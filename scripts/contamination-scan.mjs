@@ -22,11 +22,52 @@ function fail(msg) { console.error('FAIL ' + msg); failed++; }
 
 const srcFiles = walk(path.join(ROOT, 'src'), ['.mjs']);
 
-// 1. Zero runtime network in the client bundle.
+// 1. Runtime network policy (Track B).
+// The guest target is zero-network (asserted by build.mjs + budgets-check).
+// The vercel target may fetch SAME-ORIGIN '/api/' only, and only from inside
+// compile-time __AUTH_BEGIN__/__AUTH_END__ blocks (stripped from the guest
+// bundle). Everything else — XHR, WebSocket, absolute URLs, dynamic import —
+// is forbidden everywhere.
+function authBlocks(t) {
+  const blocks = [];
+  const re = /__AUTH_BEGIN__([\s\S]*?)__AUTH_END__/g;
+  let m;
+  while ((m = re.exec(t))) blocks.push(m[1]);
+  return blocks;
+}
+function stripAuthBlocksSrc(t) {
+  return t.replace(/__AUTH_BEGIN__[\s\S]*?__AUTH_END__/g, '');
+}
 for (const f of srcFiles) {
+  const rel = path.relative(ROOT, f);
   const t = fs.readFileSync(f, 'utf8');
-  for (const pat of [/fetch\s*\(/, /XMLHttpRequest/, /WebSocket/, /https?:\/\//, /import\s*\(/]) {
-    if (pat.test(t)) fail(path.relative(ROOT, f) + ' contains network/dynamic-import pattern ' + pat);
+  const stripped = stripAuthBlocksSrc(t);
+  // 1a. Outside auth blocks: zero network of any kind (the guest bundle rule).
+  for (const pat of [/fetch\s*\(/, /XMLHttpRequest/, /new WebSocket/, /https?:\/\//, /import\s*\(/]) {
+    if (pat.test(stripped)) fail(rel + ' contains network/dynamic-import pattern outside auth blocks: ' + pat);
+  }
+  // 1b. Inside auth blocks: same-origin '/api/' fetches only.
+  for (const b of authBlocks(t)) {
+    for (const pat of [/XMLHttpRequest/, /new WebSocket/, /https?:\/\//, /import\s*\(/]) {
+      if (pat.test(b)) fail(rel + ' auth block contains forbidden pattern ' + pat);
+    }
+    // Every fetch( must use the literal '/api/' prefix (see auth.mjs api()).
+    const fetchRe = /fetch\s*\(/g;
+    let fm;
+    while ((fm = fetchRe.exec(b))) {
+      const after = b.slice(fm.index, fm.index + 40);
+      if (!/fetch\s*\(\s*'\/api\//.test(after)) {
+        fail(rel + ' auth block has a non-same-origin fetch: ' + after.slice(0, 40));
+      }
+    }
+    // api('...') path args must be relative (no '://', no leading '/').
+    const apiRe = /(?<![\w$])api\(\s*'([^']*)'/g;
+    let am;
+    while ((am = apiRe.exec(b))) {
+      if (am[1].startsWith('/') || am[1].includes('://')) {
+        fail(rel + ' auth block api() path escapes same-origin: ' + am[1]);
+      }
+    }
   }
 }
 

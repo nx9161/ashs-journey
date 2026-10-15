@@ -2,8 +2,16 @@
 // One source tree -> two bundles from the same concatenated game JS:
 //   Bundle A (guest): dist/standalone.html — single self-contained file, offline.
 //   Bundle B (vercel): public/index.html + public/game.js — static client.
-// Auth code paths are compile-time feature-flagged OFF (ADR-008 Track B).
-// Validates data tables (schema + cross-refs); fails the build on bad data.
+// Build targets:
+//   --target=vercel : public/game.js + public/index.html (full client, auth UI compiled IN)
+//   --target=guest  : dist/standalone.html (guest single-file, auth UI compiled OUT)
+//   (default: both)
+// Auth code paths are compile-time feature-flagged:
+//   * lines between `// __AUTH_BEGIN__` and `// __AUTH_END__` are STRIPPED from the
+//     guest target (block strip, build fails on unbalanced markers);
+//   * the token `/*__AUTH_ENABLED__*/` is replaced with `true` (vercel) or `false` (guest).
+// The guest bundle therefore contains zero auth code and zero `/api/` references
+// (asserted as a hard build gate below — PRD AC#1 / Tech Law COPPA cleanliness).
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,12 +21,27 @@ import { fileURLToPath } from 'node:url';
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const SRC = path.join(ROOT, 'src');
 
-function transform(src, file) {
+function transform(src, file, opts) {
+  opts = opts || {};
+  const stripAuth = !opts.auth; // guest target: remove __AUTH__ blocks
   const lines = src.split('\n');
   const out = [];
   let inImport = false;
+  let authDepth = 0;
   for (const line of lines) {
     if (line.includes('__DEBUG__')) continue; // compile-time feature strip
+    if (line.includes('__AUTH_BEGIN__')) {
+      if (!stripAuth) { out.push(line); continue; }
+      authDepth++;
+      continue;
+    }
+    if (line.includes('__AUTH_END__')) {
+      if (!stripAuth) { out.push(line); continue; }
+      authDepth--;
+      if (authDepth < 0) throw new Error('unbalanced __AUTH_END__ in ' + file);
+      continue;
+    }
+    if (stripAuth && authDepth > 0) continue; // inside a stripped auth block
     if (inImport) {
       if (line.includes(';')) inImport = false;
       continue;
@@ -33,18 +56,43 @@ function transform(src, file) {
     out.push(line.replace(/^(\s*)export\s+(?=(const|let|var|function|class|async\s+function))/, '$1'));
   }
   if (inImport) throw new Error('unterminated import in ' + file);
+  if (authDepth !== 0) throw new Error('unbalanced __AUTH_BEGIN__ in ' + file);
   return out.join('\n');
 }
 
-export function buildGameJs() {
+// stripAuthBlocks: the same guest-target auth removal, applied to an already-
+// built vercel bundle. Used by drift-gate.mjs + verify-slice.mjs to prove the
+// guest bundle is EXACTLY the vercel bundle minus the auth sections (no drift).
+// Also normalizes the AUTH_ENABLED compile flag (true in vercel, false in guest)
+// so the comparison isolates the block strip.
+export function stripAuthBlocks(js) {
+  const lines = js.split('\n');
+  const out = [];
+  let depth = 0;
+  for (const line of lines) {
+    if (line.includes('__AUTH_BEGIN__')) { depth++; continue; }
+    if (line.includes('__AUTH_END__')) { depth--; if (depth < 0) throw new Error('unbalanced __AUTH_END__'); continue; }
+    if (depth > 0) continue;
+    out.push(line);
+  }
+  if (depth !== 0) throw new Error('unbalanced __AUTH_BEGIN__');
+  return out.join('\n').split('const AUTH_ENABLED = true;').join('const AUTH_ENABLED = false;');
+}
+
+export function buildGameJs(opts) {
+  opts = opts || {};
+  const auth = opts.auth !== false; // default: full (vercel) bundle
   const order = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'module-order.json'), 'utf8'));
   const parts = [];
   for (const rel of order) {
     const abs = path.join(ROOT, rel);
     if (!fs.existsSync(abs)) throw new Error('missing module in module-order: ' + rel);
-    parts.push('\n// ---- ' + rel + ' ----\n' + transform(fs.readFileSync(abs, 'utf8'), rel));
+    parts.push('\n// ---- ' + rel + ' ----\n' + transform(fs.readFileSync(abs, 'utf8'), rel, { auth }));
   }
-  const js = parts.join('\n');
+  let js = parts.join('\n');
+  // Compile-time auth flag: `const AUTH_ENABLED = /*__AUTH_ENABLED__*/;` ->
+  // true in the vercel bundle, false in the guest bundle.
+  js = js.split('/*__AUTH_ENABLED__*/').join(auth ? 'true' : 'false');
   // Guard: no unresolved module syntax survived the transform.
   for (const line of js.split('\n')) {
     const t = line.trim();
@@ -229,7 +277,62 @@ body.landscape .hudstrip{top:50%;flex-direction:column}
 body.desktop .controls{display:none}
 body.desktop.showtouch .controls{display:block}
 @media (pointer:coarse){body.desktop .controls{display:block}}
+/* Track B: full auth UI (vercel target). Gen 4/5 idiom — DS-chunky paper panels,
+   3px ink borders, gold focus ring, >=44px targets, >=16px type. Compile-time
+   stripped from the guest bundle's JS; this CSS is inert there (no JS refs). */
+.authcard{background:#F7F3E8;border:3px solid #14141A;border-radius:10px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:2px 2px 0 rgba(0,0,0,.25);overflow:hidden}
+.authhead{background:#14141A;color:#FFD23F;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
+.authsub{font-size:14px;color:#3a3a44;padding:8px 14px 0;line-height:1.45}
+.authtabs{display:flex;border-bottom:3px solid #14141A}
+.authtab{flex:1;font-family:inherit;font-size:15px;font-weight:bold;padding:12px 4px;min-height:48px;background:#e8e0c8;color:#5a5a66;border:0;border-right:2px solid #14141A;cursor:pointer}
+.authtab:last-child{border-right:0}
+.authtab.sel{background:#F7F3E8;color:#14141A;border-top:3px solid #FFD23F;padding-top:9px}
+.authtab:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
+.authpane{padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto}
+.authfield{display:flex;flex-direction:column;gap:4px;font-size:15px;font-weight:bold;color:#14141A}
+.authin{font-family:inherit;font-size:16px;padding:10px;min-height:48px;background:#fff;color:#14141A;border:3px solid #14141A;border-radius:6px}
+.authin:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
+.authin:disabled{background:#e8e4d8;color:#8a8a96}
+.authrow{display:flex;gap:8px;align-items:stretch}
+.authshow{min-width:48px;min-height:48px;font-family:inherit;font-size:14px;font-weight:bold;background:#e8e0c8;color:#14141A;border:3px solid #14141A;border-radius:6px;cursor:pointer}
+.authgo{font-family:inherit;font-size:16px;font-weight:bold;padding:12px;min-height:52px;border-radius:8px;border:3px solid #14141A;background:#2FA84F;color:#fff;cursor:pointer}
+.authgo:disabled{background:#b9b3a3;color:#6a6a76;cursor:not-allowed}
+.authgo.sec{background:#2B6CB0}
+.authgo.ghost{background:#F7F3E8;color:#14141A}
+.authgo:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
+.autherr{background:#fdecea;border:2px solid #C0392B;color:#C0392B;font-size:15px;font-weight:bold;padding:8px 10px;border-radius:6px;line-height:1.4}
+.authhint{font-size:14px;color:#5a5a66;line-height:1.4}
+.authhint.ok{color:#1e7a38;font-weight:bold}
+.authcheck{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#14141A;line-height:1.4;cursor:pointer}
+.authcheck input{width:24px;height:24px;min-width:24px;margin-top:2px;accent-color:#2B6CB0}
+.authlink{background:none;border:0;color:#2B6CB0;font-size:15px;font-weight:bold;text-decoration:underline;cursor:pointer;min-height:44px;text-align:left;font-family:inherit;padding:0}
+.authlink:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
+.authcodes{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#14141A;border-radius:8px;padding:12px}
+.authcode{font-family:monospace;font-size:18px;font-weight:bold;color:#FFD23F;text-align:center;padding:8px 4px;border:2px dashed #5a5a66;border-radius:6px;letter-spacing:1px}
+.authwarn{background:#FFF3CD;border:2px solid #D99A26;color:#7a4d00;font-size:15px;font-weight:bold;padding:8px 10px;border-radius:6px;line-height:1.4}
+.authscroll{background:#fff;border:2px solid #14141A;border-radius:6px;padding:10px 12px;font-size:14px;line-height:1.5;color:#14141A;max-height:220px;overflow-y:auto;white-space:pre-wrap}
+.authscroll h4{font-size:15px;margin:8px 0 4px}
+.authdraft{background:#14141A;color:#FFD23F;font-size:14px;font-weight:bold;padding:6px 10px;border-radius:6px}
+.confcols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.confcol{background:#fff;border:3px solid #14141A;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#14141A}
+.confcol h4{font-size:15px;margin:0}
+.confcol .pick{margin-top:4px}
+.syncdot{position:absolute;top:34px;left:8px;z-index:15;display:flex;align-items:center;gap:6px;background:rgba(28,31,40,.94);border:2px solid #55555f;border-radius:14px;color:#ffe9a8;font-size:14px;font-family:inherit;padding:6px 10px;pointer-events:none}
+.syncdot .sdot{width:10px;height:10px;border-radius:50%;background:#2FA84F}
+.syncdot.pending .sdot{background:#D99A26}
+.syncdot.offline .sdot{background:#8a8a96}
+.banner503{position:absolute;top:0;left:0;right:0;z-index:45;display:flex;align-items:center;justify-content:center;gap:10px;background:#202028;color:#ffe9a8;font-size:15px;padding:10px 12px;border-bottom:3px solid #FFD23F;pointer-events:auto;text-align:center}
+.banner503 button{background:#2a2a34;color:#ffe9a8;border:2px solid #55555f;border-radius:8px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:44px;cursor:pointer}
+.pwmeter{display:flex;gap:6px;align-items:center;font-size:14px;font-weight:bold;color:#5a5a66}
+.pwmeter .bar{flex:1;height:10px;background:#e8e0c8;border:2px solid #14141A;border-radius:5px;overflow:hidden}
+.pwmeter .fill{display:block;height:100%;width:0;background:#C0392B}
+.pwmeter.fair .fill{width:55%;background:#D99A26}
+.pwmeter.strong .fill{width:100%;background:#2FA84F}
+@media (prefers-reduced-motion: reduce){
+  .loginover *,.authcard *,.banner503 *,.syncdot *{animation:none!important;transition:none!important}
+}
 `;
+
 
 function shellHtml({ gameJs, inline }) {
   const scriptTag = inline
@@ -245,29 +348,53 @@ function shellHtml({ gameJs, inline }) {
 }
 
 async function main() {
-  const target = process.argv.includes('--target=vercel') ? 'vercel' : 'all';
+  const wantVercel = !process.argv.includes('--target=guest');
+  const wantGuest = !process.argv.includes('--target=vercel');
   await validateData();
-  const gameJs = buildGameJs();
-  const hash = crypto.createHash('sha256').update(gameJs).digest('hex');
-  console.log('game.js: ' + gameJs.length + ' bytes, contentHash ' + hash.slice(0, 16) + '...');
 
   fs.mkdirSync(path.join(ROOT, 'dist'), { recursive: true });
   fs.mkdirSync(path.join(ROOT, 'public'), { recursive: true });
 
-  // Bundle A: guest single-file (offline)
-  const standalone = shellHtml({ gameJs, inline: true })
-    .replace('</body>', '<!-- contentHash:' + hash + ' -->\n</body>');
-  fs.writeFileSync(path.join(ROOT, 'dist', 'standalone.html'), standalone);
-  console.log('dist/standalone.html: ' + standalone.length + ' bytes');
+  let vercelJs = null, guestJs = null;
 
-  // Bundle B: vercel static client
-  fs.writeFileSync(path.join(ROOT, 'public', 'game.js'), gameJs);
-  const indexHtml = shellHtml({ gameJs: null, inline: false })
-    .replace('</body>', '<!-- contentHash:' + hash + ' -->\n</body>');
-  fs.writeFileSync(path.join(ROOT, 'public', 'index.html'), indexHtml);
-  console.log('public/game.js + index.html: ' + (gameJs.length + indexHtml.length) + ' bytes');
+  if (wantVercel) {
+    // Bundle B: vercel static client (full auth UI compiled in).
+    vercelJs = buildGameJs({ auth: true });
+    const vhash = crypto.createHash('sha256').update(vercelJs).digest('hex');
+    console.log('game.js (auth): ' + vercelJs.length + ' bytes, contentHash ' + vhash.slice(0, 16) + '...');
+    fs.writeFileSync(path.join(ROOT, 'public', 'game.js'), vercelJs);
+    const indexHtml = shellHtml({ gameJs: null, inline: false })
+      .replace('</body>', '<!-- contentHash:' + vhash + ' -->\n</body>');
+    fs.writeFileSync(path.join(ROOT, 'public', 'index.html'), indexHtml);
+    console.log('public/game.js + index.html: ' + (vercelJs.length + indexHtml.length) + ' bytes');
+  }
 
-  fs.writeFileSync(path.join(ROOT, 'dist', 'content-hash.txt'), hash + '\n');
+  if (wantGuest) {
+    // Bundle A: guest single-file (auth UI compile-time stripped, offline).
+    guestJs = buildGameJs({ auth: false });
+    // HARD GATE (PRD AC#1, Tech Law COPPA cleanliness): the guest bundle makes
+    // zero network calls of any kind — fail the build if any survive the strip.
+    const netHits = [];
+    const fetchN = (guestJs.match(/fetch\s*\(/g) || []).length;
+    if (fetchN) netHits.push('fetch(:' + fetchN);
+    const apiN = (guestJs.match(/\/api\//g) || []).length;
+    if (apiN) netHits.push('/api/:' + apiN);
+    for (const pat of [/XMLHttpRequest/, /new WebSocket/, /https?:\/\//]) {
+      const n = (guestJs.match(pat) || []).length;
+      if (n) netHits.push(pat + ':' + n);
+    }
+    if (netHits.length) fail('guest bundle has network references (auth strip leaked): ' + netHits.join(', '));
+    const ghash = crypto.createHash('sha256').update(guestJs).digest('hex');
+    console.log('game.js (guest, auth stripped): ' + guestJs.length + ' bytes, contentHash ' + ghash.slice(0, 16) + '...');
+    const standalone = shellHtml({ gameJs: guestJs, inline: true })
+      .replace('</body>', '<!-- contentHash:' + ghash + ' -->\n</body>');
+    fs.writeFileSync(path.join(ROOT, 'dist', 'standalone.html'), standalone);
+    console.log('dist/standalone.html: ' + standalone.length + ' bytes (zero-network gate: PASS)');
+  }
+
+  fs.writeFileSync(path.join(ROOT, 'dist', 'content-hash.txt'),
+    (guestJs ? 'guest:' + crypto.createHash('sha256').update(guestJs).digest('hex') + '\n' : '') +
+    (vercelJs ? 'vercel:' + crypto.createHash('sha256').update(vercelJs).digest('hex') + '\n' : ''));
   console.log('build OK');
 }
 

@@ -324,6 +324,14 @@ export class OverworldScene {
     // P1/J2: player card header + Quit to title (confirm; autosaves first).
     const badges = g.state.badges.kanto.length;
     const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
+    // Track B: account row — logged in shows the account menu; logged out (vercel)
+    // offers login; guest target keeps the honest disabled row (Track A).
+    const authEnabled = (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED);
+    const accountRow = !authEnabled
+      ? { label: 'Account — coming in Track B', value: 'account', disabled: true }
+      : g.authUser
+        ? { label: 'Account', value: 'account' }
+        : { label: 'Log in to sync ★', value: 'login' };
     g.ui.showMenu('MENU', [
       { label: g.state.player.name + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
       { label: this.map.name, value: null, disabled: true },
@@ -332,7 +340,7 @@ export class OverworldScene {
       { label: 'Dex', value: 'dex' },
       { label: 'Save', value: 'save' },
       { label: 'Options', value: 'options' },
-      { label: 'Account — coming in Track B', value: 'account', disabled: true },
+      accountRow,
       { label: 'Quit to title', value: 'quit' },
       { label: 'Close', value: 'close' },
     ], (value) => {
@@ -341,6 +349,8 @@ export class OverworldScene {
       else if (value === 'dex') g.openDex();
       else if (value === 'save') g.openSave();
       else if (value === 'options') g.openOptions();
+      else if (value === 'account' && authEnabled && g.authUser) AUTH.openAccountMenu(g);
+      else if (value === 'login' && authEnabled) g.openLogin('continue');
       else if (value === 'quit') {
         g.ui.showMenu('Quit to title? (autosaves first)', [
           { label: 'Quit', value: 'yes' },

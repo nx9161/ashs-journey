@@ -92,6 +92,7 @@ export class UI {
     this._els = {};
     this.nameEntry = null; // { value, maxLen, cb, ... } while the A-Z grid is open
     this.loginOpen = false;
+    this.inBattle = false; // Track B: battle-mode flag (SYNC defers conflict UI out of battle)
     this.hudVisible = true;
     this.dexDot = false;
     this._guestBannerOff = false;
@@ -414,12 +415,18 @@ export class UI {
   }
 
   // ---- P0/B1: Trainer ID Terminal (login stub — Track B dark, zero network) ----
-  // Tabs: LOG IN / REGISTER (present, honestly disabled) / GUEST (functional).
+  // Track B: when the auth UI is compiled in (vercel target, AUTH_ENABLED), the
+  // terminal shows the full LOG IN / REGISTER / GUEST panel (auth.mjs). In the
+  // guest target the stub below is byte-identical to Track A behavior.
   showLogin(cb) {
     if (this.headless) {
       // No DOM to click in the harness: the guest path is the only functional one.
       this.log.push({ ui: 'login-guest-auto' });
       cb('guest');
+      return;
+    }
+    if (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED) {
+      AUTH.showLoginPanel(this, this.game, cb);
       return;
     }
     this.loginOpen = true;
@@ -499,11 +506,19 @@ export class UI {
       b.classList.add('hidden');
     });
     this._guestBannerEl = b;
+    // Track B (vercel): the banner's LOG IN becomes a real button (auth.mjs).
+    // Guest target: AUTH.enhanceGuestBanner is a no-op — banner byte-identical.
+    if (typeof AUTH !== 'undefined') AUTH.enhanceGuestBanner(this);
   }
 
   showGuestBanner() {
     if (this.headless || this._guestBannerOff || !this._guestBannerEl) return;
     this._guestBannerEl.classList.remove('hidden');
+  }
+
+  hideGuestBanner() {
+    if (this.headless || !this._guestBannerEl) return;
+    this._guestBannerEl.classList.add('hidden');
   }
 
   // ---- P0/C3: name-entry A-Z grid keyboard ----
@@ -752,7 +767,8 @@ export class UI {
   }
 
   setBattleMode(on) {
-    if (this.headless) return;
+    if (this.headless) { this.inBattle = !!on; return; }
+    this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
     this.dpadEl.classList.toggle('hidden', on);
     this.cmdEl.classList.toggle('hidden', !on);
     if (this.root) this.root.classList.toggle('inbattle', on); // hides the HUD strip in battle
