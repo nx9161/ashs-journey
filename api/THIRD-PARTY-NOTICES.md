@@ -7,7 +7,7 @@ packages at pin time. Any version bump re-runs the license check (AppSec C13,
 Tech Law C7).
 
 Pinned versions: **better-auth 1.7.10** · **pg 8.23.1** · **@node-rs/argon2 2.2.2**
-· **kysely** (transitive; required as better-auth's Postgres adapter machinery —
+· **kysely 0.29.6** (transitive; required as better-auth's Postgres adapter machinery —
 verified empirically from the installed package: better-auth wraps a pg Pool in
 Kysely's PostgresDialect. Flagged for the Lead Code Reviewer allowlist
 amendment.)
@@ -95,7 +95,7 @@ SOFTWARE.
 
 ---
 
-## kysely (transitive, MIT)
+## kysely 0.29.6 (transitive, MIT)
 
 The MIT License (MIT)
 
