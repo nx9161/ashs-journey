@@ -127,9 +127,11 @@ export function xpForLevel(curve, level) {
   }
 }
 
-// Simplified documented-style XP yield: base * level / 7, wild modifier 1x.
+// Simplified documented-style XP yield: base * level / 7; trainer battles pay
+// the documented Gen 5-era 1.5x (GD balance: the slice's XP economy runs on
+// trainer payouts, not wild grinding).
 export function xpYield(baseXp, level, isWild) {
-  return Math.max(1, Math.floor((baseXp * level) / 7) * (isWild ? 1 : 1));
+  return Math.max(1, Math.floor((baseXp * level) / 7 * (isWild ? 1 : 1.5)));
 }
 
 // Turn order: priority bracket -> Speed (paralysis quarters Speed, Gen 4-6) -> random.

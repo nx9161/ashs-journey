@@ -25,7 +25,7 @@ export function defaultState() {
       mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1,
     },
     facilities: { registry: [], unlocked: [] },
-    bag: { pokeball: 5, potion: 2 },
+    bag: { pokeball: 10, potion: 3 },
     meta: { createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Pallet Town' },
   };
 }
