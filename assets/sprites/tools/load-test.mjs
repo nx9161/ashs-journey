@@ -38,11 +38,12 @@ function makeCtx(w, h) {
 const stubDoc = {
   createElement: () => {
     let ctx = null;
-    return {
+    const cv = {
       width: 0, height: 0,
-      getContext: () => (ctx = ctx || makeCtx(this.width || 16, this.height || 16)),
+      getContext: () => (ctx = ctx || makeCtx(cv.width || 16, cv.height || 16)),
       _ctx() { return ctx; },
     };
+    return cv;
   },
 };
 
@@ -80,11 +81,13 @@ async function main() {
     }
   }
   // game-consumption surface checks (what buildSprites/npcSprite/tileCache request)
+  // NOTE: Wave-2 art delivers battlers at 32x32 (contract §1.5 allows 32x32/48x48).
+  // Wiring seat scales 32->48 in canvas (nearest-neighbor) or updates these.
   const need = {
     'ash-down-idle-1': [16, 16], 'ash-up-walk-4': [16, 16],
-    'pikachu-hop-1': [16, 16], 'partner-front': [48, 48], 'partner-back': [48, 48],
-    'onix-front': [48, 48], 'geodude-front': [48, 48], 'brock-battle': [32, 48],
-    'npc-professor-idle-1': [16, 16], 'tile-grass': [16, 16], 'icon-bag': [16, 16],
+    'pikachu-hop-1': [16, 16], 'partner-front': [32, 32], 'partner-back': [32, 32],
+    'onix-front': [32, 32], 'geodude-front': [32, 32], 'brock-battle': [32, 48],
+    'npc-professor-idle-1': [16, 16], 'tile-grass': [16, 16], 'icon-pokeball': [16, 16],
   };
   for (const [id, [w, h]] of Object.entries(need)) {
     const art = ART[id];

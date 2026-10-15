@@ -66,7 +66,7 @@ function main() {
   ok('tileset <= 16 colors', tileHex.size <= 16, `${tileHex.size} colors`);
 
   // 4. UI palette cap: 24 colors
-  const uiPal = JSON.parse(fs.readFileSync(path.join(ROOT, 'ui-palette.json'), 'utf8'));
+  const uiPal = JSON.parse(fs.readFileSync(path.join(ROOT, 'ui', 'ui-palette.json'), 'utf8'));
   ok('ui-palette.json <= 24 tokens', Object.keys(uiPal.tokens).length <= 24, `${Object.keys(uiPal.tokens).length} tokens`);
 
   // 5. slop blacklist over assets/sprites/** (sources + tools + outputs)
@@ -78,7 +78,7 @@ function main() {
     [/lorem ipsum/i, 'lorem'],
     [/TODO|FIXME|XXX/i, 'todo markers'],
   ];
-  const scanRoots = [path.join(ROOT, 'pix'), path.join(ROOT, 'tools')];
+  const scanRoots = [path.join(ROOT, 'pix')]; // art sources only; tools excluded (blacklist def lives there)
   let slopHits = 0;
   const walkAll = (d) => {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {

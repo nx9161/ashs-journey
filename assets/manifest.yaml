@@ -13,31 +13,109 @@ ip_posture: 100% original code/art/audio. No ripped sprites, no ROM-derived data
 assets:
   - id: overworld-tiles-v1
     kind: tiles
-    status: placeholder
-    source: procedural
-    generator: src/engine/tiles.mjs (TilePainter v1, checked into this repo)
-    seed: n/a (deterministic painter, no RNG)
-    hand_finish: none yet
-    author: game-producer (seat 20), Phase 4 Wave 1
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    seed: tiles hand-finished from forge-base drafts (seeds 1001/1078/1155); others n/a
+    hand_finish: Art Director (seat 33 "Psylocke")
+    author: Art Director (seat 33 "Psylocke"), Phase 4 Wave 2
     date: 2026-10-15
-    notes: 16x16 painter tiles (grass/path/tree/water/wall/door/sign). Palette-authored
-      per-tileset, no multiply overlays (per gameux palette discipline). To be replaced by
-      Art Director hand-authored tileset per docs/contracts.md §1.
+    ai_assisted: true
+    palette_audit: tileset <= 16 colors (verified by palette-audit.mjs); no gradients;
+      1px dark outline; no orphans; 1px transparent margin.
+    notes: 13 hand-authored 16x16 tiles (grass/path/tree/water-1/water-2 animated/
+      house/door/sign/gymwall/gymdoor/centerdoor/flower/rock). Replaces producer
+      placeholder. Atlases: assets/sprites/dist/atlas-tiles.png.
 
   - id: species-sprites-v1
     kind: sprites
-    status: placeholder
-    source: procedural
-    generator: src/engine/sprites.mjs (SpriteForge v1, seeded per species)
-    seed: per-species `spriteSeed` in src/data/species.mjs
-    hand_finish: none yet
-    author: game-producer (seat 20), Phase 4 Wave 1
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    seed: n/a (hand-drawn fresh)
+    hand_finish: Art Director (seat 33 "Psylocke")
+    author: Art Director (seat 33 "Psylocke"), Phase 4 Wave 2
     date: 2026-10-15
-    palette_audit: per-sprite <= 12 colors + alpha (enforced by generator design);
-      no gradients; 1px dark outline rule honored by painter.
-    notes: Symmetric seeded pixel creatures with body-type silhouettes (quad/biped/
-      serpent/bird/blob). Stand-ins only — Art Director replaces with original
-      pixel art per docs/contracts.md §1. AI slop blacklist applies.
+    ai_assisted: true
+    palette_audit: per-sprite <= 12 colors + alpha (verified by palette-audit.mjs);
+      no gradients; 1px dark outline (darkest shade of own palette); no orphans;
+      1px transparent margin. Slop blacklist enforced.
+    notes: 9 encounter-table species (pidgey/rattata/spearow/caterpie/weedle/
+      nidoranm/mankey/geodude/onix) front+back at 32x32. Pikachu partner front/
+      back separate (see pikachu-sprites-v1). Replaces producer placeholder.
+      Atlases: assets/sprites/dist/atlas-species.png.
+
+  - id: ash-sprites-v1
+    kind: sprites
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    seed: n/a (hand-drawn fresh)
+    hand_finish: Art Director (seat 33 "Psylocke")
+    author: Art Director (seat 33 "Psylocke"), Phase 4 Wave 2
+    date: 2026-10-15
+    ai_assisted: true
+    palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
+    notes: Ash 4-direction walk (2-frame idle + 4-frame walk per direction, 16x16).
+      Right-facing derived via MIRROR. Atlases: assets/sprites/dist/atlas-ash.png.
+
+  - id: pikachu-sprites-v1
+    kind: sprites
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    seed: n/a (hand-drawn fresh)
+    hand_finish: Art Director (seat 33 "Psylocke")
+    author: Art Director (seat 33 "Psylocke"), Phase 4 Wave 2
+    date: 2026-10-15
+    ai_assisted: true
+    palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
+    notes: Pikachu partner follow sprites (hop-1/hop-2, 16x16) + battle sprites
+      (partner-front 32x32 capstone, partner-back 32x32) + refuses-the-ball beat
+      (pikachu-refuse 32x16, cracked ball). Atlases: assets/sprites/dist/atlas-pikachu.png.
+
+  - id: brock-sprites-v1
+    kind: sprites
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    seed: n/a (hand-drawn fresh)
+    hand_finish: Art Director (seat 33 "Psylocke")
+    author: Art Director (seat 33 "Psylocke"), Phase 4 Wave 2
+    date: 2026-10-15
+    ai_assisted: true
+    palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
+    notes: Brock overworld (idle-1/2, 16x16) + battle portrait (32x48).
+      Atlases: assets/sprites/dist/atlas-brock.png.
+
+  - id: npc-sprites-v1
+    kind: sprites
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    seed: n/a (hand-drawn fresh)
+    hand_finish: Art Director (seat 33 "Psylocke")
+    author: Art Director (seat 33 "Psylocke"), Phase 4 Wave 2
+    date: 2026-10-15
+    ai_assisted: true
+    palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
+    notes: 7 NPCs (professor-hawthorn/nurse/coach/aide/rival/youngster/lass)
+      idle-1/2, 16x16. Atlases: assets/sprites/dist/atlas-npcs.png.
+
+  - id: ui-icons-v1
+    kind: ui
+    status: hand-authored
+    source: hand-authored
+    generator: assets/sprites/tools/build-art.mjs (ArtForge pipeline v1)
+    seed: n/a (hand-drawn fresh)
+    hand_finish: Art Director (seat 33 "Psylocke")
+    author: Art Director (seat 33 "Psylocke"), Phase 4 Wave 2
+    date: 2026-10-15
+    ai_assisted: true
+    palette_audit: UI palette 24 tokens (assets/sprites/ui/ui-palette.json);
+      icons <= 12 colors each (verified).
+    notes: UI icons (pokeball/potion/boulder-badge, 16x16) + 24-token UI palette.
+      Wiring into src/game/ui.mjs is Game UI/UX Designer wave.
 
   - id: ui-chrome-v1
     kind: ui
