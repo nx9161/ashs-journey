@@ -440,6 +440,11 @@ export class BattleScene {
       const crit = roll(CRIT_CHANCE, g.rng.battle);
       const rand = RANDOM_MIN + g.rng.battle() * (RANDOM_MAX - RANDOM_MIN);
       const burn = atk.status === 'burn';
+      // Yellow homage: the partner reacts to battle beats — a crit or a
+      // super-effective hit from Pikachu perks it right up.
+      if (entry.side === 'ally' && atk.speciesId === 'partner' && (crit || eff > 1)) {
+        g.state.pikachu.mood = 'happy';
+      }
       if (eff === 0) {
         this.say('It doesn\'t affect ' + defName + '...', () => this.nextAction());
         return;
@@ -535,6 +540,8 @@ export class BattleScene {
     const g = this.game;
     const mon = side === 'ally' ? this.ally : this.foe;
     if (mon.hp > 0) { cb(); return; }
+    // Yellow homage: the partner takes its own faint personally.
+    if (side === 'ally' && mon.speciesId === 'partner') g.state.pikachu.mood = 'sad';
     const name = displayName(mon, SPECIES);
     g.audio.playSfx('battle-faint');
     // README faint transform: the sprite sinks 8px + fades to 0 over 20 frames
@@ -796,6 +803,10 @@ export class BattleScene {
     this.state = 'victory';
     g.state.player.money += t.reward;
     g.state.story.flags['beat_' + t.id] = true;
+    // Yellow homage: winning with the partner conscious leaves it buzzing.
+    if (g.state.party.some((m) => m.speciesId === 'partner' && m.hp > 0)) {
+      g.state.pikachu.mood = 'excited';
+    }
     // No battle-message here: the capstone dialogue below ends the battle exactly once.
     this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + t.reward + '.';
     this.msgOpen = false;
@@ -816,6 +827,7 @@ export class BattleScene {
   finishDefeat() {
     const g = this.game;
     // Defeat: fade -> Pokemon Center (overworld, healed, money halved) — architecture §2.2
+    g.state.pikachu.mood = 'sad'; // Yellow homage: the partner hates losing
     g.state.player.money = Math.floor(g.state.player.money / 2);
     this.endBattle(false);
     g.ui.say(['You hurried to the Pokemon Center...'], () => {

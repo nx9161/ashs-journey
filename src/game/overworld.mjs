@@ -7,6 +7,7 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
+import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { BattleScene } from './battle.mjs';
@@ -248,10 +249,10 @@ export class OverworldScene {
 
   petPartner() {
     // P1/D7: mood-pip tap and the faced-tile interaction share one path.
+    // Yellow homage: the partner emotes when talked to; petting cheers it up.
     const g = this.game;
-    const moods = { happy: 'is happy! It nuzzles your hand.', curious: 'tilts its head, curious.', sleepy: 'yawns... maybe it needs a rest soon.' };
     g.state.pikachu.mood = 'happy'; // a petting cheers it up (D7: mood reacts to beats)
-    g.ui.toast('Pikachu ' + (moods[g.state.pikachu.mood] || moods.happy));
+    g.ui.toast('Pikachu ' + (PARTNER_MOODS[g.state.pikachu.mood] || PARTNER_MOODS.happy));
     g.audio.playSfx('partner-happy'); // visual twin: Pikachu hop + mood pip
     g.ui.updateMoodPip();
     return true;

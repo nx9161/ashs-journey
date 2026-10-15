@@ -20,6 +20,25 @@ export const INTRO_SCRIPT = {
   ],
 };
 
+// PARTNER_MOODS — Yellow homage: talking to the partner (face it + A, or tap
+// the mood pip) reads its current emotion. Mood is driven by battle beats
+// (battle.mjs) and by petting (overworld.mjs). All lines original.
+export const PARTNER_MOODS = {
+  happy: 'is happy! It nuzzles your hand.',
+  curious: 'tilts its head, curious.',
+  sleepy: 'yawns... maybe it needs a rest soon.',
+  excited: 'is buzzing with excitement! It hops in place.',
+  sad: 'looks downcast. A win would cheer it up.',
+};
+
+// Yellow hard rules, original wording: the partner refuses the ball system
+// outright (intro), refuses evolution, and refuses the PC box (guards in
+// state.mjs). It walks beside you, or not at all.
+export const PARTNER_REFUSAL = {
+  evolution: 'PIKACHU turned away! It does not want to change — not ever.',
+  box: 'PIKACHU leapt right back out! It walks beside you, or not at all.',
+};
+
 export const TUTORIAL_AIDE_EXTRA = [
   'One more thing — press START anytime to open the menu. Bag, party, dex, save... it is all there.',
 ];

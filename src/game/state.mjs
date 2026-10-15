@@ -73,6 +73,22 @@ export function displayName(mon, speciesTable) {
 }
 
 // Dex helpers — honest tracked-vs-playable wording lives in the UI layer.
+// Yellow hard rules for the partner (Ash's Pikachu): it refuses evolution and
+// refuses the PC box. Guards for current + future systems (no evolution or
+// deposit UI exists in the slice yet — these are the enforcement points they
+// must call). Original refusal lines live in data/dialogue.mjs.
+export function evolutionCheck(mon) {
+  if (mon.speciesId === 'partner') {
+    return { ok: false, line: 'PIKACHU turned away! It does not want to change — not ever.' };
+  }
+  return { ok: true };
+}
+export function boxCheck(mon) {
+  if (mon.speciesId === 'partner') {
+    return { ok: false, line: 'PIKACHU leapt right back out! It walks beside you, or not at all.' };
+  }
+  return { ok: true };
+}
 export function dexRegister(dex, kind, dexNo) {
   dex[kind][dexNo] = true;
   if (kind === 'caught' || kind === 'befriended') dex.seen[dexNo] = true;

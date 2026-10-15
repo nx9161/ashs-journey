@@ -9,6 +9,9 @@ export const SPECIES = {
     catchRate: 190, growth: 'mediumfast', baseXp: 82, body: 'quad', spriteSeed: 2501,
     learnset: { 1: ['thundershock', 'growl'], 5: ['quickattack'] },
     flavor: 'A spirited partner who refused the easy path. Never leaves your side.',
+    // Yellow homage (hard rules): never boxed, never evolved. Guards in state.mjs.
+    refusesEvolution: true,
+    refusesBox: true,
   },
   pidgey: {
     id: 'pidgey', name: 'Pidgey', dexNo: 16, types: ['normal', 'flying'],
