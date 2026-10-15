@@ -2,12 +2,25 @@
   "atlas": "atlas-brock.png",
   "tile": 48,
   "size": [
-    36,
-    18
+    70,
+    50
   ],
   "sprites": {
-    "brock-idle-1": {
+    "brock-battle": {
       "x": 1,
+      "y": 1,
+      "w": 32,
+      "h": 48,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "brock-idle-1": {
+      "x": 35,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -20,7 +33,7 @@
       "mirror_of": null
     },
     "brock-idle-2": {
-      "x": 19,
+      "x": 53,
       "y": 1,
       "w": 16,
       "h": 16,
