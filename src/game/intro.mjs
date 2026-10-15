@@ -92,9 +92,10 @@ export class IntroScene {
   finishIntro() {
     const g = this.game;
     g.state.story.flags.introDone = true;
+    g.state.story.chapter = 0; // D2: Act I opens on Chapter 1 (ADR-015 spine)
     g.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };
     g.saveGame(true);
-    g.startOverworld();
+    g.startOverworld({ chapterCard: 0 });
   }
 
   update(dt) {

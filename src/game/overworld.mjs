@@ -338,6 +338,7 @@ export class OverworldScene {
       { label: 'Bag', value: 'bag' },
       { label: 'Party', value: 'party' },
       { label: 'Dex', value: 'dex' },
+      { label: 'Journey', value: 'journey' },
       { label: 'Save', value: 'save' },
       { label: 'Options', value: 'options' },
       accountRow,
@@ -347,6 +348,7 @@ export class OverworldScene {
       if (value === 'bag') g.openBag();
       else if (value === 'party') g.openParty();
       else if (value === 'dex') g.openDex();
+      else if (value === 'journey') g.openJourney();
       else if (value === 'save') g.openSave();
       else if (value === 'options') g.openOptions();
       else if (value === 'account' && authEnabled && g.authUser) AUTH.openAccountMenu(g);
@@ -438,8 +440,11 @@ export class OverworldScene {
     if (comp) {
       r.text(this.map.name + ' · ' + comp.caught + '/' + comp.total + ' caught', 8, r.viewH - 18, { size: 14, color: '#ffe9a8' });
     }
-    // Dex caught counter (honest wording)
-    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, r.viewW - 92, 8, { size: 14, color: '#fff' });
+    // Dex caught counter (honest wording). D3: on desktop the DOM HUD strip is
+    // ~218 CSS px wide at the top-right; shift the counter left in logical px so
+    // the left-aligned text clears it (phone layouts keep the signed offset).
+    const dexX = g.layoutMode === 'desktop' ? r.viewW - 172 : r.viewW - 92;
+    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, dexX, 8, { size: 14, color: '#fff' });
   }
 
   // P1/D5: what would A do on the faced tile? (bubble text, or null)

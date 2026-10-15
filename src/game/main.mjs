@@ -18,6 +18,7 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS, POCKETS, BALLS } from '../data/items.mjs';
 import { MAPS } from '../data/maps.mjs';
+import { CHAPTERS, BONUS_SHELF, chapterOf } from '../data/story.mjs';
 import { displayName, dexCaughtCount, defaultState } from './state.mjs';
 import { SaveStore, freshState } from '../save/store.mjs';
 import { SFX } from '../engine/audio.mjs';
@@ -176,13 +177,28 @@ export class Game {
     }
     const w = window.innerWidth, h = window.innerHeight;
     const fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-    if (fine && w >= 700) {
+    // D3: desktop = fine pointer at >=700px, OR a laptop-class width regardless of
+    // what the browser reports (some browsers/headless never match
+    // '(pointer: fine)' — without the width fallback they fell into the phone
+    // landscape path and rendered stretched with touch controls on a laptop).
+    // Coarse-pointer wide tablets still land here and get controls back via the
+    // (pointer:coarse) CSS override.
+    if (w >= 700 && (fine || w >= 1024)) {
       this.layoutMode = 'desktop';
-      r.resize(384, 216, Math.min(1120, w * 0.9), Math.min(630, h * 0.62));
+      // D3: aspect-locked 16:9 canvas. The old h*0.62 cap stretched the buffer
+      // on 1280x800-class viewports (1120x496 CSS over a 384x216 backing store).
+      // Height now reserves room for the hint card instead of a fixed fraction.
+      const cssW0 = Math.min(1120, w * 0.9);
+      let cw = cssW0, ch = cssW0 * 9 / 16;
+      const maxH = Math.min(630, Math.max(240, h - 140));
+      if (ch > maxH) { ch = maxH; cw = ch * 16 / 9; }
+      r.resize(384, 216, Math.round(cw), Math.round(ch));
       document.body.classList.add('desktop');
     } else if (w > h) {
       this.layoutMode = 'landscape';
-      r.resize(256, 192, w * 0.72, h);
+      // D3: aspect-locked 4:3 (was w*0.72 x h — stretched on every landscape phone).
+      const lw = Math.min(w * 0.72, h * 4 / 3);
+      r.resize(256, 192, Math.round(lw), Math.round(lw * 3 / 4));
       document.body.classList.remove('desktop');
     } else {
       this.layoutMode = 'portrait';
@@ -300,9 +316,13 @@ export class Game {
     this.ui.toast('Welcome back, ' + this.state.player.name + '!');
   }
 
-  startOverworld() {
+  startOverworld(opts) {
     this.scenes.replace(new OverworldScene());
     if (this.guestMode) this.ui.showGuestBanner(); // P0/B1: in-game guest banner
+    // D2: fresh runs open on the Chapter 1 title card (anime spine, ADR-015).
+    if (opts && typeof opts.chapterCard === 'number') {
+      this.ui.showChapterCard(CHAPTERS[opts.chapterCard]);
+    }
   }
 
   saveGame(quiet) {
@@ -433,6 +453,9 @@ export class Game {
     items.unshift({ label: 'Caught ' + caught + ' / ' + DEX_TOTAL + ' (tracked)', value: null, disabled: true });
     items.unshift({ label: 'Search / Filter' + (fdesc ? ':' + fdesc : ''), value: 'filter' });
     items.unshift({ label: 'Areas — caught per area', value: 'areas' });
+    // D2: arc progression surfaced in the Dex — current chapter header row.
+    const curCh = chapterOf((g.state.story.chapter || 0) + 1);
+    items.unshift({ label: 'Journey — Ch.' + curCh.n + ' · ' + curCh.title, value: null, disabled: true });
     if (!items.length) items.push({ label: '(no matches)', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Pokedex', items, (v) => {
@@ -473,6 +496,48 @@ export class Game {
           g.openDex(f3);
         });
       });
+    });
+  }
+
+  // D2: Journey menu — the anime-chronology spine (ADR-015). Playable chapters
+  // open a detail card; locked chapters and the BONUS shelf are honest
+  // disabled rows (no fake content, no "coming soon" placeholders).
+  openJourney() {
+    const g = this;
+    const cur = g.state.story.chapter || 0; // 0-based chapter index
+    const items = [];
+    items.push({ label: '— ACT I: THE BEGINNING (v1) —', value: null, disabled: true });
+    for (const ch of CHAPTERS) {
+      if (ch.scope === 'playable') {
+        const isCur = (ch.n - 1) === cur;
+        items.push({
+          label: (isCur ? '\u25b8 ' : '  ') + 'Ch.' + ch.n + ' — ' + ch.title + (isCur ? ' (now)' : ''),
+          value: 'ch' + ch.n,
+        });
+      } else {
+        items.push({
+          label: 'Ch.' + ch.n + ' — ' + ch.title + ' · locked (future act)',
+          value: null, disabled: true,
+        });
+      }
+    }
+    items.push({ label: '— BONUS SHELF (non-canon, not on the spine) —', value: null, disabled: true });
+    for (const b of BONUS_SHELF) {
+      items.push({ label: b, value: null, disabled: true });
+    }
+    items.push({ label: 'Close', value: 'close' });
+    g.ui.showMenu('Journey', items, (v) => {
+      if (!v || v === 'close') return;
+      const ch = CHAPTERS.find((c) => 'ch' + c.n === v);
+      if (ch) {
+        g.ui.say([
+          'CHAPTER ' + ch.n + ' — ACT ' + ch.act,
+          ch.title,
+          ch.arc,
+          'Anime: ' + ch.anime,
+          ch.movies.length ? 'Special events: ' + ch.movies.join(' · ') : '',
+        ], () => g.openJourney(), 'Journey');
+      }
     });
   }
 

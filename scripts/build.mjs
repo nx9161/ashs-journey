@@ -286,6 +286,9 @@ body.flip .ab{right:auto;left:24px}
 .hudstrip{position:absolute;top:34px;right:8px;display:flex;gap:6px;pointer-events:auto;z-index:15}
 .nohud .hudstrip{display:none}
 .inbattle .hudstrip{display:none}
+/* D3: the battle command panel and the desktop hint card both anchor to the
+   viewport bottom — hide the hint card in battle so they never overlap. */
+.inbattle .hintcard{display:none}
 .hudbtn{position:relative;width:48px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(32,32,40,.92);border:2px solid #55555f;border-radius:10px;cursor:pointer;touch-action:none}
 .hudicon{width:20px;height:20px;image-rendering:pixelated}
 .hudlabel{font-size:14px;color:#ccc;font-family:inherit}
@@ -308,6 +311,15 @@ body.landscape .hudstrip{top:50%;flex-direction:column}
 .hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background:rgba(32,32,40,.95);border:2px solid #55555f;border-radius:10px;color:#ccc;font-size:14px;padding:8px 12px;pointer-events:auto;z-index:25;max-width:92vw}
 .hintcard-x{background:#2a2a34;color:#ffe9a8;border:2px solid #55555f;border-radius:8px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:44px;cursor:pointer;white-space:nowrap}
 body.desktop .controls{display:none}
+/* D2: chapter title card (anime-chronology spine, ADR-015). Paper panel, ink
+   border, gold kicker — Gen 4/5 idiom, no animation (reduced-motion safe).
+   box-shadow reuses the single house value (QA-001). All text >= 14px. */
+.chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92vw);background:#f8f8f0;border:3px solid #202028;border-radius:10px;box-shadow:2px 2px 0 rgba(0,0,0,.25);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
+.cc-kicker{font-size:14px;font-weight:bold;letter-spacing:3px;color:#8a6a10;margin-bottom:8px}
+.cc-title{font-size:22px;font-weight:bold;color:#202028;margin-bottom:8px;line-height:1.2}
+.cc-arc{font-size:15px;color:#40404a;margin-bottom:6px;line-height:1.4}
+.cc-anime{font-size:14px;color:#70707c;line-height:1.4;margin-bottom:4px}
+.cc-hint{font-size:14px;color:#8a6a10;margin-top:10px;animation:blink 1s infinite}
 body.desktop.showtouch .controls{display:block}
 @media (pointer:coarse){body.desktop .controls{display:block}}
 /* Track B: full auth UI (vercel target). Gen 4/5 idiom — DS-chunky paper panels,

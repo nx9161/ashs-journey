@@ -100,6 +100,9 @@ body.flip .ab{right:auto;left:24px}
 .hudstrip{position:absolute;top:34px;right:8px;display:flex;gap:6px;pointer-events:auto;z-index:15}
 .nohud .hudstrip{display:none}
 .inbattle .hudstrip{display:none}
+/* D3: the battle command panel and the desktop hint card both anchor to the
+   viewport bottom — hide the hint card in battle so they never overlap. */
+.inbattle .hintcard{display:none}
 .hudbtn{position:relative;width:48px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(32,32,40,.92);border:2px solid #55555f;border-radius:10px;cursor:pointer;touch-action:none}
 .hudicon{width:20px;height:20px;image-rendering:pixelated}
 .hudlabel{font-size:14px;color:#ccc;font-family:inherit}
@@ -122,6 +125,15 @@ body.landscape .hudstrip{top:50%;flex-direction:column}
 .hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background:rgba(32,32,40,.95);border:2px solid #55555f;border-radius:10px;color:#ccc;font-size:14px;padding:8px 12px;pointer-events:auto;z-index:25;max-width:92vw}
 .hintcard-x{background:#2a2a34;color:#ffe9a8;border:2px solid #55555f;border-radius:8px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:44px;cursor:pointer;white-space:nowrap}
 body.desktop .controls{display:none}
+/* D2: chapter title card (anime-chronology spine, ADR-015). Paper panel, ink
+   border, gold kicker — Gen 4/5 idiom, no animation (reduced-motion safe).
+   box-shadow reuses the single house value (QA-001). All text >= 14px. */
+.chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92vw);background:#f8f8f0;border:3px solid #202028;border-radius:10px;box-shadow:2px 2px 0 rgba(0,0,0,.25);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
+.cc-kicker{font-size:14px;font-weight:bold;letter-spacing:3px;color:#8a6a10;margin-bottom:8px}
+.cc-title{font-size:22px;font-weight:bold;color:#202028;margin-bottom:8px;line-height:1.2}
+.cc-arc{font-size:15px;color:#40404a;margin-bottom:6px;line-height:1.4}
+.cc-anime{font-size:14px;color:#70707c;line-height:1.4;margin-bottom:4px}
+.cc-hint{font-size:14px;color:#8a6a10;margin-top:10px;animation:blink 1s infinite}
 body.desktop.showtouch .controls{display:block}
 @media (pointer:coarse){body.desktop .controls{display:block}}
 /* Track B: full auth UI (vercel target). Gen 4/5 idiom — DS-chunky paper panels,
@@ -4370,6 +4382,148 @@ const SLICE_CAPSTONE = [
 ];
 
 
+// ---- src/data/story.mjs ----
+// story.mjs — Anime-chronology campaign spine (ADR-015).
+// Maps the owner's complete anime+movies watch order onto the game's chapter
+// structure. v1 "Act I: The Beginning" (ADR-006) = chapters 1-5 (Kanto, Orange,
+// Johto). Everything beyond is scaffolded as honest locked markers — no fake
+// content, no playable claims (scope-honesty rule). Non-canon movies/minis
+// live on the BONUS shelf, never on the main spine.
+// All text is original phrasing; episode/movie titles are factual references.
+
+const ACTS = [
+  { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Kanto → Orange Islands → Johto (v1)' },
+  { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Hoenn → Battle Frontier → Sinnoh (v2, announced ADR-006)' },
+  { n: 3, title: 'Act III: Beyond', scope: 'planned', note: 'Unova → Kalos → Alola → Journeys → Horizons (planned, not built)' },
+];
+
+const CHAPTERS = [
+  {
+    n: 1, id: 'indigo-league', act: 1, region: 'Kanto', scope: 'playable',
+    title: 'The Indigo League',
+    arc: 'Pallet Town to the Indigo Plateau — eight gyms, one dream.',
+    anime: 'Season 1: Indigo League (Ep 1–69, incl. Ep 70–82 tail)',
+    movies: ['The First Movie — Mewtwo Strikes Back'],
+  },
+  {
+    n: 2, id: 'orange-islands', act: 1, region: 'Orange Islands', scope: 'playable',
+    title: 'Adventures in the Orange Islands',
+    arc: 'Four Orange badges across the southern seas.',
+    anime: 'Season 2: Adventures in the Orange Islands (Ep 1–24, Special: Slowking\u2019s Day, Ep 25–36)',
+    movies: ['Pok\u00e9mon 2000 — The Power of One'],
+  },
+  {
+    n: 3, id: 'johto-journeys', act: 1, region: 'Johto', scope: 'playable',
+    title: 'The Johto Journeys',
+    arc: 'A new region, eight new gyms, an old rival.',
+    anime: 'Season 3: The Johto Journeys (Ep 1–38, Ep 39–41)',
+    movies: ['Spell of the Unown'],
+  },
+  {
+    n: 4, id: 'johto-league-champions', act: 1, region: 'Johto', scope: 'playable',
+    title: 'Johto League Champions',
+    arc: 'The road to the Silver Conference.',
+    anime: 'Season 4: Johto League Champions (Ep 1–21, Ep 22–48, Ep 49–52)',
+    movies: ['Mewtwo Returns', '4Ever — Celebi: Voice of the Forest'],
+  },
+  {
+    n: 5, id: 'master-quest', act: 1, region: 'Johto', scope: 'playable',
+    title: 'Master Quest',
+    arc: 'The Silver Conference — the road continues.',
+    anime: 'Season 5: Master Quest (Ep 1–47, Ep 48–65)',
+    movies: ['Heroes — Latios & Latias'],
+  },
+  // ---- locked: Act II (v2, announced in ADR-006) ----
+  {
+    n: 6, id: 'hoenn', act: 2, region: 'Hoenn', scope: 'locked',
+    title: 'Rise Through Hoenn',
+    arc: 'Locked — Act II (v2).',
+    anime: 'Seasons 6–8: Advanced / Advanced Challenge / Advanced Battle',
+    movies: ['Jirachi: Wish Maker', 'Destiny Deoxys', 'Lucario and the Mystery of Mew'],
+  },
+  {
+    n: 7, id: 'battle-frontier', act: 2, region: 'Kanto (Frontier)', scope: 'locked',
+    title: 'Battle Frontier',
+    arc: 'Locked — Act II (v2). The Frontier-Brain seat is the announced finale.',
+    anime: 'Season 9: Battle Frontier (Ep 1–5, Special: Mastermind of Mirage Pok\u00e9mon, Ep 6–47)',
+    movies: ['Ranger and the Temple of the Sea'],
+  },
+  {
+    n: 8, id: 'sinnoh', act: 2, region: 'Sinnoh', scope: 'locked',
+    title: 'Diamond & Pearl',
+    arc: 'Locked — Act II (v2).',
+    anime: 'Seasons 10–13: Diamond and Pearl / Battle Dimension / Galactic Battles / Sinnoh League Victors',
+    movies: ['The Rise of Darkrai', 'Giratina and the Sky Warrior', 'Arceus and the Jewel of Life', 'Zoroark: Master of Illusions'],
+  },
+  // ---- locked: Act III (planned) ----
+  {
+    n: 9, id: 'unova', act: 3, region: 'Unova', scope: 'locked',
+    title: 'Black & White',
+    arc: 'Locked — future act.',
+    anime: 'Seasons 14–16: Black & White / Rival Destinies / Adventures in Unova',
+    movies: ['Victini and Reshiram / Zekrom', 'Kyurem vs. the Sword of Justice', 'Genesect and the Legend Awakened'],
+  },
+  {
+    n: 10, id: 'kalos', act: 3, region: 'Kalos', scope: 'locked',
+    title: 'XY & XYZ',
+    arc: 'Locked — future act.',
+    anime: 'Seasons 17–19: XY / Kalos Quest / XYZ (incl. Mega Evolution specials)',
+    movies: ['Diancie and the Cocoon of Destruction', 'Hoopa and the Clash of Ages', 'Volcanion and the Mechanical Marvel'],
+  },
+  {
+    n: 11, id: 'alola', act: 3, region: 'Alola', scope: 'locked',
+    title: 'Sun & Moon',
+    arc: 'Locked — future act.',
+    anime: 'Seasons 20–22: Sun & Moon / Ultra Adventures / Ultra Legends',
+    movies: [],
+  },
+  {
+    n: 12, id: 'journeys', act: 3, region: 'World', scope: 'locked',
+    title: 'Journeys',
+    arc: 'Locked — future act. Ends with "Aim to Be a Pok\u00e9mon Master" — the end of Ash\u2019s story.',
+    anime: 'Seasons 23–25: Journeys / Master Journeys / Ultimate Journeys (incl. Arceus Chronicles)',
+    movies: [],
+  },
+  {
+    n: 13, id: 'horizons', act: 3, region: 'World', scope: 'locked',
+    title: 'Horizons: A New Beginning',
+    arc: 'Locked — future act. Liko\u2019s story begins where Ash\u2019s ends.',
+    anime: 'Horizons S1 (Ep 1–45) / S2 The Search for Laqua / S3 Rising Hope / S4 Wonder Voyage',
+    movies: [],
+  },
+];
+
+// Non-canon movies and mini-series. Never on the main spine — the BONUS shelf.
+const BONUS_SHELF = [
+  'I Choose You!',
+  'The Power of Us',
+  'Secrets of the Jungle',
+  'Detective Pikachu',
+  'Mewtwo Strikes Back: Evolution',
+  'Pok\u00e9mon Origins',
+  'Pok\u00e9mon Generations',
+  'Twilight Wings',
+  'Pok\u00e9toon',
+  'Evolutions',
+  'Hisuian Snow',
+  'Paldean Winds',
+  'Pok\u00e9mon Concierge',
+  'Path to the Peak',
+];
+
+function chapterOf(n) {
+  return CHAPTERS.find((c) => c.n === n) || CHAPTERS[0];
+}
+
+function playableChapters() {
+  return CHAPTERS.filter((c) => c.scope === 'playable');
+}
+
+function lockedChapters() {
+  return CHAPTERS.filter((c) => c.scope === 'locked');
+}
+
+
 // ---- src/game/state.mjs ----
 // state.mjs — GameState: the runtime state IS the save shape (architecture §2.3).
 // schemaVersion 1. Frontier-ready hooks from day one: badges.symbols (7 locked),
@@ -4709,6 +4863,8 @@ class UI {
     this._guestBannerOff = false;
     this.onMoodTap = null;
     this._moodWanted = false;
+    this.chapterCard = null; // D2: chapter title card overlay while open
+    this._ccT = 0;
   }
 
   init() {
@@ -4773,13 +4929,16 @@ class UI {
     };
     mkS('start', 'START'); mkS('select', 'SELECT');
     // Command panel (battle) — hidden unless battle scene shows it. P0/E8: populated as a 2x2 grid.
-    this.cmdEl = this.el('div', 'cmdpanel hidden', g);
+    // D3: child of #ui root, NOT .controls — body.desktop hides .controls (touch
+    // buttons), which used to hide the battle commands on every laptop too.
+    this.cmdEl = this.el('div', 'cmdpanel hidden', this.root);
   }
 
   // ---- P0/E8: battle command 2x2 grid (replaces the D-pad zone) ----
   // items: [{label, value, disabled, dimmed}] — dimmed = tutorial de-emphasis (still selectable).
   showCommands(items, cb, opts) {
     opts = opts || {};
+    this.game.input.consumeAll(); // D3: stale walk edges must not move the battle cursor
     this.menu = {
       title: null, items, idx: opts.initialIdx || 0, cb, battle: true,
       kind: 'commands', grid: true, focus: opts.focus || null,
@@ -4928,6 +5087,10 @@ class UI {
   // opts: { battle, grid, initialIdx, rowHtml(item, i), focusValue }
   showMenu(title, items, cb, opts) {
     opts = opts || {};
+    // D3: a menu opening consumes stale input edges — e.g. the direction key a
+    // player was holding while walking into a grass encounter must not move the
+    // battle cursor the moment the command menu appears.
+    this.game.input.consumeAll();
     this.menu = {
       title, items, idx: opts.initialIdx || 0, cb,
       battle: !!(opts && opts.battle), kind: opts.kind || 'menu',
@@ -5342,12 +5505,61 @@ class UI {
     this._hintCard.classList.toggle('hidden', !v || this._hintOff);
   }
 
+  // ---- D2: chapter title cards (anime-chronology spine, ADR-015) ----
+  // ch: a CHAPTERS entry (src/data/story.mjs). Paper-panel card, Gen 4/5 idiom,
+  // tap/A/START dismisses, auto-dismisses after 4s of game time (reduced-motion
+  // safe: no animation). All text >= 14px (QA-001).
+  showChapterCard(ch) {
+    this.log.push({ ui: 'chaptercard', chapter: ch && ch.n, title: ch && ch.title });
+    if (this.headless) { this.chapterCard = null; return; }
+    this.hideChapterCard(); // one card at a time
+    this._ccT = 0;
+    const d = this.el('div', 'chaptercard', this.root);
+    const kick = this.el('div', 'cc-kicker', d);
+    kick.textContent = 'CHAPTER ' + ch.n + ' — ACT ' + ch.act;
+    const t = this.el('div', 'cc-title', d);
+    t.textContent = ch.title;
+    const arc = this.el('div', 'cc-arc', d);
+    arc.textContent = ch.arc;
+    const an = this.el('div', 'cc-anime', d);
+    an.textContent = ch.anime;
+    if (ch.movies && ch.movies.length) {
+      const mv = this.el('div', 'cc-anime', d);
+      mv.textContent = 'Special events: ' + ch.movies.join(' · ');
+    }
+    const hint = this.el('div', 'cc-hint', d);
+    hint.textContent = 'Press A / tap to continue';
+    d.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      this.game.audio.unlock();
+      this.game.input.inject('a');
+    });
+    this.chapterCard = d;
+  }
+
+  hideChapterCard() {
+    this.chapterCard = null;
+    this._ccT = 0;
+    if (this.headless || !this.root) return;
+    const old = this.root.querySelector('.chaptercard');
+    if (old && old.remove) old.remove();
+  }
+
   update(dt) {
     const input = this.game.input;
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;
     // Login page is modal (P0/B1).
     if (this.loginOpen) return true;
+    // Chapter title card is modal (D2: auto-dismisses; A/START/tap dismiss early).
+    if (this.chapterCard) {
+      this._ccT += dt;
+      if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 4) {
+        this.game.audio.unlock();
+        this.hideChapterCard();
+      }
+      return true;
+    }
     // Typewriter advance
     if (this.dlg) {
       const d = this.dlg;
@@ -5749,9 +5961,10 @@ class IntroScene {
   finishIntro() {
     const g = this.game;
     g.state.story.flags.introDone = true;
+    g.state.story.chapter = 0; // D2: Act I opens on Chapter 1 (ADR-015 spine)
     g.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };
     g.saveGame(true);
-    g.startOverworld();
+    g.startOverworld({ chapterCard: 0 });
   }
 
   update(dt) {
@@ -7109,6 +7322,7 @@ class OverworldScene {
       { label: 'Bag', value: 'bag' },
       { label: 'Party', value: 'party' },
       { label: 'Dex', value: 'dex' },
+      { label: 'Journey', value: 'journey' },
       { label: 'Save', value: 'save' },
       { label: 'Options', value: 'options' },
       accountRow,
@@ -7118,6 +7332,7 @@ class OverworldScene {
       if (value === 'bag') g.openBag();
       else if (value === 'party') g.openParty();
       else if (value === 'dex') g.openDex();
+      else if (value === 'journey') g.openJourney();
       else if (value === 'save') g.openSave();
       else if (value === 'options') g.openOptions();
       else if (value === 'account' && authEnabled && g.authUser) AUTH.openAccountMenu(g);
@@ -7209,8 +7424,11 @@ class OverworldScene {
     if (comp) {
       r.text(this.map.name + ' · ' + comp.caught + '/' + comp.total + ' caught', 8, r.viewH - 18, { size: 14, color: '#ffe9a8' });
     }
-    // Dex caught counter (honest wording)
-    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, r.viewW - 92, 8, { size: 14, color: '#fff' });
+    // Dex caught counter (honest wording). D3: on desktop the DOM HUD strip is
+    // ~218 CSS px wide at the top-right; shift the counter left in logical px so
+    // the left-aligned text clears it (phone layouts keep the signed offset).
+    const dexX = g.layoutMode === 'desktop' ? r.viewW - 172 : r.viewW - 92;
+    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, dexX, 8, { size: 14, color: '#fff' });
   }
 
   // P1/D5: what would A do on the faced tile? (bubble text, or null)
@@ -7422,13 +7640,28 @@ class Game {
     }
     const w = window.innerWidth, h = window.innerHeight;
     const fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-    if (fine && w >= 700) {
+    // D3: desktop = fine pointer at >=700px, OR a laptop-class width regardless of
+    // what the browser reports (some browsers/headless never match
+    // '(pointer: fine)' — without the width fallback they fell into the phone
+    // landscape path and rendered stretched with touch controls on a laptop).
+    // Coarse-pointer wide tablets still land here and get controls back via the
+    // (pointer:coarse) CSS override.
+    if (w >= 700 && (fine || w >= 1024)) {
       this.layoutMode = 'desktop';
-      r.resize(384, 216, Math.min(1120, w * 0.9), Math.min(630, h * 0.62));
+      // D3: aspect-locked 16:9 canvas. The old h*0.62 cap stretched the buffer
+      // on 1280x800-class viewports (1120x496 CSS over a 384x216 backing store).
+      // Height now reserves room for the hint card instead of a fixed fraction.
+      const cssW0 = Math.min(1120, w * 0.9);
+      let cw = cssW0, ch = cssW0 * 9 / 16;
+      const maxH = Math.min(630, Math.max(240, h - 140));
+      if (ch > maxH) { ch = maxH; cw = ch * 16 / 9; }
+      r.resize(384, 216, Math.round(cw), Math.round(ch));
       document.body.classList.add('desktop');
     } else if (w > h) {
       this.layoutMode = 'landscape';
-      r.resize(256, 192, w * 0.72, h);
+      // D3: aspect-locked 4:3 (was w*0.72 x h — stretched on every landscape phone).
+      const lw = Math.min(w * 0.72, h * 4 / 3);
+      r.resize(256, 192, Math.round(lw), Math.round(lw * 3 / 4));
       document.body.classList.remove('desktop');
     } else {
       this.layoutMode = 'portrait';
@@ -7546,9 +7779,13 @@ class Game {
     this.ui.toast('Welcome back, ' + this.state.player.name + '!');
   }
 
-  startOverworld() {
+  startOverworld(opts) {
     this.scenes.replace(new OverworldScene());
     if (this.guestMode) this.ui.showGuestBanner(); // P0/B1: in-game guest banner
+    // D2: fresh runs open on the Chapter 1 title card (anime spine, ADR-015).
+    if (opts && typeof opts.chapterCard === 'number') {
+      this.ui.showChapterCard(CHAPTERS[opts.chapterCard]);
+    }
   }
 
   saveGame(quiet) {
@@ -7679,6 +7916,9 @@ class Game {
     items.unshift({ label: 'Caught ' + caught + ' / ' + DEX_TOTAL + ' (tracked)', value: null, disabled: true });
     items.unshift({ label: 'Search / Filter' + (fdesc ? ':' + fdesc : ''), value: 'filter' });
     items.unshift({ label: 'Areas — caught per area', value: 'areas' });
+    // D2: arc progression surfaced in the Dex — current chapter header row.
+    const curCh = chapterOf((g.state.story.chapter || 0) + 1);
+    items.unshift({ label: 'Journey — Ch.' + curCh.n + ' · ' + curCh.title, value: null, disabled: true });
     if (!items.length) items.push({ label: '(no matches)', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Pokedex', items, (v) => {
@@ -7719,6 +7959,48 @@ class Game {
           g.openDex(f3);
         });
       });
+    });
+  }
+
+  // D2: Journey menu — the anime-chronology spine (ADR-015). Playable chapters
+  // open a detail card; locked chapters and the BONUS shelf are honest
+  // disabled rows (no fake content, no "coming soon" placeholders).
+  openJourney() {
+    const g = this;
+    const cur = g.state.story.chapter || 0; // 0-based chapter index
+    const items = [];
+    items.push({ label: '— ACT I: THE BEGINNING (v1) —', value: null, disabled: true });
+    for (const ch of CHAPTERS) {
+      if (ch.scope === 'playable') {
+        const isCur = (ch.n - 1) === cur;
+        items.push({
+          label: (isCur ? '\u25b8 ' : '  ') + 'Ch.' + ch.n + ' — ' + ch.title + (isCur ? ' (now)' : ''),
+          value: 'ch' + ch.n,
+        });
+      } else {
+        items.push({
+          label: 'Ch.' + ch.n + ' — ' + ch.title + ' · locked (future act)',
+          value: null, disabled: true,
+        });
+      }
+    }
+    items.push({ label: '— BONUS SHELF (non-canon, not on the spine) —', value: null, disabled: true });
+    for (const b of BONUS_SHELF) {
+      items.push({ label: b, value: null, disabled: true });
+    }
+    items.push({ label: 'Close', value: 'close' });
+    g.ui.showMenu('Journey', items, (v) => {
+      if (!v || v === 'close') return;
+      const ch = CHAPTERS.find((c) => 'ch' + c.n === v);
+      if (ch) {
+        g.ui.say([
+          'CHAPTER ' + ch.n + ' — ACT ' + ch.act,
+          ch.title,
+          ch.arc,
+          'Anime: ' + ch.anime,
+          ch.movies.length ? 'Special events: ' + ch.movies.join(' · ') : '',
+        ], () => g.openJourney(), 'Journey');
+      }
     });
   }
 
@@ -7894,6 +8176,6 @@ if (typeof window !== 'undefined') {
 }
 
 </script>
-<!-- contentHash:f0139e53729a7f4c751e1a697f188876b22841a2557aef932b275d2ca0c9b0b3 -->
+<!-- contentHash:7ea2ca3ebba67dce38129b009142aa60ff7afb591a53e18a9f6c1b269f707d38 -->
 </body>
 </html>
