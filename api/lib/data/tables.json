@@ -1,0 +1,67 @@
+{
+  "tablesVersion": "c5a239c85187577e327161b9eed522f3b0ac62a9d51bb8bf523b7d07966f407f",
+  "schemaVersion": 1,
+  "species": [
+    "bulbasaur",
+    "caterpie",
+    "charmander",
+    "geodude",
+    "mankey",
+    "nidoranm",
+    "onix",
+    "partner",
+    "pidgey",
+    "rattata",
+    "spearow",
+    "squirtle",
+    "weedle",
+    "zubat"
+  ],
+  "moves": [
+    "defensecurl",
+    "ember",
+    "growl",
+    "gust",
+    "harden",
+    "leechlife",
+    "leer",
+    "lowkick",
+    "peck",
+    "poisonsting",
+    "pound",
+    "quickattack",
+    "rockthrow",
+    "scratch",
+    "stringshot",
+    "supersonic",
+    "tackle",
+    "tailwhip",
+    "thundershock",
+    "vinewhip",
+    "watergun"
+  ],
+  "items": [
+    "boulderbadge",
+    "greatball",
+    "pokeball",
+    "potion",
+    "ultraball"
+  ],
+  "balls": [
+    "greatball",
+    "pokeball",
+    "ultraball"
+  ],
+  "badgeSequences": {
+    "kanto": [
+      "boulderbadge"
+    ],
+    "orange": [],
+    "johto": []
+  },
+  "regionBadgeMax": {
+    "kanto": 8,
+    "orange": 4,
+    "johto": 8
+  }
+}
