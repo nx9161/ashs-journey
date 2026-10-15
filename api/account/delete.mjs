@@ -62,7 +62,7 @@ export default async function handler(req) {
 
     // Identity verification = current-password re-entry (Tech Law §3(1)).
     const a = await client.query(
-      `SELECT password FROM account WHERE userId = $1 AND providerId = 'credential'`,
+      `SELECT password FROM account WHERE "userId" = $1 AND "providerId" = 'credential'`,
       [userId],
     );
     const stored = a.rows[0] && a.rows[0].password;

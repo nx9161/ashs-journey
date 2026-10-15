@@ -72,7 +72,12 @@ export async function checkLimits({ keys, max, windowSec }) {
     for (const key of keys) {
       const r = await checkBucket(client, { key, max, windowSec });
       if (!r.allowed) {
-        await client.query('ROLLBACK');
+        // COMMIT, not ROLLBACK: the violation/backoff bookkeeping written by
+        // checkBucket MUST persist, or exponential backoff can never escalate
+        // (QA gate proved violations stayed 0 / backoff_until NULL forever).
+        // The denied key itself was never count-incremented, so committing
+        // does not count the denied request — only the backoff state.
+        await client.query('COMMIT');
         return r;
       }
     }
