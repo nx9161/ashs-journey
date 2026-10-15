@@ -74,7 +74,13 @@ export const MAPS = {
     ],
     npcs: [
       { x: 9, y: 5, name: 'AIDE', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#1a1a1a',
-        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you five to start."] },
+        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
+      { x: 6, y: 4, name: 'CAL', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
+        trainer: 'r1_cal',
+        dialogue: ["Heh! Nobody gets past me without a battle!", "Whoa... you're tougher than you look."] },
+      { x: 7, y: 11, name: 'LISA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+        trainer: 'r1_lisa',
+        dialogue: ["Pidgey and I train here every morning! Care to spar?", "We'll be back stronger tomorrow, won't we, Pidgey?"] },
     ],
     encounters: {
       rate: 0.12,
@@ -119,7 +125,7 @@ export const MAPS = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "The Pewter Gym is past it. Rock-types! Bring water or grass if you can."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
     ],
     encounters: null,
     start: null,
@@ -179,15 +185,28 @@ export const MAPS = {
       { x: 8, y: 13, to: { map: 'viridian', x: 10, y: 1 } },
     ],
     signs: [],
-    npcs: [],
+    npcs: [
+      { x: 6, y: 3, name: 'RICK', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
+        trainer: 'r2_bug',
+        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a Caterpie under a boot."] },
+      { x: 7, y: 5, name: 'BEA', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
+        trainer: 'r2_camper',
+        dialogue: ["I picnic here every day — battle me before you sit down!", "Not even a snack break slows you down!"] },
+      { x: 7, y: 8, name: 'NIA', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+        trainer: 'r2_jr',
+        dialogue: ["Route 2 is MY training ground! Prove you belong here!", "You're stronger than the rumors said..."] },
+      { x: 5, y: 10, name: 'ROB', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+        trainer: 'r2_hiker',
+        dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
+    ],
     encounters: {
       rate: 0.12,
       table: [
-        { species: 'caterpie', min: 3, max: 5, weight: 30 },
-        { species: 'weedle', min: 3, max: 5, weight: 30 },
-        { species: 'pidgey', min: 3, max: 5, weight: 25 },
-        { species: 'nidoranm', min: 4, max: 6, weight: 10 },
-        { species: 'mankey', min: 4, max: 6, weight: 5 },
+        { species: 'caterpie', min: 3, max: 6, weight: 28 },
+        { species: 'weedle', min: 3, max: 6, weight: 28 },
+        { species: 'pidgey', min: 4, max: 6, weight: 22 },
+        { species: 'nidoranm', min: 4, max: 7, weight: 10 },
+        { species: 'mankey', min: 4, max: 7, weight: 14 },
       ],
     },
     start: null,
@@ -222,7 +241,8 @@ export const MAPS = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
-        dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it.", "Catch something with water or grass on Route 2. Or just outlast him. You've got heart."] },
+        dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a Mankey on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Poke Balls — on the house."],
+        give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Poke Balls' } },
     ],
     encounters: null,
     start: null,
@@ -262,9 +282,72 @@ export const MAP_LIST = Object.keys(MAPS);
 export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F']);
 
 // Trainer definitions for the slice.
+// ai: 'opener-setup' = gym-leader flavor: open with a self-buff setup move if known
+// (classic Brock Defense Curl), then fight on effectiveness like everyone else.
 export const TRAINERS = {
+  r1_cal: {
+    id: 'r1_cal', name: 'Cal', title: 'Youngster',
+    intro: ["Hey! My Rattata's the toughest on Route 1! Battle me!"],
+    lose: ["Toughest... except against you, huh."],
+    team: [
+      { species: 'rattata', level: 3 },
+      { species: 'pidgey', level: 4 },
+    ],
+    reward: 140,
+  },
+  r1_lisa: {
+    id: 'r1_lisa', name: 'Lisa', title: 'Lass',
+    intro: ["Pidgey and I do our morning laps here. Spar with us?"],
+    lose: ["We still have a lot of laps to run..."],
+    team: [
+      { species: 'pidgey', level: 3 },
+      { species: 'rattata', level: 4 },
+    ],
+    reward: 150,
+  },
+  r2_bug: {
+    id: 'r2_bug', name: 'Rick', title: 'Bug Catcher',
+    intro: ["My bugs are gonna cocoon you! En garde!"],
+    lose: ["S-squashed..."],
+    team: [
+      { species: 'caterpie', level: 5 },
+      { species: 'weedle', level: 5 },
+    ],
+    reward: 160,
+  },
+  r2_camper: {
+    id: 'r2_camper', name: 'Bea', title: 'Camper',
+    intro: ["I picnic here every day — battle me before you sit down!"],
+    lose: ["Not even a snack break slows you down!"],
+    team: [
+      { species: 'nidoranm', level: 7 },
+      { species: 'mankey', level: 7 },
+    ],
+    reward: 230,
+  },
+  r2_jr: {
+    id: 'r2_jr', name: 'Nia', title: 'Jr. Trainer',
+    intro: ["Route 2 is MY training ground! Prove you belong here!"],
+    lose: ["You're stronger than the rumors said..."],
+    team: [
+      { species: 'pidgey', level: 7 },
+      { species: 'rattata', level: 7 },
+    ],
+    reward: 220,
+  },
+  r2_hiker: {
+    id: 'r2_hiker', name: 'Rob', title: 'Hiker',
+    intro: ["These boulders are my training weights! Show me your form!"],
+    lose: ["Rock-solid... defeat. Heh. Good scrap."],
+    team: [
+      { species: 'geodude', level: 8 },
+      { species: 'geodude', level: 9 },
+    ],
+    reward: 300,
+  },
   brock: {
     id: 'brock', name: 'Brock', title: 'Pewter Gym Leader',
+    ai: 'opener-setup',
     intro: ["My rock-type Pokemon will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],
     team: [

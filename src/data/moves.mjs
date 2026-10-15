@@ -20,6 +20,7 @@ export const MOVES = {
   stringshot:  { id: 'stringshot', name: 'String Shot', type: 'bug', cat: 'status', power: 0, acc: 95, pp: 40, priority: 0, effect: { target: 'foe', spe: -2 } },
   leechlife:   { id: 'leechlife', name: 'Leech Life', type: 'bug', cat: 'physical', power: 20, acc: 100, pp: 15, priority: 0, effect: { target: 'foe', drain: 0.5 } },
   rockthrow:   { id: 'rockthrow', name: 'Rock Throw', type: 'rock', cat: 'physical', power: 50, acc: 90, pp: 15, priority: 0 },
+  lowkick:     { id: 'lowkick', name: 'Low Kick', type: 'fighting', cat: 'physical', power: 50, acc: 100, pp: 20, priority: 0 },
   defensecurl: { id: 'defensecurl', name: 'Defense Curl', type: 'normal', cat: 'status', power: 0, acc: 100, pp: 40, priority: 0, effect: { target: 'self', def: 1 } },
   harden:      { id: 'harden', name: 'Harden', type: 'normal', cat: 'status', power: 0, acc: 100, pp: 30, priority: 0, effect: { target: 'self', def: 1 } },
 };
