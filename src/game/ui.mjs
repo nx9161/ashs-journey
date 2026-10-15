@@ -4,6 +4,8 @@
 
 export const TEXT_SPEED_CPS = { slow: 15, normal: 30, fast: 60, instant: 9999 };
 
+import { SFX } from '../engine/audio.mjs';
+
 function stubEl() {
   return {
     children: [], style: {}, dataset: {},
@@ -139,6 +141,7 @@ export class UI {
       if (cb) cb();
       return false;
     }
+    this.game.audio.playSfx(SFX['dialogue-blip']); // visual twin: the ▾ indicator
     if (!this.headless) this.dlgText.textContent = '';
     return true;
   }
@@ -187,7 +190,7 @@ export class UI {
       if (!m.items[i].disabled) break;
     }
     m.idx = i;
-    this.game.audio.playSfx({ wave: 'pulse', vol: 0.25, notes: [[0, 'A5', 1]] });
+    this.game.audio.playSfx(SFX['ui-tick']);
     if (!this.headless) this.renderMenu();
   }
 
@@ -199,7 +202,7 @@ export class UI {
     if (!it || it.disabled) return;
     this.menu = null;
     if (!this.headless) this.menuEl.classList.add('hidden');
-    this.game.audio.playSfx({ wave: 'pulse', vol: 0.35, notes: [[0, 'E5', 1]] });
+    this.game.audio.playSfx(SFX['ui-blip']);
     const cb = m.cb;
     if (cb) cb(it.value, idx);
   }
@@ -209,6 +212,7 @@ export class UI {
     if (!m) return;
     this.menu = null;
     if (!this.headless) this.menuEl.classList.add('hidden');
+    this.game.audio.playSfx(SFX['ui-back']);
     const cb = m.cb;
     if (cb) cb(null, -1);
   }

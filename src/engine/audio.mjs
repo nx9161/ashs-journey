@@ -1,34 +1,80 @@
-// audio.mjs — WebAudio chiptune engine (stub + note-table player).
-// Contract: docs/contracts.md §2. Voice Designer fills the full score next wave.
-// 4 channels (2 pulse, 1 triangle, 1 noise). Music unlocks on first user gesture.
-// Safe no-op when AudioContext is unavailable (headless / SSR). Persisted mute.
+// audio.mjs — WebAudio chiptune engine: note-table player with loop scheduler.
+// Contract: docs/contracts.md §2. Score lives in audio/note-tables.mjs
+// (import stripped by the zero-dep build; module-order.json pins it first).
+// 4-6 channel budget (2 pulse, 1 triangle, 1 noise) enforced by VOICE_BUDGET.
+// Music unlocks on first user gesture. Safe no-op when AudioContext is
+// unavailable (headless / SSR). Persisted mute + volume via applySettings.
+// Every gameplay-critical cue keeps a visual twin (see audio/SCORE.md).
+
+import { MUSIC, SFXSET, CRIES } from '../../audio/note-tables.mjs';
 
 export const CHANNELS = ['pulse1', 'pulse2', 'triangle', 'noise'];
+export const VOICE_BUDGET = 6; // hard cap on concurrent live voices (polyphony discipline)
+export const SFX_SCALE = 0.06; // SFX beats -> seconds (60ms per beat)
+const EPS = 1e-6; // sub-audible simultaneity epsilon for voice-overlap math
+
+const PITCH_RE = /^([A-G][#b]?)(\d)$/;
+const NAMES = { C: 0, 'C#': 1, D: 2, 'D#': 3, E: 4, F: 5, 'F#': 6, G: 7, 'G#': 8, A: 9, 'A#': 10, Bb: 10, B: 11 };
+
+export function freqOf(pitch) {
+  // Scientific pitch notation -> Hz. A4 = 440.
+  const m = PITCH_RE.exec(pitch);
+  if (!m) return 440;
+  const midi = ((parseInt(m[2], 10) + 1) * 12) + NAMES[m[1]];
+  return 440 * Math.pow(2, (midi - 69) / 12);
+}
+
+export const MUSIC_TRACKS = MUSIC;
+export const CRY_TABLE = CRIES;
+// Legacy key compatibility for existing call sites: blip/tick/back/fanfare/heal/
+// error/throw_/rattle/click/dex/lowhp/encounter all exist in SFXSET.
+export const SFX = SFXSET;
 
 export class AudioEngine {
   constructor() {
     this.ctx = null;
-    this.master = null;
+    this.master = null;   // mute switch
+    this.musicBus = null; // music volume
+    this.sfxBus = null;   // sfx volume
     this.muted = false;
     this.musicVol = 0.8;
     this.sfxVol = 0.8;
+    this.reducedMotion = false;
     this._unlocked = false;
-    this._musicTimer = null;
+    this._musicId = null;      // currently playing music track
+    this._areaMusicId = null;  // last non-battle track (restore target)
+    this._schedTimer = null;
     this._noiseBuf = null;
+    this._pulseWaves = {};
+    // Polyphony discipline: track scheduled voices as [start, stop) windows;
+    // the cap applies to voices *sounding together*, not to the whole
+    // look-ahead queue (a scheduled loop holds dozens of future notes).
+    this._live = [];
   }
 
-  // Call from the first user gesture (A press / tap).
-  unlock() {
+  // Call from the first user gesture (A press / tap). AC may be injected
+  // (tests) — otherwise resolves the browser's AudioContext.
+  unlock(AC) {
     if (this._unlocked) return;
-    const AC = typeof AudioContext !== 'undefined' ? AudioContext
-      : (typeof webkitAudioContext !== 'undefined' ? webkitAudioContext : null);
-    if (!AC) return; // headless: stay silent, never throw
+    const Ctor = AC || (typeof AudioContext !== 'undefined' ? AudioContext
+      : (typeof webkitAudioContext !== 'undefined' ? webkitAudioContext : null));
+    if (!Ctor) return; // headless: stay silent, never throw
     try {
-      this.ctx = new AC();
+      this.ctx = new Ctor();
       this.master = this.ctx.createGain();
       this.master.gain.value = this.muted ? 0 : 1;
+      this.musicBus = this.ctx.createGain();
+      this.musicBus.gain.value = this.musicVol;
+      this.sfxBus = this.ctx.createGain();
+      this.sfxBus.gain.value = this.sfxVol;
+      this.musicBus.connect(this.master);
+      this.sfxBus.connect(this.master);
       this.master.connect(this.ctx.destination);
       this._unlocked = true;
+      // If a track was requested before unlock (e.g. title theme queued at
+      // boot), start it now that the gesture arrived. _musicId is cleared
+      // first so the same-id no-op guard doesn't swallow the replay.
+      if (this._pendingMusic) { const id = this._pendingMusic; this._pendingMusic = null; this._musicId = null; this.playMusic(id); }
     } catch (e) { /* audio unavailable: silent mode */ }
   }
 
@@ -39,77 +85,203 @@ export class AudioEngine {
     }
   }
 
-  _freq(pitch) {
-    // Scientific pitch notation -> Hz. A4 = 440.
-    const names = { C: 0, 'C#': 1, D: 2, 'D#': 3, E: 4, F: 5, 'F#': 6, G: 7, 'G#': 8, A: 9, 'A#': 10, B: 11 };
-    const m = /^([A-G]#?)(\d)$/.exec(pitch);
-    if (!m) return 440;
-    const midi = ((parseInt(m[2], 10) + 1) * 12) + names[m[1]];
-    return 440 * Math.pow(2, (midi - 69) / 12);
+  setMusicVolume(v) {
+    this.musicVol = Math.min(1, Math.max(0, +v || 0));
+    if (this.musicBus && this.ctx) {
+      this.musicBus.gain.setValueAtTime(this.musicVol, this.ctx.currentTime);
+    }
   }
 
-  // noteTable: { bpm, tracks: [{ wave:'pulse'|'triangle'|'noise', duty, vol, notes:[[beat,pitch,beats],...] }] }
-  playMusic(table) {
-    if (!this._unlocked || !table) return;
-    this.stopMusic();
-    const spb = 60 / (table.bpm || 120);
-    const t0 = this.ctx.currentTime + 0.05;
-    this._musicTimer = [];
-    for (const tr of table.tracks || []) {
-      for (const [beat, pitch, beats] of tr.notes) {
-        const t = t0 + beat * spb;
-        const dur = beats * spb;
-        this._schedule(tr, pitch, t, dur, (tr.vol || 0.5) * this.musicVol);
-      }
+  setSfxVolume(v) {
+    this.sfxVol = Math.min(1, Math.max(0, +v || 0));
+    if (this.sfxBus && this.ctx) {
+      this.sfxBus.gain.setValueAtTime(this.sfxVol, this.ctx.currentTime);
     }
+  }
+
+  setReducedMotion(b) {
+    this.reducedMotion = !!b;
+  }
+
+  // Persisted settings object from game state: { mute, musicVol, sfxVol, reducedMotion }.
+  applySettings(s) {
+    if (!s) return;
+    this.setMuted(!!s.mute);
+    if (typeof s.musicVol === 'number') this.setMusicVolume(s.musicVol);
+    if (typeof s.sfxVol === 'number') this.setSfxVolume(s.sfxVol);
+    this.setReducedMotion(!!s.reducedMotion);
+  }
+
+  // ---- music ----
+  _tableBeats(table) {
+    let end = 0;
+    for (const tr of table.tracks || []) {
+      for (const [beat, , beats] of tr.notes) end = Math.max(end, beat + beats);
+    }
+    return end;
+  }
+
+  // id: key in MUSIC. opts.area=false for battle music (not a restore target).
+  // No-op when the same track is already playing (no restart churn on warps).
+  playMusic(id, opts) {
+    if (!id || !MUSIC[id]) return;
+    const area = !opts || opts.area !== false;
+    if (this._musicId === id) { if (area) this._areaMusicId = id; return; }
+    this._musicId = id;
+    if (area) this._areaMusicId = id;
+    if (!this._unlocked || !this.ctx) { this._pendingMusic = id; return; }
+    this._clearSched();
+    const table = MUSIC[id];
+    const spb = 60 / (table.bpm || 120);
+    const loopLen = Math.max(0.25, this._tableBeats(table) * spb);
+    let nextStart = this.ctx.currentTime + 0.06;
+    const scheduleLoop = () => {
+      const t0 = nextStart;
+      try {
+        for (const tr of table.tracks) {
+          for (const [beat, pitch, beats] of tr.notes) {
+            this._schedule(tr, pitch, t0 + beat * spb, beats * spb, tr.vol || 0.5, this.musicBus);
+          }
+        }
+      } catch (e) { /* never let audio break the game */ }
+      nextStart = t0 + loopLen;
+      this._schedTimer = setTimeout(scheduleLoop, Math.max(0, (nextStart - this.ctx.currentTime - 0.25) * 1000));
+    };
+    scheduleLoop();
   }
 
   stopMusic() {
-    this._musicTimer = null; // one-shot scheduler; tables are short loops re-triggered by scenes
+    this._clearSched();
+    this._musicId = null;
   }
 
-  // sfx: { wave, vol, notes } — same shape, single track.
-  playSfx(sfx) {
-    if (!this._unlocked || !sfx || this.muted) return;
+  restoreAreaMusic() {
+    if (this._areaMusicId) this.playMusic(this._areaMusicId);
+  }
+
+  _clearSched() {
+    if (this._schedTimer) { clearTimeout(this._schedTimer); this._schedTimer = null; }
+  }
+
+  // ---- SFX ----
+  // key: SFXSET key (e.g. 'ui-blip') or a raw table { wave, duty, vol, env, notes }.
+  playSfx(key) {
+    if (!this._unlocked || !this.ctx || this.muted) return;
+    const table = typeof key === 'string' ? SFXSET[key] : key;
+    if (!table) return;
     const t = this.ctx.currentTime;
-    const tr = sfx.track || sfx;
-    for (const [beat, pitch, beats] of (tr.notes || [])) {
-      this._schedule(
-        { wave: tr.wave || 'pulse', duty: tr.duty || 0.5 },
-        pitch, t + beat * 0.06, beats * 0.06, (tr.vol || 0.5) * this.sfxVol,
-      );
-    }
+    const tr = table.track || table;
+    try {
+      for (const [beat, pitch, beats] of (tr.notes || [])) {
+        this._schedule(
+          { wave: tr.wave || 'pulse', duty: tr.duty || 0.5, env: tr.env },
+          pitch, t + beat * SFX_SCALE, beats * SFX_SCALE, tr.vol || 0.5, this.sfxBus,
+        );
+      }
+    } catch (e) { /* never let audio break the game */ }
   }
 
-  _schedule(tr, pitch, t, dur, vol) {
-    if (!this.ctx) return;
+  // Convenience pairs (visual twins live in the scenes; see audio/SCORE.md).
+  encounter() { this.playSfx('encounter-sting'); this.playSfx('encounter-sting-melody'); }
+  transition() { this.playSfx(this.reducedMotion ? 'transition-fade' : 'transition-whoosh'); }
+  playCry(speciesId) {
+    const cry = CRIES[speciesId];
+    this.playSfx(cry || { wave: 'pulse', duty: 0.25, vol: 0.35, env: [0.004, 0.15], notes: [[0, 'E5', 1], [1, 'C5', 1]] });
+  }
+  // Battle impact theater: sound picks the effectiveness tier.
+  hitFeedback(eff) {
+    if (eff > 1) { this.playSfx('battle-super-boom'); this.playSfx('battle-super'); }
+    else if (eff < 1) { this.playSfx('battle-hit'); this.playSfx('battle-noteff'); }
+    else { this.playSfx('battle-hit'); this.playSfx('battle-hit-tone'); }
+  }
+  catchBreakout() { this.playSfx('catch-breakout'); this.playSfx('catch-breakout-tone'); }
+
+  // ---- voice synthesis ----
+  _schedule(tr, pitch, t, dur, vol, bus) {
+    if (!this.ctx || !bus) return;
+    if (!this._voiceSlot(t, dur)) return; // polyphony discipline: 4-6 channels
+    const g = this.ctx.createGain();
+    const env = tr.env; // [attack, decay] seconds; peak = vol
     try {
       if (tr.wave === 'noise') {
         const src = this.ctx.createBufferSource();
         src.buffer = this._noiseBuffer();
         const f = this.ctx.createBiquadFilter();
         f.type = 'highpass'; f.frequency.value = 1000;
-        const g = this.ctx.createGain();
-        g.gain.setValueAtTime(vol, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-        src.connect(f); f.connect(g); g.connect(this.master);
-        src.start(t); src.stop(t + dur + 0.02);
+        this._applyEnv(g.gain, t, vol, dur, env);
+        src.connect(f); f.connect(g); g.connect(bus);
+        this._voiceStart(src, t, Math.max(dur, env ? env[0] + env[1] : dur));
       } else {
         const o = this.ctx.createOscillator();
-        o.type = tr.wave === 'triangle' ? 'triangle' : 'square';
-        if (pitch) o.frequency.value = this._freq(pitch);
-        const g = this.ctx.createGain();
-        g.gain.setValueAtTime(vol, t);
-        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-        o.connect(g); g.connect(this.master);
-        o.start(t); o.stop(t + dur + 0.02);
+        if (tr.wave === 'triangle') { o.type = 'triangle'; }
+        else { o.setPeriodicWave(this._pulseWave(tr.duty || 0.5)); }
+        if (pitch) o.frequency.value = freqOf(pitch);
+        this._applyEnv(g.gain, t, vol, dur, env);
+        o.connect(g); g.connect(bus);
+        this._voiceStart(o, t, Math.max(dur, env ? env[0] + env[1] : dur));
       }
     } catch (e) { /* never let audio break the game */ }
   }
 
+  _applyEnv(param, t, vol, dur, env) {
+    if (env && env.length === 2) {
+      param.setValueAtTime(0.0001, t);
+      param.linearRampToValueAtTime(Math.max(0.0001, vol), t + env[0]);
+      param.exponentialRampToValueAtTime(0.0001, t + env[0] + env[1]);
+    } else {
+      param.setValueAtTime(vol, t);
+      param.exponentialRampToValueAtTime(0.0001, t + dur);
+    }
+  }
+
+  // True when a new voice [t, t+dur) can start without exceeding the budget.
+  // Measures *simultaneous* voices: the sweep checks every instant where the
+  // overlap count can change (the new note's start + each existing note's
+  // start inside its span) — the same event-sweep the verify-audio audit uses.
+  // EPS: note times are absolute AudioContext seconds (large magnitudes), so
+  // float association noise can leave a 1-ulp phantom "overlap" between a
+  // voice that just ended and one starting now. 1µs is far below audibility.
+  _voiceSlot(t, dur) {
+    const now = this.ctx ? this.ctx.currentTime : 0;
+    this._live = this._live.filter((v) => v.stop > now);
+    const instants = [t];
+    for (const v of this._live) if (v.start > t + EPS && v.start < t + dur) instants.push(v.start);
+    for (const s of instants) {
+      let n = 0;
+      for (const v of this._live) if (v.start <= s + EPS && v.stop > s + EPS) n++;
+      if (n >= VOICE_BUDGET) return false;
+    }
+    return true;
+  }
+
+  _voiceStart(node, t, stopDur) {
+    // Budget window ends at stopDur (the +0.03 below is sub-audible scheduling
+    // slack, excluded so the budget audit and the engine agree).
+    this._live.push({ start: t, stop: t + stopDur });
+    node.onended = () => { /* window-pruned in _voiceSlot; kept for debuggers */ };
+    node.start(t);
+    node.stop(t + stopDur + 0.03);
+  }
+
+  // Duty-cycle pulse timbres (0.125 / 0.25 / 0.5) via PeriodicWave.
+  _pulseWave(duty) {
+    const key = String(duty);
+    if (!this._pulseWaves[key]) {
+      const N = 24;
+      const real = new Float32Array(N);
+      const imag = new Float32Array(N);
+      real[0] = 2 * duty - 1;
+      for (let k = 1; k < N; k++) {
+        imag[k] = (k % 2 === 1) ? (4 / (k * Math.PI)) * Math.sin(k * Math.PI * duty) : 0;
+      }
+      this._pulseWaves[key] = this.ctx.createPeriodicWave(real, imag, { disableNormalization: true });
+    }
+    return this._pulseWaves[key];
+  }
+
   _noiseBuffer() {
     if (this._noiseBuf) return this._noiseBuf;
-    const len = this.ctx.sampleRate * 0.5;
+    const len = Math.floor(this.ctx.sampleRate * 0.5);
     const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
     const d = buf.getChannelData(0);
     for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
@@ -117,19 +289,3 @@ export class AudioEngine {
     return buf;
   }
 }
-
-// Built-in SFX stubs (original blips) — Voice Designer replaces with the full set.
-export const SFX = {
-  blip:   { wave: 'pulse', vol: 0.35, notes: [[0, 'E5', 1]] },
-  tick:   { wave: 'pulse', vol: 0.25, notes: [[0, 'A5', 1]] },
-  back:   { wave: 'pulse', vol: 0.35, notes: [[0, 'C5', 1]] },
-  fanfare:{ wave: 'pulse', vol: 0.5,  notes: [[0, 'C5', 2], [2, 'E5', 2], [4, 'G5', 2], [6, 'C6', 4]] },
-  heal:   { wave: 'triangle', vol: 0.5, notes: [[0, 'G4', 2], [2, 'C5', 2], [4, 'E5', 4]] },
-  error:  { wave: 'pulse', vol: 0.35, notes: [[0, 'A3', 2], [2, 'G3', 3]] },
-  throw_: { wave: 'noise', vol: 0.4, notes: [[0, null, 3]] },
-  rattle: { wave: 'noise', vol: 0.45, notes: [[0, null, 2], [3, null, 2]] },
-  click:  { wave: 'pulse', vol: 0.6, notes: [[0, 'C6', 1], [1, 'E6', 2]] },
-  dex:    { wave: 'pulse', vol: 0.5, notes: [[0, 'E5', 2], [2, 'G5', 2], [4, 'B5', 2], [6, 'E6', 4]] },
-  lowhp:  { wave: 'pulse', vol: 0.5, notes: [[0, 'A4', 2], [2, 'A4', 2], [4, 'A4', 2]] },
-  encounter: { wave: 'pulse', vol: 0.5, notes: [[0, 'G4', 1], [1, 'A4', 1], [2, 'B4', 1], [3, 'C5', 3]] },
-};
