@@ -3460,7 +3460,7 @@ const ART_META = {
   "families": [
     "tiles",
     "ash",
-    "pikachu",
+    "partner",
     "brock",
     "npcs",
     "species",

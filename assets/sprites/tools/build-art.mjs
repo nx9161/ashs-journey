@@ -17,9 +17,9 @@ const DIST = path.join(ROOT, 'dist');
 const ATLAS_MAX = 2048;
 const CELL_PAD = 1; // 1px transparent margin per sprite cell (contracts §1.1)
 
-const FAMILIES = ['tiles', 'ash', 'pikachu', 'brock', 'npcs', 'species', 'ui'];
+const FAMILIES = ['tiles', 'ash', 'partner', 'brock', 'npcs', 'species', 'ui'];
 // tiles are full-bleed (seamless); characters/sprites/icons need inner margin.
-const NEEDS_INNER_MARGIN = new Set(['ash', 'pikachu', 'brock', 'npcs', 'species', 'ui']);
+const NEEDS_INNER_MARGIN = new Set(['ash', 'partner', 'brock', 'npcs', 'species', 'ui']);
 // Grounded humanoids stand ON the bottom frame edge (feet on the ground line is
 // correct pixel-art practice); the atlas cell padding still ships the 1px
 // transparent margin per contracts §1.1. They need clear top/left/right only.
@@ -144,7 +144,7 @@ function main() {
     const pngName = `atlas-${fam}.png`;
     fs.writeFileSync(path.join(DIST, pngName), encodePng(AW, AH, rgba));
     const json = {
-      atlas: pngName, tile: fam === 'species' || fam === 'pikachu' || fam === 'brock' ? 48 : 16,
+      atlas: pngName, tile: fam === 'species' || fam === 'partner' || fam === 'brock' ? 48 : 16,
       size: [AW, AH], sprites: jsonSprites,
     };
     fs.writeFileSync(path.join(DIST, `atlas-${fam}.json`), JSON.stringify(json, null, 2) + '\n');

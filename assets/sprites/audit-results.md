@@ -53,8 +53,8 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite npc-rival-idle-2 <= 12 colors | PASS | 5 |
 | sprite npc-youngster-idle-1 <= 12 colors | PASS | 6 |
 | sprite npc-youngster-idle-2 <= 12 colors | PASS | 6 |
-| atlas atlas-pikachu.png exists | PASS |  |
-| atlas atlas-pikachu.png <= 2048x2048 | PASS | 138x34 |
+| atlas atlas-partner.png exists | PASS |  |
+| atlas atlas-partner.png <= 2048x2048 | PASS | 138x34 |
 | sprite partner-back <= 12 colors | PASS | 5 |
 | sprite partner-front <= 12 colors | PASS | 6 |
 | sprite pikachu-refuse <= 12 colors | PASS | 6 |
@@ -119,7 +119,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | png atlas-ash.png valid signature | PASS | 0.5 KB |
 | png atlas-brock.png valid signature | PASS | 0.4 KB |
 | png atlas-npcs.png valid signature | PASS | 0.7 KB |
-| png atlas-pikachu.png valid signature | PASS | 0.5 KB |
+| png atlas-partner.png valid signature | PASS | 0.5 KB |
 | png atlas-species.png valid signature | PASS | 2.5 KB |
 | png atlas-tiles.png valid signature | PASS | 0.7 KB |
 | png atlas-ui.png valid signature | PASS | 0.3 KB |

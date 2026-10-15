@@ -32,7 +32,7 @@ MIRROR <other-id>  # optional: derive by horizontal flip
 ## Families
 - **tiles**: 13 tiles, 16×16, ≤16 colors total
 - **ash**: 24 sprites, 16×16, 4 dirs × (2 idle + 4 walk)
-- **pikachu**: 5 sprites (hop-1/2 16×16, partner-front/back 32×32, refuse 32×16)
+- **partner**: 5 sprites (hop-1/2 16×16, partner-front/back 32×32, refuse 32×16)
 - **brock**: 3 sprites (idle-1/2 16×16, battle 32×48)
 - **npcs**: 14 sprites (7 NPCs × 2 idle, 16×16)
 - **species**: 21 sprites (9 species × front/back 32×32 + pikachu partner)

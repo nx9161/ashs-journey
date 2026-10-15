@@ -72,7 +72,8 @@ assets:
     palette_audit: per-sprite <= 12 colors (verified); 1px dark outline; no orphans.
     notes: Pikachu partner follow sprites (hop-1/hop-2, 16x16) + battle sprites
       (partner-front 32x32 capstone, partner-back 32x32) + refuses-the-ball beat
-      (pikachu-refuse 32x16, cracked ball). Atlases: assets/sprites/dist/atlas-pikachu.png.
+      (pikachu-refuse 32x16, cracked ball). Atlases: assets/sprites/dist/atlas-partner.png.
+      Family renamed pikachu -> partner 2026-10-15 (LCR C4 cure; in-game ART ids unchanged).
 
   - id: brock-sprites-v1
     kind: sprites
@@ -130,17 +131,17 @@ assets:
 
   - id: chiptune-v1
     kind: audio
-    status: placeholder
-    source: procedural
-    generator: src/engine/audio.mjs (ChiptuneEngine v1) + note tables in src/data/audio.mjs
+    status: hand-authored
+    source: hand-authored
+    generator: src/engine/audio.mjs (ChiptuneEngine v1) + note tables in audio/note-tables.mjs
     seed: n/a (hand-written note tables, original compositions)
-    hand_finish: none yet
-    author: game-producer (seat 20), Phase 4 Wave 1
+    hand_finish: Voice Designer (seat 24), Phase 4 Wave 2
+    author: Voice Designer (seat 24), Phase 4 Wave 2
     date: 2026-10-15
-    notes: 4 channels (2 pulse, 1 triangle, 1 noise). Melodies are original
+    notes: 9 original loops + full SFX set in audio/note-tables.mjs; provenance in
+      audio/SCORE.md. 4 channels (2 pulse, 1 triangle, 1 noise). Melodies are original
       compositions written for this project — chiptune *style* is fine, *melody* must
-      be original (GC gate). Voice Designer fills the full score next wave per
-      docs/contracts.md §2. Zero audio files ever.
+      be original (GC gate). Zero audio files ever.
 
   - id: dialogue-v1
     kind: dialogue
