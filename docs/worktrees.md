@@ -15,9 +15,12 @@ incident.
    short seat key (`qa`, `gd`, `uix`, `fe`, `arch`, `art`, `audio`,
    `balance`, ...). Branch names stay `feat/`, `fix/`, `docs/`, `chore/` +
    slug (house rules).
-3. **Creating:** from the main checkout —
-   `git worktree add ~/workspace/ashs-journey-<seat> -b feat/<slug> main`
-   (or attach an existing branch without `-b`).
+3. **Creating:** future-wave pads are attached **detached** at `main`'s tip —
+   `git worktree add --detach ~/workspace/ashs-journey-<seat> main` —
+   so no branch is double-checked-out. The seat runs
+   `git checkout -b feat/<slug>` (or attaches its assigned branch) when
+   work begins. A branch may be checked out in exactly one worktree; the
+   main checkout keeps `main`.
 4. **Merging:** the Game Producer merges seat branches to `main` with
    `--no-ff` and a conventional message, after the LCR merge-gate review
    (or a documented producer pass when LCR is next-wave). Merge conflicts
@@ -40,11 +43,11 @@ incident.
 | Path | Branch | Seat |
 |---|---|---|
 | `~/workspace/ashs-journey` | `main` | integration (producer) |
-| `~/workspace/ashs-journey-qa` | `main` | QA Manager (next wave) |
-| `~/workspace/ashs-journey-gd` | `main` | Gameplay Designer (next wave) |
-| `~/workspace/ashs-journey-uix` | `main` | Game UI/UX Designer (next wave) |
-| `~/workspace/ashs-journey-fe` | `main` | Lead Frontend (next wave) |
-| `~/workspace/ashs-journey-arch` | `main` | Game Architect (next wave) |
+| `~/workspace/ashs-journey-qa` | (detached @ main) | QA Manager (next wave) |
+| `~/workspace/ashs-journey-gd` | (detached @ main) | Gameplay Designer (next wave) |
+| `~/workspace/ashs-journey-uix` | (detached @ main) | Game UI/UX Designer (next wave) |
+| `~/workspace/ashs-journey-fe` | (detached @ main) | Lead Frontend (next wave) |
+| `~/workspace/ashs-journey-arch` | (detached @ main) | Game Architect (next wave) |
 
 Retired Wave-2 (merged to main 2026-10-15): `ashs-journey-art`
 (`feat/art-sprites`), `ashs-journey-balance` (`feat/balance-slice`).
