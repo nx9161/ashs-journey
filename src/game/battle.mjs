@@ -48,6 +48,7 @@ export class BattleScene {
     if (this.kind === 'trainer') {
       const t0 = this.trainer.team[0];
       this.foeMon = makeMon(t0.species, t0.level, SPECIES, MOVES);
+      if (t0.nickname) this.foeMon.nickname = t0.nickname; // e.g. the duo's named mons
     }
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
@@ -572,6 +573,7 @@ export class BattleScene {
       if (this.trainerIdx < this.trainer.team.length) {
         const t = this.trainer.team[this.trainerIdx];
         this.foe = makeMon(t.species, t.level, SPECIES, MOVES);
+        if (t.nickname) this.foe.nickname = t.nickname;
         this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
         this.hpAnim.foe = this.foe.hp;
         const foeName = displayName(this.foe, SPECIES);

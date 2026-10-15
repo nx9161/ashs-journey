@@ -205,6 +205,17 @@ export const MAPS = {
         trainer: 'r2_hiker',
         sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
+      // Yellow homage: the anime-trio ambush, reimagined with original
+      // characters (no motto quotes, no trademarked team name — GC C4).
+      // The duo flank the path; either one spotting you pulls BOTH in.
+      { x: 3, y: 7, name: 'RUE', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+        trainer: 'r2_duo', duoPartner: 'COLE',
+        sight: { dir: 'right', range: 4 },
+        dialogue: ["Hold it right there, kid.", "Beaten... by a kid?!"] },
+      { x: 10, y: 7, name: 'COLE', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+        trainer: 'r2_duo', duoPartner: 'RUE',
+        sight: { dir: 'left', range: 4 },
+        dialogue: ["Two of us, one of you.", "Retreat! Regroup! We'll be back with a better plan!"] },
     ],
     encounters: {
       rate: 0.12,
@@ -351,6 +362,27 @@ export const TRAINERS = {
       { species: 'geodude', level: 9 },
     ],
     reward: 300,
+  },
+  // Yellow homage: the anime-trio ambush as a sequential 2-mon duo battle
+  // (Gen 1 had no double battles — the trio fought back-to-back, as here).
+  // Original characters, original banter; nicknamed mons for personality.
+  r2_duo: {
+    id: 'r2_duo', name: 'Rue & Cole', title: 'Uniformed Duo',
+    intro: [
+      "RUE: Well, well. A little trainer marching up OUR route.",
+      "COLE: And carrying a Pikachu that walks free? That's a rare one.",
+      "RUE: Hand over your Pokemon, kid — or we'll take them the fun way!",
+      "COLE: Two of us, one of you. The math is delicious.",
+    ],
+    lose: [
+      "RUE: Beaten... by a kid?!",
+      "COLE: Retreat! Regroup! We'll be back with a better plan!",
+    ],
+    team: [
+      { species: 'weedle', level: 5, nickname: 'Sting' },
+      { species: 'zubat', level: 6, nickname: 'Echo' },
+    ],
+    reward: 200,
   },
   brock: {
     id: 'brock', name: 'Brock', title: 'Pewter Gym Leader',
