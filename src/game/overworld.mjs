@@ -10,6 +10,7 @@ import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { BattleScene } from './battle.mjs';
+import { BootScene } from './title.mjs';
 
 const WALK_MS = 200; // ~200ms per walked tile (GD feel note)
 
@@ -27,6 +28,11 @@ export class OverworldScene {
     this.stepsSinceEncounter = 0;
     this.chainCount = 0;
     this.pausedMenu = false;
+    // P1/C6: movement tutorial shows once until the player takes a first step (or 30s).
+    this.moveTut = g.state.story.flags.moveTutDone ? null : { t: 0 };
+    // P1/D7: partner mood pip — tap = pet (same as facing + A on Pikachu).
+    g.ui.onMoodTap = () => this.petPartner();
+    g.ui.showMoodPip(true);
     g.ui.setBattleMode(false);
     g.audio.playMusic(this.map.music || 'route1-theme'); // per-map original score (maps.mjs `music`)
   }
@@ -77,6 +83,11 @@ export class OverworldScene {
       this.openPauseMenu();
       return;
     }
+    // P1/D4: SELECT toggles the HUD quick-strip.
+    if (input.wasPressed('select')) {
+      g.ui.setHudVisible(!g.ui.hudVisible);
+      return;
+    }
     // Interact
     if (input.wasPressed('a')) {
       if (this.tryInteract()) return;
@@ -121,6 +132,14 @@ export class OverworldScene {
     this.playAcc = (this.playAcc || 0) + dt;
     if (this.playAcc >= 1) { this.playAcc -= 1; g.state.player.playtimeSec++; }
     if (this.banner.t > 0) this.banner.t -= dt;
+    // P1/C6: movement tutorial dismisses on first step or after 30s.
+    if (this.moveTut) {
+      this.moveTut.t += dt;
+      if (this.moveTut.t > 30 || this.trail.length > 0) {
+        this.moveTut = null;
+        g.state.story.flags.moveTutDone = true;
+      }
+    }
   }
 
   onStep(x, y) {
@@ -208,11 +227,15 @@ export class OverworldScene {
     // 3-beat: rustle 200ms -> ! 300ms -> transition 400ms (ADR-004, gameux §6)
     if (e.phase === 'rustle' && e.t >= 200) { e.phase = 'exclaim'; e.t = 0; }
     else if (e.phase === 'exclaim' && e.t >= 300) {
-      e.phase = 'transition'; e.t = 0; g.renderer.flashA = 0.7;
+      e.phase = 'transition'; e.t = 0;
+      // P0/E11: encounter flash gated like battle flashes; reduced motion -> fade.
+      if (!g.state.settings.reducedMotion && g.state.settings.shake) g.renderer.flashA = 0.7;
+      else if (g.state.settings.reducedMotion) { g.renderer.fadeA = 0.35; g.renderer.fadeColor = '#ffffff'; }
       g.audio.transition(); // whoosh on the wipe; soft blip under reduced motion
     }
     else if (e.phase === 'transition' && e.t >= 400) {
       g.renderer.flashA = 0;
+      g.renderer.fadeA = 0;
       const foe = e.foe;
       this.enc = null;
       dexRegister(g.state.dex, 'seen', SPECIES[foe.speciesId].dexNo);
@@ -223,6 +246,17 @@ export class OverworldScene {
     }
   }
 
+  petPartner() {
+    // P1/D7: mood-pip tap and the faced-tile interaction share one path.
+    const g = this.game;
+    const moods = { happy: 'is happy! It nuzzles your hand.', curious: 'tilts its head, curious.', sleepy: 'yawns... maybe it needs a rest soon.' };
+    g.state.pikachu.mood = 'happy'; // a petting cheers it up (D7: mood reacts to beats)
+    g.ui.toast('Pikachu ' + (moods[g.state.pikachu.mood] || moods.happy));
+    g.audio.playSfx('partner-happy'); // visual twin: Pikachu hop + mood pip
+    g.ui.updateMoodPip();
+    return true;
+  }
+
   tryInteract() {
     const g = this.game;
     const p = this.player;
@@ -231,12 +265,7 @@ export class OverworldScene {
     const fx = p.tx + dx, fy = p.ty + dy;
     // Partner interaction (facing Pikachu's tile)
     const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
-    if (fx === ptx && fy === pty) {
-      const moods = { happy: 'is happy! It nuzzles your hand.', curious: 'tilts its head, curious.', sleepy: 'yawns... maybe it needs a rest soon.' };
-      g.ui.toast('Pikachu ' + (moods[g.state.pikachu.mood] || moods.happy));
-      g.audio.playSfx('partner-happy'); // visual twin: Pikachu hop + mood pip
-      return true;
-    }
+    if (fx === ptx && fy === pty) return this.petPartner();
     const npc = this.npcAt(fx, fy);
     if (npc) {
       if (npc.trainer) { this.startTrainerBattle(npc); return true; }
@@ -292,13 +321,19 @@ export class OverworldScene {
 
   openPauseMenu() {
     const g = this.game;
+    // P1/J2: player card header + Quit to title (confirm; autosaves first).
+    const badges = g.state.badges.kanto.length;
+    const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
     g.ui.showMenu('MENU', [
+      { label: g.state.player.name + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
+      { label: this.map.name, value: null, disabled: true },
       { label: 'Bag', value: 'bag' },
       { label: 'Party', value: 'party' },
       { label: 'Dex', value: 'dex' },
       { label: 'Save', value: 'save' },
       { label: 'Options', value: 'options' },
       { label: 'Account — coming in Track B', value: 'account', disabled: true },
+      { label: 'Quit to title', value: 'quit' },
       { label: 'Close', value: 'close' },
     ], (value) => {
       if (value === 'bag') g.openBag();
@@ -306,6 +341,17 @@ export class OverworldScene {
       else if (value === 'dex') g.openDex();
       else if (value === 'save') g.openSave();
       else if (value === 'options') g.openOptions();
+      else if (value === 'quit') {
+        g.ui.showMenu('Quit to title? (autosaves first)', [
+          { label: 'Quit', value: 'yes' },
+          { label: 'Keep playing', value: 'no' },
+        ], (v) => {
+          if (v === 'yes') {
+            g.saveGame(true);
+            g.scenes.replace(new BootScene());
+          }
+        });
+      }
     });
   }
 
@@ -323,44 +369,113 @@ export class OverworldScene {
     // Camera centers on player
     r.centerOn(this.player.px + T / 2, this.player.py + T / 2, this.w * T, this.h * T);
     r.begin();
-    // Tiles (viewport-culled)
+    // Tiles: hand-authored ART (wave 3); void stays a solid fill.
     const vr = r.viewRect();
     const x0 = Math.max(0, Math.floor(vr.x0 / T)), x1 = Math.min(this.w - 1, Math.ceil(vr.x1 / T));
     const y0 = Math.max(0, Math.floor(vr.y0 / T)), y1 = Math.min(this.h - 1, Math.ceil(vr.y1 / T));
     for (let y = y0; y <= y1; y++) {
       for (let x = x0; x <= x1; x++) {
         const ch = this.map.rows[y][x];
-        const kind = g.tileKind(ch);
-        r.blit(g.tileCache[kind], x * T, y * T);
+        const spr = g.tileSprite(g.tileKind(ch));
+        if (spr) r.blit(spr, x * T, y * T);
+        else g.ctx2dfill('#101018', x * T, y * T, T, T); // void
       }
     }
     // Encounter rustle effect
     if (this.enc && this.enc.phase === 'rustle') {
       const jx = (this.game.rng.misc() - 0.5) * 3;
-      r.blit(g.tileCache.grass, this.player.tx * T + jx, this.player.ty * T);
+      const gspr = g.tileSprite('grass');
+      if (gspr) r.blit(gspr, this.player.tx * T + jx, this.player.ty * T);
     }
-    // NPCs
+    // NPCs (2-frame idle)
     for (const n of this.map.npcs) {
-      r.blit(g.npcSprite(n), n.x * T, n.y * T - 4);
+      r.blit(g.npcFrame(n), n.x * T, n.y * T - 4);
     }
-    // Partner (hop) + player
+    // Partner (hop) + player (walk cycle / idle blink)
     const hop = Math.abs(Math.sin(this.partner.hop)) * 3;
-    r.blit(g.spriteCache.partner, Math.round(this.partner.px), Math.round(this.partner.py) - Math.round(hop));
-    r.blit(g.playerSprite(this.player.dir, this.player.moving), Math.round(this.player.px), Math.round(this.player.py));
+    r.blit(g.partnerFrame(), Math.round(this.partner.px), Math.round(this.partner.py) - Math.round(hop));
+    r.blit(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py));
     // "!" exclamation
     if (this.enc && this.enc.phase === 'exclaim') {
-      r.text('!', this.player.px + 4, this.player.py - 14, { size: 12, bold: true, color: '#e84040' });
+      r.text('!', this.player.px + 4, this.player.py - 14, { size: 14, bold: true, color: '#e84040' });
     }
+    // P1/C6: movement tutorial — pulsing ring on the player + coach text.
+    if (this.moveTut) {
+      const pr = 12 + Math.sin(g._animT * 0.008) * 3;
+      const c = r.ctx;
+      c.strokeStyle = '#ffe9a8'; c.lineWidth = 2;
+      c.beginPath(); c.arc(this.player.px + 8, this.player.py + 8, pr, 0, Math.PI * 2); c.stroke();
+      r.text('Walk with the D-pad — Pikachu follows you!', 8, 44, { size: 14, bold: true, color: '#ffe9a8' });
+      r.text('▼', Math.round(this.partner.px) + 4, Math.round(this.partner.py) - 28, { size: 14, bold: true, color: '#ffe9a8' });
+    }
+    // P1/D5: contextual interaction prompt bubble.
+    const prompt = this.interactPrompt();
+    if (prompt) {
+      const bx = Math.round(this.player.px) - 24, by = Math.round(this.player.py) - 30;
+      r.panel(bx, by, 76, 20, '#f8f8f0', '#202028');
+      r.text(prompt, bx + 6, by + 3, { size: 14, color: '#202028', shadow: false });
+    }
+    // P1/D8: clock glyph — day/night pixel icon + season bar (no text, ambient).
+    this.renderClockGlyph(r);
     r.end();
-    // HUD overlays (canvas)
+    // HUD overlays (canvas) — P1/A5: >= 14px.
     if (this.banner.t > 0) {
-      r.text(this.banner.text, 8, 8, { size: 10, bold: true, color: '#fff' });
+      r.text(this.banner.text, 8, 8, { size: 14, bold: true, color: '#fff' });
     }
+    // P1/D6: persistent objective banner under the area banner.
+    r.text(this.objectiveText(), 8, 26, { size: 14, color: '#ffe9a8' });
     const comp = this.areaCompletion();
     if (comp) {
-      r.text(this.map.name + ' \u00b7 ' + comp.caught + '/' + comp.total + ' caught', 8, r.viewH - 12, { size: 7, color: '#ffe9a8' });
+      r.text(this.map.name + ' · ' + comp.caught + '/' + comp.total + ' caught', 8, r.viewH - 18, { size: 14, color: '#ffe9a8' });
     }
     // Dex caught counter (honest wording)
-    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, r.viewW - 78, 8, { size: 7, color: '#fff' });
+    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, r.viewW - 92, 8, { size: 14, color: '#fff' });
+  }
+
+  // P1/D5: what would A do on the faced tile? (bubble text, or null)
+  interactPrompt() {
+    const p = this.player;
+    const dx = p.dir === 'left' ? -1 : p.dir === 'right' ? 1 : 0;
+    const dy = p.dir === 'up' ? -1 : p.dir === 'down' ? 1 : 0;
+    const fx = p.tx + dx, fy = p.ty + dy;
+    const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
+    if (fx === ptx && fy === pty) return 'A: Pet';
+    if (this.npcAt(fx, fy)) return 'A: Talk';
+    if (this.signAt(fx, fy)) return 'A: Read';
+    return null;
+  }
+
+  // P1/D6: current story objective (truncating; the slice's spine).
+  objectiveText() {
+    const f = this.game.state.story.flags;
+    if (!f.beat_brock) return '▶ Earn the Boulder Badge';
+    return '▶ Explore Kanto';
+  }
+
+  // P1/D8: day/night pixel icon + season color bar, top-right of canvas.
+  renderClockGlyph(r) {
+    const g = this.game;
+    let hour = 12;
+    try { hour = new Date().getHours(); } catch (e) { /* headless */ }
+    const day = hour >= 6 && hour < 18;
+    const x = r.viewW - 20, y = 22;
+    const c = r.ctx;
+    if (day) {
+      c.fillStyle = '#f8d030';
+      c.fillRect(x + 3, y, 6, 12); c.fillRect(x, y + 3, 12, 6);
+      c.fillStyle = '#fff2b0';
+      c.fillRect(x + 4, y + 4, 4, 4);
+    } else {
+      c.fillStyle = '#bfe8f0';
+      c.fillRect(x + 3, y + 1, 6, 10); c.fillRect(x + 5, y, 8, 12);
+      c.fillStyle = '#101018';
+      c.fillRect(x + 6, y + 2, 5, 8);
+    }
+    // season bar: spr green / sum gold / aut orange / win blue
+    let m = 0;
+    try { m = new Date().getMonth(); } catch (e) { /* headless */ }
+    const seasonCol = m < 2 || m === 11 ? '#5a9ae8' : m < 5 ? '#58c94f' : m < 8 ? '#e8c832' : '#e08a4a';
+    c.fillStyle = seasonCol;
+    c.fillRect(x, y + 14, 12, 3);
   }
 }

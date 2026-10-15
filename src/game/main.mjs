@@ -7,8 +7,8 @@ import { Renderer, TILE } from '../engine/render.mjs';
 import { Input } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
-import { buildTileCache, TILE_CHARS } from '../engine/tiles.mjs';
-import { forgeSprite, forgeHumanoid } from '../engine/sprites.mjs';
+import { TILE_CHARS } from '../engine/tiles.mjs';
+import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, buildArtTileCache, tileSprite } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
 import { UI } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
@@ -17,6 +17,7 @@ import { OverworldScene } from './overworld.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS, POCKETS, BALLS } from '../data/items.mjs';
+import { MAPS } from '../data/maps.mjs';
 import { displayName, dexCaughtCount, defaultState } from './state.mjs';
 import { SaveStore, freshState } from '../save/store.mjs';
 import { SFX } from '../engine/audio.mjs';
@@ -60,35 +61,54 @@ export class Game {
     this.store = new SaveStore();
     this.state = freshState();
     this.rng = makeRngStreams(nextSeed());
-    this.tileCache = buildTileCache(doc);
+    this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs); void -> solid fill
     this.spriteCache = {};
     this.npcCache = {};
     this.skipIntroVeteran = false;
     this._lastAutosave = 0;
     this.layoutMode = 'portrait';
+    this._animT = 0;      // ms clock for sprite-frame animation (idle blink, NPCs, water)
+    this.guestMode = false; // set by the Trainer ID Terminal guest path
   }
 
   tileKind(ch) { return TILE_CHARS[ch] || 'void'; }
 
+  tileSprite(kind) { return tileSprite(this.tileCache, kind, this._animT); }
+
   buildSprites() {
+    // Wave 3: real ART data replaces the forge placeholders (README wiring handoff).
     for (const id of Object.keys(SPECIES)) {
-      this.spriteCache[id] = forgeSprite(doc, SPECIES[id], 48);
+      this.spriteCache[id] = speciesBattleArt(doc, id, SPECIES[id]);
     }
     this.playerSprites = {
-      down: forgeHumanoid(doc, { shirt: '#d84a3a', pants: '#3a5a9a', hair: '#1a1a1a' }),
-      up: forgeHumanoid(doc, { shirt: '#d84a3a', pants: '#3a5a9a', hair: '#1a1a1a' }),
-      left: forgeHumanoid(doc, { shirt: '#d84a3a', pants: '#3a5a9a', hair: '#1a1a1a' }),
-      right: forgeHumanoid(doc, { shirt: '#d84a3a', pants: '#3a5a9a', hair: '#1a1a1a' }),
+      down: ashFrames(doc, 'down'),
+      up: ashFrames(doc, 'up'),
+      left: ashFrames(doc, 'left'),
+      right: ashFrames(doc, 'right'),
     };
+    this._partnerHop = partnerHopFrames(doc);
+    this.npcCache = {};
   }
 
-  playerSprite(dir, moving) { return this.playerSprites[dir] || this.playerSprites.down; }
-
-  npcSprite(npc) {
-    if (!this.npcCache[npc.name]) {
-      this.npcCache[npc.name] = forgeHumanoid(doc, npc);
+  // Overworld Ash: 4-dir walk cycle while moving, 2-frame idle blink at rest.
+  playerSprite(p) {
+    const frames = this.playerSprites[p.dir] || this.playerSprites.down;
+    if (p.moving) {
+      const fi = 2 + (Math.floor((p.moveT / 200) * 4) % 4); // 4 walk frames per tile
+      return frames[fi];
     }
-    return this.npcCache[npc.name];
+    return frames[Math.floor(this._animT / 500) % 2]; // idle-1 / idle-2 blink
+  }
+
+  npcFrame(npc) {
+    if (!this.npcCache[npc.name]) this.npcCache[npc.name] = npcFrames(doc, npc);
+    const f = this.npcCache[npc.name];
+    return f[Math.floor(this._animT / 600) % 2]; // idle-1 / idle-2
+  }
+
+  partnerFrame() {
+    if (!this._partnerHop) return this.spriteCache.partner.front;
+    return this._partnerHop[Math.floor(this._animT / 280) % 2]; // hop-1 / hop-2
   }
 
   // Canvas 2D helpers used by scenes.
@@ -111,9 +131,33 @@ export class Game {
     if (typeof window !== 'undefined' && window.addEventListener) {
       window.addEventListener('resize', () => this.applyLayout());
     }
-    this.loop.onAutosave = () => this.saveGame(true);
+    // P1/A6: tap the canvas to advance (title + tap-to-advance dialogue).
+    if (this.canvas && this.canvas.addEventListener) {
+      this.canvas.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.audio.unlock();
+        this.input.inject('a');
+      });
+    }
+    // P1/I4: honor prefers-reduced-motion on first boot.
+    try {
+      if (typeof window !== 'undefined' && window.matchMedia &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+          !this.store.exists()) {
+        this.state.settings.reducedMotion = true;
+      }
+    } catch (e) { /* headless / no matchMedia */ }
+    this.loop.onAutosave = () => {
+      // P1/H2: visibilitychange autosaves — never mid-battle-turn.
+      const top = this.scenes.top;
+      const midResolve = !!(top && top.state === 'resolve' && top.foe);
+      if (!midResolve) this.saveGame(true);
+    };
     this.loop.bindVisibility(() => { /* sim halts via rAF freeze; autosave queued above */ });
     this.audio.applySettings(this.state.settings);
+    // Gameplay Designer co-design note (C7): the tutorial catch gate must be
+    // robust to a Spearow-class foe — the script is deterministic (balance-seat
+    // gate), never luck. Recorded here so the gate lives with the flow.
     this.scenes.push(new BootScene());
     this.loop.start();
   }
@@ -140,12 +184,27 @@ export class Game {
       r.resize(256, 256, w, h * 0.45);
       document.body.classList.remove('desktop');
     }
+    // P1/K2: landscape gets the right-edge command rail (CSS re-rails the HUD strip).
+    document.body.classList.toggle('landscape', this.layoutMode === 'landscape');
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
+    // P1/K3 + I2: desktop hint card; show-touch toggle honored on hybrids.
+    document.body.classList.toggle('showtouch', !!this.state.settings.showTouch);
+    document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1);
+    this.ui.showHintCard(this.layoutMode === 'desktop');
   }
 
   update(dt) {
+    this._animT += dt * 1000;
     // Global M-key mute toggle (options spec §4.8: "Mute (M key too)"). Persists.
     if (this.input.wasPressed('mute')) this.toggleMute();
+    // P1/I3: F = fullscreen toggle on #stage (KEYMAP defines it; now consumed).
+    if (this.input.wasPressed('fullscreen') && typeof document !== 'undefined') {
+      const stage = document.getElementById('stage');
+      if (stage) {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else if (stage.requestFullscreen) stage.requestFullscreen();
+      }
+    }
     this.ui.update(dt);
     this.scenes.update(dt);
   }
@@ -163,6 +222,18 @@ export class Game {
   }
 
   // ---- game flow ----
+  // P0/B1: title menu routes through the Trainer ID Terminal (login stub).
+  // Track B dark: LOG IN / REGISTER honestly disabled; GUEST functional; zero network.
+  openLogin(mode) {
+    this._loginMode = mode;
+    this.ui.showLogin((choice) => {
+      if (choice !== 'guest') return;
+      this.guestMode = true;
+      if (this._loginMode === 'continue') this.continueGame();
+      else this.newGame();
+    });
+  }
+
   newGame() {
     this.state = freshState();
     this.state.player.name = 'ASH';
@@ -185,6 +256,7 @@ export class Game {
 
   startOverworld() {
     this.scenes.replace(new OverworldScene());
+    if (this.guestMode) this.ui.showGuestBanner(); // P0/B1: in-game guest banner
   }
 
   saveGame(quiet) {
@@ -197,6 +269,7 @@ export class Game {
   }
 
   autosave(reason) {
+    if (this.state.settings.autosave === false) return; // P1/I5: autosave toggle
     const now = Date.now();
     if (now - this._lastAutosave < 5000) return; // 5s throttle floor
     this._lastAutosave = now;
@@ -207,10 +280,14 @@ export class Game {
   openBag() {
     const g = this;
     const items = [];
+    // P1/G4: pocket tabs as group headers (44px rows, description in the label).
     for (const pocket of POCKETS) {
       const inPocket = Object.keys(ITEMS).filter((id) => ITEMS[id].pocket === pocket && (g.state.bag[id] || 0) > 0);
+      if (!inPocket.length) continue;
+      items.push({ label: '— ' + pocket + ' —', value: null, disabled: true });
       for (const id of inPocket) {
-        items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id], value: id });
+        const hint = id === 'potion' ? ' (heals 20 HP — uses your turn in battle)' : '';
+        items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id] + hint, value: id });
       }
     }
     if (!items.length) items.push({ label: '(empty)', value: null, disabled: true });
@@ -236,8 +313,19 @@ export class Game {
 
   openParty() {
     const g = this;
+    // P1/G1: rows carry an HP mini-bar + numbers, status chip, and the ⚡ partner badge.
+    const rowHtml = (it) => {
+      if (it.value === 'close' || it.value === -1) return '<span>' + it.label + '</span>';
+      const m = g.state.party[it.value];
+      const pct = Math.max(0, Math.round((m.hp / m.maxHp) * 100));
+      const col = pct > 50 ? '#58c94f' : pct > 25 ? '#e8c832' : '#e84040';
+      const badge = m.speciesId === 'partner' ? '<span class="pbadge">⚡</span>' : '';
+      const st = m.status ? '<span class="pstat">' + m.status.toUpperCase().slice(0, 3) + '</span>' : '';
+      return '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
+        + '<span class="phpbar"><i style="width:' + pct + '%;background:' + col + '"></i></span>'
+        + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st;
+    };
     const items = g.state.party.map((m, i) => {
-      const sp = SPECIES[m.speciesId];
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + '  ' + m.hp + '/' + m.maxHp, value: i };
     });
     for (let i = g.state.party.length; i < 6; i++) items.push({ label: '—', value: -1, disabled: true });
@@ -261,30 +349,96 @@ export class Game {
           ], null, 'Summary');
         }
       });
-    });
+    }, { rowHtml });
   }
 
-  openDex() {
+  openDex(filter) {
     const g = this;
+    filter = filter || {};
     const caught = dexCaughtCount(g.state.dex);
-    const items = Object.keys(SPECIES).filter((id) => id !== 'partner').map((id) => {
+    const matchSpecies = (id) => {
+      const sp = SPECIES[id];
+      const c = !!g.state.dex.caught[sp.dexNo], s = !!g.state.dex.seen[sp.dexNo];
+      if (filter.status === 'caught' && !c) return false;
+      if (filter.status === 'seen' && !(s && !c)) return false;
+      if (filter.status === 'unseen' && (s || c)) return false;
+      if (filter.type && !sp.types.includes(filter.type)) return false;
+      if (filter.q && sp.name.toLowerCase().indexOf(filter.q.toLowerCase()) < 0) return false;
+      return true;
+    };
+    const items = Object.keys(SPECIES).filter((id) => id !== 'partner' && matchSpecies(id)).map((id) => {
       const sp = SPECIES[id];
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
       const mark = c ? '[CAUGHT]' : (s ? '[SEEN]' : '[???]');
       return { label: 'No.' + sp.dexNo + ' ' + (c || s ? sp.name : '???') + ' ' + mark, value: id };
     });
+    const fdesc = (filter.q ? ' q=' + filter.q : '') + (filter.type ? ' ' + filter.type : '') + (filter.status ? ' ' + filter.status : '');
     items.unshift({ label: 'Caught ' + caught + ' / ' + DEX_TOTAL + ' (tracked)', value: null, disabled: true });
+    items.unshift({ label: 'Search / Filter' + (fdesc ? ':' + fdesc : ''), value: 'filter' });
+    items.unshift({ label: 'Areas — caught per area', value: 'areas' });
+    if (!items.length) items.push({ label: '(no matches)', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Pokedex', items, (v) => {
       if (!v || v === 'close') return;
+      if (v === 'filter') { g.openDexFilter(filter); return; }
+      if (v === 'areas') { g.openDexAreas(); return; }
       const sp = SPECIES[v];
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
-      if (!c && !s) { g.openDex(); return; }
+      if (!c && !s) { g.openDex(filter); return; }
       g.ui.say([
         'No.' + sp.dexNo + '  ' + sp.name + '  ' + sp.types.join('/'),
         sp.flavor,
         'Status: ' + (c ? 'CAUGHT' : 'SEEN'),
-      ], () => g.openDex(), 'Dex');
+      ], () => g.openDex(filter), 'Dex');
+    });
+  }
+
+  // P1/G3: dex filter submenu — status, type, and name search (reuses the A-Z grid).
+  openDexFilter(filter) {
+    const g = this;
+    const types = [...new Set(Object.keys(SPECIES).flatMap((id) => SPECIES[id].types))].sort();
+    g.ui.showMenu('Filter: status', [
+      { label: 'All', value: 'all' },
+      { label: 'Caught', value: 'caught' },
+      { label: 'Seen', value: 'seen' },
+      { label: 'Unseen', value: 'unseen' },
+      { label: 'Back', value: 'back' },
+    ], (st) => {
+      if (st === 'back' || st === null) { g.openDex(filter); return; }
+      const f2 = Object.assign({}, filter, { status: st === 'all' ? null : st });
+      const titems = [{ label: 'All types', value: null }].concat(types.map((t) => ({ label: t, value: t })));
+      titems.push({ label: 'Back', value: 'back' });
+      g.ui.showMenu('Filter: type', titems, (tp) => {
+        if (tp === 'back' || tp === null) { g.openDex(filter); return; }
+        const f3 = Object.assign({}, f2, { type: tp });
+        g.ui.showNameEntry('Search the Dex (blank = all)', '', 8, (q) => {
+          f3.q = q || null;
+          g.openDex(f3);
+        });
+      });
+    });
+  }
+
+  // P1/G3: Areas tab — per-area "caught n/m" checklists (B2W2 Habitat pattern).
+  openDexAreas() {
+    const g = this;
+    const items = Object.keys(MAPS).filter((id) => MAPS[id].encounters).map((id) => {
+      const map = MAPS[id];
+      const species = [...new Set(map.encounters.table.map((e) => e.species))];
+      const n = species.filter((s) => g.state.dex.caught[SPECIES[s].dexNo]).length;
+      return { label: map.name + ' — ' + n + '/' + species.length + ' caught', value: id };
+    });
+    items.push({ label: 'Back', value: 'back' });
+    g.ui.showMenu('Dex — Areas', items, (v) => {
+      if (!v || v === 'back') { g.openDex(); return; }
+      const map = MAPS[v];
+      const rows = map.encounters.table.map((e) => {
+        const sp = SPECIES[e.species];
+        const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
+        return { label: (c || s ? sp.name : '???') + '  Lv' + e.min + '-' + e.max + (c ? ' [CAUGHT]' : s ? ' [SEEN]' : ''), value: null, disabled: true };
+      });
+      rows.push({ label: 'Back', value: 'back' });
+      g.ui.showMenu(map.name, rows, () => g.openDexAreas());
     });
   }
 
@@ -316,8 +470,12 @@ export class Game {
       { label: 'SFX volume: ' + Math.round(s.sfxVol * 100) + '%', value: 'sfx' },
       { label: 'Battle animations: ' + yn(s.battleAnims), value: 'banim' },
       { label: 'Screen shake: ' + yn(s.shake), value: 'shake' },
+      { label: 'Vibration: ' + yn(s.vibration), value: 'vib' },
+      { label: 'Autosave: ' + yn(s.autosave), value: 'asave' },
       { label: 'Reduced motion: ' + yn(s.reducedMotion), value: 'rmotion' },
       { label: 'Flip controls: ' + yn(s.controlsFlip), value: 'flip' },
+      { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
+      { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
       { label: 'Legal / credits', value: 'legal' },
       { label: 'Erase save', value: 'erase' },
       { label: 'Close', value: 'close' },
@@ -330,8 +488,19 @@ export class Game {
       else if (v === 'sfx') { s.sfxVol = s.sfxVol >= 0.99 ? 0 : Math.round((s.sfxVol + 0.1) * 10) / 10; g.audio.setSfxVolume(s.sfxVol); }
       else if (v === 'banim') s.battleAnims = !s.battleAnims;
       else if (v === 'shake') s.shake = !s.shake;
+      else if (v === 'vib') s.vibration = !s.vibration;
+      else if (v === 'asave') s.autosave = !s.autosave;
       else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); }
       else if (v === 'flip') { s.controlsFlip = !s.controlsFlip; g.applyLayout(); }
+      else if (v === 'showtouch') {
+        s.showTouch = !s.showTouch;
+        if (typeof document !== 'undefined') document.body.classList.toggle('showtouch', !!s.showTouch);
+      }
+      else if (v === 'hudscale') {
+        // P1/I2: HUD scale row (the setting existed with no UI).
+        s.hudScale = s.hudScale >= 1.5 ? 1 : Math.round((s.hudScale + 0.25) * 100) / 100;
+        if (typeof document !== 'undefined') document.documentElement.style.setProperty('--hudscale', s.hudScale);
+      }
       else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
       else if (v === 'erase') {
         g.ui.showMenu('Erase ALL save data?', [
@@ -344,8 +513,15 @@ export class Game {
               { label: 'No', value: 'no' },
             ], (b) => {
               if (b === 'yes2') {
-                g.store.erase();
-                g.ui.toast('Save data erased.');
+                // P1/H4: third gate — type-to-confirm DELETE (deletion is irreversible).
+                g.ui.showNameEntry('Type DELETE to confirm', '', 6, (typed) => {
+                  if (typed === 'DELETE') {
+                    g.store.erase();
+                    g.ui.toast('Save data erased.');
+                  } else {
+                    g.ui.toast('Erase cancelled.');
+                  }
+                });
               }
             });
           }

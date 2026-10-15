@@ -15,8 +15,18 @@ import { TILE } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { SLICE_CAPSTONE } from '../data/dialogue.mjs';
+import { typePill } from './ui.mjs';
 
 const HP_DRAIN_PER_SEC = 90; // ADR-004 feel budget
+
+// Fraction of the current level's XP bar filled (gameux §4.2).
+function xpFracOf(mon, add) {
+  const sp = SPECIES[mon.speciesId];
+  const lo = xpForLevel(sp.growth, mon.level);
+  const hi = xpForLevel(sp.growth, mon.level + 1);
+  if (hi <= lo) return 1;
+  return Math.max(0, Math.min(1, (mon.xp + (add || 0) - lo) / (hi - lo)));
+}
 
 export class BattleScene {
   constructor(opts) {
@@ -50,6 +60,17 @@ export class BattleScene {
     this.xpAnim = 0;
     this.shakeT = 0;
     this.flashT = 0;
+    this.fadeT = 0;      // P0/E11: reduced-motion substitute for shake/flash (100ms fade)
+    this.atkFx = null;   // { side, t } — README attack transform: 1.2x for 3 frames then back
+    this.impactFx = null; // { side, t } — README impact: white palette-swap 2 frames + shake
+    this.faintFx = null;  // { side, spr, t } — README faint: sink 8px + fade to 0 over 20 frames
+    this.xpBarAnim = null; // [{ mon, from, to }] — P0/E3 XP bar ease-out over 600ms
+    this.xpFlashT = 0;    // level-up flash on the XP bar
+    this._lastMoveIdx = 0; // P0/E9: cursor memory (last-used move pre-selected)
+    this._lowHpPulseT = 0; // P1/E7: plate pulse on first red crossing (skipped under reduced motion)
+    this._tutFightDone = false; // P0/C7: guided first-catch tutorial stage flags
+    this._tutStage = null;
+    this.catchFx = null; // P1/E10: success starburst after the catch click
     this.catchState = null;
     this.fled = false;
     this.critCap = false;
@@ -86,12 +107,28 @@ export class BattleScene {
   update(dt) {
     const g = this.game;
     const input = g.input;
-    // Screen shake / flash decay
+    const st = g.state.settings;
+    // Screen shake / flash decay — P0/E11: gated on the Screen-shake option +
+    // reduced motion (assignment is gated at the source; decay is unconditional).
     if (this.shakeT > 0) { this.shakeT -= dt * 1000; g.renderer.shakeX = (Math.random() - 0.5) * 8; g.renderer.shakeY = (Math.random() - 0.5) * 8; }
     else { g.renderer.shakeX = 0; g.renderer.shakeY = 0; }
     if (this.flashT > 0) { this.flashT -= dt * 1000; g.renderer.flashA = Math.max(0, this.flashT / 60) * 0.8; }
+    // P0/E11: reduced-motion substitute — a gentle 100ms fade instead of shake/flash.
+    if (this.fadeT > 0) {
+      this.fadeT -= dt * 1000;
+      g.renderer.fadeA = Math.max(0, this.fadeT / 100) * 0.35;
+      g.renderer.fadeColor = '#ffffff';
+      if (this.fadeT <= 0) g.renderer.fadeA = 0;
+    }
+    // README runtime transforms.
+    if (this.atkFx) { this.atkFx.t += dt * 1000; if (this.atkFx.t > 100) this.atkFx = null; } // 3 frames @30Hz
+    if (this.impactFx) { this.impactFx.t += dt * 1000; if (this.impactFx.t > 66) this.impactFx = null; } // 2 frames
+    if (this.faintFx) { this.faintFx.t += dt * 1000; if (this.faintFx.t > 660) this.faintFx = null; } // 20 frames
+    if (this.catchFx) { this.catchFx.t += dt * 1000; if (this.catchFx.t > 500) this.catchFx = null; } // P1/E10 starburst
+    if (this.xpFlashT > 0) this.xpFlashT -= dt * 1000;
+    if (this._lowHpPulseT > 0) this._lowHpPulseT -= dt * 1000;
 
-    // Animated HP drain (90 HP/s)
+    // Animated HP drain (90 HP/s) — P0/E5: reduced motion snaps instantly.
     this.drainHp(dt);
 
     if (g.ui.update(dt)) return;
@@ -125,14 +162,20 @@ export class BattleScene {
 
   toCommand() {
     this.state = 'command';
+    // P0/C7: guided first-catch tutorial — FIGHT highlighted first (others dimmed),
+    // then BAG highlighted once the foe is weakened. Dimmed = de-emphasized, still usable.
+    const tut = this.tutorial;
     const items = [
-      { label: 'FIGHT', value: 'fight' },
-      { label: 'BAG', value: 'bag' },
-      { label: 'PARTY', value: 'party' },
+      { label: 'FIGHT', value: 'fight', dimmed: tut && this._tutStage === 'bag' },
+      { label: 'BAG', value: 'bag', dimmed: tut && this._tutStage !== 'bag' },
+      { label: 'PARTY', value: 'party', dimmed: tut },
       // GD: no running from the scripted tutorial — it's a lesson, not a gamble.
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || this.tutorial },
+      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || tut },
     ];
-    this.game.ui.showCommands(items, (value) => this.onCommand(value));
+    let focus = null;
+    if (tut && !this._tutFightDone) focus = 'fight';
+    else if (tut && this._tutStage === 'bag') focus = 'bag';
+    this.game.ui.showCommands(items, (value) => this.onCommand(value), { focus });
   }
 
   updateCommand() { /* menu modal drives via ui */ }
@@ -141,19 +184,33 @@ export class BattleScene {
     const g = this.game;
     if (value === null) { this.toCommand(); return; } // cancelled -> back
     if (value === 'fight') {
+      // P0/E9: 2x2 move grid — name + type badge pill (icon+text) + PP + power/acc;
+      // 0-PP rows grayed with a slash; cursor memory pre-selects the last-used move.
       const ally = this.ally;
       const items = ally.moves.map((m, i) => {
         const mv = MOVES[m.id];
-        return { label: mv.name + '  ' + m.pp + '/' + m.maxPp, value: i, disabled: m.pp <= 0 };
+        return {
+          label: mv.name + ' (' + mv.type + ') ' + m.pp + '/' + m.maxPp,
+          value: i, disabled: m.pp <= 0, zeroPp: m.pp <= 0, move: m,
+        };
       });
       items.push({ label: 'Back', value: -1 });
       this.state = 'moves';
+      const rowHtml = (it) => {
+        if (it.value === -1) return '<span>' + it.label + '</span>';
+        const mv = MOVES[it.move.id];
+        return '<span class="mvcell"><span class="mvname">' + mv.name + '</span>'
+          + typePill(mv.type)
+          + '<span class="mvpp">' + it.move.pp + '/' + it.move.maxPp + ' PP</span>'
+          + '<span class="mvpow">' + (mv.power || '—') + ' pw / ' + (mv.acc || '—') + ' ac</span></span>';
+      };
       g.ui.showMenu('Choose a move', items, (v) => {
         if (v === null || v === -1) { this.toCommand(); return; }
+        this._lastMoveIdx = v; // P0/E9 cursor memory
         this.playerAction = { type: 'move', idx: v };
         this.foeAction = this.chooseFoeAction();
         this.beginTurn();
-      });
+      }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx, items.length - 1), rowHtml });
     } else if (value === 'bag') {
       this.state = 'bag';
       const items = [];
@@ -164,13 +221,15 @@ export class BattleScene {
       const potions = g.state.bag.potion || 0;
       items.push({ label: 'Potion x' + potions, value: 'potion', disabled: potions <= 0 });
       items.push({ label: 'Back', value: null });
+      // P0/C7: in the guided tutorial, the Poke Ball row is highlighted once the foe is weakened.
+      const focusBall = this.tutorial && this._tutStage === 'bag';
       g.ui.showMenu('Bag', items, (v) => {
         if (v === null) { this.toCommand(); return; }
         if (v === 'potion') { this.usePotion(); return; }
         this.playerAction = { type: 'ball', ball: v };
         this.foeAction = null; // throwing a ball: foe still acts? DS: ball replaces your move; foe moves first if faster. Simplify: foe acts after throw fails only.
         this.beginCatch(v);
-      });
+      }, { focusValue: focusBall ? 'pokeball' : null });
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {
@@ -396,10 +455,29 @@ export class BattleScene {
         hungOn = !this._endureShown;
         this._endureShown = true;
       }
-      // Impact theater: hit-stop feel via shake/flash
-      if (eff > 1) { this.shakeT = 120; this.flashT = 60; }
-      else if (eff < 1) { this.shakeT = 60; }
-      if (crit) this.flashT = 90;
+      if (hungOn) this._tutStage = 'bag'; // P0/C7: foe weakened -> BAG highlight next
+      // P0/C7: the tutorial's first damaging move retires the FIGHT highlight.
+      if (this.tutorial && entry.side === 'ally' && mv.cat !== 'status') this._tutFightDone = true;
+      // README attack transform: the attacker's sprite scales 1.2x for 3 frames.
+      // P1/E12: Battle animations OFF skips the lunge/impact anims entirely.
+      const animsOn = g.state.settings.battleAnims !== false;
+      if (animsOn) this.atkFx = { side: entry.side, t: 0 };
+      // Impact theater — P0/E11: shake/flash gated on the Screen-shake option
+      // and reduced motion; reduced motion gets a 100ms fade instead.
+      const canShake = animsOn && !g.state.settings.reducedMotion && g.state.settings.shake;
+      if (canShake) {
+        if (eff > 1) { this.shakeT = 120; this.flashT = 60; }
+        else if (eff < 1) { this.shakeT = 60; }
+        if (crit) this.flashT = 90;
+        // README impact: white palette-swap on the defender for 2 frames + shake.
+        if (eff !== 1 || crit) this.impactFx = { side: foeSide, t: 0 };
+        // P1/I5: haptic tick on super-effective (guarded; mobile only).
+        if (eff > 1 && g.state.settings.vibration && typeof navigator !== 'undefined' && navigator.vibrate) {
+          try { navigator.vibrate(30); } catch (e) { /* no haptics */ }
+        }
+      } else if (animsOn && g.state.settings.reducedMotion && (eff !== 1 || crit)) {
+        this.fadeT = 100;
+      }
       g.audio.hitFeedback(eff); // sound picks the effectiveness tier (visual twin: shake/flash)
       let extra = '';
       if (crit) extra = ' A critical hit!';
@@ -459,6 +537,10 @@ export class BattleScene {
     if (mon.hp > 0) { cb(); return; }
     const name = displayName(mon, SPECIES);
     g.audio.playSfx('battle-faint');
+    // README faint transform: the sprite sinks 8px + fades to 0 over 20 frames
+    // while the message plays (visual-only; the flow is unchanged).
+    const art = g.spriteCache[mon.speciesId] || g.spriteCache.partner;
+    this.faintFx = { side, spr: side === 'ally' ? art.back : art.front, t: 0 };
     this.say(name + ' fainted!', () => {
       if (side === 'foe') {
         this.state = 'faintfoe';
@@ -507,10 +589,30 @@ export class BattleScene {
     const g = this.game;
     const base = SPECIES[this.foe.speciesId].baseXp;
     const gain = xpYield(base, this.foe.level, this.kind === 'wild');
-    this.pendingXp = (this.pendingXp || 0) + gain;
+    // P0/E3: snapshot the XP-bar animation (600ms ease-out, gameux §4.2).
+    const prior = this.pendingXp || 0;
+    this.xpBarAnim = g.state.party.filter((m) => m.hp > 0).map((m) => ({
+      mon: m, from: xpFracOf(m, prior), to: xpFracOf(m, prior + gain),
+    }));
+    this.pendingXp = prior + gain;
     this.xpCb = cb;
     this.state = 'xp';
     this.xpT = 0;
+  }
+
+  // Fraction of the current level's XP progress (for the XP bar).
+  xpShownFrac(mon) {
+    let frac = xpFracOf(mon, 0);
+    if (this.state === 'xp' && this.xpBarAnim) {
+      const rec = this.xpBarAnim.find((r) => r.mon === mon);
+      if (rec) {
+        const k = this.game.state.settings.reducedMotion
+          ? 1
+          : 1 - Math.pow(1 - Math.min(1, this.xpT / 600), 3); // ease-out cubic
+        frac = rec.from + (rec.to - rec.from) * k;
+      }
+    }
+    return frac;
   }
 
   updateXp(dt) {
@@ -548,6 +650,7 @@ export class BattleScene {
       g.audio.playSfx('dex-register');
       this.pendingXp = 0;
       this.xpApplied = false;
+      this.xpFlashT = 250; // P0/E3: level-up flash on the XP bar + fanfare below
       const cb = this.xpCb; this.xpCb = null;
       if (msgs.length) { g.audio.playSfx('levelup'); this.say(msgs.join(' '), () => { this.state = 'resolve'; if (cb) cb(); }); }
       else { this.state = 'resolve'; if (cb) cb(); }
@@ -611,7 +714,12 @@ export class BattleScene {
     const c = this.catchState;
     c.t += dt * 1000;
     // throw 26f (~430ms) -> absorb -> ball drop -> 3x800ms shakes -> click
-    if (c.phase === 'throw' && c.t >= 430) { c.phase = 'shakes'; c.t = 0; }
+    if (c.phase === 'throw' && c.t >= 430) {
+      c.phase = 'shakes'; c.t = 0;
+      // P1/E10: absorb flash (the mon is drawn into the ball) — white-swap 2 frames.
+      const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
+      if (foeArt.frontWhite && !g.state.settings.reducedMotion) this.impactFx = { side: 'foe', t: 0 };
+    }
     else if (c.phase === 'shakes') {
       const want = c.need;
       const doneShakes = Math.floor(c.t / 800);
@@ -630,6 +738,7 @@ export class BattleScene {
     const g = this.game;
     g.audio.playSfx('catch-click'); // visual twin: starburst
     g.audio.playSfx('catch-gotcha');
+    this.catchFx = { t: 0 }; // P1/E10: success starburst radiates from the ball
     const foe = this.foe;
     const name = displayName(foe, SPECIES);
     dexRegister(g.state.dex, 'caught', SPECIES[foe.speciesId].dexNo);
@@ -643,6 +752,8 @@ export class BattleScene {
       g.state.party.push(foe);
     }
     g.audio.playSfx('dex-register'); // visual twin: dex toast + badge dot
+    g.ui.dexDot = true; // P1/D4: badge dot on the HUD strip's Dex button
+    if (g.ui._renderDexDot) g.ui._renderDexDot();
     this.say('Gotcha! ' + name + ' was caught! (' + dest + ')', () => {
       g.ui.toast(name + ' registered in the Dex!');
       this.endBattle(true);
@@ -653,9 +764,12 @@ export class BattleScene {
     const g = this.game;
     const name = displayName(this.foe, SPECIES);
     g.audio.catchBreakout(); // visual twin: break-out burst
-    g.renderer.flashA = 0.8;
+    // P0/E11: break-out flash gated like battle flashes; reduced motion -> fade.
+    if (!g.state.settings.reducedMotion && g.state.settings.shake) g.renderer.flashA = 0.8;
+    else if (g.state.settings.reducedMotion) { g.renderer.fadeA = 0.35; g.renderer.fadeColor = '#ffffff'; }
     this.say('Oh no! ' + name + ' broke free after ' + shakesDone + ' shake' + (shakesDone === 1 ? '' : 's') + '!', () => {
       g.renderer.flashA = 0;
+      g.renderer.fadeA = 0;
       // Break-out mood: it may attack immediately (foe gets a free move)
       this.playerAction = { type: 'ballthrown' };
       this.foeAction = this.chooseFoeAction();
@@ -729,19 +843,22 @@ export class BattleScene {
 
   drainHp(dt) {
     const g = this.game;
-    const rate = HP_DRAIN_PER_SEC * dt;
-    let dirty = false;
-    if (this.hpAnim.ally !== this.ally.hp) {
-      const d = this.ally.hp - this.hpAnim.ally;
-      this.hpAnim.ally += Math.sign(d) * Math.min(Math.abs(d), rate);
-      if (Math.abs(this.ally.hp - this.hpAnim.ally) < 1) this.hpAnim.ally = this.ally.hp;
-      dirty = true;
-    }
-    if (this.hpAnim.foe !== this.foe.hp) {
-      const d = this.foe.hp - this.hpAnim.foe;
-      this.hpAnim.foe += Math.sign(d) * Math.min(Math.abs(d), rate);
-      if (Math.abs(this.foe.hp - this.hpAnim.foe) < 1) this.hpAnim.foe = this.foe.hp;
-      dirty = true;
+    // P0/E5: reduced motion -> HP drain snaps instantly (no 90 HP/s animation).
+    if (g.state.settings.reducedMotion) {
+      this.hpAnim.ally = this.ally.hp;
+      this.hpAnim.foe = this.foe.hp;
+    } else {
+      const rate = HP_DRAIN_PER_SEC * dt;
+      if (this.hpAnim.ally !== this.ally.hp) {
+        const d = this.ally.hp - this.hpAnim.ally;
+        this.hpAnim.ally += Math.sign(d) * Math.min(Math.abs(d), rate);
+        if (Math.abs(this.ally.hp - this.hpAnim.ally) < 1) this.hpAnim.ally = this.ally.hp;
+      }
+      if (this.hpAnim.foe !== this.foe.hp) {
+        const d = this.foe.hp - this.hpAnim.foe;
+        this.hpAnim.foe += Math.sign(d) * Math.min(Math.abs(d), rate);
+        if (Math.abs(this.foe.hp - this.hpAnim.foe) < 1) this.hpAnim.foe = this.foe.hp;
+      }
     }
     // Low-HP warning jingle at first crossing into red (<25%), once per ally
     // (gameux §4.2). Visual twin: the HP plate's red pulse + ⚠ pip.
@@ -750,9 +867,10 @@ export class BattleScene {
     if (ratio > 0.25) this._lowHpWarned = false;
     else if (!this._lowHpWarned && this.ally.hp > 0) {
       this._lowHpWarned = true;
-      g.audio.playSfx('lowhp');
+      g.audio.playSfx('lowhp'); // P0-5: wired (was dead code before the Wave-2 audio merge)
+      // P1/E7: pulse the ally plate twice on first red crossing (not under reduced motion).
+      if (!g.state.settings.reducedMotion) this._lowHpPulseT = 400;
     }
-    void dirty;
   }
 
   render(r) {
@@ -766,12 +884,39 @@ export class BattleScene {
       g.ctx2dfill(bands[i], 0, (h * i) / 5, w, h / 5 + 1);
     }
     r.begin();
-    // Platforms: enemy upper-left, player lower-right (gameux §4.2)
-    const foeSpr = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
-    const allySpr = g.spriteCache[this.ally.speciesId] || g.spriteCache.partner;
+    // Platforms: foe upper-right, ally lower-left (wireframes §5.1 — the Uix
+    // ruling: gameux §4.2's "upper-left" was the spec's error; the build is correct).
+    const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
+    const allyArt = g.spriteCache[this.ally.speciesId] || g.spriteCache.partner;
     const bob = Math.sin(this.t * 0.004) * 2;
-    r.blit(foeSpr, w * 0.62, h * 0.12 + bob);
-    r.blit(allySpr, w * 0.14, h * 0.52 - bob);
+    const foePos = { x: w * 0.62, y: h * 0.12 + bob };
+    const allyPos = { x: w * 0.14, y: h * 0.52 - bob };
+    // Idle bob: the build-time derived bob frame alternates with the sine.
+    let foeSpr = (bob > 0 && foeArt.frontBob) ? foeArt.frontBob : foeArt.front;
+    let allySpr = allyArt.back;
+    // README impact transform: white palette-swap on the defender for 2 frames.
+    if (this.impactFx) {
+      if (this.impactFx.side === 'foe' && foeArt.frontWhite) foeSpr = foeArt.frontWhite;
+      if (this.impactFx.side === 'ally' && allyArt.backWhite) allySpr = allyArt.backWhite;
+    }
+    const drawBattler = (spr, pos, side) => {
+      if (this.faintFx && this.faintFx.side === side) return; // faint anim draws it
+      // README attack transform: 1.2x scale for 3 frames, then back.
+      if (this.atkFx && this.atkFx.side === side) r.blitS(spr, pos.x - 5, pos.y - 5, 58, 58);
+      else r.blitS(spr, pos.x, pos.y, 48, 48); // 32px ART -> 48px draw size
+    };
+    drawBattler(foeSpr, foePos, 'foe');
+    drawBattler(allySpr, allyPos, 'ally');
+    // README faint transform: sink 8px + fade to 0 alpha over 20 frames.
+    if (this.faintFx) {
+      const k = Math.min(1, this.faintFx.t / 660);
+      const c = r.ctx;
+      c.save();
+      c.globalAlpha = 1 - k;
+      const pos = this.faintFx.side === 'foe' ? foePos : allyPos;
+      r.blitS(this.faintFx.spr, pos.x, pos.y + 8 * k, 48, 48);
+      c.restore();
+    }
     // Catch ball arc
     if (this.state === 'catchseq' && this.catchState.phase === 'throw') {
       const k = Math.min(1, this.catchState.t / 430);
@@ -784,33 +929,70 @@ export class BattleScene {
       g.ctx2dcircle(w * 0.7 + wob, h * 0.3, 6, '#e8e8f0');
       g.ctx2dcircle(w * 0.7 + wob, h * 0.3 - 2, 6, '#e84040');
     }
+    // P1/E10: success starburst — 8 gold rays radiating from the ball, fading.
+    if (this.catchFx) {
+      const k = this.catchFx.t / 500;
+      const c = r.ctx;
+      c.save();
+      c.strokeStyle = 'rgba(232,200,50,' + (1 - k).toFixed(3) + ')';
+      c.lineWidth = 2;
+      const bx = w * 0.7, by = h * 0.3, r0 = 8 + k * 26;
+      for (let s = 0; s < 8; s++) {
+        const a = (s / 8) * Math.PI * 2;
+        c.beginPath();
+        c.moveTo(bx + Math.cos(a) * r0, by + Math.sin(a) * r0);
+        c.lineTo(bx + Math.cos(a) * (r0 + 8), by + Math.sin(a) * (r0 + 8));
+        c.stroke();
+      }
+      c.restore();
+    }
     r.end();
-    // HP plates (Gen 5 idiom, original art)
+    // HP plates (Gen 5 idiom, original art) — P1/A5: all plate text >= 14px.
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
-    this.plate(r, w - 110, h - 84, this.ally, this.hpAnim.ally, true);
+    this.plate(r, w - 116, h - 108, this.ally, this.hpAnim.ally, true);
     // Message box
     if (this.msgOpen || this.msg) {
-      r.panel(4, h - 40, w - 8, 36, '#f8f8f0', '#202028');
-      const txt = this.msg.length > 52 ? this.msg.slice(0, 52) : this.msg;
-      r.text(txt, 10, h - 32, { size: 8, color: '#202028', shadow: false });
-      if (this.msg.length > 52) r.text(this.msg.slice(52, 104), 10, h - 20, { size: 8, color: '#202028', shadow: false });
+      r.panel(4, h - 52, w - 8, 48, '#f8f8f0', '#202028');
+      const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
+      r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
+      if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
     }
     this.t += 16;
   }
 
   plate(r, x, y, mon, hpShown, isAlly) {
     const g = this.game;
-    const sp = SPECIES[mon.speciesId];
-    const w = 104, h = isAlly ? 30 : 22;
-    r.panel(x, y, w, h, '#f0ead8', '#202028');
-    r.text(displayName(mon, SPECIES), x + 4, y + 2, { size: 8, bold: true, color: '#202028', shadow: false });
-    r.text('Lv' + mon.level, x + w - 26, y + 2, { size: 8, color: '#202028', shadow: false });
-    r.hpBar(x + 4, y + 12, w - 8, 6, hpShown / mon.maxHp, g.state.settings.reducedMotion);
+    const w = 104, h = isAlly ? 62 : 48;
+    // P1/E7: low-HP pulse — the ally plate nudges twice on first red crossing
+    // (never under reduced motion; the pulse timer is only set when motion is on).
+    let px = x;
+    if (isAlly && this._lowHpPulseT > 0) px = x + Math.sin(this._lowHpPulseT * 0.05) * 2;
+    r.panel(px, y, w, h, '#f0ead8', '#202028');
+    const name = displayName(mon, SPECIES).slice(0, 10);
+    r.text(name, px + 4, y + 4, { size: 14, bold: true, color: '#202028', shadow: false });
+    r.text('Lv' + mon.level, px + w - 46, y + 4, { size: 14, color: '#202028', shadow: false });
+    const frac = hpShown / mon.maxHp;
+    r.hpBar(px + 4, y + 22, w - 8, 6, frac);
+    // P0/E6: ⚠ pip on the plate under 25% — the colorblind cue, never color-alone.
+    if (frac < 0.25 && mon.hp > 0) {
+      r.text('⚠', px + w - 22, y + 21, { size: 14, bold: true, color: '#a02020', shadow: false });
+    }
     if (isAlly) {
-      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, x + 4, y + 20, { size: 7, color: '#202028', shadow: false });
-      if (mon.status) r.text(mon.status.toUpperCase().slice(0, 3), x + w - 24, y + 20, { size: 7, bold: true, color: '#a040a0', shadow: false });
+      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + 4, y + 30, { size: 14, color: '#202028', shadow: false });
+      if (mon.status) r.text(mon.status.toUpperCase().slice(0, 3), px + w - 42, y + 30, { size: 14, bold: true, color: '#a040a0', shadow: false });
+      // P0/E3: XP bar (gold) + →Lv label; 600ms ease-out (instant under reduced motion).
+      r.text('→Lv', px + 72, y + 44, { size: 14, color: '#7a5a10', shadow: false });
+      // xpShownFrac lives on the battle instance; the QA minimal-this plate test
+      // calls plate() without it — fall back to the static fraction there.
+      const xf = (typeof this.xpShownFrac === 'function') ? this.xpShownFrac(mon) : xpFracOf(mon, 0);
+      r.xpBar(px + 4, y + 48, 64, 4, xf);
+      if (this.xpFlashT > 0) {
+        const c = r.ctx;
+        c.fillStyle = 'rgba(255,255,255,' + (this.xpFlashT / 250 * 0.8).toFixed(3) + ')';
+        c.fillRect(px + 4, y + 48, 64, 4);
+      }
     } else if (mon.status) {
-      r.text(mon.status.toUpperCase().slice(0, 3), x + w - 24, y + 12, { size: 7, bold: true, color: '#a040a0', shadow: false });
+      r.text(mon.status.toUpperCase().slice(0, 3), px + w - 42, y + 30, { size: 14, bold: true, color: '#a040a0', shadow: false });
     }
   }
 }

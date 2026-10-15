@@ -91,6 +91,15 @@ export class Renderer {
     c.drawImage(sprite, Math.round(dx), Math.round(dy));
   }
 
+  // Scaled blit for authored battlers (32px art -> 48px draw size).
+  // imageSmoothingEnabled=false is set in begin(): crisp pixel scaling.
+  blitS(sprite, dx, dy, w, h) {
+    const c = this.ctx;
+    if (dx + w < this.camX - TILE || dy + h < this.camY - TILE ||
+        dx > this.camX + this.viewW + TILE || dy > this.camY + this.viewH + TILE) return;
+    c.drawImage(sprite, Math.round(dx), Math.round(dy), Math.round(w), Math.round(h));
+  }
+
   text(str, x, y, opts) {
     const o = opts || {};
     const c = this.ctx;
@@ -114,7 +123,9 @@ export class Renderer {
   }
 
   // HP bar with colorblind-safe stripe overlay under 25% (gameux §7).
-  hpBar(x, y, w, h, frac, reducedMotion) {
+  // The stripes are STATIC (not motion) — they always draw; they are the
+  // colorblind cue, never gated on reduced motion (Uix sign-off E6 fix).
+  hpBar(x, y, w, h, frac) {
     const c = this.ctx;
     const f = Math.max(0, Math.min(1, frac));
     c.fillStyle = '#28182c';
@@ -122,11 +133,21 @@ export class Renderer {
     const col = f > 0.5 ? '#58c94f' : (f > 0.25 ? '#e8c832' : '#e84040');
     c.fillStyle = col;
     c.fillRect(x + 1, y + 1, Math.floor((w - 2) * f), h - 2);
-    if (f <= 0.25 && f > 0 && !reducedMotion) {
+    if (f <= 0.25 && f > 0) {
       c.fillStyle = 'rgba(255,255,255,0.5)';
       for (let sx = x + 2; sx < x + w - 2; sx += 4) {
         c.fillRect(sx, y + 1, 1, h - 2);
       }
     }
+  }
+
+  // XP bar: gold, 96x3 per gameux §4.2. frac eases out over 600ms in battle.
+  xpBar(x, y, w, h, frac) {
+    const c = this.ctx;
+    const f = Math.max(0, Math.min(1, frac));
+    c.fillStyle = '#28182c';
+    c.fillRect(x, y, w, h);
+    c.fillStyle = '#e8c832';
+    c.fillRect(x + 1, y + 1, Math.floor((w - 2) * f), h - 2);
   }
 }

@@ -15,20 +15,20 @@ body{font-family:monospace;-webkit-user-select:none;user-select:none;-webkit-tap
 .hidden{display:none!important}
 /* dialogue */
 .dialogue{position:absolute;left:4%;right:4%;bottom:34%;min-height:96px;background:#f8f8f0;border:3px solid #202028;border-radius:6px;padding:10px 12px 18px;pointer-events:auto;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
-.dlg-name{position:absolute;top:-14px;left:10px;background:#202028;color:#ffe9a8;font-size:11px;font-weight:bold;padding:2px 10px;border-radius:4px}
-.dlg-text{font-size:14px;line-height:1.5;color:#202028;min-height:60px;white-space:pre-wrap}
-.dlg-hint{position:absolute;right:12px;bottom:4px;color:#202028;animation:blink 1s infinite;font-size:12px}
+.dlg-name{position:absolute;top:-16px;left:10px;background:#202028;color:#ffe9a8;font-size:14px;font-weight:bold;padding:2px 10px;border-radius:4px}
+.dlg-text{font-size:16px;line-height:1.5;color:#202028;min-height:64px;white-space:pre-wrap}
+.dlg-hint{position:absolute;right:12px;bottom:4px;color:#202028;animation:blink 1s infinite;font-size:14px}
 @keyframes blink{50%{opacity:0}}
 /* menus */
 .menu{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);min-width:220px;max-width:92vw;max-height:60vh;overflow:auto;background:#f8f8f0;border:3px solid #202028;border-radius:6px;pointer-events:auto;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
-.menu-title{background:#202028;color:#ffe9a8;font-size:12px;font-weight:bold;padding:6px 10px}
+.menu-title{background:#202028;color:#ffe9a8;font-size:14px;font-weight:bold;padding:6px 10px}
 .menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-bottom:1px solid #d8d8cc;font:inherit;font-size:14px;color:#202028;text-align:left;padding:10px;min-height:44px;cursor:pointer}
 .menu-row .cur{width:18px;color:#c03028;font-weight:bold}
 .menu-row.cursor{background:#e8e0c8}
 .menu-row.disabled{color:#a0a0a0}
 /* toasts */
 .toasts{position:absolute;left:0;right:0;bottom:24%;display:flex;flex-direction:column;align-items:center;gap:6px}
-.toast{background:#202028;color:#ffe9a8;font-size:12px;padding:8px 14px;border-radius:16px;pointer-events:none}
+.toast{background:#202028;color:#ffe9a8;font-size:14px;padding:8px 14px;border-radius:16px;pointer-events:none}
 /* controls */
 .controls{position:absolute;inset:0;pointer-events:none}
 .dpad{position:absolute;left:24px;bottom:24px;width:132px;height:132px;pointer-events:auto}
@@ -42,8 +42,82 @@ body.flip .ab{right:auto;left:24px}
 .a-a{right:0;bottom:0}.a-b{left:0;bottom:0}
 .abtn:active{background:#c03028}
 .sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:24px;display:flex;gap:8px;pointer-events:auto}
-.sysbtn{background:#2a2a34;color:#ccc;border:2px solid #55555f;border-radius:14px;font-size:10px;padding:10px 14px;min-height:44px;pointer-events:auto}
+.sysbtn{background:#2a2a34;color:#ccc;border:2px solid #55555f;border-radius:14px;font-size:14px;padding:10px 14px;min-height:44px;pointer-events:auto}
+/* P0/E8: battle command 2x2 grid (replaces the D-pad zone) */
 .cmdpanel{position:absolute;left:24px;bottom:24px;right:24px;display:grid;grid-template-columns:1fr 1fr;gap:8px;pointer-events:auto}
+.cmdf{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:88px;min-height:64px;background:#2a2a34;color:#ffe9a8;border:3px solid #55555f;border-radius:10px;font-family:inherit;font-size:14px;font-weight:bold;cursor:pointer;touch-action:none}
+.cmdf.cursor{border-color:#e8c832;background:#3a3a48}
+.cmdf.disabled{opacity:.35}
+.cmdf.dimmed{opacity:.45}
+.cmdf.tut-focus{border-color:#58c94f;animation:cmdfocus 1s infinite}
+@keyframes cmdfocus{50%{border-color:#e8c832}}
+.cmdicon{width:24px;height:24px;image-rendering:pixelated}
+.cmdlabel{line-height:1}
+/* P0/E9: move menu 2x2 grid + type badge pills (icon+text, never color-alone) */
+.menugrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px}
+.menugrid .menu-row{flex-direction:column;align-items:flex-start;min-height:72px;border:2px solid #d8d8cc;border-radius:8px;position:relative}
+.menugrid .menu-row.cursor{border-color:#c03028;background:#e8e0c8}
+.mvcell{display:flex;flex-direction:column;gap:2px;width:100%}
+.mvname{font-weight:bold;font-size:14px}
+.mvpp{font-size:14px;color:#555}
+.mvpow{font-size:14px;color:#777}
+.tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #202028;border-radius:8px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
+.tpill b{font-weight:bold}
+.menu-row.zeropp{color:#a0a0a0}
+.menu-row.zeropp::after{content:'';position:absolute;left:6px;right:6px;top:50%;height:3px;background:#c03028;transform:rotate(-8deg);border-radius:2px}
+.menu-row.tut-focus{border-color:#58c94f;animation:cmdfocus 1s infinite}
+/* P0/C3: name-entry A-Z grid (44px keys) */
+.nkbover{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:auto;background:rgba(0,0,0,.45);z-index:30}
+@media(min-width:700px){.nkbover{align-items:center}}
+.namekb{background:#f8f8f0;border:3px solid #202028;border-radius:10px;padding:12px;width:100%;max-width:480px;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
+.nkb-title{font-size:14px;font-weight:bold;color:#202028;margin-bottom:8px}
+.nkb-display{font-size:20px;font-weight:bold;color:#202028;background:#fff;border:2px solid #202028;border-radius:6px;padding:8px 10px;margin-bottom:10px;min-height:44px;letter-spacing:2px}
+.nkb-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.nkb-key{min-width:44px;min-height:44px;font-family:inherit;font-size:16px;font-weight:bold;background:#e8e0c8;color:#202028;border:2px solid #202028;border-radius:8px;cursor:pointer;touch-action:none}
+.nkb-key:active{background:#d8d0b8}
+.nkb-row{display:flex;gap:6px;margin-top:6px}
+.nkb-key.wide{flex:1}
+.nkb-key.go{background:#58c94f;color:#102010}
+.shake{animation:nkbshake .3s}
+@keyframes nkbshake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+/* P0/B1: Trainer ID Terminal (login stub — Track B dark, zero network) */
+.loginover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:auto;background:rgba(10,10,18,.82);z-index:40}
+.login{background:#14141c;border:3px solid #e8c832;border-radius:10px;padding:0;width:min(420px,92vw);box-shadow:2px 2px 0 rgba(0,0,0,.25);overflow:hidden}
+.login-head{background:#e8c832;color:#14141c;font-size:15px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
+.login-tabs{display:flex}
+.logintab{flex:1;font-family:inherit;font-size:14px;font-weight:bold;padding:12px 4px;min-height:44px;background:#2a2a34;color:#999;border:0;border-bottom:3px solid transparent;cursor:pointer}
+.logintab.sel{background:#14141c;color:#ffe9a8;border-bottom-color:#e8c832}
+.loginpane{padding:16px 14px;display:flex;flex-direction:column;gap:10px}
+.login-note{font-size:14px;line-height:1.5;color:#ccc}
+.loginpane label{font-size:14px;color:#999;display:flex;flex-direction:column;gap:4px}
+.login-in{font-family:inherit;font-size:14px;padding:10px;background:#0a0a12;color:#666;border:2px solid #333;border-radius:6px}
+.login-go{font-family:inherit;font-size:15px;font-weight:bold;padding:12px;min-height:48px;border-radius:8px;border:2px solid #555;background:#2a2a34;color:#777;cursor:not-allowed}
+.login-go.active{background:#58c94f;border-color:#3a7a3a;color:#102010;cursor:pointer}
+/* P0/B1: in-game guest banner (28px strip, dismissible per session) */
+.guestbanner{position:absolute;top:0;left:0;right:0;min-height:28px;display:flex;align-items:center;justify-content:center;gap:10px;background:#202028;color:#ffe9a8;font-size:14px;pointer-events:auto;z-index:20;border-bottom:2px solid #e8c832}
+.gbx{background:none;border:0;color:#ffe9a8;font-size:14px;min-width:44px;min-height:28px;cursor:pointer}
+/* P1/D4: HUD quick-strip (portrait: overlaid top-right of canvas) */
+.hudstrip{position:absolute;top:34px;right:8px;display:flex;gap:6px;pointer-events:auto;z-index:15}
+.nohud .hudstrip{display:none}
+.inbattle .hudstrip{display:none}
+.hudbtn{position:relative;width:48px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(32,32,40,.92);border:2px solid #55555f;border-radius:10px;cursor:pointer;touch-action:none}
+.hudicon{width:20px;height:20px;image-rendering:pixelated}
+.hudlabel{font-size:14px;color:#ccc;font-family:inherit}
+.dexdot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#e84040;border:1px solid #fff}
+/* P1/D7: partner mood pip (tappable) */
+.moodpip{position:absolute;right:8px;bottom:150px;width:44px;height:44px;background:rgba(32,32,40,.92);border:2px solid #55555f;border-radius:50%;cursor:pointer;pointer-events:auto;z-index:15;touch-action:none}
+.moodface{width:24px;height:24px;image-rendering:pixelated}
+.mooddot{position:absolute;bottom:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#58c94f;border:1px solid #fff}
+/* P1/G1: party row HP mini-bars + status chips + partner badge */
+.phpbar{display:inline-block;width:64px;height:8px;background:#28182c;border-radius:3px;vertical-align:middle;margin:0 6px;overflow:hidden}
+.phpbar i{display:block;height:100%}
+.pstat{font-size:14px;font-weight:bold;color:#a040a0;margin-left:6px}
+.pbadge{color:#c89010;font-weight:bold;margin-left:6px}
+/* P1/K2: landscape — the HUD strip re-rails to the right edge */
+body.landscape .hudstrip{top:50%;transform:translateY(-50%);flex-direction:column}
+/* P1/K3: desktop keyboard-hint card */
+.hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background:rgba(32,32,40,.95);border:2px solid #55555f;border-radius:10px;color:#ccc;font-size:14px;padding:8px 12px;pointer-events:auto;z-index:25;max-width:92vw}
+.hintcard-x{background:#2a2a34;color:#ffe9a8;border:2px solid #55555f;border-radius:8px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:44px;cursor:pointer;white-space:nowrap}
 body.desktop .controls{display:none}
 body.desktop.showtouch .controls{display:block}
 @media (pointer:coarse){body.desktop .controls{display:block}}
@@ -53,6 +127,6 @@ body.desktop.showtouch .controls{display:block}
 <div id="stage"><canvas id="game"></canvas></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:a826ee8687ea0845c64ac9456736f5ca653720a4b40c4275de3003af30a5fd96 -->
+<!-- contentHash:fe830281f9548b911e2ae21a3ae09b8689eddc3ae257ab735c117a3850fb4dda -->
 </body>
 </html>

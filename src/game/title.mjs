@@ -37,6 +37,32 @@ export const DISCLAIMER_CREDITS = [
 export const GAME_TITLE = "ASH'S JOURNEY";
 export const GAME_SUBTITLE = 'An Unofficial Fan Homage';
 
+// P1/A5: legal card renders at >=14px. The GC-verbatim DISCLAIMER_BOOT wording
+// is preserved word-for-word; only the line-wrap changes, paginated across the
+// 3s dwell (page flips at 1.5s, still non-skippable).
+const LEGAL_PAGES = [
+  [
+    "ASH'S JOURNEY",
+    'An unofficial fan homage.',
+    'Not affiliated with, endorsed',
+    'by, or connected to Nintendo,',
+    'Creatures Inc., or',
+    'GAME FREAK inc.',
+  ],
+  [
+    'Pok\u00e9mon, Pikachu, and all',
+    'character names are trademarks',
+    'of Nintendo / Creatures Inc. /',
+    'GAME FREAK inc.',
+    'This is a free, non-commercial',
+    'fan project made with love',
+    'by fans.',
+    'No purchase is required or',
+    'accepted. Please support the',
+    'official releases.',
+  ],
+];
+
 export class BootScene {
   enter() {
     this.t = 0;
@@ -65,8 +91,9 @@ export class BootScene {
     if (input.wasPressed('a') || input.wasPressed('start')) {
       const it = items[this.menuIdx];
       this.game.audio.unlock();
-      if (it.value === 'new') this.game.newGame();
-      else if (it.value === 'continue') this.game.continueGame();
+      // P0/B1: title menu routes through the Trainer ID Terminal (guest-functional stub).
+      if (it.value === 'new') this.game.openLogin('new');
+      else if (it.value === 'continue') this.game.openLogin('continue');
       else if (it.value === 'options') this.game.openOptions();
     }
   }
@@ -95,30 +122,30 @@ export class BootScene {
     g.ctx2drect(w / 2 - 20, h * 0.62 + 5, 12, 14, '#1a1a22');
     g.ctx2dcircle(w / 2 + 16, h * 0.66, 5, '#1a1a22');
     r.text(GAME_TITLE, 8, 8, { size: 14, bold: true, color: '#fff' });
-    r.text(GAME_SUBTITLE, 8, 26, { size: 8, color: '#ffe9a8' });
+    r.text(GAME_SUBTITLE, 8, 26, { size: 14, color: '#ffe9a8' });
     const items = this.menuItems();
     const pulse = Math.floor(this.t * 2) % 2 === 0;
     items.forEach((it, i) => {
-      const y = h - 64 + i * 14;
-      r.text((i === this.menuIdx ? '\u25b8 ' : '  ') + it.label, w / 2 - 40, y,
-        { size: 10, color: i === this.menuIdx && pulse ? '#ffe9a8' : '#fff' });
+      const y = h - 84 + i * 18;
+      r.text((i === this.menuIdx ? '\u25b8 ' : '  ') + it.label, w / 2 - 52, y,
+        { size: 14, color: i === this.menuIdx && pulse ? '#ffe9a8' : '#fff' });
     });
-    if (pulse) r.text('PRESS START / TAP A', w / 2 - 52, h - 14, { size: 8, color: '#fff' });
-    r.text('Unofficial fan homage — not affiliated with Nintendo.', 4, h - 26, { size: 6, color: '#ddd' });
+    if (pulse) r.text('PRESS START / TAP A', w / 2 - 72, h - 20, { size: 14, color: '#fff' });
+    r.text('Unofficial fan homage.', 4, h - 42, { size: 14, color: '#ddd' });
   }
   renderLegal(r) {
     const w = r.viewW, h = r.viewH;
     r.panel(6, 6, w - 12, h - 12, '#101018', '#e8c832');
-    let y = 16;
-    for (const line of DISCLAIMER_BOOT) {
-      const size = y === 16 ? 12 : 7;
-      const bold = y === 16;
-      r.text(line, 14, y, { size, bold, color: y === 16 ? '#e8c832' : '#f0f0f0' });
-      y += size + 5;
+    const page = this.t >= 1.5 ? 1 : 0; // P1/A5: paginated 14px legal copy
+    let y = 18;
+    for (const line of LEGAL_PAGES[page]) {
+      const isTitle = page === 0 && line === "ASH'S JOURNEY";
+      r.text(line, 14, y, { size: 14, bold: isTitle, color: isTitle ? '#e8c832' : '#f0f0f0' });
+      y += 18;
     }
     if (this.ready) {
       const pulse = Math.floor(this.t * 2) % 2 === 0;
-      if (pulse) r.text('Press A / tap to continue', 14, h - 22, { size: 8, color: '#e8c832' });
+      if (pulse) r.text('Press A / tap to continue', 14, h - 24, { size: 14, color: '#e8c832' });
     }
   }
 }

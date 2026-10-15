@@ -7,7 +7,8 @@ export const KEYMAP = {
   ArrowDown: 'down', KeyS: 'down',
   ArrowLeft: 'left', KeyA: 'left',
   ArrowRight: 'right', KeyD: 'right',
-  KeyZ: 'a', Enter: 'a', Space: 'a',
+  KeyZ: 'a', Space: 'a',
+  Enter: 'start', // Uix ruling (phase4-uix-signoff): Enter = START, A = Z/Space. One key, one job.
   KeyX: 'b', Backspace: 'b',
   ShiftLeft: 'select', ShiftRight: 'select',
   KeyQ: 'pageup', KeyE: 'pagedown',

@@ -6,7 +6,7 @@
 
 import { mulberry32 } from './rng.mjs';
 
-const TYPE_COLORS = {
+export const TYPE_COLORS = {
   normal: '#a8a878', fire: '#f08030', water: '#6890f0', electric: '#f8d030',
   grass: '#78c850', ice: '#98d8d8', fighting: '#c03028', poison: '#a040a0',
   ground: '#e0c068', flying: '#a890f0', psychic: '#f85888', bug: '#a8b820',

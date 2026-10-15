@@ -23,6 +23,7 @@ export function defaultState() {
     settings: {
       textSpeed: 'normal', battleAnims: true, shake: true, reducedMotion: false,
       mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1,
+      vibration: true, autosave: true, showTouch: false, // P1/I5+I2: Wave-3 additions
     },
     facilities: { registry: [], unlocked: [] },
     bag: { pokeball: 10, potion: 3 },
