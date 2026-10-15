@@ -12,7 +12,7 @@ verified empirically from the installed package: better-auth wraps a pg Pool in
 Kysely's PostgresDialect. Flagged for the Lead Code Reviewer allowlist
 amendment.)
 
-Full transitive closure (38 packages): all MIT or ISC — audited
+Full transitive closure (50 packages): all MIT, ISC, or Apache-2.0 — audited
 `npm ls` output is kept with the build record. No copyleft, no ambiguous
 licenses.
 

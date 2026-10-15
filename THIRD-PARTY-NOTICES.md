@@ -13,5 +13,5 @@ The server dependency set is pinned in the root `package.json`
 verified from the installed packages; kysely MIT as better-auth's Postgres
 adapter machinery) with full license texts in
 [`api/THIRD-PARTY-NOTICES.md`](api/THIRD-PARTY-NOTICES.md). 50 transitive
-packages, all MIT/ISC — no copyleft, no ambiguous licenses. Nothing is
+packages, all MIT/ISC/Apache-2.0 — no copyleft, no ambiguous licenses. Nothing is
 vendored into the client: the game bundle stays zero-dependency.
