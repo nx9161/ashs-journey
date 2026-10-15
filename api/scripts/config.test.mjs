@@ -80,6 +80,11 @@ t('ipAddressHeaders pinned to x-vercel-forwarded-for',
 
 // C2: availability oracle disabled
 t('/is-username-available disabled', (o.disabledPaths || []).includes('/is-username-available'));
+// S1: identity endpoints disabled (paths verified against installed better-auth)
+t('/update-user disabled', (o.disabledPaths || []).includes('/update-user'));
+t('/change-email disabled', (o.disabledPaths || []).includes('/change-email'));
+t('/delete-user disabled', (o.disabledPaths || []).includes('/delete-user'));
+t('/change-password stays enabled', !(o.disabledPaths || []).includes('/change-password'));
 
 // trustedOrigins pinned (C4)
 t('trustedOrigins pinned to BETTER_AUTH_URL',
