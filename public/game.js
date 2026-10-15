@@ -4517,6 +4517,7 @@ class UI {
     this._els = {};
     this.nameEntry = null; // { value, maxLen, cb, ... } while the A-Z grid is open
     this.loginOpen = false;
+    this.inBattle = false; // Track B: battle-mode flag (SYNC defers conflict UI out of battle)
     this.hudVisible = true;
     this.dexDot = false;
     this._guestBannerOff = false;
@@ -4839,12 +4840,18 @@ class UI {
   }
 
   // ---- P0/B1: Trainer ID Terminal (login stub — Track B dark, zero network) ----
-  // Tabs: LOG IN / REGISTER (present, honestly disabled) / GUEST (functional).
+  // Track B: when the auth UI is compiled in (vercel target, AUTH_ENABLED), the
+  // terminal shows the full LOG IN / REGISTER / GUEST panel (auth.mjs). In the
+  // guest target the stub below is byte-identical to Track A behavior.
   showLogin(cb) {
     if (this.headless) {
       // No DOM to click in the harness: the guest path is the only functional one.
       this.log.push({ ui: 'login-guest-auto' });
       cb('guest');
+      return;
+    }
+    if (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED) {
+      AUTH.showLoginPanel(this, this.game, cb);
       return;
     }
     this.loginOpen = true;
@@ -4924,11 +4931,19 @@ class UI {
       b.classList.add('hidden');
     });
     this._guestBannerEl = b;
+    // Track B (vercel): the banner's LOG IN becomes a real button (auth.mjs).
+    // Guest target: AUTH.enhanceGuestBanner is a no-op — banner byte-identical.
+    if (typeof AUTH !== 'undefined') AUTH.enhanceGuestBanner(this);
   }
 
   showGuestBanner() {
     if (this.headless || this._guestBannerOff || !this._guestBannerEl) return;
     this._guestBannerEl.classList.remove('hidden');
+  }
+
+  hideGuestBanner() {
+    if (this.headless || !this._guestBannerEl) return;
+    this._guestBannerEl.classList.add('hidden');
   }
 
   // ---- P0/C3: name-entry A-Z grid keyboard ----
@@ -5177,7 +5192,8 @@ class UI {
   }
 
   setBattleMode(on) {
-    if (this.headless) return;
+    if (this.headless) { this.inBattle = !!on; return; }
+    this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
     this.dpadEl.classList.toggle('hidden', on);
     this.cmdEl.classList.toggle('hidden', !on);
     if (this.root) this.root.classList.toggle('inbattle', on); // hides the HUD strip in battle
@@ -5210,6 +5226,1476 @@ function drawHudIcon(x, key) {
     P(3, 3, 10, 2, '#f0f0f0'); P(3, 7, 10, 2, '#f0f0f0'); P(3, 11, 10, 2, '#f0f0f0');
   }
 }
+
+
+// ---- src/game/auth.mjs ----
+// auth.mjs — Track B client: Trainer ID Terminal (login/register/guest) + account menu.
+// ADR-005 (accounts + cloud saves) / ADR-010 (guest-first boot, username-only +
+// synthetic emails server-side, recovery codes, 13+ age gate, 7d/1d sessions).
+// Same-origin API calls ONLY (our own backend paths); the client never touches
+// session tokens — the session cookie is HttpOnly and server-managed (AppSec C4).
+// No secrets in this file.
+// Compiled IN for the vercel target; compile-time STRIPPED for the guest target
+// (see scripts/build.mjs — the auth block markers plus the boolean compile flag).
+//
+// ---- Output-encoding contract (AppSec C12) ----
+// EVERY player-controlled string (usernames, recovery codes, any echoed input)
+// is rendered via textContent / createElement ONLY — never innerHTML, never
+// string-concatenated HTML. This file performs zero innerHTML assignments.
+// The QA stored-XSS corpus covers the login/register/recovery/account surfaces.
+
+const AUTH_ENABLED = true;
+
+// ---- stub surface: compiled into BOTH targets (the guest bundle keeps only this) ----
+// Guest behavior is byte-identical to Track A: the terminal is absent, so the
+// login path degrades straight to guest. Zero network, zero auth code.
+const AUTH = {
+  user: null,          // logged-in username, or null
+  unavailable: false,  // backend reports auth_unavailable (503 / health flag)
+  _bannerShown: false,
+  init(game) {},                                    // guest build: no-op (no network)
+  showLoginPanel(ui, game, cb) { cb('guest'); },    // guest build: straight to guest
+  enhanceGuestBanner(ui) {},                        // guest build: no-op
+  openAccountMenu(game) {},                         // guest build: no-op
+  signOut(game) { return Promise.resolve({ ok: false, reason: 'guest-build' }); },
+  isLoggedIn() { return false; },
+  onSessionExpired(game) {},                        // guest build: no sessions exist
+  onUnavailable() {},                               // guest build: nothing to announce
+};
+
+// __AUTH_BEGIN__
+// ==================== full implementation (vercel target only) ====================
+
+// DOM helpers (textContent-only per the C12 contract above).
+function authEl(tag, cls, parent) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function authText(elm, str) { elm.textContent = (str === null || str === undefined) ? '' : String(str); }
+
+// Same-origin JSON API. The session cookie is HttpOnly — the client never reads
+// or writes tokens (AppSec C4). Returns {status, body, offline}.
+// NOTE: the '/api/' prefix is a string literal (not built dynamically) so the
+// contamination scan can statically verify same-origin-only fetches.
+function api(path, opts) {
+  opts = opts || {};
+  return fetch('/api/' + path, {
+    method: opts.method || 'GET',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  }).then(async (res) => {
+    let body = null;
+    try { body = await res.json(); } catch (e) { /* empty / non-JSON */ }
+    return { status: res.status, body };
+  }).catch(() => ({ status: 0, body: null, offline: true }));
+}
+
+function fmtClock(sec) {
+  const m = Math.floor(sec / 60), s = Math.floor(sec % 60);
+  return (m < 10 ? '0' + m : '' + m) + ':' + (s < 10 ? '0' + s : '' + s);
+}
+
+// ---- validation (client-side; the server re-validates everything) ----
+const USER_RE = /^[a-z0-9_]{3,16}$/;
+function validUsername(v) { return USER_RE.test(v); }
+function pwStrength(pw) {
+  if (!pw || pw.length < 8) return { label: 'Too short — use 8+ characters.', cls: '' };
+  let score = 0;
+  if (pw.length >= 12) score += 2; else if (pw.length >= 10) score++;
+  if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+  if (/[0-9]/.test(pw)) score++;
+  if (/[^A-Za-z0-9]/.test(pw)) score++;
+  if (score >= 4) return { label: 'Strong', cls: 'strong' };
+  if (score >= 2) return { label: 'Fair', cls: 'fair' };
+  return { label: 'Weak', cls: '' };
+}
+
+// ---- generic (non-enumerating) copy — never distinguishes failure reasons ----
+const COPY = {
+  loginFail: 'Invalid username or password.',
+  registerFail: "Couldn't create that account — try a different username.",
+  recoverFail: "Couldn't reset with those details — check the code and try again.",
+  recoverOk: 'Password reset — you can log in with your new password.',
+  rateLimit: 'Too many attempts — try again in a bit.',
+  offline: "You're offline — guest mode available, cloud sync paused.",
+};
+
+// Privacy notice + Terms — DRAFT text from Tech Law §6 contents.
+// MARKED DRAFT-PENDING-GC-WORDING: GC + licensed counsel must review before launch.
+const PRIVACY_DRAFT = [
+  ['Status', 'DRAFT — pending GC + licensed-counsel review. This is not final legal text.'],
+  ['1. Who runs this', 'This fan game is operated by its developer. Contact: [to be designated by the project owner before launch].'],
+  ['2. What we store and why',
+    'Your username — a public handle. Pick one that is not your real name.\n' +
+    'Your password — stored only as a salted one-way hash. We never see or store the password itself.\n' +
+    'Your cloud saves — party, boxes, dex progress, badges, story progress, settings, and the trainer/rival names you type. Used only to sync your game between devices.\n' +
+    'Timestamps — when saves were updated and when you last logged in. Used to order saves and show sync state.\n' +
+    'Security records — login-attempt records (including IP addresses), kept 30 days, used only to block abuse.\n' +
+    'Session records — used to keep you logged in; deleted when you log out.\n' +
+    'Our hosts\u2019 server logs (see below).'],
+  ['3. Who else handles your data', 'Two subprocessors, no one else:\nSupabase — database hosting for accounts, saves, and security records; automated backups.\nVercel — website hosting and the server functions that run login and saves; function logs.\nWe sell no data. There is no analytics, tracking, or advertising — ever.'],
+  ['4. How long we keep it',
+    'Accounts and cloud saves: until you delete them. Security records: 30 days.\n' +
+    'If you delete your account, it is erased from all live systems immediately; residual encrypted backup copies expire within the backup retention window (7 days or less) and are never restored except in a disaster-recovery event, after which the deletion is re-applied.'],
+  ['5. Your rights', '\u201CMy data\u201D in the account menu shows your account record and lets you download your saves. \u201CDelete account\u201D erases your account and cloud saves.'],
+  ['6. Age', 'Accounts are for players 13 and older. Under 13? Play as a guest — guest saves never leave your device.'],
+  ['7. Fan work', 'This is an unofficial fan homage. The full legal notice is on the title screen and credits — please read it.'],
+  ['8. Changes', 'If this notice changes, we will announce it in-game.'],
+  ['TERMS OF PLAY — DRAFT',
+    'This is a free, non-commercial fan project. No purchases, donations, or payments of any kind.\n' +
+    'Usernames are public — pick a handle, not your real name.\n' +
+    'Accounts unused for 24 months may be deleted after a 30-day warning shown at your next login.\n' +
+    'Play fair: tampered save data is rejected, and suspicious saves may be logged for review.\n' +
+    'Be kind: usernames that impersonate others or are offensive may be removed.'],
+];
+
+function copyText(t, done) {
+  const fb = () => {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = t;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) { /* clipboard unavailable */ }
+    if (done) done();
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done, fb);
+  } else fb();
+}
+
+function downloadJson(filename, obj) {
+  try {
+    const blob = new Blob([JSON.stringify(obj)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a); a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  } catch (e) { /* download unavailable */ }
+}
+
+// ---- the Trainer ID Terminal (full) ----
+function showLoginPanel(ui, game, cb) {
+  if (ui.headless) { cb('guest'); return; }
+  ui.loginOpen = true;
+  const ov = authEl('div', 'loginover', ui.root);
+  ui._loginOv = ov;
+  const card = authEl('div', 'authcard', ov);
+  card.setAttribute('role', 'dialog');
+  card.setAttribute('aria-modal', 'true');
+  card.setAttribute('aria-label', 'Trainer ID Terminal');
+  const head = authEl('div', 'authhead', card);
+  authText(head, 'TRAINER ID TERMINAL');
+  const sub = authEl('div', 'authsub', card);
+  authText(sub, 'Log in to sync your journey across devices.');
+
+  const tabsEl = authEl('div', 'authtabs', card);
+  tabsEl.setAttribute('role', 'tablist');
+  tabsEl.setAttribute('aria-label', 'Account options');
+  const panesEl = authEl('div', 'authpanes', card);
+
+  const panes = {};   // name -> section element
+  const tabBtns = {}; // name -> button
+  const order = ['login', 'register', 'guest'];
+  const labels = { login: 'LOG IN', register: 'REGISTER', guest: 'GUEST' };
+  let current = 'guest'; // guest-first boot (ADR-010 OQ-7)
+
+  function setTab(name) {
+    current = name;
+    order.forEach((n, i) => {
+      const sel = n === name;
+      tabBtns[n].setAttribute('aria-selected', sel ? 'true' : 'false');
+      tabBtns[n].tabIndex = sel ? 0 : -1;
+      tabBtns[n].classList.toggle('sel', sel);
+      panes[n].classList.toggle('hidden', !sel);
+      panes[n].setAttribute('aria-hidden', sel ? 'false' : 'true');
+    });
+    // Focus the primary control of the newly shown pane (keyboard flow).
+    const f = panes[name].querySelector('input:not([disabled]),button.authgo');
+    if (f) f.focus();
+  }
+
+  order.forEach((n) => {
+    const b = authEl('button', 'authtab', tabsEl);
+    b.setAttribute('role', 'tab');
+    b.id = 'authtab-' + n;
+    authText(b, labels[n]);
+    b.addEventListener('click', () => setTab(n));
+    b.addEventListener('keydown', (e) => {
+      const i = order.indexOf(n);
+      if (e.key === 'ArrowRight') { e.preventDefault(); const nx = order[(i + 1) % order.length]; setTab(nx); tabBtns[nx].focus(); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); const pv = order[(i + order.length - 1) % order.length]; setTab(pv); tabBtns[pv].focus(); }
+    });
+    tabBtns[n] = b;
+    const p = authEl('section', 'authpane hidden', panesEl);
+    p.setAttribute('role', 'tabpanel');
+    p.setAttribute('aria-labelledby', b.id);
+    panes[n] = p;
+  });
+
+  function errBox(pane) {
+    const e = authEl('div', 'autherr hidden', pane);
+    e.setAttribute('role', 'alert');
+    return {
+      show(msg) { authText(e, msg); e.classList.remove('hidden'); },
+      hide() { e.classList.add('hidden'); authText(e, ''); },
+    };
+  }
+  function close() {
+    ui.loginOpen = false;
+    document.removeEventListener('keydown', onKey, true);
+    if (rlTimer) clearInterval(rlTimer);
+    if (ov.parentNode) ov.parentNode.removeChild(ov);
+    ui._loginOv = null;
+  }
+  function onKey(e) {
+    if (e.key === 'Escape') {
+      // The recovery-codes screen must not be escapable: the codes are shown
+      // exactly once, and closing early would strand the account.
+      if (!panes.codes || panes.codes.classList.contains('hidden')) { e.preventDefault(); close(); }
+    }
+  }
+  document.addEventListener('keydown', onKey, true);
+  let rlTimer = null;
+
+  // ---------- LOG IN pane ----------
+  (function buildLogin() {
+    const p = panes.login;
+    const err = errBox(p);
+    const fUser = authEl('form', '', p);
+    fUser.setAttribute('aria-label', 'Log in');
+    const lu = authEl('label', 'authfield', fUser);
+    authText(lu, 'Username');
+    const inU = authEl('input', 'authin', lu);
+    inU.type = 'text'; inU.autocomplete = 'username'; inU.autocapitalize = 'off';
+    inU.spellcheck = false; inU.maxLength = 16;
+    inU.setAttribute('aria-label', 'Username');
+    const lp = authEl('label', 'authfield', fUser);
+    authText(lp, 'Password');
+    const prow = authEl('div', 'authrow', lp);
+    const inP = authEl('input', 'authin', prow);
+    inP.type = 'password'; inP.autocomplete = 'current-password';
+    inP.style.flex = '1';
+    inP.setAttribute('aria-label', 'Password');
+    const show = authEl('button', 'authshow', prow);
+    show.type = 'button'; authText(show, 'Show');
+    show.setAttribute('aria-pressed', 'false');
+    show.setAttribute('aria-label', 'Show password');
+    show.addEventListener('click', () => {
+      const pw = inP.type === 'password';
+      inP.type = pw ? 'text' : 'password';
+      authText(show, pw ? 'Hide' : 'Show');
+      show.setAttribute('aria-pressed', pw ? 'true' : 'false');
+    });
+    const go = authEl('button', 'authgo', fUser);
+    go.type = 'submit'; authText(go, 'LOG IN');
+    const fg = authEl('button', 'authlink', p);
+    authText(fg, 'Forgot password?');
+    fg.addEventListener('click', () => setTabExtra('recover'));
+
+    const setLocked = (locked, secs) => {
+      [inU, inP, go].forEach((c) => { c.disabled = locked; });
+      if (locked) {
+        authText(go, 'Try again in ' + fmtClock(secs));
+        rlTimer = setInterval(() => {
+          secs--;
+          if (secs <= 0) { clearInterval(rlTimer); rlTimer = null; setLocked(false, 0); err.hide(); authText(go, 'LOG IN'); }
+          else authText(go, 'Try again in ' + fmtClock(secs));
+        }, 1000);
+      } else authText(go, 'LOG IN');
+    };
+
+    fUser.addEventListener('submit', (e) => {
+      e.preventDefault();
+      err.hide();
+      const u = inU.value.trim().toLowerCase(), pw = inP.value;
+      if (!u || !pw) { err.show(COPY.loginFail); return; }
+      go.disabled = true; authText(go, 'LOGGING IN…');
+      api('auth/sign-in/username', { method: 'POST', body: { username: u, password: pw } }).then((r) => {
+        go.disabled = false; authText(go, 'LOG IN');
+        if (r.offline) { err.show(COPY.offline); setTab('guest'); return; }
+        if (r.status === 503 && r.body && r.body.error === 'auth_unavailable') { AUTH.onUnavailable(); err.show('Online accounts aren\u2019t set up yet — you can still play as a guest.'); return; }
+        if (r.status === 429) { err.show(COPY.rateLimit); setLocked(true, 120); return; }
+        if (r.status !== 200) { err.show(COPY.loginFail); return; } // generic, always (anti-enumeration)
+        const username = (r.body && r.body.user && r.body.user.username) || u;
+        close();
+        cb('login', { username });
+      });
+    });
+  })();
+
+  // ---------- REGISTER pane ----------
+  (function buildRegister() {
+    const p = panes.register;
+    const err = errBox(p);
+    const hy = authEl('div', 'authhint', p);
+    authText(hy, 'Usernames are public — pick a handle, not your real name.');
+    const f = authEl('form', '', p);
+    f.setAttribute('aria-label', 'Create account');
+
+    const lu = authEl('label', 'authfield', f);
+    authText(lu, 'Username');
+    const inU = authEl('input', 'authin', lu);
+    inU.type = 'text'; inU.autocomplete = 'username'; inU.autocapitalize = 'off';
+    inU.spellcheck = false; inU.maxLength = 16;
+    inU.setAttribute('aria-label', 'Username');
+    const uh = authEl('div', 'authhint', f);
+    authText(uh, '3–16 characters: lowercase letters, numbers, _ only.');
+
+    const lp = authEl('label', 'authfield', f);
+    authText(lp, 'Password');
+    const prow = authEl('div', 'authrow', lp);
+    const inP = authEl('input', 'authin', prow);
+    inP.type = 'password'; inP.autocomplete = 'new-password'; inP.style.flex = '1';
+    inP.setAttribute('aria-label', 'Password');
+    const show = authEl('button', 'authshow', prow);
+    show.type = 'button'; authText(show, 'Show'); show.setAttribute('aria-pressed', 'false');
+    show.setAttribute('aria-label', 'Show password');
+    show.addEventListener('click', () => {
+      const pw = inP.type === 'password';
+      inP.type = pw ? 'text' : 'password';
+      authText(show, pw ? 'Hide' : 'Show');
+      show.setAttribute('aria-pressed', pw ? 'true' : 'false');
+    });
+    const meter = authEl('div', 'pwmeter', f);
+    const mfill = authEl('span', '', authEl('span', 'bar', meter));
+    mfill.className = 'fill';
+    const mlabel = authEl('span', '', meter);
+
+    const lc = authEl('label', 'authfield', f);
+    authText(lc, 'Confirm password');
+    const inC = authEl('input', 'authin', lc);
+    inC.type = 'password'; inC.autocomplete = 'new-password';
+    inC.setAttribute('aria-label', 'Confirm password');
+    const ch = authEl('div', 'authhint', f);
+
+    const age = authEl('label', 'authcheck', f);
+    const ageBox = authEl('input', '', age);
+    ageBox.type = 'checkbox';
+    const ageTx = authEl('span', '', age);
+    authText(ageTx, 'I confirm I am 13 years of age or older.');
+    // NOTE: the checkbox state is never persisted anywhere. Only the required
+    // `ageConfirmed: true` attestation travels with the signup call itself.
+
+    const pr = authEl('button', 'authlink', f);
+    pr.type = 'button';
+    authText(pr, 'Read the privacy notice and terms (draft)');
+    const agreed = { v: false };
+    pr.addEventListener('click', () => openPrivacyModal(ov, () => {
+      agreed.v = true;
+      authText(pr, 'Privacy notice and terms — agreed ✓');
+      validate();
+    }));
+
+    const refuse = authEl('div', 'autherr hidden', f);
+    authText(refuse, 'Accounts need you to be 13 or older — you can still play as a guest!');
+    const refuseGo = authEl('button', 'authgo ghost hidden', f);
+    refuseGo.type = 'button'; authText(refuseGo, 'PLAY AS GUEST');
+    refuseGo.addEventListener('click', () => { close(); cb('guest'); });
+
+    const go = authEl('button', 'authgo', f);
+    go.type = 'submit'; authText(go, 'CREATE ACCOUNT');
+
+    inU.addEventListener('input', () => {
+      const v = inU.value.toLowerCase().replace(/[^a-z0-9_]/g, '').slice(0, 16);
+      if (v !== inU.value) inU.value = v;
+      if (!v) { authText(uh, '3–16 characters: lowercase letters, numbers, _ only.'); uh.classList.remove('ok'); }
+      else if (!validUsername(v)) { authText(uh, 'Keep going — 3–16 characters of a–z, 0–9, _.'); uh.classList.remove('ok'); }
+      else { authText(uh, 'Looks good — this will be your public handle.'); uh.classList.add('ok'); }
+      validate();
+    });
+    const pwUpdate = () => {
+      const s = pwStrength(inP.value);
+      authText(mlabel, s.label);
+      meter.className = 'pwmeter' + (s.cls ? ' ' + s.cls : '');
+      const match = inC.value && inP.value === inC.value;
+      authText(ch, inC.value ? (match ? 'Passwords match.' : "Passwords don't match.") : '');
+      ch.classList.toggle('ok', !!match);
+      validate();
+    };
+    inP.addEventListener('input', pwUpdate);
+    inC.addEventListener('input', pwUpdate);
+
+    function validate() {
+      const okU = validUsername(inU.value);
+      const okP = inP.value.length >= 8;
+      const okC = inC.value === inP.value && inC.value.length > 0;
+      go.disabled = !(okU && okP && okC && agreed.v);
+      return okU && okP && okC;
+    }
+    ageBox.addEventListener('change', validate);
+    validate();
+
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      err.hide();
+      refuse.classList.add('hidden'); refuseGo.classList.add('hidden');
+      if (!ageBox.checked) {
+        // Refusal path: honest copy + a guest button. The answer is not stored.
+        refuse.classList.remove('hidden'); refuseGo.classList.remove('hidden');
+        return;
+      }
+      if (!validate() || !agreed.v) { err.show('Please complete every field above first.'); return; }
+      go.disabled = true; authText(go, 'CREATING…');
+      api('auth/signup', {
+        method: 'POST',
+        body: { username: inU.value, password: inP.value, ageConfirmed: true },
+      }).then((r) => {
+        go.disabled = false; authText(go, 'CREATE ACCOUNT'); validate();
+        if (r.offline) { err.show(COPY.offline); return; }
+        if (r.status === 503 && r.body && r.body.error === 'auth_unavailable') { AUTH.onUnavailable(); err.show('Online accounts aren\u2019t set up yet — you can still play as a guest.'); return; }
+        if (r.status === 429) { err.show(COPY.rateLimit); return; }
+        // Generic on every failure: never reveal taken vs invalid (anti-enumeration).
+        if (r.status !== 200 || !r.body || !Array.isArray(r.body.recoveryCodes)) { err.show(COPY.registerFail); return; }
+        showCodesPane(inU.value, r.body.recoveryCodes, cb, close);
+      });
+    });
+  })();
+
+  // ---------- GUEST pane (primary, first) ----------
+  (function buildGuest() {
+    const p = panes.guest;
+    const note = authEl('div', 'authsub', p);
+    authText(note, 'Play offline on this device. Progress stays here — log in anytime to sync.');
+    const go = authEl('button', 'authgo', p);
+    authText(go, '▶ PLAY AS GUEST');
+    go.addEventListener('click', () => { game.audio.unlock(); close(); cb('guest'); });
+    const sec = authEl('button', 'authgo sec', p);
+    authText(sec, 'LOG IN / CREATE ACCOUNT');
+    sec.addEventListener('click', () => setTab('login'));
+  })();
+
+  // ---------- extra panes (recovery, codes) — swapped in, tabs hidden ----------
+  const extra = {};
+  function setTabExtra(name) {
+    order.forEach((n) => { panes[n].classList.add('hidden'); tabBtns[n].classList.remove('sel'); });
+    Object.keys(extra).forEach((k) => extra[k].classList.toggle('hidden', k !== name));
+    tabsEl.classList.toggle('hidden', true);
+    const f = extra[name].querySelector('input:not([disabled])');
+    if (f) f.focus();
+  }
+  function setTabBack(name) {
+    Object.keys(extra).forEach((k) => extra[k].classList.add('hidden'));
+    tabsEl.classList.remove('hidden');
+    setTab(name || 'login');
+  }
+  function mkExtra(name) {
+    const p = authEl('section', 'authpane hidden', panesEl);
+    p.setAttribute('role', 'tabpanel');
+    extra[name] = p;
+    return p;
+  }
+
+  // Recovery: username + one recovery code + new password. Generic copy both ways.
+  (function buildRecover() {
+    const p = mkExtra('recover');
+    const err = errBox(p);
+    const t = authEl('div', 'authsub', p);
+    authText(t, 'Enter your username, one recovery code, and a new password.');
+    const f = authEl('form', '', p);
+    const lu = authEl('label', 'authfield', f);
+    authText(lu, 'Username');
+    const inU = authEl('input', 'authin', lu);
+    inU.type = 'text'; inU.autocomplete = 'username'; inU.autocapitalize = 'off'; inU.spellcheck = false;
+    const lc = authEl('label', 'authfield', f);
+    authText(lc, 'Recovery code');
+    const inC = authEl('input', 'authin', lc);
+    inC.type = 'text'; inC.autocomplete = 'off'; inC.autocapitalize = 'off'; inC.spellcheck = false;
+    inC.setAttribute('aria-label', 'Recovery code');
+    const chint = authEl('div', 'authhint', f);
+    authText(chint, 'Use one of the 8 codes shown when you created the account.');
+    const ln = authEl('label', 'authfield', f);
+    authText(ln, 'New password');
+    const inN = authEl('input', 'authin', ln);
+    inN.type = 'password'; inN.autocomplete = 'new-password';
+    const go = authEl('button', 'authgo', f);
+    go.type = 'submit'; authText(go, 'RESET PASSWORD');
+    const back = authEl('button', 'authlink', p);
+    authText(back, '← Back to log in');
+    back.addEventListener('click', () => setTabBack('login'));
+    f.addEventListener('submit', (e) => {
+      e.preventDefault(); err.hide();
+      const u = inU.value.trim().toLowerCase(), code = inC.value.trim(), np = inN.value;
+      if (!u || !code || np.length < 8) { err.show(COPY.recoverFail); return; }
+      go.disabled = true; authText(go, 'RESETTING…');
+      api('auth/recover', { method: 'POST', body: { username: u, code, newPassword: np } }).then((r) => {
+        go.disabled = false; authText(go, 'RESET PASSWORD');
+        if (r.offline) { err.show(COPY.offline); return; }
+        if (r.status === 429) { err.show(COPY.rateLimit); return; }
+        if (r.status !== 200 || !r.body || r.body.ok !== true) { err.show(COPY.recoverFail); return; }
+        err.hide();
+        const okm = authEl('div', 'authhint ok', p);
+        authText(okm, COPY.recoverOk);
+        setTimeout(() => setTabBack('login'), 1200);
+      });
+    });
+  })();
+
+  setTab('guest'); // guest-first boot (ADR-010 OQ-7)
+  const firstInput = panes.guest.querySelector('button.authgo');
+  if (firstInput) firstInput.focus();
+
+  // ---------- recovery codes: shown EXACTLY ONCE after registration ----------
+  function showCodesPane(username, codes, cb, close) {
+    Object.keys(extra).forEach((k) => extra[k].classList.add('hidden'));
+    order.forEach((n) => panes[n].classList.add('hidden'));
+    tabsEl.classList.add('hidden');
+    const p = mkExtra('codes');
+    p.classList.remove('hidden');
+    const t = authEl('div', 'authsub', p);
+    authText(t, 'Account created — welcome, ' + username + '! Save these recovery codes:');
+    const warn = authEl('div', 'authwarn', p);
+    authText(warn, 'Save these now — they are the ONLY way to recover your account.');
+    const grid = authEl('div', 'authcodes', p);
+    grid.setAttribute('aria-label', 'Recovery codes');
+    codes.slice(0, 8).forEach((c) => {
+      const d = authEl('div', 'authcode', grid);
+      authText(d, c); // textContent-only (C12) — codes are never re-fetchable
+    });
+    const cp = authEl('button', 'authgo sec', p);
+    authText(cp, 'COPY ALL');
+    const cpd = authEl('div', 'authhint', p);
+    cp.addEventListener('click', () => {
+      copyText(codes.slice(0, 8).join('\n'), () => authText(cpd, 'Copied — paste them somewhere safe.'));
+    });
+    const lab = authEl('label', 'authcheck', p);
+    const box = authEl('input', '', lab);
+    box.type = 'checkbox';
+    const btx = authEl('span', '', lab);
+    authText(btx, "I've saved my recovery codes");
+    const go = authEl('button', 'authgo', p);
+    authText(go, 'CONTINUE');
+    go.disabled = true;
+    box.addEventListener('change', () => { go.disabled = !box.checked; });
+    go.addEventListener('click', () => { close(); cb('login', { username, fresh: true }); });
+    box.focus();
+    // NOTE: the codes are never requested from the server again — this screen is
+    // the only place they exist. Losing them without saving = account unrecoverable.
+  }
+}
+
+// Privacy notice + Terms modal. Must scroll to the bottom before the
+// "I agree" checkbox enables. DRAFT-PENDING-GC-WORDING (see PRIVACY_DRAFT).
+function openPrivacyModal(parentOv, onAgree) {
+  const ov = authEl('div', 'loginover', parentOv);
+  ov.style.zIndex = '60';
+  const card = authEl('div', 'authcard', ov);
+  card.setAttribute('role', 'dialog');
+  card.setAttribute('aria-modal', 'true');
+  card.setAttribute('aria-label', 'Privacy notice and terms');
+  const head = authEl('div', 'authhead', card);
+  authText(head, 'PRIVACY NOTICE & TERMS');
+  const draft = authEl('div', 'authdraft', card);
+  authText(draft, 'DRAFT — pending GC + licensed-counsel review. Not final legal text.');
+  const sc = authEl('div', 'authscroll', card);
+  sc.setAttribute('tabindex', '0');
+  sc.setAttribute('aria-label', 'Privacy notice and terms text');
+  PRIVACY_DRAFT.forEach(([hh, body]) => {
+    const h4 = authEl('h4', '', sc);
+    authText(h4, hh);
+    const pb = authEl('div', '', sc);
+    authText(pb, body);
+  });
+  const lab = authEl('label', 'authcheck', card);
+  lab.style.padding = '10px 14px';
+  const box = authEl('input', '', lab);
+  box.type = 'checkbox'; box.disabled = true;
+  const btx = authEl('span', '', lab);
+  authText(btx, 'I have read and agree to the notice and terms above.');
+  const row = authEl('div', 'authrow', card);
+  row.style.padding = '0 14px 14px';
+  const closeB = authEl('button', 'authgo ghost', row);
+  closeB.style.flex = '1';
+  authText(closeB, 'CLOSE');
+  const atBottom = () => sc.scrollHeight - sc.scrollTop - sc.clientHeight < 24;
+  sc.addEventListener('scroll', () => { if (atBottom()) box.disabled = false; });
+  // Short content: already at the bottom.
+  if (atBottom()) box.disabled = false;
+  const done = (agreed) => { ov.remove(); if (agreed) onAgree(); };
+  closeB.addEventListener('click', () => done(box.checked && !box.disabled));
+  box.focus();
+}
+
+// ---- account menu (pause → player card), DOM panel (username via textContent) ----
+function openAccountMenu(game) {
+  const ui = game.ui;
+  if (ui.headless || !AUTH.user) return;
+  ui.loginOpen = true;
+  const ov = authEl('div', 'loginover', ui.root);
+  ui._loginOv = ov;
+  const card = authEl('div', 'authcard', ov);
+  card.setAttribute('role', 'dialog');
+  card.setAttribute('aria-modal', 'true');
+  card.setAttribute('aria-label', 'Account');
+  const head = authEl('div', 'authhead', card);
+  authText(head, 'ACCOUNT');
+  const pane = authEl('div', 'authpane', card);
+  const who = authEl('div', 'authsub', pane);
+  authText(who, 'Signed in as: ' + AUTH.user);
+  const close = () => {
+    ui.loginOpen = false;
+    document.removeEventListener('keydown', onKey, true);
+    if (ov.parentNode) ov.parentNode.removeChild(ov);
+    ui._loginOv = null;
+  };
+  const onKey = (e) => { if (e.key === 'Escape') { e.preventDefault(); close(); } };
+  document.addEventListener('keydown', onKey, true);
+
+  const mk = (label, fn, cls) => {
+    const b = authEl('button', 'authgo ' + (cls || 'sec'), pane);
+    authText(b, label);
+    b.addEventListener('click', fn);
+    return b;
+  };
+  mk('SYNC NOW', () => { SYNC.syncNow(game, true); });
+  mk('CHANGE PASSWORD', () => accountChangePassword(game, ov, close));
+  mk('MY DATA', () => accountMyData(game, ov, close));
+  const out = mk('LOG OUT', () => {
+    // Two-tap inline confirm (no window.confirm — styled + testable).
+    if (pane.querySelector('.logout-confirm')) return;
+    const w = authEl('div', 'authwarn logout-confirm', pane);
+    authText(w, 'Log out? Your cloud saves stay on your account; this device keeps its local copy.');
+    const row = authEl('div', 'authrow', pane);
+    const yes = authEl('button', 'authgo', row); authText(yes, 'LOG OUT'); yes.style.flex = '1';
+    const no = authEl('button', 'authgo ghost', row); authText(no, 'STAY'); no.style.flex = '1';
+    yes.addEventListener('click', () => { AUTH.signOut(game).then(() => close()); });
+    no.addEventListener('click', () => { w.remove(); row.remove(); out.focus(); });
+  }, 'ghost');
+  const del = mk('DELETE ACCOUNT', () => accountDelete(game, ov, close), 'ghost');
+  del.style.borderColor = '#C0392B'; del.style.color = '#C0392B';
+  const back = authEl('button', 'authgo ghost', pane);
+  authText(back, 'BACK');
+  back.addEventListener('click', close);
+  back.focus();
+}
+
+function accountChangePassword(game, ov, closeAccount) {
+  const ui = game.ui;
+  const sub = authEl('div', 'loginover', ov);
+  sub.style.zIndex = '60';
+  const card = authEl('div', 'authcard', sub);
+  card.setAttribute('role', 'dialog'); card.setAttribute('aria-modal', 'true');
+  const head = authEl('div', 'authhead', card); authText(head, 'CHANGE PASSWORD');
+  const pane = authEl('div', 'authpane', card);
+  const note = authEl('div', 'authhint', pane);
+  authText(note, 'Changing your password logs out other devices.');
+  const err = authEl('div', 'autherr hidden', pane); err.setAttribute('role', 'alert');
+  const f = authEl('form', '', pane);
+  const lc = authEl('label', 'authfield', f); authText(lc, 'Current password');
+  const inC = authEl('input', 'authin', lc); inC.type = 'password'; inC.autocomplete = 'current-password';
+  const ln = authEl('label', 'authfield', f); authText(ln, 'New password (8+ characters)');
+  const inN = authEl('input', 'authin', ln); inN.type = 'password'; inN.autocomplete = 'new-password';
+  const lm = authEl('label', 'authfield', f); authText(lm, 'Confirm new password');
+  const inM = authEl('input', 'authin', lm); inM.type = 'password'; inM.autocomplete = 'new-password';
+  const go = authEl('button', 'authgo', f); go.type = 'submit'; authText(go, 'CHANGE PASSWORD');
+  const back = authEl('button', 'authlink', pane); authText(back, '← Back');
+  back.addEventListener('click', () => sub.remove());
+  const showErr = (m) => { authText(err, m); err.classList.remove('hidden'); };
+  f.addEventListener('submit', (e) => {
+    e.preventDefault(); err.classList.add('hidden');
+    if (!inC.value || inN.value.length < 8 || inN.value !== inM.value) { showErr('Check the fields — new passwords must match and be 8+ characters.'); return; }
+    go.disabled = true; authText(go, 'CHANGING…');
+    api('auth/change-password', { method: 'POST', body: { currentPassword: inC.value, newPassword: inN.value } }).then((r) => {
+      go.disabled = false; authText(go, 'CHANGE PASSWORD');
+      if (r.offline) { showErr(COPY.offline); return; }
+      if (r.status === 401) { AUTH.onSessionExpired(game); sub.remove(); closeAccount(); return; }
+      if (r.status === 429) { showErr(COPY.rateLimit); return; }
+      if (r.status !== 200) { showErr('Couldn\u2019t change the password — check the current one and try again.'); return; }
+      sub.remove();
+      ui.toast('Password changed — other devices were logged out.');
+    });
+  });
+  inC.focus();
+}
+
+function accountMyData(game, ov, closeAccount) {
+  const ui = game.ui;
+  const sub = authEl('div', 'loginover', ov);
+  sub.style.zIndex = '60';
+  const card = authEl('div', 'authcard', sub);
+  card.setAttribute('role', 'dialog'); card.setAttribute('aria-modal', 'true');
+  const head = authEl('div', 'authhead', card); authText(head, 'MY DATA');
+  const pane = authEl('div', 'authpane', card);
+  const loading = authEl('div', 'authhint', pane); authText(loading, 'Loading…');
+  api('account/data', { method: 'GET' }).then((r) => {
+    loading.remove();
+    if (r.offline) { const e = authEl('div', 'autherr', pane); authText(e, COPY.offline); }
+    else if (r.status === 401) { AUTH.onSessionExpired(game); sub.remove(); closeAccount(); return; }
+    else if (r.status !== 200 || !r.body) { const e = authEl('div', 'autherr', pane); authText(e, 'Couldn\u2019t load account data right now.'); }
+    else {
+      const d = r.body;
+      const rows = [
+        ['Username', d.username],
+        ['Member since', d.createdAt ? new Date(d.createdAt).toLocaleDateString() : '—'],
+        ['Last login', d.lastLogin ? new Date(d.lastLogin).toLocaleString() : '—'],
+      ];
+      rows.forEach(([k, v]) => {
+        const row = authEl('div', 'authhint', pane);
+        const b = authEl('b', '', row); authText(b, k + ': ');
+        const s = authEl('span', '', row); authText(s, v); // textContent (C12)
+      });
+    }
+    const dl = authEl('button', 'authgo sec', pane); authText(dl, 'DOWNLOAD MY SAVE (JSON)');
+    dl.addEventListener('click', () => {
+      const payload = SYNC.localPayload(game);
+      downloadJson('ashs-journey-save.json', payload || {});
+      ui.toast('Save downloaded.');
+    });
+    const back = authEl('button', 'authgo ghost', pane); authText(back, 'BACK');
+    back.addEventListener('click', () => sub.remove());
+    back.focus();
+  });
+}
+
+function accountDelete(game, ov, closeAccount) {
+  const ui = game.ui;
+  const sub = authEl('div', 'loginover', ov);
+  sub.style.zIndex = '60';
+  const card = authEl('div', 'authcard', sub);
+  card.setAttribute('role', 'dialog'); card.setAttribute('aria-modal', 'true');
+  const head = authEl('div', 'authhead', card); authText(head, 'DELETE ACCOUNT');
+  const pane = authEl('div', 'authpane', card);
+  const warn = authEl('div', 'authwarn', pane);
+  authText(warn, 'This permanently deletes your account and all cloud saves. This cannot be undone.');
+  const err = authEl('div', 'autherr hidden', pane); err.setAttribute('role', 'alert');
+  const showErr = (m) => { authText(err, m); err.classList.remove('hidden'); };
+  const f = authEl('form', '', pane);
+  const lp = authEl('label', 'authfield', f); authText(lp, 'Confirm with your password');
+  const inP = authEl('input', 'authin', lp); inP.type = 'password'; inP.autocomplete = 'current-password';
+  const go = authEl('button', 'authgo', f); go.type = 'submit'; authText(go, 'CONTINUE');
+  f.addEventListener('submit', (e) => {
+    e.preventDefault(); err.classList.add('hidden');
+    if (!inP.value) { showErr('Enter your password to continue.'); return; }
+    // Second gate: type DELETE (same pattern as save-erase).
+    ui.showNameEntry('Type DELETE to confirm', '', 6, (typed) => {
+      if (typed !== 'DELETE') { ui.toast('Deletion cancelled.'); return; }
+      api('account/delete', { method: 'POST', body: { password: inP.value } }).then((r) => {
+        if (r.offline) { showErr(COPY.offline); return; }
+        if (r.status === 401) { AUTH.onSessionExpired(game); sub.remove(); closeAccount(); return; }
+        if (r.status !== 200 || !r.body || r.body.deleted !== true) { showErr('Couldn\u2019t delete the account — check the password and try again.'); return; }
+        AUTH.user = null;
+        game.authUser = null;
+        SYNC.clearSession();
+        while (pane.firstChild) pane.removeChild(pane.firstChild); // C12: no innerHTML
+        const done1 = authEl('div', 'authsub', pane);
+        authText(done1, 'Your account and all cloud saves have been deleted.');
+        const wipe = authEl('button', 'authgo sec', pane);
+        authText(wipe, 'ALSO ERASE THIS DEVICE\u2019S LOCAL DATA');
+        wipe.addEventListener('click', () => {
+          SYNC.clearSession();
+          try { localStorage.removeItem('pdr.sync.queue'); localStorage.removeItem('pdr.sync.meta'); localStorage.removeItem('pdr.sync.cache'); } catch (e) {}
+          authText(done1, 'Your account and all cloud saves have been deleted. This device\u2019s local data is erased.');
+          wipe.disabled = true;
+        });
+        const doneB = authEl('button', 'authgo ghost', pane);
+        authText(doneB, 'DONE');
+        doneB.addEventListener('click', () => { sub.remove(); closeAccount(); game.quitToTitle(); });
+        doneB.focus();
+      });
+    });
+  });
+  const back = authEl('button', 'authlink', pane); authText(back, '← Back');
+  back.addEventListener('click', () => sub.remove());
+  inP.focus();
+}
+
+// ---- session + availability ----
+function onSessionExpired(game) {
+  AUTH.user = null;
+  if (game) {
+    game.authUser = null;
+    // Non-blocking: play continues on the local copy; re-login merges via the
+    // conflict flow. Never force-logout mid-battle — no modal is opened here.
+    game.ui.toast('Session expired — log in again');
+    SYNC.renderDot();
+  }
+}
+
+function onUnavailable() {
+  AUTH.unavailable = true;
+  if (AUTH._bannerShown) return;
+  AUTH._bannerShown = true;
+  if (typeof document === 'undefined') return;
+  const root = document.getElementById('ui');
+  if (!root) return;
+  const b = authEl('div', 'banner503', root);
+  const t = authEl('span', '', b);
+  // Honest copy: the backend isn't provisioned yet; guest mode is unaffected.
+  authText(t, "Online saves aren't set up yet — your progress is safe on this device.");
+  const x = authEl('button', '', b);
+  authText(x, 'OK');
+  x.setAttribute('aria-label', 'Dismiss');
+  x.addEventListener('click', () => b.remove());
+}
+
+function init(game) {
+  if (typeof document === 'undefined' || typeof fetch === 'undefined') return; // headless / no-net
+  // No-auth health probe. Until Supabase is provisioned the API answers
+  // 503 {error:"auth_unavailable"} (or health reports authConfigured:false).
+  api('health', { method: 'GET' }).then((r) => {
+    if (r.offline) return; // offline: silent; the sync dot covers it once logged in
+    if ((r.status === 503 && r.body && r.body.error === 'auth_unavailable') ||
+        (r.status === 200 && r.body && r.body.authConfigured === false)) {
+      onUnavailable();
+    }
+  });
+}
+
+function enhanceGuestBanner(ui) {
+  // Verce target: the guest banner's "LOG IN" becomes a real button opening the terminal.
+  if (ui.headless || !ui._guestBannerEl) return;
+  const b = authEl('button', 'authgo sec', ui._guestBannerEl);
+  authText(b, 'LOG IN');
+  b.style.minHeight = '28px'; b.style.padding = '2px 12px'; b.style.fontSize = '14px';
+  b.addEventListener('click', (e) => {
+    e.preventDefault();
+    ui.game.openLogin('continue');
+  });
+}
+
+function signOut(game) {
+  const done = () => {
+    AUTH.user = null;
+    if (game) {
+      game.authUser = null;
+      SYNC.clearSession();
+      game.ui.toast('Logged out.');
+      game.ui.hideGuestBanner();
+      game.quitToTitle(); // back to title; Continue resumes the guest save, if any
+    }
+    return { ok: true };
+  };
+  // POST-only sign-out (contract). Best-effort: local state clears regardless.
+  return api('auth/sign-out', { method: 'POST' }).then(() => done(), () => done());
+}
+
+Object.assign(AUTH, {
+  init,
+  showLoginPanel,
+  enhanceGuestBanner,
+  openAccountMenu,
+  signOut,
+  onSessionExpired,
+  onUnavailable,
+  isLoggedIn() { return !!AUTH.user; },
+});
+
+// __AUTH_END__
+
+
+// ---- src/game/sync.mjs ----
+// sync.mjs — Track B cloud-save sync engine (architecture §3.3).
+// Local-first: the game NEVER waits on network. Writes go to the local cache
+// instantly; cloud PUTs happen in the background with a 60s idle throttle.
+// Same-origin backend calls only. No silent last-write-wins: genuine divergence
+// opens the conflict sheet (wireframes §9). Compiled IN for the vercel target;
+// compile-time STRIPPED for the guest target (see scripts/build.mjs).
+//
+// ---- Output-encoding contract (AppSec C12) ----
+// Player-controlled strings are rendered via textContent / createElement ONLY
+// (helpers live in auth.mjs: authEl/authText). Zero innerHTML in this file.
+//
+// ---- CONTRACT GAP (flagged for the backend seat + Sloane) ----
+// The published API contract has NO payload-download endpoint: the save list
+// and save meta endpoints return version/timestamp rows only, and the save PUT
+// uploads. Loading a cloud save on a device with no local cache (the
+// hotel-phone test, US-N1) needs a download endpoint added by the backend
+// (e.g. GET save?slot=N returning slot, version, payload, updatedAt).
+// Until that exists, downloadPayload() below reports the gap and every pull
+// path degrades honestly (toast + keep local). Push, claimGuest, queue,
+// conflict-sheet (meta both sides), and same-device re-login all work without it.
+
+
+const SYNC = {
+  activeSlot: 1,
+  init(game) {},                                   // guest build: no-op
+  tick(game) {},                                  // guest build: no-op
+  afterLocalSave(game) {},                        // guest build: no-op
+  onHidden(game) {},                              // guest build: no-op
+  saveLocal(game) { return { ok: false, reason: 'guest-build' }; },
+  syncNow(game, manual) { return Promise.resolve({ ok: false, reason: 'guest-build' }); },
+  runLoginMerge(game, mode, done) { done({ load: 'fallback' }); },
+  clearSession() {},
+  getSlots() { return []; },
+  localPayload(game) { return game ? game.state : null; },
+  renderDot() {},
+};
+
+// __AUTH_BEGIN__
+// ==================== full implementation (vercel target only) ====================
+// Shared DOM/API helpers (authEl, authText, api, downloadJson, COPY) are defined
+// in auth.mjs's __AUTH__ block — same concatenated script scope, call-time refs.
+
+const Q_KEY = 'pdr.sync.queue';
+const M_KEY = 'pdr.sync.meta';
+const C_KEY = 'pdr.sync.cache';
+
+function sstore() {
+  try { if (typeof localStorage !== 'undefined') return localStorage; } catch (e) {}
+  return null;
+}
+function sread(key, fb) {
+  const s = sstore();
+  if (!s) return fb;
+  try {
+    const raw = s.getItem(key);
+    if (raw === null) return fb;
+    return JSON.parse(raw);
+  } catch (e) { return fb; }
+}
+function swrite(key, val) {
+  const s = sstore();
+  if (!s) return false;
+  try { s.setItem(key, JSON.stringify(val)); return true; }
+  catch (e) { return false; }
+}
+
+function fmtPlay(sec) {
+  sec = sec || 0;
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
+  return h + 'h ' + (m < 10 ? '0' + m : '' + m) + 'm';
+}
+function fmtWhen(ts) {
+  if (!ts) return 'never';
+  try { return new Date(ts).toLocaleString(); } catch (e) { return 'unknown'; }
+}
+
+const SYNC_IMPL = {
+  _dot: null,
+  _flushing: false,
+  _lastFlush: 0,
+  _lastFlushOk: false,
+  _backoffUntil: 0,
+  _pendingConflict: null,
+  _cloudMeta: null,   // last GET /api/save/meta result (in-memory)
+  _offline: false,
+
+  _queue() { return sread(Q_KEY, []); },
+  _saveQueue(q) { swrite(Q_KEY, q); },
+  _meta() { const m = sread(M_KEY, null); return m || { lastSynced: {}, activeSlot: 1 }; },
+  _saveMeta(m) { swrite(M_KEY, m); },
+  _cache() { return sread(C_KEY, {}); },
+  _saveCache(c) { swrite(C_KEY, c); },
+  _lastSyncedVersion(slot) {
+    const m = this._meta();
+    return (m.lastSynced[slot] && m.lastSynced[slot].version != null) ? m.lastSynced[slot].version : 0;
+  },
+
+  init(game) {
+    if (game.ui.headless || typeof document === 'undefined') return;
+    this.activeSlot = (this._meta().activeSlot) || 1;
+    const dot = game.ui.el('div', 'syncdot hidden', game.ui.root);
+    dot.setAttribute('role', 'status');
+    dot.setAttribute('aria-live', 'polite');
+    const pip = game.ui.el('span', 'sdot', dot);
+    const tx = game.ui.el('span', '', dot);
+    this._dot = dot; this._dotTx = tx;
+    this._game = game;
+    const upd = () => { this._offline = !navigator.onLine; this.renderDot(); if (navigator.onLine) this.tick(game); };
+    window.addEventListener('online', upd);
+    window.addEventListener('offline', upd);
+    this._offline = (typeof navigator !== 'undefined' && navigator.onLine === false);
+    this.renderDot();
+  },
+
+  renderDot() {
+    const d = this._dot;
+    if (!d) return;
+    if (!AUTH.user) { d.classList.add('hidden'); return; }
+    d.classList.remove('hidden');
+    const q = this._queue();
+    let label = 'Synced ✓', cls = 'syncdot';
+    if (q.length && this._offline) { label = 'Offline — will sync'; cls = 'syncdot offline'; }
+    else if (q.length) { label = 'Sync pending'; cls = 'syncdot pending'; }
+    else if (!this._lastFlushOk) { label = 'Sync pending'; cls = 'syncdot pending'; }
+    d.className = cls;
+    authText(this._dotTx, label);
+  },
+
+  // Write the working copy to the local cloud-cache + coalesced queue entry.
+  // Instant — the game never waits on network (architecture §3.3).
+  saveLocal(game) {
+    const slot = this.activeSlot;
+    let bytes = 0;
+    try { bytes = new Blob([JSON.stringify(game.state)]).size; }
+    catch (e) { bytes = JSON.stringify(game.state).length; }
+    if (bytes > 65536) return { ok: false, reason: 'over-budget', bytes };
+    try {
+      const snap = JSON.parse(JSON.stringify(game.state));
+      snap.meta.updatedAt = Date.now();
+      const cache = this._cache();
+      cache[slot] = snap;
+      this._saveCache(cache);
+      // Coalesce: one queued entry per slot, always the latest full snapshot
+      // (ADR-007 Decision 4(iv): conflict-sheet local side = latest queued payload).
+      const q = this._queue().filter((e) => e.slot !== slot);
+      q.push({ slot, payload: snap, expectedVersion: this._lastSyncedVersion(slot), queuedAt: Date.now() });
+      this._saveQueue(q);
+    } catch (e) { return { ok: false, reason: 'no-storage' }; }
+    return { ok: true, bytes };
+  },
+
+  afterLocalSave(game) {
+    this.renderDot();
+    if (!AUTH.user) return;
+    const now = Date.now();
+    if (now - this._lastFlush >= 60000) this.flush(game); // 60s idle throttle
+    // otherwise tick() flushes once 60s have elapsed since the last flush
+  },
+
+  onHidden(game) {
+    // visibilitychange save point: best-effort flush (never blocks the game).
+    if (AUTH.user && !this._offline) this.flush(game);
+  },
+
+  tick(game) {
+    if (!AUTH.user || this._flushing) return;
+    const now = Date.now();
+    if (this._pendingConflict && !game.ui.inBattle && !game.ui.loginOpen && !game.ui.dialogueOpen && !game.ui.menuOpen) {
+      const pc = this._pendingConflict; this._pendingConflict = null;
+      this.showConflictSheet(game, pc.local, pc.cloud, pc.slot, pc.done);
+      return;
+    }
+    if (now < this._backoffUntil) return;
+    if (this._queue().length && now - this._lastFlush >= 60000 && !this._offline) this.flush(game);
+  },
+
+  syncNow(game, manual) {
+    if (!AUTH.user) return Promise.resolve({ ok: false, reason: 'logged-out' });
+    return this.flush(game).then((r) => {
+      if (manual) {
+        if (r.ok) game.ui.toast('Synced ✓');
+        else if (r.reason === 'offline') game.ui.toast('Offline — will sync when connected.');
+        else if (r.reason) game.ui.toast('Sync pending — will retry.');
+      }
+      return r;
+    });
+  },
+
+  flush(game) {
+    if (this._flushing || !AUTH.user) return Promise.resolve({ ok: false, reason: 'busy' });
+    const q = this._queue();
+    if (!q.length) { this._lastFlushOk = true; this.renderDot(); return Promise.resolve({ ok: true, empty: true }); }
+    this._flushing = true;
+    this._lastFlush = Date.now();
+    const entry = q[0];
+    return api('save', { method: 'PUT', body: { slot: entry.slot, payload: entry.payload, expectedVersion: entry.expectedVersion } })
+      .then((r) => {
+        this._flushing = false;
+        if (r.offline) { this._offline = true; this.renderDot(); return { ok: false, reason: 'offline' }; }
+        this._offline = false;
+        if (r.status === 200 && r.body) {
+          q.shift(); this._saveQueue(q);
+          const m = this._meta();
+          m.lastSynced[entry.slot] = { version: r.body.version, updatedAt: r.body.updatedAt, syncedAt: Date.now() };
+          this._saveMeta(m);
+          this._lastFlushOk = true; this._backoffUntil = 0;
+          this.renderDot();
+          // Keep flushing the FIFO while entries remain (throttle re-arms per entry).
+          if (q.length) { this._lastFlush = 0; return this.flush(game); }
+          return { ok: true };
+        }
+        if (r.status === 409) {
+          // Version conflict: stop the queue, open the conflict sheet (deferred
+          // out of battle by tick()). Server truth: r.body.serverVersion (+
+          // optional serverMeta if the backend includes it).
+          this._lastFlushOk = false; this.renderDot();
+          this.deferConflict(game, entry, r.body, () => this.flush(game));
+          return { ok: false, reason: 'conflict' };
+        }
+        if (r.status === 422) {
+          q.shift(); this._saveQueue(q); // drop the poison payload; keep previous-good local
+          this.renderDot();
+          game.ui.toast('Cloud save rejected — kept your local copy.');
+          return { ok: false, reason: 'rejected' };
+        }
+        if (r.status === 413) {
+          q.shift(); this._saveQueue(q);
+          this.renderDot();
+          game.ui.toast('Cloud save is too large — kept your local copy.');
+          return { ok: false, reason: 'too-large' };
+        }
+        if (r.status === 429) {
+          this._backoffUntil = Date.now() + 60000;
+          this.renderDot();
+          return { ok: false, reason: 'rate-limited' };
+        }
+        if (r.status === 401) { AUTH.onSessionExpired(game); return { ok: false, reason: 'expired' }; }
+        if (r.status === 503 && r.body && r.body.error === 'auth_unavailable') {
+          AUTH.onUnavailable();
+          this.renderDot();
+          return { ok: false, reason: 'unavailable' };
+        }
+        this.renderDot();
+        return { ok: false, reason: 'error-' + r.status };
+      }, () => {
+        this._flushing = false;
+        this._offline = true; this.renderDot();
+        return { ok: false, reason: 'offline' };
+      });
+  },
+
+  deferConflict(game, entry, serverBody, done) {
+    // Local side = latest queued payload (full snapshot, ADR-007).
+    const local = { payload: entry.payload, slot: entry.slot };
+    const serverVersion = serverBody && serverBody.serverVersion;
+    // Cloud meta: prefer the 409's serverMeta when present (freshest), else the
+    // last meta pull. Either way the sheet never blocks on network.
+    const cloudMeta = ((serverBody && serverBody.serverMeta) || null) ||
+      (this._cloudMeta || []).find((m) => m.slot === entry.slot) || null;
+    this.downloadPayload(entry.slot).then((dl) => {
+      const cloud = { payload: dl.ok ? dl.payload : null, meta: cloudMeta, slot: entry.slot, serverVersion };
+      this._pendingConflict = { local, cloud, slot: entry.slot, done: (winner) => {
+        // Loser stays out of the queue; winner was already written or cached.
+        const q = this._queue().filter((e) => e.slot !== entry.slot);
+        this._saveQueue(q);
+        this.renderDot();
+        if (done) done(winner);
+      } };
+      this.tick(game); // show now unless mid-battle/modal
+    });
+  },
+
+  // ---- CONTRACT GAP: no payload-download endpoint in the published contract ----
+  downloadPayload(slot) {
+    // Required for the hotel-phone test (US-N1): loading a cloud save on a
+    // device with no local cache. The contract lists only list/meta/PUT.
+    // Returns {ok:false, reason:'no-payload-endpoint'} until the backend adds
+    // the download (e.g. GET /api/save?slot=N -> {slot,version,payload,updatedAt}).
+    return Promise.resolve({ ok: false, reason: 'no-payload-endpoint', slot });
+  },
+
+  // ---- login merge (architecture §3.3: no silent last-write-wins, ever) ----
+  runLoginMerge(game, mode, done) {
+    const fallback = (why) => done({ load: 'fallback', why });
+    api('save/meta', { method: 'GET' }).then((r) => {
+      if (r.offline) { game.ui.toast('Could not reach cloud saves — playing on this device.'); fallback('offline'); return; }
+      if (r.status === 401) { AUTH.onSessionExpired(game); fallback('expired'); return; }
+      if (r.status === 503 && r.body && r.body.error === 'auth_unavailable') { AUTH.onUnavailable(); fallback('unavailable'); return; }
+      if (r.status !== 200 || !Array.isArray(r.body)) { game.ui.toast('Could not reach cloud saves — playing on this device.'); fallback('error'); return; }
+      this._cloudMeta = r.body;
+      const slot = this.activeSlot;
+      const centry = r.body.find((m) => m.slot === slot) || null;
+      let guest = null;
+      try {
+        const s = sstore();
+        const raw = s && s.getItem('pdr.save.guest');
+        if (raw) { const data = JSON.parse(raw); guest = { ok: true, data }; }
+      } catch (e) { guest = { ok: false }; }
+      const cache = this._cache();
+      const last = this._meta().lastSynced[slot];
+      const localPayload = cache[slot] || null;
+      const localAt = localPayload ? (localPayload.meta.updatedAt || 0) : 0;
+      const dirty = this._queue().some((e) => e.slot === slot) ||
+        (localPayload && localPayload.meta.updatedAt > ((last && last.syncedAt) || 0));
+
+      if (mode === 'new') {
+        if (centry) {
+          this.offerNewVsCloud(game, centry, (pick) => {
+            if (pick === 'cloud') this.loadCloudSlot(game, slot, centry, (st) => done(st ? { load: 'state', state: st } : { load: 'new' }));
+            else done({ load: 'new' });
+          });
+        } else done({ load: 'new' });
+        return;
+      }
+
+      // mode === 'continue'
+      if (!centry && guest && guest.ok && !localPayload && !this._meta().claimed) {
+        // (a) cloud empty + guest save on this device -> offer the carry.
+        this.offerClaimGuest(game, guest.data, (carry) => {
+          if (carry) this.claimGuest(game, guest.data, centry, (res) => done(res));
+          else done({ load: 'new' });
+        });
+        return;
+      }
+      if (!centry && localPayload) {
+        // Cloud empty, have a local cache (e.g. wiped server): push silently.
+        this.pushPayload(game, slot, localPayload, 0, () => done({ load: 'state', state: localPayload }));
+        return;
+      }
+      if (!centry) { done({ load: 'new' }); return; }
+      if (!localPayload && !dirty) {
+        this.loadCloudSlot(game, slot, centry, (st) => done(st ? { load: 'state', state: st } : { load: 'new' }));
+        return;
+      }
+      const lastV = last ? last.version : null;
+      const cloudChanged = lastV == null || centry.version !== lastV;
+      if (cloudChanged && dirty) {
+        // (b) genuine divergence -> conflict sheet.
+        this.downloadPayload(slot).then((dl) => {
+          const local = { payload: localPayload, slot };
+          const cloud = { payload: dl.ok ? dl.payload : null, meta: centry, slot, serverVersion: centry.version };
+          this.showConflictSheet(game, local, cloud, slot, (winner) => done({ load: 'state', state: winner }));
+        });
+        return;
+      }
+      // (c) newest wins silently.
+      if (!localPayload || centry.updatedAt >= localAt) {
+        this.loadCloudSlot(game, slot, centry, (st) => done(st ? { load: 'state', state: st } : { load: 'state', state: localPayload }));
+      } else {
+        this.pushPayload(game, slot, localPayload, centry.version, () => done({ load: 'state', state: localPayload }));
+      }
+    });
+  },
+
+  loadCloudSlot(game, slot, centry, done) {
+    // Prefer the local cache when its version matches the server (no download
+    // needed — covers same-device re-login without the payload endpoint).
+    const cache = this._cache();
+    const last = this._meta().lastSynced[slot];
+    if (cache[slot] && last && last.version === centry.version) {
+      if (this.validPayload(cache[slot])) { done(cache[slot]); return; }
+    }
+    this.downloadPayload(slot).then((dl) => {
+      if (dl.ok && this.validPayload(dl.payload)) {
+        const c = this._cache(); c[slot] = dl.payload; this._saveCache(c);
+        const m = this._meta();
+        m.lastSynced[slot] = { version: centry.version, updatedAt: centry.updatedAt, syncedAt: Date.now() };
+        this._saveMeta(m);
+        done(dl.payload);
+        return;
+      }
+      // CONTRACT GAP fallback: honest — the cloud copy exists but can't be
+      // downloaded with the current API. Keep playing on this device.
+      game.ui.toast('Cloud download needs the save API — playing on this device for now.');
+      done(null);
+    });
+  },
+
+  validPayload(p) {
+    try { return validateSave(p).ok; } catch (e) { return false; }
+  },
+
+  pushPayload(game, slot, payload, expectedVersion, done) {
+    api('save', { method: 'PUT', body: { slot, payload, expectedVersion } }).then((r) => {
+      if (r.offline) { this._offline = true; this.renderDot(); done({ queued: true }); return; }
+      if (r.status === 200 && r.body) {
+        const m = this._meta();
+        m.lastSynced[slot] = { version: r.body.version, updatedAt: r.body.updatedAt, syncedAt: Date.now() };
+        this._saveMeta(m);
+        const q = this._queue().filter((e) => e.slot !== slot);
+        this._saveQueue(q);
+        this._lastFlushOk = true; this.renderDot();
+        done({ ok: true });
+        return;
+      }
+      if (r.status === 409) {
+        const local = { payload, slot };
+        this.downloadPayload(slot).then((dl) => {
+          const centry = (this._cloudMeta || []).find((mm) => mm.slot === slot) || null;
+          const cloud = { payload: dl.ok ? dl.payload : null, meta: centry, slot, serverVersion: r.body && r.body.serverVersion };
+          this.showConflictSheet(game, local, cloud, slot, () => done({ ok: true }));
+        });
+        return;
+      }
+      if (r.status === 422) { game.ui.toast('Cloud save rejected — kept your local copy.'); done({ kept: true }); return; }
+      if (r.status === 413) { game.ui.toast('Cloud save is too large — kept your local copy.'); done({ kept: true }); return; }
+      if (r.status === 401) { AUTH.onSessionExpired(game); done({ expired: true }); return; }
+      // Anything else: queue it; the background flush will retry.
+      const q = this._queue().filter((e) => e.slot !== slot);
+      q.push({ slot, payload, expectedVersion, queuedAt: Date.now() });
+      this._saveQueue(q);
+      this.renderDot();
+      done({ queued: true });
+    });
+  },
+
+  claimGuest(game, guestSave, centry, done) {
+    // Guest -> registered migration (US-G2): write once to slot 1, idempotent
+    // via expectedVersion 0 (CAS: fails if the slot is no longer empty).
+    api('save', { method: 'PUT', body: { slot: 1, payload: guestSave, expectedVersion: 0 } }).then((r) => {
+      if (r.offline) { game.ui.toast('Offline — your guest save is queued for upload.'); done({ load: 'state', state: guestSave }); return; }
+      if (r.status === 200 && r.body) {
+        const c = this._cache(); c[1] = guestSave; this._saveCache(c);
+        const m = this._meta();
+        m.lastSynced[1] = { version: r.body.version, updatedAt: r.body.updatedAt, syncedAt: Date.now() };
+        m.claimed = true;
+        this._saveMeta(m);
+        this._lastFlushOk = true; this.renderDot();
+        game.ui.toast('Guest save carried to your account.');
+        done({ load: 'state', state: guestSave });
+        return;
+      }
+      if (r.status === 409) {
+        // Someone claimed the slot concurrently -> conflict sheet.
+        const local = { payload: guestSave, slot: 1 };
+        const cm = (this._cloudMeta || []).find((mm) => mm.slot === 1) || centry;
+        this.downloadPayload(1).then((dl) => {
+          const cloud = { payload: dl.ok ? dl.payload : null, meta: cm, slot: 1, serverVersion: r.body && r.body.serverVersion };
+          this.showConflictSheet(game, local, cloud, 1, (winner) => done({ load: 'state', state: winner }));
+        });
+        return;
+      }
+      game.ui.toast('Could not carry the guest save — playing on this device.');
+      done({ load: 'state', state: guestSave });
+    });
+  },
+
+  // ---- login-time modals ----
+  modalShell(ui, title) {
+    const ov = authEl('div', 'loginover', ui.root);
+    ov.style.zIndex = '55';
+    const card = authEl('div', 'authcard', ov);
+    card.setAttribute('role', 'dialog'); card.setAttribute('aria-modal', 'true');
+    const head = authEl('div', 'authhead', card); authText(head, title);
+    const pane = authEl('div', 'authpane', card);
+    const close = () => { if (ov.parentNode) ov.parentNode.removeChild(ov); };
+    return { ov, pane, close };
+  },
+
+  offerClaimGuest(game, guestSave, cb) {
+    const { pane, close } = this.modalShell(game.ui, 'CARRY YOUR SAVE?');
+    const p = guestSave.player || {};
+    const t = authEl('div', 'authsub', pane);
+    authText(t, 'We found a guest save on this device (' +
+      fmtPlay(p.playtimeSec || (guestSave.meta && guestSave.meta.playtimeSec) || 0) + ', ' +
+      ((guestSave.badges && guestSave.badges.kanto && guestSave.badges.kanto.length) || 0) +
+      ' badges). Carry it to your account\u2019s Slot 1?');
+    const yes = authEl('button', 'authgo', pane); authText(yes, 'CARRY MY SAVE');
+    const no = authEl('button', 'authgo ghost', pane); authText(no, 'START FRESH');
+    yes.addEventListener('click', () => { close(); cb(true); });
+    no.addEventListener('click', () => { close(); cb(false); });
+    yes.focus();
+  },
+
+  offerNewVsCloud(game, centry, cb) {
+    const { pane, close } = this.modalShell(game.ui, 'CLOUD SAVE FOUND');
+    const t = authEl('div', 'authsub', pane);
+    authText(t, 'This account already has a cloud save (' + fmtPlay(centry.playtimeSec) +
+      ', ' + (centry.badgeCount || 0) + ' badges, saved ' + fmtWhen(centry.updatedAt) + ').');
+    const c = authEl('button', 'authgo', pane); authText(c, 'CONTINUE MY JOURNEY');
+    const n = authEl('button', 'authgo ghost', pane); authText(n, 'START BRAND-NEW');
+    c.addEventListener('click', () => { close(); cb('cloud'); });
+    n.addEventListener('click', () => { close(); cb('new'); });
+    c.focus();
+  },
+
+  // ---- conflict sheet (wireframes §9): meta both sides, explicit choice ----
+  showConflictSheet(game, local, cloud, slot, done) {
+    const ui = game.ui;
+    const { pane, close } = this.modalShell(ui, 'SYNC CONFLICT');
+    const t = authEl('div', 'authsub', pane);
+    authText(t, 'This save changed in two places. Pick which copy to keep — the other is offered as a download. Nothing is overwritten silently.');
+    const cols = authEl('div', 'confcols', pane);
+    const lp = (local && local.payload) || {};
+    const lm = (lp.meta) || {};
+    const cm = (cloud && cloud.meta) || {};
+    const mkCol = (title, playSec, beat, badges, when, extra) => {
+      const c = authEl('div', 'confcol', cols);
+      const h4 = authEl('h4', '', c); authText(h4, title);
+      const rows = [
+        'Playtime: ' + fmtPlay(playSec),
+        'Story beat: ' + (beat == null ? '—' : beat),
+        'Badges: ' + (badges == null ? '—' : badges),
+        'Saved: ' + fmtWhen(when),
+      ];
+      if (extra) rows.push(extra);
+      rows.forEach((r) => { const d = authEl('div', '', c); authText(d, r); });
+      return c;
+    };
+    const lcol = mkCol('THIS DEVICE',
+      (lp.player && lp.player.playtimeSec) || lm.playtimeSec || 0,
+      (lp.meta && lp.meta.location) || null, // human-readable story beat: where that save is
+      ((lp.badges && lp.badges.kanto && lp.badges.kanto.length) || 0),
+      lm.updatedAt || (lp.meta && lp.meta.updatedAt));
+    const ccol = mkCol('CLOUD SAVE', cm.playtimeSec, cm.storyBeat, cm.badgeCount, cm.updatedAt,
+      cloud.payload ? null : 'Full copy needs the save API');
+    const pickL = authEl('button', 'authgo pick', lcol); authText(pickL, "KEEP THIS DEVICE'S");
+    const pickC = authEl('button', 'authgo pick', ccol); authText(pickC, "KEEP CLOUD'S");
+    if (!cloud.payload) { pickC.disabled = true; } // contract gap: can't load what we can't download
+
+    const finish = (winner, loser, loserLabel) => {
+      while (pane.firstChild) pane.removeChild(pane.firstChild);
+      const d = authEl('div', 'authsub', pane);
+      authText(d, 'Kept ' + (winner === 'local' ? "this device's" : 'the cloud') + ' copy.');
+      if (loser) {
+        const dl = authEl('button', 'authgo sec', pane);
+        authText(dl, 'DOWNLOAD ' + loserLabel + ' COPY (JSON)');
+        dl.addEventListener('click', () => {
+          downloadJson('ashs-journey-' + loserLabel.toLowerCase().replace(/\s+/g, '-') + '-backup.json', loser);
+          ui.toast('Backup downloaded.');
+        });
+      }
+      const okb = authEl('button', 'authgo ghost', pane); authText(okb, 'DONE');
+      okb.addEventListener('click', () => { close(); done(winner === 'local' ? local.payload : cloud.payload); });
+      okb.focus();
+    };
+
+    pickL.addEventListener('click', () => {
+      // Keep local: push with the server's version as the CAS token.
+      this.pushPayload(game, slot, local.payload, cloud.serverVersion != null ? cloud.serverVersion : 0, () => {
+        finish('local', cloud.payload, 'CLOUD');
+      });
+    });
+    pickC.addEventListener('click', () => {
+      if (!cloud.payload) return;
+      const c = this._cache(); c[slot] = cloud.payload; this._saveCache(c);
+      const m = this._meta();
+      m.lastSynced[slot] = { version: cloud.serverVersion, updatedAt: cm.updatedAt, syncedAt: Date.now() };
+      this._saveMeta(m);
+      finish('cloud', local.payload, 'DEVICE');
+    });
+    pickL.focus();
+  },
+
+  // ---- misc ----
+  getSlots() {
+    // For the in-game Save screen: per-slot state from cloud meta + local cache.
+    const out = [];
+    const cache = this._cache();
+    const q = this._queue();
+    for (let slot = 1; slot <= 3; slot++) {
+      const cm = (this._cloudMeta || []).find((m) => m.slot === slot) || null;
+      const cp = cache[slot] || null;
+      const pending = q.some((e) => e.slot === slot);
+      out.push({
+        slot,
+        active: slot === this.activeSlot,
+        cloudMeta: cm,
+        hasLocal: !!cp,
+        pending,
+        playtimeSec: cm ? cm.playtimeSec : (cp && cp.player ? cp.player.playtimeSec : 0),
+        badgeCount: cm ? cm.badgeCount : (cp && cp.badges ? cp.badges.kanto.length : 0),
+        updatedAt: cm ? cm.updatedAt : (cp && cp.meta ? cp.meta.updatedAt : 0),
+      });
+    }
+    return out;
+  },
+
+  setActiveSlot(n) {
+    this.activeSlot = n;
+    const m = this._meta(); m.activeSlot = n; this._saveMeta(m);
+  },
+
+  localPayload(game) {
+    const c = this._cache();
+    return c[this.activeSlot] || (game ? game.state : null);
+  },
+
+  clearSession() {
+    try {
+      const s = sstore();
+      if (s) { s.removeItem(Q_KEY); s.removeItem(M_KEY); s.removeItem(C_KEY); }
+    } catch (e) {}
+    this._cloudMeta = null;
+    this._pendingConflict = null;
+    this._lastFlushOk = false;
+    this._backoffUntil = 0;
+    this.activeSlot = 1;
+    this.renderDot();
+  },
+};
+
+Object.assign(SYNC, SYNC_IMPL);
+SYNC.activeSlot = 1;
+
+// __AUTH_END__
 
 
 // ---- src/game/title.mjs ----
@@ -6802,6 +8288,14 @@ class OverworldScene {
     // P1/J2: player card header + Quit to title (confirm; autosaves first).
     const badges = g.state.badges.kanto.length;
     const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
+    // Track B: account row — logged in shows the account menu; logged out (vercel)
+    // offers login; guest target keeps the honest disabled row (Track A).
+    const authEnabled = (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED);
+    const accountRow = !authEnabled
+      ? { label: 'Account — coming in Track B', value: 'account', disabled: true }
+      : g.authUser
+        ? { label: 'Account', value: 'account' }
+        : { label: 'Log in to sync ★', value: 'login' };
     g.ui.showMenu('MENU', [
       { label: g.state.player.name + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
       { label: this.map.name, value: null, disabled: true },
@@ -6810,7 +8304,7 @@ class OverworldScene {
       { label: 'Dex', value: 'dex' },
       { label: 'Save', value: 'save' },
       { label: 'Options', value: 'options' },
-      { label: 'Account — coming in Track B', value: 'account', disabled: true },
+      accountRow,
       { label: 'Quit to title', value: 'quit' },
       { label: 'Close', value: 'close' },
     ], (value) => {
@@ -6819,6 +8313,8 @@ class OverworldScene {
       else if (value === 'dex') g.openDex();
       else if (value === 'save') g.openSave();
       else if (value === 'options') g.openOptions();
+      else if (value === 'account' && authEnabled && g.authUser) AUTH.openAccountMenu(g);
+      else if (value === 'login' && authEnabled) g.openLogin('continue');
       else if (value === 'quit') {
         g.ui.showMenu('Quit to title? (autosaves first)', [
           { label: 'Quit', value: 'yes' },
@@ -7012,6 +8508,7 @@ class Game {
     this.layoutMode = 'portrait';
     this._animT = 0;      // ms clock for sprite-frame animation (idle blink, NPCs, water)
     this.guestMode = false; // set by the Trainer ID Terminal guest path
+    this.authUser = null;   // Track B: logged-in username (null = guest / logged out)
   }
 
   tileKind(ch) { return TILE_CHARS[ch] || 'void'; }
@@ -7068,6 +8565,9 @@ class Game {
 
   boot() {
     this.ui.init();
+    // Track B: auth health probe (503 banner) + sync dot. Guest target: no-ops.
+    AUTH.init(this);
+    SYNC.init(this);
     this.input.bindKeyboard();
     this.buildSprites();
     this.applyLayout();
@@ -7095,6 +8595,7 @@ class Game {
       const top = this.scenes.top;
       const midResolve = !!(top && top.state === 'resolve' && top.foe);
       if (!midResolve) this.saveGame(true);
+      SYNC.onHidden(this); // Track B: best-effort cloud flush on tab hide
     };
     this.loop.bindVisibility(() => { /* sim halts via rAF freeze; autosave queued above */ });
     this.audio.applySettings(this.state.settings);
@@ -7150,6 +8651,7 @@ class Game {
       }
     }
     this.ui.update(dt);
+    SYNC.tick(this); // Track B: idle flush (60s) + deferred conflict sheet. Guest: no-op.
     this.scenes.update(dt);
   }
 
@@ -7166,16 +8668,55 @@ class Game {
   }
 
   // ---- game flow ----
-  // P0/B1: title menu routes through the Trainer ID Terminal (login stub).
-  // Track B dark: LOG IN / REGISTER honestly disabled; GUEST functional; zero network.
+  // P0/B1: title menu routes through the Trainer ID Terminal.
+  // Track B (vercel): full LOG IN / REGISTER / GUEST panel (auth.mjs).
+  // Guest target: the stub keeps Track-A behavior (guest only, zero network).
   openLogin(mode) {
     this._loginMode = mode;
-    this.ui.showLogin((choice) => {
-      if (choice !== 'guest') return;
+    this.ui.showLogin((choice, data) => {
+      if (choice === 'login') {
+        this.guestMode = false;
+        this.authUser = (data && data.username) || null;
+        AUTH.user = this.authUser;
+        this.ui.hideGuestBanner();
+        this.onLoggedIn(mode);
+        return;
+      }
+      // 'guest' — also the only path in the guest target and the headless harness
       this.guestMode = true;
+      this.authUser = null;
+      AUTH.user = null;
       if (this._loginMode === 'continue') this.continueGame();
       else this.newGame();
     });
+  }
+
+  // Track B: post-login — pull cloud meta, merge (claim/conflict/newest-wins),
+  // then load the resolved save or start fresh.
+  onLoggedIn(mode) {
+    const name = this.authUser || 'trainer';
+    this.ui.toast('Welcome back, ' + name + '!'); // toast = textContent (C12-safe)
+    SYNC.runLoginMerge(this, mode, (res) => {
+      if (!res) return;
+      if (res.load === 'state' && res.state) {
+        this.state = res.state;
+        this.audio.applySettings(this.state.settings);
+        this.scenes.replace(new OverworldScene());
+        this.ui.toast('Save loaded.');
+      } else if (res.load === 'new') {
+        this.newGame();
+      } else {
+        // fallback (offline / unavailable / expired): play on this device.
+        if (mode === 'continue') this.continueGame();
+        else this.newGame();
+      }
+    });
+  }
+
+  quitToTitle(saveIt) {
+    if (saveIt !== false) this.saveGame(true);
+    this.ui.hideGuestBanner();
+    this.scenes.replace(new BootScene());
   }
 
   newGame() {
@@ -7204,6 +8745,17 @@ class Game {
   }
 
   saveGame(quiet) {
+    // Track B: logged-in saves go to the local cloud-cache + background queue
+    // (SYNC) — the game never waits on network. Guest path is byte-identical.
+    if (AUTH.user) {
+      const res = SYNC.saveLocal(this);
+      if (!quiet || !res.ok) {
+        if (res.ok) { this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)'); this.audio.playSfx('save-confirm'); }
+        else this.ui.toast('Save failed: ' + res.reason);
+      }
+      SYNC.afterLocalSave(this);
+      return res;
+    }
     const res = this.store.save(this.state);
     if (!quiet || !res.ok) {
       if (res.ok) { this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)'); this.audio.playSfx('save-confirm'); }
@@ -7388,6 +8940,8 @@ class Game {
 
   openSave() {
     const g = this;
+    // Track B: logged-in players get the cloud slot list (3 slots + sync state).
+    if (AUTH.user) { g.openSaveCloud(); return; }
     const caught = dexCaughtCount(g.state.dex);
     const badges = g.state.badges.kanto.length;
     const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
@@ -7403,11 +8957,42 @@ class Game {
     });
   }
 
+  // Track B: cloud slot picker (labels are formatted numbers/dates only —
+  // no player strings, so the menu's innerHTML path is safe here).
+  openSaveCloud() {
+    const g = this;
+    const slots = SYNC.getSlots();
+    const items = [{ label: 'Cloud saves — pick a slot', value: null, disabled: true }];
+    for (const s of slots) {
+      const h = Math.floor((s.playtimeSec || 0) / 3600);
+      const m = Math.floor(((s.playtimeSec || 0) % 3600) / 60);
+      const st = s.pending ? 'Sync pending' : (s.cloudMeta || s.hasLocal) ? 'Synced' : 'Empty';
+      items.push({
+        label: (s.active ? '▸ ' : '') + 'Slot ' + s.slot + ' — ' + h + 'h ' + (m < 10 ? '0' + m : '' + m) +
+          'm · ' + s.badgeCount + ' badges · ' + st,
+        value: 'slot:' + s.slot,
+      });
+    }
+    items.push({ label: 'Save now', value: 'save' });
+    items.push({ label: 'Sync now', value: 'sync' });
+    items.push({ label: 'Close', value: 'close' });
+    g.ui.showMenu('Save', items, (v) => {
+      if (!v || v === 'close') return;
+      if (v === 'save') g.saveGame(false);
+      else if (v === 'sync') SYNC.syncNow(g, true);
+      else if (v.indexOf('slot:') === 0) {
+        SYNC.setActiveSlot(parseInt(v.slice(5), 10));
+        g.ui.toast('Slot ' + v.slice(5) + ' selected.');
+        g.openSave();
+      }
+    });
+  }
+
   openOptions() {
     const g = this;
     const s = g.state.settings;
     const yn = (b) => b ? 'ON' : 'OFF';
-    g.ui.showMenu('Options', [
+    const rows = [
       { label: 'Text speed: ' + s.textSpeed, value: 'text' },
       { label: 'Mute: ' + yn(s.mute), value: 'mute' },
       { label: 'Music volume: ' + Math.round(s.musicVol * 100) + '%', value: 'music' },
@@ -7421,9 +9006,20 @@ class Game {
       { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
       { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
       { label: 'Legal / credits', value: 'legal' },
+    ];
+    // Track B: account surface (wireframes §10). Labels are static — the
+    // username itself is only ever rendered via textContent (AppSec C12).
+    if (g.authUser) {
+      rows.push({ label: 'Account', value: 'account' });
+      rows.push({ label: 'Sync now', value: 'syncnow' });
+    } else if (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED) {
+      rows.push({ label: 'Log in to sync ★', value: 'login' });
+    }
+    rows.push(
       { label: 'Erase save', value: 'erase' },
       { label: 'Close', value: 'close' },
-    ], (v) => {
+    );
+    g.ui.showMenu('Options', rows, (v) => {
       if (v === 'text') {
         const order = ['slow', 'normal', 'fast', 'instant'];
         s.textSpeed = order[(order.indexOf(s.textSpeed) + 1) % order.length];
@@ -7446,6 +9042,9 @@ class Game {
         if (typeof document !== 'undefined') document.documentElement.style.setProperty('--hudscale', s.hudScale);
       }
       else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
+      else if (v === 'account') { AUTH.openAccountMenu(g); return; }
+      else if (v === 'syncnow') { SYNC.syncNow(g, true); return; }
+      else if (v === 'login') { g.openLogin('continue'); return; }
       else if (v === 'erase') {
         g.ui.showMenu('Erase ALL save data?', [
           { label: 'Yes, erase everything', value: 'yes' },

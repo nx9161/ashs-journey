@@ -22,6 +22,22 @@ if (!fs.existsSync(dist)) { console.error('FAIL: dist/standalone.html missing â€
 
 gate('guest bundle bytes (uncompressed)', fs.statSync(dist).size, hard.guestBundleMaxBytes);
 
+// Binding: the guest bundle makes ZERO network calls (PRD AC#1; Tech Law's
+// COPPA cleanliness â€” the zero-network guest-bundle QA gate). build.mjs fails
+// first; this is the CI-level enforcement of budgets.json guestBundleFetches:0.
+{
+  const guestHtml = fs.readFileSync(dist, 'utf8');
+  const hits = [];
+  const nFetch = (guestHtml.match(/fetch\s*\(/g) || []).length;
+  if (nFetch) hits.push('fetch(:' + nFetch);
+  const nApi = (guestHtml.match(/\/api\//g) || []).length;
+  if (nApi) hits.push('/api/:' + nApi);
+  const nXhr = (guestHtml.match(/XMLHttpRequest|new WebSocket/g) || []).length;
+  if (nXhr) hits.push('xhr/ws:' + nXhr);
+  if (hits.length) { console.error('FAIL guest bundle network gate: ' + hits.join(', ')); failed++; }
+  else console.log('PASS guest bundle zero-network gate (fetch + /api/ + xhr/ws = 0)');
+}
+
 if (fs.existsSync(pubJs) && fs.existsSync(pubHtml)) {
   gate('vercel static bytes (uncompressed)', fs.statSync(pubJs).size + fs.statSync(pubHtml).size, hard.vercelStaticMaxBytes);
 }

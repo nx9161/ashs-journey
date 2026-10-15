@@ -69,6 +69,7 @@ export class Game {
     this.layoutMode = 'portrait';
     this._animT = 0;      // ms clock for sprite-frame animation (idle blink, NPCs, water)
     this.guestMode = false; // set by the Trainer ID Terminal guest path
+    this.authUser = null;   // Track B: logged-in username (null = guest / logged out)
   }
 
   tileKind(ch) { return TILE_CHARS[ch] || 'void'; }
@@ -125,6 +126,9 @@ export class Game {
 
   boot() {
     this.ui.init();
+    // Track B: auth health probe (503 banner) + sync dot. Guest target: no-ops.
+    AUTH.init(this);
+    SYNC.init(this);
     this.input.bindKeyboard();
     this.buildSprites();
     this.applyLayout();
@@ -152,6 +156,7 @@ export class Game {
       const top = this.scenes.top;
       const midResolve = !!(top && top.state === 'resolve' && top.foe);
       if (!midResolve) this.saveGame(true);
+      SYNC.onHidden(this); // Track B: best-effort cloud flush on tab hide
     };
     this.loop.bindVisibility(() => { /* sim halts via rAF freeze; autosave queued above */ });
     this.audio.applySettings(this.state.settings);
@@ -207,6 +212,7 @@ export class Game {
       }
     }
     this.ui.update(dt);
+    SYNC.tick(this); // Track B: idle flush (60s) + deferred conflict sheet. Guest: no-op.
     this.scenes.update(dt);
   }
 
@@ -223,16 +229,55 @@ export class Game {
   }
 
   // ---- game flow ----
-  // P0/B1: title menu routes through the Trainer ID Terminal (login stub).
-  // Track B dark: LOG IN / REGISTER honestly disabled; GUEST functional; zero network.
+  // P0/B1: title menu routes through the Trainer ID Terminal.
+  // Track B (vercel): full LOG IN / REGISTER / GUEST panel (auth.mjs).
+  // Guest target: the stub keeps Track-A behavior (guest only, zero network).
   openLogin(mode) {
     this._loginMode = mode;
-    this.ui.showLogin((choice) => {
-      if (choice !== 'guest') return;
+    this.ui.showLogin((choice, data) => {
+      if (choice === 'login') {
+        this.guestMode = false;
+        this.authUser = (data && data.username) || null;
+        AUTH.user = this.authUser;
+        this.ui.hideGuestBanner();
+        this.onLoggedIn(mode);
+        return;
+      }
+      // 'guest' — also the only path in the guest target and the headless harness
       this.guestMode = true;
+      this.authUser = null;
+      AUTH.user = null;
       if (this._loginMode === 'continue') this.continueGame();
       else this.newGame();
     });
+  }
+
+  // Track B: post-login — pull cloud meta, merge (claim/conflict/newest-wins),
+  // then load the resolved save or start fresh.
+  onLoggedIn(mode) {
+    const name = this.authUser || 'trainer';
+    this.ui.toast('Welcome back, ' + name + '!'); // toast = textContent (C12-safe)
+    SYNC.runLoginMerge(this, mode, (res) => {
+      if (!res) return;
+      if (res.load === 'state' && res.state) {
+        this.state = res.state;
+        this.audio.applySettings(this.state.settings);
+        this.scenes.replace(new OverworldScene());
+        this.ui.toast('Save loaded.');
+      } else if (res.load === 'new') {
+        this.newGame();
+      } else {
+        // fallback (offline / unavailable / expired): play on this device.
+        if (mode === 'continue') this.continueGame();
+        else this.newGame();
+      }
+    });
+  }
+
+  quitToTitle(saveIt) {
+    if (saveIt !== false) this.saveGame(true);
+    this.ui.hideGuestBanner();
+    this.scenes.replace(new BootScene());
   }
 
   newGame() {
@@ -261,6 +306,17 @@ export class Game {
   }
 
   saveGame(quiet) {
+    // Track B: logged-in saves go to the local cloud-cache + background queue
+    // (SYNC) — the game never waits on network. Guest path is byte-identical.
+    if (AUTH.user) {
+      const res = SYNC.saveLocal(this);
+      if (!quiet || !res.ok) {
+        if (res.ok) { this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)'); this.audio.playSfx('save-confirm'); }
+        else this.ui.toast('Save failed: ' + res.reason);
+      }
+      SYNC.afterLocalSave(this);
+      return res;
+    }
     const res = this.store.save(this.state);
     if (!quiet || !res.ok) {
       if (res.ok) { this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)'); this.audio.playSfx('save-confirm'); }
@@ -445,6 +501,8 @@ export class Game {
 
   openSave() {
     const g = this;
+    // Track B: logged-in players get the cloud slot list (3 slots + sync state).
+    if (AUTH.user) { g.openSaveCloud(); return; }
     const caught = dexCaughtCount(g.state.dex);
     const badges = g.state.badges.kanto.length;
     const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
@@ -460,11 +518,42 @@ export class Game {
     });
   }
 
+  // Track B: cloud slot picker (labels are formatted numbers/dates only —
+  // no player strings, so the menu's innerHTML path is safe here).
+  openSaveCloud() {
+    const g = this;
+    const slots = SYNC.getSlots();
+    const items = [{ label: 'Cloud saves — pick a slot', value: null, disabled: true }];
+    for (const s of slots) {
+      const h = Math.floor((s.playtimeSec || 0) / 3600);
+      const m = Math.floor(((s.playtimeSec || 0) % 3600) / 60);
+      const st = s.pending ? 'Sync pending' : (s.cloudMeta || s.hasLocal) ? 'Synced' : 'Empty';
+      items.push({
+        label: (s.active ? '▸ ' : '') + 'Slot ' + s.slot + ' — ' + h + 'h ' + (m < 10 ? '0' + m : '' + m) +
+          'm · ' + s.badgeCount + ' badges · ' + st,
+        value: 'slot:' + s.slot,
+      });
+    }
+    items.push({ label: 'Save now', value: 'save' });
+    items.push({ label: 'Sync now', value: 'sync' });
+    items.push({ label: 'Close', value: 'close' });
+    g.ui.showMenu('Save', items, (v) => {
+      if (!v || v === 'close') return;
+      if (v === 'save') g.saveGame(false);
+      else if (v === 'sync') SYNC.syncNow(g, true);
+      else if (v.indexOf('slot:') === 0) {
+        SYNC.setActiveSlot(parseInt(v.slice(5), 10));
+        g.ui.toast('Slot ' + v.slice(5) + ' selected.');
+        g.openSave();
+      }
+    });
+  }
+
   openOptions() {
     const g = this;
     const s = g.state.settings;
     const yn = (b) => b ? 'ON' : 'OFF';
-    g.ui.showMenu('Options', [
+    const rows = [
       { label: 'Text speed: ' + s.textSpeed, value: 'text' },
       { label: 'Mute: ' + yn(s.mute), value: 'mute' },
       { label: 'Music volume: ' + Math.round(s.musicVol * 100) + '%', value: 'music' },
@@ -478,9 +567,20 @@ export class Game {
       { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
       { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
       { label: 'Legal / credits', value: 'legal' },
+    ];
+    // Track B: account surface (wireframes §10). Labels are static — the
+    // username itself is only ever rendered via textContent (AppSec C12).
+    if (g.authUser) {
+      rows.push({ label: 'Account', value: 'account' });
+      rows.push({ label: 'Sync now', value: 'syncnow' });
+    } else if (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED) {
+      rows.push({ label: 'Log in to sync ★', value: 'login' });
+    }
+    rows.push(
       { label: 'Erase save', value: 'erase' },
       { label: 'Close', value: 'close' },
-    ], (v) => {
+    );
+    g.ui.showMenu('Options', rows, (v) => {
       if (v === 'text') {
         const order = ['slow', 'normal', 'fast', 'instant'];
         s.textSpeed = order[(order.indexOf(s.textSpeed) + 1) % order.length];
@@ -503,6 +603,9 @@ export class Game {
         if (typeof document !== 'undefined') document.documentElement.style.setProperty('--hudscale', s.hudScale);
       }
       else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
+      else if (v === 'account') { AUTH.openAccountMenu(g); return; }
+      else if (v === 'syncnow') { SYNC.syncNow(g, true); return; }
+      else if (v === 'login') { g.openLogin('continue'); return; }
       else if (v === 'erase') {
         g.ui.showMenu('Erase ALL save data?', [
           { label: 'Yes, erase everything', value: 'yes' },

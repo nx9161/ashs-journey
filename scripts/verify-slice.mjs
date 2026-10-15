@@ -272,6 +272,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { stripAuthBlocks } from './build.mjs';
 
 const HROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const __QA__ = globalThis.__QA__ = globalThis.__QA__ || { results: [], failures: 0 };
@@ -305,26 +306,53 @@ __QA__.bundleA = inlineJs;   // guest single-file bundle (Track A)
 __QA__.bundleB = vercelJs;   // vercel full client bundle (Track B static)
 const hashA = sha(inlineJs), hashB = sha(vercelJs);
 
-// ---- S3a: both-bundle checksums ----
-qaOk('qa s3a guest/full bundle checksum match', hashA === hashB, hashA.slice(0, 16) + ' vs ' + hashB.slice(0, 16));
+// ---- S3a: two-bundle relationship (Track B) ----
+// The bundles INTENTIONALLY differ now: guest = vercel minus the
+// compile-time-stripped auth sections (drift-gate proves the property; the
+// build's zero-network gate proves the guest side).
+qaOk('qa s3a guest bundle has zero fetch( (auth stripped)', countPat(inlineJs, /fetch\s*\(/g) === 0);
+qaOk('qa s3a guest bundle has zero /api/ references', !/\/api\//.test(inlineJs));
+qaOk('qa s3a guest === vercel minus auth sections (no drift)',
+  sha(stripAuthBlocks(vercelJs)) === hashA,
+  sha(stripAuthBlocks(vercelJs)).slice(0, 16) + ' vs ' + hashA.slice(0, 16));
+qaOk('qa s3a vercel bundle carries the auth client',
+  vercelJs.indexOf("'/api/'") >= 0 && vercelJs.indexOf('auth/sign-in/username') >= 0);
 const hashComment = (standaloneHtml.match(/contentHash:([0-9a-f]{64})/) || [])[1];
 qaOk('qa s3a content-hash comment matches game code', hashComment === hashA);
 qaOk('qa s3a vercel shell loads game.js', vercelIndex.indexOf('<script src="game.js">') >= 0);
 qaOk('qa s3a guest bundle is shell-first (zero external scripts)', !/<script src=/.test(standaloneHtml));
 
-// ---- S4: guest fetch( audit = 0 ----
+// ---- S4: network audit (Track B) ----
+// Guest bundle: zero fetch(, zero /api/. Vercel bundle: fetches exist but are
+// same-origin '/api/' only. src: fetch( only inside __AUTH__ blocks, '/api/' only.
 const srcFiles = walkMjs(path.join(HROOT, 'src'));
 const fetchPat = /fetch\s*\(/g;
-const bundleFetch = countPat(inlineJs, fetchPat) + countPat(vercelJs, fetchPat);
-const srcFetchHits = [];
+qaOk('qa s4 guest bundle fetch( count = 0', countPat(inlineJs, fetchPat) === 0);
+const vercelApiFetches = (vercelJs.match(/fetch\s*\(\s*'\/api\//g) || []).length;
+const vercelFetchTotal = countPat(vercelJs, fetchPat);
+qaOk('qa s4 vercel fetches are same-origin /api/ only',
+  vercelFetchTotal > 0 && vercelFetchTotal === vercelApiFetches,
+  'total=' + vercelFetchTotal + ' same-origin=' + vercelApiFetches);
+const srcFetchOutside = [];
+const srcFetchNonApi = [];
 for (const f of srcFiles) {
-  const n = countPat(fs.readFileSync(f, 'utf8'), fetchPat);
-  if (n) srcFetchHits.push(path.relative(HROOT, f) + ':' + n);
+  const t = fs.readFileSync(f, 'utf8');
+  const stripped = t.replace(/__AUTH_BEGIN__[\s\S]*?__AUTH_END__/g, '');
+  if (new RegExp(fetchPat.source).test(stripped)) srcFetchOutside.push(path.relative(HROOT, f));
+  const blocks = t.match(/__AUTH_BEGIN__([\s\S]*?)__AUTH_END__/g) || [];
+  for (const b of blocks) {
+    const re = /fetch\s*\(/g;
+    let m;
+    while ((m = re.exec(b))) {
+      const after = b.slice(m.index, m.index + 40);
+      if (!/fetch\s*\(\s*'\/api\//.test(after)) srcFetchNonApi.push(path.relative(HROOT, f) + ': ' + after.slice(0, 32));
+    }
+  }
 }
-qaOk('qa s4 guest fetch( count = 0 (bundles + src)', bundleFetch === 0 && srcFetchHits.length === 0,
-  'bundle hits=' + bundleFetch + ' src hits=' + JSON.stringify(srcFetchHits));
+qaOk('qa s4 src fetch( only inside auth blocks', srcFetchOutside.length === 0, JSON.stringify(srcFetchOutside));
+qaOk('qa s4 src auth-block fetches are /api/ only', srcFetchNonApi.length === 0, JSON.stringify(srcFetchNonApi));
 const netPat = /XMLHttpRequest|new WebSocket|import\s*\(/g;
-qaOk('qa s4 no XHR/WebSocket/dynamic-import in guest bundles', countPat(inlineJs, netPat) + countPat(vercelJs, netPat) === 0);
+qaOk('qa s4 no XHR/WebSocket/dynamic-import in either bundle', countPat(inlineJs, netPat) + countPat(vercelJs, netPat) === 0);
 
 // ---- S5: tap-target audit (>= 44px, gameux §2) ----
 const css = (standaloneHtml.match(/<style>([\s\S]*?)<\/style>/) || [])[1] || '';
