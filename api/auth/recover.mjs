@@ -111,8 +111,8 @@ export default async function handler(req) {
     // providerId, password) from the pinned better-auth package).
     const newHash = await argonHash(newPassword, ARGON2_OPTS);
     const upd = await client.query(
-      `UPDATE account SET password = $2, updated_at = now()
-       WHERE userId = $1 AND providerId = 'credential'`,
+      `UPDATE account SET password = $2, "updatedAt" = now()
+       WHERE "userId" = $1 AND "providerId" = 'credential'`,
       [userId, newHash],
     );
     if (upd.rowCount !== 1) {
@@ -121,7 +121,7 @@ export default async function handler(req) {
     }
 
     // Terminate ALL sessions (C5: reset revokes everything).
-    await client.query(`DELETE FROM session WHERE userId = $1`, [userId]);
+    await client.query(`DELETE FROM session WHERE "userId" = $1`, [userId]);
 
     await client.query('COMMIT');
     return json({ ok: true });
