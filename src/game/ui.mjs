@@ -98,6 +98,8 @@ export class UI {
     this._guestBannerOff = false;
     this.onMoodTap = null;
     this._moodWanted = false;
+    this.chapterCard = null; // D2: chapter title card overlay while open
+    this._ccT = 0;
   }
 
   init() {
@@ -162,13 +164,16 @@ export class UI {
     };
     mkS('start', 'START'); mkS('select', 'SELECT');
     // Command panel (battle) — hidden unless battle scene shows it. P0/E8: populated as a 2x2 grid.
-    this.cmdEl = this.el('div', 'cmdpanel hidden', g);
+    // D3: child of #ui root, NOT .controls — body.desktop hides .controls (touch
+    // buttons), which used to hide the battle commands on every laptop too.
+    this.cmdEl = this.el('div', 'cmdpanel hidden', this.root);
   }
 
   // ---- P0/E8: battle command 2x2 grid (replaces the D-pad zone) ----
   // items: [{label, value, disabled, dimmed}] — dimmed = tutorial de-emphasis (still selectable).
   showCommands(items, cb, opts) {
     opts = opts || {};
+    this.game.input.consumeAll(); // D3: stale walk edges must not move the battle cursor
     this.menu = {
       title: null, items, idx: opts.initialIdx || 0, cb, battle: true,
       kind: 'commands', grid: true, focus: opts.focus || null,
@@ -317,6 +322,10 @@ export class UI {
   // opts: { battle, grid, initialIdx, rowHtml(item, i), focusValue }
   showMenu(title, items, cb, opts) {
     opts = opts || {};
+    // D3: a menu opening consumes stale input edges — e.g. the direction key a
+    // player was holding while walking into a grass encounter must not move the
+    // battle cursor the moment the command menu appears.
+    this.game.input.consumeAll();
     this.menu = {
       title, items, idx: opts.initialIdx || 0, cb,
       battle: !!(opts && opts.battle), kind: opts.kind || 'menu',
@@ -731,12 +740,61 @@ export class UI {
     this._hintCard.classList.toggle('hidden', !v || this._hintOff);
   }
 
+  // ---- D2: chapter title cards (anime-chronology spine, ADR-015) ----
+  // ch: a CHAPTERS entry (src/data/story.mjs). Paper-panel card, Gen 4/5 idiom,
+  // tap/A/START dismisses, auto-dismisses after 4s of game time (reduced-motion
+  // safe: no animation). All text >= 14px (QA-001).
+  showChapterCard(ch) {
+    this.log.push({ ui: 'chaptercard', chapter: ch && ch.n, title: ch && ch.title });
+    if (this.headless) { this.chapterCard = null; return; }
+    this.hideChapterCard(); // one card at a time
+    this._ccT = 0;
+    const d = this.el('div', 'chaptercard', this.root);
+    const kick = this.el('div', 'cc-kicker', d);
+    kick.textContent = 'CHAPTER ' + ch.n + ' — ACT ' + ch.act;
+    const t = this.el('div', 'cc-title', d);
+    t.textContent = ch.title;
+    const arc = this.el('div', 'cc-arc', d);
+    arc.textContent = ch.arc;
+    const an = this.el('div', 'cc-anime', d);
+    an.textContent = ch.anime;
+    if (ch.movies && ch.movies.length) {
+      const mv = this.el('div', 'cc-anime', d);
+      mv.textContent = 'Special events: ' + ch.movies.join(' · ');
+    }
+    const hint = this.el('div', 'cc-hint', d);
+    hint.textContent = 'Press A / tap to continue';
+    d.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      this.game.audio.unlock();
+      this.game.input.inject('a');
+    });
+    this.chapterCard = d;
+  }
+
+  hideChapterCard() {
+    this.chapterCard = null;
+    this._ccT = 0;
+    if (this.headless || !this.root) return;
+    const old = this.root.querySelector('.chaptercard');
+    if (old && old.remove) old.remove();
+  }
+
   update(dt) {
     const input = this.game.input;
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;
     // Login page is modal (P0/B1).
     if (this.loginOpen) return true;
+    // Chapter title card is modal (D2: auto-dismisses; A/START/tap dismiss early).
+    if (this.chapterCard) {
+      this._ccT += dt;
+      if (input.wasPressed('a') || input.wasPressed('start') || this._ccT >= 4) {
+        this.game.audio.unlock();
+        this.hideChapterCard();
+      }
+      return true;
+    }
     // Typewriter advance
     if (this.dlg) {
       const d = this.dlg;
