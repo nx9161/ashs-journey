@@ -6,6 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFileSync } from 'node:child_process';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 let failed = 0;
@@ -72,18 +73,24 @@ if (failed) { console.error('CONTAMINATION: ' + failed + ' finding(s)'); process
 //    build is a pure string transform — eval / new Function have no legitimate use in this tree.
 //    node_modules is additionally a silent blind spot: walk() skips it, so a checked-in copy
 //    would evade every check above (third-party code = unknown IP provenance, GC C4).
-const codeFiles = [...srcFiles, ...walk(path.join(ROOT, 'scripts'), ['.mjs'])];
+//    Track B note: api/ has a legitimate gitignored node_modules (server-only deps,
+//    pinned + license-audited). The check below therefore looks at TRACKED files
+//    (git ls-files), not the working tree — intent preserved, no false positive.
+const codeFiles = [...srcFiles, ...walk(path.join(ROOT, 'scripts'), ['.mjs']), ...walk(path.join(ROOT, 'api'), ['.mjs'])];
 for (const f of codeFiles) {
   const t = fs.readFileSync(f, 'utf8');
   if (/\beval\s*\(/.test(t)) fail(path.relative(ROOT, f) + ' calls eval — dynamic code execution is banned');
   if (/\bnew\s+Function\s*\(/.test(t)) fail(path.relative(ROOT, f) + ' uses new Function — dynamic code execution is banned');
 }
 {
-  const stray = [];
-  for (const e of fs.readdirSync(ROOT, { withFileTypes: true })) {
-    if (e.isDirectory() && e.name === 'node_modules') stray.push(e.name);
-  }
-  if (stray.length) fail('node_modules checked into the repo (' + stray.join(', ') + ') — zero-dep posture broken, GC C4');
+  let tracked = '';
+  try {
+    tracked = execFileSync('git', ['ls-files'], { cwd: ROOT, encoding: 'utf8' });
+  } catch { /* not a git checkout; fall back to working-tree check */ }
+  const bad = tracked
+    ? tracked.split('\n').filter((f) => f.startsWith('node_modules/'))
+    : [];
+  if (bad.length) fail('node_modules checked into the repo (' + bad.length + ' tracked files) — zero-dep posture broken, GC C4');
 }
 
 if (failed) { console.error('CONTAMINATION: ' + failed + ' finding(s)'); process.exit(1); }

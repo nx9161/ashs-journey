@@ -1,0 +1,43 @@
+# Keep-alive ping — Supabase free-tier pause guard (ADR-010 OQ-16)
+#
+# RUNBOOK (owner-side, one-time):
+#   1. Deploy the game to Vercel (production URL, e.g.
+#      https://<project>.vercel.app).
+#   2. In GitHub: repo Settings -> Secrets and variables -> Actions -> New
+#      repository secret named GAME_URL with the production URL as its value
+#      (no trailing slash).
+#   3. This workflow is inert until GAME_URL exists: the `if` guard skips the
+#      ping step when the secret is unset, so it never fails pre-deploy.
+#
+# WHAT IT DOES: every 5 days it GETs /api/health, which performs a cheap
+# SELECT 1 against the Supabase DB when auth is configured — keeping the free
+# tier's 7-day inactivity pause from triggering.
+#
+# HONESTY NOTE: this ping exists because ADR-010 OQ-16 explicitly accepted it
+# (DevOps recommendation, $0). It activates only after the owner provisions
+# Supabase and sets GAME_URL. The game degrades gracefully without it
+# (offline queue + conflict matrix per the sync spec).
+
+name: keepalive
+
+on:
+  schedule:
+    - cron: '17 3 */5 * *' # every 5 days at 03:17 UTC
+  workflow_dispatch: # manual run for verification
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping /api/health
+        if: ${{ secrets.GAME_URL != '' }}
+        run: |
+          set -euo pipefail
+          URL="${{ secrets.GAME_URL }}/api/health"
+          echo "Pinging $URL"
+          BODY="$(curl -fsS --max-time 60 "$URL")"
+          echo "$BODY"
+          echo "$BODY" | grep -q '"ok":true' || { echo "health check did not report ok:true"; exit 1; }
+      - name: No GAME_URL configured (pre-deploy)
+        if: ${{ secrets.GAME_URL == '' }}
+        run: echo "GAME_URL secret not set — keep-alive is inert until the owner provisions the deploy (see runbook above)."
