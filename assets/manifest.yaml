@@ -1,0 +1,75 @@
+# Asset provenance manifest — Ash's Journey
+# Every asset gets lineage: generator + version, seed, hand-finish author + date.
+# Lead Code Reviewer signs provenance; General Counsel signs IP clearance (Phase 4 gate).
+# Format per batch: one entry per asset family. `status: placeholder` assets are
+# programmatic stand-ins that MUST be replaced by Art Director / Voice Designer
+# output before any owner-visible sign-off (see docs/contracts.md).
+
+version: 1
+project: ashs-journey
+ip_posture: 100% original code/art/audio. No ripped sprites, no ROM-derived data,
+  no sampled audio, no copied scripts. All research from docs/wikis only.
+
+assets:
+  - id: overworld-tiles-v1
+    kind: tiles
+    status: placeholder
+    source: procedural
+    generator: src/engine/tiles.mjs (TilePainter v1, checked into this repo)
+    seed: n/a (deterministic painter, no RNG)
+    hand_finish: none yet
+    author: game-producer (seat 20), Phase 4 Wave 1
+    date: 2026-10-15
+    notes: 16x16 painter tiles (grass/path/tree/water/wall/door/sign). Palette-authored
+      per-tileset, no multiply overlays (per gameux palette discipline). To be replaced by
+      Art Director hand-authored tileset per docs/contracts.md §1.
+
+  - id: species-sprites-v1
+    kind: sprites
+    status: placeholder
+    source: procedural
+    generator: src/engine/sprites.mjs (SpriteForge v1, seeded per species)
+    seed: per-species `spriteSeed` in src/data/species.mjs
+    hand_finish: none yet
+    author: game-producer (seat 20), Phase 4 Wave 1
+    date: 2026-10-15
+    palette_audit: per-sprite <= 12 colors + alpha (enforced by generator design);
+      no gradients; 1px dark outline rule honored by painter.
+    notes: Symmetric seeded pixel creatures with body-type silhouettes (quad/biped/
+      serpent/bird/blob). Stand-ins only — Art Director replaces with original
+      pixel art per docs/contracts.md §1. AI slop blacklist applies.
+
+  - id: ui-chrome-v1
+    kind: ui
+    status: hand-authored
+    source: hand-authored
+    generator: none (DOM + canvas painter in src/game/ui.mjs)
+    hand_finish: game-producer (seat 20), Phase 4 Wave 1
+    date: 2026-10-15
+    notes: Gen 4/5 HUD *idiom* (chunky panels, serif plates, type pills) expressed in
+      original arrangement per GC C3 trade-dress separation. Global UI palette cap
+      24 colors (gameux §6). Game UI/UX + Art Director sign-off required in Wave 2.
+
+  - id: chiptune-v1
+    kind: audio
+    status: placeholder
+    source: procedural
+    generator: src/engine/audio.mjs (ChiptuneEngine v1) + note tables in src/data/audio.mjs
+    seed: n/a (hand-written note tables, original compositions)
+    hand_finish: none yet
+    author: game-producer (seat 20), Phase 4 Wave 1
+    date: 2026-10-15
+    notes: 4 channels (2 pulse, 1 triangle, 1 noise). Melodies are original
+      compositions written for this project — chiptune *style* is fine, *melody* must
+      be original (GC gate). Voice Designer fills the full score next wave per
+      docs/contracts.md §2. Zero audio files ever.
+
+  - id: dialogue-v1
+    kind: dialogue
+    status: hand-authored
+    source: hand-authored
+    generator: none
+    hand_finish: game-producer (seat 20), Phase 4 Wave 1
+    date: 2026-10-15
+    notes: All dialogue is original writing. Anime story beats are plot facts, not
+      scripts (GC §3.3). No quoted or closely-paraphrased anime lines.

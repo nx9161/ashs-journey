@@ -1,0 +1,48 @@
+// schema.mjs — save schema v1 validation + migration.
+// Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
+
+import { SCHEMA_VERSION } from '../game/state.mjs';
+
+export const SAVE_KEY = 'pdr.save.guest';
+
+// Whitelisted top-level keys. Unknown keys => reject (architecture §3.4).
+const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
+  'pikachu', 'settings', 'facilities', 'bag', 'meta'];
+
+function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
+
+export function validateSave(data) {
+  const errors = [];
+  if (!isObj(data)) return { ok: false, errors: ['not-an-object'] };
+  for (const k of Object.keys(data)) {
+    if (!TOP_KEYS.includes(k)) errors.push('unknown-key:' + k);
+  }
+  if (data.v !== SCHEMA_VERSION) errors.push('bad-schema-version');
+  if (!isObj(data.player) || typeof data.player.name !== 'string') errors.push('bad-player');
+  if (!Array.isArray(data.party) || data.party.length > 6) errors.push('bad-party');
+  for (const m of (data.party || [])) {
+    if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number') { errors.push('bad-mon'); break; }
+    if (m.level < 1 || m.level > 100) { errors.push('bad-mon-level'); break; }
+    if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-mon-moves'); break; }
+  }
+  if (!isObj(data.dex)) errors.push('bad-dex');
+  if (!isObj(data.badges) || !Array.isArray(data.badges.kanto)) errors.push('bad-badges');
+  if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
+  return { ok: errors.length === 0, errors };
+}
+
+// v0 -> v1 migration chain. v0 never shipped publicly; stub kept for the chain.
+export function migrate(data) {
+  if (!isObj(data)) return null;
+  if (data.v === 0) {
+    data.v = 1;
+    data.facilities = data.facilities || { registry: [], unlocked: [] };
+    data.badges = data.badges || { kanto: [], orange: [], johto: [], symbols: [null, null, null, null, null, null, null] };
+  }
+  return data;
+}
+
+export function saveSizeBytes(data) {
+  try { return new Blob([JSON.stringify(data)]).size; }
+  catch (e) { return JSON.stringify(data).length; }
+}

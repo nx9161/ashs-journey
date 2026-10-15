@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>ASH'S JOURNEY — An Unofficial Fan Homage</title>
+<meta name="description" content="Ash's Journey — an unofficial fan-homage creature-catching web game. 100% original code, art, and audio.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:#0a0a12;touch-action:none;overscroll-behavior:none}
+body{font-family:monospace;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#stage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center}
+#game{image-rendering:pixelated;background:#000}
+#ui{position:fixed;inset:0;pointer-events:none}
+.hidden{display:none!important}
+/* dialogue */
+.dialogue{position:absolute;left:4%;right:4%;bottom:34%;min-height:96px;background:#f8f8f0;border:3px solid #202028;border-radius:6px;padding:10px 12px 18px;pointer-events:auto;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
+.dlg-name{position:absolute;top:-14px;left:10px;background:#202028;color:#ffe9a8;font-size:11px;font-weight:bold;padding:2px 10px;border-radius:4px}
+.dlg-text{font-size:14px;line-height:1.5;color:#202028;min-height:60px;white-space:pre-wrap}
+.dlg-hint{position:absolute;right:12px;bottom:4px;color:#202028;animation:blink 1s infinite;font-size:12px}
+@keyframes blink{50%{opacity:0}}
+/* menus */
+.menu{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);min-width:220px;max-width:92vw;max-height:60vh;overflow:auto;background:#f8f8f0;border:3px solid #202028;border-radius:6px;pointer-events:auto;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
+.menu-title{background:#202028;color:#ffe9a8;font-size:12px;font-weight:bold;padding:6px 10px}
+.menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-bottom:1px solid #d8d8cc;font:inherit;font-size:14px;color:#202028;text-align:left;padding:10px;min-height:44px;cursor:pointer}
+.menu-row .cur{width:18px;color:#c03028;font-weight:bold}
+.menu-row.cursor{background:#e8e0c8}
+.menu-row.disabled{color:#a0a0a0}
+/* toasts */
+.toasts{position:absolute;left:0;right:0;bottom:24%;display:flex;flex-direction:column;align-items:center;gap:6px}
+.toast{background:#202028;color:#ffe9a8;font-size:12px;padding:8px 14px;border-radius:16px;pointer-events:none}
+/* controls */
+.controls{position:absolute;inset:0;pointer-events:none}
+.dpad{position:absolute;left:24px;bottom:24px;width:132px;height:132px;pointer-events:auto}
+body.flip .dpad{left:auto;right:24px}
+.padbtn{position:absolute;width:44px;height:44px;background:#2a2a34;color:#fff;border:2px solid #55555f;border-radius:8px;font-size:16px;pointer-events:auto;touch-action:none}
+.p-up{left:44px;top:0}.p-down{left:44px;bottom:0}.p-left{left:0;top:44px}.p-right{right:0;top:44px}
+.padbtn:active{background:#4a4a58}
+.ab{position:absolute;right:24px;bottom:24px;width:160px;height:110px;pointer-events:auto}
+body.flip .ab{right:auto;left:24px}
+.abtn{position:absolute;width:72px;height:72px;border-radius:50%;background:#2a2a34;color:#fff;border:2px solid #55555f;font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
+.a-a{right:0;bottom:0}.a-b{left:0;bottom:0}
+.abtn:active{background:#c03028}
+.sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:24px;display:flex;gap:8px;pointer-events:auto}
+.sysbtn{background:#2a2a34;color:#ccc;border:2px solid #55555f;border-radius:14px;font-size:10px;padding:10px 14px;min-height:44px;pointer-events:auto}
+.cmdpanel{position:absolute;left:24px;bottom:24px;right:24px;display:grid;grid-template-columns:1fr 1fr;gap:8px;pointer-events:auto}
+body.desktop .controls{display:none}
+body.desktop.showtouch .controls{display:block}
+@media (pointer:coarse){body.desktop .controls{display:block}}
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="game"></canvas></div>
+<div id="ui"></div>
+<script src="game.js"></script>
+<!-- contentHash:245914c0993f0e6f7c126a0bcdc0b21e931eb5d3588bd21366b79c70fc1236b7 -->
+</body>
+</html>

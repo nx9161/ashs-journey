@@ -1,0 +1,11 @@
+# gitleaks config — Ash's Journey
+# House rule: no secrets in code, ever. The build and CI also run a contamination scan.
+
+[extend]
+useDefault = true
+
+[[rules]]
+description = "Ash's Journey: never allow Supabase/better-auth-shaped secrets even in Track B stubs"
+id = "aj-blocked-secrets"
+regex = '''(?i)(supabase[_-]?key|service[_-]?role|better[_-]?auth[_-]?secret|database[_-]?url)\s*[:=]\s*['\"][^'\"]+['\"]'''
+tags = ["secrets", "ashs-journey"]
