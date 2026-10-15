@@ -18,6 +18,8 @@ globalThis.localStorage = {
   removeItem: (k) => { delete memStore[k]; },
 };
 // document/window/AudioContext/requestAnimationFrame stay undefined -> headless paths.
+// Deterministic seed (architecture §7.1): same seed + same inputs = identical playthrough.
+globalThis.__SEED__ = 20261015;
 
 const gameJs = buildGameJs();
 
@@ -130,7 +132,9 @@ const driver = `
   ok('dex seen registered', !!game.state.dex.seen[SPECIES[b.foe.speciesId].dexNo]);
 
   // ----- 5. battle: weaken, then catch (real catch math + theater) -----
+  // Plays like a real player: potions when low, balls once the foe is weakened.
   game.state.bag.pokeball = 20; // harness stock for the catch-flow check
+  game.state.bag.potion = 3;
   drainDialog();
   guard = 0;
   const foeSpecies = b.foe.speciesId, foeDex = SPECIES[foeSpecies].dexNo;
@@ -141,12 +145,21 @@ const driver = `
     if (ui.menuOpen) {
       const m = ui.menu;
       if (m.kind === 'commands') {
-        if (b.foe.hp > b.foe.maxHp * 0.35) choose(firstEnabled(m)); // FIGHT
-        else choose(1); // BAG
+        const low = b.ally.hp < b.ally.maxHp * 0.45;
+        if (low && (game.state.bag.potion || 0) > 0) choose(1); // BAG -> potion
+        else if (b.foe.hp > b.foe.maxHp * 0.5) choose(firstEnabled(m)); // FIGHT
+        else choose(1); // BAG -> ball
       } else if (m.title === 'Choose a move') { choose(bestMoveIdx(b)); }
       else if (m.title === 'Bag') {
-        const idx = m.items.findIndex((it) => it.label.indexOf('Poke Ball') === 0 && !it.disabled);
+        const low = b.ally.hp < b.ally.maxHp * 0.7;
+        let idx = -1;
+        if (low) idx = m.items.findIndex((it) => it.label.indexOf('Potion') === 0 && !it.disabled);
+        if (idx < 0) idx = m.items.findIndex((it) => it.label.indexOf('Poke Ball') === 0 && !it.disabled);
         choose(idx >= 0 ? idx : m.items.length - 1);
+      }
+      else if (m.title === 'Use Potion on...') {
+        const idx = game.state.party.findIndex((mm) => mm === b.ally);
+        choose(idx);
       }
       else if (m.title === 'Choose next Pokemon' || m.title === 'Party') {
         const idx = game.state.party.findIndex((mm) => mm.hp > 0 && mm !== b.ally);

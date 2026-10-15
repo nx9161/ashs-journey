@@ -21,6 +21,11 @@ import { displayName, dexCaughtCount, defaultState } from './state.mjs';
 import { SaveStore, freshState } from '../save/store.mjs';
 import { SFX } from '../engine/audio.mjs';
 
+function nextSeed() {
+  if (typeof globalThis !== 'undefined' && globalThis.__SEED__) return globalThis.__SEED__ >>> 0;
+  return (Date.now() ^ (Math.random() * 1e9)) >>> 0;
+}
+
 const doc = (typeof document !== 'undefined') ? document : {
   createElement: (tag) => {
     if (tag === 'canvas') {
@@ -54,7 +59,7 @@ export class Game {
     this.loop = new Loop(this);
     this.store = new SaveStore();
     this.state = freshState();
-    this.rng = makeRngStreams((Date.now() ^ (Math.random() * 1e9)) >>> 0);
+    this.rng = makeRngStreams(nextSeed());
     this.tileCache = buildTileCache(doc);
     this.spriteCache = {};
     this.npcCache = {};
@@ -151,7 +156,7 @@ export class Game {
   newGame() {
     this.state = freshState();
     this.state.player.name = 'ASH';
-    this.rng = makeRngStreams((Date.now() ^ (Math.random() * 1e9)) >>> 0);
+    this.rng = makeRngStreams(nextSeed());
     this.skipIntroVeteran = this.store.exists();
     this.scenes.replace(new IntroScene());
   }

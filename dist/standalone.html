@@ -3199,6 +3199,11 @@ class OverworldScene {
 // Battle/overworld menus (Bag/Party/Dex/Save/Options) live here as UI states.
 
 
+function nextSeed() {
+  if (typeof globalThis !== 'undefined' && globalThis.__SEED__) return globalThis.__SEED__ >>> 0;
+  return (Date.now() ^ (Math.random() * 1e9)) >>> 0;
+}
+
 const doc = (typeof document !== 'undefined') ? document : {
   createElement: (tag) => {
     if (tag === 'canvas') {
@@ -3232,7 +3237,7 @@ class Game {
     this.loop = new Loop(this);
     this.store = new SaveStore();
     this.state = freshState();
-    this.rng = makeRngStreams((Date.now() ^ (Math.random() * 1e9)) >>> 0);
+    this.rng = makeRngStreams(nextSeed());
     this.tileCache = buildTileCache(doc);
     this.spriteCache = {};
     this.npcCache = {};
@@ -3329,7 +3334,7 @@ class Game {
   newGame() {
     this.state = freshState();
     this.state.player.name = 'ASH';
-    this.rng = makeRngStreams((Date.now() ^ (Math.random() * 1e9)) >>> 0);
+    this.rng = makeRngStreams(nextSeed());
     this.skipIntroVeteran = this.store.exists();
     this.scenes.replace(new IntroScene());
   }
@@ -3527,6 +3532,6 @@ if (typeof window !== 'undefined') {
 }
 
 </script>
-<!-- contentHash:245914c0993f0e6f7c126a0bcdc0b21e931eb5d3588bd21366b79c70fc1236b7 -->
+<!-- contentHash:2cf8717f7a9e1c9f8ae03b34160cf31ad0a4443bd09df46ead5043e59a4242a8 -->
 </body>
 </html>
