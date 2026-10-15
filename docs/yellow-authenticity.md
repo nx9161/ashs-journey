@@ -79,4 +79,4 @@ New beats get original chiptune: the `trainer-spot` alert sting joins the existi
 - `scripts/verify-slice.mjs`: 19 new `qa y*` asserts (rival rule, refusal guards, spot SFX, sight-line challenge end-to-end, duo ambush end-to-end, mood hooks) — all pass; full suite exit 0.
 - `scripts/verify-audio.mjs`: 23 PASS (new `trainer-spot` table passes the contract schema).
 - `scripts/contamination-scan.mjs`: clean. `scripts/drift-gate.mjs` + `scripts/budgets-check.mjs`: pass.
-- Palace: recorded as ADR-013 in `memory/wings/projects/pikachu-ds-remake/halls/decisions.md`.
+- Palace: recorded as ADR-016 in `memory/wings/projects/pikachu-ds-remake/halls/decisions.md` (renumbered from ADR-013 to resolve a collision with Tech Law's ADR-013).
