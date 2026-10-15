@@ -7132,6 +7132,8 @@ class Game {
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
     // P1/K3 + I2: desktop hint card; show-touch toggle honored on hybrids.
     document.body.classList.toggle('showtouch', !!this.state.settings.showTouch);
+    // Headless harness stubs document without documentElement — guard it.
+    if (document.documentElement) document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1);
     this.ui.showHintCard(this.layoutMode === 'desktop');
   }
 
@@ -7417,6 +7419,7 @@ class Game {
       { label: 'Reduced motion: ' + yn(s.reducedMotion), value: 'rmotion' },
       { label: 'Flip controls: ' + yn(s.controlsFlip), value: 'flip' },
       { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
+      { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
       { label: 'Legal / credits', value: 'legal' },
       { label: 'Erase save', value: 'erase' },
       { label: 'Close', value: 'close' },
@@ -7436,6 +7439,11 @@ class Game {
       else if (v === 'showtouch') {
         s.showTouch = !s.showTouch;
         if (typeof document !== 'undefined') document.body.classList.toggle('showtouch', !!s.showTouch);
+      }
+      else if (v === 'hudscale') {
+        // P1/I2: HUD scale row (the setting existed with no UI).
+        s.hudScale = s.hudScale >= 1.5 ? 1 : Math.round((s.hudScale + 0.25) * 100) / 100;
+        if (typeof document !== 'undefined') document.documentElement.style.setProperty('--hudscale', s.hudScale);
       }
       else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
       else if (v === 'erase') {

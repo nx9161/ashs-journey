@@ -189,7 +189,8 @@ export class Game {
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
     // P1/K3 + I2: desktop hint card; show-touch toggle honored on hybrids.
     document.body.classList.toggle('showtouch', !!this.state.settings.showTouch);
-    document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1);
+    // Headless harness stubs document without documentElement — guard it.
+    if (document.documentElement) document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1);
     this.ui.showHintCard(this.layoutMode === 'desktop');
   }
 
