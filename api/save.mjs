@@ -9,8 +9,12 @@
 //   - 413 when Content-Length (or actual bytes) > 65536 BEFORE JSON parse.
 //   - Hand-rolled validator -> 422 + ROLLBACK (previous-good row retained by
 //     construction). Structurally-valid-but-impossible -> accepted + anomaly_log.
-//   - expectedVersion null -> first-write INSERT (ON CONFLICT DO NOTHING;
-//     0 rows => a row appeared concurrently => 409, client re-reads meta).
+//   - expectedVersion null/undefined/0 -> first-write INSERT (ON CONFLICT
+//     DO NOTHING; 0 rows => a row appeared concurrently => 409, client
+//     re-reads meta). 0 is an accepted first-write signal: save versions
+//     start at 1, so 0 unambiguously means "no version known" (F1: the
+//     sync client sends 0 for unknown/first-write). Negative versions are
+//     rejected (invalid_request).
 //     This is the guest->registered claim path: atomic first-wins at the DB
 //     (RLS §2.9); the loser gets the conflict sheet, never an overwrite.
 //   - expectedVersion set -> CAS UPDATE ... WHERE version = $expectedVersion.
@@ -152,9 +156,13 @@ async function handlePut(req) {
   if (!Number.isInteger(slot) || slot < 1 || slot > 3) return invalidRequest();
   const expectedVersion = body.expectedVersion;
   if (!(expectedVersion === null || expectedVersion === undefined) &&
-      (!Number.isInteger(expectedVersion) || expectedVersion < 1)) {
+      (!Number.isInteger(expectedVersion) || expectedVersion < 0)) {
     return invalidRequest();
   }
+  // First-write signal: null/undefined/0. Versions start at 1, so 0
+  // unambiguously means "no version known" — the client sends 0 for
+  // unknown/first-write (sync.mjs _lastSyncedVersion, claimGuest,
+  // login-merge). Both route into the atomic first-write INSERT below.
 
   const ip = trustedClientIP(req) || 'unknown';
   const rl = await rateLimitSave(userId, ip);
@@ -172,7 +180,7 @@ async function handlePut(req) {
 
   try {
     const result = await withSaveTx(userId, async (client) => {
-      if (expectedVersion === null || expectedVersion === undefined) {
+      if (expectedVersion === null || expectedVersion === undefined || expectedVersion === 0) {
         // First-write path: atomic INSERT (guest->account claim, §2.9).
         const ins = await client.query(
           `INSERT INTO saves (user_id, slot, payload, schema_version, version, client_updated_at, updated_at)

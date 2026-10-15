@@ -74,8 +74,11 @@ Until then, all auth code paths stay dark and the game ships guest-only.
 
 - 3 slots/user, ≤64 KB payload (413 pre-parse gate + DB CHECK), slots 1–3.
 - Version-counter CAS: `PUT {slot, payload, expectedVersion}` →
-  `200 {version, updatedAt}`; `expectedVersion: null` = first-write atomic
-  INSERT (guest→account claim, first-wins; loser gets 409 → conflict sheet);
+  `200 {version, updatedAt}`; `expectedVersion` of `null`, `undefined`, or
+  `0` = first-write atomic INSERT (guest→account claim, first-wins; loser
+  gets 409 → conflict sheet). 0 is accepted because versions start at 1, so
+  it unambiguously means "no version known" — the client sends 0 for
+  unknown/first-write (F1). Negative versions → `invalid_request`.
   stale version → `409 {error:"version_conflict", serverVersion}`;
   invalid payload → `422` + ROLLBACK (previous-good row kept).
 - RLS option (a): explicit `BEGIN` on one pooled client,
