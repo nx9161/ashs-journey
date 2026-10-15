@@ -1,17 +1,37 @@
 // build.mjs — zero-dependency build (Node stdlib only: fs/path/crypto).
-// One source tree -> two bundles from the same concatenated game JS:
-//   Bundle A (guest): dist/standalone.html — single self-contained file, offline.
-//   Bundle B (vercel): public/index.html + public/game.js — static client.
+// One source tree -> three targets from the same concatenated game JS:
+//   Bundle A (guest):    dist/standalone.html — single self-contained file, offline.
+//   Bundle B (vercel):   public/index.html + public/game.js — static client.
+//   Bundle C (personal): personal/index.html + personal/game.js — static client.
 // Build targets:
-//   --target=vercel : public/game.js + public/index.html (full client, auth UI compiled IN)
-//   --target=guest  : dist/standalone.html (guest single-file, auth UI compiled OUT)
-//   (default: both)
+//   --target=vercel   : public/game.js + public/index.html (full client, auth UI compiled IN)
+//   --target=guest    : dist/standalone.html (guest single-file, auth UI compiled OUT)
+//   --target=personal : personal/game.js + personal/index.html (ADR-012 "Naman's edition")
+//   (default: all)
 // Auth code paths are compile-time feature-flagged:
 //   * lines between `// __AUTH_BEGIN__` and `// __AUTH_END__` are STRIPPED from the
-//     guest target (block strip, build fails on unbalanced markers);
-//   * the token `/*__AUTH_ENABLED__*/` is replaced with `true` (vercel) or `false` (guest).
-// The guest bundle therefore contains zero auth code and zero `/api/` references
-// (asserted as a hard build gate below — PRD AC#1 / Tech Law COPPA cleanliness).
+//     guest and personal targets (block strip, build fails on unbalanced markers);
+//   * the token `/*__AUTH_ENABLED__*/` is replaced with `true` (vercel) or `false` (guest, personal);
+//   * the token `/*__EDITION_MARKER__*/` is replaced with `''` (vercel, guest) or
+//     `"NAMAN'S EDITION"` (personal) — see ADR-012 delta note below.
+// The guest and personal bundles therefore contain zero auth code and zero `/api/`
+// references (asserted as a hard build gate below — PRD AC#1 / Tech Law COPPA cleanliness).
+//
+// ---- ADR-012 personal-edition delta (2026-10-15) ----
+// The personal target REUSES the guest auth-strip machinery exactly — the personal
+// bundle is the guest bundle plus ONE difference: the EDITION_MARKER token
+// resolves to "NAMAN'S EDITION" (a subtle gold ribbon under the subtitle on the
+// title screen; src/game/title.mjs) instead of ''. Consequences, all deliberate:
+//   * No login UI of any kind — the Trainer ID Terminal is compile-time stripped
+//     (zero auth affordances; the title menu routes straight to New/Continue).
+//   * Saves are localStorage-only (identical to the guest path); no /api/* calls,
+//     no session code in the bundle.
+//   * The hard zero-network gate applies identically to the personal target.
+//   * Output mirrors the multi-file public/ layout (index.html + game.js) for
+//     static Vercel serving. NO api/ functions ship with this target — access
+//     control lives at the hosting layer (a separate Vercel project with Vercel
+//     Authentication, Standard Protection).
+//   * GC-verbatim disclaimers and credits are byte-identical across all targets.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -79,9 +99,19 @@ export function stripAuthBlocks(js) {
   return out.join('\n').split('const AUTH_ENABLED = true;').join('const AUTH_ENABLED = false;');
 }
 
+// EDITION_MARKER literal table (ADR-012). The literal is the JS-source text that
+// replaces the `/*__EDITION_MARKER__*/` token in src/game/title.mjs. Exported so
+// drift-gate.mjs can assert personal ≡ guest + marker with no duplication.
+export const EDITION_MARKER_LITERAL = {
+  none: `''`,
+  personal: `"NAMAN'S EDITION"`,
+};
+
 export function buildGameJs(opts) {
   opts = opts || {};
-  const auth = opts.auth !== false; // default: full (vercel) bundle
+  const edition = opts.edition || (opts.auth === false ? 'guest' : 'vercel');
+  const auth = edition === 'vercel'; // only the public vercel target carries auth UI
+  const marker = edition === 'personal' ? EDITION_MARKER_LITERAL.personal : EDITION_MARKER_LITERAL.none;
   const order = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'module-order.json'), 'utf8'));
   const parts = [];
   for (const rel of order) {
@@ -91,8 +121,11 @@ export function buildGameJs(opts) {
   }
   let js = parts.join('\n');
   // Compile-time auth flag: `const AUTH_ENABLED = /*__AUTH_ENABLED__*/;` ->
-  // true in the vercel bundle, false in the guest bundle.
+  // true in the vercel bundle, false in the guest and personal bundles.
   js = js.split('/*__AUTH_ENABLED__*/').join(auth ? 'true' : 'false');
+  // Compile-time edition marker: `const EDITION_MARKER = /*__EDITION_MARKER__*/;`
+  // -> "NAMAN'S EDITION" in the personal bundle, '' everywhere else.
+  js = js.split('/*__EDITION_MARKER__*/').join(marker);
   // Guard: no unresolved module syntax survived the transform.
   for (const line of js.split('\n')) {
     const t = line.trim();
@@ -347,17 +380,37 @@ function shellHtml({ gameJs, inline }) {
     scriptTag + '\n</body>\n</html>\n';
 }
 
+// HARD GATE (PRD AC#1, Tech Law COPPA cleanliness): a zero-network bundle makes
+// zero network calls of any kind — fail the build if any survive the strip.
+// Applies identically to the guest and personal targets (ADR-012 §4).
+function zeroNetworkGate(js, label) {
+  const netHits = [];
+  const fetchN = (js.match(/fetch\s*\(/g) || []).length;
+  if (fetchN) netHits.push('fetch(:' + fetchN);
+  const apiN = (js.match(/\/api\//g) || []).length;
+  if (apiN) netHits.push('/api/:' + apiN);
+  const beaconN = (js.match(/sendBeacon/g) || []).length;
+  if (beaconN) netHits.push('sendBeacon:' + beaconN);
+  for (const pat of [/XMLHttpRequest/, /new WebSocket/, /https?:\/\//]) {
+    const n = (js.match(pat) || []).length;
+    if (n) netHits.push(pat + ':' + n);
+  }
+  if (netHits.length) fail(label + ' bundle has network references (auth strip leaked): ' + netHits.join(', '));
+}
+
 async function main() {
-  const wantVercel = !process.argv.includes('--target=guest');
-  const wantGuest = !process.argv.includes('--target=vercel');
+  const TARGETS = ['vercel', 'guest', 'personal'];
+  const explicit = TARGETS.filter((t) => process.argv.includes('--target=' + t));
+  const want = (t) => explicit.length === 0 || explicit.includes(t);
   await validateData();
 
   fs.mkdirSync(path.join(ROOT, 'dist'), { recursive: true });
   fs.mkdirSync(path.join(ROOT, 'public'), { recursive: true });
+  fs.mkdirSync(path.join(ROOT, 'personal'), { recursive: true });
 
-  let vercelJs = null, guestJs = null;
+  let vercelJs = null, guestJs = null, personalJs = null;
 
-  if (wantVercel) {
+  if (want('vercel')) {
     // Bundle B: vercel static client (full auth UI compiled in).
     vercelJs = buildGameJs({ auth: true });
     const vhash = crypto.createHash('sha256').update(vercelJs).digest('hex');
@@ -369,21 +422,10 @@ async function main() {
     console.log('public/game.js + index.html: ' + (vercelJs.length + indexHtml.length) + ' bytes');
   }
 
-  if (wantGuest) {
+  if (want('guest')) {
     // Bundle A: guest single-file (auth UI compile-time stripped, offline).
     guestJs = buildGameJs({ auth: false });
-    // HARD GATE (PRD AC#1, Tech Law COPPA cleanliness): the guest bundle makes
-    // zero network calls of any kind — fail the build if any survive the strip.
-    const netHits = [];
-    const fetchN = (guestJs.match(/fetch\s*\(/g) || []).length;
-    if (fetchN) netHits.push('fetch(:' + fetchN);
-    const apiN = (guestJs.match(/\/api\//g) || []).length;
-    if (apiN) netHits.push('/api/:' + apiN);
-    for (const pat of [/XMLHttpRequest/, /new WebSocket/, /https?:\/\//]) {
-      const n = (guestJs.match(pat) || []).length;
-      if (n) netHits.push(pat + ':' + n);
-    }
-    if (netHits.length) fail('guest bundle has network references (auth strip leaked): ' + netHits.join(', '));
+    zeroNetworkGate(guestJs, 'guest');
     const ghash = crypto.createHash('sha256').update(guestJs).digest('hex');
     console.log('game.js (guest, auth stripped): ' + guestJs.length + ' bytes, contentHash ' + ghash.slice(0, 16) + '...');
     const standalone = shellHtml({ gameJs: guestJs, inline: true })
@@ -392,9 +434,25 @@ async function main() {
     console.log('dist/standalone.html: ' + standalone.length + ' bytes (zero-network gate: PASS)');
   }
 
+  if (want('personal')) {
+    // Bundle C (ADR-012): personal edition — the guest auth-strip path, plus
+    // the EDITION_MARKER title ribbon. Multi-file layout mirroring public/
+    // (index.html + game.js) for static Vercel serving. No api/ functions.
+    personalJs = buildGameJs({ edition: 'personal' });
+    zeroNetworkGate(personalJs, 'personal');
+    const phash = crypto.createHash('sha256').update(personalJs).digest('hex');
+    console.log('game.js (personal, auth stripped + marker): ' + personalJs.length + ' bytes, contentHash ' + phash.slice(0, 16) + '...');
+    fs.writeFileSync(path.join(ROOT, 'personal', 'game.js'), personalJs);
+    const personalHtml = shellHtml({ gameJs: null, inline: false })
+      .replace('</body>', '<!-- contentHash:' + phash + ' -->\n</body>');
+    fs.writeFileSync(path.join(ROOT, 'personal', 'index.html'), personalHtml);
+    console.log('personal/game.js + index.html: ' + (personalJs.length + personalHtml.length) + ' bytes (zero-network gate: PASS)');
+  }
+
   fs.writeFileSync(path.join(ROOT, 'dist', 'content-hash.txt'),
     (guestJs ? 'guest:' + crypto.createHash('sha256').update(guestJs).digest('hex') + '\n' : '') +
-    (vercelJs ? 'vercel:' + crypto.createHash('sha256').update(vercelJs).digest('hex') + '\n' : ''));
+    (vercelJs ? 'vercel:' + crypto.createHash('sha256').update(vercelJs).digest('hex') + '\n' : '') +
+    (personalJs ? 'personal:' + crypto.createHash('sha256').update(personalJs).digest('hex') + '\n' : ''));
   console.log('build OK');
 }
 
