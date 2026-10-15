@@ -1,0 +1,169 @@
+pass  boot scene pushed
+pass  legal phase first
+pass  disclaimer title verbatim
+pass  disclaimer non-affiliation verbatim
+pass  disclaimer non-commercial verbatim
+pass  not interactive before dwell
+pass  interactive after 3s dwell
+pass  title phase
+pass  game title line
+pass  intro scene
+pass  professor dialogue opens
+pass  intro skips nothing: 6 lines
+pass  name entry menu
+pass  starter moment dialogue
+pass  overworld after intro
+pass  partner joins party
+pass  pikachu refuses ball flag
+pass  dex caught pikachu (#25)
+pass  starts in pallet
+pass  walked + warped to route1
+pass  player moved
+pass  wild encounter triggered
+pass  wild kind
+pass  foe is route-1 species
+pass  foe level in range
+pass  dex seen registered
+pass  battle resolved
+pass  caught the wild mon
+pass  caught mon in party or box
+pass  area completion ticks
+pass  save ok
+pass  save <= 64KB budget
+pass  localStorage key written
+pass  gym map loads
+pass  reached brock
+pass  brock intro dialogue
+pass  brock battle starts
+pass  brock team size
+pass  brock defeated
+pass  beat_brock flag
+pass  boulder badge awarded
+pass  capstone shown
+pass  post-gym save ok
+pass  continue loads overworld
+pass  position restored (gym)
+pass  badge persisted
+pass  party persisted
+pass  dex persisted
+
+verify-slice: 48/48 passed
+qa-pass qa s3a guest/full bundle checksum match
+qa-pass qa s3a content-hash comment matches game code
+qa-pass qa s3a vercel shell loads game.js
+qa-pass qa s3a guest bundle is shell-first (zero external scripts)
+qa-pass qa s4 guest fetch( count = 0 (bundles + src)
+qa-pass qa s4 no XHR/WebSocket/dynamic-import in guest bundles
+qa-pass qa s5 tap targets >= 44px (gameux §2)
+qa-pass qa s1 no gradient/glow API calls in src (slop blacklist)
+qa-pass qa s1 no emoji in UI strings (slop blacklist)
+qa-pass qa s1 no placeholder/coming-soon screens in src
+qa-pass qa s1 account row is a disabled stub, not a placeholder screen
+qa-pass qa s1 exactly one drop-shadow style (gameux §6)
+QA-FAIL qa s1 slop blacklist: text >= 14 logical px — DEFECT QA-001 — 20 violations: src/game/battle.mjs:size8, src/game/battle.mjs:size8, src/game/battle.mjs:size8, src/game/battle.mjs:size8, src/game/battle.mjs:size7, src/game/battle.mjs:size7, src/game/battle.mjs:size7, src/game/intro.mjs:size10, src/game/overworld.mjs:size12, src/game/overworld.mjs:size10 | DOM: css:11px,css:12px,css:10px
+QA-FAIL qa s2 move buttons carry type badge (icon+text) — DEFECT QA-002 — label builds: label: mv.name + '  ' + m.pp + '/' + m.maxPp,
+qa-pass qa l2 phys/spec stat routing (battle engine)
+qa-info HP luminance under CVD sims: {"protanopia":{"high":"0.246","mid":"0.657","low":"0.321"},"deuteranopia":{"high":"0.199","mid":"0.685","low":"0.421"},"tritanopia":{"high":"0.206","mid":"0.305","low":"0.198"}}
+qa-pass qa s2 stripe overlay drawn at <=25% HP
+qa-pass qa s2 no stripe overlay above 25% HP
+qa-pass qa s2 status pip is text, not color alone
+qa-pass qa s3b guest bundle plays the slice
+qa-pass qa s3b full bundle plays the slice
+qa-pass qa s3b both bundles byte-identical playthrough
+qa-pass qa s6 fuzz: truncated json
+qa-pass qa s6 fuzz: not json
+qa-pass qa s6 fuzz: empty object
+qa-pass qa s6 fuzz: json null
+qa-pass qa s6 fuzz: json array
+qa-pass qa s6 fuzz: bad schema version
+qa-pass qa s6 fuzz: v0 with missing player (migrate then reject)
+qa-pass qa s6 fuzz: unknown top-level key
+qa-pass qa s6 fuzz: __proto__ pollution key
+qa-pass qa s6 fuzz: party of 7
+qa-pass qa s6 fuzz: mon level 0
+qa-pass qa s6 fuzz: mon level 101
+qa-pass qa s6 fuzz: mon 5 moves
+qa-pass qa s6 fuzz: mon speciesId null
+qa-pass qa s6 fuzz: player.name numeric
+qa-pass qa s6 fuzz: badges.kanto not array
+qa-pass qa s6 fuzz: dex null
+qa-pass qa s6 fuzz: story.position missing
+qa-pass qa s6 fuzz: valid control
+qa-pass qa s6 no prototype pollution from __proto__ key
+qa-pass qa s7 fresh write accepted (200, version+1)
+qa-pass qa s7 stale write -> 409, server untouched
+qa-pass qa s7 conflict keeps latest queued full snapshot (ADR-007 D4iv)
+qa-pass qa s7 rebase+retry succeeds (200)
+qa-pass qa s7 invalid payload -> 422, previous-good retained
+qa-pass qa s7 concurrent same-base: first wins, second 409s
+qa-info soak overworld 4000 ticks: mean=0.003ms p99=0.008ms max=2.884ms
+qa-pass qa s8 overworld logic <= 4ms mean (ADR-007)
+qa-pass qa s8 overworld p99 < 16.6ms (60fps headroom)
+qa-info soak battle 4000 ticks: mean=0.002ms p99=0.001ms max=2.296ms
+qa-pass qa s8 battle logic <= 4ms mean (ADR-007)
+qa-pass qa s8 battle max tick < 50ms (no hitches)
+qa-pass qa l1 damage formula exact (L5/P40/A12/D10 = 5)
+qa-pass qa l1 STAB 1.5x
+qa-pass qa l1 crit 2x (Gen 2-5)
+qa-pass qa l1 burn halves physical
+qa-pass qa l1 burn does not halve special
+qa-pass qa l1 random bounds 0.85/1.00
+qa-pass qa l1 damage floor is 1 (via random low-roll)
+qa-pass qa l2 move cats are physical/special/status only
+qa-pass qa l2 thundershock special / tackle physical (Gen 4 split)
+qa-pass qa l2 damage scales with the routed stat
+qa-pass qa l3 type chart: 12 documented matchups
+qa-pass qa l3 crit chance 1/16 (Gen 2-5)
+qa-pass qa l3 random range 0.85-1.00
+qa-pass qa l3 stage ladder
+qa-pass qa l4 catch formula: full-HP pidgey a=85
+qa-pass qa l4 sleep/freeze bonus 2.5x (Gen 5)
+qa-pass qa l4 para/poison/burn bonus 1.5x (Gen 5)
+qa-pass qa l4 a>=255 guarantees 3 shakes
+qa-pass qa l4 low-a throws can fail outright
+qa-pass qa l4 ball bonuses (1x / 1.5x / 2x)
+qa-pass qa l5 xp curves: documented values
+QA-FAIL qa l5 xp yield formula (wild 1x, trainer 1.5x)
+qa-pass qa l5 turn order: priority beats speed
+qa-pass qa l5 paralysis quarters speed (Gen 4-6)
+qa-pass qa l6 brock team: geodude 12, onix 14 ace
+qa-pass qa l6 boulder badge is a key item
+qa-pass qa l6 gym ace within Ch1 early band (GD §5)
+qa-pass qa l6 brock has intro + defeat dialogue
+qa-pass qa l7 save/load round-trip preserves state
+qa-pass qa l7 save <= 64KB budget
+qa-pass qa l8 dex tracks 1025, slice roster honest (14)
+qa-pass qa l8 frontier-ready hooks (7 symbol slots + befriended state)
+qa-pass qa f1 encounter 3-beat ~= 900ms (rustle 200 + ! 300 + transition 400)
+qa-pass qa f2 catch theater <= 8s (gameux §4.2)
+qa-info catch theater: 3000ms sim (budget 8000ms)
+qa-pass qa f3 wild battle (intro -> XP) <= 45s (GD §6.2)
+qa-info wild battle pace: 1.7s sim, best-move driver (best case)
+qa-info encounter gaps (2 samples, seed 20240): 2,3
+QA-FAIL qa f4 cadence measurable: 12 encounters within 900 steps — DEFECT QA-003 if not — 2 encounters in 900 steps
+qa-info cadence stats: mean=2.50 max=3
+qa-pass qa f4 no silent stretch > 20 steps (anti-frustration)
+qa-pass qa f4 no triple encounter chains
+QA-FAIL qa f4 encounter cadence sane (target 8-14 avg) — mean=2.5
+QA-FAIL qa f4b chain counter decays on non-encounter steps — DEFECT QA-003 — chainCount=2 (encounters stay dead after any double-chain)
+qa-pass qa f5 tile step ~200ms, snappy (GD feel note)
+qa-info first-catch model: legal 3.0s + title 0.6s + intro 35.0s (886 chars, 11 lines) + walk 5.2s + encounter 4.9s + battle 1.7s + theater 3.0s = 54.2s (budget 180s)
+qa-pass qa f6 first catch < 3min from boot (gameux §5)
+qa-pass qa s9 battle boots at intro
+qa-pass qa s9 rotation: portrait mid-intro
+qa-pass qa s9 battle reaches command
+qa-pass qa s9 rotation: landscape mid-command
+qa-pass qa s9 command menu intact across rotation
+qa-pass qa s9 moves submenu
+qa-pass qa s9 rotation: portrait mid-moves
+qa-pass qa s9 resolve state
+qa-pass qa s9 rotation mid-resolve keeps battle + refs
+qa-pass qa s9 battle 1 resolves after rotations
+qa-pass qa s9 bag menu
+qa-pass qa s9 rotation: desktop mid-bag
+qa-pass qa s9 poke ball listed in bag
+qa-pass qa s9 catchseq started
+qa-pass qa s9 rotation: landscape mid-catch-theater
+qa-pass qa s9 battle 2 resolves after theater+rotation
+
+qa-slice: 103/109 passed
