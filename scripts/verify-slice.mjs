@@ -21,7 +21,25 @@ globalThis.localStorage = {
 // Deterministic seed (architecture §7.1): same seed + same inputs = identical playthrough.
 globalThis.__SEED__ = 20261015;
 
-const gameJs = buildGameJs();
+// --target=personal: run the slice against the ADR-012 personal build
+// (guest auth-strip + EDITION_MARKER). Default: the full vercel bundle.
+const forPersonal = process.argv.includes('--target=personal');
+const gameJs = forPersonal ? buildGameJs({ edition: 'personal' }) : buildGameJs();
+
+// ADR-012: when running against the personal build, assert the edition marker
+// is compiled in and the full auth UI implementation is stripped before the
+// playthrough starts. (The AUTH stub surface — e.g. showLoginPanel routing
+// straight to guest with zero UI — ships in the guest bundle too: signed
+// Track-A behavior, so the check targets full-implementation-only identifiers,
+// same list as scripts/drift-gate.mjs §3b.)
+if (forPersonal) {
+  const markerOk = gameJs.includes(`const EDITION_MARKER = "NAMAN'S EDITION";`);
+  const authIds = ['showCodesPane', 'openPrivacyModal', 'PRIVACY_DRAFT', 'accountDelete', 'recoveryCodes', '__AUTH_BEGIN__'];
+  const authStripped = !authIds.some((id) => gameJs.includes(id));
+  console.log((markerOk ? 'pass' : 'FAIL') + '  personal edition marker compiled in');
+  console.log((authStripped ? 'pass' : 'FAIL') + '  personal bundle has zero auth UI');
+  if (!markerOk || !authStripped) process.exit(1);
+}
 
 const driver = `
 ;(function () {

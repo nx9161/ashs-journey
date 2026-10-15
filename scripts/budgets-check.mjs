@@ -17,29 +17,43 @@ function gate(name, actual, max) {
 const dist = path.join(ROOT, 'dist', 'standalone.html');
 const pubJs = path.join(ROOT, 'public', 'game.js');
 const pubHtml = path.join(ROOT, 'public', 'index.html');
+const perJs = path.join(ROOT, 'personal', 'game.js');
+const perHtml = path.join(ROOT, 'personal', 'index.html');
+
+// Zero-network gate (PRD AC#1; Tech Law's COPPA cleanliness): the guest and
+// personal bundles make ZERO network calls of any kind. build.mjs fails first;
+// this is the CI-level enforcement (budgets.json guestBundleFetches:0).
+function zeroNetGate(content, label) {
+  const hits = [];
+  const nFetch = (content.match(/fetch\s*\(/g) || []).length;
+  if (nFetch) hits.push('fetch(:' + nFetch);
+  const nApi = (content.match(/\/api\//g) || []).length;
+  if (nApi) hits.push('/api/:' + nApi);
+  const nBeacon = (content.match(/sendBeacon/g) || []).length;
+  if (nBeacon) hits.push('sendBeacon:' + nBeacon);
+  const nXhr = (content.match(/XMLHttpRequest|new WebSocket/g) || []).length;
+  if (nXhr) hits.push('xhr/ws:' + nXhr);
+  if (hits.length) { console.error('FAIL ' + label + ' zero-network gate: ' + hits.join(', ')); failed++; }
+  else console.log('PASS ' + label + ' zero-network gate (fetch + /api/ + beacon + xhr/ws = 0)');
+}
 
 if (!fs.existsSync(dist)) { console.error('FAIL: dist/standalone.html missing — run scripts/build.mjs first'); process.exit(1); }
 
 gate('guest bundle bytes (uncompressed)', fs.statSync(dist).size, hard.guestBundleMaxBytes);
-
-// Binding: the guest bundle makes ZERO network calls (PRD AC#1; Tech Law's
-// COPPA cleanliness — the zero-network guest-bundle QA gate). build.mjs fails
-// first; this is the CI-level enforcement of budgets.json guestBundleFetches:0.
-{
-  const guestHtml = fs.readFileSync(dist, 'utf8');
-  const hits = [];
-  const nFetch = (guestHtml.match(/fetch\s*\(/g) || []).length;
-  if (nFetch) hits.push('fetch(:' + nFetch);
-  const nApi = (guestHtml.match(/\/api\//g) || []).length;
-  if (nApi) hits.push('/api/:' + nApi);
-  const nXhr = (guestHtml.match(/XMLHttpRequest|new WebSocket/g) || []).length;
-  if (nXhr) hits.push('xhr/ws:' + nXhr);
-  if (hits.length) { console.error('FAIL guest bundle network gate: ' + hits.join(', ')); failed++; }
-  else console.log('PASS guest bundle zero-network gate (fetch + /api/ + xhr/ws = 0)');
-}
+zeroNetGate(fs.readFileSync(dist, 'utf8'), 'guest bundle');
 
 if (fs.existsSync(pubJs) && fs.existsSync(pubHtml)) {
   gate('vercel static bytes (uncompressed)', fs.statSync(pubJs).size + fs.statSync(pubHtml).size, hard.vercelStaticMaxBytes);
+}
+
+// ADR-012: the personal bundle gets the same budget + zero-network gates as the
+// guest bundle (same 12MB ADR-007 per-bundle ceiling; no api/ functions ship).
+if (!fs.existsSync(perJs) || !fs.existsSync(perHtml)) {
+  console.error('FAIL: personal/game.js or personal/index.html missing — run scripts/build.mjs --target=personal first');
+  failed++;
+} else {
+  gate('personal bundle bytes (uncompressed)', fs.statSync(perJs).size + fs.statSync(perHtml).size, hard.personalStaticMaxBytes);
+  zeroNetGate(fs.readFileSync(perJs, 'utf8') + fs.readFileSync(perHtml, 'utf8'), 'personal bundle');
 }
 
 // Zero-dep client gate: only relative imports in src (no npm packages, no require).
