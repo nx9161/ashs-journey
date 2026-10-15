@@ -4079,7 +4079,7 @@ const MAPS = {
     npcs: [
       { x: 5, y: 2, name: 'BROCK', skin: '#c89878', shirt: '#c8782a', pants: '#4a5a3a', hair: '#1a1a1a',
         trainer: 'brock',
-        dialogue: ["I'm Brock! I'm Pewter's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "My Pokemon are all rock hard, and have true-grit determination!"] },
+        dialogue: ["I'm Brock! I'm Pewter's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],
     encounters: null,
     start: null,

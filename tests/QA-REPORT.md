@@ -75,3 +75,47 @@
 4. Re-run `node scripts/verify-slice.mjs` on the integrated tree; 100% green required to close.
 
 *— QA Manager, seat 10. The gate is red until the defects are cleared; the evidence for clearing them is this harness, not a promise.*
+
+---
+
+# Changed-Flow Sign-off — ADR-015 (story chapters) + ADR-016 (Yellow authenticity) + D3 laptop viewports
+**Seat 10 · QA Manager (Black Panther) · focused sign-off, no full War Room · 2026-10-15 ~16:35 EDT**
+**Tested commit:** `361d70b` (main, post-merge of `feat/yellow-authenticity` + `feat/story-chapters-laptop`) · **local tree:** `~/workspace/ashs-journey` (clean)
+**Harness:** `tests/qa-changed-flows.mjs` — headless eval driver (same pattern as `verify-slice.mjs`), 67 asserts. Single command: `node tests/qa-changed-flows.mjs`. Exit 1 on any failure.
+**Automated gates re-run on this tree (not re-run inside the harness):** `verify-slice.mjs` 134/134 PASS · `contamination-scan.mjs` clean · `budgets-check.mjs` PASS · `drift-gate.mjs` PASS (personal === guest + EDITION_MARKER) · `verify-audio.mjs` ALL PASS.
+
+## Verdict: **GO-WITH-DEFECTS** (one P3 defect, fix below; does not block the push)
+
+67/67 asserts pass. Every changed flow behaves per ADR-015/016: chapter cards, Journey menu honesty, dex header, all six Yellow flows, and the D3 laptop-viewport math (16:9 aspect-lock at 1280×800, 1440×900, 1920×1080, plus the no-matchMedia fallback and the 4:3 phone-landscape regression case). One cosmetic-a11y defect filed (QA-005). Nothing in the data-loss / security / crash / IP class.
+
+## Pass rates
+
+| Suite | Asserts | Pass | Notes |
+|---|---|---|---|
+| A. Chapter title cards | 8 | 8 | fresh run opens Ch.1 card; modal; 4s auto-dismiss; A/START dismiss; B does not |
+| B. Journey menu (pause → Journey) | 13 | 13 | 30 rows; 5 playable enabled w/ (now); 8 locked + 14 bonus disabled; zero "coming soon"; detail cards; locked rows unopenable |
+| C. Pokédex chapter header | 2 | 2 | shows current chapter; follows story.chapter advance |
+| D. Yellow-authenticity flows | 19 | 19 | 5 moods + original lines; emote on talk; evolution/box refusal lines; rival 2-0/1-1/0-2 rule; 6 sight cones; Brock talk-only; verbatim two-beat intro; duo ambush |
+| E. Laptop viewports (D3) | 7 | 7 | 16:9 lock at all three sizes; keyboard map; 2×2 command panel; no-stretch; phone-landscape 4:3 regression |
+| Served-file / CSS / bundles | 18 | 18 | personal + public index.html served 200; CSS rules verified; personal bundle boots to overworld |
+
+## Defects filed
+
+- **QA-005 · Low (a11y) · Chapter-card hint blink ignores `prefers-reduced-motion`.** The ADR-015 criterion says the title card is "reduced-motion safe", and the code comment repeats it, but `.cc-hint` runs `animation:blink 1s infinite` (`personal/index.html` line 136) and the `@media (prefers-reduced-motion: reduce)` rule only covers `.loginover *,.authcard *,.banner503 *,.syncdot *`. The blink is a subtle 1s opacity pulse (not vestibular-triggering), but the stated criterion is violated. Pre-existing `.dlg-hint` shares the same blink and is also uncovered. **Fix (one line):** add `.chaptercard *,.dialogue *` to the reduced-motion selector list. **Owner:** Game UI/UX Designer. Re-verify: re-run `node tests/qa-changed-flows.mjs` (add a CSS assert) after the coordinator applies it. Does not block this push.
+
+## What was verified, by flow
+
+1. **Chapter title cards** — `a0–a7`: 13 chapters / 5 playable / 8 locked / 14 bonus in `src/data/story.mjs`; fresh new-game flow (boot → title → intro → name → overworld) opens the Chapter 1 card (`intro.mjs:98` → `startOverworld({ chapterCard: 0 })`); the card is modal (`ui.update` returns true, world input blocked); auto-dismisses at 4s of game time; A or START dismisses early; B does not. DOM tap path code-verified (pointerdown → `input.inject('a')` → the same tested dismiss branch). CSS: paper panel `#f8f8f0`, 3px ink border, gold kicker — Gen 4/5 idiom; all text ≥14px (14/22/15/14/14).
+2. **Journey menu** — `b1–b13`: 30 rows exactly (act header + 13 chapters + bonus header + 14 bonus + close); playable rows 1–5 enabled with values `ch1..ch5`, current chapter marked `(now)` and follows `story.chapter`; locked chapters 6–13 and all 14 BONUS entries are disabled, valueless (unopenable), labeled `locked (future act)` — no "coming soon" text anywhere, no placeholder screens, no fake content; playable rows open detail cards (kicker, title, arc, anime coverage, special events) that close back to the menu; locked rows cannot be chosen.
+3. **Pokédex header** — `c1–c2`: first dex row is a disabled `Journey — Ch.1 · The Indigo League` header; follows chapter advance (Ch.5 → Master Quest).
+4. **Yellow flows** — `d1–d19`: `PARTNER_MOODS` exactly 5 moods with distinct original lines; talk/pet emotes read the mood (sad → pet → happy + original line, mood-pip tap wired); partner species carries `refusesEvolution`/`refusesBox`, guards return the original refusal lines verbatim (`state.mjs` is the enforcement point); `rivalPartnerEvolution` implements 2-0→vaporeon / 1-1→flareon / 0-2→jolteon (losing-record default Jolteon), Gary raises an Eevee; exactly 6 route trainers have sight cones (`r1_cal, r1_lisa, r2_bug, r2_camper, r2_jr, r2_hiker`), Brock has none (talk-only); Cal's sight-line challenge fires the 500ms `!` spot beat + `trainer-spot` jingle, walks up, locks input, and opens the battle with the verbatim two-beat intro `Trainer Cal wants to battle!` → `Cal sent out Rattata!`; RUE & COLE both spot with `sight` cones, either pulls both in (2-part challenge), the battle is `r2_duo` with the nicknamed 2-mon team (Sting the Weedle 5 → Echo the Zubat 6), original intro banter, no trademarked team name or motto quotes.
+5. **Laptop viewports** — `e + served-file suite`: `applyLayout` desktop math produces exactly 1120×630 (16:9, zero stretch) at 1280×800, 1440×900, and 1920×1080, including the no-matchMedia fallback (width ≥1024 → desktop); keyboard map complete (Arrows/WASD, Z/Space=A, X=B, Enter=START, M=mute, F=fullscreen); battle command panel is a 2×2 FIGHT/BAG/PARTY/RUN grid whose element is a child of `#ui` root (not `.controls`), so `body.desktop .controls{display:none}` cannot hide it — verified in source and CSS; `.inbattle .hintcard{display:none}` + `setBattleMode` toggling `.inbattle` means the hint card never overlaps battle commands; dex-dot is absolutely positioned inside the relative dex HUD button (clears the strip, which sits top-right of the canvas); every DOM font-size in the served CSS is ≥14px (34×14, 12×15, 6×16, 1×18, 2×20, 1×22 — none below 14). `personal/index.html` + `game.js` served 200 over `python3 -m http.server`; personal bundle boots headless to the overworld with the edition marker and zero auth UI.
+6. **Regression** — the signed slice still plays end-to-end: `verify-slice.mjs` 134/134 PASS re-run on this exact tree (Pallet → Brock, guest bundle); personal-edition boot smoke PASS.
+
+## Caveats (stated plainly)
+
+1. **Headless limits:** no real pixels were rendered and no real browser ran — aspect-lock, panel visibility, HUD clearance, and text sizes are verified from the executed layout math + the served CSS, not from screenshots. A live-browser spot check (the owner's standing on-device rule covers phones; laptops deserve one pass at 1280×800) would close this.
+2. **Keyboard "works"** is evidenced through the shared `wasPressed` input path that the full 134-assert playthrough drives; the DOM `keydown`→action binding itself is code-verified, not key-pressed in a browser.
+3. QA-005 is filed above with its one-line fix; the coordinator can apply it and re-run the harness — no re-sign-off needed from this seat for that change alone.
+
+*— QA Manager, seat 10. The gate is green-with-defect: push authorized; clear QA-005 in the next pass.*

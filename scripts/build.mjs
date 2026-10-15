@@ -374,7 +374,7 @@ body.desktop.showtouch .controls{display:block}
 .pwmeter.fair .fill{width:55%;background:#D99A26}
 .pwmeter.strong .fill{width:100%;background:#2FA84F}
 @media (prefers-reduced-motion: reduce){
-  .loginover *,.authcard *,.banner503 *,.syncdot *{animation:none!important;transition:none!important}
+  .loginover *,.authcard *,.banner503 *,.syncdot *,.chaptercard *,.dialogue *{animation:none!important;transition:none!important}
 }
 `;
 
