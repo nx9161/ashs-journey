@@ -54,6 +54,7 @@ export class BootScene {
         this.phase = 'title';
         this.t = 0;
         this.game.audio.unlock();
+        this.game.audio.playMusic('title-theme'); // original score; unlock gate satisfied by the gesture
       }
       return;
     }

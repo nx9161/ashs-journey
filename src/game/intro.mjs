@@ -53,7 +53,7 @@ export class IntroScene {
       dexRegister(g.state.dex, 'caught', sp.dexNo);
       g.state.story.flags.metPartner = true;
       g.state.story.flags.refusedBall = true;
-      g.audio.playSfx(SFX.dex);
+      g.audio.playSfx('dex-register');
       g.ui.toast(sp.name + ' joined your party!');
       this.finishIntro();
     }, INTRO_SCRIPT.professor);

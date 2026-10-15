@@ -23,6 +23,7 @@ export class BattleScene {
     this.kind = opts.kind; // 'wild' | 'trainer'
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
+    this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.trainerIdx = 0;
   }
@@ -33,6 +34,7 @@ export class BattleScene {
     this.state = 'intro';
     this.t = 0;
     this.msg = '';
+    g.audio.playMusic(this.kind === 'trainer' ? 'battle-trainer-theme' : 'battle-wild-theme', { area: false });
     if (this.kind === 'trainer') {
       const t0 = this.trainer.team[0];
       this.foeMon = makeMon(t0.species, t0.level, SPECIES, MOVES);
@@ -54,7 +56,19 @@ export class BattleScene {
     this.log = [];
     g.ui.log.push({ ui: 'battle', kind: this.kind, foe: this.foe.speciesId });
     const foeName = displayName(this.foe, SPECIES);
-    this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+    g.audio.playCry(this.foe.speciesId);   // synthesized cry, never sampled
+    g.audio.playCry(this.ally.speciesId);
+    if (this.tutorial) {
+      // Scripted first-catch gate: the tips teach the loop (weaken -> throw),
+      // the engine guarantees the outcome (endure + weakened auto-catch).
+      this.say('Wild ' + foeName + ' appeared!', () => {
+        this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
+          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.toCommand());
+        });
+      });
+    } else {
+      this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+    }
   }
 
   firstAble(g) {
@@ -115,7 +129,8 @@ export class BattleScene {
       { label: 'FIGHT', value: 'fight' },
       { label: 'BAG', value: 'bag' },
       { label: 'PARTY', value: 'party' },
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' },
+      // GD: no running from the scripted tutorial — it's a lesson, not a gamble.
+      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || this.tutorial },
     ];
     this.game.ui.showCommands(items, (value) => this.onCommand(value));
   }
@@ -160,7 +175,8 @@ export class BattleScene {
       this.openPartyMenu(false);
     } else if (value === 'run') {
       if (this.kind === 'wild') {
-        this.say('Got away safely!', () => this.endBattle(true));
+        g.audio.playSfx('battle-run');
+      this.say('Got away safely!', () => this.endBattle(true));
       } else {
         this.say("Can't escape a trainer battle!", () => this.toCommand());
       }
@@ -217,6 +233,16 @@ export class BattleScene {
     const g = this.game;
     const usable = this.foe.moves.map((m, i) => i).filter((i) => this.foe.moves[i].pp > 0);
     if (!usable.length) return { type: 'move', idx: 0, struggle: true };
+    // GD balance: gym-leader opener — a leader with a self-buff setup move
+    // opens with it (classic Brock Defense Curl): gives the player a free
+    // turn, teaches setup play, and makes the fight about strategy.
+    if (this.trainer && this.trainer.ai === 'opener-setup' && this.turn === 1) {
+      const setup = usable.find((i) => {
+        const mv = MOVES[this.foe.moves[i].id];
+        return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
+      });
+      if (setup !== undefined) return { type: 'move', idx: setup };
+    }
     // Gym-leader-ish AI: prefer super-effective moves, else random.
     const allyTypes = SPECIES[this.ally.speciesId].types;
     let best = usable[0], bestScore = -1;
@@ -362,17 +388,28 @@ export class BattleScene {
       const dmg = calcDamage(atk.level, mv.power, atkStat, defStat,
         { stab, effectiveness: eff, crit, random: rand, burn, physical: mv.cat === 'physical' });
       def.hp = Math.max(0, def.hp - dmg);
+      // GD tutorial: the lesson mon endures at 1 HP — the gate teaches
+      // catching, so the only exit is a (guaranteed, once weakened) catch.
+      let hungOn = false;
+      if (this.tutorial && foeSide === 'foe' && def.hp <= 0) {
+        def.hp = 1;
+        hungOn = !this._endureShown;
+        this._endureShown = true;
+      }
       // Impact theater: hit-stop feel via shake/flash
       if (eff > 1) { this.shakeT = 120; this.flashT = 60; }
       else if (eff < 1) { this.shakeT = 60; }
       if (crit) this.flashT = 90;
+      g.audio.hitFeedback(eff); // sound picks the effectiveness tier (visual twin: shake/flash)
       let extra = '';
       if (crit) extra = ' A critical hit!';
       if (eff > 1) extra += " It's super effective!";
       else if (eff < 1) extra += " It's not very effective...";
       const after = () => {
         // Secondary effect, then the damage line (never double-say the effectiveness line).
-        let msg2 = defName + ' took ' + dmg + ' damage!';
+        let msg2 = hungOn
+          ? defName + ' hung on with 1 HP! Now — open the BAG and throw a Poke Ball!'
+          : defName + ' took ' + dmg + ' damage!';
         if (mv.effect && mv.effect.status && (!mv.effect.chance || roll(mv.effect.chance / 100, g.rng.battle))) {
           if (!def.status) {
             def.status = mv.effect.status;
@@ -417,9 +454,11 @@ export class BattleScene {
   }
 
   checkFaint(side, cb) {
+    const g = this.game;
     const mon = side === 'ally' ? this.ally : this.foe;
     if (mon.hp > 0) { cb(); return; }
     const name = displayName(mon, SPECIES);
+    g.audio.playSfx('battle-faint');
     this.say(name + ' fainted!', () => {
       if (side === 'foe') {
         this.state = 'faintfoe';
@@ -448,6 +487,7 @@ export class BattleScene {
         this.hpAnim.foe = this.foe.hp;
         const foeName = displayName(this.foe, SPECIES);
         this.say(this.trainer.name + ' sent out ' + foeName + '!', () => {
+          g.audio.playCry(t.species);
           this.state = 'resolve';
           this.awardXp(() => this.toCommand());
         });
@@ -457,6 +497,7 @@ export class BattleScene {
     } else {
       this.awardXp(() => {
         this.state = 'victory';
+        g.audio.playSfx('victory'); // wild-win sting (visual twin: the "defeated" message)
         this.say('Wild ' + displayName(this.foe, SPECIES) + ' was defeated!', () => this.afterMsg());
       });
     }
@@ -504,11 +545,11 @@ export class BattleScene {
         }
         if (leveled) msgs.push(displayName(m, SPECIES) + ' grew to Lv ' + m.level + '!');
       }
-      g.audio.playSfx(SFX.dex);
+      g.audio.playSfx('dex-register');
       this.pendingXp = 0;
       this.xpApplied = false;
       const cb = this.xpCb; this.xpCb = null;
-      if (msgs.length) this.say(msgs.join(' '), () => { this.state = 'resolve'; if (cb) cb(); });
+      if (msgs.length) { g.audio.playSfx('levelup'); this.say(msgs.join(' '), () => { this.state = 'resolve'; if (cb) cb(); }); }
       else { this.state = 'resolve'; if (cb) cb(); }
     }
   }
@@ -547,15 +588,22 @@ export class BattleScene {
     const ball = BALLS[ballId];
     this.state = 'catchseq';
     this.catchState = { ball, phase: 'throw', t: 0, shakes: 0, need: 0, a: 0 };
-    g.audio.playSfx(SFX.throw_);
+    g.audio.playSfx('catch-throw');
     this.msg = 'You threw a ' + ball.name + '!'; // throw plays immediately, no modal
     this.msgOpen = false;
     const foe = this.foe;
     const a = catchA(foe.maxHp, foe.hp, SPECIES[foe.speciesId].catchRate, ball.bonus, foe.status);
     this.catchState.a = a;
-    this.critCap = isCriticalCapture(a) && roll(0.05, g.rng.battle);
-    this.catchState.need = this.critCap ? 1 : shakeChecks(a, g.rng.battle);
-    if (this.critCap) g.ui.toast('Critical capture!');
+    if (this.tutorial && foe.hp <= foe.maxHp * 0.5) {
+      // GD tutorial: weakened in the lesson battle = guaranteed catch.
+      // The teaching is in the weaken step; the outcome is never luck.
+      this.critCap = false;
+      this.catchState.need = 3;
+    } else {
+      this.critCap = isCriticalCapture(a) && roll(0.05, g.rng.battle);
+      this.catchState.need = this.critCap ? 1 : shakeChecks(a, g.rng.battle);
+    }
+    if (this.critCap) { g.ui.toast('Critical capture!'); g.audio.playSfx('catch-crit'); }
   }
 
   updateCatch(dt) {
@@ -569,7 +617,7 @@ export class BattleScene {
       const doneShakes = Math.floor(c.t / 800);
       if (c.shakes < doneShakes && c.shakes < want) {
         c.shakes++;
-        g.audio.playSfx(SFX.rattle);
+        g.audio.playSfx('catch-rattle'); // visual twin: ball wiggle
       }
       if (c.shakes >= want && c.t >= want * 800 + 200) {
         if (want >= 3 || (this.critCap && want >= 1)) this.catchSuccess();
@@ -580,7 +628,8 @@ export class BattleScene {
 
   catchSuccess() {
     const g = this.game;
-    g.audio.playSfx(SFX.click);
+    g.audio.playSfx('catch-click'); // visual twin: starburst
+    g.audio.playSfx('catch-gotcha');
     const foe = this.foe;
     const name = displayName(foe, SPECIES);
     dexRegister(g.state.dex, 'caught', SPECIES[foe.speciesId].dexNo);
@@ -593,7 +642,7 @@ export class BattleScene {
       foe.hp = foe.maxHp; // caught fresh
       g.state.party.push(foe);
     }
-    g.audio.playSfx(SFX.dex);
+    g.audio.playSfx('dex-register'); // visual twin: dex toast + badge dot
     this.say('Gotcha! ' + name + ' was caught! (' + dest + ')', () => {
       g.ui.toast(name + ' registered in the Dex!');
       this.endBattle(true);
@@ -603,6 +652,7 @@ export class BattleScene {
   catchBreak(shakesDone) {
     const g = this.game;
     const name = displayName(this.foe, SPECIES);
+    g.audio.catchBreakout(); // visual twin: break-out burst
     g.renderer.flashA = 0.8;
     this.say('Oh no! ' + name + ' broke free after ' + shakesDone + ' shake' + (shakesDone === 1 ? '' : 's') + '!', () => {
       g.renderer.flashA = 0;
@@ -637,7 +687,7 @@ export class BattleScene {
     this.msgOpen = false;
     if (t.badge) {
       g.state.badges.kanto.push(t.badge);
-      g.audio.playSfx(SFX.fanfare);
+      g.audio.playSfx('badge'); // badge fanfare (visual twin: badge-case shine animation)
       const lines = SLICE_CAPSTONE.map((l) => l.replace('{player}', g.state.player.name));
       g.ui.say(lines, () => this.endBattle(true), '');
     } else {
@@ -669,6 +719,7 @@ export class BattleScene {
   endBattle(won) {
     const g = this.game;
     g.ui.setBattleMode(false);
+    g.audio.restoreAreaMusic(); // back to the overworld's track
     g.renderer.shakeX = 0; g.renderer.shakeY = 0; g.renderer.flashA = 0;
     // Reset battle temp state on party mons
     for (const m of g.state.party) { m.confused = false; m.statusTurns = 0; }
@@ -677,6 +728,7 @@ export class BattleScene {
   }
 
   drainHp(dt) {
+    const g = this.game;
     const rate = HP_DRAIN_PER_SEC * dt;
     let dirty = false;
     if (this.hpAnim.ally !== this.ally.hp) {
@@ -690,6 +742,15 @@ export class BattleScene {
       this.hpAnim.foe += Math.sign(d) * Math.min(Math.abs(d), rate);
       if (Math.abs(this.foe.hp - this.hpAnim.foe) < 1) this.hpAnim.foe = this.foe.hp;
       dirty = true;
+    }
+    // Low-HP warning jingle at first crossing into red (<25%), once per ally
+    // (gameux §4.2). Visual twin: the HP plate's red pulse + ⚠ pip.
+    if (this._lowHpAlly !== this.ally) { this._lowHpAlly = this.ally; this._lowHpWarned = false; }
+    const ratio = this.ally.maxHp > 0 ? this.ally.hp / this.ally.maxHp : 1;
+    if (ratio > 0.25) this._lowHpWarned = false;
+    else if (!this._lowHpWarned && this.ally.hp > 0) {
+      this._lowHpWarned = true;
+      g.audio.playSfx('lowhp');
     }
     void dirty;
   }

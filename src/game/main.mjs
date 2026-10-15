@@ -113,7 +113,7 @@ export class Game {
     }
     this.loop.onAutosave = () => this.saveGame(true);
     this.loop.bindVisibility(() => { /* sim halts via rAF freeze; autosave queued above */ });
-    this.audio.setMuted(false);
+    this.audio.applySettings(this.state.settings);
     this.scenes.push(new BootScene());
     this.loop.start();
   }
@@ -144,8 +144,18 @@ export class Game {
   }
 
   update(dt) {
+    // Global M-key mute toggle (options spec §4.8: "Mute (M key too)"). Persists.
+    if (this.input.wasPressed('mute')) this.toggleMute();
     this.ui.update(dt);
     this.scenes.update(dt);
+  }
+
+  toggleMute() {
+    const s = this.state.settings;
+    s.mute = !s.mute;
+    this.audio.setMuted(s.mute);
+    this.ui.toast(s.mute ? 'Muted.' : 'Sound on.');
+    this.saveGame(true);
   }
 
   render(alpha) {
@@ -168,7 +178,7 @@ export class Game {
       return;
     }
     this.state = res.data;
-    this.audio.setMuted(!!this.state.settings.mute);
+    this.audio.applySettings(this.state.settings);
     this.scenes.replace(new OverworldScene());
     this.ui.toast('Welcome back, ' + this.state.player.name + '!');
   }
@@ -180,7 +190,7 @@ export class Game {
   saveGame(quiet) {
     const res = this.store.save(this.state);
     if (!quiet || !res.ok) {
-      if (res.ok) this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)');
+      if (res.ok) { this.ui.toast('Game saved. (' + Math.round(res.bytes / 1024) + ' KB)'); this.audio.playSfx('save-confirm'); }
       else this.ui.toast('Save failed: ' + res.reason);
     }
     return res;
@@ -217,7 +227,7 @@ export class Game {
           const m = g.state.party[t];
           g.state.bag.potion--;
           m.hp = Math.min(m.maxHp, m.hp + 20);
-          g.audio.playSfx(SFX.heal);
+          g.audio.playSfx('heal');
           g.ui.toast(displayName(m, SPECIES) + ' recovered 20 HP!');
         });
       }
@@ -302,6 +312,8 @@ export class Game {
     g.ui.showMenu('Options', [
       { label: 'Text speed: ' + s.textSpeed, value: 'text' },
       { label: 'Mute: ' + yn(s.mute), value: 'mute' },
+      { label: 'Music volume: ' + Math.round(s.musicVol * 100) + '%', value: 'music' },
+      { label: 'SFX volume: ' + Math.round(s.sfxVol * 100) + '%', value: 'sfx' },
       { label: 'Battle animations: ' + yn(s.battleAnims), value: 'banim' },
       { label: 'Screen shake: ' + yn(s.shake), value: 'shake' },
       { label: 'Reduced motion: ' + yn(s.reducedMotion), value: 'rmotion' },
@@ -314,9 +326,11 @@ export class Game {
         const order = ['slow', 'normal', 'fast', 'instant'];
         s.textSpeed = order[(order.indexOf(s.textSpeed) + 1) % order.length];
       } else if (v === 'mute') { s.mute = !s.mute; g.audio.setMuted(s.mute); }
+      else if (v === 'music') { s.musicVol = s.musicVol >= 0.99 ? 0 : Math.round((s.musicVol + 0.1) * 10) / 10; g.audio.setMusicVolume(s.musicVol); }
+      else if (v === 'sfx') { s.sfxVol = s.sfxVol >= 0.99 ? 0 : Math.round((s.sfxVol + 0.1) * 10) / 10; g.audio.setSfxVolume(s.sfxVol); }
       else if (v === 'banim') s.battleAnims = !s.battleAnims;
       else if (v === 'shake') s.shake = !s.shake;
-      else if (v === 'rmotion') s.reducedMotion = !s.reducedMotion;
+      else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); }
       else if (v === 'flip') { s.controlsFlip = !s.controlsFlip; g.applyLayout(); }
       else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
       else if (v === 'erase') {
