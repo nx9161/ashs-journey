@@ -1,0 +1,22 @@
+# hand-drawn (no draft). Petals reuse roof-red, centers reuse water-blue (palette discipline).
+PIX tile-flower 16 16
+gggggggggggggggg
+gggggggggggggggg
+gggggjjggggggggg
+ggggjwjgggggjjgg
+gggggjjggggjwjgg
+gggggggggggggjjg
+gggggggggggggggg
+gggjjggggggggggg
+ggjwjggggggggggg
+ggggjjgggggggggg
+gggggggggggggggg
+gggggggggggjjggg
+ggggggggggjwjggg
+gggggggggggjjggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #5da24a grass
+j #b0503c petal
+w #3a7bd5 center

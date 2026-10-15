@@ -1,0 +1,199 @@
+{
+  "atlas": "atlas-npcs.png",
+  "tile": 16,
+  "size": [
+    252,
+    18
+  ],
+  "sprites": {
+    "npc-aide-idle-1": {
+      "x": 1,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-aide-idle-2": {
+      "x": 19,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-coach-idle-1": {
+      "x": 37,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-coach-idle-2": {
+      "x": 55,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lass-idle-1": {
+      "x": 73,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lass-idle-2": {
+      "x": 91,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-nurse-idle-1": {
+      "x": 109,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-nurse-idle-2": {
+      "x": 127,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-idle-1": {
+      "x": 145,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-idle-2": {
+      "x": 163,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rival-idle-1": {
+      "x": 181,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rival-idle-2": {
+      "x": 199,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-youngster-idle-1": {
+      "x": 217,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-youngster-idle-2": {
+      "x": 235,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    }
+  }
+}

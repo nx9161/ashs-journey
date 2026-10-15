@@ -1,0 +1,75 @@
+{
+  "atlas": "atlas-pikachu.png",
+  "tile": 48,
+  "size": [
+    138,
+    34
+  ],
+  "sprites": {
+    "partner-back": {
+      "x": 1,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "partner-front": {
+      "x": 35,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-refuse": {
+      "x": 69,
+      "y": 1,
+      "w": 32,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-hop-1": {
+      "x": 103,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "hop-1"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-hop-2": {
+      "x": 121,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "hop-2"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# hand-drawn (no draft).
+PIX tile-gymdoor 16 16
+mmmmmmmmmmmmmmmm
+mmmzzzzzzzzzzmmm
+mmmzzzzzzzzzzmmm
+mmmzkkkkkkkkzmmm
+mmmkzzzzzzzzkmmm
+mmmkzzzzzzzzkmmm
+mmmkzzzzzzzzkmmm
+mmmkzzzzzzzzkmmm
+mmmkzzzzzzzzkmmm
+mmmkzzzzzzzzkmmm
+mmmkzzzzzzzzkmmm
+mmmzkkkkkkkkzmmm
+mmmzzzzzzzzzzmmm
+mmmzzzzzzzzzzmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+PAL
+m #8a8aa0 stone
+z #6a6a80 stone-dark
+k #5a3a24 door-wood
