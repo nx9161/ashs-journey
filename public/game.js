@@ -6101,15 +6101,12 @@ Object.assign(AUTH, {
 // Player-controlled strings are rendered via textContent / createElement ONLY
 // (helpers live in auth.mjs: authEl/authText). Zero innerHTML in this file.
 //
-// ---- CONTRACT GAP (flagged for the backend seat + Sloane) ----
-// The published API contract has NO payload-download endpoint: the save list
-// and save meta endpoints return version/timestamp rows only, and the save PUT
-// uploads. Loading a cloud save on a device with no local cache (the
-// hotel-phone test, US-N1) needs a download endpoint added by the backend
-// (e.g. GET save?slot=N returning slot, version, payload, updatedAt).
-// Until that exists, downloadPayload() below reports the gap and every pull
-// path degrades honestly (toast + keep local). Push, claimGuest, queue,
-// conflict-sheet (meta both sides), and same-device re-login all work without it.
+// ---- Payload download (GET save?slot=N on the API) ----
+// New-device pull (the hotel-phone test, US-N1) downloads the payload via
+// GET save?slot=N -> {slot, version, payload, updatedAt}; 404 when the slot
+// is empty. Pull paths still degrade honestly on failure (toast + keep
+// local) — push, claimGuest, queue, conflict-sheet, and same-device re-login
+// never block on network.
 
 
 const SYNC = {
@@ -6362,13 +6359,21 @@ const SYNC_IMPL = {
     });
   },
 
-  // ---- CONTRACT GAP: no payload-download endpoint in the published contract ----
+  // Payload download: GET /api/save?slot=N -> {slot, version, payload,
+  // updatedAt}; 404 -> {ok:false, reason:'empty'}; 401/503 propagate honestly
+  // (status carried for the caller).
   downloadPayload(slot) {
-    // Required for the hotel-phone test (US-N1): loading a cloud save on a
-    // device with no local cache. The contract lists only list/meta/PUT.
-    // Returns {ok:false, reason:'no-payload-endpoint'} until the backend adds
-    // the download (e.g. GET /api/save?slot=N -> {slot,version,payload,updatedAt}).
-    return Promise.resolve({ ok: false, reason: 'no-payload-endpoint', slot });
+    return api('save?slot=' + encodeURIComponent(slot), { method: 'GET' }).then((r) => {
+      if (r.offline) return { ok: false, reason: 'offline', status: r.status };
+      if (r.status === 200 && r.body && r.body.payload) {
+        return {
+          ok: true, slot: r.body.slot, version: r.body.version,
+          payload: r.body.payload, updatedAt: r.body.updatedAt,
+        };
+      }
+      if (r.status === 404) return { ok: false, reason: 'empty', status: r.status };
+      return { ok: false, reason: 'error-' + r.status, status: r.status };
+    });
   },
 
   // ---- login merge (architecture §3.3: no silent last-write-wins, ever) ----
@@ -6461,9 +6466,9 @@ const SYNC_IMPL = {
         done(dl.payload);
         return;
       }
-      // CONTRACT GAP fallback: honest — the cloud copy exists but can't be
-      // downloaded with the current API. Keep playing on this device.
-      game.ui.toast('Cloud download needs the save API — playing on this device for now.');
+      // Download failed or the payload was invalid — the cloud copy exists
+      // but we can't load it. Keep playing on this device.
+      game.ui.toast('Could not download the cloud save — playing on this device for now.');
       done(null);
     });
   },
@@ -6605,10 +6610,10 @@ const SYNC_IMPL = {
       ((lp.badges && lp.badges.kanto && lp.badges.kanto.length) || 0),
       lm.updatedAt || (lp.meta && lp.meta.updatedAt));
     const ccol = mkCol('CLOUD SAVE', cm.playtimeSec, cm.storyBeat, cm.badgeCount, cm.updatedAt,
-      cloud.payload ? null : 'Full copy needs the save API');
+      cloud.payload ? null : 'Full copy could not be downloaded');
     const pickL = authEl('button', 'authgo pick', lcol); authText(pickL, "KEEP THIS DEVICE'S");
     const pickC = authEl('button', 'authgo pick', ccol); authText(pickC, "KEEP CLOUD'S");
-    if (!cloud.payload) { pickC.disabled = true; } // contract gap: can't load what we can't download
+    if (!cloud.payload) { pickC.disabled = true; } // can't keep a cloud copy we couldn't download
 
     const finish = (winner, loser, loserLabel) => {
       while (pane.firstChild) pane.removeChild(pane.firstChild);
