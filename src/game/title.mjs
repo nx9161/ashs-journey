@@ -36,6 +36,12 @@ export const DISCLAIMER_CREDITS = [
 
 export const GAME_TITLE = "ASH'S JOURNEY";
 export const GAME_SUBTITLE = 'An Unofficial Fan Homage';
+// ADR-012: personal-edition marker. The build substitutes the EDITION_MARKER
+// compile-time token with a quoted JS string literal ("NAMAN'S EDITION" for the
+// personal target, '' for every other target — guest and vercel show nothing).
+// Original text, subtle: a small gold ribbon drawn under the subtitle on the
+// title screen. The GC-verbatim disclaimers above stay byte-identical.
+export const EDITION_MARKER = /*__EDITION_MARKER__*/;
 
 // P1/A5: legal card renders at >=14px. The GC-verbatim DISCLAIMER_BOOT wording
 // is preserved word-for-word; only the line-wrap changes, paginated across the
@@ -123,6 +129,17 @@ export class BootScene {
     g.ctx2dcircle(w / 2 + 16, h * 0.66, 5, '#1a1a22');
     r.text(GAME_TITLE, 8, 8, { size: 14, bold: true, color: '#fff' });
     r.text(GAME_SUBTITLE, 8, 26, { size: 14, color: '#ffe9a8' });
+    if (EDITION_MARKER) {
+      // ADR-012 personal-edition ribbon: measured dark band + gold underline.
+      // Guest/vercel bundles have EDITION_MARKER = '' and skip this entirely.
+      const c = r.ctx;
+      c.font = '14px monospace';
+      const tw = Math.ceil(c.measureText(EDITION_MARKER).width);
+      const rx = 8, ry = 42, pad = 8;
+      g.ctx2dfill('rgba(8,8,14,0.72)', rx, ry, tw + pad * 2, 20);
+      g.ctx2dfill('#e8c832', rx, ry + 18, tw + pad * 2, 2);
+      r.text(EDITION_MARKER, rx + pad, ry + 3, { size: 14, color: '#ffe9a8' });
+    }
     const items = this.menuItems();
     const pulse = Math.floor(this.t * 2) % 2 === 0;
     items.forEach((it, i) => {
