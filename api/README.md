@@ -17,7 +17,7 @@ api/auth/signup.mjs     POST — custom registration wrapper (age gate, HIBP,
                         recovery codes; returns them EXACTLY ONCE)
 api/auth/recover.mjs    POST — password reset via recovery codes (single-use,
                         revokes all sessions)
-api/save.mjs            GET slot list / PUT upsert (version-counter CAS)
+api/save.mjs            GET slot list / GET ?slot=N payload download / PUT upsert (version-counter CAS)
 api/save/meta.mjs       GET per-slot summaries (no payloads)
 api/account/data.mjs    GET {username, createdAt, lastLogin} (access/portability)
 api/account/delete.mjs  POST — password-verified deletion, one transaction

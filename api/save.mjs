@@ -2,6 +2,9 @@
 //
 // Sync protocol (normative: drawers/phase2-rls-resolution.md §2):
 // - GET  -> 200 [{slot, version, updatedAt}] scoped WHERE user_id = server id.
+// - GET ?slot=N -> 200 {slot, version, payload, updatedAt} (payload download for
+//   new-device login / pull; same scoping; 404 when the slot is empty).
+//   Added Track B gap-fix: the client pull path requires payload download.
 // - PUT {slot, payload, expectedVersion}:
 //   - 413 when Content-Length (or actual bytes) > 65536 BEFORE JSON parse.
 //   - Hand-rolled validator -> 422 + ROLLBACK (previous-good row retained by
@@ -88,6 +91,37 @@ async function handleGet(req) {
     version: r.version,
     updatedAt: r.updated_at instanceof Date ? r.updated_at.toISOString() : r.updated_at,
   })));
+}
+
+async function handleGetSlot(req, slot) {
+  const userId = await requireUserId(req);
+  if (!userId) return unauthorized(); // 401 before any resource code (G14)
+  if (!Number.isInteger(slot) || slot < 1 || slot > 3) return invalidRequest();
+  const ip = trustedClientIP(req) || 'unknown';
+  const rl = await rateLimitSave(userId, ip);
+  if (rl.unavailable || rl.error) return unavailable();
+  if (!rl.allowed) return tooManyResponse(rl.retryAfterSec);
+
+  let row = null;
+  try {
+    row = await withSaveTx(userId, async (client) => {
+      const r = await client.query(
+        `SELECT slot, version, payload, updated_at FROM saves WHERE user_id = $1 AND slot = $2`,
+        [userId, slot],
+      );
+      return r.rows[0] || null;
+    });
+  } catch (e) {
+    console.error('[save] get slot failed', e && e.message ? e.message : e);
+    return json({ error: 'invalid_request' }, 500);
+  }
+  if (!row) return json({ error: 'not_found' }, 404);
+  return json({
+    slot: row.slot,
+    version: row.version,
+    payload: row.payload,
+    updatedAt: row.updated_at instanceof Date ? row.updated_at.toISOString() : row.updated_at,
+  });
 }
 
 async function handlePut(req) {
@@ -200,7 +234,11 @@ async function handlePut(req) {
 
 export default async function handler(req) {
   if (!isDbConfigured() || authUnavailable()) return unavailable();
-  if (req.method === 'GET') return handleGet(req);
+  if (req.method === 'GET') {
+    const slotParam = new URL(req.url, 'http://localhost').searchParams.get('slot');
+    if (slotParam !== null) return handleGetSlot(req, Number(slotParam));
+    return handleGet(req);
+  }
   if (req.method === 'PUT') {
     if (!assertSameOrigin(req)) return invalidRequest(403);
     return handlePut(req);
