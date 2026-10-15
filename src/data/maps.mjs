@@ -33,7 +33,8 @@ export const MAPS = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        dialogue: ["Yo! Smell ya later, {player}! I'm off to grab my first partner!", "My grandpa's the professor, so I get the good stuff. Try to keep up!"] },
+        // Yellow homage (original lines): the rival's partner is an Eevee.
+        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
     ],
     encounters: null,
     start: { x: 7, y: 7, dir: 'down' },
