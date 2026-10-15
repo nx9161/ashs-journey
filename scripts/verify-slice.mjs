@@ -745,6 +745,85 @@ const qaDriver = `
   ok('qa l8 dex tracks 1025, slice roster honest (14)', DEX_TOTAL === 1025 && Object.keys(SPECIES).length === 14);
   ok('qa l8 frontier-ready hooks (7 symbol slots + befriended state)', defaultState().badges.symbols.length === 7 && typeof defaultState().dex.befriended === 'object');
 
+  // ============ Yellow authenticity (Gameplay Designer seat update) ============
+  // Docs-reimplemented Yellow mechanics; 100% original code. Pure-function and
+  // headless scene asserts below.
+  ok('qa y1 rival evolution rule 2-0 -> vaporeon', rivalPartnerEvolution(2, 0) === 'vaporeon');
+  ok('qa y1 rival evolution rule 1-1 -> flareon', rivalPartnerEvolution(1, 1) === 'flareon');
+  ok('qa y1 rival evolution rule 0-2 -> jolteon', rivalPartnerEvolution(0, 2) === 'jolteon');
+  ok('qa y1 gary raises an eevee (Yellow)', RIVALS.gary.partner === 'eevee');
+  var yP = makeMon('partner', 5, SPECIES, MOVES);
+  var yN = makeMon('pidgey', 5, SPECIES, MOVES);
+  ok('qa y2 partner refuses evolution, others may evolve', evolutionCheck(yP).ok === false && evolutionCheck(yN).ok === true);
+  ok('qa y2 partner refuses the box, others may box', boxCheck(yP).ok === false && boxCheck(yN).ok === true);
+  ok('qa y2 trainer-spot SFX exists (original two-note alert)', !!SFXSET['trainer-spot']);
+  // qa y3: sight-line challenge — Cal spots the player, "!" beat, walk-up, battle.
+  var gY = mkGame(4242);
+  gY.state.party.push(makeMon('partner', 5, SPECIES, MOVES));
+  gY.state.story.position = { map: 'route1', x: 4, y: 4, dir: 'down' }; // in Cal's sight cone
+  gY.scenes.push(new OverworldScene());
+  var owY = gY.scenes.top;
+  tk(gY, 2);
+  ok('qa y3 cal spots the player (spot phase)', !!owY.challenge && owY.challenge.phase === 'spot');
+  ok('qa y3 spot is logged', gY.ui.log.some(function(e){ return e.ui === 'trainer-spot'; }));
+  tk(gY, 20); // 500ms+ -> walk phase
+  ok('qa y3 walk-up phase', owY.challenge && owY.challenge.phase === 'walk');
+  tk(gY, 150); // walk-up (150ms/tile) + failsafe margin
+  var ydd = 0; // the trainer's pre-battle dialogue drains before the battle pushes
+  while (!(gY.scenes.top instanceof BattleScene) && ydd < 40) { pA(gY, 1); ydd++; }
+  var yB = gY.scenes.top;
+  ok('qa y3 challenge opens the trainer battle', yB instanceof BattleScene && yB.kind === 'trainer' && yB.trainer.id === 'r1_cal');
+  var ydn = 0;
+  while (yB.msgOpen && ydn < 20) { pA(gY, 1); ydn++; }
+  ok('qa y3 gb-era intro beats (challenge + send-out)',
+    gY.ui.log.some(function(e){ return e.ui === 'battle-msg' && e.text.indexOf('wants to battle') >= 0; }) &&
+    gY.ui.log.some(function(e){ return e.ui === 'battle-msg' && e.text.indexOf('sent out') >= 0; }));
+  // qa y4: the uniformed duo ambush — one spotter pulls both challengers in.
+  var gD = mkGame(777);
+  gD.state.party.push(makeMon('partner', 5, SPECIES, MOVES));
+  gD.state.story.position = { map: 'route2', x: 6, y: 7, dir: 'down' };
+  gD.scenes.push(new OverworldScene());
+  var owD = gD.scenes.top;
+  tk(gD, 2);
+  ok('qa y4 duo ambush: both walk up', !!owD.challenge && owD.challenge.parts.length === 2);
+  tk(gD, 200);
+  var ddd = 0; // the duo's pre-battle banter drains before the battle pushes
+  while (!(gD.scenes.top instanceof BattleScene) && ddd < 40) { pA(gD, 1); ddd++; }
+  var dB = gD.scenes.top;
+  ok('qa y4 duo battle is r2_duo', dB instanceof BattleScene && dB.trainer.id === 'r2_duo');
+  ok('qa y4 duo lead is nicknamed (Sting)', dB.foe.nickname === 'Sting');
+  // qa y5: partner mood reacts to battle beats (Yellow homage).
+  var gM = mkGame(31337);
+  var pm = makeMon('partner', 5, SPECIES, MOVES);
+  var fm = makeMon('pidgey', 3, SPECIES, MOVES);
+  var bM = Object.create(BattleScene.prototype);
+  bM.game = gM; bM.foe = fm; bM.ally = pm;
+  bM.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+  bM.allyStages = pm.stages;
+  gM.state.pikachu.mood = 'curious';
+  bM.execMoveContinue({ side: 'ally', mon: pm, stats: { atk: 11, def: 9, spa: 12, spd: 11, spe: 16 }, move: MOVES.thundershock, action: null });
+  if (bM.msgOpen) { var ycb = bM.msgCb; bM.msgOpen = false; bM.msgCb = null; if (ycb) ycb(); } // dismiss "used ..." -> the hit lands
+  ok('qa y5 partner super-effective hit -> happy', gM.state.pikachu.mood === 'happy');
+  pm.hp = 0;
+  var bF = Object.create(BattleScene.prototype);
+  bF.game = gM; bF.ally = pm; bF.foe = fm;
+  gM.state.pikachu.mood = 'curious';
+  bF.checkFaint('ally', function(){});
+  ok('qa y5 partner faint -> sad', gM.state.pikachu.mood === 'sad');
+  var bW = Object.create(BattleScene.prototype);
+  bW.game = gM; bW.trainer = TRAINERS.r1_cal;
+  pm.hp = 10; gM.state.party = [pm];
+  gM.state.pikachu.mood = 'curious';
+  bW.winTrainer();
+  ok('qa y5 trainer win with partner conscious -> excited', gM.state.pikachu.mood === 'excited');
+  var gP = mkGame(5150);
+  gP.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };
+  gP.scenes.push(new OverworldScene());
+  var owP = gP.scenes.top;
+  gP.state.pikachu.mood = 'sleepy';
+  owP.petPartner();
+  ok('qa y5 petting cheers the partner up', gP.state.pikachu.mood === 'happy');
+
   // ============ Fun instrumentation (GD §6.2 feel checkpoints) ============
   var gF = mkGame(9003);
   bootToOverworld(gF);
