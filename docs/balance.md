@@ -43,6 +43,7 @@ arrives at **Lv 11–12** — verified by XP accounting (§4), not vibes.
 | Camper Bea (R2) | Nidoran♂ 7, Mankey 7 | ~173 |
 | Jr. Trainer Nia (R2) | Pidgey 7, Rattata 7 | ~151 |
 | Hiker Rob (R2) | Geodude 8, Geodude 9 | ~217 (Brock preview) |
+| **Uniformed Duo Rue & Cole (R2, Yellow-authenticity update)** | Weedle 5 "Sting", Zubat 6 "Echo" | ~104 (optional ambush — wide sight cones, avoidable via grass detour) |
 
 Trainer battles pay the **documented 1.5× XP** (`xpYield`, Gen 5-era). XP is
 awarded in full to every conscious party member (party-wide catch-up, §5 pacing).
@@ -55,6 +56,7 @@ awarded in full to every conscious party member (party-wide catch-up, §5 pacing
 | Route 2 trainers (4) | ~556 |
 | Wilds (~18 encounters) | ~556 |
 | **Total** | **~1324** |
+| *Uniformed Duo (optional)* | *+104 (weedle 5: 41, zubat 6: 63 — trainer 1.5×)* |
 
 Pikachu banks 125 XP at Lv 5 → 1449 ≈ **Lv 11** (1331) + progress to 12.
 A completionist fighting everything reaches 12–13. No dedicated grinding
@@ -106,8 +108,11 @@ catchRate 45, commons 255/235/190.
    sellables, Amulet-Coin-equivalent) needs Game UI/UX shop screens.
 2. **Difficulty modes** (Normal/Challenge/Easy per §5) — data hooks exist
    (`story.difficulty`), not wired.
-3. **Route-trainer sight lines** — trainers battle on talk; proximity
-   exclamation triggers are a feel upgrade for later.
+3. **Route-trainer sight lines** — IMPLEMENTED in the Yellow-authenticity
+   update (`feat/yellow-authenticity`): `sight: { dir, range }` cones on all 6
+   route trainers (Brock stays talk-only); spot beat (500ms `!` + original
+   two-note alert) → 150ms/tile walk-up → battle. Talk-to-battle still works
+   as the fallback path.
 4. **Viridian Forest / Mt. Moon** — out of slice scope; the "optional grind"
    the producer mentioned doesn't exist as maps yet.
 5. **Full catch-rate audit vs ball tiers** — Great/Ultra Balls exist in data
