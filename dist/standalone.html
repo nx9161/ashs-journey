@@ -233,9 +233,11 @@ function xpForLevel(curve, level) {
   }
 }
 
-// Simplified documented-style XP yield: base * level / 7, wild modifier 1x.
+// Simplified documented-style XP yield: base * level / 7; trainer battles pay
+// the documented Gen 5-era 1.5x (GD balance: the slice's XP economy runs on
+// trainer payouts, not wild grinding).
 function xpYield(baseXp, level, isWild) {
-  return Math.max(1, Math.floor((baseXp * level) / 7) * (isWild ? 1 : 1));
+  return Math.max(1, Math.floor((baseXp * level) / 7 * (isWild ? 1 : 1.5)));
 }
 
 // Turn order: priority bracket -> Speed (paralysis quarters Speed, Gen 4-6) -> random.
@@ -1029,7 +1031,7 @@ const SPECIES = {
     id: 'mankey', name: 'Mankey', dexNo: 56, types: ['fighting'],
     base: { hp: 40, atk: 80, def: 35, spa: 35, spd: 45, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 61, body: 'biped', spriteSeed: 5601,
-    learnset: { 1: ['scratch', 'leer'] },
+    learnset: { 1: ['scratch', 'leer', 'lowkick'] },
     flavor: 'Angers fast, forgives faster — usually after a good battle.',
   },
 };
@@ -1064,6 +1066,7 @@ const MOVES = {
   stringshot:  { id: 'stringshot', name: 'String Shot', type: 'bug', cat: 'status', power: 0, acc: 95, pp: 40, priority: 0, effect: { target: 'foe', spe: -2 } },
   leechlife:   { id: 'leechlife', name: 'Leech Life', type: 'bug', cat: 'physical', power: 20, acc: 100, pp: 15, priority: 0, effect: { target: 'foe', drain: 0.5 } },
   rockthrow:   { id: 'rockthrow', name: 'Rock Throw', type: 'rock', cat: 'physical', power: 50, acc: 90, pp: 15, priority: 0 },
+  lowkick:     { id: 'lowkick', name: 'Low Kick', type: 'fighting', cat: 'physical', power: 50, acc: 100, pp: 20, priority: 0 },
   defensecurl: { id: 'defensecurl', name: 'Defense Curl', type: 'normal', cat: 'status', power: 0, acc: 100, pp: 40, priority: 0, effect: { target: 'self', def: 1 } },
   harden:      { id: 'harden', name: 'Harden', type: 'normal', cat: 'status', power: 0, acc: 100, pp: 30, priority: 0, effect: { target: 'self', def: 1 } },
 };
@@ -1168,7 +1171,13 @@ const MAPS = {
     ],
     npcs: [
       { x: 9, y: 5, name: 'AIDE', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#1a1a1a',
-        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you five to start."] },
+        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
+      { x: 6, y: 4, name: 'CAL', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
+        trainer: 'r1_cal',
+        dialogue: ["Heh! Nobody gets past me without a battle!", "Whoa... you're tougher than you look."] },
+      { x: 7, y: 11, name: 'LISA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+        trainer: 'r1_lisa',
+        dialogue: ["Pidgey and I train here every morning! Care to spar?", "We'll be back stronger tomorrow, won't we, Pidgey?"] },
     ],
     encounters: {
       rate: 0.12,
@@ -1213,7 +1222,7 @@ const MAPS = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "The Pewter Gym is past it. Rock-types! Bring water or grass if you can."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
     ],
     encounters: null,
     start: null,
@@ -1273,15 +1282,28 @@ const MAPS = {
       { x: 8, y: 13, to: { map: 'viridian', x: 10, y: 1 } },
     ],
     signs: [],
-    npcs: [],
+    npcs: [
+      { x: 6, y: 3, name: 'RICK', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
+        trainer: 'r2_bug',
+        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a Caterpie under a boot."] },
+      { x: 7, y: 5, name: 'BEA', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
+        trainer: 'r2_camper',
+        dialogue: ["I picnic here every day — battle me before you sit down!", "Not even a snack break slows you down!"] },
+      { x: 7, y: 8, name: 'NIA', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+        trainer: 'r2_jr',
+        dialogue: ["Route 2 is MY training ground! Prove you belong here!", "You're stronger than the rumors said..."] },
+      { x: 5, y: 10, name: 'ROB', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+        trainer: 'r2_hiker',
+        dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
+    ],
     encounters: {
       rate: 0.12,
       table: [
-        { species: 'caterpie', min: 3, max: 5, weight: 30 },
-        { species: 'weedle', min: 3, max: 5, weight: 30 },
-        { species: 'pidgey', min: 3, max: 5, weight: 25 },
-        { species: 'nidoranm', min: 4, max: 6, weight: 10 },
-        { species: 'mankey', min: 4, max: 6, weight: 5 },
+        { species: 'caterpie', min: 3, max: 6, weight: 28 },
+        { species: 'weedle', min: 3, max: 6, weight: 28 },
+        { species: 'pidgey', min: 4, max: 6, weight: 22 },
+        { species: 'nidoranm', min: 4, max: 7, weight: 10 },
+        { species: 'mankey', min: 4, max: 7, weight: 14 },
       ],
     },
     start: null,
@@ -1316,7 +1338,8 @@ const MAPS = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
-        dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it.", "Catch something with water or grass on Route 2. Or just outlast him. You've got heart."] },
+        dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a Mankey on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Poke Balls — on the house."],
+        give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Poke Balls' } },
     ],
     encounters: null,
     start: null,
@@ -1356,9 +1379,72 @@ const MAP_LIST = Object.keys(MAPS);
 const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F']);
 
 // Trainer definitions for the slice.
+// ai: 'opener-setup' = gym-leader flavor: open with a self-buff setup move if known
+// (classic Brock Defense Curl), then fight on effectiveness like everyone else.
 const TRAINERS = {
+  r1_cal: {
+    id: 'r1_cal', name: 'Cal', title: 'Youngster',
+    intro: ["Hey! My Rattata's the toughest on Route 1! Battle me!"],
+    lose: ["Toughest... except against you, huh."],
+    team: [
+      { species: 'rattata', level: 3 },
+      { species: 'pidgey', level: 4 },
+    ],
+    reward: 140,
+  },
+  r1_lisa: {
+    id: 'r1_lisa', name: 'Lisa', title: 'Lass',
+    intro: ["Pidgey and I do our morning laps here. Spar with us?"],
+    lose: ["We still have a lot of laps to run..."],
+    team: [
+      { species: 'pidgey', level: 3 },
+      { species: 'rattata', level: 4 },
+    ],
+    reward: 150,
+  },
+  r2_bug: {
+    id: 'r2_bug', name: 'Rick', title: 'Bug Catcher',
+    intro: ["My bugs are gonna cocoon you! En garde!"],
+    lose: ["S-squashed..."],
+    team: [
+      { species: 'caterpie', level: 5 },
+      { species: 'weedle', level: 5 },
+    ],
+    reward: 160,
+  },
+  r2_camper: {
+    id: 'r2_camper', name: 'Bea', title: 'Camper',
+    intro: ["I picnic here every day — battle me before you sit down!"],
+    lose: ["Not even a snack break slows you down!"],
+    team: [
+      { species: 'nidoranm', level: 7 },
+      { species: 'mankey', level: 7 },
+    ],
+    reward: 230,
+  },
+  r2_jr: {
+    id: 'r2_jr', name: 'Nia', title: 'Jr. Trainer',
+    intro: ["Route 2 is MY training ground! Prove you belong here!"],
+    lose: ["You're stronger than the rumors said..."],
+    team: [
+      { species: 'pidgey', level: 7 },
+      { species: 'rattata', level: 7 },
+    ],
+    reward: 220,
+  },
+  r2_hiker: {
+    id: 'r2_hiker', name: 'Rob', title: 'Hiker',
+    intro: ["These boulders are my training weights! Show me your form!"],
+    lose: ["Rock-solid... defeat. Heh. Good scrap."],
+    team: [
+      { species: 'geodude', level: 8 },
+      { species: 'geodude', level: 9 },
+    ],
+    reward: 300,
+  },
   brock: {
     id: 'brock', name: 'Brock', title: 'Pewter Gym Leader',
+    ai: 'opener-setup',
     intro: ["My rock-type Pokemon will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],
     team: [
@@ -1436,7 +1522,7 @@ function defaultState() {
       mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1,
     },
     facilities: { registry: [], unlocked: [] },
-    bag: { pokeball: 5, potion: 2 },
+    bag: { pokeball: 10, potion: 3 },
     meta: { createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Pallet Town' },
   };
 }
@@ -2146,6 +2232,7 @@ class BattleScene {
     this.kind = opts.kind; // 'wild' | 'trainer'
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
+    this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.trainerIdx = 0;
   }
@@ -2177,7 +2264,17 @@ class BattleScene {
     this.log = [];
     g.ui.log.push({ ui: 'battle', kind: this.kind, foe: this.foe.speciesId });
     const foeName = displayName(this.foe, SPECIES);
-    this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+    if (this.tutorial) {
+      // Scripted first-catch gate: the tips teach the loop (weaken -> throw),
+      // the engine guarantees the outcome (endure + weakened auto-catch).
+      this.say('Wild ' + foeName + ' appeared!', () => {
+        this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
+          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.toCommand());
+        });
+      });
+    } else {
+      this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+    }
   }
 
   firstAble(g) {
@@ -2238,7 +2335,7 @@ class BattleScene {
       { label: 'FIGHT', value: 'fight' },
       { label: 'BAG', value: 'bag' },
       { label: 'PARTY', value: 'party' },
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' },
+      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || this.tutorial },
     ];
     this.game.ui.showCommands(items, (value) => this.onCommand(value));
   }
@@ -2340,6 +2437,16 @@ class BattleScene {
     const g = this.game;
     const usable = this.foe.moves.map((m, i) => i).filter((i) => this.foe.moves[i].pp > 0);
     if (!usable.length) return { type: 'move', idx: 0, struggle: true };
+    // GD balance: gym-leader opener — a leader with a self-buff setup move
+    // opens with it (classic Brock Defense Curl): gives the player a free
+    // turn, teaches setup play, and makes the fight about strategy.
+    if (this.trainer && this.trainer.ai === 'opener-setup' && this.turn === 1) {
+      const setup = usable.find((i) => {
+        const mv = MOVES[this.foe.moves[i].id];
+        return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
+      });
+      if (setup !== undefined) return { type: 'move', idx: setup };
+    }
     // Gym-leader-ish AI: prefer super-effective moves, else random.
     const allyTypes = SPECIES[this.ally.speciesId].types;
     let best = usable[0], bestScore = -1;
@@ -2485,6 +2592,14 @@ class BattleScene {
       const dmg = calcDamage(atk.level, mv.power, atkStat, defStat,
         { stab, effectiveness: eff, crit, random: rand, burn, physical: mv.cat === 'physical' });
       def.hp = Math.max(0, def.hp - dmg);
+      // GD tutorial: the lesson mon endures at 1 HP — the gate teaches
+      // catching, so the only exit is a (guaranteed, once weakened) catch.
+      let hungOn = false;
+      if (this.tutorial && foeSide === 'foe' && def.hp <= 0) {
+        def.hp = 1;
+        hungOn = !this._endureShown;
+        this._endureShown = true;
+      }
       // Impact theater: hit-stop feel via shake/flash
       if (eff > 1) { this.shakeT = 120; this.flashT = 60; }
       else if (eff < 1) { this.shakeT = 60; }
@@ -2495,7 +2610,9 @@ class BattleScene {
       else if (eff < 1) extra += " It's not very effective...";
       const after = () => {
         // Secondary effect, then the damage line (never double-say the effectiveness line).
-        let msg2 = defName + ' took ' + dmg + ' damage!';
+        let msg2 = hungOn
+          ? defName + ' hung on with 1 HP! Now — open the BAG and throw a Poke Ball!'
+          : defName + ' took ' + dmg + ' damage!';
         if (mv.effect && mv.effect.status && (!mv.effect.chance || roll(mv.effect.chance / 100, g.rng.battle))) {
           if (!def.status) {
             def.status = mv.effect.status;
@@ -2676,8 +2793,15 @@ class BattleScene {
     const foe = this.foe;
     const a = catchA(foe.maxHp, foe.hp, SPECIES[foe.speciesId].catchRate, ball.bonus, foe.status);
     this.catchState.a = a;
-    this.critCap = isCriticalCapture(a) && roll(0.05, g.rng.battle);
-    this.catchState.need = this.critCap ? 1 : shakeChecks(a, g.rng.battle);
+    if (this.tutorial && foe.hp <= foe.maxHp * 0.5) {
+      // GD tutorial: weakened in the lesson battle = guaranteed catch.
+      // The teaching is in the weaken step; the outcome is never luck.
+      this.critCap = false;
+      this.catchState.need = 3;
+    } else {
+      this.critCap = isCriticalCapture(a) && roll(0.05, g.rng.battle);
+      this.catchState.need = this.critCap ? 1 : shakeChecks(a, g.rng.battle);
+    }
     if (this.critCap) g.ui.toast('Critical capture!');
   }
 
@@ -3015,16 +3139,43 @@ class OverworldScene {
     // Tall grass encounter check (anti-frustration: force after 20 silent steps)
     const t = this.tileAt(x, y);
     if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters) {
+      // GD balance: the FIRST grass step on Route 1 is a scripted tutorial
+      // encounter (Lv 3 Rattata), not a random roll — the <3min first-catch
+      // gate is a certainty that teaches, never a gamble.
+      if (this.mapId === 'route1' && !g.state.story.flags.tutorialDone) {
+        this.startTutorialEncounter();
+        return;
+      }
       this.stepsSinceEncounter++;
       let p = this.map.encounters.rate;
       if (this.stepsSinceEncounter > 20) p = 1;
       if (this.chainCount >= 2) p = 0; // no triple chains
       if (roll(p, g.rng.encounter)) {
         this.startEncounter();
+      } else {
+        // GD balance (QA-003): the anti-chain counter measures CONSECUTIVE
+        // random encounters — a quiet grass step breaks the chain, otherwise
+        // encounters stay dead for the rest of the map visit.
+        this.chainCount = 0;
       }
     } else {
       this.stepsSinceEncounter = 0;
     }
+  }
+
+  startTutorialEncounter() {
+    const g = this.game;
+    g.state.story.flags.tutorialDone = true;
+    this.stepsSinceEncounter = 0;
+    this.chainCount = 0; // scripted tutorial isn't part of the random chain (QA-003)
+    // Lv 3 Rattata: one Thunder Shock drops it to yellow (teaches weakening),
+    // its Tackle does ~4 to a Lv 5 Pikachu (cannot threaten), and the battle
+    // engine guarantees the catch once weakened + never lets it faint.
+    this.enc = {
+      phase: 'rustle', t: 0, tutorial: true,
+      foe: makeMon('rattata', 3, SPECIES, MOVES),
+    };
+    g.audio.playSfx(SFX.encounter);
   }
 
   startEncounter() {
@@ -3054,7 +3205,7 @@ class OverworldScene {
       const foe = e.foe;
       this.enc = null;
       dexRegister(g.state.dex, 'seen', SPECIES[foe.speciesId].dexNo);
-      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this }));
+      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, tutorial: !!e.tutorial }));
     }
     if (g.renderer.flashA > 0 && e.phase !== 'transition') {
       g.renderer.flashA = Math.max(0, g.renderer.flashA - dt * 3);
@@ -3078,13 +3229,23 @@ class OverworldScene {
     if (npc) {
       if (npc.trainer) { this.startTrainerBattle(npc); return true; }
       const lines = npc.dialogue.map((l) => l.replace('{player}', g.state.player.name));
+      // GD balance: data-driven one-time item gifts (ball economy top-ups).
+      const after = () => {
+        if (npc.give && !g.state.story.flags[npc.give.flag]) {
+          g.state.story.flags[npc.give.flag] = true;
+          for (const item of Object.keys(npc.give.items)) {
+            g.state.bag[item] = (g.state.bag[item] || 0) + npc.give.items[item];
+          }
+          g.ui.toast('Received ' + npc.give.text + '!');
+        }
+      };
       if (npc.heal) {
         g.ui.say(lines, () => {
           this.healParty(false);
-          g.ui.say(npc.afterHeal || ['All better!'], null, npc.name);
+          g.ui.say(npc.afterHeal || ['All better!'], after, npc.name);
         }, npc.name);
       } else {
-        g.ui.say(lines, null, npc.name);
+        g.ui.say(lines, after, npc.name);
       }
       return true;
     }
@@ -3532,6 +3693,6 @@ if (typeof window !== 'undefined') {
 }
 
 </script>
-<!-- contentHash:2cf8717f7a9e1c9f8ae03b34160cf31ad0a4443bd09df46ead5043e59a4242a8 -->
+<!-- contentHash:a826ee8687ea0845c64ac9456736f5ca653720a4b40c4275de3003af30a5fd96 -->
 </body>
 </html>

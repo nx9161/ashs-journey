@@ -23,6 +23,7 @@ export class BattleScene {
     this.kind = opts.kind; // 'wild' | 'trainer'
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
+    this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.trainerIdx = 0;
   }
@@ -54,7 +55,17 @@ export class BattleScene {
     this.log = [];
     g.ui.log.push({ ui: 'battle', kind: this.kind, foe: this.foe.speciesId });
     const foeName = displayName(this.foe, SPECIES);
-    this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+    if (this.tutorial) {
+      // Scripted first-catch gate: the tips teach the loop (weaken -> throw),
+      // the engine guarantees the outcome (endure + weakened auto-catch).
+      this.say('Wild ' + foeName + ' appeared!', () => {
+        this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
+          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.toCommand());
+        });
+      });
+    } else {
+      this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+    }
   }
 
   firstAble(g) {
@@ -115,7 +126,7 @@ export class BattleScene {
       { label: 'FIGHT', value: 'fight' },
       { label: 'BAG', value: 'bag' },
       { label: 'PARTY', value: 'party' },
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' },
+      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || this.tutorial },
     ];
     this.game.ui.showCommands(items, (value) => this.onCommand(value));
   }
@@ -217,6 +228,16 @@ export class BattleScene {
     const g = this.game;
     const usable = this.foe.moves.map((m, i) => i).filter((i) => this.foe.moves[i].pp > 0);
     if (!usable.length) return { type: 'move', idx: 0, struggle: true };
+    // GD balance: gym-leader opener — a leader with a self-buff setup move
+    // opens with it (classic Brock Defense Curl): gives the player a free
+    // turn, teaches setup play, and makes the fight about strategy.
+    if (this.trainer && this.trainer.ai === 'opener-setup' && this.turn === 1) {
+      const setup = usable.find((i) => {
+        const mv = MOVES[this.foe.moves[i].id];
+        return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
+      });
+      if (setup !== undefined) return { type: 'move', idx: setup };
+    }
     // Gym-leader-ish AI: prefer super-effective moves, else random.
     const allyTypes = SPECIES[this.ally.speciesId].types;
     let best = usable[0], bestScore = -1;
@@ -362,6 +383,14 @@ export class BattleScene {
       const dmg = calcDamage(atk.level, mv.power, atkStat, defStat,
         { stab, effectiveness: eff, crit, random: rand, burn, physical: mv.cat === 'physical' });
       def.hp = Math.max(0, def.hp - dmg);
+      // GD tutorial: the lesson mon endures at 1 HP — the gate teaches
+      // catching, so the only exit is a (guaranteed, once weakened) catch.
+      let hungOn = false;
+      if (this.tutorial && foeSide === 'foe' && def.hp <= 0) {
+        def.hp = 1;
+        hungOn = !this._endureShown;
+        this._endureShown = true;
+      }
       // Impact theater: hit-stop feel via shake/flash
       if (eff > 1) { this.shakeT = 120; this.flashT = 60; }
       else if (eff < 1) { this.shakeT = 60; }
@@ -372,7 +401,9 @@ export class BattleScene {
       else if (eff < 1) extra += " It's not very effective...";
       const after = () => {
         // Secondary effect, then the damage line (never double-say the effectiveness line).
-        let msg2 = defName + ' took ' + dmg + ' damage!';
+        let msg2 = hungOn
+          ? defName + ' hung on with 1 HP! Now — open the BAG and throw a Poke Ball!'
+          : defName + ' took ' + dmg + ' damage!';
         if (mv.effect && mv.effect.status && (!mv.effect.chance || roll(mv.effect.chance / 100, g.rng.battle))) {
           if (!def.status) {
             def.status = mv.effect.status;
@@ -553,8 +584,15 @@ export class BattleScene {
     const foe = this.foe;
     const a = catchA(foe.maxHp, foe.hp, SPECIES[foe.speciesId].catchRate, ball.bonus, foe.status);
     this.catchState.a = a;
-    this.critCap = isCriticalCapture(a) && roll(0.05, g.rng.battle);
-    this.catchState.need = this.critCap ? 1 : shakeChecks(a, g.rng.battle);
+    if (this.tutorial && foe.hp <= foe.maxHp * 0.5) {
+      // GD tutorial: weakened in the lesson battle = guaranteed catch.
+      // The teaching is in the weaken step; the outcome is never luck.
+      this.critCap = false;
+      this.catchState.need = 3;
+    } else {
+      this.critCap = isCriticalCapture(a) && roll(0.05, g.rng.battle);
+      this.catchState.need = this.critCap ? 1 : shakeChecks(a, g.rng.battle);
+    }
     if (this.critCap) g.ui.toast('Critical capture!');
   }
 

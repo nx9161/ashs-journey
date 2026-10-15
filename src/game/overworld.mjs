@@ -142,16 +142,43 @@ export class OverworldScene {
     // Tall grass encounter check (anti-frustration: force after 20 silent steps)
     const t = this.tileAt(x, y);
     if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters) {
+      // GD balance: the FIRST grass step on Route 1 is a scripted tutorial
+      // encounter (Lv 3 Rattata), not a random roll — the <3min first-catch
+      // gate is a certainty that teaches, never a gamble.
+      if (this.mapId === 'route1' && !g.state.story.flags.tutorialDone) {
+        this.startTutorialEncounter();
+        return;
+      }
       this.stepsSinceEncounter++;
       let p = this.map.encounters.rate;
       if (this.stepsSinceEncounter > 20) p = 1;
       if (this.chainCount >= 2) p = 0; // no triple chains
       if (roll(p, g.rng.encounter)) {
         this.startEncounter();
+      } else {
+        // GD balance (QA-003): the anti-chain counter measures CONSECUTIVE
+        // random encounters — a quiet grass step breaks the chain, otherwise
+        // encounters stay dead for the rest of the map visit.
+        this.chainCount = 0;
       }
     } else {
       this.stepsSinceEncounter = 0;
     }
+  }
+
+  startTutorialEncounter() {
+    const g = this.game;
+    g.state.story.flags.tutorialDone = true;
+    this.stepsSinceEncounter = 0;
+    this.chainCount = 0; // scripted tutorial isn't part of the random chain (QA-003)
+    // Lv 3 Rattata: one Thunder Shock drops it to yellow (teaches weakening),
+    // its Tackle does ~4 to a Lv 5 Pikachu (cannot threaten), and the battle
+    // engine guarantees the catch once weakened + never lets it faint.
+    this.enc = {
+      phase: 'rustle', t: 0, tutorial: true,
+      foe: makeMon('rattata', 3, SPECIES, MOVES),
+    };
+    g.audio.playSfx(SFX.encounter);
   }
 
   startEncounter() {
@@ -181,7 +208,7 @@ export class OverworldScene {
       const foe = e.foe;
       this.enc = null;
       dexRegister(g.state.dex, 'seen', SPECIES[foe.speciesId].dexNo);
-      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this }));
+      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, tutorial: !!e.tutorial }));
     }
     if (g.renderer.flashA > 0 && e.phase !== 'transition') {
       g.renderer.flashA = Math.max(0, g.renderer.flashA - dt * 3);
@@ -205,13 +232,23 @@ export class OverworldScene {
     if (npc) {
       if (npc.trainer) { this.startTrainerBattle(npc); return true; }
       const lines = npc.dialogue.map((l) => l.replace('{player}', g.state.player.name));
+      // GD balance: data-driven one-time item gifts (ball economy top-ups).
+      const after = () => {
+        if (npc.give && !g.state.story.flags[npc.give.flag]) {
+          g.state.story.flags[npc.give.flag] = true;
+          for (const item of Object.keys(npc.give.items)) {
+            g.state.bag[item] = (g.state.bag[item] || 0) + npc.give.items[item];
+          }
+          g.ui.toast('Received ' + npc.give.text + '!');
+        }
+      };
       if (npc.heal) {
         g.ui.say(lines, () => {
           this.healParty(false);
-          g.ui.say(npc.afterHeal || ['All better!'], null, npc.name);
+          g.ui.say(npc.afterHeal || ['All better!'], after, npc.name);
         }, npc.name);
       } else {
-        g.ui.say(lines, null, npc.name);
+        g.ui.say(lines, after, npc.name);
       }
       return true;
     }
