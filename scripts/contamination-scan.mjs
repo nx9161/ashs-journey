@@ -67,4 +67,24 @@ for (const f of [...srcFiles, ...walk(path.join(ROOT, 'scripts'), ['.mjs'])]) {
 }
 
 if (failed) { console.error('CONTAMINATION: ' + failed + ' finding(s)'); process.exit(1); }
+// 6. No dynamic code execution and no checked-in dependencies (LCR Phase 4 final gate).
+//    The client is zero-dep by design (budgets-check enforces relative imports only) and the
+//    build is a pure string transform — eval / new Function have no legitimate use in this tree.
+//    node_modules is additionally a silent blind spot: walk() skips it, so a checked-in copy
+//    would evade every check above (third-party code = unknown IP provenance, GC C4).
+const codeFiles = [...srcFiles, ...walk(path.join(ROOT, 'scripts'), ['.mjs'])];
+for (const f of codeFiles) {
+  const t = fs.readFileSync(f, 'utf8');
+  if (/\beval\s*\(/.test(t)) fail(path.relative(ROOT, f) + ' calls eval — dynamic code execution is banned');
+  if (/\bnew\s+Function\s*\(/.test(t)) fail(path.relative(ROOT, f) + ' uses new Function — dynamic code execution is banned');
+}
+{
+  const stray = [];
+  for (const e of fs.readdirSync(ROOT, { withFileTypes: true })) {
+    if (e.isDirectory() && e.name === 'node_modules') stray.push(e.name);
+  }
+  if (stray.length) fail('node_modules checked into the repo (' + stray.join(', ') + ') — zero-dep posture broken, GC C4');
+}
+
+if (failed) { console.error('CONTAMINATION: ' + failed + ' finding(s)'); process.exit(1); }
 console.log('CONTAMINATION: clean');
