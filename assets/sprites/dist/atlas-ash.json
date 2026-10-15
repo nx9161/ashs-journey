@@ -1,0 +1,326 @@
+{
+  "atlas": "atlas-ash.png",
+  "tile": 16,
+  "size": [
+    432,
+    18
+  ],
+  "sprites": {
+    "ash-down-idle-1": {
+      "x": 1,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-idle-2": {
+      "x": 19,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-1": {
+      "x": 37,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-2": {
+      "x": 55,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-3": {
+      "x": 73,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-3"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-4": {
+      "x": 91,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-4"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-idle-1": {
+      "x": 109,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-idle-2": {
+      "x": 127,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-1": {
+      "x": 145,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-2": {
+      "x": 163,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-3": {
+      "x": 181,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-3"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-4": {
+      "x": 199,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-4"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-idle-1": {
+      "x": 217,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": "ash-left-idle-1"
+    },
+    "ash-right-idle-2": {
+      "x": 235,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": "ash-left-idle-2"
+    },
+    "ash-right-walk-1": {
+      "x": 253,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": "ash-left-walk-1"
+    },
+    "ash-right-walk-2": {
+      "x": 271,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": "ash-left-walk-2"
+    },
+    "ash-right-walk-3": {
+      "x": 289,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-3"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": "ash-left-walk-3"
+    },
+    "ash-right-walk-4": {
+      "x": 307,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-4"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": "ash-left-walk-4"
+    },
+    "ash-up-idle-1": {
+      "x": 325,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-idle-2": {
+      "x": 343,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-walk-1": {
+      "x": 361,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-walk-2": {
+      "x": 379,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-walk-3": {
+      "x": 397,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-3"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-walk-4": {
+      "x": 415,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "walk-4"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    }
+  }
+}

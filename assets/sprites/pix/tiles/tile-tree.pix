@@ -1,0 +1,24 @@
+# hand-drawn (no draft; silhouette needed intent).
+PIX tile-tree 16 16
+gggggggggggggggg
+ggggttttttttgggg
+ggtttvvtttttttgg
+gtttvvvvtttttttg
+gtttvvtttttuutgg
+gtttttttttuuuugg
+ggtttttttuuuuggg
+gggtttttuuuugggg
+ggggtttttuuggggg
+gggggkkkkggggggg
+gggggkkkkggggggg
+gggggkkkkggggggg
+gggggkkkkggggggg
+gggggkkkkggggggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #5da24a grass
+t #3e7a34 leaf
+u #2e5e28 leaf-dark
+v #54a048 leaf-light
+k #5a3a24 trunk

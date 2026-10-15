@@ -1,0 +1,22 @@
+# hand-finished from forge-base draft (seed 1001). Tileset palette: 16 colors (see audit).
+PIX tile-grass 16 16
+gggggggggggggggg
+ggdgggglgggggdgg
+gggggggggggggggg
+glgggggdggggglgg
+gggggggggggggggg
+ggdgggglgggddggg
+gggggggggggggggg
+gggglggggdgggggg
+gggggggggggggggg
+gdgggggglggggdgg
+gggggggggggggggg
+ggglgggggdgggglg
+gggggggggggggggg
+ggdgggglgggggdgg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #5da24a grass
+d #4c8a3e grass-dark
+l #6fb45c grass-light

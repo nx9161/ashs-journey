@@ -1,0 +1,21 @@
+# hand-finished from forge-base draft (seed 1078).
+PIX tile-path 16 16
+pppppppppppppppp
+ppqpppppppqppppp
+pppppppppppppppp
+pppqpppqppppqppp
+pppppppppppppppp
+pqppppppqppppppp
+pppppppppppppppp
+pppqppppppqppqpp
+pppppppppppppppp
+ppppqpppppppqppp
+pppppppppppppppp
+ppqpppqppppqpppp
+pppppppppppppppp
+pqpppppppqppppqp
+pppppppppppppppp
+pppppppppppppppp
+PAL
+p #d8c08a path
+q #c2a878 path-dark

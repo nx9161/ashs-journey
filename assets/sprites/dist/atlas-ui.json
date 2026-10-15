@@ -1,0 +1,49 @@
+{
+  "atlas": "atlas-ui.png",
+  "tile": 16,
+  "size": [
+    54,
+    18
+  ],
+  "sprites": {
+    "icon-badge": {
+      "x": 1,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-pokeball": {
+      "x": 19,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-potion": {
+      "x": 37,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    }
+  }
+}

@@ -1,0 +1,23 @@
+# hand-drawn (no draft).
+PIX tile-rock 16 16
+gggggggggggggggg
+gggggggggggggggg
+gggggmmmmmmggggg
+gggmmmmmmmmmmggg
+ggmmmlmmmmzmmggg
+ggmmmmmmmzzzmmgg
+ggmmmmmmzzzzmmgg
+ggmmmmmmzzzmmmgg
+gggmmmmmmmmmmggg
+gggglmmmmmmmlggg
+gggggmmmmmmggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #5da24a grass
+m #8a8aa0 rock
+z #6a6a80 rock-dark
+l #6fb45c moss

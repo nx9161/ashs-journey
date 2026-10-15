@@ -1,0 +1,24 @@
+# hand-drawn (no draft).
+PIX tile-house 16 16
+jjjjjjjjjjjjjjjj
+jjjjjjjjjjjjjjjj
+jjjjjjjjjjjjjjjj
+jjjjjjjjjjjjjjjj
+kkkkkkkkkkkkkkkk
+hhhhhhhhhhhhhhhh
+hhhhhhhhhhhhhhhh
+hhhhhhhhhhhhhhhh
+hhhkkkkhhhxxhhhh
+hhhkkkkhhhxxhhhh
+hhhkkkkhhhxxhhhh
+hhhkkkkhhhhhhhhh
+hhhkkkkhhhhhhhhh
+hhhhhhhhhhhhhhhh
+pppppppppppppppp
+pppppppppppppppp
+PAL
+j #b0503c roof
+k #5a3a24 trim-door
+h #c9a06a wall
+x #2e63b0 window
+p #d8c08a step
