@@ -88,8 +88,13 @@ export class BattleScene {
           this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.toCommand());
         });
       });
+    } else if (this.kind === 'trainer') {
+      // GB-era flow idiom: challenge line, then the lead's send-out.
+      this.say('Trainer ' + this.trainer.name + ' wants to battle!', () => {
+        this.say(this.trainer.name + ' sent out ' + foeName + '!', () => this.toCommand());
+      });
     } else {
-      this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+      this.say('Wild ' + foeName + ' appeared!');
     }
   }
 
