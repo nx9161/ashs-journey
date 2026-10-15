@@ -25,6 +25,7 @@ export class OverworldScene {
     this.trail = []; // partner path history
     this.partner = { px: this.player.px, py: this.player.py, hop: 0 };
     this.enc = null; // encounter sequence state
+    this.challenge = null; // Yellow-style trainer spot challenge (sight -> ! -> walk-up)
     this.banner = { text: this.map.name.toUpperCase(), t: 0 };
     this.stepsSinceEncounter = 0;
     this.chainCount = 0;
@@ -77,6 +78,8 @@ export class OverworldScene {
     const g = this.game;
     if (g.ui.update(dt)) return; // modal UI consumes input
     if (this.enc) { this.updateEncounter(dt); return; }
+    if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
+    if (this.checkSightLines()) return; // spotted this tick — challenge takes over
 
     const input = g.input;
     // Pause menu
@@ -186,6 +189,82 @@ export class OverworldScene {
       }
     } else {
       this.stepsSinceEncounter = 0;
+    }
+  }
+
+  // ---- Yellow-style trainer vision (sight -> "!" -> walk-up -> battle) ----
+  // An unbeaten trainer NPC with a `sight` cone spots the player standing in
+  // its line, plays the alert, and walks over. Checked between steps only.
+  // Duo NPCs (duoPartner) walk up together for a shared ambush.
+  checkSightLines() {
+    const p = this.player;
+    if (p.moving) return false;
+    const g = this.game;
+    for (const n of this.map.npcs) {
+      if (!n.trainer || !n.sight) continue;
+      if (g.state.story.flags['beat_' + n.trainer]) continue;
+      const dir = n.sight.dir || 'down';
+      const range = n.sight.range || 3;
+      const dx = dir === 'left' ? -1 : dir === 'right' ? 1 : 0;
+      const dy = dir === 'up' ? -1 : dir === 'down' ? 1 : 0;
+      for (let i = 1; i <= range; i++) {
+        const tx = n.x + dx * i, ty = n.y + dy * i;
+        if (tx === p.tx && ty === p.ty) { this.startChallenge(n); return true; }
+        if (!this.walkable(tx, ty)) break; // sight blocked (wall, rock, another NPC)
+      }
+    }
+    return false;
+  }
+
+  startChallenge(spotter) {
+    const g = this.game;
+    const parts = [{ npc: spotter, cx: spotter.x, cy: spotter.y }];
+    if (spotter.duoPartner) {
+      const mate = this.map.npcs.find((n) => n.name === spotter.duoPartner);
+      if (mate && !g.state.story.flags['beat_' + mate.trainer]) {
+        parts.push({ npc: mate, cx: mate.x, cy: mate.y });
+      }
+    }
+    this.challenge = { parts, phase: 'spot', t: 0, stepT: 0 };
+    g.audio.playSfx('trainer-spot'); // original two-note alert (visual twin: the ! mark)
+    g.ui.log.push({ ui: 'trainer-spot', npcs: parts.map((q) => q.npc.name) });
+  }
+
+  updateChallenge(dt) {
+    const g = this.game;
+    const ch = this.challenge;
+    ch.t += dt * 1000;
+    const pl = this.player;
+    if (ch.phase === 'spot') {
+      if (ch.t >= 500) { ch.phase = 'walk'; ch.t = 0; ch.stepT = 0; }
+      return;
+    }
+    // Walk phase: each challenger steps toward a tile adjacent to the player
+    // (150ms/tile). The battle transition covers the snap-back to home tiles.
+    const arrived = (q) => Math.abs(q.cx - pl.tx) + Math.abs(q.cy - pl.ty) <= 1;
+    if (ch.parts.every(arrived) || ch.t > 3500) {
+      const npc = ch.parts[0].npc;
+      this.challenge = null;
+      this.startTrainerBattle(npc);
+      return;
+    }
+    ch.stepT += dt * 1000;
+    if (ch.stepT >= 150) {
+      ch.stepT = 0;
+      for (const q of ch.parts) this.stepChallengerToward(q);
+    }
+  }
+
+  stepChallengerToward(q) {
+    const pl = this.player;
+    if (Math.abs(q.cx - pl.tx) + Math.abs(q.cy - pl.ty) <= 1) return;
+    const dx = pl.tx - q.cx, dy = pl.ty - q.cy;
+    const opts = Math.abs(dx) >= Math.abs(dy)
+      ? [[q.cx + Math.sign(dx), q.cy], [q.cx, q.cy + Math.sign(dy)]]
+      : [[q.cx, q.cy + Math.sign(dy)], [q.cx + Math.sign(dx), q.cy]];
+    for (const [nx, ny] of opts) {
+      if (nx === pl.tx && ny === pl.ty) continue; // never step onto the player
+      if (this.walkable(nx, ny)) { q.cx = nx; q.cy = ny; return; }
     }
   }
 
@@ -398,9 +477,18 @@ export class OverworldScene {
       const gspr = g.tileSprite('grass');
       if (gspr) r.blit(gspr, this.player.tx * T + jx, this.player.ty * T);
     }
-    // NPCs (2-frame idle)
+    // NPCs (2-frame idle) — challengers render at their walk-up position.
     for (const n of this.map.npcs) {
-      r.blit(g.npcFrame(n), n.x * T, n.y * T - 4);
+      let nx = n.x * T, ny = n.y * T - 4;
+      const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
+      if (cq) { nx = cq.cx * T; ny = cq.cy * T - 4; }
+      r.blit(g.npcFrame(n), nx, ny);
+    }
+    // Yellow-style spot "!" over each challenger during the alert beat.
+    if (this.challenge && this.challenge.phase === 'spot') {
+      for (const q of this.challenge.parts) {
+        r.text('!', q.cx * T + 4, q.cy * T - 16, { size: 14, bold: true, color: '#e84040' });
+      }
     }
     // Partner (hop) + player (walk cycle / idle blink)
     const hop = Math.abs(Math.sin(this.partner.hop)) * 3;

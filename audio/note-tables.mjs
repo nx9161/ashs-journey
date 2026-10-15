@@ -220,6 +220,9 @@ export const SFXSET = {
   ]},
   'transition-whoosh': { id:'transition-whoosh', wave:'noise', vol:0.35, env:[0.01,0.2], notes:[[0,null,4]] },
   'transition-fade':   { id:'transition-fade',   wave:'triangle', vol:0.2, env:[0.02,0.15], notes:[[0,'C5',2]] },
+  // Yellow homage: the trainer-spot alert — an original ascending two-note
+  // sting (visual twin: the "!" mark over the challenger).
+  'trainer-spot': { id:'trainer-spot', wave:'pulse', duty:0.125, vol:0.5, env:[0.002,0.12], notes:[[0,'E5',1],[1,'A5',2]] },
 
   // --- battle beats ---
   'battle-hit':   { id:'battle-hit',   wave:'noise', vol:0.5,  env:[0.002,0.12], notes:[[0,null,2]] },
