@@ -1,0 +1,12 @@
+{
+  "name": "ashs-journey-trackb-integration",
+  "private": true,
+  "type": "module",
+  "description": "Track B TEST GATE integration suite (QA-owned). Runs against @electric-sql/pglite (real Postgres, RLS enforced). SEPARATE from the root package — Vercel must never install this.",
+  "scripts": {
+    "test": "node run.mjs"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "0.3.9"
+  }
+}
