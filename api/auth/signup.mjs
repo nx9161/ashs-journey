@@ -123,9 +123,20 @@ export default async function handler(req) {
   } catch (e) {
     try { await client.query('ROLLBACK'); } catch { /* noop */ }
     console.error('[signup] recovery-code insert failed', e && e.message ? e.message : e);
-    // Account exists but codes failed: fail closed — the user can re-run
-    // recovery later; do NOT return partial codes.
-    return invalidRequest();
+    // F3: never leave an orphaned account. An account whose recovery codes
+    // failed to store has no recovery path — a dead-end worse than a failed
+    // signup — so the half-created account is deleted outright. The DELETE
+    // relies on the migration's ON DELETE CASCADE FKs (session, account,
+    // saves, recovery_codes) so nothing is left behind. Generic 503 copy:
+    // the client treats it as transient and the user can simply retry signup.
+    try {
+      await client.query(`SELECT set_config('app.user_id', $1, true)`, [userId]);
+      await client.query(`DELETE FROM "user" WHERE id = $1`, [userId]);
+    } catch (delErr) {
+      console.error('[signup] orphan-account cleanup failed',
+        delErr && delErr.message ? delErr.message : delErr);
+    }
+    return json({ error: 'invalid_request' }, 503);
   } finally {
     client.release();
   }
