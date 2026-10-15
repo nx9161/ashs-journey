@@ -101,8 +101,15 @@ function buildAuth() {
         },
       },
     },
-    // Kill the username-availability oracle endpoint (AppSec C2 / Pen T2).
-    disabledPaths: ['/is-username-available'],
+    // Kill the username-availability oracle endpoint (AppSec C2 / Pen T2), and
+    // the profile-identity endpoints (S1): identity is the immutable username,
+    // so /update-user and /change-email stay dark, and account deletion must
+    // flow through our /api/account/delete Tech-Law flow (password-verified,
+    // retention-aware) — never better-auth's /delete-user. /change-password
+    // stays ENABLED. Path strings verified verbatim against the installed
+    // better-auth package (dist/api/routes/update-user.mjs: /update-user,
+    // /change-password, /delete-user, /change-email).
+    disabledPaths: ['/is-username-available', '/update-user', '/change-email', '/delete-user'],
     databaseHooks: {
       user: {
         create: {

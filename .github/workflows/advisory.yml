@@ -1,0 +1,30 @@
+# Weekly dependency advisory — log-only (never fails the build).
+#
+# STANDING RULE (48h advisory SLA, recorded in api/README.md): any
+# HIGH/CRITICAL advisory surfaced by this job must be triaged within 48 hours
+# of the run — assess exploitability against our pinned surface, then patch
+# (version bump + license re-check per AppSec C13 / Tech Law C7) or record a
+# written risk acceptance in the build record. The advisory job itself never
+# blocks CI; the SLA is enforced by the standing rule, not the workflow.
+#
+# Scope: the api deps pinned in the root package.json (server-only; the game
+# client ships zero dependencies).
+
+name: advisory
+on:
+  schedule:
+    - cron: '0 9 * * 1' # weekly, Monday 09:00 UTC
+  workflow_dispatch: # manual run any time
+
+jobs:
+  advisory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: npm audit (log-only)
+        run: npm audit || true
+      - name: npm outdated (log-only)
+        run: npm outdated || true

@@ -22,16 +22,47 @@ jobs:
         run: node scripts/verify-slice.mjs
       - name: install api deps (pinned, server-only)
         run: npm ci --no-audit --no-fund
+      - name: npm audit (HIGH/CRITICAL fail the job)
+        # api deps are pinned in the root package.json (server-only); the game
+        # client ships zero dependencies.
+        run: npm audit --audit-level=high
+      - name: install-script ban (LCR condition 6)
+        # No package.json anywhere in the repo may declare preinstall/install/
+        # postinstall scripts (supply-chain bar, AppSec C13).
+        run: |
+          hits=$(grep -rE '"(preinstall|install|postinstall)"[[:space:]]*:' --include="package.json" . --exclude-dir=node_modules || true)
+          if [ -n "$hits" ]; then echo "install-script ban FAILED:"; echo "$hits"; exit 1; fi
+          echo "install-script ban: PASS"
+      - name: single-validator gate (LCR condition 8)
+        # Exactly two validators may exist: the client pre-check
+        # (src/save/schema.mjs) and the authoritative server gate
+        # (api/lib/validator.mjs). Parity status is documented honestly in
+        # api/README.md ("Save contract" > Validator).
+        run: |
+          defs=$(grep -rln -E "function validateSave" src/save api/lib --include="*.mjs" | sort)
+          echo "$defs"
+          expected=$(printf 'api/lib/validator.mjs\nsrc/save/schema.mjs')
+          [ "$defs" = "$expected" ] || { echo "single-validator gate FAILED"; exit 1; }
+          echo "single-validator gate: PASS"
       - name: validator table snapshot freshness
         run: node api/scripts/gen-tables.mjs --check
       - name: api unit tests (validator)
         run: node api/scripts/validator.test.mjs
+      - name: api fuzz test (validator, seeded N=2000)
+        run: node api/scripts/validator.fuzz.test.mjs
+      - name: api unit tests (save contract F1)
+        run: node api/scripts/save-contract.test.mjs
       - name: api unit tests (auth config)
         run: node api/scripts/config.test.mjs
       - name: api unit tests (http + ip)
         run: node api/scripts/http-ip.test.mjs
       - name: api fail-closed test (no DATABASE_URL)
         run: env -u DATABASE_URL node api/scripts/failclosed.test.mjs
+      - name: api coverage report (log-only; honest number in fuzz test header)
+        # Records branch coverage; the aggregate number is written into
+        # api/scripts/validator.fuzz.test.mjs's header comment. Log-only:
+        # coverage is reported, never chased artificially.
+        run: env -u DATABASE_URL node --experimental-test-coverage --test api/scripts/validator.test.mjs api/scripts/validator.fuzz.test.mjs api/scripts/config.test.mjs api/scripts/http-ip.test.mjs api/scripts/save-contract.test.mjs api/scripts/failclosed.test.mjs
       - name: secret scan
         uses: gitleaks/gitleaks-action@v2
         env:

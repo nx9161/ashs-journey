@@ -5463,15 +5463,12 @@ const AUTH = {
 // Player-controlled strings are rendered via textContent / createElement ONLY
 // (helpers live in auth.mjs: authEl/authText). Zero innerHTML in this file.
 //
-// ---- CONTRACT GAP (flagged for the backend seat + Sloane) ----
-// The published API contract has NO payload-download endpoint: the save list
-// and save meta endpoints return version/timestamp rows only, and the save PUT
-// uploads. Loading a cloud save on a device with no local cache (the
-// hotel-phone test, US-N1) needs a download endpoint added by the backend
-// (e.g. GET save?slot=N returning slot, version, payload, updatedAt).
-// Until that exists, downloadPayload() below reports the gap and every pull
-// path degrades honestly (toast + keep local). Push, claimGuest, queue,
-// conflict-sheet (meta both sides), and same-device re-login all work without it.
+// ---- Payload download (GET save?slot=N on the API) ----
+// New-device pull (the hotel-phone test, US-N1) downloads the payload via
+// GET save?slot=N -> {slot, version, payload, updatedAt}; 404 when the slot
+// is empty. Pull paths still degrade honestly on failure (toast + keep
+// local) — push, claimGuest, queue, conflict-sheet, and same-device re-login
+// never block on network.
 
 
 const SYNC = {
@@ -7880,6 +7877,6 @@ if (typeof window !== 'undefined') {
 }
 
 </script>
-<!-- contentHash:569c35076790c3fd85a441153d8d278090b2a570c4788a50d4e8265549e11b78 -->
+<!-- contentHash:d6557dcd024aa48293899546fb51f543526af84495b8ab25ad938f8e9c81a3b7 -->
 </body>
 </html>

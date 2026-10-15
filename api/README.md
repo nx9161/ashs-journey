@@ -74,8 +74,11 @@ Until then, all auth code paths stay dark and the game ships guest-only.
 
 - 3 slots/user, ≤64 KB payload (413 pre-parse gate + DB CHECK), slots 1–3.
 - Version-counter CAS: `PUT {slot, payload, expectedVersion}` →
-  `200 {version, updatedAt}`; `expectedVersion: null` = first-write atomic
-  INSERT (guest→account claim, first-wins; loser gets 409 → conflict sheet);
+  `200 {version, updatedAt}`; `expectedVersion` of `null`, `undefined`, or
+  `0` = first-write atomic INSERT (guest→account claim, first-wins; loser
+  gets 409 → conflict sheet). 0 is accepted because versions start at 1, so
+  it unambiguously means "no version known" — the client sends 0 for
+  unknown/first-write (F1). Negative versions → `invalid_request`.
   stale version → `409 {error:"version_conflict", serverVersion}`;
   invalid payload → `422` + ROLLBACK (previous-good row kept).
 - RLS option (a): explicit `BEGIN` on one pooled client,
@@ -86,8 +89,37 @@ Until then, all auth code paths stay dark and the game ships guest-only.
   `api/lib/data/tables.json` with a startup `tablesVersion` assert —
   fail closed). Regenerate after data changes:
   `node api/scripts/gen-tables.mjs` (CI: `--check`).
+- Validator parity (honest): exactly two validators exist — the client
+  pre-check `src/save/schema.mjs` (48 lines: top-level key whitelist +
+  schema version + basic shapes, `{ok, errors}` only, no anomaly model) and
+  the authoritative server gate `api/lib/validator.mjs` (350 lines: deep
+  type checks, species/move/item pins, `__proto__` denial, anomaly
+  detection, `{ok, errors, anomalies, summary}`). They are NOT in full
+  corpus parity by design: the client is a fast local pre-flight that must
+  never reject a save the server would accept; the server is the normative
+  gate (ADR-010 §9(8) bar). A third validator may never be added — enforced
+  by the single-validator gate in CI.
+- Seeded fuzz battery: `api/scripts/validator.fuzz.test.mjs` (mulberry32,
+  fixed seed, N=2000 random/mutated payloads; every result must be exactly
+  accept-with-possible-anomalies or the 422 shape — no throws, no other
+  shapes). The honest aggregate api/ branch-coverage number
+  (2026-10-15: 68.5%) is recorded in that file's header comment.
 - Anomalous-but-valid saves are accepted and written to `anomaly_log`
   (90-day purge) with no client-visible distinction.
+
+## Dependency advisories (48h SLA — standing rule)
+
+`.github/workflows/advisory.yml` runs weekly (Monday 09:00 UTC, log-only):
+`npm audit` + `npm outdated` against the pinned api deps (root
+package.json; the game client ships zero dependencies). **Standing rule:**
+any HIGH/CRITICAL advisory it surfaces must be triaged within 48 hours —
+assess exploitability against our pinned surface, then patch (version bump
++ license re-check per AppSec C13 / Tech Law C7) or record a written risk
+acceptance in the build record. The advisory job never blocks CI; the SLA
+is enforced by the rule, not the workflow. Merge-time protection is
+separate: `npm audit --audit-level=high` in `ci.yml` fails the build on
+HIGH/CRITICAL, and no package.json in the repo may declare
+preinstall/install/postinstall scripts (install-script ban, CI-enforced).
 
 ## Retention & deletion (Tech Law)
 
