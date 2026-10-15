@@ -222,6 +222,9 @@ const SFXSET = {
   ]},
   'transition-whoosh': { id:'transition-whoosh', wave:'noise', vol:0.35, env:[0.01,0.2], notes:[[0,null,4]] },
   'transition-fade':   { id:'transition-fade',   wave:'triangle', vol:0.2, env:[0.02,0.15], notes:[[0,'C5',2]] },
+  // Yellow homage: the trainer-spot alert — an original ascending two-note
+  // sting (visual twin: the "!" mark over the challenger).
+  'trainer-spot': { id:'trainer-spot', wave:'pulse', duty:0.125, vol:0.5, env:[0.002,0.12], notes:[[0,'E5',1],[1,'A5',2]] },
 
   // --- battle beats ---
   'battle-hit':   { id:'battle-hit',   wave:'noise', vol:0.5,  env:[0.002,0.12], notes:[[0,null,2]] },
@@ -3631,6 +3634,9 @@ const SPECIES = {
     catchRate: 190, growth: 'mediumfast', baseXp: 82, body: 'quad', spriteSeed: 2501,
     learnset: { 1: ['thundershock', 'growl'], 5: ['quickattack'] },
     flavor: 'A spirited partner who refused the easy path. Never leaves your side.',
+    // Yellow homage (hard rules): never boxed, never evolved. Guards in state.mjs.
+    refusesEvolution: true,
+    refusesBox: true,
   },
   pidgey: {
     id: 'pidgey', name: 'Pidgey', dexNo: 16, types: ['normal', 'flying'],
@@ -3819,7 +3825,8 @@ const MAPS = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        dialogue: ["Yo! Smell ya later, {player}! I'm off to grab my first partner!", "My grandpa's the professor, so I get the good stuff. Try to keep up!"] },
+        // Yellow homage (original lines): the rival's partner is an Eevee.
+        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
     ],
     encounters: null,
     start: { x: 7, y: 7, dir: 'down' },
@@ -3863,9 +3870,11 @@ const MAPS = {
         dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
       { x: 6, y: 4, name: 'CAL', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
+        sight: { dir: 'left', range: 3 }, // Yellow-style: spots you, "!", walks up (down is blocked by the sign)
         dialogue: ["Heh! Nobody gets past me without a battle!", "Whoa... you're tougher than you look."] },
       { x: 7, y: 11, name: 'LISA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r1_lisa',
+        sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Pidgey and I train here every morning! Care to spar?", "We'll be back stronger tomorrow, won't we, Pidgey?"] },
     ],
     encounters: {
@@ -3974,16 +3983,31 @@ const MAPS = {
     npcs: [
       { x: 6, y: 3, name: 'RICK', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
         trainer: 'r2_bug',
+        sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a Caterpie under a boot."] },
       { x: 7, y: 5, name: 'BEA', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
         trainer: 'r2_camper',
+        sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["I picnic here every day — battle me before you sit down!", "Not even a snack break slows you down!"] },
       { x: 7, y: 8, name: 'NIA', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'r2_jr',
+        sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Route 2 is MY training ground! Prove you belong here!", "You're stronger than the rumors said..."] },
       { x: 5, y: 10, name: 'ROB', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r2_hiker',
+        sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
+      // Yellow homage: the anime-trio ambush, reimagined with original
+      // characters (no motto quotes, no trademarked team name — GC C4).
+      // The duo flank the path; either one spotting you pulls BOTH in.
+      { x: 3, y: 7, name: 'RUE', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+        trainer: 'r2_duo', duoPartner: 'COLE',
+        sight: { dir: 'right', range: 4 },
+        dialogue: ["Hold it right there, kid.", "Beaten... by a kid?!"] },
+      { x: 10, y: 7, name: 'COLE', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+        trainer: 'r2_duo', duoPartner: 'RUE',
+        sight: { dir: 'left', range: 4 },
+        dialogue: ["Two of us, one of you.", "Retreat! Regroup! We'll be back with a better plan!"] },
     ],
     encounters: {
       rate: 0.12,
@@ -4131,6 +4155,27 @@ const TRAINERS = {
     ],
     reward: 300,
   },
+  // Yellow homage: the anime-trio ambush as a sequential 2-mon duo battle
+  // (Gen 1 had no double battles — the trio fought back-to-back, as here).
+  // Original characters, original banter; nicknamed mons for personality.
+  r2_duo: {
+    id: 'r2_duo', name: 'Rue & Cole', title: 'Uniformed Duo',
+    intro: [
+      "RUE: Well, well. A little trainer marching up OUR route.",
+      "COLE: And carrying a Pikachu that walks free? That's a rare one.",
+      "RUE: Hand over your Pokemon, kid — or we'll take them the fun way!",
+      "COLE: Two of us, one of you. The math is delicious.",
+    ],
+    lose: [
+      "RUE: Beaten... by a kid?!",
+      "COLE: Retreat! Regroup! We'll be back with a better plan!",
+    ],
+    team: [
+      { species: 'weedle', level: 5, nickname: 'Sting' },
+      { species: 'zubat', level: 6, nickname: 'Echo' },
+    ],
+    reward: 200,
+  },
   brock: {
     id: 'brock', name: 'Brock', title: 'Pewter Gym Leader',
     ai: 'opener-setup',
@@ -4169,6 +4214,25 @@ const INTRO_SCRIPT = {
   ],
 };
 
+// PARTNER_MOODS — Yellow homage: talking to the partner (face it + A, or tap
+// the mood pip) reads its current emotion. Mood is driven by battle beats
+// (battle.mjs) and by petting (overworld.mjs). All lines original.
+const PARTNER_MOODS = {
+  happy: 'is happy! It nuzzles your hand.',
+  curious: 'tilts its head, curious.',
+  sleepy: 'yawns... maybe it needs a rest soon.',
+  excited: 'is buzzing with excitement! It hops in place.',
+  sad: 'looks downcast. A win would cheer it up.',
+};
+
+// Yellow hard rules, original wording: the partner refuses the ball system
+// outright (intro), refuses evolution, and refuses the PC box (guards in
+// state.mjs). It walks beside you, or not at all.
+const PARTNER_REFUSAL = {
+  evolution: 'PIKACHU turned away! It does not want to change — not ever.',
+  box: 'PIKACHU leapt right back out! It walks beside you, or not at all.',
+};
+
 const TUTORIAL_AIDE_EXTRA = [
   'One more thing — press START anytime to open the menu. Bag, party, dex, save... it is all there.',
 ];
@@ -4182,6 +4246,39 @@ const SLICE_CAPSTONE = [
   'With the Boulder Badge, your Pokemon will obey you, and your team hits a little harder.',
   '...To be continued. The road to Cerulean City lies ahead — in the next chapter.',
 ];
+
+
+// ---- src/data/rivals.mjs ----
+// rivals.mjs — rival data + the documented Yellow partner-evolution rule.
+// Mechanics reimplemented from documentation (never ROM-derived). The rival
+// raises an EEVEE as his partner (Yellow), not a Kanto starter; which form it
+// takes is decided by the early rivalry record. Species data for Eevee and its
+// evolutions lands with the act that first fields them (ADR-006 content tiers).
+
+const RIVALS = {
+  gary: {
+    id: 'gary',
+    name: 'GARY',
+    partner: 'eevee', // Yellow: the rival's starter is an Eevee
+    // Team plans per act reference species ids; acts beyond Kanto resolve
+    // partner -> rivalPartnerEvolution(earlyWins, earlyLosses) at build time.
+    acts: {
+      kanto: { partner: 'eevee', team: ['pidgey', 'rattata'] },
+      orange: { partner: null /* resolved */, team: [] },
+      johto: { partner: null /* resolved */, team: [] },
+    },
+  },
+};
+
+// Yellow's documented rule: the rival's Eevee evolves by how the first two
+// rivalry battles went — won both -> Vaporeon, split -> Flareon, lost both
+// -> Jolteon. Pure function; the act builders call it when scripting the
+// evolution beat.
+function rivalPartnerEvolution(earlyWins, earlyLosses) {
+  if (earlyWins >= 2 && earlyLosses === 0) return 'vaporeon';
+  if (earlyWins === 1 && earlyLosses === 1) return 'flareon';
+  return 'jolteon'; // losing record (incl. 0-2) -> Jolteon
+}
 
 
 // ---- src/game/state.mjs ----
@@ -4258,6 +4355,22 @@ function displayName(mon, speciesTable) {
 }
 
 // Dex helpers — honest tracked-vs-playable wording lives in the UI layer.
+// Yellow hard rules for the partner (Ash's Pikachu): it refuses evolution and
+// refuses the PC box. Guards for current + future systems (no evolution or
+// deposit UI exists in the slice yet — these are the enforcement points they
+// must call). Original refusal lines live in data/dialogue.mjs.
+function evolutionCheck(mon) {
+  if (mon.speciesId === 'partner') {
+    return { ok: false, line: 'PIKACHU turned away! It does not want to change — not ever.' };
+  }
+  return { ok: true };
+}
+function boxCheck(mon) {
+  if (mon.speciesId === 'partner') {
+    return { ok: false, line: 'PIKACHU leapt right back out! It walks beside you, or not at all.' };
+  }
+  return { ok: true };
+}
 function dexRegister(dex, kind, dexNo) {
   dex[kind][dexNo] = true;
   if (kind === 'caught' || kind === 'befriended') dex.seen[dexNo] = true;
@@ -5641,6 +5754,7 @@ class BattleScene {
     if (this.kind === 'trainer') {
       const t0 = this.trainer.team[0];
       this.foeMon = makeMon(t0.species, t0.level, SPECIES, MOVES);
+      if (t0.nickname) this.foeMon.nickname = t0.nickname; // e.g. the duo's named mons
     }
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
@@ -5680,8 +5794,13 @@ class BattleScene {
           this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.toCommand());
         });
       });
+    } else if (this.kind === 'trainer') {
+      // GB-era flow idiom: challenge line, then the lead's send-out.
+      this.say('Trainer ' + this.trainer.name + ' wants to battle!', () => {
+        this.say(this.trainer.name + ' sent out ' + foeName + '!', () => this.toCommand());
+      });
     } else {
-      this.say(this.kind === 'wild' ? 'Wild ' + foeName + ' appeared!' : 'Trainer ' + this.trainer.name + ' wants to battle!');
+      this.say('Wild ' + foeName + ' appeared!');
     }
   }
 
@@ -6033,6 +6152,11 @@ class BattleScene {
       const crit = roll(CRIT_CHANCE, g.rng.battle);
       const rand = RANDOM_MIN + g.rng.battle() * (RANDOM_MAX - RANDOM_MIN);
       const burn = atk.status === 'burn';
+      // Yellow homage: the partner reacts to battle beats — a crit or a
+      // super-effective hit from Pikachu perks it right up.
+      if (entry.side === 'ally' && atk.speciesId === 'partner' && (crit || eff > 1)) {
+        g.state.pikachu.mood = 'happy';
+      }
       if (eff === 0) {
         this.say('It doesn\'t affect ' + defName + '...', () => this.nextAction());
         return;
@@ -6128,6 +6252,8 @@ class BattleScene {
     const g = this.game;
     const mon = side === 'ally' ? this.ally : this.foe;
     if (mon.hp > 0) { cb(); return; }
+    // Yellow homage: the partner takes its own faint personally.
+    if (side === 'ally' && mon.speciesId === 'partner') g.state.pikachu.mood = 'sad';
     const name = displayName(mon, SPECIES);
     g.audio.playSfx('battle-faint');
     // README faint transform: the sprite sinks 8px + fades to 0 over 20 frames
@@ -6158,6 +6284,7 @@ class BattleScene {
       if (this.trainerIdx < this.trainer.team.length) {
         const t = this.trainer.team[this.trainerIdx];
         this.foe = makeMon(t.species, t.level, SPECIES, MOVES);
+        if (t.nickname) this.foe.nickname = t.nickname;
         this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
         this.hpAnim.foe = this.foe.hp;
         const foeName = displayName(this.foe, SPECIES);
@@ -6389,6 +6516,10 @@ class BattleScene {
     this.state = 'victory';
     g.state.player.money += t.reward;
     g.state.story.flags['beat_' + t.id] = true;
+    // Yellow homage: winning with the partner conscious leaves it buzzing.
+    if (g.state.party.some((m) => m.speciesId === 'partner' && m.hp > 0)) {
+      g.state.pikachu.mood = 'excited';
+    }
     // No battle-message here: the capstone dialogue below ends the battle exactly once.
     this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + t.reward + '.';
     this.msgOpen = false;
@@ -6409,6 +6540,7 @@ class BattleScene {
   finishDefeat() {
     const g = this.game;
     // Defeat: fade -> Pokemon Center (overworld, healed, money halved) — architecture §2.2
+    g.state.pikachu.mood = 'sad'; // Yellow homage: the partner hates losing
     g.state.player.money = Math.floor(g.state.player.money / 2);
     this.endBattle(false);
     g.ui.say(['You hurried to the Pokemon Center...'], () => {
@@ -6609,6 +6741,7 @@ class OverworldScene {
     this.trail = []; // partner path history
     this.partner = { px: this.player.px, py: this.player.py, hop: 0 };
     this.enc = null; // encounter sequence state
+    this.challenge = null; // Yellow-style trainer spot challenge (sight -> ! -> walk-up)
     this.banner = { text: this.map.name.toUpperCase(), t: 0 };
     this.stepsSinceEncounter = 0;
     this.chainCount = 0;
@@ -6661,6 +6794,8 @@ class OverworldScene {
     const g = this.game;
     if (g.ui.update(dt)) return; // modal UI consumes input
     if (this.enc) { this.updateEncounter(dt); return; }
+    if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
+    if (this.checkSightLines()) return; // spotted this tick — challenge takes over
 
     const input = g.input;
     // Pause menu
@@ -6773,6 +6908,82 @@ class OverworldScene {
     }
   }
 
+  // ---- Yellow-style trainer vision (sight -> "!" -> walk-up -> battle) ----
+  // An unbeaten trainer NPC with a `sight` cone spots the player standing in
+  // its line, plays the alert, and walks over. Checked between steps only.
+  // Duo NPCs (duoPartner) walk up together for a shared ambush.
+  checkSightLines() {
+    const p = this.player;
+    if (p.moving) return false;
+    const g = this.game;
+    for (const n of this.map.npcs) {
+      if (!n.trainer || !n.sight) continue;
+      if (g.state.story.flags['beat_' + n.trainer]) continue;
+      const dir = n.sight.dir || 'down';
+      const range = n.sight.range || 3;
+      const dx = dir === 'left' ? -1 : dir === 'right' ? 1 : 0;
+      const dy = dir === 'up' ? -1 : dir === 'down' ? 1 : 0;
+      for (let i = 1; i <= range; i++) {
+        const tx = n.x + dx * i, ty = n.y + dy * i;
+        if (tx === p.tx && ty === p.ty) { this.startChallenge(n); return true; }
+        if (!this.walkable(tx, ty)) break; // sight blocked (wall, rock, another NPC)
+      }
+    }
+    return false;
+  }
+
+  startChallenge(spotter) {
+    const g = this.game;
+    const parts = [{ npc: spotter, cx: spotter.x, cy: spotter.y }];
+    if (spotter.duoPartner) {
+      const mate = this.map.npcs.find((n) => n.name === spotter.duoPartner);
+      if (mate && !g.state.story.flags['beat_' + mate.trainer]) {
+        parts.push({ npc: mate, cx: mate.x, cy: mate.y });
+      }
+    }
+    this.challenge = { parts, phase: 'spot', t: 0, stepT: 0 };
+    g.audio.playSfx('trainer-spot'); // original two-note alert (visual twin: the ! mark)
+    g.ui.log.push({ ui: 'trainer-spot', npcs: parts.map((q) => q.npc.name) });
+  }
+
+  updateChallenge(dt) {
+    const g = this.game;
+    const ch = this.challenge;
+    ch.t += dt * 1000;
+    const pl = this.player;
+    if (ch.phase === 'spot') {
+      if (ch.t >= 500) { ch.phase = 'walk'; ch.t = 0; ch.stepT = 0; }
+      return;
+    }
+    // Walk phase: each challenger steps toward a tile adjacent to the player
+    // (150ms/tile). The battle transition covers the snap-back to home tiles.
+    const arrived = (q) => Math.abs(q.cx - pl.tx) + Math.abs(q.cy - pl.ty) <= 1;
+    if (ch.parts.every(arrived) || ch.t > 3500) {
+      const npc = ch.parts[0].npc;
+      this.challenge = null;
+      this.startTrainerBattle(npc);
+      return;
+    }
+    ch.stepT += dt * 1000;
+    if (ch.stepT >= 150) {
+      ch.stepT = 0;
+      for (const q of ch.parts) this.stepChallengerToward(q);
+    }
+  }
+
+  stepChallengerToward(q) {
+    const pl = this.player;
+    if (Math.abs(q.cx - pl.tx) + Math.abs(q.cy - pl.ty) <= 1) return;
+    const dx = pl.tx - q.cx, dy = pl.ty - q.cy;
+    const opts = Math.abs(dx) >= Math.abs(dy)
+      ? [[q.cx + Math.sign(dx), q.cy], [q.cx, q.cy + Math.sign(dy)]]
+      : [[q.cx, q.cy + Math.sign(dy)], [q.cx + Math.sign(dx), q.cy]];
+    for (const [nx, ny] of opts) {
+      if (nx === pl.tx && ny === pl.ty) continue; // never step onto the player
+      if (this.walkable(nx, ny)) { q.cx = nx; q.cy = ny; return; }
+    }
+  }
+
   startTutorialEncounter() {
     const g = this.game;
     g.state.story.flags.tutorialDone = true;
@@ -6833,10 +7044,10 @@ class OverworldScene {
 
   petPartner() {
     // P1/D7: mood-pip tap and the faced-tile interaction share one path.
+    // Yellow homage: the partner emotes when talked to; petting cheers it up.
     const g = this.game;
-    const moods = { happy: 'is happy! It nuzzles your hand.', curious: 'tilts its head, curious.', sleepy: 'yawns... maybe it needs a rest soon.' };
     g.state.pikachu.mood = 'happy'; // a petting cheers it up (D7: mood reacts to beats)
-    g.ui.toast('Pikachu ' + (moods[g.state.pikachu.mood] || moods.happy));
+    g.ui.toast('Pikachu ' + (PARTNER_MOODS[g.state.pikachu.mood] || PARTNER_MOODS.happy));
     g.audio.playSfx('partner-happy'); // visual twin: Pikachu hop + mood pip
     g.ui.updateMoodPip();
     return true;
@@ -6982,9 +7193,18 @@ class OverworldScene {
       const gspr = g.tileSprite('grass');
       if (gspr) r.blit(gspr, this.player.tx * T + jx, this.player.ty * T);
     }
-    // NPCs (2-frame idle)
+    // NPCs (2-frame idle) — challengers render at their walk-up position.
     for (const n of this.map.npcs) {
-      r.blit(g.npcFrame(n), n.x * T, n.y * T - 4);
+      let nx = n.x * T, ny = n.y * T - 4;
+      const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
+      if (cq) { nx = cq.cx * T; ny = cq.cy * T - 4; }
+      r.blit(g.npcFrame(n), nx, ny);
+    }
+    // Yellow-style spot "!" over each challenger during the alert beat.
+    if (this.challenge && this.challenge.phase === 'spot') {
+      for (const q of this.challenge.parts) {
+        r.text('!', q.cx * T + 4, q.cy * T - 16, { size: 14, bold: true, color: '#e84040' });
+      }
     }
     // Partner (hop) + player (walk cycle / idle blink)
     const hop = Math.abs(Math.sin(this.partner.hop)) * 3;
