@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: 24
       - name: syntax check all modules
-        run: for f in $(find src scripts -name '*.mjs'); do node --check "$f" || exit 1; done
+        run: for f in $(find src scripts api -name '*.mjs'); do node --check "$f" || exit 1; done
       - name: build (zero-dep)
         run: node scripts/build.mjs
       - name: budget gates
@@ -20,6 +20,18 @@ jobs:
         run: node scripts/drift-gate.mjs
       - name: headless slice playthrough
         run: node scripts/verify-slice.mjs
+      - name: install api deps (pinned, server-only)
+        run: npm ci --no-audit --no-fund
+      - name: validator table snapshot freshness
+        run: node api/scripts/gen-tables.mjs --check
+      - name: api unit tests (validator)
+        run: node api/scripts/validator.test.mjs
+      - name: api unit tests (auth config)
+        run: node api/scripts/config.test.mjs
+      - name: api unit tests (http + ip)
+        run: node api/scripts/http-ip.test.mjs
+      - name: api fail-closed test (no DATABASE_URL)
+        run: env -u DATABASE_URL node api/scripts/failclosed.test.mjs
       - name: secret scan
         uses: gitleaks/gitleaks-action@v2
         env:
