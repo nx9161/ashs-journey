@@ -78,7 +78,7 @@ export const MAPS = {
         dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
       { x: 6, y: 4, name: 'CAL', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
-        sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
+        sight: { dir: 'left', range: 3 }, // Yellow-style: spots you, "!", walks up (down is blocked by the sign)
         dialogue: ["Heh! Nobody gets past me without a battle!", "Whoa... you're tougher than you look."] },
       { x: 7, y: 11, name: 'LISA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r1_lisa',
