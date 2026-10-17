@@ -16,6 +16,10 @@ created from scratch for this fan project.
 - No analytics, no tracking, no network calls (guest build works fully offline).
 - Repo is **private** by design (General Counsel ruling — this is Nintendo-IP fan work).
 
+## Live Demo
+
+**[https://ashs-journey-game-nx9161s-projects.vercel.app](https://ashs-journey-game-nx9161s-projects.vercel.app)**
+
 ## Layout
 
 ```
@@ -44,3 +48,7 @@ node scripts/verify-slice.mjs     # headless playthrough: boot → catch → bad
 
 See `docs/contracts.md` for the sprite and audio formats the asset seats build against,
 and `budgets.json` for the binding performance/size budgets (build fails over budget).
+
+---
+
+Built by **Naman Parmar** ([nx9161](https://github.com/nx9161)).
