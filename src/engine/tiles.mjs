@@ -6,6 +6,7 @@ export const TILE_CHARS = {
   '#': 'tree', '.': 'path', ',': 'grass', '~': 'water',
   'H': 'house', 'D': 'door', 'S': 'sign', 'G': 'gymwall',
   'E': 'gymdoor', 'C': 'centerdoor', 'F': 'flower', 'R': 'rock',
+  'T': 'tree', 'B': 'rock', 'W': 'water',
   ' ': 'void',
 };
 

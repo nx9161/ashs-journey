@@ -39,29 +39,51 @@ export function effectiveness(moveType, defenderTypes) {
   return m;
 }
 
-// Documented Gen 4/5 damage: floor(floor(floor(2*L/5+2)*Power*A/D)/50)+2
-// then STAB 1.5x, type effectiveness, crit 2x (1/16 Gen 2-5), random 0.85-1.00,
-// burn halves physical.
+// Damage: classic formula floor(floor(floor(2*L/5+2)*Power*A/D)/50)+2 with
+// Generation-I critical-hit semantics (ADR-018): on a crit the LEVEL is
+// doubled inside the formula (no separate 2x multiplier), the attacker's
+// negative and defender's positive stat stages are ignored (the caller
+// passes raw stats), and burn does not halve. Random factor is the classic
+// integer roll 217-255 / 255 (see gen1Random). STAB 1.5x. Type chart is the
+// complete modern 18-type chart per the WS8 ruling (ADR-018): fidelity
+// governs feel, pacing and presentation in Kanto — not chart bugs.
 export function calcDamage(level, power, atk, def, opts) {
   const o = opts || {};
   const stab = o.stab ? 1.5 : 1;
   const eff = o.effectiveness !== undefined ? o.effectiveness : 1;
-  const crit = o.crit ? 2 : 1;
   const rand = o.random !== undefined ? o.random : 1;
-  const burn = o.burn && o.physical ? 0.5 : 1;
-  const base = Math.floor(Math.floor(Math.floor((2 * level) / 5 + 2) * power * atk / def) / 50) + 2;
-  return Math.max(1, Math.floor(base * stab * eff * crit * rand * burn));
+  const effLevel = o.crit ? level * 2 : level;
+  // Gen 1: burn halves the physical Attack STAT before the formula (and a
+  // critical hit ignores the halving, like it ignores stat stages).
+  const a = (o.burn && o.physical && !o.crit) ? Math.floor(atk / 2) : atk;
+  const base = Math.floor(Math.floor(Math.floor((2 * effLevel) / 5 + 2) * power * a / def) / 50) + 2;
+  return Math.max(1, Math.floor(base * stab * eff * rand));
 }
 
-export const CRIT_CHANCE = 1 / 16; // Gen 2-5 value
+export function gen1Random(rng) { return (217 + Math.floor(rng() * 39)) / 255; }
+
+// Generation-I critical-hit rate, exact form: normal T = base Speed,
+// P = T/512; high-crit moves (Slash, Razor Leaf, Karate Chop, Crabhammer)
+// T = min(255, base Speed x 4), P = T/256. Focus Energy multiplies the rate
+// by 4 (the original divided by 4 — a bug; not reproduced, ADR-018 D4).
+export function critChance(baseSpeed, opts) {
+  const o = opts || {};
+  let c = o.highCrit ? Math.min(255, baseSpeed * 4) / 256 : baseSpeed / 512;
+  if (o.focus) c *= 4;
+  return Math.min(1, c);
+}
 export const STAB_MULT = 1.5;
-export const RANDOM_MIN = 0.85;
-export const RANDOM_MAX = 1.0;
 
 // Stat stage ladder: stage in [-6, 6]; each stage x1.5 / ÷1.5.
 export function stageMultiplier(stage) {
   if (stage >= 0) return (2 + stage) / 2;
   return 2 / (2 - stage);
+}
+
+// Accuracy/evasion stage ladder (classic table): (3+s)/3 up, 3/(3-s) down.
+export function accStageMultiplier(stage) {
+  if (stage >= 0) return (3 + stage) / 3;
+  return 3 / (3 - stage);
 }
 
 export function statValue(base, level, iv) {
@@ -73,37 +95,29 @@ export function hpValue(base, level, iv) {
   return Math.floor(((2 * base + v) * level) / 100) + level + 10;
 }
 
-// Catch: documented Gen 5 values (dossier §B1 + GD §3.3).
-// a = ((3*HPmax - 2*HPcur) / (3*HPmax)) * catchRate * ballBonus * statusBonus
-// statusBonus: 2.5 sleep/freeze, 1.5 para/poison/burn. a >= 255 => guaranteed.
-export const STATUS_CATCH_BONUS = {
-  sleep: 2.5, freeze: 2.5, paralysis: 1.5, poison: 1.5, burn: 1.5, badlyPoisoned: 1.5,
-};
-
-export function catchA(hpMax, hpCur, catchRate, ballBonus, status) {
-  const sb = (status && STATUS_CATCH_BONUS[status]) || 1;
-  return ((3 * hpMax - 2 * hpCur) / (3 * hpMax)) * catchRate * ballBonus * sb;
-}
-
-// Shake checks per documented Gen 4/5 shake probability.
-// Returns the number of successful shakes (0-3). Caller provides rng().
-export function shakeChecks(a, rng) {
-  if (a >= 255) return 3;
-  let shakes = 0;
-  for (let i = 0; i < 3; i++) {
-    // Documented shake probability: b = 65536 / (255/a)^(1/4)... simplified to the
-    // standard approximation used in reimplementations: p = a/255 scaled per shake.
-    const p = Math.pow(a / 255, 0.75);
-    if (rng() < p) shakes++;
-    else break;
-  }
-  return shakes;
-}
-
-export function isCriticalCapture(a) {
-  // Gen 5 critical capture: rare instant-catch flourish on low-odds throws.
-  // Eligibility scales inversely with `a`; kept as theater per GD §3.3.
-  return a < 60;
+// Catch: Generation-I two-roll system (ADR-018). Roll R uniformly in the
+// ball's range (poke 0-255, great 0-200, ultra 0-150, master = automatic).
+// Status shifts R down (sleep/freeze -25, poison/burn/paralysis -12).
+// R < 0 => caught; R > catchRate => immediate fail; otherwise the HP factor
+// f = (HPmax * 255 * 4) / (HPcur * divisor) (divisor 8 for Great Ball, else
+// 12, f capped at 255) and a second roll R2 in 0-255 catches iff R2 <= f.
+// Wobble count for animation comes from how far R fell under the rate.
+export const BALL_RANGES = { pokeball: 255, greatball: 200, ultraball: 150, masterball: 0, safariball: 255 };
+export function gen1Catch(hpMax, hpCur, catchRate, ballId, status, rng) {
+  if (ballId === 'masterball') return { caught: true, shakes: 3 };
+  const range = BALL_RANGES[ballId] !== undefined ? BALL_RANGES[ballId] : 255;
+  let r = Math.floor(rng() * (range + 1));
+  if (status === 'sleep' || status === 'freeze') r -= 25;
+  else if (status === 'poison' || status === 'burn' || status === 'paralysis' || status === 'badlyPoisoned') r -= 12;
+  if (r < 0) return { caught: true, shakes: 3 };
+  if (r > catchRate) return { caught: false, shakes: 0 };
+  const divisor = ballId === 'greatball' ? 8 : 12;
+  let f = Math.floor((hpMax * 255 * 4) / (Math.max(1, hpCur) * divisor));
+  if (f > 255) f = 255;
+  const r2 = Math.floor(rng() * 256);
+  if (r2 <= f) return { caught: true, shakes: 3 };
+  const shakes = r < catchRate / 3 ? 1 : (r < (2 * catchRate) / 3 ? 2 : 2);
+  return { caught: false, shakes };
 }
 
 // XP: documented growth curves reimplemented (GD §3.4).

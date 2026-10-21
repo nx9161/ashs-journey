@@ -6,8 +6,8 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { BALLS } from '../data/items.mjs';
 import {
-  effectiveness, calcDamage, stageMultiplier, CRIT_CHANCE, STAB_MULT,
-  RANDOM_MIN, RANDOM_MAX, catchA, shakeChecks, isCriticalCapture,
+  effectiveness, calcDamage, stageMultiplier, accStageMultiplier, STAB_MULT,
+  gen1Random, critChance, gen1Catch,
   xpYield, xpForLevel, statValue, hpValue,
 } from '../engine/formulas.mjs';
 import { roll, intIn } from '../engine/rng.mjs';
@@ -33,6 +33,17 @@ export class BattleScene {
     this.kind = opts.kind; // 'wild' | 'trainer'
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
+    this.safari = !!opts.safari; // Safari Zone: no ally actions, BALL/BAIT/ROCK/RUN
+    this.onEnd = opts.onEnd || null; // story-event continuation callback
+    this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
+    this.onSafariAction = opts.onSafariAction || null; // overworld spends a step per action
+    this.safariBait = false;
+    this.safariRock = false;
+    // ADR-020: real-time mode is the default battle flow; the tutorial and
+    // Safari command battles stay on the classic engine, and the player can
+    // choose Classic in Settings (opts.rt === false).
+    this.rtMode = !opts.tutorial && !opts.safari && opts.rt !== false;
+    this.rt = null;
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.trainerIdx = 0;
@@ -52,8 +63,13 @@ export class BattleScene {
     }
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
-    this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+    this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
     this.allyStages = this.ally.stages;
+    if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
+    // Fidelity pack (ADR-018): XP is split among participants — mons that
+    // were active against THIS foe. Reset per foe in afterFaintFoe.
+    this.participants = new Set([this.ally]);
+    this.runAttempts = 0;
     this.turn = 1;
     this.actions = [];
     this.animQ = [];
@@ -96,6 +112,19 @@ export class BattleScene {
     } else {
       this.say('Wild ' + foeName + ' appeared!');
     }
+  }
+
+  safariFleeCheck() {
+    // Safari flee model (ADR-019 simplification, documented): base 10%,
+    // rock +15%, bait -8%, skittish species (catch rate <= 45) +5%.
+    const g = this.game;
+    const rate = SPECIES[this.foe.speciesId].catchRate;
+    let p = 0.10 + (this.safariRock ? 0.15 : 0) - (this.safariBait ? 0.08 : 0) + (rate <= 45 ? 0.05 : 0);
+    if (roll(Math.max(0.02, p), g.rng.battle)) {
+      this.say('Wild ' + displayName(this.foe, SPECIES) + ' fled!', () => this.endBattle(true));
+      return true;
+    }
+    return false;
   }
 
   firstAble(g) {
@@ -149,6 +178,7 @@ export class BattleScene {
     }
     switch (this.state) {
       case 'intro': break; // driven by msg cb
+      case 'rt': this.updateRt(dt); break;
       case 'command': this.updateCommand(input); break;
       case 'resolve': this.updateResolve(dt); break;
       case 'catchseq': this.updateCatch(dt); break;
@@ -168,6 +198,26 @@ export class BattleScene {
 
   toCommand() {
     this.state = 'command';
+    if (this.rtMode) {
+      // ADR-020: real-time flow replaces the command menu. First call enters
+      // the arena; a NEW foe (trainer sent out the next mon) resets it;
+      // anything else (party-menu return) just resumes.
+      if (!this.rt) this.rtInit();
+      else if (this.foe !== this._rtLastFoe) this.rtResetFoe();
+      else this.state = 'rt';
+      return;
+    }
+    if (this.safari) {
+      const balls = this.game.state.bag.safariball || 0;
+      const items = [
+        { label: 'SAFARI BALL x' + balls, value: 'safariball', disabled: balls <= 0 },
+        { label: 'BAIT', value: 'bait' },
+        { label: 'ROCK', value: 'rock' },
+        { label: 'RUN', value: 'safarirun' },
+      ];
+      this.game.ui.showCommands(items, (value) => this.onCommand(value), {});
+      return;
+    }
     // P0/C7: guided first-catch tutorial — FIGHT highlighted first (others dimmed),
     // then BAG highlighted once the foe is weakened. Dimmed = de-emphasized, still usable.
     const tut = this.tutorial;
@@ -189,15 +239,31 @@ export class BattleScene {
   onCommand(value) {
     const g = this.game;
     if (value === null) { this.toCommand(); return; } // cancelled -> back
+    if (this.safari) {
+      if (this.onSafariAction) this.onSafariAction();
+      if (value === 'safarirun') { this.endBattle(true); return; }
+      if (value === 'safariball') { this.beginCatch('safariball'); return; }
+      if (value === 'bait' || value === 'rock') {
+        if (value === 'bait') { this.safariBait = true; this.safariRock = false; }
+        else { this.safariRock = true; this.safariBait = false; }
+        const name = displayName(this.foe, SPECIES);
+        this.say(value === 'bait' ? 'You threw bait! ' + name + ' is eating...' : 'You threw a rock! ' + name + ' is angry!', () => {
+          if (this.safariFleeCheck()) return;
+          this.toCommand();
+        });
+        return;
+      }
+    }
     if (value === 'fight') {
       // P0/E9: 2x2 move grid — name + type badge pill (icon+text) + PP + power/acc;
       // 0-PP rows grayed with a slash; cursor memory pre-selects the last-used move.
       const ally = this.ally;
       const items = ally.moves.map((m, i) => {
         const mv = MOVES[m.id];
+        const disabledMove = ally.disableT > 0 && ally.disabledMove === i;
         return {
           label: mv.name + ' (' + mv.type + ') ' + m.pp + '/' + m.maxPp,
-          value: i, disabled: m.pp <= 0, zeroPp: m.pp <= 0, move: m,
+          value: i, disabled: m.pp <= 0 || disabledMove, zeroPp: m.pp <= 0, move: m,
         };
       });
       items.push({ label: 'Back', value: -1 });
@@ -240,8 +306,31 @@ export class BattleScene {
       this.openPartyMenu(false);
     } else if (value === 'run') {
       if (this.kind === 'wild') {
-        g.audio.playSfx('battle-run');
-      this.say('Got away safely!', () => this.endBattle(true));
+        // Gen-1 escape formula (ADR-018): F = allySpe*128/foeSpe + 30*attempts;
+        // escape iff F > 255 or a 0-255 roll lands under F. Failure costs the
+        // turn — the foe acts.
+        this.runAttempts++;
+        const allySpe = Math.max(1, this.ally.stats.spe);
+        const foeSpe = Math.max(1, this.foe.stats.spe);
+        const F = Math.floor((allySpe * 128) / foeSpe) + 30 * this.runAttempts;
+        if (F > 255 || Math.floor(g.rng.battle() * 256) < F) {
+          g.audio.playSfx('battle-run');
+          this.say('Got away safely!', () => this.endBattle(true));
+        } else {
+          this.say("Can't escape!", () => {
+            this.playerAction = { type: 'ran' };
+            this.foeAction = this.chooseFoeAction();
+            this.state = 'resolve';
+            const mkFoe = (action) => {
+              const mon = this.foe;
+              const stats = this.effStats(mon, this.foeStages);
+              const move = action.type === 'move' ? MOVES[mon.moves[action.idx].id] : null;
+              return { side: 'foe', action, mon, stats, priority: move ? (move.priority || 0) : 0, move };
+            };
+            this.actions = [mkFoe(this.foeAction)];
+            this.nextAction();
+          });
+        }
       } else {
         this.say("Can't escape a trainer battle!", () => this.toCommand());
       }
@@ -261,9 +350,18 @@ export class BattleScene {
       const old = this.ally;
       this.ally = g.state.party[v];
       this.allyStages = this.ally.stages;
+      if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
+      this.participants.add(this.ally); // switched-in mons share this foe's XP
       this.hpAnim.ally = this.ally.hp;
       if (inFaint) {
         this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this.toCommand());
+      } else if (this.rtMode) {
+        // ADR-020: live switching — no turn is spent; the incoming mon is
+        // briefly vulnerable (no dodge i-frames) as the switch cost.
+        this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
+          if (this.rt) { this.rt.switchVulnT = 1000; this.rt.iframes = 0; this.state = 'rt'; }
+          else this.toCommand();
+        });
       } else {
         this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
           this.playerAction = { type: 'switch', from: old };
@@ -296,7 +394,8 @@ export class BattleScene {
 
   chooseFoeAction() {
     const g = this.game;
-    const usable = this.foe.moves.map((m, i) => i).filter((i) => this.foe.moves[i].pp > 0);
+    const usable = this.foe.moves.map((m, i) => i).filter((i) => this.foe.moves[i].pp > 0
+      && !(this.foe.disableT > 0 && this.foe.disabledMove === i));
     if (!usable.length) return { type: 'move', idx: 0, struggle: true };
     // GD balance: gym-leader opener — a leader with a self-buff setup move
     // opens with it (classic Brock Defense Curl): gives the player a free
@@ -308,7 +407,13 @@ export class BattleScene {
       });
       if (setup !== undefined) return { type: 'move', idx: setup };
     }
-    // Gym-leader-ish AI: prefer super-effective moves, else random.
+    // Gen-1 AI tempering (ADR-018): ordinary trainers pick near-randomly —
+    // the original's AI rarely optimizes. Leaders (ai:'smart') and the
+    // Elite Four prefer super-effective lines.
+    const smart = this.trainer && (this.trainer.ai === 'smart' || this.trainer.ai === 'opener-setup');
+    if (!smart) {
+      return { type: 'move', idx: usable[Math.floor(g.rng.battle() * usable.length)] };
+    }
     const allyTypes = SPECIES[this.ally.speciesId].types;
     let best = usable[0], bestScore = -1;
     for (const i of usable) {
@@ -335,6 +440,8 @@ export class BattleScene {
 
   beginTurn() {
     this.state = 'resolve';
+    if (this.ally) this.ally.tookPhysicalThisTurn = 0;
+    if (this.foe) this.foe.tookPhysicalThisTurn = 0;
     const pa = this.playerAction, fa = this.foeAction;
     const mk = (side, action) => {
       const mon = side === 'ally' ? this.ally : this.foe;
@@ -386,78 +493,204 @@ export class BattleScene {
     const defStages = foeSide === 'ally' ? this.allyStages : this.foeStages;
     const atkName = displayName(atk, SPECIES);
 
-    // Paralysis / sleep / freeze / confusion gates
+    // Status gates — Generation-I semantics (ADR-018).
+    if (atk.flinched) {
+      atk.flinched = false;
+      this.say(atkName + ' flinched and couldn\'t move!', () => this.nextAction());
+      return;
+    }
+    if (atk.mustRecharge) {
+      atk.mustRecharge = false;
+      this.say(atkName + ' must recharge!', () => this.nextAction());
+      return;
+    }
     if (atk.status === 'paralysis' && roll(0.25, g.rng.battle)) {
       this.say(atkName + ' is paralyzed! It can\'t move!', () => this.nextAction());
       return;
     }
     if (atk.status === 'sleep') {
-      atk.statusTurns = (atk.statusTurns || 2) - 1;
-      if (atk.statusTurns <= 0) { atk.status = null; this.say(atkName + ' woke up!', () => this.execMoveContinue(entry)); }
-      else this.say(atkName + ' is fast asleep.', () => this.nextAction());
+      // Gen 1: sleep lasts 1-7 turns, and the turn you wake up is lost.
+      if (atk.sleepTurns === undefined || atk.sleepTurns === null) atk.sleepTurns = 1 + Math.floor(g.rng.battle() * 7);
+      atk.sleepTurns--;
+      if (atk.sleepTurns > 0) { this.say(atkName + ' is fast asleep.', () => this.nextAction()); return; }
+      atk.status = null; atk.sleepTurns = null;
+      this.say(atkName + ' woke up!', () => this.nextAction());
       return;
     }
     if (atk.status === 'freeze') {
-      if (roll(0.2, g.rng.battle)) { atk.status = null; this.say(atkName + ' thawed out!', () => this.execMoveContinue(entry)); }
-      else { this.say(atkName + ' is frozen solid!', () => this.nextAction()); }
+      // Gen 1: no random thaw — only a Fire-type hit thaws (in damage code).
+      this.say(atkName + ' is frozen solid!', () => this.nextAction());
       return;
     }
-    if (atk.confused && roll(0.33, g.rng.battle)) {
-      const dmg = Math.max(1, Math.floor(calcDamage(atk.level, 40, entry.stats.atk, entry.stats.def, {}) / 2));
-      atk.hp = Math.max(0, atk.hp - dmg);
-      this.say(atkName + ' hurt itself in confusion!', () => this.checkFaint(entry.side, () => this.nextAction()));
-      return;
+    if (atk.confused) {
+      if (atk.confusedTurns === undefined || atk.confusedTurns === null) atk.confusedTurns = 2 + Math.floor(g.rng.battle() * 4);
+      atk.confusedTurns--;
+      if (atk.confusedTurns <= 0) {
+        atk.confused = false; atk.confusedTurns = null;
+        this.say(atkName + ' snapped out of confusion!', () => this.execMoveContinue(entry));
+        return;
+      }
+      if (roll(0.5, g.rng.battle)) {
+        // Gen 1: 50% self-hit at full typeless 40-power formula (no halving).
+        const dmg = Math.max(1, calcDamage(atk.level, 40, entry.stats.atk, entry.stats.def, {}));
+        atk.hp = Math.max(0, atk.hp - dmg);
+        this.say(atkName + ' hurt itself in confusion!', () => this.checkFaint(entry.side, () => this.nextAction()));
+        return;
+      }
     }
     this.execMoveContinue(entry);
   }
 
   execMoveContinue(entry) {
     const g = this.game;
-    const atk = entry.mon, mv = entry.move;
+    const atk = entry.mon;
+    let mv = entry.move;
     const foeSide = entry.side === 'ally' ? 'foe' : 'ally';
     const def = foeSide === 'ally' ? this.ally : this.foe;
     const defStages = foeSide === 'ally' ? this.allyStages : this.foeStages;
     const atkName = displayName(atk, SPECIES);
     const defName = displayName(def, SPECIES);
 
+    // Lock-in moves (Wrap/Petal Dance family): the mon keeps using the move
+    // until the lock expires; Petal Dance confuses the user afterwards.
+    if (atk.lockMove && entry.action && entry.action.type === 'move') {
+      entry.action.idx = atk.lockMove.idx;
+      mv = MOVES[atk.moves[atk.lockMove.idx].id] || mv;
+    }
+
+    // Two-turn charge moves (Solar Beam / Dig / Fly family): first use
+    // charges (no PP cost), the locked follow-up executes.
+    if (mv.charge && !atk.chargedFor) {
+      atk.chargedFor = mv.id;
+      atk.lockMove = entry.action && entry.action.type === 'move' ? { idx: entry.action.idx, left: 1, after: null } : null;
+      this.say(atkName + ' used ' + mv.name + '!', () => {
+        this.say(atkName + ' is charging up!', () => this.nextAction());
+      });
+      return;
+    }
+    if (atk.chargedFor === mv.id) atk.chargedFor = null;
+
     // PP
     if (entry.action && !entry.action.struggle && entry.action.type === 'move') {
       const slot = atk.moves[entry.action.idx];
       if (slot) slot.pp = Math.max(0, slot.pp - 1);
+      atk.lastMoveIdx = entry.action.idx;
     }
 
-    // Accuracy check
-    const acc = mv.acc || 100;
-    if (acc < 100 && !roll(acc / 100, g.rng.battle)) {
-      this.say(atkName + ' used ' + mv.name + '!', () => {
-        this.say('But it missed!', () => this.nextAction());
-      });
+    // Bide: accumulate for 2 turns, then release double the damage taken.
+    if (mv.effect && mv.effect.bide) {
+      if (!atk.bideT) { atk.bideT = 2; atk.bideDmg = 0; this.say(atkName + ' used Bide!', () => this.nextAction()); return; }
+      const bd = atk.bideDmg * 2; atk.bideT = 0; atk.bideDmg = 0;
+      if (bd <= 0) { this.say(atkName + ' used Bide! But it failed!', () => this.nextAction()); return; }
+      def.hp = Math.max(0, def.hp - bd);
+      this.say(atkName + ' unleashed energy!', () => this.checkFaint(foeSide, () => this.nextAction()));
       return;
+    }
+    if (atk.bideT) atk.bideT--;
+
+    // Metronome: become a random other move.
+    if (mv.effect && mv.effect.metronome) {
+      const pool = Object.keys(MOVES).filter((k) => !['metronome', 'mimic', 'transform', 'bide'].includes(k));
+      const pick = pool[Math.floor(g.rng.battle() * pool.length)];
+      entry.metronomeMove = MOVES[pick];
+      this.say(atkName + ' used Metronome!', () => { entry.move = MOVES[pick]; this.execMoveContinue(entry); });
+      return;
+    }
+
+    // Accuracy — Gen 1 (ADR-018): move acc x acc/eva stage multiplier;
+    // even 100%-acc moves miss 1/256 of the time; neverMiss skips all rolls.
+    // OHKO moves use their own Gen-1 rule: hit chance (userLv - targetLv
+    // + 30) / 256 — they cannot touch a sufficiently higher-level target.
+    const atkStages = entry.side === 'ally' ? this.allyStages : this.foeStages;
+    if ((mv.effect && mv.effect.ohko) || mv.ohko) {
+      const pOhko = Math.max(0, Math.min(255, atk.level - def.level + 30)) / 256;
+      if (!roll(pOhko, g.rng.battle)) {
+        this.say(atkName + ' used ' + mv.name + '!', () => {
+          this.say('But it missed!', () => this.nextAction());
+        });
+        return;
+      }
+    } else if (!mv.neverMiss) {
+      const stageDelta = (atkStages.acc || 0) - (defStages.eva || 0);
+      let p = ((mv.acc || 100) / 100) * accStageMultiplier(Math.max(-6, Math.min(6, stageDelta)));
+      if (p >= 1) p = 255 / 256;
+      if (!roll(p, g.rng.battle)) {
+        this.say(atkName + ' used ' + mv.name + '!', () => {
+          this.say('But it missed!', () => this.nextAction());
+        });
+        return;
+      }
     }
 
     this.say(atkName + ' used ' + mv.name + '!', () => {
       if (mv.cat === 'status') { this.applyStatusMove(entry, mv); return; }
-      const atkStat = mv.cat === 'physical' ? entry.stats.atk : entry.stats.spa;
-      const defStat = mv.cat === 'physical'
-        ? Math.floor(def.stats.def * stageMultiplier(defStages.def))
-        : Math.floor(def.stats.spd * stageMultiplier(defStages.spd));
-      const eff = effectiveness(mv.type, SPECIES[def.speciesId].types);
-      const stab = SPECIES[atk.speciesId].types.includes(mv.type);
-      const crit = roll(CRIT_CHANCE, g.rng.battle);
-      const rand = RANDOM_MIN + g.rng.battle() * (RANDOM_MAX - RANDOM_MIN);
-      const burn = atk.status === 'burn';
-      // Yellow homage: the partner reacts to battle beats — a crit or a
-      // super-effective hit from Pikachu perks it right up.
-      if (entry.side === 'ally' && atk.speciesId === 'partner' && (crit || eff > 1)) {
-        g.state.pikachu.mood = 'happy';
-      }
+      const efx = mv.effect || {};
+      const atkTypes = atk.tempTypes || (atk.transformed ? atk.transformed.types : SPECIES[atk.speciesId].types);
+      const defTypes = def.tempTypes || (def.transformed ? def.transformed.types : SPECIES[def.speciesId].types);
+      const eff = effectiveness(mv.type, defTypes);
+      const stab = atkTypes.includes(mv.type);
       if (eff === 0) {
         this.say('It doesn\'t affect ' + defName + '...', () => this.nextAction());
         return;
       }
-      const dmg = calcDamage(atk.level, mv.power, atkStat, defStat,
-        { stab, effectiveness: eff, crit, random: rand, burn, physical: mv.cat === 'physical' });
-      def.hp = Math.max(0, def.hp - dmg);
+      // Dream Eater only works on a sleeping target.
+      if (efx.requiresSleep && def.status !== 'sleep') {
+        this.say('But it failed! The target is not asleep!', () => this.nextAction());
+        return;
+      }
+      // Counter: succeeds only if the user took physical damage this turn.
+      if (efx.counter) {
+        const taken = atk.tookPhysicalThisTurn || 0;
+        if (taken <= 0) { this.say('But it failed!', () => this.nextAction()); return; }
+        def.hp = Math.max(0, def.hp - taken * 2);
+        this.say(defName + ' took ' + (taken * 2) + ' damage!', () => this.checkFaint(foeSide, () => this.nextAction()));
+        return;
+      }
+      const baseSpe = (atk.transformed ? atk.transformed.baseSpe : SPECIES[atk.speciesId].base.spe);
+      const crit = roll(critChance(baseSpe, { highCrit: !!mv.highcrit, focus: !!atk.focused }), g.rng.battle);
+      // Gen 1 crits ignore ALL stat stages (raw stats both sides).
+      const atkStat = mv.cat === 'physical'
+        ? (crit ? atk.stats.atk : entry.stats.atk)
+        : (crit ? atk.stats.spa : entry.stats.spa);
+      const defStat = mv.cat === 'physical'
+        ? (crit ? def.stats.def : Math.floor(def.stats.def * stageMultiplier(defStages.def)))
+        : (crit ? def.stats.spd : Math.floor(def.stats.spd * stageMultiplier(defStages.spd)));
+      const burn = atk.status === 'burn';
+      if (entry.side === 'ally' && atk.speciesId === 'partner' && (crit || eff > 1)) {
+        g.state.pikachu.mood = 'happy';
+      }
+      // Damage amount: fixed / level-scaled / OHKO / standard formula.
+      let dmg;
+      if (mv.ohko || efx.ohko) dmg = def.hp;
+      else if (efx.fixed) dmg = efx.fixed;
+      else if (efx.fixedLevel) dmg = atk.level;
+      else if (efx.psywave) dmg = Math.max(1, Math.floor(atk.level * (0.5 + g.rng.battle())));
+      else {
+        const hits = efx.hits ? (efx.hits[0] + Math.floor(g.rng.battle() * (efx.hits[1] - efx.hits[0] + 1))) : 1;
+        dmg = 0;
+        for (let hi = 0; hi < hits; hi++) {
+          dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
+            { stab, effectiveness: eff, crit, random: gen1Random(g.rng.battle), burn, physical: mv.cat === 'physical' });
+        }
+        if (hits > 1) this._hitCount = hits;
+      }
+      // Reflect / Light Screen halve the matching category while active.
+      if (mv.cat === 'physical' && def.reflectT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
+      if (mv.cat === 'special' && def.lightT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
+      // Substitute absorbs the hit.
+      let subBroke = false;
+      if (def.subHp > 0) {
+        def.subHp -= dmg;
+        if (def.subHp <= 0) { def.subHp = 0; subBroke = true; }
+        dmg = 0;
+      }
+      if (dmg > 0) {
+        def.hp = Math.max(0, def.hp - dmg);
+        if (mv.cat === 'physical') def.tookPhysicalThisTurn = (def.tookPhysicalThisTurn || 0) + dmg;
+        if (def.bideT) def.bideDmg = (def.bideDmg || 0) + dmg;
+        // Gen 1: a Fire-type hit thaws a frozen defender.
+        if (def.status === 'freeze' && mv.type === 'fire') def.status = null;
+      }
       // GD tutorial: the lesson mon endures at 1 HP — the gate teaches
       // catching, so the only exit is a (guaranteed, once weakened) catch.
       let hungOn = false;
@@ -495,22 +728,68 @@ export class BattleScene {
       if (eff > 1) extra += " It's super effective!";
       else if (eff < 1) extra += " It's not very effective...";
       const after = () => {
-        // Secondary effect, then the damage line (never double-say the effectiveness line).
+        // Secondary effects, then the damage line.
         let msg2 = hungOn
           ? defName + ' hung on with 1 HP! Now — open the BAG and throw a Poke Ball!'
-          : defName + ' took ' + dmg + ' damage!';
-        if (mv.effect && mv.effect.status && (!mv.effect.chance || roll(mv.effect.chance / 100, g.rng.battle))) {
-          if (!def.status) {
-            def.status = mv.effect.status;
-            if (mv.effect.status === 'confusion') def.confused = true;
-            msg2 = defName + this.statusText(mv.effect.status);
+          : (subBroke ? 'The substitute broke!' : defName + ' took ' + dmg + ' damage!');
+        if (this._hitCount) { msg2 += ' Hit ' + this._hitCount + ' times!'; this._hitCount = 0; }
+        if (mv.ohko || efx.ohko) msg2 = 'One-hit KO!';
+        // Status infliction (single status or Tri Attack's random pick).
+        let statusRoll = efx.status;
+        if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
+        if (statusRoll && def.hp > 0 && (!efx.chance || roll(efx.chance / 100, g.rng.battle))) {
+          if (statusRoll === 'confusion') {
+            if (!def.confused) { def.confused = true; def.confusedTurns = 2 + Math.floor(g.rng.battle() * 4); msg2 = defName + ' became confused!'; }
+          } else if (!def.status) {
+            def.status = statusRoll;
+            if (statusRoll === 'sleep') def.sleepTurns = null;
+            msg2 = defName + this.statusText(statusRoll);
           }
         }
-        if (mv.effect && mv.effect.drain) {
-          atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(dmg * mv.effect.drain));
+        // Stage changes riding on a damaging move (Bubble Beam family).
+        for (const k of ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva']) {
+          if (efx[k] && def.hp > 0 && (!efx.stageChance || roll(efx.stageChance / 100, g.rng.battle))) {
+            if (!(def.mistT > 0 && efx[k] < 0)) {
+              defStages[k] = Math.max(-6, Math.min(6, (defStages[k] || 0) + efx[k]));
+            }
+          }
         }
+        if (efx.flinch && def.hp > 0 && roll(efx.flinch / 100, g.rng.battle)) def.flinched = true;
+        if (efx.seed && def.hp > 0) def.seeded = true;
+        if (efx.drain && dmg > 0) {
+          atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(dmg * efx.drain));
+        }
+        if (efx.payday) g.state.player.money += atk.level * 2;
+        if (mv.recharge) atk.mustRecharge = true;
+        // Lock bookkeeping for Wrap / thrash-family moves.
+        if (efx.multi || efx.multiTurn) {
+          if (!atk.lockMove && entry.action && entry.action.type === 'move') {
+            atk.lockMove = { idx: entry.action.idx, left: 1 + Math.floor(g.rng.battle() * 2), after: efx.multiTurn ? 'confuse' : null };
+          }
+        }
+        if (atk.lockMove && entry.action && entry.action.type === 'move' && entry.action.idx === atk.lockMove.idx) {
+          atk.lockMove.left--;
+          if (atk.lockMove.left <= 0) {
+            const afterLock = atk.lockMove.after;
+            atk.lockMove = null;
+            if (afterLock === 'confuse' && atk.hp > 0) { atk.confused = true; atk.confusedTurns = 2 + Math.floor(g.rng.battle() * 4); }
+          }
+        }
+        const finishMove = () => {
+          if (efx.selfFaint && atk.hp > 0) {
+            atk.hp = 0;
+            this.checkFaint(entry.side, () => this.nextAction());
+            return;
+          }
+          if (efx.recoil && dmg > 0 && atk.hp > 0) {
+            atk.hp = Math.max(0, atk.hp - Math.max(1, Math.floor(dmg * efx.recoil)));
+            this.checkFaint(entry.side, () => this.nextAction());
+            return;
+          }
+          this.nextAction();
+        };
         this.say(msg2, () => {
-          this.checkFaint(foeSide, () => this.nextAction());
+          this.checkFaint(foeSide, finishMove);
         });
       };
       if (extra.trim()) this.say(extra.trim(), after);
@@ -525,19 +804,109 @@ export class BattleScene {
   applyStatusMove(entry, mv) {
     const g = this.game;
     const ef = mv.effect || {};
-    const target = ef.target === 'self' ? entry.mon : (entry.side === 'ally' ? this.foe : this.ally);
-    const stages = ef.target === 'self' ? (entry.side === 'ally' ? this.allyStages : this.foeStages) : (entry.side === 'ally' ? this.foeStages : this.allyStages);
+    const atk = entry.mon;
+    const selfSide = entry.side;
+    const foeSide = selfSide === 'ally' ? 'foe' : 'ally';
+    const foeMon = foeSide === 'ally' ? this.ally : this.foe;
+    const target = ef.target === 'self' ? atk : foeMon;
+    const stages = ef.target === 'self' ? (selfSide === 'ally' ? this.allyStages : this.foeStages) : (foeSide === 'ally' ? this.allyStages : this.foeStages);
     const tName = displayName(target, SPECIES);
+    const aName = displayName(atk, SPECIES);
+    const done = (msg) => this.say(msg, () => this.nextAction());
+    // Teleport: flee a wild battle; fails against trainers.
+    if (ef.flee) {
+      if (this.kind === 'wild') { this.say(aName + ' teleported away!', () => this.endBattle(true)); return; }
+      done('But it failed!'); return;
+    }
+    if (ef.haze) {
+      for (const s of [this.allyStages, this.foeStages]) for (const k of Object.keys(s)) s[k] = 0;
+      if (foeMon.status) foeMon.status = null;
+      foeMon.confused = false;
+      done('All stat changes were eliminated!');
+      return;
+    }
+    if (ef.heal) {
+      if (target.hp >= target.maxHp) { done('But it failed!'); return; }
+      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal));
+      done(tName + ' regained health!');
+      return;
+    }
+    if (ef.rest) {
+      target.hp = target.maxHp;
+      target.status = 'sleep';
+      target.sleepTurns = 3; // Gen 1 Rest: exactly 2 full turns asleep
+      done(tName + ' slept and became healthy!');
+      return;
+    }
+    if (ef.substitute) {
+      const cost = Math.floor(target.maxHp / 4);
+      if (target.subHp > 0 || target.hp <= cost) { done('But it failed!'); return; }
+      target.hp -= cost;
+      target.subHp = cost;
+      done(tName + ' made a substitute!');
+      return;
+    }
+    if (ef.screen) {
+      if (ef.screen === 'physical') atk.reflectT = 5; else atk.lightT = 5;
+      done(ef.screen === 'physical' ? 'A wall of light weakened physical attacks!' : 'A wall of light weakened special attacks!');
+      return;
+    }
+    if (ef.mist) { atk.mistT = 5; done(aName + ' is shrouded in mist!'); return; }
+    if (ef.focus) { atk.focused = true; done(aName + ' is getting pumped!'); return; }
+    if (ef.seed) {
+      if (foeMon.seeded) { done('But it failed!'); return; }
+      foeMon.seeded = true;
+      done('Seeds were planted on ' + tName + '!');
+      return;
+    }
+    if (ef.disable) {
+      if (foeMon.lastMoveIdx === undefined || foeMon.lastMoveIdx === null || foeMon.disableT > 0) { done('But it failed!'); return; }
+      foeMon.disabledMove = foeMon.lastMoveIdx;
+      foeMon.disableT = 1 + Math.floor(g.rng.battle() * 7);
+      done(tName + "'s " + MOVES[foeMon.moves[foeMon.disabledMove].id].name + ' was disabled!');
+      return;
+    }
+    if (ef.transform) {
+      atk._preTransform = { speciesId: atk.speciesId, stats: { ...atk.stats }, moves: atk.moves };
+      atk.transformed = { types: [...(foeMon.tempTypes || SPECIES[foeMon.speciesId].types)], baseSpe: SPECIES[foeMon.speciesId].base.spe };
+      atk.speciesId = foeMon.speciesId;
+      atk.stats = { ...foeMon.stats };
+      atk.moves = foeMon.moves.map((m) => ({ id: m.id, pp: 5, maxPp: 5 }));
+      done(aName + ' transformed into ' + tName + '!');
+      return;
+    }
+    if (ef.conversion) {
+      const first = atk.moves[0] && MOVES[atk.moves[0].id];
+      atk.tempTypes = [first ? first.type : 'normal'];
+      done(aName + ' became ' + atk.tempTypes[0] + ' type!');
+      return;
+    }
+    if (ef.mimic) {
+      const foeMoves = foeMon.moves.filter((m) => MOVES[m.id]);
+      if (!foeMoves.length || !entry.action) { done('But it failed!'); return; }
+      const pick = foeMoves[Math.floor(g.rng.battle() * foeMoves.length)];
+      atk._mimicRestore = atk.moves[entry.action.idx];
+      atk.moves[entry.action.idx] = { id: pick.id, pp: MOVES[pick.id].pp, maxPp: MOVES[pick.id].pp };
+      done(aName + ' learned ' + MOVES[pick.id].name + '!');
+      return;
+    }
     let msg = '';
-    for (const k of ['atk', 'def', 'spa', 'spd', 'spe']) {
+    for (const k of ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva']) {
       if (ef[k]) {
-        stages[k] = Math.max(-6, Math.min(6, stages[k] + ef[k]));
-        msg = tName + (ef[k] > 0 ? "'s " + k.toUpperCase() + ' rose!' : "'s " + k.toUpperCase() + ' fell!');
+        if (target.mistT > 0 && ef[k] < 0 && target !== atk) { msg = tName + ' is protected by mist!'; continue; }
+        stages[k] = Math.max(-6, Math.min(6, (stages[k] || 0) + ef[k]));
+        msg = tName + "'s " + k.toUpperCase() + (ef[k] > 0 ? ' rose!' : ' fell!');
       }
     }
     if (ef.status === 'confusion') {
-      target.confused = true;
-      msg = tName + ' became confused!';
+      if (!target.confused) { target.confused = true; target.confusedTurns = 2 + Math.floor(g.rng.battle() * 4); msg = tName + ' became confused!'; }
+      else msg = 'But it failed!';
+    } else if (ef.status) {
+      if (!target.status) {
+        target.status = ef.status;
+        if (ef.status === 'sleep') target.sleepTurns = null;
+        msg = tName + this.statusText(ef.status);
+      } else msg = 'But it failed!';
     }
     this.say(msg || 'Nothing happened.', () => this.nextAction());
   }
@@ -579,7 +948,8 @@ export class BattleScene {
         const t = this.trainer.team[this.trainerIdx];
         this.foe = makeMon(t.species, t.level, SPECIES, MOVES);
         if (t.nickname) this.foe.nickname = t.nickname;
-        this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+        this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
+        this.participants = new Set([this.ally]); // XP pool resets per foe
         this.hpAnim.foe = this.foe.hp;
         const foeName = displayName(this.foe, SPECIES);
         this.say(this.trainer.name + ' sent out ' + foeName + '!', () => {
@@ -602,13 +972,15 @@ export class BattleScene {
   awardXp(cb) {
     const g = this.game;
     const base = SPECIES[this.foe.speciesId].baseXp;
-    const gain = xpYield(base, this.foe.level, this.kind === 'wild');
-    // P0/E3: snapshot the XP-bar animation (600ms ease-out, gameux §4.2).
-    const prior = this.pendingXp || 0;
-    this.xpBarAnim = g.state.party.filter((m) => m.hp > 0).map((m) => ({
-      mon: m, from: xpFracOf(m, prior), to: xpFracOf(m, prior + gain),
+    const total = xpYield(base, this.foe.level, this.kind === 'wild');
+    // Fidelity pack (ADR-018): XP splits among the participants who faced
+    // THIS foe and are still standing — never the whole party for free.
+    const parts = [...this.participants].filter((m) => m.hp > 0);
+    const share = parts.length ? Math.max(1, Math.floor(total / parts.length)) : 0;
+    this.xpShares = new Map(parts.map((m) => [m, share]));
+    this.xpBarAnim = parts.map((m) => ({
+      mon: m, from: xpFracOf(m, 0), to: xpFracOf(m, share),
     }));
-    this.pendingXp = prior + gain;
     this.xpCb = cb;
     this.state = 'xp';
     this.xpT = 0;
@@ -637,32 +1009,43 @@ export class BattleScene {
     if (!this.xpApplied) {
       this.xpApplied = true;
       const msgs = [];
-      for (const m of g.state.party) {
-        if (m.hp <= 0) continue;
-        m.xp += this.pendingXp;
+      for (const [m, share] of (this.xpShares || new Map())) {
+        if (m.hp <= 0 || share <= 0) continue;
+        m.xp += share;
         let leveled = false;
         while (m.xp >= xpForLevel(SPECIES[m.speciesId].growth, m.level + 1) && m.level < 100) {
           m.level++;
           leveled = true;
           const sp = SPECIES[m.speciesId];
-          m.maxHp = hpValue(sp.base.hp, m.level);
-          m.hp = Math.min(m.maxHp, m.hp + Math.floor(m.maxHp * 0.2));
+          const oldMax = m.maxHp;
+          m.maxHp = hpValue(sp.base.hp, m.level, m.ivs ? m.ivs.hp : undefined);
+          // WS7/WS9: level-up evolutions queue for the post-battle ceremony.
+          if (sp.evo && sp.evo.method === 'level' && m.level >= sp.evo.level) {
+            const q = g.state.session.evolveQueue || (g.state.session.evolveQueue = []);
+            if (!q.some((e) => e.monId === m.monId)) q.push({ monId: m.monId });
+          }
+          m.hp = Math.min(m.maxHp, m.hp + (m.maxHp - oldMax));
           m.stats = {
-            atk: statValue(sp.base.atk, m.level), def: statValue(sp.base.def, m.level),
-            spa: statValue(sp.base.spa, m.level), spd: statValue(sp.base.spd, m.level),
-            spe: statValue(sp.base.spe, m.level),
+            atk: statValue(sp.base.atk, m.level, m.ivs ? m.ivs.atk : undefined), def: statValue(sp.base.def, m.level, m.ivs ? m.ivs.def : undefined),
+            spa: statValue(sp.base.spa, m.level, m.ivs ? m.ivs.spa : undefined), spd: statValue(sp.base.spd, m.level, m.ivs ? m.ivs.spd : undefined),
+            spe: statValue(sp.base.spe, m.level, m.ivs ? m.ivs.spe : undefined),
           };
-          // Learn new moves
-          const newMoves = (sp.learnset[m.level] || []);
+          // Learn new moves: free slot learns instantly; a full set queues a
+          // proper learn/forget prompt after the battle (WS9 — no silent
+          // overwrite, HM moves are protected there).
+          const newMoves = Array.isArray(sp.learnset)
+            ? sp.learnset.filter((e) => e.level === m.level).map((e) => e.move)
+            : (sp.learnset[m.level] || []);
           for (const mid of newMoves) {
+            if (m.moves.some((x) => x.id === mid)) continue;
             if (m.moves.length < 4) m.moves.push({ id: mid, pp: MOVES[mid].pp, maxPp: MOVES[mid].pp });
-            else m.moves[3] = { id: mid, pp: MOVES[mid].pp, maxPp: MOVES[mid].pp }; // slice: replace oldest-known slot
+            else (g.state.session.learnQueue = g.state.session.learnQueue || []).push({ monId: m.monId, moveId: mid });
           }
         }
         if (leveled) msgs.push(displayName(m, SPECIES) + ' grew to Lv ' + m.level + '!');
       }
+      this.xpShares = null;
       g.audio.playSfx('dex-register');
-      this.pendingXp = 0;
       this.xpApplied = false;
       this.xpFlashT = 250; // P0/E3: level-up flash on the XP bar + fanfare below
       const cb = this.xpCb; this.xpCb = null;
@@ -672,19 +1055,39 @@ export class BattleScene {
   }
 
   endTurnStatus() {
-    // Burn/poison tick (1/16 max HP), then next command or faint checks.
+    // Burn/poison tick (1/16 max HP), badly-poisoned escalates (1/16 x turns),
+    // Leech Seed drains 1/16 to the other side; then timers tick down.
     const tick = (mon, stages, side, done) => {
       if (mon.hp <= 0) { done(); return; }
+      const other = side === 'ally' ? this.foe : this.ally;
       if (mon.status === 'burn' || mon.status === 'poison' || mon.status === 'badlyPoisoned') {
-        const dmg = Math.max(1, Math.floor(mon.maxHp / 16));
+        let mult = 1;
+        if (mon.status === 'badlyPoisoned') { mon.bpTurns = (mon.bpTurns || 0) + 1; mult = mon.bpTurns; }
+        const dmg = Math.max(1, Math.floor(mon.maxHp / 16) * mult);
         mon.hp = Math.max(0, mon.hp - dmg);
         this.say(displayName(mon, SPECIES) + ' is hurt by ' + mon.status + '!', () => {
           this.checkFaint(side, done);
         });
         return;
       }
+      if (mon.seeded && other && other.hp > 0) {
+        const dmg = Math.max(1, Math.floor(mon.maxHp / 16));
+        mon.hp = Math.max(0, mon.hp - dmg);
+        other.hp = Math.min(other.maxHp, other.hp + dmg);
+        this.say(displayName(mon, SPECIES) + "'s health was sapped by Leech Seed!", () => {
+          this.checkFaint(side, done);
+        });
+        return;
+      }
       done();
     };
+    for (const m of [this.ally, this.foe]) {
+      if (!m) continue;
+      if (m.reflectT > 0) m.reflectT--;
+      if (m.lightT > 0) m.lightT--;
+      if (m.mistT > 0) m.mistT--;
+      if (m.disableT > 0) { m.disableT--; if (m.disableT <= 0) m.disabledMove = null; }
+    }
     tick(this.ally, this.allyStages, 'ally', () => {
       if (this.state === 'defeat' || !this.ally || this.ally.hp <= 0) { this.nextAfterStatus(); return; }
       tick(this.foe, this.foeStages, 'foe', () => this.nextAfterStatus());
@@ -701,6 +1104,20 @@ export class BattleScene {
   // ---- Catch sequence: the theater (gameux §4.2) ----
   beginCatch(ballId) {
     const g = this.game;
+    if (this.uncatchable) {
+      // Scripted presence: balls are deflected — the story must resolve it.
+      g.state.bag[ballId]--;
+      this.say('The ball passed right through it! This presence cannot be caught.', () => {
+        this.foeAction = this.chooseFoeAction();
+        this.state = 'resolve';
+        const mon = this.foe;
+        const stats = this.effStats(mon, this.foeStages);
+        const move = MOVES[mon.moves[this.foeAction.idx].id];
+        this.actions = [{ side: 'foe', action: this.foeAction, mon, stats, priority: move.priority || 0, move }];
+        this.nextAction();
+      });
+      return;
+    }
     g.state.bag[ballId]--;
     const ball = BALLS[ballId];
     this.state = 'catchseq';
@@ -709,18 +1126,19 @@ export class BattleScene {
     this.msg = 'You threw a ' + ball.name + '!'; // throw plays immediately, no modal
     this.msgOpen = false;
     const foe = this.foe;
-    const a = catchA(foe.maxHp, foe.hp, SPECIES[foe.speciesId].catchRate, ball.bonus, foe.status);
-    this.catchState.a = a;
+    // Gen-1 two-roll catch (ADR-018): no critical captures, no approximations.
+    // Safari throws adjust the effective rate: rock doubles it, bait halves it.
+    let rate = SPECIES[foe.speciesId].catchRate;
+    if (this.safari) rate = Math.max(3, Math.min(255, Math.round(rate * (this.safariRock ? 2 : this.safariBait ? 0.5 : 1))));
+    const res = gen1Catch(foe.maxHp, foe.hp, rate, ballId, foe.status, g.rng.battle);
+    this.catchState.willCatch = res.caught;
+    this.catchState.need = res.caught ? 3 : res.shakes;
     if (this.tutorial && foe.hp <= foe.maxHp * 0.5) {
       // GD tutorial: weakened in the lesson battle = guaranteed catch.
       // The teaching is in the weaken step; the outcome is never luck.
-      this.critCap = false;
+      this.catchState.willCatch = true;
       this.catchState.need = 3;
-    } else {
-      this.critCap = isCriticalCapture(a) && roll(0.05, g.rng.battle);
-      this.catchState.need = this.critCap ? 1 : shakeChecks(a, g.rng.battle);
     }
-    if (this.critCap) { g.ui.toast('Critical capture!'); g.audio.playSfx('catch-crit'); }
   }
 
   updateCatch(dt) {
@@ -742,7 +1160,7 @@ export class BattleScene {
         g.audio.playSfx('catch-rattle'); // visual twin: ball wiggle
       }
       if (c.shakes >= want && c.t >= want * 800 + 200) {
-        if (want >= 3 || (this.critCap && want >= 1)) this.catchSuccess();
+        if (c.willCatch) this.catchSuccess();
         else this.catchBreak(c.shakes);
       }
     }
@@ -758,9 +1176,13 @@ export class BattleScene {
     dexRegister(g.state.dex, 'caught', SPECIES[foe.speciesId].dexNo);
     let dest = 'party';
     if (g.state.party.length >= 6) {
-      const box = g.state.boxes.box1 || (g.state.boxes.box1 = []);
-      box.push({ speciesId: foe.speciesId, level: foe.level, xp: foe.xp, nickname: null, moves: foe.moves.map((m) => m.id), ivs: foe.ivs });
-      dest = 'Box 1';
+      // Full party: the catch goes to the current PC box as a complete mon.
+      const boxId = g.state.currentBox || 'box1';
+      const box = g.state.boxes[boxId] || (g.state.boxes[boxId] = []);
+      foe.hp = foe.maxHp;
+      foe.status = null; foe.confused = false;
+      box.push(foe);
+      dest = 'the PC (' + boxId.replace('box', 'Box ') + ')';
     } else {
       foe.hp = foe.maxHp; // caught fresh
       g.state.party.push(foe);
@@ -777,6 +1199,14 @@ export class BattleScene {
   catchBreak(shakesDone) {
     const g = this.game;
     const name = displayName(this.foe, SPECIES);
+    if (this.safari) {
+      g.audio.catchBreakout();
+      this.say('Oh no! ' + name + ' broke free!', () => {
+        if (this.safariFleeCheck()) return;
+        this.toCommand();
+      });
+      return;
+    }
     g.audio.catchBreakout(); // visual twin: break-out burst
     // P0/E11: break-out flash gated like battle flashes; reduced motion -> fade.
     if (!g.state.settings.reducedMotion && g.state.settings.shake) g.renderer.flashA = 0.8;
@@ -818,10 +1248,16 @@ export class BattleScene {
     this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + t.reward + '.';
     this.msgOpen = false;
     if (t.badge) {
-      g.state.badges.kanto.push(t.badge);
+      if (!g.state.badges.kanto.includes(t.badge)) g.state.badges.kanto.push(t.badge);
+      g.state.story.flags['badge_' + t.badge.replace(/badge$/, '')] = true; // quest chain (WS6)
       g.audio.playSfx('badge'); // badge fanfare (visual twin: badge-case shine animation)
-      const lines = SLICE_CAPSTONE.map((l) => l.replace('{player}', g.state.player.name));
-      g.ui.say(lines, () => this.endBattle(true), '');
+      if (t.id === 'brock') {
+        // The slice capstone lines are Brock's scene specifically.
+        const lines = SLICE_CAPSTONE.map((l) => l.replace('{player}', g.state.player.name));
+        g.ui.say(lines, () => this.endBattle(true), '');
+      } else {
+        g.ui.say(t.lose, () => this.endBattle(true), t.name);
+      }
     } else {
       g.ui.say(t.lose, () => this.endBattle(true), t.name);
     }
@@ -852,12 +1288,30 @@ export class BattleScene {
   endBattle(won) {
     const g = this.game;
     g.ui.setBattleMode(false);
+    if (g.ui.hideCommands) g.ui.hideCommands(); // RT touch move pad retires with the battle
     g.audio.restoreAreaMusic(); // back to the overworld's track
     g.renderer.shakeX = 0; g.renderer.shakeY = 0; g.renderer.flashA = 0;
-    // Reset battle temp state on party mons
-    for (const m of g.state.party) { m.confused = false; m.statusTurns = 0; }
+    // Reset battle temp state on party mons (incl. Transform restoration).
+    for (const m of g.state.party) {
+      if (m._preTransform) {
+        m.speciesId = m._preTransform.speciesId;
+        m.stats = m._preTransform.stats;
+        m.moves = m._preTransform.moves;
+        m._preTransform = null; m.transformed = null;
+      }
+      if (m._mimicRestore) m._mimicRestore = null;
+      m.confused = false; m.confusedTurns = null; m.statusTurns = 0; m.sleepTurns = null;
+      m.seeded = false; m.subHp = 0; m.reflectT = 0; m.lightT = 0; m.mistT = 0;
+      m.lockMove = null; m.chargedFor = null; m.focused = false; m.tempTypes = null;
+      m.flinched = false; m.bpTurns = 0; m.mustRecharge = false; m.bideT = 0; m.bideDmg = 0;
+      m.disabledMove = null; m.disableT = 0; m.tookPhysicalThisTurn = 0;
+      const st = m.stages; if (st) { st.atk = 0; st.def = 0; st.spa = 0; st.spd = 0; st.spe = 0; st.acc = 0; st.eva = 0; }
+    }
     g.scenes.pop();
     g.autosave('battle');
+    // Story-event continuation (WS6): scripted battles resume their script
+    // only on victory — a loss leaves the event unconsumed for a retry.
+    if (this.onEnd) { const f = this.onEnd; this.onEnd = null; f(won); }
   }
 
   drainHp(dt) {
@@ -894,6 +1348,7 @@ export class BattleScene {
 
   render(r) {
     const g = this.game;
+    if (this.rtMode && this.rt && (this.state === 'rt' || this.state === 'xp')) { this.renderRt(r); return; }
     const w = r.viewW, h = r.viewH;
     // Battle background: banded vertical steps (max 5, gameux §6) per terrain.
     const bands = this.kind === 'trainer'
