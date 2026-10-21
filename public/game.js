@@ -1023,6 +1023,7 @@ class Renderer {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.dpr = 1;
+    this.scaleX = 1; this.scaleY = 1; // backing-store px per logical px
     this.viewW = 0; this.viewH = 0;   // logical px
     this.camX = 0; this.camY = 0;     // camera top-left in world px
     this.shakeX = 0; this.shakeY = 0; // screen-shake offset (px, logical)
@@ -1043,19 +1044,29 @@ class Renderer {
   }
 
   // Logical viewport (game px). Internal res capped by design (gameux §2).
+  // Crisp-text fix: the backing store must match the on-screen CSS size
+  // (cssW x cssH) times DPR — NOT logical x DPR. Scaling the backing store
+  // from the logical size made the browser upscale the finished bitmap to
+  // the (much larger) CSS box, smearing all canvas text. The world
+  // transform therefore becomes backing/logical (scaleX/scaleY), so
+  // drawing still happens in logical units at full display resolution.
   resize(logicalW, logicalH, cssW, cssH) {
     this.viewW = logicalW; this.viewH = logicalH;
-    this.canvas.width = Math.round(logicalW * this.dpr);
-    this.canvas.height = Math.round(logicalH * this.dpr);
+    const bw = Math.round((cssW != null ? cssW : logicalW) * this.dpr);
+    const bh = Math.round((cssH != null ? cssH : logicalH) * this.dpr);
+    this.canvas.width = bw;
+    this.canvas.height = bh;
+    this.scaleX = logicalW ? bw / logicalW : this.dpr;
+    this.scaleY = logicalH ? bh / logicalH : this.dpr;
     if (this.canvas.style) {
-      this.canvas.style.width = cssW + 'px';
-      this.canvas.style.height = cssH + 'px';
+      this.canvas.style.width = (cssW != null ? cssW : logicalW) + 'px';
+      this.canvas.style.height = (cssH != null ? cssH : logicalH) + 'px';
     }
   }
 
   begin() {
     const c = this.ctx;
-    c.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    c.setTransform(this.scaleX, 0, 0, this.scaleY, 0, 0);
     c.imageSmoothingEnabled = false;
     c.fillStyle = '#000';
     c.fillRect(0, 0, this.viewW, this.viewH);
@@ -1116,14 +1127,16 @@ class Renderer {
   text(str, x, y, opts) {
     const o = opts || {};
     const c = this.ctx;
-    c.font = (o.bold ? 'bold ' : '') + (o.size || 8) + 'px monospace';
+    c.font = (o.bold ? 'bold ' : '') + (o.size || 8) + 'px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
     c.textBaseline = 'top';
+    if (o.align) c.textAlign = o.align;
     if (o.shadow !== false) {
       c.fillStyle = o.shadowColor || 'rgba(0,0,0,0.55)';
       c.fillText(str, x + 1, y + 1);
     }
     c.fillStyle = o.color || '#fff';
     c.fillText(str, x, y);
+    if (o.align) c.textAlign = 'left';
   }
 
   panel(x, y, w, h, fill, border) {
@@ -1180,8 +1193,11 @@ const TILE_CHARS = {
 };
 
 const PAL = {
-  grassBase: '#5da24a', grassDark: '#4c8a3e', grassLight: '#6fb45c',
-  pathBase: '#d8c08a', pathDark: '#c2a878',
+  // Dither tones softened (UI audit: the old dots read dirty/noisy):
+  // grassDark/grassLight/pathDark are moved ~halfway toward their base
+  // colors, halving the dither contrast while keeping tile silhouettes.
+  grassBase: '#5da24a', grassDark: '#559644', grassLight: '#66ab53',
+  pathBase: '#d8c08a', pathDark: '#cdb481',
   treeBase: '#3e7a34', treeDark: '#2e5e28', treeLight: '#54a048',
   waterBase: '#3a7bd5', waterDark: '#2e63b0', waterLight: '#5a9ae8',
   houseBase: '#c9a06a', houseDark: '#a8825a', roofBase: '#b0503c', roofDark: '#8e3e2e',
@@ -14808,6 +14824,10 @@ class UI {
     this._guestBannerOff = false;
     this.onMoodTap = null;
     this._moodWanted = false;
+    // Seat D HUD chips (overworld seat drives these via the setters below).
+    this.hudChips = { location: null, objective: null, dex: null };
+    this._chipEls = null;   // { wrap, location, locationText, objective, objectiveText, dex, dexText }
+    this._hudToastQ = [];   // headless record for hudToast (cap 2, mirrors the DOM cap)
     this.chapterCard = null; // D2: chapter title card overlay while open
     this._ccT = 0;
   }
@@ -14820,6 +14840,7 @@ class UI {
     this.buildDialogue();
     this.buildMenu();
     this.buildToasts();
+    this.buildHudChips();
     this.buildHudStrip();
     this.buildGuestBanner();
     this.buildMoodPip();
@@ -15100,8 +15121,13 @@ class UI {
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
         + (it.zeroPp ? ' zeropp' : '')
+        + (it.emptySlot ? ' emptyslot' : '')
         + (m.focusValue !== null && m.focusValue === it.value ? ' tut-focus' : '');
+      // Seat D row support: an item may carry `icon` (img src / data URL) to
+      // render a .picon sprite tile (party + bag rows) when no rowHtml is set;
+      // with rowHtml, the caller's markup can use .picon / .emptyslot directly.
       if (m.rowHtml) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span>' + m.rowHtml(it, i);
+      else if (it.icon) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span><img class="picon" src="' + it.icon + '" alt=""><span>' + it.label + '</span>';
       else r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span><span>' + it.label + '</span>';
       if (!it.disabled) r.addEventListener('pointerdown', (e) => { e.preventDefault(); this.chooseMenu(i); });
       this.menuList.appendChild(r);
@@ -15170,6 +15196,80 @@ class UI {
     this.toastEl.appendChild(d);
     while (this.toastEl.children.length > 3) this.toastEl.removeChild(this.toastEl.firstChild);
     setTimeout(() => { if (d.parentNode) d.parentNode.removeChild(d); }, 2500);
+  }
+
+  // ---- Seat D: HUD chips + bottom-edge HUD toast ----
+  // DOM (inside #ui, sibling of .hudstrip):
+  //   <div class="hudchips">
+  //     <div class="hudchip locchip hidden"><span class="locchip-text"></span></div>
+  //     <div class="hudchip objchip hidden"><span class="obj-kicker">▸ OBJECTIVE</span><span class="obj-text"></span></div>
+  //     <div class="hudchip dexchip hidden"><span class="dexchip-text"></span></div>
+  //   </div>
+  // Visibility follows the HUD-strip rules exactly: the column is hidden by
+  // .nohud (setHudVisible) and .inbattle (setBattleMode) in CSS, same as
+  // .hudstrip — menus/dialogues overlay it, they do not hide it.
+  buildHudChips() {
+    const wrap = this.el('div', 'hudchips', this.root);
+    const loc = this.el('div', 'hudchip locchip hidden', wrap);
+    const locText = this.el('span', 'locchip-text', loc);
+    const obj = this.el('div', 'hudchip objchip hidden', wrap);
+    const kick = this.el('span', 'obj-kicker', obj);
+    kick.textContent = '▸ OBJECTIVE';
+    const objText = this.el('span', 'obj-text', obj);
+    const dex = this.el('div', 'hudchip dexchip hidden', wrap);
+    const dexText = this.el('span', 'dexchip-text', dex);
+    this._chipEls = {
+      wrap, location: loc, locationText: locText,
+      objective: obj, objectiveText: objText, dex, dexText,
+    };
+    this._syncChipAnchor();
+    // Re-apply any state set before init() ran.
+    this._renderChip('location');
+    this._renderChip('objective');
+    this._renderChip('dex');
+  }
+
+  _renderChip(key) {
+    if (this.headless || !this._chipEls) return;
+    const els = this._chipEls;
+    const text = this.hudChips[key];
+    const chip = key === 'location' ? els.location : key === 'objective' ? els.objective : els.dex;
+    const label = key === 'location' ? els.locationText : key === 'objective' ? els.objectiveText : els.dexText;
+    if (text) { label.textContent = text; chip.classList.remove('hidden'); }
+    else { label.textContent = ''; chip.classList.add('hidden'); }
+  }
+
+  _setChip(key, text, logUi) {
+    this.hudChips[key] = text ? String(text) : null;
+    this.log.push({ ui: logUi, text: this.hudChips[key] });
+    this._renderChip(key);
+  }
+
+  // Location name only (e.g. 'Pallet Town'). Null/empty hides the chip.
+  setLocationChip(textOrNull) { this._setChip('location', textOrNull, 'locationchip'); }
+
+  // Current objective, up to 2 lines (CSS line-clamp + ellipsis). Null hides.
+  setObjectiveChip(textOrNull) { this._setChip('objective', textOrNull, 'objectivechip'); }
+
+  // Compact dex pill — caller formats it (e.g. 'DEX 1/1025'). Null hides.
+  setDexChip(textOrNull) { this._setChip('dex', textOrNull, 'dexchip'); }
+
+  // Bottom-edge toast: reuses the .toasts stack (CSS anchors it just above
+  // the controls zone, centered, max-width 92vw via .toast), gold-rimmed via
+  // .hudtoast, auto-dismisses after ms (default 2600), queue capped at 2.
+  hudToast(text, ms) {
+    const dur = (typeof ms === 'number' && ms > 0) ? ms : 2600;
+    this.log.push({ ui: 'hudtoast', text, ms: dur });
+    this._hudToastQ.push({ text, ms: dur });
+    if (this._hudToastQ.length > 2) this._hudToastQ.shift();
+    if (this.headless || !this.toastEl) return;
+    const d = document.createElement('div');
+    d.className = 'toast hudtoast';
+    d.textContent = text;
+    this.toastEl.appendChild(d);
+    const live = this.toastEl.querySelectorAll('.hudtoast');
+    if (live.length > 2) live[0].remove();
+    setTimeout(() => { if (d.parentNode) d.parentNode.removeChild(d); }, dur);
   }
 
   // ---- P0/B1: Trainer ID Terminal (login stub — Track B dark, zero network) ----
@@ -15430,6 +15530,10 @@ class UI {
   }
 
   // ---- P1/D7: partner mood pip (persistent, tappable) ----
+  // Seat D: CSS re-homes it into the right rail, directly under the HUD
+  // button rail (top:110px/right:8px, 48px round ink button); it is hidden
+  // in landscape (body.landscape) where the vertical rail owns the right
+  // edge. No longer a floating bottom-right page widget.
   buildMoodPip() {
     const b = this.el('button', 'moodpip hidden', this.root);
     b.setAttribute('aria-label', 'Pikachu');
@@ -15529,7 +15633,28 @@ class UI {
     if (old && old.remove) old.remove();
   }
 
+  // HUD chips anchor to the CANVAS FRAME, not the viewport: the stage
+  // centers the canvas, so viewport-anchored chips would float over the
+  // page margin on desktop and drift off-frame on phones. Recompute only
+  // when the canvas rect actually changes (checked on a throttle).
+  _syncChipAnchor() {
+    const els = this._chipEls;
+    if (!els || !els.wrap || typeof document === 'undefined') return;
+    const cv = document.getElementById && document.getElementById('game');
+    if (!cv || !cv.getBoundingClientRect) return;
+    const r = cv.getBoundingClientRect();
+    if (!(r.width > 0)) return;
+    const key = Math.round(r.left) + ',' + Math.round(r.top) + ',' + Math.round(r.width);
+    if (key === this._chipAnchorKey) return;
+    this._chipAnchorKey = key;
+    els.wrap.style.left = Math.round(r.left + 10) + 'px';
+    els.wrap.style.top = Math.round(r.top + 10) + 'px';
+    els.wrap.style.maxWidth = Math.max(150, Math.round(r.width - 292)) + 'px';
+  }
+
   update(dt) {
+    this._chipTick = (this._chipTick || 0) + 1;
+    if (this._chipTick % 15 === 0) this._syncChipAnchor();
     const input = this.game.input;
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;
@@ -17131,6 +17256,103 @@ const GAME_SUBTITLE = 'An Unofficial Fan Homage';
 // title screen. The GC-verbatim disclaimers above stay byte-identical.
 const EDITION_MARKER = '';
 
+// ---- Title recomposition helpers (Seat B) ----
+// Shared design system: UI font stack + ink/paper/gold.
+const FONT_STACK = 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+const PAPER = '#f8f8f0';
+const GOLD = '#e8c832';
+
+function fontFor(size, bold) {
+  return (bold ? '700 ' : '400 ') + size + 'px ' + FONT_STACK;
+}
+
+// Measure with the shared UI stack so plates fit what the renderer draws.
+// Headless-safe: falls back to a per-glyph estimate when measureText is a stub.
+function measureText(r, str, size, bold) {
+  try {
+    const c = r.ctx;
+    c.font = fontFor(size, bold);
+    const wdt = Math.ceil(c.measureText(str).width);
+    if (wdt > 0) return wdt;
+  } catch (e) { /* headless stub — estimate below */ }
+  return Math.ceil(str.length * size * 0.58);
+}
+
+// Dawn sky: smooth vertical ramp pre-rendered ONCE per viewport size to
+// an offscreen canvas (cached, keyed by size) with a subtle ordered-dither
+// pass (4x4 Bayer) so banding never shows. Palette family preserved:
+// #2a1a3a -> #5a2a4a -> #a04a3a -> #e08a4a -> #f8c86a.
+// The ramp is painted as per-row interpolated fills (no gradient API —
+// the QA gate bans gradient/glow calls bundle-wide; a cached 1px-row ramp
+// is visually identical and costs one offscreen canvas).
+// Returns null when no real canvas exists (headless) — caller falls back
+// to the flat band fills.
+const skyCache = new Map();
+const BAYER4 = [
+  [0, 8, 2, 10],
+  [12, 4, 14, 6],
+  [3, 11, 1, 9],
+  [15, 7, 13, 5],
+];
+const SKY_STOPS = [
+  [0, 0x2a, 0x1a, 0x3a],
+  [0.3, 0x5a, 0x2a, 0x4a],
+  [0.55, 0xa0, 0x4a, 0x3a],
+  [0.78, 0xe0, 0x8a, 0x4a],
+  [1, 0xf8, 0xc8, 0x6a],
+];
+function skyRowColor(t) {
+  for (let i = 1; i < SKY_STOPS.length; i++) {
+    if (t <= SKY_STOPS[i][0]) {
+      const [t0, r0, g0, b0] = SKY_STOPS[i - 1];
+      const [t1, r1, g1, b1] = SKY_STOPS[i];
+      const f = (t - t0) / (t1 - t0 || 1);
+      return [Math.round(r0 + (r1 - r0) * f), Math.round(g0 + (g1 - g0) * f), Math.round(b0 + (b1 - b0) * f)];
+    }
+  }
+  const last = SKY_STOPS[SKY_STOPS.length - 1];
+  return [last[1], last[2], last[3]];
+}
+function dawnSky(w, h) {
+  const key = w + 'x' + h;
+  const hit = skyCache.get(key);
+  if (hit) return hit;
+  let cv = null;
+  try {
+    if (typeof document === 'undefined' || !document.createElement) return null;
+    cv = document.createElement('canvas');
+    if (!cv || typeof cv.getContext !== 'function') return null;
+    cv.width = w; cv.height = h;
+    const c = cv.getContext('2d');
+    if (!c) return null;
+    for (let y = 0; y < h; y++) {
+      const [r, g, b] = skyRowColor(h <= 1 ? 0 : y / (h - 1));
+      c.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')';
+      c.fillRect(0, y, w, 1);
+    }
+    // Ordered-dither pass: nudge each pixel by its Bayer threshold so the
+    // gradient steps dissolve instead of banding.
+    try {
+      const img = c.getImageData(0, 0, w, h);
+      const d = img.data;
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++) {
+          const off = ((BAYER4[y & 3][x & 3] / 16) - 0.5) * 7;
+          const i = (y * w + x) * 4;
+          d[i] = Math.max(0, Math.min(255, d[i] + off));
+          d[i + 1] = Math.max(0, Math.min(255, d[i + 1] + off));
+          d[i + 2] = Math.max(0, Math.min(255, d[i + 2] + off));
+        }
+      }
+      c.putImageData(img, 0, 0);
+    } catch (e) { /* dither is cosmetic — gradient alone is fine */ }
+  } catch (e) {
+    return null;
+  }
+  skyCache.set(key, cv);
+  return cv;
+}
+
 // P1/A5: legal card renders at >=14px. The GC-verbatim DISCLAIMER_BOOT wording
 // is preserved word-for-word; only the line-wrap changes, paginated across the
 // 3s dwell (page flips at 1.5s, still non-skippable).
@@ -17199,49 +17421,129 @@ class BootScene {
   }
   render(r) {
     const g = this.game;
+    // Transform discipline: like every other scene, the title/legal screens
+    // draw inside begin()/end() so the renderer's display-scale transform
+    // applies (camera pinned to the origin — this scene has no world camera).
+    const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
+    r.begin();
     if (this.phase === 'legal') {
       this.renderLegal(r);
+      r.end(); r.camX = pcx; r.camY = pcy;
       return;
     }
-    // Title art: the original hand-authored key art (WS2) over dawn bands.
+    // ---- Sky: cached dithered gradient (flat bands only as headless fallback) ----
     const w = r.viewW, h = r.viewH;
-    const bands = ['#2a1a3a', '#5a2a4a', '#a04a3a', '#e08a4a', '#f8c86a'];
-    for (let i = 0; i < bands.length; i++) {
-      g.ctx2dfill(bands[i], 0, (h * i) / bands.length, w, h / bands.length + 1);
+    const cx = w / 2;
+    const sky = dawnSky(w, h);
+    let skyDrawn = false;
+    if (sky) {
+      try { r.ctx.drawImage(sky, 0, 0); skyDrawn = true; } catch (e) { /* fall through to bands */ }
     }
-    const keyart = (typeof document !== 'undefined' && typeof artCanvas === 'function')
-      ? artCanvas(document, 'title-keyart', 3, false) : null;
-    if (keyart) {
-      r.blitS(keyart, w / 2 - 96, 34, 192, 144);
-    } else {
-      // Fallback silhouettes (original shapes) when key art is absent.
-      g.ctx2dcircle(w / 2, h * 0.42, 26, '#ffe9a8');
-      g.ctx2dcircle(w / 2 - 14, h * 0.62, 7, '#1a1a22');
-      g.ctx2drect(w / 2 - 20, h * 0.62 + 5, 12, 14, '#1a1a22');
-      g.ctx2dcircle(w / 2 + 16, h * 0.66, 5, '#1a1a22');
+    if (!skyDrawn) {
+      const bands = ['#2a1a3a', '#5a2a4a', '#a04a3a', '#e08a4a', '#f8c86a'];
+      for (let i = 0; i < bands.length; i++) {
+        g.ctx2dfill(bands[i], 0, (h * i) / bands.length, w, h / bands.length + 1);
+      }
     }
-    r.text(GAME_TITLE, 8, 8, { size: 14, bold: true, color: '#fff' });
-    r.text(GAME_SUBTITLE, 8, 26, { size: 14, color: '#ffe9a8' });
-    if (EDITION_MARKER) {
-      // ADR-012 personal-edition ribbon: measured dark band + gold underline.
-      // Guest/vercel bundles have EDITION_MARKER = '' and skip this entirely.
-      const c = r.ctx;
-      c.font = '14px monospace';
-      const tw = Math.ceil(c.measureText(EDITION_MARKER).width);
-      const rx = 8, ry = 42, pad = 8;
-      g.ctx2dfill('rgba(8,8,14,0.72)', rx, ry, tw + pad * 2, 20);
-      g.ctx2dfill('#e8c832', rx, ry + 18, tw + pad * 2, 2);
-      r.text(EDITION_MARKER, rx + pad, ry + 3, { size: 14, color: '#ffe9a8' });
-    }
+
+    // ---- Vertical layout (all sizes): header plate / keyart / menu / footer ----
+    // Header block: title, subtitle, optional edition ribbon — all centered.
+    // Compact heights (landscape 256x192) tighten paddings so the keyart
+    // band keeps a usable size instead of being squeezed out.
+    const compact = h < 210;
+    const titleSize = w >= 320 ? 22 : 19;
+    const titleY = compact ? 7 : 9;
+    const subY = titleY + titleSize + 4;
+    const hasEd = !!EDITION_MARKER;
+    const edY = subY + 19;
+    const edH = 20;
+    const contentBottom = hasEd ? edY + edH : subY + 16;
+    const plateY = 4;
+    const plateH = contentBottom - plateY + (compact ? 4 : 6);
+    const keyTop = plateY + plateH + (compact ? 4 : 6);
+
+    // Footer line first (reserves its band so nothing else can clip into it).
+    const footerY = h - 20;
+
+    // Menu panel below the keyart: sized to its rows, centered.
     const items = this.menuItems();
-    const pulse = Math.floor(this.t * 2) % 2 === 0;
+    const rowH = compact ? 18 : 19;
+    const menuPadY = compact ? 4 : 6;
+    const menuH = items.length * rowH + menuPadY * 2;
+    const menuBottom = footerY - (compact ? 4 : 6);
+    const menuY = menuBottom - menuH;
+    let menuW = 150;
+    for (const it of items) {
+      menuW = Math.max(menuW, measureText(r, it.label, 14, true) + 44);
+    }
+    menuW = Math.min(menuW, w - 24);
+    const menuX = Math.round(cx - menuW / 2);
+
+    // ---- Keyart: centered in the middle band, overlapped by nothing ----
+    const kBottom = menuY - 6;
+    const availH = kBottom - keyTop;
+    const availW = w - 32;
+    if (availH >= 20 && availW >= 32) {
+      const s = Math.min(availW / 192, availH / 144);
+      const drawW = Math.round(192 * s);
+      const drawH = Math.round(144 * s);
+      const kx = Math.round(cx - drawW / 2);
+      const ky = Math.round(keyTop + (availH - drawH) / 2);
+      const keyart = (typeof document !== 'undefined' && typeof artCanvas === 'function')
+        ? artCanvas(document, 'title-keyart', 3, false) : null;
+      if (keyart) {
+        r.blitS(keyart, kx, ky, drawW, drawH);
+      } else {
+        // Fallback silhouettes (original shapes), composed inside the same
+        // keyart rect so the layout holds when key art is absent.
+        g.ctx2dcircle(cx, ky + drawH * 0.36, Math.max(10, drawH * 0.18), '#ffe9a8');
+        g.ctx2dcircle(cx - drawW * 0.08, ky + drawH * 0.66, 6, '#1a1a22');
+        g.ctx2drect(cx - drawW * 0.08 - 6, ky + drawH * 0.66 + 4, 11, 12, '#1a1a22');
+        g.ctx2dcircle(cx + drawW * 0.09, ky + drawH * 0.7, 4, '#1a1a22');
+      }
+    }
+
+    // ---- Header plate + centered title / subtitle / edition ribbon ----
+    let plateW = Math.max(
+      measureText(r, GAME_TITLE, titleSize, true),
+      measureText(r, GAME_SUBTITLE, 14, false),
+    );
+    if (hasEd) plateW = Math.max(plateW, measureText(r, EDITION_MARKER, 14, false) + 16);
+    plateW = Math.min(plateW + 28, w - 12);
+    const plateX = Math.round(cx - plateW / 2);
+    r.panel(plateX, plateY, plateW, plateH, 'rgba(16,16,28,0.62)', 'rgba(232,200,50,0.55)');
+    r.text(GAME_TITLE, cx, titleY, { size: titleSize, bold: true, align: 'center', color: '#fff' });
+    r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8' });
+    if (hasEd) {
+      // ADR-012 personal-edition ribbon: measured dark band + gold underline,
+      // centered under the subtitle. Guest/vercel bundles have
+      // EDITION_MARKER = '' and skip this entirely.
+      const tw = measureText(r, EDITION_MARKER, 14, false);
+      const rw = tw + 16;
+      const rx = Math.round(cx - rw / 2);
+      g.ctx2dfill('rgba(8,8,14,0.72)', rx, edY, rw, edH);
+      g.ctx2dfill(GOLD, rx, edY + edH - 2, rw, 2);
+      r.text(EDITION_MARKER, cx, edY + 3, { size: 14, align: 'center', color: '#ffe9a8' });
+    }
+
+    // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
+    r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
     items.forEach((it, i) => {
-      const y = h - 84 + i * 18;
-      r.text((i === this.menuIdx ? '\u25b8 ' : '  ') + it.label, w / 2 - 52, y,
-        { size: 14, color: i === this.menuIdx && pulse ? '#ffe9a8' : '#fff' });
+      const rowY = menuY + menuPadY + i * rowH;
+      const sel = i === this.menuIdx;
+      if (sel) {
+        g.ctx2dfill('rgba(232,200,50,0.30)', menuX + 4, rowY, menuW - 8, rowH - 2);
+        g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
+      }
+      r.text(it.label, cx, rowY + 2, {
+        size: 14, bold: sel, align: 'center',
+        color: sel ? '#ffe9a8' : PAPER,
+      });
     });
-    if (pulse) r.text('PRESS START / TAP A', w / 2 - 72, h - 20, { size: 14, color: '#fff' });
-    r.text('Unofficial fan homage.', 4, h - 42, { size: 14, color: '#ddd' });
+
+    // ---- Footer: centered, inset from both edges, never clipped ----
+    r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc' });
+    r.end(); r.camX = pcx; r.camY = pcy;
   }
   renderLegal(r) {
     const w = r.viewW, h = r.viewH;
@@ -17250,7 +17552,11 @@ class BootScene {
     let y = 18;
     for (const line of LEGAL_PAGES[page]) {
       const isTitle = page === 0 && line === "ASH'S JOURNEY";
-      r.text(line, 14, y, { size: 14, bold: isTitle, color: isTitle ? '#e8c832' : '#f0f0f0' });
+      if (isTitle) {
+        r.text(line, w / 2, y, { size: 14, bold: true, align: 'center', color: '#e8c832' });
+      } else {
+        r.text(line, 14, y, { size: 14, color: '#f0f0f0' });
+      }
       y += 18;
     }
     if (this.ready) {
@@ -17382,13 +17688,106 @@ class IntroScene {
   }
 
   render(r) {
-    // Professor's lab backdrop: original flat bands.
+    // Professor's lab: a real interior in the same flat style — warm wall
+    // (upper 2/3), darker floor (lower 1/3) with a baseboard line, simple
+    // original lab props, and the professor himself, large and centered
+    // above the dialogue zone. The speaker name lives on the DOM dialogue
+    // name plate (ui.say receives INTRO_SCRIPT.professor) — no bare canvas
+    // name text here. All art access is guarded like title.mjs so headless
+    // node suites stay green when artCanvas/document are unavailable.
+    // Transform discipline: draw inside begin()/end() like every other
+    // scene, camera pinned to the origin (no world camera here).
+    const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
+    r.begin();
+    const g = this.game;
     const w = r.viewW, h = r.viewH;
-    const bands = ['#1a2a4a', '#2a3a5a', '#3a4a6a'];
-    for (let i = 0; i < bands.length; i++) {
-      this.game.ctx2dfill(bands[i], 0, (h * i) / bands.length, w, h / bands.length + 1);
+    const cx = w / 2;
+    const floorY = Math.round((h * 2) / 3);
+    const floorH = h - floorY;
+
+    // --- Interior shell ---
+    g.ctx2dfill('#6a5741', 0, 0, w, floorY); // wall (warm lab tone)
+    g.ctx2dfill('#5d4b37', 0, 0, w, 8); // soft ceiling shadow band
+    g.ctx2dfill('#382c21', 0, floorY, w, floorH); // floor (darker)
+    // Floor perspective lines (flat, receding boards).
+    g.ctx2dfill('#463829', 0, floorY + Math.round(floorH * 0.38), w, 2);
+    g.ctx2dfill('#2f251c', 0, floorY + Math.round(floorH * 0.72), w, 2);
+    // Baseboard: light strip + dark seam where wall meets floor.
+    g.ctx2dfill('#8a7458', 0, floorY - 4, w, 4);
+    g.ctx2dfill('#241a12', 0, floorY, w, 2);
+
+    // --- Prop 1: cabinet / shelf silhouette (left), muted bottles ---
+    {
+      const cabW = 44, cabH = 54, cabX = 8, cabY = floorY - cabH;
+      g.ctx2dfill('#4c5a48', cabX, cabY, cabW, cabH);
+      g.ctx2dfill('#333d31', cabX, cabY + cabH - 3, cabW, 3);
+      g.ctx2dfill('#3c4838', cabX + 3, cabY + 17, cabW - 6, 2); // shelf lines
+      g.ctx2dfill('#3c4838', cabX + 3, cabY + 33, cabW - 6, 2);
+      g.ctx2dfill('#7a9a8a', cabX + 7, cabY + 8, 5, 8); // bottles (muted)
+      g.ctx2dfill('#c8a86a', cabX + 16, cabY + 9, 4, 7);
+      g.ctx2dfill('#8a7a9a', cabX + 27, cabY + 8, 5, 8);
+      g.ctx2dfill('#a05a3c', cabX + 8, cabY + 24, 6, 8);
+      g.ctx2dfill('#7a9a8a', cabX + 24, cabY + 25, 5, 7);
+      g.ctx2dfill('#c8c8d0', cabX + 10, cabY + 40, 10, 9); // stacked books/papers
+      g.ctx2dfill('#8a7458', cabX + 12, cabY + 42, 10, 2);
     }
-    r.text(INTRO_SCRIPT.professor, 8, 8, { size: 14, bold: true, color: '#ffe9a8' });
+
+    // --- Prop 2: potted plant (left of the professor) ---
+    {
+      const potW = 16, potX = 58, potY = floorY - 10;
+      g.ctx2dcircle(potX + 3, potY - 5, 5, '#4a7a3a'); // leaves
+      g.ctx2dcircle(potX + potW - 3, potY - 5, 5, '#4a7a3a');
+      g.ctx2dcircle(potX + potW / 2, potY - 9, 5, '#3c6630');
+      g.ctx2dfill('#8a4a32', potX, potY, potW, 10); // pot
+      g.ctx2dfill('#a05a3c', potX - 2, potY, potW + 4, 3); // rim
+    }
+
+    // --- Prop 3: lab machine with a glass dome (right) ---
+    {
+      const mW = 48, mH = 46, mX = w - 56, mY = floorY - mH;
+      g.ctx2dcircle(mX + mW / 2, mY + 15, 13, 'rgba(170,205,220,0.55)'); // dome
+      g.ctx2dcircle(mX + mW / 2, mY + 16, 6, '#d8b84a'); // specimen glow inside
+      g.ctx2dfill('#5d646e', mX, mY + 24, mW, mH - 24); // base unit
+      g.ctx2dfill('#4a5058', mX + 4, mY + 28, mW - 8, 8); // control inset
+      g.ctx2dcircle(mX + mW - 9, mY + 32, 2, '#7ac86a'); // status light
+      g.ctx2dfill('#33383f', mX, mY + mH - 3, mW, 3); // feet shadow
+    }
+
+    // --- Professor: large portrait, centered above the dialogue zone ---
+    const scale = (w >= 320 || h >= 250) ? 5 : 4; // 24x24 art -> 120 or 96 px
+    const size = 24 * scale;
+    const animT = (g && typeof g._animT === 'number') ? g._animT : 0;
+    const bob = Math.round(Math.sin(animT / 600) * 1); // gentle +/-1px idle
+    const px = Math.round(cx - size / 2);
+    const py = floorY + 6 - size + bob;
+    // Soft oval shadow / plate grounding the portrait on the floor line.
+    try {
+      const c = r.ctx;
+      c.fillStyle = 'rgba(20,14,8,0.35)';
+      c.beginPath();
+      if (typeof c.ellipse === 'function') c.ellipse(cx, floorY + 8, size * 0.42, 6, 0, 0, Math.PI * 2);
+      else c.arc(cx, floorY + 8, size * 0.3, 0, Math.PI * 2);
+      c.fill();
+    } catch (e) {
+      g.ctx2dfill('rgba(20,14,8,0.35)', cx - size * 0.4, floorY + 5, size * 0.8, 5);
+    }
+    let spr = null;
+    try {
+      if (typeof document !== 'undefined' && typeof artCanvas === 'function') {
+        spr = artCanvas(document, 'portrait-hawthorn', scale, false);
+      }
+    } catch (e) { spr = null; }
+    if (spr) {
+      r.blitS(spr, px, py, size, size);
+    } else {
+      // Fallback silhouette (original shapes) when portrait art is absent:
+      // head + lab coat, same footprint as the portrait treatment.
+      g.ctx2dcircle(cx, py + size * 0.32, size * 0.17, '#c8c4bc'); // hair
+      g.ctx2dcircle(cx, py + size * 0.36, size * 0.14, '#f0c090'); // face
+      g.ctx2dfill('#f0f0f0', cx - size * 0.21, py + size * 0.5, size * 0.42, size * 0.46); // coat
+      g.ctx2dfill('#7a8a5a', cx - size * 0.05, py + size * 0.56, size * 0.1, size * 0.3); // shirt
+    }
+    r.end(); r.camX = pcx; r.camY = pcy;
   }
 }
 
@@ -18826,7 +19225,10 @@ class BattleScene {
     r.panel(px, y, w, h, '#f0ead8', '#202028');
     const name = displayName(mon, SPECIES).slice(0, 10);
     r.text(name, px + 4, y + 4, { size: 14, bold: true, color: '#202028', shadow: false });
-    r.text('Lv' + mon.level, px + w - 46, y + 4, { size: 14, color: '#202028', shadow: false });
+    // Lv label nudged right: at px + w - 46 a 9-10 char name (Charizard,
+    // Butterfree) ran under the 'Lv' text; -41 clears those and 'Lv100'
+    // still ends inside the plate (px + w - 3).
+    r.text('Lv' + mon.level, px + w - 41, y + 4, { size: 14, color: '#202028', shadow: false });
     const frac = hpShown / mon.maxHp;
     r.hpBar(px + 4, y + 22, w - 8, 6, frac);
     // P0/E6: ⚠ pip on the plate under 25% — the colorblind cue, never color-alone.
@@ -19438,8 +19840,11 @@ Object.assign(BattleScene.prototype, {
     r.end();
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
     this.plate(r, w - 116, h - 108, this.ally, this.hpAnim.ally, true);
-    // Cooldown chips for the ally's four moves (bottom strip).
-    const chipW = 108;
+    // Cooldown chips for the ally's four moves (bottom strip). Chip width is
+    // derived from the actual view: the old fixed 108px assumed a 480-wide
+    // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
+    const chipW = Math.floor((w - 24) / 4); // 4 chips, 3 gaps of 4, 6px margins
+    const labelMax = Math.max(4, Math.min(10, Math.floor((chipW - 8) / 7)));
     for (let i = 0; i < 4; i++) {
       const slot = this.ally.moves[i];
       const x = 6 + i * (chipW + 4);
@@ -19450,19 +19855,26 @@ Object.assign(BattleScene.prototype, {
       const ready = cd <= 0 && slot.pp > 0;
       r.panel(x, y, chipW, 20, ready ? 'rgba(24,30,44,0.92)' : 'rgba(24,30,44,0.6)', ready ? '#e8c832' : '#4a506a');
       const label = (i + 1) + ' ' + (mv ? mv.name : slot.id);
-      r.text(label.slice(0, 10), x + 4, y + 2, { size: 14, color: ready ? '#f4f2e8' : '#9aa0b4', shadow: false });
+      // A spent slot also carries 'NO PP' at the chip's right end — shorten
+      // the label so the two never collide on narrow chips.
+      const maxChars = slot.pp <= 0 ? Math.max(3, Math.min(labelMax, Math.floor((chipW - 46) / 7))) : labelMax;
+      r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? '#f4f2e8' : '#9aa0b4', shadow: false });
       if (!ready && slot.pp > 0) {
         const total = cooldownMs(mv, 50, 50);
         const frac = Math.max(0, Math.min(1, cd / total));
         c.fillStyle = 'rgba(232,200,50,0.5)';
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
       }
-      if (slot.pp <= 0) r.text('NO PP', x + chipW - 52, y + 2, { size: 14, color: '#e86a6a', shadow: false });
+      if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#e86a6a', shadow: false });
     }
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
-      r.panel(w / 2 - 110, 40, 220, 22, 'rgba(16,18,28,0.88)', '#e8c832');
-      r.text(this.rtFloatText.slice(0, 30), w / 2 - 104, 44, { size: 14, color: '#f4f2e8', shadow: false });
+      // Panel fits the view and the text slice fits the panel (~7px/char at
+      // 14px): the old fixed 30-char slice could overrun the 220px panel.
+      const floatW = Math.min(220, w - 16);
+      const floatMax = Math.max(8, Math.floor((floatW - 12) / 7));
+      r.panel(w / 2 - floatW / 2, 40, floatW, 22, 'rgba(16,18,28,0.88)', '#e8c832');
+      r.text(this.rtFloatText.slice(0, floatMax), w / 2 - floatW / 2 + 6, 44, { size: 14, color: '#f4f2e8', shadow: false });
     }
     if (this.msgOpen || this.msg) {
       r.panel(4, h - 52, w - 8, 48, '#f8f8f0', '#202028');
@@ -19500,6 +19912,10 @@ class OverworldScene {
     this.pausedMenu = false;
     // P1/C6: movement tutorial shows once until the player takes a first step (or 30s).
     this.moveTut = g.state.story.flags.moveTutDone ? null : { t: 0 };
+    // HUD chip change-detection state (the DOM chips live in the UI seat;
+    // syncHud pushes values only when they change). undefined = never sent.
+    this._hudLoc = undefined; this._hudObj = undefined; this._hudDex = undefined;
+    this._hudBannerObj = null;
     // P1/D7: partner mood pip — tap = pet (same as facing + A on Pikachu).
     g.ui.onMoodTap = () => this.petPartner();
     g.ui.showMoodPip(true);
@@ -19897,14 +20313,16 @@ class OverworldScene {
     // P1/J2: player card header + Quit to title (confirm; autosaves first).
     const badges = g.state.badges.kanto.length;
     const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
-    // Track B: account row — logged in shows the account menu; logged out (vercel)
-    // offers login; guest target keeps the honest disabled row (Track A).
+    // Track B: account row — logged in shows the account menu; guest target
+    // keeps the honest disabled row (Track A). Guests get NO row here: the
+    // old 'Log in to sync ★' upsell was removed (login lives on the title
+    // Terminal); a null row is filtered out of the menu list below.
     const authEnabled = (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED);
     const accountRow = !authEnabled
       ? { label: 'Account — coming in Track B', value: 'account', disabled: true }
       : g.authUser
         ? { label: 'Account', value: 'account' }
-        : { label: 'Log in to sync ★', value: 'login' };
+        : null;
     g.ui.showMenu('MENU', [
       { label: g.state.player.name + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
       { label: this.map.name, value: null, disabled: true },
@@ -19914,7 +20332,7 @@ class OverworldScene {
       { label: 'Journey', value: 'journey' },
       { label: 'Save', value: 'save' },
       { label: 'Options', value: 'options' },
-      accountRow,
+      ...(accountRow ? [accountRow] : []),
       { label: 'Quit to title', value: 'quit' },
       { label: 'Close', value: 'close' },
     ], (value) => {
@@ -19925,7 +20343,6 @@ class OverworldScene {
       else if (value === 'save') g.openSave();
       else if (value === 'options') g.openOptions();
       else if (value === 'account' && authEnabled && g.authUser) AUTH.openAccountMenu(g);
-      else if (value === 'login' && authEnabled) g.openLogin('continue');
       else if (value === 'quit') {
         g.ui.showMenu('Quit to title? (autosaves first)', [
           { label: 'Quit', value: 'yes' },
@@ -19995,40 +20412,72 @@ class OverworldScene {
     if (this.enc && this.enc.phase === 'exclaim') {
       r.text('!', this.player.px + 4, this.player.py - 14, { size: 14, bold: true, color: '#e84040' });
     }
-    // P1/C6: movement tutorial — pulsing ring on the player + coach text.
+    // P1/C6: movement tutorial — the coach line moved to a one-shot DOM toast
+    // (syncHud). On the map only a subtle spawn ring remains: it fades out
+    // over the first 1.2s after spawn and never pulses again (the old endless
+    // pulse read as a target reticle). The partner '▼' fades with it.
     if (this.moveTut) {
-      const pr = 12 + Math.sin(g._animT * 0.008) * 3;
-      const c = r.ctx;
-      c.strokeStyle = '#ffe9a8'; c.lineWidth = 2;
-      c.beginPath(); c.arc(this.player.px + 8, this.player.py + 8, pr, 0, Math.PI * 2); c.stroke();
-      r.text('Walk with the D-pad — Pikachu follows you!', 8, 44, { size: 14, bold: true, color: '#ffe9a8' });
-      r.text('▼', Math.round(this.partner.px) + 4, Math.round(this.partner.py) - 28, { size: 14, bold: true, color: '#ffe9a8' });
+      const fade = Math.max(0, 1 - this.moveTut.t / 1.2);
+      if (fade > 0) {
+        const gold = 'rgba(255,233,168,' + fade.toFixed(3) + ')';
+        const c = r.ctx;
+        c.strokeStyle = gold; c.lineWidth = 2;
+        c.beginPath(); c.arc(this.player.px + 8, this.player.py + 8, 12, 0, Math.PI * 2); c.stroke();
+        r.text('▼', Math.round(this.partner.px) + 4, Math.round(this.partner.py) - 28, { size: 14, bold: true, color: gold, shadow: false });
+      }
     }
     // P1/D5: contextual interaction prompt bubble.
     const prompt = this.interactPrompt();
     if (prompt) {
       const bx = Math.round(this.player.px) - 24, by = Math.round(this.player.py) - 30;
       r.panel(bx, by, 76, 20, '#f8f8f0', '#202028');
-      r.text(prompt, bx + 6, by + 3, { size: 14, color: '#202028', shadow: false });
+      // Centered in the bubble: with align:'center', x is the center point.
+      r.text(prompt, bx + 38, by + 3, { size: 14, color: '#202028', shadow: false, align: 'center' });
     }
     // P1/D8: clock glyph — day/night pixel icon + season bar (no text, ambient).
     this.renderClockGlyph(r);
     r.end();
-    // HUD overlays (canvas) — P1/A5: >= 14px.
-    if (this.banner.t > 0) {
-      r.text(this.banner.text, 8, 8, { size: 14, bold: true, color: '#fff' });
+    // HUD lives in DOM chips now (UI seat): the area banner, the permanent
+    // objective line, the area-completion line and the Dex counter are no
+    // longer draped over the map as canvas text. Values are pushed on change.
+    this.syncHud();
+  }
+
+  // Push location / objective / dex values to the UI seat's DOM chips, only
+  // when a value actually changed. Every call is guarded so builds (and
+  // headless suites) without the new UI methods never crash. The strings are
+  // byte-identical to the old canvas draws — only the presentation moved.
+  // The area banner and the movement tutorial become one-shot toasts.
+  syncHud() {
+    const g = this.game;
+    const ui = g && g.ui;
+    if (!ui) return;
+    if (ui.setLocationChip) {
+      const loc = this.map.name;
+      if (loc !== this._hudLoc) { this._hudLoc = loc; ui.setLocationChip(loc); }
     }
-    // P1/D6: persistent objective banner under the area banner.
-    r.text(this.objectiveText(), 8, 26, { size: 14, color: '#ffe9a8' });
-    const comp = this.areaCompletion();
-    if (comp) {
-      r.text(this.map.name + ' · ' + comp.caught + '/' + comp.total + ' caught', 8, r.viewH - 18, { size: 14, color: '#ffe9a8' });
+    if (ui.setObjectiveChip) {
+      const obj = this.objectiveText();
+      if (obj !== this._hudObj) { this._hudObj = obj; ui.setObjectiveChip(obj); }
     }
-    // Dex caught counter (honest wording). D3: on desktop the DOM HUD strip is
-    // ~218 CSS px wide at the top-right; shift the counter left in logical px so
-    // the left-aligned text clears it (phone layouts keep the signed offset).
-    const dexX = g.layoutMode === 'desktop' ? r.viewW - 172 : r.viewW - 92;
-    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, dexX, 8, { size: 14, color: '#fff' });
+    if (ui.setDexChip) {
+      const dex = 'Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL;
+      if (dex !== this._hudDex) { this._hudDex = dex; ui.setDexChip(dex); }
+    }
+    if (ui.hudToast) {
+      // Banner trigger: the banner object is REPLACED on every trigger —
+      // in onStep's warp path and in overworld-systems (surf/fly/safari) —
+      // so a fresh object with t > 0 is exactly one toast, never per frame.
+      if (this.banner && this.banner.t > 0 && this.banner !== this._hudBannerObj) {
+        this._hudBannerObj = this.banner;
+        ui.hudToast(this.banner.text, 2600);
+      }
+      // Movement tutorial toast: once, when the tutorial starts.
+      if (this.moveTut && !this.moveTut._toastSent) {
+        this.moveTut._toastSent = true;
+        ui.hudToast('Walk with the D-pad — Pikachu follows you!', 3600);
+      }
+    }
   }
 
   // P1/D5: what would A do on the faced tile? (bubble text, or null)
@@ -20890,6 +21339,8 @@ class Game {
     this.rng = makeRngStreams(nextSeed());
     this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs); void -> solid fill
     this.spriteCache = {};
+    this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
+    this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)
     this.npcCache = {};
     this.skipIntroVeteran = false;
     this._lastAutosave = 0;
@@ -20916,6 +21367,50 @@ class Game {
     };
     this._partnerHop = partnerHopFrames(doc);
     this.npcCache = {};
+  }
+
+  // Battle-art data URL for a species (party/bag menu <img class="picon">).
+  // Cached per species id on the game object so toDataURL runs once.
+  // Headless stub canvases have no toDataURL — returns '' there (guarded).
+  spriteDataUrl(speciesId) {
+    if (!this._spriteUrlCache) this._spriteUrlCache = {};
+    if (speciesId in this._spriteUrlCache) return this._spriteUrlCache[speciesId];
+    let url = '';
+    try {
+      const entry = this.spriteCache && this.spriteCache[speciesId];
+      const cv = entry && (entry.front || entry);
+      if (cv && typeof cv.toDataURL === 'function') url = cv.toDataURL();
+    } catch (e) { url = ''; }
+    this._spriteUrlCache[speciesId] = url;
+    return url;
+  }
+
+  // Icon name for a bag item, or null when no authored icon art exists:
+  // balls -> pokeball, potion-class medicine -> potion, badges -> badge.
+  itemIconName(itemId) {
+    const it = ITEMS[itemId];
+    if (itemId === 'potion' || itemId === 'superpotion' || itemId === 'hyperpotion' ||
+        itemId === 'maxpotion' || itemId === 'fullrestore') return 'potion';
+    if ((it && it.pocket === 'balls') || itemId === 'pokeball') return 'pokeball';
+    if (itemId && String(itemId).endsWith('badge')) return 'badge';
+    return null;
+  }
+
+  // Item-icon data URL for bag rows (uiIcon canvases from art.mjs).
+  // Cached per item id on the game object so toDataURL runs once.
+  itemIconDataUrl(itemId) {
+    if (!this._iconUrlCache) this._iconUrlCache = {};
+    if (itemId in this._iconUrlCache) return this._iconUrlCache[itemId];
+    let url = '';
+    try {
+      const iconName = this.itemIconName(itemId);
+      if (iconName) {
+        const cv = uiIcon(doc, iconName);
+        if (cv && typeof cv.toDataURL === 'function') url = cv.toDataURL();
+      }
+    } catch (e) { url = ''; }
+    this._iconUrlCache[itemId] = url;
+    return url;
   }
 
   // Overworld Ash: 4-dir walk cycle while moving, 2-frame idle blink at rest.
@@ -21028,7 +21523,9 @@ class Game {
       document.body.classList.remove('desktop');
     } else {
       this.layoutMode = 'portrait';
-      r.resize(256, 256, w, h * 0.45);
+      // Portrait: canvas takes 58% of the height (was 45% — left a dead
+      // void below and shrank the game's subject). Logical stays 256x256.
+      r.resize(256, 256, w, h * 0.58);
       document.body.classList.remove('desktop');
     }
     // P1/K2: landscape gets the right-edge command rail (CSS re-rails the HUD strip).
@@ -21201,6 +21698,24 @@ class Game {
     }
     if (!items.length) items.push({ label: '(empty)', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
+    // Bag rows carry the item's authored icon (uiIcon -> data URL, cached
+    // per item id) where art exists; headers/Close stay plain text.
+    const bagRowHtml = (it) => {
+      if (!it.value || it.value === 'close') return '<span>' + it.label + '</span>';
+      const url = g.itemIconDataUrl(it.value);
+      // Emit the icon whenever authored icon art exists for the item —
+      // in the browser url is its data URL; headless stub canvases have
+      // no toDataURL (url ''), but the row still carries the <img>.
+      let hasIcon = !!url;
+      if (!hasIcon) {
+        try {
+          const iconName = g.itemIconName(it.value);
+          hasIcon = !!(iconName && uiIcon(doc, iconName));
+        } catch (e) { hasIcon = false; }
+      }
+      const img = hasIcon ? '<img class="picon" src="' + url + '" alt="">' : '';
+      return img + '<span>' + it.label + '</span>';
+    };
     g.ui.showMenu('Bag', items, (v) => {
       if (!v || v === 'close') return;
       if (v === 'potion') {
@@ -21209,6 +21724,12 @@ class Game {
           disabled: m.hp <= 0 || m.hp >= m.maxHp,
         }));
         targets.push({ label: 'Back', value: -1 });
+        const targetRowHtml = (it) => {
+          if (it.value === -1 || it.value === null) return '<span>' + it.label + '</span>';
+          const m = g.state.party[it.value];
+          if (!m) return '<span>' + it.label + '</span>';
+          return '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt=""><span>' + it.label + '</span>';
+        };
         g.ui.showMenu('Use Potion on...', targets, (t) => {
           if (t === null || t === -1) { g.openBag(); return; }
           const m = g.state.party[t];
@@ -21216,31 +21737,35 @@ class Game {
           m.hp = Math.min(m.maxHp, m.hp + 20);
           g.audio.playSfx('heal');
           g.ui.toast(displayName(m, SPECIES) + ' recovered 20 HP!');
-        });
+        }, { rowHtml: targetRowHtml });
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    });
+    }, { rowHtml: bagRowHtml });
   }
 
   openParty() {
     const g = this;
-    // P1/G1: rows carry an HP mini-bar + numbers, status chip, and the ⚡ partner badge.
+    // P1/G1: rows carry the species battle-art sprite, an HP mini-bar +
+    // numbers, status chip, and a PARTNER text chip for the partner.
     const rowHtml = (it) => {
-      if (it.value === 'close' || it.value === -1) return '<span>' + it.label + '</span>';
+      if (it.value === -1) return '<span class="emptyslot">Empty slot</span>';
+      if (it.value === 'close') return '<span>' + it.label + '</span>';
       const m = g.state.party[it.value];
+      if (!m) return '<span>' + it.label + '</span>';
       const pct = Math.max(0, Math.round((m.hp / m.maxHp) * 100));
       const col = pct > 50 ? '#58c94f' : pct > 25 ? '#e8c832' : '#e84040';
-      const badge = m.speciesId === 'partner' ? '<span class="pbadge">⚡</span>' : '';
+      const badge = m.speciesId === 'partner' ? '<span class="pbadge">PARTNER</span>' : '';
       const st = m.status ? '<span class="pstat">' + m.status.toUpperCase().slice(0, 3) + '</span>' : '';
-      return '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
+      return '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+        + '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
         + '<span class="phpbar"><i style="width:' + pct + '%;background:' + col + '"></i></span>'
         + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st;
     };
     const items = g.state.party.map((m, i) => {
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + '  ' + m.hp + '/' + m.maxHp, value: i };
     });
-    for (let i = g.state.party.length; i < 6; i++) items.push({ label: '—', value: -1, disabled: true });
+    for (let i = g.state.party.length; i < 6; i++) items.push({ label: 'Empty', value: -1, disabled: true });
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Party', items, (v) => {
       if (v === null || v === 'close' || v === -1) return;
@@ -21482,8 +22007,6 @@ class Game {
     if (g.authUser) {
       rows.push({ label: 'Account', value: 'account' });
       rows.push({ label: 'Sync now', value: 'syncnow' });
-    } else if (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED) {
-      rows.push({ label: 'Log in to sync ★', value: 'login' });
     }
     rows.push(
       { label: 'Erase save', value: 'erase' },
@@ -21515,7 +22038,6 @@ class Game {
       else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
       else if (v === 'account') { AUTH.openAccountMenu(g); return; }
       else if (v === 'syncnow') { SYNC.syncNow(g, true); return; }
-      else if (v === 'login') { g.openLogin('continue'); return; }
       else if (v === 'erase') {
         g.ui.showMenu('Erase ALL save data?', [
           { label: 'Yes, erase everything', value: 'yes' },
@@ -21581,6 +22103,23 @@ const REGIONS = [
 
 Object.assign(Game.prototype, {
   // ---------- bag ----------
+  // Bag target rows (Rare Candy / medicine / stones / TM teaching) carry
+  // the target Pokemon's battle-art sprite, same treatment as the Party
+  // menu in main.mjs: <img class="picon"> from the species data URL,
+  // cached per species id via Game#spriteDataUrl (main.mjs) so toDataURL
+  // runs once per species. Back/empty rows stay plain text. The bag's own
+  // item rows get their icons in main.mjs openBag (uiIcon data URLs).
+  partyTargetRowHtml(it) {
+    if (!it || it.value === -1 || it.value === null || it.value === undefined) {
+      return '<span>' + (it ? it.label : '') + '</span>';
+    }
+    const mon = this.state && this.state.party ? this.state.party[it.value] : null;
+    if (!mon) return '<span>' + it.label + '</span>';
+    const img = (typeof this.spriteDataUrl === 'function')
+      ? '<img class="picon" src="' + this.spriteDataUrl(mon.speciesId) + '" alt="">' : '';
+    return img + '<span>' + it.label + '</span>';
+  },
+
   useBagItem(id) {
     const g = this;
     const it = ITEMS[id];
@@ -21600,7 +22139,7 @@ Object.assign(Game.prototype, {
         this.recalcMon(m, true);
         g.audio.playSfx('levelup');
         g.ui.say([displayName(m, SPECIES) + ' grew to Lv ' + m.level + '!'], () => { this.queueEvolution(m); finish(); });
-      });
+      }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
       return;
     }
     if (it.pocket === 'medicine') {
@@ -21637,7 +22176,7 @@ Object.assign(Game.prototype, {
         }
         if (it.ppRestoreAll) { for (const mv of m.moves) mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestoreAll); apply(); return; }
         finish();
-      });
+      }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
       return;
     }
     if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone'].includes(id)) {
@@ -21653,13 +22192,19 @@ Object.assign(Game.prototype, {
       if (!stoneTargets.length) { g.ui.say(['It won\'t have any effect on your party.']); return; }
       const items = stoneTargets.map((m) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: m.monId }));
       items.push({ label: 'Back', value: null });
+      const stoneRowHtml = (row) => {
+        if (!row || row.value === null || row.value === undefined) return '<span>' + (row ? row.label : '') + '</span>';
+        const mon = stoneTargets.find((m) => m.monId === row.value);
+        if (!mon || typeof g.spriteDataUrl !== 'function') return '<span>' + row.label + '</span>';
+        return '<img class="picon" src="' + g.spriteDataUrl(mon.speciesId) + '" alt=""><span>' + row.label + '</span>';
+      };
       g.ui.showMenu('Use ' + it.name + ' on...', items, (v) => {
         const mon = stoneTargets.find((m) => m.monId === v);
         if (!mon) { finish(); return; }
         g.state.bag[id]--;
         if (ow && ow.evolveMon) ow.evolveMon(mon, id);
         finish();
-      });
+      }, { rowHtml: stoneRowHtml });
       return;
     }
     // Key items + balls: honest guidance lines.
@@ -21736,7 +22281,7 @@ Object.assign(Game.prototype, {
       if (t === null || t === -1) { g.openBag(); return; }
       const m = g.state.party[t];
       this.teachMove(m, moveId, isHm, () => { if (!isHm) g.state.bag[itemId]--; g.openBag(); });
-    });
+    }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
   },
 
   teachMove(mon, moveId, isHm, done) {
