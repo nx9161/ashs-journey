@@ -26,7 +26,7 @@ api/purge.mjs           POST — retention purges (CRON_SECRET bearer)
 api/lib/                db, auth (better-auth config), ip, rate-limit, hibp,
                         validator, blocklists, anomaly, http helpers
 api/lib/data/tables.json  committed data-table snapshot (validator pinning)
-api/scripts/gen-tables.mjs  regenerates the snapshot from src/data
+tools/api-scripts/gen-tables.mjs  regenerates the snapshot from src/data
 ```
 
 ## Provisioning (owner-side, secure flow — never chat)
@@ -88,7 +88,7 @@ Until then, all auth code paths stay dark and the game ships guest-only.
   `__proto__` denial, strict types, species/move/item ids pinned to
   `api/lib/data/tables.json` with a startup `tablesVersion` assert —
   fail closed). Regenerate after data changes:
-  `node api/scripts/gen-tables.mjs` (CI: `--check`).
+  `node tools/api-scripts/gen-tables.mjs` (CI: `--check`).
 - Validator parity (honest): exactly two validators exist — the client
   pre-check `src/save/schema.mjs` (48 lines: top-level key whitelist +
   schema version + basic shapes, `{ok, errors}` only, no anomaly model) and
@@ -99,7 +99,7 @@ Until then, all auth code paths stay dark and the game ships guest-only.
   never reject a save the server would accept; the server is the normative
   gate (ADR-010 §9(8) bar). A third validator may never be added — enforced
   by the single-validator gate in CI.
-- Seeded fuzz battery: `api/scripts/validator.fuzz.test.mjs` (mulberry32,
+- Seeded fuzz battery: `tools/api-scripts/validator.fuzz.test.mjs` (mulberry32,
   fixed seed, N=2000 random/mutated payloads; every result must be exactly
   accept-with-possible-anomalies or the 422 shape — no throws, no other
   shapes). The honest aggregate api/ branch-coverage number

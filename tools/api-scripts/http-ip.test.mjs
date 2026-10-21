@@ -1,8 +1,8 @@
 // http-ip.test.mjs — unit tests for api/lib/http.mjs + api/lib/ip.mjs.
 // Run: node api/scripts/http-ip.test.mjs   (exit 0 = all pass)
 
-import { readBody, assertSameOrigin } from '../lib/http.mjs';
-import { trustedClientIP } from '../lib/ip.mjs';
+import { readBody, assertSameOrigin } from '../../api/lib/http.mjs';
+import { trustedClientIP } from '../../api/lib/ip.mjs';
 
 let pass = 0, fail = 0;
 function t(name, cond) {

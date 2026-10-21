@@ -19,7 +19,7 @@
 // (save.mjs itself is exercised only via save-contract mocks). The number
 // is recorded, not chased — no artificial tests were added to inflate it.
 
-import { validateSave } from '../lib/validator.mjs';
+import { validateSave } from '../../api/lib/validator.mjs';
 import { defaultState } from '../../src/game/state.mjs';
 
 const N = 2000;
