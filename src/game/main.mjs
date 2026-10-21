@@ -483,7 +483,7 @@ export class Game {
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    }, { rowHtml: bagRowHtml });
+    }, { rowHtml: bagRowHtml, menuClass: 'bagwin' });
   }
 
   openParty() {

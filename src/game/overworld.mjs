@@ -612,7 +612,8 @@ export class OverworldScene {
     const fx = p.tx + dx, fy = p.ty + dy;
     const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
     if (fx === ptx && fy === pty) return 'A: Pet';
-    if (this.npcAt(fx, fy)) return 'A: Talk';
+    const facedNpc = this.npcAt(fx, fy);
+    if (facedNpc) return facedNpc.pc ? 'A: PC' : 'A: Talk'; // UI v2.3: the storage terminal names itself
     if (this.signAt(fx, fy)) return 'A: Read';
     return null;
   }

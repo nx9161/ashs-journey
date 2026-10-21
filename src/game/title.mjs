@@ -47,9 +47,11 @@ export const GAME_SUBTITLE = 'An Unofficial Fan Homage';
 export const EDITION_MARKER = /*__EDITION_MARKER__*/;
 
 // ---- Title recomposition helpers (Seat B) ----
-// Shared design system: UI font stack + ink/paper/gold. UI v2 (Platinum
-// standard): Galmuri leads the stack, matching the canvas renderer
-// (src/engine/render.mjs UI_FONT_STACK) so measured plates fit drawn text.
+// Shared design system: UI font stack + ink/paper/gold. The title screen is
+// a DISPLAY surface: Galmuri leads its stack (kept identical to
+// UI_DISPLAY_FONT_STACK in src/engine/render.mjs) and every r.text call
+// below passes { display: true }, so the measurer here and the renderer
+// always use the same font string (UI v2.3, defect 1).
 const FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 const PAPER = '#f8f8f0';
 const GOLD = '#e8c832';
@@ -337,12 +339,12 @@ export class BootScene {
     plateW = Math.min(plateW + 28, w - 12);
     const plateX = Math.round(cx - plateW / 2);
     r.panel(plateX, plateY, plateW, plateH, 'rgba(16,16,28,0.62)', 'rgba(232,200,50,0.55)');
-    r.text(GAME_TITLE, cx, titleY, { size: titleSize, bold: true, align: 'center', color: '#fff' });
+    r.text(GAME_TITLE, cx, titleY, { size: titleSize, bold: true, align: 'center', color: '#fff', display: true });
     // Platinum logo treatment: a subtle gold rule under the title,
     // sized to the measured Galmuri title text.
     const titleW = measureText(r, GAME_TITLE, titleSize, true);
     g.ctx2dfill('rgba(232,200,50,0.55)', Math.round(cx - titleW / 2), titleY + titleSize + 1, titleW, 2);
-    r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8' });
+    r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8', display: true });
     if (hasEd) {
       // ADR-012 personal-edition ribbon: measured dark band + gold underline,
       // centered under the subtitle. Guest/vercel bundles have
@@ -352,7 +354,7 @@ export class BootScene {
       const rx = Math.round(cx - rw / 2);
       g.ctx2dfill('rgba(8,8,14,0.72)', rx, edY, rw, edH);
       g.ctx2dfill(GOLD, rx, edY + edH - 2, rw, 2);
-      r.text(EDITION_MARKER, cx, edY + 3, { size: 14, align: 'center', color: '#ffe9a8' });
+      r.text(EDITION_MARKER, cx, edY + 3, { size: 14, align: 'center', color: '#ffe9a8', display: true });
     }
 
     if (showMenu) {
@@ -366,7 +368,7 @@ export class BootScene {
           g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
         }
         r.text(it.label, cx, rowY + 2, {
-          size: 14, bold: sel, align: 'center',
+          size: 14, bold: sel, align: 'center', display: true,
           color: sel ? '#ffe9a8' : PAPER,
         });
       });
@@ -376,12 +378,12 @@ export class BootScene {
       // idiom); steady-on under reduced motion.
       const reduced = !!(g.state.settings && g.state.settings.reducedMotion);
       if (reduced || Math.floor(this.t * 2) % 2 === 0) {
-        r.text('PRESS START', cx, psY, { size: 16, bold: true, align: 'center', color: '#ffe9a8' });
+        r.text('PRESS START', cx, psY, { size: 16, bold: true, align: 'center', color: '#ffe9a8', display: true });
       }
     }
 
     // ---- Footer: centered, inset from both edges, never clipped ----
-    r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc' });
+    r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
     r.end(); r.camX = pcx; r.camY = pcy;
   }
   renderLegal(r) {

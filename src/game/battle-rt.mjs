@@ -15,6 +15,7 @@ import {
 import { roll } from '../engine/rng.mjs';
 import { PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { displayName } from './state.mjs';
+import { typePill } from './ui.mjs';
 import { BattleScene } from './battle.mjs';
 
 const ARENA = { x0: 26, y0: 56, x1: 454, y1: 258 }; // logical 480x320 space
@@ -29,34 +30,73 @@ function cooldownMs(mv, userSpe, foeSpe) {
 }
 
 Object.assign(BattleScene.prototype, {
-  // ADR-021 control parity: on touch devices the DOM command panel IS the
-  // move pad — four move buttons + BALL/TEAM/RUN, all pulsing the same Input
-  // actions the keyboard produces (slot1-4 / a / start / select). Neither
-  // front-end is a degraded mode.
-  rtShowTouchCommands() {
-    const g = this.game, ui = g.ui;
-    if (!ui || ui.headless || !ui.cmdEl || typeof document === 'undefined') return;
-    const inp = g.input;
-    ui.cmdEl.innerHTML = '';
-    ui.cmdEl.classList.remove('hidden');
-    const mk = (label, fn, cls) => {
-      const b = document.createElement('button');
-      b.className = 'cmdf' + (cls ? ' ' + cls : '');
-      b.textContent = label;
-      b.addEventListener('pointerdown', (e) => { e.preventDefault(); fn(); });
-      ui.cmdEl.appendChild(b);
-      return b;
-    };
-    const pulse = (action) => { inp.press(action); setTimeout(() => inp.release(action), 90); };
-    this.ally.moves.forEach((slot, i) => {
-      const mv = MOVES[slot.id];
-      mk(mv.name + ' (' + slot.pp + ')', () => pulse('slot' + (i + 1)));
+  // UI v2.3 (defect 2): ONE battle presentation for every battle type.
+  // The v2.2 RT-only combined panel (move buttons with PP only, stacked
+  // over BALL/TEAM/RUN gradient bars, drawn across the ally databox, no
+  // FIGHT stage) is DELETED — no battle renders it. RT battles now present
+  // exactly like classic ones: A (or a tap on the A pad) opens the Platinum
+  // 2x2 command grid (FIGHT / BAG / PARTY / RUN) in the message zone, and
+  // FIGHT opens the same framed move window as the classic battle (name +
+  // type pill + PP + power/acc; a move on cooldown shows its remaining CD
+  // and picking it floats the cooldown instead of firing). Opening any of
+  // these menus freezes the arena (the
+  // theatre rule), and the windows are the classic battlewin/cmdpanel
+  // layouts, so neither databox is ever covered. Keyboard slot keys stay
+  // as direct-fire shortcuts (ADR-021 parity) — input only, never a
+  // separate rendered panel; touch plays the identical command flow
+  // through the A/B pads and tappable grid.
+  rtShowCommands() {
+    const g = this.game;
+    if (this.state !== 'rt' || !this.rt || this.rtFrozen()) return;
+    const items = [
+      { label: 'FIGHT', value: 'fight' },
+      { label: 'BAG', value: 'bag' },
+      { label: 'PARTY', value: 'party' },
+      { label: 'RUN', value: 'run', disabled: this.kind !== 'wild' },
+    ];
+    g.ui.showCommands(items, (value) => {
+      if (value === null) return; // B backs out to the live arena
+      if (value === 'fight') this.rtShowMoves();
+      else if (value === 'bag') this.rtBallMenu();
+      else if (value === 'party') this.openPartyMenu(false);
+      else if (value === 'run') this.rtTryRun();
+    }, {});
+  },
+
+  rtShowMoves() {
+    const g = this.game;
+    const ally = this.ally;
+    const rt = this.rt;
+    const items = ally.moves.map((m, i) => {
+      const mv = MOVES[m.id];
+      const disabledMove = ally.disableT > 0 && ally.disabledMove === i;
+      const cd = rt && rt.cds.ally[m.id] ? Math.ceil(rt.cds.ally[m.id] / 1000) : 0;
+      return {
+        label: mv.name + ' (' + mv.type + ') ' + m.pp + '/' + m.maxPp + (cd ? ' CD ' + cd + 's' : ''),
+        value: i, disabled: m.pp <= 0 || disabledMove, zeroPp: m.pp <= 0, move: m, cd,
+      };
     });
-    while (this.ally.moves.length && ui.cmdEl.children.length < 4) mk('—', () => {});
-    if (this.kind === 'wild') mk('BALL', () => pulse('a'));
-    mk('TEAM', () => pulse('start'));
-    mk('RUN', () => pulse('select'));
-    this._rtCmdFor = this.ally.monId;
+    items.push({ label: 'Back', value: -1, wide: true });
+    // Same framed move window as the classic battle (battle.mjs
+    // onCommand('fight')): name + type pill + PP (+ CD while cooling
+    // down) + power/acc.
+    const rowHtml = (it) => {
+      if (it.value === -1) return '<span>' + it.label + '</span>';
+      const mv = MOVES[it.move.id];
+      return '<span class="mvcell"><span class="mvname">' + mv.name + '</span>'
+        + typePill(mv.type)
+        + '<span class="mvpp">' + it.move.pp + '/' + it.move.maxPp + ' PP' + (it.cd ? ' · CD ' + it.cd + 's' : '') + '</span>'
+        + '<span class="mvpow">' + (mv.power || '—') + ' pw / ' + (mv.acc || '—') + ' ac</span></span>';
+    };
+    g.ui.showMenu('Choose a move', items, (v) => {
+      if (v === null || v === -1) { this.rtShowCommands(); return; }
+      this._lastMoveIdx = v; // cursor memory, same as classic
+      // A cooling move is selectable on purpose: picking it floats the
+      // cooldown and re-presents a FRESH window (live values — the
+      // clocks tick while menus are open, UI v2.3), never a dead press
+      // on a stale disabled row.
+      if (!this.rtUseMove('ally', v)) { this.rtFloat('Cooling down!'); this.rtShowMoves(); }
+    }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx || 0, items.length - 1), rowHtml, menuClass: 'battlewin' });
   },
 
   rtInit() {
@@ -95,16 +135,17 @@ Object.assign(BattleScene.prototype, {
     return this.msgOpen || !!g.ui.menu || !!g.ui.dialogue;
   },
 
-  updateRt(dt) {
-    const g = this.game;
-    const input = g.input;
+  // UI v2.3: the RT clock block (move cooldowns, dodge cooldown, float
+  // message cooldown, sleep clocks). Split out of updateRt so
+  // BattleScene.update can tick the clocks while a battle menu/dialogue
+  // freezes the arena — the FIGHT window's cooldowns are live, and a
+  // cooling move can come back while the player decides. Positional
+  // timers (dodge roll, i-frames, switch vulnerability) and the
+  // poison/burn pressure tick stay in updateRt: they belong to the
+  // frozen arena, not the clock.
+  rtTickClocks(dtms) {
     const rt = this.rt;
-    if (!rt) { this.toCommand(); return; }
-    // Touch move pad follows the active battler (switches rebuild it).
-    if (this._rtCmdFor !== this.ally.monId) this.rtShowTouchCommands();
-    if (this.rtFrozen()) return;
-    const dtms = dt * 1000;
-    // Cooldowns
+    if (!rt) return;
     for (const side of ['ally', 'foe']) {
       for (const k of Object.keys(rt.cds[side])) {
         rt.cds[side][k] -= dtms;
@@ -112,13 +153,24 @@ Object.assign(BattleScene.prototype, {
       }
     }
     if (rt.dodgeCd > 0) rt.dodgeCd -= dtms;
+    if (rt.msgCd > 0) rt.msgCd -= dtms;
+    if (rt.allySleepT > 0) rt.allySleepT -= dtms;
+    if (rt.foeSleepT > 0) rt.foeSleepT -= dtms;
+  },
+
+  updateRt(dt) {
+    const g = this.game;
+    const input = g.input;
+    const rt = this.rt;
+    if (!rt) { this.toCommand(); return; }
+    if (this.rtFrozen()) return;
+    const dtms = dt * 1000;
+    // Clocks (cooldowns et al.) — rtTickClocks; BattleScene.update ticks
+    // the same block on frozen frames, never both.
+    this.rtTickClocks(dtms);
     if (rt.dodgeT > 0) rt.dodgeT -= dtms;
     if (rt.iframes > 0) rt.iframes -= dtms;
     if (rt.switchVulnT > 0) rt.switchVulnT -= dtms;
-    if (rt.msgCd > 0) rt.msgCd -= dtms;
-    // Status clocks (sleep/paralysis handled at action time)
-    if (rt.allySleepT > 0) rt.allySleepT -= dtms;
-    if (rt.foeSleepT > 0) rt.foeSleepT -= dtms;
     // Poison/burn tick every 3s (turn-equivalent pressure).
     rt.tickT += dtms;
     if (rt.tickT >= 3000) {
@@ -164,15 +216,16 @@ Object.assign(BattleScene.prototype, {
       rt.dodgeT = 230; rt.iframes = 260; rt.dodgeCd = 900;
       g.audio.playSfx('menu-move');
     }
-    // Moves: slot keys fire directly (keyboard) — touch uses the same
-    // actions through the on-screen battle buttons.
+    // Moves: slot keys fire directly (keyboard shortcut) — the rendered
+    // command flow (A -> FIGHT -> move window) is identical for everyone.
     if (!allyAsleep && !rt.lunge) {
       for (let i = 0; i < 4; i++) {
         if (input.wasPressed('slot' + (i + 1))) { this.rtUseMove('ally', i); break; }
       }
     }
-    // Ball menu on A, party on START, run attempt on SELECT (wild only).
-    if (input.wasPressed('a') && this.kind === 'wild' && !rt.ballFlight) this.rtBallMenu();
+    // Commands on A (the unified Platinum grid — FIGHT/BAG/PARTY/RUN,
+    // every battle type), party on START, run attempt on SELECT (wild).
+    if (input.wasPressed('a') && !rt.ballFlight) this.rtShowCommands();
     if (input.wasPressed('start')) this.openPartyMenu(false);
     if (input.wasPressed('select') && this.kind === 'wild') this.rtTryRun();
 
@@ -236,9 +289,9 @@ Object.assign(BattleScene.prototype, {
     const atk = side === 'ally' ? this.ally : this.foe;
     const def = side === 'ally' ? this.foe : this.ally;
     const slot = atk.moves[idx];
-    if (!slot || slot.pp <= 0) return;
+    if (!slot || slot.pp <= 0) return false;
     const mv = MOVES[slot.id];
-    if (!mv || rt.cds[side][slot.id]) return;
+    if (!mv || rt.cds[side][slot.id]) return false;
     // Status gates at action time.
     if (atk.status === 'paralysis' && roll(0.25, g.rng.battle)) {
       if (side === 'ally') this.rtFloat(displayName(atk, SPECIES) + ' is paralyzed!');
@@ -264,14 +317,15 @@ Object.assign(BattleScene.prototype, {
     if (mv.cat === 'status') {
       if (dist(ax, ay, dx, dy) <= 200) this.rtApplyEffect(side, mv);
       else if (side === 'ally') this.rtFloat('Too far away!');
-      return;
+      return true;
     }
     if (mv.cat === 'physical') {
       rt.lunge = { side, t: 0, dur: 190, mv, idx, hitDone: false };
-      return;
+      return true;
     }
     rt.projs.push({ x: ax, y: ay, tx: dx, ty: dy, speed: 300, mv, side, t: 0 });
     g.audio.playSfx('menu-move');
+    return true;
   },
 
   rtUpdateLunge(dtms) {
@@ -469,6 +523,7 @@ Object.assign(BattleScene.prototype, {
     items.push({ label: 'Back', value: null });
     g.ui.showMenu('Throw which ball? (A)', items, (v) => {
       if (v) this.rtThrowBall(v);
+      else this.rtShowCommands(); // Back/cancel -> command grid (classic parity)
     }, { menuClass: 'battlewin' });
   },
 
@@ -635,9 +690,10 @@ Object.assign(BattleScene.prototype, {
     }
     if (this.msgOpen || this.msg) {
       r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
-      const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
-      r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
-      if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2.3 (defect 1): measured word-wrap (r.wrapText), as classic.
+      const lines = r.wrapText(this.msg, 14, w - 20, { maxLines: 2 });
+      if (lines[0]) r.text(lines[0], 10, h - 46, { size: 14, color: '#202028', shadow: false });
+      if (lines[1]) r.text(lines[1], 10, h - 28, { size: 14, color: '#202028', shadow: false });
       // UI v2: red advance cue at the box's bottom-right while waiting for input.
       if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }

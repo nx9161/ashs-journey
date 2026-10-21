@@ -35,6 +35,11 @@ export const MAPS = {
       { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         // Yellow homage (original lines): the rival's partner is an Eevee.
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+      // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
+      // entrance — Pallet's lab has no interior map, so the terminal lives
+      // here (and in every Pokemon Center) rather than nowhere.
+      { x: 5, y: 4, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+        dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
     ],
     encounters: null,
     start: { x: 7, y: 7, dir: 'down' },

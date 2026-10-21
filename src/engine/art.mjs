@@ -75,6 +75,15 @@ const NPC_ROLE = {
 };
 export function npcFrames(doc, npc) {
   const name = ((npc && npc.name) || '').toUpperCase();
+  // UI v2.3 (defect 5): a PC terminal is a MACHINE, not a person. It used
+  // to fall through to the 'youngster' person art, so the storage system
+  // stood in every Center disguised as a bystander — undiscoverable.
+  // Authored terminal art (monitor + box-grid screen + cabinet) instead.
+  if (npc && npc.pc) {
+    const a = artCanvas(doc, 'npc-pc-idle-1', 1);
+    const b = artCanvas(doc, 'npc-pc-idle-2', 1);
+    if (a && b) return [a, b];
+  }
   if (name === 'BROCK') {
     return [artCanvas(doc, 'brock-idle-1', 1), artCanvas(doc, 'brock-idle-2', 1)];
   }

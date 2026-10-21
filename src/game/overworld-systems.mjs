@@ -374,7 +374,7 @@ Object.assign(OverworldScene.prototype, {
     g.ui.say(['Oh! A bite!'], () => {
       g.audio.stopMusic();
       g.audio.encounter();
-      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g) }));
+      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g), arena: 'water' }));
     });
   },
 

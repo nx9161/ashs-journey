@@ -5,10 +5,20 @@
 
 export const TILE = 16;
 
-// UI v2 (Platinum standard): the UI typeface is Galmuri (OFL 1.1, DS-era
-// bitmap design, self-hosted via @font-face in the shell CSS) with the
-// DotGothic16 face as glyph fallback. Canvas text uses the same stack.
-export const UI_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// UI v2 (Platinum standard): the UI typefaces are the two self-hosted OFL
+// bitmap faces — Galmuri (display) and DotGothic16 (body). Canvas text uses
+// the same stacks as the shell CSS tokens.
+// UI v2.3 (defect 1): BODY text renders in DotGothic16 — the sturdy,
+// even-stroke bitmap grotesque. Galmuri's hand-style letterforms read thin
+// and handwritten for running text on the live build; it is kept for
+// DISPLAY only (title screen, headings — see UI_DISPLAY_FONT_STACK and the
+// --font-display CSS token). UI_FONT_STACK is the BODY stack: canvas body
+// text (battle messages, databoxes, prompts) draws with it, and wrapText()
+// measures with the identical string, so measure and render can never
+// diverge again (the v2.2 mid-word clip: 'y/our first catch').
+export const UI_FONT_STACK = "'PtGothic', 'PtGalmuri', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// Display stack (headings / title / accents): Galmuri first.
+export const UI_DISPLAY_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 // Platinum frame tones (canvas twins of the shell CSS tokens).
 export const PT_FRAME = '#2b3040';
 export const PT_FRAME2 = '#8d9bbf';
@@ -125,7 +135,7 @@ export class Renderer {
   text(str, x, y, opts) {
     const o = opts || {};
     const c = this.ctx;
-    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + UI_FONT_STACK;
+    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + (o.display ? UI_DISPLAY_FONT_STACK : UI_FONT_STACK);
     c.textBaseline = 'top';
     if (o.align) c.textAlign = o.align;
     if (o.shadow !== false) {
@@ -135,6 +145,40 @@ export class Renderer {
     c.fillStyle = o.color || '#fff';
     c.fillText(str, x, y);
     if (o.align) c.textAlign = 'left';
+  }
+
+  // UI v2.3 (defect 1): word-wrap measured with the EXACT font string text()
+  // renders with (same stack, size, weight) — breaks fall only on spaces,
+  // so no line ever ends mid-word. A single word longer than maxW is the
+  // one unavoidable exception: it is hard-split so the text still fits.
+  // Returns an array of line strings (at most maxLines when given).
+  wrapText(str, size, maxW, opts) {
+    const o = opts || {};
+    const c = this.ctx;
+    c.font = (o.bold ? '700 ' : '400 ') + (size || 8) + 'px ' + (o.display ? UI_DISPLAY_FONT_STACK : UI_FONT_STACK);
+    const words = String(str == null ? '' : str).split(/\s+/).filter(Boolean);
+    const lines = [];
+    let line = '';
+    const fits = (s) => c.measureText(s).width <= maxW;
+    for (const word of words) {
+      const trial = line ? line + ' ' + word : word;
+      if (fits(trial)) { line = trial; continue; }
+      if (line) { lines.push(line); line = ''; }
+      if (fits(word)) { line = word; continue; }
+      // Over-long single word: hard-split by characters (only case where a
+      // break can fall inside a word — the word alone exceeds the line).
+      let rest = word;
+      while (rest && !fits(rest)) {
+        let n = rest.length;
+        while (n > 1 && !fits(rest.slice(0, n))) n--;
+        lines.push(rest.slice(0, n));
+        rest = rest.slice(n);
+      }
+      line = rest;
+    }
+    if (line) lines.push(line);
+    const maxLines = o.maxLines || 0;
+    return maxLines > 0 ? lines.slice(0, maxLines) : lines;
   }
 
   panel(x, y, w, h, fill, border) {

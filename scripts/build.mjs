@@ -218,7 +218,7 @@ export function validateData() {
 }
 
 const SHELL_CSS = `
-:root{--ink:#232838;--paper:#f6f8fc;--gold:#e8b832;--frame:#2b3040;--frame2:#8d9bbf;--navy:#2e4a8f;--sky:#bcd2f5;--red:#e03c31;--sys1:#4a7dd0;--sys2:#2a4d9c;--lcd:#a9c08a;--lcdink:#26331f;--font:'PtGalmuri','PtGothic',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--rivets:radial-gradient(circle at 9px 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at 9px calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px)}
+:root{--ink:#232838;--paper:#f6f8fc;--gold:#e8b832;--frame:#2b3040;--frame2:#8d9bbf;--navy:#2e4a8f;--sky:#bcd2f5;--red:#e03c31;--sys1:#4a7dd0;--sys2:#2a4d9c;--lcd:#a9c08a;--lcdink:#26331f;--font:'PtGothic','PtGalmuri',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--font-display:'PtGalmuri','PtGothic',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--rivets:radial-gradient(circle at 9px 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at 9px calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px)}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#070a16;touch-action:none;overscroll-behavior:none}
 body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
@@ -236,21 +236,21 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
    tone. The one house drop shadow is unchanged (QA gate: exactly one
    box-shadow style bundle-wide, so depth never comes from shadows). */
 .dialogue{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;min-height:96px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:14px 16px 20px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-.dlg-name{display:block;font-size:15px;font-weight:bold;letter-spacing:.5px;color:var(--navy);margin-bottom:2px}
+.dlg-name{display:block;font-family:var(--font-display);font-size:15px;font-weight:bold;letter-spacing:.5px;color:var(--navy);margin-bottom:2px}
 .dlg-text{font-size:16px;line-height:1.55;color:var(--ink);min-height:64px;white-space:pre-wrap}
 .dlg-hint{position:absolute;right:12px;bottom:4px;color:var(--red);font-weight:bold;animation:blink 1s infinite;font-size:14px}
 @keyframes blink{50%{opacity:0}}
 /* menus — Platinum windows: light interior, silver-blue title band, pale
    blue selection with a navy inset ring and a red cursor glyph. */
 .menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:min(240px,94%);max-width:94%;max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-.menu-title{background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
+.menu-title{font-family:var(--font-display);background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
 .menu-list{padding:6px}
 .menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #ccd6ea;font:inherit;font-size:15px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:4px;min-height:48px;cursor:pointer}
 .menu-row .cur{width:18px;flex:none;color:var(--red);font-weight:bold}
 .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--navy)}
 .menu-row.disabled{color:#8a93a8;font-style:italic;cursor:default}
 .menu-row.emptyslot{border:2px dashed #9aa7c4;background:rgba(46,74,143,.05);color:#8a93a8;font-style:italic}
-.menu-row.bandrow{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-weight:bold;letter-spacing:2px;justify-content:center;border-bottom:2px solid var(--frame);border-radius:4px}
+.menu-row.bandrow{background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);font-weight:bold;font-style:normal;letter-spacing:2px;justify-content:flex-start;border:2px solid var(--frame);border-radius:6px 6px 0 0;margin-top:6px;padding-left:12px}
 .picon{width:28px;height:28px;flex:none;object-fit:contain;image-rendering:pixelated;background:#fff;border:2px solid var(--frame);border-radius:4px}
 /* blue system windows (Save / Options / confirms): Platinum's system style */
 .menu.syswin{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff}
@@ -260,13 +260,13 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .menu.syswin .menu-row.cursor{background:rgba(255,255,255,.28);outline:2px solid #fff;border-left-color:#fff}
 .menu.syswin .menu-row.disabled{color:rgba(255,255,255,.55)}
 /* party screen (Platinum layout): full-frame blue field, 2-col slot plates */
-.menu.plate-full{left:0;right:0;top:0;bottom:0;transform:none;width:auto;max-width:none;max-height:none;border:0;border-radius:0;outline:0;background:linear-gradient(165deg,#6f9fd8,#33549c)}
+.menu.plate-full{left:0;right:0;top:0;bottom:0;transform:none;width:auto;max-width:none;max-height:none;border:0;border-radius:0;outline:0;background-color:#46689f;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 12px,rgba(0,0,0,.05) 12px 24px),repeating-linear-gradient(-45deg,rgba(255,255,255,.06) 0 12px,rgba(0,0,0,.05) 12px 24px)}
 .menu.plate-full .menu-title{background:linear-gradient(#33549c,#223c78);color:#fff;border-bottom:2px solid #dfe7f5}
 .menu.plate-full .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px;align-content:start}
-.menu.plate-full .menu-row{background:linear-gradient(#fdfdff,#dfe6f2);border:2px solid var(--frame);border-radius:6px;border-bottom:2px solid var(--frame);min-height:76px;padding:8px 10px}
+.menu.plate-full .menu-row{background:var(--paper);border:2px solid var(--frame);border-radius:3px;border-bottom:2px solid var(--frame);min-height:76px;padding:8px 10px}
 .menu.plate-full .picon{width:44px;height:44px;background:rgba(255,255,255,.7)}
 .menu.plate-full .pball{width:22px;height:22px;flex:none;image-rendering:pixelated}
-.menu.plate-full .menu-row.disabled{background:rgba(24,34,64,.45);border:2px dashed rgba(223,231,245,.55);color:#d7e2f7;font-style:normal}
+.menu.plate-full .menu-row.disabled{background:#aebadd;border:2px solid var(--frame);border-radius:3px;color:#4a5878;font-style:normal}
 .menu.plate-full .menu-row.disabled .pball{opacity:.45}
 .menu.plate-full .emptyslot{font-style:normal;letter-spacing:.5px}
 .menu.plate-full .menu-row.cursor{background:var(--sky)}
@@ -276,10 +276,18 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .menu.plate-full .picon{width:36px;height:36px}
 .menu.plate-full .pball{width:18px;height:18px}
 .menu.plate-full .menu-row.close-row{min-height:40px}}
+/* bag window (UI v2.3, defect 3): the DS bag as a framed Platinum window —
+   pocket headers are the .bandrow tabs above; item rows are framed plates
+   carrying their icons, never thin lines on a white pop-up. */
+.menu.bagwin{background-color:var(--paper);background-image:var(--rivets)}
+.menu.bagwin .menu-row{border:2px solid var(--frame);border-radius:3px;background:#fff;margin-bottom:4px}
+.menu.bagwin .menu-row.bandrow{background:linear-gradient(#e3ebfa,#b9c9e8);margin-bottom:0;border-radius:6px 6px 0 0}
+.menu.bagwin .menu-row.cursor{background:var(--sky)}
+.menu.bagwin .menu-row.disabled{border-color:#9aa7c4;background:#e8edf6}
 /* PC box (Platinum): wallpaper-striped window, sprite-cell grid */
-.menu.pcbox{background-color:#cfdcf5;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 16px,rgba(46,74,143,.07) 16px 32px)}
+.menu.pcbox{background-color:#cfdcf5;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 16px,rgba(46,74,143,.07) 16px 32px),repeating-linear-gradient(-45deg,rgba(255,255,255,.22) 0 16px,rgba(46,74,143,.05) 16px 32px)}
 .menu.pcbox .menu-list{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.menu.pcbox .menu-row{flex-direction:column;justify-content:center;text-align:center;background:rgba(246,248,252,.9);border:2px solid var(--frame);border-radius:6px}
+.menu.pcbox .menu-row{flex-direction:column;justify-content:center;text-align:center;background:rgba(246,248,252,.94);border:2px solid var(--frame);border-radius:3px;outline:1px solid var(--frame2);outline-offset:-4px}
 .menu.pcbox .menu-row.wide{grid-column:1/-1;flex-direction:row}
 @media (max-width:560px){.menu.pcbox .menu-list{grid-template-columns:repeat(2,1fr)}}
 /* summary panel (Platinum tabbed summary: INFO / STATUS / MOVES) */
@@ -290,7 +298,7 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .sumbody{padding:12px 14px 14px}
 .sumhead{display:flex;gap:12px;align-items:center;margin-bottom:8px}
 .sumsprite{width:96px;height:96px;flex:none;object-fit:contain;image-rendering:pixelated;background:#dfe7f5;border:2px solid var(--frame);border-radius:6px}
-.sumname{font-size:18px;font-weight:bold;color:var(--ink)}
+.sumname{font-family:var(--font-display);font-size:18px;font-weight:bold;color:var(--ink)}
 .sumsub{font-size:14px;color:#4a5878;margin-top:2px}
 .sumrow{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #ccd6ea;padding:7px 2px;font-size:15px;color:var(--ink)}
 .sumrow b{font-weight:bold}
@@ -368,7 +376,7 @@ body.flip .ab{right:auto;left:16px}
 .nkbover{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:auto;background:rgba(7,10,22,.5);z-index:30}
 @media(min-width:700px){.nkbover{align-items:center}}
 .namekb{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:14px;width:100%;max-width:480px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-.nkb-title{font-size:14px;font-weight:bold;color:var(--ink);margin-bottom:8px}
+.nkb-title{font-family:var(--font-display);font-size:14px;font-weight:bold;color:var(--ink);margin-bottom:8px}
 .nkb-display{font-size:20px;font-weight:bold;color:var(--lcdink);background:#e8efd9;border:2px solid var(--frame);border-radius:6px;padding:8px 10px;margin-bottom:10px;min-height:44px;letter-spacing:2px}
 .nkb-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .nkb-key{min-width:44px;min-height:44px;font-family:inherit;font-size:16px;font-weight:bold;background:#eef2fb;color:var(--ink);border:2px solid var(--frame);border-bottom:4px solid var(--frame);border-radius:6px;cursor:pointer;touch-action:none}
@@ -381,7 +389,7 @@ body.flip .ab{right:auto;left:16px}
 /* Trainer ID Terminal — Platinum frame card, system-blue head */
 .loginover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:auto;background:rgba(7,10,22,.82);z-index:40}
 .login{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(420px,92vw);box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
-.login-head{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:15px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
+.login-head{font-family:var(--font-display);background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:15px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
 .login-tabs{display:flex}
 .logintab{flex:1;font-family:inherit;font-size:14px;font-weight:bold;padding:12px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:#4a5878;border:0;border-bottom:3px solid transparent;cursor:pointer}
 .logintab.sel{background:var(--paper);color:var(--ink);border-bottom-color:var(--navy)}
@@ -402,7 +410,7 @@ body.flip .ab{right:auto;left:16px}
 .hudchip{pointer-events:none}
 .locchip{align-self:flex-start;max-width:100%;background-color:var(--paper);background-image:var(--rivets);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:.4px;padding:6px 12px;border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .objchip{background-color:var(--paper);background-image:var(--rivets);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:7px 12px;max-width:min(300px,72%)}
-.obj-kicker{display:block;font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--navy);margin-bottom:2px}
+.obj-kicker{display:block;font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--navy);margin-bottom:2px}
 .obj-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:1.4}
 .dexchip{align-self:flex-start;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px}
 .dexchip-text{display:block;background:var(--lcd);color:var(--lcdink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:2px 8px;border:2px solid #46543a;border-radius:2px;white-space:nowrap}
@@ -442,8 +450,8 @@ body.landscape .hudbtn:first-child{border-top:0}
 body.desktop .controls{display:none}
 /* chapter title card — Platinum frame, navy kicker, red continue hint */
 .chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92%);background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;box-shadow:0 4px 18px rgba(0,0,0,.35);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
-.cc-kicker{font-size:14px;font-weight:bold;letter-spacing:3px;color:var(--navy);margin-bottom:8px}
-.cc-title{font-size:22px;font-weight:bold;color:var(--ink);margin-bottom:8px;line-height:1.2}
+.cc-kicker{font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:3px;color:var(--navy);margin-bottom:8px}
+.cc-title{font-family:var(--font-display);font-size:22px;font-weight:bold;color:var(--ink);margin-bottom:8px;line-height:1.2}
 .cc-arc{font-size:15px;color:#3c4a6a;margin-bottom:6px;line-height:1.4}
 .cc-anime{font-size:14px;color:#6a7799;line-height:1.4;margin-bottom:4px}
 .cc-hint{font-size:14px;color:var(--red);margin-top:10px;animation:blink 1s infinite}
@@ -452,7 +460,7 @@ body.desktop.showtouch .controls{display:block}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
    Structure and behavior untouched; presentation only. */
 .authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
-.authhead{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
+.authhead{font-family:var(--font-display);background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
 .authsub{font-size:14px;color:#3c4a6a;padding:8px 14px 0;line-height:1.45}
 .authtabs{display:flex;border-bottom:2px solid var(--frame)}
 .authtab{flex:1;font-family:inherit;font-size:15px;font-weight:bold;padding:12px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:#4a5878;border:0;border-right:2px solid var(--frame);cursor:pointer}

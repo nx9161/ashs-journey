@@ -42,6 +42,15 @@ function xpFracOf(mon, add) {
   return Math.max(0, Math.min(1, (mon.xp + (add || 0) - lo) / (hi - lo)));
 }
 
+// UI v2.3 (defect 4): deterministic 2D hash for arena texture work —
+// the same (x, y) always yields the same value, so dither/speckle patterns
+// are stable frame to frame (no shimmer) without any stored state.
+function arenaHash(x, y) {
+  let n = (Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263)) | 0;
+  n = Math.imul(n ^ (n >>> 13), 1274126177);
+  return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
+}
+
 export class BattleScene {
   constructor(opts) {
     this.kind = opts.kind; // 'wild' | 'trainer'
@@ -60,6 +69,7 @@ export class BattleScene {
     this.rt = null;
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
+    this.arena = opts.arena || null; // UI v2.3: explicit backdrop variant (fishing = 'water'); else derived in arenaKind()
     this.trainerIdx = 0;
   }
 
@@ -179,6 +189,15 @@ export class BattleScene {
 
     // Animated HP drain (90 HP/s) — P0/E5: reduced motion snaps instantly.
     this.drainHp(dt);
+
+    // UI v2.3: RT cooldown clocks tick even while a battle menu/dialogue
+    // freezes the arena — the unified FIGHT window displays live cooldowns,
+    // and a cooling move must be able to come back while the player is
+    // deciding (previously the clocks only ran inside updateRt, which the
+    // modal UI starves, so a move picked from the window could deadlock
+    // on its own cooldown). updateRt ticks the same clocks when unfrozen;
+    // the two paths are mutually exclusive per frame.
+    if (this.rtMode && this.rt && this.state === 'rt' && typeof this.rtTickClocks === 'function' && this.rtFrozen()) this.rtTickClocks(dt * 1000);
 
     if (g.ui.update(dt)) return;
     if (this.msgOpen) {
@@ -1376,34 +1395,152 @@ export class BattleScene {
     }
   }
 
-  // UI v2 (Platinum standard): the battlefield, rects only, drawn INSIDE
-  // begin()/end() (the old pre-begin bands were painted over by begin()'s
-  // black clear — that was the dark void). Stepped daylight-blue sky ramp
-  // (per-band solid fills; no gradient APIs, no offscreen cache needed at
-  // 6 bands), a stepped tree/hill scenery band on the horizon, then the
-  // ground field in stepped bands — grass greens for wild encounters,
-  // warm stone for trainer battles (this.kind is the terrain data at hand).
+  // UI v2.3 (defect 4): which arena backdrop this battle gets. Explicit
+  // opts.arena wins (fishing passes 'water'); otherwise derive from the
+  // overworld the battle returns to: surfing = water, gym interiors =
+  // gym, cave/tunnel maps = cave, everything else = grass route.
+  arenaKind() {
+    if (this.arena) return this.arena;
+    const ow = this.returnTo;
+    if (ow && ow.surfing) return 'water';
+    const id = (ow && ow.mapId) || '';
+    const nm = (ow && ow.map && ow.map.name) || '';
+    if (/gym/i.test(id) || /gym/i.test(nm)) return 'gym';
+    if (/cave|tunnel|mtmoon|victory|diglett/i.test(id)) return 'cave';
+    return 'grass';
+  }
+
+  // UI v2.3 (defect 4): the battlefield backdrop, rects only, drawn INSIDE
+  // begin()/end(). v2 drew flat color bands; the Platinum standard is a
+  // TEXTURED field, so every surface here is worked: ordered-dither sky
+  // (checker mixes at band boundaries, DS-style), detailed horizon
+  // (tree line / wave crests / rock teeth / gym trim), and a ground of
+  // perspective rows — heights grow toward the viewer — with per-variant
+  // speckle (grass tufts, foam dashes, rock chunks, floor seams). All
+  // texture placement runs through arenaHash, so the field is identical
+  // every frame. Variants: grass route, cave, water, gym (arenaKind()).
+  // Platforms/plates are unchanged (ptDisc + plate()).
   drawArena(r, horizonFrac) {
     const g = this.game;
     const w = r.viewW, h = r.viewH;
     const horizon = Math.round(h * horizonFrac);
-    const sky = ['#5f9fe6', '#6fabec', '#7fb7f1', '#8fc3f5', '#9fcdf8', '#b0d7fa'];
-    const sb = Math.ceil(horizon / sky.length) || 1;
-    for (let i = 0; i < sky.length; i++) g.ctx2dfill(sky[i], 0, i * sb, w, sb + 1);
-    // Scenery: hill band + deterministic stepped tree bumps on the horizon.
-    g.ctx2dfill('#5d8f66', 0, horizon - 8, w, 8);
-    for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
-      const bh = 8 + ((i * 5) % 3) * 3;
-      g.ctx2dfill('#3f6d4a', x, horizon - bh, 10, bh);
+    const kind = this.arenaKind();
+    const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+
+    // ---- upper field: sky (grass/water) or wall (cave/gym) ----
+    if (kind === 'cave') {
+      const wall = ['#241d2e', '#2b2338', '#332a42', '#3b314c', '#433856', '#4b4060'];
+      const wb = Math.ceil(horizon / wall.length) || 1;
+      for (let i = 0; i < wall.length; i++) F(wall[i], 0, i * wb, w, wb + 1);
+      // Rock speckle across the wall face.
+      for (let i = 0; i < Math.floor(w / 3); i++) {
+        const sx = Math.floor(arenaHash(i, 11) * w), sy = Math.floor(arenaHash(i, 23) * Math.max(1, horizon - 4));
+        F(arenaHash(i, 37) > 0.5 ? '#1a1424' : '#5a4c74', sx, sy, 2, 2);
+      }
+      // Stalactites: stepped teeth hanging from the ceiling line.
+      for (let x = 2, i = 0; x < w - 6; x += 13, i++) {
+        const len = 4 + Math.floor(arenaHash(i, 5) * 9);
+        F('#1a1424', x, 0, 5, Math.max(2, len - 3));
+        F('#1a1424', x + 1, 0, 3, len);
+        F('#120d1a', x + 2, 0, 1, len + 2);
+      }
+    } else if (kind === 'gym') {
+      // Indoor wall: deep two-tone panels, vertical seams, a banner band.
+      F('#5a3a52', 0, 0, w, Math.max(2, horizon - 14));
+      F('#6b4660', 0, Math.max(0, horizon - 14), w, 12);
+      for (let x = 0; x < w; x += 32) F('#452c40', x, 0, 2, Math.max(2, horizon - 2));
+      for (let x = 16, i = 0; x < w - 10; x += 48, i++) {
+        F(i % 2 ? '#c8a03a' : '#b03a48', x, 4, 12, 8); // hanging banners
+        F('#2b3040', x, 12, 12, 1);
+      }
+      F('#2b3040', 0, horizon - 3, w, 3); // baseboard trim
+    } else {
+      const sky = kind === 'water'
+        ? ['#4f97dd', '#61a6e6', '#73b4ee', '#85c1f4', '#97cdf8', '#aad8fa']
+        : ['#5f9fe6', '#6fabec', '#7fb7f1', '#8fc3f5', '#9fcdf8', '#b0d7fa'];
+      const sb = Math.ceil(horizon / sky.length) || 1;
+      for (let i = 0; i < sky.length; i++) F(sky[i], 0, i * sb, w, sb + 1);
+      // Ordered dither: the last two rows of each band checker-mix the
+      // next band's color, denser on the final row (DS sky softening).
+      for (let i = 0; i < sky.length - 1; i++) {
+        const yBase = (i + 1) * sb;
+        for (let dy = 2; dy >= 1; dy--) {
+          const y = yBase - dy;
+          if (y < 0 || y >= horizon) continue;
+          for (let x = 0; x < w; x += 3) {
+            if ((((x / 3) | 0) + y) % 2 === 0 && (dy === 1 || ((x / 3) | 0) % 2 === 0)) F(sky[i + 1], x, y, 3, 1);
+          }
+        }
+      }
+      // Pixel clouds: soft rect clusters at hashed anchor points.
+      for (let i = 0; i < 5; i++) {
+        const cx = Math.floor(arenaHash(i, 71) * (w - 40)) + 4;
+        const cy = 3 + Math.floor(arenaHash(i, 83) * Math.max(4, horizon * 0.45));
+        F('#eaf5ff', cx, cy, 16, 3); F('#eaf5ff', cx + 4, cy - 2, 9, 2); F('#dcefff', cx + 2, cy + 3, 12, 2);
+      }
     }
-    g.ctx2dfill('#4c7a56', 0, horizon - 3, w, 3);
-    // Ground field: stepped bands lightening toward the horizon.
-    const ground = this.kind === 'trainer'
-      ? ['#cfc2a4', '#c4b696', '#b9aa89', '#ae9e7d', '#a39271', '#988665']
-      : ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'];
-    const gb = Math.ceil((h - horizon) / ground.length) || 1;
-    for (let i = 0; i < ground.length; i++) g.ctx2dfill(ground[i], 0, horizon + i * gb, w, gb + 1);
-    g.ctx2dfill('#33513c', 0, horizon, w, 2); // horizon line
+
+    // ---- horizon detail ----
+    if (kind === 'grass') {
+      F('#5d8f66', 0, horizon - 8, w, 8);
+      for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
+        const bh = 8 + Math.floor(arenaHash(i, 3) * 8);
+        F('#3f6d4a', x, horizon - bh, 10, bh);
+        F('#2f5739', x + 2, horizon - bh + 2, 2, 2);
+        F('#527f5c', x + 6, horizon - bh + 3, 2, 2);
+      }
+      F('#4c7a56', 0, horizon - 3, w, 3);
+      F('#33513c', 0, horizon, w, 2);
+    } else if (kind === 'water') {
+      // Distant wave crests breaking along the horizon.
+      for (let x = 2, i = 0; x < w - 6; x += 11, i++) {
+        if (arenaHash(i, 17) > 0.35) F('#eaf7ff', x, horizon - 2, 5, 1);
+        if (arenaHash(i, 29) > 0.6) F('#cfeaff', x + 3, horizon - 4, 4, 1);
+      }
+      F('#2d68b0', 0, horizon, w, 2);
+    } else if (kind === 'cave') {
+      // Rock teeth silhouettes rising to meet the wall.
+      for (let x = 0, i = 0; x < w - 4; x += 9, i++) {
+        const th = 3 + Math.floor(arenaHash(i, 41) * 7);
+        F('#1a1424', x, horizon - th, 6, th);
+      }
+      F('#120d1a', 0, horizon, w, 2);
+    } else { // gym
+      F('#2b3040', 0, horizon, w, 2);
+    }
+
+    // ---- ground: perspective rows with per-variant texture ----
+    const pal = kind === 'cave'
+      ? ['#57456a', '#514163', '#4b3d5c', '#453955', '#3f354e', '#392f47']
+      : kind === 'water'
+        ? ['#4d8fd8', '#4787ce', '#417fc4', '#3b77ba', '#356fb0', '#2f67a6']
+        : kind === 'gym'
+          ? ['#c2a172', '#b99a6c', '#b09366', '#a78c60', '#9e855a', '#957e54']
+          : this.kind === 'trainer'
+            ? ['#cfc2a4', '#c4b696', '#b9aa89', '#ae9e7d', '#a39271', '#988665']
+            : ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'];
+    const dark = kind === 'cave' ? '#2a2138' : kind === 'water' ? '#27609e' : kind === 'gym' ? '#7d6742' : this.kind === 'trainer' ? '#7d6c4c' : '#4f9440';
+    const light = kind === 'cave' ? '#6c587f' : kind === 'water' ? '#eaf7ff' : kind === 'gym' ? '#d9bf92' : this.kind === 'trainer' ? '#e6dcc2' : '#c8ef9f';
+    let y = horizon + 2, rh = 2, row = 0;
+    const groundH = Math.max(1, h - horizon - 2);
+    while (y < h) {
+      const t = Math.min(1, (y - horizon) / groundH);
+      F(pal[Math.min(pal.length - 1, Math.floor(t * pal.length))], 0, y, w, rh + 1);
+      const n = Math.floor(w / 9);
+      for (let i = 0; i < n; i++) {
+        const sx = Math.floor(arenaHash(i * 3 + row * 57, row * 131) * (w - 5));
+        const sy = y + Math.floor(arenaHash(i, row * 7 + 1) * Math.max(1, rh - 1));
+        const tone = arenaHash(i + row * 3, 999) > 0.45 ? dark : light;
+        if (kind === 'grass' && this.kind !== 'trainer') F(tone, sx, sy, 1, Math.min(3, rh)); // grass tufts
+        else if (kind === 'water') { if (tone === light) F(tone, sx, sy, 4, 1); } // foam dashes
+        else if (kind === 'cave') F(tone, sx, sy, 3, 2); // rock chunks
+        else if (kind === 'gym') { if (arenaHash(i, row * 13) > 0.72) F(dark, sx, y, 1, rh); } // floor seams splay per row
+        else F(tone, sx, sy, 2, 1); // stone flecks (trainer field)
+      }
+      y += rh;
+      rh = Math.min(15, Math.ceil(rh * 1.45));
+      row++;
+    }
   }
 
   render(r) {
@@ -1489,9 +1626,12 @@ export class BattleScene {
     // Message box (Platinum frame via r.panel/ptFrame)
     if (this.msgOpen || this.msg) {
       r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
-      const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
-      r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
-      if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2.3 (defect 1): measured word-wrap with the render font itself
+      // (r.wrapText) — the old fixed 30-char slices cut words in half
+      // ('y/our first catch') whenever a word straddled the boundary.
+      const lines = r.wrapText(this.msg, 14, w - 20, { maxLines: 2 });
+      if (lines[0]) r.text(lines[0], 10, h - 46, { size: 14, color: '#202028', shadow: false });
+      if (lines[1]) r.text(lines[1], 10, h - 28, { size: 14, color: '#202028', shadow: false });
       // UI v2: red advance cue at the box's bottom-right while waiting for input.
       if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }

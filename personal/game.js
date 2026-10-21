@@ -1018,10 +1018,20 @@ class AudioEngine {
 
 const TILE = 16;
 
-// UI v2 (Platinum standard): the UI typeface is Galmuri (OFL 1.1, DS-era
-// bitmap design, self-hosted via @font-face in the shell CSS) with the
-// DotGothic16 face as glyph fallback. Canvas text uses the same stack.
-const UI_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// UI v2 (Platinum standard): the UI typefaces are the two self-hosted OFL
+// bitmap faces — Galmuri (display) and DotGothic16 (body). Canvas text uses
+// the same stacks as the shell CSS tokens.
+// UI v2.3 (defect 1): BODY text renders in DotGothic16 — the sturdy,
+// even-stroke bitmap grotesque. Galmuri's hand-style letterforms read thin
+// and handwritten for running text on the live build; it is kept for
+// DISPLAY only (title screen, headings — see UI_DISPLAY_FONT_STACK and the
+// --font-display CSS token). UI_FONT_STACK is the BODY stack: canvas body
+// text (battle messages, databoxes, prompts) draws with it, and wrapText()
+// measures with the identical string, so measure and render can never
+// diverge again (the v2.2 mid-word clip: 'y/our first catch').
+const UI_FONT_STACK = "'PtGothic', 'PtGalmuri', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// Display stack (headings / title / accents): Galmuri first.
+const UI_DISPLAY_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 // Platinum frame tones (canvas twins of the shell CSS tokens).
 const PT_FRAME = '#2b3040';
 const PT_FRAME2 = '#8d9bbf';
@@ -1138,7 +1148,7 @@ class Renderer {
   text(str, x, y, opts) {
     const o = opts || {};
     const c = this.ctx;
-    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + UI_FONT_STACK;
+    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + (o.display ? UI_DISPLAY_FONT_STACK : UI_FONT_STACK);
     c.textBaseline = 'top';
     if (o.align) c.textAlign = o.align;
     if (o.shadow !== false) {
@@ -1148,6 +1158,40 @@ class Renderer {
     c.fillStyle = o.color || '#fff';
     c.fillText(str, x, y);
     if (o.align) c.textAlign = 'left';
+  }
+
+  // UI v2.3 (defect 1): word-wrap measured with the EXACT font string text()
+  // renders with (same stack, size, weight) — breaks fall only on spaces,
+  // so no line ever ends mid-word. A single word longer than maxW is the
+  // one unavoidable exception: it is hard-split so the text still fits.
+  // Returns an array of line strings (at most maxLines when given).
+  wrapText(str, size, maxW, opts) {
+    const o = opts || {};
+    const c = this.ctx;
+    c.font = (o.bold ? '700 ' : '400 ') + (size || 8) + 'px ' + (o.display ? UI_DISPLAY_FONT_STACK : UI_FONT_STACK);
+    const words = String(str == null ? '' : str).split(/\s+/).filter(Boolean);
+    const lines = [];
+    let line = '';
+    const fits = (s) => c.measureText(s).width <= maxW;
+    for (const word of words) {
+      const trial = line ? line + ' ' + word : word;
+      if (fits(trial)) { line = trial; continue; }
+      if (line) { lines.push(line); line = ''; }
+      if (fits(word)) { line = word; continue; }
+      // Over-long single word: hard-split by characters (only case where a
+      // break can fall inside a word — the word alone exceeds the line).
+      let rest = word;
+      while (rest && !fits(rest)) {
+        let n = rest.length;
+        while (n > 1 && !fits(rest.slice(0, n))) n--;
+        lines.push(rest.slice(0, n));
+        rest = rest.slice(n);
+      }
+      line = rest;
+    }
+    if (line) lines.push(line);
+    const maxLines = o.maxLines || 0;
+    return maxLines > 0 ? lines.slice(0, maxLines) : lines;
   }
 
   panel(x, y, w, h, fill, border) {
@@ -2311,6 +2355,42 @@ const ART = {
     "...OOPPPPOO.....",
     "...OPPPPPPO.....",
     "....OOOOOOOO....",
+  ] },
+  "npc-pc-idle-1": { w: 16, h: 16, pal: {"O": "#232838", "M": "#8d9bbf", "S": "#14424a", "B": "#7fe8d8", "K": "#46536e", "D": "#5a6a8f", "L": "#58c94f"}, rows: [
+    "................",
+    "..OOOOOOOOOOOO..",
+    "..OMMMMMMMMMMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMSBBSSBBSMO..",
+    "..OMSBBSSBBSMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMMMMMMMMLMO..",
+    "...OKKKKKKKKO...",
+    "..ODDDDDDDDDDO..",
+    "..ODDDDDDDDDDO..",
+    "..ODDODDDDODDO..",
+    "..ODDODDDDODDO..",
+    "...OOOOOOOOOO...",
+    "................",
+    "................",
+  ] },
+  "npc-pc-idle-2": { w: 16, h: 16, pal: {"O": "#232838", "M": "#8d9bbf", "S": "#1d5a68", "B": "#a5f5e8", "K": "#46536e", "D": "#5a6a8f", "L": "#2f7a38"}, rows: [
+    "................",
+    "..OOOOOOOOOOOO..",
+    "..OMMMMMMMMMMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMSBBSSBBSMO..",
+    "..OMSBBSSBGGMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMMMMMMMMLMO..",
+    "...OKKKKKKKKO...",
+    "..ODDDDDDDDDDO..",
+    "..ODDDDDDDDDDO..",
+    "..ODDODDDDODDO..",
+    "..ODDODDDDODDO..",
+    "...OOOOOOOOOO...",
+    "................",
+    "................",
   ] },
   "npc-youngster-idle-1": { w: 16, h: 16, pal: {"O":"#241a20","S":"#e8b088","K":"#2f4f9e","H":"#3a2a20","J":"#e8c83a","P":"#4a4a55"}, rows: [
     "................",
@@ -5614,6 +5694,15 @@ const NPC_ROLE = {
 };
 function npcFrames(doc, npc) {
   const name = ((npc && npc.name) || '').toUpperCase();
+  // UI v2.3 (defect 5): a PC terminal is a MACHINE, not a person. It used
+  // to fall through to the 'youngster' person art, so the storage system
+  // stood in every Center disguised as a bystander — undiscoverable.
+  // Authored terminal art (monitor + box-grid screen + cabinet) instead.
+  if (npc && npc.pc) {
+    const a = artCanvas(doc, 'npc-pc-idle-1', 1);
+    const b = artCanvas(doc, 'npc-pc-idle-2', 1);
+    if (a && b) return [a, b];
+  }
   if (name === 'BROCK') {
     return [artCanvas(doc, 'brock-idle-1', 1), artCanvas(doc, 'brock-idle-2', 1)];
   }
@@ -7474,6 +7563,11 @@ const MAPS = {
       { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         // Yellow homage (original lines): the rival's partner is an Eevee.
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+      // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
+      // entrance — Pallet's lab has no interior map, so the terminal lives
+      // here (and in every Pokemon Center) rather than nowhere.
+      { x: 5, y: 4, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+        dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
     ],
     encounters: null,
     start: { x: 7, y: 7, dir: 'down' },
@@ -12711,6 +12805,11 @@ const MAPS3 = {
     npcs: [
       { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+      // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
+      // (Pallet's lab has no interior map; the terminal stands by its door,
+      // like the one in every Pokemon Center).
+      { x: 5, y: 4, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+        dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
       { x: 10, y: 8, name: 'FERRYMAN', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar',
         dialogue: ["My little ferry runs Pallet to Cinnabar for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
@@ -16019,9 +16118,11 @@ const GAME_SUBTITLE = 'An Unofficial Fan Homage';
 const EDITION_MARKER = "NAMAN'S EDITION";
 
 // ---- Title recomposition helpers (Seat B) ----
-// Shared design system: UI font stack + ink/paper/gold. UI v2 (Platinum
-// standard): Galmuri leads the stack, matching the canvas renderer
-// (src/engine/render.mjs UI_FONT_STACK) so measured plates fit drawn text.
+// Shared design system: UI font stack + ink/paper/gold. The title screen is
+// a DISPLAY surface: Galmuri leads its stack (kept identical to
+// UI_DISPLAY_FONT_STACK in src/engine/render.mjs) and every r.text call
+// below passes { display: true }, so the measurer here and the renderer
+// always use the same font string (UI v2.3, defect 1).
 const FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 const PAPER = '#f8f8f0';
 const GOLD = '#e8c832';
@@ -16309,12 +16410,12 @@ class BootScene {
     plateW = Math.min(plateW + 28, w - 12);
     const plateX = Math.round(cx - plateW / 2);
     r.panel(plateX, plateY, plateW, plateH, 'rgba(16,16,28,0.62)', 'rgba(232,200,50,0.55)');
-    r.text(GAME_TITLE, cx, titleY, { size: titleSize, bold: true, align: 'center', color: '#fff' });
+    r.text(GAME_TITLE, cx, titleY, { size: titleSize, bold: true, align: 'center', color: '#fff', display: true });
     // Platinum logo treatment: a subtle gold rule under the title,
     // sized to the measured Galmuri title text.
     const titleW = measureText(r, GAME_TITLE, titleSize, true);
     g.ctx2dfill('rgba(232,200,50,0.55)', Math.round(cx - titleW / 2), titleY + titleSize + 1, titleW, 2);
-    r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8' });
+    r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8', display: true });
     if (hasEd) {
       // ADR-012 personal-edition ribbon: measured dark band + gold underline,
       // centered under the subtitle. Guest/vercel bundles have
@@ -16324,7 +16425,7 @@ class BootScene {
       const rx = Math.round(cx - rw / 2);
       g.ctx2dfill('rgba(8,8,14,0.72)', rx, edY, rw, edH);
       g.ctx2dfill(GOLD, rx, edY + edH - 2, rw, 2);
-      r.text(EDITION_MARKER, cx, edY + 3, { size: 14, align: 'center', color: '#ffe9a8' });
+      r.text(EDITION_MARKER, cx, edY + 3, { size: 14, align: 'center', color: '#ffe9a8', display: true });
     }
 
     if (showMenu) {
@@ -16338,7 +16439,7 @@ class BootScene {
           g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
         }
         r.text(it.label, cx, rowY + 2, {
-          size: 14, bold: sel, align: 'center',
+          size: 14, bold: sel, align: 'center', display: true,
           color: sel ? '#ffe9a8' : PAPER,
         });
       });
@@ -16348,12 +16449,12 @@ class BootScene {
       // idiom); steady-on under reduced motion.
       const reduced = !!(g.state.settings && g.state.settings.reducedMotion);
       if (reduced || Math.floor(this.t * 2) % 2 === 0) {
-        r.text('PRESS START', cx, psY, { size: 16, bold: true, align: 'center', color: '#ffe9a8' });
+        r.text('PRESS START', cx, psY, { size: 16, bold: true, align: 'center', color: '#ffe9a8', display: true });
       }
     }
 
     // ---- Footer: centered, inset from both edges, never clipped ----
-    r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc' });
+    r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc', display: true });
     r.end(); r.camX = pcx; r.camY = pcy;
   }
   renderLegal(r) {
@@ -16647,6 +16748,15 @@ function xpFracOf(mon, add) {
   return Math.max(0, Math.min(1, (mon.xp + (add || 0) - lo) / (hi - lo)));
 }
 
+// UI v2.3 (defect 4): deterministic 2D hash for arena texture work —
+// the same (x, y) always yields the same value, so dither/speckle patterns
+// are stable frame to frame (no shimmer) without any stored state.
+function arenaHash(x, y) {
+  let n = (Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263)) | 0;
+  n = Math.imul(n ^ (n >>> 13), 1274126177);
+  return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
+}
+
 class BattleScene {
   constructor(opts) {
     this.kind = opts.kind; // 'wild' | 'trainer'
@@ -16665,6 +16775,7 @@ class BattleScene {
     this.rt = null;
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
+    this.arena = opts.arena || null; // UI v2.3: explicit backdrop variant (fishing = 'water'); else derived in arenaKind()
     this.trainerIdx = 0;
   }
 
@@ -16784,6 +16895,15 @@ class BattleScene {
 
     // Animated HP drain (90 HP/s) — P0/E5: reduced motion snaps instantly.
     this.drainHp(dt);
+
+    // UI v2.3: RT cooldown clocks tick even while a battle menu/dialogue
+    // freezes the arena — the unified FIGHT window displays live cooldowns,
+    // and a cooling move must be able to come back while the player is
+    // deciding (previously the clocks only ran inside updateRt, which the
+    // modal UI starves, so a move picked from the window could deadlock
+    // on its own cooldown). updateRt ticks the same clocks when unfrozen;
+    // the two paths are mutually exclusive per frame.
+    if (this.rtMode && this.rt && this.state === 'rt' && typeof this.rtTickClocks === 'function' && this.rtFrozen()) this.rtTickClocks(dt * 1000);
 
     if (g.ui.update(dt)) return;
     if (this.msgOpen) {
@@ -17981,34 +18101,152 @@ class BattleScene {
     }
   }
 
-  // UI v2 (Platinum standard): the battlefield, rects only, drawn INSIDE
-  // begin()/end() (the old pre-begin bands were painted over by begin()'s
-  // black clear — that was the dark void). Stepped daylight-blue sky ramp
-  // (per-band solid fills; no gradient APIs, no offscreen cache needed at
-  // 6 bands), a stepped tree/hill scenery band on the horizon, then the
-  // ground field in stepped bands — grass greens for wild encounters,
-  // warm stone for trainer battles (this.kind is the terrain data at hand).
+  // UI v2.3 (defect 4): which arena backdrop this battle gets. Explicit
+  // opts.arena wins (fishing passes 'water'); otherwise derive from the
+  // overworld the battle returns to: surfing = water, gym interiors =
+  // gym, cave/tunnel maps = cave, everything else = grass route.
+  arenaKind() {
+    if (this.arena) return this.arena;
+    const ow = this.returnTo;
+    if (ow && ow.surfing) return 'water';
+    const id = (ow && ow.mapId) || '';
+    const nm = (ow && ow.map && ow.map.name) || '';
+    if (/gym/i.test(id) || /gym/i.test(nm)) return 'gym';
+    if (/cave|tunnel|mtmoon|victory|diglett/i.test(id)) return 'cave';
+    return 'grass';
+  }
+
+  // UI v2.3 (defect 4): the battlefield backdrop, rects only, drawn INSIDE
+  // begin()/end(). v2 drew flat color bands; the Platinum standard is a
+  // TEXTURED field, so every surface here is worked: ordered-dither sky
+  // (checker mixes at band boundaries, DS-style), detailed horizon
+  // (tree line / wave crests / rock teeth / gym trim), and a ground of
+  // perspective rows — heights grow toward the viewer — with per-variant
+  // speckle (grass tufts, foam dashes, rock chunks, floor seams). All
+  // texture placement runs through arenaHash, so the field is identical
+  // every frame. Variants: grass route, cave, water, gym (arenaKind()).
+  // Platforms/plates are unchanged (ptDisc + plate()).
   drawArena(r, horizonFrac) {
     const g = this.game;
     const w = r.viewW, h = r.viewH;
     const horizon = Math.round(h * horizonFrac);
-    const sky = ['#5f9fe6', '#6fabec', '#7fb7f1', '#8fc3f5', '#9fcdf8', '#b0d7fa'];
-    const sb = Math.ceil(horizon / sky.length) || 1;
-    for (let i = 0; i < sky.length; i++) g.ctx2dfill(sky[i], 0, i * sb, w, sb + 1);
-    // Scenery: hill band + deterministic stepped tree bumps on the horizon.
-    g.ctx2dfill('#5d8f66', 0, horizon - 8, w, 8);
-    for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
-      const bh = 8 + ((i * 5) % 3) * 3;
-      g.ctx2dfill('#3f6d4a', x, horizon - bh, 10, bh);
+    const kind = this.arenaKind();
+    const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+
+    // ---- upper field: sky (grass/water) or wall (cave/gym) ----
+    if (kind === 'cave') {
+      const wall = ['#241d2e', '#2b2338', '#332a42', '#3b314c', '#433856', '#4b4060'];
+      const wb = Math.ceil(horizon / wall.length) || 1;
+      for (let i = 0; i < wall.length; i++) F(wall[i], 0, i * wb, w, wb + 1);
+      // Rock speckle across the wall face.
+      for (let i = 0; i < Math.floor(w / 3); i++) {
+        const sx = Math.floor(arenaHash(i, 11) * w), sy = Math.floor(arenaHash(i, 23) * Math.max(1, horizon - 4));
+        F(arenaHash(i, 37) > 0.5 ? '#1a1424' : '#5a4c74', sx, sy, 2, 2);
+      }
+      // Stalactites: stepped teeth hanging from the ceiling line.
+      for (let x = 2, i = 0; x < w - 6; x += 13, i++) {
+        const len = 4 + Math.floor(arenaHash(i, 5) * 9);
+        F('#1a1424', x, 0, 5, Math.max(2, len - 3));
+        F('#1a1424', x + 1, 0, 3, len);
+        F('#120d1a', x + 2, 0, 1, len + 2);
+      }
+    } else if (kind === 'gym') {
+      // Indoor wall: deep two-tone panels, vertical seams, a banner band.
+      F('#5a3a52', 0, 0, w, Math.max(2, horizon - 14));
+      F('#6b4660', 0, Math.max(0, horizon - 14), w, 12);
+      for (let x = 0; x < w; x += 32) F('#452c40', x, 0, 2, Math.max(2, horizon - 2));
+      for (let x = 16, i = 0; x < w - 10; x += 48, i++) {
+        F(i % 2 ? '#c8a03a' : '#b03a48', x, 4, 12, 8); // hanging banners
+        F('#2b3040', x, 12, 12, 1);
+      }
+      F('#2b3040', 0, horizon - 3, w, 3); // baseboard trim
+    } else {
+      const sky = kind === 'water'
+        ? ['#4f97dd', '#61a6e6', '#73b4ee', '#85c1f4', '#97cdf8', '#aad8fa']
+        : ['#5f9fe6', '#6fabec', '#7fb7f1', '#8fc3f5', '#9fcdf8', '#b0d7fa'];
+      const sb = Math.ceil(horizon / sky.length) || 1;
+      for (let i = 0; i < sky.length; i++) F(sky[i], 0, i * sb, w, sb + 1);
+      // Ordered dither: the last two rows of each band checker-mix the
+      // next band's color, denser on the final row (DS sky softening).
+      for (let i = 0; i < sky.length - 1; i++) {
+        const yBase = (i + 1) * sb;
+        for (let dy = 2; dy >= 1; dy--) {
+          const y = yBase - dy;
+          if (y < 0 || y >= horizon) continue;
+          for (let x = 0; x < w; x += 3) {
+            if ((((x / 3) | 0) + y) % 2 === 0 && (dy === 1 || ((x / 3) | 0) % 2 === 0)) F(sky[i + 1], x, y, 3, 1);
+          }
+        }
+      }
+      // Pixel clouds: soft rect clusters at hashed anchor points.
+      for (let i = 0; i < 5; i++) {
+        const cx = Math.floor(arenaHash(i, 71) * (w - 40)) + 4;
+        const cy = 3 + Math.floor(arenaHash(i, 83) * Math.max(4, horizon * 0.45));
+        F('#eaf5ff', cx, cy, 16, 3); F('#eaf5ff', cx + 4, cy - 2, 9, 2); F('#dcefff', cx + 2, cy + 3, 12, 2);
+      }
     }
-    g.ctx2dfill('#4c7a56', 0, horizon - 3, w, 3);
-    // Ground field: stepped bands lightening toward the horizon.
-    const ground = this.kind === 'trainer'
-      ? ['#cfc2a4', '#c4b696', '#b9aa89', '#ae9e7d', '#a39271', '#988665']
-      : ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'];
-    const gb = Math.ceil((h - horizon) / ground.length) || 1;
-    for (let i = 0; i < ground.length; i++) g.ctx2dfill(ground[i], 0, horizon + i * gb, w, gb + 1);
-    g.ctx2dfill('#33513c', 0, horizon, w, 2); // horizon line
+
+    // ---- horizon detail ----
+    if (kind === 'grass') {
+      F('#5d8f66', 0, horizon - 8, w, 8);
+      for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
+        const bh = 8 + Math.floor(arenaHash(i, 3) * 8);
+        F('#3f6d4a', x, horizon - bh, 10, bh);
+        F('#2f5739', x + 2, horizon - bh + 2, 2, 2);
+        F('#527f5c', x + 6, horizon - bh + 3, 2, 2);
+      }
+      F('#4c7a56', 0, horizon - 3, w, 3);
+      F('#33513c', 0, horizon, w, 2);
+    } else if (kind === 'water') {
+      // Distant wave crests breaking along the horizon.
+      for (let x = 2, i = 0; x < w - 6; x += 11, i++) {
+        if (arenaHash(i, 17) > 0.35) F('#eaf7ff', x, horizon - 2, 5, 1);
+        if (arenaHash(i, 29) > 0.6) F('#cfeaff', x + 3, horizon - 4, 4, 1);
+      }
+      F('#2d68b0', 0, horizon, w, 2);
+    } else if (kind === 'cave') {
+      // Rock teeth silhouettes rising to meet the wall.
+      for (let x = 0, i = 0; x < w - 4; x += 9, i++) {
+        const th = 3 + Math.floor(arenaHash(i, 41) * 7);
+        F('#1a1424', x, horizon - th, 6, th);
+      }
+      F('#120d1a', 0, horizon, w, 2);
+    } else { // gym
+      F('#2b3040', 0, horizon, w, 2);
+    }
+
+    // ---- ground: perspective rows with per-variant texture ----
+    const pal = kind === 'cave'
+      ? ['#57456a', '#514163', '#4b3d5c', '#453955', '#3f354e', '#392f47']
+      : kind === 'water'
+        ? ['#4d8fd8', '#4787ce', '#417fc4', '#3b77ba', '#356fb0', '#2f67a6']
+        : kind === 'gym'
+          ? ['#c2a172', '#b99a6c', '#b09366', '#a78c60', '#9e855a', '#957e54']
+          : this.kind === 'trainer'
+            ? ['#cfc2a4', '#c4b696', '#b9aa89', '#ae9e7d', '#a39271', '#988665']
+            : ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'];
+    const dark = kind === 'cave' ? '#2a2138' : kind === 'water' ? '#27609e' : kind === 'gym' ? '#7d6742' : this.kind === 'trainer' ? '#7d6c4c' : '#4f9440';
+    const light = kind === 'cave' ? '#6c587f' : kind === 'water' ? '#eaf7ff' : kind === 'gym' ? '#d9bf92' : this.kind === 'trainer' ? '#e6dcc2' : '#c8ef9f';
+    let y = horizon + 2, rh = 2, row = 0;
+    const groundH = Math.max(1, h - horizon - 2);
+    while (y < h) {
+      const t = Math.min(1, (y - horizon) / groundH);
+      F(pal[Math.min(pal.length - 1, Math.floor(t * pal.length))], 0, y, w, rh + 1);
+      const n = Math.floor(w / 9);
+      for (let i = 0; i < n; i++) {
+        const sx = Math.floor(arenaHash(i * 3 + row * 57, row * 131) * (w - 5));
+        const sy = y + Math.floor(arenaHash(i, row * 7 + 1) * Math.max(1, rh - 1));
+        const tone = arenaHash(i + row * 3, 999) > 0.45 ? dark : light;
+        if (kind === 'grass' && this.kind !== 'trainer') F(tone, sx, sy, 1, Math.min(3, rh)); // grass tufts
+        else if (kind === 'water') { if (tone === light) F(tone, sx, sy, 4, 1); } // foam dashes
+        else if (kind === 'cave') F(tone, sx, sy, 3, 2); // rock chunks
+        else if (kind === 'gym') { if (arenaHash(i, row * 13) > 0.72) F(dark, sx, y, 1, rh); } // floor seams splay per row
+        else F(tone, sx, sy, 2, 1); // stone flecks (trainer field)
+      }
+      y += rh;
+      rh = Math.min(15, Math.ceil(rh * 1.45));
+      row++;
+    }
   }
 
   render(r) {
@@ -18094,9 +18332,12 @@ class BattleScene {
     // Message box (Platinum frame via r.panel/ptFrame)
     if (this.msgOpen || this.msg) {
       r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
-      const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
-      r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
-      if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2.3 (defect 1): measured word-wrap with the render font itself
+      // (r.wrapText) — the old fixed 30-char slices cut words in half
+      // ('y/our first catch') whenever a word straddled the boundary.
+      const lines = r.wrapText(this.msg, 14, w - 20, { maxLines: 2 });
+      if (lines[0]) r.text(lines[0], 10, h - 46, { size: 14, color: '#202028', shadow: false });
+      if (lines[1]) r.text(lines[1], 10, h - 28, { size: 14, color: '#202028', shadow: false });
       // UI v2: red advance cue at the box's bottom-right while waiting for input.
       if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
@@ -18202,34 +18443,73 @@ function cooldownMs(mv, userSpe, foeSpe) {
 }
 
 Object.assign(BattleScene.prototype, {
-  // ADR-021 control parity: on touch devices the DOM command panel IS the
-  // move pad — four move buttons + BALL/TEAM/RUN, all pulsing the same Input
-  // actions the keyboard produces (slot1-4 / a / start / select). Neither
-  // front-end is a degraded mode.
-  rtShowTouchCommands() {
-    const g = this.game, ui = g.ui;
-    if (!ui || ui.headless || !ui.cmdEl || typeof document === 'undefined') return;
-    const inp = g.input;
-    ui.cmdEl.innerHTML = '';
-    ui.cmdEl.classList.remove('hidden');
-    const mk = (label, fn, cls) => {
-      const b = document.createElement('button');
-      b.className = 'cmdf' + (cls ? ' ' + cls : '');
-      b.textContent = label;
-      b.addEventListener('pointerdown', (e) => { e.preventDefault(); fn(); });
-      ui.cmdEl.appendChild(b);
-      return b;
-    };
-    const pulse = (action) => { inp.press(action); setTimeout(() => inp.release(action), 90); };
-    this.ally.moves.forEach((slot, i) => {
-      const mv = MOVES[slot.id];
-      mk(mv.name + ' (' + slot.pp + ')', () => pulse('slot' + (i + 1)));
+  // UI v2.3 (defect 2): ONE battle presentation for every battle type.
+  // The v2.2 RT-only combined panel (move buttons with PP only, stacked
+  // over BALL/TEAM/RUN gradient bars, drawn across the ally databox, no
+  // FIGHT stage) is DELETED — no battle renders it. RT battles now present
+  // exactly like classic ones: A (or a tap on the A pad) opens the Platinum
+  // 2x2 command grid (FIGHT / BAG / PARTY / RUN) in the message zone, and
+  // FIGHT opens the same framed move window as the classic battle (name +
+  // type pill + PP + power/acc; a move on cooldown shows its remaining CD
+  // and picking it floats the cooldown instead of firing). Opening any of
+  // these menus freezes the arena (the
+  // theatre rule), and the windows are the classic battlewin/cmdpanel
+  // layouts, so neither databox is ever covered. Keyboard slot keys stay
+  // as direct-fire shortcuts (ADR-021 parity) — input only, never a
+  // separate rendered panel; touch plays the identical command flow
+  // through the A/B pads and tappable grid.
+  rtShowCommands() {
+    const g = this.game;
+    if (this.state !== 'rt' || !this.rt || this.rtFrozen()) return;
+    const items = [
+      { label: 'FIGHT', value: 'fight' },
+      { label: 'BAG', value: 'bag' },
+      { label: 'PARTY', value: 'party' },
+      { label: 'RUN', value: 'run', disabled: this.kind !== 'wild' },
+    ];
+    g.ui.showCommands(items, (value) => {
+      if (value === null) return; // B backs out to the live arena
+      if (value === 'fight') this.rtShowMoves();
+      else if (value === 'bag') this.rtBallMenu();
+      else if (value === 'party') this.openPartyMenu(false);
+      else if (value === 'run') this.rtTryRun();
+    }, {});
+  },
+
+  rtShowMoves() {
+    const g = this.game;
+    const ally = this.ally;
+    const rt = this.rt;
+    const items = ally.moves.map((m, i) => {
+      const mv = MOVES[m.id];
+      const disabledMove = ally.disableT > 0 && ally.disabledMove === i;
+      const cd = rt && rt.cds.ally[m.id] ? Math.ceil(rt.cds.ally[m.id] / 1000) : 0;
+      return {
+        label: mv.name + ' (' + mv.type + ') ' + m.pp + '/' + m.maxPp + (cd ? ' CD ' + cd + 's' : ''),
+        value: i, disabled: m.pp <= 0 || disabledMove, zeroPp: m.pp <= 0, move: m, cd,
+      };
     });
-    while (this.ally.moves.length && ui.cmdEl.children.length < 4) mk('—', () => {});
-    if (this.kind === 'wild') mk('BALL', () => pulse('a'));
-    mk('TEAM', () => pulse('start'));
-    mk('RUN', () => pulse('select'));
-    this._rtCmdFor = this.ally.monId;
+    items.push({ label: 'Back', value: -1, wide: true });
+    // Same framed move window as the classic battle (battle.mjs
+    // onCommand('fight')): name + type pill + PP (+ CD while cooling
+    // down) + power/acc.
+    const rowHtml = (it) => {
+      if (it.value === -1) return '<span>' + it.label + '</span>';
+      const mv = MOVES[it.move.id];
+      return '<span class="mvcell"><span class="mvname">' + mv.name + '</span>'
+        + typePill(mv.type)
+        + '<span class="mvpp">' + it.move.pp + '/' + it.move.maxPp + ' PP' + (it.cd ? ' · CD ' + it.cd + 's' : '') + '</span>'
+        + '<span class="mvpow">' + (mv.power || '—') + ' pw / ' + (mv.acc || '—') + ' ac</span></span>';
+    };
+    g.ui.showMenu('Choose a move', items, (v) => {
+      if (v === null || v === -1) { this.rtShowCommands(); return; }
+      this._lastMoveIdx = v; // cursor memory, same as classic
+      // A cooling move is selectable on purpose: picking it floats the
+      // cooldown and re-presents a FRESH window (live values — the
+      // clocks tick while menus are open, UI v2.3), never a dead press
+      // on a stale disabled row.
+      if (!this.rtUseMove('ally', v)) { this.rtFloat('Cooling down!'); this.rtShowMoves(); }
+    }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx || 0, items.length - 1), rowHtml, menuClass: 'battlewin' });
   },
 
   rtInit() {
@@ -18268,16 +18548,17 @@ Object.assign(BattleScene.prototype, {
     return this.msgOpen || !!g.ui.menu || !!g.ui.dialogue;
   },
 
-  updateRt(dt) {
-    const g = this.game;
-    const input = g.input;
+  // UI v2.3: the RT clock block (move cooldowns, dodge cooldown, float
+  // message cooldown, sleep clocks). Split out of updateRt so
+  // BattleScene.update can tick the clocks while a battle menu/dialogue
+  // freezes the arena — the FIGHT window's cooldowns are live, and a
+  // cooling move can come back while the player decides. Positional
+  // timers (dodge roll, i-frames, switch vulnerability) and the
+  // poison/burn pressure tick stay in updateRt: they belong to the
+  // frozen arena, not the clock.
+  rtTickClocks(dtms) {
     const rt = this.rt;
-    if (!rt) { this.toCommand(); return; }
-    // Touch move pad follows the active battler (switches rebuild it).
-    if (this._rtCmdFor !== this.ally.monId) this.rtShowTouchCommands();
-    if (this.rtFrozen()) return;
-    const dtms = dt * 1000;
-    // Cooldowns
+    if (!rt) return;
     for (const side of ['ally', 'foe']) {
       for (const k of Object.keys(rt.cds[side])) {
         rt.cds[side][k] -= dtms;
@@ -18285,13 +18566,24 @@ Object.assign(BattleScene.prototype, {
       }
     }
     if (rt.dodgeCd > 0) rt.dodgeCd -= dtms;
+    if (rt.msgCd > 0) rt.msgCd -= dtms;
+    if (rt.allySleepT > 0) rt.allySleepT -= dtms;
+    if (rt.foeSleepT > 0) rt.foeSleepT -= dtms;
+  },
+
+  updateRt(dt) {
+    const g = this.game;
+    const input = g.input;
+    const rt = this.rt;
+    if (!rt) { this.toCommand(); return; }
+    if (this.rtFrozen()) return;
+    const dtms = dt * 1000;
+    // Clocks (cooldowns et al.) — rtTickClocks; BattleScene.update ticks
+    // the same block on frozen frames, never both.
+    this.rtTickClocks(dtms);
     if (rt.dodgeT > 0) rt.dodgeT -= dtms;
     if (rt.iframes > 0) rt.iframes -= dtms;
     if (rt.switchVulnT > 0) rt.switchVulnT -= dtms;
-    if (rt.msgCd > 0) rt.msgCd -= dtms;
-    // Status clocks (sleep/paralysis handled at action time)
-    if (rt.allySleepT > 0) rt.allySleepT -= dtms;
-    if (rt.foeSleepT > 0) rt.foeSleepT -= dtms;
     // Poison/burn tick every 3s (turn-equivalent pressure).
     rt.tickT += dtms;
     if (rt.tickT >= 3000) {
@@ -18337,15 +18629,16 @@ Object.assign(BattleScene.prototype, {
       rt.dodgeT = 230; rt.iframes = 260; rt.dodgeCd = 900;
       g.audio.playSfx('menu-move');
     }
-    // Moves: slot keys fire directly (keyboard) — touch uses the same
-    // actions through the on-screen battle buttons.
+    // Moves: slot keys fire directly (keyboard shortcut) — the rendered
+    // command flow (A -> FIGHT -> move window) is identical for everyone.
     if (!allyAsleep && !rt.lunge) {
       for (let i = 0; i < 4; i++) {
         if (input.wasPressed('slot' + (i + 1))) { this.rtUseMove('ally', i); break; }
       }
     }
-    // Ball menu on A, party on START, run attempt on SELECT (wild only).
-    if (input.wasPressed('a') && this.kind === 'wild' && !rt.ballFlight) this.rtBallMenu();
+    // Commands on A (the unified Platinum grid — FIGHT/BAG/PARTY/RUN,
+    // every battle type), party on START, run attempt on SELECT (wild).
+    if (input.wasPressed('a') && !rt.ballFlight) this.rtShowCommands();
     if (input.wasPressed('start')) this.openPartyMenu(false);
     if (input.wasPressed('select') && this.kind === 'wild') this.rtTryRun();
 
@@ -18409,9 +18702,9 @@ Object.assign(BattleScene.prototype, {
     const atk = side === 'ally' ? this.ally : this.foe;
     const def = side === 'ally' ? this.foe : this.ally;
     const slot = atk.moves[idx];
-    if (!slot || slot.pp <= 0) return;
+    if (!slot || slot.pp <= 0) return false;
     const mv = MOVES[slot.id];
-    if (!mv || rt.cds[side][slot.id]) return;
+    if (!mv || rt.cds[side][slot.id]) return false;
     // Status gates at action time.
     if (atk.status === 'paralysis' && roll(0.25, g.rng.battle)) {
       if (side === 'ally') this.rtFloat(displayName(atk, SPECIES) + ' is paralyzed!');
@@ -18437,14 +18730,15 @@ Object.assign(BattleScene.prototype, {
     if (mv.cat === 'status') {
       if (dist(ax, ay, dx, dy) <= 200) this.rtApplyEffect(side, mv);
       else if (side === 'ally') this.rtFloat('Too far away!');
-      return;
+      return true;
     }
     if (mv.cat === 'physical') {
       rt.lunge = { side, t: 0, dur: 190, mv, idx, hitDone: false };
-      return;
+      return true;
     }
     rt.projs.push({ x: ax, y: ay, tx: dx, ty: dy, speed: 300, mv, side, t: 0 });
     g.audio.playSfx('menu-move');
+    return true;
   },
 
   rtUpdateLunge(dtms) {
@@ -18642,6 +18936,7 @@ Object.assign(BattleScene.prototype, {
     items.push({ label: 'Back', value: null });
     g.ui.showMenu('Throw which ball? (A)', items, (v) => {
       if (v) this.rtThrowBall(v);
+      else this.rtShowCommands(); // Back/cancel -> command grid (classic parity)
     }, { menuClass: 'battlewin' });
   },
 
@@ -18808,9 +19103,10 @@ Object.assign(BattleScene.prototype, {
     }
     if (this.msgOpen || this.msg) {
       r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
-      const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
-      r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
-      if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2.3 (defect 1): measured word-wrap (r.wrapText), as classic.
+      const lines = r.wrapText(this.msg, 14, w - 20, { maxLines: 2 });
+      if (lines[0]) r.text(lines[0], 10, h - 46, { size: 14, color: '#202028', shadow: false });
+      if (lines[1]) r.text(lines[1], 10, h - 28, { size: 14, color: '#202028', shadow: false });
       // UI v2: red advance cue at the box's bottom-right while waiting for input.
       if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
@@ -19424,7 +19720,8 @@ class OverworldScene {
     const fx = p.tx + dx, fy = p.ty + dy;
     const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
     if (fx === ptx && fy === pty) return 'A: Pet';
-    if (this.npcAt(fx, fy)) return 'A: Talk';
+    const facedNpc = this.npcAt(fx, fy);
+    if (facedNpc) return facedNpc.pc ? 'A: PC' : 'A: Talk'; // UI v2.3: the storage terminal names itself
     if (this.signAt(fx, fy)) return 'A: Read';
     return null;
   }
@@ -19832,7 +20129,7 @@ Object.assign(OverworldScene.prototype, {
     g.ui.say(['Oh! A bite!'], () => {
       g.audio.stopMusic();
       g.audio.encounter();
-      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g) }));
+      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g), arena: 'water' }));
     });
   },
 
@@ -20733,7 +21030,7 @@ class Game {
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    }, { rowHtml: bagRowHtml });
+    }, { rowHtml: bagRowHtml, menuClass: 'bagwin' });
   }
 
   openParty() {

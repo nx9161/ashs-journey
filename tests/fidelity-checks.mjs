@@ -177,7 +177,13 @@ ok('formula: damage — crit doubles level in formula (Gen 1)', F.calcDamage(5, 
     && uiSrc.includes("mkS('start'") && uiSrc.includes("mkS('select'");
   ok('controls: touch pad builds D-pad + A/B/X/Y + START/SELECT on the same input layer', touchOk);
   const rtSrc = readFileSync(join(ROOT, 'src/game/battle-rt.mjs'), 'utf8');
-  ok('controls: RT battles expose touch move buttons (slot pulses)', rtSrc.includes('rtShowTouchCommands') && rtSrc.includes("pulse('slot'"));
+  // UI v2.3 (defect 2): the RT-only combined panel is DELETED; RT battles
+  // present the same Platinum command flow as classic (A -> 2x2 grid ->
+  // FIGHT -> framed move window). Slot keys remain a keyboard shortcut.
+  ok('controls: RT uses the unified command grid (no combined panel)',
+    rtSrc.includes('rtShowCommands') && rtSrc.includes('showCommands') && rtSrc.includes("menuClass: 'battlewin'")
+    && !rtSrc.includes('rtShowTouchCommands') && !rtSrc.includes('_rtCmdFor')
+    && rtSrc.includes("input.wasPressed('slot' + (i + 1))"));
   // Both front-ends funnel into Input.press/release — assert the API surface.
   const { Input } = await import(join(ROOT, 'src/engine/input.mjs'));
   const inp = new Input();
@@ -229,6 +235,54 @@ ok('formula: damage — crit doubles level in formula (Gen 1)', F.calcDamage(5, 
   try { eval(gameJs + driver); } finally { console.log = origLog; }
   const res = JSON.parse((logs.find((l) => l.startsWith('RT-RESULT')) || 'RT-RESULT {}').slice(10));
   ok('rt battle: keyboard-slot play deals damage and the battle ends', res.ended === true && res.dealt > 0, JSON.stringify(res));
+}
+
+// ---------- H. UI v2.3 fix round ----------
+{
+  const renderMod = await import(join(ROOT, 'src/engine/render.mjs'));
+  // Defect 1: body stack is DotGothic16-first; display stack Galmuri-first.
+  ok('v2.3 fonts: canvas body stack is PtGothic-first, display stack PtGalmuri-first',
+    renderMod.UI_FONT_STACK.startsWith("'PtGothic'") && renderMod.UI_DISPLAY_FONT_STACK.startsWith("'PtGalmuri'"));
+  const buildSrc = readFileSync(join(ROOT, 'scripts/build.mjs'), 'utf8');
+  ok('v2.3 fonts: shell --font token is PtGothic-first with a Galmuri display token',
+    buildSrc.includes("--font:'PtGothic','PtGalmuri'") && buildSrc.includes("--font-display:'PtGalmuri','PtGothic'"));
+
+  // Defect 1: no-mid-word-clip. wrapText measures with the render font
+  // itself; with a monospace stub measurer (7px/char), lines must break
+  // only on spaces: rejoining reproduces the source, and every word of
+  // the source appears whole in exactly one line.
+  const stubCtx = { font: '', measureText: (t) => ({ width: String(t).length * 7 }) };
+  const stubCanvas = { getContext: () => stubCtx, style: {} };
+  const rend = new renderMod.Renderer(stubCanvas);
+  const msg = 'Your first catch is always the sweetest one, partner!';
+  const lines = rend.wrapText(msg, 14, 20 * 7);
+  const rejoined = lines.join(' ');
+  let wordsWhole = lines.length >= 2 && rejoined === msg;
+  if (wordsWhole) {
+    for (const ln of lines) for (const w of ln.split(' ')) if (!msg.split(' ').includes(w)) wordsWhole = false;
+  }
+  ok('v2.3 wrap: battle messages wrap on word boundaries only (no y/our clip)', wordsWhole, JSON.stringify(lines));
+  ok('v2.3 wrap: the 2-line message box cap still applies', rend.wrapText(msg, 14, 20 * 7, { maxLines: 2 }).length === 2);
+  const battleSrc = readFileSync(join(ROOT, 'src/game/battle.mjs'), 'utf8');
+  const rtSrc2 = readFileSync(join(ROOT, 'src/game/battle-rt.mjs'), 'utf8');
+  ok('v2.3 wrap: fixed 30-char message slicing is gone from both battle renderers',
+    !battleSrc.includes('slice(0, 30)') && !rtSrc2.includes('slice(0, 30)')
+    && battleSrc.includes('wrapText') && rtSrc2.includes('wrapText'));
+
+  // Defect 4: textured per-area backdrops.
+  ok('v2.3 arena: textured backdrops with grass/cave/water/gym variants',
+    battleSrc.includes('arenaKind()') && battleSrc.includes('arenaHash')
+    && battleSrc.includes("'cave'") && battleSrc.includes("'water'") && battleSrc.includes("'gym'") && battleSrc.includes("'grass'"));
+
+  // Defect 5: PC terminal reachable — shared Center interior + the lab.
+  const center = ALL_MAPS.center;
+  ok('v2.3 pc: the shared Pokemon Center interior has a PC terminal',
+    !!center && center.npcs.some((n) => n.pc === true));
+  ok('v2.3 pc: a PC terminal stands at the Pallet lab entrance',
+    ALL_MAPS.pallet.npcs.some((n) => n.pc === true));
+  const artSrc = readFileSync(join(ROOT, 'assets/sprites/art-data.mjs'), 'utf8');
+  ok('v2.3 pc: terminal machine art exists (not a person sprite)',
+    artSrc.includes('"npc-pc-idle-1"') && artSrc.includes('"npc-pc-idle-2"'));
 }
 
 console.log('\nfidelity-checks: ' + pass + '/' + (pass + fail) + ' passed');
