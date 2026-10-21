@@ -80,3 +80,48 @@ New beats get original chiptune: the `trainer-spot` alert sting joins the existi
 - `scripts/verify-audio.mjs`: 23 PASS (new `trainer-spot` table passes the contract schema).
 - `scripts/contamination-scan.mjs`: clean. `scripts/drift-gate.mjs` + `scripts/budgets-check.mjs`: pass.
 - Palace: recorded as ADR-016 in `memory/wings/projects/pikachu-ds-remake/halls/decisions.md` (renumbered from ADR-013 to resolve a collision with Tech Law's ADR-013).
+
+---
+
+## Addendum — Full-fidelity round (2026-10-21, ADR-018..022)
+
+The owner's directive escalated from the Act I slice to the complete game:
+"exactly like real," a proper storyline, all 151 catchable, every Yellow
+feature, all types end to end, the Z-A presentation change order, and the
+War Room Protocol. What changed, honestly:
+
+**Now matches Yellow (mechanics):** the Gen-1 damage formula with the
+integer 217–255/255 roll; Gen-1 crits (base Speed /512, high-crit ×4,
+attacker level doubled in the formula, stat stages and burn ignored on a
+crit); Gen-1 accuracy (stage multiplier in thirds, perfect moves still
+miss 1/256); the two-roll Gen-1 catch (ball ranges, status −25/−12, HP
+factor, Master Ball absolute); Gen-1 status behavior (sleep 1–7 turns,
+freeze thaws only to Fire, confusion self-hit at full formula, badly-poison
+escalation, Leech Seed); Gen-1 escape formula; OHKO level-difference
+accuracy ((userLv − targetLv + 30)/256); XP split among participants;
+poison walk damage; the complete Kanto campaign, all 151 obtainable in one
+playthrough (audited), all 50 TMs + 5 HMs, Bill's PC (12 boxes), Safari
+Zone, Game Corner, both Snorlax, fossil revival, NPC trades, Hall of Fame,
+the diploma.
+
+**Deliberate divergences (ADR-018):** D1 the type chart is the complete
+modern 18-type chart (owner WS8 ruling — Yellow fidelity governs feel, not
+chart bugs); D2 no single Special stat / no per-type physical-special split
+(the unified spa/spd model stays; moves carry their own category); D3 Focus
+Energy multiplies crit ×4 (the original's ÷4 bug not reproduced); D4 stats
+use IV 31 rather than rolled DVs (harness determinism); D5 Safari flee uses
+a documented simplified rate model; D6 trade evolutions resolve solo via
+PC "Link Transfer"; D7 badge obedience/stat-boost side effects are not
+separately simulated (badges gate HMs, as the player feels them).
+
+**Presentation (ADR-020):** the Z-A change order re-benchmarked
+presentation — real-time battles (Model A) with the classic engine kept as
+a switchable fallback, dark dialogue/menu idiom, speaker portraits,
+encounter popup behavior — all in 100% original code and art; GC conditions
+C1–C8 in the palace review file. "Exactly like" lives in internal docs
+only, never in shipped copy.
+
+**Verification:** verify-slice 133/133 (both editions),
+tests/fidelity-checks.mjs 26/26, tests/campaign-smoke.mjs 24/24 (the whole
+Kanto spine played headlessly), changed-flow 18/18, budgets/drift/
+contamination/audio all green. Full matrix: docs/feature-parity.md.
