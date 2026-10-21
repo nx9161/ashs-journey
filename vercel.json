@@ -1,4 +1,10 @@
 {
+  "functions": {
+    "api/**/*.mjs": {
+      "runtime": "@vercel/node@5.1.0",
+      "maxDuration": 30
+    }
+  },
   "headers": [
     {
       "headers": [
