@@ -16,17 +16,17 @@
 
 import { hash as argonHash, verify as argonVerify } from '@node-rs/argon2';
 
-import { authUnavailable, normalizeUsername, USERNAME_RE, ARGON2_OPTS } from '../lib/auth.mjs';
-import { getPool, isDbConfigured } from '../lib/db.mjs';
-import { trustedClientIP } from '../lib/ip.mjs';
-import { checkLimits, tooManyResponse } from '../lib/rate-limit.mjs';
-import { isPasswordBreached } from '../lib/hibp.mjs';
-import { logAnomaly } from '../lib/anomaly.mjs';
-import { checkNestingDepth } from '../lib/validator.mjs';
+import { authUnavailable, normalizeUsername, USERNAME_RE, ARGON2_OPTS } from '../_lib/auth.mjs';
+import { getPool, isDbConfigured } from '../_lib/db.mjs';
+import { trustedClientIP } from '../_lib/ip.mjs';
+import { checkLimits, tooManyResponse } from '../_lib/rate-limit.mjs';
+import { isPasswordBreached } from '../_lib/hibp.mjs';
+import { logAnomaly } from '../_lib/anomaly.mjs';
+import { checkNestingDepth } from '../_lib/validator.mjs';
 import {
   json, invalidRequest, unavailable, readBody, parseJson,
   assertSameOrigin, methodNotAllowed,
-} from '../lib/http.mjs';
+} from '../_lib/http.mjs';
 
 const MAX_BODY = 4096;
 

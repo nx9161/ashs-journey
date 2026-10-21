@@ -51,9 +51,9 @@ pg.Pool.prototype.connect = async function () {
   };
 };
 
-const { auth } = await import('../lib/auth.mjs');
+const { auth } = await import('../../api/_lib/auth.mjs');
 auth.api.getSession = async () => ({ user: { id: 'test-user-1' } });
-const handler = (await import('../save.mjs')).default;
+const handler = (await import('../../api/save.mjs')).default;
 
 function putRequest(body) {
   return new Request('http://localhost/api/save', {

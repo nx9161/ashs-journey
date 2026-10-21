@@ -9,9 +9,9 @@
 // ignored.
 
 import { createHash, timingSafeEqual } from 'node:crypto';
-import { getPool, isDbConfigured } from './lib/db.mjs';
-import { authUnavailable } from './lib/auth.mjs';
-import { json, unavailable, methodNotAllowed } from './lib/http.mjs';
+import { getPool, isDbConfigured } from './_lib/db.mjs';
+import { authUnavailable } from './_lib/auth.mjs';
+import { json, unavailable, methodNotAllowed } from './_lib/http.mjs';
 
 function secretsEqual(a, b) {
   if (typeof a !== 'string' || typeof b !== 'string' || !a || !b) return false;

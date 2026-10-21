@@ -3,11 +3,11 @@
 // The player can already download any save as JSON (export affordance); this
 // covers the account-record side of Art. 15/20 at this scale.
 
-import { isDbConfigured, getPool } from '../lib/db.mjs';
-import { authUnavailable } from '../lib/auth.mjs';
+import { isDbConfigured, getPool } from '../_lib/db.mjs';
+import { authUnavailable } from '../_lib/auth.mjs';
 import {
   json, unavailable, unauthorized, requireUserId, methodNotAllowed,
-} from '../lib/http.mjs';
+} from '../_lib/http.mjs';
 
 export default async function handler(req) {
   if (req.method !== 'GET') return methodNotAllowed(['GET']);

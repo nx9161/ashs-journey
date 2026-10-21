@@ -1,4 +1,4 @@
-// gen-tables.mjs — emit api/lib/data/tables.json from the game's data modules.
+// gen-tables.mjs — emit api/_lib/data/tables.json from the game's data modules.
 // Run from the repo root: `node api/scripts/gen-tables.mjs` (writes the snapshot)
 // or `node api/scripts/gen-tables.mjs --check` (CI: fail if the committed snapshot
 // does not match the current src/data — the validator's pinning contract).

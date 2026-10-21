@@ -1,4 +1,4 @@
-// validator.fuzz.test.mjs — differential fuzz battery for api/lib/validator.mjs.
+// validator.fuzz.test.mjs — differential fuzz battery for api/_lib/validator.mjs.
 // Run: node api/scripts/validator.fuzz.test.mjs   (exit 0 = all pass)
 //
 // Seeded PRNG (mulberry32, fixed seed 0xC0FFEE): N=2000 random/mutated
@@ -19,7 +19,7 @@
 // (save.mjs itself is exercised only via save-contract mocks). The number
 // is recorded, not chased — no artificial tests were added to inflate it.
 
-import { validateSave } from '../../api/lib/validator.mjs';
+import { validateSave } from '../../api/_lib/validator.mjs';
 import { defaultState } from '../../src/game/state.mjs';
 
 const N = 2000;
@@ -60,15 +60,16 @@ function mutate(base) {
   const s = JSON.parse(JSON.stringify(base));
   const nMut = rint(1, 4);
   for (let i = 0; i < nMut; i++) {
+   try {
     switch (rint(0, 15)) {
       case 0: delete s[pick(Object.keys(s))]; break;
       case 1: s[pick(Object.keys(s))] = randScalar(); break;
       case 2: s['fuzz_unknown_' + rint(0, 999)] = randScalar(); break;
       case 3: if (s.player) s.player[pick(['name', 'rivalName', 'playtimeSec'])] = randScalar(); break;
       case 4: if (s.party && s.party.length) s.party[rint(0, s.party.length - 1)] = randScalar(); break;
-      case 5: if (s.party) s.party.push(randScalar()); break;
+      case 5: if (Array.isArray(s.party)) s.party.push(randScalar()); break;
       case 6: if (s.dex && s.dex.caught) s.dex.caught[pick(['25', '9999', '__proto__', 'x'])] = randScalar(); break;
-      case 7: if (s.badges && s.badges.kanto) s.badges.kanto.push(pick(['boulderbadge', 'fakegym', 123, null])); break;
+      case 7: if (s.badges && Array.isArray(s.badges.kanto)) s.badges.kanto.push(pick(['boulderbadge', 'fakegym', 123, null])); break;
       case 8: if (s.boxes) s.boxes[pick(Object.keys(s.boxes))] = randScalar(); break;
       case 9: if (s.meta) s.meta[pick(Object.keys(s.meta))] = randScalar(); break;
       case 10: if (s.player && s.player.party === undefined) s.player.party = randDeep(rint(1, 6)); break;
@@ -79,6 +80,7 @@ function mutate(base) {
       case 14: if (s.party && s.party[0] && typeof s.party[0] === 'object') s.party[0].moves = randScalar(); break;
       default: s[pick(Object.keys(s) || ['player'])] = randDeep(rint(1, 4));
     }
+   } catch { /* a mutation combo clobbered a type it later assumed — skip that mutation */ }
   }
   return s;
 }

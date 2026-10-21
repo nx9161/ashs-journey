@@ -105,7 +105,7 @@ export async function run() {
   t('PUT wrong origin: 403', r.status === 403, 'status=' + r.status);
 
   // ---- user isolation at the route level: second user cannot see slot ----
-  const { getAuth } = await import('../../api/lib/auth.mjs');
+  const { getAuth } = await import('../../api/_lib/auth.mjs');
   const auth = getAuth();
   const signup = (await import('../../api/auth/signup.mjs')).default;
   const pw2 = 'T3st!' + 'b'.repeat(24);

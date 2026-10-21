@@ -1,7 +1,7 @@
-// validator.test.mjs — quick unit battery for api/lib/validator.mjs.
+// validator.test.mjs — quick unit battery for api/_lib/validator.mjs.
 // Run: node api/scripts/validator.test.mjs   (exit 0 = all pass)
 
-import { validateSave, checkNestingDepth, tablesReady, tablesStatus } from '../../api/lib/validator.mjs';
+import { validateSave, checkNestingDepth, tablesReady, tablesStatus } from '../../api/_lib/validator.mjs';
 import { defaultState, SCHEMA_VERSION } from '../../src/game/state.mjs';
 
 let pass = 0, fail = 0;

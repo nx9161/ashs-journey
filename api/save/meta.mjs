@@ -5,13 +5,13 @@
 // playtimeSec/storyBeat/badgeCount are parsed server-side from the payload.
 // Same WHERE user_id = <server-derived> scoping as PUT (C10(v)).
 
-import { isDbConfigured, getPool } from '../lib/db.mjs';
-import { authUnavailable } from '../lib/auth.mjs';
-import { trustedClientIP } from '../lib/ip.mjs';
-import { checkLimits, tooManyResponse } from '../lib/rate-limit.mjs';
+import { isDbConfigured, getPool } from '../_lib/db.mjs';
+import { authUnavailable } from '../_lib/auth.mjs';
+import { trustedClientIP } from '../_lib/ip.mjs';
+import { checkLimits, tooManyResponse } from '../_lib/rate-limit.mjs';
 import {
   json, unavailable, unauthorized, requireUserId, methodNotAllowed,
-} from '../lib/http.mjs';
+} from '../_lib/http.mjs';
 
 export default async function handler(req) {
   if (req.method !== 'GET') return methodNotAllowed(['GET']);

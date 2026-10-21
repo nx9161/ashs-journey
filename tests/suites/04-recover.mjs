@@ -12,7 +12,7 @@ export async function run() {
   const pg = getPGlite();
   const recover = (await import('../../api/auth/recover.mjs')).default;
   const save = (await import('../../api/save.mjs')).default;
-  const { getAuth } = await import('../../api/lib/auth.mjs');
+  const { getAuth } = await import('../../api/_lib/auth.mjs');
   const auth = getAuth();
 
   const newPw = 'N3w!' + randomBytes(12).toString('hex');

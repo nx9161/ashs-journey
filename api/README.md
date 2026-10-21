@@ -23,9 +23,9 @@ api/account/data.mjs    GET {username, createdAt, lastLogin} (access/portability
 api/account/delete.mjs  POST — password-verified deletion, one transaction
 api/health.mjs          GET — liveness probe (keep-alive target, no auth)
 api/purge.mjs           POST — retention purges (CRON_SECRET bearer)
-api/lib/                db, auth (better-auth config), ip, rate-limit, hibp,
+api/_lib/                db, auth (better-auth config), ip, rate-limit, hibp,
                         validator, blocklists, anomaly, http helpers
-api/lib/data/tables.json  committed data-table snapshot (validator pinning)
+api/_lib/data/tables.json  committed data-table snapshot (validator pinning)
 tools/api-scripts/gen-tables.mjs  regenerates the snapshot from src/data
 ```
 
@@ -49,7 +49,7 @@ Until then, all auth code paths stay dark and the game ships guest-only.
 ## Auth contract
 
 - **Identity:** username 3–16 chars `[a-z0-9_]` (NFKC + lowercased),
-  reserved-name + profanity blocklists (`api/lib/blocklists.mjs`),
+  reserved-name + profanity blocklists (`api/_lib/blocklists.mjs`),
   `immutableUsername: true`. Synthetic email `<username>@game.local` exists
   only inside better-auth; the `databaseHooks` guard rejects any other email
   shape at `/sign-up/email`.
@@ -84,15 +84,15 @@ Until then, all auth code paths stay dark and the game ships guest-only.
 - RLS option (a): explicit `BEGIN` on one pooled client,
   `set_config('app.user_id', $bound, true)` before any DML;
   `FORCE ROW LEVEL SECURITY` + grants to `app_role` only.
-- Validator: `api/lib/validator.mjs` (hand-rolled, whitelist keys,
+- Validator: `api/_lib/validator.mjs` (hand-rolled, whitelist keys,
   `__proto__` denial, strict types, species/move/item ids pinned to
-  `api/lib/data/tables.json` with a startup `tablesVersion` assert —
+  `api/_lib/data/tables.json` with a startup `tablesVersion` assert —
   fail closed). Regenerate after data changes:
   `node tools/api-scripts/gen-tables.mjs` (CI: `--check`).
 - Validator parity (honest): exactly two validators exist — the client
   pre-check `src/save/schema.mjs` (48 lines: top-level key whitelist +
   schema version + basic shapes, `{ok, errors}` only, no anomaly model) and
-  the authoritative server gate `api/lib/validator.mjs` (350 lines: deep
+  the authoritative server gate `api/_lib/validator.mjs` (350 lines: deep
   type checks, species/move/item pins, `__proto__` denial, anomaly
   detection, `{ok, errors, anomalies, summary}`). They are NOT in full
   corpus parity by design: the client is a fast local pre-flight that must

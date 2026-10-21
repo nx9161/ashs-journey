@@ -2,7 +2,7 @@
 // All /api/auth/* sub-paths route here; better-auth dispatches internally.
 // Fail-closed: 503 {error:"auth_unavailable"} when the DB is not provisioned.
 
-import { auth, authUnavailable } from '../lib/auth.mjs';
+import { auth, authUnavailable } from '../_lib/auth.mjs';
 
 export default async function handler(req) {
   if (authUnavailable()) {

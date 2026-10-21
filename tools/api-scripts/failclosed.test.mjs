@@ -13,15 +13,15 @@ if (process.env.DATABASE_URL) {
 }
 
 const routes = [
-  ['../auth/[...all].mjs', 'GET', 'https://x/api/auth/get-session'],
-  ['../auth/signup.mjs', 'POST', 'https://x/api/auth/signup'],
-  ['../auth/recover.mjs', 'POST', 'https://x/api/auth/recover'],
-  ['../save.mjs', 'GET', 'https://x/api/save'],
-  ['../save.mjs', 'PUT', 'https://x/api/save'],
-  ['../save/meta.mjs', 'GET', 'https://x/api/save/meta'],
-  ['../account/data.mjs', 'GET', 'https://x/api/account/data'],
-  ['../account/delete.mjs', 'POST', 'https://x/api/account/delete'],
-  ['../purge.mjs', 'POST', 'https://x/api/purge'],
+  ['../../api/auth/[...all].mjs', 'GET', 'https://x/api/auth/get-session'],
+  ['../../api/auth/signup.mjs', 'POST', 'https://x/api/auth/signup'],
+  ['../../api/auth/recover.mjs', 'POST', 'https://x/api/auth/recover'],
+  ['../../api/save.mjs', 'GET', 'https://x/api/save'],
+  ['../../api/save.mjs', 'PUT', 'https://x/api/save'],
+  ['../../api/save/meta.mjs', 'GET', 'https://x/api/save/meta'],
+  ['../../api/account/data.mjs', 'GET', 'https://x/api/account/data'],
+  ['../../api/account/delete.mjs', 'POST', 'https://x/api/account/delete'],
+  ['../../api/purge.mjs', 'POST', 'https://x/api/purge'],
 ];
 
 for (const [mod, method, url] of routes) {
@@ -40,13 +40,13 @@ for (const [mod, method, url] of routes) {
 }
 
 // health is the exception: it reports authConfigured:false with 200.
-const { default: health } = await import('../health.mjs');
+const { default: health } = await import('../../api/health.mjs');
 const hres = await health(new Request('https://x/api/health'));
 const hbody = await hres.json();
 t('health -> 200 with authConfigured:false', hres.status === 200 && hbody.ok === true && hbody.authConfigured === false && hbody.version === 'track-b');
 
 // 405 matrix on save routes
-const { default: save } = await import('../save.mjs');
+const { default: save } = await import('../../api/save.mjs');
 const del = await save(new Request('https://x/api/save', { method: 'DELETE' }));
 t('save DELETE -> 503 (fail-closed precedes 405)', del.status === 503);
 

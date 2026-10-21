@@ -24,18 +24,18 @@
 //   ('app.user_id', $bound, true) BEFORE any DML (RLS option (a), C6).
 // - 401 precedes any resource code (G14). Rate limit: 12/min/user + 120/min/IP.
 
-import { getPool, isDbConfigured } from './lib/db.mjs';
-import { authUnavailable } from './lib/auth.mjs';
-import { trustedClientIP } from './lib/ip.mjs';
-import { checkLimits, tooManyResponse } from './lib/rate-limit.mjs';
-import { logAnomaly } from './lib/anomaly.mjs';
+import { getPool, isDbConfigured } from './_lib/db.mjs';
+import { authUnavailable } from './_lib/auth.mjs';
+import { trustedClientIP } from './_lib/ip.mjs';
+import { checkLimits, tooManyResponse } from './_lib/rate-limit.mjs';
+import { logAnomaly } from './_lib/anomaly.mjs';
 import {
   validateSave, checkNestingDepth, tablesReady, tablesStatus,
-} from './lib/validator.mjs';
+} from './_lib/validator.mjs';
 import {
   json, invalidRequest, unavailable, unauthorized, readBody, parseJson,
   requireUserId, assertSameOrigin, methodNotAllowed,
-} from './lib/http.mjs';
+} from './_lib/http.mjs';
 
 const MAX_SAVE_BYTES = 65536;
 

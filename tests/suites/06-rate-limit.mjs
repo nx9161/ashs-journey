@@ -6,7 +6,7 @@ import { t, mockReq, readJson, sessionCookieFrom, cookieHeader, validPayload } f
 
 export async function run() {
   const pg = getPGlite();
-  const { checkLimits, tooManyResponse } = await import('../../api/lib/rate-limit.mjs');
+  const { checkLimits, tooManyResponse } = await import('../../api/_lib/rate-limit.mjs');
 
   // --- unit: check-and-increment ---
   const key = 'qatest:' + randomBytes(4).toString('hex');

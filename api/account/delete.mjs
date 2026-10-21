@@ -15,15 +15,15 @@
 import { verify as argonVerify } from '@node-rs/argon2';
 import { createHash } from 'node:crypto';
 
-import { authUnavailable } from '../lib/auth.mjs';
-import { getPool, isDbConfigured } from '../lib/db.mjs';
-import { trustedClientIP } from '../lib/ip.mjs';
-import { checkLimits, tooManyResponse } from '../lib/rate-limit.mjs';
-import { checkNestingDepth } from '../lib/validator.mjs';
+import { authUnavailable } from '../_lib/auth.mjs';
+import { getPool, isDbConfigured } from '../_lib/db.mjs';
+import { trustedClientIP } from '../_lib/ip.mjs';
+import { checkLimits, tooManyResponse } from '../_lib/rate-limit.mjs';
+import { checkNestingDepth } from '../_lib/validator.mjs';
 import {
   json, invalidRequest, unavailable, unauthorized, readBody, parseJson,
   requireUserId, assertSameOrigin, methodNotAllowed,
-} from '../lib/http.mjs';
+} from '../_lib/http.mjs';
 
 const MAX_BODY = 4096;
 

@@ -1,4 +1,4 @@
-// config.test.mjs — config assertions for api/lib/auth.mjs (AppSec C1/C3/C4/C7).
+// config.test.mjs — config assertions for api/_lib/auth.mjs (AppSec C1/C3/C4/C7).
 // Run: node api/scripts/config.test.mjs   (exit 0 = all pass)
 // Uses a DUMMY DATABASE_URL: better-auth builds lazily (no connection at
 // build time), so option inspection + hook unit tests need no live DB.
@@ -7,7 +7,7 @@ process.env.DATABASE_URL = 'postgres://app_role:fake@localhost:6543/postgres';
 process.env.BETTER_AUTH_URL = 'https://ashs-journey-game.vercel.app';
 process.env.BETTER_AUTH_SECRET = 'test-secret-not-used-for-crypto-assertions';
 
-const { getAuth, normalizeUsername, usernameValidator, ARGON2_OPTS } = await import('../lib/auth.mjs');
+const { getAuth, normalizeUsername, usernameValidator, ARGON2_OPTS } = await import('../../api/_lib/auth.mjs');
 const { hash, verify } = await import('@node-rs/argon2');
 
 let pass = 0, fail = 0;

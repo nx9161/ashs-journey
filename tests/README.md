@@ -15,7 +15,7 @@ dependency. `node_modules/` is gitignored.
 PGlite 0.3.9 has no TCP server, so a real `pg.Pool` cannot connect to it.
 Instead, `register.mjs` installs a Node module-customization hook
 (`resolve-hooks.mjs`) that redirects the bare specifier `pg` — imported only by
-`api/lib/db.mjs` — to `pg-stub.mjs`, a PGlite-backed drop-in implementing the
+`api/_lib/db.mjs` — to `pg-stub.mjs`, a PGlite-backed drop-in implementing the
 subset of the pg API the Track B code uses (`new Pool()`, `pool.connect()`,
 `client.query(text, params)`, `client.release()`, `pool.on()`).
 

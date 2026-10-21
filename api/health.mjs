@@ -3,8 +3,8 @@
 // (.github/workflows/keepalive.yml): when auth is configured it performs a
 // cheap SELECT 1 so the Supabase free tier sees activity.
 
-import { isDbConfigured, pingDb } from './lib/db.mjs';
-import { json, methodNotAllowed } from './lib/http.mjs';
+import { isDbConfigured, pingDb } from './_lib/db.mjs';
+import { json, methodNotAllowed } from './_lib/http.mjs';
 
 export default async function handler(req) {
   if (req.method !== 'GET') return methodNotAllowed(['GET']);

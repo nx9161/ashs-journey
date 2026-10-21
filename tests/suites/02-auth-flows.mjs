@@ -11,7 +11,7 @@ function pw() { return 'T3st!' + randomBytes(12).toString('hex'); }
 export async function run() {
   const pg = getPGlite();
   const signup = (await import('../../api/auth/signup.mjs')).default;
-  const { getAuth } = await import('../../api/lib/auth.mjs');
+  const { getAuth } = await import('../../api/_lib/auth.mjs');
   const auth = getAuth();
   t('auth instance built (not fail-closed)', !!auth);
 
@@ -115,7 +115,7 @@ export async function run() {
   const sessAfter = await pg.query(`SELECT count(*)::int AS c FROM session WHERE "userId"=$1`, [ctx.userId]);
   // signup minted one session, login minted a second; logout kills the login one.
   t('logout: session row deleted server-side', sessAfter.rows[0].c === 1, 'sessions=' + sessAfter.rows[0].c);
-  const { requireUserId } = await import('../../api/lib/http.mjs');
+  const { requireUserId } = await import('../../api/_lib/http.mjs');
   const dead = await requireUserId(mockReq({ headers: cookieHeader(loginCookie) }));
   t('logout: revoked cookie -> no session (401 path)', dead === null);
 }
