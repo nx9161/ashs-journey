@@ -17,26 +17,33 @@ const ROOT = join(HERE, '..', '..');
 const OUT = join(HERE, '..', 'lib', 'data', 'tables.json');
 
 const { SPECIES } = await import(join(ROOT, 'src', 'data', 'species.mjs'));
+const { SPECIES2 } = await import(join(ROOT, 'src', 'data', 'species2.mjs'));
 const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
+const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
 const { ITEMS, BALLS } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
+const { FORMS } = await import(join(ROOT, 'src', 'data', 'forms.mjs'));
+const { QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
 const { SCHEMA_VERSION } = await import(join(ROOT, 'src', 'game', 'state.mjs'));
 
-// Canonical badge earn-order per region. Today only the slice's badges exist in
-// the item tables; the validator enforces "prefix of the earn order" (no badge
-// #N without #1..N-1) against this list, so the rule activates automatically as
-// content lands. Key-pocket item ids are the badge ids.
-const KNOWN_BADGES = Object.values(ITEMS)
-  .filter((it) => it && it.pocket === 'key')
-  .map((it) => it.id)
-  .sort();
+const ALL_SPECIES = { ...SPECIES, ...SPECIES2 };
+const ALL_MOVES = { ...MOVES, ...MOVES2 };
+
+// Canonical badge earn-order per region: the campaign's story order (ADR-019),
+// NOT an alphabetical sort. The validator enforces "prefix of the earn order"
+// (no badge #N without #1..N-1) against this list.
+const KANTO_EARN_ORDER = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
+const KNOWN_BADGES = KANTO_EARN_ORDER.filter((id) => ITEMS[id]);
 
 const tables = {
   schemaVersion: SCHEMA_VERSION,
-  species: Object.keys(SPECIES).sort(),
-  moves: Object.keys(MOVES).sort(),
+  species: Object.keys(ALL_SPECIES).sort(),
+  moves: Object.keys(ALL_MOVES).sort(),
   items: Object.keys(ITEMS).sort(),
   balls: Object.keys(BALLS).sort(),
-  // Ordered earn sequences. Slice v1: only the first Kanto badge exists.
+  forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
+  quests: [...QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS)].sort(),
+  regions: ['kanto', 'orange', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea', 'liko'],
+  // Ordered earn sequences.
   badgeSequences: {
     kanto: KNOWN_BADGES,
     orange: [],

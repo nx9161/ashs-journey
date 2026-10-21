@@ -52,6 +52,9 @@ function loadTables() {
       species: new Set(tables.species),
       moves: new Set(tables.moves),
       items: new Set(tables.items),
+      forms: new Set(tables.forms || []),
+      quests: new Set(tables.quests || []),
+      regions: new Set(tables.regions || ['kanto']),
       badgeSequences: tables.badgeSequences,
       regionBadgeMax: tables.regionBadgeMax,
     };
@@ -141,6 +144,22 @@ function checkDex(dex, errors, summary) {
     }
     if (kind === 'caught') caught = n; else if (kind === 'seen') seen = n; else befriended = n;
   }
+  // WS10: form completion tracking — form ids from the build's forms table,
+  // true-only values (same honesty rule as species entries).
+  if (dex.forms !== undefined) {
+    if (!isPlainObj(dex.forms)) errors.push('bad-dex-forms');
+    else {
+      const fdk = hasDangerousKey(dex.forms);
+      if (fdk) errors.push('dangerous-key:' + fdk);
+      else {
+        const fkeys = Object.keys(dex.forms);
+        if (fkeys.length > 400) errors.push('bad-dex-forms-size');
+        for (const k of fkeys) {
+          if (!TABLES.forms.has(k) || dex.forms[k] !== true) { errors.push('bad-form'); break; }
+        }
+      }
+    }
+  }
   // Totals re-derived server-side (never trust client totals).
   summary.dexCaught = caught; summary.dexSeen = seen; summary.dexBefriended = befriended;
 }
@@ -194,6 +213,41 @@ function checkStory(story, errors) {
     errors.push('bad-position');
   }
   if (!['easy', 'normal', 'hard'].includes(story.difficulty)) errors.push('bad-difficulty');
+  // WS6/WS10: campaign state — quest/arc progress keyed by ids from the
+  // build's quest table; values are the closed enum active|complete.
+  if (story.quests !== undefined) {
+    if (!isPlainObj(story.quests)) errors.push('bad-quests');
+    else {
+      const qdk = hasDangerousKey(story.quests);
+      if (qdk) errors.push('dangerous-key:' + qdk);
+      else {
+        const qkeys = Object.keys(story.quests);
+        if (qkeys.length > 200) errors.push('bad-quests-size');
+        for (const k of qkeys) {
+          if (!TABLES.quests.has(k) || !['active', 'complete'].includes(story.quests[k])) { errors.push('bad-quest'); break; }
+        }
+      }
+    }
+  }
+  // Region chain (owner rule: regions unlock in story order).
+  if (story.region !== undefined && (typeof story.region !== 'string' || !TABLES.regions.has(story.region))) errors.push('bad-region');
+  if (story.regionsDone !== undefined) {
+    if (!Array.isArray(story.regionsDone) || story.regionsDone.length > 11) errors.push('bad-regions-done');
+    else {
+      const seen = new Set();
+      for (const r of story.regionsDone) {
+        if (typeof r !== 'string' || !TABLES.regions.has(r) || seen.has(r)) { errors.push('bad-regions-done'); break; }
+        seen.add(r);
+      }
+    }
+  }
+  // Hall of Fame snapshots (WS6 finale): small, species-named entries.
+  if (story.hof !== undefined) {
+    if (!Array.isArray(story.hof) || story.hof.length > 20) errors.push('bad-hof');
+    else for (const h of story.hof) {
+      if (!isPlainObj(h) || typeof h.species !== 'string' || h.species.length > 40 || !isInt(h.level, 1, 100)) { errors.push('bad-hof'); break; }
+    }
+  }
 }
 
 function checkSettings(s, errors) {
@@ -202,7 +256,8 @@ function checkSettings(s, errors) {
   if (dk) return errors.push('dangerous-key:' + dk);
   const BOOLS = ['battleAnims', 'shake', 'reducedMotion', 'mute', 'controlsFlip', 'vibration', 'autosave', 'showTouch'];
   for (const k of BOOLS) if (s[k] !== undefined && typeof s[k] !== 'boolean') errors.push('bad-setting:' + k);
-  if (s.textSpeed !== undefined && !['slow', 'normal', 'fast'].includes(s.textSpeed)) errors.push('bad-setting:textSpeed');
+  if (s.textSpeed !== undefined && !['slow', 'normal', 'fast', 'instant'].includes(s.textSpeed)) errors.push('bad-setting:textSpeed');
+  if (s.battleStyle !== undefined && !['rt', 'classic'].includes(s.battleStyle)) errors.push('bad-setting:battleStyle');
   for (const k of ['musicVol', 'sfxVol']) if (s[k] !== undefined && (typeof s[k] !== 'number' || s[k] < 0 || s[k] > 1)) errors.push('bad-setting:' + k);
   if (s.keymap !== undefined && !(s.keymap === null || isPlainObj(s.keymap))) errors.push('bad-setting:keymap');
   if (s.hudScale !== undefined && (typeof s.hudScale !== 'number' || s.hudScale < 0.5 || s.hudScale > 2)) errors.push('bad-setting:hudScale');
@@ -222,7 +277,7 @@ function detectAnomalies(data, summary, anomalies) {
   }
 }
 
-const TOP_KEYS = new Set(['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story', 'pikachu', 'settings', 'facilities', 'bag', 'meta']);
+const TOP_KEYS = new Set(['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story', 'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session']);
 
 export function validateSave(data) {
   const errors = [];
@@ -307,9 +362,31 @@ export function validateSave(data) {
   if (!isPlainObj(bag) || hasDangerousKey(bag)) errors.push('bad-bag');
   else {
     const keys = Object.keys(bag);
-    if (keys.length > 64) errors.push('bad-bag-size');
+    if (keys.length > 160) errors.push('bad-bag-size');
     for (const k of keys) {
       if (!TABLES.items.has(k) || !isInt(bag[k], 0, 999)) { errors.push('bad-bag-item'); break; }
+    }
+  }
+
+  // currentBox (WS9: Bill's PC — the box new catches land in)
+  if (data.currentBox !== undefined && (typeof data.currentBox !== 'string' || !/^box([1-9]|1[0-2])$/.test(data.currentBox))) {
+    errors.push('bad-current-box');
+  }
+
+  // session (transient queues — validated for shape, never trusted for state)
+  if (data.session !== undefined) {
+    if (!isPlainObj(data.session) || hasDangerousKey(data.session)) errors.push('bad-session');
+    else {
+      for (const qk of ['learnQueue', 'evolveQueue']) {
+        const q = data.session[qk];
+        if (q === undefined) continue;
+        if (!Array.isArray(q) || q.length > 24) { errors.push('bad-session-queue'); break; }
+        for (const e of q) {
+          if (!isPlainObj(e) || typeof e.monId !== 'string' || e.monId.length > 40) { errors.push('bad-session-queue'); break; }
+          if (qk === 'learnQueue' && (typeof e.moveId !== 'string' || !TABLES.moves.has(e.moveId))) { errors.push('bad-session-queue'); break; }
+        }
+        if (errors.length > 24) break;
+      }
     }
   }
 
