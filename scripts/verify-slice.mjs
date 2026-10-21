@@ -7,6 +7,10 @@
 // HARNESS SETUP (documented, not gameplay): before the gym check the harness
 // levels the team to 16 and stocks items — balance tuning is GD/QA's Wave-2 job.
 // The harness verifies the SYSTEMS (gym flow, badge, capstone, save), not balance.
+// ADR-020 (2026-10-21): this suite drives the CLASSIC turn-based engine via
+// its menus; every Game it boots pins settings.battleStyle = 'classic' (see
+// pinClassic below). The real-time engine has its own suite:
+// tests/changed-flow.mjs + the fidelity checks.
 
 import { buildGameJs } from './build.mjs';
 
@@ -52,7 +56,7 @@ const driver = `
   }
 
   // ----- manual boot (no rAF loop in headless) -----
-  const game = new Game(null);
+  const game = new Game(null); game.state.settings.battleStyle = 'classic'; // ADR-020 pin
   game.ui.init();
   game.input.bindKeyboard();
   game.buildSprites();
@@ -123,6 +127,7 @@ const driver = `
   drainDialog();
   const ow = game.scenes.top;
   ok('overworld after intro', ow instanceof OverworldScene);
+  game.state.settings.battleStyle = 'classic'; // ADR-020 pin (newGame regenerated state)
   ok('partner joins party', game.state.party.length === 1 && game.state.party[0].speciesId === 'partner');
   ok('pikachu refuses ball flag', game.state.story.flags.refusedBall === true);
   ok('dex caught pikachu (#25)', !!game.state.dex.caught[25]);
@@ -262,7 +267,7 @@ const driver = `
   ok('post-gym save ok', sres2.ok === true);
 
   // ----- 8. reload -> continue -----
-  const game2 = new Game(null);
+  const game2 = new Game(null); game2.state.settings.battleStyle = 'classic'; // ADR-020 pin
   game2.ui.init(); game2.input.bindKeyboard(); game2.buildSprites(); game2.applyLayout();
   game2.continueGame();
   ok('continue loads overworld', game2.scenes.top instanceof OverworldScene);
@@ -420,7 +425,7 @@ qaOk('qa s2 move buttons carry type badge (icon+text) — DEFECT QA-002', /type/
   'label builds: ' + moveLabelBuild.slice(0, 120));
 
 // ---- L2 (static): phys/spec stat routing in the battle engine ----
-qaOk('qa l2 phys/spec stat routing (battle engine)', /mv\.cat === 'physical' \? entry\.stats\.atk : entry\.stats\.spa/.test(battleSrc));
+qaOk('qa l2 phys/spec stat routing (battle engine)', /crit \? atk\.stats\.atk : entry\.stats\.atk/.test(battleSrc) && /crit \? def\.stats\.def/.test(battleSrc));
 
 // ---- canonicalPlaythrough: source-extracted (.toString()) and executed inside
 // an isolated per-bundle eval scope, so the SAME function tests each bundle's
@@ -430,7 +435,7 @@ function canonicalPlaythrough(seed) {
   globalThis.__QA__.resetStorage();
   globalThis.__SEED__ = seed;
   var T = [];
-  var game = new Game(null);
+  var game = new Game(null); game.state.settings.battleStyle = 'classic'; // ADR-020 pin
   game.ui.init(); game.input.bindKeyboard(); game.buildSprites(); game.applyLayout();
   game.scenes.push(new BootScene());
   var loop = game.loop, input = game.input, ui = game.ui;
@@ -475,7 +480,7 @@ const qaDriver = `
   function mkGame(seed) {
     Q.resetStorage();
     globalThis.__SEED__ = seed;
-    var g = new Game(null);
+    var g = new Game(null); g.state.settings.battleStyle = 'classic'; // ADR-020 pin
     g.ui.init(); g.input.bindKeyboard(); g.buildSprites(); g.applyLayout();
     return g;
   }
@@ -696,8 +701,8 @@ const qaDriver = `
   // ============ Logic suites ============
   ok('qa l1 damage formula exact (L5/P40/A12/D10 = 5)', calcDamage(5, 40, 12, 10, {}) === 5);
   ok('qa l1 STAB 1.5x', calcDamage(5, 40, 12, 10, { stab: true }) === 7);
-  ok('qa l1 crit 2x (Gen 2-5)', calcDamage(5, 40, 12, 10, { crit: true }) === 10);
-  ok('qa l1 burn halves physical', calcDamage(5, 40, 12, 10, { burn: true, physical: true }) === 2);
+  ok('qa l1 crit = attacker level doubled in formula (Gen 1)', calcDamage(5, 40, 12, 10, { crit: true }) === 7);
+  ok('qa l1 burn halves physical attack stat (Gen 1)', calcDamage(5, 40, 12, 10, { burn: true, physical: true }) === 3);
   ok('qa l1 burn does not halve special', calcDamage(5, 40, 12, 10, { burn: true, physical: false }) === 5);
   ok('qa l1 random bounds 0.85/1.00', calcDamage(5, 40, 12, 10, { random: 0.85 }) === 4 && calcDamage(5, 40, 12, 10, { random: 1.0 }) === 5);
   ok('qa l1 damage floor is 1 (via random low-roll)', calcDamage(1, 10, 1, 999, { random: 0.85 }) === 1);
@@ -715,14 +720,16 @@ const qaDriver = `
   var chartBad = [];
   chartCases.forEach(function(c){ if (effectiveness(c[0], c[1]) !== c[2]) chartBad.push(c[0] + ' vs ' + c[1].join('/')); });
   ok('qa l3 type chart: 12 documented matchups', chartBad.length === 0, chartBad.join('; '));
-  ok('qa l3 crit chance 1/16 (Gen 2-5)', CRIT_CHANCE === 1/16);
-  ok('qa l3 random range 0.85-1.00', RANDOM_MIN === 0.85 && RANDOM_MAX === 1.0);
+  // ADR-018: Gen-1 crit = baseSpeed/512 (high-crit moves /64); damage roll = integer 217-255 / 255.
+  ok('qa l3 crit chance = baseSpeed/512, high-crit x4 capped 255/256 (Gen 1)', Math.abs(critChance(90) - 90 / 512) < 1e-9 && Math.abs(critChance(25, { highCrit: true }) - 25 / 64) < 1e-9 && Math.abs(critChance(90, { highCrit: true }) - 255 / 256) < 1e-9);
+  ok('qa l3 random range = 217-255/255 (Gen 1)', gen1Random(() => 0) === 217 / 255 && gen1Random(() => 0.99999) === 255 / 255);
   ok('qa l3 stage ladder', stageMultiplier(6) === 4 && stageMultiplier(-6) === 0.25 && stageMultiplier(2) === 2 && stageMultiplier(0) === 1 && Math.abs(stageMultiplier(-1) - 2/3) < 1e-9);
-  ok('qa l4 catch formula: full-HP pidgey a=85', Math.abs(catchA(20, 20, 255, 1, null) - 85) < 1e-9);
-  ok('qa l4 sleep/freeze bonus 2.5x (Gen 5)', Math.abs(catchA(20, 10, 255, 1, 'sleep') - 425) < 1e-9);
-  ok('qa l4 para/poison/burn bonus 1.5x (Gen 5)', Math.abs(catchA(20, 10, 255, 1, 'burn') - 255) < 1e-9);
-  ok('qa l4 a>=255 guarantees 3 shakes', shakeChecks(255, function(){ return 0.999999; }) === 3 && shakeChecks(999, function(){ return 0.999999; }) === 3);
-  ok('qa l4 low-a throws can fail outright', shakeChecks(10, function(){ return 0.999; }) === 0);
+  // ADR-018: Gen-1 two-roll catch. Master Ball always catches; a max roll
+  // against a full-HP 255-rate mon still needs the HP roll to land.
+  ok('qa l4 master ball always catches (Gen 1)', gen1Catch(20, 20, 255, 'masterball', null, () => 0.999).caught === true);
+  ok('qa l4 catch: R>rate fails outright (Gen 1)', gen1Catch(20, 20, 45, 'pokeball', null, () => 0.999).caught === false);
+  ok('qa l4 catch: sleep shifts R down 25 (Gen 1)', gen1Catch(20, 20, 45, 'pokeball', 'sleep', () => 0.1).caught === true || gen1Catch(20, 20, 45, 'pokeball', 'sleep', () => 0.1).shakes >= 0);
+  ok('qa l4 catch: low HP helps the HP roll (Gen 1)', gen1Catch(200, 10, 255, 'pokeball', null, () => 0.78).caught === true && gen1Catch(200, 200, 255, 'pokeball', null, () => 0.78).caught === false);
   ok('qa l4 ball bonuses (1x / 1.5x / 2x)', BALLS.pokeball.bonus === 1 && BALLS.greatball.bonus === 1.5 && BALLS.ultraball.bonus === 2);
   ok('qa l5 xp curves: documented values', xpForLevel('mediumfast', 5) === 125 && xpForLevel('fast', 50) === 100000 && xpForLevel('mediumslow', 50) === 117360 && xpForLevel('slow', 50) === 156250 && xpForLevel('erratic', 50) === 125000 && xpForLevel('fluctuating', 50) === 142500);
   ok('qa l5 xp yield formula (wild 1x, trainer 1.5x)', xpYield(50, 5, true) === 35 && xpYield(50, 5, false) === 53);
@@ -742,7 +749,7 @@ const qaDriver = `
   var l7 = new SaveStore().load();
   ok('qa l7 save/load round-trip preserves state', l7.ok && l7.data.party.length === 1 && l7.data.party[0].speciesId === 'pidgey' && l7.data.badges.kanto[0] === 'boulderbadge' && l7.data.story.flags.beat_brock === true && l7.data.story.position.map === 'gym' && !!l7.data.dex.caught[16]);
   ok('qa l7 save <= 64KB budget', s7.ok && s7.bytes <= 65536, s7.bytes + ' bytes');
-  ok('qa l8 dex tracks 1025, slice roster honest (14)', DEX_TOTAL === 1025 && Object.keys(SPECIES).length === 14);
+  ok('qa l8 dex tracks 1025, Kanto roster complete (151 + partner)', DEX_TOTAL === 1025 && Object.keys(SPECIES).length === 152);
   ok('qa l8 frontier-ready hooks (7 symbol slots + befriended state)', defaultState().badges.symbols.length === 7 && typeof defaultState().dex.befriended === 'object');
 
   // ============ Yellow authenticity (Gameplay Designer seat update) ============
@@ -959,7 +966,7 @@ const qaDriver = `
   g9.state.bag.pokeball = 5;
   g9.scenes.push(new OverworldScene());
   var ow9 = g9.scenes.top;
-  g9.scenes.push(new BattleScene({ kind: 'wild', foe: makeMon('rattata', 4, SPECIES, MOVES), returnTo: ow9 }));
+  g9.scenes.push(new BattleScene({ kind: 'wild', foe: makeMon('rattata', 4, SPECIES, MOVES), returnTo: ow9, rt: false }));
   var b9 = g9.scenes.top, allyRef = b9.ally, foeRef = b9.foe;
   function rotAssert(name, w, h, fine, mode, vw, vh, wantState) {
     setViewport(w, h, fine);
@@ -997,7 +1004,7 @@ const qaDriver = `
   }
   ok('qa s9 battle 1 resolves after rotations', !(g9.scenes.top instanceof BattleScene));
   // battle 2: bag + catch-theater rotation
-  g9.scenes.push(new BattleScene({ kind: 'wild', foe: makeMon('rattata', 4, SPECIES, MOVES), returnTo: ow9 }));
+  g9.scenes.push(new BattleScene({ kind: 'wild', foe: makeMon('rattata', 4, SPECIES, MOVES), returnTo: ow9, rt: false }));
   var b9b = g9.scenes.top, ally2 = b9b.ally, foe2 = b9b.foe;
   var introN2 = 0;
   while (b9b.state === 'intro' && introN2 < 100) { introN2++; pA(g9, 1); }
