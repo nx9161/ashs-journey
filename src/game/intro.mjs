@@ -75,22 +75,35 @@ export class IntroScene {
     const g = this.game;
     const lines = INTRO_SCRIPT.starterMoment.map((l) => l.replace('{player}', this.name));
     g.ui.say(lines, () => {
-      // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
-      const pikachu = makeMon('partner', 5, SPECIES, MOVES);
-      g.state.party.push(pikachu);
-      const sp = SPECIES.partner;
-      dexRegister(g.state.dex, 'seen', sp.dexNo);
-      dexRegister(g.state.dex, 'caught', sp.dexNo);
-      g.state.story.flags.metPartner = true;
-      g.state.story.flags.refusedBall = true;
-      g.audio.playSfx('dex-register');
-      g.ui.toast(sp.name + ' joined your party!');
+      this.grantPartner();
       this.finishIntro();
     }, INTRO_SCRIPT.professor);
   }
 
+  // The partner grant, idempotent: party member + dex seen/caught + story
+  // flags. The watched flow reaches it via starterMoment(); finishIntro()
+  // backstops it so EVERY skip path (veteran offer, hold-START confirm,
+  // headless) converges on the same state. (UI v2.2 defect 4: skipping used
+  // to call finishIntro() alone — empty party, first wild battle soft-locked
+  // on a faded screen because no ally existed.)
+  grantPartner() {
+    const g = this.game;
+    if (g.state.party.some((m) => m && m.speciesId === 'partner')) return;
+    // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
+    const pikachu = makeMon('partner', 5, SPECIES, MOVES);
+    g.state.party.push(pikachu);
+    const sp = SPECIES.partner;
+    dexRegister(g.state.dex, 'seen', sp.dexNo);
+    dexRegister(g.state.dex, 'caught', sp.dexNo);
+    g.state.story.flags.metPartner = true;
+    g.state.story.flags.refusedBall = true;
+    g.audio.playSfx('dex-register');
+    g.ui.toast(sp.name + ' joined your party!');
+  }
+
   finishIntro() {
     const g = this.game;
+    this.grantPartner(); // skip paths land here directly — converge state first
     g.state.story.flags.introDone = true;
     g.state.story.chapter = 0; // D2: Act I opens on Chapter 1 (ADR-015 spine)
     g.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };

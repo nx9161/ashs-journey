@@ -275,6 +275,66 @@ const driver = `
     gC2.ui.menuOpen && gC2.ui.menu.kind === 'commands' &&
     gC2.ui.menu.items.map(function(i) { return i.label; }).join(',') === 'FIGHT,BAG,PARTY,RUN');
   // dex-dot positioning is asserted from the served CSS in the outer script.
+  // ============ F. skip-intro convergence (UI v2.2 defect 4) ============
+  // The parent's live pass found: skipping the intro left the party EMPTY
+  // and the first Route 1 encounter soft-locked on a faded screen. The skip
+  // paths (veteran offer / hold-START confirm / headless) must converge with
+  // the watched flow: partner granted, dex + flags initialized, first wild
+  // battle starts AND resolves.
+  function stepDir(g, dir) { g.input.inject(dir); tk(g, 9); g.input.release(dir); tk(g, 2); }
+  var gS = mkGame(909);
+  bootToOverworld(gS);
+  var watchedParty = gS.state.party.filter(function(m) { return m; });
+  ok('f0 watched flow grants exactly one partner',
+    watchedParty.length === 1 && watchedParty[0].speciesId === 'partner');
+  gS.newGame(); // store.exists() now true -> veteran; headless enter() skips straight to finishIntro()
+  tk(gS, 4);
+  ok('f1 skip path reaches the overworld', gS.scenes.top instanceof OverworldScene);
+  var skipParty = gS.state.party.filter(function(m) { return m; });
+  ok('f2 skip grants the partner (party is NOT empty)',
+    skipParty.length === 1 && skipParty[0].speciesId === 'partner' && skipParty[0].hp > 0,
+    'party=' + JSON.stringify(gS.state.party.map(function(m) { return m && m.speciesId; })));
+  ok('f3 skip registers dex seen+caught #25',
+    !!gS.state.dex.seen[25] && !!gS.state.dex.caught[25]);
+  ok('f4 skip sets intro flags (metPartner / refusedBall / introDone)',
+    !!gS.state.story.flags.metPartner && !!gS.state.story.flags.refusedBall && !!gS.state.story.flags.introDone);
+  // walk into Route 1 grass and bounce until the wild battle starts
+  gS.state.settings.battleStyle = 'classic'; // deterministic turn-based drive
+  gS.state.story.position = { map: 'route1', x: 2, y: 2, dir: 'down' };
+  gS.scenes.push(new OverworldScene());
+  for (var cd = 0; cd < 6; cd++) { pA(gS, 1); tk(gS, 10); } // dismiss chapter card
+  var guardW = 0;
+  while (!(gS.scenes.top instanceof BattleScene) && guardW < 300) {
+    guardW++;
+    stepDir(gS, 'up');
+    if (gS.scenes.top instanceof BattleScene) break;
+    stepDir(gS, 'down');
+  }
+  ok('f5 first post-skip Route 1 encounter starts (no soft-lock)', gS.scenes.top instanceof BattleScene);
+  // drive the battle out by playing it: the first wild battle is the guided
+  // tutorial (RUN disabled by design), so FIGHT -> first move until it ends
+  var guardB = 0;
+  while ((gS.scenes.top instanceof BattleScene) && guardB < 300) {
+    guardB++;
+    if (gS.ui.dialogueOpen) { pA(gS, 1); continue; }
+    if (gS.ui.menuOpen) {
+      var bm = gS.ui.menu;
+      if (bm.kind === 'commands') choose(gS, 0); // FIGHT
+      else if (bm.title === 'Choose a move') choose(gS, 0); // first move
+      else if (bm.title === 'Choose next Pokemon' || bm.title === 'Party') choose(gS, 0);
+      else choose(gS, bm.items.length - 1);
+    } else { pA(gS, 1); tk(gS, 3); }
+  }
+  ok('f6 post-skip battle resolves back to the overworld', gS.scenes.top instanceof OverworldScene);
+  // belt-and-braces: with NO living ally, grass steps must never start a battle
+  var gG = mkGame(910);
+  gG.state.story.position = { map: 'route1', x: 2, y: 2, dir: 'down' };
+  gG.scenes.push(new OverworldScene());
+  var guardG = 0;
+  while (guardG < 80) { guardG++; stepDir(gG, 'up'); stepDir(gG, 'down'); }
+  ok('f7 empty-party grass walk starts no encounter (guard holds)',
+    gG.scenes.top instanceof OverworldScene && gG.state.party.filter(function(m) { return m; }).length === 0);
+
   globalThis.__QF__ = Q;
 })();
 `;

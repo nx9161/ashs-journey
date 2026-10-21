@@ -49,13 +49,19 @@ const SRC = path.join(ROOT, 'src');
 // README.md for provenance + subset ranges) and are embedded from disk at
 // build time, byte-identical in all three targets. Galmuri + DotGothic16
 // are SIL OFL 1.1 (THIRD-PARTY-NOTICES.md; OFL text in assets/fonts/).
+// UI v2.2 (defect 1): the 400 face is Galmuri11 Regular — the true sibling
+// of the Galmuri11 Bold headings. Galmuri14 (the v2/v2.1 400 face) loads
+// fine but its hairline outline construction renders as a wispy, unrelated
+// face next to the Bold, which is how "fonts verified loaded" shipped with
+// body text visibly NOT in the family. One family, two weights, both
+// bitmap-sturdy — the DP/Pt single-family look.
 function fontFaceCss() {
   const dir = path.join(ROOT, 'assets', 'fonts');
   const b64 = (f) => fs.readFileSync(path.join(dir, f)).toString('base64');
   const face = (family, weight, file) =>
     "@font-face{font-family:'" + family + "';src:url(data:font/woff2;base64," + b64(file) +
     ") format('woff2');font-weight:" + weight + ";font-style:normal;font-display:swap}";
-  return face('PtGalmuri', 400, 'Galmuri14.woff2')
+  return face('PtGalmuri', 400, 'Galmuri11.woff2')
     + face('PtGalmuri', 700, 'Galmuri11-Bold.woff2')
     + face('PtGothic', 400, 'DotGothic16.woff2');
 }
@@ -212,7 +218,7 @@ export function validateData() {
 }
 
 const SHELL_CSS = `
-:root{--ink:#232838;--paper:#f6f8fc;--gold:#e8b832;--frame:#2b3040;--frame2:#8d9bbf;--navy:#2e4a8f;--sky:#bcd2f5;--red:#e03c31;--sys1:#4a7dd0;--sys2:#2a4d9c;--lcd:#a9c08a;--lcdink:#26331f;--font:'PtGalmuri','PtGothic',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
+:root{--ink:#232838;--paper:#f6f8fc;--gold:#e8b832;--frame:#2b3040;--frame2:#8d9bbf;--navy:#2e4a8f;--sky:#bcd2f5;--red:#e03c31;--sys1:#4a7dd0;--sys2:#2a4d9c;--lcd:#a9c08a;--lcdink:#26331f;--font:'PtGalmuri','PtGothic',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--rivets:radial-gradient(circle at 9px 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at 9px calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px)}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#070a16;touch-action:none;overscroll-behavior:none}
 body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
@@ -229,14 +235,14 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
    silver-blue inner line (via inset outline), corner rivets in the frame
    tone. The one house drop shadow is unchanged (QA gate: exactly one
    box-shadow style bundle-wide, so depth never comes from shadows). */
-.dialogue{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;min-height:96px;background-color:var(--paper);background-image:radial-gradient(circle at 9px 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at 9px calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;padding:14px 16px 20px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.dialogue{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;min-height:96px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:14px 16px 20px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .dlg-name{display:block;font-size:15px;font-weight:bold;letter-spacing:.5px;color:var(--navy);margin-bottom:2px}
 .dlg-text{font-size:16px;line-height:1.55;color:var(--ink);min-height:64px;white-space:pre-wrap}
 .dlg-hint{position:absolute;right:12px;bottom:4px;color:var(--red);font-weight:bold;animation:blink 1s infinite;font-size:14px}
 @keyframes blink{50%{opacity:0}}
 /* menus — Platinum windows: light interior, silver-blue title band, pale
    blue selection with a navy inset ring and a red cursor glyph. */
-.menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:min(240px,94%);max-width:94%;max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:min(240px,94%);max-width:94%;max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .menu-title{background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
 .menu-list{padding:6px}
 .menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #ccd6ea;font:inherit;font-size:15px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:4px;min-height:48px;cursor:pointer}
@@ -273,7 +279,7 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .menu.pcbox .menu-row.wide{grid-column:1/-1;flex-direction:row}
 @media (max-width:560px){.menu.pcbox .menu-list{grid-template-columns:repeat(2,1fr)}}
 /* summary panel (Platinum tabbed summary: INFO / STATUS / MOVES) */
-.sumpanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94%);max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26}
+.sumpanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94%);max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26}
 .sumtabs{display:flex;gap:6px;padding:10px 10px 0}
 .sumtab{flex:1;font-family:inherit;font-size:14px;font-weight:bold;letter-spacing:1px;padding:10px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);border:2px solid var(--frame);border-radius:6px;cursor:pointer}
 .sumtab.sel{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff}
@@ -291,7 +297,7 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .sumclose{width:100%;font-family:inherit;font-size:15px;font-weight:bold;padding:12px;min-height:48px;margin-top:8px;background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);border:2px solid var(--frame);border-radius:6px;cursor:pointer}
 /* toasts — Platinum mini-frames; HUD toasts in system blue */
 .toasts{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 8px;pointer-events:none}
-.toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:14px;line-height:1.4;padding:10px 16px;border-radius:6px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:14px;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .hudtoast{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-weight:bold}
 /* controls — emulator pad in deep navy/silver to sit under the Pt chrome */
 .controls{position:absolute;inset:0;pointer-events:none}
@@ -307,30 +313,49 @@ body.flip .ab{right:auto;left:16px}
 .abtn:active{background:#c03028}
 .sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;pointer-events:auto}
 .sysbtn{background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:14px;font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
-/* battle commands — Platinum touch screen: four big framed buttons,
-   FIGHT red / BAG amber / POKEMON green / RUN blue, white bold labels */
-.cmdpanel{position:absolute;left:8px;bottom:8px;right:8px;display:grid;grid-template-columns:1fr 1fr;gap:10px;pointer-events:auto}
-.cmdf{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:88px;min-height:64px;color:#fff;border:2px solid #232838;border-bottom:5px solid #232838;border-radius:8px;font-family:var(--font);font-size:15px;font-weight:bold;cursor:pointer;touch-action:none}
-.cmdf-fight{background:linear-gradient(#f0685c,#c93327)}
-.cmdf-bag{background:linear-gradient(#f5b95c,#dd8a26)}
-.cmdf-party{background:linear-gradient(#6cc46a,#3d9240)}
-.cmdf-run{background:linear-gradient(#6f9fe8,#3863b4)}
-.cmdf.cursor{filter:brightness(1.16);outline:3px solid #fff;outline-offset:-3px}
-.cmdf.disabled{filter:grayscale(.75) brightness(.8)}
-.cmdf.dimmed{filter:brightness(.72) saturate(.65)}
+/* battle commands — UI v2.2 (defect 3): Platinum's touch-screen layout as a
+   framed window in the message-box zone (bottom strip, where the canvas
+   message box lives), NOT four free-floating gradient bars. Each command is
+   a framed Platinum button: plate-gradient interior, navy frame, a colored
+   command band at the left in the DS command colors, ink label. */
+.cmdpanel{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:7px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.cmdf{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:6px 10px 6px 18px;background:linear-gradient(#fdfdff,#dfe6f2);color:var(--ink);border:2px solid var(--frame);border-radius:3px;font-family:var(--font);font-size:15px;font-weight:bold;letter-spacing:1px;cursor:pointer;touch-action:none}
+.cmdf::before{content:'';position:absolute;left:0;top:0;bottom:0;width:9px;background:var(--cmdcol,#8d9bbf);border-right:2px solid var(--frame)}
+.cmdf-fight{--cmdcol:#c93327}
+.cmdf-bag{--cmdcol:#dd8a26}
+.cmdf-party{--cmdcol:#3d9240}
+.cmdf-run{--cmdcol:#3863b4}
+.cmdf.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-4px}
+.cmdf.disabled{background:#c9d2e4;color:#6a7799}
+.cmdf.dimmed{background:#e8edf6;color:#4a5878}
 .cmdf.tut-focus{outline:3px solid #58c94f;outline-offset:-3px;animation:cmdfocus 1s infinite}
 @keyframes cmdfocus{50%{outline-color:#e8b832}}
 .cmdicon{width:24px;height:24px;image-rendering:pixelated}
 .cmdlabel{line-height:1}
-/* move menu — Platinum move buttons: framed white cells, type pill, PP line */
-.menugrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px}
-.menugrid .menu-row{flex-direction:column;align-items:flex-start;min-height:72px;background:#fff;border:2px solid #ccd6ea;border-radius:6px;position:relative}
-.menugrid .menu-row.cursor{border-color:var(--navy);background:var(--sky)}
-.mvcell{display:flex;flex-direction:column;gap:2px;width:100%}
-.mvname{font-weight:bold;font-size:14px}
-.mvpp{font-size:14px;color:#4a5878}
-.mvpow{font-size:14px;color:#6a7799}
-.tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:6px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
+@media (max-width:560px){.cmdf{min-height:34px;font-size:14px;padding-left:16px}.cmdicon{width:20px;height:20px}.cmdpanel{gap:4px;padding:5px}}
+/* battle menus — UI v2.2 (defect 3): in battle, list menus (moves, bag,
+   ball picker) live in the message-box zone as a Platinum window, the way
+   Platinum's touch screen hosts them — never a centered floating card over
+   the databoxes. The window is bottom-anchored like .dialogue/.cmdpanel,
+   capped so it cannot reach the ally databox (ally plate bottom edge sits
+   54/192 logical px above the frame bottom; 26% cap keeps clear air). */
+.menu.battlewin{left:2.5%;right:2.5%;top:auto;bottom:2.5%;transform:none;width:auto;min-width:0;max-height:25%;background-image:var(--rivets)}
+.menu.battlewin .menu-title{display:none}
+.menu.battlewin .menu-list{max-height:100%}
+/* move menu — Platinum move buttons: framed plate cells in a 2x2 grid,
+   name + type pill on the top line, PP + power/acc on the second line */
+.menugrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px}
+.menugrid .menu-row{flex-direction:column;align-items:stretch;min-height:44px;background:linear-gradient(#fdfdff,#eef2fa);border:2px solid var(--frame);border-radius:3px;position:relative;padding:4px 8px}
+.menugrid .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--frame)}
+.menugrid .menu-row.wide{grid-column:1/-1;min-height:28px;flex-direction:row;align-items:center;justify-content:center}
+.menugrid .menu-row .cur{display:none}
+.mvcell{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:8px;width:100%;line-height:1.15}
+.mvname{font-weight:bold;font-size:14px;grid-column:1}
+.mvpp{font-size:14px;color:#4a5878;grid-column:1}
+.mvpow{font-size:14px;color:#6a7799;grid-column:2;justify-self:end}
+.mvcell .tpill{grid-column:2;grid-row:1;justify-self:end;margin:0}
+@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.menugrid .menu-row.wide{display:none}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
+.tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:3px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
 .tpill b{font-weight:bold}
 .menu-row.zeropp{color:#a0a0a0}
 .menu-row.zeropp::after{content:'';position:absolute;left:6px;right:6px;top:50%;height:3px;background:#c03028;transform:rotate(-8deg);border-radius:2px}
@@ -338,7 +363,7 @@ body.flip .ab{right:auto;left:16px}
 /* name entry — Platinum frames, LCD display inset, key-depth borders */
 .nkbover{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:auto;background:rgba(7,10,22,.5);z-index:30}
 @media(min-width:700px){.nkbover{align-items:center}}
-.namekb{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;padding:14px;width:100%;max-width:480px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.namekb{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:14px;width:100%;max-width:480px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .nkb-title{font-size:14px;font-weight:bold;color:var(--ink);margin-bottom:8px}
 .nkb-display{font-size:20px;font-weight:bold;color:var(--lcdink);background:#e8efd9;border:2px solid var(--frame);border-radius:6px;padding:8px 10px;margin-bottom:10px;min-height:44px;letter-spacing:2px}
 .nkb-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
@@ -351,7 +376,7 @@ body.flip .ab{right:auto;left:16px}
 @keyframes nkbshake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
 /* Trainer ID Terminal — Platinum frame card, system-blue head */
 .loginover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:auto;background:rgba(7,10,22,.82);z-index:40}
-.login{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;padding:0;width:min(420px,92vw);box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
+.login{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(420px,92vw);box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
 .login-head{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:15px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
 .login-tabs{display:flex}
 .logintab{flex:1;font-family:inherit;font-size:14px;font-weight:bold;padding:12px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:#4a5878;border:0;border-bottom:3px solid transparent;cursor:pointer}
@@ -371,21 +396,23 @@ body.flip .ab{right:auto;left:16px}
    objective frame, and the dex count as a Poketch-style LCD readout. */
 .hudchips{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:6px;z-index:14;pointer-events:none;max-width:calc(100% - 296px)}
 .hudchip{pointer-events:none}
-.locchip{align-self:flex-start;max-width:100%;background:var(--paper);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:.4px;padding:6px 10px;border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-4px;border-radius:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.objchip{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-4px;border-radius:6px;padding:7px 10px;max-width:min(300px,72%)}
+.locchip{align-self:flex-start;max-width:100%;background-color:var(--paper);background-image:var(--rivets);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:.4px;padding:6px 12px;border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.objchip{background-color:var(--paper);background-image:var(--rivets);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:7px 12px;max-width:min(300px,72%)}
 .obj-kicker{display:block;font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--navy);margin-bottom:2px}
 .obj-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:1.4}
-.dexchip{align-self:flex-start;background:var(--lcd);color:var(--lcdink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:6px 10px;border:2px solid #46543a;border-radius:4px;white-space:nowrap}
+.dexchip{align-self:flex-start;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px}
+.dexchip-text{display:block;background:var(--lcd);color:var(--lcdink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:2px 8px;border:2px solid #46543a;border-radius:2px;white-space:nowrap}
 .nohud .hudchips{display:none}
 body.menu-full .hudchips,body.menu-full .hudstrip,body.menu-full .moodpip,body.menu-full .syncdot{display:none}
 .inbattle .hudchips{display:none}
 @media (max-width:560px){.hudchips{top:84px;max-width:calc(100% - 72px)}.objchip{max-width:min(300px,calc(100% - 72px))}}
 /* HUD quick-strip — one light Platinum frame rail with the 4 buttons */
-.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:4px;pointer-events:auto;z-index:15;background:rgba(246,248,252,.96);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;padding:4px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:0;pointer-events:auto;z-index:15;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px 6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .nohud .hudstrip{display:none}
 .inbattle .hudstrip{display:none}
 .inbattle .hintcard{display:none}
-.hudbtn{position:relative;width:64px;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-radius:6px;cursor:pointer;touch-action:none;font-family:var(--font)}
+.hudbtn{position:relative;width:64px;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-left:1px solid #ccd6ea;border-radius:0;cursor:pointer;touch-action:none;font-family:var(--font)}
+.hudbtn:first-child{border-left:0}
 .hudbtn:active{background:var(--sky)}
 .hudicon{width:24px;height:24px;image-rendering:pixelated}
 .hudlabel{font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--ink);font-family:var(--font)}
@@ -403,12 +430,14 @@ body.landscape .moodpip{display:none}
 .hudstrip{transform:scale(var(--hudscale,1));transform-origin:top right}
 body.landscape .hudstrip{transform:translateY(-50%) scale(var(--hudscale,1))}
 body.landscape .hudstrip{top:50%;flex-direction:column}
+body.landscape .hudbtn{border-left:0;border-top:1px solid #ccd6ea}
+body.landscape .hudbtn:first-child{border-top:0}
 /* desktop keyboard-hint card — Platinum mini-frame */
-.hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background:var(--paper);border:2px solid var(--frame);border-radius:6px;color:var(--ink);font-size:14px;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-size:14px;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .hintcard-x{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;border:2px solid var(--frame);border-radius:6px;font-size:14px;font-weight:bold;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer;white-space:nowrap}
 body.desktop .controls{display:none}
 /* chapter title card — Platinum frame, navy kicker, red continue hint */
-.chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92%);background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;box-shadow:0 4px 18px rgba(0,0,0,.35);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
+.chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92%);background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;box-shadow:0 4px 18px rgba(0,0,0,.35);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
 .cc-kicker{font-size:14px;font-weight:bold;letter-spacing:3px;color:var(--navy);margin-bottom:8px}
 .cc-title{font-size:22px;font-weight:bold;color:var(--ink);margin-bottom:8px;line-height:1.2}
 .cc-arc{font-size:15px;color:#3c4a6a;margin-bottom:6px;line-height:1.4}
@@ -418,7 +447,7 @@ body.desktop.showtouch .controls{display:block}
 @media (pointer:coarse){body.desktop .controls{display:block}}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
    Structure and behavior untouched; presentation only. */
-.authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:6px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
+.authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
 .authhead{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
 .authsub{font-size:14px;color:#3c4a6a;padding:8px 14px 0;line-height:1.45}
 .authtabs{display:flex;border-bottom:2px solid var(--frame)}
@@ -455,7 +484,7 @@ body.desktop.showtouch .controls{display:block}
 .confcol{background:#fff;border:2px solid var(--frame);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink)}
 .confcol h4{font-size:15px;margin:0}
 .confcol .pick{margin-top:4px}
-.syncdot{position:absolute;top:34px;left:8px;z-index:15;display:flex;align-items:center;gap:6px;background:var(--paper);border:2px solid var(--frame);border-radius:6px;color:var(--ink);font-size:14px;font-family:inherit;padding:6px 10px;pointer-events:none}
+.syncdot{position:absolute;top:34px;left:8px;z-index:15;display:flex;align-items:center;gap:6px;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-4px;border-radius:3px;color:var(--ink);font-size:14px;font-family:inherit;padding:6px 10px;pointer-events:none}
 .syncdot .sdot{width:10px;height:10px;border-radius:50%;background:#2FA84F}
 .syncdot.pending .sdot{background:#D99A26}
 .syncdot.offline .sdot{background:#8a93a8}

@@ -15013,7 +15013,10 @@ class UI {
     }
     const pat = CMD_PIX[value];
     if (pat) {
-      x.fillStyle = '#ffe9a8';
+      // UI v2.2: command icons are ink on the light Platinum plate interior
+      // (the v2 pale-gold '#ffe9a8' was drawn for the old dark gradient bars
+      // and vanished on the framed buttons).
+      x.fillStyle = '#232838';
       for (let r = 0; r < pat.length; r++) {
         for (let q = 0; q < pat[r].length; q++) {
           if (pat[r][q] === '1') x.fillRect(q + 2, r + 2, 1, 1);
@@ -15170,7 +15173,11 @@ class UI {
       document.body.classList.toggle('menu-full', /(plate-full|pcbox)/.test(m.menuClass || ''));
     }
     this.menuTitle.textContent = m.title || '';
-    this.menuTitle.style.display = m.title ? 'block' : 'none';
+    // UI v2.2: battlewin menus (moves/bag/balls in battle) carry no title
+    // band — Platinum's battle windows are titleless, and the band would
+    // push the window up into the ally databox. (Inline style here beats
+    // the stylesheet, so the exception must live in this line.)
+    this.menuTitle.style.display = (m.title && m.menuClass !== 'battlewin') ? 'block' : 'none';
     this.menuList.innerHTML = '';
     this.menuList.className = 'menu-list' + (m.grid ? ' menugrid' : '');
     m.items.forEach((it, i) => {
@@ -15850,7 +15857,12 @@ class UI {
     if (this.headless) { this.inBattle = !!on; return; }
     this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
     this.dpadEl.classList.toggle('hidden', on);
-    this.cmdEl.classList.toggle('hidden', !on);
+    // UI v2.2: do NOT unhide the command panel here — renderCommands() owns
+    // its visibility (it unhides only when real commands populate it). The
+    // v2.1 toggle was invisible then (transparent zero-height shell); with
+    // the framed Platinum window an empty unhidden panel paints as a stray
+    // window sliver under the message box during battle messages.
+    this.cmdEl.classList.add('hidden');
     if (this.root) this.root.classList.toggle('inbattle', on); // hides the HUD strip in battle
     if (this._moodPip) this._moodPip.classList.toggle('hidden', on || !this._moodWanted);
     if (!on) this.hideCommands();
@@ -16439,22 +16451,35 @@ class IntroScene {
     const g = this.game;
     const lines = INTRO_SCRIPT.starterMoment.map((l) => l.replace('{player}', this.name));
     g.ui.say(lines, () => {
-      // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
-      const pikachu = makeMon('partner', 5, SPECIES, MOVES);
-      g.state.party.push(pikachu);
-      const sp = SPECIES.partner;
-      dexRegister(g.state.dex, 'seen', sp.dexNo);
-      dexRegister(g.state.dex, 'caught', sp.dexNo);
-      g.state.story.flags.metPartner = true;
-      g.state.story.flags.refusedBall = true;
-      g.audio.playSfx('dex-register');
-      g.ui.toast(sp.name + ' joined your party!');
+      this.grantPartner();
       this.finishIntro();
     }, INTRO_SCRIPT.professor);
   }
 
+  // The partner grant, idempotent: party member + dex seen/caught + story
+  // flags. The watched flow reaches it via starterMoment(); finishIntro()
+  // backstops it so EVERY skip path (veteran offer, hold-START confirm,
+  // headless) converges on the same state. (UI v2.2 defect 4: skipping used
+  // to call finishIntro() alone — empty party, first wild battle soft-locked
+  // on a faded screen because no ally existed.)
+  grantPartner() {
+    const g = this.game;
+    if (g.state.party.some((m) => m && m.speciesId === 'partner')) return;
+    // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
+    const pikachu = makeMon('partner', 5, SPECIES, MOVES);
+    g.state.party.push(pikachu);
+    const sp = SPECIES.partner;
+    dexRegister(g.state.dex, 'seen', sp.dexNo);
+    dexRegister(g.state.dex, 'caught', sp.dexNo);
+    g.state.story.flags.metPartner = true;
+    g.state.story.flags.refusedBall = true;
+    g.audio.playSfx('dex-register');
+    g.ui.toast(sp.name + ' joined your party!');
+  }
+
   finishIntro() {
     const g = this.game;
+    this.grantPartner(); // skip paths land here directly — converge state first
     g.state.story.flags.introDone = true;
     g.state.story.chapter = 0; // D2: Act I opens on Chapter 1 (ADR-015 spine)
     g.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };
@@ -16860,7 +16885,7 @@ class BattleScene {
           value: i, disabled: m.pp <= 0 || disabledMove, zeroPp: m.pp <= 0, move: m,
         };
       });
-      items.push({ label: 'Back', value: -1 });
+      items.push({ label: 'Back', value: -1, wide: true });
       this.state = 'moves';
       const rowHtml = (it) => {
         if (it.value === -1) return '<span>' + it.label + '</span>';
@@ -16876,7 +16901,7 @@ class BattleScene {
         this.playerAction = { type: 'move', idx: v };
         this.foeAction = this.chooseFoeAction();
         this.beginTurn();
-      }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx, items.length - 1), rowHtml });
+      }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx, items.length - 1), rowHtml, menuClass: 'battlewin' });
     } else if (value === 'bag') {
       this.state = 'bag';
       const items = [];
@@ -16895,7 +16920,7 @@ class BattleScene {
         this.playerAction = { type: 'ball', ball: v };
         this.foeAction = null; // throwing a ball: foe still acts? DS: ball replaces your move; foe moves first if faster. Simplify: foe acts after throw fails only.
         this.beginCatch(v);
-      }, { focusValue: focusBall ? 'pokeball' : null });
+      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin' });
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {
@@ -18617,7 +18642,7 @@ Object.assign(BattleScene.prototype, {
     items.push({ label: 'Back', value: null });
     g.ui.showMenu('Throw which ball? (A)', items, (v) => {
       if (v) this.rtThrowBall(v);
-    });
+    }, { menuClass: 'battlewin' });
   },
 
   rtThrowBall(ballId) {
@@ -18979,8 +19004,12 @@ class OverworldScene {
     // Systems layer: events, safari steps, poison, water/cave encounters.
     if (this.sysOnStep && this.sysOnStep(x, y)) return;
     // Tall grass encounter check (anti-frustration: force after 20 silent steps)
+    // UI v2.2 defect 4 guard: no living ally -> no encounter, ever (a battle
+    // with no active mon soft-locks; the intro grant makes this unreachable
+    // in a converged state, this keeps legacy/edge states safe).
     const t = this.tileAt(x, y);
-    if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters) {
+    if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters
+      && g.state.party.some((m) => m && m.hp > 0)) {
       // GD balance: the FIRST grass step on Route 1 is a scripted tutorial
       // encounter (Lv 3 Rattata), not a random roll — the <3min first-catch
       // gate is a certainty that teaches, never a gamble.
@@ -19539,6 +19568,8 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     const enc = this.map.encounters;
     if (!enc || g.state.story.flags.noEncounters) return false;
+    // UI v2.2 defect 4 guard: same no-living-ally rule as the grass branch.
+    if (!g.state.party.some((m) => m && m.hp > 0)) return false;
     const saf = g.state.session.safari;
     let table = null, rate = 0;
     if (saf && this.mapId === 'safari' && t === ',') { table = enc.table; rate = enc.rate; }

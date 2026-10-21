@@ -110,6 +110,8 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     const enc = this.map.encounters;
     if (!enc || g.state.story.flags.noEncounters) return false;
+    // UI v2.2 defect 4 guard: same no-living-ally rule as the grass branch.
+    if (!g.state.party.some((m) => m && m.hp > 0)) return false;
     const saf = g.state.session.safari;
     let table = null, rate = 0;
     if (saf && this.mapId === 'safari' && t === ',') { table = enc.table; rate = enc.rate; }

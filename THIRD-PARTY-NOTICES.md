@@ -8,7 +8,7 @@ CDN fetches, no libraries.
 
 **Fonts (UI v2, self-hosted — no runtime fetches):**
 
-- **Galmuri** (Galmuri14 + Galmuri11 Bold, Latin/symbol subsets) — Copyright
+- **Galmuri** (Galmuri11 + Galmuri11 Bold, Latin/symbol subsets) — Copyright
   © 2019–2025 Lee Minseo (quiple), https://github.com/quiple/galmuri —
   licensed under the **SIL Open Font License 1.1**. Galmuri is original work
   inspired by Nintendo DS-era bitmap font design; it has no Nintendo

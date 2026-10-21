@@ -280,7 +280,7 @@ export class BattleScene {
           value: i, disabled: m.pp <= 0 || disabledMove, zeroPp: m.pp <= 0, move: m,
         };
       });
-      items.push({ label: 'Back', value: -1 });
+      items.push({ label: 'Back', value: -1, wide: true });
       this.state = 'moves';
       const rowHtml = (it) => {
         if (it.value === -1) return '<span>' + it.label + '</span>';
@@ -296,7 +296,7 @@ export class BattleScene {
         this.playerAction = { type: 'move', idx: v };
         this.foeAction = this.chooseFoeAction();
         this.beginTurn();
-      }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx, items.length - 1), rowHtml });
+      }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx, items.length - 1), rowHtml, menuClass: 'battlewin' });
     } else if (value === 'bag') {
       this.state = 'bag';
       const items = [];
@@ -315,7 +315,7 @@ export class BattleScene {
         this.playerAction = { type: 'ball', ball: v };
         this.foeAction = null; // throwing a ball: foe still acts? DS: ball replaces your move; foe moves first if faster. Simplify: foe acts after throw fails only.
         this.beginCatch(v);
-      }, { focusValue: focusBall ? 'pokeball' : null });
+      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin' });
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {

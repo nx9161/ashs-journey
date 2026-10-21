@@ -192,8 +192,12 @@ export class OverworldScene {
     // Systems layer: events, safari steps, poison, water/cave encounters.
     if (this.sysOnStep && this.sysOnStep(x, y)) return;
     // Tall grass encounter check (anti-frustration: force after 20 silent steps)
+    // UI v2.2 defect 4 guard: no living ally -> no encounter, ever (a battle
+    // with no active mon soft-locks; the intro grant makes this unreachable
+    // in a converged state, this keeps legacy/edge states safe).
     const t = this.tileAt(x, y);
-    if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters) {
+    if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters
+      && g.state.party.some((m) => m && m.hp > 0)) {
       // GD balance: the FIRST grass step on Route 1 is a scripted tutorial
       // encounter (Lv 3 Rattata), not a random roll — the <3min first-catch
       // gate is a certainty that teaches, never a gamble.

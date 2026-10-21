@@ -469,7 +469,7 @@ Object.assign(BattleScene.prototype, {
     items.push({ label: 'Back', value: null });
     g.ui.showMenu('Throw which ball? (A)', items, (v) => {
       if (v) this.rtThrowBall(v);
-    });
+    }, { menuClass: 'battlewin' });
   },
 
   rtThrowBall(ballId) {

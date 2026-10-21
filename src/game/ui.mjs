@@ -218,7 +218,10 @@ export class UI {
     }
     const pat = CMD_PIX[value];
     if (pat) {
-      x.fillStyle = '#ffe9a8';
+      // UI v2.2: command icons are ink on the light Platinum plate interior
+      // (the v2 pale-gold '#ffe9a8' was drawn for the old dark gradient bars
+      // and vanished on the framed buttons).
+      x.fillStyle = '#232838';
       for (let r = 0; r < pat.length; r++) {
         for (let q = 0; q < pat[r].length; q++) {
           if (pat[r][q] === '1') x.fillRect(q + 2, r + 2, 1, 1);
@@ -375,7 +378,11 @@ export class UI {
       document.body.classList.toggle('menu-full', /(plate-full|pcbox)/.test(m.menuClass || ''));
     }
     this.menuTitle.textContent = m.title || '';
-    this.menuTitle.style.display = m.title ? 'block' : 'none';
+    // UI v2.2: battlewin menus (moves/bag/balls in battle) carry no title
+    // band — Platinum's battle windows are titleless, and the band would
+    // push the window up into the ally databox. (Inline style here beats
+    // the stylesheet, so the exception must live in this line.)
+    this.menuTitle.style.display = (m.title && m.menuClass !== 'battlewin') ? 'block' : 'none';
     this.menuList.innerHTML = '';
     this.menuList.className = 'menu-list' + (m.grid ? ' menugrid' : '');
     m.items.forEach((it, i) => {
@@ -1055,7 +1062,12 @@ export class UI {
     if (this.headless) { this.inBattle = !!on; return; }
     this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
     this.dpadEl.classList.toggle('hidden', on);
-    this.cmdEl.classList.toggle('hidden', !on);
+    // UI v2.2: do NOT unhide the command panel here — renderCommands() owns
+    // its visibility (it unhides only when real commands populate it). The
+    // v2.1 toggle was invisible then (transparent zero-height shell); with
+    // the framed Platinum window an empty unhidden panel paints as a stray
+    // window sliver under the message box during battle messages.
+    this.cmdEl.classList.add('hidden');
     if (this.root) this.root.classList.toggle('inbattle', on); // hides the HUD strip in battle
     if (this._moodPip) this._moodPip.classList.toggle('hidden', on || !this._moodWanted);
     if (!on) this.hideCommands();
