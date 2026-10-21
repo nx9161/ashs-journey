@@ -1,0 +1,44 @@
+# Charizard battle sprite, front 32x32. Original design; winged dragon, tail flame.
+PIX charizard-front 32 32
+................................
+................................
+................................
+................................
+................................
+............O.......O...........
+...O........O.......O........O..
+...O........O.......O........O..
+...OO.......OO..O..OO.......OO..
+...ONO......OBOOBOOBO......ONO..
+...OMNO.....OBBBBBBBO.....ONMO..
+...ONMO.....OBBBBBBBO.....OMNO..
+...ONMMO...OBEEBBBEEBO...OMMNO..
+...ONMMMO...OBBBBBBBO...OMMMNO..
+...ONMMMMO..OBBBBBBBO..OMMMMNO..
+...ONMMMOO...OWWWWWO...OOMMMNO..
+...ONMMO.....OWBBBWO.....OMMNO..
+...ONMO....OOBBBCBBBOO....OMNO..
+...ONO....OBBBCCCCCBBBO....ONO..
+...OO....OBBBCCCCCCCBBBO....OO..
+...O...OO.OBBCCCCCCCBBO.OO...O..
+......O..OBBBCCCCCCCBBBO..O.....
+.....O....OBCCCCCCCCCBO....OO...
+..........OBBCCCCCCCBBO....OYO..
+..........OBBCCCCCCCBBBO...OFO..
+...........OBCCCCCCCBBBBOOOFFFO.
+............OBBBCBBBBOBBBBBFFO..
+............OOOBOOOOO.OOOBBFFO..
+............OOOO.OOOO....OOOO...
+................................
+................................
+................................
+PAL
+O #4a2410 outline
+B #f08a3a body-orange
+C #f8e0a0 belly
+N #e86a3a wing
+M #7ac8b8 wing-membrane
+F #e83a2a flame-red
+Y #f8c838 flame-core
+E #1c1a22 eye
+W #f8f4e8 white

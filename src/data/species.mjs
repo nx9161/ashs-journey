@@ -111,3 +111,23 @@ export const SPECIES_LIST = Object.keys(SPECIES);
 // Dex tracking: 1025 species tracked honestly; playable = slice roster.
 // Undiscovered species render as "???" (gameux OQ recommendation).
 export const DEX_TOTAL = 1025;
+
+// Evolution completion (fidelity audit, ADR-019): the slice roster shipped
+// without evolution data; the chains complete here at canonical levels.
+const BASE_EVOS = {
+  bulbasaur: { to: 'ivysaur', method: 'level', level: 16 },
+  charmander: { to: 'charmeleon', method: 'level', level: 16 },
+  squirtle: { to: 'wartortle', method: 'level', level: 16 },
+  pidgey: { to: 'pidgeotto', method: 'level', level: 18 },
+  rattata: { to: 'raticate', method: 'level', level: 20 },
+  caterpie: { to: 'metapod', method: 'level', level: 7 },
+  weedle: { to: 'kakuna', method: 'level', level: 7 },
+  spearow: { to: 'fearow', method: 'level', level: 20 },
+  zubat: { to: 'golbat', method: 'level', level: 22 },
+  geodude: { to: 'graveler', method: 'level', level: 25 },
+  mankey: { to: 'primeape', method: 'level', level: 28 },
+  nidoranm: { to: 'nidorino', method: 'level', level: 16 },
+};
+for (const [id, evo] of Object.entries(BASE_EVOS)) {
+  if (SPECIES[id] && !SPECIES[id].evo && !SPECIES[id].evos) SPECIES[id].evo = evo;
+}

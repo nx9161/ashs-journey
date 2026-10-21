@@ -2,11 +2,11 @@
   "atlas": "atlas-species.png",
   "tile": 48,
   "size": [
-    918,
-    34
+    2040,
+    68
   ],
   "sprites": {
-    "caterpie-back": {
+    "articuno-front": {
       "x": 1,
       "y": 1,
       "w": 32,
@@ -14,12 +14,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "caterpie-front": {
+    "beedrill-front": {
       "x": 35,
       "y": 1,
       "w": 32,
@@ -32,7 +32,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "geodude-back": {
+    "blastoise-front": {
       "x": 69,
       "y": 1,
       "w": 32,
@@ -40,12 +40,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "geodude-front": {
+    "butterfree-front": {
       "x": 103,
       "y": 1,
       "w": 32,
@@ -53,12 +53,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 5,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "mankey-back": {
+    "caterpie-back": {
       "x": 137,
       "y": 1,
       "w": 32,
@@ -66,12 +66,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 2,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "mankey-front": {
+    "caterpie-front": {
       "x": 171,
       "y": 1,
       "w": 32,
@@ -79,12 +79,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 5,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "nidoranm-back": {
+    "charizard-front": {
       "x": 205,
       "y": 1,
       "w": 32,
@@ -92,12 +92,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 9,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "nidoranm-front": {
+    "charmeleon-back": {
       "x": 239,
       "y": 1,
       "w": 32,
@@ -105,12 +105,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 5,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "onix-back": {
+    "charmeleon-front": {
       "x": 273,
       "y": 1,
       "w": 32,
@@ -118,12 +118,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "onix-front": {
+    "eevee-back": {
       "x": 307,
       "y": 1,
       "w": 32,
@@ -136,8 +136,34 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pidgey-back": {
+    "eevee-front": {
       "x": 341,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "flareon-front": {
+      "x": 375,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "geodude-back": {
+      "x": 409,
       "y": 1,
       "w": 32,
       "h": 32,
@@ -149,33 +175,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pidgey-front": {
-      "x": 375,
-      "y": 1,
-      "w": 32,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 6,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "rattata-back": {
-      "x": 409,
-      "y": 1,
-      "w": 32,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 2,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "rattata-front": {
+    "geodude-front": {
       "x": 443,
       "y": 1,
       "w": 32,
@@ -188,7 +188,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "spearow-back": {
+    "ivysaur-back": {
       "x": 477,
       "y": 1,
       "w": 32,
@@ -196,12 +196,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "spearow-front": {
+    "ivysaur-front": {
       "x": 511,
       "y": 1,
       "w": 32,
@@ -214,8 +214,294 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "weedle-back": {
+    "jolteon-front": {
       "x": 545,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kakuna-front": {
+      "x": 579,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mankey-back": {
+      "x": 613,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 2,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mankey-front": {
+      "x": 647,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "metapod-front": {
+      "x": 681,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mew-front": {
+      "x": 715,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mewtwo-front": {
+      "x": 749,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "moltres-front": {
+      "x": 783,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidoranm-back": {
+      "x": 817,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidoranm-front": {
+      "x": 851,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "onix-back": {
+      "x": 885,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "onix-front": {
+      "x": 919,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pidgey-back": {
+      "x": 953,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pidgey-front": {
+      "x": 987,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "rattata-back": {
+      "x": 1021,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 2,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "rattata-front": {
+      "x": 1055,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "spearow-back": {
+      "x": 1089,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "spearow-front": {
+      "x": 1123,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "vaporeon-front": {
+      "x": 1157,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "venusaur-front": {
+      "x": 1191,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "wartortle-back": {
+      "x": 1225,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "wartortle-front": {
+      "x": 1259,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "weedle-back": {
+      "x": 1293,
       "y": 1,
       "w": 32,
       "h": 32,
@@ -228,7 +514,7 @@
       "mirror_of": null
     },
     "weedle-front": {
-      "x": 579,
+      "x": 1327,
       "y": 1,
       "w": 32,
       "h": 32,
@@ -240,8 +526,73 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "zapdos-front": {
+      "x": 1361,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "articuno-front-bob": {
+      "x": 1395,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": "articuno-front",
+      "mirror_of": null
+    },
+    "beedrill-front-bob": {
+      "x": 1429,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": "beedrill-front",
+      "mirror_of": null
+    },
+    "blastoise-front-bob": {
+      "x": 1463,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": "blastoise-front",
+      "mirror_of": null
+    },
+    "butterfree-front-bob": {
+      "x": 1497,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": "butterfree-front",
+      "mirror_of": null
+    },
     "caterpie-front-bob": {
-      "x": 613,
+      "x": 1531,
       "y": 1,
       "w": 32,
       "h": 32,
@@ -253,8 +604,60 @@
       "derived_from": "caterpie-front",
       "mirror_of": null
     },
+    "charizard-front-bob": {
+      "x": 1565,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": "charizard-front",
+      "mirror_of": null
+    },
+    "charmeleon-front-bob": {
+      "x": 1599,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": "charmeleon-front",
+      "mirror_of": null
+    },
+    "eevee-front-bob": {
+      "x": 1633,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "eevee-front",
+      "mirror_of": null
+    },
+    "flareon-front-bob": {
+      "x": 1667,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "flareon-front",
+      "mirror_of": null
+    },
     "geodude-front-bob": {
-      "x": 647,
+      "x": 1701,
       "y": 1,
       "w": 32,
       "h": 32,
@@ -266,8 +669,47 @@
       "derived_from": "geodude-front",
       "mirror_of": null
     },
+    "ivysaur-front-bob": {
+      "x": 1735,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": "ivysaur-front",
+      "mirror_of": null
+    },
+    "jolteon-front-bob": {
+      "x": 1769,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "jolteon-front",
+      "mirror_of": null
+    },
+    "kakuna-front-bob": {
+      "x": 1803,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "kakuna-front",
+      "mirror_of": null
+    },
     "mankey-front-bob": {
-      "x": 681,
+      "x": 1837,
       "y": 1,
       "w": 32,
       "h": 32,
@@ -279,8 +721,60 @@
       "derived_from": "mankey-front",
       "mirror_of": null
     },
+    "metapod-front-bob": {
+      "x": 1871,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "metapod-front",
+      "mirror_of": null
+    },
+    "mew-front-bob": {
+      "x": 1905,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "mew-front",
+      "mirror_of": null
+    },
+    "mewtwo-front-bob": {
+      "x": 1939,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": "mewtwo-front",
+      "mirror_of": null
+    },
+    "moltres-front-bob": {
+      "x": 1973,
+      "y": 1,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": "moltres-front",
+      "mirror_of": null
+    },
     "nidoranm-front-bob": {
-      "x": 715,
+      "x": 2007,
       "y": 1,
       "w": 32,
       "h": 32,
@@ -293,8 +787,8 @@
       "mirror_of": null
     },
     "onix-front-bob": {
-      "x": 749,
-      "y": 1,
+      "x": 1,
+      "y": 35,
       "w": 32,
       "h": 32,
       "frames": [
@@ -306,8 +800,8 @@
       "mirror_of": null
     },
     "pidgey-front-bob": {
-      "x": 783,
-      "y": 1,
+      "x": 35,
+      "y": 35,
       "w": 32,
       "h": 32,
       "frames": [
@@ -319,8 +813,8 @@
       "mirror_of": null
     },
     "rattata-front-bob": {
-      "x": 817,
-      "y": 1,
+      "x": 69,
+      "y": 35,
       "w": 32,
       "h": 32,
       "frames": [
@@ -332,8 +826,8 @@
       "mirror_of": null
     },
     "spearow-front-bob": {
-      "x": 851,
-      "y": 1,
+      "x": 103,
+      "y": 35,
       "w": 32,
       "h": 32,
       "frames": [
@@ -344,9 +838,48 @@
       "derived_from": "spearow-front",
       "mirror_of": null
     },
+    "vaporeon-front-bob": {
+      "x": 137,
+      "y": 35,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": "vaporeon-front",
+      "mirror_of": null
+    },
+    "venusaur-front-bob": {
+      "x": 171,
+      "y": 35,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": "venusaur-front",
+      "mirror_of": null
+    },
+    "wartortle-front-bob": {
+      "x": 205,
+      "y": 35,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": "wartortle-front",
+      "mirror_of": null
+    },
     "weedle-front-bob": {
-      "x": 885,
-      "y": 1,
+      "x": 239,
+      "y": 35,
       "w": 32,
       "h": 32,
       "frames": [
@@ -355,6 +888,19 @@
       "palette": 5,
       "seed": null,
       "derived_from": "weedle-front",
+      "mirror_of": null
+    },
+    "zapdos-front-bob": {
+      "x": 273,
+      "y": 35,
+      "w": 32,
+      "h": 32,
+      "frames": [
+        "bob"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": "zapdos-front",
       "mirror_of": null
     }
   }
