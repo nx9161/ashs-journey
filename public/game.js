@@ -15199,6 +15199,7 @@ class UI {
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
         + (it.band ? ' bandrow' : '')
+        + (it.wide ? ' wide' : '')
         + (it.closeRow ? ' close-row' : '')
         + (it.zeroPp ? ' zeropp' : '')
         + (it.emptySlot ? ' emptyslot' : '')
