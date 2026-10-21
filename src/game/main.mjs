@@ -230,6 +230,8 @@ export class Game {
     this.ui.update(dt);
     SYNC.tick(this); // Track B: idle flush (60s) + deferred conflict sheet. Guest: no-op.
     this.scenes.update(dt);
+    if (this.processQueues) this.processQueues(); // WS6/WS9: learn + evolution prompts
+    if (this.checkDiploma) this.checkDiploma(); // WS7: the 151 payoff
   }
 
   toggleMute() {
@@ -297,7 +299,11 @@ export class Game {
   }
 
   newGame() {
+    // Settings are player preferences, not save data: options chosen on the
+    // title screen (text speed, battle style, mute...) survive a new game.
+    const keepSettings = this.state && this.state.settings;
     this.state = freshState();
+    if (keepSettings) this.state.settings = keepSettings;
     this.state.player.name = 'ASH';
     this.rng = makeRngStreams(nextSeed());
     this.skipIntroVeteran = this.store.exists();
@@ -370,6 +376,7 @@ export class Game {
     if (!items.length) items.push({ label: '(empty)', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Bag', items, (v) => {
+      if (!v || v === 'close') return;
       if (v === 'potion') {
         const targets = g.state.party.map((m, i) => ({
           label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp, value: i,
@@ -384,6 +391,8 @@ export class Game {
           g.audio.playSfx('heal');
           g.ui.toast(displayName(m, SPECIES) + ' recovered 20 HP!');
         });
+      } else if (g.useBagItem) {
+        g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
     });
   }
@@ -411,10 +420,12 @@ export class Game {
       if (v === null || v === 'close' || v === -1) return;
       const m = g.state.party[v];
       const sp = SPECIES[m.speciesId];
-      g.ui.showMenu(displayName(m, SPECIES), [
-        { label: 'Summary', value: 'summary' },
-        { label: 'Close', value: 'close' },
-      ], (a) => {
+      const fieldMoves = (m.moves || []).filter((x) => ['cut', 'fly', 'surf', 'strength', 'flash'].includes(x.id));
+      const rows = [{ label: 'Summary', value: 'summary' }];
+      if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
+      rows.push({ label: 'Close', value: 'close' });
+      g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
+        if (a === 'field' && g.openFieldMove) { g.openFieldMove(m); return; }
         if (a === 'summary') {
           const mv = m.moves.map((mm) => MOVES[mm.id].name + ' ' + mm.pp + '/' + mm.maxPp).join(', ');
           g.ui.say([
@@ -451,6 +462,7 @@ export class Game {
     });
     const fdesc = (filter.q ? ' q=' + filter.q : '') + (filter.type ? ' ' + filter.type : '') + (filter.status ? ' ' + filter.status : '');
     items.unshift({ label: 'Caught ' + caught + ' / ' + DEX_TOTAL + ' (tracked)', value: null, disabled: true });
+    items.unshift({ label: "Prof. Hawthorn's rating", value: 'rating' });
     items.unshift({ label: 'Search / Filter' + (fdesc ? ':' + fdesc : ''), value: 'filter' });
     items.unshift({ label: 'Areas — caught per area', value: 'areas' });
     // D2: arc progression surfaced in the Dex — current chapter header row.
@@ -460,6 +472,7 @@ export class Game {
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Pokedex', items, (v) => {
       if (!v || v === 'close') return;
+      if (v === 'rating') { g.ui.say([g.oakRating()], () => g.openDex(filter), 'Prof. Hawthorn'); return; }
       if (v === 'filter') { g.openDexFilter(filter); return; }
       if (v === 'areas') { g.openDexAreas(); return; }
       const sp = SPECIES[v];
@@ -506,6 +519,8 @@ export class Game {
     const g = this;
     const cur = g.state.story.chapter || 0; // 0-based chapter index
     const items = [];
+    items.push({ label: 'Quest Log — the road so far', value: 'quests' });
+    items.push({ label: 'Regions — the journey chain', value: 'regions' });
     items.push({ label: '— ACT I: THE BEGINNING (v1) —', value: null, disabled: true });
     for (const ch of CHAPTERS) {
       if (ch.scope === 'playable') {
@@ -528,6 +543,8 @@ export class Game {
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Journey', items, (v) => {
       if (!v || v === 'close') return;
+      if (v === 'quests') { g.openQuestLog(); return; }
+      if (v === 'regions') { g.openRegions(); return; }
       const ch = CHAPTERS.find((c) => 'ch' + c.n === v);
       if (ch) {
         g.ui.say([
@@ -624,6 +641,7 @@ export class Game {
       { label: 'Music volume: ' + Math.round(s.musicVol * 100) + '%', value: 'music' },
       { label: 'SFX volume: ' + Math.round(s.sfxVol * 100) + '%', value: 'sfx' },
       { label: 'Battle animations: ' + yn(s.battleAnims), value: 'banim' },
+      { label: 'Battle style: ' + (s.battleStyle === 'classic' ? 'CLASSIC (turns)' : 'REAL-TIME'), value: 'bstyle' },
       { label: 'Screen shake: ' + yn(s.shake), value: 'shake' },
       { label: 'Vibration: ' + yn(s.vibration), value: 'vib' },
       { label: 'Autosave: ' + yn(s.autosave), value: 'asave' },
@@ -653,6 +671,7 @@ export class Game {
       else if (v === 'music') { s.musicVol = s.musicVol >= 0.99 ? 0 : Math.round((s.musicVol + 0.1) * 10) / 10; g.audio.setMusicVolume(s.musicVol); }
       else if (v === 'sfx') { s.sfxVol = s.sfxVol >= 0.99 ? 0 : Math.round((s.sfxVol + 0.1) * 10) / 10; g.audio.setSfxVolume(s.sfxVol); }
       else if (v === 'banim') s.battleAnims = !s.battleAnims;
+      else if (v === 'bstyle') { s.battleStyle = s.battleStyle === 'classic' ? 'rt' : 'classic'; g.ui.toast('Battle style: ' + (s.battleStyle === 'classic' ? 'Classic turns' : 'Real-time')); }
       else if (v === 'shake') s.shake = !s.shake;
       else if (v === 'vib') s.vibration = !s.vibration;
       else if (v === 'asave') s.autosave = !s.autosave;

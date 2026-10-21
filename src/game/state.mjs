@@ -16,14 +16,22 @@ export function defaultState() {
     badges: { kanto: [], orange: [], johto: [], symbols: [null, null, null, null, null, null, null] },
     story: {
       chapter: 0, beat: 0, flags: {},
+      // WS6/WS10 story state: quest-log stages + region progression
+      // (ADR-019). quests: questId -> 'active' | 'complete' (arc ids included).
+      quests: {},
+      region: 'kanto',
+      regionsDone: [],
       position: { map: 'pallet', x: 7, y: 7, dir: 'down' },
       difficulty: 'normal',
     },
+    currentBox: 'box1',
+    session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {
       textSpeed: 'normal', battleAnims: true, shake: true, reducedMotion: false,
       mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1,
       vibration: true, autosave: true, showTouch: false, // P1/I5+I2: Wave-3 additions
+      battleStyle: 'rt', // ADR-020: 'rt' real-time (default) | 'classic' turn-based
     },
     facilities: { registry: [], unlocked: [] },
     bag: { pokeball: 10, potion: 3 },
@@ -32,9 +40,11 @@ export function defaultState() {
 }
 
 // Battle-mon factory: {speciesId, nickname, level, xp, moves[{id,pp}], ivs, hp...}
+let MON_SEQ = 0;
 export function makeMon(speciesId, level, speciesTable, movesTable) {
   const sp = speciesTable[speciesId];
   const mon = {
+    monId: 'm' + (++MON_SEQ).toString(36) + Date.now().toString(36).slice(-4),
     speciesId,
     nickname: null,
     level,
@@ -47,8 +57,16 @@ export function makeMon(speciesId, level, speciesTable, movesTable) {
     friendship: 70,
   };
   const learned = [];
-  for (const lv of Object.keys(sp.learnset).map(Number).sort((a, b) => a - b)) {
-    if (lv <= level) learned.push(...sp.learnset[lv]);
+  // Canonical learnset shape: { level: [moveId...] }. species2.mjs delivers
+  // [{ level, move }...] — accept both (normalized identically here).
+  if (Array.isArray(sp.learnset)) {
+    for (const e of [...sp.learnset].sort((a, b) => a.level - b.level)) {
+      if (e.level <= level) learned.push(e.move);
+    }
+  } else {
+    for (const lv of Object.keys(sp.learnset).map(Number).sort((a, b) => a - b)) {
+      if (lv <= level) learned.push(...sp.learnset[lv]);
+    }
   }
   for (const mid of learned.slice(-4)) {
     const mv = movesTable[mid];

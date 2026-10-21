@@ -7,7 +7,7 @@ export const SAVE_KEY = 'pdr.save.guest';
 
 // Whitelisted top-level keys. Unknown keys => reject (architecture §3.4).
 const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
-  'pikachu', 'settings', 'facilities', 'bag', 'meta'];
+  'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session'];
 
 function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
 
@@ -26,8 +26,21 @@ export function validateSave(data) {
     if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-mon-moves'); break; }
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
+  if (isObj(data.dex) && data.dex.forms !== undefined) {
+    if (!isObj(data.dex.forms)) errors.push('bad-dex-forms');
+    else for (const k of Object.keys(data.dex.forms)) {
+      if (data.dex.forms[k] !== true) { errors.push('bad-dex-form-value'); break; }
+    }
+  }
   if (!isObj(data.badges) || !Array.isArray(data.badges.kanto)) errors.push('bad-badges');
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
+  if (isObj(data.story) && data.story.quests !== undefined) {
+    if (!isObj(data.story.quests)) errors.push('bad-story-quests');
+    else for (const k of Object.keys(data.story.quests)) {
+      if (!['active', 'complete'].includes(data.story.quests[k])) { errors.push('bad-quest-stage'); break; }
+    }
+  }
+  if (data.currentBox !== undefined && typeof data.currentBox !== 'string') errors.push('bad-current-box');
   return { ok: errors.length === 0, errors };
 }
 

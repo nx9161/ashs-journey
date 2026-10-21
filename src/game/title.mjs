@@ -115,18 +115,23 @@ export class BootScene {
       this.renderLegal(r);
       return;
     }
-    // Title art: original — rising sun bands + silhouettes (no official key art).
+    // Title art: the original hand-authored key art (WS2) over dawn bands.
     const w = r.viewW, h = r.viewH;
     const bands = ['#2a1a3a', '#5a2a4a', '#a04a3a', '#e08a4a', '#f8c86a'];
     for (let i = 0; i < bands.length; i++) {
       g.ctx2dfill(bands[i], 0, (h * i) / bands.length, w, h / bands.length + 1);
     }
-    // Sun disc
-    g.ctx2dcircle(w / 2, h * 0.42, 26, '#ffe9a8');
-    // Ash + Pikachu silhouettes (original shapes)
-    g.ctx2dcircle(w / 2 - 14, h * 0.62, 7, '#1a1a22');
-    g.ctx2drect(w / 2 - 20, h * 0.62 + 5, 12, 14, '#1a1a22');
-    g.ctx2dcircle(w / 2 + 16, h * 0.66, 5, '#1a1a22');
+    const keyart = (typeof document !== 'undefined' && typeof artCanvas === 'function')
+      ? artCanvas(document, 'title-keyart', 3, false) : null;
+    if (keyart) {
+      r.blitS(keyart, w / 2 - 96, 34, 192, 144);
+    } else {
+      // Fallback silhouettes (original shapes) when key art is absent.
+      g.ctx2dcircle(w / 2, h * 0.42, 26, '#ffe9a8');
+      g.ctx2dcircle(w / 2 - 14, h * 0.62, 7, '#1a1a22');
+      g.ctx2drect(w / 2 - 20, h * 0.62 + 5, 12, 14, '#1a1a22');
+      g.ctx2dcircle(w / 2 + 16, h * 0.66, 5, '#1a1a22');
+    }
     r.text(GAME_TITLE, 8, 8, { size: 14, bold: true, color: '#fff' });
     r.text(GAME_SUBTITLE, 8, 26, { size: 14, color: '#ffe9a8' });
     if (EDITION_MARKER) {

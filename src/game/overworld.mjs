@@ -44,6 +44,10 @@ export class OverworldScene {
     this.map = MAPS[id];
     this.w = this.map.rows[0].length;
     this.h = this.map.rows.length;
+    if (this.sysLoadMap) this.sysLoadMap(id);
+    // Dynamic Pokemon Center exit (WS9): remember which city we came from.
+    if (id === 'center' && this._lastCity) this.centerReturn = this._lastCity;
+    if (id !== 'center') this._lastCity = { map: id, x: this.player ? this.player.tx : 7, y: this.player ? this.player.ty : 9 };
   }
 
   tileAt(x, y) {
@@ -53,7 +57,9 @@ export class OverworldScene {
 
   walkable(x, y) {
     const t = this.tileAt(x, y);
-    if (!WALKABLE.has(t)) return false;
+    if (this.boulderAt && this.boulderAt(x, y)) return false;
+    const base = WALKABLE.has(t) || (this.sysWalkableExtra && this.sysWalkableExtra(x, y));
+    if (!base) return false;
     // NPCs block
     for (const n of this.map.npcs) if (n.x === x && n.y === y) return false;
     return true;
@@ -87,9 +93,9 @@ export class OverworldScene {
       this.openPauseMenu();
       return;
     }
-    // P1/D4: SELECT toggles the HUD quick-strip.
+    // P1/D4: SELECT = registered item first (bicycle), then HUD quick-strip.
     if (input.wasPressed('select')) {
-      g.ui.setHudVisible(!g.ui.hudVisible);
+      if (!(this.sysSelect && this.sysSelect())) g.ui.setHudVisible(!g.ui.hudVisible);
       return;
     }
     // Interact
@@ -109,11 +115,23 @@ export class OverworldScene {
           p.moving = true; p.moveT = 0;
           p.fx = p.tx; p.fy = p.ty;
           p.tx += dx; p.ty += dy;
+        } else if (this.fxState && this.fxState.strengthOn && this.boulderAt && this.boulderAt(p.tx + dx, p.ty + dy)) {
+          // Strength push: shove the boulder one tile if the far side is free.
+          const bx = p.tx + dx * 2, by = p.ty + dy * 2;
+          const bt = this.tileAt(bx, by);
+          if ((WALKABLE.has(bt) || bt === 'R') && !this.boulderAt(bx, by) && !this.npcAt(bx, by)) {
+            const b = this.boulderAt(p.tx + dx, p.ty + dy);
+            b.x = bx; b.y = by;
+            p.moving = true; p.moveT = 0;
+            p.fx = p.tx; p.fy = p.ty;
+            p.tx += dx; p.ty += dy;
+            g.audio.playSfx('menu-move');
+          }
         }
       }
     } else {
       p.moveT += dt * 1000;
-      const k = Math.min(1, p.moveT / WALK_MS);
+      const k = Math.min(1, p.moveT / (this.moveMs ? this.moveMs() : WALK_MS));
       p.px = (p.fx + (p.tx - p.fx) * k) * TILE;
       p.py = (p.fy + (p.ty - p.fy) * k) * TILE;
       if (k >= 1) {
@@ -150,7 +168,9 @@ export class OverworldScene {
     const g = this.game;
     const wp = this.warpAt(x, y);
     if (wp) {
-      const to = wp.to;
+      let to = wp.to;
+      if (wp.viaExit) to = this.centerReturn || { map: 'pallet', x: 7, y: 9 };
+      if (to.map === 'center' && wp.via) this.centerReturn = wp.via;
       this.loadMap(to.map);
       this.player.tx = to.x; this.player.ty = to.y;
       this.player.px = to.x * TILE; this.player.py = to.y * TILE;
@@ -165,6 +185,8 @@ export class OverworldScene {
       g.autosave('area');
       return;
     }
+    // Systems layer: events, safari steps, poison, water/cave encounters.
+    if (this.sysOnStep && this.sysOnStep(x, y)) return;
     // Tall grass encounter check (anti-frustration: force after 20 silent steps)
     const t = this.tileAt(x, y);
     if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters) {
@@ -319,7 +341,7 @@ export class OverworldScene {
       const foe = e.foe;
       this.enc = null;
       dexRegister(g.state.dex, 'seen', SPECIES[foe.speciesId].dexNo);
-      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, tutorial: !!e.tutorial }));
+      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, tutorial: !!e.tutorial, rt: g.state.settings.battleStyle !== 'classic' }));
     }
     if (g.renderer.flashA > 0 && e.phase !== 'transition') {
       g.renderer.flashA = Math.max(0, g.renderer.flashA - dt * 3);
@@ -346,8 +368,11 @@ export class OverworldScene {
     // Partner interaction (facing Pikachu's tile)
     const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
     if (fx === ptx && fy === pty) return this.petPartner();
+    // Systems interactions (item balls, hidden items, field moves, fishing)
+    if (this.sysInteract && this.sysInteract(fx, fy)) return true;
     const npc = this.npcAt(fx, fy);
     if (npc) {
+      if (this.sysNpc && this.sysNpc(npc)) return true;
       if (npc.trainer) { this.startTrainerBattle(npc); return true; }
       const lines = npc.dialogue.map((l) => l.replace('{player}', g.state.player.name));
       // GD balance: data-driven one-time item gifts (ball economy top-ups).
@@ -384,7 +409,7 @@ export class OverworldScene {
     }
     const t = TRAINERS[npc.trainer];
     g.ui.say(t.intro, () => {
-      g.scenes.push(new BattleScene({ kind: 'trainer', trainer: t, returnTo: this }));
+      g.scenes.push(new BattleScene({ kind: 'trainer', trainer: t, returnTo: this, rt: g.state.settings.battleStyle !== 'classic' }));
     }, npc.name);
   }
 
@@ -479,6 +504,8 @@ export class OverworldScene {
       const gspr = g.tileSprite('grass');
       if (gspr) r.blit(gspr, this.player.tx * T + jx, this.player.ty * T);
     }
+    // Systems world dressing: item balls, boulders, cut stumps, cave darkness.
+    if (this.sysRenderWorld) this.sysRenderWorld(r);
     // NPCs (2-frame idle) — challengers render at their walk-up position.
     for (const n of this.map.npcs) {
       let nx = n.x * T, ny = n.y * T - 4;
@@ -549,8 +576,9 @@ export class OverworldScene {
     return null;
   }
 
-  // P1/D6: current story objective (truncating; the slice's spine).
+  // P1/D6: current story objective — quest-driven (WS6), slice spine as fallback.
   objectiveText() {
+    if (this.sysObjective) { const t = this.sysObjective(); if (t) return t; }
     const f = this.game.state.story.flags;
     if (!f.beat_brock) return '▶ Earn the Boulder Badge';
     return '▶ Explore Kanto';

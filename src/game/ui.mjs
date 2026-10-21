@@ -154,6 +154,9 @@ export class UI {
       return b;
     };
     mkA('a', 'a-a', 'A'); mkA('b', 'a-b', 'B');
+    // Z-A change order (ADR-021): full emulator pad — X/Y join A/B.
+    // X = pageup (bag tabs / dex page / bike), Y = pagedown.
+    mkA('pageup', 'a-x', 'X'); mkA('pagedown', 'a-y', 'Y');
     const sys = this.el('div', 'sysbtns', g);
     const mkS = (action, label) => {
       const b = this.el('button', 'sysbtn', sys);
@@ -266,10 +269,29 @@ export class UI {
 
   buildDialogue() {
     this.dlgEl = this.el('div', 'dialogue hidden', this.root);
+    // WS2/ADR-020: speaker portrait (original art) in the dialogue box.
+    this.dlgFace = null;
+    if (typeof document !== 'undefined') {
+      this.dlgFace = document.createElement('canvas');
+      this.dlgFace.width = 48; this.dlgFace.height = 48;
+      this.dlgFace.className = 'dlg-face';
+      this.dlgFace.style.display = 'none';
+      this.dlgEl.appendChild(this.dlgFace);
+    }
     this.dlgName = this.el('div', 'dlg-name', this.dlgEl);
     this.dlgText = this.el('div', 'dlg-text', this.dlgEl);
     this.dlgHint = this.el('div', 'dlg-hint', this.dlgEl);
     this.dlgHint.textContent = '▼';
+  }
+
+  portraitFor(speaker) {
+    if (!speaker || typeof document === 'undefined') return null;
+    const words = String(speaker).toLowerCase().replace(/[^a-z ]/g, ' ').split(' ').filter(Boolean);
+    for (let i = words.length - 1; i >= 0; i--) {
+      const cv = artCanvas(document, 'portrait-' + words[i], 2, false);
+      if (cv) return cv;
+    }
+    return null;
   }
 
   say(lines, cb, speaker) {
@@ -280,6 +302,23 @@ export class UI {
       this.dlgName.textContent = this.dlg.speaker || '';
       this.dlgName.style.display = this.dlg.speaker ? 'block' : 'none';
       this.dlgText.textContent = '';
+      // Portrait: drawn when the speaker has original art (WS2).
+      if (this.dlgFace) {
+        const cv = this.portraitFor(this.dlg.speaker);
+        if (cv) {
+          const ctx = this.dlgFace.getContext('2d');
+          ctx.clearRect(0, 0, 48, 48);
+          ctx.imageSmoothingEnabled = false;
+          ctx.drawImage(cv, 0, 0);
+          this.dlgFace.style.display = 'block';
+          this.dlgText.style.marginLeft = '58px';
+          this.dlgName.style.marginLeft = '58px';
+        } else {
+          this.dlgFace.style.display = 'none';
+          this.dlgText.style.marginLeft = '';
+          this.dlgName.style.marginLeft = '';
+        }
+      }
     }
   }
 
