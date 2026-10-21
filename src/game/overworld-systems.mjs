@@ -18,7 +18,7 @@ import { CHAPTERS } from '../data/story.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 
 const BOX_COUNT = 12;
-const BOX_CAP = 20;
+const BOX_CAP = 30; // UI v2.4: Platinum's 30 — matches the save validator's limit (was 20)
 const FOSSIL_OF = { helixfossil: 'omanyte', domefossil: 'kabuto', oldamber: 'aerodactyl' };
 
 function key(x, y) { return x + ',' + y; }
@@ -542,101 +542,191 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- PC boxes ----------
-  // Platinum PC box (UI v2): a 'pcbox' wallpaper window whose stored
-  // Pokemon render as sprite cells (Game#spriteDataUrl, the same helper
-  // the party/bag rows use — accessed here via this.game). Navigation
-  // rows (box-switch, party deposit/withdraw lists, link, log off / back)
-  // are full-width `wide` rows under the cell grid. All values returned
-  // to the callbacks, and the deposit/withdraw/box-switch semantics, are
-  // exactly as before; the current box + capacity stay in the title.
+  // UI v2.4 (defect 4): a real box SCREEN (ui.showPcPanel) instead of the
+  // list-modal flow — wallpaper field, a 30-slot grid that renders even
+  // when empty, the party strip alongside, a framed info window, and box
+  // switching as framed nav (Q/E or the ◀ ▶ buttons). Pick-up/place
+  // semantics: A lifts a mon — it stays in its array, dimmed, until
+  // placed, so B / log-off with full hands can never lose a mon — and A
+  // again places it: empty target = deposit / withdraw / move, occupied
+  // target = swap. Boxes stay DENSE arrays under the grid (placing on an
+  // empty cell inserts at that index): the save format stores lists, and
+  // the validator rejects sparse/null slots. Deposit keeps the house
+  // rules: boxCheck (the partner never boxes) + at least one Pokemon
+  // stays with you; depositing clears status, as before.
+  // Link Transfer (Bill's system) keeps its menu, from the side button.
   openPc() {
     const g = this.game;
     const boxes = g.state.boxes;
     for (let i = 1; i <= BOX_COUNT; i++) if (!Array.isArray(boxes['box' + i])) boxes['box' + i] = [];
-    const cur = g.state.currentBox || 'box1';
-    const spriteRowHtml = (getMon) => (it) => {
-      const mon = getMon(it);
-      if (!mon) return '<span>' + it.label + '</span>';
-      const url = (typeof g.spriteDataUrl === 'function') ? g.spriteDataUrl(mon.speciesId) : '';
-      return '<img class="picon" src="' + url + '" alt=""><span>' + it.label + '</span>';
+    const COLS = 6;
+    const st = {
+      box: Math.max(1, Math.min(BOX_COUNT, parseInt(String(g.state.currentBox || 'box1').slice(3), 10) || 1)),
+      zone: 'grid', idx: 0,
+      held: null, // { mon, from: 'grid'|'party', idx, box }
     };
-    const boxRowHtml = spriteRowHtml((it) => {
-      if (typeof it.value === 'string' && it.value.indexOf('wd:') === 0) return boxes[cur][parseInt(it.value.slice(3), 10)];
-      if (typeof it.value === 'number' && it.value >= 0) return boxes[cur][it.value];
-      return null;
-    });
-    const partyRowHtml = spriteRowHtml((it) => {
-      if (typeof it.value === 'number' && it.value >= 0) return g.state.party[it.value];
-      return null;
-    });
-    const withdrawMon = (iv) => {
-      if (g.state.party.length >= 6) { g.ui.say(['Your party is full!']); return; }
-      const mon = boxes[cur].splice(iv, 1)[0];
-      if (!mon) return;
-      g.state.party.push(mon);
-      g.ui.toast('Withdrew ' + displayName(mon, SPECIES) + '.');
+    const boxArr = () => boxes['box' + st.box];
+    const sprite = (mon) => (typeof g.spriteDataUrl === 'function') ? g.spriteDataUrl(mon.speciesId) : '';
+
+    const openLink = () => {
+      // Bill's Link Transfer: trade-evolution species evolve here —
+      // the honest single-player resolution (WS7 design call, ADR-019).
+      const cand = g.state.party.filter((m) => {
+        const sp = SPECIES[m.speciesId];
+        return sp && sp.evo && sp.evo.method === 'trade';
+      });
+      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
+      const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
+      items.push({ label: 'Back', value: null, wide: true });
+      const linkRowHtml = (it) => {
+        const mon = cand.find((m) => m.monId === it.value) || null;
+        if (!mon) return '<span>' + it.label + '</span>';
+        return '<img class="picon" src="' + sprite(mon) + '" alt=""><span>' + it.label + '</span>';
+      };
+      g.ui.showMenu('Link Transfer which?', items, (iv) => {
+        const mon = cand.find((m) => m.monId === iv);
+        if (mon) this.evolveMon(mon);
+      }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
     };
-    const mainItems = boxes[cur].map((m, i) => ({
-      label: displayName(m, SPECIES) + ' Lv' + m.level, value: 'wd:' + i,
-    }));
-    mainItems.push(
-      { label: 'Deposit', value: 'dep', wide: true },
-      { label: 'Withdraw', value: 'wd', wide: true },
-      { label: 'Change box', value: 'chg', wide: true },
-      { label: 'Link Transfer (Bill\'s system)', value: 'link', wide: true },
-      { label: 'Log off', value: 'off', wide: true },
-    );
-    g.ui.showMenu('PC — someone\'s PC (current: ' + cur.replace('box', 'Box ') + ', ' + boxes[cur].length + '/' + BOX_CAP + ')', mainItems, (v) => {
-      if (typeof v === 'string' && v.indexOf('wd:') === 0) {
-        // Box-screen shortcut: choosing a stored Pokemon's cell withdraws
-        // it, with the same party-full guard as the Withdraw list below.
-        withdrawMon(parseInt(v.slice(3), 10));
+
+    const infoFor = () => {
+      if (st.held) return 'Holding <b>' + displayName(st.held.mon, SPECIES) + ' Lv' + st.held.mon.level + '</b>.<br>Choose where to place it — a box slot or a party slot. B puts it back.';
+      if (st.zone === 'grid') {
+        const mon = boxArr()[st.idx];
+        if (mon) return '<b>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</b><br>HP ' + mon.hp + '/' + mon.maxHp + (mon.status ? ' · ' + String(mon.status).toUpperCase() : '') + '<br>A: pick up.';
+        return 'Empty box slot.<br>Pick up a party member, then place it here to deposit.';
+      }
+      const mon = g.state.party[st.idx];
+      if (mon) return '<b>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</b><br>HP ' + mon.hp + '/' + mon.maxHp + '<br>A: pick up.';
+      return 'Empty party slot.<br>Place a box Pokemon here to withdraw it.';
+    };
+
+    const render = () => {
+      const arr = boxArr();
+      let cells = '';
+      for (let i = 0; i < BOX_CAP; i++) {
+        const mon = arr[i];
+        const cls = 'pccell' + (mon ? '' : ' empty')
+          + (st.zone === 'grid' && st.idx === i ? ' cursor' : '')
+          + (st.held && st.held.from === 'grid' && st.held.box === st.box && st.held.idx === i ? ' heldsrc' : '');
+        cells += '<button class="' + cls + '" data-pcact="cell" data-idx="' + i + '">'
+          + (mon ? '<img src="' + sprite(mon) + '" alt=""><span class="pclv">Lv' + mon.level + '</span>' : '')
+          + '</button>';
+      }
+      let party = '';
+      for (let i = 0; i < 6; i++) {
+        const mon = g.state.party[i];
+        const cls = 'pcpslot' + (mon ? '' : ' empty')
+          + (st.zone === 'party' && st.idx === i ? ' cursor' : '')
+          + (st.held && st.held.from === 'party' && st.held.idx === i ? ' heldsrc' : '');
+        party += '<button class="' + cls + '" data-pcact="party" data-idx="' + i + '">'
+          + (mon ? '<img src="' + sprite(mon) + '" alt=""><span>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</span>' : '<span>—</span>')
+          + '</button>';
+      }
+      const bodyHtml = '<div class="pcmain"><div class="pcgrid">' + cells + '</div>'
+        + '<div class="pcside"><div class="pcpartyhd">PARTY</div><div class="pcparty">' + party + '</div>'
+        + '<div class="pcinfo">' + infoFor() + '</div>'
+        + '<button class="pclink" data-pcact="link">Link Transfer (Bill\'s system)</button>'
+        + '<button class="pclink" data-pcact="off">Log off</button></div></div>';
+      const data = {
+        title: 'SOMEONE\'S PC — BOX ' + st.box + ' (' + arr.length + '/' + BOX_CAP + ')'
+          + (st.held ? ' · HOLDING ' + displayName(st.held.mon, SPECIES) : ''),
+        bodyHtml,
+      };
+      if (g.ui.pcOpen) g.ui.updatePcPanel(data); else g.ui.showPcPanel(data, cb);
+    };
+
+    const place = (zone, idx) => {
+      const held = st.held;
+      if (!held) {
+        const mon = zone === 'grid' ? boxArr()[idx] : g.state.party[idx];
+        if (!mon) return;
+        st.held = { mon, from: zone, idx, box: st.box };
+        g.audio.playSfx('ui-blip');
+        render();
         return;
       }
-      if (v === 'dep') {
-        const items = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: g.state.party.length <= 1 }));
-        items.push({ label: 'Back', value: -1, wide: true });
-        g.ui.showMenu('Deposit which?', items, (iv) => {
-          if (iv === null || iv === -1) return;
-          const mon = g.state.party[iv];
-          const chk = boxCheck(mon);
-          if (!chk.ok) { g.ui.say([chk.line]); return; }
-          if (boxes[cur].length >= BOX_CAP) { g.ui.say(['That box is full!']); return; }
-          g.state.party.splice(iv, 1);
-          mon.status = null;
-          boxes[cur].push(mon);
-          g.ui.toast('Deposited ' + displayName(mon, SPECIES) + '.');
-        }, { menuClass: 'pcbox', rowHtml: partyRowHtml });
-      } else if (v === 'wd') {
-        const items = boxes[cur].map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
-        items.push({ label: 'Back', value: -1, wide: true });
-        g.ui.showMenu('Withdraw which?', items, (iv) => {
-          if (iv === null || iv === -1) return;
-          withdrawMon(iv);
-        }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
-      } else if (v === 'chg') {
-        const items = [];
-        for (let i = 1; i <= BOX_COUNT; i++) items.push({ label: 'Box ' + i + ' (' + boxes['box' + i].length + '/' + BOX_CAP + ')', value: 'box' + i, wide: true });
-        g.ui.showMenu('Change to which box?', items, (iv) => {
-          if (iv) { g.state.currentBox = iv; g.ui.toast('Current box: ' + iv.replace('box', 'Box ') + '.'); }
-        }, { menuClass: 'pcbox' });
-      } else if (v === 'link') {
-        // Bill's Link Transfer: trade-evolution species evolve here —
-        // the honest single-player resolution (WS7 design call, ADR-019).
-        const cand = g.state.party.filter((m) => {
-          const sp = SPECIES[m.speciesId];
-          return sp && sp.evo && sp.evo.method === 'trade';
-        });
-        if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
-        const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
-        items.push({ label: 'Back', value: null, wide: true });
-        const linkRowHtml = spriteRowHtml((it) => cand.find((m) => m.monId === it.value) || null);
-        g.ui.showMenu('Link Transfer which?', items, (iv) => {
-          const mon = cand.find((m) => m.monId === iv);
-          if (mon) this.evolveMon(mon);
-        }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
+      // Placing back on the origin slot just puts it down again.
+      if (held.from === zone && held.idx === idx && (zone === 'party' || held.box === st.box)) {
+        st.held = null; render(); return;
       }
-    }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
+      if (zone === 'grid') {
+        const arr = boxArr();
+        const occ = arr[idx];
+        if (held.from === 'party') {
+          if (g.state.party.length <= 1) { g.ui.say(['You need at least one Pokemon with you!']); return; }
+          const chk = boxCheck(held.mon);
+          if (!chk.ok) { g.ui.say([chk.line]); return; }
+          g.state.party.splice(held.idx, 1);
+          if (occ) { arr[idx] = held.mon; g.state.party.splice(held.idx, 0, occ); }
+          else arr.splice(Math.min(idx, arr.length), 0, held.mon);
+          held.mon.status = null;
+          g.ui.toast('Deposited ' + displayName(held.mon, SPECIES) + '.');
+        } else {
+          const src = boxes['box' + held.box];
+          if (occ) { src[held.idx] = occ; arr[idx] = held.mon; }
+          else { src.splice(held.idx, 1); arr.splice(Math.min(idx, arr.length), 0, held.mon); }
+        }
+      } else {
+        const occ = g.state.party[idx];
+        if (held.from === 'grid') {
+          const src = boxes['box' + held.box];
+          if (occ) {
+            const chk = boxCheck(occ);
+            if (!chk.ok) { g.ui.say([chk.line]); return; }
+            src[held.idx] = occ; g.state.party[idx] = held.mon;
+          } else {
+            src.splice(held.idx, 1); g.state.party.push(held.mon);
+          }
+          g.ui.toast('Withdrew ' + displayName(held.mon, SPECIES) + '.');
+        } else if (occ) {
+          g.state.party[held.idx] = occ; g.state.party[idx] = held.mon;
+        }
+      }
+      st.held = null;
+      st.zone = zone; st.idx = idx;
+      g.audio.playSfx('ui-blip');
+      render();
+    };
+
+    const move = (dir) => {
+      if (st.zone === 'grid') {
+        if (dir === 'left') st.idx = Math.max(0, st.idx - 1);
+        else if (dir === 'right') st.idx = Math.min(BOX_CAP - 1, st.idx + 1);
+        else if (dir === 'up') { if (st.idx >= COLS) st.idx -= COLS; }
+        else if (dir === 'down') {
+          if (st.idx + COLS < BOX_CAP) st.idx += COLS;
+          else { st.zone = 'party'; st.idx = Math.min(5, st.idx % COLS); }
+        }
+      } else {
+        if (dir === 'left') st.idx = Math.max(0, st.idx - 1);
+        else if (dir === 'right') st.idx = Math.min(5, st.idx + 1);
+        else if (dir === 'up') { st.zone = 'grid'; st.idx = (BOX_CAP - COLS) + Math.min(COLS - 1, st.idx); }
+      }
+      g.audio.playSfx('ui-tick');
+      render();
+    };
+
+    const cb = (action, arg) => {
+      if (action === 'move') move(arg);
+      else if (action === 'box') {
+        st.box = ((st.box - 1 + arg + BOX_COUNT) % BOX_COUNT) + 1;
+        g.state.currentBox = 'box' + st.box;
+        g.audio.playSfx('ui-tick');
+        render();
+      } else if (action === 'confirm') place(st.zone, st.idx);
+      else if (action === 'cancel') {
+        if (st.held) { st.held = null; render(); }
+        else g.ui.closePcPanel();
+      } else if (action === 'click') {
+        if (arg.act === 'cell') { st.zone = 'grid'; st.idx = arg.idx; place('grid', arg.idx); }
+        else if (arg.act === 'party') { st.zone = 'party'; st.idx = arg.idx; place('party', arg.idx); }
+        else if (arg.act === 'link') { g.ui.closePcPanel(); openLink(); }
+        else if (arg.act === 'off') { g.ui.closePcPanel(); }
+      }
+    };
+
+    render();
   },
 
   // ---------- mart ----------

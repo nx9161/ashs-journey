@@ -184,7 +184,8 @@ export class Game {
       if (typeof document !== 'undefined' && document.fonts && document.fonts.load) {
         document.fonts.load('16px "PtGalmuri"', 'ASH');
         document.fonts.load('700 16px "PtGalmuri"', 'ASH');
-        document.fonts.load('16px "PtGothic"', 'ASH');
+        document.fonts.load('16px "PtPixel"', 'ASH');
+        document.fonts.load('700 16px "PtPixel"', 'ASH');
       }
     } catch (e) { /* headless / stub DOM */ }
     // Track B: auth health probe (503 banner) + sync dot. Guest target: no-ops.
@@ -428,14 +429,18 @@ export class Game {
   openBag() {
     const g = this;
     const items = [];
-    // P1/G4: pocket tabs as group headers (44px rows, description in the label).
+    // UI v2.4 (one bag): pockets are TABS now (UI.renderMenu renders the
+    // .bagtab strip from opts.bagTabs; rows carry their pocket). The v2.3
+    // full-width gradient band separators are gone — one component serves
+    // the pause menu here and the battle bag in battle.mjs.
+    const pocketsPresent = [];
     for (const pocket of POCKETS) {
       const inPocket = Object.keys(ITEMS).filter((id) => ITEMS[id].pocket === pocket && (g.state.bag[id] || 0) > 0);
       if (!inPocket.length) continue;
-      items.push({ label: '— ' + pocket + ' —', value: null, disabled: true, band: true });
+      pocketsPresent.push(pocket);
       for (const id of inPocket) {
         const hint = id === 'potion' ? ' (heals 20 HP — uses your turn in battle)' : '';
-        items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id] + hint, value: id });
+        items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id] + hint, value: id, pocket });
       }
     }
     if (!items.length) items.push({ label: '(empty)', value: null, disabled: true });
@@ -483,7 +488,7 @@ export class Game {
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    }, { rowHtml: bagRowHtml, menuClass: 'bagwin' });
+    }, { rowHtml: bagRowHtml, menuClass: 'bagwin', bagTabs: pocketsPresent });
   }
 
   openParty() {

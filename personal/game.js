@@ -1018,20 +1018,24 @@ class AudioEngine {
 
 const TILE = 16;
 
-// UI v2 (Platinum standard): the UI typefaces are the two self-hosted OFL
-// bitmap faces — Galmuri (display) and DotGothic16 (body). Canvas text uses
+// UI v2 (Platinum standard): the UI typefaces are the self-hosted OFL
+// pixel faces — Galmuri (display) and the body face. Canvas text uses
 // the same stacks as the shell CSS tokens.
-// UI v2.3 (defect 1): BODY text renders in DotGothic16 — the sturdy,
-// even-stroke bitmap grotesque. Galmuri's hand-style letterforms read thin
-// and handwritten for running text on the live build; it is kept for
-// DISPLAY only (title screen, headings — see UI_DISPLAY_FONT_STACK and the
-// --font-display CSS token). UI_FONT_STACK is the BODY stack: canvas body
+// UI v2.3 (defect 1, SUPERSEDED by v2.4 below): body text moved to
+// DotGothic16; Galmuri kept for DISPLAY only (title screen, headings —
+// see UI_DISPLAY_FONT_STACK and the --font-display CSS token).
+// UI_FONT_STACK is the BODY stack: canvas body
 // text (battle messages, databoxes, prompts) draws with it, and wrapText()
 // measures with the identical string, so measure and render can never
 // diverge again (the v2.2 mid-word clip: 'y/our first catch').
-const UI_FONT_STACK = "'PtGothic', 'PtGalmuri', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// UI v2.4 (defect 1): the body face is Pixelify Sans ('PtPixel', 400+700).
+// DotGothic16's bytes were verified sound (full Latin, loaded, applied)
+// but its half-width dot-matrix Latin dissolves into wispy strokes at
+// 13–16px in Chromium — see docs/ui-v24-root-cause.md. Pixelify's solid
+// filled letterforms hold up at body sizes.
+const UI_FONT_STACK = "'PtPixel', 'PtGalmuri', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 // Display stack (headings / title / accents): Galmuri first.
-const UI_DISPLAY_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+const UI_DISPLAY_FONT_STACK = "'PtGalmuri', 'PtPixel', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 // Platinum frame tones (canvas twins of the shell CSS tokens).
 const PT_FRAME = '#2b3040';
 const PT_FRAME2 = '#8d9bbf';
@@ -15021,6 +15025,7 @@ class UI {
     this.buildDialogue();
     this.buildMenu();
     this.buildSummaryPanel();
+    this.buildPcPanel();
     this.buildToasts();
     this.buildHudChips();
     this.buildHudStrip();
@@ -15239,6 +15244,8 @@ class UI {
   buildMenu() {
     this.menuEl = this.el('div', 'menu hidden', this.frame);
     this.menuTitle = this.el('div', 'menu-title', this.menuEl);
+    // UI v2.4: bag pocket tab strip (only populated for bag menus).
+    this.menuTabs = this.el('div', 'bagtab hidden', this.menuEl);
     this.menuList = this.el('div', 'menu-list', this.menuEl);
   }
 
@@ -15255,6 +15262,12 @@ class UI {
       grid: !!opts.grid, rowHtml: opts.rowHtml || null,
       menuClass: opts.menuClass || '',
       focusValue: opts.focusValue !== undefined ? opts.focusValue : null,
+      // UI v2.4 (one-bag): pocket tabs. Items carry `pocket`; rows with no
+      // pocket (Close/Back) are always visible. The headless item list is
+      // the FULL bag (harness contract); the DOM shows one pocket at a
+      // time under the tab strip, Platinum-style.
+      bagTabs: opts.bagTabs || null,
+      bagPocket: opts.bagPocket || (opts.bagTabs ? opts.bagTabs[0] : null),
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
     if (!this.headless) this.renderMenu();
@@ -15277,6 +15290,25 @@ class UI {
     // push the window up into the ally databox. (Inline style here beats
     // the stylesheet, so the exception must live in this line.)
     this.menuTitle.style.display = (m.title && m.menuClass !== 'battlewin') ? 'block' : 'none';
+    // UI v2.4: bag tab strip — one button per pocket; the active pocket's
+    // rows show, the rest carry .baghidden (display:none). Pointer users
+    // tap tabs; keyboard switches with left/right (see update()).
+    if (this.menuTabs) {
+      this.menuTabs.innerHTML = '';
+      if (m.bagTabs && m.bagTabs.length > 1) {
+        this.menuTabs.classList.remove('hidden');
+        m.bagTabs.forEach((p) => {
+          const b = document.createElement('button');
+          b.className = 'bagtab-btn' + (p === m.bagPocket ? ' sel' : '');
+          b.textContent = p;
+          b.setAttribute('data-pocket', p);
+          b.addEventListener('pointerdown', (e) => { e.preventDefault(); this.setBagPocket(p); });
+          this.menuTabs.appendChild(b);
+        });
+      } else {
+        this.menuTabs.classList.add('hidden');
+      }
+    }
     this.menuList.innerHTML = '';
     this.menuList.className = 'menu-list' + (m.grid ? ' menugrid' : '');
     m.items.forEach((it, i) => {
@@ -15284,11 +15316,11 @@ class UI {
       r.className = 'menu-row'
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
-        + (it.band ? ' bandrow' : '')
         + (it.wide ? ' wide' : '')
         + (it.closeRow ? ' close-row' : '')
         + (it.zeroPp ? ' zeropp' : '')
         + (it.emptySlot ? ' emptyslot' : '')
+        + (m.bagTabs && it.pocket && it.pocket !== m.bagPocket ? ' baghidden' : '')
         + (m.focusValue !== null && m.focusValue === it.value ? ' tut-focus' : '');
       // Seat D row support: an item may carry `icon` (img src / data URL) to
       // render a .picon sprite tile (party + bag rows) when no rowHtml is set;
@@ -15301,6 +15333,31 @@ class UI {
     });
   }
 
+  // UI v2.4: is this item reachable from the active bag pocket? Rows with
+  // no pocket (Close/Back) always are; pocket rows only in their pocket.
+  bagItemVisible(m, it) {
+    return !m.bagTabs || !it.pocket || it.pocket === m.bagPocket;
+  }
+
+  setBagPocket(p) {
+    const m = this.menu;
+    if (!m || !m.bagTabs || m.bagPocket === p) return;
+    m.bagPocket = p;
+    // Cursor lands on the pocket's first enabled row (or stays if none).
+    const first = m.items.findIndex((it) => !it.disabled && this.bagItemVisible(m, it) && it.pocket === p);
+    if (first >= 0) m.idx = first;
+    this.game.audio.playSfx(SFX['ui-tick']);
+    if (!this.headless) this.renderMenu();
+  }
+
+  bagTabMove(d) {
+    const m = this.menu;
+    if (!m || !m.bagTabs) return;
+    const tabs = m.bagTabs;
+    const i = tabs.indexOf(m.bagPocket);
+    this.setBagPocket(tabs[(i + d + tabs.length) % tabs.length]);
+  }
+
   moveMenu(d) {
     const m = this.menu;
     if (!m) return;
@@ -15308,7 +15365,7 @@ class UI {
     let i = m.idx;
     for (let k = 0; k < n; k++) {
       i = (i + d + n) % n;
-      if (!m.items[i].disabled) break;
+      if (!m.items[i].disabled && this.bagItemVisible(m, m.items[i])) break;
     }
     m.idx = i;
     this.game.audio.playSfx(SFX['ui-tick']);
@@ -15413,6 +15470,67 @@ class UI {
   }
 
   get summaryOpen() { return !!this.summary; }
+
+  // ---- PC box panel (UI v2.4, defect 4) ----
+  // A real box screen, not list modals: the caller (overworld-systems
+  // openPc) owns ALL state (cursor, held mon, current box) and composes
+  // bodyHtml (30-cell grid + party strip + info window); this class owns
+  // the chrome — framed panel, box nav, key routing, pointer forwarding.
+  // Actions delivered to the caller cb:
+  //   ('move', 'up'|'down'|'left'|'right') ('box', -1|1) ('confirm')
+  //   ('cancel') ('click', {act, idx})   — pointer on [data-pcact] nodes
+  buildPcPanel() {
+    this.pcEl = this.el('div', 'pcpanel hidden', this.frame);
+    const head = this.el('div', 'pchead', this.pcEl);
+    this.pcPrev = this.el('button', 'pcnav', head);
+    this.pcPrev.textContent = '◀';
+    this.pcTitle = this.el('div', 'pctitle', head);
+    this.pcNext = this.el('button', 'pcnav', head);
+    this.pcNext.textContent = '▶';
+    this.pcBody = this.el('div', 'pcbody', this.pcEl);
+    const foot = this.el('div', 'pcfoot', this.pcEl);
+    foot.textContent = 'Arrows: move · A: pick up / place · Q/E: switch box · B: log off';
+    const nav = (d) => (e) => { e.preventDefault(); if (this.pcPanel) this.pcPanel.cb('box', d); };
+    this.pcPrev.addEventListener('pointerdown', nav(-1));
+    this.pcNext.addEventListener('pointerdown', nav(1));
+  }
+
+  showPcPanel(data, cb) {
+    this.pcPanel = { data, cb };
+    this.log.push({ ui: 'pc', title: data && data.title });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) this.renderPcPanel();
+  }
+
+  renderPcPanel() {
+    if (this.headless || !this.pcEl) return;
+    const p = this.pcPanel;
+    if (!p) { this.pcEl.classList.add('hidden'); return; }
+    this.pcEl.classList.remove('hidden');
+    this.pcTitle.textContent = p.data.title || '';
+    this.pcBody.innerHTML = p.data.bodyHtml || '';
+    this.pcBody.querySelectorAll('[data-pcact]').forEach((node) => {
+      node.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        if (this.pcPanel) this.pcPanel.cb('click', { act: node.getAttribute('data-pcact'), idx: parseInt(node.getAttribute('data-idx') || '-1', 10) });
+      });
+    });
+  }
+
+  updatePcPanel(data) {
+    if (!this.pcPanel) return;
+    this.pcPanel.data = data;
+    if (!this.headless) this.renderPcPanel();
+  }
+
+  closePcPanel() {
+    if (!this.pcPanel) return;
+    this.pcPanel = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.pcEl) this.pcEl.classList.add('hidden');
+  }
+
+  get pcOpen() { return !!this.pcPanel; }
 
   buildToasts() {
     this.toastEl = this.el('div', 'toasts', this.frame);
@@ -15943,11 +16061,30 @@ class UI {
       const grid = !!this.menu.grid;
       if (input.wasPressed('up')) { grid ? this.moveMenuGrid('up') : this.moveMenu(-1); }
       else if (input.wasPressed('down')) { grid ? this.moveMenuGrid('down') : this.moveMenu(1); }
+      else if (input.wasPressed('left') && this.menu.bagTabs) { this.bagTabMove(-1); }
+      else if (input.wasPressed('right') && this.menu.bagTabs) { this.bagTabMove(1); }
+      else if (input.wasPressed('pageup') && this.menu.bagTabs) { this.bagTabMove(-1); }
+      else if (input.wasPressed('pagedown') && this.menu.bagTabs) { this.bagTabMove(1); }
       else if (input.wasPressed('left') && this.menu.battle) { grid ? this.moveMenuGrid('left') : this.moveMenu(-1); }
       else if (input.wasPressed('right') && this.menu.battle) { grid ? this.moveMenuGrid('right') : this.moveMenu(1); }
       else if (input.wasPressed('a') || input.wasPressed('start')) { this.chooseMenu(); return true; }
       else if (input.wasPressed('b') || input.wasPressed('escape')) { this.cancelMenu(); return true; }
       return true; // menu modal
+    }
+    // PC box panel is modal (UI v2.4): routed AFTER dialogue/menus so a
+    // ui.say() notice (party full, partner refusal) can overlay it and be
+    // advanced with A while the panel waits underneath.
+    if (this.pcPanel) {
+      const cb = this.pcPanel.cb;
+      if (input.wasPressed('up')) cb('move', 'up');
+      else if (input.wasPressed('down')) cb('move', 'down');
+      else if (input.wasPressed('left')) cb('move', 'left');
+      else if (input.wasPressed('right')) cb('move', 'right');
+      else if (input.wasPressed('pageup')) cb('box', -1);
+      else if (input.wasPressed('pagedown')) cb('box', 1);
+      else if (input.wasPressed('a') || input.wasPressed('start')) cb('confirm');
+      else if (input.wasPressed('b') || input.wasPressed('escape')) cb('cancel');
+      return true;
     }
     return false;
   }
@@ -16123,7 +16260,7 @@ const EDITION_MARKER = "NAMAN'S EDITION";
 // UI_DISPLAY_FONT_STACK in src/engine/render.mjs) and every r.text call
 // below passes { display: true }, so the measurer here and the renderer
 // always use the same font string (UI v2.3, defect 1).
-const FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+const FONT_STACK = "'PtGalmuri', 'PtPixel', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 const PAPER = '#f8f8f0';
 const GOLD = '#e8c832';
 
@@ -17027,10 +17164,10 @@ class BattleScene {
       const items = [];
       for (const bid of Object.keys(BALLS)) {
         const n = g.state.bag[bid] || 0;
-        items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild' });
+        items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
       }
       const potions = g.state.bag.potion || 0;
-      items.push({ label: 'Potion x' + potions, value: 'potion', disabled: potions <= 0 });
+      items.push({ label: 'Potion x' + potions, value: 'potion', disabled: potions <= 0, pocket: 'medicine' });
       items.push({ label: 'Back', value: null });
       // P0/C7: in the guided tutorial, the Poke Ball row is highlighted once the foe is weakened.
       const focusBall = this.tutorial && this._tutStage === 'bag';
@@ -17040,7 +17177,7 @@ class BattleScene {
         this.playerAction = { type: 'ball', ball: v };
         this.foeAction = null; // throwing a ball: foe still acts? DS: ball replaces your move; foe moves first if faster. Simplify: foe acts after throw fails only.
         this.beginCatch(v);
-      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin' });
+      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin bagwin', bagTabs: ['balls', 'medicine'] });
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {
@@ -19773,7 +19910,7 @@ class OverworldScene {
 
 
 const BOX_COUNT = 12;
-const BOX_CAP = 20;
+const BOX_CAP = 30; // UI v2.4: Platinum's 30 — matches the save validator's limit (was 20)
 const FOSSIL_OF = { helixfossil: 'omanyte', domefossil: 'kabuto', oldamber: 'aerodactyl' };
 
 function key(x, y) { return x + ',' + y; }
@@ -20297,101 +20434,191 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- PC boxes ----------
-  // Platinum PC box (UI v2): a 'pcbox' wallpaper window whose stored
-  // Pokemon render as sprite cells (Game#spriteDataUrl, the same helper
-  // the party/bag rows use — accessed here via this.game). Navigation
-  // rows (box-switch, party deposit/withdraw lists, link, log off / back)
-  // are full-width `wide` rows under the cell grid. All values returned
-  // to the callbacks, and the deposit/withdraw/box-switch semantics, are
-  // exactly as before; the current box + capacity stay in the title.
+  // UI v2.4 (defect 4): a real box SCREEN (ui.showPcPanel) instead of the
+  // list-modal flow — wallpaper field, a 30-slot grid that renders even
+  // when empty, the party strip alongside, a framed info window, and box
+  // switching as framed nav (Q/E or the ◀ ▶ buttons). Pick-up/place
+  // semantics: A lifts a mon — it stays in its array, dimmed, until
+  // placed, so B / log-off with full hands can never lose a mon — and A
+  // again places it: empty target = deposit / withdraw / move, occupied
+  // target = swap. Boxes stay DENSE arrays under the grid (placing on an
+  // empty cell inserts at that index): the save format stores lists, and
+  // the validator rejects sparse/null slots. Deposit keeps the house
+  // rules: boxCheck (the partner never boxes) + at least one Pokemon
+  // stays with you; depositing clears status, as before.
+  // Link Transfer (Bill's system) keeps its menu, from the side button.
   openPc() {
     const g = this.game;
     const boxes = g.state.boxes;
     for (let i = 1; i <= BOX_COUNT; i++) if (!Array.isArray(boxes['box' + i])) boxes['box' + i] = [];
-    const cur = g.state.currentBox || 'box1';
-    const spriteRowHtml = (getMon) => (it) => {
-      const mon = getMon(it);
-      if (!mon) return '<span>' + it.label + '</span>';
-      const url = (typeof g.spriteDataUrl === 'function') ? g.spriteDataUrl(mon.speciesId) : '';
-      return '<img class="picon" src="' + url + '" alt=""><span>' + it.label + '</span>';
+    const COLS = 6;
+    const st = {
+      box: Math.max(1, Math.min(BOX_COUNT, parseInt(String(g.state.currentBox || 'box1').slice(3), 10) || 1)),
+      zone: 'grid', idx: 0,
+      held: null, // { mon, from: 'grid'|'party', idx, box }
     };
-    const boxRowHtml = spriteRowHtml((it) => {
-      if (typeof it.value === 'string' && it.value.indexOf('wd:') === 0) return boxes[cur][parseInt(it.value.slice(3), 10)];
-      if (typeof it.value === 'number' && it.value >= 0) return boxes[cur][it.value];
-      return null;
-    });
-    const partyRowHtml = spriteRowHtml((it) => {
-      if (typeof it.value === 'number' && it.value >= 0) return g.state.party[it.value];
-      return null;
-    });
-    const withdrawMon = (iv) => {
-      if (g.state.party.length >= 6) { g.ui.say(['Your party is full!']); return; }
-      const mon = boxes[cur].splice(iv, 1)[0];
-      if (!mon) return;
-      g.state.party.push(mon);
-      g.ui.toast('Withdrew ' + displayName(mon, SPECIES) + '.');
+    const boxArr = () => boxes['box' + st.box];
+    const sprite = (mon) => (typeof g.spriteDataUrl === 'function') ? g.spriteDataUrl(mon.speciesId) : '';
+
+    const openLink = () => {
+      // Bill's Link Transfer: trade-evolution species evolve here —
+      // the honest single-player resolution (WS7 design call, ADR-019).
+      const cand = g.state.party.filter((m) => {
+        const sp = SPECIES[m.speciesId];
+        return sp && sp.evo && sp.evo.method === 'trade';
+      });
+      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
+      const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
+      items.push({ label: 'Back', value: null, wide: true });
+      const linkRowHtml = (it) => {
+        const mon = cand.find((m) => m.monId === it.value) || null;
+        if (!mon) return '<span>' + it.label + '</span>';
+        return '<img class="picon" src="' + sprite(mon) + '" alt=""><span>' + it.label + '</span>';
+      };
+      g.ui.showMenu('Link Transfer which?', items, (iv) => {
+        const mon = cand.find((m) => m.monId === iv);
+        if (mon) this.evolveMon(mon);
+      }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
     };
-    const mainItems = boxes[cur].map((m, i) => ({
-      label: displayName(m, SPECIES) + ' Lv' + m.level, value: 'wd:' + i,
-    }));
-    mainItems.push(
-      { label: 'Deposit', value: 'dep', wide: true },
-      { label: 'Withdraw', value: 'wd', wide: true },
-      { label: 'Change box', value: 'chg', wide: true },
-      { label: 'Link Transfer (Bill\'s system)', value: 'link', wide: true },
-      { label: 'Log off', value: 'off', wide: true },
-    );
-    g.ui.showMenu('PC — someone\'s PC (current: ' + cur.replace('box', 'Box ') + ', ' + boxes[cur].length + '/' + BOX_CAP + ')', mainItems, (v) => {
-      if (typeof v === 'string' && v.indexOf('wd:') === 0) {
-        // Box-screen shortcut: choosing a stored Pokemon's cell withdraws
-        // it, with the same party-full guard as the Withdraw list below.
-        withdrawMon(parseInt(v.slice(3), 10));
+
+    const infoFor = () => {
+      if (st.held) return 'Holding <b>' + displayName(st.held.mon, SPECIES) + ' Lv' + st.held.mon.level + '</b>.<br>Choose where to place it — a box slot or a party slot. B puts it back.';
+      if (st.zone === 'grid') {
+        const mon = boxArr()[st.idx];
+        if (mon) return '<b>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</b><br>HP ' + mon.hp + '/' + mon.maxHp + (mon.status ? ' · ' + String(mon.status).toUpperCase() : '') + '<br>A: pick up.';
+        return 'Empty box slot.<br>Pick up a party member, then place it here to deposit.';
+      }
+      const mon = g.state.party[st.idx];
+      if (mon) return '<b>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</b><br>HP ' + mon.hp + '/' + mon.maxHp + '<br>A: pick up.';
+      return 'Empty party slot.<br>Place a box Pokemon here to withdraw it.';
+    };
+
+    const render = () => {
+      const arr = boxArr();
+      let cells = '';
+      for (let i = 0; i < BOX_CAP; i++) {
+        const mon = arr[i];
+        const cls = 'pccell' + (mon ? '' : ' empty')
+          + (st.zone === 'grid' && st.idx === i ? ' cursor' : '')
+          + (st.held && st.held.from === 'grid' && st.held.box === st.box && st.held.idx === i ? ' heldsrc' : '');
+        cells += '<button class="' + cls + '" data-pcact="cell" data-idx="' + i + '">'
+          + (mon ? '<img src="' + sprite(mon) + '" alt=""><span class="pclv">Lv' + mon.level + '</span>' : '')
+          + '</button>';
+      }
+      let party = '';
+      for (let i = 0; i < 6; i++) {
+        const mon = g.state.party[i];
+        const cls = 'pcpslot' + (mon ? '' : ' empty')
+          + (st.zone === 'party' && st.idx === i ? ' cursor' : '')
+          + (st.held && st.held.from === 'party' && st.held.idx === i ? ' heldsrc' : '');
+        party += '<button class="' + cls + '" data-pcact="party" data-idx="' + i + '">'
+          + (mon ? '<img src="' + sprite(mon) + '" alt=""><span>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</span>' : '<span>—</span>')
+          + '</button>';
+      }
+      const bodyHtml = '<div class="pcmain"><div class="pcgrid">' + cells + '</div>'
+        + '<div class="pcside"><div class="pcpartyhd">PARTY</div><div class="pcparty">' + party + '</div>'
+        + '<div class="pcinfo">' + infoFor() + '</div>'
+        + '<button class="pclink" data-pcact="link">Link Transfer (Bill\'s system)</button>'
+        + '<button class="pclink" data-pcact="off">Log off</button></div></div>';
+      const data = {
+        title: 'SOMEONE\'S PC — BOX ' + st.box + ' (' + arr.length + '/' + BOX_CAP + ')'
+          + (st.held ? ' · HOLDING ' + displayName(st.held.mon, SPECIES) : ''),
+        bodyHtml,
+      };
+      if (g.ui.pcOpen) g.ui.updatePcPanel(data); else g.ui.showPcPanel(data, cb);
+    };
+
+    const place = (zone, idx) => {
+      const held = st.held;
+      if (!held) {
+        const mon = zone === 'grid' ? boxArr()[idx] : g.state.party[idx];
+        if (!mon) return;
+        st.held = { mon, from: zone, idx, box: st.box };
+        g.audio.playSfx('ui-blip');
+        render();
         return;
       }
-      if (v === 'dep') {
-        const items = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: g.state.party.length <= 1 }));
-        items.push({ label: 'Back', value: -1, wide: true });
-        g.ui.showMenu('Deposit which?', items, (iv) => {
-          if (iv === null || iv === -1) return;
-          const mon = g.state.party[iv];
-          const chk = boxCheck(mon);
-          if (!chk.ok) { g.ui.say([chk.line]); return; }
-          if (boxes[cur].length >= BOX_CAP) { g.ui.say(['That box is full!']); return; }
-          g.state.party.splice(iv, 1);
-          mon.status = null;
-          boxes[cur].push(mon);
-          g.ui.toast('Deposited ' + displayName(mon, SPECIES) + '.');
-        }, { menuClass: 'pcbox', rowHtml: partyRowHtml });
-      } else if (v === 'wd') {
-        const items = boxes[cur].map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
-        items.push({ label: 'Back', value: -1, wide: true });
-        g.ui.showMenu('Withdraw which?', items, (iv) => {
-          if (iv === null || iv === -1) return;
-          withdrawMon(iv);
-        }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
-      } else if (v === 'chg') {
-        const items = [];
-        for (let i = 1; i <= BOX_COUNT; i++) items.push({ label: 'Box ' + i + ' (' + boxes['box' + i].length + '/' + BOX_CAP + ')', value: 'box' + i, wide: true });
-        g.ui.showMenu('Change to which box?', items, (iv) => {
-          if (iv) { g.state.currentBox = iv; g.ui.toast('Current box: ' + iv.replace('box', 'Box ') + '.'); }
-        }, { menuClass: 'pcbox' });
-      } else if (v === 'link') {
-        // Bill's Link Transfer: trade-evolution species evolve here —
-        // the honest single-player resolution (WS7 design call, ADR-019).
-        const cand = g.state.party.filter((m) => {
-          const sp = SPECIES[m.speciesId];
-          return sp && sp.evo && sp.evo.method === 'trade';
-        });
-        if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
-        const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
-        items.push({ label: 'Back', value: null, wide: true });
-        const linkRowHtml = spriteRowHtml((it) => cand.find((m) => m.monId === it.value) || null);
-        g.ui.showMenu('Link Transfer which?', items, (iv) => {
-          const mon = cand.find((m) => m.monId === iv);
-          if (mon) this.evolveMon(mon);
-        }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
+      // Placing back on the origin slot just puts it down again.
+      if (held.from === zone && held.idx === idx && (zone === 'party' || held.box === st.box)) {
+        st.held = null; render(); return;
       }
-    }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
+      if (zone === 'grid') {
+        const arr = boxArr();
+        const occ = arr[idx];
+        if (held.from === 'party') {
+          if (g.state.party.length <= 1) { g.ui.say(['You need at least one Pokemon with you!']); return; }
+          const chk = boxCheck(held.mon);
+          if (!chk.ok) { g.ui.say([chk.line]); return; }
+          g.state.party.splice(held.idx, 1);
+          if (occ) { arr[idx] = held.mon; g.state.party.splice(held.idx, 0, occ); }
+          else arr.splice(Math.min(idx, arr.length), 0, held.mon);
+          held.mon.status = null;
+          g.ui.toast('Deposited ' + displayName(held.mon, SPECIES) + '.');
+        } else {
+          const src = boxes['box' + held.box];
+          if (occ) { src[held.idx] = occ; arr[idx] = held.mon; }
+          else { src.splice(held.idx, 1); arr.splice(Math.min(idx, arr.length), 0, held.mon); }
+        }
+      } else {
+        const occ = g.state.party[idx];
+        if (held.from === 'grid') {
+          const src = boxes['box' + held.box];
+          if (occ) {
+            const chk = boxCheck(occ);
+            if (!chk.ok) { g.ui.say([chk.line]); return; }
+            src[held.idx] = occ; g.state.party[idx] = held.mon;
+          } else {
+            src.splice(held.idx, 1); g.state.party.push(held.mon);
+          }
+          g.ui.toast('Withdrew ' + displayName(held.mon, SPECIES) + '.');
+        } else if (occ) {
+          g.state.party[held.idx] = occ; g.state.party[idx] = held.mon;
+        }
+      }
+      st.held = null;
+      st.zone = zone; st.idx = idx;
+      g.audio.playSfx('ui-blip');
+      render();
+    };
+
+    const move = (dir) => {
+      if (st.zone === 'grid') {
+        if (dir === 'left') st.idx = Math.max(0, st.idx - 1);
+        else if (dir === 'right') st.idx = Math.min(BOX_CAP - 1, st.idx + 1);
+        else if (dir === 'up') { if (st.idx >= COLS) st.idx -= COLS; }
+        else if (dir === 'down') {
+          if (st.idx + COLS < BOX_CAP) st.idx += COLS;
+          else { st.zone = 'party'; st.idx = Math.min(5, st.idx % COLS); }
+        }
+      } else {
+        if (dir === 'left') st.idx = Math.max(0, st.idx - 1);
+        else if (dir === 'right') st.idx = Math.min(5, st.idx + 1);
+        else if (dir === 'up') { st.zone = 'grid'; st.idx = (BOX_CAP - COLS) + Math.min(COLS - 1, st.idx); }
+      }
+      g.audio.playSfx('ui-tick');
+      render();
+    };
+
+    const cb = (action, arg) => {
+      if (action === 'move') move(arg);
+      else if (action === 'box') {
+        st.box = ((st.box - 1 + arg + BOX_COUNT) % BOX_COUNT) + 1;
+        g.state.currentBox = 'box' + st.box;
+        g.audio.playSfx('ui-tick');
+        render();
+      } else if (action === 'confirm') place(st.zone, st.idx);
+      else if (action === 'cancel') {
+        if (st.held) { st.held = null; render(); }
+        else g.ui.closePcPanel();
+      } else if (action === 'click') {
+        if (arg.act === 'cell') { st.zone = 'grid'; st.idx = arg.idx; place('grid', arg.idx); }
+        else if (arg.act === 'party') { st.zone = 'party'; st.idx = arg.idx; place('party', arg.idx); }
+        else if (arg.act === 'link') { g.ui.closePcPanel(); openLink(); }
+        else if (arg.act === 'off') { g.ui.closePcPanel(); }
+      }
+    };
+
+    render();
   },
 
   // ---------- mart ----------
@@ -20731,7 +20958,8 @@ class Game {
       if (typeof document !== 'undefined' && document.fonts && document.fonts.load) {
         document.fonts.load('16px "PtGalmuri"', 'ASH');
         document.fonts.load('700 16px "PtGalmuri"', 'ASH');
-        document.fonts.load('16px "PtGothic"', 'ASH');
+        document.fonts.load('16px "PtPixel"', 'ASH');
+        document.fonts.load('700 16px "PtPixel"', 'ASH');
       }
     } catch (e) { /* headless / stub DOM */ }
     // Track B: auth health probe (503 banner) + sync dot. Guest target: no-ops.
@@ -20975,14 +21203,18 @@ class Game {
   openBag() {
     const g = this;
     const items = [];
-    // P1/G4: pocket tabs as group headers (44px rows, description in the label).
+    // UI v2.4 (one bag): pockets are TABS now (UI.renderMenu renders the
+    // .bagtab strip from opts.bagTabs; rows carry their pocket). The v2.3
+    // full-width gradient band separators are gone — one component serves
+    // the pause menu here and the battle bag in battle.mjs.
+    const pocketsPresent = [];
     for (const pocket of POCKETS) {
       const inPocket = Object.keys(ITEMS).filter((id) => ITEMS[id].pocket === pocket && (g.state.bag[id] || 0) > 0);
       if (!inPocket.length) continue;
-      items.push({ label: '— ' + pocket + ' —', value: null, disabled: true, band: true });
+      pocketsPresent.push(pocket);
       for (const id of inPocket) {
         const hint = id === 'potion' ? ' (heals 20 HP — uses your turn in battle)' : '';
-        items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id] + hint, value: id });
+        items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id] + hint, value: id, pocket });
       }
     }
     if (!items.length) items.push({ label: '(empty)', value: null, disabled: true });
@@ -21030,7 +21262,7 @@ class Game {
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    }, { rowHtml: bagRowHtml, menuClass: 'bagwin' });
+    }, { rowHtml: bagRowHtml, menuClass: 'bagwin', bagTabs: pocketsPresent });
   }
 
   openParty() {

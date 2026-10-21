@@ -52,7 +52,7 @@ export const EDITION_MARKER = /*__EDITION_MARKER__*/;
 // UI_DISPLAY_FONT_STACK in src/engine/render.mjs) and every r.text call
 // below passes { display: true }, so the measurer here and the renderer
 // always use the same font string (UI v2.3, defect 1).
-const FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+const FONT_STACK = "'PtGalmuri', 'PtPixel', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 const PAPER = '#f8f8f0';
 const GOLD = '#e8c832';
 

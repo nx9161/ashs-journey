@@ -5,20 +5,24 @@
 
 export const TILE = 16;
 
-// UI v2 (Platinum standard): the UI typefaces are the two self-hosted OFL
-// bitmap faces — Galmuri (display) and DotGothic16 (body). Canvas text uses
+// UI v2 (Platinum standard): the UI typefaces are the self-hosted OFL
+// pixel faces — Galmuri (display) and the body face. Canvas text uses
 // the same stacks as the shell CSS tokens.
-// UI v2.3 (defect 1): BODY text renders in DotGothic16 — the sturdy,
-// even-stroke bitmap grotesque. Galmuri's hand-style letterforms read thin
-// and handwritten for running text on the live build; it is kept for
-// DISPLAY only (title screen, headings — see UI_DISPLAY_FONT_STACK and the
-// --font-display CSS token). UI_FONT_STACK is the BODY stack: canvas body
+// UI v2.3 (defect 1, SUPERSEDED by v2.4 below): body text moved to
+// DotGothic16; Galmuri kept for DISPLAY only (title screen, headings —
+// see UI_DISPLAY_FONT_STACK and the --font-display CSS token).
+// UI_FONT_STACK is the BODY stack: canvas body
 // text (battle messages, databoxes, prompts) draws with it, and wrapText()
 // measures with the identical string, so measure and render can never
 // diverge again (the v2.2 mid-word clip: 'y/our first catch').
-export const UI_FONT_STACK = "'PtGothic', 'PtGalmuri', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// UI v2.4 (defect 1): the body face is Pixelify Sans ('PtPixel', 400+700).
+// DotGothic16's bytes were verified sound (full Latin, loaded, applied)
+// but its half-width dot-matrix Latin dissolves into wispy strokes at
+// 13–16px in Chromium — see docs/ui-v24-root-cause.md. Pixelify's solid
+// filled letterforms hold up at body sizes.
+export const UI_FONT_STACK = "'PtPixel', 'PtGalmuri', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 // Display stack (headings / title / accents): Galmuri first.
-export const UI_DISPLAY_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+export const UI_DISPLAY_FONT_STACK = "'PtGalmuri', 'PtPixel', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 // Platinum frame tones (canvas twins of the shell CSS tokens).
 export const PT_FRAME = '#2b3040';
 export const PT_FRAME2 = '#8d9bbf';

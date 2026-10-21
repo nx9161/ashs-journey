@@ -321,10 +321,10 @@ export class BattleScene {
       const items = [];
       for (const bid of Object.keys(BALLS)) {
         const n = g.state.bag[bid] || 0;
-        items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild' });
+        items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
       }
       const potions = g.state.bag.potion || 0;
-      items.push({ label: 'Potion x' + potions, value: 'potion', disabled: potions <= 0 });
+      items.push({ label: 'Potion x' + potions, value: 'potion', disabled: potions <= 0, pocket: 'medicine' });
       items.push({ label: 'Back', value: null });
       // P0/C7: in the guided tutorial, the Poke Ball row is highlighted once the foe is weakened.
       const focusBall = this.tutorial && this._tutStage === 'bag';
@@ -334,7 +334,7 @@ export class BattleScene {
         this.playerAction = { type: 'ball', ball: v };
         this.foeAction = null; // throwing a ball: foe still acts? DS: ball replaces your move; foe moves first if faster. Simplify: foe acts after throw fails only.
         this.beginCatch(v);
-      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin' });
+      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin bagwin', bagTabs: ['balls', 'medicine'] });
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {

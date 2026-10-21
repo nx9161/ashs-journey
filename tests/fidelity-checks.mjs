@@ -240,12 +240,14 @@ ok('formula: damage — crit doubles level in formula (Gen 1)', F.calcDamage(5, 
 // ---------- H. UI v2.3 fix round ----------
 {
   const renderMod = await import(join(ROOT, 'src/engine/render.mjs'));
-  // Defect 1: body stack is DotGothic16-first; display stack Galmuri-first.
-  ok('v2.3 fonts: canvas body stack is PtGothic-first, display stack PtGalmuri-first',
-    renderMod.UI_FONT_STACK.startsWith("'PtGothic'") && renderMod.UI_DISPLAY_FONT_STACK.startsWith("'PtGalmuri'"));
+  // Defect 1: body stack leads with the body face; display stack Galmuri-first.
+  // UI v2.4: the body face is PtPixel (Pixelify Sans) — DotGothic16's
+  // dot-matrix Latin dissolved at body sizes (docs/ui-v24-root-cause.md).
+  ok('v2.4 fonts: canvas body stack is PtPixel-first, display stack PtGalmuri-first',
+    renderMod.UI_FONT_STACK.startsWith("'PtPixel'") && renderMod.UI_DISPLAY_FONT_STACK.startsWith("'PtGalmuri'"));
   const buildSrc = readFileSync(join(ROOT, 'scripts/build.mjs'), 'utf8');
-  ok('v2.3 fonts: shell --font token is PtGothic-first with a Galmuri display token',
-    buildSrc.includes("--font:'PtGothic','PtGalmuri'") && buildSrc.includes("--font-display:'PtGalmuri','PtGothic'"));
+  ok('v2.4 fonts: shell --font token is PtPixel-first with a Galmuri display token',
+    buildSrc.includes("--font:'PtPixel','PtGalmuri'") && buildSrc.includes("--font-display:'PtGalmuri','PtPixel'"));
 
   // Defect 1: no-mid-word-clip. wrapText measures with the render font
   // itself; with a monospace stub measurer (7px/char), lines must break

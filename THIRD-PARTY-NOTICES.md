@@ -13,9 +13,11 @@ CDN fetches, no libraries.
   licensed under the **SIL Open Font License 1.1**. Galmuri is original work
   inspired by Nintendo DS-era bitmap font design; it has no Nintendo
   affiliation, and no Nintendo font files are used.
-- **DotGothic16** (Latin subset, glyph fallback) — Copyright © 2020 The
-  DotGothic16 Project Authors, Fontworks Inc. —
-  licensed under the **SIL Open Font License 1.1**.
+- **Pixelify Sans** (body face since UI v2.4 — variable font instanced at
+  wght 400/700, Latin/symbol subset, shipped as `PtPixel`) — Copyright
+  © 2021 The Pixelify Sans Project Authors,
+  https://github.com/eifet/PixelifySans — licensed under the
+  **SIL Open Font License 1.1**.
 
 ## Track B (server API — built, DB unprovisioned)
 

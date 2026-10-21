@@ -37,6 +37,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { assertBasicLatin } from './font-gate.mjs';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const SRC = path.join(ROOT, 'src');
@@ -47,23 +48,44 @@ const SRC = path.join(ROOT, 'src');
 // name-entry cursor, gender marks), and nobody could audit what the blobs
 // were. The fonts now live as real files in assets/fonts/ (see its
 // README.md for provenance + subset ranges) and are embedded from disk at
-// build time, byte-identical in all three targets. Galmuri + DotGothic16
-// are SIL OFL 1.1 (THIRD-PARTY-NOTICES.md; OFL text in assets/fonts/).
+// build time, byte-identical in all three targets. Galmuri + Pixelify
+// Sans are SIL OFL 1.1 (THIRD-PARTY-NOTICES.md; OFL text in assets/fonts/).
 // UI v2.2 (defect 1): the 400 face is Galmuri11 Regular — the true sibling
 // of the Galmuri11 Bold headings. Galmuri14 (the v2/v2.1 400 face) loads
 // fine but its hairline outline construction renders as a wispy, unrelated
 // face next to the Bold, which is how "fonts verified loaded" shipped with
 // body text visibly NOT in the family. One family, two weights, both
 // bitmap-sturdy — the DP/Pt single-family look.
+// UI v2.4 (defect 1, third attempt): the BODY face is now Pixelify Sans
+// (family 'PtPixel', 400+700), replacing DotGothic16. DotGothic's shipped
+// bytes were never broken — full Latin, loaded, provably applied (see the
+// v2.4 root-cause in docs/ui-v24-root-cause.md) — but its Latin is a
+// half-width dot-matrix whose single-dot strokes dissolve under Chromium's
+// antialiasing at the game's 13–16px body sizes and read as handwriting.
+// Pixelify Sans has solid filled pixel letterforms that survive those
+// sizes. It ships as WOFF (not woff2) so scripts/font-gate.mjs can decode
+// the cmap of the EXACT shipped bytes in pure Node (zlib inflate + cmap
+// parse) and fail the build if basic Latin coverage is ever absent.
 function fontFaceCss() {
   const dir = path.join(ROOT, 'assets', 'fonts');
   const b64 = (f) => fs.readFileSync(path.join(dir, f)).toString('base64');
-  const face = (family, weight, file) =>
-    "@font-face{font-family:'" + family + "';src:url(data:font/woff2;base64," + b64(file) +
-    ") format('woff2');font-weight:" + weight + ";font-style:normal;font-display:swap}";
-  return face('PtGalmuri', 400, 'Galmuri11.woff2')
-    + face('PtGalmuri', 700, 'Galmuri11-Bold.woff2')
-    + face('PtGothic', 400, 'DotGothic16.woff2');
+  // UI v2.4 HARD GATE: the body face's exact shipped bytes must carry
+  // full basic Latin (scripts/font-gate.mjs) — the build dies here rather
+  // than shipping another silently-wrong body font (v2.1–v2.3 lesson).
+  for (const f of ['PtPixel.woff', 'PtPixel-Bold.woff']) {
+    const r = assertBasicLatin(fs.readFileSync(path.join(dir, f)), f);
+    if (!r.ok) {
+      throw new Error('font-gate: ' + f + ' is missing ' + r.missing.length
+        + ' basic Latin codepoints (U+0020–U+007E) — refusing to build');
+    }
+  }
+  const face = (family, weight, file, fmt) =>
+    "@font-face{font-family:'" + family + "';src:url(data:font/" + fmt + ";base64," + b64(file) +
+    ") format('" + fmt + "');font-weight:" + weight + ";font-style:normal;font-display:swap}";
+  return face('PtGalmuri', 400, 'Galmuri11.woff2', 'woff2')
+    + face('PtGalmuri', 700, 'Galmuri11-Bold.woff2', 'woff2')
+    + face('PtPixel', 400, 'PtPixel.woff', 'woff')
+    + face('PtPixel', 700, 'PtPixel-Bold.woff', 'woff');
 }
 const FONT_FACE_CSS = fontFaceCss();
 
@@ -218,7 +240,7 @@ export function validateData() {
 }
 
 const SHELL_CSS = `
-:root{--ink:#232838;--paper:#f6f8fc;--gold:#e8b832;--frame:#2b3040;--frame2:#8d9bbf;--navy:#2e4a8f;--sky:#bcd2f5;--red:#e03c31;--sys1:#4a7dd0;--sys2:#2a4d9c;--lcd:#a9c08a;--lcdink:#26331f;--font:'PtGothic','PtGalmuri',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--font-display:'PtGalmuri','PtGothic',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--rivets:radial-gradient(circle at 9px 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at 9px calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px)}
+:root{--ink:#232838;--paper:#f6f8fc;--gold:#e8b832;--frame:#2b3040;--frame2:#8d9bbf;--navy:#2e4a8f;--sky:#bcd2f5;--red:#e03c31;--sys1:#4a7dd0;--sys2:#2a4d9c;--lcd:#a9c08a;--lcdink:#26331f;--font:'PtPixel','PtGalmuri',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--font-display:'PtGalmuri','PtPixel',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--rivets:radial-gradient(circle at 9px 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) 9px,#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at 9px calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px),radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#6d7ba3 2px,rgba(0,0,0,0) 2.6px)}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#070a16;touch-action:none;overscroll-behavior:none}
 body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
@@ -243,14 +265,13 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 /* menus — Platinum windows: light interior, silver-blue title band, pale
    blue selection with a navy inset ring and a red cursor glyph. */
 .menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:min(240px,94%);max-width:94%;max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-.menu-title{font-family:var(--font-display);background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
+.menu-title{font-family:var(--font-display);background:#d7e1f2;color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
 .menu-list{padding:6px}
 .menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #ccd6ea;font:inherit;font-size:15px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:4px;min-height:48px;cursor:pointer}
 .menu-row .cur{width:18px;flex:none;color:var(--red);font-weight:bold}
 .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--navy)}
 .menu-row.disabled{color:#8a93a8;font-style:italic;cursor:default}
 .menu-row.emptyslot{border:2px dashed #9aa7c4;background:rgba(46,74,143,.05);color:#8a93a8;font-style:italic}
-.menu-row.bandrow{background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);font-weight:bold;font-style:normal;letter-spacing:2px;justify-content:flex-start;border:2px solid var(--frame);border-radius:6px 6px 0 0;margin-top:6px;padding-left:12px}
 .picon{width:28px;height:28px;flex:none;object-fit:contain;image-rendering:pixelated;background:#fff;border:2px solid var(--frame);border-radius:4px}
 /* blue system windows (Save / Options / confirms): Platinum's system style */
 .menu.syswin{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff}
@@ -276,20 +297,53 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .menu.plate-full .picon{width:36px;height:36px}
 .menu.plate-full .pball{width:18px;height:18px}
 .menu.plate-full .menu-row.close-row{min-height:40px}}
-/* bag window (UI v2.3, defect 3): the DS bag as a framed Platinum window —
-   pocket headers are the .bandrow tabs above; item rows are framed plates
-   carrying their icons, never thin lines on a white pop-up. */
+/* bag window (UI v2.4, defect 3): ONE bag component for pause + battle —
+   a framed Platinum window whose pockets are a real TAB STRIP (.bagtab
+   row rendered by UI.renderMenu when menu.bagTabs is set), never the old
+   full-width gradient section bars (the v2.3 bandrow, removed). Only the
+   active pocket's rows show; item rows are flat framed plates with icons. */
 .menu.bagwin{background-color:var(--paper);background-image:var(--rivets)}
 .menu.bagwin .menu-row{border:2px solid var(--frame);border-radius:3px;background:#fff;margin-bottom:4px}
-.menu.bagwin .menu-row.bandrow{background:linear-gradient(#e3ebfa,#b9c9e8);margin-bottom:0;border-radius:6px 6px 0 0}
 .menu.bagwin .menu-row.cursor{background:var(--sky)}
 .menu.bagwin .menu-row.disabled{border-color:#9aa7c4;background:#e8edf6}
+.menu.bagwin .menu-row.baghidden{display:none}
+.bagtab{display:flex;gap:4px;padding:8px 8px 0}
+.bagtab-btn{flex:1;font-family:var(--font);font-size:14px;font-weight:bold;letter-spacing:.5px;padding:8px 2px;min-height:40px;background:#d7e1f2;color:#4a5878;border:2px solid var(--frame);border-bottom:0;border-radius:6px 6px 0 0;cursor:pointer;text-transform:capitalize}
+.bagtab-btn.sel{background:#fff;color:var(--ink);border-top:3px solid var(--gold)}
 /* PC box (Platinum): wallpaper-striped window, sprite-cell grid */
 .menu.pcbox{background-color:#cfdcf5;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 16px,rgba(46,74,143,.07) 16px 32px),repeating-linear-gradient(-45deg,rgba(255,255,255,.22) 0 16px,rgba(46,74,143,.05) 16px 32px)}
 .menu.pcbox .menu-list{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .menu.pcbox .menu-row{flex-direction:column;justify-content:center;text-align:center;background:rgba(246,248,252,.94);border:2px solid var(--frame);border-radius:3px;outline:1px solid var(--frame2);outline-offset:-4px}
 .menu.pcbox .menu-row.wide{grid-column:1/-1;flex-direction:row}
 @media (max-width:560px){.menu.pcbox .menu-list{grid-template-columns:repeat(2,1fr)}}
+/* PC box panel (UI v2.4, defect 4): the box as a real screen — wallpaper
+   checker field, a 6x5 slot GRID that renders even when empty, the party
+   strip alongside, and a framed info window. Replaces the list-modal PC
+   flow (the .menu.pcbox rules above now serve only the Link Transfer menu). */
+.pcpanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(680px,96%);max-height:94%;overflow:auto;background-color:#cfdcf5;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 16px,rgba(46,74,143,.07) 16px 32px),repeating-linear-gradient(-45deg,rgba(255,255,255,.22) 0 16px,rgba(46,74,143,.05) 16px 32px);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26;padding:10px}
+.pchead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.pctitle{flex:1;text-align:center;font-family:var(--font-display);font-size:15px;font-weight:bold;letter-spacing:1px;color:var(--ink);background:var(--paper);border:2px solid var(--frame);border-radius:3px;padding:7px 6px}
+.pcnav{width:44px;min-height:40px;font-family:var(--font);font-size:14px;font-weight:bold;background:#fff;color:var(--ink);border:2px solid var(--frame);border-radius:3px;cursor:pointer}
+.pcmain{display:flex;gap:10px}
+.pcgrid{flex:1;display:grid;grid-template-columns:repeat(6,1fr);gap:5px;align-content:start}
+.pccell{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:52px;padding:3px 1px;background:rgba(246,248,252,.94);border:2px solid var(--frame);border-radius:3px;cursor:pointer;font-family:var(--font)}
+.pccell.empty{background:rgba(246,248,252,.45);border-color:#7c8db1}
+.pccell.cursor{outline:3px solid var(--navy);outline-offset:-3px;background:#fff}
+.pccell.heldsrc{opacity:.45}
+.pccell img{width:30px;height:30px;object-fit:contain;image-rendering:pixelated}
+.pclv{font-size:14px;font-weight:bold;color:#3c4a6a;line-height:1}
+.pcside{width:176px;flex:none;display:flex;flex-direction:column;gap:6px}
+.pcpartyhd{font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--ink)}
+.pcparty{display:flex;flex-direction:column;gap:4px}
+.pcpslot{display:flex;align-items:center;gap:6px;min-height:34px;padding:2px 6px;background:rgba(246,248,252,.94);border:2px solid var(--frame);border-radius:3px;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:bold;color:var(--ink);text-align:left}
+.pcpslot.empty{background:rgba(246,248,252,.45);border-color:#7c8db1;color:#5a6a8f}
+.pcpslot.cursor{outline:3px solid var(--navy);outline-offset:-3px;background:#fff}
+.pcpslot.heldsrc{opacity:.45}
+.pcpslot img{width:24px;height:24px;object-fit:contain;image-rendering:pixelated}
+.pcinfo{min-height:64px;background:var(--paper);border:2px solid var(--frame);border-radius:3px;padding:7px 8px;font-size:14px;line-height:1.45;color:var(--ink)}
+.pclink{font-family:var(--font);font-size:14px;font-weight:bold;padding:9px 6px;min-height:42px;background:#fff;color:var(--ink);border:2px solid var(--frame);border-radius:3px;cursor:pointer}
+.pcfoot{margin-top:8px;font-size:14px;color:#3c4a6a;text-align:center}
+@media (max-width:560px){.pcmain{flex-direction:column}.pcside{width:auto}.pcparty{flex-direction:row;flex-wrap:wrap}.pcpslot{flex:1 1 30%}.pccell{min-height:44px}.pccell img{width:24px;height:24px}}
 /* summary panel (Platinum tabbed summary: INFO / STATUS / MOVES) */
 .sumpanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94%);max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26}
 .sumtabs{display:flex;gap:6px;padding:10px 10px 0}
@@ -328,11 +382,14 @@ body.flip .ab{right:auto;left:16px}
 /* battle commands — UI v2.2 (defect 3): Platinum's touch-screen layout as a
    framed window in the message-box zone (bottom strip, where the canvas
    message box lives), NOT four free-floating gradient bars. Each command is
-   a framed Platinum button: plate-gradient interior, navy frame, a colored
-   command band at the left in the DS command colors, ink label. */
+   a framed Platinum button: navy frame, ink label, ink icon.
+   UI v2.4 (defect 2): the plate interior is FLAT — no gradient anywhere in
+   the battle UI (production read the v2.2/v2.3 plate-gradient + full-height
+   colour stripe as "wide gradient bars"). Command colour now rides on a
+   small square chip at the left, Platinum's flat command plates. */
 .cmdpanel{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:7px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
-.cmdf{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:6px 10px 6px 18px;background:linear-gradient(#fdfdff,#dfe6f2);color:var(--ink);border:2px solid var(--frame);border-radius:3px;font-family:var(--font);font-size:15px;font-weight:bold;letter-spacing:1px;cursor:pointer;touch-action:none}
-.cmdf::before{content:'';position:absolute;left:0;top:0;bottom:0;width:9px;background:var(--cmdcol,#8d9bbf);border-right:2px solid var(--frame)}
+.cmdf{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:6px 10px 6px 18px;background-color:#fdfdff;color:var(--ink);border:2px solid var(--frame);border-radius:3px;font-family:var(--font);font-size:15px;font-weight:bold;letter-spacing:1px;cursor:pointer;touch-action:none}
+.cmdf::before{content:'';position:absolute;left:7px;top:50%;transform:translateY(-50%);width:10px;height:10px;background:var(--cmdcol,#8d9bbf);border:2px solid var(--frame);border-radius:2px}
 .cmdf-fight{--cmdcol:#c93327}
 .cmdf-bag{--cmdcol:#dd8a26}
 .cmdf-party{--cmdcol:#3d9240}
@@ -357,7 +414,7 @@ body.flip .ab{right:auto;left:16px}
 /* move menu — Platinum move buttons: framed plate cells in a 2x2 grid,
    name + type pill on the top line, PP + power/acc on the second line */
 .menugrid{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px}
-.menugrid .menu-row{flex-direction:column;align-items:stretch;min-height:44px;background:linear-gradient(#fdfdff,#eef2fa);border:2px solid var(--frame);border-radius:3px;position:relative;padding:4px 8px}
+.menugrid .menu-row{flex-direction:column;align-items:stretch;min-height:44px;background-color:#fdfdff;border:2px solid var(--frame);border-radius:3px;position:relative;padding:4px 8px}
 .menugrid .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--frame)}
 .menugrid .menu-row.wide{grid-column:1/-1;min-height:28px;flex-direction:row;align-items:center;justify-content:center}
 .menugrid .menu-row .cur{display:none}
@@ -487,7 +544,7 @@ body.desktop.showtouch .controls{display:block}
 .authlink{background:none;border:0;color:#2B6CB0;font-size:15px;font-weight:bold;text-decoration:underline;cursor:pointer;min-height:48px;text-align:left;font-family:inherit;padding:0}
 .authlink:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .authcodes{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#232838;border-radius:8px;padding:12px}
-.authcode{font-family:'PtGothic',monospace;font-size:18px;font-weight:bold;color:#FFD23F;text-align:center;padding:8px 4px;border:2px dashed #5a6a8f;border-radius:6px;letter-spacing:1px}
+.authcode{font-family:'PtPixel',monospace;font-size:18px;font-weight:bold;color:#FFD23F;text-align:center;padding:8px 4px;border:2px dashed #5a6a8f;border-radius:6px;letter-spacing:1px}
 .authwarn{background:#FFF3CD;border:2px solid #D99A26;color:#7a4d00;font-size:15px;font-weight:bold;padding:8px 10px;border-radius:6px;line-height:1.4}
 .authscroll{background:#fff;border:2px solid var(--frame);border-radius:6px;padding:10px 12px;font-size:14px;line-height:1.5;color:var(--ink);max-height:220px;overflow-y:auto;white-space:pre-wrap}
 .authscroll h4{font-size:15px;margin:8px 0 4px}

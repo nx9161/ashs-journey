@@ -127,6 +127,7 @@ export class UI {
     this.buildDialogue();
     this.buildMenu();
     this.buildSummaryPanel();
+    this.buildPcPanel();
     this.buildToasts();
     this.buildHudChips();
     this.buildHudStrip();
@@ -345,6 +346,8 @@ export class UI {
   buildMenu() {
     this.menuEl = this.el('div', 'menu hidden', this.frame);
     this.menuTitle = this.el('div', 'menu-title', this.menuEl);
+    // UI v2.4: bag pocket tab strip (only populated for bag menus).
+    this.menuTabs = this.el('div', 'bagtab hidden', this.menuEl);
     this.menuList = this.el('div', 'menu-list', this.menuEl);
   }
 
@@ -361,6 +364,12 @@ export class UI {
       grid: !!opts.grid, rowHtml: opts.rowHtml || null,
       menuClass: opts.menuClass || '',
       focusValue: opts.focusValue !== undefined ? opts.focusValue : null,
+      // UI v2.4 (one-bag): pocket tabs. Items carry `pocket`; rows with no
+      // pocket (Close/Back) are always visible. The headless item list is
+      // the FULL bag (harness contract); the DOM shows one pocket at a
+      // time under the tab strip, Platinum-style.
+      bagTabs: opts.bagTabs || null,
+      bagPocket: opts.bagPocket || (opts.bagTabs ? opts.bagTabs[0] : null),
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
     if (!this.headless) this.renderMenu();
@@ -383,6 +392,25 @@ export class UI {
     // push the window up into the ally databox. (Inline style here beats
     // the stylesheet, so the exception must live in this line.)
     this.menuTitle.style.display = (m.title && m.menuClass !== 'battlewin') ? 'block' : 'none';
+    // UI v2.4: bag tab strip — one button per pocket; the active pocket's
+    // rows show, the rest carry .baghidden (display:none). Pointer users
+    // tap tabs; keyboard switches with left/right (see update()).
+    if (this.menuTabs) {
+      this.menuTabs.innerHTML = '';
+      if (m.bagTabs && m.bagTabs.length > 1) {
+        this.menuTabs.classList.remove('hidden');
+        m.bagTabs.forEach((p) => {
+          const b = document.createElement('button');
+          b.className = 'bagtab-btn' + (p === m.bagPocket ? ' sel' : '');
+          b.textContent = p;
+          b.setAttribute('data-pocket', p);
+          b.addEventListener('pointerdown', (e) => { e.preventDefault(); this.setBagPocket(p); });
+          this.menuTabs.appendChild(b);
+        });
+      } else {
+        this.menuTabs.classList.add('hidden');
+      }
+    }
     this.menuList.innerHTML = '';
     this.menuList.className = 'menu-list' + (m.grid ? ' menugrid' : '');
     m.items.forEach((it, i) => {
@@ -390,11 +418,11 @@ export class UI {
       r.className = 'menu-row'
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
-        + (it.band ? ' bandrow' : '')
         + (it.wide ? ' wide' : '')
         + (it.closeRow ? ' close-row' : '')
         + (it.zeroPp ? ' zeropp' : '')
         + (it.emptySlot ? ' emptyslot' : '')
+        + (m.bagTabs && it.pocket && it.pocket !== m.bagPocket ? ' baghidden' : '')
         + (m.focusValue !== null && m.focusValue === it.value ? ' tut-focus' : '');
       // Seat D row support: an item may carry `icon` (img src / data URL) to
       // render a .picon sprite tile (party + bag rows) when no rowHtml is set;
@@ -407,6 +435,31 @@ export class UI {
     });
   }
 
+  // UI v2.4: is this item reachable from the active bag pocket? Rows with
+  // no pocket (Close/Back) always are; pocket rows only in their pocket.
+  bagItemVisible(m, it) {
+    return !m.bagTabs || !it.pocket || it.pocket === m.bagPocket;
+  }
+
+  setBagPocket(p) {
+    const m = this.menu;
+    if (!m || !m.bagTabs || m.bagPocket === p) return;
+    m.bagPocket = p;
+    // Cursor lands on the pocket's first enabled row (or stays if none).
+    const first = m.items.findIndex((it) => !it.disabled && this.bagItemVisible(m, it) && it.pocket === p);
+    if (first >= 0) m.idx = first;
+    this.game.audio.playSfx(SFX['ui-tick']);
+    if (!this.headless) this.renderMenu();
+  }
+
+  bagTabMove(d) {
+    const m = this.menu;
+    if (!m || !m.bagTabs) return;
+    const tabs = m.bagTabs;
+    const i = tabs.indexOf(m.bagPocket);
+    this.setBagPocket(tabs[(i + d + tabs.length) % tabs.length]);
+  }
+
   moveMenu(d) {
     const m = this.menu;
     if (!m) return;
@@ -414,7 +467,7 @@ export class UI {
     let i = m.idx;
     for (let k = 0; k < n; k++) {
       i = (i + d + n) % n;
-      if (!m.items[i].disabled) break;
+      if (!m.items[i].disabled && this.bagItemVisible(m, m.items[i])) break;
     }
     m.idx = i;
     this.game.audio.playSfx(SFX['ui-tick']);
@@ -519,6 +572,67 @@ export class UI {
   }
 
   get summaryOpen() { return !!this.summary; }
+
+  // ---- PC box panel (UI v2.4, defect 4) ----
+  // A real box screen, not list modals: the caller (overworld-systems
+  // openPc) owns ALL state (cursor, held mon, current box) and composes
+  // bodyHtml (30-cell grid + party strip + info window); this class owns
+  // the chrome — framed panel, box nav, key routing, pointer forwarding.
+  // Actions delivered to the caller cb:
+  //   ('move', 'up'|'down'|'left'|'right') ('box', -1|1) ('confirm')
+  //   ('cancel') ('click', {act, idx})   — pointer on [data-pcact] nodes
+  buildPcPanel() {
+    this.pcEl = this.el('div', 'pcpanel hidden', this.frame);
+    const head = this.el('div', 'pchead', this.pcEl);
+    this.pcPrev = this.el('button', 'pcnav', head);
+    this.pcPrev.textContent = '◀';
+    this.pcTitle = this.el('div', 'pctitle', head);
+    this.pcNext = this.el('button', 'pcnav', head);
+    this.pcNext.textContent = '▶';
+    this.pcBody = this.el('div', 'pcbody', this.pcEl);
+    const foot = this.el('div', 'pcfoot', this.pcEl);
+    foot.textContent = 'Arrows: move · A: pick up / place · Q/E: switch box · B: log off';
+    const nav = (d) => (e) => { e.preventDefault(); if (this.pcPanel) this.pcPanel.cb('box', d); };
+    this.pcPrev.addEventListener('pointerdown', nav(-1));
+    this.pcNext.addEventListener('pointerdown', nav(1));
+  }
+
+  showPcPanel(data, cb) {
+    this.pcPanel = { data, cb };
+    this.log.push({ ui: 'pc', title: data && data.title });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) this.renderPcPanel();
+  }
+
+  renderPcPanel() {
+    if (this.headless || !this.pcEl) return;
+    const p = this.pcPanel;
+    if (!p) { this.pcEl.classList.add('hidden'); return; }
+    this.pcEl.classList.remove('hidden');
+    this.pcTitle.textContent = p.data.title || '';
+    this.pcBody.innerHTML = p.data.bodyHtml || '';
+    this.pcBody.querySelectorAll('[data-pcact]').forEach((node) => {
+      node.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        if (this.pcPanel) this.pcPanel.cb('click', { act: node.getAttribute('data-pcact'), idx: parseInt(node.getAttribute('data-idx') || '-1', 10) });
+      });
+    });
+  }
+
+  updatePcPanel(data) {
+    if (!this.pcPanel) return;
+    this.pcPanel.data = data;
+    if (!this.headless) this.renderPcPanel();
+  }
+
+  closePcPanel() {
+    if (!this.pcPanel) return;
+    this.pcPanel = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.pcEl) this.pcEl.classList.add('hidden');
+  }
+
+  get pcOpen() { return !!this.pcPanel; }
 
   buildToasts() {
     this.toastEl = this.el('div', 'toasts', this.frame);
@@ -1049,11 +1163,30 @@ export class UI {
       const grid = !!this.menu.grid;
       if (input.wasPressed('up')) { grid ? this.moveMenuGrid('up') : this.moveMenu(-1); }
       else if (input.wasPressed('down')) { grid ? this.moveMenuGrid('down') : this.moveMenu(1); }
+      else if (input.wasPressed('left') && this.menu.bagTabs) { this.bagTabMove(-1); }
+      else if (input.wasPressed('right') && this.menu.bagTabs) { this.bagTabMove(1); }
+      else if (input.wasPressed('pageup') && this.menu.bagTabs) { this.bagTabMove(-1); }
+      else if (input.wasPressed('pagedown') && this.menu.bagTabs) { this.bagTabMove(1); }
       else if (input.wasPressed('left') && this.menu.battle) { grid ? this.moveMenuGrid('left') : this.moveMenu(-1); }
       else if (input.wasPressed('right') && this.menu.battle) { grid ? this.moveMenuGrid('right') : this.moveMenu(1); }
       else if (input.wasPressed('a') || input.wasPressed('start')) { this.chooseMenu(); return true; }
       else if (input.wasPressed('b') || input.wasPressed('escape')) { this.cancelMenu(); return true; }
       return true; // menu modal
+    }
+    // PC box panel is modal (UI v2.4): routed AFTER dialogue/menus so a
+    // ui.say() notice (party full, partner refusal) can overlay it and be
+    // advanced with A while the panel waits underneath.
+    if (this.pcPanel) {
+      const cb = this.pcPanel.cb;
+      if (input.wasPressed('up')) cb('move', 'up');
+      else if (input.wasPressed('down')) cb('move', 'down');
+      else if (input.wasPressed('left')) cb('move', 'left');
+      else if (input.wasPressed('right')) cb('move', 'right');
+      else if (input.wasPressed('pageup')) cb('box', -1);
+      else if (input.wasPressed('pagedown')) cb('box', 1);
+      else if (input.wasPressed('a') || input.wasPressed('start')) cb('confirm');
+      else if (input.wasPressed('b') || input.wasPressed('escape')) cb('cancel');
+      return true;
     }
     return false;
   }
