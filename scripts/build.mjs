@@ -259,7 +259,19 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
    box-shadow style bundle-wide, so depth never comes from shadows). */
 .dialogue{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;min-height:96px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:14px 16px 20px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .dlg-name{display:block;font-family:var(--font-display);font-size:15px;font-weight:bold;letter-spacing:.5px;color:var(--navy);margin-bottom:2px}
-.dlg-text{font-size:16px;line-height:1.55;color:var(--ink);min-height:64px;white-space:pre-wrap}
+/* UI v2.4.1 (prose weight pass): copy the player reads as prose — dialogue
+   body, objective, terminal notes, hints — renders in the body face's BOLD
+   weight at +2px. Pixelify 400 at 13-16px has ~1px stems and read thin and
+   small next to the chunky Galmuri-bold name line on the parent's live
+   grade of v2.4, even though the face itself measured solid at 24px.
+   Bold alone still measured airy (Pixelify's letterforms have large
+   counters), so prose also carries the classic game-text treatment — a
+   hairline stroke in the text's own color plus a whisper of tight
+   tracking — tuned by screenshot measurement until the dialogue body's
+   ink density reached the name line's (the verify-live screenshot-ink
+   gate now enforces body >= 90% of name on rendered pixels). Dense
+   list rows stay 400 with a +1px rise (.menu-row, .mvpp, .sumrow, ...). */
+.dlg-text{font-size:18px;font-weight:700;line-height:1.5;color:var(--ink);min-height:64px;white-space:pre-wrap;-webkit-text-stroke:1px currentColor;letter-spacing:-.3px}
 .dlg-hint{position:absolute;right:12px;bottom:4px;color:var(--red);font-weight:bold;animation:blink 1s infinite;font-size:14px}
 @keyframes blink{50%{opacity:0}}
 /* menus — Platinum windows: light interior, silver-blue title band, pale
@@ -267,7 +279,7 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:min(240px,94%);max-width:94%;max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .menu-title{font-family:var(--font-display);background:#d7e1f2;color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
 .menu-list{padding:6px}
-.menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #ccd6ea;font:inherit;font-size:15px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:4px;min-height:48px;cursor:pointer}
+.menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #ccd6ea;font:inherit;font-size:16px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:4px;min-height:48px;cursor:pointer}
 .menu-row .cur{width:18px;flex:none;color:var(--red);font-weight:bold}
 .menu-row.cursor{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px;border-left-color:var(--navy)}
 .menu-row.disabled{color:#8a93a8;font-style:italic;cursor:default}
@@ -331,18 +343,18 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .pccell.cursor{outline:3px solid var(--navy);outline-offset:-3px;background:#fff}
 .pccell.heldsrc{opacity:.45}
 .pccell img{width:30px;height:30px;object-fit:contain;image-rendering:pixelated}
-.pclv{font-size:14px;font-weight:bold;color:#3c4a6a;line-height:1}
+.pclv{font-size:15px;font-weight:bold;color:#3c4a6a;line-height:1}
 .pcside{width:176px;flex:none;display:flex;flex-direction:column;gap:6px}
 .pcpartyhd{font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--ink)}
 .pcparty{display:flex;flex-direction:column;gap:4px}
-.pcpslot{display:flex;align-items:center;gap:6px;min-height:34px;padding:2px 6px;background:rgba(246,248,252,.94);border:2px solid var(--frame);border-radius:3px;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:bold;color:var(--ink);text-align:left}
+.pcpslot{display:flex;align-items:center;gap:6px;min-height:34px;padding:2px 6px;background:rgba(246,248,252,.94);border:2px solid var(--frame);border-radius:3px;cursor:pointer;font-family:var(--font);font-size:15px;font-weight:bold;color:var(--ink);text-align:left}
 .pcpslot.empty{background:rgba(246,248,252,.45);border-color:#7c8db1;color:#5a6a8f}
 .pcpslot.cursor{outline:3px solid var(--navy);outline-offset:-3px;background:#fff}
 .pcpslot.heldsrc{opacity:.45}
 .pcpslot img{width:24px;height:24px;object-fit:contain;image-rendering:pixelated}
-.pcinfo{min-height:64px;background:var(--paper);border:2px solid var(--frame);border-radius:3px;padding:7px 8px;font-size:14px;line-height:1.45;color:var(--ink)}
+.pcinfo{min-height:64px;background:var(--paper);border:2px solid var(--frame);border-radius:3px;padding:7px 8px;font-size:16px;font-weight:700;line-height:1.45;color:var(--ink);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .pclink{font-family:var(--font);font-size:14px;font-weight:bold;padding:9px 6px;min-height:42px;background:#fff;color:var(--ink);border:2px solid var(--frame);border-radius:3px;cursor:pointer}
-.pcfoot{margin-top:8px;font-size:14px;color:#3c4a6a;text-align:center}
+.pcfoot{margin-top:8px;font-size:15px;color:#3c4a6a;text-align:center}
 @media (max-width:560px){.pcmain{flex-direction:column}.pcside{width:auto}.pcparty{flex-direction:row;flex-wrap:wrap}.pcpslot{flex:1 1 30%}.pccell{min-height:44px}.pccell img{width:24px;height:24px}}
 /* summary panel (Platinum tabbed summary: INFO / STATUS / MOVES) */
 .sumpanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94%);max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26}
@@ -353,32 +365,32 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .sumhead{display:flex;gap:12px;align-items:center;margin-bottom:8px}
 .sumsprite{width:96px;height:96px;flex:none;object-fit:contain;image-rendering:pixelated;background:#dfe7f5;border:2px solid var(--frame);border-radius:6px}
 .sumname{font-family:var(--font-display);font-size:18px;font-weight:bold;color:var(--ink)}
-.sumsub{font-size:14px;color:#4a5878;margin-top:2px}
-.sumrow{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #ccd6ea;padding:7px 2px;font-size:15px;color:var(--ink)}
+.sumsub{font-size:15px;color:#4a5878;margin-top:2px}
+.sumrow{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #ccd6ea;padding:7px 2px;font-size:16px;color:var(--ink)}
 .sumrow b{font-weight:bold}
-.sumflavor{font-size:14px;line-height:1.5;color:#3c4a6a;padding:8px 2px}
+.sumflavor{font-size:16px;font-weight:700;line-height:1.5;color:#3c4a6a;padding:8px 2px;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .sum-move{display:flex;flex-direction:column;gap:2px;border:2px solid #ccd6ea;border-radius:6px;padding:8px 10px;margin-bottom:6px;background:#fff}
 .sum-mvname{font-weight:bold;font-size:15px;color:var(--ink)}
-.sum-mvmeta{font-size:14px;color:#4a5878}
+.sum-mvmeta{font-size:15px;color:#4a5878}
 .sumclose{width:100%;font-family:inherit;font-size:15px;font-weight:bold;padding:12px;min-height:48px;margin-top:8px;background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);border:2px solid var(--frame);border-radius:6px;cursor:pointer}
 /* toasts — Platinum mini-frames; HUD toasts in system blue */
 .toasts{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 8px;pointer-events:none}
-.toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:14px;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:16px;font-weight:700;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hudtoast{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-weight:bold}
 /* controls — emulator pad in deep navy/silver to sit under the Pt chrome */
 .controls{position:absolute;inset:0;pointer-events:none}
 .dpad{position:absolute;left:16px;bottom:12px;width:144px;height:144px;pointer-events:auto}
 body.flip .dpad{left:auto;right:16px}
-.padbtn{position:absolute;width:48px;height:48px;background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:8px;font-size:16px;pointer-events:auto;touch-action:none}
+.padbtn{position:absolute;width:48px;height:48px;background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:8px;font-family:var(--font);font-size:16px;pointer-events:auto;touch-action:none}
 .p-up{left:48px;top:0}.p-down{left:48px;bottom:0}.p-left{left:0;top:48px}.p-right{right:0;top:48px}
 .padbtn:active{background:#3c4f7d}
 .ab{position:absolute;right:16px;bottom:12px;width:160px;height:110px;pointer-events:auto}
 body.flip .ab{right:auto;left:16px}
-.abtn{position:absolute;width:72px;height:72px;border-radius:50%;background:#26304d;color:#fff;border:2px solid #8d9bbf;font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
+.abtn{position:absolute;width:72px;height:72px;border-radius:50%;background:#26304d;color:#fff;border:2px solid #8d9bbf;font-family:var(--font);font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
 .a-a{right:0;bottom:0}.a-b{left:0;bottom:0}
 .abtn:active{background:#c03028}
 .sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;pointer-events:auto}
-.sysbtn{background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:14px;font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
+.sysbtn{background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:14px;font-family:var(--font);font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
 /* battle commands — UI v2.2 (defect 3): Platinum's touch-screen layout as a
    framed window in the message-box zone (bottom strip, where the canvas
    message box lives), NOT four free-floating gradient bars. Each command is
@@ -420,8 +432,8 @@ body.flip .ab{right:auto;left:16px}
 .menugrid .menu-row .cur{display:none}
 .mvcell{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:8px;width:100%;line-height:1.15}
 .mvname{font-weight:bold;font-size:14px;grid-column:1}
-.mvpp{font-size:14px;color:#4a5878;grid-column:1}
-.mvpow{font-size:14px;color:#6a7799;grid-column:2;justify-self:end}
+.mvpp{font-size:15px;color:#4a5878;grid-column:1}
+.mvpow{font-size:15px;color:#6a7799;grid-column:2;justify-self:end}
 .mvcell .tpill{grid-column:2;grid-row:1;justify-self:end;margin:0}
 @media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.menugrid .menu-row.wide{display:none}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
 .tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:3px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
@@ -451,16 +463,16 @@ body.flip .ab{right:auto;left:16px}
 .logintab{flex:1;font-family:inherit;font-size:14px;font-weight:bold;padding:12px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:#4a5878;border:0;border-bottom:3px solid transparent;cursor:pointer}
 .logintab.sel{background:var(--paper);color:var(--ink);border-bottom-color:var(--navy)}
 .loginpane{padding:16px 14px;display:flex;flex-direction:column;gap:10px}
-.login-note{font-size:14px;line-height:1.5;color:#3c4a6a}
-.loginpane label{font-size:14px;color:#4a5878;display:flex;flex-direction:column;gap:4px}
-.login-in{font-family:inherit;font-size:14px;padding:10px;background:#eef2fb;color:#6a7799;border:2px solid var(--frame);border-radius:6px}
+.login-note{font-size:16px;font-weight:700;line-height:1.5;color:#3c4a6a;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
+.loginpane label{font-size:15px;color:#4a5878;display:flex;flex-direction:column;gap:4px}
+.login-in{font-family:inherit;font-size:15px;padding:10px;background:#eef2fb;color:#6a7799;border:2px solid var(--frame);border-radius:6px}
 .login-go{font-family:inherit;font-size:15px;font-weight:bold;padding:12px;min-height:48px;border-radius:6px;border:2px solid var(--frame);background:#ccd6ea;color:#6a7799;cursor:not-allowed}
 .login-go.active{background:linear-gradient(#6cc46a,#3d9240);border-color:var(--frame);color:#fff;cursor:pointer}
 /* guest banner — RETIRED in UI v2.1 (defect 2): the element is built for
    API compatibility (AUTH.enhanceGuestBanner) but never unhidden; the
    guest notice lives in the Trainer ID Terminal's guest pane. */
 .guestbanner{position:absolute;top:0;left:0;right:0;min-height:32px;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:14px;pointer-events:auto;z-index:20;border-bottom:3px solid var(--gold)}
-.gbx{background:none;border:0;color:#ffe9a8;font-size:14px;min-width:48px;min-height:32px;cursor:pointer}
+.gbx{background:none;border:0;color:#ffe9a8;font-family:inherit;font-size:14px;min-width:48px;min-height:32px;cursor:pointer}
 /* HUD — Platinum restraint: one small framed location window, a quiet
    objective frame, and the dex count as a Poketch-style LCD readout. */
 .hudchips{position:absolute;top:8px;left:8px;display:flex;flex-direction:column;gap:6px;z-index:14;pointer-events:none;max-width:calc(100% - 296px)}
@@ -468,7 +480,7 @@ body.flip .ab{right:auto;left:16px}
 .locchip{align-self:flex-start;max-width:100%;background-color:var(--paper);background-image:var(--rivets);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:.4px;padding:6px 12px;border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .objchip{background-color:var(--paper);background-image:var(--rivets);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:7px 12px;max-width:min(300px,72%)}
 .obj-kicker{display:block;font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:2px;color:var(--navy);margin-bottom:2px}
-.obj-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:1.4}
+.obj-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:16px;font-weight:700;line-height:1.4;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .dexchip{align-self:flex-start;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px}
 .dexchip-text{display:block;background:var(--lcd);color:var(--lcdink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:2px 8px;border:2px solid #46543a;border-radius:2px;white-space:nowrap}
 .nohud .hudchips{display:none}
@@ -502,23 +514,23 @@ body.landscape .hudstrip{top:50%;flex-direction:column}
 body.landscape .hudbtn{border-left:0;border-top:1px solid #ccd6ea}
 body.landscape .hudbtn:first-child{border-top:0}
 /* desktop keyboard-hint card — Platinum mini-frame */
-.hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-size:14px;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-family:var(--font);font-size:16px;font-weight:700;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hintcard-x{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;border:2px solid var(--frame);border-radius:6px;font-size:14px;font-weight:bold;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer;white-space:nowrap}
 body.desktop .controls{display:none}
 /* chapter title card — Platinum frame, navy kicker, red continue hint */
 .chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92%);background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;box-shadow:0 4px 18px rgba(0,0,0,.35);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
 .cc-kicker{font-family:var(--font-display);font-size:14px;font-weight:bold;letter-spacing:3px;color:var(--navy);margin-bottom:8px}
 .cc-title{font-family:var(--font-display);font-size:22px;font-weight:bold;color:var(--ink);margin-bottom:8px;line-height:1.2}
-.cc-arc{font-size:15px;color:#3c4a6a;margin-bottom:6px;line-height:1.4}
-.cc-anime{font-size:14px;color:#6a7799;line-height:1.4;margin-bottom:4px}
-.cc-hint{font-size:14px;color:var(--red);margin-top:10px;animation:blink 1s infinite}
+.cc-arc{font-size:17px;font-weight:700;color:#3c4a6a;margin-bottom:6px;line-height:1.4;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
+.cc-anime{font-size:16px;font-weight:700;color:#6a7799;line-height:1.4;margin-bottom:4px;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
+.cc-hint{font-size:16px;font-weight:700;color:var(--red);margin-top:10px;animation:blink 1s infinite;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 body.desktop.showtouch .controls{display:block}
 @media (pointer:coarse){body.desktop .controls{display:block}}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
    Structure and behavior untouched; presentation only. */
 .authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
 .authhead{font-family:var(--font-display);background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
-.authsub{font-size:14px;color:#3c4a6a;padding:8px 14px 0;line-height:1.45}
+.authsub{font-size:16px;font-weight:700;color:#3c4a6a;padding:8px 14px 0;line-height:1.45;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .authtabs{display:flex;border-bottom:2px solid var(--frame)}
 .authtab{flex:1;font-family:inherit;font-size:15px;font-weight:bold;padding:12px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:#4a5878;border:0;border-right:2px solid var(--frame);cursor:pointer}
 .authtab:last-child{border-right:0}
@@ -537,7 +549,7 @@ body.desktop.showtouch .controls{display:block}
 .authgo.ghost{background:var(--paper);color:var(--ink)}
 .authgo:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .autherr{background:#fdecea;border:2px solid #C0392B;color:#C0392B;font-size:15px;font-weight:bold;padding:8px 10px;border-radius:6px;line-height:1.4}
-.authhint{font-size:14px;color:#4a5878;line-height:1.4}
+.authhint{font-size:16px;font-weight:700;color:#4a5878;line-height:1.4;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .authhint.ok{color:#1e7a38;font-weight:bold}
 .authcheck{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:var(--ink);line-height:1.4;cursor:pointer}
 .authcheck input{width:24px;height:24px;min-width:24px;margin-top:2px;accent-color:#2B6CB0}
@@ -546,18 +558,18 @@ body.desktop.showtouch .controls{display:block}
 .authcodes{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#232838;border-radius:8px;padding:12px}
 .authcode{font-family:'PtPixel',monospace;font-size:18px;font-weight:bold;color:#FFD23F;text-align:center;padding:8px 4px;border:2px dashed #5a6a8f;border-radius:6px;letter-spacing:1px}
 .authwarn{background:#FFF3CD;border:2px solid #D99A26;color:#7a4d00;font-size:15px;font-weight:bold;padding:8px 10px;border-radius:6px;line-height:1.4}
-.authscroll{background:#fff;border:2px solid var(--frame);border-radius:6px;padding:10px 12px;font-size:14px;line-height:1.5;color:var(--ink);max-height:220px;overflow-y:auto;white-space:pre-wrap}
+.authscroll{background:#fff;border:2px solid var(--frame);border-radius:6px;padding:10px 12px;font-size:15px;line-height:1.5;color:var(--ink);max-height:220px;overflow-y:auto;white-space:pre-wrap}
 .authscroll h4{font-size:15px;margin:8px 0 4px}
 .authdraft{background:#232838;color:#FFD23F;font-size:14px;font-weight:bold;padding:6px 10px;border-radius:6px}
 .confcols{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.confcol{background:#fff;border:2px solid var(--frame);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink)}
+.confcol{background:#fff;border:2px solid var(--frame);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:15px;color:var(--ink)}
 .confcol h4{font-size:15px;margin:0}
 .confcol .pick{margin-top:4px}
 .syncdot{position:absolute;top:34px;left:8px;z-index:15;display:flex;align-items:center;gap:6px;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-4px;border-radius:3px;color:var(--ink);font-size:14px;font-family:inherit;padding:6px 10px;pointer-events:none}
 .syncdot .sdot{width:10px;height:10px;border-radius:50%;background:#2FA84F}
 .syncdot.pending .sdot{background:#D99A26}
 .syncdot.offline .sdot{background:#8a93a8}
-.banner503{position:absolute;top:0;left:0;right:0;z-index:45;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:15px;padding:10px 12px;border-bottom:3px solid var(--gold);pointer-events:auto;text-align:center}
+.banner503{position:absolute;top:0;left:0;right:0;z-index:45;display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:15px;font-weight:700;padding:10px 12px;border-bottom:3px solid var(--gold);pointer-events:auto;text-align:center}
 .banner503 button{background:var(--paper);color:var(--ink);border:2px solid var(--frame);border-radius:6px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer}
 .pwmeter{display:flex;gap:6px;align-items:center;font-size:14px;font-weight:bold;color:#4a5878}
 .pwmeter .bar{flex:1;height:10px;background:#e3ebfa;border:2px solid var(--frame);border-radius:5px;overflow:hidden}

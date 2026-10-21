@@ -19801,7 +19801,9 @@ class OverworldScene {
       const bx = Math.round(this.player.px) - 24, by = Math.round(this.player.py) - 30;
       r.panel(bx, by, 76, 20, '#f8f8f0', '#202028');
       // Centered in the bubble: with align:'center', x is the center point.
-      r.text(prompt, bx + 38, by + 3, { size: 14, color: '#202028', shadow: false, align: 'center' });
+      // UI v2.4.1: the prompt is prose the player reads — bold body face
+      // at 16 (was 400/14, same thin-stem defect class as the dialogue).
+      r.text(prompt, bx + 38, by + 2, { size: 16, bold: true, color: '#202028', shadow: false, align: 'center' });
     }
     // P1/D8: clock glyph — day/night pixel icon + season bar (no text, ambient).
     this.renderClockGlyph(r);

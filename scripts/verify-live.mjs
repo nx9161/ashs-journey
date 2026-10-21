@@ -21,11 +21,22 @@
 //           framed in the message zone); with --save-pc: the PC box
 //           screen renders exactly 30 cells + 6 party slots and switches
 //           boxes with E.
+// UI v2.4.1 adds the SCREENSHOT-INK gate: v2.4's probes still passed while
+// the parent's eyes failed the dialogue — Pixelify 400 measures solid at
+// 24px yet renders ~1px stems at the real 13-16px body sizes. So the gate
+// now measures RENDERED PIXELS at native size: crop the speaker-name line
+// and the dialogue-body line out of the actual intro screenshot, compute
+// each line's ink density (dark-pixel ratio inside the line's own ink
+// bounding box, per line band), and require body >= 90% of name — the
+// name line is the chunky Galmuri-bold reference the parent approved, so
+// the standard is self-referential and cannot drift from what eyes see.
+// A computed body font-size >= 15px verdict rides alongside.
 // Exit code 1 on any FAIL. SKIP lines mark phases whose inputs were not
 // provided; they do not fail the run.
 
 import { spawn } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { inflateSync } from 'node:zlib';
 import { assertBasicLatin } from './font-gate.mjs';
 
 const args = process.argv.slice(2);
@@ -177,6 +188,103 @@ async function shot(name) {
 }
 const visible = (sel) => ev(`(() => { const e = document.querySelector(${JSON.stringify(sel)}); if (!e) return false; const r = e.getBoundingClientRect(); return !e.classList.contains('hidden') && r.height > 0; })()`);
 
+// ---- UI v2.4.1: minimal PNG decode + per-line ink density ----
+// Chromium screenshots are non-interlaced 8-bit PNGs (color types 6/2/0).
+// No image deps: zlib inflate is built in; unfiltering is ~30 lines.
+function decodePng(buf) {
+  if (buf.length < 8 || buf.readUInt32BE(0) !== 0x89504e47) throw new Error('not a png');
+  let off = 8, width = 0, height = 0, bitDepth = 0, colorType = 0;
+  const idat = [];
+  while (off + 8 <= buf.length) {
+    const len = buf.readUInt32BE(off);
+    const type = buf.toString('ascii', off + 4, off + 8);
+    const data = buf.subarray(off + 8, off + 8 + len);
+    if (type === 'IHDR') {
+      width = data.readUInt32BE(0); height = data.readUInt32BE(4);
+      bitDepth = data[8]; colorType = data[9];
+      if (data[12] !== 0) throw new Error('interlaced png unsupported');
+    } else if (type === 'IDAT') idat.push(data);
+    else if (type === 'IEND') break;
+    off += 12 + len;
+  }
+  const bpp = colorType === 6 ? 4 : colorType === 2 ? 3 : colorType === 0 ? 1 : 0;
+  if (!bpp || bitDepth !== 8) throw new Error('unsupported png: colorType ' + colorType + ' bitDepth ' + bitDepth);
+  const raw = inflateSync(Buffer.concat(idat));
+  const stride = width * bpp;
+  const out = new Uint8Array(width * height * 4);
+  let prev = new Uint8Array(stride);
+  for (let y = 0; y < height; y++) {
+    const f = raw[y * (stride + 1)];
+    const row = raw.subarray(y * (stride + 1) + 1, y * (stride + 1) + 1 + stride);
+    const cur = new Uint8Array(stride);
+    for (let x = 0; x < stride; x++) {
+      const a = x >= bpp ? cur[x - bpp] : 0, b = prev[x], c = x >= bpp ? prev[x - bpp] : 0;
+      let v = row[x];
+      if (f === 1) v = (v + a) & 255;
+      else if (f === 2) v = (v + b) & 255;
+      else if (f === 3) v = (v + ((a + b) >> 1)) & 255;
+      else if (f === 4) {
+        const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+        v = (v + (pa <= pb && pa <= pc ? a : pb <= pc ? b : c)) & 255;
+      }
+      cur[x] = v;
+    }
+    for (let x = 0; x < width; x++) {
+      const s = x * bpp, d = (y * width + x) * 4;
+      out[d] = cur[s];
+      out[d + 1] = bpp > 1 ? cur[s + 1] : cur[s];
+      out[d + 2] = bpp > 2 ? cur[s + 2] : cur[s];
+      out[d + 3] = bpp === 4 ? cur[s + 3] : 255;
+    }
+    prev = cur;
+  }
+  return { width, height, data: out };
+}
+
+// Ink density of the text inside an element rect (CSS px -> device px via
+// `scale`): rows containing dark pixels are clustered into line bands
+// (a blank gap > 4 rows splits lines); each band's density is
+// ink / (band height x band ink width). Decorations that share the rect
+// (the dialogue's red ▼ cue, a stray rivet) form small dense blobs, so
+// bands under 6px tall or 24px wide are discarded as non-text, and the
+// result is the TRUE MEDIAN of the surviving band densities — a multi-line
+// body is judged line-by-line against the single-line name, never by its
+// densest fragment.
+function lineInkDensity(png, rect, scale) {
+  if (!rect || !rect.w || !rect.h) return { density: 0, bands: 0, detail: [] };
+  const x0 = Math.max(0, Math.floor(rect.x * scale)), x1 = Math.min(png.width - 1, Math.ceil((rect.x + rect.w) * scale));
+  const y0 = Math.max(0, Math.floor(rect.y * scale)), y1 = Math.min(png.height - 1, Math.ceil((rect.y + rect.h) * scale));
+  const dark = (x, y) => {
+    const i = (y * png.width + x) * 4;
+    return 0.2126 * png.data[i] + 0.7152 * png.data[i + 1] + 0.0722 * png.data[i + 2] < 140;
+  };
+  const inkRows = [];
+  for (let y = y0; y <= y1; y++) {
+    for (let x = x0; x <= x1; x++) if (dark(x, y)) { inkRows.push(y); break; }
+  }
+  if (!inkRows.length) return { density: 0, bands: 0, detail: [] };
+  const raw = [];
+  let start = inkRows[0], prevY = inkRows[0];
+  for (let i = 1; i < inkRows.length; i++) {
+    if (inkRows[i] - prevY > 4) { raw.push([start, prevY]); start = inkRows[i]; }
+    prevY = inkRows[i];
+  }
+  raw.push([start, prevY]);
+  const detail = raw.map(([ya, yb]) => {
+    let ink = 0, minx = Infinity, maxx = -1;
+    for (let y = ya; y <= yb; y++) for (let x = x0; x <= x1; x++) {
+      if (dark(x, y)) { ink++; if (x < minx) minx = x; if (x > maxx) maxx = x; }
+    }
+    const w = maxx - minx + 1, h = yb - ya + 1;
+    return { y0: ya, h, w, density: Math.round((ink / (h * w)) * 1000) / 1000, text: h >= 6 && w >= 24 };
+  });
+  const dens = detail.filter((b) => b.text).map((b) => b.density).sort((a, b) => a - b);
+  if (!dens.length) return { density: 0, bands: 0, detail };
+  const mid = Math.floor(dens.length / 2);
+  const median = dens.length % 2 ? dens[mid] : Math.round(((dens[mid - 1] + dens[mid]) / 2) * 1000) / 1000;
+  return { density: median, bands: dens.length, detail };
+}
+
 async function bootToOverworld(saveObj) {
   await send('Page.addScriptToEvaluateOnNewDocument', {
     source: `try{localStorage.setItem('pdr.save.guest', ${JSON.stringify(JSON.stringify(saveObj))});}catch(e){}`,
@@ -289,14 +397,37 @@ try {
   await shot('vl-intro');
   const dlg = await ev(`(() => {
     const t = document.querySelector('.dlg-text'), n = document.querySelector('.dlg-name');
+    const rect = (e) => { if (!e) return null; const r = e.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; };
+    const cs = t ? getComputedStyle(t) : null;
     return {
-      text: t ? getComputedStyle(t).fontFamily : '',
+      text: cs ? cs.fontFamily : '',
       name: n ? getComputedStyle(n).fontFamily : '',
       body: t ? t.textContent.slice(0, 40) : '',
+      size: cs ? parseFloat(cs.fontSize) : 0,
+      weight: cs ? cs.fontWeight : '',
+      nameRect: rect(n),
+      textRect: rect(t),
     };
   })()`);
   verdict('play: dialogue body computes PtPixel-first', /^\s*"?PtPixel/.test(dlg.text), dlg.text.slice(0, 50) + ' | "' + dlg.body + '"');
   verdict('play: dialogue speaker name computes PtGalmuri-first', /^\s*"?PtGalmuri/.test(dlg.name), dlg.name.slice(0, 50));
+  // UI v2.4.1 screenshot-ink gate: rendered pixels at native size, not
+  // font selection. Body line must carry >= 90% of the name line's ink.
+  verdict('play: dialogue body font-size >= 15px (computed)', dlg.size >= 15, dlg.size + 'px @ weight ' + dlg.weight);
+  try {
+    const shotRes = await send('Page.captureScreenshot', { format: 'png' }, S);
+    const png = decodePng(Buffer.from(shotRes.data, 'base64'));
+    const scale = png.width / (await ev('window.innerWidth'));
+    const nameInk = lineInkDensity(png, dlg.nameRect, scale);
+    const bodyInk = lineInkDensity(png, dlg.textRect, scale);
+    verdict('play: dialogue body ink density >= 90% of name line (native screenshot)',
+      bodyInk.density > 0 && nameInk.density > 0 && bodyInk.density >= 0.9 * nameInk.density,
+      'body=' + bodyInk.density + ' (' + bodyInk.bands + ' text band' + (bodyInk.bands === 1 ? '' : 's') + ') name=' + nameInk.density
+      + ' ratio=' + (nameInk.density ? Math.round(bodyInk.density / nameInk.density * 100) / 100 : 0)
+      + ' bodyBands=' + JSON.stringify(bodyInk.detail) + ' nameBands=' + JSON.stringify(nameInk.detail));
+  } catch (e) {
+    verdict('play: dialogue body ink density >= 90% of name line (native screenshot)', false, 'screenshot/ink error: ' + e.message);
+  }
 
   // ---- [play] seeded save: bag tabs + battle ----
   if (SAVE) {
