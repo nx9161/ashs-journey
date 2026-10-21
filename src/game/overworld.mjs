@@ -32,6 +32,10 @@ export class OverworldScene {
     this.pausedMenu = false;
     // P1/C6: movement tutorial shows once until the player takes a first step (or 30s).
     this.moveTut = g.state.story.flags.moveTutDone ? null : { t: 0 };
+    // HUD chip change-detection state (the DOM chips live in the UI seat;
+    // syncHud pushes values only when they change). undefined = never sent.
+    this._hudLoc = undefined; this._hudObj = undefined; this._hudDex = undefined;
+    this._hudBannerObj = null;
     // P1/D7: partner mood pip — tap = pet (same as facing + A on Pikachu).
     g.ui.onMoodTap = () => this.petPartner();
     g.ui.showMoodPip(true);
@@ -429,14 +433,16 @@ export class OverworldScene {
     // P1/J2: player card header + Quit to title (confirm; autosaves first).
     const badges = g.state.badges.kanto.length;
     const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
-    // Track B: account row — logged in shows the account menu; logged out (vercel)
-    // offers login; guest target keeps the honest disabled row (Track A).
+    // Track B: account row — logged in shows the account menu; guest target
+    // keeps the honest disabled row (Track A). Guests get NO row here: the
+    // old 'Log in to sync ★' upsell was removed (login lives on the title
+    // Terminal); a null row is filtered out of the menu list below.
     const authEnabled = (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED);
     const accountRow = !authEnabled
       ? { label: 'Account — coming in Track B', value: 'account', disabled: true }
       : g.authUser
         ? { label: 'Account', value: 'account' }
-        : { label: 'Log in to sync ★', value: 'login' };
+        : null;
     g.ui.showMenu('MENU', [
       { label: g.state.player.name + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
       { label: this.map.name, value: null, disabled: true },
@@ -446,7 +452,7 @@ export class OverworldScene {
       { label: 'Journey', value: 'journey' },
       { label: 'Save', value: 'save' },
       { label: 'Options', value: 'options' },
-      accountRow,
+      ...(accountRow ? [accountRow] : []),
       { label: 'Quit to title', value: 'quit' },
       { label: 'Close', value: 'close' },
     ], (value) => {
@@ -457,7 +463,6 @@ export class OverworldScene {
       else if (value === 'save') g.openSave();
       else if (value === 'options') g.openOptions();
       else if (value === 'account' && authEnabled && g.authUser) AUTH.openAccountMenu(g);
-      else if (value === 'login' && authEnabled) g.openLogin('continue');
       else if (value === 'quit') {
         g.ui.showMenu('Quit to title? (autosaves first)', [
           { label: 'Quit', value: 'yes' },
@@ -527,40 +532,72 @@ export class OverworldScene {
     if (this.enc && this.enc.phase === 'exclaim') {
       r.text('!', this.player.px + 4, this.player.py - 14, { size: 14, bold: true, color: '#e84040' });
     }
-    // P1/C6: movement tutorial — pulsing ring on the player + coach text.
+    // P1/C6: movement tutorial — the coach line moved to a one-shot DOM toast
+    // (syncHud). On the map only a subtle spawn ring remains: it fades out
+    // over the first 1.2s after spawn and never pulses again (the old endless
+    // pulse read as a target reticle). The partner '▼' fades with it.
     if (this.moveTut) {
-      const pr = 12 + Math.sin(g._animT * 0.008) * 3;
-      const c = r.ctx;
-      c.strokeStyle = '#ffe9a8'; c.lineWidth = 2;
-      c.beginPath(); c.arc(this.player.px + 8, this.player.py + 8, pr, 0, Math.PI * 2); c.stroke();
-      r.text('Walk with the D-pad — Pikachu follows you!', 8, 44, { size: 14, bold: true, color: '#ffe9a8' });
-      r.text('▼', Math.round(this.partner.px) + 4, Math.round(this.partner.py) - 28, { size: 14, bold: true, color: '#ffe9a8' });
+      const fade = Math.max(0, 1 - this.moveTut.t / 1.2);
+      if (fade > 0) {
+        const gold = 'rgba(255,233,168,' + fade.toFixed(3) + ')';
+        const c = r.ctx;
+        c.strokeStyle = gold; c.lineWidth = 2;
+        c.beginPath(); c.arc(this.player.px + 8, this.player.py + 8, 12, 0, Math.PI * 2); c.stroke();
+        r.text('▼', Math.round(this.partner.px) + 4, Math.round(this.partner.py) - 28, { size: 14, bold: true, color: gold, shadow: false });
+      }
     }
     // P1/D5: contextual interaction prompt bubble.
     const prompt = this.interactPrompt();
     if (prompt) {
       const bx = Math.round(this.player.px) - 24, by = Math.round(this.player.py) - 30;
       r.panel(bx, by, 76, 20, '#f8f8f0', '#202028');
-      r.text(prompt, bx + 6, by + 3, { size: 14, color: '#202028', shadow: false });
+      // Centered in the bubble: with align:'center', x is the center point.
+      r.text(prompt, bx + 38, by + 3, { size: 14, color: '#202028', shadow: false, align: 'center' });
     }
     // P1/D8: clock glyph — day/night pixel icon + season bar (no text, ambient).
     this.renderClockGlyph(r);
     r.end();
-    // HUD overlays (canvas) — P1/A5: >= 14px.
-    if (this.banner.t > 0) {
-      r.text(this.banner.text, 8, 8, { size: 14, bold: true, color: '#fff' });
+    // HUD lives in DOM chips now (UI seat): the area banner, the permanent
+    // objective line, the area-completion line and the Dex counter are no
+    // longer draped over the map as canvas text. Values are pushed on change.
+    this.syncHud();
+  }
+
+  // Push location / objective / dex values to the UI seat's DOM chips, only
+  // when a value actually changed. Every call is guarded so builds (and
+  // headless suites) without the new UI methods never crash. The strings are
+  // byte-identical to the old canvas draws — only the presentation moved.
+  // The area banner and the movement tutorial become one-shot toasts.
+  syncHud() {
+    const g = this.game;
+    const ui = g && g.ui;
+    if (!ui) return;
+    if (ui.setLocationChip) {
+      const loc = this.map.name;
+      if (loc !== this._hudLoc) { this._hudLoc = loc; ui.setLocationChip(loc); }
     }
-    // P1/D6: persistent objective banner under the area banner.
-    r.text(this.objectiveText(), 8, 26, { size: 14, color: '#ffe9a8' });
-    const comp = this.areaCompletion();
-    if (comp) {
-      r.text(this.map.name + ' · ' + comp.caught + '/' + comp.total + ' caught', 8, r.viewH - 18, { size: 14, color: '#ffe9a8' });
+    if (ui.setObjectiveChip) {
+      const obj = this.objectiveText();
+      if (obj !== this._hudObj) { this._hudObj = obj; ui.setObjectiveChip(obj); }
     }
-    // Dex caught counter (honest wording). D3: on desktop the DOM HUD strip is
-    // ~218 CSS px wide at the top-right; shift the counter left in logical px so
-    // the left-aligned text clears it (phone layouts keep the signed offset).
-    const dexX = g.layoutMode === 'desktop' ? r.viewW - 172 : r.viewW - 92;
-    r.text('Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL, dexX, 8, { size: 14, color: '#fff' });
+    if (ui.setDexChip) {
+      const dex = 'Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL;
+      if (dex !== this._hudDex) { this._hudDex = dex; ui.setDexChip(dex); }
+    }
+    if (ui.hudToast) {
+      // Banner trigger: the banner object is REPLACED on every trigger —
+      // in onStep's warp path and in overworld-systems (surf/fly/safari) —
+      // so a fresh object with t > 0 is exactly one toast, never per frame.
+      if (this.banner && this.banner.t > 0 && this.banner !== this._hudBannerObj) {
+        this._hudBannerObj = this.banner;
+        ui.hudToast(this.banner.text, 2600);
+      }
+      // Movement tutorial toast: once, when the tutorial starts.
+      if (this.moveTut && !this.moveTut._toastSent) {
+        this.moveTut._toastSent = true;
+        ui.hudToast('Walk with the D-pad — Pikachu follows you!', 3600);
+      }
+    }
   }
 
   // P1/D5: what would A do on the faced tile? (bubble text, or null)

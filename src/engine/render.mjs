@@ -10,6 +10,7 @@ export class Renderer {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.dpr = 1;
+    this.scaleX = 1; this.scaleY = 1; // backing-store px per logical px
     this.viewW = 0; this.viewH = 0;   // logical px
     this.camX = 0; this.camY = 0;     // camera top-left in world px
     this.shakeX = 0; this.shakeY = 0; // screen-shake offset (px, logical)
@@ -30,19 +31,29 @@ export class Renderer {
   }
 
   // Logical viewport (game px). Internal res capped by design (gameux §2).
+  // Crisp-text fix: the backing store must match the on-screen CSS size
+  // (cssW x cssH) times DPR — NOT logical x DPR. Scaling the backing store
+  // from the logical size made the browser upscale the finished bitmap to
+  // the (much larger) CSS box, smearing all canvas text. The world
+  // transform therefore becomes backing/logical (scaleX/scaleY), so
+  // drawing still happens in logical units at full display resolution.
   resize(logicalW, logicalH, cssW, cssH) {
     this.viewW = logicalW; this.viewH = logicalH;
-    this.canvas.width = Math.round(logicalW * this.dpr);
-    this.canvas.height = Math.round(logicalH * this.dpr);
+    const bw = Math.round((cssW != null ? cssW : logicalW) * this.dpr);
+    const bh = Math.round((cssH != null ? cssH : logicalH) * this.dpr);
+    this.canvas.width = bw;
+    this.canvas.height = bh;
+    this.scaleX = logicalW ? bw / logicalW : this.dpr;
+    this.scaleY = logicalH ? bh / logicalH : this.dpr;
     if (this.canvas.style) {
-      this.canvas.style.width = cssW + 'px';
-      this.canvas.style.height = cssH + 'px';
+      this.canvas.style.width = (cssW != null ? cssW : logicalW) + 'px';
+      this.canvas.style.height = (cssH != null ? cssH : logicalH) + 'px';
     }
   }
 
   begin() {
     const c = this.ctx;
-    c.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    c.setTransform(this.scaleX, 0, 0, this.scaleY, 0, 0);
     c.imageSmoothingEnabled = false;
     c.fillStyle = '#000';
     c.fillRect(0, 0, this.viewW, this.viewH);
@@ -103,14 +114,16 @@ export class Renderer {
   text(str, x, y, opts) {
     const o = opts || {};
     const c = this.ctx;
-    c.font = (o.bold ? 'bold ' : '') + (o.size || 8) + 'px monospace';
+    c.font = (o.bold ? 'bold ' : '') + (o.size || 8) + 'px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
     c.textBaseline = 'top';
+    if (o.align) c.textAlign = o.align;
     if (o.shadow !== false) {
       c.fillStyle = o.shadowColor || 'rgba(0,0,0,0.55)';
       c.fillText(str, x + 1, y + 1);
     }
     c.fillStyle = o.color || '#fff';
     c.fillText(str, x, y);
+    if (o.align) c.textAlign = 'left';
   }
 
   panel(x, y, w, h, fill, border) {

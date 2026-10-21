@@ -98,6 +98,10 @@ export class UI {
     this._guestBannerOff = false;
     this.onMoodTap = null;
     this._moodWanted = false;
+    // Seat D HUD chips (overworld seat drives these via the setters below).
+    this.hudChips = { location: null, objective: null, dex: null };
+    this._chipEls = null;   // { wrap, location, locationText, objective, objectiveText, dex, dexText }
+    this._hudToastQ = [];   // headless record for hudToast (cap 2, mirrors the DOM cap)
     this.chapterCard = null; // D2: chapter title card overlay while open
     this._ccT = 0;
   }
@@ -110,6 +114,7 @@ export class UI {
     this.buildDialogue();
     this.buildMenu();
     this.buildToasts();
+    this.buildHudChips();
     this.buildHudStrip();
     this.buildGuestBanner();
     this.buildMoodPip();
@@ -390,8 +395,13 @@ export class UI {
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
         + (it.zeroPp ? ' zeropp' : '')
+        + (it.emptySlot ? ' emptyslot' : '')
         + (m.focusValue !== null && m.focusValue === it.value ? ' tut-focus' : '');
+      // Seat D row support: an item may carry `icon` (img src / data URL) to
+      // render a .picon sprite tile (party + bag rows) when no rowHtml is set;
+      // with rowHtml, the caller's markup can use .picon / .emptyslot directly.
       if (m.rowHtml) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span>' + m.rowHtml(it, i);
+      else if (it.icon) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span><img class="picon" src="' + it.icon + '" alt=""><span>' + it.label + '</span>';
       else r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span><span>' + it.label + '</span>';
       if (!it.disabled) r.addEventListener('pointerdown', (e) => { e.preventDefault(); this.chooseMenu(i); });
       this.menuList.appendChild(r);
@@ -460,6 +470,80 @@ export class UI {
     this.toastEl.appendChild(d);
     while (this.toastEl.children.length > 3) this.toastEl.removeChild(this.toastEl.firstChild);
     setTimeout(() => { if (d.parentNode) d.parentNode.removeChild(d); }, 2500);
+  }
+
+  // ---- Seat D: HUD chips + bottom-edge HUD toast ----
+  // DOM (inside #ui, sibling of .hudstrip):
+  //   <div class="hudchips">
+  //     <div class="hudchip locchip hidden"><span class="locchip-text"></span></div>
+  //     <div class="hudchip objchip hidden"><span class="obj-kicker">▸ OBJECTIVE</span><span class="obj-text"></span></div>
+  //     <div class="hudchip dexchip hidden"><span class="dexchip-text"></span></div>
+  //   </div>
+  // Visibility follows the HUD-strip rules exactly: the column is hidden by
+  // .nohud (setHudVisible) and .inbattle (setBattleMode) in CSS, same as
+  // .hudstrip — menus/dialogues overlay it, they do not hide it.
+  buildHudChips() {
+    const wrap = this.el('div', 'hudchips', this.root);
+    const loc = this.el('div', 'hudchip locchip hidden', wrap);
+    const locText = this.el('span', 'locchip-text', loc);
+    const obj = this.el('div', 'hudchip objchip hidden', wrap);
+    const kick = this.el('span', 'obj-kicker', obj);
+    kick.textContent = '▸ OBJECTIVE';
+    const objText = this.el('span', 'obj-text', obj);
+    const dex = this.el('div', 'hudchip dexchip hidden', wrap);
+    const dexText = this.el('span', 'dexchip-text', dex);
+    this._chipEls = {
+      wrap, location: loc, locationText: locText,
+      objective: obj, objectiveText: objText, dex, dexText,
+    };
+    this._syncChipAnchor();
+    // Re-apply any state set before init() ran.
+    this._renderChip('location');
+    this._renderChip('objective');
+    this._renderChip('dex');
+  }
+
+  _renderChip(key) {
+    if (this.headless || !this._chipEls) return;
+    const els = this._chipEls;
+    const text = this.hudChips[key];
+    const chip = key === 'location' ? els.location : key === 'objective' ? els.objective : els.dex;
+    const label = key === 'location' ? els.locationText : key === 'objective' ? els.objectiveText : els.dexText;
+    if (text) { label.textContent = text; chip.classList.remove('hidden'); }
+    else { label.textContent = ''; chip.classList.add('hidden'); }
+  }
+
+  _setChip(key, text, logUi) {
+    this.hudChips[key] = text ? String(text) : null;
+    this.log.push({ ui: logUi, text: this.hudChips[key] });
+    this._renderChip(key);
+  }
+
+  // Location name only (e.g. 'Pallet Town'). Null/empty hides the chip.
+  setLocationChip(textOrNull) { this._setChip('location', textOrNull, 'locationchip'); }
+
+  // Current objective, up to 2 lines (CSS line-clamp + ellipsis). Null hides.
+  setObjectiveChip(textOrNull) { this._setChip('objective', textOrNull, 'objectivechip'); }
+
+  // Compact dex pill — caller formats it (e.g. 'DEX 1/1025'). Null hides.
+  setDexChip(textOrNull) { this._setChip('dex', textOrNull, 'dexchip'); }
+
+  // Bottom-edge toast: reuses the .toasts stack (CSS anchors it just above
+  // the controls zone, centered, max-width 92vw via .toast), gold-rimmed via
+  // .hudtoast, auto-dismisses after ms (default 2600), queue capped at 2.
+  hudToast(text, ms) {
+    const dur = (typeof ms === 'number' && ms > 0) ? ms : 2600;
+    this.log.push({ ui: 'hudtoast', text, ms: dur });
+    this._hudToastQ.push({ text, ms: dur });
+    if (this._hudToastQ.length > 2) this._hudToastQ.shift();
+    if (this.headless || !this.toastEl) return;
+    const d = document.createElement('div');
+    d.className = 'toast hudtoast';
+    d.textContent = text;
+    this.toastEl.appendChild(d);
+    const live = this.toastEl.querySelectorAll('.hudtoast');
+    if (live.length > 2) live[0].remove();
+    setTimeout(() => { if (d.parentNode) d.parentNode.removeChild(d); }, dur);
   }
 
   // ---- P0/B1: Trainer ID Terminal (login stub — Track B dark, zero network) ----
@@ -720,6 +804,10 @@ export class UI {
   }
 
   // ---- P1/D7: partner mood pip (persistent, tappable) ----
+  // Seat D: CSS re-homes it into the right rail, directly under the HUD
+  // button rail (top:110px/right:8px, 48px round ink button); it is hidden
+  // in landscape (body.landscape) where the vertical rail owns the right
+  // edge. No longer a floating bottom-right page widget.
   buildMoodPip() {
     const b = this.el('button', 'moodpip hidden', this.root);
     b.setAttribute('aria-label', 'Pikachu');
@@ -819,7 +907,28 @@ export class UI {
     if (old && old.remove) old.remove();
   }
 
+  // HUD chips anchor to the CANVAS FRAME, not the viewport: the stage
+  // centers the canvas, so viewport-anchored chips would float over the
+  // page margin on desktop and drift off-frame on phones. Recompute only
+  // when the canvas rect actually changes (checked on a throttle).
+  _syncChipAnchor() {
+    const els = this._chipEls;
+    if (!els || !els.wrap || typeof document === 'undefined') return;
+    const cv = document.getElementById && document.getElementById('game');
+    if (!cv || !cv.getBoundingClientRect) return;
+    const r = cv.getBoundingClientRect();
+    if (!(r.width > 0)) return;
+    const key = Math.round(r.left) + ',' + Math.round(r.top) + ',' + Math.round(r.width);
+    if (key === this._chipAnchorKey) return;
+    this._chipAnchorKey = key;
+    els.wrap.style.left = Math.round(r.left + 10) + 'px';
+    els.wrap.style.top = Math.round(r.top + 10) + 'px';
+    els.wrap.style.maxWidth = Math.max(150, Math.round(r.width - 292)) + 'px';
+  }
+
   update(dt) {
+    this._chipTick = (this._chipTick || 0) + 1;
+    if (this._chipTick % 15 === 0) this._syncChipAnchor();
     const input = this.game.input;
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;

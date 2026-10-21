@@ -123,12 +123,105 @@ export class IntroScene {
   }
 
   render(r) {
-    // Professor's lab backdrop: original flat bands.
+    // Professor's lab: a real interior in the same flat style — warm wall
+    // (upper 2/3), darker floor (lower 1/3) with a baseboard line, simple
+    // original lab props, and the professor himself, large and centered
+    // above the dialogue zone. The speaker name lives on the DOM dialogue
+    // name plate (ui.say receives INTRO_SCRIPT.professor) — no bare canvas
+    // name text here. All art access is guarded like title.mjs so headless
+    // node suites stay green when artCanvas/document are unavailable.
+    // Transform discipline: draw inside begin()/end() like every other
+    // scene, camera pinned to the origin (no world camera here).
+    const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
+    r.begin();
+    const g = this.game;
     const w = r.viewW, h = r.viewH;
-    const bands = ['#1a2a4a', '#2a3a5a', '#3a4a6a'];
-    for (let i = 0; i < bands.length; i++) {
-      this.game.ctx2dfill(bands[i], 0, (h * i) / bands.length, w, h / bands.length + 1);
+    const cx = w / 2;
+    const floorY = Math.round((h * 2) / 3);
+    const floorH = h - floorY;
+
+    // --- Interior shell ---
+    g.ctx2dfill('#6a5741', 0, 0, w, floorY); // wall (warm lab tone)
+    g.ctx2dfill('#5d4b37', 0, 0, w, 8); // soft ceiling shadow band
+    g.ctx2dfill('#382c21', 0, floorY, w, floorH); // floor (darker)
+    // Floor perspective lines (flat, receding boards).
+    g.ctx2dfill('#463829', 0, floorY + Math.round(floorH * 0.38), w, 2);
+    g.ctx2dfill('#2f251c', 0, floorY + Math.round(floorH * 0.72), w, 2);
+    // Baseboard: light strip + dark seam where wall meets floor.
+    g.ctx2dfill('#8a7458', 0, floorY - 4, w, 4);
+    g.ctx2dfill('#241a12', 0, floorY, w, 2);
+
+    // --- Prop 1: cabinet / shelf silhouette (left), muted bottles ---
+    {
+      const cabW = 44, cabH = 54, cabX = 8, cabY = floorY - cabH;
+      g.ctx2dfill('#4c5a48', cabX, cabY, cabW, cabH);
+      g.ctx2dfill('#333d31', cabX, cabY + cabH - 3, cabW, 3);
+      g.ctx2dfill('#3c4838', cabX + 3, cabY + 17, cabW - 6, 2); // shelf lines
+      g.ctx2dfill('#3c4838', cabX + 3, cabY + 33, cabW - 6, 2);
+      g.ctx2dfill('#7a9a8a', cabX + 7, cabY + 8, 5, 8); // bottles (muted)
+      g.ctx2dfill('#c8a86a', cabX + 16, cabY + 9, 4, 7);
+      g.ctx2dfill('#8a7a9a', cabX + 27, cabY + 8, 5, 8);
+      g.ctx2dfill('#a05a3c', cabX + 8, cabY + 24, 6, 8);
+      g.ctx2dfill('#7a9a8a', cabX + 24, cabY + 25, 5, 7);
+      g.ctx2dfill('#c8c8d0', cabX + 10, cabY + 40, 10, 9); // stacked books/papers
+      g.ctx2dfill('#8a7458', cabX + 12, cabY + 42, 10, 2);
     }
-    r.text(INTRO_SCRIPT.professor, 8, 8, { size: 14, bold: true, color: '#ffe9a8' });
+
+    // --- Prop 2: potted plant (left of the professor) ---
+    {
+      const potW = 16, potX = 58, potY = floorY - 10;
+      g.ctx2dcircle(potX + 3, potY - 5, 5, '#4a7a3a'); // leaves
+      g.ctx2dcircle(potX + potW - 3, potY - 5, 5, '#4a7a3a');
+      g.ctx2dcircle(potX + potW / 2, potY - 9, 5, '#3c6630');
+      g.ctx2dfill('#8a4a32', potX, potY, potW, 10); // pot
+      g.ctx2dfill('#a05a3c', potX - 2, potY, potW + 4, 3); // rim
+    }
+
+    // --- Prop 3: lab machine with a glass dome (right) ---
+    {
+      const mW = 48, mH = 46, mX = w - 56, mY = floorY - mH;
+      g.ctx2dcircle(mX + mW / 2, mY + 15, 13, 'rgba(170,205,220,0.55)'); // dome
+      g.ctx2dcircle(mX + mW / 2, mY + 16, 6, '#d8b84a'); // specimen glow inside
+      g.ctx2dfill('#5d646e', mX, mY + 24, mW, mH - 24); // base unit
+      g.ctx2dfill('#4a5058', mX + 4, mY + 28, mW - 8, 8); // control inset
+      g.ctx2dcircle(mX + mW - 9, mY + 32, 2, '#7ac86a'); // status light
+      g.ctx2dfill('#33383f', mX, mY + mH - 3, mW, 3); // feet shadow
+    }
+
+    // --- Professor: large portrait, centered above the dialogue zone ---
+    const scale = (w >= 320 || h >= 250) ? 5 : 4; // 24x24 art -> 120 or 96 px
+    const size = 24 * scale;
+    const animT = (g && typeof g._animT === 'number') ? g._animT : 0;
+    const bob = Math.round(Math.sin(animT / 600) * 1); // gentle +/-1px idle
+    const px = Math.round(cx - size / 2);
+    const py = floorY + 6 - size + bob;
+    // Soft oval shadow / plate grounding the portrait on the floor line.
+    try {
+      const c = r.ctx;
+      c.fillStyle = 'rgba(20,14,8,0.35)';
+      c.beginPath();
+      if (typeof c.ellipse === 'function') c.ellipse(cx, floorY + 8, size * 0.42, 6, 0, 0, Math.PI * 2);
+      else c.arc(cx, floorY + 8, size * 0.3, 0, Math.PI * 2);
+      c.fill();
+    } catch (e) {
+      g.ctx2dfill('rgba(20,14,8,0.35)', cx - size * 0.4, floorY + 5, size * 0.8, 5);
+    }
+    let spr = null;
+    try {
+      if (typeof document !== 'undefined' && typeof artCanvas === 'function') {
+        spr = artCanvas(document, 'portrait-hawthorn', scale, false);
+      }
+    } catch (e) { spr = null; }
+    if (spr) {
+      r.blitS(spr, px, py, size, size);
+    } else {
+      // Fallback silhouette (original shapes) when portrait art is absent:
+      // head + lab coat, same footprint as the portrait treatment.
+      g.ctx2dcircle(cx, py + size * 0.32, size * 0.17, '#c8c4bc'); // hair
+      g.ctx2dcircle(cx, py + size * 0.36, size * 0.14, '#f0c090'); // face
+      g.ctx2dfill('#f0f0f0', cx - size * 0.21, py + size * 0.5, size * 0.42, size * 0.46); // coat
+      g.ctx2dfill('#7a8a5a', cx - size * 0.05, py + size * 0.56, size * 0.1, size * 0.3); // shirt
+    }
+    r.end(); r.camX = pcx; r.camY = pcy;
   }
 }

@@ -27,6 +27,23 @@ const REGIONS = [
 
 Object.assign(Game.prototype, {
   // ---------- bag ----------
+  // Bag target rows (Rare Candy / medicine / stones / TM teaching) carry
+  // the target Pokemon's battle-art sprite, same treatment as the Party
+  // menu in main.mjs: <img class="picon"> from the species data URL,
+  // cached per species id via Game#spriteDataUrl (main.mjs) so toDataURL
+  // runs once per species. Back/empty rows stay plain text. The bag's own
+  // item rows get their icons in main.mjs openBag (uiIcon data URLs).
+  partyTargetRowHtml(it) {
+    if (!it || it.value === -1 || it.value === null || it.value === undefined) {
+      return '<span>' + (it ? it.label : '') + '</span>';
+    }
+    const mon = this.state && this.state.party ? this.state.party[it.value] : null;
+    if (!mon) return '<span>' + it.label + '</span>';
+    const img = (typeof this.spriteDataUrl === 'function')
+      ? '<img class="picon" src="' + this.spriteDataUrl(mon.speciesId) + '" alt="">' : '';
+    return img + '<span>' + it.label + '</span>';
+  },
+
   useBagItem(id) {
     const g = this;
     const it = ITEMS[id];
@@ -46,7 +63,7 @@ Object.assign(Game.prototype, {
         this.recalcMon(m, true);
         g.audio.playSfx('levelup');
         g.ui.say([displayName(m, SPECIES) + ' grew to Lv ' + m.level + '!'], () => { this.queueEvolution(m); finish(); });
-      });
+      }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
       return;
     }
     if (it.pocket === 'medicine') {
@@ -83,7 +100,7 @@ Object.assign(Game.prototype, {
         }
         if (it.ppRestoreAll) { for (const mv of m.moves) mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestoreAll); apply(); return; }
         finish();
-      });
+      }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
       return;
     }
     if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone'].includes(id)) {
@@ -99,13 +116,19 @@ Object.assign(Game.prototype, {
       if (!stoneTargets.length) { g.ui.say(['It won\'t have any effect on your party.']); return; }
       const items = stoneTargets.map((m) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: m.monId }));
       items.push({ label: 'Back', value: null });
+      const stoneRowHtml = (row) => {
+        if (!row || row.value === null || row.value === undefined) return '<span>' + (row ? row.label : '') + '</span>';
+        const mon = stoneTargets.find((m) => m.monId === row.value);
+        if (!mon || typeof g.spriteDataUrl !== 'function') return '<span>' + row.label + '</span>';
+        return '<img class="picon" src="' + g.spriteDataUrl(mon.speciesId) + '" alt=""><span>' + row.label + '</span>';
+      };
       g.ui.showMenu('Use ' + it.name + ' on...', items, (v) => {
         const mon = stoneTargets.find((m) => m.monId === v);
         if (!mon) { finish(); return; }
         g.state.bag[id]--;
         if (ow && ow.evolveMon) ow.evolveMon(mon, id);
         finish();
-      });
+      }, { rowHtml: stoneRowHtml });
       return;
     }
     // Key items + balls: honest guidance lines.
@@ -182,7 +205,7 @@ Object.assign(Game.prototype, {
       if (t === null || t === -1) { g.openBag(); return; }
       const m = g.state.party[t];
       this.teachMove(m, moveId, isHm, () => { if (!isHm) g.state.bag[itemId]--; g.openBag(); });
-    });
+    }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
   },
 
   teachMove(mon, moveId, isHm, done) {

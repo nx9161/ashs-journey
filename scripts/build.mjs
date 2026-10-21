@@ -192,47 +192,56 @@ export function validateData() {
 }
 
 const SHELL_CSS = `
+:root{--ink:#202028;--paper:#f8f8f0;--gold:#e8c832;--font:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#0a0a12;touch-action:none;overscroll-behavior:none}
-body{font-family:monospace;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-#stage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center}
-#game{image-rendering:pixelated;background:#000}
+body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#stage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 90% 60% at 50% 38%,rgba(58,74,140,.28),rgba(10,10,18,0) 62%),repeating-linear-gradient(45deg,rgba(248,248,240,.025) 0 2px,transparent 2px 14px),#0a0a12}
+#game{image-rendering:pixelated;background:#000;outline:2px solid #3d3d52;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 #ui{position:fixed;inset:0;pointer-events:none}
 .hidden{display:none!important}
-/* dialogue */
-.dialogue{position:absolute;left:4%;right:4%;bottom:34%;min-height:96px;background:#f8f8f0;border:3px solid #202028;border-radius:6px;padding:10px 12px 18px;pointer-events:auto;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
-.dlg-name{position:absolute;top:-16px;left:10px;background:#202028;color:#ffe9a8;font-size:14px;font-weight:bold;padding:2px 10px;border-radius:4px}
-.dlg-text{font-size:16px;line-height:1.5;color:#202028;min-height:64px;white-space:pre-wrap}
-.dlg-hint{position:absolute;right:12px;bottom:4px;color:#202028;animation:blink 1s infinite;font-size:14px}
+/* dialogue — Z-A pattern: paper panel anchored to the bottom of the frame
+   area (clamped so it clears the touch-controls zone on small screens and
+   stays a bottom sheet on desktop), ink name plate overlapping the top edge. */
+.dialogue{position:absolute;left:4%;right:4%;bottom:clamp(12px,14vh,120px);min-height:96px;background:var(--paper);border:2px solid var(--ink);border-radius:10px;padding:12px 14px 20px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.dlg-name{position:absolute;top:-14px;left:10px;background:var(--ink);color:var(--gold);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:6px}
+.dlg-face{position:absolute;left:10px;top:12px;width:48px;height:48px;image-rendering:pixelated}
+.dlg-text{font-size:16px;line-height:1.55;color:var(--ink);min-height:64px;white-space:pre-wrap}
+.dlg-hint{position:absolute;right:12px;bottom:4px;color:var(--ink);animation:blink 1s infinite;font-size:14px}
 @keyframes blink{50%{opacity:0}}
-/* menus */
-.menu{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);min-width:220px;max-width:92vw;max-height:60vh;overflow:auto;background:#f8f8f0;border:3px solid #202028;border-radius:6px;pointer-events:auto;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
-.menu-title{background:#202028;color:#ffe9a8;font-size:14px;font-weight:bold;padding:6px 10px}
-.menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-bottom:1px solid #d8d8cc;font:inherit;font-size:14px;color:#202028;text-align:left;padding:10px;min-height:44px;cursor:pointer}
-.menu-row .cur{width:18px;color:#c03028;font-weight:bold}
-.menu-row.cursor{background:#e8e0c8}
-.menu-row.disabled{color:#a0a0a0}
-/* toasts */
-.toasts{position:absolute;left:0;right:0;bottom:24%;display:flex;flex-direction:column;align-items:center;gap:6px}
-.toast{background:#202028;color:#ffe9a8;font-size:14px;padding:8px 14px;border-radius:16px;pointer-events:none}
-/* controls */
+/* menus — shared panel system: paper, 2px ink border, 10px radius, soft shadow.
+   Selection = gold tint + left gold bar + cursor glyph. Disabled = muted italic. */
+.menu{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);min-width:240px;max-width:92vw;max-height:62vh;overflow:auto;background:var(--paper);border:2px solid var(--ink);border-radius:10px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.menu-title{background:var(--ink);color:var(--gold);font-size:14px;font-weight:bold;letter-spacing:2px;text-transform:uppercase;padding:10px 12px}
+.menu-list{padding:6px}
+.menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #e2e2d6;font:inherit;font-size:15px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:6px;min-height:48px;cursor:pointer}
+.menu-row .cur{width:18px;flex:none;color:#9a7b0a;font-weight:bold}
+.menu-row.cursor{background:rgba(232,200,50,.22);border-left-color:var(--gold)}
+.menu-row.disabled{color:#8f8f96;font-style:italic;cursor:default}
+.menu-row.emptyslot{border:2px dashed #b9b9ae;background:rgba(32,32,40,.04);color:#8f8f96;font-style:italic}
+.picon{width:28px;height:28px;flex:none;object-fit:contain;image-rendering:pixelated;background:#fff;border:2px solid var(--ink);border-radius:6px}
+/* toasts — bottom-edge, centered, just above the controls zone (never mid-map) */
+.toasts{position:absolute;left:0;right:0;bottom:clamp(72px,18vh,168px);display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 8px;pointer-events:none}
+.toast{background:var(--ink);color:var(--paper);font-size:14px;line-height:1.4;padding:10px 16px;border-radius:999px;pointer-events:none;max-width:min(520px,92vw);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.hudtoast{border:2px solid var(--gold);font-weight:bold}
+/* controls — compact offsets so nothing overflows 360x640-class screens */
 .controls{position:absolute;inset:0;pointer-events:none}
-.dpad{position:absolute;left:24px;bottom:24px;width:132px;height:132px;pointer-events:auto}
-body.flip .dpad{left:auto;right:24px}
-.padbtn{position:absolute;width:44px;height:44px;background:#2a2a34;color:#fff;border:2px solid #55555f;border-radius:8px;font-size:16px;pointer-events:auto;touch-action:none}
-.p-up{left:44px;top:0}.p-down{left:44px;bottom:0}.p-left{left:0;top:44px}.p-right{right:0;top:44px}
+.dpad{position:absolute;left:16px;bottom:12px;width:144px;height:144px;pointer-events:auto}
+body.flip .dpad{left:auto;right:16px}
+.padbtn{position:absolute;width:48px;height:48px;background:#2a2a34;color:#fff;border:2px solid #55555f;border-radius:8px;font-size:16px;pointer-events:auto;touch-action:none}
+.p-up{left:48px;top:0}.p-down{left:48px;bottom:0}.p-left{left:0;top:48px}.p-right{right:0;top:48px}
 .padbtn:active{background:#4a4a58}
-.ab{position:absolute;right:24px;bottom:24px;width:160px;height:110px;pointer-events:auto}
-body.flip .ab{right:auto;left:24px}
+.ab{position:absolute;right:16px;bottom:12px;width:160px;height:110px;pointer-events:auto}
+body.flip .ab{right:auto;left:16px}
 .abtn{position:absolute;width:72px;height:72px;border-radius:50%;background:#2a2a34;color:#fff;border:2px solid #55555f;font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
 .a-a{right:0;bottom:0}.a-b{left:0;bottom:0}
 .abtn:active{background:#c03028}
-.sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:24px;display:flex;gap:8px;pointer-events:auto}
-.sysbtn{background:#2a2a34;color:#ccc;border:2px solid #55555f;border-radius:14px;font-size:14px;padding:10px 14px;min-height:44px;pointer-events:auto}
+.sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;pointer-events:auto}
+.sysbtn{background:#2a2a34;color:#ccc;border:2px solid #55555f;border-radius:14px;font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
 /* P0/E8: battle command 2x2 grid (replaces the D-pad zone) */
-.cmdpanel{position:absolute;left:24px;bottom:24px;right:24px;display:grid;grid-template-columns:1fr 1fr;gap:8px;pointer-events:auto}
-.cmdf{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:88px;min-height:64px;background:#2a2a34;color:#ffe9a8;border:3px solid #55555f;border-radius:10px;font-family:inherit;font-size:14px;font-weight:bold;cursor:pointer;touch-action:none}
-.cmdf.cursor{border-color:#e8c832;background:#3a3a48}
+.cmdpanel{position:absolute;left:16px;bottom:12px;right:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px;pointer-events:auto}
+.cmdf{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:88px;min-height:64px;background:var(--ink);color:var(--gold);border:2px solid #55555f;border-radius:10px;font-family:var(--font);font-size:14px;font-weight:bold;cursor:pointer;touch-action:none}
+.cmdf.cursor{border-color:var(--gold);background:#34343f}
 .cmdf.disabled{opacity:.35}
 .cmdf.dimmed{opacity:.45}
 .cmdf.tut-focus{border-color:#58c94f;animation:cmdfocus 1s infinite}
@@ -242,7 +251,7 @@ body.flip .ab{right:auto;left:24px}
 /* P0/E9: move menu 2x2 grid + type badge pills (icon+text, never color-alone) */
 .menugrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px}
 .menugrid .menu-row{flex-direction:column;align-items:flex-start;min-height:72px;border:2px solid #d8d8cc;border-radius:8px;position:relative}
-.menugrid .menu-row.cursor{border-color:#c03028;background:#e8e0c8}
+.menugrid .menu-row.cursor{border-color:var(--gold);background:rgba(232,200,50,.22)}
 .mvcell{display:flex;flex-direction:column;gap:2px;width:100%}
 .mvname{font-weight:bold;font-size:14px}
 .mvpp{font-size:14px;color:#555}
@@ -252,10 +261,10 @@ body.flip .ab{right:auto;left:24px}
 .menu-row.zeropp{color:#a0a0a0}
 .menu-row.zeropp::after{content:'';position:absolute;left:6px;right:6px;top:50%;height:3px;background:#c03028;transform:rotate(-8deg);border-radius:2px}
 .menu-row.tut-focus{border-color:#58c94f;animation:cmdfocus 1s infinite}
-/* P0/C3: name-entry A-Z grid (44px keys) */
+/* P0/C3: name-entry A-Z grid (44px keys) — font swap + house shadow token only */
 .nkbover{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:auto;background:rgba(0,0,0,.45);z-index:30}
 @media(min-width:700px){.nkbover{align-items:center}}
-.namekb{background:#f8f8f0;border:3px solid #202028;border-radius:10px;padding:12px;width:100%;max-width:480px;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
+.namekb{background:#f8f8f0;border:2px solid #202028;border-radius:10px;padding:12px;width:100%;max-width:480px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .nkb-title{font-size:14px;font-weight:bold;color:#202028;margin-bottom:8px}
 .nkb-display{font-size:20px;font-weight:bold;color:#202028;background:#fff;border:2px solid #202028;border-radius:6px;padding:8px 10px;margin-bottom:10px;min-height:44px;letter-spacing:2px}
 .nkb-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
@@ -268,10 +277,10 @@ body.flip .ab{right:auto;left:24px}
 @keyframes nkbshake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
 /* P0/B1: Trainer ID Terminal (login stub — Track B dark, zero network) */
 .loginover{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:auto;background:rgba(10,10,18,.82);z-index:40}
-.login{background:#14141c;border:3px solid #e8c832;border-radius:10px;padding:0;width:min(420px,92vw);box-shadow:2px 2px 0 rgba(0,0,0,.25);overflow:hidden}
+.login{background:#14141c;border:3px solid #e8c832;border-radius:10px;padding:0;width:min(420px,92vw);box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
 .login-head{background:#e8c832;color:#14141c;font-size:15px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
 .login-tabs{display:flex}
-.logintab{flex:1;font-family:inherit;font-size:14px;font-weight:bold;padding:12px 4px;min-height:44px;background:#2a2a34;color:#999;border:0;border-bottom:3px solid transparent;cursor:pointer}
+.logintab{flex:1;font-family:inherit;font-size:14px;font-weight:bold;padding:12px 4px;min-height:48px;background:#2a2a34;color:#999;border:0;border-bottom:3px solid transparent;cursor:pointer}
 .logintab.sel{background:#14141c;color:#ffe9a8;border-bottom-color:#e8c832}
 .loginpane{padding:16px 14px;display:flex;flex-direction:column;gap:10px}
 .login-note{font-size:14px;line-height:1.5;color:#ccc}
@@ -279,42 +288,64 @@ body.flip .ab{right:auto;left:24px}
 .login-in{font-family:inherit;font-size:14px;padding:10px;background:#0a0a12;color:#666;border:2px solid #333;border-radius:6px}
 .login-go{font-family:inherit;font-size:15px;font-weight:bold;padding:12px;min-height:48px;border-radius:8px;border:2px solid #555;background:#2a2a34;color:#777;cursor:not-allowed}
 .login-go.active{background:#58c94f;border-color:#3a7a3a;color:#102010;cursor:pointer}
-/* P0/B1: in-game guest banner (28px strip, dismissible per session) */
-.guestbanner{position:absolute;top:0;left:0;right:0;min-height:28px;display:flex;align-items:center;justify-content:center;gap:10px;background:#202028;color:#ffe9a8;font-size:14px;pointer-events:auto;z-index:20;border-bottom:2px solid #e8c832}
-.gbx{background:none;border:0;color:#ffe9a8;font-size:14px;min-width:44px;min-height:28px;cursor:pointer}
-/* P1/D4: HUD quick-strip (portrait: overlaid top-right of canvas) */
-.hudstrip{position:absolute;top:34px;right:8px;display:flex;gap:6px;pointer-events:auto;z-index:15}
+/* P0/B1: in-game guest banner — slim ink strip, gold underline, dismissible */
+.guestbanner{position:absolute;top:0;left:0;right:0;min-height:32px;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--paper);font-size:14px;pointer-events:auto;z-index:20;border-bottom:3px solid var(--gold)}
+.gbx{background:none;border:0;color:var(--gold);font-size:14px;min-width:48px;min-height:32px;cursor:pointer}
+/* HUD chips (Seat D API: setLocationChip / setObjectiveChip / setDexChip).
+   Top-left column inside the frame area. Base top clears the guest banner
+   (32px) AND the sync-dot row that shares top:34px/left:8px. On wide screens
+   the column's max-width reserves the top-right button rail; on narrow
+   phones (max-width:560px) the column drops BELOW the rail instead, so the
+   chips never overlap the buttons and keep a usable width at 360px. */
+.hudchips{position:absolute;top:72px;left:8px;display:flex;flex-direction:column;gap:6px;z-index:14;pointer-events:none;max-width:calc(100vw - 308px)}
+.hudchip{pointer-events:none}
+.locchip{align-self:flex-start;max-width:100%;background:var(--ink);color:var(--paper);font-size:14px;font-weight:bold;letter-spacing:.4px;padding:8px 12px;border-radius:999px;border:2px solid rgba(248,248,240,.16);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.objchip{background:rgba(248,248,240,.96);color:var(--ink);border:2px solid var(--ink);border-left:4px solid var(--gold);border-radius:10px;padding:8px 10px;max-width:min(300px,58vw);box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.obj-kicker{display:block;font-size:14px;font-weight:bold;letter-spacing:2px;color:#8a6a10;margin-bottom:2px}
+.obj-text{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:14px;line-height:1.4}
+.dexchip{align-self:flex-start;background:var(--ink);color:var(--gold);font-size:14px;font-weight:bold;letter-spacing:1px;padding:6px 12px;border-radius:999px;border:2px solid rgba(248,248,240,.16);white-space:nowrap}
+.nohud .hudchips{display:none}
+.inbattle .hudchips{display:none}
+@media (max-width:560px){.hudchips{top:110px;max-width:calc(100vw - 72px)}.objchip{max-width:min(300px,calc(100vw - 72px))}}
+/* P1/D4: HUD quick-strip — one framed ink rail containing the 4 buttons */
+.hudstrip{position:absolute;top:34px;right:8px;display:flex;gap:4px;pointer-events:auto;z-index:15;background:rgba(32,32,40,.94);border:2px solid rgba(248,248,240,.16);border-radius:14px;padding:4px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .nohud .hudstrip{display:none}
 .inbattle .hudstrip{display:none}
 /* D3: the battle command panel and the desktop hint card both anchor to the
    viewport bottom — hide the hint card in battle so they never overlap. */
 .inbattle .hintcard{display:none}
-.hudbtn{position:relative;width:48px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(32,32,40,.92);border:2px solid #55555f;border-radius:10px;cursor:pointer;touch-action:none}
-.hudicon{width:20px;height:20px;image-rendering:pixelated}
-.hudlabel{font-size:14px;color:#ccc;font-family:inherit}
+.hudbtn{position:relative;width:64px;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-radius:10px;cursor:pointer;touch-action:none;font-family:var(--font)}
+.hudbtn:active{background:rgba(232,200,50,.22)}
+.hudicon{width:24px;height:24px;image-rendering:pixelated}
+.hudlabel{font-size:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--paper);font-family:var(--font)}
 .dexdot{position:absolute;top:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#e84040;border:1px solid #fff}
-/* P1/D7: partner mood pip (tappable) */
-.moodpip{position:absolute;right:8px;bottom:150px;width:44px;height:44px;background:rgba(32,32,40,.92);border:2px solid #55555f;border-radius:50%;cursor:pointer;pointer-events:auto;z-index:15;touch-action:none}
+/* P1/D7: partner mood pip — no longer a stray bottom-right floater: it lives
+   in the right rail, directly under the HUD button rail (48px round ink
+   button, partner face + status dot). In landscape the vertical rail owns
+   the whole right edge, so the pip hides there (partner stays one tap away
+   via the Party rail button / talking to the partner in the overworld). */
+.moodpip{position:absolute;right:8px;top:110px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--ink);border:2px solid rgba(248,248,240,.25);border-radius:50%;cursor:pointer;pointer-events:auto;z-index:15;touch-action:none}
+body.landscape .moodpip{display:none}
 .moodface{width:24px;height:24px;image-rendering:pixelated}
 .mooddot{position:absolute;bottom:2px;right:2px;width:10px;height:10px;border-radius:50%;background:#58c94f;border:1px solid #fff}
 /* P1/G1: party row HP mini-bars + status chips + partner badge */
 .phpbar{display:inline-block;width:64px;height:8px;background:#28182c;border-radius:3px;vertical-align:middle;margin:0 6px;overflow:hidden}
 .phpbar i{display:block;height:100%}
 .pstat{font-size:14px;font-weight:bold;color:#a040a0;margin-left:6px}
-.pbadge{color:#c89010;font-weight:bold;margin-left:6px}
+.pbadge{display:inline-block;background:var(--gold);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:1px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
 /* P1/I2: HUD scale (setting existed with no UI row) */
 .hudstrip{transform:scale(var(--hudscale,1));transform-origin:top right}
 body.landscape .hudstrip{transform:translateY(-50%) scale(var(--hudscale,1))}
 /* P1/K2: landscape — the HUD strip re-rails to the right edge */
 body.landscape .hudstrip{top:50%;flex-direction:column}
-/* P1/K3: desktop keyboard-hint card */
-.hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background:rgba(32,32,40,.95);border:2px solid #55555f;border-radius:10px;color:#ccc;font-size:14px;padding:8px 12px;pointer-events:auto;z-index:25;max-width:92vw}
-.hintcard-x{background:#2a2a34;color:#ffe9a8;border:2px solid #55555f;border-radius:8px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:44px;cursor:pointer;white-space:nowrap}
+/* P1/K3: desktop keyboard-hint card — restyled to the chip system (ink pill) */
+.hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background:rgba(32,32,40,.95);border:2px solid rgba(248,248,240,.16);border-radius:999px;color:var(--paper);font-size:14px;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.hintcard-x{background:var(--gold);color:var(--ink);border:0;border-radius:999px;font-size:14px;font-weight:bold;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer;white-space:nowrap}
 body.desktop .controls{display:none}
 /* D2: chapter title card (anime-chronology spine, ADR-015). Paper panel, ink
    border, gold kicker — Gen 4/5 idiom, no animation (reduced-motion safe).
    box-shadow reuses the single house value (QA-001). All text >= 14px. */
-.chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92vw);background:#f8f8f0;border:3px solid #202028;border-radius:10px;box-shadow:2px 2px 0 rgba(0,0,0,.25);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
+.chaptercard{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:min(440px,92vw);background:var(--paper);border:2px solid var(--ink);border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.35);padding:18px 16px 14px;text-align:center;pointer-events:auto;z-index:35}
 .cc-kicker{font-size:14px;font-weight:bold;letter-spacing:3px;color:#8a6a10;margin-bottom:8px}
 .cc-title{font-size:22px;font-weight:bold;color:#202028;margin-bottom:8px;line-height:1.2}
 .cc-arc{font-size:15px;color:#40404a;margin-bottom:6px;line-height:1.4}
@@ -322,10 +353,10 @@ body.desktop .controls{display:none}
 .cc-hint{font-size:14px;color:#8a6a10;margin-top:10px;animation:blink 1s infinite}
 body.desktop.showtouch .controls{display:block}
 @media (pointer:coarse){body.desktop .controls{display:block}}
-/* Track B: full auth UI (vercel target). Gen 4/5 idiom — DS-chunky paper panels,
-   3px ink borders, gold focus ring, >=44px targets, >=16px type. Compile-time
-   stripped from the guest bundle's JS; this CSS is inert there (no JS refs). */
-.authcard{background:#F7F3E8;border:3px solid #14141A;border-radius:10px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:2px 2px 0 rgba(0,0,0,.25);overflow:hidden}
+/* Track B: full auth UI (vercel target). Font swap only (Seat D): structure,
+   colours and borders are untouched; the body font var and the single house
+   shadow token are the only system changes that reach these rules. */
+.authcard{background:#F7F3E8;border:3px solid #14141A;border-radius:10px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
 .authhead{background:#14141A;color:#FFD23F;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
 .authsub{font-size:14px;color:#3a3a44;padding:8px 14px 0;line-height:1.45}
 .authtabs{display:flex;border-bottom:3px solid #14141A}
@@ -350,7 +381,7 @@ body.desktop.showtouch .controls{display:block}
 .authhint.ok{color:#1e7a38;font-weight:bold}
 .authcheck{display:flex;gap:10px;align-items:flex-start;font-size:15px;color:#14141A;line-height:1.4;cursor:pointer}
 .authcheck input{width:24px;height:24px;min-width:24px;margin-top:2px;accent-color:#2B6CB0}
-.authlink{background:none;border:0;color:#2B6CB0;font-size:15px;font-weight:bold;text-decoration:underline;cursor:pointer;min-height:44px;text-align:left;font-family:inherit;padding:0}
+.authlink{background:none;border:0;color:#2B6CB0;font-size:15px;font-weight:bold;text-decoration:underline;cursor:pointer;min-height:48px;text-align:left;font-family:inherit;padding:0}
 .authlink:focus-visible{outline:3px solid #FFD23F;outline-offset:2px}
 .authcodes{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#14141A;border-radius:8px;padding:12px}
 .authcode{font-family:monospace;font-size:18px;font-weight:bold;color:#FFD23F;text-align:center;padding:8px 4px;border:2px dashed #5a5a66;border-radius:6px;letter-spacing:1px}
@@ -362,19 +393,19 @@ body.desktop.showtouch .controls{display:block}
 .confcol{background:#fff;border:3px solid #14141A;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:#14141A}
 .confcol h4{font-size:15px;margin:0}
 .confcol .pick{margin-top:4px}
-.syncdot{position:absolute;top:34px;left:8px;z-index:15;display:flex;align-items:center;gap:6px;background:rgba(28,31,40,.94);border:2px solid #55555f;border-radius:14px;color:#ffe9a8;font-size:14px;font-family:inherit;padding:6px 10px;pointer-events:none}
+.syncdot{position:absolute;top:34px;left:8px;z-index:15;display:flex;align-items:center;gap:6px;background:var(--ink);border:2px solid rgba(248,248,240,.16);border-radius:999px;color:var(--paper);font-size:14px;font-family:inherit;padding:6px 10px;pointer-events:none}
 .syncdot .sdot{width:10px;height:10px;border-radius:50%;background:#2FA84F}
 .syncdot.pending .sdot{background:#D99A26}
 .syncdot.offline .sdot{background:#8a8a96}
 .banner503{position:absolute;top:0;left:0;right:0;z-index:45;display:flex;align-items:center;justify-content:center;gap:10px;background:#202028;color:#ffe9a8;font-size:15px;padding:10px 12px;border-bottom:3px solid #FFD23F;pointer-events:auto;text-align:center}
-.banner503 button{background:#2a2a34;color:#ffe9a8;border:2px solid #55555f;border-radius:8px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:44px;cursor:pointer}
+.banner503 button{background:#2a2a34;color:#ffe9a8;border:2px solid #55555f;border-radius:8px;font-size:14px;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer}
 .pwmeter{display:flex;gap:6px;align-items:center;font-size:14px;font-weight:bold;color:#5a5a66}
 .pwmeter .bar{flex:1;height:10px;background:#e8e0c8;border:2px solid #14141A;border-radius:5px;overflow:hidden}
 .pwmeter .fill{display:block;height:100%;width:0;background:#C0392B}
 .pwmeter.fair .fill{width:55%;background:#D99A26}
 .pwmeter.strong .fill{width:100%;background:#2FA84F}
 @media (prefers-reduced-motion: reduce){
-  .loginover *,.authcard *,.banner503 *,.syncdot *,.chaptercard *,.dialogue *{animation:none!important;transition:none!important}
+  .loginover *,.authcard *,.banner503 *,.syncdot *,.chaptercard *,.dialogue *,.hudchips *,.toasts *{animation:none!important;transition:none!important}
 }
 `;
 

@@ -11,8 +11,11 @@ export const TILE_CHARS = {
 };
 
 const PAL = {
-  grassBase: '#5da24a', grassDark: '#4c8a3e', grassLight: '#6fb45c',
-  pathBase: '#d8c08a', pathDark: '#c2a878',
+  // Dither tones softened (UI audit: the old dots read dirty/noisy):
+  // grassDark/grassLight/pathDark are moved ~halfway toward their base
+  // colors, halving the dither contrast while keeping tile silhouettes.
+  grassBase: '#5da24a', grassDark: '#559644', grassLight: '#66ab53',
+  pathBase: '#d8c08a', pathDark: '#cdb481',
   treeBase: '#3e7a34', treeDark: '#2e5e28', treeLight: '#54a048',
   waterBase: '#3a7bd5', waterDark: '#2e63b0', waterLight: '#5a9ae8',
   houseBase: '#c9a06a', houseDark: '#a8825a', roofBase: '#b0503c', roofDark: '#8e3e2e',

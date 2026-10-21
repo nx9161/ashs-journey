@@ -1444,7 +1444,10 @@ export class BattleScene {
     r.panel(px, y, w, h, '#f0ead8', '#202028');
     const name = displayName(mon, SPECIES).slice(0, 10);
     r.text(name, px + 4, y + 4, { size: 14, bold: true, color: '#202028', shadow: false });
-    r.text('Lv' + mon.level, px + w - 46, y + 4, { size: 14, color: '#202028', shadow: false });
+    // Lv label nudged right: at px + w - 46 a 9-10 char name (Charizard,
+    // Butterfree) ran under the 'Lv' text; -41 clears those and 'Lv100'
+    // still ends inside the plate (px + w - 3).
+    r.text('Lv' + mon.level, px + w - 41, y + 4, { size: 14, color: '#202028', shadow: false });
     const frac = hpShown / mon.maxHp;
     r.hpBar(px + 4, y + 22, w - 8, 6, frac);
     // P0/E6: ⚠ pip on the plate under 25% — the colorblind cue, never color-alone.

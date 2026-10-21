@@ -590,8 +590,11 @@ Object.assign(BattleScene.prototype, {
     r.end();
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
     this.plate(r, w - 116, h - 108, this.ally, this.hpAnim.ally, true);
-    // Cooldown chips for the ally's four moves (bottom strip).
-    const chipW = 108;
+    // Cooldown chips for the ally's four moves (bottom strip). Chip width is
+    // derived from the actual view: the old fixed 108px assumed a 480-wide
+    // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
+    const chipW = Math.floor((w - 24) / 4); // 4 chips, 3 gaps of 4, 6px margins
+    const labelMax = Math.max(4, Math.min(10, Math.floor((chipW - 8) / 7)));
     for (let i = 0; i < 4; i++) {
       const slot = this.ally.moves[i];
       const x = 6 + i * (chipW + 4);
@@ -602,19 +605,26 @@ Object.assign(BattleScene.prototype, {
       const ready = cd <= 0 && slot.pp > 0;
       r.panel(x, y, chipW, 20, ready ? 'rgba(24,30,44,0.92)' : 'rgba(24,30,44,0.6)', ready ? '#e8c832' : '#4a506a');
       const label = (i + 1) + ' ' + (mv ? mv.name : slot.id);
-      r.text(label.slice(0, 10), x + 4, y + 2, { size: 14, color: ready ? '#f4f2e8' : '#9aa0b4', shadow: false });
+      // A spent slot also carries 'NO PP' at the chip's right end — shorten
+      // the label so the two never collide on narrow chips.
+      const maxChars = slot.pp <= 0 ? Math.max(3, Math.min(labelMax, Math.floor((chipW - 46) / 7))) : labelMax;
+      r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? '#f4f2e8' : '#9aa0b4', shadow: false });
       if (!ready && slot.pp > 0) {
         const total = cooldownMs(mv, 50, 50);
         const frac = Math.max(0, Math.min(1, cd / total));
         c.fillStyle = 'rgba(232,200,50,0.5)';
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
       }
-      if (slot.pp <= 0) r.text('NO PP', x + chipW - 52, y + 2, { size: 14, color: '#e86a6a', shadow: false });
+      if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#e86a6a', shadow: false });
     }
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
-      r.panel(w / 2 - 110, 40, 220, 22, 'rgba(16,18,28,0.88)', '#e8c832');
-      r.text(this.rtFloatText.slice(0, 30), w / 2 - 104, 44, { size: 14, color: '#f4f2e8', shadow: false });
+      // Panel fits the view and the text slice fits the panel (~7px/char at
+      // 14px): the old fixed 30-char slice could overrun the 220px panel.
+      const floatW = Math.min(220, w - 16);
+      const floatMax = Math.max(8, Math.floor((floatW - 12) / 7));
+      r.panel(w / 2 - floatW / 2, 40, floatW, 22, 'rgba(16,18,28,0.88)', '#e8c832');
+      r.text(this.rtFloatText.slice(0, floatMax), w / 2 - floatW / 2 + 6, 44, { size: 14, color: '#f4f2e8', shadow: false });
     }
     if (this.msgOpen || this.msg) {
       r.panel(4, h - 52, w - 8, 48, '#f8f8f0', '#202028');

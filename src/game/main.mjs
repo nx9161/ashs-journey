@@ -8,7 +8,7 @@ import { Input } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
-import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, buildArtTileCache, tileSprite } from '../engine/art.mjs';
+import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, buildArtTileCache, tileSprite, uiIcon } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
 import { UI } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
@@ -64,6 +64,8 @@ export class Game {
     this.rng = makeRngStreams(nextSeed());
     this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs); void -> solid fill
     this.spriteCache = {};
+    this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
+    this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)
     this.npcCache = {};
     this.skipIntroVeteran = false;
     this._lastAutosave = 0;
@@ -90,6 +92,50 @@ export class Game {
     };
     this._partnerHop = partnerHopFrames(doc);
     this.npcCache = {};
+  }
+
+  // Battle-art data URL for a species (party/bag menu <img class="picon">).
+  // Cached per species id on the game object so toDataURL runs once.
+  // Headless stub canvases have no toDataURL — returns '' there (guarded).
+  spriteDataUrl(speciesId) {
+    if (!this._spriteUrlCache) this._spriteUrlCache = {};
+    if (speciesId in this._spriteUrlCache) return this._spriteUrlCache[speciesId];
+    let url = '';
+    try {
+      const entry = this.spriteCache && this.spriteCache[speciesId];
+      const cv = entry && (entry.front || entry);
+      if (cv && typeof cv.toDataURL === 'function') url = cv.toDataURL();
+    } catch (e) { url = ''; }
+    this._spriteUrlCache[speciesId] = url;
+    return url;
+  }
+
+  // Icon name for a bag item, or null when no authored icon art exists:
+  // balls -> pokeball, potion-class medicine -> potion, badges -> badge.
+  itemIconName(itemId) {
+    const it = ITEMS[itemId];
+    if (itemId === 'potion' || itemId === 'superpotion' || itemId === 'hyperpotion' ||
+        itemId === 'maxpotion' || itemId === 'fullrestore') return 'potion';
+    if ((it && it.pocket === 'balls') || itemId === 'pokeball') return 'pokeball';
+    if (itemId && String(itemId).endsWith('badge')) return 'badge';
+    return null;
+  }
+
+  // Item-icon data URL for bag rows (uiIcon canvases from art.mjs).
+  // Cached per item id on the game object so toDataURL runs once.
+  itemIconDataUrl(itemId) {
+    if (!this._iconUrlCache) this._iconUrlCache = {};
+    if (itemId in this._iconUrlCache) return this._iconUrlCache[itemId];
+    let url = '';
+    try {
+      const iconName = this.itemIconName(itemId);
+      if (iconName) {
+        const cv = uiIcon(doc, iconName);
+        if (cv && typeof cv.toDataURL === 'function') url = cv.toDataURL();
+      }
+    } catch (e) { url = ''; }
+    this._iconUrlCache[itemId] = url;
+    return url;
   }
 
   // Overworld Ash: 4-dir walk cycle while moving, 2-frame idle blink at rest.
@@ -202,7 +248,9 @@ export class Game {
       document.body.classList.remove('desktop');
     } else {
       this.layoutMode = 'portrait';
-      r.resize(256, 256, w, h * 0.45);
+      // Portrait: canvas takes 58% of the height (was 45% — left a dead
+      // void below and shrank the game's subject). Logical stays 256x256.
+      r.resize(256, 256, w, h * 0.58);
       document.body.classList.remove('desktop');
     }
     // P1/K2: landscape gets the right-edge command rail (CSS re-rails the HUD strip).
@@ -375,6 +423,24 @@ export class Game {
     }
     if (!items.length) items.push({ label: '(empty)', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
+    // Bag rows carry the item's authored icon (uiIcon -> data URL, cached
+    // per item id) where art exists; headers/Close stay plain text.
+    const bagRowHtml = (it) => {
+      if (!it.value || it.value === 'close') return '<span>' + it.label + '</span>';
+      const url = g.itemIconDataUrl(it.value);
+      // Emit the icon whenever authored icon art exists for the item —
+      // in the browser url is its data URL; headless stub canvases have
+      // no toDataURL (url ''), but the row still carries the <img>.
+      let hasIcon = !!url;
+      if (!hasIcon) {
+        try {
+          const iconName = g.itemIconName(it.value);
+          hasIcon = !!(iconName && uiIcon(doc, iconName));
+        } catch (e) { hasIcon = false; }
+      }
+      const img = hasIcon ? '<img class="picon" src="' + url + '" alt="">' : '';
+      return img + '<span>' + it.label + '</span>';
+    };
     g.ui.showMenu('Bag', items, (v) => {
       if (!v || v === 'close') return;
       if (v === 'potion') {
@@ -383,6 +449,12 @@ export class Game {
           disabled: m.hp <= 0 || m.hp >= m.maxHp,
         }));
         targets.push({ label: 'Back', value: -1 });
+        const targetRowHtml = (it) => {
+          if (it.value === -1 || it.value === null) return '<span>' + it.label + '</span>';
+          const m = g.state.party[it.value];
+          if (!m) return '<span>' + it.label + '</span>';
+          return '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt=""><span>' + it.label + '</span>';
+        };
         g.ui.showMenu('Use Potion on...', targets, (t) => {
           if (t === null || t === -1) { g.openBag(); return; }
           const m = g.state.party[t];
@@ -390,31 +462,35 @@ export class Game {
           m.hp = Math.min(m.maxHp, m.hp + 20);
           g.audio.playSfx('heal');
           g.ui.toast(displayName(m, SPECIES) + ' recovered 20 HP!');
-        });
+        }, { rowHtml: targetRowHtml });
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    });
+    }, { rowHtml: bagRowHtml });
   }
 
   openParty() {
     const g = this;
-    // P1/G1: rows carry an HP mini-bar + numbers, status chip, and the ⚡ partner badge.
+    // P1/G1: rows carry the species battle-art sprite, an HP mini-bar +
+    // numbers, status chip, and a PARTNER text chip for the partner.
     const rowHtml = (it) => {
-      if (it.value === 'close' || it.value === -1) return '<span>' + it.label + '</span>';
+      if (it.value === -1) return '<span class="emptyslot">Empty slot</span>';
+      if (it.value === 'close') return '<span>' + it.label + '</span>';
       const m = g.state.party[it.value];
+      if (!m) return '<span>' + it.label + '</span>';
       const pct = Math.max(0, Math.round((m.hp / m.maxHp) * 100));
       const col = pct > 50 ? '#58c94f' : pct > 25 ? '#e8c832' : '#e84040';
-      const badge = m.speciesId === 'partner' ? '<span class="pbadge">⚡</span>' : '';
+      const badge = m.speciesId === 'partner' ? '<span class="pbadge">PARTNER</span>' : '';
       const st = m.status ? '<span class="pstat">' + m.status.toUpperCase().slice(0, 3) + '</span>' : '';
-      return '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
+      return '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+        + '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
         + '<span class="phpbar"><i style="width:' + pct + '%;background:' + col + '"></i></span>'
         + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st;
     };
     const items = g.state.party.map((m, i) => {
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + '  ' + m.hp + '/' + m.maxHp, value: i };
     });
-    for (let i = g.state.party.length; i < 6; i++) items.push({ label: '—', value: -1, disabled: true });
+    for (let i = g.state.party.length; i < 6; i++) items.push({ label: 'Empty', value: -1, disabled: true });
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Party', items, (v) => {
       if (v === null || v === 'close' || v === -1) return;
@@ -656,8 +732,6 @@ export class Game {
     if (g.authUser) {
       rows.push({ label: 'Account', value: 'account' });
       rows.push({ label: 'Sync now', value: 'syncnow' });
-    } else if (typeof AUTH_ENABLED !== 'undefined' && AUTH_ENABLED) {
-      rows.push({ label: 'Log in to sync ★', value: 'login' });
     }
     rows.push(
       { label: 'Erase save', value: 'erase' },
@@ -689,7 +763,6 @@ export class Game {
       else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
       else if (v === 'account') { AUTH.openAccountMenu(g); return; }
       else if (v === 'syncnow') { SYNC.syncNow(g, true); return; }
-      else if (v === 'login') { g.openLogin('continue'); return; }
       else if (v === 'erase') {
         g.ui.showMenu('Erase ALL save data?', [
           { label: 'Yes, erase everything', value: 'yes' },
