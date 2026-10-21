@@ -262,7 +262,7 @@ Object.assign(Game.prototype, {
       const doneF = q.flag && g.state.story.flags[q.flag];
       const active = !doneF && QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
       items.push({
-        label: (doneF ? '✓ ' : active ? '▶ ' : '· ') + q.text,
+        label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
         value: 'q:' + q.id, disabled: !active && !doneF,
       });
     }
@@ -272,7 +272,7 @@ Object.assign(Game.prototype, {
       for (const id of arcs) {
         const arc = LEGENDARY_ARCS[id];
         if (!arc) continue;
-        items.push({ label: (g.state.story.quests[id] === 'complete' ? '✓ ' : '▶ ') + arc.title, value: 'arc:' + id });
+        items.push({ label: (g.state.story.quests[id] === 'complete' ? '★ ' : '▶ ') + arc.title, value: 'arc:' + id });
       }
     }
     items.push({ label: 'Close', value: 'close' });
@@ -302,7 +302,7 @@ Object.assign(Game.prototype, {
       const isDone = doneList.includes(r.id);
       const isCur = r.id === cur;
       return {
-        label: (isDone ? '✓ ' : isCur ? '▶ ' : '· ') + r.name + (isCur ? ' (you are here)' : isDone ? '' : ' — sealed'),
+        label: (isDone ? '★ ' : isCur ? '▶ ' : '· ') + r.name + (isCur ? ' (you are here)' : isDone ? '' : ' — sealed'),
         value: r.id,
       };
     });

@@ -306,10 +306,17 @@ ok('css battle toggles .inbattle on #ui root', js.includes("this.root.classList.
 ok('css dex-dot absolute inside relative hud button',
   /\.dexdot\{[^}]*position\s*:\s*absolute[^}]*top\s*:\s*2px[^}]*right\s*:\s*2px/.test(css) &&
   /\.hudbtn\{[^}]*position\s*:\s*relative/.test(css));
-ok('css hudstrip top-right of canvas', /\.hudstrip\{[^}]*top\s*:\s*34px[^}]*right\s*:\s*8px/.test(css));
+ok('css hudstrip top-right inside the frame (UI v2.1)', /\.hudstrip\{[^}]*top\s*:\s*8px[^}]*right\s*:\s*8px/.test(css));
+// UI v2.1 regression guard (defect 1): the deployed flavor serves the shell
+// under vercel.json's CSP — without font-src data:, the self-hosted data-URI
+// faces are blocked and every layer silently falls back to a system sans.
+const vercelJson = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+const cspEntry = vercelJson.headers.flatMap((g) => g.headers).find((h) => h.key === 'Content-Security-Policy');
+const cspVal = cspEntry ? cspEntry.value : '';
+ok('csp font-src allows self-hosted data-uri fonts (UI v2.1)', /font-src[^;]*data:/.test(cspVal), cspVal.slice(0, 90));
 ok('css reduced-motion media query exists', /@media\s*\(prefers-reduced-motion:\s*reduce\)/.test(css));
-ok('src cmdpanel appended to #ui root, not .controls',
-  js.includes("this.el('div', 'cmdpanel hidden', this.root)"));
+ok('src cmdpanel appended to frame layer, not .controls (UI v2.1)',
+  js.includes("this.el('div', 'cmdpanel hidden', this.frame)"));
 ok('src chapter card tap injects A (tap-dismiss wiring)', js.includes("this.game.input.inject('a')"));
 
 // personal edition boot smoke (ADR-012): marker + auth strip + boots to overworld

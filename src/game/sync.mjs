@@ -116,7 +116,7 @@ const SYNC_IMPL = {
     if (!AUTH.user) { d.classList.add('hidden'); return; }
     d.classList.remove('hidden');
     const q = this._queue();
-    let label = 'Synced ✓', cls = 'syncdot';
+    let label = 'Synced', cls = 'syncdot';
     if (q.length && this._offline) { label = 'Offline — will sync'; cls = 'syncdot offline'; }
     else if (q.length) { label = 'Sync pending'; cls = 'syncdot pending'; }
     else if (!this._lastFlushOk) { label = 'Sync pending'; cls = 'syncdot pending'; }
@@ -176,7 +176,7 @@ const SYNC_IMPL = {
     if (!AUTH.user) return Promise.resolve({ ok: false, reason: 'logged-out' });
     return this.flush(game).then((r) => {
       if (manual) {
-        if (r.ok) game.ui.toast('Synced ✓');
+        if (r.ok) game.ui.toast('Synced');
         else if (r.reason === 'offline') game.ui.toast('Offline — will sync when connected.');
         else if (r.reason) game.ui.toast('Sync pending — will retry.');
       }

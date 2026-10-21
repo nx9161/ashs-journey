@@ -173,6 +173,20 @@ export class Game {
 
   boot() {
     this.ui.init();
+    // UI v2.1 (defect 1): kick off the Platinum faces NOW so the first
+    // dialogue/menu paints in Galmuri, not in the fallback stack. The faces
+    // are same-document data URIs (self-hosted in assets/fonts/, embedded by
+    // scripts/build.mjs) and the production CSP allows them via
+    // `font-src 'self' data:` — if either ever regresses, the deployed-
+    // flavor QA gate (ashs-journey-qa/shoot4.mjs) fails loudly on
+    // document.fonts.check instead of silently shipping a fallback again.
+    try {
+      if (typeof document !== 'undefined' && document.fonts && document.fonts.load) {
+        document.fonts.load('16px "PtGalmuri"', 'ASH');
+        document.fonts.load('700 16px "PtGalmuri"', 'ASH');
+        document.fonts.load('16px "PtGothic"', 'ASH');
+      }
+    } catch (e) { /* headless / stub DOM */ }
     // Track B: auth health probe (503 banner) + sync dot. Guest target: no-ops.
     AUTH.init(this);
     SYNC.init(this);
@@ -261,6 +275,9 @@ export class Game {
     // Headless harness stubs document without documentElement — guard it.
     if (document.documentElement) document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1);
     this.ui.showHintCard(this.layoutMode === 'desktop');
+    // UI v2.1: the frame layer tracks the canvas box on every layout pass
+    // (boot, resize, orientation, fullscreen) — not just the UI tick throttle.
+    if (this.ui._syncChipAnchor) this.ui._syncChipAnchor();
   }
 
   update(dt) {
@@ -372,7 +389,7 @@ export class Game {
 
   startOverworld(opts) {
     this.scenes.replace(new OverworldScene());
-    if (this.guestMode) this.ui.showGuestBanner(); // P0/B1: in-game guest banner
+    if (this.guestMode) this.ui.showGuestBanner(); // UI v2.1: no-op (banner retired; notice lives in the terminal guest pane)
     // D2: fresh runs open on the Chapter 1 title card (anime spine, ADR-015).
     if (opts && typeof opts.chapterCard === 'number') {
       this.ui.showChapterCard(CHAPTERS[opts.chapterCard]);
@@ -474,7 +491,10 @@ export class Game {
     // P1/G1: rows carry the species battle-art sprite, an HP mini-bar +
     // numbers, status chip, and a PARTNER text chip for the partner.
     const rowHtml = (it) => {
-      if (it.value === -1) return '<span class="emptyslot">Empty slot</span>';
+      // UI v2.1 (defect 3): every party plate leads with its Poke Ball slot
+      // marker, Platinum-style — filled rows and empty slots alike.
+      const ball = '<img class="pball" src="' + g.itemIconDataUrl('pokeball') + '" alt="">';
+      if (it.value === -1) return ball + '<span class="emptyslot">Empty slot</span>';
       if (it.value === 'close') return '<span>' + it.label + '</span>';
       const m = g.state.party[it.value];
       if (!m) return '<span>' + it.label + '</span>';
@@ -482,7 +502,7 @@ export class Game {
       const col = pct > 50 ? '#58c94f' : pct > 25 ? '#e8c832' : '#e84040';
       const badge = m.speciesId === 'partner' ? '<span class="pbadge">PARTNER</span>' : '';
       const st = m.status ? '<span class="pstat">' + m.status.toUpperCase().slice(0, 3) + '</span>' : '';
-      return '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+      return ball + '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
         + '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
         + '<span class="phpbar"><i style="width:' + pct + '%;background:' + col + '"></i></span>'
         + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st;
@@ -734,7 +754,7 @@ export class Game {
       const m = Math.floor(((s.playtimeSec || 0) % 3600) / 60);
       const st = s.pending ? 'Sync pending' : (s.cloudMeta || s.hasLocal) ? 'Synced' : 'Empty';
       items.push({
-        label: (s.active ? '▸ ' : '') + 'Slot ' + s.slot + ' — ' + h + 'h ' + (m < 10 ? '0' + m : '' + m) +
+        label: (s.active ? '▶ ' : '') + 'Slot ' + s.slot + ' — ' + h + 'h ' + (m < 10 ? '0' + m : '' + m) +
           'm · ' + s.badgeCount + ' badges · ' + st,
         value: 'slot:' + s.slot,
       });

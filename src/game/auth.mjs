@@ -358,7 +358,7 @@ function showLoginPanel(ui, game, cb) {
     const agreed = { v: false };
     pr.addEventListener('click', () => openPrivacyModal(ov, () => {
       agreed.v = true;
-      authText(pr, 'Privacy notice and terms — agreed ✓');
+      authText(pr, 'Privacy notice and terms — agreed');
       validate();
     }));
 

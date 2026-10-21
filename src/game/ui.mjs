@@ -83,6 +83,7 @@ export class UI {
     this.game = game;
     this.headless = (typeof document === 'undefined');
     this.root = null;
+    this.frame = null; // UI v2.1: frame-anchored layer (box synced to the canvas rect)
     this.dpadEl = null; this.cmdEl = null;
     this.dlg = null;      // { lines, idx, chars, cb, speaker }
     this.menu = null;     // { title, items, idx, cb, battle }
@@ -111,6 +112,17 @@ export class UI {
     if (this.headless) return;
     const doc = document;
     this.root = doc.getElementById('ui');
+    // UI v2.1 (defects 2-5): everything that belongs to the GAME — dialogue,
+    // menus, battle commands, HUD chips/strip, toasts, chapter cards — lives
+    // in this frame layer, whose box is synced to the canvas rect by
+    // _syncChipAnchor(). DOM chrome positioned against the viewport is how
+    // v2 shipped dialogue/commands/party OUTSIDE the frame on the live build.
+    // Viewport-layer elements stay in #ui: touch controls, login/name-entry
+    // overlays (full-screen modal dim), hint card, 503 banner, sync dot.
+    this.frame = this.el('div', 'frameui', this.root);
+    if (typeof window !== 'undefined' && window.addEventListener) {
+      window.addEventListener('resize', () => this._syncChipAnchor());
+    }
     this.buildControls();
     this.buildDialogue();
     this.buildMenu();
@@ -121,6 +133,7 @@ export class UI {
     this.buildGuestBanner();
     this.buildMoodPip();
     this.buildHintCard();
+    this._syncChipAnchor(); // frame box correct from the first painted frame
   }
 
   el(tag, cls, parent) {
@@ -176,7 +189,7 @@ export class UI {
     // Command panel (battle) — hidden unless battle scene shows it. P0/E8: populated as a 2x2 grid.
     // D3: child of #ui root, NOT .controls — body.desktop hides .controls (touch
     // buttons), which used to hide the battle commands on every laptop too.
-    this.cmdEl = this.el('div', 'cmdpanel hidden', this.root);
+    this.cmdEl = this.el('div', 'cmdpanel hidden', this.frame);
   }
 
   // ---- P0/E8: battle command 2x2 grid (replaces the D-pad zone) ----
@@ -275,30 +288,14 @@ export class UI {
   }
 
   buildDialogue() {
-    this.dlgEl = this.el('div', 'dialogue hidden', this.root);
-    // WS2/ADR-020: speaker portrait (original art) in the dialogue box.
+    this.dlgEl = this.el('div', 'dialogue hidden', this.frame);
+    // UI v2.1 (defect 5): no portrait tab, no name pill — Platinum puts the
+    // speaker's name as a plain line in the text flow (see say() + .dlg-name).
     this.dlgFace = null;
-    if (typeof document !== 'undefined') {
-      this.dlgFace = document.createElement('canvas');
-      this.dlgFace.width = 48; this.dlgFace.height = 48;
-      this.dlgFace.className = 'dlg-face';
-      this.dlgFace.style.display = 'none';
-      this.dlgEl.appendChild(this.dlgFace);
-    }
     this.dlgName = this.el('div', 'dlg-name', this.dlgEl);
     this.dlgText = this.el('div', 'dlg-text', this.dlgEl);
     this.dlgHint = this.el('div', 'dlg-hint', this.dlgEl);
     this.dlgHint.textContent = '▼';
-  }
-
-  portraitFor(speaker) {
-    if (!speaker || typeof document === 'undefined') return null;
-    const words = String(speaker).toLowerCase().replace(/[^a-z ]/g, ' ').split(' ').filter(Boolean);
-    for (let i = words.length - 1; i >= 0; i--) {
-      const cv = artCanvas(document, 'portrait-' + words[i], 2, false);
-      if (cv) return cv;
-    }
-    return null;
   }
 
   say(lines, cb, speaker) {
@@ -309,23 +306,6 @@ export class UI {
       this.dlgName.textContent = this.dlg.speaker || '';
       this.dlgName.style.display = this.dlg.speaker ? 'block' : 'none';
       this.dlgText.textContent = '';
-      // Portrait: drawn when the speaker has original art (WS2).
-      if (this.dlgFace) {
-        const cv = this.portraitFor(this.dlg.speaker);
-        if (cv) {
-          const ctx = this.dlgFace.getContext('2d');
-          ctx.clearRect(0, 0, 48, 48);
-          ctx.imageSmoothingEnabled = false;
-          ctx.drawImage(cv, 0, 0);
-          this.dlgFace.style.display = 'block';
-          this.dlgText.style.marginLeft = '58px';
-          this.dlgName.style.marginLeft = '58px';
-        } else {
-          this.dlgFace.style.display = 'none';
-          this.dlgText.style.marginLeft = '';
-          this.dlgName.style.marginLeft = '';
-        }
-      }
     }
   }
 
@@ -349,7 +329,7 @@ export class UI {
       if (cb) cb();
       return false;
     }
-    this.game.audio.playSfx(SFX['dialogue-blip']); // visual twin: the ▾ indicator
+    this.game.audio.playSfx(SFX['dialogue-blip']); // visual twin: the ▼ indicator
     if (!this.headless) this.dlgText.textContent = '';
     return true;
   }
@@ -360,7 +340,7 @@ export class UI {
   }
 
   buildMenu() {
-    this.menuEl = this.el('div', 'menu hidden', this.root);
+    this.menuEl = this.el('div', 'menu hidden', this.frame);
     this.menuTitle = this.el('div', 'menu-title', this.menuEl);
     this.menuList = this.el('div', 'menu-list', this.menuEl);
   }
@@ -412,9 +392,9 @@ export class UI {
       // Seat D row support: an item may carry `icon` (img src / data URL) to
       // render a .picon sprite tile (party + bag rows) when no rowHtml is set;
       // with rowHtml, the caller's markup can use .picon / .emptyslot directly.
-      if (m.rowHtml) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span>' + m.rowHtml(it, i);
-      else if (it.icon) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span><img class="picon" src="' + it.icon + '" alt=""><span>' + it.label + '</span>';
-      else r.innerHTML = '<span class="cur">' + (i === m.idx ? '▸' : '&nbsp;') + '</span><span>' + it.label + '</span>';
+      if (m.rowHtml) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▶' : '&nbsp;') + '</span>' + m.rowHtml(it, i);
+      else if (it.icon) r.innerHTML = '<span class="cur">' + (i === m.idx ? '▶' : '&nbsp;') + '</span><img class="picon" src="' + it.icon + '" alt=""><span>' + it.label + '</span>';
+      else r.innerHTML = '<span class="cur">' + (i === m.idx ? '▶' : '&nbsp;') + '</span><span>' + it.label + '</span>';
       if (!it.disabled) r.addEventListener('pointerdown', (e) => { e.preventDefault(); this.chooseMenu(i); });
       this.menuList.appendChild(r);
     });
@@ -475,7 +455,7 @@ export class UI {
   // Platinum summary arrangement); this class owns the chrome: tab strip,
   // framed panel, keyboard routing (left/right switch, B/START close).
   buildSummaryPanel() {
-    this.sumEl = this.el('div', 'sumpanel hidden', this.root);
+    this.sumEl = this.el('div', 'sumpanel hidden', this.frame);
     this.sumTabsEl = this.el('div', 'sumtabs', this.sumEl);
     this.sumBodyEl = this.el('div', 'sumbody', this.sumEl);
     const close = this.el('button', 'sumclose', this.sumEl);
@@ -534,7 +514,7 @@ export class UI {
   get summaryOpen() { return !!this.summary; }
 
   buildToasts() {
-    this.toastEl = this.el('div', 'toasts', this.root);
+    this.toastEl = this.el('div', 'toasts', this.frame);
   }
 
   toast(text) {
@@ -554,19 +534,19 @@ export class UI {
   // DOM (inside #ui, sibling of .hudstrip):
   //   <div class="hudchips">
   //     <div class="hudchip locchip hidden"><span class="locchip-text"></span></div>
-  //     <div class="hudchip objchip hidden"><span class="obj-kicker">▸ OBJECTIVE</span><span class="obj-text"></span></div>
+  //     <div class="hudchip objchip hidden"><span class="obj-kicker">▶ OBJECTIVE</span><span class="obj-text"></span></div>
   //     <div class="hudchip dexchip hidden"><span class="dexchip-text"></span></div>
   //   </div>
   // Visibility follows the HUD-strip rules exactly: the column is hidden by
   // .nohud (setHudVisible) and .inbattle (setBattleMode) in CSS, same as
   // .hudstrip — menus/dialogues overlay it, they do not hide it.
   buildHudChips() {
-    const wrap = this.el('div', 'hudchips', this.root);
+    const wrap = this.el('div', 'hudchips', this.frame);
     const loc = this.el('div', 'hudchip locchip hidden', wrap);
     const locText = this.el('span', 'locchip-text', loc);
     const obj = this.el('div', 'hudchip objchip hidden', wrap);
     const kick = this.el('span', 'obj-kicker', obj);
-    kick.textContent = '▸ OBJECTIVE';
+    kick.textContent = '▶ OBJECTIVE';
     const objText = this.el('span', 'obj-text', obj);
     const dex = this.el('div', 'hudchip dexchip hidden', wrap);
     const dexText = this.el('span', 'dexchip-text', dex);
@@ -702,13 +682,13 @@ export class UI {
     this._loginOv = null;
   }
 
-  // ---- in-game guest banner (wireframes §4): 28px strip, dismissible per session ----
+  // ---- guest banner element (RETIRED in UI v2.1 — see showGuestBanner) ----
   buildGuestBanner() {
     const b = this.el('div', 'guestbanner hidden', this.root);
     const t = this.el('span', '', b);
     t.textContent = 'Guest — progress stays on this device · LOG IN';
     const x = this.el('button', 'gbx', b);
-    x.textContent = '✕';
+    x.textContent = '×';
     x.setAttribute('aria-label', 'Dismiss');
     x.addEventListener('pointerdown', (e) => {
       e.preventDefault();
@@ -722,8 +702,15 @@ export class UI {
   }
 
   showGuestBanner() {
-    if (this.headless || this._guestBannerOff || !this._guestBannerEl) return;
-    this._guestBannerEl.classList.remove('hidden');
+    // UI v2.1 (defect 2): the in-game guest banner is RETIRED. It rendered as
+    // a full-width bar across the top of the gameplay frame on the live
+    // build. The guest notice now lives only in the flow where it belongs —
+    // the Trainer ID Terminal's guest pane, which already reads "Progress
+    // stays on this device — log in anytime to sync" (auth.mjs; the stub
+    // terminal's guest pane carries the same message) — i.e. before play
+    // starts, never over gameplay. This stays as a hiding no-op so the
+    // existing call sites (startOverworld / openLogin) remain safe.
+    this.hideGuestBanner();
   }
 
   hideGuestBanner() {
@@ -762,7 +749,7 @@ export class UI {
     }
     const row = this.el('div', 'nkb-row', card);
     const bk = this.el('button', 'nkb-key wide', row);
-    bk.textContent = '⌫';
+    bk.textContent = '←';
     bk.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbBack(); });
     const dash = this.el('button', 'nkb-key', row);
     dash.textContent = '-';
@@ -834,7 +821,7 @@ export class UI {
   // ---- P1/D4: persistent HUD quick-strip (one-tap Bag/Party/Dex/Menu) ----
   // Choice documented: portrait = overlaid top-right of canvas (gameux §4.1).
   buildHudStrip() {
-    const strip = this.el('div', 'hudstrip', this.root);
+    const strip = this.el('div', 'hudstrip', this.frame);
     this._hudStrip = strip;
     const defs = [
       ['bag', 'Bag'], ['party', 'Party'], ['dex', 'Dex'], ['menu', 'Menu'],
@@ -887,7 +874,7 @@ export class UI {
   // in landscape (body.landscape) where the vertical rail owns the right
   // edge. No longer a floating bottom-right page widget.
   buildMoodPip() {
-    const b = this.el('button', 'moodpip hidden', this.root);
+    const b = this.el('button', 'moodpip hidden', this.frame);
     b.setAttribute('aria-label', 'Pikachu');
     const cv = this.headless ? null : document.createElement('canvas');
     if (cv) {
@@ -931,7 +918,7 @@ export class UI {
     const t = this.el('div', '', c);
     t.textContent = 'Keyboard: Arrows/WASD move · Z/Space = A · X = B · Enter = START · M = mute · F = fullscreen';
     const x = this.el('button', 'hintcard-x', c);
-    x.textContent = 'Got it ✕';
+    x.textContent = 'Got it ×';
     x.addEventListener('pointerdown', (e) => {
       e.preventDefault();
       this._hintOff = true;
@@ -954,7 +941,7 @@ export class UI {
     if (this.headless) { this.chapterCard = null; return; }
     this.hideChapterCard(); // one card at a time
     this._ccT = 0;
-    const d = this.el('div', 'chaptercard', this.root);
+    const d = this.el('div', 'chaptercard', this.frame);
     const kick = this.el('div', 'cc-kicker', d);
     kick.textContent = 'CHAPTER ' + ch.n + ' — ACT ' + ch.act;
     const t = this.el('div', 'cc-title', d);
@@ -985,23 +972,29 @@ export class UI {
     if (old && old.remove) old.remove();
   }
 
-  // HUD chips anchor to the CANVAS FRAME, not the viewport: the stage
-  // centers the canvas, so viewport-anchored chips would float over the
-  // page margin on desktop and drift off-frame on phones. Recompute only
-  // when the canvas rect actually changes (checked on a throttle).
+  // UI v2.1: sync the FRAME LAYER's box to the canvas rect. All in-game DOM
+  // (dialogue, menus, battle commands, HUD chips/strip, toasts, chapter
+  // cards) positions against this layer, so it is geometrically impossible
+  // for game chrome to land outside the frame on any viewport. (The v2
+  // version of this method only nudged the chips column; the rest of the
+  // DOM stayed viewport-anchored — the root cause of defects 2-5.)
+  // Recompute only when the canvas rect actually changes (throttled by
+  // update(); also called from buildHudChips, init end, window resize and
+  // Game.applyLayout).
   _syncChipAnchor() {
-    const els = this._chipEls;
-    if (!els || !els.wrap || typeof document === 'undefined') return;
+    if (!this.frame || typeof document === 'undefined') return;
     const cv = document.getElementById && document.getElementById('game');
     if (!cv || !cv.getBoundingClientRect) return;
     const r = cv.getBoundingClientRect();
     if (!(r.width > 0)) return;
-    const key = Math.round(r.left) + ',' + Math.round(r.top) + ',' + Math.round(r.width);
+    const key = Math.round(r.left) + ',' + Math.round(r.top) + ',' + Math.round(r.width) + ',' + Math.round(r.height);
     if (key === this._chipAnchorKey) return;
     this._chipAnchorKey = key;
-    els.wrap.style.left = Math.round(r.left + 10) + 'px';
-    els.wrap.style.top = Math.round(r.top + 10) + 'px';
-    els.wrap.style.maxWidth = Math.max(150, Math.round(r.width - 292)) + 'px';
+    const s = this.frame.style;
+    s.left = Math.round(r.left) + 'px';
+    s.top = Math.round(r.top) + 'px';
+    s.width = Math.round(r.width) + 'px';
+    s.height = Math.round(r.height) + 'px';
   }
 
   update(dt) {

@@ -119,3 +119,59 @@
 3. QA-005 is filed above with its one-line fix; the coordinator can apply it and re-run the harness — no re-sign-off needed from this seat for that change alone.
 
 *— QA Manager, seat 10. The gate is green-with-defect: push authorized; clear QA-005 in the next pass.*
+
+---
+
+# UI v2.1 fix round — deployed-flavor gate (2026-10-21)
+
+**Why this round existed:** UI v2's screenshot gate ran against the standalone
+guest file under a CDP harness — no CSP header, a different surface from the
+deployed public flavor. Parent live verification of v2 (dde4bee) found the
+Platinum re-skin had landed in the canvas layer only; the DOM layer on the
+deployed build was still v1 modern-web, and the Galmuri typeface was not in
+effect at all.
+
+**Root cause of the font defect (defect 1):** `vercel.json`'s CSP had no
+`font-src`, so the data-URI `@font-face` sources fell back to
+`default-src 'self'` (no `data:`) and were blocked in production — silently:
+every layer fell back to system-ui. The headerless harness could not see it.
+Secondary find: the v2-embedded subsets also lacked glyphs the UI uses
+(menu cursor ▶-class, ▌, ♀, ✓/✕/⌫ — the last three exist in NO Galmuri face).
+
+**The new gate:** `~/workspace/ashs-journey-qa/shoot4.mjs` serves the ACTUAL
+public build output (`public/index.html` + `public/game.js`) with the real
+CSP parsed live from `vercel.json`, a healthy `/api/health`, and asserts:
+(a) font proof — `document.fonts.check` for PtGalmuri 400/700 + PtGothic,
+`document.fonts.load` resolving, and a canvas pixel probe (PtGalmuri render
+must differ from an unknown-family render); (b) frame geometry — dialogue,
+guest banner (must not overlap), HUD strip, HUD chips, party, bag, dex,
+pause menu, options, battle command panel, and move menu rects vs. the
+canvas rect, desktop 1280×800 and phone 390×844.
+
+**Before (dde4bee, same harness):** font check all-false, `fonts.load`
+errored, canvas probe false; dialogue spanned 51–1229px vs frame 80–1200;
+party panel 1229px wide over the full viewport; cmdpanel at y 650–788 vs
+frame bottom 715 (commands rendered BELOW the frame); HUD strip at the
+browser's top-right, outside the frame.
+
+**After (this round):** font proof all-true on desktop + phone; every
+geometry probe `inside: true` on both viewports (party = exactly the frame;
+cmdpanel 88–1192 × 569–707 inside 80–1200 × 85–715); guest banner never
+visible over gameplay (retired — the notice lives in the Trainer ID
+Terminal guest pane). Screenshots: `~/workspace/ashs-journey-qa/shots/
+v21-{desktop,phone}-*.png`, probes in `v21-{desktop,phone}-probes.json`.
+
+**Structural fix:** all in-game DOM now lives in a `#frameui` layer whose
+box is synced to the canvas rect (`UI._syncChipAnchor`, also called from
+`Game.applyLayout`), making out-of-frame chrome geometrically impossible
+rather than merely checked-for. Fonts are self-hosted files in
+`assets/fonts/` (subsets regenerated from galmuri@2.40.3 with full UI
+coverage), embedded from disk by `scripts/build.mjs`.
+
+**Suites on the final tree:** verify-slice 133/133 · fidelity-checks 26/26 ·
+campaign-smoke 24/24 · qa-changed-flows 19/19 (incl. new permanent CSP
+font-src guard) · budgets all-pass · drift gate PASS.
+
+**Known micro-deviation:** Galmuri11 Bold has no ♀ glyph; "Nidoran♀" in the
+summary panel's bold name line falls back for that one character (regular
+weight everywhere else). Documented in `assets/fonts/README.md`.
