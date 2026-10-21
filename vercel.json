@@ -37,5 +37,11 @@
       "source": "/api/(.*)"
     }
   ],
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "rewrites": [
+    {
+      "source": "/api/auth/:a/:b",
+      "destination": "/api/auth/[...all]"
+    }
+  ]
 }
