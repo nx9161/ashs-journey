@@ -1018,6 +1018,17 @@ class AudioEngine {
 
 const TILE = 16;
 
+// UI v2 (Platinum standard): the UI typeface is Galmuri (OFL 1.1, DS-era
+// bitmap design, self-hosted via @font-face in the shell CSS) with the
+// DotGothic16 face as glyph fallback. Canvas text uses the same stack.
+const UI_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// Platinum frame tones (canvas twins of the shell CSS tokens).
+const PT_FRAME = '#2b3040';
+const PT_FRAME2 = '#8d9bbf';
+const PT_PAPER = '#f6f8fc';
+const PT_PAPER2 = '#dfe6f2';
+const PT_RIVET = '#6d7ba3';
+
 class Renderer {
   constructor(canvas) {
     this.canvas = canvas;
@@ -1127,7 +1138,7 @@ class Renderer {
   text(str, x, y, opts) {
     const o = opts || {};
     const c = this.ctx;
-    c.font = (o.bold ? 'bold ' : '') + (o.size || 8) + 'px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + UI_FONT_STACK;
     c.textBaseline = 'top';
     if (o.align) c.textAlign = o.align;
     if (o.shadow !== false) {
@@ -1140,25 +1151,80 @@ class Renderer {
   }
 
   panel(x, y, w, h, fill, border) {
+    // UI v2: every canvas panel is a Platinum window (see ptFrame). The
+    // legacy (fill, border) signature is preserved for all callers; the
+    // border argument is accepted for compatibility — the frame tones are
+    // the Platinum standard on every surface.
+    this.ptFrame(x, y, w, h, fill);
+  }
+
+  // Platinum window frame, rect-only (fillRect/strokeRect — the QA recording
+  // ctx implements nothing else): interior fill, navy outer line, white
+  // hairline, silver-blue inner line, corner rivets. `fill` may be any CSS
+  // color (dark interiors keep light text readable — frame tones hold).
+  ptFrame(x, y, w, h, fill) {
     const c = this.ctx;
-    c.fillStyle = fill || '#f8f8f0';
+    c.fillStyle = fill || PT_PAPER;
     c.fillRect(x, y, w, h);
-    c.strokeStyle = border || '#202028';
+    c.strokeStyle = PT_FRAME;
     c.lineWidth = 2;
     c.strokeRect(x + 1, y + 1, w - 2, h - 2);
+    c.strokeStyle = '#ffffff';
+    c.lineWidth = 1;
+    c.strokeRect(x + 3.5, y + 3.5, w - 7, h - 7);
+    c.strokeStyle = PT_FRAME2;
+    c.strokeRect(x + 5.5, y + 5.5, w - 11, h - 11);
+    c.fillStyle = PT_RIVET;
+    const rx = [x + 8, x + w - 10], ry = [y + 8, y + h - 10];
+    for (const px of rx) for (const py of ry) c.fillRect(px, py, 2, 2);
+  }
+
+  // Platinum databox (battle HP plate): stepped two-tone interior (light
+  // top, cooler bottom — DS shading without gradient APIs), navy frame,
+  // and the tag tail stepping toward the battler (bottom-left for the foe,
+  // bottom-right for the ally). Rect-only, like ptFrame.
+  ptPlate(x, y, w, h, isAlly) {
+    const c = this.ctx;
+    // drop shade (offset silhouette rect, not a shadow API)
+    c.fillStyle = 'rgba(10,14,28,0.30)';
+    c.fillRect(x + 2, y + 3, w, h);
+    c.fillStyle = PT_PAPER;
+    c.fillRect(x, y, w, h);
+    c.fillStyle = PT_PAPER2;
+    c.fillRect(x + 2, y + Math.floor(h / 2), w - 4, h - Math.floor(h / 2) - 2);
+    c.strokeStyle = PT_FRAME;
+    c.lineWidth = 2;
+    c.strokeRect(x + 1, y + 1, w - 2, h - 2);
+    c.strokeStyle = PT_FRAME2;
+    c.lineWidth = 1;
+    c.strokeRect(x + 3.5, y + 3.5, w - 7, h - 7);
+    // tag tail: two steps descending toward the battler
+    const tx = isAlly ? x + w - 14 : x + 4;
+    c.fillStyle = PT_PAPER2;
+    c.fillRect(tx, y + h, 10, 3);
+    c.fillRect(isAlly ? tx + 3 : tx, y + h + 3, 7, 3);
+    c.fillStyle = PT_FRAME;
+    c.fillRect(tx, y + h + 2, 10, 1);
   }
 
   // HP bar with colorblind-safe stripe overlay under 25% (gameux §7).
   // The stripes are STATIC (not motion) — they always draw; they are the
   // colorblind cue, never gated on reduced motion (Uix sign-off E6 fix).
+  // UI v2: Platinum dress — navy-framed recessed track, bright DS fills,
+  // 1px segment ticks like the DS bar's stepped rendering.
   hpBar(x, y, w, h, frac) {
     const c = this.ctx;
     const f = Math.max(0, Math.min(1, frac));
-    c.fillStyle = '#28182c';
+    c.fillStyle = '#2b3040';
+    c.fillRect(x - 1, y - 1, w + 2, h + 2);
+    c.fillStyle = '#484860';
     c.fillRect(x, y, w, h);
-    const col = f > 0.5 ? '#58c94f' : (f > 0.25 ? '#e8c832' : '#e84040');
+    const col = f > 0.5 ? '#48c848' : (f > 0.25 ? '#f8c830' : '#f84838');
     c.fillStyle = col;
-    c.fillRect(x + 1, y + 1, Math.floor((w - 2) * f), h - 2);
+    const fw = Math.floor((w - 2) * f);
+    c.fillRect(x + 1, y + 1, fw, h - 2);
+    c.fillStyle = 'rgba(43,48,64,0.35)';
+    for (let sx = x + 5; sx < x + 1 + fw; sx += 4) c.fillRect(sx, y + 1, 1, h - 2);
     if (f <= 0.25 && f > 0) {
       c.fillStyle = 'rgba(255,255,255,0.5)';
       for (let sx = x + 2; sx < x + w - 2; sx += 4) {
@@ -1167,13 +1233,16 @@ class Renderer {
     }
   }
 
-  // XP bar: gold, 96x3 per gameux §4.2. frac eases out over 600ms in battle.
+  // XP bar: Platinum blue, same recessed track as the HP bar. frac eases
+  // out over 600ms in battle.
   xpBar(x, y, w, h, frac) {
     const c = this.ctx;
     const f = Math.max(0, Math.min(1, frac));
-    c.fillStyle = '#28182c';
+    c.fillStyle = '#2b3040';
+    c.fillRect(x - 1, y - 1, w + 2, h + 2);
+    c.fillStyle = '#484860';
     c.fillRect(x, y, w, h);
-    c.fillStyle = '#e8c832';
+    c.fillStyle = '#3898f8';
     c.fillRect(x + 1, y + 1, Math.floor((w - 2) * f), h - 2);
   }
 }
@@ -14816,6 +14885,7 @@ class UI {
     this.toastQ = [];
     this.log = [];        // headless: record of UI calls (test assertions)
     this._els = {};
+    this.summary = null; // Platinum summary panel state ({ data, tab, cb })
     this.nameEntry = null; // { value, maxLen, cb, ... } while the A-Z grid is open
     this.loginOpen = false;
     this.inBattle = false; // Track B: battle-mode flag (SYNC defers conflict UI out of battle)
@@ -14839,6 +14909,7 @@ class UI {
     this.buildControls();
     this.buildDialogue();
     this.buildMenu();
+    this.buildSummaryPanel();
     this.buildToasts();
     this.buildHudChips();
     this.buildHudStrip();
@@ -14947,7 +15018,7 @@ class UI {
     this.cmdEl.innerHTML = '';
     m.items.forEach((it, i) => {
       const b = document.createElement('button');
-      b.className = 'cmdf'
+      b.className = 'cmdf cmdf-' + it.value
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
         + (it.dimmed ? ' dimmed' : '')
@@ -15100,6 +15171,7 @@ class UI {
       title, items, idx: opts.initialIdx || 0, cb,
       battle: !!(opts && opts.battle), kind: opts.kind || 'menu',
       grid: !!opts.grid, rowHtml: opts.rowHtml || null,
+      menuClass: opts.menuClass || '',
       focusValue: opts.focusValue !== undefined ? opts.focusValue : null,
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
@@ -15111,6 +15183,12 @@ class UI {
     const m = this.menu;
     if (!m || m.kind === 'commands') { this.menuEl.classList.add('hidden'); return; }
     this.menuEl.classList.remove('hidden');
+    this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '');
+    // Full-takeover windows (party screen, PC box, summary) hide the
+    // overworld HUD — Platinum screens own the whole frame.
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.classList.toggle('menu-full', /(plate-full|pcbox)/.test(m.menuClass || ''));
+    }
     this.menuTitle.textContent = m.title || '';
     this.menuTitle.style.display = m.title ? 'block' : 'none';
     this.menuList.innerHTML = '';
@@ -15120,6 +15198,8 @@ class UI {
       r.className = 'menu-row'
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
+        + (it.band ? ' bandrow' : '')
+        + (it.closeRow ? ' close-row' : '')
         + (it.zeroPp ? ' zeropp' : '')
         + (it.emptySlot ? ' emptyslot' : '')
         + (m.focusValue !== null && m.focusValue === it.value ? ' tut-focus' : '');
@@ -15158,6 +15238,7 @@ class UI {
     this.menu = null;
     if (!this.headless) {
       this.menuEl.classList.add('hidden');
+      if (typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
       if (wasCommands) this.hideCommands();
     }
     this.game.audio.playSfx(SFX['ui-blip']);
@@ -15172,6 +15253,7 @@ class UI {
     this.menu = null;
     if (!this.headless) {
       this.menuEl.classList.add('hidden');
+      if (typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
       if (wasCommands) this.hideCommands();
     }
     this.game.audio.playSfx(SFX['ui-back']);
@@ -15180,6 +15262,70 @@ class UI {
   }
 
   get menuOpen() { return !!this.menu; }
+
+  // ---- Platinum tabbed summary panel (UI v2) ----
+  // data: { name, tabs: [{ id, label, bodyHtml }] }. The caller composes each
+  // tab's body HTML from real game data (profile / status / moves in the
+  // Platinum summary arrangement); this class owns the chrome: tab strip,
+  // framed panel, keyboard routing (left/right switch, B/START close).
+  buildSummaryPanel() {
+    this.sumEl = this.el('div', 'sumpanel hidden', this.root);
+    this.sumTabsEl = this.el('div', 'sumtabs', this.sumEl);
+    this.sumBodyEl = this.el('div', 'sumbody', this.sumEl);
+    const close = this.el('button', 'sumclose', this.sumEl);
+    close.textContent = 'Close';
+    close.addEventListener('pointerdown', (e) => { e.preventDefault(); this.closeSummary(); });
+    this.sumCloseBtn = close;
+  }
+
+  showSummary(data, cb) {
+    this.summary = { data, tab: 0, cb: cb || null };
+    this.log.push({ ui: 'summary', name: data && data.name });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) this.renderSummary();
+  }
+
+  renderSummary() {
+    if (this.headless || !this.sumEl) return;
+    const s = this.summary;
+    if (!s) { this.sumEl.classList.add('hidden'); return; }
+    this.sumEl.classList.remove('hidden');
+    this.sumTabsEl.innerHTML = '';
+    s.data.tabs.forEach((t, i) => {
+      const b = document.createElement('button');
+      b.className = 'sumtab' + (i === s.tab ? ' sel' : '');
+      b.textContent = t.label;
+      b.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.summary.tab = i;
+        this.game.audio.playSfx(SFX['ui-tick']);
+        this.renderSummary();
+      });
+      this.sumTabsEl.appendChild(b);
+    });
+    this.sumBodyEl.innerHTML = s.data.tabs[s.tab].bodyHtml || '';
+  }
+
+  summaryTab(d) {
+    const s = this.summary;
+    if (!s) return;
+    const n = s.data.tabs.length;
+    s.tab = (s.tab + d + n) % n;
+    this.game.audio.playSfx(SFX['ui-tick']);
+    if (!this.headless) this.renderSummary();
+  }
+
+  closeSummary() {
+    const s = this.summary;
+    if (!s) return;
+    this.summary = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.sumEl) this.sumEl.classList.add('hidden');
+    this.game.audio.playSfx(SFX['ui-back']);
+    if (s.cb) s.cb();
+  }
+
+  get summaryOpen() { return !!this.summary; }
 
   buildToasts() {
     this.toastEl = this.el('div', 'toasts', this.root);
@@ -15656,6 +15802,14 @@ class UI {
     this._chipTick = (this._chipTick || 0) + 1;
     if (this._chipTick % 15 === 0) this._syncChipAnchor();
     const input = this.game.input;
+    // Summary panel is modal (UI v2): left/right (or X/Y page keys) switch
+    // tabs, B / START / ESC closes.
+    if (this.summary) {
+      if (input.wasPressed('left') || input.wasPressed('pageup')) this.summaryTab(-1);
+      else if (input.wasPressed('right') || input.wasPressed('pagedown')) this.summaryTab(1);
+      else if (input.wasPressed('b') || input.wasPressed('start') || input.wasPressed('escape')) { this.closeSummary(); }
+      return true;
+    }
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;
     // Login page is modal (P0/B1).
@@ -15813,6 +15967,9 @@ const SYNC = {
 // title.mjs — boot disclaimer card (GC verbatim, §2a) + title screen.
 // The legal card renders in the shell before any interactive element and is not
 // skippable-in-one-tap on first boot (readable dwell >= 3 seconds).
+// Title flow (UI v2, Platinum standard): logo plate + framed keyart + a
+// blinking PRESS START prompt; the menu (New Game / Continue / Options)
+// appears only after Start/A (or a tap, which injects 'a') is pressed.
 
 const DISCLAIMER_BOOT = [
   "ASH'S JOURNEY",
@@ -15856,8 +16013,10 @@ const GAME_SUBTITLE = 'An Unofficial Fan Homage';
 const EDITION_MARKER = "NAMAN'S EDITION";
 
 // ---- Title recomposition helpers (Seat B) ----
-// Shared design system: UI font stack + ink/paper/gold.
-const FONT_STACK = 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+// Shared design system: UI font stack + ink/paper/gold. UI v2 (Platinum
+// standard): Galmuri leads the stack, matching the canvas renderer
+// (src/engine/render.mjs UI_FONT_STACK) so measured plates fit drawn text.
+const FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 const PAPER = '#f8f8f0';
 const GOLD = '#e8c832';
 
@@ -15982,6 +16141,7 @@ class BootScene {
   enter() {
     this.t = 0;
     this.phase = 'legal'; // legal -> title
+    this.titleStage = 'pressStart'; // title sub-state: 'pressStart' -> 'menu'
     this.ready = false;  // interactive only after dwell
     this.menuIdx = 0;
     this.game.ui.log.push({ ui: 'boot' });
@@ -15993,9 +16153,27 @@ class BootScene {
       if (this.t >= 3) this.ready = true;
       if (this.ready && (input.wasPressed('a') || input.wasPressed('start'))) {
         this.phase = 'title';
+        this.titleStage = 'pressStart';
         this.t = 0;
         this.game.audio.unlock();
         this.game.audio.playMusic('title-theme'); // original score; unlock gate satisfied by the gesture
+      }
+      return;
+    }
+    // Platinum title flow: the menu stays hidden behind the blinking
+    // PRESS START prompt until Start/A (or a tap, which injects 'a') is
+    // pressed. The opening press only opens the menu — it never selects.
+    if (this.titleStage !== 'menu') {
+      const aP = input.wasPressed('a');
+      const sP = input.wasPressed('start');
+      input.wasPressed('up'); input.wasPressed('down'); // swallow nav edges so none leak into the opened menu
+      if (aP || sP) {
+        this.titleStage = 'menu';
+        this.game.audio.unlock();
+        // Title music starts on the legal->title transition above;
+        // playMusic no-ops when the same track is already playing, so
+        // this only starts it if that transition somehow did not.
+        this.game.audio.playMusic('title-theme');
       }
       return;
     }
@@ -16077,9 +16255,14 @@ class BootScene {
     }
     menuW = Math.min(menuW, w - 24);
     const menuX = Math.round(cx - menuW / 2);
+    const showMenu = this.titleStage === 'menu';
+    // PRESS START band: reserved above the footer while the menu is hidden;
+    // in that sub-state the keyart band reclaims the rest of the menu's space.
+    const psH = 22;
+    const psY = menuBottom - psH + 3;
 
     // ---- Keyart: centered in the middle band, overlapped by nothing ----
-    const kBottom = menuY - 6;
+    const kBottom = showMenu ? menuY - 6 : menuBottom - psH - 6;
     const availH = kBottom - keyTop;
     const availW = w - 32;
     if (availH >= 20 && availW >= 32) {
@@ -16100,6 +16283,15 @@ class BootScene {
         g.ctx2drect(cx - drawW * 0.08 - 6, ky + drawH * 0.66 + 4, 11, 12, '#1a1a22');
         g.ctx2dcircle(cx + drawW * 0.09, ky + drawH * 0.7, 4, '#1a1a22');
       }
+      // Platinum border treatment around the keyart rect (strokeRect only):
+      // navy outer line + silver-blue inner line, mirroring the r.panel frame.
+      const kc = r.ctx;
+      kc.strokeStyle = '#2b3040';
+      kc.lineWidth = 2;
+      kc.strokeRect(kx + 1, ky + 1, drawW - 2, drawH - 2);
+      kc.strokeStyle = '#8d9bbf';
+      kc.lineWidth = 1;
+      kc.strokeRect(kx + 3.5, ky + 3.5, drawW - 7, drawH - 7);
     }
 
     // ---- Header plate + centered title / subtitle / edition ribbon ----
@@ -16112,6 +16304,10 @@ class BootScene {
     const plateX = Math.round(cx - plateW / 2);
     r.panel(plateX, plateY, plateW, plateH, 'rgba(16,16,28,0.62)', 'rgba(232,200,50,0.55)');
     r.text(GAME_TITLE, cx, titleY, { size: titleSize, bold: true, align: 'center', color: '#fff' });
+    // Platinum logo treatment: a subtle gold rule under the title,
+    // sized to the measured Galmuri title text.
+    const titleW = measureText(r, GAME_TITLE, titleSize, true);
+    g.ctx2dfill('rgba(232,200,50,0.55)', Math.round(cx - titleW / 2), titleY + titleSize + 1, titleW, 2);
     r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8' });
     if (hasEd) {
       // ADR-012 personal-edition ribbon: measured dark band + gold underline,
@@ -16125,20 +16321,30 @@ class BootScene {
       r.text(EDITION_MARKER, cx, edY + 3, { size: 14, align: 'center', color: '#ffe9a8' });
     }
 
-    // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
-    r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
-    items.forEach((it, i) => {
-      const rowY = menuY + menuPadY + i * rowH;
-      const sel = i === this.menuIdx;
-      if (sel) {
-        g.ctx2dfill('rgba(232,200,50,0.30)', menuX + 4, rowY, menuW - 8, rowH - 2);
-        g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
-      }
-      r.text(it.label, cx, rowY + 2, {
-        size: 14, bold: sel, align: 'center',
-        color: sel ? '#ffe9a8' : PAPER,
+    if (showMenu) {
+      // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
+      r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
+      items.forEach((it, i) => {
+        const rowY = menuY + menuPadY + i * rowH;
+        const sel = i === this.menuIdx;
+        if (sel) {
+          g.ctx2dfill('rgba(232,200,50,0.30)', menuX + 4, rowY, menuW - 8, rowH - 2);
+          g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
+        }
+        r.text(it.label, cx, rowY + 2, {
+          size: 14, bold: sel, align: 'center',
+          color: sel ? '#ffe9a8' : PAPER,
+        });
       });
-    });
+    } else {
+      // ---- PRESS START: blinking prompt in the band above the footer ----
+      // ~1s blink period (0.5s on / 0.5s off — the legal card's pulse
+      // idiom); steady-on under reduced motion.
+      const reduced = !!(g.state.settings && g.state.settings.reducedMotion);
+      if (reduced || Math.floor(this.t * 2) % 2 === 0) {
+        r.text('PRESS START', cx, psY, { size: 16, bold: true, align: 'center', color: '#ffe9a8' });
+      }
+    }
 
     // ---- Footer: centered, inset from both edges, never clipped ----
     r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc' });
@@ -16398,6 +16604,20 @@ class IntroScene {
 
 
 const HP_DRAIN_PER_SEC = 90; // ADR-004 feel budget
+
+// UI v2 (Platinum standard): status chips for the databox — a solid DS-toned
+// rect with the white bold 3-letter code as TEXT on it (never color alone).
+// NOTE: burn keeps the legacy 'BUR' code — verify-slice's QA plate check
+// asserts that exact text for a burned mon, so the DS 'BRN' abbreviation is
+// the one deliberate deviation from Platinum spelling in this table.
+const STATUS_CHIPS = {
+  burn: ['BUR', '#c84028'],
+  poison: ['PSN', '#9848a8'],
+  badlyPoisoned: ['PSN', '#7038a0'],
+  paralysis: ['PAR', '#b8860b'],
+  sleep: ['SLP', '#68707e'],
+  freeze: ['FRZ', '#2f88b8'],
+};
 
 // Fraction of the current level's XP bar filled (gameux §4.2).
 function xpFracOf(mon, add) {
@@ -17714,7 +17934,7 @@ class BattleScene {
       }
     }
     // Low-HP warning jingle at first crossing into red (<25%), once per ally
-    // (gameux §4.2). Visual twin: the HP plate's red pulse + ⚠ pip.
+    // (gameux §4.2). Visual twin: the HP plate's red pulse + '!' pip.
     if (this._lowHpAlly !== this.ally) { this._lowHpAlly = this.ally; this._lowHpWarned = false; }
     const ratio = this.ally.maxHp > 0 ? this.ally.hp / this.ally.maxHp : 1;
     if (ratio > 0.25) this._lowHpWarned = false;
@@ -17726,18 +17946,61 @@ class BattleScene {
     }
   }
 
+  // UI v2 (Platinum standard): stepped circular battle platform, rects only
+  // (5 horizontal bands, widest at the middle — a pixel disc, no arc/ellipse
+  // calls): light rim on top, pale fill, darker shade band at the bottom.
+  ptDisc(r, cx, cy, rx, ry) {
+    const c = r.ctx;
+    const steps = 5;
+    for (let i = 0; i < steps; i++) {
+      const t = (i / (steps - 1)) * 2 - 1; // -1 (top) .. 1 (bottom)
+      const half = Math.max(4, Math.round(rx * Math.sqrt(Math.max(0.12, 1 - t * t))));
+      const y0 = Math.round(cy + t * ry - ry / steps);
+      const hh = Math.ceil((2 * ry) / steps) + 1;
+      c.fillStyle = i === 0 ? '#f2ecd8' : (i === steps - 1 ? '#b3a586' : '#ddd2ac');
+      c.fillRect(Math.round(cx - half), y0, half * 2, hh);
+    }
+  }
+
+  // UI v2 (Platinum standard): the battlefield, rects only, drawn INSIDE
+  // begin()/end() (the old pre-begin bands were painted over by begin()'s
+  // black clear — that was the dark void). Stepped daylight-blue sky ramp
+  // (per-band solid fills; no gradient APIs, no offscreen cache needed at
+  // 6 bands), a stepped tree/hill scenery band on the horizon, then the
+  // ground field in stepped bands — grass greens for wild encounters,
+  // warm stone for trainer battles (this.kind is the terrain data at hand).
+  drawArena(r, horizonFrac) {
+    const g = this.game;
+    const w = r.viewW, h = r.viewH;
+    const horizon = Math.round(h * horizonFrac);
+    const sky = ['#5f9fe6', '#6fabec', '#7fb7f1', '#8fc3f5', '#9fcdf8', '#b0d7fa'];
+    const sb = Math.ceil(horizon / sky.length) || 1;
+    for (let i = 0; i < sky.length; i++) g.ctx2dfill(sky[i], 0, i * sb, w, sb + 1);
+    // Scenery: hill band + deterministic stepped tree bumps on the horizon.
+    g.ctx2dfill('#5d8f66', 0, horizon - 8, w, 8);
+    for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
+      const bh = 8 + ((i * 5) % 3) * 3;
+      g.ctx2dfill('#3f6d4a', x, horizon - bh, 10, bh);
+    }
+    g.ctx2dfill('#4c7a56', 0, horizon - 3, w, 3);
+    // Ground field: stepped bands lightening toward the horizon.
+    const ground = this.kind === 'trainer'
+      ? ['#cfc2a4', '#c4b696', '#b9aa89', '#ae9e7d', '#a39271', '#988665']
+      : ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'];
+    const gb = Math.ceil((h - horizon) / ground.length) || 1;
+    for (let i = 0; i < ground.length; i++) g.ctx2dfill(ground[i], 0, horizon + i * gb, w, gb + 1);
+    g.ctx2dfill('#33513c', 0, horizon, w, 2); // horizon line
+  }
+
   render(r) {
     const g = this.game;
     if (this.rtMode && this.rt && (this.state === 'rt' || this.state === 'xp')) { this.renderRt(r); return; }
     const w = r.viewW, h = r.viewH;
-    // Battle background: banded vertical steps (max 5, gameux §6) per terrain.
-    const bands = this.kind === 'trainer'
-      ? ['#3a3a4a', '#4a4a5a', '#5a5a6a', '#6a6a7a', '#7a7a8a']
-      : ['#2a6a3a', '#3a7a4a', '#4a8a5a', '#5a9a6a', '#6aaa7a'];
-    for (let i = 0; i < 5; i++) {
-      g.ctx2dfill(bands[i], 0, (h * i) / 5, w, h / 5 + 1);
-    }
+    // Transform discipline (title/intro pattern): pin the camera to the
+    // origin for the screen-space theater, restore it after end().
+    const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
     r.begin();
+    this.drawArena(r, 0.42);
     // Platforms: foe upper-right, ally lower-left (wireframes §5.1 — the Uix
     // ruling: gameux §4.2's "upper-left" was the spec's error; the build is correct).
     const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
@@ -17759,6 +18022,10 @@ class BattleScene {
       if (this.atkFx && this.atkFx.side === side) r.blitS(spr, pos.x - 5, pos.y - 5, 58, 58);
       else r.blitS(spr, pos.x, pos.y, 48, 48); // 32px ART -> 48px draw size
     };
+    // Platinum battle platforms: stepped discs under each battler (the far
+    // foe disc is smaller — perspective), drawn before the sprites.
+    this.ptDisc(r, foePos.x + 24, foePos.y + 44, 34, 8);
+    this.ptDisc(r, allyPos.x + 24, allyPos.y + 44, 38, 9);
     drawBattler(foeSpr, foePos, 'foe');
     drawBattler(allySpr, allyPos, 'ally');
     // README faint transform: sink 8px + fade to 0 alpha over 20 frames.
@@ -17801,55 +18068,94 @@ class BattleScene {
       c.restore();
     }
     r.end();
-    // HP plates (Gen 5 idiom, original art) — P1/A5: all plate text >= 14px.
+    r.camX = pcx; r.camY = pcy;
+    // HP plates (Platinum databoxes, original art) — P1/A5: all plate text >= 14px.
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
-    this.plate(r, w - 116, h - 108, this.ally, this.hpAnim.ally, true);
-    // Message box
+    this.plate(r, w - 146, h - 124, this.ally, this.hpAnim.ally, true);
+    // Message box (Platinum frame via r.panel/ptFrame)
     if (this.msgOpen || this.msg) {
-      r.panel(4, h - 52, w - 8, 48, '#f8f8f0', '#202028');
+      r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
       const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
       r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
       if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2: red advance cue at the box's bottom-right while waiting for input.
+      if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
     this.t += 16;
   }
 
+  // UI v2 (Platinum standard): a true Platinum databox on r.ptPlate.
+  // Canvas ops used here are fillRect / fillText / strokeRect ONLY (via
+  // r.ptPlate, r.hpBar, r.xpBar, r.text and one direct fillRect for the
+  // status chip / XP flash) — the QA recording-ctx plate test implements
+  // just those. Every instance field is guarded: the QA minimal-this call
+  // (only game.state.settings present) must yield zero slide/pulse offsets.
   plate(r, x, y, mon, hpShown, isAlly) {
-    const g = this.game;
-    const w = 104, h = isAlly ? 62 : 48;
+    const settings = (this.game && this.game.state && this.game.state.settings) || {};
+    const w = 140, h = isAlly ? 70 : 48;
+    // Platinum plate entrance: foe slides in from the left, ally from the
+    // right, ease-out over the battle's opening 450ms of theater time
+    // (this.t, reset in enter()). A missing/non-finite timer (the QA
+    // minimal-this call) means "entrance finished" — offset 0. Reduced
+    // motion skips the slide entirely.
+    let slide = 0;
+    if (typeof this.t === 'number' && isFinite(this.t) && !settings.reducedMotion) {
+      const p = Math.max(0, Math.min(1, this.t / 450));
+      const e = 1 - (1 - p) * (1 - p);
+      slide = (1 - e) * (w + 16);
+    }
+    let px = isAlly ? x + slide : x - slide;
     // P1/E7: low-HP pulse — the ally plate nudges twice on first red crossing
     // (never under reduced motion; the pulse timer is only set when motion is on).
-    let px = x;
-    if (isAlly && this._lowHpPulseT > 0) px = x + Math.sin(this._lowHpPulseT * 0.05) * 2;
-    r.panel(px, y, w, h, '#f0ead8', '#202028');
+    if (isAlly && this._lowHpPulseT > 0) px += Math.sin(this._lowHpPulseT * 0.05) * 2;
+    r.ptPlate(px, y, w, h, isAlly);
+    const ink = '#20242e';
     const name = displayName(mon, SPECIES).slice(0, 10);
-    r.text(name, px + 4, y + 4, { size: 14, bold: true, color: '#202028', shadow: false });
-    // Lv label nudged right: at px + w - 46 a 9-10 char name (Charizard,
-    // Butterfree) ran under the 'Lv' text; -41 clears those and 'Lv100'
-    // still ends inside the plate (px + w - 3).
-    r.text('Lv' + mon.level, px + w - 41, y + 4, { size: 14, color: '#202028', shadow: false });
-    const frac = hpShown / mon.maxHp;
-    r.hpBar(px + 4, y + 22, w - 8, 6, frac);
-    // P0/E6: ⚠ pip on the plate under 25% — the colorblind cue, never color-alone.
-    if (frac < 0.25 && mon.hp > 0) {
-      r.text('⚠', px + w - 22, y + 21, { size: 14, bold: true, color: '#a02020', shadow: false });
+    r.text(name, px + 6, y + 5, { size: 14, bold: true, color: ink, shadow: false });
+    // Gender: mons/species carry no gender data anywhere in the game, so
+    // the databox is gender-neutral — no symbol is drawn (UI v2 ruling).
+    // 'Lv' + level, right-aligned inside the frame (a 10-char name at
+    // px + 6 still clears the 'Lv100' block ending at px + w - 6).
+    r.text('Lv' + mon.level, px + w - 6, y + 5, { size: 14, color: ink, shadow: false, align: 'right' });
+    // HP row: gold 'HP' tag + the Platinum hpBar; the status chip slot is
+    // reserved at the row's right end (the bar shortens when a chip shows).
+    const fracRaw = hpShown / mon.maxHp;
+    const frac = isFinite(fracRaw) ? Math.max(0, Math.min(1, fracRaw)) : 0;
+    const chip = mon.status
+      ? (STATUS_CHIPS[mon.status] || [String(mon.status).toUpperCase().slice(0, 3), '#5a6478'])
+      : null;
+    r.text('HP', px + 6, y + 23, { size: 14, bold: true, color: '#a87818', shadow: false });
+    r.hpBar(px + 26, y + 27, chip ? w - 66 : w - 32, 7, frac);
+    if (chip) {
+      const c = r.ctx;
+      c.fillStyle = chip[1];
+      c.fillRect(px + w - 36, y + 22, 30, 16);
+      r.text(chip[0], px + w - 33, y + 23, { size: 14, bold: true, color: '#ffffff', shadow: false });
+    } else if (!isAlly && frac < 0.25 && mon.hp > 0) {
+      // P0/E6: foe low-HP text cue in the empty chip slot (never color
+      // alone; the hpBar's white stripe overlay is the always-on cue).
+      // The ally plate carries its own '!' on the HP-numbers row below.
+      r.text('!', px + w - 26, y + 23, { size: 14, bold: true, color: '#c02818', shadow: false });
     }
     if (isAlly) {
-      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + 4, y + 30, { size: 14, color: '#202028', shadow: false });
-      if (mon.status) r.text(mon.status.toUpperCase().slice(0, 3), px + w - 42, y + 30, { size: 14, bold: true, color: '#a040a0', shadow: false });
-      // P0/E3: XP bar (gold) + →Lv label; 600ms ease-out (instant under reduced motion).
-      r.text('→Lv', px + 72, y + 44, { size: 14, color: '#7a5a10', shadow: false });
-      // xpShownFrac lives on the battle instance; the QA minimal-this plate test
-      // calls plate() without it — fall back to the static fraction there.
-      const xf = (typeof this.xpShownFrac === 'function') ? this.xpShownFrac(mon) : xpFracOf(mon, 0);
-      r.xpBar(px + 4, y + 48, 64, 4, xf);
+      // HP numbers row: low-HP '!' cue at the left, cur/max right-aligned.
+      if (frac < 0.25 && mon.hp > 0) {
+        r.text('!', px + 6, y + 40, { size: 14, bold: true, color: '#c02818', shadow: false });
+      }
+      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + w - 6, y + 40, { size: 14, color: ink, shadow: false, align: 'right' });
+      // EXP row: blue 'EXP' tag + the Platinum-blue xpBar (P0/E3: 600ms
+      // ease-out via xpShownFrac; instant under reduced motion).
+      r.text('EXP', px + 6, y + 54, { size: 14, bold: true, color: '#2f68b8', shadow: false });
+      // xpShownFrac lives on the battle instance; the QA minimal-this plate
+      // test calls plate() without it — fall back to the static fraction.
+      const xfRaw = (typeof this.xpShownFrac === 'function') ? this.xpShownFrac(mon) : xpFracOf(mon, 0);
+      const xf = isFinite(xfRaw) ? xfRaw : 0;
+      r.xpBar(px + 34, y + 58, w - 40, 5, xf);
       if (this.xpFlashT > 0) {
         const c = r.ctx;
         c.fillStyle = 'rgba(255,255,255,' + (this.xpFlashT / 250 * 0.8).toFixed(3) + ')';
-        c.fillRect(px + 4, y + 48, 64, 4);
+        c.fillRect(px + 34, y + 58, w - 40, 5);
       }
-    } else if (mon.status) {
-      r.text(mon.status.toUpperCase().slice(0, 3), px + w - 42, y + 30, { size: 14, bold: true, color: '#a040a0', shadow: false });
     }
   }
 }
@@ -18402,19 +18708,21 @@ Object.assign(BattleScene.prototype, {
     const rt = this.rt;
     const w = r.viewW, h = r.viewH;
     const sx = w / 480, sy = h / 320;
-    const bands = this.kind === 'trainer'
-      ? ['#2e3242', '#3a405a', '#454c6e', '#525a80', '#606891']
-      : ['#24402c', '#2c5236', '#356540', '#3f784c', '#4a8a58'];
-    for (let i = 0; i < 5; i++) g.ctx2dfill(bands[i], 0, (h * i) / 5, w, h / 5 + 1);
+    // Transform discipline (title/intro pattern): pin the camera to the
+    // origin for the screen-space arena, restore it after end().
+    const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
     r.begin();
-    // Arena ground.
+    // UI v2 (Platinum standard): the shared battlefield (drawArena/ptDisc
+    // live in battle.mjs). The horizon is compressed to a top strip —
+    // the RT arena's free movement spans the rest of the field, so the
+    // stepped platforms travel with their battlers instead of sitting
+    // fixed like the classic theater's (documented RT divergence).
     const c = r.ctx;
-    c.save();
-    c.fillStyle = 'rgba(0,0,0,0.18)';
-    c.beginPath();
-    c.ellipse(w / 2, h * 0.58, w * 0.46, h * 0.34, 0, 0, Math.PI * 2);
-    c.fill();
-    c.restore();
+    this.drawArena(r, 0.22);
+    if (!(rt.catchSeq || rt.ballFlight)) {
+      this.ptDisc(r, rt.fx * sx, rt.fy * sy + 20, 30, 8);
+    }
+    this.ptDisc(r, rt.ax * sx, rt.ay * sy + 20, 30, 8);
     const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
     const allyArt = g.spriteCache[this.ally.speciesId] || g.spriteCache.partner;
     const bobA = Math.sin(this.t * 0.006) * 1.5;
@@ -18437,8 +18745,9 @@ Object.assign(BattleScene.prototype, {
       g.ctx2dcircle(rt.fx * sx + wob, rt.fy * sy - 2, 6, '#e84040');
     }
     r.end();
+    r.camX = pcx; r.camY = pcy;
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
-    this.plate(r, w - 116, h - 108, this.ally, this.hpAnim.ally, true);
+    this.plate(r, w - 146, h - 124, this.ally, this.hpAnim.ally, true);
     // Cooldown chips for the ally's four moves (bottom strip). Chip width is
     // derived from the actual view: the old fixed 108px assumed a 480-wide
     // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
@@ -18448,23 +18757,26 @@ Object.assign(BattleScene.prototype, {
       const slot = this.ally.moves[i];
       const x = 6 + i * (chipW + 4);
       const y = h - 26;
-      if (!slot) { r.panel(x, y, chipW, 20, 'rgba(20,22,32,0.55)', '#3a405a'); continue; }
+      if (!slot) { r.panel(x, y, chipW, 20, 'rgba(43,48,64,0.55)', PT_FRAME); continue; }
       const mv = MOVES[slot.id];
       const cd = rt.cds.ally[slot.id] || 0;
       const ready = cd <= 0 && slot.pp > 0;
-      r.panel(x, y, chipW, 20, ready ? 'rgba(24,30,44,0.92)' : 'rgba(24,30,44,0.6)', ready ? '#e8c832' : '#4a506a');
+      // UI v2: chips are Platinum windows (r.panel -> ptFrame) in PT tones —
+      // navy PT_FRAME interior, PT_PAPER text when ready, PT_FRAME2 when not.
+      r.panel(x, y, chipW, 20, ready ? 'rgba(43,48,64,0.92)' : 'rgba(43,48,64,0.6)', PT_FRAME);
       const label = (i + 1) + ' ' + (mv ? mv.name : slot.id);
       // A spent slot also carries 'NO PP' at the chip's right end — shorten
       // the label so the two never collide on narrow chips.
       const maxChars = slot.pp <= 0 ? Math.max(3, Math.min(labelMax, Math.floor((chipW - 46) / 7))) : labelMax;
-      r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? '#f4f2e8' : '#9aa0b4', shadow: false });
+      r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
       if (!ready && slot.pp > 0) {
+        // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
         const total = cooldownMs(mv, 50, 50);
         const frac = Math.max(0, Math.min(1, cd / total));
-        c.fillStyle = 'rgba(232,200,50,0.5)';
+        c.fillStyle = PT_FRAME2;
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
       }
-      if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#e86a6a', shadow: false });
+      if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#f84838', shadow: false });
     }
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
@@ -18472,14 +18784,16 @@ Object.assign(BattleScene.prototype, {
       // 14px): the old fixed 30-char slice could overrun the 220px panel.
       const floatW = Math.min(220, w - 16);
       const floatMax = Math.max(8, Math.floor((floatW - 12) / 7));
-      r.panel(w / 2 - floatW / 2, 40, floatW, 22, 'rgba(16,18,28,0.88)', '#e8c832');
-      r.text(this.rtFloatText.slice(0, floatMax), w / 2 - floatW / 2 + 6, 44, { size: 14, color: '#f4f2e8', shadow: false });
+      r.panel(w / 2 - floatW / 2, 40, floatW, 22, 'rgba(43,48,64,0.88)', PT_FRAME);
+      r.text(this.rtFloatText.slice(0, floatMax), w / 2 - floatW / 2 + 6, 44, { size: 14, color: PT_PAPER, shadow: false });
     }
     if (this.msgOpen || this.msg) {
-      r.panel(4, h - 52, w - 8, 48, '#f8f8f0', '#202028');
+      r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
       const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
       r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
       if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2: red advance cue at the box's bottom-right while waiting for input.
+      if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
     this.t += 16;
   },
@@ -19661,21 +19975,60 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- PC boxes ----------
+  // Platinum PC box (UI v2): a 'pcbox' wallpaper window whose stored
+  // Pokemon render as sprite cells (Game#spriteDataUrl, the same helper
+  // the party/bag rows use — accessed here via this.game). Navigation
+  // rows (box-switch, party deposit/withdraw lists, link, log off / back)
+  // are full-width `wide` rows under the cell grid. All values returned
+  // to the callbacks, and the deposit/withdraw/box-switch semantics, are
+  // exactly as before; the current box + capacity stay in the title.
   openPc() {
     const g = this.game;
     const boxes = g.state.boxes;
     for (let i = 1; i <= BOX_COUNT; i++) if (!Array.isArray(boxes['box' + i])) boxes['box' + i] = [];
     const cur = g.state.currentBox || 'box1';
-    g.ui.showMenu('PC — someone\'s PC (current: ' + cur.replace('box', 'Box ') + ', ' + boxes[cur].length + '/' + BOX_CAP + ')', [
-      { label: 'Deposit', value: 'dep' },
-      { label: 'Withdraw', value: 'wd' },
-      { label: 'Change box', value: 'chg' },
-      { label: 'Link Transfer (Bill\'s system)', value: 'link' },
-      { label: 'Log off', value: 'off' },
-    ], (v) => {
+    const spriteRowHtml = (getMon) => (it) => {
+      const mon = getMon(it);
+      if (!mon) return '<span>' + it.label + '</span>';
+      const url = (typeof g.spriteDataUrl === 'function') ? g.spriteDataUrl(mon.speciesId) : '';
+      return '<img class="picon" src="' + url + '" alt=""><span>' + it.label + '</span>';
+    };
+    const boxRowHtml = spriteRowHtml((it) => {
+      if (typeof it.value === 'string' && it.value.indexOf('wd:') === 0) return boxes[cur][parseInt(it.value.slice(3), 10)];
+      if (typeof it.value === 'number' && it.value >= 0) return boxes[cur][it.value];
+      return null;
+    });
+    const partyRowHtml = spriteRowHtml((it) => {
+      if (typeof it.value === 'number' && it.value >= 0) return g.state.party[it.value];
+      return null;
+    });
+    const withdrawMon = (iv) => {
+      if (g.state.party.length >= 6) { g.ui.say(['Your party is full!']); return; }
+      const mon = boxes[cur].splice(iv, 1)[0];
+      if (!mon) return;
+      g.state.party.push(mon);
+      g.ui.toast('Withdrew ' + displayName(mon, SPECIES) + '.');
+    };
+    const mainItems = boxes[cur].map((m, i) => ({
+      label: displayName(m, SPECIES) + ' Lv' + m.level, value: 'wd:' + i,
+    }));
+    mainItems.push(
+      { label: 'Deposit', value: 'dep', wide: true },
+      { label: 'Withdraw', value: 'wd', wide: true },
+      { label: 'Change box', value: 'chg', wide: true },
+      { label: 'Link Transfer (Bill\'s system)', value: 'link', wide: true },
+      { label: 'Log off', value: 'off', wide: true },
+    );
+    g.ui.showMenu('PC — someone\'s PC (current: ' + cur.replace('box', 'Box ') + ', ' + boxes[cur].length + '/' + BOX_CAP + ')', mainItems, (v) => {
+      if (typeof v === 'string' && v.indexOf('wd:') === 0) {
+        // Box-screen shortcut: choosing a stored Pokemon's cell withdraws
+        // it, with the same party-full guard as the Withdraw list below.
+        withdrawMon(parseInt(v.slice(3), 10));
+        return;
+      }
       if (v === 'dep') {
         const items = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: g.state.party.length <= 1 }));
-        items.push({ label: 'Back', value: -1 });
+        items.push({ label: 'Back', value: -1, wide: true });
         g.ui.showMenu('Deposit which?', items, (iv) => {
           if (iv === null || iv === -1) return;
           const mon = g.state.party[iv];
@@ -19686,23 +20039,20 @@ Object.assign(OverworldScene.prototype, {
           mon.status = null;
           boxes[cur].push(mon);
           g.ui.toast('Deposited ' + displayName(mon, SPECIES) + '.');
-        });
+        }, { menuClass: 'pcbox', rowHtml: partyRowHtml });
       } else if (v === 'wd') {
         const items = boxes[cur].map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
-        items.push({ label: 'Back', value: -1 });
+        items.push({ label: 'Back', value: -1, wide: true });
         g.ui.showMenu('Withdraw which?', items, (iv) => {
           if (iv === null || iv === -1) return;
-          if (g.state.party.length >= 6) { g.ui.say(['Your party is full!']); return; }
-          const mon = boxes[cur].splice(iv, 1)[0];
-          g.state.party.push(mon);
-          g.ui.toast('Withdrew ' + displayName(mon, SPECIES) + '.');
-        });
+          withdrawMon(iv);
+        }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
       } else if (v === 'chg') {
         const items = [];
-        for (let i = 1; i <= BOX_COUNT; i++) items.push({ label: 'Box ' + i + ' (' + boxes['box' + i].length + '/' + BOX_CAP + ')', value: 'box' + i });
+        for (let i = 1; i <= BOX_COUNT; i++) items.push({ label: 'Box ' + i + ' (' + boxes['box' + i].length + '/' + BOX_CAP + ')', value: 'box' + i, wide: true });
         g.ui.showMenu('Change to which box?', items, (iv) => {
           if (iv) { g.state.currentBox = iv; g.ui.toast('Current box: ' + iv.replace('box', 'Box ') + '.'); }
-        });
+        }, { menuClass: 'pcbox' });
       } else if (v === 'link') {
         // Bill's Link Transfer: trade-evolution species evolve here —
         // the honest single-player resolution (WS7 design call, ADR-019).
@@ -19712,13 +20062,14 @@ Object.assign(OverworldScene.prototype, {
         });
         if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
         const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
-        items.push({ label: 'Back', value: null });
+        items.push({ label: 'Back', value: null, wide: true });
+        const linkRowHtml = spriteRowHtml((it) => cand.find((m) => m.monId === it.value) || null);
         g.ui.showMenu('Link Transfer which?', items, (iv) => {
           const mon = cand.find((m) => m.monId === iv);
           if (mon) this.evolveMon(mon);
-        });
+        }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
       }
-    });
+    }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
   },
 
   // ---------- mart ----------
@@ -20289,7 +20640,7 @@ class Game {
     for (const pocket of POCKETS) {
       const inPocket = Object.keys(ITEMS).filter((id) => ITEMS[id].pocket === pocket && (g.state.bag[id] || 0) > 0);
       if (!inPocket.length) continue;
-      items.push({ label: '— ' + pocket + ' —', value: null, disabled: true });
+      items.push({ label: '— ' + pocket + ' —', value: null, disabled: true, band: true });
       for (const id of inPocket) {
         const hint = id === 'potion' ? ' (heals 20 HP — uses your turn in battle)' : '';
         items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id] + hint, value: id });
@@ -20365,11 +20716,61 @@ class Game {
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + '  ' + m.hp + '/' + m.maxHp, value: i };
     });
     for (let i = g.state.party.length; i < 6; i++) items.push({ label: 'Empty', value: -1, disabled: true });
-    items.push({ label: 'Close', value: 'close' });
-    g.ui.showMenu('Party', items, (v) => {
-      if (v === null || v === 'close' || v === -1) return;
-      const m = g.state.party[v];
+    items.push({ label: 'Close', value: 'close', closeRow: true });
+    // Platinum tabbed summary (UI v2): INFO / STATUS / MOVES, composed only
+    // from real mon/species/move data. The mon object carries `xp` (total
+    // XP for its level, set by makeMon and level-ups); there is no stored
+    // next-level figure on the mon, so INFO shows that total and never a
+    // derived or invented next-level number.
+    const sumRow = (k, val) => '<div class="sumrow"><span>' + k + '</span><b>' + val + '</b></div>';
+    const summaryData = (m) => {
       const sp = SPECIES[m.speciesId];
+      const xpVal = (typeof m.xp === 'number') ? m.xp : ((typeof m.exp === 'number') ? m.exp : null);
+      let info = '<div class="sumhead"><img class="sumsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+        + '<div><div class="sumname">' + displayName(m, SPECIES) + '</div>'
+        + '<div class="sumsub">No. ' + sp.dexNo + ' · ' + sp.types.join(' / ') + '</div></div></div>';
+      if (m.ot !== undefined && m.ot !== null && m.ot !== '') info += sumRow('OT', m.ot);
+      info += sumRow('Level', m.level);
+      info += sumRow('HP', m.hp + '/' + m.maxHp);
+      if (xpVal !== null) info += sumRow('EXP', xpVal);
+      if (sp.flavor) info += '<div class="sumflavor">' + sp.flavor + '</div>';
+      let statusBody = '';
+      statusBody += sumRow('ATK', m.stats.atk);
+      statusBody += sumRow('DEF', m.stats.def);
+      statusBody += sumRow('SPA', m.stats.spa);
+      statusBody += sumRow('SPD', m.stats.spd);
+      statusBody += sumRow('SPE', m.stats.spe);
+      statusBody += sumRow('Status', m.status ? m.status : 'None');
+      let movesBody = '';
+      for (const mm of (m.moves || [])) {
+        const mv = MOVES[mm.id];
+        if (!mv) {
+          movesBody += '<div class="sum-move"><span class="sum-mvname">' + mm.id + '</span>'
+            + '<span class="sum-mvmeta">PP ' + mm.pp + '/' + mm.maxPp + '</span></div>';
+          continue;
+        }
+        movesBody += '<div class="sum-move"><span class="sum-mvname">' + mv.name + '</span>'
+          + typePill(mv.type)
+          + '<span class="sum-mvmeta">Pow ' + (mv.power ? mv.power : '—')
+          + ' · Acc ' + ((mv.acc !== undefined && mv.acc !== null) ? mv.acc : '—')
+          + ' · PP ' + mm.pp + '/' + mm.maxPp + ' · ' + mv.cat + '</span></div>';
+      }
+      if (!movesBody) movesBody = '<div class="sumflavor">No moves known.</div>';
+      return {
+        name: displayName(m, SPECIES),
+        tabs: [
+          { id: 'info', label: 'INFO', bodyHtml: info },
+          { id: 'status', label: 'STATUS', bodyHtml: statusBody },
+          { id: 'moves', label: 'MOVES', bodyHtml: movesBody },
+        ],
+      };
+    };
+    // Per-Pokemon action submenu: a standard Platinum window (no menuClass).
+    // Closing the summary panel reopens this submenu, so B backs out one
+    // level like Platinum instead of dropping back to the overworld.
+    const openMonMenu = (monIndex) => {
+      const m = g.state.party[monIndex];
+      if (!m) return;
       const fieldMoves = (m.moves || []).filter((x) => ['cut', 'fly', 'surf', 'strength', 'flash'].includes(x.id));
       const rows = [{ label: 'Summary', value: 'summary' }];
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
@@ -20377,17 +20778,14 @@ class Game {
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
         if (a === 'field' && g.openFieldMove) { g.openFieldMove(m); return; }
         if (a === 'summary') {
-          const mv = m.moves.map((mm) => MOVES[mm.id].name + ' ' + mm.pp + '/' + mm.maxPp).join(', ');
-          g.ui.say([
-            displayName(m, SPECIES) + '  Lv' + m.level + '  HP ' + m.hp + '/' + m.maxHp,
-            'ATK ' + m.stats.atk + '  DEF ' + m.stats.def + '  SPA ' + m.stats.spa + '  SPD ' + m.stats.spd + '  SPE ' + m.stats.spe,
-            'Moves: ' + mv,
-            'OT: ' + m.ot + '  No. ' + sp.dexNo,
-            sp.flavor,
-          ], null, 'Summary');
+          g.ui.showSummary(summaryData(m), () => openMonMenu(monIndex));
         }
       });
-    }, { rowHtml });
+    };
+    g.ui.showMenu('Party', items, (v) => {
+      if (v === null || v === 'close' || v === -1) return;
+      openMonMenu(v);
+    }, { rowHtml, menuClass: 'plate-full' });
   }
 
   openDex(filter) {
@@ -20547,7 +20945,7 @@ class Game {
       { label: 'Close', value: 'close' },
     ], (v) => {
       if (v === 'save') g.saveGame(false);
-    });
+    }, { menuClass: 'syswin' });
   }
 
   // Track B: cloud slot picker (labels are formatted numbers/dates only —
@@ -20578,7 +20976,7 @@ class Game {
         g.ui.toast('Slot ' + v.slice(5) + ' selected.');
         g.openSave();
       }
-    });
+    }, { menuClass: 'syswin' });
   }
 
   openOptions() {
@@ -20658,14 +21056,14 @@ class Game {
                   }
                 });
               }
-            });
+            }, { menuClass: 'syswin' });
           }
-        });
+        }, { menuClass: 'syswin' });
         return;
       } else return;
       g.saveGame(true);
       g.openOptions();
-    });
+    }, { menuClass: 'syswin' });
   }
 }
 
