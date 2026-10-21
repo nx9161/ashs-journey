@@ -12,7 +12,7 @@ function authed(cookie, opts = {}) {
 
 export async function run() {
   const pg = getPGlite();
-  const save = (await import('../../api/save.mjs')).default;
+  const save = (await import('../../api/save.mjs')).handler;
   const payload = await validPayload();
   const cookie = ctx.cookie; // signup session (still valid)
 
@@ -107,7 +107,7 @@ export async function run() {
   // ---- user isolation at the route level: second user cannot see slot ----
   const { getAuth } = await import('../../api/_lib/auth.mjs');
   const auth = getAuth();
-  const signup = (await import('../../api/auth/signup.mjs')).default;
+  const signup = (await import('../../api/auth/signup.mjs')).handler;
   const pw2 = 'T3st!' + 'b'.repeat(24);
   const s2 = await signup(mockReq({
     method: 'POST', url: 'http://localhost:3000/api/auth/signup',

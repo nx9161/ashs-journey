@@ -34,8 +34,8 @@ export async function run() {
   t('429: Retry-After header', r429.headers.get('retry-after') === '60');
 
   // --- route-level: 12 save PUTs then 429 (fresh user, clean bucket) ---
-  const signup = (await import('../../api/auth/signup.mjs')).default;
-  const save = (await import('../../api/save.mjs')).default;
+  const signup = (await import('../../api/auth/signup.mjs')).handler;
+  const save = (await import('../../api/save.mjs')).handler;
   const uname = 'ash_qrl';
   const s = await signup(mockReq({
     method: 'POST', url: 'http://localhost:3000/api/auth/signup',

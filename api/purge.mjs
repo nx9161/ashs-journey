@@ -20,7 +20,7 @@ function secretsEqual(a, b) {
   return timingSafeEqual(ha, hb);
 }
 
-export default async function handler(req) {
+export async function handler(req) {
   if (req.method !== 'POST') return methodNotAllowed(['POST']);
   if (!isDbConfigured() || authUnavailable()) return unavailable();
   const secret = process.env.CRON_SECRET;
@@ -56,3 +56,13 @@ export default async function handler(req) {
     client.release();
   }
 }
+
+// Web API method handlers (Vercel Node runtime invokes these with a Fetch
+// Request; the handler itself enforces per-route methods via 405s).
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
+export const PATCH = handler;
+export const DELETE = handler;
+export const OPTIONS = handler;
+export const HEAD = handler;

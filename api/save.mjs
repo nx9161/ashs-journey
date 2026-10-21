@@ -240,7 +240,7 @@ async function handlePut(req) {
   }
 }
 
-export default async function handler(req) {
+export async function handler(req) {
   if (!isDbConfigured() || authUnavailable()) return unavailable();
   if (req.method === 'GET') {
     const slotParam = new URL(req.url, 'http://localhost').searchParams.get('slot');
@@ -253,3 +253,13 @@ export default async function handler(req) {
   }
   return methodNotAllowed(['GET', 'PUT']);
 }
+
+// Web API method handlers (Vercel Node runtime invokes these with a Fetch
+// Request; the handler itself enforces per-route methods via 405s).
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
+export const PATCH = handler;
+export const DELETE = handler;
+export const OPTIONS = handler;
+export const HEAD = handler;

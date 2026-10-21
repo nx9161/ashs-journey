@@ -9,9 +9,9 @@ const DEL_URL = 'http://localhost:3000/api/account/delete';
 
 export async function run() {
   const pg = getPGlite();
-  const del = (await import('../../api/account/delete.mjs')).default;
-  const signup = (await import('../../api/auth/signup.mjs')).default;
-  const save = (await import('../../api/save.mjs')).default;
+  const del = (await import('../../api/account/delete.mjs')).handler;
+  const signup = (await import('../../api/auth/signup.mjs')).handler;
+  const save = (await import('../../api/save.mjs')).handler;
 
   const username = 'ash_qdel';
   const password = 'D3l!' + randomBytes(12).toString('hex');

@@ -39,7 +39,7 @@ function makeCode() {
   return `${s.slice(0, 4)}-${s.slice(4, 8)}-${s.slice(8, 12)}`;
 }
 
-export default async function handler(req) {
+export async function handler(req) {
   if (req.method !== 'POST') return methodNotAllowed(['POST']);
   if (!isDbConfigured() || authUnavailable()) return unavailable();
   if (!assertSameOrigin(req)) return invalidRequest(403);
@@ -148,3 +148,13 @@ export default async function handler(req) {
   for (const c of setCookie) resp.headers.append('set-cookie', c);
   return resp;
 }
+
+// Web API method handlers (Vercel Node runtime invokes these with a Fetch
+// Request; the handler itself enforces per-route methods via 405s).
+export const GET = handler;
+export const POST = handler;
+export const PUT = handler;
+export const PATCH = handler;
+export const DELETE = handler;
+export const OPTIONS = handler;
+export const HEAD = handler;

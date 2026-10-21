@@ -10,7 +10,7 @@ function pw() { return 'T3st!' + randomBytes(12).toString('hex'); }
 
 export async function run() {
   const pg = getPGlite();
-  const signup = (await import('../../api/auth/signup.mjs')).default;
+  const signup = (await import('../../api/auth/signup.mjs')).handler;
   const { getAuth } = await import('../../api/_lib/auth.mjs');
   const auth = getAuth();
   t('auth instance built (not fail-closed)', !!auth);

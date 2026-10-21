@@ -25,7 +25,7 @@ const routes = [
 ];
 
 for (const [mod, method, url] of routes) {
-  const { default: handler } = await import(mod);
+  const { handler: handler } = await import(mod);
   const req = new Request(url, { method, headers: { origin: 'https://x' }, body: method === 'POST' || method === 'PUT' ? '{}' : undefined });
   let res;
   try {
@@ -40,13 +40,13 @@ for (const [mod, method, url] of routes) {
 }
 
 // health is the exception: it reports authConfigured:false with 200.
-const { default: health } = await import('../../api/health.mjs');
+const { handler: health } = await import('../../api/health.mjs');
 const hres = await health(new Request('https://x/api/health'));
 const hbody = await hres.json();
 t('health -> 200 with authConfigured:false', hres.status === 200 && hbody.ok === true && hbody.authConfigured === false && hbody.version === 'track-b');
 
 // 405 matrix on save routes
-const { default: save } = await import('../../api/save.mjs');
+const { handler: save } = await import('../../api/save.mjs');
 const del = await save(new Request('https://x/api/save', { method: 'DELETE' }));
 t('save DELETE -> 503 (fail-closed precedes 405)', del.status === 503);
 

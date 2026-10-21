@@ -10,8 +10,8 @@ const RECOVER_URL = 'http://localhost:3000/api/auth/recover';
 
 export async function run() {
   const pg = getPGlite();
-  const recover = (await import('../../api/auth/recover.mjs')).default;
-  const save = (await import('../../api/save.mjs')).default;
+  const recover = (await import('../../api/auth/recover.mjs')).handler;
+  const save = (await import('../../api/save.mjs')).handler;
   const { getAuth } = await import('../../api/_lib/auth.mjs');
   const auth = getAuth();
 
