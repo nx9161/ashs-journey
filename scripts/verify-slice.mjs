@@ -443,6 +443,7 @@ function canonicalPlaythrough(seed) {
   function pA(t) { t = t || 1; for (var i = 0; i < t; i++) { input.inject('a'); tk(2); input.release('a'); } }
   function drain(m) { var n = 0; m = m || 300; while (ui.dialogueOpen && n < m) { pA(1); n++; } }
   loop.stepMs(3100); tk(2); pA(1);   // legal -> title
+  pA(1);                              // PRESS START -> title menu (UI v2 Platinum flow)
   pA(1);                              // new game
   drain(); ui.debugChoose(0); tk(3); drain();  // intro, name, starter
   var ow = game.scenes.top;
@@ -508,7 +509,7 @@ const qaDriver = `
   function bootToOverworld(g) {
     g.scenes.push(new BootScene());
     g.loop.stepMs(3100); tk(g, 2);
-    pA(g, 1); pA(g, 1);
+    pA(g, 1); pA(g, 1); pA(g, 1); // legal -> title, PRESS START -> menu, New Game (UI v2)
     drain(g); choose(g, 0); drain(g);
     return g.scenes.top;
   }

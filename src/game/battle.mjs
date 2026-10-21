@@ -11,13 +11,27 @@ import {
   xpYield, xpForLevel, statValue, hpValue,
 } from '../engine/formulas.mjs';
 import { roll, intIn } from '../engine/rng.mjs';
-import { TILE } from '../engine/render.mjs';
+import { TILE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { SLICE_CAPSTONE } from '../data/dialogue.mjs';
 import { typePill } from './ui.mjs';
 
 const HP_DRAIN_PER_SEC = 90; // ADR-004 feel budget
+
+// UI v2 (Platinum standard): status chips for the databox — a solid DS-toned
+// rect with the white bold 3-letter code as TEXT on it (never color alone).
+// NOTE: burn keeps the legacy 'BUR' code — verify-slice's QA plate check
+// asserts that exact text for a burned mon, so the DS 'BRN' abbreviation is
+// the one deliberate deviation from Platinum spelling in this table.
+const STATUS_CHIPS = {
+  burn: ['BUR', '#c84028'],
+  poison: ['PSN', '#9848a8'],
+  badlyPoisoned: ['PSN', '#7038a0'],
+  paralysis: ['PAR', '#b8860b'],
+  sleep: ['SLP', '#68707e'],
+  freeze: ['FRZ', '#2f88b8'],
+};
 
 // Fraction of the current level's XP bar filled (gameux §4.2).
 function xpFracOf(mon, add) {
@@ -1334,7 +1348,7 @@ export class BattleScene {
       }
     }
     // Low-HP warning jingle at first crossing into red (<25%), once per ally
-    // (gameux §4.2). Visual twin: the HP plate's red pulse + ⚠ pip.
+    // (gameux §4.2). Visual twin: the HP plate's red pulse + '!' pip.
     if (this._lowHpAlly !== this.ally) { this._lowHpAlly = this.ally; this._lowHpWarned = false; }
     const ratio = this.ally.maxHp > 0 ? this.ally.hp / this.ally.maxHp : 1;
     if (ratio > 0.25) this._lowHpWarned = false;
@@ -1346,18 +1360,61 @@ export class BattleScene {
     }
   }
 
+  // UI v2 (Platinum standard): stepped circular battle platform, rects only
+  // (5 horizontal bands, widest at the middle — a pixel disc, no arc/ellipse
+  // calls): light rim on top, pale fill, darker shade band at the bottom.
+  ptDisc(r, cx, cy, rx, ry) {
+    const c = r.ctx;
+    const steps = 5;
+    for (let i = 0; i < steps; i++) {
+      const t = (i / (steps - 1)) * 2 - 1; // -1 (top) .. 1 (bottom)
+      const half = Math.max(4, Math.round(rx * Math.sqrt(Math.max(0.12, 1 - t * t))));
+      const y0 = Math.round(cy + t * ry - ry / steps);
+      const hh = Math.ceil((2 * ry) / steps) + 1;
+      c.fillStyle = i === 0 ? '#f2ecd8' : (i === steps - 1 ? '#b3a586' : '#ddd2ac');
+      c.fillRect(Math.round(cx - half), y0, half * 2, hh);
+    }
+  }
+
+  // UI v2 (Platinum standard): the battlefield, rects only, drawn INSIDE
+  // begin()/end() (the old pre-begin bands were painted over by begin()'s
+  // black clear — that was the dark void). Stepped daylight-blue sky ramp
+  // (per-band solid fills; no gradient APIs, no offscreen cache needed at
+  // 6 bands), a stepped tree/hill scenery band on the horizon, then the
+  // ground field in stepped bands — grass greens for wild encounters,
+  // warm stone for trainer battles (this.kind is the terrain data at hand).
+  drawArena(r, horizonFrac) {
+    const g = this.game;
+    const w = r.viewW, h = r.viewH;
+    const horizon = Math.round(h * horizonFrac);
+    const sky = ['#5f9fe6', '#6fabec', '#7fb7f1', '#8fc3f5', '#9fcdf8', '#b0d7fa'];
+    const sb = Math.ceil(horizon / sky.length) || 1;
+    for (let i = 0; i < sky.length; i++) g.ctx2dfill(sky[i], 0, i * sb, w, sb + 1);
+    // Scenery: hill band + deterministic stepped tree bumps on the horizon.
+    g.ctx2dfill('#5d8f66', 0, horizon - 8, w, 8);
+    for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
+      const bh = 8 + ((i * 5) % 3) * 3;
+      g.ctx2dfill('#3f6d4a', x, horizon - bh, 10, bh);
+    }
+    g.ctx2dfill('#4c7a56', 0, horizon - 3, w, 3);
+    // Ground field: stepped bands lightening toward the horizon.
+    const ground = this.kind === 'trainer'
+      ? ['#cfc2a4', '#c4b696', '#b9aa89', '#ae9e7d', '#a39271', '#988665']
+      : ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'];
+    const gb = Math.ceil((h - horizon) / ground.length) || 1;
+    for (let i = 0; i < ground.length; i++) g.ctx2dfill(ground[i], 0, horizon + i * gb, w, gb + 1);
+    g.ctx2dfill('#33513c', 0, horizon, w, 2); // horizon line
+  }
+
   render(r) {
     const g = this.game;
     if (this.rtMode && this.rt && (this.state === 'rt' || this.state === 'xp')) { this.renderRt(r); return; }
     const w = r.viewW, h = r.viewH;
-    // Battle background: banded vertical steps (max 5, gameux §6) per terrain.
-    const bands = this.kind === 'trainer'
-      ? ['#3a3a4a', '#4a4a5a', '#5a5a6a', '#6a6a7a', '#7a7a8a']
-      : ['#2a6a3a', '#3a7a4a', '#4a8a5a', '#5a9a6a', '#6aaa7a'];
-    for (let i = 0; i < 5; i++) {
-      g.ctx2dfill(bands[i], 0, (h * i) / 5, w, h / 5 + 1);
-    }
+    // Transform discipline (title/intro pattern): pin the camera to the
+    // origin for the screen-space theater, restore it after end().
+    const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
     r.begin();
+    this.drawArena(r, 0.42);
     // Platforms: foe upper-right, ally lower-left (wireframes §5.1 — the Uix
     // ruling: gameux §4.2's "upper-left" was the spec's error; the build is correct).
     const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
@@ -1379,6 +1436,10 @@ export class BattleScene {
       if (this.atkFx && this.atkFx.side === side) r.blitS(spr, pos.x - 5, pos.y - 5, 58, 58);
       else r.blitS(spr, pos.x, pos.y, 48, 48); // 32px ART -> 48px draw size
     };
+    // Platinum battle platforms: stepped discs under each battler (the far
+    // foe disc is smaller — perspective), drawn before the sprites.
+    this.ptDisc(r, foePos.x + 24, foePos.y + 44, 34, 8);
+    this.ptDisc(r, allyPos.x + 24, allyPos.y + 44, 38, 9);
     drawBattler(foeSpr, foePos, 'foe');
     drawBattler(allySpr, allyPos, 'ally');
     // README faint transform: sink 8px + fade to 0 alpha over 20 frames.
@@ -1421,55 +1482,94 @@ export class BattleScene {
       c.restore();
     }
     r.end();
-    // HP plates (Gen 5 idiom, original art) — P1/A5: all plate text >= 14px.
+    r.camX = pcx; r.camY = pcy;
+    // HP plates (Platinum databoxes, original art) — P1/A5: all plate text >= 14px.
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
-    this.plate(r, w - 116, h - 108, this.ally, this.hpAnim.ally, true);
-    // Message box
+    this.plate(r, w - 146, h - 124, this.ally, this.hpAnim.ally, true);
+    // Message box (Platinum frame via r.panel/ptFrame)
     if (this.msgOpen || this.msg) {
-      r.panel(4, h - 52, w - 8, 48, '#f8f8f0', '#202028');
+      r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
       const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
       r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
       if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2: red advance cue at the box's bottom-right while waiting for input.
+      if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
     this.t += 16;
   }
 
+  // UI v2 (Platinum standard): a true Platinum databox on r.ptPlate.
+  // Canvas ops used here are fillRect / fillText / strokeRect ONLY (via
+  // r.ptPlate, r.hpBar, r.xpBar, r.text and one direct fillRect for the
+  // status chip / XP flash) — the QA recording-ctx plate test implements
+  // just those. Every instance field is guarded: the QA minimal-this call
+  // (only game.state.settings present) must yield zero slide/pulse offsets.
   plate(r, x, y, mon, hpShown, isAlly) {
-    const g = this.game;
-    const w = 104, h = isAlly ? 62 : 48;
+    const settings = (this.game && this.game.state && this.game.state.settings) || {};
+    const w = 140, h = isAlly ? 70 : 48;
+    // Platinum plate entrance: foe slides in from the left, ally from the
+    // right, ease-out over the battle's opening 450ms of theater time
+    // (this.t, reset in enter()). A missing/non-finite timer (the QA
+    // minimal-this call) means "entrance finished" — offset 0. Reduced
+    // motion skips the slide entirely.
+    let slide = 0;
+    if (typeof this.t === 'number' && isFinite(this.t) && !settings.reducedMotion) {
+      const p = Math.max(0, Math.min(1, this.t / 450));
+      const e = 1 - (1 - p) * (1 - p);
+      slide = (1 - e) * (w + 16);
+    }
+    let px = isAlly ? x + slide : x - slide;
     // P1/E7: low-HP pulse — the ally plate nudges twice on first red crossing
     // (never under reduced motion; the pulse timer is only set when motion is on).
-    let px = x;
-    if (isAlly && this._lowHpPulseT > 0) px = x + Math.sin(this._lowHpPulseT * 0.05) * 2;
-    r.panel(px, y, w, h, '#f0ead8', '#202028');
+    if (isAlly && this._lowHpPulseT > 0) px += Math.sin(this._lowHpPulseT * 0.05) * 2;
+    r.ptPlate(px, y, w, h, isAlly);
+    const ink = '#20242e';
     const name = displayName(mon, SPECIES).slice(0, 10);
-    r.text(name, px + 4, y + 4, { size: 14, bold: true, color: '#202028', shadow: false });
-    // Lv label nudged right: at px + w - 46 a 9-10 char name (Charizard,
-    // Butterfree) ran under the 'Lv' text; -41 clears those and 'Lv100'
-    // still ends inside the plate (px + w - 3).
-    r.text('Lv' + mon.level, px + w - 41, y + 4, { size: 14, color: '#202028', shadow: false });
-    const frac = hpShown / mon.maxHp;
-    r.hpBar(px + 4, y + 22, w - 8, 6, frac);
-    // P0/E6: ⚠ pip on the plate under 25% — the colorblind cue, never color-alone.
-    if (frac < 0.25 && mon.hp > 0) {
-      r.text('⚠', px + w - 22, y + 21, { size: 14, bold: true, color: '#a02020', shadow: false });
+    r.text(name, px + 6, y + 5, { size: 14, bold: true, color: ink, shadow: false });
+    // Gender: mons/species carry no gender data anywhere in the game, so
+    // the databox is gender-neutral — no symbol is drawn (UI v2 ruling).
+    // 'Lv' + level, right-aligned inside the frame (a 10-char name at
+    // px + 6 still clears the 'Lv100' block ending at px + w - 6).
+    r.text('Lv' + mon.level, px + w - 6, y + 5, { size: 14, color: ink, shadow: false, align: 'right' });
+    // HP row: gold 'HP' tag + the Platinum hpBar; the status chip slot is
+    // reserved at the row's right end (the bar shortens when a chip shows).
+    const fracRaw = hpShown / mon.maxHp;
+    const frac = isFinite(fracRaw) ? Math.max(0, Math.min(1, fracRaw)) : 0;
+    const chip = mon.status
+      ? (STATUS_CHIPS[mon.status] || [String(mon.status).toUpperCase().slice(0, 3), '#5a6478'])
+      : null;
+    r.text('HP', px + 6, y + 23, { size: 14, bold: true, color: '#a87818', shadow: false });
+    r.hpBar(px + 26, y + 27, chip ? w - 66 : w - 32, 7, frac);
+    if (chip) {
+      const c = r.ctx;
+      c.fillStyle = chip[1];
+      c.fillRect(px + w - 36, y + 22, 30, 16);
+      r.text(chip[0], px + w - 33, y + 23, { size: 14, bold: true, color: '#ffffff', shadow: false });
+    } else if (!isAlly && frac < 0.25 && mon.hp > 0) {
+      // P0/E6: foe low-HP text cue in the empty chip slot (never color
+      // alone; the hpBar's white stripe overlay is the always-on cue).
+      // The ally plate carries its own '!' on the HP-numbers row below.
+      r.text('!', px + w - 26, y + 23, { size: 14, bold: true, color: '#c02818', shadow: false });
     }
     if (isAlly) {
-      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + 4, y + 30, { size: 14, color: '#202028', shadow: false });
-      if (mon.status) r.text(mon.status.toUpperCase().slice(0, 3), px + w - 42, y + 30, { size: 14, bold: true, color: '#a040a0', shadow: false });
-      // P0/E3: XP bar (gold) + →Lv label; 600ms ease-out (instant under reduced motion).
-      r.text('→Lv', px + 72, y + 44, { size: 14, color: '#7a5a10', shadow: false });
-      // xpShownFrac lives on the battle instance; the QA minimal-this plate test
-      // calls plate() without it — fall back to the static fraction there.
-      const xf = (typeof this.xpShownFrac === 'function') ? this.xpShownFrac(mon) : xpFracOf(mon, 0);
-      r.xpBar(px + 4, y + 48, 64, 4, xf);
+      // HP numbers row: low-HP '!' cue at the left, cur/max right-aligned.
+      if (frac < 0.25 && mon.hp > 0) {
+        r.text('!', px + 6, y + 40, { size: 14, bold: true, color: '#c02818', shadow: false });
+      }
+      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + w - 6, y + 40, { size: 14, color: ink, shadow: false, align: 'right' });
+      // EXP row: blue 'EXP' tag + the Platinum-blue xpBar (P0/E3: 600ms
+      // ease-out via xpShownFrac; instant under reduced motion).
+      r.text('EXP', px + 6, y + 54, { size: 14, bold: true, color: '#2f68b8', shadow: false });
+      // xpShownFrac lives on the battle instance; the QA minimal-this plate
+      // test calls plate() without it — fall back to the static fraction.
+      const xfRaw = (typeof this.xpShownFrac === 'function') ? this.xpShownFrac(mon) : xpFracOf(mon, 0);
+      const xf = isFinite(xfRaw) ? xfRaw : 0;
+      r.xpBar(px + 34, y + 58, w - 40, 5, xf);
       if (this.xpFlashT > 0) {
         const c = r.ctx;
         c.fillStyle = 'rgba(255,255,255,' + (this.xpFlashT / 250 * 0.8).toFixed(3) + ')';
-        c.fillRect(px + 4, y + 48, 64, 4);
+        c.fillRect(px + 34, y + 58, w - 40, 5);
       }
-    } else if (mon.status) {
-      r.text(mon.status.toUpperCase().slice(0, 3), px + w - 42, y + 30, { size: 14, bold: true, color: '#a040a0', shadow: false });
     }
   }
 }

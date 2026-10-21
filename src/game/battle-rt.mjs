@@ -13,6 +13,7 @@ import {
   gen1Random, critChance, gen1Catch,
 } from '../engine/formulas.mjs';
 import { roll } from '../engine/rng.mjs';
+import { PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { displayName } from './state.mjs';
 import { BattleScene } from './battle.mjs';
 
@@ -553,19 +554,21 @@ Object.assign(BattleScene.prototype, {
     const rt = this.rt;
     const w = r.viewW, h = r.viewH;
     const sx = w / 480, sy = h / 320;
-    const bands = this.kind === 'trainer'
-      ? ['#2e3242', '#3a405a', '#454c6e', '#525a80', '#606891']
-      : ['#24402c', '#2c5236', '#356540', '#3f784c', '#4a8a58'];
-    for (let i = 0; i < 5; i++) g.ctx2dfill(bands[i], 0, (h * i) / 5, w, h / 5 + 1);
+    // Transform discipline (title/intro pattern): pin the camera to the
+    // origin for the screen-space arena, restore it after end().
+    const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
     r.begin();
-    // Arena ground.
+    // UI v2 (Platinum standard): the shared battlefield (drawArena/ptDisc
+    // live in battle.mjs). The horizon is compressed to a top strip —
+    // the RT arena's free movement spans the rest of the field, so the
+    // stepped platforms travel with their battlers instead of sitting
+    // fixed like the classic theater's (documented RT divergence).
     const c = r.ctx;
-    c.save();
-    c.fillStyle = 'rgba(0,0,0,0.18)';
-    c.beginPath();
-    c.ellipse(w / 2, h * 0.58, w * 0.46, h * 0.34, 0, 0, Math.PI * 2);
-    c.fill();
-    c.restore();
+    this.drawArena(r, 0.22);
+    if (!(rt.catchSeq || rt.ballFlight)) {
+      this.ptDisc(r, rt.fx * sx, rt.fy * sy + 20, 30, 8);
+    }
+    this.ptDisc(r, rt.ax * sx, rt.ay * sy + 20, 30, 8);
     const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
     const allyArt = g.spriteCache[this.ally.speciesId] || g.spriteCache.partner;
     const bobA = Math.sin(this.t * 0.006) * 1.5;
@@ -588,8 +591,9 @@ Object.assign(BattleScene.prototype, {
       g.ctx2dcircle(rt.fx * sx + wob, rt.fy * sy - 2, 6, '#e84040');
     }
     r.end();
+    r.camX = pcx; r.camY = pcy;
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);
-    this.plate(r, w - 116, h - 108, this.ally, this.hpAnim.ally, true);
+    this.plate(r, w - 146, h - 124, this.ally, this.hpAnim.ally, true);
     // Cooldown chips for the ally's four moves (bottom strip). Chip width is
     // derived from the actual view: the old fixed 108px assumed a 480-wide
     // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
@@ -599,23 +603,26 @@ Object.assign(BattleScene.prototype, {
       const slot = this.ally.moves[i];
       const x = 6 + i * (chipW + 4);
       const y = h - 26;
-      if (!slot) { r.panel(x, y, chipW, 20, 'rgba(20,22,32,0.55)', '#3a405a'); continue; }
+      if (!slot) { r.panel(x, y, chipW, 20, 'rgba(43,48,64,0.55)', PT_FRAME); continue; }
       const mv = MOVES[slot.id];
       const cd = rt.cds.ally[slot.id] || 0;
       const ready = cd <= 0 && slot.pp > 0;
-      r.panel(x, y, chipW, 20, ready ? 'rgba(24,30,44,0.92)' : 'rgba(24,30,44,0.6)', ready ? '#e8c832' : '#4a506a');
+      // UI v2: chips are Platinum windows (r.panel -> ptFrame) in PT tones —
+      // navy PT_FRAME interior, PT_PAPER text when ready, PT_FRAME2 when not.
+      r.panel(x, y, chipW, 20, ready ? 'rgba(43,48,64,0.92)' : 'rgba(43,48,64,0.6)', PT_FRAME);
       const label = (i + 1) + ' ' + (mv ? mv.name : slot.id);
       // A spent slot also carries 'NO PP' at the chip's right end — shorten
       // the label so the two never collide on narrow chips.
       const maxChars = slot.pp <= 0 ? Math.max(3, Math.min(labelMax, Math.floor((chipW - 46) / 7))) : labelMax;
-      r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? '#f4f2e8' : '#9aa0b4', shadow: false });
+      r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
       if (!ready && slot.pp > 0) {
+        // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
         const total = cooldownMs(mv, 50, 50);
         const frac = Math.max(0, Math.min(1, cd / total));
-        c.fillStyle = 'rgba(232,200,50,0.5)';
+        c.fillStyle = PT_FRAME2;
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
       }
-      if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#e86a6a', shadow: false });
+      if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#f84838', shadow: false });
     }
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
@@ -623,14 +630,16 @@ Object.assign(BattleScene.prototype, {
       // 14px): the old fixed 30-char slice could overrun the 220px panel.
       const floatW = Math.min(220, w - 16);
       const floatMax = Math.max(8, Math.floor((floatW - 12) / 7));
-      r.panel(w / 2 - floatW / 2, 40, floatW, 22, 'rgba(16,18,28,0.88)', '#e8c832');
-      r.text(this.rtFloatText.slice(0, floatMax), w / 2 - floatW / 2 + 6, 44, { size: 14, color: '#f4f2e8', shadow: false });
+      r.panel(w / 2 - floatW / 2, 40, floatW, 22, 'rgba(43,48,64,0.88)', PT_FRAME);
+      r.text(this.rtFloatText.slice(0, floatMax), w / 2 - floatW / 2 + 6, 44, { size: 14, color: PT_PAPER, shadow: false });
     }
     if (this.msgOpen || this.msg) {
-      r.panel(4, h - 52, w - 8, 48, '#f8f8f0', '#202028');
+      r.panel(4, h - 52, w - 8, 48, PT_PAPER, PT_FRAME);
       const txt = this.msg.length > 30 ? this.msg.slice(0, 30) : this.msg;
       r.text(txt, 10, h - 46, { size: 14, color: '#202028', shadow: false });
       if (this.msg.length > 30) r.text(this.msg.slice(30, 60), 10, h - 28, { size: 14, color: '#202028', shadow: false });
+      // UI v2: red advance cue at the box's bottom-right while waiting for input.
+      if (this.msgOpen) r.text('▼', w - 20, h - 24, { size: 14, bold: true, color: '#e03c31', shadow: false });
     }
     this.t += 16;
   },

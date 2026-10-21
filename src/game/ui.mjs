@@ -90,6 +90,7 @@ export class UI {
     this.toastQ = [];
     this.log = [];        // headless: record of UI calls (test assertions)
     this._els = {};
+    this.summary = null; // Platinum summary panel state ({ data, tab, cb })
     this.nameEntry = null; // { value, maxLen, cb, ... } while the A-Z grid is open
     this.loginOpen = false;
     this.inBattle = false; // Track B: battle-mode flag (SYNC defers conflict UI out of battle)
@@ -113,6 +114,7 @@ export class UI {
     this.buildControls();
     this.buildDialogue();
     this.buildMenu();
+    this.buildSummaryPanel();
     this.buildToasts();
     this.buildHudChips();
     this.buildHudStrip();
@@ -221,7 +223,7 @@ export class UI {
     this.cmdEl.innerHTML = '';
     m.items.forEach((it, i) => {
       const b = document.createElement('button');
-      b.className = 'cmdf'
+      b.className = 'cmdf cmdf-' + it.value
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
         + (it.dimmed ? ' dimmed' : '')
@@ -374,6 +376,7 @@ export class UI {
       title, items, idx: opts.initialIdx || 0, cb,
       battle: !!(opts && opts.battle), kind: opts.kind || 'menu',
       grid: !!opts.grid, rowHtml: opts.rowHtml || null,
+      menuClass: opts.menuClass || '',
       focusValue: opts.focusValue !== undefined ? opts.focusValue : null,
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
@@ -385,6 +388,12 @@ export class UI {
     const m = this.menu;
     if (!m || m.kind === 'commands') { this.menuEl.classList.add('hidden'); return; }
     this.menuEl.classList.remove('hidden');
+    this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '');
+    // Full-takeover windows (party screen, PC box, summary) hide the
+    // overworld HUD — Platinum screens own the whole frame.
+    if (typeof document !== 'undefined' && document.body) {
+      document.body.classList.toggle('menu-full', /(plate-full|pcbox)/.test(m.menuClass || ''));
+    }
     this.menuTitle.textContent = m.title || '';
     this.menuTitle.style.display = m.title ? 'block' : 'none';
     this.menuList.innerHTML = '';
@@ -394,6 +403,8 @@ export class UI {
       r.className = 'menu-row'
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
+        + (it.band ? ' bandrow' : '')
+        + (it.closeRow ? ' close-row' : '')
         + (it.zeroPp ? ' zeropp' : '')
         + (it.emptySlot ? ' emptyslot' : '')
         + (m.focusValue !== null && m.focusValue === it.value ? ' tut-focus' : '');
@@ -432,6 +443,7 @@ export class UI {
     this.menu = null;
     if (!this.headless) {
       this.menuEl.classList.add('hidden');
+      if (typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
       if (wasCommands) this.hideCommands();
     }
     this.game.audio.playSfx(SFX['ui-blip']);
@@ -446,6 +458,7 @@ export class UI {
     this.menu = null;
     if (!this.headless) {
       this.menuEl.classList.add('hidden');
+      if (typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
       if (wasCommands) this.hideCommands();
     }
     this.game.audio.playSfx(SFX['ui-back']);
@@ -454,6 +467,70 @@ export class UI {
   }
 
   get menuOpen() { return !!this.menu; }
+
+  // ---- Platinum tabbed summary panel (UI v2) ----
+  // data: { name, tabs: [{ id, label, bodyHtml }] }. The caller composes each
+  // tab's body HTML from real game data (profile / status / moves in the
+  // Platinum summary arrangement); this class owns the chrome: tab strip,
+  // framed panel, keyboard routing (left/right switch, B/START close).
+  buildSummaryPanel() {
+    this.sumEl = this.el('div', 'sumpanel hidden', this.root);
+    this.sumTabsEl = this.el('div', 'sumtabs', this.sumEl);
+    this.sumBodyEl = this.el('div', 'sumbody', this.sumEl);
+    const close = this.el('button', 'sumclose', this.sumEl);
+    close.textContent = 'Close';
+    close.addEventListener('pointerdown', (e) => { e.preventDefault(); this.closeSummary(); });
+    this.sumCloseBtn = close;
+  }
+
+  showSummary(data, cb) {
+    this.summary = { data, tab: 0, cb: cb || null };
+    this.log.push({ ui: 'summary', name: data && data.name });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) this.renderSummary();
+  }
+
+  renderSummary() {
+    if (this.headless || !this.sumEl) return;
+    const s = this.summary;
+    if (!s) { this.sumEl.classList.add('hidden'); return; }
+    this.sumEl.classList.remove('hidden');
+    this.sumTabsEl.innerHTML = '';
+    s.data.tabs.forEach((t, i) => {
+      const b = document.createElement('button');
+      b.className = 'sumtab' + (i === s.tab ? ' sel' : '');
+      b.textContent = t.label;
+      b.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.summary.tab = i;
+        this.game.audio.playSfx(SFX['ui-tick']);
+        this.renderSummary();
+      });
+      this.sumTabsEl.appendChild(b);
+    });
+    this.sumBodyEl.innerHTML = s.data.tabs[s.tab].bodyHtml || '';
+  }
+
+  summaryTab(d) {
+    const s = this.summary;
+    if (!s) return;
+    const n = s.data.tabs.length;
+    s.tab = (s.tab + d + n) % n;
+    this.game.audio.playSfx(SFX['ui-tick']);
+    if (!this.headless) this.renderSummary();
+  }
+
+  closeSummary() {
+    const s = this.summary;
+    if (!s) return;
+    this.summary = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.sumEl) this.sumEl.classList.add('hidden');
+    this.game.audio.playSfx(SFX['ui-back']);
+    if (s.cb) s.cb();
+  }
+
+  get summaryOpen() { return !!this.summary; }
 
   buildToasts() {
     this.toastEl = this.el('div', 'toasts', this.root);
@@ -930,6 +1007,14 @@ export class UI {
     this._chipTick = (this._chipTick || 0) + 1;
     if (this._chipTick % 15 === 0) this._syncChipAnchor();
     const input = this.game.input;
+    // Summary panel is modal (UI v2): left/right (or X/Y page keys) switch
+    // tabs, B / START / ESC closes.
+    if (this.summary) {
+      if (input.wasPressed('left') || input.wasPressed('pageup')) this.summaryTab(-1);
+      else if (input.wasPressed('right') || input.wasPressed('pagedown')) this.summaryTab(1);
+      else if (input.wasPressed('b') || input.wasPressed('start') || input.wasPressed('escape')) { this.closeSummary(); }
+      return true;
+    }
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;
     // Login page is modal (P0/B1).

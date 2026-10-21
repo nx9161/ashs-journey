@@ -54,7 +54,7 @@ const driver = `
   function bootToOverworld(g) {
     g.scenes.push(new BootScene());
     g.loop.stepMs(3100); tk(g, 2);
-    pA(g, 1); pA(g, 1);
+    pA(g, 1); pA(g, 1); pA(g, 1); // legal -> title, PRESS START -> menu, New Game (UI v2)
     drain(g); choose(g, 0); drain(g);
     return g.scenes.top;
   }
@@ -317,7 +317,7 @@ const pJs = buildGameJs({ edition: 'personal' });
 ok('personal bundle has the edition marker', pJs.includes(`const EDITION_MARKER = "NAMAN'S EDITION";`));
 const authIds = ['showCodesPane', 'openPrivacyModal', 'PRIVACY_DRAFT', 'accountDelete', 'recoveryCodes', '__AUTH_BEGIN__'];
 ok('personal bundle auth UI stripped', !authIds.some((id) => pJs.includes(id)));
-(0, eval)('{ ' + pJs + '\n;(function(){ var g = new Game(null); g.ui.init(); g.input.bindKeyboard(); g.buildSprites(); g.applyLayout(); g.scenes.push(new BootScene()); g.loop.stepMs(3100); for (var i=0;i<2;i++){ g.input.inject("a"); g.loop.stepTicks(2); g.input.release("a"); } var n=0; while(g.ui.dialogueOpen && n<400){ g.input.inject("a"); g.loop.stepTicks(2); g.input.release("a"); n++; } g.ui.debugChoose(0); n=0; while(g.ui.dialogueOpen && n<400){ g.input.inject("a"); g.loop.stepTicks(2); g.input.release("a"); n++; } globalThis.__PB__ = { overworld: g.scenes.top instanceof OverworldScene, chapter: g.state.story.chapter }; })();\n}');
+(0, eval)('{ ' + pJs + '\n;(function(){ var g = new Game(null); g.ui.init(); g.input.bindKeyboard(); g.buildSprites(); g.applyLayout(); g.scenes.push(new BootScene()); g.loop.stepMs(3100); for (var i=0;i<3;i++){ g.input.inject("a"); g.loop.stepTicks(2); g.input.release("a"); } var n=0; while(g.ui.dialogueOpen && n<400){ g.input.inject("a"); g.loop.stepTicks(2); g.input.release("a"); n++; } g.ui.debugChoose(0); n=0; while(g.ui.dialogueOpen && n<400){ g.input.inject("a"); g.loop.stepTicks(2); g.input.release("a"); n++; } globalThis.__PB__ = { overworld: g.scenes.top instanceof OverworldScene, chapter: g.state.story.chapter }; })();\n}');
 ok('personal bundle boots to overworld (guest path)', globalThis.__PB__ && globalThis.__PB__.overworld === true);
 
 // ---------- serve personal/ over HTTP, verify it loads ----------

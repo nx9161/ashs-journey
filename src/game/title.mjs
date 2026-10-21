@@ -1,6 +1,9 @@
 // title.mjs — boot disclaimer card (GC verbatim, §2a) + title screen.
 // The legal card renders in the shell before any interactive element and is not
 // skippable-in-one-tap on first boot (readable dwell >= 3 seconds).
+// Title flow (UI v2, Platinum standard): logo plate + framed keyart + a
+// blinking PRESS START prompt; the menu (New Game / Continue / Options)
+// appears only after Start/A (or a tap, which injects 'a') is pressed.
 
 export const DISCLAIMER_BOOT = [
   "ASH'S JOURNEY",
@@ -44,8 +47,10 @@ export const GAME_SUBTITLE = 'An Unofficial Fan Homage';
 export const EDITION_MARKER = /*__EDITION_MARKER__*/;
 
 // ---- Title recomposition helpers (Seat B) ----
-// Shared design system: UI font stack + ink/paper/gold.
-const FONT_STACK = 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+// Shared design system: UI font stack + ink/paper/gold. UI v2 (Platinum
+// standard): Galmuri leads the stack, matching the canvas renderer
+// (src/engine/render.mjs UI_FONT_STACK) so measured plates fit drawn text.
+const FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
 const PAPER = '#f8f8f0';
 const GOLD = '#e8c832';
 
@@ -170,6 +175,7 @@ export class BootScene {
   enter() {
     this.t = 0;
     this.phase = 'legal'; // legal -> title
+    this.titleStage = 'pressStart'; // title sub-state: 'pressStart' -> 'menu'
     this.ready = false;  // interactive only after dwell
     this.menuIdx = 0;
     this.game.ui.log.push({ ui: 'boot' });
@@ -181,9 +187,27 @@ export class BootScene {
       if (this.t >= 3) this.ready = true;
       if (this.ready && (input.wasPressed('a') || input.wasPressed('start'))) {
         this.phase = 'title';
+        this.titleStage = 'pressStart';
         this.t = 0;
         this.game.audio.unlock();
         this.game.audio.playMusic('title-theme'); // original score; unlock gate satisfied by the gesture
+      }
+      return;
+    }
+    // Platinum title flow: the menu stays hidden behind the blinking
+    // PRESS START prompt until Start/A (or a tap, which injects 'a') is
+    // pressed. The opening press only opens the menu — it never selects.
+    if (this.titleStage !== 'menu') {
+      const aP = input.wasPressed('a');
+      const sP = input.wasPressed('start');
+      input.wasPressed('up'); input.wasPressed('down'); // swallow nav edges so none leak into the opened menu
+      if (aP || sP) {
+        this.titleStage = 'menu';
+        this.game.audio.unlock();
+        // Title music starts on the legal->title transition above;
+        // playMusic no-ops when the same track is already playing, so
+        // this only starts it if that transition somehow did not.
+        this.game.audio.playMusic('title-theme');
       }
       return;
     }
@@ -265,9 +289,14 @@ export class BootScene {
     }
     menuW = Math.min(menuW, w - 24);
     const menuX = Math.round(cx - menuW / 2);
+    const showMenu = this.titleStage === 'menu';
+    // PRESS START band: reserved above the footer while the menu is hidden;
+    // in that sub-state the keyart band reclaims the rest of the menu's space.
+    const psH = 22;
+    const psY = menuBottom - psH + 3;
 
     // ---- Keyart: centered in the middle band, overlapped by nothing ----
-    const kBottom = menuY - 6;
+    const kBottom = showMenu ? menuY - 6 : menuBottom - psH - 6;
     const availH = kBottom - keyTop;
     const availW = w - 32;
     if (availH >= 20 && availW >= 32) {
@@ -288,6 +317,15 @@ export class BootScene {
         g.ctx2drect(cx - drawW * 0.08 - 6, ky + drawH * 0.66 + 4, 11, 12, '#1a1a22');
         g.ctx2dcircle(cx + drawW * 0.09, ky + drawH * 0.7, 4, '#1a1a22');
       }
+      // Platinum border treatment around the keyart rect (strokeRect only):
+      // navy outer line + silver-blue inner line, mirroring the r.panel frame.
+      const kc = r.ctx;
+      kc.strokeStyle = '#2b3040';
+      kc.lineWidth = 2;
+      kc.strokeRect(kx + 1, ky + 1, drawW - 2, drawH - 2);
+      kc.strokeStyle = '#8d9bbf';
+      kc.lineWidth = 1;
+      kc.strokeRect(kx + 3.5, ky + 3.5, drawW - 7, drawH - 7);
     }
 
     // ---- Header plate + centered title / subtitle / edition ribbon ----
@@ -300,6 +338,10 @@ export class BootScene {
     const plateX = Math.round(cx - plateW / 2);
     r.panel(plateX, plateY, plateW, plateH, 'rgba(16,16,28,0.62)', 'rgba(232,200,50,0.55)');
     r.text(GAME_TITLE, cx, titleY, { size: titleSize, bold: true, align: 'center', color: '#fff' });
+    // Platinum logo treatment: a subtle gold rule under the title,
+    // sized to the measured Galmuri title text.
+    const titleW = measureText(r, GAME_TITLE, titleSize, true);
+    g.ctx2dfill('rgba(232,200,50,0.55)', Math.round(cx - titleW / 2), titleY + titleSize + 1, titleW, 2);
     r.text(GAME_SUBTITLE, cx, subY, { size: 14, align: 'center', color: '#ffe9a8' });
     if (hasEd) {
       // ADR-012 personal-edition ribbon: measured dark band + gold underline,
@@ -313,20 +355,30 @@ export class BootScene {
       r.text(EDITION_MARKER, cx, edY + 3, { size: 14, align: 'center', color: '#ffe9a8' });
     }
 
-    // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
-    r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
-    items.forEach((it, i) => {
-      const rowY = menuY + menuPadY + i * rowH;
-      const sel = i === this.menuIdx;
-      if (sel) {
-        g.ctx2dfill('rgba(232,200,50,0.30)', menuX + 4, rowY, menuW - 8, rowH - 2);
-        g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
-      }
-      r.text(it.label, cx, rowY + 2, {
-        size: 14, bold: sel, align: 'center',
-        color: sel ? '#ffe9a8' : PAPER,
+    if (showMenu) {
+      // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
+      r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
+      items.forEach((it, i) => {
+        const rowY = menuY + menuPadY + i * rowH;
+        const sel = i === this.menuIdx;
+        if (sel) {
+          g.ctx2dfill('rgba(232,200,50,0.30)', menuX + 4, rowY, menuW - 8, rowH - 2);
+          g.ctx2dfill(GOLD, menuX + 4, rowY, 3, rowH - 2);
+        }
+        r.text(it.label, cx, rowY + 2, {
+          size: 14, bold: sel, align: 'center',
+          color: sel ? '#ffe9a8' : PAPER,
+        });
       });
-    });
+    } else {
+      // ---- PRESS START: blinking prompt in the band above the footer ----
+      // ~1s blink period (0.5s on / 0.5s off — the legal card's pulse
+      // idiom); steady-on under reduced motion.
+      const reduced = !!(g.state.settings && g.state.settings.reducedMotion);
+      if (reduced || Math.floor(this.t * 2) % 2 === 0) {
+        r.text('PRESS START', cx, psY, { size: 16, bold: true, align: 'center', color: '#ffe9a8' });
+      }
+    }
 
     // ---- Footer: centered, inset from both edges, never clipped ----
     r.text('Unofficial fan homage.', cx, footerY, { size: 14, align: 'center', color: '#f5efdc' });

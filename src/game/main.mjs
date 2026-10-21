@@ -10,7 +10,7 @@ import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
 import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, buildArtTileCache, tileSprite, uiIcon } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
-import { UI } from './ui.mjs';
+import { UI, typePill } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
 import { IntroScene } from './intro.mjs';
 import { OverworldScene } from './overworld.mjs';
@@ -415,7 +415,7 @@ export class Game {
     for (const pocket of POCKETS) {
       const inPocket = Object.keys(ITEMS).filter((id) => ITEMS[id].pocket === pocket && (g.state.bag[id] || 0) > 0);
       if (!inPocket.length) continue;
-      items.push({ label: '— ' + pocket + ' —', value: null, disabled: true });
+      items.push({ label: '— ' + pocket + ' —', value: null, disabled: true, band: true });
       for (const id of inPocket) {
         const hint = id === 'potion' ? ' (heals 20 HP — uses your turn in battle)' : '';
         items.push({ label: ITEMS[id].name + ' x' + g.state.bag[id] + hint, value: id });
@@ -491,11 +491,61 @@ export class Game {
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + '  ' + m.hp + '/' + m.maxHp, value: i };
     });
     for (let i = g.state.party.length; i < 6; i++) items.push({ label: 'Empty', value: -1, disabled: true });
-    items.push({ label: 'Close', value: 'close' });
-    g.ui.showMenu('Party', items, (v) => {
-      if (v === null || v === 'close' || v === -1) return;
-      const m = g.state.party[v];
+    items.push({ label: 'Close', value: 'close', closeRow: true });
+    // Platinum tabbed summary (UI v2): INFO / STATUS / MOVES, composed only
+    // from real mon/species/move data. The mon object carries `xp` (total
+    // XP for its level, set by makeMon and level-ups); there is no stored
+    // next-level figure on the mon, so INFO shows that total and never a
+    // derived or invented next-level number.
+    const sumRow = (k, val) => '<div class="sumrow"><span>' + k + '</span><b>' + val + '</b></div>';
+    const summaryData = (m) => {
       const sp = SPECIES[m.speciesId];
+      const xpVal = (typeof m.xp === 'number') ? m.xp : ((typeof m.exp === 'number') ? m.exp : null);
+      let info = '<div class="sumhead"><img class="sumsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+        + '<div><div class="sumname">' + displayName(m, SPECIES) + '</div>'
+        + '<div class="sumsub">No. ' + sp.dexNo + ' · ' + sp.types.join(' / ') + '</div></div></div>';
+      if (m.ot !== undefined && m.ot !== null && m.ot !== '') info += sumRow('OT', m.ot);
+      info += sumRow('Level', m.level);
+      info += sumRow('HP', m.hp + '/' + m.maxHp);
+      if (xpVal !== null) info += sumRow('EXP', xpVal);
+      if (sp.flavor) info += '<div class="sumflavor">' + sp.flavor + '</div>';
+      let statusBody = '';
+      statusBody += sumRow('ATK', m.stats.atk);
+      statusBody += sumRow('DEF', m.stats.def);
+      statusBody += sumRow('SPA', m.stats.spa);
+      statusBody += sumRow('SPD', m.stats.spd);
+      statusBody += sumRow('SPE', m.stats.spe);
+      statusBody += sumRow('Status', m.status ? m.status : 'None');
+      let movesBody = '';
+      for (const mm of (m.moves || [])) {
+        const mv = MOVES[mm.id];
+        if (!mv) {
+          movesBody += '<div class="sum-move"><span class="sum-mvname">' + mm.id + '</span>'
+            + '<span class="sum-mvmeta">PP ' + mm.pp + '/' + mm.maxPp + '</span></div>';
+          continue;
+        }
+        movesBody += '<div class="sum-move"><span class="sum-mvname">' + mv.name + '</span>'
+          + typePill(mv.type)
+          + '<span class="sum-mvmeta">Pow ' + (mv.power ? mv.power : '—')
+          + ' · Acc ' + ((mv.acc !== undefined && mv.acc !== null) ? mv.acc : '—')
+          + ' · PP ' + mm.pp + '/' + mm.maxPp + ' · ' + mv.cat + '</span></div>';
+      }
+      if (!movesBody) movesBody = '<div class="sumflavor">No moves known.</div>';
+      return {
+        name: displayName(m, SPECIES),
+        tabs: [
+          { id: 'info', label: 'INFO', bodyHtml: info },
+          { id: 'status', label: 'STATUS', bodyHtml: statusBody },
+          { id: 'moves', label: 'MOVES', bodyHtml: movesBody },
+        ],
+      };
+    };
+    // Per-Pokemon action submenu: a standard Platinum window (no menuClass).
+    // Closing the summary panel reopens this submenu, so B backs out one
+    // level like Platinum instead of dropping back to the overworld.
+    const openMonMenu = (monIndex) => {
+      const m = g.state.party[monIndex];
+      if (!m) return;
       const fieldMoves = (m.moves || []).filter((x) => ['cut', 'fly', 'surf', 'strength', 'flash'].includes(x.id));
       const rows = [{ label: 'Summary', value: 'summary' }];
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
@@ -503,17 +553,14 @@ export class Game {
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
         if (a === 'field' && g.openFieldMove) { g.openFieldMove(m); return; }
         if (a === 'summary') {
-          const mv = m.moves.map((mm) => MOVES[mm.id].name + ' ' + mm.pp + '/' + mm.maxPp).join(', ');
-          g.ui.say([
-            displayName(m, SPECIES) + '  Lv' + m.level + '  HP ' + m.hp + '/' + m.maxHp,
-            'ATK ' + m.stats.atk + '  DEF ' + m.stats.def + '  SPA ' + m.stats.spa + '  SPD ' + m.stats.spd + '  SPE ' + m.stats.spe,
-            'Moves: ' + mv,
-            'OT: ' + m.ot + '  No. ' + sp.dexNo,
-            sp.flavor,
-          ], null, 'Summary');
+          g.ui.showSummary(summaryData(m), () => openMonMenu(monIndex));
         }
       });
-    }, { rowHtml });
+    };
+    g.ui.showMenu('Party', items, (v) => {
+      if (v === null || v === 'close' || v === -1) return;
+      openMonMenu(v);
+    }, { rowHtml, menuClass: 'plate-full' });
   }
 
   openDex(filter) {
@@ -673,7 +720,7 @@ export class Game {
       { label: 'Close', value: 'close' },
     ], (v) => {
       if (v === 'save') g.saveGame(false);
-    });
+    }, { menuClass: 'syswin' });
   }
 
   // Track B: cloud slot picker (labels are formatted numbers/dates only —
@@ -704,7 +751,7 @@ export class Game {
         g.ui.toast('Slot ' + v.slice(5) + ' selected.');
         g.openSave();
       }
-    });
+    }, { menuClass: 'syswin' });
   }
 
   openOptions() {
@@ -784,14 +831,14 @@ export class Game {
                   }
                 });
               }
-            });
+            }, { menuClass: 'syswin' });
           }
-        });
+        }, { menuClass: 'syswin' });
         return;
       } else return;
       g.saveGame(true);
       g.openOptions();
-    });
+    }, { menuClass: 'syswin' });
   }
 }
 

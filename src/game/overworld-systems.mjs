@@ -540,21 +540,60 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- PC boxes ----------
+  // Platinum PC box (UI v2): a 'pcbox' wallpaper window whose stored
+  // Pokemon render as sprite cells (Game#spriteDataUrl, the same helper
+  // the party/bag rows use — accessed here via this.game). Navigation
+  // rows (box-switch, party deposit/withdraw lists, link, log off / back)
+  // are full-width `wide` rows under the cell grid. All values returned
+  // to the callbacks, and the deposit/withdraw/box-switch semantics, are
+  // exactly as before; the current box + capacity stay in the title.
   openPc() {
     const g = this.game;
     const boxes = g.state.boxes;
     for (let i = 1; i <= BOX_COUNT; i++) if (!Array.isArray(boxes['box' + i])) boxes['box' + i] = [];
     const cur = g.state.currentBox || 'box1';
-    g.ui.showMenu('PC — someone\'s PC (current: ' + cur.replace('box', 'Box ') + ', ' + boxes[cur].length + '/' + BOX_CAP + ')', [
-      { label: 'Deposit', value: 'dep' },
-      { label: 'Withdraw', value: 'wd' },
-      { label: 'Change box', value: 'chg' },
-      { label: 'Link Transfer (Bill\'s system)', value: 'link' },
-      { label: 'Log off', value: 'off' },
-    ], (v) => {
+    const spriteRowHtml = (getMon) => (it) => {
+      const mon = getMon(it);
+      if (!mon) return '<span>' + it.label + '</span>';
+      const url = (typeof g.spriteDataUrl === 'function') ? g.spriteDataUrl(mon.speciesId) : '';
+      return '<img class="picon" src="' + url + '" alt=""><span>' + it.label + '</span>';
+    };
+    const boxRowHtml = spriteRowHtml((it) => {
+      if (typeof it.value === 'string' && it.value.indexOf('wd:') === 0) return boxes[cur][parseInt(it.value.slice(3), 10)];
+      if (typeof it.value === 'number' && it.value >= 0) return boxes[cur][it.value];
+      return null;
+    });
+    const partyRowHtml = spriteRowHtml((it) => {
+      if (typeof it.value === 'number' && it.value >= 0) return g.state.party[it.value];
+      return null;
+    });
+    const withdrawMon = (iv) => {
+      if (g.state.party.length >= 6) { g.ui.say(['Your party is full!']); return; }
+      const mon = boxes[cur].splice(iv, 1)[0];
+      if (!mon) return;
+      g.state.party.push(mon);
+      g.ui.toast('Withdrew ' + displayName(mon, SPECIES) + '.');
+    };
+    const mainItems = boxes[cur].map((m, i) => ({
+      label: displayName(m, SPECIES) + ' Lv' + m.level, value: 'wd:' + i,
+    }));
+    mainItems.push(
+      { label: 'Deposit', value: 'dep', wide: true },
+      { label: 'Withdraw', value: 'wd', wide: true },
+      { label: 'Change box', value: 'chg', wide: true },
+      { label: 'Link Transfer (Bill\'s system)', value: 'link', wide: true },
+      { label: 'Log off', value: 'off', wide: true },
+    );
+    g.ui.showMenu('PC — someone\'s PC (current: ' + cur.replace('box', 'Box ') + ', ' + boxes[cur].length + '/' + BOX_CAP + ')', mainItems, (v) => {
+      if (typeof v === 'string' && v.indexOf('wd:') === 0) {
+        // Box-screen shortcut: choosing a stored Pokemon's cell withdraws
+        // it, with the same party-full guard as the Withdraw list below.
+        withdrawMon(parseInt(v.slice(3), 10));
+        return;
+      }
       if (v === 'dep') {
         const items = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: g.state.party.length <= 1 }));
-        items.push({ label: 'Back', value: -1 });
+        items.push({ label: 'Back', value: -1, wide: true });
         g.ui.showMenu('Deposit which?', items, (iv) => {
           if (iv === null || iv === -1) return;
           const mon = g.state.party[iv];
@@ -565,23 +604,20 @@ Object.assign(OverworldScene.prototype, {
           mon.status = null;
           boxes[cur].push(mon);
           g.ui.toast('Deposited ' + displayName(mon, SPECIES) + '.');
-        });
+        }, { menuClass: 'pcbox', rowHtml: partyRowHtml });
       } else if (v === 'wd') {
         const items = boxes[cur].map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
-        items.push({ label: 'Back', value: -1 });
+        items.push({ label: 'Back', value: -1, wide: true });
         g.ui.showMenu('Withdraw which?', items, (iv) => {
           if (iv === null || iv === -1) return;
-          if (g.state.party.length >= 6) { g.ui.say(['Your party is full!']); return; }
-          const mon = boxes[cur].splice(iv, 1)[0];
-          g.state.party.push(mon);
-          g.ui.toast('Withdrew ' + displayName(mon, SPECIES) + '.');
-        });
+          withdrawMon(iv);
+        }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
       } else if (v === 'chg') {
         const items = [];
-        for (let i = 1; i <= BOX_COUNT; i++) items.push({ label: 'Box ' + i + ' (' + boxes['box' + i].length + '/' + BOX_CAP + ')', value: 'box' + i });
+        for (let i = 1; i <= BOX_COUNT; i++) items.push({ label: 'Box ' + i + ' (' + boxes['box' + i].length + '/' + BOX_CAP + ')', value: 'box' + i, wide: true });
         g.ui.showMenu('Change to which box?', items, (iv) => {
           if (iv) { g.state.currentBox = iv; g.ui.toast('Current box: ' + iv.replace('box', 'Box ') + '.'); }
-        });
+        }, { menuClass: 'pcbox' });
       } else if (v === 'link') {
         // Bill's Link Transfer: trade-evolution species evolve here —
         // the honest single-player resolution (WS7 design call, ADR-019).
@@ -591,13 +627,14 @@ Object.assign(OverworldScene.prototype, {
         });
         if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
         const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
-        items.push({ label: 'Back', value: null });
+        items.push({ label: 'Back', value: null, wide: true });
+        const linkRowHtml = spriteRowHtml((it) => cand.find((m) => m.monId === it.value) || null);
         g.ui.showMenu('Link Transfer which?', items, (iv) => {
           const mon = cand.find((m) => m.monId === iv);
           if (mon) this.evolveMon(mon);
-        });
+        }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
       }
-    });
+    }, { menuClass: 'pcbox', rowHtml: boxRowHtml });
   },
 
   // ---------- mart ----------

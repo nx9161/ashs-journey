@@ -5,6 +5,17 @@
 
 export const TILE = 16;
 
+// UI v2 (Platinum standard): the UI typeface is Galmuri (OFL 1.1, DS-era
+// bitmap design, self-hosted via @font-face in the shell CSS) with the
+// DotGothic16 face as glyph fallback. Canvas text uses the same stack.
+export const UI_FONT_STACK = "'PtGalmuri', 'PtGothic', system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif";
+// Platinum frame tones (canvas twins of the shell CSS tokens).
+export const PT_FRAME = '#2b3040';
+export const PT_FRAME2 = '#8d9bbf';
+export const PT_PAPER = '#f6f8fc';
+export const PT_PAPER2 = '#dfe6f2';
+export const PT_RIVET = '#6d7ba3';
+
 export class Renderer {
   constructor(canvas) {
     this.canvas = canvas;
@@ -114,7 +125,7 @@ export class Renderer {
   text(str, x, y, opts) {
     const o = opts || {};
     const c = this.ctx;
-    c.font = (o.bold ? 'bold ' : '') + (o.size || 8) + 'px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + UI_FONT_STACK;
     c.textBaseline = 'top';
     if (o.align) c.textAlign = o.align;
     if (o.shadow !== false) {
@@ -127,25 +138,80 @@ export class Renderer {
   }
 
   panel(x, y, w, h, fill, border) {
+    // UI v2: every canvas panel is a Platinum window (see ptFrame). The
+    // legacy (fill, border) signature is preserved for all callers; the
+    // border argument is accepted for compatibility — the frame tones are
+    // the Platinum standard on every surface.
+    this.ptFrame(x, y, w, h, fill);
+  }
+
+  // Platinum window frame, rect-only (fillRect/strokeRect — the QA recording
+  // ctx implements nothing else): interior fill, navy outer line, white
+  // hairline, silver-blue inner line, corner rivets. `fill` may be any CSS
+  // color (dark interiors keep light text readable — frame tones hold).
+  ptFrame(x, y, w, h, fill) {
     const c = this.ctx;
-    c.fillStyle = fill || '#f8f8f0';
+    c.fillStyle = fill || PT_PAPER;
     c.fillRect(x, y, w, h);
-    c.strokeStyle = border || '#202028';
+    c.strokeStyle = PT_FRAME;
     c.lineWidth = 2;
     c.strokeRect(x + 1, y + 1, w - 2, h - 2);
+    c.strokeStyle = '#ffffff';
+    c.lineWidth = 1;
+    c.strokeRect(x + 3.5, y + 3.5, w - 7, h - 7);
+    c.strokeStyle = PT_FRAME2;
+    c.strokeRect(x + 5.5, y + 5.5, w - 11, h - 11);
+    c.fillStyle = PT_RIVET;
+    const rx = [x + 8, x + w - 10], ry = [y + 8, y + h - 10];
+    for (const px of rx) for (const py of ry) c.fillRect(px, py, 2, 2);
+  }
+
+  // Platinum databox (battle HP plate): stepped two-tone interior (light
+  // top, cooler bottom — DS shading without gradient APIs), navy frame,
+  // and the tag tail stepping toward the battler (bottom-left for the foe,
+  // bottom-right for the ally). Rect-only, like ptFrame.
+  ptPlate(x, y, w, h, isAlly) {
+    const c = this.ctx;
+    // drop shade (offset silhouette rect, not a shadow API)
+    c.fillStyle = 'rgba(10,14,28,0.30)';
+    c.fillRect(x + 2, y + 3, w, h);
+    c.fillStyle = PT_PAPER;
+    c.fillRect(x, y, w, h);
+    c.fillStyle = PT_PAPER2;
+    c.fillRect(x + 2, y + Math.floor(h / 2), w - 4, h - Math.floor(h / 2) - 2);
+    c.strokeStyle = PT_FRAME;
+    c.lineWidth = 2;
+    c.strokeRect(x + 1, y + 1, w - 2, h - 2);
+    c.strokeStyle = PT_FRAME2;
+    c.lineWidth = 1;
+    c.strokeRect(x + 3.5, y + 3.5, w - 7, h - 7);
+    // tag tail: two steps descending toward the battler
+    const tx = isAlly ? x + w - 14 : x + 4;
+    c.fillStyle = PT_PAPER2;
+    c.fillRect(tx, y + h, 10, 3);
+    c.fillRect(isAlly ? tx + 3 : tx, y + h + 3, 7, 3);
+    c.fillStyle = PT_FRAME;
+    c.fillRect(tx, y + h + 2, 10, 1);
   }
 
   // HP bar with colorblind-safe stripe overlay under 25% (gameux §7).
   // The stripes are STATIC (not motion) — they always draw; they are the
   // colorblind cue, never gated on reduced motion (Uix sign-off E6 fix).
+  // UI v2: Platinum dress — navy-framed recessed track, bright DS fills,
+  // 1px segment ticks like the DS bar's stepped rendering.
   hpBar(x, y, w, h, frac) {
     const c = this.ctx;
     const f = Math.max(0, Math.min(1, frac));
-    c.fillStyle = '#28182c';
+    c.fillStyle = '#2b3040';
+    c.fillRect(x - 1, y - 1, w + 2, h + 2);
+    c.fillStyle = '#484860';
     c.fillRect(x, y, w, h);
-    const col = f > 0.5 ? '#58c94f' : (f > 0.25 ? '#e8c832' : '#e84040');
+    const col = f > 0.5 ? '#48c848' : (f > 0.25 ? '#f8c830' : '#f84838');
     c.fillStyle = col;
-    c.fillRect(x + 1, y + 1, Math.floor((w - 2) * f), h - 2);
+    const fw = Math.floor((w - 2) * f);
+    c.fillRect(x + 1, y + 1, fw, h - 2);
+    c.fillStyle = 'rgba(43,48,64,0.35)';
+    for (let sx = x + 5; sx < x + 1 + fw; sx += 4) c.fillRect(sx, y + 1, 1, h - 2);
     if (f <= 0.25 && f > 0) {
       c.fillStyle = 'rgba(255,255,255,0.5)';
       for (let sx = x + 2; sx < x + w - 2; sx += 4) {
@@ -154,13 +220,16 @@ export class Renderer {
     }
   }
 
-  // XP bar: gold, 96x3 per gameux §4.2. frac eases out over 600ms in battle.
+  // XP bar: Platinum blue, same recessed track as the HP bar. frac eases
+  // out over 600ms in battle.
   xpBar(x, y, w, h, frac) {
     const c = this.ctx;
     const f = Math.max(0, Math.min(1, frac));
-    c.fillStyle = '#28182c';
+    c.fillStyle = '#2b3040';
+    c.fillRect(x - 1, y - 1, w + 2, h + 2);
+    c.fillStyle = '#484860';
     c.fillRect(x, y, w, h);
-    c.fillStyle = '#e8c832';
+    c.fillStyle = '#3898f8';
     c.fillRect(x + 1, y + 1, Math.floor((w - 2) * f), h - 2);
   }
 }
