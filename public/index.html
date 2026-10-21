@@ -59,7 +59,11 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .menu.plate-full .emptyslot{font-style:normal;letter-spacing:.5px}
 .menu.plate-full .menu-row.cursor{background:var(--sky)}
 .menu.plate-full .menu-row.close-row{grid-column:1/-1;justify-content:center;font-weight:bold}
-@media (max-width:560px){.menu.plate-full .menu-list{grid-template-columns:1fr}}
+@media (max-width:560px){.menu.plate-full .menu-list{grid-template-columns:1fr;gap:5px;padding:6px}
+.menu.plate-full .menu-row{min-height:54px;padding:4px 8px}
+.menu.plate-full .picon{width:36px;height:36px}
+.menu.plate-full .pball{width:18px;height:18px}
+.menu.plate-full .menu-row.close-row{min-height:40px}}
 /* PC box (Platinum): wallpaper-striped window, sprite-cell grid */
 .menu.pcbox{background-color:#cfdcf5;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.35) 0 16px,rgba(46,74,143,.07) 16px 32px)}
 .menu.pcbox .menu-list{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
@@ -142,7 +146,7 @@ body.flip .ab{right:auto;left:16px}
 .mvpp{font-size:14px;color:#4a5878;grid-column:1}
 .mvpow{font-size:14px;color:#6a7799;grid-column:2;justify-self:end}
 .mvcell .tpill{grid-column:2;grid-row:1;justify-self:end;margin:0}
-@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.menugrid .menu-row.wide{display:none}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
+@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.menugrid .menu-row.wide{display:none}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
 .tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:3px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
 .tpill b{font-weight:bold}
 .menu-row.zeropp{color:#a0a0a0}
