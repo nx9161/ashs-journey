@@ -489,10 +489,11 @@ formula-shaped rules; campaign-smoke for content), and a
 feature-parity.md status row update. No phase is "done" on code
 alone — the owner's hands-on gate stands (ADR-019).
 
-## 9. Owner rulings requested
+## 9. Owner rulings — ALL RULED 2026-10-27
 
-Everything else in this spec is **decided** (marked inline). Three
-items genuinely belong to the owner:
+Everything else in this spec is **decided** (marked inline). The
+three items that belonged to the owner were put to him the same
+day; he adopted **all three recommendations as written**:
 
 - **R1 — Second Journey dex semantics.** Recommended: dex *records*
   carry (archive stays filled), Second Journey honors require the
