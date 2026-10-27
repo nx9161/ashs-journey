@@ -167,10 +167,39 @@ async function hold(code, ms) {
   await send('Input.dispatchKeyEvent', { type: 'keyUp', code }, S);
   await sleep(150);
 }
+// Condition waits: the mirror transport (live bytes fulfilled through CDP)
+// boots slower than the fixed sleeps this script was written against, and
+// key presses sent before the game is listening are eaten. Poll for the
+// state each step is supposed to produce instead of sleeping blind.
+async function waitFor(expr, ms = 12000) {
+  const t0 = Date.now();
+  while (Date.now() - t0 < ms) {
+    try { if (await ev(expr)) return true; } catch (e) {}
+    await sleep(400);
+  }
+  return false;
+}
+async function pressUntil(code, expr, tries = 8) {
+  for (let i = 0; i < tries; i++) {
+    try { if (await ev(expr)) return true; } catch (e) {}
+    await press(code); await sleep(500);
+  }
+  try { return !!(await ev(expr)); } catch (e) { return false; }
+}
 async function clickEl(selector, textMatch) {
   const pt = await ev(`(() => {
     const els = [...document.querySelectorAll(${JSON.stringify(selector)})];
-    const el = ${textMatch ? `els.find(e => e.textContent.trim().startsWith(${JSON.stringify(textMatch)}))` : 'els[0]'};
+    // Two-pass match over VISIBLE elements only. Pass 1: raw startsWith —
+    // exact for callers that pass the cursor glyph ('▶ PLAY AS GUEST') and
+    // it must win over hidden same-text ghosts (a hidden 'PLAY AS GUEST'
+    // ghost button sits earlier in the DOM with a 0x0 rect). Pass 2: strip
+    // the leading '▶' cursor glyph from both sides — a menu row carrying
+    // the cursor reads '▶Bag', not 'Bag' (menus now open on the first
+    // enabled row, so the target row often IS the cursor row).
+    const norm = (s) => s.trim().replace(/^▶\\s*/, '');
+    const want = ${textMatch ? JSON.stringify(textMatch) : 'null'};
+    const vis = (e) => { const r = e.getBoundingClientRect(); return r.width > 0 && r.height > 0; };
+    const el = ${textMatch ? `(els.find(e => vis(e) && e.textContent.trim().startsWith(want)) || els.find(e => vis(e) && norm(e.textContent).startsWith(norm(want))))` : 'els[0]'};
     if (!el) return null;
     const r = el.getBoundingClientRect();
     return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
@@ -290,6 +319,11 @@ async function bootToOverworld(saveObj) {
     source: `try{localStorage.setItem('pdr.save.guest', ${JSON.stringify(JSON.stringify(saveObj))});}catch(e){}`,
   }, S);
   await send('Page.navigate', { url: PAGE_URL }, S);
+  // The title menu is CANVAS-drawn (rows: New Game / Continue / Options) —
+  // there is no DOM signal for it, so this leg stays counted: Z (legal ->
+  // title), Z (PRESS START -> menu), Down (New Game -> Continue), Z. The
+  // waits before/after absorb the mirror transport's slower boot; the
+  // terminal and the overworld DO have DOM signals and are waited on.
   await sleep(3800);
   await press('KeyZ');
   await sleep(700);
@@ -297,9 +331,11 @@ async function bootToOverworld(saveObj) {
   await sleep(500);
   await press('ArrowDown'); // Continue
   await press('KeyZ');
-  await sleep(900);
+  await waitFor(`!!document.querySelector('.authpane:not(.hidden)')`, 9000);
+  await sleep(400);
   await clickEl('button', '▶ PLAY AS GUEST');
-  await sleep(1600);
+  await waitFor(`!!(document.querySelector('.locchip-text') || {}).textContent`, 12000);
+  await sleep(600);
   await clickEl('.hintcard-x', 'Got it');
   await sleep(400);
 }
@@ -387,13 +423,15 @@ try {
     'PtPixel=' + boot.inkPixel + ' (dot-matrix faces measure ≈0.15)');
 
   // ---- [play] fresh game: terminal + intro dialogue ----
-  await press('KeyZ'); await sleep(900);           // -> title
-  await press('KeyZ'); await sleep(700);           // -> title menu
-  await press('KeyZ'); await sleep(900);           // New Game -> terminal
+  // Legal -> title -> menu -> New Game -> terminal, condition-driven.
+  await pressUntil('KeyZ', `!!document.querySelector('.authpane:not(.hidden)')`);
   const termStack = await ev(`(() => { const e = document.querySelector('.authsub') || document.querySelector('.login-note'); return e ? getComputedStyle(e).fontFamily : ''; })()`);
   verdict('play: terminal body copy computes PtPixel-first', /PtPixel/.test(termStack), termStack.slice(0, 50));
   await clickEl('button', '▶ PLAY AS GUEST');
-  await sleep(1500);
+  // The intro dialogue must actually be on screen (speaker + typed body)
+  // before the ink gate measures it.
+  await waitFor(`(document.querySelector('.dlg-name') || {}).textContent.trim().length > 0 && (document.querySelector('.dlg-text') || {}).textContent.trim().length > 6`, 12000);
+  await sleep(600);
   await shot('vl-intro');
   const dlg = await ev(`(() => {
     const t = document.querySelector('.dlg-text'), n = document.querySelector('.dlg-name');
@@ -435,7 +473,8 @@ try {
     await bootToOverworld(saveObj);
     await shot('vl-overworld');
     // Pause -> Bag
-    await press('Enter'); await sleep(700);
+    await press('Enter');
+    await waitFor(`[...document.querySelectorAll('.menu-row')].some(r => r.textContent.replace(/^▶\\s*/, '').trim().startsWith('Bag'))`, 8000);
     const bagOpened = await clickEl('.menu-row', 'Bag');
     await sleep(700);
     await shot('vl-bag');
