@@ -74,6 +74,7 @@ Suites: `scripts/verify-slice.mjs` (133), `tests/fidelity-checks.mjs` (26),
 | Elite Four + Champion + Hall of Fame | Verified | campaign-smoke incl. HoF snapshot |
 | Oak's Pokédex rating | Implemented | professor rating lines by caught count |
 | Game Freak diploma at 151 | Implemented | checkDiploma on the 151st catch |
+| Difficulty modes + House Rules (Rejuvenation P1, ADR-025) | Implemented | Story/Classic/Challenge wired via rules.mjs (levels/IV/AI/RT cooldowns/XP/catch levers); six House Rule toggles in Options; Candy Coach spar + XP Candy in every Center; Pure Run ribbon on the Save summary; owner's hands-on gate stands. Proofs: tests/rejuv-phase1-checks.mjs 42/42 |
 
 ## Yellow exclusives
 | Feature | Status | Proof / note |

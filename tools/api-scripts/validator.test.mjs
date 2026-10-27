@@ -1,5 +1,5 @@
 // validator.test.mjs — quick unit battery for api/_lib/validator.mjs.
-// Run: node api/scripts/validator.test.mjs   (exit 0 = all pass)
+// Run: node tools/api-scripts/validator.test.mjs   (exit 0 = all pass)
 
 import { validateSave, checkNestingDepth, tablesReady, tablesStatus } from '../../api/_lib/validator.mjs';
 import { defaultState, SCHEMA_VERSION } from '../../src/game/state.mjs';
@@ -85,8 +85,20 @@ t('depth scan passes normal body', checkNestingDepth(JSON.stringify(good), 32));
 t('depth scan rejects 40-deep nesting', !checkNestingDepth('['.repeat(40) + ']'.repeat(40), 32));
 t('depth scan ignores brackets in strings', checkNestingDepth(JSON.stringify({ a: '[[[[' }), 32));
 
-// 6. schema version constant agreement
-t('validator tracks client SCHEMA_VERSION', SCHEMA_VERSION === 1);
+// 6. schema version constant agreement (pins the ADR-025 v2 bump)
+t('validator tracks client SCHEMA_VERSION', SCHEMA_VERSION === 2);
+
+// 7. ADR-025 (schema v2): difficulty modes, House Rules, meta fields
+const okWith = (mut) => { const s = JSON.parse(JSON.stringify(good)); mut(s); return validateSave(s).ok; };
+t('accept difficulty story', okWith((s) => { s.story.difficulty = 'story'; }));
+t('accept difficulty challenge', okWith((s) => { s.story.difficulty = 'challenge'; }));
+t('reject legacy difficulty normal', bad((s) => { s.story.difficulty = 'normal'; }, 'bad-difficulty'));
+t('accept houseRules all on', okWith((s) => { for (const k of Object.keys(s.settings.houseRules)) s.settings.houseRules[k] = true; }));
+t('reject houseRules unknown toggle', bad((s) => { s.settings.houseRules.luckyCharm = true; }, 'bad-setting:houseRules'));
+t('reject houseRules non-boolean', bad((s) => { s.settings.houseRules.fastLearner = 'yes'; }, 'bad-setting:houseRules'));
+t('accept xpcandy in bag', okWith((s) => { s.bag.xpcandy = 3; }));
+t('reject bad meta houseRulesTouched', bad((s) => { s.meta.houseRulesTouched = 'yes'; }, 'bad-meta-house-rules'));
+t('reject bad meta ngPlus', bad((s) => { s.meta.ngPlus = -1; }, 'bad-meta-ngplus'));
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

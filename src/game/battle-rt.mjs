@@ -16,6 +16,7 @@ import {
 import { roll } from '../engine/rng.mjs';
 import { PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { displayName } from './state.mjs';
+import { damageRandomFor, catchRateMultFor, rtFoeCooldownMultFor } from './rules.mjs';
 import { typePill } from './ui.mjs';
 import { BattleScene } from './battle.mjs';
 
@@ -265,9 +266,10 @@ Object.assign(BattleScene.prototype, {
     rt.fy = clamp(rt.fy + vy * spd * dt, ARENA.y0, ARENA.y1);
     rt.foeFace = rt.ax < rt.fx ? 'left' : 'right';
     // Fire a ready move when in range (leaders pick better lines).
+    // ADR-025: this.foeAi is the difficulty-resolved class (see battle.mjs).
     if (ready.length && rt.foeHoldT <= 0) {
       let idx = ready[Math.floor(Math.random() * ready.length)];
-      if (this.trainer && (this.trainer.ai === 'smart' || this.trainer.ai === 'opener-setup')) {
+      if (this.trainer && (this.foeAi === 'smart' || this.foeAi === 'opener-setup')) {
         const allyTypes = SPECIES[this.ally.speciesId].types;
         let bestScore = -1;
         for (const i of ready) {
@@ -312,7 +314,11 @@ Object.assign(BattleScene.prototype, {
     atk.lastMoveIdx = idx;
     const atkSpe = this.effStats(atk, side === 'ally' ? this.allyStages : this.foeStages).spe;
     const defSpe = this.effStats(def, side === 'ally' ? this.foeStages : this.allyStages).spe;
-    rt.cds[side][slot.id] = cooldownMs(mv, atkSpe, defSpe);
+    // ADR-025 §4: difficulty lives in THREAT speed — foe move cooldowns
+    // scale with the mode (x1.1 Story / x1.0 Classic / x0.9 Challenge);
+    // ally cooldowns are never scaled.
+    const cdBase = cooldownMs(mv, atkSpe, defSpe);
+    rt.cds[side][slot.id] = side === 'foe' ? Math.round(cdBase * rtFoeCooldownMultFor(g.state)) : cdBase;
     const ax = side === 'ally' ? rt.ax : rt.fx, ay = side === 'ally' ? rt.ay : rt.fy;
     const dx = side === 'ally' ? rt.fx : rt.ax, dy = side === 'ally' ? rt.fy : rt.ay;
     if (mv.cat === 'status') {
@@ -422,7 +428,7 @@ Object.assign(BattleScene.prototype, {
       dmg = 0;
       for (let hi = 0; hi < hits; hi++) {
         dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-          { stab, effectiveness: eff, crit, random: gen1Random(g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical' });
+          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical' });
       }
     }
     if (mv.cat === 'physical' && def.reflectT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
@@ -575,6 +581,10 @@ Object.assign(BattleScene.prototype, {
   rtThrowBall(ballId) {
     const g = this.game;
     if (this.kind !== 'wild') { this.rtFloat('A trainer blocks your ball!'); return; }
+    // Uncatchable foes (ADR-025 spar; scripted presences): the throw is
+    // refused and the ball is NOT spent. (Classic beginCatch deflects
+    // with a spent ball for the Tower ghost — authored behavior, kept.)
+    if (this.uncatchable) { this.rtFloat(this.friendly ? 'The Coach bats the ball away!' : 'It cannot be caught!'); return; }
     if ((g.state.bag[ballId] || 0) <= 0) return;
     g.state.bag[ballId]--;
     const rt = this.rt;
@@ -599,7 +609,9 @@ Object.assign(BattleScene.prototype, {
         return;
       }
       const foe = this.foe;
-      const res = gen1Catch(foe.maxHp, foe.hp, SPECIES[foe.speciesId].catchRate, b.ballId, foe.status, g.rng.battle);
+      // ADR-025 §4: Story's ball bonus (x1.1) scales the effective rate.
+      const rate = Math.max(3, Math.min(255, Math.round(SPECIES[foe.speciesId].catchRate * catchRateMultFor(g.state))));
+      const res = gen1Catch(foe.maxHp, foe.hp, rate, b.ballId, foe.status, g.rng.battle);
       rt.catchSeq = { t: 0, shakes: 0, need: res.caught ? 3 : res.shakes, willCatch: res.caught, ballId: b.ballId };
       g.audio.playSfx('catch-rattle');
     }

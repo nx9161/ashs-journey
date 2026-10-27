@@ -1,10 +1,13 @@
 // state.mjs — GameState: the runtime state IS the save shape (architecture §2.3).
-// schemaVersion 1. Frontier-ready hooks from day one: badges.symbols (7 locked),
-// dex.befriended (third dex state), facilities registry, story.flags open map.
+// schemaVersion 2 (Rejuvenation Phase 1, ADR-025): difficulty modes wired
+// (story.difficulty in {'story','classic','challenge'}), settings.houseRules,
+// meta.houseRulesTouched + meta.ngPlus. Frontier-ready hooks from day one:
+// badges.symbols (7 locked), dex.befriended (third dex state), facilities
+// registry, story.flags open map.
 
 import { xpForLevel } from '../engine/formulas.mjs';
 
-export const SCHEMA_VERSION = 1;
+export const SCHEMA_VERSION = 2;
 
 export function defaultState() {
   return {
@@ -22,7 +25,9 @@ export function defaultState() {
       region: 'kanto',
       regionsDone: [],
       position: { map: 'pallet', x: 7, y: 7, dir: 'down' },
-      difficulty: 'normal',
+      // ADR-025 §4: the run's difficulty mode. 'classic' = the game exactly
+      // as shipped; levers live in game/rules.mjs (threat-side only).
+      difficulty: 'classic',
     },
     currentBox: 'box1',
     session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
@@ -32,10 +37,21 @@ export function defaultState() {
       mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1,
       vibration: true, autosave: true, showTouch: false, // P1/I5+I2: Wave-3 additions
       battleStyle: 'rt', // ADR-020: 'rt' real-time (default) | 'classic' turn-based
+      // ADR-025 §4 House Rules: player-side modifier toggles, all default
+      // OFF. Enabling any of them (ever) sets meta.houseRulesTouched and
+      // costs the save its "Pure Run" ribbon — nothing else.
+      houseRules: {
+        steadyDamage: false, mercifulFoes: false, fastLearner: false,
+        generousWorld: false, candyCoach: false, skipIntro: false,
+      },
     },
     facilities: { registry: [], unlocked: [] },
     bag: { pokeball: 10, potion: 3 },
-    meta: { createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Pallet Town' },
+    meta: {
+      createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Pallet Town',
+      houseRulesTouched: false, // ADR-025: true once any House Rule is enabled
+      ngPlus: 0, // ADR-025 §6: Second Journey counter (Phase 6 consumes it)
+    },
   };
 }
 

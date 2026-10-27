@@ -1,6 +1,6 @@
 {
-  "tablesVersion": "0f72641c99e813a44f5bfd232319bc4fd3b3be366a4842015122016c08ae4c9a",
-  "schemaVersion": 1,
+  "tablesVersion": "7485c696072134f3f7688e03b056a63e4693b9f8c846d99ee0022900c958c324",
+  "schemaVersion": 2,
   "species": [
     "abra",
     "aerodactyl",
@@ -414,7 +414,8 @@
     "townmap",
     "ultraball",
     "volcanobadge",
-    "waterstone"
+    "waterstone",
+    "xpcandy"
   ],
   "balls": [
     "greatball",

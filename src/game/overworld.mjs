@@ -7,6 +7,7 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
+import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
@@ -46,6 +47,14 @@ export class OverworldScene {
   loadMap(id) {
     this.mapId = id;
     this.map = MAPS[id];
+    // ADR-025 §4 (Candy Coach): the Sparring Coach stands in every Pokemon
+    // Center only while the House Rule is on. The shared MAPS definition is
+    // never mutated — the scene works on a shallow copy when a coach is
+    // placed in the map's data.
+    if (this.map && Array.isArray(this.map.npcs) && this.map.npcs.some((n) => n.sparCoach)) {
+      const on = houseRule(this.game.state, 'candyCoach');
+      this.map = { ...this.map, npcs: this.map.npcs.filter((n) => on || !n.sparCoach) };
+    }
     this.w = this.map.rows[0].length;
     this.h = this.map.rows.length;
     if (this.sysLoadMap) this.sysLoadMap(id);
@@ -448,7 +457,7 @@ export class OverworldScene {
         ? { label: 'Account', value: 'account' }
         : null;
     g.ui.showMenu('MENU', [
-      { label: g.state.player.name + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
+      { label: g.state.player.name + ' · ' + DIFFICULTY_LABELS[difficultyOf(g.state)] + ' · ' + badges + ' badges · ' + mins + 'm', value: null, disabled: true },
       { label: this.map.name, value: null, disabled: true },
       { label: 'Bag', value: 'bag' },
       { label: 'Party', value: 'party' },

@@ -12,6 +12,7 @@ import { ITEMS } from '../data/items.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './state.mjs';
+import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { EVENTS, QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { CHAPTERS } from '../data/story.mjs';
@@ -390,9 +391,43 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- NPC systems ----------
+  // ADR-025 §4 (Candy Coach): a repeatable, no-stakes 1v1 spar in every
+  // Pokemon Center (the NPC only exists while the House Rule is on — see
+  // loadMap's gate in overworld.mjs). The Coach's partner fights at (your
+  // highest level - 2); a win awards one XP Candy. A loss costs nothing
+  // (BattleScene friendly flag) and the spar can be re-run immediately.
+  startSpar(npc) {
+    const g = this.game;
+    const sayLines = (cb) => g.ui.say(npc.dialogue.map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
+    const level = sparLevelFor(g.state);
+    if (!level) { sayLines(null); return; }
+    sayLines(() => {
+      g.ui.showMenu('Spar with the Coach? (Partner: Lv ' + level + ' ' + SPECIES[npc.sparSpecies].name + ')', [
+        { label: 'Spar', value: 'yes' },
+        { label: 'Not now', value: 'no' },
+      ], (v) => {
+        if (v !== 'yes') return;
+        const foe = makeMon(npc.sparSpecies, level, SPECIES, MOVES);
+        g.scenes.push(new BattleScene({
+          kind: 'wild', foe, returnTo: this, friendly: true, uncatchable: true,
+          rt: g.state.settings.battleStyle !== 'classic',
+          onEnd: (won) => {
+            if (won) {
+              g.state.bag.xpcandy = (g.state.bag.xpcandy || 0) + 1;
+              g.ui.say(['Clean work — that is a win in my book.', 'Here: one XP Candy. Winners earn one every time. Come back whenever you want more reps.'], null, npc.name);
+            } else {
+              g.ui.say(['Good reps. The nurse will patch your team up — then come back and we go again.'], null, npc.name);
+            }
+          },
+        }));
+      });
+    });
+  },
+
   sysNpc(npc) {
     const g = this.game;
     const sayLines = (cb) => g.ui.say(npc.dialogue.map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
+    if (npc.sparCoach) { this.startSpar(npc); return true; }
     if (npc.event) {
       if (!g.state.story.flags['evdone_' + npc.event]) {
         g.state.story.flags['evdone_' + npc.event] = true;

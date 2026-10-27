@@ -28,7 +28,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 
 const MAX_DEPTH = 16;
-const CURRENT_SCHEMA_VERSION = 1; // server accepts exactly the current version (no v0 shipped publicly)
+const CURRENT_SCHEMA_VERSION = 2; // server accepts exactly the current version (v1 saves migrate client-side before sync)
 const DEX_MAX = 1025; // dex honestly tracks all 1,025 (ADR-006)
 
 // --- table loading + pinning (C10(i), EA V13) ---
@@ -212,7 +212,9 @@ function checkStory(story, errors) {
   if (!isPlainObj(p) || typeof p.map !== 'string' || p.map.length > 64 || !isInt(p.x, -9999, 9999) || !isInt(p.y, -9999, 9999) || !['up', 'down', 'left', 'right'].includes(p.dir)) {
     errors.push('bad-position');
   }
-  if (!['easy', 'normal', 'hard'].includes(story.difficulty)) errors.push('bad-difficulty');
+  // ADR-025 §4: difficulty modes renamed at schema v2 (client migrates
+  // 'easy'/'normal'/'hard' -> 'story'/'classic'/'challenge' on load).
+  if (!['story', 'classic', 'challenge'].includes(story.difficulty)) errors.push('bad-difficulty');
   // WS6/WS10: campaign state — quest/arc progress keyed by ids from the
   // build's quest table; values are the closed enum active|complete.
   if (story.quests !== undefined) {
@@ -261,6 +263,18 @@ function checkSettings(s, errors) {
   for (const k of ['musicVol', 'sfxVol']) if (s[k] !== undefined && (typeof s[k] !== 'number' || s[k] < 0 || s[k] > 1)) errors.push('bad-setting:' + k);
   if (s.keymap !== undefined && !(s.keymap === null || isPlainObj(s.keymap))) errors.push('bad-setting:keymap');
   if (s.hudScale !== undefined && (typeof s.hudScale !== 'number' || s.hudScale < 0.5 || s.hudScale > 2)) errors.push('bad-setting:hudScale');
+  // ADR-025 §4: House Rules — a closed set of six boolean toggles.
+  if (s.houseRules !== undefined) {
+    const HOUSE_RULE_KEYS = ['steadyDamage', 'mercifulFoes', 'fastLearner', 'generousWorld', 'candyCoach', 'skipIntro'];
+    if (!isPlainObj(s.houseRules)) errors.push('bad-setting:houseRules');
+    else {
+      const hdk = hasDangerousKey(s.houseRules);
+      if (hdk) errors.push('dangerous-key:' + hdk);
+      else for (const k of Object.keys(s.houseRules)) {
+        if (!HOUSE_RULE_KEYS.includes(k) || typeof s.houseRules[k] !== 'boolean') { errors.push('bad-setting:houseRules'); break; }
+      }
+    }
+  }
 }
 
 // --- anomaly heuristics: structurally valid but impossible => accepted-but-logged ---
@@ -398,6 +412,9 @@ export function validateSave(data) {
     if (typeof mt.location !== 'string' || mt.location.normalize('NFKC').length > 64 || !SAFE_TEXT.test(mt.location.normalize('NFKC'))) {
       errors.push('bad-meta-location:' + NAME_CHARSET_NOTE);
     }
+    // ADR-025: Pure Run ribbon flag + Second Journey counter (Phase 6).
+    if (mt.houseRulesTouched !== undefined && typeof mt.houseRulesTouched !== 'boolean') errors.push('bad-meta-house-rules');
+    if (mt.ngPlus !== undefined && !isInt(mt.ngPlus, 0, 999)) errors.push('bad-meta-ngplus');
   }
 
   if (!errors.length) {

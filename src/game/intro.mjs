@@ -6,6 +6,7 @@
 
 import { INTRO_SCRIPT } from '../data/dialogue.mjs';
 import { makeMon, dexRegister } from './state.mjs';
+import { houseRule } from './rules.mjs';
 import { SPECIES } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
@@ -19,7 +20,11 @@ export class IntroScene {
     this._startHeld = 0;
     this.game.ui.log.push({ ui: 'intro' });
     const g = this.game;
-    if (g.skipIntroVeteran && !g.ui.headless) {
+    // ADR-025 §4: the Skip Intro House Rule earns the same veteran offer
+    // (offered, never silent — the toggle changes who qualifies, not the
+    // shape of the choice).
+    const canSkip = g.skipIntroVeteran || houseRule(g.state, 'skipIntro');
+    if (canSkip && !g.ui.headless) {
       // P1/C5: offered, never silent — default OFF (watch the intro).
       this.step = 'offer-skip';
       g.ui.showMenu('A save already exists.', [
@@ -31,7 +36,7 @@ export class IntroScene {
       });
       return;
     }
-    if (g.skipIntroVeteran) { this.finishIntro(); return; } // headless: keep harness timing
+    if (canSkip) { this.finishIntro(); return; } // headless: keep harness timing
     this.begin();
   }
 

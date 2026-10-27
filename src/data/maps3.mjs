@@ -1824,6 +1824,11 @@ export const MAPS3 = {
       { x: 4, y: 2, name: 'NURSE', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Pokemon Center! Let me heal your team..."], heal: true,
         afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
+      // ADR-025 §4: Sparring Coach — see maps.mjs center (same placement;
+      // the scene fields him only while the Candy Coach rule is on).
+      { x: 2, y: 2, name: 'SPARRING COACH', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
+        sparCoach: true, sparSpecies: 'machop',
+        dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
       { x: 7, y: 2, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Someone's PC — Pokemon Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
       { x: 2, y: 3, name: 'WAITING TRAINER', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',

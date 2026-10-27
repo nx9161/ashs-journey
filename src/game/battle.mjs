@@ -13,6 +13,10 @@ import {
 import { roll, intIn } from '../engine/rng.mjs';
 import { TILE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
+import {
+  trainerLevelFor, tuneFoeMon, effectiveAiFor, damageRandomFor,
+  xpMultFor, moneyMultFor, catchRateMultFor,
+} from './rules.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { SLICE_CAPSTONE } from '../data/dialogue.mjs';
 import { typePill } from './ui.mjs';
@@ -59,6 +63,8 @@ export class BattleScene {
     this.safari = !!opts.safari; // Safari Zone: no ally actions, BALL/BAIT/ROCK/RUN
     this.onEnd = opts.onEnd || null; // story-event continuation callback
     this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
+    this.friendly = !!opts.friendly; // no-stakes battle (Candy Coach spar): defeat costs nothing
+    this.foeAi = null; // ADR-025: effective foe AI class, resolved in enter() via rules.mjs
     this.onSafariAction = opts.onSafariAction || null; // overworld spends a step per action
     this.safariBait = false;
     this.safariRock = false;
@@ -82,9 +88,13 @@ export class BattleScene {
     g.audio.playMusic(this.kind === 'trainer' ? 'battle-trainer-theme' : 'battle-wild-theme', { area: false });
     if (this.kind === 'trainer') {
       const t0 = this.trainer.team[0];
-      this.foeMon = makeMon(t0.species, t0.level, SPECIES, MOVES);
+      // ADR-025 §4: difficulty levers land at instantiation — trainer team
+      // levels (rules.trainerLevelFor) and foe IV treatment (tuneFoeMon).
+      this.foeMon = makeMon(t0.species, trainerLevelFor(g.state, this.trainer, t0.level), SPECIES, MOVES);
       if (t0.nickname) this.foeMon.nickname = t0.nickname; // e.g. the duo's named mons
     }
+    tuneFoeMon(this.foeMon, g.state);
+    this.foeAi = effectiveAiFor(g.state, this.trainer);
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
     this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
@@ -511,7 +521,7 @@ export class BattleScene {
     // GD balance: gym-leader opener — a leader with a self-buff setup move
     // opens with it (classic Brock Defense Curl): gives the player a free
     // turn, teaches setup play, and makes the fight about strategy.
-    if (this.trainer && this.trainer.ai === 'opener-setup' && this.turn === 1) {
+    if (this.trainer && this.foeAi === 'opener-setup' && this.turn === 1) {
       const setup = usable.find((i) => {
         const mv = MOVES[this.foe.moves[i].id];
         return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
@@ -520,8 +530,9 @@ export class BattleScene {
     }
     // Gen-1 AI tempering (ADR-018): ordinary trainers pick near-randomly —
     // the original's AI rarely optimizes. Leaders (ai:'smart') and the
-    // Elite Four prefer super-effective lines.
-    const smart = this.trainer && (this.trainer.ai === 'smart' || this.trainer.ai === 'opener-setup');
+    // Elite Four prefer super-effective lines. ADR-025: this.foeAi is the
+    // difficulty-resolved class (Story flattens, Challenge promotes).
+    const smart = this.trainer && (this.foeAi === 'smart' || this.foeAi === 'opener-setup');
     if (!smart) {
       return { type: 'move', idx: usable[Math.floor(g.rng.battle() * usable.length)] };
     }
@@ -781,7 +792,7 @@ export class BattleScene {
         dmg = 0;
         for (let hi = 0; hi < hits; hi++) {
           dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-            { stab, effectiveness: eff, crit, random: gen1Random(g.rng.battle), burn, physical: mv.cat === 'physical' });
+            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical' });
         }
         if (hits > 1) this._hitCount = hits;
       }
@@ -1057,7 +1068,7 @@ export class BattleScene {
       this.trainerIdx++;
       if (this.trainerIdx < this.trainer.team.length) {
         const t = this.trainer.team[this.trainerIdx];
-        this.foe = makeMon(t.species, t.level, SPECIES, MOVES);
+        this.foe = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
         if (t.nickname) this.foe.nickname = t.nickname;
         this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
         this.participants = new Set([this.ally]); // XP pool resets per foe
@@ -1083,7 +1094,9 @@ export class BattleScene {
   awardXp(cb) {
     const g = this.game;
     const base = SPECIES[this.foe.speciesId].baseXp;
-    const total = xpYield(base, this.foe.level, this.kind === 'wild');
+    // ADR-025 §4: mode + Fast Learner XP multipliers scale the pool before
+    // the participant split (x1.25 Story; x1.5 Fast Learner; they compose).
+    const total = Math.max(1, Math.floor(xpYield(base, this.foe.level, this.kind === 'wild') * xpMultFor(g.state)));
     // Fidelity pack (ADR-018): XP splits among the participants who faced
     // THIS foe and are still standing — never the whole party for free.
     const parts = [...this.participants].filter((m) => m.hp > 0);
@@ -1215,6 +1228,12 @@ export class BattleScene {
   // ---- Catch sequence: the theater (gameux §4.2) ----
   beginCatch(ballId) {
     const g = this.game;
+    if (this.uncatchable && this.friendly) {
+      // Candy Coach spar (ADR-025): the Coach bats the ball away — the
+      // ball is NOT spent and the spar simply continues at command.
+      this.say('The Coach bats the ball away! "Hey — sparring partners are not for catching."', () => this.toCommand());
+      return;
+    }
     if (this.uncatchable) {
       // Scripted presence: balls are deflected — the story must resolve it.
       g.state.bag[ballId]--;
@@ -1241,6 +1260,8 @@ export class BattleScene {
     // Safari throws adjust the effective rate: rock doubles it, bait halves it.
     let rate = SPECIES[foe.speciesId].catchRate;
     if (this.safari) rate = Math.max(3, Math.min(255, Math.round(rate * (this.safariRock ? 2 : this.safariBait ? 0.5 : 1))));
+    // ADR-025 §4: Story's ball bonus (x1.1) scales the effective rate.
+    rate = Math.max(3, Math.min(255, Math.round(rate * catchRateMultFor(g.state))));
     const res = gen1Catch(foe.maxHp, foe.hp, rate, ballId, foe.status, g.rng.battle);
     this.catchState.willCatch = res.caught;
     this.catchState.need = res.caught ? 3 : res.shakes;
@@ -1349,14 +1370,16 @@ export class BattleScene {
     const g = this.game;
     const t = this.trainer;
     this.state = 'victory';
-    g.state.player.money += t.reward;
+    // ADR-025 §4: Generous World scales prize money (x1.5).
+    const prize = Math.floor(t.reward * moneyMultFor(g.state));
+    g.state.player.money += prize;
     g.state.story.flags['beat_' + t.id] = true;
     // Yellow homage: winning with the partner conscious leaves it buzzing.
     if (g.state.party.some((m) => m.speciesId === 'partner' && m.hp > 0)) {
       g.state.pikachu.mood = 'excited';
     }
     // No battle-message here: the capstone dialogue below ends the battle exactly once.
-    this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + t.reward + '.';
+    this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
     this.msgOpen = false;
     if (t.badge) {
       if (!g.state.badges.kanto.includes(t.badge)) g.state.badges.kanto.push(t.badge);
@@ -1380,6 +1403,9 @@ export class BattleScene {
 
   finishDefeat() {
     const g = this.game;
+    // Friendly battles (Candy Coach spar, ADR-025): a loss costs nothing —
+    // no money halving, no Center warp. onEnd still fires with won=false.
+    if (this.friendly) { this.endBattle(false); return; }
     // Defeat: fade -> Pokemon Center (overworld, healed, money halved) — architecture §2.2
     g.state.pikachu.mood = 'sad'; // Yellow homage: the partner hates losing
     g.state.player.money = Math.floor(g.state.player.money / 2);

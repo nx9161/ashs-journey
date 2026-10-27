@@ -16,7 +16,7 @@
 // local) — push, claimGuest, queue, conflict-sheet, and same-device re-login
 // never block on network.
 
-import { validateSave } from '../save/schema.mjs'; // stripped at build; global in the bundle
+import { validateSave, migrate } from '../save/schema.mjs'; // stripped at build; global in the bundle
 
 const SYNC = {
   activeSlot: 1,
@@ -383,7 +383,9 @@ const SYNC_IMPL = {
   },
 
   validPayload(p) {
-    try { return validateSave(p).ok; } catch (e) { return false; }
+    // Migrate first (store.load parity): a legacy v1 cloud save upgrades
+    // in place instead of being rejected after the v2 bump (ADR-025).
+    try { const m = migrate(p); return !!m && validateSave(m).ok; } catch (e) { return false; }
   },
 
   pushPayload(game, slot, payload, expectedVersion, done) {

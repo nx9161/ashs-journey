@@ -66,6 +66,27 @@ Object.assign(Game.prototype, {
       }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
       return;
     }
+    if (it.xpBoost) { // XP Candy (ADR-025 §4): fixed XP, Rare Candy shape
+      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= 100 }));
+      targets.push({ label: 'Back', value: -1 });
+      g.ui.showMenu('Use XP Candy on...', targets, (t) => {
+        if (t === null || t === -1) { finish(); return; }
+        const m = g.state.party[t];
+        g.state.bag[id]--;
+        const before = m.level;
+        m.xp += it.xpBoost;
+        while (m.level < 100 && m.xp >= xpForLevel(SPECIES[m.speciesId].growth, m.level + 1)) m.level++;
+        if (m.level > before) {
+          this.recalcMon(m, true);
+          g.audio.playSfx('levelup');
+          g.ui.say([displayName(m, SPECIES) + ' gained ' + it.xpBoost + ' XP and grew to Lv ' + m.level + '!'], () => { this.queueEvolution(m); finish(); });
+        } else {
+          g.audio.playSfx('heal');
+          g.ui.say([displayName(m, SPECIES) + ' gained ' + it.xpBoost + ' XP!'], () => finish());
+        }
+      }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
+      return;
+    }
     if (it.pocket === 'medicine') {
       const targets = g.state.party.map((m, i) => {
         let dis = false;

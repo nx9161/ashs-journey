@@ -612,7 +612,8 @@ const qaDriver = `
     ['empty object', '{}', false],
     ['json null', 'null', false],
     ['json array', '[]', false],
-    ['bad schema version', mutate(function(o){ o.v = 2; }), false],
+    ['bad schema version', mutate(function(o){ o.v = 3; }), false], // ADR-025: current is v2; v3 is from the future
+    ['v1 save migrates and loads (ADR-025)', mutate(function(o){ o.v = 1; o.story.difficulty = 'normal'; delete o.settings.houseRules; delete o.meta.houseRulesTouched; delete o.meta.ngPlus; }), true],
     ['v0 with missing player (migrate then reject)', mutate(function(o){ o.v = 0; delete o.player; }), false],
     ['unknown top-level key', mutate(function(o){ o.hax = 1; }), false],
     ['__proto__ pollution key', '{"v":1,"__proto__":{"polluted":true},"player":{"name":"A"},"party":[],"boxes":{},"dex":{},"badges":{"kanto":[]},"story":{"position":{}},"bag":{},"meta":{}}', false],

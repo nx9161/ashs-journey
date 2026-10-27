@@ -1,4 +1,4 @@
-// schema.mjs — save schema v1 validation + migration.
+// schema.mjs — save schema validation + migration (current: v2).
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
 
 import { SCHEMA_VERSION } from '../game/state.mjs';
@@ -44,13 +44,46 @@ export function validateSave(data) {
   return { ok: errors.length === 0, errors };
 }
 
-// v0 -> v1 migration chain. v0 never shipped publicly; stub kept for the chain.
+// Migration chain. v0 never shipped publicly; stub kept for the chain.
+// v1 -> v2 (ADR-025 Phase 1): difficulty modes renamed to the decided set
+// ('easy'->'story', 'normal'->'classic', 'hard'->'challenge'; the shipped
+// client only ever wrote 'normal'), settings.houseRules + the meta fields
+// land with defaults. Defaults are also filled on any v2 load (§7: old
+// saves open clean), so partial saves can never reach the game half-shaped.
+const DIFFICULTY_V1_TO_V2 = { easy: 'story', normal: 'classic', hard: 'challenge' };
+const HOUSE_RULE_KEYS = ['steadyDamage', 'mercifulFoes', 'fastLearner', 'generousWorld', 'candyCoach', 'skipIntro'];
+
+export function fillV2Defaults(data) {
+  if (isObj(data.story)) {
+    if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
+      data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';
+    }
+  }
+  if (isObj(data.settings)) {
+    if (!isObj(data.settings.houseRules)) data.settings.houseRules = {};
+    for (const k of HOUSE_RULE_KEYS) {
+      if (typeof data.settings.houseRules[k] !== 'boolean') data.settings.houseRules[k] = false;
+    }
+  }
+  if (isObj(data.meta)) {
+    if (typeof data.meta.houseRulesTouched !== 'boolean') data.meta.houseRulesTouched = false;
+    if (!Number.isInteger(data.meta.ngPlus) || data.meta.ngPlus < 0) data.meta.ngPlus = 0;
+  }
+  return data;
+}
+
 export function migrate(data) {
   if (!isObj(data)) return null;
   if (data.v === 0) {
     data.v = 1;
     data.facilities = data.facilities || { registry: [], unlocked: [] };
     data.badges = data.badges || { kanto: [], orange: [], johto: [], symbols: [null, null, null, null, null, null, null] };
+  }
+  if (data.v === 1) {
+    data.v = 2;
+    fillV2Defaults(data);
+  } else if (data.v === 2) {
+    fillV2Defaults(data);
   }
   return data;
 }

@@ -106,8 +106,16 @@ catchRate 45, commons 255/235/190.
 
 1. **Poké Mart / ball shop** — 13 balls cover the slice; a real economy (Mart,
    sellables, Amulet-Coin-equivalent) needs Game UI/UX shop screens.
-2. **Difficulty modes** (Normal/Challenge/Easy per §5) — data hooks exist
-   (`story.difficulty`), not wired.
+2. **Difficulty modes** — WIRED 2026-10-27 (Rejuvenation Phase 1, ADR-025
+   §4; supersedes the §5 names): `story.difficulty` ∈ story/classic/challenge,
+   resolved in `src/game/rules.mjs`. Threat-side only — Story: trainer
+   levels −2 (floor 1), foe IVs 16, standard leader AI, RT foe cooldowns
+   ×1.1, XP ×1.25, catch rate ×1.1; Challenge: leaders +2 with 'smart'
+   selection, RT foe cooldowns ×0.9; Classic = authored values (the
+   sim-verified baseline — no sim deltas in Classic). House Rules add the
+   player-side toggles (Steady Damage roll 255/255, Merciful Foes IV 16,
+   Fast Learner XP ×1.5, Generous World money ×1.5, Candy Coach, Skip
+   Intro). Proofs: tests/rejuv-phase1-checks.mjs (42 checks).
 3. **Route-trainer sight lines** — IMPLEMENTED in the Yellow-authenticity
    update (`feat/yellow-authenticity`): `sight: { dir, range }` cones on all 6
    route trainers (Brock stays talk-only); spot beat (500ms `!` + original

@@ -20,6 +20,10 @@ import { ITEMS, POCKETS, BALLS } from '../data/items.mjs';
 import { MAPS } from '../data/maps.mjs';
 import { CHAPTERS, BONUS_SHELF, chapterOf } from '../data/story.mjs';
 import { displayName, dexCaughtCount, defaultState } from './state.mjs';
+import {
+  DIFFICULTY_MODES, DIFFICULTY_LABELS, DIFFICULTY_RANK, HOUSE_RULE_DEFS,
+  difficultyOf, activeHouseRules,
+} from './rules.mjs';
 import { SaveStore, freshState } from '../save/store.mjs';
 import { SFX } from '../engine/audio.mjs';
 
@@ -379,8 +383,14 @@ export class Game {
     // Settings are player preferences, not save data: options chosen on the
     // title screen (text speed, battle style, mute...) survive a new game.
     const keepSettings = this.state && this.state.settings;
+    // ADR-025 §4: the difficulty mode is likewise picked in Options — a
+    // mode chosen on the title screen carries into the new run.
+    const keepDifficulty = this.state && this.state.story ? difficultyOf(this.state) : 'classic';
     this.state = freshState();
     if (keepSettings) this.state.settings = keepSettings;
+    this.state.story.difficulty = keepDifficulty;
+    // A run that STARTS with a House Rule on has enabled one: no Pure Run.
+    if (activeHouseRules(this.state).length) this.state.meta.houseRulesTouched = true;
     this.state.player.name = 'ASH';
     this.rng = makeRngStreams(nextSeed());
     this.skipIntroVeteran = this.store.exists();
@@ -773,8 +783,16 @@ export class Game {
     const badges = g.state.badges.kanto.length;
     const mins = Math.floor((g.state.player.playtimeSec || 0) / 60);
     const when = g.state.meta.updatedAt ? new Date(g.state.meta.updatedAt).toLocaleString() : 'never';
+    // ADR-025 §4: the save summary carries the mode + House Rules state —
+    // "Pure Run" while no rule has ever been enabled on this save.
+    const activeRules = activeHouseRules(g.state);
+    const modeLine = 'Mode: ' + DIFFICULTY_LABELS[difficultyOf(g.state)] + ' · '
+      + (!g.state.meta.houseRulesTouched ? 'Pure Run'
+        : activeRules.length ? 'Rules: ' + activeRules.join(', ')
+        : 'House Rules touched');
     g.ui.showMenu('Save', [
       { label: g.state.meta.location + ' · ' + mins + 'm · ' + badges + ' badges · Dex ' + caught, value: null, disabled: true },
+      { label: modeLine, value: null, disabled: true },
       { label: 'Last saved: ' + when, value: null, disabled: true },
       { label: 'Sync: guest-local (Track B: cloud)', value: null, disabled: true },
       { label: 'Save now', value: 'save' },
@@ -826,6 +844,8 @@ export class Game {
       { label: 'SFX volume: ' + Math.round(s.sfxVol * 100) + '%', value: 'sfx' },
       { label: 'Battle animations: ' + yn(s.battleAnims), value: 'banim' },
       { label: 'Battle style: ' + (s.battleStyle === 'classic' ? 'CLASSIC (turns)' : 'REAL-TIME'), value: 'bstyle' },
+      { label: 'Difficulty: ' + DIFFICULTY_LABELS[difficultyOf(g.state)], value: 'diff' },
+      { label: 'House Rules', value: 'hrules' },
       { label: 'Screen shake: ' + yn(s.shake), value: 'shake' },
       { label: 'Vibration: ' + yn(s.vibration), value: 'vib' },
       { label: 'Autosave: ' + yn(s.autosave), value: 'asave' },
@@ -854,6 +874,8 @@ export class Game {
       else if (v === 'sfx') { s.sfxVol = s.sfxVol >= 0.99 ? 0 : Math.round((s.sfxVol + 0.1) * 10) / 10; g.audio.setSfxVolume(s.sfxVol); }
       else if (v === 'banim') s.battleAnims = !s.battleAnims;
       else if (v === 'bstyle') { s.battleStyle = s.battleStyle === 'classic' ? 'rt' : 'classic'; g.ui.toast('Battle style: ' + (s.battleStyle === 'classic' ? 'Classic turns' : 'Real-time')); }
+      else if (v === 'diff') { g.openDifficultyMenu(); return; }
+      else if (v === 'hrules') { g.openHouseRulesMenu(); return; }
       else if (v === 'shake') s.shake = !s.shake;
       else if (v === 'vib') s.vibration = !s.vibration;
       else if (v === 'asave') s.autosave = !s.autosave;
@@ -900,6 +922,57 @@ export class Game {
       g.saveGame(true);
       g.openOptions();
     }, { menuClass: 'syswin', remember: 'options' });
+  }
+
+  // ADR-025 §4: the run's difficulty mode. Lowering is free any time;
+  // RAISING locks once the first badge is earned (a run's honors stay
+  // honest) — locked raises render as disabled rows (the menu buzzes).
+  openDifficultyMenu() {
+    const g = this;
+    const cur = difficultyOf(g.state);
+    const locked = ((g.state.badges && g.state.badges.kanto) || []).length >= 1;
+    const rows = DIFFICULTY_MODES.map((m) => ({
+      label: DIFFICULTY_LABELS[m] + (m === cur ? '  (current)' : ''),
+      value: m,
+      disabled: locked && DIFFICULTY_RANK[m] > DIFFICULTY_RANK[cur],
+    }));
+    if (locked) rows.push({ label: 'Badge earned: difficulty can only be lowered now.', value: null, disabled: true });
+    rows.push({ label: 'Back', value: 'back' });
+    g.ui.showMenu('Difficulty', rows, (v) => {
+      if (!v || v === 'back') { g.openOptions(); return; }
+      if (v !== cur) {
+        g.state.story.difficulty = v;
+        g.saveGame(true);
+        g.ui.toast('Difficulty: ' + DIFFICULTY_LABELS[v]);
+      }
+      g.openOptions();
+    }, { menuClass: 'syswin', remember: 'options-difficulty' });
+  }
+
+  // ADR-025 §4: House Rules — the six player-side modifier toggles.
+  // Turning one ON (ever) sets meta.houseRulesTouched: the save's
+  // "Pure Run" ribbon is the only thing modifiers ever cost.
+  openHouseRulesMenu() {
+    const g = this;
+    if (!g.state.settings.houseRules || typeof g.state.settings.houseRules !== 'object') {
+      g.state.settings.houseRules = {
+        steadyDamage: false, mercifulFoes: false, fastLearner: false,
+        generousWorld: false, candyCoach: false, skipIntro: false,
+      };
+    }
+    const hr = g.state.settings.houseRules;
+    const rows = HOUSE_RULE_DEFS.map((d) => ({
+      label: d.label + ': ' + (hr[d.key] ? 'ON' : 'OFF'),
+      value: d.key,
+    }));
+    rows.push({ label: 'Back', value: 'back' });
+    g.ui.showMenu('House Rules', rows, (v) => {
+      if (!v || v === 'back') { g.openOptions(); return; }
+      hr[v] = !hr[v];
+      if (hr[v]) g.state.meta.houseRulesTouched = true;
+      g.saveGame(true);
+      g.openHouseRulesMenu();
+    }, { menuClass: 'syswin', remember: 'options-houserules' });
   }
 }
 

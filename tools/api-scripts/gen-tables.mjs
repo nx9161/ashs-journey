@@ -1,7 +1,8 @@
 // gen-tables.mjs — emit api/_lib/data/tables.json from the game's data modules.
-// Run from the repo root: `node api/scripts/gen-tables.mjs` (writes the snapshot)
-// or `node api/scripts/gen-tables.mjs --check` (CI: fail if the committed snapshot
-// does not match the current src/data — the validator's pinning contract).
+// Run from the repo root: `node tools/api-scripts/gen-tables.mjs` (writes the
+// snapshot) or `node tools/api-scripts/gen-tables.mjs --check` (CI: fail if
+// the committed snapshot does not match the current src/data — the
+// validator's pinning contract).
 //
 // tablesVersion = sha256 over the canonical serialization of the tables. The
 // validator recomputes it at startup and fails closed on any skew, so the API
@@ -14,7 +15,10 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', '..');
-const OUT = join(HERE, '..', 'lib', 'data', 'tables.json');
+// Repaired 2026-10-27 (Rejuvenation Phase 1): this pointed at
+// tools/lib/data since the api/lib -> api/_lib move, so regeneration had
+// been silently impossible; the validator reads api/_lib/data/tables.json.
+const OUT = join(ROOT, 'api', '_lib', 'data', 'tables.json');
 
 const { SPECIES } = await import(join(ROOT, 'src', 'data', 'species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src', 'data', 'species2.mjs'));
@@ -61,7 +65,7 @@ if (process.argv.includes('--check')) {
   if (committed.tablesVersion !== tablesVersion) {
     console.error(
       `tables.json is STALE: committed ${committed.tablesVersion.slice(0, 12)}… != ` +
-      `generated ${tablesVersion.slice(0, 12)}…. Run: node api/scripts/gen-tables.mjs`,
+      `generated ${tablesVersion.slice(0, 12)}…. Run: node tools/api-scripts/gen-tables.mjs`,
     );
     process.exit(1);
   }
