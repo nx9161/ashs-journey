@@ -40,6 +40,10 @@
   "outputDirectory": "public",
   "rewrites": [
     {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
       "source": "/api/auth/:a/:b",
       "destination": "/api/auth/[...all]"
     }
