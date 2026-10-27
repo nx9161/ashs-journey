@@ -75,6 +75,7 @@ Suites: `scripts/verify-slice.mjs` (133), `tests/fidelity-checks.mjs` (26),
 | Oak's Pokédex rating | Implemented | professor rating lines by caught count |
 | Game Freak diploma at 151 | Implemented | checkDiploma on the 151st catch |
 | Difficulty modes + House Rules (Rejuvenation P1, ADR-025) | Implemented | Story/Classic/Challenge wired via rules.mjs (levels/IV/AI/RT cooldowns/XP/catch levers); six House Rule toggles in Options; Candy Coach spar + XP Candy in every Center; Pure Run ribbon on the Save summary; owner's hands-on gate stands. Proofs: tests/rejuv-phase1-checks.mjs 44/44 |
+| Grounds — field effects (Rejuvenation P2, ADR-025) | Implemented | 15 Grounds in src/data/grounds.mjs, all 56 Kanto maps assigned (unmapped → Open); x1.2/x0.8 type factors inside the shared calcDamage path (both engines, symmetric); per-Ground twists in both engines (heal/cooldown/accuracy/crit/Speed/status-chance/dodge/projectile/lunge/movement); Story halves to x1.1/x0.9 and disables twists (R2, folded into battle.field at resolve); classic banner + RT banner/chip/backdrop tint; 8 gym exterior teaching signs; no save-shape change. Proofs: tests/rejuv-phase2-checks.mjs 42/42 (incl. real-browser RT/classic damage parity) |
 
 ## Yellow exclusives
 | Feature | Status | Proof / note |

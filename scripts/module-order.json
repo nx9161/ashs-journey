@@ -25,6 +25,7 @@
  "src/data/story.mjs",
  "src/data/story-kanto.mjs",
  "src/data/merge.mjs",
+ "src/data/grounds.mjs",
  "src/game/state.mjs",
  "src/game/rules.mjs",
  "src/save/schema.mjs",

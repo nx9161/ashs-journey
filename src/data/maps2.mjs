@@ -46,7 +46,7 @@ export const MAPS2 = {
     ],
     signs: [
       { x: 3, y: 6, text: 'PEWTER CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
+      { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -288,7 +288,7 @@ export const MAPS2 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'CERULEAN CITY — A beautiful blue city, forever flowing like water.' },
-      { x: 8, y: 4, text: 'CERULEAN GYM — Leader: Misty. The tomboyish mermaid!' },
+      { x: 8, y: 4, text: 'CERULEAN GYM — Leader: Misty. The tomboyish mermaid! Inside lies a TIDE GROUND: Water moves hit harder and special moves ride the current — for Misty, and for you.' },
     ],
     npcs: [
       { x: 12, y: 1, name: 'BILL', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
@@ -501,7 +501,7 @@ export const MAPS2 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'VERMILION CITY — The port of the vermilion sunset. Ships from every sea dock here.' },
-      { x: 8, y: 4, text: 'VERMILION GYM — Leader: Lt. Surge. The Lightning Lieutenant!' },
+      { x: 8, y: 4, text: 'VERMILION GYM — Leader: Lt. Surge. The Lightning Lieutenant! Inside lies a VOLT GROUND: Electric moves hit harder and strike swift and true — for Surge, and for you.' },
     ],
     npcs: [
       { x: 5, y: 8, name: 'OFFICER RAE', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -698,7 +698,7 @@ export const MAPS2 = {
       '##################',
       '#......GG........#',
       '#..HH..GG....HH..#',
-      '#..HH..EE.........',
+      '#..HH.SEE.........',
       '.................#',
       '#......CC...HHHH.#',
       '.......CC....HHHH#',
@@ -722,6 +722,7 @@ export const MAPS2 = {
     ],
     signs: [
       { x: 14, y: 11, text: 'CELADON CITY — The rainbow city. Dept. Store, Game Corner, and perfume on every breeze.' },
+      { x: 6, y: 3, text: 'CELADON GYM — Leader: Erika. The nature-loving princess! Inside lies a MARSH GROUND: Grass moves hit harder and healing blooms fuller — for Erika, and for you.' },
     ],
     npcs: [
       { x: 5, y: 10, name: 'ELIAS', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',

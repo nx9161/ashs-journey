@@ -15,8 +15,12 @@ import { TILE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
 import {
   trainerLevelFor, tuneFoeMon, effectiveAiFor, damageRandomFor,
-  xpMultFor, moneyMultFor, catchRateMultFor,
+  xpMultFor, moneyMultFor, catchRateMultFor, difficultyOf,
 } from './rules.mjs';
+import {
+  resolveField, resolveFieldForGround, groundHealMult, groundStatusChanceBonus,
+  groundClassicAccuracy, groundCritBonus, groundMireSpeedMult,
+} from '../data/grounds.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { SLICE_CAPSTONE } from '../data/dialogue.mjs';
 import { typePill } from './ui.mjs';
@@ -76,6 +80,9 @@ export class BattleScene {
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.arena = opts.arena || null; // UI v2.3: explicit backdrop variant (fishing = 'water'); else derived in arenaKind()
+    this.groundPin = opts.ground || opts.groundId || null; // ADR-025 §1: scripted events may pin a Ground id explicitly
+    this.field = null;      // ADR-025 §1: battle.field — resolved ONCE in enter() from the battle's map
+    this.fieldBanner = null; // the Ground announcement line (null on Open Ground)
     this.trainerIdx = 0;
   }
 
@@ -95,6 +102,18 @@ export class BattleScene {
     }
     tuneFoeMon(this.foeMon, g.state);
     this.foeAi = effectiveAiFor(g.state, this.trainer);
+    // ADR-025 §1 (Grounds): resolve the Ground ONCE, from the map the
+    // battle starts in (returnTo is the overworld scene, whose mapId is
+    // the current map — indoors overrides outdoors by construction);
+    // story.position is the fallback for battles built without an
+    // overworld. R2 Story halving/twist-off is folded into the field by
+    // resolveField, so the engines never re-check difficulty.
+    const battleMapId = (this.returnTo && this.returnTo.mapId)
+      || (g.state.story && g.state.story.position && g.state.story.position.map) || null;
+    this.field = this.groundPin
+      ? resolveFieldForGround(this.groundPin, difficultyOf(g.state))
+      : resolveField(battleMapId, difficultyOf(g.state));
+    this.fieldBanner = this.field.banner;
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
     this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
@@ -135,17 +154,27 @@ export class BattleScene {
       // the engine guarantees the outcome (endure + weakened auto-catch).
       this.say('Wild ' + foeName + ' appeared!', () => {
         this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
-          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.toCommand());
+          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.announceGround(() => this.toCommand()));
         });
       });
     } else if (this.kind === 'trainer') {
-      // GB-era flow idiom: challenge line, then the lead's send-out.
+      // GB-era flow idiom: challenge line, then the lead's send-out, then
+      // the Ground announcement before the first command (ADR-025 §1).
       this.say('Trainer ' + this.trainer.name + ' wants to battle!', () => {
-        this.say(this.trainer.name + ' sent out ' + foeName + '!', () => this.toCommand());
+        this.say(this.trainer.name + ' sent out ' + foeName + '!', () => this.announceGround(() => this.toCommand()));
       });
     } else {
-      this.say('Wild ' + foeName + ' appeared!');
+      this.say('Wild ' + foeName + ' appeared!', () => this.announceGround(() => this.toCommand()));
     }
+  }
+
+  // ADR-025 §1: the Ground announcement — one line before the first
+  // command, shared by both engines (RT battles pass through the same
+  // enter() chain before rtInit). Open Ground shows nothing: no rules,
+  // no banner — the system teaches by contrast.
+  announceGround(cb) {
+    if (this.fieldBanner) this.say(this.fieldBanner, cb);
+    else if (cb) cb();
   }
 
   safariFleeCheck() {
@@ -569,6 +598,15 @@ export class BattleScene {
       const mon = side === 'ally' ? this.ally : this.foe;
       const stages = side === 'ally' ? this.allyStages : this.foeStages;
       const stats = this.effStats(mon, stages);
+      // ADR-025 §1 Mire (classic): Speed stat -10% for mons not
+      // Water/Grass/Ground-typed — applied to the turn-order stat
+      // resolution (beginTurn is the classic engine's stat entry point,
+      // so the RT engine's movement keeps its own -15% arena hook and
+      // the two never stack).
+      if (this.field && this.field.twist === 'mire') {
+        const types = mon.tempTypes || (mon.transformed ? mon.transformed.types : SPECIES[mon.speciesId].types);
+        stats.spe = Math.max(1, Math.floor(stats.spe * groundMireSpeedMult(this.field, types)));
+      }
       let priority = 0, move = null;
       if (action && action.type === 'move') {
         move = action.struggle ? { name: 'Struggle', type: 'normal', cat: 'physical', power: 50, acc: 100 } : MOVES[mon.moves[action.idx].id];
@@ -735,6 +773,10 @@ export class BattleScene {
     } else if (!mv.neverMiss) {
       const stageDelta = (atkStages.acc || 0) - (defStages.eva || 0);
       let p = ((mv.acc || 100) / 100) * accStageMultiplier(Math.max(-6, Math.min(6, stageDelta)));
+      // ADR-025 §1 classic twists at the accuracy hook: Storm/Volt
+      // Electric +5, Rubble physical +5, Grave/Mind status -10, Frost
+      // x0.95 (defender dodge). Applied before the 255/256 cap.
+      p = Math.max(0, groundClassicAccuracy(this.field, mv, p));
       if (p >= 1) p = 255 / 256;
       if (!roll(p, g.rng.battle)) {
         this.say(atkName + ' used ' + mv.name + '!', () => {
@@ -769,7 +811,7 @@ export class BattleScene {
         return;
       }
       const baseSpe = (atk.transformed ? atk.transformed.baseSpe : SPECIES[atk.speciesId].base.spe);
-      const crit = roll(critChance(baseSpe, { highCrit: !!mv.highcrit, focus: !!atk.focused }), g.rng.battle);
+      const crit = roll(critChance(baseSpe, { highCrit: !!mv.highcrit, focus: !!atk.focused, bonus: groundCritBonus(this.field, mv, baseSpe) }), g.rng.battle);
       // Gen 1 crits ignore ALL stat stages (raw stats both sides).
       const atkStat = mv.cat === 'physical'
         ? (crit ? atk.stats.atk : entry.stats.atk)
@@ -792,7 +834,7 @@ export class BattleScene {
         dmg = 0;
         for (let hi = 0; hi < hits; hi++) {
           dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical' });
+            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
         }
         if (hits > 1) this._hitCount = hits;
       }
@@ -859,7 +901,11 @@ export class BattleScene {
         // Status infliction (single status or Tri Attack's random pick).
         let statusRoll = efx.status;
         if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
-        if (statusRoll && def.hp > 0 && (!efx.chance || roll(efx.chance / 100, g.rng.battle))) {
+        // ADR-025 §1: Ember/Pyre (burn) and Venom (poison) twists add +10
+        // points to the infliction roll — only where the move can already
+        // inflict that status (no chance on the move = guaranteed, no roll).
+        const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+        if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
           if (statusRoll === 'confusion') {
             if (!def.confused) { def.confused = true; def.confusedTurns = 2 + Math.floor(g.rng.battle() * 4); msg2 = defName + ' became confused!'; }
           } else if (!def.status) {
@@ -949,7 +995,8 @@ export class BattleScene {
     }
     if (ef.heal) {
       if (target.hp >= target.maxHp) { done('But it failed!'); return; }
-      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal));
+      // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50%.
+      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal * groundHealMult(this.field)));
       done(tName + ' regained health!');
       return;
     }
@@ -1648,6 +1695,18 @@ export class BattleScene {
       y += rh;
       rh = Math.min(15, Math.ceil(rh * 1.45));
       row++;
+    }
+    // ADR-025 §1: the arena backdrop tint shifts toward the Ground — a
+    // flat palette shift of the EXISTING per-area backdrop (no new
+    // scenes, no gradients): one translucent flat wash in the Ground's
+    // tint over the drawn field. Guarded for the QA minimal-this call.
+    if (this.field && this.field.tint && r.ctx) {
+      const c = r.ctx;
+      c.save();
+      c.globalAlpha = 0.13;
+      c.fillStyle = this.field.tint;
+      c.fillRect(0, 0, w, h);
+      c.restore();
     }
   }
 

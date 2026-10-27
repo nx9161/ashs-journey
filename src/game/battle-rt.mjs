@@ -17,6 +17,10 @@ import { roll } from '../engine/rng.mjs';
 import { PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { displayName } from './state.mjs';
 import { damageRandomFor, catchRateMultFor, rtFoeCooldownMultFor } from './rules.mjs';
+import {
+  groundHealMult, groundStatusChanceBonus, groundCooldownMult,
+  groundProjectileMult, groundLungeMult, groundDodgeIframesBonus, groundMireMoveMult,
+} from '../data/grounds.mjs';
 import { typePill } from './ui.mjs';
 import { BattleScene } from './battle.mjs';
 
@@ -25,10 +29,13 @@ const ARENA = { x0: 26, y0: 56, x1: 454, y1: 258 }; // logical 480x320 space
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 function dist(ax, ay, bx, by) { return Math.hypot(bx - ax, by - ay); }
 
-function cooldownMs(mv, userSpe, foeSpe) {
+function cooldownMs(mv, userSpe, foeSpe, field) {
   // ADR-020 review formula: power/accuracy/speed-advantage scaled, clamped.
-  if (mv.cat === 'status') return 1500;
-  return clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200);
+  // ADR-025 §1 RT twists at this hook: Storm/Volt — Electric moves x0.85;
+  // Grave/Mind — status moves x1.25 (groundCooldownMult, field-resolved,
+  // so Story's twist-off is already folded in).
+  if (mv.cat === 'status') return Math.round(1500 * groundCooldownMult(field, mv));
+  return Math.round(clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200) * groundCooldownMult(field, mv));
 }
 
 Object.assign(BattleScene.prototype, {
@@ -205,7 +212,11 @@ Object.assign(BattleScene.prototype, {
       if (input.isHeld('down')) my += 1;
     }
     const parSlowed = this.ally.status === 'paralysis' ? 0.55 : 1;
-    let spd = (52 + allySpe * 0.55) * parSlowed;
+    // ADR-025 §1 Mire (RT): arena movement -15% for mons not
+    // Water/Grass/Ground-typed (symmetric — the foe step below uses the
+    // same helper on the foe's types).
+    const allyTypes = this.ally.tempTypes || (this.ally.transformed ? this.ally.transformed.types : SPECIES[this.ally.speciesId].types);
+    let spd = (52 + allySpe * 0.55) * parSlowed * groundMireMoveMult(this.field, allyTypes);
     if (rt.dodgeT > 0) spd *= 2.15;
     if (mx || my) {
       const len = Math.hypot(mx, my) || 1;
@@ -215,7 +226,7 @@ Object.assign(BattleScene.prototype, {
     }
     // Dodge roll: B while moving (or standing) — i-frames, 900ms cooldown.
     if (input.wasPressed('b') && rt.dodgeCd <= 0 && !allyAsleep) {
-      rt.dodgeT = 230; rt.iframes = 260; rt.dodgeCd = 900;
+      rt.dodgeT = 230; rt.iframes = 260 + groundDodgeIframesBonus(this.field); rt.dodgeCd = 900; // Frost twist: +40ms i-frames
       g.audio.playSfx('menu-move');
     }
     // Moves: slot keys fire directly (keyboard shortcut) — the rendered
@@ -257,7 +268,8 @@ Object.assign(BattleScene.prototype, {
     }
     rt.foeStrafeT -= dtms;
     if (rt.foeStrafeT <= 0) { rt.foeStrafeT = 700 + Math.random() * 900; rt.foeDir = Math.random() < 0.5 ? -1 : 1; }
-    const spd = (46 + foeSpe * 0.5) * (foe.status === 'paralysis' ? 0.55 : 1);
+    const foeTypes = foe.tempTypes || (foe.transformed ? foe.transformed.types : SPECIES[foe.speciesId].types);
+    const spd = (46 + foeSpe * 0.5) * (foe.status === 'paralysis' ? 0.55 : 1) * groundMireMoveMult(this.field, foeTypes);
     let vx = 0, vy = 0;
     if (d > want + 8) { vx = (rt.ax - rt.fx) / d; vy = (rt.ay - rt.fy) / d; }
     else if (d < want - 26) { vx = -(rt.ax - rt.fx) / d; vy = -(rt.ay - rt.fy) / d; }
@@ -317,7 +329,7 @@ Object.assign(BattleScene.prototype, {
     // ADR-025 §4: difficulty lives in THREAT speed — foe move cooldowns
     // scale with the mode (x1.1 Story / x1.0 Classic / x0.9 Challenge);
     // ally cooldowns are never scaled.
-    const cdBase = cooldownMs(mv, atkSpe, defSpe);
+    const cdBase = cooldownMs(mv, atkSpe, defSpe, this.field);
     rt.cds[side][slot.id] = side === 'foe' ? Math.round(cdBase * rtFoeCooldownMultFor(g.state)) : cdBase;
     const ax = side === 'ally' ? rt.ax : rt.fx, ay = side === 'ally' ? rt.ay : rt.fy;
     const dx = side === 'ally' ? rt.fx : rt.ax, dy = side === 'ally' ? rt.fy : rt.ay;
@@ -330,7 +342,8 @@ Object.assign(BattleScene.prototype, {
       rt.lunge = { side, t: 0, dur: 190, mv, idx, hitDone: false };
       return true;
     }
-    rt.projs.push({ x: ax, y: ay, tx: dx, ty: dy, speed: 300, mv, side, t: 0 });
+    // ADR-025 §1 Tide (RT): special-move projectile speed +15%.
+    rt.projs.push({ x: ax, y: ay, tx: dx, ty: dy, speed: 300 * groundProjectileMult(this.field, mv), mv, side, t: 0 });
     g.audio.playSfx('menu-move');
     return true;
   },
@@ -350,8 +363,9 @@ Object.assign(BattleScene.prototype, {
     }
     if (k >= 1) rt.lunge = null;
     else {
-      // Dash toward the defender.
-      const step = (340 * dtms) / 1000;
+      // Dash toward the defender. ADR-025 §1 Rubble (RT): physical
+      // lunge speed +15%.
+      const step = (340 * groundLungeMult(this.field, L.mv) * dtms) / 1000;
       const d = reach || 1;
       const nx = atkPos.x + ((defPos.x - atkPos.x) / d) * step;
       const ny = atkPos.y + ((defPos.y - atkPos.y) / d) * step;
@@ -428,7 +442,7 @@ Object.assign(BattleScene.prototype, {
       dmg = 0;
       for (let hi = 0; hi < hits; hi++) {
         dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical' });
+          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
       }
     }
     if (mv.cat === 'physical' && def.reflectT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
@@ -445,7 +459,10 @@ Object.assign(BattleScene.prototype, {
       if (efx.recoil) atk.hp = Math.max(0, atk.hp - Math.max(1, Math.floor(dmg * efx.recoil)));
       let statusRoll = efx.status;
       if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
-      if (statusRoll && def.hp > 0 && (!efx.chance || roll(efx.chance / 100, g.rng.battle))) {
+      // ADR-025 §1: Ember/Pyre (burn) / Venom (poison) +10 points, same
+      // hook as classic — only where the move can already inflict it.
+      const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+      if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
         if (statusRoll === 'confusion') { def.confused = true; def.confusedTurns = 3; }
         else if (!def.status) {
           def.status = statusRoll;
@@ -478,7 +495,8 @@ Object.assign(BattleScene.prototype, {
     const ef = mv.effect || {};
     const atkStages = side === 'ally' ? this.allyStages : this.foeStages;
     const defStages = side === 'ally' ? this.foeStages : this.allyStages;
-    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal)); return; }
+    // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50% (both engines).
+    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal * groundHealMult(this.field))); return; }
     if (ef.rest) { atk.hp = atk.maxHp; atk.status = 'sleep'; if (side === 'ally') this.rt.allySleepT = 2200; else this.rt.foeSleepT = 2200; return; }
     if (ef.substitute) { const c = Math.floor(atk.maxHp / 4); if (atk.subHp <= 0 && atk.hp > c) { atk.hp -= c; atk.subHp = c; } return; }
     if (ef.screen) { if (ef.screen === 'physical') atk.reflectT = 5; else atk.lightT = 5; return; }
@@ -710,7 +728,12 @@ Object.assign(BattleScene.prototype, {
     // Cooldown chips for the ally's four moves (bottom strip). Chip width is
     // derived from the actual view: the old fixed 108px assumed a 480-wide
     // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
-    const chipW = Math.floor((w - 24) / 4); // 4 chips, 3 gaps of 4, 6px margins
+    // ADR-025 §1: a persistent Ground chip sits NEXT TO the cooldown
+    // chips on the same bottom row for the whole RT fight (non-Open
+    // Grounds only — Open has no rules to show). It reserves its width
+    // from the row, so the four cooldown chips shrink to make room.
+    const groundChipW = this.field && this.field.id !== 'open' ? 96 : 0;
+    const chipW = Math.floor((w - 24 - (groundChipW ? groundChipW + 4 : 0)) / 4); // 4 chips, 3 gaps of 4, 6px margins
     const labelMax = Math.max(4, Math.min(10, Math.floor((chipW - 8) / 7)));
     for (let i = 0; i < 4; i++) {
       const slot = this.ally.moves[i];
@@ -730,12 +753,18 @@ Object.assign(BattleScene.prototype, {
       r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
       if (!ready && slot.pp > 0) {
         // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
-        const total = cooldownMs(mv, 50, 50);
+        const total = cooldownMs(mv, 50, 50, this.field);
         const frac = Math.max(0, Math.min(1, cd / total));
         c.fillStyle = PT_FRAME2;
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
       }
       if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#f84838', shadow: false });
+    }
+    if (groundChipW) {
+      const gx = 6 + 4 * (chipW + 4);
+      const gy = h - 26;
+      r.panel(gx, gy, groundChipW, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
+      r.text(('GROUND: ' + this.field.name.replace(/ Ground$/, '')).slice(0, 13), gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
     }
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;

@@ -182,7 +182,7 @@ export const MAPS3 = {
       '#.................',
       '#..HH......GG....#',
       '#..HH..S...GG....#',
-      '#..DD......EE....#',
+      '#..DD.....SEE....#',
       '#......CC........#',
       '#......CC........#',
       '#..FF......FF....#',
@@ -204,6 +204,7 @@ export const MAPS3 = {
     ],
     signs: [
       { x: 8, y: 6, text: 'SAFFRON CITY — The golden city at the heart of Kanto. Silph Co. HQ towers over all.' },
+      { x: 10, y: 7, text: 'SAFFRON GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
     ],
     npcs: [
       { x: 15, y: 9, name: 'SEER IVO', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -875,7 +876,7 @@ export const MAPS3 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'FUCHSIA CITY — The Safari City. Wild Pokemon roam free beyond the south gate.' },
-      { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master!' },
+      { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
     ],
     npcs: [
       { x: 10, y: 9, name: 'SAFARI WARDEN', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0c0c0', safariGate: true,
@@ -1280,7 +1281,7 @@ export const MAPS3 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'CINNABAR ISLAND — A volcanic isle of labs and legends. The sea here never quite cools.' },
-      { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST.' },
+      { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
     ],
     npcs: [
       { x: 15, y: 11, name: 'CAPT SALT', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -1428,7 +1429,7 @@ export const MAPS3 = {
     ],
     signs: [
       { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
-      { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto.' },
+      { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',

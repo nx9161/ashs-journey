@@ -767,7 +767,20 @@ function calcDamage(level, power, atk, def, opts) {
   // critical hit ignores the halving, like it ignores stat stages).
   const a = (o.burn && o.physical && !o.crit) ? Math.floor(atk / 2) : atk;
   const base = Math.floor(Math.floor(Math.floor((2 * effLevel) / 5 + 2) * power * a / def) / 50) + 2;
-  return Math.max(1, Math.floor(base * stab * eff * rand));
+  // Rejuvenation Phase 2 (ADR-025 §1): the Ground factor — the ONE place
+  // it applies, inside the shared damage path both engines call. The
+  // field (battle.field, resolved at battle start, Story halving already
+  // folded in) supplies effective boost/dampen factors for the move's
+  // type; hard caps x1.2 / x0.8 live in the Grounds data. Typeless calls
+  // (confusion self-hit: no field / no moveType passed) are untouched.
+  let gf = 1;
+  const f = o.field;
+  if (f && o.moveType) {
+    if (f.boostType && o.moveType === f.boostType) gf = f.boostFactor !== undefined ? f.boostFactor : 1.2;
+    else if (f.dampenType && o.moveType === f.dampenType) gf = f.dampenFactor !== undefined ? f.dampenFactor : 0.8;
+  }
+  if (o.groundFactor !== undefined) gf = o.groundFactor;
+  return Math.max(1, Math.floor(base * stab * eff * rand * gf));
 }
 
 function gen1Random(rng) { return (217 + Math.floor(rng() * 39)) / 255; }
@@ -780,6 +793,9 @@ function critChance(baseSpeed, opts) {
   const o = opts || {};
   let c = o.highCrit ? Math.min(255, baseSpeed * 4) / 256 : baseSpeed / 512;
   if (o.focus) c *= 4;
+  // Grounds (ADR-025 §1, Tide classic twist): an additive bonus the caller
+  // computes from the field (special moves: + base Speed/256).
+  if (o.bonus) c += o.bonus;
   return Math.min(1, c);
 }
 const STAB_MULT = 1.5;
@@ -8361,7 +8377,7 @@ const MAPS2 = {
     ],
     signs: [
       { x: 3, y: 6, text: 'PEWTER CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
+      { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -8603,7 +8619,7 @@ const MAPS2 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'CERULEAN CITY — A beautiful blue city, forever flowing like water.' },
-      { x: 8, y: 4, text: 'CERULEAN GYM — Leader: Misty. The tomboyish mermaid!' },
+      { x: 8, y: 4, text: 'CERULEAN GYM — Leader: Misty. The tomboyish mermaid! Inside lies a TIDE GROUND: Water moves hit harder and special moves ride the current — for Misty, and for you.' },
     ],
     npcs: [
       { x: 12, y: 1, name: 'BILL', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
@@ -8816,7 +8832,7 @@ const MAPS2 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'VERMILION CITY — The port of the vermilion sunset. Ships from every sea dock here.' },
-      { x: 8, y: 4, text: 'VERMILION GYM — Leader: Lt. Surge. The Lightning Lieutenant!' },
+      { x: 8, y: 4, text: 'VERMILION GYM — Leader: Lt. Surge. The Lightning Lieutenant! Inside lies a VOLT GROUND: Electric moves hit harder and strike swift and true — for Surge, and for you.' },
     ],
     npcs: [
       { x: 5, y: 8, name: 'OFFICER RAE', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -9013,7 +9029,7 @@ const MAPS2 = {
       '##################',
       '#......GG........#',
       '#..HH..GG....HH..#',
-      '#..HH..EE.........',
+      '#..HH.SEE.........',
       '.................#',
       '#......CC...HHHH.#',
       '.......CC....HHHH#',
@@ -9037,6 +9053,7 @@ const MAPS2 = {
     ],
     signs: [
       { x: 14, y: 11, text: 'CELADON CITY — The rainbow city. Dept. Store, Game Corner, and perfume on every breeze.' },
+      { x: 6, y: 3, text: 'CELADON GYM — Leader: Erika. The nature-loving princess! Inside lies a MARSH GROUND: Grass moves hit harder and healing blooms fuller — for Erika, and for you.' },
     ],
     npcs: [
       { x: 5, y: 10, name: 'ELIAS', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
@@ -11582,7 +11599,7 @@ const MAPS3 = {
       '#.................',
       '#..HH......GG....#',
       '#..HH..S...GG....#',
-      '#..DD......EE....#',
+      '#..DD.....SEE....#',
       '#......CC........#',
       '#......CC........#',
       '#..FF......FF....#',
@@ -11604,6 +11621,7 @@ const MAPS3 = {
     ],
     signs: [
       { x: 8, y: 6, text: 'SAFFRON CITY — The golden city at the heart of Kanto. Silph Co. HQ towers over all.' },
+      { x: 10, y: 7, text: 'SAFFRON GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
     ],
     npcs: [
       { x: 15, y: 9, name: 'SEER IVO', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -12275,7 +12293,7 @@ const MAPS3 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'FUCHSIA CITY — The Safari City. Wild Pokemon roam free beyond the south gate.' },
-      { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master!' },
+      { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
     ],
     npcs: [
       { x: 10, y: 9, name: 'SAFARI WARDEN', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0c0c0', safariGate: true,
@@ -12680,7 +12698,7 @@ const MAPS3 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'CINNABAR ISLAND — A volcanic isle of labs and legends. The sea here never quite cools.' },
-      { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST.' },
+      { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
     ],
     npcs: [
       { x: 15, y: 11, name: 'CAPT SALT', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -12828,7 +12846,7 @@ const MAPS3 = {
     ],
     signs: [
       { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
-      { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto.' },
+      { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
@@ -14988,6 +15006,267 @@ for (const ev of Object.values(EVENTS)) {
   for (const s of steps) {
     if (s.warp && s.warp.map === 'newisland') { s.warp.x = 8; s.warp.y = 9; }
   }
+}
+
+
+// ---- src/data/grounds.mjs ----
+// grounds.mjs — Rejuvenation Phase 2 (ADR-025 §1): Grounds (field effects).
+// Every battlefield has a Ground, derived at battle start from the map the
+// battle starts in (indoors overrides outdoors by construction). A Ground
+// is exactly three rules: one type at x1.2 damage, one type at x0.8, and
+// one twist. Hard caps (owner law): never stronger than x1.2 / x0.8, never
+// creates or removes an immunity, NO chip damage anywhere. Modifiers are
+// symmetric — the same factors apply to player and foe; there is no side
+// flag in this data shape, so none can be added silently.
+//
+// R2 (owner ruling, §9): on Story difficulty resolveField() halves the
+// type modifiers (x1.1 / x0.9) and disables twists entirely — the field
+// object handed to the engines already reflects that, so no engine ever
+// re-checks difficulty.
+//
+// Aliases (Volt/Marsh/Pyre/Spirit) share the RULES object of their parent
+// Ground by reference and keep only their own display name / banner /
+// tint, exactly as the spec's gym table decides.
+
+function rules(boostType, dampenType, twist) {
+  return { boostType, dampenType, twist };
+}
+const OPEN_RULES = rules(null, null, null);
+const BLOOM_RULES = rules('grass', 'fire', 'heal');
+const STORM_RULES = rules('electric', 'ground', 'storm');
+const MIRE_RULES = rules('ground', 'electric', 'mire');
+const GRAVE_RULES = rules('ghost', 'psychic', 'status');
+const EMBER_RULES = rules('fire', 'water', 'burn');
+const FROST_RULES = rules('ice', 'fire', 'frost');
+const TIDE_RULES = rules('water', 'electric', 'tide');
+const RUBBLE_RULES = rules('rock', 'grass', 'rubble');
+const MIND_RULES = rules('psychic', 'ghost', 'status');
+const VENOM_RULES = rules('poison', 'psychic', 'poison');
+
+function ground(id, name, r, banner, tint) {
+  return {
+    id, name, rules: r,
+    boostType: r.boostType, dampenType: r.dampenType, twist: r.twist,
+    banner, tint,
+  };
+}
+
+const GROUNDS = {
+  open: ground('open', 'Open Ground', OPEN_RULES, null, null),
+  bloom: ground('bloom', 'Bloom Ground', BLOOM_RULES,
+    'The arena is a Bloom Ground — Grass moves hit harder here, and healing blooms fuller.', '#58c94f'),
+  storm: ground('storm', 'Storm Ground', STORM_RULES,
+    'The arena is a Storm Ground — Electric moves hit harder here, and strike swift and true.', '#e8c832'),
+  mire: ground('mire', 'Mire Ground', MIRE_RULES,
+    'The arena is a Mire Ground — Ground moves hit harder here, and the mud drags at the unadapted.', '#8a6a42'),
+  grave: ground('grave', 'Grave Ground', GRAVE_RULES,
+    'The arena is a Grave Ground — Ghost moves hit harder here, and status rites falter.', '#7a5aa0'),
+  ember: ground('ember', 'Ember Ground', EMBER_RULES,
+    'The arena is an Ember Ground — Fire moves hit harder here, and burns catch more easily.', '#e06828'),
+  frost: ground('frost', 'Frost Ground', FROST_RULES,
+    'The arena is a Frost Ground — Ice moves hit harder here, and footing turns treacherous.', '#7ac2e8'),
+  tide: ground('tide', 'Tide Ground', TIDE_RULES,
+    'The arena is a Tide Ground — Water moves hit harder here, and special moves ride the current.', '#3a7ad0'),
+  rubble: ground('rubble', 'Rubble Ground', RUBBLE_RULES,
+    'The arena is a Rubble Ground — Rock moves hit harder here, and physical moves land true.', '#a8895a'),
+  mind: ground('mind', 'Mind Ground', MIND_RULES,
+    'The arena is a Mind Ground — Psychic moves hit harder here, and status rites falter.', '#c85a9a'),
+  venom: ground('venom', 'Venom Ground', VENOM_RULES,
+    'The arena is a Venom Ground — Poison moves hit harder here, and venom seeps in more easily.', '#9848a8'),
+  volt: ground('volt', 'Volt Ground', STORM_RULES,
+    'The arena is a Volt Ground — Electric moves hit harder here, and strike swift and true.', '#e8c832'),
+  marsh: ground('marsh', 'Marsh Ground', BLOOM_RULES,
+    'The arena is a Marsh Ground — Grass moves hit harder here, and healing blooms fuller.', '#58c94f'),
+  pyre: ground('pyre', 'Pyre Ground', EMBER_RULES,
+    'The arena is a Pyre Ground — Fire moves hit harder here, and burns catch more easily.', '#e06828'),
+  spirit: ground('spirit', 'Spirit Ground', MIRE_RULES,
+    'The arena is a Spirit Ground — Ground moves hit harder here, and the earth drags at the unadapted.', '#8a6a42'),
+};
+
+// map id -> groundId. Every Kanto map in the merged MAPS table is assigned
+// explicitly (56 unique ids across maps.mjs/maps2/maps3/maps4 — interiors
+// that are shared, 'center'/'mart', resolve Open). Unmapped ids fall back
+// to Open in groundForMap(), so a future map can never crash a battle.
+const MAP_GROUND = {
+  pallet: 'open',
+  route1: 'open',
+  viridian: 'open',
+  center: 'open',
+  route2: 'bloom', // Route 2 carries the Viridian Forest corridor in this build
+  pewter: 'open',
+  gym: 'rubble', // Pewter Gym — Brock
+  route3: 'bloom',
+  moon1: 'rubble',
+  moon2: 'rubble',
+  route4: 'bloom',
+  cerulean: 'open',
+  'gym-cerulean': 'tide', // Cerulean Gym — Misty
+  route5: 'bloom',
+  route6: 'bloom',
+  vermilion: 'open',
+  'gym-vermilion': 'volt', // Vermilion Gym — Lt. Surge
+  stanne: 'tide',
+  route11: 'bloom',
+  route7: 'bloom',
+  celadon: 'open',
+  'gym-celadon': 'marsh', // Celadon Gym — Erika
+  gamecorner: 'open',
+  hideout: 'open',
+  route8: 'bloom',
+  saffron: 'open',
+  'gym-saffron': 'mind', // Saffron Gym — Sabrina
+  dojo: 'open',
+  silph1: 'open',
+  silph2: 'open',
+  route9: 'rubble',
+  route10: 'rubble',
+  powerplant: 'storm',
+  rocktunnel: 'rubble',
+  lavender: 'open',
+  tower1: 'grave',
+  tower2: 'grave',
+  route12: 'tide',
+  route15: 'bloom',
+  fuchsia: 'open',
+  'gym-fuchsia': 'venom', // Fuchsia Gym — Koga
+  safari: 'mire',
+  route16: 'bloom',
+  route19: 'tide',
+  route20: 'tide',
+  seafoam: 'frost',
+  cinnabar: 'ember',
+  'gym-cinnabar': 'pyre', // Cinnabar Gym — Blaine
+  mansion: 'ember',
+  'gym-viridian': 'spirit', // Viridian Gym — Giovanni
+  route22: 'open',
+  victoryroad: 'rubble',
+  indigo: 'open',
+  league: 'open',
+  ceruleancave: 'rubble',
+  newisland: 'tide',
+};
+
+function groundForMap(mapId) {
+  const id = mapId ? MAP_GROUND[mapId] : null;
+  return GROUNDS[id] || GROUNDS.open;
+}
+
+// The field object both engines share (battle.field). Resolved ONCE at
+// battle start. Carries EFFECTIVE factors: Story halving and twist-off are
+// folded in here (R2), so engines read factors/twist and nothing else.
+function resolveField(mapId, difficulty) {
+  return fieldFromGround(groundForMap(mapId), difficulty, mapId || null);
+}
+
+// Explicit pin (scripted events may name a Ground directly, §1 guardrails).
+function resolveFieldForGround(groundId, difficulty) {
+  return fieldFromGround(GROUNDS[groundId] || GROUNDS.open, difficulty, null);
+}
+
+function fieldFromGround(g, difficulty, mapId) {
+  const story = difficulty === 'story';
+  return {
+    id: g.id,
+    groundId: g.id,
+    name: g.name,
+    mapId,
+    boostType: g.boostType,
+    dampenType: g.dampenType,
+    boostFactor: g.boostType ? (story ? 1.1 : 1.2) : 1,
+    dampenFactor: g.dampenType ? (story ? 0.9 : 0.8) : 1,
+    twist: story ? null : g.twist,
+    banner: g.banner,
+    tint: g.tint,
+  };
+}
+
+// Damage factor for a move type under a field (1 when the field is null,
+// Open, or the type is neither boosted nor dampened). calcDamage() in
+// formulas.mjs is the single consumer that applies this in the damage path.
+function groundFactorFor(field, moveType) {
+  if (!field || !moveType) return 1;
+  if (field.boostType && moveType === field.boostType) return field.boostFactor !== undefined ? field.boostFactor : 1.2;
+  if (field.dampenType && moveType === field.dampenType) return field.dampenFactor !== undefined ? field.dampenFactor : 0.8;
+  return 1;
+}
+
+// Healing moves (Bloom/Marsh twist): +50% restored, both engines.
+function groundHealMult(field) {
+  return field && field.twist === 'heal' ? 1.5 : 1;
+}
+
+// Burn / poison infliction chance bonus in percentage POINTS, added only
+// where a move can already inflict that status (Ember/Pyre: burn;
+// Venom: poison). Never creates an infliction a move does not have.
+function groundStatusChanceBonus(field, status) {
+  if (!field) return 0;
+  if (field.twist === 'burn' && status === 'burn') return 10;
+  if (field.twist === 'poison' && status === 'poison') return 10;
+  return 0;
+}
+
+// Classic accuracy adjustment (probability in, probability out):
+// Storm/Volt: Electric moves +5 points. Rubble: physical moves +5 points.
+// Grave/Mind: status moves -10 points. Frost: every move x0.95 (the
+// defender's dodge — evasion +1 stage-equivalent, dodge only, no damage).
+function groundClassicAccuracy(field, mv, p) {
+  if (!field || !field.twist || !mv) return p;
+  let out = p;
+  if (field.twist === 'storm' && mv.type === 'electric') out += 0.05;
+  else if (field.twist === 'rubble' && mv.cat === 'physical') out += 0.05;
+  else if (field.twist === 'status' && mv.cat === 'status') out -= 0.10;
+  if (field.twist === 'frost') out *= 0.95;
+  return out;
+}
+
+// Tide classic crit bonus: for special moves, add base Speed/256 to the
+// crit chance (threshold +1 stage-equivalent). Consumed via
+// critChance(..., { bonus }) in formulas.mjs.
+function groundCritBonus(field, mv, baseSpeed) {
+  if (!field || field.twist !== 'tide' || !mv || mv.cat !== 'special') return 0;
+  return (baseSpeed || 0) / 256;
+}
+
+// Mire: mons NOT Water/Grass/Ground-typed are slowed. Classic: Speed stat
+// -10% (applied at turn-order stat resolution). RT: movement -15%
+// (applied at the arena movement step for the moving mon).
+const MIRE_ADAPTED_TYPES = ['water', 'grass', 'ground'];
+function mireSlows(field, types) {
+  if (!field || field.twist !== 'mire' || !Array.isArray(types)) return false;
+  return !types.some((t) => MIRE_ADAPTED_TYPES.includes(t));
+}
+function groundMireSpeedMult(field, types) {
+  return mireSlows(field, types) ? 0.9 : 1;
+}
+function groundMireMoveMult(field, types) {
+  return mireSlows(field, types) ? 0.85 : 1;
+}
+
+// RT cooldown multiplier for a move under the field twist:
+// Storm/Volt: Electric moves x0.85. Grave/Mind: status moves x1.25.
+function groundCooldownMult(field, mv) {
+  if (!field || !field.twist || !mv) return 1;
+  if (field.twist === 'storm' && mv.type === 'electric') return 0.85;
+  if (field.twist === 'status' && mv.cat === 'status') return 1.25;
+  return 1;
+}
+
+// RT special-move projectile speed multiplier (Tide: +15%).
+function groundProjectileMult(field, mv) {
+  if (!field || field.twist !== 'tide' || !mv || mv.cat !== 'special') return 1;
+  return 1.15;
+}
+
+// RT physical-move lunge speed multiplier (Rubble: +15%). The lunge dash
+// step in battle-rt scales by this; duration is unchanged.
+function groundLungeMult(field, mv) {
+  if (!field || field.twist !== 'rubble' || !mv || mv.cat !== 'physical') return 1;
+  return 1.15;
+}
+
+// Frost RT: dodge i-frames +40ms.
+function groundDodgeIframesBonus(field) {
+  return field && field.twist === 'frost' ? 40 : 0;
 }
 
 
@@ -17739,6 +18018,9 @@ class BattleScene {
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.arena = opts.arena || null; // UI v2.3: explicit backdrop variant (fishing = 'water'); else derived in arenaKind()
+    this.groundPin = opts.ground || opts.groundId || null; // ADR-025 §1: scripted events may pin a Ground id explicitly
+    this.field = null;      // ADR-025 §1: battle.field — resolved ONCE in enter() from the battle's map
+    this.fieldBanner = null; // the Ground announcement line (null on Open Ground)
     this.trainerIdx = 0;
   }
 
@@ -17758,6 +18040,18 @@ class BattleScene {
     }
     tuneFoeMon(this.foeMon, g.state);
     this.foeAi = effectiveAiFor(g.state, this.trainer);
+    // ADR-025 §1 (Grounds): resolve the Ground ONCE, from the map the
+    // battle starts in (returnTo is the overworld scene, whose mapId is
+    // the current map — indoors overrides outdoors by construction);
+    // story.position is the fallback for battles built without an
+    // overworld. R2 Story halving/twist-off is folded into the field by
+    // resolveField, so the engines never re-check difficulty.
+    const battleMapId = (this.returnTo && this.returnTo.mapId)
+      || (g.state.story && g.state.story.position && g.state.story.position.map) || null;
+    this.field = this.groundPin
+      ? resolveFieldForGround(this.groundPin, difficultyOf(g.state))
+      : resolveField(battleMapId, difficultyOf(g.state));
+    this.fieldBanner = this.field.banner;
     this.ally = this.firstAble(g);
     this.foe = this.foeMon;
     this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
@@ -17798,17 +18092,27 @@ class BattleScene {
       // the engine guarantees the outcome (endure + weakened auto-catch).
       this.say('Wild ' + foeName + ' appeared!', () => {
         this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
-          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.toCommand());
+          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.announceGround(() => this.toCommand()));
         });
       });
     } else if (this.kind === 'trainer') {
-      // GB-era flow idiom: challenge line, then the lead's send-out.
+      // GB-era flow idiom: challenge line, then the lead's send-out, then
+      // the Ground announcement before the first command (ADR-025 §1).
       this.say('Trainer ' + this.trainer.name + ' wants to battle!', () => {
-        this.say(this.trainer.name + ' sent out ' + foeName + '!', () => this.toCommand());
+        this.say(this.trainer.name + ' sent out ' + foeName + '!', () => this.announceGround(() => this.toCommand()));
       });
     } else {
-      this.say('Wild ' + foeName + ' appeared!');
+      this.say('Wild ' + foeName + ' appeared!', () => this.announceGround(() => this.toCommand()));
     }
+  }
+
+  // ADR-025 §1: the Ground announcement — one line before the first
+  // command, shared by both engines (RT battles pass through the same
+  // enter() chain before rtInit). Open Ground shows nothing: no rules,
+  // no banner — the system teaches by contrast.
+  announceGround(cb) {
+    if (this.fieldBanner) this.say(this.fieldBanner, cb);
+    else if (cb) cb();
   }
 
   safariFleeCheck() {
@@ -18232,6 +18536,15 @@ class BattleScene {
       const mon = side === 'ally' ? this.ally : this.foe;
       const stages = side === 'ally' ? this.allyStages : this.foeStages;
       const stats = this.effStats(mon, stages);
+      // ADR-025 §1 Mire (classic): Speed stat -10% for mons not
+      // Water/Grass/Ground-typed — applied to the turn-order stat
+      // resolution (beginTurn is the classic engine's stat entry point,
+      // so the RT engine's movement keeps its own -15% arena hook and
+      // the two never stack).
+      if (this.field && this.field.twist === 'mire') {
+        const types = mon.tempTypes || (mon.transformed ? mon.transformed.types : SPECIES[mon.speciesId].types);
+        stats.spe = Math.max(1, Math.floor(stats.spe * groundMireSpeedMult(this.field, types)));
+      }
       let priority = 0, move = null;
       if (action && action.type === 'move') {
         move = action.struggle ? { name: 'Struggle', type: 'normal', cat: 'physical', power: 50, acc: 100 } : MOVES[mon.moves[action.idx].id];
@@ -18398,6 +18711,10 @@ class BattleScene {
     } else if (!mv.neverMiss) {
       const stageDelta = (atkStages.acc || 0) - (defStages.eva || 0);
       let p = ((mv.acc || 100) / 100) * accStageMultiplier(Math.max(-6, Math.min(6, stageDelta)));
+      // ADR-025 §1 classic twists at the accuracy hook: Storm/Volt
+      // Electric +5, Rubble physical +5, Grave/Mind status -10, Frost
+      // x0.95 (defender dodge). Applied before the 255/256 cap.
+      p = Math.max(0, groundClassicAccuracy(this.field, mv, p));
       if (p >= 1) p = 255 / 256;
       if (!roll(p, g.rng.battle)) {
         this.say(atkName + ' used ' + mv.name + '!', () => {
@@ -18432,7 +18749,7 @@ class BattleScene {
         return;
       }
       const baseSpe = (atk.transformed ? atk.transformed.baseSpe : SPECIES[atk.speciesId].base.spe);
-      const crit = roll(critChance(baseSpe, { highCrit: !!mv.highcrit, focus: !!atk.focused }), g.rng.battle);
+      const crit = roll(critChance(baseSpe, { highCrit: !!mv.highcrit, focus: !!atk.focused, bonus: groundCritBonus(this.field, mv, baseSpe) }), g.rng.battle);
       // Gen 1 crits ignore ALL stat stages (raw stats both sides).
       const atkStat = mv.cat === 'physical'
         ? (crit ? atk.stats.atk : entry.stats.atk)
@@ -18455,7 +18772,7 @@ class BattleScene {
         dmg = 0;
         for (let hi = 0; hi < hits; hi++) {
           dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical' });
+            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
         }
         if (hits > 1) this._hitCount = hits;
       }
@@ -18522,7 +18839,11 @@ class BattleScene {
         // Status infliction (single status or Tri Attack's random pick).
         let statusRoll = efx.status;
         if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
-        if (statusRoll && def.hp > 0 && (!efx.chance || roll(efx.chance / 100, g.rng.battle))) {
+        // ADR-025 §1: Ember/Pyre (burn) and Venom (poison) twists add +10
+        // points to the infliction roll — only where the move can already
+        // inflict that status (no chance on the move = guaranteed, no roll).
+        const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+        if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
           if (statusRoll === 'confusion') {
             if (!def.confused) { def.confused = true; def.confusedTurns = 2 + Math.floor(g.rng.battle() * 4); msg2 = defName + ' became confused!'; }
           } else if (!def.status) {
@@ -18612,7 +18933,8 @@ class BattleScene {
     }
     if (ef.heal) {
       if (target.hp >= target.maxHp) { done('But it failed!'); return; }
-      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal));
+      // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50%.
+      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal * groundHealMult(this.field)));
       done(tName + ' regained health!');
       return;
     }
@@ -19312,6 +19634,18 @@ class BattleScene {
       rh = Math.min(15, Math.ceil(rh * 1.45));
       row++;
     }
+    // ADR-025 §1: the arena backdrop tint shifts toward the Ground — a
+    // flat palette shift of the EXISTING per-area backdrop (no new
+    // scenes, no gradients): one translucent flat wash in the Ground's
+    // tint over the drawn field. Guarded for the QA minimal-this call.
+    if (this.field && this.field.tint && r.ctx) {
+      const c = r.ctx;
+      c.save();
+      c.globalAlpha = 0.13;
+      c.fillStyle = this.field.tint;
+      c.fillRect(0, 0, w, h);
+      c.restore();
+    }
   }
 
   render(r) {
@@ -19501,10 +19835,13 @@ const ARENA = { x0: 26, y0: 56, x1: 454, y1: 258 }; // logical 480x320 space
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 function dist(ax, ay, bx, by) { return Math.hypot(bx - ax, by - ay); }
 
-function cooldownMs(mv, userSpe, foeSpe) {
+function cooldownMs(mv, userSpe, foeSpe, field) {
   // ADR-020 review formula: power/accuracy/speed-advantage scaled, clamped.
-  if (mv.cat === 'status') return 1500;
-  return clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200);
+  // ADR-025 §1 RT twists at this hook: Storm/Volt — Electric moves x0.85;
+  // Grave/Mind — status moves x1.25 (groundCooldownMult, field-resolved,
+  // so Story's twist-off is already folded in).
+  if (mv.cat === 'status') return Math.round(1500 * groundCooldownMult(field, mv));
+  return Math.round(clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200) * groundCooldownMult(field, mv));
 }
 
 Object.assign(BattleScene.prototype, {
@@ -19681,7 +20018,11 @@ Object.assign(BattleScene.prototype, {
       if (input.isHeld('down')) my += 1;
     }
     const parSlowed = this.ally.status === 'paralysis' ? 0.55 : 1;
-    let spd = (52 + allySpe * 0.55) * parSlowed;
+    // ADR-025 §1 Mire (RT): arena movement -15% for mons not
+    // Water/Grass/Ground-typed (symmetric — the foe step below uses the
+    // same helper on the foe's types).
+    const allyTypes = this.ally.tempTypes || (this.ally.transformed ? this.ally.transformed.types : SPECIES[this.ally.speciesId].types);
+    let spd = (52 + allySpe * 0.55) * parSlowed * groundMireMoveMult(this.field, allyTypes);
     if (rt.dodgeT > 0) spd *= 2.15;
     if (mx || my) {
       const len = Math.hypot(mx, my) || 1;
@@ -19691,7 +20032,7 @@ Object.assign(BattleScene.prototype, {
     }
     // Dodge roll: B while moving (or standing) — i-frames, 900ms cooldown.
     if (input.wasPressed('b') && rt.dodgeCd <= 0 && !allyAsleep) {
-      rt.dodgeT = 230; rt.iframes = 260; rt.dodgeCd = 900;
+      rt.dodgeT = 230; rt.iframes = 260 + groundDodgeIframesBonus(this.field); rt.dodgeCd = 900; // Frost twist: +40ms i-frames
       g.audio.playSfx('menu-move');
     }
     // Moves: slot keys fire directly (keyboard shortcut) — the rendered
@@ -19733,7 +20074,8 @@ Object.assign(BattleScene.prototype, {
     }
     rt.foeStrafeT -= dtms;
     if (rt.foeStrafeT <= 0) { rt.foeStrafeT = 700 + Math.random() * 900; rt.foeDir = Math.random() < 0.5 ? -1 : 1; }
-    const spd = (46 + foeSpe * 0.5) * (foe.status === 'paralysis' ? 0.55 : 1);
+    const foeTypes = foe.tempTypes || (foe.transformed ? foe.transformed.types : SPECIES[foe.speciesId].types);
+    const spd = (46 + foeSpe * 0.5) * (foe.status === 'paralysis' ? 0.55 : 1) * groundMireMoveMult(this.field, foeTypes);
     let vx = 0, vy = 0;
     if (d > want + 8) { vx = (rt.ax - rt.fx) / d; vy = (rt.ay - rt.fy) / d; }
     else if (d < want - 26) { vx = -(rt.ax - rt.fx) / d; vy = -(rt.ay - rt.fy) / d; }
@@ -19793,7 +20135,7 @@ Object.assign(BattleScene.prototype, {
     // ADR-025 §4: difficulty lives in THREAT speed — foe move cooldowns
     // scale with the mode (x1.1 Story / x1.0 Classic / x0.9 Challenge);
     // ally cooldowns are never scaled.
-    const cdBase = cooldownMs(mv, atkSpe, defSpe);
+    const cdBase = cooldownMs(mv, atkSpe, defSpe, this.field);
     rt.cds[side][slot.id] = side === 'foe' ? Math.round(cdBase * rtFoeCooldownMultFor(g.state)) : cdBase;
     const ax = side === 'ally' ? rt.ax : rt.fx, ay = side === 'ally' ? rt.ay : rt.fy;
     const dx = side === 'ally' ? rt.fx : rt.ax, dy = side === 'ally' ? rt.fy : rt.ay;
@@ -19806,7 +20148,8 @@ Object.assign(BattleScene.prototype, {
       rt.lunge = { side, t: 0, dur: 190, mv, idx, hitDone: false };
       return true;
     }
-    rt.projs.push({ x: ax, y: ay, tx: dx, ty: dy, speed: 300, mv, side, t: 0 });
+    // ADR-025 §1 Tide (RT): special-move projectile speed +15%.
+    rt.projs.push({ x: ax, y: ay, tx: dx, ty: dy, speed: 300 * groundProjectileMult(this.field, mv), mv, side, t: 0 });
     g.audio.playSfx('menu-move');
     return true;
   },
@@ -19826,8 +20169,9 @@ Object.assign(BattleScene.prototype, {
     }
     if (k >= 1) rt.lunge = null;
     else {
-      // Dash toward the defender.
-      const step = (340 * dtms) / 1000;
+      // Dash toward the defender. ADR-025 §1 Rubble (RT): physical
+      // lunge speed +15%.
+      const step = (340 * groundLungeMult(this.field, L.mv) * dtms) / 1000;
       const d = reach || 1;
       const nx = atkPos.x + ((defPos.x - atkPos.x) / d) * step;
       const ny = atkPos.y + ((defPos.y - atkPos.y) / d) * step;
@@ -19904,7 +20248,7 @@ Object.assign(BattleScene.prototype, {
       dmg = 0;
       for (let hi = 0; hi < hits; hi++) {
         dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical' });
+          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
       }
     }
     if (mv.cat === 'physical' && def.reflectT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
@@ -19921,7 +20265,10 @@ Object.assign(BattleScene.prototype, {
       if (efx.recoil) atk.hp = Math.max(0, atk.hp - Math.max(1, Math.floor(dmg * efx.recoil)));
       let statusRoll = efx.status;
       if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
-      if (statusRoll && def.hp > 0 && (!efx.chance || roll(efx.chance / 100, g.rng.battle))) {
+      // ADR-025 §1: Ember/Pyre (burn) / Venom (poison) +10 points, same
+      // hook as classic — only where the move can already inflict it.
+      const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+      if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
         if (statusRoll === 'confusion') { def.confused = true; def.confusedTurns = 3; }
         else if (!def.status) {
           def.status = statusRoll;
@@ -19954,7 +20301,8 @@ Object.assign(BattleScene.prototype, {
     const ef = mv.effect || {};
     const atkStages = side === 'ally' ? this.allyStages : this.foeStages;
     const defStages = side === 'ally' ? this.foeStages : this.allyStages;
-    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal)); return; }
+    // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50% (both engines).
+    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal * groundHealMult(this.field))); return; }
     if (ef.rest) { atk.hp = atk.maxHp; atk.status = 'sleep'; if (side === 'ally') this.rt.allySleepT = 2200; else this.rt.foeSleepT = 2200; return; }
     if (ef.substitute) { const c = Math.floor(atk.maxHp / 4); if (atk.subHp <= 0 && atk.hp > c) { atk.hp -= c; atk.subHp = c; } return; }
     if (ef.screen) { if (ef.screen === 'physical') atk.reflectT = 5; else atk.lightT = 5; return; }
@@ -20186,7 +20534,12 @@ Object.assign(BattleScene.prototype, {
     // Cooldown chips for the ally's four moves (bottom strip). Chip width is
     // derived from the actual view: the old fixed 108px assumed a 480-wide
     // canvas, so at real 256/384-wide layouts chips 3-4 started offscreen.
-    const chipW = Math.floor((w - 24) / 4); // 4 chips, 3 gaps of 4, 6px margins
+    // ADR-025 §1: a persistent Ground chip sits NEXT TO the cooldown
+    // chips on the same bottom row for the whole RT fight (non-Open
+    // Grounds only — Open has no rules to show). It reserves its width
+    // from the row, so the four cooldown chips shrink to make room.
+    const groundChipW = this.field && this.field.id !== 'open' ? 96 : 0;
+    const chipW = Math.floor((w - 24 - (groundChipW ? groundChipW + 4 : 0)) / 4); // 4 chips, 3 gaps of 4, 6px margins
     const labelMax = Math.max(4, Math.min(10, Math.floor((chipW - 8) / 7)));
     for (let i = 0; i < 4; i++) {
       const slot = this.ally.moves[i];
@@ -20206,12 +20559,18 @@ Object.assign(BattleScene.prototype, {
       r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
       if (!ready && slot.pp > 0) {
         // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
-        const total = cooldownMs(mv, 50, 50);
+        const total = cooldownMs(mv, 50, 50, this.field);
         const frac = Math.max(0, Math.min(1, cd / total));
         c.fillStyle = PT_FRAME2;
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
       }
       if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#f84838', shadow: false });
+    }
+    if (groundChipW) {
+      const gx = 6 + 4 * (chipW + 4);
+      const gy = h - 26;
+      r.panel(gx, gy, groundChipW, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
+      r.text(('GROUND: ' + this.field.name.replace(/ Ground$/, '')).slice(0, 13), gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
     }
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
@@ -23231,6 +23590,6 @@ Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:03f17c5c57363276cb6b3198f841793f24cdbd226ddfc78ed602814ee37bdf0c -->
+<!-- contentHash:4c99063a990fc06b1e9bc100cfacae48ebf3b7f838b2ab0215a61fa2805d74dc -->
 </body>
 </html>

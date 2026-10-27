@@ -116,6 +116,14 @@ catchRate 45, commons 255/235/190.
    player-side toggles (Steady Damage roll 255/255, Merciful Foes IV 16,
    Fast Learner XP ×1.5, Generous World money ×1.5, Candy Coach, Skip
    Intro). Proofs: tests/rejuv-phase1-checks.mjs (44 checks).
+   **Grounds (Rejuvenation Phase 2, ADR-025 §1)** — WIRED 2026-10-27:
+   gym x1.2 on the leader's STAB ≈ +1 level of threat, absorbed by the
+   existing gym level budgets per the §1 guardrail — no level re-tuning
+   (delta method: the factor is symmetric, so the player's counter-type
+   line gains the same x1.2 the leader's STAB does; the x0.8 touches only
+   one of ≥2 counters per type). Story mode halves the factors to
+   x1.1/x0.9 and disables twists (R2). Proofs:
+   tests/rejuv-phase2-checks.mjs.
 3. **Route-trainer sight lines** — IMPLEMENTED in the Yellow-authenticity
    update (`feat/yellow-authenticity`): `sight: { dir, range }` cones on all 6
    route trainers (Brock stays talk-only); spot beat (500ms `!` + original

@@ -57,7 +57,20 @@ export function calcDamage(level, power, atk, def, opts) {
   // critical hit ignores the halving, like it ignores stat stages).
   const a = (o.burn && o.physical && !o.crit) ? Math.floor(atk / 2) : atk;
   const base = Math.floor(Math.floor(Math.floor((2 * effLevel) / 5 + 2) * power * a / def) / 50) + 2;
-  return Math.max(1, Math.floor(base * stab * eff * rand));
+  // Rejuvenation Phase 2 (ADR-025 §1): the Ground factor — the ONE place
+  // it applies, inside the shared damage path both engines call. The
+  // field (battle.field, resolved at battle start, Story halving already
+  // folded in) supplies effective boost/dampen factors for the move's
+  // type; hard caps x1.2 / x0.8 live in the Grounds data. Typeless calls
+  // (confusion self-hit: no field / no moveType passed) are untouched.
+  let gf = 1;
+  const f = o.field;
+  if (f && o.moveType) {
+    if (f.boostType && o.moveType === f.boostType) gf = f.boostFactor !== undefined ? f.boostFactor : 1.2;
+    else if (f.dampenType && o.moveType === f.dampenType) gf = f.dampenFactor !== undefined ? f.dampenFactor : 0.8;
+  }
+  if (o.groundFactor !== undefined) gf = o.groundFactor;
+  return Math.max(1, Math.floor(base * stab * eff * rand * gf));
 }
 
 export function gen1Random(rng) { return (217 + Math.floor(rng() * 39)) / 255; }
@@ -70,6 +83,9 @@ export function critChance(baseSpeed, opts) {
   const o = opts || {};
   let c = o.highCrit ? Math.min(255, baseSpeed * 4) / 256 : baseSpeed / 512;
   if (o.focus) c *= 4;
+  // Grounds (ADR-025 §1, Tide classic twist): an additive bonus the caller
+  // computes from the field (special moves: + base Speed/256).
+  if (o.bonus) c += o.bonus;
   return Math.min(1, c);
 }
 export const STAB_MULT = 1.5;
