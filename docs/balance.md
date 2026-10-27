@@ -115,7 +115,7 @@ catchRate 45, commons 255/235/190.
    sim-verified baseline — no sim deltas in Classic). House Rules add the
    player-side toggles (Steady Damage roll 255/255, Merciful Foes IV 16,
    Fast Learner XP ×1.5, Generous World money ×1.5, Candy Coach, Skip
-   Intro). Proofs: tests/rejuv-phase1-checks.mjs (42 checks).
+   Intro). Proofs: tests/rejuv-phase1-checks.mjs (44 checks).
 3. **Route-trainer sight lines** — IMPLEMENTED in the Yellow-authenticity
    update (`feat/yellow-authenticity`): `sight: { dir, range }` cones on all 6
    route trainers (Brock stays talk-only); spot beat (500ms `!` + original
