@@ -202,6 +202,17 @@ export class Game {
       this.canvas.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         this.audio.unlock();
+        // AUDIT FIX (S-01): scenes with real tap targets (the title menu)
+        // get first claim on the tap, in logical view coordinates.
+        const top = this.scenes && this.scenes.top;
+        if (top && top.handleTap && this.canvas.getBoundingClientRect) {
+          const rect = this.canvas.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) {
+            const vx = (e.clientX - rect.left) / rect.width * this.renderer.viewW;
+            const vy = (e.clientY - rect.top) / rect.height * this.renderer.viewH;
+            if (top.handleTap(vx, vy)) return;
+          }
+        }
         this.input.inject('a');
       });
     }
@@ -488,7 +499,7 @@ export class Game {
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    }, { rowHtml: bagRowHtml, menuClass: 'bagwin', bagTabs: pocketsPresent });
+    }, { rowHtml: bagRowHtml, menuClass: 'bagwin', bagTabs: pocketsPresent, remember: 'bag' });
   }
 
   openParty() {
@@ -573,10 +584,29 @@ export class Game {
       if (!m) return;
       const fieldMoves = (m.moves || []).filter((x) => ['cut', 'fly', 'surf', 'strength', 'flash'].includes(x.id));
       const rows = [{ label: 'Summary', value: 'summary' }];
+      // AUDIT FIX (S-47): Platinum's party submenu has SWITCH — party
+      // order (lead, switch-ins, XP share order) could not be changed
+      // anywhere in the game. Switch picks a partner and swaps places.
+      if (g.state.party.length > 1) rows.push({ label: 'Switch', value: 'switch' });
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
       rows.push({ label: 'Close', value: 'close' });
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
         if (a === 'field' && g.openFieldMove) { g.openFieldMove(m); return; }
+        if (a === 'switch') {
+          const others = g.state.party
+            .map((mm, i) => ({ label: displayName(mm, SPECIES) + ' Lv' + mm.level, value: i }))
+            .filter((r) => r.value !== monIndex);
+          others.push({ label: 'Back', value: -1 });
+          g.ui.showMenu('Switch ' + displayName(m, SPECIES) + ' with...', others, (t) => {
+            if (t === null || t === -1) { openMonMenu(monIndex); return; }
+            const tmp = g.state.party[monIndex];
+            g.state.party[monIndex] = g.state.party[t];
+            g.state.party[t] = tmp;
+            g.audio.playSfx('ui-blip');
+            g.openParty();
+          });
+          return;
+        }
         if (a === 'summary') {
           g.ui.showSummary(summaryData(m), () => openMonMenu(monIndex));
         }
@@ -585,7 +615,7 @@ export class Game {
     g.ui.showMenu('Party', items, (v) => {
       if (v === null || v === 'close' || v === -1) return;
       openMonMenu(v);
-    }, { rowHtml, menuClass: 'plate-full' });
+    }, { rowHtml, menuClass: 'plate-full', remember: 'party', gridNav: true });
   }
 
   openDex(filter) {
@@ -622,7 +652,7 @@ export class Game {
       if (!v || v === 'close') return;
       if (v === 'rating') { g.ui.say([g.oakRating()], () => g.openDex(filter), 'Prof. Hawthorn'); return; }
       if (v === 'filter') { g.openDexFilter(filter); return; }
-      if (v === 'areas') { g.openDexAreas(); return; }
+      if (v === 'areas') { g.openDexAreas(filter); return; }
       const sp = SPECIES[v];
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
       if (!c && !s) { g.openDex(filter); return; }
@@ -631,7 +661,7 @@ export class Game {
         sp.flavor,
         'Status: ' + (c ? 'CAUGHT' : 'SEEN'),
       ], () => g.openDex(filter), 'Dex');
-    });
+    }, { remember: 'dex' });
   }
 
   // P1/G3: dex filter submenu — status, type, and name search (reuses the A-Z grid).
@@ -647,15 +677,19 @@ export class Game {
     ], (st) => {
       if (st === 'back' || st === null) { g.openDex(filter); return; }
       const f2 = Object.assign({}, filter, { status: st === 'all' ? null : st });
-      const titems = [{ label: 'All types', value: null }].concat(types.map((t) => ({ label: t, value: t })));
+      // AUDIT FIX (S-05): 'All types' carried value:null — the cancel
+      // sentinel — so choosing it aborted the wizard and threw away the
+      // status step. It now has its own value and continues to search.
+      const titems = [{ label: 'All types', value: 'all' }].concat(types.map((t) => ({ label: t, value: t })));
       titems.push({ label: 'Back', value: 'back' });
       g.ui.showMenu('Filter: type', titems, (tp) => {
         if (tp === 'back' || tp === null) { g.openDex(filter); return; }
-        const f3 = Object.assign({}, f2, { type: tp });
+        const f3 = Object.assign({}, f2, { type: tp === 'all' ? null : tp });
         g.ui.showNameEntry('Search the Dex (blank = all)', '', 8, (q) => {
-          f3.q = q || null;
+          if (q === null) { g.openDex(f2); return; } // cancelled: keep the pre-search filter (S-03)
+          f3.q = q || null; // '' (blank OK) clears the search, as promised (S-04)
           g.openDex(f3);
-        });
+        }, { allowCancel: true, allowEmpty: true });
       });
     });
   }
@@ -707,7 +741,9 @@ export class Game {
   }
 
   // P1/G3: Areas tab — per-area "caught n/m" checklists (B2W2 Habitat pattern).
-  openDexAreas() {
+  // AUDIT FIX (S-42): the active dex filter rides along and is restored on
+  // return — the Areas detour used to silently drop it.
+  openDexAreas(filter) {
     const g = this;
     const items = Object.keys(MAPS).filter((id) => MAPS[id].encounters).map((id) => {
       const map = MAPS[id];
@@ -717,7 +753,7 @@ export class Game {
     });
     items.push({ label: 'Back', value: 'back' });
     g.ui.showMenu('Dex — Areas', items, (v) => {
-      if (!v || v === 'back') { g.openDex(); return; }
+      if (!v || v === 'back') { g.openDex(filter); return; }
       const map = MAPS[v];
       const rows = map.encounters.table.map((e) => {
         const sp = SPECIES[e.species];
@@ -725,7 +761,7 @@ export class Game {
         return { label: (c || s ? sp.name : '???') + '  Lv' + e.min + '-' + e.max + (c ? ' [CAUGHT]' : s ? ' [SEEN]' : ''), value: null, disabled: true };
       });
       rows.push({ label: 'Back', value: 'back' });
-      g.ui.showMenu(map.name, rows, () => g.openDexAreas());
+      g.ui.showMenu(map.name, rows, () => g.openDexAreas(filter));
     });
   }
 
@@ -832,7 +868,7 @@ export class Game {
         s.hudScale = s.hudScale >= 1.5 ? 1 : Math.round((s.hudScale + 0.25) * 100) / 100;
         if (typeof document !== 'undefined') document.documentElement.style.setProperty('--hudscale', s.hudScale);
       }
-      else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
+      else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, () => g.openOptions(), ''); return; }
       else if (v === 'account') { AUTH.openAccountMenu(g); return; }
       else if (v === 'syncnow') { SYNC.syncNow(g, true); return; }
       else if (v === 'erase') {
@@ -854,7 +890,7 @@ export class Game {
                   } else {
                     g.ui.toast('Erase cancelled.');
                   }
-                });
+                }, { allowCancel: true, emptyMsg: 'Type DELETE to confirm — or CANCEL to back out.' });
               }
             }, { menuClass: 'syswin' });
           }
@@ -863,7 +899,7 @@ export class Game {
       } else return;
       g.saveGame(true);
       g.openOptions();
-    }, { menuClass: 'syswin' });
+    }, { menuClass: 'syswin', remember: 'options' });
   }
 }
 

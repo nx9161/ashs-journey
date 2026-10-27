@@ -76,7 +76,10 @@ Object.assign(Game.prototype, {
         return { label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''), value: i, disabled: dis };
       });
       targets.push({ label: 'Back', value: -1 });
-      g.ui.showMenu('Use ' + it.name + ' on...', targets, (t) => {
+      // AUDIT FIX (S-37): the Ether move picker's Back used to skip this
+      // target picker entirely and land in the Bag. showTargets is now
+      // re-enterable so Back steps back exactly one level.
+      const showTargets = () => g.ui.showMenu('Use ' + it.name + ' on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
         const m = g.state.party[t];
         const apply = () => {
@@ -92,7 +95,7 @@ Object.assign(Game.prototype, {
           const mvItems = m.moves.map((mv, mi) => ({ label: MOVES[mv.id].name + ' ' + mv.pp + '/' + mv.maxPp, value: mi }));
           mvItems.push({ label: 'Back', value: -1 });
           g.ui.showMenu('Restore which move?', mvItems, (mi) => {
-            if (mi === null || mi === -1) { finish(); return; }
+            if (mi === null || mi === -1) { showTargets(); return; }
             m.moves[mi].pp = Math.min(m.moves[mi].maxPp, m.moves[mi].pp + it.ppRestore);
             apply();
           });
@@ -101,6 +104,7 @@ Object.assign(Game.prototype, {
         if (it.ppRestoreAll) { for (const mv of m.moves) mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestoreAll); apply(); return; }
         finish();
       }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
+      showTargets();
       return;
     }
     if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone'].includes(id)) {
@@ -316,8 +320,18 @@ Object.assign(Game.prototype, {
 
   openTownMap() {
     const g = this;
+    // AUDIT FIX (C201): the Town Map was one dialogue line of RAW internal
+    // map ids. It is now a real screen: visited places by display name,
+    // current location marked, in a proper Platinum window.
     const visited = Object.keys(g.state.story.flags).filter((k) => k.startsWith('reached_')).map((k) => k.slice(8));
-    g.ui.say(['KANTO — places you have been:', visited.length ? visited.join(' · ') : 'Nowhere yet. Walk!'], null, 'Town Map');
+    const cur = g.state.story.position && g.state.story.position.map;
+    const items = visited.map((id) => ({
+      label: (MAPS[id] ? MAPS[id].name : id) + (id === cur ? '  — you are here' : ''),
+      value: null, disabled: true,
+    }));
+    if (!items.length) items.push({ label: 'Nowhere yet. Walk!', value: null, disabled: true });
+    items.push({ label: 'Close', value: 'close' });
+    g.ui.showMenu('Town Map — Kanto', items, () => {});
   },
 
   // ---------- field moves (WS9) ----------

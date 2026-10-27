@@ -121,13 +121,18 @@ export class IntroScene {
       if (this._startHeld >= 1) {
         this._startHeld = 0;
         this.step = 'confirm-skip';
+        // AUDIT FIX (S-21): remember the current line — 'Keep watching'
+        // used to restart the professor's whole script from line one.
+        this._resumeIdx = g.ui.dlg ? g.ui.dlg.idx : 0;
         g.ui.closeDialogue();
         g.ui.showMenu('Skip the intro?', [
           { label: 'Keep watching', value: 'no' },
           { label: 'Skip intro', value: 'yes' },
         ], (v) => {
           if (v === 'yes') { this.finishIntro(); return; }
-          this.begin(); // restart the professor lines
+          this.step = 'professor';
+          const lines = INTRO_SCRIPT.lines.map((l) => l.replace('{player}', this.name)).slice(this._resumeIdx || 0);
+          g.ui.say(lines.length ? lines : INTRO_SCRIPT.lines, () => this.nameEntry(), INTRO_SCRIPT.professor);
         });
       }
     } else {

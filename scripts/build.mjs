@@ -435,7 +435,7 @@ body.flip .ab{right:auto;left:16px}
 .mvpp{font-size:15px;color:#4a5878;grid-column:1}
 .mvpow{font-size:15px;color:#6a7799;grid-column:2;justify-self:end}
 .mvcell .tpill{grid-column:2;grid-row:1;justify-self:end;margin:0}
-@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.menugrid .menu-row.wide{display:none}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
+@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
 .tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:3px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
 .tpill b{font-weight:bold}
 .menu-row.zeropp{color:#a0a0a0}
@@ -529,7 +529,9 @@ body.desktop.showtouch .controls{display:block}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
    Structure and behavior untouched; presentation only. */
 .authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
-.authhead{font-family:var(--font-display);background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
+.authhead{font-family:var(--font-display);background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between}
+.authx{background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.65);color:#fff;border-radius:4px;font:inherit;font-size:14px;line-height:1;padding:5px 9px;cursor:pointer}
+.authx:hover{background:rgba(255,255,255,.3)}
 .authsub{font-size:16px;font-weight:700;color:#3c4a6a;padding:8px 14px 0;line-height:1.45;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .authtabs{display:flex;border-bottom:2px solid var(--frame)}
 .authtab{flex:1;font-family:inherit;font-size:15px;font-weight:bold;padding:12px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:#4a5878;border:0;border-right:2px solid var(--frame);cursor:pointer}
@@ -595,6 +597,19 @@ function shellHtml({ gameJs, inline }) {
     scriptTag + '\n</body>\n</html>\n';
 }
 
+// Command Deck (ADR-023): the owner dashboard page + client, generated for
+// the vercel and personal targets only (the guest standalone stays a single
+// zero-network file). Source lives in src/admin/; the build injects the
+// shared @font-face CSS into the page and the edition into the client.
+function buildAdminFiles(edition) {
+  const dir = path.join(ROOT, 'src', 'admin');
+  const html = fs.readFileSync(path.join(dir, 'admin.html'), 'utf8')
+    .replace('/*__FONT_FACE_CSS__*/', FONT_FACE_CSS);
+  const js = fs.readFileSync(path.join(dir, 'admin.js'), 'utf8')
+    .replace("/*__EDITION__*/ 'vercel'", `'${edition}'`);
+  return { html, js };
+}
+
 // HARD GATE (PRD AC#1, Tech Law COPPA cleanliness): a zero-network bundle makes
 // zero network calls of any kind — fail the build if any survive the strip.
 // Applies identically to the guest and personal targets (ADR-012 §4).
@@ -635,6 +650,10 @@ async function main() {
       .replace('</body>', '<!-- contentHash:' + vhash + ' -->\n</body>');
     fs.writeFileSync(path.join(ROOT, 'public', 'index.html'), indexHtml);
     console.log('public/game.js + index.html: ' + (vercelJs.length + indexHtml.length) + ' bytes');
+    const deckV = buildAdminFiles('vercel');
+    fs.writeFileSync(path.join(ROOT, 'public', 'admin.html'), deckV.html);
+    fs.writeFileSync(path.join(ROOT, 'public', 'admin.js'), deckV.js);
+    console.log('public/admin.html + admin.js: ' + (deckV.html.length + deckV.js.length) + ' bytes (Command Deck)');
   }
 
   if (want('guest')) {
@@ -662,6 +681,10 @@ async function main() {
       .replace('</body>', '<!-- contentHash:' + phash + ' -->\n</body>');
     fs.writeFileSync(path.join(ROOT, 'personal', 'index.html'), personalHtml);
     console.log('personal/game.js + index.html: ' + (personalJs.length + personalHtml.length) + ' bytes (zero-network gate: PASS)');
+    const deckP = buildAdminFiles('personal');
+    fs.writeFileSync(path.join(ROOT, 'personal', 'admin.html'), deckP.html);
+    fs.writeFileSync(path.join(ROOT, 'personal', 'admin.js'), deckP.js);
+    console.log('personal/admin.html + admin.js: ' + (deckP.html.length + deckP.js.length) + ' bytes (Command Deck, static)');
   }
 
   fs.writeFileSync(path.join(ROOT, 'dist', 'content-hash.txt'),

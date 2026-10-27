@@ -214,17 +214,44 @@ export class BootScene {
       return;
     }
     // title menu
+    // S-49: while the Trainer ID Terminal is open, the title scene must
+    // not consume game keys — otherwise Enter/arrows at the terminal
+    // re-activate the hidden menu (stacking terminals, moving the cursor
+    // behind the panel). ui.update already gates on loginOpen; the scene
+    // stack did not.
+    if (this.game.ui && this.game.ui.loginOpen) return;
     const items = this.menuItems();
     if (input.wasPressed('up')) { this.menuIdx = (this.menuIdx + items.length - 1) % items.length; }
     if (input.wasPressed('down')) { this.menuIdx = (this.menuIdx + 1) % items.length; }
     if (input.wasPressed('a') || input.wasPressed('start')) {
-      const it = items[this.menuIdx];
       this.game.audio.unlock();
-      // P0/B1: title menu routes through the Trainer ID Terminal (guest-functional stub).
-      if (it.value === 'new') this.game.openLogin('new');
-      else if (it.value === 'continue') this.game.openLogin('continue');
-      else if (it.value === 'options') this.game.openOptions();
+      this._activateMenuItem(items[this.menuIdx]);
     }
+  }
+
+  _activateMenuItem(it) {
+    if (!it) return;
+    // P0/B1: title menu routes through the Trainer ID Terminal (guest-functional stub).
+    if (it.value === 'new') this.game.openLogin('new');
+    else if (it.value === 'continue') this.game.openLogin('continue');
+    else if (it.value === 'options') this.game.openOptions();
+  }
+
+  // AUDIT FIX (S-01): the title menu was canvas-only — a tap anywhere
+  // injected a global A and selected whatever row happened to be
+  // highlighted. Rows are now real targets: render() publishes their
+  // rects, and a tap on a row selects AND activates it. Taps elsewhere
+  // keep the old behaviour (they open the menu from PRESS START).
+  handleTap(vx, vy) {
+    if (this.phase === 'legal' || this.titleStage !== 'menu' || !this._menuHit) return false;
+    const h = this._menuHit;
+    if (vx < h.x || vx > h.x + h.w) return false;
+    const i = Math.floor((vy - (h.y + h.padY)) / h.rowH);
+    if (i < 0 || i >= h.values.length) return false;
+    this.menuIdx = i;
+    this.game.audio.unlock();
+    this._activateMenuItem(this.menuItems()[i]);
+    return true;
   }
   menuItems() {
     const items = [{ label: 'New Game', value: 'new' }];
@@ -358,6 +385,8 @@ export class BootScene {
     }
 
     if (showMenu) {
+      // S-01: publish row rects for pointer hit-testing (handleTap).
+      this._menuHit = { x: menuX, y: menuY, w: menuW, rowH, padY: menuPadY, values: items.map((it) => it.value) };
       // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
       r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
       items.forEach((it, i) => {

@@ -8,6 +8,7 @@
 
 import { SPECIES } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
+import { ITEMS } from '../data/items.mjs';
 import {
   effectiveness, calcDamage, stageMultiplier, accStageMultiplier,
   gen1Random, critChance, gen1Catch,
@@ -57,7 +58,7 @@ Object.assign(BattleScene.prototype, {
     g.ui.showCommands(items, (value) => {
       if (value === null) return; // B backs out to the live arena
       if (value === 'fight') this.rtShowMoves();
-      else if (value === 'bag') this.rtBallMenu();
+      else if (value === 'bag') this.rtBagMenu();
       else if (value === 'party') this.openPartyMenu(false);
       else if (value === 'run') this.rtTryRun();
     }, {});
@@ -513,22 +514,67 @@ Object.assign(BattleScene.prototype, {
     this.rtFloatT = 1400;
   },
 
-  rtBallMenu() {
+  // AUDIT FIX (S-14/S-43): the RT bag was balls-only (no medicine at all)
+  // and never disabled balls against trainers — a throw silently burned a
+  // ball on an uncatchable mon. It is now the same tabbed bag as classic:
+  // balls (disabled vs trainers, like classic) + the medicine pocket.
+  rtBagMenu() {
     const g = this.game;
     const items = [];
     for (const bid of ['pokeball', 'greatball', 'ultraball', 'masterball']) {
       const n = g.state.bag[bid] || 0;
-      items.push({ label: (bid === 'pokeball' ? 'Poke Ball' : bid === 'greatball' ? 'Great Ball' : bid === 'ultraball' ? 'Ultra Ball' : 'Master Ball') + ' x' + n, value: bid, disabled: n <= 0 });
+      items.push({ label: (bid === 'pokeball' ? 'Poke Ball' : bid === 'greatball' ? 'Great Ball' : bid === 'ultraball' ? 'Ultra Ball' : 'Master Ball') + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
+    }
+    const meds = this.battleMedicineIds();
+    for (const mid of meds) {
+      items.push({ label: ITEMS[mid].name + ' x' + g.state.bag[mid], value: mid, pocket: 'medicine' });
     }
     items.push({ label: 'Back', value: null });
-    g.ui.showMenu('Throw which ball? (A)', items, (v) => {
-      if (v) this.rtThrowBall(v);
-      else this.rtShowCommands(); // Back/cancel -> command grid (classic parity)
+    g.ui.showMenu('Bag', items, (v) => {
+      if (!v) { this.rtShowCommands(); return; } // Back/cancel -> command grid
+      if (ITEMS[v] && ITEMS[v].pocket === 'medicine') { this.rtUseMedicine(v); return; }
+      this.rtThrowBall(v);
+    }, { menuClass: 'battlewin bagwin', bagTabs: meds.length ? ['balls', 'medicine'] : ['balls'] });
+  },
+
+  // RT medicine: menus freeze the arena (theatre rule), the item applies
+  // on selection and play resumes at the command grid — no turn exists to
+  // spend in real-time; the cost is the menu time itself.
+  rtUseMedicine(itemId) {
+    const g = this.game;
+    const it = ITEMS[itemId];
+    const targets = g.state.party.map((m, i) => ({
+      label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''),
+      value: i, disabled: this.medicineDisabledFor(it, m),
+    }));
+    targets.push({ label: 'Back', value: -1 });
+    g.ui.showMenu('Use ' + it.name + ' on...', targets, (v) => {
+      if (v === null || v === -1) { this.rtBagMenu(); return; }
+      const m = g.state.party[v];
+      const finishUse = (line) => {
+        g.state.bag[itemId]--;
+        g.audio.playSfx('heal');
+        this.rtFloat(line);
+        this.rtShowCommands();
+      };
+      if (it.ppRestore) {
+        const mvItems = m.moves.map((mv, mi) => ({
+          label: MOVES[mv.id].name + ' ' + mv.pp + '/' + mv.maxPp, value: mi, disabled: mv.pp >= mv.maxPp,
+        }));
+        mvItems.push({ label: 'Back', value: -1 });
+        g.ui.showMenu('Restore which move?', mvItems, (mi) => {
+          if (mi === null || mi === -1) { this.rtUseMedicine(itemId); return; }
+          finishUse(this.applyMedicineTo(itemId, m, mi));
+        }, { menuClass: 'battlewin' });
+        return;
+      }
+      finishUse(this.applyMedicineTo(itemId, m, null));
     }, { menuClass: 'battlewin' });
   },
 
   rtThrowBall(ballId) {
     const g = this.game;
+    if (this.kind !== 'wild') { this.rtFloat('A trainer blocks your ball!'); return; }
     if ((g.state.bag[ballId] || 0) <= 0) return;
     g.state.bag[ballId]--;
     const rt = this.rt;

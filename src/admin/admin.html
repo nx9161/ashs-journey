@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Command Deck — ASH'S JOURNEY</title>
+<meta name="description" content="Owner operations console for ASH'S JOURNEY.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+/*__FONT_FACE_CSS__*/
+:root{
+  --navy:#1b2340; --navy2:#232c52; --ink:#20242e; --mut:#5a6478;
+  --paper:#f4f6fb; --card:#ffffff; --line:#d7deee; --gold:#d99a26;
+  --ok:#2fa84f; --bad:#c0392b; --warn:#d99a26;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--paper);color:var(--ink)}
+a{color:#2a4d9c}
+#layout{display:flex;min-height:100vh}
+#side{width:230px;flex:0 0 230px;background:var(--navy);color:#dfe6ff;padding:20px 0}
+#side .brand{font-family:'PtPixel',monospace;font-weight:700;font-size:19px;color:#fff;padding:0 20px 4px}
+#side .sub{font-size:12px;color:#9fb0dd;padding:0 20px 16px;border-bottom:1px solid var(--navy2);margin-bottom:12px}
+#side nav button{display:block;width:100%;text-align:left;background:none;border:0;border-left:4px solid transparent;color:#dfe6ff;font-size:15px;padding:10px 20px;cursor:pointer;font-family:inherit}
+#side nav button:hover{background:var(--navy2)}
+#side nav button.on{background:var(--navy2);border-left-color:var(--gold);color:#fff;font-weight:700}
+#side .foot{padding:16px 20px;font-size:11px;color:#8494c4;line-height:1.5}
+#main{flex:1;padding:26px 30px;max-width:1060px}
+h1{font-family:'PtPixel',monospace;font-size:24px;margin:0 0 4px}
+h2{font-family:'PtPixel',monospace;font-size:18px;margin:26px 0 10px}
+.lede{color:var(--mut);margin:0 0 18px;font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.card .k{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+.card .v{font-size:28px;font-weight:700;margin-top:4px}
+.card .s{font-size:13px;color:var(--mut);margin-top:2px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th,td{text-align:left;padding:9px 12px;font-size:14px;border-bottom:1px solid var(--line)}
+th{background:#eef2fb;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut)}
+tr:last-child td{border-bottom:0}
+tr.clickable{cursor:pointer}
+tr.clickable:hover td{background:#f7faff}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:baseline}
+.dot.ok{background:var(--ok)} .dot.bad{background:var(--bad)} .dot.warn{background:var(--warn)}
+.probe{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.probe .name{font-weight:700;font-size:15px}
+.probe .hint{color:var(--mut);font-size:13px;margin-top:4px;line-height:1.5}
+.step{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:10px;font-size:14px;line-height:1.55}
+.step .n{display:inline-block;background:var(--navy);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-weight:700;margin-right:8px;font-size:13px}
+.check{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:10px;font-size:14px;line-height:1.55}
+.check input{margin-top:3px;width:17px;height:17px}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:6px;padding:9px 16px;font-size:14px;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--navy2)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+input[type=text]{font-size:15px;padding:9px 12px;border:1px solid var(--line);border-radius:6px;width:280px;font-family:inherit}
+pre.payload{background:#141a2e;color:#d7e1ff;border-radius:8px;padding:16px;font-size:12.5px;line-height:1.5;overflow:auto;max-height:560px;white-space:pre-wrap;word-break:break-word}
+.notice{background:#fff3cd;border:1px solid var(--warn);border-radius:8px;padding:14px 16px;font-size:14px;line-height:1.55;margin-bottom:14px}
+.error{background:#fdecea;border:1px solid var(--bad);border-radius:8px;padding:14px 16px;font-size:14px;line-height:1.55;margin-bottom:14px}
+.mut{color:var(--mut)} .small{font-size:13px}
+.pager{display:flex;gap:10px;align-items:center;margin-top:12px}
+code{background:#eef2fb;border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:13px}
+@media (max-width:760px){ #layout{flex-direction:column} #side{width:100%;flex:none} #main{padding:18px} }
+</style>
+</head>
+<body>
+<div id="layout">
+  <aside id="side">
+    <div class="brand">COMMAND DECK</div>
+    <div class="sub">ASH'S JOURNEY — owner operations</div>
+    <nav id="nav"></nav>
+    <div class="foot">Read-only console. Every payload view is audit-logged. Nothing here can change a player's game.</div>
+  </aside>
+  <main id="main"><p class="lede">Loading the deck…</p></main>
+</div>
+<script src="admin.js" defer></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
 
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
-import { BALLS } from '../data/items.mjs';
+import { BALLS, ITEMS } from '../data/items.mjs';
 import {
   effectiveness, calcDamage, stageMultiplier, accStageMultiplier, STAB_MULT,
   gen1Random, critChance, gen1Catch,
@@ -248,7 +248,7 @@ export class BattleScene {
         { label: 'ROCK', value: 'rock' },
         { label: 'RUN', value: 'safarirun' },
       ];
-      this.game.ui.showCommands(items, (value) => this.onCommand(value), {});
+      this.game.ui.showCommands(items, (value) => this.onCommand(value), { stickyCancel: true });
       return;
     }
     // P0/C7: guided first-catch tutorial — FIGHT highlighted first (others dimmed),
@@ -264,7 +264,7 @@ export class BattleScene {
     let focus = null;
     if (tut && !this._tutFightDone) focus = 'fight';
     else if (tut && this._tutStage === 'bag') focus = 'bag';
-    this.game.ui.showCommands(items, (value) => this.onCommand(value), { focus });
+    this.game.ui.showCommands(items, (value) => this.onCommand(value), { focus, stickyCancel: true });
   }
 
   updateCommand() { /* menu modal drives via ui */ }
@@ -323,18 +323,26 @@ export class BattleScene {
         const n = g.state.bag[bid] || 0;
         items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
       }
-      const potions = g.state.bag.potion || 0;
-      items.push({ label: 'Potion x' + potions, value: 'potion', disabled: potions <= 0, pocket: 'medicine' });
+      // AUDIT FIX (S-14): the battle bag used to stock ONLY plain Potion —
+      // every other medicine the player owned was unreachable in battle.
+      // It now carries the full battle-usable medicine pocket (heals,
+      // cures, revives, PP — data/items.mjs semantics, field-identical).
+      const meds = this.battleMedicineIds();
+      for (const mid of meds) {
+        items.push({ label: ITEMS[mid].name + ' x' + g.state.bag[mid], value: mid, pocket: 'medicine' });
+      }
       items.push({ label: 'Back', value: null });
       // P0/C7: in the guided tutorial, the Poke Ball row is highlighted once the foe is weakened.
       const focusBall = this.tutorial && this._tutStage === 'bag';
       g.ui.showMenu('Bag', items, (v) => {
         if (v === null) { this.toCommand(); return; }
-        if (v === 'potion') { this.usePotion(); return; }
+        // Balls live in ITEMS too (pocket 'balls') — BALLS membership is
+        // the dispatch test, medicine is everything else.
+        if (!BALLS[v] && ITEMS[v]) { this.useBattleItem(v); return; }
         this.playerAction = { type: 'ball', ball: v };
         this.foeAction = null; // throwing a ball: foe still acts? DS: ball replaces your move; foe moves first if faster. Simplify: foe acts after throw fails only.
         this.beginCatch(v);
-      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin bagwin', bagTabs: ['balls', 'medicine'] });
+      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin bagwin', bagTabs: meds.length ? ['balls', 'medicine'] : ['balls'] });
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {
@@ -377,9 +385,13 @@ export class BattleScene {
       const tag = m === this.ally ? ' (active)' : '';
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally };
     });
-    items.push({ label: 'Back', value: -1 });
+    // AUDIT FIX (S-12, blocker): a forced faint switch has NO way out in
+    // Platinum — offering Back (or honouring B/Esc) consumed the menu and
+    // stranded the battle with no command state. No Back row in faint
+    // mode, and a cancel simply re-opens the forced choice.
+    if (!inFaint) items.push({ label: 'Back', value: -1 });
     g.ui.showMenu(inFaint ? 'Choose next Pokemon' : 'Party', items, (v) => {
-      if (v === null || v === -1) { if (!inFaint) this.toCommand(); return; }
+      if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
       this.ally = g.state.party[v];
       this.allyStages = this.ally.stages;
@@ -405,24 +417,90 @@ export class BattleScene {
     });
   }
 
-  usePotion() {
+  // ---- AUDIT FIX (S-14): full battle medicine (shared with RT) ----
+  // Battle-usable = medicine pocket minus level-ups (Rare Candy's
+  // mid-battle evolution flow doesn't exist; honest exclusion, register).
+  battleMedicineIds() {
     const g = this.game;
-    const items = g.state.party.map((m, i) => ({
-      label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp, value: i, disabled: m.hp <= 0 || m.hp >= m.maxHp,
-    }));
-    items.push({ label: 'Back', value: -1 });
-    g.ui.showMenu('Use Potion on...', items, (v) => {
-      if (v === null || v === -1) { this.toCommand(); return; }
-      const m = g.state.party[v];
-      g.state.bag.potion--;
-      m.hp = Math.min(m.maxHp, m.hp + 20);
-      this.hpAnim.ally = m.hp; // snap if active
-      this.say(displayName(m, SPECIES) + ' recovered 20 HP!', () => {
-        this.playerAction = { type: 'item' };
-        this.foeAction = this.chooseFoeAction();
-        this.beginTurn();
-      });
+    return Object.keys(ITEMS).filter((id) => {
+      const it = ITEMS[id];
+      return it.pocket === 'medicine' && !it.levelUp && (g.state.bag[id] || 0) > 0;
     });
+  }
+
+  // Same applicability rules as the field bag (main-systems.mjs), with one
+  // Platinum correction: a heal that also cures status works at full HP
+  // when the target is statused.
+  medicineDisabledFor(it, m) {
+    if (it.revive) return m.hp > 0;
+    if (it.cure) return m.hp <= 0 || (it.cure !== 'all' && m.status !== it.cure) || (it.cure === 'all' && !m.status);
+    if (it.heal) return m.hp <= 0 || (m.hp >= m.maxHp && !(it.cureStatus && m.status));
+    if (it.ppRestore || it.ppRestoreAll) return m.hp <= 0;
+    return true;
+  }
+
+  // Applies the item's effect to mon m; moveIdx only for ppRestore.
+  // Returns the result line. Caller owns the bag decrement + turn flow.
+  applyMedicineTo(itemId, m, moveIdx) {
+    const it = ITEMS[itemId];
+    const name = displayName(m, SPECIES);
+    if (it.revive) { m.hp = Math.floor(m.maxHp * it.revive); m.status = null; return name + ' was revived!'; }
+    if (it.heal) {
+      const before = m.hp;
+      const hadStatus = m.status;
+      m.hp = Math.min(m.maxHp, m.hp + it.heal);
+      if (it.cureStatus) m.status = null;
+      const gained = m.hp - before;
+      if (gained > 0) return name + ' recovered ' + gained + ' HP!';
+      if (it.cureStatus && hadStatus) return name + ' was cured of its status!';
+      return name + ' recovered HP!';
+    }
+    if (it.cure) { m.status = null; m.confused = false; return name + ' was cured of its status!'; }
+    if (it.ppRestore && moveIdx !== null && moveIdx !== undefined) {
+      const mv = m.moves[moveIdx];
+      mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestore);
+      return MOVES[mv.id].name + "'s PP was restored!";
+    }
+    if (it.ppRestoreAll) { for (const mv of m.moves) mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestoreAll); return name + "'s PP was restored!"; }
+    return it.name + ' used.';
+  }
+
+  useBattleItem(itemId) {
+    const g = this.game;
+    const it = ITEMS[itemId];
+    const targets = g.state.party.map((m, i) => ({
+      label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''),
+      value: i, disabled: this.medicineDisabledFor(it, m),
+    }));
+    targets.push({ label: 'Back', value: -1 });
+    g.ui.showMenu('Use ' + it.name + ' on...', targets, (v) => {
+      // AUDIT FIX (S-37b): Back returns to the battle Bag it came from,
+      // not all the way to the command grid.
+      if (v === null || v === -1) { this.onCommand('bag'); return; }
+      const m = g.state.party[v];
+      const finishUse = (line) => {
+        g.state.bag[itemId]--;
+        if (m === this.ally) this.hpAnim.ally = m.hp; // snap if active
+        g.audio.playSfx('heal');
+        this.say(line, () => {
+          this.playerAction = { type: 'item' };
+          this.foeAction = this.chooseFoeAction();
+          this.beginTurn();
+        });
+      };
+      if (it.ppRestore) {
+        const mvItems = m.moves.map((mv, mi) => ({
+          label: MOVES[mv.id].name + ' ' + mv.pp + '/' + mv.maxPp, value: mi, disabled: mv.pp >= mv.maxPp,
+        }));
+        mvItems.push({ label: 'Back', value: -1 });
+        g.ui.showMenu('Restore which move?', mvItems, (mi) => {
+          if (mi === null || mi === -1) { this.useBattleItem(itemId); return; }
+          finishUse(this.applyMedicineTo(itemId, m, mi));
+        }, { menuClass: 'battlewin' });
+        return;
+      }
+      finishUse(this.applyMedicineTo(itemId, m, null));
+    }, { menuClass: 'battlewin' });
   }
 
   chooseFoeAction() {

@@ -201,7 +201,7 @@ body.flip .ab{right:auto;left:16px}
 .mvpp{font-size:15px;color:#4a5878;grid-column:1}
 .mvpow{font-size:15px;color:#6a7799;grid-column:2;justify-self:end}
 .mvcell .tpill{grid-column:2;grid-row:1;justify-self:end;margin:0}
-@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.menugrid .menu-row.wide{display:none}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
+@media (max-width:560px){.menugrid{gap:3px;padding:2px}.menugrid .menu-row{min-height:32px;padding:1px 6px}.mvpow{display:none}.mvcell{line-height:1.05;column-gap:4px}.menu.battlewin{bottom:1%;left:1%;right:1%;max-height:20%}.menu.battlewin .menu-row{min-height:42px}.mvname{grid-column:1/-1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mvcell .tpill{grid-column:1;grid-row:2;justify-self:start;padding:0 5px}.mvpp{grid-column:2;grid-row:2;white-space:nowrap}}
 .tpill{display:inline-block;font-size:14px;font-weight:bold;color:#fff;border:1px solid #232838;border-radius:3px;padding:1px 8px;margin:2px 0;text-shadow:1px 1px 0 rgba(0,0,0,.4)}
 .tpill b{font-weight:bold}
 .menu-row.zeropp{color:#a0a0a0}
@@ -295,7 +295,9 @@ body.desktop.showtouch .controls{display:block}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
    Structure and behavior untouched; presentation only. */
 .authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
-.authhead{font-family:var(--font-display);background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px}
+.authhead{font-family:var(--font-display);background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-size:16px;font-weight:bold;padding:10px 14px;letter-spacing:1px;display:flex;align-items:center;justify-content:space-between}
+.authx{background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.65);color:#fff;border-radius:4px;font:inherit;font-size:14px;line-height:1;padding:5px 9px;cursor:pointer}
+.authx:hover{background:rgba(255,255,255,.3)}
 .authsub{font-size:16px;font-weight:700;color:#3c4a6a;padding:8px 14px 0;line-height:1.45;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .authtabs{display:flex;border-bottom:2px solid var(--frame)}
 .authtab{flex:1;font-family:inherit;font-size:15px;font-weight:bold;padding:12px 4px;min-height:48px;background:linear-gradient(#e3ebfa,#b9c9e8);color:#4a5878;border:0;border-right:2px solid var(--frame);cursor:pointer}
@@ -988,6 +990,7 @@ const KEYMAP = {
   KeyX: 'b', Backspace: 'b',
   ShiftLeft: 'select', ShiftRight: 'select',
   KeyQ: 'pageup', KeyE: 'pagedown',
+  PageUp: 'pageup', PageDown: 'pagedown', // laptop physicals (Mac: fn+↑/↓)
   Digit1: 'slot1', Digit2: 'slot2', Digit3: 'slot3', Digit4: 'slot4',
   KeyF: 'fullscreen', KeyM: 'mute', Escape: 'escape',
 };
@@ -1008,13 +1011,23 @@ class Input {
   bindKeyboard() {
     if (this._bound || typeof document === 'undefined') return;
     this._bound = true;
+    // AUDIT FIX (S-38, blocker): keystrokes typed into form fields (auth
+    // username/password, any DOM input) belong to the field, never to the
+    // game — without this shield, letters a/d/s/w/z/x and Space were
+    // preventDefault()ed as game keys and could not be typed at all.
+    const fromField = (e) => {
+      const t = e.target;
+      return !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable);
+    };
     const down = (e) => {
+      if (fromField(e)) return;
       const action = this.remap[e.code];
       if (!action) return;
       if (['up', 'down', 'left', 'right', 'a', 'b'].includes(action)) e.preventDefault();
-      this._press(action);
+      this._press(action, !!e.repeat);
     };
     const up = (e) => {
+      if (fromField(e)) return;
       const action = this.remap[e.code];
       if (!action) return;
       this._release(action);
@@ -1024,8 +1037,11 @@ class Input {
     // Touch overlays call press/release directly.
   }
 
-  _press(action) {
-    if (!this.held[action]) this.pressed[action] = true;
+  _press(action, repeat) {
+    // AUDIT FIX (laptop paging): OS key-repeat re-fires direction edges so
+    // HOLDING an arrow scrolls menus/lists (Platinum behavior). Buttons
+    // (a/b/start) stay edge-only — a held A must never double-confirm.
+    if (!this.held[action] || (repeat && ['up', 'down', 'left', 'right'].includes(action))) this.pressed[action] = true;
     this.held[action] = true;
     if (['up', 'down', 'left', 'right'].includes(action)) {
       this._dirStack = this._dirStack.filter((d) => d !== action);
@@ -15452,6 +15468,7 @@ class UI {
     this.menu = {
       title: null, items, idx: opts.initialIdx || 0, cb, battle: true,
       kind: 'commands', grid: true, focus: opts.focus || null,
+      stickyCancel: !!opts.stickyCancel,
     };
     this.log.push({ ui: 'commands', items: items.map((i) => i.label) });
     if (!this.headless) this.renderCommands();
@@ -15529,6 +15546,7 @@ class UI {
       if (ni >= n) ni = n - 1;
       return ni;
     };
+    const prev = m.idx;
     let i = m.idx;
     for (let k = 0; k < n; k++) {
       i = step(i);
@@ -15538,7 +15556,7 @@ class UI {
     this.game.audio.playSfx(SFX['ui-tick']);
     if (!this.headless) {
       if (m.kind === 'commands') this.renderCommands();
-      else this.renderMenu();
+      else this._menuCursorDom(prev);
     }
   }
 
@@ -15551,6 +15569,13 @@ class UI {
     this.dlgText = this.el('div', 'dlg-text', this.dlgEl);
     this.dlgHint = this.el('div', 'dlg-hint', this.dlgEl);
     this.dlgHint.textContent = '▼';
+    // AUDIT FIX (S-15): the dialogue box itself is tappable to advance —
+    // it has pointer-events:auto but had no listener, so taps on the
+    // biggest target on screen were silently swallowed.
+    this.dlgEl.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      if (this.dlg) { this.game.audio.unlock(); this.advanceDialogue(); }
+    });
   }
 
   say(lines, cb, speaker) {
@@ -15602,17 +15627,37 @@ class UI {
     this.menuList = this.el('div', 'menu-list', this.menuEl);
   }
 
-  // opts: { battle, grid, initialIdx, rowHtml(item, i), focusValue }
+  // opts: { battle, grid, initialIdx, rowHtml(item, i), focusValue, remember }
   showMenu(title, items, cb, opts) {
     opts = opts || {};
     // D3: a menu opening consumes stale input edges — e.g. the direction key a
     // player was holding while walking into a grass encounter must not move the
     // battle cursor the moment the command menu appears.
     this.game.input.consumeAll();
+    // AUDIT FIX (cursor memory): menus opened with opts.remember restore the
+    // cursor row (+ bag pocket) they had when last closed in this session —
+    // Platinum keeps your place when you back out of a submenu and return.
+    // Explicit initialIdx always wins; restores are clamped + advanced to
+    // the next enabled, visible row so a changed list can't strand it.
+    let initIdx = opts.initialIdx || 0;
+    let initPocket = opts.bagPocket || (opts.bagTabs ? opts.bagTabs[0] : null);
+    if (opts.remember && opts.initialIdx === undefined) {
+      const mem = (this._menuMem || {})[opts.remember];
+      if (mem) {
+        initIdx = Math.max(0, Math.min(mem.idx || 0, items.length - 1));
+        if (opts.bagTabs && mem.pocket && opts.bagTabs.includes(mem.pocket)) initPocket = mem.pocket;
+        for (let k = 0; k < items.length; k++) {
+          const it = items[initIdx];
+          if (it && !it.disabled && (!opts.bagTabs || !it.pocket || it.pocket === initPocket)) break;
+          initIdx = (initIdx + 1) % items.length;
+        }
+      }
+    }
     this.menu = {
-      title, items, idx: opts.initialIdx || 0, cb,
+      title, items, idx: initIdx, cb,
+      rememberKey: opts.remember || null,
       battle: !!(opts && opts.battle), kind: opts.kind || 'menu',
-      grid: !!opts.grid, rowHtml: opts.rowHtml || null,
+      grid: !!opts.grid, gridNav: !!opts.gridNav, rowHtml: opts.rowHtml || null,
       menuClass: opts.menuClass || '',
       focusValue: opts.focusValue !== undefined ? opts.focusValue : null,
       // UI v2.4 (one-bag): pocket tabs. Items carry `pocket`; rows with no
@@ -15620,7 +15665,7 @@ class UI {
       // the FULL bag (harness contract); the DOM shows one pocket at a
       // time under the tab strip, Platinum-style.
       bagTabs: opts.bagTabs || null,
-      bagPocket: opts.bagPocket || (opts.bagTabs ? opts.bagTabs[0] : null),
+      bagPocket: initPocket,
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
     if (!this.headless) this.renderMenu();
@@ -15684,6 +15729,38 @@ class UI {
       if (!it.disabled) r.addEventListener('pointerdown', (e) => { e.preventDefault(); this.chooseMenu(i); });
       this.menuList.appendChild(r);
     });
+    // AUDIT FIX: a freshly rendered menu must show its cursor — long lists
+    // (dex/bag) overflow the window, and a restored cursor starts off-screen.
+    this._scrollCursorIntoView();
+  }
+
+  // Keep the cursor row inside the menu's visible window (the .menu box
+  // scrolls; Platinum never lets the selection leave the screen).
+  _scrollCursorIntoView() {
+    if (this.headless || !this.menu || !this.menuList) return;
+    const row = this.menuList.children[this.menu.idx];
+    if (row && row.scrollIntoView) { try { row.scrollIntoView({ block: 'nearest' }); } catch (e) { /* older engines */ } }
+  }
+
+  // AUDIT FIX: light cursor move — moveMenu used to rebuild EVERY row's DOM
+  // on each step (a ~1,000-row rebuild per keypress in the full dex, which
+  // also reset the scroll box to the top and hid the cursor). Now only the
+  // two affected rows update, and the new cursor scrolls into view. Falls
+  // back to a full render if the DOM is out of sync with the item list.
+  _menuCursorDom(prevIdx) {
+    if (this.headless || !this.menu || !this.menuList) return;
+    const m = this.menu;
+    if (this.menuList.children.length !== m.items.length) { this.renderMenu(); return; }
+    const paint = (i, on) => {
+      const row = this.menuList.children[i];
+      if (!row) return;
+      row.classList.toggle('cursor', on);
+      const cur = row.querySelector('.cur');
+      if (cur) cur.textContent = on ? '▶' : ' ';
+    };
+    if (prevIdx !== m.idx) paint(prevIdx, false);
+    paint(m.idx, true);
+    this._scrollCursorIntoView();
   }
 
   // UI v2.4: is this item reachable from the active bag pocket? Rows with
@@ -15714,6 +15791,7 @@ class UI {
   moveMenu(d) {
     const m = this.menu;
     if (!m) return;
+    const prev = m.idx;
     const n = m.items.length;
     let i = m.idx;
     for (let k = 0; k < n; k++) {
@@ -15722,7 +15800,40 @@ class UI {
     }
     m.idx = i;
     this.game.audio.playSfx(SFX['ui-tick']);
-    if (!this.headless) this.renderMenu();
+    if (!this.headless) this._menuCursorDom(prev);
+  }
+
+  // AUDIT FIX (paging): Q/E / PgUp/PgDn jump a page (10 rows) through long
+  // lists, clamped at the ends — the dex runs ~1,000 entries and previously
+  // had NO fast travel at all (single steps only, no key repeat).
+  moveMenuPage(d) {
+    const m = this.menu;
+    if (!m) return;
+    const prev = m.idx;
+    const step = d > 0 ? 1 : -1;
+    for (let s = 0; s < 10; s++) {
+      let i = m.idx + step;
+      let moved = false;
+      while (i >= 0 && i < m.items.length) {
+        if (!m.items[i].disabled && this.bagItemVisible(m, m.items[i])) { m.idx = i; moved = true; break; }
+        i += step;
+      }
+      if (!moved) break;
+    }
+    if (m.idx !== prev) {
+      this.game.audio.playSfx(SFX['ui-tick']);
+      if (!this.headless) this._menuCursorDom(prev);
+    }
+  }
+
+  // AUDIT FIX: persist cursor (+pocket) for remember-menus on close.
+  _storeMenuMem(m, idxOverride) {
+    if (!m || !m.rememberKey) return;
+    this._menuMem = this._menuMem || {};
+    this._menuMem[m.rememberKey] = {
+      idx: idxOverride !== undefined ? idxOverride : m.idx,
+      pocket: m.bagPocket || null,
+    };
   }
 
   chooseMenu(i) {
@@ -15731,6 +15842,7 @@ class UI {
     const idx = (i === undefined ? m.idx : i);
     const it = m.items[idx];
     if (!it || it.disabled) return;
+    this._storeMenuMem(m, idx);
     const wasCommands = m.kind === 'commands';
     this.menu = null;
     if (!this.headless) {
@@ -15746,6 +15858,7 @@ class UI {
   cancelMenu() {
     const m = this.menu;
     if (!m) return;
+    this._storeMenuMem(m);
     const wasCommands = m.kind === 'commands';
     this.menu = null;
     if (!this.headless) {
@@ -16004,6 +16117,7 @@ class UI {
       const b = this.el('button', 'logintab', tabs);
       b.textContent = name;
       b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._loginTab(key); });
+      b.addEventListener('click', () => this._loginTab(key)); // keyboard-activated buttons fire click only
       return b;
     };
     this._loginTabs = { login: mkTab('LOG IN', 'login'), register: mkTab('REGISTER', 'register'), guest: mkTab('GUEST', 'guest') };
@@ -16031,21 +16145,37 @@ class UI {
     gnote.textContent = 'Play right now — no account needed. Progress stays on this device until cloud saves arrive in Track B.';
     const go = this.el('button', 'login-go active', gp);
     go.textContent = 'PLAY AS GUEST';
-    go.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      this.game.audio.unlock();
-      this._closeLogin();
-      cb('guest');
-    });
+    go.addEventListener('pointerdown', (e) => { e.preventDefault(); this._loginGuestGo(); });
+    go.addEventListener('click', () => this._loginGuestGo()); // keyboard activation path (see _loginGuestGo)
     this._loginTab('guest');
   }
 
   _loginTab(key) {
+    this._loginTabKey = key;
     for (const k of Object.keys(this._loginTabs)) {
       this._loginTabs[k].classList.toggle('sel', k === key);
       this._loginPanes[k].classList.toggle('hidden', k !== key);
     }
     this.game.audio.playSfx(SFX['ui-tick']);
+  }
+
+  // AUDIT FIX (S-02, blocker): the stub Terminal was pointer-only while it
+  // swallowed every game key — a keyboard-only player could not start the
+  // game in guest/personal builds. One activation path, three entrances:
+  // pointer, keyboard (routed in update()), and native button click
+  // (Tab-focus + Enter/Space fires click without pointerdown).
+  _loginGuestGo() {
+    if (!this.loginOpen || !this._loginCb) return;
+    const cb = this._loginCb;
+    this.game.audio.unlock();
+    this._closeLogin();
+    cb('guest');
+  }
+
+  _loginTabCycle(d) {
+    const order = ['login', 'register', 'guest'];
+    const i = order.indexOf(this._loginTabKey || 'guest');
+    this._loginTab(order[(i + d + order.length) % order.length]);
   }
 
   _closeLogin() {
@@ -16093,7 +16223,11 @@ class UI {
   // ---- P0/C3: name-entry A-Z grid keyboard ----
   // DOM: bottom-half grid (portrait) / 480px centered panel (desktop), 44px keys,
   // physical-keyboard support, 8-char max, validation shake on empty.
-  showNameEntry(title, initial, maxLen, cb) {
+  // opts (AUDIT FIX S-03/S-04/S-20): { allowCancel, allowEmpty, emptyMsg }.
+  // Required-name contexts (intro) pass nothing and keep the original
+  // behaviour; search/nickname/confirm contexts opt into cancel + empty.
+  showNameEntry(title, initial, maxLen, cb, opts) {
+    opts = opts || {};
     if (this.headless) {
       // Harness contract: a menu-like state so menuOpen/debugChoose keep working.
       this.menu = {
@@ -16103,7 +16237,7 @@ class UI {
       this.log.push({ ui: 'nameentry', title });
       return;
     }
-    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title };
+    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title, opts };
     const ov = this.el('div', 'nkbover', this.root);
     this._nkbOv = ov;
     const card = this.el('div', 'namekb', ov);
@@ -16113,7 +16247,9 @@ class UI {
     this._nkbDisp = disp;
     this._nkbRender();
     const grid = this.el('div', 'nkb-grid', card);
-    const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    // AUDIT FIX (S-20): the charset was A-Z + '-' only — no digits, space,
+    // period or apostrophe (Platinum's keyboard has all of them).
+    const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
     for (const k of keys) {
       const b = this.el('button', 'nkb-key', grid);
       b.textContent = k;
@@ -16123,12 +16259,19 @@ class UI {
     const bk = this.el('button', 'nkb-key wide', row);
     bk.textContent = '←';
     bk.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbBack(); });
-    const dash = this.el('button', 'nkb-key', row);
-    dash.textContent = '-';
-    dash.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbType('-'); });
+    for (const k of ['-', '.', "'", ' ']) {
+      const b = this.el('button', 'nkb-key' + (k === ' ' ? ' wide' : ''), row);
+      b.textContent = k === ' ' ? 'SPACE' : k;
+      b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbType(k); });
+    }
     const ok = this.el('button', 'nkb-key wide go', row);
     ok.textContent = 'OK';
     ok.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbOk(); });
+    if (opts.allowCancel) {
+      const cx = this.el('button', 'nkb-key wide', row);
+      cx.textContent = 'CANCEL';
+      cx.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbCancel(); });
+    }
     // Physical keyboard: capture at document level so the game's KEYMAP never sees these.
     this._nkbKey = (e) => {
       if (!this.nameEntry) return;
@@ -16136,9 +16279,19 @@ class UI {
       e.stopPropagation();
       if (e.key === 'Backspace') this._nkbBack();
       else if (e.key === 'Enter') this._nkbOk();
-      else if (/^[a-zA-Z-]$/.test(e.key)) this._nkbType(e.key.toUpperCase());
+      else if (e.key === 'Escape' && this.nameEntry.opts && this.nameEntry.opts.allowCancel) this._nkbCancel();
+      else if (/^[a-zA-Z0-9\-'. ]$/.test(e.key)) this._nkbType(e.key.toUpperCase());
     };
     document.addEventListener('keydown', this._nkbKey, true);
+  }
+
+  _nkbCancel() {
+    const ne = this.nameEntry;
+    if (!ne) return;
+    const cb = ne.cb;
+    this.game.audio.playSfx(SFX['ui-back']);
+    this._nkbClose();
+    cb(null);
   }
 
   _nkbRender() {
@@ -16167,6 +16320,16 @@ class UI {
     const ne = this.nameEntry;
     if (!ne) return;
     if (!ne.value.trim()) {
+      // AUDIT FIX (S-04): contexts that promise "blank = all" (Dex search)
+      // or clearing (nickname) opt into allowEmpty — the blanket shake
+      // made a set Dex filter effectively un-clearable, and showed
+      // trainer-name copy inside search/DELETE contexts.
+      if (ne.opts && ne.opts.allowEmpty) {
+        const cb = ne.cb;
+        this._nkbClose();
+        cb('');
+        return;
+      }
       // Validation shake on empty (P0/C3).
       this.game.audio.playSfx(SFX['error-buzz']);
       if (this._nkbOv) {
@@ -16174,7 +16337,7 @@ class UI {
         void this._nkbOv.offsetWidth;
         this._nkbOv.classList.add('shake');
       }
-      this.toast('Give your trainer a name!');
+      this.toast((ne.opts && ne.opts.emptyMsg) || 'Give your trainer a name!');
       return;
     }
     const cb = ne.cb, v = ne.value.trim().toUpperCase().slice(0, ne.maxLen);
@@ -16215,6 +16378,10 @@ class UI {
       }
       b.addEventListener('pointerdown', (e) => {
         e.preventDefault();
+        // AUDIT FIX (S-17): the strip stays visible under modal layers —
+        // a tap during dialogue/a menu must not replace the single menu
+        // slot mid-conversation and strand the pending callback.
+        if (this.dlg || this.menu || this.summary || this.pcPanel || this.loginOpen || this.nameEntry) return;
         this.game.audio.unlock();
         const g = this.game;
         if (key === 'bag') g.openBag();
@@ -16259,6 +16426,7 @@ class UI {
     this._moodDot = dot;
     b.addEventListener('pointerdown', (e) => {
       e.preventDefault();
+      if (this.dlg || this.menu || this.summary || this.pcPanel || this.loginOpen || this.nameEntry) return; // S-17 guard, same as the HUD strip
       this.game.audio.unlock();
       if (this.onMoodTap) this.onMoodTap();
     });
@@ -16288,7 +16456,7 @@ class UI {
   buildHintCard() {
     const c = this.el('div', 'hintcard hidden', this.root);
     const t = this.el('div', '', c);
-    t.textContent = 'Keyboard: Arrows/WASD move · Z/Space = A · X = B · Enter = START · M = mute · F = fullscreen';
+    t.textContent = 'Keyboard: Arrows/WASD move · Z = A · X = B · Enter = menu · Q/E or PgUp/PgDn = page · Shift = select · M = mute · F = fullscreen';
     const x = this.el('button', 'hintcard-x', c);
     x.textContent = 'Got it ×';
     x.addEventListener('pointerdown', (e) => {
@@ -16373,6 +16541,16 @@ class UI {
     this._chipTick = (this._chipTick || 0) + 1;
     if (this._chipTick % 15 === 0) this._syncChipAnchor();
     const input = this.game.input;
+    // AUDIT FIX (S-16): the desktop hint card's dismiss was pointer-only.
+    // Any confirm/back keypress dismisses it — peeked, not consumed, so
+    // the same press still does its normal job.
+    if (!this.headless && this._hintCard && !this._hintOff && !this._hintCard.classList.contains('hidden')) {
+      const p = input.pressed || {};
+      if (p.a || p.b || p.start || p.escape || p.select) {
+        this._hintOff = true;
+        this._hintCard.classList.add('hidden');
+      }
+    }
     // Summary panel is modal (UI v2): left/right (or X/Y page keys) switch
     // tabs, B / START / ESC closes.
     if (this.summary) {
@@ -16384,6 +16562,16 @@ class UI {
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;
     // Login page is modal (P0/B1).
+    // AUDIT FIX (S-02): stub Terminal keyboard routing — ←/→ switch tabs,
+    // A/START activates PLAY AS GUEST on the guest tab (the disabled stub
+    // tabs have no action). The full-auth panel (auth.mjs) uses native DOM
+    // focus instead and never builds _loginTabs, so it is untouched here.
+    if (this.loginOpen && this._loginTabs) {
+      if (input.wasPressed('left') || input.wasPressed('pageup')) this._loginTabCycle(-1);
+      else if (input.wasPressed('right') || input.wasPressed('pagedown')) this._loginTabCycle(1);
+      else if ((input.wasPressed('a') || input.wasPressed('start')) && this._loginTabKey === 'guest') this._loginGuestGo();
+      return true;
+    }
     if (this.loginOpen) return true;
     // Chapter title card is modal (D2: auto-dismisses; A/START/tap dismiss early).
     if (this.chapterCard) {
@@ -16411,17 +16599,32 @@ class UI {
       return true; // dialogue modal
     }
     if (this.menu) {
-      const grid = !!this.menu.grid;
+      const grid = !!(this.menu.grid || this.menu.gridNav);
       if (input.wasPressed('up')) { grid ? this.moveMenuGrid('up') : this.moveMenu(-1); }
       else if (input.wasPressed('down')) { grid ? this.moveMenuGrid('down') : this.moveMenu(1); }
-      else if (input.wasPressed('left') && this.menu.bagTabs) { this.bagTabMove(-1); }
-      else if (input.wasPressed('right') && this.menu.bagTabs) { this.bagTabMove(1); }
-      else if (input.wasPressed('pageup') && this.menu.bagTabs) { this.bagTabMove(-1); }
-      else if (input.wasPressed('pagedown') && this.menu.bagTabs) { this.bagTabMove(1); }
-      else if (input.wasPressed('left') && this.menu.battle) { grid ? this.moveMenuGrid('left') : this.moveMenu(-1); }
-      else if (input.wasPressed('right') && this.menu.battle) { grid ? this.moveMenuGrid('right') : this.moveMenu(1); }
+      // AUDIT FIX (S-50): guards must run BEFORE wasPressed — wasPressed
+      // consumes the edge even when the branch then fails, so the old
+      // order let the bagTabs tests eat every pageup/pagedown edge in
+      // non-bag menus (Q/E / PgUp / PgDn paging was dead in the Dex and
+      // every other long list) and the grid tests eat battle left/right.
+      else if (grid && !this.menu.bagTabs && input.wasPressed('left')) { this.moveMenuGrid('left'); }
+      else if (grid && !this.menu.bagTabs && input.wasPressed('right')) { this.moveMenuGrid('right'); }
+      else if (this.menu.bagTabs && input.wasPressed('left')) { this.bagTabMove(-1); }
+      else if (this.menu.bagTabs && input.wasPressed('right')) { this.bagTabMove(1); }
+      else if (this.menu.bagTabs && input.wasPressed('pageup')) { this.bagTabMove(-1); }
+      else if (this.menu.bagTabs && input.wasPressed('pagedown')) { this.bagTabMove(1); }
+      else if (input.wasPressed('pageup')) { this.moveMenuPage(-1); }
+      else if (input.wasPressed('pagedown')) { this.moveMenuPage(1); }
+      else if (this.menu.battle && input.wasPressed('left')) { grid ? this.moveMenuGrid('left') : this.moveMenu(-1); }
+      else if (this.menu.battle && input.wasPressed('right')) { grid ? this.moveMenuGrid('right') : this.moveMenu(1); }
       else if (input.wasPressed('a') || input.wasPressed('start')) { this.chooseMenu(); return true; }
-      else if (input.wasPressed('b') || input.wasPressed('escape')) { this.cancelMenu(); return true; }
+      else if (input.wasPressed('b') || input.wasPressed('escape')) {
+        // AUDIT FIX (S-13): a sticky root menu (the classic command grid)
+        // swallows B — Platinum has nothing beneath it, and cancelling +
+        // re-showing was a flicker loop with a back-SFX.
+        if (!this.menu.stickyCancel) this.cancelMenu();
+        return true;
+      }
       return true; // menu modal
     }
     // PC box panel is modal (UI v2.4): routed AFTER dialogue/menus so a
@@ -16435,6 +16638,7 @@ class UI {
       else if (input.wasPressed('right')) cb('move', 'right');
       else if (input.wasPressed('pageup')) cb('box', -1);
       else if (input.wasPressed('pagedown')) cb('box', 1);
+      else if (input.wasPressed('select')) cb('link');
       else if (input.wasPressed('a') || input.wasPressed('start')) cb('confirm');
       else if (input.wasPressed('b') || input.wasPressed('escape')) cb('cancel');
       return true;
@@ -16775,17 +16979,44 @@ class BootScene {
       return;
     }
     // title menu
+    // S-49: while the Trainer ID Terminal is open, the title scene must
+    // not consume game keys — otherwise Enter/arrows at the terminal
+    // re-activate the hidden menu (stacking terminals, moving the cursor
+    // behind the panel). ui.update already gates on loginOpen; the scene
+    // stack did not.
+    if (this.game.ui && this.game.ui.loginOpen) return;
     const items = this.menuItems();
     if (input.wasPressed('up')) { this.menuIdx = (this.menuIdx + items.length - 1) % items.length; }
     if (input.wasPressed('down')) { this.menuIdx = (this.menuIdx + 1) % items.length; }
     if (input.wasPressed('a') || input.wasPressed('start')) {
-      const it = items[this.menuIdx];
       this.game.audio.unlock();
-      // P0/B1: title menu routes through the Trainer ID Terminal (guest-functional stub).
-      if (it.value === 'new') this.game.openLogin('new');
-      else if (it.value === 'continue') this.game.openLogin('continue');
-      else if (it.value === 'options') this.game.openOptions();
+      this._activateMenuItem(items[this.menuIdx]);
     }
+  }
+
+  _activateMenuItem(it) {
+    if (!it) return;
+    // P0/B1: title menu routes through the Trainer ID Terminal (guest-functional stub).
+    if (it.value === 'new') this.game.openLogin('new');
+    else if (it.value === 'continue') this.game.openLogin('continue');
+    else if (it.value === 'options') this.game.openOptions();
+  }
+
+  // AUDIT FIX (S-01): the title menu was canvas-only — a tap anywhere
+  // injected a global A and selected whatever row happened to be
+  // highlighted. Rows are now real targets: render() publishes their
+  // rects, and a tap on a row selects AND activates it. Taps elsewhere
+  // keep the old behaviour (they open the menu from PRESS START).
+  handleTap(vx, vy) {
+    if (this.phase === 'legal' || this.titleStage !== 'menu' || !this._menuHit) return false;
+    const h = this._menuHit;
+    if (vx < h.x || vx > h.x + h.w) return false;
+    const i = Math.floor((vy - (h.y + h.padY)) / h.rowH);
+    if (i < 0 || i >= h.values.length) return false;
+    this.menuIdx = i;
+    this.game.audio.unlock();
+    this._activateMenuItem(this.menuItems()[i]);
+    return true;
   }
   menuItems() {
     const items = [{ label: 'New Game', value: 'new' }];
@@ -16919,6 +17150,8 @@ class BootScene {
     }
 
     if (showMenu) {
+      // S-01: publish row rects for pointer hit-testing (handleTap).
+      this._menuHit = { x: menuX, y: menuY, w: menuW, rowH, padY: menuPadY, values: items.map((it) => it.value) };
       // ---- Menu: clean centered panel, gold-tinted highlight bar on selection ----
       r.panel(menuX, menuY, menuW, menuH, 'rgba(18,18,30,0.88)', GOLD);
       items.forEach((it, i) => {
@@ -17088,13 +17321,18 @@ class IntroScene {
       if (this._startHeld >= 1) {
         this._startHeld = 0;
         this.step = 'confirm-skip';
+        // AUDIT FIX (S-21): remember the current line — 'Keep watching'
+        // used to restart the professor's whole script from line one.
+        this._resumeIdx = g.ui.dlg ? g.ui.dlg.idx : 0;
         g.ui.closeDialogue();
         g.ui.showMenu('Skip the intro?', [
           { label: 'Keep watching', value: 'no' },
           { label: 'Skip intro', value: 'yes' },
         ], (v) => {
           if (v === 'yes') { this.finishIntro(); return; }
-          this.begin(); // restart the professor lines
+          this.step = 'professor';
+          const lines = INTRO_SCRIPT.lines.map((l) => l.replace('{player}', this.name)).slice(this._resumeIdx || 0);
+          g.ui.say(lines.length ? lines : INTRO_SCRIPT.lines, () => this.nameEntry(), INTRO_SCRIPT.professor);
         });
       }
     } else {
@@ -17444,7 +17682,7 @@ class BattleScene {
         { label: 'ROCK', value: 'rock' },
         { label: 'RUN', value: 'safarirun' },
       ];
-      this.game.ui.showCommands(items, (value) => this.onCommand(value), {});
+      this.game.ui.showCommands(items, (value) => this.onCommand(value), { stickyCancel: true });
       return;
     }
     // P0/C7: guided first-catch tutorial — FIGHT highlighted first (others dimmed),
@@ -17460,7 +17698,7 @@ class BattleScene {
     let focus = null;
     if (tut && !this._tutFightDone) focus = 'fight';
     else if (tut && this._tutStage === 'bag') focus = 'bag';
-    this.game.ui.showCommands(items, (value) => this.onCommand(value), { focus });
+    this.game.ui.showCommands(items, (value) => this.onCommand(value), { focus, stickyCancel: true });
   }
 
   updateCommand() { /* menu modal drives via ui */ }
@@ -17519,18 +17757,26 @@ class BattleScene {
         const n = g.state.bag[bid] || 0;
         items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
       }
-      const potions = g.state.bag.potion || 0;
-      items.push({ label: 'Potion x' + potions, value: 'potion', disabled: potions <= 0, pocket: 'medicine' });
+      // AUDIT FIX (S-14): the battle bag used to stock ONLY plain Potion —
+      // every other medicine the player owned was unreachable in battle.
+      // It now carries the full battle-usable medicine pocket (heals,
+      // cures, revives, PP — data/items.mjs semantics, field-identical).
+      const meds = this.battleMedicineIds();
+      for (const mid of meds) {
+        items.push({ label: ITEMS[mid].name + ' x' + g.state.bag[mid], value: mid, pocket: 'medicine' });
+      }
       items.push({ label: 'Back', value: null });
       // P0/C7: in the guided tutorial, the Poke Ball row is highlighted once the foe is weakened.
       const focusBall = this.tutorial && this._tutStage === 'bag';
       g.ui.showMenu('Bag', items, (v) => {
         if (v === null) { this.toCommand(); return; }
-        if (v === 'potion') { this.usePotion(); return; }
+        // Balls live in ITEMS too (pocket 'balls') — BALLS membership is
+        // the dispatch test, medicine is everything else.
+        if (!BALLS[v] && ITEMS[v]) { this.useBattleItem(v); return; }
         this.playerAction = { type: 'ball', ball: v };
         this.foeAction = null; // throwing a ball: foe still acts? DS: ball replaces your move; foe moves first if faster. Simplify: foe acts after throw fails only.
         this.beginCatch(v);
-      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin bagwin', bagTabs: ['balls', 'medicine'] });
+      }, { focusValue: focusBall ? 'pokeball' : null, menuClass: 'battlewin bagwin', bagTabs: meds.length ? ['balls', 'medicine'] : ['balls'] });
     } else if (value === 'party') {
       this.openPartyMenu(false);
     } else if (value === 'run') {
@@ -17573,9 +17819,13 @@ class BattleScene {
       const tag = m === this.ally ? ' (active)' : '';
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally };
     });
-    items.push({ label: 'Back', value: -1 });
+    // AUDIT FIX (S-12, blocker): a forced faint switch has NO way out in
+    // Platinum — offering Back (or honouring B/Esc) consumed the menu and
+    // stranded the battle with no command state. No Back row in faint
+    // mode, and a cancel simply re-opens the forced choice.
+    if (!inFaint) items.push({ label: 'Back', value: -1 });
     g.ui.showMenu(inFaint ? 'Choose next Pokemon' : 'Party', items, (v) => {
-      if (v === null || v === -1) { if (!inFaint) this.toCommand(); return; }
+      if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
       this.ally = g.state.party[v];
       this.allyStages = this.ally.stages;
@@ -17601,24 +17851,90 @@ class BattleScene {
     });
   }
 
-  usePotion() {
+  // ---- AUDIT FIX (S-14): full battle medicine (shared with RT) ----
+  // Battle-usable = medicine pocket minus level-ups (Rare Candy's
+  // mid-battle evolution flow doesn't exist; honest exclusion, register).
+  battleMedicineIds() {
     const g = this.game;
-    const items = g.state.party.map((m, i) => ({
-      label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp, value: i, disabled: m.hp <= 0 || m.hp >= m.maxHp,
-    }));
-    items.push({ label: 'Back', value: -1 });
-    g.ui.showMenu('Use Potion on...', items, (v) => {
-      if (v === null || v === -1) { this.toCommand(); return; }
-      const m = g.state.party[v];
-      g.state.bag.potion--;
-      m.hp = Math.min(m.maxHp, m.hp + 20);
-      this.hpAnim.ally = m.hp; // snap if active
-      this.say(displayName(m, SPECIES) + ' recovered 20 HP!', () => {
-        this.playerAction = { type: 'item' };
-        this.foeAction = this.chooseFoeAction();
-        this.beginTurn();
-      });
+    return Object.keys(ITEMS).filter((id) => {
+      const it = ITEMS[id];
+      return it.pocket === 'medicine' && !it.levelUp && (g.state.bag[id] || 0) > 0;
     });
+  }
+
+  // Same applicability rules as the field bag (main-systems.mjs), with one
+  // Platinum correction: a heal that also cures status works at full HP
+  // when the target is statused.
+  medicineDisabledFor(it, m) {
+    if (it.revive) return m.hp > 0;
+    if (it.cure) return m.hp <= 0 || (it.cure !== 'all' && m.status !== it.cure) || (it.cure === 'all' && !m.status);
+    if (it.heal) return m.hp <= 0 || (m.hp >= m.maxHp && !(it.cureStatus && m.status));
+    if (it.ppRestore || it.ppRestoreAll) return m.hp <= 0;
+    return true;
+  }
+
+  // Applies the item's effect to mon m; moveIdx only for ppRestore.
+  // Returns the result line. Caller owns the bag decrement + turn flow.
+  applyMedicineTo(itemId, m, moveIdx) {
+    const it = ITEMS[itemId];
+    const name = displayName(m, SPECIES);
+    if (it.revive) { m.hp = Math.floor(m.maxHp * it.revive); m.status = null; return name + ' was revived!'; }
+    if (it.heal) {
+      const before = m.hp;
+      const hadStatus = m.status;
+      m.hp = Math.min(m.maxHp, m.hp + it.heal);
+      if (it.cureStatus) m.status = null;
+      const gained = m.hp - before;
+      if (gained > 0) return name + ' recovered ' + gained + ' HP!';
+      if (it.cureStatus && hadStatus) return name + ' was cured of its status!';
+      return name + ' recovered HP!';
+    }
+    if (it.cure) { m.status = null; m.confused = false; return name + ' was cured of its status!'; }
+    if (it.ppRestore && moveIdx !== null && moveIdx !== undefined) {
+      const mv = m.moves[moveIdx];
+      mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestore);
+      return MOVES[mv.id].name + "'s PP was restored!";
+    }
+    if (it.ppRestoreAll) { for (const mv of m.moves) mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestoreAll); return name + "'s PP was restored!"; }
+    return it.name + ' used.';
+  }
+
+  useBattleItem(itemId) {
+    const g = this.game;
+    const it = ITEMS[itemId];
+    const targets = g.state.party.map((m, i) => ({
+      label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''),
+      value: i, disabled: this.medicineDisabledFor(it, m),
+    }));
+    targets.push({ label: 'Back', value: -1 });
+    g.ui.showMenu('Use ' + it.name + ' on...', targets, (v) => {
+      // AUDIT FIX (S-37b): Back returns to the battle Bag it came from,
+      // not all the way to the command grid.
+      if (v === null || v === -1) { this.onCommand('bag'); return; }
+      const m = g.state.party[v];
+      const finishUse = (line) => {
+        g.state.bag[itemId]--;
+        if (m === this.ally) this.hpAnim.ally = m.hp; // snap if active
+        g.audio.playSfx('heal');
+        this.say(line, () => {
+          this.playerAction = { type: 'item' };
+          this.foeAction = this.chooseFoeAction();
+          this.beginTurn();
+        });
+      };
+      if (it.ppRestore) {
+        const mvItems = m.moves.map((mv, mi) => ({
+          label: MOVES[mv.id].name + ' ' + mv.pp + '/' + mv.maxPp, value: mi, disabled: mv.pp >= mv.maxPp,
+        }));
+        mvItems.push({ label: 'Back', value: -1 });
+        g.ui.showMenu('Restore which move?', mvItems, (mi) => {
+          if (mi === null || mi === -1) { this.useBattleItem(itemId); return; }
+          finishUse(this.applyMedicineTo(itemId, m, mi));
+        }, { menuClass: 'battlewin' });
+        return;
+      }
+      finishUse(this.applyMedicineTo(itemId, m, null));
+    }, { menuClass: 'battlewin' });
   }
 
   chooseFoeAction() {
@@ -18960,7 +19276,7 @@ Object.assign(BattleScene.prototype, {
     g.ui.showCommands(items, (value) => {
       if (value === null) return; // B backs out to the live arena
       if (value === 'fight') this.rtShowMoves();
-      else if (value === 'bag') this.rtBallMenu();
+      else if (value === 'bag') this.rtBagMenu();
       else if (value === 'party') this.openPartyMenu(false);
       else if (value === 'run') this.rtTryRun();
     }, {});
@@ -19416,22 +19732,67 @@ Object.assign(BattleScene.prototype, {
     this.rtFloatT = 1400;
   },
 
-  rtBallMenu() {
+  // AUDIT FIX (S-14/S-43): the RT bag was balls-only (no medicine at all)
+  // and never disabled balls against trainers — a throw silently burned a
+  // ball on an uncatchable mon. It is now the same tabbed bag as classic:
+  // balls (disabled vs trainers, like classic) + the medicine pocket.
+  rtBagMenu() {
     const g = this.game;
     const items = [];
     for (const bid of ['pokeball', 'greatball', 'ultraball', 'masterball']) {
       const n = g.state.bag[bid] || 0;
-      items.push({ label: (bid === 'pokeball' ? 'Poke Ball' : bid === 'greatball' ? 'Great Ball' : bid === 'ultraball' ? 'Ultra Ball' : 'Master Ball') + ' x' + n, value: bid, disabled: n <= 0 });
+      items.push({ label: (bid === 'pokeball' ? 'Poke Ball' : bid === 'greatball' ? 'Great Ball' : bid === 'ultraball' ? 'Ultra Ball' : 'Master Ball') + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
+    }
+    const meds = this.battleMedicineIds();
+    for (const mid of meds) {
+      items.push({ label: ITEMS[mid].name + ' x' + g.state.bag[mid], value: mid, pocket: 'medicine' });
     }
     items.push({ label: 'Back', value: null });
-    g.ui.showMenu('Throw which ball? (A)', items, (v) => {
-      if (v) this.rtThrowBall(v);
-      else this.rtShowCommands(); // Back/cancel -> command grid (classic parity)
+    g.ui.showMenu('Bag', items, (v) => {
+      if (!v) { this.rtShowCommands(); return; } // Back/cancel -> command grid
+      if (ITEMS[v] && ITEMS[v].pocket === 'medicine') { this.rtUseMedicine(v); return; }
+      this.rtThrowBall(v);
+    }, { menuClass: 'battlewin bagwin', bagTabs: meds.length ? ['balls', 'medicine'] : ['balls'] });
+  },
+
+  // RT medicine: menus freeze the arena (theatre rule), the item applies
+  // on selection and play resumes at the command grid — no turn exists to
+  // spend in real-time; the cost is the menu time itself.
+  rtUseMedicine(itemId) {
+    const g = this.game;
+    const it = ITEMS[itemId];
+    const targets = g.state.party.map((m, i) => ({
+      label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''),
+      value: i, disabled: this.medicineDisabledFor(it, m),
+    }));
+    targets.push({ label: 'Back', value: -1 });
+    g.ui.showMenu('Use ' + it.name + ' on...', targets, (v) => {
+      if (v === null || v === -1) { this.rtBagMenu(); return; }
+      const m = g.state.party[v];
+      const finishUse = (line) => {
+        g.state.bag[itemId]--;
+        g.audio.playSfx('heal');
+        this.rtFloat(line);
+        this.rtShowCommands();
+      };
+      if (it.ppRestore) {
+        const mvItems = m.moves.map((mv, mi) => ({
+          label: MOVES[mv.id].name + ' ' + mv.pp + '/' + mv.maxPp, value: mi, disabled: mv.pp >= mv.maxPp,
+        }));
+        mvItems.push({ label: 'Back', value: -1 });
+        g.ui.showMenu('Restore which move?', mvItems, (mi) => {
+          if (mi === null || mi === -1) { this.rtUseMedicine(itemId); return; }
+          finishUse(this.applyMedicineTo(itemId, m, mi));
+        }, { menuClass: 'battlewin' });
+        return;
+      }
+      finishUse(this.applyMedicineTo(itemId, m, null));
     }, { menuClass: 'battlewin' });
   },
 
   rtThrowBall(ballId) {
     const g = this.game;
+    if (this.kind !== 'wild') { this.rtFloat('A trainer blocks your ball!'); return; }
     if ((g.state.bag[ballId] || 0) <= 0) return;
     g.state.bag[ballId]--;
     const rt = this.rt;
@@ -20761,9 +21122,10 @@ Object.assign(OverworldScene.prototype, {
           if (v === null || v === -1) return;
           const mon = g.state.party[v];
           g.ui.showNameEntry('Nickname for ' + SPECIES[mon.speciesId].name + '?', mon.nickname || SPECIES[mon.speciesId].name, 12, (name) => {
-            mon.nickname = name && name.trim() ? name.trim().slice(0, 12) : null;
+            if (name === null) return; // cancelled — keep the current name (S-03)
+            mon.nickname = name && name.trim() ? name.trim().slice(0, 12) : null; // blank OK clears it (S-04)
             g.ui.say([(mon.nickname || SPECIES[mon.speciesId].name) + '... A fine name!'], null, npc.name);
-          });
+          }, { allowCancel: true, allowEmpty: true });
         });
       });
       return true;
@@ -20774,8 +21136,11 @@ Object.assign(OverworldScene.prototype, {
   endSafari(msg) {
     const g = this.game;
     g.state.session.safari = null;
+    // AUDIT FIX (C241): unspent Safari Balls used to vanish silently —
+    // the exit text now says what happened to them.
+    const left = g.state.bag.safariball || 0;
     g.state.bag.safariball = 0;
-    g.ui.say([msg], () => {
+    g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg], () => {
       const st = MAPS.fuchsia.start || { x: 10, y: 10 };
       this.loadMap('fuchsia');
       this.player.tx = st.x; this.player.ty = st.y;
@@ -20822,7 +21187,11 @@ Object.assign(OverworldScene.prototype, {
         const sp = SPECIES[m.speciesId];
         return sp && sp.evo && sp.evo.method === 'trade';
       });
-      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
+      // AUDIT FIX (S-10): the link flow used to close the PC first and
+      // never come back — checking (or backing out) cost the whole PC
+      // session. The panel now stays open underneath (menus and dialogue
+      // route above it) and every exit path returns to it.
+      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.'], () => render()); return; }
       const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
       items.push({ label: 'Back', value: null, wide: true });
       const linkRowHtml = (it) => {
@@ -20832,7 +21201,8 @@ Object.assign(OverworldScene.prototype, {
       };
       g.ui.showMenu('Link Transfer which?', items, (iv) => {
         const mon = cand.find((m) => m.monId === iv);
-        if (mon) this.evolveMon(mon);
+        if (mon) this.evolveMon(mon, null, () => render());
+        else render();
       }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
     };
 
@@ -20873,7 +21243,7 @@ Object.assign(OverworldScene.prototype, {
       const bodyHtml = '<div class="pcmain"><div class="pcgrid">' + cells + '</div>'
         + '<div class="pcside"><div class="pcpartyhd">PARTY</div><div class="pcparty">' + party + '</div>'
         + '<div class="pcinfo">' + infoFor() + '</div>'
-        + '<button class="pclink" data-pcact="link">Link Transfer (Bill\'s system)</button>'
+        + '<button class="pclink" data-pcact="link">Link Transfer (Bill\'s system) — Shift</button>'
         + '<button class="pclink" data-pcact="off">Log off</button></div></div>';
       const data = {
         title: 'SOMEONE\'S PC — BOX ' + st.box + ' (' + arr.length + '/' + BOX_CAP + ')'
@@ -20965,10 +21335,12 @@ Object.assign(OverworldScene.prototype, {
       else if (action === 'cancel') {
         if (st.held) { st.held = null; render(); }
         else g.ui.closePcPanel();
+      } else if (action === 'link') {
+        openLink(); // AUDIT FIX (S-09): Shift key — the keyboard path to Link Transfer
       } else if (action === 'click') {
         if (arg.act === 'cell') { st.zone = 'grid'; st.idx = arg.idx; place('grid', arg.idx); }
         else if (arg.act === 'party') { st.zone = 'party'; st.idx = arg.idx; place('party', arg.idx); }
-        else if (arg.act === 'link') { g.ui.closePcPanel(); openLink(); }
+        else if (arg.act === 'link') { openLink(); }
         else if (arg.act === 'off') { g.ui.closePcPanel(); }
       }
     };
@@ -20989,7 +21361,9 @@ Object.assign(OverworldScene.prototype, {
         }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Buy what?', items, (iv) => {
-          if (!iv) return;
+          // AUDIT FIX (S-11): Back returns to the Mart top menu, not out
+          // of the whole Mart flow onto the street.
+          if (!iv) { this.openMart(stock); return; }
           g.state.player.money -= ITEMS[iv].price;
           g.state.bag[iv] = (g.state.bag[iv] || 0) + 1;
           g.audio.playSfx('dex-register');
@@ -21001,7 +21375,7 @@ Object.assign(OverworldScene.prototype, {
           .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Sell what?', items, (iv) => {
-          if (!iv) return;
+          if (!iv) { this.openMart(stock); return; }
           g.state.bag[iv]--;
           g.state.player.money += Math.floor(ITEMS[iv].price / 2);
           g.ui.toast('Sold ' + ITEMS[iv].name + '.');
@@ -21041,10 +21415,10 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- evolution ----------
-  evolveMon(mon, stoneId) {
+  evolveMon(mon, stoneId, onDone) {
     const g = this.game;
     const chk = evolutionCheck(mon);
-    if (!chk.ok) { g.ui.say([chk.line]); return false; }
+    if (!chk.ok) { g.ui.say([chk.line], onDone || undefined); return false; }
     const sp = SPECIES[mon.speciesId];
     let evo = null;
     if (stoneId) {
@@ -21068,7 +21442,7 @@ Object.assign(OverworldScene.prototype, {
     };
     dexRegister(g.state.dex, 'caught', to.dexNo);
     g.audio.playSfx('levelup');
-    g.ui.say(['What? ' + fromName + ' is evolving!', fromName + ' evolved into ' + to.name + '!']);
+    g.ui.say(['What? ' + fromName + ' is evolving!', fromName + ' evolved into ' + to.name + '!'], onDone || undefined);
     return true;
   },
 
@@ -21331,6 +21705,17 @@ class Game {
       this.canvas.addEventListener('pointerdown', (e) => {
         e.preventDefault();
         this.audio.unlock();
+        // AUDIT FIX (S-01): scenes with real tap targets (the title menu)
+        // get first claim on the tap, in logical view coordinates.
+        const top = this.scenes && this.scenes.top;
+        if (top && top.handleTap && this.canvas.getBoundingClientRect) {
+          const rect = this.canvas.getBoundingClientRect();
+          if (rect.width > 0 && rect.height > 0) {
+            const vx = (e.clientX - rect.left) / rect.width * this.renderer.viewW;
+            const vy = (e.clientY - rect.top) / rect.height * this.renderer.viewH;
+            if (top.handleTap(vx, vy)) return;
+          }
+        }
         this.input.inject('a');
       });
     }
@@ -21617,7 +22002,7 @@ class Game {
       } else if (g.useBagItem) {
         g.useBagItem(v); // WS9: full item-use system (main-systems.mjs)
       }
-    }, { rowHtml: bagRowHtml, menuClass: 'bagwin', bagTabs: pocketsPresent });
+    }, { rowHtml: bagRowHtml, menuClass: 'bagwin', bagTabs: pocketsPresent, remember: 'bag' });
   }
 
   openParty() {
@@ -21702,10 +22087,29 @@ class Game {
       if (!m) return;
       const fieldMoves = (m.moves || []).filter((x) => ['cut', 'fly', 'surf', 'strength', 'flash'].includes(x.id));
       const rows = [{ label: 'Summary', value: 'summary' }];
+      // AUDIT FIX (S-47): Platinum's party submenu has SWITCH — party
+      // order (lead, switch-ins, XP share order) could not be changed
+      // anywhere in the game. Switch picks a partner and swaps places.
+      if (g.state.party.length > 1) rows.push({ label: 'Switch', value: 'switch' });
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
       rows.push({ label: 'Close', value: 'close' });
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
         if (a === 'field' && g.openFieldMove) { g.openFieldMove(m); return; }
+        if (a === 'switch') {
+          const others = g.state.party
+            .map((mm, i) => ({ label: displayName(mm, SPECIES) + ' Lv' + mm.level, value: i }))
+            .filter((r) => r.value !== monIndex);
+          others.push({ label: 'Back', value: -1 });
+          g.ui.showMenu('Switch ' + displayName(m, SPECIES) + ' with...', others, (t) => {
+            if (t === null || t === -1) { openMonMenu(monIndex); return; }
+            const tmp = g.state.party[monIndex];
+            g.state.party[monIndex] = g.state.party[t];
+            g.state.party[t] = tmp;
+            g.audio.playSfx('ui-blip');
+            g.openParty();
+          });
+          return;
+        }
         if (a === 'summary') {
           g.ui.showSummary(summaryData(m), () => openMonMenu(monIndex));
         }
@@ -21714,7 +22118,7 @@ class Game {
     g.ui.showMenu('Party', items, (v) => {
       if (v === null || v === 'close' || v === -1) return;
       openMonMenu(v);
-    }, { rowHtml, menuClass: 'plate-full' });
+    }, { rowHtml, menuClass: 'plate-full', remember: 'party', gridNav: true });
   }
 
   openDex(filter) {
@@ -21751,7 +22155,7 @@ class Game {
       if (!v || v === 'close') return;
       if (v === 'rating') { g.ui.say([g.oakRating()], () => g.openDex(filter), 'Prof. Hawthorn'); return; }
       if (v === 'filter') { g.openDexFilter(filter); return; }
-      if (v === 'areas') { g.openDexAreas(); return; }
+      if (v === 'areas') { g.openDexAreas(filter); return; }
       const sp = SPECIES[v];
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
       if (!c && !s) { g.openDex(filter); return; }
@@ -21760,7 +22164,7 @@ class Game {
         sp.flavor,
         'Status: ' + (c ? 'CAUGHT' : 'SEEN'),
       ], () => g.openDex(filter), 'Dex');
-    });
+    }, { remember: 'dex' });
   }
 
   // P1/G3: dex filter submenu — status, type, and name search (reuses the A-Z grid).
@@ -21776,15 +22180,19 @@ class Game {
     ], (st) => {
       if (st === 'back' || st === null) { g.openDex(filter); return; }
       const f2 = Object.assign({}, filter, { status: st === 'all' ? null : st });
-      const titems = [{ label: 'All types', value: null }].concat(types.map((t) => ({ label: t, value: t })));
+      // AUDIT FIX (S-05): 'All types' carried value:null — the cancel
+      // sentinel — so choosing it aborted the wizard and threw away the
+      // status step. It now has its own value and continues to search.
+      const titems = [{ label: 'All types', value: 'all' }].concat(types.map((t) => ({ label: t, value: t })));
       titems.push({ label: 'Back', value: 'back' });
       g.ui.showMenu('Filter: type', titems, (tp) => {
         if (tp === 'back' || tp === null) { g.openDex(filter); return; }
-        const f3 = Object.assign({}, f2, { type: tp });
+        const f3 = Object.assign({}, f2, { type: tp === 'all' ? null : tp });
         g.ui.showNameEntry('Search the Dex (blank = all)', '', 8, (q) => {
-          f3.q = q || null;
+          if (q === null) { g.openDex(f2); return; } // cancelled: keep the pre-search filter (S-03)
+          f3.q = q || null; // '' (blank OK) clears the search, as promised (S-04)
           g.openDex(f3);
-        });
+        }, { allowCancel: true, allowEmpty: true });
       });
     });
   }
@@ -21836,7 +22244,9 @@ class Game {
   }
 
   // P1/G3: Areas tab — per-area "caught n/m" checklists (B2W2 Habitat pattern).
-  openDexAreas() {
+  // AUDIT FIX (S-42): the active dex filter rides along and is restored on
+  // return — the Areas detour used to silently drop it.
+  openDexAreas(filter) {
     const g = this;
     const items = Object.keys(MAPS).filter((id) => MAPS[id].encounters).map((id) => {
       const map = MAPS[id];
@@ -21846,7 +22256,7 @@ class Game {
     });
     items.push({ label: 'Back', value: 'back' });
     g.ui.showMenu('Dex — Areas', items, (v) => {
-      if (!v || v === 'back') { g.openDex(); return; }
+      if (!v || v === 'back') { g.openDex(filter); return; }
       const map = MAPS[v];
       const rows = map.encounters.table.map((e) => {
         const sp = SPECIES[e.species];
@@ -21854,7 +22264,7 @@ class Game {
         return { label: (c || s ? sp.name : '???') + '  Lv' + e.min + '-' + e.max + (c ? ' [CAUGHT]' : s ? ' [SEEN]' : ''), value: null, disabled: true };
       });
       rows.push({ label: 'Back', value: 'back' });
-      g.ui.showMenu(map.name, rows, () => g.openDexAreas());
+      g.ui.showMenu(map.name, rows, () => g.openDexAreas(filter));
     });
   }
 
@@ -21961,7 +22371,7 @@ class Game {
         s.hudScale = s.hudScale >= 1.5 ? 1 : Math.round((s.hudScale + 0.25) * 100) / 100;
         if (typeof document !== 'undefined') document.documentElement.style.setProperty('--hudscale', s.hudScale);
       }
-      else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, null, ''); return; }
+      else if (v === 'legal') { g.ui.say(DISCLAIMER_CREDITS, () => g.openOptions(), ''); return; }
       else if (v === 'account') { AUTH.openAccountMenu(g); return; }
       else if (v === 'syncnow') { SYNC.syncNow(g, true); return; }
       else if (v === 'erase') {
@@ -21983,7 +22393,7 @@ class Game {
                   } else {
                     g.ui.toast('Erase cancelled.');
                   }
-                });
+                }, { allowCancel: true, emptyMsg: 'Type DELETE to confirm — or CANCEL to back out.' });
               }
             }, { menuClass: 'syswin' });
           }
@@ -21992,7 +22402,7 @@ class Game {
       } else return;
       g.saveGame(true);
       g.openOptions();
-    }, { menuClass: 'syswin' });
+    }, { menuClass: 'syswin', remember: 'options' });
   }
 }
 
@@ -22078,7 +22488,10 @@ Object.assign(Game.prototype, {
         return { label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''), value: i, disabled: dis };
       });
       targets.push({ label: 'Back', value: -1 });
-      g.ui.showMenu('Use ' + it.name + ' on...', targets, (t) => {
+      // AUDIT FIX (S-37): the Ether move picker's Back used to skip this
+      // target picker entirely and land in the Bag. showTargets is now
+      // re-enterable so Back steps back exactly one level.
+      const showTargets = () => g.ui.showMenu('Use ' + it.name + ' on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
         const m = g.state.party[t];
         const apply = () => {
@@ -22094,7 +22507,7 @@ Object.assign(Game.prototype, {
           const mvItems = m.moves.map((mv, mi) => ({ label: MOVES[mv.id].name + ' ' + mv.pp + '/' + mv.maxPp, value: mi }));
           mvItems.push({ label: 'Back', value: -1 });
           g.ui.showMenu('Restore which move?', mvItems, (mi) => {
-            if (mi === null || mi === -1) { finish(); return; }
+            if (mi === null || mi === -1) { showTargets(); return; }
             m.moves[mi].pp = Math.min(m.moves[mi].maxPp, m.moves[mi].pp + it.ppRestore);
             apply();
           });
@@ -22103,6 +22516,7 @@ Object.assign(Game.prototype, {
         if (it.ppRestoreAll) { for (const mv of m.moves) mv.pp = Math.min(mv.maxPp, mv.pp + it.ppRestoreAll); apply(); return; }
         finish();
       }, { rowHtml: (it) => g.partyTargetRowHtml(it) });
+      showTargets();
       return;
     }
     if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone'].includes(id)) {
@@ -22318,8 +22732,18 @@ Object.assign(Game.prototype, {
 
   openTownMap() {
     const g = this;
+    // AUDIT FIX (C201): the Town Map was one dialogue line of RAW internal
+    // map ids. It is now a real screen: visited places by display name,
+    // current location marked, in a proper Platinum window.
     const visited = Object.keys(g.state.story.flags).filter((k) => k.startsWith('reached_')).map((k) => k.slice(8));
-    g.ui.say(['KANTO — places you have been:', visited.length ? visited.join(' · ') : 'Nowhere yet. Walk!'], null, 'Town Map');
+    const cur = g.state.story.position && g.state.story.position.map;
+    const items = visited.map((id) => ({
+      label: (MAPS[id] ? MAPS[id].name : id) + (id === cur ? '  — you are here' : ''),
+      value: null, disabled: true,
+    }));
+    if (!items.length) items.push({ label: 'Nowhere yet. Walk!', value: null, disabled: true });
+    items.push({ label: 'Close', value: 'close' });
+    g.ui.showMenu('Town Map — Kanto', items, () => {});
   },
 
   // ---------- field moves (WS9) ----------
@@ -22400,6 +22824,6 @@ Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:a43edb694477aa83b654288e0ae45e449b903de8a25fa97f148b0b3b68bb621f -->
+<!-- contentHash:4da40554087c7df61d4cb7b962576aebb1460ea754f8c9824bf115c3422c8c88 -->
 </body>
 </html>

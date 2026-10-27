@@ -514,9 +514,10 @@ Object.assign(OverworldScene.prototype, {
           if (v === null || v === -1) return;
           const mon = g.state.party[v];
           g.ui.showNameEntry('Nickname for ' + SPECIES[mon.speciesId].name + '?', mon.nickname || SPECIES[mon.speciesId].name, 12, (name) => {
-            mon.nickname = name && name.trim() ? name.trim().slice(0, 12) : null;
+            if (name === null) return; // cancelled — keep the current name (S-03)
+            mon.nickname = name && name.trim() ? name.trim().slice(0, 12) : null; // blank OK clears it (S-04)
             g.ui.say([(mon.nickname || SPECIES[mon.speciesId].name) + '... A fine name!'], null, npc.name);
-          });
+          }, { allowCancel: true, allowEmpty: true });
         });
       });
       return true;
@@ -527,8 +528,11 @@ Object.assign(OverworldScene.prototype, {
   endSafari(msg) {
     const g = this.game;
     g.state.session.safari = null;
+    // AUDIT FIX (C241): unspent Safari Balls used to vanish silently —
+    // the exit text now says what happened to them.
+    const left = g.state.bag.safariball || 0;
     g.state.bag.safariball = 0;
-    g.ui.say([msg], () => {
+    g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg], () => {
       const st = MAPS.fuchsia.start || { x: 10, y: 10 };
       this.loadMap('fuchsia');
       this.player.tx = st.x; this.player.ty = st.y;
@@ -575,7 +579,11 @@ Object.assign(OverworldScene.prototype, {
         const sp = SPECIES[m.speciesId];
         return sp && sp.evo && sp.evo.method === 'trade';
       });
-      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.']); return; }
+      // AUDIT FIX (S-10): the link flow used to close the PC first and
+      // never come back — checking (or backing out) cost the whole PC
+      // session. The panel now stays open underneath (menus and dialogue
+      // route above it) and every exit path returns to it.
+      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.'], () => render()); return; }
       const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
       items.push({ label: 'Back', value: null, wide: true });
       const linkRowHtml = (it) => {
@@ -585,7 +593,8 @@ Object.assign(OverworldScene.prototype, {
       };
       g.ui.showMenu('Link Transfer which?', items, (iv) => {
         const mon = cand.find((m) => m.monId === iv);
-        if (mon) this.evolveMon(mon);
+        if (mon) this.evolveMon(mon, null, () => render());
+        else render();
       }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
     };
 
@@ -626,7 +635,7 @@ Object.assign(OverworldScene.prototype, {
       const bodyHtml = '<div class="pcmain"><div class="pcgrid">' + cells + '</div>'
         + '<div class="pcside"><div class="pcpartyhd">PARTY</div><div class="pcparty">' + party + '</div>'
         + '<div class="pcinfo">' + infoFor() + '</div>'
-        + '<button class="pclink" data-pcact="link">Link Transfer (Bill\'s system)</button>'
+        + '<button class="pclink" data-pcact="link">Link Transfer (Bill\'s system) — Shift</button>'
         + '<button class="pclink" data-pcact="off">Log off</button></div></div>';
       const data = {
         title: 'SOMEONE\'S PC — BOX ' + st.box + ' (' + arr.length + '/' + BOX_CAP + ')'
@@ -718,10 +727,12 @@ Object.assign(OverworldScene.prototype, {
       else if (action === 'cancel') {
         if (st.held) { st.held = null; render(); }
         else g.ui.closePcPanel();
+      } else if (action === 'link') {
+        openLink(); // AUDIT FIX (S-09): Shift key — the keyboard path to Link Transfer
       } else if (action === 'click') {
         if (arg.act === 'cell') { st.zone = 'grid'; st.idx = arg.idx; place('grid', arg.idx); }
         else if (arg.act === 'party') { st.zone = 'party'; st.idx = arg.idx; place('party', arg.idx); }
-        else if (arg.act === 'link') { g.ui.closePcPanel(); openLink(); }
+        else if (arg.act === 'link') { openLink(); }
         else if (arg.act === 'off') { g.ui.closePcPanel(); }
       }
     };
@@ -742,7 +753,9 @@ Object.assign(OverworldScene.prototype, {
         }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Buy what?', items, (iv) => {
-          if (!iv) return;
+          // AUDIT FIX (S-11): Back returns to the Mart top menu, not out
+          // of the whole Mart flow onto the street.
+          if (!iv) { this.openMart(stock); return; }
           g.state.player.money -= ITEMS[iv].price;
           g.state.bag[iv] = (g.state.bag[iv] || 0) + 1;
           g.audio.playSfx('dex-register');
@@ -754,7 +767,7 @@ Object.assign(OverworldScene.prototype, {
           .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Sell what?', items, (iv) => {
-          if (!iv) return;
+          if (!iv) { this.openMart(stock); return; }
           g.state.bag[iv]--;
           g.state.player.money += Math.floor(ITEMS[iv].price / 2);
           g.ui.toast('Sold ' + ITEMS[iv].name + '.');
@@ -794,10 +807,10 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- evolution ----------
-  evolveMon(mon, stoneId) {
+  evolveMon(mon, stoneId, onDone) {
     const g = this.game;
     const chk = evolutionCheck(mon);
-    if (!chk.ok) { g.ui.say([chk.line]); return false; }
+    if (!chk.ok) { g.ui.say([chk.line], onDone || undefined); return false; }
     const sp = SPECIES[mon.speciesId];
     let evo = null;
     if (stoneId) {
@@ -821,7 +834,7 @@ Object.assign(OverworldScene.prototype, {
     };
     dexRegister(g.state.dex, 'caught', to.dexNo);
     g.audio.playSfx('levelup');
-    g.ui.say(['What? ' + fromName + ' is evolving!', fromName + ' evolved into ' + to.name + '!']);
+    g.ui.say(['What? ' + fromName + ' is evolving!', fromName + ' evolved into ' + to.name + '!'], onDone || undefined);
     return true;
   },
 

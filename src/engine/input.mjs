@@ -12,6 +12,7 @@ export const KEYMAP = {
   KeyX: 'b', Backspace: 'b',
   ShiftLeft: 'select', ShiftRight: 'select',
   KeyQ: 'pageup', KeyE: 'pagedown',
+  PageUp: 'pageup', PageDown: 'pagedown', // laptop physicals (Mac: fn+↑/↓)
   Digit1: 'slot1', Digit2: 'slot2', Digit3: 'slot3', Digit4: 'slot4',
   KeyF: 'fullscreen', KeyM: 'mute', Escape: 'escape',
 };
@@ -32,13 +33,23 @@ export class Input {
   bindKeyboard() {
     if (this._bound || typeof document === 'undefined') return;
     this._bound = true;
+    // AUDIT FIX (S-38, blocker): keystrokes typed into form fields (auth
+    // username/password, any DOM input) belong to the field, never to the
+    // game — without this shield, letters a/d/s/w/z/x and Space were
+    // preventDefault()ed as game keys and could not be typed at all.
+    const fromField = (e) => {
+      const t = e.target;
+      return !!t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.tagName === 'SELECT' || t.isContentEditable);
+    };
     const down = (e) => {
+      if (fromField(e)) return;
       const action = this.remap[e.code];
       if (!action) return;
       if (['up', 'down', 'left', 'right', 'a', 'b'].includes(action)) e.preventDefault();
-      this._press(action);
+      this._press(action, !!e.repeat);
     };
     const up = (e) => {
+      if (fromField(e)) return;
       const action = this.remap[e.code];
       if (!action) return;
       this._release(action);
@@ -48,8 +59,11 @@ export class Input {
     // Touch overlays call press/release directly.
   }
 
-  _press(action) {
-    if (!this.held[action]) this.pressed[action] = true;
+  _press(action, repeat) {
+    // AUDIT FIX (laptop paging): OS key-repeat re-fires direction edges so
+    // HOLDING an arrow scrolls menus/lists (Platinum behavior). Buttons
+    // (a/b/start) stay edge-only — a held A must never double-confirm.
+    if (!this.held[action] || (repeat && ['up', 'down', 'left', 'right'].includes(action))) this.pressed[action] = true;
     this.held[action] = true;
     if (['up', 'down', 'left', 'right'].includes(action)) {
       this._dirStack = this._dirStack.filter((d) => d !== action);

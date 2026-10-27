@@ -44,6 +44,26 @@ function authEl(tag, cls, parent) {
 }
 function authText(elm, str) { elm.textContent = (str === null || str === undefined) ? '' : String(str); }
 
+// AUDIT FIX (S-29): every password field gets the Show/Hide toggle the
+// login/register panes already had — Recovery, Change Password, Delete
+// Account and the register Confirm field were missing it. Same pattern:
+// the input moves into an .authrow next to an .authshow button.
+function addPwToggle(labelEl, input) {
+  const row = authEl('div', 'authrow', labelEl);
+  row.appendChild(input);
+  input.style.flex = '1';
+  const show = authEl('button', 'authshow', row);
+  show.type = 'button'; authText(show, 'Show');
+  show.setAttribute('aria-pressed', 'false');
+  show.setAttribute('aria-label', 'Show password');
+  show.addEventListener('click', () => {
+    const pw = input.type === 'password';
+    input.type = pw ? 'text' : 'password';
+    authText(show, pw ? 'Hide' : 'Show');
+    show.setAttribute('aria-pressed', pw ? 'true' : 'false');
+  });
+}
+
 // Same-origin JSON API. The session cookie is HttpOnly — the client never reads
 // or writes tokens (AppSec C4). Returns {status, body, offline}.
 // NOTE: the '/api/' prefix is a string literal (not built dynamically) so the
@@ -161,6 +181,15 @@ function showLoginPanel(ui, game, cb) {
   card.setAttribute('aria-label', 'Trainer ID Terminal');
   const head = authEl('div', 'authhead', card);
   authText(head, 'TRAINER ID TERMINAL');
+  // AUDIT FIX (S-26): a visible close for pointer users — Esc was the only
+  // exit and nothing on the card hinted at it. Same guard as Esc: the
+  // one-time recovery-codes pane cannot be closed away.
+  const xBtn = authEl('button', 'authx', head);
+  xBtn.setAttribute('aria-label', 'Close terminal');
+  authText(xBtn, '✕');
+  xBtn.addEventListener('click', () => {
+    if (!panes.codes || panes.codes.classList.contains('hidden')) close();
+  });
   const sub = authEl('div', 'authsub', card);
   authText(sub, 'Log in to sync your journey across devices.');
 
@@ -342,6 +371,7 @@ function showLoginPanel(ui, game, cb) {
     const inC = authEl('input', 'authin', lc);
     inC.type = 'password'; inC.autocomplete = 'new-password';
     inC.setAttribute('aria-label', 'Confirm password');
+    addPwToggle(lc, inC);
     const ch = authEl('div', 'authhint', f);
 
     const age = authEl('label', 'authcheck', f);
@@ -395,7 +425,9 @@ function showLoginPanel(ui, game, cb) {
       const okU = validUsername(inU.value);
       const okP = inP.value.length >= 8;
       const okC = inC.value === inP.value && inC.value.length > 0;
-      go.disabled = !(okU && okP && okC && agreed.v);
+      // AUDIT FIX (S-28): the 13+ age box gates the button too — CREATE
+      // ACCOUNT used to light up without it and only refuse on submit.
+      go.disabled = !(okU && okP && okC && agreed.v && ageBox.checked);
       return okU && okP && okC;
     }
     ageBox.addEventListener('change', validate);
@@ -483,6 +515,7 @@ function showLoginPanel(ui, game, cb) {
     authText(ln, 'New password');
     const inN = authEl('input', 'authin', ln);
     inN.type = 'password'; inN.autocomplete = 'new-password';
+    addPwToggle(ln, inN);
     const go = authEl('button', 'authgo', f);
     go.type = 'submit'; authText(go, 'RESET PASSWORD');
     const back = authEl('button', 'authlink', p);
@@ -658,10 +691,13 @@ function accountChangePassword(game, ov, closeAccount) {
   const f = authEl('form', '', pane);
   const lc = authEl('label', 'authfield', f); authText(lc, 'Current password');
   const inC = authEl('input', 'authin', lc); inC.type = 'password'; inC.autocomplete = 'current-password';
+  addPwToggle(lc, inC);
   const ln = authEl('label', 'authfield', f); authText(ln, 'New password (8+ characters)');
   const inN = authEl('input', 'authin', ln); inN.type = 'password'; inN.autocomplete = 'new-password';
+  addPwToggle(ln, inN);
   const lm = authEl('label', 'authfield', f); authText(lm, 'Confirm new password');
   const inM = authEl('input', 'authin', lm); inM.type = 'password'; inM.autocomplete = 'new-password';
+  addPwToggle(lm, inM);
   const go = authEl('button', 'authgo', f); go.type = 'submit'; authText(go, 'CHANGE PASSWORD');
   const back = authEl('button', 'authlink', pane); authText(back, '← Back');
   back.addEventListener('click', () => sub.remove());
@@ -737,6 +773,7 @@ function accountDelete(game, ov, closeAccount) {
   const f = authEl('form', '', pane);
   const lp = authEl('label', 'authfield', f); authText(lp, 'Confirm with your password');
   const inP = authEl('input', 'authin', lp); inP.type = 'password'; inP.autocomplete = 'current-password';
+  addPwToggle(lp, inP);
   const go = authEl('button', 'authgo', f); go.type = 'submit'; authText(go, 'CONTINUE');
   f.addEventListener('submit', (e) => {
     e.preventDefault(); err.classList.add('hidden');
@@ -767,7 +804,7 @@ function accountDelete(game, ov, closeAccount) {
         doneB.addEventListener('click', () => { sub.remove(); closeAccount(); game.quitToTitle(); });
         doneB.focus();
       });
-    });
+    }, { allowCancel: true, emptyMsg: 'Type DELETE to confirm — or CANCEL to back out.' });
   });
   const back = authEl('button', 'authlink', pane); authText(back, '← Back');
   back.addEventListener('click', () => sub.remove());

@@ -201,6 +201,7 @@ export class UI {
     this.menu = {
       title: null, items, idx: opts.initialIdx || 0, cb, battle: true,
       kind: 'commands', grid: true, focus: opts.focus || null,
+      stickyCancel: !!opts.stickyCancel,
     };
     this.log.push({ ui: 'commands', items: items.map((i) => i.label) });
     if (!this.headless) this.renderCommands();
@@ -278,6 +279,7 @@ export class UI {
       if (ni >= n) ni = n - 1;
       return ni;
     };
+    const prev = m.idx;
     let i = m.idx;
     for (let k = 0; k < n; k++) {
       i = step(i);
@@ -287,7 +289,7 @@ export class UI {
     this.game.audio.playSfx(SFX['ui-tick']);
     if (!this.headless) {
       if (m.kind === 'commands') this.renderCommands();
-      else this.renderMenu();
+      else this._menuCursorDom(prev);
     }
   }
 
@@ -300,6 +302,13 @@ export class UI {
     this.dlgText = this.el('div', 'dlg-text', this.dlgEl);
     this.dlgHint = this.el('div', 'dlg-hint', this.dlgEl);
     this.dlgHint.textContent = '▼';
+    // AUDIT FIX (S-15): the dialogue box itself is tappable to advance —
+    // it has pointer-events:auto but had no listener, so taps on the
+    // biggest target on screen were silently swallowed.
+    this.dlgEl.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      if (this.dlg) { this.game.audio.unlock(); this.advanceDialogue(); }
+    });
   }
 
   say(lines, cb, speaker) {
@@ -351,17 +360,37 @@ export class UI {
     this.menuList = this.el('div', 'menu-list', this.menuEl);
   }
 
-  // opts: { battle, grid, initialIdx, rowHtml(item, i), focusValue }
+  // opts: { battle, grid, initialIdx, rowHtml(item, i), focusValue, remember }
   showMenu(title, items, cb, opts) {
     opts = opts || {};
     // D3: a menu opening consumes stale input edges — e.g. the direction key a
     // player was holding while walking into a grass encounter must not move the
     // battle cursor the moment the command menu appears.
     this.game.input.consumeAll();
+    // AUDIT FIX (cursor memory): menus opened with opts.remember restore the
+    // cursor row (+ bag pocket) they had when last closed in this session —
+    // Platinum keeps your place when you back out of a submenu and return.
+    // Explicit initialIdx always wins; restores are clamped + advanced to
+    // the next enabled, visible row so a changed list can't strand it.
+    let initIdx = opts.initialIdx || 0;
+    let initPocket = opts.bagPocket || (opts.bagTabs ? opts.bagTabs[0] : null);
+    if (opts.remember && opts.initialIdx === undefined) {
+      const mem = (this._menuMem || {})[opts.remember];
+      if (mem) {
+        initIdx = Math.max(0, Math.min(mem.idx || 0, items.length - 1));
+        if (opts.bagTabs && mem.pocket && opts.bagTabs.includes(mem.pocket)) initPocket = mem.pocket;
+        for (let k = 0; k < items.length; k++) {
+          const it = items[initIdx];
+          if (it && !it.disabled && (!opts.bagTabs || !it.pocket || it.pocket === initPocket)) break;
+          initIdx = (initIdx + 1) % items.length;
+        }
+      }
+    }
     this.menu = {
-      title, items, idx: opts.initialIdx || 0, cb,
+      title, items, idx: initIdx, cb,
+      rememberKey: opts.remember || null,
       battle: !!(opts && opts.battle), kind: opts.kind || 'menu',
-      grid: !!opts.grid, rowHtml: opts.rowHtml || null,
+      grid: !!opts.grid, gridNav: !!opts.gridNav, rowHtml: opts.rowHtml || null,
       menuClass: opts.menuClass || '',
       focusValue: opts.focusValue !== undefined ? opts.focusValue : null,
       // UI v2.4 (one-bag): pocket tabs. Items carry `pocket`; rows with no
@@ -369,7 +398,7 @@ export class UI {
       // the FULL bag (harness contract); the DOM shows one pocket at a
       // time under the tab strip, Platinum-style.
       bagTabs: opts.bagTabs || null,
-      bagPocket: opts.bagPocket || (opts.bagTabs ? opts.bagTabs[0] : null),
+      bagPocket: initPocket,
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
     if (!this.headless) this.renderMenu();
@@ -433,6 +462,38 @@ export class UI {
       if (!it.disabled) r.addEventListener('pointerdown', (e) => { e.preventDefault(); this.chooseMenu(i); });
       this.menuList.appendChild(r);
     });
+    // AUDIT FIX: a freshly rendered menu must show its cursor — long lists
+    // (dex/bag) overflow the window, and a restored cursor starts off-screen.
+    this._scrollCursorIntoView();
+  }
+
+  // Keep the cursor row inside the menu's visible window (the .menu box
+  // scrolls; Platinum never lets the selection leave the screen).
+  _scrollCursorIntoView() {
+    if (this.headless || !this.menu || !this.menuList) return;
+    const row = this.menuList.children[this.menu.idx];
+    if (row && row.scrollIntoView) { try { row.scrollIntoView({ block: 'nearest' }); } catch (e) { /* older engines */ } }
+  }
+
+  // AUDIT FIX: light cursor move — moveMenu used to rebuild EVERY row's DOM
+  // on each step (a ~1,000-row rebuild per keypress in the full dex, which
+  // also reset the scroll box to the top and hid the cursor). Now only the
+  // two affected rows update, and the new cursor scrolls into view. Falls
+  // back to a full render if the DOM is out of sync with the item list.
+  _menuCursorDom(prevIdx) {
+    if (this.headless || !this.menu || !this.menuList) return;
+    const m = this.menu;
+    if (this.menuList.children.length !== m.items.length) { this.renderMenu(); return; }
+    const paint = (i, on) => {
+      const row = this.menuList.children[i];
+      if (!row) return;
+      row.classList.toggle('cursor', on);
+      const cur = row.querySelector('.cur');
+      if (cur) cur.textContent = on ? '▶' : ' ';
+    };
+    if (prevIdx !== m.idx) paint(prevIdx, false);
+    paint(m.idx, true);
+    this._scrollCursorIntoView();
   }
 
   // UI v2.4: is this item reachable from the active bag pocket? Rows with
@@ -463,6 +524,7 @@ export class UI {
   moveMenu(d) {
     const m = this.menu;
     if (!m) return;
+    const prev = m.idx;
     const n = m.items.length;
     let i = m.idx;
     for (let k = 0; k < n; k++) {
@@ -471,7 +533,40 @@ export class UI {
     }
     m.idx = i;
     this.game.audio.playSfx(SFX['ui-tick']);
-    if (!this.headless) this.renderMenu();
+    if (!this.headless) this._menuCursorDom(prev);
+  }
+
+  // AUDIT FIX (paging): Q/E / PgUp/PgDn jump a page (10 rows) through long
+  // lists, clamped at the ends — the dex runs ~1,000 entries and previously
+  // had NO fast travel at all (single steps only, no key repeat).
+  moveMenuPage(d) {
+    const m = this.menu;
+    if (!m) return;
+    const prev = m.idx;
+    const step = d > 0 ? 1 : -1;
+    for (let s = 0; s < 10; s++) {
+      let i = m.idx + step;
+      let moved = false;
+      while (i >= 0 && i < m.items.length) {
+        if (!m.items[i].disabled && this.bagItemVisible(m, m.items[i])) { m.idx = i; moved = true; break; }
+        i += step;
+      }
+      if (!moved) break;
+    }
+    if (m.idx !== prev) {
+      this.game.audio.playSfx(SFX['ui-tick']);
+      if (!this.headless) this._menuCursorDom(prev);
+    }
+  }
+
+  // AUDIT FIX: persist cursor (+pocket) for remember-menus on close.
+  _storeMenuMem(m, idxOverride) {
+    if (!m || !m.rememberKey) return;
+    this._menuMem = this._menuMem || {};
+    this._menuMem[m.rememberKey] = {
+      idx: idxOverride !== undefined ? idxOverride : m.idx,
+      pocket: m.bagPocket || null,
+    };
   }
 
   chooseMenu(i) {
@@ -480,6 +575,7 @@ export class UI {
     const idx = (i === undefined ? m.idx : i);
     const it = m.items[idx];
     if (!it || it.disabled) return;
+    this._storeMenuMem(m, idx);
     const wasCommands = m.kind === 'commands';
     this.menu = null;
     if (!this.headless) {
@@ -495,6 +591,7 @@ export class UI {
   cancelMenu() {
     const m = this.menu;
     if (!m) return;
+    this._storeMenuMem(m);
     const wasCommands = m.kind === 'commands';
     this.menu = null;
     if (!this.headless) {
@@ -753,6 +850,7 @@ export class UI {
       const b = this.el('button', 'logintab', tabs);
       b.textContent = name;
       b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._loginTab(key); });
+      b.addEventListener('click', () => this._loginTab(key)); // keyboard-activated buttons fire click only
       return b;
     };
     this._loginTabs = { login: mkTab('LOG IN', 'login'), register: mkTab('REGISTER', 'register'), guest: mkTab('GUEST', 'guest') };
@@ -780,21 +878,37 @@ export class UI {
     gnote.textContent = 'Play right now — no account needed. Progress stays on this device until cloud saves arrive in Track B.';
     const go = this.el('button', 'login-go active', gp);
     go.textContent = 'PLAY AS GUEST';
-    go.addEventListener('pointerdown', (e) => {
-      e.preventDefault();
-      this.game.audio.unlock();
-      this._closeLogin();
-      cb('guest');
-    });
+    go.addEventListener('pointerdown', (e) => { e.preventDefault(); this._loginGuestGo(); });
+    go.addEventListener('click', () => this._loginGuestGo()); // keyboard activation path (see _loginGuestGo)
     this._loginTab('guest');
   }
 
   _loginTab(key) {
+    this._loginTabKey = key;
     for (const k of Object.keys(this._loginTabs)) {
       this._loginTabs[k].classList.toggle('sel', k === key);
       this._loginPanes[k].classList.toggle('hidden', k !== key);
     }
     this.game.audio.playSfx(SFX['ui-tick']);
+  }
+
+  // AUDIT FIX (S-02, blocker): the stub Terminal was pointer-only while it
+  // swallowed every game key — a keyboard-only player could not start the
+  // game in guest/personal builds. One activation path, three entrances:
+  // pointer, keyboard (routed in update()), and native button click
+  // (Tab-focus + Enter/Space fires click without pointerdown).
+  _loginGuestGo() {
+    if (!this.loginOpen || !this._loginCb) return;
+    const cb = this._loginCb;
+    this.game.audio.unlock();
+    this._closeLogin();
+    cb('guest');
+  }
+
+  _loginTabCycle(d) {
+    const order = ['login', 'register', 'guest'];
+    const i = order.indexOf(this._loginTabKey || 'guest');
+    this._loginTab(order[(i + d + order.length) % order.length]);
   }
 
   _closeLogin() {
@@ -842,7 +956,11 @@ export class UI {
   // ---- P0/C3: name-entry A-Z grid keyboard ----
   // DOM: bottom-half grid (portrait) / 480px centered panel (desktop), 44px keys,
   // physical-keyboard support, 8-char max, validation shake on empty.
-  showNameEntry(title, initial, maxLen, cb) {
+  // opts (AUDIT FIX S-03/S-04/S-20): { allowCancel, allowEmpty, emptyMsg }.
+  // Required-name contexts (intro) pass nothing and keep the original
+  // behaviour; search/nickname/confirm contexts opt into cancel + empty.
+  showNameEntry(title, initial, maxLen, cb, opts) {
+    opts = opts || {};
     if (this.headless) {
       // Harness contract: a menu-like state so menuOpen/debugChoose keep working.
       this.menu = {
@@ -852,7 +970,7 @@ export class UI {
       this.log.push({ ui: 'nameentry', title });
       return;
     }
-    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title };
+    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title, opts };
     const ov = this.el('div', 'nkbover', this.root);
     this._nkbOv = ov;
     const card = this.el('div', 'namekb', ov);
@@ -862,7 +980,9 @@ export class UI {
     this._nkbDisp = disp;
     this._nkbRender();
     const grid = this.el('div', 'nkb-grid', card);
-    const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    // AUDIT FIX (S-20): the charset was A-Z + '-' only — no digits, space,
+    // period or apostrophe (Platinum's keyboard has all of them).
+    const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
     for (const k of keys) {
       const b = this.el('button', 'nkb-key', grid);
       b.textContent = k;
@@ -872,12 +992,19 @@ export class UI {
     const bk = this.el('button', 'nkb-key wide', row);
     bk.textContent = '←';
     bk.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbBack(); });
-    const dash = this.el('button', 'nkb-key', row);
-    dash.textContent = '-';
-    dash.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbType('-'); });
+    for (const k of ['-', '.', "'", ' ']) {
+      const b = this.el('button', 'nkb-key' + (k === ' ' ? ' wide' : ''), row);
+      b.textContent = k === ' ' ? 'SPACE' : k;
+      b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbType(k); });
+    }
     const ok = this.el('button', 'nkb-key wide go', row);
     ok.textContent = 'OK';
     ok.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbOk(); });
+    if (opts.allowCancel) {
+      const cx = this.el('button', 'nkb-key wide', row);
+      cx.textContent = 'CANCEL';
+      cx.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbCancel(); });
+    }
     // Physical keyboard: capture at document level so the game's KEYMAP never sees these.
     this._nkbKey = (e) => {
       if (!this.nameEntry) return;
@@ -885,9 +1012,19 @@ export class UI {
       e.stopPropagation();
       if (e.key === 'Backspace') this._nkbBack();
       else if (e.key === 'Enter') this._nkbOk();
-      else if (/^[a-zA-Z-]$/.test(e.key)) this._nkbType(e.key.toUpperCase());
+      else if (e.key === 'Escape' && this.nameEntry.opts && this.nameEntry.opts.allowCancel) this._nkbCancel();
+      else if (/^[a-zA-Z0-9\-'. ]$/.test(e.key)) this._nkbType(e.key.toUpperCase());
     };
     document.addEventListener('keydown', this._nkbKey, true);
+  }
+
+  _nkbCancel() {
+    const ne = this.nameEntry;
+    if (!ne) return;
+    const cb = ne.cb;
+    this.game.audio.playSfx(SFX['ui-back']);
+    this._nkbClose();
+    cb(null);
   }
 
   _nkbRender() {
@@ -916,6 +1053,16 @@ export class UI {
     const ne = this.nameEntry;
     if (!ne) return;
     if (!ne.value.trim()) {
+      // AUDIT FIX (S-04): contexts that promise "blank = all" (Dex search)
+      // or clearing (nickname) opt into allowEmpty — the blanket shake
+      // made a set Dex filter effectively un-clearable, and showed
+      // trainer-name copy inside search/DELETE contexts.
+      if (ne.opts && ne.opts.allowEmpty) {
+        const cb = ne.cb;
+        this._nkbClose();
+        cb('');
+        return;
+      }
       // Validation shake on empty (P0/C3).
       this.game.audio.playSfx(SFX['error-buzz']);
       if (this._nkbOv) {
@@ -923,7 +1070,7 @@ export class UI {
         void this._nkbOv.offsetWidth;
         this._nkbOv.classList.add('shake');
       }
-      this.toast('Give your trainer a name!');
+      this.toast((ne.opts && ne.opts.emptyMsg) || 'Give your trainer a name!');
       return;
     }
     const cb = ne.cb, v = ne.value.trim().toUpperCase().slice(0, ne.maxLen);
@@ -964,6 +1111,10 @@ export class UI {
       }
       b.addEventListener('pointerdown', (e) => {
         e.preventDefault();
+        // AUDIT FIX (S-17): the strip stays visible under modal layers —
+        // a tap during dialogue/a menu must not replace the single menu
+        // slot mid-conversation and strand the pending callback.
+        if (this.dlg || this.menu || this.summary || this.pcPanel || this.loginOpen || this.nameEntry) return;
         this.game.audio.unlock();
         const g = this.game;
         if (key === 'bag') g.openBag();
@@ -1008,6 +1159,7 @@ export class UI {
     this._moodDot = dot;
     b.addEventListener('pointerdown', (e) => {
       e.preventDefault();
+      if (this.dlg || this.menu || this.summary || this.pcPanel || this.loginOpen || this.nameEntry) return; // S-17 guard, same as the HUD strip
       this.game.audio.unlock();
       if (this.onMoodTap) this.onMoodTap();
     });
@@ -1037,7 +1189,7 @@ export class UI {
   buildHintCard() {
     const c = this.el('div', 'hintcard hidden', this.root);
     const t = this.el('div', '', c);
-    t.textContent = 'Keyboard: Arrows/WASD move · Z/Space = A · X = B · Enter = START · M = mute · F = fullscreen';
+    t.textContent = 'Keyboard: Arrows/WASD move · Z = A · X = B · Enter = menu · Q/E or PgUp/PgDn = page · Shift = select · M = mute · F = fullscreen';
     const x = this.el('button', 'hintcard-x', c);
     x.textContent = 'Got it ×';
     x.addEventListener('pointerdown', (e) => {
@@ -1122,6 +1274,16 @@ export class UI {
     this._chipTick = (this._chipTick || 0) + 1;
     if (this._chipTick % 15 === 0) this._syncChipAnchor();
     const input = this.game.input;
+    // AUDIT FIX (S-16): the desktop hint card's dismiss was pointer-only.
+    // Any confirm/back keypress dismisses it — peeked, not consumed, so
+    // the same press still does its normal job.
+    if (!this.headless && this._hintCard && !this._hintOff && !this._hintCard.classList.contains('hidden')) {
+      const p = input.pressed || {};
+      if (p.a || p.b || p.start || p.escape || p.select) {
+        this._hintOff = true;
+        this._hintCard.classList.add('hidden');
+      }
+    }
     // Summary panel is modal (UI v2): left/right (or X/Y page keys) switch
     // tabs, B / START / ESC closes.
     if (this.summary) {
@@ -1133,6 +1295,16 @@ export class UI {
     // Name-entry grid is modal (P0/C3).
     if (this.nameEntry) return true;
     // Login page is modal (P0/B1).
+    // AUDIT FIX (S-02): stub Terminal keyboard routing — ←/→ switch tabs,
+    // A/START activates PLAY AS GUEST on the guest tab (the disabled stub
+    // tabs have no action). The full-auth panel (auth.mjs) uses native DOM
+    // focus instead and never builds _loginTabs, so it is untouched here.
+    if (this.loginOpen && this._loginTabs) {
+      if (input.wasPressed('left') || input.wasPressed('pageup')) this._loginTabCycle(-1);
+      else if (input.wasPressed('right') || input.wasPressed('pagedown')) this._loginTabCycle(1);
+      else if ((input.wasPressed('a') || input.wasPressed('start')) && this._loginTabKey === 'guest') this._loginGuestGo();
+      return true;
+    }
     if (this.loginOpen) return true;
     // Chapter title card is modal (D2: auto-dismisses; A/START/tap dismiss early).
     if (this.chapterCard) {
@@ -1160,17 +1332,32 @@ export class UI {
       return true; // dialogue modal
     }
     if (this.menu) {
-      const grid = !!this.menu.grid;
+      const grid = !!(this.menu.grid || this.menu.gridNav);
       if (input.wasPressed('up')) { grid ? this.moveMenuGrid('up') : this.moveMenu(-1); }
       else if (input.wasPressed('down')) { grid ? this.moveMenuGrid('down') : this.moveMenu(1); }
-      else if (input.wasPressed('left') && this.menu.bagTabs) { this.bagTabMove(-1); }
-      else if (input.wasPressed('right') && this.menu.bagTabs) { this.bagTabMove(1); }
-      else if (input.wasPressed('pageup') && this.menu.bagTabs) { this.bagTabMove(-1); }
-      else if (input.wasPressed('pagedown') && this.menu.bagTabs) { this.bagTabMove(1); }
-      else if (input.wasPressed('left') && this.menu.battle) { grid ? this.moveMenuGrid('left') : this.moveMenu(-1); }
-      else if (input.wasPressed('right') && this.menu.battle) { grid ? this.moveMenuGrid('right') : this.moveMenu(1); }
+      // AUDIT FIX (S-50): guards must run BEFORE wasPressed — wasPressed
+      // consumes the edge even when the branch then fails, so the old
+      // order let the bagTabs tests eat every pageup/pagedown edge in
+      // non-bag menus (Q/E / PgUp / PgDn paging was dead in the Dex and
+      // every other long list) and the grid tests eat battle left/right.
+      else if (grid && !this.menu.bagTabs && input.wasPressed('left')) { this.moveMenuGrid('left'); }
+      else if (grid && !this.menu.bagTabs && input.wasPressed('right')) { this.moveMenuGrid('right'); }
+      else if (this.menu.bagTabs && input.wasPressed('left')) { this.bagTabMove(-1); }
+      else if (this.menu.bagTabs && input.wasPressed('right')) { this.bagTabMove(1); }
+      else if (this.menu.bagTabs && input.wasPressed('pageup')) { this.bagTabMove(-1); }
+      else if (this.menu.bagTabs && input.wasPressed('pagedown')) { this.bagTabMove(1); }
+      else if (input.wasPressed('pageup')) { this.moveMenuPage(-1); }
+      else if (input.wasPressed('pagedown')) { this.moveMenuPage(1); }
+      else if (this.menu.battle && input.wasPressed('left')) { grid ? this.moveMenuGrid('left') : this.moveMenu(-1); }
+      else if (this.menu.battle && input.wasPressed('right')) { grid ? this.moveMenuGrid('right') : this.moveMenu(1); }
       else if (input.wasPressed('a') || input.wasPressed('start')) { this.chooseMenu(); return true; }
-      else if (input.wasPressed('b') || input.wasPressed('escape')) { this.cancelMenu(); return true; }
+      else if (input.wasPressed('b') || input.wasPressed('escape')) {
+        // AUDIT FIX (S-13): a sticky root menu (the classic command grid)
+        // swallows B — Platinum has nothing beneath it, and cancelling +
+        // re-showing was a flicker loop with a back-SFX.
+        if (!this.menu.stickyCancel) this.cancelMenu();
+        return true;
+      }
       return true; // menu modal
     }
     // PC box panel is modal (UI v2.4): routed AFTER dialogue/menus so a
@@ -1184,6 +1371,7 @@ export class UI {
       else if (input.wasPressed('right')) cb('move', 'right');
       else if (input.wasPressed('pageup')) cb('box', -1);
       else if (input.wasPressed('pagedown')) cb('box', 1);
+      else if (input.wasPressed('select')) cb('link');
       else if (input.wasPressed('a') || input.wasPressed('start')) cb('confirm');
       else if (input.wasPressed('b') || input.wasPressed('escape')) cb('cancel');
       return true;
