@@ -24,6 +24,8 @@ export function validateSave(data) {
     if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number') { errors.push('bad-mon'); break; }
     if (m.level < 1 || m.level > 100) { errors.push('bad-mon-level'); break; }
     if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-mon-moves'); break; }
+    // ADR-025 §3 (Phase 3): mon.keepsake is a keepsake itemId or null.
+    if (m.keepsake !== undefined && m.keepsake !== null && typeof m.keepsake !== 'string') { errors.push('bad-mon-keepsake'); break; }
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -54,6 +56,14 @@ const DIFFICULTY_V1_TO_V2 = { easy: 'story', normal: 'classic', hard: 'challenge
 const HOUSE_RULE_KEYS = ['steadyDamage', 'mercifulFoes', 'fastLearner', 'generousWorld', 'candyCoach', 'skipIntro'];
 
 export function fillV2Defaults(data) {
+  // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
+  // on load (party + boxes), so v1 saves and pre-Phase-3 v2 saves open
+  // clean with keepsake=null on every mon.
+  const fillMon = (m) => { if (isObj(m) && typeof m.keepsake !== 'string') m.keepsake = null; };
+  if (Array.isArray(data.party)) for (const m of data.party) fillMon(m);
+  if (isObj(data.boxes)) for (const arr of Object.values(data.boxes)) {
+    if (Array.isArray(arr)) for (const m of arr) fillMon(m);
+  }
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
       data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';

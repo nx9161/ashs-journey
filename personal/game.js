@@ -425,7 +425,13 @@ function calcDamage(level, power, atk, def, opts) {
     else if (f.dampenType && o.moveType === f.dampenType) gf = f.dampenFactor !== undefined ? f.dampenFactor : 0.8;
   }
   if (o.groundFactor !== undefined) gf = o.groundFactor;
-  return Math.max(1, Math.floor(base * stab * eff * rand * gf));
+  // Rejuvenation Phase 3 (ADR-025 §3): the Keepsake factor — resolved by
+  // src/game/keepsakes.mjs (both attacker- and defender-side windows)
+  // and applied here ONCE, AFTER the Ground factor, in the same shared
+  // path. Absent = 1 (typeless/fixed-damage calls are untouched, as
+  // with the Ground factor).
+  const kf = o.keepsakeFactor !== undefined ? o.keepsakeFactor : 1;
+  return Math.max(1, Math.floor(base * stab * eff * rand * gf * kf));
 }
 
 function gen1Random(rng) { return (217 + Math.floor(rng() * 39)) / 255; }
@@ -4620,6 +4626,222 @@ const ART = {
     ".....OOOOOO.....",
     "................",
   ] },
+  "icon-keepsake-championsribbon": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#d8384a","Y":"#ffd23e"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".......OOO......",
+    ".....OOOFOOO....",
+    ".....OFFFFFO....",
+    "....OOFYYYFOO...",
+    "....OFFYYYFFO...",
+    "....OOFYYYFOO...",
+    ".....OFFFFFO....",
+    ".....OFFFFFO....",
+    ".....OFOOOFO....",
+    ".....OOO.OOO....",
+    ".....OO...OO....",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-embereed": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#e86a2a","Y":"#ffd23e"}, rows: [
+    "................",
+    "................",
+    "................",
+    "........O.......",
+    "........O.......",
+    ".......OOO......",
+    ".......OFO......",
+    "......OOFOO.....",
+    ".....OOFFFOO....",
+    ".....OFFYFFO....",
+    ".....OFYYYFO....",
+    ".....OFFYFFO....",
+    ".....OOFFFOO....",
+    "......OOOOO.....",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-fossilspur": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#d8c8a8","B":"#8a6a44"}, rows: [
+    "................",
+    "................",
+    "................",
+    "..OOOOOOOOOOOOO.",
+    "...OFFFFFFFFFO..",
+    "...OOFFFFFFFOO..",
+    "....OBBBBBBBO...",
+    "....OOFFFFFOO...",
+    ".....OOFFFOO....",
+    "......OBBBO.....",
+    "......OOFOO.....",
+    ".......OFO......",
+    ".......OOO......",
+    "........O.......",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-gardeniasash": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#f6f1de","G":"#58a848"}, rows: [
+    "................",
+    "................",
+    "................",
+    "...........OOO..",
+    "..........OOFO..",
+    ".........OOFOO..",
+    "........OOGOO...",
+    ".......OOGOO....",
+    "......OOFOO.....",
+    ".....OOGOO......",
+    "....OOGOO.......",
+    "...OOFOO........",
+    "...OFOO.........",
+    "...OOO..........",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-gloomfang": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#f4f1e8","V":"#7a3aa8"}, rows: [
+    "................",
+    "................",
+    "................",
+    "..OOOOOOOOOOOOO.",
+    "...OOVVVVVVVOO..",
+    "....OVVVVVVVO...",
+    "....OOFFFFFOO...",
+    ".....OFFFFFO....",
+    ".....OOFFFOO....",
+    "......OOFOO.....",
+    ".......OFO......",
+    ".......OOO......",
+    "........O.......",
+    "........O.......",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-ironacorn": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#c89858","B":"#7a4a26"}, rows: [
+    "................",
+    "................",
+    "........O.......",
+    "........O.......",
+    ".....OOOOOOO....",
+    "....OOFFFFFOO...",
+    "...OOBBBBBBBOO..",
+    "....OOFFFFFOO...",
+    ".....OFFFFFO....",
+    ".....OFFFFFO....",
+    ".....OFFFFFO....",
+    "....OOFFFFFOO...",
+    "....OFFFFFFFO...",
+    "....OOOOOOOOO...",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-secondwindribbon": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#e86ab0"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......OO.OO.....",
+    ".....OOO.OOO....",
+    "....OOFOOOFOO...",
+    "...OOFFFFFFFOO..",
+    "....OOFOOOFOO...",
+    ".....OOO.OOO....",
+    "......OO.OO.....",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-sparrowfeather": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#7ec8e8","W":"#eaf7ff"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "..........OOO...",
+    "........OOOWO...",
+    ".......OOFWOO...",
+    "......OOFWFO....",
+    ".....OOFWFOO....",
+    ".....OFWFOO.....",
+    "....OOWFOO......",
+    "....OWOOO.......",
+    "....OOO.........",
+    "................",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-spectrebell": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#b8aed8","Y":"#ffd23e"}, rows: [
+    "................",
+    "................",
+    "........O.......",
+    "........O.......",
+    ".......OOO......",
+    "......OOFOO.....",
+    ".....OOFFFOO....",
+    "....OOFFFFFOO...",
+    "....OFFFFFFFO...",
+    "...OOFFFFFFFOO..",
+    "....OOOOFOOOO...",
+    ".......OFO......",
+    ".......OYO......",
+    ".......OOO......",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-thunderheadpin": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#ffd23e"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".........OOO....",
+    ".........OO.....",
+    "........OOO.....",
+    "........OO......",
+    ".......OOO......",
+    "......OOO.......",
+    ".......OO.......",
+    ".......OOO......",
+    "........OO......",
+    "........OOO.....",
+    ".........OO.....",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-tidepearl": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#f2eef8","L":"#bfe8ff","B":"#9ab8d8"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".......OOO......",
+    ".....OOOFOOO....",
+    "....OOLFFFFOO...",
+    "....OLFFFFFFO...",
+    "...OOFFFFFFFOO..",
+    "...OFFFFFFFFFO..",
+    "...OOFFFFFFFOO..",
+    "....OFFFFFFBO...",
+    "....OOFFFFBOO...",
+    ".....OOOBOOO....",
+    ".......OOO......",
+    "................",
+    "................",
+  ] },
+  "icon-keepsake-tortoisecharm": { w: 16, h: 16, pal: {"O":"#1c1a22","F":"#4aa864","D":"#2a6a3e"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......OOOOO.....",
+    ".....OODDDOO....",
+    "....OODFFFDOO...",
+    "...OOFFFFFFFOO..",
+    "...OFFDFFFDFFO..",
+    "...OFFFFFFFFOO..",
+    "...OOOOOOOOOO...",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
   "icon-pokeball": { w: 16, h: 16, pal: {"O":"#1c1a22","R":"#e84848","W":"#f0f0f0"}, rows: [
     "................",
     ".....OOOOOO.....",
@@ -7557,7 +7779,40 @@ for (let n = 1; n <= 5; n++) {
   ITEMS[id] = { id, name: 'HM0' + n, pocket: 'hm', move: HM_MOVES[n], desc: 'Teaches ' + HM_MOVES[n] + '. Unlimited use; the move cannot be forgotten normally.' };
 }
 
-const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key'];
+// ---------- Keepsakes (Rejuvenation Phase 3, ADR-025 §3) ----------
+// Held items: one per Pokemon (mon.keepsake), carried in the bag's
+// 'keepsakes' pocket — non-consumable, non-sellable, stack 1 each (a
+// keepsake is a unique object). EFFECT LAW (banned by this data shape):
+// every entry MUST declare exactly one conditional `kind` with its
+// window/trigger parameters — there is no field here that can express a
+// flat always-on % stat boost, and src/game/keepsakes.mjs resolves ONLY
+// the kinds below. `effect` is the one-line summary-screen text (§3c).
+const KEEPSAKES = {
+  sparrowfeather: { id: 'sparrowfeather', name: 'Sparrow Feather', kind: 'underdogDamage', factor: 1.25, levelGap: 3, effect: 'Deals x1.25 damage while 3+ levels below the foe.' },
+  tortoisecharm: { id: 'tortoisecharm', name: 'Tortoise Charm', kind: 'koSave', effect: 'Once per battle, survives a KO from above half HP at 1 HP.' },
+  secondwindribbon: { id: 'secondwindribbon', name: 'Second-Wind Ribbon', kind: 'lowHpSpeed', hpFrac: 0.25, stages: 1, effect: 'Once per battle, at 25% HP or less, Speed rises 1 stage.', price: 3000, minBadges: 7 },
+  embereed: { id: 'embereed', name: 'Ember Seed', kind: 'statusChance', moveType: 'fire', status: 'burn', bonus: 10, effect: "Fire moves gain +10% burn chance; the holder can't be frozen." },
+  tidepearl: { id: 'tidepearl', name: 'Tide Pearl', kind: 'typeWard', moveType: 'electric', factor: 0.8, effect: 'Takes x0.8 damage from Electric moves.' },
+  gloomfang: { id: 'gloomfang', name: 'Gloom Fang', kind: 'statusChance', moveType: 'poison', status: 'poison', bonus: 10, rtCooldown: 0.85, effect: 'Poison moves: +10% poison chance (RT: cooldown x0.85).' },
+  ironacorn: { id: 'ironacorn', name: 'Iron Acorn', kind: 'firstHitWard', factor: 0.85, effect: 'Takes x0.85 from the first hit it takes each battle.' },
+  spectrebell: { id: 'spectrebell', name: 'Spectre Bell', kind: 'matchupDamage', moveType: 'ghost', vsType: 'psychic', factor: 1.2, effect: 'Ghost moves deal x1.2 vs Psychic-types.' },
+  gardeniasash: { id: 'gardeniasash', name: 'Gardenia Sash', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
+  thunderheadpin: { id: 'thunderheadpin', name: 'Thunderhead Pin', kind: 'lowHpDamage', moveType: 'electric', factor: 1.15, hpFrac: 0.5, effect: 'Electric moves deal x1.15 while at 50% HP or less.' },
+  fossilspur: { id: 'fossilspur', name: 'Fossil Spur', kind: 'fasterFoeDamage', moveType: 'rock', factor: 1.15, effect: 'Rock moves deal x1.15 vs faster foes.' },
+  championsribbon: { id: 'championsribbon', name: "Champion's Ribbon", kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
+};
+// The bag/mart surface of the same pieces (ITEMS is the bag's table).
+// price exists ONLY on the Second-Wind Ribbon (its Celadon shop source);
+// minBadges is the mart's late-game gate for that stock (see openMart).
+// No other keepsake carries a price: they are never bought or sold.
+for (const k of Object.values(KEEPSAKES)) {
+  ITEMS[k.id] = {
+    id: k.id, name: k.name, pocket: 'keepsakes', desc: k.effect,
+    ...(k.price ? { price: k.price, minBadges: k.minBadges || 0 } : {}),
+  };
+}
+
+const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key', 'keepsakes'];
 
 
 // ---- src/data/maps.mjs ----
@@ -7801,6 +8056,11 @@ const MAPS = {
         { species: 'mankey', min: 4, max: 7, weight: 14 },
       ],
     },
+    items: [],
+    hidden: [
+      // ADR-025 §3 (Phase 3) source: Sparrow Feather — Route 2 hidden item.
+      { x: 1, y: 12, item: 'sparrowfeather', n: 1 },
+    ],
     start: null,
   },
 
@@ -7964,8 +8224,10 @@ const TRAINERS = {
     intro: ["My rock-type Pokemon will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],
     team: [
-      { species: 'geodude', level: 12 },
-      { species: 'onix', level: 14 },
+      // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
+      // decides per difficulty — Challenge: all; Classic: the ace only).
+      { species: 'geodude', level: 12, keepsake: 'ironacorn' },
+      { species: 'onix', level: 14, keepsake: 'tortoisecharm' },
     ],
     reward: 900,
     badge: 'boulderbadge',
@@ -8035,6 +8297,9 @@ const MAPS2 = {
     items: [],
     hidden: [
       { x: 14, y: 8, item: 'oldamber', n: 1 },
+      // KEEPSAKE STUB SOURCE (Phase 3) — Iron Acorn; Phase 4's Pewter
+      // Town Tale replaces this placement.
+      { x: 1, y: 9, item: 'ironacorn', n: 1 },
     ],
     events: [],
     start: null,
@@ -8128,6 +8393,8 @@ const MAPS2 = {
     ],
     hidden: [
       { x: 13, y: 2, item: 'moonstone', n: 1 },
+      // ADR-025 §3 (Phase 3) source: Fossil Spur — Mt. Moon hidden item.
+      { x: 1, y: 10, item: 'fossilspur', n: 1 },
     ],
     events: [],
     start: null,
@@ -8491,7 +8758,11 @@ const MAPS2 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Tide Pearl; Phase 4's Vermilion
+      // Town Tale replaces this placement.
+      { x: 16, y: 11, item: 'tidepearl', n: 1 },
+    ],
     events: [
       { id: 'ev_stanne', x: 8, y: 11, when: { flagNot: 'ev_stanne_done' } },
       { id: 'ev_squirtle_squad', x: 5, y: 9, when: { flagNot: 'ev_squirtle_squad_done' } },
@@ -8708,11 +8979,22 @@ const MAPS2 = {
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 3, y: 8, name: 'PERFUMER', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
         dialogue: ["Erika's perfume is distilled from her own garden. One whiff and even a Snorlax sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
+      // ADR-025 §3 (Phase 3): Celadon gains a small keepsake atelier —
+      // the Second-Wind Ribbon's SECOND source (its first is the Rue &
+      // Cole parley, bond-gated to Phase 5). The ribbon's stock is
+      // "late": ITEMS.secondwindribbon.minBadges = 7 gates the row in
+      // openMart until the player carries seven badges.
+      { x: 15, y: 11, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+        mart: { stock: ['greatball', 'ultraball', 'superpotion', 'hyperpotion', 'secondwindribbon'] },
+        dialogue: ["Celadon Atelier — ribbons, charms, and the odd heirloom. Our Second-Wind Ribbon? Reserved for proven trainers. Seven badges, hon."] },
     ],
     encounters: null,
     items: [],
     hidden: [
       { x: 16, y: 4, item: 'nugget', n: 1 },
+      // KEEPSAKE STUB SOURCE (Phase 3) — Gardenia Sash; Phase 4's
+      // Celadon Town Tale replaces this placement.
+      { x: 16, y: 8, item: 'gardeniasash', n: 1 },
     ],
     events: [],
     start: null,
@@ -11588,7 +11870,11 @@ const MAPS3 = {
     items: [
       { x: 16, y: 1, item: 'ultraball', n: 1 },
     ],
-    hidden: [],
+    hidden: [
+      // ADR-025 §3 (Phase 3) source: Thunderhead Pin — Power Plant
+      // exploration placement.
+      { x: 16, y: 10, item: 'thunderheadpin', n: 1 },
+    ],
     events: [
       { id: 'ev_zapdos', x: 16, y: 9, when: { flagNot: 'ev_zapdos_done' } },
     ],
@@ -11684,7 +11970,11 @@ const MAPS3 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Spectre Bell; Phase 4's
+      // Lavender Town Tale replaces this placement.
+      { x: 16, y: 10, item: 'spectrebell', n: 1 },
+    ],
     events: [],
     start: null,
   },
@@ -12068,6 +12358,9 @@ const MAPS3 = {
     hidden: [
       { x: 10, y: 5, item: 'goldteeth', n: 1 },
       { x: 18, y: 11, item: 'rarecandy', n: 1 },
+      // ADR-025 §3 (Phase 3) source: Gloom Fang — Safari Zone
+      // exploration placement.
+      { x: 2, y: 8, item: 'gloomfang', n: 1 },
     ],
     events: [],
     start: null,
@@ -12362,7 +12655,11 @@ const MAPS3 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Ember Seed; Phase 4's Cinnabar
+      // Town Tale replaces this placement.
+      { x: 16, y: 9, item: 'embereed', n: 1 },
+    ],
     events: [],
     start: null,
   },
@@ -12501,7 +12798,11 @@ const MAPS3 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Tortoise Charm; Phase 4's
+      // Viridian Town Tale replaces this placement.
+      { x: 1, y: 1, item: 'tortoisecharm', n: 1 },
+    ],
     events: [
       { id: 'ev_viridian_gym_locked', x: 3, y: 5, when: { badgesBelow: 7 } },
     ],
@@ -12915,49 +13216,51 @@ const TRAINERS3 = {
     id: 'misty', name: 'Misty', title: 'Cerulean Gym Leader', ai: 'smart',
     intro: ["My policy is an all-out offensive with water-type Pokemon! Show me you can swim in the deep end!"],
     lose: ["You drowned my best strategy... fine! The Cascade Badge is yours."],
-    team: [ { species: 'staryu', level: 18 }, { species: 'starmie', level: 21 } ],
+    // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
+    // applies them per difficulty — Challenge: all; Classic: ace only).
+    team: [ { species: 'staryu', level: 18, keepsake: 'secondwindribbon' }, { species: 'starmie', level: 21, keepsake: 'tidepearl' } ],
     reward: 2000, badge: 'cascadebadge',
   },
   surge: {
     id: 'surge', name: 'Lt. Surge', title: 'Vermilion Gym Leader',
     intro: ["You look like a baby, but babies don't carry badges into MY gym. My electric team will paralyze your whole plan!"],
     lose: ["Whoa! You're not just sparking — you're the whole thunderhead. Thunder Badge, earned!"],
-    team: [ { species: 'voltorb', level: 21 }, { species: 'pikachu', level: 18 }, { species: 'raichu', level: 24 } ],
+    team: [ { species: 'voltorb', level: 21, keepsake: 'ironacorn' }, { species: 'pikachu', level: 18, keepsake: 'thunderheadpin' }, { species: 'raichu', level: 24, keepsake: 'secondwindribbon' } ],
     reward: 2400, badge: 'thunderbadge',
   },
   erika: {
     id: 'erika', name: 'Erika', title: 'Celadon Gym Leader',
     intro: ["Forgive my drowsiness... the garden is so peaceful. My grass Pokemon, however, are wide awake for you."],
     lose: ["A storm in my garden, beautifully fought. The Rainbow Badge is yours."],
-    team: [ { species: 'victreebel', level: 29 }, { species: 'tangela', level: 24 }, { species: 'vileplume', level: 29 } ],
+    team: [ { species: 'victreebel', level: 29, keepsake: 'gloomfang' }, { species: 'tangela', level: 24, keepsake: 'gardeniasash' }, { species: 'vileplume', level: 29, keepsake: 'secondwindribbon' } ],
     reward: 2900, badge: 'rainbowbadge',
   },
   koga: {
     id: 'koga', name: 'Koga', title: 'Fuchsia Gym Leader',
     intro: ["A ninja's poison needs no strength — only patience. Breathe deep, challenger. Everyone does, at first."],
     lose: ["You held your breath longer than my fog. The Soul Badge, from one shadow to another."],
-    team: [ { species: 'koffing', level: 37 }, { species: 'muk', level: 39 }, { species: 'koffing', level: 37 }, { species: 'weezing', level: 43 } ],
+    team: [ { species: 'koffing', level: 37, keepsake: 'gloomfang' }, { species: 'muk', level: 39, keepsake: 'tortoisecharm' }, { species: 'koffing', level: 37, keepsake: 'gloomfang' }, { species: 'weezing', level: 43, keepsake: 'gloomfang' } ],
     reward: 4300, badge: 'soulbadge',
   },
   sabrina: {
     id: 'sabrina', name: 'Sabrina', title: 'Saffron Gym Leader',
     intro: ["Three days ago I watched this battle in a vision. You were... surprising. Visions are rarely wrong. Begin."],
     lose: ["The vision broke. How wonderful — the future is unwritten again. The Marsh Badge is yours."],
-    team: [ { species: 'kadabra', level: 38 }, { species: 'mrmime', level: 37 }, { species: 'venomoth', level: 38 }, { species: 'alakazam', level: 43 } ],
+    team: [ { species: 'kadabra', level: 38, keepsake: 'secondwindribbon' }, { species: 'mrmime', level: 37, keepsake: 'tidepearl' }, { species: 'venomoth', level: 38, keepsake: 'gloomfang' }, { species: 'alakazam', level: 43, keepsake: 'tortoisecharm' } ],
     reward: 4300, badge: 'marshbadge',
   },
   blaine: {
     id: 'blaine', name: 'Blaine', title: 'Cinnabar Gym Leader',
     intro: ["Quiz time, hotshot! What burns hotter — my Arcanine's pride, or a challenger's overconfidence? Battle me and we'll grade it!"],
     lose: ["Full marks... on MY exam. Take the Volcano Badge — and a fire extinguisher for the road."],
-    team: [ { species: 'growlithe', level: 42 }, { species: 'ponyta', level: 40 }, { species: 'rapidash', level: 42 }, { species: 'arcanine', level: 47 } ],
+    team: [ { species: 'growlithe', level: 42, keepsake: 'embereed' }, { species: 'ponyta', level: 40, keepsake: 'sparrowfeather' }, { species: 'rapidash', level: 42, keepsake: 'embereed' }, { species: 'arcanine', level: 47, keepsake: 'tortoisecharm' } ],
     reward: 4700, badge: 'volcanobadge',
   },
   giovanni: {
     id: 'giovanni', name: 'Giovanni', title: 'Viridian Gym Leader',
     intro: ["You stand in the strongest gym in Kanto, child. I do not lose. The ground itself has signed that contract."],
     lose: ["The ground... renegotiates. Take the Earth Badge. And know that we will meet in worse weather."],
-    team: [ { species: 'rhyhorn', level: 45 }, { species: 'dugtrio', level: 42 }, { species: 'nidoqueen', level: 44 }, { species: 'nidoking', level: 45 }, { species: 'rhydon', level: 50 } ],
+    team: [ { species: 'rhyhorn', level: 45, keepsake: 'ironacorn' }, { species: 'dugtrio', level: 42, keepsake: 'secondwindribbon' }, { species: 'nidoqueen', level: 44, keepsake: 'gloomfang' }, { species: 'nidoking', level: 45, keepsake: 'gloomfang' }, { species: 'rhydon', level: 50, keepsake: 'fossilspur' } ],
     reward: 5000, badge: 'earthbadge',
   },
   // ---- Gym trainers (one per gym authored in MAPS3, scaled) ----
@@ -13086,28 +13389,28 @@ const TRAINERS3 = {
     id: 'lorelei', name: 'Lorelei', title: 'Elite Four', ai: 'smart',
     intro: ["No one can best me when it comes to icy Pokemon. Freezing moves are powerful — your Pokemon will be at my mercy when they are frozen solid!"],
     lose: ["You melted more than ice today. Go on — the others are colder company than me."],
-    team: [ { species: 'dewgong', level: 54 }, { species: 'cloyster', level: 53 }, { species: 'slowbro', level: 54 }, { species: 'jynx', level: 56 }, { species: 'lapras', level: 56 } ],
+    team: [ { species: 'dewgong', level: 54, keepsake: 'tidepearl' }, { species: 'cloyster', level: 53, keepsake: 'ironacorn' }, { species: 'slowbro', level: 54, keepsake: 'gardeniasash' }, { species: 'jynx', level: 56, keepsake: 'secondwindribbon' }, { species: 'lapras', level: 56, keepsake: 'tortoisecharm' } ],
     reward: 5600,
   },
   bruno: {
     id: 'bruno', name: 'Bruno', title: 'Elite Four', ai: 'smart',
     intro: ["I am Bruno of the Elite Four! Through rigorous training, people and Pokemon can become stronger! I have weight-trained with my Pokemon!"],
     lose: ["Discipline... outmatched. My fists salute you. Forward!"],
-    team: [ { species: 'onix', level: 53 }, { species: 'hitmonchan', level: 55 }, { species: 'hitmonlee', level: 55 }, { species: 'onix', level: 56 }, { species: 'machamp', level: 58 } ],
+    team: [ { species: 'onix', level: 53, keepsake: 'fossilspur' }, { species: 'hitmonchan', level: 55, keepsake: 'secondwindribbon' }, { species: 'hitmonlee', level: 55, keepsake: 'sparrowfeather' }, { species: 'onix', level: 56, keepsake: 'ironacorn' }, { species: 'machamp', level: 58, keepsake: 'tortoisecharm' } ],
     reward: 5800,
   },
   agatha: {
     id: 'agatha', name: 'Agatha', title: 'Elite Four', ai: 'smart',
     intro: ["That old duff, Professor Hawthorn, was once young and handsome. That was decades ago. Now he just wants to fill a Pokedex. He is wrong — Pokemon are for fighting!"],
     lose: ["Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."],
-    team: [ { species: 'gengar', level: 56 }, { species: 'golbat', level: 56 }, { species: 'haunter', level: 55 }, { species: 'arbok', level: 58 }, { species: 'gengar', level: 60 } ],
+    team: [ { species: 'gengar', level: 56, keepsake: 'spectrebell' }, { species: 'golbat', level: 56, keepsake: 'gloomfang' }, { species: 'haunter', level: 55, keepsake: 'spectrebell' }, { species: 'arbok', level: 58, keepsake: 'gloomfang' }, { species: 'gengar', level: 60, keepsake: 'tortoisecharm' } ],
     reward: 6000,
   },
   lance: {
     id: 'lance', name: 'Lance', title: 'Elite Four', ai: 'smart',
     intro: ["I lead the Elite Four. Dragon Pokemon are wild, untamable — and so am I, when the battle demands it. Your challenge ends here."],
     lose: ["A legend, answered by a legend. The final chamber waits. Give him a battle worthy of the climb."],
-    team: [ { species: 'gyarados', level: 58 }, { species: 'dragonair', level: 56 }, { species: 'dragonair', level: 56 }, { species: 'aerodactyl', level: 60 }, { species: 'dragonite', level: 62 } ],
+    team: [ { species: 'gyarados', level: 58, keepsake: 'tidepearl' }, { species: 'dragonair', level: 56, keepsake: 'secondwindribbon' }, { species: 'dragonair', level: 56, keepsake: 'sparrowfeather' }, { species: 'aerodactyl', level: 60, keepsake: 'fossilspur' }, { species: 'dragonite', level: 62, keepsake: 'tortoisecharm' } ],
     reward: 6200,
   },
   // ---- Gary (rival) ladder ----
@@ -13150,7 +13453,7 @@ const TRAINERS3 = {
     id: 'gary_champion', name: 'Gary', title: 'Champion', ai: 'smart',
     intro: ["Heh. Of course it's you at the top of the mountain, {player}. It was always going to be you. Now — the battle Kanto will talk about for a hundred years!"],
     lose: ["...Yeah. Okay. The chair's yours, Champion. Smell ya at the top — because I'll be back for it."],
-    team: [ { species: 'pidgeot', level: 59 }, { species: 'alakazam', level: 57 }, { species: 'rhydon', level: 59 }, { species: 'exeggutor', level: 58 }, { species: 'vaporeon', level: 59 }, { species: 'venusaur', level: 63 } ],
+    team: [ { species: 'pidgeot', level: 59, keepsake: 'secondwindribbon' }, { species: 'alakazam', level: 57, keepsake: 'tortoisecharm' }, { species: 'rhydon', level: 59, keepsake: 'fossilspur' }, { species: 'exeggutor', level: 58, keepsake: 'gardeniasash' }, { species: 'vaporeon', level: 59, keepsake: 'tidepearl' }, { species: 'venusaur', level: 63, keepsake: 'gloomfang' } ],
     reward: 6300,
   },
   // ---- Uniformed duo encounters + admin ----
@@ -14984,6 +15287,7 @@ function makeMon(speciesId, level, speciesTable, movesTable) {
     xp: xpForLevel(sp.growth, level),
     ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 },
     moves: [],
+    keepsake: null, // ADR-025 §3 (Phase 3): held Keepsake itemId | null
     status: null,
     stages: { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
     ot: 'ASH',
@@ -15155,11 +15459,41 @@ function damageRandomFor(state, rng) {
 }
 
 // Player XP (§4 table x House Rules): Story pays x1.25; Fast Learner
-// x1.5; they compose multiplicatively.
-function xpMultFor(state) {
+// x1.5; they compose multiplicatively. Phase 3: a mon holding the
+// Champion's Ribbon gains a further x1.2 — holder-only, applied per-mon
+// at the award path (battle.mjs awardXp, via keepsakeXpMult, whose
+// factor this mirrors).
+function xpMultFor(state, mon) {
   let m = difficultyOf(state) === 'story' ? 1.25 : 1;
   if (houseRule(state, 'fastLearner')) m *= 1.5;
+  if (mon && mon.keepsake === 'championsribbon') m *= 1.2;
   return m;
+}
+
+// Foe keepsakes (§4 table, Phase 3 — the lever Phase 1 left unwired):
+//   Story     = none (no foe ever holds one)
+//   Classic   = aces only, late: the LAST team member (the ace) of each
+//               leader trainer holds its authored keepsake
+//   Challenge = all leader teams: every member holds its authored piece
+// "Leader" is Phase 1's shipped definition (isLeaderTrainer: badge or
+// smart/opener AI — gym leaders, Elite Four, Champion). Wild foes have
+// no trainer and never hold one in ANY mode. Authored pieces live on
+// the trainer data (team entry `keepsake`); a leader member with no
+// authored piece holds none. READING NOTE (§3 vs §4): §3 says Classic
+// aces hold "from the Indigo League onward" while §4 says "aces only,
+// late" — this implements §4's row over the Phase-1 leader set (no
+// gym-leader battle exists at/after the Indigo League in this build,
+// so the literal §3 reading would make the Classic row dead content);
+// "late" is read as the ace's late-battle position, as in §4.
+function foeKeepsakeFor(state, trainer, teamIndex, teamLength) {
+  if (!trainer || !isLeaderTrainer(trainer)) return null;
+  const mode = difficultyOf(state);
+  if (mode === 'story') return null;
+  const entry = Array.isArray(trainer.team) ? trainer.team[teamIndex] : null;
+  const authored = entry && typeof entry.keepsake === 'string' ? entry.keepsake : null;
+  if (!authored) return null;
+  if (mode === 'challenge') return authored;
+  return teamIndex === teamLength - 1 ? authored : null; // classic: aces only
 }
 
 // Prize money: Generous World x1.5. (Defeat halving and Pay Day are not
@@ -15193,6 +15527,199 @@ function sparLevelFor(state) {
 }
 
 
+// ---- src/game/keepsakes.mjs ----
+// keepsakes.mjs — Rejuvenation Phase 3 (ADR-025 §3): Keepsakes (held
+// items). ONE helper module shared by both battle engines so they cannot
+// drift (the grounds.mjs pattern): damage-shaped effects resolve here
+// and are applied by calcDamage (formulas.mjs) ONCE, after the Ground
+// factor; trigger-shaped effects (KO save, low-HP Speed) are evaluated
+// here and surfaced/applied by the engines' faint checks (battle.mjs
+// checkFaint, battle-rt.mjs rtCheckFaints).
+//
+// Effect law (§3): every effect is conditional — a window, a trigger, or
+// a matchup. The KEEPSAKES table (data/items.mjs) declares only `kind`s
+// resolved below; there is no shape for a flat always-on stat boost.
+//
+// Per-battle flags live on a transient wrapper, mon._ks — created lazily
+// in battle, deleted by BattleScene.endBattle, NEVER persisted (the
+// save shape carries only mon.keepsake). Flags NEVER reset mid-battle:
+// in particular the Tortoise Charm flag does not re-arm when the holder
+// heals back above half HP (§3 guardrail, explicit).
+
+
+// The keepsake definition a mon holds, or null (unknown ids read as none
+// — a tampered/legacy value can never crash a battle).
+function keepsakeOf(mon) {
+  if (!mon || typeof mon.keepsake !== 'string') return null;
+  return KEEPSAKES[mon.keepsake] || null;
+}
+function holds(mon, itemId) {
+  return !!mon && mon.keepsake === itemId && !!KEEPSAKES[itemId];
+}
+
+// Transient per-battle state for a mon (wrapper flags; see header).
+function ksState(mon) {
+  if (!mon._ks) mon._ks = { tortoiseUsed: false, secondWindUsed: false, hitsTaken: 0, announced: {} };
+  return mon._ks;
+}
+function clearKsState(mon) {
+  if (mon) delete mon._ks;
+}
+
+// ---- damage-shaped effects (shared formulas.mjs path) ----
+// The keepsake damage factor for one hit, resolved from the ATTACKER's
+// and the DEFENDER's held pieces. Returns { factor, atkId, defId } — the
+// ids of the pieces that actually fired (engines surface first-time
+// firings by name; a factor of 1 always carries null ids). `ctx`:
+//   defTypes: defender's effective types (matchup window)
+//   atkSpe / defSpe: effective Speed stats (Fossil Spur window)
+// Applied by the engines via calcDamage's `keepsakeFactor` opt, which
+// multiplies it in exactly once, after the Ground factor.
+function keepsakeDamageFactor(atk, def, mv, ctx) {
+  const out = { factor: 1, atkId: null, defId: null };
+  if (!mv || mv.cat === 'status') return out;
+  const c = ctx || {};
+  const a = keepsakeOf(atk);
+  if (a && atk) {
+    if (a.kind === 'underdogDamage' && def && (def.level - atk.level) >= a.levelGap) {
+      out.factor *= a.factor; out.atkId = a.id;
+    } else if (a.kind === 'matchupDamage' && mv.type === a.moveType
+      && Array.isArray(c.defTypes) && c.defTypes.includes(a.vsType)) {
+      out.factor *= a.factor; out.atkId = a.id;
+    } else if (a.kind === 'lowHpDamage' && mv.type === a.moveType
+      && atk.hp <= atk.maxHp * a.hpFrac) {
+      out.factor *= a.factor; out.atkId = a.id;
+    } else if (a.kind === 'fasterFoeDamage' && mv.type === a.moveType
+      && typeof c.defSpe === 'number' && typeof c.atkSpe === 'number' && c.defSpe > c.atkSpe) {
+      out.factor *= a.factor; out.atkId = a.id;
+    }
+  }
+  const d = keepsakeOf(def);
+  if (d && def) {
+    if (d.kind === 'typeWard' && mv.type === d.moveType) {
+      out.factor *= d.factor; out.defId = d.id;
+    } else if (d.kind === 'firstHitWard' && ksState(def).hitsTaken === 0) {
+      out.factor *= d.factor; out.defId = d.id;
+    }
+  }
+  return out;
+}
+
+// Record that the holder actually TOOK a hit (damage reached its HP —
+// a miss or a Substitute absorption is not a hit taken). Drives the
+// Iron Acorn's first-hit window.
+function noteHitTaken(mon) {
+  if (mon) ksState(mon).hitsTaken++;
+}
+
+// ---- trigger-shaped effects (faint/switch checks) ----
+// Evaluated by the engines at their faint checks. `ctx.hpBefore` is the
+// holder's HP before the hit being resolved and `ctx.viaAttack` marks
+// damage from an opponent's attack: the Tortoise Charm saves only from
+// an ATTACK that would KO from above half HP (not from poison ticks,
+// recoil, or confusion self-hits). Mutates only flags + (on a save) HP.
+// Returns trigger codes; the engines apply the Speed stage (their own
+// stage systems) and surface a battle message naming the keepsake.
+function evaluateTriggers(mon, ctx) {
+  const out = { tortoise: false, secondWind: false };
+  if (!mon) return out;
+  const ks = ksState(mon);
+  const c = ctx || {};
+  // Tortoise Charm: once per battle, attack-KO from above half HP -> 1 HP.
+  if (mon.hp <= 0 && holds(mon, 'tortoisecharm') && !ks.tortoiseUsed
+    && c.viaAttack === true && typeof c.hpBefore === 'number' && c.hpBefore * 2 > mon.maxHp) {
+    ks.tortoiseUsed = true;
+    mon.hp = 1;
+    out.tortoise = true;
+  }
+  // Second-Wind Ribbon: once per battle, at <=25% HP (and alive — a
+  // Tortoise save at 1 HP qualifies on the same check).
+  if (mon.hp > 0 && mon.hp * 4 <= mon.maxHp && holds(mon, 'secondwindribbon') && !ks.secondWindUsed) {
+    ks.secondWindUsed = true;
+    out.secondWind = true;
+  }
+  return out;
+}
+
+// ---- status-shaped effects ----
+// Infliction-chance bonus in percentage POINTS, added only where the
+// move can already inflict that status (the Ground-twist law, §1):
+// Ember Seed — the holder's Fire moves +10% burn; Gloom Fang — the
+// holder's Poison moves +10% poison. Composes additively with the
+// Ground twist bonus at the same roll.
+function keepsakeStatusChanceBonus(atk, mv, status) {
+  const k = keepsakeOf(atk);
+  if (!k || k.kind !== 'statusChance' || !mv) return 0;
+  return mv.type === k.moveType && status === k.status ? k.bonus : 0;
+}
+
+// Freeze refusal: an Ember Seed holder cannot be frozen — freeze
+// infliction on the holder is refused in both engines.
+function refusesStatus(mon, status) {
+  return status === 'freeze' && holds(mon, 'embereed');
+}
+
+// RT cooldown multiplier (Gloom Fang: the holder's Poison moves cool
+// down x0.85 in real-time battles; classic uses the chance bonus above).
+function keepsakeCooldownMult(mon, mv) {
+  const k = keepsakeOf(mon);
+  if (!k || k.kind !== 'statusChance' || !mv) return 1;
+  return mv.type === k.moveType && k.rtCooldown ? k.rtCooldown : 1;
+}
+
+// ---- heal / economy ----
+// Gardenia Sash: healing moves used ON the holder restore +50%. Scope
+// matches the Phase 2 heal twist exactly (the effect.heal path in both
+// engines — Recover/Soft-Boiled; drain and Rest are separate paths and
+// stay excluded, as they are for the Ground twist).
+function keepsakeHealMult(mon) {
+  const k = keepsakeOf(mon);
+  return k && k.kind === 'healBoost' ? k.factor : 1;
+}
+
+// Champion's Ribbon: the holder gains x1.2 XP (award path; holder-only).
+function keepsakeXpMult(mon) {
+  const k = keepsakeOf(mon);
+  return k && k.kind === 'xpBoost' ? k.factor : 1;
+}
+
+// ---- bag / slot operations ----
+// A keepsake is a unique object: the bag holds at most one of each id.
+function bagHasKeepsake(state, itemId) {
+  return !!state && !!state.bag && (state.bag[itemId] || 0) > 0;
+}
+function ownsKeepsake(state, itemId) {
+  if (!state) return false;
+  if (bagHasKeepsake(state, itemId)) return true;
+  const pools = [...(state.party || []), ...Object.values(state.boxes || {}).flat()];
+  return pools.some((m) => m && m.keepsake === itemId);
+}
+// Grant a keepsake to the bag pocket. Returns false (no grant) when the
+// id is not a keepsake or the player already owns that unique piece.
+function grantKeepsake(state, itemId) {
+  if (!KEEPSAKES[itemId] || !state || !state.bag) return false;
+  if (ownsKeepsake(state, itemId)) return false;
+  state.bag[itemId] = 1;
+  return true;
+}
+// Party-menu Give: bag -> mon. Fails cleanly when the mon already holds
+// one, the bag has none, or the id is not a keepsake.
+function giveKeepsake(state, mon, itemId) {
+  if (!mon || mon.keepsake || !KEEPSAKES[itemId]) return false;
+  if (!bagHasKeepsake(state, itemId)) return false;
+  state.bag[itemId]--;
+  mon.keepsake = itemId;
+  return true;
+}
+// Party-menu Take: mon -> bag.
+function takeKeepsake(state, mon) {
+  if (!mon || !mon.keepsake || !KEEPSAKES[mon.keepsake]) return false;
+  state.bag[mon.keepsake] = (state.bag[mon.keepsake] || 0) + 1;
+  mon.keepsake = null;
+  return true;
+}
+
+
 // ---- src/save/schema.mjs ----
 // schema.mjs — save schema validation + migration (current: v2).
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
@@ -15219,6 +15746,8 @@ function validateSave(data) {
     if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number') { errors.push('bad-mon'); break; }
     if (m.level < 1 || m.level > 100) { errors.push('bad-mon-level'); break; }
     if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-mon-moves'); break; }
+    // ADR-025 §3 (Phase 3): mon.keepsake is a keepsake itemId or null.
+    if (m.keepsake !== undefined && m.keepsake !== null && typeof m.keepsake !== 'string') { errors.push('bad-mon-keepsake'); break; }
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -15249,6 +15778,14 @@ const DIFFICULTY_V1_TO_V2 = { easy: 'story', normal: 'classic', hard: 'challenge
 const HOUSE_RULE_KEYS = ['steadyDamage', 'mercifulFoes', 'fastLearner', 'generousWorld', 'candyCoach', 'skipIntro'];
 
 function fillV2Defaults(data) {
+  // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
+  // on load (party + boxes), so v1 saves and pre-Phase-3 v2 saves open
+  // clean with keepsake=null on every mon.
+  const fillMon = (m) => { if (isObj(m) && typeof m.keepsake !== 'string') m.keepsake = null; };
+  if (Array.isArray(data.party)) for (const m of data.party) fillMon(m);
+  if (isObj(data.boxes)) for (const arr of Object.values(data.boxes)) {
+    if (Array.isArray(arr)) for (const m of arr) fillMon(m);
+  }
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
       data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';
@@ -17684,6 +18221,11 @@ class BattleScene {
       if (t0.nickname) this.foeMon.nickname = t0.nickname; // e.g. the duo's named mons
     }
     tuneFoeMon(this.foeMon, g.state);
+    // ADR-025 §3 (Phase 3): foe keepsake lever (rules.foeKeepsakeFor) —
+    // Story none, Classic leader aces only, Challenge all leader teams;
+    // wild foes (no trainer) never hold one.
+    const ks0 = foeKeepsakeFor(g.state, this.trainer, 0, this.trainer ? this.trainer.team.length : 0);
+    if (ks0) this.foeMon.keepsake = ks0;
     this.foeAi = effectiveAiFor(g.state, this.trainer);
     // ADR-025 §1 (Grounds): resolve the Ground ONCE, from the map the
     // battle starts in (returnTo is the overworld scene, whose mapId is
@@ -18020,22 +18562,31 @@ class BattleScene {
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.participants.add(this.ally); // switched-in mons share this foe's XP
       this.hpAnim.ally = this.ally.hp;
-      if (inFaint) {
-        this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this.toCommand());
-      } else if (this.rtMode) {
-        // ADR-020: live switching — no turn is spent; the incoming mon is
-        // briefly vulnerable (no dodge i-frames) as the switch cost.
-        this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
-          if (this.rt) { this.rt.switchVulnT = 1000; this.rt.iframes = 0; this.state = 'rt'; }
-          else this.toCommand();
-        });
-      } else {
-        this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
-          this.playerAction = { type: 'switch', from: old };
-          this.foeAction = this.chooseFoeAction();
-          this.beginTurn();
-        });
-      }
+      // ADR-025 §3: trigger-shaped keepsakes are also evaluated at the
+      // switch check — an incoming holder already at <=25% HP catches
+      // its Second Wind as it takes the field (no attack context, so
+      // the Tortoise Charm can never fire here).
+      const ksLines = this.ksApplyTriggers('ally', {});
+      const proceedSwitch = () => {
+        if (inFaint) {
+          this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this.toCommand());
+        } else if (this.rtMode) {
+          // ADR-020: live switching — no turn is spent; the incoming mon is
+          // briefly vulnerable (no dodge i-frames) as the switch cost.
+          this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
+            if (this.rt) { this.rt.switchVulnT = 1000; this.rt.iframes = 0; this.state = 'rt'; }
+            else this.toCommand();
+          });
+        } else {
+          this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
+            this.playerAction = { type: 'switch', from: old };
+            this.foeAction = this.chooseFoeAction();
+            this.beginTurn();
+          });
+        }
+      };
+      if (ksLines.length) this.say(ksLines.join(' '), proceedSwitch);
+      else proceedSwitch();
     });
   }
 
@@ -18325,6 +18876,7 @@ class BattleScene {
       if (!atk.bideT) { atk.bideT = 2; atk.bideDmg = 0; this.say(atkName + ' used Bide!', () => this.nextAction()); return; }
       const bd = atk.bideDmg * 2; atk.bideT = 0; atk.bideDmg = 0;
       if (bd <= 0) { this.say(atkName + ' used Bide! But it failed!', () => this.nextAction()); return; }
+      this._ksHit = { side: foeSide, hpBefore: def.hp }; noteHitTaken(def);
       def.hp = Math.max(0, def.hp - bd);
       this.say(atkName + ' unleashed energy!', () => this.checkFaint(foeSide, () => this.nextAction()));
       return;
@@ -18389,6 +18941,7 @@ class BattleScene {
       if (efx.counter) {
         const taken = atk.tookPhysicalThisTurn || 0;
         if (taken <= 0) { this.say('But it failed!', () => this.nextAction()); return; }
+        this._ksHit = { side: foeSide, hpBefore: def.hp }; noteHitTaken(def);
         def.hp = Math.max(0, def.hp - taken * 2);
         this.say(defName + ' took ' + (taken * 2) + ' damage!', () => this.checkFaint(foeSide, () => this.nextAction()));
         return;
@@ -18407,6 +18960,17 @@ class BattleScene {
         g.state.pikachu.mood = 'happy';
       }
       // Damage amount: fixed / level-scaled / OHKO / standard formula.
+      // ADR-025 §3 (Phase 3): the keepsake factor is resolved ONCE here
+      // (attacker + defender windows, game/keepsakes.mjs) and applied by
+      // calcDamage after the Ground factor — only on the standard
+      // formula path, exactly like the Ground factor (fixed/level/OHKO
+      // damage is untouched by both systems).
+      const defHpBefore = def.hp;
+      const ksInfo = keepsakeDamageFactor(atk, def, mv, {
+        defTypes,
+        atkSpe: entry.stats.spe,
+        defSpe: Math.floor(def.stats.spe * stageMultiplier(defStages.spe)),
+      });
       let dmg;
       if (mv.ohko || efx.ohko) dmg = def.hp;
       else if (efx.fixed) dmg = efx.fixed;
@@ -18417,7 +18981,7 @@ class BattleScene {
         dmg = 0;
         for (let hi = 0; hi < hits; hi++) {
           dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
+            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: ksInfo.factor });
         }
         if (hits > 1) this._hitCount = hits;
       }
@@ -18433,6 +18997,8 @@ class BattleScene {
       }
       if (dmg > 0) {
         def.hp = Math.max(0, def.hp - dmg);
+        noteHitTaken(def); // ADR-025 §3: the holder took a hit (Iron Acorn window)
+        this._ksHit = { side: foeSide, hpBefore: defHpBefore }; // attack context for checkFaint's Tortoise gate
         if (mv.cat === 'physical') def.tookPhysicalThisTurn = (def.tookPhysicalThisTurn || 0) + dmg;
         if (def.bideT) def.bideDmg = (def.bideDmg || 0) + dmg;
         // Gen 1: a Fire-type hit thaws a frozen defender.
@@ -18481,20 +19047,35 @@ class BattleScene {
           : (subBroke ? 'The substitute broke!' : defName + ' took ' + dmg + ' damage!');
         if (this._hitCount) { msg2 += ' Hit ' + this._hitCount + ' times!'; this._hitCount = 0; }
         if (mv.ohko || efx.ohko) msg2 = 'One-hit KO!';
+        // ADR-025 §3: first firing of a damage keepsake is announced by
+        // name on the damage line (never silent; once per battle each).
+        if (dmg > 0 && !subBroke) {
+          if (ksInfo.atkId) { const l = this.ksAnnounceLine(atk, ksInfo.atkId, atkName, false); if (l) msg2 += ' ' + l; }
+          if (ksInfo.defId) { const l = this.ksAnnounceLine(def, ksInfo.defId, defName, true); if (l) msg2 += ' ' + l; }
+        }
         // Status infliction (single status or Tri Attack's random pick).
         let statusRoll = efx.status;
         if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
         // ADR-025 §1: Ember/Pyre (burn) and Venom (poison) twists add +10
         // points to the infliction roll — only where the move can already
         // inflict that status (no chance on the move = guaranteed, no roll).
-        const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+        // ADR-025 §3: Ember Seed / Gloom Fang add their +10 at the same
+        // roll, composing additively with the Ground twist.
+        const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll)
+          + keepsakeStatusChanceBonus(atk, mv, statusRoll);
         if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
           if (statusRoll === 'confusion') {
             if (!def.confused) { def.confused = true; def.confusedTurns = 2 + Math.floor(g.rng.battle() * 4); msg2 = defName + ' became confused!'; }
           } else if (!def.status) {
-            def.status = statusRoll;
-            if (statusRoll === 'sleep') def.sleepTurns = null;
-            msg2 = defName + this.statusText(statusRoll);
+            // ADR-025 §3: an Ember Seed holder cannot be frozen.
+            if (refusesStatus(def, statusRoll)) {
+              msg2 = defName + "'s Ember Seed glows warm — it cannot be frozen!";
+              this.ksRecord(def, 'embereed');
+            } else {
+              def.status = statusRoll;
+              if (statusRoll === 'sleep') def.sleepTurns = null;
+              msg2 = defName + this.statusText(statusRoll);
+            }
           }
         }
         // Stage changes riding on a damaging move (Bubble Beam family).
@@ -18579,7 +19160,10 @@ class BattleScene {
     if (ef.heal) {
       if (target.hp >= target.maxHp) { done('But it failed!'); return; }
       // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50%.
-      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal * groundHealMult(this.field)));
+      // ADR-025 §3 Gardenia Sash: healing moves ON a holder restore a
+      // further +50% — same effect.heal scope as the Ground twist
+      // (drain and Rest are separate paths, excluded for both).
+      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal * groundHealMult(this.field) * keepsakeHealMult(target)));
       done(tName + ' regained health!');
       return;
     }
@@ -18655,15 +19239,74 @@ class BattleScene {
       else msg = 'But it failed!';
     } else if (ef.status) {
       if (!target.status) {
-        target.status = ef.status;
-        if (ef.status === 'sleep') target.sleepTurns = null;
-        msg = tName + this.statusText(ef.status);
+        // ADR-025 §3: an Ember Seed holder cannot be frozen.
+        if (refusesStatus(target, ef.status)) {
+          msg = tName + "'s Ember Seed glows warm — it cannot be frozen!";
+          this.ksRecord(target, 'embereed');
+        } else {
+          target.status = ef.status;
+          if (ef.status === 'sleep') target.sleepTurns = null;
+          msg = tName + this.statusText(ef.status);
+        }
       } else msg = 'But it failed!';
     }
     this.say(msg || 'Nothing happened.', () => this.nextAction());
   }
 
+  // ADR-025 §3 (Phase 3): shared keepsake trigger evaluation at the
+  // faint/switch checks. evaluateTriggers (game/keepsakes.mjs) owns the
+  // conditions + once-per-battle flags; this applies the Speed stage to
+  // the side's stage system and returns battle lines NAMING the piece
+  // (effects never fire silently). ctx.hpBefore/viaAttack come from
+  // this._ksHit, recorded by the damage paths for attack damage only —
+  // so the Tortoise Charm cannot save from poison ticks or recoil.
+  ksApplyTriggers(side, ctx) {
+    const mon = side === 'ally' ? this.ally : this.foe;
+    if (!mon) return [];
+    const trig = evaluateTriggers(mon, ctx || {});
+    const lines = [];
+    const name = displayName(mon, SPECIES);
+    if (trig.tortoise) {
+      lines.push(name + "'s Tortoise Charm flared! It hung on with 1 HP!");
+      this.ksRecord(mon, 'tortoisecharm');
+    }
+    if (trig.secondWind) {
+      const st = side === 'ally' ? this.allyStages : this.foeStages;
+      st.spe = Math.min(6, (st.spe || 0) + 1);
+      lines.push(name + "'s Second-Wind Ribbon caught the wind! Its Speed rose!");
+      this.ksRecord(mon, 'secondwindribbon');
+    }
+    return lines;
+  }
+
+  ksRecord(mon, id) {
+    (this._ksTriggered = this._ksTriggered || []).push({ mon, id });
+  }
+
+  // First-firing announcement for a damage-shaped keepsake (once per
+  // battle per holder — the factor itself applies on every qualifying
+  // hit). Returns the line, or null when already announced.
+  ksAnnounceLine(mon, id, holderName, isDefender) {
+    const ks = ksState(mon);
+    if (ks.announced[id]) return null;
+    ks.announced[id] = true;
+    this.ksRecord(mon, id);
+    return holderName + "'s " + KEEPSAKES[id].name + (isDefender ? ' blunted the blow!' : ' flared!');
+  }
+
   checkFaint(side, cb) {
+    const mon = side === 'ally' ? this.ally : this.foe;
+    const hit = (this._ksHit && this._ksHit.side === side) ? this._ksHit : null;
+    if (hit) this._ksHit = null;
+    const lines = this.ksApplyTriggers(side, hit ? { hpBefore: hit.hpBefore, viaAttack: true } : {});
+    if (lines.length) {
+      this.say(lines.join(' '), () => this.checkFaintContinue(side, cb));
+      return;
+    }
+    this.checkFaintContinue(side, cb);
+  }
+
+  checkFaintContinue(side, cb) {
     const g = this.game;
     const mon = side === 'ally' ? this.ally : this.foe;
     if (mon.hp > 0) { cb(); return; }
@@ -18700,6 +19343,8 @@ class BattleScene {
         const t = this.trainer.team[this.trainerIdx];
         this.foe = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
         if (t.nickname) this.foe.nickname = t.nickname;
+        const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
+        if (ksN) this.foe.keepsake = ksN;
         this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
         this.participants = new Set([this.ally]); // XP pool resets per foe
         this.hpAnim.foe = this.foe.hp;
@@ -18731,9 +19376,12 @@ class BattleScene {
     // THIS foe and are still standing — never the whole party for free.
     const parts = [...this.participants].filter((m) => m.hp > 0);
     const share = parts.length ? Math.max(1, Math.floor(total / parts.length)) : 0;
-    this.xpShares = new Map(parts.map((m) => [m, share]));
+    // ADR-025 §3: Champion's Ribbon — the HOLDER's share gains x1.2,
+    // composing multiplicatively with the mode/House-Rule factors that
+    // built the pool (rules.xpMultFor(state, mon) is the same product).
+    this.xpShares = new Map(parts.map((m) => [m, Math.max(1, Math.floor(share * keepsakeXpMult(m)))]));
     this.xpBarAnim = parts.map((m) => ({
-      mon: m, from: xpFracOf(m, 0), to: xpFracOf(m, share),
+      mon: m, from: xpFracOf(m, 0), to: xpFracOf(m, this.xpShares.get(m)),
     }));
     this.xpCb = cb;
     this.state = 'xp';
@@ -19072,6 +19720,7 @@ class BattleScene {
       m.lockMove = null; m.chargedFor = null; m.focused = false; m.tempTypes = null;
       m.flinched = false; m.bpTurns = 0; m.mustRecharge = false; m.bideT = 0; m.bideDmg = 0;
       m.disabledMove = null; m.disableT = 0; m.tookPhysicalThisTurn = 0;
+      clearKsState(m); // ADR-025 §3: per-battle keepsake flags never persist
       const st = m.stages; if (st) { st.atk = 0; st.def = 0; st.spa = 0; st.spd = 0; st.spe = 0; st.acc = 0; st.eva = 0; }
     }
     g.scenes.pop();
@@ -19480,13 +20129,15 @@ const ARENA = { x0: 26, y0: 56, x1: 454, y1: 258 }; // logical 480x320 space
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 function dist(ax, ay, bx, by) { return Math.hypot(bx - ax, by - ay); }
 
-function cooldownMs(mv, userSpe, foeSpe, field) {
+function cooldownMs(mv, userSpe, foeSpe, field, mon) {
   // ADR-020 review formula: power/accuracy/speed-advantage scaled, clamped.
   // ADR-025 §1 RT twists at this hook: Storm/Volt — Electric moves x0.85;
   // Grave/Mind — status moves x1.25 (groundCooldownMult, field-resolved,
   // so Story's twist-off is already folded in).
-  if (mv.cat === 'status') return Math.round(1500 * groundCooldownMult(field, mv));
-  return Math.round(clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200) * groundCooldownMult(field, mv));
+  // ADR-025 §3: Gloom Fang — the holder's (optional 5th arg) Poison moves
+  // cool down x0.85; the classic engine takes the +10% chance instead.
+  if (mv.cat === 'status') return Math.round(1500 * groundCooldownMult(field, mv) * keepsakeCooldownMult(mon, mv));
+  return Math.round(clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200) * groundCooldownMult(field, mv) * keepsakeCooldownMult(mon, mv));
 }
 
 Object.assign(BattleScene.prototype, {
@@ -19780,7 +20431,7 @@ Object.assign(BattleScene.prototype, {
     // ADR-025 §4: difficulty lives in THREAT speed — foe move cooldowns
     // scale with the mode (x1.1 Story / x1.0 Classic / x0.9 Challenge);
     // ally cooldowns are never scaled.
-    const cdBase = cooldownMs(mv, atkSpe, defSpe, this.field);
+    const cdBase = cooldownMs(mv, atkSpe, defSpe, this.field, atk);
     rt.cds[side][slot.id] = side === 'foe' ? Math.round(cdBase * rtFoeCooldownMultFor(g.state)) : cdBase;
     const ax = side === 'ally' ? rt.ax : rt.fx, ay = side === 'ally' ? rt.ay : rt.fy;
     const dx = side === 'ally' ? rt.fx : rt.ax, dy = side === 'ally' ? rt.fy : rt.ay;
@@ -19883,6 +20534,11 @@ Object.assign(BattleScene.prototype, {
     const crit = roll(critChance(baseSpe, { highCrit: !!mv.highcrit, focus: !!atk.focused }), g.rng.battle);
     const atkStat = mv.cat === 'physical' ? (crit ? atk.stats.atk : aStats.atk) : (crit ? atk.stats.spa : aStats.spa);
     const defStat = mv.cat === 'physical' ? (crit ? def.stats.def : dStats.def) : (crit ? def.stats.spd : dStats.spd);
+    // ADR-025 §3 (Phase 3): keepsake factor — same shared helper and
+    // same calcDamage hook as the classic engine (applied once, after
+    // the Ground factor; formula path only).
+    const defHpBefore = def.hp;
+    const ksInfo = keepsakeDamageFactor(atk, def, mv, { defTypes, atkSpe: aStats.spe, defSpe: dStats.spe });
     let dmg;
     if (mv.ohko || efx.ohko) dmg = def.hp;
     else if (efx.fixed) dmg = efx.fixed;
@@ -19893,7 +20549,7 @@ Object.assign(BattleScene.prototype, {
       dmg = 0;
       for (let hi = 0; hi < hits; hi++) {
         dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
+          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: ksInfo.factor });
       }
     }
     if (mv.cat === 'physical' && def.reflectT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
@@ -19901,10 +20557,16 @@ Object.assign(BattleScene.prototype, {
     if (def.subHp > 0) { def.subHp -= dmg; if (def.subHp <= 0) def.subHp = 0; dmg = 0; }
     if (dmg > 0) {
       def.hp = Math.max(0, def.hp - dmg);
+      noteHitTaken(def); // ADR-025 §3: Iron Acorn window (classic parity)
+      this._ksHitRt = { side: side === 'ally' ? 'foe' : 'ally', hpBefore: defHpBefore }; // Tortoise attack context
       g.audio.hitFeedback(eff);
       if (crit) this.rtFloat('A critical hit!');
       else if (eff > 1) this.rtFloat("It's super effective!");
       else if (eff < 1) this.rtFloat("It's not very effective...");
+      // ADR-025 §3: first firing of a damage keepsake is announced by
+      // name (ui.log + float lane; never silent).
+      if (ksInfo.atkId) { const l = this.ksAnnounceLine(atk, ksInfo.atkId, displayName(atk, SPECIES), false); if (l) { g.ui.log.push({ ui: 'battle-rt', text: l }); this.rtFloatText = l; this.rtFloatT = 1400; } }
+      if (ksInfo.defId) { const l = this.ksAnnounceLine(def, ksInfo.defId, displayName(def, SPECIES), true); if (l) { g.ui.log.push({ ui: 'battle-rt', text: l }); this.rtFloatText = l; this.rtFloatT = 1400; } }
       if (def.status === 'freeze' && mv.type === 'fire') def.status = null;
       if (efx.drain) atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(dmg * efx.drain));
       if (efx.recoil) atk.hp = Math.max(0, atk.hp - Math.max(1, Math.floor(dmg * efx.recoil)));
@@ -19912,14 +20574,24 @@ Object.assign(BattleScene.prototype, {
       if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
       // ADR-025 §1: Ember/Pyre (burn) / Venom (poison) +10 points, same
       // hook as classic — only where the move can already inflict it.
-      const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+      // ADR-025 §3: Ember Seed / Gloom Fang add their +10 at the same roll.
+      const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll)
+        + keepsakeStatusChanceBonus(atk, mv, statusRoll);
       if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
         if (statusRoll === 'confusion') { def.confused = true; def.confusedTurns = 3; }
         else if (!def.status) {
-          def.status = statusRoll;
-          if (statusRoll === 'sleep') {
-            const turns = 1 + Math.floor(g.rng.battle() * 7);
-            if (def === this.foe) this.rt.foeSleepT = turns * 1100; else this.rt.allySleepT = turns * 1100;
+          // ADR-025 §3: an Ember Seed holder cannot be frozen.
+          if (refusesStatus(def, statusRoll)) {
+            g.ui.log.push({ ui: 'battle-rt', text: displayName(def, SPECIES) + "'s Ember Seed glows warm — it cannot be frozen!" });
+            this.rtFloatText = displayName(def, SPECIES) + "'s Ember Seed — cannot be frozen!";
+            this.rtFloatT = 1400;
+            this.ksRecord(def, 'embereed');
+          } else {
+            def.status = statusRoll;
+            if (statusRoll === 'sleep') {
+              const turns = 1 + Math.floor(g.rng.battle() * 7);
+              if (def === this.foe) this.rt.foeSleepT = turns * 1100; else this.rt.allySleepT = turns * 1100;
+            }
           }
         }
       }
@@ -19947,7 +20619,9 @@ Object.assign(BattleScene.prototype, {
     const atkStages = side === 'ally' ? this.allyStages : this.foeStages;
     const defStages = side === 'ally' ? this.foeStages : this.allyStages;
     // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50% (both engines).
-    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal * groundHealMult(this.field))); return; }
+    // ADR-025 §3 Gardenia Sash: on a holder, a further +50% — same
+    // effect.heal scope as the Ground twist (drain/Rest excluded, both).
+    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal * groundHealMult(this.field) * keepsakeHealMult(atk))); return; }
     if (ef.rest) { atk.hp = atk.maxHp; atk.status = 'sleep'; if (side === 'ally') this.rt.allySleepT = 2200; else this.rt.foeSleepT = 2200; return; }
     if (ef.substitute) { const c = Math.floor(atk.maxHp / 4); if (atk.subHp <= 0 && atk.hp > c) { atk.hp -= c; atk.subHp = c; } return; }
     if (ef.screen) { if (ef.screen === 'physical') atk.reflectT = 5; else atk.lightT = 5; return; }
@@ -19970,6 +20644,13 @@ Object.assign(BattleScene.prototype, {
       const target = ef.target === 'self' ? atk : def;
       if (ef.status === 'confusion') { target.confused = true; target.confusedTurns = 3; }
       else if (!target.status) {
+        // ADR-025 §3: an Ember Seed holder cannot be frozen (refused
+        // only where the infliction would otherwise land — classic parity).
+        if (refusesStatus(target, ef.status)) {
+          g.ui.log.push({ ui: 'battle-rt', text: displayName(target, SPECIES) + "'s Ember Seed glows warm — it cannot be frozen!" });
+          this.ksRecord(target, 'embereed');
+          return;
+        }
         target.status = ef.status;
         if (ef.status === 'sleep') {
           const turns = 1 + Math.floor(g.rng.battle() * 7);
@@ -20113,6 +20794,22 @@ Object.assign(BattleScene.prototype, {
 
   rtCheckFaints() {
     const g = this.game;
+    // ADR-025 §3 (Phase 3): shared keepsake trigger evaluation at the RT
+    // faint check (same helper + same stage application as classic's
+    // checkFaint). Attack context comes from rtApplyDamage's _ksHitRt —
+    // poison ticks / confusion self-hits carry none, so the Tortoise
+    // Charm cannot save from them; Second-Wind can still fire.
+    for (const side of ['foe', 'ally']) {
+      const mon = side === 'foe' ? this.foe : this.ally;
+      if (!mon) continue;
+      const hit = (this._ksHitRt && this._ksHitRt.side === side) ? this._ksHitRt : null;
+      if (hit) this._ksHitRt = null;
+      const lines = this.ksApplyTriggers(side, hit ? { hpBefore: hit.hpBefore, viaAttack: true } : {});
+      for (const l of lines) {
+        g.ui.log.push({ ui: 'battle-rt', text: l });
+        this.rtFloatText = l; this.rtFloatT = 1400;
+      }
+    }
     if (this.foe && this.foe.hp <= 0) {
       this.state = 'faintfoe';
       this.afterFaintFoe();
@@ -20204,7 +20901,7 @@ Object.assign(BattleScene.prototype, {
       r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
       if (!ready && slot.pp > 0) {
         // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
-        const total = cooldownMs(mv, 50, 50, this.field);
+        const total = cooldownMs(mv, 50, 50, this.field, this.ally);
         const frac = Math.max(0, Math.min(1, cd / total));
         c.fillStyle = PT_FRAME2;
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);
@@ -21129,7 +21826,15 @@ Object.assign(OverworldScene.prototype, {
       badges: g.state.badges.kanto.length,
     });
     g.state.story.flags.champion = true;
-    g.ui.say(CREDITS_LINES.slice(), () => { if (done) done(); }, '');
+    // ADR-025 §3 (Phase 3): the Hall of Fame gift — the Champion's
+    // Ribbon is presented at League registration, once (a keepsake is
+    // a unique object; repeat registrations never duplicate it).
+    const lines = CREDITS_LINES.slice();
+    if (grantKeepsake(g.state, 'championsribbon')) {
+      lines.push('The League registrar presents you with the CHAMPION\'S RIBBON!');
+      lines.push('Give it to a Pokemon from the party menu — its holder gains x1.2 XP.');
+    }
+    g.ui.say(lines, () => { if (done) done(); }, '');
   },
 
   giftMon(speciesId, level, next) {
@@ -21676,9 +22381,16 @@ Object.assign(OverworldScene.prototype, {
       { label: 'Buy', value: 'buy' }, { label: 'Sell', value: 'sell' }, { label: 'Leave', value: 'leave' },
     ], (v) => {
       if (v === 'buy') {
-        const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0).map((id) => ({
+        // ADR-025 §3 (Phase 3): stock rows carrying minBadges stay hidden
+        // until the player has earned that many badges (the codebase's
+        // badgesAtLeast gating idiom — this is how the Celadon shop's
+        // Second-Wind Ribbon is "late"). Keepsakes are unique objects:
+        // once owned (bag or held) the row is disabled.
+        const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0
+          && (!ITEMS[id].minBadges || g.state.badges.kanto.length >= ITEMS[id].minBadges)).map((id) => ({
           label: ITEMS[id].name + ' — $' + ITEMS[id].price + ' (own ' + (g.state.bag[id] || 0) + ')', value: id,
-          disabled: g.state.player.money < ITEMS[id].price,
+          disabled: g.state.player.money < ITEMS[id].price
+            || (ITEMS[id].pocket === 'keepsakes' && ownsKeepsake(g.state, id)),
         }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Buy what?', items, (iv) => {
@@ -21692,7 +22404,8 @@ Object.assign(OverworldScene.prototype, {
           this.openMart(stock);
         });
       } else if (v === 'sell') {
-        const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].price > 0 && g.state.bag[id] > 0)
+        // ADR-025 §3: keepsakes are non-sellable (pocket excluded).
+        const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].pocket !== 'keepsakes' && ITEMS[id].price > 0 && g.state.bag[id] > 0)
           .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Sell what?', items, (iv) => {
@@ -21938,6 +22651,9 @@ class Game {
   // balls -> pokeball, potion-class medicine -> potion, badges -> badge.
   itemIconName(itemId) {
     const it = ITEMS[itemId];
+    // ADR-025 §3 (Phase 3): keepsakes carry their own authored 16x16
+    // icons (assets/sprites/pix/ui/icon-keepsake-<id>.pix).
+    if (it && it.pocket === 'keepsakes') return 'keepsake-' + itemId;
     if (itemId === 'potion' || itemId === 'superpotion' || itemId === 'hyperpotion' ||
         itemId === 'maxpotion' || itemId === 'fullrestore') return 'potion';
     if ((it && it.pocket === 'balls') || itemId === 'pokeball') return 'pokeball';
@@ -22348,10 +23064,12 @@ class Game {
       const col = pct > 50 ? '#58c94f' : pct > 25 ? '#e8c832' : '#e84040';
       const badge = m.speciesId === 'partner' ? '<span class="pbadge">PARTNER</span>' : '';
       const st = m.status ? '<span class="pstat">' + m.status.toUpperCase().slice(0, 3) + '</span>' : '';
+      // ADR-025 §3: party rows show whether a mon holds a keepsake.
+      const ksChip = m.keepsake && ITEMS[m.keepsake] ? '<span class="pstat">' + ITEMS[m.keepsake].name + '</span>' : '';
       return ball + '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
         + '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
         + '<span class="phpbar"><i style="width:' + pct + '%;background:' + col + '"></i></span>'
-        + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st;
+        + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st + ksChip;
     };
     const items = g.state.party.map((m, i) => {
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + '  ' + m.hp + '/' + m.maxHp, value: i };
@@ -22373,6 +23091,10 @@ class Game {
       if (m.ot !== undefined && m.ot !== null && m.ot !== '') info += sumRow('OT', m.ot);
       info += sumRow('Level', m.level);
       info += sumRow('HP', m.hp + '/' + m.maxHp);
+      // ADR-025 §3 (Phase 3): the summary shows the held Keepsake and
+      // its one-line effect text (ITEMS carries the same text).
+      info += sumRow('Keepsake', m.keepsake && ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : 'None');
+      if (m.keepsake && ITEMS[m.keepsake]) info += '<div class="sumflavor">' + ITEMS[m.keepsake].desc + '</div>';
       if (xpVal !== null) info += sumRow('EXP', xpVal);
       if (sp.flavor) info += '<div class="sumflavor">' + sp.flavor + '</div>';
       let statusBody = '';
@@ -22418,9 +23140,39 @@ class Game {
       // order (lead, switch-ins, XP share order) could not be changed
       // anywhere in the game. Switch picks a partner and swaps places.
       if (g.state.party.length > 1) rows.push({ label: 'Switch', value: 'switch' });
+      // ADR-025 §3 (Phase 3): Keepsake Give/Take rows. The partner
+      // Pikachu may hold one (the ADR-016 guards do NOT apply here).
+      const heldDef = m.keepsake && ITEMS[m.keepsake] ? ITEMS[m.keepsake] : null;
+      const bagKs = Object.keys(KEEPSAKES).filter((id) => (g.state.bag[id] || 0) > 0);
+      if (heldDef) rows.push({ label: 'Take ' + heldDef.name, value: 'ks-take' });
+      if (!heldDef && bagKs.length) rows.push({ label: 'Give keepsake', value: 'ks-give' });
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
       rows.push({ label: 'Close', value: 'close' });
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
+        if (a === 'ks-take') {
+          if (takeKeepsake(g.state, m)) {
+            g.audio.playSfx('ui-blip');
+            g.ui.toast('Took the ' + heldDef.name + ' from ' + displayName(m, SPECIES) + '.');
+          }
+          g.openParty();
+          return;
+        }
+        if (a === 'ks-give') {
+          const ksRows = bagKs.map((id) => ({ label: ITEMS[id].name, value: id }));
+          ksRows.push({ label: 'Back', value: -1 });
+          const ksRowHtml = (it) => it.value === -1
+            ? '<span>' + it.label + '</span>'
+            : '<img class="picon" src="' + g.itemIconDataUrl(it.value) + '" alt=""><span><b>' + it.label + '</b></span><span>' + ITEMS[it.value].desc + '</span>';
+          g.ui.showMenu('Give which keepsake?', ksRows, (id) => {
+            if (id === null || id === -1) { openMonMenu(monIndex); return; }
+            if (giveKeepsake(g.state, m, id)) {
+              g.audio.playSfx('ui-blip');
+              g.ui.toast(displayName(m, SPECIES) + ' is now holding the ' + ITEMS[id].name + '.');
+            }
+            g.openParty();
+          }, { rowHtml: ksRowHtml });
+          return;
+        }
         if (a === 'field' && g.openFieldMove) { g.openFieldMove(m); return; }
         if (a === 'switch') {
           const others = g.state.party
@@ -22852,6 +23604,24 @@ Object.assign(Game.prototype, {
     if (!it) return;
     const ow = g.scenes.top;
     const finish = () => g.openBag();
+    if (it.pocket === 'keepsakes') {
+      // ADR-025 §3 (Phase 3): selecting a keepsake in the bag gives it
+      // to a party member (non-consumable; one held slot per mon).
+      const targets = g.state.party.map((m, i) => ({
+        label: displayName(m, SPECIES) + (m.keepsake ? ' (holding ' + (ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : m.keepsake) + ')' : ''), value: i,
+        disabled: !!m.keepsake,
+      }));
+      targets.push({ label: 'Back', value: -1 });
+      g.ui.showMenu('Give ' + it.name + ' to...', targets, (t) => {
+        if (t === null || t === -1) { finish(); return; }
+        if (giveKeepsake(g.state, g.state.party[t], id)) {
+          g.audio.playSfx('ui-blip');
+          g.ui.toast(displayName(g.state.party[t], SPECIES) + ' is now holding the ' + it.name + '.');
+        }
+        finish();
+      }, { rowHtml: (it2) => g.partyTargetRowHtml(it2) });
+      return;
+    }
     if (it.pocket === 'tm' || it.pocket === 'hm') { this.teachFromBag(id, it); return; }
     if (it.levelUp) { // Rare Candy
       const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= 100 }));

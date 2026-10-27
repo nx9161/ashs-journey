@@ -16,7 +16,8 @@ import { IntroScene } from './intro.mjs';
 import { OverworldScene } from './overworld.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
-import { ITEMS, POCKETS, BALLS } from '../data/items.mjs';
+import { ITEMS, POCKETS, BALLS, KEEPSAKES } from '../data/items.mjs';
+import { giveKeepsake, takeKeepsake } from './keepsakes.mjs';
 import { MAPS } from '../data/maps.mjs';
 import { CHAPTERS, BONUS_SHELF, chapterOf } from '../data/story.mjs';
 import { displayName, dexCaughtCount, defaultState } from './state.mjs';
@@ -118,6 +119,9 @@ export class Game {
   // balls -> pokeball, potion-class medicine -> potion, badges -> badge.
   itemIconName(itemId) {
     const it = ITEMS[itemId];
+    // ADR-025 §3 (Phase 3): keepsakes carry their own authored 16x16
+    // icons (assets/sprites/pix/ui/icon-keepsake-<id>.pix).
+    if (it && it.pocket === 'keepsakes') return 'keepsake-' + itemId;
     if (itemId === 'potion' || itemId === 'superpotion' || itemId === 'hyperpotion' ||
         itemId === 'maxpotion' || itemId === 'fullrestore') return 'potion';
     if ((it && it.pocket === 'balls') || itemId === 'pokeball') return 'pokeball';
@@ -528,10 +532,12 @@ export class Game {
       const col = pct > 50 ? '#58c94f' : pct > 25 ? '#e8c832' : '#e84040';
       const badge = m.speciesId === 'partner' ? '<span class="pbadge">PARTNER</span>' : '';
       const st = m.status ? '<span class="pstat">' + m.status.toUpperCase().slice(0, 3) + '</span>' : '';
+      // ADR-025 §3: party rows show whether a mon holds a keepsake.
+      const ksChip = m.keepsake && ITEMS[m.keepsake] ? '<span class="pstat">' + ITEMS[m.keepsake].name + '</span>' : '';
       return ball + '<img class="picon" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
         + '<span><b>' + displayName(m, SPECIES) + '</b> Lv' + m.level + badge + '</span>'
         + '<span class="phpbar"><i style="width:' + pct + '%;background:' + col + '"></i></span>'
-        + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st;
+        + '<span>' + m.hp + '/' + m.maxHp + '</span>' + st + ksChip;
     };
     const items = g.state.party.map((m, i) => {
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + '  ' + m.hp + '/' + m.maxHp, value: i };
@@ -553,6 +559,10 @@ export class Game {
       if (m.ot !== undefined && m.ot !== null && m.ot !== '') info += sumRow('OT', m.ot);
       info += sumRow('Level', m.level);
       info += sumRow('HP', m.hp + '/' + m.maxHp);
+      // ADR-025 §3 (Phase 3): the summary shows the held Keepsake and
+      // its one-line effect text (ITEMS carries the same text).
+      info += sumRow('Keepsake', m.keepsake && ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : 'None');
+      if (m.keepsake && ITEMS[m.keepsake]) info += '<div class="sumflavor">' + ITEMS[m.keepsake].desc + '</div>';
       if (xpVal !== null) info += sumRow('EXP', xpVal);
       if (sp.flavor) info += '<div class="sumflavor">' + sp.flavor + '</div>';
       let statusBody = '';
@@ -598,9 +608,39 @@ export class Game {
       // order (lead, switch-ins, XP share order) could not be changed
       // anywhere in the game. Switch picks a partner and swaps places.
       if (g.state.party.length > 1) rows.push({ label: 'Switch', value: 'switch' });
+      // ADR-025 §3 (Phase 3): Keepsake Give/Take rows. The partner
+      // Pikachu may hold one (the ADR-016 guards do NOT apply here).
+      const heldDef = m.keepsake && ITEMS[m.keepsake] ? ITEMS[m.keepsake] : null;
+      const bagKs = Object.keys(KEEPSAKES).filter((id) => (g.state.bag[id] || 0) > 0);
+      if (heldDef) rows.push({ label: 'Take ' + heldDef.name, value: 'ks-take' });
+      if (!heldDef && bagKs.length) rows.push({ label: 'Give keepsake', value: 'ks-give' });
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
       rows.push({ label: 'Close', value: 'close' });
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
+        if (a === 'ks-take') {
+          if (takeKeepsake(g.state, m)) {
+            g.audio.playSfx('ui-blip');
+            g.ui.toast('Took the ' + heldDef.name + ' from ' + displayName(m, SPECIES) + '.');
+          }
+          g.openParty();
+          return;
+        }
+        if (a === 'ks-give') {
+          const ksRows = bagKs.map((id) => ({ label: ITEMS[id].name, value: id }));
+          ksRows.push({ label: 'Back', value: -1 });
+          const ksRowHtml = (it) => it.value === -1
+            ? '<span>' + it.label + '</span>'
+            : '<img class="picon" src="' + g.itemIconDataUrl(it.value) + '" alt=""><span><b>' + it.label + '</b></span><span>' + ITEMS[it.value].desc + '</span>';
+          g.ui.showMenu('Give which keepsake?', ksRows, (id) => {
+            if (id === null || id === -1) { openMonMenu(monIndex); return; }
+            if (giveKeepsake(g.state, m, id)) {
+              g.audio.playSfx('ui-blip');
+              g.ui.toast(displayName(m, SPECIES) + ' is now holding the ' + ITEMS[id].name + '.');
+            }
+            g.openParty();
+          }, { rowHtml: ksRowHtml });
+          return;
+        }
         if (a === 'field' && g.openFieldMove) { g.openFieldMove(m); return; }
         if (a === 'switch') {
           const others = g.state.party

@@ -15,8 +15,13 @@ import { TILE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
 import {
   trainerLevelFor, tuneFoeMon, effectiveAiFor, damageRandomFor,
-  xpMultFor, moneyMultFor, catchRateMultFor, difficultyOf,
+  xpMultFor, moneyMultFor, catchRateMultFor, difficultyOf, foeKeepsakeFor,
 } from './rules.mjs';
+import {
+  KEEPSAKES, keepsakeDamageFactor, noteHitTaken, evaluateTriggers,
+  ksState, clearKsState, keepsakeStatusChanceBonus, refusesStatus,
+  keepsakeHealMult, keepsakeXpMult,
+} from './keepsakes.mjs';
 import {
   resolveField, resolveFieldForGround, groundHealMult, groundStatusChanceBonus,
   groundClassicAccuracy, groundCritBonus, groundMireSpeedMult,
@@ -101,6 +106,11 @@ export class BattleScene {
       if (t0.nickname) this.foeMon.nickname = t0.nickname; // e.g. the duo's named mons
     }
     tuneFoeMon(this.foeMon, g.state);
+    // ADR-025 §3 (Phase 3): foe keepsake lever (rules.foeKeepsakeFor) —
+    // Story none, Classic leader aces only, Challenge all leader teams;
+    // wild foes (no trainer) never hold one.
+    const ks0 = foeKeepsakeFor(g.state, this.trainer, 0, this.trainer ? this.trainer.team.length : 0);
+    if (ks0) this.foeMon.keepsake = ks0;
     this.foeAi = effectiveAiFor(g.state, this.trainer);
     // ADR-025 §1 (Grounds): resolve the Ground ONCE, from the map the
     // battle starts in (returnTo is the overworld scene, whose mapId is
@@ -437,22 +447,31 @@ export class BattleScene {
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.participants.add(this.ally); // switched-in mons share this foe's XP
       this.hpAnim.ally = this.ally.hp;
-      if (inFaint) {
-        this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this.toCommand());
-      } else if (this.rtMode) {
-        // ADR-020: live switching — no turn is spent; the incoming mon is
-        // briefly vulnerable (no dodge i-frames) as the switch cost.
-        this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
-          if (this.rt) { this.rt.switchVulnT = 1000; this.rt.iframes = 0; this.state = 'rt'; }
-          else this.toCommand();
-        });
-      } else {
-        this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
-          this.playerAction = { type: 'switch', from: old };
-          this.foeAction = this.chooseFoeAction();
-          this.beginTurn();
-        });
-      }
+      // ADR-025 §3: trigger-shaped keepsakes are also evaluated at the
+      // switch check — an incoming holder already at <=25% HP catches
+      // its Second Wind as it takes the field (no attack context, so
+      // the Tortoise Charm can never fire here).
+      const ksLines = this.ksApplyTriggers('ally', {});
+      const proceedSwitch = () => {
+        if (inFaint) {
+          this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this.toCommand());
+        } else if (this.rtMode) {
+          // ADR-020: live switching — no turn is spent; the incoming mon is
+          // briefly vulnerable (no dodge i-frames) as the switch cost.
+          this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
+            if (this.rt) { this.rt.switchVulnT = 1000; this.rt.iframes = 0; this.state = 'rt'; }
+            else this.toCommand();
+          });
+        } else {
+          this.say('Come back! Go! ' + displayName(this.ally, SPECIES) + '!', () => {
+            this.playerAction = { type: 'switch', from: old };
+            this.foeAction = this.chooseFoeAction();
+            this.beginTurn();
+          });
+        }
+      };
+      if (ksLines.length) this.say(ksLines.join(' '), proceedSwitch);
+      else proceedSwitch();
     });
   }
 
@@ -742,6 +761,7 @@ export class BattleScene {
       if (!atk.bideT) { atk.bideT = 2; atk.bideDmg = 0; this.say(atkName + ' used Bide!', () => this.nextAction()); return; }
       const bd = atk.bideDmg * 2; atk.bideT = 0; atk.bideDmg = 0;
       if (bd <= 0) { this.say(atkName + ' used Bide! But it failed!', () => this.nextAction()); return; }
+      this._ksHit = { side: foeSide, hpBefore: def.hp }; noteHitTaken(def);
       def.hp = Math.max(0, def.hp - bd);
       this.say(atkName + ' unleashed energy!', () => this.checkFaint(foeSide, () => this.nextAction()));
       return;
@@ -806,6 +826,7 @@ export class BattleScene {
       if (efx.counter) {
         const taken = atk.tookPhysicalThisTurn || 0;
         if (taken <= 0) { this.say('But it failed!', () => this.nextAction()); return; }
+        this._ksHit = { side: foeSide, hpBefore: def.hp }; noteHitTaken(def);
         def.hp = Math.max(0, def.hp - taken * 2);
         this.say(defName + ' took ' + (taken * 2) + ' damage!', () => this.checkFaint(foeSide, () => this.nextAction()));
         return;
@@ -824,6 +845,17 @@ export class BattleScene {
         g.state.pikachu.mood = 'happy';
       }
       // Damage amount: fixed / level-scaled / OHKO / standard formula.
+      // ADR-025 §3 (Phase 3): the keepsake factor is resolved ONCE here
+      // (attacker + defender windows, game/keepsakes.mjs) and applied by
+      // calcDamage after the Ground factor — only on the standard
+      // formula path, exactly like the Ground factor (fixed/level/OHKO
+      // damage is untouched by both systems).
+      const defHpBefore = def.hp;
+      const ksInfo = keepsakeDamageFactor(atk, def, mv, {
+        defTypes,
+        atkSpe: entry.stats.spe,
+        defSpe: Math.floor(def.stats.spe * stageMultiplier(defStages.spe)),
+      });
       let dmg;
       if (mv.ohko || efx.ohko) dmg = def.hp;
       else if (efx.fixed) dmg = efx.fixed;
@@ -834,7 +866,7 @@ export class BattleScene {
         dmg = 0;
         for (let hi = 0; hi < hits; hi++) {
           dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
+            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: ksInfo.factor });
         }
         if (hits > 1) this._hitCount = hits;
       }
@@ -850,6 +882,8 @@ export class BattleScene {
       }
       if (dmg > 0) {
         def.hp = Math.max(0, def.hp - dmg);
+        noteHitTaken(def); // ADR-025 §3: the holder took a hit (Iron Acorn window)
+        this._ksHit = { side: foeSide, hpBefore: defHpBefore }; // attack context for checkFaint's Tortoise gate
         if (mv.cat === 'physical') def.tookPhysicalThisTurn = (def.tookPhysicalThisTurn || 0) + dmg;
         if (def.bideT) def.bideDmg = (def.bideDmg || 0) + dmg;
         // Gen 1: a Fire-type hit thaws a frozen defender.
@@ -898,20 +932,35 @@ export class BattleScene {
           : (subBroke ? 'The substitute broke!' : defName + ' took ' + dmg + ' damage!');
         if (this._hitCount) { msg2 += ' Hit ' + this._hitCount + ' times!'; this._hitCount = 0; }
         if (mv.ohko || efx.ohko) msg2 = 'One-hit KO!';
+        // ADR-025 §3: first firing of a damage keepsake is announced by
+        // name on the damage line (never silent; once per battle each).
+        if (dmg > 0 && !subBroke) {
+          if (ksInfo.atkId) { const l = this.ksAnnounceLine(atk, ksInfo.atkId, atkName, false); if (l) msg2 += ' ' + l; }
+          if (ksInfo.defId) { const l = this.ksAnnounceLine(def, ksInfo.defId, defName, true); if (l) msg2 += ' ' + l; }
+        }
         // Status infliction (single status or Tri Attack's random pick).
         let statusRoll = efx.status;
         if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
         // ADR-025 §1: Ember/Pyre (burn) and Venom (poison) twists add +10
         // points to the infliction roll — only where the move can already
         // inflict that status (no chance on the move = guaranteed, no roll).
-        const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+        // ADR-025 §3: Ember Seed / Gloom Fang add their +10 at the same
+        // roll, composing additively with the Ground twist.
+        const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll)
+          + keepsakeStatusChanceBonus(atk, mv, statusRoll);
         if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
           if (statusRoll === 'confusion') {
             if (!def.confused) { def.confused = true; def.confusedTurns = 2 + Math.floor(g.rng.battle() * 4); msg2 = defName + ' became confused!'; }
           } else if (!def.status) {
-            def.status = statusRoll;
-            if (statusRoll === 'sleep') def.sleepTurns = null;
-            msg2 = defName + this.statusText(statusRoll);
+            // ADR-025 §3: an Ember Seed holder cannot be frozen.
+            if (refusesStatus(def, statusRoll)) {
+              msg2 = defName + "'s Ember Seed glows warm — it cannot be frozen!";
+              this.ksRecord(def, 'embereed');
+            } else {
+              def.status = statusRoll;
+              if (statusRoll === 'sleep') def.sleepTurns = null;
+              msg2 = defName + this.statusText(statusRoll);
+            }
           }
         }
         // Stage changes riding on a damaging move (Bubble Beam family).
@@ -996,7 +1045,10 @@ export class BattleScene {
     if (ef.heal) {
       if (target.hp >= target.maxHp) { done('But it failed!'); return; }
       // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50%.
-      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal * groundHealMult(this.field)));
+      // ADR-025 §3 Gardenia Sash: healing moves ON a holder restore a
+      // further +50% — same effect.heal scope as the Ground twist
+      // (drain and Rest are separate paths, excluded for both).
+      target.hp = Math.min(target.maxHp, target.hp + Math.floor(target.maxHp * ef.heal * groundHealMult(this.field) * keepsakeHealMult(target)));
       done(tName + ' regained health!');
       return;
     }
@@ -1072,15 +1124,74 @@ export class BattleScene {
       else msg = 'But it failed!';
     } else if (ef.status) {
       if (!target.status) {
-        target.status = ef.status;
-        if (ef.status === 'sleep') target.sleepTurns = null;
-        msg = tName + this.statusText(ef.status);
+        // ADR-025 §3: an Ember Seed holder cannot be frozen.
+        if (refusesStatus(target, ef.status)) {
+          msg = tName + "'s Ember Seed glows warm — it cannot be frozen!";
+          this.ksRecord(target, 'embereed');
+        } else {
+          target.status = ef.status;
+          if (ef.status === 'sleep') target.sleepTurns = null;
+          msg = tName + this.statusText(ef.status);
+        }
       } else msg = 'But it failed!';
     }
     this.say(msg || 'Nothing happened.', () => this.nextAction());
   }
 
+  // ADR-025 §3 (Phase 3): shared keepsake trigger evaluation at the
+  // faint/switch checks. evaluateTriggers (game/keepsakes.mjs) owns the
+  // conditions + once-per-battle flags; this applies the Speed stage to
+  // the side's stage system and returns battle lines NAMING the piece
+  // (effects never fire silently). ctx.hpBefore/viaAttack come from
+  // this._ksHit, recorded by the damage paths for attack damage only —
+  // so the Tortoise Charm cannot save from poison ticks or recoil.
+  ksApplyTriggers(side, ctx) {
+    const mon = side === 'ally' ? this.ally : this.foe;
+    if (!mon) return [];
+    const trig = evaluateTriggers(mon, ctx || {});
+    const lines = [];
+    const name = displayName(mon, SPECIES);
+    if (trig.tortoise) {
+      lines.push(name + "'s Tortoise Charm flared! It hung on with 1 HP!");
+      this.ksRecord(mon, 'tortoisecharm');
+    }
+    if (trig.secondWind) {
+      const st = side === 'ally' ? this.allyStages : this.foeStages;
+      st.spe = Math.min(6, (st.spe || 0) + 1);
+      lines.push(name + "'s Second-Wind Ribbon caught the wind! Its Speed rose!");
+      this.ksRecord(mon, 'secondwindribbon');
+    }
+    return lines;
+  }
+
+  ksRecord(mon, id) {
+    (this._ksTriggered = this._ksTriggered || []).push({ mon, id });
+  }
+
+  // First-firing announcement for a damage-shaped keepsake (once per
+  // battle per holder — the factor itself applies on every qualifying
+  // hit). Returns the line, or null when already announced.
+  ksAnnounceLine(mon, id, holderName, isDefender) {
+    const ks = ksState(mon);
+    if (ks.announced[id]) return null;
+    ks.announced[id] = true;
+    this.ksRecord(mon, id);
+    return holderName + "'s " + KEEPSAKES[id].name + (isDefender ? ' blunted the blow!' : ' flared!');
+  }
+
   checkFaint(side, cb) {
+    const mon = side === 'ally' ? this.ally : this.foe;
+    const hit = (this._ksHit && this._ksHit.side === side) ? this._ksHit : null;
+    if (hit) this._ksHit = null;
+    const lines = this.ksApplyTriggers(side, hit ? { hpBefore: hit.hpBefore, viaAttack: true } : {});
+    if (lines.length) {
+      this.say(lines.join(' '), () => this.checkFaintContinue(side, cb));
+      return;
+    }
+    this.checkFaintContinue(side, cb);
+  }
+
+  checkFaintContinue(side, cb) {
     const g = this.game;
     const mon = side === 'ally' ? this.ally : this.foe;
     if (mon.hp > 0) { cb(); return; }
@@ -1117,6 +1228,8 @@ export class BattleScene {
         const t = this.trainer.team[this.trainerIdx];
         this.foe = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
         if (t.nickname) this.foe.nickname = t.nickname;
+        const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
+        if (ksN) this.foe.keepsake = ksN;
         this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
         this.participants = new Set([this.ally]); // XP pool resets per foe
         this.hpAnim.foe = this.foe.hp;
@@ -1148,9 +1261,12 @@ export class BattleScene {
     // THIS foe and are still standing — never the whole party for free.
     const parts = [...this.participants].filter((m) => m.hp > 0);
     const share = parts.length ? Math.max(1, Math.floor(total / parts.length)) : 0;
-    this.xpShares = new Map(parts.map((m) => [m, share]));
+    // ADR-025 §3: Champion's Ribbon — the HOLDER's share gains x1.2,
+    // composing multiplicatively with the mode/House-Rule factors that
+    // built the pool (rules.xpMultFor(state, mon) is the same product).
+    this.xpShares = new Map(parts.map((m) => [m, Math.max(1, Math.floor(share * keepsakeXpMult(m)))]));
     this.xpBarAnim = parts.map((m) => ({
-      mon: m, from: xpFracOf(m, 0), to: xpFracOf(m, share),
+      mon: m, from: xpFracOf(m, 0), to: xpFracOf(m, this.xpShares.get(m)),
     }));
     this.xpCb = cb;
     this.state = 'xp';
@@ -1489,6 +1605,7 @@ export class BattleScene {
       m.lockMove = null; m.chargedFor = null; m.focused = false; m.tempTypes = null;
       m.flinched = false; m.bpTurns = 0; m.mustRecharge = false; m.bideT = 0; m.bideDmg = 0;
       m.disabledMove = null; m.disableT = 0; m.tookPhysicalThisTurn = 0;
+      clearKsState(m); // ADR-025 §3: per-battle keepsake flags never persist
       const st = m.stages; if (st) { st.atk = 0; st.def = 0; st.spa = 0; st.spd = 0; st.spe = 0; st.acc = 0; st.eva = 0; }
     }
     g.scenes.pop();

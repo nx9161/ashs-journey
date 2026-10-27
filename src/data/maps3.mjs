@@ -526,7 +526,11 @@ export const MAPS3 = {
     items: [
       { x: 16, y: 1, item: 'ultraball', n: 1 },
     ],
-    hidden: [],
+    hidden: [
+      // ADR-025 §3 (Phase 3) source: Thunderhead Pin — Power Plant
+      // exploration placement.
+      { x: 16, y: 10, item: 'thunderheadpin', n: 1 },
+    ],
     events: [
       { id: 'ev_zapdos', x: 16, y: 9, when: { flagNot: 'ev_zapdos_done' } },
     ],
@@ -622,7 +626,11 @@ export const MAPS3 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Spectre Bell; Phase 4's
+      // Lavender Town Tale replaces this placement.
+      { x: 16, y: 10, item: 'spectrebell', n: 1 },
+    ],
     events: [],
     start: null,
   },
@@ -1006,6 +1014,9 @@ export const MAPS3 = {
     hidden: [
       { x: 10, y: 5, item: 'goldteeth', n: 1 },
       { x: 18, y: 11, item: 'rarecandy', n: 1 },
+      // ADR-025 §3 (Phase 3) source: Gloom Fang — Safari Zone
+      // exploration placement.
+      { x: 2, y: 8, item: 'gloomfang', n: 1 },
     ],
     events: [],
     start: null,
@@ -1300,7 +1311,11 @@ export const MAPS3 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Ember Seed; Phase 4's Cinnabar
+      // Town Tale replaces this placement.
+      { x: 16, y: 9, item: 'embereed', n: 1 },
+    ],
     events: [],
     start: null,
   },
@@ -1439,7 +1454,11 @@ export const MAPS3 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Tortoise Charm; Phase 4's
+      // Viridian Town Tale replaces this placement.
+      { x: 1, y: 1, item: 'tortoisecharm', n: 1 },
+    ],
     events: [
       { id: 'ev_viridian_gym_locked', x: 3, y: 5, when: { badgesBelow: 7 } },
     ],
@@ -1853,49 +1872,51 @@ export const TRAINERS3 = {
     id: 'misty', name: 'Misty', title: 'Cerulean Gym Leader', ai: 'smart',
     intro: ["My policy is an all-out offensive with water-type Pokemon! Show me you can swim in the deep end!"],
     lose: ["You drowned my best strategy... fine! The Cascade Badge is yours."],
-    team: [ { species: 'staryu', level: 18 }, { species: 'starmie', level: 21 } ],
+    // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
+    // applies them per difficulty — Challenge: all; Classic: ace only).
+    team: [ { species: 'staryu', level: 18, keepsake: 'secondwindribbon' }, { species: 'starmie', level: 21, keepsake: 'tidepearl' } ],
     reward: 2000, badge: 'cascadebadge',
   },
   surge: {
     id: 'surge', name: 'Lt. Surge', title: 'Vermilion Gym Leader',
     intro: ["You look like a baby, but babies don't carry badges into MY gym. My electric team will paralyze your whole plan!"],
     lose: ["Whoa! You're not just sparking — you're the whole thunderhead. Thunder Badge, earned!"],
-    team: [ { species: 'voltorb', level: 21 }, { species: 'pikachu', level: 18 }, { species: 'raichu', level: 24 } ],
+    team: [ { species: 'voltorb', level: 21, keepsake: 'ironacorn' }, { species: 'pikachu', level: 18, keepsake: 'thunderheadpin' }, { species: 'raichu', level: 24, keepsake: 'secondwindribbon' } ],
     reward: 2400, badge: 'thunderbadge',
   },
   erika: {
     id: 'erika', name: 'Erika', title: 'Celadon Gym Leader',
     intro: ["Forgive my drowsiness... the garden is so peaceful. My grass Pokemon, however, are wide awake for you."],
     lose: ["A storm in my garden, beautifully fought. The Rainbow Badge is yours."],
-    team: [ { species: 'victreebel', level: 29 }, { species: 'tangela', level: 24 }, { species: 'vileplume', level: 29 } ],
+    team: [ { species: 'victreebel', level: 29, keepsake: 'gloomfang' }, { species: 'tangela', level: 24, keepsake: 'gardeniasash' }, { species: 'vileplume', level: 29, keepsake: 'secondwindribbon' } ],
     reward: 2900, badge: 'rainbowbadge',
   },
   koga: {
     id: 'koga', name: 'Koga', title: 'Fuchsia Gym Leader',
     intro: ["A ninja's poison needs no strength — only patience. Breathe deep, challenger. Everyone does, at first."],
     lose: ["You held your breath longer than my fog. The Soul Badge, from one shadow to another."],
-    team: [ { species: 'koffing', level: 37 }, { species: 'muk', level: 39 }, { species: 'koffing', level: 37 }, { species: 'weezing', level: 43 } ],
+    team: [ { species: 'koffing', level: 37, keepsake: 'gloomfang' }, { species: 'muk', level: 39, keepsake: 'tortoisecharm' }, { species: 'koffing', level: 37, keepsake: 'gloomfang' }, { species: 'weezing', level: 43, keepsake: 'gloomfang' } ],
     reward: 4300, badge: 'soulbadge',
   },
   sabrina: {
     id: 'sabrina', name: 'Sabrina', title: 'Saffron Gym Leader',
     intro: ["Three days ago I watched this battle in a vision. You were... surprising. Visions are rarely wrong. Begin."],
     lose: ["The vision broke. How wonderful — the future is unwritten again. The Marsh Badge is yours."],
-    team: [ { species: 'kadabra', level: 38 }, { species: 'mrmime', level: 37 }, { species: 'venomoth', level: 38 }, { species: 'alakazam', level: 43 } ],
+    team: [ { species: 'kadabra', level: 38, keepsake: 'secondwindribbon' }, { species: 'mrmime', level: 37, keepsake: 'tidepearl' }, { species: 'venomoth', level: 38, keepsake: 'gloomfang' }, { species: 'alakazam', level: 43, keepsake: 'tortoisecharm' } ],
     reward: 4300, badge: 'marshbadge',
   },
   blaine: {
     id: 'blaine', name: 'Blaine', title: 'Cinnabar Gym Leader',
     intro: ["Quiz time, hotshot! What burns hotter — my Arcanine's pride, or a challenger's overconfidence? Battle me and we'll grade it!"],
     lose: ["Full marks... on MY exam. Take the Volcano Badge — and a fire extinguisher for the road."],
-    team: [ { species: 'growlithe', level: 42 }, { species: 'ponyta', level: 40 }, { species: 'rapidash', level: 42 }, { species: 'arcanine', level: 47 } ],
+    team: [ { species: 'growlithe', level: 42, keepsake: 'embereed' }, { species: 'ponyta', level: 40, keepsake: 'sparrowfeather' }, { species: 'rapidash', level: 42, keepsake: 'embereed' }, { species: 'arcanine', level: 47, keepsake: 'tortoisecharm' } ],
     reward: 4700, badge: 'volcanobadge',
   },
   giovanni: {
     id: 'giovanni', name: 'Giovanni', title: 'Viridian Gym Leader',
     intro: ["You stand in the strongest gym in Kanto, child. I do not lose. The ground itself has signed that contract."],
     lose: ["The ground... renegotiates. Take the Earth Badge. And know that we will meet in worse weather."],
-    team: [ { species: 'rhyhorn', level: 45 }, { species: 'dugtrio', level: 42 }, { species: 'nidoqueen', level: 44 }, { species: 'nidoking', level: 45 }, { species: 'rhydon', level: 50 } ],
+    team: [ { species: 'rhyhorn', level: 45, keepsake: 'ironacorn' }, { species: 'dugtrio', level: 42, keepsake: 'secondwindribbon' }, { species: 'nidoqueen', level: 44, keepsake: 'gloomfang' }, { species: 'nidoking', level: 45, keepsake: 'gloomfang' }, { species: 'rhydon', level: 50, keepsake: 'fossilspur' } ],
     reward: 5000, badge: 'earthbadge',
   },
   // ---- Gym trainers (one per gym authored in MAPS3, scaled) ----
@@ -2024,28 +2045,28 @@ export const TRAINERS3 = {
     id: 'lorelei', name: 'Lorelei', title: 'Elite Four', ai: 'smart',
     intro: ["No one can best me when it comes to icy Pokemon. Freezing moves are powerful — your Pokemon will be at my mercy when they are frozen solid!"],
     lose: ["You melted more than ice today. Go on — the others are colder company than me."],
-    team: [ { species: 'dewgong', level: 54 }, { species: 'cloyster', level: 53 }, { species: 'slowbro', level: 54 }, { species: 'jynx', level: 56 }, { species: 'lapras', level: 56 } ],
+    team: [ { species: 'dewgong', level: 54, keepsake: 'tidepearl' }, { species: 'cloyster', level: 53, keepsake: 'ironacorn' }, { species: 'slowbro', level: 54, keepsake: 'gardeniasash' }, { species: 'jynx', level: 56, keepsake: 'secondwindribbon' }, { species: 'lapras', level: 56, keepsake: 'tortoisecharm' } ],
     reward: 5600,
   },
   bruno: {
     id: 'bruno', name: 'Bruno', title: 'Elite Four', ai: 'smart',
     intro: ["I am Bruno of the Elite Four! Through rigorous training, people and Pokemon can become stronger! I have weight-trained with my Pokemon!"],
     lose: ["Discipline... outmatched. My fists salute you. Forward!"],
-    team: [ { species: 'onix', level: 53 }, { species: 'hitmonchan', level: 55 }, { species: 'hitmonlee', level: 55 }, { species: 'onix', level: 56 }, { species: 'machamp', level: 58 } ],
+    team: [ { species: 'onix', level: 53, keepsake: 'fossilspur' }, { species: 'hitmonchan', level: 55, keepsake: 'secondwindribbon' }, { species: 'hitmonlee', level: 55, keepsake: 'sparrowfeather' }, { species: 'onix', level: 56, keepsake: 'ironacorn' }, { species: 'machamp', level: 58, keepsake: 'tortoisecharm' } ],
     reward: 5800,
   },
   agatha: {
     id: 'agatha', name: 'Agatha', title: 'Elite Four', ai: 'smart',
     intro: ["That old duff, Professor Hawthorn, was once young and handsome. That was decades ago. Now he just wants to fill a Pokedex. He is wrong — Pokemon are for fighting!"],
     lose: ["Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."],
-    team: [ { species: 'gengar', level: 56 }, { species: 'golbat', level: 56 }, { species: 'haunter', level: 55 }, { species: 'arbok', level: 58 }, { species: 'gengar', level: 60 } ],
+    team: [ { species: 'gengar', level: 56, keepsake: 'spectrebell' }, { species: 'golbat', level: 56, keepsake: 'gloomfang' }, { species: 'haunter', level: 55, keepsake: 'spectrebell' }, { species: 'arbok', level: 58, keepsake: 'gloomfang' }, { species: 'gengar', level: 60, keepsake: 'tortoisecharm' } ],
     reward: 6000,
   },
   lance: {
     id: 'lance', name: 'Lance', title: 'Elite Four', ai: 'smart',
     intro: ["I lead the Elite Four. Dragon Pokemon are wild, untamable — and so am I, when the battle demands it. Your challenge ends here."],
     lose: ["A legend, answered by a legend. The final chamber waits. Give him a battle worthy of the climb."],
-    team: [ { species: 'gyarados', level: 58 }, { species: 'dragonair', level: 56 }, { species: 'dragonair', level: 56 }, { species: 'aerodactyl', level: 60 }, { species: 'dragonite', level: 62 } ],
+    team: [ { species: 'gyarados', level: 58, keepsake: 'tidepearl' }, { species: 'dragonair', level: 56, keepsake: 'secondwindribbon' }, { species: 'dragonair', level: 56, keepsake: 'sparrowfeather' }, { species: 'aerodactyl', level: 60, keepsake: 'fossilspur' }, { species: 'dragonite', level: 62, keepsake: 'tortoisecharm' } ],
     reward: 6200,
   },
   // ---- Gary (rival) ladder ----
@@ -2088,7 +2109,7 @@ export const TRAINERS3 = {
     id: 'gary_champion', name: 'Gary', title: 'Champion', ai: 'smart',
     intro: ["Heh. Of course it's you at the top of the mountain, {player}. It was always going to be you. Now — the battle Kanto will talk about for a hundred years!"],
     lose: ["...Yeah. Okay. The chair's yours, Champion. Smell ya at the top — because I'll be back for it."],
-    team: [ { species: 'pidgeot', level: 59 }, { species: 'alakazam', level: 57 }, { species: 'rhydon', level: 59 }, { species: 'exeggutor', level: 58 }, { species: 'vaporeon', level: 59 }, { species: 'venusaur', level: 63 } ],
+    team: [ { species: 'pidgeot', level: 59, keepsake: 'secondwindribbon' }, { species: 'alakazam', level: 57, keepsake: 'tortoisecharm' }, { species: 'rhydon', level: 59, keepsake: 'fossilspur' }, { species: 'exeggutor', level: 58, keepsake: 'gardeniasash' }, { species: 'vaporeon', level: 59, keepsake: 'tidepearl' }, { species: 'venusaur', level: 63, keepsake: 'gloomfang' } ],
     reward: 6300,
   },
   // ---- Uniformed duo encounters + admin ----

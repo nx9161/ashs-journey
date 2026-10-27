@@ -111,4 +111,37 @@ for (let n = 1; n <= 5; n++) {
   ITEMS[id] = { id, name: 'HM0' + n, pocket: 'hm', move: HM_MOVES[n], desc: 'Teaches ' + HM_MOVES[n] + '. Unlimited use; the move cannot be forgotten normally.' };
 }
 
-export const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key'];
+// ---------- Keepsakes (Rejuvenation Phase 3, ADR-025 §3) ----------
+// Held items: one per Pokemon (mon.keepsake), carried in the bag's
+// 'keepsakes' pocket — non-consumable, non-sellable, stack 1 each (a
+// keepsake is a unique object). EFFECT LAW (banned by this data shape):
+// every entry MUST declare exactly one conditional `kind` with its
+// window/trigger parameters — there is no field here that can express a
+// flat always-on % stat boost, and src/game/keepsakes.mjs resolves ONLY
+// the kinds below. `effect` is the one-line summary-screen text (§3c).
+export const KEEPSAKES = {
+  sparrowfeather: { id: 'sparrowfeather', name: 'Sparrow Feather', kind: 'underdogDamage', factor: 1.25, levelGap: 3, effect: 'Deals x1.25 damage while 3+ levels below the foe.' },
+  tortoisecharm: { id: 'tortoisecharm', name: 'Tortoise Charm', kind: 'koSave', effect: 'Once per battle, survives a KO from above half HP at 1 HP.' },
+  secondwindribbon: { id: 'secondwindribbon', name: 'Second-Wind Ribbon', kind: 'lowHpSpeed', hpFrac: 0.25, stages: 1, effect: 'Once per battle, at 25% HP or less, Speed rises 1 stage.', price: 3000, minBadges: 7 },
+  embereed: { id: 'embereed', name: 'Ember Seed', kind: 'statusChance', moveType: 'fire', status: 'burn', bonus: 10, effect: "Fire moves gain +10% burn chance; the holder can't be frozen." },
+  tidepearl: { id: 'tidepearl', name: 'Tide Pearl', kind: 'typeWard', moveType: 'electric', factor: 0.8, effect: 'Takes x0.8 damage from Electric moves.' },
+  gloomfang: { id: 'gloomfang', name: 'Gloom Fang', kind: 'statusChance', moveType: 'poison', status: 'poison', bonus: 10, rtCooldown: 0.85, effect: 'Poison moves: +10% poison chance (RT: cooldown x0.85).' },
+  ironacorn: { id: 'ironacorn', name: 'Iron Acorn', kind: 'firstHitWard', factor: 0.85, effect: 'Takes x0.85 from the first hit it takes each battle.' },
+  spectrebell: { id: 'spectrebell', name: 'Spectre Bell', kind: 'matchupDamage', moveType: 'ghost', vsType: 'psychic', factor: 1.2, effect: 'Ghost moves deal x1.2 vs Psychic-types.' },
+  gardeniasash: { id: 'gardeniasash', name: 'Gardenia Sash', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
+  thunderheadpin: { id: 'thunderheadpin', name: 'Thunderhead Pin', kind: 'lowHpDamage', moveType: 'electric', factor: 1.15, hpFrac: 0.5, effect: 'Electric moves deal x1.15 while at 50% HP or less.' },
+  fossilspur: { id: 'fossilspur', name: 'Fossil Spur', kind: 'fasterFoeDamage', moveType: 'rock', factor: 1.15, effect: 'Rock moves deal x1.15 vs faster foes.' },
+  championsribbon: { id: 'championsribbon', name: "Champion's Ribbon", kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
+};
+// The bag/mart surface of the same pieces (ITEMS is the bag's table).
+// price exists ONLY on the Second-Wind Ribbon (its Celadon shop source);
+// minBadges is the mart's late-game gate for that stock (see openMart).
+// No other keepsake carries a price: they are never bought or sold.
+for (const k of Object.values(KEEPSAKES)) {
+  ITEMS[k.id] = {
+    id: k.id, name: k.name, pocket: 'keepsakes', desc: k.effect,
+    ...(k.price ? { price: k.price, minBadges: k.minBadges || 0 } : {}),
+  };
+}
+
+export const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key', 'keepsakes'];

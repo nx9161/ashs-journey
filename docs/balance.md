@@ -124,6 +124,24 @@ catchRate 45, commons 255/235/190.
    one of ≥2 counters per type). Story mode halves the factors to
    x1.1/x0.9 and disables twists (R2). Proofs:
    tests/rejuv-phase2-checks.mjs.
+   **Keepsakes (Rejuvenation Phase 3, ADR-025 §3)** — WIRED 2026-10-27:
+   stacking audit by the §5 method (one hit through the shared
+   calcDamage path, Ground factor then keepsake factor; baseline hit
+   66 at Lv50 / 80 power / 120 Atk / 100 Def, random 1.0). One held
+   slot per mon, so attacker-side pieces never stack with each other;
+   the windows are: Spectre Bell x1.2 on Grave Ground = 95 (x1.439 —
+   the spec §3 claim of "at most ≈x1.44" matches THIS window);
+   Thunderhead Pin / Fossil Spur x1.15 on a matching x1.2 Ground = 91
+   (x1.379); **Sparrow Feather x1.25 on a matching boost Ground = 99
+   (x1.500) — this EXCEEDS the §3 claim.** Reaching x1.5 needs all
+   three conditions at once: holder ≥3 levels below the foe, standing
+   on a Ground that boosts the move's type, using a move of that type.
+   FLAGGED for the owner (2026-10-27): spec numbers were NOT changed —
+   either the claim's "narrow window" was written for the Spectre
+   window, or the Sparrow x1.25 / Ground x1.2 pair needs a ruling.
+   Defensive pieces only reduce (Tide Pearl x0.8, Iron Acorn x0.85,
+   and the two can never co-fire on one hit: Electric-only vs
+   first-hit-only). Proofs: tests/rejuv-phase3-checks.mjs.
 3. **Route-trainer sight lines** — IMPLEMENTED in the Yellow-authenticity
    update (`feat/yellow-authenticity`): `sight: { dir, range }` cones on all 6
    route trainers (Brock stays talk-only); spot beat (500ms `!` + original

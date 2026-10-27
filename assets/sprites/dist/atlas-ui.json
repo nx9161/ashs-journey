@@ -2,7 +2,7 @@
   "atlas": "atlas-ui.png",
   "tile": 16,
   "size": [
-    54,
+    270,
     18
   ],
   "sprites": {
@@ -19,7 +19,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-pokeball": {
+    "icon-keepsake-championsribbon": {
       "x": 19,
       "y": 1,
       "w": 16,
@@ -32,8 +32,164 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-potion": {
+    "icon-keepsake-embereed": {
       "x": 37,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-fossilspur": {
+      "x": 55,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-gardeniasash": {
+      "x": 73,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-gloomfang": {
+      "x": 91,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-ironacorn": {
+      "x": 109,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-secondwindribbon": {
+      "x": 127,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 2,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-sparrowfeather": {
+      "x": 145,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-spectrebell": {
+      "x": 163,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-thunderheadpin": {
+      "x": 181,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 1,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-tidepearl": {
+      "x": 199,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-tortoisecharm": {
+      "x": 217,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-pokeball": {
+      "x": 235,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-potion": {
+      "x": 253,
       "y": 1,
       "w": 16,
       "h": 16,

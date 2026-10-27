@@ -70,7 +70,13 @@ export function calcDamage(level, power, atk, def, opts) {
     else if (f.dampenType && o.moveType === f.dampenType) gf = f.dampenFactor !== undefined ? f.dampenFactor : 0.8;
   }
   if (o.groundFactor !== undefined) gf = o.groundFactor;
-  return Math.max(1, Math.floor(base * stab * eff * rand * gf));
+  // Rejuvenation Phase 3 (ADR-025 §3): the Keepsake factor — resolved by
+  // src/game/keepsakes.mjs (both attacker- and defender-side windows)
+  // and applied here ONCE, AFTER the Ground factor, in the same shared
+  // path. Absent = 1 (typeless/fixed-damage calls are untouched, as
+  // with the Ground factor).
+  const kf = o.keepsakeFactor !== undefined ? o.keepsakeFactor : 1;
+  return Math.max(1, Math.floor(base * stab * eff * rand * gf * kf));
 }
 
 export function gen1Random(rng) { return (217 + Math.floor(rng() * 39)) / 255; }

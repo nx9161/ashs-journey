@@ -52,6 +52,7 @@ function loadTables() {
       species: new Set(tables.species),
       moves: new Set(tables.moves),
       items: new Set(tables.items),
+      keepsakes: new Set(tables.keepsakes || []),
       forms: new Set(tables.forms || []),
       quests: new Set(tables.quests || []),
       regions: new Set(tables.regions || ['kanto']),
@@ -119,6 +120,13 @@ function checkMon(m, errors, depth) {
       if (!isInt(m.ivs[s], 0, 31)) { errors.push('bad-iv'); break; }
     }
   }
+  // ADR-025 §3 (Phase 3): mon.keepsake — null, or an item id from the
+  // build's table whose pocket is 'keepsakes' (ids are checked against
+  // the emitted tables; keepsake-ness is enforced by the id list the
+  // generator emits — every keepsake id exists in tables.items, and a
+  // non-keepsake item id in this slot is rejected via the dedicated
+  // keepsake id set below).
+  if (!(m.keepsake === undefined || m.keepsake === null || (typeof m.keepsake === 'string' && TABLES.keepsakes.has(m.keepsake)))) errors.push('bad-keepsake');
   if (!(m.status === null || ['paralysis', 'burn', 'poison', 'sleep', 'freeze', 'confusion'].includes(m.status))) errors.push('bad-status');
   if (!(m.ot === undefined || m.ot === null || isSafeText(m.ot, 1, 12))) errors.push('bad-ot:' + NAME_CHARSET_NOTE);
   if (!(m.friendship === undefined || isInt(m.friendship, 0, 255))) errors.push('bad-friendship');
@@ -340,6 +348,7 @@ export function validateSave(data) {
         if (!TABLES.species.has(m.speciesId)) { errors.push('bad-species'); break; }
         if (!isInt(m.level, 1, 100)) { errors.push('bad-mon-level'); break; }
         if (!(m.nickname === undefined || m.nickname === null || isSafeText(m.nickname, 1, 12))) { errors.push('bad-nickname:' + NAME_CHARSET_NOTE); break; }
+        if (!(m.keepsake === undefined || m.keepsake === null || (typeof m.keepsake === 'string' && TABLES.keepsakes.has(m.keepsake)))) { errors.push('bad-keepsake'); break; }
         if (!Array.isArray(m.moves) || m.moves.length > 4 || m.moves.some((mv) => !isPlainObj(mv) || !TABLES.moves.has(mv.id))) { errors.push('bad-move'); break; }
       }
       if (errors.length > 24) break;

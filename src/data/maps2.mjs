@@ -59,6 +59,9 @@ export const MAPS2 = {
     items: [],
     hidden: [
       { x: 14, y: 8, item: 'oldamber', n: 1 },
+      // KEEPSAKE STUB SOURCE (Phase 3) — Iron Acorn; Phase 4's Pewter
+      // Town Tale replaces this placement.
+      { x: 1, y: 9, item: 'ironacorn', n: 1 },
     ],
     events: [],
     start: null,
@@ -152,6 +155,8 @@ export const MAPS2 = {
     ],
     hidden: [
       { x: 13, y: 2, item: 'moonstone', n: 1 },
+      // ADR-025 §3 (Phase 3) source: Fossil Spur — Mt. Moon hidden item.
+      { x: 1, y: 10, item: 'fossilspur', n: 1 },
     ],
     events: [],
     start: null,
@@ -515,7 +520,11 @@ export const MAPS2 = {
     ],
     encounters: null,
     items: [],
-    hidden: [],
+    hidden: [
+      // KEEPSAKE STUB SOURCE (Phase 3) — Tide Pearl; Phase 4's Vermilion
+      // Town Tale replaces this placement.
+      { x: 16, y: 11, item: 'tidepearl', n: 1 },
+    ],
     events: [
       { id: 'ev_stanne', x: 8, y: 11, when: { flagNot: 'ev_stanne_done' } },
       { id: 'ev_squirtle_squad', x: 5, y: 9, when: { flagNot: 'ev_squirtle_squad_done' } },
@@ -732,11 +741,22 @@ export const MAPS2 = {
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 3, y: 8, name: 'PERFUMER', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
         dialogue: ["Erika's perfume is distilled from her own garden. One whiff and even a Snorlax sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
+      // ADR-025 §3 (Phase 3): Celadon gains a small keepsake atelier —
+      // the Second-Wind Ribbon's SECOND source (its first is the Rue &
+      // Cole parley, bond-gated to Phase 5). The ribbon's stock is
+      // "late": ITEMS.secondwindribbon.minBadges = 7 gates the row in
+      // openMart until the player carries seven badges.
+      { x: 15, y: 11, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+        mart: { stock: ['greatball', 'ultraball', 'superpotion', 'hyperpotion', 'secondwindribbon'] },
+        dialogue: ["Celadon Atelier — ribbons, charms, and the odd heirloom. Our Second-Wind Ribbon? Reserved for proven trainers. Seven badges, hon."] },
     ],
     encounters: null,
     items: [],
     hidden: [
       { x: 16, y: 4, item: 'nugget', n: 1 },
+      // KEEPSAKE STUB SOURCE (Phase 3) — Gardenia Sash; Phase 4's
+      // Celadon Town Tale replaces this placement.
+      { x: 16, y: 8, item: 'gardeniasash', n: 1 },
     ],
     events: [],
     start: null,

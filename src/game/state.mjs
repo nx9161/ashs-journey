@@ -67,6 +67,7 @@ export function makeMon(speciesId, level, speciesTable, movesTable) {
     xp: xpForLevel(sp.growth, level),
     ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 },
     moves: [],
+    keepsake: null, // ADR-025 §3 (Phase 3): held Keepsake itemId | null
     status: null,
     stages: { atk: 0, def: 0, spa: 0, spd: 0, spe: 0 },
     ot: 'ASH',

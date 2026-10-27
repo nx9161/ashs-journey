@@ -6,6 +6,7 @@
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
+import { giveKeepsake } from './keepsakes.mjs';
 import { displayName, dexCaughtCount, evolutionCheck } from './state.mjs';
 import { QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { FORMS } from '../data/forms.mjs';
@@ -50,6 +51,24 @@ Object.assign(Game.prototype, {
     if (!it) return;
     const ow = g.scenes.top;
     const finish = () => g.openBag();
+    if (it.pocket === 'keepsakes') {
+      // ADR-025 §3 (Phase 3): selecting a keepsake in the bag gives it
+      // to a party member (non-consumable; one held slot per mon).
+      const targets = g.state.party.map((m, i) => ({
+        label: displayName(m, SPECIES) + (m.keepsake ? ' (holding ' + (ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : m.keepsake) + ')' : ''), value: i,
+        disabled: !!m.keepsake,
+      }));
+      targets.push({ label: 'Back', value: -1 });
+      g.ui.showMenu('Give ' + it.name + ' to...', targets, (t) => {
+        if (t === null || t === -1) { finish(); return; }
+        if (giveKeepsake(g.state, g.state.party[t], id)) {
+          g.audio.playSfx('ui-blip');
+          g.ui.toast(displayName(g.state.party[t], SPECIES) + ' is now holding the ' + it.name + '.');
+        }
+        finish();
+      }, { rowHtml: (it2) => g.partyTargetRowHtml(it2) });
+      return;
+    }
     if (it.pocket === 'tm' || it.pocket === 'hm') { this.teachFromBag(id, it); return; }
     if (it.levelUp) { // Rare Candy
       const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= 100 }));

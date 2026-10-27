@@ -97,6 +97,15 @@ t('accept houseRules all on', okWith((s) => { for (const k of Object.keys(s.sett
 t('reject houseRules unknown toggle', bad((s) => { s.settings.houseRules.luckyCharm = true; }, 'bad-setting:houseRules'));
 t('reject houseRules non-boolean', bad((s) => { s.settings.houseRules.fastLearner = 'yes'; }, 'bad-setting:houseRules'));
 t('accept xpcandy in bag', okWith((s) => { s.bag.xpcandy = 3; }));
+// ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape.
+t('accept party mon keepsake', okWith((s) => { s.party[0].keepsake = 'tortoisecharm'; }));
+t('accept box mon keepsake', okWith((s) => { s.boxes.box1[0].keepsake = 'gloomfang'; }));
+t('accept keepsake in bag pocket', okWith((s) => { s.bag.tidepearl = 1; }));
+t('accept legacy mon without keepsake', okWith((s) => { delete s.party[0].keepsake; }));
+t('reject non-keepsake item as keepsake', bad((s) => { s.party[0].keepsake = 'potion'; }, 'bad-keepsake'));
+t('reject unknown keepsake id', bad((s) => { s.party[0].keepsake = 'mithrilmail'; }, 'bad-keepsake'));
+t('reject numeric keepsake', bad((s) => { s.party[0].keepsake = 7; }, 'bad-keepsake'));
+t('reject box mon non-keepsake', bad((s) => { s.boxes.box1[0].keepsake = 'pokeball'; }, 'bad-keepsake'));
 t('reject bad meta houseRulesTouched', bad((s) => { s.meta.houseRulesTouched = 'yes'; }, 'bad-meta-house-rules'));
 t('reject bad meta ngPlus', bad((s) => { s.meta.ngPlus = -1; }, 'bad-meta-ngplus'));
 

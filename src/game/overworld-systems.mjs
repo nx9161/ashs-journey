@@ -9,6 +9,7 @@ import { MAPS, TRAINERS, WALKABLE } from '../data/maps.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
+import { grantKeepsake, ownsKeepsake } from './keepsakes.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './state.mjs';
@@ -240,7 +241,15 @@ Object.assign(OverworldScene.prototype, {
       badges: g.state.badges.kanto.length,
     });
     g.state.story.flags.champion = true;
-    g.ui.say(CREDITS_LINES.slice(), () => { if (done) done(); }, '');
+    // ADR-025 §3 (Phase 3): the Hall of Fame gift — the Champion's
+    // Ribbon is presented at League registration, once (a keepsake is
+    // a unique object; repeat registrations never duplicate it).
+    const lines = CREDITS_LINES.slice();
+    if (grantKeepsake(g.state, 'championsribbon')) {
+      lines.push('The League registrar presents you with the CHAMPION\'S RIBBON!');
+      lines.push('Give it to a Pokemon from the party menu — its holder gains x1.2 XP.');
+    }
+    g.ui.say(lines, () => { if (done) done(); }, '');
   },
 
   giftMon(speciesId, level, next) {
@@ -787,9 +796,16 @@ Object.assign(OverworldScene.prototype, {
       { label: 'Buy', value: 'buy' }, { label: 'Sell', value: 'sell' }, { label: 'Leave', value: 'leave' },
     ], (v) => {
       if (v === 'buy') {
-        const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0).map((id) => ({
+        // ADR-025 §3 (Phase 3): stock rows carrying minBadges stay hidden
+        // until the player has earned that many badges (the codebase's
+        // badgesAtLeast gating idiom — this is how the Celadon shop's
+        // Second-Wind Ribbon is "late"). Keepsakes are unique objects:
+        // once owned (bag or held) the row is disabled.
+        const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0
+          && (!ITEMS[id].minBadges || g.state.badges.kanto.length >= ITEMS[id].minBadges)).map((id) => ({
           label: ITEMS[id].name + ' — $' + ITEMS[id].price + ' (own ' + (g.state.bag[id] || 0) + ')', value: id,
-          disabled: g.state.player.money < ITEMS[id].price,
+          disabled: g.state.player.money < ITEMS[id].price
+            || (ITEMS[id].pocket === 'keepsakes' && ownsKeepsake(g.state, id)),
         }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Buy what?', items, (iv) => {
@@ -803,7 +819,8 @@ Object.assign(OverworldScene.prototype, {
           this.openMart(stock);
         });
       } else if (v === 'sell') {
-        const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].price > 0 && g.state.bag[id] > 0)
+        // ADR-025 §3: keepsakes are non-sellable (pocket excluded).
+        const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].pocket !== 'keepsakes' && ITEMS[id].price > 0 && g.state.bag[id] > 0)
           .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
         items.push({ label: 'Back', value: null });
         g.ui.showMenu('Sell what?', items, (iv) => {

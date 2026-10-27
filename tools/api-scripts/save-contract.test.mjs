@@ -108,5 +108,31 @@ body = await res.json();
 t('negative expectedVersion -> invalid_request',
   res.status === 422 && body.error === 'invalid_request');
 
+// 5. ADR-025 §3 (Phase 3): a keepsake-bearing payload round-trips the
+// contract (200); a non-keepsake id in the slot is a 422 validation error.
+scenario = 'insert-ok';
+seen.length = 0;
+const ksPayload = goodPayload();
+ksPayload.player.playtimeSec = 3600; // a progressed save (keeps the anomaly branch out of this contract check)
+ksPayload.party.push({
+  speciesId: 'partner', nickname: null, level: 12, xp: 1000,
+  moves: [{ id: 'thundershock', pp: 30, maxPp: 30 }],
+  ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 },
+  status: null, ot: 'ASH', friendship: 70, hp: 40, maxHp: 40, keepsake: 'sparrowfeather',
+});
+ksPayload.bag.tidepearl = 1;
+res = await handler(putRequest({ slot: 1, payload: ksPayload, expectedVersion: 0 }));
+body = await res.json();
+t('keepsake payload -> 200 + version 1',
+  res.status === 200 && body.version === 1);
+const badKsPayload = goodPayload();
+badKsPayload.player.playtimeSec = 3600;
+badKsPayload.party.push(JSON.parse(JSON.stringify(ksPayload.party[0])));
+badKsPayload.party[0].keepsake = 'potion';
+res = await handler(putRequest({ slot: 1, payload: badKsPayload, expectedVersion: 0 }));
+body = await res.json();
+t('non-keepsake id in keepsake slot -> 422',
+  res.status === 422);
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

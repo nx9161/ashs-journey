@@ -108,11 +108,41 @@ export function damageRandomFor(state, rng) {
 }
 
 // Player XP (§4 table x House Rules): Story pays x1.25; Fast Learner
-// x1.5; they compose multiplicatively.
-export function xpMultFor(state) {
+// x1.5; they compose multiplicatively. Phase 3: a mon holding the
+// Champion's Ribbon gains a further x1.2 — holder-only, applied per-mon
+// at the award path (battle.mjs awardXp, via keepsakeXpMult, whose
+// factor this mirrors).
+export function xpMultFor(state, mon) {
   let m = difficultyOf(state) === 'story' ? 1.25 : 1;
   if (houseRule(state, 'fastLearner')) m *= 1.5;
+  if (mon && mon.keepsake === 'championsribbon') m *= 1.2;
   return m;
+}
+
+// Foe keepsakes (§4 table, Phase 3 — the lever Phase 1 left unwired):
+//   Story     = none (no foe ever holds one)
+//   Classic   = aces only, late: the LAST team member (the ace) of each
+//               leader trainer holds its authored keepsake
+//   Challenge = all leader teams: every member holds its authored piece
+// "Leader" is Phase 1's shipped definition (isLeaderTrainer: badge or
+// smart/opener AI — gym leaders, Elite Four, Champion). Wild foes have
+// no trainer and never hold one in ANY mode. Authored pieces live on
+// the trainer data (team entry `keepsake`); a leader member with no
+// authored piece holds none. READING NOTE (§3 vs §4): §3 says Classic
+// aces hold "from the Indigo League onward" while §4 says "aces only,
+// late" — this implements §4's row over the Phase-1 leader set (no
+// gym-leader battle exists at/after the Indigo League in this build,
+// so the literal §3 reading would make the Classic row dead content);
+// "late" is read as the ace's late-battle position, as in §4.
+export function foeKeepsakeFor(state, trainer, teamIndex, teamLength) {
+  if (!trainer || !isLeaderTrainer(trainer)) return null;
+  const mode = difficultyOf(state);
+  if (mode === 'story') return null;
+  const entry = Array.isArray(trainer.team) ? trainer.team[teamIndex] : null;
+  const authored = entry && typeof entry.keepsake === 'string' ? entry.keepsake : null;
+  if (!authored) return null;
+  if (mode === 'challenge') return authored;
+  return teamIndex === teamLength - 1 ? authored : null; // classic: aces only
 }
 
 // Prize money: Generous World x1.5. (Defeat halving and Pay Day are not

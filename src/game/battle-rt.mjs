@@ -23,19 +23,25 @@ import {
 } from '../data/grounds.mjs';
 import { typePill } from './ui.mjs';
 import { BattleScene } from './battle.mjs';
+import {
+  keepsakeDamageFactor, noteHitTaken, keepsakeStatusChanceBonus,
+  refusesStatus, keepsakeHealMult, keepsakeCooldownMult,
+} from './keepsakes.mjs';
 
 const ARENA = { x0: 26, y0: 56, x1: 454, y1: 258 }; // logical 480x320 space
 
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 function dist(ax, ay, bx, by) { return Math.hypot(bx - ax, by - ay); }
 
-function cooldownMs(mv, userSpe, foeSpe, field) {
+function cooldownMs(mv, userSpe, foeSpe, field, mon) {
   // ADR-020 review formula: power/accuracy/speed-advantage scaled, clamped.
   // ADR-025 §1 RT twists at this hook: Storm/Volt — Electric moves x0.85;
   // Grave/Mind — status moves x1.25 (groundCooldownMult, field-resolved,
   // so Story's twist-off is already folded in).
-  if (mv.cat === 'status') return Math.round(1500 * groundCooldownMult(field, mv));
-  return Math.round(clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200) * groundCooldownMult(field, mv));
+  // ADR-025 §3: Gloom Fang — the holder's (optional 5th arg) Poison moves
+  // cool down x0.85; the classic engine takes the +10% chance instead.
+  if (mv.cat === 'status') return Math.round(1500 * groundCooldownMult(field, mv) * keepsakeCooldownMult(mon, mv));
+  return Math.round(clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200) * groundCooldownMult(field, mv) * keepsakeCooldownMult(mon, mv));
 }
 
 Object.assign(BattleScene.prototype, {
@@ -329,7 +335,7 @@ Object.assign(BattleScene.prototype, {
     // ADR-025 §4: difficulty lives in THREAT speed — foe move cooldowns
     // scale with the mode (x1.1 Story / x1.0 Classic / x0.9 Challenge);
     // ally cooldowns are never scaled.
-    const cdBase = cooldownMs(mv, atkSpe, defSpe, this.field);
+    const cdBase = cooldownMs(mv, atkSpe, defSpe, this.field, atk);
     rt.cds[side][slot.id] = side === 'foe' ? Math.round(cdBase * rtFoeCooldownMultFor(g.state)) : cdBase;
     const ax = side === 'ally' ? rt.ax : rt.fx, ay = side === 'ally' ? rt.ay : rt.fy;
     const dx = side === 'ally' ? rt.fx : rt.ax, dy = side === 'ally' ? rt.fy : rt.ay;
@@ -432,6 +438,11 @@ Object.assign(BattleScene.prototype, {
     const crit = roll(critChance(baseSpe, { highCrit: !!mv.highcrit, focus: !!atk.focused }), g.rng.battle);
     const atkStat = mv.cat === 'physical' ? (crit ? atk.stats.atk : aStats.atk) : (crit ? atk.stats.spa : aStats.spa);
     const defStat = mv.cat === 'physical' ? (crit ? def.stats.def : dStats.def) : (crit ? def.stats.spd : dStats.spd);
+    // ADR-025 §3 (Phase 3): keepsake factor — same shared helper and
+    // same calcDamage hook as the classic engine (applied once, after
+    // the Ground factor; formula path only).
+    const defHpBefore = def.hp;
+    const ksInfo = keepsakeDamageFactor(atk, def, mv, { defTypes, atkSpe: aStats.spe, defSpe: dStats.spe });
     let dmg;
     if (mv.ohko || efx.ohko) dmg = def.hp;
     else if (efx.fixed) dmg = efx.fixed;
@@ -442,7 +453,7 @@ Object.assign(BattleScene.prototype, {
       dmg = 0;
       for (let hi = 0; hi < hits; hi++) {
         dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type });
+          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: ksInfo.factor });
       }
     }
     if (mv.cat === 'physical' && def.reflectT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
@@ -450,10 +461,16 @@ Object.assign(BattleScene.prototype, {
     if (def.subHp > 0) { def.subHp -= dmg; if (def.subHp <= 0) def.subHp = 0; dmg = 0; }
     if (dmg > 0) {
       def.hp = Math.max(0, def.hp - dmg);
+      noteHitTaken(def); // ADR-025 §3: Iron Acorn window (classic parity)
+      this._ksHitRt = { side: side === 'ally' ? 'foe' : 'ally', hpBefore: defHpBefore }; // Tortoise attack context
       g.audio.hitFeedback(eff);
       if (crit) this.rtFloat('A critical hit!');
       else if (eff > 1) this.rtFloat("It's super effective!");
       else if (eff < 1) this.rtFloat("It's not very effective...");
+      // ADR-025 §3: first firing of a damage keepsake is announced by
+      // name (ui.log + float lane; never silent).
+      if (ksInfo.atkId) { const l = this.ksAnnounceLine(atk, ksInfo.atkId, displayName(atk, SPECIES), false); if (l) { g.ui.log.push({ ui: 'battle-rt', text: l }); this.rtFloatText = l; this.rtFloatT = 1400; } }
+      if (ksInfo.defId) { const l = this.ksAnnounceLine(def, ksInfo.defId, displayName(def, SPECIES), true); if (l) { g.ui.log.push({ ui: 'battle-rt', text: l }); this.rtFloatText = l; this.rtFloatT = 1400; } }
       if (def.status === 'freeze' && mv.type === 'fire') def.status = null;
       if (efx.drain) atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(dmg * efx.drain));
       if (efx.recoil) atk.hp = Math.max(0, atk.hp - Math.max(1, Math.floor(dmg * efx.recoil)));
@@ -461,14 +478,24 @@ Object.assign(BattleScene.prototype, {
       if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
       // ADR-025 §1: Ember/Pyre (burn) / Venom (poison) +10 points, same
       // hook as classic — only where the move can already inflict it.
-      const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll);
+      // ADR-025 §3: Ember Seed / Gloom Fang add their +10 at the same roll.
+      const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll)
+        + keepsakeStatusChanceBonus(atk, mv, statusRoll);
       if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {
         if (statusRoll === 'confusion') { def.confused = true; def.confusedTurns = 3; }
         else if (!def.status) {
-          def.status = statusRoll;
-          if (statusRoll === 'sleep') {
-            const turns = 1 + Math.floor(g.rng.battle() * 7);
-            if (def === this.foe) this.rt.foeSleepT = turns * 1100; else this.rt.allySleepT = turns * 1100;
+          // ADR-025 §3: an Ember Seed holder cannot be frozen.
+          if (refusesStatus(def, statusRoll)) {
+            g.ui.log.push({ ui: 'battle-rt', text: displayName(def, SPECIES) + "'s Ember Seed glows warm — it cannot be frozen!" });
+            this.rtFloatText = displayName(def, SPECIES) + "'s Ember Seed — cannot be frozen!";
+            this.rtFloatT = 1400;
+            this.ksRecord(def, 'embereed');
+          } else {
+            def.status = statusRoll;
+            if (statusRoll === 'sleep') {
+              const turns = 1 + Math.floor(g.rng.battle() * 7);
+              if (def === this.foe) this.rt.foeSleepT = turns * 1100; else this.rt.allySleepT = turns * 1100;
+            }
           }
         }
       }
@@ -496,7 +523,9 @@ Object.assign(BattleScene.prototype, {
     const atkStages = side === 'ally' ? this.allyStages : this.foeStages;
     const defStages = side === 'ally' ? this.foeStages : this.allyStages;
     // ADR-025 §1 Bloom/Marsh twist: healing moves restore +50% (both engines).
-    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal * groundHealMult(this.field))); return; }
+    // ADR-025 §3 Gardenia Sash: on a holder, a further +50% — same
+    // effect.heal scope as the Ground twist (drain/Rest excluded, both).
+    if (ef.heal) { atk.hp = Math.min(atk.maxHp, atk.hp + Math.floor(atk.maxHp * ef.heal * groundHealMult(this.field) * keepsakeHealMult(atk))); return; }
     if (ef.rest) { atk.hp = atk.maxHp; atk.status = 'sleep'; if (side === 'ally') this.rt.allySleepT = 2200; else this.rt.foeSleepT = 2200; return; }
     if (ef.substitute) { const c = Math.floor(atk.maxHp / 4); if (atk.subHp <= 0 && atk.hp > c) { atk.hp -= c; atk.subHp = c; } return; }
     if (ef.screen) { if (ef.screen === 'physical') atk.reflectT = 5; else atk.lightT = 5; return; }
@@ -519,6 +548,13 @@ Object.assign(BattleScene.prototype, {
       const target = ef.target === 'self' ? atk : def;
       if (ef.status === 'confusion') { target.confused = true; target.confusedTurns = 3; }
       else if (!target.status) {
+        // ADR-025 §3: an Ember Seed holder cannot be frozen (refused
+        // only where the infliction would otherwise land — classic parity).
+        if (refusesStatus(target, ef.status)) {
+          g.ui.log.push({ ui: 'battle-rt', text: displayName(target, SPECIES) + "'s Ember Seed glows warm — it cannot be frozen!" });
+          this.ksRecord(target, 'embereed');
+          return;
+        }
         target.status = ef.status;
         if (ef.status === 'sleep') {
           const turns = 1 + Math.floor(g.rng.battle() * 7);
@@ -662,6 +698,22 @@ Object.assign(BattleScene.prototype, {
 
   rtCheckFaints() {
     const g = this.game;
+    // ADR-025 §3 (Phase 3): shared keepsake trigger evaluation at the RT
+    // faint check (same helper + same stage application as classic's
+    // checkFaint). Attack context comes from rtApplyDamage's _ksHitRt —
+    // poison ticks / confusion self-hits carry none, so the Tortoise
+    // Charm cannot save from them; Second-Wind can still fire.
+    for (const side of ['foe', 'ally']) {
+      const mon = side === 'foe' ? this.foe : this.ally;
+      if (!mon) continue;
+      const hit = (this._ksHitRt && this._ksHitRt.side === side) ? this._ksHitRt : null;
+      if (hit) this._ksHitRt = null;
+      const lines = this.ksApplyTriggers(side, hit ? { hpBefore: hit.hpBefore, viaAttack: true } : {});
+      for (const l of lines) {
+        g.ui.log.push({ ui: 'battle-rt', text: l });
+        this.rtFloatText = l; this.rtFloatT = 1400;
+      }
+    }
     if (this.foe && this.foe.hp <= 0) {
       this.state = 'faintfoe';
       this.afterFaintFoe();
@@ -753,7 +805,7 @@ Object.assign(BattleScene.prototype, {
       r.text(label.slice(0, maxChars), x + 4, y + 2, { size: 14, color: ready ? PT_PAPER : PT_FRAME2, shadow: false });
       if (!ready && slot.pp > 0) {
         // Cooldown pip: a PT_FRAME2 sweep draining along the chip's base.
-        const total = cooldownMs(mv, 50, 50, this.field);
+        const total = cooldownMs(mv, 50, 50, this.field, this.ally);
         const frac = Math.max(0, Math.min(1, cd / total));
         c.fillStyle = PT_FRAME2;
         c.fillRect(x + 2, y + 16, (chipW - 4) * (1 - frac), 2);

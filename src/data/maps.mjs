@@ -238,6 +238,11 @@ export const MAPS = {
         { species: 'mankey', min: 4, max: 7, weight: 14 },
       ],
     },
+    items: [],
+    hidden: [
+      // ADR-025 §3 (Phase 3) source: Sparrow Feather — Route 2 hidden item.
+      { x: 1, y: 12, item: 'sparrowfeather', n: 1 },
+    ],
     start: null,
   },
 
@@ -401,8 +406,10 @@ export const TRAINERS = {
     intro: ["My rock-type Pokemon will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],
     team: [
-      { species: 'geodude', level: 12 },
-      { species: 'onix', level: 14 },
+      // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
+      // decides per difficulty — Challenge: all; Classic: the ace only).
+      { species: 'geodude', level: 12, keepsake: 'ironacorn' },
+      { species: 'onix', level: 14, keepsake: 'tortoisecharm' },
     ],
     reward: 900,
     badge: 'boulderbadge',

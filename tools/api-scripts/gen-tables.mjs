@@ -24,7 +24,7 @@ const { SPECIES } = await import(join(ROOT, 'src', 'data', 'species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src', 'data', 'species2.mjs'));
 const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
-const { ITEMS, BALLS } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
+const { ITEMS, BALLS, KEEPSAKES } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
 const { FORMS } = await import(join(ROOT, 'src', 'data', 'forms.mjs'));
 const { QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
 const { SCHEMA_VERSION } = await import(join(ROOT, 'src', 'game', 'state.mjs'));
@@ -43,6 +43,9 @@ const tables = {
   species: Object.keys(ALL_SPECIES).sort(),
   moves: Object.keys(ALL_MOVES).sort(),
   items: Object.keys(ITEMS).sort(),
+  // ADR-025 §3 (Phase 3): the closed keepsake id set — the validator
+  // accepts mon.keepsake only from this list (never a generic item id).
+  keepsakes: Object.keys(KEEPSAKES).sort(),
   balls: Object.keys(BALLS).sort(),
   forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
   quests: [...QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS)].sort(),
