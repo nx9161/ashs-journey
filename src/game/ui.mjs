@@ -198,8 +198,15 @@ export class UI {
   showCommands(items, cb, opts) {
     opts = opts || {};
     this.game.input.consumeAll(); // D3: stale walk edges must not move the battle cursor
+    // BATTLE-FREEZE FIX (same trap as showMenu): never open with the
+    // cursor on a disabled cell (e.g. the Safari grid with 0 balls left).
+    let initIdx = opts.initialIdx || 0;
+    for (let k = 0; k < items.length; k++) {
+      if (items[initIdx] && !items[initIdx].disabled) break;
+      initIdx = (initIdx + 1) % items.length;
+    }
     this.menu = {
-      title: null, items, idx: opts.initialIdx || 0, cb, battle: true,
+      title: null, items, idx: initIdx, cb, battle: true,
       kind: 'commands', grid: true, focus: opts.focus || null,
       stickyCancel: !!opts.stickyCancel,
     };
@@ -379,12 +386,19 @@ export class UI {
       if (mem) {
         initIdx = Math.max(0, Math.min(mem.idx || 0, items.length - 1));
         if (opts.bagTabs && mem.pocket && opts.bagTabs.includes(mem.pocket)) initPocket = mem.pocket;
-        for (let k = 0; k < items.length; k++) {
-          const it = items[initIdx];
-          if (it && !it.disabled && (!opts.bagTabs || !it.pocket || it.pocket === initPocket)) break;
-          initIdx = (initIdx + 1) % items.length;
-        }
       }
+    }
+    // BATTLE-FREEZE FIX: the cursor must never OPEN on a disabled row.
+    // chooseMenu() ignores disabled rows, so a menu whose initial row is
+    // disabled swallowed every A press in silence while the screen behind
+    // it stayed frozen — the forced faint-switch party menu was the trap:
+    // row 0 is the fainted active mon (disabled), so the menu opened dead
+    // and the battle looked stuck. (This advance used to run only for
+    // remember-restored menus.) Advance to the first enabled, visible row.
+    for (let k = 0; k < items.length; k++) {
+      const it = items[initIdx];
+      if (it && !it.disabled && (!opts.bagTabs || !it.pocket || it.pocket === initPocket)) break;
+      initIdx = (initIdx + 1) % items.length;
     }
     this.menu = {
       title, items, idx: initIdx, cb,
@@ -574,7 +588,11 @@ export class UI {
     if (!m) return;
     const idx = (i === undefined ? m.idx : i);
     const it = m.items[idx];
-    if (!it || it.disabled) return;
+    if (!it) return;
+    // BATTLE-FREEZE FIX: a disabled row must never eat the press in
+    // silence (the faint-switch trap) — buzz so the player knows the
+    // row is not selectable and moves the cursor.
+    if (it.disabled) { this.game.audio.playSfx(SFX['error-buzz']); return; }
     this._storeMenuMem(m, idx);
     const wasCommands = m.kind === 'commands';
     this.menu = null;
