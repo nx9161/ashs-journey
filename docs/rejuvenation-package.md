@@ -228,6 +228,14 @@ species data are untouched (canon per ADR-018/019).
 Numbers sit deliberately at the Ground caps (×1.2/×0.8 family) so
 Fields + Keepsakes stack to at most ≈×1.44 in a narrow window —
 checked in the balance sim at build.
+> **Correction (owner ruling, 2026-10-27):** the build-time stacking
+> audit (docs/balance.md) found the true cap is **×1.5** — Sparrow
+> Feather ×1.25 over a boosting Ground ×1.2, in the triple-conditioned
+> window (holder ≥3 levels below the foe, standing on a Ground that
+> boosts the move's type, using a move of that type). The ≈×1.44
+> figure above described only the Spectre Bell window. ×1.5 is
+> accepted by owner ruling as the true stacking cap; no gameplay
+> numbers changed.
 
 ### Guardrails / abuse cases
 - One slot, no stacking, effects never multiply each other (the

@@ -8,6 +8,9 @@
 // Give/Take menus, save/load round-trip, PC preserve, Celadon shop
 // purchase + badge gate, Hall of Fame gift, hidden-item sources.
 // Part C: damage parity in real headless Chromium.
+// Extended by the rulings patch (2026-10-27): A25 (wardSpent
+// resolution) + A26 (client schema keepsake id set) + B33/B34 (Iron
+// Acorn literal first hit vs a multi-hit move, both engines).
 // Run: node tests/rejuv-phase3-checks.mjs   (exit 1 on any failure)
 // Part C reads public/index.html + public/game.js — build first.
 
@@ -283,6 +286,30 @@ const MV = (type, cat) => ({ type, cat: cat || 'physical', power: 40 });
     JSON.stringify({ r1: r1.errors, r3: r3.errors, r4: r4.errors }));
 }
 
+// -- rulings patch (2026-10-27): wardSpent + client schema id set --
+{
+  const def = mon('rattata', 5, 'ironacorn');
+  const armed = K.keepsakeDamageFactor(mon('rattata', 5), def, MV('normal'), {}).factor;
+  const spent = K.keepsakeDamageFactor(mon('rattata', 5), def, MV('normal'), { wardSpent: true }).factor;
+  const pearlSpent = K.keepsakeDamageFactor(mon('rattata', 5), mon('rattata', 5, 'tidepearl'), MV('electric', 'special'), { wardSpent: true }).factor;
+  ok('A25 iron acorn wardSpent: ward does not fire for later hits; unrelated windows (Tide Pearl) unaffected',
+    armed === 0.85 && spent === 1 && pearlSpent === 0.8);
+}
+{
+  const bogus = defaultState(); bogus.party = [mon('rattata', 5)]; bogus.party[0].keepsake = 'notakeepsake';
+  const valBogus = SCH.validateSave(JSON.parse(JSON.stringify(bogus)));
+  const migBogus = SCH.migrate(JSON.parse(JSON.stringify(bogus)));
+  const nonKs = defaultState(); nonKs.party = [mon('rattata', 5)]; nonKs.party[0].keepsake = 'potion';
+  const valNonKs = SCH.validateSave(JSON.parse(JSON.stringify(nonKs)));
+  const boxedBogus = defaultState(); boxedBogus.boxes.box1 = [mon('pidgey', 3)]; boxedBogus.boxes.box1[0].keepsake = 'notakeepsake';
+  const migBoxed = SCH.migrate(JSON.parse(JSON.stringify(boxedBogus)));
+  ok('A26 client schema (rulings patch): bogus/non-keepsake keepsake ids rejected by validateSave; migrate coerces them to null (party + box) and the result validates',
+    valBogus.ok === false && valBogus.errors.includes('bad-mon-keepsake')
+    && valNonKs.ok === false
+    && migBogus.party[0].keepsake === null && SCH.validateSave(migBogus).ok === true
+    && migBoxed.boxes.box1[0].keepsake === null);
+}
+
 // ================= Part B: headless bundle =================
 const { buildGameJs } = await import(join(ROOT, 'scripts/build.mjs'));
 globalThis.localStorage = { getItem: () => null, setItem: () => {}, removeItem: () => {} };
@@ -507,6 +534,37 @@ const driver = `
     out.rtPlainCd = cooldownMs(MOVES.poisonsting, 50, 50, resolveField('route1', 'classic'));
   }
 
+  // ---- B: Iron Acorn vs a multi-hit move (rulings patch 2026-10-27) ----
+  {
+    const slapFoe = () => { const m = rat(20); m.moves = [{ id: 'doubleslap', pp: 10, maxPp: 10 }]; return m; };
+    const chanAcorn = () => { const m = makeMon('chansey', 20, SPECIES, MOVES); m.keepsake = 'ironacorn'; return m; };
+    // Fixed hit count under the deterministic RNG (() => 0.5): the
+    // engine's own roll over effect.hits [2,5] lands on 4 hits.
+    const hitsRolled = MOVES.doubleslap.effect.hits[0]
+      + Math.floor(0.5 * (MOVES.doubleslap.effect.hits[1] - MOVES.doubleslap.effect.hits[0] + 1));
+    const perHit = (b, atk, def, f) => calcDamage(20, MOVES.doubleslap.power, atk.stats.atk, def.stats.def,
+      { stab: true, effectiveness: 1, crit: false, random: gen1Random(() => 0.5), field: b.field, moveType: 'normal', keepsakeFactor: f });
+    // classic: foe Rattata Double Slaps the Acorn-holding Chansey
+    const allyC = chanAcorn(); st.party = [allyC];
+    const bc = new BattleScene({ kind: 'wild', foe: slapFoe(), returnTo: ow, rt: false });
+    game.scenes.push(bc); bc.enter(); drain(bc);
+    const hpC0 = allyC.hp;
+    bc.execMoveContinue(entry(bc, 'foe', MOVES.doubleslap)); drain(bc);
+    out.acornSlapDmgClassic = hpC0 - allyC.hp;
+    out.acornSlapExpected = perHit(bc, bc.foe, allyC, 0.85) + perHit(bc, bc.foe, allyC, 1) * (hitsRolled - 1);
+    out.acornSlapAllWarded = perHit(bc, bc.foe, allyC, 0.85) * hitsRolled;
+    out.acornSlapHits = hitsRolled;
+    game.scenes.pop();
+    // RT: identical setup — parity total expected
+    const allyR = chanAcorn(); st.party = [allyR];
+    const br = new BattleScene({ kind: 'wild', foe: slapFoe(), returnTo: ow, rt: true });
+    game.scenes.push(br); br.enter(); drain(br);
+    const hpR0 = allyR.hp;
+    br.rtApplyDamage('foe', MOVES.doubleslap);
+    out.acornSlapDmgRt = hpR0 - allyR.hp;
+    game.scenes.pop();
+  }
+
   // ---- B: foe lever in real trainer battles ----
   {
     const foeOf = (mode, trainer) => {
@@ -719,6 +777,12 @@ ok("B31 Hall of Fame gift: Champion's Ribbon granted at registration, never dupl
   res.hofRibbon === 1 && res.hofRibbonAfterSecond === 1, JSON.stringify(res));
 ok('B32 hidden source: facing the Route 2 hidden tile grants the Sparrow Feather',
   res.hiddenSparrow === 1 && res.hiddenFlag === true, JSON.stringify(res));
+ok('B33 classic Iron Acorn (rulings patch): Double Slap at fixed RNG (4 hits) totals first-hit x0.85 + remaining hits full — NOT the whole move warded',
+  res.acornSlapHits > 1 && res.acornSlapDmgClassic > 0
+  && res.acornSlapDmgClassic === res.acornSlapExpected
+  && res.acornSlapDmgClassic !== res.acornSlapAllWarded, JSON.stringify(res));
+ok('B34 RT Iron Acorn (rulings patch): identical multi-hit total in the RT engine (parity with classic)',
+  res.acornSlapDmgRt > 0 && res.acornSlapDmgRt === res.acornSlapDmgClassic, JSON.stringify(res));
 
 // ================= Part C: real headless Chromium =================
 {

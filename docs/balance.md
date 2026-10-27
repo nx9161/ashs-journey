@@ -136,9 +136,10 @@ catchRate 45, commons 255/235/190.
    (x1.500) — this EXCEEDS the §3 claim.** Reaching x1.5 needs all
    three conditions at once: holder ≥3 levels below the foe, standing
    on a Ground that boosts the move's type, using a move of that type.
-   FLAGGED for the owner (2026-10-27): spec numbers were NOT changed —
-   either the claim's "narrow window" was written for the Spectre
-   window, or the Sparrow x1.25 / Ground x1.2 pair needs a ruling.
+   OWNER RULING (2026-10-27): the §3 claim of "at most ≈x1.44" was a
+   doc error — it described only the Spectre window above. The TRUE
+   stacking cap is x1.5 (this Sparrow window), accepted by the owner
+   as designed; spec text corrected, no gameplay numbers changed.
    Defensive pieces only reduce (Tide Pearl x0.8, Iron Acorn x0.85,
    and the two can never co-fire on one hit: Electric-only vs
    first-hit-only). Proofs: tests/rejuv-phase3-checks.mjs.

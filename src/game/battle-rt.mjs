@@ -14,7 +14,7 @@ import {
   gen1Random, critChance, gen1Catch,
 } from '../engine/formulas.mjs';
 import { roll } from '../engine/rng.mjs';
-import { PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
+import { PT_FRAME, PT_FRAME2, PT_PAPER, UI_FONT_STACK } from '../engine/render.mjs';
 import { displayName } from './state.mjs';
 import { damageRandomFor, catchRateMultFor, rtFoeCooldownMultFor } from './rules.mjs';
 import {
@@ -32,6 +32,21 @@ const ARENA = { x0: 26, y0: 56, x1: 454, y1: 258 }; // logical 480x320 space
 
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 function dist(ax, ay, bx, by) { return Math.hypot(bx - ax, by - ay); }
+
+// Width of a chip label measured with the renderer's own ctx under the
+// EXACT font string Renderer.text() draws with (the title.mjs pattern),
+// so measure and render can never diverge. Headless stubs report a
+// token width — an implausibly small reading falls back to a per-glyph
+// estimate so the chip still flexes sanely off-browser.
+function measureChipText(r, str, size) {
+  try {
+    const c = r.ctx;
+    c.font = '400 ' + size + 'px ' + UI_FONT_STACK;
+    const wdt = Math.ceil(c.measureText(str).width);
+    if (wdt > str.length * 2) return wdt;
+  } catch (e) { /* stub ctx — estimate below */ }
+  return Math.ceil(str.length * size * 0.58);
+}
 
 function cooldownMs(mv, userSpe, foeSpe, field, mon) {
   // ADR-020 review formula: power/accuracy/speed-advantage scaled, clamped.
@@ -442,7 +457,8 @@ Object.assign(BattleScene.prototype, {
     // same calcDamage hook as the classic engine (applied once, after
     // the Ground factor; formula path only).
     const defHpBefore = def.hp;
-    const ksInfo = keepsakeDamageFactor(atk, def, mv, { defTypes, atkSpe: aStats.spe, defSpe: dStats.spe });
+    const ksCtx = { defTypes, atkSpe: aStats.spe, defSpe: dStats.spe };
+    const ksInfo = keepsakeDamageFactor(atk, def, mv, ksCtx);
     let dmg;
     if (mv.ohko || efx.ohko) dmg = def.hp;
     else if (efx.fixed) dmg = efx.fixed;
@@ -451,9 +467,15 @@ Object.assign(BattleScene.prototype, {
     else {
       const hits = efx.hits ? (efx.hits[0] + Math.floor(g.rng.battle() * (efx.hits[1] - efx.hits[0] + 1))) : 1;
       dmg = 0;
+      // ADR-025 §3 owner ruling (2026-10-27, classic parity): Iron
+      // Acorn factors only the FIRST HIT of a multi-hit move — hits
+      // after the first resolve with the ward spent.
+      const ksLateFactor = hits > 1
+        ? keepsakeDamageFactor(atk, def, mv, { ...ksCtx, wardSpent: true }).factor
+        : ksInfo.factor;
       for (let hi = 0; hi < hits; hi++) {
         dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: ksInfo.factor });
+          { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn: atk.status === 'burn', physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: hi === 0 ? ksInfo.factor : ksLateFactor });
       }
     }
     if (mv.cat === 'physical' && def.reflectT > 0) dmg = Math.max(1, Math.floor(dmg / 2));
@@ -784,8 +806,15 @@ Object.assign(BattleScene.prototype, {
     // chips on the same bottom row for the whole RT fight (non-Open
     // Grounds only — Open has no rules to show). It reserves its width
     // from the row, so the four cooldown chips shrink to make room.
-    const groundChipW = this.field && this.field.id !== 'open' ? 96 : 0;
-    const chipW = Math.floor((w - 24 - (groundChipW ? groundChipW + 4 : 0)) / 4); // 4 chips, 3 gaps of 4, 6px margins
+    // Rulings patch (2026-10-27): the chip's DRAWN width flexes to its
+    // full text below ('GROUND: Rubble' measures 99px at 14px PtPixel)
+    // — the reservation here stays 96, so the four cooldown chips keep
+    // their size and layout exactly; the flex draws on the right
+    // margin and the gap, never on the cooldown chips.
+    const groundLabel = this.field && this.field.id !== 'open'
+      ? 'GROUND: ' + this.field.name.replace(/ Ground$/, '') : null;
+    const groundReserve = groundLabel ? 96 : 0;
+    const chipW = Math.floor((w - 24 - (groundReserve ? groundReserve + 4 : 0)) / 4); // 4 chips, 3 gaps of 4, 6px margins
     const labelMax = Math.max(4, Math.min(10, Math.floor((chipW - 8) / 7)));
     for (let i = 0; i < 4; i++) {
       const slot = this.ally.moves[i];
@@ -812,11 +841,18 @@ Object.assign(BattleScene.prototype, {
       }
       if (slot.pp <= 0) r.text('NO PP', x + chipW - 40, y + 2, { size: 14, color: '#f84838', shadow: false });
     }
-    if (groundChipW) {
-      const gx = 6 + 4 * (chipW + 4);
+    if (groundLabel) {
+      // Full label, never sliced (the fixed-96 chip cut 'GROUND:
+      // Rubble' to 'GROUND: Rubbl'). Width = measured text + padding,
+      // floored at the reserved 96; the right edge may advance from
+      // w-6 to w-2 and any further growth extends left over the 4px
+      // gap (bounded by the widest label to ~4px over the last chip's
+      // frame/pip zone — its label and NO PP text sit clear of it).
+      const gw = Math.max(96, Math.ceil(measureChipText(r, groundLabel, 14)) + 8);
+      const gx = Math.min(6 + 4 * (chipW + 4), w - 2 - gw);
       const gy = h - 26;
-      r.panel(gx, gy, groundChipW, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
-      r.text(('GROUND: ' + this.field.name.replace(/ Ground$/, '')).slice(0, 13), gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
+      r.panel(gx, gy, gw, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
+      r.text(groundLabel, gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
     }
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;

@@ -851,11 +851,12 @@ export class BattleScene {
       // formula path, exactly like the Ground factor (fixed/level/OHKO
       // damage is untouched by both systems).
       const defHpBefore = def.hp;
-      const ksInfo = keepsakeDamageFactor(atk, def, mv, {
+      const ksCtx = {
         defTypes,
         atkSpe: entry.stats.spe,
         defSpe: Math.floor(def.stats.spe * stageMultiplier(defStages.spe)),
-      });
+      };
+      const ksInfo = keepsakeDamageFactor(atk, def, mv, ksCtx);
       let dmg;
       if (mv.ohko || efx.ohko) dmg = def.hp;
       else if (efx.fixed) dmg = efx.fixed;
@@ -864,9 +865,15 @@ export class BattleScene {
       else {
         const hits = efx.hits ? (efx.hits[0] + Math.floor(g.rng.battle() * (efx.hits[1] - efx.hits[0] + 1))) : 1;
         dmg = 0;
+        // ADR-025 §3 owner ruling (2026-10-27): Iron Acorn factors only
+        // the FIRST HIT of a multi-hit move — hits after the first
+        // resolve with the ward spent (all other windows unchanged).
+        const ksLateFactor = hits > 1
+          ? keepsakeDamageFactor(atk, def, mv, { ...ksCtx, wardSpent: true }).factor
+          : ksInfo.factor;
         for (let hi = 0; hi < hits; hi++) {
           dmg += calcDamage(atk.level, mv.power, atkStat, defStat,
-            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: ksInfo.factor });
+            { stab, effectiveness: eff, crit, random: damageRandomFor(g.state, g.rng.battle), burn, physical: mv.cat === 'physical', field: this.field, moveType: mv.type, keepsakeFactor: hi === 0 ? ksInfo.factor : ksLateFactor });
         }
         if (hits > 1) this._hitCount = hits;
       }

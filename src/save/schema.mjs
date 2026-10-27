@@ -2,6 +2,7 @@
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
 
 import { SCHEMA_VERSION } from '../game/state.mjs';
+import { KEEPSAKES } from '../data/items.mjs';
 
 export const SAVE_KEY = 'pdr.save.guest';
 
@@ -25,7 +26,12 @@ export function validateSave(data) {
     if (m.level < 1 || m.level > 100) { errors.push('bad-mon-level'); break; }
     if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-mon-moves'); break; }
     // ADR-025 §3 (Phase 3): mon.keepsake is a keepsake itemId or null.
-    if (m.keepsake !== undefined && m.keepsake !== null && typeof m.keepsake !== 'string') { errors.push('bad-mon-keepsake'); break; }
+    // Rulings patch (2026-10-27): the id must come from the closed
+    // keepsake set — this KEEPSAKES table is the single source of
+    // truth (tools/api-scripts/gen-tables.mjs emits the server
+    // validator's set from it), so client and cloud can never drift.
+    if (m.keepsake !== undefined && m.keepsake !== null
+      && (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake])) { errors.push('bad-mon-keepsake'); break; }
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -74,7 +80,11 @@ export function fillV2Defaults(data) {
   // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
   // on load (party + boxes), so v1 saves and pre-Phase-3 v2 saves open
   // clean with keepsake=null on every mon.
-  const fillMon = (m) => { if (isObj(m) && typeof m.keepsake !== 'string') m.keepsake = null; };
+  // A keepsake value outside the closed set (non-string, or a string
+  // that is not a keepsake id) coerces to null on load — the same
+  // closed-shape rebuild the houseRules block below performs — so a
+  // tampered or legacy value opens clean; validateSave stays strict.
+  const fillMon = (m) => { if (isObj(m) && (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake])) m.keepsake = null; };
   if (Array.isArray(data.party)) for (const m of data.party) fillMon(m);
   if (isObj(data.boxes)) for (const arr of Object.values(data.boxes)) {
     if (Array.isArray(arr)) for (const m of arr) fillMon(m);

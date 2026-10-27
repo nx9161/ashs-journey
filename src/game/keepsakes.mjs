@@ -44,6 +44,10 @@ export function clearKsState(mon) {
 // firings by name; a factor of 1 always carries null ids). `ctx`:
 //   defTypes: defender's effective types (matchup window)
 //   atkSpe / defSpe: effective Speed stats (Fossil Spur window)
+//   wardSpent: resolve as if the first-hit ward were already spent —
+//     multi-hit moves resolve hits after the first this way (owner
+//     ruling 2026-10-27: Iron Acorn factors only the FIRST HIT of a
+//     multi-hit move; every other window is unaffected).
 // Applied by the engines via calcDamage's `keepsakeFactor` opt, which
 // multiplies it in exactly once, after the Ground factor.
 export function keepsakeDamageFactor(atk, def, mv, ctx) {
@@ -69,7 +73,7 @@ export function keepsakeDamageFactor(atk, def, mv, ctx) {
   if (d && def) {
     if (d.kind === 'typeWard' && mv.type === d.moveType) {
       out.factor *= d.factor; out.defId = d.id;
-    } else if (d.kind === 'firstHitWard' && ksState(def).hitsTaken === 0) {
+    } else if (d.kind === 'firstHitWard' && !c.wardSpent && ksState(def).hitsTaken === 0) {
       out.factor *= d.factor; out.defId = d.id;
     }
   }
