@@ -59,9 +59,6 @@ export const MAPS2 = {
     items: [],
     hidden: [
       { x: 14, y: 8, item: 'oldamber', n: 1 },
-      // KEEPSAKE STUB SOURCE (Phase 3) — Iron Acorn; Phase 4's Pewter
-      // Town Tale replaces this placement.
-      { x: 1, y: 9, item: 'ironacorn', n: 1 },
     ],
     events: [],
     start: null,
@@ -521,9 +518,6 @@ export const MAPS2 = {
     encounters: null,
     items: [],
     hidden: [
-      // KEEPSAKE STUB SOURCE (Phase 3) — Tide Pearl; Phase 4's Vermilion
-      // Town Tale replaces this placement.
-      { x: 16, y: 11, item: 'tidepearl', n: 1 },
     ],
     events: [
       { id: 'ev_stanne', x: 8, y: 11, when: { flagNot: 'ev_stanne_done' } },
@@ -754,9 +748,6 @@ export const MAPS2 = {
     items: [],
     hidden: [
       { x: 16, y: 4, item: 'nugget', n: 1 },
-      // KEEPSAKE STUB SOURCE (Phase 3) — Gardenia Sash; Phase 4's
-      // Celadon Town Tale replaces this placement.
-      { x: 16, y: 8, item: 'gardeniasash', n: 1 },
     ],
     events: [],
     start: null,

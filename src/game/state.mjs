@@ -20,8 +20,14 @@ export function defaultState() {
     story: {
       chapter: 0, beat: 0, flags: {},
       // WS6/WS10 story state: quest-log stages + region progression
-      // (ADR-019). quests: questId -> 'active' | 'complete' (arc ids included).
+      // (ADR-019). quests: questId -> 'active' | stage number | 'complete'
+      // (arc ids keep their string stages; Town Tales, ADR-025 §5, widen
+      // the value set per §7).
       quests: {},
+      // ADR-025 §2/§7: bond scores, npcId -> hidden integer -10..+10.
+      // Phase 4 records the Town Tale sources (structural only); the
+      // tiers, dialogue variants and consumers are Phase 5.
+      bonds: {},
       region: 'kanto',
       regionsDone: [],
       position: { map: 'pallet', x: 7, y: 7, dir: 'down' },

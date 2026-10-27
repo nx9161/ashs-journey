@@ -163,6 +163,13 @@ MAPS4.newisland = {
 // Route trainers referenced by maps2 whose definitions were in the lost
 // tail of that file — authored here on the campaign level curve.
 export const TRAINERS4 = {
+  // ADR-025 §5 (Town Tales): the Cerulean cape culprit — the one tale
+  // battle fought as a real trainer battle (a talk-it-out path exists
+  // beside it). One low-level mon: a errand fight, never a boss.
+  tale_kid: { id: 'tale_kid', name: 'Pip', title: 'Youngster',
+    team: [{ species: 'oddish', level: 13 }], reward: 120,
+    intro: ['You want the bell? Then take it off my whole team! (It is one Oddish. We are both scared.)'],
+    lose: ['Oddish says uncle. I say uncle. UNCLE. The bell is yours — it was always yours.'] },
   r3_lass: { id: 'r3_lass', name: 'Lass Mina', team: [{ species: 'pidgey', level: 11 }, { species: 'nidoranf', level: 12 }], prize: 240,
     intro: ['I practiced all week for a trainer like you!'], lose: ['Practice or not — you were better.'] },
   r3_bug: { id: 'r3_bug', name: 'Bug Catcher Colt', team: [{ species: 'caterpie', level: 11 }, { species: 'weedle', level: 11 }, { species: 'metapod', level: 12 }], prize: 180,

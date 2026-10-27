@@ -8,7 +8,8 @@ import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
 import { giveKeepsake } from './keepsakes.mjs';
 import { displayName, dexCaughtCount, evolutionCheck } from './state.mjs';
-import { QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
+import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
+import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { FORMS } from '../data/forms.mjs';
 import { xpForLevel, statValue, hpValue } from '../engine/formulas.mjs';
 
@@ -301,29 +302,42 @@ Object.assign(Game.prototype, {
   openQuestLog() {
     const g = this;
     const items = [];
-    items.push({ label: '— MAIN QUEST —', value: null, disabled: true });
-    for (const q of QUESTS) {
+    // Section 1 — Main Story (unchanged machinery: the MAIN_QUESTS chain).
+    items.push({ label: '— MAIN STORY —', value: null, disabled: true });
+    for (const q of MAIN_QUESTS) {
       const doneF = q.flag && g.state.story.flags[q.flag];
-      const active = !doneF && QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+      const active = !doneF && MAIN_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
       items.push({
         label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
         value: 'q:' + q.id, disabled: !active && !doneF,
       });
     }
+    // Section 2 — Legendary Arcs (unchanged: arcs list from story.quests,
+    // exactly the ids the arc machinery wrote there).
     const arcs = Object.keys(g.state.story.quests || {});
     if (arcs.length) {
-      items.push({ label: '— SIDE ARCS —', value: null, disabled: true });
+      items.push({ label: '— LEGENDARY ARCS —', value: null, disabled: true });
       for (const id of arcs) {
         const arc = LEGENDARY_ARCS[id];
         if (!arc) continue;
         items.push({ label: (g.state.story.quests[id] === 'complete' ? '★ ' : '▶ ') + arc.title, value: 'arc:' + id });
       }
     }
+    // Section 3 — Town Tales (ADR-025 §5): every tale, with its current
+    // stage text. Unaccepted tales point at their giver; accepted tales
+    // state their reward up front (§5 shape law); completed tales carry
+    // their revelation.
+    items.push({ label: '— TOWN TALES —', value: null, disabled: true });
+    for (const tale of Object.values(QUESTS)) {
+      const s = taleStageOf(g.state, tale.id);
+      const mark = s < 0 ? '· ' : s >= tale.stages.length ? '★ ' : '▶ ';
+      items.push({ label: mark + tale.title + ' (' + tale.town + ')', value: 'tale:' + tale.id });
+    }
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Quest Log', items, (v) => {
       if (!v || v === 'close') return;
       if (v.startsWith('q:')) {
-        const q = QUESTS.find((x) => 'q:' + x.id === v);
+        const q = MAIN_QUESTS.find((x) => 'q:' + x.id === v);
         if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');
       } else if (v.startsWith('arc:')) {
         const arc = LEGENDARY_ARCS[v.slice(4)];
@@ -333,6 +347,15 @@ Object.assign(Game.prototype, {
           for (const st of arc.steps || []) lines.push('· ' + (typeof st === 'string' ? st : st.text));
           if (arc.lair) lines.push('Lair: ' + arc.lair);
           g.ui.say(lines, () => g.openQuestLog(), 'Arc');
+        }
+      } else if (v.startsWith('tale:')) {
+        const tale = QUESTS[v.slice(5)];
+        if (tale) {
+          const s = taleStageOf(g.state, tale.id);
+          const lines = [tale.title + ' — ' + tale.town, 'Giver: ' + tale.giver];
+          lines.push(taleStageText(g.state, tale));
+          if (s >= 0) lines.push('Reward: ' + tale.rewardText);
+          g.ui.say(lines, () => g.openQuestLog(), 'Tale');
         }
       }
     });

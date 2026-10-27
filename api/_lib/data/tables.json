@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "5c76a56c588aa1b3fe60d140831ef38b35ce80745338137839ff68f6214c7d58",
+  "tablesVersion": "b9f7e12fd0941901e31620664d353cec74a25ca365deacbcc6cf4fb9060e8d1d",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -729,7 +729,17 @@
     "q_stanne",
     "q_thunder",
     "q_vermilion",
-    "q_volcano"
+    "q_volcano",
+    "tale_celadon",
+    "tale_cerulean",
+    "tale_cinnabar",
+    "tale_fuchsia",
+    "tale_lavender",
+    "tale_pallet",
+    "tale_pewter",
+    "tale_saffron",
+    "tale_vermilion",
+    "tale_viridian"
   ],
   "regions": [
     "kanto",

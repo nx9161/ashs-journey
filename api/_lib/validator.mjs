@@ -224,7 +224,11 @@ function checkStory(story, errors) {
   // 'easy'/'normal'/'hard' -> 'story'/'classic'/'challenge' on load).
   if (!['story', 'classic', 'challenge'].includes(story.difficulty)) errors.push('bad-difficulty');
   // WS6/WS10: campaign state — quest/arc progress keyed by ids from the
-  // build's quest table; values are the closed enum active|complete.
+  // build's quest table. ADR-025 §7 (Phase 4 widening): values are
+  // 'active' | stage number (integer 0..99) | 'complete'; the legendary
+  // arcs' pre-existing 'discovered' string stage stays legal (their
+  // machinery writes it; behavior is unchanged). Anything else —
+  // fractional/negative/huge numbers, other strings, objects — rejects.
   if (story.quests !== undefined) {
     if (!isPlainObj(story.quests)) errors.push('bad-quests');
     else {
@@ -234,7 +238,26 @@ function checkStory(story, errors) {
         const qkeys = Object.keys(story.quests);
         if (qkeys.length > 200) errors.push('bad-quests-size');
         for (const k of qkeys) {
-          if (!TABLES.quests.has(k) || !['active', 'complete'].includes(story.quests[k])) { errors.push('bad-quest'); break; }
+          const v = story.quests[k];
+          const okV = v === 'active' || v === 'complete' || v === 'discovered' || isInt(v, 0, 99);
+          if (!TABLES.quests.has(k) || !okV) { errors.push('bad-quest'); break; }
+        }
+      }
+    }
+  }
+  // ADR-025 §2/§7: bond scores — npcId -> hidden integer -10..+10.
+  // Keys are short lowercase ids (the authored bond cast, incl. the
+  // Town Tale sources Phase 4 records); values are strict integers.
+  if (story.bonds !== undefined) {
+    if (!isPlainObj(story.bonds)) errors.push('bad-bonds');
+    else {
+      const bdk = hasDangerousKey(story.bonds);
+      if (bdk) errors.push('dangerous-key:' + bdk);
+      else {
+        const bkeys = Object.keys(story.bonds);
+        if (bkeys.length > 64) errors.push('bad-bonds-size');
+        for (const k of bkeys) {
+          if (!/^[a-z0-9_]{1,40}$/.test(k) || !isInt(story.bonds[k], -10, 10)) { errors.push('bad-bond'); break; }
         }
       }
     }

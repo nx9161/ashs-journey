@@ -225,12 +225,18 @@ const MV = (type, cat) => ({ type, cat: cat || 'physical', power: 40 });
   const hiddenHas = (mapId, item) => (ALL_MAPS[mapId].hidden || []).some((h) => h.item === item);
   const celadon = ALL_MAPS.celadon;
   const clerk = (celadon.npcs || []).find((n) => n.mart);
-  ok('A21 all 12 sources placed: 5 direct + ribbon shop + 6 stubs (marked in data comments)',
+  // Phase 4 superseded the stub half of this check by design: the six
+  // Town-Tale pieces left their marked STUB hidden placements and are
+  // now granted by their tales (the full 12-source obtainability audit
+  // lives in tests/rejuv-phase4-checks.mjs). What remains here: the
+  // direct placements + the ribbon shop row, and proof the stubs are
+  // GONE from the world data.
+  ok('A21 direct sources placed + ribbon shop; the 6 Phase-3 stub placements are gone (Phase 4 tale sources)',
     hiddenHas('route2', 'sparrowfeather') && hiddenHas('moon1', 'fossilspur')
     && hiddenHas('safari', 'gloomfang') && hiddenHas('powerplant', 'thunderheadpin')
-    && hiddenHas('viridian', 'tortoisecharm') && hiddenHas('pewter', 'ironacorn')
-    && hiddenHas('vermilion', 'tidepearl') && hiddenHas('celadon', 'gardeniasash')
-    && hiddenHas('lavender', 'spectrebell') && hiddenHas('cinnabar', 'embereed')
+    && !hiddenHas('viridian', 'tortoisecharm') && !hiddenHas('pewter', 'ironacorn')
+    && !hiddenHas('vermilion', 'tidepearl') && !hiddenHas('celadon', 'gardeniasash')
+    && !hiddenHas('lavender', 'spectrebell') && !hiddenHas('cinnabar', 'embereed')
     && !!clerk && clerk.mart.stock.includes('secondwindribbon'));
 }
 

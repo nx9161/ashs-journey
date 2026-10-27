@@ -26,7 +26,8 @@ const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
 const { ITEMS, BALLS, KEEPSAKES } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
 const { FORMS } = await import(join(ROOT, 'src', 'data', 'forms.mjs'));
-const { QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
+const { MAIN_QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
+const { QUESTS: TOWN_TALES } = await import(join(ROOT, 'src', 'data', 'quests.mjs'));
 const { SCHEMA_VERSION } = await import(join(ROOT, 'src', 'game', 'state.mjs'));
 
 const ALL_SPECIES = { ...SPECIES, ...SPECIES2 };
@@ -48,7 +49,7 @@ const tables = {
   keepsakes: Object.keys(KEEPSAKES).sort(),
   balls: Object.keys(BALLS).sort(),
   forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
-  quests: [...QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS)].sort(),
+  quests: [...MAIN_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(TOWN_TALES)].sort(),
   regions: ['kanto', 'orange', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea', 'liko'],
   // Ordered earn sequences.
   badgeSequences: {

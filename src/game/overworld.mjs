@@ -9,6 +9,7 @@ import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
 import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
+import { TALE_NPCS, TALE_NPC_PATCHES } from '../data/quests.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { BattleScene } from './battle.mjs';
@@ -51,9 +52,31 @@ export class OverworldScene {
     // Center only while the House Rule is on. The shared MAPS definition is
     // never mutated — the scene works on a shallow copy when a coach is
     // placed in the map's data.
-    if (this.map && Array.isArray(this.map.npcs) && this.map.npcs.some((n) => n.sparCoach)) {
-      const on = houseRule(this.game.state, 'candyCoach');
-      this.map = { ...this.map, npcs: this.map.npcs.filter((n) => on || !n.sparCoach) };
+    // ADR-025 §5 (Town Tales): the same copy gains the tale actors for
+    // this map — new NPCs appended, existing townsfolk patched by name
+    // with their tale role (data/quests.mjs TALE_NPCS / TALE_NPC_PATCHES).
+    if (this.map && Array.isArray(this.map.npcs)) {
+      let npcs = this.map.npcs;
+      let changed = false;
+      if (npcs.some((n) => n.sparCoach)) {
+        const on = houseRule(this.game.state, 'candyCoach');
+        npcs = npcs.filter((n) => on || !n.sparCoach);
+        changed = true;
+      }
+      const patches = TALE_NPC_PATCHES.filter((p) => p.map === id);
+      if (patches.length) {
+        npcs = npcs.map((n) => {
+          const p = patches.find((pp) => pp.name === n.name);
+          return p ? { ...n, tale: p.tale, role: p.role, witness: p.witness } : n;
+        });
+        changed = true;
+      }
+      const taleNpcs = TALE_NPCS.filter((n) => n.map === id);
+      if (taleNpcs.length) {
+        npcs = [...npcs, ...taleNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
+        changed = true;
+      }
+      if (changed) this.map = { ...this.map, npcs };
     }
     this.w = this.map.rows[0].length;
     this.h = this.map.rows.length;

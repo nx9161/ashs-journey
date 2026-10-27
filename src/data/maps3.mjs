@@ -627,9 +627,6 @@ export const MAPS3 = {
     encounters: null,
     items: [],
     hidden: [
-      // KEEPSAKE STUB SOURCE (Phase 3) — Spectre Bell; Phase 4's
-      // Lavender Town Tale replaces this placement.
-      { x: 16, y: 10, item: 'spectrebell', n: 1 },
     ],
     events: [],
     start: null,
@@ -1312,9 +1309,6 @@ export const MAPS3 = {
     encounters: null,
     items: [],
     hidden: [
-      // KEEPSAKE STUB SOURCE (Phase 3) — Ember Seed; Phase 4's Cinnabar
-      // Town Tale replaces this placement.
-      { x: 16, y: 9, item: 'embereed', n: 1 },
     ],
     events: [],
     start: null,
@@ -1455,9 +1449,6 @@ export const MAPS3 = {
     encounters: null,
     items: [],
     hidden: [
-      // KEEPSAKE STUB SOURCE (Phase 3) — Tortoise Charm; Phase 4's
-      // Viridian Town Tale replaces this placement.
-      { x: 1, y: 1, item: 'tortoisecharm', n: 1 },
     ],
     events: [
       { id: 'ev_viridian_gym_locked', x: 3, y: 5, when: { badgesBelow: 7 } },

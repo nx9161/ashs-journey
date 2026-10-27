@@ -39,7 +39,22 @@ export function validateSave(data) {
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');
     else for (const k of Object.keys(data.story.quests)) {
-      if (!['active', 'complete'].includes(data.story.quests[k])) { errors.push('bad-quest-stage'); break; }
+      // ADR-025 §7 (Phase 4 widening): quest values are 'active' |
+      // stage number (integer 0..99) | 'complete'. The legendary arcs'
+      // pre-existing 'discovered' string stage stays legal (their
+      // machinery writes it; behavior is unchanged).
+      const v = data.story.quests[k];
+      const okV = v === 'active' || v === 'complete' || v === 'discovered'
+        || (typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 99);
+      if (!okV) { errors.push('bad-quest-stage'); break; }
+    }
+  }
+  if (isObj(data.story) && data.story.bonds !== undefined) {
+    // ADR-025 §7: story.bonds — npcId -> hidden integer in -10..+10.
+    if (!isObj(data.story.bonds)) errors.push('bad-story-bonds');
+    else for (const k of Object.keys(data.story.bonds)) {
+      const v = data.story.bonds[k];
+      if (typeof v !== 'number' || !Number.isInteger(v) || v < -10 || v > 10) { errors.push('bad-bond-value'); break; }
     }
   }
   if (data.currentBox !== undefined && typeof data.currentBox !== 'string') errors.push('bad-current-box');
@@ -68,6 +83,16 @@ export function fillV2Defaults(data) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
       data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';
     }
+    // ADR-025 §7: story.bonds defaults-filled on load (v1 saves and
+    // pre-Phase-4 v2 saves open clean); values are rebuilt into the
+    // closed shape — integer scores clamped to the §2 range.
+    if (!isObj(data.story.bonds)) data.story.bonds = {};
+    const bonds = {};
+    for (const k of Object.keys(data.story.bonds)) {
+      const v = data.story.bonds[k];
+      if (typeof v === 'number' && Number.isFinite(v)) bonds[k] = Math.max(-10, Math.min(10, Math.trunc(v)));
+    }
+    data.story.bonds = bonds;
   }
   if (isObj(data.settings)) {
     if (!isObj(data.settings.houseRules)) data.settings.houseRules = {};

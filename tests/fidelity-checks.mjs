@@ -27,7 +27,7 @@ const { MAPS3, TRAINERS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
 const { MAPS4, TRAINERS4 } = await import(join(ROOT, 'src/data/maps4.mjs'));
 const { TRAINERS: TRAINERS_BASE } = await import(join(ROOT, 'src/data/maps.mjs'));
 const { TRAINERS } = await import(join(ROOT, 'src/data/rivals.mjs'));
-const { QUESTS, LEGENDARY_ARCS, EVENTS } = await import(join(ROOT, 'src/data/story-kanto.mjs'));
+const { MAIN_QUESTS: QUESTS, LEGENDARY_ARCS, EVENTS } = await import(join(ROOT, 'src/data/story-kanto.mjs'));
 const F = await import(join(ROOT, 'src/engine/formulas.mjs'));
 const { KEYMAP, ACTIONS } = await import(join(ROOT, 'src/engine/input.mjs'));
 

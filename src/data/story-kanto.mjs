@@ -12,12 +12,15 @@
 // matching dialogue.mjs.
 
 // ---------------------------------------------------------------------------
-// QUESTS — the objective chain, in order. `flag` is the story flag that
+// MAIN_QUESTS — the main-story objective chain, in order (renamed in
+// Rejuvenation Phase 4: the name QUESTS now belongs to the Town Tales
+// table in data/quests.mjs, per ADR-025 §5; the bundle is one scope).
+// `flag` is the story flag that
 // completes the objective (events below also emit questDone where a route
 // can branch, e.g. either Snorlax).
 // ---------------------------------------------------------------------------
 
-export const QUESTS = [
+export const MAIN_QUESTS = [
   { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'The lab sits at the north edge of Pallet Town. Your partner has opinions — and a strong dislike of Poke Balls.' },
   { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Pewter City', hint: 'Through Viridian Forest, then challenge Brock. Water and Grass moves crack Rock types open.' },
   { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Moon and reach Cerulean City', hint: 'The cave east of Pewter is dark and full of Zubat. Stock up on Potions before you go in.' },

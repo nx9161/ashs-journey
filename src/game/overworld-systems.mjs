@@ -15,7 +15,8 @@ import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './state.mjs';
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
-import { EVENTS, QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
+import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
+import { taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
 import { CHAPTERS } from '../data/story.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 
@@ -270,6 +271,13 @@ Object.assign(OverworldScene.prototype, {
   // ---------- interaction systems ----------
   sysInteract(fx, fy) {
     const g = this.game;
+    // ADR-025 §5 (Town Tales): faced-tile tale searches (the lost
+    // keepsake, the dock notes, the graves, the lure, the burned notes).
+    // The handler declines whenever its tale is not at the needing
+    // stage, so base handlers (signs, fishing, hidden items) keep
+    // their exact behavior the rest of the time.
+    const taleSpot = taleSpotAt(this.mapId, fx, fy);
+    if (taleSpot && this.taleSpotInteract(taleSpot)) return true;
     const t = this.tileAt(fx, fy);
     // Item balls.
     if (this.map.items) {
@@ -442,6 +450,12 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     const sayLines = (cb) => g.ui.say(npc.dialogue.map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
     if (npc.sparCoach) { this.startSpar(npc); return true; }
+    // ADR-025 §5 (Town Tales): tale actors run their stage machine.
+    // The handler returns false when the tale is not at a stage this
+    // actor serves, and the NPC's normal flow (dialogue, trainer
+    // battle, gifts) proceeds untouched — Sabrina's gym battle and the
+    // Cerulean witnesses' small talk included.
+    if (npc.tale) { if (this.runTaleNpc(npc)) return true; }
     if (npc.event) {
       if (!g.state.story.flags['evdone_' + npc.event]) {
         g.state.story.flags['evdone_' + npc.event] = true;
@@ -592,6 +606,387 @@ Object.assign(OverworldScene.prototype, {
       this.banner = { text: 'FUCHSIA CITY', t: 1.6 };
       g.audio.playMusic(this.map.music || 'route1-theme');
     });
+  },
+
+  // ---------- Town Tales (ADR-025 §5) ----------
+  // The stage machine + payouts are pure (data/quests.mjs); everything
+  // below is presentation: dialogue, menus, and the tales' one battle
+  // each at most. Battles are friendly spars / wild chases with no
+  // stakes (the Cerulean kid is the exception — a real trainer battle
+  // with a talk-it-out alternative, per the spec's "talk OR battle").
+  // Losing any tale battle leaves the stage untouched: talk again and
+  // retry. No tale ever gates main progression.
+  taleSay(lines, who, cb) {
+    const g = this.game;
+    g.ui.say(lines.map((l) => l.replace('{player}', g.state.player.name)), cb, who || '');
+  },
+
+  // A no-stakes tale battle: friendly + uncatchable wild spar.
+  taleSpar(species, level, onWin, onLose) {
+    const g = this.game;
+    const foe = makeMon(species, level, SPECIES, MOVES);
+    dexRegister(g.state.dex, 'seen', SPECIES[species].dexNo);
+    g.scenes.push(new BattleScene({
+      kind: 'wild', foe, returnTo: this, friendly: true, uncatchable: true, rt: rtOf(g),
+      onEnd: (won, fled) => { if (won && !fled) onWin(); else if (onLose) onLose(); },
+    }));
+  },
+
+  runTaleNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const id = npc.tale;
+    const stage = taleStageOf(st, id);
+    const done = taleStatus(st, id) === 'complete';
+    const say = (lines, cb) => this.taleSay(lines, npc.name, cb);
+    const finishWith = (lines, opts) => say(lines, () => completeTale(st, id, opts));
+
+    // ---- Pallet: Mom's Care Package ----
+    if (id === 'tale_pallet') {
+      if (npc.name === 'MOM') {
+        if (stage < 0) { say(['Oh! Before you run off again — a favor, love.', 'I have a package for the Viridian shopkeeper: maps, tea, and a letter too long for any Pidgey. Carry it north for me?', 'The Quest Log has it now. Reward? Three Potions and a mother\'s undying smugness.'], () => acceptTale(st, id)); return true; }
+        if (stage === 0) { say(['The shopkeeper is in Viridian City, love — south end of town, green apron, strong opinions.']); return true; }
+        if (stage === 1) { finishWith(['A receipt! With her handwriting and everything.', 'You know, I drew the first street maps of this town as a girl — chalk on a barn door, because paper cost money.', 'She still sells copies in that shop. Half the trainers in Kanto are navigating by my handwriting, and not one of them knows it.', 'Three Potions, as promised. Come home sometimes, {player}.']); return true; }
+        say(['My maps, her shop, your road. That is how a town stays stitched together, love.']); return true;
+      }
+      if (npc.name === 'SHOPKEEPER') {
+        if (stage === 0) { say(['A package from Pallet? Let me see — maps, tea, and a letter the size of a phone book.', 'That is her handwriting on the maps, you know. Still the best-drawn charts on my shelf.', 'Here — a stamped receipt. Take it back to her, and tell her the tea shelf misses her.'], () => advanceTale(st, id)); return true; }
+        if (stage === 1) { say(['Receipt is yours already, trainer. Pallet is straight south — mind the grass.']); return true; }
+        return false;
+      }
+    }
+
+    // ---- Viridian: The Retired Ace ----
+    if (id === 'tale_viridian') {
+      if (stage < 0) { say(['You walk like a trainer. Good. An old man can use one.', 'Sixty years ago I lost a keepsake in the Viridian Forest — a tortoise charm, carved by my late wife. The grass on Route 2 keeps it still, I think.', 'Find it, and choose honestly: bring it back to me, or keep it. Either way it ends with a trainer. That is all a charm wants.'], () => acceptTale(st, id)); return true; }
+      if (stage === 0) { say(['Route 2, the deep grass. Face a likely patch and search it, the way we did before itemfinders.']); return true; }
+      if (stage === 1) {
+        say(['You have her look about you. Show me your hands, trainer.'], () => {
+          g.ui.showMenu('The Tortoise Charm. What do you do?', [
+            { label: 'Return it to Ace Marlow', value: 'return' },
+            { label: 'Keep it', value: 'keep' },
+          ], (v) => {
+            if (v === 'return') {
+              st.story.flags.tale_viridian_returned = true;
+              finishWith(['...You found it. You actually— ha. HA! Look at that carving. Sixty years, and the grass kept it gentle.', 'No — do not argue. It goes with you. A charm that is found twice has chosen twice.', 'I was the first trainer ever to challenge the Viridian Gym, before there was a League to write it down. My tortoise outlived three gyms and every rival I had.', 'Let it outlive a few of yours, too. That is a Warm feeling, trainer. Warm.'], { bondDelta: 2 });
+            } else {
+              finishWith(['Keeping it, then. Ha! Sixty years in the grass and it picks a bold one.', 'I was the first trainer ever to challenge the Viridian Gym, you know. My tortoise outlived three gyms and every rival I had.', 'A charm chooses its trainer, in the end. It seems it has. Walk tall, keeper.'], { bondDelta: 0 });
+            }
+          });
+        });
+        return true;
+      }
+      say([st.story.flags.tale_viridian_returned ? 'The charm rides with you, and my thanks with it. Warm travels, trainer.' : 'Bold heart, soft hands. The charm chose well enough.']); return true;
+    }
+
+    // ---- Pewter: Brock's Day Off ----
+    if (id === 'tale_pewter') {
+      if (npc.name === 'CURATOR') {
+        if (stage < 0) { say(['Psst — trainer. Brock has not had a day off since the museum roof leaked, and that was two winters ago.', 'Cover my desk quiz for the visitors — three questions, all from the exhibits — then spar his Geodude so he can call it exercise and clock out.', 'The Iron Acorn is yours if you pull it off. It has been our paperweight for a decade; it deserves adventure.'], () => acceptTale(st, id)); return true; }
+        if (stage === 0) { this.taleQuizPewter(npc); return true; }
+        if (stage === 1) { say(['Quiz covered! Brock is in the square, pretending not to be off duty. His Geodude is already judging you.']); return true; }
+        say(['The museum hums along, and Brock actually smiled at a fossil today. Miracles, catalogued.']); return true;
+      }
+      if (npc.name === 'BROCK') {
+        if (stage === 1) {
+          say(['Day off. Allegedly. The Curator says you are my exercise plan.', 'One Geodude, no badges on the line, no crowd. Just rock and honest work.'], () => {
+            g.ui.showMenu('Spar with Brock\'s Geodude (Lv 12)?', [
+              { label: 'Spar', value: 'yes' }, { label: 'Not yet', value: 'no' },
+            ], (v) => {
+              if (v !== 'yes') return;
+              this.taleSpar('geodude', 12, () => {
+                finishWith(['Solid. You read a Rock type like a book you have already finished.', 'Here — the Iron Acorn. The museum\'s oldest paperweight, and harder than my whole team\'s heads.', 'Secret, trainer to trainer: this city\'s gym was built out of the museum\'s own stone. The museum came first. Leaders here have been part-time curators ever since — I pay the fossil lab out of gym winnings, and I would do it on my day off, too.']);
+              }, () => say(['Geodude takes the round. He is smug about it in three languages of rock.', 'Shake it off — a day off has room for a rematch.']));
+            });
+          });
+          return true;
+        }
+        return false; // Brock's own lines (off-duty color) otherwise
+      }
+    }
+
+    // ---- Cerulean: The Stolen Bike Bell ----
+    if (id === 'tale_cerulean') {
+      if (npc.name === 'TESS') {
+        if (stage < 0) { say(['My bike bell is GONE. Brass, loud, and older than the gym — somebody lifted it right off my handlebars.', 'Three people saw something: Wren by the grass, Orin east, and the Fan near the gym. Ask them. Please.', 'The bell is Cerulean history. And my TM11 is yours if it comes home — BubbleBeam, the real one.'], () => acceptTale(st, id)); return true; }
+        if (stage === 0) {
+          const n = [1, 2, 3].filter((w) => st.story.flags['tale_cerulean_w' + w]).length;
+          say(['Witnesses heard from: ' + n + ' of 3. Wren, Orin, the Fan — Cerulean is small; somebody saw that bell.']); return true;
+        }
+        if (stage === 1) { say(['The cape, north end of town. Whoever has my bell is done running.']); return true; }
+        say(['It rings again! Half of Cerulean heard it and pretended not to be emotional.']); return true;
+      }
+      if (npc.role === 'witness') {
+        const flag = 'tale_cerulean_w' + npc.witness;
+        if (stage === 0 && !st.story.flags[flag]) {
+          const clues = {
+            1: ['The bell? I heard it — ding ding, getting quieter northward. A kid, red cap, running like the bridge owed him money.'],
+            2: ['Saw him clear as day: small, quick, hugging something brass to his chest. Headed for the cape, where the rich trainers sun themselves.'],
+            3: ['He nearly ran me down! Kept looking back like the bell might ring on its own and give him away. The cape, trainer. End of the road.'],
+          };
+          say(clues[npc.witness] || clues[1], () => {
+            st.story.flags[flag] = true;
+            if ([1, 2, 3].every((w) => st.story.flags['tale_cerulean_w' + w])) {
+              advanceTale(st, id);
+              this.taleSay(['Three stories, one direction: the cape, at the north end of Cerulean. The culprit is cornered — go and be kind, or be quick.'], 'TESS');
+            }
+          });
+          return true;
+        }
+        return false; // their ordinary small talk otherwise
+      }
+      if (npc.name === 'PIP') {
+        if (stage === 1) {
+          say(['H-hey. Cape\'s taken. I am... meditating. Loudly. In brass.', '...Fine. It is me. I took the bell. But before you— just hear me out, or don\'t. Battle me for it, if you want it clean.'], () => {
+            g.ui.showMenu('The bell, back to Tess. How?', [
+              { label: 'Talk it out', value: 'talk' },
+              { label: 'Battle for it', value: 'battle' },
+            ], (v) => {
+              const earn = () => finishWith(['...My little brother\'s bike has no bell. Cars do not hear him. I just wanted him LOUD, you know?', 'Take it. Take it back to Tess. Tell her — tell her the cape kid is sorry, and her bell is the loudest good thing in Cerulean.', 'It rang first on the first bike ever ridden over Nugget Bridge, she told the whole street once. Gym was a bike shop then. I stole a piece of history to fix a Tuesday.', 'Misty will hear the whole story by supper. Everybody tells Misty everything. That is somehow worse than losing.']);
+              if (v === 'talk') { earn(); return; }
+              if (v === 'battle') {
+                const t = TRAINERS.tale_kid;
+                if (!t) { earn(); return; }
+                g.ui.say(t.intro, () => {
+                  g.scenes.push(new BattleScene({
+                    kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
+                    onEnd: (won) => { if (won) earn(); else say(['...You are just going to let me keep it? No. NO. That look is worse than losing. Come back when you can take it properly.']); },
+                  }));
+                }, npc.name);
+              }
+            });
+          });
+          return true;
+        }
+        if (done) { say(['Bell\'s home. Brother got a whistle. It is not the same, and he will not stop saying so.']); return true; }
+        return false;
+      }
+    }
+
+    // ---- Vermilion: Fan Club Founder ----
+    if (id === 'tale_vermilion') {
+      if (npc.name === 'CHAIRMAN') {
+        if (stage < 0) { say(['You have the look of a listener, and I am a man with a LOSS to describe at length.', 'Our founder\'s notebooks — fifty years of tides, teams, and terrible puns — were left at the S.S. Anne dock. The Anne has them, or the harbor does.', 'Bring them home and the Tide Pearl is yours. The founder kept it for "a trainer who fetches paper in a storm of small talk."'], () => acceptTale(st, id)); return true; }
+        if (stage === 0) { say([st.story.flags.stanne_done ? 'The Anne has sailed — but nothing leaves this harbor unrecorded. Ask the Harbormaster, east end of the dock.' : 'The dock, trainer! South edge of town, where the gulls hold their own fan club.']); return true; }
+        if (stage === 1) { finishWith(['THE NOTEBOOKS. Intact! Slightly gull-kissed, but intact!', 'Listen to this, from the first page: "Vermilion had no harbor when I charted these tides. Three sailors and a dream. The Fan Club is just those sailors, arguing forever."', 'Even Lt. Surge learned this bay from these pages. He respects the founder like weather — you do not argue, you dress for it.', 'The Tide Pearl, as promised. It has heard fifty years of harbor stories and tells none of them.']); return true; }
+        say(['The notebooks rest in the clubhouse, and the club endures. My Rapidash, meanwhile — did I tell you about its coat?']); return true;
+      }
+      if (npc.name === 'HARBORMASTER') {
+        if (stage === 0 && st.story.flags.stanne_done) { say(['Lost property? Aye — when the Anne cast off, a oilskin bundle came off her dock cart. Notebooks. Tide tables. Puns.', 'Harbor keeps what the sea gives back. Take them to the Chairman, and tell him the harbor charges one (1) thank-you.'], () => advanceTale(st, id)); return true; }
+        return false;
+      }
+    }
+
+    // ---- Lavender: Names on the Wall ----
+    if (id === 'tale_lavender') {
+      if (npc.name === 'VOLUNTEER') {
+        if (stage < 0) { say(['Oh — a trainer with gentle hands, I hope. The tower\'s west stones are losing their names.', 'Take my ledger into Pokemon Tower and record the unnamed graves before the carving goes smooth. Then find Elder Bram — he remembers what the stones cannot.', 'Mr. Fuji keeps a Spectre Bell for whoever tends the tower\'s forgotten. It should be carried by someone kind.'], () => acceptTale(st, id)); return true; }
+        if (stage === 0) { say(['The west gravestones, in the tower. Read them aloud as you write — the tower likes to hear its names.']); return true; }
+        if (stage === 1) { say(['The ledger is filling in beautifully. Elder Bram waits in the east of town — ask him about the Marowak.']); return true; }
+        say(['Every name on that wall is a door somebody can knock on again. Thank you.']); return true;
+      }
+      if (npc.name === 'ELDER BRAM') {
+        if (stage === 1) {
+          finishWith(['So. The ledger-keeper comes to hear about the Marowak.', 'She was no legend, child. She was a mother, in a tower full of thieves, and she put herself between them and her baby with her whole heart. The little one got away. She did not.', 'The channelers say a mother\'s love does not leave a place just because her body did. If the tower is restless on your climb — well. You did not hear a strategy from me. There is none in this. Only a story.', 'Take the Spectre Bell. Mr. Fuji will want to know the names are written down — that man has carried this town\'s grief longer than I have carried mine.']);
+          return true;
+        }
+        return false;
+      }
+    }
+
+    // ---- Celadon: Roof Garden ----
+    if (id === 'tale_celadon') {
+      const badges = st.badges.kanto.length;
+      if (stage < 0) { say(['You are looking at Celadon\'s best-kept height: the Game Corner roof garden, Erika\'s own.', 'It wants three waterings this season — and the garden keeps gym hours, in its way: the second visit wants a trainer with 4 badges, the third, 6. Plants respect a journey.', 'Finish the season and the Gardenia Sash is yours. Erika sewed it herself, so water like you mean it.'], () => acceptTale(st, id)); return true; }
+      if (stage === 0) { say(['Watering one — there you go. Slow circles, no splashing the marigolds; they hold grudges.', 'One bed drinks for the whole roof when a journey is young. Come back at 4 badges for the second round.'], () => advanceTale(st, id)); return true; }
+      if (stage === 1) {
+        if (badges >= 4) { say(['Four badges! The vines noticed before I did. Watering two — mind the hanging bed, it drinks like a Snorlax.', 'One more round, at 6 badges, and the season is yours.'], () => advanceTale(st, id)); return true; }
+        say(['The garden is still sipping its first watering, trainer. Second round opens at 4 badges — you hold ' + badges + '. The plants are patient. Be like the plants.']); return true;
+      }
+      if (stage === 2) {
+        if (badges < 6) { say(['Last watering waits for a 6-badge trainer — you hold ' + badges + '. The roof is not going anywhere, and neither is the view.']); return true; }
+        say(['Six badges — the whole roof stands up straighter. Final watering, and then—', '—MEOWTH! That is the third time this week, you little toll collector! Chase it off, trainer!'], () => {
+          this.taleSpar('meowth', 18, () => {
+            finishWith(['Gone! Over the parapet like it pays rent elsewhere. The garden is safe, the season is COMPLETE, and somewhere a Meowth is telling this story very differently.', 'The Gardenia Sash — Erika\'s own stitching. Wear it knowing this: this garden grows over Celadon\'s first gym, a wooden hall where the Game Corner now glitters.', 'Erika\'s grandmother planted the first bed so the city\'s green would always stand taller than its neon. You have kept it standing, trainer.']);
+          }, () => say(['It slipped past you — all tail and opinions. The plants are unharmed; come back and chase it properly.']));
+        });
+        return true;
+      }
+      say(['The roof blooms on, season after season. Erika asks after you — gardeners notice who waters.']); return true;
+    }
+
+    // ---- Saffron: Two Gyms, One City ----
+    if (id === 'tale_saffron') {
+      if (npc.name === 'MASTER KO') {
+        if (stage < 0) { say(['You stand in the Fighting Dojo, and we have a problem older than you.', 'Once a year this hall sends one message across the street, and once a year SHE sends one back. This year the messenger is... you. Take our word to Sabrina.', 'No fighting required, unless pride gets involved. Pride always gets involved.'], () => acceptTale(st, id)); return true; }
+        if (stage === 0) { say(['Sabrina, in her gym across the street. Deliver it standing straight — she respects posture and punctuality, in that order.']); return true; }
+        if (stage === 1) { say(['You carry our word still. Deliver it; then choose your thanks with open eyes.']); return true; }
+        if (stage === 2 && !st.story.flags.tale_saffron_iou) {
+          say(['So the Dojo\'s thanks it is. One spar, my best student\'s partner, honest rules. XP is the prize and pride is the tax.'], () => {
+            g.ui.showMenu('Spar at the Dojo?', [
+              { label: 'Spar', value: 'yes' }, { label: 'Not yet', value: 'no' },
+            ], (v) => {
+              if (v !== 'yes') return;
+              const lvl = Math.max(12, sparLevelFor(st));
+              this.taleSpar('machop', lvl, () => {
+                finishWith(['Enough! The hall remembers that one.', 'Tell Sabrina her school\'s strength is still only half the story — and hear the rest from her, since a message deserves an answer.', 'One school, this was. Her father and I split it over what strength is FOR. You have carried messages between us longer in a day than we managed in twenty years.']);
+              }, () => say(['The student takes it. The Dojo does not mock a loss — it schedules the rematch. Come again.']));
+            });
+          });
+          return true;
+        }
+        if (stage === 2) { say(['Your thanks waits across the street, written in Sabrina\'s hand. Collect it after her badge — her rules, and for once, I agree with them.']); return true; }
+        say(['The hall is quieter this year. Messages do that.']); return true;
+      }
+      if (npc.name === 'SABRINA') {
+        if (stage === 0) {
+          say(['A message from across the street. I knew its words before you climbed my stairs — that is not why I let you carry it.', 'It says: "The hall stands." Every year, the same two words. Every year, I answer: "So does the Gym." That is the whole war, trainer. Two buildings, refusing to fall down first.'], () => {
+            advanceTale(st, id);
+            this.taleSay(['Now choose your thanks, messenger — in my hall, choices are also messages.'], 'SABRINA');
+          });
+          return true;
+        }
+        if (stage === 1) {
+          say(['The rivalry is witnessed. Choose, messenger.'], () => {
+            g.ui.showMenu('Your thanks?', [
+              { label: 'The Dojo spar (XP)', value: 'spar' },
+              { label: 'Sabrina\'s keepsake IOU (after her badge)', value: 'iou' },
+              { label: 'Not now', value: 'no' },
+            ], (v) => {
+              if (v === 'spar') { say(['The Dojo, then. Master Ko is already clearing the floor — I foresaw the sawdust.']); advanceTale(st, id); }
+              else if (v === 'iou') {
+                st.story.flags.tale_saffron_iou = true;
+                say(['An IOU, then, in my own hand: one keepsake from my keeping, redeemed when you hold my Marsh Badge.', 'Win it honestly, messenger. I will be watching the battle three turns before it happens.']);
+                advanceTale(st, id);
+              }
+            });
+          });
+          return true;
+        }
+        if (stage === 2 && st.story.flags.tale_saffron_iou) {
+          if (!st.badges.kanto.includes('marshbadge')) return false; // the gym battle itself is the way through
+          const pick = IOU_PRIORITY.find((k) => !ownsKeepsake(st, k));
+          if (pick) {
+            finishWith(['The badge suits you. And an IOU in my hand is a door opening.', 'Your keepsake, messenger — chosen by the only rule that matters: the one you did not already carry. May it arrive exactly when it is needed. It usually does, with me.', 'Her father and Master Ko built one school, then split it over what strength is FOR. You have now carried their whole argument in an afternoon. Thank you for not dropping it.'], { keepsake: pick });
+          } else {
+            finishWith(['Every keepsake in Kanto already rides with you — there is nothing left in my keeping you lack. The IOU pays in candy, then: three XP Candies, and my genuine surprise.', 'Her father and Master Ko built one school, then split it over what strength is FOR. You have now carried their whole argument in an afternoon.'], { items: { xpcandy: 3 } });
+          }
+          return true;
+        }
+        return false; // Sabrina's gym flow (battle / post-badge lines) otherwise
+      }
+    }
+
+    // ---- Fuchsia: The Warden's Teeth ----
+    if (id === 'tale_fuchsia') {
+      if (npc.name === 'SAFARI WARDEN') {
+        if (stage < 0) { say(['Mind the marsh on your way in, trainer — it took something of mine.', 'Not my teeth, before you grin. My FISHING LURE. Carved it the year I arrived; the entrance marsh swallowed it this morning, right inside the gate.', 'Fetch it home and there are ten Safari Balls in it for you. A lure that old deserves a story with a trainer in it.'], () => acceptTale(st, id)); return true; }
+        if (stage === 0) {
+          // The marsh is INSIDE the Safari Zone, and this same NPC is
+          // the gate: decline so his safariGate flow opens the park
+          // (his own dialogue line there points at the entrance marsh).
+          return false;
+        }
+        if (stage === 1) {
+          say(['That shine — that is IT. That is the lure!', 'Feel the weight of it. Carved the year the marsh fed all of Fuchsia, before fences, gates, or tickets. Koga\'s grandfather taught me to fish with this very piece of wood.'], () => {
+            this.taleSay(['Uncle Warden! You found it — Father will want to hear the marsh gave it back. Thank you, trainer. From both of us.'], 'JANINE', () => {
+              completeTale(st, id);
+              this.taleSay(['Ten Safari Balls, as promised — and Janine\'s thanks, which in this family is legal tender. Go on, then. The marsh is behaving today.'], 'SAFARI WARDEN');
+            });
+          });
+          return true;
+        }
+        // Complete: decline — the Warden is the Safari gate, and his
+        // gate (and his own lost-teeth business) must own his talks
+        // again. The lure hangs by his door either way.
+        return false;
+      }
+      if (npc.name === 'JANINE') {
+        if (done) { say(['Father heard the whole lure story by supper — Koga hears everything in Fuchsia eventually. Thank you again, trainer.']); return true; }
+        return false;
+      }
+    }
+
+    // ---- Cinnabar: Lab Notes ----
+    if (id === 'tale_cinnabar') {
+      if (stage < 0) { say(['Careful — ash still falls in the mansion library, twenty years on.', 'Our team\'s burned research notes are in there: two halves, west shelves and east shelves. The fire took the middle pages and left the edges legible. Typical.', 'Bring both halves back and the Ember Seed is yours — and Blaine will hear whose hands carried his science home.'], () => acceptTale(st, id)); return true; }
+      if (stage === 0) {
+        const w = !!st.story.flags.tale_cinnabar_west, e = !!st.story.flags.tale_cinnabar_east;
+        say(['Halves recovered: ' + (w ? 'west ' : '') + (e ? 'east ' : '') + (!w && !e ? 'none yet' : '') + '. The mansion library, both shelf-runs. Mind the journals — everybody reads them, nobody shelves them.']); return true;
+      }
+      if (stage === 1) {
+        finishWith(['Both halves. Both! Let me lay them together... yes. Yes, the burn line matches. Twenty years, and the argument still reads clean.', 'This page, though. A jungle expedition, before the fire — they followed a mirage no instrument could record, and came home with one curled eyelash in a specimen jar.', 'Blaine was on that team. He has never once called it a failure. What slept in that jungle, the page refuses to say — and I have stopped asking paper to gossip.', 'The Ember Seed, earned. And Blaine will hear your name from me before the week turns.']);
+        return true;
+      }
+      say(['The notes are re-shelved, the argument restored, the ash — mostly — forgiven.']); return true;
+    }
+
+    return false;
+  },
+
+  // The Pewter museum desk quiz: 3 questions, all from the exhibit
+  // lines read aloud first. A wrong answer corrects and re-asks the
+  // same question — the desk is never failed, only finished.
+  taleQuizPewter(npc) {
+    const g = this.game;
+    const st = g.state;
+    const QS = [
+      { q: 'Exhibit one: "Old Amber holds something ancient inside." What does amber hold?', opts: ['Ancient DNA', 'A tiny lighthouse', 'Fossilized soup'], a: 0, fix: 'The card says it plainly: amber holds ancient DNA. Again —' },
+      { q: 'Exhibit two: "Two fossils sleep in Mt. Moon." Which one is the SPIRAL shell?', opts: ['Dome Fossil', 'Helix Fossil', 'Old Amber'], a: 1, fix: 'Helix — think of a snail shell, a spiral staircase. Again —' },
+      { q: 'Exhibit three: "Pewter stone remembers." The museum was built from what?', opts: ['Imported marble', 'The mountain itself', 'Recycled badges'], a: 1, fix: 'The mountain itself — this whole city is one polite quarry. Again —' },
+    ];
+    const ask = (i) => {
+      if (i >= QS.length) {
+        this.taleSay(['Three for three! The desk is covered, the visitors are dazzled, and Brock owes us both a day off.', 'He is in the square with his Geodude. Go and collect your spar.'], npc.name, () => advanceTale(st, 'tale_pewter'));
+        return;
+      }
+      const item = QS[i];
+      g.ui.showMenu(item.q, item.opts.map((o, oi) => ({ label: o, value: oi })), (v) => {
+        if (v === item.a) { g.audio.playSfx('dex-register'); ask(i + 1); }
+        else this.taleSay([item.fix], npc.name, () => ask(i));
+      });
+    };
+    this.taleSay(['The desk, then! The exhibit cards, read slow — every answer is on them, as a fair quiz should be.', 'Card one: amber, and the ancient DNA inside it. Card two: the spiral Helix and the domed Dome. Card three: a museum built from the mountain itself. Ready?'], npc.name, () => ask(0));
+  },
+
+  // Faced-tile tale searches (sysInteract hook). Returns true only
+  // when the spot did tale business; false lets signs/fishing speak.
+  taleSpotInteract(spot) {
+    const g = this.game;
+    const st = g.state;
+    const id = spot.tale;
+    const stage = taleStageOf(st, id);
+    if (stage !== 0) return false;
+    const say = (lines, cb) => this.taleSay(lines, '', cb);
+    if (spot.kind === 'keepsake') { // Viridian Forest, Route 2 grass
+      say(['Something glints under the grass — a carved wooden tortoise, worn smooth as river stone.', 'THE TORTOISE CHARM. Sixty years of weather, and the carving still smiles.', 'Take it back to Ace Marlow in Viridian — or keep it. The choice is the tale.'], () => advanceTale(st, id));
+      return true;
+    }
+    if (spot.kind === 'notes') { // Vermilion dock, pre-departure
+      if (st.story.flags.stanne_done) { say(['The dock is bare — the Anne has sailed, and whatever she left behind went through the harbor office. The Harbormaster keeps lost property.']); return true; }
+      say(['Under a dock crate, oilskin-wrapped against the spray: notebooks! Tide tables, team notes, and puns of a truly maritime vintage.', 'THE FOUNDER\'S NOTES. The Chairman in Vermilion will want these yesterday.'], () => advanceTale(st, id));
+      return true;
+    }
+    if (spot.kind === 'graves') { // Pokemon Tower, west stones
+      say(['You read the west stones aloud, one by one, and write what the carving still holds.', 'Three have no names at all — only dates, and the careful marks of whoever visits. The ledger takes them as "beloved, unnamed," which is better than forgotten.', 'Elder Bram, in Lavender Town, remembers the rest. Go gently.'], () => advanceTale(st, id));
+      return true;
+    }
+    if (spot.kind === 'lure') { // Safari Zone entrance marsh
+      say(['The marsh reeds lean over something shining — you wade two steps and close your hand on carved, water-dark wood.', 'THE WARDEN\'S LURE. Older than the fence around it, and heavier than it looks: a lot of mornings live in this wood.', 'Return it to the Safari Warden in Fuchsia City.'], () => advanceTale(st, id));
+      return true;
+    }
+    if (spot.kind === 'notesWest' || spot.kind === 'notesEast') { // Mansion library
+      const flag = spot.kind === 'notesWest' ? 'tale_cinnabar_west' : 'tale_cinnabar_east';
+      if (st.story.flags[flag]) { say(['Ash and empty shelf. This half is already recovered.']); return true; }
+      st.story.flags[flag] = true;
+      const both = st.story.flags.tale_cinnabar_west && st.story.flags.tale_cinnabar_east;
+      say([spot.kind === 'notesWest'
+        ? 'Behind the west shelves: a tin box the fire only kissed. Inside — half of the lab\'s burned notes, edges crisped, argument intact.'
+        : 'Under the east shelves, where the journals fell like leaves: the other half of the burned notes, smelling of smoke and stubbornness.',
+      both ? 'BOTH HALVES. The lab tech in Cinnabar is about to have a very good day.' : 'One half recovered. The other shelf-run still waits.'], () => { if (both) advanceTale(st, id); });
+      return true;
+    }
+    return false;
   },
 
   // ---------- PC boxes ----------
@@ -960,7 +1355,7 @@ Object.assign(OverworldScene.prototype, {
   // ---------- objective (quest-driven HUD line) ----------
   sysObjective() {
     const g = this.game;
-    const q = QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+    const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;
     const active = Object.keys(g.state.story.quests).find((k) => g.state.story.quests[k] === 'active');
     if (active && LEGENDARY_ARCS[active]) return '▶ Arc: ' + LEGENDARY_ARCS[active].title;
