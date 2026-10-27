@@ -411,8 +411,13 @@ Object.assign(OverworldScene.prototype, {
         g.scenes.push(new BattleScene({
           kind: 'wild', foe, returnTo: this, friendly: true, uncatchable: true,
           rt: g.state.settings.battleStyle !== 'classic',
-          onEnd: (won) => {
-            if (won) {
+          onEnd: (won, fled) => {
+            // QA D1: fleeing (RUN / Teleport) ends the battle with
+            // won=true + fled=true — the candy only changes hands on a
+            // real win, or the spar becomes an unbounded candy farm.
+            if (fled) {
+              g.ui.say(['Running off mid-drill? The candy only changes hands on a win. Come back when you mean it.'], null, npc.name);
+            } else if (won) {
               g.state.bag.xpcandy = (g.state.bag.xpcandy || 0) + 1;
               g.ui.say(['Clean work — that is a win in my book.', 'Here: one XP Candy. Winners earn one every time. Come back whenever you want more reps.'], null, npc.name);
             } else {

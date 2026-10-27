@@ -257,6 +257,46 @@ const driver = `
   out.candyLevelConsistent = mon.xp >= xpForLevel(SPECIES.pidgey.growth, mon.level)
     && (mon.level >= 100 || mon.xp < xpForLevel(SPECIES.pidgey.growth, mon.level + 1));
 
+  // ---------- QA D1 regression: fleeing the spar pays NOTHING ----------
+  // BattleScene escape paths end with won=true; the spar must only pay on
+  // a real win. Both engines, driven the way a player flees.
+  const sparToScene = () => {
+    ow.startSpar(coach);
+    let n = 0;
+    while (n++ < 80) {
+      if (ui.menuOpen && ui.menu.items.some((it) => it.value === 'yes')) break;
+      if (ui.dlg) { game.input.inject('a'); game.loop.stepTicks(2); game.input.release('a'); game.loop.stepTicks(2); }
+      else game.loop.stepTicks(2);
+    }
+    chooseLabel('Spar');
+    return game.scenes.top;
+  };
+  const drainBattle = (b) => {
+    let n = 0;
+    while (game.scenes.top === b && n++ < 600) { game.loop.stepTicks(2); if (b.msgOpen || ui.dlg) { game.input.inject('a'); game.loop.stepTicks(2); game.input.release('a'); } }
+  };
+  st.settings.battleStyle = 'classic';
+  const bFlee = sparToScene();
+  if (bFlee && bFlee.foeMon) {
+    bFlee.ally.stats.spe = 999; bFlee.foe.stats.spe = 1; // guaranteed escape roll
+    let n = 0;
+    while (bFlee.state !== 'command' && n++ < 600) { game.loop.stepTicks(2); if (bFlee.msgOpen || ui.dlg) { game.input.inject('a'); game.loop.stepTicks(2); game.input.release('a'); } }
+    chooseLabel('RUN');
+    drainBattle(bFlee);
+  }
+  out.fleeClassicNoCandy = (st.bag.xpcandy || 0) === 0 && !!bFlee && bFlee.fled === true && game.scenes.top !== bFlee;
+  st.settings.battleStyle = 'rt';
+  const bFleeRt = sparToScene();
+  if (bFleeRt && bFleeRt.foeMon) {
+    let n = 0;
+    while (!bFleeRt.rt && n++ < 600) { game.loop.stepTicks(2); if (bFleeRt.msgOpen || ui.dlg) { game.input.inject('a'); game.loop.stepTicks(2); game.input.release('a'); } }
+    bFleeRt.ally.stats.spe = 999; bFleeRt.foe.stats.spe = 1;
+    if (bFleeRt.rt) bFleeRt.rtTryRun(); // the exact call the RUN handlers make
+    drainBattle(bFleeRt);
+  }
+  out.fleeRtNoCandy = (st.bag.xpcandy || 0) === 0 && !!bFleeRt && bFleeRt.fled === true && game.scenes.top !== bFleeRt;
+  let dn = 0; while (ui.dlg && dn++ < 60) { game.input.inject('a'); game.loop.stepTicks(2); game.input.release('a'); game.loop.stepTicks(2); }
+
   // ---------- Skip Intro house rule (headless auto-path) ----------
   st.settings.houseRules.skipIntro = true;
   game.skipIntroVeteran = false;
@@ -299,6 +339,8 @@ ok('B11 spar offer shows; scene is friendly + uncatchable, foe is Machop at high
 ok('B12 spar win awards exactly one XP Candy', res.candyAfterWin === 1, String(res.candyAfterWin));
 ok('B13 spar loss: no candy, money intact', res.candyAfterLoss === 1 && res.moneyIntact === true, JSON.stringify(res));
 ok('B14 XP Candy grants exactly 800 XP and consumes the item', res.candyXpGain === 800 && res.candyBagAfter === 0 && res.candyLevelConsistent === true, JSON.stringify(res));
+ok('B17 fleeing the spar (classic RUN) pays no candy', res.fleeClassicNoCandy === true, JSON.stringify(res));
+ok('B18 fleeing the spar (RT rtTryRun) pays no candy', res.fleeRtNoCandy === true, JSON.stringify(res));
 ok('B15 Skip Intro rule skips to a converged state; without it the intro plays', res.skipIntroSkips === true && res.noSkipWithoutRule === true, JSON.stringify(res));
 ok('B16 New Game carries difficulty; a carried rule starts the run touched', res.newGameKeepsDifficulty === true && res.newGameStartsTouched === true);
 

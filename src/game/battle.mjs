@@ -155,7 +155,7 @@ export class BattleScene {
     const rate = SPECIES[this.foe.speciesId].catchRate;
     let p = 0.10 + (this.safariRock ? 0.15 : 0) - (this.safariBait ? 0.08 : 0) + (rate <= 45 ? 0.05 : 0);
     if (roll(Math.max(0.02, p), g.rng.battle)) {
-      this.say('Wild ' + displayName(this.foe, SPECIES) + ' fled!', () => this.endBattle(true));
+      this.say('Wild ' + displayName(this.foe, SPECIES) + ' fled!', () => { this.fled = true; this.endBattle(true); });
       return true;
     }
     return false;
@@ -284,7 +284,7 @@ export class BattleScene {
     if (value === null) { this.toCommand(); return; } // cancelled -> back
     if (this.safari) {
       if (this.onSafariAction) this.onSafariAction();
-      if (value === 'safarirun') { this.endBattle(true); return; }
+      if (value === 'safarirun') { this.fled = true; this.endBattle(true); return; }
       if (value === 'safariball') { this.beginCatch('safariball'); return; }
       if (value === 'bait' || value === 'rock') {
         if (value === 'bait') { this.safariBait = true; this.safariRock = false; }
@@ -366,7 +366,7 @@ export class BattleScene {
         const F = Math.floor((allySpe * 128) / foeSpe) + 30 * this.runAttempts;
         if (F > 255 || Math.floor(g.rng.battle() * 256) < F) {
           g.audio.playSfx('battle-run');
-          this.say('Got away safely!', () => this.endBattle(true));
+          this.say('Got away safely!', () => { this.fled = true; this.endBattle(true); });
         } else {
           this.say("Can't escape!", () => {
             this.playerAction = { type: 'ran' };
@@ -937,7 +937,7 @@ export class BattleScene {
     const done = (msg) => this.say(msg, () => this.nextAction());
     // Teleport: flee a wild battle; fails against trainers.
     if (ef.flee) {
-      if (this.kind === 'wild') { this.say(aName + ' teleported away!', () => this.endBattle(true)); return; }
+      if (this.kind === 'wild') { this.say(aName + ' teleported away!', () => { this.fled = true; this.endBattle(true); }); return; }
       done('But it failed!'); return;
     }
     if (ef.haze) {
@@ -1448,7 +1448,11 @@ export class BattleScene {
     g.autosave('battle');
     // Story-event continuation (WS6): scripted battles resume their script
     // only on victory — a loss leaves the event unconsumed for a retry.
-    if (this.onEnd) { const f = this.onEnd; this.onEnd = null; f(won); }
+    // ADR-025 QA D1: escape paths (RUN / Teleport / Safari run / foe fled)
+    // end the battle with won=true but set this.fled first — consumers
+    // that pay a WIN prize (the Candy Coach spar) must check the second
+    // argument; a flee is neither a win nor a loss.
+    if (this.onEnd) { const f = this.onEnd; this.onEnd = null; f(won, this.fled === true); }
   }
 
   drainHp(dt) {

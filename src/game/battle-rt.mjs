@@ -486,7 +486,7 @@ Object.assign(BattleScene.prototype, {
     if (ef.focus) { atk.focused = true; return; }
     if (ef.seed) { def.seeded = true; return; }
     if (ef.haze) { for (const s of [this.allyStages, this.foeStages]) for (const k of Object.keys(s)) s[k] = 0; return; }
-    if (ef.flee) { if (this.kind === 'wild' && side === 'ally') this.endBattle(true); return; }
+    if (ef.flee) { if (this.kind === 'wild' && side === 'ally') { this.fled = true; this.endBattle(true); } return; }
     let applied = false;
     for (const k of ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva']) {
       if (ef[k]) {
@@ -635,7 +635,7 @@ Object.assign(BattleScene.prototype, {
     this.runAttempts++;
     const F = Math.floor((Math.max(1, this.ally.stats.spe) * 128) / Math.max(1, this.foe.stats.spe)) + 30 * this.runAttempts;
     if (F > 255 || Math.floor(g.rng.battle() * 256) < F) {
-      this.say('Got away safely!', () => this.endBattle(true));
+      this.say('Got away safely!', () => { this.fled = true; this.endBattle(true); });
     } else {
       this.rtFloat("Can't escape!");
       this.rt.dodgeCd = Math.max(this.rt.dodgeCd, 600);

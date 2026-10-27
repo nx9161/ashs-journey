@@ -61,9 +61,12 @@ export function fillV2Defaults(data) {
   }
   if (isObj(data.settings)) {
     if (!isObj(data.settings.houseRules)) data.settings.houseRules = {};
-    for (const k of HOUSE_RULE_KEYS) {
-      if (typeof data.settings.houseRules[k] !== 'boolean') data.settings.houseRules[k] = false;
-    }
+    // Rebuild with exactly the known keys (QA hygiene note): unknown keys
+    // are dropped here so the client shape always matches the server
+    // validator's closed set.
+    const hr = {};
+    for (const k of HOUSE_RULE_KEYS) hr[k] = data.settings.houseRules[k] === true;
+    data.settings.houseRules = hr;
   }
   if (isObj(data.meta)) {
     if (typeof data.meta.houseRulesTouched !== 'boolean') data.meta.houseRulesTouched = false;

@@ -15332,9 +15332,12 @@ function fillV2Defaults(data) {
   }
   if (isObj(data.settings)) {
     if (!isObj(data.settings.houseRules)) data.settings.houseRules = {};
-    for (const k of HOUSE_RULE_KEYS) {
-      if (typeof data.settings.houseRules[k] !== 'boolean') data.settings.houseRules[k] = false;
-    }
+    // Rebuild with exactly the known keys (QA hygiene note): unknown keys
+    // are dropped here so the client shape always matches the server
+    // validator's closed set.
+    const hr = {};
+    for (const k of HOUSE_RULE_KEYS) hr[k] = data.settings.houseRules[k] === true;
+    data.settings.houseRules = hr;
   }
   if (isObj(data.meta)) {
     if (typeof data.meta.houseRulesTouched !== 'boolean') data.meta.houseRulesTouched = false;
@@ -17815,7 +17818,7 @@ class BattleScene {
     const rate = SPECIES[this.foe.speciesId].catchRate;
     let p = 0.10 + (this.safariRock ? 0.15 : 0) - (this.safariBait ? 0.08 : 0) + (rate <= 45 ? 0.05 : 0);
     if (roll(Math.max(0.02, p), g.rng.battle)) {
-      this.say('Wild ' + displayName(this.foe, SPECIES) + ' fled!', () => this.endBattle(true));
+      this.say('Wild ' + displayName(this.foe, SPECIES) + ' fled!', () => { this.fled = true; this.endBattle(true); });
       return true;
     }
     return false;
@@ -17944,7 +17947,7 @@ class BattleScene {
     if (value === null) { this.toCommand(); return; } // cancelled -> back
     if (this.safari) {
       if (this.onSafariAction) this.onSafariAction();
-      if (value === 'safarirun') { this.endBattle(true); return; }
+      if (value === 'safarirun') { this.fled = true; this.endBattle(true); return; }
       if (value === 'safariball') { this.beginCatch('safariball'); return; }
       if (value === 'bait' || value === 'rock') {
         if (value === 'bait') { this.safariBait = true; this.safariRock = false; }
@@ -18026,7 +18029,7 @@ class BattleScene {
         const F = Math.floor((allySpe * 128) / foeSpe) + 30 * this.runAttempts;
         if (F > 255 || Math.floor(g.rng.battle() * 256) < F) {
           g.audio.playSfx('battle-run');
-          this.say('Got away safely!', () => this.endBattle(true));
+          this.say('Got away safely!', () => { this.fled = true; this.endBattle(true); });
         } else {
           this.say("Can't escape!", () => {
             this.playerAction = { type: 'ran' };
@@ -18597,7 +18600,7 @@ class BattleScene {
     const done = (msg) => this.say(msg, () => this.nextAction());
     // Teleport: flee a wild battle; fails against trainers.
     if (ef.flee) {
-      if (this.kind === 'wild') { this.say(aName + ' teleported away!', () => this.endBattle(true)); return; }
+      if (this.kind === 'wild') { this.say(aName + ' teleported away!', () => { this.fled = true; this.endBattle(true); }); return; }
       done('But it failed!'); return;
     }
     if (ef.haze) {
@@ -19108,7 +19111,11 @@ class BattleScene {
     g.autosave('battle');
     // Story-event continuation (WS6): scripted battles resume their script
     // only on victory — a loss leaves the event unconsumed for a retry.
-    if (this.onEnd) { const f = this.onEnd; this.onEnd = null; f(won); }
+    // ADR-025 QA D1: escape paths (RUN / Teleport / Safari run / foe fled)
+    // end the battle with won=true but set this.fled first — consumers
+    // that pay a WIN prize (the Candy Coach spar) must check the second
+    // argument; a flee is neither a win nor a loss.
+    if (this.onEnd) { const f = this.onEnd; this.onEnd = null; f(won, this.fled === true); }
   }
 
   drainHp(dt) {
@@ -19955,7 +19962,7 @@ Object.assign(BattleScene.prototype, {
     if (ef.focus) { atk.focused = true; return; }
     if (ef.seed) { def.seeded = true; return; }
     if (ef.haze) { for (const s of [this.allyStages, this.foeStages]) for (const k of Object.keys(s)) s[k] = 0; return; }
-    if (ef.flee) { if (this.kind === 'wild' && side === 'ally') this.endBattle(true); return; }
+    if (ef.flee) { if (this.kind === 'wild' && side === 'ally') { this.fled = true; this.endBattle(true); } return; }
     let applied = false;
     for (const k of ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva']) {
       if (ef[k]) {
@@ -20104,7 +20111,7 @@ Object.assign(BattleScene.prototype, {
     this.runAttempts++;
     const F = Math.floor((Math.max(1, this.ally.stats.spe) * 128) / Math.max(1, this.foe.stats.spe)) + 30 * this.runAttempts;
     if (F > 255 || Math.floor(g.rng.battle() * 256) < F) {
-      this.say('Got away safely!', () => this.endBattle(true));
+      this.say('Got away safely!', () => { this.fled = true; this.endBattle(true); });
     } else {
       this.rtFloat("Can't escape!");
       this.rt.dodgeCd = Math.max(this.rt.dodgeCd, 600);
@@ -21289,8 +21296,13 @@ Object.assign(OverworldScene.prototype, {
         g.scenes.push(new BattleScene({
           kind: 'wild', foe, returnTo: this, friendly: true, uncatchable: true,
           rt: g.state.settings.battleStyle !== 'classic',
-          onEnd: (won) => {
-            if (won) {
+          onEnd: (won, fled) => {
+            // QA D1: fleeing (RUN / Teleport) ends the battle with
+            // won=true + fled=true — the candy only changes hands on a
+            // real win, or the spar becomes an unbounded candy farm.
+            if (fled) {
+              g.ui.say(['Running off mid-drill? The candy only changes hands on a win. Come back when you mean it.'], null, npc.name);
+            } else if (won) {
               g.state.bag.xpcandy = (g.state.bag.xpcandy || 0) + 1;
               g.ui.say(['Clean work — that is a win in my book.', 'Here: one XP Candy. Winners earn one every time. Come back whenever you want more reps.'], null, npc.name);
             } else {
@@ -23219,6 +23231,6 @@ Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:c735be433db1cd647f1059c68485940ec6e3ed46f104cd81daf2136c7dbd1b9d -->
+<!-- contentHash:03f17c5c57363276cb6b3198f841793f24cdbd226ddfc78ed602814ee37bdf0c -->
 </body>
 </html>
