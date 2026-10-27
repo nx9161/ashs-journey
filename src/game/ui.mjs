@@ -318,12 +318,22 @@ export class UI {
     });
   }
 
+  // ADR-025 §2 (Bonds): the heart pip. After any bond change, the wiring
+  // queues a direction here; the NEXT dialogue's nameplate wears it
+  // (♥▲ warms / ♥▼ cools) — the PARTNER_MOODS idiom extended to people.
+  // Consumed by exactly one say(), never sticky, never labelled in
+  // advance: choices are not pre-marked good/bad; the pip teaches after.
+  queueBondPip(dir) {
+    if (dir) this._bondPip = dir > 0 ? 1 : -1;
+  }
+
   say(lines, cb, speaker) {
     this.dlg = { lines: lines.slice(), idx: 0, chars: 0, cb: cb || null, speaker: speaker || null, done: false };
+    if (this._bondPip && speaker) { this.dlg.pip = this._bondPip; this._bondPip = 0; }
     this.log.push({ ui: 'dialogue', lines });
     if (!this.headless) {
       this.dlgEl.classList.remove('hidden');
-      this.dlgName.textContent = this.dlg.speaker || '';
+      this.dlgName.textContent = (this.dlg.speaker || '') + (this.dlg.pip ? (this.dlg.pip > 0 ? ' ♥▲' : ' ♥▼') : '');
       this.dlgName.style.display = this.dlg.speaker ? 'block' : 'none';
       this.dlgText.textContent = '';
     }

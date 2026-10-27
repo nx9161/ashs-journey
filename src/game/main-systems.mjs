@@ -10,6 +10,7 @@ import { giveKeepsake } from './keepsakes.mjs';
 import { displayName, dexCaughtCount, evolutionCheck } from './state.mjs';
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
+import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
 import { FORMS } from '../data/forms.mjs';
 import { xpForLevel, statValue, hpValue } from '../engine/formulas.mjs';
 
@@ -333,9 +334,24 @@ Object.assign(Game.prototype, {
       const mark = s < 0 ? '· ' : s >= tale.stages.length ? '★ ' : '▶ ';
       items.push({ label: mark + tale.title + ' (' + tale.town + ')', value: 'tale:' + tale.id });
     }
+    // Section 4 — People (ADR-025 §2): the bond review surface. The
+    // score is hidden by design; the TIER is the visible face. Only
+    // characters the player actually has a bond record with appear.
+    const people = bondedCharacters(g.state);
+    if (people.length) {
+      items.push({ label: '— PEOPLE —', value: null, disabled: true });
+      for (const c of people) {
+        items.push({ label: '· ' + c.name + ' — ' + tierOf(g.state, c.id), value: 'bond:' + c.id });
+      }
+    }
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Quest Log', items, (v) => {
       if (!v || v === 'close') return;
+      if (v.startsWith('bond:')) {
+        const c = people.find((x) => 'bond:' + x.id === v);
+        if (c) g.ui.say([c.name + ' — ' + tierOf(g.state, c.id), c.note], () => g.openQuestLog(), 'People');
+        return;
+      }
       if (v.startsWith('q:')) {
         const q = MAIN_QUESTS.find((x) => 'q:' + x.id === v);
         if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');
@@ -450,8 +466,20 @@ Object.assign(Game.prototype, {
   },
 
   // Oak's rating + the diploma moment (WS7 payoff).
+  // ADR-025 §2: the rating's TEMPERATURE warms with the Hawthorn bond
+  // (tier-variant framing lines in BOND_DIALOGUE) — the count, its
+  // thresholds and the dex itself never vary: a dex entry is never
+  // bond-gated. Asking for a rating is a one-shot bond source (+1,
+  // first time only); the completed diploma is worth +2, once, inside
+  // checkDiploma's own one-shot guard.
   oakRating() {
     const n = dexCaughtCount(this.state.dex);
+    applyBondOnce(this.state, 'bondsrc_rating', 'hawthorn', 1);
+    const tier = tierOf(this.state, 'hawthorn').toLowerCase();
+    if (tier !== 'wary') {
+      const framed = bondSceneLines(this.state, 'hawthorn', 'rating');
+      if (framed && framed.length) return framed[0].replace('{n}', String(n));
+    }
     if (n < 10) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
     if (n < 50) return n + ' caught! You are learning what a Pokedex is for. Keep going!';
     if (n < 100) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
@@ -465,6 +493,7 @@ Object.assign(Game.prototype, {
     const done = kanto.every((s) => g.state.dex.caught[s.dexNo]);
     if (done && !g.state.story.flags.diploma) {
       g.state.story.flags.diploma = true;
+      applyBondOnce(g.state, 'bondsrc_diploma', 'hawthorn', 2); // ADR-025 §2: the diploma is a bond beat (+2, once — this guard is the one-shot)
       g.audio.playSfx('badge');
       g.ui.say([
         'DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Kanto Pokedex:',

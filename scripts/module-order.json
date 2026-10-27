@@ -30,6 +30,7 @@
  "src/game/state.mjs",
  "src/game/rules.mjs",
  "src/game/keepsakes.mjs",
+ "src/game/bonds.mjs",
  "src/save/schema.mjs",
  "src/save/store.mjs",
  "src/game/scenes.mjs",

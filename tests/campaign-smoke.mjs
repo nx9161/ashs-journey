@@ -83,12 +83,29 @@ const driver = `
     drain(60);
     driveBattle();
   }
+  // ADR-025 §2 (Phase 5): story events gained CHOICE POINT steps — a
+  // real player answers the menu; this driver picks the first enabled
+  // option (any pick completes the beat by design) and keeps flowing.
+  function resolveMenus() {
+    let guard = 0;
+    while (ui.menuOpen && guard < 8) {
+      guard++;
+      const m = ui.menu;
+      const idx = m.items.findIndex((it) => !it.disabled);
+      ui.debugChoose(idx >= 0 ? idx : 0); tick(3);
+      drain(120);
+      if (game.scenes.top instanceof BattleScene) driveBattle();
+      drain(60);
+    }
+  }
   function stepEvent(ow, x, y) {
     ow.player.tx = x; ow.player.ty = y; ow.player.px = x * 16; ow.player.py = y * 16;
     ow.onStep(x, y);
     drain(120);
+    resolveMenus();
     if (game.scenes.top instanceof BattleScene) driveBattle();
     drain(120);
+    resolveMenus();
   }
   function talkTo(ow, name) {
     const npc = ow.map.npcs.find((n) => n.name === name);
@@ -98,8 +115,10 @@ const driver = `
     ow.player.dir = 'up';
     ow.tryInteract();
     drain(120);
+    resolveMenus();
     if (game.scenes.top instanceof BattleScene) driveBattle();
     drain(60);
+    resolveMenus();
     return true;
   }
   const flags = () => st.story.flags;

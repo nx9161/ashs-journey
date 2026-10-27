@@ -143,6 +143,23 @@ catchRate 45, commons 255/235/190.
    Defensive pieces only reduce (Tide Pearl x0.8, Iron Acorn x0.85,
    and the two can never co-fire on one hit: Electric-only vs
    first-hit-only). Proofs: tests/rejuv-phase3-checks.mjs.
+   **Bonds (Rejuvenation Phase 5, ADR-025 §2)** — WIRED 2026-10-27:
+   NO balance numbers moved, by owner ruling R3 (bonds never alter
+   battle stats, AI, or teams). The bond economy, for the record:
+   hidden score -10..+10, tiers derived (Cold <= -4 / Wary -3..+1 /
+   Warm +2..+6 / Close >= +7 — the spec fixes only Close; Warm at +2
+   matches Phase 4's shipped fiction); single-source swing <= 2
+   (structural clamp in applyBond); every source is one-shot authored
+   content (7 event choice points + tale choices + parley, tale
+   completions at Phase 4 amounts, first-outcome-only rival/duo
+   battle ledgers, arc beats, leader thanks/gifts, Hawthorn's
+   rating/diploma). Gary's full-run offer is +11 (6 battle wins + 5
+   choice points) — Close is reachable, never default. The only
+   economy touch is non-combat: the parley talk path pays an XP
+   Candy instead of a prize fight (reduced XP by design, §2), and
+   Warm+ leaders gift 2 XP Candies once. Proofs:
+   tests/rejuv-phase5-checks.mjs (incl. the R3 byte-identity proof:
+   Gary's def at bond -10 vs +10 differs only in intro/lose text).
 3. **Route-trainer sight lines** — IMPLEMENTED in the Yellow-authenticity
    update (`feat/yellow-authenticity`): `sight: { dir, range }` cones on all 6
    route trainers (Brock stays talk-only); spot beat (500ms `!` + original

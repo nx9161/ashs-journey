@@ -16,7 +16,8 @@ import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './s
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
-import { taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
+import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
+import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, parleyTier } from './bonds.mjs';
 import { CHAPTERS } from '../data/story.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 
@@ -183,7 +184,51 @@ Object.assign(OverworldScene.prototype, {
     if (s.flag) { g.state.story.flags[s.flag] = true; next(); return; }
     if (s.quest) { g.state.story.quests[s.quest] = 'active'; next(); return; }
     if (s.questDone) { g.state.story.quests[s.questDone] = 'complete'; next(); return; }
-    if (s.arc) { g.state.story.quests[s.arc] = s.stage; next(); return; }
+    if (s.arc) {
+      g.state.story.quests[s.arc] = s.stage;
+      // ADR-025 §2: legendary-arc beats are a bond source — +1 with the
+      // characters the arc involves, recorded once at completion (the
+      // Mewtwo arc is Blaine's old expedition; the Mew beat is the one
+      // the duo witnessed and stood down for). One-shot by flag.
+      if (s.stage === 'complete') {
+        if (s.arc === 'arc_mewtwo') applyBondOnce(g.state, 'bondsrc_arc_mewtwo', 'blaine', 1);
+        if (s.arc === 'arc_mew') { applyBondOnce(g.state, 'bondsrc_arc_mew_rue', 'rue', 1); applyBondOnce(g.state, 'bondsrc_arc_mew_cole', 'cole', 1); }
+      }
+      next(); return;
+    }
+    // ADR-025 §2: the CHOICE POINT primitive. An authored beat offers
+    // unlabelled options through the existing ui.showMenu (keyboard /
+    // touch parity is the menu's own); the chosen option applies its
+    // bond delta (swing-clamped to <=2 inside applyBond), queues the
+    // heart pip for the consequence dialogue, then plays its lines.
+    // Choices never gate the story: every option advances the beat.
+    if (s.choice) {
+      const c = s.choice;
+      const who = c.who || '';
+      g.ui.showMenu(c.prompt, c.options.map((o) => ({ label: o.label, value: o.label })), (v) => {
+        const opt = c.options.find((o) => o.label === v) || c.options[0];
+        const ids = Array.isArray(c.npc) ? c.npc : [c.npc];
+        let dir = 0;
+        for (const id of ids) { const r = applyBond(g.state, id, opt.delta || 0); if (r.dir) dir = r.dir; }
+        if (dir) g.ui.queueBondPip(dir);
+        const lines = (opt.say || []).map((l) => l.replace('{player}', g.state.player.name));
+        if (lines.length) g.ui.say(lines, next, who);
+        else next();
+      });
+      return;
+    }
+    // ADR-025 §2: a tier-variant beat. Emits the scene's lines for the
+    // character's CURRENT tier when a variant exists for it (e.g. the
+    // champion scene's Close-only mutual-respect lines); otherwise the
+    // beat is silent and the authored scene around it plays unchanged.
+    if (s.sayVar) {
+      const lines = bondSceneLines(g.state, s.sayVar.npc, s.sayVar.scene);
+      if (lines && lines.length) {
+        g.ui.say(lines.map((l) => l.replace('{player}', g.state.player.name)), next, s.sayVar.who || '');
+        return;
+      }
+      next(); return;
+    }
     if (s.heal) { this.healParty(false); g.ui.toast('The party was healed!'); next(); return; }
     if (s.give) {
       for (const item of Object.keys(s.give.items || {})) {
@@ -210,11 +255,14 @@ Object.assign(OverworldScene.prototype, {
       next(); return;
     }
     if (s.battle) {
-      const t = TRAINERS[s.battle];
-      if (!t) { next(); return; }
+      const t0 = TRAINERS[s.battle];
+      if (!t0) { next(); return; }
+      // ADR-025 §2: Gary's battle TEXT varies by tier (cloned def, text
+      // only — R3); the outcome feeds the rival/duo ledger as a source.
+      const t = bondTrainerVariant(g.state, t0);
       g.scenes.push(new BattleScene({
         kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
-        onEnd: (won) => { if (won) next(); },
+        onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); if (won) next(); },
       }));
       return;
     }
@@ -450,12 +498,26 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     const sayLines = (cb) => g.ui.say(npc.dialogue.map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
     if (npc.sparCoach) { this.startSpar(npc); return true; }
+    // ADR-025 §2 (Bonds): the Celadon parley pair run their scene.
+    if (npc.parley) { if (this.runParleyNpc(npc)) return true; }
+    // ADR-025 §2: the Pallet lab Gary is dialogue-only — his lines are
+    // tier-variant (the wary set IS his authored dialogue, so a neutral
+    // run reads byte-identically to before Phase 5).
+    if (npc.name === 'GARY' && !npc.trainer) {
+      const lines = bondSceneLines(g.state, 'gary', 'lab');
+      if (lines) { g.ui.say(lines.map((l) => l.replace('{player}', g.state.player.name)), null, npc.name); return true; }
+    }
     // ADR-025 §5 (Town Tales): tale actors run their stage machine.
     // The handler returns false when the tale is not at a stage this
     // actor serves, and the NPC's normal flow (dialogue, trainer
     // battle, gifts) proceeds untouched — Sabrina's gym battle and the
     // Cerulean witnesses' small talk included.
     if (npc.tale) { if (this.runTaleNpc(npc)) return true; }
+    // ADR-025 §2: a beaten gym leader whose Town Tale is complete runs
+    // the bond talk (Warm+ gift + tier-variant rematch banter). Placed
+    // after the tale hook: Sabrina's tale stages keep first claim on
+    // her, and the hook itself declines pre-badge / pre-tale.
+    if (npc.trainer) { if (this.leaderBondTalk(npc)) return true; }
     if (npc.event) {
       if (!g.state.story.flags['evdone_' + npc.event]) {
         g.state.story.flags['evdone_' + npc.event] = true;
@@ -639,7 +701,16 @@ Object.assign(OverworldScene.prototype, {
     const stage = taleStageOf(st, id);
     const done = taleStatus(st, id) === 'complete';
     const say = (lines, cb) => this.taleSay(lines, npc.name, cb);
-    const finishWith = (lines, opts) => say(lines, () => completeTale(st, id, opts));
+    const finishWith = (lines, opts) => say(lines, () => {
+      const tale = QUESTS[id];
+      const npcId = tale && tale.bondNpc;
+      const before = npcId ? bondOf(st, npcId) : 0;
+      completeTale(st, id, opts);
+      // ADR-025 §2: Phase 4's tale deltas now land in a LIVE tier model
+      // (their amounts and semantics are unchanged) — the heart pip
+      // rides the next dialogue after the change.
+      if (npcId) { const d = Math.sign(bondOf(st, npcId) - before); if (d) g.ui.queueBondPip(d); }
+    });
 
     // ---- Pallet: Mom's Care Package ----
     if (id === 'tale_pallet') {
@@ -647,7 +718,13 @@ Object.assign(OverworldScene.prototype, {
         if (stage < 0) { say(['Oh! Before you run off again — a favor, love.', 'I have a package for the Viridian shopkeeper: maps, tea, and a letter too long for any Pidgey. Carry it north for me?', 'The Quest Log has it now. Reward? Three Potions and a mother\'s undying smugness.'], () => acceptTale(st, id)); return true; }
         if (stage === 0) { say(['The shopkeeper is in Viridian City, love — south end of town, green apron, strong opinions.']); return true; }
         if (stage === 1) { finishWith(['A receipt! With her handwriting and everything.', 'You know, I drew the first street maps of this town as a girl — chalk on a barn door, because paper cost money.', 'She still sells copies in that shop. Half the trainers in Kanto are navigating by my handwriting, and not one of them knows it.', 'Three Potions, as promised. Come home sometimes, {player}.']); return true; }
-        say(['My maps, her shop, your road. That is how a town stays stitched together, love.']); return true;
+        // ADR-025 §2: Mom's send-offs warm up by tier; milestone talks
+        // are one-shot bond sources (a mother's pride, authored beats).
+        let pipDir = 0;
+        if (st.badges.kanto.length >= 4) { const r = applyBondOnce(st, 'bondsrc_mom_badges', 'mom', 1); if (r && r.dir) pipDir = r.dir; }
+        if (st.story.flags.champion) { const r = applyBondOnce(st, 'bondsrc_mom_champion', 'mom', 1); if (r && r.dir) pipDir = r.dir; }
+        if (pipDir) g.ui.queueBondPip(pipDir);
+        say(bondSceneLines(st, 'mom', 'sendoff') || ['My maps, her shop, your road. That is how a town stays stitched together, love.']); return true;
       }
       if (npc.name === 'SHOPKEEPER') {
         if (stage === 0) { say(['A package from Pallet? Let me see — maps, tea, and a letter the size of a phone book.', 'That is her handwriting on the maps, you know. Still the best-drawn charts on my shelf.', 'Here — a stamped receipt. Take it back to her, and tell her the tea shelf misses her.'], () => advanceTale(st, id)); return true; }
@@ -890,7 +967,10 @@ Object.assign(OverworldScene.prototype, {
         if (stage === 1) {
           say(['That shine — that is IT. That is the lure!', 'Feel the weight of it. Carved the year the marsh fed all of Fuchsia, before fences, gates, or tickets. Koga\'s grandfather taught me to fish with this very piece of wood.'], () => {
             this.taleSay(['Uncle Warden! You found it — Father will want to hear the marsh gave it back. Thank you, trainer. From both of us.'], 'JANINE', () => {
+              const beforeK = bondOf(st, 'koga');
               completeTale(st, id);
+              const dK = Math.sign(bondOf(st, 'koga') - beforeK);
+              if (dK) g.ui.queueBondPip(dK);
               this.taleSay(['Ten Safari Balls, as promised — and Janine\'s thanks, which in this family is legal tender. Go on, then. The marsh is behaving today.'], 'SAFARI WARDEN');
             });
           });
@@ -922,6 +1002,116 @@ Object.assign(OverworldScene.prototype, {
     }
 
     return false;
+  },
+
+  // ---------- Bonds: the Celadon parley (ADR-025 §2 + §3) ----------
+  // Rue & Cole's Celadon appearance. Wary or below: the ambush stays an
+  // ambush — a straight fight against the duo3 team. Warm+ (the pair's
+  // LOWER tier): the scene opens with a parley choice — fight anyway,
+  // or talk them down: no battle, reduced XP (an XP Candy instead of a
+  // prize fight), +1 bond each, and the Second-Wind Ribbon — the
+  // keepsake's FIRST source (§3), whose second source (the atelier
+  // clerk's 7-badge stock) keeps its existence un-gated either way.
+  // Both paths mark the scene resolved and reach the same Giovanni
+  // payoff downstream; nothing here touches a battle's numbers (R3).
+  runParleyNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    if (flags.parley_celadon_done || !flags.stanne_done) return false;
+    const say = (lines, cb) => this.taleSay(lines, npc.name, cb);
+    const resolve = () => { flags.parley_celadon_done = true; };
+    const fight = () => {
+      const def = TRAINERS.duo3_celadon;
+      if (!def) { resolve(); return; }
+      // A clone carrying the pair's own names and lines for THIS scene;
+      // team, levels and reward are the authored def's, untouched (R3).
+      const t = { ...def, name: 'Rue & Cole',
+        intro: ['RUE: Fine. FINE. The fun way it is — like always, like every single time!', 'COLE: For the record, I suggested literally any other city.'],
+        lose: ['RUE: Beaten... in our own ambush... the indignity has layers...', 'COLE: Retreat! Again! We are getting uncomfortably good at this part!'] };
+      g.scenes.push(new BattleScene({
+        kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
+        onEnd: (won, fled) => {
+          recordBattleBond(st, 'duo3_celadon', won, fled);
+          if (won && !fled) {
+            resolve();
+            this.taleSay(['They flee toward the Game Corner, arguing about whose idea Celadon was.', 'Some things even a long road cannot fix. Their next ambush, wherever it is, will still be an ambush — but maybe a shorter one.'], '');
+          }
+        },
+      }));
+    };
+    if (tierAtLeast(st, 'rue', 'Warm') && tierAtLeast(st, 'cole', 'Warm')) {
+      say(['...You. Of ALL the street corners in all of Kanto—', 'Wait. Wait wait wait. Before the fun way starts — Cole. Cole, look at them. That is not a mark anymore. That is... the road. The whole road, walking next to us.', 'New plan. No plan. You and us, we are doing something else now: we are TALKING.'], () => {
+        g.ui.showMenu('The duo is actually holding still. You —', [
+          { label: 'Talk them down', value: 'talk' },
+          { label: 'Fight them', value: 'fight' },
+        ], (v) => {
+          if (v === 'fight') { say(['HA! There it is! Some things never change — GOOD. I was getting emotional and I HATED it.'], () => fight()); return; }
+          const r1 = applyBond(st, 'rue', 1);
+          const r2 = applyBond(st, 'cole', 1);
+          if ((r1 && r1.dir) || (r2 && r2.dir)) g.ui.queueBondPip(1);
+          const gotRibbon = grantKeepsake(st, 'secondwindribbon');
+          st.bag.xpcandy = (st.bag.xpcandy || 0) + (gotRibbon ? 1 : 2);
+          resolve();
+          this.taleSay([
+            'You talk. About the ship. The tower. The standing-down on the island that has not even happened yet and somehow already counts.',
+            'Nobody reaches for a Poke Ball. Cole laughs once, surprised at himself. Rue pretends she was never scared of you, badly.',
+            gotRibbon
+              ? 'On the way out, Rue presses something into your hand — a ribbon, road-worn and carefully mended. "Second-Wind," she says. "For the one who keeps getting up. Do NOT make it a thing." It is absolutely a thing.'
+              : 'On the way out, Rue presses two XP Candies into your hand. "For the road," she says. "Do NOT make it a thing." It is absolutely a thing.',
+            'They walk off arguing about lunch. Not running. Walking. (Received an XP Candy for the road — less than a prize fight pays, and worth more.)',
+          ], '');
+        });
+      });
+      return true;
+    }
+    say(['Hold it right there— oh. OH NO. It is the kid. IT IS THE KID, COLE.', 'No disguises this time, no soup course, no dignity: the Game Corner score is OURS and the Pikachu is a bonus!', 'Rue. The kid is doing the stance. The BATTLE stance. I hate the stance.'], () => fight());
+    return true;
+  },
+
+  // ---------- Bonds: gym leader talks (ADR-025 §2) ----------
+  // Post-badge, post-tale leader talks. The first such talk carries the
+  // leader's thanks (+1, one-shot); at Warm+ the leader also presents
+  // their gift (2 XP Candies, one-shot) and the talk itself becomes the
+  // tier-variant rematch BANTER (Warm+ = personal backstory, Cold =
+  // guarded). Nothing here gates rematch availability or anything
+  // else — there is no bond check on any battle, badge, or door (R3 +
+  // the never-gates law); a leader whose tale is unfinished simply
+  // keeps their ordinary post-badge lines.
+  leaderBondTalk(npc) {
+    const g = this.game;
+    const st = g.state;
+    const LEADER_TALE = { brock: 'tale_pewter', misty: 'tale_cerulean', surge: 'tale_vermilion', erika: 'tale_celadon', koga: 'tale_fuchsia', sabrina: 'tale_saffron', blaine: 'tale_cinnabar' };
+    const THANKS = {
+      brock: 'The Curator still brags about the day you covered the desk. The museum remembers, trainer. So does the gym.',
+      misty: 'The whole street heard that bell come home. Cerulean does not forget a sound like that — or who carried it back.',
+      surge: 'The Chairman framed your tide-table delivery receipt. FRAMED it. In the clubhouse. You are harbor legend now, soldier.',
+      erika: 'The roof garden is in full season, thanks to your three waterings. Erika — I — wanted that said out loud.',
+      koga: 'Janine has told the lure story at three family dinners. You are, whether you planned it or not, part of this family\'s archive.',
+      sabrina: 'Two buildings stood apart for twenty years, and a messenger crossed between them in an afternoon. The city noticed.',
+      blaine: 'The lab re-shelved the notes under a new label: "Recovered." Your name is on the shelf card, in the tech\'s best handwriting.',
+    };
+    const taleId = LEADER_TALE[npc.trainer];
+    if (!taleId) return false;
+    if (!st.story.flags['beat_' + npc.trainer]) return false;
+    if (taleStatus(st, taleId) !== 'complete') return false;
+    const id = npc.trainer;
+    const lines = [];
+    const thanks = applyBondOnce(st, 'bondsrc_leader_' + id, id, 1);
+    if (thanks) {
+      if (thanks.dir) g.ui.queueBondPip(thanks.dir);
+      lines.push(THANKS[id]);
+    }
+    if (tierAtLeast(st, id, 'Warm') && !st.story.flags['bondgift_' + id]) {
+      st.story.flags['bondgift_' + id] = true;
+      st.bag.xpcandy = (st.bag.xpcandy || 0) + 2;
+      lines.push('And a gift, trainer to trainer — two XP Candies, from my own stores. No receipt. No IOU. You have earned quieter thanks than a speech.');
+    }
+    const banter = bondSceneLines(st, id, 'banter');
+    if (banter) lines.push(...banter);
+    if (!lines.length) return false;
+    g.ui.say(lines.map((l) => l.replace('{player}', g.state.player.name)), null, npc.name);
+    return true;
   },
 
   // The Pewter museum desk quiz: 3 questions, all from the exhibit

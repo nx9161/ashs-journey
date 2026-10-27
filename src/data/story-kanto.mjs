@@ -6,7 +6,10 @@
 //
 // Event step contract (engine): { say, who } | { battle } | { wildBattle } |
 // { giveMon } | { give } | { flag } | { quest } | { questDone } | { arc } |
-// { heal } | { warp } | { chapterCard } | { toast } | { ending }.
+// { heal } | { warp } | { chapterCard } | { toast } | { ending } |
+// { choice } | { sayVar } — the ADR-025 §2 bond steps: choice points
+// (unlabelled options, deltas <= 2, every option advances the beat) and
+// tier-variant line beats (silent when no variant exists for the tier).
 // Gym aftermath lines live in the trainer defs, NOT here — these events
 // carry the story AROUND the gyms. {player} is the name placeholder,
 // matching dialogue.mjs.
@@ -75,6 +78,11 @@ export const EVENTS = {
     { say: ['I was just up at that cottage on the cape. The researcher there let me scroll his whole database — some of us get the guided tour, {player}.'], who: 'GARY' },
     { say: ['Badges? Funny you should ask. Two already. I would show them off, but the glare might sting your eyes.'], who: 'GARY' },
     { say: ['And this — this is Eevee. Everyone keeps asking why it has not evolved yet.', 'Because I am saving it. Evolution is a promise you make exactly once. When mine happens, it is going to mean something.'], who: 'GARY' },
+    { choice: { npc: 'gary', who: 'GARY', prompt: 'Eevee looks at you, head tilted. You —', options: [
+      { label: 'Ask what Eevee wants', delta: 2, say: ['...What Eevee wants? Nobody asks that. They ask what it will BECOME.', 'Huh. It wants to win, obviously. Like me. ...Thanks for asking, I guess. Do not make it weird.'] },
+      { label: 'Laugh at the speech', delta: -1, say: ['Oh, REAL mature, {player}. Laugh it up. In about ten minutes one of us is going to look extremely stupid, and it is not the one with two badges.'] },
+      { label: 'Say nothing', delta: 0, say: ['...Yeah. You get it. Enough talk, then.'] },
+    ] } },
     { say: ['Enough talk. Show me what the mountain taught you — if it taught you anything.'], who: 'GARY' },
     { battle: 'gary_cerulean' },
     { say: ['Tch. Fine. Take the win and the bridge. Cerulean’s gym is just south — Misty has been bored all week, so try not to disappoint her too quickly.'], who: 'GARY' },
@@ -99,6 +107,10 @@ export const EVENTS = {
     { say: ['You are holding the menu upside down.'], who: 'COLE' },
     { say: ['It is AVANT-GARDE. ...Enough! The disguise was flawless and everyone on this ship knows it. Hand over the Pikachu, {player} — the fun way or the other way!'], who: 'RUE' },
     { battle: 'duo2_vermilion' },
+    { choice: { npc: ['rue', 'cole'], who: 'COLE', prompt: 'The duo is down, dripping, and tangled in a tablecloth. You —', options: [
+      { label: 'Help them up', delta: 2, say: ['...You are helping us? We literally just tried to steal your Pikachu. In waiter costumes.', 'Rue. Rue, the kid is HELPING us. I do not know what to do with that. File it under — under DECENT, I guess.'] },
+      { label: 'Leave them dripping', delta: -1, say: ['Yeah. Yeah, that is fair. That is — ow — that is extremely fair, actually.'] },
+    ] } },
     { say: ['Beaten... on a boat... in front of the soup course...'], who: 'RUE' },
     { say: ['Retreat! Service exit!'], who: 'COLE' },
     { say: ['There IS no service exit, it is a boat—'], who: 'RUE' },
@@ -150,6 +162,10 @@ export const EVENTS = {
     { say: ['Plan B, Cole!'], who: 'RUE' },
     { say: ['We don’t HAVE a Plan B!'], who: 'COLE' },
     { say: ['Then for once in our lives, we improvise. Quietly. RUN.'], who: 'RUE' },
+    { choice: { npc: ['rue', 'cole'], who: '', prompt: 'Their footsteps echo down the tower stairs. You —', options: [
+      { label: 'Call after them: "You do not have to run!"', delta: 1, say: ['The footsteps stop. Just for a second. Somewhere below, a voice — Cole\'s — says, very quietly: "Huh." Then the running resumes, a little slower.'] },
+      { label: 'Let them run', delta: 0, say: ['The tower swallows the sound of them, the way it swallows everything.'] },
+    ] } },
     { say: ['Ah... thank you, young one. They wanted this tower emptied, so that no one would ask what was taken from it. Greed makes such loud ghosts.'], who: 'MR. FUJI' },
     { say: ['You climbed all this way for the lost one below, not for glory. I saw her light rise, you know. First time in years this tower has felt like a beginning instead of an ending.'], who: 'MR. FUJI' },
     { say: ['Take my flute. Its song is older than the tower — sleeping things hear it the way children hear a parent calling them home. Use it kindly.'], who: 'MR. FUJI' },
@@ -184,6 +200,10 @@ export const EVENTS = {
     { say: ['{player}?! What are YOU doing on the eighth floor of a hostage situation?'], who: 'GARY' },
     { say: ['Do not give me that look. I smelled something rotten in Saffron and followed it up the elevator. Say what you want about me — even I do not let uniforms in matching shirts bully a whole company.'], who: 'GARY' },
     { say: ['And before you ask: yes, Eevee is still Eevee. Still saving it. When it changes, it will be because WE decided. Nobody else.'], who: 'GARY' },
+    { choice: { npc: 'gary', who: 'GARY', prompt: 'He is grinning like this is a game. It is not a game. You —', options: [
+      { label: 'Admit you followed the same smell', delta: 1, say: ['HA! Knew it. Two noses, one rotten building. That is us all over, {player} — everyone else smells flowers, we smell a fight.'] },
+      { label: 'Tell him to stay out of your way', delta: -1, say: ['...Wow. Okay. Message received, hero. Do not come crying to the elevator when the top floor eats you.'] },
+    ] } },
     { say: ['Race you to the top floor. Loser buys the lemonade and the winner gets eternal bragging rights.'], who: 'GARY' },
     { battle: 'gary_silph' },
     { say: ['Hah... okay. OKAY. You take the president’s floor. I will hold this elevator so this lot cannot regroup. Go be a hero, {player}.'], who: 'GARY' },
@@ -256,6 +276,10 @@ export const EVENTS = {
     { say: ['Nobody move! This fortress of evil is now under the jurisdiction of— uh...'], who: 'RUE' },
     { say: ['Rue. Rue, read the room. We are surrounded by legend-class Pokemon and a man in a machine. Read. The. Room.'], who: 'COLE' },
     { say: ['...We will be over here. Quietly. Stealing NOTHING. For once, the show is bigger than the theft.'], who: 'RUE' },
+    { choice: { npc: ['rue', 'cole'], who: 'COLE', prompt: 'Across the hall, the duo watches you face the storm. You —', options: [
+      { label: 'Nod to them. Partners, this once.', delta: 1, say: ['Rue nods back, slow and solemn, like a general at a treaty signing. Cole is already crying a little. "We are part of history," he whispers. "Terrible, damp history."'] },
+      { label: 'Face the storm alone', delta: 0, say: ['Some moments are not for sharing. The duo seems to understand — they step back, and give you the whole stage.'] },
+    ] } },
     { say: ['And then — through the rain, small as a soap bubble and twice as unbothered — something pink drifts down and lands on the railing.'], who: 'NARRATOR' },
     { say: ['It looks at the storm. It looks at the armor. It looks at you. It is not afraid of any of it. It wants to PLAY.'], who: 'NARRATOR' },
     { wildBattle: { species: 'mew', level: 50, legendary: true } },
@@ -272,6 +296,10 @@ export const EVENTS = {
     { say: ['Knew I would find you here, {player}. Route 22 — where big talk goes to get measured.'], who: 'GARY' },
     { say: ['The League gate is just ahead, and I am NOT letting you walk through it first. Everything since Pallet Town comes down to who is still standing after this.'], who: 'GARY' },
     { say: ['And before you ask — yes, Eevee is still Eevee. I am saving its evolution for the League itself. When the whole region is watching. It deserves an entrance.'], who: 'GARY' },
+    { choice: { npc: 'gary', who: 'GARY', prompt: 'The League gate glitters at the top of the road. You —', options: [
+      { label: 'Wish him luck — and mean it', delta: 1, say: ['...Luck. HAH. I do not need— ...yeah. Yeah, okay. You too, {player}. Mean it back. Do not waste it.'] },
+      { label: 'Promise to end his run here', delta: -1, say: ['Big words. You have been promising that since Pallet Town, and somehow we are BOTH still standing. Make it count this time.'] },
+    ] } },
     { battle: 'gary_r22_final' },
     { say: ['Tch! Fine — warm-up over anyway. First one to the top of the Plateau wins everything. Do not be late, {player}.'], who: 'GARY' },
     { flag: 'rival_route22_done' },
@@ -329,8 +357,13 @@ export const EVENTS = {
     { say: ['...You actually did it. Four of them. In a row. I had a whole speech for this moment and I have forgotten every word of it.'], who: 'GARY' },
     { say: ['Fine. No speech. Just this: I saved my partner’s evolution for the biggest stage there is. No more waiting. It is time — OUR time.'], who: 'GARY' },
     { say: ['Whatever stands across from you now, {player} — that is us, finished deciding. Come and take the crown. If you can.'], who: 'GARY' },
+    { choice: { npc: 'gary', who: 'GARY', prompt: 'The crown, the crowd, the whole road behind you both. You —', options: [
+      { label: 'Tell him: "Wouldn\'t be here without you."', delta: 1, say: ['...Do NOT get sentimental on me before the biggest battle of our lives, {player}. ...Save it for after. When I have won. Obviously.'] },
+      { label: 'Say nothing. Battle says it.', delta: 0, say: ['...Yeah. Yeah, that is the most {player} thing you have ever not said. Come on, then.'] },
+    ] } },
     { battle: 'gary_champion' },
     { say: ['...Yeah. Yeah, okay. It had to be you, did it not. Champion. Ha! Say it back to me when we are old, {player}. I will still be one win behind, and twice as loud about it.'], who: 'GARY' },
+    { sayVar: { npc: 'gary', scene: 'championAfter', who: 'GARY' } },
     { flag: 'champion' },
     { questDone: 'q_champion' },
     { ending: true },

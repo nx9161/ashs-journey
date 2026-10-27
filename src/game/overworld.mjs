@@ -10,6 +10,7 @@ import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
 import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { TALE_NPCS, TALE_NPC_PATCHES } from '../data/quests.mjs';
+import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from './bonds.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { BattleScene } from './battle.mjs';
@@ -74,6 +75,12 @@ export class OverworldScene {
       const taleNpcs = TALE_NPCS.filter((n) => n.map === id);
       if (taleNpcs.length) {
         npcs = [...npcs, ...taleNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
+        changed = true;
+      }
+      // ADR-025 §2 (Bonds): the Celadon parley pair stand in Celadon
+      // only while their scene is unresolved (post-St. Anne window).
+      if (id === 'celadon' && parleyVisible(this.game.state)) {
+        npcs = [...npcs, ...PARLEY_NPCS.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
       if (changed) this.map = { ...this.map, npcs };
@@ -447,9 +454,17 @@ export class OverworldScene {
       g.ui.say(npc.dialogue.slice(1), null, npc.name);
       return;
     }
-    const t = TRAINERS[npc.trainer];
+    // ADR-025 §2: Gary's intro/lose TEXT varies by bond tier (a cloned
+    // def — team/AI/stats are the authored def's own, R3); the battle's
+    // first outcome feeds the rival/duo ledger as a bond SOURCE. The
+    // recording lives here, in the layer that constructs the battle —
+    // the battle code itself never reads a bond value.
+    const t = bondTrainerVariant(g.state, TRAINERS[npc.trainer]);
     g.ui.say(t.intro, () => {
-      g.scenes.push(new BattleScene({ kind: 'trainer', trainer: t, returnTo: this, rt: g.state.settings.battleStyle !== 'classic' }));
+      g.scenes.push(new BattleScene({
+        kind: 'trainer', trainer: t, returnTo: this, rt: g.state.settings.battleStyle !== 'classic',
+        onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); },
+      }));
     }, npc.name);
   }
 
