@@ -1,0 +1,23 @@
+# Wave 5a: Gym floor v1 — warm sport wood
+PIX tile-gymfloor-1 16 16
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaacaaaa
+aacaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbcbbbbbbbb
+aaaaaaaaaaaaaaca
+aaaaaaaaaaaaaaaa
+acaaaaaaaaaaaaaa
+aaaaaaaaaaaaacaa
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaacaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #c9a06a gym-wood
+b #a87f4e gym-board-line
+c #d8c08a gym-worn
+d #f5f0dc gym-court-line

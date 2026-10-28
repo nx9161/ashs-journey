@@ -1601,7 +1601,7 @@ export class BattleScene {
       ow.player.fx = 4; ow.player.fy = 3;
       ow.trail = [];
       ow.healParty(false);
-      g.state.story.position = { map: 'center', x: 4, y: 3, dir: 'down' };
+      g.state.story.position = { map: 'center', x: 4, y: 4, dir: 'down' };
       g.ui.toast('Your Pokemon were healed. (Lost half your money.)');
     });
   }

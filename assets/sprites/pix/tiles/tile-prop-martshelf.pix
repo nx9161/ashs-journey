@@ -1,0 +1,25 @@
+# Wave 5a prop: Mart shelving — stocked goods rows
+PIX tile-prop-martshelf 16 16
+................
+.bbbbbbbbbbbbbb.
+.aaaaaaaaaaaaaa.
+.aaaaaaaaaaaaaa.
+.afcdefcdefcdea.
+.adefcdefcdefca.
+.aaaaaaaaaaaaaa.
+.aaaaaaaaaaaaaa.
+.afcdefcdefcdea.
+.adefcdefcdefca.
+.aaaaaaaaaaaaaa.
+.aaaaaaaaaaaaaa.
+.afcdefcdefcdea.
+.adefcdefcdefca.
+.aaaaaaaaaaaaaa.
+.bbbbbbbbbbbbbb.
+PAL
+a #5f748f mart-shelf-frame
+b #c2c8d4 mart-shelf-trim
+c #d84040 goods-red
+d #f0e060 goods-yellow
+e #6fb0ee goods-blue
+f #e86a8a goods-pink

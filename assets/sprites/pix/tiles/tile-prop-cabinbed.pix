@@ -1,0 +1,24 @@
+# Wave 5a prop: S.S. Anne cabin bed — red-striped nautical blanket, brass rail
+PIX tile-prop-cabinbed 16 16
+.eeeeeeeeeeeeee.
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..cccccccccccc..
+..cccccccccccc..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..dddddddddddd..
+..dddddddddddd..
+................
+PAL
+a #f5f0dc cabin-pillow
+b #eef7ff cabin-sheet
+c #d84040 cabin-stripe
+d #7a5a38 cabin-frame
+e #ffd873 cabin-brass

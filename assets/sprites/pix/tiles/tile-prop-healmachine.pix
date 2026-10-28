@@ -1,0 +1,24 @@
+# Wave 5a prop: Healing machine — screen with red cross, tray
+PIX tile-prop-healmachine 16 16
+................
+..aaaaaaaaaaaa..
+..abbbbbbbbbba..
+..abbbbccbbbba..
+..abbbccccbbba..
+..abbbccccbbba..
+..abbbbccbbbba..
+..abbbbbbbbbba..
+..aaaaaaaaaaaa..
+..aaddddddddaa..
+..aaddddddddaa..
+..aaaaaaaaaaaa..
+..aaeeeeeeeeaa..
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..eeeeeeeeeeee..
+PAL
+a #c2c8d4 heal-body
+b #3fa08a heal-screen
+c #d84040 heal-cross
+d #5f748f heal-tray
+e #6a6a80 heal-base

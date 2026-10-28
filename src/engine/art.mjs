@@ -277,6 +277,27 @@ const TILE_ART = {
   towerwall: 'tile-towerwall', towerfloor: 'tile-towerfloor-1',
   silphwall: 'tile-silphwall', silphfloor: 'tile-silphfloor-1',
   plantwall: 'tile-plantwall', plantfloor: 'tile-plantfloor-1',
+  // Wave 5a interiors: per-family tilesets + the prop library. Kind ->
+  // tile-<kind> for walls; floors resolve through their variant lists;
+  // props are tile-prop-<kind> (composited over their floor, below).
+  centerfloor: 'tile-centerfloor-1', centerwall: 'tile-centerwall',
+  martfloor: 'tile-martfloor-1', martwall: 'tile-martwall',
+  housefloor: 'tile-housefloor-1', housewall: 'tile-housewall',
+  gymfloor: 'tile-gymfloor-1', gymwallin: 'tile-gymwallin',
+  labfloor: 'tile-labfloor-1', labwall: 'tile-labwall',
+  annewall: 'tile-annewall', leaguewall: 'tile-leaguewall',
+  counter: 'tile-prop-counter', healmachine: 'tile-prop-healmachine',
+  pcdesk: 'tile-prop-pcdesk', bed: 'tile-prop-bed', table: 'tile-prop-table',
+  chair: 'tile-prop-chair', shelf: 'tile-prop-shelf', plant: 'tile-prop-plant',
+  martshelf: 'tile-prop-martshelf', goods: 'tile-prop-goods',
+  podium: 'tile-prop-podium', statue: 'tile-prop-statue',
+  badgecase: 'tile-prop-badgecase', labmachine: 'tile-prop-labmachine',
+  labtank: 'tile-prop-labtank', labdesk: 'tile-prop-labdesk',
+  cabinbed: 'tile-prop-cabinbed', cabintable: 'tile-prop-cabintable',
+  porthole: 'tile-prop-porthole', slotmachine: 'tile-prop-slotmachine',
+  throne: 'tile-prop-throne', memorial: 'tile-prop-memorial',
+  officedesk: 'tile-prop-officedesk', sofa: 'tile-prop-sofa',
+  stool: 'tile-prop-stool', rug: 'tile-prop-rug', battlemat: 'tile-prop-battlemat',
 };
 
 // Wave 2: kinds that are part of a building (for ground-shadow anchoring
@@ -343,6 +364,17 @@ export function buildArtTileCache(doc) {
   if (cache.silphFloorVariants.length) cache.silphfloor = cache.silphFloorVariants[0];
   cache.plantFloorVariants = ids(['tile-plantfloor-1', 'tile-plantfloor-2']);
   if (cache.plantFloorVariants.length) cache.plantfloor = cache.plantFloorVariants[0];
+  // Wave 5a interior floor variants (2 per family, spread-hash picked).
+  cache.centerFloorVariants = ids(['tile-centerfloor-1', 'tile-centerfloor-2']);
+  if (cache.centerFloorVariants.length) cache.centerfloor = cache.centerFloorVariants[0];
+  cache.martFloorVariants = ids(['tile-martfloor-1', 'tile-martfloor-2']);
+  if (cache.martFloorVariants.length) cache.martfloor = cache.martFloorVariants[0];
+  cache.houseFloorVariants = ids(['tile-housefloor-1', 'tile-housefloor-2']);
+  if (cache.houseFloorVariants.length) cache.housefloor = cache.houseFloorVariants[0];
+  cache.gymFloorVariants = ids(['tile-gymfloor-1', 'tile-gymfloor-2']);
+  if (cache.gymFloorVariants.length) cache.gymfloor = cache.gymFloorVariants[0];
+  cache.labFloorVariants = ids(['tile-labfloor-1', 'tile-labfloor-2']);
+  if (cache.labFloorVariants.length) cache.labfloor = cache.labFloorVariants[0];
   // Legacy single-tile callers (rustle overlay) get a tufted tile: the
   // rustle draws over the player's grass cell, which is tufted now.
   if (cache.tallVariants.length) cache.grass = cache.tallVariants[0];
@@ -392,11 +424,24 @@ const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall'
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
+  centerfloor: 'centerFloorVariants', martfloor: 'martFloorVariants',
+  housefloor: 'houseFloorVariants', gymfloor: 'gymFloorVariants', labfloor: 'labFloorVariants',
 };
+// Wave 5a: interior floor kinds are ground families of their own (a prop
+// inside a Center stands on Center floor, never on grass or path), and
+// interior walls cast the shared shadow strip onto the floor below.
+const INTERIOR_FLOORS = new Set(['centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']);
+const INTERIOR_WALLS = new Set(['centerwall', 'martwall', 'housewall', 'gymwallin', 'labwall', 'annewall', 'leaguewall']);
+const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
+  'chair', 'shelf', 'plant', 'martshelf', 'goods', 'podium', 'statue',
+  'badgecase', 'labmachine', 'labtank', 'labdesk', 'cabinbed', 'cabintable',
+  'porthole', 'slotmachine', 'throne', 'memorial', 'officedesk', 'sofa',
+  'stool', 'rug', 'battlemat']);
 function groundFamilyOf(kind) {
   if (kind === 'grass' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
       kind === 'fence' || kind === 'lamp' || kind === 'flowerbed') return 'grass';
   if (kind === 'cavefloor' || kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') return kind;
+  if (INTERIOR_FLOORS.has(kind)) return kind;
   if (kind === 'path' || isArchKind(kind)) return 'path';
   return null;
 }
@@ -538,8 +583,28 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       if (hashTileSpread(x, y, 62) < 0.10 && cache.detail && cache.detail.pebbles) layers.push(cache.detail.pebbles);
       return layers.filter(Boolean);
     }
+    case 'centerfloor': case 'martfloor': case 'housefloor': case 'gymfloor': case 'labfloor': {
+      // Wave 5a interior floors: own variant pair; an interior or
+      // dungeon wall directly north casts the shared shadow strip.
+      // Interiors are swept — no pebble detail indoors.
+      const layers = [groundBase(cache, kind, x, y)];
+      if ((INTERIOR_WALLS.has(nb.n) || DUNGEON_WALLS.has(nb.n)) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      return layers.filter(Boolean);
+    }
     case 'tree': case 'rock': case 'caveboulder': case 'sign': case 'flower':
-    case 'fence': case 'lamp': case 'flowerbed': {
+    case 'fence': case 'lamp': case 'flowerbed':
+    // Wave 5a props: furniture composites over the floor it stands on,
+    // exactly like the outdoor objects above (transparent surrounds in
+    // the .pix; the ground layer comes from the neighbours, interior
+    // floor families included). Rugs / battle mats are walkable
+    // dressings drawn the same way, over their floor.
+    case 'counter': case 'healmachine': case 'pcdesk': case 'bed':
+    case 'table': case 'chair': case 'shelf': case 'plant':
+    case 'martshelf': case 'goods': case 'podium': case 'statue':
+    case 'badgecase': case 'labmachine': case 'labtank': case 'labdesk':
+    case 'cabinbed': case 'cabintable': case 'porthole': case 'slotmachine':
+    case 'throne': case 'memorial': case 'officedesk': case 'sofa':
+    case 'stool': case 'rug': case 'battlemat': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -549,7 +614,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       if (!ground) {
         const counts = {};
         for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
-        ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor']
+        ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor',
+          'centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']
           .filter((f) => counts[f]).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
       }
       const layers = [];

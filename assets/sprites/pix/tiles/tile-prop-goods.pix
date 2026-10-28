@@ -1,0 +1,26 @@
+# Wave 5a prop: Goods display — glass counter with colorful stock
+PIX tile-prop-goods 16 16
+................
+................
+................
+................
+................
+aaaaaaaaaaaaaaaa
+adefgdefgdefgdea
+aaaaaaaaaaaaaaaa
+bbbbbcbbbbbcbbbb
+bbbbbcbbbbbcbbbb
+bbbbbcbbbbbcbbbb
+bbbbbcbbbbbcbbbb
+bbbbbcbbbbbcbbbb
+bbbbbcbbbbbcbbbb
+cccccccccccccccc
+cccccccccccccccc
+PAL
+a #6fb0ee goods-glass
+b #2e7a6a goods-case
+c #1f5a4c goods-shadow
+d #d84040 goods-red
+e #f0e060 goods-yellow
+f #e86a8a goods-pink
+g #ffd873 goods-gold

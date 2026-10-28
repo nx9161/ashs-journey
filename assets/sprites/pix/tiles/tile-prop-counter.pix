@@ -1,0 +1,23 @@
+# Wave 5a prop: Center counter — cream slab, rosewood panels
+PIX tile-prop-counter 16 16
+................
+................
+................
+................
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+cccccdcccccdcccc
+cccccdcccccdcccc
+cccccdcccccdcccc
+cccccdcccccdcccc
+cccccdcccccdcccc
+cccccdcccccdcccc
+cccccdcccccdcccc
+dddddddddddddddd
+dddddddddddddddd
+PAL
+a #f5f0dc counter-top
+b #c97e97 counter-edge
+c #c96a52 counter-panel
+d #7a3226 counter-shadow

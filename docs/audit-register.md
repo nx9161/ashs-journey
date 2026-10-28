@@ -1545,3 +1545,190 @@ dialogue, or pacing changed; nothing deployed. All art is original
 - Cave floor speckle is denser than the outdoor path texture —
   deliberate (dusty, pebble-strewn), and all three variants share
   the same base so floors read as one material.
+
+## World Art Wave 5a — Interior Tilesets, Furniture, Existing Interiors Dressed (2026-10-28)
+
+Source of truth: `ashs-journey-qa/world-art-census.md` §3 (interiors
+row) + §4 Wave 5. Scope honored: EXISTING interior maps only — no new
+maps built, no NPC moved between maps (Wave 5b owns the new house +
+Mart interiors; the Mart tileset ships here, its map does not).
+Presentation + map-arrangement only, plus two small interaction
+repairs the dressing required (§5). Nothing deployed.
+
+### 1. Interior tilesets — 5 families, 17 tiles
+
+- **Pieces:** per family a floor in **2 variants** + a wall with
+  crown band, panel seams and baseboard trim: Center (`tile-centerfloor-1/2`,
+  `tile-centerwall` — cream-rose floor, rose wall), Mart
+  (`tile-martfloor-1/2`, `tile-martwall` — pale sage floor, teal wall;
+  map arrives in 5b, exercised here by the Game Corner), house
+  (`tile-housefloor-1/2` wood planks, `tile-housewall` warm plaster),
+  gym (`tile-gymfloor-1/2` sport wood, `tile-gymwallin` stone with red
+  accent), lab (`tile-labfloor-1/2` slate panels, `tile-labwall`).
+  Two further walls ride the same system: S.S. Anne `tile-annewall`
+  (ship wood, brass studs) and League `tile-leaguewall` (dark stone,
+  gold crown, purple trim).
+- **New chars, collision class carried by the char:** floors
+  `! $ * + -` joined `WALKABLE` (each swapped 1:1 from the walkable
+  `.` floor); walls `: ; < = > ? ^` are wall class. Wave 4's Tower /
+  Silph / Power Plant sets (`M/Q`, `I/%`, `@/&`) are untouched and
+  only gain furniture (§3).
+- **Resolver:** interior floors pick their variant pair by the Wave 4
+  spread hash and take the shared shadow strip under a wall; props
+  composite over the floor they stand on via the Wave 1
+  object-over-ground path, with the five interior floors added as
+  ground families — a plant in a Center stands on Center floor,
+  never on grass. `paintTile` fallbacks exist for every new kind.
+
+### 2. Prop / furniture library — 27 kinds
+
+`counter` (Center counter), `healmachine` (healing machine, red-cross
+screen), `pcdesk` (PC desk — sits beside the PC Terminal NPC, whose
+own art is the Wave 0 `npc-pc` pair), `bed`, `table`, `chair`,
+`shelf` (bookshelf), `plant`, `martshelf` (Mart shelving), `goods`
+(glass goods counter), `podium`, `statue`, `badgecase`, `labmachine`,
+`labtank`, `labdesk`, `cabinbed` + `cabintable` + `porthole` (S.S.
+Anne cabin set), `slotmachine` (Game Corner), `throne` (League),
+`memorial` (Tower gravestone), `officedesk` (Silph), `sofa`, `stool`,
+plus the two walkable dressings `rug` and `battlemat`. **25 solid +
+2 walkable = 27 kinds** (library target ≥25). Solidity: every prop
+char is non-walkable except `)` rug and `/` battle mat, which joined
+`WALKABLE`. Prop chars are Greek letters (+ `(` stool) — the ASCII
+letter/digit space was already exhausted by Waves 1–4; the legend
+lives in `src/engine/tiles.mjs` at the `TILE_CHARS` Wave 5a block.
+
+### 3. Per-interior dressing (20 interiors; every one ≥6 distinct props)
+
+- **Center (shared, all towns):** rose walls + cream-rose floor;
+  nurse behind the **counter** (`α` at (4,3)/(5,3)) with the
+  **healing machine** at (5,1), PC desk beside the PC Terminal,
+  plant, sofa, chair — 6 prop kinds + the terminal itself. The first
+  heal reads instantly: counter in front, machine behind.
+- **All 8 gyms:** stone walls + sport-wood floor; podium pair
+  flanking each leader, battle mat on the center aisle, badge case,
+  plant, entrance rugs — 6 kinds each (7 in Vermilion/Fuchsia).
+  Type flavour within the shared system: Pewter/Viridian statues
+  replace their rocks 1:1; Cerulean keeps its pools; Vermilion's
+  rocks become generator machines; Celadon's flowers become rugs
+  (walkable→walkable) + plants + a goods display; Saffron/Cinnabar
+  keep their quiz signs (statues/machines replace rocks); Fuchsia
+  adds a lab tank.
+- **S.S. Anne:** ship-wood walls, porthole pair, four cabin alcoves
+  (cabin beds / cabin table / plants replacing the flavor door
+  stamps), hall table + chair — 6 kinds.
+- **Game Corner:** Mart-family walls/floor; the four slot signs are
+  now slot machines (same cells, same solidity, sign texts intact),
+  goods display, lounge table + chair, plants, rug — 6 kinds.
+- **Hideout:** lab walls/floor; machines, crate rows (goods), tanks,
+  office desk, PC desk, chair — 6 kinds. The Silph Scope item tile
+  and both event tiles are untouched.
+- **Dojo:** gym set; podiums, statues, benches, big battle mat,
+  shelf, plants — 6 kinds.
+- **Silph 1/2 (Wave 4 floors kept):** machines replace the office
+  rocks; the four Silph-1 storage rocks beside staff became floor
+  (they sat on NPC-adjacent cells — opening them was the only legal
+  dressing); office desks, PC desk, chairs, table, plants — 6 kinds.
+- **Tower 1/2 (Wave 4 set kept):** memorial stones, offering table,
+  prayer shelf, bench/chair, plants, runner rugs — 6 kinds; the
+  gravestone signs keep their cells and texts.
+- **Mansion:** house walls/floors; bookshelves on the diary alcoves,
+  lab tanks across the center, machines, ruined bed, table, plant —
+  6 kinds; both diary signs stay readable on their (now shelved /
+  tanked) cells.
+- **League:** league walls, gym floor; throne behind the Champion
+  (diagonal cell — never on an NPC-adjacent cell), statues, chamber
+  battle mats (row 4; the row-5 chamber event tiles are untouched),
+  badge case, plants, rugs — 6 kinds. The interior `#` pillar trees
+  are now league-wall stone.
+- **Power Plant (Wave 4 set kept):** all twelve rocks are now
+  generator machines; tank, office desk, PC desk, chair, rug —
+  6 kinds.
+
+### 4. Palette — ONE deliberate raise, +6 (48 → 54)
+
+Tiles-family union **48/48 → 54/54**. Exactly six new hexes, counted
+from the authored tiles: Center rose set — floor `#f2ddd5`, wall
+`#e8b4c4`, mid `#c97e97`, baseboard `#9e5570`; Mart sage floor
+`#cfd4c2`; League purple trim `#6a4a7a`. Every other Wave 5a hex
+reuses the existing union (woods, stones, slates, teals, golds).
+The raise is documented at the budget in
+`assets/sprites/tools/build-art.mjs`; no headroom banked.
+
+### 5. Interaction repairs the dressing required (flagged, minimal)
+
+- **Over-counter talk:** the nurse's counter sits on her south cell
+  (4,3) — the task's own nurse + counter adjacency requirement. Heal
+  access is preserved exactly: `tryInteract` / `interactPrompt` now
+  look one tile past a faced counter (`α`) to an NPC beyond it, the
+  canonical Center mechanic. Drive-proven (§6). This is the single
+  deliberate exception to the no-prop-on-NPC-adjacent rule, and it
+  exists because the brief simultaneously bans the cell and demands
+  the counter on it; every other NPC in the game keeps all four
+  adjacent cells prop-free (asserted in the pass script).
+- **Blackout respawn landing:** (4,3) became the counter, so the
+  defeat respawn in `battle.mjs` / `overworld-systems.mjs` moves
+  one tile south to (4,4) — the Center's own standard landing, used
+  by all ten town warps. No test asserted the old cell.
+
+### 6. Audits (Wave 2 non-circular method)
+
+- **Reachability** (`~/workspace/w2fix/audit.mjs`): warp triggers
+  **226/229 reachable; unreachable set exactly the pre-existing
+  {victoryroad@(17,5), newisland pair}**; single-point scan **0**.
+  Door approaches: the only delta vs HEAD is S.S. Anne's eight
+  flavor door stamps converted to cabin furniture (110 → 102 door
+  cells, all eight formerly approachable; the no-approach set is
+  the identical pre-existing 6).
+- **Adjacency audit** (NPC-blocked BFS over all 20 dressed
+  interiors): every NPC, sign, item and event tile has a reachable
+  interaction cell — **ALL PASS**. (First run caught two quiz signs
+  whose last free neighbour my podium placements had taken in
+  Saffron/Cinnabar; podiums moved one tile, re-audited clean.)
+- **Dressing census:** ≥6 distinct prop kinds in **every** dressed
+  interior (table in §3); **zero tree tiles** (`#`/`T`) inside any
+  of the 20, and zero inside any indoor map that Wave 4 had already
+  claimed.
+- **Interaction drives** (headless, real bundle): heal over the
+  counter from the (4,4) landing restores a hurt party **✓**; PC
+  Terminal prompt + response **✓**; talking to Brock starts his
+  battle **✓** — 8/8 drive checks.
+- **Regen safety:** ART keys **362 → 406 (+44: 17 tileset + 27
+  props), zero lost**; build-art run twice = byte-identical.
+- **Copies:** every source copy of the 20 interiors carries
+  row-identical dressing (Wave 4 discipline), except two
+  pre-existing divergent loser copies (maps2 gym-viridian, 10 rows;
+  maps2 league, 21 rows — different geometry at HEAD, never the
+  merged runtime) which were dressed in place at the same
+  coordinates instead of being overwritten with foreign geometry.
+
+### 7. Bytes + battery
+
+- **Bytes:** `art-data.mjs` 330,397 → **352,733 B (+22,336)**;
+  `public/game.js` 1,575,864 → **1,606,131 B (+30,267)** — inside
+  the 5a guide (~32,000), leaving **14,733 B** of the 45,000 B
+  Wave 5 total for 5b. Built vercel+guest only; **personal/
+  byte-identical to HEAD** (restored after the battery; content-hash
+  personal line restored to the HEAD value). Nothing deployed.
+- **Battery (public):** rejuv-phase1 **44/44** · phase2 **42/42** ·
+  phase3 **63/63** · phase4 **53/53** · phase5 **55/55** · phase6
+  **46/46** · fidelity **35/35** · campaign-smoke **24/24** ·
+  audit-headless **17/17** · audit-laptop public **41/41** ·
+  verify-slice **48/48** · qa-slice **134/134** · validator test
+  **51/51** · validator fuzz **2000/2000** · save-contract **6/6**
+  · Track B **114/114** · budgets-check **all gates pass** ·
+  contamination **clean** · drift-gate guest ≡ strip(vercel) PASS ·
+  qa-changed-flows **55/57, failures exactly the standing baseline
+  {b2, d9}**.
+
+### Flags / deviations
+
+- The Mart interior MAP and enterable house interiors are **not**
+  in this commit — they are Wave 5b content, per the brief's split.
+  The Mart tileset + Mart prop kinds ship now and are exercised by
+  the Game Corner dressing.
+- The nurse-counter exception and the respawn-landing move (§5)
+  are the only gameplay-adjacent touches; both are required by the
+  brief's own Center spec and both are drive-proven.
+- Prop chars are Greek letters (see §2) — a legend is mandatory
+  reading before hand-editing interior rows; it is recorded in
+  `tiles.mjs` at the char table.

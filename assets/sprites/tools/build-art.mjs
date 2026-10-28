@@ -93,7 +93,15 @@ function main() {
   // capped at 48 distinct hexes. Other families are bounded by the
   // per-sprite cap (32) alone; a family that needs a union budget gets
   // its own entry here, deliberately, never by silently widening this one.
-  const FAMILY_PALETTE_BUDGETS = { tiles: 48 };
+  // Wave 5a raise (2026-10-28, the ONE deliberate raise for interiors):
+  // 48 -> 54. The interior families need hues the outdoor union never
+  // had: the Center's rose set (floor #f2ddd5, wall #e8b4c4, mid
+  // #c97e97, baseboard #9e5570), the Mart's pale sage floor (#cfd4c2),
+  // and the League's purple trim (#6a4a7a) — exactly 6 new hexes,
+  // counted from the Wave 5a tiles as authored; every other Wave 5a
+  // hex reuses the existing 48. Sized to the real need, no headroom
+  // banked for future waves.
+  const FAMILY_PALETTE_BUDGETS = { tiles: 54 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

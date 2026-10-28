@@ -1,0 +1,23 @@
+# Wave 5a prop: Bed — pillow, blue blanket, wood frame
+PIX tile-prop-bed 16 16
+.dddddddddddddd.
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..cccccccccccc..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..cccccccccccc..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..bbbbbbbbbbbb..
+..dddddddddddd..
+..dddddddddddd..
+................
+PAL
+a #f5f0dc bed-pillow
+b #3a7bd5 bed-blanket
+c #6fb0ee bed-stripe
+d #7a5a38 bed-frame

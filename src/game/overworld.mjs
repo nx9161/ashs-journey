@@ -417,7 +417,13 @@ export class OverworldScene {
     if (fx === ptx && fy === pty) return this.petPartner();
     // Systems interactions (item balls, hidden items, field moves, fishing)
     if (this.sysInteract && this.sysInteract(fx, fy)) return true;
-    const npc = this.npcAt(fx, fy);
+    // Wave 5a: the Center counter (tile char '\u03b1') is furniture the
+    // nurse stands BEHIND — talking over it is the canonical Center
+    // interaction. If the faced tile is a counter and an NPC stands
+    // directly beyond it, interact with that NPC. Counters with no one
+    // beyond them stay inert scenery.
+    const facedNpc = this.npcAt(fx, fy);
+    const npc = facedNpc || ((this.tileAt(fx, fy) === '\u03b1') ? this.npcAt(fx + dx, fy + dy) : null);
     if (npc) {
       if (this.sysNpc && this.sysNpc(npc)) return true;
       if (npc.trainer) { this.startTrainerBattle(npc); return true; }
@@ -689,7 +695,8 @@ export class OverworldScene {
     const fx = p.tx + dx, fy = p.ty + dy;
     const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
     if (fx === ptx && fy === pty) return 'A: Pet';
-    const facedNpc = this.npcAt(fx, fy);
+    const facedNpc = this.npcAt(fx, fy)
+      || ((this.tileAt(fx, fy) === '\u03b1') ? this.npcAt(fx + dx, fy + dy) : null);
     if (facedNpc) return facedNpc.pc ? 'A: PC' : 'A: Talk'; // UI v2.3: the storage terminal names itself
     if (this.signAt(fx, fy)) return 'A: Read';
     return null;

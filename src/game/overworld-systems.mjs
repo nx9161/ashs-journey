@@ -1618,7 +1618,7 @@ Object.assign(OverworldScene.prototype, {
       this.player.fx = 4; this.player.fy = 3;
       this.trail = [];
       this.healParty(false);
-      g.state.story.position = { map: 'center', x: 4, y: 3, dir: 'down' };
+      g.state.story.position = { map: 'center', x: 4, y: 4, dir: 'down' };
       g.ui.toast('Your Pokemon were healed. (Lost half your money.)');
     });
   },

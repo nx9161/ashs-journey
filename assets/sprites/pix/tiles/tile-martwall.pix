@@ -1,0 +1,24 @@
+# Wave 5a: Mart wall — teal panels, cream trim
+PIX tile-martwall 16 16
+cccccccccccccccc
+cccccccccccccccc
+tttttttttttttttt
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+tttttttttttttttt
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+f #2e7a6a mart-wall
+c #3fa08a mart-crown
+t #f5f0dc mart-trim
+s #1f5a4c mart-seam
+b #1f5a4c mart-baseboard

@@ -142,13 +142,13 @@ export const MAPS = {
   center: {
     id: 'center', name: 'Pokemon Center', music: 'center-theme', indoor: true,
     rows: rows([
-      '##########',
-      '#........#',
-      '#........#',
-      '#........#',
-      '#........#',
-      '#...DD...#',
-      '##########',
+      '::::::::::',
+      ':θ!!!β!!γ:',
+      ':!!!!!!!!:',
+      ':!!!αα!!!:',
+      ':ω!!!!!!ζ:',
+      ':!!!DD!!!:',
+      '::::::::::',
     ]),
     warps: [
       { x: 4, y: 5, to: { map: 'viridian', x: 7, y: 6 } },
@@ -285,15 +285,15 @@ export const MAPS = {
   gym: {
     id: 'gym', name: 'Pewter Gym', music: 'gym-theme', indoor: true,
     rows: rows([
-      '############',
-      '#..........#',
-      '#.R......R.#',
-      '#..........#',
-      '#..........#',
-      '#..........#',
-      '#..........#',
-      '#..........#',
-      '#####..#####',
+      '============',
+      '=ν++λ+λ+++θ=',
+      '=+μ++++++μ+=',
+      '=++++++++++=',
+      '=++++//++++=',
+      '=++++//++++=',
+      '=++++//++++=',
+      '=+++)++)+++=',
+      '=====++=====',
     ]),
     warps: [
       { x: 5, y: 8, to: { map: 'pewter', x: 6, y: 4 } },
@@ -320,7 +320,11 @@ export const MAP_LIST = Object.keys(MAPS);
 export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9',
   // Wave 4 dungeon floors: cave L, Tower Q, Silph %, Plant & — each was
   // swapped 1:1 from the walkable '.' floor char, so floor stays floor.
-  'L', 'Q', '%', '&']);
+  'L', 'Q', '%', '&',
+  // Wave 5a interior floors (center !, mart $, house *, gym +, lab -)
+  // swapped 1:1 from the walkable '.' floor char, plus the two walkable
+  // dressings: ')' rug and '/' battle mat.
+  '!', '$', '*', '+', '-', ')', '/']);
 
 // Trainer definitions for the slice.
 // ai: 'opener-setup' = gym-leader flavor: open with a self-buff setup move if known

@@ -35,6 +35,26 @@ export const TILE_CHARS = {
   M: 'towerwall', Q: 'towerfloor',
   I: 'silphwall', '%': 'silphfloor',
   '@': 'plantwall', '&': 'plantfloor',
+  // Wave 5a interiors: dedicated tilesets per building family. Floor
+  // chars are floor class (WALKABLE); wall chars are wall class. Prop
+  // chars (Greek letters + '(' stool) are object class — solid except
+  // the two walkable dressings ')' rug and '/' battle mat. Each prop
+  // kind composites over the floor it stands on (art.mjs resolver).
+  '!': 'centerfloor', ':': 'centerwall',
+  '$': 'martfloor', ';': 'martwall',
+  '*': 'housefloor', '<': 'housewall',
+  '+': 'gymfloor', '=': 'gymwallin',
+  '-': 'labfloor', '>': 'labwall',
+  '?': 'annewall', '^': 'leaguewall',
+  '\u03b1': 'counter', '\u03b2': 'healmachine', '\u03b3': 'pcdesk',
+  '\u03b4': 'bed', '\u03b5': 'table', '\u03b6': 'chair', '\u03b7': 'shelf',
+  '\u03b8': 'plant', '\u03b9': 'martshelf', '\u03ba': 'goods',
+  '\u03bb': 'podium', '\u03bc': 'statue', '\u03bd': 'badgecase',
+  '\u03be': 'labmachine', '\u03bf': 'labtank', '\u03c0': 'labdesk',
+  '\u03c1': 'cabinbed', '\u03c3': 'cabintable', '\u03c4': 'porthole',
+  '\u03c5': 'slotmachine', '\u03c6': 'throne', '\u03c7': 'memorial',
+  '\u03c8': 'officedesk', '\u03c9': 'sofa', '(': 'stool',
+  ')': 'rug', '/': 'battlemat',
 };
 
 const PAL = {
@@ -129,7 +149,22 @@ export function paintTile(ctx, kind, px, py) {
       r(0, 0, T, T, kind === 'silphfloor' ? '#c2c8d4' : kind === 'towerfloor' ? PAL.rockBase : '#46586e');
       r(0, 7, T, 1, PAL.rockDark); r(7, 0, 1, 7, PAL.rockDark);
       break;
+    case 'centerfloor': case 'martfloor': case 'housefloor': case 'gymfloor': case 'labfloor':
+      r(0, 0, T, T, kind === 'labfloor' ? '#46586e' : kind === 'centerfloor' ? '#f2ddd5' : kind === 'martfloor' ? '#cfd4c2' : '#c9a06a');
+      r(0, 7, T, 1, PAL.rockDark); r(7, 0, 1, 7, PAL.rockDark);
+      break;
+    case 'centerwall': case 'martwall': case 'housewall': case 'gymwallin': case 'labwall': case 'annewall': case 'leaguewall':
+      r(0, 0, T, T, kind === 'martwall' ? '#2e7a6a' : kind === 'centerwall' ? '#e8b4c4' : PAL.gymBase);
+      r(0, 0, T, 2, PAL.rockBase); r(0, 13, T, 3, PAL.rockDark);
+      break;
+    case 'rug': case 'battlemat':
+      r(0, 0, T, T, kind === 'rug' ? PAL.roofBase : PAL.gymDark);
+      r(3, 3, 10, 10, kind === 'rug' ? PAL.roofDark : PAL.rockBase);
+      break;
     default:
+      // Wave 5a solid props: a furniture-toned block (the ART path
+      // draws the real prop; this is the no-art fallback only).
+      if (kind && kind !== 'void') { r(0, 0, T, T, PAL.houseBase); r(2, 2, 12, 10, PAL.doorBase); break; }
       r(0, 0, T, T, '#101018');
   }
 }

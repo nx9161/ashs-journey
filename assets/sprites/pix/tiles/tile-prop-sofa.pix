@@ -1,0 +1,23 @@
+# Wave 5a prop: Center sofa — rose two-seater
+PIX tile-prop-sofa 16 16
+................
+................
+................
+................
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+..aaaaaaaaaaaa..
+.bbbaaaaaaaabbb.
+.bbbaaaaaaaabbb.
+.bbbaaaaaaaabbb.
+.bcccccddcccccb.
+.bcccccddcccccb.
+.bcccccddcccccb.
+..dddddddddddd..
+..dddddddddddd..
+................
+PAL
+a #e8b4c4 sofa-back
+b #c97e97 sofa-arm
+c #c97e97 sofa-seat
+d #9e5570 sofa-shadow

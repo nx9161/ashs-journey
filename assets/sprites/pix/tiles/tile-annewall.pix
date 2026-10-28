@@ -1,0 +1,24 @@
+# Wave 5a: S.S. Anne wall — ship wood panels, brass studs
+PIX tile-annewall 16 16
+cccccccccccccccc
+cccccccccccccccc
+tttttttttttttttt
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+fffffsfffffsffff
+tttttttttttttttt
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+f #7a5a38 anne-wall
+c #a87f4e anne-crown
+t #ffd873 anne-brass
+s #5a3a24 anne-seam
+b #5a3a24 anne-baseboard

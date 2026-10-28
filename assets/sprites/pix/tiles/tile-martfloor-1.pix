@@ -1,0 +1,22 @@
+# Wave 5a: Mart floor v1 — pale sage tile
+PIX tile-martfloor-1 16 16
+bbbbbbbbbbbbbbbb
+baaaaaaabaaaaaab
+baaaaaaabaacaaab
+bacaaaaabaaaaaab
+baaaaaaabaaaaaab
+baaaaaacbaaaaaab
+baaaaaaabaaaaacb
+baaaaaaabaaaaaab
+bcbbbbbbbbbbbbbb
+baaaaaaabaaaacab
+baaaaaaabaaaaaab
+baaaaaaabaaaaaab
+baaacaaabaaaaaab
+baaaaaaabaaaaaab
+baaaaaaabcaaaaab
+bbbbbbbbbbbbbbbb
+PAL
+a #cfd4c2 mart-floor
+b #a8b85a mart-grid
+c #f5f0dc mart-speckle
