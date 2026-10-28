@@ -1,0 +1,26 @@
+# Wave 4: flower cluster variant 3 — white/pink clusters, red + yellow singles on the Wave 1 grass island.
+PIX tile-flower-3 16 16
+..gggggggggggg..
+ggggggggggggggg.
+gggggggggglggggg
+gggdggggoggggggg
+gggguuggggggdggg
+gggguogggggggigg
+gggggggggggggglg
+gggggggdgggggggg
+ggggggggggoigggg
+gglgggggggiigggg
+gggggggggggggdgg
+gggogggggggggggg
+gggggdggggggjjgg
+gggggggggggggggg
+.ggggglgggggggg.
+..gggggggggggg..
+PAL
+g #5da24a grass
+d #4c8a3e grass-dark
+l #6fb45c grass-light
+u #f5f0dc petal-white
+i #e86a8a petal-pink
+o #f0e060 center-yellow
+j #b0503c petal-red

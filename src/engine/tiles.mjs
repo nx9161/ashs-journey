@@ -27,6 +27,14 @@ export const TILE_CHARS = {
   9: 'step',
   // town dressing (objects on the ground they stand on)
   n: 'fence', o: 'lamp', p: 'flowerbed',
+  // Wave 4 nature & dungeons: cave set (wall/floor are new chars so the
+  // collision class is carried by the char itself — G/N stay non-walkable
+  // wall/boulder class, L joins WALKABLE as floor class) and the three
+  // dungeon-interior sets (Tower stone, Silph panel, Plant industrial).
+  G: 'cavewall', L: 'cavefloor', N: 'caveboulder',
+  M: 'towerwall', Q: 'towerfloor',
+  I: 'silphwall', '%': 'silphfloor',
+  '@': 'plantwall', '&': 'plantfloor',
 };
 
 const PAL = {
@@ -104,9 +112,22 @@ export function paintTile(ctx, kind, px, py) {
       r(7, 8, 2, 8, '#5a3a24'); r(3, 2, 10, 7, PAL.signBase);
       r(4, 3, 8, 1, '#6e5233');
       break;
-    case 'rock':
-      r(0, 0, T, T, PAL.grassBase);
+    case 'rock': case 'caveboulder':
+      // Wave 4: no ground is baked under a rock any more — the fallback
+      // paints the boulder alone (the ART path composites the ground).
       r(3, 5, 10, 8, PAL.rockBase); r(4, 6, 4, 3, '#b5b5c0'); r(8, 9, 4, 3, PAL.rockDark);
+      break;
+    case 'cavewall': case 'towerwall': case 'silphwall': case 'plantwall':
+      r(0, 0, T, T, kind === 'cavewall' ? PAL.rockDark : PAL.gymBase);
+      r(0, 5, T, 2, PAL.rockDark); r(0, 11, T, 2, '#5a3a24'); r(7, 0, 2, 5, PAL.rockDark);
+      break;
+    case 'cavefloor':
+      r(0, 0, T, T, '#b09468');
+      for (let i = 0; i < 5; i++) { const x = Math.floor(h2(px + i * 3, py) * 14), y = Math.floor(h2(px, py + i * 5) * 14); r(x, y, 2, 2, '#a8845c'); }
+      break;
+    case 'towerfloor': case 'silphfloor': case 'plantfloor':
+      r(0, 0, T, T, kind === 'silphfloor' ? '#c2c8d4' : kind === 'towerfloor' ? PAL.rockBase : '#46586e');
+      r(0, 7, T, 1, PAL.rockDark); r(7, 0, 1, 7, PAL.rockDark);
       break;
     default:
       r(0, 0, T, T, '#101018');

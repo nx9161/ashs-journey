@@ -1,0 +1,27 @@
+# Wave 4: Power Plant wall — riveted industrial panels over a hazard-striped base.
+PIX tile-plantwall 16 16
+zzzzzzzzzzzzzzzz
+zggggzggggzggggz
+zggggzggggzggggz
+zgcggzggggzggggz
+zggggzggggzgcggz
+zggggzggggzggggz
+zggggzgcggzggggz
+zggggzggggzggggz
+zggggzggggzggggz
+zggcgzggggzggggz
+zggggzggggzggggz
+zzzzzzzzzzzzzzzz
+ygygygygygygygyg
+gygygygygygygygy
+ygygygygygygygyg
+zggggzggggzggggz
+PAL
+m #8a8aa0 rock
+z #6a6a80 rock-dark
+c #c2c8d4 rock-light
+k #5a3a24 shadow-brown
+a #a8845c strata-brown
+b #b09468 strata-tan
+y #ffd873 hazard
+g #46586e rock-slate

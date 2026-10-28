@@ -1368,3 +1368,180 @@ and fix:
   even with this bug, because the first instance is the one
   the cache keeps. Crowd claims need rendered fingerprints
   of the SECOND same-kind instance on a screen.
+
+## World Art Wave 4 — Nature & Dungeons (2026-10-28)
+
+Source of truth: `ashs-journey-qa/world-art-census.md` §3 (trees /
+vegetation + cave rows) + §4 Wave 4. Presentation only, except the
+coordinator-approved spirit addendum (§6): no game state, balance,
+dialogue, or pacing changed; nothing deployed. All art is original
+`.pix` work drawn to §3, nothing traced or copied.
+
+### 1. Trees & vegetation — 3 species × 2 sizes + bush
+
+- **Pieces:** `tile-tree` redrawn in place (oak, large) + new
+  `tile-tree-oak-small`, `tile-tree-pine`, `tile-tree-pine-small`,
+  `tile-tree-elm`, `tile-tree-elm-small`, `tile-bush`,
+  `tile-flower-3` (white/pink clusters — third flower variant).
+  Every tree carries a layered canopy (highlight / mid / shadow
+  clusters in 4–5 greens, seeded by the old tree's 3-tone canopy)
+  and a cast shadow painted at its base over the composited ground.
+- **No identical neighbours, by construction:** `resolveTileLayers`
+  picks the tree stamp by `treeVariantIndex(x, y, n) = (x + 2y) mod n`
+  over the 7-variant pool — orthogonal steps change the index by 1
+  or 2, never 0 mod n (n ≥ 3), so two orthogonally adjacent trees
+  can never resolve to the same stamp. Rendered-layer audit over
+  the merged world: **2,242 tree cells, 2,161 orthogonal adjacent
+  pairs checked, 0 identical pairs.**
+- Tree tiles still wall non-dungeon interiors for now — Wave 5 owns
+  interior walls; Wave 4 replaces them exactly where its dungeon
+  sets apply (§3/§4 below), per the wave brief.
+
+### 2. Rocks — baked-in ground killed
+
+- `tile-rock` redrawn + new `tile-rock-2` / `tile-rock-3`: pure rock
+  tones only (the old tile's moss-green `#6fb45c` pixels are gone —
+  measured: no grass/moss hex in any rock or cave-boulder palette).
+  The ground an object stands on is supplied by the Wave 1
+  object-over-ground compositing, now extended (§3) so a rock in a
+  cave stands on cave floor, never on a square of grass:
+  **rock-on-grass artifact count 0** (rendered-layer check over all
+  6 caves: every rock/boulder cell's ground layer is a cave floor).
+- The Strength-boulder overlay (`sysRenderWorld`) now draws the
+  position-hashed variant via `boulderCanvasFor` (cave set when the
+  boulder's neighbourhood is cave tiles) — at a boulder's home
+  position it is exactly the sprite the tile resolver drew, so the
+  overlay stays idempotent, and the variant follows a pushed boulder.
+
+### 3. Cave tileset + application to all cave/dungeon maps
+
+- **Pieces:** `tile-cavewall-1/2/3` (strata bands, ≥3 rock tones
+  each), `tile-stalactite` (pale cones over a dark strata face —
+  the resolver picks it for exposed wall faces, south = floor, at
+  a spread-hash rate), `tile-cavefloor-1/2/3` (dusty variants),
+  `tile-caveboulder-1/2/3` (rounded / angular / stalagmite-cone).
+- **New chars, collision classes carried by the char:** `G` cavewall
+  (wall class, non-walkable), `L` cavefloor (floor class — added to
+  `WALKABLE`), `N` caveboulder (non-walkable). Map-data char pass:
+  `#`→`G`, `.`→`L`, `R`→`N` in every source copy of each cave map
+  (maps2 + maps3), so duplicated definitions agree. `B` (movable
+  Strength boulders), `D` doors, `~`/`W` water and `S` signs are
+  untouched chars; cave water banks now take foam only — the sand
+  shore scallop is suppressed on cave banks in the water resolver.
+- **Per-map application (merged runtime):** moon1, moon2 (Mt. Moon),
+  rocktunnel, seafoam, victoryroad, ceruleancave — walls, floors
+  and rocks all swapped. **Diglett's Cave does not exist as a map**
+  in this game's data (searched all map modules: no diglett cave
+  id; Diglett appear only as encounters/species) — the brief's
+  list of 6 resolves to the 5 cave systems above, Mt. Moon counting
+  as its two floors; flagged here rather than invented.
+- **Collision-class proof:** cell-by-cell comparison of every source
+  module against HEAD — 20,972 cells compared, 4,276 changed,
+  **0 walkability-class violations** (old char walkable ⇔ new char
+  walkable, each under its own version's `WALKABLE`).
+- **Rendered-layer audit (per cave):** every cave renders all 3
+  strata wall variants + the stalactite face (7–9 stalactite cells
+  per cave), all 3 dusty floor variants, and (where rocks exist)
+  all 3 cave boulder variants; **zero outdoor layers** (no tree, no
+  sand path, no grass) in any cave cell. The darkness overlay is
+  untouched and is no longer the only cave signal.
+- **Variant-hash note:** Wave 1's `hashTile` clusters in the low
+  two-thirds over map-sized grids (measured: at every salt, an
+  18×13 grid never reaches the top third), which starved 3-variant
+  sets. Wave 4 sets pick via a new `hashTileSpread` (measured
+  ~78/74/82 over the same grid); Wave 1 picks are unchanged.
+
+### 4. Dungeon interior sets (wall/floor only; furniture is Wave 5)
+
+- **Pokémon Tower** (tower1, tower2): `M` towerwall (coursed
+  memorial stone) + `Q` towerfloor (worn stone slabs, 2 variants);
+  `#`→`M`, `.`→`Q`.
+- **Silph Co.** (silph1, silph2 — all source copies incl. maps4's
+  silph2): `I` silphwall (brushed metal panels, teal accent stripe)
+  + `%` silphfloor (pale corporate tile grid, 2 variants);
+  `#`→`I`, `.`→`%`.
+- **Power Plant** (powerplant): `@` plantwall (riveted industrial
+  panels, hazard-striped base) + `&` plantfloor (dark concrete,
+  2 variants); `#`→`@`, `.`→`&`.
+- New floor chars `Q` / `%` / `&` joined `WALKABLE` (floor class
+  preserved 1:1 from `.`); walls stay non-walkable. `R`/`S` props
+  inside these maps keep their chars (props are Wave 5 scope).
+  Rendered-layer audit: each of tower1/tower2/silph1/silph2/
+  powerplant renders only its own wall/floor identity (+ the shared
+  shadow strip / pebble detail overlays), both floor variants in
+  every map.
+
+### 5. Safari dressing check
+
+- Pond edges: Wave 1 shore + foam already resolve on every Safari
+  bank (water neighbours are path/grass); grass variety inherits
+  the Wave 1 tall/base variant system. **Gap found:** the zone's
+  path floor had zero dressing of its own. Added 6 flower tiles
+  (`F`, walkable → walkable, class preserved) scattered on path
+  cells in both safari source copies. No other Safari change.
+
+### 6. Addendum — Cubone + Marowak spirit sprites (coordinator-approved)
+
+- **Pieces:** `npc-cubonespirit-idle-1/2`, `npc-marowakspirit-idle-1/2`
+  — 16×20 idle pairs, ghostly pale palettes (pale skull, washed
+  tan / lavender bodies, wavy ghost hems, bone in hand; frame 2
+  lowers the bone and catches one eye with light).
+- **Wiring:** the two Pokémon Tower spirit instances in maps3
+  tower2 now carry `art: 'cubonespirit'` / `art: 'marowakspirit'`.
+  The kinds are deliberately NOT in `NPC_SWAP_KEYS`, so the
+  authored ghost palettes render unswapped (instances' legacy
+  skin/shirt data stays, unused for these kinds). The Wave 0
+  why-not comment at those instances is amended in place to point
+  at this resolution. Rendered proof: `npcFrames` for both
+  instances returns exactly the authored canvases (16×20).
+
+### 7. Palette disposition
+
+- Tiles-family union: **48/48 before → 48/48 after — no budget
+  raise taken.** Every Wave 4 tile hex reuses the existing union
+  (vegetation greens, strata browns/greys, hazard yellow, teal
+  accent, foam white were all already present). Palette-audit:
+  "tiles family palette <= 48 colors" PASS at 48; all source
+  sprites pass pixel checks. (The audit tool's 4 standing failures
+  at HEAD — its `XXX` slop pattern matching water-tile pixel rows —
+  are pre-existing and unchanged.)
+
+### 8. Reachability + bytes + battery
+
+- **Non-circular reachability audit** (Wave 2 fix method,
+  `~/workspace/w2fix/audit.mjs`, sources = starts + cross-map
+  landings only): warp triggers 226/229 reachable; **unreachable
+  set exactly the pre-existing {victoryroad@(17,5), newisland
+  pair}**; door approaches 104 any-adjacent (baseline-identical);
+  single-point scan 0.
+- **Bytes:** `art-data.mjs` 312,508 → **330,397 B (+17,889)** —
+  inside the 20,000 B Wave 4 budget, no overrun. ART keys
+  **330 → 362 (+32: 28 tiles + 4 spirit frames), zero lost**;
+  build-art run twice = byte-identical. `public/game.js`
+  1,548,540 → **1,575,864 B** (+27,324: art + resolver/map code).
+- **Battery (public):** rejuv-phase1 **44/44** · phase2 **42/42** ·
+  phase3 **63/63** · phase4 **53/53** · phase5 **55/55** · phase6
+  **46/46** · fidelity **35/35** · campaign-smoke **24/24** ·
+  audit-headless **17/17** · audit-laptop public **41/41** ·
+  verify-slice **48/48** · qa-slice **134/134** · validator test
+  **51/51** · validator fuzz **2000/2000** · save-contract **6/6**
+  · Track B **114/114** · budgets-check **all gates pass** ·
+  contamination **clean** · drift-gate guest ≡ strip(vercel) PASS ·
+  qa-changed-flows **55/57, failures exactly the standing baseline
+  {b2, d9}**. Built vercel+guest only; **personal/ byte-identical
+  to HEAD** (restored after the battery; content-hash personal
+  line restored to the HEAD value). Nothing deployed.
+- Self-check composites (resolver-rendered, not live play):
+  `ashs-journey-qa/wave4-selfcheck-shots/` (moon1, tower2, route1,
+  silph1, powerplant).
+
+### Flags / deviations
+
+- **Diglett's Cave is not a map in this game** (see §3) — the
+  brief's "all 6 cave/dungeon maps" was applied to every cave map
+  that exists; nothing was invented to fill the slot.
+- Interior tree-walls outside the dungeon sets (Center, gyms,
+  houses) remain until Wave 5, exactly as the brief scoped.
+- Cave floor speckle is denser than the outdoor path texture —
+  deliberate (dusty, pebble-strewn), and all three variants share
+  the same base so floors read as one material.

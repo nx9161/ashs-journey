@@ -99,7 +99,11 @@ export function ashFrames(doc, dir) {
 // 'acetrainer' | 'twin'), plus, since Wave 3a, one individual kind per named-cast member ('gary',
 // 'garychamp', 'mom', 'hawthorn', 'misty', 'surge', 'erika', 'koga',
 // 'sabrina', 'blaine', 'giovanni', 'lorelei', 'bruno', 'agatha',
-// 'lance', 'rue', 'cole', 'sparcoach'). That field is the primary key. The
+// 'lance', 'rue', 'cole', 'sparcoach'), plus, since the Wave 4
+// addendum, the two Pokemon Tower spirit kinds ('cubonespirit' |
+// 'marowakspirit' — 16x20 overworld species sprites, deliberately NOT
+// in NPC_SWAP_KEYS so their authored ghost palettes never swap). That
+// field is the primary key. The
 // legacy name map below is ONLY a last-resort fallback for an instance
 // that predates the field (it is what CHAMPION and SPARRING COACH used
 // to miss through — both now carry art:'rival' / art:'coach' in data).
@@ -268,6 +272,11 @@ const TILE_ART = {
   'door-lab-l': 'tile-door-lab-l', 'door-lab-r': 'tile-door-lab-r', 'door-lab-facade': 'tile-door-lab-facade',
   'door-wood-l': 'tile-door-wood-l', 'door-wood-r': 'tile-door-wood-r',
   step: 'tile-step', fence: 'tile-fence', lamp: 'tile-lamp', flowerbed: 'tile-flowerbed',
+  // Wave 4 nature & dungeons.
+  cavewall: 'tile-cavewall-1', cavefloor: 'tile-cavefloor-1', caveboulder: 'tile-caveboulder-1',
+  towerwall: 'tile-towerwall', towerfloor: 'tile-towerfloor-1',
+  silphwall: 'tile-silphwall', silphfloor: 'tile-silphfloor-1',
+  plantwall: 'tile-plantwall', plantfloor: 'tile-plantfloor-1',
 };
 
 // Wave 2: kinds that are part of a building (for ground-shadow anchoring
@@ -312,7 +321,28 @@ export function buildArtTileCache(doc) {
   cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6']);
   cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4']);
   cache.pathVariants = ids(['tile-path', 'tile-path-2', 'tile-path-3']);
-  cache.flowerVariants = ids(['tile-flower', 'tile-flower-2']);
+  cache.flowerVariants = ids(['tile-flower', 'tile-flower-2', 'tile-flower-3']);
+  // Wave 4: tree-variant pool = 3 species (oak / pine / elm) x 2 sizes +
+  // the bush. The resolver picks by the (x + 2y) mod n rule documented in
+  // resolveTileLayers, so orthogonally adjacent trees never share a stamp.
+  cache.treeVariants = ids(['tile-tree', 'tile-tree-oak-small', 'tile-tree-pine',
+    'tile-tree-pine-small', 'tile-tree-elm', 'tile-tree-elm-small', 'tile-bush']);
+  if (cache.treeVariants.length) cache.tree = cache.treeVariants[0];
+  cache.rockVariants = ids(['tile-rock', 'tile-rock-2', 'tile-rock-3']);
+  if (cache.rockVariants.length) cache.rock = cache.rockVariants[0];
+  cache.caveWallVariants = ids(['tile-cavewall-1', 'tile-cavewall-2', 'tile-cavewall-3']);
+  if (cache.caveWallVariants.length) cache.cavewall = cache.caveWallVariants[0];
+  cache.stalactite = artCanvas(doc, 'tile-stalactite', 1);
+  cache.caveFloorVariants = ids(['tile-cavefloor-1', 'tile-cavefloor-2', 'tile-cavefloor-3']);
+  if (cache.caveFloorVariants.length) cache.cavefloor = cache.caveFloorVariants[0];
+  cache.caveBoulderVariants = ids(['tile-caveboulder-1', 'tile-caveboulder-2', 'tile-caveboulder-3']);
+  if (cache.caveBoulderVariants.length) cache.caveboulder = cache.caveBoulderVariants[0];
+  cache.towerFloorVariants = ids(['tile-towerfloor-1', 'tile-towerfloor-2']);
+  if (cache.towerFloorVariants.length) cache.towerfloor = cache.towerFloorVariants[0];
+  cache.silphFloorVariants = ids(['tile-silphfloor-1', 'tile-silphfloor-2']);
+  if (cache.silphFloorVariants.length) cache.silphfloor = cache.silphFloorVariants[0];
+  cache.plantFloorVariants = ids(['tile-plantfloor-1', 'tile-plantfloor-2']);
+  if (cache.plantFloorVariants.length) cache.plantfloor = cache.plantFloorVariants[0];
   // Legacy single-tile callers (rustle overlay) get a tufted tile: the
   // rustle draws over the player's grass cell, which is tufted now.
   if (cache.tallVariants.length) cache.grass = cache.tallVariants[0];
@@ -352,6 +382,63 @@ export function tileSprite(cache, kind, t) {
   if (!v) return null;
   if (Array.isArray(v)) return v[Math.floor((t || 0) / 600) % v.length]; // water shimmer (3 frames, Wave 1)
   return v;
+}
+
+// ---- Wave 4: nature & dungeon helpers ----
+// Kind families for the Wave 4 sets (used for ground compositing under
+// object tiles and for cave-context detection around rocks/boulders).
+const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder']);
+const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall']);
+const FLOOR_VARIANTS = {
+  grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
+  towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
+};
+function groundFamilyOf(kind) {
+  if (kind === 'grass' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
+      kind === 'fence' || kind === 'lamp' || kind === 'flowerbed') return 'grass';
+  if (kind === 'cavefloor' || kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') return kind;
+  if (kind === 'path' || isArchKind(kind)) return 'path';
+  return null;
+}
+// Wave 4 spread hash: hashTile's output clusters in the low two-thirds
+// over map-sized grids (measured: at every salt, an 18x13 grid never
+// reaches the top third), which would starve 3-variant sets of their
+// third variant. This second hash mixes with larger multipliers and
+// distributes near-uniformly (measured ~78/74/82 over the same grid);
+// it is used ONLY by the Wave 4 sets — Wave 1 picks keep hashTile so
+// their shipped look does not move.
+export function hashTileSpread(x, y, salt) {
+  let h = (Math.imul(x + 1, 2654435761) ^ Math.imul(y + 1, 2246822519) ^ Math.imul(salt + 1, 3266489917)) | 0;
+  h = Math.imul(h ^ (h >>> 15), 2246822519);
+  h ^= h >>> 13;
+  return (h >>> 0) / 4294967296;
+}
+function pickVariantSpread(arr, x, y, salt) {
+  if (!arr || !arr.length) return null;
+  return arr[Math.floor(hashTileSpread(x, y, salt) * arr.length) % arr.length];
+}
+function groundBase(cache, family, x, y) {
+  if (!family) return null;
+  const arr = cache[FLOOR_VARIANTS[family]];
+  if (family === 'grass') return pickVariant(arr, x, y, 13) || cache[family] || null;
+  if (family === 'path') return pickVariant(arr, x, y, 21) || cache[family] || null;
+  return pickVariantSpread(arr, x, y, 61) || cache[family] || null;
+}
+// Tree-variant index: (x + 2y) mod n. Orthogonal steps change the index
+// by 1 (east/west) or 2 (north/south) — never by 0 mod n for n >= 3 — so
+// two orthogonally adjacent trees can NEVER resolve to the same stamp,
+// while the species/size mix still varies across every forest (Wave 4 QA:
+// forest audit, no two adjacent identical tree stamps).
+export function treeVariantIndex(x, y, n) {
+  return ((x + 2 * y) % n + n) % n;
+}
+// Boulder variant for the runtime (Strength) boulder overlay: must agree
+// with the map-tile resolver at the boulder's home position so the two
+// draws are the same sprite, and follow the boulder when it is pushed.
+export function boulderCanvasFor(cache, x, y, cave) {
+  const arr = cave ? cache.caveBoulderVariants : cache.rockVariants;
+  const v = cave ? pickVariantSpread(arr, x, y, 53) : pickVariant(arr, x, y, 43);
+  return v || (cave ? cache.caveboulder : cache.rock) || null;
 }
 
 const DIRS = ['n', 'e', 's', 'w'];
@@ -423,10 +510,14 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       const base = Array.isArray(cache.water) ? cache.water[frame % cache.water.length] : cache.water;
       if (base) layers.push(base);
       // Shore/foam on EVERY bank: any non-water, non-void neighbour is land.
+      // Wave 4: a cave bank gets foam only — the sand shore scallop is an
+      // outdoor treatment and must not appear in the cave set.
+      const caveBank = DIRS.some((d) => CAVE_KINDS.has(nb[d]));
       let shore = false;
       for (const d of DIRS) {
         if (nb[d] && nb[d] !== 'water' && nb[d] !== 'void' && cache.shore && cache.shore[d]) {
-          layers.push(cache.shore[d]); shore = true;
+          if (!caveBank) layers.push(cache.shore[d]);
+          shore = true;
         }
       }
       if (shore && cache.foamFrames && cache.foamFrames.length) {
@@ -434,27 +525,46 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       }
       return layers.filter(Boolean);
     }
-    case 'tree': case 'rock': case 'sign': case 'flower':
+    case 'cavewall': {
+      // Strata walls by position hash; an exposed face (floor to the
+      // south) with a lucky hash wears the stalactite face instead.
+      if (nb.s === 'cavefloor' && cache.stalactite && hashTileSpread(x, y, 52) < 0.45) return [cache.stalactite];
+      return [pickVariantSpread(cache.caveWallVariants, x, y, 51) || cache.cavewall].filter(Boolean);
+    }
+    case 'cavefloor': case 'towerfloor': case 'silphfloor': case 'plantfloor': {
+      const layers = [groundBase(cache, kind, x, y)];
+      // A dungeon wall directly north casts the shared shadow strip.
+      if (DUNGEON_WALLS.has(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      if (hashTileSpread(x, y, 62) < 0.10 && cache.detail && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+      return layers.filter(Boolean);
+    }
+    case 'tree': case 'rock': case 'caveboulder': case 'sign': case 'flower':
     case 'fence': case 'lamp': case 'flowerbed': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
-      const fam = (k) => (k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign' || k === 'fence' || k === 'lamp' || k === 'flowerbed')
-        ? 'grass'
-        : (k === 'path' || isArchKind(k)) ? 'path' : null;
-      let ground = fam(nb.s);
+      // Wave 4: the dungeon floors are ground families of their own, so a
+      // cave boulder never sits on a square of grass again.
+      let ground = groundFamilyOf(nb.s);
       if (!ground) {
-        const counts = { grass: 0, path: 0 };
-        for (const d of DIRS) { const f = fam(nb[d]); if (f) counts[f]++; }
-        ground = counts.path > counts.grass ? 'path' : 'grass';
+        const counts = {};
+        for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
+        ground = ['grass', 'path', 'cavefloor', 'towerfloor', 'silphfloor', 'plantfloor']
+          .filter((f) => counts[f]).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
       }
-      const base = ground === 'path'
-        ? (pickVariant(cache.pathVariants, x, y, 21) || cache.path)
-        : (pickVariant(cache.grassVariants, x, y, 13) || cache.grass);
       const layers = [];
+      const base = groundBase(cache, ground, x, y);
       if (base) layers.push(base);
       if (kind === 'flower') layers.push(pickVariant(cache.flowerVariants, x, y, 31) || cache.flower);
-      else if (cache[kind]) layers.push(cache[kind]);
+      else if (kind === 'tree') {
+        const tv = cache.treeVariants;
+        layers.push(tv && tv.length ? tv[treeVariantIndex(x, y, tv.length)] : cache.tree);
+      } else if (kind === 'rock') {
+        const cave = ground === 'cavefloor' || DIRS.some((d) => CAVE_KINDS.has(nb[d]));
+        layers.push(boulderCanvasFor(cache, x, y, cave));
+      } else if (kind === 'caveboulder') {
+        layers.push(boulderCanvasFor(cache, x, y, true));
+      } else if (cache[kind]) layers.push(cache[kind]);
       return layers.filter(Boolean);
     }
     default: {

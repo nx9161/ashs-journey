@@ -1,0 +1,22 @@
+# Wave 4: Silph Co. floor variant 2 — offset tile grid.
+PIX tile-silphfloor-2 16 16
+mmmmmmmmmmmmmmmm
+ccccccccccmccccc
+ccccccccccmccccc
+ccceccccccmccccc
+ccccccccccmccccc
+ccccccccccmccccc
+ccccccccccmccccc
+ccccccccccmccccc
+mmmmmmmmmmmmmmmm
+cccccmcccccccccc
+cccccmcccccccccc
+cccccmcccccceccc
+cccccmcccccccccc
+cccccmcccccccccc
+cccccmcccccccccc
+cccccmcccccccccc
+PAL
+c #c2c8d4 floor
+m #8a8aa0 floor-grout
+e #eef7ff floor-sheen

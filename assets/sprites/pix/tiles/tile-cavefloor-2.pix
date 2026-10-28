@@ -1,0 +1,27 @@
+# Wave 4: dusty cave floor variant 2 — different speckle field.
+PIX tile-cavefloor-2 16 16
+bbbbbbbbbbbbbbbb
+bcbbbbbbbbbbbbbb
+bbbbbbbbybbbbbbb
+bbbbbabbbbbbbmbb
+bbbbbbbbbbbbbbbb
+bbbbybbbbbbabbbb
+bbbbbbbbbbbbbbcb
+bbbbbbbbbbbbbbbb
+bbabbbbbbbbbbbbb
+bbbbbbbbbbbbbbab
+bbbbbbbbbbbbbbbb
+bbbmbbbbbbbbbbbb
+bbbbbbbbbabbybbb
+bbbbbbbbbbbbbbbb
+bbbbbbcbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+m #8a8aa0 rock
+z #6a6a80 rock-dark
+c #c2c8d4 rock-light
+k #5a3a24 shadow-brown
+a #a8845c strata-brown
+b #b09468 strata-tan
+y #7a5a38 strata-dark
+g #46586e rock-slate

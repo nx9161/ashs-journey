@@ -1,0 +1,23 @@
+# Wave 4: Silph Co. wall — brushed metal panels with seams and a lit top rail (furniture is Wave 5).
+PIX tile-silphwall 16 16
+zccccccczccccccc
+zccccccczccccccc
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+zgggggggzggggggg
+gttttttttttttttg
+zgggggggzggggggg
+zgggggggzggggggg
+zzzzzzzzzzzzzzzz
+PAL
+g #46586e panel
+c #c2c8d4 panel-light
+z #6a6a80 panel-seam
+t #3fa08a accent-teal

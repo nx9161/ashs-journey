@@ -1634,9 +1634,18 @@ Object.assign(OverworldScene.prototype, {
         const spr = g.tileSprite('path');
         if (spr) r.blit(spr, cx * T, cy * T);
       }
-      // Boulders at their runtime positions.
+      // Boulders at their runtime positions. Wave 4: the sprite is the
+      // position-hashed boulder variant (cave set when the boulder's
+      // neighbourhood is cave tiles), not one global rock stamp — and at
+      // the boulder's home position it is exactly the sprite the tile
+      // resolver already drew, so the overlay is idempotent.
       for (const b of this.fxState.boulders.values()) {
-        const spr = g.tileSprite('rock');
+        const rowsNow = this.map.rows;
+        const caveNear = [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
+          const row = rowsNow[b.y + dy]; const ch = row && row[b.x + dx];
+          return ch === 'G' || ch === 'L' || ch === 'N';
+        });
+        const spr = g.boulderSprite ? g.boulderSprite(b.x, b.y, caveNear) : g.tileSprite('rock');
         if (spr) r.blit(spr, b.x * T, b.y * T);
       }
     }

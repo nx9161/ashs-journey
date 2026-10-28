@@ -1,0 +1,23 @@
+# Wave 4: Power Plant floor variant 2 — different wear field.
+PIX tile-plantfloor-2 16 16
+gggggggggggggggg
+gggggggggggggggg
+ggzggggggggggggg
+ggggggggggggzggg
+gggggggggggggggg
+gggggggzgggggggg
+gggggggggggcgggg
+gggmmggggggggggg
+gggggcggggggggzg
+gggggggggggggggg
+gggggggggggggggg
+ggggzggggggggggg
+gggggggggggggggg
+ggggggggggzggggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+g #46586e concrete
+z #3a4657 concrete-dark
+c #c2c8d4 bolt
+m #8a8aa0 crack

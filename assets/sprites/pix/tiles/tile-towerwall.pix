@@ -1,0 +1,27 @@
+# Wave 4: Pokemon Tower wall — coursed memorial stone blocks, slate-grey with a lit top edge.
+PIX tile-towerwall 16 16
+cccccccccccccccc
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+zzzzzzzzzzzzzzzz
+mmmzmmmmmmmzmmmm
+mmmzmmmmmmmzmmmm
+mmmzmmmmmmmzmmmm
+mmmzmmmmmmmzmmmm
+zzzzzzzzzzzzzzzz
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+zzzzzzzzzzzzzzzz
+PAL
+m #8a8aa0 rock
+z #6a6a80 rock-dark
+c #c2c8d4 rock-light
+k #5a3a24 shadow-brown
+a #a8845c strata-brown
+b #b09468 strata-tan
+y #7a5a38 strata-dark
+g #46586e rock-slate

@@ -1,0 +1,27 @@
+# Wave 4: cave wall, strata variant 1 — banded rock in 4+ tones with a slate crack.
+PIX tile-cavewall-1 16 16
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmgmmmm
+mmmmmmmmmmmgmmmm
+mmmmmmmmmmgmmmmm
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+zzzzzzzzzzzzzzzz
+zzzzgzzzzzzzzzzz
+zzzzzzzzzzzzzzzz
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+PAL
+m #8a8aa0 rock
+z #6a6a80 rock-dark
+c #c2c8d4 rock-light
+k #5a3a24 shadow-brown
+a #a8845c strata-brown
+b #b09468 strata-tan
+y #7a5a38 strata-dark
+g #46586e rock-slate

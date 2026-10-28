@@ -1,0 +1,27 @@
+# Wave 4: Pokemon Tower floor variant 1 — large worn stone slabs.
+PIX tile-towerfloor-1 16 16
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+mmcmmmmzmmmmmmmm
+mmmmmmmzmgmmmmmm
+mmmmmmmzmmgmcmmm
+mmmmmmmzmmmmmmmm
+mmmmmmmzmmmmmmmm
+zzzzzzzzzzzzzzzz
+mmmmmmmmzmmmmmmm
+mmmmmmmmzmmmmmmm
+mmmmmmmmzmmmmmmm
+mmmmmcmmzmmmmmmm
+mmmmmmmmzmmmmmmm
+mmmmmmmmzmmmmcmm
+mmmmmmmmzmmmmmmm
+zzzzzzzzzzzzzzzz
+PAL
+m #8a8aa0 rock
+z #6a6a80 rock-dark
+c #c2c8d4 rock-light
+k #5a3a24 shadow-brown
+a #a8845c strata-brown
+b #b09468 strata-tan
+y #7a5a38 strata-dark
+g #46586e rock-slate

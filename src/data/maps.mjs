@@ -317,7 +317,10 @@ export const MAP_LIST = Object.keys(MAPS);
 // lab 4/5, wood 7/8) and entrance steps (9) are step-warp / threshold
 // tiles exactly like the legacy D/E/C doors — warps remain
 // coordinate-keyed in each map's warps[] list.
-export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9']);
+export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9',
+  // Wave 4 dungeon floors: cave L, Tower Q, Silph %, Plant & — each was
+  // swapped 1:1 from the walkable '.' floor char, so floor stays floor.
+  'L', 'Q', '%', '&']);
 
 // Trainer definitions for the slice.
 // ai: 'opener-setup' = gym-leader flavor: open with a self-buff setup move if known
