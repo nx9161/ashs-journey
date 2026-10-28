@@ -1913,3 +1913,118 @@ assertions. All three suites pass at full count (63/53/55).
 - SHOPKEEPER fields only for a Viridian Mart entry; a scripted
   entry with no return ticket falls back to Viridian (the Center's
   Pallet-fallback pattern).
+
+## World Art Wave 6a — Battle Presentation: The Always-On-Screen Set (2026-10-28)
+
+Source of truth: census §3 (battle rows) + §4 Wave 6a. Scope honored:
+battle sprites only — no trainer battle sprites (6b), no arenas (6c),
+no engine or balance change. Every sprite below is an original
+drawing in the `.pix` pipeline, seeded by the species' identity and
+its first-build sprite; authored **64×64** and drawn at
+`BATTLER_DRAW_SIZE` 64 on both sides (Wave 0 parity).
+
+### 1. What was drawn — 58 sprites, 29 ids
+
+- **Partner (Pikachu)** front + back redrawn at 64×64: five yellow
+  steps (`#ffe98a / #ffdf6b / #f5c93c / #dda01e / #b57a14`, the
+  follower's craft standard), shaded ear tips, red cheeks with shade,
+  zigzag tail; the back carries the two brown back-stripes, a head
+  stripe, cheek-edge wrap and a cream belly peek. 13 colors each.
+- **The 13 existing species pairs** redrawn front + back at 64×64:
+  caterpie, charmeleon, eevee, geodude, ivysaur, mankey, nidoranm,
+  onix, pidgey, rattata, spearow, wartortle, weedle.
+- **The 15 front-only species** — fronts redrawn at 64×64 AND backs
+  authored new at 64×64 (the front-only trap is closed for them):
+  articuno, beedrill, blastoise, butterfree, charizard, flareon,
+  jolteon, kakuna, metapod, mew, mewtwo, moltres, vaporeon,
+  venusaur, zapdos.
+- Every sprite: full-body anatomy, **12–17 painted colors** (min 12,
+  median 13 across the 58), ≥3 shades per main surface (five-step
+  primary ramps in most palettes), highlight, species personality
+  (Charizard's membrane wings + tail flame, Blastoise's cannons,
+  Venusaur's open flower, Articuno's crest + ribbon tail, Zapdos's
+  jagged crest/wings, Moltres's flame crest/tail, Mewtwo's neck
+  connector + curling tail, Mew's long tail + bulb tip, Beedrill's
+  lance stingers, Geodude's flexed fists, Onix's crested head
+  boulder). Backs are real rear drawings (shell-back dome for the
+  turtles, folded feather layers for the birds, segment backs for
+  the serpents, ridged cocoon backs, rock-crack backs for
+  Geodude/Onix) — never a flipped front.
+- Pair completeness: every one of the 29 ids ships front AND back in
+  this commit; no front is left back-less. The derived
+  `-front-bob` frames regenerate from the new fronts — verified
+  row-for-row (each bob = its front shifted 2px down, 28/28
+  consistent; partner has no bob, as before — the partner family
+  never derived one).
+
+### 2. Species-render audit (the QA yardstick)
+
+Method: for every id in the merged species data (152 = 151 +
+partner), hand art ⇔ `ART[id-front]` and `ART[id-back]` both exist;
+cross-checked at runtime through `speciesBattleArt` with a stub
+document (hand ⇔ no `forgeFallback`).
+
+- **Before:** 14 hand-art ids (partner + caterpie, charmeleon,
+  eevee, geodude, ivysaur, mankey, nidoranm, onix, pidgey, rattata,
+  spearow, wartortle, weedle) · **138 forge-fallback**.
+- **After:** **29 hand-art ids** (the 14 above + the 15 former
+  front-only species) · **123 forge-fallback**. Runtime drive
+  agrees exactly (hand 29 / forge 123; partner front+back canvases
+  64×64 at draw size 64; a 6a foe — zapdos — resolves authored
+  front + bob at 64).
+- Census §1's "29 fronts + 12 backs / 14 pairs" resolves on disk to
+  28 species fronts + partner front, 13 species backs + partner
+  back = 14 complete ids including partner; this section's counts
+  are the audited disk/runtime numbers.
+
+### 3. Regen safety + bytes
+
+- `build-art.mjs` run twice: **byte-identical** (art-data + all
+  atlases). ART keys **406 → 421, zero lost** (the 15 gains are
+  exactly the 15 new backs). Only the partner + species atlases
+  changed.
+- **Bytes:** `art-data.mjs` 352,733 → **669,836 B (+317,103)**;
+  `public/game.js` 1,620,291 → **1,937,394 B (+317,103)** — the
+  delta is the art segment exactly. Against the Wave 6 budget
+  (2,650,000 B for battlers + bobs + arenas), 6a consumes
+  **317,103 B**, leaving 2,332,897 B for 6b/6c. The brief's
+  ≈220 KB guide assumed ≈45 sprites and no bob growth; the real
+  scope is 58 sprites (the 14 complete ids include partner, so
+  14×2 + 15×2 = 58) plus 28 derived bobs re-emitted at 64×64 —
+  flagged as a guide undercount, not a budget breach (11.9% of the
+  Wave 6 budget for the always-on-screen set).
+- Per-sprite palette cap 32 respected everywhere (max painted 17);
+  no tiles-family interaction (tiles union untouched at 54).
+  Built vercel+guest only; **personal/ byte-identical to HEAD**
+  (restored after the battery; content-hash personal line restored
+  to the HEAD value). Nothing deployed.
+
+### 4. Battery (public)
+
+rejuv-phase1 **44/44** · phase2 **42/42** · phase3 **63/63** ·
+phase4 **53/53** · phase5 **55/55** · phase6 **46/46** · fidelity
+**35/35** · campaign-smoke **24/24** · audit-headless **17/17** ·
+audit-laptop public **41/41** · verify-slice **48/48** · qa-slice
+**134/134** · validator test **51/51** · validator fuzz
+**2000/2000** · save-contract **6/6** · Track B **114/114** ·
+budgets-check **all gates pass** · contamination **clean** ·
+drift-gate PASS · verify-audio **ALL PASS** · qa-changed-flows
+**55/57, failures exactly the standing baseline {b2, d9}**.
+
+### Flags / deviations
+
+- **load-test expectation update (equal strength):** the tool's
+  stale Wave-2 surface table expected battlers at 32×32; the four
+  entries this wave redrew (partner-front/back, onix-front,
+  geodude-front) now expect **64×64**, the Wave 0 standard. The
+  tool still fails exactly its 4 pre-existing HEAD failures (ash /
+  pikachu-hop / professor 16×16-era expectations, Waves 3 scope —
+  untouched here). All 421 sprites rasterize through the game path.
+- **palette-audit standalone tool:** 515/520 with the same 5
+  failures as HEAD verbatim (its stale 48 tiles cap vs the
+  deliberate 54 in build-art, + 3 water-tile blacklist false
+  positives from Wave 1). Not 6a-caused; `audit-results.md` left at
+  HEAD rather than committing the tool's rewrite.
+- The brief's sprite arithmetic (≈45) and census pair counts are
+  superseded by the audited numbers in §2 — 58 sprites, 29 ids,
+  forge 138 → 123 exactly as targeted.

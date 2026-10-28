@@ -2,38 +2,38 @@
   "atlas": "atlas-partner.png",
   "tile": 48,
   "size": [
-    174,
-    34
+    238,
+    66
   ],
   "sprites": {
     "partner-back": {
       "x": 1,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "partner-front": {
-      "x": 35,
+      "x": 67,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "pikachu-hop-1": {
-      "x": 69,
+      "x": 133,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -46,7 +46,7 @@
       "mirror_of": null
     },
     "pikachu-hop-2": {
-      "x": 87,
+      "x": 151,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -59,7 +59,7 @@
       "mirror_of": null
     },
     "pikachu-idle-1": {
-      "x": 105,
+      "x": 169,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -72,7 +72,7 @@
       "mirror_of": null
     },
     "pikachu-idle-2": {
-      "x": 123,
+      "x": 187,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -86,7 +86,7 @@
       "mirror_of": null
     },
     "pikachu-refuse": {
-      "x": 141,
+      "x": 205,
       "y": 1,
       "w": 32,
       "h": 16,

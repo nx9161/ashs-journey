@@ -2,903 +2,1098 @@
   "atlas": "atlas-species.png",
   "tile": 48,
   "size": [
-    2040,
-    68
+    2046,
+    198
   ],
   "sprites": {
-    "articuno-front": {
+    "articuno-back": {
       "x": 1,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "articuno-front": {
+      "x": 67,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "beedrill-back": {
+      "x": 133,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "beedrill-front": {
-      "x": 35,
+      "x": 199,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "blastoise-back": {
+      "x": 265,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "blastoise-front": {
-      "x": 69,
+      "x": 331,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "butterfree-back": {
+      "x": 397,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "butterfree-front": {
-      "x": 103,
+      "x": 463,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "caterpie-back": {
-      "x": 137,
+      "x": 529,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "caterpie-front": {
-      "x": 171,
+      "x": 595,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "charizard-back": {
+      "x": 661,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "charizard-front": {
-      "x": 205,
+      "x": 727,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "charmeleon-back": {
-      "x": 239,
+      "x": 793,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "charmeleon-front": {
-      "x": 273,
+      "x": 859,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "eevee-back": {
-      "x": 307,
+      "x": 925,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "eevee-front": {
-      "x": 341,
+      "x": 991,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "flareon-back": {
+      "x": 1057,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "flareon-front": {
-      "x": 375,
+      "x": 1123,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "geodude-back": {
-      "x": 409,
+      "x": 1189,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "geodude-front": {
-      "x": 443,
+      "x": 1255,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "ivysaur-back": {
-      "x": 477,
+      "x": 1321,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "ivysaur-front": {
-      "x": 511,
+      "x": 1387,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jolteon-back": {
+      "x": 1453,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "jolteon-front": {
-      "x": 545,
+      "x": 1519,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kakuna-back": {
+      "x": 1585,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "kakuna-front": {
-      "x": 579,
+      "x": 1651,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "mankey-back": {
-      "x": 613,
+      "x": 1717,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 2,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "mankey-front": {
-      "x": 647,
+      "x": 1783,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "metapod-back": {
+      "x": 1849,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "metapod-front": {
-      "x": 681,
+      "x": 1915,
       "y": 1,
-      "w": 32,
-      "h": 32,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mew-back": {
+      "x": 1981,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "mew-front": {
-      "x": 715,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mewtwo-back": {
+      "x": 67,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "mewtwo-front": {
-      "x": 749,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 133,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "moltres-back": {
+      "x": 199,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "moltres-front": {
-      "x": 783,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 265,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "nidoranm-back": {
-      "x": 817,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 331,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "nidoranm-front": {
-      "x": 851,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 397,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "onix-back": {
-      "x": 885,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 463,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "onix-front": {
-      "x": 919,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 529,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "pidgey-back": {
-      "x": 953,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 595,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "pidgey-front": {
-      "x": 987,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 661,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "rattata-back": {
-      "x": 1021,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 727,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 2,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "rattata-front": {
-      "x": 1055,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 793,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "spearow-back": {
-      "x": 1089,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 859,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "spearow-front": {
-      "x": 1123,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 925,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "vaporeon-back": {
+      "x": 991,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "vaporeon-front": {
-      "x": 1157,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1057,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "venusaur-back": {
+      "x": 1123,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "venusaur-front": {
-      "x": 1191,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1189,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "wartortle-back": {
-      "x": 1225,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1255,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "wartortle-front": {
-      "x": 1259,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1321,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "weedle-back": {
-      "x": 1293,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1387,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "weedle-front": {
-      "x": 1327,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1453,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "zapdos-back": {
+      "x": 1519,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "zapdos-front": {
-      "x": 1361,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1585,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "articuno-front-bob": {
-      "x": 1395,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1651,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 14,
       "seed": null,
       "derived_from": "articuno-front",
       "mirror_of": null
     },
     "beedrill-front-bob": {
-      "x": 1429,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1717,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 5,
+      "palette": 14,
       "seed": null,
       "derived_from": "beedrill-front",
       "mirror_of": null
     },
     "blastoise-front-bob": {
-      "x": 1463,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1783,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 17,
       "seed": null,
       "derived_from": "blastoise-front",
       "mirror_of": null
     },
     "butterfree-front-bob": {
-      "x": 1497,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1849,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 5,
+      "palette": 12,
       "seed": null,
       "derived_from": "butterfree-front",
       "mirror_of": null
     },
     "caterpie-front-bob": {
-      "x": 1531,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1915,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 5,
+      "palette": 13,
       "seed": null,
       "derived_from": "caterpie-front",
       "mirror_of": null
     },
     "charizard-front-bob": {
-      "x": 1565,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1981,
+      "y": 67,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": "charizard-front",
       "mirror_of": null
     },
     "charmeleon-front-bob": {
-      "x": 1599,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 1,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": "charmeleon-front",
       "mirror_of": null
     },
     "eevee-front-bob": {
-      "x": 1633,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 67,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 12,
       "seed": null,
       "derived_from": "eevee-front",
       "mirror_of": null
     },
     "flareon-front-bob": {
-      "x": 1667,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 133,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 12,
       "seed": null,
       "derived_from": "flareon-front",
       "mirror_of": null
     },
     "geodude-front-bob": {
-      "x": 1701,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 199,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 13,
       "seed": null,
       "derived_from": "geodude-front",
       "mirror_of": null
     },
     "ivysaur-front-bob": {
-      "x": 1735,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 265,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 13,
       "seed": null,
       "derived_from": "ivysaur-front",
       "mirror_of": null
     },
     "jolteon-front-bob": {
-      "x": 1769,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 331,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 11,
       "seed": null,
       "derived_from": "jolteon-front",
       "mirror_of": null
     },
     "kakuna-front-bob": {
-      "x": 1803,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 397,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 12,
       "seed": null,
       "derived_from": "kakuna-front",
       "mirror_of": null
     },
     "mankey-front-bob": {
-      "x": 1837,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 463,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 13,
       "seed": null,
       "derived_from": "mankey-front",
       "mirror_of": null
     },
     "metapod-front-bob": {
-      "x": 1871,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 529,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 13,
       "seed": null,
       "derived_from": "metapod-front",
       "mirror_of": null
     },
     "mew-front-bob": {
-      "x": 1905,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 595,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 14,
       "seed": null,
       "derived_from": "mew-front",
       "mirror_of": null
     },
     "mewtwo-front-bob": {
-      "x": 1939,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 661,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 14,
       "seed": null,
       "derived_from": "mewtwo-front",
       "mirror_of": null
     },
     "moltres-front-bob": {
-      "x": 1973,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 727,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 15,
       "seed": null,
       "derived_from": "moltres-front",
       "mirror_of": null
     },
     "nidoranm-front-bob": {
-      "x": 2007,
-      "y": 1,
-      "w": 32,
-      "h": 32,
+      "x": 793,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 11,
       "seed": null,
       "derived_from": "nidoranm-front",
       "mirror_of": null
     },
     "onix-front-bob": {
-      "x": 1,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 859,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 4,
+      "palette": 13,
       "seed": null,
       "derived_from": "onix-front",
       "mirror_of": null
     },
     "pidgey-front-bob": {
-      "x": 35,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 925,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 15,
       "seed": null,
       "derived_from": "pidgey-front",
       "mirror_of": null
     },
     "rattata-front-bob": {
-      "x": 69,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 991,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 15,
       "seed": null,
       "derived_from": "rattata-front",
       "mirror_of": null
     },
     "spearow-front-bob": {
-      "x": 103,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 1057,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 15,
       "seed": null,
       "derived_from": "spearow-front",
       "mirror_of": null
     },
     "vaporeon-front-bob": {
-      "x": 137,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 1123,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 12,
       "seed": null,
       "derived_from": "vaporeon-front",
       "mirror_of": null
     },
     "venusaur-front-bob": {
-      "x": 171,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 1189,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 13,
       "seed": null,
       "derived_from": "venusaur-front",
       "mirror_of": null
     },
     "wartortle-front-bob": {
-      "x": 205,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 1255,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 6,
+      "palette": 14,
       "seed": null,
       "derived_from": "wartortle-front",
       "mirror_of": null
     },
     "weedle-front-bob": {
-      "x": 239,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 1321,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 5,
+      "palette": 13,
       "seed": null,
       "derived_from": "weedle-front",
       "mirror_of": null
     },
     "zapdos-front-bob": {
-      "x": 273,
-      "y": 35,
-      "w": 32,
-      "h": 32,
+      "x": 1387,
+      "y": 133,
+      "w": 64,
+      "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 5,
+      "palette": 15,
       "seed": null,
       "derived_from": "zapdos-front",
       "mirror_of": null

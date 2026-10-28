@@ -81,12 +81,14 @@ async function main() {
     }
   }
   // game-consumption surface checks (what buildSprites/npcSprite/tileCache request)
-  // NOTE: Wave-2 art delivers battlers at 32x32 (contract §1.5 allows 32x32/48x48).
-  // Wiring seat scales 32->48 in canvas (nearest-neighbor) or updates these.
+  // NOTE: battlers are authored 64x64 since the Wave 0 size standard
+  // (drawn at BATTLER_DRAW_SIZE 64, both sides); Wave 6a redrew the
+  // always-on-screen set (partner + 28 species) to that standard.
+  // Legacy 32x32 battlers upscale x2 through the same draw path.
   const need = {
     'ash-down-idle-1': [16, 16], 'ash-up-walk-4': [16, 16],
-    'pikachu-hop-1': [16, 16], 'partner-front': [32, 32], 'partner-back': [32, 32],
-    'onix-front': [32, 32], 'geodude-front': [32, 32], 'brock-battle': [32, 48],
+    'pikachu-hop-1': [16, 16], 'partner-front': [64, 64], 'partner-back': [64, 64],
+    'onix-front': [64, 64], 'geodude-front': [64, 64], 'brock-battle': [32, 48],
     'npc-professor-idle-1': [16, 16], 'tile-grass': [16, 16], 'icon-pokeball': [16, 16],
   };
   for (const [id, [w, h]] of Object.entries(need)) {
