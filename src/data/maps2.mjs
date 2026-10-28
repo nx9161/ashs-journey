@@ -616,7 +616,7 @@ export const MAPS2 = {
       '#..,,,,..........#',
       '#..,,,,....RR....#',
       '#................#',
-      '.................#',
+      '..................',
       '#..........,,,,,,#',
       '#....S.....,,,,,,#',
       '#..........,,,,,,#',
@@ -625,6 +625,7 @@ export const MAPS2 = {
     ]),
     warps: [
       { x: 0, y: 5, to: { map: 'vermilion', x: 16, y: 5 } },
+      { x: 17, y: 5, to: { map: 'route12', x: 1, y: 5 } },
     ],
     signs: [
       { x: 5, y: 7, text: "ROUTE 11 — Vermilion's east meadow. Something huge once slept across this road, they say." },
