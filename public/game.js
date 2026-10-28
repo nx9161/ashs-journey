@@ -16385,14 +16385,6 @@ function parleyVisible(state) {
   if (!state || !state.story || !state.story.flags) return false;
   return !!state.story.flags.stanne_done && !state.story.flags.parley_celadon_done;
 }
-// The parley's tier gate reads the pair's LOWER tier: a parley is an
-// opening between two people, and it only opens when BOTH are Warm+.
-function parleyTier(state) {
-  const a = BOND_TIERS.indexOf(tierOf(state, 'rue'));
-  const b = BOND_TIERS.indexOf(tierOf(state, 'cole'));
-  return BOND_TIERS[Math.min(a, b)];
-}
-
 // ---------- Gary's battle text, by tier (R3: text only) ----------
 // At battle construction the overworld layers clone the rival's
 // trainer def and swap ONLY its intro/lose lines for the tier set.
