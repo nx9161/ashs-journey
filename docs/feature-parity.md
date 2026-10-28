@@ -39,7 +39,9 @@ Suites: `scripts/verify-slice.mjs` (133), `tests/fidelity-checks.mjs` (26),
 | OHKO level-difference accuracy | Verified | campaign-smoke (Giovanni regression) |
 | Ball inventory (Poké/Great/Ultra/Master/Safari) | Verified | gen1Catch asserts incl. Master auto-catch |
 | Catch formula (two-roll, status −25/−12, HP factor) | Verified | fidelity-checks |
-| Real-time battle mode (Z-A change order) | Implemented | ADR-020 Model A; fidelity-checks RT functional test; classic engine kept as a switchable fallback |
+| Classic turn-based battle (THE main battle, ADR-026) | Implemented | Owner ruling 2026-10-28: classic is the default (settings.battleStyle 'classic'); presentation elevated WP3 (hitstop/trauma holds, faint beat, drain cap, Ground readout — census in ~/workspace/ashs-journey-qa/battle-classic-census.md); proofs: tests/battle-model-checks.mjs 45/45 |
+| Real-time battle mode (Z-A change order) | Implemented | ADR-020 Model A; ADR-026 (2026-10-28): retained as a selectable OPTIONAL legacy mode — no longer the default, feel untouched; fidelity-checks RT functional test + battle-model-checks B07/B08 |
+| Shift/Set switch option (ADR-026) | Implemented | settings.switchMode 'set' (default) / 'shift'; classic engine only; Set = no prompt on a foe KO (owner complaint, 2026-10-28), Shift = genre prompt exactly once per trainer KO with genre XP/participant semantics; proofs: battle-model-checks B03–B06 + Part F edge gates |
 | XP split among participants | Implemented | engine participants set |
 
 ## Pokémon management

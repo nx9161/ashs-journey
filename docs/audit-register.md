@@ -2348,3 +2348,115 @@ standing baseline {b2, d9}**.
   full public battery green, qa-changed-flows failures exactly
   the standing baseline {b2, d9}, personal/ byte-identical
   throughout, nothing deployed by the implementer.
+
+## Battle Model Mission — ADR-026 (2026-10-28, mission close)
+
+Owner rulings (2026-10-28): (A) classic turn-based is THE main
+battle — ADR-020's RT-as-default gate resolved negatively after the
+owner playtested RT and rejected its feel (foe beelines, attacks not
+firing on press, foe movement reading as beams of light). RT is
+retained as a selectable OPTIONAL legacy mode, untouched. (B) Owner
+complaint: "when I defeat a Pokemon it keeps giving me option to
+choose another Pokemon" → Shift/Set option added, DEFAULT = SET.
+
+- **WP1 default flip:** settings.battleStyle default 'rt'→'classic'
+  (state.mjs, schema fill, Options row unchanged in spirit). Stored
+  values are NEVER rewritten: a save with 'rt' stored keeps 'rt'
+  (code-verified through schema fill + the whole-payload sync merge;
+  New Game / Second Journey carry the settings object wholesale, so
+  a carried style is the player's own stored preference). Options
+  gains exactly one row (Switch style) — row-count-sensitive suites
+  (audit-laptop, phase1) verified green.
+- **WP2 Shift/Set:** settings.switchMode 'set'|'shift' (state
+  default, schema fill for all pre-existing saves → 'set', server
+  validator `bad-setting:switchMode`, Options toggle with toast).
+  Investigation (pre-change, both engines): NEITHER engine prompted
+  on a foe KO — classic afterFaintFoe sent the next foe immediately,
+  RT routed through the same path; the only switch menu was the
+  genre-mandatory forced menu on an ALLY faint (S-12 cancel-reopen
+  untouched). The owner's recurring interruption was that forced
+  menu in RT, where his mons faint fast (~9s idle-KO). Shift flow
+  (classic only; gated off for RT/wild/tutorial/friendly/last-foe/
+  no-legal-target): faint → KO'd foe's XP (genre order) → prompt
+  exactly once → Yes opens a voluntary no-turn party menu (Back
+  re-presents the prompt menu; the prompt line fires exactly once
+  per KO; switched-in mon is the sole participant for the incoming
+  foe) → send-out + cry → command. Set XP totals byte-identical.
+- **P0 (OWNER-REPORTED, 2026-10-28):** "the Pokemon doesn't die
+  even if I keep pushing it… my damage is 20 and his health is 30
+  and if I attack twice it gets stuck at the 10 HP." Hunt with
+  instrumented sweeps in both engines: the standard damage paths,
+  hpAnim, seeded drain, Counter/Bide/recoil, Substitute, and the
+  keepsake rulings-patch (Tortoise Charm / Iron Acorn — CLEARED with
+  traces; the fault does NOT touch the keepsake patch or the
+  battle-freeze fix) were all proven clean. Three real defects in
+  the reported family, each reproduced pre-fix and pinned by
+  regressions (battle-model-checks Part C):
+  1. Seismic Toss + Night Shade dealt ~5/hit instead of level
+     damage in BOTH engines — both moves declare `fixedLevel` at
+     move top level (like ohko/charge, which are read top-level)
+     but the engines read only `efx.fixedLevel`. A Lv20 Seismic
+     Toss took a 30-HP foe to 25, not 10, and crawled from there
+     while the foe won by attrition. Fix: `efx.fixedLevel ||
+     mv.fixedLevel` in both engines.
+  2. Tutorial endure went silent: the lesson foe clamps at 1 HP by
+     design, but the catch hint showed only on the FIRST endured
+     KO — later lethal hits clamped silently, reading as an
+     immortal foe that could win by attrition. The hint now
+     repeats on every endured KO; the endure is unchanged.
+  3. RT physical lunge whiffs were silent: PP + cooldown spent out
+     of range, no damage, no message. The whiff geometry is
+     unchanged; it now floats "Too far away!" (the feedback the
+     status-move range check already gave).
+  Plus hardening: BattleScene.updateResolve() was called by
+  update()'s state switch but never defined — a no-op now exists
+  (resolution is message-driven; no driven flow reaches the call).
+- **P1 (OWNER-REPORTED, 2026-10-28):** "when I got defeated after
+  leaving Pallet Town, I was sent to the health center, and when I
+  got OUT I was right where I was defeated." Root cause:
+  loadMap('center') overwrote centerReturn with _lastCity — the
+  player's tile snapshotted when the previous map loaded. The
+  warp-in door-front anchor (each town door's `via`, verified
+  walkable in all 9 Center towns) was clobbered by its own loadMap,
+  and both blackout paths load 'center' directly (no warp), so the
+  exit anchored to the faint site (reproduced headlessly: exit
+  landed route1 (7,7)). Fix: loadMap never touches centerReturn;
+  the via also persists as story.lastCenter (save-fill sanitized,
+  server-validated); one centerExit() resolver (runtime ticket →
+  persisted anchor → Pallet fallback) serves the exit warp, both
+  blackout paths, and the Escape Rope (whose landing tile thereby
+  becomes the door-front — same town). Reload-inside-a-Center
+  covered by the persisted anchor. Regressions: battle-model
+  Part E. Note: Pallet and Pewter have no Center building in the
+  authored world (unchanged world data, observed not altered).
+- **WP3 classic presentation (FLOW/PACING/STRUCTURE only):** census
+  at ~/workspace/ashs-journey-qa/battle-classic-census.md (observed
+  sequences: wild 14 beats, trainer Set 14, trainer Shift 16, catch
+  7, run 3, defeat 7; per-stage verdicts; feedback spec table;
+  research disposition; art-thin notes for the follow-up art
+  mission). Elevations: hitstop 70ms + faint beat 450ms implemented
+  as message DISMISSAL HOLDS (a press during a hold is remembered,
+  never eaten; the say() chain stays synchronous — the first cut's
+  deferred-chain design was caught by rejuv-phase3 stalling
+  callback-driven flows and redesigned, commit d544974); trauma
+  screenshake (0.28/0.35/0.55 + 0.25 crit, KO ~×1.35 attack-only);
+  universal impact flash; HP-drain 600ms cap; send-out cry with the
+  send-out line; SELECT Ground readout (exact live factors + twist
+  + stat stages; grid stays 4 commands). No damage/AI/catch/XP
+  numbers changed; RNG order/count in resolution unchanged.
+- **WP4 parity + battery:** headless parity harness 9/9
+  (~/workspace/ashs-journey-qa/battle-parity-log.txt): defaults,
+  Bloom banner + Recover +50% twist in classic, Tortoise Charm in
+  classic, Story −2 (Oddish 13→11), Fast Learner ×1.5 XP, real spar
+  win + candy in classic, Cerulean tale battle, Brock gym battle.
+  New suite tests/battle-model-checks.mjs 45/45 (defaults/saves/
+  validator, Set/Shift flows + XP semantics, RT regressions, P0
+  Part C, WP3 Part D, P1 Part E, Shift edge gates Part F). Full
+  battery green: rejuv 1–6 (44/42/63/53/55/46), fidelity 35,
+  campaign-smoke 24, audit-headless 17, audit-laptop public 40,
+  verify-slice 48 + qa-slice 134, validator 51 + fuzz 2000/2000 +
+  save-contract 6, Track B integration 114; qa-changed-flows fails
+  EXACTLY {b2, d9} (standing baseline). verify-live: zero
+  expectation changes (it never selects a style; its seeded save
+  stores 'rt', preserved by design). personal/ byte-identical.
+  Nothing deployed.
