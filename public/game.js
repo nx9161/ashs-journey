@@ -63668,7 +63668,14 @@ Object.assign(OverworldScene.prototype, {
       g.scenes.push(new BattleScene({
         kind: 'wild', foe, returnTo: this, rt: rtOf(g),
         uncatchable: !!wb.uncatchable, legendary: !!wb.legendary,
-        onEnd: (won) => { if (won) next(); },
+        // ADR-025 QA D1 (Cheat Shop QA, D1): endBattle passes
+        // (won, fled) — fleeing (RUN / Teleport / Safari run / foe
+        // fled) ends won=true + fled=true, so a flee must NOT
+        // advance the event chain into its completion steps.
+        // Stalling here leaves ev_<id>_done unwritten (runEvent
+        // only writes it when the chain runs off the end), so the
+        // event re-fires on re-entry and can be fought properly.
+        onEnd: (won, fled) => { if (won && !fled) next(); },
       }));
       return;
     }
