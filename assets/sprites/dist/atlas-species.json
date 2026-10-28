@@ -3,7 +3,7 @@
   "tile": 48,
   "size": [
     2046,
-    594
+    990
   ],
   "sprites": {
     "abra-back": {
@@ -240,8 +240,34 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "butterfree-back": {
+    "bulbasaur-back": {
       "x": 1189,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "bulbasaur-front": {
+      "x": 1255,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "butterfree-back": {
+      "x": 1321,
       "y": 1,
       "w": 64,
       "h": 64,
@@ -254,7 +280,7 @@
       "mirror_of": null
     },
     "butterfree-front": {
-      "x": 1255,
+      "x": 1387,
       "y": 1,
       "w": 64,
       "h": 64,
@@ -267,7 +293,7 @@
       "mirror_of": null
     },
     "caterpie-back": {
-      "x": 1321,
+      "x": 1453,
       "y": 1,
       "w": 64,
       "h": 64,
@@ -280,7 +306,33 @@
       "mirror_of": null
     },
     "caterpie-front": {
-      "x": 1387,
+      "x": 1519,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "chansey-back": {
+      "x": 1585,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "chansey-front": {
+      "x": 1651,
       "y": 1,
       "w": 64,
       "h": 64,
@@ -293,7 +345,7 @@
       "mirror_of": null
     },
     "charizard-back": {
-      "x": 1453,
+      "x": 1717,
       "y": 1,
       "w": 64,
       "h": 64,
@@ -306,7 +358,7 @@
       "mirror_of": null
     },
     "charizard-front": {
-      "x": 1519,
+      "x": 1783,
       "y": 1,
       "w": 64,
       "h": 64,
@@ -318,8 +370,34 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "charmander-back": {
+      "x": 1849,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "charmander-front": {
+      "x": 1915,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "charmeleon-back": {
-      "x": 1585,
+      "x": 1981,
       "y": 1,
       "w": 64,
       "h": 64,
@@ -332,84 +410,6 @@
       "mirror_of": null
     },
     "charmeleon-front": {
-      "x": 1651,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "clefairy-back": {
-      "x": 1717,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "clefairy-front": {
-      "x": 1783,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "cloyster-back": {
-      "x": 1849,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "cloyster-front": {
-      "x": 1915,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "dewgong-back": {
-      "x": 1981,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "dewgong-front": {
       "x": 1,
       "y": 67,
       "w": 64,
@@ -422,8 +422,242 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "dragonair-back": {
+    "clefable-back": {
       "x": 67,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "clefable-front": {
+      "x": 133,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "clefairy-back": {
+      "x": 199,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "clefairy-front": {
+      "x": 265,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "cloyster-back": {
+      "x": 331,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "cloyster-front": {
+      "x": 397,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "cubone-back": {
+      "x": 463,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "cubone-front": {
+      "x": 529,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dewgong-back": {
+      "x": 595,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dewgong-front": {
+      "x": 661,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "diglett-back": {
+      "x": 727,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "diglett-front": {
+      "x": 793,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ditto-back": {
+      "x": 859,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ditto-front": {
+      "x": 925,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dodrio-back": {
+      "x": 991,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dodrio-front": {
+      "x": 1057,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "doduo-back": {
+      "x": 1123,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "doduo-front": {
+      "x": 1189,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dragonair-back": {
+      "x": 1255,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -436,7 +670,7 @@
       "mirror_of": null
     },
     "dragonair-front": {
-      "x": 133,
+      "x": 1321,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -449,7 +683,7 @@
       "mirror_of": null
     },
     "dragonite-back": {
-      "x": 199,
+      "x": 1387,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -462,7 +696,7 @@
       "mirror_of": null
     },
     "dragonite-front": {
-      "x": 265,
+      "x": 1453,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -474,8 +708,60 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "dratini-back": {
+      "x": 1519,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dratini-front": {
+      "x": 1585,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "drowzee-back": {
+      "x": 1651,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "drowzee-front": {
+      "x": 1717,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "dugtrio-back": {
-      "x": 331,
+      "x": 1783,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -488,7 +774,7 @@
       "mirror_of": null
     },
     "dugtrio-front": {
-      "x": 397,
+      "x": 1849,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -501,7 +787,7 @@
       "mirror_of": null
     },
     "eevee-back": {
-      "x": 463,
+      "x": 1915,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -514,7 +800,7 @@
       "mirror_of": null
     },
     "eevee-front": {
-      "x": 529,
+      "x": 1981,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -527,8 +813,8 @@
       "mirror_of": null
     },
     "ekans-back": {
-      "x": 595,
-      "y": 67,
+      "x": 1,
+      "y": 133,
       "w": 64,
       "h": 64,
       "frames": [
@@ -540,292 +826,6 @@
       "mirror_of": null
     },
     "ekans-front": {
-      "x": 661,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "exeggutor-back": {
-      "x": 727,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "exeggutor-front": {
-      "x": 793,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "flareon-back": {
-      "x": 859,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "flareon-front": {
-      "x": 925,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "gastly-back": {
-      "x": 991,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "gastly-front": {
-      "x": 1057,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "gengar-back": {
-      "x": 1123,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "gengar-front": {
-      "x": 1189,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "geodude-back": {
-      "x": 1255,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "geodude-front": {
-      "x": 1321,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "golbat-back": {
-      "x": 1387,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "golbat-front": {
-      "x": 1453,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 17,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "graveler-back": {
-      "x": 1519,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "graveler-front": {
-      "x": 1585,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "growlithe-back": {
-      "x": 1651,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "growlithe-front": {
-      "x": 1717,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "gyarados-back": {
-      "x": 1783,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "gyarados-front": {
-      "x": 1849,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "haunter-back": {
-      "x": 1915,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "haunter-front": {
-      "x": 1981,
-      "y": 67,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "hitmonchan-back": {
-      "x": 1,
-      "y": 133,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "hitmonchan-front": {
       "x": 67,
       "y": 133,
       "w": 64,
@@ -833,12 +833,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "hitmonlee-back": {
+    "electabuzz-back": {
       "x": 133,
       "y": 133,
       "w": 64,
@@ -851,7 +851,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "hitmonlee-front": {
+    "electabuzz-front": {
       "x": 199,
       "y": 133,
       "w": 64,
@@ -864,7 +864,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "ivysaur-back": {
+    "electrode-back": {
       "x": 265,
       "y": 133,
       "w": 64,
@@ -872,12 +872,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ivysaur-front": {
+    "electrode-front": {
       "x": 331,
       "y": 133,
       "w": 64,
@@ -890,7 +890,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "jigglypuff-back": {
+    "exeggcute-back": {
       "x": 397,
       "y": 133,
       "w": 64,
@@ -898,12 +898,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "jigglypuff-front": {
+    "exeggcute-front": {
       "x": 463,
       "y": 133,
       "w": 64,
@@ -916,7 +916,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "jolteon-back": {
+    "exeggutor-back": {
       "x": 529,
       "y": 133,
       "w": 64,
@@ -924,12 +924,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "jolteon-front": {
+    "exeggutor-front": {
       "x": 595,
       "y": 133,
       "w": 64,
@@ -937,13 +937,26 @@
       "frames": [
         "idle"
       ],
-      "palette": 11,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "jynx-back": {
+    "farfetchd-back": {
       "x": 661,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "farfetchd-front": {
+      "x": 727,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -955,20 +968,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "jynx-front": {
-      "x": 727,
-      "y": 133,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 16,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "kadabra-back": {
+    "fearow-back": {
       "x": 793,
       "y": 133,
       "w": 64,
@@ -976,12 +976,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "kadabra-front": {
+    "fearow-front": {
       "x": 859,
       "y": 133,
       "w": 64,
@@ -989,12 +989,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 19,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "kakuna-back": {
+    "flareon-back": {
       "x": 925,
       "y": 133,
       "w": 64,
@@ -1002,12 +1002,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "kakuna-front": {
+    "flareon-front": {
       "x": 991,
       "y": 133,
       "w": 64,
@@ -1020,7 +1020,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "koffing-back": {
+    "gastly-back": {
       "x": 1057,
       "y": 133,
       "w": 64,
@@ -1033,7 +1033,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "koffing-front": {
+    "gastly-front": {
       "x": 1123,
       "y": 133,
       "w": 64,
@@ -1046,34 +1046,8 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "lapras-back": {
+    "gengar-back": {
       "x": 1189,
-      "y": 133,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "lapras-front": {
-      "x": 1255,
-      "y": 133,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 16,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "lickitung-back": {
-      "x": 1321,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1085,7 +1059,33 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "lickitung-front": {
+    "gengar-front": {
+      "x": 1255,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "geodude-back": {
+      "x": 1321,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "geodude-front": {
       "x": 1387,
       "y": 133,
       "w": 64,
@@ -1098,21 +1098,8 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "machamp-back": {
+    "gloom-back": {
       "x": 1453,
-      "y": 133,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "machamp-front": {
-      "x": 1519,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1124,8 +1111,73 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "machop-back": {
+    "gloom-front": {
+      "x": 1519,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golbat-back": {
       "x": 1585,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golbat-front": {
+      "x": 1651,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "goldeen-back": {
+      "x": 1717,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "goldeen-front": {
+      "x": 1783,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golduck-back": {
+      "x": 1849,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1137,9 +1189,763 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "machop-front": {
-      "x": 1651,
+    "golduck-front": {
+      "x": 1915,
       "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golem-back": {
+      "x": 1981,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golem-front": {
+      "x": 1,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "graveler-back": {
+      "x": 67,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "graveler-front": {
+      "x": 133,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "grimer-back": {
+      "x": 199,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "grimer-front": {
+      "x": 265,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "growlithe-back": {
+      "x": 331,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "growlithe-front": {
+      "x": 397,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "gyarados-back": {
+      "x": 463,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "gyarados-front": {
+      "x": 529,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "haunter-back": {
+      "x": 595,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "haunter-front": {
+      "x": 661,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hitmonchan-back": {
+      "x": 727,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hitmonchan-front": {
+      "x": 793,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hitmonlee-back": {
+      "x": 859,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hitmonlee-front": {
+      "x": 925,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "horsea-back": {
+      "x": 991,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "horsea-front": {
+      "x": 1057,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hypno-back": {
+      "x": 1123,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hypno-front": {
+      "x": 1189,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ivysaur-back": {
+      "x": 1255,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ivysaur-front": {
+      "x": 1321,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jigglypuff-back": {
+      "x": 1387,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jigglypuff-front": {
+      "x": 1453,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jolteon-back": {
+      "x": 1519,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jolteon-front": {
+      "x": 1585,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jynx-back": {
+      "x": 1651,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jynx-front": {
+      "x": 1717,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kabuto-back": {
+      "x": 1783,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kabuto-front": {
+      "x": 1849,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kabutops-back": {
+      "x": 1915,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kabutops-front": {
+      "x": 1981,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kadabra-back": {
+      "x": 1,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kadabra-front": {
+      "x": 67,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 19,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kakuna-back": {
+      "x": 133,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kakuna-front": {
+      "x": 199,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kangaskhan-back": {
+      "x": 265,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kangaskhan-front": {
+      "x": 331,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kingler-back": {
+      "x": 397,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kingler-front": {
+      "x": 463,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "koffing-back": {
+      "x": 529,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "koffing-front": {
+      "x": 595,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "krabby-back": {
+      "x": 661,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "krabby-front": {
+      "x": 727,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "lapras-back": {
+      "x": 793,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "lapras-front": {
+      "x": 859,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "lickitung-back": {
+      "x": 925,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "lickitung-front": {
+      "x": 991,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machamp-back": {
+      "x": 1057,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machamp-front": {
+      "x": 1123,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machoke-back": {
+      "x": 1189,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machoke-front": {
+      "x": 1255,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machop-back": {
+      "x": 1321,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machop-front": {
+      "x": 1387,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magikarp-back": {
+      "x": 1453,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magikarp-front": {
+      "x": 1519,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magmar-back": {
+      "x": 1585,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magmar-front": {
+      "x": 1651,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1152,7 +1958,7 @@
     },
     "magnemite-back": {
       "x": 1717,
-      "y": 133,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1165,7 +1971,7 @@
     },
     "magnemite-front": {
       "x": 1783,
-      "y": 133,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1176,9 +1982,35 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "mankey-back": {
+    "magneton-back": {
       "x": 1849,
-      "y": 133,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magneton-front": {
+      "x": 1915,
+      "y": 265,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mankey-back": {
+      "x": 1981,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1190,8 +2022,34 @@
       "mirror_of": null
     },
     "mankey-front": {
-      "x": 1915,
-      "y": 133,
+      "x": 1,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "marowak-back": {
+      "x": 67,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "marowak-front": {
+      "x": 133,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1203,8 +2061,8 @@
       "mirror_of": null
     },
     "meowth-back": {
-      "x": 1981,
-      "y": 133,
+      "x": 199,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1216,8 +2074,8 @@
       "mirror_of": null
     },
     "meowth-front": {
-      "x": 1,
-      "y": 199,
+      "x": 265,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1229,8 +2087,8 @@
       "mirror_of": null
     },
     "metapod-back": {
-      "x": 67,
-      "y": 199,
+      "x": 331,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1242,8 +2100,8 @@
       "mirror_of": null
     },
     "metapod-front": {
-      "x": 133,
-      "y": 199,
+      "x": 397,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1255,8 +2113,8 @@
       "mirror_of": null
     },
     "mew-back": {
-      "x": 199,
-      "y": 199,
+      "x": 463,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1268,8 +2126,8 @@
       "mirror_of": null
     },
     "mew-front": {
-      "x": 265,
-      "y": 199,
+      "x": 529,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1281,8 +2139,8 @@
       "mirror_of": null
     },
     "mewtwo-back": {
-      "x": 331,
-      "y": 199,
+      "x": 595,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1294,8 +2152,8 @@
       "mirror_of": null
     },
     "mewtwo-front": {
-      "x": 397,
-      "y": 199,
+      "x": 661,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1307,8 +2165,8 @@
       "mirror_of": null
     },
     "moltres-back": {
-      "x": 463,
-      "y": 199,
+      "x": 727,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1320,8 +2178,8 @@
       "mirror_of": null
     },
     "moltres-front": {
-      "x": 529,
-      "y": 199,
+      "x": 793,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1333,8 +2191,8 @@
       "mirror_of": null
     },
     "mrmime-back": {
-      "x": 595,
-      "y": 199,
+      "x": 859,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1346,8 +2204,8 @@
       "mirror_of": null
     },
     "mrmime-front": {
-      "x": 661,
-      "y": 199,
+      "x": 925,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1359,8 +2217,8 @@
       "mirror_of": null
     },
     "muk-back": {
-      "x": 727,
-      "y": 199,
+      "x": 991,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1372,8 +2230,8 @@
       "mirror_of": null
     },
     "muk-front": {
-      "x": 793,
-      "y": 199,
+      "x": 1057,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1385,8 +2243,8 @@
       "mirror_of": null
     },
     "nidoking-back": {
-      "x": 859,
-      "y": 199,
+      "x": 1123,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1398,8 +2256,8 @@
       "mirror_of": null
     },
     "nidoking-front": {
-      "x": 925,
-      "y": 199,
+      "x": 1189,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1411,8 +2269,8 @@
       "mirror_of": null
     },
     "nidoqueen-back": {
-      "x": 991,
-      "y": 199,
+      "x": 1255,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1424,8 +2282,8 @@
       "mirror_of": null
     },
     "nidoqueen-front": {
-      "x": 1057,
-      "y": 199,
+      "x": 1321,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1437,8 +2295,8 @@
       "mirror_of": null
     },
     "nidoranf-back": {
-      "x": 1123,
-      "y": 199,
+      "x": 1387,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1450,8 +2308,8 @@
       "mirror_of": null
     },
     "nidoranf-front": {
-      "x": 1189,
-      "y": 199,
+      "x": 1453,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1463,8 +2321,8 @@
       "mirror_of": null
     },
     "nidoranm-back": {
-      "x": 1255,
-      "y": 199,
+      "x": 1519,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1476,8 +2334,8 @@
       "mirror_of": null
     },
     "nidoranm-front": {
-      "x": 1321,
-      "y": 199,
+      "x": 1585,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1489,8 +2347,8 @@
       "mirror_of": null
     },
     "nidorina-back": {
-      "x": 1387,
-      "y": 199,
+      "x": 1651,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1502,8 +2360,60 @@
       "mirror_of": null
     },
     "nidorina-front": {
-      "x": 1453,
-      "y": 199,
+      "x": 1717,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidorino-back": {
+      "x": 1783,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidorino-front": {
+      "x": 1849,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ninetales-back": {
+      "x": 1915,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ninetales-front": {
+      "x": 1981,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1515,8 +2425,8 @@
       "mirror_of": null
     },
     "oddish-back": {
-      "x": 1519,
-      "y": 199,
+      "x": 1,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1528,8 +2438,8 @@
       "mirror_of": null
     },
     "oddish-front": {
-      "x": 1585,
-      "y": 199,
+      "x": 67,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1540,9 +2450,61 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "omanyte-back": {
+      "x": 133,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "omanyte-front": {
+      "x": 199,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "omastar-back": {
+      "x": 265,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "omastar-front": {
+      "x": 331,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "onix-back": {
-      "x": 1651,
-      "y": 199,
+      "x": 397,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1554,8 +2516,8 @@
       "mirror_of": null
     },
     "onix-front": {
-      "x": 1717,
-      "y": 199,
+      "x": 463,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1567,8 +2529,8 @@
       "mirror_of": null
     },
     "paras-back": {
-      "x": 1783,
-      "y": 199,
+      "x": 529,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1580,8 +2542,60 @@
       "mirror_of": null
     },
     "paras-front": {
-      "x": 1849,
-      "y": 199,
+      "x": 595,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "parasect-back": {
+      "x": 661,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "parasect-front": {
+      "x": 727,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "persian-back": {
+      "x": 793,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "persian-front": {
+      "x": 859,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1593,8 +2607,8 @@
       "mirror_of": null
     },
     "pidgeot-back": {
-      "x": 1915,
-      "y": 199,
+      "x": 925,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1606,8 +2620,8 @@
       "mirror_of": null
     },
     "pidgeot-front": {
-      "x": 1981,
-      "y": 199,
+      "x": 991,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1619,8 +2633,8 @@
       "mirror_of": null
     },
     "pidgeotto-back": {
-      "x": 1,
-      "y": 265,
+      "x": 1057,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1632,8 +2646,8 @@
       "mirror_of": null
     },
     "pidgeotto-front": {
-      "x": 67,
-      "y": 265,
+      "x": 1123,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1645,8 +2659,8 @@
       "mirror_of": null
     },
     "pidgey-back": {
-      "x": 133,
-      "y": 265,
+      "x": 1189,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1658,8 +2672,8 @@
       "mirror_of": null
     },
     "pidgey-front": {
-      "x": 199,
-      "y": 265,
+      "x": 1255,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1671,8 +2685,8 @@
       "mirror_of": null
     },
     "pikachu-back": {
-      "x": 265,
-      "y": 265,
+      "x": 1321,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1684,8 +2698,8 @@
       "mirror_of": null
     },
     "pikachu-front": {
-      "x": 331,
-      "y": 265,
+      "x": 1387,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1696,9 +2710,113 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "pinsir-back": {
+      "x": 1453,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pinsir-front": {
+      "x": 1519,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwag-back": {
+      "x": 1585,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwag-front": {
+      "x": 1651,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwhirl-back": {
+      "x": 1717,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwhirl-front": {
+      "x": 1783,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwrath-back": {
+      "x": 1849,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwrath-front": {
+      "x": 1915,
+      "y": 397,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "ponyta-back": {
-      "x": 397,
-      "y": 265,
+      "x": 1981,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1710,8 +2828,8 @@
       "mirror_of": null
     },
     "ponyta-front": {
-      "x": 463,
-      "y": 265,
+      "x": 1,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1722,9 +2840,87 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "porygon-back": {
+      "x": 67,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "porygon-front": {
+      "x": 133,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "primeape-back": {
+      "x": 199,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "primeape-front": {
+      "x": 265,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "psyduck-back": {
+      "x": 331,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "psyduck-front": {
+      "x": 397,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "raichu-back": {
-      "x": 529,
-      "y": 265,
+      "x": 463,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1736,8 +2932,8 @@
       "mirror_of": null
     },
     "raichu-front": {
-      "x": 595,
-      "y": 265,
+      "x": 529,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1749,8 +2945,8 @@
       "mirror_of": null
     },
     "rapidash-back": {
-      "x": 661,
-      "y": 265,
+      "x": 595,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1762,8 +2958,8 @@
       "mirror_of": null
     },
     "rapidash-front": {
-      "x": 727,
-      "y": 265,
+      "x": 661,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1775,8 +2971,8 @@
       "mirror_of": null
     },
     "raticate-back": {
-      "x": 793,
-      "y": 265,
+      "x": 727,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1788,8 +2984,8 @@
       "mirror_of": null
     },
     "raticate-front": {
-      "x": 859,
-      "y": 265,
+      "x": 793,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1801,8 +2997,8 @@
       "mirror_of": null
     },
     "rattata-back": {
-      "x": 925,
-      "y": 265,
+      "x": 859,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1814,8 +3010,8 @@
       "mirror_of": null
     },
     "rattata-front": {
-      "x": 991,
-      "y": 265,
+      "x": 925,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1827,8 +3023,8 @@
       "mirror_of": null
     },
     "rhydon-back": {
-      "x": 1057,
-      "y": 265,
+      "x": 991,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1840,8 +3036,8 @@
       "mirror_of": null
     },
     "rhydon-front": {
-      "x": 1123,
-      "y": 265,
+      "x": 1057,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1853,8 +3049,8 @@
       "mirror_of": null
     },
     "rhyhorn-back": {
-      "x": 1189,
-      "y": 265,
+      "x": 1123,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1866,8 +3062,8 @@
       "mirror_of": null
     },
     "rhyhorn-front": {
-      "x": 1255,
-      "y": 265,
+      "x": 1189,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1879,8 +3075,8 @@
       "mirror_of": null
     },
     "sandshrew-back": {
-      "x": 1321,
-      "y": 265,
+      "x": 1255,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1892,8 +3088,8 @@
       "mirror_of": null
     },
     "sandshrew-front": {
-      "x": 1387,
-      "y": 265,
+      "x": 1321,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1904,9 +3100,165 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "slowbro-back": {
+    "sandslash-back": {
+      "x": 1387,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "sandslash-front": {
       "x": 1453,
-      "y": 265,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "scyther-back": {
+      "x": 1519,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "scyther-front": {
+      "x": 1585,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seadra-back": {
+      "x": 1651,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seadra-front": {
+      "x": 1717,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seaking-back": {
+      "x": 1783,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seaking-front": {
+      "x": 1849,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seel-back": {
+      "x": 1915,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seel-front": {
+      "x": 1981,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "shellder-back": {
+      "x": 1,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "shellder-front": {
+      "x": 67,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "slowbro-back": {
+      "x": 133,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1918,8 +3270,8 @@
       "mirror_of": null
     },
     "slowbro-front": {
-      "x": 1519,
-      "y": 265,
+      "x": 199,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1930,9 +3282,61 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "slowpoke-back": {
+      "x": 265,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "slowpoke-front": {
+      "x": 331,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "snorlax-back": {
+      "x": 397,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "snorlax-front": {
+      "x": 463,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "spearow-back": {
-      "x": 1585,
-      "y": 265,
+      "x": 529,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1944,8 +3348,8 @@
       "mirror_of": null
     },
     "spearow-front": {
-      "x": 1651,
-      "y": 265,
+      "x": 595,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1956,9 +3360,35 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "squirtle-back": {
+      "x": 661,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "squirtle-front": {
+      "x": 727,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "starmie-back": {
-      "x": 1717,
-      "y": 265,
+      "x": 793,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1970,8 +3400,8 @@
       "mirror_of": null
     },
     "starmie-front": {
-      "x": 1783,
-      "y": 265,
+      "x": 859,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1983,8 +3413,8 @@
       "mirror_of": null
     },
     "staryu-back": {
-      "x": 1849,
-      "y": 265,
+      "x": 925,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1996,8 +3426,8 @@
       "mirror_of": null
     },
     "staryu-front": {
-      "x": 1915,
-      "y": 265,
+      "x": 991,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2009,8 +3439,8 @@
       "mirror_of": null
     },
     "tangela-back": {
-      "x": 1981,
-      "y": 265,
+      "x": 1057,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2022,8 +3452,8 @@
       "mirror_of": null
     },
     "tangela-front": {
-      "x": 1,
-      "y": 331,
+      "x": 1123,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2034,9 +3464,87 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tauros-back": {
+      "x": 1189,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tauros-front": {
+      "x": 1255,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tentacool-back": {
+      "x": 1321,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tentacool-front": {
+      "x": 1387,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tentacruel-back": {
+      "x": 1453,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tentacruel-front": {
+      "x": 1519,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "vaporeon-back": {
-      "x": 67,
-      "y": 331,
+      "x": 1585,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2048,8 +3556,8 @@
       "mirror_of": null
     },
     "vaporeon-front": {
-      "x": 133,
-      "y": 331,
+      "x": 1651,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2061,8 +3569,8 @@
       "mirror_of": null
     },
     "venomoth-back": {
-      "x": 199,
-      "y": 331,
+      "x": 1717,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2074,8 +3582,8 @@
       "mirror_of": null
     },
     "venomoth-front": {
-      "x": 265,
-      "y": 331,
+      "x": 1783,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2087,8 +3595,8 @@
       "mirror_of": null
     },
     "venonat-back": {
-      "x": 331,
-      "y": 331,
+      "x": 1849,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2100,8 +3608,8 @@
       "mirror_of": null
     },
     "venonat-front": {
-      "x": 397,
-      "y": 331,
+      "x": 1915,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2113,8 +3621,8 @@
       "mirror_of": null
     },
     "venusaur-back": {
-      "x": 463,
-      "y": 331,
+      "x": 1981,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2126,8 +3634,8 @@
       "mirror_of": null
     },
     "venusaur-front": {
-      "x": 529,
-      "y": 331,
+      "x": 1,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2139,8 +3647,8 @@
       "mirror_of": null
     },
     "victreebel-back": {
-      "x": 595,
-      "y": 331,
+      "x": 67,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2152,8 +3660,8 @@
       "mirror_of": null
     },
     "victreebel-front": {
-      "x": 661,
-      "y": 331,
+      "x": 133,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2165,8 +3673,8 @@
       "mirror_of": null
     },
     "vileplume-back": {
-      "x": 727,
-      "y": 331,
+      "x": 199,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2178,8 +3686,8 @@
       "mirror_of": null
     },
     "vileplume-front": {
-      "x": 793,
-      "y": 331,
+      "x": 265,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2191,8 +3699,8 @@
       "mirror_of": null
     },
     "voltorb-back": {
-      "x": 859,
-      "y": 331,
+      "x": 331,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2204,8 +3712,8 @@
       "mirror_of": null
     },
     "voltorb-front": {
-      "x": 925,
-      "y": 331,
+      "x": 397,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2217,8 +3725,8 @@
       "mirror_of": null
     },
     "vulpix-back": {
-      "x": 991,
-      "y": 331,
+      "x": 463,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2230,8 +3738,8 @@
       "mirror_of": null
     },
     "vulpix-front": {
-      "x": 1057,
-      "y": 331,
+      "x": 529,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2243,8 +3751,8 @@
       "mirror_of": null
     },
     "wartortle-back": {
-      "x": 1123,
-      "y": 331,
+      "x": 595,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2256,8 +3764,8 @@
       "mirror_of": null
     },
     "wartortle-front": {
-      "x": 1189,
-      "y": 331,
+      "x": 661,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2269,8 +3777,8 @@
       "mirror_of": null
     },
     "weedle-back": {
-      "x": 1255,
-      "y": 331,
+      "x": 727,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2282,8 +3790,8 @@
       "mirror_of": null
     },
     "weedle-front": {
-      "x": 1321,
-      "y": 331,
+      "x": 793,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2294,9 +3802,35 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "weepinbell-back": {
+      "x": 859,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "weepinbell-front": {
+      "x": 925,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "weezing-back": {
-      "x": 1387,
-      "y": 331,
+      "x": 991,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2308,8 +3842,8 @@
       "mirror_of": null
     },
     "weezing-front": {
-      "x": 1453,
-      "y": 331,
+      "x": 1057,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2320,9 +3854,35 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "wigglytuff-back": {
+      "x": 1123,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "wigglytuff-front": {
+      "x": 1189,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "zapdos-back": {
-      "x": 1519,
-      "y": 331,
+      "x": 1255,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2334,8 +3894,8 @@
       "mirror_of": null
     },
     "zapdos-front": {
-      "x": 1585,
-      "y": 331,
+      "x": 1321,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2347,8 +3907,8 @@
       "mirror_of": null
     },
     "zubat-back": {
-      "x": 1651,
-      "y": 331,
+      "x": 1387,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2360,8 +3920,8 @@
       "mirror_of": null
     },
     "zubat-front": {
-      "x": 1717,
-      "y": 331,
+      "x": 1453,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2373,8 +3933,8 @@
       "mirror_of": null
     },
     "abra-front-bob": {
-      "x": 1783,
-      "y": 331,
+      "x": 1519,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2386,8 +3946,8 @@
       "mirror_of": null
     },
     "aerodactyl-front-bob": {
-      "x": 1849,
-      "y": 331,
+      "x": 1585,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2399,8 +3959,8 @@
       "mirror_of": null
     },
     "alakazam-front-bob": {
-      "x": 1915,
-      "y": 331,
+      "x": 1651,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2412,8 +3972,8 @@
       "mirror_of": null
     },
     "arbok-front-bob": {
-      "x": 1981,
-      "y": 331,
+      "x": 1717,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2425,8 +3985,8 @@
       "mirror_of": null
     },
     "arcanine-front-bob": {
-      "x": 1,
-      "y": 397,
+      "x": 1783,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2438,8 +3998,8 @@
       "mirror_of": null
     },
     "articuno-front-bob": {
-      "x": 67,
-      "y": 397,
+      "x": 1849,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2451,8 +4011,8 @@
       "mirror_of": null
     },
     "beedrill-front-bob": {
-      "x": 133,
-      "y": 397,
+      "x": 1915,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2464,8 +4024,8 @@
       "mirror_of": null
     },
     "bellsprout-front-bob": {
-      "x": 199,
-      "y": 397,
+      "x": 1981,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2477,8 +4037,8 @@
       "mirror_of": null
     },
     "blastoise-front-bob": {
-      "x": 265,
-      "y": 397,
+      "x": 1,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2489,9 +4049,22 @@
       "derived_from": "blastoise-front",
       "mirror_of": null
     },
+    "bulbasaur-front-bob": {
+      "x": 67,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": "bulbasaur-front",
+      "mirror_of": null
+    },
     "butterfree-front-bob": {
-      "x": 331,
-      "y": 397,
+      "x": 133,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2503,8 +4076,8 @@
       "mirror_of": null
     },
     "caterpie-front-bob": {
-      "x": 397,
-      "y": 397,
+      "x": 199,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2515,9 +4088,22 @@
       "derived_from": "caterpie-front",
       "mirror_of": null
     },
+    "chansey-front-bob": {
+      "x": 265,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "chansey-front",
+      "mirror_of": null
+    },
     "charizard-front-bob": {
-      "x": 463,
-      "y": 397,
+      "x": 331,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2528,9 +4114,22 @@
       "derived_from": "charizard-front",
       "mirror_of": null
     },
+    "charmander-front-bob": {
+      "x": 397,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": "charmander-front",
+      "mirror_of": null
+    },
     "charmeleon-front-bob": {
-      "x": 529,
-      "y": 397,
+      "x": 463,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2541,9 +4140,22 @@
       "derived_from": "charmeleon-front",
       "mirror_of": null
     },
+    "clefable-front-bob": {
+      "x": 529,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "clefable-front",
+      "mirror_of": null
+    },
     "clefairy-front-bob": {
       "x": 595,
-      "y": 397,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2556,7 +4168,7 @@
     },
     "cloyster-front-bob": {
       "x": 661,
-      "y": 397,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2567,9 +4179,22 @@
       "derived_from": "cloyster-front",
       "mirror_of": null
     },
-    "dewgong-front-bob": {
+    "cubone-front-bob": {
       "x": 727,
-      "y": 397,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "cubone-front",
+      "mirror_of": null
+    },
+    "dewgong-front-bob": {
+      "x": 793,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2580,9 +4205,61 @@
       "derived_from": "dewgong-front",
       "mirror_of": null
     },
+    "diglett-front-bob": {
+      "x": 859,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "diglett-front",
+      "mirror_of": null
+    },
+    "ditto-front-bob": {
+      "x": 925,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "ditto-front",
+      "mirror_of": null
+    },
+    "dodrio-front-bob": {
+      "x": 991,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "dodrio-front",
+      "mirror_of": null
+    },
+    "doduo-front-bob": {
+      "x": 1057,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "doduo-front",
+      "mirror_of": null
+    },
     "dragonair-front-bob": {
-      "x": 793,
-      "y": 397,
+      "x": 1123,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2594,8 +4271,8 @@
       "mirror_of": null
     },
     "dragonite-front-bob": {
-      "x": 859,
-      "y": 397,
+      "x": 1189,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2606,9 +4283,35 @@
       "derived_from": "dragonite-front",
       "mirror_of": null
     },
+    "dratini-front-bob": {
+      "x": 1255,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "dratini-front",
+      "mirror_of": null
+    },
+    "drowzee-front-bob": {
+      "x": 1321,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "drowzee-front",
+      "mirror_of": null
+    },
     "dugtrio-front-bob": {
-      "x": 925,
-      "y": 397,
+      "x": 1387,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2620,8 +4323,8 @@
       "mirror_of": null
     },
     "eevee-front-bob": {
-      "x": 991,
-      "y": 397,
+      "x": 1453,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2633,8 +4336,8 @@
       "mirror_of": null
     },
     "ekans-front-bob": {
-      "x": 1057,
-      "y": 397,
+      "x": 1519,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2645,9 +4348,48 @@
       "derived_from": "ekans-front",
       "mirror_of": null
     },
+    "electabuzz-front-bob": {
+      "x": 1585,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "electabuzz-front",
+      "mirror_of": null
+    },
+    "electrode-front-bob": {
+      "x": 1651,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "electrode-front",
+      "mirror_of": null
+    },
+    "exeggcute-front-bob": {
+      "x": 1717,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "exeggcute-front",
+      "mirror_of": null
+    },
     "exeggutor-front-bob": {
-      "x": 1123,
-      "y": 397,
+      "x": 1783,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2658,9 +4400,35 @@
       "derived_from": "exeggutor-front",
       "mirror_of": null
     },
+    "farfetchd-front-bob": {
+      "x": 1849,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": "farfetchd-front",
+      "mirror_of": null
+    },
+    "fearow-front-bob": {
+      "x": 1915,
+      "y": 661,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": "fearow-front",
+      "mirror_of": null
+    },
     "flareon-front-bob": {
-      "x": 1189,
-      "y": 397,
+      "x": 1981,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2672,8 +4440,8 @@
       "mirror_of": null
     },
     "gastly-front-bob": {
-      "x": 1255,
-      "y": 397,
+      "x": 1,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2685,8 +4453,8 @@
       "mirror_of": null
     },
     "gengar-front-bob": {
-      "x": 1321,
-      "y": 397,
+      "x": 67,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2698,8 +4466,8 @@
       "mirror_of": null
     },
     "geodude-front-bob": {
-      "x": 1387,
-      "y": 397,
+      "x": 133,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2710,9 +4478,22 @@
       "derived_from": "geodude-front",
       "mirror_of": null
     },
+    "gloom-front-bob": {
+      "x": 199,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": "gloom-front",
+      "mirror_of": null
+    },
     "golbat-front-bob": {
-      "x": 1453,
-      "y": 397,
+      "x": 265,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2723,9 +4504,48 @@
       "derived_from": "golbat-front",
       "mirror_of": null
     },
+    "goldeen-front-bob": {
+      "x": 331,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "goldeen-front",
+      "mirror_of": null
+    },
+    "golduck-front-bob": {
+      "x": 397,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": "golduck-front",
+      "mirror_of": null
+    },
+    "golem-front-bob": {
+      "x": 463,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "golem-front",
+      "mirror_of": null
+    },
     "graveler-front-bob": {
-      "x": 1519,
-      "y": 397,
+      "x": 529,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2736,9 +4556,22 @@
       "derived_from": "graveler-front",
       "mirror_of": null
     },
+    "grimer-front-bob": {
+      "x": 595,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "grimer-front",
+      "mirror_of": null
+    },
     "growlithe-front-bob": {
-      "x": 1585,
-      "y": 397,
+      "x": 661,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2750,8 +4583,8 @@
       "mirror_of": null
     },
     "gyarados-front-bob": {
-      "x": 1651,
-      "y": 397,
+      "x": 727,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2763,8 +4596,8 @@
       "mirror_of": null
     },
     "haunter-front-bob": {
-      "x": 1717,
-      "y": 397,
+      "x": 793,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2776,8 +4609,8 @@
       "mirror_of": null
     },
     "hitmonchan-front-bob": {
-      "x": 1783,
-      "y": 397,
+      "x": 859,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2789,8 +4622,8 @@
       "mirror_of": null
     },
     "hitmonlee-front-bob": {
-      "x": 1849,
-      "y": 397,
+      "x": 925,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2801,9 +4634,35 @@
       "derived_from": "hitmonlee-front",
       "mirror_of": null
     },
+    "horsea-front-bob": {
+      "x": 991,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "horsea-front",
+      "mirror_of": null
+    },
+    "hypno-front-bob": {
+      "x": 1057,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "hypno-front",
+      "mirror_of": null
+    },
     "ivysaur-front-bob": {
-      "x": 1915,
-      "y": 397,
+      "x": 1123,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2815,8 +4674,8 @@
       "mirror_of": null
     },
     "jigglypuff-front-bob": {
-      "x": 1981,
-      "y": 397,
+      "x": 1189,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2828,8 +4687,8 @@
       "mirror_of": null
     },
     "jolteon-front-bob": {
-      "x": 1,
-      "y": 463,
+      "x": 1255,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2841,8 +4700,8 @@
       "mirror_of": null
     },
     "jynx-front-bob": {
-      "x": 67,
-      "y": 463,
+      "x": 1321,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2853,9 +4712,35 @@
       "derived_from": "jynx-front",
       "mirror_of": null
     },
+    "kabuto-front-bob": {
+      "x": 1387,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "kabuto-front",
+      "mirror_of": null
+    },
+    "kabutops-front-bob": {
+      "x": 1453,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "kabutops-front",
+      "mirror_of": null
+    },
     "kadabra-front-bob": {
-      "x": 133,
-      "y": 463,
+      "x": 1519,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2867,8 +4752,8 @@
       "mirror_of": null
     },
     "kakuna-front-bob": {
-      "x": 199,
-      "y": 463,
+      "x": 1585,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2879,9 +4764,35 @@
       "derived_from": "kakuna-front",
       "mirror_of": null
     },
+    "kangaskhan-front-bob": {
+      "x": 1651,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "kangaskhan-front",
+      "mirror_of": null
+    },
+    "kingler-front-bob": {
+      "x": 1717,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "kingler-front",
+      "mirror_of": null
+    },
     "koffing-front-bob": {
-      "x": 265,
-      "y": 463,
+      "x": 1783,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2892,9 +4803,22 @@
       "derived_from": "koffing-front",
       "mirror_of": null
     },
+    "krabby-front-bob": {
+      "x": 1849,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "krabby-front",
+      "mirror_of": null
+    },
     "lapras-front-bob": {
-      "x": 331,
-      "y": 463,
+      "x": 1915,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2906,8 +4830,8 @@
       "mirror_of": null
     },
     "lickitung-front-bob": {
-      "x": 397,
-      "y": 463,
+      "x": 1981,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2919,8 +4843,8 @@
       "mirror_of": null
     },
     "machamp-front-bob": {
-      "x": 463,
-      "y": 463,
+      "x": 1,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2931,9 +4855,22 @@
       "derived_from": "machamp-front",
       "mirror_of": null
     },
+    "machoke-front-bob": {
+      "x": 67,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "machoke-front",
+      "mirror_of": null
+    },
     "machop-front-bob": {
-      "x": 529,
-      "y": 463,
+      "x": 133,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2944,9 +4881,35 @@
       "derived_from": "machop-front",
       "mirror_of": null
     },
+    "magikarp-front-bob": {
+      "x": 199,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "magikarp-front",
+      "mirror_of": null
+    },
+    "magmar-front-bob": {
+      "x": 265,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": "magmar-front",
+      "mirror_of": null
+    },
     "magnemite-front-bob": {
-      "x": 595,
-      "y": 463,
+      "x": 331,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2957,9 +4920,22 @@
       "derived_from": "magnemite-front",
       "mirror_of": null
     },
+    "magneton-front-bob": {
+      "x": 397,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": "magneton-front",
+      "mirror_of": null
+    },
     "mankey-front-bob": {
-      "x": 661,
-      "y": 463,
+      "x": 463,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2970,9 +4946,22 @@
       "derived_from": "mankey-front",
       "mirror_of": null
     },
+    "marowak-front-bob": {
+      "x": 529,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "marowak-front",
+      "mirror_of": null
+    },
     "meowth-front-bob": {
-      "x": 727,
-      "y": 463,
+      "x": 595,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2984,8 +4973,8 @@
       "mirror_of": null
     },
     "metapod-front-bob": {
-      "x": 793,
-      "y": 463,
+      "x": 661,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2997,8 +4986,8 @@
       "mirror_of": null
     },
     "mew-front-bob": {
-      "x": 859,
-      "y": 463,
+      "x": 727,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3010,8 +4999,8 @@
       "mirror_of": null
     },
     "mewtwo-front-bob": {
-      "x": 925,
-      "y": 463,
+      "x": 793,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3023,8 +5012,8 @@
       "mirror_of": null
     },
     "moltres-front-bob": {
-      "x": 991,
-      "y": 463,
+      "x": 859,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3036,8 +5025,8 @@
       "mirror_of": null
     },
     "mrmime-front-bob": {
-      "x": 1057,
-      "y": 463,
+      "x": 925,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3049,8 +5038,8 @@
       "mirror_of": null
     },
     "muk-front-bob": {
-      "x": 1123,
-      "y": 463,
+      "x": 991,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3062,8 +5051,8 @@
       "mirror_of": null
     },
     "nidoking-front-bob": {
-      "x": 1189,
-      "y": 463,
+      "x": 1057,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3075,8 +5064,8 @@
       "mirror_of": null
     },
     "nidoqueen-front-bob": {
-      "x": 1255,
-      "y": 463,
+      "x": 1123,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3088,8 +5077,8 @@
       "mirror_of": null
     },
     "nidoranf-front-bob": {
-      "x": 1321,
-      "y": 463,
+      "x": 1189,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3101,8 +5090,8 @@
       "mirror_of": null
     },
     "nidoranm-front-bob": {
-      "x": 1387,
-      "y": 463,
+      "x": 1255,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3114,8 +5103,8 @@
       "mirror_of": null
     },
     "nidorina-front-bob": {
-      "x": 1453,
-      "y": 463,
+      "x": 1321,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3126,9 +5115,35 @@
       "derived_from": "nidorina-front",
       "mirror_of": null
     },
+    "nidorino-front-bob": {
+      "x": 1387,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "nidorino-front",
+      "mirror_of": null
+    },
+    "ninetales-front-bob": {
+      "x": 1453,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "ninetales-front",
+      "mirror_of": null
+    },
     "oddish-front-bob": {
       "x": 1519,
-      "y": 463,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3139,9 +5154,35 @@
       "derived_from": "oddish-front",
       "mirror_of": null
     },
-    "onix-front-bob": {
+    "omanyte-front-bob": {
       "x": 1585,
-      "y": 463,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "omanyte-front",
+      "mirror_of": null
+    },
+    "omastar-front-bob": {
+      "x": 1651,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "omastar-front",
+      "mirror_of": null
+    },
+    "onix-front-bob": {
+      "x": 1717,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3153,8 +5194,8 @@
       "mirror_of": null
     },
     "paras-front-bob": {
-      "x": 1651,
-      "y": 463,
+      "x": 1783,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3165,9 +5206,35 @@
       "derived_from": "paras-front",
       "mirror_of": null
     },
+    "parasect-front-bob": {
+      "x": 1849,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": "parasect-front",
+      "mirror_of": null
+    },
+    "persian-front-bob": {
+      "x": 1915,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "persian-front",
+      "mirror_of": null
+    },
     "pidgeot-front-bob": {
-      "x": 1717,
-      "y": 463,
+      "x": 1981,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3179,8 +5246,8 @@
       "mirror_of": null
     },
     "pidgeotto-front-bob": {
-      "x": 1783,
-      "y": 463,
+      "x": 1,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3192,8 +5259,8 @@
       "mirror_of": null
     },
     "pidgey-front-bob": {
-      "x": 1849,
-      "y": 463,
+      "x": 67,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3205,8 +5272,8 @@
       "mirror_of": null
     },
     "pikachu-front-bob": {
-      "x": 1915,
-      "y": 463,
+      "x": 133,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3217,9 +5284,61 @@
       "derived_from": "pikachu-front",
       "mirror_of": null
     },
+    "pinsir-front-bob": {
+      "x": 199,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "pinsir-front",
+      "mirror_of": null
+    },
+    "poliwag-front-bob": {
+      "x": 265,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "poliwag-front",
+      "mirror_of": null
+    },
+    "poliwhirl-front-bob": {
+      "x": 331,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "poliwhirl-front",
+      "mirror_of": null
+    },
+    "poliwrath-front-bob": {
+      "x": 397,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "poliwrath-front",
+      "mirror_of": null
+    },
     "ponyta-front-bob": {
-      "x": 1981,
-      "y": 463,
+      "x": 463,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3230,9 +5349,48 @@
       "derived_from": "ponyta-front",
       "mirror_of": null
     },
+    "porygon-front-bob": {
+      "x": 529,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "porygon-front",
+      "mirror_of": null
+    },
+    "primeape-front-bob": {
+      "x": 595,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "primeape-front",
+      "mirror_of": null
+    },
+    "psyduck-front-bob": {
+      "x": 661,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "psyduck-front",
+      "mirror_of": null
+    },
     "raichu-front-bob": {
-      "x": 1,
-      "y": 529,
+      "x": 727,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3244,8 +5402,8 @@
       "mirror_of": null
     },
     "rapidash-front-bob": {
-      "x": 67,
-      "y": 529,
+      "x": 793,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3257,8 +5415,8 @@
       "mirror_of": null
     },
     "raticate-front-bob": {
-      "x": 133,
-      "y": 529,
+      "x": 859,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3270,8 +5428,8 @@
       "mirror_of": null
     },
     "rattata-front-bob": {
-      "x": 199,
-      "y": 529,
+      "x": 925,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3283,8 +5441,8 @@
       "mirror_of": null
     },
     "rhydon-front-bob": {
-      "x": 265,
-      "y": 529,
+      "x": 991,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3296,8 +5454,8 @@
       "mirror_of": null
     },
     "rhyhorn-front-bob": {
-      "x": 331,
-      "y": 529,
+      "x": 1057,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3309,8 +5467,8 @@
       "mirror_of": null
     },
     "sandshrew-front-bob": {
-      "x": 397,
-      "y": 529,
+      "x": 1123,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3321,9 +5479,87 @@
       "derived_from": "sandshrew-front",
       "mirror_of": null
     },
+    "sandslash-front-bob": {
+      "x": 1189,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "sandslash-front",
+      "mirror_of": null
+    },
+    "scyther-front-bob": {
+      "x": 1255,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "scyther-front",
+      "mirror_of": null
+    },
+    "seadra-front-bob": {
+      "x": 1321,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "seadra-front",
+      "mirror_of": null
+    },
+    "seaking-front-bob": {
+      "x": 1387,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "seaking-front",
+      "mirror_of": null
+    },
+    "seel-front-bob": {
+      "x": 1453,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "seel-front",
+      "mirror_of": null
+    },
+    "shellder-front-bob": {
+      "x": 1519,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "shellder-front",
+      "mirror_of": null
+    },
     "slowbro-front-bob": {
-      "x": 463,
-      "y": 529,
+      "x": 1585,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3334,9 +5570,35 @@
       "derived_from": "slowbro-front",
       "mirror_of": null
     },
+    "slowpoke-front-bob": {
+      "x": 1651,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "slowpoke-front",
+      "mirror_of": null
+    },
+    "snorlax-front-bob": {
+      "x": 1717,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "snorlax-front",
+      "mirror_of": null
+    },
     "spearow-front-bob": {
-      "x": 529,
-      "y": 529,
+      "x": 1783,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3347,9 +5609,22 @@
       "derived_from": "spearow-front",
       "mirror_of": null
     },
+    "squirtle-front-bob": {
+      "x": 1849,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "squirtle-front",
+      "mirror_of": null
+    },
     "starmie-front-bob": {
-      "x": 595,
-      "y": 529,
+      "x": 1915,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3361,8 +5636,8 @@
       "mirror_of": null
     },
     "staryu-front-bob": {
-      "x": 661,
-      "y": 529,
+      "x": 1981,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3374,8 +5649,8 @@
       "mirror_of": null
     },
     "tangela-front-bob": {
-      "x": 727,
-      "y": 529,
+      "x": 1,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3386,9 +5661,48 @@
       "derived_from": "tangela-front",
       "mirror_of": null
     },
+    "tauros-front-bob": {
+      "x": 67,
+      "y": 925,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "tauros-front",
+      "mirror_of": null
+    },
+    "tentacool-front-bob": {
+      "x": 133,
+      "y": 925,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "tentacool-front",
+      "mirror_of": null
+    },
+    "tentacruel-front-bob": {
+      "x": 199,
+      "y": 925,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "tentacruel-front",
+      "mirror_of": null
+    },
     "vaporeon-front-bob": {
-      "x": 793,
-      "y": 529,
+      "x": 265,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3400,8 +5714,8 @@
       "mirror_of": null
     },
     "venomoth-front-bob": {
-      "x": 859,
-      "y": 529,
+      "x": 331,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3413,8 +5727,8 @@
       "mirror_of": null
     },
     "venonat-front-bob": {
-      "x": 925,
-      "y": 529,
+      "x": 397,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3426,8 +5740,8 @@
       "mirror_of": null
     },
     "venusaur-front-bob": {
-      "x": 991,
-      "y": 529,
+      "x": 463,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3439,8 +5753,8 @@
       "mirror_of": null
     },
     "victreebel-front-bob": {
-      "x": 1057,
-      "y": 529,
+      "x": 529,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3452,8 +5766,8 @@
       "mirror_of": null
     },
     "vileplume-front-bob": {
-      "x": 1123,
-      "y": 529,
+      "x": 595,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3465,8 +5779,8 @@
       "mirror_of": null
     },
     "voltorb-front-bob": {
-      "x": 1189,
-      "y": 529,
+      "x": 661,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3478,8 +5792,8 @@
       "mirror_of": null
     },
     "vulpix-front-bob": {
-      "x": 1255,
-      "y": 529,
+      "x": 727,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3491,8 +5805,8 @@
       "mirror_of": null
     },
     "wartortle-front-bob": {
-      "x": 1321,
-      "y": 529,
+      "x": 793,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3504,8 +5818,8 @@
       "mirror_of": null
     },
     "weedle-front-bob": {
-      "x": 1387,
-      "y": 529,
+      "x": 859,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3516,9 +5830,22 @@
       "derived_from": "weedle-front",
       "mirror_of": null
     },
+    "weepinbell-front-bob": {
+      "x": 925,
+      "y": 925,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "weepinbell-front",
+      "mirror_of": null
+    },
     "weezing-front-bob": {
-      "x": 1453,
-      "y": 529,
+      "x": 991,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3529,9 +5856,22 @@
       "derived_from": "weezing-front",
       "mirror_of": null
     },
+    "wigglytuff-front-bob": {
+      "x": 1057,
+      "y": 925,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "wigglytuff-front",
+      "mirror_of": null
+    },
     "zapdos-front-bob": {
-      "x": 1519,
-      "y": 529,
+      "x": 1123,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3543,8 +5883,8 @@
       "mirror_of": null
     },
     "zubat-front-bob": {
-      "x": 1585,
-      "y": 529,
+      "x": 1189,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [

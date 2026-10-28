@@ -2184,3 +2184,167 @@ standing baseline {b2, d9}**.
   presentation choice forced by the data's two names for one pair;
   documented in the art.mjs comment and §2 above so QA grades
   against the stated map.
+
+## World Art Wave 6c — Battle Presentation: Full Roster + Arenas (2026-10-28)
+
+Source of truth: census §3 (battle rows) + §4 Wave 6c. Scope honored:
+the remaining forge-fallback roster + per-Ground arena art — no
+field-logic, balance, or state change. This wave closes Wave 6 and
+the census's battle rows.
+
+### 1. Part 1 — the remaining roster (60 species, 120 sprites)
+
+- **Enumeration from the render audit, not memory:** hand art ⇔
+  `ART[id-front]` + `ART[id-back]` both exist in the merged species
+  data (152 = 151 + partner). At wave start: **92 hand / 60 forge**.
+  The 60: bulbasaur, charmander, squirtle, fearow, sandslash,
+  nidorino, clefable, ninetales, wigglytuff, gloom, parasect,
+  diglett, persian, psyduck, golduck, primeape, poliwag, poliwhirl,
+  poliwrath, machoke, weepinbell, tentacool, tentacruel, golem,
+  slowpoke, magneton, farfetchd, doduo, dodrio, seel, grimer,
+  shellder, drowzee, hypno, krabby, kingler, electrode, exeggcute,
+  cubone, marowak, chansey, kangaskhan, horsea, seadra, goldeen,
+  seaking, scyther, electabuzz, magmar, pinsir, tauros, magikarp,
+  ditto, porygon, omanyte, omastar, kabuto, kabutops, snorlax,
+  dratini.
+- **All 60 authored front + back at 64×64** in the `.pix` pipeline:
+  full-body anatomy per species (Bulbasaur's bulb + spots,
+  Charmander's flame tail, Squirtle's shell, Cubone/Marowak skull
+  masks, Magneton's three magnet spheres, Tentacruel's tentacles,
+  Dratini's serpent coils, Snorlax's belly), five-step primary
+  ramps (≥3 shades per main surface + highlight), **12–17 painted
+  colors each (min 12, mean 13.2 across the 120)**. Backs are
+  genuine rear drawings — shell domes (Squirtle/Omanyte/Kabuto),
+  dorsal panels/stripes/spots, back-of-head masses, no faces —
+  never flipped fronts. Pair completeness: 60/60 ship both sides;
+  the 60 derived `-front-bob` frames regenerate from the new fronts.
+
+### 2. Species-render audit — THE audit of the mission
+
+Same method as 6a/6b, cross-checked at runtime by driving
+`speciesBattleArt` (stub document) over **all 152 ids + the partner
+path**:
+
+- **Before:** 92 hand-art ids · **60 forge-fallback**.
+- **After:** **152/152 hand-art ids · 0 forge-fallback.** Runtime
+  drive agrees exactly: every id resolves authored front + back
+  (front ≠ back canvas) + `-front-bob` (partner: front/back 64×64,
+  draw size 64; partner never had a bob, as before).
+- **Forge reachability for species art = 0.** `forgeSprite`'s only
+  remaining consumer is the `speciesBattleArt` fallback branch in
+  `src/engine/art.mjs`, which no species id in the data can reach
+  any more (proven by the drive above). The separate
+  `forgeHumanoid` painter still legitimately serves the NPC
+  fallback in `npcFrames` (non-species, unchanged from Wave 0/3).
+
+### 3. Part 2 — arenas (15/15 Grounds)
+
+- Battles backdrop onto the shared `drawArena` (battle.mjs;
+  battle-rt.mjs calls the same prototype method, so **both engines
+  render the treatment** — classic horizon 0.42 and RT horizon
+  0.22 alike). Wave 6c adds `ARENA_ART`: one entry per Ground in
+  `src/data/grounds.mjs` (open, bloom, storm, mire, grave, ember,
+  frost, tide, rubble, mind, venom, volt, marsh, pyre, spirit),
+  each a palette set (6 sky/wall bands + 6 ground bands + dark /
+  light / accent) + a horizon motif + a ground texture, composed
+  at draw time from rects/strips through `arenaHash` — **texture
+  composition, zero raster assets**. The arena follows
+  `battle.field` exactly as resolved at battle start; no
+  field-logic changes.
+- **Motifs:** trees (open), flowers (bloom), storm clouds +
+  lightning (storm), reeds (mire/marsh), tombstones (grave/
+  spirit), flame tongues (ember/pyre), snow drifts + ice spikes
+  (frost), wave crests + reef (tide), rock teeth (rubble),
+  floating rune crystals (mind), mushroom silhouettes (venom),
+  storm + pylons (volt). Aliases sharing rules still carry
+  distinct treatments (volt ≠ storm, marsh ≠ bloom, pyre ≠ ember,
+  spirit ≠ mire/grave palettes). **Textures:** tuft, petal, spark,
+  chunk, fleck, foam, bubble ground speckle per Ground.
+- **Drive proof:** `drawArena` driven for all 15 fields at both
+  horizons through the built bundle — **15/15 distinct fill
+  signatures in classic AND in RT**, 14–15 distinct colors per
+  arena. Tide (foam blues) vs Pyre (charcoal + flame orange) vs
+  Grave (dusk purple + tombstones) are unmistakable.
+- **Tint call (documented):** the Phase 2 flat tint wash drops
+  from 0.13 to **0.05** when a per-Ground treatment is on screen
+  (the art now carries the field identity); legacy no-field calls
+  keep 0.13. The GROUND chip, banner text, and all field
+  information the player had are unchanged. One preserved legacy
+  case: Open-Ground *trainer* battles keep their sandy tournament
+  floor palette (the sky/horizon treatment still applies).
+
+### 4. Regen safety + bytes
+
+- `build-art.mjs` run twice: **byte-identical** (art-data + all
+  atlases). ART keys **624 → 804, zero lost** (gains = 120 species
+  sprites + 60 derived bobs). Per-sprite palette cap 32 respected.
+- **Bytes:** `art-data.mjs` 1,651,317 → **2,527,237 B
+  (+875,920)**; `public/game.js` 2,920,753 → **3,807,029 B
+  (+886,276** = the art segment + 10,356 of arena code).
+  **Arena cost: 10,356 B total for all 15 Grounds ≈ 690 B per
+  Ground all-in** (table + motif/texture painters), far under the
+  ~25 KB/Ground guide.
+- **Against the Wave 0 projection (art-data 2,542,105 /
+  game.js 3,742,979):** art-data lands **UNDER by 14,868 B**;
+  game.js lands over by 64,050 B — the overage is code (this
+  wave's arena painters + earlier waves' presentation code), not
+  art. **Against the hard ceilings:** art-data 2,527,237 <
+  3,000,000 internal art ceiling (472,763 spare); game.js
+  3,807,029 ≪ 12,582,912 budgets gate. **Wave 6 budget
+  (2,650,000 B): total consumed 2,186,738** (6a 317,103 + 6b
+  983,359 + 6c 886,276, game.js basis) — 463,262 spare. 6c used
+  886,276 of its 1,351,416 remaining — no flag needed, it fit.
+- Built vercel+guest only; **personal/ byte-identical to HEAD**
+  (battery full-builds restored; content-hash personal line
+  restored to the HEAD value). Nothing deployed.
+
+### 5. Battery (public)
+
+rejuv-phase1 **44/44** · phase2 **42/42** · phase3 **63/63** ·
+phase4 **53/53** · phase5 **55/55** · phase6 **46/46** · fidelity
+**35/35** · campaign-smoke **24/24** · audit-headless **17/17** ·
+audit-laptop public **41/41** · verify-slice / qa-slice
+**134/134** · validator test **51/51** · validator fuzz
+**2000/2000** · save-contract **6/6** · Track B **114/114** via
+its DOCUMENTED invocation (`node --import ./register.mjs run.mjs`
+in `tests/`; the bare `npm test` script omission is pre-existing
+and was not treated as a failure) · budgets-check **all gates
+pass** · contamination **clean** · drift-gate PASS · verify-audio
+**ALL PASS** · qa-changed-flows **55/57, failures exactly the
+standing baseline {b2, d9}**.
+
+### Flags / deviations
+
+- **audit-laptop first run read 40/40, clean re-run 41/41** —
+  the known fixed-sleep cascade signature under sandbox load
+  (register standing note); the re-run is the verdict.
+- The Wave 0 game.js projection is exceeded by 64,050 B on code
+  growth while art itself lands under projection — reported
+  plainly; both hard ceilings hold with wide margins.
+
+## World Art Wave 6 — Summary (6a + 6b + 6c, mission close)
+
+- **Species:** 14 hand-art ids at Wave 6 open → 29 (6a) → 92 (6b)
+  → **152/152 (6c)**. Forge-fallback species: 138 → 123 → 60 →
+  **0**. Every species entry (151 + partner) resolves authored
+  64×64 front + back (+ derived bob) through `speciesBattleArt`;
+  pair completeness 152/152; the forge painter has zero runtime
+  reachability for species art.
+- **Trainers:** 16 battle-scale figures + Ash's back (6b), all
+  reachable in real battle intros in both engines.
+- **Arenas:** the striped void is gone — **15/15 Grounds** carry
+  distinct palette + motif + texture treatments in classic and
+  RT battles (6c), following `battle.field` with no field-logic
+  change.
+- **Final numbers:** ART keys 406 → **804** (zero lost across the
+  whole wave; build-art byte-identical on re-run at every step).
+  `art-data.mjs` 352,733 → **2,527,237 B** vs the Wave 0
+  projection 2,542,105 (under by 14,868). `public/game.js`
+  1,620,291 → **3,807,029 B** vs projection 3,742,979 (over by
+  64,050, code growth; budgets gate 12,582,912 and the 3.0 MB
+  art-data ceiling both hold). Wave 6 budget 2,650,000 B:
+  consumed 2,186,738, spare 463,262.
+- **Battery at close:** identical green state at every sub-wave —
+  full public battery green, qa-changed-flows failures exactly
+  the standing baseline {b2, d9}, personal/ byte-identical
+  throughout, nothing deployed by the implementer.

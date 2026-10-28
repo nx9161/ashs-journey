@@ -65,6 +65,32 @@ function arenaHash(x, y) {
   return ((n ^ (n >>> 16)) >>> 0) / 4294967296;
 }
 
+// World Art Wave 6c: per-Ground arena art. Every Ground (all 15 in
+// grounds.mjs) owns a palette set + horizon motif + ground texture,
+// composed at draw time from rects/strips through arenaHash — no raster
+// assets, so the whole table + painters cost ~0.5 KB of code per Ground.
+// drawArena (shared by the classic and RT engines) reads the treatment
+// from battle.field, exactly as resolved at battle start; no field
+// logic lives here. Aliases that share rules (volt/storm, marsh/bloom,
+// pyre/ember, spirit/mire) still carry DISTINCT treatments.
+const ARENA_ART = {
+  open: { sky: ['#5f9fe6', '#6fabec', '#7fb7f1', '#8fc3f5', '#9fcdf8', '#b0d7fa'], ground: ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'], dark: '#4f9440', light: '#c8ef9f', accent: '#5d8f66', motif: 'trees', tex: 'tuft', haze: true },
+  bloom: { sky: ['#6fb98a', '#7cc496', '#89cfa1', '#97d9ac', '#a5e3b6', '#b3ecc0'], ground: ['#8fe07a', '#85d670', '#7bcc66', '#71c25c', '#67b852', '#5dae48'], dark: '#3f7d33', light: '#e6ffb0', accent: '#f2a7c3', motif: 'flowers', tex: 'petal', haze: true },
+  storm: { sky: ['#4a4a68', '#565672', '#625f7c', '#6e6886', '#7a7290', '#867c9a'], ground: ['#7a8a72', '#71816a', '#687862', '#5f6f5a', '#566652', '#4d5d4a'], dark: '#333d33', light: '#f8e98a', accent: '#e8c832', motif: 'storm', tex: 'spark' },
+  mire: { sky: ['#7a7a5a', '#857f5e', '#908462', '#9a8966', '#a48e6a', '#ae936e'], ground: ['#9a7c52', '#8f714b', '#846644', '#795b3d', '#6e5036', '#63452f'], dark: '#4a3520', light: '#d8c9a0', accent: '#7a9a4a', motif: 'reeds', tex: 'chunk' },
+  grave: { sky: ['#4e4468', '#584e74', '#625880', '#6c628c', '#766c98', '#8076a4'], ground: ['#6a6284', '#625a7a', '#5a5270', '#524a66', '#4a425c', '#423a52'], dark: '#2e2844', light: '#cfc4ea', accent: '#9a8ac2', motif: 'tombs', tex: 'fleck' },
+  ember: { sky: ['#6e4a3a', '#7a5040', '#865646', '#925c4c', '#9e6252', '#aa6858'], ground: ['#5c4034', '#543a30', '#4c342c', '#44302a', '#3c2c26', '#342822'], dark: '#241a16', light: '#ffb37a', accent: '#f07818', motif: 'flames', tex: 'chunk' },
+  frost: { sky: ['#a8d4ec', '#b2dcf2', '#bce4f6', '#c6ecfa', '#d0f2fc', '#daf8fe'], ground: ['#eef8fc', '#e4f2fa', '#daeaf6', '#d0e2f2', '#c6daee', '#bcd2ea'], dark: '#7aa8cc', light: '#ffffff', accent: '#9ad4f0', motif: 'snow', tex: 'spark', haze: true },
+  tide: { sky: ['#4f97dd', '#61a6e6', '#73b4ee', '#85c1f4', '#97cdf8', '#aad8fa'], ground: ['#4d8fd8', '#4787ce', '#417fc4', '#3b77ba', '#356fb0', '#2f67a6'], dark: '#27609e', light: '#eaf7ff', accent: '#7ad0e8', motif: 'waves', tex: 'foam', haze: true },
+  rubble: { sky: ['#8aa4bc', '#96b0c6', '#a2bcd0', '#aec8da', '#bacfe2', '#c6dbea'], ground: ['#c2a172', '#b99a6c', '#b09366', '#a78c60', '#9e855a', '#957e54'], dark: '#7d6742', light: '#e8dcc0', accent: '#a8895a', motif: 'rocks', tex: 'chunk' },
+  mind: { sky: ['#a86a9e', '#b476aa', '#c082b6', '#cc8ec2', '#d89ace', '#e4a6da'], ground: ['#9a6a94', '#8f628a', '#846080', '#795672', '#6e4e66', '#63465c'], dark: '#4a2e44', light: '#ffd8f4', accent: '#f2a7e8', motif: 'runes', tex: 'spark' },
+  venom: { sky: ['#5e6a4a', '#687453', '#727e5c', '#7c8865', '#86926e', '#909c77'], ground: ['#5f4a72', '#57446a', '#4f3e62', '#47385a', '#3f3252', '#372c4a'], dark: '#2c2138', light: '#b8e89a', accent: '#a8d85a', motif: 'shrooms', tex: 'bubble' },
+  volt: { sky: ['#3a3a5e', '#46466e', '#524f7d', '#5e588c', '#6a619b', '#766aaa'], ground: ['#8a8a62', '#81815a', '#787852', '#6f6f4a', '#666642', '#5d5d3a'], dark: '#3d3d28', light: '#fdf08a', accent: '#f8d030', motif: 'storm', tex: 'spark', pylon: true },
+  marsh: { sky: ['#7ab08a', '#83ba94', '#8cc49e', '#95cea8', '#9ed8b2', '#a7e2bc'], ground: ['#93a85c', '#8a9e56', '#819450', '#788a4a', '#6f8044', '#66763e'], dark: '#33512c', light: '#d8f4b0', accent: '#e8a7d0', motif: 'reeds', tex: 'petal', haze: true },
+  pyre: { sky: ['#5e3230', '#6a3834', '#76403a', '#82483f', '#8e5045', '#9a584b'], ground: ['#4a3436', '#433033', '#3c2c2e', '#352829', '#2e2426', '#272023'], dark: '#1c1416', light: '#ffd28a', accent: '#f84818', motif: 'flames', tex: 'spark' },
+  spirit: { sky: ['#8a86a8', '#948fb4', '#9e98c0', '#a8a1cc', '#b2aad8', '#bcb3e4'], ground: ['#8a7f74', '#7f746a', '#746960', '#695e56', '#5e534c', '#534842'], dark: '#3a332e', light: '#f4f1ff', accent: '#c9bfff', motif: 'tombs', tex: 'fleck' },
+};
+
 export class BattleScene {
   constructor(opts) {
     this.kind = opts.kind; // 'wild' | 'trainer'
@@ -1719,9 +1745,38 @@ export class BattleScene {
     const horizon = Math.round(h * horizonFrac);
     const kind = this.arenaKind();
     const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+    // Wave 6c: the per-Ground treatment for battle.field (null when a
+    // minimal/legacy caller has no field — the legacy kind backdrop
+    // below then serves unchanged).
+    const gid = this.field ? (this.field.id || this.field.groundId) : null;
+    const ga = gid ? (ARENA_ART[gid] || null) : null;
 
-    // ---- upper field: sky (grass/water) or wall (cave/gym) ----
-    if (kind === 'cave') {
+    // ---- upper field: per-Ground bands, else sky (grass/water) or wall (cave/gym) ----
+    if (ga) {
+      const sb = Math.ceil(horizon / ga.sky.length) || 1;
+      for (let i = 0; i < ga.sky.length; i++) F(ga.sky[i], 0, i * sb, w, sb + 1);
+      for (let i = 0; i < ga.sky.length - 1; i++) {
+        const yBase = (i + 1) * sb;
+        for (let dy = 2; dy >= 1; dy--) {
+          const y = yBase - dy;
+          if (y < 0 || y >= horizon) continue;
+          for (let x = 0; x < w; x += 3) {
+            if ((((x / 3) | 0) + y) % 2 === 0 && (dy === 1 || ((x / 3) | 0) % 2 === 0)) F(ga.sky[i + 1], x, y, 3, 1);
+          }
+        }
+      }
+      if (ga.haze) for (let i = 0; i < 5; i++) {
+        const cx = Math.floor(arenaHash(i, 71) * (w - 40)) + 4;
+        const cy = 3 + Math.floor(arenaHash(i, 83) * Math.max(4, horizon * 0.45));
+        F(ga.light, cx, cy, 16, 3); F(ga.light, cx + 4, cy - 2, 9, 2); F(ga.dark, cx + 2, cy + 3, 12, 2);
+      }
+      if (ga.motif === 'tombs' || ga.motif === 'runes' || ga.motif === 'rocks') {
+        for (let i = 0; i < Math.floor(w / 3); i++) {
+          const sx = Math.floor(arenaHash(i, 11) * w), sy = Math.floor(arenaHash(i, 23) * Math.max(1, horizon - 4));
+          F(arenaHash(i, 37) > 0.5 ? ga.dark : ga.accent, sx, sy, 2, 2);
+        }
+      }
+    } else if (kind === 'cave') {
       const wall = ['#241d2e', '#2b2338', '#332a42', '#3b314c', '#433856', '#4b4060'];
       const wb = Math.ceil(horizon / wall.length) || 1;
       for (let i = 0; i < wall.length; i++) F(wall[i], 0, i * wb, w, wb + 1);
@@ -1773,8 +1828,67 @@ export class BattleScene {
       }
     }
 
-    // ---- horizon detail ----
-    if (kind === 'grass') {
+    // ---- horizon detail: per-Ground motif, else the legacy kind detail ----
+    if (ga) {
+      const M = ga.motif, A = ga.accent, D = ga.dark, L = ga.light;
+      if (M === 'trees' || M === 'flowers' || M === 'reeds') {
+        F(D, 0, horizon - 8, w, 8);
+        for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
+          const bh = 8 + Math.floor(arenaHash(i, 3) * 8);
+          F(D, x, horizon - bh, 10, bh); F(A, x + 2, horizon - bh + 2, 2, 2); F(L, x + 6, horizon - bh + 3, 2, 2);
+          if (M === 'reeds') F(A, x + 12, horizon - 12, 2, 12);
+          if (M === 'flowers') { F(A, x + 3, horizon - 3, 2, 2); F(L, x + 9, horizon - 2, 2, 2); }
+        }
+        F(A, 0, horizon - 3, w, 3); F(D, 0, horizon, w, 2);
+      } else if (M === 'waves') {
+        for (let x = 2, i = 0; x < w - 6; x += 11, i++) {
+          if (arenaHash(i, 17) > 0.3) F(L, x, horizon - 2, 5, 1);
+          if (arenaHash(i, 29) > 0.55) F(A, x + 3, horizon - 4, 4, 1);
+          if (i % 3 === 0) F(D, x, horizon - 6, 6, 3);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'rocks' || M === 'tombs' || M === 'spires') {
+        for (let x = 0, i = 0; x < w - 4; x += 9, i++) {
+          const th = 3 + Math.floor(arenaHash(i, 41) * 7);
+          F(D, x, horizon - th, 6, th);
+          if (M === 'tombs' && i % 2 === 0) F(A, x + 1, horizon - th - 4, 4, 4);
+          if (M === 'spires') F(L, x + 2, horizon - th - 2, 2, 2);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'flames') {
+        for (let x = 2, i = 0; x < w - 6; x += 13, i++) {
+          const fh = 5 + Math.floor(arenaHash(i, 51) * 8);
+          F(A, x, horizon - fh, 6, fh); F(L, x + 2, horizon - Math.max(2, fh - 3), 2, Math.max(2, fh - 3)); F(D, x - 1, horizon - 2, 8, 2);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'storm') {
+        for (let x = 6, i = 0; x < w - 10; x += 34, i++) {
+          F(D, x, horizon - 14, 14, 5); F(D, x + 3, horizon - 17, 8, 3);
+          if (i % 2 === 0) { F(L, x + 6, horizon - 9, 2, 4); F(L, x + 4, horizon - 5, 2, 3); F(L, x + 6, horizon - 2, 2, 2); }
+          if (ga.pylon) { F(D, x + 16, horizon - 16, 2, 16); F(D, x + 12, horizon - 16, 10, 2); }
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'shrooms') {
+        for (let x = 4, i = 0; x < w - 8; x += 20, i++) {
+          const mh = 6 + Math.floor(arenaHash(i, 61) * 6);
+          F(L, x + 4, horizon - mh, 3, mh); F(A, x, horizon - mh - 3, 11, 4); F(L, x + 2, horizon - mh - 2, 2, 1);
+        }
+        F(D, 0, horizon, w, 2);
+      } else if (M === 'runes') {
+        for (let x = 8, i = 0; x < w - 8; x += 26, i++) {
+          const fh = 6 + Math.floor(arenaHash(i, 67) * 10);
+          F(A, x, horizon - fh, 3, fh); F(L, x + 1, horizon - fh, 1, 3); F(A, x - 2, horizon - fh + 3, 7, 2);
+          F(L, x + 1, horizon - fh - 3, 2, 3);
+        }
+        F(D, 0, horizon, w, 2);
+      } else { // snow
+        for (let x = 0, i = 0; x < w - 6; x += 12, i++) {
+          const sh = 3 + Math.floor(arenaHash(i, 73) * 5);
+          F(L, x, horizon - sh, 9, sh); if (i % 2) F(A, x + 3, horizon - sh - 3, 2, 3);
+        }
+        F(A, 0, horizon, w, 2);
+      }
+    } else if (kind === 'grass') {
       F('#5d8f66', 0, horizon - 8, w, 8);
       for (let x = 4, i = 0; x < w - 8; x += 18, i++) {
         const bh = 8 + Math.floor(arenaHash(i, 3) * 8);
@@ -1803,7 +1917,10 @@ export class BattleScene {
     }
 
     // ---- ground: perspective rows with per-variant texture ----
-    const pal = kind === 'cave'
+    // Wave 6c: the Ground's own ground palette wins, except the Open
+    // trainer field, which keeps its legacy sandy tournament floor.
+    const useGa = ga && !(gid === 'open' && this.kind === 'trainer');
+    const pal = useGa ? ga.ground : kind === 'cave'
       ? ['#57456a', '#514163', '#4b3d5c', '#453955', '#3f354e', '#392f47']
       : kind === 'water'
         ? ['#4d8fd8', '#4787ce', '#417fc4', '#3b77ba', '#356fb0', '#2f67a6']
@@ -1812,8 +1929,8 @@ export class BattleScene {
           : this.kind === 'trainer'
             ? ['#cfc2a4', '#c4b696', '#b9aa89', '#ae9e7d', '#a39271', '#988665']
             : ['#a5dc82', '#9bd578', '#91ce6f', '#87c766', '#7dc05d', '#73b954'];
-    const dark = kind === 'cave' ? '#2a2138' : kind === 'water' ? '#27609e' : kind === 'gym' ? '#7d6742' : this.kind === 'trainer' ? '#7d6c4c' : '#4f9440';
-    const light = kind === 'cave' ? '#6c587f' : kind === 'water' ? '#eaf7ff' : kind === 'gym' ? '#d9bf92' : this.kind === 'trainer' ? '#e6dcc2' : '#c8ef9f';
+    const dark = useGa ? ga.dark : kind === 'cave' ? '#2a2138' : kind === 'water' ? '#27609e' : kind === 'gym' ? '#7d6742' : this.kind === 'trainer' ? '#7d6c4c' : '#4f9440';
+    const light = useGa ? ga.light : kind === 'cave' ? '#6c587f' : kind === 'water' ? '#eaf7ff' : kind === 'gym' ? '#d9bf92' : this.kind === 'trainer' ? '#e6dcc2' : '#c8ef9f';
     let y = horizon + 2, rh = 2, row = 0;
     const groundH = Math.max(1, h - horizon - 2);
     while (y < h) {
@@ -1824,7 +1941,18 @@ export class BattleScene {
         const sx = Math.floor(arenaHash(i * 3 + row * 57, row * 131) * (w - 5));
         const sy = y + Math.floor(arenaHash(i, row * 7 + 1) * Math.max(1, rh - 1));
         const tone = arenaHash(i + row * 3, 999) > 0.45 ? dark : light;
-        if (kind === 'grass' && this.kind !== 'trainer') F(tone, sx, sy, 1, Math.min(3, rh)); // grass tufts
+        if (useGa) {
+          // Wave 6c ground textures: foam dashes on water grounds, rock
+          // chunks on hard grounds, sparks/petals/bubbles as accents,
+          // tuft-family flecks everywhere else.
+          if (ga.tex === 'foam') { if (tone === light) F(tone, sx, sy, 4, 1); }
+          else if (ga.tex === 'chunk') F(tone, sx, sy, 3, 2);
+          else if (ga.tex === 'spark') { if (tone === light) F(tone, sx, sy, 2, 2); else F(tone, sx, sy, 2, 1); }
+          else if (ga.tex === 'petal') F(arenaHash(i, row * 7) > 0.6 ? ga.accent : tone, sx, sy, 2, 1);
+          else if (ga.tex === 'bubble') { if (tone === light) { F(tone, sx, sy, 2, 1); F(tone, sx, sy + 1, 1, 1); } }
+          else F(tone, sx, sy, 1, Math.min(3, rh));
+        }
+        else if (kind === 'grass' && this.kind !== 'trainer') F(tone, sx, sy, 1, Math.min(3, rh)); // grass tufts
         else if (kind === 'water') { if (tone === light) F(tone, sx, sy, 4, 1); } // foam dashes
         else if (kind === 'cave') F(tone, sx, sy, 3, 2); // rock chunks
         else if (kind === 'gym') { if (arenaHash(i, row * 13) > 0.72) F(dark, sx, y, 1, rh); } // floor seams splay per row
@@ -1838,10 +1966,14 @@ export class BattleScene {
     // flat palette shift of the EXISTING per-area backdrop (no new
     // scenes, no gradients): one translucent flat wash in the Ground's
     // tint over the drawn field. Guarded for the QA minimal-this call.
+    // Wave 6c: when the per-Ground arena art above is on screen it
+    // already carries the field's identity, so the wash drops to 0.05
+    // (kept, not removed — the hue shift and the GROUND chip/banner
+    // information are unchanged); legacy no-field battles keep 0.13.
     if (this.field && this.field.tint && r.ctx) {
       const c = r.ctx;
       c.save();
-      c.globalAlpha = 0.13;
+      c.globalAlpha = ga ? 0.05 : 0.13;
       c.fillStyle = this.field.tint;
       c.fillRect(0, 0, w, h);
       c.restore();
