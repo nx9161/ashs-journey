@@ -751,7 +751,7 @@ const qaDriver = `
   var l7 = new SaveStore().load();
   ok('qa l7 save/load round-trip preserves state', l7.ok && l7.data.party.length === 1 && l7.data.party[0].speciesId === 'pidgey' && l7.data.badges.kanto[0] === 'boulderbadge' && l7.data.story.flags.beat_brock === true && l7.data.story.position.map === 'gym' && !!l7.data.dex.caught[16]);
   ok('qa l7 save <= 64KB budget', s7.ok && s7.bytes <= 65536, s7.bytes + ' bytes');
-  ok('qa l8 dex tracks 1025, Kanto roster complete (151 + partner)', DEX_TOTAL === 1025 && Object.keys(SPECIES).length === 152);
+  ok('qa l8 dex tracks 1025, Kanto roster complete (151 + partner + 5 forms + 5 National, Cheat Shop expansion)', DEX_TOTAL === 1025 && Object.keys(SPECIES).length === 162);
   ok('qa l8 frontier-ready hooks (7 symbol slots + befriended state)', defaultState().badges.symbols.length === 7 && typeof defaultState().dex.befriended === 'object');
 
   // ============ Yellow authenticity (Gameplay Designer seat update) ============

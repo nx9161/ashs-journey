@@ -206,7 +206,15 @@ export const FORMS = [
   { id: 'zygarde-complete', speciesId: 718, name: 'Zygarde (Complete Forme)', kind: 'form', region: 'kalos', types: ['dragon', 'ground'], note: 'Every cell assembled; the ecosystem’s last argument.' },
   { id: 'greninja-battle-bond', speciesId: 658, name: 'Greninja (Battle Bond)', kind: 'form', region: 'kalos', types: ['water', 'dark'], note: 'Bond phenomenon; it takes on echoes of its trainer.' },
   { id: 'aegislash-blade', speciesId: 681, name: 'Aegislash (Blade Forme)', kind: 'form', region: 'kalos', types: ['steel', 'ghost'], note: 'Shield lowered, sword drawn; the stance is the strategy.' },
+  // ---- Anime/book canon forms (Cheat Shop expansion, 2026-10-28) ----
+  // Playable partner-style species entries live in species2.mjs under
+  // these same ids; this index row is their forms-table registration.
+  { id: 'crystalonix', speciesId: 95, name: 'Crystal Onix', kind: 'form', region: 'orange', types: ['rock', 'ice'], note: 'A cave spring grew an Onix out of living crystal.' },
+  { id: 'pinkbutterfree', speciesId: 12, name: 'Pink Butterfree', kind: 'form', region: 'orange', types: ['bug', 'flying'], note: 'Island fruit blushed its wings a deep, lovesick pink.' },
+  { id: 'surfingpikachu', speciesId: 25, name: 'Surfing Pikachu', kind: 'form', region: 'kanto', types: ['electric'], note: 'Born wave-tamer; it carries its board everywhere.' },
+  { id: 'flyingpikachu', speciesId: 25, name: 'Flying Pikachu', kind: 'form', region: 'kanto', types: ['electric', 'flying'], note: 'Balloon-borne and beaming; the sky is just tall grass.' },
+  { id: 'giantdragonite', speciesId: 149, name: 'Giant Dragonite', kind: 'form', region: 'kanto', types: ['dragon', 'flying'], note: 'The lighthouse legend, big as a storm cloud, gentle as fog.' },
 ];
 
-// FORMS_TOTAL = 197
+// FORMS_TOTAL = 202 (197 base + 5 Cheat Shop canon forms, 2026-10-28)
 export const FORMS_TOTAL = FORMS.length;

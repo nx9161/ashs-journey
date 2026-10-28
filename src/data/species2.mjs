@@ -1113,6 +1113,100 @@ export const SPECIES2 = {
     flavor: 'It plays hide and seek with history itself.',
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
+  // ===== Cheat Shop canon expansion (owner order 2026-10-28) =====
+  // Five FORMS in the partner pattern: own speciesId, SHARED dexNo with
+  // the base species, `form: true` + baseSpecies for picker grouping.
+  // They never count as separate species: the Kanto diploma reads dex
+  // numbers 1-151 and the dex lists exclude form entries (like partner).
+  // Anime/book canon, absent from game data; stats/types/learnsets are
+  // this project's own original take on the canon facts.
+  crystalonix: {
+    // Crystal Onix: a body of living crystal instead of rock. Canon: it
+    // shrugs off Fire yet fears Water. Our take: Rock/Ice — Ice sheds the
+    // Fire weakness, Water still strikes the Rock half double, and the
+    // crystal trades raw Defense for Special shine.
+    id: 'crystalonix', name: 'Crystal Onix', dexNo: 95, types: ['rock', 'ice'],
+    base: { hp: 45, atk: 45, def: 110, spa: 55, spd: 65, spe: 70 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9502,
+    learnset: { 1: ['tackle', 'harden'], 8: ['rockthrow'], 20: ['icebeam'] },
+    flavor: 'Its crystal segments chime softly when rain is coming.',
+    form: true, baseSpecies: 'onix',
+  },
+  pinkbutterfree: {
+    id: 'pinkbutterfree', name: 'Pink Butterfree', dexNo: 12, types: ['bug', 'flying'],
+    base: { hp: 60, atk: 45, def: 50, spa: 95, spd: 80, spe: 75 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 198, body: 'bird', spriteSeed: 1202,
+    learnset: { 1: ['confusion'], 12: ['poisonpowder'], 13: ['stunspore'], 14: ['sleeppowder'], 16: ['supersonic'], 21: ['gust'], 26: ['psybeam'] },
+    flavor: 'Blush-pink wings, dusted by the island fruit it loves.',
+    form: true, baseSpecies: 'butterfree',
+  },
+  surfingpikachu: {
+    id: 'surfingpikachu', name: 'Surfing Pikachu', dexNo: 25, types: ['electric'],
+    base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 112, body: 'quad', spriteSeed: 2503,
+    learnset: { 1: ['thundershock', 'growl', 'surf'], 6: ['tailwhip'], 8: ['thunderwave'], 11: ['quickattack'], 20: ['swift'], 26: ['agility'], 33: ['thunderbolt'], 43: ['thunder'] },
+    flavor: 'It rides its own little board and never, ever wipes out.',
+    form: true, baseSpecies: 'pikachu',
+  },
+  flyingpikachu: {
+    id: 'flyingpikachu', name: 'Flying Pikachu', dexNo: 25, types: ['electric', 'flying'],
+    base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 95 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 112, body: 'quad', spriteSeed: 2504,
+    learnset: { 1: ['thundershock', 'growl', 'fly'], 6: ['tailwhip'], 8: ['thunderwave'], 11: ['quickattack'], 20: ['swift'], 26: ['agility'], 33: ['thunderbolt'], 43: ['thunder'] },
+    flavor: 'A fistful of balloons, a heart full of sky. It waves at planes.',
+    form: true, baseSpecies: 'pikachu',
+  },
+  giantdragonite: {
+    // The lighthouse giant: same gentle heart, enormous frame. Stats are
+    // Onix-scale upsized: huge bulk, heavy blows, slower on the wing.
+    id: 'giantdragonite', name: 'Giant Dragonite', dexNo: 149, types: ['dragon', 'flying'],
+    base: { hp: 121, atk: 154, def: 115, spa: 120, spd: 120, spe: 70 },
+    catchRate: 45, growth: 'slow', baseXp: 300, body: 'biped', spriteSeed: 14902,
+    learnset: { 1: ['wrap', 'leer', 'thunderwave', 'agility'], 30: ['takedown'], 45: ['hyperbeam'] },
+    flavor: 'Its song crosses whole seas. Ships steer home by its shadow.',
+    form: true, baseSpecies: 'dragonite',
+  },
+  // Five FULL SPECIES (National dex only — dexNo > 151, so the Kanto
+  // diploma's 151 cannot move). Canon facts (types/base stats/catch
+  // rate/growth/base XP) verified against PokeAPI at build time;
+  // learnsets restricted to this game's move table; flavor written for
+  // this project. NO evolution entries, deliberately: their evolved
+  // forms are out of scope, so claims arrive as themselves.
+  togepi: {
+    id: 'togepi', name: 'Togepi', dexNo: 175, types: ['fairy'],
+    base: { hp: 35, atk: 20, def: 65, spa: 40, spd: 65, spe: 20 },
+    catchRate: 190, growth: 'fast', baseXp: 49, body: 'biped', spriteSeed: 17501,
+    learnset: { 1: ['pound', 'growl'], 9: ['metronome'], 17: ['doubleedge'] },
+    flavor: 'It totters after whoever makes it happiest, shell and all.',
+  },
+  marill: {
+    id: 'marill', name: 'Marill', dexNo: 183, types: ['water', 'fairy'],
+    base: { hp: 70, atk: 20, def: 50, spa: 20, spd: 50, spe: 40 },
+    catchRate: 190, growth: 'fast', baseXp: 88, body: 'quad', spriteSeed: 18301,
+    learnset: { 1: ['tackle', 'tailwhip', 'watergun'], 6: ['bubblebeam'], 10: ['defensecurl'], 20: ['doubleedge'], 30: ['hydropump'] },
+    flavor: 'Its round tail bobs on the water like a tiny blue buoy.',
+  },
+  snubbull: {
+    id: 'snubbull', name: 'Snubbull', dexNo: 209, types: ['fairy'],
+    base: { hp: 60, atk: 80, def: 50, spa: 40, spd: 40, spe: 30 },
+    catchRate: 190, growth: 'fast', baseXp: 60, body: 'quad', spriteSeed: 20901,
+    learnset: { 1: ['tackle', 'tailwhip', 'growl'], 7: ['bite'], 13: ['lick'], 19: ['headbutt'], 31: ['rage'], 37: ['takedown'] },
+    flavor: 'All scowl and no bite — it would rather be carried home.',
+  },
+  donphan: {
+    id: 'donphan', name: 'Donphan', dexNo: 232, types: ['ground'],
+    base: { hp: 90, atk: 120, def: 120, spa: 60, spd: 60, spe: 50 },
+    catchRate: 60, growth: 'mediumfast', baseXp: 175, body: 'quad', spriteSeed: 23201,
+    learnset: { 1: ['tackle', 'growl'], 6: ['defensecurl'], 24: ['slam'], 37: ['takedown'], 43: ['earthquake'] },
+    flavor: 'It curls into a living boulder and rolls clean through trouble.',
+  },
+  hooh: {
+    id: 'hooh', name: 'Ho-Oh', dexNo: 250, types: ['fire', 'flying'],
+    base: { hp: 106, atk: 130, def: 90, spa: 110, spd: 154, spe: 90 },
+    catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 25001,
+    learnset: { 1: ['gust', 'whirlwind'], 23: ['recover'], 29: ['fireblast'], 43: ['swift'], 90: ['skyattack'] },
+    flavor: 'Where its rainbow passes, the ash of old sorrow turns green.',
+  },
 };
 
 // Fidelity patch (ADR-018): Yellow's Kadabra/Alakazam learn Kinesis at 15.

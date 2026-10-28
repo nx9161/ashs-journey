@@ -3,7 +3,7 @@
   "tile": 48,
   "size": [
     2046,
-    990
+    1056
   ],
   "sprites": {
     "abra-back": {
@@ -500,8 +500,34 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "cubone-back": {
+    "crystalonix-back": {
       "x": 463,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "crystalonix-front": {
+      "x": 529,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "cubone-back": {
+      "x": 595,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -514,7 +540,7 @@
       "mirror_of": null
     },
     "cubone-front": {
-      "x": 529,
+      "x": 661,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -527,7 +553,7 @@
       "mirror_of": null
     },
     "dewgong-back": {
-      "x": 595,
+      "x": 727,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -540,7 +566,7 @@
       "mirror_of": null
     },
     "dewgong-front": {
-      "x": 661,
+      "x": 793,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -553,7 +579,7 @@
       "mirror_of": null
     },
     "diglett-back": {
-      "x": 727,
+      "x": 859,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -566,7 +592,7 @@
       "mirror_of": null
     },
     "diglett-front": {
-      "x": 793,
+      "x": 925,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -579,7 +605,7 @@
       "mirror_of": null
     },
     "ditto-back": {
-      "x": 859,
+      "x": 991,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -592,7 +618,7 @@
       "mirror_of": null
     },
     "ditto-front": {
-      "x": 925,
+      "x": 1057,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -605,7 +631,7 @@
       "mirror_of": null
     },
     "dodrio-back": {
-      "x": 991,
+      "x": 1123,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -618,7 +644,7 @@
       "mirror_of": null
     },
     "dodrio-front": {
-      "x": 1057,
+      "x": 1189,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -631,7 +657,7 @@
       "mirror_of": null
     },
     "doduo-back": {
-      "x": 1123,
+      "x": 1255,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -644,7 +670,7 @@
       "mirror_of": null
     },
     "doduo-front": {
-      "x": 1189,
+      "x": 1321,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -656,8 +682,34 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "donphan-back": {
+      "x": 1387,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "donphan-front": {
+      "x": 1453,
+      "y": 67,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "dragonair-back": {
-      "x": 1255,
+      "x": 1519,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -670,7 +722,7 @@
       "mirror_of": null
     },
     "dragonair-front": {
-      "x": 1321,
+      "x": 1585,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -683,7 +735,7 @@
       "mirror_of": null
     },
     "dragonite-back": {
-      "x": 1387,
+      "x": 1651,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -696,7 +748,7 @@
       "mirror_of": null
     },
     "dragonite-front": {
-      "x": 1453,
+      "x": 1717,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -709,7 +761,7 @@
       "mirror_of": null
     },
     "dratini-back": {
-      "x": 1519,
+      "x": 1783,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -722,7 +774,7 @@
       "mirror_of": null
     },
     "dratini-front": {
-      "x": 1585,
+      "x": 1849,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -735,7 +787,7 @@
       "mirror_of": null
     },
     "drowzee-back": {
-      "x": 1651,
+      "x": 1915,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -748,7 +800,7 @@
       "mirror_of": null
     },
     "drowzee-front": {
-      "x": 1717,
+      "x": 1981,
       "y": 67,
       "w": 64,
       "h": 64,
@@ -761,8 +813,8 @@
       "mirror_of": null
     },
     "dugtrio-back": {
-      "x": 1783,
-      "y": 67,
+      "x": 1,
+      "y": 133,
       "w": 64,
       "h": 64,
       "frames": [
@@ -774,8 +826,8 @@
       "mirror_of": null
     },
     "dugtrio-front": {
-      "x": 1849,
-      "y": 67,
+      "x": 67,
+      "y": 133,
       "w": 64,
       "h": 64,
       "frames": [
@@ -787,8 +839,8 @@
       "mirror_of": null
     },
     "eevee-back": {
-      "x": 1915,
-      "y": 67,
+      "x": 133,
+      "y": 133,
       "w": 64,
       "h": 64,
       "frames": [
@@ -800,8 +852,8 @@
       "mirror_of": null
     },
     "eevee-front": {
-      "x": 1981,
-      "y": 67,
+      "x": 199,
+      "y": 133,
       "w": 64,
       "h": 64,
       "frames": [
@@ -813,7 +865,7 @@
       "mirror_of": null
     },
     "ekans-back": {
-      "x": 1,
+      "x": 265,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -826,7 +878,7 @@
       "mirror_of": null
     },
     "ekans-front": {
-      "x": 67,
+      "x": 331,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -839,7 +891,7 @@
       "mirror_of": null
     },
     "electabuzz-back": {
-      "x": 133,
+      "x": 397,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -852,7 +904,7 @@
       "mirror_of": null
     },
     "electabuzz-front": {
-      "x": 199,
+      "x": 463,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -865,7 +917,7 @@
       "mirror_of": null
     },
     "electrode-back": {
-      "x": 265,
+      "x": 529,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -878,7 +930,7 @@
       "mirror_of": null
     },
     "electrode-front": {
-      "x": 331,
+      "x": 595,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -891,7 +943,7 @@
       "mirror_of": null
     },
     "exeggcute-back": {
-      "x": 397,
+      "x": 661,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -904,7 +956,7 @@
       "mirror_of": null
     },
     "exeggcute-front": {
-      "x": 463,
+      "x": 727,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -917,7 +969,7 @@
       "mirror_of": null
     },
     "exeggutor-back": {
-      "x": 529,
+      "x": 793,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -930,7 +982,7 @@
       "mirror_of": null
     },
     "exeggutor-front": {
-      "x": 595,
+      "x": 859,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -943,7 +995,7 @@
       "mirror_of": null
     },
     "farfetchd-back": {
-      "x": 661,
+      "x": 925,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -956,7 +1008,7 @@
       "mirror_of": null
     },
     "farfetchd-front": {
-      "x": 727,
+      "x": 991,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -969,7 +1021,7 @@
       "mirror_of": null
     },
     "fearow-back": {
-      "x": 793,
+      "x": 1057,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -982,7 +1034,7 @@
       "mirror_of": null
     },
     "fearow-front": {
-      "x": 859,
+      "x": 1123,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -995,7 +1047,7 @@
       "mirror_of": null
     },
     "flareon-back": {
-      "x": 925,
+      "x": 1189,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1008,7 +1060,7 @@
       "mirror_of": null
     },
     "flareon-front": {
-      "x": 991,
+      "x": 1255,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1020,8 +1072,34 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "flyingpikachu-back": {
+      "x": 1321,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "flyingpikachu-front": {
+      "x": 1387,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "gastly-back": {
-      "x": 1057,
+      "x": 1453,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1034,7 +1112,7 @@
       "mirror_of": null
     },
     "gastly-front": {
-      "x": 1123,
+      "x": 1519,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1047,7 +1125,7 @@
       "mirror_of": null
     },
     "gengar-back": {
-      "x": 1189,
+      "x": 1585,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1060,7 +1138,7 @@
       "mirror_of": null
     },
     "gengar-front": {
-      "x": 1255,
+      "x": 1651,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1073,7 +1151,7 @@
       "mirror_of": null
     },
     "geodude-back": {
-      "x": 1321,
+      "x": 1717,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1086,7 +1164,7 @@
       "mirror_of": null
     },
     "geodude-front": {
-      "x": 1387,
+      "x": 1783,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1098,8 +1176,34 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "giantdragonite-back": {
+      "x": 1849,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "giantdragonite-front": {
+      "x": 1915,
+      "y": 133,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "gloom-back": {
-      "x": 1453,
+      "x": 1981,
       "y": 133,
       "w": 64,
       "h": 64,
@@ -1112,8 +1216,8 @@
       "mirror_of": null
     },
     "gloom-front": {
-      "x": 1519,
-      "y": 133,
+      "x": 1,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1125,8 +1229,8 @@
       "mirror_of": null
     },
     "golbat-back": {
-      "x": 1585,
-      "y": 133,
+      "x": 67,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1138,8 +1242,8 @@
       "mirror_of": null
     },
     "golbat-front": {
-      "x": 1651,
-      "y": 133,
+      "x": 133,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1151,8 +1255,8 @@
       "mirror_of": null
     },
     "goldeen-back": {
-      "x": 1717,
-      "y": 133,
+      "x": 199,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1164,8 +1268,8 @@
       "mirror_of": null
     },
     "goldeen-front": {
-      "x": 1783,
-      "y": 133,
+      "x": 265,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1177,8 +1281,8 @@
       "mirror_of": null
     },
     "golduck-back": {
-      "x": 1849,
-      "y": 133,
+      "x": 331,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1190,8 +1294,8 @@
       "mirror_of": null
     },
     "golduck-front": {
-      "x": 1915,
-      "y": 133,
+      "x": 397,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1203,8 +1307,8 @@
       "mirror_of": null
     },
     "golem-back": {
-      "x": 1981,
-      "y": 133,
+      "x": 463,
+      "y": 199,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1216,7 +1320,7 @@
       "mirror_of": null
     },
     "golem-front": {
-      "x": 1,
+      "x": 529,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1229,7 +1333,7 @@
       "mirror_of": null
     },
     "graveler-back": {
-      "x": 67,
+      "x": 595,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1242,7 +1346,7 @@
       "mirror_of": null
     },
     "graveler-front": {
-      "x": 133,
+      "x": 661,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1255,7 +1359,7 @@
       "mirror_of": null
     },
     "grimer-back": {
-      "x": 199,
+      "x": 727,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1268,7 +1372,7 @@
       "mirror_of": null
     },
     "grimer-front": {
-      "x": 265,
+      "x": 793,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1281,7 +1385,7 @@
       "mirror_of": null
     },
     "growlithe-back": {
-      "x": 331,
+      "x": 859,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1294,7 +1398,7 @@
       "mirror_of": null
     },
     "growlithe-front": {
-      "x": 397,
+      "x": 925,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1307,7 +1411,7 @@
       "mirror_of": null
     },
     "gyarados-back": {
-      "x": 463,
+      "x": 991,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1320,7 +1424,7 @@
       "mirror_of": null
     },
     "gyarados-front": {
-      "x": 529,
+      "x": 1057,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1333,7 +1437,7 @@
       "mirror_of": null
     },
     "haunter-back": {
-      "x": 595,
+      "x": 1123,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1346,7 +1450,7 @@
       "mirror_of": null
     },
     "haunter-front": {
-      "x": 661,
+      "x": 1189,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1359,7 +1463,7 @@
       "mirror_of": null
     },
     "hitmonchan-back": {
-      "x": 727,
+      "x": 1255,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1372,7 +1476,7 @@
       "mirror_of": null
     },
     "hitmonchan-front": {
-      "x": 793,
+      "x": 1321,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1385,7 +1489,7 @@
       "mirror_of": null
     },
     "hitmonlee-back": {
-      "x": 859,
+      "x": 1387,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1398,7 +1502,7 @@
       "mirror_of": null
     },
     "hitmonlee-front": {
-      "x": 925,
+      "x": 1453,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1410,8 +1514,34 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "hooh-back": {
+      "x": 1519,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hooh-front": {
+      "x": 1585,
+      "y": 199,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "horsea-back": {
-      "x": 991,
+      "x": 1651,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1424,7 +1554,7 @@
       "mirror_of": null
     },
     "horsea-front": {
-      "x": 1057,
+      "x": 1717,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1437,7 +1567,7 @@
       "mirror_of": null
     },
     "hypno-back": {
-      "x": 1123,
+      "x": 1783,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1450,7 +1580,7 @@
       "mirror_of": null
     },
     "hypno-front": {
-      "x": 1189,
+      "x": 1849,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1463,7 +1593,7 @@
       "mirror_of": null
     },
     "ivysaur-back": {
-      "x": 1255,
+      "x": 1915,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1476,7 +1606,7 @@
       "mirror_of": null
     },
     "ivysaur-front": {
-      "x": 1321,
+      "x": 1981,
       "y": 199,
       "w": 64,
       "h": 64,
@@ -1489,8 +1619,8 @@
       "mirror_of": null
     },
     "jigglypuff-back": {
-      "x": 1387,
-      "y": 199,
+      "x": 1,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1502,8 +1632,8 @@
       "mirror_of": null
     },
     "jigglypuff-front": {
-      "x": 1453,
-      "y": 199,
+      "x": 67,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1515,8 +1645,8 @@
       "mirror_of": null
     },
     "jolteon-back": {
-      "x": 1519,
-      "y": 199,
+      "x": 133,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1528,8 +1658,8 @@
       "mirror_of": null
     },
     "jolteon-front": {
-      "x": 1585,
-      "y": 199,
+      "x": 199,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1541,8 +1671,8 @@
       "mirror_of": null
     },
     "jynx-back": {
-      "x": 1651,
-      "y": 199,
+      "x": 265,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1554,8 +1684,8 @@
       "mirror_of": null
     },
     "jynx-front": {
-      "x": 1717,
-      "y": 199,
+      "x": 331,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1567,8 +1697,8 @@
       "mirror_of": null
     },
     "kabuto-back": {
-      "x": 1783,
-      "y": 199,
+      "x": 397,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1580,8 +1710,8 @@
       "mirror_of": null
     },
     "kabuto-front": {
-      "x": 1849,
-      "y": 199,
+      "x": 463,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1593,8 +1723,8 @@
       "mirror_of": null
     },
     "kabutops-back": {
-      "x": 1915,
-      "y": 199,
+      "x": 529,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1606,8 +1736,8 @@
       "mirror_of": null
     },
     "kabutops-front": {
-      "x": 1981,
-      "y": 199,
+      "x": 595,
+      "y": 265,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1619,7 +1749,7 @@
       "mirror_of": null
     },
     "kadabra-back": {
-      "x": 1,
+      "x": 661,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1632,7 +1762,7 @@
       "mirror_of": null
     },
     "kadabra-front": {
-      "x": 67,
+      "x": 727,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1645,7 +1775,7 @@
       "mirror_of": null
     },
     "kakuna-back": {
-      "x": 133,
+      "x": 793,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1658,7 +1788,7 @@
       "mirror_of": null
     },
     "kakuna-front": {
-      "x": 199,
+      "x": 859,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1671,7 +1801,7 @@
       "mirror_of": null
     },
     "kangaskhan-back": {
-      "x": 265,
+      "x": 925,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1684,7 +1814,7 @@
       "mirror_of": null
     },
     "kangaskhan-front": {
-      "x": 331,
+      "x": 991,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1697,7 +1827,7 @@
       "mirror_of": null
     },
     "kingler-back": {
-      "x": 397,
+      "x": 1057,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1710,7 +1840,7 @@
       "mirror_of": null
     },
     "kingler-front": {
-      "x": 463,
+      "x": 1123,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1723,7 +1853,7 @@
       "mirror_of": null
     },
     "koffing-back": {
-      "x": 529,
+      "x": 1189,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1736,7 +1866,7 @@
       "mirror_of": null
     },
     "koffing-front": {
-      "x": 595,
+      "x": 1255,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1749,7 +1879,7 @@
       "mirror_of": null
     },
     "krabby-back": {
-      "x": 661,
+      "x": 1321,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1762,7 +1892,7 @@
       "mirror_of": null
     },
     "krabby-front": {
-      "x": 727,
+      "x": 1387,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1775,7 +1905,7 @@
       "mirror_of": null
     },
     "lapras-back": {
-      "x": 793,
+      "x": 1453,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1788,7 +1918,7 @@
       "mirror_of": null
     },
     "lapras-front": {
-      "x": 859,
+      "x": 1519,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1801,7 +1931,7 @@
       "mirror_of": null
     },
     "lickitung-back": {
-      "x": 925,
+      "x": 1585,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1814,7 +1944,7 @@
       "mirror_of": null
     },
     "lickitung-front": {
-      "x": 991,
+      "x": 1651,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1827,7 +1957,7 @@
       "mirror_of": null
     },
     "machamp-back": {
-      "x": 1057,
+      "x": 1717,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1840,7 +1970,7 @@
       "mirror_of": null
     },
     "machamp-front": {
-      "x": 1123,
+      "x": 1783,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1853,7 +1983,7 @@
       "mirror_of": null
     },
     "machoke-back": {
-      "x": 1189,
+      "x": 1849,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1866,7 +1996,7 @@
       "mirror_of": null
     },
     "machoke-front": {
-      "x": 1255,
+      "x": 1915,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1879,7 +2009,7 @@
       "mirror_of": null
     },
     "machop-back": {
-      "x": 1321,
+      "x": 1981,
       "y": 265,
       "w": 64,
       "h": 64,
@@ -1892,8 +2022,8 @@
       "mirror_of": null
     },
     "machop-front": {
-      "x": 1387,
-      "y": 265,
+      "x": 1,
+      "y": 331,
       "w": 64,
       "h": 64,
       "frames": [
@@ -1905,124 +2035,7 @@
       "mirror_of": null
     },
     "magikarp-back": {
-      "x": 1453,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "magikarp-front": {
-      "x": 1519,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "magmar-back": {
-      "x": 1585,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 16,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "magmar-front": {
-      "x": 1651,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "magnemite-back": {
-      "x": 1717,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "magnemite-front": {
-      "x": 1783,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "magneton-back": {
-      "x": 1849,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "magneton-front": {
-      "x": 1915,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "mankey-back": {
-      "x": 1981,
-      "y": 265,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "mankey-front": {
-      "x": 1,
+      "x": 67,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2034,8 +2047,151 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "magikarp-front": {
+      "x": 133,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magmar-back": {
+      "x": 199,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magmar-front": {
+      "x": 265,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magnemite-back": {
+      "x": 331,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magnemite-front": {
+      "x": 397,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magneton-back": {
+      "x": 463,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magneton-front": {
+      "x": 529,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mankey-back": {
+      "x": 595,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mankey-front": {
+      "x": 661,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "marill-back": {
+      "x": 727,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "marill-front": {
+      "x": 793,
+      "y": 331,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "marowak-back": {
-      "x": 67,
+      "x": 859,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2048,7 +2204,7 @@
       "mirror_of": null
     },
     "marowak-front": {
-      "x": 133,
+      "x": 925,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2061,7 +2217,7 @@
       "mirror_of": null
     },
     "meowth-back": {
-      "x": 199,
+      "x": 991,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2074,7 +2230,7 @@
       "mirror_of": null
     },
     "meowth-front": {
-      "x": 265,
+      "x": 1057,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2087,7 +2243,7 @@
       "mirror_of": null
     },
     "metapod-back": {
-      "x": 331,
+      "x": 1123,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2100,7 +2256,7 @@
       "mirror_of": null
     },
     "metapod-front": {
-      "x": 397,
+      "x": 1189,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2113,7 +2269,7 @@
       "mirror_of": null
     },
     "mew-back": {
-      "x": 463,
+      "x": 1255,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2126,7 +2282,7 @@
       "mirror_of": null
     },
     "mew-front": {
-      "x": 529,
+      "x": 1321,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2139,7 +2295,7 @@
       "mirror_of": null
     },
     "mewtwo-back": {
-      "x": 595,
+      "x": 1387,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2152,7 +2308,7 @@
       "mirror_of": null
     },
     "mewtwo-front": {
-      "x": 661,
+      "x": 1453,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2165,7 +2321,7 @@
       "mirror_of": null
     },
     "moltres-back": {
-      "x": 727,
+      "x": 1519,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2178,7 +2334,7 @@
       "mirror_of": null
     },
     "moltres-front": {
-      "x": 793,
+      "x": 1585,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2191,7 +2347,7 @@
       "mirror_of": null
     },
     "mrmime-back": {
-      "x": 859,
+      "x": 1651,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2204,7 +2360,7 @@
       "mirror_of": null
     },
     "mrmime-front": {
-      "x": 925,
+      "x": 1717,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2217,7 +2373,7 @@
       "mirror_of": null
     },
     "muk-back": {
-      "x": 991,
+      "x": 1783,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2230,7 +2386,7 @@
       "mirror_of": null
     },
     "muk-front": {
-      "x": 1057,
+      "x": 1849,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2243,7 +2399,7 @@
       "mirror_of": null
     },
     "nidoking-back": {
-      "x": 1123,
+      "x": 1915,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2256,7 +2412,7 @@
       "mirror_of": null
     },
     "nidoking-front": {
-      "x": 1189,
+      "x": 1981,
       "y": 331,
       "w": 64,
       "h": 64,
@@ -2269,8 +2425,8 @@
       "mirror_of": null
     },
     "nidoqueen-back": {
-      "x": 1255,
-      "y": 331,
+      "x": 1,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2282,8 +2438,8 @@
       "mirror_of": null
     },
     "nidoqueen-front": {
-      "x": 1321,
-      "y": 331,
+      "x": 67,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2295,8 +2451,8 @@
       "mirror_of": null
     },
     "nidoranf-back": {
-      "x": 1387,
-      "y": 331,
+      "x": 133,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2308,8 +2464,8 @@
       "mirror_of": null
     },
     "nidoranf-front": {
-      "x": 1453,
-      "y": 331,
+      "x": 199,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2321,8 +2477,8 @@
       "mirror_of": null
     },
     "nidoranm-back": {
-      "x": 1519,
-      "y": 331,
+      "x": 265,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2334,8 +2490,8 @@
       "mirror_of": null
     },
     "nidoranm-front": {
-      "x": 1585,
-      "y": 331,
+      "x": 331,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2347,8 +2503,8 @@
       "mirror_of": null
     },
     "nidorina-back": {
-      "x": 1651,
-      "y": 331,
+      "x": 397,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2360,8 +2516,8 @@
       "mirror_of": null
     },
     "nidorina-front": {
-      "x": 1717,
-      "y": 331,
+      "x": 463,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2373,8 +2529,8 @@
       "mirror_of": null
     },
     "nidorino-back": {
-      "x": 1783,
-      "y": 331,
+      "x": 529,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2386,8 +2542,8 @@
       "mirror_of": null
     },
     "nidorino-front": {
-      "x": 1849,
-      "y": 331,
+      "x": 595,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2399,8 +2555,8 @@
       "mirror_of": null
     },
     "ninetales-back": {
-      "x": 1915,
-      "y": 331,
+      "x": 661,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2412,8 +2568,8 @@
       "mirror_of": null
     },
     "ninetales-front": {
-      "x": 1981,
-      "y": 331,
+      "x": 727,
+      "y": 397,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2425,7 +2581,7 @@
       "mirror_of": null
     },
     "oddish-back": {
-      "x": 1,
+      "x": 793,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2438,7 +2594,7 @@
       "mirror_of": null
     },
     "oddish-front": {
-      "x": 67,
+      "x": 859,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2451,7 +2607,7 @@
       "mirror_of": null
     },
     "omanyte-back": {
-      "x": 133,
+      "x": 925,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2464,7 +2620,7 @@
       "mirror_of": null
     },
     "omanyte-front": {
-      "x": 199,
+      "x": 991,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2477,7 +2633,7 @@
       "mirror_of": null
     },
     "omastar-back": {
-      "x": 265,
+      "x": 1057,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2490,7 +2646,7 @@
       "mirror_of": null
     },
     "omastar-front": {
-      "x": 331,
+      "x": 1123,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2503,7 +2659,7 @@
       "mirror_of": null
     },
     "onix-back": {
-      "x": 397,
+      "x": 1189,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2516,7 +2672,7 @@
       "mirror_of": null
     },
     "onix-front": {
-      "x": 463,
+      "x": 1255,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2529,7 +2685,7 @@
       "mirror_of": null
     },
     "paras-back": {
-      "x": 529,
+      "x": 1321,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2542,7 +2698,7 @@
       "mirror_of": null
     },
     "paras-front": {
-      "x": 595,
+      "x": 1387,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2555,7 +2711,7 @@
       "mirror_of": null
     },
     "parasect-back": {
-      "x": 661,
+      "x": 1453,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2568,7 +2724,7 @@
       "mirror_of": null
     },
     "parasect-front": {
-      "x": 727,
+      "x": 1519,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2581,7 +2737,7 @@
       "mirror_of": null
     },
     "persian-back": {
-      "x": 793,
+      "x": 1585,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2594,7 +2750,7 @@
       "mirror_of": null
     },
     "persian-front": {
-      "x": 859,
+      "x": 1651,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2607,7 +2763,7 @@
       "mirror_of": null
     },
     "pidgeot-back": {
-      "x": 925,
+      "x": 1717,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2620,7 +2776,7 @@
       "mirror_of": null
     },
     "pidgeot-front": {
-      "x": 991,
+      "x": 1783,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2633,7 +2789,7 @@
       "mirror_of": null
     },
     "pidgeotto-back": {
-      "x": 1057,
+      "x": 1849,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2646,7 +2802,7 @@
       "mirror_of": null
     },
     "pidgeotto-front": {
-      "x": 1123,
+      "x": 1915,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2659,7 +2815,7 @@
       "mirror_of": null
     },
     "pidgey-back": {
-      "x": 1189,
+      "x": 1981,
       "y": 397,
       "w": 64,
       "h": 64,
@@ -2672,8 +2828,8 @@
       "mirror_of": null
     },
     "pidgey-front": {
-      "x": 1255,
-      "y": 397,
+      "x": 1,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2685,8 +2841,8 @@
       "mirror_of": null
     },
     "pikachu-back": {
-      "x": 1321,
-      "y": 397,
+      "x": 67,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2698,8 +2854,8 @@
       "mirror_of": null
     },
     "pikachu-front": {
-      "x": 1387,
-      "y": 397,
+      "x": 133,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2710,9 +2866,35 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "pinkbutterfree-back": {
+      "x": 199,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pinkbutterfree-front": {
+      "x": 265,
+      "y": 463,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "pinsir-back": {
-      "x": 1453,
-      "y": 397,
+      "x": 331,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2724,8 +2906,8 @@
       "mirror_of": null
     },
     "pinsir-front": {
-      "x": 1519,
-      "y": 397,
+      "x": 397,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2737,8 +2919,8 @@
       "mirror_of": null
     },
     "poliwag-back": {
-      "x": 1585,
-      "y": 397,
+      "x": 463,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2750,8 +2932,8 @@
       "mirror_of": null
     },
     "poliwag-front": {
-      "x": 1651,
-      "y": 397,
+      "x": 529,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2763,8 +2945,8 @@
       "mirror_of": null
     },
     "poliwhirl-back": {
-      "x": 1717,
-      "y": 397,
+      "x": 595,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2776,8 +2958,8 @@
       "mirror_of": null
     },
     "poliwhirl-front": {
-      "x": 1783,
-      "y": 397,
+      "x": 661,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2789,8 +2971,8 @@
       "mirror_of": null
     },
     "poliwrath-back": {
-      "x": 1849,
-      "y": 397,
+      "x": 727,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2802,8 +2984,8 @@
       "mirror_of": null
     },
     "poliwrath-front": {
-      "x": 1915,
-      "y": 397,
+      "x": 793,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2815,8 +2997,8 @@
       "mirror_of": null
     },
     "ponyta-back": {
-      "x": 1981,
-      "y": 397,
+      "x": 859,
+      "y": 463,
       "w": 64,
       "h": 64,
       "frames": [
@@ -2828,7 +3010,7 @@
       "mirror_of": null
     },
     "ponyta-front": {
-      "x": 1,
+      "x": 925,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2841,7 +3023,7 @@
       "mirror_of": null
     },
     "porygon-back": {
-      "x": 67,
+      "x": 991,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2854,7 +3036,7 @@
       "mirror_of": null
     },
     "porygon-front": {
-      "x": 133,
+      "x": 1057,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2867,7 +3049,7 @@
       "mirror_of": null
     },
     "primeape-back": {
-      "x": 199,
+      "x": 1123,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2880,7 +3062,7 @@
       "mirror_of": null
     },
     "primeape-front": {
-      "x": 265,
+      "x": 1189,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2893,7 +3075,7 @@
       "mirror_of": null
     },
     "psyduck-back": {
-      "x": 331,
+      "x": 1255,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2906,7 +3088,7 @@
       "mirror_of": null
     },
     "psyduck-front": {
-      "x": 397,
+      "x": 1321,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2919,7 +3101,7 @@
       "mirror_of": null
     },
     "raichu-back": {
-      "x": 463,
+      "x": 1387,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2932,7 +3114,7 @@
       "mirror_of": null
     },
     "raichu-front": {
-      "x": 529,
+      "x": 1453,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2945,7 +3127,7 @@
       "mirror_of": null
     },
     "rapidash-back": {
-      "x": 595,
+      "x": 1519,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2958,7 +3140,7 @@
       "mirror_of": null
     },
     "rapidash-front": {
-      "x": 661,
+      "x": 1585,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2971,7 +3153,7 @@
       "mirror_of": null
     },
     "raticate-back": {
-      "x": 727,
+      "x": 1651,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2984,7 +3166,7 @@
       "mirror_of": null
     },
     "raticate-front": {
-      "x": 793,
+      "x": 1717,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -2997,7 +3179,7 @@
       "mirror_of": null
     },
     "rattata-back": {
-      "x": 859,
+      "x": 1783,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -3010,7 +3192,7 @@
       "mirror_of": null
     },
     "rattata-front": {
-      "x": 925,
+      "x": 1849,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -3023,7 +3205,7 @@
       "mirror_of": null
     },
     "rhydon-back": {
-      "x": 991,
+      "x": 1915,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -3036,7 +3218,7 @@
       "mirror_of": null
     },
     "rhydon-front": {
-      "x": 1057,
+      "x": 1981,
       "y": 463,
       "w": 64,
       "h": 64,
@@ -3049,8 +3231,8 @@
       "mirror_of": null
     },
     "rhyhorn-back": {
-      "x": 1123,
-      "y": 463,
+      "x": 1,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3062,8 +3244,8 @@
       "mirror_of": null
     },
     "rhyhorn-front": {
-      "x": 1189,
-      "y": 463,
+      "x": 67,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3075,8 +3257,8 @@
       "mirror_of": null
     },
     "sandshrew-back": {
-      "x": 1255,
-      "y": 463,
+      "x": 133,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3088,8 +3270,8 @@
       "mirror_of": null
     },
     "sandshrew-front": {
-      "x": 1321,
-      "y": 463,
+      "x": 199,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3101,8 +3283,8 @@
       "mirror_of": null
     },
     "sandslash-back": {
-      "x": 1387,
-      "y": 463,
+      "x": 265,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3114,8 +3296,8 @@
       "mirror_of": null
     },
     "sandslash-front": {
-      "x": 1453,
-      "y": 463,
+      "x": 331,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3127,8 +3309,8 @@
       "mirror_of": null
     },
     "scyther-back": {
-      "x": 1519,
-      "y": 463,
+      "x": 397,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3140,8 +3322,8 @@
       "mirror_of": null
     },
     "scyther-front": {
-      "x": 1585,
-      "y": 463,
+      "x": 463,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3153,8 +3335,8 @@
       "mirror_of": null
     },
     "seadra-back": {
-      "x": 1651,
-      "y": 463,
+      "x": 529,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3166,8 +3348,8 @@
       "mirror_of": null
     },
     "seadra-front": {
-      "x": 1717,
-      "y": 463,
+      "x": 595,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3179,8 +3361,8 @@
       "mirror_of": null
     },
     "seaking-back": {
-      "x": 1783,
-      "y": 463,
+      "x": 661,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3192,8 +3374,8 @@
       "mirror_of": null
     },
     "seaking-front": {
-      "x": 1849,
-      "y": 463,
+      "x": 727,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3205,8 +3387,8 @@
       "mirror_of": null
     },
     "seel-back": {
-      "x": 1915,
-      "y": 463,
+      "x": 793,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3218,8 +3400,8 @@
       "mirror_of": null
     },
     "seel-front": {
-      "x": 1981,
-      "y": 463,
+      "x": 859,
+      "y": 529,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3231,7 +3413,7 @@
       "mirror_of": null
     },
     "shellder-back": {
-      "x": 1,
+      "x": 925,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3244,7 +3426,7 @@
       "mirror_of": null
     },
     "shellder-front": {
-      "x": 67,
+      "x": 991,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3257,7 +3439,7 @@
       "mirror_of": null
     },
     "slowbro-back": {
-      "x": 133,
+      "x": 1057,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3270,7 +3452,7 @@
       "mirror_of": null
     },
     "slowbro-front": {
-      "x": 199,
+      "x": 1123,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3283,7 +3465,7 @@
       "mirror_of": null
     },
     "slowpoke-back": {
-      "x": 265,
+      "x": 1189,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3296,7 +3478,7 @@
       "mirror_of": null
     },
     "slowpoke-front": {
-      "x": 331,
+      "x": 1255,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3309,7 +3491,7 @@
       "mirror_of": null
     },
     "snorlax-back": {
-      "x": 397,
+      "x": 1321,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3322,7 +3504,7 @@
       "mirror_of": null
     },
     "snorlax-front": {
-      "x": 463,
+      "x": 1387,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3334,8 +3516,34 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "snubbull-back": {
+      "x": 1453,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "snubbull-front": {
+      "x": 1519,
+      "y": 529,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "spearow-back": {
-      "x": 529,
+      "x": 1585,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3348,7 +3556,7 @@
       "mirror_of": null
     },
     "spearow-front": {
-      "x": 595,
+      "x": 1651,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3361,7 +3569,7 @@
       "mirror_of": null
     },
     "squirtle-back": {
-      "x": 661,
+      "x": 1717,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3374,7 +3582,7 @@
       "mirror_of": null
     },
     "squirtle-front": {
-      "x": 727,
+      "x": 1783,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3387,7 +3595,7 @@
       "mirror_of": null
     },
     "starmie-back": {
-      "x": 793,
+      "x": 1849,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3400,7 +3608,7 @@
       "mirror_of": null
     },
     "starmie-front": {
-      "x": 859,
+      "x": 1915,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3413,7 +3621,7 @@
       "mirror_of": null
     },
     "staryu-back": {
-      "x": 925,
+      "x": 1981,
       "y": 529,
       "w": 64,
       "h": 64,
@@ -3426,8 +3634,8 @@
       "mirror_of": null
     },
     "staryu-front": {
-      "x": 991,
-      "y": 529,
+      "x": 1,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3438,9 +3646,35 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "surfingpikachu-back": {
+      "x": 67,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "surfingpikachu-front": {
+      "x": 133,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tangela-back": {
-      "x": 1057,
-      "y": 529,
+      "x": 199,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3452,8 +3686,8 @@
       "mirror_of": null
     },
     "tangela-front": {
-      "x": 1123,
-      "y": 529,
+      "x": 265,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3465,8 +3699,8 @@
       "mirror_of": null
     },
     "tauros-back": {
-      "x": 1189,
-      "y": 529,
+      "x": 331,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3478,8 +3712,8 @@
       "mirror_of": null
     },
     "tauros-front": {
-      "x": 1255,
-      "y": 529,
+      "x": 397,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3491,8 +3725,8 @@
       "mirror_of": null
     },
     "tentacool-back": {
-      "x": 1321,
-      "y": 529,
+      "x": 463,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3504,8 +3738,8 @@
       "mirror_of": null
     },
     "tentacool-front": {
-      "x": 1387,
-      "y": 529,
+      "x": 529,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3517,8 +3751,8 @@
       "mirror_of": null
     },
     "tentacruel-back": {
-      "x": 1453,
-      "y": 529,
+      "x": 595,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3530,8 +3764,8 @@
       "mirror_of": null
     },
     "tentacruel-front": {
-      "x": 1519,
-      "y": 529,
+      "x": 661,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3542,9 +3776,35 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "togepi-back": {
+      "x": 727,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "togepi-front": {
+      "x": 793,
+      "y": 595,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "vaporeon-back": {
-      "x": 1585,
-      "y": 529,
+      "x": 859,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3556,8 +3816,8 @@
       "mirror_of": null
     },
     "vaporeon-front": {
-      "x": 1651,
-      "y": 529,
+      "x": 925,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3569,8 +3829,8 @@
       "mirror_of": null
     },
     "venomoth-back": {
-      "x": 1717,
-      "y": 529,
+      "x": 991,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3582,8 +3842,8 @@
       "mirror_of": null
     },
     "venomoth-front": {
-      "x": 1783,
-      "y": 529,
+      "x": 1057,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3595,8 +3855,8 @@
       "mirror_of": null
     },
     "venonat-back": {
-      "x": 1849,
-      "y": 529,
+      "x": 1123,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3608,8 +3868,8 @@
       "mirror_of": null
     },
     "venonat-front": {
-      "x": 1915,
-      "y": 529,
+      "x": 1189,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3621,8 +3881,8 @@
       "mirror_of": null
     },
     "venusaur-back": {
-      "x": 1981,
-      "y": 529,
+      "x": 1255,
+      "y": 595,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3634,7 +3894,7 @@
       "mirror_of": null
     },
     "venusaur-front": {
-      "x": 1,
+      "x": 1321,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3647,7 +3907,7 @@
       "mirror_of": null
     },
     "victreebel-back": {
-      "x": 67,
+      "x": 1387,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3660,7 +3920,7 @@
       "mirror_of": null
     },
     "victreebel-front": {
-      "x": 133,
+      "x": 1453,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3673,7 +3933,7 @@
       "mirror_of": null
     },
     "vileplume-back": {
-      "x": 199,
+      "x": 1519,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3686,7 +3946,7 @@
       "mirror_of": null
     },
     "vileplume-front": {
-      "x": 265,
+      "x": 1585,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3699,7 +3959,7 @@
       "mirror_of": null
     },
     "voltorb-back": {
-      "x": 331,
+      "x": 1651,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3712,7 +3972,7 @@
       "mirror_of": null
     },
     "voltorb-front": {
-      "x": 397,
+      "x": 1717,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3725,7 +3985,7 @@
       "mirror_of": null
     },
     "vulpix-back": {
-      "x": 463,
+      "x": 1783,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3738,7 +3998,7 @@
       "mirror_of": null
     },
     "vulpix-front": {
-      "x": 529,
+      "x": 1849,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3751,7 +4011,7 @@
       "mirror_of": null
     },
     "wartortle-back": {
-      "x": 595,
+      "x": 1915,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3764,7 +4024,7 @@
       "mirror_of": null
     },
     "wartortle-front": {
-      "x": 661,
+      "x": 1981,
       "y": 595,
       "w": 64,
       "h": 64,
@@ -3777,8 +4037,8 @@
       "mirror_of": null
     },
     "weedle-back": {
-      "x": 727,
-      "y": 595,
+      "x": 1,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3790,8 +4050,8 @@
       "mirror_of": null
     },
     "weedle-front": {
-      "x": 793,
-      "y": 595,
+      "x": 67,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3803,8 +4063,8 @@
       "mirror_of": null
     },
     "weepinbell-back": {
-      "x": 859,
-      "y": 595,
+      "x": 133,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3816,8 +4076,8 @@
       "mirror_of": null
     },
     "weepinbell-front": {
-      "x": 925,
-      "y": 595,
+      "x": 199,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3829,8 +4089,8 @@
       "mirror_of": null
     },
     "weezing-back": {
-      "x": 991,
-      "y": 595,
+      "x": 265,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3842,8 +4102,8 @@
       "mirror_of": null
     },
     "weezing-front": {
-      "x": 1057,
-      "y": 595,
+      "x": 331,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3855,8 +4115,8 @@
       "mirror_of": null
     },
     "wigglytuff-back": {
-      "x": 1123,
-      "y": 595,
+      "x": 397,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3868,8 +4128,8 @@
       "mirror_of": null
     },
     "wigglytuff-front": {
-      "x": 1189,
-      "y": 595,
+      "x": 463,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3881,8 +4141,8 @@
       "mirror_of": null
     },
     "zapdos-back": {
-      "x": 1255,
-      "y": 595,
+      "x": 529,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3894,8 +4154,8 @@
       "mirror_of": null
     },
     "zapdos-front": {
-      "x": 1321,
-      "y": 595,
+      "x": 595,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3907,8 +4167,8 @@
       "mirror_of": null
     },
     "zubat-back": {
-      "x": 1387,
-      "y": 595,
+      "x": 661,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3920,8 +4180,8 @@
       "mirror_of": null
     },
     "zubat-front": {
-      "x": 1453,
-      "y": 595,
+      "x": 727,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3933,8 +4193,8 @@
       "mirror_of": null
     },
     "abra-front-bob": {
-      "x": 1519,
-      "y": 595,
+      "x": 793,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3946,8 +4206,8 @@
       "mirror_of": null
     },
     "aerodactyl-front-bob": {
-      "x": 1585,
-      "y": 595,
+      "x": 859,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3959,8 +4219,8 @@
       "mirror_of": null
     },
     "alakazam-front-bob": {
-      "x": 1651,
-      "y": 595,
+      "x": 925,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3972,8 +4232,8 @@
       "mirror_of": null
     },
     "arbok-front-bob": {
-      "x": 1717,
-      "y": 595,
+      "x": 991,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3985,8 +4245,8 @@
       "mirror_of": null
     },
     "arcanine-front-bob": {
-      "x": 1783,
-      "y": 595,
+      "x": 1057,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -3998,8 +4258,8 @@
       "mirror_of": null
     },
     "articuno-front-bob": {
-      "x": 1849,
-      "y": 595,
+      "x": 1123,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4011,8 +4271,8 @@
       "mirror_of": null
     },
     "beedrill-front-bob": {
-      "x": 1915,
-      "y": 595,
+      "x": 1189,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4024,8 +4284,8 @@
       "mirror_of": null
     },
     "bellsprout-front-bob": {
-      "x": 1981,
-      "y": 595,
+      "x": 1255,
+      "y": 661,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4037,7 +4297,7 @@
       "mirror_of": null
     },
     "blastoise-front-bob": {
-      "x": 1,
+      "x": 1321,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4050,7 +4310,7 @@
       "mirror_of": null
     },
     "bulbasaur-front-bob": {
-      "x": 67,
+      "x": 1387,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4063,7 +4323,7 @@
       "mirror_of": null
     },
     "butterfree-front-bob": {
-      "x": 133,
+      "x": 1453,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4076,7 +4336,7 @@
       "mirror_of": null
     },
     "caterpie-front-bob": {
-      "x": 199,
+      "x": 1519,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4089,7 +4349,7 @@
       "mirror_of": null
     },
     "chansey-front-bob": {
-      "x": 265,
+      "x": 1585,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4102,7 +4362,7 @@
       "mirror_of": null
     },
     "charizard-front-bob": {
-      "x": 331,
+      "x": 1651,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4115,7 +4375,7 @@
       "mirror_of": null
     },
     "charmander-front-bob": {
-      "x": 397,
+      "x": 1717,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4128,7 +4388,7 @@
       "mirror_of": null
     },
     "charmeleon-front-bob": {
-      "x": 463,
+      "x": 1783,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4141,7 +4401,7 @@
       "mirror_of": null
     },
     "clefable-front-bob": {
-      "x": 529,
+      "x": 1849,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4154,7 +4414,7 @@
       "mirror_of": null
     },
     "clefairy-front-bob": {
-      "x": 595,
+      "x": 1915,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4167,7 +4427,7 @@
       "mirror_of": null
     },
     "cloyster-front-bob": {
-      "x": 661,
+      "x": 1981,
       "y": 661,
       "w": 64,
       "h": 64,
@@ -4179,9 +4439,22 @@
       "derived_from": "cloyster-front",
       "mirror_of": null
     },
+    "crystalonix-front-bob": {
+      "x": 1,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": "crystalonix-front",
+      "mirror_of": null
+    },
     "cubone-front-bob": {
-      "x": 727,
-      "y": 661,
+      "x": 67,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4193,8 +4466,8 @@
       "mirror_of": null
     },
     "dewgong-front-bob": {
-      "x": 793,
-      "y": 661,
+      "x": 133,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4206,8 +4479,8 @@
       "mirror_of": null
     },
     "diglett-front-bob": {
-      "x": 859,
-      "y": 661,
+      "x": 199,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4219,8 +4492,8 @@
       "mirror_of": null
     },
     "ditto-front-bob": {
-      "x": 925,
-      "y": 661,
+      "x": 265,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4232,8 +4505,8 @@
       "mirror_of": null
     },
     "dodrio-front-bob": {
-      "x": 991,
-      "y": 661,
+      "x": 331,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4245,8 +4518,8 @@
       "mirror_of": null
     },
     "doduo-front-bob": {
-      "x": 1057,
-      "y": 661,
+      "x": 397,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4257,9 +4530,22 @@
       "derived_from": "doduo-front",
       "mirror_of": null
     },
+    "donphan-front-bob": {
+      "x": 463,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "donphan-front",
+      "mirror_of": null
+    },
     "dragonair-front-bob": {
-      "x": 1123,
-      "y": 661,
+      "x": 529,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4271,8 +4557,8 @@
       "mirror_of": null
     },
     "dragonite-front-bob": {
-      "x": 1189,
-      "y": 661,
+      "x": 595,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4284,8 +4570,8 @@
       "mirror_of": null
     },
     "dratini-front-bob": {
-      "x": 1255,
-      "y": 661,
+      "x": 661,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4297,8 +4583,8 @@
       "mirror_of": null
     },
     "drowzee-front-bob": {
-      "x": 1321,
-      "y": 661,
+      "x": 727,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4310,8 +4596,8 @@
       "mirror_of": null
     },
     "dugtrio-front-bob": {
-      "x": 1387,
-      "y": 661,
+      "x": 793,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4323,8 +4609,8 @@
       "mirror_of": null
     },
     "eevee-front-bob": {
-      "x": 1453,
-      "y": 661,
+      "x": 859,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4336,8 +4622,8 @@
       "mirror_of": null
     },
     "ekans-front-bob": {
-      "x": 1519,
-      "y": 661,
+      "x": 925,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4349,8 +4635,8 @@
       "mirror_of": null
     },
     "electabuzz-front-bob": {
-      "x": 1585,
-      "y": 661,
+      "x": 991,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4362,8 +4648,8 @@
       "mirror_of": null
     },
     "electrode-front-bob": {
-      "x": 1651,
-      "y": 661,
+      "x": 1057,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4375,8 +4661,8 @@
       "mirror_of": null
     },
     "exeggcute-front-bob": {
-      "x": 1717,
-      "y": 661,
+      "x": 1123,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4388,8 +4674,8 @@
       "mirror_of": null
     },
     "exeggutor-front-bob": {
-      "x": 1783,
-      "y": 661,
+      "x": 1189,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4401,8 +4687,8 @@
       "mirror_of": null
     },
     "farfetchd-front-bob": {
-      "x": 1849,
-      "y": 661,
+      "x": 1255,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4414,8 +4700,8 @@
       "mirror_of": null
     },
     "fearow-front-bob": {
-      "x": 1915,
-      "y": 661,
+      "x": 1321,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4427,8 +4713,8 @@
       "mirror_of": null
     },
     "flareon-front-bob": {
-      "x": 1981,
-      "y": 661,
+      "x": 1387,
+      "y": 727,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4439,8 +4725,21 @@
       "derived_from": "flareon-front",
       "mirror_of": null
     },
+    "flyingpikachu-front-bob": {
+      "x": 1453,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": "flyingpikachu-front",
+      "mirror_of": null
+    },
     "gastly-front-bob": {
-      "x": 1,
+      "x": 1519,
       "y": 727,
       "w": 64,
       "h": 64,
@@ -4453,7 +4752,7 @@
       "mirror_of": null
     },
     "gengar-front-bob": {
-      "x": 67,
+      "x": 1585,
       "y": 727,
       "w": 64,
       "h": 64,
@@ -4466,7 +4765,7 @@
       "mirror_of": null
     },
     "geodude-front-bob": {
-      "x": 133,
+      "x": 1651,
       "y": 727,
       "w": 64,
       "h": 64,
@@ -4478,8 +4777,21 @@
       "derived_from": "geodude-front",
       "mirror_of": null
     },
+    "giantdragonite-front-bob": {
+      "x": 1717,
+      "y": 727,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": "giantdragonite-front",
+      "mirror_of": null
+    },
     "gloom-front-bob": {
-      "x": 199,
+      "x": 1783,
       "y": 727,
       "w": 64,
       "h": 64,
@@ -4492,7 +4804,7 @@
       "mirror_of": null
     },
     "golbat-front-bob": {
-      "x": 265,
+      "x": 1849,
       "y": 727,
       "w": 64,
       "h": 64,
@@ -4505,7 +4817,7 @@
       "mirror_of": null
     },
     "goldeen-front-bob": {
-      "x": 331,
+      "x": 1915,
       "y": 727,
       "w": 64,
       "h": 64,
@@ -4518,7 +4830,7 @@
       "mirror_of": null
     },
     "golduck-front-bob": {
-      "x": 397,
+      "x": 1981,
       "y": 727,
       "w": 64,
       "h": 64,
@@ -4531,8 +4843,8 @@
       "mirror_of": null
     },
     "golem-front-bob": {
-      "x": 463,
-      "y": 727,
+      "x": 1,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4544,8 +4856,8 @@
       "mirror_of": null
     },
     "graveler-front-bob": {
-      "x": 529,
-      "y": 727,
+      "x": 67,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4557,8 +4869,8 @@
       "mirror_of": null
     },
     "grimer-front-bob": {
-      "x": 595,
-      "y": 727,
+      "x": 133,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4570,8 +4882,8 @@
       "mirror_of": null
     },
     "growlithe-front-bob": {
-      "x": 661,
-      "y": 727,
+      "x": 199,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4583,8 +4895,8 @@
       "mirror_of": null
     },
     "gyarados-front-bob": {
-      "x": 727,
-      "y": 727,
+      "x": 265,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4596,8 +4908,8 @@
       "mirror_of": null
     },
     "haunter-front-bob": {
-      "x": 793,
-      "y": 727,
+      "x": 331,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4609,8 +4921,8 @@
       "mirror_of": null
     },
     "hitmonchan-front-bob": {
-      "x": 859,
-      "y": 727,
+      "x": 397,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4622,8 +4934,8 @@
       "mirror_of": null
     },
     "hitmonlee-front-bob": {
-      "x": 925,
-      "y": 727,
+      "x": 463,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4634,9 +4946,22 @@
       "derived_from": "hitmonlee-front",
       "mirror_of": null
     },
+    "hooh-front-bob": {
+      "x": 529,
+      "y": 793,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": "hooh-front",
+      "mirror_of": null
+    },
     "horsea-front-bob": {
-      "x": 991,
-      "y": 727,
+      "x": 595,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4648,8 +4973,8 @@
       "mirror_of": null
     },
     "hypno-front-bob": {
-      "x": 1057,
-      "y": 727,
+      "x": 661,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4661,8 +4986,8 @@
       "mirror_of": null
     },
     "ivysaur-front-bob": {
-      "x": 1123,
-      "y": 727,
+      "x": 727,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4674,8 +4999,8 @@
       "mirror_of": null
     },
     "jigglypuff-front-bob": {
-      "x": 1189,
-      "y": 727,
+      "x": 793,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4687,8 +5012,8 @@
       "mirror_of": null
     },
     "jolteon-front-bob": {
-      "x": 1255,
-      "y": 727,
+      "x": 859,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4700,8 +5025,8 @@
       "mirror_of": null
     },
     "jynx-front-bob": {
-      "x": 1321,
-      "y": 727,
+      "x": 925,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4713,8 +5038,8 @@
       "mirror_of": null
     },
     "kabuto-front-bob": {
-      "x": 1387,
-      "y": 727,
+      "x": 991,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4726,8 +5051,8 @@
       "mirror_of": null
     },
     "kabutops-front-bob": {
-      "x": 1453,
-      "y": 727,
+      "x": 1057,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4739,8 +5064,8 @@
       "mirror_of": null
     },
     "kadabra-front-bob": {
-      "x": 1519,
-      "y": 727,
+      "x": 1123,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4752,8 +5077,8 @@
       "mirror_of": null
     },
     "kakuna-front-bob": {
-      "x": 1585,
-      "y": 727,
+      "x": 1189,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4765,8 +5090,8 @@
       "mirror_of": null
     },
     "kangaskhan-front-bob": {
-      "x": 1651,
-      "y": 727,
+      "x": 1255,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4778,8 +5103,8 @@
       "mirror_of": null
     },
     "kingler-front-bob": {
-      "x": 1717,
-      "y": 727,
+      "x": 1321,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4791,8 +5116,8 @@
       "mirror_of": null
     },
     "koffing-front-bob": {
-      "x": 1783,
-      "y": 727,
+      "x": 1387,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4804,8 +5129,8 @@
       "mirror_of": null
     },
     "krabby-front-bob": {
-      "x": 1849,
-      "y": 727,
+      "x": 1453,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4817,8 +5142,8 @@
       "mirror_of": null
     },
     "lapras-front-bob": {
-      "x": 1915,
-      "y": 727,
+      "x": 1519,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4830,8 +5155,8 @@
       "mirror_of": null
     },
     "lickitung-front-bob": {
-      "x": 1981,
-      "y": 727,
+      "x": 1585,
+      "y": 793,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4843,7 +5168,7 @@
       "mirror_of": null
     },
     "machamp-front-bob": {
-      "x": 1,
+      "x": 1651,
       "y": 793,
       "w": 64,
       "h": 64,
@@ -4856,7 +5181,7 @@
       "mirror_of": null
     },
     "machoke-front-bob": {
-      "x": 67,
+      "x": 1717,
       "y": 793,
       "w": 64,
       "h": 64,
@@ -4869,7 +5194,7 @@
       "mirror_of": null
     },
     "machop-front-bob": {
-      "x": 133,
+      "x": 1783,
       "y": 793,
       "w": 64,
       "h": 64,
@@ -4882,7 +5207,7 @@
       "mirror_of": null
     },
     "magikarp-front-bob": {
-      "x": 199,
+      "x": 1849,
       "y": 793,
       "w": 64,
       "h": 64,
@@ -4895,7 +5220,7 @@
       "mirror_of": null
     },
     "magmar-front-bob": {
-      "x": 265,
+      "x": 1915,
       "y": 793,
       "w": 64,
       "h": 64,
@@ -4908,7 +5233,7 @@
       "mirror_of": null
     },
     "magnemite-front-bob": {
-      "x": 331,
+      "x": 1981,
       "y": 793,
       "w": 64,
       "h": 64,
@@ -4921,8 +5246,8 @@
       "mirror_of": null
     },
     "magneton-front-bob": {
-      "x": 397,
-      "y": 793,
+      "x": 1,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4934,8 +5259,8 @@
       "mirror_of": null
     },
     "mankey-front-bob": {
-      "x": 463,
-      "y": 793,
+      "x": 67,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4946,9 +5271,22 @@
       "derived_from": "mankey-front",
       "mirror_of": null
     },
+    "marill-front-bob": {
+      "x": 133,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": "marill-front",
+      "mirror_of": null
+    },
     "marowak-front-bob": {
-      "x": 529,
-      "y": 793,
+      "x": 199,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4960,8 +5298,8 @@
       "mirror_of": null
     },
     "meowth-front-bob": {
-      "x": 595,
-      "y": 793,
+      "x": 265,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4973,8 +5311,8 @@
       "mirror_of": null
     },
     "metapod-front-bob": {
-      "x": 661,
-      "y": 793,
+      "x": 331,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4986,8 +5324,8 @@
       "mirror_of": null
     },
     "mew-front-bob": {
-      "x": 727,
-      "y": 793,
+      "x": 397,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -4999,8 +5337,8 @@
       "mirror_of": null
     },
     "mewtwo-front-bob": {
-      "x": 793,
-      "y": 793,
+      "x": 463,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5012,8 +5350,8 @@
       "mirror_of": null
     },
     "moltres-front-bob": {
-      "x": 859,
-      "y": 793,
+      "x": 529,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5025,8 +5363,8 @@
       "mirror_of": null
     },
     "mrmime-front-bob": {
-      "x": 925,
-      "y": 793,
+      "x": 595,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5038,8 +5376,8 @@
       "mirror_of": null
     },
     "muk-front-bob": {
-      "x": 991,
-      "y": 793,
+      "x": 661,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5051,8 +5389,8 @@
       "mirror_of": null
     },
     "nidoking-front-bob": {
-      "x": 1057,
-      "y": 793,
+      "x": 727,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5064,8 +5402,8 @@
       "mirror_of": null
     },
     "nidoqueen-front-bob": {
-      "x": 1123,
-      "y": 793,
+      "x": 793,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5077,8 +5415,8 @@
       "mirror_of": null
     },
     "nidoranf-front-bob": {
-      "x": 1189,
-      "y": 793,
+      "x": 859,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5090,8 +5428,8 @@
       "mirror_of": null
     },
     "nidoranm-front-bob": {
-      "x": 1255,
-      "y": 793,
+      "x": 925,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5103,8 +5441,8 @@
       "mirror_of": null
     },
     "nidorina-front-bob": {
-      "x": 1321,
-      "y": 793,
+      "x": 991,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5116,8 +5454,8 @@
       "mirror_of": null
     },
     "nidorino-front-bob": {
-      "x": 1387,
-      "y": 793,
+      "x": 1057,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5129,8 +5467,8 @@
       "mirror_of": null
     },
     "ninetales-front-bob": {
-      "x": 1453,
-      "y": 793,
+      "x": 1123,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5142,8 +5480,8 @@
       "mirror_of": null
     },
     "oddish-front-bob": {
-      "x": 1519,
-      "y": 793,
+      "x": 1189,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5155,8 +5493,8 @@
       "mirror_of": null
     },
     "omanyte-front-bob": {
-      "x": 1585,
-      "y": 793,
+      "x": 1255,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5168,8 +5506,8 @@
       "mirror_of": null
     },
     "omastar-front-bob": {
-      "x": 1651,
-      "y": 793,
+      "x": 1321,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5181,8 +5519,8 @@
       "mirror_of": null
     },
     "onix-front-bob": {
-      "x": 1717,
-      "y": 793,
+      "x": 1387,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5194,8 +5532,8 @@
       "mirror_of": null
     },
     "paras-front-bob": {
-      "x": 1783,
-      "y": 793,
+      "x": 1453,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5207,8 +5545,8 @@
       "mirror_of": null
     },
     "parasect-front-bob": {
-      "x": 1849,
-      "y": 793,
+      "x": 1519,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5220,8 +5558,8 @@
       "mirror_of": null
     },
     "persian-front-bob": {
-      "x": 1915,
-      "y": 793,
+      "x": 1585,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5233,8 +5571,8 @@
       "mirror_of": null
     },
     "pidgeot-front-bob": {
-      "x": 1981,
-      "y": 793,
+      "x": 1651,
+      "y": 859,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5246,7 +5584,7 @@
       "mirror_of": null
     },
     "pidgeotto-front-bob": {
-      "x": 1,
+      "x": 1717,
       "y": 859,
       "w": 64,
       "h": 64,
@@ -5259,7 +5597,7 @@
       "mirror_of": null
     },
     "pidgey-front-bob": {
-      "x": 67,
+      "x": 1783,
       "y": 859,
       "w": 64,
       "h": 64,
@@ -5272,7 +5610,7 @@
       "mirror_of": null
     },
     "pikachu-front-bob": {
-      "x": 133,
+      "x": 1849,
       "y": 859,
       "w": 64,
       "h": 64,
@@ -5284,8 +5622,21 @@
       "derived_from": "pikachu-front",
       "mirror_of": null
     },
+    "pinkbutterfree-front-bob": {
+      "x": 1915,
+      "y": 859,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": "pinkbutterfree-front",
+      "mirror_of": null
+    },
     "pinsir-front-bob": {
-      "x": 199,
+      "x": 1981,
       "y": 859,
       "w": 64,
       "h": 64,
@@ -5298,8 +5649,8 @@
       "mirror_of": null
     },
     "poliwag-front-bob": {
-      "x": 265,
-      "y": 859,
+      "x": 1,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5311,8 +5662,8 @@
       "mirror_of": null
     },
     "poliwhirl-front-bob": {
-      "x": 331,
-      "y": 859,
+      "x": 67,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5324,8 +5675,8 @@
       "mirror_of": null
     },
     "poliwrath-front-bob": {
-      "x": 397,
-      "y": 859,
+      "x": 133,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5337,8 +5688,8 @@
       "mirror_of": null
     },
     "ponyta-front-bob": {
-      "x": 463,
-      "y": 859,
+      "x": 199,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5350,8 +5701,8 @@
       "mirror_of": null
     },
     "porygon-front-bob": {
-      "x": 529,
-      "y": 859,
+      "x": 265,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5363,8 +5714,8 @@
       "mirror_of": null
     },
     "primeape-front-bob": {
-      "x": 595,
-      "y": 859,
+      "x": 331,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5376,8 +5727,8 @@
       "mirror_of": null
     },
     "psyduck-front-bob": {
-      "x": 661,
-      "y": 859,
+      "x": 397,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5389,8 +5740,8 @@
       "mirror_of": null
     },
     "raichu-front-bob": {
-      "x": 727,
-      "y": 859,
+      "x": 463,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5402,8 +5753,8 @@
       "mirror_of": null
     },
     "rapidash-front-bob": {
-      "x": 793,
-      "y": 859,
+      "x": 529,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5415,8 +5766,8 @@
       "mirror_of": null
     },
     "raticate-front-bob": {
-      "x": 859,
-      "y": 859,
+      "x": 595,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5428,8 +5779,8 @@
       "mirror_of": null
     },
     "rattata-front-bob": {
-      "x": 925,
-      "y": 859,
+      "x": 661,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5441,8 +5792,8 @@
       "mirror_of": null
     },
     "rhydon-front-bob": {
-      "x": 991,
-      "y": 859,
+      "x": 727,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5454,8 +5805,8 @@
       "mirror_of": null
     },
     "rhyhorn-front-bob": {
-      "x": 1057,
-      "y": 859,
+      "x": 793,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5467,8 +5818,8 @@
       "mirror_of": null
     },
     "sandshrew-front-bob": {
-      "x": 1123,
-      "y": 859,
+      "x": 859,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5480,8 +5831,8 @@
       "mirror_of": null
     },
     "sandslash-front-bob": {
-      "x": 1189,
-      "y": 859,
+      "x": 925,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5493,8 +5844,8 @@
       "mirror_of": null
     },
     "scyther-front-bob": {
-      "x": 1255,
-      "y": 859,
+      "x": 991,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5506,8 +5857,8 @@
       "mirror_of": null
     },
     "seadra-front-bob": {
-      "x": 1321,
-      "y": 859,
+      "x": 1057,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5519,8 +5870,8 @@
       "mirror_of": null
     },
     "seaking-front-bob": {
-      "x": 1387,
-      "y": 859,
+      "x": 1123,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5532,8 +5883,8 @@
       "mirror_of": null
     },
     "seel-front-bob": {
-      "x": 1453,
-      "y": 859,
+      "x": 1189,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5545,8 +5896,8 @@
       "mirror_of": null
     },
     "shellder-front-bob": {
-      "x": 1519,
-      "y": 859,
+      "x": 1255,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5558,8 +5909,8 @@
       "mirror_of": null
     },
     "slowbro-front-bob": {
-      "x": 1585,
-      "y": 859,
+      "x": 1321,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5571,8 +5922,8 @@
       "mirror_of": null
     },
     "slowpoke-front-bob": {
-      "x": 1651,
-      "y": 859,
+      "x": 1387,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5584,8 +5935,8 @@
       "mirror_of": null
     },
     "snorlax-front-bob": {
-      "x": 1717,
-      "y": 859,
+      "x": 1453,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5596,9 +5947,22 @@
       "derived_from": "snorlax-front",
       "mirror_of": null
     },
+    "snubbull-front-bob": {
+      "x": 1519,
+      "y": 925,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": "snubbull-front",
+      "mirror_of": null
+    },
     "spearow-front-bob": {
-      "x": 1783,
-      "y": 859,
+      "x": 1585,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5610,8 +5974,8 @@
       "mirror_of": null
     },
     "squirtle-front-bob": {
-      "x": 1849,
-      "y": 859,
+      "x": 1651,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5623,8 +5987,8 @@
       "mirror_of": null
     },
     "starmie-front-bob": {
-      "x": 1915,
-      "y": 859,
+      "x": 1717,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5636,8 +6000,8 @@
       "mirror_of": null
     },
     "staryu-front-bob": {
-      "x": 1981,
-      "y": 859,
+      "x": 1783,
+      "y": 925,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5648,8 +6012,21 @@
       "derived_from": "staryu-front",
       "mirror_of": null
     },
+    "surfingpikachu-front-bob": {
+      "x": 1849,
+      "y": 925,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": "surfingpikachu-front",
+      "mirror_of": null
+    },
     "tangela-front-bob": {
-      "x": 1,
+      "x": 1915,
       "y": 925,
       "w": 64,
       "h": 64,
@@ -5662,7 +6039,7 @@
       "mirror_of": null
     },
     "tauros-front-bob": {
-      "x": 67,
+      "x": 1981,
       "y": 925,
       "w": 64,
       "h": 64,
@@ -5675,8 +6052,8 @@
       "mirror_of": null
     },
     "tentacool-front-bob": {
-      "x": 133,
-      "y": 925,
+      "x": 1,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5688,8 +6065,8 @@
       "mirror_of": null
     },
     "tentacruel-front-bob": {
-      "x": 199,
-      "y": 925,
+      "x": 67,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5700,9 +6077,22 @@
       "derived_from": "tentacruel-front",
       "mirror_of": null
     },
+    "togepi-front-bob": {
+      "x": 133,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": "togepi-front",
+      "mirror_of": null
+    },
     "vaporeon-front-bob": {
-      "x": 265,
-      "y": 925,
+      "x": 199,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5714,8 +6104,8 @@
       "mirror_of": null
     },
     "venomoth-front-bob": {
-      "x": 331,
-      "y": 925,
+      "x": 265,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5727,8 +6117,8 @@
       "mirror_of": null
     },
     "venonat-front-bob": {
-      "x": 397,
-      "y": 925,
+      "x": 331,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5740,8 +6130,8 @@
       "mirror_of": null
     },
     "venusaur-front-bob": {
-      "x": 463,
-      "y": 925,
+      "x": 397,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5753,8 +6143,8 @@
       "mirror_of": null
     },
     "victreebel-front-bob": {
-      "x": 529,
-      "y": 925,
+      "x": 463,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5766,8 +6156,8 @@
       "mirror_of": null
     },
     "vileplume-front-bob": {
-      "x": 595,
-      "y": 925,
+      "x": 529,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5779,8 +6169,8 @@
       "mirror_of": null
     },
     "voltorb-front-bob": {
-      "x": 661,
-      "y": 925,
+      "x": 595,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5792,8 +6182,8 @@
       "mirror_of": null
     },
     "vulpix-front-bob": {
-      "x": 727,
-      "y": 925,
+      "x": 661,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5805,8 +6195,8 @@
       "mirror_of": null
     },
     "wartortle-front-bob": {
-      "x": 793,
-      "y": 925,
+      "x": 727,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5818,8 +6208,8 @@
       "mirror_of": null
     },
     "weedle-front-bob": {
-      "x": 859,
-      "y": 925,
+      "x": 793,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5831,8 +6221,8 @@
       "mirror_of": null
     },
     "weepinbell-front-bob": {
-      "x": 925,
-      "y": 925,
+      "x": 859,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5844,8 +6234,8 @@
       "mirror_of": null
     },
     "weezing-front-bob": {
-      "x": 991,
-      "y": 925,
+      "x": 925,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5857,8 +6247,8 @@
       "mirror_of": null
     },
     "wigglytuff-front-bob": {
-      "x": 1057,
-      "y": 925,
+      "x": 991,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5870,8 +6260,8 @@
       "mirror_of": null
     },
     "zapdos-front-bob": {
-      "x": 1123,
-      "y": 925,
+      "x": 1057,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [
@@ -5883,8 +6273,8 @@
       "mirror_of": null
     },
     "zubat-front-bob": {
-      "x": 1189,
-      "y": 925,
+      "x": 1123,
+      "y": 991,
       "w": 64,
       "h": 64,
       "frames": [

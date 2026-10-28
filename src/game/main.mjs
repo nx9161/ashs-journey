@@ -716,7 +716,7 @@ export class Game {
       if (filter.q && sp.name.toLowerCase().indexOf(filter.q.toLowerCase()) < 0) return false;
       return true;
     };
-    const items = Object.keys(SPECIES).filter((id) => id !== 'partner' && matchSpecies(id)).map((id) => {
+    const items = Object.keys(SPECIES).filter((id) => id !== 'partner' && !SPECIES[id].form && matchSpecies(id)).map((id) => {
       const sp = SPECIES[id];
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
       const mark = c ? '[CAUGHT]' : (s ? '[SEEN]' : '[???]');
@@ -751,7 +751,7 @@ export class Game {
   openDexEntry(speciesId, filter) {
     const g = this;
     const order = Object.keys(SPECIES)
-      .filter((id) => id !== 'partner' && SPECIES[id].dexNo >= 1 && SPECIES[id].dexNo <= 151)
+      .filter((id) => id !== 'partner' && !SPECIES[id].form && SPECIES[id].dexNo >= 1 && SPECIES[id].dexNo <= 151)
       .sort((a, b) => SPECIES[a].dexNo - SPECIES[b].dexNo);
     let idx = order.indexOf(speciesId);
     if (idx < 0) idx = 0;

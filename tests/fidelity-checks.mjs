@@ -37,12 +37,15 @@ const ALL_MAPS = { ...MAPS, ...MAPS2, ...MAPS3, ...MAPS4 };
 const ALL_TRAINERS = { ...TRAINERS_BASE, ...TRAINERS, ...TRAINERS3, ...TRAINERS4 };
 
 // ---------- A. roster / data integrity ----------
-ok('roster: 151 Kanto species + partner', Object.keys(ALL_SPECIES).length === 152);
+ok('roster: 151 Kanto species + partner + 5 forms + 5 National species (Cheat Shop expansion, 2026-10-28)', Object.keys(ALL_SPECIES).length === 162);
 {
   const byDex = {};
-  for (const sp of Object.values(ALL_SPECIES)) { if (sp.dexNo && sp.id !== 'partner') (byDex[sp.dexNo] = byDex[sp.dexNo] || []).push(sp.id); }
+  // Form entries share their base species' dexNo by design (like partner
+  // shares 25) — uniqueness is asserted over non-form species only.
+  for (const sp of Object.values(ALL_SPECIES)) { if (sp.dexNo && sp.id !== 'partner' && !sp.form) (byDex[sp.dexNo] = byDex[sp.dexNo] || []).push(sp.id); }
   const dupes = Object.entries(byDex).filter(([, v]) => v.length > 1).map(([k]) => k);
-  ok('roster: dex numbers 1-151 each exactly once (partner shares 25 by design)', dupes.length === 0 && Object.keys(byDex).length === 151, 'dupes: ' + dupes.join(','));
+  const kanto = Object.keys(byDex).filter((n) => +n >= 1 && +n <= 151);
+  ok('roster: dex numbers 1-151 each exactly once (partner + forms share by design)', dupes.length === 0 && kanto.length === 151, 'dupes: ' + dupes.join(','));
 }
 {
   const bad = [];

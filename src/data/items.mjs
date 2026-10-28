@@ -99,6 +99,13 @@ export const ITEMS = {
   marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Saffron. Up to Lv70 obey.' },
   volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Cinnabar. Special rises.' },
   earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Viridian Gym. All Pokemon obey. The League gate opens.' },
+  // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
+  // treasures with NO game system to hook — honestly labeled COLLECTIBLE
+  // in the shop, with no effects of any kind.
+  gsball: { id: 'gsball', name: 'GS Ball', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A gold-and-silver ball no machine can open. It hums near old shrines.' },
+  pinkanberry: { id: 'pinkanberry', name: 'Pinkan Berry', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A rosy island berry. One bite blushes fur and feathers pink for a day.' },
+  minimistylure: { id: 'minimistylure', name: 'Mini-Misty Lure', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A hand-painted fishing lure, a tiny redhead in a yellow top. Fish approve.' },
+  rainbowwing: { id: 'rainbowwing', name: 'Rainbow Wing', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A single feather in every color at once. It is warm, as if just flown in.' },
 };
 
 // TMs + HMs are generated from the canonical maps (single-use TMs, reusable HMs).

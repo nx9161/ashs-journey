@@ -1830,6 +1830,8 @@ export const MAPS3 = {
       // like the one in every Pokemon Center).
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
+      { x: 6, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
+        dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Pokemon, no questions asked. The professor pretends not to see this machine."] },
       { x: 10, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
         dialogue: ["My little ferry runs Pallet to Cinnabar for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
@@ -1871,6 +1873,8 @@ export const MAPS3 = {
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
       { x: 7, y: 2, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Someone's PC — Pokemon Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
+      { x: 6, y: 2, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
+        dialogue: ["CHEAT TERMINAL — a humming machine the nurses don't talk about. Everything on it is free: items, badges, even legendary Pokemon."] },
       { x: 2, y: 3, name: 'WAITING TRAINER', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
         dialogue: ["Every Center in Kanto runs the same boxes off Bill's system. Deposit a friend here, withdraw them a mountain away.", "Technology's incredible — and the nurse still heals for free. Some things never change."] },
     ],

@@ -581,6 +581,7 @@ Object.assign(OverworldScene.prototype, {
     }
     if (npc.pc) { sayLines(() => this.openPc()); return true; }
     if (npc.mart) { sayLines(() => this.openMart(npc.mart.stock || [])); return true; }
+    if (npc.cheat) { sayLines(() => this.openCheatShop()); return true; }
     if (npc.slots) { sayLines(() => this.openSlots()); return true; }
     if (npc.prize) {
       sayLines(() => {
@@ -1460,13 +1461,14 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- mart ----------
-  openMart(stock) {
+  // Elevation B4: the shared quantity stepper, extracted from openMart
+  // (Cheat Shop, 2026-10-28) so the mart and the Cheat Terminal share
+  // ONE stepper. One menu row carries the live count + total; the
+  // direction keys adjust (Left/Right ±1, Up/Down ±10) through the
+  // menu's onKey hook, A confirms the WHOLE purchase as one transaction,
+  // B cancels back to the stock list. openMart's behaviour is unchanged.
+  pickQty(verb, itemName, unitPrice, maxQty, onConfirm, onCancel) {
     const g = this.game;
-    // Elevation B4: the shared quantity stepper. One menu row carries
-    // the live count + total; the direction keys adjust (Left/Right ±1,
-    // Up/Down ±10) through the menu's onKey hook, A confirms the WHOLE
-    // purchase as one transaction, B cancels back to the stock list.
-    const pickQty = (verb, itemName, unitPrice, maxQty, onConfirm, onCancel) => {
       let qty = 1;
       const render = () => {
         g.ui.showMenu(verb + ' — ' + itemName, [
@@ -1490,7 +1492,12 @@ Object.assign(OverworldScene.prototype, {
         });
       };
       render();
-    };
+  },
+
+  openMart(stock) {
+    const g = this.game;
+    const pickQty = (verb, itemName, unitPrice, maxQty, onConfirm, onCancel) =>
+      this.pickQty(verb, itemName, unitPrice, maxQty, onConfirm, onCancel);
     const showBuy = () => {
       // ADR-025 §3 (Phase 3): stock rows carrying minBadges stay hidden
       // until the player has earned that many badges (the codebase's
@@ -1556,6 +1563,214 @@ Object.assign(OverworldScene.prototype, {
     ], (v) => {
       if (v === 'buy') showBuy();
       else if (v === 'sell') showSell();
+    });
+  },
+
+  // ---------- Cheat Terminal (owner order 2026-10-28) ----------
+  // A free shop: no Sell, no money anywhere — every claim is $0 and the
+  // player's money is never read or written here. Stock = the whole
+  // item table by pocket, all 8 Kanto badges, every keepsake, and every
+  // species (legendaries included). The server validator's rules are
+  // honored on the client: bag entries clamp at 999, boxes cap at 30.
+  cheatClaimItem(id, qty) {
+    // Returns the quantity actually granted. Clamps to the validator's
+    // 999 bag cap; an item already at 999 grants 0 (caller toasts).
+    const g = this.game;
+    const owned = g.state.bag[id] || 0;
+    const grant = Math.max(0, Math.min(qty, 999 - owned));
+    if (grant > 0) g.state.bag[id] = owned + grant;
+    return grant;
+  },
+
+  cheatClaimBadge(badgeId) {
+    // OWNER OVERRIDE: badges are stock. The claim writes the exact
+    // representation the leader-award path writes (battle.mjs: the id
+    // pushed into badges.kanto + the badge_<name> story flag) — no
+    // parallel representation. The server validator requires badges to
+    // be a PREFIX of the canonical earn order, so claiming badge #N
+    // also grants any missing earlier badges (in earn order); a claim
+    // can therefore never produce an invalid save.
+    const g = this.game;
+    const ORDER = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
+    const idx = ORDER.indexOf(badgeId);
+    if (idx < 0 || g.state.badges.kanto.includes(badgeId)) return false;
+    for (let i = 0; i <= idx; i++) {
+      if (!g.state.badges.kanto.includes(ORDER[i])) {
+        g.state.badges.kanto.push(ORDER[i]);
+        g.state.story.flags['badge_' + ORDER[i].replace(/badge$/, '')] = true;
+      }
+    }
+    return true;
+  },
+
+  cheatDeliverMon(speciesId, level, dest) {
+    // Gift-path generation (makeMon: all-31 IVs, last-4 learnset moves)
+    // + dexRegister('caught') — but CAP-SAFE, unlike giftMon's blind
+    // push into the current box: space is verified BEFORE any state
+    // mutation, so a refusal leaves the save byte-identical.
+    const g = this.game;
+    let boxId = null;
+    if (dest === 'party') {
+      if (g.state.party.length >= 6) return { ok: false, reason: 'party-full' };
+    } else {
+      for (let i = 1; i <= BOX_COUNT; i++) {
+        const id = 'box' + i;
+        if (((g.state.boxes[id] || []).length) < BOX_CAP) { boxId = id; break; }
+      }
+      if (!boxId) return { ok: false, reason: 'boxes-full' };
+    }
+    const mon = makeMon(speciesId, level, SPECIES, MOVES);
+    dexRegister(g.state.dex, 'caught', SPECIES[speciesId].dexNo);
+    if (dest === 'party') g.state.party.push(mon);
+    else (g.state.boxes[boxId] || (g.state.boxes[boxId] = [])).push(mon);
+    return { ok: true, dest, boxId, mon };
+  },
+
+  openCheatShop() {
+    const g = this.game;
+    const BADGE_IDS = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
+    const SECTIONS = [
+      { label: 'Balls', value: 'balls' }, { label: 'Medicine', value: 'medicine' },
+      { label: 'Items', value: 'items' }, { label: 'TMs', value: 'tm' }, { label: 'HMs', value: 'hm' },
+      { label: 'Key Items', value: 'key' }, { label: 'Badges', value: 'badges' },
+      { label: 'Keepsakes', value: 'keepsakes' }, { label: 'Collectibles', value: 'collectibles' },
+    ];
+    const stockOf = (section) => Object.keys(ITEMS).filter((id) => {
+      const it = ITEMS[id];
+      if (section === 'badges') return BADGE_IDS.includes(id);
+      if (section === 'collectibles') return !!it.collectible;
+      if (section === 'key') return it.pocket === 'key' && !BADGE_IDS.includes(id);
+      if (section === 'items') return it.pocket === 'items' && !it.collectible;
+      return it.pocket === section;
+    });
+    const showSection = (section) => {
+      const rows = stockOf(section).map((id) => {
+        const it = ITEMS[id];
+        if (section === 'badges') {
+          return { label: it.name + ' — $0', value: id, disabled: g.state.badges.kanto.includes(id) };
+        }
+        if (section === 'keepsakes') {
+          return { label: it.name + ' — $0 (own ' + (g.state.bag[id] || 0) + ')', value: id, disabled: ownsKeepsake(g.state, id) };
+        }
+        return { label: it.name + ' — $0 (own ' + (g.state.bag[id] || 0) + ')', value: id };
+      });
+      rows.push({ label: 'Back', value: null });
+      g.ui.showMenu('Cheat Terminal — free', rows, (iv) => {
+        if (!iv) { showItems(); return; }
+        const it = ITEMS[iv];
+        if (section === 'badges') {
+          if (this.cheatClaimBadge(iv)) {
+            g.audio.playSfx('badge');
+            g.ui.toast('Got the ' + it.name + '!');
+          }
+          showSection(section);
+          return;
+        }
+        if (section === 'keepsakes') {
+          // Claim through the central source grant. The row is disabled
+          // once owned, so the duplicate->$2,000 conversion is
+          // unreachable from here (guarded again below regardless).
+          if (ownsKeepsake(g.state, iv)) { showSection(section); return; }
+          const res = grantKeepsakeFromSource(g.state, iv);
+          if (res.status === 'granted') {
+            g.audio.playSfx('dex-register');
+            g.ui.toast('Got ' + it.name + '!');
+          }
+          showSection(section);
+          return;
+        }
+        const owned = g.state.bag[iv] || 0;
+        if (owned >= 999) {
+          g.ui.toast(it.name + ' is already maxed at 999.');
+          showSection(section);
+          return;
+        }
+        // Fossils land here as ordinary key items: the item is granted,
+        // fossil_taken is NEVER set by the shop (the Mt. Moon choice
+        // event owns that flag; the Cinnabar revive reads the bag).
+        const maxQty = Math.min(99, 999 - owned);
+        this.pickQty('Get', it.name, 0, maxQty, (qty) => {
+          const granted = this.cheatClaimItem(iv, qty);
+          g.audio.playSfx('dex-register');
+          g.ui.toast(granted > 1 ? 'Got ' + granted + ' x ' + it.name + '.' : 'Got ' + it.name + '.');
+          showSection(section);
+        }, () => showSection(section));
+      });
+    };
+    const showItems = () => {
+      const rows = SECTIONS.map((s) => ({ label: s.label, value: s.value }));
+      rows.push({ label: 'Back', value: null });
+      g.ui.showMenu('Get Items — everything $0', rows, (v) => {
+        if (!v) { this.openCheatShop(); return; }
+        showSection(v);
+      });
+    };
+    const showPokemon = () => {
+      // Dex idiom: No. + name, owned marks. Forms group directly under
+      // their base species (shared dexNo, form rows second, by name).
+      const ownedIds = new Set([...g.state.party, ...Object.values(g.state.boxes || {}).flat()]
+        .filter(Boolean).map((m) => m.speciesId));
+      const ids = Object.keys(SPECIES).filter((id) => id !== 'partner')
+        .sort((a, b) => (SPECIES[a].dexNo - SPECIES[b].dexNo)
+          || ((SPECIES[a].form ? 1 : 0) - (SPECIES[b].form ? 1 : 0))
+          || SPECIES[a].name.localeCompare(SPECIES[b].name));
+      const rows = ids.map((id) => {
+        const sp = SPECIES[id];
+        const owned = sp.form ? ownedIds.has(id) : !!g.state.dex.caught[sp.dexNo];
+        return { label: 'No.' + sp.dexNo + ' ' + sp.name + (owned ? ' ✓' : ''), value: id };
+      });
+      rows.push({ label: 'Back', value: null });
+      g.ui.showMenu('Get Pokemon — everything $0', rows, (sid) => {
+        if (!sid) { this.openCheatShop(); return; }
+        const sp = SPECIES[sid];
+        // Level stepper 1-100, opening at 50 (pickQty idiom, own start).
+        let level = 50;
+        const renderLevel = () => {
+          g.ui.showMenu(sp.name + ' — choose a level', [
+            { label: 'Level ' + level + '  (◀ ▶ ±1 · ▲ ▼ ±10)', value: 'go' },
+            { label: 'Cancel', value: 'cancel' },
+          ], (v) => {
+            if (v !== 'go') { showPokemon(); return; }
+            g.ui.showMenu('Send ' + sp.name + ' (Lv' + level + ') where?', [
+              { label: 'Party', value: 'party', disabled: g.state.party.length >= 6 },
+              { label: 'PC Box', value: 'box' },
+              { label: 'Back', value: null },
+            ], (dest) => {
+              if (!dest) { renderLevel(); return; }
+              const res = this.cheatDeliverMon(sid, level, dest);
+              if (!res.ok) {
+                g.ui.toast(res.reason === 'boxes-full' ? 'All PC boxes are full!' : 'Your party is full!');
+                showPokemon();
+                return;
+              }
+              g.audio.playSfx('dex-register');
+              g.ui.toast(dest === 'party' ? 'Received ' + sp.name + '!' : 'Received ' + sp.name + '! Sent to ' + res.boxId.replace('box', 'Box ') + '.');
+              showPokemon();
+            });
+          }, {
+            onKey: (dir) => {
+              if (dir === 'left') level = Math.max(1, level - 1);
+              else if (dir === 'right') level = Math.min(100, level + 1);
+              else if (dir === 'up') level = Math.min(100, level + 10);
+              else if (dir === 'down') level = Math.max(1, level - 10);
+              else if (dir === 'pageup') level = Math.max(1, level - 10);
+              else if (dir === 'pagedown') level = Math.min(100, level + 10);
+              else return;
+              g.audio.playSfx('ui-tick');
+              renderLevel();
+            },
+          });
+        };
+        renderLevel();
+      });
+    };
+    g.ui.showMenu('Cheat Terminal — everything is $0', [
+      { label: 'Get Items', value: 'items' },
+      { label: 'Get Pokémon', value: 'pokemon' },
+      { label: 'Leave', value: 'leave' },
+    ], (v) => {
+      if (v === 'items') showItems();
+      else if (v === 'pokemon') showPokemon();
     });
   },
 

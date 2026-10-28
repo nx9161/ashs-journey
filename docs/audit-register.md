@@ -2584,3 +2584,86 @@ driver `celadon-regression-driver.mjs`, shots in `celadon-fix-shots/`).
   Route 12 warp link the Town Map draws (missing connection, not a
   sealed region — the west ↔ south-east land route stays broken at
   the graph level; parent's call). Nothing deployed (parent ships).
+
+## Cheat Terminal — owner-ordered feature + override + canon expansion (2026-10-28)
+
+- **Feature (owner order: "everything free, including all kinds of
+  Pokémon including legendary"):** a free CHEAT TERMINAL NPC
+  (`cheat: true`, in-world name "CHEAT TERMINAL") in Pallet at (6,4),
+  beside the lab PC TERMINAL at (5,4), and in the shared Pokémon
+  Center interior at (6,2), beside its PC at (7,2) — one edit covers
+  every Center (maps3.mjs). Dispatch rides the existing NPC chain in
+  overworld-systems.mjs (`if (npc.cheat)` beside `npc.pc`/`npc.mart`).
+  `openCheatShop()`: top menu [Get Items · Get Pokémon · Leave] — no
+  Sell, no money anywhere (the shop never reads or writes
+  player.money; proven by test B05). Item sections by pocket: Balls /
+  Medicine / Items / TMs / HMs / Key Items / Badges / Keepsakes /
+  Collectibles. Rows read `Name — $0 (own N)`. Quantity rides the
+  shared pickQty stepper — EXTRACTED from openMart into a prototype
+  method (openMart keeps a same-named local alias; behaviour
+  byte-identical, mart suites green). Claims clamp to the server
+  validator's 999 bag cap (grant = min(qty, 999 − owned); at 999 the
+  shop toasts instead of overflowing). Keepsakes claim through
+  grantKeepsakeFromSource with the row disabled once owned, so the
+  dupe→$2,000 conversion is unreachable from the shop.
+- **Get Pokémon:** dex-idiom picker (No. + name, owned ✓), forms
+  grouped under their base species, level stepper 1–100 opening at
+  50, destination Party (row disabled at 6) or PC Box. Generation is
+  the gift path verbatim (makeMon: all-31 IVs, last-4 learnset moves;
+  dexRegister 'caught'). PC delivery is CAP-SAFE — deliberately NOT
+  giftMon (its blind push into currentBox can overflow the ≤30/box
+  validator rule): first box with space wins, the toast names it, and
+  an all-boxes-full refusal mutates ZERO state (test B19 snapshots the
+  whole state JSON).
+- **OWNER OVERRIDE — badges, key items, fossils stocked:** badge
+  claims write the exact leader-award representation (the
+  `boulderbadge`…`earthbadge` id pushed into state.badges.kanto +
+  the `badge_<name>` story flag; battle.mjs remains the only other
+  push site, no parallel representation). DEVIATION, forced by the
+  server validator: badges must be a PREFIX of the canonical earn
+  order, so claiming badge #N also grants any missing earlier badges
+  in earn order — a literal single-badge push would have made
+  non-prefix claims unsavable. Already-owned badge rows are
+  disabled/no-op. Key items stock as ordinary pocket:'key' items.
+  Fossils grant the ITEM only — the shop never sets fossil_taken
+  (Mt. Moon's choice event owns the flag; Cinnabar's revive reads the
+  bag, so a shopped fossil revives identically and the choice event
+  stays live; test B11).
+- **Canon expansion (anime/book canon, absent from game data; all
+  writing/art ORIGINAL to this project):**
+  - Five FORMS in the partner pattern (own speciesId, SHARED dexNo,
+    `form: true` + baseSpecies, FORMS index entries): Crystal Onix
+    (Rock/Ice — our documented take: the crystal body sheds Onix's
+    Fire weakness while Water still strikes the Rock half; Defense
+    traded for Special shine), Pink Butterfree, Surfing Pikachu
+    (knows Surf), Flying Pikachu (knows Fly, Electric/Flying), Giant
+    Dragonite (oversized stats). Form entries are excluded from the
+    dex lists and diploma counts exactly like `partner`, so the
+    species count for honors and the 151 Kanto diploma threshold do
+    NOT move (tests A13/B23/B24). Art: palette variants of this
+    game's own original base sprites (surfboard/balloons hand-drawn
+    additions), authored in the .pix pipeline.
+  - Five FULL SPECIES, National dex only: Togepi (175), Marill
+    (183), Snubbull (209), Donphan (232), Ho-Oh (250). Types, base
+    stats, catch rate, growth and base XP verified against PokeAPI
+    at build time (facts source only — no sprite files used);
+    learnsets restricted to this game's move table; dex flavor
+    written for this project; NO evolution entries (deliberate —
+    claims arrive as themselves). Original .pix front+back art
+    authored for this project; the art pipeline accepts all 20 new
+    sprites (834 total).
+  - Four ITEMS with no game system to hook, honestly labeled
+    COLLECTIBLES in name, shop section and description, no fake
+    effects: GS Ball, Pinkan Berry, Mini-Misty Lure, Rainbow Wing.
+- **Validator symmetry:** tables regenerated via
+  tools/api-scripts/gen-tables.mjs (never hand-edited): species
+  152→162, items 126→130, keepsakes 12→12, forms 197→202.
+  tests/cheat-shop-checks.mjs (44 checks) proves both terminals
+  reachable from a fresh save through the real NPC path, $0 claims
+  with money untouched, the 999 clamp, keepsake claim-once, species
+  claims (party/PC/party-full/box-full-zero-mutation), Mewtwo, every
+  expansion entry claimable, the diploma threshold, and
+  validateSave passing on a MAXIMAL-stock save (every badge + every
+  item @999 + every keepsake + every species) built through the real
+  claim paths. Bundle rebuilt for the public (vercel) target only;
+  personal/ untouched. NOT deployed (parent ships).

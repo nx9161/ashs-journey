@@ -491,7 +491,9 @@ Object.assign(Game.prototype, {
   // from the Journey menu once the Kanto dex is complete.
   openDiploma() {
     const g = this;
-    const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
+    // Form entries share their base species' dexNo — excluded so the
+    // Kanto count stays exactly the 151 species (Cheat Shop, 2026-10-28).
+    const kanto = Object.values(SPECIES).filter((s) => !s.form && s.dexNo >= 1 && s.dexNo <= 151);
     // ADR-025 §6: the diploma is an HONOR — it reads the run's OWN
     // catches (ownCaughtMap), never the carried archive alone.
     const own = ownCaughtMap(g.state.dex);
@@ -583,7 +585,7 @@ Object.assign(Game.prototype, {
 
   checkDiploma() {
     const g = this;
-    const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
+    const kanto = Object.values(SPECIES).filter((s) => !s.form && s.dexNo >= 1 && s.dexNo <= 151);
     // ADR-025 §6: honors require the new run's OWN catches — a carried
     // archive can fill the dex's records but never this check.
     const own = ownCaughtMap(g.state.dex);
