@@ -14,7 +14,7 @@ import {
   gen1Random, critChance, gen1Catch,
 } from '../engine/formulas.mjs';
 import { roll } from '../engine/rng.mjs';
-import { PT_FRAME, PT_FRAME2, PT_PAPER, UI_FONT_STACK } from '../engine/render.mjs';
+import { BATTLER_DRAW_SIZE, PT_FRAME, PT_FRAME2, PT_PAPER, UI_FONT_STACK } from '../engine/render.mjs';
 import { displayName } from './state.mjs';
 import { damageRandomFor, catchRateMultFor, rtFoeCooldownMultFor } from './rules.mjs';
 import {
@@ -804,11 +804,16 @@ Object.assign(BattleScene.prototype, {
     const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
     const allyArt = g.spriteCache[this.ally.speciesId] || g.spriteCache.partner;
     const bobA = Math.sin(this.t * 0.006) * 1.5;
+    // Wave 0 battler size standard: same derived draw size both sides
+    // (art entry `size` = BATTLER_DRAW_SIZE, 64 logical px), centered on
+    // the battler's arena position exactly as the old 48px draw was.
+    const foeSize = (foeArt && foeArt.size) || BATTLER_DRAW_SIZE;
+    const allySize = (allyArt && allyArt.size) || BATTLER_DRAW_SIZE;
     if (!(rt.catchSeq || rt.ballFlight)) {
-      r.blitS(foeArt.front, rt.fx * sx - 24, rt.fy * sy - 24 + bobA, 48, 48);
+      r.blitS(foeArt.front, rt.fx * sx - foeSize / 2, rt.fy * sy - foeSize / 2 + bobA, foeSize, foeSize);
     }
     const allySpr = this.ally.status === 'sleep' ? allyArt.back : allyArt.back;
-    r.blitS(allySpr, rt.ax * sx - 24, rt.ay * sy - 24 - bobA, 48, 48);
+    r.blitS(allySpr, rt.ax * sx - allySize / 2, rt.ay * sy - allySize / 2 - bobA, allySize, allySize);
     // Projectiles.
     for (const p of rt.projs) {
       g.ctx2dcircle(p.x * sx, p.y * sy, 4, p.side === 'ally' ? '#ffe27a' : '#ff9a7a');

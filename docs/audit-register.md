@@ -306,3 +306,159 @@ starter-reunion offer, the HoF viewer's PRIOR JOURNEYS section, and the
 - Route 1 is SOUTH of this Pallet Town; the border warps sit one tile apart and
   a buffered Down-step can bounce the player back — the battle drive settles,
   re-checks the location chip, and retries the crossing.
+
+## World Art Wave 0 — Foundations (2026-10-27)
+
+Implementer pass for the world-art elevation (census:
+`ashs-journey-qa/world-art-census.md` §3 style spec + §4 Wave 0).
+Presentation/foundation work only — no game state or balance change.
+Nothing deployed; the public battery below is the gate.
+
+### 1. Regeneration hazard CLOSED
+- `npc-pc-idle-1/2` now have real `.pix` sources
+  (`assets/sprites/pix/npcs/npc-pc-idle-*.pix`), extracted verbatim
+  (rows + palette) from the shipped `art-data.mjs`.
+- Baseline before the change: **163 ART keys**. Clean-tree
+  `node assets/sprites/tools/build-art.mjs` after: **163 keys, zero
+  lost, zero added**. Both PC keys are **pixel-identical** to the
+  shipped entries (raster hashes under the runtime's own raster rule:
+  idle-1 `4ba87481…`, idle-2 `d23916a7…`, match before/after).
+- One shipped defect preserved deliberately: idle-2's rows paint two
+  pixels with key `G`, which the shipped palette never declared — the
+  runtime falls back to `#ff00ff` for undeclared keys, so those pixels
+  have always rendered magenta. The `.pix` declares `G #ff00ff` so
+  regeneration is pixel-identical; recoloring it is a future art
+  decision, not a Wave 0 accident. (Visible in captures as the PC
+  frame-2 screen pixels, exactly as at HEAD.)
+- Determinism: two consecutive build-art runs produce byte-identical
+  `art-data.mjs` + `dist/` atlases. The npcs atlas now legitimately
+  includes the PC pair (16 sprites).
+
+### 2. Art contracts raised (deliberately)
+- Per-sprite palette cap **12 → 32**, in both enforcement points:
+  `pix.mjs:63` (declared palette) and `build-art.mjs:59` (painted
+  hexes). Verified: a 20-color test sprite builds; a 33-color sprite
+  fails (`palette cap violated: 33 > 32`).
+- Tileset-wide 16-color cap **replaced** by a per-family budget
+  (`build-art.mjs` `FAMILY_PALETTE_BUDGETS`): the **tiles family union
+  ≤ 48**; failure message `tiles family palette cap: N > 48
+  (per-family budget for the tiles family)` (verified at N=51).
+  `palette-audit.mjs` mirrors both numbers. Outline, inner-margin,
+  orphan and painted checks unchanged.
+- `assets/sprites/README.md` contracts corrected (caps, full family
+  list with true counts — portraits/keyart/battle included, species
+  41, ui 15, npcs 16 — and the stale wiring handoff).
+
+### 3. Size standard — engine
+- Characters: `Renderer.blitCharacter` (`src/engine/render.mjs:144`)
+  draws a character scaled to its 1-tile footprint, bottom-anchored,
+  taller art overhanging upward. Overworld call sites:
+  `overworld.mjs:575` (NPCs — legacy feet line tileY+12 preserved, i.e.
+  the old −4 offset is now the anchor, not a draw offset),
+  `:589` (partner, hop lifts the anchor), `:590` (player). For the
+  current 16×16 art every draw lands at the same position at native
+  size — pixel-identical (unit-verified: 16×16 at bottom 48 draws
+  [32,32,16,16]; a 16×32 draws [32,16,16,32]).
+- Battlers: `BATTLER_DRAW_SIZE = 64` (`render.mjs:13`), carried on
+  every battle-art entry's `size` (`art.mjs` `speciesBattleArt`, hand
+  and forge paths alike). Classic engine (`battle.mjs:1868`): one
+  draw path, size derived from the side's art entry, anchored on the
+  legacy frame's center-x + bottom edge so platforms/plates do not
+  move; attack (1.2×, derived) and faint use the same size. RT engine
+  (`battle-rt.mjs:810-816`): both sides centered on their arena
+  position at their entry size. **This is the one intentional visual
+  change in Wave 0: battlers render at 64px (legacy 32px art upscaled
+  ×2) with foe/ally parity** — recording-ctx proof on the built
+  bundle: classic foe [151,6,64,64] / ally [28,85,64,64]; RT foe and
+  ally both 64×64; forge-fallback foe also 64×64.
+
+### 4. Selection wiring
+- **Explicit `art` field** on NPC instances: 202 source entries across
+  `src/data/maps*.mjs` + `src/game/bonds.mjs` (PARLEY pair) and all 10
+  `TALE_NPCS` in `src/data/quests.mjs` now carry `art: '<kind>'`.
+  Merged population: **125 of 127 map NPCs carry the field**; the two
+  exceptions are deliberate (below). `npcArtKind` (`art.mjs:103`)
+  resolves: `pc` flag → `art` field → legacy name map (last resort,
+  now also containing CHAMPION/SPARRING COACH) → youngster.
+  The known misses are fixed in data: **CHAMPION carries
+  `art: 'rival'`** (Gary's champion art), **SPARRING COACH carries
+  `art: 'coach'`** in both center definitions.
+- **CUBONE / MAROWAK SPIRIT carry NO art field, deliberately** (a
+  comment at their `maps3.mjs` entries records this): they are
+  Pokémon, not people, but no overworld species art exists to route
+  them to — the species family is battle front/back pairs, cubone and
+  marowak have neither, their NPC data carries only human palette
+  fields (no species reference), and the battle fallback is a 48px
+  forge canvas that cannot stand in a 16px NPC slot. They remain on
+  the youngster placeholder until a wave authors overworld species
+  sprites. Inventing a substitute in a foundations wave would have
+  been a silent visual change.
+- **Palette-swap rasterization** (`art.mjs` `NPC_SWAP_KEYS` +
+  `npcSwapFor`, `artCanvas` swap parameter): each NPC kind's primary
+  palette keys (skin/hair/shirt/pants) remap from the instance's data
+  palette at raster time; authored secondary shades (cap, glasses,
+  vest-dark, uniform accent) stay authored as kind identity; an
+  instance with no palette data gets the authored colors unchanged.
+  The nurse sprite's legs were split onto their own key `T` in its
+  `.pix` sources (same hex the hair key `P` always had — default
+  pixels unchanged) so hair and pants remap independently.
+  `Game.npcFrame`'s cache key (`main.mjs:164`) now carries art kind +
+  instance palette, not the name alone, so same-name NPCs with
+  different palettes no longer share frames.
+- Capture evidence (census driver re-run against this build, diffed
+  against the census shots): every differing pixel in the canonical
+  Pallet / Viridian / Center-interior captures is an NPC palette
+  remap (e.g. Gary #d83a34→#3a5a9a shirt, #f0d060→#6a4a2a hair; nurse
+  hair #f0a0b0→#e86a5a with legs unchanged at the data pants hex) or
+  an idle-animation phase difference (blink / PC shimmer / partner
+  hop — transitions between authored colors only). The gym-interior
+  Brock capture is byte-identical (Brock's data palette equals his
+  authored sprite). No tile, building, player-palette or UI pixel
+  moved. A whole-capture color audit found no new color that is not
+  an NPC data palette hex, an authored color, or the PC frame-2
+  palette (plus ≤23px of DOM text antialiasing in the mart menu shot).
+
+### 5. Bundle budget projection (decision)
+Full table in `assets/sprites/README.md` ("Bundle budget
+projection"). Headline: projected full-redraw `art-data.mjs`
+≈ **2,542,105 bytes** (304 battlers at 64×64 + 152 derived bobs +
+~120 characters at 16×32 + ~60 tiles + ~40 architecture + ~65 props
++ 15 arenas + retained portraits/keyart/ui), projected
+`public/game.js` ≈ **3,742,979 bytes = 29.7%** of the 12,582,912
+hard gate (headroom ≈8,839,933). Per-wave segment budgets: W1 40,000
+· W2 35,000 · W3 140,000 · W4 20,000 · W5 45,000 · W6 2,650,000;
+internal ceiling art-data ≤ 3.0 MB / any bundle ≤ 4.2 MB.
+**Decision: inline art-data STAYS — no runtime data-file loading
+needed.** Sensitivity (+8 colors on every battler/bob ≈ +59,000;
+architecture at full 32×32 ≈ +30,000) does not move the conclusion.
+
+### 6. Battery at this commit (public battery)
+rejuv-phase1 **44/44** · phase2 **42/42** · phase3 **63/63** ·
+phase4 **53/53** · phase5 **55/55** · phase6 **46/46** · fidelity
+**35/35** · campaign-smoke **24/24** · audit-headless **17/17** ·
+audit-laptop public **41/41** · verify-slice **48/48** · qa-slice
+**134/134** · validator test **51/51** · validator fuzz **2000/2000**
+· save-contract **6/6** · Track B **114/114** (documented invocation
+`node --import ./register.mjs run.mjs` from tests/) · budgets-check
+**all gates pass** · contamination **clean** · qa-changed-flows
+**55/57, failures exactly the standing baseline {b2, d9}** ·
+drift-gate: guest ≡ strip(vercel) PASS, and the full three-edition
+check PASS as run during the battery.
+
+### Standing notes from this pass
+- **personal/ is byte-identical to HEAD in this commit** (retired
+  edition). Two build paths touch it and were reverted after use:
+  the explicit-target build (`--target=vercel --target=guest`) does
+  not touch it, but verify-slice's harness execs a full
+  `scripts/build.mjs` (all targets) — personal/ was restored from
+  HEAD afterwards, and `dist/content-hash.txt`'s personal line was
+  restored to the HEAD value (the frozen edition's record). With
+  personal frozen, drift-gate's personal-divergence line fires by
+  design (guest+marker built from current source ≠ the frozen
+  bundle) — per the Phase 6 precedent, personal-edition checks are
+  informational only; the public battery gates.
+- **Verify-live expectation impact: none.** Nothing was deployed;
+  production still serves the Phase 6 build. When Wave 0 is deployed,
+  the only production-visible differences will be NPC palette colors
+  and battlers at 64px parity — no counted title/menu rows, flows or
+  strings changed, so no verify-live expectation needs adapting.

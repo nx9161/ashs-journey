@@ -26,7 +26,7 @@ function main() {
     ok(`atlas ${j.atlas} <= 2048x2048`, w <= 2048 && h <= 2048, `${w}x${h}`);
     for (const [id, sp] of Object.entries(j.sprites)) {
       totalSprites++;
-      ok(`sprite ${id} <= 12 colors`, sp.palette <= 12, `${sp.palette}`);
+      ok(`sprite ${id} <= 32 colors`, sp.palette <= 32, `${sp.palette}`);
       // battle sprites <= 160x160 (contracts §1.1 / ADR-007)
       if (sp.w > 48 || sp.h > 48) {
         ok(`sprite ${id} battle-size <= 160px`, sp.w <= 160 && sp.h <= 160, `${sp.w}x${sp.h}`);
@@ -55,7 +55,7 @@ function main() {
   const tileHex = new Set();
   let fail = 0;
   for (const s of sprites) {
-    if (colorCount(s) > 12) { ok(`src ${s.id} palette`, false); fail++; }
+    if (colorCount(s) > 32) { ok(`src ${s.id} palette`, false); fail++; }
     const oo = outlineOk(s);
     if (!oo.ok) { ok(`src ${s.id} outline`, false, `${oo.bad} bad edge px`); fail++; }
     if (orphanCount(s) > 0) { ok(`src ${s.id} orphans`, false); fail++; }
@@ -63,7 +63,7 @@ function main() {
     if (fam === 'tiles') for (const row of s.rows) for (const ch of row) if (ch !== '.') tileHex.add(s.pal[ch].hex);
   }
   ok('all source sprites pass pixel checks', fail === 0, `${sprites.length} sprites, ${fail} failures`);
-  ok('tileset <= 16 colors', tileHex.size <= 16, `${tileHex.size} colors`);
+  ok('tiles family palette <= 48 colors (per-family budget)', tileHex.size <= 48, `${tileHex.size} colors`);
 
   // 4. UI palette cap: 24 colors
   const uiPal = JSON.parse(fs.readFileSync(path.join(ROOT, 'ui', 'ui-palette.json'), 'utf8'));

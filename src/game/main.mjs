@@ -157,8 +157,14 @@ export class Game {
   }
 
   npcFrame(npc) {
-    if (!this.npcCache[npc.name]) this.npcCache[npc.name] = npcFrames(doc, npc);
-    const f = this.npcCache[npc.name];
+    // Wave 0: the cache key carries the art kind + the instance palette,
+    // not the name alone — two NPCs sharing a name (or one name in two
+    // towns) can carry different palettes/art and must not share frames
+    // now that the palette-swap rasterizer honors the instance data.
+    const cacheKey = [npc.art || '', npc.pc ? 'pc' : '', npc.name || '',
+      npc.skin || '', npc.shirt || '', npc.pants || '', npc.hair || ''].join('|');
+    if (!this.npcCache[cacheKey]) this.npcCache[cacheKey] = npcFrames(doc, npc);
+    const f = this.npcCache[cacheKey];
     return f[Math.floor(this._animT / 600) % 2]; // idle-1 / idle-2
   }
 

@@ -6,7 +6,8 @@
 //   <CHAR> <#rrggbb> [name]
 //   (optional) MIRROR <other-id>  — instead of rows/PAL, mirror another sprite
 // Rules enforced: rows exact width, every non-'.' char declared in PAL,
-// palette <= 12 colors + transparency (contracts §1.2).
+// palette <= 32 colors + transparency (Wave 0 art contract, 2026-10-27:
+// raised from 12 — see assets/sprites/README.md "Palette/size contracts").
 
 export function parsePix(text, path) {
   const rawLines = text.split('\n');
@@ -59,7 +60,7 @@ export function parsePix(text, path) {
     if (!pal[ch]) throw new Error(`${path}: char "${ch}" painted but not in PAL`);
   }
   const nColors = Object.keys(pal).length;
-  if (nColors > 12) throw new Error(`${path}: palette cap violated: ${nColors} > 12`);
+  if (nColors > 32) throw new Error(`${path}: palette cap violated: ${nColors} > 32`);
   return { id, w, h, mirrorOf: null, rows, pal, path };
 }
 

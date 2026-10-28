@@ -56,7 +56,7 @@ function main() {
   for (const s of sprites) {
     if (!s.rows) { errors.push(`${s.path}: unresolved mirror`); continue; }
     const cc = colorCount(s);
-    if (cc > 12) errors.push(`${s.id}: palette cap ${cc} > 12`);
+    if (cc > 32) errors.push(`${s.id}: palette cap ${cc} > 32`);
     if (NEEDS_INNER_MARGIN.has(s.family)) {
       const m = GROUNDED.has(s.family) ? hasInnerMarginTopSides(s) : hasInnerMargin(s);
       if (!m) errors.push(`${s.id}: missing 1px transparent inner margin${GROUNDED.has(s.family) ? ' (top/sides)' : ''}`);
@@ -87,15 +87,25 @@ function main() {
     sprites.push(d);
   }
 
-  // ---- tileset palette cap: <= 16 colors across the whole tileset ----
-  const tileHexes = new Set();
-  for (const s of sprites) {
-    if (s.family !== 'tiles') continue;
-    for (const row of s.rows) for (const ch of row) {
-      if (ch !== '.') tileHexes.add(s.pal[ch].hex);
+  // ---- per-family palette budget (Wave 0, 2026-10-27) ----
+  // The old tileset-wide cap (<= 16 colors across every tile sprite) is
+  // replaced by a per-family budget: the tiles family's color UNION is
+  // capped at 48 distinct hexes. Other families are bounded by the
+  // per-sprite cap (32) alone; a family that needs a union budget gets
+  // its own entry here, deliberately, never by silently widening this one.
+  const FAMILY_PALETTE_BUDGETS = { tiles: 48 };
+  for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
+    const hexes = new Set();
+    for (const s of sprites) {
+      if (s.family !== fam) continue;
+      for (const row of s.rows) for (const ch of row) {
+        if (ch !== '.') hexes.add(s.pal[ch].hex);
+      }
+    }
+    if (hexes.size > budget) {
+      errors.push(`${fam} family palette cap: ${hexes.size} > ${budget} (per-family budget for the ${fam} family)`);
     }
   }
-  if (tileHexes.size > 16) errors.push(`tileset palette cap: ${tileHexes.size} > 16`);
 
   if (errors.length) {
     console.error('BUILD FAILED — ' + errors.length + ' error(s):');

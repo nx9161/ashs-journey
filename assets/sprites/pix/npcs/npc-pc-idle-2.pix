@@ -1,0 +1,35 @@
+# PC Terminal (original design). Overworld idle frame 2 (screen shimmer).
+# Source of truth for the formerly hand-inserted art-data entry (Wave 0):
+# rows extracted verbatim from the shipped art-data.mjs. NOTE: the shipped
+# rows paint two pixels with the key 'G', but the shipped palette never
+# declared 'G' — the runtime rasterizer (art.mjs) falls back to #ff00ff
+# for undeclared keys, so those two pixels have always rendered #ff00ff.
+# 'G' is declared here with exactly that hex so the regenerated sprite is
+# PIXEL-IDENTICAL to the shipped one (a future art pass may recolor it
+# deliberately; Wave 0 must not).
+PIX npc-pc-idle-2 16 16
+................
+..OOOOOOOOOOOO..
+..OMMMMMMMMMMO..
+..OMSSSSSSSSMO..
+..OMSBBSSBBSMO..
+..OMSBBSSBGGMO..
+..OMSSSSSSSSMO..
+..OMMMMMMMMLMO..
+...OKKKKKKKKO...
+..ODDDDDDDDDDO..
+..ODDDDDDDDDDO..
+..ODDODDDDODDO..
+..ODDODDDDODDO..
+...OOOOOOOOOO...
+................
+................
+PAL
+O #232838 outline
+M #8d9bbf monitor-frame
+S #1d5a68 screen
+B #a5f5e8 screen-box
+G #ff00ff screen-box-alt-as-shipped
+K #46536e cabinet-dark
+D #5a6a8f cabinet
+L #2f7a38 status-led

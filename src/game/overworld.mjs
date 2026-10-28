@@ -563,11 +563,16 @@ export class OverworldScene {
     // Systems world dressing: item balls, boulders, cut stumps, cave darkness.
     if (this.sysRenderWorld) this.sysRenderWorld(r);
     // NPCs (2-frame idle) — challengers render at their walk-up position.
+    // Wave 0 draw standard: bottom-anchored to the 1-tile footprint via
+    // blitCharacter (taller 16x32 art overhangs upward). The legacy feet
+    // line is preserved exactly: a 16x16 sprite's bottom sat at
+    // tileY - 4 + 16 (the old hardcoded -4 offset), so existing art
+    // renders pixel-identical.
     for (const n of this.map.npcs) {
-      let nx = n.x * T, ny = n.y * T - 4;
+      let nx = n.x * T, footY = n.y * T - 4 + T;
       const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
-      if (cq) { nx = cq.cx * T; ny = cq.cy * T - 4; }
-      r.blit(g.npcFrame(n), nx, ny);
+      if (cq) { nx = cq.cx * T; footY = cq.cy * T - 4 + T; }
+      r.blitCharacter(g.npcFrame(n), nx, footY);
     }
     // Yellow-style spot "!" over each challenger during the alert beat.
     if (this.challenge && this.challenge.phase === 'spot') {
@@ -576,9 +581,13 @@ export class OverworldScene {
       }
     }
     // Partner (hop) + player (walk cycle / idle blink)
+    // Wave 0 draw standard: bottom-anchored (blitCharacter) — for the
+    // current 16x16 art the bottoms are py + T (partner: minus the hop
+    // lift), so these draws are pixel-identical to the old unscaled
+    // blits; 16x32 art will overhang upward from the same feet line.
     const hop = Math.abs(Math.sin(this.partner.hop)) * 3;
-    r.blit(g.partnerFrame(), Math.round(this.partner.px), Math.round(this.partner.py) - Math.round(hop));
-    r.blit(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py));
+    r.blitCharacter(g.partnerFrame(), Math.round(this.partner.px), Math.round(this.partner.py) + T - Math.round(hop));
+    r.blitCharacter(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py) + T);
     // "!" exclamation
     if (this.enc && this.enc.phase === 'exclaim') {
       r.text('!', this.player.px + 4, this.player.py - 14, { size: 14, bold: true, color: '#e84040' });

@@ -32,13 +32,13 @@ export const MAPS = {
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 10, y: 4, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         // Yellow homage (original lines): the rival's partner is an Eevee.
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
       // entrance — Pallet's lab has no interior map, so the terminal lives
       // here (and in every Pokemon Center) rather than nowhere.
-      { x: 5, y: 4, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+      { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
     ],
     encounters: null,
@@ -79,13 +79,13 @@ export const MAPS = {
       { x: 5, y: 6, text: 'ROUTE 1 — Pallet Town to Viridian City. Tall grass rustles with wild Pokemon.' },
     ],
     npcs: [
-      { x: 9, y: 5, name: 'AIDE', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#1a1a1a',
+      { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#1a1a1a',
         dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
-      { x: 6, y: 4, name: 'CAL', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
+      { x: 6, y: 4, name: 'CAL', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
         sight: { dir: 'left', range: 3 }, // Yellow-style: spots you, "!", walks up (down is blocked by the sign)
         dialogue: ["Heh! Nobody gets past me without a battle!", "Whoa... you're tougher than you look."] },
-      { x: 7, y: 11, name: 'LISA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 7, y: 11, name: 'LISA', art: 'lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r1_lisa',
         sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Pidgey and I train here every morning! Care to spar?", "We'll be back stronger tomorrow, won't we, Pidgey?"] },
@@ -132,7 +132,7 @@ export const MAPS = {
       { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 11, y: 7, name: 'HIKER', art: 'youngster', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
     ],
     encounters: null,
@@ -156,13 +156,13 @@ export const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 2, name: 'NURSE', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
+      { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Pokemon Center! Let me heal your team..."], heal: true,
         afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach (Candy Coach House Rule) — present in
       // every Center's data; the scene only fields him while the rule is
       // on (loadMap gate in overworld.mjs).
-      { x: 2, y: 2, name: 'SPARRING COACH', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 2, y: 2, name: 'SPARRING COACH', art: 'coach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
         sparCoach: true, sparSpecies: 'machop',
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
     ],
@@ -200,30 +200,30 @@ export const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 6, y: 3, name: 'RICK', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
+      { x: 6, y: 3, name: 'RICK', art: 'youngster', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
         trainer: 'r2_bug',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a Caterpie under a boot."] },
-      { x: 7, y: 5, name: 'BEA', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
+      { x: 7, y: 5, name: 'BEA', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
         trainer: 'r2_camper',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["I picnic here every day — battle me before you sit down!", "Not even a snack break slows you down!"] },
-      { x: 7, y: 8, name: 'NIA', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 7, y: 8, name: 'NIA', art: 'youngster', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'r2_jr',
         sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Route 2 is MY training ground! Prove you belong here!", "You're stronger than the rumors said..."] },
-      { x: 5, y: 10, name: 'ROB', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 5, y: 10, name: 'ROB', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r2_hiker',
         sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
       // Yellow homage: the anime-trio ambush, reimagined with original
       // characters (no motto quotes, no trademarked team name — GC C4).
       // The duo flank the path; either one spotting you pulls BOTH in.
-      { x: 3, y: 7, name: 'RUE', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 3, y: 7, name: 'RUE', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'r2_duo', duoPartner: 'COLE',
         sight: { dir: 'right', range: 4 },
         dialogue: ["Hold it right there, kid.", "Beaten... by a kid?!"] },
-      { x: 10, y: 7, name: 'COLE', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+      { x: 10, y: 7, name: 'COLE', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
         trainer: 'r2_duo', duoPartner: 'RUE',
         sight: { dir: 'left', range: 4 },
         dialogue: ["Two of us, one of you.", "Retreat! Regroup! We'll be back with a better plan!"] },
@@ -274,7 +274,7 @@ export const MAPS = {
       { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'COACH', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a Mankey on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Poke Balls — on the house."],
         give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Poke Balls' } },
     ],
@@ -301,7 +301,7 @@ export const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 2, name: 'BROCK', skin: '#c89878', shirt: '#c8782a', pants: '#4a5a3a', hair: '#1a1a1a',
+      { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#4a5a3a', hair: '#1a1a1a',
         trainer: 'brock',
         dialogue: ["I'm Brock! I'm Pewter's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],

@@ -11,7 +11,7 @@ import {
   xpYield, xpForLevel, statValue, hpValue,
 } from '../engine/formulas.mjs';
 import { roll, intIn } from '../engine/rng.mjs';
-import { TILE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
+import { TILE, BATTLER_DRAW_SIZE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
 import {
   trainerLevelFor, tuneFoeMon, effectiveAiFor, damageRandomFor,
@@ -1858,18 +1858,30 @@ export class BattleScene {
       if (this.impactFx.side === 'foe' && foeArt.frontWhite) foeSpr = foeArt.frontWhite;
       if (this.impactFx.side === 'ally' && allyArt.backWhite) allySpr = allyArt.backWhite;
     }
-    const drawBattler = (spr, pos, side) => {
+    // Wave 0 battler size standard: ONE draw size for both sides,
+    // derived from each side's art entry (`size` = BATTLER_DRAW_SIZE,
+    // 64 logical px — legacy 32px art upscales x2, 64px art draws 1:1).
+    // pos keeps its legacy meaning (top-left of the old 48px frame):
+    // the battler is anchored on the frame's center-x and bottom edge,
+    // so the platforms below and the plates do not move — only the
+    // sprite's extent grows, identically for foe and ally (parity).
+    const drawBattler = (spr, pos, side, art) => {
       if (this.faintFx && this.faintFx.side === side) return; // faint anim draws it
-      // README attack transform: 1.2x scale for 3 frames, then back.
-      if (this.atkFx && this.atkFx.side === side) r.blitS(spr, pos.x - 5, pos.y - 5, 58, 58);
-      else r.blitS(spr, pos.x, pos.y, 48, 48); // 32px ART -> 48px draw size
+      const size = (art && art.size) || BATTLER_DRAW_SIZE;
+      const cx = pos.x + 24, bottom = pos.y + 48;
+      // README attack transform: 1.2x scale for 3 frames, then back
+      // (size derived from the same standard, centered on the battler).
+      if (this.atkFx && this.atkFx.side === side) {
+        const atk = Math.round(size * 1.2);
+        r.blitS(spr, cx - atk / 2, bottom - size / 2 - atk / 2, atk, atk);
+      } else r.blitS(spr, cx - size / 2, bottom - size, size, size);
     };
     // Platinum battle platforms: stepped discs under each battler (the far
     // foe disc is smaller — perspective), drawn before the sprites.
     this.ptDisc(r, foePos.x + 24, foePos.y + 44, 34, 8);
     this.ptDisc(r, allyPos.x + 24, allyPos.y + 44, 38, 9);
-    drawBattler(foeSpr, foePos, 'foe');
-    drawBattler(allySpr, allyPos, 'ally');
+    drawBattler(foeSpr, foePos, 'foe', foeArt);
+    drawBattler(allySpr, allyPos, 'ally', allyArt);
     // README faint transform: sink 8px + fade to 0 alpha over 20 frames.
     if (this.faintFx) {
       const k = Math.min(1, this.faintFx.t / 660);
@@ -1877,7 +1889,9 @@ export class BattleScene {
       c.save();
       c.globalAlpha = 1 - k;
       const pos = this.faintFx.side === 'foe' ? foePos : allyPos;
-      r.blitS(this.faintFx.spr, pos.x, pos.y + 8 * k, 48, 48);
+      const art = this.faintFx.side === 'foe' ? foeArt : allyArt;
+      const size = (art && art.size) || BATTLER_DRAW_SIZE;
+      r.blitS(this.faintFx.spr, pos.x + 24 - size / 2, pos.y + 48 - size + 8 * k, size, size);
       c.restore();
     }
     // Catch ball arc

@@ -1456,6 +1456,13 @@ class AudioEngine {
 
 const TILE = 16;
 
+// Wave 0 size standard (world-art census §3): battlers are authored at
+// 64x64 and drawn at 64 logical px on BOTH sides (foe/ally parity);
+// legacy 32x32 art is upscaled x2 (nearest-neighbor) to the same 64.
+// One constant, derived everywhere from the art entry's `size` — no
+// per-side draw-size literals in the battle engines.
+const BATTLER_DRAW_SIZE = 64;
+
 // UI v2 (Platinum standard): the UI typefaces are the self-hosted OFL
 // pixel faces — Galmuri (display) and the body face. Canvas text uses
 // the same stacks as the shell CSS tokens.
@@ -1576,6 +1583,20 @@ class Renderer {
     if (dx + w < this.camX - TILE || dy + h < this.camY - TILE ||
         dx > this.camX + this.viewW + TILE || dy > this.camY + this.viewH + TILE) return;
     c.drawImage(sprite, Math.round(dx), Math.round(dy));
+  }
+
+  // Bottom-anchored character blit (Wave 0 size standard): characters
+  // are authored 16 wide (16x32 at the new standard, 16x16 legacy) on a
+  // 1-tile footprint. The sprite is scaled to footprint width (TILE) with
+  // its authored aspect ratio, and drawn so its BOTTOM sits exactly at
+  // bottomY — taller art overhangs upward, never into the tile below.
+  // For a legacy 16x16 sprite this draws at (dx, bottomY - 16) at native
+  // size: pixel-identical to the old unscaled blit at that position.
+  blitCharacter(sprite, dx, bottomY) {
+    if (!sprite || !sprite.width || !sprite.height) return;
+    const w = TILE;
+    const h = Math.round(TILE * sprite.height / sprite.width);
+    this.blitS(sprite, dx, bottomY - h, w, h);
   }
 
   // Scaled blit for authored battlers (32px art -> 48px draw size).
@@ -2690,7 +2711,7 @@ const ART = {
     "....OKKKKKKO....",
     ".....OOOOOOOO...",
   ] },
-  "npc-nurse-idle-1": { w: 16, h: 16, pal: {"O":"#241a20","S":"#f0c090","P":"#f0a0b0","W":"#f8f8f8","R":"#e87a8a"}, rows: [
+  "npc-nurse-idle-1": { w: 16, h: 16, pal: {"O":"#241a20","S":"#f0c090","P":"#f0a0b0","W":"#f8f8f8","R":"#e87a8a","T":"#f0a0b0"}, rows: [
     "................",
     "....OOOOOOOO....",
     "...OPPPPPPPPO...",
@@ -2704,11 +2725,11 @@ const ART = {
     "...OWWRRRRWWO...",
     "...OSWRRRRWSO...",
     "...OSWRRRRWSO...",
-    "....OOPPPPOO....",
-    "....OPPPPPPO....",
+    "....OOTTTTOO....",
+    "....OTTTTTTO....",
     "....OOOOOOOO....",
   ] },
-  "npc-nurse-idle-2": { w: 16, h: 16, pal: {"O":"#241a20","S":"#f0c090","P":"#f0a0b0","W":"#f8f8f8","R":"#e87a8a"}, rows: [
+  "npc-nurse-idle-2": { w: 16, h: 16, pal: {"O":"#241a20","S":"#f0c090","P":"#f0a0b0","W":"#f8f8f8","R":"#e87a8a","T":"#f0a0b0"}, rows: [
     "................",
     "....OOOOOOOO....",
     "...OPPPPPPPPO...",
@@ -2722,9 +2743,45 @@ const ART = {
     "...OWWRRRRWWO...",
     "...OSWRRRRWSO...",
     "...OSWRRRRWSO...",
-    "....OOPPPPOO....",
-    "....OPPPPPPO....",
+    "....OOTTTTOO....",
+    "....OTTTTTTO....",
     ".....OOOOOOOO...",
+  ] },
+  "npc-pc-idle-1": { w: 16, h: 16, pal: {"O":"#232838","M":"#8d9bbf","S":"#14424a","B":"#7fe8d8","K":"#46536e","D":"#5a6a8f","L":"#58c94f"}, rows: [
+    "................",
+    "..OOOOOOOOOOOO..",
+    "..OMMMMMMMMMMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMSBBSSBBSMO..",
+    "..OMSBBSSBBSMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMMMMMMMMLMO..",
+    "...OKKKKKKKKO...",
+    "..ODDDDDDDDDDO..",
+    "..ODDDDDDDDDDO..",
+    "..ODDODDDDODDO..",
+    "..ODDODDDDODDO..",
+    "...OOOOOOOOOO...",
+    "................",
+    "................",
+  ] },
+  "npc-pc-idle-2": { w: 16, h: 16, pal: {"O":"#232838","M":"#8d9bbf","S":"#1d5a68","B":"#a5f5e8","G":"#ff00ff","K":"#46536e","D":"#5a6a8f","L":"#2f7a38"}, rows: [
+    "................",
+    "..OOOOOOOOOOOO..",
+    "..OMMMMMMMMMMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMSBBSSBBSMO..",
+    "..OMSBBSSBGGMO..",
+    "..OMSSSSSSSSMO..",
+    "..OMMMMMMMMLMO..",
+    "...OKKKKKKKKO...",
+    "..ODDDDDDDDDDO..",
+    "..ODDDDDDDDDDO..",
+    "..ODDODDDDODDO..",
+    "..ODDODDDDODDO..",
+    "...OOOOOOOOOO...",
+    "................",
+    "................",
   ] },
   "npc-professor-idle-1": { w: 16, h: 16, pal: {"O":"#241a20","S":"#f0c090","G":"#b8b8c0","W":"#f0f0f0","D":"#c8c8d0","K":"#5a5a7a"}, rows: [
     "................",
@@ -2797,42 +2854,6 @@ const ART = {
     "...OOPPPPOO.....",
     "...OPPPPPPO.....",
     "....OOOOOOOO....",
-  ] },
-  "npc-pc-idle-1": { w: 16, h: 16, pal: {"O": "#232838", "M": "#8d9bbf", "S": "#14424a", "B": "#7fe8d8", "K": "#46536e", "D": "#5a6a8f", "L": "#58c94f"}, rows: [
-    "................",
-    "..OOOOOOOOOOOO..",
-    "..OMMMMMMMMMMO..",
-    "..OMSSSSSSSSMO..",
-    "..OMSBBSSBBSMO..",
-    "..OMSBBSSBBSMO..",
-    "..OMSSSSSSSSMO..",
-    "..OMMMMMMMMLMO..",
-    "...OKKKKKKKKO...",
-    "..ODDDDDDDDDDO..",
-    "..ODDDDDDDDDDO..",
-    "..ODDODDDDODDO..",
-    "..ODDODDDDODDO..",
-    "...OOOOOOOOOO...",
-    "................",
-    "................",
-  ] },
-  "npc-pc-idle-2": { w: 16, h: 16, pal: {"O": "#232838", "M": "#8d9bbf", "S": "#1d5a68", "B": "#a5f5e8", "K": "#46536e", "D": "#5a6a8f", "L": "#2f7a38"}, rows: [
-    "................",
-    "..OOOOOOOOOOOO..",
-    "..OMMMMMMMMMMO..",
-    "..OMSSSSSSSSMO..",
-    "..OMSBBSSBBSMO..",
-    "..OMSBBSSBGGMO..",
-    "..OMSSSSSSSSMO..",
-    "..OMMMMMMMMLMO..",
-    "...OKKKKKKKKO...",
-    "..ODDDDDDDDDDO..",
-    "..ODDDDDDDDDDO..",
-    "..ODDODDDDODDO..",
-    "..ODDODDDDODDO..",
-    "...OOOOOOOOOO...",
-    "................",
-    "................",
   ] },
   "npc-youngster-idle-1": { w: 16, h: 16, pal: {"O":"#241a20","S":"#e8b088","K":"#2f4f9e","H":"#3a2a20","J":"#e8c83a","P":"#4a4a55"}, rows: [
     "................",
@@ -6243,7 +6264,7 @@ const ART_META = {
     "species",
     "ui"
   ],
-  "generated": "2026-10-21",
+  "generated": "2026-10-28",
   "derived_bob": [
     "articuno-front-bob",
     "beedrill-front-bob",
@@ -6281,8 +6302,9 @@ const ART_META = {
 // art.mjs — hand-authored pixel-art wiring (Phase 4 Wave 3, Game Producer).
 // Replaces the SpriteForge placeholder calls with real ART data per
 // assets/sprites/README.md (wiring handoff) and docs/contracts.md §1.
-// Battlers are 32x32 authored; drawn at 48px via Renderer.blitS with
-// imageSmoothingEnabled=false (README: "scale in canvas if the contract says so").
+// Battlers: Wave 0 size standard — authored 64x64 (legacy art 32x32),
+// drawn at BATTLER_DRAW_SIZE (64 logical px, both sides) via
+// Renderer.blitS with imageSmoothingEnabled=false.
 // Runtime transforms (README): attack = 1.2x scale for 3 frames then back;
 // impact = white palette-swap 2 frames + screen shake; faint = sink 8px + fade
 // to 0 alpha over 20 frames; idle bob = build-time derived `-bob` frame.
@@ -6292,12 +6314,23 @@ const ART_META = {
 
 const cvCache = new Map();
 
-function key(id, scale, white) { return id + '|' + scale + '|' + (white ? 'w' : 'n'); }
+function key(id, scale, white, swap) {
+  let k = id + '|' + scale + '|' + (white ? 'w' : 'n');
+  if (swap) {
+    const parts = Object.keys(swap).sort().map((ch) => ch + '=' + swap[ch]);
+    if (parts.length) k += '|swap:' + parts.join(',');
+  }
+  return k;
+}
 
 // Rasterize one ART sprite to an offscreen canvas at integer pixel scale.
 // white=true: impact-flash variant (every inked pixel -> white).
-function artCanvas(doc, id, scale, white) {
-  const k = key(id, scale || 1, !!white);
+// swap (optional): palette-key -> hex remap applied over the authored
+// palette (NPC palette-swap rasterization, Wave 0). Keys not in the swap
+// keep their authored color; a sprite rasterized without a swap is the
+// authored default.
+function artCanvas(doc, id, scale, white, swap) {
+  const k = key(id, scale || 1, !!white, swap);
   const hit = cvCache.get(k);
   if (hit) return hit;
   const a = ART[id];
@@ -6311,7 +6344,7 @@ function artCanvas(doc, id, scale, white) {
     for (let x = 0; x < a.w; x++) {
       const ch = row[x];
       if (!ch || ch === '.') continue;
-      ctx.fillStyle = white ? '#ffffff' : (a.pal[ch] || '#ff00ff');
+      ctx.fillStyle = white ? '#ffffff' : ((swap && swap[ch]) || a.pal[ch] || '#ff00ff');
       ctx.fillRect(x * s, y * s, s, s);
     }
   }
@@ -6319,7 +6352,10 @@ function artCanvas(doc, id, scale, white) {
   return cv;
 }
 
-// ---- battle battlers (32px ART -> 48px draw size via blitS) ----
+// ---- battle battlers (authored art -> BATTLER_DRAW_SIZE via blitS) ----
+// `size` is THE draw size for both foe and ally: the Wave 0 standard
+// (64 logical px). Legacy 32x32 canvases upscale x2 at draw time;
+// future 64x64 canvases draw 1:1 — one code path, no per-side literals.
 function speciesBattleArt(doc, speciesId, species) {
   const mk = (id) => artCanvas(doc, id, 1, false);
   const front = mk(speciesId + '-front');
@@ -6330,12 +6366,12 @@ function speciesBattleArt(doc, speciesId, species) {
       frontBob: mk(speciesId + '-front-bob'),
       frontWhite: artCanvas(doc, speciesId + '-front', 1, true),
       backWhite: artCanvas(doc, speciesId + '-back', 1, true),
-      size: 48,
+      size: BATTLER_DRAW_SIZE,
     };
   }
   // Fallback: forge stand-in (documented; replaced when art ships).
-  const cv = forgeSprite(doc, species, 48);
-  return { front: cv, back: cv, frontBob: null, frontWhite: null, backWhite: null, size: 48, forgeFallback: true };
+  const cv = forgeSprite(doc, species, BATTLER_DRAW_SIZE);
+  return { front: cv, back: cv, frontBob: null, frontWhite: null, backWhite: null, size: BATTLER_DRAW_SIZE, forgeFallback: true };
 }
 
 // ---- overworld ----
@@ -6346,29 +6382,78 @@ function ashFrames(doc, dir) {
   return ids.map((f) => artCanvas(doc, 'ash-' + d + '-' + f, 1) || artCanvas(doc, 'ash-down-' + f, 1));
 }
 
+// ---- NPC art selection (Wave 0: explicit art field, not name strings) ----
+// Every NPC instance in the data (src/data/maps*.mjs, quests.mjs
+// TALE_NPCS, bonds.mjs PARLEY_NPCS) carries an explicit `art` kind:
+// 'youngster' | 'rival' | 'coach' | 'aide' | 'nurse' | 'lass' |
+// 'professor' | 'brock' | 'pc'. That field is the primary key. The
+// legacy name map below is ONLY a last-resort fallback for an instance
+// that predates the field (it is what CHAMPION and SPARRING COACH used
+// to miss through — both now carry art:'rival' / art:'coach' in data).
 const NPC_ROLE = {
   AIDE: 'aide', COACH: 'coach', NURSE: 'nurse', GARY: 'rival',
   BEA: 'lass', LISA: 'lass',
+  // Legacy-name safety net for the two known misses (data now sets the
+  // art field explicitly; these keep any un-updated copy honest):
+  CHAMPION: 'rival', 'SPARRING COACH': 'coach',
 };
+function npcArtKind(npc) {
+  if (!npc) return 'youngster';
+  // UI v2.3 (defect 5): a PC terminal is a MACHINE, not a person.
+  if (npc.pc) return 'pc';
+  if (npc.art) return npc.art;
+  const name = (npc.name || '').toUpperCase();
+  if (name === 'BROCK') return 'brock';
+  return NPC_ROLE[name] || 'youngster';
+}
+
+// ---- NPC palette-swap (Wave 0) ----
+// Map data carries an authored palette per instance (skin / shirt /
+// pants / hair) — 98 distinct tuples that the hand-art path used to
+// ignore entirely. Each NPC kind's sprite keys its primary garment
+// colors distinctly; this table maps palette KEY -> data FIELD for the
+// keys that carry instance identity. Authored secondary shades (cap,
+// glasses, vest-dark, uniform accent) are kind identity, not instance
+// palette, and stay authored. The nurse sprite's legs were split onto
+// their own key (T, same hex as the hair key P) in its .pix source so
+// hair and pants can remap independently.
+const NPC_SWAP_KEYS = {
+  youngster: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  rival: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  lass: { S: 'skin', H: 'hair', D: 'shirt', K: 'pants' },
+  nurse: { S: 'skin', P: 'hair', W: 'shirt', T: 'pants' },
+  coach: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  aide: { S: 'skin', H: 'hair', V: 'shirt', P: 'pants' },
+  professor: { S: 'skin', G: 'hair', W: 'shirt', K: 'pants' },
+  brock: { S: 'skin', H: 'hair', V: 'shirt', P: 'pants' },
+};
+const HEX_RE = /^#[0-9a-fA-F]{6}$/;
+function npcSwapFor(npc, kind) {
+  const table = NPC_SWAP_KEYS[kind];
+  if (!table || !npc) return null;
+  const swap = {};
+  for (const [ch, field] of Object.entries(table)) {
+    const hex = npc[field];
+    if (typeof hex === 'string' && HEX_RE.test(hex)) swap[ch] = hex.toLowerCase();
+  }
+  return Object.keys(swap).length ? swap : null;
+}
+
 function npcFrames(doc, npc) {
-  const name = ((npc && npc.name) || '').toUpperCase();
-  // UI v2.3 (defect 5): a PC terminal is a MACHINE, not a person. It used
-  // to fall through to the 'youngster' person art, so the storage system
-  // stood in every Center disguised as a bystander — undiscoverable.
-  // Authored terminal art (monitor + box-grid screen + cabinet) instead.
-  if (npc && npc.pc) {
+  const kind = npcArtKind(npc);
+  // Authored terminal art (monitor + box-grid screen + cabinet). A PC
+  // is a machine: no palette swap, ever.
+  if (kind === 'pc') {
     const a = artCanvas(doc, 'npc-pc-idle-1', 1);
     const b = artCanvas(doc, 'npc-pc-idle-2', 1);
     if (a && b) return [a, b];
   }
-  if (name === 'BROCK') {
-    return [artCanvas(doc, 'brock-idle-1', 1), artCanvas(doc, 'brock-idle-2', 1)];
-  }
-  const role = NPC_ROLE[name] || 'youngster';
-  const a = artCanvas(doc, 'npc-' + role + '-idle-1', 1);
-  const b = artCanvas(doc, 'npc-' + role + '-idle-2', 1);
+  const prefix = kind === 'brock' ? 'brock' : 'npc-' + kind;
+  const swap = npcSwapFor(npc, kind);
+  const a = artCanvas(doc, prefix + '-idle-1', 1, false, swap);
+  const b = artCanvas(doc, prefix + '-idle-2', 1, false, swap);
   if (a && b) return [a, b];
-  // Fallback: forge placeholder humanoid.
+  // Fallback: forge placeholder humanoid (honors the data palette).
   const cv = forgeHumanoid(doc, npc);
   return [cv, cv];
 }
@@ -8252,13 +8337,13 @@ const MAPS = {
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 10, y: 4, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         // Yellow homage (original lines): the rival's partner is an Eevee.
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
       // entrance — Pallet's lab has no interior map, so the terminal lives
       // here (and in every Pokemon Center) rather than nowhere.
-      { x: 5, y: 4, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+      { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
     ],
     encounters: null,
@@ -8299,13 +8384,13 @@ const MAPS = {
       { x: 5, y: 6, text: 'ROUTE 1 — Pallet Town to Viridian City. Tall grass rustles with wild Pokemon.' },
     ],
     npcs: [
-      { x: 9, y: 5, name: 'AIDE', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#1a1a1a',
+      { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#1a1a1a',
         dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
-      { x: 6, y: 4, name: 'CAL', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
+      { x: 6, y: 4, name: 'CAL', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
         sight: { dir: 'left', range: 3 }, // Yellow-style: spots you, "!", walks up (down is blocked by the sign)
         dialogue: ["Heh! Nobody gets past me without a battle!", "Whoa... you're tougher than you look."] },
-      { x: 7, y: 11, name: 'LISA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 7, y: 11, name: 'LISA', art: 'lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r1_lisa',
         sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Pidgey and I train here every morning! Care to spar?", "We'll be back stronger tomorrow, won't we, Pidgey?"] },
@@ -8352,7 +8437,7 @@ const MAPS = {
       { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 11, y: 7, name: 'HIKER', art: 'youngster', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
     ],
     encounters: null,
@@ -8376,13 +8461,13 @@ const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 2, name: 'NURSE', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
+      { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Pokemon Center! Let me heal your team..."], heal: true,
         afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach (Candy Coach House Rule) — present in
       // every Center's data; the scene only fields him while the rule is
       // on (loadMap gate in overworld.mjs).
-      { x: 2, y: 2, name: 'SPARRING COACH', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 2, y: 2, name: 'SPARRING COACH', art: 'coach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
         sparCoach: true, sparSpecies: 'machop',
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
     ],
@@ -8420,30 +8505,30 @@ const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 6, y: 3, name: 'RICK', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
+      { x: 6, y: 3, name: 'RICK', art: 'youngster', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
         trainer: 'r2_bug',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a Caterpie under a boot."] },
-      { x: 7, y: 5, name: 'BEA', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
+      { x: 7, y: 5, name: 'BEA', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
         trainer: 'r2_camper',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["I picnic here every day — battle me before you sit down!", "Not even a snack break slows you down!"] },
-      { x: 7, y: 8, name: 'NIA', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 7, y: 8, name: 'NIA', art: 'youngster', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'r2_jr',
         sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Route 2 is MY training ground! Prove you belong here!", "You're stronger than the rumors said..."] },
-      { x: 5, y: 10, name: 'ROB', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 5, y: 10, name: 'ROB', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r2_hiker',
         sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
       // Yellow homage: the anime-trio ambush, reimagined with original
       // characters (no motto quotes, no trademarked team name — GC C4).
       // The duo flank the path; either one spotting you pulls BOTH in.
-      { x: 3, y: 7, name: 'RUE', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 3, y: 7, name: 'RUE', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'r2_duo', duoPartner: 'COLE',
         sight: { dir: 'right', range: 4 },
         dialogue: ["Hold it right there, kid.", "Beaten... by a kid?!"] },
-      { x: 10, y: 7, name: 'COLE', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+      { x: 10, y: 7, name: 'COLE', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
         trainer: 'r2_duo', duoPartner: 'RUE',
         sight: { dir: 'left', range: 4 },
         dialogue: ["Two of us, one of you.", "Retreat! Regroup! We'll be back with a better plan!"] },
@@ -8494,7 +8579,7 @@ const MAPS = {
       { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'COACH', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a Mankey on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Poke Balls — on the house."],
         give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Poke Balls' } },
     ],
@@ -8521,7 +8606,7 @@ const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 2, name: 'BROCK', skin: '#c89878', shirt: '#c8782a', pants: '#4a5a3a', hair: '#1a1a1a',
+      { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#4a5a3a', hair: '#1a1a1a',
         trainer: 'brock',
         dialogue: ["I'm Brock! I'm Pewter's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],
@@ -8689,10 +8774,10 @@ const MAPS2 = {
       { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'COACH', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a Mankey on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Poke Balls — on the house."],
         give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Poke Balls' } },
-      { x: 2, y: 8, name: 'CURATOR', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
+      { x: 2, y: 8, name: 'CURATOR', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
         dialogue: ["Our museum's fossil lab swears a shard of Old Amber washed up right here in town once.", "Amber holds ancient DNA, you know. If you ever find a piece — guard it with your life."] },
     ],
     encounters: null,
@@ -8727,10 +8812,10 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 3 — Pewter City to Mt. Moon. Watch for falling rocks and eager trainers.' },
     ],
     npcs: [
-      { x: 12, y: 4, name: 'LASS ANA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 12, y: 4, name: 'LASS ANA', art: 'youngster', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r3_lass', sight: { dir: 'left', range: 3 },
         dialogue: ["I just got my first badge — wanna see what it taught me?", "Okay, okay! Your badge energy is real!"] },
-      { x: 8, y: 9, name: 'BUGSY JR', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
+      { x: 8, y: 9, name: 'BUGSY JR', art: 'youngster', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
         trainer: 'r3_bug', sight: { dir: 'up', range: 3 },
         dialogue: ["My net's full and my bugs are feisty! Battle!", "Net empty, pride emptier..."] },
     ],
@@ -8775,7 +8860,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 12, y: 6, name: 'HIKER TOMO', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 12, y: 6, name: 'HIKER TOMO', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         dialogue: ["Zubat own the dark in here — they hear you before you see them.", "Somewhere below, the mountain keeps a stone that fell from the sky. Moon Stone, they call it."] },
     ],
     encounters: {
@@ -8822,10 +8907,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 8, name: 'GRUNT REX', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 5, y: 8, name: 'GRUNT REX', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'moon_grunt', sight: { dir: 'right', range: 3 },
         dialogue: ["This cave's fossils belong to the Team now, brat. Scram!", "Tch! The boss'll hear about this..."] },
-      { x: 10, y: 3, name: 'SCIENTIST', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 10, y: 3, name: 'SCIENTIST', art: 'youngster', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         dialogue: ["Two fossils sleep in this chamber — a helix and a dome, older than the mountain itself.", "Take ONE, trainer, and leave the other for the next dreamer. Science is not greed."] },
     ],
     encounters: {
@@ -8871,10 +8956,10 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 4 — Mt. Moon to Cerulean City. The ledges only let you down, never back up.' },
     ],
     npcs: [
-      { x: 4, y: 4, name: 'MARCO', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 4, y: 4, name: 'MARCO', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         giveMon: { species: 'charmander', level: 10 },
         dialogue: ["My Charmander's too much fire for a guy with my temper. We keep setting each other off.", "Take him. Raise that flame right — and when he roars someday, remember old Marco."] },
-      { x: 9, y: 9, name: 'LASS RUE2', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
+      { x: 9, y: 9, name: 'LASS RUE2', art: 'youngster', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
         trainer: 'r4_lass', sight: { dir: 'up', range: 3 },
         dialogue: ["Cerulean's just ahead — but nobody passes my picnic spot unbattled!", "Fine, FINE. Cerulean deserves you."] },
     ],
@@ -8933,18 +9018,18 @@ const MAPS2 = {
       { x: 8, y: 4, text: 'CERULEAN GYM — Leader: Misty. The tomboyish mermaid! Inside lies a TIDE GROUND: Water moves hit harder and special moves ride the current — for Misty, and for you.' },
     ],
     npcs: [
-      { x: 12, y: 1, name: 'BILL', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
+      { x: 12, y: 1, name: 'BILL', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
         dialogue: ["Heya! I'm Bill — the PC box whiz. My teleport experiment hiccuped and I woke up dressed as a Clefairy.", "My Sea Cottage lab is shuttered while I fix it, so ask me anything here. Your boxes? I built those. You're welcome."] },
-      { x: 5, y: 10, name: 'WREN', skin: '#e8b888', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
+      { x: 5, y: 10, name: 'WREN', art: 'youngster', skin: '#e8b888', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
         giveMon: { species: 'bulbasaur', level: 10 },
         dialogue: ["I nurse hurt Pokemon back to health here. This Bulbasaur came to me half-starved, the poor sprout.", "He's strong now — and he needs a journey, not a garden. Will you take him with you?"] },
-      { x: 15, y: 8, name: 'ORIN', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 15, y: 8, name: 'ORIN', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#6a4a2a',
         trade: { give: 'abra', get: 'mrmime', nickname: 'MARCEL' },
         dialogue: ["My Abra teleports out of every conversation. Exhausting at parties.", "Trade you my Mr. Mime, Marcel, for an Abra? At least he'll stay in the room. Mostly."] },
-      { x: 2, y: 6, name: 'TESS', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#c0a03a',
+      { x: 2, y: 6, name: 'TESS', art: 'youngster', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#c0a03a',
         trade: { give: 'poliwhirl', get: 'jynx', nickname: 'LOLA' },
         dialogue: ["Lola my Jynx sings to the river every dawn. Beautiful. Loud. So loud.", "Swap her for a Poliwhirl? My ears are begging you."] },
-      { x: 10, y: 9, name: 'FAN', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 10, y: 9, name: 'FAN', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         dialogue: ["Misty's Starmie once spun a whirlpool that soaked the whole front row. Best day of my life.", "North of here the bridge kids challenge everyone who crosses. Even grandmas. ESPECIALLY grandmas."] },
     ],
     encounters: null,
@@ -8980,10 +9065,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'MISTY', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
+      { x: 8, y: 2, name: 'MISTY', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
         dialogue: ["I'm Misty! Cerulean's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
-      { x: 4, y: 6, name: 'DIANA', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 4, y: 6, name: 'DIANA', art: 'youngster', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'gym_cerulean_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Misty taught me to swim AND to battle. Both involve not panicking.", "You kept your head above water... fine, pass."] },
     ],
@@ -9022,9 +9107,9 @@ const MAPS2 = {
       { x: 10, y: 7, text: 'POKEMON DAY CARE — We raise your Pokemon with love while you travel. — The Day-Care Couple' },
     ],
     npcs: [
-      { x: 8, y: 8, name: 'GRAMPS', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 8, y: 8, name: 'GRAMPS', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Sixty years I've raised other folks' Pokemon on this route. They always come back stronger.", "Leave a partner with us someday, eh? Love and fresh air — that's the whole recipe."] },
-      { x: 12, y: 5, name: 'CAMPER JO', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 12, y: 5, name: 'CAMPER JO', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
         trainer: 'r5_camper', sight: { dir: 'left', range: 3 },
         dialogue: ["Day care's closed to challengers, but I'M not! Battle the camper!", "Camp's all yours, champ. Sheesh."] },
     ],
@@ -9074,7 +9159,7 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 6 — Cerulean to Vermilion. The pond is full of quiet, patient Pokemon.' },
     ],
     npcs: [
-      { x: 3, y: 10, name: 'BUG CATCHER ELI', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#7a4a1a',
+      { x: 3, y: 10, name: 'BUG CATCHER ELI', art: 'youngster', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#7a4a1a',
         trainer: 'r6_bug', sight: { dir: 'right', range: 3 },
         dialogue: ["Everyone underestimates a Butterfree until the Sleep Powder lands!", "Slept on... literally..."] },
     ],
@@ -9146,13 +9231,13 @@ const MAPS2 = {
       { x: 8, y: 4, text: 'VERMILION GYM — Leader: Lt. Surge. The Lightning Lieutenant! Inside lies a VOLT GROUND: Electric moves hit harder and strike swift and true — for Surge, and for you.' },
     ],
     npcs: [
-      { x: 5, y: 8, name: 'OFFICER RAE', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 5, y: 8, name: 'OFFICER RAE', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         giveMon: { species: 'squirtle', level: 10 },
         dialogue: ["This Squirtle leads a whole squad of pranksters — they flooded the pier AGAIN this morning.", "He listens to you, though. Take him, trainer. A squad needs a real leader."] },
-      { x: 14, y: 9, name: 'HANK', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 14, y: 9, name: 'HANK', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         trade: { give: 'spearow', get: 'farfetchd', nickname: 'DUX' },
         dialogue: ["Caught this Farfetch'd — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a Spearow for him? A sailor needs a scout, not a chef."] },
-      { x: 13, y: 2, name: 'CHAIRMAN', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
+      { x: 13, y: 2, name: 'CHAIRMAN', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
         dialogue: ["I chair the Pokemon Fan Club! Did I tell you about my Rapidash? Its coat — like spun sunset!", "And my Fearow? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
     ],
     encounters: null,
@@ -9186,10 +9271,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'LT. SURGE', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0a03a',
+      { x: 8, y: 2, name: 'LT. SURGE', art: 'youngster', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0a03a',
         trainer: 'surge',
         dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
-      { x: 4, y: 6, name: 'WALT', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
+      { x: 4, y: 6, name: 'WALT', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
         trainer: 'gym_vermilion_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Surge taught this old gentleman one thing: never grab a live wire.", "Shocking... defeat. Mind the switches on your way up."] },
     ],
@@ -9221,18 +9306,18 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 9, y: 3, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 9, y: 3, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_stanne',
         dialogue: ["Fancy meeting you on MY ship, {player}. The captain lets ME cut the ribbon on this tub.", "Hmph! The sea air must've slowed my team down. That's the only explanation."] },
-      { x: 4, y: 5, name: 'MARA', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a3a',
+      { x: 4, y: 5, name: 'MARA', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a3a',
         trainer: 'duo2_vermilion', duoPartner: 'JULES',
         sight: { dir: 'right', range: 3 },
         dialogue: ["A luxury liner, a famous captain... and one very collectible passenger list.", "Jules! Plan B! Plan B!!"] },
-      { x: 13, y: 5, name: 'JULES', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a6ac0',
+      { x: 13, y: 5, name: 'JULES', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a6ac0',
         trainer: 'duo2_vermilion', duoPartner: 'MARA',
         sight: { dir: 'left', range: 3 },
         dialogue: ["We dressed as crew. The hats were VERY convincing.", "Abandon ship — the plan, I mean! The plan!"] },
-      { x: 15, y: 8, name: 'CAPTAIN', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#2a3a4a', hair: '#c0c0c0',
+      { x: 15, y: 8, name: 'CAPTAIN', art: 'youngster', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#2a3a4a', hair: '#c0c0c0',
         dialogue: ["Back in '62 I wrestled a storm off the Sevii coast with one hand on the wheel and one on my tea.", "Rub my back when I'm seasick and I might teach your Pokemon to slice clean through anything."] },
     ],
     encounters: null,
@@ -9266,10 +9351,10 @@ const MAPS2 = {
       { x: 5, y: 7, text: "ROUTE 11 — Vermilion's east meadow. Something huge once slept across this road, they say." },
     ],
     npcs: [
-      { x: 9, y: 4, name: 'GAMER HUGO', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 9, y: 4, name: 'GAMER HUGO', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         trainer: 'r11_gamer', sight: { dir: 'down', range: 3 },
         dialogue: ["Battles are a game of odds, kid — and my Diglett never folds!", "Read me like an open book... rematch after I reshuffle my pride."] },
-      { x: 13, y: 9, name: 'ENGINEER', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 13, y: 9, name: 'ENGINEER', art: 'youngster', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["We're surveying for a tunnel under Vermilion Bay. The Diglett keep redrawing our maps.", "Honestly? Their tunnels are better engineered than ours. Don't print that."] },
     ],
     encounters: {
@@ -9314,7 +9399,7 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 7 — Vermilion to Celadon. Short grass, tall stories at the gatehouse.' },
     ],
     npcs: [
-      { x: 8, y: 4, name: 'LASS MINA', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 8, y: 4, name: 'LASS MINA', art: 'youngster', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r7_lass', sight: { dir: 'down', range: 3 },
         dialogue: ["Celadon's perfume shops can wait — battle first, shopping second!", "My wallet thanks you for the delay, at least."] },
     ],
@@ -9368,19 +9453,19 @@ const MAPS2 = {
       { x: 6, y: 3, text: 'CELADON GYM — Leader: Erika. The nature-loving princess! Inside lies a MARSH GROUND: Grass moves hit harder and healing blooms fuller — for Erika, and for you.' },
     ],
     npcs: [
-      { x: 5, y: 10, name: 'ELIAS', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 5, y: 10, name: 'ELIAS', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         giveMon: { species: 'eevee', level: 25 },
         dialogue: ["Atop the old condo I kept an Eevee — bright little thing, brimming with possible futures.", "My traveling days are done. Take Eevee, and let it become whatever your journey needs."] },
-      { x: 11, y: 8, name: 'HOSTESS', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 11, y: 8, name: 'HOSTESS', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
-      { x: 3, y: 8, name: 'PERFUMER', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
+      { x: 3, y: 8, name: 'PERFUMER', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#a05a2a',
         dialogue: ["Erika's perfume is distilled from her own garden. One whiff and even a Snorlax sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
       // ADR-025 §3 (Phase 3): Celadon gains a small keepsake atelier —
       // the Second-Wind Ribbon's SECOND source (its first is the Rue &
       // Cole parley, bond-gated to Phase 5). The ribbon's stock is
       // "late": ITEMS.secondwindribbon.minBadges = 7 gates the row in
       // openMart until the player carries seven badges.
-      { x: 15, y: 11, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 15, y: 11, name: 'MART CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['greatball', 'ultraball', 'superpotion', 'hyperpotion', 'secondwindribbon'] },
         dialogue: ["Celadon Atelier — ribbons, charms, and the odd heirloom. Our Second-Wind Ribbon? Reserved for proven trainers. Seven badges, hon."] },
     ],
@@ -9413,10 +9498,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'ERIKA', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a5a3a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'ERIKA', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a5a3a', hair: '#1a1a1a',
         trainer: 'erika',
         dialogue: ["I am Erika, of Celadon Gym. My flower arrangements... and my battles... both demand a gentle, exact hand.", "How lovely — a storm in my garden. The Rainbow Badge is yours."] },
-      { x: 4, y: 6, name: 'TAMIA', skin: '#e8b888', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a1a1a',
+      { x: 4, y: 6, name: 'TAMIA', art: 'youngster', skin: '#e8b888', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a1a1a',
         trainer: 'gym_celadon_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Erika's napping again, so I weed out the unworthy. That's you, apparently.", "Ugh. Even the weeds respect you now. Go on, then."] },
     ],
@@ -9454,16 +9539,16 @@ const MAPS2 = {
       { x: 12, y: 2, text: 'SLOT MACHINE — Someone carved tiny letters here: R WAS HERE.' },
     ],
     npcs: [
-      { x: 5, y: 3, name: 'PRIZE CLERK', skin: '#f0c8a0', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 5, y: 3, name: 'PRIZE CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#1a1a1a',
         prize: { species: 'porygon', coins: 6500 },
         dialogue: ["Six thousand five hundred coins buys you the future, friend — a Porygon, fresh from the lab.", "Digital, loyal, and it never eats. Best deal on this floor."] },
-      { x: 11, y: 3, name: 'COIN CLERK', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#4a3a2a',
+      { x: 11, y: 3, name: 'COIN CLERK', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#4a3a2a',
         prize: { species: 'abra', coins: 180 },
         dialogue: ["One eighty gets you an Abra. It'll teleport from strangers — but you're not a stranger, are you?", "Five hundred, a Clefairy. Sweet as the perfume upstairs, twice as stubborn."] },
-      { x: 14, y: 5, name: 'FAIRY CLERK', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#c0a03a',
+      { x: 14, y: 5, name: 'FAIRY CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#c0a03a',
         prize: { species: 'clefairy', coins: 500 },
         dialogue: ["Clefairy, five hundred coins, final offer. It dances on moonlit nights, you know.", "No refunds. The moon doesn't do refunds either."] },
-      { x: 2, y: 9, name: 'REGULAR', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 2, y: 9, name: 'REGULAR', art: 'youngster', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Twenty years I've fed these slots. The poster behind me rattles some nights, like something's under the floor.", "Bah. Machines settle, that's all. ...Right?"] },
     ],
     encounters: null,
@@ -9497,7 +9582,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 8, name: 'SENTRY SUE', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a3a',
+      { x: 3, y: 8, name: 'SENTRY SUE', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a3a',
         dialogue: ["You didn't see a hideout. There's no hideout. The poster is DECORATIVE.", "Wait — how did you even get down here?! Security! SECURITY!"] },
     ],
     encounters: null,
@@ -9536,7 +9621,7 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 8 — Celadon to Lavender, under the shadow of Saffron. The grass here smells faintly of perfume.' },
     ],
     npcs: [
-      { x: 8, y: 4, name: 'LASS PAIGE', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#a05a2a',
+      { x: 8, y: 4, name: 'LASS PAIGE', art: 'youngster', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#a05a2a',
         trainer: 'r8_lass', sight: { dir: 'down', range: 3 },
         dialogue: ["I take this road to visit the tower graves. First — a battle, for luck!", "Luck noted. The road respects you."] },
     ],
@@ -9592,10 +9677,10 @@ const MAPS2 = {
       { x: 8, y: 6, text: 'SAFFRON CITY — The golden city at the heart of Kanto. Silph Co. HQ towers over all.' },
     ],
     npcs: [
-      { x: 15, y: 9, name: 'SEER IVO', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 15, y: 9, name: 'SEER IVO', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["I saw you coming, trainer — yesterday, in fact. Psychic's honor.", "Take this TM. Inside it sleeps a move that reads minds and rattles them."],
         give: { flag: 'seer_tm', items: { tm29: 1 }, text: 'TM29 Psychic' } },
-      { x: 2, y: 11, name: 'COPYCAT', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 2, y: 11, name: 'COPYCAT', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#7a4a1a',
         dialogue: ["Copycat's my name — I mimic every word you say... starting now, retroactively.", "Your Doduo impression? Flawless. Wait. That was ME. Ugh, I've confused myself again."] },
     ],
     encounters: null,
@@ -9625,10 +9710,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'SABRINA', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#2a2a3a', hair: '#1a1a2a',
+      { x: 8, y: 2, name: 'SABRINA', art: 'youngster', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#2a2a3a', hair: '#1a1a2a',
         trainer: 'sabrina',
         dialogue: ["I foresaw your arrival three days ago, {player}. My vision also showed this battle's end. Shall we check it?", "...The vision was wrong. How wonderful. The Marsh Badge is yours."] },
-      { x: 4, y: 6, name: 'JOHAN', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#1a1a1a',
+      { x: 4, y: 6, name: 'JOHAN', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#1a1a1a',
         trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Sabrina bent a spoon with her mind at age nine. I can bend... a fork. Slowly.", "Fork or no fork — beaten is beaten. Proceed, prodigy."] },
     ],
@@ -9656,13 +9741,13 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 7, y: 1, name: 'MASTER KO', skin: '#d8a878', shirt: '#f0f0f0', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 7, y: 1, name: 'MASTER KO', art: 'youngster', skin: '#d8a878', shirt: '#f0f0f0', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'dojo_master',
         dialogue: ["I am Ko, master of this dojo! We were a Gym once — Sabrina's psychics took our sign, but never our spirit!", "Superb form! Choose one of my prized fighters as your reward. Choose with your heart."] },
-      { x: 4, y: 3, name: 'MONK TETSU', skin: '#e8b888', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
+      { x: 4, y: 3, name: 'MONK TETSU', art: 'youngster', skin: '#e8b888', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
         giveMon: { species: 'hitmonlee', level: 30 },
         dialogue: ["Hitmonlee — the Kicking Fiend. Legs like tempered springs, strikes like thunder.", "Take him as your prize, champion of the dojo. He has been waiting for a worthy corner."] },
-      { x: 10, y: 3, name: 'MONK BRUNO2', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#2a1a0a',
+      { x: 10, y: 3, name: 'MONK BRUNO2', art: 'youngster', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#2a1a0a',
         giveMon: { species: 'hitmonchan', level: 30 },
         dialogue: ["Hitmonchan — the Punching Demon. His gloves have ended a hundred arguments.", "Take him as your prize, champion of the dojo. Every punch, a punctuation mark."] },
     ],
@@ -9697,10 +9782,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 4, name: 'GRUNT VEX2', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 4, y: 4, name: 'GRUNT VEX2', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'silph_grunt', sight: { dir: 'right', range: 3 },
         dialogue: ["Silph is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
-      { x: 13, y: 8, name: 'EMPLOYEE', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
+      { x: 13, y: 8, name: 'EMPLOYEE', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
         dialogue: ["They took the president's office upstairs and locked the lift with a Card Key.", "Please — my Porygon project is up there. And, uh. My lunch. Mostly the project."] },
     ],
     encounters: null,
@@ -9734,9 +9819,9 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 15, y: 2, name: 'PRESIDENT', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 15, y: 2, name: 'PRESIDENT', art: 'youngster', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["You drove them out of my building?! Silph owes you a debt no bonus could cover.", "My researchers insisted you take their Lapras — she carried our crew through every storm at sea."] },
-      { x: 13, y: 9, name: 'RESEARCHER', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 13, y: 9, name: 'RESEARCHER', art: 'youngster', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         giveMon: { species: 'lapras', level: 25 },
         dialogue: ["This Lapras ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Kanto are open to you."] },
     ],
@@ -9774,7 +9859,7 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 9 — The rocky road east. Hikers consider this their personal gym.' },
     ],
     npcs: [
-      { x: 13, y: 9, name: 'HIKER BRANT', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 13, y: 9, name: 'HIKER BRANT', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r9_hiker', sight: { dir: 'up', range: 3 },
         dialogue: ["Every stone on this route has met my boots. Now my team wants to meet YOU!", "Boots: scuffed. Team: scuffed-er. Well fought!"] },
     ],
@@ -9828,7 +9913,7 @@ const MAPS2 = {
       { x: 11, y: 7, text: 'ROUTE 10 — Rock Tunnel ahead. East: the old Power Plant, humming with something vast.' },
     ],
     npcs: [
-      { x: 4, y: 9, name: 'ENGINEER RUI', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 4, y: 9, name: 'ENGINEER RUI', art: 'youngster', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#1a1a1a',
         trainer: 'r10_hiker', sight: { dir: 'right', range: 3 },
         dialogue: ["I maintain the lines out here — my Voltorb ARE the spare parts!", "Grounded. Thoroughly, professionally grounded."] },
     ],
@@ -9886,7 +9971,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 10, name: 'CARETAKER', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 3, y: 10, name: 'CARETAKER', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Plant's been abandoned twenty years, but the turbines still sing. The wild electrics keep them warm.", "Deeper in, the air itself crackles. Something enormous nests by the main coil. Something with wings."] },
     ],
     encounters: {
@@ -9936,7 +10021,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 5, name: 'HIKER DOSS', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 4, y: 5, name: 'HIKER DOSS', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'tunnel_hiker', sight: { dir: 'right', range: 3 },
         dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "Okay... a LITTLE light would've helped. And a map. And a better team."] },
     ],
@@ -9991,9 +10076,9 @@ const MAPS2 = {
       { x: 8, y: 4, text: 'POKEMON TOWER — Honor the spirits of departed Pokemon.' },
     ],
     npcs: [
-      { x: 5, y: 9, name: 'VOLUNTEER', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
+      { x: 5, y: 9, name: 'VOLUNTEER', art: 'youngster', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
         dialogue: ["I volunteer at the Pokemon House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
-      { x: 13, y: 9, name: 'CHILD', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
+      { x: 13, y: 9, name: 'CHILD', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
         dialogue: ["My grandma says the tower ghosts are just Pokemon who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
     ],
     encounters: null,
@@ -10031,10 +10116,10 @@ const MAPS2 = {
       { x: 12, y: 2, text: 'A gravestone carved with a smiling Cubone. It does not look sad at all.' },
     ],
     npcs: [
-      { x: 8, y: 3, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 8, y: 3, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_tower',
         dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
-      { x: 12, y: 6, name: 'CHANNELER', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 12, y: 6, name: 'CHANNELER', art: 'youngster', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["The spirits drift closer to the stairs each night, child. Something above grieves — loudly.", "Purify your heart before you climb. The tower can smell doubt."] },
     ],
     encounters: {
@@ -10078,7 +10163,7 @@ const MAPS2 = {
       { x: 12, y: 2, text: 'The oldest stone in the tower. Its inscription is in a language of scratches and pawprints.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'MR. FUJI', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 8, y: 2, name: 'MR. FUJI', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Easy, children... the old man means you no harm. I am Fuji — I keep this tower, and it keeps me.", "You calmed a grieving mother and freed an old fool. Lavender will not forget it. Neither will I."] },
     ],
     encounters: {
@@ -10125,7 +10210,7 @@ const MAPS2 = {
       { x: 11, y: 6, text: 'ROUTE 12 — The quiet fishing road. Mind the sleeper on the bridge; everyone does, eventually.' },
     ],
     npcs: [
-      { x: 5, y: 4, name: 'FISHER ED', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#4a3a2a',
+      { x: 5, y: 4, name: 'FISHER ED', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#4a3a2a',
         trainer: 'r12_fisher', sight: { dir: 'right', range: 3 },
         dialogue: ["Shh! You'll scare the — oh, forget it. Battle me, loudmouth!", "The big one got away. The BIG big one. It was THIS — never mind."] },
     ],
@@ -10190,7 +10275,7 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 15 — Fuchsia lies west. Something in this grass copies what it touches. Almost.' },
     ],
     npcs: [
-      { x: 9, y: 4, name: 'BIKER REX2', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+      { x: 9, y: 4, name: 'BIKER REX2', art: 'youngster', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
         trainer: 'r15_biker', sight: { dir: 'down', range: 3 },
         dialogue: ["My exhaust, my rules, my road! You got a problem, you got a battle!", "Cough... hacked up a loss there. Ride on, kid."] },
     ],
@@ -10247,9 +10332,9 @@ const MAPS2 = {
       { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master!' },
     ],
     npcs: [
-      { x: 10, y: 11, name: 'WARDEN', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0c0c0',
+      { x: 10, y: 11, name: 'WARDEN', art: 'youngster', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0c0c0',
         dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Safari Zone mud again.", "Find them and I'll teach your Pokemon to push boulders like they're made of foam. Mmh!"] },
-      { x: 3, y: 9, name: 'ZOO FAN', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a4a1a',
+      { x: 3, y: 9, name: 'ZOO FAN', art: 'youngster', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a4a1a',
         dialogue: ["The zoo's Chansey waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
     ],
     encounters: null,
@@ -10279,10 +10364,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'KOGA', skin: '#d8a878', shirt: '#3a2a4a', pants: '#1a1a2a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'KOGA', art: 'youngster', skin: '#d8a878', shirt: '#3a2a4a', pants: '#1a1a2a', hair: '#1a1a1a',
         trainer: 'koga',
         dialogue: ["I am Koga of the Fuchsia Gym. A ninja's poison creeps unseen — despair begins before the pain.", "You saw through the fog. Impressive. The Soul Badge, from one shadow to another."] },
-      { x: 4, y: 6, name: 'EDGAR', skin: '#c89878', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#3a2a1a',
+      { x: 4, y: 6, name: 'EDGAR', art: 'youngster', skin: '#c89878', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#3a2a1a',
         trainer: 'gym_fuchsia_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Master Koga's walls are invisible, but his students are not. Regrettably for you.", "Hm. You found the gaps in more than the walls."] },
     ],
@@ -10317,7 +10402,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 16, y: 11, name: 'RANGER', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#2a1a0a',
+      { x: 16, y: 11, name: 'RANGER', art: 'youngster', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#2a1a0a',
         dialogue: ["Safari rules: no battling the wildlife — bait, rocks, and quick feet. The rare ones reward patience.", "Chansey and Kangaskhan nest deep in the center grass. Tauros stampede the east field at dawn."] },
     ],
     encounters: {
@@ -10395,10 +10480,10 @@ const MAPS2 = {
       { x: 10, y: 6, text: 'CYCLING ROAD GATE — Bicycles only beyond this point. Something enormous naps on the south slope.' },
     ],
     npcs: [
-      { x: 10, y: 5, name: 'MARCUS', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 5, name: 'MARCUS', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         trade: { give: 'slowbro', get: 'lickitung', nickname: 'MARC' },
         dialogue: ["My Slowbro naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a Lickitung? I hear they never sleep. Sounds exhausting. Perfect."] },
-      { x: 4, y: 10, name: 'BIKER JOEL', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
+      { x: 4, y: 10, name: 'BIKER JOEL', art: 'youngster', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
         trainer: 'r16_biker', sight: { dir: 'right', range: 3 },
         dialogue: ["Cyclists rule this hill, pedestrian! Defend your walking privileges!", "The hill... respects your legs. UGH. Fine."] },
     ],
@@ -10451,7 +10536,7 @@ const MAPS2 = {
       { x: 5, y: 6, text: 'ROUTE 19 — Fuchsia Beach. The surf runs south all the way to Cinnabar.' },
     ],
     npcs: [
-      { x: 11, y: 9, name: 'SWIMMER ADA', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#e07830',
+      { x: 11, y: 9, name: 'SWIMMER ADA', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#e07830',
         trainer: 'r19_swimmer', sight: { dir: 'right', range: 3 },
         dialogue: ["I swim this coast every morning — race my team to the buoy and back!", "You swim like a Starmie spins. Cinnabar's yours to reach."] },
     ],
@@ -10516,7 +10601,7 @@ const MAPS2 = {
       { x: 11, y: 7, text: 'ROUTE 20 — Seafoam Isles west, Cinnabar east. The caves breathe cold air in summer.' },
     ],
     npcs: [
-      { x: 12, y: 8, name: 'SWIMMER BO', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 12, y: 8, name: 'SWIMMER BO', art: 'youngster', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         dialogue: ["Something huge and blue nests in the Seafoam caves. The cold near its chamber isn't weather — it's presence.", "Push the boulders into the sea holes if you go. Slows the current. Old swimmer's trick."] },
     ],
     encounters: {
@@ -10574,7 +10659,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 9, name: 'EXPLORER', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 3, y: 9, name: 'EXPLORER', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["The boulders here roll into the sea-holes and calm the currents below. Muscle work, trainer work.", "At the heart of the cold, something sleeps with one eye open. Tread like snowfall."] },
     ],
     encounters: {
@@ -10636,12 +10721,12 @@ const MAPS2 = {
       { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST.' },
     ],
     npcs: [
-      { x: 15, y: 11, name: 'CAPT SALT', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 15, y: 11, name: 'CAPT SALT', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["Fifty years I've ferried folks around this coast, but ONE island I sail to only when the sea itself asks.", "New Island, they call it. When its story calls you, trainer — you'll know. Everyone does, exactly once."] },
-      { x: 3, y: 6, name: 'TOM', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 3, y: 6, name: 'TOM', art: 'youngster', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         trade: { give: 'venonat', get: 'tangela', nickname: 'TANG' },
         dialogue: ["Lab work breeds Venonat like paperwork. My Tangela, Tang, at least files the vines neatly.", "Swap? Your Venonat for my Tangela. The lab gains a moth; you gain a jungle."] },
-      { x: 15, y: 8, name: 'UMA', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
+      { x: 15, y: 8, name: 'UMA', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
         trade: { give: 'raichu', get: 'electrode', nickname: 'DORRY' },
         dialogue: ["My Electrode, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a Raichu? Something with legs, for once. Please. My shins beg you."] },
     ],
@@ -10674,10 +10759,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'BLAINE', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
+      { x: 8, y: 2, name: 'BLAINE', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
         dialogue: ["Blaine's the name — quiz-master of Cinnabar and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
-      { x: 4, y: 6, name: 'PYRO', skin: '#c89878', shirt: '#7a3a2a', pants: '#2a2a2a', hair: '#e07830',
+      { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#7a3a2a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
     ],
@@ -10710,7 +10795,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 8, name: 'JOURNAL', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 3, y: 8, name: 'JOURNAL', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["A charred journal page: 'We named the newborn MEWTWO. The mother dreams beneath the island still...'", "Another page: 'If anyone reads this — the Gym key is hidden where we worked. Forgive us.'"] },
     ],
     encounters: {
@@ -10763,9 +10848,9 @@ const MAPS2 = {
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 10, y: 4, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
-      { x: 12, y: 8, name: 'CAPT MARA', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#e8e0f0',
+      { x: 12, y: 8, name: 'CAPT MARA', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#e8e0f0',
         dialogue: ["I run the little ferry out of Pallet's dock, dear. Mostly supplies, sometimes secrets.", "Once a year the fog takes me somewhere that isn't on any chart. New Island. When it calls you, I'll be waiting."] },
     ],
     encounters: null,
@@ -10812,9 +10897,9 @@ const MAPS2 = {
       { x: 12, y: 6, text: 'VIRIDIAN GYM — Leader: UNKNOWN. The door has been locked for a long, long time.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 11, y: 7, name: 'HIKER', art: 'youngster', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
-      { x: 12, y: 4, name: 'OLD MAN', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 12, y: 4, name: 'OLD MAN', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["That gym's leader vanished years ago — some say he runs... an organization. Some say he'll be back.", "When the door opens again, trainer, Kanto will feel it. Mark an old man's words."] },
     ],
     encounters: null,
@@ -10846,10 +10931,10 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'GIOVANNI', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'GIOVANNI', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#1a1a1a',
         trainer: 'giovanni',
         dialogue: ["So! The League's rising star darkens MY gym. I am Giovanni — leader here, and... other things, elsewhere.", "Impossible... beaten, in my own house. Take the Earth Badge. And forget you ever understood me."] },
-      { x: 4, y: 6, name: 'VEX', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+      { x: 4, y: 6, name: 'VEX', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
         trainer: 'gym_viridian_1', sight: { dir: 'right', range: 3 },
         dialogue: ["The boss only takes challengers who've earned seven badges. His standards are... organizational.", "Standards met, apparently. He's waiting. Try to survive the small talk."] },
     ],
@@ -10883,7 +10968,7 @@ const MAPS2 = {
       { x: 5, y: 7, text: 'ROUTE 22 — Pokemon League Front Gate. Eight badges open the road. No exceptions, no shortcuts.' },
     ],
     npcs: [
-      { x: 2, y: 4, name: 'GATE GUARD', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 2, y: 4, name: 'GATE GUARD', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["League checkpoint! I count badges the way sailors count storms — carefully, and twice.", "Eight badges, trainer, or the mountain keeps its secrets. Those are the rules older than me."] },
     ],
     encounters: {
@@ -10931,7 +11016,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 5, name: 'ACE RIN', skin: '#f0c8a0', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a2a',
+      { x: 4, y: 5, name: 'ACE RIN', art: 'youngster', skin: '#f0c8a0', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a2a',
         trainer: 'vr_cool', sight: { dir: 'right', range: 3 },
         dialogue: ["Only badge-bearers walk this road. Show me yours were earned, not inherited!", "Earned. Every single one. The plateau will taste your name soon."] },
     ],
@@ -10984,9 +11069,9 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 5, name: 'CLERK', skin: '#f0c8a0', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 5, y: 5, name: 'CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to Indigo Plateau, challenger. Beyond those doors: four elites, one champion, no exits mid-trials.", "Stock up, heal up, breathe deep. The mountain believes in you. So do we."] },
-      { x: 13, y: 9, name: 'ACE VETERAN', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 13, y: 9, name: 'ACE VETERAN', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Thirty years ago I stood where you stand, knees knocking like maracas.", "I lost to the first door and never regretted a step. Go knock louder than I did."] },
     ],
     encounters: null,
@@ -11035,19 +11120,19 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 9, y: 17, name: 'LORELEI', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#7a1a3a',
+      { x: 9, y: 17, name: 'LORELEI', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#7a1a3a',
         trainer: 'lorelei',
         dialogue: ["I am Lorelei of the Elite Four! My ice Pokemon are glaciers with tempers — no one breaks them. No one.", "Glaciers... melt. Astonishing. Bruno waits above, and he hits far harder than winter."] },
-      { x: 9, y: 13, name: 'BRUNO', skin: '#c89878', shirt: '#8a6a3a', pants: '#3a3a3a', hair: '#1a1a1a',
+      { x: 9, y: 13, name: 'BRUNO', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#3a3a3a', hair: '#1a1a1a',
         trainer: 'bruno',
         dialogue: ["I am Bruno! Through rigorous training, my Pokemon and I became one machine of muscle!", "We train again. YOU — climb. Agatha's ghosts are older than my pride."] },
-      { x: 9, y: 9, name: 'AGATHA', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 9, y: 9, name: 'AGATHA', art: 'youngster', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'agatha',
         dialogue: ["I am Agatha. I battled that fool Hawthorn when we were both young and reckless... mostly him.", "Hmph. You fight like he dreamed of fighting. Lance awaits, child. Mind the dragons."] },
-      { x: 9, y: 5, name: 'LANCE', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#1a1a2a', hair: '#a02a2a',
+      { x: 9, y: 5, name: 'LANCE', art: 'youngster', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#1a1a2a', hair: '#a02a2a',
         trainer: 'lance',
         dialogue: ["I am Lance — dragon master, and the League's final wall before its throne.", "A wall, breached by a better storm. The champion's room is yours to enter. Earn what's inside."] },
-      { x: 9, y: 1, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 9, y: 1, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_champion',
         dialogue: ["Well, well. Look who the mountain let in. I've been champion for exactly one satisfying afternoon, {player} — don't ruin it.", "No... NO! My reign can't end before it trends! ...Heh. Take the crown, then. It was always going to be one of us."] },
     ],
@@ -11087,7 +11172,7 @@ const MAPS2 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 10, name: 'SURVIVOR', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 3, y: 10, name: 'SURVIVOR', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Locals call this the Unknown Dungeon. Only League champions are permitted past the rope.", "At its heart, something the labs made — and unmade themselves fearing. It waits. It REMEMBERS."] },
     ],
     encounters: {
@@ -11141,9 +11226,9 @@ const MAPS2 = {
       { x: 3, y: 8, text: 'A storm-bent sign: NEW ISLAND RESEARCH STATION. Below, fresher paint: NO ONE WAS SUPPOSED TO COME BACK.' },
     ],
     npcs: [
-      { x: 12, y: 7, name: 'DR. ASHE', skin: '#e8b888', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 12, y: 7, name: 'DR. ASHE', art: 'youngster', skin: '#e8b888', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["We built this place to answer one question: can a copy love the original back?", "The storm that took the lab was no storm, child. It was a refusal. Remember that, whatever calls you here."] },
-      { x: 4, y: 10, name: 'SAILOR GHOST', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 4, y: 10, name: 'SAILOR GHOST', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Ferry came in on a sea flat as glass. No wind. No birds. Just... an invitation, humming.", "You felt it too, didn't you? That's why your boat knew the way."] },
     ],
     encounters: null,
@@ -11777,10 +11862,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'MISTY', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
+      { x: 8, y: 2, name: 'MISTY', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
         dialogue: ["I'm Misty! Cerulean's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
-      { x: 4, y: 6, name: 'DIANA', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 4, y: 6, name: 'DIANA', art: 'youngster', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'gym_cerulean_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Misty taught me to swim AND to battle. Both involve not panicking.", "You kept your head above water... fine, pass."] },
     ],
@@ -11811,10 +11896,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'LT. SURGE', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0a03a',
+      { x: 8, y: 2, name: 'LT. SURGE', art: 'youngster', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0a03a',
         trainer: 'surge',
         dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
-      { x: 4, y: 6, name: 'WALT', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
+      { x: 4, y: 6, name: 'WALT', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
         trainer: 'gym_vermilion_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Surge taught this old gentleman one thing: never grab a live wire.", "Shocking... defeat. Mind the switches on your way up."] },
     ],
@@ -11845,10 +11930,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'ERIKA', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a5a3a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'ERIKA', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a5a3a', hair: '#1a1a1a',
         trainer: 'erika',
         dialogue: ["I am Erika, of Celadon Gym. My flower arrangements... and my battles... both demand a gentle, exact hand.", "How lovely — a storm in my garden. The Rainbow Badge is yours."] },
-      { x: 4, y: 6, name: 'TAMIA', skin: '#e8b888', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a1a1a',
+      { x: 4, y: 6, name: 'TAMIA', art: 'youngster', skin: '#e8b888', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a1a1a',
         trainer: 'gym_celadon_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Erika's napping again, so I weed out the unworthy. That's you, apparently.", "Ugh. Even the weeds respect you now. Go on, then."] },
     ],
@@ -11884,10 +11969,10 @@ const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 8 — Celadon to Lavender, under the shadow of Saffron. The grass here smells faintly of perfume.' },
     ],
     npcs: [
-      { x: 8, y: 4, name: 'LASS PAIGE', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#a05a2a',
+      { x: 8, y: 4, name: 'LASS PAIGE', art: 'youngster', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#a05a2a',
         trainer: 'r8_lass', sight: { dir: 'down', range: 3 },
         dialogue: ["I take this road to visit the tower graves. First — a battle, for luck!", "Luck noted. The road respects you."] },
-      { x: 13, y: 8, name: 'GAMER DOSS', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 13, y: 8, name: 'GAMER DOSS', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         trainer: 'r8_gamer', sight: { dir: 'left', range: 3 },
         dialogue: ["I bet my lunch money on my Growlithe's nose. It has never once lied about snacks — or challengers!", "My nose for trainers needs recalibrating..."] },
     ],
@@ -11944,12 +12029,12 @@ const MAPS3 = {
       { x: 10, y: 7, text: 'SAFFRON GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
     ],
     npcs: [
-      { x: 15, y: 9, name: 'SEER IVO', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 15, y: 9, name: 'SEER IVO', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["I saw you coming, trainer — yesterday, in fact. Psychic's honor.", "Take this TM. Inside it sleeps a move that reads minds and rattles them."],
         give: { flag: 'seer_tm', items: { tm29: 1 }, text: 'TM29 Psychic' } },
-      { x: 2, y: 11, name: 'COPYCAT', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#7a4a1a',
+      { x: 2, y: 11, name: 'COPYCAT', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#7a4a1a',
         dialogue: ["Copycat's my name — I mimic every word you say... starting now, retroactively.", "Your Doduo impression? Flawless. Wait. That was ME. Ugh, I've confused myself again."] },
-      { x: 15, y: 11, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 15, y: 11, name: 'MART CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'fullheal', 'revive'] },
         dialogue: ["Saffron Mart, ground floor, everything a traveling trainer needs. The big city's prices, the small town's smile."] },
     ],
@@ -11980,10 +12065,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'SABRINA', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#2a2a3a', hair: '#1a1a2a',
+      { x: 8, y: 2, name: 'SABRINA', art: 'youngster', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#2a2a3a', hair: '#1a1a2a',
         trainer: 'sabrina',
         dialogue: ["I foresaw your arrival three days ago, {player}. My vision also showed this battle's end. Shall we check it?", "...The vision was wrong. How wonderful. The Marsh Badge is yours."] },
-      { x: 4, y: 6, name: 'JOHAN', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#1a1a1a',
+      { x: 4, y: 6, name: 'JOHAN', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#1a1a1a',
         trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Sabrina bent a spoon with her mind at age nine. I can bend... a fork. Slowly.", "Fork or no fork — beaten is beaten. Proceed, prodigy."] },
     ],
@@ -12011,12 +12096,12 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 7, y: 1, name: 'MASTER KO', skin: '#d8a878', shirt: '#f0f0f0', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 7, y: 1, name: 'MASTER KO', art: 'youngster', skin: '#d8a878', shirt: '#f0f0f0', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["I am Ko, master of this dojo! We were a Gym once — Sabrina's psychics took our sign, but never our spirit!", "You have bested my students and my pride alike. Choose one of my prized fighters as your reward. Choose with your heart."] },
-      { x: 4, y: 3, name: 'MONK TETSU', skin: '#e8b888', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
+      { x: 4, y: 3, name: 'MONK TETSU', art: 'youngster', skin: '#e8b888', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
         giveMon: { species: 'hitmonlee', level: 30 },
         dialogue: ["Hitmonlee — the Kicking Fiend. Legs like tempered springs, strikes like thunder.", "Take him as your prize, champion of the dojo. He has been waiting for a worthy corner."] },
-      { x: 10, y: 3, name: 'MONK BRUNO2', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#2a1a0a',
+      { x: 10, y: 3, name: 'MONK BRUNO2', art: 'youngster', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#2a1a0a',
         giveMon: { species: 'hitmonchan', level: 30 },
         dialogue: ["Hitmonchan — the Punching Demon. His gloves have ended a hundred arguments.", "Take him as your prize, champion of the dojo. Every punch, a punctuation mark."] },
     ],
@@ -12051,11 +12136,11 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 4, name: 'GUARD VEX', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 4, y: 4, name: 'GUARD VEX', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         dialogue: ["Silph is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
-      { x: 13, y: 8, name: 'EMPLOYEE', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
+      { x: 13, y: 8, name: 'EMPLOYEE', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
         dialogue: ["They stormed the president's office upstairs. Someone dropped a Card Key in the lobby rush — check the corner by the plants!", "Please — my Porygon project is up there. And, uh. My lunch. Mostly the project."] },
-      { x: 3, y: 8, name: 'RECEPTIONIST', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 3, y: 8, name: 'RECEPTIONIST', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to Silph Co.! ...Is what I would say, on a normal day. Today the lobby belongs to men in black.", "The lift doors upstairs only answer to the Card Key. Company policy. Criminal policy too, apparently."] },
     ],
     encounters: null,
@@ -12089,10 +12174,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 15, y: 2, name: 'PRESIDENT', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 15, y: 2, name: 'PRESIDENT', art: 'youngster', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["You drove them out of my building?! Silph owes you a debt no bonus could cover.", "Take our prototype — the Master Ball. It has never failed, and after today, I trust no hands but yours."],
         give: { flag: 'pres_masterball', items: { masterball: 1 }, text: 'Master Ball' } },
-      { x: 13, y: 9, name: 'RESEARCHER', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 13, y: 9, name: 'RESEARCHER', art: 'youngster', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         giveMon: { species: 'lapras', level: 25 },
         dialogue: ["This Lapras ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Kanto are open to you."] },
     ],
@@ -12130,10 +12215,10 @@ const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 9 — The rocky road east. Hikers consider this their personal gym.' },
     ],
     npcs: [
-      { x: 13, y: 9, name: 'HIKER BRANT', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 13, y: 9, name: 'HIKER BRANT', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r9_hiker', sight: { dir: 'up', range: 3 },
         dialogue: ["Every stone on this route has met my boots. Now my team wants to meet YOU!", "Boots: scuffed. Team: scuffed-er. Well fought!"] },
-      { x: 4, y: 8, name: 'CAMPER LIO', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 4, y: 8, name: 'CAMPER LIO', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
         trainer: 'r9_camper', sight: { dir: 'right', range: 3 },
         dialogue: ["I pitched my tent on the best battling spot on the route. Coincidence? Never.", "Tent's yours if you want it. The view's great; the company was better."] },
     ],
@@ -12187,7 +12272,7 @@ const MAPS3 = {
       { x: 11, y: 7, text: 'ROUTE 10 — Rock Tunnel ahead. East: the old Power Plant, humming with something vast.' },
     ],
     npcs: [
-      { x: 4, y: 9, name: 'ENGINEER RUI', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 4, y: 9, name: 'ENGINEER RUI', art: 'youngster', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#1a1a1a',
         trainer: 'r10_hiker', sight: { dir: 'right', range: 3 },
         dialogue: ["I maintain the lines out here — my Voltorb ARE the spare parts!", "Grounded. Thoroughly, professionally grounded."] },
     ],
@@ -12245,7 +12330,7 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 10, name: 'CARETAKER', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 3, y: 10, name: 'CARETAKER', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Plant's been abandoned twenty years, but the turbines still sing. The wild electrics keep them warm.", "Deeper in, the air itself crackles. Something enormous nests by the main coil. Something with wings."] },
     ],
     encounters: {
@@ -12299,7 +12384,7 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 5, name: 'HIKER DOSS', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 4, y: 5, name: 'HIKER DOSS', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The Zubat union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
     ],
     encounters: {
@@ -12353,11 +12438,11 @@ const MAPS3 = {
       { x: 8, y: 4, text: 'POKEMON TOWER — Honor the spirits of departed Pokemon.' },
     ],
     npcs: [
-      { x: 5, y: 9, name: 'VOLUNTEER', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
+      { x: 5, y: 9, name: 'VOLUNTEER', art: 'youngster', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
         dialogue: ["I volunteer at the Pokemon House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
-      { x: 13, y: 9, name: 'CHILD', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
+      { x: 13, y: 9, name: 'CHILD', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
         dialogue: ["My grandma says the tower ghosts are just Pokemon who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
-      { x: 15, y: 11, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 15, y: 11, name: 'MART CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
         dialogue: ["Lavender Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
     ],
@@ -12397,10 +12482,10 @@ const MAPS3 = {
       { x: 12, y: 2, text: 'A gravestone carved with a smiling Cubone. It does not look sad at all.' },
     ],
     npcs: [
-      { x: 8, y: 3, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 8, y: 3, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_tower',
         dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
-      { x: 12, y: 6, name: 'CHANNELER', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 12, y: 6, name: 'CHANNELER', art: 'youngster', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["The spirits drift closer to the stairs each night, child. Something above grieves — loudly.", "Purify your heart before you climb. The tower can smell doubt."] },
     ],
     encounters: {
@@ -12444,8 +12529,15 @@ const MAPS3 = {
       { x: 12, y: 2, text: 'The oldest stone in the tower. Its inscription is in a language of scratches and pawprints.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'MR. FUJI', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 8, y: 2, name: 'MR. FUJI', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Easy, children... the old man means you no harm. I am Fuji — I keep this tower, and it keeps me.", "You calmed a grieving mother and freed an old fool. Lavender will not forget it. Neither will I."] },
+      // Wave 0 (world-art): CUBONE + MAROWAK SPIRIT deliberately carry NO
+      // art field. They are Pokemon, not people, but no overworld species
+      // art exists to route them to: the species family is battle
+      // front/back pairs, cubone/marowak have neither, and the battle
+      // fallback is a 48px forge canvas that cannot stand in a 16px NPC
+      // slot. They fall back to the youngster placeholder until a wave
+      // authors overworld species sprites (see docs/audit-register.md).
       { x: 5, y: 6, name: 'CUBONE', skin: '#e8b888', shirt: '#c8b898', pants: '#8a7a5a', hair: '#3a2a1a',
         dialogue: ["A small Cubone sits by the topmost grave, helmet polished, bone laid across its knees like an offering.", "It is not crying. Whatever grieved on this floor... it grieves quieter now."] },
       { x: 11, y: 6, name: 'MAROWAK SPIRIT', skin: '#e8e0f0', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -12495,7 +12587,7 @@ const MAPS3 = {
       { x: 11, y: 6, text: 'ROUTE 12 — The quiet fishing road. Mind the sleeper on the bridge; everyone does, eventually.' },
     ],
     npcs: [
-      { x: 5, y: 4, name: 'FISHER ED', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#4a3a2a',
+      { x: 5, y: 4, name: 'FISHER ED', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#4a3a2a',
         trainer: 'r12_fisher', sight: { dir: 'right', range: 3 },
         dialogue: ["Shh! You'll scare the — oh, forget it. Battle me, loudmouth!", "The big one got away. The BIG big one. It was THIS — never mind."] },
     ],
@@ -12564,7 +12656,7 @@ const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 15 — Fuchsia lies west. Something in this grass copies what it touches. Almost.' },
     ],
     npcs: [
-      { x: 9, y: 4, name: 'BIKER REX2', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+      { x: 9, y: 4, name: 'BIKER REX2', art: 'youngster', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
         trainer: 'r15_biker', sight: { dir: 'down', range: 3 },
         dialogue: ["My exhaust, my rules, my road! You got a problem, you got a battle!", "Cough... hacked up a loss there. Ride on, kid."] },
     ],
@@ -12621,14 +12713,14 @@ const MAPS3 = {
       { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
     ],
     npcs: [
-      { x: 10, y: 9, name: 'SAFARI WARDEN', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0c0c0', safariGate: true,
+      { x: 10, y: 9, name: 'SAFARI WARDEN', art: 'youngster', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0c0c0', safariGate: true,
         dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Safari Zone mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Pokemon to push boulders like foam. Mmh!"] },
-      { x: 3, y: 9, name: 'ZOO FAN', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a4a1a',
+      { x: 3, y: 9, name: 'ZOO FAN', art: 'youngster', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a4a1a',
         dialogue: ["The zoo's Chansey waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
-      { x: 15, y: 11, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 15, y: 11, name: 'MART CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
         dialogue: ["Fuchsia Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
-      { x: 2, y: 5, name: 'AUNTIE MOSS', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 2, y: 5, name: 'AUNTIE MOSS', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["My house? The warden borrows it half the year and leaves it smelling of bait and boot polish.", "If I'd a spare set of teeth I'd trade him for his, just to end the mumbling. Family rates, of course."] },
     ],
     encounters: null,
@@ -12658,10 +12750,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'KOGA', skin: '#d8a878', shirt: '#3a2a4a', pants: '#1a1a2a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'KOGA', art: 'youngster', skin: '#d8a878', shirt: '#3a2a4a', pants: '#1a1a2a', hair: '#1a1a1a',
         trainer: 'koga',
         dialogue: ["I am Koga of the Fuchsia Gym. A ninja's poison creeps unseen — despair begins before the pain.", "You saw through the fog. Impressive. The Soul Badge, from one shadow to another."] },
-      { x: 4, y: 6, name: 'EDGAR', skin: '#c89878', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#3a2a1a',
+      { x: 4, y: 6, name: 'EDGAR', art: 'youngster', skin: '#c89878', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#3a2a1a',
         trainer: 'gym_fuchsia_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Master Koga's walls are invisible, but his students are not. Regrettably for you.", "Hm. You found the gaps in more than the walls."] },
     ],
@@ -12697,11 +12789,11 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 16, y: 8, name: 'RANGER', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#2a1a0a',
+      { x: 16, y: 8, name: 'RANGER', art: 'youngster', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#2a1a0a',
         dialogue: ["Safari rules: no battling the wildlife — bait, rocks, and quick feet. The rare ones reward patience.", "Chansey and Kangaskhan nest deep in the center grass. Tauros stampede the east field at dawn."] },
-      { x: 10, y: 11, name: 'GATE RANGER', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#1a1a1a', safariExit: true,
+      { x: 10, y: 11, name: 'GATE RANGER', art: 'youngster', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#1a1a1a', safariExit: true,
         dialogue: ["Heading out? The gatehouse is right here — step up when your Safari Balls or your courage run dry.", "Mind the mud on your way. The warden lost something precious in it, and he has NOT stopped mentioning it."] },
-      { x: 14, y: 11, name: 'KEEPER', skin: '#f0c8a0', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#a05a2a',
+      { x: 14, y: 11, name: 'KEEPER', art: 'youngster', skin: '#f0c8a0', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#a05a2a',
         dialogue: ["The rest house is open to every Safari guest. Sit a spell — the grass will still be rustling when you get back.", "A trainer once fished a Dratini out of the west pond with the Super Rod. Once. In thirty years."] },
     ],
     encounters: {
@@ -12784,10 +12876,10 @@ const MAPS3 = {
       { x: 10, y: 6, text: 'CYCLING ROAD GATE — Bicycles only beyond this point. Something enormous naps on the south slope.' },
     ],
     npcs: [
-      { x: 10, y: 5, name: 'MARCUS', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 10, y: 5, name: 'MARCUS', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         trade: { give: 'slowbro', get: 'lickitung', nickname: 'MARC' },
         dialogue: ["My Slowbro naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a Lickitung? I hear they never sleep. Sounds exhausting. Perfect."] },
-      { x: 4, y: 10, name: 'BIKER JOEL', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
+      { x: 4, y: 10, name: 'BIKER JOEL', art: 'youngster', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
         trainer: 'r16_biker', sight: { dir: 'right', range: 3 },
         dialogue: ["Cyclists rule this hill, pedestrian! Defend your walking privileges!", "The hill... respects your legs. UGH. Fine."] },
     ],
@@ -12840,10 +12932,10 @@ const MAPS3 = {
       { x: 5, y: 6, text: 'ROUTE 19 — Fuchsia Beach. The surf runs south all the way to Cinnabar.' },
     ],
     npcs: [
-      { x: 11, y: 9, name: 'SWIMMER ADA', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#e07830',
+      { x: 11, y: 9, name: 'SWIMMER ADA', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#e07830',
         trainer: 'r19_swimmer', sight: { dir: 'right', range: 3 },
         dialogue: ["I swim this coast every morning — race my team to the buoy and back!", "You swim like a Starmie spins. Cinnabar's yours to reach."] },
-      { x: 4, y: 7, name: 'SWIMMER KIT', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 4, y: 7, name: 'SWIMMER KIT', art: 'youngster', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'r19_swimmer2', sight: { dir: 'down', range: 3 },
         dialogue: ["Tentacool stung me twice this week. Twice! My Staryu's honor demands a land battle!", "Honor restored... and only slightly damp."] },
     ],
@@ -12909,7 +13001,7 @@ const MAPS3 = {
       { x: 11, y: 7, text: 'ROUTE 20 — Seafoam Isles west, Cinnabar east. The caves breathe cold air in summer.' },
     ],
     npcs: [
-      { x: 12, y: 8, name: 'SWIMMER BO', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 12, y: 8, name: 'SWIMMER BO', art: 'youngster', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         dialogue: ["Something huge and blue nests in the Seafoam caves. The cold near its chamber isn't weather — it's presence.", "Push the boulders into the sea holes if you go. Slows the current. Old swimmer's trick."] },
     ],
     encounters: {
@@ -12967,7 +13059,7 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 9, name: 'EXPLORER', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 3, y: 9, name: 'EXPLORER', art: 'youngster', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["The boulders here roll into the sea-holes and calm the currents below. Muscle work, trainer work.", "At the heart of the cold, something sleeps with one eye open. Tread like snowfall."] },
     ],
     encounters: {
@@ -13029,17 +13121,17 @@ const MAPS3 = {
       { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
     ],
     npcs: [
-      { x: 15, y: 11, name: 'CAPT SALT', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 15, y: 11, name: 'CAPT SALT', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["Fifty years I've ferried folks around this coast, but ONE island I sail to only when the sea itself asks.", "New Island, they call it. When its story calls you, trainer — you'll know. Everyone does, exactly once."] },
-      { x: 3, y: 6, name: 'TOM', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
+      { x: 3, y: 6, name: 'TOM', art: 'youngster', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         trade: { give: 'venonat', get: 'tangela', nickname: 'TANG' },
         dialogue: ["Lab work breeds Venonat like paperwork. My Tangela, Tang, at least files the vines neatly.", "Swap? Your Venonat for my Tangela. The lab gains a moth; you gain a jungle."] },
-      { x: 15, y: 8, name: 'UMA', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
+      { x: 15, y: 8, name: 'UMA', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
         trade: { give: 'raichu', get: 'electrode', nickname: 'DORRY' },
         dialogue: ["My Electrode, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a Raichu? Something with legs, for once. Please. My shins beg you."] },
-      { x: 13, y: 8, name: 'DR. EMBER', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#e07830', revive: true,
+      { x: 13, y: 8, name: 'DR. EMBER', art: 'youngster', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#e07830', revive: true,
         dialogue: ["The lab behind me coaxes life out of stone — bring a fossil, any fossil, and our machines will do the rest.", "Helix, dome, even amber older than the island. Stone remembers, trainer. We just remind it how."] },
-      { x: 2, y: 11, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 2, y: 11, name: 'MART CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['ultraball', 'hyperpotion', 'maxpotion', 'fullrestore', 'revive', 'firestone', 'waterstone', 'thunderstone', 'leafstone'] },
         dialogue: ["Cinnabar Mart — last proper shop before the League road turns north. Stones, balls, and burn insurance."] },
     ],
@@ -13077,7 +13169,7 @@ const MAPS3 = {
       { x: 8, y: 4, text: "DIARY — 'It dreams of its mother. We hear it through the walls on still nights. God forgive the quiet we keep.'" },
     ],
     npcs: [
-      { x: 3, y: 8, name: 'JOURNAL', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 3, y: 8, name: 'JOURNAL', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["A charred journal page: 'We named the newborn MEWTWO. The mother dreams beneath the island still...'", "Another page: 'If anyone reads this — the Gym key is hidden where we worked. Forgive us.'"] },
     ],
     encounters: {
@@ -13125,10 +13217,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'BLAINE', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
+      { x: 8, y: 2, name: 'BLAINE', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
         dialogue: ["Blaine's the name — quiz-master of Cinnabar and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
-      { x: 4, y: 6, name: 'PYRO', skin: '#c89878', shirt: '#7a3a2a', pants: '#2a2a2a', hair: '#e07830',
+      { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#7a3a2a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
     ],
@@ -13178,9 +13270,9 @@ const MAPS3 = {
       { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 11, y: 7, name: 'HIKER', art: 'youngster', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
-      { x: 5, y: 7, name: 'GYM GUIDE', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 5, y: 7, name: 'GYM GUIDE', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
     ],
     encounters: null,
@@ -13212,10 +13304,10 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 2, name: 'GIOVANNI', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#1a1a1a',
+      { x: 5, y: 2, name: 'GIOVANNI', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#1a1a1a',
         trainer: 'giovanni',
         dialogue: ["So! You have come back to the lion's den at last. I am Giovanni — and the earth itself answers my call.", "Impossible... The earth... rejects me? Take the Earth Badge. The League gate is yours to darken."] },
-      { x: 3, y: 6, name: 'ACE RUE3', skin: '#e8b888', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#7a1a1a',
+      { x: 3, y: 6, name: 'ACE RUE3', art: 'youngster', skin: '#e8b888', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#7a1a1a',
         trainer: 'gym_viridian_1', sight: { dir: 'right', range: 3 },
         dialogue: ["The boss hand-picked every trainer in this gym. I am the handshake before the earthquake.", "Some handshake... the quake's all yours now."] },
     ],
@@ -13249,7 +13341,7 @@ const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 22 — The League road. Beyond the gate, only badge-bearers pass. No exceptions. Ever.' },
     ],
     npcs: [
-      { x: 2, y: 4, name: 'GATE GUARD', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
+      { x: 2, y: 4, name: 'GATE GUARD', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["League checkpoint. Eight badges open the mountain; seven open a long walk home.", "I've turned away champions-in-waiting for thirty years. The mountain doesn't grade on effort, kid."] },
     ],
     encounters: {
@@ -13293,7 +13385,7 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 9, y: 8, name: 'VETERAN', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#c0c0c0',
+      { x: 9, y: 8, name: 'VETERAN', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#c0c0c0',
         dialogue: ["Thirty years ago I pushed these same boulders with younger knees. The mountain remembers every trainer who crosses it.", "Deep in the dark, something burns without wood or coal. The old ones called it a second sun."] },
     ],
     encounters: {
@@ -13348,10 +13440,10 @@ const MAPS3 = {
       { x: 8, y: 4, text: 'POKEMON LEAGUE — Four chambers, then the Champion. No healing between. No mercy asked.' },
     ],
     npcs: [
-      { x: 3, y: 8, name: 'MART CLERK', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
+      { x: 3, y: 8, name: 'MART CLERK', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['ultraball', 'maxpotion', 'fullrestore', 'maxrevive', 'fullheal'] },
         dialogue: ["Last shop on the mountain, trainer. Whatever you're missing, you're missing it all the way down."] },
-      { x: 12, y: 8, name: 'LEAGUE GUIDE', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 12, y: 8, name: 'LEAGUE GUIDE', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["Four elites, one champion, zero exits once the first door shuts. Heal here. Save here. Breathe here.", "Win, and the Hall of Fame takes your team's names forever. Lose, and the mountain walk is... educational."] },
     ],
     encounters: null,
@@ -13389,19 +13481,19 @@ const MAPS3 = {
       { x: 17, y: 1, text: 'FINAL CHAMBER — One chair. Two claimants.' },
     ],
     npcs: [
-      { x: 2, y: 2, name: 'LORELEI', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#7a1a3a',
+      { x: 2, y: 2, name: 'LORELEI', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#7a1a3a',
         trainer: 'lorelei',
         dialogue: ["Welcome to the League. I am Lorelei — my ice Pokemon are the first winter you'll have to outlast.", "You melted more than ice today. Go on — the others are colder company than me."] },
-      { x: 6, y: 2, name: 'BRUNO', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
+      { x: 6, y: 2, name: 'BRUNO', art: 'youngster', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
         trainer: 'bruno',
         dialogue: ["I am Bruno! My Pokemon and I train until the mountain itself gets tired. Show me your discipline!", "Discipline... outmatched. My fists salute you. Forward!"] },
-      { x: 10, y: 2, name: 'AGATHA', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 10, y: 2, name: 'AGATHA', art: 'youngster', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'agatha',
         dialogue: ["So the professor's newest spark climbs to my chamber. I knew that man when his hair was dark and his ideas darker.", "Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."] },
-      { x: 14, y: 2, name: 'LANCE', skin: '#d8a878', shirt: '#7a1a3a', pants: '#1a1a2a', hair: '#e07830',
+      { x: 14, y: 2, name: 'LANCE', art: 'youngster', skin: '#d8a878', shirt: '#7a1a3a', pants: '#1a1a2a', hair: '#e07830',
         trainer: 'lance',
         dialogue: ["I am Lance. Dragons are mythical, yes — and so, it seems, is every trainer who reaches me.", "A legend, answered by a legend. The final chamber waits. Give him a battle worthy of the climb."] },
-      { x: 17, y: 2, name: 'CHAMPION', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 17, y: 2, name: 'CHAMPION', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_champion',
         dialogue: ["Heh. Of course it's you at the top of the mountain, {player}. It was always going to be you.", "...Yeah. Okay. The chair's yours, Champion. Smell ya at the top — because I'll be back for it."] },
     ],
@@ -13490,7 +13582,7 @@ const MAPS3 = {
       { x: 9, y: 7, text: 'Below the scratches, one line survives in a careful hand: THE STRONGEST TRAINER IS INVITED.' },
     ],
     npcs: [
-      { x: 12, y: 8, name: 'WRECKED LOG', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 12, y: 8, name: 'WRECKED LOG', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["A waterlogged logbook in a shattered case. The last entry is dated the night the storm swallowed the harbor lights.", "'The master of this island has made a Pokemon stronger than any that nature —' The rest is salt and ash."] },
     ],
     encounters: null,
@@ -13531,14 +13623,14 @@ const MAPS3 = {
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'GARY', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 10, y: 4, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
       // (Pallet's lab has no interior map; the terminal stands by its door,
       // like the one in every Pokemon Center).
-      { x: 5, y: 4, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+      { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
-      { x: 10, y: 8, name: 'FERRYMAN', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar',
+      { x: 10, y: 8, name: 'FERRYMAN', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar',
         dialogue: ["My little ferry runs Pallet to Cinnabar for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
     encounters: null,
@@ -13569,17 +13661,17 @@ const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 2, name: 'NURSE', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
+      { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Pokemon Center! Let me heal your team..."], heal: true,
         afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach — see maps.mjs center (same placement;
       // the scene fields him only while the Candy Coach rule is on).
-      { x: 2, y: 2, name: 'SPARRING COACH', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 2, y: 2, name: 'SPARRING COACH', art: 'coach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
         sparCoach: true, sparSpecies: 'machop',
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
-      { x: 7, y: 2, name: 'PC TERMINAL', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
+      { x: 7, y: 2, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Someone's PC — Pokemon Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
-      { x: 2, y: 3, name: 'WAITING TRAINER', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 2, y: 3, name: 'WAITING TRAINER', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
         dialogue: ["Every Center in Kanto runs the same boxes off Bill's system. Deposit a friend here, withdraw them a mountain away.", "Technology's incredible — and the nurse still heals for free. Some things never change."] },
     ],
     encounters: null,
@@ -13911,9 +14003,9 @@ const MAPS4 = {
       { x: 8, y: 1, text: 'A small doll sits on a shelf, watching the door. It has always been watching the door.' },
     ],
     npcs: [
-      { x: 7, y: 2, name: 'SABRINA', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
+      { x: 7, y: 2, name: 'SABRINA', art: 'youngster', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
         dialogue: ['I foresaw your arrival three turns of the moon ago. The future is a door — and I am holding it shut.', 'The door opens a crack. Take the Marsh Badge — and go on surprising me.'] },
-      { x: 4, y: 5, name: 'MEDIUM LIA', skin: '#e8b888', shirt: '#4a3a5a', pants: '#2a2a3a', hair: '#8a8a9a', trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
+      { x: 4, y: 5, name: 'MEDIUM LIA', art: 'youngster', skin: '#e8b888', shirt: '#4a3a5a', pants: '#2a2a3a', hair: '#8a8a9a', trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
         dialogue: ['My senses tingle — a challenger with a loud heart approaches!', 'So loud... and so kind. Odd.'] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,
@@ -13941,9 +14033,9 @@ const MAPS4 = {
       { x: 8, y: 1, text: 'QUIZ: What beats Fire every time? Answer at the door, with your whole team.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'BLAINE', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
+      { x: 8, y: 2, name: 'BLAINE', art: 'youngster', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
         dialogue: ['Wahaha! A challenger climbs MY mountain of fire? Riddle me this first: what burns hotter — magma, or regret? Battle me and find out!', 'Scalded but smiling — that is the correct answer. The Volcano Badge, hot off the press!'] },
-      { x: 11, y: 5, name: 'BURGLAR OTIS', skin: '#c89878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
+      { x: 11, y: 5, name: 'BURGLAR OTIS', art: 'youngster', skin: '#c89878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
         dialogue: ['I only came in to warm my hands, honest! ...Fine. Battle first, alibi later.', 'Hot hands, cold heart. Story of my life.'] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,
@@ -13975,10 +14067,10 @@ const MAPS4 = {
       { x: 10, y: 2, text: 'The big chair has been spun around to face the window for some time.' },
     ],
     npcs: [
-      { x: 8, y: 1, name: 'THE PRESIDENT', skin: '#e8c098', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#c8c8d0',
+      { x: 8, y: 1, name: 'THE PRESIDENT', art: 'youngster', skin: '#e8c098', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#c8c8d0',
         dialogue: ['You climbed eleven floors of trouble to reach an old man at a desk. The Scope, the company, my gratitude — and this prototype ball. Take them all.', 'Whatever is on that island, child — it is older than this company and sadder than its board. Go gently.'],
         give: { flag: 'silph_president_gift', items: { masterball: 1 }, text: 'the Master Ball prototype' } },
-      { x: 15, y: 3, name: 'AIDE NOVA', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#5a3a6a',
+      { x: 15, y: 3, name: 'AIDE NOVA', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#5a3a6a',
         dialogue: ['I hid the transport project when they stormed in. Lapras — gentle, strong, and it can carry you across any water. Take it. Please. Get us help, or be the help.', 'Lapras sings when the sea is calm. You will be good for each other.'],
         giveMon: { species: 'lapras', level: 15 } },
     ],
@@ -13999,7 +14091,7 @@ const MAPS4 = {
 MAPS4.vermilion = {
   ...MAPS2.vermilion,  npcs: [
     ...MAPS2.vermilion.npcs,
-    { x: 10, y: 10, name: 'SAILOR BRINE', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#4a3a2a', ferry: 'stanne',
+    { x: 10, y: 10, name: 'SAILOR BRINE', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#4a3a2a', ferry: 'stanne',
       dialogue: ['The S.S. Anne is in port, shining like a coin in a fountain. Ticket holders, step lively!', 'Fine sailing, trainer. Mind the gulls — they have seen things.'] },
   ],
   events: [
@@ -15635,25 +15727,25 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 const TALE_NPCS = [
-  { map: 'pallet', x: 3, y: 4, name: 'MOM', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
+  { map: 'pallet', x: 3, y: 4, name: 'MOM', art: 'youngster', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
     dialogue: ['Mind the grass on Route 1, love. And eat something that is not a Potion.'] },
-  { map: 'viridian', x: 2, y: 7, name: 'SHOPKEEPER', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
+  { map: 'viridian', x: 2, y: 7, name: 'SHOPKEEPER', art: 'youngster', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
     dialogue: ['Viridian sundries! Maps, string, and strong opinions about both.'] },
-  { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
+  { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', art: 'youngster', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
-  { map: 'pewter', x: 5, y: 4, name: 'BROCK', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
+  { map: 'pewter', x: 5, y: 4, name: 'BROCK', art: 'brock', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
     dialogue: ['Off duty, I read to the museum fossils. They never heckle.'] },
-  { map: 'cerulean', x: 16, y: 1, name: 'PIP', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
+  { map: 'cerulean', x: 16, y: 1, name: 'PIP', art: 'youngster', ...APPEAR.kid, tale: 'tale_cerulean', role: 'culprit',
     dialogue: ['The cape is mine. The view is mine. The bell is — also around here somewhere.'] },
-  { map: 'vermilion', x: 16, y: 11, name: 'HARBORMASTER', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
+  { map: 'vermilion', x: 16, y: 11, name: 'HARBORMASTER', art: 'youngster', ...APPEAR.harbor, tale: 'tale_vermilion', role: 'stage',
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
-  { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
+  { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'youngster', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
-  { map: 'celadon', x: 16, y: 9, name: 'GARDENER', ...APPEAR.gardener, tale: 'tale_celadon', role: 'giver',
+  { map: 'celadon', x: 16, y: 9, name: 'GARDENER', art: 'youngster', ...APPEAR.gardener, tale: 'tale_celadon', role: 'giver',
     dialogue: ["Erika's roof garden. Three waterings a season, or the vines file a complaint."] },
-  { map: 'fuchsia', x: 5, y: 11, name: 'JANINE', ...APPEAR.janine, tale: 'tale_fuchsia', role: 'flavor',
+  { map: 'fuchsia', x: 5, y: 11, name: 'JANINE', art: 'youngster', ...APPEAR.janine, tale: 'tale_fuchsia', role: 'flavor',
     dialogue: ["Father says a ninja's patience is a pond: still on top, deep below. I am working on the still part."] },
-  { map: 'cinnabar', x: 10, y: 9, name: 'LAB TECH', ...APPEAR.tech, tale: 'tale_cinnabar', role: 'giver',
+  { map: 'cinnabar', x: 10, y: 9, name: 'LAB TECH', art: 'youngster', ...APPEAR.tech, tale: 'tale_cinnabar', role: 'giver',
     dialogue: ['The mansion library burned, but paper is stubborn. So are we.'] },
 ];
 
@@ -16976,9 +17068,9 @@ function recordBattleBond(state, trainerId, won, fled) {
 // injects these actors into the scene's map copy under parleyVisible,
 // the tale-NPC pattern (shared MAPS data is never mutated).
 const PARLEY_NPCS = [
-  { map: 'celadon', x: 8, y: 8, name: 'RUE', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a', parley: true,
+  { map: 'celadon', x: 8, y: 8, name: 'RUE', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a', parley: true,
     dialogue: ['You. YOU. Of all the street corners in all of Kanto—', 'Do not look at me like that. The moustache was ONE time.'] },
-  { map: 'celadon', x: 9, y: 8, name: 'COLE', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a', parley: true,
+  { map: 'celadon', x: 9, y: 8, name: 'COLE', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a', parley: true,
     dialogue: ['Oh no. Oh no no no. Rue. Rue, it is the kid. It is THE kid.'] },
 ];
 function parleyVisible(state) {
@@ -21811,18 +21903,30 @@ class BattleScene {
       if (this.impactFx.side === 'foe' && foeArt.frontWhite) foeSpr = foeArt.frontWhite;
       if (this.impactFx.side === 'ally' && allyArt.backWhite) allySpr = allyArt.backWhite;
     }
-    const drawBattler = (spr, pos, side) => {
+    // Wave 0 battler size standard: ONE draw size for both sides,
+    // derived from each side's art entry (`size` = BATTLER_DRAW_SIZE,
+    // 64 logical px — legacy 32px art upscales x2, 64px art draws 1:1).
+    // pos keeps its legacy meaning (top-left of the old 48px frame):
+    // the battler is anchored on the frame's center-x and bottom edge,
+    // so the platforms below and the plates do not move — only the
+    // sprite's extent grows, identically for foe and ally (parity).
+    const drawBattler = (spr, pos, side, art) => {
       if (this.faintFx && this.faintFx.side === side) return; // faint anim draws it
-      // README attack transform: 1.2x scale for 3 frames, then back.
-      if (this.atkFx && this.atkFx.side === side) r.blitS(spr, pos.x - 5, pos.y - 5, 58, 58);
-      else r.blitS(spr, pos.x, pos.y, 48, 48); // 32px ART -> 48px draw size
+      const size = (art && art.size) || BATTLER_DRAW_SIZE;
+      const cx = pos.x + 24, bottom = pos.y + 48;
+      // README attack transform: 1.2x scale for 3 frames, then back
+      // (size derived from the same standard, centered on the battler).
+      if (this.atkFx && this.atkFx.side === side) {
+        const atk = Math.round(size * 1.2);
+        r.blitS(spr, cx - atk / 2, bottom - size / 2 - atk / 2, atk, atk);
+      } else r.blitS(spr, cx - size / 2, bottom - size, size, size);
     };
     // Platinum battle platforms: stepped discs under each battler (the far
     // foe disc is smaller — perspective), drawn before the sprites.
     this.ptDisc(r, foePos.x + 24, foePos.y + 44, 34, 8);
     this.ptDisc(r, allyPos.x + 24, allyPos.y + 44, 38, 9);
-    drawBattler(foeSpr, foePos, 'foe');
-    drawBattler(allySpr, allyPos, 'ally');
+    drawBattler(foeSpr, foePos, 'foe', foeArt);
+    drawBattler(allySpr, allyPos, 'ally', allyArt);
     // README faint transform: sink 8px + fade to 0 alpha over 20 frames.
     if (this.faintFx) {
       const k = Math.min(1, this.faintFx.t / 660);
@@ -21830,7 +21934,9 @@ class BattleScene {
       c.save();
       c.globalAlpha = 1 - k;
       const pos = this.faintFx.side === 'foe' ? foePos : allyPos;
-      r.blitS(this.faintFx.spr, pos.x, pos.y + 8 * k, 48, 48);
+      const art = this.faintFx.side === 'foe' ? foeArt : allyArt;
+      const size = (art && art.size) || BATTLER_DRAW_SIZE;
+      r.blitS(this.faintFx.spr, pos.x + 24 - size / 2, pos.y + 48 - size + 8 * k, size, size);
       c.restore();
     }
     // Catch ball arc
@@ -22745,11 +22851,16 @@ Object.assign(BattleScene.prototype, {
     const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
     const allyArt = g.spriteCache[this.ally.speciesId] || g.spriteCache.partner;
     const bobA = Math.sin(this.t * 0.006) * 1.5;
+    // Wave 0 battler size standard: same derived draw size both sides
+    // (art entry `size` = BATTLER_DRAW_SIZE, 64 logical px), centered on
+    // the battler's arena position exactly as the old 48px draw was.
+    const foeSize = (foeArt && foeArt.size) || BATTLER_DRAW_SIZE;
+    const allySize = (allyArt && allyArt.size) || BATTLER_DRAW_SIZE;
     if (!(rt.catchSeq || rt.ballFlight)) {
-      r.blitS(foeArt.front, rt.fx * sx - 24, rt.fy * sy - 24 + bobA, 48, 48);
+      r.blitS(foeArt.front, rt.fx * sx - foeSize / 2, rt.fy * sy - foeSize / 2 + bobA, foeSize, foeSize);
     }
     const allySpr = this.ally.status === 'sleep' ? allyArt.back : allyArt.back;
-    r.blitS(allySpr, rt.ax * sx - 24, rt.ay * sy - 24 - bobA, 48, 48);
+    r.blitS(allySpr, rt.ax * sx - allySize / 2, rt.ay * sy - allySize / 2 - bobA, allySize, allySize);
     // Projectiles.
     for (const p of rt.projs) {
       g.ctx2dcircle(p.x * sx, p.y * sy, 4, p.side === 'ally' ? '#ffe27a' : '#ff9a7a');
@@ -23399,11 +23510,16 @@ class OverworldScene {
     // Systems world dressing: item balls, boulders, cut stumps, cave darkness.
     if (this.sysRenderWorld) this.sysRenderWorld(r);
     // NPCs (2-frame idle) — challengers render at their walk-up position.
+    // Wave 0 draw standard: bottom-anchored to the 1-tile footprint via
+    // blitCharacter (taller 16x32 art overhangs upward). The legacy feet
+    // line is preserved exactly: a 16x16 sprite's bottom sat at
+    // tileY - 4 + 16 (the old hardcoded -4 offset), so existing art
+    // renders pixel-identical.
     for (const n of this.map.npcs) {
-      let nx = n.x * T, ny = n.y * T - 4;
+      let nx = n.x * T, footY = n.y * T - 4 + T;
       const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
-      if (cq) { nx = cq.cx * T; ny = cq.cy * T - 4; }
-      r.blit(g.npcFrame(n), nx, ny);
+      if (cq) { nx = cq.cx * T; footY = cq.cy * T - 4 + T; }
+      r.blitCharacter(g.npcFrame(n), nx, footY);
     }
     // Yellow-style spot "!" over each challenger during the alert beat.
     if (this.challenge && this.challenge.phase === 'spot') {
@@ -23412,9 +23528,13 @@ class OverworldScene {
       }
     }
     // Partner (hop) + player (walk cycle / idle blink)
+    // Wave 0 draw standard: bottom-anchored (blitCharacter) — for the
+    // current 16x16 art the bottoms are py + T (partner: minus the hop
+    // lift), so these draws are pixel-identical to the old unscaled
+    // blits; 16x32 art will overhang upward from the same feet line.
     const hop = Math.abs(Math.sin(this.partner.hop)) * 3;
-    r.blit(g.partnerFrame(), Math.round(this.partner.px), Math.round(this.partner.py) - Math.round(hop));
-    r.blit(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py));
+    r.blitCharacter(g.partnerFrame(), Math.round(this.partner.px), Math.round(this.partner.py) + T - Math.round(hop));
+    r.blitCharacter(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py) + T);
     // "!" exclamation
     if (this.enc && this.enc.phase === 'exclaim') {
       r.text('!', this.player.px + 4, this.player.py - 14, { size: 14, bold: true, color: '#e84040' });
@@ -25344,8 +25464,14 @@ class Game {
   }
 
   npcFrame(npc) {
-    if (!this.npcCache[npc.name]) this.npcCache[npc.name] = npcFrames(doc, npc);
-    const f = this.npcCache[npc.name];
+    // Wave 0: the cache key carries the art kind + the instance palette,
+    // not the name alone — two NPCs sharing a name (or one name in two
+    // towns) can carry different palettes/art and must not share frames
+    // now that the palette-swap rasterizer honors the instance data.
+    const cacheKey = [npc.art || '', npc.pc ? 'pc' : '', npc.name || '',
+      npc.skin || '', npc.shirt || '', npc.pants || '', npc.hair || ''].join('|');
+    if (!this.npcCache[cacheKey]) this.npcCache[cacheKey] = npcFrames(doc, npc);
+    const f = this.npcCache[cacheKey];
     return f[Math.floor(this._animT / 600) % 2]; // idle-1 / idle-2
   }
 
@@ -27064,6 +27190,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:a28f07f34b7e8b7140997afa15d0aaaa1d1d9e279d947fa8ddd7f62be8d92e2e -->
+<!-- contentHash:cb44414afb5d685d5afe2841792cf495fdb2de3471f1f090052cde1da3ceaabf -->
 </body>
 </html>

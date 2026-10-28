@@ -2,7 +2,7 @@
   "atlas": "atlas-npcs.png",
   "tile": 16,
   "size": [
-    252,
+    288,
     18
   ],
   "sprites": {
@@ -114,8 +114,35 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-professor-idle-1": {
+    "npc-pc-idle-1": {
       "x": 145,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-pc-idle-2": {
+      "x": 163,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-idle-1": {
+      "x": 181,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -128,7 +155,7 @@
       "mirror_of": null
     },
     "npc-professor-idle-2": {
-      "x": 163,
+      "x": 199,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -142,7 +169,7 @@
       "mirror_of": null
     },
     "npc-rival-idle-1": {
-      "x": 181,
+      "x": 217,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -155,7 +182,7 @@
       "mirror_of": null
     },
     "npc-rival-idle-2": {
-      "x": 199,
+      "x": 235,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -169,7 +196,7 @@
       "mirror_of": null
     },
     "npc-youngster-idle-1": {
-      "x": 217,
+      "x": 253,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -182,7 +209,7 @@
       "mirror_of": null
     },
     "npc-youngster-idle-2": {
-      "x": 235,
+      "x": 271,
       "y": 1,
       "w": 16,
       "h": 16,

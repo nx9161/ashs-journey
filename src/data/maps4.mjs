@@ -31,9 +31,9 @@ export const MAPS4 = {
       { x: 8, y: 1, text: 'A small doll sits on a shelf, watching the door. It has always been watching the door.' },
     ],
     npcs: [
-      { x: 7, y: 2, name: 'SABRINA', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
+      { x: 7, y: 2, name: 'SABRINA', art: 'youngster', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
         dialogue: ['I foresaw your arrival three turns of the moon ago. The future is a door — and I am holding it shut.', 'The door opens a crack. Take the Marsh Badge — and go on surprising me.'] },
-      { x: 4, y: 5, name: 'MEDIUM LIA', skin: '#e8b888', shirt: '#4a3a5a', pants: '#2a2a3a', hair: '#8a8a9a', trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
+      { x: 4, y: 5, name: 'MEDIUM LIA', art: 'youngster', skin: '#e8b888', shirt: '#4a3a5a', pants: '#2a2a3a', hair: '#8a8a9a', trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
         dialogue: ['My senses tingle — a challenger with a loud heart approaches!', 'So loud... and so kind. Odd.'] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,
@@ -61,9 +61,9 @@ export const MAPS4 = {
       { x: 8, y: 1, text: 'QUIZ: What beats Fire every time? Answer at the door, with your whole team.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'BLAINE', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
+      { x: 8, y: 2, name: 'BLAINE', art: 'youngster', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
         dialogue: ['Wahaha! A challenger climbs MY mountain of fire? Riddle me this first: what burns hotter — magma, or regret? Battle me and find out!', 'Scalded but smiling — that is the correct answer. The Volcano Badge, hot off the press!'] },
-      { x: 11, y: 5, name: 'BURGLAR OTIS', skin: '#c89878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
+      { x: 11, y: 5, name: 'BURGLAR OTIS', art: 'youngster', skin: '#c89878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
         dialogue: ['I only came in to warm my hands, honest! ...Fine. Battle first, alibi later.', 'Hot hands, cold heart. Story of my life.'] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,
@@ -95,10 +95,10 @@ export const MAPS4 = {
       { x: 10, y: 2, text: 'The big chair has been spun around to face the window for some time.' },
     ],
     npcs: [
-      { x: 8, y: 1, name: 'THE PRESIDENT', skin: '#e8c098', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#c8c8d0',
+      { x: 8, y: 1, name: 'THE PRESIDENT', art: 'youngster', skin: '#e8c098', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#c8c8d0',
         dialogue: ['You climbed eleven floors of trouble to reach an old man at a desk. The Scope, the company, my gratitude — and this prototype ball. Take them all.', 'Whatever is on that island, child — it is older than this company and sadder than its board. Go gently.'],
         give: { flag: 'silph_president_gift', items: { masterball: 1 }, text: 'the Master Ball prototype' } },
-      { x: 15, y: 3, name: 'AIDE NOVA', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#5a3a6a',
+      { x: 15, y: 3, name: 'AIDE NOVA', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#5a3a6a',
         dialogue: ['I hid the transport project when they stormed in. Lapras — gentle, strong, and it can carry you across any water. Take it. Please. Get us help, or be the help.', 'Lapras sings when the sea is calm. You will be good for each other.'],
         giveMon: { species: 'lapras', level: 15 } },
     ],
@@ -119,7 +119,7 @@ export const MAPS4 = {
 MAPS4.vermilion = {
   ...MAPS2.vermilion,  npcs: [
     ...MAPS2.vermilion.npcs,
-    { x: 10, y: 10, name: 'SAILOR BRINE', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#4a3a2a', ferry: 'stanne',
+    { x: 10, y: 10, name: 'SAILOR BRINE', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#4a3a2a', ferry: 'stanne',
       dialogue: ['The S.S. Anne is in port, shining like a coin in a fountain. Ticket holders, step lively!', 'Fine sailing, trainer. Mind the gulls — they have seen things.'] },
   ],
   events: [

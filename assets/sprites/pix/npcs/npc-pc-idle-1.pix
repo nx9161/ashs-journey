@@ -1,0 +1,29 @@
+# PC Terminal (original design). Overworld idle frame 1.
+# Source of truth for the formerly hand-inserted art-data entry (Wave 0):
+# rows + palette extracted verbatim from the shipped art-data.mjs so a
+# build-art regeneration reproduces the sprite pixel-for-pixel.
+PIX npc-pc-idle-1 16 16
+................
+..OOOOOOOOOOOO..
+..OMMMMMMMMMMO..
+..OMSSSSSSSSMO..
+..OMSBBSSBBSMO..
+..OMSBBSSBBSMO..
+..OMSSSSSSSSMO..
+..OMMMMMMMMLMO..
+...OKKKKKKKKO...
+..ODDDDDDDDDDO..
+..ODDDDDDDDDDO..
+..ODDODDDDODDO..
+..ODDODDDDODDO..
+...OOOOOOOOOO...
+................
+................
+PAL
+O #232838 outline
+M #8d9bbf monitor-frame
+S #14424a screen
+B #7fe8d8 screen-box
+K #46536e cabinet-dark
+D #5a6a8f cabinet
+L #58c94f status-led

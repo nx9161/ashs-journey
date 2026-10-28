@@ -5,6 +5,13 @@
 
 export const TILE = 16;
 
+// Wave 0 size standard (world-art census §3): battlers are authored at
+// 64x64 and drawn at 64 logical px on BOTH sides (foe/ally parity);
+// legacy 32x32 art is upscaled x2 (nearest-neighbor) to the same 64.
+// One constant, derived everywhere from the art entry's `size` — no
+// per-side draw-size literals in the battle engines.
+export const BATTLER_DRAW_SIZE = 64;
+
 // UI v2 (Platinum standard): the UI typefaces are the self-hosted OFL
 // pixel faces — Galmuri (display) and the body face. Canvas text uses
 // the same stacks as the shell CSS tokens.
@@ -125,6 +132,20 @@ export class Renderer {
     if (dx + w < this.camX - TILE || dy + h < this.camY - TILE ||
         dx > this.camX + this.viewW + TILE || dy > this.camY + this.viewH + TILE) return;
     c.drawImage(sprite, Math.round(dx), Math.round(dy));
+  }
+
+  // Bottom-anchored character blit (Wave 0 size standard): characters
+  // are authored 16 wide (16x32 at the new standard, 16x16 legacy) on a
+  // 1-tile footprint. The sprite is scaled to footprint width (TILE) with
+  // its authored aspect ratio, and drawn so its BOTTOM sits exactly at
+  // bottomY — taller art overhangs upward, never into the tile below.
+  // For a legacy 16x16 sprite this draws at (dx, bottomY - 16) at native
+  // size: pixel-identical to the old unscaled blit at that position.
+  blitCharacter(sprite, dx, bottomY) {
+    if (!sprite || !sprite.width || !sprite.height) return;
+    const w = TILE;
+    const h = Math.round(TILE * sprite.height / sprite.width);
+    this.blitS(sprite, dx, bottomY - h, w, h);
   }
 
   // Scaled blit for authored battlers (32px art -> 48px draw size).
