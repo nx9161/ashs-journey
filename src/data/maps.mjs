@@ -132,7 +132,7 @@ export const MAPS = {
       { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', art: 'youngster', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
     ],
     encounters: null,
@@ -208,11 +208,11 @@ export const MAPS = {
         trainer: 'r2_camper',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["I picnic here every day — battle me before you sit down!", "Not even a snack break slows you down!"] },
-      { x: 7, y: 8, name: 'NIA', art: 'youngster', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
+      { x: 7, y: 8, name: 'NIA', art: 'lass', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'r2_jr',
         sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Route 2 is MY training ground! Prove you belong here!", "You're stronger than the rumors said..."] },
-      { x: 5, y: 10, name: 'ROB', art: 'youngster', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 5, y: 10, name: 'ROB', art: 'camper', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r2_hiker',
         sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },

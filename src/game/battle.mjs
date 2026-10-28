@@ -27,6 +27,7 @@ import {
   groundClassicAccuracy, groundCritBonus, groundMireSpeedMult,
 } from '../data/grounds.mjs';
 import { SFX } from '../engine/audio.mjs';
+import { trainerBattleArt, playerBattleBackArt } from '../engine/art.mjs';
 import { SLICE_CAPSTONE } from '../data/dialogue.mjs';
 import { typePill } from './ui.mjs';
 
@@ -95,6 +96,19 @@ export class BattleScene {
     const g = this.game;
     g.ui.setBattleMode(true);
     this.state = 'intro';
+    // Wave 3b: intro presentation art, resolved once here (never in the
+    // render loop). The foe trainer's battle sprite + Ash's battle back
+    // stand on the platforms while state==='intro'; either may be null
+    // (trainer without a battle sprite / headless) and the intro then
+    // keeps that side's battler, exactly as before. Presentation only.
+    this._introFoeArt = null;
+    this._introAllyArt = null;
+    if (typeof document !== 'undefined') {
+      try {
+        this._introFoeArt = trainerBattleArt(document, this.trainer);
+        this._introAllyArt = playerBattleBackArt(document);
+      } catch (e) { this._introFoeArt = null; this._introAllyArt = null; }
+    }
     this.t = 0;
     this.msg = '';
     g.audio.playMusic(this.kind === 'trainer' ? 'battle-trainer-theme' : 'battle-wild-theme', { area: false });
@@ -1880,8 +1894,22 @@ export class BattleScene {
     // foe disc is smaller — perspective), drawn before the sprites.
     this.ptDisc(r, foePos.x + 24, foePos.y + 44, 34, 8);
     this.ptDisc(r, allyPos.x + 24, allyPos.y + 44, 38, 9);
-    drawBattler(foeSpr, foePos, 'foe', foeArt);
-    drawBattler(allySpr, allyPos, 'ally', allyArt);
+    // Wave 3b: during the intro chain (state 'intro' — challenge and
+    // send-out messages), the authored trainer figures stand on the
+    // platforms instead of the battlers: Ash's battle back on the ally
+    // platform, the foe trainer's battle sprite on the foe platform
+    // when one exists. A side without intro art keeps its battler
+    // (graceful degrade). The battlers take over untouched the moment
+    // the intro hands off — no state, timing, or message changes.
+    const introFigure = (cv, pos) => {
+      if (!cv || !cv.width || !cv.height) return false;
+      const hh = 64, ww = Math.round(cv.width * (hh / cv.height));
+      r.blitS(cv, pos.x + 24 - ww / 2, pos.y + 48 - hh, ww, hh);
+      return true;
+    };
+    const inIntro = this.state === 'intro';
+    if (!(inIntro && introFigure(this._introFoeArt, foePos))) drawBattler(foeSpr, foePos, 'foe', foeArt);
+    if (!(inIntro && introFigure(this._introAllyArt, allyPos))) drawBattler(allySpr, allyPos, 'ally', allyArt);
     // README faint transform: sink 8px + fade to 0 alpha over 20 frames.
     if (this.faintFx) {
       const k = Math.min(1, this.faintFx.t / 660);

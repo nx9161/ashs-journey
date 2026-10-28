@@ -1101,3 +1101,165 @@ separately so the shadow stays planted while it hops.
   after the battery's full builds; `dist/content-hash.txt`
   personal line restored to the HEAD value), per precedent.
 - Verify-live expectation impact: none (nothing deployed).
+
+## World Art Wave 3b — Crowds + Presentation Wiring (2026-10-28)
+
+Second half of census §4 Wave 3 (source of truth:
+`ashs-journey-qa/world-art-census.md` §3 NPC row + §4 Wave 3).
+Presentation only — no game state, balance, dialogue text, pacing,
+or battle timing changed; nothing deployed. All art is original
+`.pix` work drawn to §3, nothing traced or copied.
+
+### Register corrections folded in from Wave 3a QA
+
+- **(a) Pikachu yellow steps:** the 3a claim of "four yellow steps"
+  overstates the follower frames. Measured on the shipped sources:
+  hop-1/2 and idle-1/2 paint with **3 yellow steps** (y #ffdf6b /
+  Y #f5c93c / D #dda01e); the 4th palette entry **d #b57a14 is
+  declared but unused by those frames** (0 pixels). The palette
+  entry stays (the battle front/back pair is a different family and
+  Wave 6a owns the partner's battle redraw).
+- **(b) Instance count:** the 3a section's "212 NPC instances" is a
+  **pre-merge source count** (the four map modules + tale/parley
+  lists before `Object.assign` shadowing). The **runtime-merged
+  population is 139** (127 map instances after merge + 12 tale
+  injections). All Wave 3b audits below use the merged figure.
+
+### 1. Generic population — 27 generic kinds at 16×32
+
+- **Redrawn in place at 16×32** (were 16×16): youngster, lass,
+  rival, coach, aide, professor — the Wave 3a craft standard
+  (≥3 shades per garment via authored light/dark secondaries, 2+
+  skin tones across the set, hair highlight + shadow). Nurse was
+  already redrawn at 16×32 in 3a and is untouched.
+- **20 new kinds × 2 idle frames:** hiker, swimmer, sailor,
+  scientist, fisher, elder, kid, camper, bugcatcher, biker,
+  grunt, clerk, worker, officer, lady, gent, monk, ranger,
+  acetrainer, twin — the full generic roster is **27 kinds**
+  (7 pre-existing + 20 new), all × 2 idle frames at 16×32. Every kind is authored on the uniform swap
+  scheme — S (skin) / H (hair) / J (shirt) / P (pants) as distinct
+  palette keys, registered in `NPC_SWAP_KEYS` (`art.mjs`) — so the
+  Wave 0 rasterizer renders the ~98 authored instance palettes
+  across the crowd. (Lass/aide/professor moved off their legacy
+  one-off swap keys — D/K, V, G/W/K — onto the same scheme.)
+- **Repoints: 146 source instances** across maps.mjs / maps2 /
+  maps3 / maps4 / quests.mjs, name-keyed so every duplicated map
+  copy agrees: sailors crew the S.S. Anne (MARA, JULES, CAPTAIN)
+  and the harbors (CAPT SALT, CAPT MARA, FERRYMAN, HARBORMASTER,
+  SAILOR BRINE/GHOST); swimmers on Routes 19/20 + Cerulean gym's
+  DIANA; hikers on Routes 2/3/9, Mt. Moon, Rock Tunnel, Seafoam;
+  fishers at Vermilion harbor + Route 12; scientists in Mt. Moon,
+  Silph, both labs, New Island; grunts for every Team Rocket
+  body; clerks at every Mart/Game Corner counter; officers at
+  gates; rangers/warden/keeper in the Safari; monks in the dojo,
+  Tower, Saffron gym; elders for Fuji, Gramps, the Old Man, the
+  Curator, veterans; WREN (Pokemon House nurse) now renders the
+  nurse kind. 15 instances stay youngster (young male trainers,
+  gamers, MARCO/RICK/CAL/ORIN/FAN/MARCUS, PYRO, the waiting
+  trainer — and the two object-NPCs JOURNAL / WRECKED LOG, which
+  are things, not people; see flags).
+- **Runtime audit (merged population, 139):** every instance
+  resolves to authored idle frames; **no map contains two
+  identical figures** (same kind + same rendered palette
+  signature); **25 distinct generic kinds actually appear** in
+  the merged world (professor appears only via the legacy name
+  fallback; rival likewise). Live self-check captures
+  (headless Chromium, local build): Viridian street, S.S. Anne,
+  Route 2 — crowds read as individuals; the Anne's crew wears
+  sailor whites with per-instance skin/hair/palette variation.
+- **CUBONE / MAROWAK SPIRIT:** unchanged — still no overworld
+  species art exists; they remain on the generic path per the
+  census's documented why-not (species art is Wave 6 scope; a
+  human sprite for them would be wrong, and no overworld species
+  sprite was invented here).
+
+### 2. Portraits into dialogue
+
+The 15 authored 24×24 portraits existed with exactly one ever
+shown (Hawthorn, intro). Wiring (presentation only):
+
+- `src/engine/art.mjs`: `SPEAKER_PORTRAITS` +
+  `speakerPortraitId()` / `speakerPortraitCanvas()` — speaker
+  names normalized (uppercase, parentheticals dropped, punctuation
+  folded), so 'GARY', 'CHAMPION', 'PROF. HAWTHORN', 'LT. SURGE',
+  'GIOVANNI (phone)', 'THE BOSS (speaker)' (Giovanni) all resolve.
+  **Map size: 20 speaker keys → all 15 portrait subjects
+  reachable.** Unmapped speakers resolve null.
+- `src/game/ui.mjs`: `buildDialogue()` creates a 48×48 face
+  canvas (inline styles — shell CSS untouched, keeping the
+  personal/public index parity gate) floated at the panel's left;
+  `say()` calls `_showDlgFace(speaker)`, which paints the mapped
+  portrait (2×, smoothing off) or hides the canvas. Speakers
+  without portraits show **no portrait — no placeholder**.
+  `closeDialogue()` hides it. Dialogue lines, typewriter pacing,
+  callback flow, and the headless path are byte-for-byte
+  behavior-identical (the face only paints when `!headless`).
+- Live proof: talking to Gary in Pallet shows portrait-gary in
+  the panel (canvas display:block, 1,072 painted pixels measured)
+  with the dialogue text unchanged.
+
+### 3. Trainer sprites into battle intros
+
+The three authored battle-family sprites (ash-battle-back 32×32,
+gary-battle 32×32, brock-battle 32×48) were drawn 0 times. Wiring
+(presentation only):
+
+- `src/engine/art.mjs`: `trainerBattleArt(doc, trainer)` (Brock
+  by name/id, Gary by name or `gary*` id; else null) +
+  `playerBattleBackArt(doc)`.
+- `src/game/battle.mjs`: `enter()` resolves both canvases once
+  (guarded, headless-safe); `render()` — while `state === 'intro'`
+  (the challenge/send-out message chain) — stands Ash's battle
+  back on the ally platform and the foe trainer's battle sprite
+  on the foe platform, anchored center-x/bottom exactly like the
+  battlers, drawn 64px tall with aspect preserved. Battlers take
+  over untouched when the intro hands off. **Zero state, timing,
+  or message changes.**
+- **Engines:** the intro state and this render path are shared —
+  `renderRt` only takes over at state 'rt'/'xp', so **RT battles
+  get the same intro figures**; classic-only was not necessary.
+- **Fallback rule:** a trainer without a battle-scale sprite
+  (`trainerBattleArt` → null) keeps the foe battler on the
+  platform during the intro — the pre-3b behavior, no blank or
+  broken frame. Wild battles show Ash's back only. Wave 6b
+  authors the full trainer set.
+- Live proof: Brock and Gary (S.S. Anne) battle intros captured
+  with both figures on their platforms; the Brock battle then
+  reached its command panel and plays identically.
+
+### 4. Bytes + battery at this commit
+
+- `art-data.mjs` 265,746 → **312,508 B (+46,762)** — inside the
+  remaining Wave 3 budget of 83,156 B (36,394 B unspent). ART
+  keys **290 → 330 (+40: 20 new kinds × 2 frames), zero lost**;
+  build-art run twice = byte-identical. `public/game.js`
+  1,494,883 → **1,548,524 B** (+53,641: art + wiring code).
+- Battery (public): rejuv-phase1 **44/44** · phase2 **42/42** ·
+  phase3 **63/63** · phase4 **53/53** · phase5 **55/55** · phase6
+  **46/46** · fidelity **35/35** · campaign-smoke **24/24** ·
+  audit-headless **17/17** · audit-laptop public **41/41** ·
+  qa-slice **134/134** · validator test **51/51** · validator
+  fuzz **2000/2000** · save-contract **6/6** · Track B **114/114**
+  · budgets-check **all gates pass** · contamination **clean** ·
+  drift-gate guest ≡ strip(vercel) PASS · qa-changed-flows
+  **55/57, failures exactly the standing baseline {b2, d9}**.
+- **personal/ is byte-identical to HEAD** in this commit (restored
+  after the battery's full builds; `dist/content-hash.txt`
+  personal line restored to the HEAD value), per precedent.
+- Verify-live expectation impact: none (nothing deployed).
+
+### Flags / deviations
+
+- MARA and JULES both wear the sailor kind on the S.S. Anne —
+  deliberate (their dialogue: they dressed as crew). Their
+  rendered palettes differ (skin #e8b888/#d8a878, hair
+  #7a1a3a/#3a6ac0), so no two figures on that screen are
+  identical; they read as a uniformed pair, which is the joke.
+- JOURNAL / WRECKED LOG (object-NPCs in the Mansion / New Island)
+  still render on the youngster kind — pre-existing, not a crowd
+  member, and no object sprite system exists yet; flagged for
+  whichever wave adds prop-NPC art.
+- Brock's battle sprite is the skinny legacy 32×48 art, drawn
+  faithfully at 64px tall; it reads thin next to the 64×64
+  battler standard. Redrawing trainer art at battle scale is
+  Wave 6b scope, not 3b.

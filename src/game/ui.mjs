@@ -9,7 +9,7 @@
 export const TEXT_SPEED_CPS = { slow: 15, normal: 30, fast: 60, instant: 9999 };
 
 import { SFX } from '../engine/audio.mjs';
-import { uiIcon } from '../engine/art.mjs';
+import { uiIcon, speakerPortraitCanvas } from '../engine/art.mjs';
 import { TYPE_COLORS } from '../engine/sprites.mjs';
 
 function stubEl() {
@@ -307,7 +307,18 @@ export class UI {
     this.dlgEl = this.el('div', 'dialogue hidden', this.frame);
     // UI v2.1 (defect 5): no portrait tab, no name pill — Platinum puts the
     // speaker's name as a plain line in the text flow (see say() + .dlg-name).
-    this.dlgFace = null;
+    // Wave 3b: the speaker's authored portrait (art.mjs speakerPortrait*)
+    // floats at the panel's left when the speaker has one; speakers
+    // without a portrait get no face element shown (never a placeholder).
+    // Presentation only — dialogue lines, pacing and flow are untouched.
+    this.dlgFace = this.el('canvas', 'dlg-face', this.dlgEl);
+    this.dlgFace.width = 48; this.dlgFace.height = 48;
+    // Inline styles (not shell CSS): the face is a Wave 3b presentation
+    // add-on, and inline styling keeps the shell byte-identical across
+    // editions (the personal/public index parity gate).
+    this.dlgFace.style.cssText = 'display:none;float:left;width:48px;height:48px;'
+      + 'margin:2px 10px 4px 0;image-rendering:pixelated;background:#e3dcc4;'
+      + 'border:2px solid #2b3040;border-radius:3px';
     this.dlgName = this.el('div', 'dlg-name', this.dlgEl);
     this.dlgText = this.el('div', 'dlg-text', this.dlgEl);
     this.dlgHint = this.el('div', 'dlg-hint', this.dlgEl);
@@ -339,7 +350,24 @@ export class UI {
       this.dlgName.textContent = (this.dlg.speaker || '') + (this.dlg.pip ? (this.dlg.pip > 0 ? ' ♥▲' : ' ♥▼') : '');
       this.dlgName.style.display = this.dlg.speaker ? 'block' : 'none';
       this.dlgText.textContent = '';
+      this._showDlgFace(this.dlg.speaker);
     }
+  }
+
+  // Wave 3b: resolve + paint the speaker's portrait into the dialogue
+  // panel's face canvas (24x24 authored art at 2x, smoothing off).
+  // No portrait for this speaker -> the canvas hides; the panel layout
+  // and text flow are exactly as before in both cases.
+  _showDlgFace(speaker) {
+    const cv = this.dlgFace;
+    if (!cv || typeof cv.getContext !== 'function') return;
+    const src = speaker ? speakerPortraitCanvas(document, speaker) : null;
+    if (!src) { cv.style.display = 'none'; return; }
+    const ctx = cv.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(src, 0, 0, cv.width, cv.height);
+    cv.style.display = 'block';
   }
 
   get dialogueOpen() { return !!this.dlg; }
@@ -369,7 +397,10 @@ export class UI {
 
   closeDialogue() {
     this.dlg = null;
-    if (!this.headless) this.dlgEl.classList.add('hidden');
+    if (!this.headless) {
+      this.dlgEl.classList.add('hidden');
+      if (this.dlgFace) this.dlgFace.style.display = 'none';
+    }
   }
 
   buildMenu() {

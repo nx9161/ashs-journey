@@ -91,8 +91,12 @@ export function ashFrames(doc, dir) {
 // Every NPC instance in the data (src/data/maps*.mjs, quests.mjs
 // TALE_NPCS, bonds.mjs PARLEY_NPCS) carries an explicit `art` kind:
 // the generic kinds ('youngster' | 'rival' | 'coach' | 'aide' |
-// 'nurse' | 'lass' | 'professor' | 'brock' | 'pc') plus, since
-// Wave 3a, one individual kind per named-cast member ('gary',
+// 'nurse' | 'lass' | 'professor' | 'brock' | 'pc'), plus since
+// Wave 3b the role kinds ('hiker' | 'swimmer' | 'sailor' |
+// 'scientist' | 'fisher' | 'elder' | 'kid' | 'camper' |
+// 'bugcatcher' | 'biker' | 'grunt' | 'clerk' | 'worker' |
+// 'officer' | 'lady' | 'gent' | 'monk' | 'ranger' |
+// 'acetrainer' | 'twin'), plus, since Wave 3a, one individual kind per named-cast member ('gary',
 // 'garychamp', 'mom', 'hawthorn', 'misty', 'surge', 'erika', 'koga',
 // 'sabrina', 'blaine', 'giovanni', 'lorelei', 'bruno', 'agatha',
 // 'lance', 'rue', 'cole', 'sparcoach'). That field is the primary key. The
@@ -133,12 +137,35 @@ export function npcArtKind(npc) {
 const NPC_SWAP_KEYS = {
   youngster: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   rival: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
-  lass: { S: 'skin', H: 'hair', D: 'shirt', K: 'pants' },
+  lass: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   nurse: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   coach: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
-  aide: { S: 'skin', H: 'hair', V: 'shirt', P: 'pants' },
-  professor: { S: 'skin', G: 'hair', W: 'shirt', K: 'pants' },
+  aide: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  professor: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   brock: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  // Wave 3b generic population — every generic kind is authored on the
+  // same uniform swap scheme (hair/shirt/pants/skin as distinct keys),
+  // so the ~98 authored instance palettes render across the whole crowd.
+  hiker: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  swimmer: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  sailor: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  scientist: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  fisher: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  elder: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  kid: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  camper: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  bugcatcher: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  biker: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  grunt: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  clerk: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  worker: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  officer: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  lady: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  gent: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  monk: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  ranger: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  acetrainer: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  twin: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   // Wave 3a named cast — individual sprites, uniform swap keys.
   gary: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   garychamp: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
@@ -442,4 +469,57 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
 // ---- UI icons (ART ui family) ----
 export function uiIcon(doc, name) {
   return artCanvas(doc, 'icon-' + name, 1);
+}
+
+// ---- dialogue portraits (Wave 3b: the 15 authored portraits, wired) ----
+// Speaker name -> portrait subject. Speakers are NPC names (overworld
+// dialogue), story `who` strings, and UI speakers ('Prof. Hawthorn').
+// Normalization: uppercase, parentheticals dropped, punctuation folded
+// to spaces — 'GIOVANNI (phone)' and 'Giovanni' resolve alike. A speaker
+// with no entry has NO portrait (the dialogue UI shows none — never a
+// placeholder). All 15 portrait subjects are reachable through this map.
+const SPEAKER_PORTRAITS = {
+  'ASH': 'ash',
+  'GARY': 'gary', 'CHAMPION': 'gary',
+  'PROF HAWTHORN': 'hawthorn', 'HAWTHORN': 'hawthorn',
+  'MISTY': 'misty', 'LT SURGE': 'surge', 'SURGE': 'surge',
+  'ERIKA': 'erika', 'KOGA': 'koga', 'SABRINA': 'sabrina',
+  'BLAINE': 'blaine', 'GIOVANNI': 'giovanni', 'THE BOSS': 'giovanni',
+  'LORELEI': 'lorelei', 'BRUNO': 'bruno', 'AGATHA': 'agatha',
+  'LANCE': 'lance', 'NURSE': 'nurse', 'NURSE JOY': 'nurse',
+};
+export function speakerPortraitId(speaker) {
+  if (!speaker || typeof speaker !== 'string') return null;
+  const norm = speaker.toUpperCase()
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/[^A-Z ]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const subject = SPEAKER_PORTRAITS[norm];
+  return subject ? 'portrait-' + subject : null;
+}
+export function speakerPortraitCanvas(doc, speaker) {
+  const id = speakerPortraitId(speaker);
+  return id ? artCanvas(doc, id, 1) : null;
+}
+
+// ---- trainer battle presentation (Wave 3b) ----
+// The three authored battle-family sprites, presented during the battle
+// intro (state 'intro' — the challenge/send-out message chain) only:
+// the foe trainer stands on the foe platform, Ash's back on the ally
+// platform; battlers take over the moment the intro chain hands off to
+// commands/RT. Trainers without a battle-scale sprite return null and
+// the intro keeps the foe battler on the platform (graceful degrade —
+// Wave 6b authors the full trainer set).
+const TRAINER_BATTLE_ART = { brock: 'brock-battle', gary: 'gary-battle' };
+export function trainerBattleArt(doc, trainer) {
+  if (!trainer) return null;
+  const name = String(trainer.name || '').toLowerCase();
+  const id = String(trainer.id || '').toLowerCase();
+  const kind = (name === 'brock' || id === 'brock') ? 'brock'
+    : (name === 'gary' || id.startsWith('gary')) ? 'gary' : null;
+  return kind ? artCanvas(doc, TRAINER_BATTLE_ART[kind], 1) : null;
+}
+export function playerBattleBackArt(doc) {
+  return artCanvas(doc, 'ash-battle-back', 1);
 }
