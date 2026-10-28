@@ -3,8 +3,8 @@
 // predicate, carry exactness (dex records as archive, honors reading
 // the run's OWN catches, keepsake pocket == source collection), the
 // never-carry list, source immutability, HoF shape reconciliation
-// (canonical {team, badges} + legacy {species, level} across client
-// schema and server validator), Traveler's Memory derivation from the
+// (canonical {team, badges} + legacy {species, level} + hybrid
+// members across client schema and server validator), Traveler's Memory derivation from the
 // source's own shipped flags, starter-line derivation, the central
 // duplicate-keepsake conversion (+$2,000 + line, no second piece), the
 // bond echo (early Warm + the one-time line) and its R3 inertness.
@@ -14,7 +14,8 @@
 // untouched, the intro reunion, the HoF viewer's prior-journeys
 // section, the diploma gate in the real bundle, the fossil re-pick,
 // the hidden-keepsake duplicate, the echo greeting at Mom, the
-// Saffron memory line. Part C: real-browser smoke.
+// Saffron memory line, the Silph Card Key memory line. Part C:
+// real-browser smoke.
 // Run: node tests/rejuv-phase6-checks.mjs   (exit 1 on any failure)
 
 import { dirname, join } from 'node:path';
@@ -130,6 +131,19 @@ function makeSource() {
   const badMem = JSON.parse(JSON.stringify(ngSave)); badMem.story.travelersMemory = ['fly-to-moon'];
   ok('A15 server validator rejects what it must: unknown species in a HoF team, unknown memory gate',
     VAL.validateSave(badHof).ok === false && VAL.validateSave(badMem).ok === false);
+  const hybrid = JSON.parse(JSON.stringify(ngSave)); hybrid.story.hof = [{ team: [{ species: 'pidgeot', level: 55 }], badges: 8 }];
+  const hybridMixed = JSON.parse(JSON.stringify(ngSave));
+  hybridMixed.story.hof = [{ team: [{ speciesId: 'venusaur', level: 63, nickname: null }, { species: 'pidgeot', level: 55 }], badges: 8 }];
+  hybridMixed.story.priorHof = [{ team: [{ species: 'mew', level: 70 }], badges: 8 }];
+  ok('A31 server validator accepts the hybrid shape the client normalizes: legacy member keys inside canonical entries (QA repro), mixed teams, hybrid priorHof',
+    VAL.validateSave(hybrid).ok === true && VAL.validateSave(hybridMixed).ok === true
+    && S.normalizeHofEntry(hybrid.story.hof[0]).team[0].speciesId === 'pidgeot');
+  const hybridBadSpecies = JSON.parse(JSON.stringify(ngSave)); hybridBadSpecies.story.hof = [{ team: [{ species: 'notaspecies', level: 55 }], badges: 8 }];
+  const hybridBadLevel = JSON.parse(JSON.stringify(ngSave)); hybridBadLevel.story.hof = [{ team: [{ species: 'pidgeot', level: 101 }], badges: 8 }];
+  const hybridNoKey = JSON.parse(JSON.stringify(ngSave)); hybridNoKey.story.hof = [{ team: [{ level: 55 }], badges: 8 }];
+  ok('A32 server validator still rejects garbage hybrids: unknown species via the legacy key, out-of-bounds level, member with no species key',
+    VAL.validateSave(hybridBadSpecies).ok === false && VAL.validateSave(hybridBadLevel).ok === false
+    && VAL.validateSave(hybridNoKey).ok === false);
 }
 
 // -- (i) Traveler's Memory derivation --
@@ -397,6 +411,16 @@ const driver = `
     const g3 = boot(); const D3 = g3.D;
     D3.gotoMap('saffron', 10, 10);
     out.saffronSilent = !D3.allDialogue().includes('City remembers you');
+    const g4 = boot(); const D4 = g4.D;
+    g4.game.state.story.travelersMemory = ['card-key'];
+    D4.gotoMap('silph1', 8, 7);
+    out.silphLine = D4.allDialogue().includes('Card Key in hand');
+    const logLen4 = D4.ui.log.length;
+    D4.gotoMap('silph1', 8, 7);
+    out.silphOnce = !D4.ui.log.slice(logLen4).some((e) => e.ui === 'dialogue' && (e.lines || []).join(' ').includes('Card Key in hand'));
+    const g5 = boot(); const D5 = g5.D;
+    D5.gotoMap('silph1', 8, 7);
+    out.silphSilent = !D5.allDialogue().includes('Card Key in hand');
   }
   console.log('REJUV6-RESULT ' + JSON.stringify(out));
 })()`;
@@ -448,6 +472,9 @@ if (B_out) {
     B_out.echoHeard === true && B_out.echoOnce === true);
   ok('B11 (i) Saffron memory: the gate line plays for a remembering traveler, and stays silent otherwise',
     B_out.saffronLine === true && B_out.saffronSilent === true);
+  ok('B12 (i) Card Key memory: the Silph route line plays exactly once for a remembering traveler on Silph entry, and stays silent for everyone else',
+    B_out.silphLine === true && B_out.silphOnce === true && B_out.silphSilent === true,
+    JSON.stringify({ line: B_out.silphLine, once: B_out.silphOnce, silent: B_out.silphSilent }));
 }
 
 // ================= Part C: real headless Chromium =================

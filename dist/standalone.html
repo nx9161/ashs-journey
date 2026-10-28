@@ -23587,6 +23587,16 @@ Object.assign(OverworldScene.prototype, {
       g.state.story.flags.echo_saffron_guard = true;
       g.ui.say(['The Saffron gate attendant looks up from his thermos — then waves you straight through, drink and all. "Go on," he says. "City remembers you."']);
     }
+    // ADR-025 §6 (Traveler's Memory): the Card Key route, remembered.
+    // Like Saffron, the shipped game never actually gates Silph on
+    // the Card Key (the warps run either way), so the memory is pure
+    // acknowledgment — once, on the first Silph entry of a journey
+    // that carries it. No gate is claimed, none is lifted.
+    if ((id === 'silph1' || id === 'silph2') && hasTravelersMemory(g.state, 'card-key')
+      && !g.state.story.flags.echo_card_key) {
+      g.state.story.flags.echo_card_key = true;
+      g.ui.say(['The lobby doors part, and your feet are already sure of the way — the key by the plants, the lift, the long climb. You walked Silph once with a Card Key in hand. The building feels smaller when you know its route by heart.']);
+    }
   },
 
   boulderAt(x, y) {
@@ -27054,6 +27064,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:2e6c80a19e780ec00a784e91ea2126adf2e96d51428ff953fc16d76dc8202d08 -->
+<!-- contentHash:a28f07f34b7e8b7140997afa15d0aaaa1d1d9e279d947fa8ddd7f62be8d92e2e -->
 </body>
 </html>

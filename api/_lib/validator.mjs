@@ -300,8 +300,11 @@ function checkStory(story, errors) {
   // legacy single-mon shape { species, level } — this validator's
   // original expectation, which the client never actually pushed —
   // stays ACCEPTED so any save carrying it loads clean; the client
-  // normalizes it to canonical on load. story.priorHof (a Second
-  // Journey run's inherited teams) carries the same shapes.
+  // normalizes it to canonical on load. A canonical entry's members
+  // may individually carry the legacy species key (hybrid shape) —
+  // the client normalizer maps it the same way, so both sides agree.
+  // story.priorHof (a Second Journey run's inherited teams) carries
+  // the same shapes.
   const checkHofList = (list) => {
     if (!Array.isArray(list) || list.length > 40) return false;
     for (const h of list) {
@@ -310,7 +313,14 @@ function checkStory(story, errors) {
         if (h.team.length < 1 || h.team.length > 6) return false;
         if (!(h.badges === undefined || isInt(h.badges, 0, 20))) return false;
         for (const m of h.team) {
-          if (!isPlainObj(m) || !TABLES.species.has(m.speciesId) || !isInt(m.level, 1, 100)) return false;
+          if (!isPlainObj(m)) return false;
+          // Hybrid members: a canonical team member may carry the
+          // legacy { species } key instead of speciesId — the client's
+          // normalizeHofEntry accepts it and maps species -> speciesId,
+          // so the server validates the same effective id (speciesId
+          // wins when it is a string, exactly as the client resolves).
+          const sid = typeof m.speciesId === 'string' ? m.speciesId : m.species;
+          if (!TABLES.species.has(sid) || !isInt(m.level, 1, 100)) return false;
           if (!(m.nickname === undefined || m.nickname === null || isSafeText(m.nickname, 1, 12))) return false;
         }
       } else if (!(typeof h.species === 'string' && h.species.length >= 1 && h.species.length <= 40 && isInt(h.level, 1, 100))) {

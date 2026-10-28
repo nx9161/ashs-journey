@@ -109,5 +109,18 @@ t('reject box mon non-keepsake', bad((s) => { s.boxes.box1[0].keepsake = 'pokeba
 t('reject bad meta houseRulesTouched', bad((s) => { s.meta.houseRulesTouched = 'yes'; }, 'bad-meta-house-rules'));
 t('reject bad meta ngPlus', bad((s) => { s.meta.ngPlus = -1; }, 'bad-meta-ngplus'));
 
+// 8. ADR-025 §6 (Phase 6 fix): HoF hybrid shape — a canonical team
+// entry whose members carry the legacy { species } key. The client's
+// normalizeHofEntry maps species -> speciesId; the server must agree.
+t('accept hybrid hof member (legacy species key inside canonical team)', okWith((s) => { s.story.hof = [{ team: [{ species: 'pidgeot', level: 55 }], badges: 8 }]; }));
+t('accept mixed team (canonical + legacy members) and hybrid priorHof', okWith((s) => {
+  s.story.hof = [{ team: [{ speciesId: 'venusaur', level: 63, nickname: null }, { species: 'pidgeot', level: 55 }], badges: 8 }];
+  s.story.priorHof = [{ team: [{ species: 'mew', level: 70 }], badges: 8 }];
+}));
+t('accept pure legacy hof entry', okWith((s) => { s.story.hof = [{ species: 'pidgey', level: 33 }]; }));
+t('reject garbage hybrid: unknown species via legacy key', bad((s) => { s.story.hof = [{ team: [{ species: 'notaspecies', level: 55 }], badges: 8 }]; }, 'bad-hof'));
+t('reject garbage hybrid: level out of bounds via legacy key', bad((s) => { s.story.hof = [{ team: [{ species: 'pidgeot', level: 101 }], badges: 8 }]; }, 'bad-hof'));
+t('reject garbage hybrid: member with no species key at all', bad((s) => { s.story.hof = [{ team: [{ level: 55 }], badges: 8 }]; }, 'bad-hof'));
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);
