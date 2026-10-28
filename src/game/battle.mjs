@@ -198,13 +198,10 @@ export class BattleScene {
     // WP3 (ADR-026 elevation pass, research §1.5): trauma-based shake
     // replaces the binary shakeT magnitudes for classic battles —
     // offset = 12px x trauma^2, one value, decayed in update(); shakeT
-    // remains only as the legacy timer other paths poke. _beat is the
-    // presentation-beat slot (hitstop / Set faint beat): a pending
-    // callback update() counts down on real time; a confirm press SKIPS
-    // it — input is never eaten by a beat, per the research failure
-    // mode that mirrors the owner's RT complaint.
+    // remains only as the legacy timer other paths poke. Message
+    // holds (hitstop / faint beat) live in _msgHoldUntil/_nextMsgHold
+    // — see say() and the msgOpen branch in update().
     this.trauma = 0;
-    this._beat = null;
     this.flashT = 0;
     this.fadeT = 0;      // P0/E11: reduced-motion substitute for shake/flash (100ms fade)
     this.atkFx = null;   // { side, t } — README attack transform: 1.2x for 3 frames then back
@@ -300,6 +297,12 @@ export class BattleScene {
     this.msg = text;
     this.msgCb = cb || null;
     this.msgOpen = true;
+    // WP3: a caller may arm a dismissal hold for THIS message
+    // (hitstop on the damage line, the faint beat on the faint line)
+    // via this._nextMsgHold just before calling say().
+    this._msgHoldUntil = this._nextMsgHold ? (this._clockMs || 0) + this._nextMsgHold : 0;
+    this._nextMsgHold = 0;
+    this._msgEarlyPress = false;
     this.game.ui.log.push({ ui: 'battle-msg', text });
   }
 
@@ -307,6 +310,11 @@ export class BattleScene {
     const g = this.game;
     const input = g.input;
     const st = g.state.settings;
+    // WP3 battle clock: advances only on real frames (update ticks) —
+    // the message-hold math below reads it; callback-driven harness
+    // drains never advance it and bypass holds entirely by invoking
+    // message callbacks directly, exactly as they always have.
+    this._clockMs = (this._clockMs || 0) + dt * 1000;
     // Screen shake / flash decay — P0/E11: gated on the Screen-shake option +
     // reduced motion (assignment is gated at the source; decay is unconditional).
     // Trauma shake (WP3): offset = 12px x trauma^2 so small hits stay
@@ -352,20 +360,6 @@ export class BattleScene {
     // the two paths are mutually exclusive per frame.
     if (this.rtMode && this.rt && this.state === 'rt' && typeof this.rtTickClocks === 'function' && this.rtFrozen()) this.rtTickClocks(dt * 1000);
 
-    // Presentation beats (WP3): hitstop + the Set-mode faint beat live
-    // here — after every visual system above has ticked (shake/flash/
-    // drain keep running on real time inside the beat), before any
-    // input consumer. A confirm press SKIPS the beat: a beat can delay
-    // a message, it can never swallow a press.
-    if (this._beat) {
-      this._beat.t -= dt * 1000;
-      if (input.wasPressed('a') || input.wasPressed('start')) this._beat.t = 0;
-      if (this._beat.t > 0) return;
-      const beatCb = this._beat.cb;
-      this._beat = null;
-      if (beatCb) beatCb();
-      return;
-    }
     // Ground legibility (WP3): SELECT at the classic command grid opens
     // the on-demand Ground + stat-stage readout. The grid stays exactly
     // four commands (verify-live counts them); SELECT is consumed here
@@ -375,7 +369,17 @@ export class BattleScene {
 
     if (g.ui.update(dt)) return;
     if (this.msgOpen) {
-      if (input.wasPressed('a') || input.wasPressed('start')) {
+      // WP3 message holds (hitstop / faint beat): a held message cannot
+      // be dismissed until its hold expires — but a press during the
+      // hold is REMEMBERED and dismisses it the moment the hold ends.
+      // Input is never eaten; the say() chain itself is never delayed,
+      // so resolution order/RNG are untouched.
+      const pressed = input.wasPressed('a') || input.wasPressed('start');
+      if (this._msgHoldUntil && this._clockMs < this._msgHoldUntil) {
+        if (pressed) this._msgEarlyPress = true;
+      } else if (pressed || this._msgEarlyPress) {
+        this._msgEarlyPress = false;
+        this._msgHoldUntil = 0;
         this.msgOpen = false;
         const cb = this.msgCb; this.msgCb = null;
         if (cb) cb();
@@ -1168,23 +1172,23 @@ export class BattleScene {
           }
           this.nextAction();
         };
+        // HITSTOP: the damage line carries a 70ms dismissal hold on
+        // damaging impacts (see the note at the say(extra) dispatch).
+        if ((dmg > 0 || subBroke) && animsOn && !g.state.settings.reducedMotion) this._nextMsgHold = 70;
         this.say(msg2, () => {
           this.checkFaint(foeSide, finishMove);
         });
       };
       // HITSTOP (WP3, research §1.5 — the single biggest move-weight
-      // lever): on a damaging impact, hold the resolution messages for
-      // 70ms while the flash/shake/drain run on real time in update().
-      // The beat lives in update()'s _beat slot and a confirm press
-      // SKIPS it — input is never disabled, never eaten. No RNG is
-      // consumed by the pause; message order/count unchanged. Off
-      // entirely under reduced motion or battleAnims off.
-      const beginAfter = () => {
-        if (extra.trim()) this.say(extra.trim(), after);
-        else after();
-      };
-      if ((dmg > 0 || subBroke) && animsOn && !g.state.settings.reducedMotion) this._beat = { t: 70, cb: beginAfter };
-      else beginAfter();
+      // lever): on a damaging impact the damage LINE gets a 70ms
+      // dismissal hold (armed inside after() where the line is said):
+      // the flash/shake/drain play over a line the player cannot blow
+      // past instantly, and a press during the hold is remembered and
+      // dismisses it at expiry — input is never disabled, never
+      // eaten, and the say() chain is never deferred (resolution
+      // order and RNG untouched). Off under reduced motion/anims off.
+      if (extra.trim()) this.say(extra.trim(), after);
+      else after();
     });
   }
 
@@ -1392,18 +1396,18 @@ export class BattleScene {
     // while the message plays (visual-only; the flow is unchanged).
     const art = g.spriteCache[mon.speciesId] || g.spriteCache.partner;
     this.faintFx = { side, spr: side === 'ally' ? art.back : art.front, t: 0 };
+    // SET/SHIFT faint beat (WP3, WP2 pacing spec): in classic battles
+    // the faint LINE carries a 450ms dismissal hold — the KO lands
+    // for a beat before the send-out / XP / victory text can replace
+    // it. Zero prompts in Set; in Shift the beat precedes the prompt.
+    // A press during the hold is remembered, not eaten (see the
+    // msgOpen branch in update()). No hold under reduced motion.
+    // RT faints route through rtCheckFaints and never reach here.
+    if (!this.rtMode && !g.state.settings.reducedMotion) this._nextMsgHold = 450;
     this.say(name + ' fainted!', () => {
       if (side === 'foe') {
         this.state = 'faintfoe';
-        // SET/SHIFT faint beat (WP3, WP2 pacing spec): in classic
-        // battles the KO lands for 450ms before the send-out / XP /
-        // victory flow continues — the faint gets a beat instead of
-        // cutting straight to the next text. Zero prompts in Set; in
-        // Shift the beat precedes the prompt. Input-skippable via the
-        // _beat slot; instant under reduced motion. RT faints route
-        // through rtCheckFaints and never reach here.
-        if (!this.rtMode && !g.state.settings.reducedMotion) this._beat = { t: 450, cb: () => this.afterFaintFoe() };
-        else this.afterFaintFoe();
+        this.afterFaintFoe();
       } else {
         const g = this.game;
         const anyLeft = g.state.party.some((m) => m.hp > 0);
@@ -1424,11 +1428,6 @@ export class BattleScene {
     // state==='faintfoe' lanes in afterMsg/nextAfterStatus) is a no-op —
     // the prompt can never fire twice for one KO.
     if (this._shiftInProgress) return;
-    // WP3 faint-beat guard: while the post-KO beat is still pending,
-    // its callback is the single caller allowed through — the
-    // state==='faintfoe' re-entry lanes no-op until the beat fires
-    // (update() clears _beat before invoking it).
-    if (this._beat) return;
     if (this.kind === 'trainer') {
       // ADR-026 Shift/Set: in Shift mode (classic engine only) the KO'd
       // foe's XP is awarded BEFORE the "about to send out" prompt. Set

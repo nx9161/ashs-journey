@@ -387,26 +387,37 @@ const wp3Driver = `
   const drain = (b) => { let n = 0; while (b.msgOpen && n++ < 30) { const cb = b.msgCb; b.msgCb = null; b.msgOpen = false; if (cb) cb(); else b.afterMsg(); } };
   game.rng.battle = () => 0.5;
 
-  // (D01/D04) Hitstop + trauma on impact: damage applies immediately,
-  // the damage LINE waits out a 70ms beat; trauma reflects the hit.
+  // (D01/D04) Hitstop + trauma on impact: damage applies immediately;
+  // the damage LINE opens with a 70ms dismissal hold armed; a press
+  // during the hold is remembered (not eaten) and fires at expiry.
   {
     const ally = makeMon('partner', 20, SPECIES, MOVES);
     const foe = makeMon('pidgey', 12, SPECIES, MOVES); foe.maxHp = 60; foe.hp = 60;
     st.party = [ally];
     const b = new BattleScene({ kind: 'wild', foe, returnTo: ow, rt: false });
     game.scenes.push(b); b.enter(); drain(b);
+    ui.menu = null; // real flow picks the move from the grid, closing it first
     const e = { side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.thundershock, action: { type: 'move', idx: 0 } };
     b.execMoveContinue(e); // says "used Thunder Shock!"
-    drain(b); // dismiss it -> damage applies -> hitstop beat pending
-    out.dFoeHpAfterHit = foe.hp; out.dBeatPending = !!b._beat; out.dBeatT = b._beat ? b._beat.t : null;
-    out.dMsgOpenDuringBeat = b.msgOpen; out.dTrauma = b.trauma;
-    for (let i = 0; i < 10 && !b.msgOpen; i++) game.loop.stepTicks(2);
-    out.dMsgAfterBeat = b.msgOpen;
+    // dismiss the use/effectiveness lines only — stop AT the damage line
+    let dn = 0;
+    while (b.msgOpen && !(typeof b.msg === 'string' && b.msg.includes('took')) && dn++ < 10) { const cb = b.msgCb; b.msgCb = null; b.msgOpen = false; if (cb) cb(); else b.afterMsg(); }
+    out.dDmgLine = b.msg;
+    out.dFoeHpAfterHit = foe.hp;
+    out.dHoldMs = b._msgHoldUntil - (b._clockMs || 0);
+    out.dMsgOpenDuringHold = b.msgOpen; out.dTrauma = b.trauma;
+    // press DURING the hold: remembered, line survives the press...
+    input.inject('a'); game.loop.stepTicks(2); input.release('a');
+    out.dSurvivesEarlyPress = b.msgOpen && b.msg === out.dDmgLine;
+    // ...and dismisses on its own once the hold expires (msgOpen is
+    // the signal — b.msg retains the last line's text at command).
+    for (let i = 0; i < 8 && b.msgOpen; i++) game.loop.stepTicks(2);
+    out.dDismissedAfterExpiry = !b.msgOpen;
     game.scenes.pop();
   }
 
-  // (D02) Set faint beat: after the faint message, the flow holds
-  // 450ms (state faintfoe, beat pending) before XP/victory begins.
+  // (D02) Set faint beat: the faint LINE carries a 450ms dismissal
+  // hold; the chain itself is synchronous (afterFaintFoe on dismiss).
   {
     const ally = makeMon('partner', 20, SPECIES, MOVES);
     ally.moves = [{ id: 'quickattack', pp: 99, maxPp: 99 }];
@@ -415,13 +426,13 @@ const wp3Driver = `
     const b = new BattleScene({ kind: 'wild', foe, returnTo: ow, rt: false });
     game.scenes.push(b); b.enter(); drain(b);
     const e = { side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.quickattack, action: { type: 'move', idx: 0 } };
-    b.execMoveContinue(e); drain(b); // used-line -> hitstop
-    for (let i = 0; i < 12 && !b.msgOpen; i++) game.loop.stepTicks(2); // hitstop out -> damage line
-    drain(b); // damage line -> checkFaint -> faint message
-    drain(b); // faint message -> beat
-    out.dFaintState = b.state; out.dFaintBeatT = b._beat ? b._beat.t : null;
-    for (let i = 0; i < 40 && b.state === 'faintfoe'; i++) game.loop.stepTicks(2);
-    out.dAfterBeatState = b.state;
+    b.execMoveContinue(e);
+    // drain until the faint line is the open message, then read its hold
+    let n = 0;
+    while (b.msgOpen && !(typeof b.msg === 'string' && b.msg.includes('fainted!')) && n++ < 30) { const cb = b.msgCb; b.msgCb = null; b.msgOpen = false; if (cb) cb(); else b.afterMsg(); }
+    out.dFaintHoldMs = b._msgHoldUntil - (b._clockMs || 0);
+    drain(b); // faint line dismissed -> afterFaintFoe -> XP flow
+    out.dAfterFaintState = b.state;
     game.scenes.pop();
   }
 
@@ -467,10 +478,10 @@ const wp3Driver = `
   console.log = (...a) => { logs3.push(a.join(' ')); };
   try { eval(gameJs + wp3Driver); } finally { console.log = origLog3; }
   const r = JSON.parse((logs3.find((l) => l.startsWith('WP3-RESULT')) || 'WP3-RESULT {}').slice(11));
-  ok('D01 WP3 hitstop: damage applies at once, the damage line waits out a 70ms beat',
-    r.dFoeHpAfterHit < 60 && r.dBeatPending === true && r.dBeatT === 70 && r.dMsgOpenDuringBeat === false && r.dMsgAfterBeat === true, JSON.stringify(r));
-  ok('D02 WP3 Set faint beat: 450ms hold at faintfoe, then the flow proceeds on its own',
-    r.dFaintState === 'faintfoe' && r.dFaintBeatT === 450 && r.dAfterBeatState !== 'faintfoe', JSON.stringify(r));
+  ok('D01 WP3 hitstop: damage applies at once; the damage line carries a 70ms hold; an early press is remembered, not eaten',
+    typeof r.dDmgLine === 'string' && r.dDmgLine.includes('took') && r.dFoeHpAfterHit < 60 && r.dHoldMs === 70 && r.dMsgOpenDuringHold === true && r.dSurvivesEarlyPress === true && r.dDismissedAfterExpiry === true, JSON.stringify(r));
+  ok('D02 WP3 Set faint beat: the faint line carries a 450ms hold; dismissal runs the normal flow',
+    r.dFaintHoldMs === 450 && r.dAfterFaintState === 'xp', JSON.stringify(r));
   ok('D03 WP3 trauma: a super-effective hit sets trauma >= 0.5 at impact',
     typeof r.dTrauma === 'number' && r.dTrauma >= 0.5, JSON.stringify(r));
   ok('D04 WP3 Ground readout: SELECT opens the Storm Ground readout, close returns to the grid',
