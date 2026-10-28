@@ -88,7 +88,7 @@ async function main() {
   const need = {
     'ash-down-idle-1': [16, 16], 'ash-up-walk-4': [16, 16],
     'pikachu-hop-1': [16, 16], 'partner-front': [64, 64], 'partner-back': [64, 64],
-    'onix-front': [64, 64], 'geodude-front': [64, 64], 'brock-battle': [32, 48],
+    'onix-front': [64, 64], 'geodude-front': [64, 64], 'brock-battle': [48, 64],
     'npc-professor-idle-1': [16, 16], 'tile-grass': [16, 16], 'icon-pokeball': [16, 16],
   };
   for (const [id, [w, h]] of Object.entries(need)) {

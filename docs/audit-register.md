@@ -2028,3 +2028,159 @@ drift-gate PASS · verify-audio **ALL PASS** · qa-changed-flows
 - The brief's sprite arithmetic (≈45) and census pair counts are
   superseded by the audited numbers in §2 — 58 sprites, 29 ids,
   forge 138 → 123 exactly as targeted.
+
+## World Art Wave 6b — Battle Presentation: What Players Actually Meet + Trainer Sprites (2026-10-28)
+
+Source of truth: census §3 (battle rows) + §4 Wave 6b. Scope honored:
+battle species by encounter priority + battle-scale trainer
+presentation — no arenas (6c), no balance change. Every sprite below
+is an original drawing in the `.pix` pipeline, seeded by the species'
+identity (Part 1) or the character's Wave 3 overworld design (Part 2).
+
+### 1. Part 1 — species (63 new pairs; derivation from data, reproducible)
+
+Derivation rule (run against the merged data tables — SPECIES /
+TRAINERS incl. TRAINERS2/3/4 / MAPS — in module order):
+- **(a) Boss teams first:** every species on a gym-leader, Elite Four,
+  Champion, rival, or story-boss team not already authored. Boss set =
+  trainers brock, misty, surge, erika, koga, sabrina, blaine,
+  giovanni, lorelei, bruno, agatha, lance, gary_champion,
+  gary_cerulean, gary_stanne, gary_tower, gary_silph, gary_r22_final,
+  rocket_admin, duo2_vermilion, duo3_celadon, duo4_saffron,
+  duo5_island, r2_duo. Result = **48 species**: staryu, starmie,
+  voltorb, pikachu, raichu, victreebel, tangela, vileplume, koffing,
+  muk, weezing, kadabra, mrmime, venomoth, alakazam, growlithe,
+  ponyta, rapidash, arcanine, rhyhorn, dugtrio, nidoqueen, nidoking,
+  rhydon, dewgong, cloyster, slowbro, jynx, lapras, hitmonchan,
+  hitmonlee, machamp, gengar, golbat, haunter, arbok, gyarados,
+  dragonair, aerodactyl, dragonite, pidgeotto, raticate, pidgeot,
+  exeggutor, ekans, lickitung, zubat, meowth. (Note: `pikachu` is its
+  own species id — Surge's team + Power Plant wilds — distinct from
+  the `partner` entry; it was forge until this wave.)
+- **(c) Town Tale / event battles:** the tale spar species and the
+  Coach's spar partner (overworld-systems taleSpar calls + sparSpecies
+  + tale_kid's team) not already covered: **machop** (Coach spar +
+  Saffron Dojo tale), **oddish** (tale_kid). (geodude/meowth were
+  already covered by 6a/(a).) = **2 species**.
+- **(b) Wild encounter tables**, weighted: Tier A = Routes 1–10 +
+  moon1/moon2 tables, species scored by summed table weight; then
+  Tier B = all remaining maps by summed weight. Tier A ranking:
+  bellsprout 75, sandshrew 60, paras 35, magnemite 25, abra 21,
+  nidoranf 15, vulpix 12, nidorina 10 (tie with nidorino 10 broken by
+  lower dexNo, 30 < 33), jigglypuff 8, clefairy 5. Took Tier A ranks
+  1–8 (bellsprout, sandshrew, paras, magnemite, abra, nidoranf,
+  vulpix, nidorina), then Tier B top 2 among the remainder: gastly
+  175, graveler 50. = **10 species**.
+- Derived total = 48 + 2 + 10 = **60 exactly as briefed**. Three
+  further species were authored in the same pass because the queue
+  continued into them and the art was already in hand: jigglypuff
+  (Tier A #9), clefairy (Tier A #10), venonat (Tier B #3, weight 44).
+  **Wave total = 63 new species, 126 sprites**, all front+back pairs
+  in this commit, all 64×64, **12–17 painted colors each (min 12,
+  mean 13.6)**, ≥3 shades per main surface (five-step primary ramps),
+  backs as genuine rear drawings (Sandshrew's armor-brick back,
+  Growlithe/Arcanine dorsal stripes, Nidorina/Nidoqueen/Nidoking
+  spine-spike rows, Raichu's cream back stripes, Starmie's rear star,
+  Cloyster's shell-back dome, Tangela's vine back, Muk's sheen mass…).
+
+### 2. Part 2 — trainer battle presentation (16 figures + Ash)
+
+- **16 battle-scale trainer sprites authored fresh at 48×64**
+  (≥12 colors each, 13–18 actual), drawn at 64 tall by the existing
+  Wave 3b intro path, palettes and designs faithful to each
+  character's Wave 3 overworld sprite (same hex families): Brock
+  (open vest, squint eyes), Misty (side ponytail), Lt. Surge (broad,
+  dog tags), Erika (long hair, sash, skirt), Koga (magenta scarf),
+  Sabrina (long hair, chest gem), Blaine (bald + mustache), Giovanni
+  (suit + red tie), Lorelei (long red hair), Bruno (open top + belt),
+  Agatha (bun + cane), Lance (cape), Gary (pendant), Gary-Champion
+  (cape + medallion), Rue, Cole (uniform, epaulettes, chest patch).
+- **Legacy art replaced in place under the same keys** — `brock-battle`
+  (was 32×48 thin) and `gary-battle` (was 32×32) redrawn at 48×64; no
+  key retired (both keys have exactly one consumer each,
+  trainerBattleArt, plus the load-test size table, updated below).
+  14 new keys: misty/surge/erika/koga/sabrina/blaine/giovanni/
+  lorelei/bruno/agatha/lance/garychamp/rue/cole `-battle`.
+- **Resolution** (`trainerBattleArt`, shared by both engines' intro
+  path): by trainer id first (23 battle identities), name second,
+  Gary family fallback by id-prefix/title. Gary's five rival battles
+  → gary-battle; gary_champion (or title Champion) → garychamp-battle.
+  The uniformed duo resolves per its two data identities: r2_duo
+  ('Rue & Cole') → Rue; duo2–duo5 ('Mara & Jules', the same pair
+  under cover names) → Cole — both sprites reachable in real battles.
+  Runtime drive: **23/23 identities resolve at 48×64; zero generic
+  trainers leak** (all other TRAINERS entries still return null and
+  keep the graceful battler fallback).
+- **Ash's battle back redrawn** at 48×64 under `ash-battle-back`:
+  cap from behind, hair, jacket, green backpack + straps, right arm
+  raised mid-throw with the ball in hand. Drive: 48×64.
+
+### 3. Species-render audit (the QA yardstick)
+
+Same method as 6a (hand ⇔ ART front+back both exist; cross-checked
+at runtime through `speciesBattleArt` with a stub document):
+- **Before:** 29 hand-art ids · **123 forge-fallback**.
+- **After:** **92 hand-art ids · 60 forge-fallback** (the 60 remaining
+  are 6c's roster). Runtime drive agrees exactly; every hand front/
+  back canvas is 64×64 and every non-partner hand id resolves its
+  derived `-front-bob` at 64×64. Pair completeness: 92/92 ids ship
+  front AND back (pix fronts 91 + partner, zero fronts missing a
+  back).
+
+### 4. Regen safety + bytes
+
+- `build-art.mjs` run twice: **byte-identical** (art-data + all
+  atlases). ART keys **421 → 624, zero lost** (gains = 126 species
+  sprites + 63 derived bobs + 14 trainer keys; Brock/Gary/Ash redrawn
+  in place). Per-sprite palette cap 32 respected (max painted 18).
+- **Bytes:** `art-data.mjs` 669,836 → **1,651,317 B (+981,481)**;
+  `public/game.js` 1,937,394 → **2,920,753 B (+983,359** = the art
+  segment +1,878 of trainerBattleArt resolution code). Against the
+  Wave 6 budget (2,650,000 B): 6a consumed 317,103, 6b consumes
+  981,481 art bytes — **1,351,416 B remain for 6c** (60 species pairs
+  + 60 bobs + 15 arena treatments; at 6b's measured ~5.2 KB per
+  battler/bob unit the roster alone projects ≈940 KB, so 6c fits
+  with arena headroom — flagged for the 6c brief, not a breach).
+- Built vercel+guest only; **personal/ byte-identical to HEAD**
+  (restored after the battery; content-hash personal line restored
+  to the HEAD value). Nothing deployed.
+
+### 5. Battery (public)
+
+rejuv-phase1 **44/44** · phase2 **42/42** · phase3 **63/63** ·
+phase4 **53/53** · phase5 **55/55** · phase6 **46/46** · fidelity
+**35/35** · campaign-smoke **24/24** · audit-headless **17/17** ·
+audit-laptop public **41/41** · verify-slice **48/48** · qa-slice
+**134/134** · validator test **51/51** · validator fuzz
+**2000/2000** · save-contract **6/6** · budgets-check **all gates
+pass** · contamination **clean** · drift-gate PASS · verify-audio
+**ALL PASS** · qa-changed-flows **55/57, failures exactly the
+standing baseline {b2, d9}**.
+
+### Flags / deviations
+
+- **Three species beyond the derived 60** (jigglypuff, clefairy,
+  venonat — the next three in the same reproducible queue, §1):
+  forge lands at **60**, not ≈63. The derived 60 are covered in
+  full, boss-team coverage is 48/48; reported plainly per the brief.
+- **Track B not run to a verdict in this environment:** `tests/`
+  npm test crashes with ECONNREFUSED ::1:5432 (the pg-stub hook does
+  not intercept here) — **identically at HEAD (c8dceba)** in a clean
+  worktree, so it is a pre-existing environment failure, not a 6b
+  regression. 6b touches no api/ or tests/ code.
+- **load-test (equal-strength update):** `brock-battle` expectation
+  updated 32×48 → **48×64** (the Wave 6b battle-scale standard). The
+  tool still fails exactly its 4 pre-existing HEAD failures (ash /
+  pikachu-hop / professor 16×16-era expectations); 620/624 sprites
+  rasterize through the game path.
+- **palette-audit standalone tool:** 894/900 with **the same 5
+  failing checks as HEAD verbatim** (stale 48 tiles cap vs the
+  deliberate 54, + water-tile blacklist false positives from Wave 1;
+  totals grew with the sprite count). One transient 6th failure
+  during the wave (a palette char whose rows spelled a blacklisted
+  token) was fixed at the source; `audit-results.md` left at HEAD
+  rather than committing the tool's rewrite.
+- **Duo resolution split** (Rue via r2_duo, Cole via duo2–duo5) is a
+  presentation choice forced by the data's two names for one pair;
+  documented in the art.mjs comment and §2 above so QA grades
+  against the stated map.

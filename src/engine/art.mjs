@@ -679,21 +679,59 @@ export function speakerPortraitCanvas(doc, speaker) {
   return id ? artCanvas(doc, id, 1) : null;
 }
 
-// ---- trainer battle presentation (Wave 3b) ----
-// The three authored battle-family sprites, presented during the battle
-// intro (state 'intro' — the challenge/send-out message chain) only:
-// the foe trainer stands on the foe platform, Ash's back on the ally
-// platform; battlers take over the moment the intro chain hands off to
-// commands/RT. Trainers without a battle-scale sprite return null and
-// the intro keeps the foe battler on the platform (graceful degrade —
-// Wave 6b authors the full trainer set).
-const TRAINER_BATTLE_ART = { brock: 'brock-battle', gary: 'gary-battle' };
+// ---- trainer battle presentation (Wave 3b mechanism, Wave 6b art) ----
+// The authored battle-scale trainer sprites (48x64), presented during
+// the battle intro (state 'intro' — the challenge/send-out message
+// chain) only: the foe trainer stands on the foe platform, Ash's back
+// on the ally platform; battlers take over the moment the intro chain
+// hands off to commands/RT. Trainers without a battle-scale sprite
+// return null and the intro keeps the foe battler on the platform
+// (graceful degrade for generic trainers).
+// Wave 6b resolution: the 16 named figures resolve by trainer id, with
+// name as fallback. Gary's five rival battles use gary-battle; his
+// Champion battle (id gary_champion / title Champion) uses
+// garychamp-battle. The uniformed duo resolves per its two data
+// identities: the Route 2 ambush (id r2_duo, name 'Rue & Cole')
+// presents Rue; the later duo battles (ids duo2..duo5, name
+// 'Mara & Jules' — the same pair under their cover names) present
+// Cole. Both duo sprites are thereby reachable in real battles.
+const TRAINER_BATTLE_ART = {
+  brock: 'brock-battle', misty: 'misty-battle', surge: 'surge-battle',
+  erika: 'erika-battle', koga: 'koga-battle', sabrina: 'sabrina-battle',
+  blaine: 'blaine-battle', giovanni: 'giovanni-battle',
+  lorelei: 'lorelei-battle', bruno: 'bruno-battle',
+  agatha: 'agatha-battle', lance: 'lance-battle',
+  gary: 'gary-battle', garychamp: 'garychamp-battle',
+  rue: 'rue-battle', cole: 'cole-battle',
+};
+const TRAINER_BATTLE_IDS = {
+  brock: 'brock', misty: 'misty', surge: 'surge', erika: 'erika',
+  koga: 'koga', sabrina: 'sabrina', blaine: 'blaine',
+  giovanni: 'giovanni', lorelei: 'lorelei', bruno: 'bruno',
+  agatha: 'agatha', lance: 'lance',
+  gary_cerulean: 'gary', gary_stanne: 'gary', gary_tower: 'gary',
+  gary_silph: 'gary', gary_r22_final: 'gary',
+  gary_champion: 'garychamp',
+  r2_duo: 'rue',
+  duo2_vermilion: 'cole', duo3_celadon: 'cole', duo4_saffron: 'cole',
+  duo5_island: 'cole',
+};
+const TRAINER_BATTLE_NAMES = {
+  'brock': 'brock', 'misty': 'misty', 'lt. surge': 'surge',
+  'erika': 'erika', 'koga': 'koga', 'sabrina': 'sabrina',
+  'blaine': 'blaine', 'giovanni': 'giovanni', 'lorelei': 'lorelei',
+  'bruno': 'bruno', 'agatha': 'agatha', 'lance': 'lance',
+  'rue & cole': 'rue', 'mara & jules': 'cole',
+};
 export function trainerBattleArt(doc, trainer) {
   if (!trainer) return null;
   const name = String(trainer.name || '').toLowerCase();
   const id = String(trainer.id || '').toLowerCase();
-  const kind = (name === 'brock' || id === 'brock') ? 'brock'
-    : (name === 'gary' || id.startsWith('gary')) ? 'gary' : null;
+  const title = String(trainer.title || '').toLowerCase();
+  let kind = TRAINER_BATTLE_IDS[id] || TRAINER_BATTLE_NAMES[name] || null;
+  if (!kind && (name === 'gary' || id.startsWith('gary'))) {
+    kind = (id === 'gary_champion' || title.includes('champion')) ? 'garychamp' : 'gary';
+  }
   return kind ? artCanvas(doc, TRAINER_BATTLE_ART[kind], 1) : null;
 }
 export function playerBattleBackArt(doc) {
