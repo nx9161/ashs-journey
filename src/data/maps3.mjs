@@ -1313,8 +1313,8 @@ export const MAPS3 = {
       { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
     ],
     npcs: [
-      { x: 15, y: 11, name: 'CAPT SALT', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["Fifty years I've ferried folks around this coast, but ONE island I sail to only when the sea itself asks.", "New Island, they call it. When its story calls you, trainer — you'll know. Everyone does, exactly once."] },
+      { x: 15, y: 11, name: 'CAPT SALT', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'pallet',
+        dialogue: ["Fifty years I've ferried folks around this coast, but ONE island I sail to only when the sea itself asks.", "New Island, they call it. When its story calls you, trainer — you'll know. Everyone does, exactly once.", "And if it's Pallet Town you're wanting, my little boat runs home any time — no questions asked."] },
       { x: 3, y: 6, name: 'TOM', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         trade: { give: 'venonat', get: 'tangela', nickname: 'TANG' },
         dialogue: ["Lab work breeds Venonat like paperwork. My Tangela, Tang, at least files the vines neatly.", "Swap? Your Venonat for my Tangela. The lab gains a moth; you gain a jungle."] },
@@ -1830,7 +1830,7 @@ export const MAPS3 = {
       // like the one in every Pokemon Center).
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
-      { x: 10, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar',
+      { x: 10, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
         dialogue: ["My little ferry runs Pallet to Cinnabar for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
     encounters: null,

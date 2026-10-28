@@ -639,6 +639,19 @@ Object.assign(OverworldScene.prototype, {
     }
     if (npc.ferry) {
       sayLines(() => {
+        // CINNABAR TRAP FIX (owner report 2026-10-28): a ferry whose def
+        // carries ferryGate:'surf' enforces the game's own Surf rule —
+        // Soul Badge + a party member that knows Surf, the same pair
+        // sysInteract checks at the water's edge. The Pallet FERRYMAN's
+        // dialogue always claimed "sea legs — and the badges", but the
+        // menu opened for anyone: a fresh player sailed to Cinnabar in
+        // the first minutes and had no way home. Return legs carry no
+        // gate (CAPT SALT, Cinnabar -> Pallet): NO-SOFT-LOCK LAW —
+        // anyone standing on Cinnabar can always sail home.
+        if (npc.ferryGate === 'surf' && !(g.state.badges.kanto.includes('soulbadge') && this.partyKnows('surf'))) {
+          g.ui.say(['The crossing is no fair-weather hop, trainer.', 'Come back with the Soul Badge in your case and a partner who knows Surf — then we sail.'], null, npc.name);
+          return;
+        }
         g.ui.showMenu('Sail to ' + npc.ferry + '?', [
           { label: 'Sail', value: 'yes' }, { label: 'Stay', value: 'no' },
         ], (v) => {

@@ -2460,3 +2460,68 @@ choose another Pokemon" → Shift/Set option added, DEFAULT = SET.
   expectation changes (it never selects a style; its seeded save
   stores 'rt', preserved by design). personal/ byte-identical.
   Nothing deployed.
+
+## Cinnabar Trap — owner-reported bug (2026-10-28, mission close)
+
+Owner report: reached Cinnabar Island "at the beginning of the game"
+and could not get back. Investigation + proof drives at
+~/workspace/ashs-journey-qa/cinnabar-trap.md (drivers
+cinnabar-proof-driver.mjs / cinnabar-regression-driver.mjs, shots in
+cinnabar-proof-shots/).
+
+- **Root cause 1 (early access):** the Pallet Town FERRYMAN
+  (maps3.mjs, (10,8), `ferry: 'cinnabar'`) — his dialogue claims the
+  crossing is "for trainers who've earned the sea legs — and the
+  badges", but the `npc.ferry` handler in overworld-systems.mjs
+  checked NOTHING: talk → "Sail to cinnabar?" → island, in the first
+  minutes of a fresh game. Live-proven: fresh save (badges [],
+  no Surf/Fly) sailed Pallet → Cinnabar in 3 steps + 2 talks.
+- **Root cause 2 (stranding):** Cinnabar had NO return leg — CAPT
+  SALT carried no `ferry:` (dialogue only, live-proven). Fly is
+  Thunder-Badge + visited-gated; and the land route home dead-ends:
+  full-graph reachability (engine WALKABLE set + warp graph) from
+  Fuchsia reaches 31 south-east maps but never Pallet/Viridian —
+  Route 11 has no east exit (its only warp returns to Vermilion;
+  the Vermilion↔Route 12 link the Town Map draws does not exist in
+  the warp data) and Celadon's Route 8 gate sits in a sealed pocket
+  (sibling S1, below). Healing on Cinnabar even anchors the blackout
+  respawn there. Stranded — as reported.
+- **Fix:** the ferry handler now enforces `ferryGate: 'surf'` —
+  the game's own Surf rule (Soul Badge + a party member that knows
+  Surf, the same pair sysInteract checks at the water's edge).
+  FERRYMAN's def carries the flag; refusal plays as dialogue ("Come
+  back with the Soul Badge in your case and a partner who knows
+  Surf — then we sail."), no menu. SAILOR BRINE (→ S.S. Anne)
+  untouched. CAPT SALT gains `ferry: 'pallet'` with NO gate —
+  **NO-SOFT-LOCK LAW (new standing regression): every reachable map
+  must have a reachable exit using only the tools the player provably
+  has there; anyone standing on Cinnabar, including a legacy save
+  with no Surf, can always sail home.**
+- **Regressions (live drives, 9/9):** R1 fresh save refused (no
+  menu, refusal names the rule, still in Pallet); R2 Surf-equipped
+  save sails Pallet → Cinnabar AND returns via CAPT SALT; R3 a
+  stranded no-badge save seeded on Cinnabar escapes via CAPT SALT
+  → Pallet (7,7) — the owner's own rescue path.
+- **Battery:** build OK; qa-changed-flows fails EXACTLY {b2, d9}
+  (standing baseline); campaign-smoke 24/24; fidelity 35/35;
+  battle-model 45/45; rejuv 1–6 (44/42/63/53/55/46); Track B
+  integration 114/114; verify-slice 134/134; audit-headless 17/17;
+  audit-laptop (public) 39/39 standalone (base A/B 40/40; an earlier
+  15/29 run was the documented parallel-contention flake, disproven
+  on re-run); budgets PASS; contamination clean; audio ALL PASS.
+  Drift gate FAILS identically on the pristine base commit — the
+  retired personal edition is deliberately stale there; personal/
+  byte-identical in this change, as in the ADR-026 mission.
+- **Sibling S1 (reported, NOT fixed here):** Celadon City is
+  fragmented — entering from Route 7, the live engine reaches only
+  32 tiles (gym + east-house doors, way back); the Center, Mart,
+  Game Corner, Route 8 gate (17,9) and Route 16 gate (0,4) are
+  unreachable (NPC at (11,8), bare `n` plinth at (12,9), Game Corner
+  door-fronts opening into the sealed pocket). Live-proven by
+  cinnabar-celadon-probe.mjs. Pre-existing dressing-era progression
+  break; not a one-way trap (Route 7 exit works) and not on the
+  Cinnabar route — queued for its own mission.
+- **Sibling audit (clean):** S.S. Anne exit warps → Vermilion ✓;
+  New Island exit warps → Vermilion, arrival story-gated ✓; Seafoam
+  exits → Route 20, entry already behind the same sea gate ✓.
+  Nothing deployed (parent ships).
