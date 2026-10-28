@@ -355,6 +355,7 @@ function checkSettings(s, errors) {
   for (const k of BOOLS) if (s[k] !== undefined && typeof s[k] !== 'boolean') errors.push('bad-setting:' + k);
   if (s.textSpeed !== undefined && !['slow', 'normal', 'fast', 'instant'].includes(s.textSpeed)) errors.push('bad-setting:textSpeed');
   if (s.battleStyle !== undefined && !['rt', 'classic'].includes(s.battleStyle)) errors.push('bad-setting:battleStyle');
+  if (s.switchMode !== undefined && !['set', 'shift'].includes(s.switchMode)) errors.push('bad-setting:switchMode');
   for (const k of ['musicVol', 'sfxVol']) if (s[k] !== undefined && (typeof s[k] !== 'number' || s[k] < 0 || s[k] > 1)) errors.push('bad-setting:' + k);
   if (s.keymap !== undefined && !(s.keymap === null || isPlainObj(s.keymap))) errors.push('bad-setting:keymap');
   if (s.hudScale !== undefined && (typeof s.hudScale !== 'number' || s.hudScale < 0.5 || s.hudScale > 2)) errors.push('bad-setting:hudScale');

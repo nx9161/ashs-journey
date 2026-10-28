@@ -104,9 +104,10 @@ export class BattleScene {
     this.onSafariAction = opts.onSafariAction || null; // overworld spends a step per action
     this.safariBait = false;
     this.safariRock = false;
-    // ADR-020: real-time mode is the default battle flow; the tutorial and
-    // Safari command battles stay on the classic engine, and the player can
-    // choose Classic in Settings (opts.rt === false).
+    // ADR-026 (owner ruling 2026-10-28): the classic turn-based engine is
+    // THE main battle; real-time (ADR-020) survives as an optional legacy
+    // mode the player selects in Settings (opts.rt === true). The tutorial
+    // and Safari command battles always stay on the classic engine.
     this.rtMode = !opts.tutorial && !opts.safari && opts.rt !== false;
     this.rt = null;
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
@@ -493,6 +494,11 @@ export class BattleScene {
       // the Tortoise Charm can never fire here).
       const ksLines = this.ksApplyTriggers('ally', {});
       const proceedSwitch = () => {
+        // ADR-026 WP3 (presentation only, classic theater): the incoming
+        // mon's cry lands WITH its "Go!" line — switch-ins were the one
+        // send-out in the classic flow with no cry at all. RT keeps its
+        // own soundscape untouched.
+        if (!this.rtMode) g.audio.playCry(this.ally.speciesId);
         if (inFaint) {
           this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this.toCommand());
         } else if (this.rtMode) {
@@ -959,7 +965,11 @@ export class BattleScene {
         else if (eff < 1) { this.shakeT = 60; }
         if (crit) this.flashT = 90;
         // README impact: white palette-swap on the defender for 2 frames + shake.
-        if (eff !== 1 || crit) this.impactFx = { side: foeSide, t: 0 };
+        // ADR-026 WP3 (presentation only): EVERY damaging hit flashes the
+        // defender — neutral-effectiveness hits used to land with no
+        // impact feedback at all while super/not-very-effective hits
+        // flashed, which read as inconsistent hit confirmation.
+        if (eff !== 1 || crit || dmg > 0) this.impactFx = { side: foeSide, t: 0 };
         // P1/I5: haptic tick on super-effective (guarded; mobile only).
         if (eff > 1 && g.state.settings.vibration && typeof navigator !== 'undefined' && navigator.vibrate) {
           try { navigator.vibrate(30); } catch (e) { /* no haptics */ }
@@ -1269,7 +1279,16 @@ export class BattleScene {
 
   afterFaintFoe() {
     const g = this.game;
+    // ADR-026 Shift exactly-once guard: while a Shift sequence for this
+    // KO is in progress, any re-entry into afterFaintFoe (the
+    // state==='faintfoe' lanes in afterMsg/nextAfterStatus) is a no-op —
+    // the prompt can never fire twice for one KO.
+    if (this._shiftInProgress) return;
     if (this.kind === 'trainer') {
+      // ADR-026 Shift/Set: in Shift mode (classic engine only) the KO'd
+      // foe's XP is awarded BEFORE the "about to send out" prompt. Set
+      // mode — and every RT battle — runs the flow below verbatim.
+      if (this._shiftApplies()) { this._beginShift(); return; }
       this.trainerIdx++;
       if (this.trainerIdx < this.trainer.team.length) {
         const t = this.trainer.team[this.trainerIdx];
@@ -1281,8 +1300,10 @@ export class BattleScene {
         this.participants = new Set([this.ally]); // XP pool resets per foe
         this.hpAnim.foe = this.foe.hp;
         const foeName = displayName(this.foe, SPECIES);
+        // ADR-026 WP3 (presentation only): the incoming mon's cry lands
+        // WITH the send-out line, not after the player dismisses it.
+        g.audio.playCry(t.species);
         this.say(this.trainer.name + ' sent out ' + foeName + '!', () => {
-          g.audio.playCry(t.species);
           this.state = 'resolve';
           this.awardXp(() => this.toCommand());
         });
@@ -1298,15 +1319,124 @@ export class BattleScene {
     }
   }
 
-  awardXp(cb) {
+  // ---- ADR-026: Shift/Set (settings.switchMode, classic engine only) ----
+  // SET (default): afterFaintFoe above, exactly as shipped — no prompt,
+  // ever, on a foe KO. SHIFT: the genre prompt. The gate is deliberately
+  // narrow: classic engine only (RT's flow is unchanged), trainer battles
+  // only, never the scripted tutorial, never a friendly spar, never the
+  // trainer's last mon (straight to winTrainer), and only when a legal
+  // switch target exists (another healthy party mon) — asking with
+  // nothing to switch to would be a pointless interruption.
+  _shiftApplies() {
+    if (this.rtMode) return false;
+    if (this.tutorial || this.friendly) return false;
+    if (this.kind !== 'trainer' || !this.trainer) return false;
     const g = this.game;
-    const base = SPECIES[this.foe.speciesId].baseXp;
+    if (!g.state.settings || g.state.settings.switchMode !== 'shift') return false;
+    if (this._shiftInProgress) return false;
+    if (this.trainerIdx + 1 >= this.trainer.team.length) return false;
+    return g.state.party.some((m) => m.hp > 0 && m !== this.ally);
+  }
+
+  _beginShift() {
+    const g = this.game;
+    this._shiftInProgress = true;
+    const koFoe = this.foe;
+    const koParts = this.participants;
+    // Genre order: the KO'd foe's XP goes only to the mons that
+    // participated against IT — awarded BEFORE the prompt, so a mon
+    // that switches in for the incoming foe can never share it.
+    this.awardXpFor(koFoe, koParts, () => {
+      // Build the incoming foe now: the prompt must name it. It takes
+      // the field only in _shiftSendOut, after the player's decision.
+      this.trainerIdx++;
+      const t = this.trainer.team[this.trainerIdx];
+      const incoming = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
+      if (t.nickname) incoming.nickname = t.nickname;
+      const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
+      if (ksN) incoming.keepsake = ksN;
+      this._shiftIncoming = incoming;
+      this._askShift();
+    });
+  }
+
+  _askShift() {
+    const nextName = displayName(this._shiftIncoming, SPECIES);
+    this.state = 'shiftprompt';
+    this.say(this.trainer.name + ' is about to send out ' + nextName + '! Will you change Pokemon?', () => this._showShiftMenu());
+  }
+
+  _showShiftMenu() {
+    const g = this.game;
+    this.state = 'shiftprompt';
+    g.ui.showMenu('Will you change Pokemon?', [
+      { label: 'Yes', value: 'yes' },
+      { label: 'No', value: 'no' },
+    ], (v) => {
+      if (v === 'yes') { this._openShiftParty(); return; }
+      // No — or the menu was cancelled: the battle must never strand
+      // on the prompt, so a cancel takes the No path.
+      this._shiftSendOut();
+    }, { menuClass: 'battlewin' });
+  }
+
+  // The Shift switch is NOT a turn: no foe action, no beginTurn — the
+  // incoming ally simply takes the field before the trainer's send-out.
+  // Backing out re-asks the prompt; it can never strand the battle.
+  _openShiftParty() {
+    const g = this.game;
+    const items = g.state.party.map((m, i) => ({
+      label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + (m === this.ally ? ' (active)' : ''),
+      value: i, disabled: m.hp <= 0 || m === this.ally,
+    }));
+    items.push({ label: 'Back', value: -1 });
+    g.ui.showMenu('Choose a Pokemon', items, (v) => {
+      if (v === null || v === -1) { this._showShiftMenu(); return; }
+      this.ally = g.state.party[v];
+      this.allyStages = this.ally.stages;
+      if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
+      this.hpAnim.ally = this.ally.hp;
+      // Switch-in keepsake triggers evaluate exactly as a command-phase
+      // switch-in does (openPartyMenu parity — presentation + stages).
+      const ksLines = this.ksApplyTriggers('ally', {});
+      const go = () => {
+        g.audio.playCry(this.ally.speciesId);
+        this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this._shiftSendOut());
+      };
+      if (ksLines.length) this.say(ksLines.join(' '), go);
+      else go();
+    }, { menuClass: 'battlewin' });
+  }
+
+  _shiftSendOut() {
+    const g = this.game;
+    const incoming = this._shiftIncoming;
+    this._shiftIncoming = null;
+    this.foe = incoming;
+    this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
+    // The incoming foe's XP pool starts with whoever NOW faces it —
+    // the ally who stayed, or the mon just switched in.
+    this.participants = new Set([this.ally]);
+    this.hpAnim.foe = this.foe.hp;
+    const foeName = displayName(this.foe, SPECIES);
+    g.audio.playCry(this.foe.speciesId); // WP3: cry with the line, as Set
+    this.say(this.trainer.name + ' sent out ' + foeName + '!', () => {
+      this._shiftInProgress = false;
+      this.toCommand();
+    });
+  }
+
+  awardXp(cb) { this.awardXpFor(this.foe, this.participants, cb); }
+
+  awardXpFor(foeMon, partsSet, cb) {
+    const g = this.game;
+    const base = SPECIES[foeMon.speciesId].baseXp;
     // ADR-025 §4: mode + Fast Learner XP multipliers scale the pool before
     // the participant split (x1.25 Story; x1.5 Fast Learner; they compose).
-    const total = Math.max(1, Math.floor(xpYield(base, this.foe.level, this.kind === 'wild') * xpMultFor(g.state)));
+    const total = Math.max(1, Math.floor(xpYield(base, foeMon.level, this.kind === 'wild') * xpMultFor(g.state)));
     // Fidelity pack (ADR-018): XP splits among the participants who faced
     // THIS foe and are still standing — never the whole party for free.
-    const parts = [...this.participants].filter((m) => m.hp > 0);
+    const parts = [...partsSet].filter((m) => m.hp > 0);
     const share = parts.length ? Math.max(1, Math.floor(total / parts.length)) : 0;
     // ADR-025 §3: Champion's Ribbon — the HOLDER's share gains x1.2,
     // composing multiplicatively with the mode/House-Rule factors that

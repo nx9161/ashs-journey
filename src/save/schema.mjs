@@ -167,6 +167,13 @@ export function fillV2Defaults(data) {
     }
   }
   if (isObj(data.settings)) {
+    // ADR-026 (2026-10-28): battle model defaults-fill. A STORED
+    // battleStyle is the player's own choice and is NEVER rewritten —
+    // only a missing/invalid value lands on the current default
+    // ('classic'). switchMode did not exist before ADR-026, so every
+    // existing save lands on the ruled default 'set' the same way.
+    if (!['rt', 'classic'].includes(data.settings.battleStyle)) data.settings.battleStyle = 'classic';
+    if (!['set', 'shift'].includes(data.settings.switchMode)) data.settings.switchMode = 'set';
     if (!isObj(data.settings.houseRules)) data.settings.houseRules = {};
     // Rebuild with exactly the known keys (QA hygiene note): unknown keys
     // are dropped here so the client shape always matches the server

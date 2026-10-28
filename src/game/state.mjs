@@ -172,7 +172,8 @@ export function defaultState(inherit) {
       textSpeed: 'normal', battleAnims: true, shake: true, reducedMotion: false,
       mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1,
       vibration: true, autosave: true, showTouch: false, // P1/I5+I2: Wave-3 additions
-      battleStyle: 'rt', // ADR-020: 'rt' real-time (default) | 'classic' turn-based
+      battleStyle: 'classic', // ADR-026 (owner ruling 2026-10-28): 'classic' turn-based is THE main battle (default) | 'rt' real-time (optional legacy mode, ADR-020)
+      switchMode: 'set', // ADR-026: 'set' (default — no switch prompt on a foe KO) | 'shift' (genre prompt before the next foe is sent out; classic engine only)
       // ADR-025 §4 House Rules: player-side modifier toggles, all default
       // OFF. Enabling any of them (ever) sets meta.houseRulesTouched and
       // costs the save its "Pure Run" ribbon — nothing else.

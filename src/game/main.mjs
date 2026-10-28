@@ -956,6 +956,7 @@ export class Game {
       { label: 'SFX volume: ' + Math.round(s.sfxVol * 100) + '%', value: 'sfx' },
       { label: 'Battle animations: ' + yn(s.battleAnims), value: 'banim' },
       { label: 'Battle style: ' + (s.battleStyle === 'classic' ? 'CLASSIC (turns)' : 'REAL-TIME'), value: 'bstyle' },
+      { label: 'Switch style: ' + (s.switchMode === 'shift' ? 'SHIFT' : 'SET'), value: 'swmode' },
       { label: 'Difficulty: ' + DIFFICULTY_LABELS[difficultyOf(g.state)], value: 'diff' },
       { label: 'House Rules', value: 'hrules' },
       { label: 'Screen shake: ' + yn(s.shake), value: 'shake' },
@@ -987,6 +988,7 @@ export class Game {
       else if (v === 'sfx') { s.sfxVol = s.sfxVol >= 0.99 ? 0 : Math.round((s.sfxVol + 0.1) * 10) / 10; g.audio.setSfxVolume(s.sfxVol); }
       else if (v === 'banim') s.battleAnims = !s.battleAnims;
       else if (v === 'bstyle') { s.battleStyle = s.battleStyle === 'classic' ? 'rt' : 'classic'; g.ui.toast('Battle style: ' + (s.battleStyle === 'classic' ? 'Classic turns' : 'Real-time')); }
+      else if (v === 'swmode') { s.switchMode = s.switchMode === 'shift' ? 'set' : 'shift'; g.ui.toast('Switch style: ' + (s.switchMode === 'shift' ? 'Shift' : 'Set')); }
       else if (v === 'diff') { g.openDifficultyMenu(); return; }
       else if (v === 'hrules') { g.openHouseRulesMenu(); return; }
       else if (v === 'shake') s.shake = !s.shake;

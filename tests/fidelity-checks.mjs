@@ -201,7 +201,8 @@ ok('formula: damage — crit doubles level in formula (Gen 1)', F.calcDamage(5, 
   const gameJs = buildGameJs();
   const driver = `
   ;(function () {
-    const game = new Game(null); // default settings: battleStyle 'rt' (ADR-020)
+    const game = new Game(null); // ADR-026: default is now 'classic' — pin 'rt' explicitly so this RT functional proof is independent of the default
+    game.state.settings.battleStyle = 'rt';
     game.ui.init(); game.input.bindKeyboard(); game.buildSprites(); game.applyLayout();
     game.scenes.push(new BootScene());
     const input = game.input, ui = game.ui;
