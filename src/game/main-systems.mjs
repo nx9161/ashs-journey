@@ -304,7 +304,7 @@ Object.assign(Game.prototype, {
     const g = this;
     const items = [];
     // Section 1 — Main Story (unchanged machinery: the MAIN_QUESTS chain).
-    items.push({ label: '— MAIN STORY —', value: null, disabled: true });
+    items.push({ label: '— MAIN STORY —', value: null, disabled: true, band: true });
     for (const q of MAIN_QUESTS) {
       const doneF = q.flag && g.state.story.flags[q.flag];
       const active = !doneF && MAIN_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
@@ -317,7 +317,7 @@ Object.assign(Game.prototype, {
     // exactly the ids the arc machinery wrote there).
     const arcs = Object.keys(g.state.story.quests || {});
     if (arcs.length) {
-      items.push({ label: '— LEGENDARY ARCS —', value: null, disabled: true });
+      items.push({ label: '— LEGENDARY ARCS —', value: null, disabled: true, band: true });
       for (const id of arcs) {
         const arc = LEGENDARY_ARCS[id];
         if (!arc) continue;
@@ -328,7 +328,7 @@ Object.assign(Game.prototype, {
     // stage text. Unaccepted tales point at their giver; accepted tales
     // state their reward up front (§5 shape law); completed tales carry
     // their revelation.
-    items.push({ label: '— TOWN TALES —', value: null, disabled: true });
+    items.push({ label: '— TOWN TALES —', value: null, disabled: true, band: true });
     for (const tale of Object.values(QUESTS)) {
       const s = taleStageOf(g.state, tale.id);
       const mark = s < 0 ? '· ' : s >= tale.stages.length ? '★ ' : '▶ ';
@@ -339,7 +339,7 @@ Object.assign(Game.prototype, {
     // characters the player actually has a bond record with appear.
     const people = bondedCharacters(g.state);
     if (people.length) {
-      items.push({ label: '— PEOPLE —', value: null, disabled: true });
+      items.push({ label: '— PEOPLE —', value: null, disabled: true, band: true });
       for (const c of people) {
         items.push({ label: '· ' + c.name + ' — ' + tierOf(g.state, c.id), value: 'bond:' + c.id });
       }
@@ -399,18 +399,95 @@ Object.assign(Game.prototype, {
 
   openTownMap() {
     const g = this;
-    // AUDIT FIX (C201): the Town Map was one dialogue line of RAW internal
-    // map ids. It is now a real screen: visited places by display name,
-    // current location marked, in a proper Platinum window.
-    const visited = Object.keys(g.state.story.flags).filter((k) => k.startsWith('reached_')).map((k) => k.slice(8));
+    // Elevation B1 (C201 remainder): the Town Map is now Platinum's
+    // GRAPHICAL map — a canvas panel over a hand-authored Kanto layout.
+    // The gating rule is unchanged from the text screen it replaces:
+    // only places whose reached_* flag is set appear at all, and the
+    // player's current map carries the "you are here" marker.
+    const LAYOUT = [
+      // [mapId, x (0=W..1=E), y (0=N..1=S), isTown]
+      ['indigo', 0.06, 0.30, 1], ['victoryroad', 0.10, 0.37, 0], ['route22', 0.14, 0.44, 0],
+      ['pewter', 0.16, 0.20, 1], ['route2', 0.19, 0.33, 0], ['viridian', 0.20, 0.50, 1],
+      ['route1', 0.20, 0.58, 0], ['pallet', 0.20, 0.67, 1], ['cinnabar', 0.16, 0.90, 1],
+      ['route3', 0.31, 0.19, 0], ['route4', 0.45, 0.17, 0], ['cerulean', 0.57, 0.15, 1],
+      ['route5', 0.57, 0.28, 0], ['route9', 0.70, 0.17, 0], ['route10', 0.79, 0.27, 0],
+      ['lavender', 0.81, 0.40, 1], ['route12', 0.81, 0.57, 0], ['route8', 0.69, 0.43, 0],
+      ['saffron', 0.58, 0.42, 1], ['route7', 0.50, 0.44, 0], ['celadon', 0.41, 0.44, 1],
+      ['route16', 0.29, 0.60, 0], ['route6', 0.57, 0.56, 0], ['vermilion', 0.57, 0.68, 1],
+      ['route11', 0.70, 0.68, 0], ['route15', 0.71, 0.82, 0], ['fuchsia', 0.54, 0.86, 1],
+      ['route19', 0.52, 0.95, 0], ['route20', 0.33, 0.95, 0],
+    ];
+    const LINKS = [
+      ['pallet', 'route1'], ['route1', 'viridian'], ['viridian', 'route2'], ['route2', 'pewter'],
+      ['pewter', 'route3'], ['route3', 'route4'], ['route4', 'cerulean'], ['cerulean', 'route9'],
+      ['route9', 'route10'], ['route10', 'lavender'], ['lavender', 'route8'], ['route8', 'saffron'],
+      ['saffron', 'route7'], ['route7', 'celadon'], ['cerulean', 'route5'], ['route5', 'saffron'],
+      ['saffron', 'route6'], ['route6', 'vermilion'], ['vermilion', 'route11'], ['route11', 'route12'],
+      ['lavender', 'route12'], ['route12', 'route15'], ['route15', 'fuchsia'], ['celadon', 'route16'],
+      ['route16', 'fuchsia'], ['fuchsia', 'route19'], ['route19', 'route20'], ['route20', 'cinnabar'],
+      ['viridian', 'route22'], ['route22', 'victoryroad'], ['victoryroad', 'indigo'],
+    ];
+    const flags = g.state.story.flags;
     const cur = g.state.story.position && g.state.story.position.map;
-    const items = visited.map((id) => ({
-      label: (MAPS[id] ? MAPS[id].name : id) + (id === cur ? '  — you are here' : ''),
-      value: null, disabled: true,
-    }));
-    if (!items.length) items.push({ label: 'Nowhere yet. Walk!', value: null, disabled: true });
-    items.push({ label: 'Close', value: 'close' });
-    g.ui.showMenu('Town Map — Kanto', items, () => {});
+    const nodes = [];
+    const indexOf = {};
+    for (const [id, x, y, town] of LAYOUT) {
+      if (!flags['reached_' + id] || !MAPS[id]) continue;
+      indexOf[id] = nodes.length;
+      nodes.push({ id, name: MAPS[id].name, x, y, town: !!town, current: id === cur });
+    }
+    if (!nodes.length) { g.ui.say(['Nowhere yet. Walk!']); return; }
+    const links = [];
+    for (const [a, b] of LINKS) {
+      if (indexOf[a] !== undefined && indexOf[b] !== undefined) links.push([indexOf[a], indexOf[b]]);
+    }
+    g.ui.showMapPanel({ nodes, links }, () => {});
+  },
+
+  // Elevation B2 (S-48): Hall of Fame viewer — reads the REAL story.hof
+  // shape recorded by runEnding ({team: [{speciesId, level, nickname}],
+  // badges}), latest entry first, on the gold-trim ceremony plate.
+  openHallOfFame() {
+    const g = this;
+    const hof = (g.state.story && g.state.story.hof) || [];
+    if (!hof.length) {
+      g.ui.say(['No Hall of Fame entries yet — defeat the Champion to record your team.'], null, 'Hall of Fame');
+      return;
+    }
+    const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
+    for (let e = hof.length - 1; e >= 0; e--) {
+      const entry = hof[e];
+      html += '<div class="hofentry"><div class="hofhead2">Entry ' + (e + 1) + ' — ' + (entry.badges || 0) + ' badges</div><div class="hofteam">';
+      for (const m of entry.team || []) {
+        const sp = SPECIES[m.speciesId];
+        const name = m.nickname || (sp ? sp.name : m.speciesId);
+        html += '<div class="hofmon"><img class="picon hofsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+          + '<span class="hofname">' + esc(name) + '</span>'
+          + '<span class="hofsub">' + (m.nickname && sp ? esc(sp.name) + ' · ' : '') + 'Lv' + m.level + '</span></div>';
+      }
+      html += '</div></div>';
+    }
+    html += '</div>';
+    g.ui.showSummary({ name: 'Hall of Fame', tabs: [{ id: 'hof', label: 'HALL OF FAME', bodyHtml: html }] }, null);
+  },
+
+  // Elevation B2 (S-48): Diploma viewer — the same plate Hawthorn
+  // presents at dex completion (checkDiploma's exact lines), re-viewable
+  // from the Journey menu once the Kanto dex is complete.
+  openDiploma() {
+    const g = this;
+    const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
+    const n = kanto.filter((s) => g.state.dex.caught[s.dexNo]).length;
+    if (n < 151) {
+      g.ui.say(['You\'ve caught ' + n + ' of 151 Kanto Pokemon.'], null, 'Prof. Hawthorn');
+      return;
+    }
+    const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const html = '<div class="diploma"><div class="diplomatitle">DIPLOMA</div>'
+      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Kanto Pokedex:</div>'
+      + '<div class="diplomabody">all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
+    g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'DIPLOMA', bodyHtml: html }] }, null);
   },
 
   // ---------- field moves (WS9) ----------

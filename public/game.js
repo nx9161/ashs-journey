@@ -16802,6 +16802,9 @@ class UI {
     this.buildDialogue();
     this.buildMenu();
     this.buildSummaryPanel();
+    this.buildEntryPanel();
+    this.buildMapPanel();
+    this.buildRtMovePad();
     this.buildPcPanel();
     this.buildToasts();
     this.buildHudChips();
@@ -17098,6 +17101,9 @@ class UI {
       // time under the tab strip, Platinum-style.
       bagTabs: opts.bagTabs || null,
       bagPocket: initPocket,
+      // Elevation B4: a menu may claim the direction keys itself (the
+      // mart quantity stepper adjusts instead of moving a cursor).
+      onKey: opts.onKey || null,
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
     if (!this.headless) this.renderMenu();
@@ -17107,8 +17113,15 @@ class UI {
     if (this.headless) return;
     const m = this.menu;
     if (!m || m.kind === 'commands') { this.menuEl.classList.add('hidden'); return; }
-    this.menuEl.classList.remove('hidden');
+    // Elevation C1: the open transition plays only when the window was
+    // actually hidden (a fresh open) — cursor moves and in-place
+    // re-renders (bag pockets, the mart stepper) must not replay it.
+    const wasHidden = this.menuEl.classList.contains('hidden');
+    // className assignment wipes the class list, so it must land BEFORE
+    // the menu-open add below (QA Major 2, 2026-10-27: the transition
+    // class was being stripped by this very line and never played).
     this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '');
+    if (wasHidden) this.menuEl.classList.add('menu-open');
     // Full-takeover windows (party screen, PC box, summary) hide the
     // overworld HUD — Platinum screens own the whole frame.
     if (typeof document !== 'undefined' && document.body) {
@@ -17146,6 +17159,7 @@ class UI {
       r.className = 'menu-row'
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
+        + (it.band ? ' band' : '')
         + (it.wide ? ' wide' : '')
         + (it.closeRow ? ' close-row' : '')
         + (it.zeroPp ? ' zeropp' : '')
@@ -17372,6 +17386,278 @@ class UI {
   }
 
   get summaryOpen() { return !!this.summary; }
+
+  // ---- Dex entry panel (Elevation B5) ----
+  // A single-plate panel in the summary family: the caller composes the
+  // entry body per species; this class owns the chrome and the paging
+  // keys (routed in update()). cb receives ('page', -1|1) and ('close').
+  buildEntryPanel() {
+    this.entryEl = this.el('div', 'entrypanel hidden', this.frame);
+    this.entryHead = this.el('div', 'entryhead', this.entryEl);
+    this.entryBody = this.el('div', 'entrybody', this.entryEl);
+    const close = this.el('button', 'sumclose', this.entryEl);
+    close.textContent = 'Close';
+    close.addEventListener('pointerdown', (e) => { e.preventDefault(); this.closeEntryPanel(); });
+    // Pointer paging: tap the header's edge arrows (rendered in the title).
+    this.entryHead.addEventListener('pointerdown', (e) => {
+      if (!this.entryPanel) return;
+      e.preventDefault();
+      const r = this.entryHead.getBoundingClientRect();
+      if (!r || !r.width) return;
+      const frac = (e.clientX - r.left) / r.width;
+      if (frac < 0.18) this.entryPanel.cb('page', -1);
+      else if (frac > 0.82) this.entryPanel.cb('page', 1);
+    });
+  }
+
+  showEntryPanel(data, cb) {
+    this.entryPanel = { data, cb: cb || null };
+    this.log.push({ ui: 'dexentry', title: data && data.title });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) this.renderEntryPanel();
+  }
+
+  renderEntryPanel() {
+    if (this.headless || !this.entryEl) return;
+    const p = this.entryPanel;
+    if (!p) { this.entryEl.classList.add('hidden'); return; }
+    this.entryEl.classList.remove('hidden');
+    this.entryHead.textContent = p.data.title || '';
+    this.entryBody.innerHTML = p.data.bodyHtml || '';
+  }
+
+  updateEntryPanel(data) {
+    if (!this.entryPanel) return;
+    this.entryPanel.data = data;
+    if (!this.headless) this.renderEntryPanel();
+  }
+
+  closeEntryPanel() {
+    const p = this.entryPanel;
+    if (!p) return;
+    this.entryPanel = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.entryEl) this.entryEl.classList.add('hidden');
+    this.game.audio.playSfx(SFX['ui-back']);
+    if (p.cb) p.cb('close');
+  }
+
+  get entryOpen() { return !!this.entryPanel; }
+
+  // ---- Graphical Town Map panel (Elevation B1) ----
+  // A canvas map in a Platinum window, PC-panel pattern: the caller
+  // (Game.openTownMap) supplies the reached-gated node list + link pairs
+  // on a hand-authored layout; this class owns the chrome, the cursor,
+  // the canvas drawing (flat plates only) and a DOM narration element
+  // whose text names the map + the place under the cursor, so the map
+  // is verifiable without reading pixels (the sign-narration pattern).
+  buildMapPanel() {
+    this.mapEl = this.el('div', 'mappanel hidden', this.frame);
+    const head = this.el('div', 'maptitle', this.mapEl);
+    head.textContent = 'TOWN MAP — KANTO';
+    this.mapCanvas = this.el('canvas', 'mapcanvas', this.mapEl);
+    if (this.mapCanvas) { this.mapCanvas.width = 480; this.mapCanvas.height = 300; }
+    this.mapNarr = this.el('div', 'mapnarr', this.mapEl);
+    const foot = this.el('div', 'mapfoot', this.mapEl);
+    foot.textContent = 'Arrows: move · B: close';
+    const close = this.el('button', 'sumclose', this.mapEl);
+    close.textContent = 'Close';
+    close.addEventListener('pointerdown', (e) => { e.preventDefault(); this.closeMapPanel(); });
+    if (this.mapCanvas && this.mapCanvas.addEventListener) {
+      this.mapCanvas.addEventListener('pointerdown', (e) => {
+        if (!this.mapPanel) return;
+        e.preventDefault();
+        const r = this.mapCanvas.getBoundingClientRect();
+        if (!r || !r.width) return;
+        const nx = (e.clientX - r.left) / r.width, ny = (e.clientY - r.top) / r.height;
+        let best = -1, bd = 0.02;
+        this.mapPanel.data.nodes.forEach((n, i) => {
+          const d = (n.x - nx) * (n.x - nx) + (n.y - ny) * (n.y - ny);
+          if (d < bd) { bd = d; best = i; }
+        });
+        if (best >= 0) { this.mapPanel.cursor = best; this.game.audio.playSfx(SFX['ui-tick']); this.renderMapCanvas(); this._mapNarrate(); }
+      });
+    }
+  }
+
+  // data: { nodes: [{id, name, x, y, town, current}], links: [[i, j], ...] }
+  showMapPanel(data, cb) {
+    let cursor = data.nodes.findIndex((n) => n.current);
+    if (cursor < 0) cursor = 0;
+    this.mapPanel = { data, cursor, cb: cb || null };
+    this.log.push({ ui: 'townmap', nodes: data.nodes.map((n) => n.name), current: data.nodes[cursor] ? data.nodes[cursor].name : null });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) {
+      this.mapEl.classList.remove('hidden');
+      this.renderMapCanvas();
+      this._mapNarrate();
+    }
+  }
+
+  _mapNarrate() {
+    if (this.headless || !this.mapNarr || !this.mapPanel) return;
+    const n = this.mapPanel.data.nodes[this.mapPanel.cursor];
+    this.mapNarr.textContent = 'Town Map — Kanto · ' + (n ? n.name + (n.current ? ' (you are here)' : '') : 'Nowhere yet');
+  }
+
+  mapMove(dir) {
+    const p = this.mapPanel;
+    if (!p || p.data.nodes.length < 2) return;
+    const cur = p.data.nodes[p.cursor];
+    let best = -1, bestScore = Infinity;
+    p.data.nodes.forEach((n, i) => {
+      if (i === p.cursor) return;
+      const dx = n.x - cur.x, dy = n.y - cur.y;
+      let primary, perp;
+      if (dir === 'left') { primary = -dx; perp = Math.abs(dy); }
+      else if (dir === 'right') { primary = dx; perp = Math.abs(dy); }
+      else if (dir === 'up') { primary = -dy; perp = Math.abs(dx); }
+      else { primary = dy; perp = Math.abs(dx); }
+      if (primary <= 0.005) return;
+      const score = primary + perp * 2.2;
+      if (score < bestScore) { bestScore = score; best = i; }
+    });
+    if (best >= 0) {
+      p.cursor = best;
+      this.game.audio.playSfx(SFX['ui-tick']);
+      this.renderMapCanvas();
+      this._mapNarrate();
+    }
+  }
+
+  renderMapCanvas() {
+    if (this.headless || !this.mapCanvas || !this.mapPanel) return;
+    const x = this.mapCanvas.getContext('2d');
+    if (!x) return;
+    const W = 480, H = 300;
+    const p = this.mapPanel;
+    const nodes = p.data.nodes;
+    const px = (n) => Math.round(n.x * (W - 48)) + 24;
+    const py = (n) => Math.round(n.y * (H - 48)) + 24;
+    // Sea + landmass: flat plates only (Platinum law — no gradients).
+    x.fillStyle = '#5a9ae8'; x.fillRect(0, 0, W, H); // sea: the HUD dex-screen blue
+    x.fillStyle = '#a9c08a'; // land: the LCD plate green (--lcd)
+    x.beginPath();
+    const land = [[0.03, 0.30], [0.10, 0.13], [0.30, 0.05], [0.55, 0.04], [0.78, 0.08], [0.92, 0.22], [0.94, 0.45], [0.86, 0.66], [0.78, 0.88], [0.58, 0.99], [0.30, 0.97], [0.13, 0.86], [0.10, 0.62], [0.04, 0.48]];
+    land.forEach(([lx, ly], i) => { const X = lx * W, Y = ly * H; if (i === 0) x.moveTo(X, Y); else x.lineTo(X, Y); });
+    x.closePath(); x.fill();
+    x.strokeStyle = '#46543a'; x.lineWidth = 2; x.stroke(); // the LCD plate border green
+    // Cinnabar is an island off the SW coast.
+    x.fillStyle = '#a9c08a'; // land: the LCD plate green (--lcd)
+    x.fillRect(Math.round(0.10 * W), Math.round(0.86 * H), 52, 26);
+    x.strokeRect(Math.round(0.10 * W), Math.round(0.86 * H), 52, 26);
+    // Route links between visited places.
+    x.strokeStyle = '#f6f8fc'; x.lineWidth = 2;
+    for (const [a, b] of p.data.links) {
+      if (!nodes[a] || !nodes[b]) continue;
+      x.beginPath(); x.moveTo(px(nodes[a]), py(nodes[a])); x.lineTo(px(nodes[b]), py(nodes[b])); x.stroke();
+    }
+    // Nodes: towns are framed plates, routes are dots.
+    const pulse = Math.floor(Date.now() / 500) % 2 === 0;
+    nodes.forEach((n, i) => {
+      const X = px(n), Y = py(n);
+      if (n.town) {
+        x.fillStyle = n.current ? '#e8b832' : '#f6f8fc';
+        x.fillRect(X - 6, Y - 6, 12, 12);
+        x.strokeStyle = '#2b3040'; x.lineWidth = 2; x.strokeRect(X - 6, Y - 6, 12, 12);
+        x.fillStyle = '#c03028'; x.fillRect(X - 3, Y - 6, 6, 3);
+      } else {
+        x.fillStyle = '#f6f8fc';
+        x.beginPath(); x.arc(X, Y, 3.5, 0, Math.PI * 2); x.fill();
+        x.strokeStyle = '#2b3040'; x.lineWidth = 1.5; x.stroke();
+      }
+      if (n.current && pulse) {
+        x.strokeStyle = '#e03c31'; x.lineWidth = 2;
+        x.beginPath(); x.arc(X, Y, 11, 0, Math.PI * 2); x.stroke();
+      }
+      if (i === p.cursor) {
+        x.strokeStyle = '#e03c31'; x.lineWidth = 2;
+        x.strokeRect(X - 10, Y - 10, 20, 20);
+      }
+    });
+    // Selected place name plate (canvas twin of the DOM narration).
+    const cur = nodes[p.cursor];
+    if (cur) {
+      const label = cur.name + (cur.current ? ' — you are here' : '');
+      x.font = 'bold 14px sans-serif';
+      const tw = Math.min(W - 16, x.measureText(label).width + 16);
+      x.fillStyle = '#f6f8fc'; x.fillRect(8, H - 30, tw, 22);
+      x.strokeStyle = '#2b3040'; x.lineWidth = 2; x.strokeRect(8, H - 30, tw, 22);
+      x.fillStyle = '#232838'; x.fillText(label, 16, H - 14);
+    }
+  }
+
+  closeMapPanel() {
+    const p = this.mapPanel;
+    if (!p) return;
+    this.mapPanel = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.mapEl) this.mapEl.classList.add('hidden');
+    this.game.audio.playSfx(SFX['ui-back']);
+    if (p.cb) p.cb('close');
+  }
+
+  get mapOpen() { return !!this.mapPanel; }
+
+  // ---- RT touch move pad (Elevation B7) ----
+  // Four flat chips mirroring the canvas cooldown chips: one per ally
+  // move, labelled with the move name + its slot key number. Tapping
+  // fires the SAME path as keys 1-4 (BattleScene.rtTouchMove, which
+  // guards exactly like the keyboard branch). Display is gated by the
+  // same CSS rule as the touch controls (body.showtouch / coarse
+  // pointer); visibility state is refreshed per render by the scene.
+  buildRtMovePad() {
+    this.rtPadEl = this.el('div', 'rtmoves hidden', this.frame);
+    this.rtPadBtns = [];
+    for (let i = 0; i < 4; i++) {
+      const b = this.el('button', 'rtmove', this.rtPadEl);
+      b.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.game.audio.unlock();
+        if (this.rtPadScene && this.rtPadScene.rtTouchMove) this.rtPadScene.rtTouchMove(i);
+      });
+      this.rtPadBtns.push(b);
+    }
+  }
+
+  showRtMovePad(scene) {
+    this.rtPadScene = scene;
+    this._rtPadSig = null;
+    if (!this.headless && this.rtPadEl) this.rtPadEl.classList.remove('hidden');
+    this.refreshRtMovePad();
+  }
+
+  hideRtMovePad() {
+    this.rtPadScene = null;
+    if (!this.headless && this.rtPadEl) this.rtPadEl.classList.add('hidden');
+  }
+
+  refreshRtMovePad() {
+    if (this.headless || !this.rtPadEl) return;
+    const scene = this.rtPadScene;
+    if (!scene || !scene.rt || !scene.ally) { this.rtPadEl.classList.add('hidden'); return; }
+    // The pad retires under any modal layer, exactly like the canvas
+    // chips are covered by the command panel / menus.
+    const modal = this.menu || this.dlg || this.summary || this.pcPanel || this.entryPanel || this.mapPanel || this.loginOpen || this.nameEntry;
+    if (modal || scene.state !== 'rt') { this.rtPadEl.classList.add('hidden'); return; }
+    this.rtPadEl.classList.remove('hidden');
+    // The scene composes the chip data (it owns MOVES + the cooldown
+    // clocks); the pad is a dumb renderer, like the canvas chips.
+    const chips = (typeof scene.rtPadMoves === 'function') ? scene.rtPadMoves() : [];
+    const sig = chips.map((c) => c.name + ':' + c.pp + ':' + (c.cd > 0 ? 1 : 0)).join('|');
+    if (sig === this._rtPadSig) return;
+    this._rtPadSig = sig;
+    chips.forEach((c, i) => {
+      const b = this.rtPadBtns[i];
+      if (!b) return;
+      b.textContent = (i + 1) + ' ' + c.name + (c.cd > 0 ? ' CD ' + c.cd + 's' : (c.pp <= 0 ? ' NO PP' : ''));
+      b.classList.toggle('cooling', c.cd > 0 || c.pp <= 0);
+      b.style.display = '';
+    });
+    for (let i = chips.length; i < 4; i++) {
+      if (this.rtPadBtns[i]) this.rtPadBtns[i].style.display = 'none';
+    }
+  }
 
   // ---- PC box panel (UI v2.4, defect 4) ----
   // A real box screen, not list modals: the caller (overworld-systems
@@ -17673,7 +17959,7 @@ class UI {
       this.log.push({ ui: 'nameentry', title });
       return;
     }
-    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title, opts };
+    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title, opts, lower: false };
     const ov = this.el('div', 'nkbover', this.root);
     this._nkbOv = ov;
     const card = this.el('div', 'namekb', ov);
@@ -17685,16 +17971,25 @@ class UI {
     const grid = this.el('div', 'nkb-grid', card);
     // AUDIT FIX (S-20): the charset was A-Z + '-' only — no digits, space,
     // period or apostrophe (Platinum's keyboard has all of them).
+    // Elevation B6 (S-20 remainder): the aA key toggles letter case; the
+    // letter keys re-label in the active case and typed case is kept.
+    this._nkbLetterBtns = [];
     const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
     for (const k of keys) {
       const b = this.el('button', 'nkb-key', grid);
       b.textContent = k;
-      b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbType(k); });
+      b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbTypeGrid(k); });
+      if (/[A-Z]/.test(k)) this._nkbLetterBtns.push({ btn: b, ch: k });
     }
     const row = this.el('div', 'nkb-row', card);
     const bk = this.el('button', 'nkb-key wide', row);
     bk.textContent = '←';
     bk.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbBack(); });
+    const sh = this.el('button', 'nkb-key wide', row);
+    sh.textContent = 'aA';
+    sh.setAttribute('aria-label', 'Toggle letter case');
+    this._nkbShiftBtn = sh;
+    sh.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbShift(); });
     for (const k of ['-', '.', "'", ' ']) {
       const b = this.el('button', 'nkb-key' + (k === ' ' ? ' wide' : ''), row);
       b.textContent = k === ' ' ? 'SPACE' : k;
@@ -17716,7 +18011,9 @@ class UI {
       if (e.key === 'Backspace') this._nkbBack();
       else if (e.key === 'Enter') this._nkbOk();
       else if (e.key === 'Escape' && this.nameEntry.opts && this.nameEntry.opts.allowCancel) this._nkbCancel();
-      else if (/^[a-zA-Z0-9\-'. ]$/.test(e.key)) this._nkbType(e.key.toUpperCase());
+      // Elevation B6: a physical keyboard types its own case (the real
+      // Shift key is the toggle there); only the grid uses the aA key.
+      else if (/^[a-zA-Z0-9\-'. ]$/.test(e.key)) this._nkbType(e.key);
     };
     document.addEventListener('keydown', this._nkbKey, true);
   }
@@ -17742,6 +18039,25 @@ class UI {
     ne.value += ch;
     this.game.audio.playSfx(SFX['ui-tick']);
     this._nkbRender();
+  }
+
+  // Grid letters pass through the aA case toggle; digits/punct are
+  // case-free and go through _nkbType directly.
+  _nkbTypeGrid(ch) {
+    const ne = this.nameEntry;
+    if (!ne) return;
+    this._nkbType(ne.lower && /[A-Z]/.test(ch) ? ch.toLowerCase() : ch);
+  }
+
+  _nkbShift() {
+    const ne = this.nameEntry;
+    if (!ne) return;
+    ne.lower = !ne.lower;
+    this.game.audio.playSfx(SFX['ui-tick']);
+    if (this._nkbLetterBtns) {
+      for (const { btn, ch } of this._nkbLetterBtns) btn.textContent = ne.lower ? ch.toLowerCase() : ch;
+    }
+    if (this._nkbShiftBtn) this._nkbShiftBtn.classList.toggle('sel', ne.lower);
   }
 
   _nkbBack() {
@@ -17776,7 +18092,10 @@ class UI {
       this.toast((ne.opts && ne.opts.emptyMsg) || 'Give your trainer a name!');
       return;
     }
-    const cb = ne.cb, v = ne.value.trim().toUpperCase().slice(0, ne.maxLen);
+    // Elevation B6 (S-20 remainder): the value keeps the case the player
+    // typed — the old blanket toUpperCase() is gone. (The DELETE
+    // type-to-confirm compares case-insensitively at its call sites.)
+    const cb = ne.cb, v = ne.value.trim().slice(0, ne.maxLen);
     this._nkbClose();
     cb(v);
   }
@@ -17987,6 +18306,27 @@ class UI {
         this._hintCard.classList.add('hidden');
       }
     }
+    // Dex entry panel is modal (Elevation B5): left/right (or Q/E page
+    // keys) page between entries, B / START / ESC closes back to the list.
+    if (this.entryPanel) {
+      if (input.wasPressed('left') || input.wasPressed('pageup')) this.entryPanel.cb('page', -1);
+      else if (input.wasPressed('right') || input.wasPressed('pagedown')) this.entryPanel.cb('page', 1);
+      else if (input.wasPressed('b') || input.wasPressed('start') || input.wasPressed('escape')) { this.closeEntryPanel(); }
+      return true;
+    }
+    // Town Map panel is modal (Elevation B1): arrows move the cursor
+    // between visited places, B / START / ESC closes.
+    if (this.mapPanel) {
+      if (input.wasPressed('up')) this.mapMove('up');
+      else if (input.wasPressed('down')) this.mapMove('down');
+      else if (input.wasPressed('left')) this.mapMove('left');
+      else if (input.wasPressed('right')) this.mapMove('right');
+      else if (input.wasPressed('b') || input.wasPressed('start') || input.wasPressed('escape')) { this.closeMapPanel(); }
+      // The "you are here" pulse runs on a slow redraw beat, not per frame.
+      this._mapTick = (this._mapTick || 0) + 1;
+      if (this._mapTick % 30 === 0) this.renderMapCanvas();
+      return true;
+    }
     // Summary panel is modal (UI v2): left/right (or X/Y page keys) switch
     // tabs, B / START / ESC closes.
     if (this.summary) {
@@ -18036,6 +18376,23 @@ class UI {
     }
     if (this.menu) {
       const grid = !!(this.menu.grid || this.menu.gridNav);
+      // Elevation B4: an onKey menu (mart quantity stepper) claims the
+      // direction + page keys for itself; A confirms, B cancels, exactly
+      // like a normal menu otherwise.
+      if (this.menu.onKey) {
+        if (input.wasPressed('up')) this.menu.onKey('up');
+        else if (input.wasPressed('down')) this.menu.onKey('down');
+        else if (input.wasPressed('left')) this.menu.onKey('left');
+        else if (input.wasPressed('right')) this.menu.onKey('right');
+        else if (input.wasPressed('pageup')) this.menu.onKey('pageup');
+        else if (input.wasPressed('pagedown')) this.menu.onKey('pagedown');
+        else if (input.wasPressed('a') || input.wasPressed('start')) { this.chooseMenu(); return true; }
+        else if (input.wasPressed('b') || input.wasPressed('escape')) {
+          if (!this.menu.stickyCancel) this.cancelMenu();
+          return true;
+        }
+        return true;
+      }
       if (input.wasPressed('up')) { grid ? this.moveMenuGrid('up') : this.moveMenu(-1); }
       else if (input.wasPressed('down')) { grid ? this.moveMenuGrid('down') : this.moveMenu(1); }
       // AUDIT FIX (S-50): guards must run BEFORE wasPressed — wasPressed
@@ -18085,6 +18442,7 @@ class UI {
   setBattleMode(on) {
     if (this.headless) { this.inBattle = !!on; return; }
     this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
+    if (!on) this.hideRtMovePad(); // Elevation B7: the RT touch pad retires with the battle
     this.dpadEl.classList.toggle('hidden', on);
     // UI v2.2: do NOT unhide the command panel here — renderCommands() owns
     // its visibility (it unhides only when real commands populate it). The
@@ -18907,7 +19265,7 @@ function accountDelete(game, ov, closeAccount) {
     if (!inP.value) { showErr('Enter your password to continue.'); return; }
     // Second gate: type DELETE (same pattern as save-erase).
     ui.showNameEntry('Type DELETE to confirm', '', 6, (typed) => {
-      if (typed !== 'DELETE') { ui.toast('Deletion cancelled.'); return; }
+      if (String(typed).toUpperCase() !== 'DELETE') { ui.toast('Deletion cancelled.'); return; }
       api('account/delete', { method: 'POST', body: { password: inP.value } }).then((r) => {
         if (r.offline) { showErr(COPY.offline); return; }
         if (r.status === 401) { AUTH.onSessionExpired(game); sub.remove(); closeAccount(); return; }
@@ -22435,7 +22793,34 @@ Object.assign(BattleScene.prototype, {
       switchVulnT: 0,
     };
     this.state = 'rt';
+    // Elevation B7: the touch move pad joins the arena (its display is
+    // CSS-gated to touch layouts; it retires in setBattleMode(false)).
+    if (g.ui.showRtMovePad) g.ui.showRtMovePad(this);
     // (The enter() intro lines already announced the send-out — no repeat.)
+  },
+
+  // Elevation B7: chip data for the touch move pad — the same values
+  // the canvas cooldown chips draw (name, PP, cooldown seconds).
+  rtPadMoves() {
+    const rt = this.rt;
+    if (!rt || !this.ally) return [];
+    return this.ally.moves.map((m) => {
+      const mv = MOVES[m.id];
+      return {
+        name: mv ? mv.name : m.id, pp: m.pp,
+        cd: rt.cds.ally[m.id] ? Math.ceil(rt.cds.ally[m.id] / 1000) : 0,
+      };
+    });
+  },
+
+  // Elevation B7: a tap on a touch move chip fires EXACTLY the keyboard
+  // slot-key path (updateRt): same sleep/lunge guards, then rtUseMove
+  // applies its own PP/cooldown/status guards.
+  rtTouchMove(i) {
+    const rt = this.rt;
+    if (!rt || this.state !== 'rt' || this.rtFrozen()) return;
+    const allyAsleep = this.ally.status === 'sleep' && rt.allySleepT > 0;
+    if (!allyAsleep && !rt.lunge) this.rtUseMove('ally', i);
   },
 
   rtResetFoe() {
@@ -23143,6 +23528,7 @@ Object.assign(BattleScene.prototype, {
       r.panel(gx, gy, gw, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
       r.text(groundLabel, gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
     }
+    if (this.game.ui.refreshRtMovePad) this.game.ui.refreshRtMovePad();
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
       // Panel fits the view and the text slice fits the panel (~7px/char at
@@ -25225,45 +25611,88 @@ Object.assign(OverworldScene.prototype, {
   // ---------- mart ----------
   openMart(stock) {
     const g = this.game;
+    // Elevation B4: the shared quantity stepper. One menu row carries
+    // the live count + total; the direction keys adjust (Left/Right ±1,
+    // Up/Down ±10) through the menu's onKey hook, A confirms the WHOLE
+    // purchase as one transaction, B cancels back to the stock list.
+    const pickQty = (verb, itemName, unitPrice, maxQty, onConfirm, onCancel) => {
+      let qty = 1;
+      const render = () => {
+        g.ui.showMenu(verb + ' — ' + itemName, [
+          { label: verb + ' x' + qty + ' — $' + (qty * unitPrice) + '  (◀ ▶ ±1 · ▲ ▼ ±10)', value: 'go' },
+          { label: 'Cancel', value: 'cancel' },
+        ], (v) => {
+          if (v === 'go') onConfirm(qty);
+          else onCancel();
+        }, {
+          onKey: (dir) => {
+            if (dir === 'left') qty = Math.max(1, qty - 1);
+            else if (dir === 'right') qty = Math.min(maxQty, qty + 1);
+            else if (dir === 'up') qty = Math.min(maxQty, qty + 10);
+            else if (dir === 'down') qty = Math.max(1, qty - 10);
+            else if (dir === 'pageup') qty = Math.max(1, qty - 10);
+            else if (dir === 'pagedown') qty = Math.min(maxQty, qty + 10);
+            else return;
+            g.audio.playSfx('ui-tick');
+            render();
+          },
+        });
+      };
+      render();
+    };
+    const showBuy = () => {
+      // ADR-025 §3 (Phase 3): stock rows carrying minBadges stay hidden
+      // until the player has earned that many badges (the codebase's
+      // badgesAtLeast gating idiom — this is how the Celadon shop's
+      // Second-Wind Ribbon is "late"). Keepsakes are unique objects:
+      // once owned (bag or held) the row is disabled.
+      const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0
+        && (!ITEMS[id].minBadges || g.state.badges.kanto.length >= ITEMS[id].minBadges)).map((id) => ({
+        label: ITEMS[id].name + ' — $' + ITEMS[id].price + ' (own ' + (g.state.bag[id] || 0) + ')', value: id,
+        disabled: g.state.player.money < ITEMS[id].price
+          || (ITEMS[id].pocket === 'keepsakes' && ownsKeepsake(g.state, id)),
+      }));
+      items.push({ label: 'Back', value: null });
+      g.ui.showMenu('Buy what?', items, (iv) => {
+        // AUDIT FIX (S-11): Back returns to the Mart top menu, not out
+        // of the whole Mart flow onto the street.
+        if (!iv) { this.openMart(stock); return; }
+        const it = ITEMS[iv];
+        const buyNow = (qty) => {
+          g.state.player.money -= it.price * qty;
+          g.state.bag[iv] = (g.state.bag[iv] || 0) + qty;
+          g.audio.playSfx('dex-register');
+          g.ui.toast(qty > 1 ? 'Bought ' + qty + ' x ' + it.name + '.' : 'Bought ' + it.name + '.');
+          this.openMart(stock);
+        };
+        // Keepsakes stay qty-1 only: unique objects buy in one press.
+        if (it.pocket === 'keepsakes') { buyNow(1); return; }
+        const maxQty = Math.max(1, Math.min(99, Math.floor(g.state.player.money / it.price)));
+        pickQty('Buy', it.name, it.price, maxQty, buyNow, showBuy);
+      });
+    };
+    const showSell = () => {
+      // ADR-025 §3: keepsakes are non-sellable (pocket excluded).
+      const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].pocket !== 'keepsakes' && ITEMS[id].price > 0 && g.state.bag[id] > 0)
+        .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
+      items.push({ label: 'Back', value: null });
+      g.ui.showMenu('Sell what?', items, (iv) => {
+        if (!iv) { this.openMart(stock); return; }
+        const it = ITEMS[iv];
+        const unit = Math.floor(it.price / 2);
+        pickQty('Sell', it.name, unit, g.state.bag[iv] || 1, (qty) => {
+          g.state.bag[iv] -= qty;
+          g.state.player.money += unit * qty;
+          g.ui.toast(qty > 1 ? 'Sold ' + qty + ' x ' + it.name + '.' : 'Sold ' + it.name + '.');
+          this.openMart(stock);
+        }, showSell);
+      });
+    };
     g.ui.showMenu('Mart — $' + g.state.player.money, [
       { label: 'Buy', value: 'buy' }, { label: 'Sell', value: 'sell' }, { label: 'Leave', value: 'leave' },
     ], (v) => {
-      if (v === 'buy') {
-        // ADR-025 §3 (Phase 3): stock rows carrying minBadges stay hidden
-        // until the player has earned that many badges (the codebase's
-        // badgesAtLeast gating idiom — this is how the Celadon shop's
-        // Second-Wind Ribbon is "late"). Keepsakes are unique objects:
-        // once owned (bag or held) the row is disabled.
-        const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0
-          && (!ITEMS[id].minBadges || g.state.badges.kanto.length >= ITEMS[id].minBadges)).map((id) => ({
-          label: ITEMS[id].name + ' — $' + ITEMS[id].price + ' (own ' + (g.state.bag[id] || 0) + ')', value: id,
-          disabled: g.state.player.money < ITEMS[id].price
-            || (ITEMS[id].pocket === 'keepsakes' && ownsKeepsake(g.state, id)),
-        }));
-        items.push({ label: 'Back', value: null });
-        g.ui.showMenu('Buy what?', items, (iv) => {
-          // AUDIT FIX (S-11): Back returns to the Mart top menu, not out
-          // of the whole Mart flow onto the street.
-          if (!iv) { this.openMart(stock); return; }
-          g.state.player.money -= ITEMS[iv].price;
-          g.state.bag[iv] = (g.state.bag[iv] || 0) + 1;
-          g.audio.playSfx('dex-register');
-          g.ui.toast('Bought ' + ITEMS[iv].name + '.');
-          this.openMart(stock);
-        });
-      } else if (v === 'sell') {
-        // ADR-025 §3: keepsakes are non-sellable (pocket excluded).
-        const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].pocket !== 'keepsakes' && ITEMS[id].price > 0 && g.state.bag[id] > 0)
-          .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
-        items.push({ label: 'Back', value: null });
-        g.ui.showMenu('Sell what?', items, (iv) => {
-          if (!iv) { this.openMart(stock); return; }
-          g.state.bag[iv]--;
-          g.state.player.money += Math.floor(ITEMS[iv].price / 2);
-          g.ui.toast('Sold ' + ITEMS[iv].name + '.');
-          this.openMart(stock);
-        });
-      }
+      if (v === 'buy') showBuy();
+      else if (v === 'sell') showSell();
     });
   },
 
@@ -25621,6 +26050,7 @@ class Game {
     };
     this.loop.bindVisibility(() => { /* sim halts via rAF freeze; autosave queued above */ });
     this.audio.applySettings(this.state.settings);
+    this.applyKeymap();
     // Gameplay Designer co-design note (C7): the tutorial catch gate must be
     // robust to a Spearow-class foe — the script is deterministic (balance-seat
     // gate), never luck. Recorded here so the gate lives with the flow.
@@ -25670,6 +26100,8 @@ class Game {
     // P1/K2: landscape gets the right-edge command rail (CSS re-rails the HUD strip).
     document.body.classList.toggle('landscape', this.layoutMode === 'landscape');
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
+    // Elevation C1: the reduced-motion body gate for the menu transition.
+    document.body.classList.toggle('reduced-motion', !!this.state.settings.reducedMotion);
     // P1/K3 + I2: desktop hint card; show-touch toggle honored on hybrids.
     document.body.classList.toggle('showtouch', !!this.state.settings.showTouch);
     // Headless harness stubs document without documentElement — guard it.
@@ -25745,6 +26177,8 @@ class Game {
       if (res.load === 'state' && res.state) {
         this.state = res.state;
         this.audio.applySettings(this.state.settings);
+        this.applyKeymap();
+        this.applyLayout();
         this.scenes.replace(new OverworldScene());
         this.ui.toast('Save loaded.');
       } else if (res.load === 'new') {
@@ -25772,6 +26206,7 @@ class Game {
     const keepDifficulty = this.state && this.state.story ? difficultyOf(this.state) : 'classic';
     this.state = freshState();
     if (keepSettings) this.state.settings = keepSettings;
+    this.applyKeymap();
     this.state.story.difficulty = keepDifficulty;
     // A run that STARTS with a House Rule on has enabled one: no Pure Run.
     if (activeHouseRules(this.state).length) this.state.meta.houseRulesTouched = true;
@@ -25789,6 +26224,8 @@ class Game {
     }
     this.state = res.data;
     this.audio.applySettings(this.state.settings);
+    this.applyKeymap();
+    this.applyLayout();
     this.scenes.replace(new OverworldScene());
     this.ui.toast('Welcome back, ' + this.state.player.name + '!');
   }
@@ -26086,12 +26523,43 @@ class Game {
       const sp = SPECIES[v];
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
       if (!c && !s) { g.openDex(filter); return; }
-      g.ui.say([
-        'No.' + sp.dexNo + '  ' + sp.name + '  ' + sp.types.join('/'),
-        sp.flavor,
-        'Status: ' + (c ? 'CAUGHT' : 'SEEN'),
-      ], () => g.openDex(filter), 'Dex');
+      g.openDexEntry(v, filter);
     }, { remember: 'dex' });
+  }
+
+  // Elevation B5: the dex entry as its own plate, pageable in place —
+  // Left/Right (and Q/E, the PC box-switch convention) walk the whole
+  // Kanto dex in dex order without returning to the list. Unseen
+  // neighbours render redacted, exactly as the list shows them (???).
+  openDexEntry(speciesId, filter) {
+    const g = this;
+    const order = Object.keys(SPECIES)
+      .filter((id) => id !== 'partner' && SPECIES[id].dexNo >= 1 && SPECIES[id].dexNo <= 151)
+      .sort((a, b) => SPECIES[a].dexNo - SPECIES[b].dexNo);
+    let idx = order.indexOf(speciesId);
+    if (idx < 0) idx = 0;
+    const render = () => {
+      const id = order[idx];
+      const sp = SPECIES[id];
+      const c = !!g.state.dex.caught[sp.dexNo], s = !!g.state.dex.seen[sp.dexNo];
+      const known = c || s;
+      const title = '◀ No.' + sp.dexNo + ' ' + (known ? sp.name : '???') + ' ▶';
+      const body = '<div class="sumhead"><img class="sumsprite" src="' + (known ? g.spriteDataUrl(id) : '') + '" alt="">'
+        + '<div><div class="sumname">' + (known ? sp.name : '???') + '</div>'
+        + '<div class="sumsub">' + (known ? sp.types.join(' / ') : '???') + '</div>'
+        + '<div class="sumsub">Status: ' + (c ? 'CAUGHT' : s ? 'SEEN' : 'UNSEEN') + '</div></div></div>'
+        + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Pokemon has not been seen.') + '</div>'
+        + '<div class="sumsub">◀ ▶ : previous / next entry</div>';
+      return { title, bodyHtml: body };
+    };
+    g.ui.showEntryPanel(render(), (act, d) => {
+      if (act === 'page') {
+        idx = (idx + d + order.length) % order.length;
+        g.ui.updateEntryPanel(render());
+      } else if (act === 'close') {
+        g.openDex(filter);
+      }
+    });
   }
 
   // P1/G3: dex filter submenu — status, type, and name search (reuses the A-Z grid).
@@ -26133,6 +26601,8 @@ class Game {
     const items = [];
     items.push({ label: 'Quest Log — the road so far', value: 'quests' });
     items.push({ label: 'Regions — the journey chain', value: 'regions' });
+    items.push({ label: 'Hall of Fame', value: 'hof' });
+    items.push({ label: 'Diploma', value: 'diploma' });
     items.push({ label: '— ACT I: THE BEGINNING (v1) —', value: null, disabled: true });
     for (const ch of CHAPTERS) {
       if (ch.scope === 'playable') {
@@ -26157,6 +26627,8 @@ class Game {
       if (!v || v === 'close') return;
       if (v === 'quests') { g.openQuestLog(); return; }
       if (v === 'regions') { g.openRegions(); return; }
+      if (v === 'hof') { g.openHallOfFame(); return; }
+      if (v === 'diploma') { g.openDiploma(); return; }
       const ch = CHAPTERS.find((c) => 'ch' + c.n === v);
       if (ch) {
         g.ui.say([
@@ -26271,6 +26743,7 @@ class Game {
       { label: 'Autosave: ' + yn(s.autosave), value: 'asave' },
       { label: 'Reduced motion: ' + yn(s.reducedMotion), value: 'rmotion' },
       { label: 'Flip controls: ' + yn(s.controlsFlip), value: 'flip' },
+      { label: 'Controls — remap keys', value: 'controls' },
       { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
       { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
       { label: 'Legal / credits', value: 'legal' },
@@ -26299,8 +26772,9 @@ class Game {
       else if (v === 'shake') s.shake = !s.shake;
       else if (v === 'vib') s.vibration = !s.vibration;
       else if (v === 'asave') s.autosave = !s.autosave;
-      else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); }
+      else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); if (typeof document !== 'undefined' && document.body) document.body.classList.toggle('reduced-motion', !!s.reducedMotion); }
       else if (v === 'flip') { s.controlsFlip = !s.controlsFlip; g.applyLayout(); }
+      else if (v === 'controls') { g.openControlsMenu(); return; }
       else if (v === 'showtouch') {
         s.showTouch = !s.showTouch;
         if (typeof document !== 'undefined') document.body.classList.toggle('showtouch', !!s.showTouch);
@@ -26326,7 +26800,7 @@ class Game {
               if (b === 'yes2') {
                 // P1/H4: third gate — type-to-confirm DELETE (deletion is irreversible).
                 g.ui.showNameEntry('Type DELETE to confirm', '', 6, (typed) => {
-                  if (typed === 'DELETE') {
+                  if (String(typed).toUpperCase() === 'DELETE') {
                     g.store.erase();
                     g.ui.toast('Save data erased.');
                   } else {
@@ -26393,6 +26867,91 @@ class Game {
       g.saveGame(true);
       g.openHouseRulesMenu();
     }, { menuClass: 'syswin', remember: 'options-houserules' });
+  }
+
+  // Elevation B3 (S-18): apply the persisted keymap (settings.keymap).
+  // The persisted map is the COMPLETE effective remap (captureRemapKey
+  // saves the full object), so when one exists it replaces the factory
+  // KEYMAP wholesale — overlaying it would resurrect bindings the player
+  // deliberately moved off their old keys (QA Major 1, 2026-10-27).
+  // A null map (fresh player / after Reset defaults) means factory.
+  // Called wherever a state's settings land (boot, Continue, cloud
+  // login, New Game's carried settings).
+  applyKeymap() {
+    const saved = this.state && this.state.settings ? this.state.settings.keymap : null;
+    if (saved && typeof saved === 'object') {
+      const remap = {};
+      for (const code of Object.keys(saved)) {
+        if (typeof code === 'string' && ACTIONS.includes(saved[code])) remap[code] = saved[code];
+      }
+      this.input.remap = remap;
+    } else {
+      this.input.remap = Object.assign({}, KEYMAP);
+    }
+  }
+
+  // Elevation B3 (S-18): Options -> Controls. Each row shows the codes
+  // bound to one action; choosing a row captures the next physical
+  // keydown's e.code as that action's primary binding. A code already
+  // bound elsewhere SWAPS (the other action takes this action's old
+  // primary code). Persists to settings.keymap and applies live.
+  openControlsMenu() {
+    const g = this;
+    const NAMES = {
+      up: 'Up', down: 'Down', left: 'Left', right: 'Right',
+      a: 'A — confirm', b: 'B — back', start: 'Start — menu', select: 'Select',
+      pageup: 'Page up', pagedown: 'Page down',
+      slot1: 'RT move 1', slot2: 'RT move 2', slot3: 'RT move 3', slot4: 'RT move 4',
+      fullscreen: 'Fullscreen', mute: 'Mute', escape: 'Escape — back',
+    };
+    const codesFor = (action) => Object.keys(g.input.remap).filter((c) => g.input.remap[c] === action);
+    const rows = Object.keys(NAMES).map((action) => ({
+      label: NAMES[action] + ': ' + (codesFor(action).join(' / ') || '—'),
+      value: action,
+    }));
+    rows.push({ label: 'Reset defaults', value: 'reset' });
+    rows.push({ label: 'Back', value: 'back' });
+    g.ui.showMenu('Controls', rows, (v) => {
+      if (!v || v === 'back') { g.openOptions(); return; }
+      if (v === 'reset') {
+        g.input.remap = Object.assign({}, KEYMAP);
+        g.state.settings.keymap = null;
+        g.saveGame(true);
+        g.ui.toast('Controls reset to defaults.');
+        g.openControlsMenu();
+        return;
+      }
+      g.captureRemapKey(v, NAMES[v]);
+    }, { menuClass: 'syswin', remember: 'options-controls' });
+  }
+
+  captureRemapKey(action, name) {
+    const g = this;
+    g.ui.toast('Press a key for ' + name + ' — Esc cancels');
+    if (typeof document === 'undefined' || !document.addEventListener) { g.openControlsMenu(); return; }
+    const onKey = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      document.removeEventListener('keydown', onKey, true);
+      if (e.code === 'Escape') { g.openControlsMenu(); return; }
+      const remap = Object.assign({}, g.input.remap);
+      const primary = Object.keys(KEYMAP).find((c) => KEYMAP[c] === action && remap[c] === action)
+        || Object.keys(remap).find((c) => remap[c] === action);
+      const other = remap[e.code];
+      if (other !== action) {
+        if (primary && primary !== e.code) {
+          if (other) remap[primary] = other; // conflict: swap primaries
+          else delete remap[primary];
+        }
+        remap[e.code] = action;
+      }
+      g.input.remap = remap;
+      g.state.settings.keymap = Object.assign({}, remap);
+      g.saveGame(true);
+      g.ui.toast(name + ' is now ' + e.code + '.');
+      g.openControlsMenu();
+    };
+    document.addEventListener('keydown', onKey, true);
   }
 }
 
@@ -26703,7 +27262,7 @@ Object.assign(Game.prototype, {
     const g = this;
     const items = [];
     // Section 1 — Main Story (unchanged machinery: the MAIN_QUESTS chain).
-    items.push({ label: '— MAIN STORY —', value: null, disabled: true });
+    items.push({ label: '— MAIN STORY —', value: null, disabled: true, band: true });
     for (const q of MAIN_QUESTS) {
       const doneF = q.flag && g.state.story.flags[q.flag];
       const active = !doneF && MAIN_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
@@ -26716,7 +27275,7 @@ Object.assign(Game.prototype, {
     // exactly the ids the arc machinery wrote there).
     const arcs = Object.keys(g.state.story.quests || {});
     if (arcs.length) {
-      items.push({ label: '— LEGENDARY ARCS —', value: null, disabled: true });
+      items.push({ label: '— LEGENDARY ARCS —', value: null, disabled: true, band: true });
       for (const id of arcs) {
         const arc = LEGENDARY_ARCS[id];
         if (!arc) continue;
@@ -26727,7 +27286,7 @@ Object.assign(Game.prototype, {
     // stage text. Unaccepted tales point at their giver; accepted tales
     // state their reward up front (§5 shape law); completed tales carry
     // their revelation.
-    items.push({ label: '— TOWN TALES —', value: null, disabled: true });
+    items.push({ label: '— TOWN TALES —', value: null, disabled: true, band: true });
     for (const tale of Object.values(QUESTS)) {
       const s = taleStageOf(g.state, tale.id);
       const mark = s < 0 ? '· ' : s >= tale.stages.length ? '★ ' : '▶ ';
@@ -26738,7 +27297,7 @@ Object.assign(Game.prototype, {
     // characters the player actually has a bond record with appear.
     const people = bondedCharacters(g.state);
     if (people.length) {
-      items.push({ label: '— PEOPLE —', value: null, disabled: true });
+      items.push({ label: '— PEOPLE —', value: null, disabled: true, band: true });
       for (const c of people) {
         items.push({ label: '· ' + c.name + ' — ' + tierOf(g.state, c.id), value: 'bond:' + c.id });
       }
@@ -26798,18 +27357,95 @@ Object.assign(Game.prototype, {
 
   openTownMap() {
     const g = this;
-    // AUDIT FIX (C201): the Town Map was one dialogue line of RAW internal
-    // map ids. It is now a real screen: visited places by display name,
-    // current location marked, in a proper Platinum window.
-    const visited = Object.keys(g.state.story.flags).filter((k) => k.startsWith('reached_')).map((k) => k.slice(8));
+    // Elevation B1 (C201 remainder): the Town Map is now Platinum's
+    // GRAPHICAL map — a canvas panel over a hand-authored Kanto layout.
+    // The gating rule is unchanged from the text screen it replaces:
+    // only places whose reached_* flag is set appear at all, and the
+    // player's current map carries the "you are here" marker.
+    const LAYOUT = [
+      // [mapId, x (0=W..1=E), y (0=N..1=S), isTown]
+      ['indigo', 0.06, 0.30, 1], ['victoryroad', 0.10, 0.37, 0], ['route22', 0.14, 0.44, 0],
+      ['pewter', 0.16, 0.20, 1], ['route2', 0.19, 0.33, 0], ['viridian', 0.20, 0.50, 1],
+      ['route1', 0.20, 0.58, 0], ['pallet', 0.20, 0.67, 1], ['cinnabar', 0.16, 0.90, 1],
+      ['route3', 0.31, 0.19, 0], ['route4', 0.45, 0.17, 0], ['cerulean', 0.57, 0.15, 1],
+      ['route5', 0.57, 0.28, 0], ['route9', 0.70, 0.17, 0], ['route10', 0.79, 0.27, 0],
+      ['lavender', 0.81, 0.40, 1], ['route12', 0.81, 0.57, 0], ['route8', 0.69, 0.43, 0],
+      ['saffron', 0.58, 0.42, 1], ['route7', 0.50, 0.44, 0], ['celadon', 0.41, 0.44, 1],
+      ['route16', 0.29, 0.60, 0], ['route6', 0.57, 0.56, 0], ['vermilion', 0.57, 0.68, 1],
+      ['route11', 0.70, 0.68, 0], ['route15', 0.71, 0.82, 0], ['fuchsia', 0.54, 0.86, 1],
+      ['route19', 0.52, 0.95, 0], ['route20', 0.33, 0.95, 0],
+    ];
+    const LINKS = [
+      ['pallet', 'route1'], ['route1', 'viridian'], ['viridian', 'route2'], ['route2', 'pewter'],
+      ['pewter', 'route3'], ['route3', 'route4'], ['route4', 'cerulean'], ['cerulean', 'route9'],
+      ['route9', 'route10'], ['route10', 'lavender'], ['lavender', 'route8'], ['route8', 'saffron'],
+      ['saffron', 'route7'], ['route7', 'celadon'], ['cerulean', 'route5'], ['route5', 'saffron'],
+      ['saffron', 'route6'], ['route6', 'vermilion'], ['vermilion', 'route11'], ['route11', 'route12'],
+      ['lavender', 'route12'], ['route12', 'route15'], ['route15', 'fuchsia'], ['celadon', 'route16'],
+      ['route16', 'fuchsia'], ['fuchsia', 'route19'], ['route19', 'route20'], ['route20', 'cinnabar'],
+      ['viridian', 'route22'], ['route22', 'victoryroad'], ['victoryroad', 'indigo'],
+    ];
+    const flags = g.state.story.flags;
     const cur = g.state.story.position && g.state.story.position.map;
-    const items = visited.map((id) => ({
-      label: (MAPS[id] ? MAPS[id].name : id) + (id === cur ? '  — you are here' : ''),
-      value: null, disabled: true,
-    }));
-    if (!items.length) items.push({ label: 'Nowhere yet. Walk!', value: null, disabled: true });
-    items.push({ label: 'Close', value: 'close' });
-    g.ui.showMenu('Town Map — Kanto', items, () => {});
+    const nodes = [];
+    const indexOf = {};
+    for (const [id, x, y, town] of LAYOUT) {
+      if (!flags['reached_' + id] || !MAPS[id]) continue;
+      indexOf[id] = nodes.length;
+      nodes.push({ id, name: MAPS[id].name, x, y, town: !!town, current: id === cur });
+    }
+    if (!nodes.length) { g.ui.say(['Nowhere yet. Walk!']); return; }
+    const links = [];
+    for (const [a, b] of LINKS) {
+      if (indexOf[a] !== undefined && indexOf[b] !== undefined) links.push([indexOf[a], indexOf[b]]);
+    }
+    g.ui.showMapPanel({ nodes, links }, () => {});
+  },
+
+  // Elevation B2 (S-48): Hall of Fame viewer — reads the REAL story.hof
+  // shape recorded by runEnding ({team: [{speciesId, level, nickname}],
+  // badges}), latest entry first, on the gold-trim ceremony plate.
+  openHallOfFame() {
+    const g = this;
+    const hof = (g.state.story && g.state.story.hof) || [];
+    if (!hof.length) {
+      g.ui.say(['No Hall of Fame entries yet — defeat the Champion to record your team.'], null, 'Hall of Fame');
+      return;
+    }
+    const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
+    for (let e = hof.length - 1; e >= 0; e--) {
+      const entry = hof[e];
+      html += '<div class="hofentry"><div class="hofhead2">Entry ' + (e + 1) + ' — ' + (entry.badges || 0) + ' badges</div><div class="hofteam">';
+      for (const m of entry.team || []) {
+        const sp = SPECIES[m.speciesId];
+        const name = m.nickname || (sp ? sp.name : m.speciesId);
+        html += '<div class="hofmon"><img class="picon hofsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+          + '<span class="hofname">' + esc(name) + '</span>'
+          + '<span class="hofsub">' + (m.nickname && sp ? esc(sp.name) + ' · ' : '') + 'Lv' + m.level + '</span></div>';
+      }
+      html += '</div></div>';
+    }
+    html += '</div>';
+    g.ui.showSummary({ name: 'Hall of Fame', tabs: [{ id: 'hof', label: 'HALL OF FAME', bodyHtml: html }] }, null);
+  },
+
+  // Elevation B2 (S-48): Diploma viewer — the same plate Hawthorn
+  // presents at dex completion (checkDiploma's exact lines), re-viewable
+  // from the Journey menu once the Kanto dex is complete.
+  openDiploma() {
+    const g = this;
+    const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
+    const n = kanto.filter((s) => g.state.dex.caught[s.dexNo]).length;
+    if (n < 151) {
+      g.ui.say(['You\'ve caught ' + n + ' of 151 Kanto Pokemon.'], null, 'Prof. Hawthorn');
+      return;
+    }
+    const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const html = '<div class="diploma"><div class="diplomatitle">DIPLOMA</div>'
+      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Kanto Pokedex:</div>'
+      + '<div class="diplomabody">all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
+    g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'DIPLOMA', bodyHtml: html }] }, null);
   },
 
   // ---------- field moves (WS9) ----------

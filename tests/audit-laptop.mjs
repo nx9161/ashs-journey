@@ -330,14 +330,19 @@ if (DIR === 'personal') {
       ok('found a readable Dex entry row', !!entryLabel, String(entryLabel));
       if (entryLabel) {
         await key('KeyZ'); await sleep(500);
-        const said = await evl(P.dlgText);
-        ok('Dex entry opens as dialogue', !!said, String(said));
-        // advance until the Dex menu is back (extra presses would re-choose the row)
-        for (let i = 0; i < 6; i++) {
-          await key('KeyZ'); await sleep(300);
-          if ((await evl(P.menuTitle)) === 'Pokedex') break;
+        // Elevation B5 (expectation updated): the entry is a dedicated
+        // panel now, not a dialogue — ◀ ▶ in the head band, pageable in
+        // place, B returns to the list with the cursor restored.
+        const head = await evl(`(document.querySelector('.entryhead') || {}).textContent || null`);
+        const noM = /No\.(\d+)/.exec(entryLabel);
+        ok('Dex entry opens as entry panel (B5)', !!head && !!noM && head.includes('No.' + noM[1]), String(head));
+        if (head && noM) {
+          await key('ArrowRight'); await sleep(400);
+          const head2 = await evl(`(document.querySelector('.entryhead') || {}).textContent || null`);
+          ok('Dex entry Right pages to the next entry in place (B5)', !!head2 && head2.includes('No.' + (parseInt(noM[1], 10) + 1)), String(head2));
+          await key('ArrowLeft'); await sleep(400);
         }
-        await sleep(300);
+        await key('KeyX'); await sleep(500); // B closes the panel back to the list
         const back = await evl(P.cursorRow);
         ok('Back from Dex entry restores the same row', !!back && back.text === entryLabel, (back && back.text) + ' vs ' + entryLabel);
       }

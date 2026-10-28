@@ -146,7 +146,34 @@ Object.assign(BattleScene.prototype, {
       switchVulnT: 0,
     };
     this.state = 'rt';
+    // Elevation B7: the touch move pad joins the arena (its display is
+    // CSS-gated to touch layouts; it retires in setBattleMode(false)).
+    if (g.ui.showRtMovePad) g.ui.showRtMovePad(this);
     // (The enter() intro lines already announced the send-out — no repeat.)
+  },
+
+  // Elevation B7: chip data for the touch move pad — the same values
+  // the canvas cooldown chips draw (name, PP, cooldown seconds).
+  rtPadMoves() {
+    const rt = this.rt;
+    if (!rt || !this.ally) return [];
+    return this.ally.moves.map((m) => {
+      const mv = MOVES[m.id];
+      return {
+        name: mv ? mv.name : m.id, pp: m.pp,
+        cd: rt.cds.ally[m.id] ? Math.ceil(rt.cds.ally[m.id] / 1000) : 0,
+      };
+    });
+  },
+
+  // Elevation B7: a tap on a touch move chip fires EXACTLY the keyboard
+  // slot-key path (updateRt): same sleep/lunge guards, then rtUseMove
+  // applies its own PP/cooldown/status guards.
+  rtTouchMove(i) {
+    const rt = this.rt;
+    if (!rt || this.state !== 'rt' || this.rtFrozen()) return;
+    const allyAsleep = this.ally.status === 'sleep' && rt.allySleepT > 0;
+    if (!allyAsleep && !rt.lunge) this.rtUseMove('ally', i);
   },
 
   rtResetFoe() {
@@ -854,6 +881,7 @@ Object.assign(BattleScene.prototype, {
       r.panel(gx, gy, gw, 20, 'rgba(43,48,64,0.92)', PT_FRAME);
       r.text(groundLabel, gx + 4, gy + 2, { size: 14, color: PT_PAPER, shadow: false });
     }
+    if (this.game.ui.refreshRtMovePad) this.game.ui.refreshRtMovePad();
     if (this.rtFloatText && this.rtFloatT > 0) {
       this.rtFloatT -= 16;
       // Panel fits the view and the text slice fits the panel (~7px/char at

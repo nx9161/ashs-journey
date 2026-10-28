@@ -43,6 +43,13 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 /* menus — Platinum windows: light interior, silver-blue title band, pale
    blue selection with a navy inset ring and a red cursor glyph. */
 .menu{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);min-width:min(240px,94%);max-width:94%;max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+/* Elevation C1: menu open transition — a 90ms flat plate-settle
+   (translateY 4px -> 0 + opacity, steps() easing for the pixel feel).
+   Flat only: no gradients, no new shadow. The .menu-open class is added
+   by UI.renderMenu only on a fresh open; Reduced Motion kills it. */
+@keyframes menuopen{from{opacity:0;transform:translate(-50%,calc(-50% + 4px))}to{opacity:1;transform:translate(-50%,-50%)}}
+.menu.menu-open{animation:menuopen 90ms steps(3) 1}
+body.reduced-motion .menu.menu-open{animation:none}
 .menu-title{font-family:var(--font-display);background:#d7e1f2;color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;padding:10px 12px;border-bottom:2px solid var(--frame)}
 .menu-list{padding:6px}
 .menu-row{display:flex;width:100%;gap:8px;align-items:center;background:none;border:0;border-left:4px solid transparent;border-bottom:1px solid #ccd6ea;font:inherit;font-size:16px;line-height:1.35;color:var(--ink);text-align:left;padding:10px;border-radius:4px;min-height:48px;cursor:pointer}
@@ -51,6 +58,10 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .menu-row.disabled{color:#8a93a8;font-style:italic;cursor:default}
 .menu-row.emptyslot{border:2px dashed #9aa7c4;background:rgba(46,74,143,.05);color:#8a93a8;font-style:italic}
 .picon{width:28px;height:28px;flex:none;object-fit:contain;image-rendering:pixelated;background:#fff;border:2px solid var(--frame);border-radius:4px}
+/* Elevation C2: Quest Log section headers wear the flat silver-blue
+   section band (the menu-title band treatment), not muted italic. */
+.menu-row.band{background:#d7e1f2;border-bottom:2px solid var(--frame);font-family:var(--font-display);font-weight:bold;font-style:normal;letter-spacing:1px;justify-content:center;text-align:center;min-height:38px;padding:6px 10px;color:var(--ink)}
+.menu-row.band .cur{display:none}
 /* blue system windows (Save / Options / confirms): Platinum's system style */
 .menu.syswin{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff}
 .menu.syswin .menu-title{background:linear-gradient(#33549c,#223c78);color:#fff;border-bottom:2px solid #dfe7f5}
@@ -139,6 +150,41 @@ body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-t
 .sum-mvname{font-weight:bold;font-size:15px;color:var(--ink)}
 .sum-mvmeta{font-size:15px;color:#4a5878}
 .sumclose{width:100%;font-family:inherit;font-size:15px;font-weight:bold;padding:12px;min-height:48px;margin-top:8px;background:linear-gradient(#e3ebfa,#b9c9e8);color:var(--ink);border:2px solid var(--frame);border-radius:6px;cursor:pointer}
+/* dex entry panel (Elevation B5): the summary plate's sibling — one
+   entry, paged in place with ◀ ▶ in its silver-blue head band. */
+.entrypanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94%);max-height:92%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26}
+.entryhead{font-family:var(--font-display);background:#d7e1f2;color:var(--ink);font-size:15px;font-weight:bold;letter-spacing:1px;padding:10px 12px;border-bottom:2px solid var(--frame);text-align:center;cursor:pointer}
+.entrybody{padding:12px 14px 14px}
+/* Hall of Fame + Diploma ceremony plates (Elevation B2): flat paper
+   plates with a gold trim — no gradients. */
+.hofplate{border:3px solid var(--gold);background:#fdfdff;border-radius:3px;padding:12px}
+.hoftitle{font-family:var(--font-display);font-size:18px;font-weight:bold;letter-spacing:2px;text-align:center;color:var(--ink);margin-bottom:10px}
+.hofentry{border-top:2px solid var(--frame);padding:8px 0 2px;margin-top:8px}
+.hofhead2{font-size:15px;font-weight:bold;color:#4a5878;margin-bottom:6px}
+.hofteam{display:flex;flex-wrap:wrap;gap:8px}
+.hofmon{display:flex;flex-direction:column;align-items:center;width:88px;text-align:center}
+.hofsprite{width:44px;height:44px}
+.hofname{font-size:15px;font-weight:bold;color:var(--ink);line-height:1.2;word-break:break-word}
+.hofsub{font-size:15px;color:#4a5878;line-height:1.2}
+.diploma{border:3px solid var(--gold);background:#fdfdff;border-radius:3px;padding:20px 14px;text-align:center}
+.diplomatitle{font-family:var(--font-display);font-size:18px;font-weight:bold;letter-spacing:2px;color:var(--ink);margin-bottom:12px}
+.diplomabody{font-size:16px;font-weight:700;line-height:1.5;color:#3c4a6a;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px;margin-bottom:8px}
+/* graphical Town Map panel (Elevation B1): a Platinum window hosting
+   the canvas map, its DOM narration plate and a hint footer. */
+.mappanel{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,94%);max-height:94%;overflow:auto;background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;pointer-events:auto;box-shadow:0 4px 18px rgba(0,0,0,.35);z-index:26;padding:10px}
+.maptitle{font-family:var(--font-display);font-size:15px;font-weight:bold;letter-spacing:1px;color:var(--ink);background:#d7e1f2;border:2px solid var(--frame);border-radius:3px;padding:7px 6px;text-align:center;margin-bottom:8px}
+.mapcanvas{display:block;width:100%;height:auto;image-rendering:pixelated;border:2px solid var(--frame);border-radius:3px;background:#5a9ae8;cursor:pointer}
+.mapnarr{margin-top:8px;background:#fff;border:2px solid var(--frame);border-radius:3px;padding:7px 8px;font-size:16px;font-weight:700;line-height:1.45;color:var(--ink);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
+.mapfoot{margin-top:6px;font-size:15px;color:#3c4a6a;text-align:center}
+.mappanel .sumclose{margin-top:8px}
+/* RT touch move pad (Elevation B7): four flat chips in the canvas
+   chips' own zone, shown only where the touch controls show. */
+.rtmoves{position:absolute;left:2.5%;right:2.5%;bottom:2.5%;display:flex;gap:6px;pointer-events:auto}
+.rtmove{flex:1;min-height:44px;padding:6px 4px;background:#2b3040;color:#f6f8fc;border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;font-family:var(--font);font-size:14px;font-weight:bold;letter-spacing:.5px;cursor:pointer;touch-action:none}
+.rtmove.cooling{color:#8d9bbf;background:rgba(43,48,64,.6)}
+body.desktop .rtmoves{display:none}
+body.desktop.showtouch .rtmoves{display:flex}
+@media (pointer:coarse){body.desktop .rtmoves{display:flex}}
 /* toasts — Platinum mini-frames; HUD toasts in system blue */
 .toasts{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 8px;pointer-events:none}
 .toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:16px;font-weight:700;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
@@ -216,8 +262,9 @@ body.flip .ab{right:auto;left:16px}
 .nkb-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .nkb-key{min-width:44px;min-height:44px;font-family:inherit;font-size:16px;font-weight:bold;background:#eef2fb;color:var(--ink);border:2px solid var(--frame);border-bottom:4px solid var(--frame);border-radius:6px;cursor:pointer;touch-action:none}
 .nkb-key:active{background:#d7e2f7}
+.nkb-key.sel{background:var(--sky);outline:2px solid var(--navy);outline-offset:-2px}
 .nkb-row{display:flex;gap:6px;margin-top:6px}
-.nkb-key.wide{flex:1}
+.nkb-key.wide{flex:1;font-size:14px}
 .nkb-key.go{background:linear-gradient(#6cc46a,#3d9240);color:#fff}
 .shake{animation:nkbshake .3s}
 @keyframes nkbshake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
@@ -353,6 +400,6 @@ body.desktop.showtouch .controls{display:block}
 <div id="stage"><canvas id="game"></canvas></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:ef607cc1287827317c6c719e4dade9c923f2d7d9d5218fdcdcfbe70412904c32 -->
+<!-- contentHash:821844f25dda6ba4c07ffa2520c6fe40ce98941cc864819ac7a73c97d1ccdacc -->
 </body>
 </html>

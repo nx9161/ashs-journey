@@ -127,6 +127,9 @@ export class UI {
     this.buildDialogue();
     this.buildMenu();
     this.buildSummaryPanel();
+    this.buildEntryPanel();
+    this.buildMapPanel();
+    this.buildRtMovePad();
     this.buildPcPanel();
     this.buildToasts();
     this.buildHudChips();
@@ -423,6 +426,9 @@ export class UI {
       // time under the tab strip, Platinum-style.
       bagTabs: opts.bagTabs || null,
       bagPocket: initPocket,
+      // Elevation B4: a menu may claim the direction keys itself (the
+      // mart quantity stepper adjusts instead of moving a cursor).
+      onKey: opts.onKey || null,
     };
     this.log.push({ ui: 'menu', title, items: items.map((i) => i.label) });
     if (!this.headless) this.renderMenu();
@@ -432,8 +438,15 @@ export class UI {
     if (this.headless) return;
     const m = this.menu;
     if (!m || m.kind === 'commands') { this.menuEl.classList.add('hidden'); return; }
-    this.menuEl.classList.remove('hidden');
+    // Elevation C1: the open transition plays only when the window was
+    // actually hidden (a fresh open) — cursor moves and in-place
+    // re-renders (bag pockets, the mart stepper) must not replay it.
+    const wasHidden = this.menuEl.classList.contains('hidden');
+    // className assignment wipes the class list, so it must land BEFORE
+    // the menu-open add below (QA Major 2, 2026-10-27: the transition
+    // class was being stripped by this very line and never played).
     this.menuEl.className = 'menu' + (m.menuClass ? ' ' + m.menuClass : '');
+    if (wasHidden) this.menuEl.classList.add('menu-open');
     // Full-takeover windows (party screen, PC box, summary) hide the
     // overworld HUD — Platinum screens own the whole frame.
     if (typeof document !== 'undefined' && document.body) {
@@ -471,6 +484,7 @@ export class UI {
       r.className = 'menu-row'
         + (i === m.idx ? ' cursor' : '')
         + (it.disabled ? ' disabled' : '')
+        + (it.band ? ' band' : '')
         + (it.wide ? ' wide' : '')
         + (it.closeRow ? ' close-row' : '')
         + (it.zeroPp ? ' zeropp' : '')
@@ -697,6 +711,278 @@ export class UI {
   }
 
   get summaryOpen() { return !!this.summary; }
+
+  // ---- Dex entry panel (Elevation B5) ----
+  // A single-plate panel in the summary family: the caller composes the
+  // entry body per species; this class owns the chrome and the paging
+  // keys (routed in update()). cb receives ('page', -1|1) and ('close').
+  buildEntryPanel() {
+    this.entryEl = this.el('div', 'entrypanel hidden', this.frame);
+    this.entryHead = this.el('div', 'entryhead', this.entryEl);
+    this.entryBody = this.el('div', 'entrybody', this.entryEl);
+    const close = this.el('button', 'sumclose', this.entryEl);
+    close.textContent = 'Close';
+    close.addEventListener('pointerdown', (e) => { e.preventDefault(); this.closeEntryPanel(); });
+    // Pointer paging: tap the header's edge arrows (rendered in the title).
+    this.entryHead.addEventListener('pointerdown', (e) => {
+      if (!this.entryPanel) return;
+      e.preventDefault();
+      const r = this.entryHead.getBoundingClientRect();
+      if (!r || !r.width) return;
+      const frac = (e.clientX - r.left) / r.width;
+      if (frac < 0.18) this.entryPanel.cb('page', -1);
+      else if (frac > 0.82) this.entryPanel.cb('page', 1);
+    });
+  }
+
+  showEntryPanel(data, cb) {
+    this.entryPanel = { data, cb: cb || null };
+    this.log.push({ ui: 'dexentry', title: data && data.title });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) this.renderEntryPanel();
+  }
+
+  renderEntryPanel() {
+    if (this.headless || !this.entryEl) return;
+    const p = this.entryPanel;
+    if (!p) { this.entryEl.classList.add('hidden'); return; }
+    this.entryEl.classList.remove('hidden');
+    this.entryHead.textContent = p.data.title || '';
+    this.entryBody.innerHTML = p.data.bodyHtml || '';
+  }
+
+  updateEntryPanel(data) {
+    if (!this.entryPanel) return;
+    this.entryPanel.data = data;
+    if (!this.headless) this.renderEntryPanel();
+  }
+
+  closeEntryPanel() {
+    const p = this.entryPanel;
+    if (!p) return;
+    this.entryPanel = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.entryEl) this.entryEl.classList.add('hidden');
+    this.game.audio.playSfx(SFX['ui-back']);
+    if (p.cb) p.cb('close');
+  }
+
+  get entryOpen() { return !!this.entryPanel; }
+
+  // ---- Graphical Town Map panel (Elevation B1) ----
+  // A canvas map in a Platinum window, PC-panel pattern: the caller
+  // (Game.openTownMap) supplies the reached-gated node list + link pairs
+  // on a hand-authored layout; this class owns the chrome, the cursor,
+  // the canvas drawing (flat plates only) and a DOM narration element
+  // whose text names the map + the place under the cursor, so the map
+  // is verifiable without reading pixels (the sign-narration pattern).
+  buildMapPanel() {
+    this.mapEl = this.el('div', 'mappanel hidden', this.frame);
+    const head = this.el('div', 'maptitle', this.mapEl);
+    head.textContent = 'TOWN MAP — KANTO';
+    this.mapCanvas = this.el('canvas', 'mapcanvas', this.mapEl);
+    if (this.mapCanvas) { this.mapCanvas.width = 480; this.mapCanvas.height = 300; }
+    this.mapNarr = this.el('div', 'mapnarr', this.mapEl);
+    const foot = this.el('div', 'mapfoot', this.mapEl);
+    foot.textContent = 'Arrows: move · B: close';
+    const close = this.el('button', 'sumclose', this.mapEl);
+    close.textContent = 'Close';
+    close.addEventListener('pointerdown', (e) => { e.preventDefault(); this.closeMapPanel(); });
+    if (this.mapCanvas && this.mapCanvas.addEventListener) {
+      this.mapCanvas.addEventListener('pointerdown', (e) => {
+        if (!this.mapPanel) return;
+        e.preventDefault();
+        const r = this.mapCanvas.getBoundingClientRect();
+        if (!r || !r.width) return;
+        const nx = (e.clientX - r.left) / r.width, ny = (e.clientY - r.top) / r.height;
+        let best = -1, bd = 0.02;
+        this.mapPanel.data.nodes.forEach((n, i) => {
+          const d = (n.x - nx) * (n.x - nx) + (n.y - ny) * (n.y - ny);
+          if (d < bd) { bd = d; best = i; }
+        });
+        if (best >= 0) { this.mapPanel.cursor = best; this.game.audio.playSfx(SFX['ui-tick']); this.renderMapCanvas(); this._mapNarrate(); }
+      });
+    }
+  }
+
+  // data: { nodes: [{id, name, x, y, town, current}], links: [[i, j], ...] }
+  showMapPanel(data, cb) {
+    let cursor = data.nodes.findIndex((n) => n.current);
+    if (cursor < 0) cursor = 0;
+    this.mapPanel = { data, cursor, cb: cb || null };
+    this.log.push({ ui: 'townmap', nodes: data.nodes.map((n) => n.name), current: data.nodes[cursor] ? data.nodes[cursor].name : null });
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.add('menu-full');
+    if (!this.headless) {
+      this.mapEl.classList.remove('hidden');
+      this.renderMapCanvas();
+      this._mapNarrate();
+    }
+  }
+
+  _mapNarrate() {
+    if (this.headless || !this.mapNarr || !this.mapPanel) return;
+    const n = this.mapPanel.data.nodes[this.mapPanel.cursor];
+    this.mapNarr.textContent = 'Town Map — Kanto · ' + (n ? n.name + (n.current ? ' (you are here)' : '') : 'Nowhere yet');
+  }
+
+  mapMove(dir) {
+    const p = this.mapPanel;
+    if (!p || p.data.nodes.length < 2) return;
+    const cur = p.data.nodes[p.cursor];
+    let best = -1, bestScore = Infinity;
+    p.data.nodes.forEach((n, i) => {
+      if (i === p.cursor) return;
+      const dx = n.x - cur.x, dy = n.y - cur.y;
+      let primary, perp;
+      if (dir === 'left') { primary = -dx; perp = Math.abs(dy); }
+      else if (dir === 'right') { primary = dx; perp = Math.abs(dy); }
+      else if (dir === 'up') { primary = -dy; perp = Math.abs(dx); }
+      else { primary = dy; perp = Math.abs(dx); }
+      if (primary <= 0.005) return;
+      const score = primary + perp * 2.2;
+      if (score < bestScore) { bestScore = score; best = i; }
+    });
+    if (best >= 0) {
+      p.cursor = best;
+      this.game.audio.playSfx(SFX['ui-tick']);
+      this.renderMapCanvas();
+      this._mapNarrate();
+    }
+  }
+
+  renderMapCanvas() {
+    if (this.headless || !this.mapCanvas || !this.mapPanel) return;
+    const x = this.mapCanvas.getContext('2d');
+    if (!x) return;
+    const W = 480, H = 300;
+    const p = this.mapPanel;
+    const nodes = p.data.nodes;
+    const px = (n) => Math.round(n.x * (W - 48)) + 24;
+    const py = (n) => Math.round(n.y * (H - 48)) + 24;
+    // Sea + landmass: flat plates only (Platinum law — no gradients).
+    x.fillStyle = '#5a9ae8'; x.fillRect(0, 0, W, H); // sea: the HUD dex-screen blue
+    x.fillStyle = '#a9c08a'; // land: the LCD plate green (--lcd)
+    x.beginPath();
+    const land = [[0.03, 0.30], [0.10, 0.13], [0.30, 0.05], [0.55, 0.04], [0.78, 0.08], [0.92, 0.22], [0.94, 0.45], [0.86, 0.66], [0.78, 0.88], [0.58, 0.99], [0.30, 0.97], [0.13, 0.86], [0.10, 0.62], [0.04, 0.48]];
+    land.forEach(([lx, ly], i) => { const X = lx * W, Y = ly * H; if (i === 0) x.moveTo(X, Y); else x.lineTo(X, Y); });
+    x.closePath(); x.fill();
+    x.strokeStyle = '#46543a'; x.lineWidth = 2; x.stroke(); // the LCD plate border green
+    // Cinnabar is an island off the SW coast.
+    x.fillStyle = '#a9c08a'; // land: the LCD plate green (--lcd)
+    x.fillRect(Math.round(0.10 * W), Math.round(0.86 * H), 52, 26);
+    x.strokeRect(Math.round(0.10 * W), Math.round(0.86 * H), 52, 26);
+    // Route links between visited places.
+    x.strokeStyle = '#f6f8fc'; x.lineWidth = 2;
+    for (const [a, b] of p.data.links) {
+      if (!nodes[a] || !nodes[b]) continue;
+      x.beginPath(); x.moveTo(px(nodes[a]), py(nodes[a])); x.lineTo(px(nodes[b]), py(nodes[b])); x.stroke();
+    }
+    // Nodes: towns are framed plates, routes are dots.
+    const pulse = Math.floor(Date.now() / 500) % 2 === 0;
+    nodes.forEach((n, i) => {
+      const X = px(n), Y = py(n);
+      if (n.town) {
+        x.fillStyle = n.current ? '#e8b832' : '#f6f8fc';
+        x.fillRect(X - 6, Y - 6, 12, 12);
+        x.strokeStyle = '#2b3040'; x.lineWidth = 2; x.strokeRect(X - 6, Y - 6, 12, 12);
+        x.fillStyle = '#c03028'; x.fillRect(X - 3, Y - 6, 6, 3);
+      } else {
+        x.fillStyle = '#f6f8fc';
+        x.beginPath(); x.arc(X, Y, 3.5, 0, Math.PI * 2); x.fill();
+        x.strokeStyle = '#2b3040'; x.lineWidth = 1.5; x.stroke();
+      }
+      if (n.current && pulse) {
+        x.strokeStyle = '#e03c31'; x.lineWidth = 2;
+        x.beginPath(); x.arc(X, Y, 11, 0, Math.PI * 2); x.stroke();
+      }
+      if (i === p.cursor) {
+        x.strokeStyle = '#e03c31'; x.lineWidth = 2;
+        x.strokeRect(X - 10, Y - 10, 20, 20);
+      }
+    });
+    // Selected place name plate (canvas twin of the DOM narration).
+    const cur = nodes[p.cursor];
+    if (cur) {
+      const label = cur.name + (cur.current ? ' — you are here' : '');
+      x.font = 'bold 14px sans-serif';
+      const tw = Math.min(W - 16, x.measureText(label).width + 16);
+      x.fillStyle = '#f6f8fc'; x.fillRect(8, H - 30, tw, 22);
+      x.strokeStyle = '#2b3040'; x.lineWidth = 2; x.strokeRect(8, H - 30, tw, 22);
+      x.fillStyle = '#232838'; x.fillText(label, 16, H - 14);
+    }
+  }
+
+  closeMapPanel() {
+    const p = this.mapPanel;
+    if (!p) return;
+    this.mapPanel = null;
+    if (!this.headless && typeof document !== 'undefined' && document.body) document.body.classList.remove('menu-full');
+    if (!this.headless && this.mapEl) this.mapEl.classList.add('hidden');
+    this.game.audio.playSfx(SFX['ui-back']);
+    if (p.cb) p.cb('close');
+  }
+
+  get mapOpen() { return !!this.mapPanel; }
+
+  // ---- RT touch move pad (Elevation B7) ----
+  // Four flat chips mirroring the canvas cooldown chips: one per ally
+  // move, labelled with the move name + its slot key number. Tapping
+  // fires the SAME path as keys 1-4 (BattleScene.rtTouchMove, which
+  // guards exactly like the keyboard branch). Display is gated by the
+  // same CSS rule as the touch controls (body.showtouch / coarse
+  // pointer); visibility state is refreshed per render by the scene.
+  buildRtMovePad() {
+    this.rtPadEl = this.el('div', 'rtmoves hidden', this.frame);
+    this.rtPadBtns = [];
+    for (let i = 0; i < 4; i++) {
+      const b = this.el('button', 'rtmove', this.rtPadEl);
+      b.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        this.game.audio.unlock();
+        if (this.rtPadScene && this.rtPadScene.rtTouchMove) this.rtPadScene.rtTouchMove(i);
+      });
+      this.rtPadBtns.push(b);
+    }
+  }
+
+  showRtMovePad(scene) {
+    this.rtPadScene = scene;
+    this._rtPadSig = null;
+    if (!this.headless && this.rtPadEl) this.rtPadEl.classList.remove('hidden');
+    this.refreshRtMovePad();
+  }
+
+  hideRtMovePad() {
+    this.rtPadScene = null;
+    if (!this.headless && this.rtPadEl) this.rtPadEl.classList.add('hidden');
+  }
+
+  refreshRtMovePad() {
+    if (this.headless || !this.rtPadEl) return;
+    const scene = this.rtPadScene;
+    if (!scene || !scene.rt || !scene.ally) { this.rtPadEl.classList.add('hidden'); return; }
+    // The pad retires under any modal layer, exactly like the canvas
+    // chips are covered by the command panel / menus.
+    const modal = this.menu || this.dlg || this.summary || this.pcPanel || this.entryPanel || this.mapPanel || this.loginOpen || this.nameEntry;
+    if (modal || scene.state !== 'rt') { this.rtPadEl.classList.add('hidden'); return; }
+    this.rtPadEl.classList.remove('hidden');
+    // The scene composes the chip data (it owns MOVES + the cooldown
+    // clocks); the pad is a dumb renderer, like the canvas chips.
+    const chips = (typeof scene.rtPadMoves === 'function') ? scene.rtPadMoves() : [];
+    const sig = chips.map((c) => c.name + ':' + c.pp + ':' + (c.cd > 0 ? 1 : 0)).join('|');
+    if (sig === this._rtPadSig) return;
+    this._rtPadSig = sig;
+    chips.forEach((c, i) => {
+      const b = this.rtPadBtns[i];
+      if (!b) return;
+      b.textContent = (i + 1) + ' ' + c.name + (c.cd > 0 ? ' CD ' + c.cd + 's' : (c.pp <= 0 ? ' NO PP' : ''));
+      b.classList.toggle('cooling', c.cd > 0 || c.pp <= 0);
+      b.style.display = '';
+    });
+    for (let i = chips.length; i < 4; i++) {
+      if (this.rtPadBtns[i]) this.rtPadBtns[i].style.display = 'none';
+    }
+  }
 
   // ---- PC box panel (UI v2.4, defect 4) ----
   // A real box screen, not list modals: the caller (overworld-systems
@@ -998,7 +1284,7 @@ export class UI {
       this.log.push({ ui: 'nameentry', title });
       return;
     }
-    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title, opts };
+    this.nameEntry = { value: initial || '', maxLen: maxLen || 8, cb, title, opts, lower: false };
     const ov = this.el('div', 'nkbover', this.root);
     this._nkbOv = ov;
     const card = this.el('div', 'namekb', ov);
@@ -1010,16 +1296,25 @@ export class UI {
     const grid = this.el('div', 'nkb-grid', card);
     // AUDIT FIX (S-20): the charset was A-Z + '-' only — no digits, space,
     // period or apostrophe (Platinum's keyboard has all of them).
+    // Elevation B6 (S-20 remainder): the aA key toggles letter case; the
+    // letter keys re-label in the active case and typed case is kept.
+    this._nkbLetterBtns = [];
     const keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
     for (const k of keys) {
       const b = this.el('button', 'nkb-key', grid);
       b.textContent = k;
-      b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbType(k); });
+      b.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbTypeGrid(k); });
+      if (/[A-Z]/.test(k)) this._nkbLetterBtns.push({ btn: b, ch: k });
     }
     const row = this.el('div', 'nkb-row', card);
     const bk = this.el('button', 'nkb-key wide', row);
     bk.textContent = '←';
     bk.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbBack(); });
+    const sh = this.el('button', 'nkb-key wide', row);
+    sh.textContent = 'aA';
+    sh.setAttribute('aria-label', 'Toggle letter case');
+    this._nkbShiftBtn = sh;
+    sh.addEventListener('pointerdown', (e) => { e.preventDefault(); this._nkbShift(); });
     for (const k of ['-', '.', "'", ' ']) {
       const b = this.el('button', 'nkb-key' + (k === ' ' ? ' wide' : ''), row);
       b.textContent = k === ' ' ? 'SPACE' : k;
@@ -1041,7 +1336,9 @@ export class UI {
       if (e.key === 'Backspace') this._nkbBack();
       else if (e.key === 'Enter') this._nkbOk();
       else if (e.key === 'Escape' && this.nameEntry.opts && this.nameEntry.opts.allowCancel) this._nkbCancel();
-      else if (/^[a-zA-Z0-9\-'. ]$/.test(e.key)) this._nkbType(e.key.toUpperCase());
+      // Elevation B6: a physical keyboard types its own case (the real
+      // Shift key is the toggle there); only the grid uses the aA key.
+      else if (/^[a-zA-Z0-9\-'. ]$/.test(e.key)) this._nkbType(e.key);
     };
     document.addEventListener('keydown', this._nkbKey, true);
   }
@@ -1067,6 +1364,25 @@ export class UI {
     ne.value += ch;
     this.game.audio.playSfx(SFX['ui-tick']);
     this._nkbRender();
+  }
+
+  // Grid letters pass through the aA case toggle; digits/punct are
+  // case-free and go through _nkbType directly.
+  _nkbTypeGrid(ch) {
+    const ne = this.nameEntry;
+    if (!ne) return;
+    this._nkbType(ne.lower && /[A-Z]/.test(ch) ? ch.toLowerCase() : ch);
+  }
+
+  _nkbShift() {
+    const ne = this.nameEntry;
+    if (!ne) return;
+    ne.lower = !ne.lower;
+    this.game.audio.playSfx(SFX['ui-tick']);
+    if (this._nkbLetterBtns) {
+      for (const { btn, ch } of this._nkbLetterBtns) btn.textContent = ne.lower ? ch.toLowerCase() : ch;
+    }
+    if (this._nkbShiftBtn) this._nkbShiftBtn.classList.toggle('sel', ne.lower);
   }
 
   _nkbBack() {
@@ -1101,7 +1417,10 @@ export class UI {
       this.toast((ne.opts && ne.opts.emptyMsg) || 'Give your trainer a name!');
       return;
     }
-    const cb = ne.cb, v = ne.value.trim().toUpperCase().slice(0, ne.maxLen);
+    // Elevation B6 (S-20 remainder): the value keeps the case the player
+    // typed — the old blanket toUpperCase() is gone. (The DELETE
+    // type-to-confirm compares case-insensitively at its call sites.)
+    const cb = ne.cb, v = ne.value.trim().slice(0, ne.maxLen);
     this._nkbClose();
     cb(v);
   }
@@ -1312,6 +1631,27 @@ export class UI {
         this._hintCard.classList.add('hidden');
       }
     }
+    // Dex entry panel is modal (Elevation B5): left/right (or Q/E page
+    // keys) page between entries, B / START / ESC closes back to the list.
+    if (this.entryPanel) {
+      if (input.wasPressed('left') || input.wasPressed('pageup')) this.entryPanel.cb('page', -1);
+      else if (input.wasPressed('right') || input.wasPressed('pagedown')) this.entryPanel.cb('page', 1);
+      else if (input.wasPressed('b') || input.wasPressed('start') || input.wasPressed('escape')) { this.closeEntryPanel(); }
+      return true;
+    }
+    // Town Map panel is modal (Elevation B1): arrows move the cursor
+    // between visited places, B / START / ESC closes.
+    if (this.mapPanel) {
+      if (input.wasPressed('up')) this.mapMove('up');
+      else if (input.wasPressed('down')) this.mapMove('down');
+      else if (input.wasPressed('left')) this.mapMove('left');
+      else if (input.wasPressed('right')) this.mapMove('right');
+      else if (input.wasPressed('b') || input.wasPressed('start') || input.wasPressed('escape')) { this.closeMapPanel(); }
+      // The "you are here" pulse runs on a slow redraw beat, not per frame.
+      this._mapTick = (this._mapTick || 0) + 1;
+      if (this._mapTick % 30 === 0) this.renderMapCanvas();
+      return true;
+    }
     // Summary panel is modal (UI v2): left/right (or X/Y page keys) switch
     // tabs, B / START / ESC closes.
     if (this.summary) {
@@ -1361,6 +1701,23 @@ export class UI {
     }
     if (this.menu) {
       const grid = !!(this.menu.grid || this.menu.gridNav);
+      // Elevation B4: an onKey menu (mart quantity stepper) claims the
+      // direction + page keys for itself; A confirms, B cancels, exactly
+      // like a normal menu otherwise.
+      if (this.menu.onKey) {
+        if (input.wasPressed('up')) this.menu.onKey('up');
+        else if (input.wasPressed('down')) this.menu.onKey('down');
+        else if (input.wasPressed('left')) this.menu.onKey('left');
+        else if (input.wasPressed('right')) this.menu.onKey('right');
+        else if (input.wasPressed('pageup')) this.menu.onKey('pageup');
+        else if (input.wasPressed('pagedown')) this.menu.onKey('pagedown');
+        else if (input.wasPressed('a') || input.wasPressed('start')) { this.chooseMenu(); return true; }
+        else if (input.wasPressed('b') || input.wasPressed('escape')) {
+          if (!this.menu.stickyCancel) this.cancelMenu();
+          return true;
+        }
+        return true;
+      }
       if (input.wasPressed('up')) { grid ? this.moveMenuGrid('up') : this.moveMenu(-1); }
       else if (input.wasPressed('down')) { grid ? this.moveMenuGrid('down') : this.moveMenu(1); }
       // AUDIT FIX (S-50): guards must run BEFORE wasPressed — wasPressed
@@ -1410,6 +1767,7 @@ export class UI {
   setBattleMode(on) {
     if (this.headless) { this.inBattle = !!on; return; }
     this.inBattle = !!on; // Track B: SYNC.tick defers the conflict sheet out of battle
+    if (!on) this.hideRtMovePad(); // Elevation B7: the RT touch pad retires with the battle
     this.dpadEl.classList.toggle('hidden', on);
     // UI v2.2: do NOT unhide the command panel here — renderCommands() owns
     // its visibility (it unhides only when real commands populate it). The

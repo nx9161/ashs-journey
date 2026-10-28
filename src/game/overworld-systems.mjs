@@ -1377,45 +1377,88 @@ Object.assign(OverworldScene.prototype, {
   // ---------- mart ----------
   openMart(stock) {
     const g = this.game;
+    // Elevation B4: the shared quantity stepper. One menu row carries
+    // the live count + total; the direction keys adjust (Left/Right ±1,
+    // Up/Down ±10) through the menu's onKey hook, A confirms the WHOLE
+    // purchase as one transaction, B cancels back to the stock list.
+    const pickQty = (verb, itemName, unitPrice, maxQty, onConfirm, onCancel) => {
+      let qty = 1;
+      const render = () => {
+        g.ui.showMenu(verb + ' — ' + itemName, [
+          { label: verb + ' x' + qty + ' — $' + (qty * unitPrice) + '  (◀ ▶ ±1 · ▲ ▼ ±10)', value: 'go' },
+          { label: 'Cancel', value: 'cancel' },
+        ], (v) => {
+          if (v === 'go') onConfirm(qty);
+          else onCancel();
+        }, {
+          onKey: (dir) => {
+            if (dir === 'left') qty = Math.max(1, qty - 1);
+            else if (dir === 'right') qty = Math.min(maxQty, qty + 1);
+            else if (dir === 'up') qty = Math.min(maxQty, qty + 10);
+            else if (dir === 'down') qty = Math.max(1, qty - 10);
+            else if (dir === 'pageup') qty = Math.max(1, qty - 10);
+            else if (dir === 'pagedown') qty = Math.min(maxQty, qty + 10);
+            else return;
+            g.audio.playSfx('ui-tick');
+            render();
+          },
+        });
+      };
+      render();
+    };
+    const showBuy = () => {
+      // ADR-025 §3 (Phase 3): stock rows carrying minBadges stay hidden
+      // until the player has earned that many badges (the codebase's
+      // badgesAtLeast gating idiom — this is how the Celadon shop's
+      // Second-Wind Ribbon is "late"). Keepsakes are unique objects:
+      // once owned (bag or held) the row is disabled.
+      const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0
+        && (!ITEMS[id].minBadges || g.state.badges.kanto.length >= ITEMS[id].minBadges)).map((id) => ({
+        label: ITEMS[id].name + ' — $' + ITEMS[id].price + ' (own ' + (g.state.bag[id] || 0) + ')', value: id,
+        disabled: g.state.player.money < ITEMS[id].price
+          || (ITEMS[id].pocket === 'keepsakes' && ownsKeepsake(g.state, id)),
+      }));
+      items.push({ label: 'Back', value: null });
+      g.ui.showMenu('Buy what?', items, (iv) => {
+        // AUDIT FIX (S-11): Back returns to the Mart top menu, not out
+        // of the whole Mart flow onto the street.
+        if (!iv) { this.openMart(stock); return; }
+        const it = ITEMS[iv];
+        const buyNow = (qty) => {
+          g.state.player.money -= it.price * qty;
+          g.state.bag[iv] = (g.state.bag[iv] || 0) + qty;
+          g.audio.playSfx('dex-register');
+          g.ui.toast(qty > 1 ? 'Bought ' + qty + ' x ' + it.name + '.' : 'Bought ' + it.name + '.');
+          this.openMart(stock);
+        };
+        // Keepsakes stay qty-1 only: unique objects buy in one press.
+        if (it.pocket === 'keepsakes') { buyNow(1); return; }
+        const maxQty = Math.max(1, Math.min(99, Math.floor(g.state.player.money / it.price)));
+        pickQty('Buy', it.name, it.price, maxQty, buyNow, showBuy);
+      });
+    };
+    const showSell = () => {
+      // ADR-025 §3: keepsakes are non-sellable (pocket excluded).
+      const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].pocket !== 'keepsakes' && ITEMS[id].price > 0 && g.state.bag[id] > 0)
+        .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
+      items.push({ label: 'Back', value: null });
+      g.ui.showMenu('Sell what?', items, (iv) => {
+        if (!iv) { this.openMart(stock); return; }
+        const it = ITEMS[iv];
+        const unit = Math.floor(it.price / 2);
+        pickQty('Sell', it.name, unit, g.state.bag[iv] || 1, (qty) => {
+          g.state.bag[iv] -= qty;
+          g.state.player.money += unit * qty;
+          g.ui.toast(qty > 1 ? 'Sold ' + qty + ' x ' + it.name + '.' : 'Sold ' + it.name + '.');
+          this.openMart(stock);
+        }, showSell);
+      });
+    };
     g.ui.showMenu('Mart — $' + g.state.player.money, [
       { label: 'Buy', value: 'buy' }, { label: 'Sell', value: 'sell' }, { label: 'Leave', value: 'leave' },
     ], (v) => {
-      if (v === 'buy') {
-        // ADR-025 §3 (Phase 3): stock rows carrying minBadges stay hidden
-        // until the player has earned that many badges (the codebase's
-        // badgesAtLeast gating idiom — this is how the Celadon shop's
-        // Second-Wind Ribbon is "late"). Keepsakes are unique objects:
-        // once owned (bag or held) the row is disabled.
-        const items = stock.filter((id) => ITEMS[id] && ITEMS[id].price > 0
-          && (!ITEMS[id].minBadges || g.state.badges.kanto.length >= ITEMS[id].minBadges)).map((id) => ({
-          label: ITEMS[id].name + ' — $' + ITEMS[id].price + ' (own ' + (g.state.bag[id] || 0) + ')', value: id,
-          disabled: g.state.player.money < ITEMS[id].price
-            || (ITEMS[id].pocket === 'keepsakes' && ownsKeepsake(g.state, id)),
-        }));
-        items.push({ label: 'Back', value: null });
-        g.ui.showMenu('Buy what?', items, (iv) => {
-          // AUDIT FIX (S-11): Back returns to the Mart top menu, not out
-          // of the whole Mart flow onto the street.
-          if (!iv) { this.openMart(stock); return; }
-          g.state.player.money -= ITEMS[iv].price;
-          g.state.bag[iv] = (g.state.bag[iv] || 0) + 1;
-          g.audio.playSfx('dex-register');
-          g.ui.toast('Bought ' + ITEMS[iv].name + '.');
-          this.openMart(stock);
-        });
-      } else if (v === 'sell') {
-        // ADR-025 §3: keepsakes are non-sellable (pocket excluded).
-        const items = Object.keys(g.state.bag).filter((id) => ITEMS[id] && ITEMS[id].pocket !== 'keepsakes' && ITEMS[id].price > 0 && g.state.bag[id] > 0)
-          .map((id) => ({ label: ITEMS[id].name + ' x' + g.state.bag[id] + ' — sell $' + Math.floor(ITEMS[id].price / 2), value: id }));
-        items.push({ label: 'Back', value: null });
-        g.ui.showMenu('Sell what?', items, (iv) => {
-          if (!iv) { this.openMart(stock); return; }
-          g.state.bag[iv]--;
-          g.state.player.money += Math.floor(ITEMS[iv].price / 2);
-          g.ui.toast('Sold ' + ITEMS[iv].name + '.');
-          this.openMart(stock);
-        });
-      }
+      if (v === 'buy') showBuy();
+      else if (v === 'sell') showSell();
     });
   },
 

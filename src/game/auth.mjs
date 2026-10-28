@@ -780,7 +780,7 @@ function accountDelete(game, ov, closeAccount) {
     if (!inP.value) { showErr('Enter your password to continue.'); return; }
     // Second gate: type DELETE (same pattern as save-erase).
     ui.showNameEntry('Type DELETE to confirm', '', 6, (typed) => {
-      if (typed !== 'DELETE') { ui.toast('Deletion cancelled.'); return; }
+      if (String(typed).toUpperCase() !== 'DELETE') { ui.toast('Deletion cancelled.'); return; }
       api('account/delete', { method: 'POST', body: { password: inP.value } }).then((r) => {
         if (r.offline) { showErr(COPY.offline); return; }
         if (r.status === 401) { AUTH.onSessionExpired(game); sub.remove(); closeAccount(); return; }

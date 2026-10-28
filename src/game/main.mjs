@@ -4,7 +4,7 @@
 
 import { Loop } from '../engine/loop.mjs';
 import { Renderer, TILE } from '../engine/render.mjs';
-import { Input } from '../engine/input.mjs';
+import { Input, KEYMAP, ACTIONS } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
@@ -241,6 +241,7 @@ export class Game {
     };
     this.loop.bindVisibility(() => { /* sim halts via rAF freeze; autosave queued above */ });
     this.audio.applySettings(this.state.settings);
+    this.applyKeymap();
     // Gameplay Designer co-design note (C7): the tutorial catch gate must be
     // robust to a Spearow-class foe — the script is deterministic (balance-seat
     // gate), never luck. Recorded here so the gate lives with the flow.
@@ -290,6 +291,8 @@ export class Game {
     // P1/K2: landscape gets the right-edge command rail (CSS re-rails the HUD strip).
     document.body.classList.toggle('landscape', this.layoutMode === 'landscape');
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
+    // Elevation C1: the reduced-motion body gate for the menu transition.
+    document.body.classList.toggle('reduced-motion', !!this.state.settings.reducedMotion);
     // P1/K3 + I2: desktop hint card; show-touch toggle honored on hybrids.
     document.body.classList.toggle('showtouch', !!this.state.settings.showTouch);
     // Headless harness stubs document without documentElement — guard it.
@@ -365,6 +368,8 @@ export class Game {
       if (res.load === 'state' && res.state) {
         this.state = res.state;
         this.audio.applySettings(this.state.settings);
+        this.applyKeymap();
+        this.applyLayout();
         this.scenes.replace(new OverworldScene());
         this.ui.toast('Save loaded.');
       } else if (res.load === 'new') {
@@ -392,6 +397,7 @@ export class Game {
     const keepDifficulty = this.state && this.state.story ? difficultyOf(this.state) : 'classic';
     this.state = freshState();
     if (keepSettings) this.state.settings = keepSettings;
+    this.applyKeymap();
     this.state.story.difficulty = keepDifficulty;
     // A run that STARTS with a House Rule on has enabled one: no Pure Run.
     if (activeHouseRules(this.state).length) this.state.meta.houseRulesTouched = true;
@@ -409,6 +415,8 @@ export class Game {
     }
     this.state = res.data;
     this.audio.applySettings(this.state.settings);
+    this.applyKeymap();
+    this.applyLayout();
     this.scenes.replace(new OverworldScene());
     this.ui.toast('Welcome back, ' + this.state.player.name + '!');
   }
@@ -706,12 +714,43 @@ export class Game {
       const sp = SPECIES[v];
       const c = g.state.dex.caught[sp.dexNo], s = g.state.dex.seen[sp.dexNo];
       if (!c && !s) { g.openDex(filter); return; }
-      g.ui.say([
-        'No.' + sp.dexNo + '  ' + sp.name + '  ' + sp.types.join('/'),
-        sp.flavor,
-        'Status: ' + (c ? 'CAUGHT' : 'SEEN'),
-      ], () => g.openDex(filter), 'Dex');
+      g.openDexEntry(v, filter);
     }, { remember: 'dex' });
+  }
+
+  // Elevation B5: the dex entry as its own plate, pageable in place —
+  // Left/Right (and Q/E, the PC box-switch convention) walk the whole
+  // Kanto dex in dex order without returning to the list. Unseen
+  // neighbours render redacted, exactly as the list shows them (???).
+  openDexEntry(speciesId, filter) {
+    const g = this;
+    const order = Object.keys(SPECIES)
+      .filter((id) => id !== 'partner' && SPECIES[id].dexNo >= 1 && SPECIES[id].dexNo <= 151)
+      .sort((a, b) => SPECIES[a].dexNo - SPECIES[b].dexNo);
+    let idx = order.indexOf(speciesId);
+    if (idx < 0) idx = 0;
+    const render = () => {
+      const id = order[idx];
+      const sp = SPECIES[id];
+      const c = !!g.state.dex.caught[sp.dexNo], s = !!g.state.dex.seen[sp.dexNo];
+      const known = c || s;
+      const title = '◀ No.' + sp.dexNo + ' ' + (known ? sp.name : '???') + ' ▶';
+      const body = '<div class="sumhead"><img class="sumsprite" src="' + (known ? g.spriteDataUrl(id) : '') + '" alt="">'
+        + '<div><div class="sumname">' + (known ? sp.name : '???') + '</div>'
+        + '<div class="sumsub">' + (known ? sp.types.join(' / ') : '???') + '</div>'
+        + '<div class="sumsub">Status: ' + (c ? 'CAUGHT' : s ? 'SEEN' : 'UNSEEN') + '</div></div></div>'
+        + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Pokemon has not been seen.') + '</div>'
+        + '<div class="sumsub">◀ ▶ : previous / next entry</div>';
+      return { title, bodyHtml: body };
+    };
+    g.ui.showEntryPanel(render(), (act, d) => {
+      if (act === 'page') {
+        idx = (idx + d + order.length) % order.length;
+        g.ui.updateEntryPanel(render());
+      } else if (act === 'close') {
+        g.openDex(filter);
+      }
+    });
   }
 
   // P1/G3: dex filter submenu — status, type, and name search (reuses the A-Z grid).
@@ -753,6 +792,8 @@ export class Game {
     const items = [];
     items.push({ label: 'Quest Log — the road so far', value: 'quests' });
     items.push({ label: 'Regions — the journey chain', value: 'regions' });
+    items.push({ label: 'Hall of Fame', value: 'hof' });
+    items.push({ label: 'Diploma', value: 'diploma' });
     items.push({ label: '— ACT I: THE BEGINNING (v1) —', value: null, disabled: true });
     for (const ch of CHAPTERS) {
       if (ch.scope === 'playable') {
@@ -777,6 +818,8 @@ export class Game {
       if (!v || v === 'close') return;
       if (v === 'quests') { g.openQuestLog(); return; }
       if (v === 'regions') { g.openRegions(); return; }
+      if (v === 'hof') { g.openHallOfFame(); return; }
+      if (v === 'diploma') { g.openDiploma(); return; }
       const ch = CHAPTERS.find((c) => 'ch' + c.n === v);
       if (ch) {
         g.ui.say([
@@ -891,6 +934,7 @@ export class Game {
       { label: 'Autosave: ' + yn(s.autosave), value: 'asave' },
       { label: 'Reduced motion: ' + yn(s.reducedMotion), value: 'rmotion' },
       { label: 'Flip controls: ' + yn(s.controlsFlip), value: 'flip' },
+      { label: 'Controls — remap keys', value: 'controls' },
       { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
       { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
       { label: 'Legal / credits', value: 'legal' },
@@ -919,8 +963,9 @@ export class Game {
       else if (v === 'shake') s.shake = !s.shake;
       else if (v === 'vib') s.vibration = !s.vibration;
       else if (v === 'asave') s.autosave = !s.autosave;
-      else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); }
+      else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); if (typeof document !== 'undefined' && document.body) document.body.classList.toggle('reduced-motion', !!s.reducedMotion); }
       else if (v === 'flip') { s.controlsFlip = !s.controlsFlip; g.applyLayout(); }
+      else if (v === 'controls') { g.openControlsMenu(); return; }
       else if (v === 'showtouch') {
         s.showTouch = !s.showTouch;
         if (typeof document !== 'undefined') document.body.classList.toggle('showtouch', !!s.showTouch);
@@ -946,7 +991,7 @@ export class Game {
               if (b === 'yes2') {
                 // P1/H4: third gate — type-to-confirm DELETE (deletion is irreversible).
                 g.ui.showNameEntry('Type DELETE to confirm', '', 6, (typed) => {
-                  if (typed === 'DELETE') {
+                  if (String(typed).toUpperCase() === 'DELETE') {
                     g.store.erase();
                     g.ui.toast('Save data erased.');
                   } else {
@@ -1013,6 +1058,91 @@ export class Game {
       g.saveGame(true);
       g.openHouseRulesMenu();
     }, { menuClass: 'syswin', remember: 'options-houserules' });
+  }
+
+  // Elevation B3 (S-18): apply the persisted keymap (settings.keymap).
+  // The persisted map is the COMPLETE effective remap (captureRemapKey
+  // saves the full object), so when one exists it replaces the factory
+  // KEYMAP wholesale — overlaying it would resurrect bindings the player
+  // deliberately moved off their old keys (QA Major 1, 2026-10-27).
+  // A null map (fresh player / after Reset defaults) means factory.
+  // Called wherever a state's settings land (boot, Continue, cloud
+  // login, New Game's carried settings).
+  applyKeymap() {
+    const saved = this.state && this.state.settings ? this.state.settings.keymap : null;
+    if (saved && typeof saved === 'object') {
+      const remap = {};
+      for (const code of Object.keys(saved)) {
+        if (typeof code === 'string' && ACTIONS.includes(saved[code])) remap[code] = saved[code];
+      }
+      this.input.remap = remap;
+    } else {
+      this.input.remap = Object.assign({}, KEYMAP);
+    }
+  }
+
+  // Elevation B3 (S-18): Options -> Controls. Each row shows the codes
+  // bound to one action; choosing a row captures the next physical
+  // keydown's e.code as that action's primary binding. A code already
+  // bound elsewhere SWAPS (the other action takes this action's old
+  // primary code). Persists to settings.keymap and applies live.
+  openControlsMenu() {
+    const g = this;
+    const NAMES = {
+      up: 'Up', down: 'Down', left: 'Left', right: 'Right',
+      a: 'A — confirm', b: 'B — back', start: 'Start — menu', select: 'Select',
+      pageup: 'Page up', pagedown: 'Page down',
+      slot1: 'RT move 1', slot2: 'RT move 2', slot3: 'RT move 3', slot4: 'RT move 4',
+      fullscreen: 'Fullscreen', mute: 'Mute', escape: 'Escape — back',
+    };
+    const codesFor = (action) => Object.keys(g.input.remap).filter((c) => g.input.remap[c] === action);
+    const rows = Object.keys(NAMES).map((action) => ({
+      label: NAMES[action] + ': ' + (codesFor(action).join(' / ') || '—'),
+      value: action,
+    }));
+    rows.push({ label: 'Reset defaults', value: 'reset' });
+    rows.push({ label: 'Back', value: 'back' });
+    g.ui.showMenu('Controls', rows, (v) => {
+      if (!v || v === 'back') { g.openOptions(); return; }
+      if (v === 'reset') {
+        g.input.remap = Object.assign({}, KEYMAP);
+        g.state.settings.keymap = null;
+        g.saveGame(true);
+        g.ui.toast('Controls reset to defaults.');
+        g.openControlsMenu();
+        return;
+      }
+      g.captureRemapKey(v, NAMES[v]);
+    }, { menuClass: 'syswin', remember: 'options-controls' });
+  }
+
+  captureRemapKey(action, name) {
+    const g = this;
+    g.ui.toast('Press a key for ' + name + ' — Esc cancels');
+    if (typeof document === 'undefined' || !document.addEventListener) { g.openControlsMenu(); return; }
+    const onKey = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      document.removeEventListener('keydown', onKey, true);
+      if (e.code === 'Escape') { g.openControlsMenu(); return; }
+      const remap = Object.assign({}, g.input.remap);
+      const primary = Object.keys(KEYMAP).find((c) => KEYMAP[c] === action && remap[c] === action)
+        || Object.keys(remap).find((c) => remap[c] === action);
+      const other = remap[e.code];
+      if (other !== action) {
+        if (primary && primary !== e.code) {
+          if (other) remap[primary] = other; // conflict: swap primaries
+          else delete remap[primary];
+        }
+        remap[e.code] = action;
+      }
+      g.input.remap = remap;
+      g.state.settings.keymap = Object.assign({}, remap);
+      g.saveGame(true);
+      g.ui.toast(name + ' is now ' + e.code + '.');
+      g.openControlsMenu();
+    };
+    document.addEventListener('keydown', onKey, true);
   }
 }
 

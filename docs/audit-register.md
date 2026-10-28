@@ -139,6 +139,111 @@ cursor moves do a light 2-row DOM update instead of rebuilding ~1,000 rows;
   outside menus (S-30, established design); **dex filter wizard has no "apply now"**
   (S-41, per-step Back works post-S-05).
 
+## UI Elevation Pass (2026-10-27, after Rejuvenation Phase 5)
+
+Owner order: the Rejuvenation phases shipped systems inside the existing
+interface ("the ui is still the same") — this pass owns the face. Census first
+(live play, mirror transport, production CSP, HEAD `9679f14`): **36 surfaces —
+29 MATCH · 7 below-MATCH · 0 DOWNGRADE** (full inventory + pixel evidence:
+`~/workspace/ashs-journey-qa/elevation-inventory.md`; measured baselines:
+battle message plate 0.203 of frame vs Platinum ref 22's 0.198; battle plates
+389px wide, HP fill 0.779 of plate on both). Build waves B1–B7 + C1–C2,
+independent QA re-grade from live play, then coordinator fixes (below).
+
+### Gap dispositions (supersede the matching accepted-gap bullets above)
+
+- **Town Map (was: text menu)** — now a graphical canvas panel: 29-node
+  hand-authored Kanto layout (towns as roofed plates, routes as dots, 31
+  links), flat token palette (sea `#5a9ae8`, land `#a9c08a`), gated by the
+  same `reached_*` flags as the text version, gold current-location node +
+  red cursor ring, `.mapnarr` DOM narration for the harness. Canvas ink
+  fraction 0.093 where the text menu had 0 map pixels. **MATCH** (QA).
+- **Hall of Fame viewer (S-48)** — Journey menu row; ceremony plate (summary
+  panel geometry, flat `--gold` trim) reading the real `story.hof` shape
+  `{team:[{speciesId, level, nickname}], badges}`, latest first, 44px
+  sprites; empty state is a dialogue line. **MATCH** (QA, seeded 2 entries).
+- **Diploma viewer (S-48 pair)** — Journey menu row; at 151 Kanto caught it
+  shows the plate reusing `checkDiploma`'s exact lines, otherwise a
+  "caught N of 151" progress dialogue. The one-time Hawthorn ceremony
+  dialogue still fires in-world (seen live in the census). PC flow
+  untouched, so verify-live's PC checks stand unmodified. **MATCH** (QA).
+- **Key-remap UI (S-18)** — Options → Controls: 17 action rows, next-keydown
+  capture, conflict = primary swap, Esc cancels, Reset defaults. Persists
+  the complete effective map to `settings.keymap`; applied at boot /
+  Continue / cloud login / New Game carry-over. **MATCH** after the QA fix
+  below (was STILL-BELOW at QA).
+- **Mart quantity picker** — shared stepper on Buy and Sell rows
+  (◀ ▶ ±1, ▲ ▼ ±10, Q/E too; cap min(99, affordable) / owned; total shown;
+  one transaction per confirm). Preserved exactly: `minBadges` hiding,
+  keepsakes stay qty-1 single-press (owned rows disabled), S-11
+  return-to-top. **MATCH** (QA headless math 7/7 + live Celadon buy).
+- **Dex entry paging** — the entry is now a dedicated plate (summary
+  geometry, head band with ◀ ▶ + `No.N`); Left/Right and Q/E page 1..151 in
+  place, unseen neighbours redacted exactly as the list renders them, Back
+  restores the list row. Paging **wraps** at both ends (QA observation —
+  deliberate, Platinum's dex also wraps). audit-laptop's dex-entry checks
+  were updated to this treatment (stricter than the old dialogue asserts).
+  **MATCH** (QA).
+- **Name entry lowercase (S-20 remainder)** — an `aA` grid key toggles case;
+  typed case is preserved end-to-end (the blanket uppercase force is gone);
+  physical keyboards type their own case. Both type-to-confirm DELETE
+  compares are case-insensitive so the safety confirm still works typed
+  lowercase (QA live-verified a lowercase "delete" erasing the save).
+  **MATCH** (QA).
+- **RT direct-fire touch equivalent (S-44 remainder)** — four flat chips
+  ("N MoveName", `#2b3040` PT_FRAME interior, 44px targets) in the RT chips'
+  bottom zone, shown under exactly the touch-controls visibility rule,
+  mirroring cooldown/PP state, hidden under modal layers; taps call the
+  keyboard path's own guards into `rtUseMove`. **MATCH** (implementer
+  live-verified a tap firing + cooldown flipping; QA verified gating,
+  pixels, and the guard chain — QA's own tap drive was defeated by sandbox
+  encounter-RNG, recorded here rather than rounded up).
+- **C1 menu open transition** — 90ms `steps(3)` plate settle on fresh opens
+  only, off under Reduced Motion. **UPGRADE delivered** after the QA fix
+  below (was dead code at QA).
+- **C2 Quest Log section bands** — the four section headers render as flat
+  bands (`#d7e1f2` menu-title token, 38px, display font, non-italic).
+  **UPGRADE** (QA pixel-verified).
+
+**Grade distribution after: 34 MATCH · 2 UPGRADE (C1, C2) · 0 below-MATCH ·
+0 DOWNGRADE.** Every accepted gap from this register's list that the pass
+targeted is closed; the intentional items (S-08, S-24, S-25, S-30, S-31,
+S-34, S-46) stand as recorded.
+
+### QA defect log (independent grader, all fixed + re-verified)
+
+- **MAJOR — keymap reload resurrection (B3):** `applyKeymap` overlaid the
+  stored map on the factory KEYMAP, so a binding the player moved off its
+  old key resurrected after reload (old + new both live). Fix: a stored map
+  replaces the factory map wholesale (it is persisted complete); null still
+  means factory. Coordinator live probe after the fix: remap A KeyZ→KeyK,
+  reload — KeyZ dead, KeyK opens the Bag. Closed.
+- **MAJOR — C1 transition dead code:** `renderMenu` added `.menu-open`,
+  then its own `className` assignment stripped it; the animation could
+  never play. Fix: the className assignment lands before the class add.
+  Coordinator probe: fresh pause open carries `menu menu-open`,
+  `animation-name: menuopen`, 0.09s. Closed.
+- **MINOR — Cinnabar island unfilled** on the Town Map (its `fillRect` sat
+  inside a `//` comment). Fixed; island rect now measures land-green
+  plurality, sea absent. Closed.
+- **MINOR — name-entry CANCEL label overflowed** its wide key at 16px;
+  wide keys now use the 14px size already used by the panel title/chips.
+  Closed.
+
+### Standing notes from this pass
+
+- **qa-changed-flows b2 is a known-stale expectation, deliberately left
+  failing:** it expects a 30-row Journey menu; the true count was already
+  32 before this pass and is 34 now (+ Hall of Fame, + Diploma, by design).
+  The failure set stays exactly {b2, d9} per the mission gate; correcting
+  the expectation to 34 is a one-line owner/coordinator call, recorded here
+  so it is never mistaken for a regression.
+- audit-laptop's fixed-sleep drives cascade under sandbox load (observed
+  load >10 with stray Chromium instances): run it serially on a quiet
+  machine; a cascade that starts at "Dex opens from the pause menu" with
+  everything downstream failing is the known signature, proven twice this
+  pass by clean re-runs (public 41/41, personal 5/5).
+
 ## Harness notes (so the next seat doesn't re-learn them)
 
 - CDP `Fetch.fulfillRequest` MUST be sent on the session that paused the request
