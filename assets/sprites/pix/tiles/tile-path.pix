@@ -1,21 +1,25 @@
-# hand-finished from forge-base draft (seed 1078).
+# Wave 1: worn dirt path variant 1 — patches, tracks, 4 path tones.
 PIX tile-path 16 16
 pppppppppppppppp
-ppqpppppppqppppp
 pppppppppppppppp
-pppqpppqppppqppp
-pppppppppppppppp
-pqppppppqppppppp
-pppppppppppppppp
-pppqppppppqppqpp
-pppppppppppppppp
-ppppqpppppppqppp
-pppppppppppppppp
-ppqpppqppppqpppp
-pppppppppppppppp
-pqpppppppqppppqp
-pppppppppppppppp
+pqpppppppppppppp
+qqqbpppppppppppp
+pqbbbppppppppppp
+bbbbppbbbpbbbppp
+ppqppppppppppppp
+pqqqpppppppppppp
+ppqppppppppppnpp
+ppppbpppppppnnnp
+pppbbbpppppppnpp
+pppbbbpbbbpbbbpp
+ppppppppqppppppp
+pppppppqqqpppppp
+ppppppppqppppppp
 pppppppppppppppp
 PAL
 p #d8c08a path
 q #c2a878 path-dark
+b #b09468 path-worn
+n #ecd9a8 path-pale
+k #a8845c path-edge
+r #5a3a24 dirt-brown

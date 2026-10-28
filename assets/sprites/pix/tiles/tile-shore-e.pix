@@ -1,0 +1,22 @@
+# Wave 1: shore overlay (e) — sand scallop + foam band, drawn on water at a land bank.
+PIX tile-shore-e 16 16
+.............fpp
+.............ffp
+............y.pp
+.............f.p
+.............ffp
+...............p
+............yfpp
+.............ffp
+..............pp
+.............f.p
+.............ffp
+............y..p
+.............fpp
+.............ffp
+............y.pp
+.............f.p
+PAL
+p #d8c08a shore-sand
+f #eef7ff foam
+y #5a9ae8 water-light

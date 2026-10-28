@@ -542,15 +542,20 @@ export class OverworldScene {
     // Camera centers on player
     r.centerOn(this.player.px + T / 2, this.player.py + T / 2, this.w * T, this.h * T);
     r.begin();
-    // Tiles: hand-authored ART (wave 3); void stays a solid fill.
+    // Tiles: hand-authored ART; Wave 1 composes each cell from variant +
+    // transition layers resolved against its neighbours (art.mjs
+    // resolveTileLayers) — presentation only, map data untouched.
+    // void stays a solid fill.
     const vr = r.viewRect();
     const x0 = Math.max(0, Math.floor(vr.x0 / T)), x1 = Math.min(this.w - 1, Math.ceil(vr.x1 / T));
     const y0 = Math.max(0, Math.floor(vr.y0 / T)), y1 = Math.min(this.h - 1, Math.ceil(vr.y1 / T));
+    const kindAt = (tx, ty) => (ty < 0 || ty >= this.map.rows.length || tx < 0 || tx >= this.map.rows[ty].length)
+      ? null : g.tileKind(this.map.rows[ty][tx]);
     for (let y = y0; y <= y1; y++) {
       for (let x = x0; x <= x1; x++) {
         const ch = this.map.rows[y][x];
-        const spr = g.tileSprite(g.tileKind(ch));
-        if (spr) r.blit(spr, x * T, y * T);
+        const layers = g.tileLayers(g.tileKind(ch), x, y, kindAt);
+        if (layers.length) { for (const spr of layers) r.blit(spr, x * T, y * T); }
         else g.ctx2dfill('#101018', x * T, y * T, T, T); // void
       }
     }

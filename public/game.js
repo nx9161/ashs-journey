@@ -4413,6 +4413,42 @@ const ART = {
     "hhhhhhhhhhhhhhhh",
     "hhhhhhhhhhhhhhhh",
   ] },
+  "tile-detail-dirt": { w: 16, h: 16, pal: {"r":"#5a3a24","t":"#7a5a38"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "....r...........",
+    "...rrr.t........",
+    "....r.ttt.......",
+    ".......t........",
+    "................",
+    "................",
+    "...........r....",
+    "..........rrr.t.",
+    "...........r.ttt",
+    "..............t.",
+    "................",
+    "................",
+  ] },
+  "tile-detail-pebbles": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".............mz.",
+    "...mz........z..",
+    "...z............",
+    "................",
+    "................",
+    "..........mz....",
+    "..........z.....",
+    "................",
+    "................",
+    "......mz........",
+    "......z.........",
+    "................",
+    "................",
+  ] },
   "tile-door": { w: 16, h: 16, pal: {"h":"#c9a06a","k":"#5a3a24"}, rows: [
     "hhhhhhhhhhhhhhhh",
     "hhkkkkkkkkkkhhhh",
@@ -4431,41 +4467,563 @@ const ART = {
     "hhhhhhhhhhhhhhhh",
     "hhhhhhhhhhhhhhhh",
   ] },
-  "tile-flower": { w: 16, h: 16, pal: {"g":"#5da24a","j":"#b0503c","w":"#3a7bd5"}, rows: [
+  "tile-edge-dirt-e": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "..............bb",
+    "...............r",
+    "..............bb",
+    ".............qq.",
+    ".............rbb",
+    "...............r",
+    "..............bb",
+    "................",
+    ".............qqb",
+    ".............r.r",
+    "..............bb",
+    "................",
+    "..............bb",
+    ".............qqr",
+    ".............rbb",
+    "................",
+  ] },
+  "tile-edge-dirt-n": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "brb.brb.brb.brb.",
+    "b.bqb.b.q.b.bqb.",
+    "...qr...qr...qr.",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-edge-dirt-ne": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "..........rrbrrb",
+    "...........rrbrr",
+    "............rrbr",
+    ".............rrb",
+    "..............rr",
+    "...............r",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-edge-dirt-nw": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "brrbrr..........",
+    "rrbrr...........",
+    "rbrr............",
+    "brr.............",
+    "rr..............",
+    "r...............",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-edge-dirt-s": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".rq...rq...rq...",
+    ".bqb.b.q.b.bqb.b",
+    ".brb.brb.brb.brb",
+  ] },
+  "tile-edge-dirt-se": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "...............r",
+    "..............rr",
+    ".............rrb",
+    "............rrbr",
+    "...........rrbrr",
+    "..........rrbrrb",
+  ] },
+  "tile-edge-dirt-sw": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "r...............",
+    "rr..............",
+    "brr.............",
+    "rbrr............",
+    "rrbrr...........",
+    "brrbrr..........",
+  ] },
+  "tile-edge-dirt-w": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+    "................",
+    "bbr.............",
+    "rqq.............",
+    "bb..............",
+    "................",
+    "bb..............",
+    "r.r.............",
+    "bqq.............",
+    "................",
+    "bb..............",
+    "r...............",
+    "bbr.............",
+    ".qq.............",
+    "bb..............",
+    "r...............",
+    "bb..............",
+  ] },
+  "tile-edge-grass-e": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
+    "...............m",
+    "............sdlm",
+    "............s...",
+    ".............dd.",
+    "...............m",
+    "...............m",
+    "............sdl.",
+    "............s...",
+    ".............ddm",
+    "...............m",
+    "............sdl.",
+    "............s...",
+    ".............ddm",
+    "...............m",
+    "............sdl.",
+    "............s...",
+  ] },
+  "tile-edge-grass-n": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
+    "mm..mm..mm..mm..",
+    ".l.d..l.d.l.d.l.",
+    ".d.d..d.d.d.d.d.",
+    ".ss...ss..ss..ss",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-edge-grass-s": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "ss..ss..ss...ss.",
+    ".d.d.d.d.d..d.d.",
+    ".l.d.l.d.l..d.l.",
+    "..mm..mm..mm..mm",
+  ] },
+  "tile-edge-grass-w": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
+    "...s............",
+    ".lds............",
+    "m...............",
+    "mdd.............",
+    "...s............",
+    ".lds............",
+    "m...............",
+    "mdd.............",
+    "...s............",
+    ".lds............",
+    "m...............",
+    "m...............",
+    ".dd.............",
+    "...s............",
+    "mlds............",
+    "m...............",
+  ] },
+  "tile-edge-wet-e": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+    "..............kk",
+    "...............k",
+    "..............qf",
+    "...............k",
+    ".............qkk",
+    ".............q.k",
+    "..............kk",
+    "..............qf",
+    "..............kk",
+    "...............k",
+    ".............qkk",
+    ".............q.k",
+    "..............qf",
+    "...............k",
+    "..............kk",
+    "...............k",
+  ] },
+  "tile-edge-wet-n": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+    "kkfkkkkfkkkkfkkk",
+    "k.q.k.kqk.k.q.k.",
+    "....qq....qq....",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-edge-wet-s": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "....qq....qq....",
+    ".k.q.k.kqk.k.q.k",
+    "kkkfkkkkfkkkkfkk",
+  ] },
+  "tile-edge-wet-w": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+    "k...............",
+    "kk..............",
+    "k...............",
+    "fq..............",
+    "k.q.............",
+    "kkq.............",
+    "k...............",
+    "kk..............",
+    "fq..............",
+    "kk..............",
+    "k.q.............",
+    "kkq.............",
+    "k...............",
+    "fq..............",
+    "k...............",
+    "kk..............",
+  ] },
+  "tile-flower-2": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","i":"#e86a8a","u":"#f5f0dc","o":"#f0e060"}, rows: [
+    ".......gg.......",
+    "....gggggggg....",
+    "..gggggggggggg..",
+    ".ggggggggggiggg.",
+    ".gggigggggioigg.",
+    "gggioigggggigggg",
+    "ggggiguggggggggg",
+    "ggggguougggguggg",
+    "ggggggugggmuougg",
+    "ggggggggimmmumgg",
+    "gggggggioimdddmg",
+    ".gdiggggigggdig.",
+    ".dioigggggggioi.",
+    "..diggdggggggi..",
+    "....gdddgggg....",
+    "......dgg.......",
+  ] },
+  "tile-flower": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","j":"#b0503c","o":"#f0e060","i":"#e86a8a"}, rows: [
+    ".......gg.......",
+    "....gggggggg....",
+    "..gggggggggggg..",
+    ".ggggggggggjggg.",
+    ".gggjgggggjojgd.",
+    "gggjojgggggjgddd",
+    "ggggjgggggggdddd",
+    "gggggggggggggdld",
+    "ggggggggggggglll",
+    "ggggggggjggggglg",
+    "gggggggjojgggggg",
+    ".ggjggggjlgggjg.",
+    ".gjojggglllljoj.",
+    "..ljlggggllllj..",
+    "...lgggggggl....",
+    ".......gg.......",
+  ] },
+  "tile-foam-1": { w: 16, h: 16, pal: {"f":"#eef7ff","c":"#6fb0ee"}, rows: [
+    "................",
+    "............ff..",
+    "............c...",
+    "........ff......",
+    "........cff.....",
+    "..ff.....c......",
+    "..c.....ff......",
+    "........c.......",
+    "................",
+    "................",
+    ".......ff.......",
+    ".......c........",
+    "............ff..",
+    "............c...",
+    "................",
+    "................",
+  ] },
+  "tile-foam-2": { w: 16, h: 16, pal: {"f":"#eef7ff","c":"#6fb0ee"}, rows: [
+    "................",
+    "................",
+    ".ff...ff........",
+    ".c....c.........",
+    "................",
+    "................",
+    "................",
+    "...........ff...",
+    "...........c....",
+    "................",
+    "................",
+    ".ff.............",
+    ".c.....ff.......",
+    ".....ffc....ff..",
+    ".....c......c...",
+    "................",
+  ] },
+  "tile-foam-3": { w: 16, h: 16, pal: {"f":"#eef7ff","c":"#6fb0ee"}, rows: [
+    "................",
+    "................",
+    ".ff.............",
+    ".c.........ff...",
+    "...........c....",
+    "................",
+    "....ff..........",
+    "....c...........",
+    ".....ffff.......",
+    "....ff.c........",
+    "....c...........",
+    "................",
+    "...........ff...",
+    "...........c....",
+    "................",
+    "................",
+  ] },
+  "tile-fringe-tall-e": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "................",
+    "................",
+    "..........esdml.",
+    "..........e.....",
+    "...........ed...",
+    "...........e.mh.",
+    "................",
+    "................",
+    "..........esdml.",
+    "..........e.....",
+    "...........ed...",
+    "...........e.mh.",
+    "................",
+    "..........esdml.",
+    "..........e.....",
+    "...........ed...",
+  ] },
+  "tile-fringe-tall-n": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "................",
+    "..l..h..l..h.l..",
+    "..m..m..m..m.m..",
+    "..d.d...d.d..d.d",
+    "..s.ee..s.ee.s.e",
+    "..ee....ee...ee.",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-fringe-tall-s": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".ee...ee....ee..",
+    "e.s.ee.s..ee.s..",
+    "d.d..d.d...d.d..",
+    "..m.m..m..m..m..",
+    "..l.h..l..h..l..",
+    "................",
+  ] },
+  "tile-fringe-tall-w": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "...de...........",
+    ".....e..........",
+    ".lmdse..........",
+    "................",
+    ".hm.e...........",
+    "...de...........",
+    ".....e..........",
+    ".lmdse..........",
+    "................",
+    "................",
+    ".hm.e...........",
+    "...de...........",
+    ".....e..........",
+    ".lmdse..........",
+    "................",
+    "................",
+  ] },
+  "tile-grass-2": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
     "gggggggggggggggg",
-    "gggggggggggggggg",
-    "gggggjjggggggggg",
-    "ggggjwjgggggjjgg",
-    "gggggjjggggjwjgg",
-    "gggggggggggggjjg",
-    "gggggggggggggggg",
-    "gggjjggggggggggg",
-    "ggjwjggggggggggg",
-    "ggggjjgggggggggg",
-    "gggggggggggggggg",
-    "gggggggggggjjggg",
-    "ggggggggggjwjggg",
-    "gggggggggggjjggg",
-    "gggggggggggggggg",
+    "ggdggggggggggggg",
+    "gdddgggggggggggg",
+    "dddddsgglgdggggg",
+    "gdddssslldddgggg",
+    "ggdggslllldggggg",
+    "gggggggdmlgggggg",
+    "ggggggddddgggggg",
+    "gggggggdggggmggg",
+    "gggggggggmggddgg",
+    "gggggggggddggggg",
+    "gggggldggggdgggg",
+    "ggggldddgghddggg",
+    "gggggldgghhhgggg",
+    "gggggggggghggggg",
     "gggggggggggggggg",
   ] },
-  "tile-grass": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c"}, rows: [
-    "gggggggggggggggg",
-    "ggdgggglgggggdgg",
-    "gggggggggggggggg",
-    "glgggggdggggglgg",
-    "gggggggggggggggg",
-    "ggdgggglgggddggg",
-    "gggggggggggggggg",
-    "gggglggggdgggggg",
-    "gggggggggggggggg",
-    "gdgggggglggggdgg",
-    "gggggggggggggggg",
-    "ggglgggggdgggglg",
-    "gggggggggggggggg",
-    "ggdgggglgggggdgg",
+  "tile-grass-3": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggmgggggggg",
+    "ggggggmmmgggdggg",
+    "glgggmmmmmgdldgg",
+    "lllgggmsmhddmddg",
+    "llmlggsshhhdddgg",
+    "llddgggsghdgmmmg",
+    "glgggglllggggmgg",
+    "gggggglllggggggg",
+    "ggggggglglgggggg",
+    "gggggggglllggggg",
+    "ggggggggglgggggg",
+    "gggggggggggggggg",
+  ] },
+  "tile-grass-4": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "glgggggggggggggg",
+    "lllggggggggggggg",
+    "glggggggggdggggg",
+    "gggggggggdddlggg",
+    "ggggggggdddlllgg",
+    "ggggggglgdgglggg",
+    "gggggggmggggdmlg",
+    "ggsggggddggddddl",
+    "gsssggggggggllll",
+    "ggsgggglggggglll",
+    "ggddgghllggggglg",
+    "ggmmmhhhgggggggg",
+    "gggmgghggggggggg",
+    "gggggggggggggggg",
+  ] },
+  "tile-grass-5": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "ggggggggggglgggg",
+    "gggggggggglllggg",
+    "ggggggggggglddgg",
+    "ggggggggggggdggg",
+    "gggggggggggggdgg",
+    "ggggggggggggdddg",
+    "gggggggggggddddd",
+    "ggggdgggggggdddg",
+    "gggdldghdggggdgg",
+    "ggglllhhhdgggggg",
+    "gmlglgdhdddggggg",
+    "mmmggggdddgggggg",
+    "gmddggggdggsgdgg",
+    "ggggggggggsssddg",
+    "ggggggmggggsdddd",
+    "ggggggddggggdddg",
+  ] },
+  "tile-grass-6": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "gggdgllllggggggg",
+    "ggddllllllgggggg",
+    "gggdgllllggggggg",
+    "gggggllggggsgggg",
+    "gmgglllgggsssggg",
+    "mmmgglgggggsgggg",
+    "mmmmgggggggggggg",
+    "mlmggggggggggmgg",
+    "gmgggggdggggmmmg",
+    "gddgggdddggggmmm",
+    "gggggdddddggglmg",
+    "ggggggmddggggmgg",
+    "ggggggddggggghdg",
+    "gggggggggggghhhg",
+    "ggggggggggggghgg",
+    "gggggggggggggggg",
+  ] },
+  "tile-grass": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "gggggggggdddglgg",
+    "ggggggggdddddllg",
+    "gggggggggddsglgg",
+    "ggggggggggsssggg",
+    "gggggggggggslggg",
+    "ggggggggggglllgg",
+    "gggggggggllllllg",
+    "gggggggglllllllg",
+    "gglglgggglggllgg",
+    "ggmlllgggghglggg",
+    "ggddlgggghhhllgg",
+    "gggggggggghmlllg",
+    "ggggggggggdddldg",
+    "gggggggggggdldgg",
+    "gmggggggggggdggg",
+    "gddggggggggggggg",
   ] },
   "tile-gymdoor": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","k":"#5a3a24"}, rows: [
     "mmmmmmmmmmmmmmmm",
@@ -4521,112 +5079,310 @@ const ART = {
     "pppppppppppppppp",
     "pppppppppppppppp",
   ] },
-  "tile-path": { w: 16, h: 16, pal: {"p":"#d8c08a","q":"#c2a878"}, rows: [
+  "tile-path-2": { w: 16, h: 16, pal: {"p":"#d8c08a","q":"#c2a878","b":"#b09468","n":"#ecd9a8","k":"#a8845c","r":"#5a3a24"}, rows: [
     "pppppppppppppppp",
-    "ppqpppppppqppppp",
     "pppppppppppppppp",
-    "pppqpppqppppqppp",
     "pppppppppppppppp",
-    "pqppppppqppppppp",
     "pppppppppppppppp",
-    "pppqppppppqppqpp",
+    "pppppppppbpppppp",
+    "pppbbbppbbbbpppp",
+    "ppppbbbppbnnnppp",
+    "pppppbpppppnpppp",
     "pppppppppppppppp",
-    "ppppqpppppppqppp",
     "pppppppppppppppp",
-    "ppqpppqppppqpppp",
+    "pppbbbpbbbpbbbpp",
+    "ppppppnnnppppppp",
+    "pppppppnpnpppppp",
+    "ppppppppnnnqpppp",
+    "pppppppppnqqqppp",
+    "pppppppppppqpppp",
+  ] },
+  "tile-path-3": { w: 16, h: 16, pal: {"p":"#d8c08a","q":"#c2a878","b":"#b09468","n":"#ecd9a8","k":"#a8845c","r":"#5a3a24"}, rows: [
     "pppppppppppppppp",
-    "pqpppppppqppppqp",
     "pppppppppppppppp",
+    "pppbbbpppbbbpppp",
+    "pppbbbpppppppppp",
+    "pppnbppppppppppp",
+    "ppnnnppppppppppp",
+    "pppnpppppppppppp",
+    "ppppppppppppppbp",
+    "pppppppppppppbbb",
+    "ppppppppppppppbp",
+    "pppppppppppppppp",
+    "pnpppppppppppppp",
+    "nnnppppppppppppp",
+    "pnpbbbppbbbppbqp",
+    "ppppppppppppbqqq",
+    "pppppppppppppbqp",
+  ] },
+  "tile-path": { w: 16, h: 16, pal: {"p":"#d8c08a","q":"#c2a878","b":"#b09468","n":"#ecd9a8","k":"#a8845c","r":"#5a3a24"}, rows: [
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pqpppppppppppppp",
+    "qqqbpppppppppppp",
+    "pqbbbppppppppppp",
+    "bbbbppbbbpbbbppp",
+    "ppqppppppppppppp",
+    "pqqqpppppppppppp",
+    "ppqppppppppppnpp",
+    "ppppbpppppppnnnp",
+    "pppbbbpppppppnpp",
+    "pppbbbpbbbpbbbpp",
+    "ppppppppqppppppp",
+    "pppppppqqqpppppp",
+    "ppppppppqppppppp",
     "pppppppppppppppp",
   ] },
-  "tile-rock": { w: 16, h: 16, pal: {"g":"#5da24a","m":"#8a8aa0","z":"#6a6a80","l":"#6fb45c"}, rows: [
-    "gggggggggggggggg",
-    "gggggggggggggggg",
-    "gggggmmmmmmggggg",
-    "gggmmmmmmmmmmggg",
-    "ggmmmlmmmmzmmggg",
-    "ggmmmmmmmzzzmmgg",
-    "ggmmmmmmzzzzmmgg",
-    "ggmmmmmmzzzmmmgg",
-    "gggmmmmmmmmmmggg",
-    "gggglmmmmmmmlggg",
-    "gggggmmmmmmggggg",
-    "gggggggggggggggg",
-    "gggggggggggggggg",
-    "gggggggggggggggg",
-    "gggggggggggggggg",
+  "tile-rock": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","l":"#6fb45c"}, rows: [
+    "................",
+    "................",
+    ".....mmmmmm.....",
+    "...mmmmmmmmmm...",
+    "..mmmlmmmmzmm...",
+    "..mmmmmmmzzzmm..",
+    "..mmmmmmzzzzmm..",
+    "..mmmmmmzzzmmm..",
+    "...mmmmmmmmmm...",
+    "....lmmmmmmml...",
+    ".....mmmmmm.....",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-shore-e": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+    ".............fpp",
+    ".............ffp",
+    "............y.pp",
+    ".............f.p",
+    ".............ffp",
+    "...............p",
+    "............yfpp",
+    ".............ffp",
+    "..............pp",
+    ".............f.p",
+    ".............ffp",
+    "............y..p",
+    ".............fpp",
+    ".............ffp",
+    "............y.pp",
+    ".............f.p",
+  ] },
+  "tile-shore-n": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+    "pppppppppppppppp",
+    "pfp.f.pfp.f.pfp.",
+    "ff.ff.ff.ff.ff.f",
+    "..y...y....y..y.",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-shore-s": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".y..y....y...y..",
+    "f.ff.ff.ff.ff.ff",
+    ".pfp.f.pfp.f.pfp",
+    "pppppppppppppppp",
+  ] },
+  "tile-shore-w": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+    "p.f.............",
+    "pp.y............",
+    "pff.............",
+    "ppf.............",
+    "p..y............",
+    "pff.............",
+    "p.f.............",
+    "pp..............",
+    "pff.............",
+    "ppfy............",
+    "p...............",
+    "pff.............",
+    "p.f.............",
+    "pp.y............",
+    "pff.............",
+    "ppf.............",
+  ] },
+  "tile-sign": { w: 16, h: 16, pal: {"p":"#d8c08a","q":"#c2a878","k":"#5a3a24"}, rows: [
+    "................",
+    "................",
+    "..kkkkkkkkkk....",
+    ".kpqqqqqqqqpk...",
+    ".kqqppppppqqk...",
+    ".kqppppppppqk...",
+    ".kqqqqqqqqqqk...",
+    "..kkkkkkkkkk....",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    "................",
+    "................",
+  ] },
+  "tile-tallgrass-1": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","o":"#2e5e28","t":"#3e7a34","w":"#54a048"}, rows: [
+    "llgllaagaggaaggg",
+    "mmmmmaaghghhgggg",
+    "ddddhhhgglllgggg",
+    "sssslllggmmmmgag",
+    "eeeemmmggddddmag",
+    "ssssdddggssssgag",
+    "gggdsssagaehehhg",
+    "gghgeeeegaalsllg",
+    "gllsssssghhmmmmg",
+    "gmmmmmmlgllddddg",
+    "gdddddmmmmmssssg",
+    "gsssssdddddeeeee",
+    "geeeeeesssssssss",
+    "gssssseeeeeemmmg",
+    "ggggggsssssggmgg",
     "gggggggggggggggg",
   ] },
-  "tile-sign": { w: 16, h: 16, pal: {"g":"#5da24a","p":"#d8c08a","q":"#c2a878","k":"#5a3a24"}, rows: [
-    "gggggggggggggggg",
-    "gggggggggggggggg",
-    "ggppppppppppgggg",
-    "gppqqqqqqqqppggg",
-    "gpqqppppppqqpggg",
-    "gpqppppppppqpggg",
-    "gpqqqqqqqqqqpggg",
-    "ggppppppppppgggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggggggggggggg",
-    "gggggggggggggggg",
-  ] },
-  "tile-tree": { w: 16, h: 16, pal: {"g":"#5da24a","t":"#3e7a34","u":"#2e5e28","v":"#54a048","k":"#5a3a24"}, rows: [
-    "gggggggggggggggg",
-    "ggggttttttttgggg",
-    "ggtttvvtttttttgg",
-    "gtttvvvvtttttttg",
-    "gtttvvtttttuutgg",
-    "gtttttttttuuuugg",
-    "ggtttttttuuuuggg",
-    "gggtttttuuuugggg",
-    "ggggtttttuuggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggkkkkggggggg",
-    "gggggggggggggggg",
+  "tile-tallgrass-2": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","o":"#2e5e28","t":"#3e7a34","w":"#54a048","v":"#d9cf7a","y":"#a8b85a"}, rows: [
+    "gllggagaggaaggmg",
+    "gtttgagagaaagmmm",
+    "gdddaagaglllggmg",
+    "geeevvllgttttgag",
+    "goooyattgddddgag",
+    "sssssaddgeeevvgg",
+    "ggaaaeeagoooyoga",
+    "ggaaaooaosssssgl",
+    "gglllssaagmttttt",
+    "ggtttmmlllgddddd",
+    "ggdddmmvvtgeeeee",
+    "gmeeemmyddgooooo",
+    "mmoooomeeegsssss",
+    "gsssssdooooggggg",
+    "ggggggsssssggggg",
     "gggggggggggggggg",
   ] },
-  "tile-water-1": { w: 16, h: 16, pal: {"w":"#3a7bd5","x":"#2e63b0","y":"#5a9ae8"}, rows: [
+  "tile-tallgrass-3": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","o":"#2e5e28","t":"#3e7a34","w":"#54a048"}, rows: [
+    "wwgggggmgaagaggg",
+    "mmgmggammhhhghgg",
+    "ttgtghhmgwwwgwgg",
+    "sssswwwggmmmmggg",
+    "eeeeemmdgttttggg",
+    "sssssttggssssggg",
+    "gggasssgaeeeeehg",
+    "gghheeeaasssssww",
+    "gwwsssshhhgmgmmm",
+    "gmmmmmwwwwgttttt",
+    "gtttttmmmmgsssss",
+    "gsssssttttgeeeee",
+    "geeeeeesssgsssss",
+    "gssssseeeeeggggg",
+    "ggggggsssssggggg",
+    "gggggggggmgggggg",
+  ] },
+  "tile-tallgrass-4": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","o":"#2e5e28","t":"#3e7a34","w":"#54a048","u":"#f5f0dc"}, rows: [
+    "wwwwggggggaggggg",
+    "ttttgggmgghhhggg",
+    "ddddggmmhwwwwwgg",
+    "ssssgwwmwtttttgg",
+    "ooooouutgdddddgg",
+    "ssssshddgsssasga",
+    "ggasssssgooohooh",
+    "ghhohoooossswwmw",
+    "gwgwwhssdhghttmt",
+    "ggtttwmwdwguuddd",
+    "ggdddgttmtthssss",
+    "ggsssgdddddooooo",
+    "ggoooossssssssss",
+    "gsssssoooooogggg",
+    "ggggggsssssggggg",
+    "gggggggggggggggg",
+  ] },
+  "tile-tree": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","k":"#5a3a24"}, rows: [
+    "................",
+    "....tttttttt....",
+    "..tttvvttttttt..",
+    ".tttvvvvttttttt.",
+    ".tttvvtttttuut..",
+    ".tttttttttuuuu..",
+    "..tttttttuuuu...",
+    "...tttttuuuu....",
+    "....tttttuu.....",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    ".....kkkk.......",
+    "................",
+    "................",
+  ] },
+  "tile-water-1": { w: 16, h: 16, pal: {"w":"#3a7bd5","x":"#2e63b0","y":"#5a9ae8","z":"#1d4a86","c":"#6fb0ee","f":"#eef7ff"}, rows: [
     "wwwwwwwwwwwwwwww",
-    "wyywwwwwwyywwwww",
     "wwwwwwwwwwwwwwww",
-    "wwxxwwwwwwxxwwww",
+    "wyyyyywwwwwwwwww",
+    "wzzzwwwwzwwwwwww",
+    "wwzwwwwzxxxcwwww",
+    "wwcwwwwwzwcccwww",
+    "wcccwwyyyyycwwww",
+    "wwczzwwwwwwwwwww",
+    "wwwxxxwwwwwwwwww",
     "wwwwwwwwwwwwwwww",
-    "wwwwyywwwwwwyyww",
-    "wwwwwwwwwwwwwwww",
-    "wxxwwwwwwxxwwwww",
-    "wwwwwwwwwwwwwwww",
-    "wwyywwwwwwyywwww",
-    "wwwwwwwwwwwwwwww",
-    "wwwwxxwwwwwwxxww",
-    "wwwwwwwwwwwwwwww",
-    "wyywwwwwwyywwwww",
-    "wwwwwwwwwwwwwwww",
+    "wwyyyyywwwwwwwww",
+    "wwwwwcwwwwwwwwww",
+    "xxxwcccwwwwwwwww",
+    "wwwwwcwwwwwwwwww",
+    "wwwwwwwyyyyywwww",
     "wwwwwwwwwwwwwwww",
   ] },
-  "tile-water-2": { w: 16, h: 16, pal: {"w":"#3a7bd5","x":"#2e63b0","y":"#5a9ae8"}, rows: [
+  "tile-water-2": { w: 16, h: 16, pal: {"w":"#3a7bd5","x":"#2e63b0","y":"#5a9ae8","z":"#1d4a86","c":"#6fb0ee","f":"#eef7ff"}, rows: [
+    "wwwwwwwwwwwwwwww",
+    "wwwwwwwwwwcwwwww",
+    "wwwwyyyyycccwwww",
+    "wwzwwzwwwwcwwwww",
+    "wzxxxzzwwwwzwwww",
+    "wwzwwzwwwwzzzwww",
+    "yyyyywwwwwwzwwww",
+    "wwwwwwwwwwwwwwww",
+    "wwwwwwxxxwwwwwww",
+    "wwwwwwwwwwwwwwww",
+    "wwwwwyyyyywwwwww",
+    "wwwwwwwwwcwwwwww",
+    "wwwxxxwwcccwwcww",
+    "wwwwwwwwwcwwcccw",
+    "wyyyyywwwwwwwcww",
+    "wwwwwwwwwwwwwwww",
+  ] },
+  "tile-water-3": { w: 16, h: 16, pal: {"w":"#3a7bd5","x":"#2e63b0","y":"#5a9ae8","z":"#1d4a86","c":"#6fb0ee","f":"#eef7ff"}, rows: [
     "wwwwwwwwwwwwwwww",
     "wwwwwwwwwwwwwwww",
-    "wxxwwwwwwxxwwwww",
+    "wwwwcwwyyyyywwww",
+    "wwwcccwwwwwwwwww",
+    "wwcccxxxwwwwwwww",
+    "wwwcwwwwwwwwzwww",
+    "wwwyyyyywwwzzzww",
+    "wwwwwwwwwwwwzwww",
+    "xxxwwwwwwwwwwwww",
     "wwwwwwwwwwwwwwww",
-    "wwyywwwwwwyywwww",
-    "wwwwwwwwwwwwwwww",
-    "wwwwxxwwwwwwxxww",
-    "wwwwwwwwwwwwwwww",
-    "wyywwwwwwyywwwww",
-    "wwwwwwwwwwwwwwww",
-    "wwxxwwwwwwxxwwww",
-    "wwwwwwwwwwwwwwww",
-    "wwwwyywwwwwwyyww",
-    "wwwwwwwwwwwwwwww",
-    "wxxwwwwwwxxwwwww",
+    "wwwwwwwwyyyyywww",
+    "wwwwwwwwzwwwwzww",
+    "wwcwwwxxxzwwzzzw",
+    "wcccwwwwzwwwwzww",
+    "wwcwyyyyywwwwwww",
     "wwwwwwwwwwwwwwww",
   ] },
   "icon-badge": { w: 16, h: 16, pal: {"O":"#4a4a4a","G":"#8a8a8a","L":"#c8c8c8"}, rows: [
@@ -6063,6 +6819,19 @@ function partnerHopFrames(doc) {
 }
 
 // ---- tiles ----
+// Wave 1 terrain system (world-art census §3/§4 Wave 1): the single-tile
+// lookup below is superseded at draw time by resolveTileLayers(), which
+// composes each cell from variant + transition layers:
+//   * deterministic per-position variants (hashTile on map x/y — stable
+//     across frames and reloads, no game state involved);
+//   * runtime auto-tiling: transition overlays are chosen from the four
+//     neighbour KINDS at draw time, so all 56 maps inherit the terrain
+//     system with zero map-data edits;
+//   * object tiles (tree / rock / sign / flower) are authored with
+//     transparent surrounds and are laid over the ground their position
+//     actually stands on (the south neighbour's ground family, else the
+//     neighbour majority) — no more grass squares baked onto sand.
+// Presentation only: nothing here reads or writes game state.
 const TILE_ART = {
   tree: 'tile-tree', path: 'tile-path', grass: 'tile-grass',
   house: 'tile-house', door: 'tile-door', sign: 'tile-sign',
@@ -6070,8 +6839,26 @@ const TILE_ART = {
   flower: 'tile-flower', rock: 'tile-rock',
 };
 
+// Deterministic 2D position hash (same family as tiles.mjs h2).
+function hashTile(x, y, salt) {
+  let h = (x * 374761393 + y * 668265263 + (salt || 0) * 2246822519) | 0;
+  h = (h ^ (h >> 13)) | 0;
+  h = Math.imul(h, 1274126177);
+  return ((h ^ (h >> 16)) >>> 0) / 4294967296;
+}
+
+function pickVariant(arr, x, y, salt) {
+  if (!arr || !arr.length) return null;
+  return arr[Math.floor(hashTile(x, y, salt) * arr.length) % arr.length];
+}
+
+// A ',' cell renders TALL (tufted encounter grass) or BASE (plain textured
+// grass) by this one hash rule — the resolver and the fringe logic must
+// agree on it, so it lives in exactly one place.
+function isTallGrass(x, y) { return hashTile(x, y, 11) < 0.78; }
+
 function buildArtTileCache(doc) {
-  // kind -> canvas (16x16). 'water' -> [water-1, water-2] animated pair.
+  // kind -> canvas (16x16). 'water' -> [water-1..3] animated frames.
   // 'void' stays a solid fill (no art). Kinds without ART fall back to paintTile.
   const cache = {};
   for (const kind of Object.keys(TILE_ART)) {
@@ -6082,23 +6869,153 @@ function buildArtTileCache(doc) {
     paintTile(fb.getContext('2d'), kind, 0, 0);
     cache[kind] = fb;
   }
-  const w1 = artCanvas(doc, 'tile-water-1', 1);
-  const w2 = artCanvas(doc, 'tile-water-2', 1);
-  if (w1 && w2) cache.water = [w1, w2];
+  const ids = (list) => list.map((id) => artCanvas(doc, id, 1)).filter(Boolean);
+  cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6']);
+  cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4']);
+  cache.pathVariants = ids(['tile-path', 'tile-path-2', 'tile-path-3']);
+  cache.flowerVariants = ids(['tile-flower', 'tile-flower-2']);
+  // Legacy single-tile callers (rustle overlay) get a tufted tile: the
+  // rustle draws over the player's grass cell, which is tufted now.
+  if (cache.tallVariants.length) cache.grass = cache.tallVariants[0];
+  if (cache.flowerVariants.length) cache.flower = cache.flowerVariants[0];
+  const water = ids(['tile-water-1', 'tile-water-2', 'tile-water-3']);
+  if (water.length) cache.water = water;
   else {
     const fb = doc.createElement('canvas');
     fb.width = 16; fb.height = 16;
     paintTile(fb.getContext('2d'), 'water', 0, 0);
     cache.water = fb;
   }
+  cache.foamFrames = ids(['tile-foam-1', 'tile-foam-2', 'tile-foam-3']);
+  const sides = (base, corners) => {
+    const o = {};
+    for (const d of ['n', 'e', 's', 'w']) o[d] = artCanvas(doc, base + '-' + d, 1);
+    if (corners) for (const c of ['ne', 'nw', 'se', 'sw']) o[c] = artCanvas(doc, base + '-' + c, 1);
+    return o;
+  };
+  cache.shore = sides('tile-shore');               // on water, side facing land
+  cache.edgeDirt = sides('tile-edge-dirt', true);  // on grass, side/corner facing path
+  cache.edgeGrass = sides('tile-edge-grass');      // on path, side facing grass
+  cache.edgeWet = sides('tile-edge-wet');          // on path, side facing water
+  cache.fringeTall = sides('tile-fringe-tall');    // on base grass, side facing tall grass
+  cache.detail = {
+    pebbles: artCanvas(doc, 'tile-detail-pebbles', 1),
+    dirt: artCanvas(doc, 'tile-detail-dirt', 1),
+  };
   return cache;
 }
 
 function tileSprite(cache, kind, t) {
   const v = cache[kind];
   if (!v) return null;
-  if (Array.isArray(v)) return v[Math.floor((t || 0) / 600) % 2]; // water shimmer
+  if (Array.isArray(v)) return v[Math.floor((t || 0) / 600) % v.length]; // water shimmer (3 frames, Wave 1)
   return v;
+}
+
+const DIRS = ['n', 'e', 's', 'w'];
+
+// Compose the layer stack for one map cell. kindAt(x, y) returns the tile
+// KIND at a map position, or null off-map (off-map neighbours never raise
+// a transition). t is the shared animation clock (water/foam stay in sync
+// with tileSprite's 600ms frame step). Returns canvases in draw order.
+function resolveTileLayers(cache, kind, x, y, kindAt, t) {
+  const at = (dx, dy) => {
+    const k = kindAt(x + dx, y + dy);
+    return k == null ? kind : k;
+  };
+  const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
+  const frame = Math.floor((t || 0) / 600);
+  switch (kind) {
+    case 'grass': {
+      const layers = [];
+      if (isTallGrass(x, y)) {
+        layers.push(pickVariant(cache.tallVariants, x, y, 12) || cache.grass);
+      } else {
+        layers.push(pickVariant(cache.grassVariants, x, y, 13) || cache.grass);
+        const dh = hashTile(x, y, 14);
+        if (dh < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+        else if (dh < 0.18 && cache.detail.dirt) layers.push(cache.detail.dirt);
+        // grass<->tallgrass: short tufts lean in from a tall neighbour.
+        const off = { n: [0, -1], e: [1, 0], s: [0, 1], w: [-1, 0] };
+        for (const d of DIRS) {
+          const [dx, dy] = off[d];
+          if (kindAt(x + dx, y + dy) === 'grass' && isTallGrass(x + dx, y + dy) &&
+              cache.fringeTall && cache.fringeTall[d]) layers.push(cache.fringeTall[d]);
+        }
+      }
+      // grass<->path: worn dirt edge on the grass side (corners first).
+      if (cache.edgeDirt) {
+        const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
+        const used = new Set();
+        for (const c of ['ne', 'se', 'sw', 'nw']) {
+          if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
+            layers.push(cache.edgeDirt[c]); used.add(c[0]); used.add(c[1]);
+          }
+        }
+        for (const d of DIRS) {
+          if (p[d] && !used.has(d) && cache.edgeDirt[d]) layers.push(cache.edgeDirt[d]);
+        }
+      }
+      return layers.filter(Boolean);
+    }
+    case 'path': {
+      const layers = [pickVariant(cache.pathVariants, x, y, 21) || cache.path];
+      if (hashTile(x, y, 22) < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+      const grassy = (k) => k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
+      for (const d of DIRS) {
+        if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
+        // Fringe on ~70% of path cells (position hash): a fringe on every
+        // cell reads as stitching; broken spill reads as growth.
+        else if (grassy(nb[d]) && cache.edgeGrass && cache.edgeGrass[d] &&
+                 hashTile(x, y, 23 + d.charCodeAt(0)) < 0.7) layers.push(cache.edgeGrass[d]);
+      }
+      return layers.filter(Boolean);
+    }
+    case 'water': {
+      const layers = [];
+      const base = Array.isArray(cache.water) ? cache.water[frame % cache.water.length] : cache.water;
+      if (base) layers.push(base);
+      // Shore/foam on EVERY bank: any non-water, non-void neighbour is land.
+      let shore = false;
+      for (const d of DIRS) {
+        if (nb[d] && nb[d] !== 'water' && nb[d] !== 'void' && cache.shore && cache.shore[d]) {
+          layers.push(cache.shore[d]); shore = true;
+        }
+      }
+      if (shore && cache.foamFrames && cache.foamFrames.length) {
+        layers.push(cache.foamFrames[frame % cache.foamFrames.length]);
+      }
+      return layers.filter(Boolean);
+    }
+    case 'tree': case 'rock': case 'sign': case 'flower': {
+      // Object tiles carry transparent surrounds (Wave 1): lay the ground
+      // the object stands on beneath it — south neighbour's family first
+      // (the contact edge), else the neighbour majority, else grass.
+      const fam = (k) => (k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign')
+        ? 'grass'
+        : (k === 'path' || k === 'house' || k === 'door' || k === 'gymwall' || k === 'gymdoor' || k === 'centerdoor') ? 'path' : null;
+      let ground = fam(nb.s);
+      if (!ground) {
+        const counts = { grass: 0, path: 0 };
+        for (const d of DIRS) { const f = fam(nb[d]); if (f) counts[f]++; }
+        ground = counts.path > counts.grass ? 'path' : 'grass';
+      }
+      const base = ground === 'path'
+        ? (pickVariant(cache.pathVariants, x, y, 21) || cache.path)
+        : (pickVariant(cache.grassVariants, x, y, 13) || cache.grass);
+      const layers = [];
+      if (base) layers.push(base);
+      if (kind === 'flower') layers.push(pickVariant(cache.flowerVariants, x, y, 31) || cache.flower);
+      else if (cache[kind]) layers.push(cache[kind]);
+      return layers.filter(Boolean);
+    }
+    default: {
+      const v = cache[kind];
+      if (!v) return [];
+      if (Array.isArray(v)) return [v[frame % v.length]];
+      return [v];
+    }
+  }
 }
 
 // ---- UI icons (ART ui family) ----
@@ -24527,15 +25444,20 @@ class OverworldScene {
     // Camera centers on player
     r.centerOn(this.player.px + T / 2, this.player.py + T / 2, this.w * T, this.h * T);
     r.begin();
-    // Tiles: hand-authored ART (wave 3); void stays a solid fill.
+    // Tiles: hand-authored ART; Wave 1 composes each cell from variant +
+    // transition layers resolved against its neighbours (art.mjs
+    // resolveTileLayers) — presentation only, map data untouched.
+    // void stays a solid fill.
     const vr = r.viewRect();
     const x0 = Math.max(0, Math.floor(vr.x0 / T)), x1 = Math.min(this.w - 1, Math.ceil(vr.x1 / T));
     const y0 = Math.max(0, Math.floor(vr.y0 / T)), y1 = Math.min(this.h - 1, Math.ceil(vr.y1 / T));
+    const kindAt = (tx, ty) => (ty < 0 || ty >= this.map.rows.length || tx < 0 || tx >= this.map.rows[ty].length)
+      ? null : g.tileKind(this.map.rows[ty][tx]);
     for (let y = y0; y <= y1; y++) {
       for (let x = x0; x <= x1; x++) {
         const ch = this.map.rows[y][x];
-        const spr = g.tileSprite(g.tileKind(ch));
-        if (spr) r.blit(spr, x * T, y * T);
+        const layers = g.tileLayers(g.tileKind(ch), x, y, kindAt);
+        if (layers.length) { for (const spr of layers) r.blit(spr, x * T, y * T); }
         else g.ctx2dfill('#101018', x * T, y * T, T, T); // void
       }
     }
@@ -26428,6 +27350,10 @@ class Game {
   tileKind(ch) { return TILE_CHARS[ch] || 'void'; }
 
   tileSprite(kind) { return tileSprite(this.tileCache, kind, this._animT); }
+
+  // Wave 1 terrain system: the composed layer stack for one map cell
+  // (variants + neighbour-aware transitions). kindAt(x, y) -> kind | null.
+  tileLayers(kind, x, y, kindAt) { return resolveTileLayers(this.tileCache, kind, x, y, kindAt, this._animT); }
 
   buildSprites() {
     // Wave 3: real ART data replaces the forge placeholders (README wiring handoff).

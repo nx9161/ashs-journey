@@ -168,6 +168,19 @@ export function partnerHopFrames(doc) {
 }
 
 // ---- tiles ----
+// Wave 1 terrain system (world-art census §3/§4 Wave 1): the single-tile
+// lookup below is superseded at draw time by resolveTileLayers(), which
+// composes each cell from variant + transition layers:
+//   * deterministic per-position variants (hashTile on map x/y — stable
+//     across frames and reloads, no game state involved);
+//   * runtime auto-tiling: transition overlays are chosen from the four
+//     neighbour KINDS at draw time, so all 56 maps inherit the terrain
+//     system with zero map-data edits;
+//   * object tiles (tree / rock / sign / flower) are authored with
+//     transparent surrounds and are laid over the ground their position
+//     actually stands on (the south neighbour's ground family, else the
+//     neighbour majority) — no more grass squares baked onto sand.
+// Presentation only: nothing here reads or writes game state.
 const TILE_ART = {
   tree: 'tile-tree', path: 'tile-path', grass: 'tile-grass',
   house: 'tile-house', door: 'tile-door', sign: 'tile-sign',
@@ -175,8 +188,26 @@ const TILE_ART = {
   flower: 'tile-flower', rock: 'tile-rock',
 };
 
+// Deterministic 2D position hash (same family as tiles.mjs h2).
+export function hashTile(x, y, salt) {
+  let h = (x * 374761393 + y * 668265263 + (salt || 0) * 2246822519) | 0;
+  h = (h ^ (h >> 13)) | 0;
+  h = Math.imul(h, 1274126177);
+  return ((h ^ (h >> 16)) >>> 0) / 4294967296;
+}
+
+function pickVariant(arr, x, y, salt) {
+  if (!arr || !arr.length) return null;
+  return arr[Math.floor(hashTile(x, y, salt) * arr.length) % arr.length];
+}
+
+// A ',' cell renders TALL (tufted encounter grass) or BASE (plain textured
+// grass) by this one hash rule — the resolver and the fringe logic must
+// agree on it, so it lives in exactly one place.
+function isTallGrass(x, y) { return hashTile(x, y, 11) < 0.78; }
+
 export function buildArtTileCache(doc) {
-  // kind -> canvas (16x16). 'water' -> [water-1, water-2] animated pair.
+  // kind -> canvas (16x16). 'water' -> [water-1..3] animated frames.
   // 'void' stays a solid fill (no art). Kinds without ART fall back to paintTile.
   const cache = {};
   for (const kind of Object.keys(TILE_ART)) {
@@ -187,23 +218,153 @@ export function buildArtTileCache(doc) {
     paintTile(fb.getContext('2d'), kind, 0, 0);
     cache[kind] = fb;
   }
-  const w1 = artCanvas(doc, 'tile-water-1', 1);
-  const w2 = artCanvas(doc, 'tile-water-2', 1);
-  if (w1 && w2) cache.water = [w1, w2];
+  const ids = (list) => list.map((id) => artCanvas(doc, id, 1)).filter(Boolean);
+  cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6']);
+  cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4']);
+  cache.pathVariants = ids(['tile-path', 'tile-path-2', 'tile-path-3']);
+  cache.flowerVariants = ids(['tile-flower', 'tile-flower-2']);
+  // Legacy single-tile callers (rustle overlay) get a tufted tile: the
+  // rustle draws over the player's grass cell, which is tufted now.
+  if (cache.tallVariants.length) cache.grass = cache.tallVariants[0];
+  if (cache.flowerVariants.length) cache.flower = cache.flowerVariants[0];
+  const water = ids(['tile-water-1', 'tile-water-2', 'tile-water-3']);
+  if (water.length) cache.water = water;
   else {
     const fb = doc.createElement('canvas');
     fb.width = 16; fb.height = 16;
     paintTile(fb.getContext('2d'), 'water', 0, 0);
     cache.water = fb;
   }
+  cache.foamFrames = ids(['tile-foam-1', 'tile-foam-2', 'tile-foam-3']);
+  const sides = (base, corners) => {
+    const o = {};
+    for (const d of ['n', 'e', 's', 'w']) o[d] = artCanvas(doc, base + '-' + d, 1);
+    if (corners) for (const c of ['ne', 'nw', 'se', 'sw']) o[c] = artCanvas(doc, base + '-' + c, 1);
+    return o;
+  };
+  cache.shore = sides('tile-shore');               // on water, side facing land
+  cache.edgeDirt = sides('tile-edge-dirt', true);  // on grass, side/corner facing path
+  cache.edgeGrass = sides('tile-edge-grass');      // on path, side facing grass
+  cache.edgeWet = sides('tile-edge-wet');          // on path, side facing water
+  cache.fringeTall = sides('tile-fringe-tall');    // on base grass, side facing tall grass
+  cache.detail = {
+    pebbles: artCanvas(doc, 'tile-detail-pebbles', 1),
+    dirt: artCanvas(doc, 'tile-detail-dirt', 1),
+  };
   return cache;
 }
 
 export function tileSprite(cache, kind, t) {
   const v = cache[kind];
   if (!v) return null;
-  if (Array.isArray(v)) return v[Math.floor((t || 0) / 600) % 2]; // water shimmer
+  if (Array.isArray(v)) return v[Math.floor((t || 0) / 600) % v.length]; // water shimmer (3 frames, Wave 1)
   return v;
+}
+
+const DIRS = ['n', 'e', 's', 'w'];
+
+// Compose the layer stack for one map cell. kindAt(x, y) returns the tile
+// KIND at a map position, or null off-map (off-map neighbours never raise
+// a transition). t is the shared animation clock (water/foam stay in sync
+// with tileSprite's 600ms frame step). Returns canvases in draw order.
+export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
+  const at = (dx, dy) => {
+    const k = kindAt(x + dx, y + dy);
+    return k == null ? kind : k;
+  };
+  const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
+  const frame = Math.floor((t || 0) / 600);
+  switch (kind) {
+    case 'grass': {
+      const layers = [];
+      if (isTallGrass(x, y)) {
+        layers.push(pickVariant(cache.tallVariants, x, y, 12) || cache.grass);
+      } else {
+        layers.push(pickVariant(cache.grassVariants, x, y, 13) || cache.grass);
+        const dh = hashTile(x, y, 14);
+        if (dh < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+        else if (dh < 0.18 && cache.detail.dirt) layers.push(cache.detail.dirt);
+        // grass<->tallgrass: short tufts lean in from a tall neighbour.
+        const off = { n: [0, -1], e: [1, 0], s: [0, 1], w: [-1, 0] };
+        for (const d of DIRS) {
+          const [dx, dy] = off[d];
+          if (kindAt(x + dx, y + dy) === 'grass' && isTallGrass(x + dx, y + dy) &&
+              cache.fringeTall && cache.fringeTall[d]) layers.push(cache.fringeTall[d]);
+        }
+      }
+      // grass<->path: worn dirt edge on the grass side (corners first).
+      if (cache.edgeDirt) {
+        const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
+        const used = new Set();
+        for (const c of ['ne', 'se', 'sw', 'nw']) {
+          if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
+            layers.push(cache.edgeDirt[c]); used.add(c[0]); used.add(c[1]);
+          }
+        }
+        for (const d of DIRS) {
+          if (p[d] && !used.has(d) && cache.edgeDirt[d]) layers.push(cache.edgeDirt[d]);
+        }
+      }
+      return layers.filter(Boolean);
+    }
+    case 'path': {
+      const layers = [pickVariant(cache.pathVariants, x, y, 21) || cache.path];
+      if (hashTile(x, y, 22) < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+      const grassy = (k) => k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
+      for (const d of DIRS) {
+        if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
+        // Fringe on ~70% of path cells (position hash): a fringe on every
+        // cell reads as stitching; broken spill reads as growth.
+        else if (grassy(nb[d]) && cache.edgeGrass && cache.edgeGrass[d] &&
+                 hashTile(x, y, 23 + d.charCodeAt(0)) < 0.7) layers.push(cache.edgeGrass[d]);
+      }
+      return layers.filter(Boolean);
+    }
+    case 'water': {
+      const layers = [];
+      const base = Array.isArray(cache.water) ? cache.water[frame % cache.water.length] : cache.water;
+      if (base) layers.push(base);
+      // Shore/foam on EVERY bank: any non-water, non-void neighbour is land.
+      let shore = false;
+      for (const d of DIRS) {
+        if (nb[d] && nb[d] !== 'water' && nb[d] !== 'void' && cache.shore && cache.shore[d]) {
+          layers.push(cache.shore[d]); shore = true;
+        }
+      }
+      if (shore && cache.foamFrames && cache.foamFrames.length) {
+        layers.push(cache.foamFrames[frame % cache.foamFrames.length]);
+      }
+      return layers.filter(Boolean);
+    }
+    case 'tree': case 'rock': case 'sign': case 'flower': {
+      // Object tiles carry transparent surrounds (Wave 1): lay the ground
+      // the object stands on beneath it — south neighbour's family first
+      // (the contact edge), else the neighbour majority, else grass.
+      const fam = (k) => (k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign')
+        ? 'grass'
+        : (k === 'path' || k === 'house' || k === 'door' || k === 'gymwall' || k === 'gymdoor' || k === 'centerdoor') ? 'path' : null;
+      let ground = fam(nb.s);
+      if (!ground) {
+        const counts = { grass: 0, path: 0 };
+        for (const d of DIRS) { const f = fam(nb[d]); if (f) counts[f]++; }
+        ground = counts.path > counts.grass ? 'path' : 'grass';
+      }
+      const base = ground === 'path'
+        ? (pickVariant(cache.pathVariants, x, y, 21) || cache.path)
+        : (pickVariant(cache.grassVariants, x, y, 13) || cache.grass);
+      const layers = [];
+      if (base) layers.push(base);
+      if (kind === 'flower') layers.push(pickVariant(cache.flowerVariants, x, y, 31) || cache.flower);
+      else if (cache[kind]) layers.push(cache[kind]);
+      return layers.filter(Boolean);
+    }
+    default: {
+      const v = cache[kind];
+      if (!v) return [];
+      if (Array.isArray(v)) return [v[frame % v.length]];
+      return [v];
+    }
+  }
 }
 
 // ---- UI icons (ART ui family) ----

@@ -8,7 +8,7 @@ import { Input, KEYMAP, ACTIONS } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
-import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, buildArtTileCache, tileSprite, uiIcon } from '../engine/art.mjs';
+import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, buildArtTileCache, tileSprite, resolveTileLayers, uiIcon } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
 import { UI, typePill } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
@@ -83,6 +83,10 @@ export class Game {
   tileKind(ch) { return TILE_CHARS[ch] || 'void'; }
 
   tileSprite(kind) { return tileSprite(this.tileCache, kind, this._animT); }
+
+  // Wave 1 terrain system: the composed layer stack for one map cell
+  // (variants + neighbour-aware transitions). kindAt(x, y) -> kind | null.
+  tileLayers(kind, x, y, kindAt) { return resolveTileLayers(this.tileCache, kind, x, y, kindAt, this._animT); }
 
   buildSprites() {
     // Wave 3: real ART data replaces the forge placeholders (README wiring handoff).

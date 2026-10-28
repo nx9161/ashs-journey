@@ -1,22 +1,26 @@
-# hand-drawn (no draft). Petals reuse roof-red, centers reuse water-blue (palette discipline).
+# Wave 1: flower cluster variant 1 — grass island patch + petal clusters (transparent surround).
 PIX tile-flower 16 16
-gggggggggggggggg
-gggggggggggggggg
-gggggjjggggggggg
-ggggjwjgggggjjgg
-gggggjjggggjwjgg
-gggggggggggggjjg
-gggggggggggggggg
-gggjjggggggggggg
-ggjwjggggggggggg
-ggggjjgggggggggg
-gggggggggggggggg
-gggggggggggjjggg
-ggggggggggjwjggg
-gggggggggggjjggg
-gggggggggggggggg
-gggggggggggggggg
+.......gg.......
+....gggggggg....
+..gggggggggggg..
+.ggggggggggjggg.
+.gggjgggggjojgd.
+gggjojgggggjgddd
+ggggjgggggggdddd
+gggggggggggggdld
+ggggggggggggglll
+ggggggggjggggglg
+gggggggjojgggggg
+.ggjggggjlgggjg.
+.gjojggglllljoj.
+..ljlggggllllj..
+...lgggggggl....
+.......gg.......
 PAL
 g #5da24a grass
-j #b0503c petal
-w #3a7bd5 center
+d #4c8a3e grass-dark
+l #6fb45c grass-light
+m #67aa54 grass-mid
+j #b0503c petal-red
+o #f0e060 center-yellow
+i #e86a8a petal-pink

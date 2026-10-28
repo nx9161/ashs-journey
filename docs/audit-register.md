@@ -462,3 +462,148 @@ check PASS as run during the battery.
   the only production-visible differences will be NPC palette colors
   and battlers at 64px parity — no counted title/menu rows, flows or
   strings changed, so no verify-live expectation needs adapting.
+
+## World Art Wave 1 — The Ground Itself (terrain system) (2026-10-27)
+
+Implementer pass for the world-art elevation (census:
+`ashs-journey-qa/world-art-census.md` §3 terrain rows + §4 Wave 1).
+Presentation only — no game state, balance, or map-data change; no map
+layout was edited. Nothing deployed.
+
+### 1. Tiles authored — 13 → 55 tile kinds (+42 new .pix sources, 8 redrawn)
+
+All sources in `assets/sprites/pix/tiles/`, all original, cluster/blade
+construction (no flat fills, no single-pixel speckle — the pipeline's
+orphan rule passes by construction).
+
+- **Redrawn (8):** `tile-grass` (textured base, 6 colors), `tile-path`
+  (worn, 4 tones), `tile-flower` (grass-island cluster, transparent
+  surround), `tile-water-1/2` (5 blues, layered waves), `tile-tree`,
+  `tile-rock`, `tile-sign` (object pixels unchanged in kind; baked grass
+  background replaced by transparency so the resolver lays them over
+  the ground they stand on — this kills the grass-square-on-sand
+  artifact, incl. gym rocks; the sign board also gained a dark outline
+  so it reads against path and grass alike).
+- **Untouched (5, Wave 2 architecture):** `tile-house`, `tile-door`,
+  `tile-gymwall`, `tile-gymdoor`, `tile-centerdoor`.
+- **New (42):** grass bases `tile-grass-2..6` (6 ground variants total);
+  tall grass `tile-tallgrass-1..4`; path `tile-path-2..3` (3 variants
+  total); `tile-flower-2`; water frame `tile-water-3` (animation 2 → 3
+  frames); shore `tile-shore-n/e/s/w`; foam `tile-foam-1..3`; grass→path
+  dirt edges `tile-edge-dirt-n/e/s/w` + corners `tile-edge-dirt-ne/nw/
+  se/sw`; path→grass fringe `tile-edge-grass-n/e/s/w`; path→water wet
+  edges `tile-edge-wet-n/e/s/w`; grass→tallgrass tuft fringe
+  `tile-fringe-tall-n/e/s/w`; ground detail `tile-detail-pebbles`,
+  `tile-detail-dirt`. Transition/overlay tiles: **27** (≥24 required).
+
+### 2. Mechanism — how all 56 maps inherit with zero map edits
+
+`src/engine/art.mjs`: `hashTile` (:192, deterministic position hash),
+`isTallGrass` (:207 — a `,` cell is tufted tall grass or plain base
+grass by one hash rule, 78/22), `buildArtTileCache` (:209 — variant
+arrays, overlay sets, 3-frame water + foam), `resolveTileLayers`
+(:270 — the neighbour-aware composer). `src/game/main.mjs:89`
+`Game.tileLayers` delegates with the shared `_animT` clock (water and
+foam frames stay in sync with `tileSprite`'s 600 ms step);
+`src/game/overworld.mjs:557` draws the layer stack per cell. Rules:
+
+- **Variants:** position-hash selection (salt per family) — the same
+  position renders the same variant on every frame and reload
+  (verified: Route 1 resolved 50× per cell, stacks identical).
+- **Auto-tiling:** transitions are chosen from the four neighbour
+  KINDS at draw time. Grass cells draw dirt edges/corners toward path;
+  path cells draw grass fringe toward grassy neighbours (hash-gated to
+  ~70% of cells so the spill reads as growth, not stitching) and wet
+  edges toward water; water cells draw a shore overlay toward ANY
+  non-water, non-void neighbour plus the animated foam frame on shore
+  cells; base-grass cells draw tuft fringe toward tall-grass
+  neighbours; object tiles (tree/rock/sign/flower) are drawn over a
+  ground variant matching the ground they stand on (south neighbour's
+  family, else neighbour majority).
+- Legacy single-tile callers keep working: `tileSprite` now cycles
+  water over 3 frames; `cache.grass` is a tufted tile (the encounter
+  rustle overlay); boulders (`tileSprite('rock')`) draw their
+  transparent-surround rock over the already-rendered ground.
+
+### 3. Terrain pairs — enumerated from the merged 56-map data, all covered
+
+Self-check (real resolver run over every cell of all 56 maps):
+**4,447 / 4,447 terrain boundaries covered (100%)**; zero non-void
+cells resolve to an empty stack. Pair counts (undirected adjacencies):
+path↔tree 2,582 · grass↔path 632 · path↔rock 494 · path↔sign 220 ·
+path↔water 183 · flower↔path 161 · grass↔tree 130 · tree↔water 31 ·
+sign↔tree 10 · grass↔sign 2 · grass↔rock 2 · grass↔tallgrass
+(variant-level, same map char — covered by the tuft fringe). Two
+honest notes: **grass↔water never occurs** in the current map data
+(0 adjacencies) — it is covered by construction, since the shore set
+fires for any land neighbour (proven live by tree↔water and
+path↔water); **575 boundaries involve architecture kinds**
+(house/door/gymwall/gymdoor/centerdoor ↔ ground) and are Wave 2's
+scope, excluded from the terrain denominator — the floor↔wall
+boundary indoors is terrain-covered (the tree-tile wall ring now
+stands on the floor's ground variant, not on baked grass), while wall
+identity itself is Wave 5.
+
+### 4. Palette + shading (measured from ART data)
+
+- Tiles-family union: **33 colors vs the 48 budget** (Wave 0) — no
+  budget raise needed. Total tiles union before: 16.
+- Shading steps: grass base tiles 6 colors each (≥4 greens, cluster
+  texture); tall-grass tiles 8–10 colors each on a 5-step tuft ramp
+  (deep/shadow/dark/mid/light/highlight/pale across the set, incl. the
+  canopy greens shared with the tree tile); water **5 blues**
+  (#1d4a86, #2e63b0, #3a7bd5, #5a9ae8, #6fb0ee) + foam white — 4+
+  steps as required; path set 5 tones (base/dark/worn/pale/edge).
+
+### 5. Before/after measurements (stated method)
+
+Method: logical raster — every map rendered tile-only in Node through
+the REAL resolver + ART data (fake rasterizing canvas), unique colors
+counted over the map's own pixels. Before = HEAD art + single-tile
+rendering, same method. (The census's 327/603 figures are full
+1440×900 screenshots incl. NPCs/HUD/scaling — a different method; the
+§3 end-state yardsticks Pallet ≥900 / routes ≥1,200 are whole-mission
+targets across all waves, not Wave 1's.)
+
+- Scene color depth (tiles only): **Pallet 13 → 22 · Route 1 11 → 22 ·
+  Route 20 12 → 27.**
+- Tall-grass patch (union over all `,` cells of Route 1): **3 → 15
+  unique colors** (census screenshot method measured 5 before). The
+  Wave 1 yardstick of ≥25 is **NOT met under this stricter logical
+  method** — flagged, not rounded: a pure-grass region can only carry
+  the grass ramp (15 hexes incl. dirt-edge browns at patch borders).
+  QA's capture-crop method counts neighbouring terrains and will land
+  higher; the honest logical figure is 15.
+- Water: 2 → **3 distinct animation frames** (t = 0/600/1200 ms);
+  Route 20: 26 shore cells, all 26 carrying the animated foam layer.
+- Transition coverage: **0 tiles → 100%** of terrain boundaries
+  (self-check above; QA re-grades from live captures).
+
+### 6. Budgets + regeneration
+
+- ART keys **163 → 205, zero lost**; tiles family 13 → 55.
+- `art-data.mjs` 162,117 → 184,030 B = **+21,913 B vs the 40,000 B
+  Wave 1 budget**; `public/game.js` 1,373,875 → 1,404,586 B.
+- build-art run twice = byte-identical `art-data.mjs` + atlases.
+
+### 7. Battery at this commit (public battery)
+
+rejuv-phase1 **44/44** · phase2 **42/42** · phase3 **63/63** · phase4
+**53/53** · phase5 **55/55** · phase6 **46/46** · fidelity **35/35** ·
+campaign-smoke **24/24** · audit-headless **17/17** · audit-laptop
+public **41/41** · verify-slice **48/48** · qa-slice **134/134** ·
+validator test **51/51** · validator fuzz **2000/2000** ·
+save-contract **6/6** · Track B **114/114** · budgets-check **all
+gates pass** · contamination **clean** · drift-gate guest ≡
+strip(vercel) PASS · qa-changed-flows **55/57, failures exactly the
+standing baseline {b2, d9}**.
+
+### Standing notes from this pass
+
+- **personal/ is byte-identical to HEAD in this commit** (retired
+  edition): the battery's full builds touched it; it was restored from
+  HEAD afterwards and `dist/content-hash.txt`'s personal line restored
+  to the HEAD value, per the Wave 0 precedent.
+- Verify-live expectation impact: none (nothing deployed). When Wave 1
+  is deployed, the visible differences are the terrain system itself —
+  no strings, flows, menus or counts changed.

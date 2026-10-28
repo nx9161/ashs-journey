@@ -1,0 +1,25 @@
+# Wave 1: worn dirt path variant 3 — patches, tracks, 4 path tones.
+PIX tile-path-3 16 16
+pppppppppppppppp
+pppppppppppppppp
+pppbbbpppbbbpppp
+pppbbbpppppppppp
+pppnbppppppppppp
+ppnnnppppppppppp
+pppnpppppppppppp
+ppppppppppppppbp
+pppppppppppppbbb
+ppppppppppppppbp
+pppppppppppppppp
+pnpppppppppppppp
+nnnppppppppppppp
+pnpbbbppbbbppbqp
+ppppppppppppbqqq
+pppppppppppppbqp
+PAL
+p #d8c08a path
+q #c2a878 path-dark
+b #b09468 path-worn
+n #ecd9a8 path-pale
+k #a8845c path-edge
+r #5a3a24 dirt-brown

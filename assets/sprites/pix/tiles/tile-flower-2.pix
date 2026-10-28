@@ -1,0 +1,26 @@
+# Wave 1: flower cluster variant 2 — grass island patch + petal clusters (transparent surround).
+PIX tile-flower-2 16 16
+.......gg.......
+....gggggggg....
+..gggggggggggg..
+.ggggggggggiggg.
+.gggigggggioigg.
+gggioigggggigggg
+ggggiguggggggggg
+ggggguougggguggg
+ggggggugggmuougg
+ggggggggimmmumgg
+gggggggioimdddmg
+.gdiggggigggdig.
+.dioigggggggioi.
+..diggdggggggi..
+....gdddgggg....
+......dgg.......
+PAL
+g #5da24a grass
+d #4c8a3e grass-dark
+l #6fb45c grass-light
+m #67aa54 grass-mid
+i #e86a8a petal-pink
+u #f5f0dc petal-white
+o #f0e060 center-yellow
