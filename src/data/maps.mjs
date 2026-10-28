@@ -32,7 +32,7 @@ export const MAPS = {
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         // Yellow homage (original lines): the rival's partner is an Eevee.
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
@@ -162,7 +162,7 @@ export const MAPS = {
       // ADR-025 §4: Sparring Coach (Candy Coach House Rule) — present in
       // every Center's data; the scene only fields him while the rule is
       // on (loadMap gate in overworld.mjs).
-      { x: 2, y: 2, name: 'SPARRING COACH', art: 'coach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 2, y: 2, name: 'SPARRING COACH', art: 'sparcoach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
         sparCoach: true, sparSpecies: 'machop',
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
     ],
@@ -219,11 +219,11 @@ export const MAPS = {
       // Yellow homage: the anime-trio ambush, reimagined with original
       // characters (no motto quotes, no trademarked team name — GC C4).
       // The duo flank the path; either one spotting you pulls BOTH in.
-      { x: 3, y: 7, name: 'RUE', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
+      { x: 3, y: 7, name: 'RUE', art: 'rue', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         trainer: 'r2_duo', duoPartner: 'COLE',
         sight: { dir: 'right', range: 4 },
         dialogue: ["Hold it right there, kid.", "Beaten... by a kid?!"] },
-      { x: 10, y: 7, name: 'COLE', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
+      { x: 10, y: 7, name: 'COLE', art: 'cole', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
         trainer: 'r2_duo', duoPartner: 'RUE',
         sight: { dir: 'left', range: 4 },
         dialogue: ["Two of us, one of you.", "Retreat! Regroup! We'll be back with a better plan!"] },

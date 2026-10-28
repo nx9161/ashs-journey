@@ -141,11 +141,32 @@ export class Renderer {
   // bottomY — taller art overhangs upward, never into the tile below.
   // For a legacy 16x16 sprite this draws at (dx, bottomY - 16) at native
   // size: pixel-identical to the old unscaled blit at that position.
-  blitCharacter(sprite, dx, bottomY) {
+  // Wave 3a: every character also gets the shared soft ground shadow
+  // (below) at its feet line — groundY when the caller knows the true
+  // ground line differs from the sprite's bottom (the follower's hop
+  // lift), else bottomY itself.
+  blitCharacter(sprite, dx, bottomY, groundY) {
     if (!sprite || !sprite.width || !sprite.height) return;
     const w = TILE;
     const h = Math.round(TILE * sprite.height / sprite.width);
+    this.characterShadow(dx + w / 2, groundY == null ? bottomY : groundY);
     this.blitS(sprite, dx, bottomY - h, w, h);
+  }
+
+  // Soft ground shadow (Wave 3a, census s3 character row): a stepped
+  // pixel ellipse in two alpha passes — outer band fainter, core
+  // darker — drawn rect-only like ptDisc (no arc/ellipse calls, so the
+  // headless recording ctx renders it identically). Centered on the
+  // footprint, sitting on the feet line: subtle and consistent for
+  // every overworld character (player, follower, NPCs).
+  characterShadow(cx, groundY) {
+    const c = this.ctx;
+    c.fillStyle = 'rgba(16,22,14,0.16)';
+    c.fillRect(Math.round(cx - 5), Math.round(groundY - 3), 10, 1);
+    c.fillRect(Math.round(cx - 7), Math.round(groundY - 2), 14, 2);
+    c.fillRect(Math.round(cx - 5), Math.round(groundY), 10, 1);
+    c.fillStyle = 'rgba(16,22,14,0.20)';
+    c.fillRect(Math.round(cx - 4), Math.round(groundY - 2), 8, 2);
   }
 
   // Scaled blit for authored battlers (32px art -> 48px draw size).

@@ -195,9 +195,9 @@ export function recordBattleBond(state, trainerId, won, fled) {
 // injects these actors into the scene's map copy under parleyVisible,
 // the tale-NPC pattern (shared MAPS data is never mutated).
 export const PARLEY_NPCS = [
-  { map: 'celadon', x: 8, y: 8, name: 'RUE', art: 'youngster', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a', parley: true,
+  { map: 'celadon', x: 8, y: 8, name: 'RUE', art: 'rue', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a', parley: true,
     dialogue: ['You. YOU. Of all the street corners in all of Kanto—', 'Do not look at me like that. The moustache was ONE time.'] },
-  { map: 'celadon', x: 9, y: 8, name: 'COLE', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a', parley: true,
+  { map: 'celadon', x: 9, y: 8, name: 'COLE', art: 'cole', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a', parley: true,
     dialogue: ['Oh no. Oh no no no. Rue. Rue, it is the kid. It is THE kid.'] },
 ];
 export function parleyVisible(state) {

@@ -590,8 +590,22 @@ export class OverworldScene {
     // current 16x16 art the bottoms are py + T (partner: minus the hop
     // lift), so these draws are pixel-identical to the old unscaled
     // blits; 16x32 art will overhang upward from the same feet line.
+    // Wave 3a follower visibility (PRESENTATION ONLY — the partner's
+    // logical position, the trail and every interaction check keep
+    // using this.partner.px/py untouched): the follower used to spawn
+    // stacked exactly under the player (empty trail -> partner tile =
+    // player tile) and, trailing in the same column, its body landed
+    // on the tall Ash sprite's head. The DISPLAY position therefore
+    // steps aside: a full tile west when stacked on the player's tile
+    // (spawn / warp landing), and ~10px east whenever it shares the
+    // player's column, so it is always visible BESIDE Ash, never
+    // under or on him.
     const hop = Math.abs(Math.sin(this.partner.hop)) * 3;
-    r.blitCharacter(g.partnerFrame(), Math.round(this.partner.px), Math.round(this.partner.py) + T - Math.round(hop));
+    let fpx = Math.round(this.partner.px);
+    const fpy = Math.round(this.partner.py);
+    if (fpx === Math.round(this.player.px) && fpy === Math.round(this.player.py)) fpx -= T;
+    else if (fpx === Math.round(this.player.px)) fpx += 10;
+    r.blitCharacter(g.partnerFrame(!this.player.moving), fpx, fpy + T - Math.round(hop), fpy + T);
     r.blitCharacter(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py) + T);
     // "!" exclamation
     if (this.enc && this.enc.phase === 'exclaim') {

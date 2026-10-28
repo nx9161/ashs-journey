@@ -79,7 +79,9 @@ export function speciesBattleArt(doc, speciesId, species) {
 
 // ---- overworld ----
 export function ashFrames(doc, dir) {
-  // [idle1, idle2, walk1, walk2, walk3, walk4] — 16x16 canvases.
+  // [idle1, idle2, walk1, walk2, walk3, walk4] — 16x32 canvases since
+  // Wave 3a (the right-facing set is authored art of its own, NOT a
+  // mirror of the left set — cap logo, hip strap buckle, bag pocket).
   const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
   const ids = ['idle-1', 'idle-2', 'walk-1', 'walk-2', 'walk-3', 'walk-4'];
   return ids.map((f) => artCanvas(doc, 'ash-' + d + '-' + f, 1) || artCanvas(doc, 'ash-down-' + f, 1));
@@ -88,8 +90,12 @@ export function ashFrames(doc, dir) {
 // ---- NPC art selection (Wave 0: explicit art field, not name strings) ----
 // Every NPC instance in the data (src/data/maps*.mjs, quests.mjs
 // TALE_NPCS, bonds.mjs PARLEY_NPCS) carries an explicit `art` kind:
-// 'youngster' | 'rival' | 'coach' | 'aide' | 'nurse' | 'lass' |
-// 'professor' | 'brock' | 'pc'. That field is the primary key. The
+// the generic kinds ('youngster' | 'rival' | 'coach' | 'aide' |
+// 'nurse' | 'lass' | 'professor' | 'brock' | 'pc') plus, since
+// Wave 3a, one individual kind per named-cast member ('gary',
+// 'garychamp', 'mom', 'hawthorn', 'misty', 'surge', 'erika', 'koga',
+// 'sabrina', 'blaine', 'giovanni', 'lorelei', 'bruno', 'agatha',
+// 'lance', 'rue', 'cole', 'sparcoach'). That field is the primary key. The
 // legacy name map below is ONLY a last-resort fallback for an instance
 // that predates the field (it is what CHAMPION and SPARRING COACH used
 // to miss through — both now carry art:'rival' / art:'coach' in data).
@@ -110,25 +116,48 @@ export function npcArtKind(npc) {
   return NPC_ROLE[name] || 'youngster';
 }
 
-// ---- NPC palette-swap (Wave 0) ----
+// ---- NPC palette-swap (Wave 0; Wave 3a uniform scheme) ----
 // Map data carries an authored palette per instance (skin / shirt /
 // pants / hair) — 98 distinct tuples that the hand-art path used to
 // ignore entirely. Each NPC kind's sprite keys its primary garment
 // colors distinctly; this table maps palette KEY -> data FIELD for the
 // keys that carry instance identity. Authored secondary shades (cap,
 // glasses, vest-dark, uniform accent) are kind identity, not instance
-// palette, and stay authored. The nurse sprite's legs were split onto
-// their own key (T, same hex as the hair key P) in its .pix source so
-// hair and pants can remap independently.
+// palette, and stay authored. (Wave 0 note, superseded in Wave 3a: the
+// nurse sprite's legs once used a split key T; the Wave 3a redraws put
+// EVERY named-cast kind on the uniform S/H/J/P key scheme below, so
+// nurse and brock remap through the same keys as everyone else. The
+// named kinds' authored palettes were chosen to agree with their
+// instances' data palettes, so the swap is an identity mapping for
+// them — it exists so the discipline holds, not to recolor them.)
 const NPC_SWAP_KEYS = {
   youngster: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   rival: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   lass: { S: 'skin', H: 'hair', D: 'shirt', K: 'pants' },
-  nurse: { S: 'skin', P: 'hair', W: 'shirt', T: 'pants' },
+  nurse: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   coach: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
   aide: { S: 'skin', H: 'hair', V: 'shirt', P: 'pants' },
   professor: { S: 'skin', G: 'hair', W: 'shirt', K: 'pants' },
-  brock: { S: 'skin', H: 'hair', V: 'shirt', P: 'pants' },
+  brock: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  // Wave 3a named cast — individual sprites, uniform swap keys.
+  gary: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  garychamp: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  mom: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  hawthorn: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  misty: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  surge: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  erika: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  koga: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  sabrina: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  blaine: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  giovanni: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  lorelei: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  bruno: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  agatha: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  lance: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  rue: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  cole: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
+  sparcoach: { S: 'skin', H: 'hair', J: 'shirt', P: 'pants' },
 };
 const HEX_RE = /^#[0-9a-fA-F]{6}$/;
 export function npcSwapFor(npc, kind) {
@@ -164,6 +193,14 @@ export function npcFrames(doc, npc) {
 export function partnerHopFrames(doc) {
   const a = artCanvas(doc, 'pikachu-hop-1', 1);
   const b = artCanvas(doc, 'pikachu-hop-2', 1);
+  return (a && b) ? [a, b] : null;
+}
+
+// Wave 3a: the follower's at-rest pair (blink / ear-twitch), drawn at
+// the same 16x20 canvas as the hop pair.
+export function partnerIdleFrames(doc) {
+  const a = artCanvas(doc, 'pikachu-idle-1', 1);
+  const b = artCanvas(doc, 'pikachu-idle-2', 1);
   return (a && b) ? [a, b] : null;
 }
 

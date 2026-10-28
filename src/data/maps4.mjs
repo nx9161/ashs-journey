@@ -31,7 +31,7 @@ export const MAPS4 = {
       { x: 8, y: 1, text: 'A small doll sits on a shelf, watching the door. It has always been watching the door.' },
     ],
     npcs: [
-      { x: 7, y: 2, name: 'SABRINA', art: 'youngster', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
+      { x: 7, y: 2, name: 'SABRINA', art: 'sabrina', skin: '#f0c8a0', shirt: '#7a2a4a', pants: '#2a2a3a', hair: '#1a2a4a', trainer: 'sabrina',
         dialogue: ['I foresaw your arrival three turns of the moon ago. The future is a door — and I am holding it shut.', 'The door opens a crack. Take the Marsh Badge — and go on surprising me.'] },
       { x: 4, y: 5, name: 'MEDIUM LIA', art: 'youngster', skin: '#e8b888', shirt: '#4a3a5a', pants: '#2a2a3a', hair: '#8a8a9a', trainer: 'gym_saffron_1', sight: { dir: 'right', range: 3 },
         dialogue: ['My senses tingle — a challenger with a loud heart approaches!', 'So loud... and so kind. Odd.'] },
@@ -61,7 +61,7 @@ export const MAPS4 = {
       { x: 8, y: 1, text: 'QUIZ: What beats Fire every time? Answer at the door, with your whole team.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'BLAINE', art: 'youngster', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
+      { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
         dialogue: ['Wahaha! A challenger climbs MY mountain of fire? Riddle me this first: what burns hotter — magma, or regret? Battle me and find out!', 'Scalded but smiling — that is the correct answer. The Volcano Badge, hot off the press!'] },
       { x: 11, y: 5, name: 'BURGLAR OTIS', art: 'youngster', skin: '#c89878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
         dialogue: ['I only came in to warm my hands, honest! ...Fine. Battle first, alibi later.', 'Hot hands, cold heart. Story of my life.'] },

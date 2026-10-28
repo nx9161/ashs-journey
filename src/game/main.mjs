@@ -8,7 +8,7 @@ import { Input, KEYMAP, ACTIONS } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
-import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, buildArtTileCache, tileSprite, resolveTileLayers, uiIcon } from '../engine/art.mjs';
+import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, partnerIdleFrames, buildArtTileCache, tileSprite, resolveTileLayers, uiIcon } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
 import { UI, typePill } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
@@ -100,6 +100,7 @@ export class Game {
       right: ashFrames(doc, 'right'),
     };
     this._partnerHop = partnerHopFrames(doc);
+    this._partnerIdle = partnerIdleFrames(doc);
     this.npcCache = {};
   }
 
@@ -172,7 +173,11 @@ export class Game {
     return f[Math.floor(this._animT / 600) % 2]; // idle-1 / idle-2
   }
 
-  partnerFrame() {
+  partnerFrame(idle) {
+    // Wave 3a: at rest (player not moving) the follower plays its idle
+    // pair (blink / ear-twitch, 500ms like the player's idle cadence);
+    // while travelling it hops as before (280ms hop cycle, unchanged).
+    if (idle && this._partnerIdle) return this._partnerIdle[Math.floor(this._animT / 500) % 2];
     if (!this._partnerHop) return this.spriteCache.partner.front;
     return this._partnerHop[Math.floor(this._animT / 280) % 2]; // hop-1 / hop-2
   }

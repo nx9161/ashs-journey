@@ -40,7 +40,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'MISTY', art: 'youngster', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
+      { x: 8, y: 2, name: 'MISTY', art: 'misty', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
         dialogue: ["I'm Misty! Cerulean's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
       { x: 4, y: 6, name: 'DIANA', art: 'youngster', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
@@ -74,7 +74,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'LT. SURGE', art: 'youngster', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0a03a',
+      { x: 8, y: 2, name: 'LT. SURGE', art: 'surge', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0a03a',
         trainer: 'surge',
         dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
       { x: 4, y: 6, name: 'WALT', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
@@ -108,7 +108,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'ERIKA', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a5a3a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'ERIKA', art: 'erika', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a5a3a', hair: '#1a1a1a',
         trainer: 'erika',
         dialogue: ["I am Erika, of Celadon Gym. My flower arrangements... and my battles... both demand a gentle, exact hand.", "How lovely — a storm in my garden. The Rainbow Badge is yours."] },
       { x: 4, y: 6, name: 'TAMIA', art: 'youngster', skin: '#e8b888', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a1a1a',
@@ -243,7 +243,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'SABRINA', art: 'youngster', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#2a2a3a', hair: '#1a1a2a',
+      { x: 8, y: 2, name: 'SABRINA', art: 'sabrina', skin: '#f0c8a0', shirt: '#7a1a3a', pants: '#2a2a3a', hair: '#1a1a2a',
         trainer: 'sabrina',
         dialogue: ["I foresaw your arrival three days ago, {player}. My vision also showed this battle's end. Shall we check it?", "...The vision was wrong. How wonderful. The Marsh Badge is yours."] },
       { x: 4, y: 6, name: 'JOHAN', art: 'youngster', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#1a1a1a',
@@ -660,7 +660,7 @@ export const MAPS3 = {
       { x: 12, y: 2, text: 'A gravestone carved with a smiling Cubone. It does not look sad at all.' },
     ],
     npcs: [
-      { x: 8, y: 3, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 8, y: 3, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_tower',
         dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
       { x: 12, y: 6, name: 'CHANNELER', art: 'youngster', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -928,7 +928,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'KOGA', art: 'youngster', skin: '#d8a878', shirt: '#3a2a4a', pants: '#1a1a2a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'KOGA', art: 'koga', skin: '#d8a878', shirt: '#3a2a4a', pants: '#1a1a2a', hair: '#1a1a1a',
         trainer: 'koga',
         dialogue: ["I am Koga of the Fuchsia Gym. A ninja's poison creeps unseen — despair begins before the pain.", "You saw through the fog. Impressive. The Soul Badge, from one shadow to another."] },
       { x: 4, y: 6, name: 'EDGAR', art: 'youngster', skin: '#c89878', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#3a2a1a',
@@ -1395,7 +1395,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'BLAINE', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
+      { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
         dialogue: ["Blaine's the name — quiz-master of Cinnabar and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
       { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#7a3a2a', pants: '#2a2a2a', hair: '#e07830',
@@ -1482,7 +1482,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 2, name: 'GIOVANNI', art: 'youngster', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#1a1a1a',
+      { x: 5, y: 2, name: 'GIOVANNI', art: 'giovanni', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#1a1a1a',
         trainer: 'giovanni',
         dialogue: ["So! You have come back to the lion's den at last. I am Giovanni — and the earth itself answers my call.", "Impossible... The earth... rejects me? Take the Earth Badge. The League gate is yours to darken."] },
       { x: 3, y: 6, name: 'ACE RUE3', art: 'youngster', skin: '#e8b888', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#7a1a1a',
@@ -1659,19 +1659,19 @@ export const MAPS3 = {
       { x: 17, y: 1, text: 'FINAL CHAMBER — One chair. Two claimants.' },
     ],
     npcs: [
-      { x: 2, y: 2, name: 'LORELEI', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#7a1a3a',
+      { x: 2, y: 2, name: 'LORELEI', art: 'lorelei', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#7a1a3a',
         trainer: 'lorelei',
         dialogue: ["Welcome to the League. I am Lorelei — my ice Pokemon are the first winter you'll have to outlast.", "You melted more than ice today. Go on — the others are colder company than me."] },
-      { x: 6, y: 2, name: 'BRUNO', art: 'youngster', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
+      { x: 6, y: 2, name: 'BRUNO', art: 'bruno', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
         trainer: 'bruno',
         dialogue: ["I am Bruno! My Pokemon and I train until the mountain itself gets tired. Show me your discipline!", "Discipline... outmatched. My fists salute you. Forward!"] },
-      { x: 10, y: 2, name: 'AGATHA', art: 'youngster', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
+      { x: 10, y: 2, name: 'AGATHA', art: 'agatha', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'agatha',
         dialogue: ["So the professor's newest spark climbs to my chamber. I knew that man when his hair was dark and his ideas darker.", "Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."] },
-      { x: 14, y: 2, name: 'LANCE', art: 'youngster', skin: '#d8a878', shirt: '#7a1a3a', pants: '#1a1a2a', hair: '#e07830',
+      { x: 14, y: 2, name: 'LANCE', art: 'lance', skin: '#d8a878', shirt: '#7a1a3a', pants: '#1a1a2a', hair: '#e07830',
         trainer: 'lance',
         dialogue: ["I am Lance. Dragons are mythical, yes — and so, it seems, is every trainer who reaches me.", "A legend, answered by a legend. The final chamber waits. Give him a battle worthy of the climb."] },
-      { x: 17, y: 2, name: 'CHAMPION', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 17, y: 2, name: 'CHAMPION', art: 'garychamp', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_champion',
         dialogue: ["Heh. Of course it's you at the top of the mountain, {player}. It was always going to be you.", "...Yeah. Okay. The chair's yours, Champion. Smell ya at the top — because I'll be back for it."] },
     ],
@@ -1801,7 +1801,7 @@ export const MAPS3 = {
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
     ],
     npcs: [
-      { x: 10, y: 4, name: 'GARY', art: 'rival', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
+      { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
       // (Pallet's lab has no interior map; the terminal stands by its door,
@@ -1844,7 +1844,7 @@ export const MAPS3 = {
         afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach — see maps.mjs center (same placement;
       // the scene fields him only while the Candy Coach rule is on).
-      { x: 2, y: 2, name: 'SPARRING COACH', art: 'coach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 2, y: 2, name: 'SPARRING COACH', art: 'sparcoach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
         sparCoach: true, sparSpecies: 'machop',
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
       { x: 7, y: 2, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,

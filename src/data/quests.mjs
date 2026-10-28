@@ -153,7 +153,7 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 export const TALE_NPCS = [
-  { map: 'pallet', x: 3, y: 4, name: 'MOM', art: 'youngster', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
+  { map: 'pallet', x: 3, y: 4, name: 'MOM', art: 'mom', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
     dialogue: ['Mind the grass on Route 1, love. And eat something that is not a Potion.'] },
   { map: 'viridian', x: 2, y: 7, name: 'SHOPKEEPER', art: 'youngster', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
     dialogue: ['Viridian sundries! Maps, string, and strong opinions about both.'] },

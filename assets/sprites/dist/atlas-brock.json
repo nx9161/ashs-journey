@@ -23,11 +23,11 @@
       "x": 35,
       "y": 1,
       "w": 16,
-      "h": 16,
+      "h": 32,
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -36,12 +36,12 @@
       "x": 53,
       "y": 1,
       "w": 16,
-      "h": 16,
+      "h": 32,
       "frames": [
         "idle",
         "idle2"
       ],
-      "palette": 6,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

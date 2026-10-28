@@ -944,3 +944,160 @@ audit supersedes it.
   after the battery's full builds; `dist/content-hash.txt`
   personal line restored to the HEAD value), per precedent.
 - Verify-live expectation impact: none (nothing deployed).
+
+## World Art Wave 3a — Hero, Follower, Named Cast (2026-10-28)
+
+Implementer pass for the world-art elevation (census:
+`ashs-journey-qa/world-art-census.md` §3 character rows + §4 Wave 3,
+first half). Presentation only — no game state, balance, dialogue, or
+map layout changed; nothing deployed. Wave 3b (generic population +
+portrait/trainer wiring) follows and is NOT in this commit. All art is
+original `.pix` work drawn to §3 — redesigns, not recolors, nothing
+traced or copied from any game.
+
+### 1. Ash — full redraw at 16×32 (24 authored files)
+
+All 24 frame files (`assets/sprites/pix/ash/`) redrawn at 16×32:
+4 directions × (idle-1/2 + walk-1..4), frame counts and the
+idle/walk cadence exactly as before (control parity: `playerSprite`'s
+200ms walk cycle and 500ms idle blink untouched).
+
+**Frame-scheme reconciliation (flagged per the wave brief):** the
+census §3 line "30 files" counts the 24 frame ids PLUS the 6
+right-facing frames as new authoring. On disk the count resolves to
+**24 authored `.pix` files**: the 18 previously-authored frames
+redrawn, and the 6 `ash-right-*` files converted from `MIRROR`
+stubs into full authored grids. Total ash ART keys unchanged (24),
+zero lost.
+
+- **True right-facing frames:** the right set is drawn, not mirrored —
+  cap logo patch (white patch + gold dot on the dome), the chest-strap
+  buckle moved to the hip, and a backpack pocket flap that the left
+  set does not have. Measured: `ash-right-walk-1` vs the horizontal
+  flip of `ash-left-walk-1` differs in exactly 5 pixels, all in the
+  strap/logo region — (11,3), (11,4) logo; (9,18), (10,19) hip
+  buckle; (4,16) bag pocket.
+- Shading standard: ≥3 shades per garment (jacket j/J/B, cap K/k +
+  white panel W/w), 2 skin tones (S/s), hair highlight + shadow
+  (h/H/d), real 2px eyes + brows + mouth at the bigger canvas,
+  backpack with straps front and a shaded pack + flap on the back
+  view.
+
+### 2. Pikachu follower — redraw + visibility fix
+
+- Redrawn at **16×20** (kept smaller than the 16×32 humanoid canvas —
+  it is a Pikachu; `blitCharacter`'s aspect-preserving bottom anchor
+  handles it with no draw-path change): hop-1/2 redrawn +
+  **new idle-1/2** (blink / ear-twitch). Four yellow steps
+  (y #ffdf6b / Y #f5c93c / D #dda01e / d #b57a14), dark shaded ear
+  tips, a constructed zigzag tail (brown base → shaded yellow
+  segments, visible beside the body), two-tone shaded cheeks.
+- **Idle wiring:** `Game.partnerFrame(idle)` plays the idle pair at
+  the player's 500ms rest cadence when the player is not moving; the
+  280ms hop cycle while travelling is unchanged.
+- **Visibility fix (presentation only)** — `src/game/overworld.mjs`
+  render: the follower's DISPLAY position steps aside while its
+  logical position (`this.partner.px/py`, the trail, the pet
+  interaction check) is untouched. When the display tile equals the
+  player's tile (spawn / warp landing, where the empty trail used to
+  stack it invisibly under Ash) it draws one tile west — beside Ash.
+  When it shares the player's column (vertical trail, where its body
+  used to land on the tall Ash sprite's head) it draws 10px east.
+  Self-check captures (`ashs-journey-qa/wave3a-selfcheck-shots/`):
+  at Pallet spawn Pikachu stands west of Ash, fully visible; after
+  southward steps it settles beside, never under.
+
+### 3. Named cast — 20 individual sprites × 2 idle frames
+
+New/redrawn kinds (all 16×32, all ≥10 colors — measured range
+12–15 after the leg-geometry fix below): **gary** (spiky hair,
+pendant), **garychamp** (Gary + crimson cape/gold trim — the League
+CHAMPION), **mom** (bun, apron dress), **hawthorn** (gray beard,
+glasses, lab coat), **brock** (redrawn in place, vest + undershirt),
+**misty** (side ponytail, midriff top, shorts), **surge** (broad,
+flat-top, sunglasses, dog tags, camo), **erika** (long hair, kimono
+sleeves, gold obi), **koga** (topknot, magenta scarf over the mouth),
+**sabrina** (long purple-shadowed hair, gold collar), **blaine**
+(bald, gray moustache, glasses), **giovanni** (slick hair, suit, red
+tie, stern brows), **lorelei** (long red hair, glasses, dress),
+**bruno** (bare chest, diagonal strap, gold belt), **agatha**
+(hunched, bun, cane), **lance** (red spikes, cape, gold trim),
+**rue** (uniform, drawn-on moustache per his Bonds note), **cole**
+(uniform, red hair), **nurse** (redrawn in place: pink hair rolls,
+nurse cap, cross apron), **sparcoach** (buzz cut, tracksuit stripes,
+whistle — split from the generic `coach` kind, which the Pewter
+advice NPCs keep).
+
+- **Repoints: 39 instances** across `maps.mjs` / `maps2.mjs` /
+  `maps3.mjs` / `maps4.mjs` / `quests.mjs` (MOM tale NPC) /
+  `bonds.mjs` (parley RUE/COLE) — every GARY (7, incl. S.S. Anne,
+  Tower, Silph, League approach), CHAMPION (→ garychamp), all eight
+  gym leaders incl. the duplicated gym maps in maps3/maps4, all four
+  Elite Four in BOTH League layouts, Giovanni in both his rooms,
+  RUE/COLE on Route 2 and at the Celadon parley, SPARRING COACH
+  in both Center definitions. Static audit over the merged instance
+  set: **212 NPC instances, every one resolves to authored idle
+  frames; zero named instances left on a generic kind.**
+- **Swap discipline:** every named kind is authored on the uniform
+  S (skin) / H (hair) / J (shirt) / P (pants) palette keys and
+  registered in `NPC_SWAP_KEYS` (`art.mjs`) — nurse and brock moved
+  off their Wave 0 one-off keys (T/V) onto the same scheme. Authored
+  palettes were checked against instance data palettes: Gary ×7,
+  Mom, Misty, Surge, Erika, Koga, Giovanni, the Elite Four and
+  Rue/Cole instances agree (authored = data, so the swap is an
+  identity mapping for them). **Flagged data disagreements (not
+  changed — data is content):** Blaine's maps4 instance carries a
+  different shirt/hair than maps2/maps3, Lance's maps3 hair is
+  orange vs maps2 red, Sabrina's maps4 shirt/hair differ slightly,
+  Bruno's maps3 shirt differs; for those rooms the swap rasterizer
+  honors the per-instance data, as designed in Wave 0.
+- **Craft fix found during the pass:** 2-wide leg columns are all
+  outline pixels by construction, so first-draft legs rendered as
+  black sticks and pants colors never appeared. Legs were rebuilt as
+  a shaded thigh block + 3-wide lower legs (Ash's front legs too);
+  every named sprite then measures 12–15 distinct colors.
+
+### 4. Hawthorn — sprite delivered, NOT placed (flag)
+
+Hawthorn's dialogue does not happen at any map standing spot: he
+speaks in the intro cutscene and through UI `say` panels (Dex rating,
+diploma). Pallet's lab has no interior map, and the lab sign states
+he is out on Route 1 — but no Hawthorn NPC or dialogue exists on
+Route 1 either. Placing him would require new dialogue/interaction
+content, so per the wave rule he was **not placed**. His sprite ships
+as `npc-hawthorn-idle-1/2` with the kind fully wired (`NPC_SWAP_KEYS`
+entry; any future instance with `art: 'hawthorn'` renders him). The
+orphaned legacy `npc-professor-*` art is untouched (zero keys lost).
+
+### 5. Ground shadows — shared renderer mechanism
+
+`Renderer.blitCharacter` (render.mjs) now draws a soft ground shadow
+for every character it blits — player, follower, and all NPCs —
+via `Renderer.characterShadow`: a stepped pixel ellipse in two
+alpha passes (outer `rgba(16,22,14,0.16)`, core `0.20`), rect-only
+like `ptDisc` so the headless recording ctx renders it identically.
+Not baked into any sprite. The follower passes its true ground line
+separately so the shadow stays planted while it hops.
+
+### 6. Bytes + battery at this commit
+
+- `art-data.mjs` 208,902 → **265,746 B (+56,844)** — inside the
+  3a share (~95,000 B) of the 140,000 B Wave 3 budget; **83,156 B
+  remains for Wave 3b**. ART keys **252 → 290 (+38: 36 named-cast
+  files + pikachu-idle-1/2), zero lost**; build-art run twice =
+  byte-identical. `public/game.js` 1,433,590 → **1,494,883 B**
+  (+61,293, art + the §2/§5 code).
+- Battery (public): rejuv-phase1 **44/44** · phase2 **42/42** ·
+  phase3 **63/63** · phase4 **53/53** · phase5 **55/55** · phase6
+  **46/46** · fidelity **35/35** · campaign-smoke **24/24** ·
+  audit-headless **17/17** · audit-laptop public **41/41** ·
+  verify-slice **48/48** · qa-slice **134/134** · validator test
+  **51/51** · validator fuzz **2000/2000** · save-contract **6/6**
+  · Track B **114/114** · budgets-check **all gates pass** ·
+  contamination **clean** · drift-gate guest ≡ strip(vercel) PASS ·
+  qa-changed-flows **failures exactly the standing baseline
+  {b2, d9}**.
+- **personal/ is byte-identical to HEAD** in this commit (restored
+  after the battery's full builds; `dist/content-hash.txt`
+  personal line restored to the HEAD value), per precedent.
+- Verify-live expectation impact: none (nothing deployed).
