@@ -607,5 +607,114 @@ const p1Driver = `
   ok('E08d P1 validator rejects a malformed story.lastCenter', badRes.ok === false && badRes.errors.includes('bad-lastCenter'), JSON.stringify(badRes.errors));
 }
 
+// ================= Part F: Shift edge gates =================
+const edgeDriver = `
+;(function () {
+  const out = {};
+  const game = new Game(null);
+  game.ui.init(); game.input.bindKeyboard(); game.buildSprites(); game.applyLayout();
+  const input = game.input, ui = game.ui, st = game.state;
+  const ow = new OverworldScene(); game.scenes.push(ow); ow.enter();
+  const pressKey = (k) => { input.inject(k); game.loop.stepTicks(2); input.release(k); game.loop.stepTicks(2); };
+  const settle = (b) => { for (let i = 0; i < 500; i++) { if (b.msgOpen) { const cb = b.msgCb; b.msgCb = null; b.msgOpen = false; if (cb) cb(); else b.afterMsg(); } else break; } };
+  const prompts = () => ui.log.filter((l) => l.ui === 'battle-msg' && typeof l.text === 'string' && l.text.includes('is about to send out')).length;
+  game.rng.battle = () => 0.5;
+  const killFoe = (b) => {
+    b.foe.hp = 1;
+    const ally = b.ally;
+    ally.moves = [{ id: 'quickattack', pp: 99, maxPp: 99 }];
+    b.execMoveContinue({ side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.quickattack, action: { type: 'move', idx: 0 } });
+    settle(b);
+  };
+  const trainer2 = () => ({ id: 'edge_trainer', name: 'Edge', team: [{ species: 'rattata', level: 10 }, { species: 'pidgey', level: 10 }], reward: 100, intro: ['Edge intro.'], lose: ['Edge lose.'] });
+
+  // (F01) SHIFT + solo party: no legal switch target -> NO prompt.
+  {
+    st.settings.switchMode = 'shift';
+    st.party = [makeMon('partner', 20, SPECIES, MOVES)];
+    const b = new BattleScene({ kind: 'trainer', trainer: trainer2(), returnTo: ow, rt: false });
+    game.scenes.push(b); b.enter(); settle(b);
+    const before = prompts();
+    killFoe(b);
+    out.f1Prompts = prompts() - before; out.f1State = b.state;
+    game.scenes.pop();
+  }
+
+  // (F02) SHIFT + Yes -> party menu -> BACK re-asks the prompt exactly
+  // once more; answering No then sends the foe out.
+  {
+    st.settings.switchMode = 'shift';
+    const lead = makeMon('partner', 20, SPECIES, MOVES);
+    const reserve = makeMon('pidgey', 18, SPECIES, MOVES);
+    st.party = [lead, reserve];
+    const b = new BattleScene({ kind: 'trainer', trainer: trainer2(), returnTo: ow, rt: false });
+    game.scenes.push(b); b.enter(); settle(b);
+    ui.menu = null; // the move pick closes the grid in real flow
+    const before = prompts();
+    killFoe(b); // -> KO'd foe's XP first (animated: needs real ticks)...
+    let wn = 0;
+    while (wn++ < 600) { game.loop.stepTicks(2); settle(b); if (ui.menu && ui.menu.items.some((it) => it.label === 'Yes')) break; }
+    out.f2PromptAfterKO = prompts() - before;
+    const menu = ui.menu;
+    out.f2MenuIsPrompt = !!menu && menu.items.some((it) => it.label === 'Yes') && menu.items.some((it) => it.label === 'No');
+    const yesIdx = menu.items.findIndex((it) => it.label === 'Yes');
+    ui.debugChoose(yesIdx); settle(b);
+    out.f2PartyMenuOpen = !!ui.menu && ui.menu !== menu;
+    pressKey('b'); settle(b); // back out of the party menu
+    // Re-ask = the Yes/No menu is presented again; the prompt LINE
+    // itself still fired exactly once for this KO (exactly-once rule).
+    out.f2PromptsAfterBack = prompts() - before;
+    out.f2ReaskMenu = !!ui.menu && ui.menu.items.some((it) => it.label === 'Yes') && ui.menu.items.some((it) => it.label === 'No');
+    const menu2 = ui.menu;
+    if (menu2 && menu2.items.some((it) => it.label === 'No')) { ui.debugChoose(menu2.items.findIndex((it) => it.label === 'No')); settle(b); }
+    out.f2StateAfterNo = b.state;
+    game.scenes.pop();
+  }
+
+  // (F03) RT + switchMode 'shift': RT flow unchanged — no prompt, the
+  // next foe is simply sent (rtSendNextFoe path).
+  {
+    st.settings.switchMode = 'shift';
+    st.party = [makeMon('partner', 20, SPECIES, MOVES)];
+    const b = new BattleScene({ kind: 'trainer', trainer: trainer2(), returnTo: ow, rt: true });
+    game.scenes.push(b); b.enter(); settle(b);
+    const before = prompts();
+    b.foe.hp = 1;
+    b.rtApplyDamage('ally', MOVES.thundershock); settle(b);
+    // RT send-out is clock-driven; tick until the second foe is in.
+    let n = 0; while (b.trainerIdx < 1 && n++ < 400) { game.loop.stepTicks(2); if (b.msgOpen) settle(b); }
+    out.f3Prompts = prompts() - before; out.f3TrainerIdx = b.trainerIdx;
+    game.scenes.pop();
+  }
+
+  // (F04) Tutorial + SHIFT settings: the gate stays shut.
+  {
+    st.settings.switchMode = 'shift';
+    st.party = [makeMon('partner', 20, SPECIES, MOVES), makeMon('pidgey', 18, SPECIES, MOVES)];
+    const b = new BattleScene({ kind: 'trainer', trainer: trainer2(), returnTo: ow, rt: false, tutorial: true });
+    game.scenes.push(b); b.enter(); settle(b);
+    out.f4Gate = b._shiftApplies();
+    const before = prompts();
+    killFoe(b);
+    out.f4Prompts = prompts() - before;
+    game.scenes.pop();
+  }
+  st.settings.switchMode = 'set';
+
+  console.log('EDGE-RESULT ' + JSON.stringify(out));
+})();`;
+{
+  const logs5 = [];
+  const origLog5 = console.log;
+  console.log = (...a) => { logs5.push(a.join(' ')); };
+  try { eval(gameJs + edgeDriver); } finally { console.log = origLog5; }
+  const r = JSON.parse((logs5.find((l) => l.startsWith('EDGE-RESULT')) || 'EDGE-RESULT {}').slice(12));
+  ok('F01 SHIFT edge: solo party gets no prompt (no legal switch target)', r.f1Prompts === 0, JSON.stringify(r));
+  ok('F02 SHIFT edge: Yes opens the party menu; Back re-presents the prompt menu (line still exactly once); No sends the foe out',
+    r.f2PromptAfterKO === 1 && r.f2MenuIsPrompt === true && r.f2PartyMenuOpen === true && r.f2PromptsAfterBack === 1 && r.f2ReaskMenu === true && r.f2StateAfterNo === 'command', JSON.stringify(r));
+  ok('F03 SHIFT edge: RT battles never prompt (flow unchanged)', r.f3Prompts === 0 && r.f3TrainerIdx === 1, JSON.stringify(r));
+  ok('F04 SHIFT edge: tutorial battles never prompt', r.f4Gate === false && r.f4Prompts === 0, JSON.stringify(r));
+}
+
 console.log('battle-model-checks: ' + pass + '/' + (pass + fail) + ' passed');
 process.exit(fail ? 1 : 0);
