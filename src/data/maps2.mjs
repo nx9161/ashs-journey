@@ -706,7 +706,7 @@ export const MAPS2 = {
       '#.....dXef.......#',
       '#.ghi.UUUU..ghi..#',
       '#.rsu.SVYU..rsu...',
-      '..n.no.....o.....#',
+      '..n.n......o.....#',
       '#.....jklm..aObbc#',
       '..o.p.AJKA.nPPPPP#',
       '#.........o.12PPP#',

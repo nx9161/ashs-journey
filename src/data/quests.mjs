@@ -177,7 +177,11 @@ export const TALE_NPCS = [
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
   { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
-  { map: 'celadon', x: 16, y: 9, name: 'GARDENER', art: 'worker', ...APPEAR.gardener, tale: 'tale_celadon', role: 'giver',
+  // Celadon fragmentation fix (2026-10-28): the GARDENER stands at
+  // (15,9), NOT (16,9) — (16,9) is the Route 8 gate's only approach tile
+  // and its landing tile; an NPC there seals the gate (see
+  // ~/workspace/ashs-journey-qa/celadon-fix.md).
+  { map: 'celadon', x: 15, y: 9, name: 'GARDENER', art: 'worker', ...APPEAR.gardener, tale: 'tale_celadon', role: 'giver',
     dialogue: ["Erika's roof garden. Three waterings a season, or the vines file a complaint."] },
   { map: 'fuchsia', x: 5, y: 11, name: 'JANINE', art: 'lass', ...APPEAR.janine, tale: 'tale_fuchsia', role: 'flavor',
     dialogue: ["Father says a ninja's patience is a pond: still on top, deep below. I am working on the still part."] },

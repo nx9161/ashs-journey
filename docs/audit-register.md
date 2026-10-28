@@ -2525,3 +2525,62 @@ cinnabar-proof-shots/).
   New Island exit warps → Vermilion, arrival story-gated ✓; Seafoam
   exits → Route 20, entry already behind the same sea gate ✓.
   Nothing deployed (parent ships).
+
+## Celadon Fragmentation — S1 fixed + Saffron same-class (2026-10-28, mission close)
+
+Owner-visible progression break found via the Cinnabar investigation
+(sibling S1), fixed on base `dd83d3a`. Full investigation, fragment
+maps, and proofs at ~/workspace/ashs-journey-qa/celadon-fix.md
+(probe `celadon-diag-probe.mjs`, sweep `celadon-sweep.mjs`, walking
+driver `celadon-regression-driver.mjs`, shots in `celadon-fix-shots/`).
+
+- **Root cause 1 (the seam):** Celadon's east↔west street junction
+  tile (5,4) — where the column-5 gym path meets the row-4 street —
+  is a decorative lamp `o` (solid). One dressing tile split the city
+  in two: entering from Route 7 the live engine reaches only 32 tiles
+  (gym + east-house doors, way back); the Center, Mart, Game Corner,
+  house-w, and both other gates are unreachable. From Route 16 the
+  mirror image (80 tiles; gym/east-house/Route 7 unreachable). Every
+  QA suite seeds positions per-map, so no suite ever walked in and
+  tried to cross — the same blind spot as the Cinnabar trap.
+- **Root cause 2 (residual seal, live-only):** the Route 8 gate
+  (17,9) has exactly one approach tile, (16,9), and the tale NPC
+  GARDENER (quests.mjs TALE_NPCS, appended by loadMap) stands
+  permanently on it. Map-data models cannot see him — the
+  coordinator's static BFS counted the gate as reachable from the
+  west; the live engine proved it sealed (and that entering FROM
+  Route 8 lands the player on the NPC's own tile).
+- **Fix (3 one-token changes):** Celadon (5,4) `o`→`.` in
+  maps2.mjs (the junction is floor again; five lamps remain);
+  GARDENER (16,9)→(15,9) in quests.mjs (same row, beside the gate;
+  his talk-driven tale is found by name everywhere — no coordinate
+  references exist); Saffron (11,4) `o`→`.` in maps3.mjs (below).
+  Untouched: gym sign (6,3), fences (2,4)/(4,4), HOSTESS (11,8),
+  fence (12,9).
+- **All-cities sweep (same defect shape):** pallet, viridian,
+  pewter, cerulean, vermilion, lavender, fuchsia, cinnabar all PASS
+  (one fragment, every warp from every entry, engine-faithful NPC
+  model). **Saffron FAILED with the identical class:** the Silph Co.
+  plaza is a 17-tile pocket sealed from the 101-tile city by two
+  street lamps on row 4, (6,4) and (11,4) — Silph's doors were
+  enterable only by suites seeding inside. Fixed here with the same
+  minimal shape (east lamp (11,4) opened; one suffices, sweep-proven).
+  Live-engine confirmed both cities before and after.
+- **Verification:** post-fix live-engine BFS — Celadon every entry
+  114 tiles / all 13 warps; Saffron every entry 119 tiles / all 13
+  warps (parley-window variant also PASS). Walking regressions
+  25/25 (boot on Route 7, NO seeding inside Celadon: Center, Mart,
+  Game Corner, Gym doors in+out; Route 8 exit + walk back in; Route
+  16 exit; bonus Saffron set from Route 9 incl. Silph doors in+out).
+  Full battery: build OK; qa-changed-flows fails EXACTLY {b2, d9}
+  (standing baseline); campaign-smoke 24/24; fidelity 35/35;
+  battle-model 45/45; rejuv 1–6 (44/42/63/53/55/46); Track B
+  114/114 (documented --import invocation; plain `npm test` omits
+  the flag in this checkout — pre-existing harness quirk, unrelated);
+  verify-slice 134/134; audit-headless 17/17; audit-laptop 41/41
+  standalone; budgets PASS; contamination clean; audio ALL PASS;
+  drift gate PASS on the full build. personal/ byte-identical.
+- **Queued (different class, NOT fixed):** the missing Route 11 ↔
+  Route 12 warp link the Town Map draws (missing connection, not a
+  sealed region — the west ↔ south-east land route stays broken at
+  the graph level; parent's call). Nothing deployed (parent ships).

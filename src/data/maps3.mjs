@@ -179,7 +179,7 @@ export const MAPS3 = {
       '#....d3eeef..aOc.#',
       '#....Z6ZZ6Z..P12.#',
       '#....ZZZ45Z......#',
-      '#.n...o....o......',
+      '#.n...o...........',
       '#.abbc....dXefn..#',
       '#.vvvv.S..UUUU...#',
       '#.v78v....SVYU..n#',
