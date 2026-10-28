@@ -701,13 +701,21 @@ non-town rows + warps byte-identical; per-map warp-destination
 multisets identical; signs / NPCs / events / hidden items / items /
 starts identical in all 56 maps; BFS reachability from every warp
 landing, via-return, start, and border opening reaches every warp
-trigger, and every NPC and coordinate sign keeps a reachable adjacent
+trigger **[CORRECTED by the fix pass below: seeding via-return
+landings made this BFS circular for exactly the Center-door case
+and the claim was wrong for Fuchsia + Cinnabar; the corrected
+audit and its results are recorded there]**, and every NPC and
+coordinate sign keeps a reachable adjacent
 cell; injected actors (10 TALE_NPCS + Celadon parley pair) all stand
 on plain floor (one lamp was moved off the parley tile at Celadon
 (9,8) — phase5 A28 caught it, now 55/55).
 
 - **FLAGGED — Center door triggers moved one tile south, in every
-  Center town (32 warp entries across the duplicated town defs):**
+  Center town (18 effective warp entries — 9 Center towns × 2 door
+  halves; corrected by the fix pass below: the original "32" counted
+  every duplicated/shadowed definition in the source files —
+  maps.mjs 2 + maps2 18 + maps3 12 — of which only the merged 18
+  are live):**
   at HEAD the Center's step-warp sat on the building's NORTH row
   (every other building in the game warps from its south row, and
   every Center `via` return already lands one tile south of the
@@ -780,3 +788,159 @@ baseline **{b2, d9}**.
 - Verify-live expectation impact: none (nothing deployed). When
   Wave 2 is deployed, the visible differences are the towns
   themselves — no strings, flows, menus, or counts changed.
+
+## World Art Wave 2 — Fix Pass (warp integrity) (2026-10-28)
+
+Independent QA **FAILED** Wave 2 §5 (warp integrity; art passed):
+live drives proved the Fuchsia and Cinnabar Pokémon Centers
+**unreachable on foot**. This pass fixes that defect, corrects the
+§3 record, and re-proves reachability with a non-circular audit.
+Map-data only — no `src/game` / `src/engine` change. Nothing
+deployed.
+
+### The defect
+
+Both towns place another building's roof 2 rows south of the
+Center facade, leaving a 1-row door-front pocket at (7–8, 8).
+Wave 2 dressing placed lamps (`o`, non-walkable) on both pocket
+mouths, (6,8) and (9,8), sealing the pocket: the Center door
+triggers (7,7)/(8,7) could only be reached from inside the pocket
+itself. At a132397 that row was open ground. QA evidence:
+`ashs-journey-qa/wave2-qa-shots/` (08b/09/10b drives — a player
+spawned in the pocket can leave only by entering the Center; a
+player outside cannot get in).
+
+### Root cause — the circular BFS (standing lesson)
+
+The Wave 2 §3 audit seeded its BFS from "every warp landing,
+via-return, start, and border opening". A Center's `via` return
+lands exactly on its door-front tile — the pocket. Seeding from
+the via-return therefore assumed the very reachability the audit
+was meant to prove, for exactly the case that was broken. **Never
+seed a reachability proof from a return landing, or from the
+trigger's own pocket: a return is evidence you once got in, not
+proof you still can.**
+
+### Remedy (dressing relocation only)
+
+In Fuchsia and Cinnabar (both duplicated defs, `maps2.mjs` +
+`maps3.mjs`; 8 row strings total, char-for-char, byte-flat):
+
+- Row 8: lamps removed from the pocket mouths — (6,8) `o`→`.` and
+  (9,8) `o`→`.` in both towns (Fuchsia row 8 `#.pFF.o..o.FFp...#`
+  → `#.pFF......FFp...#`; Cinnabar `#.pFF.o..o.FF.p..#` →
+  `#.pFF......FF.p..#`).
+- Row 7: the same two lamps relocated to the Center facade's
+  flanks — `.`→`o` at (5,7) and (10,7), row 7 `#.....AJKA.......#`
+  → `#....oAJKAo......#` in both towns. This is the template's own
+  precedent: Indigo already flanks its Center facade exactly this
+  way. The tiles are plain street ground — no warp, landing, NPC,
+  sign, event, or item stands on them, and neither tile is a
+  door-front or a through-chokepoint (the facade itself already
+  breaks row 7; BFS-verified below).
+- The pocket now has **two independent mouths**: blocking either
+  (6,8) or (9,8) alone in the BFS still leaves both pocket tiles
+  and both door triggers reachable through the other mouth.
+- Density unchanged (lamp count and interior ground count both
+  invariant under the swap): Fuchsia **1 per 7.9**, Cinnabar
+  **1 per 7.5** ground tiles — identical to the Wave 2 §4 figures,
+  re-measured with the same formula (decor F/S/fence/lamp/
+  flowerbed vs interior `.`/`,` ground); all 11 settlements
+  re-measured and reproduce the Wave 2 §4 table exactly.
+
+### Corrected audit (the non-circular method)
+
+Per map, BFS over `WALKABLE` tiles with sources = **map starts +
+cross-map warp landings only** (destinations of warps in other
+maps), **excluding** `viaExit` warps (dynamic Center returns;
+their static `to` is a fallback, not a landing) and **excluding**
+any landing coordinate that is a `via{}` return coordinate for
+that map. Warp triggers audited: **229 — reachable 226,
+unreachable 3**, and the 3 are exactly the pre-existing
+a132397 set, unchanged: `victoryroad@(17,5)` (warp on a `#`
+tile) and the `newisland` pair (8,10)/(9,10) (event-arrival map,
+no warp-in landing exists to seed from). The same audit run
+against a132397 gives 229 / 226 / the identical 3, so the fix
+restores the baseline exactly — **no new unreachable triggers**.
+At the Wave 2 commit the same audit gave 222 reachable with the
+4 Center triggers (Fuchsia (7,7)/(8,7), Cinnabar (7,7)/(8,7))
+as the only extra failures. Building-door approaches (110 door
+tiles, warp halves + decorative facades): every door has a
+reachable approach except the 4 pre-existing New Island doors
+(fronts are sign/border tiles, identical at a132397) and the 2
+edge facades listed under Findings. A single-point scan
+(each reachable trigger re-audited with each of its approach
+tiles blocked in turn) found **no trigger with a single
+load-bearing approach tile**.
+
+### Center-exit landings at (7,9) — disposition per town
+
+QA found Center exits land at (7,9) in every Center town
+(pre-existing engine behavior — `loadMap` overwrites
+`centerReturn` with `_lastCity`; engine code is out of scope for
+this art mission). Verified per town (tile + escapability — a
+player placed there can step to a reachable walkable tile):
+
+- **Open ground, landing tile itself walkable + reachable (6):**
+  Viridian `,` · Cerulean `.` · Vermilion `.` · Celadon `.` ·
+  Lavender `.` · Indigo `.`.
+- **Saffron (7,9) is the Center door tile `J` itself** — walkable,
+  reachable; stepping off south/east exits normally.
+- **Fuchsia (7,9) = `b` (roof-terra-m), Cinnabar (7,9) = `e`
+  (roof-slate-m)** — non-walkable (was a non-walkable `H` stamp
+  pre-wave, so not a Wave 2 regression), and **escapable both
+  ways**: north into the now-open pocket (7,8) and south onto the
+  Safari-gate / Mansion door warp (7,10). **Remedy considered and
+  NOT taken:** shifting the south building 1 tile south so (7,9)
+  becomes ground is not clean in either town — the shifted
+  facade would sit on the last interior row, its doors' fronts
+  would be the border row (`#` at (7,12); the route-exit warp at
+  (8,12) in Fuchsia), the roof would take the doors' current
+  row, and the doors would become unreachable from every side.
+  Left as-is, explicitly, per the fix-pass terms.
+
+### Findings (listed, not fixed — no clean dressing remedy)
+
+- **Vermilion south-dock house door `w`@(5,11) and Celadon south
+  house door `s`@(7,11)** are decorative facades (no warp, no
+  interior) on the maps' last interior row: their south fronts
+  are the border row, so no door-front tile exists. Wave 2
+  introduced the explicit door tiles (at a132397 these houses
+  were `H` stamps with open ground in front). Not fixable by
+  dressing relocation, and shifting either house 1 tile north is
+  not clean: in Vermilion the roof would cover the
+  `ev_squirtle_squad` event tile at (5,9), and in both towns the
+  roof would land exactly on the (7,9) Center-exit tile,
+  degrading an open-ground landing to a roof landing. Recorded
+  here so QA's door-approach re-audit has the disposition in
+  writing; footprint moves are a future-wave call.
+
+### Correction to §3 (record)
+
+The Center warp move was **18 effective entries (9 towns × 2 door
+halves)**, not 32 — see the amended FLAGGED bullet in §3 above.
+The §3 BFS claim is likewise corrected there; this section's
+audit supersedes it.
+
+### Bytes + battery at this commit
+
+- Map-data delta: 8 row strings char-for-char (byte-flat);
+  `art-data.mjs` unchanged at 208,902 B (ART keys **252, zero
+  lost**; build-art run twice = byte-identical, and identical to
+  the Wave 2 commit). `public/game.js` **1,433,590 B — exactly
+  the Wave 2 size** (the fix pass adds 0 bytes against the
+  +24,872 B Wave 2 total).
+- Battery (public): rejuv-phase1 **44/44** · phase2 **42/42** ·
+  phase3 **63/63** · phase4 **53/53** · phase5 **55/55** · phase6
+  **46/46** · fidelity **35/35** · campaign-smoke **24/24** ·
+  audit-headless **17/17** · audit-laptop public **41/41** ·
+  verify-slice **48/48** · qa-slice **134/134** · validator test
+  **51/51** · validator fuzz **2000/2000** · save-contract **6/6**
+  · Track B **114/114** · budgets-check **all gates pass** ·
+  contamination **clean** · drift-gate guest ≡ strip(vercel) PASS
+  + full three-edition PASS · qa-changed-flows **55/57, failures
+  exactly the standing baseline {b2, d9}**.
+- **personal/ is byte-identical to HEAD** in this commit (restored
+  after the battery's full builds; `dist/content-hash.txt`
+  personal line restored to the HEAD value), per precedent.
+- Verify-live expectation impact: none (nothing deployed).
