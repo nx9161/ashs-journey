@@ -1,0 +1,25 @@
+# Wave 2 architecture: gym sign on slate fascia: stone panel, original diamond glyph
+PIX tile-sign-gym 16 16
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aadssssyyssssdaa
+aadsssyssysssdaa
+aadsssyssysssdaa
+aadssssyyssssdaa
+aadssssyyssssdaa
+aadssssssssssdaa
+aaddddddddddddcc
+aaaaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #46586e slate-mid
+b #5f748f slate-light
+c #3a4657 slate-deep
+d #5a3a24 eave-trim
+s #8a8aa0 sign-stone
+y #ffd873 glyph-gold

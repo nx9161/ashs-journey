@@ -1,0 +1,25 @@
+# Wave 2 architecture: center roof, left slope (red)
+PIX tile-roof-center-l 16 16
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbbbbbbbbbbbbbb
+ccbbbbbbbbbbbbbb
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbcaaaaccaaacca
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbaaccaaaaccaaa
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbccaaaaccaaacc
+ccbaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #d84040 center-roof
+b #e86a8a center-roof-light
+c #a02828 center-roof-deep
+d #5a3a24 eave-trim
+w #eef7ff sign-white
+r #d84040 sign-red

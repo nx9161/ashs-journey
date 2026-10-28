@@ -1,0 +1,23 @@
+# Wave 2 architecture: slate roof, left slope
+PIX tile-roof-slate-l 16 16
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbbbbbbbbbbbbbb
+ccbbbbbbbbbbbbbb
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbcaaaaccaaacca
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbaaccaaaaccaaa
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbccaaaaccaaacc
+ccbaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #46586e slate-mid
+b #5f748f slate-light
+c #3a4657 slate-deep
+d #5a3a24 eave-trim

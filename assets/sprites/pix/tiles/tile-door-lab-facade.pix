@@ -1,0 +1,26 @@
+# Wave 2 architecture: lab facade door, recessed (non-enterable)
+PIX tile-door-lab-facade 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwwwttttttwwwww
+wwwwwtuuuutwwwww
+wwwwwtuuuutwwwww
+wwwwwtuuuutwwwww
+wwwwwtuuuutwwwww
+ssssstsssstsssss
+wwwwwtsssstwwwww
+wwwwwtsssstwwwww
+wwwwwtsssstwwwww
+wwwwwtsssstwwwww
+wwwwwtsssstwwwww
+wwwwllllllllwwww
+ssssssssssssssss
+PAL
+w #8a8aa0 metal-mid
+l #c2c8d4 metal-light
+s #46586e metal-dark
+t #5a3a24 trim
+u #2e63b0 porthole-glass
+h #5a9ae8 glass-shine
+q #3fa08a panel-teal

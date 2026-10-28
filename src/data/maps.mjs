@@ -11,13 +11,13 @@ export const MAPS = {
     rows: rows([
       '################',
       '#..............#',
-      '#..HH......HH..#',
-      '#..HH..SS..HH..#',
-      '#..............#',
+      '#.aqc.....abc..#',
+      '#.rsu..SS.usr..#',
+      '#.n.n....o...p.#',
       '#......##......#',
       '#......##......#',
-      '#..FF......FF..#',
-      '#..............#',
+      '#.pFF......FFp.#',
+      '#.....o..o.....#',
       '#......,,......#',
       '######....######',
     ]),
@@ -105,20 +105,20 @@ export const MAPS = {
     id: 'viridian', name: 'Viridian City', music: 'viridian-theme',
     rows: rows([
       '######....######',
-      '#......##......#',
-      '#..HH..##..HH..#',
-      '#..HH......HH..#',
-      '#......CC......#',
-      '#......CC......#',
-      '#..SS......SS..#',
+      '#.p....##....p.#',
+      '#.aqc..##.abc..#',
+      '#.rsu.....usr..#',
+      '#.....jklm.....#',
+      '#.....AJKA.....#',
+      '#..SS.o..o.SS..#',
       '#..............#',
-      '#..FF......FF..#',
+      '#.nFF......FFp.#',
       '#......,,......#',
       '######....######',
     ]),
     warps: [
-      { x: 7, y: 4, to: { map: 'center', x: 4, y: 4 } },
-      { x: 8, y: 4, to: { map: 'center', x: 5, y: 4 } },
+      { x: 7, y: 5, to: { map: 'center', x: 4, y: 4 } },
+      { x: 8, y: 5, to: { map: 'center', x: 5, y: 4 } },
       { x: 6, y: 0, to: { map: 'route2', x: 6, y: 12 } },
       { x: 7, y: 0, to: { map: 'route2', x: 7, y: 12 } },
       { x: 8, y: 0, to: { map: 'route2', x: 6, y: 12 } },
@@ -250,14 +250,14 @@ export const MAPS = {
     id: 'pewter', name: 'Pewter City', music: 'pewter-theme',
     rows: rows([
       '################',
-      '#......GG......#',
-      '#..HH..GG..HH..#',
-      '#..HH..EE..HH..#',
-      '#......GG......#',
+      '#....odXefo....#',
+      '#.def.UUUU.def.#',
+      '#.xyz.UVYU.zyx.#',
+      '#.n.n..99....p.#',
       '#......##......#',
-      '#..SS......SS..#',
+      '#..SS.o..o.SS..#',
       '#..............#',
-      '#..FF......FF..#',
+      '#..FF......FFp.#',
       '#......,,......#',
       '######....######',
     ]),
@@ -313,7 +313,11 @@ export const MAPS = {
 export const MAP_LIST = Object.keys(MAPS);
 
 // Tile passability: walkable kinds.
-export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F']);
+// Wave 2: the composable door halves (center J/K, mart 1/2, gym V/Y,
+// lab 4/5, wood 7/8) and entrance steps (9) are step-warp / threshold
+// tiles exactly like the legacy D/E/C doors — warps remain
+// coordinate-keyed in each map's warps[] list.
+export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9']);
 
 // Trainer definitions for the slice.
 // ai: 'opener-setup' = gym-leader flavor: open with a self-buff setup move if known

@@ -1,0 +1,25 @@
+# Wave 2 architecture: gym heavy door, right half (walkable warp tile)
+PIX tile-door-gym-r 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+ttstttttttttttww
+dtsddddddddddtww
+dtsddddddddddtww
+dtsllddllddlltww
+dtsddddddddddtww
+dtsddddddddddtww
+dtsddddddddddtww
+dtsllddllddlltww
+dtsddddddddddtww
+dtsddddddddddtww
+dtsddddddddddtww
+ttstttttttttttww
+ssssssssssssssss
+PAL
+w #8a8aa0 stone-mid
+l #c2c8d4 stone-light
+s #6a6a80 stone-dark
+t #5a3a24 trim
+d #3a4657 door-iron
+g #ffd873 window-lit

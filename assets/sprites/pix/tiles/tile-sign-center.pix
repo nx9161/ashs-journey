@@ -1,0 +1,25 @@
+# Wave 2 architecture: center sign on roof fascia: white panel, original plus glyph
+PIX tile-sign-center 16 16
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+arrrrrrrrrrrrrra
+arwwwwwwwwwwwwra
+arwwwwrrrwwwwwra
+arwwwwrrrrwwwwra
+crwwwwrrrrwwwwra
+arwwwwwrrrwwwwra
+arwwwwwwwwwwwwra
+arrrrrrrrrrrrrrc
+aaaaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #d84040 center-roof
+b #e86a8a center-roof-light
+c #a02828 center-roof-deep
+d #5a3a24 eave-trim
+w #eef7ff sign-white
+r #d84040 sign-red

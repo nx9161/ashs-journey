@@ -1,0 +1,24 @@
+# Wave 2 architecture: wooden double door, right half (walkable warp tile)
+PIX tile-door-wood-r 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+sslsssssssssssww
+ttlttttttttttsww
+ttlttttttttttsww
+ttltttdddddttsww
+ttltttdddddttsww
+ttltttdddddttsww
+ttlltttttttttsww
+ttltttdddddttsww
+ttltttdddddttsww
+ttltttdddddttsww
+ttlttttttttttsww
+sslsssssssssssww
+ssssssssssssssss
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 door-wood
+d #7a5a38 door-panel

@@ -607,3 +607,176 @@ standing baseline {b2, d9}**.
 - Verify-live expectation impact: none (nothing deployed). When Wave 1
   is deployed, the visible differences are the terrain system itself —
   no strings, flows, menus or counts changed.
+
+## World Art Wave 2 — Buildings & Towns (architecture set) (2026-10-28)
+
+Implementer pass for the world-art elevation (census:
+`ashs-journey-qa/world-art-census.md` §3 buildings + decoration-density
++ map-presence rows, §4 Wave 2, §5 risk 9). Layout + art only — no
+balance, story, or mechanics change. Nothing deployed.
+
+### 1. Pieces authored — 47 new `.pix` tiles (tiles family 55 → 102)
+
+All original, 16×16, in `assets/sprites/pix/tiles/`. Roofs ≥3 shading
+steps (ridge highlight / mid / shadow-side + eave trim), walls ≥3 steps
++ trim, framed windows (lit + unlit), recessed doors with step.
+
+- **Roofs (17):** terracotta `tile-roof-terra-l/m/r` +
+  `tile-roof-terra-chimney`; slate `tile-roof-slate-l/m/r`; teal
+  `tile-roof-teal-l/m/r`; Center red `tile-roof-center-l/m/r`;
+  per-type signs on the roof fascia — `tile-sign-center` (white panel,
+  original plus-in-circle glyph), `tile-sign-gym` (stone panel,
+  original diamond glyph), `tile-sign-mart` (blue panel, original
+  shopping-bag glyph), `tile-sign-lab` (metal panel, original flask
+  glyph). No copied logos or text art.
+- **Facades (26):** plaster house `tile-wall-house-lit`,
+  `tile-wall-house-unlit`, `tile-door-house`, `tile-wall-house-plain`;
+  wood house `tile-wall-wood-lit`, `tile-door-wood-facade`; brick
+  `tile-wall-brick-lit`, `tile-door-brick`, `tile-wall-brick-plain`;
+  Center `tile-wall-center`, `tile-door-center-l/r` (glass double
+  door); Mart `tile-wall-mart` (striped awning + goods window),
+  `tile-door-mart-l/r`; Gym `tile-wall-gym` (stone pillars, slit
+  window), `tile-door-gym-l/r`; Lab `tile-wall-lab`,
+  `tile-wall-lab-plain`, `tile-door-lab-l/r`, `tile-door-lab-facade`;
+  generic wooden double doors `tile-door-wood-l/r` (dojo / mansion /
+  safari gate / tower-class entrances); entrance `tile-step`.
+- **Dressing + shadow (4):** `tile-fence`, `tile-lamp`,
+  `tile-flowerbed` (transparent-surround objects, ground laid beneath
+  by the resolver, Wave 1 pattern), `tile-shadow` (ground-shadow strip
+  the resolver lays on every ground cell directly south of a building,
+  anchoring every structure).
+- The 5 legacy architecture tiles (`tile-house/door/gymwall/gymdoor/
+  centerdoor`) keep their ART keys and remain in use in interiors
+  (Wave 5 scope); towns no longer stamp them.
+- Wiring: new map chars in `src/engine/tiles.mjs` `TILE_CHARS`;
+  `TILE_ART` + `isArchKind` + shadow/object handling in
+  `src/engine/art.mjs` `resolveTileLayers`; door halves + steps added
+  to `WALKABLE` in `src/data/maps.mjs` (they are step-warp/threshold
+  tiles exactly like legacy D/E/C).
+
+### 2. Map-data pass — all 10 towns + Indigo Plateau (11 settlements)
+
+Every building footprint rebuilt from the set: footprints 3×2 to 6×3
+tiles, visual height 2–3 tiles, **exactly one roof and one door per
+building** (door halves L/R compose a single double door; house doors
+are single recessed facades). Distinct exteriors: Pokémon Center
+(red roof + plus sign + white/red facade — unmistakable), Mart/Dept.
+Store (Celadon Game Corner block: bag sign + awning), Gym (slate roof
++ diamond sign + stone pillars), Lab (Silph Co. + Cinnabar Lab: flask
+sign + metal panels), and 3 house styles (plaster / wood / brick)
+rotated per town with per-town roof colorways (terracotta, slate,
+teal) so towns no longer share one template. Town dressing added with
+fence / lamp / flowerbed pieces (see §4 for densities).
+
+- **No town's bounds were extended.** Every footprint fits inside the
+  existing rows; two footprints were shrunk/shifted to preserve the
+  original 1-tile gaps between distinct buildings (Viridian Gym
+  3-wide, Pewter east house shifted one tile east).
+- Per-town summary — Pallet: 2 plaster houses (one with chimney),
+  Mom stands at the left house's door. Viridian: 3-wide Gym (locked-
+  door event tile untouched), Center, plaster house. Pewter: 3-row
+  Gym with entrance steps (interior returns land beside the steps,
+  as authored), 2 brick houses. Cerulean: wood house, 3-wide Gym
+  (west expansion refused — the Bill event tile at (12,2) keeps its
+  ground), Center. Vermilion: wood house, 3-wide Gym (Chairman's
+  tile (13,2) kept clear), Center, south dock house completed to
+  2 rows. Celadon: plaster house ×2 + NE house, Gym (its coordinate
+  text sign kept at (6,3)), Center, Mart-fronted Dept./Game Corner
+  block, south house (Elias's tile (5,10) is ground again — he stood
+  on a house tile at HEAD). Saffron: Silph Co. as Lab (6-wide, flask
+  sign), Dojo as a wood building, Gym, Center. Lavender: plaster
+  house, Pokémon Tower as a stone signed building, Center. Fuchsia:
+  wood house, Gym, Center, Safari gate as a wood building. Cinnabar:
+  brick house (chimney), Gym, Center, Mansion (brick + wood doors),
+  Lab (flask sign, facade door). Indigo: plaster house, League as a
+  signed stone building, Center.
+
+### 3. Warp safety (§5.9) — how warps bind, and the one flagged move
+
+Warps are **coordinate-keyed** (`warps[] {x, y, to}` looked up by
+player position in `overworld.mjs warpAt`); they are not tile-keyed,
+and no warp's destination or arrival semantics changed anywhere.
+Audit (data-driven, before/after snapshots of all 56 maps):
+non-town rows + warps byte-identical; per-map warp-destination
+multisets identical; signs / NPCs / events / hidden items / items /
+starts identical in all 56 maps; BFS reachability from every warp
+landing, via-return, start, and border opening reaches every warp
+trigger, and every NPC and coordinate sign keeps a reachable adjacent
+cell; injected actors (10 TALE_NPCS + Celadon parley pair) all stand
+on plain floor (one lamp was moved off the parley tile at Celadon
+(9,8) — phase5 A28 caught it, now 55/55).
+
+- **FLAGGED — Center door triggers moved one tile south, in every
+  Center town (32 warp entries across the duplicated town defs):**
+  at HEAD the Center's step-warp sat on the building's NORTH row
+  (every other building in the game warps from its south row, and
+  every Center `via` return already lands one tile south of the
+  south row). The trigger now sits on the facade row's glass doors
+  (same x, y+1, same destination `center (4|5,4)`, same via return —
+  the return tile is now exactly the door-front tile). This is the
+  only warp-coordinate change in the wave; destinations, counts, and
+  arrival semantics are provably identical (audit above +
+  campaign-smoke 24/24 + fidelity warp-graph 35/35).
+- Live-drive evidence: campaign-smoke (24/24) and audit-laptop
+  (41/41) drive the shipped bundle through towns, Centers, and gyms;
+  the data-driven warp-graph proof covers every enterable building in
+  every town (in + out, all destinations).
+
+### 4. Density + door/roof audits (measured)
+
+- **Decoration density** (decor tiles F/S/fence/lamp/flowerbed vs
+  interior ground tiles, per town): Pallet 1 per 6.9 · Viridian 5.2 ·
+  Pewter 5.1 · Cerulean 7.1 · Vermilion 7.2 · Celadon 6.8 · Saffron
+  6.1 · Lavender 7.8 · Fuchsia 7.9 · Cinnabar 7.5 · Indigo 5.7 ground
+  tiles — every town inside the §3 target of ≥1 per ~8.
+- **Door/roof audit** (4-connectivity building clusters in all 11
+  settlements): every building has **exactly 1 door group**; every
+  typed building (Center / Gym / Mart / Lab / Silph / Tower / League)
+  has **exactly 1 sign tile**; houses have exactly 1 door facade.
+- **Scene color depth** (QA re-specified method: tiles-only logical
+  raster through the real resolver + ART): Pallet **22 → 33**
+  (post-Wave-1 → now); Viridian 40 · Pewter 31 · Cerulean 40 ·
+  Vermilion 35 · Celadon 41 · Saffron 39 · Lavender 36 · Fuchsia 41 ·
+  Cinnabar 40 · Indigo 36 unique colors. Zero non-void cells resolve
+  to an empty layer stack in any settlement.
+
+### 5. Palette + bytes
+
+- Tiles-family palette union: **48 / 48 — at the Wave 0 budget, no
+  raise taken** (15 new hexes planned; two planned hexes were remapped
+  onto existing union colors to fit: center-roof light → flower pink
+  `#e86a8a`, fence rail → `#a8845c`).
+- ART keys **205 → 252, zero lost**; build-art twice = byte-identical
+  `art-data.mjs` + atlases.
+- `art-data.mjs` 184,030 → 208,902 B = **+24,872 B vs the 35,000 B
+  Wave 2 budget**; `public/game.js` 1,404,586 → 1,433,590 B.
+  Map-data growth reported separately: maps files +306 B total
+  (char-for-char row rewrites; the delta is the WALKABLE comment).
+
+### 6. Battery at this commit (public battery)
+
+rejuv-phase1 **44/44** · phase2 **42/42** · phase3 **63/63** · phase4
+**53/53** · phase5 **55/55** · phase6 **46/46** · fidelity **35/35** ·
+campaign-smoke **24/24** · audit-headless **17/17** · audit-laptop
+public **41/41** · verify-slice **48/48** · qa-slice **134/134** ·
+validator test **51/51** · validator fuzz **2000/2000** ·
+save-contract **6/6** · Track B **114/114** · budgets-check **all
+gates pass** · contamination **clean** · drift-gate guest ≡
+strip(vercel) PASS · qa-changed-flows failures exactly the standing
+baseline **{b2, d9}**.
+
+### Standing notes from this pass
+
+- **personal/ is byte-identical to HEAD in this commit** (retired
+  edition): restored after the battery's full builds, and
+  `dist/content-hash.txt`'s personal line restored to the HEAD value,
+  per the Wave 0/1 precedent.
+- **Pre-existing quirks found (NOT changed, identical at HEAD):**
+  several coordinate signs do not sit on `S` tiles (Pallet lab,
+  Celadon mart, Saffron gym, Routes 5/16, Mansion rocks) — sign
+  interaction is coordinate-keyed and works regardless; Victory Road
+  has a warp entry on a `#` tile at (17,5). Both predate this wave
+  and are outside its scope.
+- Verify-live expectation impact: none (nothing deployed). When
+  Wave 2 is deployed, the visible differences are the towns
+  themselves — no strings, flows, menus, or counts changed.

@@ -8,6 +8,25 @@ export const TILE_CHARS = {
   'E': 'gymdoor', 'C': 'centerdoor', 'F': 'flower', 'R': 'rock',
   'T': 'tree', 'B': 'rock', 'W': 'water',
   ' ': 'void',
+  // Wave 2 composable architecture (assets/sprites/pix/tiles/tile-*):
+  // roofs (top row of every building; one roof spans L/M/R + sign/chimney)
+  a: 'roof-terra-l', b: 'roof-terra-m', c: 'roof-terra-r', q: 'roof-terra-chimney',
+  d: 'roof-slate-l', e: 'roof-slate-m', f: 'roof-slate-r',
+  g: 'roof-teal-l', h: 'roof-teal-m', i: 'roof-teal-r',
+  j: 'roof-center-l', k: 'sign-center', l: 'roof-center-m', m: 'roof-center-r',
+  X: 'sign-gym', O: 'sign-mart',
+  // facades (bottom row: framed windows + exactly one door per building)
+  r: 'wall-house-lit', u: 'wall-house-unlit', s: 'door-house', t: 'wall-house-plain',
+  v: 'wall-wood-lit', w: 'door-wood-facade',
+  x: 'wall-brick-lit', y: 'door-brick', z: 'wall-brick-plain',
+  A: 'wall-center', J: 'door-center-l', K: 'door-center-r',
+  P: 'wall-mart', 1: 'door-mart-l', 2: 'door-mart-r',
+  U: 'wall-gym', V: 'door-gym-l', Y: 'door-gym-r',
+  Z: 'wall-lab', 6: 'wall-lab-plain', 3: 'sign-lab', 4: 'door-lab-l', 5: 'door-lab-r', 0: 'door-lab-facade',
+  7: 'door-wood-l', 8: 'door-wood-r',
+  9: 'step',
+  // town dressing (objects on the ground they stand on)
+  n: 'fence', o: 'lamp', p: 'flowerbed',
 };
 
 const PAL = {

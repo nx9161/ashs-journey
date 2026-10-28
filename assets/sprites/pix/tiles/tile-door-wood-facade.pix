@@ -1,0 +1,26 @@
+# Wave 2 architecture: wood house facade, recessed door with step (non-enterable)
+PIX tile-door-wood-facade 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwswttttttttwsww
+wwswtsssssstwsww
+wwswtsssssstwsww
+wwswtsssssstwsww
+wwswtsssssstwsww
+wwswtssstgstwsww
+wwswtsssststwsww
+wwswtsssssstwsww
+wwswtsssssstwsww
+wwswtsssssstwsww
+wwswtsttttstwsww
+wwwllllllllllwww
+wwssssssssssssww
+PAL
+w #a8845c wood-mid
+l #b09468 wood-light
+s #7a5a38 wood-shadow
+t #5a3a24 trim
+g #ffd873 window-lit
+u #2e63b0 window-glass
+h #5a9ae8 glass-shine

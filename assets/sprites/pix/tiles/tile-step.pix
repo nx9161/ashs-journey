@@ -1,0 +1,23 @@
+# Wave 2 architecture: entrance steps: stone slabs over path (walkable, no warp)
+PIX tile-step 16 16
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wwwsswwwwwwwwwww
+wwwwwwwwwwwsswww
+ssssssssssssssss
+llllllllllllllll
+lllllsslllllllll
+llllllllllllssll
+ssssssssssssssss
+pppppppppppppppp
+ppsspppppppppppp
+pppppppppssppppp
+pppppppppppppppp
+PAL
+w #b09468 step-stone
+l #c2a878 step-light
+s #a8845c step-shadow
+p #d8c08a path

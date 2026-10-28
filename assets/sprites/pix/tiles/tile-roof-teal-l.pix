@@ -1,0 +1,23 @@
+# Wave 2 architecture: teal roof, left slope
+PIX tile-roof-teal-l 16 16
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbbbbbbbbbbbbbb
+ccbbbbbbbbbbbbbb
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbcaaaaccaaacca
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbaaccaaaaccaaa
+ccbaaaaaaaaaaaaa
+ccbaaaaaaaaaaaaa
+ccbccaaaaccaaacc
+ccbaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #2e7a6a teal-mid
+b #3fa08a teal-light
+c #1f5a4c teal-deep
+d #5a3a24 eave-trim

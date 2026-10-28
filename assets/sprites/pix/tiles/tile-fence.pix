@@ -1,0 +1,22 @@
+# Wave 2 architecture: wooden fence: posts + two rails (object, ground shows through)
+PIX tile-fence 16 16
+................
+................
+................
+.tt....tt....tt.
+.tt....tt....tt.
+.tt....tt....tt.
+wwwwwwwwwwwwwwww
+llllllllllllllll
+.tt....tt....tt.
+.tt....tt....tt.
+.tt....tt....tt.
+wwwwwwwwwwwwwwww
+llllllllllllllll
+.tt....tt....tt.
+.tt....tt....tt.
+................
+PAL
+t #5a3a24 post
+w #a8845c rail
+l #a8845c rail-light

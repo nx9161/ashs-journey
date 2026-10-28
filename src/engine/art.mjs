@@ -186,7 +186,33 @@ const TILE_ART = {
   house: 'tile-house', door: 'tile-door', sign: 'tile-sign',
   gymwall: 'tile-gymwall', gymdoor: 'tile-gymdoor', centerdoor: 'tile-centerdoor',
   flower: 'tile-flower', rock: 'tile-rock',
+  // Wave 2 architecture + dressing: kind -> tile-<kind> for every piece.
+  'roof-terra-l': 'tile-roof-terra-l', 'roof-terra-m': 'tile-roof-terra-m',
+  'roof-terra-r': 'tile-roof-terra-r', 'roof-terra-chimney': 'tile-roof-terra-chimney',
+  'roof-slate-l': 'tile-roof-slate-l', 'roof-slate-m': 'tile-roof-slate-m', 'roof-slate-r': 'tile-roof-slate-r',
+  'roof-teal-l': 'tile-roof-teal-l', 'roof-teal-m': 'tile-roof-teal-m', 'roof-teal-r': 'tile-roof-teal-r',
+  'roof-center-l': 'tile-roof-center-l', 'roof-center-m': 'tile-roof-center-m', 'roof-center-r': 'tile-roof-center-r',
+  'sign-center': 'tile-sign-center', 'sign-gym': 'tile-sign-gym', 'sign-mart': 'tile-sign-mart', 'sign-lab': 'tile-sign-lab',
+  'wall-house-lit': 'tile-wall-house-lit', 'wall-house-unlit': 'tile-wall-house-unlit',
+  'door-house': 'tile-door-house', 'wall-house-plain': 'tile-wall-house-plain',
+  'wall-wood-lit': 'tile-wall-wood-lit', 'door-wood-facade': 'tile-door-wood-facade',
+  'wall-brick-lit': 'tile-wall-brick-lit', 'door-brick': 'tile-door-brick', 'wall-brick-plain': 'tile-wall-brick-plain',
+  'wall-center': 'tile-wall-center', 'door-center-l': 'tile-door-center-l', 'door-center-r': 'tile-door-center-r',
+  'wall-mart': 'tile-wall-mart', 'door-mart-l': 'tile-door-mart-l', 'door-mart-r': 'tile-door-mart-r',
+  'wall-gym': 'tile-wall-gym', 'door-gym-l': 'tile-door-gym-l', 'door-gym-r': 'tile-door-gym-r',
+  'wall-lab': 'tile-wall-lab', 'wall-lab-plain': 'tile-wall-lab-plain',
+  'door-lab-l': 'tile-door-lab-l', 'door-lab-r': 'tile-door-lab-r', 'door-lab-facade': 'tile-door-lab-facade',
+  'door-wood-l': 'tile-door-wood-l', 'door-wood-r': 'tile-door-wood-r',
+  step: 'tile-step', fence: 'tile-fence', lamp: 'tile-lamp', flowerbed: 'tile-flowerbed',
 };
+
+// Wave 2: kinds that are part of a building (for ground-shadow anchoring
+// and for the ground a dressing object stands on).
+const ARCH_KINDS = new Set([
+  'house', 'door', 'gymwall', 'gymdoor', 'centerdoor',
+  ...Object.keys(TILE_ART).filter((k) => !['tree', 'path', 'grass', 'sign', 'flower', 'rock', 'fence', 'lamp', 'flowerbed'].includes(k)),
+]);
+export function isArchKind(kind) { return ARCH_KINDS.has(kind); }
 
 // Deterministic 2D position hash (same family as tiles.mjs h2).
 export function hashTile(x, y, salt) {
@@ -251,6 +277,9 @@ export function buildArtTileCache(doc) {
     pebbles: artCanvas(doc, 'tile-detail-pebbles', 1),
     dirt: artCanvas(doc, 'tile-detail-dirt', 1),
   };
+  // Wave 2: ground-shadow strip laid on ground cells directly south of
+  // a building, anchoring every structure.
+  cache.shadowStrip = artCanvas(doc, 'tile-shadow', 1);
   return cache;
 }
 
@@ -292,6 +321,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
               cache.fringeTall && cache.fringeTall[d]) layers.push(cache.fringeTall[d]);
         }
       }
+      // Wave 2: building directly north -> ground-shadow strip.
+      if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       // grass<->path: worn dirt edge on the grass side (corners first).
       if (cache.edgeDirt) {
         const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
@@ -309,6 +340,9 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
     }
     case 'path': {
       const layers = [pickVariant(cache.pathVariants, x, y, 21) || cache.path];
+      // Wave 2: a building directly north anchors this cell with its
+      // ground-shadow strip.
+      if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       if (hashTile(x, y, 22) < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
       const grassy = (k) => k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
       for (const d of DIRS) {
@@ -336,13 +370,14 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       }
       return layers.filter(Boolean);
     }
-    case 'tree': case 'rock': case 'sign': case 'flower': {
+    case 'tree': case 'rock': case 'sign': case 'flower':
+    case 'fence': case 'lamp': case 'flowerbed': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
-      const fam = (k) => (k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign')
+      const fam = (k) => (k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign' || k === 'fence' || k === 'lamp' || k === 'flowerbed')
         ? 'grass'
-        : (k === 'path' || k === 'house' || k === 'door' || k === 'gymwall' || k === 'gymdoor' || k === 'centerdoor') ? 'path' : null;
+        : (k === 'path' || isArchKind(k)) ? 'path' : null;
       let ground = fam(nb.s);
       if (!ground) {
         const counts = { grass: 0, path: 0 };

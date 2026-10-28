@@ -1,0 +1,26 @@
+# Wave 2 architecture: plaster house wall, framed unlit window
+PIX tile-wall-house-unlit 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwwwwwwwwwwwwww
+wwwwttttttttwwww
+wwwwthhuuuutwwww
+wllwthhhuuutwllw
+wllwtuhhuuutwllw
+wllwtuuuuuutwllw
+wllwtuuuuuutwllw
+wllwtuuuuuutwllw
+wwwwttttttttwwww
+wwwwllllllllwwww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 trim
+g #ffd873 window-lit
+u #2e63b0 window-glass
+h #5a9ae8 glass-shine

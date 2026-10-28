@@ -1,0 +1,26 @@
+# Wave 2 architecture: flower bed: bordered soil with flower clusters (object)
+PIX tile-flowerbed 16 16
+................
+................
+................
+................
+................
+.tttttttttttttt.
+.tsffsyyswwsfft.
+.tsnnsnnsnndnnt.
+.tssssddsssssst.
+.tssyyssffsyydt.
+.tssnnssnnsnnst.
+.tsssswwddffdst.
+.tssssnnssnnsst.
+.tttttttttttttt.
+................
+................
+PAL
+s #5a3a24 bed-soil
+d #7a5a38 bed-soil-light
+f #e86a8a flower-pink
+y #f0e060 flower-yellow
+w #eef7ff flower-white
+n #67aa54 leaf
+t #a8845c bed-edge

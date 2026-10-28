@@ -1,0 +1,26 @@
+# Wave 2 architecture: lab sign on slate fascia: metal panel, original flask glyph
+PIX tile-sign-lab 16 16
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+adddddddddddddda
+admmmmmwwmmmmmda
+admmmmmwwmmmmmda
+admmmmwwwwmmmmda
+admmmwwwwwwmmmda
+admmwwttttwwmmda
+admmwttttttwmmda
+addddddddddddddc
+aaaaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #46586e slate-mid
+b #5f748f slate-light
+c #3a4657 slate-deep
+d #5a3a24 eave-trim
+m #46586e sign-metal
+w #eef7ff glyph-light
+t #3fa08a flask-liquid

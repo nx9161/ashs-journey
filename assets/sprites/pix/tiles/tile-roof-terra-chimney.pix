@@ -1,0 +1,25 @@
+# Wave 2 architecture: terracotta roof with chimney
+PIX tile-roof-terra-chimney 16 16
+aaaaaddddddaaaaa
+aaaaaddddddaaaaa
+bbbbbbffffbbbbbb
+bbbbbbeeeebbbbbb
+aaaaaaeeeeaaaaaa
+aaaaaaeeeeaaaaaa
+aaccaaeeeeaaacca
+aaaaaaeeeeaaaaaa
+aaaaaaeeeeaaaaaa
+ccaaaccaaaaccaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaccaaaaccaaacc
+aaaaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #b0503c roof-mid
+b #d0704f roof-light
+c #7a3226 roof-deep
+d #5a3a24 eave-trim
+e #8a8aa0 chimney-stone
+f #6a6a80 chimney-capshadow

@@ -1,0 +1,27 @@
+# Wave 2 architecture: center glass double door, right half (walkable warp tile)
+PIX tile-door-center-r 16 16
+rrrrrrrrrrrrrrrr
+rrrrrrrrrrrrrrrr
+rrrrrrrrrrrrrrrr
+ssssssssssssssss
+ststttttttttttww
+stsgggghhhhhhtww
+stsggghhhhhhhtww
+stsggghhhhhhgtww
+stsggggggggggtww
+stsggggggggggtww
+stsggggggggggtww
+stsggggggggggtww
+stsggggggggggtww
+ststttttttttttww
+llllllllllllllll
+ssssssssssssssss
+PAL
+w #eef7ff center-white
+l #f5f0dc center-cream
+s #a02828 center-red-dark
+r #d84040 center-red
+t #5a3a24 trim
+u #2e63b0 window-glass
+h #5a9ae8 glass-shine
+g #3a7bd5 door-glass

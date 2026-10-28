@@ -1,0 +1,23 @@
+# Wave 2 architecture: terracotta roof, right slope
+PIX tile-roof-terra-r 16 16
+aaaaaaaaaaaaabcc
+aaaaaaaaaaaaabcc
+bbbbbbbbbbbbbbcc
+bbbbbbbbbbbbbbcc
+aaaaaaaaaaaaabcc
+aaaaaaaaaaaaabcc
+aaccaaaaccaaabcc
+aaaaaaaaaaaaabcc
+aaaaaaaaaaaaabcc
+ccaaaccaaaaccbcc
+aaaaaaaaaaaaabcc
+aaaaaaaaaaaaabcc
+aaaccaaaaccaabcc
+aaaaaaaaaaaaabcc
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #b0503c roof-mid
+b #d0704f roof-light
+c #7a3226 roof-deep
+d #5a3a24 eave-trim

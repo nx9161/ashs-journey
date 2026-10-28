@@ -1,0 +1,26 @@
+# Wave 2 architecture: wood house wall, framed lit window
+PIX tile-wall-wood-lit 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwswwwswwwswwws
+wwwsttttttttwwws
+wwwstggtgggtwwws
+wwwstggtgggtwwws
+wwwsttttttttwwws
+sssstggtgggtssss
+wwwstggtgggtwwws
+wwwstggtgggtwwws
+wwwsttttttttwwws
+wwwsllllllllwwws
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #a8845c wood-mid
+l #b09468 wood-light
+s #7a5a38 wood-shadow
+t #5a3a24 trim
+g #ffd873 window-lit
+u #2e63b0 window-glass
+h #5a9ae8 glass-shine

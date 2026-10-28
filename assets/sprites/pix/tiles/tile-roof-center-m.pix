@@ -1,0 +1,25 @@
+# Wave 2 architecture: center roof, ridge mid (red)
+PIX tile-roof-center-m 16 16
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaccaaaaccaaacca
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+ccaaaccaaaaccaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaccaaaaccaaacc
+aaaaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #d84040 center-roof
+b #e86a8a center-roof-light
+c #a02828 center-roof-deep
+d #5a3a24 eave-trim
+w #eef7ff sign-white
+r #d84040 sign-red

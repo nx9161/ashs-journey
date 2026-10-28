@@ -1,0 +1,26 @@
+# Wave 2 architecture: mart sign on roof fascia: blue panel, original bag glyph
+PIX tile-sign-mart 16 16
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+adddddddddddddda
+aduuuuuyyuuuuuda
+aduuuuyuuyuuuuda
+aduuuwwwwwwuuuda
+cduuuyyyyyyuuuda
+aduuuyyyyyyuuuda
+aduuuyyyyyyuuuda
+addddddddddddddc
+aaaaaaaaaaaaaaaa
+cccccccccccccccc
+dddddddddddddddd
+PAL
+a #b0503c roof-mid
+b #d0704f roof-light
+c #7a3226 roof-deep
+d #5a3a24 eave-trim
+u #2e63b0 sign-blue
+y #ffd873 glyph-gold
+w #eef7ff glyph-light

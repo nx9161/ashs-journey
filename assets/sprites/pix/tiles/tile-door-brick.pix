@@ -1,0 +1,26 @@
+# Wave 2 architecture: brick facade, recessed door with step (non-enterable)
+PIX tile-door-brick 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwwttttttttwwww
+wwwwtsssssstwwww
+sssstsssssstssss
+wwwwtsssssstwwww
+wwwwtsssssstwwww
+wwwwtssstgstwwww
+sssstsssststssss
+wwwwtsssssstwwww
+wwwwtsssssstwwww
+wwwwtsssssstwwww
+wwwwtsttttstwwww
+wwwllllllllllwww
+wwssssssssssssww
+PAL
+w #b0503c brick-mid
+l #c96a52 brick-light
+s #7a3226 brick-deep
+t #5a3a24 trim
+g #ffd873 window-lit
+u #2e63b0 window-glass
+h #5a9ae8 glass-shine

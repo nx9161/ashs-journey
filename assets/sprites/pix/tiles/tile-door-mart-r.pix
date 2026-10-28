@@ -1,0 +1,28 @@
+# Wave 2 architecture: mart glass door, right half (walkable warp tile)
+PIX tile-door-mart-r 16 16
+ssssssssssssssss
+ssssssssssssssss
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+tttttttttttttttt
+tsttttttttttttww
+bsbbbbbeeeeeetww
+bsbbbbbeeeeeetww
+bsbbbbbbbbbbbtww
+bsbbbbbbbbbbbtww
+bsbbbbbbbbbbbtww
+bsbbbbbbbbbbbtww
+bsbbbbbbbbbbbtww
+tsttttttttttttww
+llllllllllllllll
+ssssssssssssssss
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 trim
+b #2e63b0 awning-blue
+e #eef7ff awning-white
+g #ffd873 goods-glow
+p #e86a8a goods-pink
+n #67aa54 goods-green
