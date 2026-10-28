@@ -409,8 +409,16 @@ Object.assign(BattleScene.prototype, {
       L.hitDone = true;
       this.rtApplyDamage(L.side, L.mv);
     }
-    if (k >= 1) rt.lunge = null;
-    else {
+    if (k >= 1) {
+      // P0 fix (owner report 2026-10-28): a lunge that never came into
+      // reach used to end in total silence — PP and cooldown spent, no
+      // damage, no message — so a player firing physical moves from
+      // range saw the foe's HP freeze with no explanation. The whiff
+      // itself (real-time geometry) is unchanged; it now SAYS so, the
+      // same feedback the status-move range check already gave.
+      if (!L.hitDone && L.side === 'ally') this.rtFloat('Too far away!');
+      rt.lunge = null;
+    } else {
       // Dash toward the defender. ADR-025 §1 Rubble (RT): physical
       // lunge speed +15%.
       const step = (340 * groundLungeMult(this.field, L.mv) * dtms) / 1000;
@@ -489,7 +497,7 @@ Object.assign(BattleScene.prototype, {
     let dmg;
     if (mv.ohko || efx.ohko) dmg = def.hp;
     else if (efx.fixed) dmg = efx.fixed;
-    else if (efx.fixedLevel) dmg = atk.level;
+    else if (efx.fixedLevel || mv.fixedLevel) dmg = atk.level; // P0 fix: same top-level fixedLevel read as the classic engine (Seismic Toss / Night Shade)
     else if (efx.psywave) dmg = Math.max(1, Math.floor(atk.level * (0.5 + g.rng.battle())));
     else {
       const hits = efx.hits ? (efx.hits[0] + Math.floor(g.rng.battle() * (efx.hits[1] - efx.hits[0] + 1))) : 1;

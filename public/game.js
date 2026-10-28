@@ -57468,6 +57468,15 @@ class BattleScene {
 
   updateCommand() { /* menu modal drives via ui */ }
 
+  // Resolution is message-driven: every resolve beat opens a say() whose
+  // callback advances the queue, so there is no per-frame work here.
+  // This method must EXIST — update()'s state switch has called it since
+  // the engine's first version without a definition ever landing, and
+  // any frame that reached state 'resolve' with no message open would
+  // have thrown (P0 hardening, 2026-10-28; no driven flow reaches it —
+  // every resolve entry opens a message synchronously).
+  updateResolve() {}
+
   onCommand(value) {
     const g = this.game;
     if (value === null) { this.toCommand(); return; } // cancelled -> back
@@ -58015,7 +58024,7 @@ class BattleScene {
       let dmg;
       if (mv.ohko || efx.ohko) dmg = def.hp;
       else if (efx.fixed) dmg = efx.fixed;
-      else if (efx.fixedLevel) dmg = atk.level;
+      else if (efx.fixedLevel || mv.fixedLevel) dmg = atk.level; // P0 fix: Seismic Toss / Night Shade declare fixedLevel at move top level (like ohko/charge) — reading only efx made them deal power-0 damage (~2) instead of level damage
       else if (efx.psywave) dmg = Math.max(1, Math.floor(atk.level * (0.5 + g.rng.battle())));
       else {
         const hits = efx.hits ? (efx.hits[0] + Math.floor(g.rng.battle() * (efx.hits[1] - efx.hits[0] + 1))) : 1;
@@ -58053,10 +58062,17 @@ class BattleScene {
       }
       // GD tutorial: the lesson mon endures at 1 HP — the gate teaches
       // catching, so the only exit is a (guaranteed, once weakened) catch.
+      // P0 fix (owner report 2026-10-28): the catch hint used to show only
+      // on the FIRST endured KO (_endureShown) — every later lethal hit
+      // silently clamped to 1 HP again, so a player who kept choosing
+      // FIGHT faced an apparently immortal foe that kept attacking and
+      // could win by attrition, with no explanation on screen. The hint
+      // now repeats on EVERY endured KO; the endure itself (the lesson's
+      // design) is unchanged.
       let hungOn = false;
       if (this.tutorial && foeSide === 'foe' && def.hp <= 0) {
         def.hp = 1;
-        hungOn = !this._endureShown;
+        hungOn = true;
         this._endureShown = true;
       }
       if (hungOn) this._tutStage = 'bag'; // P0/C7: foe weakened -> BAG highlight next
@@ -59810,8 +59826,16 @@ Object.assign(BattleScene.prototype, {
       L.hitDone = true;
       this.rtApplyDamage(L.side, L.mv);
     }
-    if (k >= 1) rt.lunge = null;
-    else {
+    if (k >= 1) {
+      // P0 fix (owner report 2026-10-28): a lunge that never came into
+      // reach used to end in total silence — PP and cooldown spent, no
+      // damage, no message — so a player firing physical moves from
+      // range saw the foe's HP freeze with no explanation. The whiff
+      // itself (real-time geometry) is unchanged; it now SAYS so, the
+      // same feedback the status-move range check already gave.
+      if (!L.hitDone && L.side === 'ally') this.rtFloat('Too far away!');
+      rt.lunge = null;
+    } else {
       // Dash toward the defender. ADR-025 §1 Rubble (RT): physical
       // lunge speed +15%.
       const step = (340 * groundLungeMult(this.field, L.mv) * dtms) / 1000;
@@ -59890,7 +59914,7 @@ Object.assign(BattleScene.prototype, {
     let dmg;
     if (mv.ohko || efx.ohko) dmg = def.hp;
     else if (efx.fixed) dmg = efx.fixed;
-    else if (efx.fixedLevel) dmg = atk.level;
+    else if (efx.fixedLevel || mv.fixedLevel) dmg = atk.level; // P0 fix: same top-level fixedLevel read as the classic engine (Seismic Toss / Night Shade)
     else if (efx.psywave) dmg = Math.max(1, Math.floor(atk.level * (0.5 + g.rng.battle())));
     else {
       const hits = efx.hits ? (efx.hits[0] + Math.floor(g.rng.battle() * (efx.hits[1] - efx.hits[0] + 1))) : 1;
