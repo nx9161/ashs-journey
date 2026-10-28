@@ -240,6 +240,15 @@ function checkStory(story, errors) {
   if (!isPlainObj(p) || typeof p.map !== 'string' || p.map.length > 64 || !isInt(p.x, -9999, 9999) || !isInt(p.y, -9999, 9999) || !['up', 'down', 'left', 'right'].includes(p.dir)) {
     errors.push('bad-position');
   }
+  // P1 (2026-10-28): story.lastCenter — the persisted Center
+  // door-front anchor; optional, shape-checked when present
+  // (mirrors position, minus dir).
+  if (story.lastCenter !== undefined) {
+    const lc = story.lastCenter;
+    if (!isPlainObj(lc) || typeof lc.map !== 'string' || lc.map.length > 64 || !isInt(lc.x, -9999, 9999) || !isInt(lc.y, -9999, 9999)) {
+      errors.push('bad-lastCenter');
+    }
+  }
   // ADR-025 §4: difficulty modes renamed at schema v2 (client migrates
   // 'easy'/'normal'/'hard' -> 'story'/'classic'/'challenge' on load).
   if (!['story', 'classic', 'challenge'].includes(story.difficulty)) errors.push('bad-difficulty');

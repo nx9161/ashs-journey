@@ -190,9 +190,12 @@ Object.assign(Game.prototype, {
     };
     if (id === 'townmap') { this.openTownMap(); return; }
     if (id === 'escaperope') {
-      // Warp to the last Center town (the overworld tracks centerReturn).
+      // Warp to the last Center town. P1: resolve through centerExit()
+      // (runtime ticket -> persisted lastCenter -> Pallet) — the
+      // landing tile is now that Center's door-front, where before it
+      // could be a stale load-time snapshot tile in the same town.
       const owNow = g.scenes.top;
-      const ret = owNow && owNow.centerReturn;
+      const ret = owNow && (typeof owNow.centerExit === 'function' ? owNow.centerExit() : owNow.centerReturn);
       if (ret && ret.map !== (g.state.story.position && g.state.story.position.map)) {
         g.state.bag[id]--;
         g.state.story.position = { map: ret.map, x: ret.x, y: ret.y, dir: 'down' };

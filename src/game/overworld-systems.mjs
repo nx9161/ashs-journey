@@ -1612,6 +1612,11 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     g.state.player.money = Math.floor(g.state.player.money / 2);
     g.ui.say(['You scurried to a Pokemon Center, protecting your exhausted team...'], () => {
+      // P1: anchor the exit BEFORE the direct loadMap — a blackout
+      // respawns in the last-visited Center, and leaving it must land
+      // on that Center's town door-front (centerExit resolves the
+      // persisted lineage), never back at the faint location.
+      this.centerReturn = this.centerExit();
       this.loadMap('center');
       this.player.tx = 4; this.player.ty = 3;
       this.player.px = 4 * TILE; this.player.py = 3 * TILE;

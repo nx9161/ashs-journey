@@ -110,11 +110,33 @@ export class OverworldScene {
     this.w = this.map.rows[0].length;
     this.h = this.map.rows.length;
     if (this.sysLoadMap) this.sysLoadMap(id);
-    // Dynamic Pokemon Center exit (WS9): remember which city we came from.
-    if (id === 'center' && this._lastCity) this.centerReturn = this._lastCity;
+    // P1 fix (owner report 2026-10-28): loadMap used to OVERWRITE
+    // centerReturn with _lastCity here — a snapshot of the player's
+    // tile taken when the PREVIOUS map loaded. That one line defeated
+    // the warp's door-front anchor (onStep sets centerReturn from the
+    // door's via BEFORE loadMap runs, below) and, on the blackout
+    // paths (which load 'center' directly — no warp ever runs),
+    // anchored the exit to the last load-time snapshot: the route
+    // where the player fainted. Hence "I got out of the Center right
+    // where I was defeated." centerReturn is now written ONLY by the
+    // warp-in via and the blackout anchor (centerExit()); loadMap
+    // never touches it. (The Mart never had this bug — Wave 5b gave
+    // it its own ticket and no clobber.)
     // Shared interiors (center/mart) and house interiors are not
     // cities — loading one must not clobber the Fly/center origin.
     if (id !== 'center' && id !== 'mart' && !id.startsWith('house-')) this._lastCity = { map: id, x: this.player ? this.player.tx : 7, y: this.player ? this.player.ty : 9 };
+  }
+
+  // P1: the ONE resolver for "where does leaving the Center put me" —
+  // the runtime ticket first, then the persisted last-Center anchor
+  // (story.lastCenter survives a save/reload inside a Center, where
+  // the runtime ticket is gone), then the genre fallback: Pallet,
+  // home (Pallet has no Center of its own in this world).
+  centerExit() {
+    if (this.centerReturn && this.centerReturn.map) return this.centerReturn;
+    const lc = this.game && this.game.state && this.game.state.story && this.game.state.story.lastCenter;
+    if (lc && typeof lc.map === 'string' && Number.isFinite(lc.x) && Number.isFinite(lc.y)) return { map: lc.map, x: lc.x, y: lc.y };
+    return { map: 'pallet', x: 7, y: 9 };
   }
 
   tileAt(x, y) {
@@ -240,8 +262,13 @@ export class OverworldScene {
       // exit ticket is its own (martReturn), the Center's is unchanged.
       if (wp.viaExit) to = this.mapId === 'mart'
         ? (this.martReturn || { map: 'viridian', x: 3, y: 9 })
-        : (this.centerReturn || { map: 'pallet', x: 7, y: 9 });
-      if (to.map === 'center' && wp.via) this.centerReturn = wp.via;
+        : this.centerExit();
+      if (to.map === 'center' && wp.via) {
+        this.centerReturn = wp.via;
+        // P1: persist the anchor — a save/reload inside the Center
+        // must still exit to THIS town's door-front.
+        g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+      }
       if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
       this.loadMap(to.map);
       this.player.tx = to.x; this.player.ty = to.y;

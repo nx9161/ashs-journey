@@ -140,6 +140,17 @@ export function fillV2Defaults(data) {
       if (typeof v === 'number' && Number.isFinite(v)) bonds[k] = Math.max(-10, Math.min(10, Math.trunc(v)));
     }
     data.story.bonds = bonds;
+    // P1 (2026-10-28): story.lastCenter — the persisted door-front
+    // anchor of the last Center entered (the Center exit resolver
+    // falls back to it after a reload inside a Center). Sanitized to
+    // its closed shape on load; dropped when malformed (the exit
+    // then falls back to Pallet until the next Center visit).
+    if (data.story.lastCenter !== undefined) {
+      const lc = data.story.lastCenter;
+      if (isObj(lc) && typeof lc.map === 'string' && /^[a-z0-9-]{1,40}$/.test(lc.map) && Number.isFinite(lc.x) && Number.isFinite(lc.y)) {
+        data.story.lastCenter = { map: lc.map, x: Math.trunc(lc.x), y: Math.trunc(lc.y) };
+      } else delete data.story.lastCenter;
+    }
     // ADR-025 §6 (Phase 6): HoF lists normalize to the ONE canonical
     // shape on load — legacy { species, level } entries (the shape the
     // server validator was written against) and the pushed
