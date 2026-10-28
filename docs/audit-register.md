@@ -1167,6 +1167,12 @@ or battle timing changed; nothing deployed. All art is original
   (headless Chromium, local build): Viridian street, S.S. Anne,
   Route 2 — crowds read as individuals; the Anne's crew wears
   sailor whites with per-instance skin/hair/palette variation.
+  **[CORRECTED by the Wave 3b fix pass below: this audit was
+  data-level (kind + data palette), not rendered. As shipped at
+  c6ddd38 the rendered claim was FALSE — a bundle global-name
+  collision silently dropped swap (and white) from the art
+  cache key, so only the first instance of each kind per page
+  session rendered its own palette. See "Wave 3b FIX PASS".]**
 - **CUBONE / MAROWAK SPIRIT:** unchanged — still no overworld
   species art exists; they remain on the generic path per the
   census's documented why-not (species art is Wave 6 scope; a
@@ -1255,6 +1261,12 @@ gary-battle 32×32, brock-battle 32×48) were drawn 0 times. Wiring
   rendered palettes differ (skin #e8b888/#d8a878, hair
   #7a1a3a/#3a6ac0), so no two figures on that screen are
   identical; they read as a uniformed pair, which is the joke.
+  **[CORRECTED by the Wave 3b fix pass below: the premise was
+  false as rendered at c6ddd38 — MARA and JULES rendered
+  byte-identical (both in MARA's palette, the first sailor
+  rasterized in the session). Their DATA palettes differ as
+  listed; after the fix pass their RENDERED palettes differ
+  too, measured in-bundle (see "Wave 3b FIX PASS").]**
 - JOURNAL / WRECKED LOG (object-NPCs in the Mansion / New Island)
   still render on the youngster kind — pre-existing, not a crowd
   member, and no object sprite system exists yet; flagged for
@@ -1263,3 +1275,96 @@ gary-battle 32×32, brock-battle 32×48) were drawn 0 times. Wiring
   faithfully at 64px tall; it reads thin next to the 64×64
   battler standard. Redrawing trainer art at battle scale is
   Wave 6b scope, not 3b.
+
+### Wave 3b FIX PASS — art cache-key global collision (2026-10-28)
+
+Independent QA FAILED 3b §1/§2 at c6ddd38 (verdict:
+`ashs-journey-qa/wave3b-qa-verdict.md`). The defect, root cause,
+and fix:
+
+- **Defect (as rendered):** palette swaps rendered only for the
+  FIRST instance of each NPC kind per page session; every later
+  same-kind instance inherited that palette (S.S. Anne's three
+  sailors byte-identical in MARA's palette; Viridian's two
+  clerks identical; Route 2 NIA in BEA's palette). The same
+  dropped parameter also disabled the battle white-flash: the
+  white variant of every battler WAS its normal sprite.
+- **Root cause:** the build concatenates all modules into one
+  scope. `src/game/overworld-systems.mjs` defines a global
+  `key(x, y)` (coordinate key, later in module order) which
+  silently overrode `src/engine/art.mjs`'s global
+  `key(id, scale, white, swap)` (the artCanvas cache key).
+  artCanvas therefore cached on `id + ',' + scale` only —
+  `swap` and `white` never reached the key, so the first
+  rasterization of each sprite id won for the whole session.
+  Pre-existing collision; Wave 3b's per-instance swaps were the
+  first workload to expose it at crowd scale.
+- **Fix (minimal, engine only — no art, no data):**
+  `src/engine/art.mjs` — the cache-key helper renamed
+  `key` → `artCacheKey` (definition + its single call site,
+  artCanvas; 2 lines). overworld-systems' `key(x, y)` is the
+  widely-referenced one (4 call sites) and is untouched.
+  Built-bundle diff vs c6ddd38 is exactly those 2 lines
+  (+16 B: `public/game.js` 1,548,524 → 1,548,540).
+- **Collision sweep (same class):** every top-level
+  function/const/let/var/class name across all 47 files in
+  `scripts/module-order.json` (377 names post-fix): the ONLY
+  remaining duplicate is `rows(list) { return list; }` in
+  maps/maps2/maps3 — three byte-identical identity helpers,
+  benign by construction, pre-existing, not art/render.
+  Intersecting art/render top-level names (art, render, tiles,
+  sprites, battle, battle-rt, overworld) against every other
+  file: `key` was the sole collision; post-fix zero.
+- **In-bundle proof** (built bundle eval'd headless with a
+  pixel-recording canvas stub; pre-fix bundle reconstructed by
+  reverting only the rename): OLD — green-swap vs red-swap
+  sailor returned the SAME canvas object (hash 24648b76:234;
+  red request carried green, no red pixels); white vs normal
+  battler the same object (3729251a:391, not white); MARA-first
+  npcFrames: MARA bb42895c:234 (correct), JULES the same object
+  carrying MARA's hair #7a1a3a, his own #3a6ac0 absent.
+  NEW — green 24648b76:234 / red 76e76b76:234, distinct objects,
+  each carrying only its own swap color; identical-arg repeat
+  still cache-hits the same object; white is a distinct
+  all-#ffffff canvas (80805bce) with the same 391 inked pixels
+  as normal; `speciesBattleArt` frontWhite now distinct +
+  all-white; MARA-first hash bb42895c:234 pixel-identical to
+  the pre-fix first instance (no regression), JULES distinct
+  (f27879ca:234) with his own hair and none of MARA's;
+  unswapped tile-grass (5300b204:256) and ash-down-idle-1
+  (f6f63662:232) hashes identical pre/post fix.
+- **`white` blast radius:** the only `white=true` caller in
+  the game is `speciesBattleArt` (frontWhite/backWhite),
+  consumed by battle.mjs's impactFx (impact frames swap the
+  battler sprite to its white variant). Pre-fix
+  frontWhite === front, so impact frames silently showed the
+  normal sprite; post-fix the authored white flash actually
+  flashes — the single intended visual change of this pass.
+  No other caller passes white. Full battery (below, incl.
+  verify-slice + fidelity + both battle engines' suites) is
+  green with the flash restored.
+- **Battery (public, all exit 0):** rejuv-phase1 **44/44** ·
+  phase2 **42/42** · phase3 **63/63** · phase4 **53/53** ·
+  phase5 **55/55** · phase6 **46/46** · fidelity **35/35** ·
+  campaign-smoke **24/24** · audit-headless **17/17** ·
+  audit-laptop public **41/41** · verify-slice **48/48** ·
+  qa-slice **134/134** · validator test **51/51** · validator
+  fuzz **2000/2000** · save-contract **6/6** · Track B
+  **114/114** (documented invocation
+  `node --import ./register.mjs run.mjs`) · budgets-check
+  **all gates pass** · contamination **clean** · drift-gate
+  guest ≡ strip(vercel), personal ≡ guest + marker PASS ·
+  qa-changed-flows **55/57, failures exactly the standing
+  baseline {b2, d9}**. Regen: build-art twice = byte-identical
+  `art-data.mjs` (md5 d8b8b80b…), ART keys **330** (unchanged).
+  Built vercel+guest only; **personal/ byte-identical to
+  c6ddd38** (restored after the battery's full builds; the
+  content-hash personal line restored to the c6ddd38 value).
+  Nothing deployed.
+- **Lesson:** data-level audits don't prove rendering — the
+  3b crowd audit compared kind + data palette and could not
+  see a cache that discarded the swap at raster time; and
+  per-kind FIRST-instance spot checks (Gary, the nurse) pass
+  even with this bug, because the first instance is the one
+  the cache keeps. Crowd claims need rendered fingerprints
+  of the SECOND same-kind instance on a screen.

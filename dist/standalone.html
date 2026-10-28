@@ -11232,7 +11232,7 @@ const ART_META = {
 
 const cvCache = new Map();
 
-function key(id, scale, white, swap) {
+function artCacheKey(id, scale, white, swap) {
   let k = id + '|' + scale + '|' + (white ? 'w' : 'n');
   if (swap) {
     const parts = Object.keys(swap).sort().map((ch) => ch + '=' + swap[ch]);
@@ -11248,7 +11248,7 @@ function key(id, scale, white, swap) {
 // keep their authored color; a sprite rasterized without a swap is the
 // authored default.
 function artCanvas(doc, id, scale, white, swap) {
-  const k = key(id, scale || 1, !!white, swap);
+  const k = artCacheKey(id, scale || 1, !!white, swap);
   const hit = cvCache.get(k);
   if (hit) return hit;
   const a = ART[id];
@@ -32511,6 +32511,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:bace41250a343f73256ab670736b9d6994572c10e18cafb0f0e28664c742f78b -->
+<!-- contentHash:62bdf0a29c4a74a3bfc733fb0a734f769abae3c3c6d0b4ae5a6fe19c7df75efb -->
 </body>
 </html>

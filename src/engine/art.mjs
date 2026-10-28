@@ -17,7 +17,7 @@ import { BATTLER_DRAW_SIZE } from './render.mjs';
 
 const cvCache = new Map();
 
-function key(id, scale, white, swap) {
+function artCacheKey(id, scale, white, swap) {
   let k = id + '|' + scale + '|' + (white ? 'w' : 'n');
   if (swap) {
     const parts = Object.keys(swap).sort().map((ch) => ch + '=' + swap[ch]);
@@ -33,7 +33,7 @@ function key(id, scale, white, swap) {
 // keep their authored color; a sprite rasterized without a swap is the
 // authored default.
 export function artCanvas(doc, id, scale, white, swap) {
-  const k = key(id, scale || 1, !!white, swap);
+  const k = artCacheKey(id, scale || 1, !!white, swap);
   const hit = cvCache.get(k);
   if (hit) return hit;
   const a = ART[id];
