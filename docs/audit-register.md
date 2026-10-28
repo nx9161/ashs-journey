@@ -251,6 +251,49 @@ S-34, S-46) stand as recorded.
   everything downstream failing is the known signature, proven twice this
   pass by clean re-runs (public 41/41, personal 5/5).
 
+## Rejuvenation Phase 6 — Second Journey (2026-10-27, after the UI Elevation Pass)
+
+ADR-025 §6 shipped: New Game+ (implementer pass; independent QA pending).
+New surface: the title's **Second Journey** row + the creation flow
+(source picker → target picker → the standard intro), the intro's
+starter-reunion offer, the HoF viewer's PRIOR JOURNEYS section, and the
+★ ribbon marker on Continue / the Save summary for ngPlus > 0 runs.
+
+- **Title-menu safety (the load-bearing decision):** the row is appended
+  AFTER Options and exists only when a completed save is present. With
+  no completed slot the menu items are byte-identical to pre-Phase-6
+  (proven in tests/rejuv-phase6-checks.mjs B01/B02 + C01), so
+  verify-live's and audit-laptop's counted presses (Down once → the
+  Continue row) are untouched in every state they drive. One flagged
+  expectation for the next production verify-live: on a device whose
+  save has COMPLETED Kanto, the title legitimately shows a 4th row —
+  any future gate that counts total title rows must expect 4 there,
+  3 elsewhere (and 2 with no save at all). No existing gate counts
+  title rows today; nothing was adapted silently.
+- **Battery at ship:** rejuv phases 44/42/63/53/55 + phase6 **43/43** ·
+  fidelity 35/35 · campaign 24/24 · headless 17/17 · verify-slice 48/48
+  · qa-slice 134/134 · audit-laptop public **41/41** · validator test
+  45/45 · validator fuzz 2000/2000 · save-contract 6/6 · Track B
+  **114/114** · qa-changed-flows failure set exactly the standing
+  baseline **{b2, d9}** · gen-tables --check clean (tables.json
+  unchanged — the HoF reconciliation needed no table regeneration;
+  the validator's HoF check is hand-rolled code, now canonical).
+- **HoF shape reconciliation:** pre-Phase-6, runEnding pushed
+  `{team, badges}` while the server validator demanded `{species,
+  level}` — a real completed save would have failed cloud validation.
+  One canonical shape now (validator species-checks team entries);
+  the legacy shape is accepted by both validators and normalized on
+  client load. Inherited teams live in `story.priorHof`, never in the
+  new run's `story.hof`, so inherited entries cannot satisfy the new
+  run's completion (or a further Second Journey unlock chain — they
+  DO carry forward as viewable history).
+- Track B invocation note (pre-existing, not a Phase 6 defect): the
+  gate must run as its header documents — `node --import
+  ./register.mjs run.mjs` from tests/; the bare `npm test` script in
+  this checkout omits the register import, so pg.Pool is never stubbed
+  and suite 02 dies with ECONNREFUSED ::1:5432. With the documented
+  invocation: 114/114.
+
 ## Harness notes (so the next seat doesn't re-learn them)
 
 - CDP `Fetch.fulfillRequest` MUST be sent on the session that paused the request

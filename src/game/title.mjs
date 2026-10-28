@@ -234,6 +234,7 @@ export class BootScene {
     // P0/B1: title menu routes through the Trainer ID Terminal (guest-functional stub).
     if (it.value === 'new') this.game.openLogin('new');
     else if (it.value === 'continue') this.game.openLogin('continue');
+    else if (it.value === 'second') this.game.openLogin('second');
     else if (it.value === 'options') this.game.openOptions();
   }
 
@@ -255,8 +256,24 @@ export class BootScene {
   }
   menuItems() {
     const items = [{ label: 'New Game', value: 'new' }];
-    if (this.game.store.exists()) items.push({ label: 'Continue', value: 'continue' });
+    if (this.game.store.exists()) {
+      // ADR-025 §6: the title save summary's ribbon marker — a
+      // Second Journey run (meta.ngPlus > 0) shows its star.
+      const ng = this.game.state && this.game.state.meta && this.game.state.meta.ngPlus;
+      items.push({ label: 'Continue' + (ng > 0 ? ' ★' : ''), value: 'continue' });
+    }
     items.push({ label: 'Options', value: 'options' });
+    // ADR-025 §6: Second Journey unlocks when ANY save slot holds a
+    // completed Kanto. The row is appended AFTER Options so every
+    // existing counted-press path (New Game / Continue / Options) is
+    // untouched; with no completed slot the menu is byte-identical
+    // to before Phase 6. The unlock scan is cached for the title's
+    // lifetime (menuItems runs per render frame; saves cannot change
+    // while the title is up).
+    if (this._sjUnlock === undefined) {
+      this._sjUnlock = typeof hasCompletedSave === 'function' && hasCompletedSave();
+    }
+    if (this._sjUnlock) items.push({ label: 'Second Journey', value: 'second' });
     return items;
   }
   render(r) {

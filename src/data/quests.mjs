@@ -25,7 +25,7 @@
 // recordBond clamps to the §2 range (-10..+10) and every source is
 // one-shot (completion is one-shot), so nothing here is grindable.
 
-import { grantKeepsake } from '../game/keepsakes.mjs';
+import { grantKeepsakeFromSource } from '../game/keepsakes.mjs';
 
 export const QUESTS = {
   tale_pallet: {
@@ -292,7 +292,10 @@ export function completeTale(state, id, opts) {
     state.bag[item] = (state.bag[item] || 0) + items[item];
   }
   const ks = o.keepsake !== undefined ? o.keepsake : reward.keepsake;
-  if (ks) grantKeepsake(state, ks);
+  // ADR-025 §6: tale rewards ride the central source grant — a piece
+  // the player already owns converts to $2,000 cash (the wiring
+  // surfaces the line; see finishWith in overworld-systems).
+  if (ks) grantKeepsakeFromSource(state, ks);
   const delta = o.bondDelta !== undefined ? o.bondDelta : (tale.bondDelta || 0);
   if (delta && tale.bondNpc) recordBond(state, tale.bondNpc, delta);
   return true;

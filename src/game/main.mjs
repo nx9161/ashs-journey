@@ -354,6 +354,7 @@ export class Game {
       this.authUser = null;
       AUTH.user = null;
       if (this._loginMode === 'continue') this.continueGame();
+      else if (this._loginMode === 'second') this.secondJourney();
       else this.newGame();
     });
   }
@@ -365,6 +366,11 @@ export class Game {
     this.ui.toast('Welcome back, ' + name + '!'); // toast = textContent (C12-safe)
     SYNC.runLoginMerge(this, mode, (res) => {
       if (!res) return;
+      // ADR-025 §6: a Second Journey login merges like Continue (the
+      // merge refreshes the local slot caches), then hands off to the
+      // creation flow, which re-reads its sources from those caches.
+      // The merge's own load outcome is deliberately not followed.
+      if (mode === 'second') { this.secondJourney(); return; }
       if (res.load === 'state' && res.state) {
         this.state = res.state;
         this.audio.applySettings(this.state.settings);
@@ -876,6 +882,9 @@ export class Game {
     g.ui.showMenu('Save', [
       { label: g.state.meta.location + ' · ' + mins + 'm · ' + badges + ' badges · Dex ' + caught, value: null, disabled: true },
       { label: modeLine, value: null, disabled: true },
+      // ADR-025 §6: a Second Journey run's summary carries its ribbon.
+      ...((g.state.meta.ngPlus || 0) > 0
+        ? [{ label: '★ Second Journey — Journey ' + (g.state.meta.ngPlus + 1), value: null, disabled: true }] : []),
       { label: 'Last saved: ' + when, value: null, disabled: true },
       { label: 'Sync: guest-local (Track B: cloud)', value: null, disabled: true },
       { label: 'Save now', value: 'save' },

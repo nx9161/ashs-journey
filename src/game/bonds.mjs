@@ -225,17 +225,42 @@ export function bondTrainerVariant(state, trainer) {
 // Resolve a scene's lines for the character's CURRENT tier. Fallback:
 // close -> warm -> wary, cold -> wary. Returns null when the scene has
 // no usable set (callers keep their default lines).
+// ADR-025 §6 (Phase 6): the bond echo — for a character who was Close
+// in a previous journey (story.bondEcho), the Warm sets unlock one
+// tier earlier: at Wary, 'warm' joins the chain ahead of 'wary'.
+// Close-only sets still wait for Close. Presentation only, always.
 export function bondSceneLines(state, npcId, sceneId) {
   const scenes = BOND_DIALOGUE[npcId];
   const scene = scenes && scenes[sceneId];
   if (!scene) return null;
   const tier = tierOf(state, npcId).toLowerCase();
+  const echo = tier === 'wary' && Array.isArray(state && state.story && state.story.bondEcho)
+    && state.story.bondEcho.includes(npcId);
   const chain = tier === 'close' ? ['close', 'warm', 'wary']
     : tier === 'warm' ? ['warm', 'wary']
     : tier === 'cold' ? ['cold', 'wary']
-    : ['wary'];
+    : echo ? ['warm', 'wary'] : ['wary'];
   for (const t of chain) {
     if (Array.isArray(scene[t]) && scene[t].length) return scene[t];
   }
   return null;
 }
+// ---- ADR-025 §6: the echo greeting ----
+// Said once, plainly, the first time a new journey meets a character
+// who was Close in the last one. The spending flag lives in
+// story.flags like every other one-shot marker.
+export const ECHO_LINE = 'You seem familiar. Have we met?';
+export function takeEchoGreeting(state, npcId) {
+  if (!state || !state.story) return false;
+  if (!Array.isArray(state.story.bondEcho) || !state.story.bondEcho.includes(npcId)) return false;
+  const flag = 'echo_met_' + npcId;
+  if (state.story.flags[flag]) return false;
+  state.story.flags[flag] = true;
+  return true;
+}
+// Overworld NPC display name -> bond id, for the echo greeting hook.
+export const BOND_NPC_IDS = {
+  MOM: 'mom', GARY: 'gary', RUE: 'rue', COLE: 'cole', 'ACE MARLOW': 'retiredace',
+  BROCK: 'brock', MISTY: 'misty', 'LT. SURGE': 'surge', ERIKA: 'erika',
+  KOGA: 'koga', SABRINA: 'sabrina', BLAINE: 'blaine', 'MR. FUJI': 'fuji',
+};

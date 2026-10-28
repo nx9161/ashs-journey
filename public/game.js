@@ -15372,7 +15372,10 @@ function completeTale(state, id, opts) {
     state.bag[item] = (state.bag[item] || 0) + items[item];
   }
   const ks = o.keepsake !== undefined ? o.keepsake : reward.keepsake;
-  if (ks) grantKeepsake(state, ks);
+  // ADR-025 §6: tale rewards ride the central source grant — a piece
+  // the player already owns converts to $2,000 cash (the wiring
+  // surfaces the line; see finishWith in overworld-systems).
+  if (ks) grantKeepsakeFromSource(state, ks);
   const delta = o.bondDelta !== undefined ? o.bondDelta : (tale.bondDelta || 0);
   if (delta && tale.bondNpc) recordBond(state, tale.bondNpc, delta);
   return true;
@@ -15679,8 +15682,126 @@ function groundDodgeIframesBonus(field) {
 
 const SCHEMA_VERSION = 2;
 
-function defaultState() {
-  return {
+// ---------- ADR-025 §6 (Phase 6): Second Journey helpers ----------
+// The canonical Hall of Fame entry shape — ONE shape across runEnding
+// (the writer), the client schema, the server validator, and the HoF
+// viewer: { team: [{ speciesId, level, nickname }], badges }. Legacy
+// entries shaped { species, level } (the shape the server validator
+// was written against before the viewer shipped) normalize into it.
+function normalizeHofEntry(e) {
+  if (!e || typeof e !== 'object' || Array.isArray(e)) return null;
+  const lvl = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.max(1, Math.min(100, Math.trunc(v))) : 1);
+  if (Array.isArray(e.team)) {
+    const team = [];
+    for (const m of e.team) {
+      if (!m || typeof m !== 'object') continue;
+      const speciesId = typeof m.speciesId === 'string' ? m.speciesId : (typeof m.species === 'string' ? m.species : null);
+      if (!speciesId) continue;
+      team.push({ speciesId, level: lvl(m.level), nickname: typeof m.nickname === 'string' ? m.nickname : null });
+    }
+    if (!team.length) return null;
+    const badges = typeof e.badges === 'number' && Number.isFinite(e.badges) ? Math.max(0, Math.trunc(e.badges)) : 0;
+    return { team, badges };
+  }
+  if (typeof e.species === 'string' && e.species) {
+    return { team: [{ speciesId: e.species, level: lvl(e.level), nickname: null }], badges: 0 };
+  }
+  return null;
+}
+function normalizeHofList(list) {
+  if (!Array.isArray(list)) return [];
+  const out = [];
+  for (const e of list) { const n = normalizeHofEntry(e); if (n) out.push(n); }
+  return out;
+}
+// Completion detection (§6): a run has completed Kanto when ITS OWN
+// Hall of Fame holds an entry, or its regionsDone names Kanto.
+// Inherited priorHof entries NEVER satisfy this — they live apart.
+function isCompletedRun(save) {
+  if (!save || typeof save !== 'object' || !save.story) return false;
+  if (normalizeHofList(save.story.hof).length > 0) return true;
+  return Array.isArray(save.story.regionsDone) && save.story.regionsDone.includes('kanto');
+}
+// The run's OWN catches. In a Second Journey run the dex itself is the
+// carried ARCHIVE (records), so dexRegister also writes dex.runCaught
+// and honors (diploma, HoF ribbon semantics) read THIS map. The map
+// exists only on Second Journey runs — its presence is the
+// discriminator; every other run's archive IS its own record, so the
+// helper falls back to dex.caught there.
+function ownCaughtMap(dex) {
+  if (dex && typeof dex.runCaught === 'object' && dex.runCaught !== null && !Array.isArray(dex.runCaught)) return dex.runCaught;
+  return (dex && dex.caught) || {};
+}
+// The keepsake collection a save owns: bag pocket + held pieces.
+function keepsakeCollectionOf(save) {
+  if (!save || typeof save !== 'object') return [];
+  const out = [];
+  for (const id of Object.keys(KEEPSAKES)) {
+    const inBag = !!(save.bag && (save.bag[id] || 0) > 0);
+    const held = [...(Array.isArray(save.party) ? save.party : []),
+      ...Object.values(save.boxes || {}).flat()]
+      .some((m) => m && m.keepsake === id);
+    if (inBag || held) out.push(id);
+  }
+  return out;
+}
+// Bond echo (§6): the characters who were Close (>= +7) in the source.
+function bondEchoFromSave(save) {
+  const bonds = (save && save.story && save.story.bonds) || {};
+  return Object.keys(bonds).filter((id) => typeof bonds[id] === 'number' && bonds[id] >= 7);
+}
+// Traveler's Memory (§6): the one-time friction gates, derived from
+// the SOURCE save's own shipped evidence — its story flags, its badge
+// case, its bag. (The shipped game records these exact names:
+// silph_done / fossil_taken are story flags set by the campaign;
+// reached_saffron is written by sysLoadMap on entering Saffron.)
+const TRAVELERS_MEMORY_GATES = ['saffron-guard', 'coin-case', 'card-key', 'fossil-choice'];
+function travelersMemoryFromSave(save) {
+  if (!save || typeof save !== 'object') return [];
+  const flags = (save.story && save.story.flags) || {};
+  const bag = save.bag || {};
+  const badges = (save.badges && save.badges.kanto) || [];
+  const out = [];
+  if (flags.silph_done === true || flags.reached_saffron === true || badges.includes('marshbadge')) out.push('saffron-guard');
+  if ((bag.coincase || 0) > 0 || (bag.coin || 0) > 0) out.push('coin-case');
+  if (flags.silph_done === true || (bag.cardkey || 0) > 0) out.push('card-key');
+  if (flags.fossil_taken === true) out.push('fossil-choice');
+  return out;
+}
+function hasTravelersMemory(state, gate) {
+  return !!(state && state.story && Array.isArray(state.story.travelersMemory)
+    && state.story.travelersMemory.includes(gate));
+}
+// Starter breadth (§6): the Kanto starter lines, by base species. A
+// line counts as "chosen in the source run" when the shipped game
+// recorded it joining that run: the gift-event flags
+// (bulbasaur_joined / charmander_joined / squirtle_joined), a line
+// member in the party/boxes, or a line member in the dex's caught
+// records (dex numbers 1-9 are exactly these three lines).
+const STARTER_LINES = {
+  bulbasaur: ['bulbasaur', 'ivysaur', 'venusaur'],
+  charmander: ['charmander', 'charmeleon', 'charizard'],
+  squirtle: ['squirtle', 'wartortle', 'blastoise'],
+};
+const STARTER_DEXNO = { bulbasaur: [1, 2, 3], charmander: [4, 5, 6], squirtle: [7, 8, 9] };
+function starterLinesFromSave(save) {
+  if (!save || typeof save !== 'object') return [];
+  const flags = (save.story && save.story.flags) || {};
+  const mons = [...(Array.isArray(save.party) ? save.party : []),
+    ...Object.values(save.boxes || {}).flat()];
+  const caught = (save.dex && save.dex.caught) || {};
+  const out = [];
+  for (const base of Object.keys(STARTER_LINES)) {
+    const line = STARTER_LINES[base];
+    if (flags[base + '_joined'] === true
+      || mons.some((m) => m && line.includes(m.speciesId))
+      || STARTER_DEXNO[base].some((n) => caught[n] === true || caught[String(n)] === true)) out.push(base);
+  }
+  return out;
+}
+
+function defaultState(inherit) {
+  const st = {
     v: SCHEMA_VERSION,
     player: { name: 'ASH', rivalName: 'GARY', trainerId: 0, playtimeSec: 0, money: 300 },
     party: [],
@@ -15698,6 +15819,17 @@ function defaultState() {
       // Phase 4 records the Town Tale sources (structural only); the
       // tiers, dialogue variants and consumers are Phase 5.
       bonds: {},
+      // ADR-025 §6 (Phase 6): Second Journey fields, all defaults-filled
+      // on load (schema v2 stays). hof holds THIS run's own entries
+      // only; priorHof keeps earlier runs' teams viewable without ever
+      // satisfying this run's completion. bondEcho / travelersMemory /
+      // starterLines are the carried knowledge of a Second Journey run
+      // (empty on a first run).
+      hof: [],
+      priorHof: [],
+      bondEcho: [],
+      travelersMemory: [],
+      starterLines: [],
       region: 'kanto',
       regionsDone: [],
       position: { map: 'pallet', x: 7, y: 7, dir: 'down' },
@@ -15729,6 +15861,44 @@ function defaultState() {
       ngPlus: 0, // ADR-025 §6: Second Journey counter (Phase 6 consumes it)
     },
   };
+  // ---- Second Journey inheritance (§6) ----
+  // Fed ONLY a completed source save (isCompletedRun); anything else
+  // is ignored whole, so a normal New Game can never inherit by
+  // accident. The source object is READ, never written. Carries are
+  // exactly the §6 list — knowledge and relief from repetition, never
+  // power: no levels, party, boxes, money, badges, story progress, or
+  // items beyond the keepsake collection cross over.
+  if (inherit && isCompletedRun(inherit)) {
+    const src = inherit;
+    const trueOnly = (obj) => {
+      const out = {};
+      if (obj && typeof obj === 'object') for (const k of Object.keys(obj)) if (obj[k] === true) out[k] = true;
+      return out;
+    };
+    // 1. Dex records: the archive carries; honors read runCaught.
+    st.dex.caught = trueOnly(src.dex && src.dex.caught);
+    st.dex.seen = trueOnly(src.dex && src.dex.seen);
+    st.dex.befriended = trueOnly(src.dex && src.dex.befriended);
+    if (src.dex && typeof src.dex.forms === 'object' && src.dex.forms !== null) st.dex.forms = trueOnly(src.dex.forms);
+    st.dex.runCaught = {};
+    // 2. Keepsake collection: the pieces, in the pocket, from the start.
+    for (const id of keepsakeCollectionOf(src)) st.bag[id] = 1;
+    // 3. Prior runs' HoF teams stay viewable (this run's hof stays empty).
+    st.story.priorHof = [...normalizeHofList(src.story && src.story.hof),
+      ...normalizeHofList(src.story && src.story.priorHof)];
+    // 4. Traveler's Memory (door-keeping only). The coin case is the
+    // one gate whose "pre-solved" state is a handover: it is in the
+    // new run's bag from the start when the source had earned it.
+    st.story.travelersMemory = travelersMemoryFromSave(src);
+    if (st.story.travelersMemory.includes('coin-case')) st.bag.coincase = (st.bag.coincase || 0) + 1;
+    // 5. Starter breadth + 6. Bond echo: presentation/dialogue only.
+    st.story.starterLines = starterLinesFromSave(src);
+    st.story.bondEcho = bondEchoFromSave(src);
+    // 7. Meta: the counter climbs by one per Second Journey.
+    const prev = src.meta && Number.isInteger(src.meta.ngPlus) && src.meta.ngPlus > 0 ? src.meta.ngPlus : 0;
+    st.meta.ngPlus = prev + 1;
+  }
+  return st;
 }
 
 // Battle-mon factory: {speciesId, nickname, level, xp, moves[{id,pp}], ivs, hp...}
@@ -15802,6 +15972,12 @@ function boxCheck(mon) {
 function dexRegister(dex, kind, dexNo) {
   dex[kind][dexNo] = true;
   if (kind === 'caught' || kind === 'befriended') dex.seen[dexNo] = true;
+  // ADR-025 §6: on a Second Journey run (runCaught present), a catch in
+  // THIS run also lands in the run's own record — the set honors read.
+  if ((kind === 'caught' || kind === 'befriended')
+    && typeof dex.runCaught === 'object' && dex.runCaught !== null && !Array.isArray(dex.runCaught)) {
+    dex.runCaught[dexNo] = true;
+  }
 }
 function dexCaughtCount(dex) { return Object.keys(dex.caught).length; }
 
@@ -16162,6 +16338,28 @@ function grantKeepsake(state, itemId) {
   state.bag[itemId] = 1;
   return true;
 }
+// ---- ADR-025 §6 (Phase 6): the central SOURCE grant path ----
+// Every world source (tales, hidden items, item balls, shops, the HoF
+// gift, the parley) grants through here so they all behave identically
+// when the player ALREADY owns the piece a source would grant: the
+// duplicate never lands as a second copy (a keepsake is a unique
+// object, and held pieces stay non-sellable) — it converts to cash
+// instead, +2,000, and the caller surfaces `line` as dialogue.
+const DUPE_KEEPSAKE_CASH = 2000;
+function dupeKeepsakeLine(itemId) {
+  const def = KEEPSAKES[itemId];
+  if (!def) return null;
+  return 'You already carry the ' + def.name + ' — a keepsake is one of a kind, so its keeper presses $'
+    + DUPE_KEEPSAKE_CASH.toLocaleString('en-US') + ' into your hand instead.';
+}
+function grantKeepsakeFromSource(state, itemId) {
+  const def = KEEPSAKES[itemId];
+  if (!def || !state || !state.bag || !state.player) return { status: 'invalid', granted: false, cash: 0, line: null };
+  if (grantKeepsake(state, itemId)) return { status: 'granted', granted: true, cash: 0, line: null };
+  if (!ownsKeepsake(state, itemId)) return { status: 'invalid', granted: false, cash: 0, line: null };
+  state.player.money = (state.player.money || 0) + DUPE_KEEPSAKE_CASH;
+  return { status: 'duplicate', granted: false, cash: DUPE_KEEPSAKE_CASH, line: dupeKeepsakeLine(itemId) };
+}
 // Party-menu Give: bag -> mon. Fails cleanly when the mon already holds
 // one, the bag has none, or the id is not a keepsake.
 function giveKeepsake(state, mon, itemId) {
@@ -16406,20 +16604,45 @@ function bondTrainerVariant(state, trainer) {
 // Resolve a scene's lines for the character's CURRENT tier. Fallback:
 // close -> warm -> wary, cold -> wary. Returns null when the scene has
 // no usable set (callers keep their default lines).
+// ADR-025 §6 (Phase 6): the bond echo — for a character who was Close
+// in a previous journey (story.bondEcho), the Warm sets unlock one
+// tier earlier: at Wary, 'warm' joins the chain ahead of 'wary'.
+// Close-only sets still wait for Close. Presentation only, always.
 function bondSceneLines(state, npcId, sceneId) {
   const scenes = BOND_DIALOGUE[npcId];
   const scene = scenes && scenes[sceneId];
   if (!scene) return null;
   const tier = tierOf(state, npcId).toLowerCase();
+  const echo = tier === 'wary' && Array.isArray(state && state.story && state.story.bondEcho)
+    && state.story.bondEcho.includes(npcId);
   const chain = tier === 'close' ? ['close', 'warm', 'wary']
     : tier === 'warm' ? ['warm', 'wary']
     : tier === 'cold' ? ['cold', 'wary']
-    : ['wary'];
+    : echo ? ['warm', 'wary'] : ['wary'];
   for (const t of chain) {
     if (Array.isArray(scene[t]) && scene[t].length) return scene[t];
   }
   return null;
 }
+// ---- ADR-025 §6: the echo greeting ----
+// Said once, plainly, the first time a new journey meets a character
+// who was Close in the last one. The spending flag lives in
+// story.flags like every other one-shot marker.
+const ECHO_LINE = 'You seem familiar. Have we met?';
+function takeEchoGreeting(state, npcId) {
+  if (!state || !state.story) return false;
+  if (!Array.isArray(state.story.bondEcho) || !state.story.bondEcho.includes(npcId)) return false;
+  const flag = 'echo_met_' + npcId;
+  if (state.story.flags[flag]) return false;
+  state.story.flags[flag] = true;
+  return true;
+}
+// Overworld NPC display name -> bond id, for the echo greeting hook.
+const BOND_NPC_IDS = {
+  MOM: 'mom', GARY: 'gary', RUE: 'rue', COLE: 'cole', 'ACE MARLOW': 'retiredace',
+  BROCK: 'brock', MISTY: 'misty', 'LT. SURGE': 'surge', ERIKA: 'erika',
+  KOGA: 'koga', SABRINA: 'sabrina', BLAINE: 'blaine', 'MR. FUJI': 'fuji',
+};
 
 
 // ---- src/save/schema.mjs ----
@@ -16486,6 +16709,43 @@ function validateSave(data) {
       if (typeof v !== 'number' || !Number.isInteger(v) || v < -10 || v > 10) { errors.push('bad-bond-value'); break; }
     }
   }
+  // ADR-025 §6 (Phase 6): Hall of Fame lists — ONE canonical shape
+  // ({ team: [{speciesId, level, nickname}], badges }); the legacy
+  // { species, level } entry stays acceptable here and is normalized
+  // on load (fillV2Defaults), never rejected.
+  for (const key of ['hof', 'priorHof']) {
+    const list = isObj(data.story) ? data.story[key] : undefined;
+    if (list === undefined) continue;
+    if (!Array.isArray(list) || list.length > 40) { errors.push('bad-story-' + key); continue; }
+    for (const e of list) {
+      const canon = isObj(e) && Array.isArray(e.team) && e.team.length >= 1 && e.team.length <= 6
+        && e.team.every((m) => isObj(m) && typeof m.speciesId === 'string'
+          && typeof m.level === 'number' && m.level >= 1 && m.level <= 100)
+        && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0));
+      const legacy = isObj(e) && typeof e.species === 'string'
+        && typeof e.level === 'number' && e.level >= 1 && e.level <= 100;
+      if (!canon && !legacy) { errors.push('bad-story-' + key + '-entry'); break; }
+    }
+  }
+  if (isObj(data.story)) {
+    // Phase 6 carried-knowledge lists: closed vocabularies.
+    if (data.story.bondEcho !== undefined
+      && (!Array.isArray(data.story.bondEcho) || data.story.bondEcho.length > 32
+        || data.story.bondEcho.some((x) => typeof x !== 'string' || !/^[a-z0-9_]{1,40}$/.test(x)))) errors.push('bad-story-bond-echo');
+    if (data.story.travelersMemory !== undefined
+      && (!Array.isArray(data.story.travelersMemory)
+        || data.story.travelersMemory.some((x) => !TRAVELERS_MEMORY_GATES.includes(x)))) errors.push('bad-story-travelers-memory');
+    if (data.story.starterLines !== undefined
+      && (!Array.isArray(data.story.starterLines)
+        || data.story.starterLines.some((x) => !Object.prototype.hasOwnProperty.call(STARTER_LINES, x)))) errors.push('bad-story-starter-lines');
+  }
+  if (isObj(data.dex) && data.dex.runCaught !== undefined) {
+    // Phase 6: the run's own catch record (Second Journey runs only).
+    if (!isObj(data.dex.runCaught)) errors.push('bad-dex-run-caught');
+    else for (const k of Object.keys(data.dex.runCaught)) {
+      if (data.dex.runCaught[k] !== true) { errors.push('bad-dex-run-caught-value'); break; }
+    }
+  }
   if (data.currentBox !== undefined && typeof data.currentBox !== 'string') errors.push('bad-current-box');
   return { ok: errors.length === 0, errors };
 }
@@ -16526,6 +16786,31 @@ function fillV2Defaults(data) {
       if (typeof v === 'number' && Number.isFinite(v)) bonds[k] = Math.max(-10, Math.min(10, Math.trunc(v)));
     }
     data.story.bonds = bonds;
+    // ADR-025 §6 (Phase 6): HoF lists normalize to the ONE canonical
+    // shape on load — legacy { species, level } entries (the shape the
+    // server validator was written against) and the pushed
+    // { team, badges } shape both land canonical; junk entries drop.
+    data.story.hof = normalizeHofList(data.story.hof);
+    data.story.priorHof = normalizeHofList(data.story.priorHof);
+    // Carried-knowledge lists rebuild into their closed vocabularies.
+    data.story.bondEcho = Array.isArray(data.story.bondEcho)
+      ? [...new Set(data.story.bondEcho.filter((x) => typeof x === 'string' && /^[a-z0-9_]{1,40}$/.test(x)))].slice(0, 32) : [];
+    data.story.travelersMemory = Array.isArray(data.story.travelersMemory)
+      ? [...new Set(data.story.travelersMemory.filter((x) => TRAVELERS_MEMORY_GATES.includes(x)))] : [];
+    data.story.starterLines = Array.isArray(data.story.starterLines)
+      ? [...new Set(data.story.starterLines.filter((x) => Object.prototype.hasOwnProperty.call(STARTER_LINES, x)))] : [];
+  }
+  if (isObj(data.dex)) {
+    // Phase 6: dex.runCaught is NEVER invented here — its presence is
+    // the Second Journey discriminator (ownCaughtMap). A present but
+    // malformed map rebuilds to its true-only entries.
+    if (data.dex.runCaught !== undefined) {
+      const rc = {};
+      if (isObj(data.dex.runCaught)) {
+        for (const k of Object.keys(data.dex.runCaught)) if (data.dex.runCaught[k] === true) rc[k] = true;
+      }
+      data.dex.runCaught = rc;
+    }
   }
   if (isObj(data.settings)) {
     if (!isObj(data.settings.houseRules)) data.settings.houseRules = {};
@@ -16628,8 +16913,8 @@ class SaveStore {
   }
 }
 
-function freshState() {
-  const st = defaultState();
+function freshState(inherit) {
+  const st = defaultState(inherit);
   st.meta.createdAt = Date.now();
   st.meta.updatedAt = Date.now();
   return st;
@@ -20233,6 +20518,7 @@ class BootScene {
     // P0/B1: title menu routes through the Trainer ID Terminal (guest-functional stub).
     if (it.value === 'new') this.game.openLogin('new');
     else if (it.value === 'continue') this.game.openLogin('continue');
+    else if (it.value === 'second') this.game.openLogin('second');
     else if (it.value === 'options') this.game.openOptions();
   }
 
@@ -20254,8 +20540,24 @@ class BootScene {
   }
   menuItems() {
     const items = [{ label: 'New Game', value: 'new' }];
-    if (this.game.store.exists()) items.push({ label: 'Continue', value: 'continue' });
+    if (this.game.store.exists()) {
+      // ADR-025 §6: the title save summary's ribbon marker — a
+      // Second Journey run (meta.ngPlus > 0) shows its star.
+      const ng = this.game.state && this.game.state.meta && this.game.state.meta.ngPlus;
+      items.push({ label: 'Continue' + (ng > 0 ? ' ★' : ''), value: 'continue' });
+    }
     items.push({ label: 'Options', value: 'options' });
+    // ADR-025 §6: Second Journey unlocks when ANY save slot holds a
+    // completed Kanto. The row is appended AFTER Options so every
+    // existing counted-press path (New Game / Continue / Options) is
+    // untouched; with no completed slot the menu is byte-identical
+    // to before Phase 6. The unlock scan is cached for the title's
+    // lifetime (menuItems runs per render frame; saves cannot change
+    // while the title is up).
+    if (this._sjUnlock === undefined) {
+      this._sjUnlock = typeof hasCompletedSave === 'function' && hasCompletedSave();
+    }
+    if (this._sjUnlock) items.push({ label: 'Second Journey', value: 'second' });
     return items;
   }
   render(r) {
@@ -20542,6 +20844,36 @@ class IntroScene {
   finishIntro() {
     const g = this.game;
     this.grantPartner(); // skip paths land here directly — converge state first
+    // ADR-025 §6 (starter breadth): a Second Journey's intro offers the
+    // reunion — each starter line a completed journey chose may join
+    // NOW, at the start, instead of waiting for its gift event (the
+    // gift events stay live regardless; declining loses nothing). A
+    // first journey carries no lines and sees no offer: its intro is
+    // byte-identical to before Phase 6. Headless keeps harness timing.
+    const lines = (g.state.story.starterLines || [])
+      .filter((id) => !g.state.story.flags['starter_reunion_' + id]);
+    if (lines.length && !g.ui.headless) {
+      for (const id of g.state.story.starterLines) g.state.story.flags['starter_reunion_' + id] = true;
+      const items = lines.map((id) => ({ label: SPECIES[id].name + ' — an old friend is waiting', value: id }));
+      items.push({ label: 'Not now', value: null });
+      g.ui.showMenu('By the lab fence, a familiar face is waiting...', items, (v) => {
+        if (v && SPECIES[v]) {
+          const mon = makeMon(v, 5, SPECIES, MOVES);
+          g.state.party.push(mon);
+          dexRegister(g.state.dex, 'seen', SPECIES[v].dexNo);
+          dexRegister(g.state.dex, 'caught', SPECIES[v].dexNo);
+          g.audio.playSfx('dex-register');
+          g.ui.toast(SPECIES[v].name + ' joined your party!');
+        }
+        this.completeIntro();
+      });
+      return;
+    }
+    this.completeIntro();
+  }
+
+  completeIntro() {
+    const g = this.game;
     g.state.story.flags.introDone = true;
     g.state.story.chapter = 0; // D2: Act I opens on Chapter 1 (ADR-015 spine)
     g.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };
@@ -24282,6 +24614,17 @@ Object.assign(OverworldScene.prototype, {
     }
     if (g.state.story.flags['in_' + id] === undefined) g.state.story.flags['in_' + id] = true;
     g.state.story.flags['reached_' + id] = true; // quest chain producers (WS6)
+    // ADR-025 §6 (Traveler's Memory): the Saffron gate, remembered.
+    // The shipped game never posted a guard at Saffron's doors (the
+    // city is entered freely), so the memory surfaces as the city
+    // itself acknowledging the returning traveler — once, on the
+    // first arrival of a journey that carries it. Door-keeping only:
+    // no beat, battle, or badge is touched.
+    if (id === 'saffron' && hasTravelersMemory(g.state, 'saffron-guard')
+      && !g.state.story.flags.echo_saffron_guard) {
+      g.state.story.flags.echo_saffron_guard = true;
+      g.ui.say(['The Saffron gate attendant looks up from his thermos — then waves you straight through, drink and all. "Go on," he says. "City remembers you."']);
+    }
   },
 
   boulderAt(x, y) {
@@ -24527,10 +24870,17 @@ Object.assign(OverworldScene.prototype, {
     // ADR-025 §3 (Phase 3): the Hall of Fame gift — the Champion's
     // Ribbon is presented at League registration, once (a keepsake is
     // a unique object; repeat registrations never duplicate it).
+    // ADR-025 §6: when the champion ALREADY carries the Ribbon (a
+    // Second Journey), the gift rides the central source grant's
+    // duplicate conversion (cash + the line) instead of a 2nd piece.
     const lines = CREDITS_LINES.slice();
     if (grantKeepsake(g.state, 'championsribbon')) {
       lines.push('The League registrar presents you with the CHAMPION\'S RIBBON!');
       lines.push('Give it to a Pokemon from the party menu — its holder gains x1.2 XP.');
+    } else if (ownsKeepsake(g.state, 'championsribbon')) {
+      const hofGift = grantKeepsakeFromSource(g.state, 'championsribbon');
+      lines.push('The League registrar reaches for the CHAMPION\'S RIBBON — then sees yours, and smiles.');
+      if (hofGift.line) lines.push(hofGift.line);
     }
     g.ui.say(lines, () => { if (done) done(); }, '');
   },
@@ -24568,12 +24918,22 @@ Object.assign(OverworldScene.prototype, {
           const flag = 'item_' + this.mapId + '_' + fx + '_' + fy;
           if (g.state.story.flags[flag]) { g.ui.say(['There is nothing here.']); return true; }
           // Mt. Moon fossil pair: taking one seals the other (original beat).
-          if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken) {
+          // ADR-025 §6 Traveler's Memory: a traveler who chose before
+          // may re-pick freely — the seal never lands for them.
+          if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken
+            && !hasTravelersMemory(g.state, 'fossil-choice')) {
             g.ui.say(['Only crumbled stone remains. You chose your fossil already.']);
             return true;
           }
           g.state.story.flags[flag] = true;
           if (b.item === 'helixfossil' || b.item === 'domefossil') g.state.story.flags.fossil_taken = true;
+          // ADR-025 §6: keepsake item balls ride the central source grant.
+          if (ITEMS[b.item] && ITEMS[b.item].pocket === 'keepsakes') {
+            const res = grantKeepsakeFromSource(g.state, b.item);
+            g.audio.playSfx('dex-register');
+            g.ui.say([res.status === 'granted' ? 'Found ' + ITEMS[b.item].name + '!' : res.line]);
+            return true;
+          }
           g.state.bag[b.item] = (g.state.bag[b.item] || 0) + (b.n || 1);
           g.audio.playSfx('dex-register');
           g.ui.say(['Found ' + (ITEMS[b.item] ? ITEMS[b.item].name : b.item) + '!']);
@@ -24588,6 +24948,13 @@ Object.assign(OverworldScene.prototype, {
           const flag = 'hidden_' + this.mapId + '_' + fx + '_' + fy;
           if (!g.state.story.flags[flag]) {
             g.state.story.flags[flag] = true;
+            // ADR-025 §6: hidden keepsakes ride the central source grant.
+            if (ITEMS[hb.item] && ITEMS[hb.item].pocket === 'keepsakes') {
+              const res = grantKeepsakeFromSource(g.state, hb.item);
+              g.audio.playSfx('dex-register');
+              g.ui.say([res.status === 'granted' ? 'Found a hidden ' + ITEMS[hb.item].name + '!' : res.line]);
+              return true;
+            }
             g.state.bag[hb.item] = (g.state.bag[hb.item] || 0) + (hb.n || 1);
             g.audio.playSfx('dex-register');
             g.ui.say(['Found a hidden ' + (ITEMS[hb.item] ? ITEMS[hb.item].name : hb.item) + '!']);
@@ -24731,6 +25098,14 @@ Object.assign(OverworldScene.prototype, {
   sysNpc(npc) {
     const g = this.game;
     const sayLines = (cb) => g.ui.say(npc.dialogue.map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
+    // ADR-025 §6 (Bond echo): a character who was Close in a previous
+    // journey says the line, once, the first time the new journey
+    // meets them — then their own scene proceeds. Presentation only.
+    const echoId = BOND_NPC_IDS[npc.name];
+    if (echoId && takeEchoGreeting(g.state, echoId)) {
+      g.ui.say([ECHO_LINE], () => { this.sysNpc(npc); }, npc.name);
+      return true;
+    }
     if (npc.sparCoach) { this.startSpar(npc); return true; }
     // ADR-025 §2 (Bonds): the Celadon parley pair run their scene.
     if (npc.parley) { if (this.runParleyNpc(npc)) return true; }
@@ -24939,7 +25314,17 @@ Object.assign(OverworldScene.prototype, {
       const tale = QUESTS[id];
       const npcId = tale && tale.bondNpc;
       const before = npcId ? bondOf(st, npcId) : 0;
+      // ADR-025 §6: a tale reward riding the central source grant may
+      // convert to cash when the piece is already owned — the
+      // conversion line follows the tale's own words.
+      const moneyBefore = st.player.money;
       completeTale(st, id, opts);
+      if (st.player.money === moneyBefore + DUPE_KEEPSAKE_CASH) {
+        const ksId = (opts && opts.keepsake !== undefined) ? opts.keepsake
+          : (tale && (tale.keepsakeReward || (tale.reward || {}).keepsake));
+        const dl = ksId ? dupeKeepsakeLine(ksId) : null;
+        if (dl) g.ui.say([dl]);
+      }
       // ADR-025 §2: Phase 4's tale deltas now land in a LIVE tier model
       // (their amounts and semantics are unchanged) — the heart pip
       // rides the next dialogue after the change.
@@ -25284,15 +25669,23 @@ Object.assign(OverworldScene.prototype, {
           const r1 = applyBond(st, 'rue', 1);
           const r2 = applyBond(st, 'cole', 1);
           if ((r1 && r1.dir) || (r2 && r2.dir)) g.ui.queueBondPip(1);
-          const gotRibbon = grantKeepsake(st, 'secondwindribbon');
-          st.bag.xpcandy = (st.bag.xpcandy || 0) + (gotRibbon ? 1 : 2);
+          // ADR-025 §6: the parley ribbon rides the central source
+          // grant — in a Second Journey (ribbon already carried) the
+          // duplicate converts to cash, and the candies settle at the
+          // talk-down's usual one.
+          const ribbonRes = grantKeepsakeFromSource(st, 'secondwindribbon');
+          const gotRibbon = ribbonRes.status === 'granted';
+          const dupeRibbon = ribbonRes.status === 'duplicate';
+          st.bag.xpcandy = (st.bag.xpcandy || 0) + ((gotRibbon || dupeRibbon) ? 1 : 2);
           resolve();
           this.taleSay([
             'You talk. About the ship. The tower. The standing-down on the island that has not even happened yet and somehow already counts.',
             'Nobody reaches for a Poke Ball. Cole laughs once, surprised at himself. Rue pretends she was never scared of you, badly.',
             gotRibbon
               ? 'On the way out, Rue presses something into your hand — a ribbon, road-worn and carefully mended. "Second-Wind," she says. "For the one who keeps getting up. Do NOT make it a thing." It is absolutely a thing.'
-              : 'On the way out, Rue presses two XP Candies into your hand. "For the road," she says. "Do NOT make it a thing." It is absolutely a thing.',
+              : dupeRibbon
+                ? 'On the way out, Rue presses something into your hand — then stops. "You already carry a Second-Wind," she says, flat. "One of a kind. Fine." She counts out $2,000 instead, like it personally offends her. "Do NOT make it a thing." It is absolutely a thing.'
+                : 'On the way out, Rue presses two XP Candies into your hand. "For the road," she says. "Do NOT make it a thing." It is absolutely a thing.',
             'They walk off arguing about lunch. Not running. Walking. (Received an XP Candy for the road — less than a prize fight pays, and worth more.)',
           ], '');
         });
@@ -25665,8 +26058,20 @@ Object.assign(OverworldScene.prototype, {
           g.ui.toast(qty > 1 ? 'Bought ' + qty + ' x ' + it.name + '.' : 'Bought ' + it.name + '.');
           this.openMart(stock);
         };
-        // Keepsakes stay qty-1 only: unique objects buy in one press.
-        if (it.pocket === 'keepsakes') { buyNow(1); return; }
+        // Keepsakes stay qty-1 only: unique objects buy in one press,
+        // and the purchase rides the central source grant (the row is
+        // already disabled when the piece is owned, so a duplicate
+        // here is unreachable — the grant is the guard).
+        if (it.pocket === 'keepsakes') {
+          const res = grantKeepsakeFromSource(g.state, iv);
+          if (res.status === 'granted') {
+            g.state.player.money -= it.price;
+            g.audio.playSfx('dex-register');
+            g.ui.toast('Bought ' + it.name + '.');
+          }
+          this.openMart(stock);
+          return;
+        }
         const maxQty = Math.max(1, Math.min(99, Math.floor(g.state.player.money / it.price)));
         pickQty('Buy', it.name, it.price, maxQty, buyNow, showBuy);
       });
@@ -25795,7 +26200,8 @@ Object.assign(OverworldScene.prototype, {
       for (const b of this.map.items) {
         const flag = 'item_' + this.mapId + '_' + b.x + '_' + b.y;
         if (g.state.story.flags[flag]) continue;
-        if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken) continue;
+        if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken
+          && !hasTravelersMemory(g.state, 'fossil-choice')) continue;
         const c = r.ctx;
         c.save();
         c.fillStyle = '#e84040';
@@ -26163,6 +26569,7 @@ class Game {
       this.authUser = null;
       AUTH.user = null;
       if (this._loginMode === 'continue') this.continueGame();
+      else if (this._loginMode === 'second') this.secondJourney();
       else this.newGame();
     });
   }
@@ -26174,6 +26581,11 @@ class Game {
     this.ui.toast('Welcome back, ' + name + '!'); // toast = textContent (C12-safe)
     SYNC.runLoginMerge(this, mode, (res) => {
       if (!res) return;
+      // ADR-025 §6: a Second Journey login merges like Continue (the
+      // merge refreshes the local slot caches), then hands off to the
+      // creation flow, which re-reads its sources from those caches.
+      // The merge's own load outcome is deliberately not followed.
+      if (mode === 'second') { this.secondJourney(); return; }
       if (res.load === 'state' && res.state) {
         this.state = res.state;
         this.audio.applySettings(this.state.settings);
@@ -26685,6 +27097,9 @@ class Game {
     g.ui.showMenu('Save', [
       { label: g.state.meta.location + ' · ' + mins + 'm · ' + badges + ' badges · Dex ' + caught, value: null, disabled: true },
       { label: modeLine, value: null, disabled: true },
+      // ADR-025 §6: a Second Journey run's summary carries its ribbon.
+      ...((g.state.meta.ngPlus || 0) > 0
+        ? [{ label: '★ Second Journey — Journey ' + (g.state.meta.ngPlus + 1), value: null, disabled: true }] : []),
       { label: 'Last saved: ' + when, value: null, disabled: true },
       { label: 'Sync: guest-local (Track B: cloud)', value: null, disabled: true },
       { label: 'Save now', value: 'save' },
@@ -27408,23 +27823,34 @@ Object.assign(Game.prototype, {
   openHallOfFame() {
     const g = this;
     const hof = (g.state.story && g.state.story.hof) || [];
-    if (!hof.length) {
+    const prior = (g.state.story && g.state.story.priorHof) || [];
+    if (!hof.length && !prior.length) {
       g.ui.say(['No Hall of Fame entries yet — defeat the Champion to record your team.'], null, 'Hall of Fame');
       return;
     }
     const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-    let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
-    for (let e = hof.length - 1; e >= 0; e--) {
-      const entry = hof[e];
-      html += '<div class="hofentry"><div class="hofhead2">Entry ' + (e + 1) + ' — ' + (entry.badges || 0) + ' badges</div><div class="hofteam">';
+    const entryHtml = (entry, head) => {
+      let h = '<div class="hofentry"><div class="hofhead2">' + head + '</div><div class="hofteam">';
       for (const m of entry.team || []) {
         const sp = SPECIES[m.speciesId];
         const name = m.nickname || (sp ? sp.name : m.speciesId);
-        html += '<div class="hofmon"><img class="picon hofsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+        h += '<div class="hofmon"><img class="picon hofsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
           + '<span class="hofname">' + esc(name) + '</span>'
           + '<span class="hofsub">' + (m.nickname && sp ? esc(sp.name) + ' · ' : '') + 'Lv' + m.level + '</span></div>';
       }
-      html += '</div></div>';
+      return h + '</div></div>';
+    };
+    let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
+    for (let e = hof.length - 1; e >= 0; e--) {
+      html += entryHtml(hof[e], 'Entry ' + (e + 1) + ' — ' + (hof[e].badges || 0) + ' badges');
+    }
+    // ADR-025 §6: prior journeys' teams stay viewable from the new
+    // run — under their own heading, never counted as this run's.
+    if (prior.length) {
+      html += '<div class="hofhead2">— PRIOR JOURNEYS —</div>';
+      for (let e = prior.length - 1; e >= 0; e--) {
+        html += entryHtml(prior[e], 'Earlier journey ' + (e + 1) + ' — ' + (prior[e].badges || 0) + ' badges');
+      }
     }
     html += '</div>';
     g.ui.showSummary({ name: 'Hall of Fame', tabs: [{ id: 'hof', label: 'HALL OF FAME', bodyHtml: html }] }, null);
@@ -27436,7 +27862,10 @@ Object.assign(Game.prototype, {
   openDiploma() {
     const g = this;
     const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
-    const n = kanto.filter((s) => g.state.dex.caught[s.dexNo]).length;
+    // ADR-025 §6: the diploma is an HONOR — it reads the run's OWN
+    // catches (ownCaughtMap), never the carried archive alone.
+    const own = ownCaughtMap(g.state.dex);
+    const n = kanto.filter((s) => own[s.dexNo]).length;
     if (n < 151) {
       g.ui.say(['You\'ve caught ' + n + ' of 151 Kanto Pokemon.'], null, 'Prof. Hawthorn');
       return;
@@ -27525,7 +27954,10 @@ Object.assign(Game.prototype, {
   checkDiploma() {
     const g = this;
     const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
-    const done = kanto.every((s) => g.state.dex.caught[s.dexNo]);
+    // ADR-025 §6: honors require the new run's OWN catches — a carried
+    // archive can fill the dex's records but never this check.
+    const own = ownCaughtMap(g.state.dex);
+    const done = kanto.every((s) => own[s.dexNo]);
     if (done && !g.state.story.flags.diploma) {
       g.state.story.flags.diploma = true;
       applyBondOnce(g.state, 'bondsrc_diploma', 'hawthorn', 2); // ADR-025 §2: the diploma is a bond beat (+2, once — this guard is the one-shot)
@@ -27535,5 +27967,126 @@ Object.assign(Game.prototype, {
         'all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
       ], null, 'Prof. Hawthorn');
     }
+  },
+});
+
+
+// ---- src/game/second-journey.mjs ----
+// ---------- ADR-025 §6 (Phase 6): Second Journey creation ----------
+// The New Game+ flow. A "Second Journey" begins from a COMPLETED save
+// (state.mjs isCompletedRun: its own Hall of Fame entry, or Kanto in
+// regionsDone) and inherits exactly what §6 allows — dex records, the
+// keepsake collection, Traveler's Memory, starter breadth, the bond
+// echo, prior HoF teams, and meta.ngPlus + 1 — all applied inside
+// defaultState(inherit). The SOURCE SLOT IS NEVER MODIFIED: sources
+// are read as raw stored bytes, deep-cloned, and migrated in memory;
+// nothing in this module ever writes a source slot.
+
+const SYNC_CACHE_KEY = 'pdr.sync.cache';
+
+// Read every locally-held save (the guest slot + the cloud session
+// cache's three slots), each migrated in memory. Returns
+// [{ key, label, state }] — `state` is a fresh object the caller may
+// hand to defaultState(inherit); the stored bytes are untouched.
+function readLocalSaves() {
+  const out = [];
+  const push = (key, label, raw) => {
+    if (!raw) return;
+    try {
+      const parsed = JSON.parse(raw);
+      const st = migrate(parsed && parsed.state ? parsed.state : parsed);
+      if (st && typeof st === 'object') out.push({ key, label, state: st });
+    } catch (e) { /* a corrupt slot simply does not offer a journey */ }
+  };
+  try {
+    push('guest', 'This device', localStorage.getItem(SAVE_KEY));
+    const cache = JSON.parse(localStorage.getItem(SYNC_CACHE_KEY) || 'null');
+    if (cache && cache.slots) {
+      for (const n of [1, 2, 3]) {
+        const s = cache.slots[n];
+        if (s && s.state) push('slot' + n, 'Save slot ' + n, JSON.stringify(s.state));
+      }
+    }
+  } catch (e) { /* storage unavailable — no sources, no row */ }
+  return out;
+}
+
+// The completed saves a Second Journey may begin from.
+function completedSources() {
+  return readLocalSaves().filter((s) => isCompletedRun(s.state));
+}
+
+// Any completed save at all? (The title's unlock condition.)
+function hasCompletedSave() {
+  return completedSources().length > 0;
+}
+
+if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
+  // The creation flow, entered from the title's Second Journey row
+  // after the Trainer ID Terminal (guests pass straight through).
+  // Pick the source (when several qualify), then the target slot,
+  // then begin — the same intro a normal New Game plays, on a state
+  // built by defaultState(inherit). Difficulty is chosen exactly the
+  // way newGame() does (the current run's difficulty carries into the
+  // intro's difficulty step); House Rules are settings and persist.
+  secondJourney() {
+    const g = this;
+    const sources = completedSources();
+    if (!sources.length) { g.startTitle(); return; }
+    const pickSource = (src) => {
+      const targets = [];
+      for (const n of [1, 2, 3]) {
+        if (src.key !== 'slot' + n) targets.push({ label: 'Save slot ' + n, value: n });
+      }
+      // The guest build has exactly one shipped slot; its target is
+      // that slot. Creation itself never writes the source — the new
+      // run's first save (at the intro's end) is what lands there.
+      if (src.key === 'guest' || typeof SYNC === 'undefined' || typeof SYNC.setActiveSlot !== 'function') {
+        begin(src, null);
+        return;
+      }
+      if (targets.length === 1) { begin(src, targets[0].value); return; }
+      g.ui.showMenu('Begin the Second Journey in...', [...targets, { label: 'Back', value: null }], (v) => {
+        if (v === null || v === undefined) { g.startTitle(); return; }
+        begin(src, v);
+      });
+    };
+    const begin = (src, targetSlot) => {
+      if (typeof targetSlot === 'number' && typeof SYNC !== 'undefined' && typeof SYNC.setActiveSlot === 'function') {
+        try { SYNC.setActiveSlot(targetSlot); } catch (e) { /* cache-only concern */ }
+      }
+      g.beginSecondJourney(src.state);
+    };
+    if (sources.length === 1) { pickSource(sources[0]); return; }
+    const items = sources.map((s, i) => ({
+      label: s.label + ' — Journey ' + (((s.state.meta && s.state.meta.ngPlus) || 0) + 1) + ' complete', value: i,
+    }));
+    items.push({ label: 'Back', value: null });
+    g.ui.showMenu('Begin again from which completed journey?', items, (v) => {
+      if (v === null || v === undefined) { g.startTitle(); return; }
+      pickSource(sources[v]);
+    });
+  },
+
+  // Mirrors newGame() line for line, on an inherited state: settings
+  // kept (House Rules are settings and persist), difficulty from the
+  // current run exactly as newGame() takes it, veteran skip-intro.
+  beginSecondJourney(sourceState) {
+    const g = this;
+    const keepSettings = g.state && g.state.settings;
+    const keepDifficulty = (typeof difficultyOf === 'function' && g.state) ? difficultyOf(g.state) : 'classic';
+    g.state = freshState(sourceState);
+    if (keepSettings) g.state.settings = keepSettings;
+    if (typeof g.applyKeymap === 'function') g.applyKeymap();
+    g.state.story.difficulty = keepDifficulty;
+    if (typeof activeHouseRules === 'function' && activeHouseRules(g.state).length) {
+      g.state.meta.houseRulesTouched = true;
+    }
+    g.state.player.name = 'ASH';
+    g.state.player.rivalName = 'GARY';
+    if (typeof makeRngStreams === 'function' && typeof nextSeed === 'function') g.rng = makeRngStreams(nextSeed());
+    g.skipIntroVeteran = true; // a returning champion may skip the intro
+    g.scenes.replace(new IntroScene());
+    g.ui.toast('A Second Journey begins.');
   },
 });

@@ -177,6 +177,28 @@ export function grantKeepsake(state, itemId) {
   state.bag[itemId] = 1;
   return true;
 }
+// ---- ADR-025 §6 (Phase 6): the central SOURCE grant path ----
+// Every world source (tales, hidden items, item balls, shops, the HoF
+// gift, the parley) grants through here so they all behave identically
+// when the player ALREADY owns the piece a source would grant: the
+// duplicate never lands as a second copy (a keepsake is a unique
+// object, and held pieces stay non-sellable) — it converts to cash
+// instead, +2,000, and the caller surfaces `line` as dialogue.
+export const DUPE_KEEPSAKE_CASH = 2000;
+export function dupeKeepsakeLine(itemId) {
+  const def = KEEPSAKES[itemId];
+  if (!def) return null;
+  return 'You already carry the ' + def.name + ' — a keepsake is one of a kind, so its keeper presses $'
+    + DUPE_KEEPSAKE_CASH.toLocaleString('en-US') + ' into your hand instead.';
+}
+export function grantKeepsakeFromSource(state, itemId) {
+  const def = KEEPSAKES[itemId];
+  if (!def || !state || !state.bag || !state.player) return { status: 'invalid', granted: false, cash: 0, line: null };
+  if (grantKeepsake(state, itemId)) return { status: 'granted', granted: true, cash: 0, line: null };
+  if (!ownsKeepsake(state, itemId)) return { status: 'invalid', granted: false, cash: 0, line: null };
+  state.player.money = (state.player.money || 0) + DUPE_KEEPSAKE_CASH;
+  return { status: 'duplicate', granted: false, cash: DUPE_KEEPSAKE_CASH, line: dupeKeepsakeLine(itemId) };
+}
 // Party-menu Give: bag -> mon. Fails cleanly when the mon already holds
 // one, the bag has none, or the id is not a keepsake.
 export function giveKeepsake(state, mon, itemId) {

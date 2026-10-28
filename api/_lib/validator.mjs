@@ -168,6 +168,26 @@ function checkDex(dex, errors, summary) {
       }
     }
   }
+  // ADR-025 §6 (Phase 6): the run's OWN catch record — present only on
+  // Second Journey runs, where dex.caught is the carried archive and
+  // honors read this map instead. Same honesty rules as the archive.
+  if (dex.runCaught !== undefined) {
+    if (!isPlainObj(dex.runCaught)) errors.push('bad-dex-run-caught');
+    else {
+      const rdk = hasDangerousKey(dex.runCaught);
+      if (rdk) errors.push('dangerous-key:' + rdk);
+      else {
+        let n = 0;
+        for (const k of Object.keys(dex.runCaught)) {
+          const no = Number(k);
+          if (!Number.isInteger(no) || no < 1 || no > DEX_MAX || String(no) !== k) { errors.push('bad-dexno'); break; }
+          if (dex.runCaught[k] !== true) { errors.push('bad-dexval'); break; }
+          n++;
+        }
+        summary.dexRunCaught = n;
+      }
+    }
+  }
   // Totals re-derived server-side (never trust client totals).
   summary.dexCaught = caught; summary.dexSeen = seen; summary.dexBefriended = befriended;
 }
@@ -274,12 +294,46 @@ function checkStory(story, errors) {
       }
     }
   }
-  // Hall of Fame snapshots (WS6 finale): small, species-named entries.
-  if (story.hof !== undefined) {
-    if (!Array.isArray(story.hof) || story.hof.length > 20) errors.push('bad-hof');
-    else for (const h of story.hof) {
-      if (!isPlainObj(h) || typeof h.species !== 'string' || h.species.length > 40 || !isInt(h.level, 1, 100)) { errors.push('bad-hof'); break; }
+  // Hall of Fame snapshots — ADR-025 §6 (Phase 6) shape reconciliation.
+  // ONE canonical shape, the one runEnding pushes and the HoF viewer
+  // reads: { team: [{ speciesId, level, nickname }], badges }. The
+  // legacy single-mon shape { species, level } — this validator's
+  // original expectation, which the client never actually pushed —
+  // stays ACCEPTED so any save carrying it loads clean; the client
+  // normalizes it to canonical on load. story.priorHof (a Second
+  // Journey run's inherited teams) carries the same shapes.
+  const checkHofList = (list) => {
+    if (!Array.isArray(list) || list.length > 40) return false;
+    for (const h of list) {
+      if (!isPlainObj(h) || hasDangerousKey(h)) return false;
+      if (Array.isArray(h.team)) {
+        if (h.team.length < 1 || h.team.length > 6) return false;
+        if (!(h.badges === undefined || isInt(h.badges, 0, 20))) return false;
+        for (const m of h.team) {
+          if (!isPlainObj(m) || !TABLES.species.has(m.speciesId) || !isInt(m.level, 1, 100)) return false;
+          if (!(m.nickname === undefined || m.nickname === null || isSafeText(m.nickname, 1, 12))) return false;
+        }
+      } else if (!(typeof h.species === 'string' && h.species.length >= 1 && h.species.length <= 40 && isInt(h.level, 1, 100))) {
+        return false;
+      }
     }
+    return true;
+  };
+  if (story.hof !== undefined && !checkHofList(story.hof)) errors.push('bad-hof');
+  if (story.priorHof !== undefined && !checkHofList(story.priorHof)) errors.push('bad-prior-hof');
+  // Phase 6 carried knowledge: closed vocabularies, bounded lists.
+  if (story.bondEcho !== undefined) {
+    if (!Array.isArray(story.bondEcho) || story.bondEcho.length > 32
+      || story.bondEcho.some((x) => typeof x !== 'string' || !/^[a-z0-9_]{1,40}$/.test(x))) errors.push('bad-bond-echo');
+  }
+  if (story.travelersMemory !== undefined) {
+    const GATES = ['saffron-guard', 'coin-case', 'card-key', 'fossil-choice'];
+    if (!Array.isArray(story.travelersMemory) || story.travelersMemory.length > 4
+      || story.travelersMemory.some((x) => !GATES.includes(x))) errors.push('bad-travelers-memory');
+  }
+  if (story.starterLines !== undefined) {
+    if (!Array.isArray(story.starterLines) || story.starterLines.length > 3
+      || story.starterLines.some((x) => !['bulbasaur', 'charmander', 'squirtle'].includes(x))) errors.push('bad-starter-lines');
   }
 }
 

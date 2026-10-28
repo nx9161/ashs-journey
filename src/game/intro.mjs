@@ -109,6 +109,36 @@ export class IntroScene {
   finishIntro() {
     const g = this.game;
     this.grantPartner(); // skip paths land here directly — converge state first
+    // ADR-025 §6 (starter breadth): a Second Journey's intro offers the
+    // reunion — each starter line a completed journey chose may join
+    // NOW, at the start, instead of waiting for its gift event (the
+    // gift events stay live regardless; declining loses nothing). A
+    // first journey carries no lines and sees no offer: its intro is
+    // byte-identical to before Phase 6. Headless keeps harness timing.
+    const lines = (g.state.story.starterLines || [])
+      .filter((id) => !g.state.story.flags['starter_reunion_' + id]);
+    if (lines.length && !g.ui.headless) {
+      for (const id of g.state.story.starterLines) g.state.story.flags['starter_reunion_' + id] = true;
+      const items = lines.map((id) => ({ label: SPECIES[id].name + ' — an old friend is waiting', value: id }));
+      items.push({ label: 'Not now', value: null });
+      g.ui.showMenu('By the lab fence, a familiar face is waiting...', items, (v) => {
+        if (v && SPECIES[v]) {
+          const mon = makeMon(v, 5, SPECIES, MOVES);
+          g.state.party.push(mon);
+          dexRegister(g.state.dex, 'seen', SPECIES[v].dexNo);
+          dexRegister(g.state.dex, 'caught', SPECIES[v].dexNo);
+          g.audio.playSfx('dex-register');
+          g.ui.toast(SPECIES[v].name + ' joined your party!');
+        }
+        this.completeIntro();
+      });
+      return;
+    }
+    this.completeIntro();
+  }
+
+  completeIntro() {
+    const g = this.game;
     g.state.story.flags.introDone = true;
     g.state.story.chapter = 0; // D2: Act I opens on Chapter 1 (ADR-015 spine)
     g.state.story.position = { map: 'pallet', x: 7, y: 7, dir: 'down' };

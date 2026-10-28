@@ -6,11 +6,130 @@
 // registry, story.flags open map.
 
 import { xpForLevel } from '../engine/formulas.mjs';
+import { KEEPSAKES } from '../data/items.mjs';
 
 export const SCHEMA_VERSION = 2;
 
-export function defaultState() {
-  return {
+// ---------- ADR-025 §6 (Phase 6): Second Journey helpers ----------
+// The canonical Hall of Fame entry shape — ONE shape across runEnding
+// (the writer), the client schema, the server validator, and the HoF
+// viewer: { team: [{ speciesId, level, nickname }], badges }. Legacy
+// entries shaped { species, level } (the shape the server validator
+// was written against before the viewer shipped) normalize into it.
+export function normalizeHofEntry(e) {
+  if (!e || typeof e !== 'object' || Array.isArray(e)) return null;
+  const lvl = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.max(1, Math.min(100, Math.trunc(v))) : 1);
+  if (Array.isArray(e.team)) {
+    const team = [];
+    for (const m of e.team) {
+      if (!m || typeof m !== 'object') continue;
+      const speciesId = typeof m.speciesId === 'string' ? m.speciesId : (typeof m.species === 'string' ? m.species : null);
+      if (!speciesId) continue;
+      team.push({ speciesId, level: lvl(m.level), nickname: typeof m.nickname === 'string' ? m.nickname : null });
+    }
+    if (!team.length) return null;
+    const badges = typeof e.badges === 'number' && Number.isFinite(e.badges) ? Math.max(0, Math.trunc(e.badges)) : 0;
+    return { team, badges };
+  }
+  if (typeof e.species === 'string' && e.species) {
+    return { team: [{ speciesId: e.species, level: lvl(e.level), nickname: null }], badges: 0 };
+  }
+  return null;
+}
+export function normalizeHofList(list) {
+  if (!Array.isArray(list)) return [];
+  const out = [];
+  for (const e of list) { const n = normalizeHofEntry(e); if (n) out.push(n); }
+  return out;
+}
+// Completion detection (§6): a run has completed Kanto when ITS OWN
+// Hall of Fame holds an entry, or its regionsDone names Kanto.
+// Inherited priorHof entries NEVER satisfy this — they live apart.
+export function isCompletedRun(save) {
+  if (!save || typeof save !== 'object' || !save.story) return false;
+  if (normalizeHofList(save.story.hof).length > 0) return true;
+  return Array.isArray(save.story.regionsDone) && save.story.regionsDone.includes('kanto');
+}
+// The run's OWN catches. In a Second Journey run the dex itself is the
+// carried ARCHIVE (records), so dexRegister also writes dex.runCaught
+// and honors (diploma, HoF ribbon semantics) read THIS map. The map
+// exists only on Second Journey runs — its presence is the
+// discriminator; every other run's archive IS its own record, so the
+// helper falls back to dex.caught there.
+export function ownCaughtMap(dex) {
+  if (dex && typeof dex.runCaught === 'object' && dex.runCaught !== null && !Array.isArray(dex.runCaught)) return dex.runCaught;
+  return (dex && dex.caught) || {};
+}
+// The keepsake collection a save owns: bag pocket + held pieces.
+export function keepsakeCollectionOf(save) {
+  if (!save || typeof save !== 'object') return [];
+  const out = [];
+  for (const id of Object.keys(KEEPSAKES)) {
+    const inBag = !!(save.bag && (save.bag[id] || 0) > 0);
+    const held = [...(Array.isArray(save.party) ? save.party : []),
+      ...Object.values(save.boxes || {}).flat()]
+      .some((m) => m && m.keepsake === id);
+    if (inBag || held) out.push(id);
+  }
+  return out;
+}
+// Bond echo (§6): the characters who were Close (>= +7) in the source.
+export function bondEchoFromSave(save) {
+  const bonds = (save && save.story && save.story.bonds) || {};
+  return Object.keys(bonds).filter((id) => typeof bonds[id] === 'number' && bonds[id] >= 7);
+}
+// Traveler's Memory (§6): the one-time friction gates, derived from
+// the SOURCE save's own shipped evidence — its story flags, its badge
+// case, its bag. (The shipped game records these exact names:
+// silph_done / fossil_taken are story flags set by the campaign;
+// reached_saffron is written by sysLoadMap on entering Saffron.)
+export const TRAVELERS_MEMORY_GATES = ['saffron-guard', 'coin-case', 'card-key', 'fossil-choice'];
+export function travelersMemoryFromSave(save) {
+  if (!save || typeof save !== 'object') return [];
+  const flags = (save.story && save.story.flags) || {};
+  const bag = save.bag || {};
+  const badges = (save.badges && save.badges.kanto) || [];
+  const out = [];
+  if (flags.silph_done === true || flags.reached_saffron === true || badges.includes('marshbadge')) out.push('saffron-guard');
+  if ((bag.coincase || 0) > 0 || (bag.coin || 0) > 0) out.push('coin-case');
+  if (flags.silph_done === true || (bag.cardkey || 0) > 0) out.push('card-key');
+  if (flags.fossil_taken === true) out.push('fossil-choice');
+  return out;
+}
+export function hasTravelersMemory(state, gate) {
+  return !!(state && state.story && Array.isArray(state.story.travelersMemory)
+    && state.story.travelersMemory.includes(gate));
+}
+// Starter breadth (§6): the Kanto starter lines, by base species. A
+// line counts as "chosen in the source run" when the shipped game
+// recorded it joining that run: the gift-event flags
+// (bulbasaur_joined / charmander_joined / squirtle_joined), a line
+// member in the party/boxes, or a line member in the dex's caught
+// records (dex numbers 1-9 are exactly these three lines).
+export const STARTER_LINES = {
+  bulbasaur: ['bulbasaur', 'ivysaur', 'venusaur'],
+  charmander: ['charmander', 'charmeleon', 'charizard'],
+  squirtle: ['squirtle', 'wartortle', 'blastoise'],
+};
+const STARTER_DEXNO = { bulbasaur: [1, 2, 3], charmander: [4, 5, 6], squirtle: [7, 8, 9] };
+export function starterLinesFromSave(save) {
+  if (!save || typeof save !== 'object') return [];
+  const flags = (save.story && save.story.flags) || {};
+  const mons = [...(Array.isArray(save.party) ? save.party : []),
+    ...Object.values(save.boxes || {}).flat()];
+  const caught = (save.dex && save.dex.caught) || {};
+  const out = [];
+  for (const base of Object.keys(STARTER_LINES)) {
+    const line = STARTER_LINES[base];
+    if (flags[base + '_joined'] === true
+      || mons.some((m) => m && line.includes(m.speciesId))
+      || STARTER_DEXNO[base].some((n) => caught[n] === true || caught[String(n)] === true)) out.push(base);
+  }
+  return out;
+}
+
+export function defaultState(inherit) {
+  const st = {
     v: SCHEMA_VERSION,
     player: { name: 'ASH', rivalName: 'GARY', trainerId: 0, playtimeSec: 0, money: 300 },
     party: [],
@@ -28,6 +147,17 @@ export function defaultState() {
       // Phase 4 records the Town Tale sources (structural only); the
       // tiers, dialogue variants and consumers are Phase 5.
       bonds: {},
+      // ADR-025 §6 (Phase 6): Second Journey fields, all defaults-filled
+      // on load (schema v2 stays). hof holds THIS run's own entries
+      // only; priorHof keeps earlier runs' teams viewable without ever
+      // satisfying this run's completion. bondEcho / travelersMemory /
+      // starterLines are the carried knowledge of a Second Journey run
+      // (empty on a first run).
+      hof: [],
+      priorHof: [],
+      bondEcho: [],
+      travelersMemory: [],
+      starterLines: [],
       region: 'kanto',
       regionsDone: [],
       position: { map: 'pallet', x: 7, y: 7, dir: 'down' },
@@ -59,6 +189,44 @@ export function defaultState() {
       ngPlus: 0, // ADR-025 §6: Second Journey counter (Phase 6 consumes it)
     },
   };
+  // ---- Second Journey inheritance (§6) ----
+  // Fed ONLY a completed source save (isCompletedRun); anything else
+  // is ignored whole, so a normal New Game can never inherit by
+  // accident. The source object is READ, never written. Carries are
+  // exactly the §6 list — knowledge and relief from repetition, never
+  // power: no levels, party, boxes, money, badges, story progress, or
+  // items beyond the keepsake collection cross over.
+  if (inherit && isCompletedRun(inherit)) {
+    const src = inherit;
+    const trueOnly = (obj) => {
+      const out = {};
+      if (obj && typeof obj === 'object') for (const k of Object.keys(obj)) if (obj[k] === true) out[k] = true;
+      return out;
+    };
+    // 1. Dex records: the archive carries; honors read runCaught.
+    st.dex.caught = trueOnly(src.dex && src.dex.caught);
+    st.dex.seen = trueOnly(src.dex && src.dex.seen);
+    st.dex.befriended = trueOnly(src.dex && src.dex.befriended);
+    if (src.dex && typeof src.dex.forms === 'object' && src.dex.forms !== null) st.dex.forms = trueOnly(src.dex.forms);
+    st.dex.runCaught = {};
+    // 2. Keepsake collection: the pieces, in the pocket, from the start.
+    for (const id of keepsakeCollectionOf(src)) st.bag[id] = 1;
+    // 3. Prior runs' HoF teams stay viewable (this run's hof stays empty).
+    st.story.priorHof = [...normalizeHofList(src.story && src.story.hof),
+      ...normalizeHofList(src.story && src.story.priorHof)];
+    // 4. Traveler's Memory (door-keeping only). The coin case is the
+    // one gate whose "pre-solved" state is a handover: it is in the
+    // new run's bag from the start when the source had earned it.
+    st.story.travelersMemory = travelersMemoryFromSave(src);
+    if (st.story.travelersMemory.includes('coin-case')) st.bag.coincase = (st.bag.coincase || 0) + 1;
+    // 5. Starter breadth + 6. Bond echo: presentation/dialogue only.
+    st.story.starterLines = starterLinesFromSave(src);
+    st.story.bondEcho = bondEchoFromSave(src);
+    // 7. Meta: the counter climbs by one per Second Journey.
+    const prev = src.meta && Number.isInteger(src.meta.ngPlus) && src.meta.ngPlus > 0 ? src.meta.ngPlus : 0;
+    st.meta.ngPlus = prev + 1;
+  }
+  return st;
 }
 
 // Battle-mon factory: {speciesId, nickname, level, xp, moves[{id,pp}], ivs, hp...}
@@ -133,5 +301,11 @@ export function boxCheck(mon) {
 export function dexRegister(dex, kind, dexNo) {
   dex[kind][dexNo] = true;
   if (kind === 'caught' || kind === 'befriended') dex.seen[dexNo] = true;
+  // ADR-025 §6: on a Second Journey run (runCaught present), a catch in
+  // THIS run also lands in the run's own record — the set honors read.
+  if ((kind === 'caught' || kind === 'befriended')
+    && typeof dex.runCaught === 'object' && dex.runCaught !== null && !Array.isArray(dex.runCaught)) {
+    dex.runCaught[dexNo] = true;
+  }
 }
 export function dexCaughtCount(dex) { return Object.keys(dex.caught).length; }

@@ -62,8 +62,8 @@ export class SaveStore {
   }
 }
 
-export function freshState() {
-  const st = defaultState();
+export function freshState(inherit) {
+  const st = defaultState(inherit);
   st.meta.createdAt = Date.now();
   st.meta.updatedAt = Date.now();
   return st;

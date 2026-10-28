@@ -44,5 +44,6 @@
  "src/game/overworld.mjs",
  "src/game/overworld-systems.mjs",
  "src/game/main.mjs",
- "src/game/main-systems.mjs"
+ "src/game/main-systems.mjs",
+ "src/game/second-journey.mjs"
 ]

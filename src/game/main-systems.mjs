@@ -7,7 +7,7 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
 import { giveKeepsake } from './keepsakes.mjs';
-import { displayName, dexCaughtCount, evolutionCheck } from './state.mjs';
+import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './state.mjs';
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
@@ -450,23 +450,34 @@ Object.assign(Game.prototype, {
   openHallOfFame() {
     const g = this;
     const hof = (g.state.story && g.state.story.hof) || [];
-    if (!hof.length) {
+    const prior = (g.state.story && g.state.story.priorHof) || [];
+    if (!hof.length && !prior.length) {
       g.ui.say(['No Hall of Fame entries yet — defeat the Champion to record your team.'], null, 'Hall of Fame');
       return;
     }
     const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-    let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
-    for (let e = hof.length - 1; e >= 0; e--) {
-      const entry = hof[e];
-      html += '<div class="hofentry"><div class="hofhead2">Entry ' + (e + 1) + ' — ' + (entry.badges || 0) + ' badges</div><div class="hofteam">';
+    const entryHtml = (entry, head) => {
+      let h = '<div class="hofentry"><div class="hofhead2">' + head + '</div><div class="hofteam">';
       for (const m of entry.team || []) {
         const sp = SPECIES[m.speciesId];
         const name = m.nickname || (sp ? sp.name : m.speciesId);
-        html += '<div class="hofmon"><img class="picon hofsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
+        h += '<div class="hofmon"><img class="picon hofsprite" src="' + g.spriteDataUrl(m.speciesId) + '" alt="">'
           + '<span class="hofname">' + esc(name) + '</span>'
           + '<span class="hofsub">' + (m.nickname && sp ? esc(sp.name) + ' · ' : '') + 'Lv' + m.level + '</span></div>';
       }
-      html += '</div></div>';
+      return h + '</div></div>';
+    };
+    let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
+    for (let e = hof.length - 1; e >= 0; e--) {
+      html += entryHtml(hof[e], 'Entry ' + (e + 1) + ' — ' + (hof[e].badges || 0) + ' badges');
+    }
+    // ADR-025 §6: prior journeys' teams stay viewable from the new
+    // run — under their own heading, never counted as this run's.
+    if (prior.length) {
+      html += '<div class="hofhead2">— PRIOR JOURNEYS —</div>';
+      for (let e = prior.length - 1; e >= 0; e--) {
+        html += entryHtml(prior[e], 'Earlier journey ' + (e + 1) + ' — ' + (prior[e].badges || 0) + ' badges');
+      }
     }
     html += '</div>';
     g.ui.showSummary({ name: 'Hall of Fame', tabs: [{ id: 'hof', label: 'HALL OF FAME', bodyHtml: html }] }, null);
@@ -478,7 +489,10 @@ Object.assign(Game.prototype, {
   openDiploma() {
     const g = this;
     const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
-    const n = kanto.filter((s) => g.state.dex.caught[s.dexNo]).length;
+    // ADR-025 §6: the diploma is an HONOR — it reads the run's OWN
+    // catches (ownCaughtMap), never the carried archive alone.
+    const own = ownCaughtMap(g.state.dex);
+    const n = kanto.filter((s) => own[s.dexNo]).length;
     if (n < 151) {
       g.ui.say(['You\'ve caught ' + n + ' of 151 Kanto Pokemon.'], null, 'Prof. Hawthorn');
       return;
@@ -567,7 +581,10 @@ Object.assign(Game.prototype, {
   checkDiploma() {
     const g = this;
     const kanto = Object.values(SPECIES).filter((s) => s.dexNo >= 1 && s.dexNo <= 151);
-    const done = kanto.every((s) => g.state.dex.caught[s.dexNo]);
+    // ADR-025 §6: honors require the new run's OWN catches — a carried
+    // archive can fill the dex's records but never this check.
+    const own = ownCaughtMap(g.state.dex);
+    const done = kanto.every((s) => own[s.dexNo]);
     if (done && !g.state.story.flags.diploma) {
       g.state.story.flags.diploma = true;
       applyBondOnce(g.state, 'bondsrc_diploma', 'hawthorn', 2); // ADR-025 §2: the diploma is a bond beat (+2, once — this guard is the one-shot)

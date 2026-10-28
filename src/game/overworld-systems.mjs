@@ -9,7 +9,8 @@ import { MAPS, TRAINERS, WALKABLE } from '../data/maps.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
-import { grantKeepsake, ownsKeepsake } from './keepsakes.mjs';
+import { grantKeepsake, grantKeepsakeFromSource, dupeKeepsakeLine, DUPE_KEEPSAKE_CASH, ownsKeepsake } from './keepsakes.mjs';
+import { hasTravelersMemory } from './state.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './state.mjs';
@@ -17,7 +18,7 @@ import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
-import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast } from './bonds.mjs';
+import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
 import { CHAPTERS } from '../data/story.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 
@@ -48,6 +49,17 @@ Object.assign(OverworldScene.prototype, {
     }
     if (g.state.story.flags['in_' + id] === undefined) g.state.story.flags['in_' + id] = true;
     g.state.story.flags['reached_' + id] = true; // quest chain producers (WS6)
+    // ADR-025 §6 (Traveler's Memory): the Saffron gate, remembered.
+    // The shipped game never posted a guard at Saffron's doors (the
+    // city is entered freely), so the memory surfaces as the city
+    // itself acknowledging the returning traveler — once, on the
+    // first arrival of a journey that carries it. Door-keeping only:
+    // no beat, battle, or badge is touched.
+    if (id === 'saffron' && hasTravelersMemory(g.state, 'saffron-guard')
+      && !g.state.story.flags.echo_saffron_guard) {
+      g.state.story.flags.echo_saffron_guard = true;
+      g.ui.say(['The Saffron gate attendant looks up from his thermos — then waves you straight through, drink and all. "Go on," he says. "City remembers you."']);
+    }
   },
 
   boulderAt(x, y) {
@@ -293,10 +305,17 @@ Object.assign(OverworldScene.prototype, {
     // ADR-025 §3 (Phase 3): the Hall of Fame gift — the Champion's
     // Ribbon is presented at League registration, once (a keepsake is
     // a unique object; repeat registrations never duplicate it).
+    // ADR-025 §6: when the champion ALREADY carries the Ribbon (a
+    // Second Journey), the gift rides the central source grant's
+    // duplicate conversion (cash + the line) instead of a 2nd piece.
     const lines = CREDITS_LINES.slice();
     if (grantKeepsake(g.state, 'championsribbon')) {
       lines.push('The League registrar presents you with the CHAMPION\'S RIBBON!');
       lines.push('Give it to a Pokemon from the party menu — its holder gains x1.2 XP.');
+    } else if (ownsKeepsake(g.state, 'championsribbon')) {
+      const hofGift = grantKeepsakeFromSource(g.state, 'championsribbon');
+      lines.push('The League registrar reaches for the CHAMPION\'S RIBBON — then sees yours, and smiles.');
+      if (hofGift.line) lines.push(hofGift.line);
     }
     g.ui.say(lines, () => { if (done) done(); }, '');
   },
@@ -334,12 +353,22 @@ Object.assign(OverworldScene.prototype, {
           const flag = 'item_' + this.mapId + '_' + fx + '_' + fy;
           if (g.state.story.flags[flag]) { g.ui.say(['There is nothing here.']); return true; }
           // Mt. Moon fossil pair: taking one seals the other (original beat).
-          if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken) {
+          // ADR-025 §6 Traveler's Memory: a traveler who chose before
+          // may re-pick freely — the seal never lands for them.
+          if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken
+            && !hasTravelersMemory(g.state, 'fossil-choice')) {
             g.ui.say(['Only crumbled stone remains. You chose your fossil already.']);
             return true;
           }
           g.state.story.flags[flag] = true;
           if (b.item === 'helixfossil' || b.item === 'domefossil') g.state.story.flags.fossil_taken = true;
+          // ADR-025 §6: keepsake item balls ride the central source grant.
+          if (ITEMS[b.item] && ITEMS[b.item].pocket === 'keepsakes') {
+            const res = grantKeepsakeFromSource(g.state, b.item);
+            g.audio.playSfx('dex-register');
+            g.ui.say([res.status === 'granted' ? 'Found ' + ITEMS[b.item].name + '!' : res.line]);
+            return true;
+          }
           g.state.bag[b.item] = (g.state.bag[b.item] || 0) + (b.n || 1);
           g.audio.playSfx('dex-register');
           g.ui.say(['Found ' + (ITEMS[b.item] ? ITEMS[b.item].name : b.item) + '!']);
@@ -354,6 +383,13 @@ Object.assign(OverworldScene.prototype, {
           const flag = 'hidden_' + this.mapId + '_' + fx + '_' + fy;
           if (!g.state.story.flags[flag]) {
             g.state.story.flags[flag] = true;
+            // ADR-025 §6: hidden keepsakes ride the central source grant.
+            if (ITEMS[hb.item] && ITEMS[hb.item].pocket === 'keepsakes') {
+              const res = grantKeepsakeFromSource(g.state, hb.item);
+              g.audio.playSfx('dex-register');
+              g.ui.say([res.status === 'granted' ? 'Found a hidden ' + ITEMS[hb.item].name + '!' : res.line]);
+              return true;
+            }
             g.state.bag[hb.item] = (g.state.bag[hb.item] || 0) + (hb.n || 1);
             g.audio.playSfx('dex-register');
             g.ui.say(['Found a hidden ' + (ITEMS[hb.item] ? ITEMS[hb.item].name : hb.item) + '!']);
@@ -497,6 +533,14 @@ Object.assign(OverworldScene.prototype, {
   sysNpc(npc) {
     const g = this.game;
     const sayLines = (cb) => g.ui.say(npc.dialogue.map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
+    // ADR-025 §6 (Bond echo): a character who was Close in a previous
+    // journey says the line, once, the first time the new journey
+    // meets them — then their own scene proceeds. Presentation only.
+    const echoId = BOND_NPC_IDS[npc.name];
+    if (echoId && takeEchoGreeting(g.state, echoId)) {
+      g.ui.say([ECHO_LINE], () => { this.sysNpc(npc); }, npc.name);
+      return true;
+    }
     if (npc.sparCoach) { this.startSpar(npc); return true; }
     // ADR-025 §2 (Bonds): the Celadon parley pair run their scene.
     if (npc.parley) { if (this.runParleyNpc(npc)) return true; }
@@ -705,7 +749,17 @@ Object.assign(OverworldScene.prototype, {
       const tale = QUESTS[id];
       const npcId = tale && tale.bondNpc;
       const before = npcId ? bondOf(st, npcId) : 0;
+      // ADR-025 §6: a tale reward riding the central source grant may
+      // convert to cash when the piece is already owned — the
+      // conversion line follows the tale's own words.
+      const moneyBefore = st.player.money;
       completeTale(st, id, opts);
+      if (st.player.money === moneyBefore + DUPE_KEEPSAKE_CASH) {
+        const ksId = (opts && opts.keepsake !== undefined) ? opts.keepsake
+          : (tale && (tale.keepsakeReward || (tale.reward || {}).keepsake));
+        const dl = ksId ? dupeKeepsakeLine(ksId) : null;
+        if (dl) g.ui.say([dl]);
+      }
       // ADR-025 §2: Phase 4's tale deltas now land in a LIVE tier model
       // (their amounts and semantics are unchanged) — the heart pip
       // rides the next dialogue after the change.
@@ -1050,15 +1104,23 @@ Object.assign(OverworldScene.prototype, {
           const r1 = applyBond(st, 'rue', 1);
           const r2 = applyBond(st, 'cole', 1);
           if ((r1 && r1.dir) || (r2 && r2.dir)) g.ui.queueBondPip(1);
-          const gotRibbon = grantKeepsake(st, 'secondwindribbon');
-          st.bag.xpcandy = (st.bag.xpcandy || 0) + (gotRibbon ? 1 : 2);
+          // ADR-025 §6: the parley ribbon rides the central source
+          // grant — in a Second Journey (ribbon already carried) the
+          // duplicate converts to cash, and the candies settle at the
+          // talk-down's usual one.
+          const ribbonRes = grantKeepsakeFromSource(st, 'secondwindribbon');
+          const gotRibbon = ribbonRes.status === 'granted';
+          const dupeRibbon = ribbonRes.status === 'duplicate';
+          st.bag.xpcandy = (st.bag.xpcandy || 0) + ((gotRibbon || dupeRibbon) ? 1 : 2);
           resolve();
           this.taleSay([
             'You talk. About the ship. The tower. The standing-down on the island that has not even happened yet and somehow already counts.',
             'Nobody reaches for a Poke Ball. Cole laughs once, surprised at himself. Rue pretends she was never scared of you, badly.',
             gotRibbon
               ? 'On the way out, Rue presses something into your hand — a ribbon, road-worn and carefully mended. "Second-Wind," she says. "For the one who keeps getting up. Do NOT make it a thing." It is absolutely a thing.'
-              : 'On the way out, Rue presses two XP Candies into your hand. "For the road," she says. "Do NOT make it a thing." It is absolutely a thing.',
+              : dupeRibbon
+                ? 'On the way out, Rue presses something into your hand — then stops. "You already carry a Second-Wind," she says, flat. "One of a kind. Fine." She counts out $2,000 instead, like it personally offends her. "Do NOT make it a thing." It is absolutely a thing.'
+                : 'On the way out, Rue presses two XP Candies into your hand. "For the road," she says. "Do NOT make it a thing." It is absolutely a thing.',
             'They walk off arguing about lunch. Not running. Walking. (Received an XP Candy for the road — less than a prize fight pays, and worth more.)',
           ], '');
         });
@@ -1431,8 +1493,20 @@ Object.assign(OverworldScene.prototype, {
           g.ui.toast(qty > 1 ? 'Bought ' + qty + ' x ' + it.name + '.' : 'Bought ' + it.name + '.');
           this.openMart(stock);
         };
-        // Keepsakes stay qty-1 only: unique objects buy in one press.
-        if (it.pocket === 'keepsakes') { buyNow(1); return; }
+        // Keepsakes stay qty-1 only: unique objects buy in one press,
+        // and the purchase rides the central source grant (the row is
+        // already disabled when the piece is owned, so a duplicate
+        // here is unreachable — the grant is the guard).
+        if (it.pocket === 'keepsakes') {
+          const res = grantKeepsakeFromSource(g.state, iv);
+          if (res.status === 'granted') {
+            g.state.player.money -= it.price;
+            g.audio.playSfx('dex-register');
+            g.ui.toast('Bought ' + it.name + '.');
+          }
+          this.openMart(stock);
+          return;
+        }
         const maxQty = Math.max(1, Math.min(99, Math.floor(g.state.player.money / it.price)));
         pickQty('Buy', it.name, it.price, maxQty, buyNow, showBuy);
       });
@@ -1561,7 +1635,8 @@ Object.assign(OverworldScene.prototype, {
       for (const b of this.map.items) {
         const flag = 'item_' + this.mapId + '_' + b.x + '_' + b.y;
         if (g.state.story.flags[flag]) continue;
-        if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken) continue;
+        if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken
+          && !hasTravelersMemory(g.state, 'fossil-choice')) continue;
         const c = r.ctx;
         c.save();
         c.fillStyle = '#e84040';

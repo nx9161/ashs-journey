@@ -1,7 +1,7 @@
 // schema.mjs — save schema validation + migration (current: v2).
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
 
-import { SCHEMA_VERSION } from '../game/state.mjs';
+import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
 import { KEEPSAKES } from '../data/items.mjs';
 
 export const SAVE_KEY = 'pdr.save.guest';
@@ -63,6 +63,43 @@ export function validateSave(data) {
       if (typeof v !== 'number' || !Number.isInteger(v) || v < -10 || v > 10) { errors.push('bad-bond-value'); break; }
     }
   }
+  // ADR-025 §6 (Phase 6): Hall of Fame lists — ONE canonical shape
+  // ({ team: [{speciesId, level, nickname}], badges }); the legacy
+  // { species, level } entry stays acceptable here and is normalized
+  // on load (fillV2Defaults), never rejected.
+  for (const key of ['hof', 'priorHof']) {
+    const list = isObj(data.story) ? data.story[key] : undefined;
+    if (list === undefined) continue;
+    if (!Array.isArray(list) || list.length > 40) { errors.push('bad-story-' + key); continue; }
+    for (const e of list) {
+      const canon = isObj(e) && Array.isArray(e.team) && e.team.length >= 1 && e.team.length <= 6
+        && e.team.every((m) => isObj(m) && typeof m.speciesId === 'string'
+          && typeof m.level === 'number' && m.level >= 1 && m.level <= 100)
+        && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0));
+      const legacy = isObj(e) && typeof e.species === 'string'
+        && typeof e.level === 'number' && e.level >= 1 && e.level <= 100;
+      if (!canon && !legacy) { errors.push('bad-story-' + key + '-entry'); break; }
+    }
+  }
+  if (isObj(data.story)) {
+    // Phase 6 carried-knowledge lists: closed vocabularies.
+    if (data.story.bondEcho !== undefined
+      && (!Array.isArray(data.story.bondEcho) || data.story.bondEcho.length > 32
+        || data.story.bondEcho.some((x) => typeof x !== 'string' || !/^[a-z0-9_]{1,40}$/.test(x)))) errors.push('bad-story-bond-echo');
+    if (data.story.travelersMemory !== undefined
+      && (!Array.isArray(data.story.travelersMemory)
+        || data.story.travelersMemory.some((x) => !TRAVELERS_MEMORY_GATES.includes(x)))) errors.push('bad-story-travelers-memory');
+    if (data.story.starterLines !== undefined
+      && (!Array.isArray(data.story.starterLines)
+        || data.story.starterLines.some((x) => !Object.prototype.hasOwnProperty.call(STARTER_LINES, x)))) errors.push('bad-story-starter-lines');
+  }
+  if (isObj(data.dex) && data.dex.runCaught !== undefined) {
+    // Phase 6: the run's own catch record (Second Journey runs only).
+    if (!isObj(data.dex.runCaught)) errors.push('bad-dex-run-caught');
+    else for (const k of Object.keys(data.dex.runCaught)) {
+      if (data.dex.runCaught[k] !== true) { errors.push('bad-dex-run-caught-value'); break; }
+    }
+  }
   if (data.currentBox !== undefined && typeof data.currentBox !== 'string') errors.push('bad-current-box');
   return { ok: errors.length === 0, errors };
 }
@@ -103,6 +140,31 @@ export function fillV2Defaults(data) {
       if (typeof v === 'number' && Number.isFinite(v)) bonds[k] = Math.max(-10, Math.min(10, Math.trunc(v)));
     }
     data.story.bonds = bonds;
+    // ADR-025 §6 (Phase 6): HoF lists normalize to the ONE canonical
+    // shape on load — legacy { species, level } entries (the shape the
+    // server validator was written against) and the pushed
+    // { team, badges } shape both land canonical; junk entries drop.
+    data.story.hof = normalizeHofList(data.story.hof);
+    data.story.priorHof = normalizeHofList(data.story.priorHof);
+    // Carried-knowledge lists rebuild into their closed vocabularies.
+    data.story.bondEcho = Array.isArray(data.story.bondEcho)
+      ? [...new Set(data.story.bondEcho.filter((x) => typeof x === 'string' && /^[a-z0-9_]{1,40}$/.test(x)))].slice(0, 32) : [];
+    data.story.travelersMemory = Array.isArray(data.story.travelersMemory)
+      ? [...new Set(data.story.travelersMemory.filter((x) => TRAVELERS_MEMORY_GATES.includes(x)))] : [];
+    data.story.starterLines = Array.isArray(data.story.starterLines)
+      ? [...new Set(data.story.starterLines.filter((x) => Object.prototype.hasOwnProperty.call(STARTER_LINES, x)))] : [];
+  }
+  if (isObj(data.dex)) {
+    // Phase 6: dex.runCaught is NEVER invented here — its presence is
+    // the Second Journey discriminator (ownCaughtMap). A present but
+    // malformed map rebuilds to its true-only entries.
+    if (data.dex.runCaught !== undefined) {
+      const rc = {};
+      if (isObj(data.dex.runCaught)) {
+        for (const k of Object.keys(data.dex.runCaught)) if (data.dex.runCaught[k] === true) rc[k] = true;
+      }
+      data.dex.runCaught = rc;
+    }
   }
   if (isObj(data.settings)) {
     if (!isObj(data.settings.houseRules)) data.settings.houseRules = {};
