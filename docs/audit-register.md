@@ -232,6 +232,13 @@ S-34, S-46) stand as recorded.
 
 ### Standing notes from this pass
 
+- **Editions merged (owner order, 2026-10-27):** the personal edition
+  (ashs-journey-personal) is retired, frozen at its Phase 5 deploy
+  (`9679f14`), not deleted; the public edition (ashs-journey-game) is the
+  sole edition going forward. From this pass on, only the public battery
+  gates a verdict; personal-edition checks are informational only.
+- **qa-changed-flows b2 is a known-stale expectation, deliberately left
+
 - **qa-changed-flows b2 is a known-stale expectation, deliberately left
   failing:** it expects a 30-row Journey menu; the true count was already
   32 before this pass and is 34 now (+ Hall of Fame, + Diploma, by design).
