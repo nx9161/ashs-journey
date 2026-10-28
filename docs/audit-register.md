@@ -2667,3 +2667,96 @@ driver `celadon-regression-driver.mjs`, shots in `celadon-fix-shots/`).
   item @999 + every keepsake + every species) built through the real
   claim paths. Bundle rebuilt for the public (vercel) target only;
   personal/ untouched. NOT deployed (parent ships).
+
+## World Fixes Q1 — the missing Route 11 ↔ Route 12 warp link (2026-10-28, mission close)
+
+Queued by the Cinnabar Trap and Celadon Fragmentation missions:
+the Town Map draws a Vermilion ↔ Route 12 link, but the warp data
+never had it — Route 11's east edge was walled (its only warp
+returns to Vermilion) and Route 12 had no west exit, one of the
+two breaks that stranded the south-east cluster from
+Pallet/Viridian on foot.
+
+- **Fix (data only, mirrors the existing Vermilion ↔ Route 11
+  edge-warp idiom — warp on the border tile, landing one tile
+  inside):** maps2.mjs `route11` (18×11): row y=5 last tile (17,5)
+  `#` → `.`, warp (17,5) → route12 (1,5). maps3.mjs `route12`
+  (16×14): row y=5 first tile (0,5) `#` → `.`, warp (0,5) →
+  route11 (16,5). Both landings — (16,5) on route11, (1,5) on
+  route12 — were already `.`. y=5 is the junction latitude, just
+  north of Route 12's Snorlax bridge (ev_snorlax_east at (8,7)).
+- **Shadowed copy (noted, deliberately untouched):** maps2.mjs
+  also defines a `route12`, but merge.mjs assembles
+  `Object.assign(MAPS, MAPS2, MAPS3, MAPS4)` — later wins, so the
+  maps3 def is the effective one and the only one edited.
+- **Proof (data-level reachability):** BFS over the merged map
+  data (engine WALKABLE set + static NPC blocking + warp graph,
+  interiors as connectors) from Fuchsia AND from Cinnabar each
+  reach 68 maps / 7,290 tiles, including Pallet, Viridian,
+  Vermilion, route11 and route12; both new warp tiles and both
+  landing tiles are walkable. (Pre-fix graph model reached only
+  the 31-map south-east cluster from Fuchsia.) fidelity's
+  "every map reachable from Pallet" check also passes.
+- **Battery (run once on the combined Q1+D1 tree, HEAD
+  `8cd434b`):** build OK (vercel + guest); qa-changed-flows fails
+  EXACTLY {b2, d9} (standing baseline); campaign-smoke 24/24;
+  fidelity 35/35; battle-model 45/45; cheat-shop 44/44; rejuv
+  1–6 (44/42/63/53/55/46); Track B integration 114/114;
+  verify-slice 134/134; audit-headless 17/17; audit-laptop
+  (public) 41/41 standalone; budgets PASS; contamination clean;
+  audio ALL PASS; drift PASS. Bundles rebuilt (vercel + guest
+  targets only); personal/ untouched. NOT deployed (parent
+  ships).
+
+## World Fixes D1 — fleeing completed legendary/event arcs (2026-10-28, mission close)
+
+Filed by Cheat Shop QA as D1; pre-existing at `8855b5e`.
+
+- **Root cause:** battle.mjs's endBattle contract is
+  `onEnd(won, fled)` — every escape path (RUN / Teleport / Safari
+  run / foe fled) ends the battle won=true AND fled=true, and
+  consumers must check `fled` (ADR-025 QA D1 comment at the
+  contract site; correct precedents: the coach spar and taleSpar
+  consumers, both `won && !fled`). But runSteps' `s.wildBattle`
+  branch in overworld-systems.mjs was
+  `onEnd: (won) => { if (won) next(); }` — it ignored the fled
+  half of the contract, so fleeing a scripted wild battle
+  advanced the event chain straight into its completion steps
+  (arc complete / story flags / questDone) without a fight.
+- **Fix (one site, the root):**
+  `onEnd: (won, fled) => { if (won && !fled) next(); }`, plus a
+  comment citing the contract. Semantics: flee or lose stalls
+  the chain before its completion steps, so runEvent's
+  `ev_<id>_done` never writes (it fires only when a chain runs
+  off the end) — the event re-fires on re-entry and can be
+  fought properly, and the arc stage stays wherever the
+  pre-battle steps left it ('active'). Catch/KO still end
+  won=true, fled=false and advance exactly as before.
+- **Affected events — every `wildBattle` step in
+  story-kanto.mjs (the complete list; all share the defect
+  shape; all fixed by the single root fix):** ev_mewtwo
+  (arc_mewtwo, Mewtwo Lv70), ev_zapdos (arc_zapdos, Lv50),
+  ev_moltres (arc_moltres, Lv50), ev_articuno (arc_articuno,
+  Lv50), ev_movie_climax (arc_mew, Mew Lv50), ev_snorlax_east
+  (Snorlax Lv30), ev_snorlax_west (Snorlax Lv30), ev_tower_ghost
+  (Marowak Lv30, uncatchable).
+- **Sibling verdict — `s.battle` (trainer) branch: SAFE BY
+  CONSTRUCTION, deliberately unchanged.** Trainer battles
+  cannot be fled in either engine. Classic: the RUN row is
+  disabled when `kind !== 'wild'`, and onCommand('run') vs a
+  trainer only says "Can't escape a trainer battle!" and
+  returns to the command menu (no fled, no endBattle); Teleport
+  (the flee effect) succeeds only when `kind === 'wild'`, vs a
+  trainer it reports "But it failed!". RT: the RUN row is
+  disabled when `kind !== 'wild'`, the SELECT run shortcut is
+  gated `kind === 'wild'`, and rtApplyEffect's flee is gated
+  `kind === 'wild' && side === 'ally'` — rtTryRun is reachable
+  only through those wild-gated paths. Safari run / foe-fled
+  are wild/Safari-only. The branch's other consumer,
+  recordBattleBond, already returns early on `fled`
+  defensively.
+- **Battery:** same full battery as the Q1 entry above (run on
+  the combined tree) — all suites at standing numbers,
+  qa-changed-flows failing exactly {b2, d9}. Bundles rebuilt
+  (vercel + guest targets only); personal/ untouched. NOT
+  deployed (parent ships).
