@@ -38,6 +38,21 @@ const HP_DRAIN_PER_SEC = 90; // ADR-004 feel budget
 // NOTE: burn keeps the legacy 'BUR' code — verify-slice's QA plate check
 // asserts that exact text for a burned mon, so the DS 'BRN' abbreviation is
 // the one deliberate deviation from Platinum spelling in this table.
+// WP3 Ground legibility: player-facing text for each Ground twist
+// (mirrors the twist semantics in src/data/grounds.mjs + rulesEffects;
+// wording is presentation, the numbers are the shipped ones).
+const GROUND_TWIST_TEXT = {
+  heal: 'Healing moves restore +50% more HP.',
+  storm: 'Electric moves are 5 points more accurate (and cool down faster in real-time).',
+  mire: 'Mons not native to this Ground are slowed.',
+  status: 'Status moves are 10 points less accurate.',
+  burn: 'Fire moves that can burn do so +10 points more often.',
+  frost: 'Accuracy x0.95 for both sides (real-time dodges gain +40ms of i-frames).',
+  tide: 'Special moves crit more often (and fly faster in real-time).',
+  rubble: 'Physical moves are 5 points more accurate (and lunge faster in real-time).',
+  poison: 'Poison moves that can poison do so +10 points more often.',
+};
+
 const STATUS_CHIPS = {
   burn: ['BUR', '#c84028'],
   poison: ['PSN', '#9848a8'],
@@ -180,6 +195,16 @@ export class BattleScene {
     this.hpAnim = { ally: this.ally.hp, foe: this.foe.hp };
     this.xpAnim = 0;
     this.shakeT = 0;
+    // WP3 (ADR-026 elevation pass, research §1.5): trauma-based shake
+    // replaces the binary shakeT magnitudes for classic battles —
+    // offset = 12px x trauma^2, one value, decayed in update(); shakeT
+    // remains only as the legacy timer other paths poke. _beat is the
+    // presentation-beat slot (hitstop / Set faint beat): a pending
+    // callback update() counts down on real time; a confirm press SKIPS
+    // it — input is never eaten by a beat, per the research failure
+    // mode that mirrors the owner's RT complaint.
+    this.trauma = 0;
+    this._beat = null;
     this.flashT = 0;
     this.fadeT = 0;      // P0/E11: reduced-motion substitute for shake/flash (100ms fade)
     this.atkFx = null;   // { side, t } — README attack transform: 1.2x for 3 frames then back
@@ -228,6 +253,31 @@ export class BattleScene {
     else if (cb) cb();
   }
 
+  // WP3 Ground legibility: the on-demand readout behind SELECT at the
+  // classic command grid — the current Ground with its EXACT effects
+  // (the live factors, Story-halving included, read off the field
+  // object itself) plus both sides' active stat-stage changes.
+  // Presentation only: reads state, changes nothing.
+  showGroundReadout() {
+    const g = this.game;
+    const f = this.field;
+    const lines = [];
+    if (!f || !f.boostType) {
+      lines.push('Open Ground — no field effects. Every move lands exactly as authored.');
+    } else {
+      lines.push(f.name + ': ' + f.boostType + ' moves hit x' + f.boostFactor + ', ' + f.dampenType + ' moves hit x' + f.dampenFactor + '.');
+      lines.push('Twist: ' + (f.twist ? (GROUND_TWIST_TEXT[f.twist] || 'None.') : 'None on this difficulty.'));
+    }
+    const stageLine = (label, st) => {
+      const parts = [];
+      for (const k of ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva']) if (st && st[k]) parts.push(k.toUpperCase() + (st[k] > 0 ? '+' : '') + st[k]);
+      return label + ': ' + (parts.length ? parts.join(', ') : 'no stage changes');
+    };
+    lines.push(stageLine(displayName(this.ally, SPECIES), this.allyStages));
+    lines.push(stageLine(displayName(this.foe, SPECIES), this.foeStages));
+    g.ui.say(lines, () => this.toCommand(), '');
+  }
+
   safariFleeCheck() {
     // Safari flee model (ADR-019 simplification, documented): base 10%,
     // rock +15%, bait -8%, skittish species (catch rate <= 45) +5%.
@@ -259,7 +309,20 @@ export class BattleScene {
     const st = g.state.settings;
     // Screen shake / flash decay — P0/E11: gated on the Screen-shake option +
     // reduced motion (assignment is gated at the source; decay is unconditional).
-    if (this.shakeT > 0) { this.shakeT -= dt * 1000; g.renderer.shakeX = (Math.random() - 0.5) * 8; g.renderer.shakeY = (Math.random() - 0.5) * 8; }
+    // Trauma shake (WP3): offset = 12px x trauma^2 so small hits stay
+    // subtle and big ones kick; decays ~2.2/s (a 0.55 hit settles in
+    // ~250ms — inside the message beat); one value = one shake at a
+    // time, strongest event wins by max(). Settings gates unchanged:
+    // reduced motion or shake-off or anims-off = no offset (the
+    // reduced-motion flash substitute lives at the call sites).
+    if (this.trauma > 0) {
+      this.trauma = Math.max(0, this.trauma - dt * 2.2);
+      if (!g.state.settings.reducedMotion && g.state.settings.shake && g.state.settings.battleAnims !== false) {
+        const amp = this.trauma * this.trauma * 12;
+        g.renderer.shakeX = (Math.random() - 0.5) * 2 * amp;
+        g.renderer.shakeY = (Math.random() - 0.5) * 2 * amp;
+      } else { g.renderer.shakeX = 0; g.renderer.shakeY = 0; }
+    } else if (this.shakeT > 0) { this.shakeT -= dt * 1000; g.renderer.shakeX = (Math.random() - 0.5) * 8; g.renderer.shakeY = (Math.random() - 0.5) * 8; }
     else { g.renderer.shakeX = 0; g.renderer.shakeY = 0; }
     if (this.flashT > 0) { this.flashT -= dt * 1000; g.renderer.flashA = Math.max(0, this.flashT / 60) * 0.8; }
     // P0/E11: reduced-motion substitute — a gentle 100ms fade instead of shake/flash.
@@ -288,6 +351,27 @@ export class BattleScene {
     // on its own cooldown). updateRt ticks the same clocks when unfrozen;
     // the two paths are mutually exclusive per frame.
     if (this.rtMode && this.rt && this.state === 'rt' && typeof this.rtTickClocks === 'function' && this.rtFrozen()) this.rtTickClocks(dt * 1000);
+
+    // Presentation beats (WP3): hitstop + the Set-mode faint beat live
+    // here — after every visual system above has ticked (shake/flash/
+    // drain keep running on real time inside the beat), before any
+    // input consumer. A confirm press SKIPS the beat: a beat can delay
+    // a message, it can never swallow a press.
+    if (this._beat) {
+      this._beat.t -= dt * 1000;
+      if (input.wasPressed('a') || input.wasPressed('start')) this._beat.t = 0;
+      if (this._beat.t > 0) return;
+      const beatCb = this._beat.cb;
+      this._beat = null;
+      if (beatCb) beatCb();
+      return;
+    }
+    // Ground legibility (WP3): SELECT at the classic command grid opens
+    // the on-demand Ground + stat-stage readout. The grid stays exactly
+    // four commands (verify-live counts them); SELECT is consumed here
+    // before the UI layer, and the readout is a plain dialogue that
+    // returns to the command grid.
+    if (!this.rtMode && this.state === 'command' && input.wasPressed('select')) { this.showGroundReadout(); return; }
 
     if (g.ui.update(dt)) return;
     if (this.msgOpen) {
@@ -977,9 +1061,15 @@ export class BattleScene {
       // and reduced motion; reduced motion gets a 100ms fade instead.
       const canShake = animsOn && !g.state.settings.reducedMotion && g.state.settings.shake;
       if (canShake) {
-        if (eff > 1) { this.shakeT = 120; this.flashT = 60; }
-        else if (eff < 1) { this.shakeT = 60; }
-        if (crit) this.flashT = 90;
+        // Trauma adds (WP3, research §1.5): super-effective kicks
+        // hardest, resisted hits stay dull, crits stack a little more.
+        // update() turns the value into amplitude (12px x trauma^2)
+        // and a decay-derived duration; one value = one shake at a
+        // time. Flash unchanged.
+        if (eff > 1) { this.trauma = Math.max(this.trauma, 0.55); this.flashT = 60; }
+        else if (eff < 1) { this.trauma = Math.max(this.trauma, 0.28); }
+        else { this.trauma = Math.max(this.trauma, 0.35); }
+        if (crit) { this.trauma = Math.min(1, this.trauma + 0.25); this.flashT = 90; }
         // README impact: white palette-swap on the defender for 2 frames + shake.
         // ADR-026 WP3 (presentation only): EVERY damaging hit flashes the
         // defender — neutral-effectiveness hits used to land with no
@@ -1082,8 +1172,19 @@ export class BattleScene {
           this.checkFaint(foeSide, finishMove);
         });
       };
-      if (extra.trim()) this.say(extra.trim(), after);
-      else after();
+      // HITSTOP (WP3, research §1.5 — the single biggest move-weight
+      // lever): on a damaging impact, hold the resolution messages for
+      // 70ms while the flash/shake/drain run on real time in update().
+      // The beat lives in update()'s _beat slot and a confirm press
+      // SKIPS it — input is never disabled, never eaten. No RNG is
+      // consumed by the pause; message order/count unchanged. Off
+      // entirely under reduced motion or battleAnims off.
+      const beginAfter = () => {
+        if (extra.trim()) this.say(extra.trim(), after);
+        else after();
+      };
+      if ((dmg > 0 || subBroke) && animsOn && !g.state.settings.reducedMotion) this._beat = { t: 70, cb: beginAfter };
+      else beginAfter();
     });
   }
 
@@ -1256,6 +1357,10 @@ export class BattleScene {
     const mon = side === 'ally' ? this.ally : this.foe;
     const hit = (this._ksHit && this._ksHit.side === side) ? this._ksHit : null;
     if (hit) this._ksHit = null;
+    // WP3: remember whether THIS faint check was caused by an attack
+    // hit (vs a status/DoT tick) so checkFaintContinue can apply the
+    // KO shake on attack KOs only.
+    this._faintByAttack = hit ? side : null;
     const lines = this.ksApplyTriggers(side, hit ? { hpBefore: hit.hpBefore, viaAttack: true } : {});
     if (lines.length) {
       this.say(lines.join(' '), () => this.checkFaintContinue(side, cb));
@@ -1267,7 +1372,18 @@ export class BattleScene {
   checkFaintContinue(side, cb) {
     const g = this.game;
     const mon = side === 'ally' ? this.ally : this.foe;
-    if (mon.hp > 0) { cb(); return; }
+    if (mon.hp > 0) { this._faintByAttack = null; cb(); return; }
+    // KO trauma (WP3): a killing blow kicks ~1.35x a normal hit's
+    // shake (0.35 -> ~0.47 base, more after big hits). Ignition rule:
+    // only when an attack's hit context is still unconsumed for this
+    // side — checkFaint consumes _ksHit before delegating here, so
+    // attack KOs arrive with it set on _faintByAttack; status/DoT tick
+    // faints never set it and stay shake-free.
+    if (this._faintByAttack === side && !this.rtMode) {
+      const st = g.state.settings;
+      if (st.battleAnims !== false && !st.reducedMotion && st.shake) this.trauma = Math.min(1, Math.max(this.trauma + 0.12, 0.47));
+    }
+    this._faintByAttack = null;
     // Yellow homage: the partner takes its own faint personally.
     if (side === 'ally' && mon.speciesId === 'partner') g.state.pikachu.mood = 'sad';
     const name = displayName(mon, SPECIES);
@@ -1279,7 +1395,15 @@ export class BattleScene {
     this.say(name + ' fainted!', () => {
       if (side === 'foe') {
         this.state = 'faintfoe';
-        this.afterFaintFoe();
+        // SET/SHIFT faint beat (WP3, WP2 pacing spec): in classic
+        // battles the KO lands for 450ms before the send-out / XP /
+        // victory flow continues — the faint gets a beat instead of
+        // cutting straight to the next text. Zero prompts in Set; in
+        // Shift the beat precedes the prompt. Input-skippable via the
+        // _beat slot; instant under reduced motion. RT faints route
+        // through rtCheckFaints and never reach here.
+        if (!this.rtMode && !g.state.settings.reducedMotion) this._beat = { t: 450, cb: () => this.afterFaintFoe() };
+        else this.afterFaintFoe();
       } else {
         const g = this.game;
         const anyLeft = g.state.party.some((m) => m.hp > 0);
@@ -1300,6 +1424,11 @@ export class BattleScene {
     // state==='faintfoe' lanes in afterMsg/nextAfterStatus) is a no-op —
     // the prompt can never fire twice for one KO.
     if (this._shiftInProgress) return;
+    // WP3 faint-beat guard: while the post-KO beat is still pending,
+    // its callback is the single caller allowed through — the
+    // state==='faintfoe' re-entry lanes no-op until the beat fires
+    // (update() clears _beat before invoking it).
+    if (this._beat) return;
     if (this.kind === 'trainer') {
       // ADR-026 Shift/Set: in Shift mode (classic engine only) the KO'd
       // foe's XP is awarded BEFORE the "about to send out" prompt. Set
@@ -1768,6 +1897,10 @@ export class BattleScene {
     this.endBattle(false);
     g.ui.say(['You hurried to the Pokemon Center...'], () => {
       const ow = this.returnTo;
+      // P1: same blackout anchor as the overworld path — the defeat
+      // warp loads 'center' directly, so the exit ticket must be set
+      // from the last-Center lineage first (see overworld.centerExit).
+      if (typeof ow.centerExit === 'function') ow.centerReturn = ow.centerExit();
       ow.loadMap('center');
       ow.player.tx = 4; ow.player.ty = 3; ow.player.px = 4 * TILE; ow.player.py = 3 * TILE;
       ow.player.fx = 4; ow.player.fy = 3;
@@ -1819,15 +1952,29 @@ export class BattleScene {
       this.hpAnim.ally = this.ally.hp;
       this.hpAnim.foe = this.foe.hp;
     } else {
-      const rate = HP_DRAIN_PER_SEC * dt;
+      // WP3 drain-duration cap: the classic 90 HP/s rate is kept for
+      // ordinary hits, but a huge hit no longer leaves the bar crawling
+      // for seconds after the text has moved on — when a side's target
+      // changes, its drain rate for that episode is set so the bar
+      // lands within 600ms however large the gap (visual catch-up
+      // only; hpAnim converges to the same final values, sooner).
+      if (!this._drainRate) this._drainRate = { ally: HP_DRAIN_PER_SEC, foe: HP_DRAIN_PER_SEC };
+      if (!this._drainTarget) this._drainTarget = { ally: this.ally.hp, foe: this.foe.hp };
+      for (const side of ['ally', 'foe']) {
+        const mon = side === 'ally' ? this.ally : this.foe;
+        if (mon.hp !== this._drainTarget[side]) {
+          this._drainTarget[side] = mon.hp;
+          this._drainRate[side] = Math.max(HP_DRAIN_PER_SEC, Math.abs(mon.hp - this.hpAnim[side]) / 0.6);
+        }
+      }
       if (this.hpAnim.ally !== this.ally.hp) {
         const d = this.ally.hp - this.hpAnim.ally;
-        this.hpAnim.ally += Math.sign(d) * Math.min(Math.abs(d), rate);
+        this.hpAnim.ally += Math.sign(d) * Math.min(Math.abs(d), this._drainRate.ally * dt);
         if (Math.abs(this.ally.hp - this.hpAnim.ally) < 1) this.hpAnim.ally = this.ally.hp;
       }
       if (this.hpAnim.foe !== this.foe.hp) {
         const d = this.foe.hp - this.hpAnim.foe;
-        this.hpAnim.foe += Math.sign(d) * Math.min(Math.abs(d), rate);
+        this.hpAnim.foe += Math.sign(d) * Math.min(Math.abs(d), this._drainRate.foe * dt);
         if (Math.abs(this.foe.hp - this.hpAnim.foe) < 1) this.hpAnim.foe = this.foe.hp;
       }
     }

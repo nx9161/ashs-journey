@@ -277,7 +277,10 @@ const p0Driver = `
     st.party = [ally];
     const b = new BattleScene({ kind: 'wild', foe, returnTo: ow, rt: false });
     game.scenes.push(b); b.enter(); drain(b);
-    const hit = () => { const e = { side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.seismictoss, action: { type: 'move', idx: 0 } }; b.execMoveContinue(e); drain(b); };
+    // settle(): messages drain via callbacks; WP3 presentation beats
+    // (hitstop/faint beat) drain via real ticks — real play has both.
+    const settle = () => { for (let i = 0; i < 400; i++) { if (b.msgOpen) { const cb = b.msgCb; b.msgCb = null; b.msgOpen = false; if (cb) cb(); else b.afterMsg(); } else if (b._beat) game.loop.stepTicks(2); else break; } };
+    const hit = () => { const e = { side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.seismictoss, action: { type: 'move', idx: 0 } }; b.execMoveContinue(e); settle(); };
     hit(); out.cClassicAfter1 = foe.hp;
     hit(); out.cClassicAfter2 = foe.hp; out.cClassicState = b.state;
     game.scenes.pop();
@@ -323,10 +326,11 @@ const p0Driver = `
     b.say = (t, cb) => { if (typeof t === 'string' && t.includes('hung on with 1 HP')) hints.push(t); origSay(t, cb); };
     drain(b);
     const ally = b.ally;
+    const settleT = () => { for (let i = 0; i < 400; i++) { if (b.msgOpen) { const cb = b.msgCb; b.msgCb = null; b.msgOpen = false; if (cb) cb(); else b.afterMsg(); } else if (b._beat) game.loop.stepTicks(2); else break; } };
     for (let i = 0; i < 2; i++) {
       foe.hp = 5; // weakened, one hit from KO each time
       const e = { side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.thundershock, action: { type: 'move', idx: 0 } };
-      b.execMoveContinue(e); drain(b);
+      b.execMoveContinue(e); settleT();
     }
     b.say = origSay;
     out.cTutFoeHp = foe.hp; out.cTutHints = hints.length;
@@ -370,6 +374,226 @@ const p0Driver = `
     r.cTutFoeHp === 1 && r.cTutHints === 2, JSON.stringify(r));
   ok('C06 P0 RT lunge whiff from range: no damage, but the player is told "Too far away!"',
     r.cWhiffFoeHp === 30 && r.cWhiffFloat === 'Too far away!', JSON.stringify(r));
+}
+
+// ================= Part D: WP3 presentation elevations =================
+const wp3Driver = `
+;(function () {
+  const out = {};
+  const game = new Game(null);
+  game.ui.init(); game.input.bindKeyboard(); game.buildSprites(); game.applyLayout();
+  const input = game.input, ui = game.ui, st = game.state;
+  const ow = new OverworldScene(); game.scenes.push(ow); ow.enter();
+  const drain = (b) => { let n = 0; while (b.msgOpen && n++ < 30) { const cb = b.msgCb; b.msgCb = null; b.msgOpen = false; if (cb) cb(); else b.afterMsg(); } };
+  game.rng.battle = () => 0.5;
+
+  // (D01/D04) Hitstop + trauma on impact: damage applies immediately,
+  // the damage LINE waits out a 70ms beat; trauma reflects the hit.
+  {
+    const ally = makeMon('partner', 20, SPECIES, MOVES);
+    const foe = makeMon('pidgey', 12, SPECIES, MOVES); foe.maxHp = 60; foe.hp = 60;
+    st.party = [ally];
+    const b = new BattleScene({ kind: 'wild', foe, returnTo: ow, rt: false });
+    game.scenes.push(b); b.enter(); drain(b);
+    const e = { side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.thundershock, action: { type: 'move', idx: 0 } };
+    b.execMoveContinue(e); // says "used Thunder Shock!"
+    drain(b); // dismiss it -> damage applies -> hitstop beat pending
+    out.dFoeHpAfterHit = foe.hp; out.dBeatPending = !!b._beat; out.dBeatT = b._beat ? b._beat.t : null;
+    out.dMsgOpenDuringBeat = b.msgOpen; out.dTrauma = b.trauma;
+    for (let i = 0; i < 10 && !b.msgOpen; i++) game.loop.stepTicks(2);
+    out.dMsgAfterBeat = b.msgOpen;
+    game.scenes.pop();
+  }
+
+  // (D02) Set faint beat: after the faint message, the flow holds
+  // 450ms (state faintfoe, beat pending) before XP/victory begins.
+  {
+    const ally = makeMon('partner', 20, SPECIES, MOVES);
+    ally.moves = [{ id: 'quickattack', pp: 99, maxPp: 99 }];
+    const foe = makeMon('rattata', 5, SPECIES, MOVES); foe.hp = 1;
+    st.party = [ally];
+    const b = new BattleScene({ kind: 'wild', foe, returnTo: ow, rt: false });
+    game.scenes.push(b); b.enter(); drain(b);
+    const e = { side: 'ally', mon: ally, stats: b.effStats(ally, b.allyStages), move: MOVES.quickattack, action: { type: 'move', idx: 0 } };
+    b.execMoveContinue(e); drain(b); // used-line -> hitstop
+    for (let i = 0; i < 12 && !b.msgOpen; i++) game.loop.stepTicks(2); // hitstop out -> damage line
+    drain(b); // damage line -> checkFaint -> faint message
+    drain(b); // faint message -> beat
+    out.dFaintState = b.state; out.dFaintBeatT = b._beat ? b._beat.t : null;
+    for (let i = 0; i < 40 && b.state === 'faintfoe'; i++) game.loop.stepTicks(2);
+    out.dAfterBeatState = b.state;
+    game.scenes.pop();
+  }
+
+  // (D03) Ground readout: SELECT at the command grid on a pinned
+  // Storm Ground opens a dialogue naming the Ground + exact factors,
+  // and closing it returns to the command grid.
+  {
+    st.party = [makeMon('partner', 20, SPECIES, MOVES)];
+    const foe = makeMon('rattata', 10, SPECIES, MOVES);
+    const b = new BattleScene({ kind: 'wild', foe, returnTo: ow, rt: false, ground: 'storm' });
+    game.scenes.push(b); b.enter();
+    let n = 0;
+    while (b.state !== 'command' && n++ < 300) { game.loop.stepTicks(2); if (b.msgOpen) { input.inject('a'); game.loop.stepTicks(2); input.release('a'); game.loop.stepTicks(2); } }
+    out.dReachedCommand = b.state;
+    input.inject('select'); game.loop.stepTicks(2); input.release('select'); game.loop.stepTicks(2);
+    out.dDlgOpen = !!ui.dlg;
+    out.dDlgText = ui.dlg && ui.dlg.lines ? ui.dlg.lines.join(' | ') : '';
+    let m = 0;
+    while (ui.dlg && m++ < 60) { input.inject('a'); game.loop.stepTicks(2); input.release('a'); game.loop.stepTicks(3); }
+    out.dBackToMenu = !ui.dlg && !!ui.menu && b.state === 'command';
+    game.scenes.pop();
+  }
+
+  // (D05) HP-drain cap: a 300-point gap converges within ~0.7s of
+  // ticks (the uncapped 90 HP/s rate would need ~3.3s).
+  {
+    st.party = [makeMon('partner', 20, SPECIES, MOVES)];
+    const foe = makeMon('rattata', 10, SPECIES, MOVES);
+    const b = new BattleScene({ kind: 'wild', foe, returnTo: ow, rt: false });
+    game.scenes.push(b); b.enter(); drain(b);
+    for (let i = 0; i < 5; i++) game.loop.stepTicks(1); // drain bookkeeping initializes at the natural HP
+    b.foe.maxHp = 300; b.foe.hp = 0; b.hpAnim.foe = 300; // a 300-point hit lands
+    for (let i = 0; i < 45; i++) game.loop.stepTicks(1);
+    out.dDrainAfter = b.hpAnim.foe;
+    game.scenes.pop();
+  }
+
+  console.log('WP3-RESULT ' + JSON.stringify(out));
+})();`;
+{
+  const logs3 = [];
+  const origLog3 = console.log;
+  console.log = (...a) => { logs3.push(a.join(' ')); };
+  try { eval(gameJs + wp3Driver); } finally { console.log = origLog3; }
+  const r = JSON.parse((logs3.find((l) => l.startsWith('WP3-RESULT')) || 'WP3-RESULT {}').slice(11));
+  ok('D01 WP3 hitstop: damage applies at once, the damage line waits out a 70ms beat',
+    r.dFoeHpAfterHit < 60 && r.dBeatPending === true && r.dBeatT === 70 && r.dMsgOpenDuringBeat === false && r.dMsgAfterBeat === true, JSON.stringify(r));
+  ok('D02 WP3 Set faint beat: 450ms hold at faintfoe, then the flow proceeds on its own',
+    r.dFaintState === 'faintfoe' && r.dFaintBeatT === 450 && r.dAfterBeatState !== 'faintfoe', JSON.stringify(r));
+  ok('D03 WP3 trauma: a super-effective hit sets trauma >= 0.5 at impact',
+    typeof r.dTrauma === 'number' && r.dTrauma >= 0.5, JSON.stringify(r));
+  ok('D04 WP3 Ground readout: SELECT opens the Storm Ground readout, close returns to the grid',
+    r.dReachedCommand === 'command' && r.dDlgOpen === true && /Storm Ground/.test(r.dDlgText) && /x1\.2/.test(r.dDlgText) && r.dBackToMenu === true, JSON.stringify(r));
+  ok('D05 WP3 drain cap: a 300-point HP gap converges within 45 ticks',
+    r.dDrainAfter === 0, JSON.stringify(r));
+}
+
+// ================= Part E: P1 Center-exit anchor (owner report 2026-10-28) =================
+// "When I got defeated after leaving Pallet Town, I was sent to the
+// health center, and when I got OUT I was right where I was defeated."
+// Root cause: loadMap('center') overwrote centerReturn with the
+// _lastCity load-time snapshot. Fix: warp via owns the anchor, it is
+// persisted as story.lastCenter, blackout paths anchor through
+// centerExit(), and loadMap never touches the ticket.
+const p1Driver = `
+;(function () {
+  const out = {};
+  const game = new Game(null);
+  game.ui.init(); game.input.bindKeyboard(); game.buildSprites(); game.applyLayout();
+  const input = game.input, ui = game.ui, st = game.state;
+  const ow = new OverworldScene(); game.scenes.push(ow); ow.enter();
+  const pressA = () => { input.inject('a'); game.loop.stepTicks(2); input.release('a'); game.loop.stepTicks(2); };
+  const drainDlg = () => { let n = 0; while (ui.dlg && n++ < 80) pressA(); };
+  const stepOn = (scene, x, y) => { scene.player.tx = x; scene.player.ty = y; scene.onStep(x, y); };
+  const exitCenter = (scene) => stepOn(scene, 4, 5); // the center's exit warp tile
+
+  // (E1) OWNER SCENARIO: fresh game -> leave Pallet -> battle defeat on
+  // Route 1 -> blackout Center -> exit must land in PALLET, not route1.
+  {
+    ow.loadMap('pallet'); ow.player.tx = 7; ow.player.ty = 7;
+    ow.loadMap('route1'); // the old bug's anchor snapshot is now route1
+    st.party = [makeMon('partner', 5, SPECIES, MOVES)];
+    const b = new BattleScene({ kind: 'wild', foe: makeMon('rattata', 5, SPECIES, MOVES), returnTo: ow, rt: false });
+    game.scenes.push(b);
+    b.finishDefeat(); drainDlg();
+    out.e1InCenter = ow.mapId;
+    exitCenter(ow);
+    out.e1Exit = { map: ow.mapId, x: ow.player.tx, y: ow.player.ty };
+    game.scenes.pop();
+  }
+
+  // (E2) Voluntary Viridian visit round-trips to the door-front (7,6);
+  // then a route blackout (systems path) respawns and exits VIRIDIAN.
+  {
+    ow.loadMap('viridian'); stepOn(ow, 7, 5); // step on the Center door
+    out.e2Entered = ow.mapId; out.e2Anchor = st.story.lastCenter;
+    exitCenter(ow);
+    out.e2VoluntaryExit = { map: ow.mapId, x: ow.player.tx, y: ow.player.ty };
+    ow.loadMap('route2');
+    ow.blackout(); drainDlg();
+    out.e2BlackoutInCenter = ow.mapId;
+    exitCenter(ow);
+    out.e2BlackoutExit = { map: ow.mapId, x: ow.player.tx, y: ow.player.ty };
+  }
+
+  // (E3) Fuchsia + Cinnabar exits re-verified (the register's old
+  // roof-tile quirk towns): door (7,7) in, exit lands (town, 7, 8).
+  for (const town of ['fuchsia', 'cinnabar']) {
+    ow.loadMap(town); stepOn(ow, 7, 7);
+    const inC = ow.mapId;
+    exitCenter(ow);
+    out['e3_' + town] = { inC, map: ow.mapId, x: ow.player.tx, y: ow.player.ty };
+  }
+
+  // (E4) RELOAD inside a Center: a fresh OverworldScene has NO runtime
+  // ticket; the persisted story.lastCenter alone must anchor the exit.
+  {
+    // A reloaded game: the save says "inside the Center" (that is
+    // where a blackout leaves story.position); a brand-new scene has
+    // no runtime ticket at all.
+    st.story.position = { map: 'center', x: 4, y: 5, dir: 'down' };
+    const ow2 = new OverworldScene(); game.scenes.push(ow2); ow2.enter();
+    out.e4TicketGone = ow2.centerReturn === undefined || ow2.centerReturn === null;
+    stepOn(ow2, 4, 5);
+    out.e4ReloadExit = { map: ow2.mapId, x: ow2.player.tx, y: ow2.player.ty };
+    game.scenes.pop();
+  }
+
+  console.log('P1-RESULT ' + JSON.stringify(out));
+})();`;
+{
+  const logs4 = [];
+  const origLog4 = console.log;
+  console.log = (...a) => { logs4.push(a.join(' ')); };
+  try { eval(gameJs + p1Driver); } finally { console.log = origLog4; }
+  const r = JSON.parse((logs4.find((l) => l.startsWith('P1-RESULT')) || 'P1-RESULT {}').slice(10));
+  ok('E01 P1 owner scenario: defeat on Route 1 blacks out to the Center', r.e1InCenter === 'center', JSON.stringify(r));
+  ok('E02 P1 owner scenario: exiting lands in PALLET (7,9) — never back on route1',
+    r.e1Exit && r.e1Exit.map === 'pallet' && r.e1Exit.x === 7 && r.e1Exit.y === 9, JSON.stringify(r.e1Exit));
+  ok('E03 P1 voluntary: Viridian Center door enters the Center and persists the door-front anchor',
+    r.e2Entered === 'center' && r.e2Anchor && r.e2Anchor.map === 'viridian' && r.e2Anchor.x === 7 && r.e2Anchor.y === 6, JSON.stringify(r));
+  ok('E04 P1 voluntary: exit returns to Viridian door-front (7,6)',
+    r.e2VoluntaryExit && r.e2VoluntaryExit.map === 'viridian' && r.e2VoluntaryExit.x === 7 && r.e2VoluntaryExit.y === 6, JSON.stringify(r.e2VoluntaryExit));
+  ok('E05 P1 blackout after visiting Viridian: exit lands Viridian door-front, not the route',
+    r.e2BlackoutInCenter === 'center' && r.e2BlackoutExit && r.e2BlackoutExit.map === 'viridian' && r.e2BlackoutExit.x === 7 && r.e2BlackoutExit.y === 6, JSON.stringify(r));
+  ok('E06 P1 Fuchsia + Cinnabar exits land on their door-fronts (7,8)',
+    r.e3_fuchsia && r.e3_fuchsia.map === 'fuchsia' && r.e3_fuchsia.x === 7 && r.e3_fuchsia.y === 8
+    && r.e3_cinnabar && r.e3_cinnabar.map === 'cinnabar' && r.e3_cinnabar.x === 7 && r.e3_cinnabar.y === 8, JSON.stringify(r));
+  ok('E07 P1 reload inside a Center: persisted anchor alone exits to the last-visited door-front (Cinnabar 7,8)',
+    r.e4TicketGone === true && r.e4ReloadExit && r.e4ReloadExit.map === 'cinnabar' && r.e4ReloadExit.x === 7 && r.e4ReloadExit.y === 8, JSON.stringify(r));
+}
+// (E08) save-fill + server validator treat story.lastCenter soundly
+{
+  const s = defaultState();
+  s.story.lastCenter = { map: 'viridian', x: 7, y: 6 };
+  const m = migrate(JSON.parse(JSON.stringify(s)));
+  ok('E08a P1 save-fill keeps a well-formed story.lastCenter', !!m.story.lastCenter && m.story.lastCenter.map === 'viridian' && m.story.lastCenter.x === 7, JSON.stringify(m.story.lastCenter));
+  const junk = defaultState();
+  junk.story.lastCenter = { map: 42, x: 'west' };
+  const m2 = migrate(JSON.parse(JSON.stringify(junk)));
+  ok('E08b P1 save-fill drops a malformed story.lastCenter', m2.story.lastCenter === undefined, JSON.stringify(m2.story.lastCenter));
+  const payload = () => {
+    const p = defaultState();
+    p.player.name = 'ASH'; p.player.rivalName = 'GARY';
+    p.party.push({ speciesId: 'partner', nickname: null, level: 12, xp: 1000, moves: [{ id: 'thundershock', pp: 30, maxPp: 30 }], ivs: { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 }, status: null, ot: 'ASH', friendship: 70, hp: 40, maxHp: 40 });
+    return p;
+  };
+  const good = payload(); good.story.lastCenter = { map: 'viridian', x: 7, y: 6 };
+  ok('E08c P1 validator accepts a well-formed story.lastCenter', serverValidate(good).ok === true, JSON.stringify(serverValidate(good).errors));
+  const badP = payload(); badP.story.lastCenter = { map: 'viridian', x: 'west', y: 6 };
+  const badRes = serverValidate(badP);
+  ok('E08d P1 validator rejects a malformed story.lastCenter', badRes.ok === false && badRes.errors.includes('bad-lastCenter'), JSON.stringify(badRes.errors));
 }
 
 console.log('battle-model-checks: ' + pass + '/' + (pass + fail) + ' passed');
