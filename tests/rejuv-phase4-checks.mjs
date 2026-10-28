@@ -146,7 +146,9 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
     Q.TALE_NPCS.every((n) => {
       const m = ALL_MAPS[n.map]; if (!m) return false;
       const ch = m.rows[n.y] && m.rows[n.y][n.x];
-      if (!['.', ','].includes(ch)) return false;
+      // Wave 5b: '$' (Mart floor) joins the walkable-floor whitelist —
+      // the SHOPKEEPER tale actor now stands in the shared Mart scene.
+      if (!['.', ',', '$'].includes(ch)) return false;
       if ((m.npcs || []).some((b) => b.x === n.x && b.y === n.y)) return false;
       if ((m.warps || []).some((w) => w.x === n.x && w.y === n.y)) return false;
       if ((m.signs || []).some((s2) => s2.x === n.x && s2.y === n.y)) return false;
@@ -378,7 +380,7 @@ const driver = `
     const potions0 = st.bag.potion || 0;
     D.talkTo(ow, 'MOM');
     out.palletAccepted = Q('tale_pallet');
-    const owV = D.gotoMap('viridian', 7, 7);
+    const owV = D.gotoMap('mart', 5, 5); // Wave 5b: SHOPKEEPER is indoors (Viridian Mart scene)
     D.talkTo(owV, 'SHOPKEEPER');
     out.palletStage1 = Q('tale_pallet');
     const ow2 = D.gotoMap('pallet', 7, 7);
@@ -568,7 +570,7 @@ const driver = `
   {
     let ow = E.gotoMap('pallet', 7, 7);
     E.talkTo(ow, 'MOM');
-    ow = E.gotoMap('viridian', 7, 7);
+    ow = E.gotoMap('mart', 5, 5); // Wave 5b: SHOPKEEPER is indoors (Viridian Mart scene)
     E.talkTo(ow, 'SHOPKEEPER');
     ow = E.gotoMap('pallet', 7, 7);
     E.talkTo(ow, 'MOM');

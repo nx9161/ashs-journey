@@ -153,9 +153,19 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 export const TALE_NPCS = [
-  { map: 'pallet', x: 3, y: 4, name: 'MOM', art: 'mom', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
+  // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
+  // own front-door threshold (3,4) — the one-tile gap in the fence
+  // row, fed only from (3,5) — so ANY stance in that column seals
+  // Ash's house now that its door is a real warp. She now stands
+  // beside the gap, still in front of her house; same map, same
+  // staging, same lines, and every tale drive finds her by name.
+  { map: 'pallet', x: 4, y: 5, name: 'MOM', art: 'mom', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
     dialogue: ['Mind the grass on Route 1, love. And eat something that is not a Potion.'] },
-  { map: 'viridian', x: 2, y: 7, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
+  // Wave 5b: the SHOPKEEPER moved indoors with the Viridian Mart (the
+  // owner's "real Mart interior" ruling) — he stands behind the Mart
+  // counter in the shared 'mart' scene, fielded only for a Viridian
+  // entry (see overworld loadMap). Same NPC, same tale, same lines.
+  { map: 'mart', x: 5, y: 2, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
     dialogue: ['Viridian sundries! Maps, string, and strong opinions about both.'] },
   { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },

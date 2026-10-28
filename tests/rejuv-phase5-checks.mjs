@@ -477,7 +477,7 @@ const driver = `
     for (const id of ['mom', 'hawthorn', 'gary', 'rue', 'cole', 'retiredace', 'brock', 'misty', 'surge', 'erika', 'koga', 'sabrina', 'blaine', 'fuji']) st.story.bonds[id] = -10;
     let ow = D.gotoMap('pallet', 7, 7);
     D.talkTo(ow, 'MOM');
-    ow = D.gotoMap('viridian', 7, 7);
+    ow = D.gotoMap('mart', 5, 5); // Wave 5b: SHOPKEEPER is indoors (Viridian Mart scene)
     D.talkTo(ow, 'SHOPKEEPER');
     ow = D.gotoMap('pallet', 7, 7);
     D.talkTo(ow, 'MOM');

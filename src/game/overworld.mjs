@@ -64,6 +64,25 @@ export class OverworldScene {
         npcs = npcs.filter((n) => on || !n.sparCoach);
         changed = true;
       }
+      // World Art Wave 5b (Mart interior): mart clerks no longer stand
+      // outdoors — a town scene filters its clerk out (the definition
+      // stays in the town data as the stock/dialogue source of truth),
+      // and the shared 'mart' scene fields the ORIGIN town's clerk
+      // behind the goods counter at (5,2) instead, verbatim. The
+      // origin is the via{} return ticket set by the door warp; with
+      // no ticket (scripted entry) it falls back to Viridian, the
+      // first Mart town — the Center's Pallet fallback pattern.
+      if (id === 'mart') {
+        const origin = (this.martReturn && this.martReturn.map) || 'viridian';
+        this._martOrigin = origin;
+        const src = MAPS[origin];
+        const clerk = src && Array.isArray(src.npcs) ? src.npcs.find((n) => n.mart) : null;
+        npcs = clerk ? [{ ...clerk, x: 5, y: 2 }] : [];
+        changed = true;
+      } else if (npcs.some((n) => n.mart)) {
+        npcs = npcs.filter((n) => !n.mart);
+        changed = true;
+      }
       const patches = TALE_NPC_PATCHES.filter((p) => p.map === id);
       if (patches.length) {
         npcs = npcs.map((n) => {
@@ -72,7 +91,10 @@ export class OverworldScene {
         });
         changed = true;
       }
-      const taleNpcs = TALE_NPCS.filter((n) => n.map === id);
+      // Wave 5b: the SHOPKEEPER tale actor belongs to the 'mart' map
+      // (quests.mjs) but is fielded only for a Viridian entry — in any
+      // other town's Mart he would collide with that town's clerk.
+      const taleNpcs = TALE_NPCS.filter((n) => n.map === id && (id !== 'mart' || n.name !== 'SHOPKEEPER' || this._martOrigin === 'viridian'));
       if (taleNpcs.length) {
         npcs = [...npcs, ...taleNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
@@ -90,7 +112,9 @@ export class OverworldScene {
     if (this.sysLoadMap) this.sysLoadMap(id);
     // Dynamic Pokemon Center exit (WS9): remember which city we came from.
     if (id === 'center' && this._lastCity) this.centerReturn = this._lastCity;
-    if (id !== 'center') this._lastCity = { map: id, x: this.player ? this.player.tx : 7, y: this.player ? this.player.ty : 9 };
+    // Shared interiors (center/mart) and house interiors are not
+    // cities — loading one must not clobber the Fly/center origin.
+    if (id !== 'center' && id !== 'mart' && !id.startsWith('house-')) this._lastCity = { map: id, x: this.player ? this.player.tx : 7, y: this.player ? this.player.ty : 9 };
   }
 
   tileAt(x, y) {
@@ -212,8 +236,13 @@ export class OverworldScene {
     const wp = this.warpAt(x, y);
     if (wp) {
       let to = wp.to;
-      if (wp.viaExit) to = this.centerReturn || { map: 'pallet', x: 7, y: 9 };
+      // Wave 5b: viaExit resolves per shared interior — the Mart's
+      // exit ticket is its own (martReturn), the Center's is unchanged.
+      if (wp.viaExit) to = this.mapId === 'mart'
+        ? (this.martReturn || { map: 'viridian', x: 3, y: 9 })
+        : (this.centerReturn || { map: 'pallet', x: 7, y: 9 });
       if (to.map === 'center' && wp.via) this.centerReturn = wp.via;
+      if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
       this.loadMap(to.map);
       this.player.tx = to.x; this.player.ty = to.y;
       this.player.px = to.x * TILE; this.player.py = to.y * TILE;

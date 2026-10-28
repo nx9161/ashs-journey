@@ -318,6 +318,11 @@ export const MAP_LIST = Object.keys(MAPS);
 // tiles exactly like the legacy D/E/C doors — warps remain
 // coordinate-keyed in each map's warps[] list.
 export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9',
+  // Wave 5b: the single-tile house doors (s house, w wood, y brick)
+  // become step-warp thresholds now that the houses are enterable.
+  // The chars occur ONLY as the 15 town house doors (13 warped, the 2
+  // known decorative doors stay enclosed by roof/facade/border tiles).
+  's', 'w', 'y',
   // Wave 4 dungeon floors: cave L, Tower Q, Silph %, Plant & — each was
   // swapped 1:1 from the walkable '.' floor char, so floor stays floor.
   'L', 'Q', '%', '&',

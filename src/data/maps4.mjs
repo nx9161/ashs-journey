@@ -113,6 +113,295 @@ export const MAPS4 = {
     ],
     start: null,
   },
+
+  // ---- World Art Wave 5b: house interiors + the shared Mart ----
+  // One template family (10x7, house tileset, Wave 5a prop library) in
+  // four layout variants (A bed-NW / B bed-NE / C bed-W / D bed-E) with
+  // per-house prop mixes. Every exit pair lands on the town door's one
+  // front tile; every entry lands at (4,4), the exit doors' front row,
+  // so no interior can trap. The Mart is ONE shared interior on the
+  // Center pattern: town doors carry a via{} return ticket, the exits
+  // carry viaExit:true, and loadMap fields the origin town's own clerk
+  // (its stock/dialogue definition stays in the town's data) behind
+  // the goods counter — Viridian fields its SHOPKEEPER tale actor
+  // instead (data/quests.mjs). Mart base npcs are therefore empty.
+  mart: {
+    id: 'mart', name: 'Pokemon Mart', music: 'viridian-theme', indoor: true,
+    rows: [
+      ';;;;;;;;;;;;',
+      ';ιι$$$$$$κκ;',
+      ';$$$$$$$$$$;',
+      ';$$$ααα$$$θ;',
+      ';$$$$$$$$$$;',
+      ';$$)$$$$ζ$$;',
+      ';$$$$DD$$$$;',
+      ';;;;;;;;;;;;',
+    ],
+    warps: [
+      { x: 5, y: 6, to: { map: 'viridian', x: 3, y: 9 }, viaExit: true },
+      { x: 6, y: 6, to: { map: 'viridian', x: 4, y: 9 }, viaExit: true },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pallet-ash': {
+    id: 'house-pallet-ash', name: 'Your House', music: 'pallet-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pallet', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pallet', x: 3, y: 4 } },
+    ],
+    signs: [
+      { x: 4, y: 1, text: 'A shelf of maps in a careful hand, and a teacup that never quite empties.' },
+    ],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pallet-gary': {
+    id: 'house-pallet-gary', name: "Gary's House", music: 'pallet-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*γ***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pallet', x: 11, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pallet', x: 11, y: 4 } },
+    ],
+    signs: [
+      { x: 3, y: 1, text: 'Battle magazines, spine-cracked, sorted by badge season.' },
+    ],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-viridian': {
+    id: 'house-viridian', name: 'Viridian City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<η**θ***η<',
+      '<δ*******<',
+      '<*(*εζ***<',
+      '<*****))*<',
+      '<***DD**ζ<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
+      { x: 5, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pewter-w': {
+    id: 'house-pewter-w', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*(***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pewter', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pewter', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pewter-e': {
+    id: 'house-pewter-e', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ**η****<',
+      '<*******δ<',
+      '<ω**εζ***<',
+      '<*))*****<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pewter', x: 12, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pewter', x: 12, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-cerulean': {
+    id: 'house-cerulean', name: 'Cerulean City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'cerulean', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'cerulean', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-vermilion': {
+    id: 'house-vermilion', name: 'Vermilion City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*(***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'vermilion', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'vermilion', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-celadon-w': {
+    id: 'house-celadon-w', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ**η****<',
+      '<*******δ<',
+      '<ω**εζ***<',
+      '<*))*****<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'celadon', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'celadon', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-celadon-e': {
+    id: 'house-celadon-e', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'celadon', x: 13, y: 4 } },
+      { x: 5, y: 5, to: { map: 'celadon', x: 13, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-lavender': {
+    id: 'house-lavender', name: 'Lavender Town — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<η**θ***η<',
+      '<δ*******<',
+      '<*(*εζ***<',
+      '<*****))*<',
+      '<***DD**ζ<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'lavender', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'lavender', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-fuchsia': {
+    id: 'house-fuchsia', name: "Auntie Moss's House", music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ**η****<',
+      '<*******δ<',
+      '<ω**εζ***<',
+      '<*))*****<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'fuchsia', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'fuchsia', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [
+      // Wave 5b: the one resident whose dialogue names her house ("My
+      // house? The warden borrows it half the year...") — same NPC,
+      // same lines, now standing inside it (was Fuchsia (2,5)).
+      { x: 6, y: 2, name: 'AUNTIE MOSS', art: 'elder', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+        dialogue: ["My house? The warden borrows it half the year and leaves it smelling of bait and boot polish.", "If I'd a spare set of teeth I'd trade him for his, just to end the mumbling. Family rates, of course."] },
+    ],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-cinnabar': {
+    id: 'house-cinnabar', name: 'Cinnabar Island — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*(***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'cinnabar', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'cinnabar', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-indigo': {
+    id: 'house-indigo', name: 'Indigo Plateau — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'indigo', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'indigo', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
 };
 
 // ---- travel-graph repairs (fidelity audit, ADR-019) ----

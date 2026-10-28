@@ -15470,6 +15470,11 @@ const MAP_LIST = Object.keys(MAPS);
 // tiles exactly like the legacy D/E/C doors — warps remain
 // coordinate-keyed in each map's warps[] list.
 const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9',
+  // Wave 5b: the single-tile house doors (s house, w wood, y brick)
+  // become step-warp thresholds now that the houses are enterable.
+  // The chars occur ONLY as the 15 town house doors (13 warped, the 2
+  // known decorative doors stay enclosed by roof/facade/border tiles).
+  's', 'w', 'y',
   // Wave 4 dungeon floors: cave L, Tower Q, Silph %, Plant & — each was
   // swapped 1:1 from the walkable '.' floor char, so floor stays floor.
   'L', 'Q', '%', '&',
@@ -15622,6 +15627,8 @@ const MAPS2 = {
       { x: 7, y: 3, to: { map: 'gym', x: 5, y: 7 } },
       { x: 8, y: 3, to: { map: 'gym', x: 6, y: 7 } },
       { x: 15, y: 7, to: { map: 'route3', x: 1, y: 5 } },
+      { x: 3, y: 3, to: { map: 'house-pewter-w', x: 4, y: 4 } },
+      { x: 12, y: 3, to: { map: 'house-pewter-e', x: 4, y: 4 } },
       { x: 6, y: 10, to: { map: 'route2', x: 6, y: 1 } },
       { x: 7, y: 10, to: { map: 'route2', x: 7, y: 1 } },
       { x: 8, y: 10, to: { map: 'route2', x: 6, y: 1 } },
@@ -15870,6 +15877,7 @@ const MAPS2 = {
       { x: 8, y: 12, to: { map: 'route5', x: 8, y: 12 } },
       { x: 9, y: 12, to: { map: 'route5', x: 9, y: 12 } },
       { x: 2, y: 1, to: { map: 'ceruleancave', x: 8, y: 10 } },
+      { x: 3, y: 3, to: { map: 'house-cerulean', x: 4, y: 4 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'CERULEAN CITY — A beautiful blue city, forever flowing like water.' },
@@ -16083,6 +16091,7 @@ const MAPS2 = {
       { x: 9, y: 0, to: { map: 'route6', x: 9, y: 12 } },
       { x: 0, y: 5, to: { map: 'route7', x: 15, y: 5 } },
       { x: 17, y: 5, to: { map: 'route11', x: 1, y: 5 } },
+      { x: 3, y: 3, to: { map: 'house-vermilion', x: 4, y: 4 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'VERMILION CITY — The port of the vermilion sunset. Ships from every sea dock here.' },
@@ -16290,8 +16299,8 @@ const MAPS2 = {
       '..o.p.AJKA.nPPPPP#',
       '#.........o.12PPP#',
       '#.....o...o......#',
-      '#.p.........n.....',
-      '#.....ghi.......p#',
+      '#.aOc.......n.....',
+      '#.P12.ghi.......p#',
       '#.....rsup...S...#',
       '##################',
     ]),
@@ -16302,6 +16311,10 @@ const MAPS2 = {
       { x: 8, y: 6, to: { map: 'center', x: 5, y: 4 }, via: { map: 'celadon', x: 8, y: 7 } },
       { x: 12, y: 7, to: { map: 'gamecorner', x: 8, y: 10 } },
       { x: 13, y: 7, to: { map: 'gamecorner', x: 9, y: 10 } },
+      { x: 3, y: 3, to: { map: 'house-celadon-w', x: 4, y: 4 } },
+      { x: 13, y: 3, to: { map: 'house-celadon-e', x: 4, y: 4 } },
+      { x: 3, y: 10, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'celadon', x: 3, y: 11 } },
+      { x: 4, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'celadon', x: 4, y: 11 } },
       { x: 17, y: 3, to: { map: 'route7', x: 1, y: 5 } },
       { x: 17, y: 9, to: { map: 'route8', x: 1, y: 5 } },
       { x: 0, y: 4, to: { map: 'route16', x: 8, y: 1 } },
@@ -18856,8 +18869,8 @@ const MAPS3 = {
     id: 'saffron', name: 'Saffron City', music: 'viridian-theme',
     rows: rows([
       '##################',
-      '#....d3eeef......#',
-      '#....Z6ZZ6Z......#',
+      '#....d3eeef..aOc.#',
+      '#....Z6ZZ6Z..P12.#',
       '#....ZZZ45Z......#',
       '#.n...o....o......',
       '#.abbc....dXefn..#',
@@ -18881,6 +18894,8 @@ const MAPS3 = {
       { x: 17, y: 4, to: { map: 'route9', x: 1, y: 5 } },
       { x: 9, y: 12, to: { map: 'route8', x: 9, y: 1 } },
       { x: 10, y: 12, to: { map: 'route8', x: 10, y: 1 } },
+      { x: 14, y: 2, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'saffron', x: 14, y: 3 } },
+      { x: 15, y: 2, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'saffron', x: 15, y: 3 } },
     ],
     signs: [
       { x: 8, y: 6, text: 'SAFFRON CITY — The golden city at the heart of Kanto. Silph Co. HQ towers over all.' },
@@ -19273,8 +19288,8 @@ const MAPS3 = {
       '#.n.n..SS.UVYUn..#',
       '..o............o.#',
       '#.....jklm.......#',
-      '#.....AJKA.......#',
-      '#.pFF.o..o.FFp...#',
+      '#.....AJKA....aOc#',
+      '#.pFF.o..o.FFpP12#',
       '#................#',
       '#................#',
       '#....n...........#',
@@ -19290,6 +19305,9 @@ const MAPS3 = {
       { x: 0, y: 5, to: { map: 'route8', x: 16, y: 5 } },
       { x: 8, y: 12, to: { map: 'route12', x: 8, y: 1 } },
       { x: 9, y: 12, to: { map: 'route12', x: 9, y: 1 } },
+      { x: 3, y: 3, to: { map: 'house-lavender', x: 4, y: 4 } },
+      { x: 15, y: 8, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'lavender', x: 15, y: 9 } },
+      { x: 16, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'lavender', x: 16, y: 9 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'LAVENDER TOWN — The noble purple town. Speak softly here; the tower is listening.' },
@@ -19551,8 +19569,8 @@ const MAPS3 = {
       '#.....jklm.......#',
       '#....oAJKAo......#',
       '#.pFF......FFp...#',
-      '#.....abbc.......#',
-      '#.....v78v.......#',
+      '#.....abbc...aOc.#',
+      '#.....v78v...P12.#',
       '#...........p....#',
       '########..########',
     ]),
@@ -19568,6 +19586,9 @@ const MAPS3 = {
       { x: 17, y: 5, to: { map: 'route15', x: 1, y: 5 } },
       { x: 8, y: 12, to: { map: 'route19', x: 8, y: 1 } },
       { x: 9, y: 12, to: { map: 'route19', x: 9, y: 1 } },
+      { x: 3, y: 3, to: { map: 'house-fuchsia', x: 4, y: 4 } },
+      { x: 14, y: 10, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'fuchsia', x: 14, y: 11 } },
+      { x: 15, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'fuchsia', x: 15, y: 11 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'FUCHSIA CITY — The Safari City. Wild Pokemon roam free beyond the south gate.' },
@@ -19581,8 +19602,8 @@ const MAPS3 = {
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
         dialogue: ["Fuchsia Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
-      { x: 2, y: 5, name: 'AUNTIE MOSS', art: 'elder', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
-        dialogue: ["My house? The warden borrows it half the year and leaves it smelling of bait and boot polish.", "If I'd a spare set of teeth I'd trade him for his, just to end the mumbling. Family rates, of course."] },
+      // Wave 5b: AUNTIE MOSS moved into her house (house-fuchsia in
+      // maps4.mjs) — her dialogue names it as hers; same NPC, same lines.
     ],
     encounters: null,
     items: [],
@@ -19963,8 +19984,8 @@ const MAPS3 = {
       '#.....jklm.......#',
       '#....oAJKAo......#',
       '#.pFF......FF.p..#',
-      '#....deef..d3f...#',
-      '#....x78z..Z0Z..p#',
+      '#aOc.deef..d3f...#',
+      '#P12.x78z..Z0Z..p#',
       '#.........o......#',
       '##################',
     ]),
@@ -19976,6 +19997,9 @@ const MAPS3 = {
       { x: 6, y: 10, to: { map: 'mansion', x: 8, y: 10 } },
       { x: 7, y: 10, to: { map: 'mansion', x: 9, y: 10 } },
       { x: 0, y: 5, to: { map: 'route20', x: 16, y: 3 } },
+      { x: 3, y: 3, to: { map: 'house-cinnabar', x: 4, y: 4 } },
+      { x: 2, y: 10, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'cinnabar', x: 2, y: 11 } },
+      { x: 3, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'cinnabar', x: 3, y: 11 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'CINNABAR ISLAND — A volcanic isle of labs and legends. The sea here never quite cools.' },
@@ -20106,8 +20130,8 @@ const MAPS3 = {
       '#.UVY.jklmn.n..#',
       '#.....AJKA.....#',
       '#..SS.o..o.SS..#',
-      '...............#',
-      '#.nFF......FFp.#',
+      '..aOc..........#',
+      '#.P12......FFp.#',
       '#......,,......#',
       '######....######',
     ]),
@@ -20121,6 +20145,9 @@ const MAPS3 = {
       { x: 8, y: 0, to: { map: 'route2', x: 6, y: 12 } },
       { x: 9, y: 0, to: { map: 'route2', x: 7, y: 12 } },
       { x: 0, y: 7, to: { map: 'route22', x: 16, y: 5 } },
+      { x: 11, y: 3, to: { map: 'house-viridian', x: 4, y: 4 } },
+      { x: 3, y: 8, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'viridian', x: 3, y: 9 } },
+      { x: 4, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'viridian', x: 4, y: 9 } },
       { x: 6, y: 10, to: { map: 'route1', x: 6, y: 1 } },
       { x: 7, y: 10, to: { map: 'route1', x: 7, y: 1 } },
       { x: 8, y: 10, to: { map: 'route1', x: 6, y: 1 } },
@@ -20281,8 +20308,8 @@ const MAPS3 = {
       '#.n.n..SS.UVYU.#',
       '#....o....o..p.#',
       '#.....jklm.....#',
-      '#....oAJKAo....#',
-      '#..FF......FF.n#',
+      '#.aOcoAJKAo....#',
+      '#.P12......FF.n#',
       '#.p............#',
       '######....######',
     ]),
@@ -20295,6 +20322,9 @@ const MAPS3 = {
       { x: 7, y: 10, to: { map: 'victoryroad', x: 16, y: 5 } },
       { x: 8, y: 10, to: { map: 'victoryroad', x: 16, y: 5 } },
       { x: 9, y: 10, to: { map: 'victoryroad', x: 16, y: 5 } },
+      { x: 3, y: 3, to: { map: 'house-indigo', x: 4, y: 4 } },
+      { x: 3, y: 8, to: { map: 'mart', x: 5, y: 5 }, via: { map: 'indigo', x: 3, y: 9 } },
+      { x: 4, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'indigo', x: 4, y: 9 } },
     ],
     signs: [
       { x: 7, y: 4, text: 'INDIGO PLATEAU — The Pokemon League. Every road in Kanto ends here.' },
@@ -20478,6 +20508,8 @@ const MAPS3 = {
       { x: 7, y: 10, to: { map: 'route1', x: 7, y: 14 } },
       { x: 8, y: 10, to: { map: 'route1', x: 6, y: 14 } },
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
+      { x: 3, y: 3, to: { map: 'house-pallet-ash', x: 4, y: 4 } },
+      { x: 11, y: 3, to: { map: 'house-pallet-gary', x: 4, y: 4 } },
     ],
     signs: [
       { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
@@ -20945,6 +20977,295 @@ const MAPS4 = {
       { id: 'ev_silph_boss', x: 9, y: 4, when: { flagNot: 'silph_done' } },
     ],
     start: null,
+  },
+
+  // ---- World Art Wave 5b: house interiors + the shared Mart ----
+  // One template family (10x7, house tileset, Wave 5a prop library) in
+  // four layout variants (A bed-NW / B bed-NE / C bed-W / D bed-E) with
+  // per-house prop mixes. Every exit pair lands on the town door's one
+  // front tile; every entry lands at (4,4), the exit doors' front row,
+  // so no interior can trap. The Mart is ONE shared interior on the
+  // Center pattern: town doors carry a via{} return ticket, the exits
+  // carry viaExit:true, and loadMap fields the origin town's own clerk
+  // (its stock/dialogue definition stays in the town's data) behind
+  // the goods counter — Viridian fields its SHOPKEEPER tale actor
+  // instead (data/quests.mjs). Mart base npcs are therefore empty.
+  mart: {
+    id: 'mart', name: 'Pokemon Mart', music: 'viridian-theme', indoor: true,
+    rows: [
+      ';;;;;;;;;;;;',
+      ';ιι$$$$$$κκ;',
+      ';$$$$$$$$$$;',
+      ';$$$ααα$$$θ;',
+      ';$$$$$$$$$$;',
+      ';$$)$$$$ζ$$;',
+      ';$$$$DD$$$$;',
+      ';;;;;;;;;;;;',
+    ],
+    warps: [
+      { x: 5, y: 6, to: { map: 'viridian', x: 3, y: 9 }, viaExit: true },
+      { x: 6, y: 6, to: { map: 'viridian', x: 4, y: 9 }, viaExit: true },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pallet-ash': {
+    id: 'house-pallet-ash', name: 'Your House', music: 'pallet-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pallet', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pallet', x: 3, y: 4 } },
+    ],
+    signs: [
+      { x: 4, y: 1, text: 'A shelf of maps in a careful hand, and a teacup that never quite empties.' },
+    ],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pallet-gary': {
+    id: 'house-pallet-gary', name: "Gary's House", music: 'pallet-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*γ***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pallet', x: 11, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pallet', x: 11, y: 4 } },
+    ],
+    signs: [
+      { x: 3, y: 1, text: 'Battle magazines, spine-cracked, sorted by badge season.' },
+    ],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-viridian': {
+    id: 'house-viridian', name: 'Viridian City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<η**θ***η<',
+      '<δ*******<',
+      '<*(*εζ***<',
+      '<*****))*<',
+      '<***DD**ζ<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
+      { x: 5, y: 5, to: { map: 'viridian', x: 11, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pewter-w': {
+    id: 'house-pewter-w', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*(***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pewter', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pewter', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-pewter-e': {
+    id: 'house-pewter-e', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ**η****<',
+      '<*******δ<',
+      '<ω**εζ***<',
+      '<*))*****<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'pewter', x: 12, y: 4 } },
+      { x: 5, y: 5, to: { map: 'pewter', x: 12, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-cerulean': {
+    id: 'house-cerulean', name: 'Cerulean City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'cerulean', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'cerulean', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-vermilion': {
+    id: 'house-vermilion', name: 'Vermilion City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*(***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'vermilion', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'vermilion', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-celadon-w': {
+    id: 'house-celadon-w', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ**η****<',
+      '<*******δ<',
+      '<ω**εζ***<',
+      '<*))*****<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'celadon', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'celadon', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-celadon-e': {
+    id: 'house-celadon-e', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'celadon', x: 13, y: 4 } },
+      { x: 5, y: 5, to: { map: 'celadon', x: 13, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-lavender': {
+    id: 'house-lavender', name: 'Lavender Town — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<η**θ***η<',
+      '<δ*******<',
+      '<*(*εζ***<',
+      '<*****))*<',
+      '<***DD**ζ<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'lavender', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'lavender', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-fuchsia': {
+    id: 'house-fuchsia', name: "Auntie Moss's House", music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ**η****<',
+      '<*******δ<',
+      '<ω**εζ***<',
+      '<*))*****<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'fuchsia', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'fuchsia', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [
+      // Wave 5b: the one resident whose dialogue names her house ("My
+      // house? The warden borrows it half the year...") — same NPC,
+      // same lines, now standing inside it (was Fuchsia (2,5)).
+      { x: 6, y: 2, name: 'AUNTIE MOSS', art: 'elder', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+        dialogue: ["My house? The warden borrows it half the year and leaves it smelling of bait and boot polish.", "If I'd a spare set of teeth I'd trade him for his, just to end the mumbling. Family rates, of course."] },
+    ],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-cinnabar': {
+    id: 'house-cinnabar', name: 'Cinnabar Island — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<θ*η****δ<',
+      '<********<',
+      '<*(***εζ*<',
+      '<ω***))**<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'cinnabar', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'cinnabar', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
+  },
+  'house-indigo': {
+    id: 'house-indigo', name: 'Indigo Plateau — House', music: 'viridian-theme', indoor: true,
+    rows: [
+      '<<<<<<<<<<',
+      '<δ**η**θ*<',
+      '<********<',
+      '<*εζ***(*<',
+      '<**)***ω*<',
+      '<***DD***<',
+      '<<<<<<<<<<',
+    ],
+    warps: [
+      { x: 4, y: 5, to: { map: 'indigo', x: 3, y: 4 } },
+      { x: 5, y: 5, to: { map: 'indigo', x: 3, y: 4 } },
+    ],
+    signs: [],
+    npcs: [],
+    encounters: null, items: [], hidden: [], events: [], start: null,
   },
 };
 
@@ -22588,9 +22909,19 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 const TALE_NPCS = [
-  { map: 'pallet', x: 3, y: 4, name: 'MOM', art: 'mom', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
+  // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
+  // own front-door threshold (3,4) — the one-tile gap in the fence
+  // row, fed only from (3,5) — so ANY stance in that column seals
+  // Ash's house now that its door is a real warp. She now stands
+  // beside the gap, still in front of her house; same map, same
+  // staging, same lines, and every tale drive finds her by name.
+  { map: 'pallet', x: 4, y: 5, name: 'MOM', art: 'mom', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
     dialogue: ['Mind the grass on Route 1, love. And eat something that is not a Potion.'] },
-  { map: 'viridian', x: 2, y: 7, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
+  // Wave 5b: the SHOPKEEPER moved indoors with the Viridian Mart (the
+  // owner's "real Mart interior" ruling) — he stands behind the Mart
+  // counter in the shared 'mart' scene, fielded only for a Viridian
+  // entry (see overworld loadMap). Same NPC, same tale, same lines.
+  { map: 'mart', x: 5, y: 2, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
     dialogue: ['Viridian sundries! Maps, string, and strong opinions about both.'] },
   { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
@@ -22840,7 +23171,7 @@ const GROUNDS = {
 };
 
 // map id -> groundId. Every Kanto map in the merged MAPS table is assigned
-// explicitly (56 unique ids across maps.mjs/maps2/maps3/maps4 — interiors
+// explicitly (70 unique ids across maps.mjs/maps2/maps3/maps4 — interiors
 // that are shared, 'center'/'mart', resolve Open). Unmapped ids fall back
 // to Open in groundForMap(), so a future map can never crash a battle.
 const MAP_GROUND = {
@@ -22848,6 +23179,7 @@ const MAP_GROUND = {
   route1: 'open',
   viridian: 'open',
   center: 'open',
+  mart: 'open', // World Art Wave 5b: the shared Mart interior
   route2: 'bloom', // Route 2 carries the Viridian Forest corridor in this build
   pewter: 'open',
   gym: 'rubble', // Pewter Gym — Brock
@@ -22900,6 +23232,20 @@ const MAP_GROUND = {
   league: 'open',
   ceruleancave: 'rubble',
   newisland: 'tide',
+  // World Art Wave 5b: house interiors (shared template family).
+  'house-pallet-ash': 'open',
+  'house-pallet-gary': 'open',
+  'house-viridian': 'open',
+  'house-pewter-w': 'open',
+  'house-pewter-e': 'open',
+  'house-cerulean': 'open',
+  'house-vermilion': 'open',
+  'house-celadon-w': 'open',
+  'house-celadon-e': 'open',
+  'house-lavender': 'open',
+  'house-fuchsia': 'open',
+  'house-cinnabar': 'open',
+  'house-indigo': 'open',
 };
 
 function groundForMap(mapId) {
@@ -29930,6 +30276,25 @@ class OverworldScene {
         npcs = npcs.filter((n) => on || !n.sparCoach);
         changed = true;
       }
+      // World Art Wave 5b (Mart interior): mart clerks no longer stand
+      // outdoors — a town scene filters its clerk out (the definition
+      // stays in the town data as the stock/dialogue source of truth),
+      // and the shared 'mart' scene fields the ORIGIN town's clerk
+      // behind the goods counter at (5,2) instead, verbatim. The
+      // origin is the via{} return ticket set by the door warp; with
+      // no ticket (scripted entry) it falls back to Viridian, the
+      // first Mart town — the Center's Pallet fallback pattern.
+      if (id === 'mart') {
+        const origin = (this.martReturn && this.martReturn.map) || 'viridian';
+        this._martOrigin = origin;
+        const src = MAPS[origin];
+        const clerk = src && Array.isArray(src.npcs) ? src.npcs.find((n) => n.mart) : null;
+        npcs = clerk ? [{ ...clerk, x: 5, y: 2 }] : [];
+        changed = true;
+      } else if (npcs.some((n) => n.mart)) {
+        npcs = npcs.filter((n) => !n.mart);
+        changed = true;
+      }
       const patches = TALE_NPC_PATCHES.filter((p) => p.map === id);
       if (patches.length) {
         npcs = npcs.map((n) => {
@@ -29938,7 +30303,10 @@ class OverworldScene {
         });
         changed = true;
       }
-      const taleNpcs = TALE_NPCS.filter((n) => n.map === id);
+      // Wave 5b: the SHOPKEEPER tale actor belongs to the 'mart' map
+      // (quests.mjs) but is fielded only for a Viridian entry — in any
+      // other town's Mart he would collide with that town's clerk.
+      const taleNpcs = TALE_NPCS.filter((n) => n.map === id && (id !== 'mart' || n.name !== 'SHOPKEEPER' || this._martOrigin === 'viridian'));
       if (taleNpcs.length) {
         npcs = [...npcs, ...taleNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
@@ -29956,7 +30324,9 @@ class OverworldScene {
     if (this.sysLoadMap) this.sysLoadMap(id);
     // Dynamic Pokemon Center exit (WS9): remember which city we came from.
     if (id === 'center' && this._lastCity) this.centerReturn = this._lastCity;
-    if (id !== 'center') this._lastCity = { map: id, x: this.player ? this.player.tx : 7, y: this.player ? this.player.ty : 9 };
+    // Shared interiors (center/mart) and house interiors are not
+    // cities — loading one must not clobber the Fly/center origin.
+    if (id !== 'center' && id !== 'mart' && !id.startsWith('house-')) this._lastCity = { map: id, x: this.player ? this.player.tx : 7, y: this.player ? this.player.ty : 9 };
   }
 
   tileAt(x, y) {
@@ -30078,8 +30448,13 @@ class OverworldScene {
     const wp = this.warpAt(x, y);
     if (wp) {
       let to = wp.to;
-      if (wp.viaExit) to = this.centerReturn || { map: 'pallet', x: 7, y: 9 };
+      // Wave 5b: viaExit resolves per shared interior — the Mart's
+      // exit ticket is its own (martReturn), the Center's is unchanged.
+      if (wp.viaExit) to = this.mapId === 'mart'
+        ? (this.martReturn || { map: 'viridian', x: 3, y: 9 })
+        : (this.centerReturn || { map: 'pallet', x: 7, y: 9 });
       if (to.map === 'center' && wp.via) this.centerReturn = wp.via;
+      if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
       this.loadMap(to.map);
       this.player.tx = to.x; this.player.ty = to.y;
       this.player.px = to.x * TILE; this.player.py = to.y * TILE;
@@ -34158,6 +34533,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:a2aa7fcf329f2a4db6ba039117a5ef76c2c3a18fe0eb530a83d7aad068801caf -->
+<!-- contentHash:14e19039c10b7698746e8b8f2d0b8e934df913f8af8b8c8c6740e673fda8a571 -->
 </body>
 </html>

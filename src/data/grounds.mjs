@@ -72,7 +72,7 @@ export const GROUNDS = {
 };
 
 // map id -> groundId. Every Kanto map in the merged MAPS table is assigned
-// explicitly (56 unique ids across maps.mjs/maps2/maps3/maps4 — interiors
+// explicitly (70 unique ids across maps.mjs/maps2/maps3/maps4 — interiors
 // that are shared, 'center'/'mart', resolve Open). Unmapped ids fall back
 // to Open in groundForMap(), so a future map can never crash a battle.
 export const MAP_GROUND = {
@@ -80,6 +80,7 @@ export const MAP_GROUND = {
   route1: 'open',
   viridian: 'open',
   center: 'open',
+  mart: 'open', // World Art Wave 5b: the shared Mart interior
   route2: 'bloom', // Route 2 carries the Viridian Forest corridor in this build
   pewter: 'open',
   gym: 'rubble', // Pewter Gym — Brock
@@ -132,6 +133,20 @@ export const MAP_GROUND = {
   league: 'open',
   ceruleancave: 'rubble',
   newisland: 'tide',
+  // World Art Wave 5b: house interiors (shared template family).
+  'house-pallet-ash': 'open',
+  'house-pallet-gary': 'open',
+  'house-viridian': 'open',
+  'house-pewter-w': 'open',
+  'house-pewter-e': 'open',
+  'house-cerulean': 'open',
+  'house-vermilion': 'open',
+  'house-celadon-w': 'open',
+  'house-celadon-e': 'open',
+  'house-lavender': 'open',
+  'house-fuchsia': 'open',
+  'house-cinnabar': 'open',
+  'house-indigo': 'open',
 };
 
 export function groundForMap(mapId) {

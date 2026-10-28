@@ -1732,3 +1732,184 @@ The raise is documented at the budget in
 - Prop chars are Greek letters (see §2) — a legend is mandatory
   reading before hand-editing interior rows; it is recorded in
   `tiles.mjs` at the char table.
+
+## World Art Wave 5b — House Interiors + Real Mart Interior (2026-10-28)
+
+Owner rulings executed: (a) every Wave 2 town house enterable,
+(b) a real Mart interior replacing the outdoor-clerk arrangement.
+Build vercel+guest only; **not deployed**.
+
+### 1. House interiors — 13 of 15 enterable
+
+One shared template family in `src/data/maps4.mjs` (10×7, house
+tileset, Wave 5a prop library): four layout variants (bed NW / NE /
+W / E) with per-house prop mixes of 7–8 distinct kinds (bed, shelf,
+plant, table, chair, stool, rug, sofa; Gary's house swaps the stool
+for the PC desk γ). Entry lands at (4,4); the paired exit doors
+(4,5)/(5,5) land exactly on the town door's one front tile. Two
+shelf signs carry the wave's only new writing (Ash's house, Gary's
+house — dressing, no story).
+
+Enterable (door → interior): Pallet (3,3) → house-pallet-ash,
+Pallet (11,3) → house-pallet-gary, Viridian (11,3) → house-viridian,
+Pewter (3,3) → house-pewter-w, Pewter (12,3) → house-pewter-e,
+Cerulean (3,3) → house-cerulean, Vermilion (3,3) → house-vermilion,
+Celadon (3,3) → house-celadon-w, Celadon (13,3) → house-celadon-e,
+Lavender (3,3) → house-lavender, Fuchsia (3,3) → house-fuchsia,
+Cinnabar (3,3) → house-cinnabar, Indigo (3,3) → house-indigo.
+Saffron has no Wave 2 house (0 doors) — nothing to enter.
+
+**Exclusions (flag standing):** Vermilion w@(5,11) and Celadon
+s@(7,11) — decorative doors on the last interior row, fronts are
+the `#` border; the Wave 2 fix-pass finding stands (no clean
+footprint nudge). Both houses remain unenterable, as before.
+
+**Enabler:** the single-tile house doors `s`/`w`/`y` were NOT in
+WALKABLE (Wave 2 doors were decorative). A full-map scan proves
+the three chars occur ONLY as these 15 house doors, so they were
+added to WALKABLE as step-warp thresholds (`src/data/maps.mjs`);
+the 2 excluded doors stay enclosed by roof/facade/border tiles.
+
+### 2. Resident NPCs — one clear occupant moved; Mom re-staged in place
+
+Association audit from data/dialogue: only ONE resident is clearly
+a house's occupant — **AUNTIE MOSS** (Fuchsia): her dialogue names
+the house ("My house? The warden borrows it half the year…"). She
+now stands inside house-fuchsia at (6,2), same NPC, same lines;
+removed from the Fuchsia town scene. Every other house's nearest
+NPC is ambiguous (tale givers/witnesses, a trade NPC, the gym
+COACH) — nobody else moved; those houses are dressed lived-in.
+
+**MOM (tale-critical) did NOT move indoors** — six-plus test sites
+drive her in Pallet, including the real-browser C02. She did need
+a two-tile re-stage, (3,4) → (4,5) in `src/data/quests.mjs`: she
+stood on her own front-door threshold — the one-tile fence gap
+feeding Ash's house, fed only from (3,5) — so any stance in that
+column seals the house in the real engine (NPC blocking; the
+NPC-free audit cannot see this — the live drive caught it). She
+stands beside the gap now, still in front of her house; same map,
+same lines, every drive finds her by name. Phase 4 stays 53/53.
+
+### 3. The Mart — one shared interior, 7 towns
+
+`mart` (12×8, Mart tileset) in maps4.mjs, built on the Center
+pattern: town doors carry a `via{}` return ticket, exits carry
+`viaExit:true` resolving through a new `martReturn` (Center's
+`centerReturn` untouched), and `loadMap` fields the ORIGIN town's
+clerk behind the goods counter at (5,2) — the Wave 5a over-counter
+interaction serves him. Clerk definitions (stock/dialogue source
+of truth) stay in the town data; town scenes filter `mart` NPCs
+out at load (the Sparring Coach copy pattern — shared MAPS never
+mutated). Outdoor clerk arrangement removed in all 7 towns; the
+old pitches are plain dressing again.
+
+Towns + exterior placements (Wave 2 Mart facade: `aOc` roof with
+bag sign, `P12` facade): Viridian SW (3,8)/(4,8) · Saffron NE
+(14,2)/(15,2) · Lavender E (15,8)/(16,8) · Fuchsia SE
+(14,10)/(15,10) · Cinnabar W (2,10)/(3,10) · Indigo W (3,8)/(4,8)
+· Celadon W (3,10)/(4,10). Pallet/Pewter/Cerulean/Vermilion have
+no clerk in the data → no Mart (per the brief's wording).
+
+**Viridian SHOPKEEPER (Phase 4 tale target):** his TALE_NPCS entry
+now reads map `mart`, (5,2) — he is fielded in the Mart scene only
+for a Viridian entry (any other town fields its own clerk on that
+tile). Mom's "south end of town, green apron" line stays accurate
+(the Viridian Mart is at the SW/south end). Live drive: tale
+accepted at Mom → walked in → delivery over the counter advanced
+tale_pallet to stage 1 → exit landed on (3,9). Phase 4 53/53.
+
+**Celadon disposition (traced):** the east block (rows 5–7) is the
+Game Corner's exterior — its `12` doors have always warped to
+`gamecorner`. There is no Dept. Store interior, clerk, or menu
+anywhere in code; the city sign's "Dept. Store" text is flavor,
+and Celadon's only shop was the outdoor Atelier clerk. The block
+is UNTOUCHED (Game Corner intact); Celadon gets its Mart on the
+west side instead. **Placement correction, flagged:** the first
+stamp put the Celadon Mart in the SE pocket (rows 9–10, x13–15) —
+the non-circular audit + engine both show that pocket is reachable
+only through the Mart itself (`S`/`P`/fence seal it), i.e.
+unenterable. It was moved west (roof row 9 x2–4, facade row 10
+x2–4, fronts (3,11)/(4,11) on the open west street; ELIAS at (5,10)
+stands beside it, unmoved) and re-proved. The Atelier clerk serves
+indoors with identical stock, Second-Wind Ribbon included.
+
+### 4. Warp audit (Wave 2 non-circular method, rerun)
+
+- 70 maps; warp triggers 284, reachable 281, unreachable exactly
+  {victoryroad@(17,5), newisland@(8,10), newisland@(9,10)} — the
+  standing set, NOTHING new.
+- Door approaches: 144 doors, south-front reachable 84,
+  any-adjacent 138, no-approach 6 = the 2 excluded problem doors
+  + the 4 pre-existing New Island decorative doors. No new
+  no-approach doors.
+- Single-point-approach scan: 279 triggers checked, 0 single-point.
+- Every new interior un-trappable: house exits reachable from the
+  (4,4) landing, Mart exits from (5,5)/(6,5); all exit landings
+  verified on door-front tiles by live stepping drives (13/13
+  houses, 7/7 Marts — enter, exit, land on the front tile).
+- MAP_GROUND gained the 14 new ids (all 'open'; the phase-2 exact-
+  coverage law holds). Shared interiors no longer clobber
+  `_lastCity` (Fly/Center origin), same guard as `center`.
+
+### 5. verify-live — NO CHANGE (checked, none exists to break)
+
+`scripts/verify-live.mjs` contains no mart/shopping drive at all
+(grep-verified: no mart/buy/shop strings; `verify-slice.mjs` none
+either). The only mart drives are the rejuv suites, which call
+`openMart(stock)` directly and are untouched. Nothing to update;
+nothing was weakened or deleted.
+
+### 6. Test-drive updates (flagged, equal strength)
+
+The SHOPKEEPER's move indoors required three drive updates, same
+pattern the brief authorizes for verify-live: (1) phase4 A14's
+walkable-floor whitelist gains `'$'` (Mart floor — the collision
+checks against base NPCs/warps/signs are unchanged); (2) phase4
+GAME1 + GAME2 and (3) phase5 GAME7 SHOPKEEPER legs now
+`gotoMap('mart', 5, 5)` instead of Viridian — same talkTo, same
+assertions. All three suites pass at full count (63/53/55).
+
+### 7. Bytes + battery
+
+- **Bytes:** `art-data.mjs` **352,733 B — byte-identical to HEAD**
+  (zero new ART keys; the whole wave's art was 5a's). The 14,733 B
+  of art headroom is untouched. `public/game.js` 1,606,131 →
+  **1,620,291 B (+14,160)** — map data (14 new maps + town warps/
+  facades), the loadMap/onStep Mart wiring, grounds/quests data;
+  map data is not art data. Palette unchanged (54, no raise).
+  Built vercel+guest only; **personal/ byte-identical to HEAD**
+  (restored after the battery; content-hash personal line restored
+  to the HEAD value). Nothing deployed.
+- **Battery (public):** rejuv-phase1 **44/44** · phase2 **42/42** ·
+  phase3 **63/63** · phase4 **53/53** · phase5 **55/55** · phase6
+  **46/46** · fidelity **35/35** · campaign-smoke **24/24** ·
+  audit-headless **17/17** · audit-laptop public **41/41** ·
+  verify-slice **48/48** · qa-slice **134/134** · validator test
+  **51/51** · validator fuzz **2000/2000** · save-contract **6/6**
+  · Track B **114/114** · budgets-check **all gates pass** ·
+  contamination **clean** · drift-gate PASS · verify-audio
+  **ALL PASS** · qa-changed-flows **55/57, failures exactly the
+  standing baseline {b2, d9}**.
+- **Live drives (headless bundle, real warp stepping + real
+  counter interaction):** Pallet tale accept → walk to Ash's
+  door-front → house in/out (exit lands (3,4)); Viridian Mart walk-
+  in → SHOPKEEPER alone behind the counter → delivery advances the
+  tale → exit lands (3,9); Saffron Mart buy (Poke Ball, −$200,
+  through the quantity stepper, stock list identical to data);
+  Celadon Mart (clerk + ribbon stock indoors, exit lands (3,11));
+  Fuchsia house (AUNTIE MOSS inside, dialogue served, exit lands
+  (3,4)); loops: 13/13 houses and 7/7 Marts enter/exit clean, no
+  outdoor clerk remains in any town scene.
+
+### Flags / deviations
+
+- MOM's two-tile re-stage (§2) and the Celadon Mart's west
+  placement (§3) are the wave's two judgment calls; both are
+  drive-proven and flagged above. MOM does not move indoors;
+  Ash's house is dressed lived-in.
+- The two problem doors stay excluded (§1); the flag stands.
+- Three rejuv drive updates (§6) — flagged, equal strength,
+  no check deleted or weakened.
+- SHOPKEEPER fields only for a Viridian Mart entry; a scripted
+  entry with no return ticket falls back to Viridian (the Center's
+  Pallet-fallback pattern).
