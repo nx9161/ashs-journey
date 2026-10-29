@@ -1,0 +1,27 @@
+# croconaw-front-accent — Arc2 J2a accent frame (blink). Recolor-only delta over croconaw-front.
+PIXD croconaw-front-accent croconaw-front 64 64
+26 19 O
+38 19 O
+26 20 O
+27 20 O
+38 20 O
+39 20 O
+24 21 O
+25 21 O
+26 21 O
+27 21 O
+28 21 O
+36 21 O
+37 21 O
+38 21 O
+39 21 O
+40 21 O
+25 22 O
+26 22 O
+27 22 O
+37 22 O
+38 22 O
+39 22 O
+26 23 O
+38 23 O
+PAL

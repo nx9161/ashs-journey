@@ -221,45 +221,61 @@ function main() {
     const members = sprites.filter((s) => s.family === fam)
       .sort((a, b) => (b.h - a.h) || (b.w - a.w));
     if (!members.length) continue;
-    // shelf pack
-    let x = 0, y = 0, rowH = 0, maxW = 0;
-    const cells = [];
+    // Shelf pack, multi-page (Arc2 J2a, 2026-10-29): a family whose cells
+    // exceed one 2048x2048 page continues onto atlas-<fam>-2, -3, ...
+    // instead of failing. Every page still honours the contracts §1.1
+    // ceiling (<=2048x2048, 1px cell padding); page 1 keeps the legacy
+    // atlas-<fam>.png/.json names, and single-page families produce
+    // byte-identical output to the pre-split packer. A single sprite
+    // larger than a page still fails loudly.
+    const pages = [];
+    let cells = [], x = 0, y = 0, rowH = 0, maxW = 0;
+    const flush = () => { if (cells.length) pages.push({ cells, maxW, h: y + rowH }); cells = []; x = 0; y = 0; rowH = 0; maxW = 0; };
     for (const s of members) {
       const cw = s.w + CELL_PAD * 2, ch = s.h + CELL_PAD * 2;
+      if (cw > ATLAS_MAX || ch > ATLAS_MAX) { errors.push(`atlas ${fam}: sprite ${s.id} exceeds 2048x2048 page`); continue; }
       if (x + cw > ATLAS_MAX) { y += rowH; x = 0; rowH = 0; }
-      if (y + ch > ATLAS_MAX) { errors.push(`atlas ${fam}: exceeds 2048x2048`); break; }
+      if (y + ch > ATLAS_MAX) { flush(); }
       cells.push({ s, x: x + CELL_PAD, y: y + CELL_PAD });
       x += cw; rowH = Math.max(rowH, ch); maxW = Math.max(maxW, x);
     }
-    const AW = Math.min(ATLAS_MAX, maxW), AH = Math.min(ATLAS_MAX, y + rowH);
-    const rgba = Buffer.alloc(AW * AH * 4);
-    const jsonSprites = {};
-    for (const { s, x: sx, y: sy } of cells) {
-      const px = rasterize(s);
-      for (let py = 0; py < s.h; py++) {
-        for (let pxx = 0; pxx < s.w; pxx++) {
-          const si = (py * s.w + pxx) * 4, di = ((sy + py) * AW + (sx + pxx)) * 4;
-          rgba[di] = px[si]; rgba[di + 1] = px[si + 1]; rgba[di + 2] = px[si + 2]; rgba[di + 3] = px[si + 3];
+    flush();
+    let famCount = 0;
+    pages.forEach((page, pi) => {
+      const AW = Math.min(ATLAS_MAX, page.maxW), AH = Math.min(ATLAS_MAX, page.h);
+      const rgba = Buffer.alloc(AW * AH * 4);
+      const jsonSprites = {};
+      for (const { s, x: sx, y: sy } of page.cells) {
+        const px = rasterize(s);
+        for (let py = 0; py < s.h; py++) {
+          for (let pxx = 0; pxx < s.w; pxx++) {
+            const si = (py * s.w + pxx) * 4, di = ((sy + py) * AW + (sx + pxx)) * 4;
+            rgba[di] = px[si]; rgba[di + 1] = px[si + 1]; rgba[di + 2] = px[si + 2]; rgba[di + 3] = px[si + 3];
+          }
         }
+        jsonSprites[s.id] = {
+          x: sx, y: sy, w: s.w, h: s.h,
+          frames: frameNames(s.id),
+          palette: colorCount(s),
+          seed: s.seed ?? null,
+          derived_from: s.derivedFrom ?? null,
+          mirror_of: s.mirrorOf ?? null,
+          ...(s.deltaOf ? { delta_of: s.deltaOf } : {}),
+        };
       }
-      jsonSprites[s.id] = {
-        x: sx, y: sy, w: s.w, h: s.h,
-        frames: frameNames(s.id),
-        palette: colorCount(s),
-        seed: s.seed ?? null,
-        derived_from: s.derivedFrom ?? null,
-        mirror_of: s.mirrorOf ?? null,
-        ...(s.deltaOf ? { delta_of: s.deltaOf } : {}),
+      const suffix = pi === 0 ? '' : `-${pi + 1}`;
+      const pngName = `atlas-${fam}${suffix}.png`;
+      fs.writeFileSync(path.join(DIST, pngName), encodePng(AW, AH, rgba));
+      const json = {
+        atlas: pngName, tile: fam === 'species' || fam === 'partner' || fam === 'brock' ? 48 : 16,
+        size: [AW, AH], sprites: jsonSprites,
+        ...(pages.length > 1 ? { page: pi + 1, pages: pages.length } : {}),
       };
-    }
-    const pngName = `atlas-${fam}.png`;
-    fs.writeFileSync(path.join(DIST, pngName), encodePng(AW, AH, rgba));
-    const json = {
-      atlas: pngName, tile: fam === 'species' || fam === 'partner' || fam === 'brock' ? 48 : 16,
-      size: [AW, AH], sprites: jsonSprites,
-    };
-    fs.writeFileSync(path.join(DIST, `atlas-${fam}.json`), JSON.stringify(json, null, 2) + '\n');
-    atlases[fam] = { png: pngName, w: AW, h: AH, count: members.length };
+      fs.writeFileSync(path.join(DIST, `atlas-${fam}${suffix}.json`), JSON.stringify(json, null, 2) + '\n');
+      famCount += page.cells.length;
+      if (pi === 0) atlases[fam] = { png: pngName, w: AW, h: AH, count: famCount };
+    });
+    if (atlases[fam]) atlases[fam].count = famCount;
   }
   if (errors.length) {
     console.error('BUILD FAILED:'); for (const e of errors) console.error('  ✗ ' + e);

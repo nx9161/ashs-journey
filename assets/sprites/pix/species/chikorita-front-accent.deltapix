@@ -1,0 +1,27 @@
+# chikorita-front-accent — Arc2 J2a accent frame (blink). Recolor-only delta over chikorita-front.
+PIXD chikorita-front-accent chikorita-front 64 64
+14 30 O
+22 30 O
+14 31 O
+15 31 O
+22 31 O
+23 31 O
+12 32 O
+13 32 O
+14 32 O
+15 32 O
+16 32 O
+20 32 O
+21 32 O
+22 32 O
+23 32 O
+24 32 O
+13 33 O
+14 33 O
+15 33 O
+21 33 O
+22 33 O
+23 33 O
+14 34 O
+22 34 O
+PAL

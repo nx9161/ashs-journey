@@ -6021,3 +6021,85 @@ f434ba63… as at HEAD) and the content-hash personal line preserved
 - Day/night encounter variants remain OUT of this mission
   (ruling 6) — the eevee sun/moonstone adaptation is an evolution
   mapping only, not an encounter system.
+
+## Arc 2 Stage J2a — Species art, dex 152–201 (2026-10-29)
+
+### 1. What landed
+
+- **48 species authored** (dex 152–201; the in-range guests togepi 175 and
+  marill 183 already had art): chikorita, bayleef, meganium, cyndaquil,
+  quilava, typhlosion, totodile, croconaw, feraligatr, sentret, furret,
+  hoothoot, noctowl, ledyba, ledian, spinarak, ariados, crobat, chinchou,
+  lanturn, pichu, cleffa, igglybuff, togetic, natu, xatu, mareep, flaaffy,
+  ampharos, bellossom, azumarill, sudowoodo, politoed, hoppip, skiploom,
+  jumpluff, aipom, sunkern, sunflora, yanma, wooper, quagsire, espeon,
+  umbreon, murkrow, slowking, misdreavus, unown.
+- **96 full frames** (`<id>-front` + `<id>-back` .pix, 64×64, original
+  pixel work in the Platinum language — NW-light shading, shared outline
+  colour, true rear views: no eyes, back-specific markings/flames/stripes/
+  shells). Backs are NOT mirrors: front/back row data differs for all 48.
+- **96 bob frames** reach the shipped set via the pipeline itself:
+  front-bobs by build-art's marked derivation, back-bobs by the W2
+  shift-delta mechanism — no hand files, exactly as shipped species.
+- **18 accent deltas** for the 9 starter-line species (chikorita…
+  feraligatr): front-accent = blink (recolor-only), back-accent =
+  ear/flame twitch recolor, as .deltapix over the new bases.
+- Authoring workflow: generator script
+  `~/workspace/ashs-journey-qa/gen-j2a-art.mjs` composes per-species
+  authored silhouettes/palettes/markings into .pix sources; the repo's
+  own build-art validation is the gate (palette cap, outline, margins,
+  orphans — three orphan/palette fights during authoring were fixed in
+  the art, never in the validator).
+
+### 2. Pipeline change (on the record)
+
+- The species atlas outgrew one 2048×2048 page: 977 species-family
+  sprites (420 full + 137 deltas + 210 front-bobs + 210 back-bobs) vs a
+  961-cell padded capacity. `build-art.mjs` packing is now multi-page:
+  overflow continues onto `atlas-species-2.png/.json`; every page still
+  honours contracts §1.1 (≤2048×2048, 1px cell padding), page 1 keeps
+  the legacy name, and single-page families are byte-identical to the
+  pre-split packer (verified: all non-species atlases unchanged). A
+  single sprite larger than a page still fails loudly. The game runtime
+  consumes art-data.mjs, not the dist atlases; no engine change.
+
+### 3. Census (gate)
+
+- Script: `~/workspace/ashs-journey-qa/arc2-etl/census-j2a.mjs`.
+- Every species entry dex 1–201 (207 registry entries incl. partner +
+  forms sharing dex numbers) has front+back keys in art-data.mjs:
+  **missing 0, blanks 0**. The 48 new species: front-bob + back-bob
+  present for all (**missing 0**); starter accents present (**missing
+  0**); partner front/back keys present. Zero forge fallbacks in range.
+- Per-sprite stats for the 96 new frames: painted pixels **437–1,307**
+  (min = unown front, a hollow glyph by design), palette sizes **5–11**
+  colours (cap 32). Full per-species table is the census script output.
+- **Contact sheet:** `~/workspace/ashs-journey-qa/arc2-etl/census-j2a-contact.png`
+  (1536×1236, 48 labelled fronts at 3×).
+
+### 4. Battery at this commit
+
+- build-art clean and **deterministic** (two runs → byte-identical
+  art-data.mjs + species atlases). 2,506 sprites total, 210 derived
+  bobs, 621 delta frames.
+- fidelity-checks **35/35** · campaign-smoke **24/24** ·
+  qa-changed-flows failures exactly **{b2, d9}**.
+- Fresh build (vercel + guest targets) OK — public/game.js
+  **5,966,719 bytes** (gate 12,582,912). **personal/ byte-identical**
+  (untouched by this stage; built targets were vercel+guest only).
+
+### 5. Leftovers, named
+
+- **Unown:** ONE canonical glyph form authored (the "A" eye-glyph);
+  the full alphabet of forms is out of scope for this stage.
+- **Hardest silhouettes at 64×64** (flagged for the owner's eye on the
+  contact sheet): yanma (wings read as pale blobs at small size),
+  mareep (wool/head separation is subtle), spinarak (face markings
+  dense). All pass silhouette naming in the sheet, but they are the
+  first candidates if a polish pass is ordered.
+- **J2b (dex 202–251)** will add ~100 more full frames: species atlas
+  page 2 already has room (16 sprites used), page 3 will appear
+  automatically when needed — no further packer work expected.
+- Accent deltas for non-starter Johto species are NOT in this stage's
+  brief (shipped Kanto coverage is likewise partial); fronts/backs/
+  bobs are complete for the range.
