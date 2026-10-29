@@ -2673,9 +2673,13 @@ driver `celadon-regression-driver.mjs`, shots in `celadon-fix-shots/`).
 Queued by the Cinnabar Trap and Celadon Fragmentation missions:
 the Town Map draws a Vermilion ↔ Route 12 link, but the warp data
 never had it — Route 11's east edge was walled (its only warp
-returns to Vermilion) and Route 12 had no west exit, one of the
-two breaks that stranded the south-east cluster from
-Pallet/Viridian on foot.
+returns to Vermilion) and Route 12 had no west exit.
+**Precision correction (independent QA, 2026-10-28):** the
+south-east cluster was NOT fully stranded at base — Route 12
+remained reachable via Lavender's south warps and via
+Route 15/Fuchsia. The true defect was the dead-end spur at
+Route 11's east edge, Route 12's sealed west edge, and the
+Town Map's false link; all three are fixed by this entry.
 
 - **Fix (data only, mirrors the existing Vermilion ↔ Route 11
   edge-warp idiom — warp on the border tile, landing one tile
