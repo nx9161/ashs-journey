@@ -88677,10 +88677,14 @@ const ITEMS = {
   hivebadge: { id: 'hivebadge', name: 'Hive Badge', pocket: 'key', desc: 'From Bugsy of Azalea. Won under the trees, in a room of load-bearing webs.' },
   plainbadge: { id: 'plainbadge', name: 'Plain Badge', pocket: 'key', desc: 'From Whitney of Goldenrod. It is not plain at all, whatever people say.' },
   fogbadge: { id: 'fogbadge', name: 'Fog Badge', pocket: 'key', desc: 'From Morty of Ecruteak. For a trainer the fog decided to show things to.' },
-  stormbadge: { id: 'stormbadge', name: 'Storm Badge', pocket: 'key', desc: 'From Chuck of Cianwood. (Stage J4b stages this gym.)' },
-  mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Olivine. (Stage J4b stages this gym.)' },
-  glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Mahogany. (Stage J4b stages this gym.)' },
-  risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Blackthorn. (Stage J4b stages this gym.)' },
+  stormbadge: { id: 'stormbadge', name: 'Storm Badge', pocket: 'key', desc: 'From Chuck of Cianwood. For a team the storm respects.' },
+  mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Olivine. It shines back at the lighthouse.' },
+  glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Mahogany. It will not melt. Neither will you.' },
+  risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Blackthorn — awarded in the Dragon\'s Den, by the clan\'s law, after the elder\'s test.' },
+  // Stage J4b key item: the Cianwood pharmacy's Secret Potion, the
+  // medicine errand's whole cargo (delivered to Amphy in the Glitter
+  // Lighthouse; the delivery scene removes it from the bag).
+  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Cianwood pharmacy. For Amphy, the lighthouse Pokemon — handle with both hands.' },
   winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Orange League Winner\'s Trophy, presented at Pummelo Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE
@@ -113764,9 +113768,17 @@ const ORANGE_LEGENDARY_ARCS = {
 // Stage split: J4a ships the west (badges 1-4: zephyr / hive / plain /
 // fog), the Silver thief thread's first clash, the Slowpoke Well +
 // Kurt + GS Ball delivery, and the Burned Tower awakening that ARMS
-// J5's beast arcs. J4b owns the east + the Silver Conference; J5 owns
-// the beast / Celebi / Ho-Oh encounters (this stage only sets their
-// arming flags — see the flag map in docs/audit-register.md).
+// J5's beast arcs. J4b (this stage, appended below the marked seams)
+// ships the east: the Olivine/Cianwood medicine errand + Storm and
+// Mineral badges, Silver's second and third clashes, the Red Gyarados
+// + Lance + the Rocket Hideout + Glacier Badge, the Radio Tower
+// takeover, Clair + the Dragon's Den test (the Rising Badge is awarded
+// AT THE DEN, not in the gym), the route-silver badge gate, the Silver
+// Conference (Gary must-win centrepiece, then Harrison — see the
+// Harrison mechanism note at his trainer def), johto_complete through
+// the Foundation machine, and Red on Mt. Silver as post-game. J5 owns
+// the beast / Celebi / Ho-Oh encounters (J4a only set their arming
+// flags — see the flag map in docs/audit-register.md).
 //
 // New event-step kinds consumed by runSteps (overworld-systems.mjs):
 //   { battleAny: { trainer, winFlag, loseFlag } }
@@ -113793,8 +113805,19 @@ const JOHTO_QUESTS = [
   { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Goldenrod City', hint: 'Whitney\'s Miltank is famous all over Johto, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
   { id: 'q_johto_burned', flag: 'beasts_awakened', text: 'See what woke in the Burned Tower', hint: 'In Ecruteak, the tower that burned a hundred and fifty years ago stands open and ash-smelling. Its basement held three statues. Held.' },
   { id: 'q_johto_fog', flag: 'badge_fog', text: 'Win the Fog Badge from Morty in Ecruteak City', hint: 'Morty reads the fog the way sailors read weather. His Ghost types fear Ghost and Dark moves — and respect trainers who have looked into the tower.' },
-  // --- J4b APPEND SEAM: the east rows (storm / mineral / glacier /
-  // rising + the Silver Conference) join here. ---
+  // --- J4b: the east rows (appended at the J4a seam) ---
+  { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Amphy, the lighthouse Pokemon', hint: 'Amphy, the Ampharos whose light guides Olivine\'s ships, is sick in the Glitter Lighthouse. The pharmacy across Route 40 in Cianwood makes a Secret Potion — Jasmine is waiting on it.' },
+  { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Cianwood City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
+  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Olivine City', hint: 'Jasmine will not battle while Amphy is sick — the errand comes first. Her Steelix fears Fire, Fighting and Ground moves.' },
+  { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red Gyarados at the Lake of Rage', hint: 'North of Mahogany, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
+  { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Rocket Hideout beneath Mahogany\'s souvenir shop', hint: 'Lance is waiting in Mahogany Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
+  { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Pryce in Mahogany Town', hint: 'Pryce has trained through fifty winters and one Rocket occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
+  { id: 'q_johto_radio', flag: 'radio_tower_cleared', text: 'Take back the Goldenrod Radio Tower', hint: 'With the hideout gone, Team Rocket has seized the Radio Tower to broadcast their return. The real Director is being held somewhere below the city — the Card Key is with him.' },
+  { id: 'q_johto_rising', flag: 'badge_rising', text: 'Win Clair\'s trust — and the Rising Badge — in Blackthorn', hint: 'Clair\'s gym is only the first half. By the clan\'s law the badge itself is given in the Dragon\'s Den, after the elder\'s test. Her Dragon types fear Ice and Dragon moves.' },
+  { id: 'q_johto_conference', flag: 'conference_registered', text: 'Register for the Silver Conference at Silver Town', hint: 'Eight Johto badges open the road north: Blackthorn, Route Silver, Silver Town. The Conference Official in the stadium keeps the bracket.' },
+  { id: 'q_johto_gary', flag: 'beat_gary_johto', text: 'The Silver Conference — beat Gary', hint: 'He has been waiting on the far side of the bracket all arc. Blastoise and all. This one you have to win.' },
+  { id: 'q_johto_harrison', flag: 'johto_complete', text: 'The Silver Conference — the quarter-final, and whatever it decides', hint: 'Harrison of Littleroot, and a Houndoom that has ended better runs than yours. Face him with everything — the Conference, and Johto, end on the far side of this battle.' },
+  { id: 'q_johto_red', flag: 'red_defeated', text: 'Post-game: the silent trainer on Mt. Silver', hint: 'Past Silver Town, the mountain keeps one more name off every bracket. He has been standing on that dais a long time, saying nothing, waiting for someone worth the silence.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -113917,6 +113940,263 @@ const JOHTO_TRAINERS = {
     ],
     reward: 900,
   },
+  // ================= Stage J4b: the east =================
+  chuck: {
+    id: 'chuck', name: 'Chuck', title: 'Cianwood Gym Leader', ai: 'smart', badgeSet: 'johto',
+    intro: ['You crossed the whole sea to stand in my gym — good. Out here we train where the waves hit, because a wave does not care about your excuses. Neither do I. Show me a team the storm respects!'],
+    lose: ['Hah! Knocked clean off my feet — and I have excellent feet!', 'The Storm Badge is yours. You hit like weather, trainer. Like weather.'],
+    team: [
+      { species: 'primeape', level: 148 },
+      { species: 'poliwrath', level: 151 },
+      { species: 'machamp', level: 154, keepsake: 'secondwindribbon' },
+    ],
+    reward: 6600, badge: 'stormbadge',
+  },
+  jasmine: {
+    id: 'jasmine', name: 'Jasmine', title: 'Olivine Gym Leader', ai: 'smart', badgeSet: 'johto',
+    intro: ['Amphy is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My Steelix has been patient. I have not.'],
+    lose: ['Oh...! Beaten, truly beaten. Amphy\'s light and your battle — Olivine is bright today in every way there is.', 'The Mineral Badge is yours. Hold it up to the lighthouse sometime. It shines back.'],
+    team: [
+      { species: 'magnemite', level: 154 },
+      { species: 'magneton', level: 157 },
+      { species: 'steelix', level: 160, keepsake: 'fossilspur' },
+    ],
+    reward: 7000, badge: 'mineralbadge',
+  },
+  pryce: {
+    id: 'pryce', name: 'Pryce', title: 'Mahogany Gym Leader', ai: 'smart', badgeSet: 'johto',
+    intro: ['Fifty winters I have trained in this town, and I will tell you the secret of every one of them: winter does not hate you. Winter is simply honest about what you are. Let us be honest, then.'],
+    lose: ['...Warm. That is the word. Your team fights warm, the way my Piloswine and I did when we were both young and foolish.', 'The Glacier Badge is yours. It will not melt. Neither, I think, will you.'],
+    team: [
+      { species: 'seel', level: 162 },
+      { species: 'dewgong', level: 165 },
+      { species: 'piloswine', level: 168, keepsake: 'tortoisecharm' },
+    ],
+    reward: 7400, badge: 'glacierbadge',
+  },
+  // Clair carries NO badge field on purpose: by the clan's law the
+  // Rising Badge is awarded in the Dragon's Den, after the elder's
+  // test — the den handler writes the exact leader-award
+  // representation (badges.johto push + badge_rising flag) when the
+  // test is passed. A gym win here sets clair_beaten only.
+  clair: {
+    id: 'clair', name: 'Clair', title: 'Blackthorn Gym Leader', ai: 'smart', badgeSet: 'johto',
+    intro: ['I am Clair. The clan has kept dragons since before your maps had names for these mountains, and I keep this gym the way we keep everything: completely. You may try to be the exception.'],
+    lose: ['...Beaten. In my own gym, by — very well. VERY well.', 'But understand this: you have won a battle here, not the badge. The badge is not mine to hand over in a gym. The Dragon\'s Den decides — the elder, the shrine, the old questions. Go and be judged properly.'],
+    team: [
+      { species: 'dragonair', level: 172 },
+      { species: 'dragonair', level: 174 },
+      { species: 'gyarados', level: 175 },
+      { species: 'kingdra', level: 178, keepsake: 'tidepearl' },
+    ],
+    reward: 8000,
+  },
+  den_shrine: {
+    id: 'den_shrine', name: 'Shrine Keeper Sora', title: 'Dragon\'s Den Keeper', ai: 'smart',
+    intro: ['The elder has heard your answers. Now the shrine asks its own question, and it only speaks battle. Answer carefully, trainer of Blackthorn\'s choosing.'],
+    lose: ['The shrine is satisfied. So, I think, are the dragons.'],
+    team: [
+      { species: 'dragonair', level: 174 },
+      { species: 'kingdra', level: 177 },
+    ],
+    reward: 1200,
+  },
+  // Silver, second clash (Ilex Forest): the stolen starter grown
+  // (Croconaw, a touch stronger), a Golbat, a Sneasel he caught on
+  // the road. Fought through battleAny like the first clash — the
+  // branch flag records the honest outcome.
+  silver_ilex: {
+    id: 'silver_ilex', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
+    intro: ['You again. Route 30 was interrupted, not finished. Croconaw — we finish it here.'],
+    lose: ['...Again?! No — no, this is data. You are data. I will be back with better.'],
+    team: [
+      { species: 'golbat', level: 128 },
+      { species: 'sneasel', level: 131 },
+      { species: 'croconaw', level: 134 },
+    ],
+    reward: 0,
+  },
+  // Silver, third clash (Route Silver): the rivalry closes here.
+  // His starter is fully grown at last — Feraligatr — and the team
+  // around it is a real team. Still battleAny: he concedes the race
+  // either way, in words (the handler event's closing lines).
+  silver_route: {
+    id: 'silver_route', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
+    intro: ['Last road, trainer. Whatever is left between us, we settle it here — Feraligatr and I have been waiting for a finish line.'],
+    lose: ['...There it is. There is the gap. I have been measuring it wrong all this time.'],
+    team: [
+      { species: 'crobat', level: 178 },
+      { species: 'sneasel', level: 180 },
+      { species: 'magneton', level: 182 },
+      { species: 'feraligatr', level: 184 },
+    ],
+    reward: 0,
+  },
+  // The Rocket Hideout gauntlet (staged as the descent event — see
+  // ev_johto_hideout; J3b authored no hideout interior map and
+  // maps6 stays untouched, so the gauntlet plays as a scripted
+  // descent from Mahogany's souvenir shop with Lance beside you).
+  rocket_hideout_1: {
+    id: 'rocket_hideout_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    intro: ['The shop is closed! The basement is DEFINITELY closed! Nobody ordered a hero!'],
+    lose: ['Security! SECURITY! ...The security is also me. Run!'],
+    team: [
+      { species: 'koffing', level: 158 },
+      { species: 'golbat', level: 160 },
+    ],
+    reward: 800,
+  },
+  rocket_hideout_2: {
+    id: 'rocket_hideout_2', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    intro: ['You hear that hum? That is the sound of every Gyarados on the lake answering US. Keep walking and you join the choir — as the example!'],
+    lose: ['The hum... it stopped for a second there. Did you feel it stop? That is bad. That is very bad.'],
+    team: [
+      { species: 'arbok', level: 161 },
+      { species: 'weezing', level: 163 },
+    ],
+    reward: 850,
+  },
+  rocket_hideout_exec: {
+    id: 'rocket_hideout_exec', name: 'Executive Vey', title: 'Team Rocket Executive', ai: 'smart',
+    intro: ['I am Vey. I sign the orders the grunts are afraid to read aloud. The lake, the signal, this little shop of horrors — my paperwork, all of it. And you are the audit.'],
+    lose: ['Audit... accepted. The signal dies with this room, trainer. Tell the man with the Dragonite that Vey sends her regards — and her resignation.'],
+    team: [
+      { species: 'hypno', level: 164 },
+      { species: 'houndoom', level: 166 },
+    ],
+    reward: 2000,
+  },
+  // The Radio Tower takeover gauntlet (post-hideout, canon order).
+  rocket_radio_1: {
+    id: 'rocket_radio_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    intro: ['This station is under new management! All broadcasts are belong — are property of — look, just hand over the badges, kid!'],
+    lose: ['We interrupt this takeover for a message from our sponsors: pain.'],
+    team: [
+      { species: 'golbat', level: 166 },
+      { species: 'koffing', level: 167 },
+    ],
+    reward: 900,
+  },
+  rocket_underground: {
+    id: 'rocket_underground', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
+    intro: ['Nobody comes down here! The old man in the back is a — a storage item! Very valuable! Very stored!'],
+    lose: ['Stored... defeated... The Director is going to be furious. The REAL one. Oh no.'],
+    team: [
+      { species: 'arbok', level: 168 },
+      { species: 'golbat', level: 169 },
+    ],
+    reward: 950,
+  },
+  rocket_radio_2: {
+    id: 'rocket_radio_2', name: 'Rocket Senior', title: 'Team Rocket', ai: 'basic',
+    intro: ['The Card Key? Then the old man talked. They always talk. The tower is still ours above this floor, trainer — come and take the stairs.'],
+    lose: ['Stairs... yours. The Director upstairs is not going to like this. Either of them.'],
+    team: [
+      { species: 'arbok', level: 169 },
+      { species: 'weezing', level: 170 },
+    ],
+    reward: 1000,
+  },
+  rocket_director_fake: {
+    id: 'rocket_director_fake', name: 'Director?', title: 'Radio Tower Director', ai: 'smart',
+    intro: ['Ah, our rescuer! I am the Director, as you can plainly — the suit, trainer. Judge the suit. Everything is under control, the Rockets have fled, and you may go home with our gratit— why are you still standing there.'],
+    lose: ['The suit... was expensive... Petrel — no. VEY. Vey said the suit would work. Nobody questions a suit, she said...'],
+    team: [
+      { species: 'persian', level: 172 },
+      { species: 'hypno', level: 173 },
+      { species: 'houndoom', level: 174 },
+    ],
+    reward: 2200,
+  },
+  // The Silver Conference bracket (Silver Stadium).
+  conference_q1: {
+    id: 'conference_q1', name: 'Brenna', title: 'Conference Trainer', ai: 'smart',
+    intro: ['Qualifier one, and the draw gave me you. I did not cross Johto to be anyone\'s warm-up, trainer. Neither did you. Good — let us be honest about it.'],
+    lose: ['Honest it was. The bracket is yours to climb — climb it loudly, I want my loss to mean something.'],
+    team: [
+      { species: 'noctowl', level: 180 },
+      { species: 'lanturn', level: 182 },
+      { species: 'xatu', level: 184 },
+    ],
+    reward: 3000,
+  },
+  conference_q2: {
+    id: 'conference_q2', name: 'Cato', title: 'Conference Trainer', ai: 'smart',
+    intro: ['Second qualifier. They are saying your name in the stands already — did you know? I intend to make them say mine instead.'],
+    lose: ['Say it, then. Say yours. You earned the volume. The Gary match is next — I will be in the front row, taking notes and taking it personally.'],
+    team: [
+      { species: 'magmar', level: 183 },
+      { species: 'electabuzz', level: 185 },
+      { species: 'heracross', level: 186 },
+    ],
+    reward: 3200,
+  },
+  // THE GARY BATTLE — the arc's centrepiece. A REAL trainer battle
+  // the player must WIN (standard league idiom: losing leaves
+  // beat_gary_johto unset and Gary re-challengeable after healing —
+  // no soft-lock). His team is built from his Kanto identity, grown
+  // to the Conference: Alakazam and Arcanine from his road, Gengar
+  // and Umbreon from his Johto years, Pidgeot from the first sky
+  // you shared — and Blastoise, his starter, anchoring it all, the
+  // Charizard-vs-Blastoise echo the whole rivalry has pointed at.
+  gary_johto: {
+    id: 'gary_johto', name: 'Gary', title: 'Silver Conference Trainer', ai: 'smart',
+    intro: ['Well. Look who the bracket dragged in.', 'Kanto champion, Orange winner — and still the second-most interesting trainer in this stadium. I have waited two regions for this draw, {player}. Do not make me regret the wait.'],
+    lose: ['...Ha. Hahaha. Yeah. Yeah, that is the one I wanted.', 'Two regions, and it still comes down to us at the end of the bracket. Take the win. Take it all the way to Harrison — and do not you dare lose to him after beating me.'],
+    team: [
+      { species: 'pidgeot', level: 186 },
+      { species: 'alakazam', level: 188 },
+      { species: 'arcanine', level: 189 },
+      { species: 'gengar', level: 190 },
+      { species: 'umbreon', level: 191 },
+      { species: 'blastoise', level: 193, keepsake: 'tidepearl' },
+    ],
+    reward: 9000,
+  },
+  // HARRISON — the quarter-final, and the Harrison mechanism
+  // (RECORDED DECISION, Stage J4b): preference (a), a scripted
+  // climax, is INEXPRESSIBLE in this engine — the only endure hook
+  // is the classic battle's tutorial lesson-mon (battle.mjs: gated
+  // on the tutorial flag, wild foes only), trainer battles expose no
+  // scripted-outcome / forced-result step, and runSteps has no
+  // conditional branch for post-battle text. So branch (b) ships, as
+  // the brief specifies: a REAL full-strength battle whose
+  // completion predicate is FACED (fought friendly through the
+  // stadium handler, win or lose, never a blackout) — with
+  // branch-true text: canon-honours lines on a loss (the quarter-
+  // final loss stands, staged with dignity), upset-acknowledged
+  // lines on a win, and johto_complete set either way.
+  harrison: {
+    id: 'harrison', name: 'Harrison', title: 'Silver Conference Trainer', ai: 'smart',
+    intro: ['Harrison, from Littleroot Town — a long way from home, same as you. I watched your Gary match from the tunnel. Whatever happens here, trainer, this crowd is getting a final worthy of a semi.'],
+    lose: ['There it is! There is the battle I crossed an ocean of brackets for!'],
+    team: [
+      { species: 'sneasel', level: 192 },
+      { species: 'xatu', level: 193 },
+      { species: 'hypno', level: 194 },
+      { species: 'steelix', level: 195 },
+      { species: 'miltank', level: 196 },
+      { species: 'houndoom', level: 198 },
+    ],
+    reward: 9500,
+  },
+  // RED — post-completion, gated on johto_complete in his handler.
+  // The canon team at the band ceiling: Pikachu 200, the rest
+  // 195-198. Rematchable: talk again, battle again.
+  red: {
+    id: 'red', name: 'Red', title: 'Trainer', ai: 'smart',
+    intro: ['...'],
+    lose: ['...!'],
+    team: [
+      { species: 'espeon', level: 195 },
+      { species: 'snorlax', level: 196 },
+      { species: 'venusaur', level: 197 },
+      { species: 'charizard', level: 198 },
+      { species: 'blastoise', level: 198 },
+      { species: 'pikachu', level: 200 },
+    ],
+    reward: 12000,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -113968,6 +114248,129 @@ const JOHTO_EVENTS = {
     { flag: 'beast_seen_suicune' },
     { flag: 'johto_burned_tower' },
     { toast: 'Something ancient has woken.' },
+  ],
+
+  // ================= Stage J4b events =================
+  // -- Silver, second clash (Ilex Forest): TWO stagings of one beat.
+  // sysLoadMap picks the variant by the Route 30 branch flag, so his
+  // opening lines genuinely branch on silver_r30_won / _lost; the
+  // battle itself is the shared battleAny (win or lose advances).
+  ev_johto_silver_ilex_won: [
+    { say: ['The Ilex trees close overhead like a held breath. Then — a laugh, short and disbelieving, from the Azalea-side path. Red hair. A Golbat riding the thermals between the trunks. And a Croconaw, bigger than you remember, keeping pace like a shadow with teeth.'], who: 'NARRATOR' },
+    { say: ['Route 30. I have replayed it every night since. You got LUCKY — the grass, the light, one lucky bounce. Luck is not a strategy, trainer. It runs out. Watch it run out.'], who: 'SILVER' },
+    { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
+    { say: ['He is gone into the trees before the echo is — but slower than last time, and looking back once, the way a person looks at a measuring mark they did not expect to move.'], who: 'NARRATOR' },
+    { flag: 'silver_ilex_done' },
+    { toast: 'Silver is measuring himself against you now.' },
+  ],
+  ev_johto_silver_ilex_lost: [
+    { say: ['The Ilex trees close overhead like a held breath. Then — footsteps, unhurried, from the Azalea-side path. Red hair. A Golbat in the branches. And a Croconaw, bigger than you remember, wearing Route 30 like a medal.'], who: 'NARRATOR' },
+    { say: ['You. I wondered when the road would return my practice partner. Route 30 was not a fluke, and this forest is about to prove it twice. Croconaw — encore.'], who: 'SILVER' },
+    { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
+    { say: ['He is gone into the trees before the echo is — but slower than you would expect from a boy in a hurry, and looking back once, at the space where the battle happened, like it surprised him too.'], who: 'NARRATOR' },
+    { flag: 'silver_ilex_done' },
+    { toast: 'Silver is measuring himself against you now.' },
+  ],
+
+  // -- The Red Gyarados (Lake of Rage entry): a one-time CATCHABLE
+  // wildBattle. The runSteps fled guard is the whole law here:
+  // fleeing leaves the chain unfinished (no flag, no event-done), so
+  // the encounter re-fires on the next entry and completes NOTHING;
+  // a catch or a KO resolves it exactly once, and red_gyarados_done
+  // gates it forever after. Lance arrives in the aftermath, inside
+  // the same scene.
+  ev_johto_redgyarados: [
+    { say: ['The lake is wrong before you even see it. Gulls are screaming inland, away from the water, and the sound coming off the shore is not waves — it is something enormous, thrashing in water too shallow to hold it, over and over, like a bell being struck underwater.'], who: 'NARRATOR' },
+    { say: ['Then the surface breaks. Red. Not sunset-red — scale-red, fin-red, a Gyarados the colour of a wound, thirty feet of fury trying to shake a sound out of its own skull that only it can hear. The fishermen are on the shore with their boats pulled up and their hats in their hands. Nobody is fishing today.'], who: 'NARRATOR' },
+    { say: ['It sees you. Whatever is screaming inside its head, for one moment you are louder. The Red Gyarados comes at the shore like weather.'], who: 'NARRATOR' },
+    { wildBattle: { species: 'gyarados', level: 162 } },
+    { say: ['Quiet. Not peace — exhaustion, the lake settling back into its banks, the gulls daring their way down again one at a time. And over it, a new sound: wings. Very large wings, folding.'], who: 'NARRATOR' },
+    { say: ['You felt it too, then. Not the rage — the cause. I am Lance. I train dragons, and I have been following a signal across Johto that should not exist: a radio wave, tuned like a hand on a shoulder, that Pokemon cannot refuse. It is loudest here. It drove that Gyarados out of the deep water and painted it with its own fury.', 'Signals have sources, trainer. This one is close — buried under a town that smells of cedar and souvenirs. Mahogany. Meet me there. Bring that look with you — the one you are wearing now. We are going to need it.'], who: 'LANCE' },
+    { flag: 'red_gyarados_done' },
+    { flag: 'lance_met' },
+    { toast: 'Lance is waiting in Mahogany Town.' },
+  ],
+
+  // -- The Rocket Hideout (the descent, run from Lance in Mahogany):
+  // a gauntlet of must-win { battle } steps — a loss stalls the chain
+  // with no flag and no event-done, so talking to Lance re-runs the
+  // descent; it can never half-clear. The Electrode power core is a
+  // wildBattle staged as a battle (uncatchable — it is a machine's
+  // heart, not a wild encounter). Lance fights beside you in the
+  // dialogue between beats, not as a mechanic.
+  ev_johto_hideout: [
+    { say: ['Behind the souvenir shop\'s counter, under a trapdoor stacked with unsold keychains: stairs. The air coming up is warm, electric, and humming at a pitch that makes your teeth ache — the lake\'s scream, at its source.'], who: 'NARRATOR' },
+    { say: ['Dragonite walks point with me — you watch our backs, trainer, and I will watch yours. Whatever they are powering down here, it ends tonight. On three. One — two —'], who: 'LANCE' },
+    { battle: 'rocket_hideout_1' },
+    { say: ['The first room folds. Lance does not even slow down — somewhere to your left a Dragonite\'s wingbeat puts out a row of lights like candles, and the humming climbs a note. The core is close. The core is AWAKE.'], who: 'NARRATOR' },
+    { battle: 'rocket_hideout_2' },
+    { say: ['There. The power core: a ring of Electrode, wired into the transmitter like beads on a wire, pouring themselves into the signal. They cannot be caught and they cannot be reasoned with — they can only be emptied. Gently is not available. Go.'], who: 'LANCE' },
+    { wildBattle: { species: 'electrode', level: 166, uncatchable: true } },
+    { say: ['The core cracks open like an egg of light. The hum stutters — drops — dies, floor by floor, and in the sudden quiet you can hear the lake, miles north, going calm. One door remains, and behind it, the hand that signed the orders.'], who: 'NARRATOR' },
+    { battle: 'rocket_hideout_exec' },
+    { say: ['It is over. The transmitter is dark, the signal is dead, and Team Rocket\'s little empire under the souvenir shop is a basement again — wet concrete and abandoned paperwork.', 'You fight the way the lake needed someone to fight, trainer. Remember that. Now — Mahogany has a gym, and an old man in it who has been waiting out an occupation. Pryce is free to take challengers again. Tell him Lance sent you. Tell him the lake is quiet.'], who: 'LANCE' },
+    { flag: 'johto_hideout_cleared' },
+    { toast: 'The Rocket Hideout is cleared!' },
+  ],
+
+  // -- The Radio Tower takeover (staged AFTER the hideout) ---------
+  ev_johto_radio_takeover: [
+    { say: ['The Radio Tower\'s lobby is too quiet, and every speaker in it is playing the same thing: a cheerful jingle, cut off mid-note, and a voice you do not know, reading the same sentence it was reading when you walked the plaza an hour ago. "— we are back. Tell your Pokemon to listen closely. We are back —"'], who: 'NARRATOR' },
+    { say: ['Team Rocket has taken the tower. With the hideout gone they have gone loud instead — a broadcast to every Pokemon in Johto, calling them to a new Rocket age. The staff are locked out, the stairs are guarded, and somewhere above you a fake cheerful voice is reading your region its future. Not today.'], who: 'NARRATOR' },
+    { battle: 'rocket_radio_1' },
+    { flag: 'radio_takeover_active' },
+    { flag: 'radio_f1_cleared' },
+    { toast: 'Team Rocket holds the upper floors!' },
+  ],
+  ev_johto_radio_locked: [
+    { say: ['The stair door to the third floor is locked — a card reader, blinking red, patient as a held breath. From below, the tower\'s own speakers carry a waltz. From above, boots.'], who: 'NARRATOR' },
+    { say: ['A whisper through the stairwell grille — the tower engineer, hiding in a cable run: "Trainer! The Director has the Card Key — but the man upstairs in the Director\'s suit is NOT him. The real Director is being held below the city, in the Underground\'s south passage. Free him. The key opens this door — and only this door matters now."'], who: 'ENGINEER DARA' },
+    { flag: 'radio_locked_seen' },
+    { toast: 'The real Director is in the Underground!' },
+  ],
+  ev_johto_director: [
+    { say: ['The Underground\'s south passage smells of damp wool and old bargains. At its far end, behind a stall\'s worth of crates: a Rocket guard, a rope, and a very dignified man in a broadcasting blazer, sitting on a box with the posture of a king on a very small throne.'], who: 'NARRATOR' },
+    { battle: 'rocket_underground' },
+    { say: ['Untied, brushed down, and furious in the quiet way of men who sign licences: "Director Ainsley Hale, Goldenrod Radio. You have my thanks and my outrage, trainer, in equal measure. They took my tower, my microphone, and — the insult I cannot forgive — my SUIT is being worn by a Rocket upstairs, badly."', '"Take this. My Card Key. It opens the tower\'s locked floor — the stairs above the second. Go and take my building back. And trainer — when you reach the top floor, the man in my suit will try to thank you for rescuing him. He rehearsed it. I can hear him through the vents."'], who: 'DIRECTOR HALE' },
+    { give: { items: { cardkey: 1 }, text: 'Got the Card Key!' } },
+    { flag: 'radio_director_rescued' },
+    { toast: 'The Card Key opens the tower\'s locked floor.' },
+  ],
+  ev_johto_radio_f2: [
+    { say: ['The Card Key turns the reader green. Beyond the door: the second floor\'s last guard, standing in a drift of torn broadcast schedules, already reaching for a ball.'], who: 'NARRATOR' },
+    { battle: 'rocket_radio_2' },
+    { flag: 'radio_f2_cleared' },
+    { toast: 'The top floor is open. The Director\'s office waits.' },
+  ],
+  ev_johto_radio_top: [
+    { say: ['The Director\'s office. A wide desk, a warmer suit than the real Director has ever owned, and behind it a man arranging his face into gratitude like a bouquet. On the desk, the master microphone. On his face, when he sees your badge case: the exact moment the rehearsal fails.'], who: 'NARRATOR' },
+    { battle: 'rocket_director_fake' },
+    { say: ['It ends the way takeovers end when one trainer climbs the whole building: quickly, and then all at once. The fake Director is hauled down the stairs by his own former guards, the master microphone is cut, and Director Hale\'s real voice — crackling up from the plaza speakers, borrowed from a handheld set — says the only honest broadcast of the day:', '"— to every trainer and Pokemon in Johto: the tower is ours again. Theirs is over. Team Rocket has left the air."', 'Below, Goldenrod is cheering at loudspeakers. Rocket is gone from Johto — the well, the lake, the tower: finished. The road east is calling, trainer. Blackthorn. Then the Conference.'], who: 'NARRATOR' },
+    { flag: 'radio_tower_cleared' },
+    { toast: 'Team Rocket has left Johto!' },
+  ],
+
+  // -- Route Silver: the badge gate. Fired by sysLoadMap when a
+  // player WITHOUT all 8 Johto badges enters route-silver; the warp
+  // step returns them to Blackthorn's east edge — turned back with
+  // directions, never stuck (the pass is re-enterable the moment
+  // the eighth badge lands).
+  ev_johto_silver_gate: [
+    { say: ['At the mouth of Silver Pass, a League official in a wind-cut coat steps into the road with one hand raised — not unkindly. Just finally.'], who: 'NARRATOR' },
+    { say: ['"Conference road, trainer, and the Conference keeps its one rule: eight Johto badges, earned in Johto, no exceptions and no shortcuts — I have turned back gym leaders\' own children at this post, so do not take it personally."', '"Blackthorn is behind you, and Clair and the Dragon\'s Den are where the last of it waits for most. When your case holds eight, this road will be the proudest walk of your life. I will be here. I am always here."'], who: 'PASS OFFICER HALD' },
+    { warp: { map: 'blackthorn', x: 28, y: 8 } },
+  ],
+
+  // -- Silver, third clash (Route Silver, past the gate): the
+  // rivalry with Silver closes. battleAny — win or lose, the words
+  // land: he acknowledges the gap either way.
+  ev_johto_silver_route: [
+    { say: ['Halfway up Silver Pass, where the wind has opinions and the road narrows to single file: red hair, a Crobat on the crosswind, and a Feraligatr standing in the road like a toll. He has been waiting. By the look of the camp ashes behind him, he has been waiting a while.'], who: 'NARRATOR' },
+    { say: ['I stole a Pokemon from a glass case, and I told myself the case was the crime. Then a trainer from a boat kept showing up — Route 30, the forest — and the story kept not going the way I wrote it.', 'One more measurement, {player}. The real one. Feraligatr: FULL strength. No excuses left in either of us.'], who: 'SILVER' },
+    { battleAny: { trainer: 'silver_route', winFlag: 'silver_route_won', loseFlag: 'silver_route_lost' } },
+    { say: ['Whatever the battle decided, he stands in the settling dust doing the arithmetic he has avoided all arc — and then, astonishingly, he laughs. Once. Like it hurts and helps at the same time.', '"There is the gap. Not luck. Not the road. You trained yours like partners and I trained mine like weapons, and the weapons kept... looking at me. Waiting to be asked, not aimed." He looks at Feraligatr. Feraligatr looks back, patient as a tide. "...We are going back to Azalea. There is a man there who makes balls by hand, and a lab with a page missing. I do not know how you return a beginning. I am going to learn."', 'He steps out of the road. The whole road, all of it, held his breath with him — Silver Pass is yours, trainer. The Conference is at the top of it. Go and be measured by better judges than me.'], who: 'SILVER' },
+    { flag: 'silver_route_done' },
+    { toast: 'The road to the Conference is clear.' },
   ],
 };
 
@@ -114060,6 +114463,58 @@ const JOHTO_TALES = {
     stageLines: ['Why two towers? Elias finally asks a real question. Listen, then.', 'One tower is a lookout. Two towers are a welcome. Whichever way the great bird came over the hills, there would be bells under it, and a roof raised in its honor. The bells were never alarms, child. They were doorbells. Tell the historian the Sage said so — and tell him to write THAT in a book.'],
     finishLines: ['Doorbells. A hundred and fifty years of scholarship and the answer is doorbells — and it is TRUE, I can feel it being true.', 'Two welcomes, one skyline, and one of them ashes. We keep the remaining bells polished anyway. Some welcomes you keep ready forever. A Full Heal, trainer — and the next book in my shop will say it properly.'],
   },
+  tale_olivine: {
+    id: 'tale_olivine', town: 'Olivine City', giver: 'LIGHTKEEPER ADA', title: 'The Light That Waits', johtoTale: true,
+    stages: [
+      'Ask Sailor Joss in Olivine what the harbor does when the light goes out',
+      'Tell Lightkeeper Ada what Joss said',
+    ],
+    reward: { items: { superpotion: 2 } }, rewardText: '2 Super Potions',
+    bondNpc: 'ada', bondDelta: 1,
+    revelation: 'When the lighthouse went dark in the great storm, Olivine\'s fishing fleet did not stay in port — every boat lit its own lamp and held a line of small lights from the harbor mouth to open water, and the big ships steered home by their neighbors.',
+    offerLines: ['Forty years I have kept that light, trainer, through Amphy and her mother before her. Everybody asks how the light works. Nobody asks what the harbor does on the nights it cannot.', 'Ask Sailor Joss, down by the water. He was out in the great storm, the year the lamp failed. Bring me what he tells you — two Super Potions for the story, told straight.'],
+    stageLines: ['The year the light failed? I was nineteen, and my father\'s boat was the last one out. You want to know what the harbor did, ask what the boats did.', 'Every fishing boat in Olivine lit its lamp and took station — harbor mouth to open water, a road of small lights on black sea. The big ships steered by US, trainer. Tell Ada: the light never really went out. It just changed hands for a night.'],
+    finishLines: ['It changed hands... He said that? That old — of course he said that. It is the truest thing ever said about this port, and a sailor said it in one breath.', 'That is why Amphy\'s light matters, trainer. Not because the harbor is helpless without it. Because on the one night it mattered, the harbor learned it was not. Two Super Potions — and thank you for carrying that home to me.'],
+  },
+  tale_cianwood: {
+    id: 'tale_cianwood', town: 'Cianwood City', giver: 'ISLAND ELDER BRAN', title: 'Salt on the Steps', johtoTale: true,
+    stages: [
+      'Ask Surf Kid Nia in Cianwood why the gym steps are worn in the middle',
+      'Tell Island Elder Bran what Nia said',
+    ],
+    reward: { items: { greatball: 2 } }, rewardText: '2 Great Balls',
+    bondNpc: 'bran', bondDelta: 1,
+    revelation: 'The gym\'s stone steps are worn hollow in the middle because for a hundred years every challenger, winner or loser, has sat on the same step afterward to watch the sea — Chuck\'s master started it, sitting with the trainers he had just beaten until their hands stopped shaking.',
+    offerLines: ['Look at the gym steps as you pass, trainer. Worn in the middle, like a saddle. A hundred years of challengers did that — but not the way you think.', 'Surf Kid Nia watches those steps every day from the water. Ask her what she sees, and bring me her answer. Two Great Balls for it — island knowledge should travel.'],
+    stageLines: ['The steps? Oh, I know the steps. I surf past them every morning, and every morning somebody is sitting in the hollow.', 'Winners sit there. Losers sit there LONGER. And here is the thing nobody from the mainland believes: Chuck sits there too. After every battle. Next to whoever he just fought, saying nothing, until their hands stop shaking. His master did it. His master\'s master did it. The stone remembers a hundred years of sitting still until it is over.'],
+    finishLines: ['Until their hands stop shaking... She sees it clearly, that girl. Clearer than the ones who climb.', 'That hollow is the real trophy of this island, trainer. Badges leave. The sitting stays. Two Great Balls — and when your hands shake out there, find a step. It is what they are for.'],
+  },
+  tale_mahogany: {
+    id: 'tale_mahogany', town: 'Mahogany Town', giver: 'LAKEWATCHER FENN', title: 'The Lake Keeps Count', johtoTale: true,
+    stages: [
+      'Ask Timberwright Oda in Mahogany what the lake gave back',
+      'Tell Lakewatcher Fenn what Oda said',
+    ],
+    reward: { items: { hyperpotion: 1 } }, rewardText: '1 Hyper Potion',
+    bondNpc: 'fenn', bondDelta: 1,
+    revelation: 'Oda\'s grandfather, the town\'s first timberwright, threw his wedding ring into the lake in a rage after an argument — and a Magikarp delivered it back to his doorstep plank three winters later, in the spring melt, the week the couple\'s fiftieth anniversary came due. Mahogany says the lake keeps count of everything it is owed and everything it owes.',
+    offerLines: ['Thirty years I have watched that lake, trainer, and I will tell you its one law for an errand: the lake keeps count. What it takes, it owes. What it is given, it remembers.', 'Timberwright Oda knows a count the lake settled. Ask him what the lake gave back. A Hyper Potion for the telling — some stories are medicine.'],
+    stageLines: ['What the lake gave back? My grandfather\'s ring. Sit — no, stand there, the story is short and I tell it standing, the way he did.', 'He threw it in after a row with my grandmother, the winter they were wed — threw it far, and was too proud to fish for it. Three winters later the spring melt comes down, and on the doorstep plank, in a clump of weed: the ring. A Magikarp had been carrying it, or the current had, or the lake had. In Mahogany we do not separate those. It came back the week of their fiftieth. He never took it off again.'],
+    finishLines: ['The week of their fiftieth. The count kept to the WEEK. That is the lake all over, trainer — slow as ice and exact as a ledger.', 'That is why this town did not panic when the water turned strange lately. We know the lake. What is taken from it is owed, and what is owed comes back. A Hyper Potion — earned, and counted.'],
+  },
+  tale_blackthorn: {
+    id: 'tale_blackthorn', town: 'Blackthorn City', giver: 'MOVE KEEPER ELDER', title: 'What Dragons Remember', johtoTale: true,
+    stages: [
+      'Ask Dragon Tamer Ryu in Blackthorn what the dragons remember',
+      'Tell the Move Keeper Elder what Ryu said',
+    ],
+    reward: { items: { fullheal: 1 } }, rewardText: '1 Full Heal',
+    bondNpc: 'elder', bondDelta: 1,
+    revelation: 'The clan\'s dragons are not taught their oldest moves in the den at all — the tamers take the young ones to the same black rocks above the town every spring, because a dragon learns a move twice: once in the body, and once in the place its grandmother learned it.',
+    offerLines: ['I keep the moves of this clan written in books, trainer, and I will confess a keeper\'s shame for an errand: there is one thing the dragons know that none of my books can hold.', 'Dragon Tamer Ryu trains the young ones on the black rocks. Ask him what the dragons remember that I cannot write. A Full Heal for the answer — accuracy is a kind of medicine too.'],
+    stageLines: ['What do they remember? Elder, you old book — come here in spring and SEE. We take the young ones to the black rocks above town, the same rocks, every year.', 'A dragon learns a move twice. Once in the body — that part your elder can write down. And once in the PLACE: the rock where its grandmother learned it, the wind off the same cliff. They stand where she stood and the move arrives like something remembered, not taught. Tell the keeper: it is not that the books are wrong. It is that dragons keep their library in geography.'],
+    finishLines: ['A library in geography... Fifty years of ink, and the true catalogue is a hillside. Of course. Of COURSE.', 'I will write that in the front of the first book, where the young keepers will trip over it: the moves live in the clan twice — in the hand, and in the ground. A Full Heal, trainer, for the truest footnote of my life.'],
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -114096,6 +114551,29 @@ const JOHTO_NPCS = [
     dialogue: ['My Miltank has been waiting ALL week for a real challenger.'] },
   { map: 'gym-ecruteak', x: 7, y: 2, name: 'MORTY', art: 'gym4', skin: '#e8b888', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#d8c8a0', johto: 'morty',
     dialogue: ['The fog is honest. It hides nothing that matters.'] },
+  // ---- Stage J4b: the east actors ----
+  { map: 'gym-cianwood', x: 7, y: 2, name: 'CHUCK', art: 'bruno', skin: '#d8a878', shirt: '#a03a2a', pants: '#3a3a2a', hair: '#2a1a0a', johto: 'chuck',
+    dialogue: ['We train where the waves hit, challenger!'] },
+  { map: 'house-cianwood', x: 10, y: 5, name: 'CHUCK\'S WIFE', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0c8', pants: '#5a4a6a', hair: '#6a4a2a', johto: 'chucks_wife',
+    dialogue: ['My husband is at the gym, roaring at the weather.'] },
+  { map: 'lighthouse-2', x: 5, y: 4, name: 'JASMINE', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine_light',
+    dialogue: ['Amphy... please hold on. The light has to hold on.'] },
+  { map: 'gym-olivine', x: 7, y: 2, name: 'JASMINE', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine',
+    dialogue: ['Amphy first. Everything in Olivine is Amphy first, until the light is well.'] },
+  { map: 'lake-of-rage', x: 16, y: 15, name: 'LANCE', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_lake',
+    dialogue: ['The lake is screaming, trainer. Something is making it scream.'] },
+  { map: 'mahogany', x: 18, y: 7, name: 'LANCE', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_mahogany',
+    dialogue: ['Mahogany smells of cedar and souvenirs. One of those is a lie.'] },
+  { map: 'gym-mahogany', x: 7, y: 2, name: 'PRYCE', art: 'elder', skin: '#e8b888', shirt: '#dfe8ee', pants: '#3a4a5a', hair: '#e8e8e8', johto: 'pryce',
+    dialogue: ['Winter is honest about what you are. So am I.'] },
+  { map: 'gym-blackthorn', x: 7, y: 2, name: 'CLAIR', art: 'acetrainer', skin: '#f0c8a0', shirt: '#3a4a7a', pants: '#2a2a4a', hair: '#4a6ac8', johto: 'clair',
+    dialogue: ['The clan keeps dragons. I keep this gym. Completely.'] },
+  { map: 'silver-stadium', x: 13, y: 5, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a', johto: 'gary_stadium',
+    dialogue: ['Took you long enough. The bracket has been boring without you.'] },
+  { map: 'silver-stadium', x: 9, y: 5, name: 'HARRISON', art: 'acetrainer', skin: '#d8a878', shirt: '#7a4a2a', pants: '#3a3a2a', hair: '#a03a2a', johto: 'harrison',
+    dialogue: ['Harrison, from Littleroot. I have been watching your side of the bracket with great interest.'] },
+  { map: 'mt-silver-cave', x: 8, y: 2, name: 'RED', art: 'rival', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a3a5a', hair: '#2a1a0a', johto: 'red',
+    dialogue: ['...'] },
 ];
 
 const JOHTO_NPC_PATCHES = [
@@ -114111,6 +114589,21 @@ const JOHTO_NPC_PATCHES = [
   { map: 'goldenrod', name: 'BIKE HAND RYO', tale: 'tale_goldenrod', role: 'stage' },
   { map: 'ecruteak', name: 'HISTORIAN ELIAS', tale: 'tale_ecruteak', role: 'giver' },
   { map: 'ecruteak', name: 'SAGE OF THE BELLS', tale: 'tale_ecruteak', role: 'stage' },
+  // ---- Stage J4b: east tale actors + functional stamps ----
+  { map: 'olivine', name: 'LIGHTKEEPER ADA', tale: 'tale_olivine', role: 'giver' },
+  { map: 'olivine', name: 'SAILOR JOSS', tale: 'tale_olivine', role: 'stage' },
+  { map: 'cianwood', name: 'ISLAND ELDER BRAN', tale: 'tale_cianwood', role: 'giver' },
+  { map: 'cianwood', name: 'SURF KID NIA', tale: 'tale_cianwood', role: 'stage' },
+  { map: 'mahogany', name: 'LAKEWATCHER FENN', tale: 'tale_mahogany', role: 'giver' },
+  { map: 'mahogany', name: 'TIMBERWRIGHT ODA', tale: 'tale_mahogany', role: 'stage' },
+  { map: 'blackthorn', name: 'MOVE KEEPER ELDER', tale: 'tale_blackthorn', role: 'giver' },
+  { map: 'blackthorn', name: 'DRAGON TAMER RYU', tale: 'tale_blackthorn', role: 'stage' },
+  // Functional stamps (the `johto` key routes these existing maps6
+  // townsfolk into runJohtoNpc; loadMap's patch code copies it):
+  { map: 'house-cianwood', name: 'PHARMACIST WREN', johto: 'pharmacist' },
+  { map: 'dragons-den', name: 'DEN ELDER', johto: 'den_elder' },
+  { map: 'route-silver', name: 'VETERAN HALD', johto: 'silver_gate' },
+  { map: 'silver-stadium', name: 'CONFERENCE OFFICIAL', johto: 'conference' },
 ];
 
 
@@ -114966,6 +115459,28 @@ const MAP_GROUND = {
   'burned-tower-2': 'grave',
   'elm-lab': 'open',
   'kurt-house': 'open',
+  // Stage J4b: Johto east gym signature Grounds (existing 15 only —
+  // no new Grounds this stage): Chuck's shore gym rides the Rubble
+  // (physical moves land true where the waves hit), Jasmine's harbor
+  // gym the Tide, Pryce's the Frost, Clair's the Ember (the den's
+  // lava-hearted dark). Landmarks follow their feel: the lighthouse
+  // and the Lake of Rage run Tide, the Radio Tower hums Storm, the
+  // Dragon's Den keeps Grave reverence, the Silver Stadium takes
+  // Open (the league-floor precedent), and Mt. Silver's summit cave
+  // is Frost ground.
+  'gym-cianwood': 'rubble', // Cianwood Gym — Chuck
+  'gym-olivine': 'tide', // Olivine Gym — Jasmine
+  'gym-mahogany': 'frost', // Mahogany Gym — Pryce
+  'gym-blackthorn': 'ember', // Blackthorn Gym — Clair
+  'lighthouse-1': 'tide',
+  'lighthouse-2': 'tide',
+  'lake-of-rage': 'tide',
+  'radio-tower-1': 'storm',
+  'radio-tower-2': 'storm',
+  'radio-tower-3': 'storm',
+  'dragons-den': 'grave',
+  'silver-stadium': 'open',
+  'mt-silver-cave': 'frost',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',
@@ -123889,7 +124404,14 @@ class OverworldScene {
       if (jPatches.length) {
         npcs = npcs.map((n) => {
           const p = jPatches.find((pp) => pp.name === n.name);
-          return p ? { ...n, tale: p.tale, role: p.role } : n;
+          if (!p) return n;
+          // Stage J4b: a patch may also stamp a functional `johto`
+          // kind (the Cianwood pharmacist, the Den Elder, the pass
+          // veteran, the Conference Official) — copied only when the
+          // patch carries one, so tale-only patches stay byte-true.
+          const out = { ...n, tale: p.tale, role: p.role };
+          if (p.johto) out.johto = p.johto;
+          return out;
         });
         changed = true;
       }
@@ -125093,6 +125615,42 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_johto_burned');
       }
     }
+    // Stage J4b (Johto story, east): map-entry scenes, same idiom —
+    // each scene's own completion flag is its gate, so a fled or lost
+    // beat re-fires on a later entry and completes nothing early.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const jf = g.state.story.flags;
+      const jBadgeN = ((g.state.badges && g.state.badges.johto) || []).length;
+      if (id === 'lake-of-rage' && !jf.red_gyarados_done && !jf.ev_johto_redgyarados_done) {
+        this.runEvent('ev_johto_redgyarados');
+      } else if (id === 'ilex-forest' && jf.silver_reported && jf.badge_fog && !jf.silver_ilex_done && !jf.ev_johto_silver_ilex_won_done && !jf.ev_johto_silver_ilex_lost_done) {
+        // Silver's second clash BRANCHES on the Route 30 outcome:
+        // the won/lost flag from J4a picks the staging (his lines
+        // differ; the battle and its own branch flags are shared).
+        this.runEvent(jf.silver_r30_won ? 'ev_johto_silver_ilex_won' : 'ev_johto_silver_ilex_lost');
+      } else if (id === 'route-silver' && jBadgeN < 8) {
+        // The badge gate: an official's word + the warp home. Fires
+        // on every under-badged entry (its own scene flag is never
+        // the gate — the badge count is), so it can never be
+        // bypassed by having seen it once, and never strands: the
+        // warp lands on Blackthorn's east edge, facing the road back.
+        this.runEvent('ev_johto_silver_gate');
+      } else if (id === 'route-silver' && jBadgeN >= 8 && !jf.silver_route_done && !jf.ev_johto_silver_route_done) {
+        this.runEvent('ev_johto_silver_route');
+      } else if (id === 'radio-tower-1' && jf.johto_hideout_cleared && !jf.radio_tower_cleared && !jf.radio_f1_cleared && !jf.ev_johto_radio_takeover_done) {
+        this.runEvent('ev_johto_radio_takeover');
+      } else if (id === 'radio-tower-2' && jf.radio_f1_cleared && !jf.radio_tower_cleared && !jf.radio_f2_cleared) {
+        // The locked floor: without the rescue, the locked-door
+        // scene (once — its own flag gates it); with the Director
+        // rescued, the floor's gauntlet.
+        if (jf.radio_director_rescued) this.runEvent('ev_johto_radio_f2');
+        else if (!jf.radio_locked_seen && !jf.ev_johto_radio_locked_done) this.runEvent('ev_johto_radio_locked');
+      } else if (id === 'goldenrod-underground-2' && jf.radio_f1_cleared && !jf.radio_director_rescued && !jf.ev_johto_director_done) {
+        this.runEvent('ev_johto_director');
+      } else if (id === 'radio-tower-3' && jf.radio_f2_cleared && !jf.radio_tower_cleared && !jf.ev_johto_radio_top_done) {
+        this.runEvent('ev_johto_radio_top');
+      }
+    }
   },
 
   boulderAt(x, y) {
@@ -126165,6 +126723,243 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
+    // ================= Stage J4b: the east actors =================
+    if (kind === 'pharmacist') {
+      if (flags.amphy_healed) { say(['Amphy\'s light is back over the water — the whole island saw it come on at dusk. That is the best review this pharmacy has ever had, trainer.']); return true; }
+      if ((st.bag.secretpotion || 0) > 0) { say(['That potion in your bag is the real article — my own mix, both hands, no shortcuts. Get it across the water to the lighthouse, and do not drop it. Amphy is counting on a steady hand.']); return true; }
+      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Amphy, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Olivine out of its depth.',
+        'This is the Secret Potion. My family\'s recipe, the strong one — we make it for exactly one patient at a time, and today the patient is a lighthouse. Carry it carefully, trainer. Half of Johto\'s ships steer by that light.'], () => {
+        st.bag.secretpotion = (st.bag.secretpotion || 0) + 1;
+        flags.secret_potion_got = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Got the Secret Potion!');
+      });
+      return true;
+    }
+
+    if (kind === 'jasmine_light') {
+      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Amphy is well, trainer, and every ship between here and Cianwood knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will Steelix.']); return true; }
+      if ((st.bag.secretpotion || 0) > 0) {
+        say(['That smell — honey and iron and something green. The Cianwood mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Amphy, love — medicine. The good kind, from across the water.'], () => {
+          st.bag.secretpotion = (st.bag.secretpotion || 0) - 1;
+          if (st.bag.secretpotion <= 0) delete st.bag.secretpotion;
+          flags.amphy_healed = true;
+          g.audio.playSfx('heal');
+          say(['She drinks. A long, shuddering breath — and then the lamp room does what it has done every dusk for a hundred years, all at once, like a held note finally sounded: the light comes on. Slowly. Then completely. Out past the harbor mouth, three ships sound their horns in answer.', 'Amphy is well. And I... I am free to be a gym leader again, with my whole heart in it. My gym is across the plaza, trainer. Come and take your battle — you have more than earned the queue jumping.'], null, 'JASMINE');
+        });
+        return true;
+      }
+      if (!flags.jasmine_asked) {
+        say(['Oh — a trainer. Forgive me, I — my name is Jasmine. I keep Olivine\'s gym, most days. These days I keep this room.',
+          'This is Amphy. Her light has guided Olivine\'s ships since before I was born, and she is sick — a fever no medicine in this city touches. The pharmacy in Cianwood, across Route 40, makes one thing that might: their Secret Potion. I cannot leave her. The ships cannot wait much longer. Trainer... would you go? For a lighthouse?'], () => { flags.jasmine_asked = true; });
+        return true;
+      }
+      say(['Amphy is holding on. The Cianwood pharmacy, trainer — across the sea road, Route 40. Their Secret Potion is her best hope, and you are its fastest ship.']);
+      return true;
+    }
+
+    if (kind === 'lance_lake') {
+      if (flags.red_gyarados_done) { say(['The lake is quiet — listen to it being quiet. That is our work, trainer. Mahogany next: whatever made this lake scream is buried under that town, and I mean to dig. Meet me there.']); return true; }
+      say(['Careful at the water\'s edge, trainer. Something in that lake is in pain, and pain that size does not stay in the lake for long. Whatever you came here to do — do it gently, or do it fast. Ideally both.']);
+      return true;
+    }
+
+    if (kind === 'lance_mahogany') {
+      if (flags.johto_hideout_cleared) { say(['The signal is dead and the lake is calm — I checked from the air at dawn. Team Rocket\'s Johto operation ended in that basement, trainer. What remains is the honest work: Pryce, Blackthorn, and a Conference with your name rising up its bracket.']); return true; }
+      if (!flags.red_gyarados_done) { say(['You have the look of a trainer between errands, so let me lend you one: the Lake of Rage, north of here. Something red is tearing it apart, and I do not believe in coincidences with scales. Look into it. Then come back and tell me what the water said.']); return true; }
+      say(['You saw the lake. You heard the signal in its screaming. The source is here, {player} — under the souvenir shop, behind the postcards: a transmitter, a power core, and the whole Johto operation of a team that should have stayed beaten.', 'Dragonite and I take the front. You take everything that moves behind us. Are you ready to go down?'], () => {
+        g.ui.showMenu('Enter the Rocket Hideout with Lance?', [
+          { label: 'Descend', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => { if (v === 'yes') this.runEvent('ev_johto_hideout'); });
+      });
+      return true;
+    }
+
+    if (kind === 'clair') {
+      if (jBadges.includes('risingbadge')) { say(['The Rising Badge sits well on you, {player}. The den chose, the shrine approved, and I — I concur, which the clan will tell you is the rarest of the three. The Conference road is yours. Do not waste it.']); return true; }
+      if (flags.clair_beaten) { say(['The gym is settled between us — the DEN is not. North of the town, through the cliff mouth: the Dragon\'s Den, the elder, the old questions, the shrine. The badge waits there, {player}. It has only ever waited there.']); return true; }
+      const ct = TRAINERS.clair;
+      say([ct.intro[0]], () => {
+        g.ui.showMenu('Challenge Clair?', [
+          { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startJohtoBattle('clair', (won) => {
+            if (!won) return;
+            flags.clair_beaten = true;
+            say(['North, then. The cliff behind this town, the water that runs black and patient — the Dragon\'s Den. The elder will ask you the old questions, and the shrine will ask its own. Pass, and the Rising Badge is yours by the clan\'s law. Fail... and you may try again. Dragons respect persistence almost as much as strength.'], null, 'CLAIR');
+          });
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'den_elder') {
+      if (jBadges.includes('risingbadge')) { say(['The badge rose, the shrine is quiet, and the dragons have a new name to respect, {player}. Walk the Conference road the way you walked this den: like you belong on it. You do.']); return true; }
+      if (!flags.clair_beaten) { say(['I am the elder of this den, and this is a place of judgment, not tourism. The test is for those Clair has faced and failed to dismiss — win her gym first, trainer, and then come and be weighed properly.']); return true; }
+      // The elder's test: three questions (every answer is heard —
+      // the choice law — and the elder's verdict names what the
+      // answers showed), then the shrine battle. Win the battle and
+      // the Rising Badge is awarded HERE, by the exact leader-award
+      // representation (badges.johto push + badge_rising flag) —
+      // the badge-count proof: 7 after the gym, 8 after the den.
+      say(['So. Clair faced you and could not dismiss you. Then the den will weigh what the gym could not. Three questions, trainer, the old ones. Answer as yourself — the shrine can hear varnish crack.', 'First: a young dragon in your care loses, badly, in front of the whole clan. What do you do?'], () => {
+        let honest = 0;
+        const ask2 = () => {
+          g.ui.showMenu('Second: what makes a dragon strong?', [
+            { label: 'A heart that trusts its trainer', value: 'honest' },
+            { label: 'Breeding and bloodline', value: 'proud' },
+            { label: 'Fear. Theirs, of me', value: 'cruel' },
+          ], (v2) => {
+            if (v2 === 'honest') honest++;
+            say(['Last: your rival stands where you are standing, asking for the badge you came for. What do you hope for them?'], () => {
+              g.ui.showMenu('The elder waits.', [
+                { label: 'That they pass, and meet me at the top', value: 'honest' },
+                { label: 'Nothing. The den decides', value: 'proud' },
+                { label: 'That they fail where I did not', value: 'cruel' },
+              ], (v3) => {
+                if (v3 === 'honest') honest++;
+                flags.den_test_done = true;
+                const verdict = honest >= 2
+                  ? 'Your answers have the shape of the thing itself, trainer. The clan has a word for trainers like you, and it is not a small one.'
+                  : 'Your answers are... armored. But armor can be learned out of a person, and the shrine\'s question is the honest one. Let us see which of you shows up to it.';
+                say([verdict, 'Now the shrine asks its question. Keeper Sora — the floor is yours.'], () => {
+                  this.startJohtoBattle('den_shrine', (won) => {
+                    if (!won) return;
+                    if (!st.badges.johto.includes('risingbadge')) st.badges.johto.push('risingbadge');
+                    flags.badge_rising = true;
+                    g.audio.playSfx('badge');
+                    say(['It is decided, then — by gym, by word, and by battle, the full measure of the old law.', 'The RISING BADGE is yours, {player}. Eight badges. The whole of Johto, answered. Clair will hear of this before you reach the town — the den has its own ways of telling her. The road north is open now: Route Silver, Silver Town, and the Conference that has been waiting for you since New Bark.'], null, 'DEN ELDER');
+                  });
+                });
+              });
+            });
+          });
+        };
+        g.ui.showMenu('The elder waits.', [
+          { label: 'Kneel. It lost with me, not for me', value: 'honest' },
+          { label: 'Train it harder before dusk', value: 'proud' },
+          { label: 'Trade it for a stronger one', value: 'cruel' },
+        ], (v1) => { if (v1 === 'honest') honest++; say(['Second question comes the way weather does, trainer — whether you are ready or not.'], ask2, 'DEN ELDER'); });
+      });
+      return true;
+    }
+
+    if (kind === 'silver_gate') {
+      if (jBadges.length >= 8) { say(['Eight badges, counted with my own eyes — the pass is yours, Conference trainer. Hald, veteran of this road, at your service. Silver, when you are ready, is in the stadium. So is the young man with the red hair\'s opposite number. Make it a good one.']); return true; }
+      say(['Pass Officer Hald — the League keeps me at this end of the road to count, so let me count for you, trainer: ' + jBadges.length + ' of 8 Johto badges in that case.', 'The rule is the rule, and it turns nobody away forever: earn the eight — Blackthorn and the Dragon\'s Den hold the last of it for most — and this road opens like it was built for you. Because by then, trainer, it will have been.']);
+      return true;
+    }
+
+    if (kind === 'conference') {
+      if (flags.johto_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Conference book in the good ink, trainer. Whatever mountain is next — and there is always a next one — Silver Town was glad to host this chapter.']); return true; }
+      if (jBadges.length < 8) { say(['Conference registration, trainer — and I can see by your case that the road is not finished with you yet. Eight Johto badges open this bracket. You hold ' + jBadges.length + '. Blackthorn is the usual last stop. I will keep your page open.']); return true; }
+      if (!flags.conference_registered) {
+        say(['Eight badges. Counted, verified, and — if I may — well carried, trainer. Let me write your name into the Silver Conference properly... There. Registered.', 'The bracket: two qualifying battles, here in this stadium, then the names you already know are waiting deeper in. Gary is on the far side of the draw. He asked me to tell you the bracket was "finally interesting." His words. Begin when you are ready — speak to me for each qualifier.'], () => {
+          flags.conference_registered = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Registered for the Silver Conference!');
+        });
+        return true;
+      }
+      if (!flags.beat_conference_q1) {
+        say(['Qualifier one, trainer. Brenna, of the western road — a clean battler with a cleaner record. The floor is yours when you call it.'], () => {
+          g.ui.showMenu('Begin qualifier one?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startJohtoBattle('conference_q1', null); });
+        });
+        return true;
+      }
+      if (!flags.beat_conference_q2) {
+        say(['One down. Qualifier two: Cato, who has been telling the stands all morning that the draw did him a favour. Correct him, would you?'], () => {
+          g.ui.showMenu('Begin qualifier two?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startJohtoBattle('conference_q2', null); });
+        });
+        return true;
+      }
+      if (!flags.beat_gary_johto) { say(['The qualifiers are behind you, and the whole stadium knows what is next. Gary is on the pitch, pretending not to warm up. Go and give these people the match they came for.']); return true; }
+      if (!flags.harrison_faced) { say(['Gary is beaten, and the bracket has one name left on your side of it: Harrison, in the quarter-final. He is standing by the pitch with his Houndoom and his good manners. End this Conference properly, trainer.']); return true; }
+      say(['The Conference is decided, and decided honestly. The book has it. So does everyone who was here.']);
+      return true;
+    }
+
+    if (kind === 'gary_stadium') {
+      if (flags.johto_complete) { say(['Still here? The Conference is over and you are still the story of it — even Harrison\'s people are telling it your way. Go home, {player}. Pallet first. It is what the road is FOR. Smell ya later — and I mean that warmer than it sounds.']); return true; }
+      if (flags.beat_gary_johto) { say(['Beaten, and — fine, I will say it in the open where it costs me: beaten FAIR, by the best version of you there has ever been. Harrison is next, {player}. He is better than his bracket manners suggest. Do not lose to him after beating me. I would never recover, and neither would you.']); return true; }
+      if (!flags.conference_registered) { say(['Registration first, {player}. Even I had to sign the book — the official, by the bracket board. Then qualifiers. THEN you may lose to me properly, in order, like tradition demands.']); return true; }
+      if (!flags.beat_conference_q2) { say(['Qualifiers first. Brenna, then Cato — the bracket is the bracket, even for the main event. I will be right here, being patient at a professional standard.']); return true; }
+      const gt = TRAINERS.gary_johto;
+      say(gt.intro.map((l) => l.replace('{player}', st.player.name)), () => {
+        g.ui.showMenu('Face Gary — the Silver Conference centrepiece?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => { if (v === 'yes') this.startJohtoBattle('gary_johto', null); });
+      }, 'GARY');
+      return true;
+    }
+
+    if (kind === 'harrison') {
+      if (flags.johto_complete) { say(['The Conference book is closed and your name is in it in the good ink, trainer. Whatever either of us does next, this stadium saw the real thing. Travel well. Houndoom and I will be telling this one for years.']); return true; }
+      if (!flags.beat_gary_johto) { say(['Harrison, from Littleroot Town. We are on a collision course, you and I — but Gary is your road to me, and the bracket does not bend. Beat him first. I will be here, and I will be ready either way.']); return true; }
+      // The quarter-final (mechanism recorded at his trainer def):
+      // a real full-strength battle, fought FRIENDLY — the predicate
+      // is FACED, not won. Win or lose, the branch-true honours play,
+      // johto_complete is set, and the Foundation machine itself
+      // fires (checkArcCompletion — ARC COMPLETE card, regionsDone,
+      // the pinned Hoenn directive; nothing here writes regionsDone).
+      say(['So it is us. Gary is beaten — I watched it from the tunnel, and I will carry that match with me whatever happens here.', 'Quarter-final rules, trainer, and Conference stakes. Give me everything you gave him. Houndoom and I did not cross the bracket for less.'], () => {
+        g.ui.showMenu('The quarter-final — face Harrison?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          const ht = bondTrainerVariant(g.state, TRAINERS.harrison);
+          g.scenes.push(new BattleScene({
+            kind: 'trainer', trainer: ht, returnTo: this, rt: rtOf(g), friendly: true,
+            onEnd: (won, fled) => {
+              if (fled) return;
+              recordBattleBond(g.state, ht.id, won, fled);
+              flags.harrison_faced = true;
+              if (won) flags.harrison_won = true; else flags.harrison_lost = true;
+              const lines = won ? [
+                '...Well. WELL. The card says your name, trainer — the judges did not even deliberate. An upset, the papers will call it. It was not an upset. I was there. It was a better team, on a bigger day.',
+                'Take the semi-final road with my respect — you have beaten the two best trainers in this bracket back to back, and one of them is standing here applauding. The Conference is yours in every way that history checks.',
+              ] : [
+                '...It is decided. The final exchange — Houndoom endures, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Harrison.',
+                'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
+                'Gary is in the tunnel, trainer. Even he is applauding. Especially him, though he will deny the especially.',
+              ];
+              say(lines, () => {
+                flags.johto_complete = true;
+                g.audio.playSfx('badge');
+                say(['Silver Conference — the run ends in honours, and Johto ends with it: eight badges, a rivalry settled, a lake calmed, a tower retaken, and a Conference that will be argued about in Silver Town for a decade. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+              }, 'HARRISON');
+            },
+          }));
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'red') {
+      if (!flags.johto_complete) { say(['...'], null, 'RED'); return true; }
+      if (flags.red_defeated) {
+        say(['...!', '...'], () => {
+          g.ui.showMenu('Battle Red again?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startJohtoBattle('red', null); });
+        }, 'RED');
+        return true;
+      }
+      say(['...'], () => {
+        this.startJohtoBattle('red', (won) => {
+          if (!won) return;
+          flags.red_defeated = true;
+          say(['...!!', 'He tips his cap — once, the way a mountain might bow — and turns back to the snow and the silence, satisfied in a way that has nothing to do with winning. Some names are not beaten, exactly. They are answered. His was.'], null, 'RED');
+        });
+      }, 'RED');
+      return true;
+    }
+
     // ---- the west leaders ----
     const LEADERS = {
       falkner: { badge: 'zephyrbadge', gate: 'sprout_tower_done',
@@ -126176,6 +126971,18 @@ Object.assign(OverworldScene.prototype, {
         post: 'No crying this time — I practiced! Come back for a rematch whenever, Plain Badge holder. Miltank asks about your team by name now. By NAME.' },
       morty: { badge: 'fogbadge', gate: null, gateLines: [],
         post: 'The fog keeps its counsel and so do I. Walk carefully in it, Fog Badge holder — it has decided you are interesting.' },
+      // Stage J4b east leaders on the same runner: Jasmine's battle
+      // is gated on the potion delivery ONLY (amphy_healed — either
+      // gym order works; nothing else gates her), and Pryce's on the
+      // hideout (canon order — the occupation ends first).
+      chuck: { badge: 'stormbadge', gate: null, gateLines: [],
+        post: 'Any time the sea brings you back, Storm Badge holder, my gym is its loudest address. Bring your hands — and your appetite. My wife insists on feeding challengers who survive me.' },
+      jasmine: { badge: 'mineralbadge', gate: 'amphy_healed',
+        gateLines: ['I am sorry — truly. I cannot battle while Amphy is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my Steelix deserves better from me. The light first, trainer. Please. The light first.'],
+        post: 'Amphy\'s light and your Mineral Badge, trainer — Olivine shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
+      pryce: { badge: 'glacierbadge', gate: 'johto_hideout_cleared',
+        gateLines: ['Not yet, challenger. My town is sitting on a Rocket nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Lance is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
+        post: 'The lake is calm, the town is ours, and the Glacier Badge is where it belongs — with the warm-hearted. Winter remembers you kindly, trainer. That is rarer than the badge.' },
     };
     const L = LEADERS[kind];
     if (!L) return false;
@@ -129693,6 +130500,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:e109ae324b3243de12cd8f56da69a158cdc1b2eb9a822117fb68761b8d594a0c -->
+<!-- contentHash:acaf35a564a7a0cf87521c823fff1ce7a1904e2bb168b7dc2cb08dacaabd310b -->
 </body>
 </html>

@@ -157,7 +157,14 @@ export class OverworldScene {
       if (jPatches.length) {
         npcs = npcs.map((n) => {
           const p = jPatches.find((pp) => pp.name === n.name);
-          return p ? { ...n, tale: p.tale, role: p.role } : n;
+          if (!p) return n;
+          // Stage J4b: a patch may also stamp a functional `johto`
+          // kind (the Cianwood pharmacist, the Den Elder, the pass
+          // veteran, the Conference Official) — copied only when the
+          // patch carries one, so tale-only patches stay byte-true.
+          const out = { ...n, tale: p.tale, role: p.role };
+          if (p.johto) out.johto = p.johto;
+          return out;
         });
         changed = true;
       }

@@ -140,6 +140,42 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_johto_burned');
       }
     }
+    // Stage J4b (Johto story, east): map-entry scenes, same idiom —
+    // each scene's own completion flag is its gate, so a fled or lost
+    // beat re-fires on a later entry and completes nothing early.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const jf = g.state.story.flags;
+      const jBadgeN = ((g.state.badges && g.state.badges.johto) || []).length;
+      if (id === 'lake-of-rage' && !jf.red_gyarados_done && !jf.ev_johto_redgyarados_done) {
+        this.runEvent('ev_johto_redgyarados');
+      } else if (id === 'ilex-forest' && jf.silver_reported && jf.badge_fog && !jf.silver_ilex_done && !jf.ev_johto_silver_ilex_won_done && !jf.ev_johto_silver_ilex_lost_done) {
+        // Silver's second clash BRANCHES on the Route 30 outcome:
+        // the won/lost flag from J4a picks the staging (his lines
+        // differ; the battle and its own branch flags are shared).
+        this.runEvent(jf.silver_r30_won ? 'ev_johto_silver_ilex_won' : 'ev_johto_silver_ilex_lost');
+      } else if (id === 'route-silver' && jBadgeN < 8) {
+        // The badge gate: an official's word + the warp home. Fires
+        // on every under-badged entry (its own scene flag is never
+        // the gate — the badge count is), so it can never be
+        // bypassed by having seen it once, and never strands: the
+        // warp lands on Blackthorn's east edge, facing the road back.
+        this.runEvent('ev_johto_silver_gate');
+      } else if (id === 'route-silver' && jBadgeN >= 8 && !jf.silver_route_done && !jf.ev_johto_silver_route_done) {
+        this.runEvent('ev_johto_silver_route');
+      } else if (id === 'radio-tower-1' && jf.johto_hideout_cleared && !jf.radio_tower_cleared && !jf.radio_f1_cleared && !jf.ev_johto_radio_takeover_done) {
+        this.runEvent('ev_johto_radio_takeover');
+      } else if (id === 'radio-tower-2' && jf.radio_f1_cleared && !jf.radio_tower_cleared && !jf.radio_f2_cleared) {
+        // The locked floor: without the rescue, the locked-door
+        // scene (once — its own flag gates it); with the Director
+        // rescued, the floor's gauntlet.
+        if (jf.radio_director_rescued) this.runEvent('ev_johto_radio_f2');
+        else if (!jf.radio_locked_seen && !jf.ev_johto_radio_locked_done) this.runEvent('ev_johto_radio_locked');
+      } else if (id === 'goldenrod-underground-2' && jf.radio_f1_cleared && !jf.radio_director_rescued && !jf.ev_johto_director_done) {
+        this.runEvent('ev_johto_director');
+      } else if (id === 'radio-tower-3' && jf.radio_f2_cleared && !jf.radio_tower_cleared && !jf.ev_johto_radio_top_done) {
+        this.runEvent('ev_johto_radio_top');
+      }
+    }
   },
 
   boulderAt(x, y) {
@@ -1212,6 +1248,243 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
+    // ================= Stage J4b: the east actors =================
+    if (kind === 'pharmacist') {
+      if (flags.amphy_healed) { say(['Amphy\'s light is back over the water — the whole island saw it come on at dusk. That is the best review this pharmacy has ever had, trainer.']); return true; }
+      if ((st.bag.secretpotion || 0) > 0) { say(['That potion in your bag is the real article — my own mix, both hands, no shortcuts. Get it across the water to the lighthouse, and do not drop it. Amphy is counting on a steady hand.']); return true; }
+      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Amphy, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Olivine out of its depth.',
+        'This is the Secret Potion. My family\'s recipe, the strong one — we make it for exactly one patient at a time, and today the patient is a lighthouse. Carry it carefully, trainer. Half of Johto\'s ships steer by that light.'], () => {
+        st.bag.secretpotion = (st.bag.secretpotion || 0) + 1;
+        flags.secret_potion_got = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Got the Secret Potion!');
+      });
+      return true;
+    }
+
+    if (kind === 'jasmine_light') {
+      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Amphy is well, trainer, and every ship between here and Cianwood knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will Steelix.']); return true; }
+      if ((st.bag.secretpotion || 0) > 0) {
+        say(['That smell — honey and iron and something green. The Cianwood mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Amphy, love — medicine. The good kind, from across the water.'], () => {
+          st.bag.secretpotion = (st.bag.secretpotion || 0) - 1;
+          if (st.bag.secretpotion <= 0) delete st.bag.secretpotion;
+          flags.amphy_healed = true;
+          g.audio.playSfx('heal');
+          say(['She drinks. A long, shuddering breath — and then the lamp room does what it has done every dusk for a hundred years, all at once, like a held note finally sounded: the light comes on. Slowly. Then completely. Out past the harbor mouth, three ships sound their horns in answer.', 'Amphy is well. And I... I am free to be a gym leader again, with my whole heart in it. My gym is across the plaza, trainer. Come and take your battle — you have more than earned the queue jumping.'], null, 'JASMINE');
+        });
+        return true;
+      }
+      if (!flags.jasmine_asked) {
+        say(['Oh — a trainer. Forgive me, I — my name is Jasmine. I keep Olivine\'s gym, most days. These days I keep this room.',
+          'This is Amphy. Her light has guided Olivine\'s ships since before I was born, and she is sick — a fever no medicine in this city touches. The pharmacy in Cianwood, across Route 40, makes one thing that might: their Secret Potion. I cannot leave her. The ships cannot wait much longer. Trainer... would you go? For a lighthouse?'], () => { flags.jasmine_asked = true; });
+        return true;
+      }
+      say(['Amphy is holding on. The Cianwood pharmacy, trainer — across the sea road, Route 40. Their Secret Potion is her best hope, and you are its fastest ship.']);
+      return true;
+    }
+
+    if (kind === 'lance_lake') {
+      if (flags.red_gyarados_done) { say(['The lake is quiet — listen to it being quiet. That is our work, trainer. Mahogany next: whatever made this lake scream is buried under that town, and I mean to dig. Meet me there.']); return true; }
+      say(['Careful at the water\'s edge, trainer. Something in that lake is in pain, and pain that size does not stay in the lake for long. Whatever you came here to do — do it gently, or do it fast. Ideally both.']);
+      return true;
+    }
+
+    if (kind === 'lance_mahogany') {
+      if (flags.johto_hideout_cleared) { say(['The signal is dead and the lake is calm — I checked from the air at dawn. Team Rocket\'s Johto operation ended in that basement, trainer. What remains is the honest work: Pryce, Blackthorn, and a Conference with your name rising up its bracket.']); return true; }
+      if (!flags.red_gyarados_done) { say(['You have the look of a trainer between errands, so let me lend you one: the Lake of Rage, north of here. Something red is tearing it apart, and I do not believe in coincidences with scales. Look into it. Then come back and tell me what the water said.']); return true; }
+      say(['You saw the lake. You heard the signal in its screaming. The source is here, {player} — under the souvenir shop, behind the postcards: a transmitter, a power core, and the whole Johto operation of a team that should have stayed beaten.', 'Dragonite and I take the front. You take everything that moves behind us. Are you ready to go down?'], () => {
+        g.ui.showMenu('Enter the Rocket Hideout with Lance?', [
+          { label: 'Descend', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => { if (v === 'yes') this.runEvent('ev_johto_hideout'); });
+      });
+      return true;
+    }
+
+    if (kind === 'clair') {
+      if (jBadges.includes('risingbadge')) { say(['The Rising Badge sits well on you, {player}. The den chose, the shrine approved, and I — I concur, which the clan will tell you is the rarest of the three. The Conference road is yours. Do not waste it.']); return true; }
+      if (flags.clair_beaten) { say(['The gym is settled between us — the DEN is not. North of the town, through the cliff mouth: the Dragon\'s Den, the elder, the old questions, the shrine. The badge waits there, {player}. It has only ever waited there.']); return true; }
+      const ct = TRAINERS.clair;
+      say([ct.intro[0]], () => {
+        g.ui.showMenu('Challenge Clair?', [
+          { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startJohtoBattle('clair', (won) => {
+            if (!won) return;
+            flags.clair_beaten = true;
+            say(['North, then. The cliff behind this town, the water that runs black and patient — the Dragon\'s Den. The elder will ask you the old questions, and the shrine will ask its own. Pass, and the Rising Badge is yours by the clan\'s law. Fail... and you may try again. Dragons respect persistence almost as much as strength.'], null, 'CLAIR');
+          });
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'den_elder') {
+      if (jBadges.includes('risingbadge')) { say(['The badge rose, the shrine is quiet, and the dragons have a new name to respect, {player}. Walk the Conference road the way you walked this den: like you belong on it. You do.']); return true; }
+      if (!flags.clair_beaten) { say(['I am the elder of this den, and this is a place of judgment, not tourism. The test is for those Clair has faced and failed to dismiss — win her gym first, trainer, and then come and be weighed properly.']); return true; }
+      // The elder's test: three questions (every answer is heard —
+      // the choice law — and the elder's verdict names what the
+      // answers showed), then the shrine battle. Win the battle and
+      // the Rising Badge is awarded HERE, by the exact leader-award
+      // representation (badges.johto push + badge_rising flag) —
+      // the badge-count proof: 7 after the gym, 8 after the den.
+      say(['So. Clair faced you and could not dismiss you. Then the den will weigh what the gym could not. Three questions, trainer, the old ones. Answer as yourself — the shrine can hear varnish crack.', 'First: a young dragon in your care loses, badly, in front of the whole clan. What do you do?'], () => {
+        let honest = 0;
+        const ask2 = () => {
+          g.ui.showMenu('Second: what makes a dragon strong?', [
+            { label: 'A heart that trusts its trainer', value: 'honest' },
+            { label: 'Breeding and bloodline', value: 'proud' },
+            { label: 'Fear. Theirs, of me', value: 'cruel' },
+          ], (v2) => {
+            if (v2 === 'honest') honest++;
+            say(['Last: your rival stands where you are standing, asking for the badge you came for. What do you hope for them?'], () => {
+              g.ui.showMenu('The elder waits.', [
+                { label: 'That they pass, and meet me at the top', value: 'honest' },
+                { label: 'Nothing. The den decides', value: 'proud' },
+                { label: 'That they fail where I did not', value: 'cruel' },
+              ], (v3) => {
+                if (v3 === 'honest') honest++;
+                flags.den_test_done = true;
+                const verdict = honest >= 2
+                  ? 'Your answers have the shape of the thing itself, trainer. The clan has a word for trainers like you, and it is not a small one.'
+                  : 'Your answers are... armored. But armor can be learned out of a person, and the shrine\'s question is the honest one. Let us see which of you shows up to it.';
+                say([verdict, 'Now the shrine asks its question. Keeper Sora — the floor is yours.'], () => {
+                  this.startJohtoBattle('den_shrine', (won) => {
+                    if (!won) return;
+                    if (!st.badges.johto.includes('risingbadge')) st.badges.johto.push('risingbadge');
+                    flags.badge_rising = true;
+                    g.audio.playSfx('badge');
+                    say(['It is decided, then — by gym, by word, and by battle, the full measure of the old law.', 'The RISING BADGE is yours, {player}. Eight badges. The whole of Johto, answered. Clair will hear of this before you reach the town — the den has its own ways of telling her. The road north is open now: Route Silver, Silver Town, and the Conference that has been waiting for you since New Bark.'], null, 'DEN ELDER');
+                  });
+                });
+              });
+            });
+          });
+        };
+        g.ui.showMenu('The elder waits.', [
+          { label: 'Kneel. It lost with me, not for me', value: 'honest' },
+          { label: 'Train it harder before dusk', value: 'proud' },
+          { label: 'Trade it for a stronger one', value: 'cruel' },
+        ], (v1) => { if (v1 === 'honest') honest++; say(['Second question comes the way weather does, trainer — whether you are ready or not.'], ask2, 'DEN ELDER'); });
+      });
+      return true;
+    }
+
+    if (kind === 'silver_gate') {
+      if (jBadges.length >= 8) { say(['Eight badges, counted with my own eyes — the pass is yours, Conference trainer. Hald, veteran of this road, at your service. Silver, when you are ready, is in the stadium. So is the young man with the red hair\'s opposite number. Make it a good one.']); return true; }
+      say(['Pass Officer Hald — the League keeps me at this end of the road to count, so let me count for you, trainer: ' + jBadges.length + ' of 8 Johto badges in that case.', 'The rule is the rule, and it turns nobody away forever: earn the eight — Blackthorn and the Dragon\'s Den hold the last of it for most — and this road opens like it was built for you. Because by then, trainer, it will have been.']);
+      return true;
+    }
+
+    if (kind === 'conference') {
+      if (flags.johto_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Conference book in the good ink, trainer. Whatever mountain is next — and there is always a next one — Silver Town was glad to host this chapter.']); return true; }
+      if (jBadges.length < 8) { say(['Conference registration, trainer — and I can see by your case that the road is not finished with you yet. Eight Johto badges open this bracket. You hold ' + jBadges.length + '. Blackthorn is the usual last stop. I will keep your page open.']); return true; }
+      if (!flags.conference_registered) {
+        say(['Eight badges. Counted, verified, and — if I may — well carried, trainer. Let me write your name into the Silver Conference properly... There. Registered.', 'The bracket: two qualifying battles, here in this stadium, then the names you already know are waiting deeper in. Gary is on the far side of the draw. He asked me to tell you the bracket was "finally interesting." His words. Begin when you are ready — speak to me for each qualifier.'], () => {
+          flags.conference_registered = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Registered for the Silver Conference!');
+        });
+        return true;
+      }
+      if (!flags.beat_conference_q1) {
+        say(['Qualifier one, trainer. Brenna, of the western road — a clean battler with a cleaner record. The floor is yours when you call it.'], () => {
+          g.ui.showMenu('Begin qualifier one?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startJohtoBattle('conference_q1', null); });
+        });
+        return true;
+      }
+      if (!flags.beat_conference_q2) {
+        say(['One down. Qualifier two: Cato, who has been telling the stands all morning that the draw did him a favour. Correct him, would you?'], () => {
+          g.ui.showMenu('Begin qualifier two?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startJohtoBattle('conference_q2', null); });
+        });
+        return true;
+      }
+      if (!flags.beat_gary_johto) { say(['The qualifiers are behind you, and the whole stadium knows what is next. Gary is on the pitch, pretending not to warm up. Go and give these people the match they came for.']); return true; }
+      if (!flags.harrison_faced) { say(['Gary is beaten, and the bracket has one name left on your side of it: Harrison, in the quarter-final. He is standing by the pitch with his Houndoom and his good manners. End this Conference properly, trainer.']); return true; }
+      say(['The Conference is decided, and decided honestly. The book has it. So does everyone who was here.']);
+      return true;
+    }
+
+    if (kind === 'gary_stadium') {
+      if (flags.johto_complete) { say(['Still here? The Conference is over and you are still the story of it — even Harrison\'s people are telling it your way. Go home, {player}. Pallet first. It is what the road is FOR. Smell ya later — and I mean that warmer than it sounds.']); return true; }
+      if (flags.beat_gary_johto) { say(['Beaten, and — fine, I will say it in the open where it costs me: beaten FAIR, by the best version of you there has ever been. Harrison is next, {player}. He is better than his bracket manners suggest. Do not lose to him after beating me. I would never recover, and neither would you.']); return true; }
+      if (!flags.conference_registered) { say(['Registration first, {player}. Even I had to sign the book — the official, by the bracket board. Then qualifiers. THEN you may lose to me properly, in order, like tradition demands.']); return true; }
+      if (!flags.beat_conference_q2) { say(['Qualifiers first. Brenna, then Cato — the bracket is the bracket, even for the main event. I will be right here, being patient at a professional standard.']); return true; }
+      const gt = TRAINERS.gary_johto;
+      say(gt.intro.map((l) => l.replace('{player}', st.player.name)), () => {
+        g.ui.showMenu('Face Gary — the Silver Conference centrepiece?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => { if (v === 'yes') this.startJohtoBattle('gary_johto', null); });
+      }, 'GARY');
+      return true;
+    }
+
+    if (kind === 'harrison') {
+      if (flags.johto_complete) { say(['The Conference book is closed and your name is in it in the good ink, trainer. Whatever either of us does next, this stadium saw the real thing. Travel well. Houndoom and I will be telling this one for years.']); return true; }
+      if (!flags.beat_gary_johto) { say(['Harrison, from Littleroot Town. We are on a collision course, you and I — but Gary is your road to me, and the bracket does not bend. Beat him first. I will be here, and I will be ready either way.']); return true; }
+      // The quarter-final (mechanism recorded at his trainer def):
+      // a real full-strength battle, fought FRIENDLY — the predicate
+      // is FACED, not won. Win or lose, the branch-true honours play,
+      // johto_complete is set, and the Foundation machine itself
+      // fires (checkArcCompletion — ARC COMPLETE card, regionsDone,
+      // the pinned Hoenn directive; nothing here writes regionsDone).
+      say(['So it is us. Gary is beaten — I watched it from the tunnel, and I will carry that match with me whatever happens here.', 'Quarter-final rules, trainer, and Conference stakes. Give me everything you gave him. Houndoom and I did not cross the bracket for less.'], () => {
+        g.ui.showMenu('The quarter-final — face Harrison?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          const ht = bondTrainerVariant(g.state, TRAINERS.harrison);
+          g.scenes.push(new BattleScene({
+            kind: 'trainer', trainer: ht, returnTo: this, rt: rtOf(g), friendly: true,
+            onEnd: (won, fled) => {
+              if (fled) return;
+              recordBattleBond(g.state, ht.id, won, fled);
+              flags.harrison_faced = true;
+              if (won) flags.harrison_won = true; else flags.harrison_lost = true;
+              const lines = won ? [
+                '...Well. WELL. The card says your name, trainer — the judges did not even deliberate. An upset, the papers will call it. It was not an upset. I was there. It was a better team, on a bigger day.',
+                'Take the semi-final road with my respect — you have beaten the two best trainers in this bracket back to back, and one of them is standing here applauding. The Conference is yours in every way that history checks.',
+              ] : [
+                '...It is decided. The final exchange — Houndoom endures, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Harrison.',
+                'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
+                'Gary is in the tunnel, trainer. Even he is applauding. Especially him, though he will deny the especially.',
+              ];
+              say(lines, () => {
+                flags.johto_complete = true;
+                g.audio.playSfx('badge');
+                say(['Silver Conference — the run ends in honours, and Johto ends with it: eight badges, a rivalry settled, a lake calmed, a tower retaken, and a Conference that will be argued about in Silver Town for a decade. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+              }, 'HARRISON');
+            },
+          }));
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'red') {
+      if (!flags.johto_complete) { say(['...'], null, 'RED'); return true; }
+      if (flags.red_defeated) {
+        say(['...!', '...'], () => {
+          g.ui.showMenu('Battle Red again?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startJohtoBattle('red', null); });
+        }, 'RED');
+        return true;
+      }
+      say(['...'], () => {
+        this.startJohtoBattle('red', (won) => {
+          if (!won) return;
+          flags.red_defeated = true;
+          say(['...!!', 'He tips his cap — once, the way a mountain might bow — and turns back to the snow and the silence, satisfied in a way that has nothing to do with winning. Some names are not beaten, exactly. They are answered. His was.'], null, 'RED');
+        });
+      }, 'RED');
+      return true;
+    }
+
     // ---- the west leaders ----
     const LEADERS = {
       falkner: { badge: 'zephyrbadge', gate: 'sprout_tower_done',
@@ -1223,6 +1496,18 @@ Object.assign(OverworldScene.prototype, {
         post: 'No crying this time — I practiced! Come back for a rematch whenever, Plain Badge holder. Miltank asks about your team by name now. By NAME.' },
       morty: { badge: 'fogbadge', gate: null, gateLines: [],
         post: 'The fog keeps its counsel and so do I. Walk carefully in it, Fog Badge holder — it has decided you are interesting.' },
+      // Stage J4b east leaders on the same runner: Jasmine's battle
+      // is gated on the potion delivery ONLY (amphy_healed — either
+      // gym order works; nothing else gates her), and Pryce's on the
+      // hideout (canon order — the occupation ends first).
+      chuck: { badge: 'stormbadge', gate: null, gateLines: [],
+        post: 'Any time the sea brings you back, Storm Badge holder, my gym is its loudest address. Bring your hands — and your appetite. My wife insists on feeding challengers who survive me.' },
+      jasmine: { badge: 'mineralbadge', gate: 'amphy_healed',
+        gateLines: ['I am sorry — truly. I cannot battle while Amphy is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my Steelix deserves better from me. The light first, trainer. Please. The light first.'],
+        post: 'Amphy\'s light and your Mineral Badge, trainer — Olivine shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
+      pryce: { badge: 'glacierbadge', gate: 'johto_hideout_cleared',
+        gateLines: ['Not yet, challenger. My town is sitting on a Rocket nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Lance is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
+        post: 'The lake is calm, the town is ours, and the Glacier Badge is where it belongs — with the warm-hearted. Winter remembers you kindly, trainer. That is rarer than the badge.' },
     };
     const L = LEADERS[kind];
     if (!L) return false;

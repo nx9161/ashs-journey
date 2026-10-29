@@ -6737,3 +6737,272 @@ non-warp tiles + walk-to-actor BFS from every entry).
   rides the awakened talk) — a deliberate chain-order gate (burned
   → fog in JOHTO_QUESTS). If QA wants the battle offerable
   pre-tower, it is a one-branch change in runJohtoNpc.
+
+## Arc 2 Stage J4b — Johto story, EAST + Silver Conference + completion (2026-10-29)
+
+Base: main @ a0cabb7 (J4a). Deliverables: the east chain appended at
+the J4a seams in `src/data/story-johto.mjs` (12 quest rows, 19 trainer
+defs, 10 events, 4 tales, 11 NPCs, 12 patches), the Secret Potion key
+item, east Ground assignments, the sysLoadMap J4b gates + the
+runJohtoNpc east handlers + the loadMap `johto` patch stamp, tables
+regenerated via gen-tables ONLY (items 144 → **145**), and
+`tests/johto-story-checks.mjs` extended 41 → **90 checks**. All
+dialogue is original writing in the game's voice. maps6.mjs and its
+generator are untouched; `personal/` is byte-identical.
+
+### 1. Staging decisions
+
+- **The medicine errand (Olivine ⇄ Cianwood):** Jasmine stands in the
+  Glitter Lighthouse lamp room (a second instance in her gym runs the
+  battle). The ask sets `jasmine_asked`; the Cianwood pharmacy
+  (PHARMACIST WREN, patched in `house-cianwood`) hands over the
+  **Secret Potion** (new key-pocket ITEMS row `secretpotion`)
+  unconditionally — so the Cianwood-first order works: a player who
+  sails r40 first can take the potion and the Storm Badge before ever
+  meeting Jasmine (suite E29). The delivery (lighthouse talk with the
+  potion in the bag) removes it and sets `amphy_healed`; Jasmine's
+  BATTLE is gated on `amphy_healed` and nothing else (LEADERS gate —
+  E03/E07). Amphy has no overworld body — there is no overworld
+  species art (the Wave-0 Cubone precedent); Amphy is present through
+  the lamp-room scene itself.
+- **Silver, second clash (Ilex Forest):** two stagings of one beat,
+  `ev_johto_silver_ilex_won` / `_lost`; sysLoadMap picks by J4a's
+  `silver_r30_won` flag, so his opening lines genuinely branch on the
+  Route 30 outcome (E01/E34). Gate: `silver_reported` + `badge_fog`
+  (it is an east beat — it cannot fire during the west traverse).
+  Shared battleAny: his Croconaw grown (134), Golbat, Sneasel.
+- **Red Gyarados:** a map-entry event wildBattle (Gyarados Lv 162,
+  CATCHABLE, no uncatchable flag). The runSteps fled guard is the
+  whole law: fleeing sets nothing and the event re-fires on the next
+  entry (E08); a catch (proven by Master Ball in E09) or a KO
+  resolves it once, and `red_gyarados_done` gates it forever (E10).
+  Lance's aftermath plays inside the same event (he names the radio
+  signal and points at Mahogany's souvenir shop; `lance_met`).
+- **The Rocket Hideout has NO interior map** — J3b authored none for
+  Mahogany and maps6 stays untouched by this stage's brief, so the
+  hideout is staged as a scripted DESCENT event (`ev_johto_hideout`)
+  run from Lance in Mahogany: trapdoor dialogue → grunt → grunt →
+  the Electrode power core (a wildBattle, Lv 166, uncatchable — a
+  machine's heart staged as a battle) → Executive Vey → the signal
+  dies. Lance fights beside the player in the dialogue between
+  beats, not as a mechanic. Must-win `{ battle }` steps mean a loss
+  stalls the chain with no flag — re-talking to Lance re-runs the
+  descent; it can never half-clear (E11). A bespoke hideout interior
+  map is a future map-stage candidate (see leftovers).
+- **Pryce** is gated on `johto_hideout_cleared` (canon order — the
+  occupation ends first; E35).
+- **The Radio Tower takeover** stages AFTER the hideout, in canon
+  order, as flag-staged floor events: tower-1 entry (post-hideout)
+  fires the takeover + floor-1 grunt; tower-2 without the rescue
+  plays the locked-door scene (once) pointing at the Underground;
+  the real Director, held in `goldenrod-underground-2`, is freed in
+  an event battle and gives the **Card Key** — the shipped `cardkey`
+  ITEMS row (one representation, Silph → Radio Tower). The tower's
+  lock reads the RESCUE flag, not the bag (a veteran player already
+  carries Silph's card; the Director's own key is the rescue). With
+  the rescue, tower-2 runs its gauntlet; tower-3 runs the fake
+  Director (`rocket_director_fake`) and sets `radio_tower_cleared` —
+  Rocket leaves Johto (E13–E17). Before the hideout the tower is
+  QUIET (E36). NO Clear Bell is awarded here — J5's Kimono sisters
+  own it, per the designed arc steps.
+- **Clair + the Dragon's Den:** Clair's trainer def carries NO badge
+  on purpose. Her gym win sets `clair_beaten` only — the suite's
+  badge-count proof shows **7 after the gym** (E18). The Den Elder
+  (patched in `dragons-den`) runs the test: three questions (every
+  answer is heard, per the choice law; the elder's verdict names
+  what the answers showed), then the shrine battle (Keeper Sora,
+  Dragonair 174 / Kingdra 177). Winning writes the badge by the
+  EXACT leader-award representation — `risingbadge` pushed to
+  `badges.johto` + the `badge_rising` flag, badge sfx — **8 after
+  the den** (E19).
+- **The route-silver badge gate** is a sysLoadMap gate in the
+  engine's event idiom: entering `route-silver` with fewer than 8
+  Johto badges fires `ev_johto_silver_gate` (a League official's
+  word + a warp back to Blackthorn's east edge at (28,8)). The badge
+  count is the gate (never the event's done flag), so it cannot be
+  bypassed by having seen it; the player is turned back with
+  directions, never stuck (E30). Past the gate, Silver's third clash
+  fires on the same road (battleAny; Crobat / Sneasel / Magneton /
+  Feraligatr 178–184) and the rivalry closes in words either way:
+  he concedes the race, names what he is going back to Azalea to
+  learn, and steps out of the road (E20).
+- **The Silver Conference** (silver-stadium): the patched CONFERENCE
+  OFFICIAL registers the player (8 badges) and runs the two
+  qualifiers (Brenna 180–184, Cato 183–186). **Gary is a REAL
+  must-win trainer battle** (standard league idiom): his team is
+  built from his Kanto identity, grown — Pidgeot 186, Alakazam 188,
+  Arcanine 189, Gengar 190, Umbreon 191, Blastoise 193 ace
+  (Tide Pearl). Losing leaves `beat_gary_johto` unset; he is
+  re-challengeable after healing — proven by a loss-then-win drive
+  (E31). No soft-lock.
+- **HARRISON — the mechanism, and why (RECORDED):** the brief's
+  preference (a), a scripted climax, is **inexpressible in this
+  engine**: the only endure hook is the classic battle's tutorial
+  lesson-mon (battle.mjs, gated on the tutorial flag, wild foes
+  only); trainer battles expose no scripted-outcome / forced-result
+  step; and runSteps has no conditional branch for post-battle text.
+  So branch **(b)** ships, exactly as the brief specifies: a REAL
+  full-strength battle (Sneasel 192, Xatu 193, Hypno 194, Steelix
+  195, Miltank 196, Houndoom 198 — the canon core plus Xatu as the
+  in-roster sixth) fought FRIENDLY through the stadium handler,
+  whose completion predicate is **FACED**: win or lose, the branch
+  flag records the honest outcome, branch-true text plays
+  (canon-honours on a loss — the quarter-final loss stands, judges'
+  card and all, staged with dignity and Gary applauding in the
+  tunnel; upset-acknowledged text on a win), and `johto_complete`
+  is set either way. Both branches are suite-proven (E24 win on the
+  true path, E32 loss on a branch drive — friendly, so a loss never
+  blackouts out of the stadium).
+- **Completion rides the Foundation machine, untouched:** the
+  Harrison handler sets ONLY `johto_complete` (the registry's
+  completionFlag) and calls `checkArcCompletion(g)` — the machine
+  writes `regionsDone 'johto'`, plays the ARC COMPLETE card, and
+  pins the Hoenn directive itself (E25: card flag, regionsDone,
+  `arc_directive 'hoenn'`, arc still `johto`). The drive then
+  ferries/walks home and **Homecoming #3** fires in Mom's house:
+  Hawthorn's Hoenn hook delivered from the registry, directive
+  cleared, and because Hoenn's row is `sealed`, the ritual completes
+  with arc unadvanced and NO embark flag — zero dangling state
+  (E26). Nothing in this stage hand-writes regionsDone.
+- **Red (post-completion):** one NPC on the `mt-silver-cave` dais.
+  Before `johto_complete` he offers only "..." and no battle (E33).
+  After it, talking starts the battle: the canon team at the band
+  ceiling — Espeon 195, Snorlax 196, Venusaur 197, Charizard 198,
+  Blastoise 198, Pikachu 200. Beating him sets `red_defeated`,
+  which completes the post-game quest row `q_johto_red` — an
+  honours line in the log, a gate on nothing. Rematchable: post-win
+  talks offer the battle again (E27).
+
+### 2. Gym table — all 8 Johto gyms (completed)
+
+| Gym | Leader | Team (levels) | Ace keepsake | Ground |
+|---|---|---|---|---|
+| Violet | Falkner | Pidgeotto 108, Noctowl 111, Pidgeot 114 | Sparrow Feather | Storm |
+| Azalea | Bugsy | Ariados 120, Heracross 123, Scizor 126 | Iron Acorn | Bloom |
+| Goldenrod | Whitney | Clefairy 131, Snubbull 134, Miltank 138 | Tortoise Charm | Open |
+| Ecruteak | Morty | Gastly 140, Haunter 143, Misdreavus 145, Gengar 148 | Spectre Bell | Grave |
+| Cianwood | Chuck | Primeape 148, Poliwrath 151, Machamp 154 | Second-Wind Ribbon | Rubble |
+| Olivine | Jasmine | Magnemite 154, Magneton 157, Steelix 160 | Fossil Spur | Tide |
+| Mahogany | Pryce | Seel 162, Dewgong 165, Piloswine 168 | Tortoise Charm | Frost |
+| Blackthorn | Clair | Dragonair 172, Dragonair 174, Gyarados 175, Kingdra 178 | Tide Pearl | Ember (gym) |
+
+The Rising Badge is awarded in the Dragon's Den (Grave Ground), not
+the gym — see §1. Grounds are all from the existing 15 (NO new
+Grounds): east landmarks — lighthouse + Lake of Rage Tide, Radio
+Tower Storm, Dragon's Den Grave, Silver Stadium Open (the
+league-floor precedent), Mt. Silver summit cave Frost.
+
+### 3. Flag map (every J4b story flag + its consumer)
+
+- `jasmine_asked` — the lighthouse ask scene. Consumed by:
+  Jasmine's lighthouse repeat lines. (The pharmacist does NOT read
+  it — the potion is served either order, by design.)
+- `secret_potion_got` — the pharmacist's grant. Consumed by: the
+  pharmacist's repeat lines.
+- `amphy_healed` — the lighthouse delivery. Consumed by:
+  q_johto_potion, Jasmine's gym gate, the lighthouse + pharmacist
+  post lines.
+- `badge_storm` / `badge_mineral` / `badge_glacier` + `beat_chuck` /
+  `beat_jasmine` / `beat_pryce` — winTrainer auto-flags (Clair:
+  `beat_clair` only, no badge flag — the den writes `badge_rising`).
+- `silver_ilex_won` / `silver_ilex_lost` (exactly one) +
+  `silver_ilex_done` (+ auto `ev_johto_silver_ilex_*_done`) — the
+  Ilex battleAny branch record; consumed by the suite's honesty
+  check (the J4a pattern).
+- `red_gyarados_done` — the lake event, post-battle only. Consumed
+  by: q_johto_redgyarados, the lake re-fire gate, Lance's lines.
+- `lance_met` — the lake aftermath. Record flag (Lance's Mahogany
+  gate reads `red_gyarados_done`).
+- `johto_hideout_cleared` — the hideout event's final step.
+  Consumed by: q_johto_hideout, Pryce's gate, the Radio Tower
+  takeover gate, Lance's post lines.
+- `beat_rocket_hideout_1/2`, `beat_rocket_hideout_exec` —
+  winTrainer auto-flags inside the descent.
+- `radio_takeover_active`, `radio_f1_cleared` — the takeover event.
+  Consumed by: the tower-2 / underground staging gates.
+- `radio_locked_seen` — the locked-door scene's once-gate.
+- `radio_director_rescued` — the Director event (which also grants
+  the `cardkey` item). Consumed by: the tower-2 gauntlet gate —
+  THIS flag is the tower's key (see §1).
+- `radio_f2_cleared` — the floor-2 event. Consumed by: the tower-3
+  gate. `radio_tower_cleared` — the top-floor event. Consumed by:
+  q_johto_radio; the tower is quiet afterwards.
+- `beat_rocket_radio_1/2`, `beat_rocket_underground`,
+  `beat_rocket_director_fake` — winTrainer auto-flags.
+- `clair_beaten` — Clair's handler on a gym win. Consumed by:
+  Clair's post-gym lines, the Den Elder's gate.
+- `den_test_done` — the elder's questions completed (set before the
+  shrine battle). Record flag for the test's dialogue half.
+- `badge_rising` — written by the den award with the
+  `badges.johto` push (the exact leader representation).
+- `conference_registered` — the Official's registration. Consumed
+  by: q_johto_conference, the bracket flow (Official / Gary /
+  Harrison handlers).
+- `beat_conference_q1` / `beat_conference_q2` / `beat_gary_johto` —
+  winTrainer auto-flags. Consumed by: the bracket flow;
+  `beat_gary_johto` also completes q_johto_gary and unlocks
+  Harrison.
+- `harrison_faced` + `harrison_won` XOR `harrison_lost` — the
+  Harrison handler's FACED record. Consumed by: the Official's post
+  lines; the completion proof.
+- `johto_complete` — the Harrison handler. Consumed by: the
+  Foundation machine (`arcCompletionMet` → card / regionsDone /
+  directive), Red's gate, the Conference post lines. THIS stage
+  never writes `regionsDone` itself.
+- `silver_route_won` / `silver_route_lost` (exactly one) +
+  `silver_route_done` — the Route Silver battleAny record.
+- `red_defeated` — Red's handler on a win. Consumed by:
+  q_johto_red (the honours row). Red stays rematchable.
+
+### 4. Suite + battery at this commit
+
+- `tests/johto-story-checks.mjs` **90/90** — J4a's 41 (assertions
+  A02/A11/A15/A18 extended to the full chain: 22 quests, 10 tales,
+  items 145, 24 patches) + A19–A29 east units + the EAST TRUE PATH
+  on one continuous save (E01–E28: Ilex clash → errand both halves
+  → Storm → delivery → Mineral → Gyarados flee→re-fire→catch →
+  hideout → Glacier → Radio Tower in staging order → Clair 7 →
+  Den 8 → Silver's third clash → an east tale → Conference →
+  Gary → Harrison → machine → Homecoming #3 → Red → Quest Log,
+  the save validating server- and client-side at full prefix) +
+  branch drives E29–E36 (Cianwood-first order, the badge gate,
+  Gary lose→re-challenge, Harrison loss, Red's gate, the Ilex
+  lost-branch staging, Pryce's gate, the quiet tower) + B23/B24
+  validator prefix proofs.
+- Supersession recorded: cheat-shop A02 items **144 → 145** (the
+  Secret Potion row), updated in place.
+- Battery: fidelity **35/35** · validator **78/78** · save-contract
+  **6/6** · cheat-shop **44/44** · arc-foundation **47/47** ·
+  orange-story **38/38** · orange-climax **42/42** ·
+  campaign-smoke **24/24** · qa-changed-flows failures exactly
+  **{b2, d9}**.
+- Fresh build (vercel + guest) OK — `public/game.js` **7,076,169
+  bytes**. **personal/ byte-identical** (sha256 f434ba63…,
+  a780af0b…; untouched — vercel+guest targets only). NOT pushed,
+  NOT deployed.
+
+### 5. Leftovers, named
+
+- **J5 reads, unchanged:** `beasts_awakened` (beast arcs arm),
+  `gsball_delivered` / `kurt_has_ball` / `gsball_at_kurt_house`
+  (Celebi — the ball never moved in J4b), Ho-Oh at the Bell Tower.
+  The Clear Bell was deliberately NOT awarded in the Radio Tower
+  beat — it is the Kimono sisters' to give in J5's designed steps.
+- **J7:** the arc-chain drive extension (one continuous save
+  Kanto→Orange→Johto→Homecoming #3 + systems) is J7's stage; this
+  stage proves the Johto leg + completion + homecoming on the
+  johto-story save.
+- **Prefix-law note (standing J4a plumbing, surfaced honestly):**
+  badges are a validator PREFIX of the canonical earn order
+  (storm before mineral). The brief's either-order case — Cianwood
+  first (Storm → Mineral) — works and is proven (E29). A player who
+  ferries back from Cianwood WITHOUT fighting Chuck and then beats
+  Jasmine first would push `mineralbadge` ahead of `stormbadge` in
+  `badges.johto`, the same out-of-order exposure the west's ungated
+  leaders already carry under J4a's plumbing; closing it (order-
+  enforcing gates or order-normalizing awards) is a coordinator
+  call, not a J4b change.
+- **No hideout interior map exists** (see §1): if a later map stage
+  authors one under Mahogany's shop, the descent event's battles
+  can be re-homed into it without flag changes — every flag the
+  gauntlet sets is location-independent.

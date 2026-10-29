@@ -162,6 +162,28 @@ export const MAP_GROUND = {
   'burned-tower-2': 'grave',
   'elm-lab': 'open',
   'kurt-house': 'open',
+  // Stage J4b: Johto east gym signature Grounds (existing 15 only —
+  // no new Grounds this stage): Chuck's shore gym rides the Rubble
+  // (physical moves land true where the waves hit), Jasmine's harbor
+  // gym the Tide, Pryce's the Frost, Clair's the Ember (the den's
+  // lava-hearted dark). Landmarks follow their feel: the lighthouse
+  // and the Lake of Rage run Tide, the Radio Tower hums Storm, the
+  // Dragon's Den keeps Grave reverence, the Silver Stadium takes
+  // Open (the league-floor precedent), and Mt. Silver's summit cave
+  // is Frost ground.
+  'gym-cianwood': 'rubble', // Cianwood Gym — Chuck
+  'gym-olivine': 'tide', // Olivine Gym — Jasmine
+  'gym-mahogany': 'frost', // Mahogany Gym — Pryce
+  'gym-blackthorn': 'ember', // Blackthorn Gym — Clair
+  'lighthouse-1': 'tide',
+  'lighthouse-2': 'tide',
+  'lake-of-rage': 'tide',
+  'radio-tower-1': 'storm',
+  'radio-tower-2': 'storm',
+  'radio-tower-3': 'storm',
+  'dragons-den': 'grave',
+  'silver-stadium': 'open',
+  'mt-silver-cave': 'frost',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',
