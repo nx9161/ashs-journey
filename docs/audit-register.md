@@ -4908,3 +4908,214 @@ for a future wave, exactly as the implementer recorded.
 Mission grade: **PASS WITH NOTES** — W8's claims survive cold
 verification; the Premium+ art mission is complete with L1–L6
 honestly on the books.
+
+## Arc Chain Stage F — Foundation (2026-10-29)
+
+Implementer pass for the arc chain (ADR-027 + Amendments 1–2; roadmap
+`~/workspace/ashs-journey-qa/arc-roadmap-platinum.md` §2/§7). The
+foundation only: registry, transition machine, ferry-network rule,
+dex/HUD horizon presentation, Journey grouping, and the level-band
+cap conversion. NO new region content (Valencia + the Vermilion ferry
+NPCs land in Stage O1), nothing deployed, **personal/ byte-identical**
+(shas verified against HEAD at commit time).
+
+### 1. The ARCS registry — `src/data/arcs.mjs` (new, single arc source)
+
+Rows: `kanto` (Arc 1, Yellow, ch [1], horizon 151, band 1–100 idx 1,
+badgeSet kanto/8, status shipped, origin — embarkPort null) ·
+`orange` (Arc 1.5, anime-original, ch [2], horizon 151, band SHARES
+Kanto {1,100,1}, orange/4, status **next**, embark vermilion →
+arrival valencia) · `johto` (Arc 2, ch [3,4,5], 251, {101,200,2},
+johto/8, embark pallet → newbark) · `hoenn` (Arc 3, ch [6], 386,
+{201,300,3}, hoenn/8, vermilion → littleroot) · `frontier` (Arc 3.5,
+ch [7], 386, band **null = open level**, symbols/7, regionKey kanto)
+· `sinnoh` (Arc 4, Platinum, ch [8], 493, {301,400,4}, sinnoh/8,
+vermilion → sandgem) · five sealed future rows `unova`/`kalos`/
+`alola`/`journeys`/`horizons` (ch 9–13, horizon 1025, bands continue
+the pattern as data). Each row carries `completionKey`,
+`completionFlag` (the registry completion-test hook — Kanto's is the
+shipped `champion`; later arcs' flags are named now so their stages
+register data, not machinery), `hookGiver`, `summaryLines`,
+`hookLines`, `enRouteLines` (all player-facing copy original; the
+Kanto→Orange hook is the GS Ball errand in the roadmap §2.3 voice,
+spoken by Prof. Hawthorn — this game's professor; later hooks are
+honest single-purpose lines, the sealed rows future-tense with no
+playable claims). Helpers: `arcById`, `arcForChapter`, `nextArcOf`,
+`currentArcOf`, `levelCapFor` (band max; open level = **Infinity** —
+the documented convention, so `<`/`>=`/`Math.min` consumers behave
+unchanged), `dexHorizonFor`, `arcDexSpan` (previous distinct horizon,
+so Orange shares 1–151 and the Frontier shares Hoenn's 252–386),
+`badgeCountFor`, `arcCompletionMet`, `arcStateOf` (complete/current/
+locked-next/sealed from regionsDone + story.arc + directive; a
+registry-`sealed` arc can never read locked-next), `deriveArcDefaults`.
+
+### 2. Save state — `story.arc` / `arc_directive` / snapshots
+
+`defaultState` gains `story.arc: 'kanto'`, `story.arc_directive:
+null`, `story.arcDexStart: 0`, `story.arcStartPlaytime: 0` (schema
+version stays 2; no existing field changes shape). The fill path
+(`schema.mjs` → `deriveArcDefaults`, run on every load) derives
+legacy state: mid-Kanto → arc kanto, no directive; **Kanto-complete
+→ arc 'kanto' with the directive pending on 'orange'** — completion
+is read from regionsDone OR a HoF entry OR the shipped `champion`
+flag (the shipped game never wrote regionsDone; HoF/flag are its
+real completion evidence). Design decision, flagged: the derived
+`story.arc` stays `'kanto'` until the homecoming walks it forward —
+the directive field carries the pending target, so
+`currentArcOf`/caps/horizons keep reading the arc the player is
+actually finishing. Snapshots default truthfully for Arc 1 (0/0 —
+the journey began there) and to current totals for later arcs; a
+spent directive (hook flag set) is never re-derived. Client schema
+validates the four fields (closed arc vocabulary, bounded counters);
+the server validator does the same from the `arcs` table gen-tables
+now emits from the registry (tables.json regenerated via the tool,
+`--check` clean) — a migrated legacy completed save passes BOTH
+validators (suite A27).
+
+### 3. The transition machine — `src/game/arcs.mjs` (new)
+
+Registry-driven, names no region. `checkArcCompletion(g, done)`:
+when the current arc's predicate holds and `arc_card_<id>` is unset,
+it commits first (flag + regionsDone += completionKey + directive =
+next arc), then shows the **ARC COMPLETE card** — title, badges
+n/total for the arc's badgeSet, the registry league-result lines,
+dex gained this arc (caught − arcDexStart) + running national
+n/horizon, the HoF team (latest entry; portraits live in the HoF
+viewer — the card is a dialogue card in the game's ending idiom, the
+surface CREDITS_LINES play on, so every headless drive that drains
+the credits drains this), playtime this arc, and the forward line.
+Call sites: `runEnding` (the shipped HoF path — the event chain
+resumes after the card) and `sysLoadMap` (legacy completers get
+their card on first entry). **Homecoming** (`tryHomecoming`, hooked
+in `sysLoadMap` for `house-pallet-ash` — the real Mom's-house map
+id): Mom's welcome → the summary in fiction (Hawthorn's dex rating,
+relayed) → the next arc's registry hook scene; completion clears
+the directive, sets `story.arc`/`story.region`, stamps both
+snapshots, sets `hook_<id>` + `embark_<id>`. **Sealed next arc:**
+the ritual completes (hook delivered, directive cleared) but the
+arc does NOT advance and NO embark flag is set. Amendment 1 holds
+throughout: the machine touches flags + story.arc only — party,
+levels, items, money, dex, honors are never read for writing.
+**Quest Log:** while the directive is set, a pinned first entry
+'★ Go home — return to Pallet Town' (value `arcdirective`) shows
+the directive text; it completes no other way.
+
+### 4. Ferry network generalization
+
+The handler (`overworld-systems.mjs` `sysNpc` ferry branch) gained
+the network rule beside the untouched plain path: an NPC with
+`ferryArc: '<arcId>'` offers travel iff `arcFerryAllowed` — the
+embark is armed (`embark_<id>`) OR the arc was reached before
+(`reachedarc_<id>`, stamped by any completed crossing, or the
+arrival map's `reached_<map>` flag). Riding plays the registry
+en-route card ('— days at sea —') before landing via the dest map's
+start. The three shipped NPCs carry no `ferryArc` and keep the exact
+prior behaviour (the landing steps were factored into one closure
+shared by both branches — behaviour-identical). Headless proof with
+the existing maps (suite B10–B12): a Pallet→Vermilion test port
+stays gated pre-embark, sails post-embark, and the return leg sails
+with the embark flag DELETED (reached is enough — no-soft-lock).
+
+### 5. Dex / HUD presentation (data layer untouched, DEX_TOTAL 1025)
+
+HUD pill (`overworld.mjs` syncHud): `Dex n/` + `dexHorizonFor(state)`
+(151 in Arcs 1/1.5). Dex screen (`main.mjs` openDex): two header
+lines under the chapter row (which stays items[0] — the
+qa-changed-flows anchor) — **Regional** (current arc's span,
+caught/total) and **National — Platinum horizon: n/493 (pct%)** —
+plus the sealed divider before Close: '— More Pokémon are known to
+exist. Their regions are future arcs. —' (species past 493 keep
+rendering as ??? rows below it, exactly as undiscovered ones do).
+`oakRating` bands re-keyed to the 493 horizon (bond framing path
+untouched; the Kanto completion is honoured inside its band).
+Diploma: `checkDiploma` (151) is UNCHANGED and stays the Arc 1
+honor; new `checkPlatinumDiploma` awards the Platinum Diploma at
+493 of the run's OWN catches (ownCaughtMap, the Phase-6 rule),
+checked beside checkDiploma in `Game.update`; `openDiploma` shows
+the Platinum plate once earned, the Kanto plate otherwise. Nothing
+is un-awarded on any save.
+
+### 6. Journey grouping
+
+`main.mjs` openJourney: chapters render under registry ARC headers
+(Arc 1 · Arc 1.5 · Arc 2 · Arc 3 · Arc 3.5 · Arc 4 · one FUTURE ARCS
+header for ch 9–13), each header carrying its `arcStateOf` word;
+chapter rows + detail view are byte-identical to before.
+`main-systems.mjs` openRegions: the same grouping over the REGIONS
+chain (band headers from the same registry + state helper — one
+logic, two surfaces); region rows unchanged. The Journey row count
+moves 34 → 40 by the six added headers, so qa-changed-flows' stale
+b2 expectation (30) still fails exactly as baselined — the failure
+set stays {b2, d9}.
+
+### 7. Bridge card → directive pattern
+
+`story-kanto.mjs` CREDITS_LINES: the static 'TO BE CONTINUED — the
+Orange Islands await.' line is REMOVED (a comment records the
+retirement); `runEnding` now hands off to the machine (§3), so only
+one ending plays.
+
+### 8. Level-cap reads converted to `levelCapFor(state)` (Amendment 2)
+
+With Arcs 1/1.5 live every read still yields 100 — Kanto behaviour
+is identical by construction and proven by the battery.
+
+| Read | Site |
+|---|---|
+| Rare Candy target disable | `src/game/main-systems.mjs` (levelUp branch) |
+| XP Candy target disable | `src/game/main-systems.mjs` (xpBoost branch) |
+| XP Candy level-up loop clamp | `src/game/main-systems.mjs` (xpBoost branch) |
+| Battle XP level-up clamp | `src/game/battle.mjs` updateXp |
+| Cheat Terminal level stepper cap (×3 keys) | `src/game/overworld-systems.mjs` openCheatShop onKey |
+| Challenge-leader +2 cap | `src/game/rules.mjs` trainerLevelFor |
+
+**Deliberately NOT converted in this stage (honest leftover):** the
+save-validation level bounds — client `schema.mjs` mon/HoF 1..100
+and server `validator.mjs` `isInt(m.level, 1, 100)` (+ the HoF
+normalizer clamp in `state.mjs`). They are a matched client/server
+pair whose rejection of level 101 is pinned by the validator suite
+(A25-era test 'reject level 101'), and no arc with a band above 100
+is playable in this build; when the Johto stage ships content, the
+bound becomes a registry read on BOTH sides in the same change
+(gen-tables already carries the registry to the server).
+
+### 9. Battery at this commit
+
+New suite `tests/arc-foundation-checks.mjs` **47/47** (registry
+integrity incl. chapters 1–13 exactly-once + monotonic horizons;
+cap/horizon helpers; the arcStateOf matrix; legacy fixtures —
+mid-Kanto, HoF-complete, regionsDone-complete, post-homecoming —
+deriving with zero data loss; both validators; the full directive
+lifecycle, both homecomings, ferry gating, HUD/dex/Journey surfaces,
+the Rare Candy registry read, and runEnding's handoff, all driven
+headlessly through the real bundle). Public battery: build clean ·
+campaign-smoke **24/24** · qa-changed-flows failures **exactly the
+standing baseline {b2, d9}** · Track B **114/114** (documented
+invocation) · save-contract **6/6** · validator **51/51** + fuzz
+**2000/2000** · cheat-shop **44/44** · fidelity **35/35** ·
+audit-headless **17/17** · budgets all gates pass · drift-gate
+guest ≡ strip(vercel) PASS (personal divergence by design, frozen
+edition). battle-model **39/45** and rejuv phases 2–6 (each short
+only its C01 real-browser check — 'chromium did not start' /
+sandbox-browser flake) were **proven base-parity by stash A/B at
+HEAD**: identical counts and failure sets with these changes
+removed; rejuv phase1 44/44 clean. audit-laptop not run (needs the
+live-browser harness; its dex/Journey surfaces are covered
+headlessly by the new suite + qa-changed-flows).
+
+### 10. Leftovers, named
+
+- Stage O1 wires the actual ports: Valencia map + the Vermilion ↔
+  Valencia `ferryArc: 'orange'` NPCs (the handler + rule ship here;
+  no shipped NPC carries `ferryArc` yet, deliberately — a port with
+  no destination map would be a fake crossing).
+- The GS Ball ITEM is granted by the Orange stage, not here (the
+  homecoming delivers the errand only, per the stage brief).
+- Save-validation level bounds stay 1..100 until the Johto stage
+  (§8) — the one registry read that is staged, not shipped.
+- `story.region` for the Frontier arc reads 'kanto' (its regionKey)
+  — the Regions chain has no Frontier row; the Journey grouping
+  carries the arc.
+- Orange's completion flag is named `orange_champion` in the
+  registry; the Orange stage's league code must set exactly that
+  flag (or amend the row) when it ships.
