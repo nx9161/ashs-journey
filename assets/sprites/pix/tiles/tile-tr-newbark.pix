@@ -1,0 +1,23 @@
+# Stage J3a: newbark roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-newbark 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #4a7a8a newbark-roof
+b #355863 roof-dark
+c #5c98ac roof-light
+d #3a7ca5 roof-trim

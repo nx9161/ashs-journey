@@ -153,6 +153,19 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 export const TALE_NPCS = [
+  // Arc 2 Stage J3a: the Johto embark captain, appended to Pallet's
+  // roster through this same loadMap append idiom (Pallet's map def in
+  // maps3.mjs is NOT rewritten). He carries NO tale/role — the ferry
+  // handler (overworld-systems, ferryArc 'johto') owns him entirely:
+  // gated by the Foundation embark leg (embark_johto) outbound, and
+  // unconditional once Johto has been reached (NO-SOFT-LOCK LAW). He
+  // stands at (11,8), one tile east of the Cinnabar FERRYMAN, on a
+  // tg2 ground tile in the open south field — no door, warp or route
+  // can be sealed from there. The return captain stands on the
+  // New Bark dock (maps6.mjs, CAPT WESTWIND).
+  { map: 'pallet', x: 11, y: 8, name: 'CAPT JOHTO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
+    ferry: 'newbark', ferryArc: 'johto',
+    dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
   // own front-door threshold (3,4) — the one-tile gap in the fence
   // row, fed only from (3,5) — so ANY stance in that column seals

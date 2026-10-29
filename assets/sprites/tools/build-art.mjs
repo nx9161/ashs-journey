@@ -193,7 +193,12 @@ function main() {
   // banked beyond it. palette-audit.mjs mirrors it. [Comment
   // corrected at QA: the first draft of this note stopped at the
   // 486/512 estimate while the code already carried 640.]
-  const FAMILY_PALETTE_BUDGETS = { tiles: 640 };
+  // Stage J3a: 640 -> 760 — the Johto tile family (57 new tiles: six
+  // settlements x eight identity tiles + nine Johto kinds) carries its
+  // own per-town anchors/accents by design (Premium+ identity law);
+  // the raise is recorded in docs/audit-register.md (J3a section),
+  // following the W5 palette-cap-raise precedent.
+  const FAMILY_PALETTE_BUDGETS = { tiles: 760 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

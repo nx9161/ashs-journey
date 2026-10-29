@@ -6191,3 +6191,190 @@ f434ba63… as at HEAD) and the content-hash personal line preserved
   complete for the range.
 - **Stage J2 total (J2a + J2b): 257/257 authored pairs, 94/94 Johto
   bob sets — the J2 art gate is closed.**
+
+## Arc 2 Stage J3a — Johto maps, WEST half (2026-10-29)
+
+### 1. What landed
+
+- **NEW `src/data/maps6.mjs`** (export `MAPS6`; registered in
+  `scripts/module-order.json` after `maps5.mjs`; folded in
+  `merge.mjs`): **44 maps** — 6 towns, 12 routes/dungeons,
+  26 interiors. Generated deterministically by
+  `~/workspace/ashs-journey-qa/johto-j3a/gen_maps6.py` in the
+  maps5.mjs idiom (edit the generator, not the file).
+  - Towns: `newbark` 28×18, `cherrygrove` 28×18, `violet` 30×18,
+    `azalea` 28×18, `goldenrod` 34×20, `ecruteak` 30×18 — all
+    ≥24×14 viewport-filling (P-1).
+  - Routes/dungeons: `r29` 26×16, `r30` 24×18, `r31` 26×16,
+    `r32` 24×20, `union-cave` 26×16, `r33` 24×16, `ilex-forest`
+    28×18, `r34` 24×18, `r35` 24×16, `national-park` 28×18,
+    `r36` 28×16, `r37` 24×18.
+  - Interiors (26): `elm-lab`, `kurt-house`, `daycare` (Route 34
+    shell — J6 wires the system), `dance-theater`, houses ×6
+    (`house-newbark/cherrygrove/violet/azalea/goldenrod/ecruteak`),
+    gyms ×4 layouts-only (`gym-violet/azalea/goldenrod/ecruteak` —
+    pads + leader stands; leaders/battles are J4), `sprout-tower-1/2`,
+    `slowpoke-well`, `radio-tower-1/2/3`,
+    `goldenrod-underground-1/2`, `burned-tower-1/2` (the three
+    beasts sleep in the basement as statue dressing — J4/J5 arm
+    the event), `bell-tower-1/2` (summit: twin `jbell` props +
+    Ho-Oh perch mat — dressing).
+  - Shared `center`/`mart` interiors serve all six towns via
+    `via{}` tickets exactly as Orange — no per-town centers/marts.
+  - The **Celebi shrine stands in Ilex Forest** as a `jshrine`
+    prop landmark on a cleared clearing at (14,3) with a faced
+    sign at (15,5); J5 dresses the event.
+  - Route 32 is split by a rock barrier: **Union Cave is the
+    through-passage** (north mouth (17,6)/(18,6) ↔ cave doors
+    (2,0)/(3,0); south mouth (5,12)/(6,12) ↔ cave doors
+    (22,15)/(23,15)), the canon arrangement.
+- **Identity system extended** (Premium+ W5 machinery): the six
+  settlements own the eight signature kinds (tg/tg2/tc/td/tr/tl/
+  th/tw) via `JOHTO_TOWN_ORDER`/`JOHTO_TOWN_CHARS` in
+  `src/engine/tiles.mjs`. The Latin-1 char blocks are exhausted
+  by the eleven Kanto towns, so Johto chars continue the Latin
+  Extended Additional block (town i owns U+1E00+173+i·8…+180+i·8);
+  the art resolver's prefix branches ride the shipped W5 paths
+  unchanged. WALKABLE in `src/data/maps.mjs` gains the Johto
+  tg/tg2 chars + the two J3 floor chars by the O1 spread
+  precedent. Roof-form families (P-4): newbark lakeside-lab
+  modern, cherrygrove coastal flower gable, violet tower-town
+  stone, azalea forest-edge timber, goldenrod urban brick slab,
+  ecruteak traditional timber.
+- **Nine Johto tile kinds** (`J3_KIND_DEFS`, U+1E00+164…172):
+  props `maple`, `jshrine`, `jwell`, `apricorn`, `jbell`; floors
+  `cityfloor`, `woodfloor`; walls `towerwood`, `citybrick` —
+  wired through tiles.mjs/art.mjs exactly as the O1 set.
+- **57 new tile .pix sources** (48 town-identity + 9 kinds) under
+  `assets/sprites/pix/tiles/`, authored by
+  `~/workspace/ashs-journey-qa/johto-j3a/gen_j3_art.py`;
+  `art-data.mjs` regenerated via `build-art.mjs` only (two runs
+  byte-identical). **Palette budget:** the tiles family union
+  rose 640 → 732 painted hexes, so `FAMILY_PALETTE_BUDGETS.tiles`
+  is raised 640 → 760 in `build-art.mjs` (the W5 ratified-raise
+  precedent; per-sprite cap 32 untouched, max painted 18).
+
+### 2. Connectivity (gate) — PASS
+
+- Script: `~/workspace/ashs-journey-qa/johto-j3a/johto-sweep.mjs`
+  (celadon/orange-sweep discipline: engine WALKABLE + Surf
+  assumed, loadMap-faithful NPC model incl. the TALE_NPCS
+  appends and the outdoor mart-clerk filter, interiors as
+  connectors to fixpoint). **All 45 maps in scope PASS** (44 new
+  + `pallet`): every entry reaches every warp; **zero bad warp
+  landings**; map graph from `newbark` reaches all 44; the full
+  chain pallet →(ferry)→ newbark → … → ecruteak incl.
+  `bell-tower-2`, `burned-tower-2`, `union-cave`, `daycare`
+  verified at graph level. The shipped `celadon-sweep.mjs`
+  re-run on `pallet` also passes (1 relevant fragment — the new
+  captain seals nothing).
+
+### 3. Richness + identity (gate) — PASS
+
+- Script: `~/workspace/ashs-journey-qa/johto-j3a/johto-richness.mjs`
+  (W5 logical-raster method, real resolver + ART). **All 44 maps
+  pass their floors.** Towns: newbark 168, cherrygrove 167,
+  violet 171, azalea 149, goldenrod 148, ecruteak 156 colours
+  (floor 80). Routes 128–186 (floor 60; national-park 128 is the
+  minimum). Interiors 55–83 (floor 55; bell-tower-1 55 is the
+  minimum). Caves: union-cave 80, slowpoke-well 83,
+  burned-tower-2 63 (floor 45).
+- Town ground rule under BOTH precedents: top counted family
+  (orange-richness function) ≤20.6% and top single ground KIND
+  ≤20.9% of town cells (gate ≤40%). Routes' dominant family is
+  grass-family at 50.8–65.6% of cells (the 40% rule is a town
+  rule; route path sits at ~13–19% — reported, not gated).
+- **Tile-kind Jaccard, settlements (pairwise, target ≤0.60):**
+  max **0.532** (violet~ecruteak); min 0.347 (newbark~azalea).
+  Full table: newbark~cherrygrove .488, newbark~violet .396,
+  newbark~goldenrod .370, newbark~ecruteak .367,
+  cherrygrove~violet .467, cherrygrove~azalea .444,
+  cherrygrove~goldenrod .476, cherrygrove~ecruteak .435,
+  violet~azalea .479, violet~goldenrod .447, azalea~goldenrod
+  .457, azalea~ecruteak .511, goldenrod~ecruteak .447.
+
+### 4. Encounters
+
+- 272 table entries across 24 encounter-bearing maps, audited
+  programmatically: every species exists in the merged roster;
+  **no babies** (pichu/cleffa/igglybuff/togepi/magby/elekid/
+  smoochum/tyrogue), **no starters, no legendaries**; levels
+  span **101–145**, inside band 101–200, rising west→east
+  (r29/newbark 101–111 → violet area 108–121 → azalea/ilex
+  116–131 → goldenrod area 124–140 → ecruteak area 132–145).
+  Water tables on every map with water (WTR_A→WTR_D curve);
+  cave/forest/tower tables follow the maps5 idiom.
+
+### 5. The embark (gate) — PASS 6/6
+
+- **Finding:** the Foundation machine's embark leg works from
+  Pallet as registered (`embarkPort: 'pallet'`,
+  `arrivalMap: 'newbark'`) — but Pallet had NO Johto dock NPC.
+  **Fix:** `CAPT JOHTO` (ferry `newbark`, ferryArc `johto`) is
+  appended to Pallet's roster at loadMap through the shipped
+  append idiom — a `TALE_NPCS` entry in `src/data/quests.mjs`
+  carrying no tale/role (the ferry handler owns him; Pallet's
+  maps3.mjs def is untouched). He stands at **(11,8)**, one tile
+  east of the Cinnabar FERRYMAN, on open tg2 ground; the
+  celadon-sweep discipline proves he seals nothing. The return
+  captain `CAPT WESTWIND` stands on the New Bark dock (13,15)
+  start plaza at (12,15).
+- Drive: `~/workspace/ashs-journey-qa/johto-j3a/johto-embark.mjs`
+  on the real bundle — E01 captain on the live roster; E02
+  pre-embark the crossing gates (gate line, no menu); E03–E04
+  post-Homecoming-#2 state (hook_johto set, directive spent,
+  embark_johto armed) sails Pallet → newbark, en-route card,
+  lands on newbark.start (13,15), stamps reachedarc_johto;
+  E05–E06 the return leg sails with embark_johto DELETED
+  (unconditional return). **Note:** the registry row is still
+  `status: 'sealed'` at J3a, so a live homecoming does not yet
+  arm embark_johto — the J4 story stage flips the row to
+  'shipped' (mission ruling 1); the drive arms the flag
+  directly, the same isolation arc-foundation B09 uses.
+
+### 6. J3b stitch points (exact)
+
+- **r36 east edge → r38 (toward Olivine):** road tiles
+  **(27,8) and (27,9)** — path running to the east edge, NO
+  warps. J3b: add warps there to r38's west landings, and
+  reciprocal warps on r38 landing at (26,8)/(26,9).
+- **r37 east edge → r42 (toward Mahogany):** the east arm tiles
+  **(23,8) and (23,9)** — path running to the east edge, NO
+  warps. J3b: add warps there to r42's west landings, and
+  reciprocal warps on r42 landing at (22,8)/(22,9).
+- r36's west end is closed with trees (the National Park spur
+  is its west entry); r37's spine is x=11,12 (south = r36
+  (20,0)/(21,0) warps, north = ecruteak (14,16)/(15,16)
+  landings).
+
+### 7. Battery at this commit
+
+- fidelity **35/35** · campaign-smoke **24/24** ·
+  qa-changed-flows failures exactly **{b2, d9}** (55/57).
+- Adjacent suites: arc-foundation **47/47**, orange-story
+  **38/38**, orange-climax **42/42**, cheat-shop **44/44**;
+  rejuv-phase4 50/51 (sole failure C01 chromium-start — the
+  pre-existing harness failure documented at base).
+- build-art clean + deterministic; fresh build (vercel + guest)
+  OK — `public/game.js` **6,803,536 bytes**.
+  **personal/ byte-identical** (sha256 f434ba63…, untouched;
+  vercel+guest targets only).
+
+### 8. Leftovers, named
+
+- **Registry flip is J4's** (ruling 1): johto row stays
+  'sealed' here; the embark is proven but not yet reachable in
+  a live playthrough until J4 ships the flip + story.
+- **Goldenrod department store** is exterior dressing: its
+  annex door reuses `house-goldenrod`. A bespoke multi-floor
+  department-store interior is NOT authored (out of the J3a
+  interior list); candidate for a later polish stage.
+- **Day/night encounter variants** remain deferred (mission
+  ruling 6) — e.g. Murkrow/Hoothoot are in day tables here.
+- Gym interiors are layouts only by design (J4 arms leaders);
+  the Day-Care interior is a shell (J6); the Ilex shrine,
+  Burned Tower statues and Bell Tower perch are dressing
+  (J5 arms the events).
+- Route grass-family share (50.8–65.6%) is reported under the
+  town-rule note in §3 — if a route-family gate is ever
+  adopted, routes need a path/ground re-dress pass.

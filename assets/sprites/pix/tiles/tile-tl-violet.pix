@@ -1,0 +1,24 @@
+# Stage J3a: violet landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-violet 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #a6a0b3 violet-landmark-wall
+b #6c6874 landmark-trim
+d #7a6ab0 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

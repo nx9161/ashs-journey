@@ -1,0 +1,25 @@
+# Stage J3a: goldenrod town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-goldenrod 16 16
+bccbcccbcccccabc
+aecccbcacacabecc
+cecbcbccacbbbbce
+cbacacccbbccaecb
+eccbcebccbbbbbbc
+cabebcccaccbacae
+ccbcccacabbcaaab
+baaacbcbabbbcabe
+cccccbbccccabcec
+accbacaaccbaacce
+ebabbaacbccccabb
+cbceccbbcacccbcb
+ccbcbbcccaabcbac
+abbcceaaebcccacc
+becccacbacccccbc
+eaabcbccacaabccc
+PAL
+a #c2a878 goldenrod-ground
+b #97835e ground-dark
+c #e5c68e ground-light
+d #e85a4a town-accent
+e #4a90c0 town-accent-2
+f #746548 ground-deep

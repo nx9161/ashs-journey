@@ -1,0 +1,22 @@
+# Stage J3a: tower timber wall — vertical planks, dark posts + caps (full-bleed, solid).
+PIX tile-towerwood 16 16
+bbbbbbbbbbbbbbbb
+aacbaaabaaabacab
+aaabcaabaaabaaab
+aaabaacbaaabaaab
+aaabaaabcaabaaab
+aaabaaabaacbaaab
+acabaaabaaabcaab
+aaabaaabaaabaacb
+aaabacabaaabaaab
+aaabaaabaaabaaab
+aaabaaabacabaaab
+caabaaabaaabaaab
+aacbaaabaaabacab
+aaabcaabaaabaaab
+aaabaacbaaabaaab
+bbbbbbbbbbbbbbbb
+PAL
+a #6e4f30 tower-timber
+b #4e3822 tower-timber-dark
+c #8a683f tower-timber-light

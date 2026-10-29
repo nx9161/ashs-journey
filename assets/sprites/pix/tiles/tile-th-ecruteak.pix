@@ -1,0 +1,23 @@
+# Stage J3a: ecruteak house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-ecruteak 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #7a3a2a ecruteak-roof
+b #582a1e roof-dark
+c #984834 roof-light
+d #c03a2a roof-trim

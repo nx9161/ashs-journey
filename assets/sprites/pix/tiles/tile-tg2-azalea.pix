@@ -1,0 +1,25 @@
+# Stage J3a: azalea town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-azalea 16 16
+bccbcccbccbcccba
+cccccbaccaacbaac
+cacbbabccabaaacb
+cbcccaebbbcccccb
+cccccabcbccaabca
+cbccbccccccbccac
+cabbbccccbacaccb
+bacccccbacaacabc
+accaabcccaaabbca
+cccbaaacaebeaceb
+cbccccacbbcacaab
+caaccabcacceabcb
+accbbccccaebcacc
+aabccaabcbccccca
+bbcbeaabcaacccba
+caccabacceacbcbc
+PAL
+a #6fae6a azalea-ground
+b #578853 ground-dark
+c #83cd7d ground-light
+d #e8b84a town-accent
+e #a05a3a town-accent-2
+f #436840 ground-deep

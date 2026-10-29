@@ -215,6 +215,59 @@ export const O1_PROP_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([
 export const O1_FLOOR_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const O1_WALL_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const O1_WALKABLE_CHARS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => O1_KIND_CHARS[k]);
+// ---- Arc 2 Stage J3a: Johto kinds ----
+// Chars continue the W6/W7/O1 block at U+1E00+164 (W6 idx 0..131, W7
+// 132..151, O1 152..163). Same class convention as O1: floor = WALKABLE
+// ground family of its own, wall = solid, prop = solid object composited
+// over the ground it stands on (art.mjs resolver). Authored art:
+// assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage J3a).
+export const J3_KIND_DEFS = [
+  ['maple', 'prop'], ['jshrine', 'prop'], ['jwell', 'prop'], ['apricorn', 'prop'], ['jbell', 'prop'],
+  ['cityfloor', 'floor'], ['woodfloor', 'floor'],
+  ['towerwood', 'wall'], ['citybrick', 'wall'],
+];
+export const J3_KIND_CHARS = {};
+J3_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 164 + i);
+  J3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const J3_PROP_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const J3_FLOOR_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+export const J3_WALL_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const J3_WALKABLE_CHARS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => J3_KIND_CHARS[k]);
+// ---- Arc 2 Stage J3a: Johto per-town identity kinds (Premium+ W5
+// machinery, extended) ----
+// The six west-Johto settlements own the same eight signature kinds as
+// the Kanto towns (tg ground / tg2 ground II / tc canopy / td dress /
+// tr roof / tl landmark facade / th house-roof / tw house-wall). The
+// U+00C0.. Latin-1 blocks are exhausted by the eleven Kanto towns, so
+// Johto chars continue the Latin Extended Additional block after the
+// J3 kinds: town i owns idx 173+i*8 .. 180+i*8 in the order
+// [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
+// kind-name prefixes (tg-/tc-/td-/tr-/tl-/th-/tw-), so Johto kinds ride
+// the shipped W5 rendering paths unchanged.
+export const JOHTO_TOWN_ORDER = ['newbark', 'cherrygrove', 'violet', 'azalea', 'goldenrod', 'ecruteak'];
+export const JOHTO_TOWN_STYLE = {
+  newbark:    { ground: '#8fb8a8', form: 'lakeside-lab modern' },
+  cherrygrove:{ ground: '#a8c686', form: 'coastal flower gable' },
+  violet:     { ground: '#9a94a6', form: 'tower-town stone' },
+  azalea:     { ground: '#6fae6a', form: 'forest-edge timber' },
+  goldenrod:  { ground: '#c2a878', form: 'urban brick slab' },
+  ecruteak:   { ground: '#c98a5a', form: 'traditional timber' },
+};
+const JOHTO_KIND_SUFFIXES = ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'];
+export const JOHTO_TOWN_CHARS = {};
+JOHTO_TOWN_ORDER.forEach((id, i) => {
+  JOHTO_TOWN_CHARS[id] = {};
+  JOHTO_KIND_SUFFIXES.forEach((sfx, j) => {
+    const ch = String.fromCodePoint(0x1E00 + 173 + i * 8 + j);
+    JOHTO_TOWN_CHARS[id][sfx] = ch;
+    TILE_CHARS[ch] = sfx + '-' + id;
+  });
+});
+export const JOHTO_TOWN_GROUND_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_CHARS[id].tg);
+export const JOHTO_TOWN_GROUND2_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
 export const GYM_KIND_BY_TOWN = {
   viridian: 'gym-ground', pewter: 'gym-rock', cerulean: 'gym-water', vermilion: 'gym-volt',

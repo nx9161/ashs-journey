@@ -1,0 +1,24 @@
+# Stage J3a: newbark landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-newbark 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #9ac7b5 newbark-landmark-wall
+b #648176 landmark-trim
+d #3a7ca5 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

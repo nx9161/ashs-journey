@@ -1,0 +1,23 @@
+# Stage J3a: violet roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-violet 16 16
+dddddddddddddddd
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+PAL
+a #5a5a7a violet-roof
+b #414158 roof-dark
+c #707098 roof-light
+d #7a6ab0 roof-trim

@@ -1,0 +1,22 @@
+# Stage J3a: city brick wall — staggered courses, pale mortar (full-bleed, solid).
+PIX tile-citybrick 16 16
+caaaaaamaaaaaaam
+aaaaaaamacaaaaam
+acaaaaamaaaaaaam
+mmmmmmmmmmmmmmmm
+aacmaaaaaaamaaaa
+aaamaaaaaaamaaaa
+aaamaaaaaaamaaaa
+mmmmmmmmmmmmmmmm
+aaaacaamaaaaaaam
+aaaaaaamaaaaacam
+aaaaacamaaaaaaam
+mmmmmmmmmmmmmmmm
+aaamaacaaaamaaaa
+aaamaaaaaaamaaac
+aaamaaacaaamaaaa
+mmmmmmmmmmmmmmmm
+PAL
+a #a8583e city-brick
+m #d8c8b0 city-mortar
+c #c06a4c city-brick-light

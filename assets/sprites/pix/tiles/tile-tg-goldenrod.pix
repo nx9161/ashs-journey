@@ -1,0 +1,25 @@
+# Stage J3a: goldenrod town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-goldenrod 16 16
+adaaabaaaaaaabaa
+cafaaccaaabaaabb
+afaacbaaabcaabaa
+abaaaaaaaaaacaaa
+caaaacbacaaaaaaa
+bbcbaaacacaaaaaa
+acabaacaacaadaaa
+fabacaaaacababaa
+afaaaaaaaaaabaac
+aafbaaccaadadbba
+aaaacaaaaaaabaaa
+babaaaacaaaaaafa
+baaaaaaaaaababac
+afbfcaaaacaaaaaa
+fbacacaaafaaacaa
+aaaaacaaabfafaaa
+PAL
+a #c2a878 goldenrod-ground
+b #97835e ground-dark
+c #e5c68e ground-light
+d #e85a4a town-accent
+e #4a90c0 town-accent-2
+f #746548 ground-deep

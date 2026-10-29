@@ -1620,6 +1620,59 @@ const O1_PROP_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => 
 const O1_FLOOR_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const O1_WALL_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const O1_WALKABLE_CHARS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => O1_KIND_CHARS[k]);
+// ---- Arc 2 Stage J3a: Johto kinds ----
+// Chars continue the W6/W7/O1 block at U+1E00+164 (W6 idx 0..131, W7
+// 132..151, O1 152..163). Same class convention as O1: floor = WALKABLE
+// ground family of its own, wall = solid, prop = solid object composited
+// over the ground it stands on (art.mjs resolver). Authored art:
+// assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage J3a).
+const J3_KIND_DEFS = [
+  ['maple', 'prop'], ['jshrine', 'prop'], ['jwell', 'prop'], ['apricorn', 'prop'], ['jbell', 'prop'],
+  ['cityfloor', 'floor'], ['woodfloor', 'floor'],
+  ['towerwood', 'wall'], ['citybrick', 'wall'],
+];
+const J3_KIND_CHARS = {};
+J3_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 164 + i);
+  J3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const J3_PROP_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+const J3_FLOOR_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+const J3_WALL_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+const J3_WALKABLE_CHARS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => J3_KIND_CHARS[k]);
+// ---- Arc 2 Stage J3a: Johto per-town identity kinds (Premium+ W5
+// machinery, extended) ----
+// The six west-Johto settlements own the same eight signature kinds as
+// the Kanto towns (tg ground / tg2 ground II / tc canopy / td dress /
+// tr roof / tl landmark facade / th house-roof / tw house-wall). The
+// U+00C0.. Latin-1 blocks are exhausted by the eleven Kanto towns, so
+// Johto chars continue the Latin Extended Additional block after the
+// J3 kinds: town i owns idx 173+i*8 .. 180+i*8 in the order
+// [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
+// kind-name prefixes (tg-/tc-/td-/tr-/tl-/th-/tw-), so Johto kinds ride
+// the shipped W5 rendering paths unchanged.
+const JOHTO_TOWN_ORDER = ['newbark', 'cherrygrove', 'violet', 'azalea', 'goldenrod', 'ecruteak'];
+const JOHTO_TOWN_STYLE = {
+  newbark:    { ground: '#8fb8a8', form: 'lakeside-lab modern' },
+  cherrygrove:{ ground: '#a8c686', form: 'coastal flower gable' },
+  violet:     { ground: '#9a94a6', form: 'tower-town stone' },
+  azalea:     { ground: '#6fae6a', form: 'forest-edge timber' },
+  goldenrod:  { ground: '#c2a878', form: 'urban brick slab' },
+  ecruteak:   { ground: '#c98a5a', form: 'traditional timber' },
+};
+const JOHTO_KIND_SUFFIXES = ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'];
+const JOHTO_TOWN_CHARS = {};
+JOHTO_TOWN_ORDER.forEach((id, i) => {
+  JOHTO_TOWN_CHARS[id] = {};
+  JOHTO_KIND_SUFFIXES.forEach((sfx, j) => {
+    const ch = String.fromCodePoint(0x1E00 + 173 + i * 8 + j);
+    JOHTO_TOWN_CHARS[id][sfx] = ch;
+    TILE_CHARS[ch] = sfx + '-' + id;
+  });
+});
+const JOHTO_TOWN_GROUND_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_CHARS[id].tg);
+const JOHTO_TOWN_GROUND2_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
 const GYM_KIND_BY_TOWN = {
   viridian: 'gym-ground', pewter: 'gym-rock', cerulean: 'gym-water', vermilion: 'gym-volt',
@@ -50756,6 +50809,42 @@ const ART = {
     "AAAABBAABBBAABBB",
     "AABBBBAABBBBBBBB",
   ] },
+  "tile-citybrick": { w: 16, h: 16, pal: {"a":"#a8583e","m":"#d8c8b0","c":"#c06a4c"}, rows: [
+    "caaaaaamaaaaaaam",
+    "aaaaaaamacaaaaam",
+    "acaaaaamaaaaaaam",
+    "mmmmmmmmmmmmmmmm",
+    "aacmaaaaaaamaaaa",
+    "aaamaaaaaaamaaaa",
+    "aaamaaaaaaamaaaa",
+    "mmmmmmmmmmmmmmmm",
+    "aaaacaamaaaaaaam",
+    "aaaaaaamaaaaacam",
+    "aaaaacamaaaaaaam",
+    "mmmmmmmmmmmmmmmm",
+    "aaamaacaaaamaaaa",
+    "aaamaaaaaaamaaac",
+    "aaamaaacaaamaaaa",
+    "mmmmmmmmmmmmmmmm",
+  ] },
+  "tile-cityfloor": { w: 16, h: 16, pal: {"a":"#c8bc9c","b":"#a89a78","c":"#ddd2b2","d":"#b8a888"}, rows: [
+    "aaaaaaabaaaaaaab",
+    "aadaaacbaaaaaaad",
+    "aaaaaaabaaaaaaad",
+    "aacaadabaaaaaaab",
+    "acaaaadbaaaaaaab",
+    "aacaaacbaaaaaaab",
+    "aaaaaaabdaaaaaab",
+    "bbbdbbbbbbbbcbbb",
+    "aaaaacabaaaaaaab",
+    "aacaaaabaaaacaab",
+    "daaaaaabaaaaaaab",
+    "aaaaaaacaaaaaaab",
+    "aaacaaabaaaaaaab",
+    "aaaaaaadaaaaaaab",
+    "aaaaacabadaaaaab",
+    "bbbbbbbbbbbbcbbb",
+  ] },
   "tile-crackedfloor": { w: 16, h: 16, pal: {"B":"#a8905e","D":"#54452f","A":"#b09b68"}, rows: [
     "DDBBAABBBBDDDDBB",
     "DDBDDABBBBDDDDBB",
@@ -54524,6 +54613,24 @@ const ART = {
     "ygygygygygygygyg",
     "zggggzggggzggggz",
   ] },
+  "tile-prop-apricorn": { w: 16, h: 16, pal: {"a":"#3e7a34","b":"#2e5e28","c":"#54a048","k":"#5a3a24","r":"#e84a3a","y":"#f0d040","p":"#f098c0","w":"#f0ead8","g":"#58b84a"}, rows: [
+    "................",
+    "................",
+    ".....abaaaa.....",
+    "...aaaaybaaaa...",
+    "..abrbccaaagaa..",
+    "..aaaraabbpbba..",
+    "...aaawacbbaa...",
+    "....bcaabaaa....",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    "................",
+  ] },
   "tile-prop-aquarium": { w: 16, h: 32, pal: {"B":"#3a7bd5","D":"#2e63b0","L":"#8ae8f0","A":"#f07830","C":"#67aa54"}, rows: [
     "................",
     "................",
@@ -55762,6 +55869,60 @@ const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
+  "tile-prop-jbell": { w: 16, h: 16, pal: {"b":"#b08a3a","h":"#e8c86a","k":"#4a3020"}, rows: [
+    "................",
+    "................",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    ".......kk.......",
+    "......bbbb......",
+    ".....bhbbbb.....",
+    ".....bhbbbb.....",
+    ".....bhbbbb.....",
+    "....bbbbbbbb....",
+    "....bbbbbbbb....",
+    "....bbbbbbbb....",
+    ".......bb.......",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-prop-jshrine": { w: 16, h: 16, pal: {"r":"#7a4a3a","m":"#4da653","k":"#5a3a24","g":"#7ae8a8","h":"#d8ffe8"}, rows: [
+    "................",
+    "................",
+    "..mmmmmmmmmmmm..",
+    "...rrrrrrrrrr...",
+    "...rrrrrrrrrr...",
+    "....k......k....",
+    "....k......k....",
+    "....k..gg..k....",
+    "....k..hg..k....",
+    "....k..gg..k....",
+    "....k..gg..k....",
+    "....k......k....",
+    "....k......k....",
+    "....kkkkkkkk....",
+    "................",
+    "................",
+  ] },
+  "tile-prop-jwell": { w: 16, h: 16, pal: {"s":"#8a8a95","d":"#1a1a2a","k":"#5a3a24","r":"#7a4a3a"}, rows: [
+    "................",
+    "................",
+    "...rrrrrrrrrr...",
+    "...k........k...",
+    "...k........k...",
+    "...ssssssssss...",
+    "...ssssssssss...",
+    "...sdddddddds...",
+    "...sdddddddds...",
+    "...sdddddddds...",
+    "...sdddddddds...",
+    "...sdddddddds...",
+    "...ssssssssss...",
+    "................",
+    "................",
+    "................",
+  ] },
   "tile-prop-kitchen": { w: 16, h: 32, pal: {"B":"#d8c08a","D":"#8a6a48","L":"#f2ddd5","A":"#46586e","C":"#f07830"}, rows: [
     "................",
     "................",
@@ -55972,6 +56133,24 @@ const ART = {
     ".BBBBBBBBBBBBBB.",
     "..DD........DD..",
     "..DD........DD..",
+    "................",
+  ] },
+  "tile-prop-maple": { w: 16, h: 16, pal: {"a":"#c05038","b":"#e07840","c":"#f0a848","d":"#a03828","k":"#4a3020"}, rows: [
+    "................",
+    ".....abbcac.....",
+    "...aaacbaabca...",
+    "..abbaaaadaaac..",
+    "..aaaadaaccaaa..",
+    "...cacbdbaaca...",
+    "....acaaccaa....",
+    ".....aacbad.....",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......kk.......",
     "................",
   ] },
   "tile-prop-martshelf": { w: 16, h: 16, pal: {"a":"#5f748f","b":"#c2c8d4","c":"#d84040","d":"#f0e060","e":"#6fb0ee","f":"#e86a8a"}, rows: [
@@ -59116,6 +59295,24 @@ const ART = {
     "llmggdddssggddee",
     "llmmdddeesgmmlmm",
   ] },
+  "tile-tc-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","b":"#578853","c":"#83cd7d","d":"#e8b84a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+    "................",
+    "................",
+    ".....bbbbbb.....",
+    "...bbcbdcbbbc...",
+    "..bbbdbbbcabbb..",
+    "..bbcbbbcbbcbb..",
+    "...cbbbbbdccb...",
+    "....bbcbbbbb....",
+    ".....bbbbcc.....",
+    ".......kk.......",
+    ".......kw.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......wk.......",
+    ".......kk.......",
+    "................",
+  ] },
   "tile-tc-celadon": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#d0f0c0","a":"#d0f0c0","x":"#5cb255","z":"#d5f5d8","n":"#468d40","k":"#5a3a24","w":"#7a5a38"}, rows: [
     "................",
     "................",
@@ -59152,6 +59349,24 @@ const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
+  "tile-tc-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","b":"#839a69","c":"#c6ea9e","d":"#e86a8a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+    "................",
+    "................",
+    ".....abccba.....",
+    "...bbcbdabcbc...",
+    "..cabdbbbbabbb..",
+    "..bbbacbccaabb..",
+    "...babbbbdbbb...",
+    "....bbbaabba....",
+    ".....bbbbab.....",
+    ".......kk.......",
+    ".......kw.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......wk.......",
+    ".......kk.......",
+    "................",
+  ] },
   "tile-tc-cinnabar": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#e8b89a","a":"#e8b89a","x":"#b35984","z":"#ede1af","n":"#8f4267","k":"#5a3a24","w":"#7a5a38"}, rows: [
     "................",
     "................",
@@ -59170,6 +59385,24 @@ const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
+  "tile-tc-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","b":"#9d6c46","c":"#eda36a","d":"#c03a2a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+    "................",
+    "................",
+    ".....baabbb.....",
+    "...bbbbdbcbbc...",
+    "..cbbdcbccbbcb..",
+    "..bbaabbbbbbbb..",
+    "...bbbabcdbbb...",
+    "....bbbbcbbb....",
+    ".....bcabba.....",
+    ".......kk.......",
+    ".......kw.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......wk.......",
+    ".......kk.......",
+    "................",
+  ] },
   "tile-tc-fuchsia": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#f4cfe2","a":"#f4cfe2","x":"#be82c7","z":"#f9e4e5","n":"#a450b1","k":"#5a3a24","w":"#7a5a38"}, rows: [
     "................",
     "................",
@@ -59187,6 +59420,24 @@ const ART = {
     "......kkkk......",
     ".......kk.......",
     ".......kk.......",
+  ] },
+  "tile-tc-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","b":"#97835e","c":"#e5c68e","d":"#e85a4a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+    "................",
+    "................",
+    ".....bbbccc.....",
+    "...ababdbbcbc...",
+    "..bccdabcbbabb..",
+    "..bbbbbbbabbbc..",
+    "...ccbbbcdbbc...",
+    "....babbbcbc....",
+    ".....cbabcc.....",
+    ".......kk.......",
+    ".......kw.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......wk.......",
+    ".......kk.......",
+    "................",
   ] },
   "tile-tc-indigo": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#c4cfef","a":"#c4cfef","x":"#71a6b4","z":"#ddd8f4","n":"#4f8796","k":"#5a3a24","w":"#7a5a38"}, rows: [
     "................",
@@ -59223,6 +59474,24 @@ const ART = {
     "......kkkk......",
     ".......kk.......",
     ".......kk.......",
+  ] },
+  "tile-tc-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","b":"#709083","c":"#a9d9c6","d":"#3a7ca5","k":"#5a3a24","w":"#7a5a38"}, rows: [
+    "................",
+    "................",
+    ".....cbbcbb.....",
+    "...bbabdbcbbb...",
+    "..ccadbaabcbbb..",
+    "..bbbbccababbc..",
+    "...cbbabadcba...",
+    "....bcbccbbb....",
+    ".....bccbbb.....",
+    ".......kk.......",
+    ".......kw.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......wk.......",
+    ".......kk.......",
+    "................",
   ] },
   "tile-tc-pallet": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#e8e0a0","a":"#e8e0a0","x":"#b6995d","z":"#dbedb5","n":"#947943","k":"#5a3a24","w":"#7a5a38"}, rows: [
     "................",
@@ -59295,6 +59564,24 @@ const ART = {
     "......kkkk......",
     ".......kk.......",
     ".......kk.......",
+  ] },
+  "tile-tc-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","b":"#787381","c":"#b6afc4","d":"#7a6ab0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+    "................",
+    "................",
+    ".....bbccbb.....",
+    "...bcbbdaabbc...",
+    "..bacdcbcccbbb..",
+    "..bbcbabbcbbaa..",
+    "...bbcabbdbbb...",
+    "....cbbcbabb....",
+    ".....bcbbbb.....",
+    ".......kk.......",
+    ".......kw.......",
+    ".......kk.......",
+    ".......kk.......",
+    ".......wk.......",
+    ".......kk.......",
+    "................",
   ] },
   "tile-tc-viridian": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#cfe8a8","a":"#cfe8a8","x":"#79a552","z":"#c5edbc","n":"#5e8140","k":"#5a3a24","w":"#7a5a38"}, rows: [
     "................",
@@ -59512,6 +59799,24 @@ const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
+  "tile-td-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","d":"#e8b84a","e":"#a05a3a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......e...e.....",
+    "....daa.daaad...",
+    "....ada.adada...",
+    "..wwwwwwwwwwww..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "................",
+    "................",
+  ] },
   "tile-td-celadon": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#d0f0c0","y":"#f0e060","w":"#eef7ff","a":"#4fae7e","b":"#202028"}, rows: [
     "................",
     "................",
@@ -59548,6 +59853,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-td-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","d":"#e86a8a","e":"#f0e060","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......e...e.....",
+    "....daa.daaad...",
+    "....ada.adada...",
+    "..wwwwwwwwwwww..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "................",
+    "................",
+  ] },
   "tile-td-cinnabar": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#e8b89a","y":"#f0e060","w":"#eef7ff","a":"#b06a52","b":"#202028"}, rows: [
     "................",
     "................",
@@ -59566,6 +59889,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-td-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","d":"#c03a2a","e":"#f0c060","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......e...e.....",
+    "....daa.daaad...",
+    "....ada.adada...",
+    "..wwwwwwwwwwww..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "................",
+    "................",
+  ] },
   "tile-td-fuchsia": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#f4cfe2","y":"#f0e060","w":"#eef7ff","a":"#c47ba4","b":"#202028"}, rows: [
     "................",
     "................",
@@ -59581,6 +59922,24 @@ const ART = {
     ".tttttttttttttt.",
     ".......tt.......",
     ".......tt.......",
+    "................",
+    "................",
+  ] },
+  "tile-td-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","d":"#e85a4a","e":"#4a90c0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......e...e.....",
+    "....daa.daaad...",
+    "....ada.adada...",
+    "..wwwwwwwwwwww..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
     "................",
     "................",
   ] },
@@ -59617,6 +59976,24 @@ const ART = {
     ".tttttttttttttt.",
     ".......tt.......",
     ".......tt.......",
+    "................",
+    "................",
+  ] },
+  "tile-td-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","d":"#3a7ca5","e":"#e8f0d8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......e...e.....",
+    "....daa.daaad...",
+    "....ada.adada...",
+    "..wwwwwwwwwwww..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
     "................",
     "................",
   ] },
@@ -59692,6 +60069,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-td-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","d":"#7a6ab0","e":"#d8d0e8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "......e...e.....",
+    "....daa.daaad...",
+    "....ada.adada...",
+    "..wwwwwwwwwwww..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "..kkkkkkkkkkkk..",
+    "................",
+    "................",
+  ] },
   "tile-td-viridian": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#cfe8a8","y":"#f0e060","w":"#eef7ff","a":"#4f9e57","b":"#202028"}, rows: [
     "................",
     "................",
@@ -59709,6 +60104,24 @@ const ART = {
     ".......tt.......",
     "................",
     "................",
+  ] },
+  "tile-tg-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","b":"#578853","c":"#83cd7d","d":"#e8b84a","e":"#a05a3a","f":"#436840"}, rows: [
+    "babbaacbcaacbdaa",
+    "caabaabaafaacaaf",
+    "aaaaabaaaaaaaaad",
+    "aabfaacbaadbaaab",
+    "aaabaaaaabaaadad",
+    "aaacaaacaaacacaa",
+    "aaaaaadabaaaabaa",
+    "baddaabaaaaaffca",
+    "abaabaababbdaaaa",
+    "aaabcaabaaaaaacc",
+    "aacacaaaafaaacdc",
+    "faaadabaaaaaaafa",
+    "baafaaaaaadadaaa",
+    "abdaacaacaaaabaa",
+    "caacabaaaaaaacba",
+    "affaaacfaaacacaa",
   ] },
   "tile-tg-celadon": { w: 16, h: 16, pal: {"g":"#4fae7e","m":"#429a6e","l":"#63c08f","d":"#32805a","a":"#d0f0c0","x":"#4faea4","z":"#c0f0cd"}, rows: [
     "ggggddzzddllllgg",
@@ -59746,6 +60159,24 @@ const ART = {
     "llmmmmmmqqzzmqql",
     "llmddmmmggggddll",
   ] },
+  "tile-tg-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","b":"#839a69","c":"#c6ea9e","d":"#e86a8a","e":"#f0e060","f":"#657750"}, rows: [
+    "aaaadacaacdfaaaa",
+    "aaaaabbaaaabaaaa",
+    "caaaabcaaaaaabac",
+    "aaccbacabacaccda",
+    "aaaafaaaacaaabbc",
+    "abbacaacaaabacbc",
+    "acaaabacafaaaaac",
+    "aaabacabcdbcaaaa",
+    "baaaacaaaaacacad",
+    "aaaaaaaaaaaacbaa",
+    "aaaaafaabcfaabdc",
+    "baaaacacaabaaaca",
+    "ababcbaaaaaaaaac",
+    "cbdabafabaabaaaa",
+    "acccabbaaaafaaca",
+    "abaaaaaaacaaabaa",
+  ] },
   "tile-tg-cinnabar": { w: 16, h: 16, pal: {"g":"#b0525a","m":"#9e4d46","l":"#c06f66","d":"#823936","a":"#e8ab9a","q":"#b07052","z":"#e8da9a"}, rows: [
     "mmqqzzmmllzzqggd",
     "mmmmmmmmllzzqqdd",
@@ -59764,6 +60195,24 @@ const ART = {
     "ddmmlllzzmmlmmdd",
     "dggmllllmddlmmdd",
   ] },
+  "tile-tg-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","b":"#9d6c46","c":"#eda36a","d":"#c03a2a","e":"#f0c060","f":"#795336"}, rows: [
+    "cabafaaaaaaaaaad",
+    "bcaccaaaffbaaaaa",
+    "acaaaaaaaaaaaaaa",
+    "caaaaaaaaaaacaaa",
+    "aacaaaaaaadbacaa",
+    "aabaaccaaaacaaaa",
+    "aacaaaaaaaaaaaaa",
+    "abaaacaabbaccaaa",
+    "aacaacafacaacaaf",
+    "aafaabaabcbaadaa",
+    "aadaabaacbfaaaab",
+    "fabaaabcafaaacaa",
+    "abbaccdbacaabaac",
+    "aacaadacaaacaafa",
+    "aaabaabaaacaaaac",
+    "caaabbccccbabaca",
+  ] },
   "tile-tg-fuchsia": { w: 16, h: 16, pal: {"g":"#c47ba4","m":"#b26892","l":"#d28fb4","d":"#96567c","a":"#f4cfe2","q":"#c47b87","z":"#f4d2cf"}, rows: [
     "ddzzaaggllddmmmm",
     "llzzaagllqqzzmmm",
@@ -59781,6 +60230,24 @@ const ART = {
     "mmmmaaaammmmglll",
     "qqaagllzzmmmggdd",
     "qqmmgmmgmmmmggll",
+  ] },
+  "tile-tg-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","b":"#97835e","c":"#e5c68e","d":"#e85a4a","e":"#4a90c0","f":"#746548"}, rows: [
+    "adaaabaaaaaaabaa",
+    "cafaaccaaabaaabb",
+    "afaacbaaabcaabaa",
+    "abaaaaaaaaaacaaa",
+    "caaaacbacaaaaaaa",
+    "bbcbaaacacaaaaaa",
+    "acabaacaacaadaaa",
+    "fabacaaaacababaa",
+    "afaaaaaaaaaabaac",
+    "aafbaaccaadadbba",
+    "aaaacaaaaaaabaaa",
+    "babaaaacaaaaaafa",
+    "baaaaaaaaaababac",
+    "afbfcaaaacaaaaaa",
+    "fbacacaaafaaacaa",
+    "aaaaacaaabfafaaa",
   ] },
   "tile-tg-indigo": { w: 16, h: 16, pal: {"g":"#6a7ab0","m":"#5c6ca0","l":"#7e8cc0","d":"#49588c","a":"#c4cfef","x":"#766ab0","z":"#d3c4ef"}, rows: [
     "ddllggddggxxllaa",
@@ -59817,6 +60284,24 @@ const ART = {
     "llxxggggggmddggg",
     "ggaaxxmmzzmmxxgg",
     "ggaallmmgzzzzxgg",
+  ] },
+  "tile-tg-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","b":"#709083","c":"#a9d9c6","d":"#3a7ca5","e":"#e8f0d8","f":"#566e65"}, rows: [
+    "fabaaaabaaaaafba",
+    "bacaadaaaaaaaaaa",
+    "aacaabaaaaaabaaa",
+    "aabaaaaaaacaaaaa",
+    "baaaaabaaaacaaaa",
+    "aaadaaaafaafaaaa",
+    "aacaaadadbaaafdf",
+    "badcbbbaacaacaab",
+    "adcaaccaaaaaaaaa",
+    "acaaabbaaaaaaaba",
+    "aacaaaadbdcaaaaa",
+    "acdabaaacdcaaada",
+    "acbdfaabadaaaaaa",
+    "aaaabaaaaabdacaa",
+    "fbccfbaacbfcaaaa",
+    "aabbaaaaaabaabaa",
   ] },
   "tile-tg-pallet": { w: 16, h: 16, pal: {"g":"#9db356","m":"#8aa348","l":"#b3c46e","d":"#75903c","a":"#e8e0a0","x":"#78b356","z":"#c5e8a0"}, rows: [
     "ggmmmmxxzzggggdd",
@@ -59890,6 +60375,24 @@ const ART = {
     "ddddmaagddzzmmdd",
     "ggxxddggmmzzlldd",
   ] },
+  "tile-tg-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","b":"#787381","c":"#b6afc4","d":"#7a6ab0","e":"#d8d0e8","f":"#5c5964"}, rows: [
+    "cadfaacbcafbaaaa",
+    "aaaaaaacabaaaaba",
+    "abfaaaaacaaacaaa",
+    "aaabcaaaaacaacba",
+    "aaabfcaaaaaaaaaa",
+    "aabbaaabbabbaaba",
+    "acadbaabaaaaaafa",
+    "accacaaaabbcafbc",
+    "aaaafaaacaabaaaa",
+    "adaabaacaaaacaaa",
+    "aaafabaabaaaaaaa",
+    "aaaabcbaaaacacdb",
+    "daaaaaaaacaaaaab",
+    "cabbaaaaadbaabaa",
+    "faaacccaaabaabfa",
+    "aaccaaaabbaafaaa",
+  ] },
   "tile-tg-viridian": { w: 16, h: 16, pal: {"g":"#4f9e57","m":"#448c4c","l":"#63b06b","d":"#35733e","a":"#cfe8a8","q":"#4f9e77","z":"#a9e8a8"}, rows: [
     "mmaallqqmmddlaam",
     "mmaallqqmmmmllmm",
@@ -59907,6 +60410,24 @@ const ART = {
     "ggmmlgggqggdggqq",
     "mggmqqddddmmllmm",
     "mmmaalldddmmqqmm",
+  ] },
+  "tile-tg2-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","b":"#578853","c":"#83cd7d","d":"#e8b84a","e":"#a05a3a","f":"#436840"}, rows: [
+    "bccbcccbccbcccba",
+    "cccccbaccaacbaac",
+    "cacbbabccabaaacb",
+    "cbcccaebbbcccccb",
+    "cccccabcbccaabca",
+    "cbccbccccccbccac",
+    "cabbbccccbacaccb",
+    "bacccccbacaacabc",
+    "accaabcccaaabbca",
+    "cccbaaacaebeaceb",
+    "cbccccacbbcacaab",
+    "caaccabcacceabcb",
+    "accbbccccaebcacc",
+    "aabccaabcbccccca",
+    "bbcbeaabcaacccba",
+    "caccabacceacbcbc",
   ] },
   "tile-tg2-celadon": { w: 16, h: 16, pal: {"g":"#4fae97","m":"#429a85","l":"#63c0a8","d":"#32806f","a":"#d0f0c0","q":"#4fae68","z":"#c0f0cd"}, rows: [
     "ggllmmaallggdddd",
@@ -59944,6 +60465,24 @@ const ART = {
     "xxaaggllddggmmgg",
     "xddagglzzdggmmgg",
   ] },
+  "tile-tg2-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","b":"#839a69","c":"#c6ea9e","d":"#e86a8a","e":"#f0e060","f":"#657750"}, rows: [
+    "bccccccbacaaccbc",
+    "eccccbceecccbccb",
+    "cccbcbccacbaaccc",
+    "cbaccbccbcccaceb",
+    "ecccccbbbcbcabcc",
+    "acccbcccaacbcccc",
+    "aabccaabcbbcacac",
+    "bccaeacbccaccaba",
+    "aaaccbcaeaccbccc",
+    "aacbecccccbccacc",
+    "abaaabacbcccceab",
+    "ceaacabecacccbcc",
+    "ccccbccacacbbccc",
+    "cebbacccabbccccc",
+    "bccbcacbcccccabc",
+    "bbcccbccceccbaca",
+  ] },
   "tile-tg2-cinnabar": { w: 16, h: 16, pal: {"g":"#b06352","m":"#9e6446","l":"#c08766","d":"#824d36","a":"#e8ab9a","q":"#b05270","z":"#e8da9a"}, rows: [
     "llllmmaallzzggqq",
     "llggdmaaaqqzggqq",
@@ -59962,6 +60501,24 @@ const ART = {
     "ddggddqddammmmmm",
     "ddggqqqqaammmmmm",
   ] },
+  "tile-tg2-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","b":"#9d6c46","c":"#eda36a","d":"#c03a2a","e":"#f0c060","f":"#795336"}, rows: [
+    "bccccccbcacababa",
+    "bcccabbcacacbacc",
+    "cecbaccaacbacccc",
+    "abbcabecbeccceab",
+    "aaccbbbaebcccbbc",
+    "acecbccccccbabcc",
+    "cabcccaccbccccaa",
+    "becbcbcbacaccabc",
+    "cabacbccccccbcac",
+    "aacbacccbcbbacac",
+    "cbecacccbbccabab",
+    "ccccccbccbaccbae",
+    "ccacbcaecacbccaa",
+    "babccaaccbacaaaa",
+    "bccacbcbcccccabc",
+    "acacabcccabcbccc",
+  ] },
   "tile-tg2-fuchsia": { w: 16, h: 16, pal: {"g":"#c47b91","m":"#b2687e","l":"#d28fa2","d":"#96566b","a":"#f4cfe2","x":"#c47bb5","z":"#f4d2cf"}, rows: [
     "mmzzlxxggzzgddgg",
     "mmzddgggggggddgg",
@@ -59979,6 +60536,24 @@ const ART = {
     "mmmmllddmmggmmxx",
     "dxxgddxxlxxmggdd",
     "ddgzzdxmmlmmggdd",
+  ] },
+  "tile-tg2-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","b":"#97835e","c":"#e5c68e","d":"#e85a4a","e":"#4a90c0","f":"#746548"}, rows: [
+    "bccbcccbcccccabc",
+    "aecccbcacacabecc",
+    "cecbcbccacbbbbce",
+    "cbacacccbbccaecb",
+    "eccbcebccbbbbbbc",
+    "cabebcccaccbacae",
+    "ccbcccacabbcaaab",
+    "baaacbcbabbbcabe",
+    "cccccbbccccabcec",
+    "accbacaaccbaacce",
+    "ebabbaacbccccabb",
+    "cbceccbbcacccbcb",
+    "ccbcbbcccaabcbac",
+    "abbcceaaebcccacc",
+    "becccacbacccccbc",
+    "eaabcbccacaabccc",
   ] },
   "tile-tg2-indigo": { w: 16, h: 16, pal: {"g":"#6d6ab0","m":"#5e5ca0","l":"#827ec0","d":"#4c498c","a":"#c4cfef","q":"#6a8ab0","z":"#d3c4ef"}, rows: [
     "dzzgmmddllggmlld",
@@ -60015,6 +60590,24 @@ const ART = {
     "lldaagggggmmllgg",
     "mmggxxggllmmmmmm",
     "mxxgxxgglggmmmmm",
+  ] },
+  "tile-tg2-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","b":"#709083","c":"#a9d9c6","d":"#3a7ca5","e":"#e8f0d8","f":"#566e65"}, rows: [
+    "bbcccccbbccccbba",
+    "ceceebccccecbaac",
+    "bccbcccaccbccceb",
+    "cbcecaecbaaaccbb",
+    "baccabbcaacacbac",
+    "ecccbcccacabacac",
+    "cbbcbaacabbaebee",
+    "bccbeaabbacecabb",
+    "caaecbeccaccbccb",
+    "aacbcccccabccacc",
+    "cbaeccccbbbbbbab",
+    "ccabcabcccbcebcc",
+    "acacbacbcabbacca",
+    "cabacceabbccccbb",
+    "baccbcabccccacbb",
+    "ccaacbeecaccbcce",
   ] },
   "tile-tg2-pallet": { w: 16, h: 16, pal: {"g":"#84b356","m":"#72a348","l":"#9cc46e","d":"#5f903c","a":"#e8e0a0","x":"#b3b356","z":"#c5e8a0"}, rows: [
     "lddmmmddddggggll",
@@ -60088,6 +60681,24 @@ const ART = {
     "mmllmmllalaammmm",
     "mmddmgglaaxxmmmm",
   ] },
+  "tile-tg2-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","b":"#787381","c":"#b6afc4","d":"#7a6ab0","e":"#d8d0e8","f":"#5c5964"}, rows: [
+    "bccbacabacbcbcba",
+    "ccccebcaccacbcac",
+    "cccbacbaccbcaeec",
+    "bbccaaacbccccccb",
+    "aacacabcccaccbac",
+    "ccbcbccceccbbbcc",
+    "bbbbcccaebcecacc",
+    "bcccccabcccccaba",
+    "aecccbcacaacbcce",
+    "eccbaaccbbbcccac",
+    "abbbecccbaacaccb",
+    "ccbbcbbcacacabca",
+    "cbccbacaceabcccc",
+    "ccbcebaccbccccac",
+    "bccccccbacccacba",
+    "cccbebcceccabecc",
+  ] },
   "tile-tg2-viridian": { w: 16, h: 16, pal: {"g":"#4f9e6c","m":"#448c5f","l":"#63b080","d":"#35734f","a":"#cfe8a8","x":"#599e4f","z":"#a9e8a8"}, rows: [
     "mmmmddllxxllmmgg",
     "zzmmddllxxllmaag",
@@ -60105,6 +60716,24 @@ const ART = {
     "mmddddmmllxxllmm",
     "llggmaagaammggdd",
     "llllmmggaammggdd",
+  ] },
+  "tile-th-azalea": { w: 16, h: 16, pal: {"a":"#6a4a2e","b":"#4c3521","c":"#845c3a","d":"#e8b84a"}, rows: [
+    "caaaaaaacaaaaaaa",
+    "aaaaaaacaaaaaaac",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaacaaaaaaacaa",
+    "aaaacaaaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaaaacaaaaa",
+    "acaaaaaaacaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaacaaaaaaac",
+    "aaaaaacaaaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaaaacaaa",
+    "aaacaaaaaaacaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-th-celadon": { w: 16, h: 48, pal: {"g":"#429a6e","m":"#63c08f","d":"#286648","z":"#1e4d36","a":"#d0f0c0","k":"#5a3a24","r":"#56b786"}, rows: [
     "kkkkkkkaakkkkkkk",
@@ -60206,6 +60835,24 @@ const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
+  "tile-th-cherrygrove": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#7f3a2b","c":"#dc644b","d":"#e86a8a"}, rows: [
+    "caaaaaaacaaaaaaa",
+    "aaaaaaacaaaaaaac",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaacaaaaaaacaa",
+    "aaaacaaaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaaaacaaaaa",
+    "acaaaaaaacaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaacaaaaaaac",
+    "aaaaaacaaaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaaaacaaa",
+    "aaacaaaaaaacaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-th-cinnabar": { w: 16, h: 48, pal: {"g":"#9e5c46","m":"#c07e66","d":"#68382b","z":"#4e2a20","a":"#e8b89a","k":"#5a3a24","r":"#b8755e"}, rows: [
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
@@ -60256,6 +60903,24 @@ const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
+  "tile-th-ecruteak": { w: 16, h: 16, pal: {"a":"#7a3a2a","b":"#582a1e","c":"#984834","d":"#c03a2a"}, rows: [
+    "caaaaaaacaaaaaaa",
+    "aaaaaaacaaaaaaac",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaacaaaaaaacaa",
+    "aaaacaaaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaaaacaaaaa",
+    "acaaaaaaacaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaacaaaaaaac",
+    "aaaaaacaaaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaaaacaaa",
+    "aaacaaaaaaacaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-th-fuchsia": { w: 16, h: 48, pal: {"g":"#b26892","m":"#d28fb4","d":"#784563","z":"#5a344a","a":"#f4cfe2","k":"#5a3a24","r":"#c791b0"}, rows: [
     "zzzzzzzaazzzaazz",
     "zzzzzzdaadzzzzzz",
@@ -60305,6 +60970,24 @@ const ART = {
     "ggggagggggaggggg",
     "dddddddddddddddd",
     "dddddddddddddddd",
+  ] },
+  "tile-th-goldenrod": { w: 16, h: 16, pal: {"a":"#8a4a3a","b":"#63352a","c":"#ac5c48","d":"#e85a4a"}, rows: [
+    "caaaaaaacaaaaaaa",
+    "aaaaaaacaaaaaaac",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaacaaaaaaacaa",
+    "aaaacaaaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaaaacaaaaa",
+    "acaaaaaaacaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaacaaaaaaac",
+    "aaaaaacaaaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaaaacaaa",
+    "aaacaaaaaaacaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-th-indigo": { w: 16, h: 48, pal: {"g":"#5c6ca0","m":"#7e8cc0","d":"#3a4670","z":"#2c3554","a":"#c4cfef","k":"#5a3a24","r":"#7e8bb5"}, rows: [
     "zzzzzzzaazzzzzzz",
@@ -60405,6 +61088,24 @@ const ART = {
     "ggggagggggaggggg",
     "dddddddddddddddd",
     "dddddddddddddddd",
+  ] },
+  "tile-th-newbark": { w: 16, h: 16, pal: {"a":"#4a7a8a","b":"#355863","c":"#5c98ac","d":"#3a7ca5"}, rows: [
+    "caaaaaaacaaaaaaa",
+    "aaaaaaacaaaaaaac",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaacaaaaaaacaa",
+    "aaaacaaaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaaaacaaaaa",
+    "acaaaaaaacaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaacaaaaaaac",
+    "aaaaaacaaaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaaaacaaa",
+    "aaacaaaaaaacaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-th-pallet": { w: 16, h: 48, pal: {"g":"#8aa348","m":"#b3c46e","d":"#5e7330","z":"#465624","a":"#e8e0a0","k":"#5a3a24","r":"#a3bb64"}, rows: [
     "kkkkkkkaakkkaakk",
@@ -60606,6 +61307,24 @@ const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
+  "tile-th-violet": { w: 16, h: 16, pal: {"a":"#5a5a7a","b":"#414158","c":"#707098","d":"#7a6ab0"}, rows: [
+    "caaaaaaacaaaaaaa",
+    "aaaaaaacaaaaaaac",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaacaaaaaaacaa",
+    "aaaacaaaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaaaacaaaaa",
+    "acaaaaaaacaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaacaaaaaaac",
+    "aaaaaacaaaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaaaacaaa",
+    "aaacaaaaaaacaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-th-viridian": { w: 16, h: 48, pal: {"g":"#448c4c","m":"#63b06b","d":"#2a5c32","z":"#204525","a":"#cfe8a8","k":"#5a3a24","r":"#53ab5d"}, rows: [
     "zzzzzzzaazzzzzzz",
     "zzzzzzdaadzzzzzz",
@@ -60656,6 +61375,24 @@ const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
+  "tile-tl-azalea": { w: 16, h: 16, pal: {"a":"#78bc72","b":"#4e7a4a","d":"#e8b84a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahggaaaahggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaddddddddddddaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-tl-celadon": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#32805a","s":"#a87f4e","a":"#d0f0c0","z":"#88c871","h":"#d5f5d8","F":"#6a6a80"}, rows: [
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
@@ -60692,6 +61429,24 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
+  "tile-tl-cherrygrove": { w: 16, h: 16, pal: {"a":"#b5d691","b":"#768b5e","d":"#e86a8a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahggaaaahggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaddddddddddddaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-tl-cinnabar": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#824636","s":"#a87f4e","a":"#e8b89a","z":"#d47a42","h":"#ede1af","F":"#6a6a80"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -60710,6 +61465,24 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
+  "tile-tl-ecruteak": { w: 16, h: 16, pal: {"a":"#d99561","b":"#8d613f","d":"#c03a2a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahggaaaahggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaddddddddddddaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-tl-fuchsia": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#96567c","s":"#a87f4e","a":"#f4cfe2","z":"#dc68a4","h":"#f4e7f7","F":"#6a6a80"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -60727,6 +61500,24 @@ const ART = {
     "ssssssssssssssss",
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
+  ] },
+  "tile-tl-goldenrod": { w: 16, h: 16, pal: {"a":"#d2b582","b":"#887654","d":"#e85a4a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahggaaaahggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaddddddddddddaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-tl-indigo": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#49588c","s":"#a87f4e","a":"#c4cfef","z":"#6481d5","h":"#ddd8f4","F":"#6a6a80"}, rows: [
     "dddddddddddddddd",
@@ -60763,6 +61554,24 @@ const ART = {
     "ssssssssssssssss",
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
+  ] },
+  "tile-tl-newbark": { w: 16, h: 16, pal: {"a":"#9ac7b5","b":"#648176","d":"#3a7ca5","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahggaaaahggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaddddddddddddaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-tl-pallet": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#75903c","s":"#a87f4e","a":"#e8e0a0","z":"#d3c348","h":"#e7f4be","F":"#6a6a80"}, rows: [
     "FFFFFFFFFFFFFFFF",
@@ -60835,6 +61644,24 @@ const ART = {
     "ssssssssssssssss",
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
+  ] },
+  "tile-tl-violet": { w: 16, h: 16, pal: {"a":"#a6a0b3","b":"#6c6874","d":"#7a6ab0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahggaaaahggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaagggaaaagggaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaddddddddddddaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-tl-viridian": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#35733e","s":"#a87f4e","a":"#cfe8a8","z":"#9ed14f","h":"#d0f0c0","F":"#6a6a80"}, rows: [
     "dddddddddddddddd",
@@ -60962,6 +61789,42 @@ const ART = {
     "mmmmmmmzmmmmmmmm",
     "zzzzzzzzzzzzzzzz",
   ] },
+  "tile-towerwood": { w: 16, h: 16, pal: {"a":"#6e4f30","b":"#4e3822","c":"#8a683f"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "aacbaaabaaabacab",
+    "aaabcaabaaabaaab",
+    "aaabaacbaaabaaab",
+    "aaabaaabcaabaaab",
+    "aaabaaabaacbaaab",
+    "acabaaabaaabcaab",
+    "aaabaaabaaabaacb",
+    "aaabacabaaabaaab",
+    "aaabaaabaaabaaab",
+    "aaabaaabacabaaab",
+    "caabaaabaaabaaab",
+    "aacbaaabaaabacab",
+    "aaabcaabaaabaaab",
+    "aaabaacbaaabaaab",
+    "bbbbbbbbbbbbbbbb",
+  ] },
+  "tile-tr-azalea": { w: 16, h: 16, pal: {"a":"#6a4a2e","b":"#4c3521","c":"#845c3a","d":"#e8b84a"}, rows: [
+    "dddddddddddddddd",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaacaaaaa",
+    "aaaacaaaaacaaaaa",
+    "aaaacaaaaacaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaacaaaaaca",
+    "aacaaaaacaaaaaca",
+    "aacaaaaacaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-tr-celadon": { w: 16, h: 48, pal: {"g":"#429a6e","m":"#63c08f","d":"#32805a","a":"#d0f0c0"}, rows: [
     "dddddddaaddddddd",
     "dddddddaaddddddd",
@@ -61062,6 +61925,24 @@ const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
+  "tile-tr-cherrygrove": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#7f3a2b","c":"#dc644b","d":"#e86a8a"}, rows: [
+    "dddddddddddddddd",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "aaaabaaaabcaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aacabaaaabaaacba",
+    "aaaabaaaabaaaaba",
+    "aaaabcaaabaaaaba",
+    "acaabaaaabaacaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabaaaabaaaabc",
+    "caaabaaaabacaaba",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabacaabaaaaba",
+  ] },
   "tile-tr-cinnabar": { w: 16, h: 48, pal: {"g":"#9e5c46","m":"#c07e66","d":"#824636","a":"#e8b89a"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -61112,6 +61993,24 @@ const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
+  "tile-tr-ecruteak": { w: 16, h: 16, pal: {"a":"#7a3a2a","b":"#582a1e","c":"#984834","d":"#c03a2a"}, rows: [
+    "dddddddddddddddd",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+    "aababcaababcaaba",
+    "abaacbabaacbabaa",
+    "baacaabaacaabaac",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+    "aababcaababcaaba",
+    "abaacbabaacbabaa",
+    "baacaabaacaabaac",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+  ] },
   "tile-tr-fuchsia": { w: 16, h: 48, pal: {"g":"#b26892","m":"#d28fb4","d":"#96567c","a":"#f4cfe2"}, rows: [
     "dddddddaadddaadd",
     "ddddddmaamdddddd",
@@ -61161,6 +62060,24 @@ const ART = {
     "dddddddddddddddd",
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
+  ] },
+  "tile-tr-goldenrod": { w: 16, h: 16, pal: {"a":"#8a4a3a","b":"#63352a","c":"#ac5c48","d":"#e85a4a"}, rows: [
+    "dddddddddddddddd",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "aaaabaaaabcaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aacabaaaabaaacba",
+    "aaaabaaaabaaaaba",
+    "aaaabcaaabaaaaba",
+    "acaabaaaabaacaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabaaaabaaaabc",
+    "caaabaaaabacaaba",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabacaabaaaaba",
   ] },
   "tile-tr-indigo": { w: 16, h: 48, pal: {"g":"#5c6ca0","m":"#7e8cc0","d":"#49588c","a":"#c4cfef"}, rows: [
     "dddddddaaddddddd",
@@ -61261,6 +62178,24 @@ const ART = {
     "dddddddddddddddd",
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
+  ] },
+  "tile-tr-newbark": { w: 16, h: 16, pal: {"a":"#4a7a8a","b":"#355863","c":"#5c98ac","d":"#3a7ca5"}, rows: [
+    "dddddddddddddddd",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaacaaaaa",
+    "aaaacaaaaacaaaaa",
+    "aaaacaaaaacaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaacaaaaaca",
+    "aacaaaaacaaaaaca",
+    "aacaaaaacaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-tr-pallet": { w: 16, h: 48, pal: {"g":"#8aa348","m":"#b3c46e","d":"#75903c","a":"#e8e0a0"}, rows: [
     "dddddddaadddaadd",
@@ -61462,6 +62397,24 @@ const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
+  "tile-tr-violet": { w: 16, h: 16, pal: {"a":"#5a5a7a","b":"#414158","c":"#707098","d":"#7a6ab0"}, rows: [
+    "dddddddddddddddd",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+    "aababcaababcaaba",
+    "abaacbabaacbabaa",
+    "baacaabaacaabaac",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+    "aababcaababcaaba",
+    "abaacbabaacbabaa",
+    "baacaabaacaabaac",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+  ] },
   "tile-tr-viridian": { w: 16, h: 48, pal: {"g":"#448c4c","m":"#63b06b","d":"#35733e","a":"#cfe8a8"}, rows: [
     "dddddddaaddddddd",
     "ddddddmaamdddddd",
@@ -61638,6 +62591,24 @@ const ART = {
     "aaaaccaaacaaaaad",
     "aacacacbaababbab",
   ] },
+  "tile-tw-azalea": { w: 16, h: 16, pal: {"a":"#78bc72","b":"#4e7a4a","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "ababaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahgggaaaaabaaa",
+    "aaaggggbaaaaaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaaggggaaaaaabaa",
+    "aaabbbbaaaaaaaaa",
+    "aaaaaaaaaaabaaaa",
+    "aabaaaaaaaaaaaab",
+    "aaaaabaaaabaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaab",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-tw-celadon": { w: 16, h: 16, pal: {"w":"#88cfaa","n":"#52b983","s":"#429a6e","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
@@ -61674,6 +62645,24 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
+  "tile-tw-cherrygrove": { w: 16, h: 16, pal: {"a":"#b5d691","b":"#768b5e","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "abaabaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "abaaaabaaaaaaaaa",
+    "aaahgggaaaaaaaaa",
+    "aaaggggaabaaabaa",
+    "aaaggggbaaaaaaaa",
+    "aaaggggaaaaaaaba",
+    "abaggggabaaaaaaa",
+    "aaabbbbaaaaaaaaa",
+    "aaaaaaaaabaaaaaa",
+    "aaaaaaaaaaaaaaab",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaabaabaabaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-tw-cinnabar": { w: 16, h: 16, pal: {"w":"#cf9e8b","n":"#b97055","s":"#9e5c46","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
@@ -61692,6 +62681,24 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
+  "tile-tw-ecruteak": { w: 16, h: 16, pal: {"a":"#d99561","b":"#8d613f","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaaaaaaaaaaaa",
+    "aaababaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahgggaaaaaaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaaggggabaaaaaaa",
+    "aaaggggaaaaabaaa",
+    "aaaggggaaaaaaaaa",
+    "aaabbbbaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaba",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaab",
+    "bbbbbbbbbbbbbbbb",
+  ] },
   "tile-tw-fuchsia": { w: 16, h: 16, pal: {"w":"#e4bcd2","n":"#ca7ba7","s":"#b26892","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
@@ -61709,6 +62716,24 @@ const ART = {
     "nnnnnnnnnnnnnnnn",
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
+  ] },
+  "tile-tw-goldenrod": { w: 16, h: 16, pal: {"a":"#d2b582","b":"#887654","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "aaaaabaaaaaaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aaaaaaaaaaabaaaa",
+    "aaahgggaaaaaaaaa",
+    "abbggggbaaaaaaaa",
+    "baaggggaaaaaaaaa",
+    "aaaggggaaaaaaaab",
+    "aaaggggaaaaaaaaa",
+    "aaabbbbaaaaaaaba",
+    "aaaaaaaaaaabaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaba",
+    "bbaaaaaabaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-tw-indigo": { w: 16, h: 16, pal: {"w":"#a4aed3","n":"#6d7db8","s":"#5c6ca0","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
     "tttttttttttttttt",
@@ -61745,6 +62770,24 @@ const ART = {
     "nnnnnnnnnnnnnnnn",
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
+  ] },
+  "tile-tw-newbark": { w: 16, h: 16, pal: {"a":"#9ac7b5","b":"#648176","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaabaaaaaaaaa",
+    "aaaaaaaaaaabaaaa",
+    "aaaaaaaabaaaaaba",
+    "aaahgggaaaaaaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaaggggbaaaaabaa",
+    "aaabbbbaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaabaaaaaaaa",
+    "aabaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-tw-pallet": { w: 16, h: 16, pal: {"w":"#c8d495","n":"#aabd5d","s":"#8aa348","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
     "tttttttttttttttt",
@@ -61867,6 +62910,24 @@ const ART = {
     "nnnnnnnnnnnnnnnn",
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
+  ] },
+  "tile-tw-violet": { w: 16, h: 16, pal: {"a":"#a6a0b3","b":"#6c6874","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+    "bbbbbbbbbbbbbbbb",
+    "aaaaaabbaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaahgggbaaaaaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaaggggaaaaabaaa",
+    "aaaggggaaaabaaaa",
+    "aaaggggaaaaaaaaa",
+    "aaabbbbaaaaaaaaa",
+    "aaaaaabaaaaaaaab",
+    "aaaaaaaaaaaaaaaa",
+    "aaabaaaabaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "tile-tw-viridian": { w: 16, h: 16, pal: {"w":"#84c18a","n":"#55a85e","s":"#448c4c","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
     "tttttttttttttttt",
@@ -62371,6 +63432,24 @@ const ART = {
     "aawwbbwwaawwbbbb",
     "bbbbaawwwwbbaaww",
     "bbbbaawwwwaaaaww",
+  ] },
+  "tile-woodfloor": { w: 16, h: 16, pal: {"a":"#a87c4e","b":"#86603a","c":"#c09a68"}, rows: [
+    "baaaaaaaabaaacaa",
+    "baaaaaacabaaaaaa",
+    "bcaaaaaaabaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "aacabaaaaaaaabac",
+    "aaaabaaaacaaabaa",
+    "aaacbaaaaaaaabaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaabaaaaaaa",
+    "aaaaaaaabaacaaaa",
+    "aaaaacaabaaaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaabaacaaaaabaaa",
+    "caabaaaaaaaabcaa",
+    "aaabaaacaaaabaaa",
+    "bbbbbbbbbbbbbbbb",
   ] },
   "ball-greatball": { w: 16, h: 16, pal: {"O":"#202028","U":"#3868d8","h":"#8ab8ff","R":"#e84040","W":"#f4f4f8","s":"#b8b8c8","B":"#ffffff"}, rows: [
     "................",
@@ -82440,6 +83519,9 @@ for (const k of W7_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // props draw tile-prop-<kind> (same convention as W6/W7).
 for (const k of [...O1_WALL_KINDS, ...O1_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of O1_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Arc 2 Stage J3a: Johto kinds — same convention as O1.
+for (const k of [...J3_WALL_KINDS, ...J3_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
+for (const k of J3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -82476,6 +83558,7 @@ function doorOpenCanvas(doc, kind) {
 const FACADE_GROUPS = {};
 for (const t of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
   'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo']) FACADE_GROUPS['tw-' + t] = 'house';
+for (const t of JOHTO_TOWN_ORDER) FACADE_GROUPS['tw-' + t] = 'house';
 for (const k of ['wall-house-lit', 'wall-house-unlit', 'wall-house-plain',
   'wall-wood-lit', 'wall-brick-lit', 'wall-brick-plain']) FACADE_GROUPS[k] = 'house';
 FACADE_GROUPS['wall-center'] = 'center';
@@ -82505,6 +83588,19 @@ for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
 }
 for (const id of ['pallet', 'cerulean', 'celadon', 'lavender', 'fuchsia', 'cinnabar']) {
   TILE_ART['flora-' + id] = 'tile-flora-' + id;
+}
+// Arc 2 Stage J3a: Johto town identity kinds -> their authored tiles
+// (the resolver's prefix branches handle tg/tg2/tc/td/tr/tl/th/tw for
+// any town id; tc2 canopy variants are optional and simply absent).
+for (const id of JOHTO_TOWN_ORDER) {
+  TILE_ART['tg-' + id] = 'tile-tg-' + id;
+  TILE_ART['tg2-' + id] = 'tile-tg2-' + id;
+  TILE_ART['tc-' + id] = 'tile-tc-' + id;
+  TILE_ART['td-' + id] = 'tile-td-' + id;
+  TILE_ART['tr-' + id] = 'tile-tr-' + id;
+  TILE_ART['tl-' + id] = 'tile-tl-' + id;
+  TILE_ART['th-' + id] = 'tile-th-' + id;
+  TILE_ART['tw-' + id] = 'tile-tw-' + id;
 }
 // Premium+ W5 round 2: second town ground + town house roof/wall kinds.
 for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
@@ -82731,6 +83827,7 @@ function buildArtTileCache(doc) {
   // ---- Premium+ W6: floors, foundations, facades, door-open frames ----
   for (const k of W6_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of O1_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of J3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -82879,6 +83976,7 @@ const FLOOR_VARIANTS = {
 };
 for (const k of W6_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of O1_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of J3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -82897,9 +83995,11 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Premium+ W7 (TX-6): dressing + gate/arch props.
   ...W7_PROP_KINDS,
   // Arc 1.5 Stage O1: Orange props composite over their ground too.
-  ...O1_PROP_KINDS]);
+  ...O1_PROP_KINDS,
+  // Arc 2 Stage J3a: Johto props composite over their ground too.
+  ...J3_PROP_KINDS]);
 function groundFamilyOf(kind) {
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind))) return kind; // W6/O1 floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -86867,6 +87967,16 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // U+1E00+152, tiles.mjs) are walkable ground, swapped from walkable
   // ground chars, so floor stays floor.
   ...[158, 159, 160, 162]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Arc 2 Stage J3a: the Johto floor kinds (cityfloor / woodfloor —
+  // J3_KIND_DEFS idx 5,6 at U+1E00+164, tiles.mjs) and the six Johto
+  // settlements' town-ground chars (tg at idx 173+i*8, tg2 at +1,
+  // tiles.mjs JOHTO_TOWN_CHARS) are walkable ground, swapped from
+  // walkable ground chars, so floor stays floor.
+  ...[169, 170]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  ...[0, 1, 2, 3, 4, 5]
+    .flatMap((i) => [173 + i * 8, 174 + i * 8])
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -97481,6 +98591,6109 @@ MAPS5.vermilion = {
 };
 
 
+// ---- src/data/maps6.mjs ----
+// maps6.mjs — Arc 2 Stage J3a: WEST JOHTO (maps, world art data, wild
+// tables). 44 new maps: 6 towns, 12 routes/dungeons, 26 interiors.
+// Travel law: the Johto embark lands at newbark (registry: pallet ->
+// newbark, ferryArc 'johto' — the Pallet dock captain is appended at
+// loadMap via quests.mjs TALE_NPCS, the Vermilion/CAPT ORANGE pattern);
+// the walking chain newbark -> ecruteak is connected end-to-end, with
+// Union Cave as the Route 32 through-passage. The shared 'center' and
+// 'mart' interiors serve every town via via{} tickets — no per-town
+// centers/marts are authored. Gym interiors are layouts only
+// (leaders/battles: Stage J4); the Day-Care system is Stage J6 (the
+// building + interior shell stand on Route 34); the Ilex shrine and
+// the Burned Tower beast statues are dressing for Stage J5. East
+// edges: r36 (27,8)/(27,9) and r37 (23,8)/(23,9) run to the map edge
+// with NO warps — J3b stitches r38/r42 there (see audit register).
+// Generated by ~/workspace/ashs-journey-qa/johto-j3a/gen_maps6.py
+// (deterministic) in the maps5.mjs idiom — edit the generator, not
+// this file.
+const MAPS6 = {
+  "newbark": {
+    "id": "newbark",
+    "name": "New Bark Town",
+    "music": "pallet-theme",
+    "rows": [
+      "ắắắắắắắắắắắắắắắắắắắắắắắắắắắắ",
+      "ắ_ậậ_FẮậậẮoẮẮẅẮ_ậậ_ậ_ậậ_ậậ_ắ",
+      "ắ_Ắdeeeef_ậjklmẮậẳẳẳoậậẮẮ_Ắắ",
+      "ắ_ẮZZ45ZZ_ậAJKAậậẴsẴẮậẤẮậậậắ",
+      "ắ_Ẅ......ậậ....ậo...ậo_Ắ_ậẮắ",
+      "ắ.S........................ắ",
+      "ắ_ậẮ_Ắ_ẅẮ__Ắậ.._ậậ__Ấậậ_ậậẄắ",
+      "ắậẮậnậ_ậ_ẮẮậẮ..Ằậ_Ắ__ậẮẮẰậậắ",
+      "ắ_ậ_ậẮậ_ẮẮậậậ...............",
+      "ắ_ẮậậậẮẮậẮậẮậ...............",
+      "ắậẮ_ậẮậẮậ__ậậ..Ắ_ẮẮ_ẮẮF_ậẮ_ắ",
+      "ắ__ẮẄậ_ậẮẮẰ_o..Ẅ_Ắậ_Ắ___ẮẤ_ắ",
+      "ắẮ_,,,,ậ_Ắ__ậ..ậậậậ_,,,,ậậẮắ",
+      "ắẮ_,,,,__ậ_ậ_..ẮẤậậậ,,,,ậẄẮắ",
+      "ắ__Ắ_ậ__ẮậẮẮ_..ậẮẮ___Ắậậ_ậ_ắ",
+      "ắẮ_ậ_ậậậẮậ_ậ_..Sẅ_ẮẮ_ẮẮ_ậậẮắ",
+      "ắ~~~~~~~~~~~~..~~~~~~~~~~~~ắ",
+      "ắ~~~~~~~~~~~~..~~~~~~~~~~~~ắ"
+    ],
+    "warps": [
+      {
+        "x": 5,
+        "y": 3,
+        "to": {
+          "map": "elm-lab",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "to": {
+          "map": "elm-lab",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 12,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "newbark",
+          "x": 12,
+          "y": 4
+        }
+      },
+      {
+        "x": 13,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "newbark",
+          "x": 13,
+          "y": 4
+        }
+      },
+      {
+        "x": 18,
+        "y": 3,
+        "to": {
+          "map": "house-newbark",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 8,
+        "to": {
+          "map": "r29",
+          "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 9,
+        "to": {
+          "map": "r29",
+          "x": 1,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 2,
+        "y": 5,
+        "text": "PROF. ELM'S LAB — New Bark's own Pokemon laboratory. Elm studies how Pokemon grow and hatch."
+      },
+      {
+        "x": 15,
+        "y": 15,
+        "text": "NEW BARK DOCK — The Johto boat ties up here. West across the water lies Pallet Town and home."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 12,
+        "y": 15,
+        "name": "CAPT WESTWIND",
+        "art": "sailor",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "The New Bark run is the western crossing — Pallet Town, straight across the water.",
+          "Step aboard when you're ready. Johto keeps no one waiting who knows her moods."
+        ],
+        "ferry": "pallet",
+        "ferryArc": "johto"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "name": "WREN",
+        "art": "lady",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "New Bark is where the wind comes from — that's what the old name means, anyway.",
+          "Professor Elm's lab coats have pockets full of apricorns. Don't ask me why."
+        ]
+      },
+      {
+        "x": 19,
+        "y": 6,
+        "name": "TOMO",
+        "art": "kid",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "A bird Pokemon delivered a letter to the lab once. A LETTER.",
+          "When I grow up I'm studying eggs, just like Professor Elm."
+        ]
+      },
+      {
+        "x": 6,
+        "y": 13,
+        "name": "ELDER MARA",
+        "art": "elder",
+        "skin": "#e8b888",
+        "shirt": "#b0503c",
+        "pants": "#2a2a3a",
+        "hair": "#5a3a2a",
+        "dialogue": [
+          "I watched them raise the lab, brick by brick. Elm was a boy with a notebook then.",
+          "The lake gives us our weather and our suppers. Mind both."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "sentret",
+          "min": 101,
+          "max": 104,
+          "weight": 30
+        },
+        {
+          "species": "hoothoot",
+          "min": 101,
+          "max": 104,
+          "weight": 25
+        },
+        {
+          "species": "pidgey",
+          "min": 101,
+          "max": 103,
+          "weight": 20
+        },
+        {
+          "species": "ledyba",
+          "min": 102,
+          "max": 105,
+          "weight": 12
+        },
+        {
+          "species": "spinarak",
+          "min": 102,
+          "max": 105,
+          "weight": 8
+        },
+        {
+          "species": "rattata",
+          "min": 101,
+          "max": 103,
+          "weight": 5
+        }
+      ],
+      "water": [
+        {
+          "species": "poliwag",
+          "min": 101,
+          "max": 108,
+          "weight": 25
+        },
+        {
+          "species": "magikarp",
+          "min": 101,
+          "max": 106,
+          "weight": 25
+        },
+        {
+          "species": "goldeen",
+          "min": 102,
+          "max": 109,
+          "weight": 18
+        },
+        {
+          "species": "tentacool",
+          "min": 102,
+          "max": 110,
+          "weight": 14
+        },
+        {
+          "species": "wooper",
+          "min": 103,
+          "max": 110,
+          "weight": 10
+        },
+        {
+          "species": "marill",
+          "min": 104,
+          "max": 111,
+          "weight": 8
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 13,
+      "y": 15
+    }
+  },
+  "cherrygrove": {
+    "id": "cherrygrove",
+    "name": "Cherrygrove City",
+    "music": "viridian-theme",
+    "rows": [
+      "ặặặặặặặặặặặặặặặặặặặặặặặặặặặặ",
+      "ặẶẶoẶẶẶ_ẏẵẵẵ_ẶẶ_ẵẶẵẶ__ẅẵẵẵẵặ",
+      "ặn_jklmẵẶdeefẶẸẻẻẻ_ẵ____oẵẵặ",
+      "ặ_ẶAJKAẶẶP12PẵẵẼsẼẵẶẵẵẵẵẵẶFặ",
+      "ặẵẶ....Ặẵ....ẏẵ...ẵẵẶ_ẵ_ẵẵẶặ",
+      "ặ.S........................ặ",
+      "ặ_ẵẵẵẵẶẵẅ_Ặẵ___Ặẵ_Ẹ_..Ặẵ_Ặ_ặ",
+      "ặẵẶẸ___Ặẵ__ẵẵẵẶnẏ_ẵẶ.._Ặ_FẶặ",
+      "ặ...........................",
+      "ặ...........................",
+      "ặẵẵẶẶẵẵẵẶ___ẶẵẶẅẶẵẵ_Ặ_ẵẵ_ẵ_ặ",
+      "ặ_Ặẵẵẵ_ẵẶẵẅẵ_ẶF___Ặ_ẵẶẶ_ẵẵẶặ",
+      "ặẵẵFFFFFFF_ẶnẶẶ,,,,ẶẶẅẵFẵẶẵặ",
+      "ặẵ_~~~~~~~ẵẶẶẵF,,,,___,,,Ặ_ặ",
+      "ặẵF~~~~~~~___ẵẵẵẵ_ẵẏẵẶ,,,ẵ_ặ",
+      "ặF_~~~~~~~_ẵẶẵ_ẵ_ẶẶẵẶẵẶ_ẵẏẶặ",
+      "ặ__~~~~~~~__ẏẵ_ẶFẶẵẵ_ẵẶẶẵẶ_ặ",
+      "ặặặặặặặặặặặặặặặặặặặặặặặặặặặặ"
+    ],
+    "warps": [
+      {
+        "x": 4,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "cherrygrove",
+          "x": 4,
+          "y": 4
+        }
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "cherrygrove",
+          "x": 5,
+          "y": 4
+        }
+      },
+      {
+        "x": 10,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "cherrygrove",
+          "x": 10,
+          "y": 4
+        }
+      },
+      {
+        "x": 11,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "cherrygrove",
+          "x": 11,
+          "y": 4
+        }
+      },
+      {
+        "x": 16,
+        "y": 3,
+        "to": {
+          "map": "house-cherrygrove",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 8,
+        "to": {
+          "map": "r30",
+          "x": 11,
+          "y": 16
+        }
+      },
+      {
+        "x": 27,
+        "y": 9,
+        "to": {
+          "map": "r30",
+          "x": 12,
+          "y": 16
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 2,
+        "y": 5,
+        "text": "CHERRYGROVE CITY — The city of fragrant flowers. Route 30 climbs north from the east gate."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 11,
+        "y": 11,
+        "name": "OLD MARIN",
+        "art": "fisher",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "The pond's stocked by the city, but the big ones are nobody's fools.",
+          "Flowers on the water, flowers on the wind. Cherrygrove earns its name."
+        ]
+      },
+      {
+        "x": 17,
+        "y": 6,
+        "name": "PETAL",
+        "art": "lass",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "Every garden here is a competition nobody admits to entering.",
+          "My flowerbed beat the mayor's this spring. He pretends not to mind."
+        ]
+      },
+      {
+        "x": 23,
+        "y": 12,
+        "name": "GUIDE GENT",
+        "art": "gent",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "First time in Johto? The road east climbs to Violet City, past Mr. Pokemon's house country.",
+          "Take it slow. The region rewards trainers who look around."
+        ]
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Cherrygrove Mart — balls, potions, and flower seeds we are not supposed to sell you."
+        ],
+        "mart": {
+          "stock": [
+            "pokeball",
+            "greatball",
+            "potion",
+            "superpotion",
+            "antidote",
+            "awakening"
+          ]
+        }
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "sentret",
+          "min": 103,
+          "max": 107,
+          "weight": 26
+        },
+        {
+          "species": "hoothoot",
+          "min": 103,
+          "max": 107,
+          "weight": 22
+        },
+        {
+          "species": "pidgey",
+          "min": 103,
+          "max": 106,
+          "weight": 18
+        },
+        {
+          "species": "ledyba",
+          "min": 104,
+          "max": 108,
+          "weight": 12
+        },
+        {
+          "species": "spinarak",
+          "min": 104,
+          "max": 108,
+          "weight": 10
+        },
+        {
+          "species": "caterpie",
+          "min": 104,
+          "max": 107,
+          "weight": 12
+        }
+      ],
+      "water": [
+        {
+          "species": "poliwag",
+          "min": 101,
+          "max": 108,
+          "weight": 25
+        },
+        {
+          "species": "magikarp",
+          "min": 101,
+          "max": 106,
+          "weight": 25
+        },
+        {
+          "species": "goldeen",
+          "min": 102,
+          "max": 109,
+          "weight": 18
+        },
+        {
+          "species": "tentacool",
+          "min": 102,
+          "max": 110,
+          "weight": 14
+        },
+        {
+          "species": "wooper",
+          "min": 103,
+          "max": 110,
+          "weight": 10
+        },
+        {
+          "species": "marill",
+          "min": 104,
+          "max": 111,
+          "weight": 8
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 2,
+      "y": 8
+    }
+  },
+  "violet": {
+    "id": "violet",
+    "name": "Violet City",
+    "music": "viridian-theme",
+    "rows": [
+      "ếếếếếếếếếếếếếếếếếếếếếếếếếếếếếế",
+      "ế__n_ẽẽẽ__ẽẽo__ẽ_ẽẾ_ẽẾẽẾẾẾRẾẽế",
+      "ếẾ_jklm_ẾdeefẾẽềềềềẽẾềềềềẾ_ểểể",
+      "ế_ẽAJKA_ẾP12P_ẾUVYUẽẾỂỂỂỂ_ẽỄsỄ",
+      "ếẽẾ....ẽẽ...._Ế....ẽS....ẽẾ...",
+      "ế.S..........................ế",
+      "ế_ẽ___ẽ_Ếẽ_ẾẽẤ..Ến_Ếẽ_ẾẾ_ẽẾ_Ấế",
+      "ếẽẾẽ_nẾẤẽẾn_ẽẽ..ẽẽ_ẾỀẽẽẽẽnẈẾẾế",
+      "ế..............._nẽ_RẾẾẾẽẽẾnẽế",
+      "ế..............._ẾẾṀ_ẾẽẾẾẽ___ế",
+      "ếẾ__ẽ_Ế_ẽẾẈẾ_Ề..ẽRẾẽẾẽẽẽ__ṀẽẾế",
+      "ếẽẽoẽẽ__ẾẽẾẽẾẽ.._____ẽ_ẽ__ẽẾẽế",
+      "ếẽẽẤ,,,,_ẽẾẾẾẽ..ẽ_,,,Ấ__ẽẽẽẽẽế",
+      "ếẾẽ_,,,,ẾRẽẽẾẾ.._ẽ,,,_~~~~~_ẽế",
+      "ế_ẽẾẾẾẽ_o_Ế_Ếẽ.._ẾẤ__ẽ~~~~~Ẉẽế",
+      "ếẽẽẽẽẾ_ẾẽẾẾẽẾẽ..ẽẾẽẽẽỀ~~~~~_Ếế",
+      "ế__ẽẽẽẽẽẽ__ẽẽẾ..nẽ__ẽ_ẽẽ_ẽẽ_Ếế",
+      "ếếếếếếếếếếếếếế..ếếếếếếếếếếếếếế"
+    ],
+    "warps": [
+      {
+        "x": 4,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "violet",
+          "x": 4,
+          "y": 4
+        }
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "violet",
+          "x": 5,
+          "y": 4
+        }
+      },
+      {
+        "x": 10,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "violet",
+          "x": 10,
+          "y": 4
+        }
+      },
+      {
+        "x": 11,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "violet",
+          "x": 11,
+          "y": 4
+        }
+      },
+      {
+        "x": 16,
+        "y": 3,
+        "to": {
+          "map": "gym-violet",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 17,
+        "y": 3,
+        "to": {
+          "map": "gym-violet",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 22,
+        "y": 4,
+        "to": {
+          "map": "sprout-tower-1",
+          "x": 7,
+          "y": 10
+        }
+      },
+      {
+        "x": 23,
+        "y": 4,
+        "to": {
+          "map": "sprout-tower-1",
+          "x": 7,
+          "y": 10
+        }
+      },
+      {
+        "x": 28,
+        "y": 3,
+        "to": {
+          "map": "house-violet",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 14,
+        "y": 17,
+        "to": {
+          "map": "r32",
+          "x": 11,
+          "y": 1
+        }
+      },
+      {
+        "x": 15,
+        "y": 17,
+        "to": {
+          "map": "r32",
+          "x": 12,
+          "y": 1
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 2,
+        "y": 5,
+        "text": "VIOLET CITY — The city of nostalgic scents. Sprout Tower sways north of the gym; its monks welcome visitors."
+      },
+      {
+        "x": 20,
+        "y": 4,
+        "text": "SPROUT TOWER — A tower built around a single great pillar of wood. It sways, and it has never once fallen."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 18,
+        "y": 6,
+        "name": "MONK SAGE",
+        "art": "monk",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "The tower pillar was a Bellsprout a hundred feet tall, so the story goes.",
+          "We train beside it to learn what it teaches: bend, and do not break."
+        ]
+      },
+      {
+        "x": 9,
+        "y": 12,
+        "name": "IRIS",
+        "art": "lass",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "Earl's academy drills type matchups until we dream them.",
+          "Flying types nest in the tower eaves. The whole city hears them at dawn."
+        ]
+      },
+      {
+        "x": 24,
+        "y": 7,
+        "name": "OLD TOWERKEEP",
+        "art": "elder",
+        "skin": "#e8b888",
+        "shirt": "#b0503c",
+        "pants": "#2a2a3a",
+        "hair": "#5a3a2a",
+        "dialogue": [
+          "Sixty years I have watched that tower sway in storms.",
+          "It leans toward whoever needs the lesson. Today it leans toward you, I think."
+        ]
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Violet Mart — tower-climbing essentials, and rope. So much rope."
+        ],
+        "mart": {
+          "stock": [
+            "pokeball",
+            "greatball",
+            "potion",
+            "superpotion",
+            "antidote",
+            "awakening"
+          ]
+        }
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "hoothoot",
+          "min": 108,
+          "max": 113,
+          "weight": 24
+        },
+        {
+          "species": "mareep",
+          "min": 109,
+          "max": 114,
+          "weight": 18
+        },
+        {
+          "species": "pidgey",
+          "min": 108,
+          "max": 112,
+          "weight": 16
+        },
+        {
+          "species": "spearow",
+          "min": 109,
+          "max": 114,
+          "weight": 14
+        },
+        {
+          "species": "hoppip",
+          "min": 109,
+          "max": 114,
+          "weight": 14
+        },
+        {
+          "species": "zubat",
+          "min": 110,
+          "max": 115,
+          "weight": 14
+        }
+      ],
+      "water": [
+        {
+          "species": "poliwag",
+          "min": 108,
+          "max": 116,
+          "weight": 22
+        },
+        {
+          "species": "magikarp",
+          "min": 108,
+          "max": 114,
+          "weight": 22
+        },
+        {
+          "species": "goldeen",
+          "min": 109,
+          "max": 117,
+          "weight": 16
+        },
+        {
+          "species": "tentacool",
+          "min": 109,
+          "max": 118,
+          "weight": 14
+        },
+        {
+          "species": "wooper",
+          "min": 110,
+          "max": 118,
+          "weight": 10
+        },
+        {
+          "species": "marill",
+          "min": 111,
+          "max": 119,
+          "weight": 9
+        },
+        {
+          "species": "remoraid",
+          "min": 112,
+          "max": 120,
+          "weight": 7
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 2,
+      "y": 8
+    }
+  },
+  "azalea": {
+    "id": "azalea",
+    "name": "Azalea Town",
+    "music": "viridian-theme",
+    "rows": [
+      "ệệệệệệệệệệệệệệệệệệệệệệệệệệệệ",
+      "ệ_____ễỆễỆỆễoỆễễ_ễễầầ_ễỆỆ_ễệ",
+      "ệ_Ỉjklmễễdeef_ẑỉỉỉỉễỆịịịỆẑịị",
+      "ệễễAJKA_ỆP12PỆễUVYU_ỆỌsỌỆầỌs",
+      "ệỈầ....Ệễ....Ệẑ...._ễ...ễễ..",
+      "ệ.S...................S....ệ",
+      "ệễ_ỆầỆễỆễễỆỈỆỆỆ_ẍỆễễễ_ễễẦỆỆệ",
+      "ệỆễ__ỆỆ_ễ_ễễẑỆễ__ễỆỆầẑễễ9n_ệ",
+      "...........................ệ",
+      "...........................ệ",
+      "ệễầễỆỆ____ễễễễễễ_ầễỆỆễễỆ__ễệ",
+      "ệ_ỆỆễ_ễỆ_ễ_ễễễễễ__ỆễễễnễỆ_ẑệ",
+      "ệ_ỆỆỆễ_Ỉ__ễnỆỆỆễ_Ệễễễễễễễễ_ệ",
+      "ệễễỆ,,,,ễễễỆ__,,,,__ỆỆnỆỆỆ_ệ",
+      "ệễ_Ệ,,,,ễ_ễ_Ệẑ,,,,ỆễễễỆỆ_nễệ",
+      "ệ_Ệ__ỆỆoễ_ễ_ễầ_ễễỆ_ễ_ễ_ễễễ_ệ",
+      "ệễỆ_ỆẍễễỆễ__Ệễễễễễ_n_Ệầễễễẍệ",
+      "ệệệệệệệệệệệệệệệệệệệệệệệệệệệệ"
+    ],
+    "warps": [
+      {
+        "x": 4,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "azalea",
+          "x": 4,
+          "y": 4
+        }
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "azalea",
+          "x": 5,
+          "y": 4
+        }
+      },
+      {
+        "x": 10,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "azalea",
+          "x": 10,
+          "y": 4
+        }
+      },
+      {
+        "x": 11,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "azalea",
+          "x": 11,
+          "y": 4
+        }
+      },
+      {
+        "x": 16,
+        "y": 3,
+        "to": {
+          "map": "gym-azalea",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 17,
+        "y": 3,
+        "to": {
+          "map": "gym-azalea",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 22,
+        "y": 3,
+        "to": {
+          "map": "kurt-house",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 3,
+        "to": {
+          "map": "house-azalea",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "to": {
+          "map": "ilex-forest",
+          "x": 25,
+          "y": 8
+        }
+      },
+      {
+        "x": 0,
+        "y": 9,
+        "to": {
+          "map": "ilex-forest",
+          "x": 25,
+          "y": 9
+        }
+      },
+      {
+        "x": 24,
+        "y": 7,
+        "to": {
+          "map": "slowpoke-well",
+          "x": 9,
+          "y": 12
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 22,
+        "y": 5,
+        "text": "SLOWPOKE WELL — The town well, and the Slowpokes own it. Mind your step on the way down."
+      },
+      {
+        "x": 2,
+        "y": 5,
+        "text": "AZALEA TOWN — Where people and Pokemon live in happy harmony. Kurt works his craft on the north street."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 12,
+        "y": 6,
+        "name": "MAIZIE",
+        "art": "kid",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "Grandpa Kurt makes Poke Balls from apricorns, one at a time, by hand.",
+          "The Slowpoke bring rain. That's not a story, that's just Azalea."
+        ]
+      },
+      {
+        "x": 18,
+        "y": 11,
+        "name": "WELLKEEPER JONAS",
+        "art": "elder",
+        "skin": "#e8b888",
+        "shirt": "#b0503c",
+        "pants": "#2a2a3a",
+        "hair": "#5a3a2a",
+        "dialogue": [
+          "The well ran dry once, long ago. The Slowpoke yawned, and the rain came back.",
+          "We don't hurry them. They don't hurry us. It works out."
+        ]
+      },
+      {
+        "x": 7,
+        "y": 13,
+        "name": "CHARCOAL KID",
+        "art": "youngster",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Ilex Forest charcoal burns the sweetest. Every Azalea kid learns the kilns.",
+          "Bug types run the gym AND the forest. Town wouldn't have it any other way."
+        ]
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Azalea Mart — forest-ready stock. The apricorn balls are Kurt's department, not ours."
+        ],
+        "mart": {
+          "stock": [
+            "pokeball",
+            "greatball",
+            "superpotion",
+            "hyperpotion",
+            "antidote",
+            "parlyzheal",
+            "revive"
+          ]
+        }
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "spinarak",
+          "min": 118,
+          "max": 124,
+          "weight": 20
+        },
+        {
+          "species": "oddish",
+          "min": 118,
+          "max": 124,
+          "weight": 18
+        },
+        {
+          "species": "ledyba",
+          "min": 118,
+          "max": 123,
+          "weight": 14
+        },
+        {
+          "species": "hoppip",
+          "min": 119,
+          "max": 125,
+          "weight": 14
+        },
+        {
+          "species": "sentret",
+          "min": 118,
+          "max": 123,
+          "weight": 12
+        },
+        {
+          "species": "sunkern",
+          "min": 120,
+          "max": 126,
+          "weight": 10
+        },
+        {
+          "species": "ariados",
+          "min": 121,
+          "max": 127,
+          "weight": 6
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 116,
+          "max": 124,
+          "weight": 20
+        },
+        {
+          "species": "goldeen",
+          "min": 117,
+          "max": 126,
+          "weight": 16
+        },
+        {
+          "species": "tentacool",
+          "min": 117,
+          "max": 127,
+          "weight": 14
+        },
+        {
+          "species": "marill",
+          "min": 118,
+          "max": 127,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 119,
+          "max": 128,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 120,
+          "max": 130,
+          "weight": 10
+        },
+        {
+          "species": "corsola",
+          "min": 120,
+          "max": 129,
+          "weight": 8
+        },
+        {
+          "species": "qwilfish",
+          "min": 121,
+          "max": 130,
+          "weight": 6
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 25,
+      "y": 8
+    }
+  },
+  "goldenrod": {
+    "id": "goldenrod",
+    "name": "Goldenrod City",
+    "music": "pewter-theme",
+    "rows": [
+      "ỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏ..ỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏ",
+      "ỏẩ_ọ_ỎỎọỎọọẩẩ__Ỏ.._Ốọẩ_ẩ_ỎỎỎọẩ_Ỏẩỏ",
+      "ỏỎỎjklmẩ_deefọẩố..ố__ốốốố__ốốốốẩỎỏ",
+      "ỏọẩAJKAọẋP12Pẩ_U..UẩọỒỒỒỒỎ_ỒsỒỒẩ_ỏ",
+      "ỏỎọ....ẩỎ...._Ỏ....ọỎ....__....ọẩỏ",
+      "ỏ.S...............S..............ỏ",
+      "ỏọọọẩọỎ_ẩọọ_ọ_Ẋ_..ẩẩ_ẊỐ_ẩẩỎẩ_ẩ_Ỏẩỏ",
+      "ỏẊọọỎ_ẩ_ẩẩọẩoỎọỎ..ẩỎọọ_ỎẩẩẩọỎ__Ỏẩỏ",
+      "ỏ_ẋnỎỎỎọỎọ_Ỏ_Ỏẩẩ.._ẋ_ọỎ_ọẩ__ỎọẩọỎỏ",
+      "ỏ_ỎỎọỎ_ẩ____ọ_ọỎ..ọọ_ẊẊọ__ọỎọẩỎọẩỏ",
+      "ỏ_ọ__ọ__ọọ_ọẌọ__..ẩ_ọ_Ỏ__ẩốốốốỎọọỏ",
+      "ỏẩỎỎẩỎọọ_Ỏ__ẩọọ_..ọ_Ỏ_ẩọnẩỒsỒỒ___ỏ",
+      "ỏẩỎ_Ỏ_ọọọọ_ẩọẩọ_..Ẍ_ẋỎoọỐọ..S.Ỏẩẋỏ",
+      "ỏọḋ_ẩọ_ẩ__Ố_ẩỎ_ẩ..____ọẩẋỐ_ỎọẩỎỎẩỏ",
+      "ỏẩ_ọọ___ọ_ọ_ẩ_ỎỎ..Ẍẩẩ__ỎỐỎẩỎḋẩ___ỏ",
+      "ỏọọẩ,,,,ọẩẩẩ_ẩ__..__Ỏọ__Ỏ_Ẍ_ḋ__ọọỏ",
+      "ỏỎọỎ,ẩ,,ọo_ọẩọẩẩ.._Ỏ_ẩỎ_ẩẩ,,ọẩ_ẋỎỏ",
+      "ỏỎỎẩẩỎọọ__ẩ__Ỏọẩ.._ọỎẊọọẩ,ẩ,_ọọỎẩỏ",
+      "ỏoẩ_ẩ_Ỏ_ọọ_ẋọẊẩẩ..ẩ_Ỏ_ọ_ẋọẩẩẋ_ọẩẩỏ",
+      "ỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏỏ"
+    ],
+    "warps": [
+      {
+        "x": 4,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "goldenrod",
+          "x": 4,
+          "y": 4
+        }
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "goldenrod",
+          "x": 5,
+          "y": 4
+        }
+      },
+      {
+        "x": 10,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "goldenrod",
+          "x": 10,
+          "y": 4
+        }
+      },
+      {
+        "x": 11,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "goldenrod",
+          "x": 11,
+          "y": 4
+        }
+      },
+      {
+        "x": 16,
+        "y": 3,
+        "to": {
+          "map": "gym-goldenrod",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 17,
+        "y": 3,
+        "to": {
+          "map": "gym-goldenrod",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 22,
+        "y": 4,
+        "to": {
+          "map": "radio-tower-1",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 23,
+        "y": 4,
+        "to": {
+          "map": "radio-tower-1",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 28,
+        "y": 3,
+        "to": {
+          "map": "goldenrod-underground-1",
+          "x": 10,
+          "y": 10
+        }
+      },
+      {
+        "x": 16,
+        "y": 0,
+        "to": {
+          "map": "r35",
+          "x": 11,
+          "y": 14
+        }
+      },
+      {
+        "x": 17,
+        "y": 0,
+        "to": {
+          "map": "r35",
+          "x": 12,
+          "y": 14
+        }
+      },
+      {
+        "x": 27,
+        "y": 11,
+        "to": {
+          "map": "house-goldenrod",
+          "x": 6,
+          "y": 8
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 28,
+        "y": 12,
+        "text": "GOLDENROD DEPARTMENT STORE — Six floors of everything a trainer can carry. (The annex doors serve the east arcade.)"
+      },
+      {
+        "x": 2,
+        "y": 5,
+        "text": "GOLDENROD CITY — The festival city of sights and sounds. Radio Tower broadcasts from the west end of the north street."
+      },
+      {
+        "x": 18,
+        "y": 5,
+        "text": "GOLDENROD UNDERGROUND — A shopping passage beneath the city. Stairs down by the landmark door."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 12,
+        "y": 7,
+        "name": "DJ MARY FAN",
+        "art": "lass",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "I queue at the Radio Tower every morning hoping for a tour group slot.",
+          "The afternoon request show plays half the city's dedications. The other half is static and hope."
+        ]
+      },
+      {
+        "x": 21,
+        "y": 6,
+        "name": "COMMUTER KOBE",
+        "art": "gent",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Goldenrod runs on magnet trains and strong coffee. I run on both.",
+          "North street for business, south road for home. That's the whole map a local needs."
+        ]
+      },
+      {
+        "x": 8,
+        "y": 15,
+        "name": "FLOWER SELLER UNA",
+        "art": "lady",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "The flower shop by the gym does arrangements for victories AND defeats. Same price.",
+          "City flowers bloom loud. Like everything else here."
+        ]
+      },
+      {
+        "x": 25,
+        "y": 15,
+        "name": "BIKE HAND RYO",
+        "art": "worker",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "The Bike Shop lends wheels to half the trainers in Johto.",
+          "Goldenrod legs are cycling legs. You'll see."
+        ]
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Goldenrod Mart — the big-city counter. If we don't stock it, the department store does."
+        ],
+        "mart": {
+          "stock": [
+            "greatball",
+            "ultraball",
+            "hyperpotion",
+            "fullheal",
+            "revive",
+            "superpotion"
+          ]
+        }
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "meowth",
+          "min": 126,
+          "max": 133,
+          "weight": 20
+        },
+        {
+          "species": "snubbull",
+          "min": 127,
+          "max": 134,
+          "weight": 16
+        },
+        {
+          "species": "pidgeotto",
+          "min": 127,
+          "max": 134,
+          "weight": 12
+        },
+        {
+          "species": "abra",
+          "min": 127,
+          "max": 134,
+          "weight": 10
+        },
+        {
+          "species": "hoppip",
+          "min": 126,
+          "max": 132,
+          "weight": 12
+        },
+        {
+          "species": "natu",
+          "min": 128,
+          "max": 135,
+          "weight": 10
+        },
+        {
+          "species": "granbull",
+          "min": 129,
+          "max": 136,
+          "weight": 6
+        },
+        {
+          "species": "miltank",
+          "min": 129,
+          "max": 136,
+          "weight": 5
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 124,
+          "max": 132,
+          "weight": 18
+        },
+        {
+          "species": "goldeen",
+          "min": 125,
+          "max": 134,
+          "weight": 15
+        },
+        {
+          "species": "tentacool",
+          "min": 125,
+          "max": 135,
+          "weight": 13
+        },
+        {
+          "species": "marill",
+          "min": 126,
+          "max": 135,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 127,
+          "max": 136,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 128,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "corsola",
+          "min": 128,
+          "max": 137,
+          "weight": 8
+        },
+        {
+          "species": "octillery",
+          "min": 130,
+          "max": 140,
+          "weight": 5
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 16,
+      "y": 17
+    }
+  },
+  "ecruteak": {
+    "id": "ecruteak",
+    "name": "Ecruteak City",
+    "music": "pewter-theme",
+    "rows": [
+      "ỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗ",
+      "ỗỖ_ổnỖổổổ_ỖổỖổỖỖổỖỖổổổnỖổ_Ộ_oỗ",
+      "ỗổỖjklmổổdeef_ỖộộộộỘ_ộộộộổ_ớớớ",
+      "ỗ_ỖAJKA_ỖP12PỖổUVYUổỖỚỚỚỚổ_ỜsỜ",
+      "ỗỖổ....ổ_....ổổ...._ổ....ỖỖ...",
+      "ỗ.S..........................ỗ",
+      "ỗẤổ_nổ_Ỗ_ỖổỖổổ.._ỖổổỖ_ổỖ_ổổỖ_ỗ",
+      "ỗoỖỖổổỖỖổẎ_ẤẤỖ..ỖỖổỖ_ổỖỖ_Ỗ_ổ_ỗ",
+      "ỗổỖổổỖổổổ_Ỗ__ổ..ẤổổỖổ_ỖoỖổổỖ_ỗ",
+      "ỗỖỖṀổnổỖ__Ỗo__.._Ỗ__ổỖổổổ_ổ_Ỗỗ",
+      "ỗ_ổẫẫẫẫẎổổỖổổỖ.._ổỖ__ộộộộổỖổ_ỗ",
+      "ỗổổẫ99ẫổỖ____Ỗ..Ỗ_ỖỖổỚsỚỚổ_Ỗổỗ",
+      "ỗổo...SẎỖổỖỖ_Ấ..Ỗổổ_Ỗ..S.ổổỘỖỗ",
+      "ỗ_ỖỖỖỖỖổỖ_ỖỖổỖ..ổ___ổổỖ_ổẤỖỖổỗ",
+      "ỗỖổ___ổổỖổ,,,,..ổṀổổ_Ỗ_ổổổ_ổ_ỗ",
+      "ỗỖỖỖỖỖỖổỖỖ,,,,..Ỗổ_ỖỖ_ổ_,,,ổổỗ",
+      "ỗ__ổỖổ_Ỗổổ_ỖẎổ.._ổổổổổoổ,,,ổ_ỗ",
+      "ỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗỗ"
+    ],
+    "warps": [
+      {
+        "x": 4,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "ecruteak",
+          "x": 4,
+          "y": 4
+        }
+      },
+      {
+        "x": 5,
+        "y": 3,
+        "to": {
+          "map": "center",
+          "x": 4,
+          "y": 4
+        },
+        "via": {
+          "map": "ecruteak",
+          "x": 5,
+          "y": 4
+        }
+      },
+      {
+        "x": 10,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "ecruteak",
+          "x": 10,
+          "y": 4
+        }
+      },
+      {
+        "x": 11,
+        "y": 3,
+        "to": {
+          "map": "mart",
+          "x": 5,
+          "y": 5
+        },
+        "via": {
+          "map": "ecruteak",
+          "x": 11,
+          "y": 4
+        }
+      },
+      {
+        "x": 16,
+        "y": 3,
+        "to": {
+          "map": "gym-ecruteak",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 17,
+        "y": 3,
+        "to": {
+          "map": "gym-ecruteak",
+          "x": 7,
+          "y": 8
+        }
+      },
+      {
+        "x": 22,
+        "y": 4,
+        "to": {
+          "map": "bell-tower-1",
+          "x": 7,
+          "y": 10
+        }
+      },
+      {
+        "x": 23,
+        "y": 4,
+        "to": {
+          "map": "bell-tower-1",
+          "x": 7,
+          "y": 10
+        }
+      },
+      {
+        "x": 28,
+        "y": 3,
+        "to": {
+          "map": "house-ecruteak",
+          "x": 6,
+          "y": 8
+        }
+      },
+      {
+        "x": 22,
+        "y": 11,
+        "to": {
+          "map": "dance-theater",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 4,
+        "y": 11,
+        "to": {
+          "map": "burned-tower-1",
+          "x": 8,
+          "y": 10
+        }
+      },
+      {
+        "x": 5,
+        "y": 11,
+        "to": {
+          "map": "burned-tower-1",
+          "x": 9,
+          "y": 10
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 23,
+        "y": 12,
+        "text": "DANCE THEATER — The Kimono Girls perform the old dances. Visitors are welcome, quietly."
+      },
+      {
+        "x": 6,
+        "y": 12,
+        "text": "BURNED TOWER — It caught the lightning long ago and never stopped smouldering in story. Enter respectfully."
+      },
+      {
+        "x": 2,
+        "y": 5,
+        "text": "ECRUTEAK CITY — A city of old traditions. Two towers watch it: the Bell Tower standing, the Burned Tower remembered."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 17,
+        "y": 6,
+        "name": "SAGE OF THE BELLS",
+        "art": "monk",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "The Bell Tower's bells ring for a Pokemon the old songs call the rainbow's keeper.",
+          "We sweep the approach every morning. Some mornings, there are footprints that are not ours."
+        ]
+      },
+      {
+        "x": 26,
+        "y": 7,
+        "name": "KIMONO DANCER SAKURA",
+        "art": "lady",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "Five sisters, five dances, one stage. The theater keeps Ecruteak's heart beating.",
+          "Watch a performance before you climb anything. Towers respect a settled heart."
+        ]
+      },
+      {
+        "x": 9,
+        "y": 14,
+        "name": "HISTORIAN ELIAS",
+        "art": "elder",
+        "skin": "#e8b888",
+        "shirt": "#b0503c",
+        "pants": "#2a2a3a",
+        "hair": "#5a3a2a",
+        "dialogue": [
+          "A hundred and fifty years ago, lightning took the west tower. The east one still answers its bells.",
+          "Ask the towers your questions. Just don't expect them to hurry."
+        ]
+      },
+      {
+        "x": 3,
+        "y": 5,
+        "name": "MART CLERK",
+        "art": "clerk",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Ecruteak Mart — quiet stock for a quiet city. Incense sells out first, always."
+        ],
+        "mart": {
+          "stock": [
+            "pokeball",
+            "greatball",
+            "superpotion",
+            "hyperpotion",
+            "antidote",
+            "parlyzheal",
+            "revive"
+          ]
+        }
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "noctowl",
+          "min": 132,
+          "max": 139,
+          "weight": 20
+        },
+        {
+          "species": "growlithe",
+          "min": 133,
+          "max": 140,
+          "weight": 16
+        },
+        {
+          "species": "stantler",
+          "min": 133,
+          "max": 140,
+          "weight": 14
+        },
+        {
+          "species": "murkrow",
+          "min": 134,
+          "max": 141,
+          "weight": 12
+        },
+        {
+          "species": "pidgeotto",
+          "min": 132,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "gastly",
+          "min": 133,
+          "max": 140,
+          "weight": 12
+        },
+        {
+          "species": "haunter",
+          "min": 135,
+          "max": 142,
+          "weight": 6
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 124,
+          "max": 132,
+          "weight": 18
+        },
+        {
+          "species": "goldeen",
+          "min": 125,
+          "max": 134,
+          "weight": 15
+        },
+        {
+          "species": "tentacool",
+          "min": 125,
+          "max": 135,
+          "weight": 13
+        },
+        {
+          "species": "marill",
+          "min": 126,
+          "max": 135,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 127,
+          "max": 136,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 128,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "corsola",
+          "min": 128,
+          "max": 137,
+          "weight": 8
+        },
+        {
+          "species": "octillery",
+          "min": 130,
+          "max": 140,
+          "weight": 5
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 14,
+      "y": 15
+    }
+  },
+  "r29": {
+    "id": "r29",
+    "name": "Route 29",
+    "music": "route1-theme",
+    "rows": [
+      "##########################",
+      "#___,__________,,F___,_F_#",
+      "#____,_,__,_F_Ẉ_,______,_#",
+      "#_________F____,_F,__,___#",
+      "#,__F______F_____,_______#",
+      "#,___,,,____,_,,__,_____,#",
+      "#_____R,,____n___________#",
+      "#,_S,____F_____F_#__,,___#",
+      "..........................",
+      "..........................",
+      "#,___F__F,Ấ_____,___F____#",
+      "#____,________,________,_#",
+      "#__,____,____,,_~~~~~~,__#",
+      "#__Ẉ,______,__F_~~~~~~Ấ,_#",
+      "#F_,_,__________~~~~~~,_,#",
+      "##########################"
+    ],
+    "warps": [
+      {
+        "x": 0,
+        "y": 8,
+        "to": {
+          "map": "newbark",
+          "x": 26,
+          "y": 8
+        }
+      },
+      {
+        "x": 0,
+        "y": 9,
+        "to": {
+          "map": "newbark",
+          "x": 26,
+          "y": 9
+        }
+      },
+      {
+        "x": 25,
+        "y": 8,
+        "to": {
+          "map": "cherrygrove",
+          "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "x": 25,
+        "y": 9,
+        "to": {
+          "map": "cherrygrove",
+          "x": 1,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 3,
+        "y": 7,
+        "text": "ROUTE 29 — New Bark Town to Cherrygrove City. The wind off the lake smells of rain and apricorns."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 8,
+        "y": 6,
+        "name": "HIKER BRAM",
+        "art": "hiker",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "First road out of New Bark. Every Johto journey starts with this wind.",
+          "Sentret at dawn, Hoothoot at dusk. The route keeps two shifts."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "sentret",
+          "min": 101,
+          "max": 105,
+          "weight": 28
+        },
+        {
+          "species": "hoothoot",
+          "min": 101,
+          "max": 105,
+          "weight": 24
+        },
+        {
+          "species": "pidgey",
+          "min": 101,
+          "max": 104,
+          "weight": 20
+        },
+        {
+          "species": "rattata",
+          "min": 101,
+          "max": 104,
+          "weight": 10
+        },
+        {
+          "species": "ledyba",
+          "min": 102,
+          "max": 106,
+          "weight": 10
+        },
+        {
+          "species": "spinarak",
+          "min": 102,
+          "max": 106,
+          "weight": 8
+        }
+      ],
+      "water": [
+        {
+          "species": "poliwag",
+          "min": 101,
+          "max": 108,
+          "weight": 25
+        },
+        {
+          "species": "magikarp",
+          "min": 101,
+          "max": 106,
+          "weight": 25
+        },
+        {
+          "species": "goldeen",
+          "min": 102,
+          "max": 109,
+          "weight": 18
+        },
+        {
+          "species": "tentacool",
+          "min": 102,
+          "max": 110,
+          "weight": 14
+        },
+        {
+          "species": "wooper",
+          "min": 103,
+          "max": 110,
+          "weight": 10
+        },
+        {
+          "species": "marill",
+          "min": 104,
+          "max": 111,
+          "weight": 8
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 1,
+      "y": 8
+    }
+  },
+  "r30": {
+    "id": "r30",
+    "name": "Route 30",
+    "music": "route1-theme",
+    "rows": [
+      "###########..###########",
+      "#_F,_,_____..__,____,__#",
+      "#_F______,_..___,F__,__#",
+      "#__R_______..__,,______#",
+      "#__~~~~~___..___Ẉ_,____#",
+      "#__~~~~~_,_..__R_,n__,_#",
+      "#__~~~~~F#_..______#F__#",
+      "#__~~~~~___..ẈR__,___,_#",
+      "#F_F_,n_Ẉ__..__,_____#_#",
+      "#_____,___,..,__,__,_,_#",
+      "#_Ẉ_F,_F__n..________#_#",
+      "#,______,__.._____,____#",
+      "#___,F___Ẉ_..F____,,__,#",
+      "#___,______..,_______,_#",
+      "#______,___..___#_,____#",
+      "#___,n,___#..S,,_______#",
+      "#___,__,_,_..__,,_,__,_#",
+      "###########..###########"
+    ],
+    "warps": [
+      {
+        "x": 11,
+        "y": 0,
+        "to": {
+          "map": "r31",
+          "x": 6,
+          "y": 14
+        }
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "to": {
+          "map": "r31",
+          "x": 7,
+          "y": 14
+        }
+      },
+      {
+        "x": 11,
+        "y": 17,
+        "to": {
+          "map": "cherrygrove",
+          "x": 26,
+          "y": 8
+        }
+      },
+      {
+        "x": 12,
+        "y": 17,
+        "to": {
+          "map": "cherrygrove",
+          "x": 26,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 13,
+        "y": 15,
+        "text": "ROUTE 30 — Cherrygrove City to Route 31. Berry trees line the climb; shake one and see."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 9,
+        "y": 10,
+        "name": "CAMPER ELI",
+        "art": "camper",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "I camp where the Mareep graze. Counting them is how I fall asleep.",
+          "The house up the road belongs to a berry researcher. Nice fellow, odd hours."
+        ]
+      },
+      {
+        "x": 14,
+        "y": 5,
+        "name": "LASS FERN",
+        "art": "lass",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "My Hoppip drifts over the pond when the wind picks up.",
+          "Route 30 is two climates: pond weather and hill weather."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "sentret",
+          "min": 105,
+          "max": 110,
+          "weight": 20
+        },
+        {
+          "species": "hoothoot",
+          "min": 105,
+          "max": 110,
+          "weight": 18
+        },
+        {
+          "species": "mareep",
+          "min": 106,
+          "max": 111,
+          "weight": 16
+        },
+        {
+          "species": "hoppip",
+          "min": 106,
+          "max": 111,
+          "weight": 14
+        },
+        {
+          "species": "pidgey",
+          "min": 105,
+          "max": 109,
+          "weight": 12
+        },
+        {
+          "species": "spinarak",
+          "min": 106,
+          "max": 111,
+          "weight": 10
+        },
+        {
+          "species": "ledyba",
+          "min": 106,
+          "max": 110,
+          "weight": 10
+        }
+      ],
+      "water": [
+        {
+          "species": "poliwag",
+          "min": 108,
+          "max": 116,
+          "weight": 22
+        },
+        {
+          "species": "magikarp",
+          "min": 108,
+          "max": 114,
+          "weight": 22
+        },
+        {
+          "species": "goldeen",
+          "min": 109,
+          "max": 117,
+          "weight": 16
+        },
+        {
+          "species": "tentacool",
+          "min": 109,
+          "max": 118,
+          "weight": 14
+        },
+        {
+          "species": "wooper",
+          "min": 110,
+          "max": 118,
+          "weight": 10
+        },
+        {
+          "species": "marill",
+          "min": 111,
+          "max": 119,
+          "weight": 9
+        },
+        {
+          "species": "remoraid",
+          "min": 112,
+          "max": 120,
+          "weight": 7
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 11,
+      "y": 16
+    }
+  },
+  "r31": {
+    "id": "r31",
+    "name": "Route 31",
+    "music": "route1-theme",
+    "rows": [
+      "##########################",
+      "#___F___,_,__,__,F,_,__,_#",
+      "##Ẉ,________,__F_________#",
+      "#,_,______________,F___,_#",
+      "#____,_________,_,___F___#",
+      "#_,F_,__Ẉ___F________,,,,#",
+      "#_Ấ_n,F,___,_,_,__#,n__F_#",
+      "#,_,__,nSF__,_______RR___#",
+      "#___F_....................",
+      "#___F_....................",
+      "#__FF,..#____,_F_____,___#",
+      "#_____..,F_Ấ_________,F__#",
+      "#___,_..__,_F____,_#_____#",
+      "#____F.._,_______,_______#",
+      "#_,F,,..__________,R__,__#",
+      "######..##################"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 15,
+        "to": {
+          "map": "r30",
+          "x": 11,
+          "y": 1
+        }
+      },
+      {
+        "x": 7,
+        "y": 15,
+        "to": {
+          "map": "r30",
+          "x": 12,
+          "y": 1
+        }
+      },
+      {
+        "x": 25,
+        "y": 8,
+        "to": {
+          "map": "violet",
+          "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "x": 25,
+        "y": 9,
+        "to": {
+          "map": "violet",
+          "x": 1,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 8,
+        "y": 7,
+        "text": "ROUTE 31 — Route 30 to Violet City. A dark little cave mouth sleeps east of the road; locals leave it be."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 12,
+        "y": 6,
+        "name": "YOUNGSTER COLE",
+        "art": "youngster",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Violet's gym leader watches the sky, not the road. That's all I'm saying.",
+          "I race the Spearow shadows home. They always win."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "mareep",
+          "min": 108,
+          "max": 114,
+          "weight": 20
+        },
+        {
+          "species": "hoppip",
+          "min": 108,
+          "max": 114,
+          "weight": 16
+        },
+        {
+          "species": "spearow",
+          "min": 109,
+          "max": 115,
+          "weight": 14
+        },
+        {
+          "species": "sentret",
+          "min": 108,
+          "max": 113,
+          "weight": 14
+        },
+        {
+          "species": "hoothoot",
+          "min": 108,
+          "max": 113,
+          "weight": 12
+        },
+        {
+          "species": "ekans",
+          "min": 109,
+          "max": 115,
+          "weight": 10
+        },
+        {
+          "species": "furret",
+          "min": 111,
+          "max": 116,
+          "weight": 8
+        },
+        {
+          "species": "skiploom",
+          "min": 111,
+          "max": 117,
+          "weight": 6
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 14
+    }
+  },
+  "r32": {
+    "id": "r32",
+    "name": "Route 32",
+    "music": "route1-theme",
+    "rows": [
+      "###########..###########",
+      "#___F______..__,___,_,_#",
+      "#F________n.._,,,______#",
+      "#_____,_,,,.._F,__,____#",
+      "#_,________.._Ấ_,______#",
+      "#__,,____F,.._,_S______#",
+      "#___F,F____......LL____#",
+      "#______,_,_..____F_____#",
+      "#__________.._,_____F_,#",
+      "#_____#_,F_..__,__Ấ__,,#",
+      "#RRRRRRRRRRRRRRRRRRRRRR#",
+      "#,,_F___,_Ẉ..F____,____#",
+      "#__F_LL......F_____~~~~#",
+      "#_____,_,__.._Ẉ____~~~~#",
+      "#_F___F____..______~~~~#",
+      "#_,,____F__..__,___~~~~#",
+      "#___F______.._F____~~~~#",
+      "#_,,______#..FF___F~~~~#",
+      "#__,,__,,__..#_____~~~~#",
+      "###########..###########"
+    ],
+    "warps": [
+      {
+        "x": 11,
+        "y": 0,
+        "to": {
+          "map": "violet",
+          "x": 14,
+          "y": 16
+        }
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "to": {
+          "map": "violet",
+          "x": 15,
+          "y": 16
+        }
+      },
+      {
+        "x": 11,
+        "y": 19,
+        "to": {
+          "map": "r33",
+          "x": 22,
+          "y": 8
+        }
+      },
+      {
+        "x": 12,
+        "y": 19,
+        "to": {
+          "map": "r33",
+          "x": 22,
+          "y": 9
+        }
+      },
+      {
+        "x": 17,
+        "y": 6,
+        "to": {
+          "map": "union-cave",
+          "x": 2,
+          "y": 1
+        }
+      },
+      {
+        "x": 18,
+        "y": 6,
+        "to": {
+          "map": "union-cave",
+          "x": 3,
+          "y": 1
+        }
+      },
+      {
+        "x": 5,
+        "y": 12,
+        "to": {
+          "map": "union-cave",
+          "x": 22,
+          "y": 14
+        }
+      },
+      {
+        "x": 6,
+        "y": 12,
+        "to": {
+          "map": "union-cave",
+          "x": 23,
+          "y": 14
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 16,
+        "y": 5,
+        "text": "UNION CAVE — Through to the south shore of Route 32. Bring a light you trust."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 9,
+        "y": 4,
+        "name": "HIKER SOL",
+        "art": "hiker",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "Union Cave cuts the cliff the long way round forgot.",
+          "Wooper own the cave pools. We just visit."
+        ]
+      },
+      {
+        "x": 14,
+        "y": 15,
+        "name": "FISHER WRENNA",
+        "art": "fisher",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "South shore fishing: the tide brings Marill this time of year.",
+          "Through the cave and the whole coast opens up. Worth the dark."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "wooper",
+          "min": 112,
+          "max": 118,
+          "weight": 20
+        },
+        {
+          "species": "mareep",
+          "min": 112,
+          "max": 118,
+          "weight": 16
+        },
+        {
+          "species": "pidgey",
+          "min": 112,
+          "max": 117,
+          "weight": 14
+        },
+        {
+          "species": "spearow",
+          "min": 113,
+          "max": 119,
+          "weight": 12
+        },
+        {
+          "species": "hoothoot",
+          "min": 112,
+          "max": 118,
+          "weight": 12
+        },
+        {
+          "species": "poliwag",
+          "min": 113,
+          "max": 119,
+          "weight": 10
+        },
+        {
+          "species": "furret",
+          "min": 114,
+          "max": 120,
+          "weight": 8
+        },
+        {
+          "species": "noctowl",
+          "min": 115,
+          "max": 121,
+          "weight": 8
+        }
+      ],
+      "water": [
+        {
+          "species": "poliwag",
+          "min": 108,
+          "max": 116,
+          "weight": 22
+        },
+        {
+          "species": "magikarp",
+          "min": 108,
+          "max": 114,
+          "weight": 22
+        },
+        {
+          "species": "goldeen",
+          "min": 109,
+          "max": 117,
+          "weight": 16
+        },
+        {
+          "species": "tentacool",
+          "min": 109,
+          "max": 118,
+          "weight": 14
+        },
+        {
+          "species": "wooper",
+          "min": 110,
+          "max": 118,
+          "weight": 10
+        },
+        {
+          "species": "marill",
+          "min": 111,
+          "max": 119,
+          "weight": 9
+        },
+        {
+          "species": "remoraid",
+          "min": 112,
+          "max": 120,
+          "weight": 7
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 11,
+      "y": 1
+    }
+  },
+  "union-cave": {
+    "id": "union-cave",
+    "name": "Union Cave",
+    "music": "pewter-theme",
+    "rows": [
+      "GGLLGGGGGGGGGGGGGGGGGGGGGG",
+      "GLLLLLLLLLLLLLLLLLýLLLLþLG",
+      "GLþLLSLLLLLLLLLLLLLLLLLLýG",
+      "GLLLLLLLLLLLýLLLLLLLLLLLLG",
+      "GLLNNLLLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLLLLLLLLLLNLLLLLLLG",
+      "GLLLLLýLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLNLLýLLLLþLLLLLLLLG",
+      "GLLLLLLLLLLLLLLLLLýLLLLLLG",
+      "GLL~~~~~~LLLLLLLLþLLLLLLLG",
+      "GLL~~~~~~LLLLLLýLLLLLLLLLG",
+      "GLL~~~~~ĀĀLLLLLLLLLLLLLLLG",
+      "GLL~~~~~ĀýLLLLLýLLLLLLLLLG",
+      "GLLLLLLLLLLLLLLLLLLLLLLLLG",
+      "GGGGGGGGGGGGGGGGGGGGGGLLGG"
+    ],
+    "warps": [
+      {
+        "x": 2,
+        "y": 0,
+        "to": {
+          "map": "r32",
+          "x": 17,
+          "y": 5
+        }
+      },
+      {
+        "x": 3,
+        "y": 0,
+        "to": {
+          "map": "r32",
+          "x": 18,
+          "y": 5
+        }
+      },
+      {
+        "x": 22,
+        "y": 15,
+        "to": {
+          "map": "r32",
+          "x": 5,
+          "y": 13
+        }
+      },
+      {
+        "x": 23,
+        "y": 15,
+        "to": {
+          "map": "r32",
+          "x": 6,
+          "y": 13
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 5,
+        "y": 2,
+        "text": "UNION CAVE — North door: Violet side. South door: the Azalea road. The pools are not for swimming."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 12,
+        "y": 8,
+        "name": "CAVER DUN",
+        "art": "hiker",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Two doors, one mountain. The cave doesn't care which way you're going.",
+          "Mind the boulders — they were here first, by a few million years."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.14,
+      "table": [
+        {
+          "species": "zubat",
+          "min": 113,
+          "max": 120,
+          "weight": 30
+        },
+        {
+          "species": "geodude",
+          "min": 114,
+          "max": 121,
+          "weight": 25
+        },
+        {
+          "species": "wooper",
+          "min": 114,
+          "max": 120,
+          "weight": 15
+        },
+        {
+          "species": "onix",
+          "min": 117,
+          "max": 124,
+          "weight": 8
+        },
+        {
+          "species": "machop",
+          "min": 115,
+          "max": 122,
+          "weight": 12
+        },
+        {
+          "species": "golbat",
+          "min": 118,
+          "max": 125,
+          "weight": 5
+        },
+        {
+          "species": "quagsire",
+          "min": 116,
+          "max": 123,
+          "weight": 5
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 2,
+      "y": 1
+    },
+    "indoor": true
+  },
+  "r33": {
+    "id": "r33",
+    "name": "Route 33",
+    "music": "route1-theme",
+    "rows": [
+      "########################",
+      "#_,_________,_______F__#",
+      "#___F_##____F__ầ,__ầ,,ầ#",
+      "#___~~~~~_____,F__,____#",
+      "#,,_~~~~~___,_,___,____#",
+      "#__,~~~~~,#__#_,_,__,_F#",
+      "#__,____F___#ầ_______,,#",
+      "#_,_____,_F_____F___S_F#",
+      "........................",
+      "........................",
+      "#,,____________n___,___#",
+      "#____,____,F,F,________#",
+      "#_R,_______F________,__#",
+      "#_Fầ___,,_______,____,,#",
+      "#F____,_____F_______,_ầ#",
+      "########################"
+    ],
+    "warps": [
+      {
+        "x": 23,
+        "y": 8,
+        "to": {
+          "map": "r32",
+          "x": 11,
+          "y": 18
+        }
+      },
+      {
+        "x": 23,
+        "y": 9,
+        "to": {
+          "map": "r32",
+          "x": 12,
+          "y": 18
+        }
+      },
+      {
+        "x": 0,
+        "y": 8,
+        "to": {
+          "map": "azalea",
+          "x": 26,
+          "y": 8
+        }
+      },
+      {
+        "x": 0,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 26,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 20,
+        "y": 7,
+        "text": "ROUTE 33 — Union Cave to Azalea Town. Rain rolls off the forest and waters the whole road."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 10,
+        "y": 11,
+        "name": "LASS WILLOW",
+        "art": "lass",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Azalea's slowpokes predict this road's rain better than the radio does.",
+          "The forest starts smelling of charcoal two bends from town."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "wooper",
+          "min": 116,
+          "max": 122,
+          "weight": 20
+        },
+        {
+          "species": "oddish",
+          "min": 117,
+          "max": 123,
+          "weight": 16
+        },
+        {
+          "species": "sentret",
+          "min": 116,
+          "max": 121,
+          "weight": 14
+        },
+        {
+          "species": "spinarak",
+          "min": 117,
+          "max": 123,
+          "weight": 12
+        },
+        {
+          "species": "hoppip",
+          "min": 117,
+          "max": 122,
+          "weight": 12
+        },
+        {
+          "species": "furret",
+          "min": 118,
+          "max": 124,
+          "weight": 10
+        },
+        {
+          "species": "quagsire",
+          "min": 119,
+          "max": 125,
+          "weight": 8
+        },
+        {
+          "species": "ledian",
+          "min": 119,
+          "max": 125,
+          "weight": 8
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 116,
+          "max": 124,
+          "weight": 20
+        },
+        {
+          "species": "goldeen",
+          "min": 117,
+          "max": 126,
+          "weight": 16
+        },
+        {
+          "species": "tentacool",
+          "min": 117,
+          "max": 127,
+          "weight": 14
+        },
+        {
+          "species": "marill",
+          "min": 118,
+          "max": 127,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 119,
+          "max": 128,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 120,
+          "max": 130,
+          "weight": 10
+        },
+        {
+          "species": "corsola",
+          "min": 120,
+          "max": 129,
+          "weight": 8
+        },
+        {
+          "species": "qwilfish",
+          "min": 121,
+          "max": 130,
+          "weight": 6
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 22,
+      "y": 8
+    }
+  },
+  "ilex-forest": {
+    "id": "ilex-forest",
+    "name": "Ilex Forest",
+    "music": "viridian-theme",
+    "rows": [
+      "############################",
+      "#,____F#___,_________F_#F_,#",
+      "##,,,F_F,,,___##,#____F_,__#",
+      "##__,___,_____ấ____,___##_F#",
+      "#_F,,,Ấ,,___FF_F__,____F_F_#",
+      "##__,Ấ__#_#F___S__F##______#",
+      "#__F,,F__ẤF___.___#____,_,,#",
+      "#,_#_,F,,___#F.F##,_F_,__SẤ#",
+      "#_,F_ẤẤF_,_,__.,_F_F#_Ấ____#",
+      "............................",
+      "............................",
+      "#Ấ_#F_,#_Ấ,,F_Ấ,#_,_##__,__#",
+      "#_F__#F_,_,_,FẤ,___#F#_____#",
+      "#__F_,,,_____F_______,_ẤẤ__#",
+      "#Ấ___,_,_,___F__,Ấ_F__,F___#",
+      "#F_,Ấ_,,,__#__Ấ#_#Ấ_FẤ,_,,_#",
+      "#_F,__#,__,_,_#_,_F________#",
+      "############################"
+    ],
+    "warps": [
+      {
+        "x": 27,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 1,
+          "y": 8
+        }
+      },
+      {
+        "x": 27,
+        "y": 10,
+        "to": {
+          "map": "azalea",
+          "x": 1,
+          "y": 9
+        }
+      },
+      {
+        "x": 0,
+        "y": 9,
+        "to": {
+          "map": "r34",
+          "x": 11,
+          "y": 16
+        }
+      },
+      {
+        "x": 0,
+        "y": 10,
+        "to": {
+          "map": "r34",
+          "x": 12,
+          "y": 16
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 15,
+        "y": 5,
+        "text": "FOREST SHRINE — Travellers leave flowers here for the voice of the forest. The moss is older than Azalea."
+      },
+      {
+        "x": 25,
+        "y": 7,
+        "text": "ILEX FOREST — Azalea Town to Route 34. Charcoal cutters keep the paths; the forest keeps everything else."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 8,
+        "y": 7,
+        "name": "BUG CATCHER NILS",
+        "art": "bugcatcher",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Heracross sap, Pineco shade, Oddish everywhere. This forest is a whole city.",
+          "The shrine? We leave flowers. Everybody leaves flowers. Nobody says why out loud."
+        ]
+      },
+      {
+        "x": 20,
+        "y": 12,
+        "name": "CHARCUTTER RUE",
+        "art": "worker",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "Third generation cutting Ilex charcoal. The forest grows back faster than we take.",
+          "Mind the webs after rain. The Ariados redecorate nightly."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.13,
+      "table": [
+        {
+          "species": "oddish",
+          "min": 120,
+          "max": 127,
+          "weight": 20
+        },
+        {
+          "species": "spinarak",
+          "min": 120,
+          "max": 127,
+          "weight": 16
+        },
+        {
+          "species": "paras",
+          "min": 121,
+          "max": 128,
+          "weight": 14
+        },
+        {
+          "species": "ledyba",
+          "min": 120,
+          "max": 126,
+          "weight": 12
+        },
+        {
+          "species": "hoppip",
+          "min": 121,
+          "max": 127,
+          "weight": 12
+        },
+        {
+          "species": "pineco",
+          "min": 122,
+          "max": 129,
+          "weight": 10
+        },
+        {
+          "species": "ariados",
+          "min": 123,
+          "max": 130,
+          "weight": 6
+        },
+        {
+          "species": "heracross",
+          "min": 124,
+          "max": 131,
+          "weight": 4
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 26,
+      "y": 9
+    }
+  },
+  "r34": {
+    "id": "r34",
+    "name": "Route 34",
+    "music": "route1-theme",
+    "rows": [
+      "###########..###########",
+      "#F__,____,_.._,F_#___,_#",
+      "#__,_____R_..____F_____#",
+      "#__________..______,F__#",
+      "#_,_____,__..F_,,R,,__Ấ#",
+      "#_____,____.._F_#______#",
+      "#_F________..____,Ẉ____#",
+      "#_________F..___ồồồ____#",
+      "#_________,.._,_ỔsỔ___R#",
+      "#_,__F____F..__S....,__#",
+      "#F#_______,..___Ấ_,_R__#",
+      "#__,_______..___nnnnn,_#",
+      "#,,~~~~~_,_.._F,,__F__F#",
+      "#__~~~~~_ẈF.._F__F_____#",
+      "#_,~~~~~_,,.._,,__,____#",
+      "#_,~~~~~_F_..,,_______,#",
+      "#_#____,F__..#FF__Ấ____#",
+      "###########..###########"
+    ],
+    "warps": [
+      {
+        "x": 11,
+        "y": 17,
+        "to": {
+          "map": "ilex-forest",
+          "x": 1,
+          "y": 9
+        }
+      },
+      {
+        "x": 12,
+        "y": 17,
+        "to": {
+          "map": "ilex-forest",
+          "x": 1,
+          "y": 10
+        }
+      },
+      {
+        "x": 11,
+        "y": 0,
+        "to": {
+          "map": "goldenrod",
+          "x": 16,
+          "y": 18
+        }
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "to": {
+          "map": "goldenrod",
+          "x": 17,
+          "y": 18
+        }
+      },
+      {
+        "x": 17,
+        "y": 8,
+        "to": {
+          "map": "daycare",
+          "x": 6,
+          "y": 8
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 15,
+        "y": 9,
+        "text": "POKEMON DAY-CARE — The couple on Route 34 raise Pokemon with famously patient hands."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 9,
+        "y": 6,
+        "name": "JOGGER AMARA",
+        "art": "lass",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "Goldenrod by lunch if my legs hold out. They usually hold out.",
+          "The Day-Care couple wave at every trainer. Every single one. It's a whole thing."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "oddish",
+          "min": 122,
+          "max": 129,
+          "weight": 16
+        },
+        {
+          "species": "meowth",
+          "min": 123,
+          "max": 130,
+          "weight": 14
+        },
+        {
+          "species": "hoppip",
+          "min": 122,
+          "max": 129,
+          "weight": 14
+        },
+        {
+          "species": "pidgey",
+          "min": 122,
+          "max": 128,
+          "weight": 12
+        },
+        {
+          "species": "snubbull",
+          "min": 124,
+          "max": 131,
+          "weight": 10
+        },
+        {
+          "species": "jumpluff",
+          "min": 125,
+          "max": 132,
+          "weight": 6
+        },
+        {
+          "species": "aipom",
+          "min": 124,
+          "max": 131,
+          "weight": 8
+        },
+        {
+          "species": "sunkern",
+          "min": 123,
+          "max": 130,
+          "weight": 8
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 116,
+          "max": 124,
+          "weight": 20
+        },
+        {
+          "species": "goldeen",
+          "min": 117,
+          "max": 126,
+          "weight": 16
+        },
+        {
+          "species": "tentacool",
+          "min": 117,
+          "max": 127,
+          "weight": 14
+        },
+        {
+          "species": "marill",
+          "min": 118,
+          "max": 127,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 119,
+          "max": 128,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 120,
+          "max": 130,
+          "weight": 10
+        },
+        {
+          "species": "corsola",
+          "min": 120,
+          "max": 129,
+          "weight": 8
+        },
+        {
+          "species": "qwilfish",
+          "min": 121,
+          "max": 130,
+          "weight": 6
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 11,
+      "y": 16
+    }
+  },
+  "r35": {
+    "id": "r35",
+    "name": "Route 35",
+    "music": "route1-theme",
+    "rows": [
+      "###########..###########",
+      "#___,_,__,_..Ẉ_,F___,__#",
+      "#F_,_F____Ẉ..,___,,__,_#",
+      "#Fn,,__F_,_.._,__~~~~_F#",
+      "#__,_______..F__,~~~~__#",
+      "#__________..____~~~~__#",
+      "#_____,_F__.._R________#",
+      "#__F_,___,_..__________#",
+      "#n_F,_,_,__.._,,_______#",
+      "#_,_,__,___.._,,n_____,#",
+      "#___ẈF_____..#,_______,#",
+      "#_F,_,_____.._F_,,__Ấ_F#",
+      "#F___,__,__..____,__n,n#",
+      "#__________..S_______Ấ_#",
+      "#,#_,____Ẉ_.._#__,,_,,_#",
+      "###########..###########"
+    ],
+    "warps": [
+      {
+        "x": 11,
+        "y": 15,
+        "to": {
+          "map": "goldenrod",
+          "x": 16,
+          "y": 1
+        }
+      },
+      {
+        "x": 12,
+        "y": 15,
+        "to": {
+          "map": "goldenrod",
+          "x": 17,
+          "y": 1
+        }
+      },
+      {
+        "x": 11,
+        "y": 0,
+        "to": {
+          "map": "national-park",
+          "x": 13,
+          "y": 16
+        }
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "to": {
+          "map": "national-park",
+          "x": 14,
+          "y": 16
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 13,
+        "y": 13,
+        "text": "ROUTE 35 — Goldenrod City to the National Park. The park gatekeepers count every visitor, cheerfully."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 9,
+        "y": 8,
+        "name": "PICNICKER GAIL",
+        "art": "lass",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Park day! I pack for three picnics and eat two on this road.",
+          "Natu watch the crossroads like tiny green judges."
+        ]
+      },
+      {
+        "x": 14,
+        "y": 10,
+        "name": "CAMPER ORIN",
+        "art": "camper",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "The ditch by the bend is Yanma water — dragonflies the size of teacups.",
+          "Goldenrod hums behind you, the park breathes ahead. Good road."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "meowth",
+          "min": 128,
+          "max": 135,
+          "weight": 16
+        },
+        {
+          "species": "snubbull",
+          "min": 129,
+          "max": 136,
+          "weight": 14
+        },
+        {
+          "species": "pidgeotto",
+          "min": 128,
+          "max": 135,
+          "weight": 14
+        },
+        {
+          "species": "natu",
+          "min": 130,
+          "max": 137,
+          "weight": 12
+        },
+        {
+          "species": "drowzee",
+          "min": 129,
+          "max": 136,
+          "weight": 12
+        },
+        {
+          "species": "aipom",
+          "min": 130,
+          "max": 137,
+          "weight": 10
+        },
+        {
+          "species": "granbull",
+          "min": 131,
+          "max": 138,
+          "weight": 7
+        },
+        {
+          "species": "yanma",
+          "min": 131,
+          "max": 138,
+          "weight": 7
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 124,
+          "max": 132,
+          "weight": 18
+        },
+        {
+          "species": "goldeen",
+          "min": 125,
+          "max": 134,
+          "weight": 15
+        },
+        {
+          "species": "tentacool",
+          "min": 125,
+          "max": 135,
+          "weight": 13
+        },
+        {
+          "species": "marill",
+          "min": 126,
+          "max": 135,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 127,
+          "max": 136,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 128,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "corsola",
+          "min": 128,
+          "max": 137,
+          "weight": 8
+        },
+        {
+          "species": "octillery",
+          "min": 130,
+          "max": 140,
+          "weight": 5
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 11,
+      "y": 14
+    }
+  },
+  "national-park": {
+    "id": "national-park",
+    "name": "National Park",
+    "music": "viridian-theme",
+    "rows": [
+      "ỏỏỏỏỏỏỏỏỏỏỏỏỏ..ỏỏỏỏỏỏỏỏỏỏỏỏỏ",
+      "ỏ____ọ_______..ẅ_ọ_Ẅọ__ọ__ọỏ",
+      "ỏ_____o__ọ___.._ọ_ọ__oẄọ__Ốỏ",
+      "ỏ__~~~~~ọọ__ọ.._ọ_,,,,,,_ọ_ỏ",
+      "ỏ__~~~~~_____..___,,,,,,ọ__ỏ",
+      "ỏ__~~~~~ọoỐỐỐ..o__,,,,,,ọ__ỏ",
+      "ỏẅo~~~~~____ẅ..___ọ_ọọọ___ọỏ",
+      "ỏ__ọ________ọḣḣF_ọọ________ỏ",
+      "ỏ____ọ___o___..____Ẅ__ọ___Ẅỏ",
+      "ỏ..........................ỏ",
+      "ỏọ___ọ____ọọ_..S______ọ_ọ__ỏ",
+      "ỏ_Ốọ_____Ố__ọ..oọ______ọ_ọ_ỏ",
+      "ỏọọọ,,,,,,ọF_..____,,,,,___ỏ",
+      "ỏ_ọ_,,,,,,__ọ..ọ___,,,,,ọ__ỏ",
+      "ỏ___,,,,,,ọ__..____,,,,,___ỏ",
+      "ỏ___ẅ_ọ_____ọ..___ẅoọ_ọọọ__ỏ",
+      "ỏ_ọ_____oẄọ__..ọ______o____ỏ",
+      "ỏỏỏỏỏỏỏỏỏỏỏỏỏ..ỏỏỏỏỏỏỏỏỏỏỏỏỏ"
+    ],
+    "warps": [
+      {
+        "x": 13,
+        "y": 17,
+        "to": {
+          "map": "r35",
+          "x": 11,
+          "y": 1
+        }
+      },
+      {
+        "x": 14,
+        "y": 17,
+        "to": {
+          "map": "r35",
+          "x": 12,
+          "y": 1
+        }
+      },
+      {
+        "x": 13,
+        "y": 0,
+        "to": {
+          "map": "r36",
+          "x": 5,
+          "y": 14
+        }
+      },
+      {
+        "x": 14,
+        "y": 0,
+        "to": {
+          "map": "r36",
+          "x": 6,
+          "y": 14
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 15,
+        "y": 10,
+        "text": "NATIONAL PARK — Lawns, ponds, and the famous fountain. Bug-catching days are a local religion."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 11,
+        "y": 6,
+        "name": "PARK KEEPER LOU",
+        "art": "ranger",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "Twenty years tending these lawns. The Sunflora by the pond are my pension plan.",
+          "Trainers rest here between cities. The park insists on it."
+        ]
+      },
+      {
+        "x": 17,
+        "y": 13,
+        "name": "BUG MANIAC TESS",
+        "art": "lass",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "Contest Tuesdays! The park judges have SEEN things.",
+          "A Yanma at the fountain at noon is the park's whole personality."
+        ]
+      },
+      {
+        "x": 7,
+        "y": 10,
+        "name": "ELDER PRAN",
+        "art": "elder",
+        "skin": "#e8b888",
+        "shirt": "#b0503c",
+        "pants": "#2a2a3a",
+        "hair": "#5a3a2a",
+        "dialogue": [
+          "I walked my first Pokemon around this fountain. My granddaughter walks hers now.",
+          "Parks remember every generation kindly. That is their job."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "natu",
+          "min": 130,
+          "max": 137,
+          "weight": 16
+        },
+        {
+          "species": "hoppip",
+          "min": 130,
+          "max": 137,
+          "weight": 14
+        },
+        {
+          "species": "ledian",
+          "min": 131,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "ariados",
+          "min": 131,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "sunkern",
+          "min": 130,
+          "max": 136,
+          "weight": 12
+        },
+        {
+          "species": "pidgeotto",
+          "min": 131,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "yanma",
+          "min": 132,
+          "max": 139,
+          "weight": 10
+        },
+        {
+          "species": "sunflora",
+          "min": 132,
+          "max": 139,
+          "weight": 6
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 124,
+          "max": 132,
+          "weight": 18
+        },
+        {
+          "species": "goldeen",
+          "min": 125,
+          "max": 134,
+          "weight": 15
+        },
+        {
+          "species": "tentacool",
+          "min": 125,
+          "max": 135,
+          "weight": 13
+        },
+        {
+          "species": "marill",
+          "min": 126,
+          "max": 135,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 127,
+          "max": 136,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 128,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "corsola",
+          "min": 128,
+          "max": 137,
+          "weight": 8
+        },
+        {
+          "species": "octillery",
+          "min": 130,
+          "max": 140,
+          "weight": 5
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 13,
+      "y": 16
+    }
+  },
+  "r36": {
+    "id": "r36",
+    "name": "Route 36",
+    "music": "route1-theme",
+    "rows": [
+      "####################..######",
+      "#_________R__F__#___.._,__F#",
+      "#_,_F___Ấ______#____..__,,F#",
+      "#_,,,___,_~~~~~___,_..,____#",
+      "#__F,___n_~~~~~_F___..#,___#",
+      "#_,__,F__F~~~~~____,..____##",
+      "#__,,____,,__Ẉ,__F__.._____#",
+      "#__Ấ,__S___F,__,____..___,_#",
+      "#...........................",
+      "#...........................",
+      "#_F__..___,_,_F_Ấ,RF__,____#",
+      "#,__F..____F___,Ẉ#_R,_,,__,#",
+      "#___,.._F__,,_F_,__________#",
+      "#__,_..____,_,____n______,_#",
+      "#____..__F____,____,_,__,#_#",
+      "#####..#####################"
+    ],
+    "warps": [
+      {
+        "x": 5,
+        "y": 15,
+        "to": {
+          "map": "national-park",
+          "x": 13,
+          "y": 1
+        }
+      },
+      {
+        "x": 6,
+        "y": 15,
+        "to": {
+          "map": "national-park",
+          "x": 14,
+          "y": 1
+        }
+      },
+      {
+        "x": 20,
+        "y": 0,
+        "to": {
+          "map": "r37",
+          "x": 11,
+          "y": 16
+        }
+      },
+      {
+        "x": 21,
+        "y": 0,
+        "to": {
+          "map": "r37",
+          "x": 12,
+          "y": 16
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 7,
+        "y": 7,
+        "text": "ROUTE 36 — National Park to Route 37. East, the road runs on toward the crossroads country."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 14,
+        "y": 11,
+        "name": "HIKER PETRA",
+        "art": "hiker",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "Three regions' worth of roads meet east of here, or so the signs promise.",
+          "Sudowoodo country north of this route, they say. A tree that is not a tree."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "growlithe",
+          "min": 130,
+          "max": 138,
+          "weight": 16
+        },
+        {
+          "species": "stantler",
+          "min": 131,
+          "max": 139,
+          "weight": 14
+        },
+        {
+          "species": "pidgeotto",
+          "min": 130,
+          "max": 137,
+          "weight": 14
+        },
+        {
+          "species": "noctowl",
+          "min": 131,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "meowth",
+          "min": 130,
+          "max": 137,
+          "weight": 12
+        },
+        {
+          "species": "natu",
+          "min": 131,
+          "max": 138,
+          "weight": 10
+        },
+        {
+          "species": "granbull",
+          "min": 132,
+          "max": 140,
+          "weight": 8
+        },
+        {
+          "species": "xatu",
+          "min": 133,
+          "max": 140,
+          "weight": 6
+        }
+      ],
+      "water": [
+        {
+          "species": "magikarp",
+          "min": 124,
+          "max": 132,
+          "weight": 18
+        },
+        {
+          "species": "goldeen",
+          "min": 125,
+          "max": 134,
+          "weight": 15
+        },
+        {
+          "species": "tentacool",
+          "min": 125,
+          "max": 135,
+          "weight": 13
+        },
+        {
+          "species": "marill",
+          "min": 126,
+          "max": 135,
+          "weight": 10
+        },
+        {
+          "species": "remoraid",
+          "min": 127,
+          "max": 136,
+          "weight": 10
+        },
+        {
+          "species": "chinchou",
+          "min": 128,
+          "max": 138,
+          "weight": 12
+        },
+        {
+          "species": "corsola",
+          "min": 128,
+          "max": 137,
+          "weight": 8
+        },
+        {
+          "species": "octillery",
+          "min": 130,
+          "max": 140,
+          "weight": 5
+        }
+      ],
+      "waterRate": 0.08
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 5,
+      "y": 14
+    }
+  },
+  "r37": {
+    "id": "r37",
+    "name": "Route 37",
+    "music": "route1-theme",
+    "rows": [
+      "###########..###########",
+      "#_____Ấ,___..ẤF,__Fn__,#",
+      "#__________..F__,F____F#",
+      "#F___,_____..__________#",
+      "#_,F__Ấ___F..____FRn__F#",
+      "#__n__FF__R..__,__ầ,___#",
+      "#__,_,_____.._,,__,,R,_#",
+      "#____F____,.._F#_______#",
+      "#_______,__.............",
+      "#_,________.............",
+      "#_______n__..___R__R,__#",
+      "#_,___,_#__.._F______F_#",
+      "#_,___,__,_.._____R,ầ_F#",
+      "#,____,F___.._____F_#__#",
+      "#___R,____,.._______,__#",
+      "#________,_..S_Ấ______##",
+      "#_,F__,_R__..____,,_R__#",
+      "###########..###########"
+    ],
+    "warps": [
+      {
+        "x": 11,
+        "y": 17,
+        "to": {
+          "map": "r36",
+          "x": 20,
+          "y": 1
+        }
+      },
+      {
+        "x": 12,
+        "y": 17,
+        "to": {
+          "map": "r36",
+          "x": 21,
+          "y": 1
+        }
+      },
+      {
+        "x": 11,
+        "y": 0,
+        "to": {
+          "map": "ecruteak",
+          "x": 14,
+          "y": 16
+        }
+      },
+      {
+        "x": 12,
+        "y": 0,
+        "to": {
+          "map": "ecruteak",
+          "x": 15,
+          "y": 16
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 13,
+        "y": 15,
+        "text": "ROUTE 37 — Route 36 to Ecruteak City. Twin apricorn trees mark the old road east."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 9,
+        "y": 9,
+        "name": "WANDERER JUN",
+        "art": "hiker",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Ecruteak's bells carry down this whole road on a still day.",
+          "Growlithe patrol the dusk here like small, serious guards."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "growlithe",
+          "min": 132,
+          "max": 140,
+          "weight": 18
+        },
+        {
+          "species": "stantler",
+          "min": 133,
+          "max": 140,
+          "weight": 16
+        },
+        {
+          "species": "noctowl",
+          "min": 132,
+          "max": 139,
+          "weight": 16
+        },
+        {
+          "species": "pidgeotto",
+          "min": 132,
+          "max": 139,
+          "weight": 14
+        },
+        {
+          "species": "murkrow",
+          "min": 134,
+          "max": 141,
+          "weight": 10
+        },
+        {
+          "species": "xatu",
+          "min": 134,
+          "max": 141,
+          "weight": 8
+        },
+        {
+          "species": "girafarig",
+          "min": 134,
+          "max": 141,
+          "weight": 8
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 11,
+      "y": 16
+    }
+  },
+  "house-newbark": {
+    "id": "house-newbark",
+    "name": "New Bark House",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<*δ**ε***η*θ*<",
+      "<****ζ*******<",
+      "<************<",
+      "<************<",
+      "<*****))*****<",
+      "<*ε*******Ḳ**<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "newbark",
+          "x": 18,
+          "y": 4
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "newbark",
+          "x": 18,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 3,
+        "name": "AUNTIE ROSE",
+        "art": "lady",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "Elm's aides all but live at the lab, so this street cooks for them.",
+          "A trainer's mother learns to pack for any weather. It's a whole education."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "house-cherrygrove": {
+    "id": "house-cherrygrove",
+    "name": "Cherrygrove House",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<*δ**ε***η*θ*<",
+      "<****ζ*******<",
+      "<************<",
+      "<************<",
+      "<*****))*****<",
+      "<*ε*******Ḽ**<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "cherrygrove",
+          "x": 16,
+          "y": 4
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "cherrygrove",
+          "x": 16,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 3,
+        "name": "FLORIST HANA",
+        "art": "lady",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "Cut flowers by the door — Cherrygrove houses compete by scent.",
+          "The pond road floods every spring and the flowers thank it every summer."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "house-violet": {
+    "id": "house-violet",
+    "name": "Violet House",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<*δ**ε***η*θ*<",
+      "<****ζ*******<",
+      "<************<",
+      "<************<",
+      "<*****))*****<",
+      "<*ε*******Ḕ**<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "violet",
+          "x": 28,
+          "y": 4
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "violet",
+          "x": 28,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 3,
+        "name": "EARL THE TUTOR",
+        "art": "gent",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Type charts on the wall, type charts in my sleep. The academy way.",
+          "A Flying gym makes for students who look up. Good habit, that."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "house-azalea": {
+    "id": "house-azalea",
+    "name": "Azalea House",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<*δ**ε***η*θ*<",
+      "<****ζ*******<",
+      "<************<",
+      "<************<",
+      "<*****))*****<",
+      "<*ε*******ṓ**<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 27,
+          "y": 4
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 27,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 3,
+        "name": "CHARCOAL BURNER ODO",
+        "art": "worker",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "Kiln smoke means Azalea's working. You learn to love the smell.",
+          "Slowpoke tails grow back, tempers mend, charcoal sells. A patient town."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "house-goldenrod": {
+    "id": "house-goldenrod",
+    "name": "Goldenrod House",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<*δ**ε***η*θ*<",
+      "<****ζ*******<",
+      "<************<",
+      "<************<",
+      "<*****))*****<",
+      "<*ε*******Ḓ**<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "goldenrod",
+          "x": 27,
+          "y": 12
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "goldenrod",
+          "x": 27,
+          "y": 12
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 3,
+        "name": "ANNOUNCER VEE",
+        "art": "lass",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "I read the Radio Tower's morning dedications. Half the city cries before nine.",
+          "Goldenrod apartments are small because the city outside is enormous."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "house-ecruteak": {
+    "id": "house-ecruteak",
+    "name": "Ecruteak House",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<*δḟ*ε***η*θ*<",
+      "<****ζ*******<",
+      "<************<",
+      "<************<",
+      "<*****))*****<",
+      "<*ε*******Ḳ**<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "ecruteak",
+          "x": 28,
+          "y": 4
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "ecruteak",
+          "x": 28,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 3,
+        "name": "TEA HOSTESS YUI",
+        "art": "lady",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "Tea first, news second. Ecruteak pours in that order.",
+          "When the bells ring at dusk, the whole street sets its cups down. Old habit."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "elm-lab": {
+    "id": "elm-lab",
+    "name": "Elm Pokemon Lab",
+    "music": "viridian-theme",
+    "rows": [
+      ">>>>>>>>>>>>>>>>>>",
+      ">--ξ--ο---π--ξ-η->",
+      ">-------S-------->",
+      ">---------------->",
+      ">---------------->",
+      ">--ο---------π-Ḧ->",
+      ">-------))------->",
+      ">---------------->",
+      ">---------------->",
+      ">---------------->",
+      ">---------------->",
+      ">>>>>>>>-->>>>>>>>"
+    ],
+    "warps": [
+      {
+        "x": 8,
+        "y": 11,
+        "to": {
+          "map": "newbark",
+          "x": 5,
+          "y": 4
+        }
+      },
+      {
+        "x": 9,
+        "y": 11,
+        "to": {
+          "map": "newbark",
+          "x": 5,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 8,
+        "y": 2,
+        "text": "ELM'S RESEARCH BOARD — 'Eggs are not the beginning of a Pokemon. They are the middle of a story.'"
+      }
+    ],
+    "npcs": [
+      {
+        "x": 9,
+        "y": 4,
+        "name": "AIDE LIN",
+        "art": "aide",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "The lab tracks every registered egg in western Johto. Every one.",
+          "Professor Elm names his notebooks by year and by weather. It works for him."
+        ]
+      },
+      {
+        "x": 5,
+        "y": 8,
+        "name": "AIDE CORIN",
+        "art": "scientist",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "New Bark doctrine: a Pokemon's first hour matters as much as its hundredth level.",
+          "Mind the tank glass. The Poliwag inside judges visitors."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 8,
+      "y": 10
+    },
+    "indoor": true
+  },
+  "kurt-house": {
+    "id": "kurt-house",
+    "name": "Kurt's House",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<**ḻ**Ḽ**ầ***<",
+      "<******S***ầ*<",
+      "<************<",
+      "<************<",
+      "<***ε********<",
+      "<*****))***η*<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 22,
+          "y": 4
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 22,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 7,
+        "y": 2,
+        "text": "KURT'S WORKBENCH — Apricorns in every colour, each with a name and a season. The tools are older than the town hall."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 4,
+        "name": "APPRENTICE SOL",
+        "art": "youngster",
+        "skin": "#f0c8a0",
+        "shirt": "#c05a3a",
+        "pants": "#2a2a3a",
+        "hair": "#4a3a2a",
+        "dialogue": [
+          "Mr. Kurt can hear whether an apricorn is ripe. I am on year three of learning how.",
+          "One ball at a time. The workbench has rules and I am not one of them."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "gym-violet": {
+    "id": "gym-violet",
+    "name": "Violet Gym",
+    "music": "gym-theme",
+    "rows": [
+      "================",
+      "=++++++λλ++++++=",
+      "=++Ḛ++++++++Ḛ++=",
+      "=++++++++++++++=",
+      "=++++++//++++++=",
+      "=++++++//++++++=",
+      "=++ḗ++++++++ḙ++=",
+      "=++++++++++++++=",
+      "=++++++++++++++=",
+      "=======++======="
+    ],
+    "warps": [
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "violet",
+          "x": 16,
+          "y": 4
+        }
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "to": {
+          "map": "violet",
+          "x": 16,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 4,
+        "y": 7,
+        "name": "GYM ATTENDANT SKYE",
+        "art": "youngster",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "The perch platforms sway on purpose. Balance is a Flying-type virtue.",
+          "Challengers sign the guest book first. The leader reads every name."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 7,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "gym-azalea": {
+    "id": "gym-azalea",
+    "name": "Azalea Gym",
+    "music": "gym-theme",
+    "rows": [
+      "================",
+      "=++++++λλ++++++=",
+      "=++Ṉ++++++++Ṋ++=",
+      "=++++++++++++++=",
+      "=++++++//++++++=",
+      "=++++++//++++++=",
+      "=++Ṉ++++++++ṉ++=",
+      "=++++++++++++++=",
+      "=++++++++++++++=",
+      "=======++======="
+    ],
+    "warps": [
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 16,
+          "y": 4
+        }
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "to": {
+          "map": "azalea",
+          "x": 16,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 4,
+        "y": 7,
+        "name": "GYM ATTENDANT FERN",
+        "art": "youngster",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "Mind the webbing on the doorframes. It is decorative. Mostly.",
+          "The leader's garden grows straight through the gym floor. We sweep around it."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 7,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "gym-goldenrod": {
+    "id": "gym-goldenrod",
+    "name": "Goldenrod Gym",
+    "music": "gym-theme",
+    "rows": [
+      "================",
+      "=++++++λλ++++++=",
+      "=++ḋ++++++++Ḋ++=",
+      "=++++++++++++++=",
+      "=++++++//++++++=",
+      "=++++++//++++++=",
+      "=++ḙ++++++++Ḋ++=",
+      "=++++++++++++++=",
+      "=++++++++++++++=",
+      "=======++======="
+    ],
+    "warps": [
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "goldenrod",
+          "x": 16,
+          "y": 4
+        }
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "to": {
+          "map": "goldenrod",
+          "x": 16,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 4,
+        "y": 7,
+        "name": "GYM ATTENDANT MILA",
+        "art": "youngster",
+        "skin": "#f0c8a0",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a1a0a",
+        "dialogue": [
+          "The arena floor is polished nightly. The leader inspects it personally.",
+          "Win or lose, every challenger gets the tour. House rule since forever."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 7,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "gym-ecruteak": {
+    "id": "gym-ecruteak",
+    "name": "Ecruteak Gym",
+    "music": "gym-theme",
+    "rows": [
+      "================",
+      "=++++++λλ++++++=",
+      "=++ḟ++++++++Ḡ++=",
+      "=++++++++++++++=",
+      "=++++++//++++++=",
+      "=++++++//++++++=",
+      "=++ḟ++++++++ḡ++=",
+      "=++++++++++++++=",
+      "=++++++++++++++=",
+      "=======++======="
+    ],
+    "warps": [
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "ecruteak",
+          "x": 16,
+          "y": 4
+        }
+      },
+      {
+        "x": 8,
+        "y": 9,
+        "to": {
+          "map": "ecruteak",
+          "x": 16,
+          "y": 4
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 4,
+        "y": 7,
+        "name": "GYM ATTENDANT REN",
+        "art": "youngster",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Candles only, in this gym. The shadows are part of the architecture.",
+          "Speak softly on the mat. The leader hears challengers before he sees them."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 7,
+      "y": 8
+    },
+    "indoor": true
+  },
+  "sprout-tower-1": {
+    "id": "sprout-tower-1",
+    "name": "Sprout Tower 1F",
+    "music": "pewter-theme",
+    "rows": [
+      "MMMMMMMMMMMMMMMM",
+      "MQQQQQQQQQQQQ9QM",
+      "MQQṀQQQQQQQQμQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQQQẫẫQQQQQQM",
+      "MQQQQQQẫẫQQQQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQḢQQQQQQḢQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MMMMMMMQQMMMMMMM"
+    ],
+    "warps": [
+      {
+        "x": 7,
+        "y": 11,
+        "to": {
+          "map": "violet",
+          "x": 22,
+          "y": 5
+        }
+      },
+      {
+        "x": 8,
+        "y": 11,
+        "to": {
+          "map": "violet",
+          "x": 22,
+          "y": 5
+        }
+      },
+      {
+        "x": 13,
+        "y": 1,
+        "to": {
+          "map": "sprout-tower-2",
+          "x": 13,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 5,
+        "y": 3,
+        "name": "MONK THEO",
+        "art": "monk",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "The pillar breathes with the wind. Stand still and you can feel the floor agree.",
+          "We battle on the second floor, gently. The tower dislikes haste."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.1,
+      "table": [
+        {
+          "species": "rattata",
+          "min": 110,
+          "max": 117,
+          "weight": 35
+        },
+        {
+          "species": "gastly",
+          "min": 111,
+          "max": 118,
+          "weight": 30
+        },
+        {
+          "species": "zubat",
+          "min": 110,
+          "max": 116,
+          "weight": 20
+        },
+        {
+          "species": "raticate",
+          "min": 113,
+          "max": 120,
+          "weight": 10
+        },
+        {
+          "species": "golbat",
+          "min": 114,
+          "max": 121,
+          "weight": 5
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 7,
+      "y": 10
+    },
+    "indoor": true
+  },
+  "sprout-tower-2": {
+    "id": "sprout-tower-2",
+    "name": "Sprout Tower 2F",
+    "music": "pewter-theme",
+    "rows": [
+      "MMMMMMMMMMMMMMMM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQμQQQẨQQQμQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQQQSQQQQQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQḢQQQḢQQQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQQQQQQQQQQQM",
+      "MQQQQQQQQQQQQ9QM",
+      "MMMMMMMMMMMMMMMM"
+    ],
+    "warps": [
+      {
+        "x": 13,
+        "y": 10,
+        "to": {
+          "map": "sprout-tower-1",
+          "x": 13,
+          "y": 2
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 7,
+        "y": 4,
+        "text": "SPROUT TOWER — UPPER FLOOR — The great pillar rises through this room. Bellsprout carved in the beam-ends watch the mats."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 6,
+        "y": 8,
+        "name": "SAGE IN TRAINING",
+        "art": "monk",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "At the top of the sway, the whole valley tilts. You get used to trusting it.",
+          "The elder meditates here at dawn. The tower is quietest then."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.1,
+      "table": [
+        {
+          "species": "rattata",
+          "min": 110,
+          "max": 117,
+          "weight": 35
+        },
+        {
+          "species": "gastly",
+          "min": 111,
+          "max": 118,
+          "weight": 30
+        },
+        {
+          "species": "zubat",
+          "min": 110,
+          "max": 116,
+          "weight": 20
+        },
+        {
+          "species": "raticate",
+          "min": 113,
+          "max": 120,
+          "weight": 10
+        },
+        {
+          "species": "golbat",
+          "min": 114,
+          "max": 121,
+          "weight": 5
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 13,
+      "y": 9
+    },
+    "indoor": true
+  },
+  "slowpoke-well": {
+    "id": "slowpoke-well",
+    "name": "Slowpoke Well",
+    "music": "pewter-theme",
+    "rows": [
+      "GGGGGGGGGGGGGGGGGGGG",
+      "GLLLLNLLLLLLLLNLLLLG",
+      "GLLLLLLLLLLLLLýLLLLG",
+      "GLL~~~~~~LLLLLLLLLLG",
+      "GLL~~~~~~NLLLLLLLLLG",
+      "GLL~~~~~~LLLLLNLLLLG",
+      "GLL~~~~~~LLLLLLLLLLG",
+      "GLLLLLLLNLLLLLLLLLLG",
+      "GLLLLNLLLNLLLLLLLLLG",
+      "GLLLLLLLLLLL~~~~~NLG",
+      "GLLLLLLLýLLL~~~~~LLG",
+      "GLýLLLLLLLLL~~~~~ýLG",
+      "GLLLLLLLLLLSLLLýLýLG",
+      "GGGGGGGGGLLGGGGGGGGG"
+    ],
+    "warps": [
+      {
+        "x": 9,
+        "y": 13,
+        "to": {
+          "map": "azalea",
+          "x": 24,
+          "y": 8
+        }
+      },
+      {
+        "x": 10,
+        "y": 13,
+        "to": {
+          "map": "azalea",
+          "x": 24,
+          "y": 8
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 11,
+        "y": 12,
+        "text": "SLOWPOKE WELL — The water down here is sweet and cold. The residents were here first."
+      }
+    ],
+    "npcs": [],
+    "encounters": {
+      "rate": 0.14,
+      "table": [
+        {
+          "species": "slowpoke",
+          "min": 118,
+          "max": 125,
+          "weight": 40
+        },
+        {
+          "species": "zubat",
+          "min": 118,
+          "max": 124,
+          "weight": 25
+        },
+        {
+          "species": "wooper",
+          "min": 119,
+          "max": 125,
+          "weight": 15
+        },
+        {
+          "species": "golbat",
+          "min": 121,
+          "max": 128,
+          "weight": 8
+        },
+        {
+          "species": "quagsire",
+          "min": 120,
+          "max": 127,
+          "weight": 7
+        },
+        {
+          "species": "slowbro",
+          "min": 122,
+          "max": 129,
+          "weight": 5
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 9,
+      "y": 12
+    },
+    "indoor": true
+  },
+  "radio-tower-1": {
+    "id": "radio-tower-1",
+    "name": "Radio Tower 1F",
+    "music": "pewter-theme",
+    "rows": [
+      "IIIIIIIIIIIIIIIIII",
+      "I%%ḛ%ḛ%%%%%%ṇ%%9%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%ψ%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%S%%%%%Ḝ%%I",
+      "I%%ḝ%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "IIIIIIII%%IIIIIIII"
+    ],
+    "warps": [
+      {
+        "x": 8,
+        "y": 11,
+        "to": {
+          "map": "goldenrod",
+          "x": 22,
+          "y": 5
+        }
+      },
+      {
+        "x": 9,
+        "y": 11,
+        "to": {
+          "map": "goldenrod",
+          "x": 22,
+          "y": 5
+        }
+      },
+      {
+        "x": 15,
+        "y": 1,
+        "to": {
+          "map": "radio-tower-2",
+          "x": 15,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 8,
+        "y": 5,
+        "text": "RADIO TOWER — LOBBY — Now broadcasting across Johto. Tour groups gather by the desk."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 6,
+        "y": 7,
+        "name": "RECEPTIONIST MAI",
+        "art": "lady",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "Welcome to the Radio Tower! Tours run when the red light is off.",
+          "The tower's antenna can hear Kanto on a clear night. Or so engineering swears."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 8,
+      "y": 10
+    },
+    "indoor": true
+  },
+  "radio-tower-2": {
+    "id": "radio-tower-2",
+    "name": "Radio Tower 2F",
+    "music": "pewter-theme",
+    "rows": [
+      "IIIIIIIIIIIIIIIIII",
+      "I%9%%%ḛ%%%ṇ%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%ψ%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%Ḟ%%%%%Ḟ%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%9%I",
+      "IIIIIIIIIIIIIIIIII"
+    ],
+    "warps": [
+      {
+        "x": 15,
+        "y": 10,
+        "to": {
+          "map": "radio-tower-1",
+          "x": 15,
+          "y": 2
+        }
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "to": {
+          "map": "radio-tower-3",
+          "x": 2,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 8,
+        "y": 8,
+        "name": "ENGINEER DARA",
+        "art": "scientist",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "Studios hum at sixty cycles and so do I, by now.",
+          "Every request show rides the racks behind me. Handle with care."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 15,
+      "y": 9
+    },
+    "indoor": true
+  },
+  "radio-tower-3": {
+    "id": "radio-tower-3",
+    "name": "Radio Tower 3F",
+    "music": "pewter-theme",
+    "rows": [
+      "IIIIIIIIIIIIIIIIII",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%ṅ%Ṇ%%ṇ%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%S%%%%%ḛ%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%%%%%%%%%%%%%%%%I",
+      "I%9%%%%%%%%%%%%%%I",
+      "IIIIIIIIIIIIIIIIII"
+    ],
+    "warps": [
+      {
+        "x": 2,
+        "y": 10,
+        "to": {
+          "map": "radio-tower-2",
+          "x": 2,
+          "y": 2
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 9,
+        "y": 5,
+        "text": "RADIO TOWER — ANTENNA FLOOR — Above this ceiling, the aerial. All Johto hears what leaves this room."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 6,
+        "y": 8,
+        "name": "NIGHT DJ SOLENE",
+        "art": "lady",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "The night show is mine. Johto insomniacs are my entire congregation.",
+          "On fog nights the signal bends and we take calls from the sea."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 2,
+      "y": 9
+    },
+    "indoor": true
+  },
+  "goldenrod-underground-1": {
+    "id": "goldenrod-underground-1",
+    "name": "Goldenrod Underground",
+    "music": "pewter-theme",
+    "rows": [
+      "GGGṲṲṲṲṲṲGGGGGGGGGGGGG",
+      "GLLLLLẆLLẁLLLLLLṴLL9LG",
+      "GLLẌLLLLLLṳṳẇṳṳṳLẃẃẃLG",
+      "GLLLLLLLLLṳṳṳṳṳṳLẃẃẁLG",
+      "GLLLṶṶṶṶṶLSṳṳṳṳṳLLLLLG",
+      "GLLLṶṶṶṶṶLLLLLLLLLLLLG",
+      "GLLLṶṶṶṶṶLLLLLLLLLẌLLG",
+      "GLLLLLLLLLLLLẂẂẂẂẂLLLG",
+      "GLLLLLLLLLLṵLẂẂẂẂẂLLLG",
+      "GLLṴLLLLLLLLLẂẂẂẂẂLLLG",
+      "GLLLLLLLLLLLLLLLLLLLLG",
+      "GGGGGGGGGGLLGGGGGGGGGG"
+    ],
+    "warps": [
+      {
+        "x": 10,
+        "y": 11,
+        "to": {
+          "map": "goldenrod",
+          "x": 28,
+          "y": 4
+        }
+      },
+      {
+        "x": 11,
+        "y": 11,
+        "to": {
+          "map": "goldenrod",
+          "x": 28,
+          "y": 4
+        }
+      },
+      {
+        "x": 19,
+        "y": 1,
+        "to": {
+          "map": "goldenrod-underground-2",
+          "x": 19,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 10,
+        "y": 4,
+        "text": "GOLDENROD UNDERGROUND — Haircuts, photos, and bargains in the cool dark under the city."
+      }
+    ],
+    "npcs": [
+      {
+        "x": 8,
+        "y": 7,
+        "name": "BARGAIN HUNTER OLIN",
+        "art": "gent",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Everything down here is a deal if you haggle like you mean it.",
+          "The south passage stalls rotate stock daily. Daily! I keep a ledger."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 10,
+      "y": 10
+    },
+    "indoor": true
+  },
+  "goldenrod-underground-2": {
+    "id": "goldenrod-underground-2",
+    "name": "Underground — South Passage",
+    "music": "pewter-theme",
+    "rows": [
+      "GGGGGGGGGGṲṲṲṲṲṲGGGGGG",
+      "GLLLLLLLLLLLLẑLLLẁLLLG",
+      "GLLLẌLLLẌLLLLLṳṳṳṳṳLLG",
+      "GLLLLLLLLLLLLLṳṳṳṳṳLLG",
+      "GLLLLLLLLLṶṶṶṶṶṳṳṳṳLLG",
+      "GLLLLLLLLLṶṶṶṶṶLẆLLLLG",
+      "GLLLLLLLLLṶṶṶṶṶLLLLLLG",
+      "GLLẃẃẃṵLLLLLLLLLLLLLLG",
+      "GLLẃẃẃẃLLLLLṴLLLLLẇLLG",
+      "GLLẃẃẃẃLLLLLLLLLLLLLLG",
+      "GLLLLLLLLLLLLLLLLLL9LG",
+      "GGGGGGGGGGGGGGGGGGGGGG"
+    ],
+    "warps": [
+      {
+        "x": 19,
+        "y": 10,
+        "to": {
+          "map": "goldenrod-underground-1",
+          "x": 19,
+          "y": 2
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 10,
+        "y": 8,
+        "name": "STALLKEEPER BRYN",
+        "art": "lady",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "South passage, best passage. Don't let the north end hear that.",
+          "My stall has stood here eleven years. The tunnel and I have an understanding."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 19,
+      "y": 9
+    },
+    "indoor": true
+  },
+  "burned-tower-1": {
+    "id": "burned-tower-1",
+    "name": "Burned Tower 1F",
+    "music": "pewter-theme",
+    "rows": [
+      "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
+      "ẫẪ9ẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
+      "ẫẪẪẪṷẪẪẪẪNẪẪẪẪẪþẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪṷẪẪẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪSṶṶṶṶṶẪẪẫ",
+      "ẫẪẪẪẪẪẪẪṷẪṶṶṶṶṶẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪṶṶṶṶṶẪẪẫ",
+      "ẫẪẪṹQQQẪẪẪẪẪẪẪḟẪẪẫ",
+      "ẫẪẪQQQḠẪẪẪẪẪẪẪẪẪẪẫ",
+      "ẫẪẪQQQQẪẪẪẪẪẪẪẪṷẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
+      "ẫẫẫẫẫẫẫẫẪẪẫẫẫẫẫẫẫẫ"
+    ],
+    "warps": [
+      {
+        "x": 8,
+        "y": 11,
+        "to": {
+          "map": "ecruteak",
+          "x": 4,
+          "y": 12
+        }
+      },
+      {
+        "x": 9,
+        "y": 11,
+        "to": {
+          "map": "ecruteak",
+          "x": 4,
+          "y": 12
+        }
+      },
+      {
+        "x": 2,
+        "y": 1,
+        "to": {
+          "map": "burned-tower-2",
+          "x": 2,
+          "y": 11
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 9,
+        "y": 4,
+        "text": "BURNED TOWER — Charred beams, patient dust. Something downstairs has been asleep a very long time."
+      }
+    ],
+    "npcs": [],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "gastly",
+          "min": 134,
+          "max": 141,
+          "weight": 30
+        },
+        {
+          "species": "koffing",
+          "min": 134,
+          "max": 141,
+          "weight": 20
+        },
+        {
+          "species": "rattata",
+          "min": 133,
+          "max": 140,
+          "weight": 18
+        },
+        {
+          "species": "haunter",
+          "min": 136,
+          "max": 143,
+          "weight": 12
+        },
+        {
+          "species": "magmar",
+          "min": 136,
+          "max": 143,
+          "weight": 8
+        },
+        {
+          "species": "raticate",
+          "min": 135,
+          "max": 142,
+          "weight": 12
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 8,
+      "y": 10
+    },
+    "indoor": true
+  },
+  "burned-tower-2": {
+    "id": "burned-tower-2",
+    "name": "Burned Tower B1F",
+    "music": "pewter-theme",
+    "rows": [
+      "GGGGGGGGGGGGGGGGGGGG",
+      "GLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLμLLLμLLLμLNLýG",
+      "GLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLLLSLLLLLLLLG",
+      "GýLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLLLLLLLLLLýLG",
+      "GLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLLýLLLLLLLLLG",
+      "GLLNLLLLLLLýLLLLLLLG",
+      "GLLLLLLýLLLLLýLLLLLG",
+      "GL9LLLLLLLLLLLLLLLLG",
+      "GGGGGGGGGGGGGGGGGGGG"
+    ],
+    "warps": [
+      {
+        "x": 2,
+        "y": 12,
+        "to": {
+          "map": "burned-tower-1",
+          "x": 2,
+          "y": 2
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 10,
+        "y": 5,
+        "text": "THREE STATUES — Beasts of storm, volcano and north wind, carved where they fell asleep. The stone is warm."
+      }
+    ],
+    "npcs": [],
+    "encounters": {
+      "rate": 0.12,
+      "table": [
+        {
+          "species": "gastly",
+          "min": 134,
+          "max": 141,
+          "weight": 30
+        },
+        {
+          "species": "koffing",
+          "min": 134,
+          "max": 141,
+          "weight": 20
+        },
+        {
+          "species": "rattata",
+          "min": 133,
+          "max": 140,
+          "weight": 18
+        },
+        {
+          "species": "haunter",
+          "min": 136,
+          "max": 143,
+          "weight": 12
+        },
+        {
+          "species": "magmar",
+          "min": 136,
+          "max": 143,
+          "weight": 8
+        },
+        {
+          "species": "raticate",
+          "min": 135,
+          "max": 142,
+          "weight": 12
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 2,
+      "y": 11
+    },
+    "indoor": true
+  },
+  "bell-tower-1": {
+    "id": "bell-tower-1",
+    "name": "Bell Tower 1F",
+    "music": "pewter-theme",
+    "rows": [
+      "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪ9Ẫẫ",
+      "ẫẪẪḟẪẪẪẪẪẪẪẪμẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪ)))ẪẪẫ",
+      "ẫẪẪẪḠẪẪẪẪẪ)))ẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪẪṀẫ",
+      "ẫẪẪẪẪḢẪẪẪẪḢẪẪẪẪẫ",
+      "ẫẪẪQQQQẪẪẪẪẪẪẪẪẫ",
+      "ẫẪẪQQQQẪẪẪẪẪẪḟẪẫ",
+      "ẫẪẪQQQQẪẪẪẪẪẪẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
+      "ẫẫẫẫẫẫẫẪẪẫẫẫẫẫẫẫ"
+    ],
+    "warps": [
+      {
+        "x": 7,
+        "y": 11,
+        "to": {
+          "map": "ecruteak",
+          "x": 22,
+          "y": 5
+        }
+      },
+      {
+        "x": 8,
+        "y": 11,
+        "to": {
+          "map": "ecruteak",
+          "x": 22,
+          "y": 5
+        }
+      },
+      {
+        "x": 13,
+        "y": 1,
+        "to": {
+          "map": "bell-tower-2",
+          "x": 13,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 4,
+        "name": "TOWER SAGE ANSELM",
+        "art": "monk",
+        "skin": "#e8b888",
+        "shirt": "#3a6ac0",
+        "pants": "#2a3a4a",
+        "hair": "#1a1a1a",
+        "dialogue": [
+          "Climb quietly. The tower is listening to the bells, and the bells to the sky.",
+          "Only the clear-hearted hear the topmost bell answer. That is not a rule. It is a report."
+        ]
+      }
+    ],
+    "encounters": {
+      "rate": 0.1,
+      "table": [
+        {
+          "species": "gastly",
+          "min": 136,
+          "max": 143,
+          "weight": 30
+        },
+        {
+          "species": "rattata",
+          "min": 135,
+          "max": 142,
+          "weight": 25
+        },
+        {
+          "species": "hoothoot",
+          "min": 135,
+          "max": 142,
+          "weight": 20
+        },
+        {
+          "species": "haunter",
+          "min": 138,
+          "max": 145,
+          "weight": 12
+        },
+        {
+          "species": "noctowl",
+          "min": 137,
+          "max": 144,
+          "weight": 13
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 7,
+      "y": 10
+    },
+    "indoor": true
+  },
+  "bell-tower-2": {
+    "id": "bell-tower-2",
+    "name": "Bell Tower — Summit",
+    "music": "pewter-theme",
+    "rows": [
+      "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
+      "ẫẪẪẪẪẪẨẪẪẨẪẪẪẪẪẫ",
+      "ẫẪẪμẪẪẪẪẪẪẪẪμẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪḠẪẫ",
+      "ẫẪẪẪḟẪẪ//ẪẪḟẪẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪẪẪẫ",
+      "ẫẪẪQQQQSẪẪẪẪẪẪẪẫ",
+      "ẫẪẪQQḢQẪẪẪẪẪṀẪẪẫ",
+      "ẫẪẪQQQQẪẪẪẪẪẪẪẪẫ",
+      "ẫẪẪẪẪẪẪẪẪẪẪẪẪ9Ẫẫ",
+      "ẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫẫ"
+    ],
+    "warps": [
+      {
+        "x": 13,
+        "y": 10,
+        "to": {
+          "map": "bell-tower-1",
+          "x": 13,
+          "y": 2
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 7,
+        "y": 7,
+        "text": "BELL TOWER — SUMMIT — The great bells hang over Ecruteak. Old songs say a rainbow-winged keeper roosts above them."
+      }
+    ],
+    "npcs": [],
+    "encounters": {
+      "rate": 0.1,
+      "table": [
+        {
+          "species": "gastly",
+          "min": 136,
+          "max": 143,
+          "weight": 30
+        },
+        {
+          "species": "rattata",
+          "min": 135,
+          "max": 142,
+          "weight": 25
+        },
+        {
+          "species": "hoothoot",
+          "min": 135,
+          "max": 142,
+          "weight": 20
+        },
+        {
+          "species": "haunter",
+          "min": 138,
+          "max": 145,
+          "weight": 12
+        },
+        {
+          "species": "noctowl",
+          "min": 137,
+          "max": 144,
+          "weight": 13
+        }
+      ]
+    },
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 13,
+      "y": 9
+    },
+    "indoor": true
+  },
+  "dance-theater": {
+    "id": "dance-theater",
+    "name": "Dance Theater",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<<<<<",
+      "<****************<",
+      "<*ḟ*//////////*ḟ*<",
+      "<***//////////***<",
+      "<****************<",
+      "<**************Ḯ*<",
+      "<****Ḣ**Ḣ**Ḣ*****<",
+      "<****************<",
+      "<****************<",
+      "<****************<",
+      "<****************<",
+      "<<<<<<<<**<<<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 8,
+        "y": 11,
+        "to": {
+          "map": "ecruteak",
+          "x": 22,
+          "y": 12
+        }
+      },
+      {
+        "x": 9,
+        "y": 11,
+        "to": {
+          "map": "ecruteak",
+          "x": 22,
+          "y": 12
+        }
+      }
+    ],
+    "signs": [],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 3,
+        "name": "DANCER MOMOKO",
+        "art": "lady",
+        "skin": "#c89878",
+        "shirt": "#2a7a6a",
+        "pants": "#3a3a4a",
+        "hair": "#7a4a1a",
+        "dialogue": [
+          "The stage boards are cedar from Ilex. They sing under our feet.",
+          "We dance the storm dance in summer and the bell dance at new year."
+        ]
+      },
+      {
+        "x": 10,
+        "y": 8,
+        "name": "DANCER CHIEMI",
+        "art": "lady",
+        "skin": "#d8a878",
+        "shirt": "#7a4a8a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": [
+          "Audience sits on cushions, shoes by the door. Theater rules are grandmother rules.",
+          "Five sisters learn fifty dances. I am at forty-one and counting."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 8,
+      "y": 10
+    },
+    "indoor": true
+  },
+  "daycare": {
+    "id": "daycare",
+    "name": "Pokemon Day-Care",
+    "music": "viridian-theme",
+    "rows": [
+      "<<<<<<<<<<<<<<",
+      "<*δ********ḫ*<",
+      "<************<",
+      "<**nnnnnnnn**<",
+      "<*****S******<",
+      "<************<",
+      "<*****))**ε**<",
+      "<************<",
+      "<************<",
+      "<<<<<<**<<<<<<"
+    ],
+    "warps": [
+      {
+        "x": 6,
+        "y": 9,
+        "to": {
+          "map": "r34",
+          "x": 17,
+          "y": 9
+        }
+      },
+      {
+        "x": 7,
+        "y": 9,
+        "to": {
+          "map": "r34",
+          "x": 17,
+          "y": 9
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 6,
+        "y": 4,
+        "text": "DAY-CARE JOURNAL — 'Every guest gets a name, a nap schedule, and a song. No exceptions in forty years.'"
+      }
+    ],
+    "npcs": [
+      {
+        "x": 7,
+        "y": 7,
+        "name": "DAY-CARE KEEPER",
+        "art": "elder",
+        "skin": "#e8b888",
+        "shirt": "#b0503c",
+        "pants": "#2a2a3a",
+        "hair": "#5a3a2a",
+        "dialogue": [
+          "My wife and I have raised half the Pokemon in this county, one nap at a time.",
+          "Leave a guest with us and walk the routes. Eggs and friendships both happen at walking pace."
+        ]
+      }
+    ],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 6,
+      "y": 8
+    },
+    "indoor": true
+  }
+};
+
+
 // ---- src/data/dialogue.mjs ----
 // dialogue.mjs — original writing only. Anime story beats are plot facts, not scripts.
 // No quoted or closely-paraphrased anime lines (GC §3.3).
@@ -99729,6 +106942,19 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 const TALE_NPCS = [
+  // Arc 2 Stage J3a: the Johto embark captain, appended to Pallet's
+  // roster through this same loadMap append idiom (Pallet's map def in
+  // maps3.mjs is NOT rewritten). He carries NO tale/role — the ferry
+  // handler (overworld-systems, ferryArc 'johto') owns him entirely:
+  // gated by the Foundation embark leg (embark_johto) outbound, and
+  // unconditional once Johto has been reached (NO-SOFT-LOCK LAW). He
+  // stands at (11,8), one tile east of the Cinnabar FERRYMAN, on a
+  // tg2 ground tile in the open south field — no door, warp or route
+  // can be sealed from there. The return captain stands on the
+  // New Bark dock (maps6.mjs, CAPT WESTWIND).
+  { map: 'pallet', x: 11, y: 8, name: 'CAPT JOHTO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
+    ferry: 'newbark', ferryArc: 'johto',
+    dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
   // own front-door threshold (3,4) — the one-tile gap in the fence
   // row, fed only from (3,5) — so ANY stance in that column seals
@@ -99909,7 +107135,7 @@ const IOU_PRIORITY = [
 Object.assign(SPECIES, SPECIES2);
 Object.assign(SPECIES, SPECIES_JOHTO);
 Object.assign(MOVES, MOVES2);
-Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5);
+Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5, MAPS6);
 Object.assign(TRAINERS, TRAINERS3, TRAINERS4, ORANGE_TRAINERS);
 Object.assign(EVENTS, ORANGE_EVENTS);
 Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);

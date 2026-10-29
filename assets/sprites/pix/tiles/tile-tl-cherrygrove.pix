@@ -1,0 +1,24 @@
+# Stage J3a: cherrygrove landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-cherrygrove 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #b5d691 cherrygrove-landmark-wall
+b #768b5e landmark-trim
+d #e86a8a landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

@@ -353,6 +353,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // U+1E00+152, tiles.mjs) are walkable ground, swapped from walkable
   // ground chars, so floor stays floor.
   ...[158, 159, 160, 162]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Arc 2 Stage J3a: the Johto floor kinds (cityfloor / woodfloor —
+  // J3_KIND_DEFS idx 5,6 at U+1E00+164, tiles.mjs) and the six Johto
+  // settlements' town-ground chars (tg at idx 173+i*8, tg2 at +1,
+  // tiles.mjs JOHTO_TOWN_CHARS) are walkable ground, swapped from
+  // walkable ground chars, so floor stays floor.
+  ...[169, 170]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  ...[0, 1, 2, 3, 4, 5]
+    .flatMap((i) => [173 + i * 8, 174 + i * 8])
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

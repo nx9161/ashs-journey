@@ -1,0 +1,23 @@
+# Stage J3a: azalea roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-azalea 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #6a4a2e azalea-roof
+b #4c3521 roof-dark
+c #845c3a roof-light
+d #e8b84a roof-trim

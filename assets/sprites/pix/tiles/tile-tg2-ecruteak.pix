@@ -1,0 +1,25 @@
+# Stage J3a: ecruteak town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-ecruteak 16 16
+bccccccbcacababa
+bcccabbcacacbacc
+cecbaccaacbacccc
+abbcabecbeccceab
+aaccbbbaebcccbbc
+acecbccccccbabcc
+cabcccaccbccccaa
+becbcbcbacaccabc
+cabacbccccccbcac
+aacbacccbcbbacac
+cbecacccbbccabab
+ccccccbccbaccbae
+ccacbcaecacbccaa
+babccaaccbacaaaa
+bccacbcbcccccabc
+acacabcccabcbccc
+PAL
+a #c98a5a ecruteak-ground
+b #9d6c46 ground-dark
+c #eda36a ground-light
+d #c03a2a town-accent
+e #f0c060 town-accent-2
+f #795336 ground-deep

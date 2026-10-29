@@ -1,0 +1,23 @@
+# Stage J3a: cherrygrove roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-cherrygrove 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #b0503c cherrygrove-roof
+b #7f3a2b roof-dark
+c #dc644b roof-light
+d #e86a8a roof-trim

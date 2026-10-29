@@ -1,0 +1,24 @@
+# Stage J3a: azalea landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-azalea 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #78bc72 azalea-landmark-wall
+b #4e7a4a landmark-trim
+d #e8b84a landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

@@ -1,0 +1,25 @@
+# Stage J3a: cherrygrove town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-cherrygrove 16 16
+bccccccbacaaccbc
+eccccbceecccbccb
+cccbcbccacbaaccc
+cbaccbccbcccaceb
+ecccccbbbcbcabcc
+acccbcccaacbcccc
+aabccaabcbbcacac
+bccaeacbccaccaba
+aaaccbcaeaccbccc
+aacbecccccbccacc
+abaaabacbcccceab
+ceaacabecacccbcc
+ccccbccacacbbccc
+cebbacccabbccccc
+bccbcacbcccccabc
+bbcccbccceccbaca
+PAL
+a #a8c686 cherrygrove-ground
+b #839a69 ground-dark
+c #c6ea9e ground-light
+d #e86a8a town-accent
+e #f0e060 town-accent-2
+f #657750 ground-deep

@@ -1,0 +1,23 @@
+# Stage J3a: newbark house wall — town-toned facade, one lit window (full-bleed, solid).
+PIX tile-tw-newbark 16 16
+bbbbbbbbbbbbbbbb
+aaaaaabaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaaaabaaaaaba
+aaahgggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggbaaaaabaa
+aaabbbbaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaabaaaaaaaa
+aabaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #9ac7b5 newbark-house-wall
+b #648176 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light
