@@ -506,7 +506,12 @@ const p1Driver = `
   const ow = new OverworldScene(); game.scenes.push(ow); ow.enter();
   const pressA = () => { input.inject('a'); game.loop.stepTicks(2); input.release('a'); game.loop.stepTicks(2); };
   const drainDlg = () => { let n = 0; while (ui.dlg && n++ < 80) pressA(); };
-  const stepOn = (scene, x, y) => { scene.player.tx = x; scene.player.ty = y; scene.onStep(x, y); };
+  // J6.5: since Premium+ W7 (TX-6) a stepped warp lands at its fade
+  // midpoint, not synchronously — settle the transition before
+  // reading the landing (the same hold-to-poll conversion W7 applied
+  // to verify-slice; every assertion below is unchanged).
+  const settleWarp = (scene) => { let n = 0; while (scene.warpFx && n++ < 20) scene.updateWarpFx(0.05); };
+  const stepOn = (scene, x, y) => { scene.player.tx = x; scene.player.ty = y; scene.onStep(x, y); settleWarp(scene); };
   const exitCenter = (scene) => stepOn(scene, 4, 5); // the center's exit warp tile
 
   // (E1) OWNER SCENARIO: fresh game -> leave Pallet -> battle defeat on

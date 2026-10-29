@@ -125336,6 +125336,18 @@ class OverworldScene {
   }
 
   loadMap(id) {
+    // J6.5 (P1 repair): a DIRECT load supersedes a queued warp fade.
+    // Premium+ W7 (ecd050d, TX-6) deferred every step-warp behind
+    // warpFx, executed at the fade midpoint — a warp left pending
+    // across a direct load (the blackout paths load 'center'
+    // directly; scripted loads do the same) would otherwise fire
+    // LATE, into whatever map the direct load had just installed.
+    // The fade's own load is exempt (firing): it IS the queued warp
+    // landing, and its fade-in phase still owns the transition.
+    if (this.warpFx && !this.warpFx.firing) {
+      this.warpFx = null;
+      if (this.game && this.game.renderer) this.game.renderer.fadeA = 0;
+    }
     this.mapId = id;
     this.map = MAPS[id];
     // ADR-025 §4 (Candy Coach): the Sparring Coach stands in every Pokemon
@@ -125788,6 +125800,19 @@ class OverworldScene {
   // pattern: presentation honors settings.reducedMotion everywhere.
   startWarpFade(to, wp) {
     const g = this.game;
+    // J6.5 (P1 repair): the via ticket is captured NOW, at step time —
+    // the P1 invariant is that the door-front anchor exists from the
+    // moment the door is stepped on. W7 originally captured it inside
+    // doWarp (the fade midpoint, ~110ms later), so during the fade
+    // window the runtime ticket was unset and story.lastCenter was
+    // not yet persisted: a save, blackout, or direct load interleaved
+    // in that window lost the anchor and the Center exit fell back
+    // (the E02–E07 regression). doWarp keeps an idempotent re-assert.
+    if (to.map === 'center' && wp.via) {
+      this.centerReturn = wp.via;
+      g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+    }
+    if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
     if (g.state.settings.reducedMotion) { this.doWarp(to, wp); return; }
     const kind = g.tileKind(this.tileAt(this.player.tx, this.player.ty));
     const door = g.doorOpenSprite ? (g.doorOpenSprite(kind) ? kind : null) : null;
@@ -125814,7 +125839,9 @@ class OverworldScene {
       g.renderer.fadeColor = '#000';
       g.renderer.fadeA = easeOut(k);
       if (k >= 1) {
+        fx.firing = true; // J6.5: doWarp's own loadMap must not cancel this transition (see loadMap)
         this.doWarp(fx.to, fx.wp);
+        fx.firing = false;
         fx.phase = 'in'; fx.t = 0;
         g.renderer.fadeA = 1;
       }
@@ -125833,6 +125860,9 @@ class OverworldScene {
   doWarp(to, wp) {
     const g = this.game;
     if (to.map === 'center' && wp.via) {
+      // Idempotent re-assert: the authoritative capture happens at
+      // step time in startWarpFade (J6.5); this keeps a direct
+      // doWarp call (Reduced Motion) byte-identical in effect.
       this.centerReturn = wp.via;
       // P1: persist the anchor — a save/reload inside the Center
       // must still exit to THIS town's door-front.
@@ -131966,6 +131996,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:c6464c1704e37ab6fce267a975e853a0bf44b5fde8e1680435d133232faad981 -->
+<!-- contentHash:c1dd2d9d790dc632d50f22ebccd517d1ecfad8f7b5db2471b2cfeaa5e4003b62 -->
 </body>
 </html>

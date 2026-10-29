@@ -7404,3 +7404,134 @@ poliwrath path is untouched, A39).
   XL-tier species); the tier mapping carries it for Hoenn.
 - **J7 unchanged:** the arc-chain drive + Hoenn hook read J6's
   fields as ordinary save data; nothing in J6 gates J7.
+
+## Arc 2 Stage J6.5 — Center-exit regression fix: the W7 warp fade vs the P1 ticket (2026-10-29)
+
+### 1. The failure
+
+At the J6 gate, `tests/battle-model-checks.mjs` stood at **39/45**,
+failing **E02–E07** — the whole P1 Center-exit family (ADR-026
+battle mission, commit 31effbf): leaving a Pokémon Center —
+voluntarily, after a blackout, or after a reload inside a Center —
+landed on a fallback position (still on map `center`, or the town
+at (4,5)) instead of the persisted door-front ticket (Viridian
+(7,6), Fuchsia/Cinnabar (7,8), Pallet (7,9) for the owner
+scenario). The E08 save-fill/validator pins passed throughout:
+`story.lastCenter` persisted correctly — the runtime path was
+not honouring it in time. The failure set was byte-identical at
+base 445a195, i.e. NOT a Johto-stage regression.
+
+### 2. Bisect trail (git worktrees, suite run at each point)
+
+- **85c249a** (ADR-026 WP5, the battle mission's close): **45/45**.
+- **8e10c72** (last pre-Premium+ commit): **45/45**.
+- **8ed572e** (Premium+ W0): 45/45 · **09a32b7** (W2): 45/45 ·
+  **5849dae** (W5): 45/45 · **56cab43** (W6): 45/45.
+- **ecd050d** (Premium+ W7): **39/45** — E02–E07 fail, failure
+  payloads byte-identical to HEAD's.
+- **32e54f0** (Premium+ W8 complete): 39/45 · **445a195** (Orange
+  complete): 39/45 · **b80a515** (J6, HEAD before this fix):
+  39/45.
+
+**Guilty commit: ecd050d — Premium+ W7 "Dressing & Composition"
+(TX-6).** It is in Premium+, not the arc chain: the Foundation's
+sysLoadMap gates and Orange's shared-center reuse are both
+exonerated (47/47 + 38/38 + 42/42 were green before and after,
+and the arc chain postdates the break).
+
+### 3. Mechanism
+
+Pre-W7, `onStep` executed a stepped warp **synchronously**: it
+set `centerReturn` from the door's `via`, persisted
+`story.lastCenter`, and called `loadMap` in the same tick — the
+P1 design ("loadMap never touches the ticket; the warp via owns
+it; one `centerExit()` resolver serves the exit warp, both
+blackout paths, and the Escape Rope").
+
+TX-6 split that body in two: `onStep` now only resolves `to` and
+calls `startWarpFade(to, wp)`, which **queues** `warpFx`; the
+actual warp — ticket capture included — moved into `doWarp()`,
+executed by `updateWarpFx` at the fade midpoint (~110ms later,
+only when the scene ticks). Two consequences:
+
+1. **The ticket did not exist at step time.** During the fade
+   window `centerReturn` was unset/stale and `story.lastCenter`
+   not yet persisted, so any consumer reading the landing
+   synchronously after the step (the P1 driver; in principle a
+   save/blackout interleave in the window) resolved the exit
+   through the Pallet/fallback path and observed the pre-warp
+   map/tile — the E02–E07 payloads exactly (`center` (4,5),
+   town (4,5)).
+2. **A queued warp survived direct loads.** `loadMap` never
+   cleared `warpFx`, so a warp queued just before a direct
+   `loadMap` (the blackout paths load `center` directly) fired
+   late, into whatever map the direct load had installed.
+
+Proof the resolver itself never broke: at unmodified HEAD, the
+Part E scenario run under **Reduced Motion** (W7's own
+instant-warp path — `startWarpFade` calls `doWarp` immediately)
+produces every expected landing synchronously: Pallet (7,9),
+Viridian anchor persisted (7,6) + voluntary and blackout exits
+(7,6), Fuchsia/Cinnabar (7,8), reload-in-Center exit Cinnabar
+(7,8). `centerExit()`, the via values, and the persisted anchor
+were correct at every commit; only the timing moved.
+
+### 4. The fix (HEAD, minimal — TX-6 itself untouched)
+
+`src/game/overworld.mjs`, three changes:
+
+1. **`startWarpFade` captures the via ticket synchronously at
+   step time** (Center: `centerReturn` + persisted
+   `story.lastCenter`; Mart: `martReturn`), before the fade is
+   queued — restoring the P1 invariant that the anchor exists
+   from the moment the door is stepped on. `doWarp` keeps an
+   idempotent re-assert, so the Reduced-Motion path is
+   byte-identical in effect.
+2. **`loadMap` supersedes a queued warp**: a pending `warpFx`
+   is cancelled (and the renderer fade reset) when a direct
+   load lands — except the fade's own firing load (`fx.firing`,
+   set around `doWarp` in `updateWarpFx`), whose fade-in phase
+   still owns the transition. A stale warp can no longer fire
+   into the wrong map.
+3. Nothing else: the fade timings, door beat, and 100%-of-warps
+   coverage are exactly as W7 shipped them; no arc, Orange, or
+   Johto code was touched.
+
+`tests/battle-model-checks.mjs`, one change: the Part E driver's
+`stepOn` now **settles the warp transition** (`updateWarpFx`
+polled until `warpFx` clears, bounded) before the landing is
+read — the same hold-to-poll conversion W7 itself applied to
+verify-slice (139/139, "assertion-identical"). Every E
+assertion is unchanged, character for character.
+
+### 5. Why it escaped three missions — stated plainly
+
+This regression survived the Premium+, Foundation/Orange, and
+Johto missions because **battle-model-checks was not in any of
+their gate lists**. Premium+ W7's own register recorded
+"battle-model 39/45 proven base-parity environmental by
+byte-identical A/B" — true (the break predates that A/B's base)
+but the suite was never run against its last green point,
+85c249a, where it was 45/45. Each later mission inherited the
+39/45 as a "standing baseline" (J6's register repeats the
+phrase) instead of a regression to bisect. The J7 gate now
+includes battle-model-checks; a inherited failure count is a
+bisect trigger, not a baseline.
+
+### 6. Verification (all 2026-10-29, this tree)
+
+- **battle-model-checks 45/45** (E02–E07 green again).
+- Full battery: fidelity **35/35** · validator **78/78** ·
+  save-contract **10/10** · cheat-shop **44/44** ·
+  arc-foundation **47/47** · orange-story **38/38** ·
+  orange-climax **42/42** · johto-story **110/110** ·
+  johto-systems **62/62** · campaign-smoke **24/24** ·
+  qa-changed-flows failures exactly the standing **{b2, d9}**.
+  Orange's shared-center via{} exits, Johto's shared centers,
+  the arc machine's loadMap gates, and the Escape Rope path
+  (centerExit consumers) are all covered by those suites and
+  stay green.
+- Fresh build (vercel + guest) OK — `public/game.js`
+  **7,142,527 bytes**. **personal/ byte-identical** (md5
+  verified against the pre-work snapshot; untouched —
+  vercel+guest targets only). NOT pushed, NOT deployed.
