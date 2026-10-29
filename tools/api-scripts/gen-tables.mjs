@@ -88,6 +88,13 @@ const tables = {
     return [a.id, Number.isFinite(ceiling) ? ceiling : null];
   })),
   // Ordered earn sequences.
+  // Stage F0: BADGE_SETS.symbols is deliberately NOT emitted here and
+  // gets no regionBadgeMax row — symbols are unordered facility SLOTS
+  // (null | 'silver' | 'gold'), not an earn sequence, so there is no
+  // prefix for the validator to check; it tier-checks the slots
+  // directly in checkBadges. (The symbols facility list also cannot
+  // pass the ITEMS filter above: its entries are facility ids, not
+  // the '<name>symbol' item ids.)
   badgeSequences: {
     kanto: KNOWN_BADGES,
     orange: ORANGE_EARN_ORDER,

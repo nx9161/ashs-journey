@@ -12,8 +12,9 @@
 //   (413) before JSON.parse, plus a pre-parse bracket-depth scan (Pen T7c).
 // - Species/move/item ids must exist in the build's emitted tables
 //   (api/lib/data/tables.json); tablesVersion is asserted at startup, fail closed.
-// - State-transition checks: badge earn-order prefix per region, v1 symbol slots
-//   must be null, dex totals re-derived server-side (never trusted).
+// - State-transition checks: badge earn-order prefix per region, Frontier
+//   symbol slots tier-checked (null | 'silver' | 'gold', unordered — Stage
+//   F0), dex totals re-derived server-side (never trusted).
 // - 422 errors carry field-level codes only — never echoed payload values
 //   (Pen G12).
 //
@@ -234,7 +235,7 @@ function checkBadges(badges, errors, anomalies) {
   if (!isPlainObj(badges)) return errors.push('bad-badges');
   const dk = hasDangerousKey(badges);
   if (dk) return errors.push('dangerous-key:' + dk);
-  const counts = { kanto: 0, orange: 0, johto: 0, hoenn: 0 };
+  const counts = { kanto: 0, orange: 0, johto: 0, hoenn: 0, symbols: 0 };
   for (const region of ['kanto', 'orange', 'johto', 'hoenn']) {
     const arr = badges[region];
     const max = TABLES.regionBadgeMax[region];
@@ -252,9 +253,22 @@ function checkBadges(badges, errors, anomalies) {
     }
     counts[region] = arr.length;
   }
-  // v1: all 7 symbol slots locked — any non-null is a hard reject.
+  // Stage F0 (supersedes the v1 lock, which hard-rejected any non-null
+  // slot): Frontier symbol slots are tier-validity checked — absent is
+  // ok (a pre-F0 cloud save carries the all-null/default shape only
+  // after the client fill; absence itself is not an offence); if
+  // present it must be an array of exactly 7, each null | 'silver' |
+  // 'gold', else 'bad-symbols'. NO prefix/order rule: symbols slots
+  // are unordered facility slots (BADGE_SETS.symbols is slot order,
+  // not an earn sequence), so checkBadges deliberately does NOT run
+  // symbols through badgeSequences — slot 6 'gold' with slot 0 null
+  // is a legal save. The count is the non-null slot count, the same
+  // read badgeCountFor (src/data/arcs.mjs) makes for the registry.
   const sym = badges.symbols;
-  if (!Array.isArray(sym) || sym.length !== 7 || sym.some((s) => s !== null)) errors.push('bad-symbols');
+  if (sym !== undefined) {
+    if (!Array.isArray(sym) || sym.length !== 7 || sym.some((s) => !(s === null || s === 'silver' || s === 'gold'))) errors.push('bad-symbols');
+    else counts.symbols = sym.filter((s) => s !== null).length;
+  }
   return counts;
 }
 
@@ -575,7 +589,12 @@ export function validateSave(data) {
 
   let badgeCounts = null;
   if (TABLES) badgeCounts = checkBadges(data.badges, errors, anomalies);
-  summary.badgeCount = badgeCounts ? badgeCounts.kanto + badgeCounts.orange + badgeCounts.johto + badgeCounts.hoenn : 0;
+  // Stage F0 summary-count call (recorded in the register): the
+  // summary badgeCount INCLUDES the non-null symbol slots — it is the
+  // total honors count, and badgeCountFor counts symbols the same way
+  // for the Frontier's own arc card; leaving them out would make a
+  // Frontier-complete save report fewer badges than a Hoenn one.
+  summary.badgeCount = badgeCounts ? badgeCounts.kanto + badgeCounts.orange + badgeCounts.johto + badgeCounts.hoenn + badgeCounts.symbols : 0;
 
   checkStory(data.story, errors);
 
@@ -601,7 +620,7 @@ export function validateSave(data) {
   if (!isPlainObj(bag) || hasDangerousKey(bag)) errors.push('bad-bag');
   else {
     const keys = Object.keys(bag);
-    if (keys.length > 168) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (168 since H4a's 8 Hoenn badges; was 160 at J6)
+    if (keys.length > 175) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (175 since F0's 7 Frontier Symbols; was 168 at H4a, 160 at J6)
     for (const k of keys) {
       if (!TABLES.items.has(k) || !isInt(bag[k], 0, 999)) { errors.push('bad-bag-item'); break; }
     }

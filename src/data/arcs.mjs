@@ -152,7 +152,7 @@ export const ARCS = [
     band: null, // open level (Amendment 2): facilities match the entrant
     badgeSet: 'symbols', badgeTotal: 7,
     completionKey: 'frontier', completionFlag: 'frontier_complete',
-    status: 'sealed', future: false,
+    status: 'shipped', future: false,
     hookGiver: 'scott', embarkPort: 'pallet', arrivalMap: 'frontierhub', home: 'pallet',
     summaryLines: [
       'Battle Frontier — CONQUERED.',
@@ -384,6 +384,33 @@ export function deriveArcDefaults(story, caughtCount, playtimeSec) {
   }
   // A directive whose homecoming already happened is spent.
   if (story.arc_directive && flags['hook_' + story.arc_directive]) story.arc_directive = null;
+  // Stage F0 catch-up (GENERIC — names no region): a save that
+  // consumed a SEALED homecoming in an earlier build set hook_<id> +
+  // homecoming_<id> but, by the sealed law, never advanced story.arc
+  // and never got an embark. If that arc is NOW 'shipped' or 'next',
+  // the save is repaired on load: story.arc advances to it and its
+  // embark arms — exactly what the homecoming would have done had
+  // the arc been shipped when it fired. Fires only while story.arc
+  // is still the PREVIOUS arc and that arc's completion is met
+  // (regionsDone or its completionFlag, via arcCompletionMet); it
+  // cannot fire while a homecoming is still pending (no homecoming
+  // flag) or once story.arc has already advanced, and it is
+  // idempotent (after the repair, story.arc IS the arc, so the
+  // previous-arc test fails on every later load). The loop runs in
+  // registry order and does not break, so a save that consumed more
+  // than one sealed homecoming catches up through each in turn.
+  for (let i = 1; i < ARCS.length; i++) {
+    const a = ARCS[i];
+    if (a.status !== 'shipped' && a.status !== 'next') continue;
+    const prev = ARCS[i - 1];
+    if (story.arc !== prev.id) continue;
+    const fl = story.flags && typeof story.flags === 'object' ? story.flags : {};
+    if (!fl['hook_' + a.id] || !fl['homecoming_' + a.id]) continue;
+    if (!arcCompletionMet({ story }, prev)) continue;
+    story.arc = a.id;
+    if (!story.flags || typeof story.flags !== 'object') story.flags = {};
+    story.flags['embark_' + a.id] = true;
+  }
   if (typeof story.arcDexStart !== 'number' || !Number.isFinite(story.arcDexStart) || story.arcDexStart < 0) {
     story.arcDexStart = story.arc === 'kanto' ? 0 : (caughtCount || 0);
   }

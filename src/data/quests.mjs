@@ -166,6 +166,26 @@ export const TALE_NPCS = [
   { map: 'pallet', x: 11, y: 8, name: 'CAPT JOHTO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
     ferry: 'newbark', ferryArc: 'johto',
     dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+  // Arc 3.5 Stage F0: the Frontier embark captain, appended to
+  // Pallet's roster through this same loadMap append idiom. He
+  // carries NO tale/role — the ferry handler (overworld-systems,
+  // ferryArc 'frontier') owns him entirely: gated by the Foundation
+  // embark leg (embark_frontier, armed at the Frontier homecoming —
+  // or by the deriveArcDefaults catch-up for a save that consumed
+  // that homecoming while the Frontier was still sealed) outbound,
+  // and unconditional once the Frontier has been reached
+  // (NO-SOFT-LOCK LAW). He stands at (11,9), one tile south of CAPT
+  // JOHTO (11,8) in Pallet's open south field — a plain ground tile:
+  // no door, warp or route tile is sealed from there, and Pallet's
+  // walkable graph stays one fragment with all warps reachable
+  // (celadon-sweep verified before/after in F0; the bundle suite pins
+  // his adjacency). The tile one EAST of CAPT JOHTO, (12,8), was
+  // tried first and REJECTED on that evidence: it is the only exit
+  // of the (13,8)/(14,8) pocket and an NPC there seals it into a
+  // second fragment.
+  { map: 'pallet', x: 11, y: 9, name: 'CAPT FRONTIER', art: 'sailor', skin: '#e8b888', shirt: '#5a3a7a', pants: '#2a2a3a', hair: '#1a1a2a',
+    ferry: 'frontierhub', ferryArc: 'frontier',
+    dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Scott himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
   // Arc 3 Stage H4a: the Hoenn embark captain, appended to Vermilion's
   // roster through this same loadMap append idiom (Vermilion's map def
   // in maps2.mjs is NOT rewritten). He carries NO tale/role — the ferry

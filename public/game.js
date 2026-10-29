@@ -120558,6 +120558,21 @@ const ITEMS = {
   featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
   mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
   rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
+  // Frontier Symbols (Stage F0): the Kanto representation adapted to
+  // the Frontier's shape — a key-pocket ITEMS row per Symbol, but the
+  // earned state itself is NOT a bag/badge array: it is the slot array
+  // badges.symbols (slot i = facility BADGE_SETS.symbols[i], each slot
+  // null | 'silver' | 'gold'). Silver sets the slot; Gold raises it.
+  // These rows are the case/display record of a Symbol once earned —
+  // they are earned-only and never stock (see the Cheat Terminal
+  // exclusion in overworld-systems.mjs openCheatShop).
+  abilitysymbol: { id: 'abilitysymbol', name: 'Ability Symbol', pocket: 'key', desc: 'From the Battle Tower. Struck in silver for the first long climb, and in gold for the trainer who climbs twice as far again.' },
+  knowledgesymbol: { id: 'knowledgesymbol', name: 'Knowledge Symbol', pocket: 'key', desc: 'From the Battle Factory. For winning with borrowed partners — proof that what you know matters more than what you own.' },
+  gutssymbol: { id: 'gutssymbol', name: 'Guts Symbol', pocket: 'key', desc: 'From the Battle Arena. Three turns, judged without mercy — for a team that never once fought scared.' },
+  tacticssymbol: { id: 'tacticssymbol', name: 'Tactics Symbol', pocket: 'key', desc: 'From the Battle Dome. Won through a whole tournament bracket, one read at a time, under the brightest lights on the island.' },
+  lucksymbol: { id: 'lucksymbol', name: 'Luck Symbol', pocket: 'key', desc: 'From the Battle Pike. The rooms choose what happens to you in there; this says you walked out smiling anyway.' },
+  spiritsymbol: { id: 'spiritsymbol', name: 'Spirit Symbol', pocket: 'key', desc: 'From the Battle Palace. For trusting your partners to choose their own moves — and being right to trust them.' },
+  bravesymbol: { id: 'bravesymbol', name: 'Brave Symbol', pocket: 'key', desc: 'From the Battle Pyramid. Carried up through the dark, floor by floor, with only what you brought in your bag.' },
   // Stage J4b key item: the Cianwood pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
@@ -120633,6 +120648,16 @@ const BADGE_SETS = {
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
   johto: ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge', 'glacierbadge', 'risingbadge'],
   hoenn: ['stonebadge', 'knucklebadge', 'dynamobadge', 'heatbadge', 'balancebadge', 'featherbadge', 'mindbadge', 'rainbadge'],
+  // Stage F0: the Frontier SLOT ORDER — facility ids, NOT item ids and
+  // NOT an earn order. Slot i of badges.symbols belongs to facility
+  // symbols[i] (its ITEMS row is the '<name>symbol' row above: tower ->
+  // abilitysymbol, factory -> knowledgesymbol, arena -> gutssymbol,
+  // dome -> tacticssymbol, pike -> lucksymbol, palace -> spiritsymbol,
+  // pyramid -> bravesymbol). Slots are UNORDERED: any facility can be
+  // won in any order, so no prefix rule reads this list — the server
+  // validator tier-checks the slots and gen-tables deliberately emits
+  // NO badgeSequence for symbols.
+  symbols: ['tower', 'factory', 'arena', 'dome', 'pike', 'palace', 'pyramid'],
 };
 const ORANGE_BADGES = BADGE_SETS.orange;
 
@@ -148419,7 +148444,7 @@ const ARCS = [
     band: null, // open level (Amendment 2): facilities match the entrant
     badgeSet: 'symbols', badgeTotal: 7,
     completionKey: 'frontier', completionFlag: 'frontier_complete',
-    status: 'sealed', future: false,
+    status: 'shipped', future: false,
     hookGiver: 'scott', embarkPort: 'pallet', arrivalMap: 'frontierhub', home: 'pallet',
     summaryLines: [
       'Battle Frontier — CONQUERED.',
@@ -148651,6 +148676,33 @@ function deriveArcDefaults(story, caughtCount, playtimeSec) {
   }
   // A directive whose homecoming already happened is spent.
   if (story.arc_directive && flags['hook_' + story.arc_directive]) story.arc_directive = null;
+  // Stage F0 catch-up (GENERIC — names no region): a save that
+  // consumed a SEALED homecoming in an earlier build set hook_<id> +
+  // homecoming_<id> but, by the sealed law, never advanced story.arc
+  // and never got an embark. If that arc is NOW 'shipped' or 'next',
+  // the save is repaired on load: story.arc advances to it and its
+  // embark arms — exactly what the homecoming would have done had
+  // the arc been shipped when it fired. Fires only while story.arc
+  // is still the PREVIOUS arc and that arc's completion is met
+  // (regionsDone or its completionFlag, via arcCompletionMet); it
+  // cannot fire while a homecoming is still pending (no homecoming
+  // flag) or once story.arc has already advanced, and it is
+  // idempotent (after the repair, story.arc IS the arc, so the
+  // previous-arc test fails on every later load). The loop runs in
+  // registry order and does not break, so a save that consumed more
+  // than one sealed homecoming catches up through each in turn.
+  for (let i = 1; i < ARCS.length; i++) {
+    const a = ARCS[i];
+    if (a.status !== 'shipped' && a.status !== 'next') continue;
+    const prev = ARCS[i - 1];
+    if (story.arc !== prev.id) continue;
+    const fl = story.flags && typeof story.flags === 'object' ? story.flags : {};
+    if (!fl['hook_' + a.id] || !fl['homecoming_' + a.id]) continue;
+    if (!arcCompletionMet({ story }, prev)) continue;
+    story.arc = a.id;
+    if (!story.flags || typeof story.flags !== 'object') story.flags = {};
+    story.flags['embark_' + a.id] = true;
+  }
   if (typeof story.arcDexStart !== 'number' || !Number.isFinite(story.arcDexStart) || story.arcDexStart < 0) {
     story.arcDexStart = story.arc === 'kanto' ? 0 : (caughtCount || 0);
   }
@@ -152306,6 +152358,26 @@ const TALE_NPCS = [
   { map: 'pallet', x: 11, y: 8, name: 'CAPT JOHTO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
     ferry: 'newbark', ferryArc: 'johto',
     dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+  // Arc 3.5 Stage F0: the Frontier embark captain, appended to
+  // Pallet's roster through this same loadMap append idiom. He
+  // carries NO tale/role — the ferry handler (overworld-systems,
+  // ferryArc 'frontier') owns him entirely: gated by the Foundation
+  // embark leg (embark_frontier, armed at the Frontier homecoming —
+  // or by the deriveArcDefaults catch-up for a save that consumed
+  // that homecoming while the Frontier was still sealed) outbound,
+  // and unconditional once the Frontier has been reached
+  // (NO-SOFT-LOCK LAW). He stands at (11,9), one tile south of CAPT
+  // JOHTO (11,8) in Pallet's open south field — a plain ground tile:
+  // no door, warp or route tile is sealed from there, and Pallet's
+  // walkable graph stays one fragment with all warps reachable
+  // (celadon-sweep verified before/after in F0; the bundle suite pins
+  // his adjacency). The tile one EAST of CAPT JOHTO, (12,8), was
+  // tried first and REJECTED on that evidence: it is the only exit
+  // of the (13,8)/(14,8) pocket and an NPC there seals it into a
+  // second fragment.
+  { map: 'pallet', x: 11, y: 9, name: 'CAPT FRONTIER', art: 'sailor', skin: '#e8b888', shirt: '#5a3a7a', pants: '#2a2a3a', hair: '#1a1a2a',
+    ferry: 'frontierhub', ferryArc: 'frontier',
+    dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Scott himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
   // Arc 3 Stage H4a: the Hoenn embark captain, appended to Vermilion's
   // roster through this same loadMap append idiom (Vermilion's map def
   // in maps2.mjs is NOT rewritten). He carries NO tale/role — the ferry
@@ -155538,6 +155610,16 @@ function validateSave(data) {
     const seq = BADGE_SETS.hoenn;
     if (!Array.isArray(h) || !seq || h.length > seq.length || h.some((id, i) => id !== seq[i])) errors.push('bad-badges-hoenn');
   }
+  // Stage F0: badges.symbols, when present, must be an array of
+  // exactly 7 slots (slot i = facility BADGE_SETS.symbols[i]), each
+  // null | 'silver' | 'gold' — the server validator enforces the same
+  // tiers as 'bad-symbols'. Symbols are UNORDERED (any facility first),
+  // so there is NO prefix rule here, unlike the badge sets above.
+  if (isObj(data.badges) && data.badges.symbols !== undefined) {
+    const sym = data.badges.symbols;
+    if (!Array.isArray(sym) || sym.length !== 7
+      || sym.some((s) => !(s === null || s === 'silver' || s === 'gold'))) errors.push('bad-badges-symbols');
+  }
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');
@@ -155629,7 +155711,15 @@ function fillV2Defaults(data) {
     if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
     if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
     if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
-    if (!Array.isArray(data.badges.symbols)) data.badges.symbols = [null, null, null, null, null, null, null];
+    // Stage F0: the symbols fill PRESERVES earned tiers and repairs
+    // only the shape — a non-array becomes all-null, a wrong length
+    // pads/truncates with nulls, an invalid entry becomes null. A
+    // legitimately earned 'silver'/'gold' slot is NEVER rewritten
+    // (validateSave stays strict for saves carrying their own tiers).
+    {
+      const rawSym = Array.isArray(data.badges.symbols) ? data.badges.symbols : [];
+      data.badges.symbols = Array.from({ length: 7 }, (_, i) => (rawSym[i] === 'silver' || rawSym[i] === 'gold' ? rawSym[i] : null));
+    }
   }
   // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
   // on load (party + boxes), so v1 saves and pre-Phase-3 v2 saves open
@@ -169484,7 +169574,11 @@ Object.assign(OverworldScene.prototype, {
     // claims never touch badges.orange and vice versa); a claim can
     // therefore never produce an invalid save.
     const g = this.game;
-    const setId = Object.keys(BADGE_SETS).find((k) => BADGE_SETS[k].includes(badgeId));
+    // Stage F0: 'symbols' is excluded from the set search — its list
+    // is facility slot order, not claimable badge ids, and its state
+    // is the slot-shaped badges.symbols (earned-only; a claim here
+    // writes set ARRAYS and would corrupt the slot shape).
+    const setId = Object.keys(BADGE_SETS).filter((k) => k !== 'symbols').find((k) => BADGE_SETS[k].includes(badgeId));
     if (!setId) return false;
     const ORDER = BADGE_SETS[setId];
     const arr = g.state.badges[setId] || (g.state.badges[setId] = []);
@@ -169528,7 +169622,15 @@ Object.assign(OverworldScene.prototype, {
     // Badge stock is data-driven from BADGE_SETS (Stage O2): the
     // Kanto eight plus the Orange four, each set claimed under its
     // own prefix rule (cheatClaimBadge resolves the set from the id).
-    const BADGE_IDS = Object.values(BADGE_SETS).flat();
+    // Stage F0: 'symbols' is excluded EXPLICITLY at this read site.
+    // BADGE_SETS.symbols is the Frontier SLOT ORDER (facility ids, not
+    // item ids), and Symbols are earned-only, slot-shaped state
+    // (badges.symbols tiers) — they must never become claimable badge
+    // stock (the claim path writes set arrays), and their ITEMS rows
+    // must not leak in through the Key Items pocket either, so the
+    // symbol item ids are filtered out of EVERY section below.
+    const BADGE_IDS = Object.entries(BADGE_SETS).filter(([setId]) => setId !== 'symbols').flatMap(([, ids]) => ids);
+    const SYMBOL_ITEM_IDS = ['abilitysymbol', 'knowledgesymbol', 'gutssymbol', 'tacticssymbol', 'lucksymbol', 'spiritsymbol', 'bravesymbol'];
     const badgeOwned = (id) => Object.values(g.state.badges || {}).some((arr) => Array.isArray(arr) && arr.includes(id));
     const SECTIONS = [
       { label: 'Balls', value: 'balls' }, { label: 'Medicine', value: 'medicine' },
@@ -169538,6 +169640,7 @@ Object.assign(OverworldScene.prototype, {
     ];
     const stockOf = (section) => Object.keys(ITEMS).filter((id) => {
       const it = ITEMS[id];
+      if (SYMBOL_ITEM_IDS.includes(id)) return false; // Stage F0: earned-only, never stock (see above)
       if (section === 'badges') return BADGE_IDS.includes(id);
       if (section === 'collectibles') return !!it.collectible;
       if (section === 'key') return it.pocket === 'key' && !BADGE_IDS.includes(id);

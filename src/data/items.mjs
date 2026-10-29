@@ -167,6 +167,21 @@ export const ITEMS = {
   featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
   mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
   rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
+  // Frontier Symbols (Stage F0): the Kanto representation adapted to
+  // the Frontier's shape — a key-pocket ITEMS row per Symbol, but the
+  // earned state itself is NOT a bag/badge array: it is the slot array
+  // badges.symbols (slot i = facility BADGE_SETS.symbols[i], each slot
+  // null | 'silver' | 'gold'). Silver sets the slot; Gold raises it.
+  // These rows are the case/display record of a Symbol once earned —
+  // they are earned-only and never stock (see the Cheat Terminal
+  // exclusion in overworld-systems.mjs openCheatShop).
+  abilitysymbol: { id: 'abilitysymbol', name: 'Ability Symbol', pocket: 'key', desc: 'From the Battle Tower. Struck in silver for the first long climb, and in gold for the trainer who climbs twice as far again.' },
+  knowledgesymbol: { id: 'knowledgesymbol', name: 'Knowledge Symbol', pocket: 'key', desc: 'From the Battle Factory. For winning with borrowed partners — proof that what you know matters more than what you own.' },
+  gutssymbol: { id: 'gutssymbol', name: 'Guts Symbol', pocket: 'key', desc: 'From the Battle Arena. Three turns, judged without mercy — for a team that never once fought scared.' },
+  tacticssymbol: { id: 'tacticssymbol', name: 'Tactics Symbol', pocket: 'key', desc: 'From the Battle Dome. Won through a whole tournament bracket, one read at a time, under the brightest lights on the island.' },
+  lucksymbol: { id: 'lucksymbol', name: 'Luck Symbol', pocket: 'key', desc: 'From the Battle Pike. The rooms choose what happens to you in there; this says you walked out smiling anyway.' },
+  spiritsymbol: { id: 'spiritsymbol', name: 'Spirit Symbol', pocket: 'key', desc: 'From the Battle Palace. For trusting your partners to choose their own moves — and being right to trust them.' },
+  bravesymbol: { id: 'bravesymbol', name: 'Brave Symbol', pocket: 'key', desc: 'From the Battle Pyramid. Carried up through the dark, floor by floor, with only what you brought in your bag.' },
   // Stage J4b key item: the Cianwood pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
@@ -242,6 +257,16 @@ export const BADGE_SETS = {
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
   johto: ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge', 'glacierbadge', 'risingbadge'],
   hoenn: ['stonebadge', 'knucklebadge', 'dynamobadge', 'heatbadge', 'balancebadge', 'featherbadge', 'mindbadge', 'rainbadge'],
+  // Stage F0: the Frontier SLOT ORDER — facility ids, NOT item ids and
+  // NOT an earn order. Slot i of badges.symbols belongs to facility
+  // symbols[i] (its ITEMS row is the '<name>symbol' row above: tower ->
+  // abilitysymbol, factory -> knowledgesymbol, arena -> gutssymbol,
+  // dome -> tacticssymbol, pike -> lucksymbol, palace -> spiritsymbol,
+  // pyramid -> bravesymbol). Slots are UNORDERED: any facility can be
+  // won in any order, so no prefix rule reads this list — the server
+  // validator tier-checks the slots and gen-tables deliberately emits
+  // NO badgeSequence for symbols.
+  symbols: ['tower', 'factory', 'arena', 'dome', 'pike', 'palace', 'pyramid'],
 };
 export const ORANGE_BADGES = BADGE_SETS.orange;
 

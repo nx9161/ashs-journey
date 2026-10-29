@@ -138,11 +138,11 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A16 tables.json in sync; badgeSequences.hoenn is the earn order, regionBadgeMax.hoenn 8, items count 168 (160 + 8 Hoenn badges), quests table carries every q_hoenn_* + hoenn tale id',
+  ok('A16 tables.json in sync; badgeSequences.hoenn is the earn order, regionBadgeMax.hoenn 8, items count 175 (168 + 7 Frontier Symbols, Stage F0 — supersedes the Stage H4a count), quests table carries every q_hoenn_* + hoenn tale id',
     checkOut.includes('tables.json OK')
     && JSON.stringify(t.badgeSequences.hoenn) === JSON.stringify(HOENN_ORDER)
     && t.regionBadgeMax.hoenn === 8
-    && t.items.length === 168
+    && t.items.length === 175
     && HOENN_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(HOENN_TALES).every((id) => t.quests.includes(id)), checkOut.trim());
 }
@@ -275,10 +275,15 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
     /Rise Through Hoenn/.test(chron) && /Lucario and the Mystery of Mew/.test(chron)
     && chron.indexOf('Lucario and the Mystery of Mew') < chron.indexOf('Battle Frontier'));
   const fr = arcById('frontier');
-  ok('A37 Frontier registry row consumed, not rewritten: hookGiver scott with hookLines written, status sealed (the machine\'s sealed-homecoming law: hook delivered, directive cleared, NO arc advance, NO embark — no dangling state)',
-    fr.hookGiver === 'scott' && fr.hookLines.length === 3 && fr.status === 'sealed'
+  // SUPERSEDED at Stage F0: the Frontier registry row flipped
+  // 'sealed' -> 'shipped' (the arming), so a Hoenn-complete save with
+  // the directive pinned now reads frontier as locked-next (the road
+  // ahead, armed) instead of sealed. The row is otherwise consumed,
+  // not rewritten — same hookGiver/hookLines as at H4b.
+  ok('A37 Frontier registry row consumed, not rewritten: hookGiver scott with hookLines written, status shipped (Stage F0 supersedes the sealed-era expectation: with the directive pinned, frontier reads locked-next, the armed road ahead)',
+    fr.hookGiver === 'scott' && fr.hookLines.length === 3 && fr.status === 'shipped'
     && (() => { const s2 = defaultState(); s2.story.arc = 'hoenn'; s2.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn']; s2.story.flags.hoenn_complete = true; s2.story.arc_directive = 'frontier';
-      return arcStateOf(s2, 'frontier') === 'sealed' && arcStateOf(s2, 'hoenn') === 'complete'; })());
+      return arcStateOf(s2, 'frontier') === 'locked-next' && arcStateOf(s2, 'hoenn') === 'complete'; })());
 }
 
 // ================= Part B: headless bundle =================
@@ -597,10 +602,16 @@ const driver = `
     !!st.story.flags.arc_card_hoenn && st.story.regionsDone.includes('hoenn') && st.story.arc_directive === 'frontier',
     'directive=' + st.story.arc_directive + ' done=' + st.story.regionsDone.join(','));
   ow = gotoMap(g, 'house-pallet-ash', 5, 5); pump(g, 900);
-  ok('B51 Homecoming rides the machine: Scott\\'s Frontier hook is delivered at home (hook_frontier), the directive clears, and the sealed-arc law holds — story.arc stays hoenn, NO embark_frontier, no dangling state; Hoenn reads complete',
-    !!st.story.flags.hook_frontier && st.story.arc_directive === null && st.story.arc === 'hoenn'
-    && !st.story.flags.embark_frontier && arcStateOf(st, 'hoenn') === 'complete',
-    'arc=' + st.story.arc + ' hook=' + !!st.story.flags.hook_frontier);
+  // SUPERSEDED at Stage F0: the Frontier row flipped 'sealed' ->
+  // 'shipped', so this homecoming now takes the SHIPPED branch of the
+  // same machine (the sealed branch's last live proof was this test
+  // at H4b): the hook is still delivered and the directive still
+  // clears — the subjects this check was written for — but story.arc
+  // now ADVANCES to frontier and embark_frontier IS armed.
+  ok('B51 Homecoming rides the machine: Scott\\'s Frontier hook is delivered at home (hook_frontier), the directive clears, and the shipped-arc law holds (Stage F0 supersedes the sealed-branch assertion) — story.arc advances to frontier, embark_frontier armed; Hoenn reads complete',
+    !!st.story.flags.hook_frontier && st.story.arc_directive === null && st.story.arc === 'frontier'
+    && !!st.story.flags.embark_frontier && arcStateOf(st, 'hoenn') === 'complete',
+    'arc=' + st.story.arc + ' hook=' + !!st.story.flags.hook_frontier + ' embark=' + !!st.story.flags.embark_frontier);
   globalThis.__HOENN_Q__ = Q;
 })();`;
 

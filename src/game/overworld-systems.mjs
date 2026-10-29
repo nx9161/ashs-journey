@@ -3841,7 +3841,11 @@ Object.assign(OverworldScene.prototype, {
     // claims never touch badges.orange and vice versa); a claim can
     // therefore never produce an invalid save.
     const g = this.game;
-    const setId = Object.keys(BADGE_SETS).find((k) => BADGE_SETS[k].includes(badgeId));
+    // Stage F0: 'symbols' is excluded from the set search — its list
+    // is facility slot order, not claimable badge ids, and its state
+    // is the slot-shaped badges.symbols (earned-only; a claim here
+    // writes set ARRAYS and would corrupt the slot shape).
+    const setId = Object.keys(BADGE_SETS).filter((k) => k !== 'symbols').find((k) => BADGE_SETS[k].includes(badgeId));
     if (!setId) return false;
     const ORDER = BADGE_SETS[setId];
     const arr = g.state.badges[setId] || (g.state.badges[setId] = []);
@@ -3885,7 +3889,15 @@ Object.assign(OverworldScene.prototype, {
     // Badge stock is data-driven from BADGE_SETS (Stage O2): the
     // Kanto eight plus the Orange four, each set claimed under its
     // own prefix rule (cheatClaimBadge resolves the set from the id).
-    const BADGE_IDS = Object.values(BADGE_SETS).flat();
+    // Stage F0: 'symbols' is excluded EXPLICITLY at this read site.
+    // BADGE_SETS.symbols is the Frontier SLOT ORDER (facility ids, not
+    // item ids), and Symbols are earned-only, slot-shaped state
+    // (badges.symbols tiers) — they must never become claimable badge
+    // stock (the claim path writes set arrays), and their ITEMS rows
+    // must not leak in through the Key Items pocket either, so the
+    // symbol item ids are filtered out of EVERY section below.
+    const BADGE_IDS = Object.entries(BADGE_SETS).filter(([setId]) => setId !== 'symbols').flatMap(([, ids]) => ids);
+    const SYMBOL_ITEM_IDS = ['abilitysymbol', 'knowledgesymbol', 'gutssymbol', 'tacticssymbol', 'lucksymbol', 'spiritsymbol', 'bravesymbol'];
     const badgeOwned = (id) => Object.values(g.state.badges || {}).some((arr) => Array.isArray(arr) && arr.includes(id));
     const SECTIONS = [
       { label: 'Balls', value: 'balls' }, { label: 'Medicine', value: 'medicine' },
@@ -3895,6 +3907,7 @@ Object.assign(OverworldScene.prototype, {
     ];
     const stockOf = (section) => Object.keys(ITEMS).filter((id) => {
       const it = ITEMS[id];
+      if (SYMBOL_ITEM_IDS.includes(id)) return false; // Stage F0: earned-only, never stock (see above)
       if (section === 'badges') return BADGE_IDS.includes(id);
       if (section === 'collectibles') return !!it.collectible;
       if (section === 'key') return it.pocket === 'key' && !BADGE_IDS.includes(id);

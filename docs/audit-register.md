@@ -9928,3 +9928,179 @@ never drove, Center exits land right, Sootopolis is dive-only, and all
 notes being §6's log order, two test-method caveats, a handful of
 decorative unreachable tiles, and the drought signature — none of them
 a player's blocker.**
+
+## Arc 3.5 Stage F0 — Battle Frontier: Symbol quintet + Frontier arming (2026-10-29)
+
+Base 8225dd1 (Hoenn complete, QA SHIP-WITH-NOTES). ONE commit.
+`personal/` byte-identical (restored from HEAD after builds; zero
+personal/ paths in the diff). Never pushed, never deployed (owner
+order: deploy once, when the arc chain is completely done).
+
+### The Symbol quintet — five places at once (Hoenn's law, mission §1)
+
+The Frontier's badge set is slot-shaped, and the quintet landed in
+one commit, before any facility exists:
+
+1. **ITEMS** (src/data/items.mjs): 7 Symbol rows, key pocket, Emerald
+   names, original flavour text — abilitysymbol (Tower),
+   knowledgesymbol (Factory), gutssymbol (Arena), tacticssymbol
+   (Dome), lucksymbol (Pike), spiritsymbol (Palace), bravesymbol
+   (Pyramid). The rows are the case/display record of an earned
+   Symbol; the earned STATE is badges.symbols, never the bag.
+2. **BADGE_SETS.symbols** = ['tower', 'factory', 'arena', 'dome',
+   'pike', 'palace', 'pyramid'] — the SLOT ORDER: facility ids, not
+   item ids, not an earn order. Slot i of badges.symbols belongs to
+   facility symbols[i]. Nothing prefix-reads this list.
+3. **defaultState** (src/game/state.mjs): badges.symbols already
+   seeded [null x7] since the foundation — verified, NOT duplicated.
+4. **Client schema** (src/save/schema.mjs): validate-if-present —
+   exactly 7 entries, each null | 'silver' | 'gold', else
+   `bad-badges-symbols` (the bad-badges-<set> idiom). The save-FILL
+   preserves earned tiers and repairs only shape: non-array ->
+   all-null, wrong length pads/truncates with nulls, invalid entries
+   -> null. A legitimately earned tier is never rewritten on load.
+5. **Server validator** (api/_lib/validator.mjs): the v1 hard-reject
+   ("all 7 symbol slots locked") is REPLACED with tier validity:
+   absent ok; if present, an array of exactly 7 with each entry
+   null | 'silver' | 'gold', else `bad-symbols`. NO prefix check —
+   checkBadges runs only kanto/orange/johto/hoenn through
+   badgeSequences; symbols are unordered slots (suite proof: slot 6
+   'gold' with slot 0 null validates on BOTH validators; a bad tier
+   fails on both). The bag cap tracks the ITEMS table as at J6/H4a:
+   168 -> 175.
+   **Summary-count call (decided here, on the record):** the summary
+   badgeCount INCLUDES the non-null symbol slots
+   (kanto + orange + johto + hoenn + symbols). It is the total
+   honors count, and the registry's own badgeCountFor counts symbols
+   exactly this way for the Frontier's arc card — leaving them out
+   would report a Frontier-complete save as holding fewer badges
+   than a Hoenn-complete one. Pinned by frontier-checks A11.
+6. **gen-tables** (tools/api-scripts/gen-tables.mjs): tables.json
+   regenerated ONLY via the tool (`--check` green, 175 items). The
+   generator deliberately emits NO badgeSequence and NO
+   regionBadgeMax row for symbols — there is no prefix to check —
+   and the slot list could not pass its ITEMS filter anyway
+   (facility ids are not item ids). A comment in the generator
+   records the exclusion so a future stage does not "fix" it.
+
+### Cheat Terminal check — the leak was real, and is closed
+
+openCheatShop builds badge stock from BADGE_SETS. Two leaks found on
+inspection: (a) `Object.values(BADGE_SETS).flat()` would have carried
+the facility ids into the badge-stock id list; (b) the REAL leak —
+the Symbol ITEMS rows are key-pocket, so they would have been
+claimable through the Key Items section (and cheatClaimBadge's set
+search would have resolved a facility id into the symbols set and
+written into the slot array). Both are now excluded explicitly at
+the read site with comments: BADGE_IDS skips the 'symbols' entry,
+stockOf filters the 7 symbol item ids out of EVERY section, and
+cheatClaimBadge's set search skips 'symbols'. Symbols are
+earned-only. The cheat-shop suite stays **44/44** with its total
+unchanged; its one legitimate ripple is the tables count inside
+A02, superseded by name below — nothing else in the suite moved
+(the maximal-stock saves, which now hold all 175 items, validate
+server-side under the raised bag cap).
+
+### Arming (mission §2)
+
+- **Registry:** the frontier row's status 'sealed' -> 'shipped' in
+  src/data/arcs.mjs. Nothing else in the row changed (band null,
+  horizon 386, pallet -> frontierhub, Scott hookLines all already
+  correct, consumed not rewritten).
+- **Save-fill catch-up** in deriveArcDefaults (called from
+  fillV2Defaults on every load), GENERIC — it names no region: for
+  each arc A in registry order with status 'shipped' or 'next', if
+  hook_<A> and homecoming_<A> are set, story.arc is still the
+  previous arc's id, and the previous arc's completion is met
+  (regionsDone or its completionFlag, via arcCompletionMet), it sets
+  story.arc = A.id and embark_<A> = true — exactly what the
+  homecoming would have done had the arc been shipped when it
+  fired. This repairs Hoenn-complete saves that consumed the SEALED
+  Frontier homecoming in an earlier build (hook + homecoming set,
+  arc stayed hoenn, no embark). It cannot fire while a homecoming
+  is still pending (no homecoming flag), nor once story.arc has
+  advanced, and it is idempotent; the registry-order loop does not
+  break, so stacked sealed homecomings would repair in one load.
+  It sets exactly the two things the brief names — arc + embark;
+  story.region is left as stored (the live homecoming sets it in
+  its own path). Four fixtures pin it in frontier-checks A13–A17
+  (consumed-sealed by regionsDone AND by completionFlag, mid-Hoenn
+  untouched, already-advanced untouched, pending untouched).
+- **CAPT FRONTIER** appended to Pallet's roster via the TALE_NPCS
+  append idiom in src/data/quests.mjs, copied from CAPT JOHTO /
+  CAPT HOENN: ferry 'frontierhub', ferryArc 'frontier', sailor art,
+  original dialogue (the short island crossing + Scott's
+  invitation). Placement evidence: (12,8), one tile east of CAPT
+  JOHTO, was tried FIRST and REJECTED — celadon-sweep showed it
+  seals the (13,8)/(14,8) pocket (its only exit) into a second
+  fragment. The captain stands at **(11,9)**, one tile south of
+  CAPT JOHTO in the open south field: before, Pallet swept 1
+  component / 85 reached / all warps PASS; after, 1 component /
+  84 reached (the captain's own tile) / all warps PASS from every
+  entry. frontier-checks A20–A21 pin the tile + the one-fragment
+  graph in-suite.
+
+### Supersessions, by name (the C28 pattern — subjects kept)
+
+- **hoenn-story A37**: SUBJECT was the Frontier registry row
+  consumed-not-rewritten — the sealed-era expectation (status
+  sealed, arcStateOf 'sealed') now observes the shipped row:
+  status 'shipped', arcStateOf 'locked-next' with the directive
+  pinned. Hook/hookLines assertions unchanged.
+- **hoenn-story B51**: SUBJECT was the Frontier homecoming riding
+  the machine (hook delivered in dialogue, directive cleared) —
+  it now takes the machine's SHIPPED branch: story.arc advances
+  to 'frontier' and embark_frontier IS armed. The hook-delivered
+  and directive-cleared assertions are unchanged.
+- **Item-count supersessions (the H4a class — the quintet adds 7
+  ITEMS rows, 168 -> 175):** hoenn-story A16, cheat-shop A02,
+  johto-story A15, johto-systems A24. In each, only the count
+  moved; every other assertion in those checks stands as written,
+  and each suite's TOTAL is unchanged (88/88, 44/44, 110/110,
+  62/62).
+- **arc-foundation needed NO supersession** (47/47 as written —
+  no assertion in it subjects the Frontier's sealed state).
+- validator.test's 'reject non-null symbol slot (v1 lock)' needed
+  no edit: its mutation ('x') is an invalid tier, so its subject —
+  a bad-symbols rejection — still holds under tier validity.
+
+### Battery + build (this tree, 2026-10-29)
+
+- **NEW tests/frontier-checks.mjs: 27/27** (21 pure + 6 bundle:
+  quintet 1:1, both validator pairs, fill preserve/repair, the
+  four derivation fixtures, captain placement + one-fragment
+  graph; bundle: captain on Pallet's live roster, the ferry gate
+  line with embark_frontier deleted and NO warp — the crossing
+  itself is NOT proven here, frontierhub does not exist until
+  F1 and its proof belongs to F1 — and the live Cheat Terminal
+  carrying no symbol in badge or key stock, with direct
+  cheatClaimBadge('tower'/'abilitysymbol') refusals).
+- qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**
+  (HARD); validator **89** + fuzz **2000/2000** + save-contract
+  **10/10**; arc-foundation **47/47**; hoenn-story **88/88**;
+  cheat-shop **44/44**; johto-story **110/110**; johto-systems
+  **62/62**; campaign-smoke **24/24**; fidelity **35/35**;
+  hoenn-contest **28/28**; hoenn-legendary **24/24**; orange-story
+  **38/38**; orange-climax **42/42**; gen-tables --check green;
+  Pallet celadon-sweep PASS (1 fragment, all warps).
+- **public/game.js: 9,808,323 B** (+7,994 vs the H7b close of
+  9,800,329 B), byte-stable: two consecutive
+  `node scripts/build.mjs` runs produce the identical sha256
+  (578905a577dd…). Public static total 9,970,945 B vs the
+  10,100,000 B trigger — margin 129,055 B. `personal/`
+  byte-identical; dist/ restored (the guest bundle stays as
+  flagged at H7a).
+
+### What F1 inherits
+
+- The crossing proof: CAPT FRONTIER's allowed path (embark armed
+  -> Sail menu -> en-route card -> landing on frontierhub) can
+  only be driven once frontierhub exists (F1's maps). The gate
+  half is proven now; the sail half is F1's first bundle check.
+- The Symbol award path (Silver sets a slot, Gold upgrades it,
+  the 7th Gold writes frontier_complete) is F2/F3's build — F0
+  ships only the state, its validators, and its arming.
+- A Hoenn-complete save that already heard Scott's invitation
+  now loads as a Frontier save (arc + embark derived); a save
+  mid-homecoming (directive pinned, not yet home) still walks
+  the ritual live, through the shipped branch.

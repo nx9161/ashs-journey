@@ -137,6 +137,16 @@ export function validateSave(data) {
     const seq = BADGE_SETS.hoenn;
     if (!Array.isArray(h) || !seq || h.length > seq.length || h.some((id, i) => id !== seq[i])) errors.push('bad-badges-hoenn');
   }
+  // Stage F0: badges.symbols, when present, must be an array of
+  // exactly 7 slots (slot i = facility BADGE_SETS.symbols[i]), each
+  // null | 'silver' | 'gold' — the server validator enforces the same
+  // tiers as 'bad-symbols'. Symbols are UNORDERED (any facility first),
+  // so there is NO prefix rule here, unlike the badge sets above.
+  if (isObj(data.badges) && data.badges.symbols !== undefined) {
+    const sym = data.badges.symbols;
+    if (!Array.isArray(sym) || sym.length !== 7
+      || sym.some((s) => !(s === null || s === 'silver' || s === 'gold'))) errors.push('bad-badges-symbols');
+  }
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');
@@ -228,7 +238,15 @@ export function fillV2Defaults(data) {
     if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
     if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
     if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
-    if (!Array.isArray(data.badges.symbols)) data.badges.symbols = [null, null, null, null, null, null, null];
+    // Stage F0: the symbols fill PRESERVES earned tiers and repairs
+    // only the shape — a non-array becomes all-null, a wrong length
+    // pads/truncates with nulls, an invalid entry becomes null. A
+    // legitimately earned 'silver'/'gold' slot is NEVER rewritten
+    // (validateSave stays strict for saves carrying their own tiers).
+    {
+      const rawSym = Array.isArray(data.badges.symbols) ? data.badges.symbols : [];
+      data.badges.symbols = Array.from({ length: 7 }, (_, i) => (rawSym[i] === 'silver' || rawSym[i] === 'gold' ? rawSym[i] : null));
+    }
   }
   // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
   // on load (party + boxes), so v1 saves and pre-Phase-3 v2 saves open
