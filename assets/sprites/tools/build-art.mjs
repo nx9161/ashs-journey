@@ -198,7 +198,13 @@ function main() {
   // own per-town anchors/accents by design (Premium+ identity law);
   // the raise is recorded in docs/audit-register.md (J3a section),
   // following the W5 palette-cap-raise precedent.
-  const FAMILY_PALETTE_BUDGETS = { tiles: 760 };
+  // Stage J3b: 760 -> 800 — the five east-Johto settlements (olivine /
+  // cianwood / mahogany / blackthorn / silvertown) add 40 identity
+  // tiles on the same per-town anchor programme; the union MEASURES
+  // 783 hexes, so the cap is set just above the measured union, no
+  // headroom banked beyond it. Recorded in docs/audit-register.md
+  // (J3b section), same precedent.
+  const FAMILY_PALETTE_BUDGETS = { tiles: 800 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

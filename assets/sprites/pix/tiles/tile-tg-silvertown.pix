@@ -1,0 +1,25 @@
+# Stage J3a: silvertown town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-silvertown 16 16
+acaaabaaaaabfafa
+aacacaaaaaaaaacb
+acafbafcaaaafaaa
+aabcaaaacaaaaaac
+aabaacaaacabbaaa
+abaacaaabbacaaac
+aaaaacbbaaaaaadc
+aaacbacaaaacbaaa
+acaaaaaaafcbaaaa
+cabbaaaaacaabbaa
+aaacaaaaaabaaaaa
+babcaabfaafaaaaa
+daabaaabaafbacca
+aaaaaaabaabaacbc
+daacaadaaccbaaaa
+dcccaaababaaaaaa
+PAL
+a #c8c8d0 silvertown-ground
+b #9c9ca2 ground-dark
+c #ececf5 ground-light
+d #c9a227 town-accent
+e #7a9ac0 town-accent-2
+f #78787d ground-deep

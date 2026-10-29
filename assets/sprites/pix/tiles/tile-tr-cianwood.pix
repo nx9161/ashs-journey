@@ -1,0 +1,23 @@
+# Stage J3a: cianwood roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-cianwood 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #6a5a48 cianwood-roof
+b #4c4134 roof-dark
+c #84705a roof-light
+d #4a90a8 roof-trim

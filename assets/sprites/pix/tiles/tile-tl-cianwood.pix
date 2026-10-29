@@ -1,0 +1,24 @@
+# Stage J3a: cianwood landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-cianwood 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #c7b582 cianwood-landmark-wall
+b #817654 landmark-trim
+d #4a90a8 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

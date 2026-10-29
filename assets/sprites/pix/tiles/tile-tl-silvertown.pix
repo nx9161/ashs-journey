@@ -1,0 +1,24 @@
+# Stage J3a: silvertown landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-silvertown 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #d8d8e1 silvertown-landmark-wall
+b #8c8c92 landmark-trim
+d #c9a227 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

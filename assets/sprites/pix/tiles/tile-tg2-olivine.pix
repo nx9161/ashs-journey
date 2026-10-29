@@ -1,0 +1,25 @@
+# Stage J3a: olivine town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-olivine 16 16
+bacbbacbcecababc
+cbccbbacccacbaaa
+cbcbbaccccbebaec
+abaaccccbcececcb
+ccbcccbbcaccbbac
+accabccabacbcecc
+cabccbbacbccaacc
+bccacccbeaccbcbb
+accccbceccacbacc
+ccbbccaaccbaccac
+cbaaabcabacaaacb
+cccaacbacacabbcc
+aaccbcbcaabbcacc
+acbcbaaccbcbeabc
+bccaaccbacbaccbc
+cccccbcebbabbacc
+PAL
+a #7aa8b8 olivine-ground
+b #5f8390 ground-dark
+c #90c6d9 ground-light
+d #e8a13a town-accent
+e #f0f0e8 town-accent-2
+f #49656e ground-deep

@@ -1,0 +1,23 @@
+# Stage J3a: mahogany roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-mahogany 16 16
+dddddddddddddddd
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+PAL
+a #6a5138 mahogany-roof
+b #4c3a28 roof-dark
+c #846546 roof-light
+d #5a8ab0 roof-trim

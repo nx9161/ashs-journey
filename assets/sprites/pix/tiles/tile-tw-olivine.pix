@@ -1,0 +1,23 @@
+# Stage J3a: olivine house wall — town-toned facade, one lit window (full-bleed, solid).
+PIX tile-tw-olivine 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaba
+aaaaaaaaaaaabaaa
+aaaaaaabaaaaaaaa
+aaahgggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+baaggggabaaaaaaa
+aaaggggaaaaaaaaa
+aaabbbbaaaaaaaaa
+aaaaaaaaabaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaabaaaaa
+abaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #84b5c7 olivine-house-wall
+b #557681 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

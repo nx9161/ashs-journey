@@ -1,0 +1,25 @@
+# Stage J3a: mahogany town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-mahogany 16 16
+aaaaacaabbcbfcaf
+aaaafdadaaaaaaad
+aaaafbbcfacbaada
+aaaaaaafbaaaafca
+faaaafaaaaacaabb
+facaacaaafbaacaa
+bbabaabaaacaccbc
+aaabaaabaacabafc
+aaacfbacbaaacacc
+bbabaaaaafbcaaaa
+aaacaaaafabaaaaa
+aababcaadaabacac
+aaaaaaaafaaacafb
+ccadaaaaacacbcab
+aaaaaaaaaacaaaaa
+cabbacaaadbaaacc
+PAL
+a #8aa888 mahogany-ground
+b #6c836a ground-dark
+c #a3c6a0 ground-light
+d #5a8ab0 town-accent
+e #d8e8f0 town-accent-2
+f #536552 ground-deep

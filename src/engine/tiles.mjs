@@ -247,7 +247,8 @@ export const J3_WALKABLE_CHARS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
 // kind-name prefixes (tg-/tc-/td-/tr-/tl-/th-/tw-), so Johto kinds ride
 // the shipped W5 rendering paths unchanged.
-export const JOHTO_TOWN_ORDER = ['newbark', 'cherrygrove', 'violet', 'azalea', 'goldenrod', 'ecruteak'];
+export const JOHTO_TOWN_ORDER = ['newbark', 'cherrygrove', 'violet', 'azalea', 'goldenrod', 'ecruteak',
+  'olivine', 'cianwood', 'mahogany', 'blackthorn', 'silvertown'];
 export const JOHTO_TOWN_STYLE = {
   newbark:    { ground: '#8fb8a8', form: 'lakeside-lab modern' },
   cherrygrove:{ ground: '#a8c686', form: 'coastal flower gable' },
@@ -255,6 +256,11 @@ export const JOHTO_TOWN_STYLE = {
   azalea:     { ground: '#6fae6a', form: 'forest-edge timber' },
   goldenrod:  { ground: '#c2a878', form: 'urban brick slab' },
   ecruteak:   { ground: '#c98a5a', form: 'traditional timber' },
+  olivine:    { ground: '#7aa8b8', form: 'port + lighthouse landmark' },
+  cianwood:   { ground: '#b8a878', form: 'rustic island stone' },
+  mahogany:   { ground: '#8aa888', form: 'quiet lakeside timber' },
+  blackthorn: { ground: '#8a8a96', form: 'mountain slate + dragon motifs' },
+  silvertown: { ground: '#c8c8d0', form: 'league marble' },
 };
 const JOHTO_KIND_SUFFIXES = ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'];
 export const JOHTO_TOWN_CHARS = {};

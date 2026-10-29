@@ -1,0 +1,23 @@
+# Stage J3a: mahogany house wall — town-toned facade, one lit window (full-bleed, solid).
+PIX tile-tw-mahogany 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+abaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaaaaaaaa
+aaaggggaaaaabaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaabaaa
+baabbbbabaaaaaaa
+aaaaaaaaaaaaabaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaabaaaabbaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #95b593 mahogany-house-wall
+b #61765f house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

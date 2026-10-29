@@ -1,0 +1,25 @@
+# Stage J3a: silvertown town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-silvertown 16 16
+bcccaccbcbabcabc
+cbbccbccaaccbacc
+cccbacbacebcacbc
+abccbccabaccccab
+cacacbbacaaccbcc
+ccbcbcbacccbccac
+bcbcaccccbcaccbc
+bcaccccbacccccbe
+acccbbcccaacbcac
+cacbcccacabcccca
+cbbaabccbcccacab
+ccccccbacccccbca
+aaccbaaacccbccac
+aabccccbcbaacccc
+baabacebcccaccba
+bcaccbaccacabcba
+PAL
+a #c8c8d0 silvertown-ground
+b #9c9ca2 ground-dark
+c #ececf5 ground-light
+d #c9a227 town-accent
+e #7a9ac0 town-accent-2
+f #78787d ground-deep

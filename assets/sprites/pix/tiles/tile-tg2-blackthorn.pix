@@ -1,0 +1,25 @@
+# Stage J3a: blackthorn town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-blackthorn 16 16
+bccaaacbccccacbc
+cccacbcaeaeabaac
+cccbcccccebccacb
+cbacccccbccaabab
+cccacabceeccbbcc
+cacabcccccbbccca
+ccbabceecbccaccb
+bcbcccabcbacbcbb
+acacebcacbccbcca
+cecbccccccbcccca
+abcbecccbecaccab
+cccccbbcacccabbb
+ceacbcccaccbccce
+ecbcccacbbccaaac
+bcbaaacbceaacabc
+cccacbccccbbbbca
+PAL
+a #8a8a96 blackthorn-ground
+b #6c6c75 ground-dark
+c #a3a3b1 ground-light
+d #b03a5a town-accent
+e #e8c86a town-accent-2
+f #53535a ground-deep

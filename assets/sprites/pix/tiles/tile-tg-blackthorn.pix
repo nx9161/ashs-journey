@@ -1,0 +1,25 @@
+# Stage J3a: blackthorn town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-blackthorn 16 16
+baaaaaaabaaaaffc
+aaaaaaaaaaaaaaaa
+baaaaaadaaaaaaaa
+aaaaaaaaaacaaaaa
+babacacabfaacaac
+cafabaaabaaaaaaa
+aaccaaaacaaaabfc
+aaaafaaaaaabcaab
+bafaaaababaaacaa
+aaacadabbcaacaaa
+aaaaaacadcaaafba
+afcaacabaaccaaaa
+aaafaaacbafaaaaa
+aacaadaaaaaabaaa
+ccaabaaaaaaafaaa
+badacbaaaaaaafaa
+PAL
+a #8a8a96 blackthorn-ground
+b #6c6c75 ground-dark
+c #a3a3b1 ground-light
+d #b03a5a town-accent
+e #e8c86a town-accent-2
+f #53535a ground-deep

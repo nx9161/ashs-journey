@@ -1,0 +1,23 @@
+# Stage J3a: olivine house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-olivine 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #3a5a7a olivine-roof
+b #2a4158 roof-dark
+c #487098 roof-light
+d #e8a13a roof-trim

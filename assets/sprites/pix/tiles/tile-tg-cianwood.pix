@@ -1,0 +1,25 @@
+# Stage J3a: cianwood town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-cianwood 16 16
+aabaabaaaaaaacba
+aaaaadccbaaaabab
+baaaabccaacaaaaa
+bbaaaafbaaccaaac
+aaaaaaadaaabcbaa
+caaaabaafaaaabaa
+aaaaabaaaaaacafc
+cabcaaccadaaabaa
+aaaabaaaafaaaabb
+aaaaaababaaaaaba
+aaaaaaaaaaaaaaaa
+cacafbcaaabacaac
+aaaaaaaaabaaabab
+baaacaaaaaaaabaa
+aaacabcaaaaabaab
+aacaaabaacaaaaab
+PAL
+a #b8a878 cianwood-ground
+b #90835e ground-dark
+c #d9c68e ground-light
+d #4a90a8 town-accent
+e #e86a5a town-accent-2
+f #6e6548 ground-deep

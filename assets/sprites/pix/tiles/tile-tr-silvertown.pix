@@ -1,0 +1,23 @@
+# Stage J3a: silvertown roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-silvertown 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #6a6a9a silvertown-roof
+b #4c4c6f roof-dark
+c #8484c0 roof-light
+d #c9a227 roof-trim

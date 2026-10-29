@@ -361,7 +361,7 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // walkable ground chars, so floor stays floor.
   ...[169, 170]
     .map((i) => String.fromCodePoint(0x1E00 + i)),
-  ...[0, 1, 2, 3, 4, 5]
+  ...[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     .flatMap((i) => [173 + i * 8, 174 + i * 8])
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 

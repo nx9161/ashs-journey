@@ -1,0 +1,23 @@
+# Stage J3a: olivine roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-olivine 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #3a5a7a olivine-roof
+b #2a4158 roof-dark
+c #487098 roof-light
+d #e8a13a roof-trim

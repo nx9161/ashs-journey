@@ -1,0 +1,24 @@
+# Stage J3a: mahogany landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-mahogany 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #95b593 mahogany-landmark-wall
+b #61765f landmark-trim
+d #5a8ab0 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light
