@@ -160,6 +160,17 @@ export function defaultState(inherit) {
       starterLines: [],
       region: 'kanto',
       regionsDone: [],
+      // ADR-027 (Stage F foundation): the arc chain state. arc = the
+      // current arc's registry id (src/data/arcs.mjs); arc_directive =
+      // the pinned "go home" directive's target arc id (null = none);
+      // arcDexStart / arcStartPlaytime snapshot the dex count and the
+      // playtime clock when the current arc began (the ARC COMPLETE
+      // card's per-arc gains read them). All defaults-filled on load
+      // (schema.mjs deriveArcDefaults) so legacy saves open unchanged.
+      arc: 'kanto',
+      arc_directive: null,
+      arcDexStart: 0,
+      arcStartPlaytime: 0,
       position: { map: 'pallet', x: 7, y: 7, dir: 'down' },
       // ADR-025 §4: the run's difficulty mode. 'classic' = the game exactly
       // as shipped; levers live in game/rules.mjs (threat-side only).

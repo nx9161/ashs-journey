@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "b6e1fa68e5fac70700f6a5f0035b0601a049ca3910431a13be5922f14ac8e32a",
+  "tablesVersion": "2eda7690cfd728cbc4b7a014c2c3773da5fe29ea52775472ad32fef53a832576",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -772,6 +772,19 @@
     "galar",
     "paldea",
     "liko"
+  ],
+  "arcs": [
+    "kanto",
+    "orange",
+    "johto",
+    "hoenn",
+    "frontier",
+    "sinnoh",
+    "unova",
+    "kalos",
+    "alola",
+    "journeys",
+    "horizons"
   ],
   "badgeSequences": {
     "kanto": [

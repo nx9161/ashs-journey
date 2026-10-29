@@ -56,6 +56,7 @@ function loadTables() {
       forms: new Set(tables.forms || []),
       quests: new Set(tables.quests || []),
       regions: new Set(tables.regions || ['kanto']),
+      arcs: new Set(tables.arcs || []),
       badgeSequences: tables.badgeSequences,
       regionBadgeMax: tables.regionBadgeMax,
     };
@@ -354,6 +355,18 @@ function checkStory(story, errors) {
     if (!Array.isArray(story.starterLines) || story.starterLines.length > 3
       || story.starterLines.some((x) => !['bulbasaur', 'charmander', 'squirtle'].includes(x))) errors.push('bad-starter-lines');
   }
+  // ADR-027 (Stage F): the arc chain fields — story.arc and the pinned
+  // directive's target are closed-vocabulary registry ids (emitted by
+  // gen-tables from src/data/arcs.mjs, so client and cloud cannot
+  // drift); the arc-start snapshots are bounded counters. Absent =
+  // pre-foundation save (the client derives them on load); the mon
+  // level bounds stay 1..100 in this stage — bands above 100 arrive
+  // with the first arc whose band needs them, registry-driven then.
+  if (story.arc !== undefined && !(TABLES.arcs && TABLES.arcs.has(story.arc))) errors.push('bad-arc');
+  if (story.arc_directive !== undefined && story.arc_directive !== null
+    && !(TABLES.arcs && TABLES.arcs.has(story.arc_directive))) errors.push('bad-arc-directive');
+  if (story.arcDexStart !== undefined && !isInt(story.arcDexStart, 0, 1025)) errors.push('bad-arc-dex-start');
+  if (story.arcStartPlaytime !== undefined && !isInt(story.arcStartPlaytime, 0, 100000000)) errors.push('bad-arc-start-playtime');
 }
 
 function checkSettings(s, errors) {

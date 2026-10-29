@@ -28,6 +28,7 @@ const { ITEMS, BALLS, KEEPSAKES } = await import(join(ROOT, 'src', 'data', 'item
 const { FORMS } = await import(join(ROOT, 'src', 'data', 'forms.mjs'));
 const { MAIN_QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
 const { QUESTS: TOWN_TALES } = await import(join(ROOT, 'src', 'data', 'quests.mjs'));
+const { ARCS } = await import(join(ROOT, 'src', 'data', 'arcs.mjs'));
 const { SCHEMA_VERSION } = await import(join(ROOT, 'src', 'game', 'state.mjs'));
 
 const ALL_SPECIES = { ...SPECIES, ...SPECIES2 };
@@ -51,6 +52,9 @@ const tables = {
   forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
   quests: [...MAIN_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(TOWN_TALES)].sort(),
   regions: ['kanto', 'orange', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea', 'liko'],
+  // ADR-027 (Stage F): the closed arc-id vocabulary — the validator
+  // accepts story.arc / story.arc_directive only from the registry.
+  arcs: ARCS.map((a) => a.id),
   // Ordered earn sequences.
   badgeSequences: {
     kanto: KNOWN_BADGES,

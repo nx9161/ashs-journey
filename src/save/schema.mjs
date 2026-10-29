@@ -3,6 +3,9 @@
 
 import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
 import { KEEPSAKES } from '../data/items.mjs';
+import { ARCS, deriveArcDefaults } from '../data/arcs.mjs';
+
+const ARC_IDS = new Set(ARCS.map((a) => a.id));
 
 export const SAVE_KEY = 'pdr.save.guest';
 
@@ -82,6 +85,16 @@ export function validateSave(data) {
     }
   }
   if (isObj(data.story)) {
+    // ADR-027 (Stage F): the arc chain fields — closed vocabulary (the
+    // ARCS registry ids), bounded counters. Absent = pre-foundation
+    // save (fillV2Defaults derives them); present-but-wrong = reject.
+    if (data.story.arc !== undefined && !ARC_IDS.has(data.story.arc)) errors.push('bad-story-arc');
+    if (data.story.arc_directive !== undefined && data.story.arc_directive !== null
+      && !ARC_IDS.has(data.story.arc_directive)) errors.push('bad-story-arc-directive');
+    if (data.story.arcDexStart !== undefined
+      && (!Number.isInteger(data.story.arcDexStart) || data.story.arcDexStart < 0 || data.story.arcDexStart > 1025)) errors.push('bad-story-arc-dex-start');
+    if (data.story.arcStartPlaytime !== undefined
+      && (typeof data.story.arcStartPlaytime !== 'number' || !Number.isFinite(data.story.arcStartPlaytime) || data.story.arcStartPlaytime < 0)) errors.push('bad-story-arc-start-playtime');
     // Phase 6 carried-knowledge lists: closed vocabularies.
     if (data.story.bondEcho !== undefined
       && (!Array.isArray(data.story.bondEcho) || data.story.bondEcho.length > 32
@@ -164,6 +177,12 @@ export function fillV2Defaults(data) {
       ? [...new Set(data.story.travelersMemory.filter((x) => TRAVELERS_MEMORY_GATES.includes(x)))] : [];
     data.story.starterLines = Array.isArray(data.story.starterLines)
       ? [...new Set(data.story.starterLines.filter((x) => Object.prototype.hasOwnProperty.call(STARTER_LINES, x)))] : [];
+    // ADR-027 (Stage F): arc chain fields derive on load — a legacy
+    // save (no arc fields at all) opens with its arc state inferred
+    // from regionsDone / HoF / the champion flag, nothing else touched.
+    const caughtCount = isObj(data.dex) && isObj(data.dex.caught) ? Object.keys(data.dex.caught).length : 0;
+    const playtimeSec = isObj(data.player) && typeof data.player.playtimeSec === 'number' ? data.player.playtimeSec : 0;
+    deriveArcDefaults(data.story, caughtCount, playtimeSec);
   }
   if (isObj(data.dex)) {
     // Phase 6: dex.runCaught is NEVER invented here — its presence is
