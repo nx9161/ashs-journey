@@ -52,6 +52,7 @@ const KNOWN_BADGES = KANTO_EARN_ORDER.filter((id) => ITEMS[id]);
 const ORANGE_EARN_ORDER = (BADGE_SETS.orange || []).filter((id) => ITEMS[id]);
 const JOHTO_EARN_ORDER = (BADGE_SETS.johto || []).filter((id) => ITEMS[id]);
 const HOENN_EARN_ORDER = (BADGE_SETS.hoenn || []).filter((id) => ITEMS[id]);
+const SINNOH_EARN_ORDER = (BADGE_SETS.sinnoh || []).filter((id) => ITEMS[id]);
 
 const tables = {
   schemaVersion: SCHEMA_VERSION,
@@ -120,8 +121,9 @@ const tables = {
     orange: ORANGE_EARN_ORDER,
     johto: JOHTO_EARN_ORDER,
     hoenn: HOENN_EARN_ORDER,
+    sinnoh: SINNOH_EARN_ORDER,
   },
-  regionBadgeMax: { kanto: 8, orange: 4, johto: 8, hoenn: 8 },
+  regionBadgeMax: { kanto: 8, orange: 4, johto: 8, hoenn: 8, sinnoh: 8 },
 };
 
 const canonical = JSON.stringify(tables);

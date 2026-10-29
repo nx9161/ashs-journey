@@ -138,11 +138,11 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A16 tables.json in sync; badgeSequences.hoenn is the earn order, regionBadgeMax.hoenn 8, items count 175 (168 + 7 Frontier Symbols, Stage F0 — supersedes the Stage H4a count), quests table carries every q_hoenn_* + hoenn tale id',
+  ok('A16 tables.json in sync; badgeSequences.hoenn is the earn order, regionBadgeMax.hoenn 8, items count 183 (175 + 8 Sinnoh badges, Arc 4 Stage S0 — supersedes the Stage F0 count), quests table carries every q_hoenn_* + hoenn tale id',
     checkOut.includes('tables.json OK')
     && JSON.stringify(t.badgeSequences.hoenn) === JSON.stringify(HOENN_ORDER)
     && t.regionBadgeMax.hoenn === 8
-    && t.items.length === 175
+    && t.items.length === 183
     && HOENN_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(HOENN_TALES).every((id) => t.quests.includes(id)), checkOut.trim());
 }

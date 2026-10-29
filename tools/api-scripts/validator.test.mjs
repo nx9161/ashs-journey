@@ -259,5 +259,29 @@ t('F5-fix story.region frontier stays rejected bad-region server-side (unchanged
 t('F5-fix story.region kanto (the Frontier regionKey) stays accepted server-side (unchanged from base)',
   validateSave(frontierComplete((s) => { s.story.region = 'kanto'; })).ok);
 
+// 12. Arc 4 Stage S0 (F-1 fix, coordinator ruling): meta.location is
+// a snapshot of the game's own map display name, and shipped names
+// carry U+2014 EM DASH — the server location check uses a dedicated
+// charset (SAFE_TEXT + em dash + en dash) while every other free-text
+// check keeps SAFE_TEXT. Before this fix, a real player standing in
+// e.g. 'Pewter City — House' got 'bad-meta-location:charset'
+// server-side while the client accepted the same save, so they could
+// not cloud-save at all.
+t('S0 F-1 accept em-dash meta.location (a real shipped map name)', okWith((s) => { s.meta.location = 'Pewter City — House'; }));
+t('S0 F-1 accept en-dash meta.location (the dedicated charset carries U+2013 too)', okWith((s) => { s.meta.location = 'Pewter City – House'; }));
+t('S0 F-1 reject meta.location with a genuinely unsafe character (<)', bad((s) => { s.meta.location = 'Pewter <City'; }, 'bad-meta-location'));
+t('S0 F-1 reject meta.location with a genuinely unsafe character (")', bad((s) => { s.meta.location = 'Pewter "City'; }, 'bad-meta-location'));
+t('S0 F-1 reject meta.location with an emoji', bad((s) => { s.meta.location = 'Pewter City 🏠'; }, 'bad-meta-location'));
+t('S0 F-1 nothing else widens: an em-dash nickname still rejects (bad-nickname, SAFE_TEXT kept)', bad((s) => { s.party[0].nickname = 'A—B'; }, 'bad-nickname'));
+t('S0 F-1 nothing else widens: an em-dash player name still rejects (bad-player-name, SAFE_TEXT kept)', bad((s) => { s.player.name = 'A—B'; }, 'bad-player-name'));
+// The played-shape case: a fleshed-out save (party mon, dex, a Kanto
+// badge, a box mon — the `good` fixture) whose ONLY unusual field is
+// meta.location set to a real em-dash map name validates server-side
+// with ZERO errors, and the client result is unchanged (accepted).
+t('S0 F-1 played-shape save with meta.location = Vermilion City — House validates server-side with ZERO errors',
+  (() => { const rr = validateSave((() => { const s = JSON.parse(JSON.stringify(good)); s.meta.location = 'Vermilion City — House'; return s; })()); return rr.ok && rr.errors.length === 0; })());
+t('S0 F-1 client schema result for the same played-shape save is unchanged (accepted)',
+  (() => { const s = JSON.parse(JSON.stringify(good)); s.meta.location = 'Vermilion City — House'; return validateSaveClient(s).ok; })());
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

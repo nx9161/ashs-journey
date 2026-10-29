@@ -167,6 +167,20 @@ export const ITEMS = {
   featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
   mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
   rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
+  // Sinnoh badges (Arc 4 Stage S0): the Kanto representation exactly —
+  // a key-pocket ITEMS row per badge, the id in badges.sinnoh, and the
+  // badge_<root> story flag. Platinum order, minted complete now so
+  // the set, the Cheat Terminal stock and the validator sequence are
+  // whole before S5 stages their gyms (the Hoenn H4a precedent: the
+  // east four rows shipped before their leaders existed).
+  coalbadge: { id: 'coalbadge', name: 'Coal Badge', pocket: 'key', desc: 'From Roark of Oreburgh. Cut from the seam his miners work — it still smells faintly of coal dust.' },
+  forestbadge: { id: 'forestbadge', name: 'Forest Badge', pocket: 'key', desc: 'From Gardenia of Eterna. It carries the green hush of the old forest at the town\'s edge.' },
+  relicbadge: { id: 'relicbadge', name: 'Relic Badge', pocket: 'key', desc: 'From Fantina of Hearthome. An old, elegant thing — it feels heavier than it looks, like a held breath.' },
+  cobblebadge: { id: 'cobblebadge', name: 'Cobble Badge', pocket: 'key', desc: 'From Maylene of Veilstone. Plain, hard and honest — it has never once pretended to be anything else.' },
+  fenbadge: { id: 'fenbadge', name: 'Fen Badge', pocket: 'key', desc: 'From Crasher Wake of Pastoria. It smells of marsh water and arena lights, and it grins back at you.' },
+  minebadge: { id: 'minebadge', name: 'Mine Badge', pocket: 'key', desc: 'From Byron of Canalave. Forged steel, harbour-forged — the iron island\'s weight in miniature.' },
+  iciclebadge: { id: 'iciclebadge', name: 'Icicle Badge', pocket: 'key', desc: 'From Candice of Snowpoint. Cold enough to sting the palm. It will not melt. Neither will she.' },
+  beaconbadge: { id: 'beaconbadge', name: 'Beacon Badge', pocket: 'key', desc: 'From Volkner of Sunyshore. It hums at lighthouse pitch — the last light before the League road.' },
   // Frontier Symbols (Stage F0): the Kanto representation adapted to
   // the Frontier's shape — a key-pocket ITEMS row per Symbol, but the
   // earned state itself is NOT a bag/badge array: it is the slot array
@@ -257,6 +271,7 @@ export const BADGE_SETS = {
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
   johto: ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge', 'glacierbadge', 'risingbadge'],
   hoenn: ['stonebadge', 'knucklebadge', 'dynamobadge', 'heatbadge', 'balancebadge', 'featherbadge', 'mindbadge', 'rainbadge'],
+  sinnoh: ['coalbadge', 'forestbadge', 'relicbadge', 'cobblebadge', 'fenbadge', 'minebadge', 'iciclebadge', 'beaconbadge'],
   // Stage F0: the Frontier SLOT ORDER — facility ids, NOT item ids and
   // NOT an earn order. Slot i of badges.symbols belongs to facility
   // symbols[i] (its ITEMS row is the '<name>symbol' row above: tower ->

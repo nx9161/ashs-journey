@@ -199,6 +199,28 @@ export const TALE_NPCS = [
   { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#7a3a2a', pants: '#2a2a3a', hair: '#2a1a0a',
     ferry: 'littleroot', ferryArc: 'hoenn',
     dialogue: ['The Littleroot run is the long weather crossing — Hoenn water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+  // Arc 4 Stage S0: the Sinnoh embark captain, appended to Vermilion's
+  // roster through this same loadMap append idiom (Vermilion's map def
+  // is NOT rewritten). He carries NO tale/role — the ferry handler
+  // (overworld-systems, ferryArc 'sinnoh') owns him entirely: gated by
+  // the Foundation embark leg (embark_sinnoh, armed at the Sinnoh
+  // homecoming — or by the deriveArcDefaults catch-up for a save that
+  // consumed that homecoming while Sinnoh was still sealed) outbound,
+  // and unconditional once Sinnoh has been reached (NO-SOFT-LOCK LAW).
+  // He stands at (14,10) on Vermilion's dock row, one tile east of
+  // CAPT ORANGE (13,10) and two west of CAPT HOENN (16,10), leaving
+  // (15,10) open as the passage between them: a plain ground tile —
+  // no warp, door, sign or event tile is sealed from there, and
+  // Vermilion's walkable graph keeps its exact base shape (the main
+  // fragment loses only the captain's own tile; the one pre-existing
+  // isolated tile at (5,11) is untouched — sweep-verified in S0, the
+  // bundle suite pins the graph). The tile one EAST of him, (15,10),
+  // was REJECTED on that evidence: it seals (14,10) — whose only
+  // walkable neighbours are captain tiles and HANK's stance — into
+  // its own fragment.
+  { map: 'vermilion', x: 14, y: 10, name: 'CAPT SINNOH', art: 'sailor', skin: '#b8c8d8', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#e8e8e8',
+    ferry: 'sandgem', ferryArc: 'sinnoh',
+    dialogue: ['The Sandgem run is the northern crossing — cold water, colder air, and a mountain on the horizon that gets taller the whole way north.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
   // own front-door threshold (3,4) — the one-tile gap in the fence
   // row, fed only from (3,5) — so ANY stance in that column seals

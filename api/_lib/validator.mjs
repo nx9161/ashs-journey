@@ -119,6 +119,19 @@ function isInt(x, min, max) {
 }
 // T12 stored-XSS gate: free-text fields are whitelisted to a safe charset.
 const SAFE_TEXT = /^[A-Za-z0-9 _.'\-]*$/;
+// Arc 4 Stage S0 (F-1 fix, coordinator ruling): meta.location is NOT
+// free text — it is a snapshot of the game's OWN map display name
+// (overworld.mjs writes this.map.name into it), and shipped map names
+// legitimately carry U+2014 EM DASH (e.g. 'Pewter City — House':
+// 38 shipped map entries / 36 unique names, scanned from the
+// maps*.mjs name fields). The client accepts those saves; this
+// validator rejected them 'bad-meta-location:charset', so a real
+// player standing in such a map could not cloud-save. The location
+// check therefore uses this DEDICATED charset — the SAFE_TEXT set
+// plus U+2014 and U+2013 (en dash, the same typographic family) —
+// and NOTHING else widens: nickname / player-name / rival-name / OT
+// checks keep SAFE_TEXT exactly as before.
+const SAFE_LOCATION_TEXT = /^[A-Za-z0-9 _.'\-—–]*$/;
 function isSafeText(x, min, max) {
   if (typeof x !== 'string') return false;
   const n = x.normalize('NFKC');
@@ -252,8 +265,8 @@ function checkBadges(badges, errors, anomalies) {
   if (!isPlainObj(badges)) return errors.push('bad-badges');
   const dk = hasDangerousKey(badges);
   if (dk) return errors.push('dangerous-key:' + dk);
-  const counts = { kanto: 0, orange: 0, johto: 0, hoenn: 0, symbols: 0 };
-  for (const region of ['kanto', 'orange', 'johto', 'hoenn']) {
+  const counts = { kanto: 0, orange: 0, johto: 0, hoenn: 0, sinnoh: 0, symbols: 0 };
+  for (const region of ['kanto', 'orange', 'johto', 'hoenn', 'sinnoh']) {
     const arr = badges[region];
     const max = TABLES.regionBadgeMax[region];
     if (!Array.isArray(arr) || arr.length > max) { errors.push('bad-badges-' + region); continue; }
@@ -688,7 +701,7 @@ export function validateSave(data) {
   // total honors count, and badgeCountFor counts symbols the same way
   // for the Frontier's own arc card; leaving them out would make a
   // Frontier-complete save report fewer badges than a Hoenn one.
-  summary.badgeCount = badgeCounts ? badgeCounts.kanto + badgeCounts.orange + badgeCounts.johto + badgeCounts.hoenn + badgeCounts.symbols : 0;
+  summary.badgeCount = badgeCounts ? badgeCounts.kanto + badgeCounts.orange + badgeCounts.johto + badgeCounts.hoenn + badgeCounts.sinnoh + badgeCounts.symbols : 0;
 
   checkStory(data.story, errors);
 
@@ -714,7 +727,7 @@ export function validateSave(data) {
   if (!isPlainObj(bag) || hasDangerousKey(bag)) errors.push('bad-bag');
   else {
     const keys = Object.keys(bag);
-    if (keys.length > 175) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (175 since F0's 7 Frontier Symbols; was 168 at H4a, 160 at J6)
+    if (keys.length > 183) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (183 since S0's 8 Sinnoh badges; was 175 at F0, 168 at H4a, 160 at J6)
     for (const k of keys) {
       if (!TABLES.items.has(k) || !isInt(bag[k], 0, 999)) { errors.push('bad-bag-item'); break; }
     }
@@ -747,7 +760,7 @@ export function validateSave(data) {
   if (!isPlainObj(mt) || hasDangerousKey(mt)) errors.push('bad-meta');
   else {
     if (!isInt(mt.playtimeSec, 0, 100000000)) errors.push('bad-meta-playtime');
-    if (typeof mt.location !== 'string' || mt.location.normalize('NFKC').length > 64 || !SAFE_TEXT.test(mt.location.normalize('NFKC'))) {
+    if (typeof mt.location !== 'string' || mt.location.normalize('NFKC').length > 64 || !SAFE_LOCATION_TEXT.test(mt.location.normalize('NFKC'))) {
       errors.push('bad-meta-location:' + NAME_CHARSET_NOTE);
     }
     // ADR-025: Pure Run ribbon flag + Second Journey counter (Phase 6).

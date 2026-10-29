@@ -174,7 +174,7 @@ export const ARCS = [
     band: { min: 301, max: 400, bandIndex: 4 },
     badgeSet: 'sinnoh', badgeTotal: 8,
     completionKey: 'sinnoh', completionFlag: 'sinnoh_complete',
-    status: 'sealed', future: false,
+    status: 'shipped', future: false,
     hookGiver: 'gary', embarkPort: 'vermilion', arrivalMap: 'sandgem', home: 'pallet',
     summaryLines: [
       'Lily of the Valley Conference — HONOURS.',

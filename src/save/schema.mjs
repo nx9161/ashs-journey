@@ -204,6 +204,13 @@ export function validateSave(data) {
     const seq = BADGE_SETS.hoenn;
     if (!Array.isArray(h) || !seq || h.length > seq.length || h.some((id, i) => id !== seq[i])) errors.push('bad-badges-hoenn');
   }
+  // Arc 4 Stage S0: badges.sinnoh, when present, must be a PREFIX of
+  // the Sinnoh earn order (BADGE_SETS) — the same rule, the same source.
+  if (isObj(data.badges) && data.badges.sinnoh !== undefined) {
+    const sn = data.badges.sinnoh;
+    const seq = BADGE_SETS.sinnoh;
+    if (!Array.isArray(sn) || !seq || sn.length > seq.length || sn.some((id, i) => id !== seq[i])) errors.push('bad-badges-sinnoh');
+  }
   // Stage F0: badges.symbols, when present, must be an array of
   // exactly 7 slots (slot i = facility BADGE_SETS.symbols[i]), each
   // null | 'silver' | 'gold' — the server validator enforces the same
@@ -305,6 +312,7 @@ export function fillV2Defaults(data) {
     if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
     if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
     if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
+    if (!Array.isArray(data.badges.sinnoh)) data.badges.sinnoh = [];
     // Stage F0: the symbols fill PRESERVES earned tiers and repairs
     // only the shape — a non-array becomes all-null, a wrong length
     // pads/truncates with nulls, an invalid entry becomes null. A
@@ -501,7 +509,7 @@ export function migrate(data) {
   if (data.v === 0) {
     data.v = 1;
     data.facilities = data.facilities || { registry: [], unlocked: [] };
-    data.badges = data.badges || { kanto: [], orange: [], johto: [], hoenn: [], symbols: [null, null, null, null, null, null, null] };
+    data.badges = data.badges || { kanto: [], orange: [], johto: [], hoenn: [], sinnoh: [], symbols: [null, null, null, null, null, null, null] };
   }
   if (data.v === 1) {
     data.v = 2;

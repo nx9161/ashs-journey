@@ -10989,3 +10989,177 @@ server-side under the raised bag cap).
   re-open trigger — not fired). `personal/` byte-identical
   across the whole mission (8225dd1 → close); roster
   unchanged at 395 entries (no new species, as designed).
+
+## Arc 4 Stage S0 — Sinnoh badge quintet + arming + F-1 fix (2026-10-29)
+
+Base 8cf87e3 (Frontier complete, QA SHIP-WITH-NOTES). ONE commit.
+`personal/` byte-identical (aggregate sha256 of personal/ files
+7c94537f582325… — identical before and after this stage; restored
+from HEAD after builds; zero personal/ paths in the diff). Never
+pushed, never deployed (owner order: deploy once, when the arc
+chain is completely done).
+
+### The badge quintet — all places at once (Hoenn law, mission §1)
+
+Platinum order: coalbadge, forestbadge, relicbadge, cobblebadge,
+fenbadge, minebadge, iciclebadge, beaconbadge (Roark / Gardenia /
+Fantina / Maylene / Crasher Wake / Byron / Candice / Volkner).
+
+1. **ITEMS** (src/data/items.mjs): 8 Sinnoh badge rows, key pocket,
+   Platinum names, original flavour text — minted complete now so
+   the set is whole before S5 stages their gyms (the H4a precedent).
+2. **BADGE_SETS.sinnoh** in items.mjs, the Platinum earn order.
+3. **defaultState** (src/game/state.mjs): badges.sinnoh seeded [].
+4. **Client schema** (src/save/schema.mjs): validate-if-present —
+   badges.sinnoh must be a PREFIX of BADGE_SETS.sinnoh, else
+   `bad-badges-sinnoh`; the fill is the Hoenn idiom (a present array
+   passes through untouched, so earned badges are preserved on old
+   saves; absent/non-array fills to []). The migrate() fallback
+   badges object carries sinnoh: [] too.
+5. **Server validator** (api/_lib/validator.mjs): checkBadges runs
+   sinnoh through the same badgeSequences prefix law (skip/swap ->
+   `bad-badge-order`, duplicate -> `bad-badge-id`, overlong ->
+   `bad-badges-sinnoh`); the summary badgeCount INCLUDES sinnoh
+   (the F0 total-honors read). The bag cap tracks the ITEMS table
+   again: 175 -> 183.
+6. **gen-tables** (tools/api-scripts/gen-tables.mjs): taught the
+   sinnoh earn order exactly as hoenn's (SINNOH_EARN_ORDER from
+   BADGE_SETS, badgeSequences.sinnoh, regionBadgeMax.sinnoh 8);
+   tables.json regenerated ONLY via the tool (`--check` green,
+   183 items).
+7. **Data-driven consumers verified, no special-casing added:**
+   the leader award path (battle.mjs winTrainer writes
+   badges.<badgeSet> + the badge_<root> flag generically); the
+   Cheat Terminal (BADGE_IDS stock is BADGE_SETS-driven excluding
+   'symbols' only — sinnoh stock appears, key-pocket leak excluded
+   by the same BADGE_IDS read, cheatClaimBadge resolves the set
+   generically and prefix-completes — proven live in sinnoh-checks
+   B06–B08); the summary/Journal display path (arcCompleteSummary
+   reads badgeCountFor through the registry badgeSet — B09 proves
+   'Badges: 8/8' for Sinnoh with no new code).
+
+### Arming (mission §2)
+
+- **Registry:** the sinnoh row's status 'sealed' -> 'shipped' in
+  src/data/arcs.mjs. Nothing else in the row changed (band
+  301–400, horizon 493, vermilion -> sandgem, Gary hookLines all
+  already correct, consumed not rewritten).
+- **Save-fill catch-up:** the generic F0 catch-up in
+  deriveArcDefaults (it names no region) ALREADY covers Sinnoh —
+  verified, NOT extended: a Frontier-close-shaped save
+  (hook_sinnoh + homecoming_sinnoh consumed while sealed,
+  story.arc 'frontier', Frontier completion met by regionsDone
+  AND by completionFlag forms) derives story.arc = 'sinnoh',
+  story.region = 'sinnoh', embark_sinnoh, and both arc-start
+  snapshots on load, idempotently (sinnoh-checks A14–A19, the F0
+  A13–A17 fixture idiom).
+- **CAPT SINNOH** appended to Vermilion's roster via the TALE_NPCS
+  append idiom in src/data/quests.mjs, copied from CAPT HOENN:
+  ferry 'sandgem', ferryArc 'sinnoh', sailor art, original
+  dialogue. Placement evidence: he stands at **(14,10)** on the
+  dock row, one tile east of CAPT ORANGE (13,10), two west of
+  CAPT HOENN (16,10). (15,10) — the only free tile adjacent to
+  CAPT HOENN — was REJECTED as his stance: it is the shared
+  talking tile for the dock captains, and a stance there seals
+  (14,10) (whose only walkable neighbours are captain/HANK
+  tiles) into its own fragment. Before: Vermilion swept
+  [main 119, one pre-existing isolated tile (5,11)]; after:
+  [main 118, (5,11)] — the main fragment loses only the
+  captain's own tile, no new fragment, every warp in the main
+  fragment or beside it (sinnoh-checks A20–A22 pure, B03–B05
+  walked on foot in the bundle: Route 6 landing -> (15,10) ->
+  west along the dock -> the gym door warp fires).
+
+### F-1 fix (mission §3, coordinator ruling — server aligned, scoped)
+
+- meta.location is a snapshot of the game's own map display name
+  (overworld.mjs writes this.map.name); the server validator's
+  SAFE_TEXT lacks U+2014, so it rejected `bad-meta-location:
+  charset` for real players standing in em-dash maps while the
+  client accepted the same saves — those players could not
+  cloud-save. Fix: the meta.location check alone now uses a
+  dedicated charset, SAFE_LOCATION_TEXT = the SAFE_TEXT set +
+  U+2014 (—) + U+2013 (–). NOTHING else widens: nickname /
+  player-name / rival-name / OT checks keep SAFE_TEXT (pinned).
+  No map renamed; the snapshot is not normalized.
+- **Affected-name count (exact, scanned from the shipped
+  maps*.mjs name fields via the merged map table): 38 shipped
+  map entries carry an em-dash display name, 36 of them unique**
+  ('Pewter City — House' and 'Celadon City — House' are each
+  carried by two house maps). U+2014 is the ONLY character in
+  any shipped map display name outside the SAFE_TEXT set
+  (sinnoh-checks A27 pins the census). The mission doc's ~15
+  estimate counted only single-quoted name fields; the
+  JSON-style maps (maps6–8) carry the rest.
+- Pins: validator.test.mjs 97 -> **106** (em-dash + en-dash
+  locations accept; `<` / `"` / emoji locations still reject;
+  em-dash nickname and player name still reject; a played-shape
+  save whose meta.location is 'Vermilion City — House'
+  validates server-side with ZERO errors, client unchanged) +
+  sinnoh-checks A23–A26 (incl. a Lv312 Sinnoh-arc played shape).
+
+### Supersessions, by name (the C28 pattern — subjects kept)
+
+- **frontier-checks E09–E12**: SUBJECT was the Sinnoh homecoming
+  riding the machine + the Journey/Regions surfaces — the
+  sealed-era expectations now observe the SHIPPED row: E09's
+  hook-delivered and directive-cleared assertions unchanged;
+  E10 now asserts arc advances to sinnoh, region sinnoh,
+  embark_sinnoh armed (regionsDone still unchanged by the
+  homecoming); E11 reads ARC 4 SINNOH CURRENT; E12 reads the
+  Sinnoh row current ('you are here'). Suite total unchanged
+  (136/136).
+- **frontier-checks B03**: Cheat Terminal badge-stock row count
+  29 -> 37 (36 real badge rows + Back — the 8 Sinnoh badges are
+  stock by the same BADGE_SETS read; the no-symbol subject is
+  unchanged).
+- **Item-count supersessions (the H4a/F0 class — the quintet
+  adds 8 ITEMS rows, 175 -> 183):** frontier-checks A12,
+  cheat-shop A02, hoenn-story A16, johto-story A15,
+  johto-systems A24. In each, only the count moved; every other
+  assertion stands as written, and each suite's TOTAL is
+  unchanged (136, 44, 88, 110, 62).
+
+### Battery + build (this tree, 2026-10-29)
+
+- **NEW tests/sinnoh-checks.mjs: 37/37** (27 pure + 10 bundle:
+  quintet 1:1, both validator pairs, fill preserve, the five
+  derivation fixtures, captain placement + graph, the F-1
+  charset pins + census; bundle: captain on Vermilion's live
+  roster, the ferry gate line with embark_sinnoh deleted and
+  NO warp — the crossing itself is NOT proven here, sandgem
+  does not exist until S3 and its proof belongs to S3 — the
+  on-foot dock walk + gym warp, the live Cheat Terminal, the
+  registry summary read).
+- validator **106** + fuzz **2000/2000** + save-contract
+  **12/12**; qa-changed-flows exactly **{b2, d9}** (QA TOTAL
+  19/19); battle-model **45/45** (HARD); campaign-smoke
+  **24/24**; arc-foundation **47/47**; frontier-checks
+  **136/136**; cheat-shop **44/44**; hoenn-story **88/88**;
+  johto-story **110/110**; johto-systems **62/62**;
+  gen-tables --check green.
+- **public/game.js: 9,935,642 B** (+4,215 vs the Frontier close
+  of 9,931,427 B), byte-stable: two consecutive
+  `node scripts/build.mjs` runs produce the identical sha256
+  (7a1a3e0ee7a8…). Public static total **10,098,264 B** vs the
+  12,582,912 B gate — margin 2,484,648 B. The F4-restated
+  projection-to-close (12,115,538 B, margin 467,374 B) stands:
+  S0's actual delta is +4,215 B and the 250,000 B re-open
+  trigger is not approached. `personal/` byte-identical;
+  dist/ restored.
+
+### What S1 inherits
+
+- The crossing proof: CAPT SINNOH's allowed path (embark armed
+  -> Sail menu -> en-route card -> landing on sandgem) can only
+  be driven once sandgem exists (S3's maps). The gate half is
+  proven now; the sail half is S3's first bundle check.
+- The badge award path is state-only this stage: no Sinnoh
+  leader exists until S5, but the quintet's validators, stock
+  and registry reads are all live, so S5's leaders award into
+  a finished system without touching it.
+- A Frontier-complete save that already heard Gary's hook now
+  loads as a Sinnoh save (arc + region + embark + snapshots
+  derived); a save mid-homecoming (directive pinned, not yet
+  home) still walks the ritual live, through the shipped branch
+  (frontier-checks E09–E12 prove that branch end-to-end).

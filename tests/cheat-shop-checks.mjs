@@ -49,8 +49,8 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   ok('A01 tables.json in sync with src/data (gen-tables --check)', checkOut.includes('tables.json OK'), checkOut.trim());
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A02 counts: species 395 (257 + 135 Hoenn species + 3 Deoxys form entries, Stage H1 — supersedes the Stage J1 count), items 175 (168 + 7 Frontier Symbols, Stage F0 — supersedes the Stage H4a count), keepsakes 12, forms 202 (197+5)',
-    t.species.length === 395 && t.items.length === 175 && t.keepsakes.length === 12 && t.forms.length === 202,
+  ok('A02 counts: species 395 (257 + 135 Hoenn species + 3 Deoxys form entries, Stage H1 — supersedes the Stage J1 count), items 183 (175 + 8 Sinnoh badges, Arc 4 Stage S0 — supersedes the Stage F0 count), keepsakes 12, forms 202 (197+5)',
+    t.species.length === 395 && t.items.length === 183 && t.keepsakes.length === 12 && t.forms.length === 202,
     JSON.stringify({ s: t.species.length, i: t.items.length, k: t.keepsakes.length, f: t.forms.length }));
   ok('A03 server tables carry every expansion id',
     [...FORM_IDS, ...NEW_IDS].every((id) => t.species.includes(id) && t.forms.includes(id) === FORM_IDS.includes(id))

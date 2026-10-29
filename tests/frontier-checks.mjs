@@ -25,8 +25,9 @@
 // itself is then driven TRUE-PATH) at six gold symbols + Pyramid
 // silver + the possession faced, driven through the Brandon Gold
 // win, the machine's ARC COMPLETE card, the unconditional ferry
-// home, Scott's closing beat on Pallet entry, and the SEALED Sinnoh
-// homecoming at Mom's house.
+// home, Scott's closing beat on Pallet entry, and the Sinnoh
+// homecoming at Mom's house (SEALED at F4; Arc 4 Stage S0 superseded
+// E09-E12 to the machine's SHIPPED branch — see the E09 comment).
 // Run: node tests/frontier-checks.mjs   (exit 1 on any failure)
 
 import { dirname, join } from 'node:path';
@@ -117,8 +118,8 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A12 tables.json in sync (gen-tables --check, regenerated via the tool only); items 175 carries all 7 symbol ids; badgeSequences has NO symbols entry and regionBadgeMax no symbols row (no prefix check exists to emit)',
-    checkOut.includes('tables.json OK') && t.items.length === 175
+  ok('A12 tables.json in sync (gen-tables --check, regenerated via the tool only); items 183 carries all 7 symbol ids (175 + 8 Sinnoh badges, Arc 4 Stage S0 — supersedes the F0 count); badgeSequences has NO symbols entry and regionBadgeMax no symbols row (no prefix check exists to emit)',
+    checkOut.includes('tables.json OK') && t.items.length === 183
     && SYMBOL_ITEM_IDS.every((id) => t.items.includes(id))
     && !('symbols' in t.badgeSequences) && !('symbols' in t.regionBadgeMax), checkOut.trim());
 }
@@ -410,8 +411,8 @@ const driver = `
   ow.openCheatShop(); pick(g, 'items'); pick(g, 'badges');
   var badgeVals = g.ui.menu.items.map(function (i) { return i.value; });
   var badgeLabels = g.ui.menu.items.map(function (i) { return i.label; }).join(' | ');
-  ok('B03 Cheat Terminal badge stock carries NO symbol (28 real badge rows + Back; no symbol item id, no facility id, no Symbol label)',
-    badgeVals.length === 29 && SYM_IDS.every(function (id) { return !badgeVals.includes(id); })
+  ok('B03 Cheat Terminal badge stock carries NO symbol (36 real badge rows + Back — 28 + the 8 Sinnoh badges, Arc 4 Stage S0 supersedes the row count; no symbol item id, no facility id, no Symbol label)',
+    badgeVals.length === 37 && SYM_IDS.every(function (id) { return !badgeVals.includes(id); })
     && FAC_IDS.every(function (id) { return !badgeVals.includes(id); }) && badgeLabels.indexOf('Symbol') < 0,
     'rows=' + badgeVals.length);
   pick(g, null); pick(g, 'key');
@@ -1916,17 +1917,23 @@ const driverE = `
       !g.ui.dialogueOpen && scottLogCount(g) === 1 && st.story.flags.scott_closing_done === true,
       'logScenes=' + scottLogCount(g));
 
-    // ---------- E09-E10: the SEALED Sinnoh homecoming (machine, untouched) ----------
+    // ---------- E09-E10: the Sinnoh homecoming (machine, untouched) ----------
+    // SUPERSEDED at Arc 4 Stage S0: the Sinnoh registry row flipped
+    // 'sealed' -> 'shipped' (the arming), so this homecoming now takes
+    // the SHIPPED branch of the same machine (the sealed branch's last
+    // live proof was this test at F4). E09's hook-delivered and
+    // directive-cleared assertions are unchanged; E10 now observes the
+    // shipped advance.
     var regionsBefore = st.story.regionsDone.slice();
     ow = gotoMap(g, 'house-pallet-ash', 4, 4);
     drain(g);
     var hookSeen = g.ui.log.some(function (e) { return e.lines && e.lines.some(function (l) { return l.indexOf('Electivire') >= 0 && l.indexOf('Sinnoh') >= 0; }); });
-    ok('E09 the SEALED Sinnoh homecoming completes at Mom house: the machine delivers Gary hook lines itself (the Electivire line), hook_sinnoh + homecoming_sinnoh set, the directive is cleared',
+    ok('E09 the Sinnoh homecoming completes at Mom house: the machine delivers Gary hook lines itself (the Electivire line), hook_sinnoh + homecoming_sinnoh set, the directive is cleared',
       hookSeen && st.story.flags.hook_sinnoh === true && st.story.flags.homecoming_sinnoh === true
       && st.story.arc_directive === null,
       'hook=' + st.story.flags.hook_sinnoh + ' dir=' + st.story.arc_directive);
-    ok('E10 sealed law holds end-to-end: story.arc STAYS frontier, embark_sinnoh is NOT set, regionsDone is unchanged by the homecoming',
-      st.story.arc === 'frontier' && !st.story.flags.embark_sinnoh
+    ok('E10 shipped law holds end-to-end (Stage S0 supersedes the sealed-branch assertion): story.arc ADVANCES to sinnoh, story.region is sinnoh, embark_sinnoh IS armed, regionsDone is unchanged by the homecoming',
+      st.story.arc === 'sinnoh' && st.story.region === 'sinnoh' && st.story.flags.embark_sinnoh === true
       && JSON.stringify(st.story.regionsDone) === JSON.stringify(regionsBefore),
       'arc=' + st.story.arc + ' done=' + JSON.stringify(st.story.regionsDone));
 
@@ -1937,13 +1944,14 @@ const driverE = `
     g.openRegions(); tk(g, 2);
     var rLabels = g.ui.menu.items.map(function (i) { return i.label; });
     pick(g, 'close'); tk(g, 2);
-    ok('E11 Journey surface: the arc headers read ARC 3.5 BATTLE FRONTIER COMPLETE and ARC 4 SINNOH SEALED (arcStateOf agrees: frontier complete, sinnoh sealed)',
-      arcStateOf(st, 'frontier') === 'complete' && arcStateOf(st, 'sinnoh') === 'sealed'
+    ok('E11 Journey surface: the arc headers read ARC 3.5 BATTLE FRONTIER COMPLETE and ARC 4 SINNOH CURRENT (Stage S0 supersedes the sealed reading: arcStateOf agrees — frontier complete, sinnoh current after its shipped homecoming)',
+      arcStateOf(st, 'frontier') === 'complete' && arcStateOf(st, 'sinnoh') === 'current'
       && jLabels.some(function (l) { return l.indexOf('BATTLE FRONTIER') >= 0 && l.indexOf('COMPLETE') >= 0; })
-      && jLabels.some(function (l) { return l.indexOf('SINNOH') >= 0 && l.indexOf('SEALED') >= 0; }),
+      && jLabels.some(function (l) { return l.indexOf('SINNOH') >= 0 && l.indexOf('CURRENT') >= 0; }),
       jLabels.join(' / ').slice(0, 300));
-    ok('E12 Regions surface: the Sinnoh row reads sealed (not done, not current)',
-      rLabels.some(function (l) { return l.indexOf('Sinnoh') >= 0 && l.indexOf('sealed') >= 0; }),
+    ok('E12 Regions surface: the Sinnoh row reads current — you are here (Stage S0 supersedes the sealed reading; not done, not sealed)',
+      rLabels.some(function (l) { return l.indexOf('Sinnoh') >= 0 && l.indexOf('you are here') >= 0; })
+      && !rLabels.some(function (l) { return l.indexOf('Sinnoh') >= 0 && l.indexOf('sealed') >= 0; }),
       rLabels.join(' / ').slice(0, 300));
   }
 

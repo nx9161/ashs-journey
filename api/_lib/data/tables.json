@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "008f46510d26503bb3589a834779b00b2c9417c70aa580ffa327805823b878ef",
+  "tablesVersion": "cee4e2f31d982a9ca1f541decbe652682806419cd597148955d4c635d9445e1f",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -549,6 +549,7 @@
     "antidote",
     "awakening",
     "balancebadge",
+    "beaconbadge",
     "bicycle",
     "bikevoucher",
     "blackapricorn",
@@ -560,6 +561,8 @@
     "cascadebadge",
     "championsribbon",
     "clearbell",
+    "coalbadge",
+    "cobblebadge",
     "coin",
     "coincase",
     "coraleyebadge",
@@ -572,8 +575,10 @@
     "ether",
     "fastball",
     "featherbadge",
+    "fenbadge",
     "firestone",
     "fogbadge",
+    "forestbadge",
     "fossilspur",
     "friendball",
     "fullheal",
@@ -598,6 +603,7 @@
     "hm05",
     "hyperpotion",
     "iceheal",
+    "iciclebadge",
     "ironacorn",
     "itemfinder",
     "jadestarbadge",
@@ -615,6 +621,7 @@
     "maxpotion",
     "maxrevive",
     "mindbadge",
+    "minebadge",
     "mineralbadge",
     "minimistylure",
     "moonball",
@@ -634,6 +641,7 @@
     "rainbowwing",
     "rarecandy",
     "redapricorn",
+    "relicbadge",
     "revive",
     "risingbadge",
     "safariball",
@@ -1242,12 +1250,23 @@
       "featherbadge",
       "mindbadge",
       "rainbadge"
+    ],
+    "sinnoh": [
+      "coalbadge",
+      "forestbadge",
+      "relicbadge",
+      "cobblebadge",
+      "fenbadge",
+      "minebadge",
+      "iciclebadge",
+      "beaconbadge"
     ]
   },
   "regionBadgeMax": {
     "kanto": 8,
     "orange": 4,
     "johto": 8,
-    "hoenn": 8
+    "hoenn": 8,
+    "sinnoh": 8
   }
 }

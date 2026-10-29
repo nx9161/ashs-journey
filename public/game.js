@@ -120558,6 +120558,20 @@ const ITEMS = {
   featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
   mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
   rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
+  // Sinnoh badges (Arc 4 Stage S0): the Kanto representation exactly —
+  // a key-pocket ITEMS row per badge, the id in badges.sinnoh, and the
+  // badge_<root> story flag. Platinum order, minted complete now so
+  // the set, the Cheat Terminal stock and the validator sequence are
+  // whole before S5 stages their gyms (the Hoenn H4a precedent: the
+  // east four rows shipped before their leaders existed).
+  coalbadge: { id: 'coalbadge', name: 'Coal Badge', pocket: 'key', desc: 'From Roark of Oreburgh. Cut from the seam his miners work — it still smells faintly of coal dust.' },
+  forestbadge: { id: 'forestbadge', name: 'Forest Badge', pocket: 'key', desc: 'From Gardenia of Eterna. It carries the green hush of the old forest at the town\'s edge.' },
+  relicbadge: { id: 'relicbadge', name: 'Relic Badge', pocket: 'key', desc: 'From Fantina of Hearthome. An old, elegant thing — it feels heavier than it looks, like a held breath.' },
+  cobblebadge: { id: 'cobblebadge', name: 'Cobble Badge', pocket: 'key', desc: 'From Maylene of Veilstone. Plain, hard and honest — it has never once pretended to be anything else.' },
+  fenbadge: { id: 'fenbadge', name: 'Fen Badge', pocket: 'key', desc: 'From Crasher Wake of Pastoria. It smells of marsh water and arena lights, and it grins back at you.' },
+  minebadge: { id: 'minebadge', name: 'Mine Badge', pocket: 'key', desc: 'From Byron of Canalave. Forged steel, harbour-forged — the iron island\'s weight in miniature.' },
+  iciclebadge: { id: 'iciclebadge', name: 'Icicle Badge', pocket: 'key', desc: 'From Candice of Snowpoint. Cold enough to sting the palm. It will not melt. Neither will she.' },
+  beaconbadge: { id: 'beaconbadge', name: 'Beacon Badge', pocket: 'key', desc: 'From Volkner of Sunyshore. It hums at lighthouse pitch — the last light before the League road.' },
   // Frontier Symbols (Stage F0): the Kanto representation adapted to
   // the Frontier's shape — a key-pocket ITEMS row per Symbol, but the
   // earned state itself is NOT a bag/badge array: it is the slot array
@@ -120648,6 +120662,7 @@ const BADGE_SETS = {
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
   johto: ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge', 'glacierbadge', 'risingbadge'],
   hoenn: ['stonebadge', 'knucklebadge', 'dynamobadge', 'heatbadge', 'balancebadge', 'featherbadge', 'mindbadge', 'rainbadge'],
+  sinnoh: ['coalbadge', 'forestbadge', 'relicbadge', 'cobblebadge', 'fenbadge', 'minebadge', 'iciclebadge', 'beaconbadge'],
   // Stage F0: the Frontier SLOT ORDER — facility ids, NOT item ids and
   // NOT an earn order. Slot i of badges.symbols belongs to facility
   // symbols[i] (its ITEMS row is the '<name>symbol' row above: tower ->
@@ -150043,7 +150058,7 @@ const ARCS = [
     band: { min: 301, max: 400, bandIndex: 4 },
     badgeSet: 'sinnoh', badgeTotal: 8,
     completionKey: 'sinnoh', completionFlag: 'sinnoh_complete',
-    status: 'sealed', future: false,
+    status: 'shipped', future: false,
     hookGiver: 'gary', embarkPort: 'vermilion', arrivalMap: 'sandgem', home: 'pallet',
     summaryLines: [
       'Lily of the Valley Conference — HONOURS.',
@@ -153971,6 +153986,28 @@ const TALE_NPCS = [
   { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#7a3a2a', pants: '#2a2a3a', hair: '#2a1a0a',
     ferry: 'littleroot', ferryArc: 'hoenn',
     dialogue: ['The Littleroot run is the long weather crossing — Hoenn water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+  // Arc 4 Stage S0: the Sinnoh embark captain, appended to Vermilion's
+  // roster through this same loadMap append idiom (Vermilion's map def
+  // is NOT rewritten). He carries NO tale/role — the ferry handler
+  // (overworld-systems, ferryArc 'sinnoh') owns him entirely: gated by
+  // the Foundation embark leg (embark_sinnoh, armed at the Sinnoh
+  // homecoming — or by the deriveArcDefaults catch-up for a save that
+  // consumed that homecoming while Sinnoh was still sealed) outbound,
+  // and unconditional once Sinnoh has been reached (NO-SOFT-LOCK LAW).
+  // He stands at (14,10) on Vermilion's dock row, one tile east of
+  // CAPT ORANGE (13,10) and two west of CAPT HOENN (16,10), leaving
+  // (15,10) open as the passage between them: a plain ground tile —
+  // no warp, door, sign or event tile is sealed from there, and
+  // Vermilion's walkable graph keeps its exact base shape (the main
+  // fragment loses only the captain's own tile; the one pre-existing
+  // isolated tile at (5,11) is untouched — sweep-verified in S0, the
+  // bundle suite pins the graph). The tile one EAST of him, (15,10),
+  // was REJECTED on that evidence: it seals (14,10) — whose only
+  // walkable neighbours are captain tiles and HANK's stance — into
+  // its own fragment.
+  { map: 'vermilion', x: 14, y: 10, name: 'CAPT SINNOH', art: 'sailor', skin: '#b8c8d8', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#e8e8e8',
+    ferry: 'sandgem', ferryArc: 'sinnoh',
+    dialogue: ['The Sandgem run is the northern crossing — cold water, colder air, and a mountain on the horizon that gets taller the whole way north.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
   // own front-door threshold (3,4) — the one-tile gap in the fence
   // row, fed only from (3,5) — so ANY stance in that column seals
@@ -155449,7 +155486,7 @@ function defaultState(inherit) {
     party: [],
     boxes: {},
     dex: { caught: {}, seen: {}, befriended: {} }, // dexNo -> true
-    badges: { kanto: [], orange: [], johto: [], hoenn: [], symbols: [null, null, null, null, null, null, null] },
+    badges: { kanto: [], orange: [], johto: [], hoenn: [], sinnoh: [], symbols: [null, null, null, null, null, null, null] },
     story: {
       chapter: 0, beat: 0, flags: {},
       // WS6/WS10 story state: quest-log stages + region progression
@@ -157262,6 +157299,13 @@ function validateSave(data) {
     const seq = BADGE_SETS.hoenn;
     if (!Array.isArray(h) || !seq || h.length > seq.length || h.some((id, i) => id !== seq[i])) errors.push('bad-badges-hoenn');
   }
+  // Arc 4 Stage S0: badges.sinnoh, when present, must be a PREFIX of
+  // the Sinnoh earn order (BADGE_SETS) — the same rule, the same source.
+  if (isObj(data.badges) && data.badges.sinnoh !== undefined) {
+    const sn = data.badges.sinnoh;
+    const seq = BADGE_SETS.sinnoh;
+    if (!Array.isArray(sn) || !seq || sn.length > seq.length || sn.some((id, i) => id !== seq[i])) errors.push('bad-badges-sinnoh');
+  }
   // Stage F0: badges.symbols, when present, must be an array of
   // exactly 7 slots (slot i = facility BADGE_SETS.symbols[i]), each
   // null | 'silver' | 'gold' — the server validator enforces the same
@@ -157363,6 +157407,7 @@ function fillV2Defaults(data) {
     if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
     if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
     if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
+    if (!Array.isArray(data.badges.sinnoh)) data.badges.sinnoh = [];
     // Stage F0: the symbols fill PRESERVES earned tiers and repairs
     // only the shape — a non-array becomes all-null, a wrong length
     // pads/truncates with nulls, an invalid entry becomes null. A
@@ -157559,7 +157604,7 @@ function migrate(data) {
   if (data.v === 0) {
     data.v = 1;
     data.facilities = data.facilities || { registry: [], unlocked: [] };
-    data.badges = data.badges || { kanto: [], orange: [], johto: [], hoenn: [], symbols: [null, null, null, null, null, null, null] };
+    data.badges = data.badges || { kanto: [], orange: [], johto: [], hoenn: [], sinnoh: [], symbols: [null, null, null, null, null, null, null] };
   }
   if (data.v === 1) {
     data.v = 2;
