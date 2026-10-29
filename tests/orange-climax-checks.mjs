@@ -504,8 +504,8 @@ const driver = `
     JSON.stringify({ champ: stB.story.flags.orange_champion, dir: stB.story.arc_directive }));
   gotoMap(gB, 'house-pallet-ash', 4, 6);
   pump(gB);
-  ok('B22 homecoming completes (Johto hook delivered, directive cleared, sealed arc does not advance story.arc)',
-    stB.story.arc_directive === null && stB.story.flags.hook_johto === true && stB.story.arc === 'orange',
+  ok('B22 homecoming completes (Johto hook delivered, directive cleared, arc advances to johto + embark armed — Stage J4a supersedes the sealed-arc assertion)',
+    stB.story.arc_directive === null && stB.story.flags.hook_johto === true && stB.story.arc === 'johto' && stB.story.flags.embark_johto === true,
     JSON.stringify({ dir: stB.story.arc_directive, hook: stB.story.flags.hook_johto, arc: stB.story.arc }));
   gotoMap(gB, 'shamouti', 14, 15);
   pump(gB);

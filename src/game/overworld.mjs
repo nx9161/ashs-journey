@@ -12,6 +12,7 @@ import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
 import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { TALE_NPCS, TALE_NPC_PATCHES } from '../data/quests.mjs';
+import { JOHTO_NPCS, JOHTO_NPC_PATCHES } from '../data/story-johto.mjs';
 import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from './bonds.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
@@ -144,6 +145,25 @@ export class OverworldScene {
       const taleNpcs = TALE_NPCS.filter((n) => n.map === id && (id !== 'mart' || n.name !== 'SHOPKEEPER' || this._martOrigin === 'viridian'));
       if (taleNpcs.length) {
         npcs = [...npcs, ...taleNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
+        changed = true;
+      }
+      // Stage J4a (Johto story): the same append idiom fields the
+      // Johto story actors (Elm, the west leaders, Kurt, the Sprout
+      // monks, the well Rockets — data/story-johto.mjs JOHTO_NPCS) and
+      // stamps Johto tale roles onto existing maps6 townsfolk by name
+      // (JOHTO_NPC_PATCHES). The generated maps6 definitions are never
+      // mutated; the scene works on this copy, exactly as for tales.
+      const jPatches = JOHTO_NPC_PATCHES.filter((p) => p.map === id);
+      if (jPatches.length) {
+        npcs = npcs.map((n) => {
+          const p = jPatches.find((pp) => pp.name === n.name);
+          return p ? { ...n, tale: p.tale, role: p.role } : n;
+        });
+        changed = true;
+      }
+      const johtoNpcs = JOHTO_NPCS.filter((n) => n.map === id);
+      if (johtoNpcs.length) {
+        npcs = [...npcs, ...johtoNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
       // ADR-025 §2 (Bonds): the Celadon parley pair stand in Celadon

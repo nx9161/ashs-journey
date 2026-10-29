@@ -144,6 +144,24 @@ export const MAP_GROUND = {
   'trovita-gym': 'rubble',
   'kumquat-gym': 'mind',
   'pummelo-stadium': 'open',
+  // Stage J4a: Johto west gym signature Grounds (existing 15 only —
+  // no new Grounds this stage): Falkner's sky gym rides the Storm,
+  // Bugsy's forest gym the Bloom, Whitney's the Open (the Plain Badge
+  // is plain all the way down, by her own cheerful admission), and
+  // Morty's the Grave. West landmark interiors follow their feel:
+  // Sprout Tower blooms, the Slowpoke Well runs Tide-wet, the Burned
+  // Tower is Grave ground, and the lab / Kurt's house stay Open.
+  'gym-violet': 'storm', // Violet Gym — Falkner
+  'gym-azalea': 'bloom', // Azalea Gym — Bugsy
+  'gym-goldenrod': 'open', // Goldenrod Gym — Whitney
+  'gym-ecruteak': 'grave', // Ecruteak Gym — Morty
+  'sprout-tower-1': 'bloom',
+  'sprout-tower-2': 'bloom',
+  'slowpoke-well': 'tide',
+  'burned-tower-1': 'grave',
+  'burned-tower-2': 'grave',
+  'elm-lab': 'open',
+  'kurt-house': 'open',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',

@@ -27,6 +27,7 @@ const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
 const { ITEMS, BALLS, KEEPSAKES, BADGE_SETS } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
 const { ORANGE_QUESTS, ORANGE_LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-orange.mjs'));
+const { JOHTO_QUESTS, JOHTO_TALES } = await import(join(ROOT, 'src', 'data', 'story-johto.mjs'));
 const { FORMS } = await import(join(ROOT, 'src', 'data', 'forms.mjs'));
 const { MAIN_QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
 const { QUESTS: TOWN_TALES } = await import(join(ROOT, 'src', 'data', 'quests.mjs'));
@@ -45,6 +46,7 @@ const ALL_MOVES = { ...MOVES, ...MOVES2 };
 const KANTO_EARN_ORDER = BADGE_SETS.kanto;
 const KNOWN_BADGES = KANTO_EARN_ORDER.filter((id) => ITEMS[id]);
 const ORANGE_EARN_ORDER = (BADGE_SETS.orange || []).filter((id) => ITEMS[id]);
+const JOHTO_EARN_ORDER = (BADGE_SETS.johto || []).filter((id) => ITEMS[id]);
 
 const tables = {
   schemaVersion: SCHEMA_VERSION,
@@ -56,7 +58,7 @@ const tables = {
   keepsakes: Object.keys(KEEPSAKES).sort(),
   balls: Object.keys(BALLS).sort(),
   forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
-  quests: [...MAIN_QUESTS.map((q) => q.id), ...ORANGE_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(ORANGE_LEGENDARY_ARCS || {}), ...Object.keys(TOWN_TALES)].sort(),
+  quests: [...MAIN_QUESTS.map((q) => q.id), ...ORANGE_QUESTS.map((q) => q.id), ...JOHTO_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(ORANGE_LEGENDARY_ARCS || {}), ...Object.keys(TOWN_TALES), ...Object.keys(JOHTO_TALES)].sort(),
   regions: ['kanto', 'orange', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea', 'liko'],
   // ADR-027 (Stage F): the closed arc-id vocabulary — the validator
   // accepts story.arc / story.arc_directive only from the registry.
@@ -82,7 +84,7 @@ const tables = {
   badgeSequences: {
     kanto: KNOWN_BADGES,
     orange: ORANGE_EARN_ORDER,
-    johto: [],
+    johto: JOHTO_EARN_ORDER,
   },
   regionBadgeMax: { kanto: 8, orange: 4, johto: 8 },
 };

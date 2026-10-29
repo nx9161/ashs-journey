@@ -19,6 +19,7 @@ import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
+import { JOHTO_QUESTS } from '../data/story-johto.mjs';
 import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
 import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
 import { CHAPTERS } from '../data/story.mjs';
@@ -120,6 +121,23 @@ Object.assign(OverworldScene.prototype, {
       } else if (id === 'shamouti-deep' && of.orange_2000_storm_stilled
         && !of.orange_2000_lugia_done && !of.ev_orange_2000_lugia_done) {
         this.runEvent('ev_orange_2000_lugia');
+      }
+    }
+    // Stage J4a (Johto story, west): map-entry scenes, flag-gated once
+    // each, in the Orange idiom — a scene's own completion flag is its
+    // gate, so a stalled chain re-fires on a later entry. The Silver
+    // clash additionally requires Elm's registration (the arrival
+    // scene) so the thief thread can never fire before it is set up.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const jf = g.state.story.flags;
+      if (id === 'elm-lab' && !jf.johto_arrival && !jf.ev_johto_arrival_done) {
+        this.runEvent('ev_johto_arrival');
+      } else if (id === 'r30' && jf.johto_arrival && !jf.silver_r30_done && !jf.ev_johto_silver_r30_done) {
+        this.runEvent('ev_johto_silver_r30');
+      } else if (id === 'slowpoke-well' && !jf.kurt_well_plea && !jf.ev_johto_well_done) {
+        this.runEvent('ev_johto_well');
+      } else if (id === 'burned-tower-2' && !jf.beasts_awakened && !jf.ev_johto_burned_done) {
+        this.runEvent('ev_johto_burned');
       }
     }
   },
@@ -370,6 +388,29 @@ Object.assign(OverworldScene.prototype, {
       this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
       g.audio.playMusic(this.map.music || 'route1-theme');
       next(); return;
+    }
+    // Stage J4a: a scripted battle the story survives either way
+    // (Silver on Route 30). Fought friendly — a loss costs nothing and
+    // never blacks out — the branch flag records the honest outcome
+    // (winFlag / loseFlag), and the chain advances on a win OR a loss.
+    // Fleeing stalls the chain (no flag, no event-done), so the scene
+    // re-fires on the next entry, exactly like a fled wildBattle.
+    if (s.battleAny) {
+      const spec = s.battleAny;
+      const t0 = TRAINERS[spec.trainer];
+      if (!t0) { next(); return; }
+      const t = bondTrainerVariant(g.state, t0);
+      g.scenes.push(new BattleScene({
+        kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g), friendly: true,
+        onEnd: (won, fled) => {
+          if (fled) return;
+          if (won) { if (spec.winFlag) g.state.story.flags[spec.winFlag] = true; }
+          else if (spec.loseFlag) { g.state.story.flags[spec.loseFlag] = true; }
+          recordBattleBond(g.state, t.id, won, fled);
+          next();
+        },
+      }));
+      return;
     }
     if (s.battle) {
       const t0 = TRAINERS[s.battle];
@@ -686,6 +727,9 @@ Object.assign(OverworldScene.prototype, {
     // gates, and the two-stage Kumquat match are menu/battle flows,
     // not plain dialogue or a single trainer battle.
     if (npc.orange) { if (this.runOrangeNpc(npc)) return true; }
+    // Stage J4a: Johto story actors (Elm, the west leaders, Kurt, the
+    // Sprout Elder, the well Rockets) run their own scenes.
+    if (npc.johto) { if (this.runJohtoNpc(npc)) return true; }
     // ADR-025 §2: the Pallet lab Gary is dialogue-only — his lines are
     // tier-variant (the wary set IS his authored dialogue, so a neutral
     // run reads byte-identically to before Phase 5).
@@ -1076,6 +1120,158 @@ Object.assign(OverworldScene.prototype, {
     ], () => { checkArcCompletion(g); }, '');
   },
 
+  // ---------- Stage J4a: Johto story actors (west) ----------
+  // One dispatch for every NPC carrying a `johto:` key (appended at
+  // loadMap from story-johto.mjs JOHTO_NPCS). Leaders ride the shared
+  // leader runner (startJohtoBattle = the startOrangeBattle idiom:
+  // the trainer def's intro, then a BattleScene whose winTrainer award
+  // writes badges.johto + the badge_<root> flag). Elm, Kurt, the
+  // Sprout Elder and the well Rockets are state-driven scenes.
+  runJohtoNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    const jBadges = (st.badges && st.badges.johto) || [];
+    const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
+    const kind = npc.johto;
+
+    if (kind === 'elm') {
+      if (!flags.johto_arrival && !flags.ev_johto_arrival_done) { this.runEvent('ev_johto_arrival'); return true; }
+      if (flags.silver_r30_done && !flags.silver_reported) {
+        say(['You met him. On Route 30, with the Croconaw — yes. Yes, that is my missing page, walking around with red hair and no intention of apologizing.',
+          'A name. You are sure? ...Silver. One of the aides found his practice registration in the hedge by the window — half a card, all the name we need. Silver.',
+          'Thank you, {player}. A lab keeps records, and now mine has its page back — the rest of that story is his to write, and I suspect he will write it at you, repeatedly. The road west is yours: Violet first, then Azalea. And when you reach Kurt — remember what you are carrying.'], () => {
+          flags.silver_reported = true;
+          g.ui.toast('You reported the thief to Elm.');
+        });
+        return true;
+      }
+      if (flags.silver_reported) { say(['Silver. The record is complete, and the road is yours, {player}. Violet, Azalea, and Kurt — in that order, the way the wind goes.']); return true; }
+      say(['North through Cherrygrove, then Route 30 to Violet, {player}. And eyes open — red hair, no fear. Come back to me with whatever you find.']);
+      return true;
+    }
+
+    if (kind === 'sprout_elder') {
+      if (flags.sprout_tower_done) { say(['The tower sways, and so do we all. Falkner\'s birds are watching the road for you, child.']); return true; }
+      say(['You climbed. Slowly, I hope — the tower dislikes being hurried, and so do my knees.',
+        'I am Li, keeper of this creaking old prayer. The monks tell me your legs danced on the stairs, and the tower tells me the rest: you bend, traveler. You do not break.',
+        'Take these, and an old man\'s ruling with them: Falkner of the Violet Gym now owes you his proper challenge. Tell him the tower said so. It usually sways him.'], () => {
+        st.bag.superpotion = (st.bag.superpotion || 0) + 2;
+        flags.sprout_tower_done = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Got 2 Super Potions!');
+      });
+      return true;
+    }
+
+    if (kind === 'kurt') {
+      if (!flags.johto_well_cleared) {
+        if (flags.kurt_well_plea) { say(['Still sitting, still useless, still proud — the back has union rules, apparently. The well, trainer. Three Rockets, and Slowpoke who deserve better. My house will keep.']); return true; }
+        say(['Mind the well on your way past, trainer. Something down there smells like a market that should not exist. If you find an old man investigating it badly — that will be me, shortly.']); return true; }
+      if (!flags.gsball_delivered) {
+        if ((st.bag.gsball || 0) > 0) {
+          say(['The well is quiet, the Slowpoke are whole, and Azalea can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+            '...Wait. Wait wait wait. That — in your bag. Gold and silver bands, warm as a held hand. Let me see it. LET me see it.',
+            'Forty years I have worked Poke Balls by hand. Forty years, and I have never — feel that? It is not locked. It is not broken. It is WAITING, and no tool I own speaks its language. Even I cannot open this ball, trainer.',
+            'But listen. ...There. It hums. It has hummed twice since I took it — both times when the wind came through Ilex Forest, from the old shrine in the trees. Whatever this ball is waiting for, it is waiting THERE. Keep it with me a while. Let an old man study it properly, and when the forest calls, we will both know.'], () => {
+            st.bag.gsball = (st.bag.gsball || 0) - 1;
+            if (st.bag.gsball <= 0) delete st.bag.gsball;
+            flags.gsball_delivered = true;
+            flags.kurt_has_ball = true;
+            // The ball's whereabouts, recorded precisely in the
+            // boolean flag vocabulary (the validator's flag law):
+            // the GS Ball is IN KURT'S HOUSE, in his study, until
+            // J5's shrine scene moves it.
+            flags.gsball_at_kurt_house = true;
+            g.audio.playSfx('dex-register');
+            g.ui.toast('Kurt is studying the GS Ball.');
+          });
+          return true;
+        }
+        say(['The well is quiet, the Slowpoke are whole, and Azalea can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+          'Hawthorn wrote that you carry a ball no machine can open. Bring it to this house when you can — an old pair of hands would like its turn at being defeated by it.']);
+        return true;
+      }
+      say(['The ball sits in my study and hums at the Ilex wind. Patience, trainer. Some locks are not picked. They are answered.']);
+      return true;
+    }
+
+    if (kind === 'rocket_well_1' || kind === 'rocket_well_2' || kind === 'rocket_well_3') {
+      const tid = kind;
+      if (flags['beat_' + tid]) { say(['...We are leaving. We were ALWAYS leaving. This never happened.']); return true; }
+      if (!flags.kurt_well_plea) { say(['Work site, trainer. Authorized personnel, tail division. Come back when you have a uniform — or do not come back at all.']); return true; }
+      say([TRAINERS[tid] ? TRAINERS[tid].intro[0] : 'For the boss!'], () => {
+        this.startJohtoBattle(tid, (won) => {
+          if (!won) return;
+          if (flags.beat_rocket_well_1 && flags.beat_rocket_well_2 && flags.beat_rocket_well_3 && !flags.johto_well_cleared) {
+            flags.johto_well_cleared = true;
+            say(['The last Rocket scrambles up the ladder and does not look back. Below, in the wet dark, the Slowpoke lift their heads one by one — slow, unhurried, already forgetting, which is the kindest thing about them.', 'Somewhere above, a bent old man is about to hear the best news of his year. Kurt\'s house, trainer. And bring what you are carrying — he has waited long enough.'], null, 'NARRATOR');
+          }
+        });
+      }, npc.name);
+      return true;
+    }
+
+    // ---- the west leaders ----
+    const LEADERS = {
+      falkner: { badge: 'zephyrbadge', gate: 'sprout_tower_done',
+        gateLines: ['Not yet, challenger. On this side of Johto we do it in order: Sprout Tower first — the climb, the monks, the Elder\'s blessing. My gym is the second half of the test, and I will not rob you of the first.'],
+        post: 'The tower sways, the gulls turn, and Violet is quiet below us. Any time your team wants the sky again, challenger, my gym is its address.' },
+      bugsy: { badge: 'hivebadge', gate: null, gateLines: [],
+        post: 'The webs are re-strung and the forest is humming again. You are welcome under these trees any time, Hive Badge holder.' },
+      whitney: { badge: 'plainbadge', gate: null, gateLines: [],
+        post: 'No crying this time — I practiced! Come back for a rematch whenever, Plain Badge holder. Miltank asks about your team by name now. By NAME.' },
+      morty: { badge: 'fogbadge', gate: null, gateLines: [],
+        post: 'The fog keeps its counsel and so do I. Walk carefully in it, Fog Badge holder — it has decided you are interesting.' },
+    };
+    const L = LEADERS[kind];
+    if (!L) return false;
+    if (jBadges.includes(L.badge)) {
+      if (kind === 'morty' && flags.beasts_awakened) {
+        say(['So. You have seen the empty plinths too, and the one who watched you from the lamplight\'s edge. Hear the names the tower-keepers use, {player}: Raikou, the thunder that walks. Entei, the mountain that burns. And Suicune, the north wind made visible — the one whose eyes you met.',
+          'They slept as statues for a hundred and fifty years, under a promise nobody wrote down. Promises end. What woke them, I cannot tell you — but they will cross your road again, all three, and when they do, remember: they are not angry. They are AWAKE. There is a difference, and it matters.']);
+        return true;
+      }
+      say([L.post]); return true;
+    }
+    if (L.gate && !flags[L.gate]) { say(L.gateLines); return true; }
+    if (kind === 'morty' && !flags.beasts_awakened) {
+      say(['Morty of Ecruteak. Before we battle, a keeper\'s courtesy: the Burned Tower stands open in the west of town, and its basement has been... restless. Look into it, trainer. A leader likes to know what his challengers have seen. Then come back, and we will see each other clearly.']);
+      return true;
+    }
+    if (kind === 'morty' && flags.beasts_awakened) {
+      say(['You have been below the tower. I can see the ash on you — not on your clothes, {player}. On the way you hold still.',
+        'Then you know what I know: the statues are gone, and something with eyes like deep water is abroad in Johto. We will speak of it properly after. First — the Fog Badge has been waiting for a challenger the fog respects.'], () => {
+        g.ui.showMenu('Challenge Morty?', [
+          { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => { if (v === 'yes') this.startJohtoBattle('morty', null); });
+      });
+      return true;
+    }
+    const t0 = TRAINERS[kind];
+    say([t0.intro[0]], () => {
+      g.ui.showMenu('Challenge ' + t0.name + '?', [
+        { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+      ], (v) => { if (v === 'yes') this.startJohtoBattle(kind, null); });
+    });
+    return true;
+  },
+
+  // The shared leader runner, Johto seat (startOrangeBattle's idiom):
+  // the def's intro has already played in the handler above for the
+  // menu leaders, so this goes straight to the BattleScene; winTrainer
+  // writes the badge itself. onWin(won) fires from the battle's onEnd.
+  startJohtoBattle(trainerId, onWin) {
+    const g = this.game;
+    const t0 = TRAINERS[trainerId];
+    if (!t0) { if (onWin) onWin(false); return; }
+    const t = bondTrainerVariant(g.state, t0);
+    g.scenes.push(new BattleScene({
+      kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
+      onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); if (onWin) onWin(!!won && !fled); },
+    }));
+  },
+
   endSafari(msg) {
     const g = this.game;
     g.state.session.safari = null;
@@ -1147,6 +1343,30 @@ Object.assign(OverworldScene.prototype, {
       // rides the next dialogue after the change.
       if (npcId) { const d = Math.sign(bondOf(st, npcId) - before); if (d) g.ui.queueBondPip(d); }
     });
+
+    // ---- Stage J4a: Johto tales (data-driven lines) ----
+    // The six west tales carry their dialogue in their defs
+    // (story-johto.mjs JOHTO_TALES: offerLines / stageLines /
+    // finishLines), so one generic branch serves them all through the
+    // shipped stage machine: giver accepts -> stage actor advances ->
+    // giver finishes (finishWith pays the def's reward + bond).
+    {
+      const jt = QUESTS[id];
+      if (jt && jt.johtoTale) {
+        if (npc.role === 'giver') {
+          if (stage < 0) { say(jt.offerLines, () => acceptTale(st, id)); return true; }
+          if (stage === 0) { say(['The road remembers an errand, trainer: ' + jt.stages[0] + '.']); return true; }
+          if (stage === 1) { finishWith(jt.finishLines); return true; }
+          say(['Our town keeps its stories the way it keeps its paths, trainer — walked, and told, and walked again.']); return true;
+        }
+        if (npc.role === 'stage') {
+          if (stage === 0) { say(jt.stageLines, () => advanceTale(st, id)); return true; }
+          if (stage === 1) { say(['My part is told, trainer. The giver of that tale is waiting to hear the ending.']); return true; }
+          return false;
+        }
+        return false;
+      }
+    }
 
     // ---- Pallet: Mom's Care Package ----
     if (id === 'tale_pallet') {
@@ -2373,6 +2593,13 @@ Object.assign(OverworldScene.prototype, {
       }
       const oq = ORANGE_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '') + (oq.titanCount ? ' (' + ((f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed)' : '');
+    }
+    // Stage J4a: while the Johto arc is current, its chain leads the
+    // HUD objective (the west rows in J4a; J4b's appended rows join
+    // the same find, in chain order).
+    if (currentArcOf(g.state).id === 'johto') {
+      const jq = JOHTO_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      if (jq) return '▶ ' + jq.text;
     }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;

@@ -108,7 +108,7 @@ export const ARCS = [
     band: { min: 101, max: 200, bandIndex: 2 },
     badgeSet: 'johto', badgeTotal: 8,
     completionKey: 'johto', completionFlag: 'johto_complete',
-    status: 'sealed', future: false,
+    status: 'shipped', future: false,
     hookGiver: 'hawthorn', embarkPort: 'pallet', arrivalMap: 'newbark', home: 'pallet',
     summaryLines: [
       'Silver Conference — HONOURS.',

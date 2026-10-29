@@ -61,6 +61,13 @@ export function validateSave(data) {
     const seq = BADGE_SETS.orange;
     if (!Array.isArray(o) || o.length > seq.length || o.some((id, i) => id !== seq[i])) errors.push('bad-badges-orange');
   }
+  // Stage J4a: badges.johto, when present, must be a PREFIX of the
+  // Johto earn order (BADGE_SETS) — the same rule, the same source.
+  if (isObj(data.badges) && data.badges.johto !== undefined) {
+    const j = data.badges.johto;
+    const seq = BADGE_SETS.johto;
+    if (!Array.isArray(j) || !seq || j.length > seq.length || j.some((id, i) => id !== seq[i])) errors.push('bad-badges-johto');
+  }
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');

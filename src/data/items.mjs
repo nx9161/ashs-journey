@@ -108,6 +108,19 @@ export const ITEMS = {
   searubybadge: { id: 'searubybadge', name: 'Sea Ruby Badge', pocket: 'key', desc: 'From Danny of Navel. The climb was the first half of the challenge.' },
   spikeshellbadge: { id: 'spikeshellbadge', name: 'Spike Shell Badge', pocket: 'key', desc: 'From Rudy of Trovita. He tests a team type by type, then dances.' },
   jadestarbadge: { id: 'jadestarbadge', name: 'Jade Star Badge', pocket: 'key', desc: 'From Luana of Kumquat. Her double battle: two pairs, back to back, no rest.' },
+  // Johto badges (Stage J4a): the Kanto representation exactly — a
+  // key-pocket ITEMS row per badge, the id in badges.johto, and the
+  // badge_<root> story flag. West four ship playable in J4a; the east
+  // four rows exist now so the set, the Cheat Terminal stock and the
+  // validator sequence are complete before J4b stages their gyms.
+  zephyrbadge: { id: 'zephyrbadge', name: 'Zephyr Badge', pocket: 'key', desc: 'From Falkner of Violet. The wind over the tower road is yours to borrow.' },
+  hivebadge: { id: 'hivebadge', name: 'Hive Badge', pocket: 'key', desc: 'From Bugsy of Azalea. Won under the trees, in a room of load-bearing webs.' },
+  plainbadge: { id: 'plainbadge', name: 'Plain Badge', pocket: 'key', desc: 'From Whitney of Goldenrod. It is not plain at all, whatever people say.' },
+  fogbadge: { id: 'fogbadge', name: 'Fog Badge', pocket: 'key', desc: 'From Morty of Ecruteak. For a trainer the fog decided to show things to.' },
+  stormbadge: { id: 'stormbadge', name: 'Storm Badge', pocket: 'key', desc: 'From Chuck of Cianwood. (Stage J4b stages this gym.)' },
+  mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Olivine. (Stage J4b stages this gym.)' },
+  glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Mahogany. (Stage J4b stages this gym.)' },
+  risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Blackthorn. (Stage J4b stages this gym.)' },
   winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Orange League Winner\'s Trophy, presented at Pummelo Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE
@@ -173,6 +186,7 @@ for (const k of Object.values(KEEPSAKES)) {
 export const BADGE_SETS = {
   kanto: ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'],
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
+  johto: ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge', 'glacierbadge', 'risingbadge'],
 };
 export const ORANGE_BADGES = BADGE_SETS.orange;
 

@@ -300,7 +300,12 @@ const driver = `
   ok('B08 homecoming fires once: re-entering the house is quiet',
     !g1.ui.dialogueOpen);
 
-  // ---- B4: sealed-next-arc homecoming (Orange complete -> Johto sealed) ----
+  // ---- B4: Johto homecoming (Orange complete -> Johto) ----
+  // SUPERSEDED at Stage J4a: the Johto registry row flipped
+  // 'sealed' -> 'shipped', so this homecoming now takes the SHIPPED
+  // branch of the same machine (the sealed branch's last live proof
+  // was this test at Foundation time): hook delivered, directive
+  // cleared, the embark IS armed and story.arc advances to johto.
   var g2 = mkGame(202); var ow2 = boot(g2);
   var st2 = g2.state;
   st2.story.arc = 'orange';
@@ -309,9 +314,9 @@ const driver = `
   st2.story.flags.arc_card_orange = true; // isolate: the Orange card already played
   gotoMap(g2, 'house-pallet-ash', 4, 4);
   drain(g2);
-  ok('B09 sealed homecoming completes the ritual: hook delivered, directive cleared, NO embark, arc does not advance',
+  ok('B09 shipped homecoming completes the ritual: hook delivered, directive cleared, embark armed, arc advances to johto (Stage J4a supersedes the sealed-branch assertion)',
     st2.story.arc_directive === null && st2.story.flags.hook_johto === true
-    && !st2.story.flags.embark_johto && st2.story.arc === 'orange',
+    && st2.story.flags.embark_johto === true && st2.story.arc === 'johto',
     JSON.stringify({ arc: st2.story.arc, hook: st2.story.flags.hook_johto, emb: st2.story.flags.embark_johto }));
 
   // ---- B5: ferry gating with the existing maps ----

@@ -6528,3 +6528,212 @@ f434ba63… as at HEAD) and the content-hash personal line preserved
 - The Whirl Islands Deep Chamber is deliberately inert dressing —
   if a later stage wants a Lugia *event* there it must reckon with
   ruling 4 (one Lugia, already caught at Shamouti) first.
+
+## Arc 2 Stage J4a — Johto story, WEST: New Bark → Ecruteak (2026-10-29)
+
+Base: main @ 0228663 (J3b). Deliverables: the registry flip, NEW
+`src/data/story-johto.mjs` (quests / trainers / events / tales / NPC
+tables, module-order after story-orange, folded in merge.mjs), the
+Johto badge plumbing end-to-end, engine wiring (loadMap appends,
+sysLoadMap gates, runJohtoNpc, the battleAny step, Quest Log + HUD
+sections), and NEW `tests/johto-story-checks.mjs`. All dialogue is
+original writing in the game's voice.
+
+### 1. Registry flip + badge plumbing
+
+- `src/data/arcs.mjs`: the johto row `status: 'sealed'` → `'shipped'`
+  — the ONLY change in the row (band / hook / embark / completionFlag
+  were already correct and are consumed, not rewritten). The
+  Foundation machine now takes its shipped branch for Johto:
+  Homecoming #2 advances `story.arc` and arms `embark_johto`.
+- Badge ids in canonical earn order — zephyr, hive, plain, fog,
+  storm, mineral, glacier, rising (`zephyrbadge` … `risingbadge`):
+  ITEMS rows (key pocket) + `BADGE_SETS.johto` in items.mjs, all
+  eight NOW so the set, the Cheat Terminal stock and the validator
+  sequence are complete before J4b stages the east gyms. Leaders
+  carry `badgeSet: 'johto'`; winTrainer's shipped award path writes
+  `badges.johto` + `badge_<root>` unchanged.
+- Client schema gained the prefix rule for johto (`bad-badges-johto`,
+  the orange rule's twin); gen-tables now emits
+  `badgeSequences.johto` FROM BADGE_SETS (it was a hardcoded `[]`)
+  and the quest table gains the JOHTO_QUESTS ids + JOHTO_TALES ids.
+  Tables regenerated ONLY via gen-tables (items 136 → **144**).
+
+### 2. Staging decisions
+
+- **Arrival:** the opening scene is the `ev_johto_arrival` map-entry
+  event on first `elm-lab` entry (the ivy-lab precedent): Elm
+  registers the journey, tells the stolen-starter incident (a
+  Totodile taken before dawn; red hair seen at the dock), and asks
+  the player to keep an eye out and REPORT back — no Mr. Pokémon
+  fetch chain (out per the brief). Flags: `johto_arrival`,
+  `elm_registered`.
+- **Silver (r30):** first `r30` entry AFTER the arrival scene fires
+  `ev_johto_silver_r30`. The clash is a NEW event step,
+  `{ battleAny }`: a scripted trainer battle fought FRIENDLY (a loss
+  costs nothing, never blacks out — finishDefeat's friendly branch),
+  the chain advances on a win OR a loss, and the branch flag records
+  the honest outcome (`silver_r30_won` XOR `silver_r30_lost`); fleeing
+  stalls the chain so the scene re-fires, per the fled-guard law. His
+  team: Zubat 104 + the stolen Croconaw 106 (the Totodile line, a
+  touch grown). Win or lose he flees and the starter STAYS his.
+  Reporting back to Elm sets `silver_reported` — Elm names him
+  SILVER from a dropped practice registration. Silver is a recurring
+  battler, NOT the arc rival (Gary is; J4b owns their beats).
+- **Sprout Tower:** two monk trainers (talk-to, tower floors 1–2,
+  Bellsprout 106–109) + Elder Li's scene at the top (reward: 2 Super
+  Potions; sets `sprout_tower_done`). Falkner's challenge GATES on
+  the blessing ("Sprout Tower first") — recorded as this stage's one
+  gym gate; the other three west leaders are ungated.
+- **Slowpoke Well + Kurt + GS Ball:** first well entry fires Kurt's
+  plea (`kurt_well_plea` — he confronted the tail-cutters, hurt his
+  back, and hands the well to the player). Three Rocket battles
+  inside (118–124) ride the generic battle path via runJohtoNpc;
+  the third win sets `johto_well_cleared`. The GS Ball delivery is
+  Kurt's kurt-house scene AFTER the clear: the ball leaves the bag
+  through the bag's own count (decremented, key deleted at zero) and
+  the whereabouts are recorded in the boolean flag vocabulary —
+  `gsball_delivered`, `kurt_has_ball`, `gsball_at_kurt_house` (the
+  ball is in Kurt's study until J5 moves it; the validator's flag
+  law is booleans-only, so no string flag exists). Kurt: even he
+  can't open it — it HUMS when the wind comes through Ilex Forest,
+  toward the shrine. That seeds J5's Celebi arc; Kurt keeps the ball
+  to study. (If a player somehow reaches Kurt without the ball, he
+  asks for it and nothing is set — no soft-fail.)
+- **Burned Tower:** staged on first `burned-tower-2` (basement)
+  entry — the statues' home floor, not the town. A glimpse scene
+  only: three empty plinths, Suicune watches and is gone. NO battle,
+  NO catch. Sets `beasts_awakened` + `beast_seen_suicune` +
+  `johto_burned_tower` — the ARMING flags for J5's three beast arcs
+  (J5 owns their quest entries and encounters). Morty's post-badge
+  talk names what woke (Raikou / Entei / Suicune); pre-awakening he
+  sends the challenger to look into the tower first, and his
+  challenge menu rides the awakened talk — so the Fog Badge is
+  effectively gated on the awakening, matching the quest-chain
+  order (burned → fog). Recorded as a staging decision in §9.
+- **Goldenrod:** Whitney stands alone this stage — the Radio Tower
+  is QUIET (its takeover is J4b, post-hideout). No radio content
+  was staged.
+- **Whitney's Miltank:** the engine's move table has NO Rollout, so
+  the famous rolling threat is staged honestly with Miltank's real
+  band learnset (makeMon resolution, as every leader) — no move was
+  invented. Its menace is carried by level (138, the west's steepest
+  ace jump) + the Tortoise Charm KO-save on the ace.
+
+### 3. Gym assignments (leaders ride the shared leader runner)
+
+| Gym | Leader | Team (levels) | Ace keepsake | Ground |
+|---|---|---|---|---|
+| Violet | Falkner | Pidgeotto 108, Noctowl 111, Pidgeot 114 | Sparrow Feather | Storm |
+| Azalea | Bugsy | Ariados 120, Heracross 123, Scizor 126 | Iron Acorn | Bloom |
+| Goldenrod | Whitney | Clefairy 131, Snubbull 134, Miltank 138 | Tortoise Charm | Open |
+| Ecruteak | Morty | Gastly 140, Haunter 143, Misdreavus 145, Gengar 148 | Spectre Bell | Grave |
+
+Grounds are all from the existing 15 (NO new Grounds): Falkner's sky
+gym rides the Storm; Bugsy's forest gym the Bloom; Whitney's the
+Open (the Plain Badge, plain all the way down); Morty's the Grave.
+Landmark interiors: Sprout Tower Bloom, Slowpoke Well Tide, Burned
+Tower Grave, Elm's lab + Kurt's house Open. Leader-ace keepsakes
+follow the Classic pattern (authored on the team entry;
+rules.foeKeepsakeFor serves them to leader aces at Classic).
+
+### 4. Town Tales (west) — one system, folded in
+
+Six tales (newbark / cherrygrove / violet / azalea / goldenrod /
+ecruteak) exported as JOHTO_TALES from story-johto.mjs and folded
+into the ONE shipped QUESTS table by merge.mjs — stage values, the
+Quest Log TOWN TALES section and the validator quest list serve
+them unchanged. Their dialogue rides IN the defs (offerLines /
+stageLines / finishLines) and one generic Johto branch of
+runTaleNpc plays them (giver accepts → stage actor advances →
+giver finishes; rewards are items, stated up front per the shape
+law; every tale ends in a lore revelation). Givers + stage actors
+are existing maps6 townsfolk stamped by JOHTO_NPC_PATCHES.
+
+### 5. NPC placement law
+
+Every story actor is placed via the loadMap-append idiom (the CAPT
+JOHTO precedent): JOHTO_NPCS appended + JOHTO_NPC_PATCHES stamped in
+overworld loadMap; the generated maps6.mjs and its generator were
+NOT touched. Placement is proven in the suite (A16/A17: walkable
+non-warp tiles + walk-to-actor BFS from every entry).
+
+### 6. Supersessions recorded
+
+- cheat-shop A02: items **136 → 144** (the 8 Johto badge rows);
+  species stays **257** (A02's Johto-mon assertion untouched).
+- arc-foundation B09 + orange-climax B22 asserted the SEALED-branch
+  homecoming for Johto (no advance, no embark). The flip supersedes
+  them: both now assert the shipped branch (arc advances to johto,
+  embark armed), same assertion count, notes in place.
+- J3a's flag-armed isolation drive of the embark is replaced as the
+  proof of record by johto-story B01–B03 (the true path, below).
+
+### 7. Suite + battery at this commit
+
+- NEW `tests/johto-story-checks.mjs` **41/41** — Part A units
+  (registry, chains, plumbing, grounds, tales, placement) + Part B
+  the TRUE PATH on one continuous save: post-Orange state →
+  Homecoming #2 → Pallet dock CAPT JOHTO → embark → New Bark
+  arrival → Silver (win branch) → report → New Bark tale → Sprout
+  gauntlet → Zephyr → well plea → 3 Rockets → GS Ball delivery →
+  Hive → Plain → Burned Tower awakening → Fog → Quest Log, with the
+  final save validating server- and client-side; branch drives for
+  the Falkner gate, the Silver LOSS branch (still standing on r30),
+  and the Cheat Terminal's Johto prefix claim.
+- Battery: fidelity **35/35** · validator **78/78** · save-contract
+  **6/6** · cheat-shop **44/44** · arc-foundation **47/47** ·
+  orange-story **38/38** · orange-climax **42/42** ·
+  campaign-smoke **24/24** · qa-changed-flows failures exactly
+  **{b2, d9}**.
+- Fresh build (vercel + guest) OK — `public/game.js` **7,006,316
+  bytes**. **personal/ byte-identical** (sha256 f434ba63…, a780af0b…;
+  untouched — vercel+guest targets only). NOT pushed, NOT deployed.
+
+### 8. Flag map (every J4a story flag + its consumer)
+
+- `johto_arrival`, `elm_registered` — set by ev_johto_arrival.
+  Consumed by: q_johto_arrival, the r30 Silver gate, Elm's dialogue.
+- `silver_r30_won` / `silver_r30_lost` — the battleAny branch record
+  (exactly one is set). Consumed by: the suite's honesty check;
+  J4b's Silver beats should read them for continuity.
+- `silver_r30_done` (+ auto `ev_johto_silver_r30_done`,
+  `beat_silver_r30` on a win) — consumed by Elm's report scene gate.
+- `silver_reported` — set by Elm's report scene. Consumed by:
+  q_johto_thief.
+- `sprout_tower_done` — Elder Li. Consumed by: q_johto_sprout,
+  Falkner's gate.
+- `kurt_well_plea` — ev_johto_well. Consumed by: the well Rockets'
+  battle gate, Kurt's dialogue.
+- `beat_rocket_well_1/2/3` — winTrainer auto-flags. Consumed by:
+  runJohtoNpc's clear count.
+- `johto_well_cleared` — the third Rocket's fall. Consumed by:
+  q_johto_well, Kurt's delivery gate.
+- `gsball_delivered`, `kurt_has_ball`, `gsball_at_kurt_house` —
+  Kurt's delivery scene; the ball's whereabouts (Kurt's study) for
+  J5. Consumed by: q_johto_gsball; J5's Celebi arc reads all three.
+- `beasts_awakened`, `beast_seen_suicune`, `johto_burned_tower` —
+  the Burned Tower event. Consumed by: q_johto_burned, Morty's
+  naming dialogue; J5's beast arcs ARM on `beasts_awakened`.
+- `badge_zephyr/hive/plain/fog` + `beat_<leader>` — winTrainer
+  auto-flags. Consumed by: the badge quest rows; J4b's east gates.
+
+### 9. Leftovers for J4b / J5 (named)
+
+- J4b: east quests appended at the JOHTO_QUESTS seam (storm /
+  mineral / glacier / rising + the Conference), Jasmine/Chuck +
+  the medicine errand, Pryce + Lake of Rage + Lance + the hideout,
+  Clair + the Dragon's Den test, the Radio Tower takeover (post-
+  hideout), Gary's Johto beats + the Silver Conference (Gary
+  victory centrepiece, Harrison conclusion) → `johto_complete`,
+  Mt. Silver / Red at completion, and the four east Town Tales.
+- J5: the three beast arcs arm on `beasts_awakened` (quest entries
+  + lairs are J5's); Celebi reads the GS Ball flags (the ball is at
+  Kurt's house; the Ilex shrine scene owns its return/opening);
+  Ho-Oh at Bell Tower per ruling 3 (~Lv 170–185, superseding the
+  designed Lv 70).
+- Morty's challenge is gated on the Burned Tower awakening (his
+  pre-awakening talk sends the challenger to the tower; the menu
+  rides the awakened talk) — a deliberate chain-order gate (burned
+  → fog in JOHTO_QUESTS). If QA wants the battle offerable
+  pre-tower, it is a one-branch change in runJohtoNpc.

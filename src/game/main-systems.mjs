@@ -10,6 +10,7 @@ import { giveKeepsake } from './keepsakes.mjs';
 import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './state.mjs';
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
+import { JOHTO_QUESTS } from '../data/story-johto.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
 import { FORMS } from '../data/forms.mjs';
@@ -352,6 +353,27 @@ Object.assign(Game.prototype, {
         });
       }
     }
+    // Section 1.75 — Johto (Stage J4a): the JOHTO_QUESTS chain in the
+    // same idiom, rendered once the Johto arc is reached (the
+    // homecoming hook, the current arc, a first badge, the arrival,
+    // or a completed journey). J4b's appended east rows render here
+    // unchanged — the chain order is the data order.
+    const johtoReached = currentArcOf(g.state).id === 'johto'
+      || !!g.state.story.flags.hook_johto
+      || ((g.state.badges.johto || []).length > 0)
+      || !!g.state.story.flags.johto_arrival
+      || (g.state.story.regionsDone || []).includes('johto');
+    if (johtoReached) {
+      items.push({ label: '— JOHTO —', value: null, disabled: true, band: true });
+      for (const q of JOHTO_QUESTS) {
+        const doneF = q.flag && g.state.story.flags[q.flag];
+        const active = !doneF && JOHTO_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        items.push({
+          label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
+          value: 'jq:' + q.id, disabled: !active && !doneF,
+        });
+      }
+    }
     // Section 2 — Legendary Arcs (unchanged: arcs list from story.quests,
     // exactly the ids the arc machinery wrote there).
     const arcs = Object.keys(g.state.story.quests || {});
@@ -395,7 +417,10 @@ Object.assign(Game.prototype, {
         if (c) g.ui.say([c.name + ' — ' + tierOf(g.state, c.id), c.note], () => g.openQuestLog(), 'People');
         return;
       }
-      if (v.startsWith('oq:')) {
+      if (v.startsWith('jq:')) {
+        const q = JOHTO_QUESTS.find((x) => 'jq:' + x.id === v);
+        if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');
+      } else if (v.startsWith('oq:')) {
         const q = ORANGE_QUESTS.find((x) => 'oq:' + x.id === v);
         if (q) {
           const lines = [q.text + (q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : '') + (q.titanCount ? ' — ' + ((g.state.story.flags.orange_2000_moltres ? 1 : 0) + (g.state.story.flags.orange_2000_zapdos ? 1 : 0) + (g.state.story.flags.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed' : ''), q.hint];
