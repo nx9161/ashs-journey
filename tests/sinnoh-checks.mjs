@@ -339,6 +339,47 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     tables.species.length === 509 && Object.keys(SPECIES_SINNOH).every((id) => tables.species.includes(id)));
 }
 
+// ================= Part S2a: species art, first half (Arc 4 Stage S2a) ======
+// Dex 387-439 hand-authored through the shipped .pix pipeline
+// (arc4-etl/gen-s2a-art.mjs -> build-art -> art-data.mjs): front +
+// TRUE-REAR back + front/back idle-bobs for all 53, accent deltas for
+// the 9 starter-line species (387-395). Census rig:
+// arc4-etl/census-s2a.mjs (contact sheets visually inspected).
+{
+  const { ART } = await import(join(ROOT, 'assets/sprites/art-data.mjs'));
+  const { SPECIES_SINNOH: SP5 } = await import(join(ROOT, 'src/data/species5.mjs'));
+  const HALF = Object.values(SP5).filter((s) => s.dexNo >= 387 && s.dexNo <= 439).sort((a, b) => a.dexNo - b.dexNo);
+  const materialize = (id) => {
+    const a = ART[id]; if (!a) return null;
+    if (a.rows) return a;
+    if (a.shiftY) { const b = materialize(a.base); const rows = Array.from({ length: b.h }, () => '.'.repeat(b.w)); for (let y = 0; y < b.h - a.shiftY; y++) rows[y + a.shiftY] = b.rows[y]; return { ...b, rows }; }
+    if (a.deltas) { const b = materialize(a.base); const rows = b.rows.map((r) => r.split('')); for (const [x, y, c] of a.deltas) rows[y][x] = c; return { w: b.w, h: b.h, pal: { ...b.pal, ...a.pal }, rows: rows.map((r) => r.join('')) }; }
+    return null;
+  };
+  const painted = (id) => { const m = materialize(id); if (!m) return 0; let n = 0; for (const r of m.rows) for (const c of r) if (c !== '.') n++; return n; };
+  ok('S2a-01 census population: exactly 53 species in dex 387-439 (turtwig 387 -> mimejr 439, dex order)',
+    HALF.length === 53 && HALF[0].id === 'turtwig' && HALF[52].id === 'mimejr');
+  ok('S2a-02 every one of the 53 resolves AUTHORED front+back from art-data (forge-fallback count for 387-439 = 0): full ART keys with rows, none blank (painted >= 400 each)',
+    HALF.every((s) => painted(s.id + '-front') >= 400 && painted(s.id + '-back') >= 400),
+    HALF.filter((s) => painted(s.id + '-front') < 400 || painted(s.id + '-back') < 400).map((s) => s.id).join(','));
+  ok('S2a-03 backs are TRUE REARS, not mirrors: front row data != back row data for all 53',
+    HALF.every((s) => materialize(s.id + '-front').rows.join('\n') !== materialize(s.id + '-back').rows.join('\n')));
+  ok('S2a-04 idle-bobs shipped for all 53: front-bob + back-bob ART keys present (build-art derivation, the Johto/Hoenn pattern)',
+    HALF.every((s) => ART[s.id + '-front-bob'] && ART[s.id + '-back-bob']));
+  const STARTERS9 = ['turtwig', 'grotle', 'torterra', 'chimchar', 'monferno', 'infernape', 'piplup', 'prinplup', 'empoleon'];
+  ok('S2a-05 starter-line accents (387-395): front-accent + back-accent deltas present for all 9, each a non-empty recolor delta over its base',
+    STARTERS9.every((id) => ART[id + '-front-accent'] && ART[id + '-back-accent']
+      && ART[id + '-front-accent'].deltas.length > 0 && ART[id + '-back-accent'].deltas.length > 0));
+  ok('S2a-06 .pix sources on disk for all 53 pairs (assets/sprites/pix/species/<id>-front.pix + -back.pix) — art flows through the game pipeline, no parallel store',
+    HALF.every((s) => { try { readFileSync(join(ROOT, 'assets/sprites/pix/species', s.id + '-front.pix'), 'utf8'); readFileSync(join(ROOT, 'assets/sprites/pix/species', s.id + '-back.pix'), 'utf8'); return true; } catch { return false; } }));
+  ok('S2a-07 singular-design law: shellos/gastrodon carry ONE authored set each (no east/west form entries in species5 or ART); burmy/wormadam/mothim one set each',
+    !SP5['shellos-east'] && !SP5['shellos-west'] && !ART['shellos-east-front'] && !ART['gastrodon-west-front']
+    && painted('shellos-front') >= 400 && painted('gastrodon-front') >= 400
+    && ['burmy', 'wormadam', 'mothim'].every((id) => painted(id + '-front') >= 400 && painted(id + '-back') >= 400));
+  ok('S2a-08 palette discipline: every new frame paints 5-12 colours (cap 32) — the H2a envelope (5-11) held within one',
+    HALF.every((s) => ['-front', '-back'].every((k) => { const m = materialize(s.id + k); const n = Object.keys(m.pal).length; return n >= 5 && n <= 12; })));
+}
+
 // ================= Part B: headless bundle =================
 const { buildGameJs } = await import(join(ROOT, 'scripts/build.mjs'));
 const gameJs = buildGameJs();

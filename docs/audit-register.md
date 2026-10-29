@@ -11434,3 +11434,128 @@ with the primary branch duplicated in the singular `evo` slot.
 - Fresh build byte-identical to the committed `public/game.js`
   (verified post-commit per the standing drift lesson).
 - `personal/` byte-identical to HEAD.
+
+## Arc 4 Stage S2a — Species art, first half (dex 387–439) (2026-10-29)
+
+### 1. What landed
+
+- **53 species authored** (dex 387–439, turtwig → mimejr): turtwig,
+  grotle, torterra, chimchar, monferno, infernape, piplup, prinplup,
+  empoleon, starly, staravia, staraptor, bidoof, bibarel, kricketot,
+  kricketune, shinx, luxio, luxray, budew, roserade, cranidos,
+  rampardos, shieldon, bastiodon, burmy, wormadam, mothim, combee,
+  vespiquen, pachirisu, buizel, floatzel, cherubi, cherrim, shellos,
+  gastrodon, ambipom, drifloon, drifblim, buneary, lopunny, mismagius,
+  honchkrow, glameow, purugly, chingling, stunky, skuntank, bronzor,
+  bronzong, bonsly, mimejr.
+- **106 full frames** (`<id>-front` + `<id>-back` .pix, 64×64, original
+  pixel work in the Platinum language — NW-light shading, TRUE REAR
+  views: no eyes, back-specific markings: torterra's tree from behind,
+  empoleon's gold collar band, bronzor's rear X relief, the slugs'
+  dorsal bands, mismagius's plain back under the hat brim). Backs are
+  NOT mirrors: front/back row data differs for all 53 (census-checked).
+- **106 bob frames** reach the shipped set via the pipeline itself:
+  front-bobs by build-art's marked derivation, back-bobs by the W2
+  shift-delta mechanism — no hand files, exactly as Johto/Hoenn species.
+- **18 accent deltas** for the 9 Sinnoh starter-line species
+  (turtwig…empoleon): front-accent = blink (recolor-only), back-accent
+  = crest/fin twitch recolor, as .deltapix over the new bases — the
+  J2a/H2a starter-accent mechanism, unchanged.
+- **Shellos/gastrodon:** ONE authored set each (rose-pink sea slug in
+  our colours) — east/west variants are not separate data entries and
+  none were created. **Burmy/wormadam/mothim:** one set each for the
+  singular data entries.
+- Authoring workflow: generator script
+  `~/workspace/ashs-journey-qa/arc4-etl/gen-s2a-art.mjs` composes
+  per-species authored silhouettes/palettes/markings from the species'
+  concept only (clean-room: no sprite was fetched, traced, or derived
+  from); the repo's own build-art validation is the gate (palette cap,
+  outline, margins, orphans — zero errors). Three visual fixes after
+  contact-sheet review: shieldon's shield became a grey face plate
+  inset in a yellow head (it read as a detached grey blob), cherrim
+  was redrawn as its closed-bud blossom form (the first pass read as
+  a pink quadruped), burmy/wormadam cloaks widened a step.
+
+### 2. Pipeline change (on the record)
+
+- **Art-data ceiling raised 7,100,000 → 8,800,000 B** in
+  `assets/sprites/tools/build-art.mjs` (the only enforcement site),
+  by the H2a measured law: S2a takes art-data to 7,731,350 B of
+  payload (file 7,773,711 B) — already past the old cap with zero
+  validator errors. The new cap is sized to the Sinnoh-close
+  projection (S2b's 61 remaining entries at this stage's measured
+  unit ≈ +890,000 → ~8.66 MB incl. S3 tile-art room), no further
+  headroom banked; `budgets.json`'s 12,582,912 B hard gate is
+  unchanged and still governs (all budgets pass, §4).
+
+### 3. Census (gate)
+
+- Script: `~/workspace/ashs-journey-qa/arc4-etl/census-s2a.mjs`
+  (on the census-h2a pattern). **CENSUS S2A: PASS.**
+- Every registry entry dex 1–439 (**448 entries** incl. partner +
+  forms) has front+back keys in art-data.mjs: **missing 0, blanks 0**.
+  The 53 new species: front-bob + back-bob present for all (**missing
+  0**); starter accents present (**missing 0**); front ≠ back for
+  all 53. **Zero forge fallbacks for dex 387–439.**
+- Per-sprite stats for the 106 new frames: painted pixels
+  **482–1,476** (median 1,012; H2a floor was 616 — the low end here is
+  the small bell/bud species, chingling 482 / burmy 571, by canon
+  design), palette sizes **5–12** colours (median 8; cap 32) —
+  inside the H2a envelope (5–11) within one colour.
+- **Contact sheets:** `~/workspace/ashs-journey-qa/arc4-etl/census-s2a-contact.png`
+  (fronts, 1536×1658, 53 labelled at 3×) +
+  `census-s2a-contact-backs.png` (backs, same format), visually
+  inspected by the implementer: silhouettes nameable at sheet scale
+  with the §5 exceptions flagged.
+- tests/sinnoh-checks.mjs gains the S2a census section (S2a-01…
+  S2a-08): **57 → 65/65**, all prior checks green.
+
+### 4. Battery at this commit
+
+- build-art clean and **deterministic** (two runs → byte-identical
+  art-data.mjs, md5 dcc55a18…). 3,764 sprites total, 447 derived
+  bobs, 691 delta frames.
+- sinnoh-checks **65/65** · fidelity **35/35** · campaign-smoke
+  **24/24** · battle-model **45/45 HARD** · qa-changed-flows failures
+  exactly **{b2, d9}** · validator **106** + fuzz **2000/2000** +
+  save-contract **12/12** · budgets-check **all gates pass** ·
+  hoenn-story 88/88 · johto-story 110/110 · frontier 136/136 ·
+  arc-foundation 47/47 · cheat-shop 44/44.
+- Fresh build (vercel + guest targets) byte-identical to the
+  committed public/game.js (sha256 86aed041…, verified across two
+  builds). **personal/ byte-identical** (sha256 f434ba63…, untouched).
+
+### 5. Budget (measured)
+
+- public/game.js **10,786,109 B** (S1 close: 10,012,566; **Δ
+  +773,543 B = 14,595 B per species** vs the H0/H2a measured art unit
+  of 14,483–14,570 B/species — on projection); public static total
+  **10,948,731 B** (S1 close 10,175,188; same delta).
+- **S2b projection:** 61 remaining entries (dex 440–493 = 54 species
+  + 7 formes) × 14,595 ≈ **+890,295 B** → static ≈ 11,839,026 B at
+  S2b close. Implied FULL-mission projection-to-close ≈ **12,128,314
+  B** (the F4 reference 12,115,538 + this stage's +5,944 over-unit
+  drift + S2b at the measured unit) — gate margin ≈ **454,598 B**,
+  comfortably outside the coordinator's 250,000 B stop trigger.
+
+### 6. Leftovers, named
+
+- **Weakest silhouettes at 64×64** (flagged for the owner's eye on
+  the contact sheet): burmy + wormadam (the leaf cloak + stem reads
+  as a hanging green pendant; the face is nearly lost inside the
+  cloak — widened once, still the weakest pair), starly (dark wings
+  read as detached ovals flanking the pale body; staravia shares the
+  family risk to a lesser degree), mothim (the pale wing ovals dwarf
+  the striped body), stunky (cream tail plume and face stripe
+  under-read at sheet scale — it reads as a generic purple
+  quadruped), shieldon (improved in the fix pass; the shield face
+  still dominates its small frame). All pass silhouette naming on
+  the sheet; first candidates if a polish pass is ordered.
+- **Chingling** is the smallest frame of the half (482 painted px) —
+  a lone bell by canon design; the ribbon + mouth band carry it.
+- Accent deltas for non-starter Sinnoh species are NOT in this
+  stage's brief (Johto/Hoenn coverage is likewise starter-only);
+  fronts/backs/bobs are complete for the range.
+- **S2b (dex 440–493 + 7 formes)** remains: 61 more entries at this
+  stage's measured unit cost ≈ +890 KB art, landing art-data
+  ≈ 8.66 MB — inside the §2 ceiling as sized.

@@ -1,0 +1,12 @@
+# chimchar-front-accent — Arc4 S2a accent frame (blink). Recolor-only delta over chimchar-front.
+PIXD chimchar-front-accent chimchar-front 64 64
+25 24 O
+39 24 O
+32 28 O
+30 29 O
+31 29 O
+32 29 O
+33 29 O
+34 29 O
+32 30 O
+PAL
