@@ -1,0 +1,16 @@
+# darkrai-front-accent — Arc4 S2b accent frame (blink). Recolor-only delta over darkrai-front.
+PIXD darkrai-front-accent darkrai-front 64 64
+38 20 O
+37 21 O
+38 21 O
+39 21 O
+36 22 O
+37 22 O
+38 22 O
+39 22 O
+40 22 O
+37 23 O
+38 23 O
+39 23 O
+38 24 O
+PAL

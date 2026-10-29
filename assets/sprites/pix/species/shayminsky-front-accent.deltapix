@@ -1,0 +1,34 @@
+# shayminsky-front-accent — Arc4 S2b accent frame (blink). Recolor-only delta over shayminsky-front.
+PIXD shayminsky-front-accent shayminsky-front 64 64
+14 28 O
+20 28 O
+14 29 O
+15 29 O
+20 29 O
+21 29 O
+12 30 O
+13 30 O
+14 30 O
+15 30 O
+16 30 O
+18 30 O
+19 30 O
+20 30 O
+21 30 O
+22 30 O
+13 31 O
+14 31 O
+15 31 O
+19 31 O
+20 31 O
+21 31 O
+14 32 O
+20 32 O
+17 33 O
+15 34 O
+16 34 O
+17 34 O
+18 34 O
+19 34 O
+17 35 O
+PAL

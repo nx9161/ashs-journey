@@ -380,6 +380,59 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     HALF.every((s) => ['-front', '-back'].every((k) => { const m = materialize(s.id + k); const n = Object.keys(m.pal).length; return n >= 5 && n <= 12; })));
 }
 
+// ================= Part S2b: species art, second half (Arc 4 Stage S2b) ======
+// Dex 440-493 (54 species) + the 7 forme entries (rotom-heat/wash/frost/
+// fan/mow, giratina-origin, shaymin-sky) = 61 entries, hand-authored
+// through the shipped .pix pipeline (arc4-etl/gen-s2b-art.mjs ->
+// build-art -> art-data.mjs): front + TRUE-REAR back + front/back
+// idle-bobs for all 61, accent deltas for the 9 marquee legendary
+// entries. Census rig: arc4-etl/census-s2b.mjs (contact sheets
+// visually inspected; roster-wide census over all 509 entries).
+{
+  const { ART } = await import(join(ROOT, 'assets/sprites/art-data.mjs'));
+  const { SPECIES_SINNOH: SP5 } = await import(join(ROOT, 'src/data/species5.mjs'));
+  const HALF = Object.values(SP5).filter((s) => s.dexNo >= 440).sort((a, b) => a.dexNo - b.dexNo || (a.id < b.id ? -1 : 1));
+  const materialize = (id) => {
+    const a = ART[id]; if (!a) return null;
+    if (a.rows) return a;
+    if (a.shiftY) { const b = materialize(a.base); const rows = Array.from({ length: b.h }, () => '.'.repeat(b.w)); for (let y = 0; y < b.h - a.shiftY; y++) rows[y + a.shiftY] = b.rows[y]; return { ...b, rows }; }
+    if (a.deltas) { const b = materialize(a.base); const rows = b.rows.map((r) => r.split('')); for (const [x, y, c] of a.deltas) rows[y][x] = c; return { w: b.w, h: b.h, pal: { ...b.pal, ...a.pal }, rows: rows.map((r) => r.join('')) }; }
+    return null;
+  };
+  const painted = (id) => { const m = materialize(id); if (!m) return 0; let n = 0; for (const r of m.rows) for (const c of r) if (c !== '.') n++; return n; };
+  const cellDiff = (a, b) => { const A = materialize(a).rows, B = materialize(b).rows; let n = 0; for (let y = 0; y < 64; y++) for (let x = 0; x < 64; x++) if (A[y][x] !== B[y][x]) n++; return n; };
+  ok('S2b-01 census population: exactly 61 entries in dex 440-493 + formes (happiny 440 -> arceus 493, incl. 7 forme entries)',
+    HALF.length === 61 && HALF[0].id === 'happiny' && HALF.filter((s) => s.form).length === 7
+    && ['rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow', 'giratinaorigin', 'shayminsky'].every((id) => HALF.some((s) => s.id === id)));
+  ok('S2b-02 every one of the 61 resolves AUTHORED front+back from art-data (forge-fallback count for 440-493 + formes = 0): full ART keys with rows, none blank (painted >= 400 each)',
+    HALF.every((s) => painted(s.id + '-front') >= 400 && painted(s.id + '-back') >= 400),
+    HALF.filter((s) => painted(s.id + '-front') < 400 || painted(s.id + '-back') < 400).map((s) => s.id).join(','));
+  ok('S2b-03 backs are TRUE REARS, not mirrors: front row data != back row data for all 61',
+    HALF.every((s) => materialize(s.id + '-front').rows.join('\n') !== materialize(s.id + '-back').rows.join('\n')));
+  ok('S2b-04 idle-bobs shipped for all 61: front-bob + back-bob ART keys present (build-art derivation, the Johto/Hoenn pattern)',
+    HALF.every((s) => ART[s.id + '-front-bob'] && ART[s.id + '-back-bob']));
+  const MARQUEE9 = ['dialga', 'palkia', 'giratina', 'giratinaorigin', 'cresselia', 'darkrai', 'shaymin', 'shayminsky', 'arceus'];
+  ok('S2b-05 marquee legendary accents: front-accent + back-accent deltas present for all 9 (dialga, palkia, giratina both formes, cresselia, darkrai, shaymin both formes, arceus), each a non-empty recolor delta over its base',
+    MARQUEE9.every((id) => ART[id + '-front-accent'] && ART[id + '-back-accent']
+      && ART[id + '-front-accent'].deltas.length > 0 && ART[id + '-back-accent'].deltas.length > 0));
+  ok('S2b-06 .pix sources on disk for all 61 pairs (assets/sprites/pix/species/<id>-front.pix + -back.pix) — art flows through the game pipeline, no parallel store',
+    HALF.every((s) => { try { readFileSync(join(ROOT, 'assets/sprites/pix/species', s.id + '-front.pix'), 'utf8'); readFileSync(join(ROOT, 'assets/sprites/pix/species', s.id + '-back.pix'), 'utf8'); return true; } catch { return false; } }));
+  ok('S2b-07 forme distinctness: giratina-origin is a DIFFERENT drawing from giratina-altered (front cells differ >= 800; serpentine, no legs) and shaymin-sky from shaymin-land (>= 800); the 5 rotom formes pairwise differ (>= 300 cells each pair — shared plasma core, distinct appliance bodies)',
+    cellDiff('giratina-front', 'giratinaorigin-front') >= 800 && cellDiff('shaymin-front', 'shayminsky-front') >= 800
+    && ['rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow'].every((a, i, arr) => arr.every((b, j) => j <= i || cellDiff(a + '-front', b + '-front') >= 300)));
+  ok('S2b-08 palette discipline: every new frame paints 5-12 colours (cap 32) — the S2a envelope held',
+    HALF.every((s) => ['-front', '-back'].every((k) => { const m = materialize(s.id + k); const n = Object.keys(m.pal).length; return n >= 5 && n <= 12; })));
+  // Roster-wide: every entry in every species module resolves authored art.
+  const mods = [];
+  for (const f of ['species.mjs', 'species2.mjs', 'species3.mjs', 'species4.mjs', 'species5.mjs']) mods.push(await import(join(ROOT, 'src/data', f)));
+  const roster = {};
+  for (const mod of mods) for (const v of Object.values(mod)) if (v && typeof v === 'object') for (const [k, e] of Object.entries(v)) if (e && e.id && e.dexNo) roster[e.id] = e;
+  const rosterList = Object.values(roster);
+  ok('S2b-09 ROSTER-WIDE census: all 509 entries resolve authored front+back (forge-fallback count = 0 across the whole roster; Sinnoh species art complete)',
+    rosterList.length === 509 && rosterList.every((s) => painted(s.id + '-front') > 0 && painted(s.id + '-back') > 0),
+    rosterList.filter((s) => painted(s.id + '-front') === 0 || painted(s.id + '-back') === 0).map((s) => s.id).join(','));
+}
+
 // ================= Part B: headless bundle =================
 const { buildGameJs } = await import(join(ROOT, 'scripts/build.mjs'));
 const gameJs = buildGameJs();

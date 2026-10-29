@@ -11559,3 +11559,160 @@ with the primary branch duplicated in the singular `evo` slot.
 - **S2b (dex 440–493 + 7 formes)** remains: 61 more entries at this
   stage's measured unit cost ≈ +890 KB art, landing art-data
   ≈ 8.66 MB — inside the §2 ceiling as sized.
+
+## Arc 4 Stage S2b — Species art, second half (dex 440–493 + formes) (2026-10-29)
+
+### 1. What landed
+
+- **61 entries authored** (dex 440–493, happiny → arceus, PLUS the 7
+  forme entries rotomheat / rotomwash / rotomfrost / rotomfan /
+  rotommow / giratinaorigin / shayminsky): happiny, chatot,
+  spiritomb, gible, gabite, garchomp, munchlax, riolu, lucario,
+  hippopotas, hippowdon, skorupi, drapion, croagunk, toxicroak,
+  carnivine, finneon, lumineon, mantyke, snover, abomasnow, weavile,
+  magnezone, lickilicky, rhyperior, tangrowth, electivire, magmortar,
+  togekiss, yanmega, leafeon, glaceon, gliscor, mamoswine, porygonz,
+  gallade, probopass, dusknoir, froslass, rotom, uxie, mesprit,
+  azelf, dialga, palkia, heatran, regigigas, giratina, cresselia,
+  phione, manaphy, darkrai, shaymin, arceus + the 7 formes.
+- **122 full frames** (`<id>-front` + `<id>-back` .pix, 64×64,
+  original pixel work in the Platinum language — NW-light shading,
+  TRUE REAR views: no eyes, back-specific markings: spiritomb's
+  rear swirl-X, hippowdon's dorsal geyser holes, mantyke's back
+  smile-marking, dusknoir's back rift, dialga's back fin plates,
+  heatran's back crack, arceus's wheel from behind with its centre
+  gem). Backs are NOT mirrors: front/back row data differs for all
+  61 (census-checked).
+- **122 bob frames** reach the shipped set via the pipeline itself:
+  front-bobs by build-art's marked derivation, back-bobs by the W2
+  shift-delta mechanism — no hand files, exactly as S2a species.
+- **18 accent deltas** for the 9 marquee legendary entries in this
+  half (dialga, palkia, giratina, giratinaorigin, cresselia,
+  darkrai, shaymin, shayminsky, arceus): front-accent = blink
+  (recolor-only), back-accent = crest/fin twitch recolor, as
+  .deltapix over the new bases — the J2b/H2b marquee mechanism,
+  unchanged. **Arceus is the capstone of the whole game and its set
+  got the most care in this stage:** the gold wheel is drawn as a
+  true ring around the mid-body (four spokes, centre gem on the
+  back view), gold hooves, flowing mane, green/red eye detail —
+  the largest authored frame of the half after the wheel's own
+  geometry (front 1,484 painted px).
+- **Forme distinctness (the stage's named risk, discharged):**
+  giratina-origin is a separate drawing from giratina-altered —
+  front row data differs in **1,425 of 4,096 cells**: origin is a
+  legless serpentine coil with six wing spikes and a crown, altered
+  is the hexapod with six stilt legs, gold neck rings and red wing
+  blades. Shaymin-sky likewise differs from shaymin-land in **1,170
+  cells** (long-legged canine with green wing-ears and a red petal
+  scarf vs the land forme's grass hedgehog mound with flowers).
+  The 5 rotom formes share the plasma core (head + aura arms —
+  that IS their concept) over five clearly distinct appliance
+  bodies (oven / washer / fridge / fan / mower): every pairwise
+  front differs in **≥438 cells** (min heat↔wash), and each shell
+  reads at sheet scale, fronts AND backs.
+- **Spiritomb:** one set, as briefed — the swirl visage is painted
+  on the wisp mass above an honest grey keystone (cracked base,
+  inset panel); the back carries the swirl as an X-rune with gem
+  dots, no face.
+- Authoring workflow: generator script
+  `~/workspace/ashs-journey-qa/arc4-etl/gen-s2b-art.mjs` mirrors
+  gen-s2a exactly, composing per-species authored silhouettes/
+  palettes/markings from the species' concept only (clean-room:
+  no sprite was fetched, traced, or derived from); the repo's own
+  build-art validation is the gate (palette cap, outline, margins,
+  orphans — zero errors after fixes in the art, never the
+  validator: gabite's fin tips and giratina-origin's tail tip
+  orphan pixels were thickened in the drawings). Six visual fixes
+  after contact-sheet review: chatot's note-head enlarged,
+  skorupi's tail given a solid segmented spine, tangrowth's arms
+  re-shaded light so they separate from the vine mass, porygonz
+  gained its body band + patch, giratina-origin's wing spikes
+  enlarged, dialga's neck thickened and crest raised.
+
+### 2. Pipeline / ceiling (on the record)
+
+- **No ceiling change.** The art-data ceiling stays **8,800,000 B**
+  (raised in S2a, sized to the Sinnoh-close projection). S2b lands
+  art-data at **8,663,315 B** (file bytes; payload within) —
+  headroom 136,685 B, which is S3's tile-art room on the S2a
+  sizing, NOT spare species room. `budgets.json`'s 12,582,912 B
+  hard gate is unchanged and still governs (all budgets pass, §4).
+
+### 3. Census (gate)
+
+- Script: `~/workspace/ashs-journey-qa/arc4-etl/census-s2b.mjs`
+  (on the census-s2a pattern). **CENSUS S2B: PASS.**
+- **Roster-wide: every registry entry (509 entries incl. partner +
+  all formes) has front+back keys in art-data.mjs: missing 0,
+  blanks 0 — the roster-wide forge-fallback count is 0.** With
+  S2b, Sinnoh species art is complete and NO forge fallback
+  remains anywhere in the dex 1–493 range.
+- The 61 new entries: front-bob + back-bob present for all
+  (**missing 0**); marquee accents present (**missing 0**);
+  front ≠ back for all 61; forme-distinctness diffs as §1.
+- Per-sprite stats for the 122 new frames: painted pixels
+  **630–1,633** (median 1,090; S2a: 482–1,476, median 1,012 — this
+  half runs bigger: legendaries + appliance bodies), palette sizes
+  **5–12** colours (median 8; cap 32) — the S2a envelope held
+  exactly.
+- **Contact sheets:** `~/workspace/ashs-journey-qa/arc4-etl/census-s2b-contact.png`
+  (fronts, 1536×1454, 61 labelled at 3×) +
+  `census-s2b-contact-backs.png` (backs, same format), visually
+  inspected by the implementer: silhouettes nameable at sheet
+  scale with the §5 exceptions flagged.
+- tests/sinnoh-checks.mjs gains the S2b census section (S2b-01…
+  S2b-09, incl. the roster-wide S2b-09): **65 → 74/74**, all prior
+  checks green.
+
+### 4. Battery at this commit
+
+- build-art clean and **deterministic** (two runs → byte-identical
+  art-data.mjs, md5 68fd45a9…). 4,026 sprites total, 508 derived
+  bobs, 709 delta frames.
+- sinnoh-checks **74/74** · fidelity **35/35** · campaign-smoke
+  **24/24** · battle-model **45/45 HARD** · qa-changed-flows failures
+  exactly **{b2, d9}** (55/57) · qa-slice failures exactly the named
+  inheritances **{s6, l8}** (132/134) · verify-slice **48/48** ·
+  validator **106** + fuzz **2000/2000** + save-contract **12/12** ·
+  budgets-check **all gates pass** · contamination **clean** ·
+  hoenn-story 88/88 · johto-story 110/110 · frontier 136/136 ·
+  arc-foundation 47/47 · cheat-shop 44/44.
+- Fresh build (vercel + guest targets) byte-identical to the
+  committed public/game.js (sha256 d0d56203…, verified across two
+  builds). **personal/ byte-identical** (sha256 f434ba63…,
+  restored from HEAD after verify-slice's full rebuild).
+
+### 5. Budget (measured)
+
+- public/game.js **11,675,671 B** (S2a close: 10,786,109; **Δ
+  +889,562 B = 14,583 B per entry** vs S2a's measured unit of
+  14,595 B/species — on projection, −0.1%); public static total
+  **11,838,293 B** (S2a close 10,948,731; same delta).
+- **Restated full-mission projection-to-close ≈ 12,127,581 B**
+  (S2a's implied 12,128,314 with S2b's actual −733 B under-unit
+  drift applied) — gate margin ≈ **455,331 B**, comfortably
+  outside the coordinator's 250,000 B stop trigger. No stop.
+
+### 6. Leftovers, named
+
+- **Weakest silhouettes at 64×64** (flagged for the owner's eye on
+  the contact sheet): porygonz (the detached tilted head + plain
+  body reads near-abstract — canon-true disjointedness, but the
+  plainest frame of the half), yanmega (the four glass wings
+  cluster over the head and the whole reads helicopter-adjacent
+  before it reads dragonfly), giratinaorigin (deliberately spare
+  next to altered's bulk — the coil + spikes name it, but it is
+  the lightest legendary frame), skorupi (small; its solid tail
+  spine helped, it still reads slighter than drapion beside it),
+  tangrowth (improved in the fix pass; the vine mass is still the
+  plainest mid-half body). All pass silhouette naming on the
+  sheet; first candidates if a polish pass is ordered.
+- **Riolu's back** carries an odd dark-ring patch (collar + tail
+  geometry from behind) — honest rear, flagged here rather than
+  smoothed over.
+- Accent deltas for non-marquee Sinnoh species are NOT in this
+  stage's brief (S2a/Johto/Hoenn coverage is likewise
+  marquee-only); fronts/backs/bobs are complete for the range.
+- **Sinnoh species art (S2) is now COMPLETE across both halves:**
+  114/114 entries authored (387–493 + formes), zero forge
+  fallbacks roster-wide (509/509).
