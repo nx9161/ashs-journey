@@ -8077,3 +8077,43 @@ change beyond the regenerated tables the validator suite pins).
   obtainability (§4) are H3 obligations created by this stage's
   rulings; both are recorded in `arc3-etl/etl-notes.json` as well.
 - **H6:** the Deoxys meteorite forme-switch consumes §5's entries.
+
+## Arc 3 Stage H0 — Region-pack decision: STAY MONOLITH through Platinum (2026-10-29, ratified by coordinator)
+
+- **Decision (binding on H2):** the monolith stands through the Platinum
+  horizon. Hoenn art authors into `assets/sprites/art-data.mjs` exactly as
+  Johto's did. Per-region art packs become a MANDATORY stage at Arc 5
+  (Unova) — not an option — with two early re-open triggers below.
+  Full evidence: `~/workspace/ashs-journey-qa/arc3-pack-decision.md`;
+  measurement scratch in `~/workspace/ashs-journey-qa/arc3-h0/`.
+- **Measured actuals (tree-verified, checksums reconcile):** current
+  vercel static 7,262,669 B vs gate 12,582,912 B (one number applied to
+  the guest/vercel/personal static measurements in budgets.json).
+  Johto's true all-in cost 1,839,713 B (+94 species, +83 maps, story,
+  systems, tiles). Real unit costs: species all-in 15,153 B (art 14,483
+  incl. a full front-bob copy + data 603 + support rows 67 — the
+  roadmap's pair-only estimate undercounted ~1.5x and is superseded by
+  these actuals); map 3,167 B (Johto rate); story ~90,115 B/arc.
+- **Projections:** Hoenn close ~9,872,965 B static (headroom 2,709,947 B,
+  21.5%); Sinnoh close (incl. Frontier 3.5) ~12,086,695 B (margin
+  496,217 B, 3.9%; worst-stack 237,819 B, 1.9%) — every target passes.
+- **Why packs cannot help now:** there is NO PWA/service worker in this
+  project — offline exists only as the zero-network guest standalone,
+  which must inline all art regardless; on the vercel target packs
+  would only move bytes outside budgets-check's game.js+index.html
+  measurement, which is accounting evasion, not engineering. Monolith
+  first-load wire cost stays honest: ~1.06 MB gzip today, ~1.43 MB at
+  Hoenn close, ~1.75 MB at Sinnoh close (measured gzip ratio 14.16%).
+- **Re-open triggers (either fires -> the pack stage runs BEFORE the
+  next art stage):** (1) Hoenn-close static > 10,100,000 B;
+  (2) Arc-4 re-measurement projecting the Sinnoh-close margin
+  < 250,000 B.
+- **Deferral note (post-Platinum honesty):** the 532 species beyond
+  Platinum alone measure ~8,061,448 B at the real unit cost; Unova's
+  species alone would breach the gate by ~1,867,666 B before any map
+  byte. At Arc 5 the choice is packs or an ADR-007 amendment — recorded
+  now so the deferral is a plan, not a surprise.
+- **Incidental:** the in-tree `personal/game.js` is a stale pre-Johto
+  build (frozen retired edition; its budget reading is meaningless
+  until the parent rebuilds that target). Untouched by this mission,
+  consistent with the J7 leftover of the same name.
