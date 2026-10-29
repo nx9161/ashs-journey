@@ -223,7 +223,13 @@ function main() {
   // beyond it. Recorded in docs/audit-register.md (Arc 4 Stage S3a
   // section), same precedent. (S3b's four east settlements will
   // re-measure.)
-  const FAMILY_PALETTE_BUDGETS = { tiles: 1120 };
+  // Stage S3b: 1120 -> 1180 — the four east-Sinnoh settlements
+  // (pastoria / celestic / snowpoint / sunnyshore) add 32 identity
+  // tiles + 8 S3B kinds on the same per-town anchor programme; the
+  // union MEASURES 1171 hexes, so the cap is set just above the
+  // measured union, no headroom banked beyond it. Recorded in
+  // docs/audit-register.md (Arc 4 Stage S3b section), same precedent.
+  const FAMILY_PALETTE_BUDGETS = { tiles: 1180 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

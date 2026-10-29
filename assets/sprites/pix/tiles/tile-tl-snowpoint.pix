@@ -1,0 +1,24 @@
+# Stage S3a: snowpoint landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-snowpoint 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #daffff snowpoint-landmark-wall
+b #8da8ae landmark-trim
+d #e85a7a landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

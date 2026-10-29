@@ -1,0 +1,23 @@
+# Stage S3b: climbwall — Rock Climb gate face; the holds are the marker (S4 wires the move) (full-bleed, solid).
+PIX tile-climbwall 16 16
+bbbbbbbbbbbbbbbb
+bbaaaaabaaaaabbc
+aaaaaaaaaaaaaaaa
+aacaaaaaaaaaaaaa
+aaaddaaaaaaddaab
+aaaaaacaaaaaaaaa
+baaabacddacabcaa
+bbaaaaaaaaacaaab
+abaaaaaaaabbaaaa
+aaabbaaaaaaaaddc
+babaaddaacaabaaa
+aaaaaabaaddbbaba
+aaddabbacacacaab
+aaaababbaaaaabdd
+aacaaabaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #7a6a58 climb-face
+b #584a3c climb-face-dark
+c #9a8a74 climb-face-light
+d #e8dcc0 climb-hold

@@ -1,0 +1,26 @@
+# Stage S3b: distortfloor — tilted violet stone floor of the Distortion World (full-bleed, walkable).
+PIX tile-distortfloor 16 16
+baaaaaabaafcafba
+aaaaaabaaaaaabaa
+acaeabaaaafabaaa
+afdabaacaadbaafa
+aacbaaaaaabadcaa
+aabaaaaacbaaaaaa
+abacadaabffdaaeb
+baaaaaabacaaeaba
+aaaacabdafaaabfc
+aaafabaafacabaaa
+fafabcaaaaaeaaae
+daabaaaaaabcaaaa
+aabaaacaabaaaaaa
+abaaaaadbadacfab
+baaaaaadaadaaabd
+aacaaafaaaaafdaa
+PAL
+a #6a5a8a distort-stone
+b #4e4266 distort-stone-dark
+c #8a7ab0 distort-stone-light
+d #b8a8e0 distort-glint
+e #3a2c52 distort-stone-deep
+f #a894cc distort-stone-pale
+g #c8a24a distort-ochre-vein

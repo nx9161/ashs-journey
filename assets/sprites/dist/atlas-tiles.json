@@ -3,7 +3,7 @@
   "tile": 16,
   "size": [
     2040,
-    194
+    212
   ],
   "sprites": {
     "tile-th-celadon": {
@@ -1267,7 +1267,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-coronetfloor": {
+    "tile-climbwall": {
       "x": 1843,
       "y": 1,
       "w": 16,
@@ -1280,7 +1280,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-coronetrock": {
+    "tile-coronetfloor": {
       "x": 1861,
       "y": 1,
       "w": 16,
@@ -1293,8 +1293,21 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-crackedfloor": {
+    "tile-coronetrock": {
       "x": 1879,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-crackedfloor": {
+      "x": 1897,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -1307,19 +1320,6 @@
       "mirror_of": null
     },
     "tile-crystal-1": {
-      "x": 1897,
-      "y": 1,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 2,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-crystal-2": {
       "x": 1915,
       "y": 1,
       "w": 16,
@@ -1332,7 +1332,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-current": {
+    "tile-crystal-2": {
       "x": 1933,
       "y": 1,
       "w": 16,
@@ -1340,12 +1340,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 2,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-decor-basket": {
+    "tile-current": {
       "x": 1951,
       "y": 1,
       "w": 16,
@@ -1358,7 +1358,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-decor-books": {
+    "tile-decor-basket": {
       "x": 1969,
       "y": 1,
       "w": 16,
@@ -1371,7 +1371,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-decor-bottles": {
+    "tile-decor-books": {
       "x": 1987,
       "y": 1,
       "w": 16,
@@ -1384,7 +1384,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-decor-cake": {
+    "tile-decor-bottles": {
       "x": 2005,
       "y": 1,
       "w": 16,
@@ -1397,7 +1397,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-decor-clock": {
+    "tile-decor-cake": {
       "x": 2023,
       "y": 1,
       "w": 16,
@@ -1410,8 +1410,21 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-decor-cup": {
+    "tile-decor-clock": {
       "x": 1,
+      "y": 51,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-decor-cup": {
+      "x": 19,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1424,7 +1437,7 @@
       "mirror_of": null
     },
     "tile-decor-cushion": {
-      "x": 19,
+      "x": 37,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1437,7 +1450,7 @@
       "mirror_of": null
     },
     "tile-decor-fern": {
-      "x": 37,
+      "x": 55,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1450,7 +1463,7 @@
       "mirror_of": null
     },
     "tile-decor-globe": {
-      "x": 55,
+      "x": 73,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1463,7 +1476,7 @@
       "mirror_of": null
     },
     "tile-decor-herb": {
-      "x": 73,
+      "x": 91,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1476,7 +1489,7 @@
       "mirror_of": null
     },
     "tile-decor-lamp": {
-      "x": 91,
+      "x": 109,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1489,7 +1502,7 @@
       "mirror_of": null
     },
     "tile-decor-papers": {
-      "x": 109,
+      "x": 127,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1502,7 +1515,7 @@
       "mirror_of": null
     },
     "tile-decor-radio": {
-      "x": 127,
+      "x": 145,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1515,7 +1528,7 @@
       "mirror_of": null
     },
     "tile-decor-shoes": {
-      "x": 145,
+      "x": 163,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1528,7 +1541,7 @@
       "mirror_of": null
     },
     "tile-decor-typer": {
-      "x": 163,
+      "x": 181,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1541,7 +1554,7 @@
       "mirror_of": null
     },
     "tile-decor-vase": {
-      "x": 181,
+      "x": 199,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1554,7 +1567,7 @@
       "mirror_of": null
     },
     "tile-desertsand": {
-      "x": 199,
+      "x": 217,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1567,7 +1580,7 @@
       "mirror_of": null
     },
     "tile-detail-ash": {
-      "x": 217,
+      "x": 235,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1580,7 +1593,7 @@
       "mirror_of": null
     },
     "tile-detail-blossom": {
-      "x": 235,
+      "x": 253,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1593,7 +1606,7 @@
       "mirror_of": null
     },
     "tile-detail-bunting": {
-      "x": 253,
+      "x": 271,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1606,7 +1619,7 @@
       "mirror_of": null
     },
     "tile-detail-clover": {
-      "x": 271,
+      "x": 289,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1619,7 +1632,7 @@
       "mirror_of": null
     },
     "tile-detail-cobble-ring": {
-      "x": 289,
+      "x": 307,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1632,7 +1645,7 @@
       "mirror_of": null
     },
     "tile-detail-dirt": {
-      "x": 307,
+      "x": 325,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1645,7 +1658,7 @@
       "mirror_of": null
     },
     "tile-detail-leaves": {
-      "x": 325,
+      "x": 343,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1658,7 +1671,7 @@
       "mirror_of": null
     },
     "tile-detail-moss": {
-      "x": 343,
+      "x": 361,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1671,7 +1684,7 @@
       "mirror_of": null
     },
     "tile-detail-pebbles": {
-      "x": 361,
+      "x": 379,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1684,7 +1697,7 @@
       "mirror_of": null
     },
     "tile-detail-petals": {
-      "x": 379,
+      "x": 397,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1697,7 +1710,7 @@
       "mirror_of": null
     },
     "tile-detail-sand": {
-      "x": 397,
+      "x": 415,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1710,7 +1723,7 @@
       "mirror_of": null
     },
     "tile-detail-shells": {
-      "x": 415,
+      "x": 433,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1723,7 +1736,7 @@
       "mirror_of": null
     },
     "tile-detail-straw": {
-      "x": 433,
+      "x": 451,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1736,7 +1749,7 @@
       "mirror_of": null
     },
     "tile-detail-twig": {
-      "x": 451,
+      "x": 469,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1748,8 +1761,47 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-distortfalls": {
+      "x": 487,
+      "y": 51,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-distortfloor": {
+      "x": 505,
+      "y": 51,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-distortrock": {
+      "x": 523,
+      "y": 51,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-door-brick-open": {
-      "x": 469,
+      "x": 541,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1762,7 +1814,7 @@
       "mirror_of": null
     },
     "tile-door-brick": {
-      "x": 487,
+      "x": 559,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1775,7 +1827,7 @@
       "mirror_of": null
     },
     "tile-door-center-l-open": {
-      "x": 505,
+      "x": 577,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1788,7 +1840,7 @@
       "mirror_of": null
     },
     "tile-door-center-l": {
-      "x": 523,
+      "x": 595,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1801,7 +1853,7 @@
       "mirror_of": null
     },
     "tile-door-center-r-open": {
-      "x": 541,
+      "x": 613,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1814,7 +1866,7 @@
       "mirror_of": null
     },
     "tile-door-center-r": {
-      "x": 559,
+      "x": 631,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1827,7 +1879,7 @@
       "mirror_of": null
     },
     "tile-door-gym-l-open": {
-      "x": 577,
+      "x": 649,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1840,7 +1892,7 @@
       "mirror_of": null
     },
     "tile-door-gym-l": {
-      "x": 595,
+      "x": 667,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1853,7 +1905,7 @@
       "mirror_of": null
     },
     "tile-door-gym-r-open": {
-      "x": 613,
+      "x": 685,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1866,7 +1918,7 @@
       "mirror_of": null
     },
     "tile-door-gym-r": {
-      "x": 631,
+      "x": 703,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1879,7 +1931,7 @@
       "mirror_of": null
     },
     "tile-door-house-open": {
-      "x": 649,
+      "x": 721,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1892,7 +1944,7 @@
       "mirror_of": null
     },
     "tile-door-house": {
-      "x": 667,
+      "x": 739,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1905,7 +1957,7 @@
       "mirror_of": null
     },
     "tile-door-lab-facade": {
-      "x": 685,
+      "x": 757,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1918,7 +1970,7 @@
       "mirror_of": null
     },
     "tile-door-lab-l-open": {
-      "x": 703,
+      "x": 775,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1931,7 +1983,7 @@
       "mirror_of": null
     },
     "tile-door-lab-l": {
-      "x": 721,
+      "x": 793,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1944,7 +1996,7 @@
       "mirror_of": null
     },
     "tile-door-lab-r-open": {
-      "x": 739,
+      "x": 811,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1957,7 +2009,7 @@
       "mirror_of": null
     },
     "tile-door-lab-r": {
-      "x": 757,
+      "x": 829,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1970,7 +2022,7 @@
       "mirror_of": null
     },
     "tile-door-mart-l-open": {
-      "x": 775,
+      "x": 847,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1983,7 +2035,7 @@
       "mirror_of": null
     },
     "tile-door-mart-l": {
-      "x": 793,
+      "x": 865,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -1996,7 +2048,7 @@
       "mirror_of": null
     },
     "tile-door-mart-r-open": {
-      "x": 811,
+      "x": 883,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2009,7 +2061,7 @@
       "mirror_of": null
     },
     "tile-door-mart-r": {
-      "x": 829,
+      "x": 901,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2022,7 +2074,7 @@
       "mirror_of": null
     },
     "tile-door-open": {
-      "x": 847,
+      "x": 919,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2035,7 +2087,7 @@
       "mirror_of": null
     },
     "tile-door-wood-facade-open": {
-      "x": 865,
+      "x": 937,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2048,7 +2100,7 @@
       "mirror_of": null
     },
     "tile-door-wood-facade": {
-      "x": 883,
+      "x": 955,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2061,7 +2113,7 @@
       "mirror_of": null
     },
     "tile-door-wood-l-open": {
-      "x": 901,
+      "x": 973,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2074,7 +2126,7 @@
       "mirror_of": null
     },
     "tile-door-wood-l": {
-      "x": 919,
+      "x": 991,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2087,7 +2139,7 @@
       "mirror_of": null
     },
     "tile-door-wood-r-open": {
-      "x": 937,
+      "x": 1009,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2100,7 +2152,7 @@
       "mirror_of": null
     },
     "tile-door-wood-r": {
-      "x": 955,
+      "x": 1027,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2113,7 +2165,7 @@
       "mirror_of": null
     },
     "tile-door": {
-      "x": 973,
+      "x": 1045,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2126,7 +2178,7 @@
       "mirror_of": null
     },
     "tile-dressbanner": {
-      "x": 991,
+      "x": 1063,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2139,7 +2191,7 @@
       "mirror_of": null
     },
     "tile-dresscalendar": {
-      "x": 1009,
+      "x": 1081,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2152,7 +2204,7 @@
       "mirror_of": null
     },
     "tile-dressclock": {
-      "x": 1027,
+      "x": 1099,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2165,7 +2217,7 @@
       "mirror_of": null
     },
     "tile-dresscurtain": {
-      "x": 1045,
+      "x": 1117,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2178,7 +2230,7 @@
       "mirror_of": null
     },
     "tile-dressmap": {
-      "x": 1063,
+      "x": 1135,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2191,7 +2243,7 @@
       "mirror_of": null
     },
     "tile-dressmirror": {
-      "x": 1081,
+      "x": 1153,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2204,7 +2256,7 @@
       "mirror_of": null
     },
     "tile-dresspicture": {
-      "x": 1099,
+      "x": 1171,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2217,7 +2269,7 @@
       "mirror_of": null
     },
     "tile-dresspicture2": {
-      "x": 1117,
+      "x": 1189,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2230,7 +2282,7 @@
       "mirror_of": null
     },
     "tile-dressposter": {
-      "x": 1135,
+      "x": 1207,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2243,7 +2295,7 @@
       "mirror_of": null
     },
     "tile-dresswindow": {
-      "x": 1153,
+      "x": 1225,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2256,7 +2308,7 @@
       "mirror_of": null
     },
     "tile-dresswreath": {
-      "x": 1171,
+      "x": 1243,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2269,7 +2321,7 @@
       "mirror_of": null
     },
     "tile-drip-1": {
-      "x": 1189,
+      "x": 1261,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2282,7 +2334,7 @@
       "mirror_of": null
     },
     "tile-drip-2": {
-      "x": 1207,
+      "x": 1279,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2295,7 +2347,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-e": {
-      "x": 1225,
+      "x": 1297,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2308,7 +2360,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-n": {
-      "x": 1243,
+      "x": 1315,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2321,7 +2373,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-ne": {
-      "x": 1261,
+      "x": 1333,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2334,7 +2386,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-nw": {
-      "x": 1279,
+      "x": 1351,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2347,7 +2399,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-s": {
-      "x": 1297,
+      "x": 1369,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2360,7 +2412,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-se": {
-      "x": 1315,
+      "x": 1387,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2373,7 +2425,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-sw": {
-      "x": 1333,
+      "x": 1405,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2386,7 +2438,7 @@
       "mirror_of": null
     },
     "tile-edge-dirt-w": {
-      "x": 1351,
+      "x": 1423,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2399,7 +2451,7 @@
       "mirror_of": null
     },
     "tile-edge-grass-e": {
-      "x": 1369,
+      "x": 1441,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2412,7 +2464,7 @@
       "mirror_of": null
     },
     "tile-edge-grass-n": {
-      "x": 1387,
+      "x": 1459,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2425,7 +2477,7 @@
       "mirror_of": null
     },
     "tile-edge-grass-s": {
-      "x": 1405,
+      "x": 1477,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2438,7 +2490,7 @@
       "mirror_of": null
     },
     "tile-edge-grass-w": {
-      "x": 1423,
+      "x": 1495,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2451,7 +2503,7 @@
       "mirror_of": null
     },
     "tile-edge-wet-e": {
-      "x": 1441,
+      "x": 1513,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2464,7 +2516,7 @@
       "mirror_of": null
     },
     "tile-edge-wet-n": {
-      "x": 1459,
+      "x": 1531,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2477,7 +2529,7 @@
       "mirror_of": null
     },
     "tile-edge-wet-s": {
-      "x": 1477,
+      "x": 1549,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2490,7 +2542,7 @@
       "mirror_of": null
     },
     "tile-edge-wet-w": {
-      "x": 1495,
+      "x": 1567,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2503,7 +2555,7 @@
       "mirror_of": null
     },
     "tile-fence": {
-      "x": 1513,
+      "x": 1585,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2516,7 +2568,7 @@
       "mirror_of": null
     },
     "tile-flora-celadon": {
-      "x": 1531,
+      "x": 1603,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2529,7 +2581,7 @@
       "mirror_of": null
     },
     "tile-flora-cerulean": {
-      "x": 1549,
+      "x": 1621,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2542,7 +2594,7 @@
       "mirror_of": null
     },
     "tile-flora-cinnabar": {
-      "x": 1567,
+      "x": 1639,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2555,7 +2607,7 @@
       "mirror_of": null
     },
     "tile-flora-fuchsia": {
-      "x": 1585,
+      "x": 1657,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2568,7 +2620,7 @@
       "mirror_of": null
     },
     "tile-flora-lavender": {
-      "x": 1603,
+      "x": 1675,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2581,7 +2633,7 @@
       "mirror_of": null
     },
     "tile-flora-pallet": {
-      "x": 1621,
+      "x": 1693,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2594,7 +2646,7 @@
       "mirror_of": null
     },
     "tile-flower-2": {
-      "x": 1639,
+      "x": 1711,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2607,7 +2659,7 @@
       "mirror_of": null
     },
     "tile-flower-3": {
-      "x": 1657,
+      "x": 1729,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2620,7 +2672,7 @@
       "mirror_of": null
     },
     "tile-flower-4": {
-      "x": 1675,
+      "x": 1747,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2633,7 +2685,7 @@
       "mirror_of": null
     },
     "tile-flower-5": {
-      "x": 1693,
+      "x": 1765,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2646,7 +2698,7 @@
       "mirror_of": null
     },
     "tile-flower": {
-      "x": 1711,
+      "x": 1783,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2659,7 +2711,7 @@
       "mirror_of": null
     },
     "tile-flowerbed": {
-      "x": 1729,
+      "x": 1801,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2672,7 +2724,7 @@
       "mirror_of": null
     },
     "tile-flowerfield": {
-      "x": 1747,
+      "x": 1819,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2685,7 +2737,7 @@
       "mirror_of": null
     },
     "tile-foam-1": {
-      "x": 1765,
+      "x": 1837,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2698,7 +2750,7 @@
       "mirror_of": null
     },
     "tile-foam-2": {
-      "x": 1783,
+      "x": 1855,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2711,7 +2763,7 @@
       "mirror_of": null
     },
     "tile-foam-3": {
-      "x": 1801,
+      "x": 1873,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2724,7 +2776,7 @@
       "mirror_of": null
     },
     "tile-foundation-1": {
-      "x": 1819,
+      "x": 1891,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2737,7 +2789,7 @@
       "mirror_of": null
     },
     "tile-foundation-2": {
-      "x": 1837,
+      "x": 1909,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2750,7 +2802,7 @@
       "mirror_of": null
     },
     "tile-foundation-3": {
-      "x": 1855,
+      "x": 1927,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2763,7 +2815,7 @@
       "mirror_of": null
     },
     "tile-fringe-tall-e": {
-      "x": 1873,
+      "x": 1945,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2776,7 +2828,7 @@
       "mirror_of": null
     },
     "tile-fringe-tall-n": {
-      "x": 1891,
+      "x": 1963,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2789,7 +2841,7 @@
       "mirror_of": null
     },
     "tile-fringe-tall-s": {
-      "x": 1909,
+      "x": 1981,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2802,7 +2854,7 @@
       "mirror_of": null
     },
     "tile-fringe-tall-w": {
-      "x": 1927,
+      "x": 1999,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2815,7 +2867,7 @@
       "mirror_of": null
     },
     "tile-frostfloor": {
-      "x": 1945,
+      "x": 2017,
       "y": 51,
       "w": 16,
       "h": 16,
@@ -2828,8 +2880,8 @@
       "mirror_of": null
     },
     "tile-glowpool-1": {
-      "x": 1963,
-      "y": 51,
+      "x": 1,
+      "y": 69,
       "w": 16,
       "h": 16,
       "frames": [
@@ -2841,8 +2893,8 @@
       "mirror_of": null
     },
     "tile-glowpool-2": {
-      "x": 1981,
-      "y": 51,
+      "x": 19,
+      "y": 69,
       "w": 16,
       "h": 16,
       "frames": [
@@ -2854,8 +2906,8 @@
       "mirror_of": null
     },
     "tile-grass-10": {
-      "x": 1999,
-      "y": 51,
+      "x": 37,
+      "y": 69,
       "w": 16,
       "h": 16,
       "frames": [
@@ -2867,8 +2919,8 @@
       "mirror_of": null
     },
     "tile-grass-2": {
-      "x": 2017,
-      "y": 51,
+      "x": 55,
+      "y": 69,
       "w": 16,
       "h": 16,
       "frames": [
@@ -2880,7 +2932,7 @@
       "mirror_of": null
     },
     "tile-grass-3": {
-      "x": 1,
+      "x": 73,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2893,7 +2945,7 @@
       "mirror_of": null
     },
     "tile-grass-4": {
-      "x": 19,
+      "x": 91,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2906,7 +2958,7 @@
       "mirror_of": null
     },
     "tile-grass-5": {
-      "x": 37,
+      "x": 109,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2919,7 +2971,7 @@
       "mirror_of": null
     },
     "tile-grass-6": {
-      "x": 55,
+      "x": 127,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2932,7 +2984,7 @@
       "mirror_of": null
     },
     "tile-grass-7": {
-      "x": 73,
+      "x": 145,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2945,7 +2997,7 @@
       "mirror_of": null
     },
     "tile-grass-8": {
-      "x": 91,
+      "x": 163,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2958,7 +3010,7 @@
       "mirror_of": null
     },
     "tile-grass-9": {
-      "x": 109,
+      "x": 181,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2971,7 +3023,7 @@
       "mirror_of": null
     },
     "tile-grass": {
-      "x": 127,
+      "x": 199,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2984,7 +3036,7 @@
       "mirror_of": null
     },
     "tile-grassground-2": {
-      "x": 145,
+      "x": 217,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -2997,7 +3049,7 @@
       "mirror_of": null
     },
     "tile-grassground-3": {
-      "x": 163,
+      "x": 235,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3010,7 +3062,7 @@
       "mirror_of": null
     },
     "tile-grassground-4": {
-      "x": 181,
+      "x": 253,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3023,7 +3075,7 @@
       "mirror_of": null
     },
     "tile-grassground": {
-      "x": 199,
+      "x": 271,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3036,7 +3088,7 @@
       "mirror_of": null
     },
     "tile-gratefloor": {
-      "x": 217,
+      "x": 289,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3049,7 +3101,7 @@
       "mirror_of": null
     },
     "tile-gym-fire-upper": {
-      "x": 235,
+      "x": 307,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3062,7 +3114,7 @@
       "mirror_of": null
     },
     "tile-gym-fire": {
-      "x": 253,
+      "x": 325,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3075,7 +3127,7 @@
       "mirror_of": null
     },
     "tile-gym-ground-upper": {
-      "x": 271,
+      "x": 343,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3088,7 +3140,7 @@
       "mirror_of": null
     },
     "tile-gym-ground": {
-      "x": 289,
+      "x": 361,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3101,7 +3153,7 @@
       "mirror_of": null
     },
     "tile-gym-leaf-upper": {
-      "x": 307,
+      "x": 379,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3114,7 +3166,7 @@
       "mirror_of": null
     },
     "tile-gym-leaf": {
-      "x": 325,
+      "x": 397,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3127,7 +3179,7 @@
       "mirror_of": null
     },
     "tile-gym-poison-upper": {
-      "x": 343,
+      "x": 415,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3140,7 +3192,7 @@
       "mirror_of": null
     },
     "tile-gym-poison": {
-      "x": 361,
+      "x": 433,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3153,7 +3205,7 @@
       "mirror_of": null
     },
     "tile-gym-psy-upper": {
-      "x": 379,
+      "x": 451,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3166,7 +3218,7 @@
       "mirror_of": null
     },
     "tile-gym-psy": {
-      "x": 397,
+      "x": 469,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3179,7 +3231,7 @@
       "mirror_of": null
     },
     "tile-gym-rock-upper": {
-      "x": 415,
+      "x": 487,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3192,7 +3244,7 @@
       "mirror_of": null
     },
     "tile-gym-rock": {
-      "x": 433,
+      "x": 505,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3205,7 +3257,7 @@
       "mirror_of": null
     },
     "tile-gym-volt-upper": {
-      "x": 451,
+      "x": 523,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3218,7 +3270,7 @@
       "mirror_of": null
     },
     "tile-gym-volt": {
-      "x": 469,
+      "x": 541,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3231,7 +3283,7 @@
       "mirror_of": null
     },
     "tile-gym-water-upper": {
-      "x": 487,
+      "x": 559,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3244,7 +3296,7 @@
       "mirror_of": null
     },
     "tile-gym-water": {
-      "x": 505,
+      "x": 577,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3257,7 +3309,7 @@
       "mirror_of": null
     },
     "tile-gymdoor-open": {
-      "x": 523,
+      "x": 595,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3270,7 +3322,7 @@
       "mirror_of": null
     },
     "tile-gymdoor": {
-      "x": 541,
+      "x": 613,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3283,7 +3335,7 @@
       "mirror_of": null
     },
     "tile-gymfloor-1": {
-      "x": 559,
+      "x": 631,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3296,7 +3348,7 @@
       "mirror_of": null
     },
     "tile-gymfloor-2": {
-      "x": 577,
+      "x": 649,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3309,7 +3361,7 @@
       "mirror_of": null
     },
     "tile-gymfloor-3": {
-      "x": 595,
+      "x": 667,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3322,7 +3374,7 @@
       "mirror_of": null
     },
     "tile-gymfloor-4": {
-      "x": 613,
+      "x": 685,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3335,7 +3387,7 @@
       "mirror_of": null
     },
     "tile-gymwall": {
-      "x": 631,
+      "x": 703,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3348,7 +3400,7 @@
       "mirror_of": null
     },
     "tile-gymwallin-2": {
-      "x": 649,
+      "x": 721,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3361,7 +3413,7 @@
       "mirror_of": null
     },
     "tile-gymwallin": {
-      "x": 667,
+      "x": 739,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3374,7 +3426,7 @@
       "mirror_of": null
     },
     "tile-harbourstone": {
-      "x": 685,
+      "x": 757,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3387,7 +3439,7 @@
       "mirror_of": null
     },
     "tile-house": {
-      "x": 703,
+      "x": 775,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3400,7 +3452,7 @@
       "mirror_of": null
     },
     "tile-housefloor-1": {
-      "x": 721,
+      "x": 793,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3413,7 +3465,7 @@
       "mirror_of": null
     },
     "tile-housefloor-2": {
-      "x": 739,
+      "x": 811,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3426,7 +3478,7 @@
       "mirror_of": null
     },
     "tile-housefloor-3": {
-      "x": 757,
+      "x": 829,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3439,7 +3491,7 @@
       "mirror_of": null
     },
     "tile-housefloor-4": {
-      "x": 775,
+      "x": 847,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3452,7 +3504,7 @@
       "mirror_of": null
     },
     "tile-housewall-2": {
-      "x": 793,
+      "x": 865,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3465,7 +3517,7 @@
       "mirror_of": null
     },
     "tile-housewall": {
-      "x": 811,
+      "x": 883,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3478,7 +3530,7 @@
       "mirror_of": null
     },
     "tile-iceface": {
-      "x": 829,
+      "x": 901,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3491,7 +3543,7 @@
       "mirror_of": null
     },
     "tile-icefloor": {
-      "x": 847,
+      "x": 919,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3504,7 +3556,7 @@
       "mirror_of": null
     },
     "tile-icepool": {
-      "x": 865,
+      "x": 937,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3517,7 +3569,7 @@
       "mirror_of": null
     },
     "tile-icewall": {
-      "x": 883,
+      "x": 955,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3530,7 +3582,7 @@
       "mirror_of": null
     },
     "tile-itemball": {
-      "x": 901,
+      "x": 973,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3543,7 +3595,7 @@
       "mirror_of": null
     },
     "tile-kelpbed": {
-      "x": 919,
+      "x": 991,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3556,7 +3608,7 @@
       "mirror_of": null
     },
     "tile-labfloor-1": {
-      "x": 937,
+      "x": 1009,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3569,7 +3621,7 @@
       "mirror_of": null
     },
     "tile-labfloor-2": {
-      "x": 955,
+      "x": 1027,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3582,7 +3634,7 @@
       "mirror_of": null
     },
     "tile-labfloor-3": {
-      "x": 973,
+      "x": 1045,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3595,7 +3647,7 @@
       "mirror_of": null
     },
     "tile-labfloor-4": {
-      "x": 991,
+      "x": 1063,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3608,7 +3660,7 @@
       "mirror_of": null
     },
     "tile-labwall-2": {
-      "x": 1009,
+      "x": 1081,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3621,7 +3673,7 @@
       "mirror_of": null
     },
     "tile-labwall": {
-      "x": 1027,
+      "x": 1099,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3634,7 +3686,7 @@
       "mirror_of": null
     },
     "tile-lamp": {
-      "x": 1045,
+      "x": 1117,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3647,7 +3699,7 @@
       "mirror_of": null
     },
     "tile-lavaglow": {
-      "x": 1063,
+      "x": 1135,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3660,7 +3712,20 @@
       "mirror_of": null
     },
     "tile-leaguewall": {
-      "x": 1081,
+      "x": 1153,
+      "y": 69,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-marshbog": {
+      "x": 1171,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3673,7 +3738,7 @@
       "mirror_of": null
     },
     "tile-martfloor-1": {
-      "x": 1099,
+      "x": 1189,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3686,7 +3751,7 @@
       "mirror_of": null
     },
     "tile-martfloor-2": {
-      "x": 1117,
+      "x": 1207,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3699,7 +3764,7 @@
       "mirror_of": null
     },
     "tile-martfloor-3": {
-      "x": 1135,
+      "x": 1225,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3712,7 +3777,7 @@
       "mirror_of": null
     },
     "tile-martfloor-4": {
-      "x": 1153,
+      "x": 1243,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3725,7 +3790,7 @@
       "mirror_of": null
     },
     "tile-martwall-2": {
-      "x": 1171,
+      "x": 1261,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3738,7 +3803,7 @@
       "mirror_of": null
     },
     "tile-martwall": {
-      "x": 1189,
+      "x": 1279,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3751,7 +3816,7 @@
       "mirror_of": null
     },
     "tile-moonmoss": {
-      "x": 1207,
+      "x": 1297,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3764,7 +3829,7 @@
       "mirror_of": null
     },
     "tile-panelwall": {
-      "x": 1225,
+      "x": 1315,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3777,7 +3842,7 @@
       "mirror_of": null
     },
     "tile-path-2": {
-      "x": 1243,
+      "x": 1333,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3790,7 +3855,7 @@
       "mirror_of": null
     },
     "tile-path-3": {
-      "x": 1261,
+      "x": 1351,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3803,7 +3868,7 @@
       "mirror_of": null
     },
     "tile-path-4": {
-      "x": 1279,
+      "x": 1369,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3816,7 +3881,7 @@
       "mirror_of": null
     },
     "tile-path-5": {
-      "x": 1297,
+      "x": 1387,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3829,7 +3894,7 @@
       "mirror_of": null
     },
     "tile-path-6": {
-      "x": 1315,
+      "x": 1405,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3842,7 +3907,7 @@
       "mirror_of": null
     },
     "tile-path": {
-      "x": 1333,
+      "x": 1423,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3855,7 +3920,7 @@
       "mirror_of": null
     },
     "tile-plantfloor-1": {
-      "x": 1351,
+      "x": 1441,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3868,7 +3933,7 @@
       "mirror_of": null
     },
     "tile-plantfloor-2": {
-      "x": 1369,
+      "x": 1459,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3881,7 +3946,7 @@
       "mirror_of": null
     },
     "tile-plantfloor-3": {
-      "x": 1387,
+      "x": 1477,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3894,7 +3959,7 @@
       "mirror_of": null
     },
     "tile-plantfloor-4": {
-      "x": 1405,
+      "x": 1495,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3907,7 +3972,7 @@
       "mirror_of": null
     },
     "tile-plantwall-2": {
-      "x": 1423,
+      "x": 1513,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3920,7 +3985,7 @@
       "mirror_of": null
     },
     "tile-plantwall": {
-      "x": 1441,
+      "x": 1531,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3933,7 +3998,7 @@
       "mirror_of": null
     },
     "tile-prop-ancientpillar": {
-      "x": 1459,
+      "x": 1549,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3946,7 +4011,7 @@
       "mirror_of": null
     },
     "tile-prop-apricorn": {
-      "x": 1477,
+      "x": 1567,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3959,7 +4024,7 @@
       "mirror_of": null
     },
     "tile-prop-ashshrub": {
-      "x": 1495,
+      "x": 1585,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3972,7 +4037,7 @@
       "mirror_of": null
     },
     "tile-prop-badgecase": {
-      "x": 1513,
+      "x": 1603,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3985,7 +4050,7 @@
       "mirror_of": null
     },
     "tile-prop-barrel": {
-      "x": 1531,
+      "x": 1621,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -3998,7 +4063,7 @@
       "mirror_of": null
     },
     "tile-prop-basketstack": {
-      "x": 1549,
+      "x": 1639,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4011,7 +4076,7 @@
       "mirror_of": null
     },
     "tile-prop-batterypack": {
-      "x": 1567,
+      "x": 1657,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4024,7 +4089,7 @@
       "mirror_of": null
     },
     "tile-prop-battlemat": {
-      "x": 1585,
+      "x": 1675,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4037,7 +4102,7 @@
       "mirror_of": null
     },
     "tile-prop-bed": {
-      "x": 1603,
+      "x": 1693,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4050,7 +4115,7 @@
       "mirror_of": null
     },
     "tile-prop-bench": {
-      "x": 1621,
+      "x": 1711,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4063,7 +4128,7 @@
       "mirror_of": null
     },
     "tile-prop-bikestand": {
-      "x": 1639,
+      "x": 1729,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4076,7 +4141,7 @@
       "mirror_of": null
     },
     "tile-prop-birdbath": {
-      "x": 1657,
+      "x": 1747,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4089,7 +4154,7 @@
       "mirror_of": null
     },
     "tile-prop-birdcage": {
-      "x": 1675,
+      "x": 1765,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4102,7 +4167,7 @@
       "mirror_of": null
     },
     "tile-prop-boardgames": {
-      "x": 1693,
+      "x": 1783,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4115,7 +4180,7 @@
       "mirror_of": null
     },
     "tile-prop-bonsai": {
-      "x": 1711,
+      "x": 1801,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4128,7 +4193,7 @@
       "mirror_of": null
     },
     "tile-prop-cabinbed": {
-      "x": 1729,
+      "x": 1819,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4141,7 +4206,7 @@
       "mirror_of": null
     },
     "tile-prop-cabintable": {
-      "x": 1747,
+      "x": 1837,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4154,7 +4219,7 @@
       "mirror_of": null
     },
     "tile-prop-candle": {
-      "x": 1765,
+      "x": 1855,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4167,7 +4232,7 @@
       "mirror_of": null
     },
     "tile-prop-cercrystal": {
-      "x": 1783,
+      "x": 1873,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4180,7 +4245,7 @@
       "mirror_of": null
     },
     "tile-prop-cershard": {
-      "x": 1801,
+      "x": 1891,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4193,7 +4258,7 @@
       "mirror_of": null
     },
     "tile-prop-chair": {
-      "x": 1819,
+      "x": 1909,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4206,7 +4271,7 @@
       "mirror_of": null
     },
     "tile-prop-chessboard": {
-      "x": 1837,
+      "x": 1927,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4219,7 +4284,7 @@
       "mirror_of": null
     },
     "tile-prop-coalscuttle": {
-      "x": 1855,
+      "x": 1945,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4232,7 +4297,7 @@
       "mirror_of": null
     },
     "tile-prop-contestarch": {
-      "x": 1873,
+      "x": 1963,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4245,7 +4310,7 @@
       "mirror_of": null
     },
     "tile-prop-contestdome": {
-      "x": 1891,
+      "x": 1981,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4258,7 +4323,7 @@
       "mirror_of": null
     },
     "tile-prop-cooler": {
-      "x": 1909,
+      "x": 1999,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4271,7 +4336,7 @@
       "mirror_of": null
     },
     "tile-prop-copier": {
-      "x": 1927,
+      "x": 2017,
       "y": 69,
       "w": 16,
       "h": 16,
@@ -4284,8 +4349,8 @@
       "mirror_of": null
     },
     "tile-prop-coral": {
-      "x": 1945,
-      "y": 69,
+      "x": 1,
+      "y": 87,
       "w": 16,
       "h": 16,
       "frames": [
@@ -4297,8 +4362,8 @@
       "mirror_of": null
     },
     "tile-prop-counter": {
-      "x": 1963,
-      "y": 69,
+      "x": 19,
+      "y": 87,
       "w": 16,
       "h": 16,
       "frames": [
@@ -4310,8 +4375,8 @@
       "mirror_of": null
     },
     "tile-prop-cradle": {
-      "x": 1981,
-      "y": 69,
+      "x": 37,
+      "y": 87,
       "w": 16,
       "h": 16,
       "frames": [
@@ -4323,8 +4388,8 @@
       "mirror_of": null
     },
     "tile-prop-crates": {
-      "x": 1999,
-      "y": 69,
+      "x": 55,
+      "y": 87,
       "w": 16,
       "h": 16,
       "frames": [
@@ -4336,8 +4401,8 @@
       "mirror_of": null
     },
     "tile-prop-crystalball": {
-      "x": 2017,
-      "y": 69,
+      "x": 73,
+      "y": 87,
       "w": 16,
       "h": 16,
       "frames": [
@@ -4349,7 +4414,7 @@
       "mirror_of": null
     },
     "tile-prop-crystalcluster": {
-      "x": 1,
+      "x": 91,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4362,7 +4427,7 @@
       "mirror_of": null
     },
     "tile-prop-cushion2": {
-      "x": 19,
+      "x": 109,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4375,7 +4440,7 @@
       "mirror_of": null
     },
     "tile-prop-drum": {
-      "x": 37,
+      "x": 127,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4388,7 +4453,7 @@
       "mirror_of": null
     },
     "tile-prop-easel": {
-      "x": 55,
+      "x": 145,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4401,7 +4466,7 @@
       "mirror_of": null
     },
     "tile-prop-feststand": {
-      "x": 73,
+      "x": 163,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4414,7 +4479,7 @@
       "mirror_of": null
     },
     "tile-prop-fireplace": {
-      "x": 91,
+      "x": 181,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4427,7 +4492,7 @@
       "mirror_of": null
     },
     "tile-prop-firewood": {
-      "x": 109,
+      "x": 199,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4440,7 +4505,7 @@
       "mirror_of": null
     },
     "tile-prop-focuslamp": {
-      "x": 127,
+      "x": 217,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4453,7 +4518,7 @@
       "mirror_of": null
     },
     "tile-prop-fossildisplay": {
-      "x": 145,
+      "x": 235,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4466,7 +4531,7 @@
       "mirror_of": null
     },
     "tile-prop-frostrock": {
-      "x": 163,
+      "x": 253,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4479,7 +4544,7 @@
       "mirror_of": null
     },
     "tile-prop-gamestation": {
-      "x": 181,
+      "x": 271,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4492,7 +4557,7 @@
       "mirror_of": null
     },
     "tile-prop-gascanister": {
-      "x": 199,
+      "x": 289,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4505,7 +4570,7 @@
       "mirror_of": null
     },
     "tile-prop-goods": {
-      "x": 217,
+      "x": 307,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4518,7 +4583,7 @@
       "mirror_of": null
     },
     "tile-prop-grandclock": {
-      "x": 235,
+      "x": 325,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4531,7 +4596,7 @@
       "mirror_of": null
     },
     "tile-prop-gspedestal": {
-      "x": 253,
+      "x": 343,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4544,7 +4609,7 @@
       "mirror_of": null
     },
     "tile-prop-harp": {
-      "x": 271,
+      "x": 361,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4557,7 +4622,7 @@
       "mirror_of": null
     },
     "tile-prop-haycart": {
-      "x": 289,
+      "x": 379,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4570,7 +4635,7 @@
       "mirror_of": null
     },
     "tile-prop-healmachine": {
-      "x": 307,
+      "x": 397,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4583,7 +4648,7 @@
       "mirror_of": null
     },
     "tile-prop-herbdryer": {
-      "x": 325,
+      "x": 415,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4596,7 +4661,7 @@
       "mirror_of": null
     },
     "tile-prop-honeytree": {
-      "x": 343,
+      "x": 433,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4609,7 +4674,7 @@
       "mirror_of": null
     },
     "tile-prop-iceboulder": {
-      "x": 361,
+      "x": 451,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4622,7 +4687,7 @@
       "mirror_of": null
     },
     "tile-prop-icecrystal": {
-      "x": 379,
+      "x": 469,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4635,7 +4700,7 @@
       "mirror_of": null
     },
     "tile-prop-ironarch": {
-      "x": 397,
+      "x": 487,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4648,7 +4713,7 @@
       "mirror_of": null
     },
     "tile-prop-jbell": {
-      "x": 415,
+      "x": 505,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4661,7 +4726,7 @@
       "mirror_of": null
     },
     "tile-prop-jshrine": {
-      "x": 433,
+      "x": 523,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4674,7 +4739,7 @@
       "mirror_of": null
     },
     "tile-prop-jwell": {
-      "x": 451,
+      "x": 541,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4687,7 +4752,7 @@
       "mirror_of": null
     },
     "tile-prop-kelp": {
-      "x": 469,
+      "x": 559,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4700,7 +4765,7 @@
       "mirror_of": null
     },
     "tile-prop-knittingbasket": {
-      "x": 487,
+      "x": 577,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4713,7 +4778,7 @@
       "mirror_of": null
     },
     "tile-prop-labdesk": {
-      "x": 505,
+      "x": 595,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4726,7 +4791,7 @@
       "mirror_of": null
     },
     "tile-prop-labmachine": {
-      "x": 523,
+      "x": 613,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4739,7 +4804,7 @@
       "mirror_of": null
     },
     "tile-prop-labtank": {
-      "x": 541,
+      "x": 631,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4752,7 +4817,7 @@
       "mirror_of": null
     },
     "tile-prop-lanternpost": {
-      "x": 559,
+      "x": 649,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4765,7 +4830,7 @@
       "mirror_of": null
     },
     "tile-prop-leafplanter": {
-      "x": 577,
+      "x": 667,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4778,7 +4843,7 @@
       "mirror_of": null
     },
     "tile-prop-lifering": {
-      "x": 595,
+      "x": 685,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4791,7 +4856,7 @@
       "mirror_of": null
     },
     "tile-prop-mapdesk": {
-      "x": 613,
+      "x": 703,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4804,7 +4869,7 @@
       "mirror_of": null
     },
     "tile-prop-maple": {
-      "x": 631,
+      "x": 721,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4816,8 +4881,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-prop-marshreed": {
+      "x": 739,
+      "y": 87,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-prop-martshelf": {
-      "x": 649,
+      "x": 757,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4830,7 +4908,7 @@
       "mirror_of": null
     },
     "tile-prop-memorial": {
-      "x": 667,
+      "x": 775,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4843,7 +4921,7 @@
       "mirror_of": null
     },
     "tile-prop-meteorstone": {
-      "x": 685,
+      "x": 793,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4856,7 +4934,7 @@
       "mirror_of": null
     },
     "tile-prop-miningcart": {
-      "x": 703,
+      "x": 811,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4869,7 +4947,7 @@
       "mirror_of": null
     },
     "tile-prop-officedesk": {
-      "x": 721,
+      "x": 829,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4881,8 +4959,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-prop-originstone": {
+      "x": 847,
+      "y": 87,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-prop-palm": {
-      "x": 739,
+      "x": 865,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4895,7 +4986,7 @@
       "mirror_of": null
     },
     "tile-prop-pcdesk": {
-      "x": 757,
+      "x": 883,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4908,7 +4999,7 @@
       "mirror_of": null
     },
     "tile-prop-piano": {
-      "x": 775,
+      "x": 901,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4921,7 +5012,7 @@
       "mirror_of": null
     },
     "tile-prop-pipecluster": {
-      "x": 793,
+      "x": 919,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4934,7 +5025,7 @@
       "mirror_of": null
     },
     "tile-prop-plant": {
-      "x": 811,
+      "x": 937,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4947,7 +5038,7 @@
       "mirror_of": null
     },
     "tile-prop-planter": {
-      "x": 829,
+      "x": 955,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4960,7 +5051,7 @@
       "mirror_of": null
     },
     "tile-prop-podium": {
-      "x": 847,
+      "x": 973,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4973,7 +5064,7 @@
       "mirror_of": null
     },
     "tile-prop-poolblock": {
-      "x": 865,
+      "x": 991,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4986,7 +5077,7 @@
       "mirror_of": null
     },
     "tile-prop-porthole": {
-      "x": 883,
+      "x": 1009,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -4999,7 +5090,7 @@
       "mirror_of": null
     },
     "tile-prop-postbox": {
-      "x": 901,
+      "x": 1027,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5012,7 +5103,7 @@
       "mirror_of": null
     },
     "tile-prop-pottedtree": {
-      "x": 919,
+      "x": 1045,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5025,7 +5116,7 @@
       "mirror_of": null
     },
     "tile-prop-potterswheel": {
-      "x": 937,
+      "x": 1063,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5038,7 +5129,7 @@
       "mirror_of": null
     },
     "tile-prop-psypod": {
-      "x": 955,
+      "x": 1081,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5051,7 +5142,7 @@
       "mirror_of": null
     },
     "tile-prop-quiltframe": {
-      "x": 973,
+      "x": 1099,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5064,7 +5155,7 @@
       "mirror_of": null
     },
     "tile-prop-redcarpet": {
-      "x": 991,
+      "x": 1117,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5077,7 +5168,7 @@
       "mirror_of": null
     },
     "tile-prop-rockinghorse": {
-      "x": 1009,
+      "x": 1135,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5090,7 +5181,7 @@
       "mirror_of": null
     },
     "tile-prop-rubble": {
-      "x": 1027,
+      "x": 1153,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5103,7 +5194,7 @@
       "mirror_of": null
     },
     "tile-prop-rug": {
-      "x": 1045,
+      "x": 1171,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5116,7 +5207,7 @@
       "mirror_of": null
     },
     "tile-prop-rug2": {
-      "x": 1063,
+      "x": 1189,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5129,7 +5220,7 @@
       "mirror_of": null
     },
     "tile-prop-rug3": {
-      "x": 1081,
+      "x": 1207,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5142,7 +5233,7 @@
       "mirror_of": null
     },
     "tile-prop-sacks": {
-      "x": 1099,
+      "x": 1225,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5155,7 +5246,7 @@
       "mirror_of": null
     },
     "tile-prop-sandcrate": {
-      "x": 1117,
+      "x": 1243,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5168,7 +5259,7 @@
       "mirror_of": null
     },
     "tile-prop-sealstone": {
-      "x": 1135,
+      "x": 1261,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5181,7 +5272,7 @@
       "mirror_of": null
     },
     "tile-prop-seedvault": {
-      "x": 1153,
+      "x": 1279,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5194,7 +5285,7 @@
       "mirror_of": null
     },
     "tile-prop-sewingtable": {
-      "x": 1171,
+      "x": 1297,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5207,7 +5298,7 @@
       "mirror_of": null
     },
     "tile-prop-shelf": {
-      "x": 1189,
+      "x": 1315,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5220,7 +5311,7 @@
       "mirror_of": null
     },
     "tile-prop-shelfend": {
-      "x": 1207,
+      "x": 1333,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5233,7 +5324,7 @@
       "mirror_of": null
     },
     "tile-prop-shrinegate": {
-      "x": 1225,
+      "x": 1351,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5246,7 +5337,7 @@
       "mirror_of": null
     },
     "tile-prop-shroomcap": {
-      "x": 1243,
+      "x": 1369,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5259,7 +5350,7 @@
       "mirror_of": null
     },
     "tile-prop-shroomglow": {
-      "x": 1261,
+      "x": 1387,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5272,7 +5363,7 @@
       "mirror_of": null
     },
     "tile-prop-signpost": {
-      "x": 1279,
+      "x": 1405,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5285,7 +5376,7 @@
       "mirror_of": null
     },
     "tile-prop-slotmachine": {
-      "x": 1297,
+      "x": 1423,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5298,7 +5389,7 @@
       "mirror_of": null
     },
     "tile-prop-snackmachine": {
-      "x": 1315,
+      "x": 1441,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5311,7 +5402,20 @@
       "mirror_of": null
     },
     "tile-prop-sofa": {
-      "x": 1333,
+      "x": 1459,
+      "y": 87,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-prop-solarpanel": {
+      "x": 1477,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5324,7 +5428,7 @@
       "mirror_of": null
     },
     "tile-prop-spicerack": {
-      "x": 1351,
+      "x": 1495,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5337,7 +5441,7 @@
       "mirror_of": null
     },
     "tile-prop-stadiumcrest": {
-      "x": 1369,
+      "x": 1513,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5350,7 +5454,7 @@
       "mirror_of": null
     },
     "tile-prop-stall": {
-      "x": 1387,
+      "x": 1531,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5363,7 +5467,7 @@
       "mirror_of": null
     },
     "tile-prop-starglobe": {
-      "x": 1405,
+      "x": 1549,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5376,7 +5480,7 @@
       "mirror_of": null
     },
     "tile-prop-starrock": {
-      "x": 1423,
+      "x": 1567,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5389,7 +5493,7 @@
       "mirror_of": null
     },
     "tile-prop-statue": {
-      "x": 1441,
+      "x": 1585,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5402,7 +5506,7 @@
       "mirror_of": null
     },
     "tile-prop-stonebell": {
-      "x": 1459,
+      "x": 1603,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5415,7 +5519,7 @@
       "mirror_of": null
     },
     "tile-prop-stool": {
-      "x": 1477,
+      "x": 1621,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5428,7 +5532,7 @@
       "mirror_of": null
     },
     "tile-prop-sundial": {
-      "x": 1495,
+      "x": 1639,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5441,7 +5545,7 @@
       "mirror_of": null
     },
     "tile-prop-supportbeam": {
-      "x": 1513,
+      "x": 1657,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5454,7 +5558,7 @@
       "mirror_of": null
     },
     "tile-prop-switchboard": {
-      "x": 1531,
+      "x": 1675,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5467,7 +5571,7 @@
       "mirror_of": null
     },
     "tile-prop-table": {
-      "x": 1549,
+      "x": 1693,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5480,7 +5584,7 @@
       "mirror_of": null
     },
     "tile-prop-teacart": {
-      "x": 1567,
+      "x": 1711,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5493,7 +5597,7 @@
       "mirror_of": null
     },
     "tile-prop-telescope": {
-      "x": 1585,
+      "x": 1729,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5506,7 +5610,7 @@
       "mirror_of": null
     },
     "tile-prop-thornpost": {
-      "x": 1603,
+      "x": 1747,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5519,7 +5623,7 @@
       "mirror_of": null
     },
     "tile-prop-throne": {
-      "x": 1621,
+      "x": 1765,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5532,7 +5636,7 @@
       "mirror_of": null
     },
     "tile-prop-tombstone": {
-      "x": 1639,
+      "x": 1783,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5545,7 +5649,7 @@
       "mirror_of": null
     },
     "tile-prop-toolbench": {
-      "x": 1657,
+      "x": 1801,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5558,7 +5662,7 @@
       "mirror_of": null
     },
     "tile-prop-torchpost": {
-      "x": 1675,
+      "x": 1819,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5571,7 +5675,7 @@
       "mirror_of": null
     },
     "tile-prop-trainingbag": {
-      "x": 1693,
+      "x": 1837,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5584,7 +5688,7 @@
       "mirror_of": null
     },
     "tile-prop-trainset": {
-      "x": 1711,
+      "x": 1855,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5597,7 +5701,7 @@
       "mirror_of": null
     },
     "tile-prop-trophycase": {
-      "x": 1729,
+      "x": 1873,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5610,7 +5714,7 @@
       "mirror_of": null
     },
     "tile-prop-tub": {
-      "x": 1747,
+      "x": 1891,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5623,7 +5727,7 @@
       "mirror_of": null
     },
     "tile-prop-typewriter": {
-      "x": 1765,
+      "x": 1909,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5636,7 +5740,7 @@
       "mirror_of": null
     },
     "tile-prop-urn": {
-      "x": 1783,
+      "x": 1927,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5649,7 +5753,7 @@
       "mirror_of": null
     },
     "tile-prop-uwcoral": {
-      "x": 1801,
+      "x": 1945,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5662,7 +5766,7 @@
       "mirror_of": null
     },
     "tile-prop-vinepost": {
-      "x": 1819,
+      "x": 1963,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5675,7 +5779,7 @@
       "mirror_of": null
     },
     "tile-prop-violin": {
-      "x": 1837,
+      "x": 1981,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5688,7 +5792,7 @@
       "mirror_of": null
     },
     "tile-prop-waitbench": {
-      "x": 1855,
+      "x": 1999,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5701,7 +5805,7 @@
       "mirror_of": null
     },
     "tile-prop-waterpump": {
-      "x": 1873,
+      "x": 2017,
       "y": 87,
       "w": 16,
       "h": 16,
@@ -5714,8 +5818,8 @@
       "mirror_of": null
     },
     "tile-prop-well": {
-      "x": 1891,
-      "y": 87,
+      "x": 1,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5727,8 +5831,8 @@
       "mirror_of": null
     },
     "tile-prop-windmill": {
-      "x": 1909,
-      "y": 87,
+      "x": 19,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5740,8 +5844,8 @@
       "mirror_of": null
     },
     "tile-prop-workdesk": {
-      "x": 1927,
-      "y": 87,
+      "x": 37,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5753,8 +5857,8 @@
       "mirror_of": null
     },
     "tile-rock-2": {
-      "x": 1945,
-      "y": 87,
+      "x": 55,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5766,8 +5870,8 @@
       "mirror_of": null
     },
     "tile-rock-3": {
-      "x": 1963,
-      "y": 87,
+      "x": 73,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5779,8 +5883,8 @@
       "mirror_of": null
     },
     "tile-rock": {
-      "x": 1981,
-      "y": 87,
+      "x": 91,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5792,8 +5896,8 @@
       "mirror_of": null
     },
     "tile-roof-center-l": {
-      "x": 1999,
-      "y": 87,
+      "x": 109,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5805,8 +5909,8 @@
       "mirror_of": null
     },
     "tile-roof-center-m": {
-      "x": 2017,
-      "y": 87,
+      "x": 127,
+      "y": 105,
       "w": 16,
       "h": 16,
       "frames": [
@@ -5818,7 +5922,7 @@
       "mirror_of": null
     },
     "tile-roof-center-r": {
-      "x": 1,
+      "x": 145,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5831,7 +5935,7 @@
       "mirror_of": null
     },
     "tile-roof-slate-l": {
-      "x": 19,
+      "x": 163,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5844,7 +5948,7 @@
       "mirror_of": null
     },
     "tile-roof-slate-m": {
-      "x": 37,
+      "x": 181,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5857,7 +5961,7 @@
       "mirror_of": null
     },
     "tile-roof-slate-r": {
-      "x": 55,
+      "x": 199,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5870,7 +5974,7 @@
       "mirror_of": null
     },
     "tile-roof-teal-l": {
-      "x": 73,
+      "x": 217,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5883,7 +5987,7 @@
       "mirror_of": null
     },
     "tile-roof-teal-m": {
-      "x": 91,
+      "x": 235,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5896,7 +6000,7 @@
       "mirror_of": null
     },
     "tile-roof-teal-r": {
-      "x": 109,
+      "x": 253,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5909,7 +6013,7 @@
       "mirror_of": null
     },
     "tile-roof-terra-chimney": {
-      "x": 127,
+      "x": 271,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5922,7 +6026,7 @@
       "mirror_of": null
     },
     "tile-roof-terra-l": {
-      "x": 145,
+      "x": 289,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5935,7 +6039,7 @@
       "mirror_of": null
     },
     "tile-roof-terra-m": {
-      "x": 163,
+      "x": 307,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5948,7 +6052,7 @@
       "mirror_of": null
     },
     "tile-roof-terra-r": {
-      "x": 181,
+      "x": 325,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5961,7 +6065,7 @@
       "mirror_of": null
     },
     "tile-sand": {
-      "x": 199,
+      "x": 343,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5974,7 +6078,7 @@
       "mirror_of": null
     },
     "tile-seasand": {
-      "x": 217,
+      "x": 361,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -5987,7 +6091,7 @@
       "mirror_of": null
     },
     "tile-shadow-boulder": {
-      "x": 235,
+      "x": 379,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6000,7 +6104,7 @@
       "mirror_of": null
     },
     "tile-shadow-e": {
-      "x": 253,
+      "x": 397,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6013,7 +6117,7 @@
       "mirror_of": null
     },
     "tile-shadow-e2": {
-      "x": 271,
+      "x": 415,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6026,7 +6130,7 @@
       "mirror_of": null
     },
     "tile-shadow-l": {
-      "x": 289,
+      "x": 433,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6039,7 +6143,7 @@
       "mirror_of": null
     },
     "tile-shadow-l2": {
-      "x": 307,
+      "x": 451,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6052,7 +6156,7 @@
       "mirror_of": null
     },
     "tile-shadow-prop": {
-      "x": 325,
+      "x": 469,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6065,7 +6169,7 @@
       "mirror_of": null
     },
     "tile-shadow-rock": {
-      "x": 343,
+      "x": 487,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6078,7 +6182,7 @@
       "mirror_of": null
     },
     "tile-shadow-scap": {
-      "x": 361,
+      "x": 505,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6091,7 +6195,7 @@
       "mirror_of": null
     },
     "tile-shadow-scap2": {
-      "x": 379,
+      "x": 523,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6104,7 +6208,7 @@
       "mirror_of": null
     },
     "tile-shadow-se": {
-      "x": 397,
+      "x": 541,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6117,7 +6221,7 @@
       "mirror_of": null
     },
     "tile-shadow-se2": {
-      "x": 415,
+      "x": 559,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6130,7 +6234,7 @@
       "mirror_of": null
     },
     "tile-shadow-tree-1": {
-      "x": 433,
+      "x": 577,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6143,7 +6247,7 @@
       "mirror_of": null
     },
     "tile-shadow-tree-2": {
-      "x": 451,
+      "x": 595,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6156,7 +6260,7 @@
       "mirror_of": null
     },
     "tile-shadow-tree-3": {
-      "x": 469,
+      "x": 613,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6169,7 +6273,7 @@
       "mirror_of": null
     },
     "tile-shadow-tree-4": {
-      "x": 487,
+      "x": 631,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6182,7 +6286,7 @@
       "mirror_of": null
     },
     "tile-shadow-tree-5": {
-      "x": 505,
+      "x": 649,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6195,7 +6299,7 @@
       "mirror_of": null
     },
     "tile-shadow-tree-6": {
-      "x": 523,
+      "x": 667,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6208,7 +6312,7 @@
       "mirror_of": null
     },
     "tile-shadow-tree-7": {
-      "x": 541,
+      "x": 685,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6221,7 +6325,7 @@
       "mirror_of": null
     },
     "tile-shadow": {
-      "x": 559,
+      "x": 703,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6234,7 +6338,7 @@
       "mirror_of": null
     },
     "tile-shore-e": {
-      "x": 577,
+      "x": 721,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6247,7 +6351,7 @@
       "mirror_of": null
     },
     "tile-shore-n": {
-      "x": 595,
+      "x": 739,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6260,7 +6364,7 @@
       "mirror_of": null
     },
     "tile-shore-s": {
-      "x": 613,
+      "x": 757,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6273,7 +6377,7 @@
       "mirror_of": null
     },
     "tile-shore-w": {
-      "x": 631,
+      "x": 775,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6286,7 +6390,7 @@
       "mirror_of": null
     },
     "tile-shorepulse-1": {
-      "x": 649,
+      "x": 793,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6299,7 +6403,7 @@
       "mirror_of": null
     },
     "tile-shorepulse-2": {
-      "x": 667,
+      "x": 811,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6312,7 +6416,7 @@
       "mirror_of": null
     },
     "tile-shorepulse-3": {
-      "x": 685,
+      "x": 829,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6325,7 +6429,7 @@
       "mirror_of": null
     },
     "tile-shorepulse-4": {
-      "x": 703,
+      "x": 847,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6338,7 +6442,7 @@
       "mirror_of": null
     },
     "tile-shrinefloor": {
-      "x": 721,
+      "x": 865,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6351,7 +6455,7 @@
       "mirror_of": null
     },
     "tile-shrinewall": {
-      "x": 739,
+      "x": 883,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6364,7 +6468,7 @@
       "mirror_of": null
     },
     "tile-sign-center-lit": {
-      "x": 757,
+      "x": 901,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6377,7 +6481,7 @@
       "mirror_of": null
     },
     "tile-sign-center": {
-      "x": 775,
+      "x": 919,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6390,7 +6494,7 @@
       "mirror_of": null
     },
     "tile-sign-gym": {
-      "x": 793,
+      "x": 937,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6403,7 +6507,7 @@
       "mirror_of": null
     },
     "tile-sign-lab": {
-      "x": 811,
+      "x": 955,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6416,7 +6520,7 @@
       "mirror_of": null
     },
     "tile-sign-mart": {
-      "x": 829,
+      "x": 973,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6429,7 +6533,7 @@
       "mirror_of": null
     },
     "tile-sign": {
-      "x": 847,
+      "x": 991,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6442,7 +6546,7 @@
       "mirror_of": null
     },
     "tile-silphfloor-1": {
-      "x": 865,
+      "x": 1009,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6455,7 +6559,7 @@
       "mirror_of": null
     },
     "tile-silphfloor-2": {
-      "x": 883,
+      "x": 1027,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6468,7 +6572,7 @@
       "mirror_of": null
     },
     "tile-silphfloor-3": {
-      "x": 901,
+      "x": 1045,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6481,7 +6585,7 @@
       "mirror_of": null
     },
     "tile-silphfloor-4": {
-      "x": 919,
+      "x": 1063,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6494,7 +6598,7 @@
       "mirror_of": null
     },
     "tile-silphwall-2": {
-      "x": 937,
+      "x": 1081,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6507,7 +6611,7 @@
       "mirror_of": null
     },
     "tile-silphwall": {
-      "x": 955,
+      "x": 1099,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6520,7 +6624,7 @@
       "mirror_of": null
     },
     "tile-smoke-grey-1": {
-      "x": 973,
+      "x": 1117,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6533,7 +6637,7 @@
       "mirror_of": null
     },
     "tile-smoke-grey-2": {
-      "x": 991,
+      "x": 1135,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6546,7 +6650,7 @@
       "mirror_of": null
     },
     "tile-smoke-grey-3": {
-      "x": 1009,
+      "x": 1153,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6559,7 +6663,7 @@
       "mirror_of": null
     },
     "tile-smoke-warm-1": {
-      "x": 1027,
+      "x": 1171,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6572,7 +6676,7 @@
       "mirror_of": null
     },
     "tile-smoke-warm-2": {
-      "x": 1045,
+      "x": 1189,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6585,7 +6689,7 @@
       "mirror_of": null
     },
     "tile-smoke-warm-3": {
-      "x": 1063,
+      "x": 1207,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6598,7 +6702,7 @@
       "mirror_of": null
     },
     "tile-stadiumfloor": {
-      "x": 1081,
+      "x": 1225,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6611,7 +6715,7 @@
       "mirror_of": null
     },
     "tile-stadiumwall": {
-      "x": 1099,
+      "x": 1243,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6624,7 +6728,7 @@
       "mirror_of": null
     },
     "tile-stalactite": {
-      "x": 1117,
+      "x": 1261,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6637,7 +6741,7 @@
       "mirror_of": null
     },
     "tile-step": {
-      "x": 1135,
+      "x": 1279,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6650,7 +6754,7 @@
       "mirror_of": null
     },
     "tile-stratafloor": {
-      "x": 1153,
+      "x": 1297,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6663,7 +6767,7 @@
       "mirror_of": null
     },
     "tile-stratwall": {
-      "x": 1171,
+      "x": 1315,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6676,7 +6780,7 @@
       "mirror_of": null
     },
     "tile-sway-a-1": {
-      "x": 1189,
+      "x": 1333,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6689,7 +6793,7 @@
       "mirror_of": null
     },
     "tile-sway-a-2": {
-      "x": 1207,
+      "x": 1351,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6702,7 +6806,7 @@
       "mirror_of": null
     },
     "tile-sway-a-3": {
-      "x": 1225,
+      "x": 1369,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6715,7 +6819,7 @@
       "mirror_of": null
     },
     "tile-sway-b-1": {
-      "x": 1243,
+      "x": 1387,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6728,7 +6832,7 @@
       "mirror_of": null
     },
     "tile-sway-b-2": {
-      "x": 1261,
+      "x": 1405,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6741,7 +6845,7 @@
       "mirror_of": null
     },
     "tile-sway-b-3": {
-      "x": 1279,
+      "x": 1423,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6754,7 +6858,7 @@
       "mirror_of": null
     },
     "tile-tallgrass-1": {
-      "x": 1297,
+      "x": 1441,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6767,7 +6871,7 @@
       "mirror_of": null
     },
     "tile-tallgrass-2": {
-      "x": 1315,
+      "x": 1459,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6780,7 +6884,7 @@
       "mirror_of": null
     },
     "tile-tallgrass-3": {
-      "x": 1333,
+      "x": 1477,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6793,7 +6897,7 @@
       "mirror_of": null
     },
     "tile-tallgrass-4": {
-      "x": 1351,
+      "x": 1495,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6806,7 +6910,7 @@
       "mirror_of": null
     },
     "tile-tallgrass-5": {
-      "x": 1369,
+      "x": 1513,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6819,7 +6923,7 @@
       "mirror_of": null
     },
     "tile-tallgrass-6": {
-      "x": 1387,
+      "x": 1531,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6832,7 +6936,7 @@
       "mirror_of": null
     },
     "tile-tc-azalea": {
-      "x": 1405,
+      "x": 1549,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6845,7 +6949,7 @@
       "mirror_of": null
     },
     "tile-tc-blackthorn": {
-      "x": 1423,
+      "x": 1567,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6858,7 +6962,7 @@
       "mirror_of": null
     },
     "tile-tc-canalave": {
-      "x": 1441,
+      "x": 1585,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6871,7 +6975,7 @@
       "mirror_of": null
     },
     "tile-tc-celadon": {
-      "x": 1459,
+      "x": 1603,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6883,8 +6987,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tc-celestic": {
+      "x": 1621,
+      "y": 105,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tc-cerulean": {
-      "x": 1477,
+      "x": 1639,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6897,7 +7014,7 @@
       "mirror_of": null
     },
     "tile-tc-cherrygrove": {
-      "x": 1495,
+      "x": 1657,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6910,7 +7027,7 @@
       "mirror_of": null
     },
     "tile-tc-cianwood": {
-      "x": 1513,
+      "x": 1675,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6923,7 +7040,7 @@
       "mirror_of": null
     },
     "tile-tc-cinnabar": {
-      "x": 1531,
+      "x": 1693,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6936,7 +7053,7 @@
       "mirror_of": null
     },
     "tile-tc-dewford": {
-      "x": 1549,
+      "x": 1711,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6949,7 +7066,7 @@
       "mirror_of": null
     },
     "tile-tc-ecruteak": {
-      "x": 1567,
+      "x": 1729,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6962,7 +7079,7 @@
       "mirror_of": null
     },
     "tile-tc-eterna": {
-      "x": 1585,
+      "x": 1747,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6975,7 +7092,7 @@
       "mirror_of": null
     },
     "tile-tc-evergrande": {
-      "x": 1603,
+      "x": 1765,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -6988,7 +7105,7 @@
       "mirror_of": null
     },
     "tile-tc-fallarbor": {
-      "x": 1621,
+      "x": 1783,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7001,7 +7118,7 @@
       "mirror_of": null
     },
     "tile-tc-floaroma": {
-      "x": 1639,
+      "x": 1801,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7014,7 +7131,7 @@
       "mirror_of": null
     },
     "tile-tc-fortree": {
-      "x": 1657,
+      "x": 1819,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7027,7 +7144,7 @@
       "mirror_of": null
     },
     "tile-tc-fuchsia": {
-      "x": 1675,
+      "x": 1837,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7040,7 +7157,7 @@
       "mirror_of": null
     },
     "tile-tc-goldenrod": {
-      "x": 1693,
+      "x": 1855,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7053,7 +7170,7 @@
       "mirror_of": null
     },
     "tile-tc-hearthome": {
-      "x": 1711,
+      "x": 1873,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7066,7 +7183,7 @@
       "mirror_of": null
     },
     "tile-tc-indigo": {
-      "x": 1729,
+      "x": 1891,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7079,7 +7196,7 @@
       "mirror_of": null
     },
     "tile-tc-jubilife": {
-      "x": 1747,
+      "x": 1909,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7092,7 +7209,7 @@
       "mirror_of": null
     },
     "tile-tc-lavaridge": {
-      "x": 1765,
+      "x": 1927,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7105,7 +7222,7 @@
       "mirror_of": null
     },
     "tile-tc-lavender": {
-      "x": 1783,
+      "x": 1945,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7118,7 +7235,7 @@
       "mirror_of": null
     },
     "tile-tc-lilycove": {
-      "x": 1801,
+      "x": 1963,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7131,7 +7248,7 @@
       "mirror_of": null
     },
     "tile-tc-littleroot": {
-      "x": 1819,
+      "x": 1981,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7144,7 +7261,7 @@
       "mirror_of": null
     },
     "tile-tc-mahogany": {
-      "x": 1837,
+      "x": 1999,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7157,7 +7274,7 @@
       "mirror_of": null
     },
     "tile-tc-mauville": {
-      "x": 1855,
+      "x": 2017,
       "y": 105,
       "w": 16,
       "h": 16,
@@ -7170,8 +7287,8 @@
       "mirror_of": null
     },
     "tile-tc-mossdeep": {
-      "x": 1873,
-      "y": 105,
+      "x": 1,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7183,8 +7300,8 @@
       "mirror_of": null
     },
     "tile-tc-newbark": {
-      "x": 1891,
-      "y": 105,
+      "x": 19,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7196,8 +7313,8 @@
       "mirror_of": null
     },
     "tile-tc-oldale": {
-      "x": 1909,
-      "y": 105,
+      "x": 37,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7209,8 +7326,8 @@
       "mirror_of": null
     },
     "tile-tc-olivine": {
-      "x": 1927,
-      "y": 105,
+      "x": 55,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7222,8 +7339,8 @@
       "mirror_of": null
     },
     "tile-tc-oreburgh": {
-      "x": 1945,
-      "y": 105,
+      "x": 73,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7235,8 +7352,8 @@
       "mirror_of": null
     },
     "tile-tc-pacifidlog": {
-      "x": 1963,
-      "y": 105,
+      "x": 91,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7248,8 +7365,8 @@
       "mirror_of": null
     },
     "tile-tc-pallet": {
-      "x": 1981,
-      "y": 105,
+      "x": 109,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7260,9 +7377,22 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tc-pastoria": {
+      "x": 127,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tc-petalburg": {
-      "x": 1999,
-      "y": 105,
+      "x": 145,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7274,8 +7404,8 @@
       "mirror_of": null
     },
     "tile-tc-pewter": {
-      "x": 2017,
-      "y": 105,
+      "x": 163,
+      "y": 123,
       "w": 16,
       "h": 16,
       "frames": [
@@ -7287,7 +7417,7 @@
       "mirror_of": null
     },
     "tile-tc-rustboro": {
-      "x": 1,
+      "x": 181,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7300,7 +7430,7 @@
       "mirror_of": null
     },
     "tile-tc-saffron": {
-      "x": 19,
+      "x": 199,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7313,7 +7443,7 @@
       "mirror_of": null
     },
     "tile-tc-sandgem": {
-      "x": 37,
+      "x": 217,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7326,7 +7456,7 @@
       "mirror_of": null
     },
     "tile-tc-silvertown": {
-      "x": 55,
+      "x": 235,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7339,7 +7469,20 @@
       "mirror_of": null
     },
     "tile-tc-slateport": {
-      "x": 73,
+      "x": 253,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tc-snowpoint": {
+      "x": 271,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7352,7 +7495,7 @@
       "mirror_of": null
     },
     "tile-tc-solaceon": {
-      "x": 91,
+      "x": 289,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7365,7 +7508,20 @@
       "mirror_of": null
     },
     "tile-tc-sootopolis": {
-      "x": 109,
+      "x": 307,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tc-sunnyshore": {
+      "x": 325,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7378,7 +7534,7 @@
       "mirror_of": null
     },
     "tile-tc-twinleaf": {
-      "x": 127,
+      "x": 343,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7391,7 +7547,7 @@
       "mirror_of": null
     },
     "tile-tc-veilstone": {
-      "x": 145,
+      "x": 361,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7404,7 +7560,7 @@
       "mirror_of": null
     },
     "tile-tc-verdanturf": {
-      "x": 163,
+      "x": 379,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7417,7 +7573,7 @@
       "mirror_of": null
     },
     "tile-tc-vermilion": {
-      "x": 181,
+      "x": 397,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7430,7 +7586,7 @@
       "mirror_of": null
     },
     "tile-tc-violet": {
-      "x": 199,
+      "x": 415,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7443,7 +7599,7 @@
       "mirror_of": null
     },
     "tile-tc-viridian": {
-      "x": 217,
+      "x": 433,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7456,7 +7612,7 @@
       "mirror_of": null
     },
     "tile-tc2-celadon": {
-      "x": 235,
+      "x": 451,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7469,7 +7625,7 @@
       "mirror_of": null
     },
     "tile-tc2-cerulean": {
-      "x": 253,
+      "x": 469,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7482,7 +7638,7 @@
       "mirror_of": null
     },
     "tile-tc2-cinnabar": {
-      "x": 271,
+      "x": 487,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7495,7 +7651,7 @@
       "mirror_of": null
     },
     "tile-tc2-fuchsia": {
-      "x": 289,
+      "x": 505,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7508,7 +7664,7 @@
       "mirror_of": null
     },
     "tile-tc2-indigo": {
-      "x": 307,
+      "x": 523,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7521,7 +7677,7 @@
       "mirror_of": null
     },
     "tile-tc2-lavender": {
-      "x": 325,
+      "x": 541,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7534,7 +7690,7 @@
       "mirror_of": null
     },
     "tile-tc2-pallet": {
-      "x": 343,
+      "x": 559,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7547,7 +7703,7 @@
       "mirror_of": null
     },
     "tile-tc2-pewter": {
-      "x": 361,
+      "x": 577,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7560,7 +7716,7 @@
       "mirror_of": null
     },
     "tile-tc2-saffron": {
-      "x": 379,
+      "x": 595,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7573,7 +7729,7 @@
       "mirror_of": null
     },
     "tile-tc2-vermilion": {
-      "x": 397,
+      "x": 613,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7586,7 +7742,7 @@
       "mirror_of": null
     },
     "tile-tc2-viridian": {
-      "x": 415,
+      "x": 631,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7599,7 +7755,7 @@
       "mirror_of": null
     },
     "tile-td-azalea": {
-      "x": 433,
+      "x": 649,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7612,7 +7768,7 @@
       "mirror_of": null
     },
     "tile-td-blackthorn": {
-      "x": 451,
+      "x": 667,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7625,7 +7781,7 @@
       "mirror_of": null
     },
     "tile-td-canalave": {
-      "x": 469,
+      "x": 685,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7638,7 +7794,7 @@
       "mirror_of": null
     },
     "tile-td-celadon": {
-      "x": 487,
+      "x": 703,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7650,8 +7806,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-td-celestic": {
+      "x": 721,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-td-cerulean": {
-      "x": 505,
+      "x": 739,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7664,7 +7833,7 @@
       "mirror_of": null
     },
     "tile-td-cherrygrove": {
-      "x": 523,
+      "x": 757,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7677,7 +7846,7 @@
       "mirror_of": null
     },
     "tile-td-cianwood": {
-      "x": 541,
+      "x": 775,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7690,7 +7859,7 @@
       "mirror_of": null
     },
     "tile-td-cinnabar": {
-      "x": 559,
+      "x": 793,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7703,7 +7872,7 @@
       "mirror_of": null
     },
     "tile-td-dewford": {
-      "x": 577,
+      "x": 811,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7716,7 +7885,7 @@
       "mirror_of": null
     },
     "tile-td-ecruteak": {
-      "x": 595,
+      "x": 829,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7729,7 +7898,7 @@
       "mirror_of": null
     },
     "tile-td-eterna": {
-      "x": 613,
+      "x": 847,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7742,7 +7911,7 @@
       "mirror_of": null
     },
     "tile-td-evergrande": {
-      "x": 631,
+      "x": 865,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7755,7 +7924,7 @@
       "mirror_of": null
     },
     "tile-td-fallarbor": {
-      "x": 649,
+      "x": 883,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7768,7 +7937,7 @@
       "mirror_of": null
     },
     "tile-td-floaroma": {
-      "x": 667,
+      "x": 901,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7781,7 +7950,7 @@
       "mirror_of": null
     },
     "tile-td-fortree": {
-      "x": 685,
+      "x": 919,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7794,7 +7963,7 @@
       "mirror_of": null
     },
     "tile-td-fuchsia": {
-      "x": 703,
+      "x": 937,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7807,7 +7976,7 @@
       "mirror_of": null
     },
     "tile-td-goldenrod": {
-      "x": 721,
+      "x": 955,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7820,7 +7989,7 @@
       "mirror_of": null
     },
     "tile-td-hearthome": {
-      "x": 739,
+      "x": 973,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7833,7 +8002,7 @@
       "mirror_of": null
     },
     "tile-td-indigo": {
-      "x": 757,
+      "x": 991,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7846,7 +8015,7 @@
       "mirror_of": null
     },
     "tile-td-jubilife": {
-      "x": 775,
+      "x": 1009,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7859,7 +8028,7 @@
       "mirror_of": null
     },
     "tile-td-lavaridge": {
-      "x": 793,
+      "x": 1027,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7872,7 +8041,7 @@
       "mirror_of": null
     },
     "tile-td-lavender": {
-      "x": 811,
+      "x": 1045,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7885,7 +8054,7 @@
       "mirror_of": null
     },
     "tile-td-lilycove": {
-      "x": 829,
+      "x": 1063,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7898,7 +8067,7 @@
       "mirror_of": null
     },
     "tile-td-littleroot": {
-      "x": 847,
+      "x": 1081,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7911,7 +8080,7 @@
       "mirror_of": null
     },
     "tile-td-mahogany": {
-      "x": 865,
+      "x": 1099,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7924,7 +8093,7 @@
       "mirror_of": null
     },
     "tile-td-mauville": {
-      "x": 883,
+      "x": 1117,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7937,7 +8106,7 @@
       "mirror_of": null
     },
     "tile-td-mossdeep": {
-      "x": 901,
+      "x": 1135,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7950,7 +8119,7 @@
       "mirror_of": null
     },
     "tile-td-newbark": {
-      "x": 919,
+      "x": 1153,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7963,7 +8132,7 @@
       "mirror_of": null
     },
     "tile-td-oldale": {
-      "x": 937,
+      "x": 1171,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7976,7 +8145,7 @@
       "mirror_of": null
     },
     "tile-td-olivine": {
-      "x": 955,
+      "x": 1189,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -7989,7 +8158,7 @@
       "mirror_of": null
     },
     "tile-td-oreburgh": {
-      "x": 973,
+      "x": 1207,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8002,7 +8171,7 @@
       "mirror_of": null
     },
     "tile-td-pacifidlog": {
-      "x": 991,
+      "x": 1225,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8015,7 +8184,7 @@
       "mirror_of": null
     },
     "tile-td-pallet": {
-      "x": 1009,
+      "x": 1243,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8027,8 +8196,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-td-pastoria": {
+      "x": 1261,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-td-petalburg": {
-      "x": 1027,
+      "x": 1279,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8041,7 +8223,7 @@
       "mirror_of": null
     },
     "tile-td-pewter": {
-      "x": 1045,
+      "x": 1297,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8054,7 +8236,7 @@
       "mirror_of": null
     },
     "tile-td-rustboro": {
-      "x": 1063,
+      "x": 1315,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8067,7 +8249,7 @@
       "mirror_of": null
     },
     "tile-td-saffron": {
-      "x": 1081,
+      "x": 1333,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8080,7 +8262,7 @@
       "mirror_of": null
     },
     "tile-td-sandgem": {
-      "x": 1099,
+      "x": 1351,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8093,7 +8275,7 @@
       "mirror_of": null
     },
     "tile-td-silvertown": {
-      "x": 1117,
+      "x": 1369,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8106,7 +8288,20 @@
       "mirror_of": null
     },
     "tile-td-slateport": {
-      "x": 1135,
+      "x": 1387,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-td-snowpoint": {
+      "x": 1405,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8119,7 +8314,7 @@
       "mirror_of": null
     },
     "tile-td-solaceon": {
-      "x": 1153,
+      "x": 1423,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8132,7 +8327,20 @@
       "mirror_of": null
     },
     "tile-td-sootopolis": {
-      "x": 1171,
+      "x": 1441,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-td-sunnyshore": {
+      "x": 1459,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8145,7 +8353,7 @@
       "mirror_of": null
     },
     "tile-td-twinleaf": {
-      "x": 1189,
+      "x": 1477,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8158,7 +8366,7 @@
       "mirror_of": null
     },
     "tile-td-veilstone": {
-      "x": 1207,
+      "x": 1495,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8171,7 +8379,7 @@
       "mirror_of": null
     },
     "tile-td-verdanturf": {
-      "x": 1225,
+      "x": 1513,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8184,7 +8392,7 @@
       "mirror_of": null
     },
     "tile-td-vermilion": {
-      "x": 1243,
+      "x": 1531,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8197,7 +8405,7 @@
       "mirror_of": null
     },
     "tile-td-violet": {
-      "x": 1261,
+      "x": 1549,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8210,7 +8418,7 @@
       "mirror_of": null
     },
     "tile-td-viridian": {
-      "x": 1279,
+      "x": 1567,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8223,7 +8431,7 @@
       "mirror_of": null
     },
     "tile-tg-azalea": {
-      "x": 1297,
+      "x": 1585,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8236,7 +8444,7 @@
       "mirror_of": null
     },
     "tile-tg-blackthorn": {
-      "x": 1315,
+      "x": 1603,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8249,7 +8457,7 @@
       "mirror_of": null
     },
     "tile-tg-canalave": {
-      "x": 1333,
+      "x": 1621,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8262,7 +8470,7 @@
       "mirror_of": null
     },
     "tile-tg-celadon": {
-      "x": 1351,
+      "x": 1639,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8274,8 +8482,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tg-celestic": {
+      "x": 1657,
+      "y": 123,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tg-cerulean": {
-      "x": 1369,
+      "x": 1675,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8288,7 +8509,7 @@
       "mirror_of": null
     },
     "tile-tg-cherrygrove": {
-      "x": 1387,
+      "x": 1693,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8301,7 +8522,7 @@
       "mirror_of": null
     },
     "tile-tg-cianwood": {
-      "x": 1405,
+      "x": 1711,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8314,7 +8535,7 @@
       "mirror_of": null
     },
     "tile-tg-cinnabar": {
-      "x": 1423,
+      "x": 1729,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8327,7 +8548,7 @@
       "mirror_of": null
     },
     "tile-tg-dewford": {
-      "x": 1441,
+      "x": 1747,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8340,7 +8561,7 @@
       "mirror_of": null
     },
     "tile-tg-ecruteak": {
-      "x": 1459,
+      "x": 1765,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8353,7 +8574,7 @@
       "mirror_of": null
     },
     "tile-tg-eterna": {
-      "x": 1477,
+      "x": 1783,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8366,7 +8587,7 @@
       "mirror_of": null
     },
     "tile-tg-evergrande": {
-      "x": 1495,
+      "x": 1801,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8379,7 +8600,7 @@
       "mirror_of": null
     },
     "tile-tg-fallarbor": {
-      "x": 1513,
+      "x": 1819,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8392,7 +8613,7 @@
       "mirror_of": null
     },
     "tile-tg-floaroma": {
-      "x": 1531,
+      "x": 1837,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8405,7 +8626,7 @@
       "mirror_of": null
     },
     "tile-tg-fortree": {
-      "x": 1549,
+      "x": 1855,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8418,7 +8639,7 @@
       "mirror_of": null
     },
     "tile-tg-fuchsia": {
-      "x": 1567,
+      "x": 1873,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8431,7 +8652,7 @@
       "mirror_of": null
     },
     "tile-tg-goldenrod": {
-      "x": 1585,
+      "x": 1891,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8444,7 +8665,7 @@
       "mirror_of": null
     },
     "tile-tg-hearthome": {
-      "x": 1603,
+      "x": 1909,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8457,7 +8678,7 @@
       "mirror_of": null
     },
     "tile-tg-indigo": {
-      "x": 1621,
+      "x": 1927,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8470,7 +8691,7 @@
       "mirror_of": null
     },
     "tile-tg-jubilife": {
-      "x": 1639,
+      "x": 1945,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8483,7 +8704,7 @@
       "mirror_of": null
     },
     "tile-tg-lavaridge": {
-      "x": 1657,
+      "x": 1963,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8496,7 +8717,7 @@
       "mirror_of": null
     },
     "tile-tg-lavender": {
-      "x": 1675,
+      "x": 1981,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8509,7 +8730,7 @@
       "mirror_of": null
     },
     "tile-tg-lilycove": {
-      "x": 1693,
+      "x": 1999,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8522,7 +8743,7 @@
       "mirror_of": null
     },
     "tile-tg-littleroot": {
-      "x": 1711,
+      "x": 2017,
       "y": 123,
       "w": 16,
       "h": 16,
@@ -8535,8 +8756,8 @@
       "mirror_of": null
     },
     "tile-tg-mahogany": {
-      "x": 1729,
-      "y": 123,
+      "x": 1,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8548,8 +8769,8 @@
       "mirror_of": null
     },
     "tile-tg-mauville": {
-      "x": 1747,
-      "y": 123,
+      "x": 19,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8561,8 +8782,8 @@
       "mirror_of": null
     },
     "tile-tg-mossdeep": {
-      "x": 1765,
-      "y": 123,
+      "x": 37,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8574,8 +8795,8 @@
       "mirror_of": null
     },
     "tile-tg-newbark": {
-      "x": 1783,
-      "y": 123,
+      "x": 55,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8587,8 +8808,8 @@
       "mirror_of": null
     },
     "tile-tg-oldale": {
-      "x": 1801,
-      "y": 123,
+      "x": 73,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8600,8 +8821,8 @@
       "mirror_of": null
     },
     "tile-tg-olivine": {
-      "x": 1819,
-      "y": 123,
+      "x": 91,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8613,8 +8834,8 @@
       "mirror_of": null
     },
     "tile-tg-oreburgh": {
-      "x": 1837,
-      "y": 123,
+      "x": 109,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8626,8 +8847,8 @@
       "mirror_of": null
     },
     "tile-tg-pacifidlog": {
-      "x": 1855,
-      "y": 123,
+      "x": 127,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8639,8 +8860,8 @@
       "mirror_of": null
     },
     "tile-tg-pallet": {
-      "x": 1873,
-      "y": 123,
+      "x": 145,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8651,9 +8872,22 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tg-pastoria": {
+      "x": 163,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tg-petalburg": {
-      "x": 1891,
-      "y": 123,
+      "x": 181,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8665,8 +8899,8 @@
       "mirror_of": null
     },
     "tile-tg-pewter": {
-      "x": 1909,
-      "y": 123,
+      "x": 199,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8678,8 +8912,8 @@
       "mirror_of": null
     },
     "tile-tg-rustboro": {
-      "x": 1927,
-      "y": 123,
+      "x": 217,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8691,8 +8925,8 @@
       "mirror_of": null
     },
     "tile-tg-saffron": {
-      "x": 1945,
-      "y": 123,
+      "x": 235,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8704,8 +8938,8 @@
       "mirror_of": null
     },
     "tile-tg-sandgem": {
-      "x": 1963,
-      "y": 123,
+      "x": 253,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8717,8 +8951,8 @@
       "mirror_of": null
     },
     "tile-tg-silvertown": {
-      "x": 1981,
-      "y": 123,
+      "x": 271,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8730,8 +8964,21 @@
       "mirror_of": null
     },
     "tile-tg-slateport": {
-      "x": 1999,
-      "y": 123,
+      "x": 289,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tg-snowpoint": {
+      "x": 307,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8743,8 +8990,8 @@
       "mirror_of": null
     },
     "tile-tg-solaceon": {
-      "x": 2017,
-      "y": 123,
+      "x": 325,
+      "y": 141,
       "w": 16,
       "h": 16,
       "frames": [
@@ -8756,7 +9003,20 @@
       "mirror_of": null
     },
     "tile-tg-sootopolis": {
-      "x": 1,
+      "x": 343,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tg-sunnyshore": {
+      "x": 361,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8769,7 +9029,7 @@
       "mirror_of": null
     },
     "tile-tg-twinleaf": {
-      "x": 19,
+      "x": 379,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8782,7 +9042,7 @@
       "mirror_of": null
     },
     "tile-tg-veilstone": {
-      "x": 37,
+      "x": 397,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8795,7 +9055,7 @@
       "mirror_of": null
     },
     "tile-tg-verdanturf": {
-      "x": 55,
+      "x": 415,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8808,7 +9068,7 @@
       "mirror_of": null
     },
     "tile-tg-vermilion": {
-      "x": 73,
+      "x": 433,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8821,7 +9081,7 @@
       "mirror_of": null
     },
     "tile-tg-violet": {
-      "x": 91,
+      "x": 451,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8834,7 +9094,7 @@
       "mirror_of": null
     },
     "tile-tg-viridian": {
-      "x": 109,
+      "x": 469,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8847,7 +9107,7 @@
       "mirror_of": null
     },
     "tile-tg2-azalea": {
-      "x": 127,
+      "x": 487,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8860,7 +9120,7 @@
       "mirror_of": null
     },
     "tile-tg2-blackthorn": {
-      "x": 145,
+      "x": 505,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8873,7 +9133,7 @@
       "mirror_of": null
     },
     "tile-tg2-canalave": {
-      "x": 163,
+      "x": 523,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8886,7 +9146,7 @@
       "mirror_of": null
     },
     "tile-tg2-celadon": {
-      "x": 181,
+      "x": 541,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8898,8 +9158,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tg2-celestic": {
+      "x": 559,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tg2-cerulean": {
-      "x": 199,
+      "x": 577,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8912,7 +9185,7 @@
       "mirror_of": null
     },
     "tile-tg2-cherrygrove": {
-      "x": 217,
+      "x": 595,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8925,7 +9198,7 @@
       "mirror_of": null
     },
     "tile-tg2-cianwood": {
-      "x": 235,
+      "x": 613,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8938,7 +9211,7 @@
       "mirror_of": null
     },
     "tile-tg2-cinnabar": {
-      "x": 253,
+      "x": 631,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8951,7 +9224,7 @@
       "mirror_of": null
     },
     "tile-tg2-dewford": {
-      "x": 271,
+      "x": 649,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8964,7 +9237,7 @@
       "mirror_of": null
     },
     "tile-tg2-ecruteak": {
-      "x": 289,
+      "x": 667,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8977,7 +9250,7 @@
       "mirror_of": null
     },
     "tile-tg2-eterna": {
-      "x": 307,
+      "x": 685,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -8990,7 +9263,7 @@
       "mirror_of": null
     },
     "tile-tg2-evergrande": {
-      "x": 325,
+      "x": 703,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9003,7 +9276,7 @@
       "mirror_of": null
     },
     "tile-tg2-fallarbor": {
-      "x": 343,
+      "x": 721,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9016,7 +9289,7 @@
       "mirror_of": null
     },
     "tile-tg2-floaroma": {
-      "x": 361,
+      "x": 739,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9029,7 +9302,7 @@
       "mirror_of": null
     },
     "tile-tg2-fortree": {
-      "x": 379,
+      "x": 757,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9042,7 +9315,7 @@
       "mirror_of": null
     },
     "tile-tg2-fuchsia": {
-      "x": 397,
+      "x": 775,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9055,7 +9328,7 @@
       "mirror_of": null
     },
     "tile-tg2-goldenrod": {
-      "x": 415,
+      "x": 793,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9068,7 +9341,7 @@
       "mirror_of": null
     },
     "tile-tg2-hearthome": {
-      "x": 433,
+      "x": 811,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9081,7 +9354,7 @@
       "mirror_of": null
     },
     "tile-tg2-indigo": {
-      "x": 451,
+      "x": 829,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9094,7 +9367,7 @@
       "mirror_of": null
     },
     "tile-tg2-jubilife": {
-      "x": 469,
+      "x": 847,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9107,7 +9380,7 @@
       "mirror_of": null
     },
     "tile-tg2-lavaridge": {
-      "x": 487,
+      "x": 865,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9120,7 +9393,7 @@
       "mirror_of": null
     },
     "tile-tg2-lavender": {
-      "x": 505,
+      "x": 883,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9133,7 +9406,7 @@
       "mirror_of": null
     },
     "tile-tg2-lilycove": {
-      "x": 523,
+      "x": 901,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9146,7 +9419,7 @@
       "mirror_of": null
     },
     "tile-tg2-littleroot": {
-      "x": 541,
+      "x": 919,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9159,7 +9432,7 @@
       "mirror_of": null
     },
     "tile-tg2-mahogany": {
-      "x": 559,
+      "x": 937,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9172,7 +9445,7 @@
       "mirror_of": null
     },
     "tile-tg2-mauville": {
-      "x": 577,
+      "x": 955,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9185,7 +9458,7 @@
       "mirror_of": null
     },
     "tile-tg2-mossdeep": {
-      "x": 595,
+      "x": 973,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9198,7 +9471,7 @@
       "mirror_of": null
     },
     "tile-tg2-newbark": {
-      "x": 613,
+      "x": 991,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9211,7 +9484,7 @@
       "mirror_of": null
     },
     "tile-tg2-oldale": {
-      "x": 631,
+      "x": 1009,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9224,7 +9497,7 @@
       "mirror_of": null
     },
     "tile-tg2-olivine": {
-      "x": 649,
+      "x": 1027,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9237,7 +9510,7 @@
       "mirror_of": null
     },
     "tile-tg2-oreburgh": {
-      "x": 667,
+      "x": 1045,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9250,7 +9523,7 @@
       "mirror_of": null
     },
     "tile-tg2-pacifidlog": {
-      "x": 685,
+      "x": 1063,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9263,7 +9536,7 @@
       "mirror_of": null
     },
     "tile-tg2-pallet": {
-      "x": 703,
+      "x": 1081,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9275,8 +9548,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tg2-pastoria": {
+      "x": 1099,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tg2-petalburg": {
-      "x": 721,
+      "x": 1117,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9289,7 +9575,7 @@
       "mirror_of": null
     },
     "tile-tg2-pewter": {
-      "x": 739,
+      "x": 1135,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9302,7 +9588,7 @@
       "mirror_of": null
     },
     "tile-tg2-rustboro": {
-      "x": 757,
+      "x": 1153,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9315,7 +9601,7 @@
       "mirror_of": null
     },
     "tile-tg2-saffron": {
-      "x": 775,
+      "x": 1171,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9328,7 +9614,7 @@
       "mirror_of": null
     },
     "tile-tg2-sandgem": {
-      "x": 793,
+      "x": 1189,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9341,7 +9627,7 @@
       "mirror_of": null
     },
     "tile-tg2-silvertown": {
-      "x": 811,
+      "x": 1207,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9354,7 +9640,20 @@
       "mirror_of": null
     },
     "tile-tg2-slateport": {
-      "x": 829,
+      "x": 1225,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tg2-snowpoint": {
+      "x": 1243,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9367,7 +9666,7 @@
       "mirror_of": null
     },
     "tile-tg2-solaceon": {
-      "x": 847,
+      "x": 1261,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9380,7 +9679,20 @@
       "mirror_of": null
     },
     "tile-tg2-sootopolis": {
-      "x": 865,
+      "x": 1279,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tg2-sunnyshore": {
+      "x": 1297,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9393,7 +9705,7 @@
       "mirror_of": null
     },
     "tile-tg2-twinleaf": {
-      "x": 883,
+      "x": 1315,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9406,7 +9718,7 @@
       "mirror_of": null
     },
     "tile-tg2-veilstone": {
-      "x": 901,
+      "x": 1333,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9419,7 +9731,7 @@
       "mirror_of": null
     },
     "tile-tg2-verdanturf": {
-      "x": 919,
+      "x": 1351,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9432,7 +9744,7 @@
       "mirror_of": null
     },
     "tile-tg2-vermilion": {
-      "x": 937,
+      "x": 1369,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9445,7 +9757,7 @@
       "mirror_of": null
     },
     "tile-tg2-violet": {
-      "x": 955,
+      "x": 1387,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9458,7 +9770,7 @@
       "mirror_of": null
     },
     "tile-tg2-viridian": {
-      "x": 973,
+      "x": 1405,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9471,7 +9783,7 @@
       "mirror_of": null
     },
     "tile-th-azalea": {
-      "x": 991,
+      "x": 1423,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9484,7 +9796,7 @@
       "mirror_of": null
     },
     "tile-th-blackthorn": {
-      "x": 1009,
+      "x": 1441,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9497,7 +9809,20 @@
       "mirror_of": null
     },
     "tile-th-canalave": {
-      "x": 1027,
+      "x": 1459,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-th-celestic": {
+      "x": 1477,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9510,7 +9835,7 @@
       "mirror_of": null
     },
     "tile-th-cherrygrove": {
-      "x": 1045,
+      "x": 1495,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9523,7 +9848,7 @@
       "mirror_of": null
     },
     "tile-th-cianwood": {
-      "x": 1063,
+      "x": 1513,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9536,7 +9861,7 @@
       "mirror_of": null
     },
     "tile-th-dewford": {
-      "x": 1081,
+      "x": 1531,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9549,7 +9874,7 @@
       "mirror_of": null
     },
     "tile-th-ecruteak": {
-      "x": 1099,
+      "x": 1549,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9562,7 +9887,7 @@
       "mirror_of": null
     },
     "tile-th-eterna": {
-      "x": 1117,
+      "x": 1567,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9575,7 +9900,7 @@
       "mirror_of": null
     },
     "tile-th-evergrande": {
-      "x": 1135,
+      "x": 1585,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9588,7 +9913,7 @@
       "mirror_of": null
     },
     "tile-th-fallarbor": {
-      "x": 1153,
+      "x": 1603,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9601,7 +9926,7 @@
       "mirror_of": null
     },
     "tile-th-floaroma": {
-      "x": 1171,
+      "x": 1621,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9614,7 +9939,7 @@
       "mirror_of": null
     },
     "tile-th-fortree": {
-      "x": 1189,
+      "x": 1639,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9627,7 +9952,7 @@
       "mirror_of": null
     },
     "tile-th-goldenrod": {
-      "x": 1207,
+      "x": 1657,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9640,7 +9965,7 @@
       "mirror_of": null
     },
     "tile-th-hearthome": {
-      "x": 1225,
+      "x": 1675,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9653,7 +9978,7 @@
       "mirror_of": null
     },
     "tile-th-jubilife": {
-      "x": 1243,
+      "x": 1693,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9666,7 +9991,7 @@
       "mirror_of": null
     },
     "tile-th-lavaridge": {
-      "x": 1261,
+      "x": 1711,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9679,7 +10004,7 @@
       "mirror_of": null
     },
     "tile-th-lilycove": {
-      "x": 1279,
+      "x": 1729,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9692,7 +10017,7 @@
       "mirror_of": null
     },
     "tile-th-littleroot": {
-      "x": 1297,
+      "x": 1747,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9705,7 +10030,7 @@
       "mirror_of": null
     },
     "tile-th-mahogany": {
-      "x": 1315,
+      "x": 1765,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9718,7 +10043,7 @@
       "mirror_of": null
     },
     "tile-th-mauville": {
-      "x": 1333,
+      "x": 1783,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9731,7 +10056,7 @@
       "mirror_of": null
     },
     "tile-th-mossdeep": {
-      "x": 1351,
+      "x": 1801,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9744,7 +10069,7 @@
       "mirror_of": null
     },
     "tile-th-newbark": {
-      "x": 1369,
+      "x": 1819,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9757,7 +10082,7 @@
       "mirror_of": null
     },
     "tile-th-oldale": {
-      "x": 1387,
+      "x": 1837,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9770,7 +10095,7 @@
       "mirror_of": null
     },
     "tile-th-olivine": {
-      "x": 1405,
+      "x": 1855,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9783,7 +10108,7 @@
       "mirror_of": null
     },
     "tile-th-oreburgh": {
-      "x": 1423,
+      "x": 1873,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9796,7 +10121,20 @@
       "mirror_of": null
     },
     "tile-th-pacifidlog": {
-      "x": 1441,
+      "x": 1891,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-th-pastoria": {
+      "x": 1909,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9809,7 +10147,7 @@
       "mirror_of": null
     },
     "tile-th-petalburg": {
-      "x": 1459,
+      "x": 1927,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9822,7 +10160,7 @@
       "mirror_of": null
     },
     "tile-th-rustboro": {
-      "x": 1477,
+      "x": 1945,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9835,7 +10173,7 @@
       "mirror_of": null
     },
     "tile-th-sandgem": {
-      "x": 1495,
+      "x": 1963,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9848,7 +10186,7 @@
       "mirror_of": null
     },
     "tile-th-silvertown": {
-      "x": 1513,
+      "x": 1981,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9861,7 +10199,20 @@
       "mirror_of": null
     },
     "tile-th-slateport": {
-      "x": 1531,
+      "x": 1999,
+      "y": 141,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-th-snowpoint": {
+      "x": 2017,
       "y": 141,
       "w": 16,
       "h": 16,
@@ -9874,8 +10225,8 @@
       "mirror_of": null
     },
     "tile-th-solaceon": {
-      "x": 1549,
-      "y": 141,
+      "x": 1,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9887,8 +10238,21 @@
       "mirror_of": null
     },
     "tile-th-sootopolis": {
-      "x": 1567,
-      "y": 141,
+      "x": 19,
+      "y": 159,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-th-sunnyshore": {
+      "x": 37,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9900,8 +10264,8 @@
       "mirror_of": null
     },
     "tile-th-twinleaf": {
-      "x": 1585,
-      "y": 141,
+      "x": 55,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9913,8 +10277,8 @@
       "mirror_of": null
     },
     "tile-th-veilstone": {
-      "x": 1603,
-      "y": 141,
+      "x": 73,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9926,8 +10290,8 @@
       "mirror_of": null
     },
     "tile-th-verdanturf": {
-      "x": 1621,
-      "y": 141,
+      "x": 91,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9939,8 +10303,8 @@
       "mirror_of": null
     },
     "tile-th-violet": {
-      "x": 1639,
-      "y": 141,
+      "x": 109,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9952,8 +10316,8 @@
       "mirror_of": null
     },
     "tile-tl-azalea": {
-      "x": 1657,
-      "y": 141,
+      "x": 127,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9965,8 +10329,8 @@
       "mirror_of": null
     },
     "tile-tl-blackthorn": {
-      "x": 1675,
-      "y": 141,
+      "x": 145,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9978,8 +10342,8 @@
       "mirror_of": null
     },
     "tile-tl-canalave": {
-      "x": 1693,
-      "y": 141,
+      "x": 163,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -9991,8 +10355,8 @@
       "mirror_of": null
     },
     "tile-tl-celadon": {
-      "x": 1711,
-      "y": 141,
+      "x": 181,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10003,9 +10367,22 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tl-celestic": {
+      "x": 199,
+      "y": 159,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tl-cerulean": {
-      "x": 1729,
-      "y": 141,
+      "x": 217,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10017,8 +10394,8 @@
       "mirror_of": null
     },
     "tile-tl-cherrygrove": {
-      "x": 1747,
-      "y": 141,
+      "x": 235,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10030,8 +10407,8 @@
       "mirror_of": null
     },
     "tile-tl-cianwood": {
-      "x": 1765,
-      "y": 141,
+      "x": 253,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10043,8 +10420,8 @@
       "mirror_of": null
     },
     "tile-tl-cinnabar": {
-      "x": 1783,
-      "y": 141,
+      "x": 271,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10056,8 +10433,8 @@
       "mirror_of": null
     },
     "tile-tl-dewford": {
-      "x": 1801,
-      "y": 141,
+      "x": 289,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10069,8 +10446,8 @@
       "mirror_of": null
     },
     "tile-tl-ecruteak": {
-      "x": 1819,
-      "y": 141,
+      "x": 307,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10082,8 +10459,8 @@
       "mirror_of": null
     },
     "tile-tl-eterna": {
-      "x": 1837,
-      "y": 141,
+      "x": 325,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10095,8 +10472,8 @@
       "mirror_of": null
     },
     "tile-tl-evergrande": {
-      "x": 1855,
-      "y": 141,
+      "x": 343,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10108,8 +10485,8 @@
       "mirror_of": null
     },
     "tile-tl-fallarbor": {
-      "x": 1873,
-      "y": 141,
+      "x": 361,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10121,8 +10498,8 @@
       "mirror_of": null
     },
     "tile-tl-floaroma": {
-      "x": 1891,
-      "y": 141,
+      "x": 379,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10134,8 +10511,8 @@
       "mirror_of": null
     },
     "tile-tl-fortree": {
-      "x": 1909,
-      "y": 141,
+      "x": 397,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10147,8 +10524,8 @@
       "mirror_of": null
     },
     "tile-tl-fuchsia": {
-      "x": 1927,
-      "y": 141,
+      "x": 415,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10160,8 +10537,8 @@
       "mirror_of": null
     },
     "tile-tl-goldenrod": {
-      "x": 1945,
-      "y": 141,
+      "x": 433,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10173,8 +10550,8 @@
       "mirror_of": null
     },
     "tile-tl-hearthome": {
-      "x": 1963,
-      "y": 141,
+      "x": 451,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10186,8 +10563,8 @@
       "mirror_of": null
     },
     "tile-tl-indigo": {
-      "x": 1981,
-      "y": 141,
+      "x": 469,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10199,8 +10576,8 @@
       "mirror_of": null
     },
     "tile-tl-jubilife": {
-      "x": 1999,
-      "y": 141,
+      "x": 487,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10212,8 +10589,8 @@
       "mirror_of": null
     },
     "tile-tl-lavaridge": {
-      "x": 2017,
-      "y": 141,
+      "x": 505,
+      "y": 159,
       "w": 16,
       "h": 16,
       "frames": [
@@ -10225,7 +10602,7 @@
       "mirror_of": null
     },
     "tile-tl-lavender": {
-      "x": 1,
+      "x": 523,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10238,7 +10615,7 @@
       "mirror_of": null
     },
     "tile-tl-lilycove": {
-      "x": 19,
+      "x": 541,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10251,7 +10628,7 @@
       "mirror_of": null
     },
     "tile-tl-littleroot": {
-      "x": 37,
+      "x": 559,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10264,7 +10641,7 @@
       "mirror_of": null
     },
     "tile-tl-mahogany": {
-      "x": 55,
+      "x": 577,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10277,7 +10654,7 @@
       "mirror_of": null
     },
     "tile-tl-mauville": {
-      "x": 73,
+      "x": 595,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10290,7 +10667,7 @@
       "mirror_of": null
     },
     "tile-tl-mossdeep": {
-      "x": 91,
+      "x": 613,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10303,7 +10680,7 @@
       "mirror_of": null
     },
     "tile-tl-newbark": {
-      "x": 109,
+      "x": 631,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10316,7 +10693,7 @@
       "mirror_of": null
     },
     "tile-tl-oldale": {
-      "x": 127,
+      "x": 649,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10329,7 +10706,7 @@
       "mirror_of": null
     },
     "tile-tl-olivine": {
-      "x": 145,
+      "x": 667,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10342,7 +10719,7 @@
       "mirror_of": null
     },
     "tile-tl-oreburgh": {
-      "x": 163,
+      "x": 685,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10355,7 +10732,7 @@
       "mirror_of": null
     },
     "tile-tl-pacifidlog": {
-      "x": 181,
+      "x": 703,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10368,7 +10745,7 @@
       "mirror_of": null
     },
     "tile-tl-pallet": {
-      "x": 199,
+      "x": 721,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10380,8 +10757,21 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "tile-tl-pastoria": {
+      "x": 739,
+      "y": 159,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "tile-tl-petalburg": {
-      "x": 217,
+      "x": 757,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10394,7 +10784,7 @@
       "mirror_of": null
     },
     "tile-tl-pewter": {
-      "x": 235,
+      "x": 775,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10407,7 +10797,7 @@
       "mirror_of": null
     },
     "tile-tl-rustboro": {
-      "x": 253,
+      "x": 793,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10420,7 +10810,7 @@
       "mirror_of": null
     },
     "tile-tl-saffron": {
-      "x": 271,
+      "x": 811,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10433,7 +10823,7 @@
       "mirror_of": null
     },
     "tile-tl-sandgem": {
-      "x": 289,
+      "x": 829,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10446,7 +10836,7 @@
       "mirror_of": null
     },
     "tile-tl-silvertown": {
-      "x": 307,
+      "x": 847,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10459,7 +10849,20 @@
       "mirror_of": null
     },
     "tile-tl-slateport": {
-      "x": 325,
+      "x": 865,
+      "y": 159,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tl-snowpoint": {
+      "x": 883,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10472,7 +10875,7 @@
       "mirror_of": null
     },
     "tile-tl-solaceon": {
-      "x": 343,
+      "x": 901,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10485,7 +10888,20 @@
       "mirror_of": null
     },
     "tile-tl-sootopolis": {
-      "x": 361,
+      "x": 919,
+      "y": 159,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tl-sunnyshore": {
+      "x": 937,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10498,7 +10914,7 @@
       "mirror_of": null
     },
     "tile-tl-twinleaf": {
-      "x": 379,
+      "x": 955,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10511,7 +10927,7 @@
       "mirror_of": null
     },
     "tile-tl-veilstone": {
-      "x": 397,
+      "x": 973,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10524,7 +10940,7 @@
       "mirror_of": null
     },
     "tile-tl-verdanturf": {
-      "x": 415,
+      "x": 991,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10537,7 +10953,7 @@
       "mirror_of": null
     },
     "tile-tl-vermilion": {
-      "x": 433,
+      "x": 1009,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10550,7 +10966,7 @@
       "mirror_of": null
     },
     "tile-tl-violet": {
-      "x": 451,
+      "x": 1027,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10563,7 +10979,7 @@
       "mirror_of": null
     },
     "tile-tl-viridian": {
-      "x": 469,
+      "x": 1045,
       "y": 159,
       "w": 16,
       "h": 16,
@@ -10576,422 +10992,6 @@
       "mirror_of": null
     },
     "tile-towerfloor-1": {
-      "x": 487,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-towerfloor-2": {
-      "x": 505,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-towerfloor-3": {
-      "x": 523,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 3,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-towerfloor-4": {
-      "x": 541,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-towerwall-2": {
-      "x": 559,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 3,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-towerwall": {
-      "x": 577,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 3,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-towerwood": {
-      "x": 595,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 3,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-azalea": {
-      "x": 613,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-blackthorn": {
-      "x": 631,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-canalave": {
-      "x": 649,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-cherrygrove": {
-      "x": 667,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-cianwood": {
-      "x": 685,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-dewford": {
-      "x": 703,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-ecruteak": {
-      "x": 721,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-eterna": {
-      "x": 739,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-evergrande": {
-      "x": 757,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-fallarbor": {
-      "x": 775,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-floaroma": {
-      "x": 793,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-fortree": {
-      "x": 811,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-goldenrod": {
-      "x": 829,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-hearthome": {
-      "x": 847,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-jubilife": {
-      "x": 865,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-lavaridge": {
-      "x": 883,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-lilycove": {
-      "x": 901,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-littleroot": {
-      "x": 919,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-mahogany": {
-      "x": 937,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-mauville": {
-      "x": 955,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-mossdeep": {
-      "x": 973,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-newbark": {
-      "x": 991,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-oldale": {
-      "x": 1009,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-olivine": {
-      "x": 1027,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-oreburgh": {
-      "x": 1045,
-      "y": 159,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tr-pacifidlog": {
       "x": 1063,
       "y": 159,
       "w": 16,
@@ -11004,7 +11004,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-petalburg": {
+    "tile-towerfloor-2": {
       "x": 1081,
       "y": 159,
       "w": 16,
@@ -11017,7 +11017,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-rustboro": {
+    "tile-towerfloor-3": {
       "x": 1099,
       "y": 159,
       "w": 16,
@@ -11025,12 +11025,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-sandgem": {
+    "tile-towerfloor-4": {
       "x": 1117,
       "y": 159,
       "w": 16,
@@ -11043,7 +11043,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-silvertown": {
+    "tile-towerwall-2": {
       "x": 1135,
       "y": 159,
       "w": 16,
@@ -11051,12 +11051,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-slateport": {
+    "tile-towerwall": {
       "x": 1153,
       "y": 159,
       "w": 16,
@@ -11064,12 +11064,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-solaceon": {
+    "tile-towerwood": {
       "x": 1171,
       "y": 159,
       "w": 16,
@@ -11077,12 +11077,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-sootopolis": {
+    "tile-tr-azalea": {
       "x": 1189,
       "y": 159,
       "w": 16,
@@ -11095,7 +11095,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-twinleaf": {
+    "tile-tr-blackthorn": {
       "x": 1207,
       "y": 159,
       "w": 16,
@@ -11108,7 +11108,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-veilstone": {
+    "tile-tr-canalave": {
       "x": 1225,
       "y": 159,
       "w": 16,
@@ -11121,7 +11121,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-verdanturf": {
+    "tile-tr-celestic": {
       "x": 1243,
       "y": 159,
       "w": 16,
@@ -11134,7 +11134,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tr-violet": {
+    "tile-tr-cherrygrove": {
       "x": 1261,
       "y": 159,
       "w": 16,
@@ -11147,7 +11147,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tree-elm-small": {
+    "tile-tr-cianwood": {
       "x": 1279,
       "y": 159,
       "w": 16,
@@ -11155,12 +11155,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tree-elm": {
+    "tile-tr-dewford": {
       "x": 1297,
       "y": 159,
       "w": 16,
@@ -11168,12 +11168,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tree-oak-small": {
+    "tile-tr-ecruteak": {
       "x": 1315,
       "y": 159,
       "w": 16,
@@ -11181,12 +11181,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tree-pine-small": {
+    "tile-tr-eterna": {
       "x": 1333,
       "y": 159,
       "w": 16,
@@ -11194,12 +11194,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tree-pine": {
+    "tile-tr-evergrande": {
       "x": 1351,
       "y": 159,
       "w": 16,
@@ -11207,12 +11207,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tree": {
+    "tile-tr-fallarbor": {
       "x": 1369,
       "y": 159,
       "w": 16,
@@ -11220,12 +11220,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tropgrass": {
+    "tile-tr-floaroma": {
       "x": 1387,
       "y": 159,
       "w": 16,
@@ -11233,12 +11233,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-azalea": {
+    "tile-tr-fortree": {
       "x": 1405,
       "y": 159,
       "w": 16,
@@ -11251,7 +11251,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-blackthorn": {
+    "tile-tr-goldenrod": {
       "x": 1423,
       "y": 159,
       "w": 16,
@@ -11264,7 +11264,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-canalave": {
+    "tile-tr-hearthome": {
       "x": 1441,
       "y": 159,
       "w": 16,
@@ -11277,7 +11277,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-celadon": {
+    "tile-tr-jubilife": {
       "x": 1459,
       "y": 159,
       "w": 16,
@@ -11285,12 +11285,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-cerulean": {
+    "tile-tr-lavaridge": {
       "x": 1477,
       "y": 159,
       "w": 16,
@@ -11298,12 +11298,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-cherrygrove": {
+    "tile-tr-lilycove": {
       "x": 1495,
       "y": 159,
       "w": 16,
@@ -11316,7 +11316,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-cianwood": {
+    "tile-tr-littleroot": {
       "x": 1513,
       "y": 159,
       "w": 16,
@@ -11329,7 +11329,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-cinnabar": {
+    "tile-tr-mahogany": {
       "x": 1531,
       "y": 159,
       "w": 16,
@@ -11337,12 +11337,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-dewford": {
+    "tile-tr-mauville": {
       "x": 1549,
       "y": 159,
       "w": 16,
@@ -11355,7 +11355,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-ecruteak": {
+    "tile-tr-mossdeep": {
       "x": 1567,
       "y": 159,
       "w": 16,
@@ -11368,7 +11368,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-eterna": {
+    "tile-tr-newbark": {
       "x": 1585,
       "y": 159,
       "w": 16,
@@ -11381,7 +11381,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-evergrande": {
+    "tile-tr-oldale": {
       "x": 1603,
       "y": 159,
       "w": 16,
@@ -11394,7 +11394,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-fallarbor": {
+    "tile-tr-olivine": {
       "x": 1621,
       "y": 159,
       "w": 16,
@@ -11407,7 +11407,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-floaroma": {
+    "tile-tr-oreburgh": {
       "x": 1639,
       "y": 159,
       "w": 16,
@@ -11420,7 +11420,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-fortree": {
+    "tile-tr-pacifidlog": {
       "x": 1657,
       "y": 159,
       "w": 16,
@@ -11433,7 +11433,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-fuchsia": {
+    "tile-tr-pastoria": {
       "x": 1675,
       "y": 159,
       "w": 16,
@@ -11441,12 +11441,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-goldenrod": {
+    "tile-tr-petalburg": {
       "x": 1693,
       "y": 159,
       "w": 16,
@@ -11459,7 +11459,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-hearthome": {
+    "tile-tr-rustboro": {
       "x": 1711,
       "y": 159,
       "w": 16,
@@ -11472,7 +11472,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-indigo": {
+    "tile-tr-sandgem": {
       "x": 1729,
       "y": 159,
       "w": 16,
@@ -11480,12 +11480,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-jubilife": {
+    "tile-tr-silvertown": {
       "x": 1747,
       "y": 159,
       "w": 16,
@@ -11498,7 +11498,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-lavaridge": {
+    "tile-tr-slateport": {
       "x": 1765,
       "y": 159,
       "w": 16,
@@ -11511,7 +11511,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-lavender": {
+    "tile-tr-snowpoint": {
       "x": 1783,
       "y": 159,
       "w": 16,
@@ -11519,12 +11519,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-lilycove": {
+    "tile-tr-solaceon": {
       "x": 1801,
       "y": 159,
       "w": 16,
@@ -11537,7 +11537,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-littleroot": {
+    "tile-tr-sootopolis": {
       "x": 1819,
       "y": 159,
       "w": 16,
@@ -11550,7 +11550,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-mahogany": {
+    "tile-tr-sunnyshore": {
       "x": 1837,
       "y": 159,
       "w": 16,
@@ -11563,7 +11563,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-mauville": {
+    "tile-tr-twinleaf": {
       "x": 1855,
       "y": 159,
       "w": 16,
@@ -11576,7 +11576,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-mossdeep": {
+    "tile-tr-veilstone": {
       "x": 1873,
       "y": 159,
       "w": 16,
@@ -11589,7 +11589,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-newbark": {
+    "tile-tr-verdanturf": {
       "x": 1891,
       "y": 159,
       "w": 16,
@@ -11602,7 +11602,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-oldale": {
+    "tile-tr-violet": {
       "x": 1909,
       "y": 159,
       "w": 16,
@@ -11615,7 +11615,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-olivine": {
+    "tile-tree-elm-small": {
       "x": 1927,
       "y": 159,
       "w": 16,
@@ -11623,12 +11623,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-oreburgh": {
+    "tile-tree-elm": {
       "x": 1945,
       "y": 159,
       "w": 16,
@@ -11636,12 +11636,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-pacifidlog": {
+    "tile-tree-oak-small": {
       "x": 1963,
       "y": 159,
       "w": 16,
@@ -11649,12 +11649,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-pallet": {
+    "tile-tree-pine-small": {
       "x": 1981,
       "y": 159,
       "w": 16,
@@ -11662,12 +11662,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-petalburg": {
+    "tile-tree-pine": {
       "x": 1999,
       "y": 159,
       "w": 16,
@@ -11675,12 +11675,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 8,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-pewter": {
+    "tile-tree": {
       "x": 2017,
       "y": 159,
       "w": 16,
@@ -11688,13 +11688,26 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 8,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-rustboro": {
+    "tile-tropgrass": {
       "x": 1,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-azalea": {
+      "x": 19,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -11706,20 +11719,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-saffron": {
-      "x": 19,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 6,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tw-sandgem": {
+    "tile-tw-blackthorn": {
       "x": 37,
       "y": 177,
       "w": 16,
@@ -11732,7 +11732,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-silvertown": {
+    "tile-tw-canalave": {
       "x": 55,
       "y": 177,
       "w": 16,
@@ -11745,7 +11745,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-slateport": {
+    "tile-tw-celadon": {
       "x": 73,
       "y": 177,
       "w": 16,
@@ -11753,12 +11753,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-solaceon": {
+    "tile-tw-celestic": {
       "x": 91,
       "y": 177,
       "w": 16,
@@ -11771,7 +11771,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-sootopolis": {
+    "tile-tw-cerulean": {
       "x": 109,
       "y": 177,
       "w": 16,
@@ -11779,12 +11779,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-twinleaf": {
+    "tile-tw-cherrygrove": {
       "x": 127,
       "y": 177,
       "w": 16,
@@ -11797,7 +11797,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-veilstone": {
+    "tile-tw-cianwood": {
       "x": 145,
       "y": 177,
       "w": 16,
@@ -11810,21 +11810,8 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-verdanturf": {
+    "tile-tw-cinnabar": {
       "x": 163,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 4,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-tw-vermilion": {
-      "x": 181,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -11836,7 +11823,20 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-violet": {
+    "tile-tw-dewford": {
+      "x": 181,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-ecruteak": {
       "x": 199,
       "y": 177,
       "w": 16,
@@ -11849,7 +11849,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-tw-viridian": {
+    "tile-tw-eterna": {
       "x": 217,
       "y": 177,
       "w": 16,
@@ -11857,12 +11857,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-uwrock": {
+    "tile-tw-evergrande": {
       "x": 235,
       "y": 177,
       "w": 16,
@@ -11875,7 +11875,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-volcrock": {
+    "tile-tw-fallarbor": {
       "x": 253,
       "y": 177,
       "w": 16,
@@ -11888,7 +11888,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wake-1": {
+    "tile-tw-floaroma": {
       "x": 271,
       "y": 177,
       "w": 16,
@@ -11896,12 +11896,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 2,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wake-2": {
+    "tile-tw-fortree": {
       "x": 289,
       "y": 177,
       "w": 16,
@@ -11909,12 +11909,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 2,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-brick-lit": {
+    "tile-tw-fuchsia": {
       "x": 307,
       "y": 177,
       "w": 16,
@@ -11927,73 +11927,8 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-brick-plain-lit": {
+    "tile-tw-goldenrod": {
       "x": 325,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 3,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-brick-plain": {
-      "x": 343,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 5,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-center-lit": {
-      "x": 361,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 5,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-center-upper": {
-      "x": 379,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 8,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-center": {
-      "x": 397,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 8,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-gym-lit": {
-      "x": 415,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12005,7 +11940,72 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-gym": {
+    "tile-tw-hearthome": {
+      "x": 343,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-indigo": {
+      "x": 361,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-jubilife": {
+      "x": 379,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-lavaridge": {
+      "x": 397,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-lavender": {
+      "x": 415,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-lilycove": {
       "x": 433,
       "y": 177,
       "w": 16,
@@ -12013,12 +12013,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-house-lit": {
+    "tile-tw-littleroot": {
       "x": 451,
       "y": 177,
       "w": 16,
@@ -12026,12 +12026,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-house-plain-lit": {
+    "tile-tw-mahogany": {
       "x": 469,
       "y": 177,
       "w": 16,
@@ -12039,12 +12039,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-house-plain": {
+    "tile-tw-mauville": {
       "x": 487,
       "y": 177,
       "w": 16,
@@ -12057,7 +12057,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-house-unlit": {
+    "tile-tw-mossdeep": {
       "x": 505,
       "y": 177,
       "w": 16,
@@ -12065,12 +12065,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-lab-lit": {
+    "tile-tw-newbark": {
       "x": 523,
       "y": 177,
       "w": 16,
@@ -12078,12 +12078,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-lab-plain-lit": {
+    "tile-tw-oldale": {
       "x": 541,
       "y": 177,
       "w": 16,
@@ -12096,8 +12096,47 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-lab-plain": {
+    "tile-tw-olivine": {
       "x": 559,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-oreburgh": {
+      "x": 577,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-pacifidlog": {
+      "x": 595,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-pallet": {
+      "x": 613,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12109,46 +12148,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-lab-upper": {
-      "x": 577,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 7,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-lab": {
-      "x": 595,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 7,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-mart-lit": {
-      "x": 613,
-      "y": 177,
-      "w": 16,
-      "h": 16,
-      "frames": [
-        "idle"
-      ],
-      "palette": 8,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "tile-wall-mart-upper": {
+    "tile-tw-pastoria": {
       "x": 631,
       "y": 177,
       "w": 16,
@@ -12156,12 +12156,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-mart": {
+    "tile-tw-petalburg": {
       "x": 649,
       "y": 177,
       "w": 16,
@@ -12169,12 +12169,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 4,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-wall-wood-lit": {
+    "tile-tw-pewter": {
       "x": 667,
       "y": 177,
       "w": 16,
@@ -12187,8 +12187,528 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "tile-water-1": {
+    "tile-tw-rustboro": {
       "x": 685,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-saffron": {
+      "x": 703,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-sandgem": {
+      "x": 721,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-silvertown": {
+      "x": 739,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-slateport": {
+      "x": 757,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-snowpoint": {
+      "x": 775,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-solaceon": {
+      "x": 793,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-sootopolis": {
+      "x": 811,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-sunnyshore": {
+      "x": 829,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-twinleaf": {
+      "x": 847,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-veilstone": {
+      "x": 865,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-verdanturf": {
+      "x": 883,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-vermilion": {
+      "x": 901,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-violet": {
+      "x": 919,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-tw-viridian": {
+      "x": 937,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-uwrock": {
+      "x": 955,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-volcrock": {
+      "x": 973,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wake-1": {
+      "x": 991,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 2,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wake-2": {
+      "x": 1009,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 2,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-brick-lit": {
+      "x": 1027,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-brick-plain-lit": {
+      "x": 1045,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-brick-plain": {
+      "x": 1063,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-center-lit": {
+      "x": 1081,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-center-upper": {
+      "x": 1099,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-center": {
+      "x": 1117,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-gym-lit": {
+      "x": 1135,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-gym": {
+      "x": 1153,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-house-lit": {
+      "x": 1171,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-house-plain-lit": {
+      "x": 1189,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-house-plain": {
+      "x": 1207,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-house-unlit": {
+      "x": 1225,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-lab-lit": {
+      "x": 1243,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-lab-plain-lit": {
+      "x": 1261,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-lab-plain": {
+      "x": 1279,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-lab-upper": {
+      "x": 1297,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-lab": {
+      "x": 1315,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-mart-lit": {
+      "x": 1333,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-mart-upper": {
+      "x": 1351,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-mart": {
+      "x": 1369,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-wall-wood-lit": {
+      "x": 1387,
+      "y": 177,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tile-water-1": {
+      "x": 1405,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12201,7 +12721,7 @@
       "mirror_of": null
     },
     "tile-water-2": {
-      "x": 703,
+      "x": 1423,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12214,7 +12734,7 @@
       "mirror_of": null
     },
     "tile-water-3": {
-      "x": 721,
+      "x": 1441,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12227,7 +12747,7 @@
       "mirror_of": null
     },
     "tile-waterglow": {
-      "x": 739,
+      "x": 1459,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12240,7 +12760,7 @@
       "mirror_of": null
     },
     "tile-woodfloor": {
-      "x": 757,
+      "x": 1477,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12253,7 +12773,7 @@
       "mirror_of": null
     },
     "tile-bush-sway": {
-      "x": 775,
+      "x": 1495,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12267,7 +12787,7 @@
       "delta_of": "tile-bush"
     },
     "tile-flower-2-sway": {
-      "x": 793,
+      "x": 1513,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12281,7 +12801,7 @@
       "delta_of": "tile-flower-2"
     },
     "tile-flower-3-sway": {
-      "x": 811,
+      "x": 1531,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12295,7 +12815,7 @@
       "delta_of": "tile-flower-3"
     },
     "tile-flower-4-sway": {
-      "x": 829,
+      "x": 1549,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12309,7 +12829,7 @@
       "delta_of": "tile-flower-4"
     },
     "tile-flower-5-sway": {
-      "x": 847,
+      "x": 1567,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12323,7 +12843,7 @@
       "delta_of": "tile-flower-5"
     },
     "tile-flower-sway": {
-      "x": 865,
+      "x": 1585,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12337,7 +12857,7 @@
       "delta_of": "tile-flower"
     },
     "tile-foam-4": {
-      "x": 883,
+      "x": 1603,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12351,7 +12871,7 @@
       "delta_of": "tile-foam-2"
     },
     "tile-lamp-2": {
-      "x": 901,
+      "x": 1621,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12365,7 +12885,7 @@
       "delta_of": "tile-lamp"
     },
     "tile-lamp-3": {
-      "x": 919,
+      "x": 1639,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12379,7 +12899,7 @@
       "delta_of": "tile-lamp"
     },
     "tile-prop-healmachine-2": {
-      "x": 937,
+      "x": 1657,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12393,7 +12913,7 @@
       "delta_of": "tile-prop-healmachine"
     },
     "tile-prop-healmachine-3": {
-      "x": 955,
+      "x": 1675,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12407,7 +12927,7 @@
       "delta_of": "tile-prop-healmachine"
     },
     "tile-prop-labmachine-2": {
-      "x": 973,
+      "x": 1693,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12421,7 +12941,7 @@
       "delta_of": "tile-prop-labmachine"
     },
     "tile-prop-labmachine-3": {
-      "x": 991,
+      "x": 1711,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12435,7 +12955,7 @@
       "delta_of": "tile-prop-labmachine"
     },
     "tile-prop-labtank-2": {
-      "x": 1009,
+      "x": 1729,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12449,7 +12969,7 @@
       "delta_of": "tile-prop-labtank"
     },
     "tile-prop-labtank-3": {
-      "x": 1027,
+      "x": 1747,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12463,7 +12983,7 @@
       "delta_of": "tile-prop-labtank"
     },
     "tile-prop-pcdesk-2": {
-      "x": 1045,
+      "x": 1765,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12477,7 +12997,7 @@
       "delta_of": "tile-prop-pcdesk"
     },
     "tile-prop-pcdesk-3": {
-      "x": 1063,
+      "x": 1783,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12491,7 +13011,7 @@
       "delta_of": "tile-prop-pcdesk"
     },
     "tile-prop-plant-2": {
-      "x": 1081,
+      "x": 1801,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12505,7 +13025,7 @@
       "delta_of": "tile-prop-plant"
     },
     "tile-prop-porthole-2": {
-      "x": 1099,
+      "x": 1819,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12519,7 +13039,7 @@
       "delta_of": "tile-prop-porthole"
     },
     "tile-prop-shelf-2": {
-      "x": 1117,
+      "x": 1837,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12533,7 +13053,7 @@
       "delta_of": "tile-prop-shelf"
     },
     "tile-prop-slotmachine-2": {
-      "x": 1135,
+      "x": 1855,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12547,7 +13067,7 @@
       "delta_of": "tile-prop-slotmachine"
     },
     "tile-prop-slotmachine-3": {
-      "x": 1153,
+      "x": 1873,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12561,7 +13081,7 @@
       "delta_of": "tile-prop-slotmachine"
     },
     "tile-tallgrass-1-sway2": {
-      "x": 1171,
+      "x": 1891,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12575,7 +13095,7 @@
       "delta_of": "tile-tallgrass-1"
     },
     "tile-tallgrass-1-sway3": {
-      "x": 1189,
+      "x": 1909,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12589,7 +13109,7 @@
       "delta_of": "tile-tallgrass-1"
     },
     "tile-tallgrass-2-sway2": {
-      "x": 1207,
+      "x": 1927,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12603,7 +13123,7 @@
       "delta_of": "tile-tallgrass-2"
     },
     "tile-tallgrass-2-sway3": {
-      "x": 1225,
+      "x": 1945,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12617,7 +13137,7 @@
       "delta_of": "tile-tallgrass-2"
     },
     "tile-tallgrass-3-sway2": {
-      "x": 1243,
+      "x": 1963,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12631,7 +13151,7 @@
       "delta_of": "tile-tallgrass-3"
     },
     "tile-tallgrass-3-sway3": {
-      "x": 1261,
+      "x": 1981,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12645,7 +13165,7 @@
       "delta_of": "tile-tallgrass-3"
     },
     "tile-tallgrass-4-sway2": {
-      "x": 1279,
+      "x": 1999,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12659,7 +13179,7 @@
       "delta_of": "tile-tallgrass-4"
     },
     "tile-tallgrass-4-sway3": {
-      "x": 1297,
+      "x": 2017,
       "y": 177,
       "w": 16,
       "h": 16,
@@ -12673,8 +13193,8 @@
       "delta_of": "tile-tallgrass-4"
     },
     "tile-tallgrass-5-sway2": {
-      "x": 1315,
-      "y": 177,
+      "x": 1,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12687,8 +13207,8 @@
       "delta_of": "tile-tallgrass-5"
     },
     "tile-tallgrass-5-sway3": {
-      "x": 1333,
-      "y": 177,
+      "x": 19,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12701,8 +13221,8 @@
       "delta_of": "tile-tallgrass-5"
     },
     "tile-tallgrass-6-sway2": {
-      "x": 1351,
-      "y": 177,
+      "x": 37,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12715,8 +13235,8 @@
       "delta_of": "tile-tallgrass-6"
     },
     "tile-tallgrass-6-sway3": {
-      "x": 1369,
-      "y": 177,
+      "x": 55,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12729,8 +13249,8 @@
       "delta_of": "tile-tallgrass-6"
     },
     "tile-tree-elm-small-sway": {
-      "x": 1387,
-      "y": 177,
+      "x": 73,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12743,8 +13263,8 @@
       "delta_of": "tile-tree-elm-small"
     },
     "tile-tree-elm-sway": {
-      "x": 1405,
-      "y": 177,
+      "x": 91,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12757,8 +13277,8 @@
       "delta_of": "tile-tree-elm"
     },
     "tile-tree-oak-small-sway": {
-      "x": 1423,
-      "y": 177,
+      "x": 109,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12771,8 +13291,8 @@
       "delta_of": "tile-tree-oak-small"
     },
     "tile-tree-pine-small-sway": {
-      "x": 1441,
-      "y": 177,
+      "x": 127,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12785,8 +13305,8 @@
       "delta_of": "tile-tree-pine-small"
     },
     "tile-tree-pine-sway": {
-      "x": 1459,
-      "y": 177,
+      "x": 145,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12799,8 +13319,8 @@
       "delta_of": "tile-tree-pine"
     },
     "tile-tree-sway": {
-      "x": 1477,
-      "y": 177,
+      "x": 163,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12813,8 +13333,8 @@
       "delta_of": "tile-tree"
     },
     "tile-water-4": {
-      "x": 1495,
-      "y": 177,
+      "x": 181,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12827,8 +13347,8 @@
       "delta_of": "tile-water-1"
     },
     "tile-water-5": {
-      "x": 1513,
-      "y": 177,
+      "x": 199,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [
@@ -12841,8 +13361,8 @@
       "delta_of": "tile-water-2"
     },
     "tile-water-6": {
-      "x": 1531,
-      "y": 177,
+      "x": 217,
+      "y": 195,
       "w": 16,
       "h": 16,
       "frames": [

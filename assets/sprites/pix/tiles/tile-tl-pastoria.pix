@@ -1,0 +1,24 @@
+# Stage S3a: pastoria landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-pastoria 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #72a554 pastoria-landmark-wall
+b #4a6b37 landmark-trim
+d #d9a441 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

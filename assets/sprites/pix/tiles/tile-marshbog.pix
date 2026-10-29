@@ -1,0 +1,23 @@
+# Stage S3b: marshbog — peat bog floor of the Great Marsh (full-bleed, walkable).
+PIX tile-marshbog 16 16
+bcbcbaabcaaacaab
+baacccacaaaaadaa
+bcbbaadbaacbbcac
+caaacaaacdaadaab
+bcbccbabaabaaabc
+aaadbaaaaaaaaacb
+bdacaaaabaaaaaaa
+daabaddcaaaaccaa
+caaaaabaaaaaaaaa
+dadbdaacaacaaaaa
+acaaaadababaaaca
+acbacaaabaaabaca
+aadacaacaabaadaa
+caaacdaadbacbbca
+aaaabcccaabbabaa
+baabaacbbaaaabaa
+PAL
+a #5d7a45 marsh-bog
+b #47603a marsh-bog-dark
+c #74945a marsh-bog-light
+d #3d5a6e marsh-pool-chip

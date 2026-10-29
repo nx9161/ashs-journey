@@ -11952,3 +11952,220 @@ projection-to-close ruling, not a defect in the landed work.
   again (~+55 projected for four towns) — re-measure before
   raising. **And the §0 projection flag stands: S3b does not
   start without the coordinator's budget ruling.**
+
+## Arc 4 Stage S3b — Sinnoh maps, east/north + Distortion World (2026-10-29)
+
+Base: main @ 5a8838b (S3a). Deliverable: `src/data/maps9.mjs` grows
+62 → **139 maps** (export `MAPS9` unchanged; no new module), still
+generated deterministically by the SAME generator, extended in
+place (`~/workspace/ashs-journey-qa/arc4-etl/gen_maps9.py`, two runs
+byte-identical; edit the generator, not the file). Rigs in the same
+folder, rescoped to all of MAPS9: `sinnoh-sweep.mjs`,
+`sinnoh-richness.mjs`, `sinnoh-enc-audit.mjs`; art generator
+`gen_s3a_art.py` extended in place (S3a tiles byte-unchanged).
+
+### 0. The coordinator BUDGET RULING — post-S3a (binding on this stage, recorded verbatim in substance)
+
+S3a closed with its projection inside the 250K stop trigger; the
+coordinator ruled before S3b started, and this stage was executed
+under that ruling: **(1)** the hard gate **12,582,912 B never
+moves**; **(2)** S3b's stage allowance is **+200,000 B public
+static total max** (the H3b/J3b analogues, re-based on S3a's
+measured +187,606); **(3)** inside it, the art-data internal
+ceiling (8,800,000 B) may be raised ONLY via the recorded
+ratified-raise procedure and ONLY by measured tile need — the
+S3a-close headroom was **91,475 B**; **(4)** every later stage's
+own close restates the projection; if any restated margin falls
+below **150,000 B**, the NEXT stage plans to a byte allowance set
+by the coordinator before it starts (austerity tripwire).
+**Actuals vs the ruling:** public static total 12,025,899 →
+**12,224,915 B, Δ +199,016 — inside the +200,000 allowance by
+984 B** (`public/game.js` 11,863,277 → 12,062,293, same delta;
+index/admin unchanged). Art-data 8,708,525 → **8,729,120 B
+(+20,595)** — the 8.8 MB ceiling was **NOT raised** (70,880 B of
+headroom remains). The tiles palette cap WAS raised by the
+ratified procedure, 1120 → **1180**, on measured need: the union
+measures **1171 hexes** after the four east settlements' 32
+identity tiles + 8 S3B kinds (recorded at the cap in
+`assets/sprites/tools/build-art.mjs`, mirrored in
+`palette-audit.mjs`). **Restated projection-to-close:** S4 ≈
++40,000, S5a+S5b ≈ +135,000, S6 ≈ +50,000, S7 ≈ +25,000, S8/S9 ≈
++3,000 (the S3a analogues unchanged — no S3b evidence revises
+them) → remaining ≈ +253,000 → projection ≈ **12,477,915 B**,
+margin ≈ **104,997 B — BELOW the ruling's 150,000 B austerity
+tripwire. The tripwire therefore fires for S4: S4 plans to a
+coordinator-set byte allowance before it starts.** This stage is
+committed complete: its own allowance held and every gate is
+green; the tripwire is a forward planning constraint, exactly as
+the ruling designs it.
+
+### 1. What landed — 77 new maps (139 total in maps9)
+
+- **Settlements (4) + the League:** `pastoria` 30×18 (Great Marsh
+  gatehouse on its north fence), `celestic` 28×16 (shrine town),
+  `snowpoint` 30×18 (snow country; temple + harbour + the
+  Battle-Zone ferry captain on the pier), `sunnyshore` 30×18
+  (solar-panel roads, lighthouse, the League causeway east) —
+  all ≥24×14 viewport-filling, all fielding Center + Mart via
+  the shared `via{}` idiom. `pokemon-league` 28×16
+  (settlement-class exterior on its waterfall plateau) +
+  `league-lobby` + `league-chamber-1..4` + `league-champion`:
+  the full Elite Four approach as dressed places (battles S5).
+- **Battle Zone (the byte call, recorded):** the allowance HELD,
+  so `fight-area` / `survival-area` / `resort-area` ship at
+  **settlement-lite standard — real places** (24×14, their own
+  Center + Mart via `via{}`, a house each, the Resort's villa) —
+  NOT fenced-and-signed. The fence fallback the brief allowed was
+  not needed.
+- **Routes (20):** `r212-south` (the fence S3a signed is OPEN),
+  `r210-north` (**fog segment**, §4), `r213`, `r214` (the
+  Veilstone→Valor shore road — opens Veilstone's second south
+  lane), `spring-path`, `r216`, `r217` (snow climb country),
+  `r219`–`r224` (the Sandgem sea lane + the Pal Park approach +
+  the Sunyshore/League coast + the Seabreak run), `r225`–`r230`
+  (the Battle Zone island loop: snow pass, ash desert, coast
+  water).
+- **Dungeons/places (23):** `lake-valor` (restored lake) +
+  `lake-valor-cave`, `lake-acuity` (frozen) + `lake-acuity-cave`,
+  `sendoff-spring` + `turnback-cave` (**the Griseous Orb chamber
+  exists as a place**, signed; S4 wires the switch),
+  `great-marsh-gate` + `great-marsh-west/east/north` (the Safari
+  PLACE set — playable maps with bog tables; the Safari-format
+  reskin lands S4), `mt-coronet-north` (**through the S3a seam**:
+  the central gallery's north wall, row 0 cols 13–14, warps
+  here; the "UNFINISHED" sign is reworded "THE NORTH STAIR"),
+  `spear-pillar`, `hall-of-origin` (the place exists above the
+  Pillar; S7 unlocks reaching it), `snowpoint-temple` +
+  `snowpoint-temple-depths`, `iron-island` + `iron-island-mine`,
+  `stark-mountain` + `stark-interior`, `victory-road`,
+  `fuego-ironworks` (its building now stands on r205),
+  `fullmoon-island`, `newmoon-island`, `flower-paradise` (exists
+  as a place off `seabreak-path`; S6 gates its event).
+- **Interiors (21):** houses ×8 (incl. the Resort villa), gyms
+  ×3 (`gym-pastoria/snowpoint/sunnyshore`, layouts only),
+  `celestic-shrine`, `sunnyshore-lighthouse`, + the League chain
+  and temple depths above.
+- **S3a maps patched at seams only:** r212 fence → r212-south;
+  veilstone second south lane → r214; sandgem beach lane → r219;
+  r210 west lane → r210-north; r205 gains the Fuego building;
+  mt-coronet-central's seam warps (above); canalave's pier gains
+  two plain-ferry sailors (Brine → Iron Island, Luna → Fullmoon);
+  snowpoint ⇄ fight-area ferry captains. No other S3a map
+  content changed.
+
+### 2. The Distortion World — this stage's best map work, honestly bounded
+
+Six maps, all `indoor: true, distortion: true` (the field is the
+S5 tint/weather hook): `distortion-entrance` (the Threshold,
+reached ONLY through Turnback Cave's Griseous-chamber portal —
+the Spear Pillar entry is S5's story), `distortion-depths`,
+`distortion-isles` (floating islets on a void field, bridged by
+narrow causeways), `distortion-falls`, `distortion-abyss`,
+`distortion-platform` (Giratina's platform; the return portal
+stands on it). Traversal is proven in-suite (S3b-10): entrance →
+depths → isles → falls → abyss → platform by the warp graph, and
+every DW map carries a warp out — no soft locks. **What the
+engine can and cannot do, stated plainly:** there is no gravity
+or z-axis in this engine, so the World's inverted geography is
+expressed the honest way — tilted platform layouts, floating
+islets over void, and **waterfalls walked as a floor family**
+(`distortfalls` is a WALKABLE floor kind, like surf-water is a
+floor family in the overworld idiom): you walk the falls because
+in this world the falls are ground. Nothing fakes an engine
+feature that does not exist; the bespoke presentation (tint,
+drift, Giratina) is S5's, driven through the `distortion` field
++ weather hooks these maps already carry.
+
+### 3. Tiles & art spend
+
+40 new `.pix` tiles via the S3a programme: the four east towns ×
+8 identity kinds at U+1E00 **idx 492–523** (the block S3a
+reserved; anchors: pastoria marsh green `#6a994e`, celestic
+shrine violet `#957fef`, snowpoint snow white `#caf0f8`,
+sunnyshore solar gold `#ffd166`) + 8 S3B kind tiles at idx
+524–531 (`marshbog`/`distortfloor`/`distortfalls` floors,
+`climbwall`/`distortrock` walls, `marshreed`/`solarpanel`/
+`originstone` props), wired through `tiles.mjs` (`S3B_KIND_DEFS`)
++ `art.mjs` exactly as S3a wired S3. Sprite audit: 6348/6352
+(the 4 failures are the inherited water-tile TODO markers, also
+failing at S3a close: 6308/6312 — not this stage's tiles).
+
+### 4. Systems geography authored (systems land S4)
+
+- **Fog:** `r210-north` carries `weather: 'fog'` — the field
+  `src/game/weather.mjs` reads (`mapDef.weather`), the
+  `diveSpots` precedent from Hoenn. The only fog map in Sinnoh.
+- **Rock Climb gates:** `climbwall` tiles (TILE_CHARS kind
+  `climbwall`, wall-class) stand on **r217**'s north bench, in
+  **victory-road**'s east ledge, and on **mt-coronet-north**'s
+  west shelf — each beside an ungated through-road, exactly the
+  Cut/Surf gate idiom: the maps carry the gates today, S4 wires
+  the move, nothing is hard-gated before the move exists.
+- **Ferries:** plain ferry NPCs (the shipped intra-region
+  idiom): Snowpoint ⇄ Fight Area (CAPT NORTHSTAR), Canalave →
+  Iron Island / Fullmoon Island, Fullmoon ⇄ Newmoon (the moon
+  boatman). No story gates on any of them (return-ticket law).
+
+### 5. Encounters (rig: `sinnoh-enc-audit.mjs`, PASS)
+
+S3b tables: **484 entries**, span **336–400** — Pastoria country
+opens in the 340s, the League approach climbs 385–398, Stark
+Mountain + the Battle Zone sit at the 388–400 cap. Marsh tables
+carry the Safari canon (Carnivine, Skorupi, Croagunk, Wooper,
+Yanma, Tropius in the deep bogs). Across all of maps9: **773
+entries / 128 species, span 301–400** — no legendaries, no
+starter lines, no Rotom, no Spiritomb, no lake trio placed wild.
+
+### 6. Proof
+
+- **Walking sweep** (`sinnoh-sweep.mjs`, all 139 maps): **PASS —
+  zero bad landings**; the warp+ferry graph from `sandgem`
+  reaches **139/139** (Coronet seam, Battle Zone ferry, Turnback
+  portal included).
+- **Jaccard:** settlement tile-kind sets, **all 14 settlements,
+  91/91 pairs ≤ 0.60, max 0.533** (oreburgh~veilstone, unchanged
+  from S3a).
+- **Richness:** PASS all 139 maps (new towns: pastoria 146,
+  celestic 142, snowpoint 166, sunnyshore 166 distinct colours;
+  snow reads as snow, the Distortion World rooms pass the cave
+  floor on their expanded distort palettes).
+- **sinnoh-checks 89 → 105/105.** Supersessions BY NAME: A27 F-1
+  census 41/39 → **59/57** (eighteen new em-dash names, same F-1
+  charset); S3a-01 rescoped to the S3a set (the 139 total is
+  pinned at S3b-01); S3a-07 rescoped to the S3a tables (289; the
+  S3b tables are S3b-07: 484); S3a-12 updated — the r212 fence is
+  open (warps reach hearthome + r212-south). New S3b-01…16:
+  accounting, viewport law, via{} service law incl. the lite
+  areas, story places, warp integrity, 139/139 reachability, the
+  encounter audit, the Coronet seam, fog + climbwall geography,
+  Distortion World traversal + `distortion` fields, the Great
+  Marsh chain, the ferry web, east-town tile identity (idx 492+,
+  authored art, no forge fallbacks), the weather law, the League
+  chamber chain, the Battle Zone loop.
+
+### 7. Battery
+
+sinnoh-checks **105/105** · qa-changed-flows failures exactly
+**{b2, d9}** · qa-slice exactly **{s6, l8}** (132/134) +
+verify-slice 48/48 · rejuv-phase2 exactly **{A09, C01}** (38/40)
+· battle-model **45/45** · campaign **24/24** · arc-foundation
+**47/47** · frontier **136/136** · hoenn-story **88/88** ·
+fidelity **35/35** · validator **106** + fuzz **2000/2000** +
+save-contract **12/12** · budgets-check **all gates pass**
+(vercel static 12,153,853 ≤ 12,582,912 on the budgets accounting,
+which excludes admin). Fresh build byte-identical post-commit;
+`personal/` byte-identical (sha f434ba63… / a780af0b…).
+
+### 8. Open items handed on
+
+- **S4 plans to a coordinator-set byte allowance** (the §0
+  tripwire: restated margin ≈ 104,997 B < 150,000 B).
+- S4 wires: the Safari reskin on the Great Marsh set, the
+  Griseous Orb switch in Turnback Cave, Rock Climb on the
+  authored `climbwall` gates, Defog/fog reading on r210-north.
+- S5: the League battles in the shipped chambers, the Galactic
+  finale + the Spear Pillar Distortion entry, DW presentation
+  via the `distortion` field. S6: Flower Paradise's event gate.
+  S7: reaching the Hall of Origin.
+- The Slowking-class forge-fallback watch carries on: every S3b
+  tile is authored (S3b-13 pins it), nothing new rides the forge.

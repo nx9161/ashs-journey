@@ -1,0 +1,23 @@
+# Stage S3a: pastoria house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-pastoria 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaaaaaaab
+aaaggggaaaaabaaa
+aaaggggaaaaaaaab
+aaaggggaaaaaaaaa
+aabggggaaaaaaaaa
+aabbbbbaaaaaaaaa
+abaaaaaaaaaabaaa
+aabaabaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaabaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #72a554 pastoria-house-wall
+b #4a6b37 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

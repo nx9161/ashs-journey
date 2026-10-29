@@ -1,0 +1,23 @@
+# Stage S3a: snowpoint house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-snowpoint 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #5a7a9a snowpoint-roof
+b #41586f roof-dark
+c #7098c0 roof-light
+d #e85a7a roof-trim

@@ -395,6 +395,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
     .flatMap((i) => [412 + i * 8, 413 + i * 8])
     .map((i) => String.fromCodePoint(0x1E00 + i)),
   ...[404, 405, 406]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Arc 4 Stage S3b: the four east-Sinnoh settlements' town-ground
+  // chars (tg at idx 492+i*8, tg2 at +1, tiles.mjs SINNOH_TOWN_CHARS
+  // towns 10..13) and the S3B floor kinds (marshbog / distortfloor /
+  // distortfalls — S3B_KIND_DEFS idx 0,1,2 at U+1E00+524, tiles.mjs)
+  // are walkable ground, swapped from walkable ground chars.
+  ...[0, 1, 2, 3]
+    .flatMap((i) => [492 + i * 8, 493 + i * 8])
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  ...[524, 525, 526]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

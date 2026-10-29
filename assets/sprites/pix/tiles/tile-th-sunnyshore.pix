@@ -1,0 +1,23 @@
+# Stage S3a: sunnyshore house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-sunnyshore 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #b8860b sunnyshore-roof
+b #846008 roof-dark
+c #e6a80e roof-light
+d #3a7ac0 roof-trim

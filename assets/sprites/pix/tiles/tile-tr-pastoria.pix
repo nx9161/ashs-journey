@@ -1,0 +1,23 @@
+# Stage S3a: pastoria roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-pastoria 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #4a5d23 pastoria-roof
+b #354319 roof-dark
+c #5c742c roof-light
+d #d9a441 roof-trim

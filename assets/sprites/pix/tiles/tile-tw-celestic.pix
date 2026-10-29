@@ -1,0 +1,23 @@
+# Stage S3a: celestic house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-celestic 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaabaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaaaaaaab
+abaggggaaaaaaaaa
+aabggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aabggggaaaaaaaaa
+aaabbbbaaaaaaaab
+baaaaaaaaaaaabaa
+aaaaaaaaaabaaaaa
+aaaaaaaaaaaaaaba
+aaaaaaaaaaaaaaaa
+abaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #a189ff celestic-house-wall
+b #6859a7 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

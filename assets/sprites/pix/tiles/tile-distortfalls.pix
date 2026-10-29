@@ -1,0 +1,25 @@
+# Stage S3b: distortfalls — waterfall floor of the Distortion World, walked like ground (full-bleed, walkable).
+PIX tile-distortfalls 16 16
+bfaabaaabceabaaa
+eaaabadcfaaabaaa
+baaaecafbdaabace
+baacbaaabaaabaaa
+bcaabeaabacabaaa
+baaabaaabaaabaaa
+baaabacabaaaeaac
+baaabaaabaaabcaa
+bacabaafbaacbaaa
+baaddaadbcaabaaa
+badabaacbaaabaaa
+eaaadcaabaaabaca
+baacbafabaaabaaa
+bcaabaaabacdbaaa
+baaabaadbafabaaa
+baaafacabaaabaac
+PAL
+a #4a6a9a distort-falls
+b #6a9ac8 distort-falls-foam
+c #38527a distort-falls-deep
+d #c8e0f5 distort-falls-spray
+e #2c4470 distort-falls-abyss
+f #8ad8c8 distort-falls-mint

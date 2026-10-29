@@ -1,0 +1,24 @@
+# Stage S3a: sunnyshore landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-sunnyshore 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #ffe26e sunnyshore-landmark-wall
+b #b29247 landmark-trim
+d #3a7ac0 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

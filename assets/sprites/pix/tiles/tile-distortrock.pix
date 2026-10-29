@@ -1,0 +1,25 @@
+# Stage S3b: distortrock — wrong-way banded cliff of the Distortion World (full-bleed, solid).
+PIX tile-distortrock 16 16
+fbbbbbbbbbfbbbbb
+aacbcefaafccabaa
+aaeaacbaaaaaeaaa
+bcaacbaaaaaafbae
+aaaaeacaaaaaaaaa
+aabaaaaaacaaaacb
+dddddddddddddddd
+aaeaaabaaaaaaaaa
+afaaaaacaaaaaaae
+aefaafabaaacaaba
+ddddddddddddddfd
+aeaaabbfbaafbbaf
+caceaaacbaaaacab
+aaaaaaabaaaafaab
+aaacfacaecbaaaab
+bbbbbbbbbbbbbbbb
+PAL
+a #54486e distort-rock
+b #3a304e distort-rock-dark
+c #6e5f8f distort-rock-light
+d #7a6a4a distort-ochre-band
+e #241c38 distort-rock-abyss
+f #9a8ab8 distort-rock-pale

@@ -247,8 +247,8 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     if (typeof m.name !== 'string') continue;
     for (const ch of m.name.normalize('NFKC')) if (!SAFE.test(ch)) offending.add(ch);
   }
-  ok('A27 F-1 census (the register count; S3a supersession — maps9 adds three em-dash names: Route 212 — North, Mt. Coronet — South, Mt. Coronet — Central, all covered by the same F-1 charset): the shipped maps*.mjs name fields hold 41 map entries whose display name contains the em-dash, 39 unique names — and U+2014 is the ONLY character in any shipped map display name outside the SAFE_TEXT set',
-    emNames.length === 41 && new Set(emNames).size === 39
+  ok('A27 F-1 census (the register count; S3b supersession — maps9 S3b adds eighteen em-dash names: Route 212 — South, Route 210 — North, Mt. Coronet — North, Great Marsh — West/East/North, Snowpoint Temple — Depths, Stark Mountain — Crater Hall, League Chamber — First/Second/Third/Fourth, Distortion World — Threshold/Depths/Isles/Falls/Abyss/Platform, all covered by the same F-1 charset): the shipped maps*.mjs name fields hold 59 map entries whose display name contains the em-dash, 57 unique names — and U+2014 is the ONLY character in any shipped map display name outside the SAFE_TEXT set',
+    emNames.length === 59 && new Set(emNames).size === 57
     && offending.size === 1 && offending.has('—'),
     'entries=' + emNames.length + ' unique=' + new Set(emNames).size + ' offending=' + [...offending].join(','));
 }
@@ -446,8 +446,8 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   const PLACES9 = ['lake-verity', 'lake-verity-cave', 'oreburgh-mine', 'ravaged-path', 'valley-windworks', 'eterna-forest', 'old-chateau', 'wayward-cave', 'mt-coronet-south', 'mt-coronet-central', 'solaceon-ruins', 'lost-tower', 'amity-square'];
   const INTERIORS9 = ['house-twinleaf', 'house-twinleaf-rival', 'house-sandgem', 'house-jubilife', 'house-jubilife-condo', 'house-oreburgh', 'house-floaroma', 'house-eterna', 'house-hearthome', 'house-hearthome-poffin', 'house-solaceon', 'house-solaceon-daycare', 'house-veilstone', 'house-canalave', 'canalave-library', 'rowan-lab', 'jubilife-tv', 'galactic-eterna', 'galactic-hq', 'gym-oreburgh', 'gym-eterna', 'gym-hearthome', 'gym-veilstone', 'gym-canalave', 'contest-hearthome'];
   const ALL9 = [...TOWNS9, ...ROUTES9, ...PLACES9, ...INTERIORS9];
-  ok('S3a-01 maps9 accounting: exactly 62 maps (10 settlements + 14 routes + 13 dungeons/places + 25 interiors), every expected id present exactly once, rows rectangular',
-    Object.keys(MAPS9).length === 62 && ALL9.every((id) => MAPS9[id] && MAPS9[id].id === id)
+  ok('S3a-01 maps9 accounting (S3b supersession — the total count moved to S3b-01 when maps9 grew to 139; this check now scopes to the S3a set): the 62 S3a maps (10 settlements + 14 routes + 13 dungeons/places + 25 interiors) are all present exactly once, rows rectangular across all of maps9',
+    ALL9.length === 62 && ALL9.every((id) => MAPS9[id] && MAPS9[id].id === id)
     && Object.values(MAPS9).every((m) => m.rows.every((r) => r.length === m.rows[0].length)),
     'count=' + Object.keys(MAPS9).length + ' missing=' + ALL9.filter((id) => !MAPS9[id]).join(','));
   ok('S3a-02 viewport law: every settlement outdoor map is authored >= 24 wide x >= 14 tall (the standing new-region viewport-filling law)',
@@ -487,7 +487,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   const LEG9 = new Set(['articuno', 'zapdos', 'moltres', 'mewtwo', 'mew', 'raikou', 'entei', 'suicune', 'lugia', 'hooh', 'celebi', 'regirock', 'regice', 'registeel', 'latias', 'latios', 'kyogre', 'groudon', 'rayquaza', 'jirachi', 'deoxys', 'uxie', 'mesprit', 'azelf', 'dialga', 'palkia', 'heatran', 'regigigas', 'giratina', 'giratinaorigin', 'cresselia', 'phione', 'manaphy', 'darkrai', 'shaymin', 'shayminsky', 'arceus', 'rotom', 'rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow', 'spiritomb']);
   const START9 = new Set(['turtwig', 'grotle', 'torterra', 'chimchar', 'monferno', 'infernape', 'piplup', 'prinplup', 'empoleon']);
   let encEntries = 0, encLo = 999, encHi = 0, encBad = [];
-  for (const m of Object.values(MAPS9)) {
+  for (const m of ALL9.map((id) => MAPS9[id])) {
     if (!m.encounters) continue;
     for (const t of [...(m.encounters.table || []), ...(m.encounters.water || [])]) {
       encEntries++;
@@ -495,7 +495,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
       if (!roster9[t.species] || LEG9.has(t.species) || START9.has(t.species) || t.min < 301 || t.max > 400 || t.min > t.max || !(t.weight > 0)) encBad.push(m.id + ':' + t.species);
     }
   }
-  ok('S3a-07 encounter audit in-suite: 289 entries across the maps9 tables — every species exists in the merged roster, every level inside band 301-400, no legendaries, no starter lines, no Rotom, no Spiritomb placed wild',
+  ok('S3a-07 encounter audit in-suite (S3b supersession — scoped to the S3a map set; the S3b tables are audited in S3b-07): 289 entries across the S3a maps9 tables — every species exists in the merged roster, every level inside band 301-400, no legendaries, no starter lines, no Rotom, no Spiritomb placed wild',
     encEntries === 289 && encBad.length === 0 && encLo === 301 && encHi <= 345,
     'entries=' + encEntries + ' span=' + encLo + '-' + encHi + ' bad=' + encBad.join(','));
   const tab9 = (id) => (MAPS9[id].encounters && MAPS9[id].encounters.table) || [];
@@ -514,9 +514,10 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     && (MAPS9['mt-coronet-central'].warps || []).filter((w) => w.to.map === 'mt-coronet-central').length >= 2);
   ok('S3a-11 Old Chateau: the Rotom room exists as a place (the television sign in old-chateau) while Rotom itself is placed nowhere wild (its forme system lands S4)',
     (MAPS9['old-chateau'].signs || []).some((s) => s.text.includes('television')));
-  ok('S3a-12 Route 212 honesty: r212 is the NORTH segment only — its only warp target is hearthome (the Pastoria leg is S3b, fenced + signed, never faked)',
-    (MAPS9.r212.warps || []).length > 0 && (MAPS9.r212.warps || []).every((w) => w.to.map === 'hearthome')
-    && (MAPS9.r212.signs || []).some((s) => s.text.includes('212')));
+  ok('S3a-12 Route 212 (S3b supersession — the S3a fence is OPEN: r212 remains the NORTH segment, its warps now reach hearthome AND r212-south, the Pastoria leg S3a signed as future work; the sign was reworded to say the road runs on)',
+    (MAPS9.r212.warps || []).length > 0 && (MAPS9.r212.warps || []).every((w) => ['hearthome', 'r212-south'].includes(w.to.map))
+    && (MAPS9.r212.warps || []).some((w) => w.to.map === 'r212-south')
+    && (MAPS9.r212.signs || []).some((s) => s.text.includes('212') && s.text.includes('Pastoria')));
   const tiles9 = await import(join(ROOT, 'src/engine/tiles.mjs'));
   ok('S3a-13 Sinnoh tile identity: SINNOH_TOWN_ORDER reserves all 14 settlements; the 10 S3a towns each own 8 distinct signature chars (tg/tg2/tc/td/tr/tl/th/tw at U+1E00 idx 412+i*8) registered in TILE_CHARS, and the tg/tg2 ground chars + the 3 S3 floor kinds are in the engine WALKABLE set',
     tiles9.SINNOH_TOWN_ORDER.length === 14
@@ -534,6 +535,131 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     [...TOWNS9, ...ROUTES9, 'lake-verity', 'eterna-forest', 'amity-square'].every((id) => typeof MAPS9[id].weather === 'string')
     && INTERIORS9.every((id) => MAPS9[id].indoor === true && MAPS9[id].weather === undefined)
     && PLACES9.filter((id) => !['lake-verity', 'eterna-forest', 'amity-square'].includes(id)).every((id) => MAPS9[id].indoor === true));
+}
+
+
+// ================= Part S3b: maps, east/north + Distortion World ========
+// maps9.mjs grows 62 -> 139 (gen: arc4-etl/gen_maps9.py S3b section):
+// the 4 remaining settlements + the League, 20 routes, the Battle
+// Zone, the remaining lakes/dungeons, and the Distortion World set.
+// Full walking sweep / richness / encounter rigs: arc4-etl/sinnoh-
+// {sweep,richness,enc-audit}.mjs (scope = all of MAPS9).
+{
+  const { MAPS9 } = await import(join(ROOT, 'src/data/maps9.mjs'));
+  const TOWNS9B = ['pastoria', 'celestic', 'snowpoint', 'sunnyshore'];
+  const LITE9B = ['fight-area', 'survival-area', 'resort-area'];
+  const ROUTES9B = ['r212-south', 'r210-north', 'r213', 'r214', 'spring-path', 'r216', 'r217', 'r219', 'r220', 'r221', 'r222', 'r223', 'r224', 'seabreak-path', 'r225', 'r226', 'r227', 'r228', 'r229', 'r230'];
+  const PLACES9B = ['pokemon-league', 'lake-valor', 'lake-valor-cave', 'lake-acuity', 'lake-acuity-cave', 'sendoff-spring', 'turnback-cave', 'great-marsh-gate', 'great-marsh-west', 'great-marsh-east', 'great-marsh-north', 'mt-coronet-north', 'spear-pillar', 'hall-of-origin', 'iron-island', 'iron-island-mine', 'stark-mountain', 'stark-interior', 'victory-road', 'fuego-ironworks', 'fullmoon-island', 'newmoon-island', 'flower-paradise'];
+  const DW9B = ['distortion-entrance', 'distortion-depths', 'distortion-isles', 'distortion-falls', 'distortion-abyss', 'distortion-platform'];
+  const INTERIORS9B = ['house-pastoria', 'house-celestic', 'house-snowpoint', 'house-sunnyshore', 'house-fight', 'house-survival', 'house-resort', 'house-resort-villa', 'gym-pastoria', 'gym-snowpoint', 'gym-sunnyshore', 'celestic-shrine', 'snowpoint-temple', 'snowpoint-temple-depths', 'sunnyshore-lighthouse', 'league-lobby', 'league-chamber-1', 'league-chamber-2', 'league-chamber-3', 'league-chamber-4', 'league-champion'];
+  const NEW9B = [...TOWNS9B, ...LITE9B, ...ROUTES9B, ...PLACES9B, ...DW9B, ...INTERIORS9B];
+  ok('S3b-01 maps9 accounting: exactly 139 maps (62 S3a + 77 S3b: 4 settlements + League + 3 Battle Zone lite areas, 20 routes, 23 dungeons/places, the 6-map Distortion World, 21 interiors), every expected S3b id present exactly once',
+    Object.keys(MAPS9).length === 139 && NEW9B.length === 77 && NEW9B.every((id) => MAPS9[id] && MAPS9[id].id === id),
+    'count=' + Object.keys(MAPS9).length + ' missing=' + NEW9B.filter((id) => !MAPS9[id]).join(','));
+  ok('S3b-02 viewport law: every S3b settlement outdoor map (4 towns + the League exterior + the 3 lite areas) is authored >= 24 wide x >= 14 tall',
+    [...TOWNS9B, 'pokemon-league', ...LITE9B].every((id) => MAPS9[id].rows[0].length >= 24 && MAPS9[id].rows.length >= 14),
+    [...TOWNS9B, 'pokemon-league', ...LITE9B].filter((id) => MAPS9[id].rows[0].length < 24 || MAPS9[id].rows.length < 14).join(','));
+  ok('S3b-03 every S3b settlement + lite area fields a Pokemon Center + Mart through the shared interiors WITH via{} tickets (the Johto/Hoenn idiom, the lite areas included)',
+    [...TOWNS9B, ...LITE9B].every((id) => ['center', 'mart'].every((t) => (MAPS9[id].warps || []).some((w) => w.to.map === t && w.via && w.via.map === id))));
+  ok('S3b-04 story places exist as maps: gym-pastoria/gym-snowpoint/gym-sunnyshore (layouts only), celestic-shrine, snowpoint-temple + its depths, sunnyshore-lighthouse, the Great Marsh gatehouse — all indoor, all with a return warp',
+    ['gym-pastoria', 'gym-snowpoint', 'gym-sunnyshore', 'celestic-shrine', 'snowpoint-temple', 'snowpoint-temple-depths', 'sunnyshore-lighthouse', 'great-marsh-gate']
+      .every((id) => MAPS9[id] && MAPS9[id].indoor === true && (MAPS9[id].warps || []).length >= 2));
+  ok('S3b-05 warp integrity (S3b maps): every warp target exists in the merged map set and lands on a walkable (or water) tile — zero bad landings in data',
+    NEW9B.every((id) => (MAPS9[id].warps || []).every((w) => {
+      const d = ALL_MAPS[w.to.map];
+      if (!d) return false;
+      const ch = d.rows[w.to.y] && d.rows[w.to.y][w.to.x];
+      return ch !== undefined && (WALKABLE.has(ch) || ch === '~' || ch === 'W');
+    })));
+  const adjB = {};
+  for (const m of Object.values(ALL_MAPS)) {
+    adjB[m.id] = adjB[m.id] || new Set();
+    for (const w of m.warps || []) if (w.to && ALL_MAPS[w.to.map]) adjB[m.id].add(w.to.map);
+    for (const n of m.npcs || []) if (n.ferry && ALL_MAPS[n.ferry]) adjB[m.id].add(n.ferry);
+  }
+  const seenB = new Set(['sandgem']); const qB = ['sandgem'];
+  while (qB.length) { const c = qB.shift(); for (const nx of adjB[c] || []) if (!seenB.has(nx)) { seenB.add(nx); qB.push(nx); } }
+  ok('S3b-06 fresh-game reachability: the map graph from sandgem reaches ALL 139 maps9 maps — Sinnoh is walkable end-to-end (the Coronet seam, the Battle Zone ferry, the Turnback portal included)',
+    Object.keys(MAPS9).every((id) => seenB.has(id)),
+    'unreached=' + Object.keys(MAPS9).filter((id) => !seenB.has(id)).join(','));
+  const rosterB = {};
+  for (const f of ['species.mjs', 'species2.mjs', 'species3.mjs', 'species4.mjs', 'species5.mjs']) {
+    const mod = await import(join(ROOT, 'src/data', f));
+    for (const v of Object.values(mod)) if (v && typeof v === 'object') Object.assign(rosterB, v);
+  }
+  const LEG9B = new Set(['articuno', 'zapdos', 'moltres', 'mewtwo', 'mew', 'raikou', 'entei', 'suicune', 'lugia', 'hooh', 'celebi', 'regirock', 'regice', 'registeel', 'latias', 'latios', 'kyogre', 'groudon', 'rayquaza', 'jirachi', 'deoxys', 'uxie', 'mesprit', 'azelf', 'dialga', 'palkia', 'heatran', 'regigigas', 'giratina', 'giratinaorigin', 'cresselia', 'phione', 'manaphy', 'darkrai', 'shaymin', 'shayminsky', 'arceus', 'rotom', 'rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow', 'spiritomb']);
+  const START9B = new Set(['turtwig', 'grotle', 'torterra', 'chimchar', 'monferno', 'infernape', 'piplup', 'prinplup', 'empoleon']);
+  let encB = 0, encBLo = 999, encBHi = 0, encBBad = [];
+  for (const id of NEW9B) {
+    const m = MAPS9[id];
+    if (!m.encounters) continue;
+    for (const t of [...(m.encounters.table || []), ...(m.encounters.water || [])]) {
+      encB++;
+      encBLo = Math.min(encBLo, t.min); encBHi = Math.max(encBHi, t.max);
+      if (!rosterB[t.species] || LEG9B.has(t.species) || START9B.has(t.species) || t.min < 301 || t.max > 400 || t.min > t.max || !(t.weight > 0)) encBBad.push(id + ':' + t.species);
+    }
+  }
+  ok('S3b-07 encounter audit in-suite: 484 entries across the S3b tables — every species exists in the merged roster, levels inside band 301-400 scaled to progression (span 336-400: Pastoria country opens the 340s, the Battle Zone + Stark Mountain sit at the 388-400 cap), no legendaries, no starter lines, no Rotom, no Spiritomb, no lake trio placed wild',
+    encB === 484 && encBBad.length === 0 && encBLo === 336 && encBHi === 400,
+    'entries=' + encB + ' span=' + encBLo + '-' + encBHi + ' bad=' + encBBad.join(','));
+  ok('S3b-08 the Coronet seam CONNECTS: mt-coronet-central warps north at its gallery wall (row 0, cols 13-14) to mt-coronet-north; the north cavern warps back south, north to spear-pillar, and east to r216; spear-pillar warps south back and north up to hall-of-origin',
+    [13, 14].every((x) => (MAPS9['mt-coronet-central'].warps || []).some((w) => w.x === x && w.y === 0 && w.to.map === 'mt-coronet-north'))
+    && ['mt-coronet-central', 'spear-pillar', 'r216'].every((t) => (MAPS9['mt-coronet-north'].warps || []).some((w) => w.to.map === t))
+    && (MAPS9['spear-pillar'].warps || []).some((w) => w.to.map === 'hall-of-origin')
+    && (MAPS9['hall-of-origin'].warps || []).every((w) => w.to.map === 'spear-pillar'));
+  const tilesB = await import(join(ROOT, 'src/engine/tiles.mjs'));
+  const climbCh = tilesB.S3B_KIND_CHARS.climbwall;
+  ok('S3b-09 fog + climb geography authored (systems land S4): r210-north carries weather fog (the field src/game/weather.mjs reads, the diveSpots precedent); climbwall gate tiles (TILE_CHARS kind climbwall) stand on r217, in victory-road, and in mt-coronet-north — each beside an ungated through-road',
+    MAPS9['r210-north'].weather === 'fog' && tilesB.TILE_CHARS[climbCh] === 'climbwall'
+    && ['r217', 'victory-road', 'mt-coronet-north'].every((id) => MAPS9[id].rows.some((r) => r.includes(climbCh))));
+  const dwSeen = new Set(['distortion-entrance']); const dwQ = ['distortion-entrance'];
+  while (dwQ.length) { const c = dwQ.shift(); for (const w of MAPS9[c].warps || []) if (DW9B.includes(w.to.map) && !dwSeen.has(w.to.map)) { dwSeen.add(w.to.map); dwQ.push(w.to.map); } }
+  ok('S3b-10 THE DISTORTION WORLD: all 6 maps carry distortion:true (the S5 tint/weather hook) + indoor:true; the warp graph walks entrance -> depths -> isles -> falls -> abyss -> platform; the platform carries the return portal to the entrance; the entrance portals back to turnback-cave (no soft lock: every DW map has a warp out)',
+    DW9B.every((id) => MAPS9[id].distortion === true && MAPS9[id].indoor === true && (MAPS9[id].warps || []).length >= 2)
+    && dwSeen.size === 6
+    && (MAPS9['distortion-platform'].warps || []).some((w) => w.to.map === 'distortion-entrance')
+    && (MAPS9['distortion-entrance'].warps || []).some((w) => w.to.map === 'turnback-cave')
+    && (MAPS9['turnback-cave'].warps || []).some((w) => w.to.map === 'distortion-entrance'));
+  ok('S3b-11 the Great Marsh is a playable place set: great-marsh-gate stands in Pastoria (a warp from pastoria) and chains gate -> west -> east -> north; the three marsh maps are outdoor rain maps with bog tables (the Safari reskin lands S4, the PLACE is S3b)',
+    (MAPS9.pastoria.warps || []).some((w) => w.to.map === 'great-marsh-gate')
+    && (MAPS9['great-marsh-gate'].warps || []).some((w) => w.to.map === 'great-marsh-west')
+    && (MAPS9['great-marsh-west'].warps || []).some((w) => w.to.map === 'great-marsh-east')
+    && (MAPS9['great-marsh-east'].warps || []).some((w) => w.to.map === 'great-marsh-north')
+    && ['great-marsh-west', 'great-marsh-east', 'great-marsh-north'].every((id) => MAPS9[id].weather === 'rain' && MAPS9[id].encounters));
+  const ferryTo = (mid, name) => { const n = (MAPS9[mid].npcs || []).find((x) => x.name === name); return n && n.ferry; };
+  ok('S3b-12 the boat web (plain ferry NPCs, the shipped intra-region idiom): Snowpoint CAPT NORTHSTAR <-> Fight Area (ferry fight-area / snowpoint); Canalave SAILOR BRINE -> iron-island and SAILOR LUNA -> fullmoon-island; Iron Island + Fullmoon sailors ferry back to canalave; Fullmoon MOON BOATMAN REED <-> Newmoon',
+    ferryTo('snowpoint', 'CAPT NORTHSTAR') === 'fight-area' && ferryTo('fight-area', 'CAPT NORTHSTAR') === 'snowpoint'
+    && ferryTo('canalave', 'SAILOR BRINE') === 'iron-island' && ferryTo('canalave', 'SAILOR LUNA') === 'fullmoon-island'
+    && ferryTo('iron-island', 'SAILOR BRINE') === 'canalave'
+    && ferryTo('fullmoon-island', 'SAILOR LUNA') === 'canalave' && ferryTo('fullmoon-island', 'MOON BOATMAN REED') === 'newmoon-island'
+    && ferryTo('newmoon-island', 'MOON BOATMAN REED') === 'fullmoon-island');
+  const { ART: ARTB } = await import(join(ROOT, 'assets/sprites/art-data.mjs'));
+  ok('S3b-13 east-town tile identity: pastoria/celestic/snowpoint/sunnyshore each own their 8 signature chars at U+1E00 idx 492+i*8 in TILE_CHARS, their tg/tg2 ground chars are in WALKABLE, and all 32 identity tiles + the 8 S3B kinds resolve authored art (no forge fallbacks)',
+    TOWNS9B.every((id, k) => ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'].every((sfx, j) =>
+      tilesB.SINNOH_TOWN_CHARS[id][sfx] === String.fromCodePoint(0x1E00 + 492 + k * 8 + j)
+      && tilesB.TILE_CHARS[tilesB.SINNOH_TOWN_CHARS[id][sfx]] === sfx + '-' + id))
+    && TOWNS9B.every((id) => WALKABLE.has(tilesB.SINNOH_TOWN_CHARS[id].tg) && WALKABLE.has(tilesB.SINNOH_TOWN_CHARS[id].tg2))
+    && TOWNS9B.every((id) => ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'].every((sfx) => ARTB['tile-' + sfx + '-' + id] && ARTB['tile-' + sfx + '-' + id].rows))
+    && ['marshbog', 'distortfloor', 'distortfalls', 'climbwall', 'distortrock'].every((k) => ARTB['tile-' + k] && ARTB['tile-' + k].rows)
+    && ['marshreed', 'solarpanel', 'originstone'].every((k) => ARTB['tile-prop-' + k] && ARTB['tile-prop-' + k].rows)
+    && tilesB.S3B_FLOOR_KINDS.every((k) => WALKABLE.has(tilesB.S3B_KIND_CHARS[k])));
+  ok('S3b-14 weather law (S3b): every outdoor S3b map declares a weather field; every S3b interior is indoor:true with no weather field; the fog segment is the only fog map',
+    [...TOWNS9B, ...LITE9B, ...ROUTES9B, ...PLACES9B.filter((id) => MAPS9[id].indoor !== true)].every((id) => typeof MAPS9[id].weather === 'string')
+    && INTERIORS9B.every((id) => MAPS9[id].indoor === true && MAPS9[id].weather === undefined)
+    && Object.values(MAPS9).filter((m) => m.weather === 'fog').length === 1);
+  ok('S3b-15 the League chain + the gated-event places: league-lobby -> chamber-1 -> chamber-2 -> chamber-3 -> chamber-4 -> league-champion warp chain is complete (battles are S5); flower-paradise is walkable from seabreak-path (S6 gates its event); turnback-cave carries the Griseous chamber sign (S4 wires the orb switch)',
+    (MAPS9['league-lobby'].warps || []).some((w) => w.to.map === 'league-chamber-1')
+    && ['league-chamber-1', 'league-chamber-2', 'league-chamber-3'].every((id, i) => (MAPS9[id].warps || []).some((w) => w.to.map === 'league-chamber-' + (i + 2)))
+    && (MAPS9['league-chamber-4'].warps || []).some((w) => w.to.map === 'league-champion')
+    && (MAPS9['flower-paradise'].warps || []).some((w) => w.to.map === 'seabreak-path')
+    && (MAPS9['turnback-cave'].signs || []).some((s) => s.text.includes('GRISEOUS')));
+  ok('S3b-16 the Battle Zone closes: r225 fight-area <-> survival-area, r226 survival -> resort-area, r227 resort -> stark-mountain -> stark-interior, and the r228 desert + r229/r230 coast water complete the island loop back to fight-area',
+    (MAPS9['r225'].warps || []).some((w) => w.to.map === 'fight-area') && (MAPS9['r225'].warps || []).some((w) => w.to.map === 'survival-area')
+    && (MAPS9['r226'].warps || []).some((w) => w.to.map === 'resort-area')
+    && (MAPS9['r227'].warps || []).some((w) => w.to.map === 'stark-mountain')
+    && (MAPS9['stark-mountain'].warps || []).some((w) => w.to.map === 'stark-interior')
+    && (MAPS9['r228'].warps || []).every((w) => w.to.map === 'resort-area')
+    && (MAPS9['r230'].warps || []).some((w) => w.to.map === 'fight-area'));
 }
 
 // ================= Part B: headless bundle =================

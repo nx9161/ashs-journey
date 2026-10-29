@@ -1,0 +1,23 @@
+# Stage S3a: celestic house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-celestic 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #4a3a6a celestic-roof
+b #352a4c roof-dark
+c #5c4884 roof-light
+d #e8e4da roof-trim

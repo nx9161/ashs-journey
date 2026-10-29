@@ -1,0 +1,23 @@
+# Stage S3a: sunnyshore roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-sunnyshore 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #b8860b sunnyshore-roof
+b #846008 roof-dark
+c #e6a80e roof-light
+d #3a7ac0 roof-trim

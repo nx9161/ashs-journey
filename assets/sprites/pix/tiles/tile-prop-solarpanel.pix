@@ -1,0 +1,22 @@
+# Stage S3b: solarpanel — solar road panel of Sunyshore (prop).
+PIX tile-prop-solarpanel 16 16
+aaaabaaaabaaaaba
+aaaabaaaabaaaaba
+aacabaaaabaaaaba
+aaaabaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaaba
+aaaabaaaabaaaaba
+aaaabaaacbaaaaba
+aaaabaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaaba
+aaaabaaaabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaaba
+PAL
+a #2e4a7a solar-cell
+b #1e3456 solar-grid
+c #9ac8e8 solar-glint

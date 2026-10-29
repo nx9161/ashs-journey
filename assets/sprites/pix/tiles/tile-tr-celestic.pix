@@ -1,0 +1,23 @@
+# Stage S3a: celestic roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-celestic 16 16
+dddddddddddddddd
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+PAL
+a #4a3a6a celestic-roof
+b #352a4c roof-dark
+c #5c4884 roof-light
+d #e8e4da roof-trim

@@ -1,0 +1,25 @@
+# Stage S3a: sunnyshore town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-sunnyshore 16 16
+bcccbccbaccaacbc
+ccbcabacaacabcaa
+cbcbcccccabccecc
+abcaaccebcaacccb
+bbaaccbcccccbbca
+ccccbabcaccbaaec
+acbbaacaabaccccc
+bacbccabaccccabc
+acacebccacccbaec
+caabcccaacbcaccb
+abccabcabbcabacb
+cccaccbaccaecbcc
+bccabccabcababcb
+aabccccccbecacae
+bbacaacbccccccbc
+abbccbcccaacbcac
+PAL
+a #ffd166 sunnyshore-ground
+b #c7a350 ground-dark
+c #fff778 ground-light
+d #3a7ac0 town-accent
+e #e8f4f8 town-accent-2
+f #997d3d ground-deep

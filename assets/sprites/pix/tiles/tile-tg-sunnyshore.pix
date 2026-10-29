@@ -1,0 +1,25 @@
+# Stage S3a: sunnyshore town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-sunnyshore 16 16
+aabfaaabdaaaabaa
+aaacaafaabafacaa
+baaacbcfaaaaaaab
+aaaafafaaaaacaac
+accaabaacaaaaaaa
+aabaaaabaaccaaaa
+aacaaaaabacacaca
+caaafabcfaafabda
+abaaaabaaabbaafc
+accaaaaaccaaaaaa
+aaaaaaaabaaaaaaa
+aaaaaabbbacaaaaa
+aaaaacabbaabaaaa
+baacaaaaaabaaccd
+aaabaaaaaaabaaba
+acabaaaabdaabbfa
+PAL
+a #ffd166 sunnyshore-ground
+b #c7a350 ground-dark
+c #fff778 ground-light
+d #3a7ac0 town-accent
+e #e8f4f8 town-accent-2
+f #997d3d ground-deep

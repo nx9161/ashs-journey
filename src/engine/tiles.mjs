@@ -419,6 +419,34 @@ SINNOH_TOWN_ORDER.forEach((id, i) => {
     TILE_CHARS[ch] = sfx + '-' + id;
   });
 });
+// ---- Arc 4 Stage S3b: Sinnoh east/north kinds ----
+// Chars continue the block at U+1E00+524 (S3 kinds 404..411, Sinnoh
+// towns 412..523). Same class convention as S3: floor = WALKABLE
+// ground family of its own, wall = solid, prop = solid object
+// composited over the ground it stands on. Authored art:
+// assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage S3b).
+// climbwall is the Rock Climb GATE kind: a solid cliff face whose
+// TILE_CHARS kind name is the marker the S4 field-move system reads
+// (the Cut-tree idiom — the gate lives in the tile, the move lands
+// in S4). distortfalls is the Distortion World's waterfall-walking
+// floor: a WALKABLE floor family drawn as falling water (the honest
+// engine idiom for DW's inverted falls — you walk the falls as
+// floor; no new movement system is faked).
+export const S3B_KIND_DEFS = [
+  ['marshbog', 'floor'], ['distortfloor', 'floor'], ['distortfalls', 'floor'],
+  ['climbwall', 'wall'], ['distortrock', 'wall'],
+  ['marshreed', 'prop'], ['solarpanel', 'prop'], ['originstone', 'prop'],
+];
+export const S3B_KIND_CHARS = {};
+S3B_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 524 + i);
+  S3B_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const S3B_PROP_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const S3B_FLOOR_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+export const S3B_WALL_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const S3B_WALKABLE_CHARS = S3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => S3B_KIND_CHARS[k]);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

@@ -1,0 +1,23 @@
+# Stage S3a: pastoria house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-pastoria 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #4a5d23 pastoria-roof
+b #354319 roof-dark
+c #5c742c roof-light
+d #d9a441 roof-trim

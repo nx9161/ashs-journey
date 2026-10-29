@@ -1,0 +1,25 @@
+# Stage S3a: celestic town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-celestic 16 16
+bcacacbbaaacabbc
+ccaccbabcecabacc
+cccbccbcccbbaecc
+cbeaccccbacacaab
+accccabbaccbcbca
+aeccbcccccabacca
+abbbcecacbaccaec
+bacaacabbcacacbc
+ccacbbccbccabccc
+cccbbaaeeabbcacb
+cbccacccbacccccb
+ccbacbbcacaccbcc
+acccbccacebbcccc
+acbacacbabcceccc
+bcbececbcbecccbc
+bccacbcccaccbcac
+PAL
+a #957fef celestic-ground
+b #7463ba ground-dark
+c #b096ff ground-light
+d #e8e4da town-accent
+e #c8a24a town-accent-2
+f #594c8f ground-deep
