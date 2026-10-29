@@ -139,11 +139,20 @@ export function baseStageOf(speciesId) {
 }
 // Offspring rule (recorded simplification): the non-Ditto parent when
 // one parent is Ditto, else the FIRST-deposited parent; the offspring
-// is that parent's line's base stage.
+// is that parent's line's base stage. Arc 4 Stage S6 widening (data,
+// not a species name in code): a species entry may declare its own
+// egg species (`eggSpecies`) when its eggs hatch a DIFFERENT species
+// than its base stage — the Manaphy -> Phione canon, which the
+// base-stage walk cannot express (Phione is Manaphy's offspring, not
+// its ancestor; the S1 assumption that egg-group data alone sufficed
+// was measured wrong at S6 — a Manaphy egg hatched Manaphy). The
+// declared field is the smallest data-driven correction.
 export function offspringOf(daycare) {
   if (!Array.isArray(daycare) || daycare.length < 2) return null;
   const [a, b] = daycare;
   const parent = isDittoMon(a) && !isDittoMon(b) ? b : (isDittoMon(b) && !isDittoMon(a) ? a : a);
+  const declared = SPECIES_ALL[parent.speciesId] && SPECIES_ALL[parent.speciesId].eggSpecies;
+  if (declared && SPECIES_ALL[declared]) return declared;
   return baseStageOf(parent.speciesId);
 }
 export function eggStepsFor(speciesId) {

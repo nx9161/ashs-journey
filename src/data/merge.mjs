@@ -28,6 +28,9 @@ Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
 // ids, pre-band levels, and arc_rayquaza's arcs-prereq, replaced by
 // the climax_resolved flag key per the H4b ruling).
 Object.assign(LEGENDARY_ARCS, HOENN_LEGENDARY_ARCS);
+// Arc 4 Stage S6 fold: Sinnoh's thirteen live legendary arcs,
+// superseding their story-kanto designed stubs (decision-9 keying).
+Object.assign(LEGENDARY_ARCS, SINNOH_LEGENDARY_ARCS);
 // Story patch (fidelity audit): the movie invite's island landing was
 // scripted out of bounds (8,14 on a 12-row map) — land on the shore (8,9).
 for (const ev of Object.values(EVENTS)) {

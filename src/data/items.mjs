@@ -137,6 +137,12 @@ export const ITEMS = {
   // Arc 4 Stage S5b: the Lunar Wing — carried away from Fullmoon
   // Island in the Darkrai beat; S6's Newmoon arc reads it.
   lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
+  // Arc 4 Stage S6: the Odd Keystone (Spiritomb's stone, a Route 209
+  // traveller's gift) and Oak's Letter (Shaymin's gate, Rowan-granted
+  // post-Conference; no item is invented for Darkrai — the inn event
+  // is its key, by flag).
+  oddkeystone: { id: 'oddkeystone', name: 'Odd Keystone', pocket: 'key', desc: 'A cracked stone, cold in a way weather does not explain. Something in it is counting. It wants a tower to go home to.' },
+  oaksletter: { id: 'oaksletter', name: "Oak's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Pewter. Lets you use FLASH outside battle; Attack rises.' },

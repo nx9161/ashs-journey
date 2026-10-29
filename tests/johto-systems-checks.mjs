@@ -211,8 +211,8 @@ const mon = (id, lv) => makeMon(id, lv || 120, SPECIES, MOVES);
   maximal.player.name = 'ASH'; maximal.player.rivalName = 'GARY';
   for (const id of Object.keys(ITEMS)) maximal.bag[id] = 999;
   const rm = VAL.validateSave(clone(maximal));
-  ok('A24 cheat maximal stock at 197 (192 + 4 Sinnoh keepsakes + the Lunar Wing key item, Arc 4 Stage S5b — supersedes the Stage S5a count) items validates server-side',
-    Object.keys(ITEMS).length === 197 && rm.ok, JSON.stringify(rm.errors));
+  ok('A24 cheat maximal stock at 199 (197 + the Odd Keystone + Oak\'s Letter, Arc 4 Stage S6 — supersedes the Stage S5b count) items validates server-side',
+    Object.keys(ITEMS).length === 199 && rm.ok, JSON.stringify(rm.errors));
 }
 
 // ---- apricorn trees ----

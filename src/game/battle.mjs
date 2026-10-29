@@ -37,6 +37,20 @@ import { typePill } from './ui.mjs';
 
 const HP_DRAIN_PER_SEC = 90; // ADR-004 feel budget
 
+// Arc 4 Stage S6 RIDER: authored foe move sets. A trainer team entry
+// may carry `moves: [moveId...]`; when it does, the foe mon's
+// learnset-derived set is replaced by the authored one, in order, at
+// full PP. Entries without the field keep the shipped learnset
+// behaviour byte-for-byte — a no-op for every def that predates it.
+function authoredMoves(mon, entry) {
+  if (entry && Array.isArray(entry.moves) && entry.moves.length) {
+    const set = entry.moves.filter((id) => MOVES[id]).slice(0, 4)
+      .map((id) => ({ id, pp: MOVES[id].pp, maxPp: MOVES[id].pp }));
+    if (set.length) mon.moves = set;
+  }
+  return mon;
+}
+
 // ---- Premium+ W1 (FX-1/FX-2/FX-4/FX-5/FX-6): battle impact layer ----
 // All W1 presentation is VISUAL ONLY: it never calls g.rng, never
 // changes a timing the battle-model mission shipped (hitstop 70ms,
@@ -287,7 +301,7 @@ export class BattleScene {
       const t0 = this.trainer.team[0];
       // ADR-025 §4: difficulty levers land at instantiation — trainer team
       // levels (rules.trainerLevelFor) and foe IV treatment (tuneFoeMon).
-      this.foeMon = makeMon(t0.species, trainerLevelFor(g.state, this.trainer, t0.level), SPECIES, MOVES);
+      this.foeMon = authoredMoves(makeMon(t0.species, trainerLevelFor(g.state, this.trainer, t0.level), SPECIES, MOVES), t0);
       if (t0.nickname) this.foeMon.nickname = t0.nickname; // e.g. the duo's named mons
     }
     tuneFoeMon(this.foeMon, g.state);
@@ -1737,7 +1751,7 @@ export class BattleScene {
       this.trainerIdx++;
       if (this.trainerIdx < this.trainer.team.length) {
         const t = this.trainer.team[this.trainerIdx];
-        this.foe = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
+        this.foe = tuneFoeMon(authoredMoves(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), t), g.state);
         if (t.nickname) this.foe.nickname = t.nickname;
         const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
         if (ksN) this.foe.keepsake = ksN;
@@ -1799,7 +1813,7 @@ export class BattleScene {
       // the field only in _shiftSendOut, after the player's decision.
       this.trainerIdx++;
       const t = this.trainer.team[this.trainerIdx];
-      const incoming = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
+      const incoming = tuneFoeMon(authoredMoves(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), t), g.state);
       if (t.nickname) incoming.nickname = t.nickname;
       const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
       if (ksN) incoming.keepsake = ksN;

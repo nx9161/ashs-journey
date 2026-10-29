@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "ae3e90b87de149fc4835dee3cbbf14bb9e0f9b22744f4b7fe9b39ccb48ae4192",
+  "tablesVersion": "3d0f361a76edf3aaeae9316427b5a5d005783398a6207be34e2ffa7c7e5346cc",
   "schemaVersion": 2,
   "species": [
     "abomasnow",
@@ -753,6 +753,8 @@
     "moonball",
     "moonstone",
     "nugget",
+    "oaksletter",
+    "oddkeystone",
     "oldamber",
     "oldrod",
     "parlyzheal",
@@ -1179,6 +1181,7 @@
     "arc_registeel",
     "arc_shaymin",
     "arc_solgaleo",
+    "arc_spiritomb",
     "arc_suicune",
     "arc_terapagos",
     "arc_urshifu",

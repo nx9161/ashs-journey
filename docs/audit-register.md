@@ -12814,3 +12814,289 @@ post-commit (d3cb4852…); `personal/` byte-identical
 - The single owner-ordered deploy happens once the whole Sinnoh
   arc chain closes (through Sinnoh); nothing here was pushed or
   deployed.
+
+## Arc 4 Stage S6 — Sinnoh legendary arcs ×13 + Tobias rider (2026-10-29)
+
+The thirteen Sinnoh legendary arcs, live on the shipped
+quest/legendary machinery (decision 9 + the coordinator allowance
+of 2026-10-29, binding: +45,000 B static max), plus the Tobias
+rider closing S5b's honesty note. Base 9794398; nothing pushed or
+deployed; `personal/` byte-identical.
+
+### 1. The rider (done first, per the allowance)
+
+S5b's honesty note stood: Tobias's Darkrai, built from its
+band-local learnset alone, carried Quick Attack as its only
+damaging move. Two facts had to be faced in order:
+
+- **The def format's authored-set slot existed in NO shipped
+  code.** The coordinator's premise ("the def format supports
+  authored moves — Frontier Brains precedent") was checked against
+  the tree and is not true of it: `BattleScene` built every foe
+  via `makeMon` (learnset last-4) at all three construction sites,
+  and no `moves` field was read anywhere for trainer teams
+  (BRAIN_TEAMS carry species + keepsake only). S6 therefore added
+  the smallest generic engine support: `authoredMoves(mon, entry)`
+  in `src/game/battle.mjs`, applied at the three foe-construction
+  sites — a team entry carrying `moves: [ids]` gets exactly that
+  set, in order, at full PP; entries without the field keep the
+  shipped learnset behaviour byte-for-byte. battle-model **45/45**
+  (the hard gate) is unmoved, as designed.
+- **The sets themselves** (each move verified in the species'
+  legal in-table pool — band learnset ∪ TM list): Darkrai 390 =
+  **Hypnosis + Dream Eater** (learnset; the nightmare engine) +
+  **Fire Blast (TM38) + Hyper Beam (TM15)**, its TM list's
+  strongest honest special damage. Latios 392 = **Psychic**
+  (learnset STAB) + **Ice Beam (TM13) + Thunderbolt (TM24)** +
+  **Recover** (learnset). Darkrai's learnset alone tops out at
+  Quick Attack/Dream Eater for damage (Dream Eater needs sleep —
+  hence Hypnosis authored alongside it); the TM list is where its
+  honest power lives, and the rider says so rather than pretending
+  the learnset sufficed. Pinned in sinnoh-story **A23** (extended
+  in place: both aces authored, pool-legal, ≥2 damaging) and in
+  the new suite's A07 + **B15** (the sets read off the LIVE
+  BattleScene foes). The three Tobias proofs stay green inside
+  sinnoh-story's 95/95 (B55 wipe = rematch offered, B56/B57 the
+  felling + Latios conclusion, B58 the machine firing once) —
+  B56's strong team fells the authored Darkrai exactly as before.
+
+### 2. The thirteen arcs
+
+All thirteen ride the shipped machinery: a Quest Log legendary
+entry per arc with spelled-out requirement steps (≥2 steps,
+exactly one catch step naming its own species, every other step
+flag-keyed — pinned A02), discovery on the openQuestLog
+living-section law (an arc whose prereq flag stands joins the Log
+as 'discovered'), and every one-of-one face on the
+`{ wildBattleCatch }` chain — the arc advances ONLY on a catch;
+flee AND KO stall the chain with nothing written, so every face
+re-fires and nothing can ever dex-lock. The live register
+(`SINNOH_LEGENDARY_ARCS`, folded by merge.mjs over the
+story-kanto designed stubs) supersedes the stubs' dead lair ids,
+pre-band levels, and arcs-prereqs wholesale.
+
+| Arc | Lair | Gate (as the quest-log step spells it) | Level |
+| --- | --- | --- | --- |
+| Uxie | lake-acuity-cave | `sinnoh_climax_resolved` | 370 |
+| Azelf | lake-valor-cave | `sinnoh_climax_resolved` | 370 |
+| Mesprit | sinnoh-routes (roams) | climax, then the Verity Cavern meeting sets her roaming | 370 |
+| Dialga | spear-pillar | `sinnoh_climax_resolved` only (+ S5b's `dialga_unlocked`) | 388 |
+| Palkia | spear-pillar | climax + Dialga caught first (the pillar's order) | 388 |
+| Giratina | turnback-cave | climax (+ S5b's `giratina_unlocked`) | 392 |
+| Heatran | stark-interior | meet Buck (Survival Area) → return the Magma Stone with him → revisit | 375 |
+| Regigigas | snowpoint-temple-depths | Regirock + Regice + Registeel IN THE PARTY, read live | 380 |
+| Cresselia | sinnoh-routes (roams) | `lunar_wing_received`, climax, then the Fullmoon meeting sets her roaming | 372 |
+| Darkrai | newmoon-island | `darkrai_unlocked` + `sinnoh_complete` → the Canalave inn sleep event | 378 |
+| Manaphy | rowan-lab (the Egg) | `sinnoh_complete` → Rowan's gift Egg → hatch at 301; Phione breeds from it | 301 (hatch) |
+| Shaymin | flower-paradise | `sinnoh_complete` → Oak's Letter from Rowan → the Seabreak Path | 374 |
+| Spiritomb | r209 (the Hallowed Tower) | the Odd Keystone (a Route 209 traveller's gift) + facing the tower | 365 |
+
+Per-arc wiring notes:
+
+- **Lake trio.** Uxie/Azelf are post-climax cave faces in the
+  caverns S3b placed. **Mesprit roams** — the Latias precedent
+  exactly: the Verity Cavern meeting sets `mesprit_roaming` (no
+  battle — she declines, courteously), and her landing is a pure
+  function of the persisted step counter over
+  `['r201','r205','r210','r215','r222']`.
+- **Dialga/Palkia** key ONLY on `sinnoh_climax_resolved` (the
+  *_unlocked flags S5b's climax set are read as the wake proof,
+  nothing else — no Cyrus rematch, no item). Platinum truth,
+  written that way: after the climax both dragons can be faced at
+  Spear Pillar; the pillar keeps its appointments in order, so
+  Palkia's face stands behind Dialga's catch (a quest-log step
+  says so). The S5b spear event owns the climax visit itself, so
+  the faces begin on the NEXT entry — no double-fire.
+- **Giratina — DESIGN CALL 1: the primary lair is TURNBACK
+  CAVE.** The Griseous Orb's chamber already lives there (S4),
+  Platinum's post-game tenant is Turnback's, and the Distortion
+  World return is NOT wired as a second trigger: one one-of-one
+  gets one door (a second trigger for the same catch adds a
+  failure surface, not a feature — the platform keeps the
+  climax's memory and the forme switch, which S4 already proved
+  there and at Turnback both). The face fires on Turnback entry
+  while `giratina_unlocked` stands.
+- **Heatran.** Buck is a new Survival Area NPC (kind 'buck'):
+  flavour-only pre-climax; post-climax the meeting sets
+  `buck_met` + discovers the arc. The first stark-interior entry
+  with Buck met plays the accompaniment (the displaced Magma
+  Stone found and returned together — dialogue only, NO battle,
+  NO stone item invented: `magma_stone_returned` is a flag); the
+  REVISIT fires the face, per the canon structure.
+- **Regigigas.** The gate is read LIVE from the party by the
+  entry handler (the designed stub's three-arc prereq is
+  superseded — owning is not the gate, BRINGING is, and the
+  quest-log step says exactly that, naming all three and the
+  words "in your party"). With fewer than three standing, the
+  statue declines with the keeper's carved note (which reports
+  the count standing) — nothing consumed, nothing set, the arc
+  discovered; the refusal re-fires every entry. With all three,
+  the face fires.
+- **Cresselia — DESIGN CALL 2: she ROAMS.** The shipped idiom
+  generalised data-side, as the allowance anticipated: ONE pure
+  landing function (`roamLanding(stepsTotal, landings)` in
+  story-sinnoh.mjs) serves both roamers over disjoint landing
+  sets (Cresselia: `['r218','r219','r221','r223','r230']` — her
+  crescent trail of night roads), each set by its own island
+  meeting. A direct Fullmoon catch was rejected: the S5b beat
+  already established her as the provider who comes and goes,
+  and two roamers on one mechanism is more honest fiction than
+  one roamer and one exception. Zero new save state either way.
+- **Darkrai.** No distribution item invented (pinned A08: no
+  member-card row exists). The gate inputs are S5b's own flags:
+  the boy woken (`darkrai_unlocked`) + the Conference finished
+  (`sinnoh_complete`). Entering the Canalave harbour house then
+  plays the inn event: the keeper's key, the sleep, the dream —
+  `darkrai_inn_done` is set BEFORE the mid-chain warp (so the
+  island's own gate can't double-fire during the warp's load),
+  the chain warps the dreamer to Newmoon Island and the face
+  fires inside the same event. A fled/KO'd night leaves the
+  player standing on Newmoon, where the standalone face
+  (`ev_sinnoh_darkrai`) re-fires on entry; the island's boatman
+  (S3a's REED) ferries back to Fullmoon, so no state soft-locks.
+- **Manaphy + Phione — and an S1 correction, recorded plainly.**
+  The gift Egg is a Ranger-flavoured delivery held in trust at
+  Rowan's lab (the placement call: Sandgem is where Sinnoh's
+  trusts are kept, and Rowan is the region's registrar; the
+  egg is refused with NOTHING set when the player has no room —
+  the cap-safe delivery idiom). Rowan's second post-Conference
+  talk grants Oak's Letter (below), so the lab visit pays both
+  S6 gifts in a fixed order. The Egg rides the shipped egg
+  system end-to-end (250 steps, hatching Manaphy at the band
+  floor 301 through the real step hook), and the arc completes
+  on the hatch's dex registration via a map-load sweep (an egg
+  has no face to complete it). **Phione did NOT breed from
+  Manaphy on shipped data, the S1 register's claim
+  notwithstanding**: measured at S6, `offspringOf` walks evo
+  predecessors for the base stage, Manaphy has none, and a
+  driven deposit→egg→hatch produced a second Manaphy — Phione
+  (dex 489) was unobtainable, a dex-lock the S1 entry's
+  "already supports" wording had papered over. The correction
+  is data, minimal and generic: species entries may declare
+  `eggSpecies` (Manaphy declares 'phione'), and `offspringOf`
+  honours a declared egg species before the base-stage walk —
+  no species named in code. The S6 suite proves the whole line
+  end-to-end (B11), including the daycare egg's speciesId being
+  'phione' before it hatches.
+- **Shaymin.** Oak's Letter is granted by Rowan in person
+  post-completion (the placement call: Oak left it in trust
+  with the one colleague who would out-wait the Conference —
+  no distribution item, a letter with a named keeper). The
+  letter is a real key item (`oaksletter`); the Seabreak Path
+  S3b built leads to the face, and the S4 Gracidea switch is
+  pinned working on the CAUGHT Shaymin (B12: land → sky →
+  land, flower never consumed).
+- **Spiritomb** (the deferred placement, decided here): the
+  Odd Keystone is a real key item (`oddkeystone`), granted by a
+  new Route 209 traveller NPC (kind 'keystone_traveller' —
+  the canon-flavoured route: a traveller on the Lost Tower
+  road carries the stone and wants it off his hands). The
+  Hallowed Tower is the faced rock at r209 (14,6), west of the
+  Lost Tower — placed via the shipped object-append idiom
+  (a sysInteract handler claiming exactly that tile on that
+  map; the generated maps9 rows are unedited). Facing it
+  without the keystone is a description; with it, the
+  summoning face. The arc's designed stub was added to
+  story-kanto (the validator-vocabulary pre-registration, the
+  other twelve stubs' precedent) and superseded live in the
+  fold, like every Sinnoh arc before it.
+
+### 3. State accounting
+
+**Zero new persisted state.** The arcs add: flags only (the
+arcs' own `arc_*_done`, the gate flags named in the table, the
+two meeting/roaming flags — all inside `story.flags`, the
+standing open vocabulary), quest states inside `story.quests`
+(the standing vocabulary — `arc_spiritomb` pre-registered via
+its designed stub, so the validator's quest table grew by the
+one id through gen-tables), and two key items in `bag`
+(`oddkeystone`, `oaksletter` — the ITEMS table 197 → 199; the
+server validator's bag-size cap tracks it 197 → 199, the
+standing supersession chain extended). Roaming adds NOTHING —
+positions derive from `state.stepsTotal`, already persisted.
+No schema field, no migration; client + server validators
+accept the new saves (A10/A11 + the validator battery below),
+and pre-S6 saves open unchanged (every S6 read is a flag that
+may simply be absent).
+
+### 4. Supersessions (by name)
+
+- items 197 → **199** wherever the count is pinned
+  (sinnoh-checks A11/A12, sinnoh-story A18, cheat-shop A02,
+  frontier A12, hoenn-story A16, johto-story A15,
+  johto-systems A24) — each renamed in place with the S6
+  supersession wording; the server validator's bag cap
+  197 → 199 with its comment chain extended.
+- sinnoh-story A12: SINNOH_NPCS count 41 → **43** (Buck at the
+  Survival Area + Traveller Maren on Route 209), renamed.
+- sinnoh-story A23: extended in place with the rider pin (the
+  count stays 95/95 — the pin rides the existing Tobias row).
+- fidelity-checks: legendary-arc register count 56 → **57**
+  (the arc_spiritomb designed stub), renamed.
+- tables.json regenerated via gen-tables only (items 199;
+  quests +arc_spiritomb).
+
+### 5. Suite
+
+NEW `tests/sinnoh-legendary-checks.mjs` **27/27**: Part A —
+the live register (13 arcs, dex set, shipped lairs), the
+quest-log step law, the twelve catch-face shapes + levels, the
+inn event's warp/flag order, Manaphy's egg-only shape, the
+shared roaming function's purity + disjoint landings, the
+rider's data pools, the two key items (+ no member card), the
+Regigigas step's spelled-out gate, the Phione egg data, and
+validator plumbing. Part B — every arc driven: Uxie locked →
+flee → KO → catch; Azelf flee → catch; Mesprit's meeting, the
+r201 landing at stepsTotal 0, the empty r205 and the held r210
+at stepsTotal 100; Dialga-then-Palkia at the pillar (Palkia
+never jumps the order); Giratina locked without its wake flag;
+Heatran's full Buck/stone/revisit structure; Regigigas refused
+at 0 and at 2 Regis, woken at 3; Cresselia's meeting + r218
+landing; Darkrai's shut inn, the dream warp, the island
+re-fires through flee AND KO; Manaphy's Egg → hatch at 301 →
+arc sweep → Phione bred and hatched at 301; Shaymin's letter
+gate + the Gracidea pin; Spiritomb's scenery → gift →
+summoning; the Quest Log rendering a Sinnoh arc's steps; and
+the rider read off the live foes.
+
+### 6. Battery
+
+sinnoh-legendary **27/27** (new) · sinnoh-story **95/95**
+(incl. rider A23; Tobias B55–B58 green) · sinnoh-checks
+**132/132** · qa-changed-flows failures exactly **{b2, d9}** ·
+battle-model **45/45** HARD · campaign **24/24** ·
+arc-foundation **47/47** · frontier **136/136** · hoenn-story
+**88/88** · hoenn-legendary green · hoenn-contest **28/28** ·
+cheat-shop **44/44** · johto-story **110/110** ·
+johto-systems **62/62** · fidelity **35/35** · orange-story
+**38/38** · orange-climax **42/42** · validator **106** +
+fuzz **2000/2000** + save-contract **12/12** (api-scripts) ·
+qa-slice failures exactly **{s6, l8}** (the recorded baseline) ·
+budgets **pass** · drift-gate **pass** on the fresh full build ·
+contamination **clean**. rejuv-phase2 A09 + the rejuv C01
+chromium-harness failures are pre-existing at base 9794398
+(verified against a pristine HEAD worktree — not S6's).
+Fresh build byte-identical post-commit (4fa39b1f…);
+`personal/` byte-identical (sha f434ba63…).
+
+### 7. Budget
+
+Static (public/) 12,388,347 → **12,432,909 = +44,562 B**
+against the coordinator's +45,000 B allowance (margin 438 B;
+the prose was trimmed to land inside it after a first build
+projected +48,689). Headroom to the 12,582,912 gate:
+**150,003 B**. Restated projection-to-close: S7 finale
+allowance +45,000 B and S8/S9 ~3,000 B project a close at
+≈ 12,480,909 B — ≈ 102,000 B under the gate, with the S7
+allowance the binding constraint, exactly as the coordinator
+framed it.
+
+### 8. Open items handed on
+
+- S7 owns the finale variant (full credits, Master HoF, the
+  Arceus capstone) on its +45,000 B allowance; the thirteen
+  arcs' completion flags (`arc_*_done` ×13) stand ready as its
+  inputs, as does `sinnoh_complete`.
+- The single owner-ordered deploy happens once the whole
+  Sinnoh arc chain closes (through S9); nothing here was
+  pushed or deployed.

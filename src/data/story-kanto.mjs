@@ -767,6 +767,20 @@ export const LEGENDARY_ARCS = {
     ],
     lair: 'seatemple',
   },
+  // Stage S6 addition to the designed register (Spiritomb's
+  // placement was deferred at S1): the stub pre-registers the id in
+  // the validator's quest vocabulary, as the other twelve Sinnoh
+  // stubs did; S6's live entry supersedes it in the merge fold.
+  arc_spiritomb: {
+    id: 'arc_spiritomb', title: 'The Hundred and Eight', species: 'spiritomb', region: 'Sinnoh', designedOnly: true,
+    hook: 'A cracked keystone, a ruined tower on the Lost Tower road, and a number the stones keep repeating: one hundred and eight.',
+    steps: [
+      { text: 'Receive the Odd Keystone' },
+      { text: 'Set the keystone into the Hallowed Tower' },
+      { text: 'Face what the tower was built to hold', catch: 'spiritomb' },
+    ],
+    lair: 'hallowedtower',
+  },
 
   // ---- Unova (designed) -----------------------------------------------------------
   arc_victini: {

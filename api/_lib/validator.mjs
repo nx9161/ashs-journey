@@ -727,7 +727,7 @@ export function validateSave(data) {
   if (!isPlainObj(bag) || hasDangerousKey(bag)) errors.push('bad-bag');
   else {
     const keys = Object.keys(bag);
-    if (keys.length > 197) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (197 since S5b's 4 Sinnoh keepsakes + the Lunar Wing key item; was 192 at S5a, 186 at S4, 183 at S0, 175 at F0, 168 at H4a, 160 at J6)
+    if (keys.length > 199) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (199 since S6's Odd Keystone + Oak's Letter key items; was 197 at S5b, 192 at S5a, 186 at S4, 183 at S0, 175 at F0, 168 at H4a, 160 at J6)
     for (const k of keys) {
       if (!TABLES.items.has(k) || !isInt(bag[k], 0, 999)) { errors.push('bad-bag-item'); break; }
     }

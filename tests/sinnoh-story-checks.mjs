@@ -34,6 +34,7 @@ function ok(name, cond, extra) {
 const storyMod = await import(join(ROOT, 'src/data/story-sinnoh.mjs'));
 const { SINNOH_QUESTS, SINNOH_TRAINERS, SINNOH_EVENTS, SINNOH_TALES, SINNOH_NPCS, SINNOH_NPC_PATCHES } = storyMod;
 const { ITEMS, BADGE_SETS, KEEPSAKES, TM_MOVES } = await import(join(ROOT, 'src/data/items.mjs'));
+const ALL_MOVES_A = { ...(await import(join(ROOT, 'src/data/moves.mjs'))).MOVES, ...(await import(join(ROOT, 'src/data/moves2.mjs'))).MOVES2 };
 const { SPECIES } = await import(join(ROOT, 'src/data/species.mjs'));
 const speciesAll = { ...SPECIES,
   ...(await import(join(ROOT, 'src/data/species2.mjs'))).SPECIES2,
@@ -159,8 +160,8 @@ const CHAIN = [
     }
     return false;
   };
-  ok('A12 every SINNOH_NPCS actor (' + SINNOH_NPCS.length + ') stands on a walkable tile with a reachable talk-adjacent tile (S5a: leaders, rosters, Rowan, Dawn x2, Barry, Paul x3, the commanders, Reggie; S5b supersedes the count 23 -> 41: +4 leaders, +8 rosters, Paul at Acuity, Dawn at Valor, the Canalave sailor, the Conference registrar + Paul + Tobias)',
-    SINNOH_NPCS.length === 41 && SINNOH_NPCS.every((n) => {
+  ok('A12 every SINNOH_NPCS actor (' + SINNOH_NPCS.length + ') stands on a walkable tile with a reachable talk-adjacent tile (S5a: leaders, rosters, Rowan, Dawn x2, Barry, Paul x3, the commanders, Reggie; S5b supersedes the count 23 -> 41: +4 leaders, +8 rosters, Paul at Acuity, Dawn at Valor, the Canalave sailor, the Conference registrar + Paul + Tobias; S6 supersedes 41 -> 43: Buck at the Survival Area + Traveller Maren on Route 209)',
+    SINNOH_NPCS.length === 43 && SINNOH_NPCS.every((n) => {
       const m = ALL_MAPS[n.map]; if (!m) return false;
       const row = m.rows[n.y]; if (!row || !WALKABLE.has(row[n.x])) return false;
       return reach(n.map, n.x, n.y);
@@ -207,8 +208,8 @@ const CHAIN = [
   let checkOut = '';
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { checkOut = String(e.stdout || '') + String(e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A18 tables.json in sync (gen-tables --check, regenerated via the tool only); items 197 (192 + S5b\'s 4 keepsakes + the Lunar Wing key item — supersedes the S5a count); the quest vocabulary carries every q_sinnoh_* chain id (all 30) + all thirteen tale ids; keepsakes table carries the ten Sinnoh pieces; items table carries the Lunar Wing',
-    checkOut.includes('tables.json OK') && t.items.length === 197
+  ok('A18 tables.json in sync (gen-tables --check, regenerated via the tool only); items 199 (192 + S5b\'s 4 keepsakes + the Lunar Wing key item — supersedes the S5a count); the quest vocabulary carries every q_sinnoh_* chain id (all 30) + all thirteen tale ids; keepsakes table carries the ten Sinnoh pieces; items table carries the Lunar Wing',
+    checkOut.includes('tables.json OK') && t.items.length === 199
     && SINNOH_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(SINNOH_TALES).every((id) => t.quests.includes(id))
     && ['dawnribbon', 'starshard', 'coalseamcharm', 'meadowcord', 'ruinbell', 'ribbonclasp', 'fencharm', 'shrinebell', 'frostpetal', 'beaconcoil'].every((id) => t.keepsakes.includes(id))
@@ -245,9 +246,29 @@ const CHAIN = [
     && !pa.badge && !pc.badge && !pa.badgeSet && !pc.badgeSet
     && pa.team.concat(pc.team).every((m) => speciesAll[m.species]));
   const td = SINNOH_TRAINERS.tobias_darkrai, tl = SINNOH_TRAINERS.tobias_latios;
-  ok('A23 Tobias, per the coordinator ruling\'s data shape: Act 1 is Darkrai ALONE at 390 (authored beatable in-band); Act 2 is Latios ALONE at 392; neither carries a badge',
+  // Stage S6 RIDER (pinned here, in the story suite, per the
+  // coordinator allowance): both conference aces carry explicitly
+  // authored move sets; every authored move is in its species' legal
+  // in-table pool (band learnset ∪ TM list), and each ace carries
+  // >= 2 damaging moves — closing the S5b honesty note (Darkrai's
+  // learnset-only set had Quick Attack as its only damaging move).
+  const poolOf = (sp, lvl) => {
+    const e = speciesAll[sp];
+    const pool = new Set();
+    for (const [l0, ids] of Object.entries(e.learnset)) if (+l0 <= lvl) for (const id of [].concat(ids || [])) pool.add(id);
+    for (const t of (e.tm || [])) if (TM_MOVES[t]) pool.add(TM_MOVES[t]);
+    return pool;
+  };
+  const riderOk = (def, sp, lvl) => {
+    const mv = def.team[0].moves || [];
+    const pool = poolOf(sp, lvl);
+    const damaging = mv.filter((id) => ALL_MOVES_A[id] && (ALL_MOVES_A[id].power || 0) > 0).length;
+    return mv.length >= 2 && mv.every((id) => !!ALL_MOVES_A[id] && pool.has(id)) && damaging >= 2;
+  };
+  ok('A23 Tobias, per the coordinator ruling\'s data shape: Act 1 is Darkrai ALONE at 390 (authored beatable in-band); Act 2 is Latios ALONE at 392; neither carries a badge. S6 RIDER (pinned): both aces carry explicitly authored move sets, every move in the species\' legal in-table pool (band learnset + TM list), each with >= 2 damaging moves — Darkrai: hypnosis/dreameater/fireblast/hyperbeam; Latios: psychic/icebeam/thunderbolt/recover',
     td.team.length === 1 && td.team[0].species === 'darkrai' && td.team[0].level === 390 && !td.badge
-    && tl.team.length === 1 && tl.team[0].species === 'latios' && tl.team[0].level === 392 && !tl.badge);
+    && tl.team.length === 1 && tl.team[0].species === 'latios' && tl.team[0].level === 392 && !tl.badge
+    && riderOk(td, 'darkrai', 390) && riderOk(tl, 'latios', 392));
   const sat = SINNOH_TRAINERS.saturn_hq, csp = SINNOH_TRAINERS.cyrus_spear, cfi = SINNOH_TRAINERS.cyrus_final;
   ok('A24 Galactic second half + Cyrus: Saturn\'s raid team (toxicroak ace 358), Cyrus at Spear Pillar (weavile ace 388) and at the platform (weavile ace 392) — all in band with real species',
     Math.max(...sat.team.map((m) => m.level)) === 358 && sat.team[sat.team.length - 1].species === 'toxicroak'

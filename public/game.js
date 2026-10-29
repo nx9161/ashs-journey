@@ -146324,7 +146324,7 @@ const SPECIES_SINNOH = {
     id: 'manaphy', name: 'Manaphy', dexNo: 490, types: ['water'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 49001,
-    eggGroups: ['water1', 'fairy'], hatchCounter: 10,
+    eggGroups: ['water1', 'fairy'], hatchCounter: 10, eggSpecies: 'phione',
     learnset: { 1: ['bubble'], 316: ['supersonic'], 324: ['bubblebeam'], 331: ['acidarmor'] },
     flavor: 'Born on a cold seafloor, it swaps hearts the way tides swap shores. Its eggs hatch Phione here — the one line the breeding pools carry further than the Pokedex does.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
@@ -147171,6 +147171,12 @@ const ITEMS = {
   // Arc 4 Stage S5b: the Lunar Wing — carried away from Fullmoon
   // Island in the Darkrai beat; S6's Newmoon arc reads it.
   lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
+  // Arc 4 Stage S6: the Odd Keystone (Spiritomb's stone, a Route 209
+  // traveller's gift) and Oak's Letter (Shaymin's gate, Rowan-granted
+  // post-Conference; no item is invented for Darkrai — the inn event
+  // is its key, by flag).
+  oddkeystone: { id: 'oddkeystone', name: 'Odd Keystone', pocket: 'key', desc: 'A cracked stone, cold in a way weather does not explain. Something in it is counting. It wants a tower to go home to.' },
+  oaksletter: { id: 'oaksletter', name: "Oak's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Pewter. Lets you use FLASH outside battle; Attack rises.' },
@@ -183409,6 +183415,20 @@ const LEGENDARY_ARCS = {
     ],
     lair: 'seatemple',
   },
+  // Stage S6 addition to the designed register (Spiritomb's
+  // placement was deferred at S1): the stub pre-registers the id in
+  // the validator's quest vocabulary, as the other twelve Sinnoh
+  // stubs did; S6's live entry supersedes it in the merge fold.
+  arc_spiritomb: {
+    id: 'arc_spiritomb', title: 'The Hundred and Eight', species: 'spiritomb', region: 'Sinnoh', designedOnly: true,
+    hook: 'A cracked keystone, a ruined tower on the Lost Tower road, and a number the stones keep repeating: one hundred and eight.',
+    steps: [
+      { text: 'Receive the Odd Keystone' },
+      { text: 'Set the keystone into the Hallowed Tower' },
+      { text: 'Face what the tower was built to hold', catch: 'spiritomb' },
+    ],
+    lair: 'hallowedtower',
+  },
 
   // ---- Unova (designed) -----------------------------------------------------------
   arc_victini: {
@@ -186520,7 +186540,13 @@ const SINNOH_TRAINERS = {
     intro: ['Tobias. You beat Paul — I watched from the tunnel, and I will not pretend it was anything less than it was.', 'Everyone asks about my team. There is, functionally, one question on it, and it is standing in front of you. No trainer in this Conference has taken Darkrai down. The bracket is waiting to see if the record survives you.'],
     lose: ['...Down. It is DOWN. Do you understand what this hall just saw, trainer? No one — no one — has done that in this entire Conference.'],
     team: [
-      { species: 'darkrai', level: 390 },
+      // Stage S6 RIDER (the S5b honesty note, closed): the set is
+      // AUTHORED in the def (the engine reads a team entry's
+      // `moves` list — battle.mjs authoredMoves), every move in
+      // Darkrai's legal in-table pool: Hypnosis + Dream Eater
+      // (learnset) are the nightmare engine, Fire Blast (TM38) +
+      // Hyper Beam (TM15) its strongest honest TM damage.
+      { species: 'darkrai', level: 390, moves: ['hypnosis', 'dreameater', 'fireblast', 'hyperbeam'] },
     ],
     reward: 8000,
   },
@@ -186529,7 +186555,10 @@ const SINNOH_TRAINERS = {
     intro: ['One question answered. There is a second on my team, and it has been patient all Conference. Latios, trainer. Finish the match — if the match can be finished.'],
     lose: ['Finished. Utterly, honestly finished — by the only trainer who ever got this far into my team. The final is yours, Tobias says, and means it like a door opening.'],
     team: [
-      { species: 'latios', level: 392 },
+      // Stage S6 RIDER: Latios's set is authored on the same law —
+      // Psychic (learnset STAB) + Ice Beam (TM13) + Thunderbolt
+      // (TM24), its strongest in-table coverage, + Recover.
+      { species: 'latios', level: 392, moves: ['psychic', 'icebeam', 'thunderbolt', 'recover'] },
     ],
     reward: 8000,
   },
@@ -186698,6 +186727,315 @@ const SINNOH_EVENTS = {
     { flag: 'giratina_unlocked' },
     { toast: 'Giratina settled. The chains are broken — the sky is mended.' },
   ],
+
+  // ================= Stage S6: the legendary arcs' faces =================
+  // Every face rides the catch-only chain (the J5 law): a flee or a
+  // KO stalls it with nothing set, so each face re-fires until its
+  // one-of-one is caught. Gates: the sysLoadMap S6 block.
+  ev_sinnoh_uxie: [
+    { say: ['Acuity Cavern is colder inside than the lake above it, and quieter than either — a held thought of a room. At its heart the ice simply... decides to have a tenant.', 'Uxie rises out of the stillness with its eyes closed, the way it has risen for everyone who ever truly needed to know something: unhurried, ungiving, complete. The being of knowledge does not offer answers. It offers a battle — the one examination it has ever set.'], who: '' },
+    { arc: 'arc_uxie', stage: 'active' },
+    { wildBattleCatch: { species: 'uxie', level: 370, legendary: true } },
+    { arc: 'arc_uxie', stage: 'complete' },
+    { flag: 'arc_uxie_done' },
+    { toast: 'Uxie is yours. The cavern keeps what it knows — it just shares the address now.' },
+  ],
+  ev_sinnoh_azelf: [
+    { say: ['Valor Cavern still smells faintly of hot stone from the day the lake was blown half skyward — and at its heart, where the water runs decision-coloured, something has come home to the ruin of its house and stayed anyway.', 'Azelf. The being of willpower, hovering over the scarred water with its chin up in a way that makes the whole cavern feel like a held chin too. It does not forgive the region. It does something harder: it stays, and it tests the hand that mended the sky. Yours.'], who: '' },
+
+    { arc: 'arc_azelf', stage: 'active' },
+    { wildBattleCatch: { species: 'azelf', level: 370, legendary: true } },
+    { arc: 'arc_azelf', stage: 'complete' },
+    { flag: 'arc_azelf_done' },
+    { toast: 'Azelf is yours. The lake, the wardens say, sat a degree straighter in its banks that evening.' },
+  ],
+  // Mesprit I: the meeting at Verity Cavern — she does not stay.
+  ev_sinnoh_mesprit_meet: [
+    { say: ['Verity Cavern keeps its small heart of sky-less water — and today the water has company. Mesprit turns above it in slow circles, crowned, pink as a held breath, watching you the way weather watches a window.', 'You step forward. She steps — elsewhere. Not fleeing: DECLINING, with the ancient courtesy she showed the grey boats, and a look back over one shoulder that is not fear at all. It is an itinerary. The being of emotion does not wait in caves. It visits. Catching up with it is the whole of the test — walk Sinnoh, and be somewhere she lands.'], who: '' },
+    { arc: 'arc_mesprit', stage: 'active' },
+    { flag: 'mesprit_roaming' },
+    { toast: 'Mesprit slipped away — she is roaming Sinnoh now.' },
+  ],
+  // Mesprit II: the roaming face (the Latias precedent — her landing
+  // is a pure function of the persisted step counter).
+  ev_sinnoh_mesprit: [
+    { say: ['The light here has a pink edge it did not have a moment ago — and then the air simply admits she is in it: Mesprit, hanging a wingspan away, considering you with the unafraid calm of a creature who has never once been anywhere she did not choose to be.', 'She chose this. Remember that: the chase was hers, the landing is hers, and the battle — the battle she is offering like a hand held out. Take it honestly.'], who: '' },
+    { arc: 'arc_mesprit', stage: 'active' },
+    { wildBattleCatch: { species: 'mesprit', level: 370, legendary: true } },
+    { arc: 'arc_mesprit', stage: 'complete' },
+    { flag: 'arc_mesprit_done' },
+    { toast: 'Mesprit is yours. The lake that feels has a feeling with your name on it now.' },
+  ],
+  ev_sinnoh_dialga: [
+    { say: ['Spear Pillar, after everything: the broken pillars, the whole sky, and a stillness with a heartbeat in it — slow, enormous, older than the mountain it stands on. The heartbeat resolves into a shape. Blue steel. A crest like a sundial made of decisions.', 'Dialga regards you out of the deep places of time it returned to when the chain broke — free, alive, and, in the way of gods who owe a trainer a debt, findable. The debt is not paid by kneeling. It is paid by standing. Stand, then.'], who: '' },
+    { arc: 'arc_dialga', stage: 'active' },
+    { wildBattleCatch: { species: 'dialga', level: 388, legendary: true } },
+    { arc: 'arc_dialga', stage: 'complete' },
+    { flag: 'arc_dialga_done' },
+    { toast: 'Dialga is yours. Somewhere, very faintly, a clock you have never heard decides to keep your time too.' },
+  ],
+  ev_sinnoh_palkia: [
+    { say: ['The pillar keeps its appointments in order, and the second appointment makes the sky feel... roomy. Space takes a breath and steps aside in the middle, and Palkia is standing in the space it stepped out of — pearl-bright, patient, enormous in a way that has nothing to do with size.', 'It came back to the pillar the way its twin did: unchained, unhurried, curious about the one pair of hands that broke red light. The examination is the same. The examiner is not. Answer it.'], who: '' },
+    { arc: 'arc_palkia', stage: 'active' },
+    { wildBattleCatch: { species: 'palkia', level: 388, legendary: true } },
+    { arc: 'arc_palkia', stage: 'complete' },
+    { flag: 'arc_palkia_done' },
+    { toast: 'Palkia is yours. The summit air feels wider on the way down, as if it is making room for you out of respect.' },
+  ],
+  // Giratina: the post-game lair is TURNBACK CAVE (the recorded S6
+  // call — the Griseous Orb's chamber lives there, and Platinum's
+  // post-game tenant is Turnback's; the Distortion World platform
+  // is NOT a second trigger for the same one-of-one).
+  ev_sinnoh_giratina: [
+    { say: ['Turnback Cave leans its silence toward you harder than it ever has — because today the silence has a shape in it. Beyond the Griseous chamber, where the floor is not entirely floor, the dark stands up in gold and smoke and six-legged patience.', 'Giratina did not forget the platform, trainer. Gods of banished places keep excellent ledgers, and yours is the only name in this one written in anything but grievance. It settles, and waits to see whether the answer you gave Cyrus was the whole of you. Show it the rest.'], who: '' },
+    { arc: 'arc_giratina', stage: 'active' },
+    { wildBattleCatch: { species: 'giratina', level: 392, legendary: true } },
+    { arc: 'arc_giratina', stage: 'complete' },
+    { flag: 'arc_giratina_done' },
+    { toast: 'Giratina is yours. Turnback Cave exhales, slow as a held note allowed to end.' },
+  ],
+  // Heatran I: the accompaniment — Buck, the stone, the socket.
+  ev_sinnoh_magma_stone: [
+    { say: ['Buck keeps pace up the crater hall like a man walking a fence line he owns: unhurried, proprietary, pointing with his chin. "There. You can feel it through your boots first. The socket."', 'At the hall\u2019s heart the lava floor is wrong in one place: a round scar, stone-dust pale, and beside it — rolled half a room away by whatever hands thought a volcano was a cupboard — the Magma Stone. It is warm. It has never not been warm. Between you, you lift it the way you would lift a sleeping animal: carefully, and with respect for the teeth.'], who: 'BUCK' },
+    { say: ['It goes back into its socket with a sound like a held chord resolving. The hall seems to... unclench. "That\u2019s the mountain\u2019s temper back where it belongs," Buck says, deeply satisfied. "Mind you — a stone returned is a bell rung, down where HE sleeps. He\u2019ll want to see who rang it. Come back up, trainer. Not today. He wakes slow, like everything honest."'], who: 'BUCK' },
+    { arc: 'arc_heatran', stage: 'active' },
+    { flag: 'magma_stone_returned' },
+    { toast: 'The Magma Stone is returned — something deep has begun, slowly, to wake.' },
+  ],
+  // Heatran II: the revisit — the tenant, woken.
+  ev_sinnoh_heatran: [
+    { say: ['The Crater Hall is hotter than you left it — honestly hotter, the way a forge is honest. The stone glows at the edges like a coal that has remembered something. And the lava floor at the hall\u2019s heart is not a floor anymore. It is a back. Rising.', 'Heatran comes up out of its own mountain the way grievances come up out of old ground: slowly, and with total conviction. It looks at the returned stone. It looks at the hands that returned it. The examination begins.'], who: '' },
+    { arc: 'arc_heatran', stage: 'active' },
+    { wildBattleCatch: { species: 'heatran', level: 375, legendary: true } },
+    { arc: 'arc_heatran', stage: 'complete' },
+    { flag: 'arc_heatran_done' },
+    { toast: 'Heatran is yours. The crater settles back to its long, warm patience.' },
+  ],
+  ev_sinnoh_regigigas: [
+    { say: ['The deep room of Snowpoint Temple has waited since the lake froze the first time — and today it does not wait alone. Three small giants stand in your party\u2019s light, and the dais at the room\u2019s heart answers them the way deep water answers a dropped stone: slowly, and then all at once.', 'The statue is not a statue. It never was. Regigigas unfolds out of ten thousand years of stillness joint by joint, moss and patience falling away, until the continent-mover stands at the height the room was built for and looks down — at its three, and at the trainer they chose to follow here. That choice is the only key this door ever had. It has turned. Defend it.'], who: '' },
+    { arc: 'arc_regigigas', stage: 'active' },
+    { wildBattleCatch: { species: 'regigigas', level: 380, legendary: true } },
+    { arc: 'arc_regigigas', stage: 'complete' },
+    { flag: 'arc_regigigas_done' },
+    { toast: 'Regigigas is yours. The temple, wardens say, is one degree warmer than it has ever been.' },
+  ],
+  // Cresselia I: the meeting at Fullmoon — she does not stay either.
+  ev_sinnoh_cresselia_meet: [
+    { say: ['Fullmoon Island, and the pond keeping the moon\u2019s shape out of loyalty — and this time, when the pond\u2019s light stands up, it does not settle back into a feather. Cresselia rises whole: crescent-winged, dawn-pink ribbons trailing, regarding you with the patience of a lighthouse that has decided to move.', 'She provided once, for a sleeping boy. For herself she provides differently: a circuit of the region\u2019s night roads — Routes 218, 219, 221, 223 and 230, walked at her pace and met at yours. The antidote does not sit in a shrine, trainer. It travels. So travel.'], who: '' },
+    { arc: 'arc_cresselia', stage: 'active' },
+    { flag: 'cresselia_roaming' },
+    { toast: 'Cresselia took to her crescent trail — she is roaming Sinnoh now.' },
+  ],
+  // Cresselia II: the roaming face (the shared step-counter idiom).
+  ev_sinnoh_cresselia: [
+    { say: ['The light here goes crescent at the edges — and then she is simply in it, the way moonrise is in a clear sky: Cresselia, hanging above the road with her ribbons moving in a wind that is entirely hers.', 'For every nightmare there is an antidote, and the antidote has stopped running — not cornered, never cornered. Choosing. The choice, apparently, is a battle, fought in good dreams\u2019 name. Accept it gently.'], who: '' },
+    { arc: 'arc_cresselia', stage: 'active' },
+    { wildBattleCatch: { species: 'cresselia', level: 372, legendary: true } },
+    { arc: 'arc_cresselia', stage: 'complete' },
+    { flag: 'arc_cresselia_done' },
+    { toast: 'Cresselia is yours. Sleep, all over Sinnoh, runs a little deeper tonight.' },
+  ],
+  // Darkrai: the inn event. The locked harbour inn opens only for
+  // the Conference's finisher (sinnoh_complete) with the boy already
+  // woken (darkrai_unlocked); the sleep itself is the ferry. No
+  // distribution item exists — the key is the event, by flag.
+  ev_sinnoh_darkrai_inn: [
+    { say: ['The harbour inn at Canalave has kept its best room locked for fifty years — one guest, the old keepers say, who never checked in and never left. Tonight the keeper looks at you — the hand that carried the Lunar Wing — and takes a key off its hook without a word.', '"Room\u2019s yours," she says. "Mind the dreams. They\u2019re local." The bed is narrow, the pillow cold, and the dark at the window not entirely the night\u2019s. You sleep the way sailors sleep before weather: completely, and on purpose.'], who: '' },
+    { flag: 'darkrai_inn_done' },
+    { say: ['The dream has a shoreline. Black water, a pond that reflects nothing the sky admits to, and trees that grow toward the water as if listening. You know this island. You have simply never arrived at it from inside a sleeping head before.', 'Newmoon Island. And at its heart the dark shape that stood over a sailor\u2019s boy\u2019s bed for a month stands over its own — patient as debt, and considerably less patient about you.'], who: '' },
+    { warp: { map: 'newmoon-island', x: 11, y: 11 } },
+    { arc: 'arc_darkrai', stage: 'active' },
+    { wildBattleCatch: { species: 'darkrai', level: 378, legendary: true } },
+    { arc: 'arc_darkrai', stage: 'complete' },
+    { flag: 'arc_darkrai_done' },
+    { toast: 'Darkrai is yours. You wake in the inn room, and the pillow is warm, and the dreams are only dreams.' },
+  ],
+  // Darkrai: the face alone, for re-fires after a fled/failed inn
+  // night (the entry gate stands on darkrai_inn_done).
+  ev_sinnoh_darkrai: [
+    { say: ['The pond that reflects nothing has company, and the company has been waiting with the patience of the place itself. Darkrai unfolds out of the island\u2019s own dark — not attacking, not fleeing: presenting itself, the way a debt presents itself. Here to be settled.'], who: '' },
+    { arc: 'arc_darkrai', stage: 'active' },
+    { wildBattleCatch: { species: 'darkrai', level: 378, legendary: true } },
+    { arc: 'arc_darkrai', stage: 'complete' },
+    { flag: 'arc_darkrai_done' },
+    { toast: 'Darkrai is yours. Newmoon Island, for the first time in fifty years, sounds like an ordinary island at night.' },
+  ],
+  ev_sinnoh_shaymin: [
+    { say: ['Flower Paradise lives past its billing the way shrines do: quietly, and completely — a meadow at the end of the sea road, in bloom past all reason. The letter in your bag seems to weigh less here. The flowers seem to weigh more. Gratitude does that to a place.', 'At the meadow\u2019s heart the bloom moves against the wind — and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm, and makes the decision the Gracidea field made in Floaroma: an appointment, kept. Shaymin. The Gratitude Pokemon, in its own house, offering the house\u2019s one examination. Pass it gently.'], who: '' },
+    { arc: 'arc_shaymin', stage: 'active' },
+    { wildBattleCatch: { species: 'shaymin', level: 374, legendary: true } },
+    { arc: 'arc_shaymin', stage: 'complete' },
+    { flag: 'arc_shaymin_done' },
+    { toast: 'Shaymin is yours. Somewhere behind you, unnoticed, the whole meadow blooms a second time.' },
+  ],
+  ev_sinnoh_spiritomb: [
+    { say: ['The Odd Keystone leaves your hands the way warm things leave cold ones — reluctantly, and then all at once — and seats itself into the Hallowed Tower\u2019s stones like it was always the mortar. The tower... clears its throat. A sound with far too many voices in it, arriving at one word by committee.', 'One hundred and eight grudges, pressed into one cracked stone for longer than the road has had a name — and the stone has just been handed back its address. Spiritomb rises out of the keystone the way smoke rises out of a green fire: in spirals, in faces, in a grin that arrives several expressions before the rest of it. It was not summoned lightly. It will not leave early. Neither, it has decided, will you.'], who: '' },
+    { arc: 'arc_spiritomb', stage: 'active' },
+    { wildBattleCatch: { species: 'spiritomb', level: 365, legendary: true } },
+    { arc: 'arc_spiritomb', stage: 'complete' },
+    { flag: 'arc_spiritomb_done' },
+    { toast: 'Spiritomb is yours. The tower keeps its silence again — a quieter count of it, this time.' },
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// SINNOH_LEGENDARY_ARCS — Stage S6. The thirteen Sinnoh legendary
+// arcs, folded into LEGENDARY_ARCS by merge.mjs (the Johto/Hoenn
+// fold idiom); the live entries supersede the story-kanto designed
+// stubs (Dialga/Palkia/Giratina key ONLY on sinnoh_climax_resolved
+// per decision 9; Regigigas' gate is the three Regis' party
+// presence, read live by its handler). Laws: every face rides
+// { wildBattleCatch } (flee AND KO re-fire, nothing dex-locks) —
+// Manaphy's "face" is an egg hatching; levels in band (Spiritomb
+// 365, lake trio 370, Cresselia 372, Shaymin 374, Heatran 375,
+// Darkrai 378, Regigigas 380, Dialga/Palkia 388, Giratina 392,
+// Manaphy hatching at the floor 301); Mesprit + Cresselia roam on
+// the Latias precedent (pure step-counter function, no new state).
+// ---------------------------------------------------------------------------
+const MESPRIT_LANDINGS = ['r201', 'r205', 'r210', 'r215', 'r222'];
+const CRESSELIA_LANDINGS = ['r218', 'r219', 'r221', 'r223', 'r230'];
+function roamLanding(stepsTotal, landings) {
+  return landings[Math.floor((stepsTotal || 0) / 50) % landings.length];
+}
+// The Hallowed Tower (Spiritomb's site): a faced-rock object on
+// Route 209 at (14,6), west of the Lost Tower — placed by this data
+// spot + the sysInteract handler (the shipped object-append idiom;
+// the generated maps9 rows are not edited).
+const HALLOWED_TOWER = { map: 'r209', x: 14, y: 6 };
+
+const SINNOH_LEGENDARY_ARCS = {
+  arc_uxie: {
+    id: 'arc_uxie', title: 'The Lake That Knows', species: 'uxie', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'Lake Acuity is too still. Its guardian holds every memory of the region — and since the sky mended, it has been deciding whether the trainer who mended it is worth keeping.',
+    steps: [
+      { text: 'Resolve the Spear Pillar climax — the lake spirits only face the trainer who answered Giratina', flag: 'sinnoh_climax_resolved' },
+      { text: 'Enter Acuity Cavern at Lake Acuity\u2019s heart and face Uxie, level 370', catch: 'uxie' },
+    ],
+    lair: 'lake-acuity-cave',
+  },
+  arc_azelf: {
+    id: 'arc_azelf', title: 'The Lake That Wills', species: 'azelf', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'Lake Valor took the worst of the crisis and its guardian took it personally. What was taken by force has come home — and willpower, the wardens say, answers willpower.',
+    steps: [
+      { text: 'Resolve the Spear Pillar climax — Azelf only faces the trainer who ended the counting of the lakes', flag: 'sinnoh_climax_resolved' },
+      { text: 'Enter Valor Cavern at Lake Valor\u2019s heart and face Azelf, level 370', catch: 'azelf' },
+    ],
+    lair: 'lake-valor-cave',
+  },
+  arc_mesprit: {
+    id: 'arc_mesprit', title: 'The Lake That Feels', species: 'mesprit', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'Lake Verity\u2019s guardian does not wait in its cavern. It runs — courteously, deliberately, entirely on purpose. Understanding why that is the test IS the test.',
+    steps: [
+      { text: 'Resolve the Spear Pillar climax — she only visits a region whose sky is a sky again', flag: 'sinnoh_climax_resolved' },
+      { text: 'Meet Mesprit at Verity Cavern, at Lake Verity\u2019s heart — she will not stay', flag: 'mesprit_roaming' },
+      { text: 'Meet Mesprit, level 370, where she lands — her landings turn with your walking: Routes 201, 205, 210, 215 and 222, in turn', catch: 'mesprit' },
+    ],
+    lair: 'sinnoh-routes',
+  },
+  arc_dialga: {
+    id: 'arc_dialga', title: 'The Pillar of Time', species: 'dialga', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'The chained god of time stood unchained for one held second at Spear Pillar, looked at the trainer who broke its chains — and was gone, like a candle deciding to be a star instead. Stars can be revisited.',
+    steps: [
+      { text: 'Resolve the Spear Pillar climax — Dialga\u2019s catch keys on the mended sky alone, nothing else', flag: 'sinnoh_climax_resolved' },
+      { text: 'Return to Spear Pillar and face Dialga, level 388', catch: 'dialga' },
+    ],
+    lair: 'spear-pillar',
+  },
+  arc_palkia: {
+    id: 'arc_palkia', title: 'The Pillar of Space', species: 'palkia', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'Space folded wrong over Mt. Coronet once, like a map crumpled by an unseen hand. The hand that uncrumpled it is invited back to the pillar — second, the way the appointments were always kept.',
+    steps: [
+      { text: 'Resolve the Spear Pillar climax — Palkia\u2019s catch keys on the mended sky alone, nothing else', flag: 'sinnoh_climax_resolved' },
+      { text: 'Face Dialga first — the pillar keeps its appointments in order', flag: 'arc_dialga_done' },
+      { text: 'Return to Spear Pillar and face Palkia, level 388', catch: 'palkia' },
+    ],
+    lair: 'spear-pillar',
+  },
+  arc_giratina: {
+    id: 'arc_giratina', title: 'The World Behind the Waterfall', species: 'giratina', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'The banished one settled its audience on a platform of black glass and let the tear in the sky still. But Turnback Cave — where the Griseous Orb keeps its chamber — is its house on this side of the world.',
+    steps: [
+      { text: 'Resolve the Spear Pillar climax — answer Giratina on the platform first', flag: 'sinnoh_climax_resolved' },
+      { text: 'Return to Turnback Cave, past Sendoff Spring, and face Giratina, level 392, beyond the Griseous chamber', catch: 'giratina' },
+    ],
+    lair: 'turnback-cave',
+  },
+  arc_heatran: {
+    id: 'arc_heatran', title: 'The Mountain\u2019s Furnace', species: 'heatran', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'Stark Mountain breathes like a forge, and something has rolled the stone that keeps its temper halfway across its crater hall. A local named Buck knows the mountain\u2019s temper — and its tenant.',
+    steps: [
+      { text: 'Meet Buck in the Survival Area, at Stark Mountain\u2019s foot', flag: 'buck_met' },
+      { text: 'Climb with Buck to the Crater Hall and return the Magma Stone to its socket', flag: 'magma_stone_returned' },
+      { text: 'Return to the Crater Hall and face Heatran, level 375 — a stone returned is a bell rung, and he wakes to answer it', catch: 'heatran' },
+    ],
+    lair: 'stark-interior',
+  },
+  arc_regigigas: {
+    id: 'arc_regigigas', title: 'The One Who Moved Continents', species: 'regigigas', region: 'Sinnoh',
+    hook: 'Snowpoint Temple\u2019s lowest floor sleeps a giant that three smaller giants once served. The statue is not a statue, and its only key is company: it wakes for the three, or not at all.',
+    steps: [
+      { text: 'Bring Regirock, Regice and Registeel WITH YOU, in your party, to Snowpoint Temple — Hoenn\u2019s three tomb titans (the Desert Ruins, the Island Cave, the Ancient Tomb)', flag: 'regi_trio_present' },
+      { text: 'Descend to Snowpoint Temple\u2019s depths and face Regigigas, level 380', catch: 'regigigas' },
+    ],
+    lair: 'snowpoint-temple-depths',
+  },
+  arc_cresselia: {
+    id: 'arc_cresselia', title: 'The Feather of Good Dreams', species: 'cresselia', region: 'Sinnoh',
+    prereq: 'sinnoh_climax_resolved',
+    hook: 'For every nightmare there is an antidote, and she keeps hers on an island shaped like the moon\u2019s other half — but the antidote does not sit in a shrine. It travels, on a crescent trail only the woken can follow.',
+    steps: [
+      { text: 'Take the Lunar Wing from Cresselia at Fullmoon Island and wake the sailor\u2019s son in Canalave', flag: 'lunar_wing_received' },
+      { text: 'Resolve the climax, then return to Fullmoon Island and meet Cresselia — she will not stay', flag: 'cresselia_roaming' },
+      { text: 'Meet Cresselia, level 372, where she lands — her landings turn with your walking: Routes 218, 219, 221, 223 and 230, in turn', catch: 'cresselia' },
+    ],
+    lair: 'sinnoh-routes',
+  },
+  arc_darkrai: {
+    id: 'arc_darkrai', title: 'The Nightmare at the Inn', species: 'darkrai', region: 'Sinnoh',
+    hook: 'A locked inn in Canalave has had one guest for fifty years. The sailor\u2019s boy woke — and whatever stood over his bed has been noticed now, by the one trainer it cannot simply wait out.',
+    steps: [
+      { text: 'Wake the sailor\u2019s son with the Lunar Wing — let Darkrai learn your name first', flag: 'darkrai_unlocked' },
+      { text: 'Finish the Lily of the Valley Conference — the inn only opens for the trainer the harbour watched finish it', flag: 'sinnoh_complete' },
+      { text: 'Sleep at the harbour inn in Canalave (the house by the pier), and face Darkrai, level 378, where the dream ferries you: Newmoon Island', catch: 'darkrai' },
+    ],
+    lair: 'newmoon-island',
+  },
+  arc_manaphy: {
+    id: 'arc_manaphy', title: 'The Prince of the Sea Temple', species: 'manaphy', region: 'Sinnoh',
+    hook: 'An egg, blue as deep water, came in from a far sea in a Ranger\u2019s careful hands — and the Sandgem lab has been keeping it warm, waiting for the one trainer the region would trust with a prince.',
+    steps: [
+      { text: 'Finish the Lily of the Valley Conference — the egg is entrusted only to the finished road', flag: 'sinnoh_complete' },
+      { text: 'Collect the blue Egg from Professor Rowan at the Sandgem lab', flag: 'manaphy_egg_received' },
+      { text: 'Walk with the Egg until it hatches: Manaphy, at the Sinnoh band floor (level 301) — and breed it with Ditto at a Day-Care, and its egg hatches Phione', catch: 'manaphy' },
+    ],
+    lair: 'rowan-lab',
+  },
+  arc_shaymin: {
+    id: 'arc_shaymin', title: 'The Gratitude Bloom', species: 'shaymin', region: 'Sinnoh',
+    hook: 'A white-stone road north of the League ends in a flower field that only blooms for a thankful heart — and a letter in a famous hand is the field\u2019s only key.',
+    steps: [
+      { text: 'Finish the Lily of the Valley Conference — the letter is written only to the finished road', flag: 'sinnoh_complete' },
+      { text: 'Receive Oak\u2019s Letter from Professor Rowan at the Sandgem lab, where Oak left it in trust', flag: 'oaks_letter_received' },
+      { text: 'Walk the Seabreak Path to Flower Paradise and face Shaymin, level 374 — the Gracidea in Floaroma\u2019s meadow will know its forme', catch: 'shaymin' },
+    ],
+    lair: 'flower-paradise',
+  },
+  arc_spiritomb: {
+    id: 'arc_spiritomb', title: 'The Hundred and Eight', species: 'spiritomb', region: 'Sinnoh',
+    hook: 'A cracked keystone, cold in a way weather does not explain, and a ruined tower of stones on the Lost Tower road that has been holding its breath for a hundred years. Something in the stone is counting.',
+    steps: [
+      { text: 'Receive the Odd Keystone from the traveller on Route 209, by the Lost Tower road', flag: 'odd_keystone_received' },
+      { text: 'Face the Hallowed Tower\u2019s stones on Route 209 (the weathered rock west of the Lost Tower) with the keystone in hand, and face Spiritomb, level 365', catch: 'spiritomb' },
+    ],
+    lair: 'r209',
+  },
 };
 
 // ---- Town Tales (ADR-025 §5): one per first-half settlement, in the
@@ -186847,6 +187185,10 @@ const SINNOH_NPCS = [
   { map: 'league-lobby', name: 'LEAGUE REGISTRAR', x: 8, y: 5, dir: 'down', art: 'scientist', skin: '#e8b888', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#4a3a2a', sinnoh: 'sinnoh_conference', dialogue: ['Conference registration, trainer. The bracket is honest here. It only ever is.'] },
   { map: 'league-lobby', name: 'PAUL', x: 5, y: 7, dir: 'right', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_conference', dialogue: ['Quarter-final, {player}. This is the ink.'] },
   { map: 'league-lobby', name: 'TOBIAS', x: 11, y: 7, dir: 'left', art: 'acetrainer', skin: '#d8a878', shirt: '#2a2a3a', pants: '#2a2a3a', hair: '#1a1a1a', sinnoh: 'tobias', dialogue: ['Tobias. The bracket is waiting to see if the record survives you.'] },
+  // ---- Stage S6 actors: Buck (Heatran's accompaniment) + the
+  // Route 209 traveller (the keystone's giver). ----
+  { map: 'survival-area', name: 'BUCK', x: 14, y: 11, dir: 'down', art: 'hiker', skin: '#e8b888', shirt: '#c85a2a', pants: '#4a3a2a', hair: '#8a2a1a', sinnoh: 'buck', dialogue: ['Stark Mountain keeps its own counsel, trainer. And its own stone.'] },
+  { map: 'r209', name: 'TRAVELLER MAREN', x: 11, y: 13, dir: 'down', art: 'gent', skin: '#d8a878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#6a6a6a', sinnoh: 'keystone_traveller', dialogue: ['Mind the tower road, trainer. Some stones on it are heavier than they look.'] },
 ];
 
 // Tale actors among the maps9 townsfolk (giver/stage roles keyed by
@@ -187336,6 +187678,9 @@ Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
 // ids, pre-band levels, and arc_rayquaza's arcs-prereq, replaced by
 // the climax_resolved flag key per the H4b ruling).
 Object.assign(LEGENDARY_ARCS, HOENN_LEGENDARY_ARCS);
+// Arc 4 Stage S6 fold: Sinnoh's thirteen live legendary arcs,
+// superseding their story-kanto designed stubs (decision-9 keying).
+Object.assign(LEGENDARY_ARCS, SINNOH_LEGENDARY_ARCS);
 // Story patch (fidelity audit): the movie invite's island landing was
 // scripted out of bounds (8,14 on a 12-row map) — land on the shore (8,9).
 for (const ev of Object.values(EVENTS)) {
@@ -190186,11 +190531,20 @@ function baseStageOf(speciesId) {
 }
 // Offspring rule (recorded simplification): the non-Ditto parent when
 // one parent is Ditto, else the FIRST-deposited parent; the offspring
-// is that parent's line's base stage.
+// is that parent's line's base stage. Arc 4 Stage S6 widening (data,
+// not a species name in code): a species entry may declare its own
+// egg species (`eggSpecies`) when its eggs hatch a DIFFERENT species
+// than its base stage — the Manaphy -> Phione canon, which the
+// base-stage walk cannot express (Phione is Manaphy's offspring, not
+// its ancestor; the S1 assumption that egg-group data alone sufficed
+// was measured wrong at S6 — a Manaphy egg hatched Manaphy). The
+// declared field is the smallest data-driven correction.
 function offspringOf(daycare) {
   if (!Array.isArray(daycare) || daycare.length < 2) return null;
   const [a, b] = daycare;
   const parent = isDittoMon(a) && !isDittoMon(b) ? b : (isDittoMon(b) && !isDittoMon(a) ? a : a);
+  const declared = SPECIES_ALL[parent.speciesId] && SPECIES_ALL[parent.speciesId].eggSpecies;
+  if (declared && SPECIES_ALL[declared]) return declared;
   return baseStageOf(parent.speciesId);
 }
 function eggStepsFor(speciesId) {
@@ -195201,6 +195555,20 @@ class IntroScene {
 
 const HP_DRAIN_PER_SEC = 90; // ADR-004 feel budget
 
+// Arc 4 Stage S6 RIDER: authored foe move sets. A trainer team entry
+// may carry `moves: [moveId...]`; when it does, the foe mon's
+// learnset-derived set is replaced by the authored one, in order, at
+// full PP. Entries without the field keep the shipped learnset
+// behaviour byte-for-byte — a no-op for every def that predates it.
+function authoredMoves(mon, entry) {
+  if (entry && Array.isArray(entry.moves) && entry.moves.length) {
+    const set = entry.moves.filter((id) => MOVES[id]).slice(0, 4)
+      .map((id) => ({ id, pp: MOVES[id].pp, maxPp: MOVES[id].pp }));
+    if (set.length) mon.moves = set;
+  }
+  return mon;
+}
+
 // ---- Premium+ W1 (FX-1/FX-2/FX-4/FX-5/FX-6): battle impact layer ----
 // All W1 presentation is VISUAL ONLY: it never calls g.rng, never
 // changes a timing the battle-model mission shipped (hitstop 70ms,
@@ -195451,7 +195819,7 @@ class BattleScene {
       const t0 = this.trainer.team[0];
       // ADR-025 §4: difficulty levers land at instantiation — trainer team
       // levels (rules.trainerLevelFor) and foe IV treatment (tuneFoeMon).
-      this.foeMon = makeMon(t0.species, trainerLevelFor(g.state, this.trainer, t0.level), SPECIES, MOVES);
+      this.foeMon = authoredMoves(makeMon(t0.species, trainerLevelFor(g.state, this.trainer, t0.level), SPECIES, MOVES), t0);
       if (t0.nickname) this.foeMon.nickname = t0.nickname; // e.g. the duo's named mons
     }
     tuneFoeMon(this.foeMon, g.state);
@@ -196901,7 +197269,7 @@ class BattleScene {
       this.trainerIdx++;
       if (this.trainerIdx < this.trainer.team.length) {
         const t = this.trainer.team[this.trainerIdx];
-        this.foe = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
+        this.foe = tuneFoeMon(authoredMoves(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), t), g.state);
         if (t.nickname) this.foe.nickname = t.nickname;
         const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
         if (ksN) this.foe.keepsake = ksN;
@@ -196963,7 +197331,7 @@ class BattleScene {
       // the field only in _shiftSendOut, after the player's decision.
       this.trainerIdx++;
       const t = this.trainer.team[this.trainerIdx];
-      const incoming = tuneFoeMon(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), g.state);
+      const incoming = tuneFoeMon(authoredMoves(makeMon(t.species, trainerLevelFor(g.state, this.trainer, t.level), SPECIES, MOVES), t), g.state);
       if (t.nickname) incoming.nickname = t.nickname;
       const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
       if (ksN) incoming.keepsake = ksN;
@@ -202629,6 +202997,77 @@ Object.assign(OverworldScene.prototype, {
         if (id === landing) this.runEvent('ev_hoenn_latias');
       }
     }
+    // Stage S6 (Sinnoh legendary arcs): discovery, faces, roamers —
+    // the H6 idiom (faces gated on their arcs' own progress flags;
+    // the catch-only chain leaves flee/KO unwritten, so faces
+    // re-fire). The lake trio + Dialga/Palkia/Giratina key ONLY on
+    // sinnoh_climax_resolved (+ S5b's wake flags; Palkia behind
+    // Dialga's catch). Mesprit + Cresselia roam on the Latias
+    // precedent, generalised data-side: one pure landing function
+    // (roamLanding) over the persisted step counter, two roamers,
+    // disjoint landing sets, ZERO new save state. Heatran rides
+    // Buck's accompaniment; Regigigas reads the party's Regi
+    // presence live; Darkrai rides the inn event; Manaphy's arc
+    // completes on the hatch's dex registration (an egg has no face).
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const S6F = g.state.story.flags, S6Q = g.state.story.quests;
+      // Arc discovery (the openQuestLog living-section law): an arc
+      // whose prereq flag stands joins the Quest Log as 'discovered'.
+      const S6_DISCOVER = [
+        ['arc_uxie', 'sinnoh_climax_resolved'], ['arc_azelf', 'sinnoh_climax_resolved'],
+        ['arc_mesprit', 'sinnoh_climax_resolved'], ['arc_dialga', 'sinnoh_climax_resolved'],
+        ['arc_palkia', 'sinnoh_climax_resolved'], ['arc_giratina', 'sinnoh_climax_resolved'],
+        ['arc_darkrai', 'darkrai_unlocked'], ['arc_cresselia', 'cresselia_glimpsed'],
+        ['arc_shaymin', 'oaks_letter_received'],
+      ];
+      for (const [arcId, flag] of S6_DISCOVER) if (S6F[flag] && S6Q[arcId] === undefined) S6Q[arcId] = 'discovered';
+      // Manaphy completion sweep: the arc completes on the hatch's
+      // dex registration (checked on every map load).
+      if (S6F.manaphy_egg_received && !S6F.arc_manaphy_done && g.state.dex.caught[SPECIES.manaphy.dexNo]) {
+        S6F.arc_manaphy_done = true; S6Q.arc_manaphy = 'complete';
+        g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Pokemon!');
+      }
+      if (id === 'lake-acuity-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_uxie_done && !S6F.ev_sinnoh_uxie_done) {
+        this.runEvent('ev_sinnoh_uxie');
+      } else if (id === 'lake-valor-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_azelf_done && !S6F.ev_sinnoh_azelf_done) {
+        this.runEvent('ev_sinnoh_azelf');
+      } else if (id === 'lake-verity-cave' && S6F.sinnoh_climax_resolved && !S6F.mesprit_roaming && !S6F.arc_mesprit_done && !S6F.ev_sinnoh_mesprit_meet_done) {
+        this.runEvent('ev_sinnoh_mesprit_meet');
+      } else if (id === 'spear-pillar' && S6F.sinnoh_climax_resolved && S6F.dialga_unlocked && !S6F.arc_dialga_done && !S6F.ev_sinnoh_dialga_done) {
+        this.runEvent('ev_sinnoh_dialga');
+      } else if (id === 'spear-pillar' && S6F.palkia_unlocked && S6F.arc_dialga_done && !S6F.arc_palkia_done && !S6F.ev_sinnoh_palkia_done) {
+        this.runEvent('ev_sinnoh_palkia');
+      } else if (id === 'turnback-cave' && S6F.giratina_unlocked && !S6F.arc_giratina_done && !S6F.ev_sinnoh_giratina_done) {
+        this.runEvent('ev_sinnoh_giratina');
+      } else if (id === 'stark-interior' && S6F.sinnoh_climax_resolved && S6F.buck_met && !S6F.magma_stone_returned && !S6F.ev_sinnoh_magma_stone_done) {
+        this.runEvent('ev_sinnoh_magma_stone');
+      } else if (id === 'stark-interior' && S6F.magma_stone_returned && !S6F.arc_heatran_done && !S6F.ev_sinnoh_heatran_done) {
+        this.runEvent('ev_sinnoh_heatran');
+      } else if (id === 'snowpoint-temple-depths' && !S6F.arc_regigigas_done && !S6F.ev_sinnoh_regigigas_done) {
+        // Regigigas: the gate is read live from the party. No trio
+        // -> the statue declines, nothing set; all three -> the face.
+        S6Q.arc_regigigas = S6Q.arc_regigigas || 'discovered';
+        const triad = ['regirock', 'regice', 'registeel'].filter((s) => (g.state.party || []).some((m) => m && m.speciesId === s)).length;
+        if (triad >= 3) { S6F.regi_trio_present = true; this.runEvent('ev_sinnoh_regigigas'); }
+        else g.ui.say(['The deep room of Snowpoint Temple is a held breath of a room: a dais built for a giant, and a statue the size of a small hill keeping it. Cold runs off it in sheets. Nothing moves.', 'A keeper\u2019s note, generations old, is carved where a visitor will find it: HE SLEEPS UNTIL HIS THREE COME TO HIM TOGETHER. BRING THE THREE OF THE TOMBS — ROCK, ICE AND STEEL — IN YOUR OWN COMPANY, OR LET HIM SLEEP. (' + triad + ' of his three stand with you.)']);
+      } else if (id === 'fullmoon-island' && S6F.sinnoh_climax_resolved && S6F.cresselia_glimpsed && !S6F.cresselia_roaming && !S6F.arc_cresselia_done && !S6F.ev_sinnoh_cresselia_meet_done) {
+        this.runEvent('ev_sinnoh_cresselia_meet');
+      } else if (id === 'house-canalave' && S6F.sinnoh_complete && S6F.darkrai_unlocked && !S6F.darkrai_inn_done && !S6F.ev_sinnoh_darkrai_inn_done) {
+        this.runEvent('ev_sinnoh_darkrai_inn');
+      } else if (id === 'newmoon-island' && S6F.darkrai_inn_done && !S6F.arc_darkrai_done && !S6F.ev_sinnoh_darkrai_done) {
+        this.runEvent('ev_sinnoh_darkrai');
+      } else if (id === 'flower-paradise' && S6F.oaks_letter_received && !S6F.arc_shaymin_done && !S6F.ev_sinnoh_shaymin_done) {
+        this.runEvent('ev_sinnoh_shaymin');
+      }
+      // The two roamers (after the chain: a lair face outranks a
+      // landing on the same load).
+      if (S6F.mesprit_roaming && !S6F.arc_mesprit_done && !S6F.ev_sinnoh_mesprit_done && id === roamLanding(g.state.stepsTotal, MESPRIT_LANDINGS)) {
+        this.runEvent('ev_sinnoh_mesprit');
+      }
+      if (S6F.cresselia_roaming && !S6F.arc_cresselia_done && !S6F.ev_sinnoh_cresselia_done && id === roamLanding(g.state.stepsTotal, CRESSELIA_LANDINGS)) {
+        this.runEvent('ev_sinnoh_cresselia');
+      }
+    }
   },
 
   boulderAt(x, y) {
@@ -203121,6 +203560,10 @@ Object.assign(OverworldScene.prototype, {
     if (this.mapId === 'turnback-cave' && fx === 11 && fy === 5 && this.griseousInteract()) return true;
     if (this.mapId === 'distortion-platform' && fx === 10 && fy === 8 && this.griseousInteract()) return true;
     if (this.mapId === 'old-chateau' && fx === 16 && fy === 4 && this.rotomInteract()) return true;
+    // Arc 4 Stage S6: the Hallowed Tower on Route 209 (spiritombInteract
+    // claims only the tower's own faced tile; everywhere else it
+    // declines and the generic sign/tile text speaks as before).
+    if (this.spiritombInteract(fx, fy)) return true;
     // Arc 4 Stage S4: Rock Climb — facing a climbwall gate tile (the
     // tile-kind marker S3b authored; the Cut-tree idiom: the gate
     // lives in the tile, the move in the party).
@@ -203495,6 +203938,26 @@ Object.assign(OverworldScene.prototype, {
         }
       });
     });
+    return true;
+  },
+  // Arc 4 Stage S6: the Hallowed Tower (Spiritomb's site) — a faced
+  // rock object on Route 209 (HALLOWED_TOWER in story-sinnoh.mjs;
+  // the object-append idiom: maps9 rows unedited, the (14,6) 'R'
+  // tile west of the Lost Tower claimed here for this map only).
+  spiritombInteract(fx, fy) {
+    const g = this.game;
+    if (this.mapId !== HALLOWED_TOWER.map) return false;
+    if (fx !== HALLOWED_TOWER.x || fy !== HALLOWED_TOWER.y) return false;
+    const F = g.state.story.flags;
+    if (F.arc_spiritomb_done) {
+      g.ui.say(['The Hallowed Tower. The keystone sits in its stones like mortar, and the tower keeps a quieter silence than it used to. Nothing in it is counting anymore.']);
+      return true;
+    }
+    if ((g.state.bag.oddkeystone || 0) < 1) {
+      g.ui.say(['The Hallowed Tower: a mound of weathered stones on the Lost Tower road, older than the road, older than the tower. Travellers touch it for luck and then walk a little faster. Something about it suggests a missing piece — a stone that should sit in it, cracked, and cold.']);
+      return true;
+    }
+    this.runEvent('ev_sinnoh_spiritomb');
     return true;
   },
   rotomInteract() {
@@ -205156,8 +205619,58 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'rowan') {
       if (!flags.sinnoh_arrival && !flags.ev_sinnoh_arrival_done) { say(['The lab is at the north end of Sandgem, trainer — tall windows, taller reputation.']); return true; }
+      // Stage S6: Rowan delivers the two post-Conference gifts (the
+      // Manaphy Egg, then Oak's Letter) — two talks, fixed order;
+      // the egg is refused (nothing set) when there is no room.
+      if (flags.sinnoh_complete && !flags.manaphy_egg_received) {
+        say(['Ah. {player}. Come here — carefully, mind the warmth lamp. Something has been keeping this lab warmer than my tea since before the Conference, and it has your name on the crate.', 'A Ranger out of Fiore delivered it — by sea, by hand, the whole way, with instructions stricter than my own: the blue Egg goes to the trainer who finished the Lily of the Valley road, and to no one sooner. It hatches at the band floor of whatever road it walks, {player} — here, that means level 301, and it means Manaphy. The sea keeps a prince. Walk it gently.'], () => {
+          const res = deliverEggCapSafe(st, 'manaphy');
+          if (!res || !res.ok) { g.ui.say(['No room, {player} — party full and boxes full. Make space and come back; the Egg is not going anywhere warmer than right here.'.replace('{player}', st.player.name)], null, npc.name); return; }
+          flags.manaphy_egg_received = true;
+          if (st.story.quests.arc_manaphy === undefined) st.story.quests.arc_manaphy = 'active';
+          g.audio.playSfx('item-get');
+          g.ui.say([st.player.name + ' received the mysterious blue EGG! (It rests ' + (res.dest === 'party' ? 'in your party' : 'in the PC box') + '. Keep it close, and walk.)'], null, npc.name);
+        });
+        return true;
+      }
+      if (flags.sinnoh_complete && !flags.oaks_letter_received) {
+        say(['One more trust, while you are standing in my lab, {player}. Samuel Oak was in Sinnoh in the spring. He walked the white-stone road north of the League, stood in a flower field that should not exist, and came back quieter than I have ever seen him.', 'He left this letter in my keeping, sealed, with one instruction: it goes to the trainer who finishes the Conference road — the field only opens for gratitude, he said, and gratitude should be EARNED before it is carried. It is yours. The Seabreak Path, {player}. Mind the bloom.'], () => {
+          flags.oaks_letter_received = true; st.bag.oaksletter = (st.bag.oaksletter || 0) + 1;
+          if (st.story.quests.arc_shaymin === undefined) st.story.quests.arc_shaymin = 'discovered';
+          g.audio.playSfx('item-get');
+          g.ui.say([st.player.name + " received OAK'S LETTER!"], null, npc.name);
+        });
+        return true;
+      }
       if (flags.galactic_eterna_done) { say(['Jupiter left a page behind, I am told. The lakes, underlined. My oldest books are missing their statue rubbings, {player} — and a thief who steals HISTORY is planning to use it. Walk carefully, and watch the water.']); return true; }
       say(['Registered, measured, and only slightly audited by my least diplomatic colleague. Oreburgh first, {player}: east through Jubilife, then the mine road. Roark keeps the Coal Badge, and a fossil collection worth the walk on its own.']);
+      return true;
+    }
+
+    // Stage S6: Buck — meeting him (post-climax) discovers Heatran.
+    if (kind === 'buck') {
+      if (flags.arc_heatran_done) say(['Caught him proper, did you? Ha! The mountain\u2019s temper and my temper both — settled. You climb like family now, trainer. Mind the stone stays PUT.']);
+      else if (flags.magma_stone_returned) say(['Stone\u2019s back, and you can feel the change through your boots, can\u2019t you? He wakes slow. Go up and knock on the crater, trainer — politely. With your whole team.']);
+      else if (flags.buck_met) say(['Stone\u2019s still rolled off its seat up there — I can tell by the way the mountain breathes wrong. We\u2019ll set it right together, you and me. The hall at the top, trainer. I\u2019ll keep your pace.']);
+      else if (flags.sinnoh_climax_resolved) {
+        flags.buck_met = true; if (st.story.quests.arc_heatran === undefined) st.story.quests.arc_heatran = 'discovered';
+        say(['Well now. The trainer who mended the sky, walking Stark Mountain\u2019s doorstep like it\u2019s a garden path. Name\u2019s Buck. The mountain\u2019s mine in the way a fence is a farmer\u2019s — I keep it, it keeps me honest.', 'Listen, since you\u2019re here: something\u2019s rolled the mountain\u2019s Magma Stone clean out of its socket up in the Crater Hall. A volcano without its temper-stone is a kettle shopping for a lid. Come up with me and we\u2019ll set it back — two pairs of hands, one careful lift.']);
+      }
+      else say(['Name\u2019s Buck. Stark Mountain\u2019s the last honest weather in Sinnoh — climb it like you mean it. And if you find a round stone down the crater that doesn\u2019t belong there... it belongs. That\u2019s the whole problem with stones.']);
+      return true;
+    }
+    // Stage S6: the Route 209 traveller — the Odd Keystone's giver.
+    if (kind === 'keystone_traveller') {
+      if (flags.arc_spiritomb_done) say(['You set it in the tower? And the counting STOPPED? ...Then the road is just a road again. Walk it like one, trainer. Slowly, for the view.']);
+      else if (flags.odd_keystone_received) say(['The tower, trainer. Weathered stones, west of the Lost Tower, where the grass gives up. Set the stone in and stand honest. Whatever counts itself out of it — it was counted for a reason.']);
+      else {
+        say(['Travelling light is a discipline, trainer, and I have been carrying a stone that disagrees with it. Cold thing. Heavy in a way that has nothing to do with my knees. Found it by a ruined tower up the road, years back, and it has been COUNTING at me ever since — quiet, patient, in numbers I don\u2019t care to reach.', 'You have the look of someone who finishes counts. Take it. Set it back in its tower, west of the Lost Tower, and whatever it\u2019s holding, hold it better than the road did.'], () => {
+          flags.odd_keystone_received = true; st.bag.oddkeystone = (st.bag.oddkeystone || 0) + 1;
+          if (st.story.quests.arc_spiritomb === undefined) st.story.quests.arc_spiritomb = 'discovered';
+          g.audio.playSfx('item-get');
+          g.ui.say([st.player.name + ' received the ODD KEYSTONE!'], null, npc.name);
+        });
+      }
       return true;
     }
 

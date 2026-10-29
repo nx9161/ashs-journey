@@ -112,14 +112,14 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A11 tables.json in sync (gen-tables --check, regenerated via the tool only); items 197 (192 + 4 Sinnoh keepsakes + the Lunar Wing key item, Arc 4 Stage S5b — supersedes the Stage S5a count) carries all 8 sinnoh ids; badgeSequences.sinnoh is the Platinum order and regionBadgeMax.sinnoh is 8',
-    checkOut.includes('tables.json OK') && t.items.length === 197
+  ok('A11 tables.json in sync (gen-tables --check, regenerated via the tool only); items 199 (197 + the Odd Keystone + Oak\'s Letter key items, Arc 4 Stage S6 — supersedes the Stage S5b count) carries all 8 sinnoh ids; badgeSequences.sinnoh is the Platinum order and regionBadgeMax.sinnoh is 8',
+    checkOut.includes('tables.json OK') && t.items.length === 199
     && SINNOH_ORDER.every((id) => t.items.includes(id))
     && JSON.stringify(t.badgeSequences.sinnoh) === JSON.stringify(SINNOH_ORDER)
     && t.regionBadgeMax.sinnoh === 8, checkOut.trim());
   const maximal = cloud((s) => { for (const id of Object.keys(ITEMS)) s.bag[id] = 999; });
-  ok('A12 bag cap tracks the ITEMS table: a maximal bag (all 197 items @999 — supersedes the S5a 192 wording; the count tracks the ITEMS table, Arc 4 Stage S5b) validates server-side',
-    Object.keys(ITEMS).length === 197 && VAL.validateSave(maximal).ok,
+  ok('A12 bag cap tracks the ITEMS table: a maximal bag (all 199 items @999 — supersedes the S5b 197 wording; the count tracks the ITEMS table, Arc 4 Stage S6) validates server-side',
+    Object.keys(ITEMS).length === 199 && VAL.validateSave(maximal).ok,
     JSON.stringify(VAL.validateSave(maximal).errors));
   ok('A13 registry-driven display read: badgeCountFor counts badges.sinnoh through the arc row (3 earned -> 3; absent array -> 0)',
     badgeCountFor({ badges: { sinnoh: SINNOH_ORDER.slice(0, 3) } }, arcById('sinnoh')) === 3
