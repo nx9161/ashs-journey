@@ -283,5 +283,32 @@ t('S0 F-1 played-shape save with meta.location = Vermilion City — House valida
 t('S0 F-1 client schema result for the same played-shape save is unchanged (accepted)',
   (() => { const s = JSON.parse(JSON.stringify(good)); s.meta.location = 'Vermilion City — House'; return validateSaveClient(s).ok; })());
 
+// 13. Arc 4 Stage S8-fix: the flags-size bound tracks the shipped
+// campaign's real flag count. The bug (caught by the S8 chain drive
+// on one continuous played save, D08/D09/D10): story.flags is the
+// standing open vocabulary and a real full-chain save legitimately
+// carries 650 flags at the finale (619 at Sinnoh-complete, 433 at
+// Frontier-complete — measured on the chain snapshots), so the
+// Track-B-era 500 bound rejected every real full-chain save with
+// 'bad-flags-size' server-side while the client schema accepted it.
+// The bound stands, raised to 1000 (its purpose — a sanity size —
+// is unchanged; the 64 KB route gate still bounds the payload).
+const fullChainFlags = (n) => {
+  const s = frontierComplete((x) => {
+    x.story.arc = 'sinnoh'; x.story.region = 'sinnoh';
+    x.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh'];
+  });
+  s.story.flags = {};
+  for (let i = 0; i < n; i++) s.story.flags['flag_' + String(i).padStart(4, '0')] = true;
+  s.story.flags.sinnoh_complete = true; s.story.flags.finale_done = true;
+  return s;
+};
+t('S8-fix (i) played-shape full-chain save carrying 650 story flags (the measured finale-complete count) validates server-side with ZERO errors (the D08/D09/D10 case)',
+  (() => { const rr = validateSave(fullChainFlags(650)); return rr.ok && rr.errors.length === 0; })());
+t('S8-fix (ii) client schema result for the same 650-flag save is unchanged (accepted)',
+  (() => { const rr = validateSaveClient(fullChainFlags(650)); return rr.ok && rr.errors.length === 0; })());
+t('S8-fix (iii) the bound still stands: 1001 story flags reject bad-flags-size server-side',
+  (() => { const rr = validateSave(fullChainFlags(1001)); return !rr.ok && rr.errors.includes('bad-flags-size'); })());
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

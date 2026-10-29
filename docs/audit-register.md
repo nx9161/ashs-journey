@@ -13299,3 +13299,93 @@ ordered.
 - The single owner-ordered deploy happens once the whole Sinnoh
   arc chain closes (through S9); nothing here was pushed or
   deployed.
+
+## Arc 4 Stage S8 — CAMPAIGN GATE: the full chain through Sinnoh + finale on one save (2026-10-29)
+
+Base for this stage: `main` @ `b45001b` (S7 committed). Implementer session (War Room). **The continuous-save chain drive — the H7a/F5a harness at `~/workspace/ashs-journey-qa/arc-chain-qa/chain-drive.mjs`, standing at 147/147 at the Frontier close — is EXTENDED, not replaced: from the Frontier-complete point the SAME save now walks the whole of Sinnoh and the finale, closing at 211/211.** Exactly ONE by-name supersession (F22, below); every other prior check (C01–C40, J01–J40, H01–H35, F01–F24, D01–D08) stands UNMODIFIED and passes. **The gate caught one genuine full-chain bug** — the server validator's flags-size bound rejecting every real Sinnoh-complete save — fixed minimally as S8-fix (its own entry follows this one; A/B-proven below). **No other game-code change: the fresh build is byte-identical to the S7 close (public/game.js 12,287,055 B, sha256 `b1f77766…`; public static total 12,449,677 B, delta +0).** No push, no deploy (owner order: the single deploy waits for the whole chain through S9). `personal/` byte-identical (game.js sha256 `f434ba63…`, index.html `a780af0b…`, admin.js `a9242398…`, admin.html `dbf2112b…` — all four restored from HEAD after the slice/full-build passes and re-verified).
+
+### 1. The supersession (one, named — the C28/J4a precedent)
+
+**F22 (Sinnoh homecoming)** was written at F5a when Sinnoh was a SEALED arc: it asserted the machine delivers Gary's hook and sets `hook_sinnoh` + `homecoming_sinnoh` while `story.arc` STAYS `frontier` and NO `embark_sinnoh` is armed. S0 flipped Sinnoh to shipped, so the machine now takes its shipped branch. The check's SUBJECT is kept verbatim (the hook IS delivered by the machine in dialogue, the directive IS cleared, regionsDone is unchanged) and the assertion now reads the shipped behaviour: `story.arc` ADVANCES to `sinnoh`, region `sinnoh`, `embark_sinnoh` IS armed. **A/B at base `b45001b`: the UNMODIFIED 147-check drive run against the base tree read 146/147 with F22 the ONLY failure, its extra reading exactly `arc=sinnoh`** — the same signature as C28 (Orange flip) and J4a (Johto flip) before it. Arithmetic: 147 prior − 1 superseded + 1 replacement + 61 new Sinnoh checks (S01–S61) + 3 new D checks (D09–D11) = **211 total**.
+
+### 2. The Sinnoh segment, enumerated (S01–S61, all on the one save)
+
+Sealed derivation + embark: S01 homecoming read-back (arc/region sinnoh, embark armed, `arcDexStart` == the walked caught count, 13); S02 CAPT SINNOH sails Vermilion → Sandgem, arrival scene completes. **S5a spine:** S03 Rowan's lab + Paul 1; S04 Dawn met + Verity glimpse; S05 Gardenia badge-skip refusal (prefix law, no battle); S06 Roark (a shipped-roster miner battles first); S07 Barry; S08 Windworks/Mars; S09 Gardenia; S10 Jupiter raid + Paul's Eterna assessment; S11 Fantina; S12 Dawn's Hearthome contest beat + the player's rank gate standing open; S13 THE CHIMCHAR BEAT (Chimchar Lv 320 in band); S14 Defog/HM06 once; S15 Maylene — the prefix of four; S16 Saturn's HQ door + Reggie + Paul's Veilstone audit; S17 the first 14 SINNOH chain flags all stand. **S5b spine:** S18 Pastoria Tale + Wake; S19 Valor glimpse; S20 the HQ raid (Saturn must-win — the S5a door opened); S21 Byron; S22 the Darkrai plea → Fullmoon Lunar Wing → the boy wakes; S23 Gracidea; S24 Snowpoint Tale + Candice; S25 Acuity glimpse + THE PAUL MIDPOINT resolved FACED (win-or-lose, no gate); S26 Rock Climb/HM07; S27 Sunyshore Tale + Volkner — badges.sinnoh the full Platinum eight IN ORDER; S28 Grand Festival + Mesprit glimpse + Zoroark special + Celestic Tale; S29 Coronet climb; S30 Spear Pillar — Cyrus FACED, the sky tears, warp into the Distortion World; S31 the six-map traversal + THE CLIMAX (Cyrus ended, `sinnoh_climax_resolved`, Dialga/Palkia/Giratina unlocks); S32 Conference registration + preliminary; S33 THE PAUL SETTLEMENT (won at full strength, 2 attempts via the shipped rechallenge loop — the engine never hard-locked); S34 TOBIAS PROOF (i) a full wipe (the sinnoh-story Growl-only-Starly fixture) concludes NOTHING; S35 Darkrai FALLS (1 attempt); S36 Latios concludes WIN-OR-LOSE on the canon-loss path with the honour intact — the machine fired on `sinnoh_complete` EXACTLY once (regionsDone gained `sinnoh` exactly once, directive `unova` pinned) and never re-fires; S37 all 30 SINNOH chain flags stand + the Quest Log SINNOH rows starred. **S6 spot-arcs sampled on the same save** (exhaustive per-arc proofs live in sinnoh-legendary): S39 Uxie (flee re-fires, then caught); S40 Dialga THEN Palkia, both caught, order enforced; S41 Spiritomb (no-stone scenery, the traveller's Odd Keystone gift, flee re-fires at the tower, caught); S42 Manaphy (Rowan's Egg + Oak's Letter, hatched at exactly 250 walked steps via the shipped step hook, Lv 301). **Finale (S7):** S43 pre-finale pinning (NO flute, NO unlock, NO Master HoF, Hall of Origin SILENT — the capstone is finale-gated, not map-gated); S44 the NAMED DEX FIXTURE (the sinnoh-story C03 idiom — dex filled to 492/493 with only the capstone outstanding; the drive's own walked catches numbered 19 before the fill; the fill touches dex data only); S45 the finale homecoming (sealed law: arc stays `sinnoh`, NO embark armed, directive COMPLETE); S46 bond echoes ×6, one per completed arc, in regionsDone order; S47 Oak's "492 of 493" + the Azure Flute entrusted (exactly one, key pocket); S48 Master HoF — the shelf grows 2 → 3, exactly one `master` entry, the genuine per-arc entries untouched; S49 full credits closing on the end card, the approved line verbatim ("Six journeys. Five leagues and a frontier. One road, walked whole."); S50 the capstone appears in the Quest Log; S51 the flute ceremony at Spear Pillar (say-only, both titans already caught, the pillar quiet); S52 Arceus faces at the band cap Lv 400 — FLEE RE-FIRES, completes nothing; S53 the catch — dex **493/493**; S54 the Platinum Diploma reads earned; S55 home stays quiet (no re-fire, flute still one, Master still one); S56 the Journey menu — six arcs COMPLETE + the SEALED silhouette band. **Post-game integrity tail:** S57 CAPT WESTWIND sails Canalave → Vermilion after the finale; S58 CAPT SINNOH still sails Vermilion → Sandgem; S59 a Center exit in Sinnoh (Jubilife's own door-front (4,4) via the real door warp + `centerExit()` — never the Pallet fallback); S60 the end state (regionsDone exactly `[kanto, orange, johto, hoenn, frontier, sinnoh]`, the Platinum eight in order, Frontier symbols still all gold, dex 493/493); S61 NG+ starts from the full-chain save (`ngPlus` 1, own HoF empty, the prior shelf carrying all 3 entries with the Master flag intact).
+
+**Named drive-side adaptations** (driver only, no game code): every Sinnoh gym drives the shipped 4-attempt rechallenge loop (heal + re-talk per attempt), the league idiom, so an honest loss never hard-locks the chain — Paul's settlement took 2 attempts, recorded in its extra; the Tobias wipe fields the suites' own no-damage fixture; both validator snapshots are stamped through the REAL `doWarp` funnel (the F5a faithfulness idiom) so `meta.location` carries a real map name, not a teleport artifact.
+
+### 3. The F5-lesson check (D09/D10/D11 + D08 re-pointed)
+
+- **D09 (Sinnoh-complete):** the chain's own S38 snapshot — taken standing in **Route 212 — North** through the real warp funnel — validates with **ZERO errors on BOTH validators**: `{location: "Route 212 — North", server: [], client: []}`. The F-1 em-dash surface, now carrying Sinnoh's own names.
+- **D10 (finale-complete):** the S60 snapshot — **Route 212 — South** (em dash), Master HoF entry standing, Azure Flute in the bag, dex 493/493 — **ZERO errors on BOTH validators**: `{location: "Route 212 — South", server: [], client: []}`.
+- **D11 (sealed derivation):** the chain's own Frontier end state, re-shaped pure-side to the sealed-consumed form (hook + homecoming set, arc `frontier`, no embark), derives arc `sinnoh` + region `sinnoh` + `embark_sinnoh` through `SCH.migrate` — the UNCHANGED generic F0 catch-up — regionsDone untouched, idempotent.
+- **D08** now snapshots the FINAL finale end state (the H7a re-pointing precedent; `__CHAINSAVE__` re-stamped after S60) and re-proves it against BOTH validators: `{server: [], client: []}`.
+
+### 4. The complete battery (every suite; counts as run at this stage)
+
+| Suite | Result | Notes |
+|---|---|---|
+| **chain drive (this stage)** | **211/211** | 147 prior (F22 superseded, §1) + S01–S61 + D09–D11 |
+| sinnoh-checks | 132/132 | |
+| sinnoh-story | 123/123 | |
+| sinnoh-legendary | 27/27 | |
+| frontier-checks | 136/136 | |
+| hoenn-story | 88/88 | |
+| hoenn-contest | 28/28 | |
+| hoenn-legendary | 24/24 | |
+| johto-story | 110/110 | |
+| johto-systems | 62/62 | |
+| arc-foundation | 47/47 | |
+| cheat-shop | 44/44 | |
+| fidelity | 35/35 | |
+| orange-story | 38/38 | |
+| orange-climax | 42/42 | |
+| campaign-smoke | **24/24** | hard requirement met |
+| **battle-model** | **45/45** | hard requirement met |
+| qa-changed-flows | failures exactly **{b2, d9}** | hard requirement met; the standing pre-seal failures (Journey-menu row count; sight cones), unchanged |
+| qa-slice (verify-slice) | 132/134 | failures exactly **{s6, l8}** — the named inheritance |
+| audit-headless | 17/17 | |
+| audit-laptop | unrunnable | chromium did not start in this sandbox — the named inheritance |
+| rejuv phase 1 | 44/44 | |
+| rejuv phase 2 | 38/40 | failures {A09, C01} — named inheritances (C01 = chromium launch) |
+| rejuv phase 3 | 60/61 | failure {C01} chromium |
+| rejuv phase 4 | 50/51 | failure {C01} chromium |
+| rejuv phase 5 | 52/53 | failure {C01} chromium |
+| rejuv phase 6 | 44/45 | failure {C01} chromium |
+| Track B integration (`tests/run.mjs`) | 114/114 | via the documented register hook (PGlite) |
+| api-scripts validator | **109/109** | 106 at S7 + 3 S8-fix pins (§S8-fix) |
+| api-scripts validator fuzz | 2000/2000 | |
+| api-scripts save-contract | 12/12 | |
+| api-scripts config | 39/39 | |
+| api-scripts failclosed | 20/20 | |
+| api-scripts http-ip | 13/13 | |
+| api-scripts gen-tables --check | OK | tables `b7d7fc71…`, 509 species / 146 moves / 200 items |
+| budgets-check | all gates pass | script's vercel-static accounting 12,378,615 ≤ 12,582,912 |
+| drift-gate | PASS on the fresh build | on the COMMITTED tree it fails identically at base `b45001b` (same hashes — the committed `dist/standalone.html` is stale vs committed `public/game.js` from the S5b–S7 per-target public builds; A/B-proven in a pristine base worktree, so standing bookkeeping, NOT an S8 regression) |
+| contamination-scan | clean | |
+| verify-audio | ALL PASS | |
+
+**Exceptions beyond the named inheritances: NONE.** The one genuine bug the gate caught (bad-flags-size) is fixed and pinned — see the S8-fix entry.
+
+### 5. Final numbers (the mission's closing figures)
+
+- **Roster census (the S2b rig): PASS — 509/509 authored front+back pairs, missing [], blanks [], 0 fallbacks.**
+- **Sinnoh walking sweep: PASS — graph from Sandgem reaches 139/139 maps** (the S3 figure, re-proven).
+- **Bundle: fresh full build run twice — byte-identical** (public/game.js sha256 `b1f77766…` both runs). **public/game.js 12,287,055 B; public static total 12,449,677 B (game.js + index.html 91,560 + admin.html 52,951 + admin.js 18,111) — delta vs the S7 close: +0 B** (S8 changed no game code; the one fix is server-side validator + its pins). Gate 12,582,912 B, headroom 133,235 B. The S9 reserve is intact.
+- `personal/` byte-identical to base (hashes in the head of this entry); the commit carries ONLY `api/_lib/validator.mjs`, `tools/api-scripts/validator.test.mjs`, and this register.
+
+### 6. Verdict
+
+**CAMPAIGN GATE: SHIP.** One save, walked continuously from a fresh Kanto start through Orange, Johto, Hoenn, the Battle Frontier, the full Sinnoh campaign, and the finale, now reads **211/211** — with the F5 lesson re-proven on Sinnoh's own ground: played-shape Sinnoh-complete and finale-complete saves validate with zero errors on BOTH validators, em-dash map names and all. The gate did the job a gate exists for: it caught the one bug no stage battery could see (a Foundation-era server bound the finished campaign outgrew), and that bug is fixed, pinned, and recorded as its own entry below. The arc chain through Sinnoh is COMPLETE and proven; what remains is S9 (the Player's Guide revision) and then the owner's single deploy.
+
+## Arc 4 Stage S8-fix — the server flags-size bound outgrown by the shipped campaign (2026-10-29)
+
+**The bug (caught ONLY by the S8 chain drive, the F5-fix class):** `api/_lib/validator.mjs` capped `story.flags` at 500 keys (`bad-flags-size`) — a Track-B-era sanity bound. `story.flags` is the standing open vocabulary, and a real played save accumulates flags across every arc. Measured on the chain drive's own snapshots: **433 flags at Frontier-complete (under the bound — D08 passed at F5), 619 at Sinnoh-complete, 650 at finale-complete.** Every real full-chain save from Sinnoh onward was therefore REJECTED server-side while the client schema accepted it — the player could not cloud-save. No stage battery could see it: their played-shape fixtures carry few flags by construction (the same blind spot as F5-fix's `regionsDone` vocabulary and S0's F-1 charset).
+
+**A/B:** the S8-extended chain drive against the base validator read 208/211 with D08, D09, D10 failing ONLY as `{server: ["bad-flags-size"], client: []}` — the same snapshots, the same client result; the server bound is the sole discriminator. After the fix: 211/211, D08/D09/D10 all `{server: [], client: []}`.
+
+**The fix (one line + its lineage comment, `api/_lib/validator.mjs`):** the bound stands and is raised 500 → **1000**, with the measured counts recorded in the comment in the bag-cap lineage style (the cap tracks the shipped campaign's real need; its purpose — a sanity size — is unchanged, and the route's 64 KB payload gate still bounds the bytes: the finale-complete save serializes to ~44 KB at 650 flags). Nothing else widens: flag keys still ≤64 chars, values still boolean-only, dangerous keys still rejected.
+
+**Pins (+3, validator 106 → 109):** (i) a played-shape full-chain save carrying 650 story flags (the measured finale count) validates server-side with ZERO errors; (ii) the client schema result for the same save is unchanged (accepted); (iii) the bound still stands — 1001 flags reject `bad-flags-size`. Fuzz 2000/2000, save-contract 12/12, Track B 114/114 all re-run green over the change.
+
+**Guilty stage, named:** no S-stage introduced the bound — it predates the arcs (Track B). What outgrew it is the shipped campaign itself, accreting stage by stage (S5a/S5b's story flags carried a Frontier-complete save's 433 past 500 during Sinnoh); S8 is the first gate whose continuous save could measure it. Recorded as its own entry per the campaign-gate rule — not buried in the S8 battery table.

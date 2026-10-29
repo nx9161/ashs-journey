@@ -313,7 +313,7 @@ function checkStory(story, errors) {
     const fdk = hasDangerousKey(story.flags);
     if (fdk) errors.push('dangerous-key:' + fdk);
     const keys = Object.keys(story.flags);
-    if (keys.length > 500) errors.push('bad-flags-size');
+    if (keys.length > 1000) errors.push('bad-flags-size'); // cap tracks the shipped campaign's real flag count (Arc 4 Stage S8-fix: the S8 chain drive measured 650 flags on a finale-complete played save, 619 at Sinnoh-complete, 433 at Frontier-complete — the Track-B-era 500 bound rejected every real full-chain save server-side while the client accepted it, the F5-fix class; the bound itself stands, at 1000)
     for (const k of keys) {
       if (k.length > 64 || typeof story.flags[k] !== 'boolean') { errors.push('bad-flag'); break; }
     }
