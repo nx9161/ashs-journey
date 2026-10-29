@@ -37,7 +37,7 @@ const { makeMon, defaultState } = await import(join(ROOT, 'src/game/state.mjs'))
 const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 
 const FORM_IDS = ['crystalonix', 'pinkbutterfree', 'surfingpikachu', 'flyingpikachu', 'giantdragonite'];
-const NEW_IDS = ['togepi', 'marill', 'snubbull', 'donphan', 'hooh'];
+const NEW_IDS = ['togepi', 'marill', 'snubbull', 'donphan', 'hooh', 'lugia']; // lugia: Stage O1 addition on the hooh precedent
 const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
 
 // -- tables: client <-> server symmetric (gen-tables --check is the pin) --
@@ -47,8 +47,8 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   ok('A01 tables.json in sync with src/data (gen-tables --check)', checkOut.includes('tables.json OK'), checkOut.trim());
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A02 counts: species 162 (152+5 forms+5 species), items 130 (126+4), keepsakes 12, forms 202 (197+5)',
-    t.species.length === 162 && t.items.length === 130 && t.keepsakes.length === 12 && t.forms.length === 202,
+  ok('A02 counts: species 163 (152+5 forms+5 species+1 Lugia, Stage O1), items 130 (126+4), keepsakes 12, forms 202 (197+5)',
+    t.species.length === 163 && t.items.length === 130 && t.keepsakes.length === 12 && t.forms.length === 202,
     JSON.stringify({ s: t.species.length, i: t.items.length, k: t.keepsakes.length, f: t.forms.length }));
   ok('A03 server tables carry every expansion id',
     [...FORM_IDS, ...NEW_IDS].every((id) => t.species.includes(id) && t.forms.includes(id) === FORM_IDS.includes(id))
@@ -84,8 +84,9 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
     snubbull: { dexNo: 209, types: ['fairy'], base: { hp: 60, atk: 80, def: 50, spa: 40, spd: 40, spe: 30 }, catchRate: 190, growth: 'fast', baseXp: 60 },
     donphan: { dexNo: 232, types: ['ground'], base: { hp: 90, atk: 120, def: 120, spa: 60, spd: 60, spe: 50 }, catchRate: 60, growth: 'mediumfast', baseXp: 175 },
     hooh: { dexNo: 250, types: ['fire', 'flying'], base: { hp: 106, atk: 130, def: 90, spa: 110, spd: 154, spe: 90 }, catchRate: 3, growth: 'slow', baseXp: 306 },
+    lugia: { dexNo: 249, types: ['psychic', 'flying'], base: { hp: 106, atk: 90, def: 130, spa: 90, spd: 154, spe: 110 }, catchRate: 3, growth: 'slow', baseXp: 306 },
   };
-  ok('A10 five full species match PokeAPI canon (types/stats/catch/growth/xp)',
+  ok('A10 six full species match PokeAPI canon (types/stats/catch/growth/xp; Lugia added Stage O1, PokeAPI verified 2026-10-29)',
     NEW_IDS.every((id) => { const s = SPECIES[id], c = canon[id];
       return s.dexNo === c.dexNo && JSON.stringify(s.types) === JSON.stringify(c.types)
         && JSON.stringify(s.base) === JSON.stringify(c.base) && s.catchRate === c.catchRate
@@ -266,13 +267,13 @@ const driver = `
 
   // ---- B11: every expansion species + form claimable ----
   var g5 = mkGame(105); var ow5 = boot(g5);
-  var expIds = ['crystalonix','pinkbutterfree','surfingpikachu','flyingpikachu','giantdragonite','togepi','marill','snubbull','donphan','hooh'];
+  var expIds = ['crystalonix','pinkbutterfree','surfingpikachu','flyingpikachu','giantdragonite','togepi','marill','snubbull','donphan','hooh','lugia'];
   var allOk = expIds.every(function (id) { return ow5.cheatDeliverMon(id, 50, 'box').ok; });
   var ownedExp = [].concat.apply([], Object.values(g5.state.boxes)).map(function (m) { return m.speciesId; });
-  ok('B20 all 10 expansion entries claimable (5 forms + 5 species)',
+  ok('B20 all 11 guest entries claimable (5 forms + 5 species + Lugia via the same data-driven picker, Stage O1)',
     allOk && expIds.every(function (id) { return ownedExp.includes(id); }), ownedExp.join(','));
   ok('B21 expansion claims register their shared/base dex numbers',
-    g5.state.dex.caught[95] === true && g5.state.dex.caught[250] === true && g5.state.dex.caught[175] === true);
+    g5.state.dex.caught[95] === true && g5.state.dex.caught[250] === true && g5.state.dex.caught[175] === true && g5.state.dex.caught[249] === true);
 
   // ---- B12: maximal stock through the real claim paths ----
   var g6 = mkGame(106); var ow6 = boot(g6);

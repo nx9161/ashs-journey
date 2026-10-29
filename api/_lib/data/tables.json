@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "2eda7690cfd728cbc4b7a014c2c3773da5fe29ea52775472ad32fef53a832576",
+  "tablesVersion": "c77b60e92870d4822baa6c1b4c1abf6830df6889b46868249e14fa56d124e8a0",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -77,6 +77,7 @@
     "krabby",
     "lapras",
     "lickitung",
+    "lugia",
     "machamp",
     "machoke",
     "machop",

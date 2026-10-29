@@ -180,6 +180,7 @@ export const BATTLER_TIERS = {
   snubbull: 'S', // bulk 150
   donphan: 'L', // bulk 270
   hooh: 'L', // bulk 350
+  lugia: 'L', // bulk 350
 };
 export const TIER_DRAW_SIZES = { S: 52, M: 64, L: 80 };
 export function battlerTierFor(speciesId) { return BATTLER_TIERS[speciesId] || 'M'; }

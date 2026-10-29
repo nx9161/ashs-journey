@@ -37,7 +37,7 @@ const ALL_MAPS = { ...MAPS, ...MAPS2, ...MAPS3, ...MAPS4 };
 const ALL_TRAINERS = { ...TRAINERS_BASE, ...TRAINERS, ...TRAINERS3, ...TRAINERS4 };
 
 // ---------- A. roster / data integrity ----------
-ok('roster: 151 Kanto species + partner + 5 forms + 5 National species (Cheat Shop expansion, 2026-10-28)', Object.keys(ALL_SPECIES).length === 162);
+ok('roster: 151 Kanto species + partner + 5 forms + 6 National species (Cheat Shop expansion 2026-10-28 + Lugia, Stage O1 2026-10-29)', Object.keys(ALL_SPECIES).length === 163);
 {
   const byDex = {};
   // Form entries share their base species' dexNo by design (like partner

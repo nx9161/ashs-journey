@@ -2,7 +2,7 @@
 // The class mechanism is PROCEDURAL motion in battle.mjs rendered over
 // the authored frames (base / derived bob / authored accent delta): the
 // class only sets amplitude, rate and pattern per species. Assigned per
-// species in DATA — every battler species in the game (162 rows: the 161
+// species in DATA — every battler species in the game (163 rows: the 162
 // authored species pairs + the partner) appears exactly once below.
 // Classes (measurably different amplitude/rate — see IDLE_CLASS_PARAMS):
 //   grounded    breathe: slow low bob, bob-frame on the inhale
@@ -177,7 +177,8 @@ export const IDLE_CLASS = {
   marill: 'grounded',
   snubbull: 'grounded',
   donphan: 'grounded',
-  hooh: 'hover',};
+  hooh: 'hover',
+  lugia: 'hover',};
 
 // Motion parameters per class (battle.mjs idleMotion consumes these —
 // amplitude in logical px, periods in ms). No two classes share both

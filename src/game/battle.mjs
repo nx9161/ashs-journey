@@ -2883,7 +2883,7 @@ export class BattleScene {
     // one shared sine both battlers used to ride. Frame picks: the
     // authored accent delta inside its window, else the bob frame
     // (fronts: build-derived since Wave 6; backs: W2 shift-delta
-    // parity, all 162), else the base pose. With the motion gate off
+    // parity, all 163), else the base pose. With the motion gate off
     // idleMotion returns the static base pose (shipped behaviour).
     const foeIdle = this.idleMotion('foe', this.foe.speciesId);
     const allyIdle = this.idleMotion('ally', this.ally.speciesId);

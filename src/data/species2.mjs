@@ -1207,6 +1207,21 @@ export const SPECIES2 = {
     learnset: { 1: ['gust', 'whirlwind'], 23: ['recover'], 29: ['fireblast'], 43: ['swift'], 90: ['skyattack'] },
     flavor: 'Where its rainbow passes, the ash of old sorrow turns green.',
   },
+  // Stage O1 (Arc 1.5): ONE more full species on the Ho-Oh precedent —
+  // National dex only (dexNo 249 > 151, so the Kanto diploma cannot
+  // move). Canon facts (types/base stats/catch rate/growth/base XP)
+  // verified against PokeAPI at build time (2026-10-29); learnset
+  // restricted to this game's move table; flavor original. No wild
+  // placement in O1 (the Shamouti deep-shrine encounter is Stage O3)
+  // and no evolution entry. Cheat Terminal claimability follows the
+  // guest-species precedent automatically (data-driven picker).
+  lugia: {
+    id: 'lugia', name: 'Lugia', dexNo: 249, types: ['psychic', 'flying'],
+    base: { hp: 106, atk: 90, def: 130, spa: 90, spd: 154, spe: 110 },
+    catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 24901,
+    learnset: { 1: ['gust', 'whirlwind'], 20: ['mist'], 29: ['recover'], 43: ['swift'], 55: ['psychic'], 71: ['hydropump'], 90: ['skyattack'] },
+    flavor: 'It sleeps in the deep current so its wings need never trouble the sky.',
+  },
 };
 
 // Fidelity patch (ADR-018): Yellow's Kadabra/Alakazam learn Kinesis at 15.
