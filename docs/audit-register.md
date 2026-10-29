@@ -5299,3 +5299,192 @@ fidelity **35/35** · arc-foundation **47/47** · audit-headless
 - Sea-lane ground-family share is ~90% water by design (they are
   open sea); the ≤40% ground rule is a town rule and is reported
   for towns only in the richness driver.
+
+---
+
+## Stage O2 — Orange Story: quest chain, GS Ball, Lapras, the Orange Crew, Pummelo League (2026-10-29)
+
+Owner mission: the Orange arc gets its story spine on top of Stage
+O1's 30 maps — Prof. Ivy's GS Ball errand, a 3-stage quest chain,
+Lapras's gift and pod reunion, the four Orange Crew gyms with
+original challenge scenes, Drake's 6v6 at Pummelo, and the full
+badge plumbing (state, schema, server validator, tables, Cheat
+Terminal). Build + self-test + local commits only; NOT pushed,
+NOT deployed. `personal/` byte-identical (game.js sha256
+f434ba63… verified before and after; fresh build = vercel +
+guest targets only, personal line in dist/content-hash.txt
+preserved, Stage F convention).
+
+### 1. Story data (new src/data/story-orange.mjs)
+
+- **ORANGE_QUESTS** in the MAIN_QUESTS idiom (id / title / flag /
+  stage array / done-line): `q_orange_gsball` (flag
+  `orange_gsball`) → `q_orange_crew` (flag `orange_crew_done`,
+  `badgeCount: true` so the Quest Log stage text tracks n/4) →
+  `q_orange_league` (flag `orange_champion`, the registry's
+  completion flag). The chain file carries an explicit append
+  seam: Stage O3 appends its 2000 / Lugia stages here — the
+  climax is NOT written in this stage.
+- **ORANGE_EVENTS**: `ev_orange_ivy` (intro + GS Ball grant),
+  `ev_orange_lapras` (gift, flag step AFTER the gift step so the
+  flag can never set on a refused delivery), `ev_orange_lapras_pod`
+  (flag-only reunion; no removal step exists in the data — Lapras
+  is never taken away, by construction).
+- **ORANGE_TRAINERS**: cissy (Seadra 38 / Starmie 40), danny
+  (Nidoqueen 41 / Machoke 42 / Scyther 44), rudy (Electabuzz 44 /
+  Exeggutor 45 / Starmie 47), luana_a (Alakazam 48 / Hypno 46),
+  luana_b (Marowak 50 / Gengar 48), drake (Ditto 52 / Onix 53 /
+  Gengar 54 / Venusaur 55 / Electabuzz 56 / Dragonite 58; no
+  badgeId — the trophy path awards his prize).
+- All dialogue and copy is original writing; the anime is the
+  canon reference (ADR-015) but no line is borrowed.
+
+### 2. Engine wiring (no parallel systems)
+
+- **GS Ball grant**: a new generic steps-runner case `{gsBall}`
+  in overworld-systems: if `bag.gsball > 0` (Cheat Terminal
+  stock) Ivy's scene plays its variant line and grants nothing —
+  the errand can never soft-fail or duplicate; otherwise exactly
+  one `gsball` is granted. Ivy's intro fires from a `sysLoadMap`
+  entry hook on first `ivy-lab` entry (guarded against firing
+  during the Arc-F homecoming card window).
+- **Lapras gift**: a new `{giftCapSafe}` steps case reusing the
+  Cheat Shop stage's `cheatDeliverMon` seam: party if room, else
+  the first PC box with space, with a toast naming the box; a
+  total refusal stalls the event chain so the flag stays unset
+  and the scene retries on a later entry. Scene triggers: first
+  Valencia entry with ≥1 Orange badge (injured-Lapras heal beat,
+  Lv 30); pod reunion on first `pummelo` / `orange-sea-north`
+  entry with 4 badges and Lapras joined — dialogue-only, Lapras
+  visits the pod and chooses to return; nothing is removed.
+- **Leader scenes**: `sysNpc` dispatches `npc.orange` to one
+  `runOrangeNpc` before the generic paths. Cissy: three generous,
+  retryable, no-fail aim prompts (menu flavour) → battle. Danny:
+  arrival at the summit gym IS the climb (his own line says so) →
+  battle → post-win sled-ceremony in dialogue. Rudy: a drill menu
+  tied to the player's actual party types (reads SPECIES types,
+  falls back warm-generic) → battle; his Starmie gets its dancing
+  line. Each leader keeps a warm post-badge line; beaten leaders
+  never re-battle.
+- **Luana — deliberate, disclosed deviation**: her anime format
+  is a double battle; the battle engine is singles-only. Honest
+  adaptation shipped: a **two-stage match** — stage A
+  (`luana_a`, Alakazam pair) → on victory NO heal, party state
+  (HP/PP/status) carries straight into stage B (`luana_b`,
+  Marowak pair); the Jade Star Badge awards only on clearing
+  both. Her dialogue names the format plainly up front ("my
+  double battle — two pairs, back to back, no rest between
+  them"). Recorded here as a deviation from anime format, not
+  passed off as one.
+- **Badge award generalized**: `winTrainer` reads the trainer
+  def's `badgeSet` (default `'kanto'`) and writes
+  `badges.<set>` + `badge_<root>` + the beat flag; at 4 Orange
+  badges it also sets `orange_crew_done`. Kanto behaviour is
+  unchanged (default set). One canonical order table,
+  **BADGE_SETS**, lives in `src/data/items.mjs` and is read by
+  the leader award, the Cheat Terminal claim, and the tables
+  generator — no second copy anywhere.
+- **Pummelo League**: a stadium official NPC gates the room's
+  business — refusal dialogue names the count held/needed
+  ("You hold N of the 4 Orange Crew badges…"). Drake's own
+  pre-battle gate repeats the check; at 4 badges his challenge
+  menu opens the 6v6. Victory path (`finishOrangeLeague`):
+  sets `orange_champion`, adds `'orange'` to
+  `story.regionsDone`, grants the **Winner's Trophy**
+  (`winnerstrophy`, new collectible ITEMS row) once, records
+  the HoF entry in the shipped `story.hof` shape (team snapshot
+  + `badges: <orange count>`), then calls
+  `checkArcCompletion(g)` — the Stage F transition machine
+  fires the ARC COMPLETE card and pins the Johto directive
+  itself. No hand-rolled ending exists.
+- **Quest Log**: a "— ORANGE ISLANDS —" section in the Kanto
+  section's idiom, shown when the Orange arc is current or
+  reached (arc id, `hook_orange`, any Orange badge, the GS Ball
+  flag, or regionsDone), with per-quest detail cards; the crew
+  row tracks n/4 live. There is no dedicated badge-case screen
+  in the codebase (verified by search), so Orange badges
+  surface as key-pocket ITEMS rows in the Bag, exactly like
+  Kanto's — no screen was invented.
+- **Objective line**: when the current arc is orange,
+  `sysObjective` leads with the chain (fetch the GS Ball → the
+  Crew at n/4 → the League) ahead of the generic lines.
+- **Grounds**: `ivy-lab: open`, `mikan-gym: tide`,
+  `navel-gym: frost`, `trovita-gym: rubble`,
+  `kumquat-gym: mind`, `pummelo-stadium: open` — picks from the
+  existing 15 only; no new Grounds.
+
+### 3. Badge ids, validator, tables
+
+- **Badge id convention (flagged decision)**: the mission text
+  listed the set as `['coraleye','searuby','spikeshell',
+  'jadestar']`, but Kanto's idiom is the `-badge` suffix
+  (`boulderbadge`, …) and `badges.kanto` holds full item ids.
+  Orange follows the idiom: `coraleyebadge`, `searubybadge`,
+  `spikeshellbadge`, `jadestarbadge` — each also a key-pocket
+  ITEMS row (the badge case IS the Bag's key pocket here), with
+  `badge_coraleye` etc. flags set on award, mirroring Kanto.
+  `badges.orange` validates with the same PREFIX-ORDER rule as
+  Kanto, client (`bad-badges-orange`) and server
+  (`bad-badge-order`) — a completed Orange save (4 badges +
+  trophy + GS Ball + `orange_champion` + HoF entry) round-trips
+  clean on both validators (suite B20).
+- **Save fill**: legacy saves gain `badges.orange = []` through
+  the existing `fillV2Defaults` path with zero loss (proven in
+  A10: kanto badge + name intact).
+- **Tables**: `tools/api-scripts/gen-tables.mjs` now derives
+  both badge sequences from BADGE_SETS and includes the three
+  Orange quest ids; `api/_lib/data/tables.json` regenerated,
+  `--check` in sync (tablesVersion 9490647279a2…). The server
+  validator reads `badgeSequences` generically — no validator
+  code changed.
+- **Cheat Terminal**: badge stock is data-driven off BADGE_SETS
+  (Orange appeared without a stock edit); `cheatClaimBadge` was
+  rewritten set-aware — a claim prefix-completes ONLY its own
+  set, sets the crew flag at 4, and never touches another set
+  (B18/B19 prove Kanto stays untouched by Orange claims).
+- **Named content-count ripple (cheat-shop A02)**: items count
+  130 → 135 (4 Orange badge items + Winner's Trophy). This is a
+  pure content-count ripple of the Ho-Oh precedent class; the
+  baseline in tests/cheat-shop-checks.mjs was updated with the
+  ripple named in its assertion text, and it is named here.
+  No other baseline moved: qa-changed-flows failures remain
+  EXACTLY {b2, d9}.
+
+### 4. Verification (all headless, real bundles)
+
+- tests/orange-story-checks.mjs (NEW): **38/38** — Part A data /
+  validator units (quest idiom, BADGE_SETS ↔ ITEMS, GS Ball
+  identity with the collectible, team sheets, Luana two-def
+  shape, Drake 6v6, cap-safe gift data, schema prefix rules,
+  server round-trip incl. rejection of a non-prefix set, tables
+  sync, Grounds, placements, walk-to-leader BFS for all six
+  rooms). Part B drives the real campaign bundle: Ivy grant
+  once + cheat-owned variant (bag stays 5), Lapras party gift +
+  Box 1 delivery with the naming toast + once-only + pod
+  reunion (Lapras never removed), all four badges through the
+  real NPC → challenge → battle path, Luana stage-B capture
+  proving party damage carried with no heal, Drake refusal at
+  3 badges from BOTH the official and Drake naming "3 of the
+  4", Drake victory asserting `orange_champion` + trophy +
+  HoF + `arc_card_orange` + regionsDone ∋ orange + directive
+  'johto' + the card's own lines seen (the machine fired, not a
+  lookalike), Quest Log 2/4 tracking, cheat claims per set.
+- Battery: campaign-smoke **24/24**, arc-foundation-checks
+  **47/47**, cheat-shop-checks **44/44**, fidelity-checks
+  **35/35**, validator tests **51/51**, qa-changed-flows
+  failures exactly **{b2, d9}**, Orange connectivity sweep
+  **30/30** (leader placements block no interior — A17's
+  walk-to-leader BFS covers every gym + the stadium).
+
+### 5. Leftovers, named
+
+- Stage O3 appends the 2000 / Lugia stages to ORANGE_QUESTS and
+  owns Shamouti, the birds, Slowking and the GS Ball's payoff —
+  none of it is written here; Ivy's scene only promises the
+  ball "matters later", in-fiction.
+- Luana's true double battle waits on a doubles-capable battle
+  engine, if one is ever built; the two-stage adaptation is the
+  shipped format until then (deviation disclosed in §2).
+- The stadium official is a gate + flavour NPC only; no League
+  undercard / Elite-style gauntlet exists at Pummelo — Drake is
+  the League, as in the anime.
