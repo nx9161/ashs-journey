@@ -5119,3 +5119,183 @@ headlessly by the new suite + qa-changed-flows).
 - Orange's completion flag is named `orange_champion` in the
   registry; the Orange stage's league code must set exactly that
   flag (or amend the row) when it ships.
+
+## Arc Chain Stage O1 — Orange Islands: Maps, World Art, Data (2026-10-29)
+
+Implementer entry — pending independent QA. Base: Stage F @ 84372a8.
+Scope per the arc-chain mission: the Orange archipelago as data + art +
+travel only. Story/quests (O2) and the Pokémon 2000 / Lugia arc (O3)
+are NOT in this stage; gym interiors are layouts without leaders or
+battles, and `orange_champion` is still set by nobody.
+
+### 1. Map census — 30 new maps in `src/data/maps5.mjs`
+
+Registered in `src/data/merge.mjs` (`Object.assign(MAPS, MAPS2,
+MAPS3, MAPS4, MAPS5)`) and `scripts/module-order.json` after maps4.
+Merged map total: 70 → 100. No id collisions with the Kanto set.
+
+| Class | Maps (id — size) |
+|---|---|
+| Island exteriors (11) | valencia 28×18 · mikan 26×16 · navel 26×18 · moro 26×16 · trovita 26×16 · kumquat 28×16 · pummelo 30×18 · shamouti 28×18 · fire-isle 24×14 · ice-isle 24×14 · lightning-isle 24×14 |
+| Sea lanes (4) | orange-sea-west / -central / -east / -north, all 30×16 |
+| Interiors (15) | ivy-lab 18×12 · mikan-gym / navel-gym / trovita-gym / kumquat-gym 16×10 · pummelo-stadium 24×14 · shamouti-shrine 16×12 · shamouti-deep 16×12 · fire-cave / ice-cave / lightning-cave 14×10 · house-valencia / house-mikan / house-kumquat / house-shamouti 10×7 |
+
+Every exterior and sea map is ≥24×14 (viewport-filling from the first
+tile, roadmap §5). Interiors follow the shipped size idiom (gyms
+16×10, houses 10×7). Landmarks per P-6: Ivy's lab (Valencia), the
+Navel peak with its switchback path and summit sign, Pummelo Stadium
+(12-wide grand facade on the exterior + a 24×14 arena interior),
+the Shamouti shrine + plaza + Slowking's rock, Moro's ruins.
+
+Shared interiors reused, never re-authored: every island Pokémon
+Center door warps to the shared `center` and every Mart door to the
+shared `mart`, both with the shipped `via{}` return tickets; each
+Mart island carries its own `mart:` clerk def (stock + dialogue) in
+its town data, fielded inside the shared Mart exactly as in Kanto.
+Houses follow the shipped per-town idiom (the `viaExit` mechanism is
+mart/center-only in the engine, so no shared house interior was
+invented): four house interiors reuse shipped house-template rows
+with per-island returns and residents.
+
+Layout (hub-wise): Valencia SW → sea-west → Mikan N / sea-central →
+Navel centre, Moro S, sea-east → Trovita S, Kumquat N, Pummelo far E;
+sea-north → Shamouti far N, ringed by Fire (W), Lightning (E) and
+Ice (N) isles. Surf stitching is edge-warp pairs on both maps of
+every adjacency, with geographically coherent landings (entering
+from the south lands on the north inset, etc. — a mirrored-landing
+bug in the first generator pass was caught by the sweep's entry
+labels and fixed before commit).
+
+### 2. Travel — the no-soft-lock law, proven
+
+- **Vermilion dock**: MAPS5 patches MAPS4's repaired Vermilion with
+  ONE added NPC, CAPT ORANGE at (13,10): `ferry: 'valencia',
+  ferryArc: 'orange'`, sailor art, dialogue naming the Orange
+  crossing and Hawthorn's booking rule. Stage F's handler gates him:
+  pre-embark the gate line answers; post-homecoming the crossing
+  runs; returns are unconditional (reached-before rule).
+- **Valencia dock**: the mirror ferryman (`ferry: 'vermilion',
+  ferryArc: 'orange'`) plus plain hoppers.
+- **Island-hopper graph** (plain `ferry:` legs, an NPC at BOTH docks
+  of every leg, unconditional both ways): valencia↔mikan,
+  valencia↔navel, mikan↔navel, navel↔moro, moro↔trovita,
+  trovita↔kumquat, trovita↔pummelo, kumquat↔pummelo,
+  pummelo↔shamouti, shamouti↔fire-isle, shamouti↔ice-isle,
+  shamouti↔lightning-isle. The graph is connected (machine-checked).
+- **Sea lanes** are surfable (`~` tiles + water tables); every shore
+  transition is two-way by construction (edge-warp pairs).
+
+**Connectivity gate** — `~/workspace/ashs-journey-qa/orange-connectivity/orange-sweep.mjs`
+(celadon-sweep methodology extended: Surf assumed, mart clerks
+filtered as the engine filters them, interiors as connectors to
+fixpoint): **all 30 maps PASS** — every entry reaches every warp on
+its map; ferry graph connected with every Orange leg two-way; every
+new map reachable from Valencia in the map-level warp+ferry graph.
+Full per-entry table in `orange-connectivity/sweep-results.txt`.
+**Live drive** — `orange-connectivity/orange-live-drive.mjs` through
+the real built bundle: **9/9** — all 30 maps `loadMap()` in the
+engine; pre-embark crossing refused in Vermilion; embark-armed
+crossing sails via the en-route card and lands on Valencia's start
+with `reachedarc_orange` stamped; return sails with the embark flag
+cleared; a plain Valencia→Mikan hopper leg sails and lands at
+Mikan's dock start.
+
+### 3. World art — 12 new tile kinds (O1 block, tiles.mjs)
+
+Chars continue the W6/W7 allocation at U+1E00+152..163, same class
+system: props `palm` (curved trunk, six-frond crown, cast shadow —
+P-2), `coral`, `shrinegate`, `feststand`, `gspedestal` (the GS Ball
+pedestal visual in ivy-lab), `stadiumcrest`; floors `sand`,
+`tropgrass`, `shrinefloor`, `stadiumfloor`; walls `shrinewall`,
+`stadiumwall`. All twelve are real authored `.pix` in
+`assets/sprites/pix/tiles/` (generator + sources kept in
+`orange-connectivity/gen_o1_art.py`), wired in `art.mjs`
+(TILE_ART / PROP_KINDS / floor-variant families) and the WALKABLE
+set in `maps.mjs` (the four floor chars). Tiles-family palette
+union: 623 → 638 of the 640 budget (new hexes held to 15 by reusing
+shipped tones — no budget raise needed). `build-art.mjs` clean:
+2,296 sprites.
+
+**Richness** — `orange-connectivity/orange-richness.mjs` (Premium+
+W5 logical-raster method, real resolver + ART): **all 30 maps PASS
+the floors.** Island towns 132–178 unique colours (floor 80);
+sea lanes 75–98 and interiors 57–76 (floor 55); no ground family
+above 40% of any town's cells (worst: fire/ice/lightning-isle water
+at 39.3%). Full table in `orange-connectivity/richness-results.txt`.
+Ambient life: 2 flavour NPCs per island (sailors, swimmers, elders,
+keepers on the shrine isles) plus ferrymen, mart clerks, gym
+attendants, the stadium usher, the shrine keeper, a lab aide and
+house residents — all original dialogue, flavour only; signs on
+every dock, gym, the lab, the peak, the ruins and the shrines.
+
+### 4. Wild data
+
+Per the shipped idiom (`encounters.table` grass / `.water` surf):
+island grass = coastal Kanto species (Pidgey/Rattata/Oddish/Meowth/
+Spearow/Pidgeotto, Lv 25–38); shores + sea lanes = water species
+(Tentacool/Magikarp/Poliwag/Goldeen/Krabby/Horsea/Staryu/Shellder,
+Lv 25–45; Tentacruel rare on the lanes); Navel slopes = Geodude/
+Onix/Graveler/Rhyhorn Lv 28–40; shrine isles sparse themed tables
+(Vulpix/Growlithe · Seel/Shellder · Pikachu/Magnemite/Voltorb).
+No new species in any wild table; Lugia appears in none.
+
+### 5. Lugia (#249) — the Ho-Oh precedent, followed exactly
+
+One full species entry in `species2.mjs` beside Ho-Oh: Psychic/
+Flying, base 106/90/130/90/154/110, catchRate 3, growth 'slow',
+baseXp 306 — facts verified against PokeAPI at build time
+(2026-10-29, build-time only; no sprites or expression taken).
+Learnset restricted to the game's move table (Gust/Whirlwind at 1,
+Mist 20, Recover 29, Swift 43, Psychic 55, Hydro Pump 71, Sky
+Attack 90 — a curve mirroring Ho-Oh's shape); original flavour line;
+no evolution entry. Hand-drawn original 64×64 front+back `.pix`
+(`lugia-front`/`lugia-back`, + derived/shift bobs from the pipeline)
+— PokeAPI sprites were never fetched. Companions on the precedent:
+`idle-classes.mjs` (hover) and `battler-tiers.mjs` (L) rows;
+`gen-tables` regenerated (server species list 162 → 163).
+
+Roster invariants: Kanto 151 diploma set unchanged (dexNo 249 is
+outside 1–151); roster 162 → 163. Test expectations updated ONLY
+where the Ho-Oh precedent set them: `cheat-shop-checks.mjs` (A02
+count, A10 canon table + Lugia row, B20/B21 — Lugia IS claimable at
+the Cheat Terminal, verified, because the picker is data-driven,
+identical to Ho-Oh) and `fidelity-checks.mjs` (roster count line).
+Lugia has NO wild/story placement in O1 — the catchable encounter
+is O3's deep-shrine legendary arc, per the coordinator ruling.
+
+### 6. Battery at this commit
+
+Build clean (vercel + guest; personal target NOT built — see §7) ·
+campaign-smoke **24/24** · qa-changed-flows failures **exactly
+{b2, d9}** (the standing baseline) · cheat-shop **44/44** ·
+fidelity **35/35** · arc-foundation **47/47** · audit-headless
+**17/17** · orange-sweep **30/30 + ferry graph** · orange-richness
+**30/30** · orange-live-drive **9/9**. Bundle: `public/game.js`
+5,129,070 bytes (gate 12,582,912 — 40.8%); guest standalone
+5,154,216 bytes.
+
+### 7. Leftovers, named
+
+- `personal/` byte-identical (game.js sha256 f434ba63… verified
+  before and after): the personal bundle was not rebuilt, and the
+  `personal:` line in `dist/content-hash.txt` is the preserved
+  prior line, per the Stage F convention.
+- Gym interiors carry flavour signs + an attendant each, but no
+  leaders, trainers or battles — Stage O2. The Mikan sign's
+  parenthetical says so in-fiction; the other gym signs name the
+  badge challenges only.
+- `shamouti-deep` is authored and reachable (through the shrine's
+  back passage) but its Lugia encounter, the bird events and
+  Slowking's counsel are Stage O3; its altar sign is written to
+  read honestly in the meantime.
+- The GS Ball is a pedestal visual + sign text in ivy-lab; the
+  item grant and Ivy's scene are Stage O2 (the item id already
+  exists from the Cheat Shop stage).
+- One generator wart, disclosed: maps were produced by a
+  deterministic generator (`orange-connectivity/gen_maps5.py`) —
+  an early pass mis-indexed W6 tile chars by 8 (hyphenated kind
+  names skipped by its parser); caught by the sweep's kind census,
+  fixed, and both gates re-run green on the corrected file.
+- Sea-lane ground-family share is ~90% water by design (they are
+  open sea); the ≤40% ground rule is a town rule and is reported
+  for towns only in the richness driver.
