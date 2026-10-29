@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): camper left idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-camper-left-idle-2 npc-camper-left-idle-1 16 32
+4 16 j
+5 16 j
+PAL

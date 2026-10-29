@@ -1,0 +1,6 @@
+# Premium+ W4 (AN-4): grunt left idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-grunt-left-idle-2 npc-grunt-left-idle-1 16 32
+5 6 S
+4 14 j
+5 14 j
+PAL

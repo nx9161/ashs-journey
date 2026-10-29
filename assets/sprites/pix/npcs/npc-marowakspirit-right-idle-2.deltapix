@@ -1,0 +1,4 @@
+# Premium+ W4 (AN-4): marowakspirit right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-marowakspirit-right-idle-2 npc-marowakspirit-right-idle-1 16 20
+5 2 G
+PAL

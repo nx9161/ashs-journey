@@ -1,0 +1,4 @@
+# Premium+ W4 (AN-4): cubonespirit right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-cubonespirit-right-idle-2 npc-cubonespirit-right-idle-1 16 20
+5 3 G
+PAL

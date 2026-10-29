@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): elder left idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-elder-left-idle-2 npc-elder-left-idle-1 16 32
+5 20 j
+6 20 j
+PAL

@@ -1,0 +1,6 @@
+# Premium+ W4 (AN-4): sailor right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-sailor-right-idle-2 npc-sailor-right-idle-1 16 32
+11 14 j
+11 15 j
+7 21 J
+PAL

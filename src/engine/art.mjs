@@ -266,6 +266,55 @@ export function npcSwapFor(npc, kind) {
   return Object.keys(swap).length ? swap : null;
 }
 
+// ---- Premium+ W4 (AN-4): directional NPC sets + named/roaming tables ----
+// The named cast (Wave 3a's 20 individual kinds) extends its FRONT idle
+// to 4 frames with a kind-specific gesture (idle-3/4 deltas). The 24
+// roaming generic kinds own walk cycles (2f x 4 dirs). Every one of the
+// 48 kinds (all but the PC terminal, a machine that already cycles 4
+// screen frames) owns directional idles: up/left/right at 2f each.
+export const NPC_NAMED_KINDS = new Set([
+  'gary', 'garychamp', 'mom', 'hawthorn', 'brock', 'misty', 'surge',
+  'erika', 'koga', 'sabrina', 'blaine', 'giovanni', 'lorelei', 'bruno',
+  'agatha', 'lance', 'rue', 'cole', 'nurse', 'sparcoach',
+]);
+export const NPC_ROAMING_KINDS = new Set([
+  'youngster', 'lass', 'kid', 'twin', 'camper', 'bugcatcher', 'hiker',
+  'sailor', 'fisher', 'biker', 'worker', 'ranger', 'officer', 'gent',
+  'lady', 'elder', 'monk', 'scientist', 'swimmer', 'acetrainer', 'aide',
+  'coach', 'rival', 'grunt',
+]);
+
+// Directional frame set for one NPC instance: walk pair while moving
+// (roaming kinds), else the idle set for the facing — the named cast's
+// 4-frame gesture cycle on the front, 2-frame idles elsewhere. Missing
+// art degrades to the shipped front pair (npcFrames), never to nothing.
+export function npcFramesFor(doc, npc, dir, moving) {
+  const kind = npcArtKind(npc);
+  if (kind === 'pc') return npcFrames(doc, npc);
+  const prefix = kind === 'brock' ? 'brock' : 'npc-' + kind;
+  const swap = npcSwapFor(npc, kind);
+  const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
+  const cv = (id) => artCanvas(doc, id, 1, false, swap);
+  if (moving) {
+    const w = [cv(prefix + '-' + d + '-walk-1'), cv(prefix + '-' + d + '-walk-2')].filter(Boolean);
+    if (w.length >= 2) return w;
+  }
+  if (d === 'down') {
+    const base = [cv(prefix + '-idle-1'), cv(prefix + '-idle-2')].filter(Boolean);
+    if (base.length >= 2) {
+      if (NPC_NAMED_KINDS.has(kind)) {
+        const g = [cv(prefix + '-idle-3'), cv(prefix + '-idle-4')].filter(Boolean);
+        if (g.length >= 2) return [...base, ...g];
+      }
+      return base;
+    }
+  } else {
+    const f = [cv(prefix + '-' + d + '-idle-1'), cv(prefix + '-' + d + '-idle-2')].filter(Boolean);
+    if (f.length >= 2) return f;
+  }
+  return npcFrames(doc, npc);
+}
+
 export function npcFrames(doc, npc) {
   const kind = npcArtKind(npc);
   // Authored terminal art (monitor + box-grid screen + cabinet). A PC

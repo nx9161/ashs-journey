@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): clerk right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-clerk-right-idle-2 npc-clerk-right-idle-1 16 32
+11 14 j
+11 15 j
+PAL

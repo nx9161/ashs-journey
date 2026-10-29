@@ -1,0 +1,4 @@
+# Premium+ W4 (AN-4): cubonespirit up idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-cubonespirit-up-idle-2 npc-cubonespirit-up-idle-1 16 20
+5 3 G
+PAL

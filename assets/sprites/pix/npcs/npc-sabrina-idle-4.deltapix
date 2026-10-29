@@ -1,0 +1,26 @@
+# Premium+ W4 (AN-4): named-cast gesture idle — original delta over the shipped front idle; kind-specific gesture (see register).
+PIXD npc-sabrina-idle-4 npc-sabrina-idle-2 16 32
+3 3 O
+11 3 .
+3 4 O
+4 4 H
+10 4 O
+11 4 .
+2 5 O
+3 5 d
+11 5 O
+12 5 .
+2 6 O
+3 6 S
+10 6 s
+11 6 O
+12 6 .
+2 7 O
+3 7 S
+10 7 s
+11 7 O
+12 7 .
+6 14 W
+11 15 S
+11 16 S
+PAL

@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): koga up idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-koga-up-idle-2 npc-koga-up-idle-1 16 32
+4 14 j
+5 14 j
+PAL

@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): fisher right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-fisher-right-idle-2 npc-fisher-right-idle-1 16 32
+7 14 j
+8 14 j
+PAL

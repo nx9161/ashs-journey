@@ -2,8 +2,8 @@
   "atlas": "atlas-npcs.png",
   "tile": 16,
   "size": [
-    1764,
-    34
+    2034,
+    204
   ],
   "sprites": {
     "npc-acetrainer-idle-1": {
@@ -33,7 +33,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-agatha-idle-1": {
+    "npc-acetrainer-left-idle-1": {
       "x": 37,
       "y": 1,
       "w": 16,
@@ -46,8 +46,47 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-agatha-idle-2": {
+    "npc-acetrainer-right-idle-1": {
       "x": 55,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-acetrainer-up-idle-1": {
+      "x": 73,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-agatha-idle-1": {
+      "x": 91,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-agatha-idle-2": {
+      "x": 109,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -60,61 +99,20 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-aide-idle-1": {
-      "x": 73,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 16,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-aide-idle-2": {
-      "x": 91,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 16,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-biker-idle-1": {
-      "x": 109,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-biker-idle-2": {
+    "npc-agatha-left-idle-1": {
       "x": 127,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
-      "palette": 14,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-blaine-idle-1": {
+    "npc-agatha-right-idle-1": {
       "x": 145,
       "y": 1,
       "w": 16,
@@ -127,8 +125,100 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-blaine-idle-2": {
+    "npc-agatha-up-idle-1": {
       "x": 163,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-aide-idle-1": {
+      "x": 181,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-aide-idle-2": {
+      "x": 199,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-aide-left-idle-1": {
+      "x": 217,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-aide-right-idle-1": {
+      "x": 235,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-aide-up-idle-1": {
+      "x": 253,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-biker-idle-1": {
+      "x": 271,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-biker-idle-2": {
+      "x": 289,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -141,8 +231,113 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "npc-biker-left-idle-1": {
+      "x": 307,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-biker-right-idle-1": {
+      "x": 325,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-biker-up-idle-1": {
+      "x": 343,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-blaine-idle-1": {
+      "x": 361,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-blaine-idle-2": {
+      "x": 379,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-blaine-left-idle-1": {
+      "x": 397,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-blaine-right-idle-1": {
+      "x": 415,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-blaine-up-idle-1": {
+      "x": 433,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "npc-bruno-idle-1": {
-      "x": 181,
+      "x": 451,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -155,7 +350,7 @@
       "mirror_of": null
     },
     "npc-bruno-idle-2": {
-      "x": 199,
+      "x": 469,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -168,8 +363,47 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "npc-bruno-left-idle-1": {
+      "x": 487,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-bruno-right-idle-1": {
+      "x": 505,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-bruno-up-idle-1": {
+      "x": 523,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "npc-bugcatcher-idle-1": {
-      "x": 217,
+      "x": 541,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -182,7 +416,7 @@
       "mirror_of": null
     },
     "npc-bugcatcher-idle-2": {
-      "x": 235,
+      "x": 559,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -195,8 +429,47 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "npc-bugcatcher-left-idle-1": {
+      "x": 577,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-bugcatcher-right-idle-1": {
+      "x": 595,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-bugcatcher-up-idle-1": {
+      "x": 613,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "npc-camper-idle-1": {
-      "x": 253,
+      "x": 631,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -209,7 +482,7 @@
       "mirror_of": null
     },
     "npc-camper-idle-2": {
-      "x": 271,
+      "x": 649,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -222,8 +495,47 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "npc-camper-left-idle-1": {
+      "x": 667,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-camper-right-idle-1": {
+      "x": 685,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-camper-up-idle-1": {
+      "x": 703,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "npc-clerk-idle-1": {
-      "x": 289,
+      "x": 721,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -236,330 +548,6 @@
       "mirror_of": null
     },
     "npc-clerk-idle-2": {
-      "x": 307,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-coach-idle-1": {
-      "x": 325,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-coach-idle-2": {
-      "x": 343,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-cole-idle-1": {
-      "x": 361,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-cole-idle-2": {
-      "x": 379,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-elder-idle-1": {
-      "x": 397,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 11,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-elder-idle-2": {
-      "x": 415,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 11,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-erika-idle-1": {
-      "x": 433,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-erika-idle-2": {
-      "x": 451,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-fisher-idle-1": {
-      "x": 469,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-fisher-idle-2": {
-      "x": 487,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-gary-idle-1": {
-      "x": 505,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-gary-idle-2": {
-      "x": 523,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-garychamp-idle-1": {
-      "x": 541,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-garychamp-idle-2": {
-      "x": 559,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-gent-idle-1": {
-      "x": 577,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 16,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-gent-idle-2": {
-      "x": 595,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 16,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-giovanni-idle-1": {
-      "x": 613,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-giovanni-idle-2": {
-      "x": 631,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-grunt-idle-1": {
-      "x": 649,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-grunt-idle-2": {
-      "x": 667,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-hawthorn-idle-1": {
-      "x": 685,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-hawthorn-idle-2": {
-      "x": 703,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-hiker-idle-1": {
-      "x": 721,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-hiker-idle-2": {
       "x": 739,
       "y": 1,
       "w": 16,
@@ -568,12 +556,12 @@
         "idle",
         "idle2"
       ],
-      "palette": 14,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-kid-idle-1": {
+    "npc-clerk-left-idle-1": {
       "x": 757,
       "y": 1,
       "w": 16,
@@ -581,26 +569,25 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-kid-idle-2": {
+    "npc-clerk-right-idle-1": {
       "x": 775,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-koga-idle-1": {
+    "npc-clerk-up-idle-1": {
       "x": 793,
       "y": 1,
       "w": 16,
@@ -613,35 +600,21 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-koga-idle-2": {
+    "npc-coach-idle-1": {
       "x": 811,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 13,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-lady-idle-1": {
-      "x": 829,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
         "idle"
       ],
-      "palette": 10,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-lady-idle-2": {
-      "x": 847,
+    "npc-coach-idle-2": {
+      "x": 829,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -649,12 +622,25 @@
         "idle",
         "idle2"
       ],
-      "palette": 10,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-lance-idle-1": {
+    "npc-coach-left-idle-1": {
+      "x": 847,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-coach-right-idle-1": {
       "x": 865,
       "y": 1,
       "w": 16,
@@ -662,26 +648,25 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-lance-idle-2": {
+    "npc-coach-up-idle-1": {
       "x": 883,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
       "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-lass-idle-1": {
+    "npc-cole-idle-1": {
       "x": 901,
       "y": 1,
       "w": 16,
@@ -689,12 +674,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-lass-idle-2": {
+    "npc-cole-idle-2": {
       "x": 919,
       "y": 1,
       "w": 16,
@@ -703,12 +688,12 @@
         "idle",
         "idle2"
       ],
-      "palette": 13,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-lorelei-idle-1": {
+    "npc-cole-left-idle-1": {
       "x": 937,
       "y": 1,
       "w": 16,
@@ -716,26 +701,25 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-lorelei-idle-2": {
+    "npc-cole-right-idle-1": {
       "x": 955,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
-      "palette": 12,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-misty-idle-1": {
+    "npc-cole-up-idle-1": {
       "x": 973,
       "y": 1,
       "w": 16,
@@ -743,40 +727,26 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-misty-idle-2": {
+    "npc-elder-idle-1": {
       "x": 991,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-mom-idle-1": {
-      "x": 1009,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-mom-idle-2": {
-      "x": 1027,
+    "npc-elder-idle-2": {
+      "x": 1009,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -784,12 +754,25 @@
         "idle",
         "idle2"
       ],
-      "palette": 13,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-monk-idle-1": {
+    "npc-elder-left-idle-1": {
+      "x": 1027,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-elder-right-idle-1": {
       "x": 1045,
       "y": 1,
       "w": 16,
@@ -802,21 +785,20 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-monk-idle-2": {
+    "npc-elder-up-idle-1": {
       "x": 1063,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
-      "palette": 11,
+      "palette": 10,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-nurse-idle-1": {
+    "npc-erika-idle-1": {
       "x": 1081,
       "y": 1,
       "w": 16,
@@ -829,7 +811,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-nurse-idle-2": {
+    "npc-erika-idle-2": {
       "x": 1099,
       "y": 1,
       "w": 16,
@@ -843,7 +825,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-officer-idle-1": {
+    "npc-erika-left-idle-1": {
       "x": 1117,
       "y": 1,
       "w": 16,
@@ -851,26 +833,25 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-officer-idle-2": {
+    "npc-erika-right-idle-1": {
       "x": 1135,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
-      "palette": 13,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-professor-idle-1": {
+    "npc-erika-up-idle-1": {
       "x": 1153,
       "y": 1,
       "w": 16,
@@ -878,27 +859,13 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-professor-idle-2": {
+    "npc-fisher-idle-1": {
       "x": 1171,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-ranger-idle-1": {
-      "x": 1189,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -910,8 +877,8 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-ranger-idle-2": {
-      "x": 1207,
+    "npc-fisher-idle-2": {
+      "x": 1189,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -924,7 +891,20 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-rival-idle-1": {
+    "npc-fisher-left-idle-1": {
+      "x": 1207,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-fisher-right-idle-1": {
       "x": 1225,
       "y": 1,
       "w": 16,
@@ -932,26 +912,25 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-rival-idle-2": {
+    "npc-fisher-up-idle-1": {
       "x": 1243,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
       "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-rue-idle-1": {
+    "npc-gary-idle-1": {
       "x": 1261,
       "y": 1,
       "w": 16,
@@ -964,7 +943,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-rue-idle-2": {
+    "npc-gary-idle-2": {
       "x": 1279,
       "y": 1,
       "w": 16,
@@ -978,7 +957,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-sabrina-idle-1": {
+    "npc-gary-left-idle-1": {
       "x": 1297,
       "y": 1,
       "w": 16,
@@ -991,21 +970,20 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-sabrina-idle-2": {
+    "npc-gary-right-idle-1": {
       "x": 1315,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
       "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-sailor-idle-1": {
+    "npc-gary-up-idle-1": {
       "x": 1333,
       "y": 1,
       "w": 16,
@@ -1013,40 +991,26 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-sailor-idle-2": {
+    "npc-garychamp-idle-1": {
       "x": 1351,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 15,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-scientist-idle-1": {
-      "x": 1369,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-scientist-idle-2": {
-      "x": 1387,
+    "npc-garychamp-idle-2": {
+      "x": 1369,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -1054,12 +1018,25 @@
         "idle",
         "idle2"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-sparcoach-idle-1": {
+    "npc-garychamp-left-idle-1": {
+      "x": 1387,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-garychamp-right-idle-1": {
       "x": 1405,
       "y": 1,
       "w": 16,
@@ -1067,26 +1044,25 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-sparcoach-idle-2": {
+    "npc-garychamp-up-idle-1": {
       "x": 1423,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
-      "palette": 12,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-surge-idle-1": {
+    "npc-gent-idle-1": {
       "x": 1441,
       "y": 1,
       "w": 16,
@@ -1094,12 +1070,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-surge-idle-2": {
+    "npc-gent-idle-2": {
       "x": 1459,
       "y": 1,
       "w": 16,
@@ -1108,12 +1084,12 @@
         "idle",
         "idle2"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-swimmer-idle-1": {
+    "npc-gent-left-idle-1": {
       "x": 1477,
       "y": 1,
       "w": 16,
@@ -1121,26 +1097,25 @@
       "frames": [
         "idle"
       ],
-      "palette": 11,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-swimmer-idle-2": {
+    "npc-gent-right-idle-1": {
       "x": 1495,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
-      "palette": 11,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-twin-idle-1": {
+    "npc-gent-up-idle-1": {
       "x": 1513,
       "y": 1,
       "w": 16,
@@ -1148,40 +1123,26 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 13,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-twin-idle-2": {
+    "npc-giovanni-idle-1": {
       "x": 1531,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "idle",
-        "idle2"
-      ],
-      "palette": 14,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "npc-worker-idle-1": {
-      "x": 1549,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-worker-idle-2": {
-      "x": 1567,
+    "npc-giovanni-idle-2": {
+      "x": 1549,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -1189,12 +1150,25 @@
         "idle",
         "idle2"
       ],
-      "palette": 13,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-youngster-idle-1": {
+    "npc-giovanni-left-idle-1": {
+      "x": 1567,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-giovanni-right-idle-1": {
       "x": 1585,
       "y": 1,
       "w": 16,
@@ -1207,8 +1181,100 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-youngster-idle-2": {
+    "npc-giovanni-up-idle-1": {
       "x": 1603,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-grunt-idle-1": {
+      "x": 1621,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-grunt-idle-2": {
+      "x": 1639,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-grunt-left-idle-1": {
+      "x": 1657,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-grunt-right-idle-1": {
+      "x": 1675,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-grunt-up-idle-1": {
+      "x": 1693,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hawthorn-idle-1": {
+      "x": 1711,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hawthorn-idle-2": {
+      "x": 1729,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -1221,9 +1287,6943 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "npc-cubonespirit-idle-1": {
-      "x": 1621,
+    "npc-hawthorn-left-idle-1": {
+      "x": 1747,
       "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hawthorn-right-idle-1": {
+      "x": 1765,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hawthorn-up-idle-1": {
+      "x": 1783,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hiker-idle-1": {
+      "x": 1801,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hiker-idle-2": {
+      "x": 1819,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hiker-left-idle-1": {
+      "x": 1837,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hiker-right-idle-1": {
+      "x": 1855,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-hiker-up-idle-1": {
+      "x": 1873,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-kid-idle-1": {
+      "x": 1891,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-kid-idle-2": {
+      "x": 1909,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-kid-left-idle-1": {
+      "x": 1927,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-kid-right-idle-1": {
+      "x": 1945,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-kid-up-idle-1": {
+      "x": 1963,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-koga-idle-1": {
+      "x": 1981,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-koga-idle-2": {
+      "x": 1999,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-koga-left-idle-1": {
+      "x": 2017,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-koga-right-idle-1": {
+      "x": 1,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-koga-up-idle-1": {
+      "x": 19,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lady-idle-1": {
+      "x": 37,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lady-idle-2": {
+      "x": 55,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lady-left-idle-1": {
+      "x": 73,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lady-right-idle-1": {
+      "x": 91,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lady-up-idle-1": {
+      "x": 109,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lance-idle-1": {
+      "x": 127,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lance-idle-2": {
+      "x": 145,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lance-left-idle-1": {
+      "x": 163,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lance-right-idle-1": {
+      "x": 181,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lance-up-idle-1": {
+      "x": 199,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lass-idle-1": {
+      "x": 217,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lass-idle-2": {
+      "x": 235,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lass-left-idle-1": {
+      "x": 253,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lass-right-idle-1": {
+      "x": 271,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lass-up-idle-1": {
+      "x": 289,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lorelei-idle-1": {
+      "x": 307,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lorelei-idle-2": {
+      "x": 325,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lorelei-left-idle-1": {
+      "x": 343,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lorelei-right-idle-1": {
+      "x": 361,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-lorelei-up-idle-1": {
+      "x": 379,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-misty-idle-1": {
+      "x": 397,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-misty-idle-2": {
+      "x": 415,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-misty-left-idle-1": {
+      "x": 433,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-misty-right-idle-1": {
+      "x": 451,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-misty-up-idle-1": {
+      "x": 469,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-mom-idle-1": {
+      "x": 487,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-mom-idle-2": {
+      "x": 505,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-mom-left-idle-1": {
+      "x": 523,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-mom-right-idle-1": {
+      "x": 541,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-mom-up-idle-1": {
+      "x": 559,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-monk-idle-1": {
+      "x": 577,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-monk-idle-2": {
+      "x": 595,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-monk-left-idle-1": {
+      "x": 613,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-monk-right-idle-1": {
+      "x": 631,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-monk-up-idle-1": {
+      "x": 649,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-nurse-idle-1": {
+      "x": 667,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-nurse-idle-2": {
+      "x": 685,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-nurse-left-idle-1": {
+      "x": 703,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-nurse-right-idle-1": {
+      "x": 721,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-nurse-up-idle-1": {
+      "x": 739,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-officer-idle-1": {
+      "x": 757,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-officer-idle-2": {
+      "x": 775,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-officer-left-idle-1": {
+      "x": 793,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-officer-right-idle-1": {
+      "x": 811,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-officer-up-idle-1": {
+      "x": 829,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-idle-1": {
+      "x": 847,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-idle-2": {
+      "x": 865,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-left-idle-1": {
+      "x": 883,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-right-idle-1": {
+      "x": 901,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-professor-up-idle-1": {
+      "x": 919,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-ranger-idle-1": {
+      "x": 937,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-ranger-idle-2": {
+      "x": 955,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-ranger-left-idle-1": {
+      "x": 973,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-ranger-right-idle-1": {
+      "x": 991,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-ranger-up-idle-1": {
+      "x": 1009,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rival-idle-1": {
+      "x": 1027,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rival-idle-2": {
+      "x": 1045,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rival-left-idle-1": {
+      "x": 1063,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rival-right-idle-1": {
+      "x": 1081,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rival-up-idle-1": {
+      "x": 1099,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rue-idle-1": {
+      "x": 1117,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rue-idle-2": {
+      "x": 1135,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rue-left-idle-1": {
+      "x": 1153,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rue-right-idle-1": {
+      "x": 1171,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-rue-up-idle-1": {
+      "x": 1189,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sabrina-idle-1": {
+      "x": 1207,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sabrina-idle-2": {
+      "x": 1225,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sabrina-left-idle-1": {
+      "x": 1243,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sabrina-right-idle-1": {
+      "x": 1261,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sabrina-up-idle-1": {
+      "x": 1279,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sailor-idle-1": {
+      "x": 1297,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sailor-idle-2": {
+      "x": 1315,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sailor-left-idle-1": {
+      "x": 1333,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sailor-right-idle-1": {
+      "x": 1351,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sailor-up-idle-1": {
+      "x": 1369,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-scientist-idle-1": {
+      "x": 1387,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-scientist-idle-2": {
+      "x": 1405,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-scientist-left-idle-1": {
+      "x": 1423,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-scientist-right-idle-1": {
+      "x": 1441,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-scientist-up-idle-1": {
+      "x": 1459,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sparcoach-idle-1": {
+      "x": 1477,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sparcoach-idle-2": {
+      "x": 1495,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sparcoach-left-idle-1": {
+      "x": 1513,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sparcoach-right-idle-1": {
+      "x": 1531,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-sparcoach-up-idle-1": {
+      "x": 1549,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-surge-idle-1": {
+      "x": 1567,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-surge-idle-2": {
+      "x": 1585,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-surge-left-idle-1": {
+      "x": 1603,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-surge-right-idle-1": {
+      "x": 1621,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-surge-up-idle-1": {
+      "x": 1639,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-swimmer-idle-1": {
+      "x": 1657,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-swimmer-idle-2": {
+      "x": 1675,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-swimmer-left-idle-1": {
+      "x": 1693,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-swimmer-right-idle-1": {
+      "x": 1711,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-swimmer-up-idle-1": {
+      "x": 1729,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-twin-idle-1": {
+      "x": 1747,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-twin-idle-2": {
+      "x": 1765,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-twin-left-idle-1": {
+      "x": 1783,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-twin-right-idle-1": {
+      "x": 1801,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-twin-up-idle-1": {
+      "x": 1819,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-worker-idle-1": {
+      "x": 1837,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-worker-idle-2": {
+      "x": 1855,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-worker-left-idle-1": {
+      "x": 1873,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-worker-right-idle-1": {
+      "x": 1891,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-worker-up-idle-1": {
+      "x": 1909,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-youngster-idle-1": {
+      "x": 1927,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-youngster-idle-2": {
+      "x": 1945,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-youngster-left-idle-1": {
+      "x": 1963,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-youngster-right-idle-1": {
+      "x": 1981,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-youngster-up-idle-1": {
+      "x": 1999,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-acetrainer-down-walk-1": {
+      "x": 2017,
+      "y": 35,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-idle-1"
+    },
+    "npc-acetrainer-down-walk-2": {
+      "x": 1,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-idle-1"
+    },
+    "npc-acetrainer-left-idle-2": {
+      "x": 19,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-left-idle-1"
+    },
+    "npc-acetrainer-left-walk-1": {
+      "x": 37,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-left-idle-1"
+    },
+    "npc-acetrainer-left-walk-2": {
+      "x": 55,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-left-idle-1"
+    },
+    "npc-acetrainer-right-idle-2": {
+      "x": 73,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-right-idle-1"
+    },
+    "npc-acetrainer-right-walk-1": {
+      "x": 91,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-right-idle-1"
+    },
+    "npc-acetrainer-right-walk-2": {
+      "x": 109,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-right-idle-1"
+    },
+    "npc-acetrainer-up-idle-2": {
+      "x": 127,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-up-idle-1"
+    },
+    "npc-acetrainer-up-walk-1": {
+      "x": 145,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-up-idle-1"
+    },
+    "npc-acetrainer-up-walk-2": {
+      "x": 163,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-acetrainer-up-idle-1"
+    },
+    "npc-agatha-idle-3": {
+      "x": 181,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-agatha-idle-1"
+    },
+    "npc-agatha-idle-4": {
+      "x": 199,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-agatha-idle-2"
+    },
+    "npc-agatha-left-idle-2": {
+      "x": 217,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-agatha-left-idle-1"
+    },
+    "npc-agatha-right-idle-2": {
+      "x": 235,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-agatha-right-idle-1"
+    },
+    "npc-agatha-up-idle-2": {
+      "x": 253,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-agatha-up-idle-1"
+    },
+    "npc-aide-down-walk-1": {
+      "x": 271,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-idle-1"
+    },
+    "npc-aide-down-walk-2": {
+      "x": 289,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-idle-1"
+    },
+    "npc-aide-left-idle-2": {
+      "x": 307,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-left-idle-1"
+    },
+    "npc-aide-left-walk-1": {
+      "x": 325,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-left-idle-1"
+    },
+    "npc-aide-left-walk-2": {
+      "x": 343,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-left-idle-1"
+    },
+    "npc-aide-right-idle-2": {
+      "x": 361,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-right-idle-1"
+    },
+    "npc-aide-right-walk-1": {
+      "x": 379,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-right-idle-1"
+    },
+    "npc-aide-right-walk-2": {
+      "x": 397,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-right-idle-1"
+    },
+    "npc-aide-up-idle-2": {
+      "x": 415,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-up-idle-1"
+    },
+    "npc-aide-up-walk-1": {
+      "x": 433,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-up-idle-1"
+    },
+    "npc-aide-up-walk-2": {
+      "x": 451,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-aide-up-idle-1"
+    },
+    "npc-biker-down-walk-1": {
+      "x": 469,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-idle-1"
+    },
+    "npc-biker-down-walk-2": {
+      "x": 487,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-idle-1"
+    },
+    "npc-biker-left-idle-2": {
+      "x": 505,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-left-idle-1"
+    },
+    "npc-biker-left-walk-1": {
+      "x": 523,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-left-idle-1"
+    },
+    "npc-biker-left-walk-2": {
+      "x": 541,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-left-idle-1"
+    },
+    "npc-biker-right-idle-2": {
+      "x": 559,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-right-idle-1"
+    },
+    "npc-biker-right-walk-1": {
+      "x": 577,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-right-idle-1"
+    },
+    "npc-biker-right-walk-2": {
+      "x": 595,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-right-idle-1"
+    },
+    "npc-biker-up-idle-2": {
+      "x": 613,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-up-idle-1"
+    },
+    "npc-biker-up-walk-1": {
+      "x": 631,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-up-idle-1"
+    },
+    "npc-biker-up-walk-2": {
+      "x": 649,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-biker-up-idle-1"
+    },
+    "npc-blaine-idle-3": {
+      "x": 667,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-blaine-idle-1"
+    },
+    "npc-blaine-idle-4": {
+      "x": 685,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-blaine-idle-2"
+    },
+    "npc-blaine-left-idle-2": {
+      "x": 703,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-blaine-left-idle-1"
+    },
+    "npc-blaine-right-idle-2": {
+      "x": 721,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-blaine-right-idle-1"
+    },
+    "npc-blaine-up-idle-2": {
+      "x": 739,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-blaine-up-idle-1"
+    },
+    "npc-bruno-idle-3": {
+      "x": 757,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bruno-idle-1"
+    },
+    "npc-bruno-idle-4": {
+      "x": 775,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bruno-idle-2"
+    },
+    "npc-bruno-left-idle-2": {
+      "x": 793,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bruno-left-idle-1"
+    },
+    "npc-bruno-right-idle-2": {
+      "x": 811,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bruno-right-idle-1"
+    },
+    "npc-bruno-up-idle-2": {
+      "x": 829,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bruno-up-idle-1"
+    },
+    "npc-bugcatcher-down-walk-1": {
+      "x": 847,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-idle-1"
+    },
+    "npc-bugcatcher-down-walk-2": {
+      "x": 865,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-idle-1"
+    },
+    "npc-bugcatcher-left-idle-2": {
+      "x": 883,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-left-idle-1"
+    },
+    "npc-bugcatcher-left-walk-1": {
+      "x": 901,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-left-idle-1"
+    },
+    "npc-bugcatcher-left-walk-2": {
+      "x": 919,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-left-idle-1"
+    },
+    "npc-bugcatcher-right-idle-2": {
+      "x": 937,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-right-idle-1"
+    },
+    "npc-bugcatcher-right-walk-1": {
+      "x": 955,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-right-idle-1"
+    },
+    "npc-bugcatcher-right-walk-2": {
+      "x": 973,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-right-idle-1"
+    },
+    "npc-bugcatcher-up-idle-2": {
+      "x": 991,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-up-idle-1"
+    },
+    "npc-bugcatcher-up-walk-1": {
+      "x": 1009,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-up-idle-1"
+    },
+    "npc-bugcatcher-up-walk-2": {
+      "x": 1027,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-bugcatcher-up-idle-1"
+    },
+    "npc-camper-down-walk-1": {
+      "x": 1045,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-idle-1"
+    },
+    "npc-camper-down-walk-2": {
+      "x": 1063,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-idle-1"
+    },
+    "npc-camper-left-idle-2": {
+      "x": 1081,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-left-idle-1"
+    },
+    "npc-camper-left-walk-1": {
+      "x": 1099,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-left-idle-1"
+    },
+    "npc-camper-left-walk-2": {
+      "x": 1117,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-left-idle-1"
+    },
+    "npc-camper-right-idle-2": {
+      "x": 1135,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-right-idle-1"
+    },
+    "npc-camper-right-walk-1": {
+      "x": 1153,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-right-idle-1"
+    },
+    "npc-camper-right-walk-2": {
+      "x": 1171,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-right-idle-1"
+    },
+    "npc-camper-up-idle-2": {
+      "x": 1189,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-up-idle-1"
+    },
+    "npc-camper-up-walk-1": {
+      "x": 1207,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-up-idle-1"
+    },
+    "npc-camper-up-walk-2": {
+      "x": 1225,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-camper-up-idle-1"
+    },
+    "npc-clerk-left-idle-2": {
+      "x": 1243,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-clerk-left-idle-1"
+    },
+    "npc-clerk-right-idle-2": {
+      "x": 1261,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-clerk-right-idle-1"
+    },
+    "npc-clerk-up-idle-2": {
+      "x": 1279,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-clerk-up-idle-1"
+    },
+    "npc-coach-down-walk-1": {
+      "x": 1297,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-idle-1"
+    },
+    "npc-coach-down-walk-2": {
+      "x": 1315,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-idle-1"
+    },
+    "npc-coach-left-idle-2": {
+      "x": 1333,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-left-idle-1"
+    },
+    "npc-coach-left-walk-1": {
+      "x": 1351,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-left-idle-1"
+    },
+    "npc-coach-left-walk-2": {
+      "x": 1369,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-left-idle-1"
+    },
+    "npc-coach-right-idle-2": {
+      "x": 1387,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-right-idle-1"
+    },
+    "npc-coach-right-walk-1": {
+      "x": 1405,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-right-idle-1"
+    },
+    "npc-coach-right-walk-2": {
+      "x": 1423,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-right-idle-1"
+    },
+    "npc-coach-up-idle-2": {
+      "x": 1441,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-up-idle-1"
+    },
+    "npc-coach-up-walk-1": {
+      "x": 1459,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-up-idle-1"
+    },
+    "npc-coach-up-walk-2": {
+      "x": 1477,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-coach-up-idle-1"
+    },
+    "npc-cole-idle-3": {
+      "x": 1495,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cole-idle-1"
+    },
+    "npc-cole-idle-4": {
+      "x": 1513,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cole-idle-2"
+    },
+    "npc-cole-left-idle-2": {
+      "x": 1531,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cole-left-idle-1"
+    },
+    "npc-cole-right-idle-2": {
+      "x": 1549,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cole-right-idle-1"
+    },
+    "npc-cole-up-idle-2": {
+      "x": 1567,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cole-up-idle-1"
+    },
+    "npc-elder-down-walk-1": {
+      "x": 1585,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-idle-1"
+    },
+    "npc-elder-down-walk-2": {
+      "x": 1603,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-idle-1"
+    },
+    "npc-elder-left-idle-2": {
+      "x": 1621,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-left-idle-1"
+    },
+    "npc-elder-left-walk-1": {
+      "x": 1639,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-left-idle-1"
+    },
+    "npc-elder-left-walk-2": {
+      "x": 1657,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-left-idle-1"
+    },
+    "npc-elder-right-idle-2": {
+      "x": 1675,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-right-idle-1"
+    },
+    "npc-elder-right-walk-1": {
+      "x": 1693,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-right-idle-1"
+    },
+    "npc-elder-right-walk-2": {
+      "x": 1711,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-right-idle-1"
+    },
+    "npc-elder-up-idle-2": {
+      "x": 1729,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-up-idle-1"
+    },
+    "npc-elder-up-walk-1": {
+      "x": 1747,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-up-idle-1"
+    },
+    "npc-elder-up-walk-2": {
+      "x": 1765,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-elder-up-idle-1"
+    },
+    "npc-erika-idle-3": {
+      "x": 1783,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-erika-idle-1"
+    },
+    "npc-erika-idle-4": {
+      "x": 1801,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-erika-idle-2"
+    },
+    "npc-erika-left-idle-2": {
+      "x": 1819,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-erika-left-idle-1"
+    },
+    "npc-erika-right-idle-2": {
+      "x": 1837,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-erika-right-idle-1"
+    },
+    "npc-erika-up-idle-2": {
+      "x": 1855,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-erika-up-idle-1"
+    },
+    "npc-fisher-down-walk-1": {
+      "x": 1873,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-idle-1"
+    },
+    "npc-fisher-down-walk-2": {
+      "x": 1891,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-idle-1"
+    },
+    "npc-fisher-left-idle-2": {
+      "x": 1909,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-left-idle-1"
+    },
+    "npc-fisher-left-walk-1": {
+      "x": 1927,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-left-idle-1"
+    },
+    "npc-fisher-left-walk-2": {
+      "x": 1945,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-left-idle-1"
+    },
+    "npc-fisher-right-idle-2": {
+      "x": 1963,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-right-idle-1"
+    },
+    "npc-fisher-right-walk-1": {
+      "x": 1981,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-right-idle-1"
+    },
+    "npc-fisher-right-walk-2": {
+      "x": 1999,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-right-idle-1"
+    },
+    "npc-fisher-up-idle-2": {
+      "x": 2017,
+      "y": 69,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-up-idle-1"
+    },
+    "npc-fisher-up-walk-1": {
+      "x": 1,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-up-idle-1"
+    },
+    "npc-fisher-up-walk-2": {
+      "x": 19,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-fisher-up-idle-1"
+    },
+    "npc-gary-idle-3": {
+      "x": 37,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gary-idle-1"
+    },
+    "npc-gary-idle-4": {
+      "x": 55,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gary-idle-2"
+    },
+    "npc-gary-left-idle-2": {
+      "x": 73,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gary-left-idle-1"
+    },
+    "npc-gary-right-idle-2": {
+      "x": 91,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gary-right-idle-1"
+    },
+    "npc-gary-up-idle-2": {
+      "x": 109,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gary-up-idle-1"
+    },
+    "npc-garychamp-idle-3": {
+      "x": 127,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-garychamp-idle-1"
+    },
+    "npc-garychamp-idle-4": {
+      "x": 145,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-garychamp-idle-2"
+    },
+    "npc-garychamp-left-idle-2": {
+      "x": 163,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-garychamp-left-idle-1"
+    },
+    "npc-garychamp-right-idle-2": {
+      "x": 181,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-garychamp-right-idle-1"
+    },
+    "npc-garychamp-up-idle-2": {
+      "x": 199,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-garychamp-up-idle-1"
+    },
+    "npc-gent-down-walk-1": {
+      "x": 217,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-idle-1"
+    },
+    "npc-gent-down-walk-2": {
+      "x": 235,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-idle-1"
+    },
+    "npc-gent-left-idle-2": {
+      "x": 253,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-left-idle-1"
+    },
+    "npc-gent-left-walk-1": {
+      "x": 271,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-left-idle-1"
+    },
+    "npc-gent-left-walk-2": {
+      "x": 289,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-left-idle-1"
+    },
+    "npc-gent-right-idle-2": {
+      "x": 307,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-right-idle-1"
+    },
+    "npc-gent-right-walk-1": {
+      "x": 325,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-right-idle-1"
+    },
+    "npc-gent-right-walk-2": {
+      "x": 343,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-right-idle-1"
+    },
+    "npc-gent-up-idle-2": {
+      "x": 361,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-up-idle-1"
+    },
+    "npc-gent-up-walk-1": {
+      "x": 379,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-up-idle-1"
+    },
+    "npc-gent-up-walk-2": {
+      "x": 397,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-gent-up-idle-1"
+    },
+    "npc-giovanni-idle-3": {
+      "x": 415,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-giovanni-idle-1"
+    },
+    "npc-giovanni-idle-4": {
+      "x": 433,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-giovanni-idle-2"
+    },
+    "npc-giovanni-left-idle-2": {
+      "x": 451,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-giovanni-left-idle-1"
+    },
+    "npc-giovanni-right-idle-2": {
+      "x": 469,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-giovanni-right-idle-1"
+    },
+    "npc-giovanni-up-idle-2": {
+      "x": 487,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-giovanni-up-idle-1"
+    },
+    "npc-grunt-down-walk-1": {
+      "x": 505,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-idle-1"
+    },
+    "npc-grunt-down-walk-2": {
+      "x": 523,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-idle-1"
+    },
+    "npc-grunt-left-idle-2": {
+      "x": 541,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-left-idle-1"
+    },
+    "npc-grunt-left-walk-1": {
+      "x": 559,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-left-idle-1"
+    },
+    "npc-grunt-left-walk-2": {
+      "x": 577,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-left-idle-1"
+    },
+    "npc-grunt-right-idle-2": {
+      "x": 595,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-right-idle-1"
+    },
+    "npc-grunt-right-walk-1": {
+      "x": 613,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-right-idle-1"
+    },
+    "npc-grunt-right-walk-2": {
+      "x": 631,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-right-idle-1"
+    },
+    "npc-grunt-up-idle-2": {
+      "x": 649,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-up-idle-1"
+    },
+    "npc-grunt-up-walk-1": {
+      "x": 667,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-up-idle-1"
+    },
+    "npc-grunt-up-walk-2": {
+      "x": 685,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-grunt-up-idle-1"
+    },
+    "npc-hawthorn-idle-3": {
+      "x": 703,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hawthorn-idle-1"
+    },
+    "npc-hawthorn-idle-4": {
+      "x": 721,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hawthorn-idle-2"
+    },
+    "npc-hawthorn-left-idle-2": {
+      "x": 739,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hawthorn-left-idle-1"
+    },
+    "npc-hawthorn-right-idle-2": {
+      "x": 757,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hawthorn-right-idle-1"
+    },
+    "npc-hawthorn-up-idle-2": {
+      "x": 775,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hawthorn-up-idle-1"
+    },
+    "npc-hiker-down-walk-1": {
+      "x": 793,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-idle-1"
+    },
+    "npc-hiker-down-walk-2": {
+      "x": 811,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-idle-1"
+    },
+    "npc-hiker-left-idle-2": {
+      "x": 829,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-left-idle-1"
+    },
+    "npc-hiker-left-walk-1": {
+      "x": 847,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-left-idle-1"
+    },
+    "npc-hiker-left-walk-2": {
+      "x": 865,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-left-idle-1"
+    },
+    "npc-hiker-right-idle-2": {
+      "x": 883,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-right-idle-1"
+    },
+    "npc-hiker-right-walk-1": {
+      "x": 901,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-right-idle-1"
+    },
+    "npc-hiker-right-walk-2": {
+      "x": 919,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-right-idle-1"
+    },
+    "npc-hiker-up-idle-2": {
+      "x": 937,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-up-idle-1"
+    },
+    "npc-hiker-up-walk-1": {
+      "x": 955,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-up-idle-1"
+    },
+    "npc-hiker-up-walk-2": {
+      "x": 973,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-hiker-up-idle-1"
+    },
+    "npc-kid-down-walk-1": {
+      "x": 991,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-idle-1"
+    },
+    "npc-kid-down-walk-2": {
+      "x": 1009,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-idle-1"
+    },
+    "npc-kid-left-idle-2": {
+      "x": 1027,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-left-idle-1"
+    },
+    "npc-kid-left-walk-1": {
+      "x": 1045,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-left-idle-1"
+    },
+    "npc-kid-left-walk-2": {
+      "x": 1063,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-left-idle-1"
+    },
+    "npc-kid-right-idle-2": {
+      "x": 1081,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-right-idle-1"
+    },
+    "npc-kid-right-walk-1": {
+      "x": 1099,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-right-idle-1"
+    },
+    "npc-kid-right-walk-2": {
+      "x": 1117,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-right-idle-1"
+    },
+    "npc-kid-up-idle-2": {
+      "x": 1135,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-up-idle-1"
+    },
+    "npc-kid-up-walk-1": {
+      "x": 1153,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-up-idle-1"
+    },
+    "npc-kid-up-walk-2": {
+      "x": 1171,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-kid-up-idle-1"
+    },
+    "npc-koga-idle-3": {
+      "x": 1189,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-koga-idle-1"
+    },
+    "npc-koga-idle-4": {
+      "x": 1207,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-koga-idle-2"
+    },
+    "npc-koga-left-idle-2": {
+      "x": 1225,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-koga-left-idle-1"
+    },
+    "npc-koga-right-idle-2": {
+      "x": 1243,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-koga-right-idle-1"
+    },
+    "npc-koga-up-idle-2": {
+      "x": 1261,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-koga-up-idle-1"
+    },
+    "npc-lady-down-walk-1": {
+      "x": 1279,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-idle-1"
+    },
+    "npc-lady-down-walk-2": {
+      "x": 1297,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-idle-1"
+    },
+    "npc-lady-left-idle-2": {
+      "x": 1315,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-left-idle-1"
+    },
+    "npc-lady-left-walk-1": {
+      "x": 1333,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-left-idle-1"
+    },
+    "npc-lady-left-walk-2": {
+      "x": 1351,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-left-idle-1"
+    },
+    "npc-lady-right-idle-2": {
+      "x": 1369,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-right-idle-1"
+    },
+    "npc-lady-right-walk-1": {
+      "x": 1387,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-right-idle-1"
+    },
+    "npc-lady-right-walk-2": {
+      "x": 1405,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-right-idle-1"
+    },
+    "npc-lady-up-idle-2": {
+      "x": 1423,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-up-idle-1"
+    },
+    "npc-lady-up-walk-1": {
+      "x": 1441,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-up-idle-1"
+    },
+    "npc-lady-up-walk-2": {
+      "x": 1459,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lady-up-idle-1"
+    },
+    "npc-lance-idle-3": {
+      "x": 1477,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lance-idle-1"
+    },
+    "npc-lance-idle-4": {
+      "x": 1495,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lance-idle-2"
+    },
+    "npc-lance-left-idle-2": {
+      "x": 1513,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lance-left-idle-1"
+    },
+    "npc-lance-right-idle-2": {
+      "x": 1531,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lance-right-idle-1"
+    },
+    "npc-lance-up-idle-2": {
+      "x": 1549,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lance-up-idle-1"
+    },
+    "npc-lass-down-walk-1": {
+      "x": 1567,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-idle-1"
+    },
+    "npc-lass-down-walk-2": {
+      "x": 1585,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-idle-1"
+    },
+    "npc-lass-left-idle-2": {
+      "x": 1603,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-left-idle-1"
+    },
+    "npc-lass-left-walk-1": {
+      "x": 1621,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-left-idle-1"
+    },
+    "npc-lass-left-walk-2": {
+      "x": 1639,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-left-idle-1"
+    },
+    "npc-lass-right-idle-2": {
+      "x": 1657,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-right-idle-1"
+    },
+    "npc-lass-right-walk-1": {
+      "x": 1675,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-right-idle-1"
+    },
+    "npc-lass-right-walk-2": {
+      "x": 1693,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-right-idle-1"
+    },
+    "npc-lass-up-idle-2": {
+      "x": 1711,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-up-idle-1"
+    },
+    "npc-lass-up-walk-1": {
+      "x": 1729,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-up-idle-1"
+    },
+    "npc-lass-up-walk-2": {
+      "x": 1747,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lass-up-idle-1"
+    },
+    "npc-lorelei-idle-3": {
+      "x": 1765,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lorelei-idle-1"
+    },
+    "npc-lorelei-idle-4": {
+      "x": 1783,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lorelei-idle-2"
+    },
+    "npc-lorelei-left-idle-2": {
+      "x": 1801,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lorelei-left-idle-1"
+    },
+    "npc-lorelei-right-idle-2": {
+      "x": 1819,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lorelei-right-idle-1"
+    },
+    "npc-lorelei-up-idle-2": {
+      "x": 1837,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-lorelei-up-idle-1"
+    },
+    "npc-misty-idle-3": {
+      "x": 1855,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-misty-idle-1"
+    },
+    "npc-misty-idle-4": {
+      "x": 1873,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-misty-idle-2"
+    },
+    "npc-misty-left-idle-2": {
+      "x": 1891,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-misty-left-idle-1"
+    },
+    "npc-misty-right-idle-2": {
+      "x": 1909,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-misty-right-idle-1"
+    },
+    "npc-misty-up-idle-2": {
+      "x": 1927,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-misty-up-idle-1"
+    },
+    "npc-mom-idle-3": {
+      "x": 1945,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-mom-idle-1"
+    },
+    "npc-mom-idle-4": {
+      "x": 1963,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-mom-idle-2"
+    },
+    "npc-mom-left-idle-2": {
+      "x": 1981,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-mom-left-idle-1"
+    },
+    "npc-mom-right-idle-2": {
+      "x": 1999,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-mom-right-idle-1"
+    },
+    "npc-mom-up-idle-2": {
+      "x": 2017,
+      "y": 103,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-mom-up-idle-1"
+    },
+    "npc-monk-down-walk-1": {
+      "x": 1,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-idle-1"
+    },
+    "npc-monk-down-walk-2": {
+      "x": 19,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-idle-1"
+    },
+    "npc-monk-left-idle-2": {
+      "x": 37,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-left-idle-1"
+    },
+    "npc-monk-left-walk-1": {
+      "x": 55,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-left-idle-1"
+    },
+    "npc-monk-left-walk-2": {
+      "x": 73,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-left-idle-1"
+    },
+    "npc-monk-right-idle-2": {
+      "x": 91,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-right-idle-1"
+    },
+    "npc-monk-right-walk-1": {
+      "x": 109,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-right-idle-1"
+    },
+    "npc-monk-right-walk-2": {
+      "x": 127,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-right-idle-1"
+    },
+    "npc-monk-up-idle-2": {
+      "x": 145,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-up-idle-1"
+    },
+    "npc-monk-up-walk-1": {
+      "x": 163,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-up-idle-1"
+    },
+    "npc-monk-up-walk-2": {
+      "x": 181,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-monk-up-idle-1"
+    },
+    "npc-nurse-idle-3": {
+      "x": 199,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-nurse-idle-1"
+    },
+    "npc-nurse-idle-4": {
+      "x": 217,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-nurse-idle-2"
+    },
+    "npc-nurse-left-idle-2": {
+      "x": 235,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-nurse-left-idle-1"
+    },
+    "npc-nurse-right-idle-2": {
+      "x": 253,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-nurse-right-idle-1"
+    },
+    "npc-nurse-up-idle-2": {
+      "x": 271,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-nurse-up-idle-1"
+    },
+    "npc-officer-down-walk-1": {
+      "x": 289,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-idle-1"
+    },
+    "npc-officer-down-walk-2": {
+      "x": 307,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-idle-1"
+    },
+    "npc-officer-left-idle-2": {
+      "x": 325,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-left-idle-1"
+    },
+    "npc-officer-left-walk-1": {
+      "x": 343,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-left-idle-1"
+    },
+    "npc-officer-left-walk-2": {
+      "x": 361,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-left-idle-1"
+    },
+    "npc-officer-right-idle-2": {
+      "x": 379,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-right-idle-1"
+    },
+    "npc-officer-right-walk-1": {
+      "x": 397,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-right-idle-1"
+    },
+    "npc-officer-right-walk-2": {
+      "x": 415,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-right-idle-1"
+    },
+    "npc-officer-up-idle-2": {
+      "x": 433,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-up-idle-1"
+    },
+    "npc-officer-up-walk-1": {
+      "x": 451,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-up-idle-1"
+    },
+    "npc-officer-up-walk-2": {
+      "x": 469,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-officer-up-idle-1"
+    },
+    "npc-professor-left-idle-2": {
+      "x": 487,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-professor-left-idle-1"
+    },
+    "npc-professor-right-idle-2": {
+      "x": 505,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-professor-right-idle-1"
+    },
+    "npc-professor-up-idle-2": {
+      "x": 523,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-professor-up-idle-1"
+    },
+    "npc-ranger-down-walk-1": {
+      "x": 541,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-idle-1"
+    },
+    "npc-ranger-down-walk-2": {
+      "x": 559,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-idle-1"
+    },
+    "npc-ranger-left-idle-2": {
+      "x": 577,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-left-idle-1"
+    },
+    "npc-ranger-left-walk-1": {
+      "x": 595,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-left-idle-1"
+    },
+    "npc-ranger-left-walk-2": {
+      "x": 613,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-left-idle-1"
+    },
+    "npc-ranger-right-idle-2": {
+      "x": 631,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-right-idle-1"
+    },
+    "npc-ranger-right-walk-1": {
+      "x": 649,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-right-idle-1"
+    },
+    "npc-ranger-right-walk-2": {
+      "x": 667,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-right-idle-1"
+    },
+    "npc-ranger-up-idle-2": {
+      "x": 685,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-up-idle-1"
+    },
+    "npc-ranger-up-walk-1": {
+      "x": 703,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-up-idle-1"
+    },
+    "npc-ranger-up-walk-2": {
+      "x": 721,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-ranger-up-idle-1"
+    },
+    "npc-rival-down-walk-1": {
+      "x": 739,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-idle-1"
+    },
+    "npc-rival-down-walk-2": {
+      "x": 757,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-idle-1"
+    },
+    "npc-rival-left-idle-2": {
+      "x": 775,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-left-idle-1"
+    },
+    "npc-rival-left-walk-1": {
+      "x": 793,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-left-idle-1"
+    },
+    "npc-rival-left-walk-2": {
+      "x": 811,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-left-idle-1"
+    },
+    "npc-rival-right-idle-2": {
+      "x": 829,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-right-idle-1"
+    },
+    "npc-rival-right-walk-1": {
+      "x": 847,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-right-idle-1"
+    },
+    "npc-rival-right-walk-2": {
+      "x": 865,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-right-idle-1"
+    },
+    "npc-rival-up-idle-2": {
+      "x": 883,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-up-idle-1"
+    },
+    "npc-rival-up-walk-1": {
+      "x": 901,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-up-idle-1"
+    },
+    "npc-rival-up-walk-2": {
+      "x": 919,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rival-up-idle-1"
+    },
+    "npc-rue-idle-3": {
+      "x": 937,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rue-idle-1"
+    },
+    "npc-rue-idle-4": {
+      "x": 955,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rue-idle-2"
+    },
+    "npc-rue-left-idle-2": {
+      "x": 973,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rue-left-idle-1"
+    },
+    "npc-rue-right-idle-2": {
+      "x": 991,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rue-right-idle-1"
+    },
+    "npc-rue-up-idle-2": {
+      "x": 1009,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-rue-up-idle-1"
+    },
+    "npc-sabrina-idle-3": {
+      "x": 1027,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sabrina-idle-1"
+    },
+    "npc-sabrina-idle-4": {
+      "x": 1045,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sabrina-idle-2"
+    },
+    "npc-sabrina-left-idle-2": {
+      "x": 1063,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sabrina-left-idle-1"
+    },
+    "npc-sabrina-right-idle-2": {
+      "x": 1081,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sabrina-right-idle-1"
+    },
+    "npc-sabrina-up-idle-2": {
+      "x": 1099,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sabrina-up-idle-1"
+    },
+    "npc-sailor-down-walk-1": {
+      "x": 1117,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-idle-1"
+    },
+    "npc-sailor-down-walk-2": {
+      "x": 1135,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-idle-1"
+    },
+    "npc-sailor-left-idle-2": {
+      "x": 1153,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-left-idle-1"
+    },
+    "npc-sailor-left-walk-1": {
+      "x": 1171,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-left-idle-1"
+    },
+    "npc-sailor-left-walk-2": {
+      "x": 1189,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-left-idle-1"
+    },
+    "npc-sailor-right-idle-2": {
+      "x": 1207,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-right-idle-1"
+    },
+    "npc-sailor-right-walk-1": {
+      "x": 1225,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-right-idle-1"
+    },
+    "npc-sailor-right-walk-2": {
+      "x": 1243,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-right-idle-1"
+    },
+    "npc-sailor-up-idle-2": {
+      "x": 1261,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-up-idle-1"
+    },
+    "npc-sailor-up-walk-1": {
+      "x": 1279,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-up-idle-1"
+    },
+    "npc-sailor-up-walk-2": {
+      "x": 1297,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sailor-up-idle-1"
+    },
+    "npc-scientist-down-walk-1": {
+      "x": 1315,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-idle-1"
+    },
+    "npc-scientist-down-walk-2": {
+      "x": 1333,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-idle-1"
+    },
+    "npc-scientist-left-idle-2": {
+      "x": 1351,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-left-idle-1"
+    },
+    "npc-scientist-left-walk-1": {
+      "x": 1369,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-left-idle-1"
+    },
+    "npc-scientist-left-walk-2": {
+      "x": 1387,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-left-idle-1"
+    },
+    "npc-scientist-right-idle-2": {
+      "x": 1405,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-right-idle-1"
+    },
+    "npc-scientist-right-walk-1": {
+      "x": 1423,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-right-idle-1"
+    },
+    "npc-scientist-right-walk-2": {
+      "x": 1441,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-right-idle-1"
+    },
+    "npc-scientist-up-idle-2": {
+      "x": 1459,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-up-idle-1"
+    },
+    "npc-scientist-up-walk-1": {
+      "x": 1477,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-up-idle-1"
+    },
+    "npc-scientist-up-walk-2": {
+      "x": 1495,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-scientist-up-idle-1"
+    },
+    "npc-sparcoach-idle-3": {
+      "x": 1513,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sparcoach-idle-1"
+    },
+    "npc-sparcoach-idle-4": {
+      "x": 1531,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sparcoach-idle-2"
+    },
+    "npc-sparcoach-left-idle-2": {
+      "x": 1549,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sparcoach-left-idle-1"
+    },
+    "npc-sparcoach-right-idle-2": {
+      "x": 1567,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sparcoach-right-idle-1"
+    },
+    "npc-sparcoach-up-idle-2": {
+      "x": 1585,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-sparcoach-up-idle-1"
+    },
+    "npc-surge-idle-3": {
+      "x": 1603,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-surge-idle-1"
+    },
+    "npc-surge-idle-4": {
+      "x": 1621,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-surge-idle-2"
+    },
+    "npc-surge-left-idle-2": {
+      "x": 1639,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-surge-left-idle-1"
+    },
+    "npc-surge-right-idle-2": {
+      "x": 1657,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-surge-right-idle-1"
+    },
+    "npc-surge-up-idle-2": {
+      "x": 1675,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-surge-up-idle-1"
+    },
+    "npc-swimmer-down-walk-1": {
+      "x": 1693,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-idle-1"
+    },
+    "npc-swimmer-down-walk-2": {
+      "x": 1711,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-idle-1"
+    },
+    "npc-swimmer-left-idle-2": {
+      "x": 1729,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-left-idle-1"
+    },
+    "npc-swimmer-left-walk-1": {
+      "x": 1747,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-left-idle-1"
+    },
+    "npc-swimmer-left-walk-2": {
+      "x": 1765,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-left-idle-1"
+    },
+    "npc-swimmer-right-idle-2": {
+      "x": 1783,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-right-idle-1"
+    },
+    "npc-swimmer-right-walk-1": {
+      "x": 1801,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-right-idle-1"
+    },
+    "npc-swimmer-right-walk-2": {
+      "x": 1819,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-right-idle-1"
+    },
+    "npc-swimmer-up-idle-2": {
+      "x": 1837,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-up-idle-1"
+    },
+    "npc-swimmer-up-walk-1": {
+      "x": 1855,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-up-idle-1"
+    },
+    "npc-swimmer-up-walk-2": {
+      "x": 1873,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-swimmer-up-idle-1"
+    },
+    "npc-twin-down-walk-1": {
+      "x": 1891,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-idle-1"
+    },
+    "npc-twin-down-walk-2": {
+      "x": 1909,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-idle-1"
+    },
+    "npc-twin-left-idle-2": {
+      "x": 1927,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-left-idle-1"
+    },
+    "npc-twin-left-walk-1": {
+      "x": 1945,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-left-idle-1"
+    },
+    "npc-twin-left-walk-2": {
+      "x": 1963,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-left-idle-1"
+    },
+    "npc-twin-right-idle-2": {
+      "x": 1981,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-right-idle-1"
+    },
+    "npc-twin-right-walk-1": {
+      "x": 1999,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-right-idle-1"
+    },
+    "npc-twin-right-walk-2": {
+      "x": 2017,
+      "y": 137,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-right-idle-1"
+    },
+    "npc-twin-up-idle-2": {
+      "x": 1,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-up-idle-1"
+    },
+    "npc-twin-up-walk-1": {
+      "x": 19,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-up-idle-1"
+    },
+    "npc-twin-up-walk-2": {
+      "x": 37,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-twin-up-idle-1"
+    },
+    "npc-worker-down-walk-1": {
+      "x": 55,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-idle-1"
+    },
+    "npc-worker-down-walk-2": {
+      "x": 73,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-idle-1"
+    },
+    "npc-worker-left-idle-2": {
+      "x": 91,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-left-idle-1"
+    },
+    "npc-worker-left-walk-1": {
+      "x": 109,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-left-idle-1"
+    },
+    "npc-worker-left-walk-2": {
+      "x": 127,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-left-idle-1"
+    },
+    "npc-worker-right-idle-2": {
+      "x": 145,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-right-idle-1"
+    },
+    "npc-worker-right-walk-1": {
+      "x": 163,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-right-idle-1"
+    },
+    "npc-worker-right-walk-2": {
+      "x": 181,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-right-idle-1"
+    },
+    "npc-worker-up-idle-2": {
+      "x": 199,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-up-idle-1"
+    },
+    "npc-worker-up-walk-1": {
+      "x": 217,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-up-idle-1"
+    },
+    "npc-worker-up-walk-2": {
+      "x": 235,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-worker-up-idle-1"
+    },
+    "npc-youngster-down-walk-1": {
+      "x": 253,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-idle-1"
+    },
+    "npc-youngster-down-walk-2": {
+      "x": 271,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-idle-1"
+    },
+    "npc-youngster-left-idle-2": {
+      "x": 289,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-left-idle-1"
+    },
+    "npc-youngster-left-walk-1": {
+      "x": 307,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-left-idle-1"
+    },
+    "npc-youngster-left-walk-2": {
+      "x": 325,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-left-idle-1"
+    },
+    "npc-youngster-right-idle-2": {
+      "x": 343,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-right-idle-1"
+    },
+    "npc-youngster-right-walk-1": {
+      "x": 361,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-right-idle-1"
+    },
+    "npc-youngster-right-walk-2": {
+      "x": 379,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-right-idle-1"
+    },
+    "npc-youngster-up-idle-2": {
+      "x": 397,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-up-idle-1"
+    },
+    "npc-youngster-up-walk-1": {
+      "x": 415,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-up-idle-1"
+    },
+    "npc-youngster-up-walk-2": {
+      "x": 433,
+      "y": 171,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-youngster-up-idle-1"
+    },
+    "npc-cubonespirit-idle-1": {
+      "x": 451,
+      "y": 171,
       "w": 16,
       "h": 20,
       "frames": [
@@ -1235,8 +8235,8 @@
       "mirror_of": null
     },
     "npc-cubonespirit-idle-2": {
-      "x": 1639,
-      "y": 1,
+      "x": 469,
+      "y": 171,
       "w": 16,
       "h": 20,
       "frames": [
@@ -1248,9 +8248,48 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "npc-cubonespirit-left-idle-1": {
+      "x": 487,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-cubonespirit-right-idle-1": {
+      "x": 505,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-cubonespirit-up-idle-1": {
+      "x": 523,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "npc-marowakspirit-idle-1": {
-      "x": 1657,
-      "y": 1,
+      "x": 541,
+      "y": 171,
       "w": 16,
       "h": 20,
       "frames": [
@@ -1262,8 +8301,8 @@
       "mirror_of": null
     },
     "npc-marowakspirit-idle-2": {
-      "x": 1675,
-      "y": 1,
+      "x": 559,
+      "y": 171,
       "w": 16,
       "h": 20,
       "frames": [
@@ -1275,9 +8314,138 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "npc-marowakspirit-left-idle-1": {
+      "x": 577,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-marowakspirit-right-idle-1": {
+      "x": 595,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-marowakspirit-up-idle-1": {
+      "x": 613,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "npc-cubonespirit-left-idle-2": {
+      "x": 631,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cubonespirit-left-idle-1"
+    },
+    "npc-cubonespirit-right-idle-2": {
+      "x": 649,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cubonespirit-right-idle-1"
+    },
+    "npc-cubonespirit-up-idle-2": {
+      "x": 667,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-cubonespirit-up-idle-1"
+    },
+    "npc-marowakspirit-left-idle-2": {
+      "x": 685,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-marowakspirit-left-idle-1"
+    },
+    "npc-marowakspirit-right-idle-2": {
+      "x": 703,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-marowakspirit-right-idle-1"
+    },
+    "npc-marowakspirit-up-idle-2": {
+      "x": 721,
+      "y": 171,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-marowakspirit-up-idle-1"
+    },
     "npc-pc-idle-1": {
-      "x": 1693,
-      "y": 1,
+      "x": 739,
+      "y": 171,
       "w": 16,
       "h": 16,
       "frames": [
@@ -1289,8 +8457,8 @@
       "mirror_of": null
     },
     "npc-pc-idle-2": {
-      "x": 1711,
-      "y": 1,
+      "x": 757,
+      "y": 171,
       "w": 16,
       "h": 16,
       "frames": [
@@ -1303,8 +8471,8 @@
       "mirror_of": null
     },
     "npc-pc-idle-3": {
-      "x": 1729,
-      "y": 1,
+      "x": 775,
+      "y": 171,
       "w": 16,
       "h": 16,
       "frames": [
@@ -1317,8 +8485,8 @@
       "delta_of": "npc-pc-idle-1"
     },
     "npc-pc-idle-4": {
-      "x": 1747,
-      "y": 1,
+      "x": 793,
+      "y": 171,
       "w": 16,
       "h": 16,
       "frames": [

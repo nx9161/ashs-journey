@@ -3,6 +3,7 @@
 // NPCs, signs, warps, pause menu (Bag/Party/Dex/Save/Options).
 
 import { MAPS, WALKABLE, TRAINERS } from '../data/maps.mjs';
+import { npcArtKind, NPC_ROAMING_KINDS, hashTile } from '../engine/art.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
@@ -17,6 +18,40 @@ import { BattleScene } from './battle.mjs';
 import { BootScene } from './title.mjs';
 
 const WALK_MS = 200; // ~200ms per walked tile (GD feel note)
+
+// ---- Premium+ W4 (AN-4): wander scoping (engine behaviour, NOT map data) ----
+// The W0 design authored wander as a per-instance data field; this wave's
+// hard gate forbids map-data edits, so the scope lives here as an engine
+// table instead (the one deliberate deviation from the design, recorded
+// in the W4 register entry). An NPC wanders iff ALL of these hold:
+//   * its map is one of the ten settlements (routes/interiors/gyms are
+//     out — the spec's acceptance is a TOWN crowd);
+//   * its art kind is one of the 24 roaming generics (art.mjs table);
+//   * it carries NO functional prop: sight trainers, healers, mart
+//     clerks, PC/cheat terminals, spar coaches, tale actors (the
+//     loadMap tale patches stamp tale/role/witness BEFORE this runs),
+//     parley actors, event/ferry/slot/prize NPCs all stay at their
+//     posts. Talk-based services (gifts, giveMon, trades, fossil
+//     revival) are NOT pinned: every interaction resolves at the NPC's
+//     current tile through npcTileOf, so they work from any tile in
+//     the radius — wander can never strand them.
+//   * it is not BILL of Cerulean: his instance is dialogue-only, but
+//     his post beside the ev_bill event tile is a story placement.
+// Radius is 2 (Chebyshev) around the authored home tile; step legality
+// (updateWander) additionally bars warp tiles AND warp-adjacent tiles
+// (a wanderer can never seal a door), signs, event/item/hidden tiles,
+// other NPCs' current tiles, and the player's/follower's tiles.
+const WANDER_TOWN_MAPS = new Set([
+  'pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
+  'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar',
+]);
+const WANDER_PIN_PROPS = [
+  'trainer', 'sight', 'heal', 'mart', 'pc', 'cheat', 'slots', 'prize',
+  'parley', 'event', 'ferry', 'sparCoach', 'tale', 'role', 'witness',
+  'duoPartner',
+];
+const WANDER_NAME_PINS = new Set(['BILL']);
+const WANDER_DIRS = [[0, -1, 'up'], [0, 1, 'down'], [-1, 0, 'left'], [1, 0, 'right']];
 
 export class OverworldScene {
   enter() {
@@ -114,9 +149,48 @@ export class OverworldScene {
       }
       if (changed) this.map = { ...this.map, npcs };
     }
+    // Premium+ W4 (AN-4): EVERY load now works on per-NPC copies so the
+    // runtime presentation state below never touches the shared MAPS
+    // definitions (the loadMap copy discipline, extended from "when it
+    // mutates" to always). Stamped per instance:
+    //   _pk       stable identity (map id + roster index);
+    //   _phaseMs  idle phase offset — roster slots spaced across the
+    //             600ms idle period with a hash jitter under one slot,
+    //             so offsets are pairwise distinct mod 600 across the
+    //             whole roster: no two NPCs on a screen share an idle
+    //             phase or flip at the same instant;
+    //   _face     current facing — sight direction for trainers, the
+    //             last wander-step / interaction direction otherwise;
+    //   _wander   scoped wanderers only (see the scoping table above):
+    //             current tile, hash-timed step period + counter. All
+    //             state resets on every load (deterministic re-entry).
+    if (this.map && Array.isArray(this.map.npcs)) {
+      const roster = this.map.npcs.length;
+      const stamped = this.map.npcs.map((n, i) => {
+        const c = { ...n };
+        c._pk = id + ':' + i;
+        const slot = 600 / Math.max(1, roster);
+        c._phaseMs = Math.floor(i * slot + hashTile(i, roster, 77) * slot * 0.6);
+        c._face = (n.sight && n.sight.dir) || 'down';
+        if (this.wanderRadiusFor(c, id) > 0) {
+          const h1 = hashTile(n.x * 3 + i, n.y * 5 + i, 91);
+          const h2 = hashTile(n.x * 7 + i, n.y * 11 + i, 97);
+          c._wander = {
+            hx: n.x, hy: n.y, x: n.x, y: n.y, fx: n.x, fy: n.y,
+            radius: 2, period: 2600 + Math.floor(h1 * 3200),
+            wt: Math.floor(h2 * 2600), step: 0, glide: 0,
+          };
+        }
+        return c;
+      });
+      this.map = { ...this.map, npcs: stamped };
+    }
     this.w = this.map.rows[0].length;
     this.h = this.map.rows.length;
     if (this.sysLoadMap) this.sysLoadMap(id);
+    // Premium+ W4: door-critical tiles for the wander legality check
+    // (see computeDoorCritical) — recomputed per load, towns only.
+    this._doorCritical = WANDER_TOWN_MAPS.has(id) ? this.computeDoorCritical() : null;
     // P1 fix (owner report 2026-10-28): loadMap used to OVERWRITE
     // centerReturn with _lastCity here — a snapshot of the player's
     // tile taken when the PREVIOUS map loaded. That one line defeated
@@ -151,13 +225,79 @@ export class OverworldScene {
     return this.map.rows[y][x];
   }
 
+  // Premium+ W4: an NPC's CURRENT tile — its wander tile while it
+  // roams, its authored home tile otherwise. Every occupancy, sight,
+  // interaction and render consumer resolves through these two helpers
+  // so the picture, the collision and the talk target never disagree.
+  npcX(n) { return n._wander ? n._wander.x : n.x; }
+  npcY(n) { return n._wander ? n._wander.y : n.y; }
+
+  // Premium+ W4: the door-critical set — static-terrain articulation
+  // tiles whose removal would disconnect a warp from the map's largest
+  // walkable component. A wanderer may never STEP onto one (its own
+  // home tile exempt — homes are data): this is what "wander never
+  // seals a door" means mechanically, and it subsumes sole-approach
+  // corridors that a fixed warp-adjacency radius cannot see (e.g.
+  // Cinnabar's (3,5), the only corridor tile to the (3,3) house door,
+  // two tiles from the warp). Terrain only: NPC occupancy and boulders
+  // are not part of the graph. Cost is trivial at town map sizes.
+  computeDoorCritical() {
+    const key = (x, y) => x + ',' + y;
+    const stat = (x, y) => {
+      if (x < 0 || y < 0 || x >= this.w || y >= this.h) return false;
+      const t = this.tileAt(x, y);
+      return WALKABLE.has(t) || (this.sysWalkableExtra && this.sysWalkableExtra(x, y));
+    };
+    const component = (banned) => {
+      const seen = new Set(); let best = new Set();
+      for (let y = 0; y < this.h; y++) for (let x = 0; x < this.w; x++) {
+        const k = key(x, y);
+        if (!stat(x, y) || k === banned || seen.has(k)) continue;
+        const comp = new Set([k]); const q = [[x, y]]; seen.add(k);
+        while (q.length) {
+          const [cx, cy] = q.pop();
+          for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+            const nx = cx + dx, ny = cy + dy, nk = key(nx, ny);
+            if (nk === banned || seen.has(nk) || !stat(nx, ny)) continue;
+            seen.add(nk); comp.add(nk); q.push([nx, ny]);
+          }
+        }
+        if (comp.size > best.size) best = comp;
+      }
+      return best;
+    };
+    const warpKeys = (this.map.warps || []).map((w) => key(w.x, w.y));
+    if (!warpKeys.length) return new Set();
+    const base = component(null);
+    const protectedWarps = warpKeys.filter((k) => base.has(k));
+    const crit = new Set();
+    if (!protectedWarps.length) return crit;
+    for (const k of base) {
+      if (warpKeys.includes(k)) continue;
+      const [x, y] = k.split(',').map(Number);
+      const without = component(k);
+      if (protectedWarps.some((wk) => !without.has(wk))) crit.add(key(x, y));
+    }
+    return crit;
+  }
+
+  // Premium+ W4: wander scope for one loaded instance (see the table
+  // at WANDER_TOWN_MAPS). Returns the radius, or 0 for pinned.
+  wanderRadiusFor(n, mapId) {
+    if (!WANDER_TOWN_MAPS.has(mapId)) return 0;
+    if (WANDER_NAME_PINS.has(n.name)) return 0;
+    for (const p of WANDER_PIN_PROPS) if (n[p]) return 0;
+    if (!NPC_ROAMING_KINDS.has(npcArtKind(n))) return 0;
+    return 2;
+  }
+
   walkable(x, y) {
     const t = this.tileAt(x, y);
     if (this.boulderAt && this.boulderAt(x, y)) return false;
     const base = WALKABLE.has(t) || (this.sysWalkableExtra && this.sysWalkableExtra(x, y));
     if (!base) return false;
-    // NPCs block
-    for (const n of this.map.npcs) if (n.x === x && n.y === y) return false;
+    // NPCs block (at their CURRENT tiles — wander positions included)
+    for (const n of this.map.npcs) if (this.npcX(n) === x && this.npcY(n) === y) return false;
     return true;
   }
 
@@ -167,8 +307,60 @@ export class OverworldScene {
   }
 
   npcAt(x, y) {
-    for (const n of this.map.npcs) if (n.x === x && n.y === y) return n;
+    for (const n of this.map.npcs) if (this.npcX(n) === x && this.npcY(n) === y) return n;
     return null;
+  }
+
+  // Premium+ W4 (AN-4): the wander step (W0 design, engine-scoped).
+  // Called from update() BELOW the modal early-return, so open dialogue
+  // or menus freeze every wanderer structurally. Fully hash-driven:
+  // the candidate direction is a hash of (home tile, roster identity,
+  // step counter) — no RNG stream is consumed, no Math.random — and an
+  // illegal candidate means "stay" (the counter still advances, so an
+  // NPC never freeze-locks onto one bad direction). A legal step sets
+  // the logical tile at once and glides the render over 280ms in the
+  // walk pair, facing the step direction. Reduced Motion: no stepping
+  // at all (teleport-freeze per the design — wanderers hold home).
+  updateWander(dt) {
+    const g = this.game;
+    if (!this.map || !Array.isArray(this.map.npcs)) return;
+    const still = g.state && g.state.settings && g.state.settings.reducedMotion;
+    const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
+    for (const n of this.map.npcs) {
+      const w = n._wander;
+      if (!w) continue;
+      if (w.glide > 0) w.glide = Math.max(0, w.glide - dt * 1000);
+      if (still) continue;
+      w.wt += dt * 1000;
+      if (w.wt < w.period) continue;
+      w.wt = 0;
+      w.step++;
+      const di = Math.floor(hashTile(w.hx + w.step * 7, w.hy + w.step * 13, 131) * 4) % 4;
+      const [dx, dy, dname] = WANDER_DIRS[di];
+      const tx = w.x + dx, ty = w.y + dy;
+      if (Math.max(Math.abs(tx - w.hx), Math.abs(ty - w.hy)) > w.radius) continue;
+      if (tx === this.player.tx && ty === this.player.ty) continue;
+      if (tx === ptx && ty === pty) continue;
+      if (!this.walkable(tx, ty)) continue;
+      // never stand on — or directly in front of — a warp (door sealing),
+      // and never on a sign / event / item / hidden-item cell
+      let barred = false;
+      for (const wp of this.map.warps || []) {
+        if (Math.max(Math.abs(tx - wp.x), Math.abs(ty - wp.y)) <= 1) { barred = true; break; }
+      }
+      if (barred) continue;
+      // never seal a door: door-critical articulation tiles are barred
+      // as step targets (the wanderer's own home tile is exempt)
+      if (this._doorCritical && this._doorCritical.has(tx + ',' + ty) && !(tx === w.hx && ty === w.hy)) continue;
+      if (this.signAt(tx, ty)) continue;
+      if (this.map.events && this.map.events.some((e) => e.x === tx && e.y === ty)) continue;
+      if (this.map.items && this.map.items.some((e) => e.x === tx && e.y === ty)) continue;
+      if (this.map.hidden && this.map.hidden.some((e) => e.x === tx && e.y === ty)) continue;
+      w.fx = w.x; w.fy = w.y;
+      w.x = tx; w.y = ty;
+      w.glide = 280;
+      n._face = dname;
+    }
   }
 
   signAt(x, y) {
@@ -182,6 +374,7 @@ export class OverworldScene {
     if (this.enc) { this.updateEncounter(dt); return; }
     if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
     if (this.checkSightLines()) return; // spotted this tick — challenge takes over
+    this.updateWander(dt); // Premium+ W4: ambient town wander (frozen while any modal above consumed the tick)
 
     const input = g.input;
     // Pause menu
@@ -387,7 +580,7 @@ export class OverworldScene {
       const dx = dir === 'left' ? -1 : dir === 'right' ? 1 : 0;
       const dy = dir === 'up' ? -1 : dir === 'down' ? 1 : 0;
       for (let i = 1; i <= range; i++) {
-        const tx = n.x + dx * i, ty = n.y + dy * i;
+        const tx = this.npcX(n) + dx * i, ty = this.npcY(n) + dy * i;
         if (tx === p.tx && ty === p.ty) { this.startChallenge(n); return true; }
         if (!this.walkable(tx, ty)) break; // sight blocked (wall, rock, another NPC)
       }
@@ -397,11 +590,11 @@ export class OverworldScene {
 
   startChallenge(spotter) {
     const g = this.game;
-    const parts = [{ npc: spotter, cx: spotter.x, cy: spotter.y }];
+    const parts = [{ npc: spotter, cx: this.npcX(spotter), cy: this.npcY(spotter) }];
     if (spotter.duoPartner) {
       const mate = this.map.npcs.find((n) => n.name === spotter.duoPartner);
       if (mate && !g.state.story.flags['beat_' + mate.trainer]) {
-        parts.push({ npc: mate, cx: mate.x, cy: mate.y });
+        parts.push({ npc: mate, cx: this.npcX(mate), cy: this.npcY(mate) });
       }
     }
     this.challenge = { parts, phase: 'spot', t: 0, stepT: 0 };
@@ -443,7 +636,12 @@ export class OverworldScene {
       : [[q.cx, q.cy + Math.sign(dy)], [q.cx + Math.sign(dx), q.cy]];
     for (const [nx, ny] of opts) {
       if (nx === pl.tx && ny === pl.ty) continue; // never step onto the player
-      if (this.walkable(nx, ny)) { q.cx = nx; q.cy = ny; return; }
+      if (this.walkable(nx, ny)) {
+        // Premium+ W4: the challenger FACEs its walk-up step (and draws
+        // the walk pair in render) instead of gliding front-facing.
+        if (q.npc) q.npc._face = nx !== q.cx ? (nx > q.cx ? 'right' : 'left') : (ny > q.cy ? 'down' : 'up');
+        q.cx = nx; q.cy = ny; return;
+      }
     }
   }
 
@@ -535,6 +733,11 @@ export class OverworldScene {
     const facedNpc = this.npcAt(fx, fy);
     const npc = facedNpc || ((this.tileAt(fx, fy) === '\u03b1') ? this.npcAt(fx + dx, fy + dy) : null);
     if (npc) {
+      // Premium+ W4 (AN-4): the talked-to NPC turns to face the player —
+      // sprite facing = interaction facing, from every approach side.
+      const fdx = p.tx - this.npcX(npc), fdy = p.ty - this.npcY(npc);
+      npc._face = Math.abs(fdx) >= Math.abs(fdy)
+        ? (fdx > 0 ? 'right' : 'left') : (fdy > 0 ? 'down' : 'up');
       if (this.sysNpc && this.sysNpc(npc)) return true;
       if (npc.trainer) { this.startTrainerBattle(npc); return true; }
       const lines = npc.dialogue.map((l) => l.replace('{player}', g.state.player.name));
@@ -712,7 +915,20 @@ export class OverworldScene {
       let nx = n.x * T, footY = n.y * T - 4 + T;
       const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
       if (cq) { nx = cq.cx * T; footY = cq.cy * T - 4 + T; }
-      r.blitCharacter(g.npcFrame(n), nx, footY);
+      else if (n._wander) {
+        // Premium+ W4: wanderers draw at their current tile, gliding
+        // between tiles over the step's 280ms in their walk pair.
+        const w = n._wander;
+        let rx = w.x, ry = w.y;
+        if (w.glide > 0) {
+          const k = 1 - w.glide / 280;
+          rx = w.fx + (w.x - w.fx) * k;
+          ry = w.fy + (w.y - w.fy) * k;
+        }
+        nx = rx * T; footY = ry * T - 4 + T;
+      }
+      const moving = !!cq || !!(n._wander && n._wander.glide > 0);
+      r.blitCharacter(g.npcFrame(n, { dir: n._face || 'down', moving }), nx, footY);
     }
     // Yellow-style spot "!" over each challenger during the alert beat.
     if (this.challenge && this.challenge.phase === 'spot') {

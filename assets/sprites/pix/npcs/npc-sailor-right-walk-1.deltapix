@@ -1,0 +1,45 @@
+# Premium+ W4 (AN-4): sailor right walk frame 1 — stride delta over the right idle (legs scissor / hem sway / profile travel).
+PIXD npc-sailor-right-walk-1 npc-sailor-right-idle-1 16 32
+5 24 .
+6 24 O
+10 24 P
+11 24 O
+5 25 .
+6 25 O
+7 25 P
+9 25 O
+10 25 P
+11 25 O
+4 26 .
+5 26 O
+6 26 P
+8 26 O
+10 26 P
+12 26 O
+4 27 .
+5 27 O
+6 27 P
+8 27 O
+10 27 P
+12 27 O
+4 28 .
+5 28 O
+6 28 P
+8 28 O
+10 28 P
+12 28 O
+4 29 .
+5 29 O
+6 29 q
+8 29 O
+10 29 q
+12 29 O
+4 30 .
+5 30 O
+6 30 B
+8 30 O
+10 30 B
+12 30 O
+4 31 .
+12 31 O
+PAL

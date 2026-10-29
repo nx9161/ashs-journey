@@ -1,0 +1,17 @@
+# Premium+ W4 (AN-4): grunt right walk frame 2 — stride delta over the right idle (legs scissor / hem sway / profile travel).
+PIXD npc-grunt-right-walk-2 npc-grunt-right-idle-1 16 32
+3 29 O
+4 29 q
+5 29 O
+7 29 q
+9 29 O
+11 29 .
+3 30 O
+4 30 B
+5 30 O
+7 30 B
+9 30 O
+11 30 .
+3 31 O
+11 31 .
+PAL

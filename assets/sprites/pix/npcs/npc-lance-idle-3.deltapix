@@ -1,0 +1,30 @@
+# Premium+ W4 (AN-4): named-cast gesture idle — original delta over the shipped front idle; kind-specific gesture (see register).
+PIXD npc-lance-idle-3 npc-lance-idle-1 16 32
+3 13 O
+1 14 O
+3 14 .
+4 14 O
+6 14 W
+1 15 O
+3 15 .
+4 15 O
+1 16 O
+3 16 .
+4 16 O
+1 17 O
+3 17 .
+4 17 O
+1 18 O
+3 18 .
+4 18 O
+1 19 O
+3 19 .
+4 19 O
+1 20 O
+3 20 .
+4 20 O
+1 21 O
+3 21 .
+1 22 O
+3 22 .
+PAL

@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): biker right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-biker-right-idle-2 npc-biker-right-idle-1 16 32
+7 14 j
+8 14 j
+PAL

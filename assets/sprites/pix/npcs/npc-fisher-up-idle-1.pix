@@ -1,0 +1,50 @@
+# Premium+ W4 (AN-4): fisher up idle frame 1 — original directional view derived by row surgery from the shipped front (back = cover fill + front details removed; profile = face at facing edge, hair behind).
+PIX npc-fisher-up-idle-1 16 32
+................
+................
+.....OOOOOO.....
+....OAAAAAaO....
+..OOAAAAAAAaOO..
+....OddddddO.OO.
+....OHddddHO..O.
+....OOddddOO..O.
+....OOddddOO..O.
+....OddddddO..O.
+....OddddddO..O.
+....OOOddOOO..O.
+.......OO.....O.
+...OOOOjjOOOO.O.
+...OJJJJJJJkO.O.
+...OJJJJJJJkO.O.
+...OJJJJJJJkO.O.
+...OJJJJJJJkO.O.
+...OJkJJJJkkO.O.
+...OJJJJJJJkO.O.
+...OSJJJJJJSOOO.
+...OOkkkkkkOO.O.
+.....OppppO...O.
+.....OPPPPO...O.
+.....OPPPPO...O.
+.....OPOOPO...O.
+....OPO..OPO..O.
+....OPO..OPO..O.
+....OPO..OPO..O.
+....OqO..OqO....
+....OBO..OBO....
+....OOO..OOO....
+PAL
+O #241a20 outline
+A #c8b06a accessory
+a #a68d4e accessory-shade
+d #2e2118 hair-shadow
+H #4a3a2a hair
+S #d8a878 skin
+s #b8906a skin-shade
+j #5a86cc shirt-light
+J #3a6ac0 shirt
+k #2a4c84 shirt-dark
+Y #e8c832 gold-accent
+p #3c5064 pants-light
+P #2a3a4a pants
+q #1e2c3a pants-dark
+B #4a3423 shoes

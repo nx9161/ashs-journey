@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): scientist right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-scientist-right-idle-2 npc-scientist-right-idle-1 16 32
+11 14 j
+11 15 j
+PAL

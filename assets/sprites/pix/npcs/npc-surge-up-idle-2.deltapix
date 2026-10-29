@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): surge up idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-surge-up-idle-2 npc-surge-up-idle-1 16 32
+3 14 j
+4 14 j
+PAL

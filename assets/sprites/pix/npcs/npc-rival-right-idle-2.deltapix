@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): rival right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-rival-right-idle-2 npc-rival-right-idle-1 16 32
+11 14 j
+7 15 j
+PAL

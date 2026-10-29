@@ -1,0 +1,6 @@
+# Premium+ W4 (AN-4): sabrina right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-sabrina-right-idle-2 npc-sabrina-right-idle-1 16 32
+10 7 S
+11 14 j
+7 15 j
+PAL

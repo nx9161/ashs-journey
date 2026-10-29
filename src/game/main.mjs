@@ -8,7 +8,7 @@ import { Input, KEYMAP, ACTIONS } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
-import { speciesBattleArt, ashFrames, ashModeFrames, npcFrames, partnerHopFrames, partnerIdleFrames, partnerSleepFrames, partnerLookFrames, buildArtTileCache, tileSprite, resolveTileLayers, boulderCanvasFor, uiIcon } from '../engine/art.mjs';
+import { speciesBattleArt, ashFrames, ashModeFrames, npcFrames, npcFramesFor, partnerHopFrames, partnerIdleFrames, partnerSleepFrames, partnerLookFrames, buildArtTileCache, tileSprite, resolveTileLayers, boulderCanvasFor, uiIcon } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
 import { UI, typePill } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
@@ -202,14 +202,27 @@ export class Game {
     return frames[still ? 0 : Math.floor(this._animT / 500) % 4]; // idle 4f breath cycle
   }
 
-  npcFrame(npc) {
+  npcFrame(npc, opts) {
     // Wave 0: the cache key carries the art kind + the instance palette,
     // not the name alone — two NPCs sharing a name (or one name in two
     // towns) can carry different palettes/art and must not share frames
     // now that the palette-swap rasterizer honors the instance data.
+    // Premium+ W4 (AN-4): the key also carries facing + locomotion —
+    // the sprite now FACEs its interaction/sight/wander direction
+    // (directional idles, walk pairs for roaming kinds, the named
+    // cast's 4-frame front gesture cycle) — and the idle clock is
+    // shifted by the NPC's per-instance phase offset (_phaseMs,
+    // stamped by the scene at loadMap: pairwise-distinct mod 600ms
+    // across the map roster, so no two NPCs on a screen ever flip
+    // idle frames at the same instant; hash fallback for unstamped
+    // instances). Reduced Motion holds frame 0 of every NPC cycle
+    // (the W3 gate, extended to the new sets).
+    const dir = (opts && opts.dir) || (npc && npc._face) || 'down';
+    const moving = !!(opts && opts.moving);
     const cacheKey = [npc.art || '', npc.pc ? 'pc' : '', npc.name || '',
-      npc.skin || '', npc.shirt || '', npc.pants || '', npc.hair || ''].join('|');
-    if (!this.npcCache[cacheKey]) this.npcCache[cacheKey] = npcFrames(doc, npc);
+      npc.skin || '', npc.shirt || '', npc.pants || '', npc.hair || '',
+      dir, moving ? 'w' : 'i'].join('|');
+    if (!this.npcCache[cacheKey]) this.npcCache[cacheKey] = npcFramesFor(doc, npc, dir, moving);
     const f = this.npcCache[cacheKey];
     // Premium+ W3 (AN-6): the PC terminal cycles its screen at the fast
     // cadence (200ms x 4 frames); people keep the 600ms idle pair.
@@ -217,7 +230,16 @@ export class Game {
       const still = this.state && this.state.settings && this.state.settings.reducedMotion;
       return f[still ? 0 : Math.floor(this._animT / 200) % f.length];
     }
-    return f[Math.floor(this._animT / 600) % 2]; // idle-1 / idle-2
+    const still = this.state && this.state.settings && this.state.settings.reducedMotion;
+    if (still) return f[0];
+    if (moving) return f[Math.floor(this._animT / 200) % f.length]; // walk pair at step cadence
+    let off = (npc && npc._phaseMs) || 0;
+    if (!off && npc && !npc.pc) { // unstamped instance: stable hash phase
+      let h = 0; const s = (npc.name || '') + '|' + (npc.art || '') + '|' + npc.x + ',' + npc.y;
+      for (let i = 0; i < s.length; i++) { h = Math.imul(h ^ s.charCodeAt(i), 16777619); }
+      off = (h >>> 0) % 600;
+    }
+    return f[Math.floor((this._animT + off) / 600) % f.length];
   }
 
   partnerFrame(idle, opts) {

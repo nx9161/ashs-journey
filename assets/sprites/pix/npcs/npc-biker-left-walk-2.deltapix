@@ -1,0 +1,17 @@
+# Premium+ W4 (AN-4): biker left walk frame 2 — stride delta over the left idle (legs scissor / hem sway / profile travel).
+PIXD npc-biker-left-walk-2 npc-biker-left-idle-1 16 32
+4 29 .
+6 29 O
+8 29 q
+10 29 O
+11 29 q
+12 29 O
+4 30 .
+6 30 O
+8 30 B
+10 30 O
+11 30 B
+12 30 O
+4 31 .
+12 31 O
+PAL

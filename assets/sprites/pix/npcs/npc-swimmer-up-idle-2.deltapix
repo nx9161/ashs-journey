@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): swimmer up idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-swimmer-up-idle-2 npc-swimmer-up-idle-1 16 32
+6 14 j
+7 14 j
+PAL

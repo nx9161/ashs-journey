@@ -1,0 +1,6 @@
+# Premium+ W4 (AN-4): lass right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-lass-right-idle-2 npc-lass-right-idle-1 16 32
+10 7 S
+7 15 j
+10 15 j
+PAL

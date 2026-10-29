@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): gent right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-gent-right-idle-2 npc-gent-right-idle-1 16 32
+7 14 j
+10 14 j
+PAL

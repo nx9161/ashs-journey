@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): bruno up idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-bruno-up-idle-2 npc-bruno-up-idle-1 16 32
+5 15 j
+6 15 j
+PAL

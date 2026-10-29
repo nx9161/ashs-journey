@@ -1,0 +1,6 @@
+# Premium+ W4 (AN-4): gary right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-gary-right-idle-2 npc-gary-right-idle-1 16 32
+8 14 j
+9 14 j
+6 20 J
+PAL

@@ -1,0 +1,17 @@
+# Premium+ W4 (AN-4): swimmer left walk frame 2 — stride delta over the left idle (legs scissor / hem sway / profile travel).
+PIXD npc-swimmer-left-walk-2 npc-swimmer-left-idle-1 16 32
+4 29 .
+6 29 O
+8 29 s
+10 29 O
+11 29 s
+12 29 O
+4 30 .
+6 30 O
+8 30 S
+10 30 O
+11 30 S
+12 30 O
+4 31 .
+12 31 O
+PAL

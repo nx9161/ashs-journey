@@ -2,7 +2,7 @@
   "atlas": "atlas-brock.png",
   "tile": 48,
   "size": [
-    186,
+    330,
     66
   ],
   "sprites": {
@@ -73,6 +73,118 @@
       "seed": null,
       "derived_from": null,
       "mirror_of": null
+    },
+    "brock-left-idle-1": {
+      "x": 187,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "brock-right-idle-1": {
+      "x": 205,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "brock-up-idle-1": {
+      "x": 223,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "brock-idle-3": {
+      "x": 241,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "brock-idle-1"
+    },
+    "brock-idle-4": {
+      "x": 259,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "brock-idle-2"
+    },
+    "brock-left-idle-2": {
+      "x": 277,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "brock-left-idle-1"
+    },
+    "brock-right-idle-2": {
+      "x": 295,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "brock-right-idle-1"
+    },
+    "brock-up-idle-2": {
+      "x": 313,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "brock-up-idle-1"
     }
   }
 }

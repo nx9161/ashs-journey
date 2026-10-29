@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): worker right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-worker-right-idle-2 npc-worker-right-idle-1 16 32
+8 14 j
+9 14 j
+PAL

@@ -1,0 +1,15 @@
+# Premium+ W4 (AN-4): acetrainer up walk frame 2 — stride delta over the up idle (legs scissor / hem sway / profile travel).
+PIXD npc-acetrainer-up-walk-2 npc-acetrainer-up-idle-1 16 32
+4 30 .
+5 30 O
+6 30 B
+7 30 O
+8 30 O
+9 30 B
+10 30 O
+11 30 .
+4 31 .
+7 31 O
+8 31 O
+11 31 .
+PAL

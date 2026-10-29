@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): aide right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-aide-right-idle-2 npc-aide-right-idle-1 16 32
+11 14 j
+11 15 j
+PAL

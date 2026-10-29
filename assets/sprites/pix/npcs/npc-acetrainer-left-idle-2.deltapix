@@ -1,0 +1,5 @@
+# Premium+ W4 (AN-4): acetrainer left idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-acetrainer-left-idle-2 npc-acetrainer-left-idle-1 16 32
+4 14 j
+4 15 j
+PAL

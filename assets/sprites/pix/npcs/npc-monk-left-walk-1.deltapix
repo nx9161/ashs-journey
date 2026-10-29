@@ -1,0 +1,47 @@
+# Premium+ W4 (AN-4): monk left walk frame 1 — stride delta over the left idle (legs scissor / hem sway / profile travel).
+PIXD npc-monk-left-walk-1 npc-monk-left-idle-1 16 32
+2 24 O
+3 24 J
+5 24 A
+6 24 J
+8 24 k
+9 24 O
+10 24 .
+2 25 O
+3 25 J
+8 25 k
+9 25 O
+10 25 .
+2 26 O
+3 26 J
+5 26 A
+6 26 J
+8 26 k
+9 26 O
+10 26 .
+2 27 O
+3 27 J
+8 27 k
+9 27 O
+10 27 .
+2 28 O
+3 28 k
+5 28 O
+7 28 k
+9 28 O
+10 28 .
+3 29 O
+5 29 S
+7 29 O
+9 29 S
+10 29 O
+11 29 .
+3 30 O
+5 30 B
+7 30 O
+9 30 B
+10 30 O
+11 30 .
+3 31 O
+11 31 .
+PAL

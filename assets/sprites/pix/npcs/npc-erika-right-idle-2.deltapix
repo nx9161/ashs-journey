@@ -1,0 +1,6 @@
+# Premium+ W4 (AN-4): erika right idle frame 2 — breath/sway/blink delta over frame 1.
+PIXD npc-erika-right-idle-2 npc-erika-right-idle-1 16 32
+10 7 S
+6 14 j
+7 14 j
+PAL
