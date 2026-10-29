@@ -47,8 +47,8 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   ok('A01 tables.json in sync with src/data (gen-tables --check)', checkOut.includes('tables.json OK'), checkOut.trim());
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A02 counts: species 163 (152+5 forms+5 species+1 Lugia, Stage O1), items 130 (126+4), keepsakes 12, forms 202 (197+5)',
-    t.species.length === 163 && t.items.length === 130 && t.keepsakes.length === 12 && t.forms.length === 202,
+  ok('A02 counts: species 163 (152+5 forms+5 species+1 Lugia, Stage O1), items 135 (130 + 4 Orange badge items + Winner\'s Trophy, Stage O2 content-count ripple), keepsakes 12, forms 202 (197+5)',
+    t.species.length === 163 && t.items.length === 135 && t.keepsakes.length === 12 && t.forms.length === 202,
     JSON.stringify({ s: t.species.length, i: t.items.length, k: t.keepsakes.length, f: t.forms.length }));
   ok('A03 server tables carry every expansion id',
     [...FORM_IDS, ...NEW_IDS].every((id) => t.species.includes(id) && t.forms.includes(id) === FORM_IDS.includes(id))
