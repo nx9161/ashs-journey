@@ -1,0 +1,24 @@
+# deoxysspeed-front-accent — Arc3 H2b accent frame (blink). Recolor-only delta over deoxysspeed-front.
+PIXD deoxysspeed-front-accent deoxysspeed-front 64 64
+27 21 O
+35 21 O
+27 22 O
+28 22 O
+35 22 O
+36 22 O
+26 23 O
+28 23 O
+29 23 O
+33 23 O
+34 23 O
+36 23 O
+37 23 O
+26 24 O
+27 24 O
+28 24 O
+34 24 O
+35 24 O
+36 24 O
+27 25 O
+35 25 O
+PAL

@@ -1,0 +1,30 @@
+# groudon-front-accent — Arc3 H2b accent frame (blink). Recolor-only delta over groudon-front.
+PIXD groudon-front-accent groudon-front 64 64
+26 21 O
+38 21 O
+26 22 O
+27 22 O
+38 22 O
+39 22 O
+24 23 O
+25 23 O
+27 23 O
+28 23 O
+36 23 O
+37 23 O
+39 23 O
+40 23 O
+25 24 O
+26 24 O
+27 24 O
+37 24 O
+38 24 O
+39 24 O
+26 25 O
+38 25 O
+27 30 O
+30 30 O
+33 30 O
+36 30 O
+37 30 O
+PAL

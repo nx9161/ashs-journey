@@ -1,0 +1,37 @@
+# rayquaza-front-accent — Arc3 H2b accent frame (blink). Recolor-only delta over rayquaza-front.
+PIXD rayquaza-front-accent rayquaza-front 64 64
+16 18 O
+25 18 O
+15 19 O
+16 19 O
+17 19 O
+24 19 O
+25 19 O
+26 19 O
+16 20 O
+25 20 O
+13 25 O
+15 25 O
+16 25 O
+18 25 O
+19 25 O
+21 25 O
+22 25 O
+24 25 O
+25 25 O
+27 25 O
+13 26 O
+15 26 O
+16 26 O
+18 26 O
+19 26 O
+21 26 O
+22 26 O
+24 26 O
+25 26 O
+27 26 O
+16 27 O
+19 27 O
+22 27 O
+25 27 O
+PAL

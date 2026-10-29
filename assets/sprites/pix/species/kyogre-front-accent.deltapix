@@ -1,0 +1,27 @@
+# kyogre-front-accent — Arc3 H2b accent frame (blink). Recolor-only delta over kyogre-front.
+PIXD kyogre-front-accent kyogre-front 64 64
+18 34 O
+38 34 O
+18 35 O
+19 35 O
+38 35 O
+39 35 O
+16 36 O
+17 36 O
+18 36 O
+19 36 O
+20 36 O
+36 36 O
+37 36 O
+38 36 O
+39 36 O
+40 36 O
+17 37 O
+18 37 O
+19 37 O
+37 37 O
+38 37 O
+39 37 O
+18 38 O
+38 38 O
+PAL

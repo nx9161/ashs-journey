@@ -8229,3 +8229,141 @@ change beyond the regenerated tables the validator suite pins).
 - **H2b (dex 320–386 + 3 Deoxys formes)** remains: ~70 more entries
   at this stage's measured unit cost ≈ +1.02 MB art, landing
   art-data ≈ 6.93 MB — inside the §2 ceiling as sized.
+
+## Arc 3 Stage H2b — Species art, SECOND half (dex 320–386 + Deoxys formes) (2026-10-29)
+
+### 1. What landed
+
+- **70 entries authored** (dex 320–386, wailmer → deoxys-normal, plus
+  the 3 Deoxys form entries `deoxysattack` / `deoxysdefense` /
+  `deoxysspeed`, shared dexNo 386): wailmer, wailord, numel, camerupt,
+  torkoal, spoink, grumpig, spinda, trapinch, vibrava, flygon, cacnea,
+  cacturne, swablu, altaria, zangoose, seviper, lunatone, solrock,
+  barboach, whiscash, corphish, crawdaunt, baltoy, claydol, lileep,
+  cradily, anorith, armaldo, feebas, milotic, castform, kecleon,
+  shuppet, banette, duskull, dusclops, tropius, chimecho, absol,
+  wynaut, snorunt, glalie, spheal, sealeo, walrein, clamperl, huntail,
+  gorebyss, relicanth, luvdisc, bagon, shelgon, salamence, beldum,
+  metang, metagross, regirock, regice, registeel, latias, latios,
+  kyogre, groudon, rayquaza, jirachi, deoxys + the 3 formes.
+- **140 full frames** (`<id>-front` + `<id>-back` .pix, 64×64, original
+  pixel work in the Platinum language — NW-light shading, true rear
+  views: no eyes, back-specific markings: kyogre's red circuit lines,
+  rayquaza's ring bands, walrein's mane back, duskull's skull cross,
+  banette's rear zipper, metagross's back plates). Backs are NOT
+  mirrors: front/back row data differs for all 70 (census-checked).
+  Castform is the single base form only (coordinator ruling 2).
+- **140 bob frames** reach the shipped set via the pipeline itself:
+  front-bobs by build-art's marked derivation, back-bobs by the W2
+  shift-delta mechanism — no hand files, exactly as H2a/Johto species.
+- **26 accent deltas** for the 13 marquee legendary/mythical entries
+  in range (regirock, regice, registeel, latias, latios, kyogre,
+  groudon, rayquaza, jirachi, deoxys + 3 formes): front-accent = blink
+  (recolor-only; the Regis blink their dot-matrix eyes via the same
+  mechanism on their eye colour), back-accent = crest/fin twitch
+  recolor, as .deltapix over the new bases. Pattern call, recorded:
+  J2b gave accents to ITS marquee legendaries (raikou/entei/suicune/
+  celebi); hooh/lugia ship without because they predate that pattern
+  (shipped earlier as guests). H2b follows the later J2b marquee
+  pattern rather than the hooh/lugia exception.
+- **Deoxys formes — one design language, four readable silhouettes**
+  (shared rust-red/violet/teal-core palette): Normal = rounded head,
+  tentacles hanging; Attack = tri-spike crown + raised jagged arms
+  (strengthened after first contact-sheet review, where Attack read
+  too close to Normal); Defense = flat-topped head, bulky violet
+  shoulder/arm mass (widest body of the four); Speed = slimmest body,
+  swept-back head fin, streamer arms. All four distinguishable at
+  sheet scale on the final sheet.
+- **Weather trio are the arc's faces and were drawn silhouette-first:**
+  kyogre (wide whale front, red circuit lines, white jaw), groudon
+  (bulkiest biped frame in the half, grey plate bands, white horn/
+  claw set, tail slab), rayquaza (coiled serpent, yellow ring bands,
+  red fins, yellow horn pair over a toothed jaw).
+- Authoring workflow: generator script
+  `~/workspace/ashs-journey-qa/arc3-etl/gen-h2b-art.mjs` (mirrors
+  gen-h2a) composes per-species authored silhouettes/palettes/
+  markings into .pix sources; the repo's own build-art validation is
+  the gate (palette cap, outline, margins, orphans). 15 orphan pixels
+  across 6 species (skinny spike/leg/horn raster tips on solrock,
+  rayquaza, lunatone, deoxysattack, deoxysspeed) were fixed in the
+  art, never in the validator; two palette omissions (bird-beak `R`
+  on latias/swablu) fixed in the palettes.
+
+### 2. Pipeline / ceiling (on the record)
+
+- **No ceiling change.** build-art's internal art-data ceiling stays
+  7,100,000 B (H2a §2). H2b lands art-data at **6,926,787 B**
+  (H2a close 5,904,995 + 1,021,792), headroom 173,213 B — inside the
+  cap as sized to the H0 Hoenn-close projection (6,912,862 B + ~70 KB
+  H3 tile art). The remaining headroom is H3's tile-art room, NOT
+  spare species room; if H3 tile art measures over it, H3 reports
+  before any raise, per the H2a rule.
+
+### 3. Census (gate)
+
+- Script: `~/workspace/ashs-journey-qa/arc3-etl/census-h2b.mjs`
+  (on the census-h2a pattern). **CENSUS H2B: PASS.**
+- Half census: every one of the 70 entries has authored front+back:
+  **bob missing 0, marquee accents missing 0, front ≠ back for all
+  70. Zero forge fallbacks for dex 320–386 + formes.**
+- **Full-roster census: all 395 entries** (386 dex + partner + 5
+  forms + 3 Deoxys formes) have front+back keys in art-data.mjs:
+  **missing 0, blanks 0.** With H2b, Hoenn species art is complete —
+  no forge fallback remains anywhere in the dex 1–386 range.
+- Per-sprite stats for the 140 new frames: painted pixels
+  **642–1,562** (median 1,046; H2a: 616–1,391, median 1,059), palette
+  sizes **5–11** colours (median 7; cap 32). The floor sits inside
+  the H2a envelope (lunatone's crescent was enlarged a step to lift
+  it off 442); the ceiling is groudon (1,562) and regirock (1,519) —
+  the arc's two bulkiest bodies, in line with shipped precedent
+  (dragonite 1,536, hooh 1,529), recorded here rather than trimmed
+  into a lie about their size.
+- **Contact sheets:** `~/workspace/ashs-journey-qa/arc3-etl/census-h2b-contact.png`
+  (fronts, 1536×1854, 70 labelled at 3×) +
+  `census-h2b-contact-backs.png` (backs, same format), visually
+  inspected by the implementer: silhouettes nameable at sheet scale
+  with the §5 exceptions flagged; the Deoxys formes row was
+  re-inspected after the Attack-forme strengthening.
+
+### 4. Battery at this commit
+
+- build-art clean and **deterministic** (two runs → byte-identical
+  art-data.mjs). 3,391 sprites total, 394 derived bobs, 673 delta
+  frames.
+- fidelity-checks **35/35** · campaign-smoke **24/24** ·
+  battle-model-checks **45/45** · qa-changed-flows failures exactly
+  **{b2, d9}** · qa-slice failures exactly **{s6, l8}** ·
+  rejuv-phase2 failures exactly **{A09, C01}** (named inheritances,
+  not grown) · budgets-check **all gates pass** (vercel static
+  **9,365,478 B ≤ 12,582,912**).
+- Fresh build (vercel + guest targets): public/game.js
+  **9,273,918 B** (H2a close: 8,252,132; **Δ +1,021,786 B = 14,597 B
+  per entry** vs the H0 measured art unit of 14,483 B/species —
+  +0.8%, on projection; art-data 5,904,995 → 6,926,787 B, the same
+  delta within rounding of frame/palette bytes). H0 re-open trigger
+  (1) is Hoenn-CLOSE static > 10,100,000 B: current vercel static
+  9,365,478 B with maps/story/systems (H3–H6) still to come against
+  the ~9.87 MB Hoenn-close projection — no trigger fired, margin
+  noted for H3's measurement. **personal/ byte-identical**
+  (sha256 f434ba63…, restored from HEAD after verify-slice's
+  rebuild; built targets were vercel+guest only).
+
+### 5. Leftovers, named
+
+- **Hardest silhouettes at 64×64** (flagged for the owner's eye on
+  the contact sheet): absol (front reads side-on and slight — the
+  white ruff and dark face compress at sheet scale), numel (the
+  green hump crater reads as a disc from the front; canon-true but
+  bold), clamperl (front shell/pearl stack reads near-abstract —
+  the back, a closed shell with a pink heart, is the stronger
+  frame), castform (snowman-adjacent, as the base form is).
+  All pass silhouette naming on the sheet; first candidates if a
+  polish pass is ordered.
+- **Beldum/metang** are the plainest frames in the half (single-eye
+  steel orbs by canon design); panel-line + claw treatment is the
+  honest read at this size.
+- Accent deltas for non-marquee Hoenn species are NOT in this
+  stage's brief (H2a/Johto coverage is likewise marquee-only);
+  fronts/backs/bobs are complete for the range.
+- **Hoenn species art (H2) is now COMPLETE across both halves:**
+  138/138 entries authored, zero forge fallbacks roster-wide.
