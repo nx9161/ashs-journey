@@ -2764,3 +2764,132 @@ Filed by Cheat Shop QA as D1; pre-existing at `8855b5e`.
   qa-changed-flows failing exactly {b2, d9}. Bundles rebuilt
   (vercel + guest targets only); personal/ untouched. NOT
   deployed (parent ships).
+
+## Premium+ Art Wave W0 — Foundations+ (2026-10-28, mission close)
+
+Pipeline + rig + designs only — **zero player-facing change**: no shipped
+map, sprite, or battle behaviour differs from base `8e10c72`. Built by the
+W0 implementer; NOT committed by the implementer (coordinator commits
+after independent QA). Spec: `~/workspace/ashs-journey-qa/premium-art-spec.md`
+§4 W0 row, §5 budget, §7 risks.
+
+- **1 · Layered delta-frame format (`.deltapix`).** Sources carry header
+  `PIXD <id> <base-id> <w> <h>`, per-pixel overrides `<x> <y> <char>`
+  ('.' erases), and a `PAL` section with ONLY keys the base lacks.
+  `pix.mjs` gains `parseDeltaPix` / `materializeDeltaRows` /
+  `mergedDeltaPal`; `build-art.mjs` materializes deltas AFTER derived
+  bobs (so a delta may target a derived frame) and emits compact ART
+  entries `{base, w, h, pal:{new keys only}, deltas:[[x,y,char],…]}`
+  (plus `ART_META.delta_frames` and conditional `delta_of` in the atlas
+  JSON); `src/engine/art.mjs` gains exported `materializeArt(id)` —
+  full entries return identity, zero behaviour change. Proof frame:
+  `pidgey-front-blink.deltapix` (base `pidgey-front`; its only 3 white
+  eye-glint pixels → dark eye tone): **120 B vs the base's 4,875 B
+  (2.5%)**. Clean rebuild: **834 baseline ART keys → 836, 0 lost, 0
+  existing blocks changed** (per-key sha256 block hashes), byte-stable
+  across rebuilds; the 2 additions are `pidgey-front-blink` and
+  `tile-grassground` (item 5). Not wired to any presentation.
+- **2 · FX registry (`src/engine/fx.mjs`, GENERATED — regenerate, don't
+  hand-edit).** Generator + audits live in the QA rig (below). **144
+  move rows** (`MOVE_FX`), measured census **59 physical / 34 special /
+  51 status** across 15 types — the spec §1 estimate of ≈61 physical is
+  corrected on the record. **62 definitions** in the spec taxonomy:
+  15 type kits, 8 contact archetypes, 12 status visuals, 20 signature
+  effects, 7 condition overlays; definitions are parameter stubs
+  (colors/shape/travel/impact/duration/truncate ≈65%/particle caps)
+  for W1 to author. `fxPlanForMove(move)` layers signature > status
+  visual/condition > contact archetype > type kit; Splash resolves to
+  `kit.normal` (documented — it has no type effect to kit). Coverage
+  audit proves 144/144 moves resolve and **62/62 definitions are
+  reachable** through some plan layer (8 have no primary move but are
+  plan-reachable: kit.bug/fighting/ground/rock, cond.burn/freeze/
+  sleep/seeded). No battle code consumes the registry yet — zero
+  behaviour change.
+- **3 · Animation QA rig (`~/workspace/ashs-journey-qa/premium-rig/`).**
+  `frame-sampler.mjs` (CDP Fetch-mirror of the local build under
+  production CSP; state-machine guest boot; in-page canvas sampling at
+  120 ms steps), `audit-fx-coverage.mjs`, `audit-art-census.mjs`,
+  `audit-palette-use.mjs`, `audit-grassground.mjs`,
+  `gen-fx-registry.mjs`. **Smoke run on the W0 build: PASS, 0 JS
+  errors.** Overworld Route 1 idle (full frame): 20 frames, **9
+  distinct poses**, meanAbsDiff 0.203, mean changed fraction 0.17%.
+  Wild battle foe battler region: 20 frames, **10 distinct poses**,
+  meanAbsDiff 19.98, mean changed fraction 10.8% — the AN-1 baseline:
+  the foe's sine + derived front-bob are measurably alive today.
+  (Region note: battle.mjs draws the foe at [230, 10+bob, 64, 64] in
+  the 384×216 layout; the Wave 0 register's [151, 6] was the 256×192
+  layout.)
+- **4 · Budget decisions executed.** Art-data ceiling **3.0 MB →
+  5.5 MB**, now enforced as a build constant
+  (`ART_DATA_CEILING_BYTES` in `build-art.mjs` — before W0 the 3.0 MB
+  figure existed only in docs; no script enforced it). Tiles palette
+  cap **54 → 72** at every site: `build-art.mjs`
+  `FAMILY_PALETTE_BUDGETS.tiles`, `assets/sprites/tools/palette-audit.mjs`
+  (which was stale at 48 through the whole 54 era — the "existing
+  palette audit" had silently diverged from the build), and
+  `assets/sprites/README.md`, which also records the **hybrid
+  battler-idle plan** (152 authored back-bobs + priority accents as
+  delta frames + procedural classes for the rest; full-authored
+  +2.0–2.3 MB documented as fallback; no lazy-load pack) and notes
+  the old "any bundle ≤ 4.2 MB" tripwire is superseded by the §5
+  projection (game.js ≈6.0 MB at mission end; the 12 MB hard gate
+  governs) — a recorded decision, not a silent weakening. Palette
+  audit re-run under the new cap: **tiles PASS, union = 54 hexes**
+  (the actual current max). The audit's only remaining failures are
+  3 PRE-EXISTING slop-blacklist hits in `tile-water-1/2/3.pix`
+  (proven present at HEAD; W0 does not touch water art).
+  Census under the new ceiling: art-data **2,672,490 B** (baseline
+  2,671,763; +727 B for the two new entries).
+- **5 · `grassground` tile kind (TX-1 prerequisite).** New char `_`
+  wired end-to-end: `TILE_CHARS` + `paintTile` fallback
+  (`src/engine/tiles.mjs`), `WALKABLE` (`src/data/maps.mjs`),
+  `TILE_ART` + grass-family membership + a dedicated
+  `resolveTileLayers` case (own tile + building shadow strip + path
+  dirt-edges, NEVER tall — `isTallGrass` covers kind `grass` only)
+  in `src/engine/art.mjs`, and hand-authored art
+  `pix/tiles/tile-grassground.pix` reusing ONLY existing grass hexes
+  (tiles union stays 54). **Placement decision: NO cell placed in any
+  shipped map** (proof over placement). `audit-grassground.mjs` PASS:
+  wiring present, resolver returns the 5-layer stack on a stub doc,
+  **0 `_` cells across MAPS/MAPS2/MAPS3/MAPS4**, and encounter-inert
+  by code path — every encounter source tests exact chars (overworld
+  grass `','`, safari `','`, surf `'~'||'W'`, cave `'.'||'R'`); no
+  path tests `'_'`.
+- **6 · Engine designs (docs only)** in
+  `~/workspace/ashs-journey-qa/premium-designs/`: `y-sort-draw.md`
+  (LD-3, W5 — sort pass in `OverworldScene.render`),
+  `time-of-day-tint.md` (LD-2/P-3, W5 — phase from the existing clock,
+  flat overlay + lit-window layer swaps), `npc-wander-phase.md`
+  (AN-4, W4 — per-instance phase via the `hashTile` family into
+  `Game.npcFrame`, opt-in `wander` data, hash-stepped directions,
+  never `g.rng.*`/`Math.random`), `warp-fade.md` (TX-6/PL-1, W7 —
+  single `performWarp` choke point, ~110 ms + ~110 ms black fade,
+  reducedMotion collapses to instant). Each carries hook points,
+  data changes, settings gates, and its determinism argument.
+- **Spec assumptions W0 proved wrong, on the record:** (a) §1 move
+  split ≈61 physical — measured 59/34/51. (b) §1 ART census 804 keys
+  was taken at `aa13a96`; base `8e10c72` carries 834 (battle-model
+  mission growth). (c) `palette-audit.mjs` enforced 48 while the
+  build enforced 54. (d) The 3.0 MB ceiling was documentation-only
+  before W0. (e) The sprites README's "any bundle ≤ 4.2 MB" line is
+  incompatible with §5's own ≈6.0 MB end-state projection.
+- **Battery (this tree, serial):** build OK (vercel + guest, and full
+  3-target) · qa-changed-flows fails EXACTLY {b2, d9} ·
+  campaign-smoke 24/24 · fidelity-checks 35/35 · battle-model-checks
+  45/45 · cheat-shop-checks 44/44 · rejuv-phase1–6 44/42/63/53/55/46 ·
+  Track B 114/114 · verify-slice 134/134 · audit-headless 17/17 ·
+  budgets-check PASS · contamination-scan clean · verify-audio ALL
+  PASS · drift-gate PASS (guest ≡ strip(vercel)) · **audit-laptop
+  (public): zero failures in four full clean runs (40/40 ×2, 39/39
+  ×2)** — the counted total varies because the suite conditionally
+  skips (never fails) a terminal auto-focus check when its waitFor
+  takes the retry branch; three further runs hit the known
+  fixed-sleep cascade starting at "Dex opens from the pause menu"
+  on the IDENTICAL tree that also produced the clean runs, i.e. the
+  standing environmental signature, not a W0 regression (nothing in
+  W0 touches those flows). Recommend the coordinator's QA re-run
+  audit-laptop once on a quiet machine for the full-count line.
+  **game.js (public, vercel target) = 4,021,068 B** vs the
+  12,582,912 B gate. personal/ untouched (restored byte-identical
+  after the full-build suites; `git status --porcelain personal/`
+  empty; content-hash carries guest+vercel lines only).

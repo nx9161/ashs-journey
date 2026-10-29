@@ -4,6 +4,10 @@
 
 export const TILE_CHARS = {
   '#': 'tree', '.': 'path', ',': 'grass', '~': 'water',
+  // Premium+ W0 (TX-1 prerequisite): '_' = grassground — grass texture,
+  // no encounters (encounter branches key on ',' / '~' / 'W' / '.' / 'R'
+  // only). Walkable ground; W5 re-dresses path cells with it.
+  '_': 'grassground',
   'H': 'house', 'D': 'door', 'S': 'sign', 'G': 'gymwall',
   'E': 'gymdoor', 'C': 'centerdoor', 'F': 'flower', 'R': 'rock',
   'T': 'tree', 'B': 'rock', 'W': 'water',
@@ -87,6 +91,15 @@ export function paintTile(ctx, kind, px, py) {
       for (let i = 0; i < 8; i++) {
         const x = Math.floor(h2(px + i * 3, py) * 14), y = Math.floor(h2(px, py + i * 5) * 12);
         r(x, y, 2, 3, h2(x, y) > 0.5 ? PAL.grassDark : PAL.grassLight);
+      }
+      break;
+    case 'grassground':
+      // No-art fallback only (the ART path draws tile-grassground):
+      // meadow texture in the grass tones, denser speckle than 'grass'.
+      r(0, 0, T, T, PAL.grassBase);
+      for (let i = 0; i < 12; i++) {
+        const x = Math.floor(h2(px + i * 5, py + 2) * 14), y = Math.floor(h2(px + 7, py + i * 3) * 14);
+        r(x, y, 2, 2, h2(x + 1, y) > 0.5 ? PAL.grassDark : PAL.grassLight);
       }
       break;
     case 'path':

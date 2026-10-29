@@ -28309,6 +28309,24 @@ export const ART = {
     "gmggggggggggdggg",
     "gddggggggggggggg",
   ] },
+  "tile-grassground": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "mmllddddaaaammmm",
+    "mmllddddggggmmmm",
+    "aaddaammaahhlldd",
+    "ggddggmmgghhlldd",
+    "mmddllhhddmmmmhh",
+    "mmddllhhddmmmmhh",
+    "ddllllmmllddllmm",
+    "ddllllmmllddllmm",
+    "aahhddaaddaammdd",
+    "gghhddggddggmmdd",
+    "mmllllaaddmmddhh",
+    "mmllllggddmmddhh",
+    "ddllmmaaddllddll",
+    "ddllmmggddllddll",
+    "llmmddmmllddaahh",
+    "llmmddmmllddgghh",
+  ] },
   "tile-gymdoor": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","k":"#5a3a24"}, rows: [
     "mmmmmmmmmmmmmmmm",
     "mmmzzzzzzzzzzmmm",
@@ -41149,6 +41167,7 @@ export const ART = {
     "................................................................",
     "................................................................",
   ] },
+  "pidgey-front-blink": { base: "pidgey-front", w: 64, h: 64, pal: {}, deltas: [[27,20,"Y"],[35,20,"Y"],[36,20,"Y"]] },
 };
 export const ART_META = {
   "families": [
@@ -41160,7 +41179,7 @@ export const ART_META = {
     "species",
     "ui"
   ],
-  "generated": "2026-10-28",
+  "generated": "2026-10-29",
   "derived_bob": [
     "abra-front-bob",
     "aerodactyl-front-bob",
@@ -41323,5 +41342,8 @@ export const ART_META = {
     "wigglytuff-front-bob",
     "zapdos-front-bob",
     "zubat-front-bob"
+  ],
+  "delta_frames": [
+    "pidgey-front-blink"
   ]
 };

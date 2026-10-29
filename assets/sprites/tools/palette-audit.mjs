@@ -63,7 +63,11 @@ function main() {
     if (fam === 'tiles') for (const row of s.rows) for (const ch of row) if (ch !== '.') tileHex.add(s.pal[ch].hex);
   }
   ok('all source sprites pass pixel checks', fail === 0, `${sprites.length} sprites, ${fail} failures`);
-  ok('tiles family palette <= 48 colors (per-family budget)', tileHex.size <= 48, `${tileHex.size} colors`);
+  // Per-family budget mirrors build-art.mjs FAMILY_PALETTE_BUDGETS.
+  // History: 48 (Wave 0) -> 54 (Wave 5a) -> 72 (Premium+ W0, spec §5 —
+  // the deliberate, on-the-record raise; this line was stale at 48
+  // through the 54 era and is corrected as part of the W0 raise).
+  ok('tiles family palette <= 72 colors (per-family budget)', tileHex.size <= 72, `${tileHex.size} colors`);
 
   // 4. UI palette cap: 24 colors
   const uiPal = JSON.parse(fs.readFileSync(path.join(ROOT, 'ui', 'ui-palette.json'), 'utf8'));

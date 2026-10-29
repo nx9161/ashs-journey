@@ -318,6 +318,9 @@ export const MAP_LIST = Object.keys(MAPS);
 // tiles exactly like the legacy D/E/C doors — warps remain
 // coordinate-keyed in each map's warps[] list.
 export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9',
+  // Premium+ W0: '_' grassground is walkable ground (grass texture, no
+  // encounters — the encounter branches never test for '_').
+  '_',
   // Wave 5b: the single-tile house doors (s house, w wood, y brick)
   // become step-warp thresholds now that the houses are enterable.
   // The chars occur ONLY as the 15 town house doors (13 warped, the 2

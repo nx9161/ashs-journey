@@ -33,7 +33,7 @@ MIRROR <other-id>  # optional: derive by horizontal flip
 Counts are the shipped tree as of Wave 0 (2026-10-27): 135 `.pix` sources,
 163 ART keys (135 sources + 28 build-derived `-front-bob` frames; zero
 sourceless keys — the PC Terminal pair has real `.pix` sources now).
-- **tiles**: 13 tiles, 16×16 (family palette budget: ≤48 colors across the tiles family — see contracts below)
+- **tiles**: 13 tiles, 16×16 (family palette budget: ≤72 colors across the tiles family — see contracts below)
 - **ash**: 24 sprites, 16×16, 4 dirs × (2 idle + 4 walk)
 - **partner**: 5 sprites (hop-1/2 16×16, partner-front/back 32×32, refuse 32×16)
 - **brock**: 3 sprites (idle-1/2 16×16, battle 32×48)
@@ -54,9 +54,13 @@ inner-margin, orphan and painted checks are unchanged.
 - **Per-sprite palette cap: ≤32 colors** (was 12) — enforced in both
   `pix.mjs` (declared palette) and `build-art.mjs` (distinct painted hexes).
 - **Per-family palette budget:** the **tiles** family's color union is
-  capped at **≤48 distinct hexes** (was a 16-color tileset-wide cap).
-  Other families have no union cap beyond the per-sprite cap; a new
-  union budget is added per family, deliberately, in `build-art.mjs`.
+  capped at **≤72 distinct hexes** (history: 16-color tileset-wide cap
+  → 48 at Wave 0 → 54 at Wave 5a → **72 at Premium+ W0, 2026-10-28,
+  spec §5** — each raise deliberate and recorded, never silent creep;
+  the union measured 54 at the W0 raise). Other families have no union
+  cap beyond the per-sprite cap; a new union budget is added per
+  family, deliberately, in `build-art.mjs`. `palette-audit.mjs`
+  mirrors the cap.
 - **Character size standard:** overworld characters are authored
   **16×32** on a 1-tile (16px) footprint, drawn bottom-anchored with
   upward overhang (`Renderer.blitCharacter`). Legacy 16×16 art draws
@@ -111,6 +115,27 @@ stops and re-decides before drawing, it does not discover it after.
 **Decision: inline `art-data.mjs` STAYS.** No runtime data-file
 loading is needed — the full redraw lands at under a third of the hard
 gate with the per-wave budgets above as the tripwire.
+
+## Premium+ budget decisions (W0, 2026-10-28 — spec §5, supersede the ceiling above)
+
+- **Internal art-data ceiling raised 3.0 MB → 5.5 MB**, enforced in
+  `assets/sprites/tools/build-art.mjs` (`ART_DATA_CEILING_BYTES`) —
+  the only enforcement site; `budgets.json`'s 12,582,912 B per-bundle
+  hard gate is unchanged. Measured at the raise: art-data 2,671,763 B.
+  Expected Premium+ end state ≈4.7 MB art-data, `game.js` ≈6.0 MB
+  (≈48% of the hard gate); the old "any bundle ≤ 4.2 MB" tripwire is
+  superseded by that projection and the hard gate governs bundles.
+- **Battler idle path: HYBRID (adopted as the recorded plan).** 152
+  authored back-bob frames + hand-authored accent frames for the
+  ~40–60 most-seen species (shipped as layered delta frames — see
+  `tools/pix.mjs` `parseDeltaPix` — not full sprites), and procedural
+  idle classes (≥4 locomotion classes, AN-1) for the rest of the
+  roster. Full-authored (456 extra frames, +2.0–2.3 MB) is the
+  documented fallback if W2's frame-series QA proves the hybrid reads
+  thin; no lazy-load pack is needed at either scope.
+- **Per-wave art-data growth caps** are the spec §4 table (W1 ≤120 KB ·
+  W2 ≤950 KB · W3 ≤220 KB · W4 ≤850 KB · W5 ≤140 KB · W6 ≤160 KB ·
+  W7 ≤60 KB · W8 ≤250 KB).
 
 ## Runtime Transforms (for wiring seat)
 Per contracts.md §1.5, the following are **runtime transforms**, not authored sprites:

@@ -6284,6 +6284,20 @@
       "seed": null,
       "derived_from": "zubat-front",
       "mirror_of": null
+    },
+    "pidgey-front-blink": {
+      "x": 1189,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pidgey-front"
     }
   }
 }

@@ -1381,6 +1381,10 @@ class Renderer {
 
 const TILE_CHARS = {
   '#': 'tree', '.': 'path', ',': 'grass', '~': 'water',
+  // Premium+ W0 (TX-1 prerequisite): '_' = grassground — grass texture,
+  // no encounters (encounter branches key on ',' / '~' / 'W' / '.' / 'R'
+  // only). Walkable ground; W5 re-dresses path cells with it.
+  '_': 'grassground',
   'H': 'house', 'D': 'door', 'S': 'sign', 'G': 'gymwall',
   'E': 'gymdoor', 'C': 'centerdoor', 'F': 'flower', 'R': 'rock',
   'T': 'tree', 'B': 'rock', 'W': 'water',
@@ -1464,6 +1468,15 @@ function paintTile(ctx, kind, px, py) {
       for (let i = 0; i < 8; i++) {
         const x = Math.floor(h2(px + i * 3, py) * 14), y = Math.floor(h2(px, py + i * 5) * 12);
         r(x, y, 2, 3, h2(x, y) > 0.5 ? PAL.grassDark : PAL.grassLight);
+      }
+      break;
+    case 'grassground':
+      // No-art fallback only (the ART path draws tile-grassground):
+      // meadow texture in the grass tones, denser speckle than 'grass'.
+      r(0, 0, T, T, PAL.grassBase);
+      for (let i = 0; i < 12; i++) {
+        const x = Math.floor(h2(px + i * 5, py + 2) * 14), y = Math.floor(h2(px + 7, py + i * 3) * 14);
+        r(x, y, 2, 2, h2(x + 1, y) > 0.5 ? PAL.grassDark : PAL.grassLight);
       }
       break;
     case 'path':
@@ -29969,6 +29982,24 @@ const ART = {
     "gmggggggggggdggg",
     "gddggggggggggggg",
   ] },
+  "tile-grassground": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+    "mmllddddaaaammmm",
+    "mmllddddggggmmmm",
+    "aaddaammaahhlldd",
+    "ggddggmmgghhlldd",
+    "mmddllhhddmmmmhh",
+    "mmddllhhddmmmmhh",
+    "ddllllmmllddllmm",
+    "ddllllmmllddllmm",
+    "aahhddaaddaammdd",
+    "gghhddggddggmmdd",
+    "mmllllaaddmmddhh",
+    "mmllllggddmmddhh",
+    "ddllmmaaddllddll",
+    "ddllmmggddllddll",
+    "llmmddmmllddaahh",
+    "llmmddmmllddgghh",
+  ] },
   "tile-gymdoor": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","k":"#5a3a24"}, rows: [
     "mmmmmmmmmmmmmmmm",
     "mmmzzzzzzzzzzmmm",
@@ -42809,6 +42840,7 @@ const ART = {
     "................................................................",
     "................................................................",
   ] },
+  "pidgey-front-blink": { base: "pidgey-front", w: 64, h: 64, pal: {}, deltas: [[27,20,"Y"],[35,20,"Y"],[36,20,"Y"]] },
 };
 const ART_META = {
   "families": [
@@ -42820,7 +42852,7 @@ const ART_META = {
     "species",
     "ui"
   ],
-  "generated": "2026-10-28",
+  "generated": "2026-10-29",
   "derived_bob": [
     "abra-front-bob",
     "aerodactyl-front-bob",
@@ -42983,6 +43015,9 @@ const ART_META = {
     "wigglytuff-front-bob",
     "zapdos-front-bob",
     "zubat-front-bob"
+  ],
+  "delta_frames": [
+    "pidgey-front-blink"
   ]
 };
 
@@ -43000,6 +43035,33 @@ const ART_META = {
 // Species / tile kinds WITHOUT authored art fall back to the forge painters —
 // those are documented placeholders, never presented as finished art.
 
+
+// ---- Layered delta frames (Premium+ W0, spec §4 W0 item 1) ----
+// ART entries authored as .deltapix ship in delta form:
+//   { base, w, h, pal, deltas: [[x, y, char], ...] }
+// where pal carries ONLY palette keys the base lacks and each delta is a
+// palette-index override ('.' erases to transparent). materializeArt()
+// resolves an entry to the full { w, h, pal, rows } shape every consumer
+// already expects; full entries return as-is (identity — zero behaviour
+// change for all pre-existing art). Results are cached per id; the base
+// chain is depth-1 by build law (build-art rejects a delta base).
+const matCache = new Map();
+function materializeArt(id) {
+  const a = ART[id];
+  if (!a) return null;
+  if (!a.deltas) return a;
+  const hit = matCache.get(id);
+  if (hit) return hit;
+  const base = materializeArt(a.base);
+  if (!base) return null;
+  const rows = base.rows.map((r) => r.split(''));
+  for (const [x, y, ch] of a.deltas) {
+    if (rows[y] && x >= 0 && x < rows[y].length) rows[y][x] = ch;
+  }
+  const out = { w: a.w, h: a.h, pal: { ...base.pal, ...a.pal }, rows: rows.map((r) => r.join('')) };
+  matCache.set(id, out);
+  return out;
+}
 
 const cvCache = new Map();
 
@@ -43022,7 +43084,7 @@ function artCanvas(doc, id, scale, white, swap) {
   const k = artCacheKey(id, scale || 1, !!white, swap);
   const hit = cvCache.get(k);
   if (hit) return hit;
-  const a = ART[id];
+  const a = materializeArt(id);
   if (!a) return null;
   const s = scale || 1;
   const cv = doc.createElement('canvas');
@@ -43237,6 +43299,13 @@ function partnerIdleFrames(doc) {
 // Presentation only: nothing here reads or writes game state.
 const TILE_ART = {
   tree: 'tile-tree', path: 'tile-path', grass: 'tile-grass',
+  // Premium+ W0 (TX-1 prerequisite): grassground — grass-texture ground
+  // with NO encounter behaviour. Encounter code keys on the map CHAR
+  // (',' only; see overworld.mjs onStep / overworld-systems.mjs
+  // sysEncounterStep), and grassground's char '_' is in none of those
+  // branches, so dressing a cell grassground can never create or remove
+  // an encounter. W5 does the re-dress; W0 only wires the kind.
+  grassground: 'tile-grassground',
   house: 'tile-house', door: 'tile-door', sign: 'tile-sign',
   gymwall: 'tile-gymwall', gymdoor: 'tile-gymdoor', centerdoor: 'tile-centerdoor',
   flower: 'tile-flower', rock: 'tile-rock',
@@ -43424,7 +43493,7 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   'porthole', 'slotmachine', 'throne', 'memorial', 'officedesk', 'sofa',
   'stool', 'rug', 'battlemat']);
 function groundFamilyOf(kind) {
-  if (kind === 'grass' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
+  if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
       kind === 'fence' || kind === 'lamp' || kind === 'flowerbed') return 'grass';
   if (kind === 'cavefloor' || kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') return kind;
   if (INTERIOR_FLOORS.has(kind)) return kind;
@@ -43486,6 +43555,27 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t) {
   const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
   const frame = Math.floor((t || 0) / 600);
   switch (kind) {
+    case 'grassground': {
+      // Premium+ W0: textured meadow ground — its own authored tile,
+      // never a tall/encounter variant (isTallGrass applies to the
+      // 'grass' kind only). Building shadow + path dirt-edge dressing
+      // match the base-grass treatment so W5 re-dress blends in.
+      const layers = [cache.grassground || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
+      if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      if (cache.edgeDirt) {
+        const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
+        const used = new Set();
+        for (const c of ['ne', 'se', 'sw', 'nw']) {
+          if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
+            layers.push(cache.edgeDirt[c]); used.add(c[0]); used.add(c[1]);
+          }
+        }
+        for (const d of DIRS) {
+          if (p[d] && !used.has(d) && cache.edgeDirt[d]) layers.push(cache.edgeDirt[d]);
+        }
+      }
+      return layers.filter(Boolean);
+    }
     case 'grass': {
       const layers = [];
       if (isTallGrass(x, y)) {
@@ -43526,7 +43616,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       // ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       if (hashTile(x, y, 22) < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
-      const grassy = (k) => k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
+      const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
       for (const d of DIRS) {
         if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
         // Fringe on ~70% of path cells (position hash): a fringe on every
@@ -45948,6 +46038,9 @@ const MAP_LIST = Object.keys(MAPS);
 // tiles exactly like the legacy D/E/C doors — warps remain
 // coordinate-keyed in each map's warps[] list.
 const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V', 'Y', '4', '5', '7', '8', '9',
+  // Premium+ W0: '_' grassground is walkable ground (grass texture, no
+  // encounters — the encounter branches never test for '_').
+  '_',
   // Wave 5b: the single-tile house doors (s house, w wood, y brick)
   // become step-warp thresholds now that the houses are enterable.
   // The chars occur ONLY as the 15 town house doors (13 warped, the 2
@@ -53581,6 +53674,321 @@ for (const ev of Object.values(EVENTS)) {
   for (const s of steps) {
     if (s.warp && s.warp.map === 'newisland') { s.warp.x = 8; s.warp.y = 9; }
   }
+}
+
+
+// ---- src/engine/fx.mjs ----
+// fx.mjs — Premium+ FX registry (W0 foundations, spec §3 FX-1).
+// GENERATED by ~/workspace/ashs-journey-qa/premium-rig/gen-fx-registry.mjs
+// from src/data/moves.mjs + moves2.mjs — regenerate, do not hand-edit rows.
+// W0 scope: DATA ONLY. No battle code consumes this registry yet, so no
+// current battle behaviour changes; W1 builds the effect player on it.
+// Taxonomy (62 definitions): 15 type kits + 8 contact archetypes +
+// 12 status visuals + 20 signature treatments + 7 condition overlays.
+// Every one of the 144 moves resolves to exactly one primary effect id
+// (MOVE_FX); fxPlanForMove() additionally reports the move's type kit,
+// contact archetype (physical moves) and condition overlay (from the
+// move's own effect data), which is how W1 layers kit + delivery +
+// condition without a second table. Every sequence carries a marked
+// truncation point (truncateMs ≈ 65%) per FX-1's repeat-use rule.
+// Assignment priority: signature > status visual / condition (status
+// moves) > contact archetype (physical) > type kit (special). Splash
+// resolves to kit.normal: the famous no-op still owns an effect slot —
+// no move may resolve to "no effect".
+// Definition rows are PARAMETER STUBS in W0 (palette / silhouette /
+// duration / particle budget); W1 authors the full procedural recipes.
+const FX_DEFS = {
+  "kit.bug": { id: "kit.bug", kind: "type-kit", label: "kit.bug", colors: ["#a8c828","#688818","#e0f088"], shape: "needle-fan", travel: "needle-stream", impact: "spore-puff", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.dragon": { id: "kit.dragon", kind: "type-kit", label: "kit.dragon", colors: ["#7860f0","#4028b8","#c0b0ff"], shape: "fang-arc", travel: "draco-stream", impact: "fang-burst", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.electric": { id: "kit.electric", kind: "type-kit", label: "kit.electric", colors: ["#f8e038","#e8a818","#fff8b0"], shape: "bolt-zigzag", travel: "arc-bolt", impact: "spark-fan", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.fighting": { id: "kit.fighting", kind: "type-kit", label: "kit.fighting", colors: ["#e06848","#a82818","#f8b898"], shape: "fist-arc", travel: "dash-line", impact: "shock-ring", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.fire": { id: "kit.fire", kind: "type-kit", label: "kit.fire", colors: ["#f08030","#e84818","#f8d050"], shape: "flame-tongues", travel: "ember-stream", impact: "flame-bloom", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.flying": { id: "kit.flying", kind: "type-kit", label: "kit.flying", colors: ["#a8c8f8","#6890d8","#e8f2ff"], shape: "feather-fan", travel: "gust-arc", impact: "feather-scatter", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.ghost": { id: "kit.ghost", kind: "type-kit", label: "kit.ghost", colors: ["#8878c8","#483878","#c8b8f0"], shape: "wisp-trail", travel: "wisp-drift", impact: "wisp-bloom", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.grass": { id: "kit.grass", kind: "type-kit", label: "kit.grass", colors: ["#58b838","#2e7a28","#b8e888"], shape: "leaf-swirl", travel: "leaf-stream", impact: "petal-scatter", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.ground": { id: "kit.ground", kind: "type-kit", label: "kit.ground", colors: ["#d8b058","#987838","#f0e0a0"], shape: "crack-fan", travel: "ground-wave", impact: "dust-plume", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.ice": { id: "kit.ice", kind: "type-kit", label: "kit.ice", colors: ["#78d8e8","#38a8c8","#e8fbff"], shape: "shard-fan", travel: "shard-stream", impact: "frost-star", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.normal": { id: "kit.normal", kind: "type-kit", label: "kit.normal", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "burst-star", travel: "none-contact", impact: "ring-burst", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.poison": { id: "kit.poison", kind: "type-kit", label: "kit.poison", colors: ["#b058c8","#7030a0","#e0a8f0"], shape: "bubble-cluster", travel: "glob-stream", impact: "bubble-pop", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.psychic": { id: "kit.psychic", kind: "type-kit", label: "kit.psychic", colors: ["#f858a8","#c02878","#ffc0e0"], shape: "wave-rings", travel: "pulse-wave", impact: "ring-collapse", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.rock": { id: "kit.rock", kind: "type-kit", label: "kit.rock", colors: ["#c8b088","#887848","#e8dcc0"], shape: "chunk-cluster", travel: "chunk-arc", impact: "rubble-burst", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "kit.water": { id: "kit.water", kind: "type-kit", label: "kit.water", colors: ["#3890f0","#2050c8","#a8d8f8"], shape: "droplet-arc", travel: "jet-stream", impact: "splash-crown", durationMs: 360, truncateMs: 234, maxParticles: 24 },
+  "contact.bite": { id: "contact.bite", kind: "contact", label: "Bite", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "jaw-snap", desc: "jaw snap at contact", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "contact.grapple": { id: "contact.grapple", kind: "contact", label: "Grapple", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "coil-wrap", desc: "wrap/coil contact, sustained squeeze pulses", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "contact.multihit": { id: "contact.multihit", kind: "contact", label: "Multi-hit", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "hit-chain", desc: "per-hit bursts, one per strike", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "contact.pierce": { id: "contact.pierce", kind: "contact", label: "Pierce", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "point-thrust", desc: "narrow thrust + puncture star", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "contact.slam": { id: "contact.slam", kind: "contact", label: "Slam", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "body-slam", desc: "full-body displacement + ground ring", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "contact.slash": { id: "contact.slash", kind: "contact", label: "Slash", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "edge-arc", desc: "diagonal edge arc", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "contact.strike": { id: "contact.strike", kind: "contact", label: "Strike", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "jab-burst", desc: "short lunge + point burst", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "contact.sweep": { id: "contact.sweep", kind: "contact", label: "Sweep", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "wide-arc", desc: "wide low arc (wing / whip / low kick)", durationMs: 300, truncateMs: 195, maxParticles: 18 },
+  "vis.disable-mark": { id: "vis.disable-mark", kind: "status", label: "Disable mark", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "seal-mark", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.focus-glow": { id: "vis.focus-glow", kind: "status", label: "Focus glow", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "eye-glint", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.foe-shimmer": { id: "vis.foe-shimmer", kind: "status", label: "Foe shimmer (foe lower / inflict)", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "falling-shimmer", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.haze-clear": { id: "vis.haze-clear", kind: "status", label: "Haze clear", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "field-wipe", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.heal-sparkle": { id: "vis.heal-sparkle", kind: "status", label: "Heal sparkle", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "sparkle-rise", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.mist-veil": { id: "vis.mist-veil", kind: "status", label: "Mist veil", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "veil-drape", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.seed-attach": { id: "vis.seed-attach", kind: "status", label: "Seed attach", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "seed-latch", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.sleep-zzz": { id: "vis.sleep-zzz", kind: "status", label: "Sleep Zzz (infliction)", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "zzz-drift", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.stat-aura": { id: "vis.stat-aura", kind: "status", label: "Stat aura (self raise)", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "rising-aura", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.substitute-doll": { id: "vis.substitute-doll", kind: "status", label: "Substitute doll", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "doll-pop", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.transform-flash": { id: "vis.transform-flash", kind: "status", label: "Transform flash", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "form-flash", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "vis.wall-screen": { id: "vis.wall-screen", kind: "status", label: "Wall / screen", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "screen-panel", durationMs: 420, truncateMs: 273, maxParticles: 16 },
+  "sig.blizzard": { id: "sig.blizzard", kind: "signature", label: "Blizzard signature", colors: ["#78d8e8","#38a8c8","#e8fbff"], shape: "signature-ice", travel: "shard-stream", impact: "frost-star", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.doubleedge": { id: "sig.doubleedge", kind: "signature", label: "Double-Edge signature", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "signature-normal", travel: "none-contact", impact: "ring-burst", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.dreameater": { id: "sig.dreameater", kind: "signature", label: "Dream Eater signature", colors: ["#f858a8","#c02878","#ffc0e0"], shape: "signature-psychic", travel: "pulse-wave", impact: "ring-collapse", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.earthquake": { id: "sig.earthquake", kind: "signature", label: "Earthquake signature", colors: ["#d8b058","#987838","#f0e0a0"], shape: "signature-ground", travel: "ground-wave", impact: "dust-plume", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.explosion": { id: "sig.explosion", kind: "signature", label: "Explosion signature", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "signature-normal", travel: "none-contact", impact: "ring-burst", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.fireblast": { id: "sig.fireblast", kind: "signature", label: "Fire Blast signature", colors: ["#f08030","#e84818","#f8d050"], shape: "signature-fire", travel: "ember-stream", impact: "flame-bloom", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.fissure": { id: "sig.fissure", kind: "signature", label: "Fissure signature", colors: ["#d8b058","#987838","#f0e0a0"], shape: "signature-ground", travel: "ground-wave", impact: "dust-plume", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.flamethrower": { id: "sig.flamethrower", kind: "signature", label: "Flamethrower signature", colors: ["#f08030","#e84818","#f8d050"], shape: "signature-fire", travel: "ember-stream", impact: "flame-bloom", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.guillotine": { id: "sig.guillotine", kind: "signature", label: "Guillotine signature", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "signature-normal", travel: "none-contact", impact: "ring-burst", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.horndrill": { id: "sig.horndrill", kind: "signature", label: "Horn Drill signature", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "signature-normal", travel: "none-contact", impact: "ring-burst", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.hydropump": { id: "sig.hydropump", kind: "signature", label: "Hydro Pump signature", colors: ["#3890f0","#2050c8","#a8d8f8"], shape: "signature-water", travel: "jet-stream", impact: "splash-crown", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.hyperbeam": { id: "sig.hyperbeam", kind: "signature", label: "Hyper Beam signature", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "signature-normal", travel: "none-contact", impact: "ring-burst", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.megakick": { id: "sig.megakick", kind: "signature", label: "Mega Kick signature", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "signature-normal", travel: "none-contact", impact: "ring-burst", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.petaldance": { id: "sig.petaldance", kind: "signature", label: "Petal Dance signature", colors: ["#58b838","#2e7a28","#b8e888"], shape: "signature-grass", travel: "leaf-stream", impact: "petal-scatter", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.psychic": { id: "sig.psychic", kind: "signature", label: "Psychic signature", colors: ["#f858a8","#c02878","#ffc0e0"], shape: "signature-psychic", travel: "pulse-wave", impact: "ring-collapse", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.selfdestruct": { id: "sig.selfdestruct", kind: "signature", label: "Self-Destruct signature", colors: ["#e8e8f0","#a8a8c0","#ffffff"], shape: "signature-normal", travel: "none-contact", impact: "ring-burst", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.skyattack": { id: "sig.skyattack", kind: "signature", label: "Sky Attack signature", colors: ["#a8c8f8","#6890d8","#e8f2ff"], shape: "signature-flying", travel: "gust-arc", impact: "feather-scatter", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.solarbeam": { id: "sig.solarbeam", kind: "signature", label: "Solar Beam signature", colors: ["#58b838","#2e7a28","#b8e888"], shape: "signature-grass", travel: "leaf-stream", impact: "petal-scatter", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.surf": { id: "sig.surf", kind: "signature", label: "Surf signature", colors: ["#3890f0","#2050c8","#a8d8f8"], shape: "signature-water", travel: "jet-stream", impact: "splash-crown", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "sig.thunder": { id: "sig.thunder", kind: "signature", label: "Thunder signature", colors: ["#f8e038","#e8a818","#fff8b0"], shape: "signature-electric", travel: "arc-bolt", impact: "spark-fan", durationMs: 800, truncateMs: 520, maxParticles: 48 },
+  "cond.burn": { id: "cond.burn", kind: "condition", label: "Burn embers", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "ember-rise", durationMs: 0, truncateMs: 0, maxParticles: 10, persistent: true },
+  "cond.confusion": { id: "cond.confusion", kind: "condition", label: "Confusion stars", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "star-orbit", durationMs: 0, truncateMs: 0, maxParticles: 10, persistent: true },
+  "cond.freeze": { id: "cond.freeze", kind: "condition", label: "Freeze ice", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "ice-shell", durationMs: 0, truncateMs: 0, maxParticles: 10, persistent: true },
+  "cond.paralysis": { id: "cond.paralysis", kind: "condition", label: "Paralysis sparks", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "spark-jitter", durationMs: 0, truncateMs: 0, maxParticles: 10, persistent: true },
+  "cond.poison": { id: "cond.poison", kind: "condition", label: "Poison bubbles", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "bubble-rise", durationMs: 0, truncateMs: 0, maxParticles: 10, persistent: true },
+  "cond.seeded": { id: "cond.seeded", kind: "condition", label: "Seeded vines", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "vine-creep", durationMs: 0, truncateMs: 0, maxParticles: 10, persistent: true },
+  "cond.sleep": { id: "cond.sleep", kind: "condition", label: "Sleep Zzz", colors: ["#ffffff","#c8c8d8","#8888a8"], shape: "zzz-loop", durationMs: 0, truncateMs: 0, maxParticles: 10, persistent: true },
+};
+
+const MOVE_FX = {
+  "absorb": "kit.grass",
+  "acid": "kit.poison",
+  "acidarmor": "vis.stat-aura",
+  "agility": "vis.stat-aura",
+  "amnesia": "vis.stat-aura",
+  "aurorabeam": "kit.ice",
+  "barrier": "vis.stat-aura",
+  "bide": "contact.strike",
+  "bind": "contact.grapple",
+  "bite": "contact.bite",
+  "blizzard": "sig.blizzard",
+  "bodyslam": "contact.slam",
+  "boneclub": "contact.strike",
+  "bonemerang": "contact.multihit",
+  "bubble": "kit.water",
+  "bubblebeam": "kit.water",
+  "clamp": "contact.grapple",
+  "cometpunch": "contact.multihit",
+  "confuseray": "cond.confusion",
+  "confusion": "kit.psychic",
+  "constrict": "contact.grapple",
+  "conversion": "vis.transform-flash",
+  "counter": "contact.strike",
+  "cut": "contact.slash",
+  "defensecurl": "vis.stat-aura",
+  "dig": "contact.strike",
+  "disable": "vis.disable-mark",
+  "doubleedge": "sig.doubleedge",
+  "doubleslap": "contact.multihit",
+  "doubletam": "vis.stat-aura",
+  "dragonrage": "kit.dragon",
+  "dreameater": "sig.dreameater",
+  "drillpeck": "contact.pierce",
+  "earthquake": "sig.earthquake",
+  "eggbomb": "contact.strike",
+  "ember": "kit.fire",
+  "explosion": "sig.explosion",
+  "fireblast": "sig.fireblast",
+  "firepunch": "contact.strike",
+  "firespin": "kit.fire",
+  "fissure": "sig.fissure",
+  "flamethrower": "sig.flamethrower",
+  "flash": "vis.foe-shimmer",
+  "fly": "contact.sweep",
+  "focusenergy": "vis.focus-glow",
+  "furyattack": "contact.multihit",
+  "glare": "cond.paralysis",
+  "growl": "vis.foe-shimmer",
+  "growth": "vis.stat-aura",
+  "guillotine": "sig.guillotine",
+  "gust": "kit.flying",
+  "harden": "vis.stat-aura",
+  "haze": "vis.haze-clear",
+  "headbutt": "contact.strike",
+  "horndrill": "sig.horndrill",
+  "hydropump": "sig.hydropump",
+  "hyperbeam": "sig.hyperbeam",
+  "hypnosis": "vis.sleep-zzz",
+  "icebeam": "kit.ice",
+  "icepunch": "contact.strike",
+  "karatechop": "contact.slash",
+  "kinesis": "vis.foe-shimmer",
+  "leechlife": "contact.grapple",
+  "leechseed": "vis.seed-attach",
+  "leer": "vis.foe-shimmer",
+  "lick": "contact.strike",
+  "lightscreen": "vis.wall-screen",
+  "lovelykiss": "vis.sleep-zzz",
+  "lowkick": "contact.sweep",
+  "meditate": "vis.stat-aura",
+  "megadrain": "kit.grass",
+  "megakick": "sig.megakick",
+  "megapunch": "contact.strike",
+  "metronome": "vis.transform-flash",
+  "mimic": "vis.transform-flash",
+  "minimize": "vis.stat-aura",
+  "mist": "vis.mist-veil",
+  "nightshade": "kit.ghost",
+  "payday": "contact.strike",
+  "peck": "contact.pierce",
+  "petaldance": "sig.petaldance",
+  "pinmissile": "contact.multihit",
+  "poisonpowder": "cond.poison",
+  "poisonsting": "contact.pierce",
+  "pound": "contact.strike",
+  "psybeam": "kit.psychic",
+  "psychic": "sig.psychic",
+  "psywave": "kit.psychic",
+  "quickattack": "contact.strike",
+  "rage": "contact.strike",
+  "razorleaf": "contact.slash",
+  "razorwind": "kit.normal",
+  "recover": "vis.heal-sparkle",
+  "reflect": "vis.wall-screen",
+  "rest": "vis.heal-sparkle",
+  "rockslide": "contact.strike",
+  "rockthrow": "contact.strike",
+  "sandattack": "vis.foe-shimmer",
+  "scratch": "contact.slash",
+  "screech": "vis.foe-shimmer",
+  "seismictoss": "contact.grapple",
+  "selfdestruct": "sig.selfdestruct",
+  "sing": "vis.sleep-zzz",
+  "skullbash": "contact.slam",
+  "skyattack": "sig.skyattack",
+  "slam": "contact.slam",
+  "slash": "contact.slash",
+  "sleeppowder": "vis.sleep-zzz",
+  "sludge": "kit.poison",
+  "smog": "kit.poison",
+  "smokescreen": "vis.foe-shimmer",
+  "softboiled": "vis.heal-sparkle",
+  "solarbeam": "sig.solarbeam",
+  "splash": "kit.normal",
+  "spore": "vis.sleep-zzz",
+  "stomp": "contact.slam",
+  "strength": "contact.slam",
+  "stringshot": "vis.foe-shimmer",
+  "stunspore": "cond.paralysis",
+  "submission": "contact.grapple",
+  "substitute": "vis.substitute-doll",
+  "supersonic": "cond.confusion",
+  "surf": "sig.surf",
+  "swift": "kit.normal",
+  "swordsdance": "vis.stat-aura",
+  "tackle": "contact.slam",
+  "tailwhip": "vis.foe-shimmer",
+  "takedown": "contact.slam",
+  "teleport": "vis.transform-flash",
+  "thunder": "sig.thunder",
+  "thunderbolt": "kit.electric",
+  "thunderpunch": "contact.strike",
+  "thundershock": "kit.electric",
+  "thunderwave": "cond.paralysis",
+  "toxic": "cond.poison",
+  "transform": "vis.transform-flash",
+  "triattack": "kit.normal",
+  "twineedle": "contact.multihit",
+  "vinewhip": "contact.sweep",
+  "watergun": "kit.water",
+  "whirlwind": "vis.foe-shimmer",
+  "wingattack": "contact.sweep",
+  "withdraw": "vis.stat-aura",
+  "wrap": "contact.grapple",
+};
+
+// Contact archetype per physical move (null for non-physical moves) —
+// the delivery layer of fxPlanForMove; MOVE_FX already encodes it as
+// the primary for non-signature physical moves.
+const MOVE_ARCH = {
+  "bide": "strike",
+  "bind": "grapple",
+  "bite": "bite",
+  "bodyslam": "slam",
+  "boneclub": "strike",
+  "bonemerang": "multihit",
+  "clamp": "grapple",
+  "cometpunch": "multihit",
+  "constrict": "grapple",
+  "counter": "strike",
+  "cut": "slash",
+  "dig": "strike",
+  "doubleslap": "multihit",
+  "drillpeck": "pierce",
+  "eggbomb": "strike",
+  "firepunch": "strike",
+  "fly": "sweep",
+  "furyattack": "multihit",
+  "headbutt": "strike",
+  "icepunch": "strike",
+  "karatechop": "slash",
+  "leechlife": "grapple",
+  "lick": "strike",
+  "lowkick": "sweep",
+  "megapunch": "strike",
+  "payday": "strike",
+  "peck": "pierce",
+  "pinmissile": "multihit",
+  "poisonsting": "pierce",
+  "pound": "strike",
+  "quickattack": "strike",
+  "rage": "strike",
+  "razorleaf": "slash",
+  "rockslide": "strike",
+  "rockthrow": "strike",
+  "scratch": "slash",
+  "seismictoss": "grapple",
+  "skullbash": "slam",
+  "slam": "slam",
+  "slash": "slash",
+  "stomp": "slam",
+  "strength": "slam",
+  "submission": "grapple",
+  "tackle": "slam",
+  "takedown": "slam",
+  "thunderpunch": "strike",
+  "twineedle": "multihit",
+  "vinewhip": "sweep",
+  "wingattack": "sweep",
+  "wrap": "grapple",
+};
+
+const FX_CONDITION_BY_STATUS = { burn: 'cond.burn', poison: 'cond.poison', badlyPoisoned: 'cond.poison', paralysis: 'cond.paralysis', sleep: 'cond.sleep', freeze: 'cond.freeze', confusion: 'cond.confusion' };
+
+// Resolve a move id to its primary effect definition (never null for a
+// known move; null only for an unknown id, so callers fail visibly).
+function fxDefForMove(moveId) {
+  const fx = MOVE_FX[moveId];
+  return fx ? FX_DEFS[fx] : null;
+}
+
+// Full presentation plan for a move object (from MOVES): primary effect
+// + type kit + contact archetype + condition overlay the move applies.
+function fxPlanForMove(move) {
+  if (!move || !move.id) return null;
+  const ef = move.effect || {};
+  let condition = null;
+  if (ef.seed) condition = 'cond.seeded';
+  else if (ef.status) condition = FX_CONDITION_BY_STATUS[ef.status] || null;
+  else if (Array.isArray(ef.statusAny) && ef.statusAny.length) condition = FX_CONDITION_BY_STATUS[ef.statusAny[0]] || null;
+  return {
+    primary: MOVE_FX[move.id] || null,
+    kit: 'kit.' + move.type,
+    archetype: MOVE_ARCH[move.id] ? 'contact.' + MOVE_ARCH[move.id] : null,
+    condition,
+  };
 }
 
 

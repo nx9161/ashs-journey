@@ -15,6 +15,33 @@ import { forgeSprite, forgeHumanoid } from './sprites.mjs';
 import { paintTile } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 
+// ---- Layered delta frames (Premium+ W0, spec §4 W0 item 1) ----
+// ART entries authored as .deltapix ship in delta form:
+//   { base, w, h, pal, deltas: [[x, y, char], ...] }
+// where pal carries ONLY palette keys the base lacks and each delta is a
+// palette-index override ('.' erases to transparent). materializeArt()
+// resolves an entry to the full { w, h, pal, rows } shape every consumer
+// already expects; full entries return as-is (identity — zero behaviour
+// change for all pre-existing art). Results are cached per id; the base
+// chain is depth-1 by build law (build-art rejects a delta base).
+const matCache = new Map();
+export function materializeArt(id) {
+  const a = ART[id];
+  if (!a) return null;
+  if (!a.deltas) return a;
+  const hit = matCache.get(id);
+  if (hit) return hit;
+  const base = materializeArt(a.base);
+  if (!base) return null;
+  const rows = base.rows.map((r) => r.split(''));
+  for (const [x, y, ch] of a.deltas) {
+    if (rows[y] && x >= 0 && x < rows[y].length) rows[y][x] = ch;
+  }
+  const out = { w: a.w, h: a.h, pal: { ...base.pal, ...a.pal }, rows: rows.map((r) => r.join('')) };
+  matCache.set(id, out);
+  return out;
+}
+
 const cvCache = new Map();
 
 function artCacheKey(id, scale, white, swap) {
@@ -36,7 +63,7 @@ export function artCanvas(doc, id, scale, white, swap) {
   const k = artCacheKey(id, scale || 1, !!white, swap);
   const hit = cvCache.get(k);
   if (hit) return hit;
-  const a = ART[id];
+  const a = materializeArt(id);
   if (!a) return null;
   const s = scale || 1;
   const cv = doc.createElement('canvas');
@@ -251,6 +278,13 @@ export function partnerIdleFrames(doc) {
 // Presentation only: nothing here reads or writes game state.
 const TILE_ART = {
   tree: 'tile-tree', path: 'tile-path', grass: 'tile-grass',
+  // Premium+ W0 (TX-1 prerequisite): grassground — grass-texture ground
+  // with NO encounter behaviour. Encounter code keys on the map CHAR
+  // (',' only; see overworld.mjs onStep / overworld-systems.mjs
+  // sysEncounterStep), and grassground's char '_' is in none of those
+  // branches, so dressing a cell grassground can never create or remove
+  // an encounter. W5 does the re-dress; W0 only wires the kind.
+  grassground: 'tile-grassground',
   house: 'tile-house', door: 'tile-door', sign: 'tile-sign',
   gymwall: 'tile-gymwall', gymdoor: 'tile-gymdoor', centerdoor: 'tile-centerdoor',
   flower: 'tile-flower', rock: 'tile-rock',
@@ -438,7 +472,7 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   'porthole', 'slotmachine', 'throne', 'memorial', 'officedesk', 'sofa',
   'stool', 'rug', 'battlemat']);
 function groundFamilyOf(kind) {
-  if (kind === 'grass' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
+  if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
       kind === 'fence' || kind === 'lamp' || kind === 'flowerbed') return 'grass';
   if (kind === 'cavefloor' || kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') return kind;
   if (INTERIOR_FLOORS.has(kind)) return kind;
@@ -500,6 +534,27 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
   const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
   const frame = Math.floor((t || 0) / 600);
   switch (kind) {
+    case 'grassground': {
+      // Premium+ W0: textured meadow ground — its own authored tile,
+      // never a tall/encounter variant (isTallGrass applies to the
+      // 'grass' kind only). Building shadow + path dirt-edge dressing
+      // match the base-grass treatment so W5 re-dress blends in.
+      const layers = [cache.grassground || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
+      if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      if (cache.edgeDirt) {
+        const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
+        const used = new Set();
+        for (const c of ['ne', 'se', 'sw', 'nw']) {
+          if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
+            layers.push(cache.edgeDirt[c]); used.add(c[0]); used.add(c[1]);
+          }
+        }
+        for (const d of DIRS) {
+          if (p[d] && !used.has(d) && cache.edgeDirt[d]) layers.push(cache.edgeDirt[d]);
+        }
+      }
+      return layers.filter(Boolean);
+    }
     case 'grass': {
       const layers = [];
       if (isTallGrass(x, y)) {
@@ -540,7 +595,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       // ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       if (hashTile(x, y, 22) < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
-      const grassy = (k) => k === 'grass' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
+      const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
       for (const d of DIRS) {
         if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
         // Fringe on ~70% of path cells (position hash): a fringe on every

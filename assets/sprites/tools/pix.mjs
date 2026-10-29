@@ -143,6 +143,80 @@ export function orphanCount(s) {
   return orphans;
 }
 
+// ---- Layered delta frames (Premium+ W0, spec §4 W0 / §3 AN-1) ----
+// A delta frame ships ONLY the pixels that differ from a base sprite:
+// accent/idle frames (blink, ear, flame, wing) cost a handful of palette-
+// index entries instead of a full 64x64 sprite (~4-5 KB). Source format
+// (.deltapix):
+//   PIXD <id> <base-id> <w> <h>
+//   <x> <y> <char>        one override per line; char '.' erases to
+//                         transparent; any other char must be declared
+//                         in this file's PAL or inherited from the base
+//   PAL
+//   <CHAR> <#rrggbb> [name]   ONLY keys the base does not already carry
+//                             (the section may be empty)
+// The base must be a full (non-delta) sprite of identical dimensions.
+// Materialization is pure: base rows with each override applied, palette
+// = base palette overlaid with the delta's own keys.
+export function parseDeltaPix(text, path) {
+  const lines = text.split('\n').map((l) => l.replace(/\r$/, ''));
+  let i = 0;
+  while (i < lines.length && (lines[i].trim() === '' || lines[i].trim().startsWith('#'))) i++;
+  const head = (lines[i++] || '').trim().split(/\s+/);
+  if (head[0] !== 'PIXD' || head.length < 5) {
+    throw new Error(`${path}: bad header, want "PIXD <id> <base-id> <w> <h>"`);
+  }
+  const [, id, base, ws, hs] = head;
+  const w = +ws, h = +hs;
+  if (!id || !base || !Number.isInteger(w) || !Number.isInteger(h) || w <= 0 || h <= 0 || w > 256 || h > 256) {
+    throw new Error(`${path}: bad dimensions in header`);
+  }
+  const deltas = [];
+  const seen = new Set();
+  while (i < lines.length && lines[i].trim() !== 'PAL') {
+    const t = lines[i++].trim();
+    if (t === '' || t.startsWith('#')) continue;
+    const [xs, ys, ch] = t.split(/\s+/);
+    const x = +xs, y = +ys;
+    if (!Number.isInteger(x) || !Number.isInteger(y) || x < 0 || y < 0 || x >= w || y >= h) {
+      throw new Error(`${path}: delta coord out of bounds "${t}"`);
+    }
+    if (!ch || ch.length !== 1) throw new Error(`${path}: bad delta char in "${t}"`);
+    const key = x + ',' + y;
+    if (seen.has(key)) throw new Error(`${path}: duplicate delta coord ${key}`);
+    seen.add(key);
+    deltas.push([x, y, ch]);
+  }
+  if (i >= lines.length) throw new Error(`${path}: want PAL section after deltas`);
+  i++; // consume PAL
+  const pal = {};
+  while (i < lines.length) {
+    const t = lines[i++].trim();
+    if (t === '' || t.startsWith('#')) continue;
+    const [ch, hex, ...name] = t.split(/\s+/);
+    if (!ch || ch.length !== 1 || !/^#[0-9a-fA-F]{6}$/.test(hex || '')) {
+      throw new Error(`${path}: bad palette line "${t}"`);
+    }
+    if (ch === '.') throw new Error(`${path}: '.' is reserved for transparency`);
+    pal[ch] = { hex: hex.toLowerCase(), name: name.join(' ') || ch };
+  }
+  if (Object.keys(pal).length > 32) throw new Error(`${path}: palette cap violated: ${Object.keys(pal).length} > 32`);
+  deltas.sort((a, b) => (a[1] - b[1]) || (a[0] - b[0]));
+  return { id, base, w, h, deltas, pal, path };
+}
+
+// Materialize a delta against its parsed base sprite -> full rows.
+export function materializeDeltaRows(baseSprite, delta) {
+  const rows = baseSprite.rows.map((r) => r.split(''));
+  for (const [x, y, ch] of delta.deltas) rows[y][x] = ch;
+  return rows.map((r) => r.join(''));
+}
+
+// Palette a delta sprite renders with: base keys overlaid by delta keys.
+export function mergedDeltaPal(baseSprite, delta) {
+  return { ...baseSprite.pal, ...delta.pal };
+}
+
 export function paintedCount(s) {
   let n = 0;
   for (const row of s.rows) for (const ch of row) if (ch !== '.') n++;

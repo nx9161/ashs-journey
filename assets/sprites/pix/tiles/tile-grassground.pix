@@ -1,0 +1,30 @@
+# Wave Premium+ W0 (TX-1 prerequisite): grassground — grass texture, NO encounters.
+# Meadow dressing ground: same grass hex family as tile-grass (union-neutral),
+# cluster-stamp texture distinct from the encounter-grass variants. Placed on
+# map char _ (see tiles.mjs); the encounter code paths key on the , char only.
+PIX tile-grassground 16 16
+mmllddddaaaammmm
+mmllddddggggmmmm
+aaddaammaahhlldd
+ggddggmmgghhlldd
+mmddllhhddmmmmhh
+mmddllhhddmmmmhh
+ddllllmmllddllmm
+ddllllmmllddllmm
+aahhddaaddaammdd
+gghhddggddggmmdd
+mmllllaaddmmddhh
+mmllllggddmmddhh
+ddllmmaaddllddll
+ddllmmggddllddll
+llmmddmmllddaahh
+llmmddmmllddgghh
+PAL
+g #5da24a grass
+d #4c8a3e grass
+l #6fb45c grass
+m #67aa54 grass
+h #79c168 grass
+a #8acb74 grass
+s #386e2c grass
+e #2f6127 grass

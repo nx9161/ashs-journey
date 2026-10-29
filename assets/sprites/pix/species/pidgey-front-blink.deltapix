@@ -1,0 +1,11 @@
+# pidgey-front-blink — Premium+ W0 delta-format proof (spec §4 W0 item 1).
+# A blink accent for pidgey-front: the three white eye-glint pixels close
+# to the dark eye tone (Y, already in the base palette). Ships as 3
+# palette-index deltas instead of a full 64x64 sprite. NOT wired to any
+# battle presentation in W0 (foundations only) — W2 authors the real
+# accent set on this format.
+PIXD pidgey-front-blink pidgey-front 64 64
+27 20 Y
+35 20 Y
+36 20 Y
+PAL
