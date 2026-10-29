@@ -7535,3 +7535,164 @@ bisect trigger, not a baseline.
   **7,142,527 bytes**. **personal/ byte-identical** (md5
   verified against the pre-work snapshot; untouched —
   vercel+guest targets only). NOT pushed, NOT deployed.
+
+## Arc 2 Stage J7a — CAMPAIGN GATE: the continuous chain drive through Johto + the complete battery (2026-10-29)
+
+### 1. What this stage is
+
+Proof only — no game code changed. The Foundation mission's closing
+proof (the independent chain drive,
+`~/workspace/ashs-journey-qa/arc-chain-qa/chain-drive.mjs`, 48/48
+through Orange) is extended through Arc 2 on **one continuous save**,
+and the **complete battery** is run without exception. Base:
+`main @ 6f4d26d` (J6.5). NOT pushed, NOT deployed.
+
+### 2. The chain drive: 88/88 on one save
+
+48 existing checks (C01–C40 + D01–D08) + 40 new Johto checks
+(J01–J40), all green, exit 0. The save runs: Kanto complete → card →
+directive → Homecoming #1 → Orange (4 Crew badges → Drake → Lugia
+arc → completion) → Homecoming #2 → Pallet dock embark (CAPT JOHTO)
+→ New Bark arrival (Elm) → the full Johto spine in order: Sprout
+Tower → Falkner (1) → Slowpoke Well + Kurt + GS Ball delivered →
+Bugsy (2) → Whitney (3) → Burned Tower awakening → Morty (4) →
+Silver in Ilex → medicine errand → Chuck (5) → delivery → Jasmine
+(6) → Red Gyarados (caught) → Rocket Hideout (cleared on the
+`rocket-hideout` map) → Pryce (7) → Radio Tower takeover (locked
+floor → Director rescue → Card Key → fake Director) → Clair (badge
+count still 7 after the gym) → Dragon's Den test → Rising (8) →
+route-silver gate → Silver Conference (registration, both
+qualifiers) → **Gary victory** → Harrison faced (honest branch:
+lost, honours stand) → `johto_complete` → ARC COMPLETE card →
+Hoenn directive → Homecoming #3 (hook delivered, Arc 3 sealed, no
+dangling state). Still on the same save, the systems + arcs proofs:
+the Day-Care gift egg received (Smoochum) and **hatched at Lv101**
+on the real step hook; a Red Apricorn picked at the Azalea tree →
+Kurt order → 250 steps → Level Ball collected and **used in a real
+catch attempt** (thrown through the battle bag menu, bag count
+drops); the **Raikou arc completed** (signs proven order-locked —
+the second witness files nothing before the first — then the Lv178
+face caught at National Park); the **Celebi arc completed** (Kurt
+returns the GS Ball, whereabouts chain exact; the Lv170 shrine
+catch; the empty GS Ball stays in the bag).
+
+**End-state assertions (J40 + D08, on the final snapshot):**
+`regionsDone = [kanto, orange, johto]` exactly; `badges.johto` =
+the 8 badges in earn order; dex caught includes Raikou (243) and
+Celebi (251); the final save validates through **both** the server
+validator (`api/_lib/validator.mjs`) and the client schema
+(D08, whose snapshot now sits at the true end of the drive).
+
+### 3. Two drive changes, both named
+
+1. **C28 superseded (J4a registry flip).** At `6f4d26d` the
+   unmodified drive stood at **47/48**: C28 — written at Foundation,
+   when Johto was sealed — asserted Homecoming #2 leaves
+   `arc = orange` with no embark. Since J4a shipped the arc, the
+   same homecoming advances `arc = johto` and arms `embark_johto`
+   (johto-story **B01** proves the identical flow on the true
+   path). C28 now asserts the shipped behaviour, keeping its
+   subject (hook delivered in dialogue: GS Ball / Kurt / Azalea;
+   directive cleared). This is the stage suites' own supersession
+   practice (cf. johto-story A15/A18), recorded here, not a
+   weakening: every other C/D check is byte-untouched.
+2. **J05 driver idiom.** The Sprout monks are trainer NPCs; the
+   chain's legacy `talk()` only narrates when `sysNpc` declines,
+   so the monks never battled. The extension drives them with
+   johto-story's own `talk()` idiom (the `startTrainerBattle`
+   fallback). No assertion changed; the gauntlet, the Elder, and
+   `sprout_tower_done` are all proven on the real trainer path.
+
+### 4. The complete battery (this tree, 2026-10-29)
+
+| Suite | Result | Note |
+|---|---|---|
+| chain-drive (J7a) | **88/88** | §2 above |
+| arc-foundation-checks | 47/47 | |
+| battle-model-checks | **45/45** | the J6.5 gate holds |
+| campaign-smoke | **24/24** | |
+| cheat-shop-checks | 44/44 | |
+| fidelity-checks | 35/35 | |
+| johto-story-checks | 110/110 | |
+| johto-systems-checks | 62/62 | |
+| orange-story-checks | 38/38 | |
+| orange-climax-checks | 42/42 | |
+| qa-changed-flows | 55/57 | failures exactly the standing **{b2, d9}** |
+| verify-slice | 48/48 | |
+| qa-slice | 132/134 | failures {s6, l8} — §5.1 |
+| rejuv-phase1-checks | 44/44 | |
+| rejuv-phase2-checks | 38/40 | failures {A09, C01} — §5.2 |
+| rejuv-phase3-checks | 60/61 | = named baseline (C01 chromium-start, environmental) |
+| rejuv-phase4-checks | 50/51 | C01 chromium-start; identical at 445a195 |
+| rejuv-phase5-checks | 52/53 | C01 chromium-start; identical at 445a195 |
+| rejuv-phase6-checks | 44/45 | = named baseline (C01 chromium-start, environmental) |
+| audit-headless | 17/17 | |
+| audit-laptop | 0 checks run | chromium did not start — §5.3 |
+| validator.test | 78/78 | |
+| validator.fuzz.test | 2000/2000 | |
+| save-contract.test | 10/10 | |
+| config.test / failclosed.test / http-ip.test | 39/39 · 20/20 · 13/13 | beyond the named list; run anyway |
+| gen-tables --check | clean | tables.json OK (257 species, 144 moves, 160 items) |
+| Track B (`run.mjs`) | 114/114 | |
+
+### 5. Discrepancies — investigated to named causes
+
+**5.1 qa-slice {s6, l8} — standing, predates Johto.** A/B in a
+worktree at base `445a195` (the Foundation close): qa-slice is
+**132/134 there too, with the identical two failures,
+name-for-name** (`s6 fuzz: badges.kanto not array — ok=true`;
+`l8 dex tracks 1025, Kanto roster complete`). The W8 register
+recorded 134/134, so the pair broke during the Foundation/Orange
+arc-chain work and was inherited by every Johto stage (qa-slice
+was in no Johto gate list — the same inheritance pattern J6.5 §5
+named for battle-model). Not a Johto regression; flagged here as
+an open standing item for a future bisect, not silently absorbed.
+
+**5.2 rejuv-phase2 A09 — standing, same inheritance.** A09 asserts
+every merged Kanto map is assigned in MAP_GROUND; its premise is
+that MAP_GROUND holds Kanto maps only. It fails at `445a195` too
+(assigned 76 then, 101 now — Orange, then Johto ground assignments
+landed in the same table; johto-story A10/A28 prove the Johto
+assignments deliberate, drawn from the existing 15 grounds). The
+failure set {A09, C01} is identical at both bases; only the
+assigned count grew, by design.
+
+**5.3 The chromium cluster — environmental, base-identical.**
+rejuv phases 2–6 each lose exactly their C01 to
+`chromium did not start`, and audit-laptop dies at the same line
+before any check executes — at `445a195` identically
+(name-for-name, verified by worktree A/B for phases 2/4/5 and
+audit-laptop). Phase 3 (60/61) and phase 6 (44/45) match their
+proven baselines exactly. No Johto signal in this cluster; the
+sandbox cannot start chromium, at either base.
+
+**5.4 verify-slice rebuilds personal/ — restored, and flagged.**
+`scripts/verify-slice.mjs` (line 327) runs `scripts/build.mjs`
+with no `--target`, i.e. it rebuilds **all** targets including
+personal. Its run in this battery therefore rewrote `personal/`
+from current source (game.js sha256 `7df821fc…`). Every stage
+since Foundation built vercel+guest only, so the committed
+personal bundle is the Foundation-era build of that target —
+a from-source personal build at HEAD no longer reproduces it.
+`personal/` was restored byte-identical from HEAD immediately
+after the battery (game.js sha256 **f434ba63…** re-verified; the
+tree is clean). No game code is at fault; whether the personal
+edition gets a deliberate rebuild is an owner call, recorded
+here rather than taken.
+
+### 6. Build + close state
+
+- Fresh build (vercel, then guest): `public/game.js`
+  **7,171,109 bytes**, sha256 `fb35470d…` — **byte-stable across
+  two consecutive builds**, and identical to the bundle committed
+  at `6f4d26d`. Guest standalone: 7,167,673 bytes, zero-network
+  gate PASS.
+- `personal/` byte-identical (sha256 f434ba63…, §5.4).
+- Changes in this stage: the chain drive (QA workspace, not a git
+  tree — as at Foundation) + this register section. No game-code
+  changes. NOT pushed, NOT deployed.
+
+**Arc 2 Johto is campaign-proven: one save, Kanto → Orange →
+Johto → home, every badge in order, Gary beaten, both J5/J6
+systems arcs closed on the same file, and the full battery at its
+named counts.**
