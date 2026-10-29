@@ -347,6 +347,12 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // gratefloor/cablefloor 130-131), chars U+1E00+idx (tiles.mjs). Each
   // was swapped 1:1 from a walkable floor char, so floor stays floor.
   ...[98, 99, 100, 103, 104, 105, 109, 115, 118, 123, 124, 130, 131]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Arc 1.5 Stage O1: the Orange floor kinds (sand / tropgrass /
+  // shrinefloor / stadiumfloor — O1_KIND_DEFS idx 6,7,8,10 at
+  // U+1E00+152, tiles.mjs) are walkable ground, swapped from walkable
+  // ground chars, so floor stays floor.
+  ...[158, 159, 160, 162]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

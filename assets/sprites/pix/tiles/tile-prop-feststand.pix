@@ -1,0 +1,26 @@
+# Stage O1: festival stall — red/white striped canopy, bunting, goods on the counter (prop).
+PIX tile-prop-feststand 16 16
+................
+................
+................
+.wrrwwrrwwrrwwr.
+rrwwrrwwrrwwrrww
+yk.y..y..y..y.ky
+.k............k.
+.k............k.
+.k............k.
+.k.ddpddddpdd.k.
+.k.dddddddddd.k.
+.k.doddddoddd.k.
+.k.dddoddddod.k.
+.k.dddddddddd.k.
+.k............k.
+................
+PAL
+r #b0503c canopy-red
+w #f5f0dc canopy-white
+y #f0e060 bunting
+k #5a3a24 post
+d #8a6a42 counter
+o #e86a8a goods-pink
+p #54a048 goods-green

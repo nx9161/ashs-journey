@@ -1,0 +1,23 @@
+# Stage O1: shrine wall — coursed stone blocks with a carved ring (solid wall).
+PIX tile-shrinewall 16 16
+aaaaadaabaaaaaaa
+aaaaaaaabaaaaaaa
+adaaaaaabaaaaaaa
+aaaadaaabaaaaaaa
+aaaaaaadbaaaaaaa
+bbbbbbbbbbbbbbbb
+aaaabaaaaaaabada
+aaaabaacccaabaaa
+aaaabacaaaddbaaa
+aaaabacaaacabaad
+adaabaacccaabaaa
+bbbbbbbbbbbbbbbb
+aaaaaaaabaaaadaa
+aaaadaaabaaaaaaa
+aaaaaaaadaaaaaaa
+daaaaaaabaaaaaaa
+PAL
+a #8a97a8 shrine-stone
+b #6a7a8c stone-joint
+c #aebac6 carving
+d #4da653 moss

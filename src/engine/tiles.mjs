@@ -193,6 +193,28 @@ export const W7_KIND_CHARS = {};
   TILE_CHARS[ch] = kind;
 });
 export const W7_PROP_KINDS = [...W7_DRESS_KINDS, ...W7_GATE_KINDS];
+// ---- Arc 1.5 Stage O1: Orange Islands kinds ----
+// Chars continue the W6/W7 block at U+1E00+152 (W6 idx 0..131, W7
+// 132..151). Classes follow the W6 convention: floor = WALKABLE ground
+// family of its own, wall = solid, prop = solid object composited over
+// the ground it stands on (art.mjs resolver). Authored art:
+// assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage O1).
+export const O1_KIND_DEFS = [
+  ['palm', 'prop'], ['coral', 'prop'], ['shrinegate', 'prop'], ['feststand', 'prop'],
+  ['gspedestal', 'prop'], ['stadiumcrest', 'prop'],
+  ['sand', 'floor'], ['tropgrass', 'floor'], ['shrinefloor', 'floor'],
+  ['shrinewall', 'wall'], ['stadiumfloor', 'floor'], ['stadiumwall', 'wall'],
+];
+export const O1_KIND_CHARS = {};
+O1_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 152 + i);
+  O1_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const O1_PROP_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const O1_FLOOR_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+export const O1_WALL_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const O1_WALKABLE_CHARS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => O1_KIND_CHARS[k]);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
 export const GYM_KIND_BY_TOWN = {
   viridian: 'gym-ground', pewter: 'gym-rock', cerulean: 'gym-water', vermilion: 'gym-volt',

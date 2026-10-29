@@ -1,0 +1,23 @@
+# Stage O1: stadium wall — grand ashlar courses with a gold crest inset (P-6 scale, solid wall).
+PIX tile-stadiumwall 16 16
+bbbbbabbbbbbbbbb
+bbbbbabbbbbbbbbb
+aaaaaaaaaaabaaaa
+aaaaaaaaaaabaaaa
+aaaaaargggabaaaa
+aaaaaagggrabaaaa
+aaaaaaaaaaabaaaa
+aaaaaaaaaaabaaaa
+bbbbbabbbbbbbbbb
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
+bbbbbbbbbbbabbbb
+PAL
+a #cfc4a8 stadium-stone
+b #a89a78 stadium-joint
+g #e8b83a crest-gold
+r #b0503c crest-red
