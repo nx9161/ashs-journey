@@ -120006,6 +120006,165 @@ MOVES2.guillotine = { id: 'guillotine', name: 'Guillotine', type: 'normal', cat:
 MOVES2.slam = { id: 'slam', name: 'Slam', type: 'normal', cat: 'physical', power: 80, acc: 75, pp: 20, effect: {} };
 
 
+// ---- src/data/contest.mjs ----
+// contest.mjs — Arc 3 Stage H5: Contest-lite data (coordinator ruling 7).
+//
+// APPEAL / JAM for every move in the game's move table, as a PARALLEL
+// table keyed by move id (the recorded H5 choice: moves.mjs / moves2.mjs
+// stay byte-untouched; the contest engine reads appealJamFor(id), which
+// never misses — see the derivation below). Values are contest-only:
+// no battle path reads them, no battle number changes.
+//
+// THE DERIVATION (one place, applied to every move):
+//   Damaging moves (power > 0):
+//     appeal = 1 + floor(power / 25)          (40->2, 65->3, 95->4, 120->5)
+//            + 1 if multi-hit (effect.hits)   (a flurry reads flashy)
+//            + 1 if high-crit                 (a flourish)
+//            + 1 if charge / recharge         (a spectacle beat)
+//            + 1 if it drains                 (an elegant siphon)
+//            + 1 if fixed-level / OHKO        (a precision set piece)
+//     jam    = 1 if it can also inflict a status (effect.status + chance)
+//   Status moves (cat 'status'):
+//     appeal = 4 (a clean presentation is the baseline)
+//            = 5 for a SELF stage-raise (a showcase buff: Growth, Barrier)
+//            = 3 for a foe stage-drop (Leer/Tail Whip — effective, plain)
+//     jam    = 2 if it inflicts a status on the foe (Sing, Spore — the
+//              startle that breaks the leader's rhythm)
+//            = 1 for a foe stage-drop or a seeded snare (Leech Seed)
+// Derived appeal clamps to 1..6, jam to 0..3. The hand-tuned NOTABLES
+// below override the derivation for signature moves (finales, OHKO
+// set pieces, the famous snoozes, and Splash — the joke that scores 1).
+
+
+const ALL_MOVES = { ...MOVES, ...MOVES2 };
+
+// The four halls (maps7's `contestHall` field values) and the ribbon
+// each awards. Ribbon ids ARE the hall ids — one ribbon per hall, no
+// rank ladder (ruling 7). This list is the closed vocabulary the save
+// validators check state.contest.ribbons against (emitted into
+// tables.json by gen-tables — never hand-edit the generated table).
+const CONTEST_HALLS = ['verdanturf', 'fallarbor', 'slateport', 'lilycove'];
+const CONTEST_RIBBONS = [...CONTEST_HALLS];
+const RIBBON_NAMES = {
+  verdanturf: 'Verdanturf Ribbon',
+  fallarbor: 'Fallarbor Ribbon',
+  slateport: 'Slateport Ribbon',
+  lilycove: 'Lilycove Ribbon',
+};
+const CONTEST_ROUNDS = 4;
+
+// Hand-tuned notables (36): id -> [appeal, jam]. Everything not listed
+// here takes the derivation above.
+const CONTEST_NOTABLES = {
+  hyperbeam: [8, 0],   // THE finale — the biggest number in the hall
+  solarbeam: [7, 0],   // the charge-up is the performance
+  skyattack: [7, 0],
+  explosion: [7, 2],   // a bang that rattles the leader's nerve
+  selfdestruct: [6, 2],
+  fireblast: [6, 1],
+  thunder: [6, 1],
+  blizzard: [6, 1],
+  hydropump: [6, 0],
+  earthquake: [6, 1],  // the floor itself applauds, then wobbles
+  psychic: [6, 0],     // bending spoons needs no jam
+  petaldance: [6, 0],  // a storm of petals, all grace
+  swordsdance: [6, 0], // the blade dance is a headliner, not a buff
+  flamethrower: [5, 0],
+  icebeam: [5, 0],
+  surf: [5, 0],        // a whole wave, ridden
+  thunderbolt: [5, 1],
+  doubleedge: [5, 0],
+  skullbash: [5, 0],
+  triattack: [5, 1],   // three elements, three gasps
+  fly: [5, 0],
+  dig: [5, 0],         // the vanish-and-return bit
+  agility: [5, 0],
+  amnesia: [5, 0],
+  dreameater: [5, 1],
+  metronome: [5, 0],   // nobody knows what's coming — that's the act
+  sing: [5, 2],        // a lullaby that steals the room
+  guillotine: [6, 2],  // OHKO set pieces: precision with menace
+  horndrill: [6, 2],
+  fissure: [6, 2],
+  spore: [4, 3],       // the rudest snooze in Hoenn
+  lovelykiss: [4, 3],
+  sleeppowder: [4, 3],
+  hypnosis: [4, 2],
+  screech: [3, 2],     // ugly to hear, great at breaking a leader
+  splash: [1, 0],      // it flops. The crowd is kind. One point.
+};
+
+function deriveAppealJam(mv) {
+  if (!mv) return { appeal: 1, jam: 0 };
+  const e = mv.effect || {};
+  let appeal, jam = 0;
+  if (mv.cat === 'status' || !(mv.power > 0)) {
+    const stageKeys = ['atk', 'def', 'spa', 'spd', 'spe', 'acc', 'eva'];
+    if (e.target === 'self' && stageKeys.some((k) => typeof e[k] === 'number' && e[k] > 0)) appeal = 5;
+    else if (e.target === 'foe' && !e.status && stageKeys.some((k) => typeof e[k] === 'number' && e[k] < 0)) appeal = 3;
+    else appeal = 4;
+    if (e.status && e.target !== 'self') jam = 2;
+    else if (e.seed) jam = 1;
+    else if (appeal === 3) jam = 1;
+  } else {
+    appeal = 1 + Math.floor((mv.power || 0) / 25);
+    if (e.hits) appeal += 1;
+    if (mv.highcrit) appeal += 1;
+    if (mv.charge || mv.recharge) appeal += 1;
+    if (e.drain) appeal += 1;
+    if (mv.fixedLevel || mv.ohko) appeal += 1;
+    if (e.status && typeof e.chance === 'number') jam = 1;
+  }
+  return {
+    appeal: Math.max(1, Math.min(6, appeal)),
+    jam: Math.max(0, Math.min(3, jam)),
+  };
+}
+
+// The parallel table: EVERY move in the game resolves here (derivation
+// first, notables override). Built once at load from the move tables.
+const MOVE_APPEAL = {};
+for (const id of Object.keys(ALL_MOVES)) {
+  const d = deriveAppealJam(ALL_MOVES[id]);
+  const n = CONTEST_NOTABLES[id];
+  MOVE_APPEAL[id] = n ? { appeal: n[0], jam: n[1] } : d;
+}
+
+// The engine's one read path. Unknown ids resolve to the floor values
+// rather than throwing — a contest can never crash on a move id.
+function appealJamFor(moveId) {
+  return MOVE_APPEAL[moveId] || { appeal: 1, jam: 0 };
+}
+
+// The NPC fields. Three original entrants per hall, dressed Hoenn-era
+// species, each with a 4-round script of real move ids. Scripts are
+// tuned so a hall is always winnable with headliner play and always
+// losable with a flop act: every scripted move scores appeal 4-5, jam
+// stays 0 in Verdanturf (the suite's proving hall) and <= 1 elsewhere.
+const CONTEST_NPCS = {
+  verdanturf: [
+    { name: 'FERN', species: 'roselia', script: ['razorleaf', 'growth', 'razorleaf', 'growth'] },
+    { name: 'PIOTR', species: 'pelipper', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
+    { name: 'MABEL', species: 'altaria', script: ['flamethrower', 'icebeam', 'flamethrower', 'icebeam'] },
+  ],
+  fallarbor: [
+    { name: 'DUSTIN', species: 'sandslash', script: ['slash', 'dig', 'slash', 'dig'] },
+    { name: 'VERA', species: 'vibrava', script: ['dig', 'flamethrower', 'dig', 'flamethrower'] },
+    { name: 'RUFO', species: 'camerupt', script: ['flamethrower', 'bodyslam', 'flamethrower', 'bodyslam'] },
+  ],
+  slateport: [
+    { name: 'CORAL', species: 'corsola', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
+    { name: 'BRINE', species: 'lanturn', script: ['thunderbolt', 'surf', 'thunderbolt', 'surf'] },
+    { name: 'PEARL', species: 'milotic', script: ['icebeam', 'surf', 'icebeam', 'surf'] },
+  ],
+  lilycove: [
+    { name: 'OPAL', species: 'gardevoir', script: ['triattack', 'thunderbolt', 'triattack', 'thunderbolt'] },
+    { name: 'NOCT', species: 'banette', script: ['slash', 'firepunch', 'slash', 'firepunch'] },
+    { name: 'LUMEN', species: 'milotic', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
+  ],
+};
+
+
 // ---- src/data/forms.mjs ----
 // forms.mjs — alternate forms index (data-level only; no stats here by design).
 // speciesId = National Dex number of the base species. kind: 'regional' | 'mega' | 'form'.
@@ -153452,6 +153611,11 @@ function defaultState(inherit) {
     stepsTotal: 0,
     gather: {},
     kurtOrder: null,
+    // Stage H5: Contest-lite ribbons (game/contest.mjs) — the closed
+    // hall-id set the player has won (src/data/contest.mjs
+    // CONTEST_RIBBONS). Defaults-filled on load (schema.mjs) so
+    // pre-H5 saves open unchanged in shape.
+    contest: { ribbons: [] },
     session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {
@@ -155013,7 +155177,10 @@ const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
   'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session',
   // Stage J6: the arc-systems fields (johto-systems.mjs) — the server
   // validator's TOP_KEYS carries the same six, the matched pair.
-  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder'];
+  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder',
+  // Stage H5: the contest field (contest.mjs) — the server validator's
+  // TOP_KEYS carries the same key, the matched pair.
+  'contest'];
 
 function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
 
@@ -155089,6 +155256,18 @@ function validateSave(data) {
     const o = data.kurtOrder;
     if (!isObj(o) || typeof o.ball !== 'string' || !BALLS[o.ball]
       || !Number.isInteger(o.readyAt) || o.readyAt < 0 || o.readyAt > 100000000) errors.push('bad-kurt-order');
+  }
+  // Stage H5: contest.ribbons, when present, must be a duplicate-free
+  // subset of the closed hall set (CONTEST_RIBBONS — the same source
+  // gen-tables emits for the server validator, so the pair cannot
+  // drift). Absent = pre-H5 save (filled to { ribbons: [] } on load).
+  // Ribbons are UNORDERED (any hall can be won first) — no prefix rule,
+  // unlike badges.
+  if (data.contest !== undefined) {
+    const c = data.contest;
+    if (!isObj(c) || !Array.isArray(c.ribbons) || c.ribbons.length > CONTEST_RIBBONS.length
+      || c.ribbons.some((id) => !CONTEST_RIBBONS.includes(id))
+      || new Set(c.ribbons).size !== c.ribbons.length) errors.push('bad-contest-ribbons');
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -155248,6 +155427,19 @@ function fillV2Defaults(data) {
   if (!isObj(data.kurtOrder) || typeof data.kurtOrder.ball !== 'string' || !BALLS[data.kurtOrder.ball]
     || !Number.isInteger(data.kurtOrder.readyAt) || data.kurtOrder.readyAt < 0) data.kurtOrder = null;
   if (data.kurtOrder) data.kurtOrder = { ball: data.kurtOrder.ball, readyAt: data.kurtOrder.readyAt };
+  // Stage H5: contest defaults-fill — a pre-H5 save opens with an
+  // empty ribbon case; a present value rebuilds into the closed shape
+  // (known hall ids only, duplicates dropped), so validateSave stays
+  // strict for saves that carry malformed values of their own.
+  {
+    const ribbons = [];
+    if (isObj(data.contest) && Array.isArray(data.contest.ribbons)) {
+      for (const id of data.contest.ribbons) {
+        if (CONTEST_RIBBONS.includes(id) && !ribbons.includes(id)) ribbons.push(id);
+      }
+    }
+    data.contest = { ribbons };
+  }
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
       data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';
@@ -162765,6 +162957,274 @@ class BattleScene {
 }
 
 
+// ---- src/game/contest.mjs ----
+// contest.mjs — Arc 3 Stage H5: Contest-lite (coordinator ruling 7).
+//
+// THE ENGINE (pure, deterministic): a contest is 4 entrants x 4 rounds
+// of APPEAL performances on the shipped battle presentation. No damage,
+// no fainting, no levels — a mon performs one of its real moves, the
+// crowd scores appeal (src/data/contest.mjs: appealJamFor) plus a small
+// presentation variance (0..2, drawn from the caller's rng stream —
+// seeded in tests, g.rng.misc live), and a move with JAM cuts the
+// current ROUND leader's round score: the leader *so far this round*
+// (an entrant who has already performed), never the performer. Playing
+// a jam move while behind is the comeback lever; playing it while
+// leading fizzles (you cannot jam yourself). Performance order rotates
+// each round (round r opens with entrant r-1), the classic rotation.
+// Standings sort by total, then by final-round gain, then by entrant
+// order — fully deterministic, no coin flips.
+//
+// THE SCENE: ContestScene extends BattleScene and INHERITS its render
+// whole — the arena, the stepped platforms, the battler plates, the
+// idle life — with the battle flow replaced: this.foe tracks the
+// current performer, narration rides ui.say, move picks ride a
+// 'Choose a move' menu over the entered mon's real moveset (the same
+// harness seams the battle drivers use). BattleScene itself is not
+// modified by this stage (battle-model-checks 45/45 is the hard gate).
+// What the presentation had to LEARN: nothing — every field render()
+// touches is plain scene state this class initializes in enter()
+// (fxPool/entryFx/fxKb/fxRecoil/entryT/_exitStartT/hpAnim/msg), the
+// same set BattleScene.enter() initializes for itself.
+
+
+const NPC_LEVEL = 250; // dressing only — contests are not level fights
+
+function npcMon(def) {
+  const mon = makeMon(def.species, NPC_LEVEL, SPECIES, MOVES);
+  mon.moves = def.script.map((id) => ({ id, pp: MOVES[id].pp, maxPp: MOVES[id].pp }));
+  return mon;
+}
+
+// createContest({ hall, playerMon, playerName }) -> state.
+// Entrant 0 is always the player; 1..3 are the hall's NPC field.
+function createContest(opts) {
+  const hall = opts.hall;
+  const entrants = [{
+    key: 'player', name: opts.playerName || 'ASH', mon: opts.playerMon,
+    script: null, total: 0, roundGain: 0, lastGain: 0, performed: false,
+  }];
+  for (const def of CONTEST_NPCS[hall] || []) {
+    entrants.push({
+      key: 'npc:' + def.name, name: def.name, mon: npcMon(def),
+      script: def.script, total: 0, roundGain: 0, lastGain: 0, performed: false,
+    });
+  }
+  return { hall, round: 1, entrants, events: [] };
+}
+
+// One performance. Mutates the entrant + any jammed leader; returns the
+// event record (also appended to state.events): the suite's scoring
+// proof reads these, the scene's narration renders them.
+function resolvePerformance(state, entrant, moveId, rng) {
+  const aj = appealJamFor(moveId);
+  const variance = intIn(0, 2, rng);
+  const gained = aj.appeal + variance;
+  entrant.roundGain += gained;
+  entrant.total += gained;
+  entrant.lastGain = gained;
+  entrant.performed = true;
+  const ev = {
+    round: state.round, entrant: entrant.key, name: entrant.name,
+    speciesId: entrant.mon.speciesId, moveId, appeal: aj.appeal,
+    variance, gained, jam: aj.jam, jamTarget: null, jammed: 0,
+  };
+  if (aj.jam > 0) {
+    // The round leader so far: highest roundGain among entrants who
+    // have ALREADY performed this round, excluding the performer.
+    let leader = null;
+    for (const e of state.entrants) {
+      if (e === entrant || !e.performed) continue;
+      if (!leader || e.roundGain > leader.roundGain
+        || (e.roundGain === leader.roundGain && e.total > leader.total)) leader = e;
+    }
+    if (leader && leader.roundGain > 0) {
+      const cut = Math.min(aj.jam, leader.roundGain);
+      leader.roundGain -= cut;
+      leader.total -= cut;
+      ev.jamTarget = leader.key;
+      ev.jammed = cut;
+    }
+  }
+  state.events.push(ev);
+  return ev;
+}
+
+// A full round: the player performs playerMoveId, NPCs perform their
+// scripted move for the round, in the rotated order. Returns the
+// round's events in performance order.
+function performRound(state, playerMoveId, rng) {
+  const r = state.round;
+  for (const e of state.entrants) { e.roundGain = 0; e.performed = false; }
+  const start = (r - 1) % state.entrants.length;
+  const out = [];
+  for (let i = 0; i < state.entrants.length; i++) {
+    const e = state.entrants[(start + i) % state.entrants.length];
+    const moveId = e.script ? e.script[r - 1] : playerMoveId;
+    out.push(resolvePerformance(state, e, moveId, rng));
+  }
+  state.round = r + 1;
+  return out;
+}
+
+// Standings: total desc, final-round gain desc, entrant order asc.
+function standingsOf(state) {
+  return state.entrants.map((e, i) => ({ e, i }))
+    .sort((a, b) => (b.e.total - a.e.total) || (b.e.lastGain - a.e.lastGain) || (a.i - b.i))
+    .map((x) => x.e);
+}
+function placementOf(state) {
+  return standingsOf(state).findIndex((e) => e.key === 'player') + 1;
+}
+function contestFinished(state) { return state.round > CONTEST_ROUNDS; }
+
+// Ribbon persistence: state.contest.ribbons is the closed hall-id set
+// (see the quintet in schema.mjs / api validator / gen-tables). Award
+// is idempotent — a replayed win never duplicates the ribbon.
+function awardContestRibbon(gameState, hall) {
+  if (!CONTEST_RIBBONS.includes(hall)) return false;
+  if (!gameState.contest || !Array.isArray(gameState.contest.ribbons)) {
+    gameState.contest = { ribbons: [] };
+  }
+  if (gameState.contest.ribbons.includes(hall)) return false;
+  gameState.contest.ribbons.push(hall);
+  return true;
+}
+function hasRibbon(gameState, hall) {
+  return !!gameState.contest && Array.isArray(gameState.contest.ribbons)
+    && gameState.contest.ribbons.includes(hall);
+}
+
+// ---------------- the scene ----------------
+
+class ContestScene extends BattleScene {
+  constructor(opts) {
+    // The battle constructor only stores fields; its enter() (the
+    // battle flow) is fully overridden below and never runs.
+    super({ kind: 'trainer', foe: opts.mon, rt: false, returnTo: opts.returnTo || null });
+    this.hall = opts.hall;
+    this.playerMon = opts.mon;
+    this.onEnd = opts.onEnd || null;
+    this.contest = null;
+  }
+
+  enter() {
+    const g = this.game;
+    g.ui.setBattleMode(true);
+    // The render-field set BattleScene.enter() initializes for itself
+    // (see the header note) — render() reads these unconditionally.
+    this.t = 0;
+    this.state = 'contest';
+    this.msg = '';
+    this.msgOpen = false;
+    this.ally = this.playerMon;
+    this.contest = createContest({
+      hall: this.hall, playerMon: this.playerMon, playerName: g.state.player.name,
+    });
+    this.foe = this.contest.entrants[1].mon;
+    this.hpAnim = { ally: this.ally.hp, foe: this.foe.hp };
+    this.fxPool = [];
+    for (let i = 0; i < 60; i++) this.fxPool.push({ on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, life: 1, sz: 2, col: '#fff', grav: 0 });
+    this.entryFx = { ally: null, foe: null };
+    this.fxKb = { ally: { t: 1e9, dist: 0 }, foe: { t: 1e9, dist: 0 } };
+    this.fxRecoil = { ally: { t: 1e9, dist: 0 }, foe: { t: 1e9, dist: 0 } };
+    this.entryT = 1e9;
+    this._exitStartT = -1;
+    this.atkFx = null; this.impactFx = null; this.faintFx = null;
+    this.recallFx = null; this.catchFx = null; this.breakFx = null; this.fxSeq = null;
+    this.trauma = 0; this.shakeT = 0; this.flashT = 0; this.fadeT = 0;
+    this.xpFlashT = 0; this._lowHpPulseT = 0;
+    g.audio.playMusic('battle-trainer-theme', { area: false });
+    const hallName = (this.returnTo && this.returnTo.map && this.returnTo.map.name) || 'Contest Hall';
+    const field = this.contest.entrants.map((e) => e.name + ' & ' + displayName(e.mon, SPECIES)).join(', ');
+    g.ui.say([
+      'Welcome to the ' + hallName + '!',
+      'Four entrants take the stage: ' + field + '.',
+      'Four rounds of appeal. No battling — just showmanship. The crowd\'s favourite takes the ' + RIBBON_NAMES[this.hall] + '!',
+    ], () => this.roundPrompt());
+  }
+
+  update(dt) {
+    // Presentation clocks only; the flow is callback-driven (ui.say /
+    // ui.showMenu), exactly like the overworld's event chains.
+    this.entryT += dt * 1000;
+  }
+
+  exit() {
+    this.game.ui.setBattleMode(false);
+  }
+
+  roundPrompt() {
+    const g = this.game;
+    if (contestFinished(this.contest)) { this.finish(); return; }
+    const round = this.contest.round;
+    const items = this.playerMon.moves.map((slot, i) => {
+      const mv = MOVES[slot.id];
+      const aj = appealJamFor(slot.id);
+      return {
+        label: (mv ? mv.name : slot.id) + '  ♥' + aj.appeal + (aj.jam ? '  JAM ' + aj.jam : ''),
+        value: i, disabled: false,
+      };
+    });
+    g.ui.showMenu('Choose a move', items, (v) => {
+      const slot = this.playerMon.moves[v];
+      if (!slot) { this.roundPrompt(); return; }
+      const events = performRound(this.contest, slot.id, g.rng.misc);
+      this.narrateRound(events, 0);
+    });
+  }
+
+  narrateRound(events, idx) {
+    const g = this.game;
+    if (idx >= events.length) {
+      const st = standingsOf(this.contest);
+      const line = 'Round ' + (this.contest.round - 1) + ' standings: '
+        + st.map((e) => e.name + ' ' + e.total).join(' · ') + '.';
+      g.ui.say([line], () => this.roundPrompt());
+      return;
+    }
+    const ev = events[idx];
+    const entrant = this.contest.entrants.find((e) => e.key === ev.entrant);
+    if (entrant && ev.entrant !== 'player') { this.foe = entrant.mon; this.hpAnim.foe = this.foe.hp; }
+    const lines = [
+      ev.name + '\'s ' + displayName(entrant.mon, SPECIES) + ' used ' + MOVES[ev.moveId].name + '!',
+      'The crowd roars — +' + ev.gained + ' appeal!',
+    ];
+    if (ev.jammed > 0) {
+      const target = this.contest.entrants.find((e) => e.key === ev.jamTarget);
+      lines.push('It JAMS ' + (target ? target.name : 'the leader') + '\'s rhythm — their round score drops by ' + ev.jammed + '!');
+    }
+    g.ui.say(lines, () => this.narrateRound(events, idx + 1));
+  }
+
+  finish() {
+    const g = this.game;
+    const place = placementOf(this.contest);
+    const st = standingsOf(this.contest);
+    const lines = [
+      'Final standings: ' + st.map((e) => e.name + ' ' + e.total).join(' · ') + '.',
+    ];
+    let won = false;
+    if (place === 1) {
+      won = awardContestRibbon(g.state, this.hall);
+      lines.push('FIRST PLACE! ' + displayName(this.playerMon, SPECIES) + ' takes the stage!');
+      lines.push(won
+        ? 'Received the ' + RIBBON_NAMES[this.hall] + '!'
+        : 'You already hold the ' + RIBBON_NAMES[this.hall] + ' — the hall applauds the encore all the same.');
+      g.audio.playSfx('dex-register');
+    } else {
+      lines.push('You placed ' + place + (place === 2 ? 'nd' : place === 3 ? 'rd' : 'th')
+        + '. No ribbon this time — the hall keeps its ribbon for a first-place finish.');
+    }
+    const result = { place, won, standings: st.map((e) => ({ key: e.key, name: e.name, total: e.total })) };
+    g.ui.say(lines, () => {
+      g.ui.setBattleMode(false);
+      g.scenes.pop();
+      if (this.onEnd) this.onEnd(result);
+    });
+  }
+}
+
+
 // ---- src/game/battle-rt.mjs ----
 // battle-rt.mjs — REAL-TIME battle mode (ADR-020): free arena movement,
 // per-move cooldowns, lunges/projectiles, a dodge roll with i-frames, live
@@ -165702,6 +166162,16 @@ Object.assign(OverworldScene.prototype, {
       }
       return true;
     }
+    // Stage H5: Contest-lite entry (coordinator ruling 7). The seam
+    // is the map's `contestHall` field (maps7): facing the reception
+    // counter (the 'α' counter tile the halls are dressed with — the
+    // same tile the Center nurse stands behind) opens entry. Halls
+    // are NPC-free floors by design, so the counter itself is the
+    // receptionist. One ribbon per hall; replays stay open forever.
+    if (this.map.contestHall && t === 'α') {
+      this.startContest();
+      return true;
+    }
     // Stage H4b: scoped Dive (coordinator ruling 5). A dive spot is
     // a DEFINED tile only — the current map's diveSpots (surface) or
     // surfaceSpots (underwater), cross-checked against maps7's
@@ -165775,6 +166245,35 @@ Object.assign(OverworldScene.prototype, {
       }
     }
     return false;
+  },
+
+  // Stage H5: the contest entry flow — a reception greeting (the
+  // ribbon already held is named honestly), a party pick, then the
+  // ContestScene takes the stage. The scene owns the contest from
+  // there (rounds, scoring, the ribbon award on a 1st place).
+  startContest() {
+    const g = this.game;
+    const hall = this.map.contestHall;
+    const able = g.state.party.filter((m) => m && !m.egg && m.hp > 0);
+    if (!able.length) {
+      g.ui.say(['The receptionist smiles apologetically: "Oh — none of your partners is ready to take the stage. Rest them at a Center and come back!"']);
+      return;
+    }
+    const held = hasRibbon(g.state, hall);
+    g.ui.say([
+      held
+        ? 'The receptionist beams: "Welcome back, champion! Your ' + RIBBON_NAMES[hall] + ' is already in the case — but the stage is always open for an encore."'
+        : 'The receptionist beams: "Welcome to the Contest Hall! Four entrants, four rounds of appeal — first place takes the ' + RIBBON_NAMES[hall] + '!"',
+      '"Who will you enter? Choose the partner who takes the stage."',
+    ], () => {
+      g.ui.showMenu('Enter which Pokemon?', able.map((m, i) => ({
+        label: displayName(m, SPECIES) + '  Lv' + m.level, value: i,
+      })), (v) => {
+        const mon = able[v];
+        if (!mon) return;
+        g.scenes.push(new ContestScene({ hall, mon, returnTo: this }));
+      });
+    });
   },
 
   // Stage H4b: Dive knowledge, in Surf's exact representation with

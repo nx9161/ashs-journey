@@ -17,6 +17,8 @@ import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './state.mjs';
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
+import { ContestScene, hasRibbon } from './contest.mjs';
+import { RIBBON_NAMES } from '../data/contest.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
@@ -756,6 +758,16 @@ Object.assign(OverworldScene.prototype, {
       }
       return true;
     }
+    // Stage H5: Contest-lite entry (coordinator ruling 7). The seam
+    // is the map's `contestHall` field (maps7): facing the reception
+    // counter (the 'α' counter tile the halls are dressed with — the
+    // same tile the Center nurse stands behind) opens entry. Halls
+    // are NPC-free floors by design, so the counter itself is the
+    // receptionist. One ribbon per hall; replays stay open forever.
+    if (this.map.contestHall && t === 'α') {
+      this.startContest();
+      return true;
+    }
     // Stage H4b: scoped Dive (coordinator ruling 5). A dive spot is
     // a DEFINED tile only — the current map's diveSpots (surface) or
     // surfaceSpots (underwater), cross-checked against maps7's
@@ -829,6 +841,35 @@ Object.assign(OverworldScene.prototype, {
       }
     }
     return false;
+  },
+
+  // Stage H5: the contest entry flow — a reception greeting (the
+  // ribbon already held is named honestly), a party pick, then the
+  // ContestScene takes the stage. The scene owns the contest from
+  // there (rounds, scoring, the ribbon award on a 1st place).
+  startContest() {
+    const g = this.game;
+    const hall = this.map.contestHall;
+    const able = g.state.party.filter((m) => m && !m.egg && m.hp > 0);
+    if (!able.length) {
+      g.ui.say(['The receptionist smiles apologetically: "Oh — none of your partners is ready to take the stage. Rest them at a Center and come back!"']);
+      return;
+    }
+    const held = hasRibbon(g.state, hall);
+    g.ui.say([
+      held
+        ? 'The receptionist beams: "Welcome back, champion! Your ' + RIBBON_NAMES[hall] + ' is already in the case — but the stage is always open for an encore."'
+        : 'The receptionist beams: "Welcome to the Contest Hall! Four entrants, four rounds of appeal — first place takes the ' + RIBBON_NAMES[hall] + '!"',
+      '"Who will you enter? Choose the partner who takes the stage."',
+    ], () => {
+      g.ui.showMenu('Enter which Pokemon?', able.map((m, i) => ({
+        label: displayName(m, SPECIES) + '  Lv' + m.level, value: i,
+      })), (v) => {
+        const mon = able[v];
+        if (!mon) return;
+        g.scenes.push(new ContestScene({ hall, mon, returnTo: this }));
+      });
+    });
   },
 
   // Stage H4b: Dive knowledge, in Surf's exact representation with

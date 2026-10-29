@@ -3,6 +3,7 @@
 
 import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
 import { KEEPSAKES, BADGE_SETS, BALLS } from '../data/items.mjs';
+import { CONTEST_RIBBONS } from '../data/contest.mjs';
 import { ARCS, deriveArcDefaults, levelCapFor, xpCeilingFor } from '../data/arcs.mjs';
 
 const ARC_IDS = new Set(ARCS.map((a) => a.id));
@@ -14,7 +15,10 @@ const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
   'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session',
   // Stage J6: the arc-systems fields (johto-systems.mjs) — the server
   // validator's TOP_KEYS carries the same six, the matched pair.
-  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder'];
+  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder',
+  // Stage H5: the contest field (contest.mjs) — the server validator's
+  // TOP_KEYS carries the same key, the matched pair.
+  'contest'];
 
 function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
 
@@ -90,6 +94,18 @@ export function validateSave(data) {
     const o = data.kurtOrder;
     if (!isObj(o) || typeof o.ball !== 'string' || !BALLS[o.ball]
       || !Number.isInteger(o.readyAt) || o.readyAt < 0 || o.readyAt > 100000000) errors.push('bad-kurt-order');
+  }
+  // Stage H5: contest.ribbons, when present, must be a duplicate-free
+  // subset of the closed hall set (CONTEST_RIBBONS — the same source
+  // gen-tables emits for the server validator, so the pair cannot
+  // drift). Absent = pre-H5 save (filled to { ribbons: [] } on load).
+  // Ribbons are UNORDERED (any hall can be won first) — no prefix rule,
+  // unlike badges.
+  if (data.contest !== undefined) {
+    const c = data.contest;
+    if (!isObj(c) || !Array.isArray(c.ribbons) || c.ribbons.length > CONTEST_RIBBONS.length
+      || c.ribbons.some((id) => !CONTEST_RIBBONS.includes(id))
+      || new Set(c.ribbons).size !== c.ribbons.length) errors.push('bad-contest-ribbons');
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -249,6 +265,19 @@ export function fillV2Defaults(data) {
   if (!isObj(data.kurtOrder) || typeof data.kurtOrder.ball !== 'string' || !BALLS[data.kurtOrder.ball]
     || !Number.isInteger(data.kurtOrder.readyAt) || data.kurtOrder.readyAt < 0) data.kurtOrder = null;
   if (data.kurtOrder) data.kurtOrder = { ball: data.kurtOrder.ball, readyAt: data.kurtOrder.readyAt };
+  // Stage H5: contest defaults-fill — a pre-H5 save opens with an
+  // empty ribbon case; a present value rebuilds into the closed shape
+  // (known hall ids only, duplicates dropped), so validateSave stays
+  // strict for saves that carry malformed values of their own.
+  {
+    const ribbons = [];
+    if (isObj(data.contest) && Array.isArray(data.contest.ribbons)) {
+      for (const id of data.contest.ribbons) {
+        if (CONTEST_RIBBONS.includes(id) && !ribbons.includes(id)) ribbons.push(id);
+      }
+    }
+    data.contest = { ribbons };
+  }
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
       data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';

@@ -196,6 +196,11 @@ export function defaultState(inherit) {
     stepsTotal: 0,
     gather: {},
     kurtOrder: null,
+    // Stage H5: Contest-lite ribbons (game/contest.mjs) — the closed
+    // hall-id set the player has won (src/data/contest.mjs
+    // CONTEST_RIBBONS). Defaults-filled on load (schema.mjs) so
+    // pre-H5 saves open unchanged in shape.
+    contest: { ribbons: [] },
     session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {

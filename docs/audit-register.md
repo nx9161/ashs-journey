@@ -9189,3 +9189,175 @@ is Arc 3.5's build, not this stage's.
   assigned=107, the same single named failure, not a new one);
   budgets **all gates pass**; `personal/` byte-identical.
 - **public/game.js: 9,735,190 B (+68,496 vs H4a)** (vs H4a's 9,666,694 B).
+
+## Arc 3 Stage H5 — Contest-lite: appeal/jam data, the appeal-round engine, ribbons persisted (2026-10-29)
+
+Scope: coordinator ruling 7, exactly as locked — 4 halls, one ribbon
+per hall, no rank ladder, no dress-up/accessories, no combo/category
+engine beyond appeal+jam, no new art. May's contest career stays
+story dressing (H4's `may_ribbon_*` flags); the player's contests
+never read or write those flags (suite B09 proves it).
+
+### Appeal/Jam data — the recorded choice: a PARALLEL table
+
+- `src/data/contest.mjs` (new; module-order right after moves2):
+  `MOVE_APPEAL`, a parallel table keyed by move id, built at load
+  from MOVES + MOVES2. **moves.mjs / moves2.mjs are byte-untouched**
+  — the mission allowed additive fields OR the parallel table; the
+  table won because (a) it keeps every battle-data file stable for
+  the H6/H7 stages that read them, (b) the derivation lives in ONE
+  place (`deriveAppealJam`) instead of 144 hand-edits, and (c) the
+  engine's single read path `appealJamFor(id)` cannot miss: an
+  unknown id resolves to floor values {appeal 1, jam 0} rather than
+  throwing. Suite A01 proves coverage over all 144 moves.
+- **The derivation** (by category / power / effect class):
+  damaging — appeal = 1 + floor(power/25), +1 multi-hit, +1
+  high-crit, +1 charge/recharge, +1 drain, +1 fixed-level/OHKO;
+  jam 1 if it can also inflict a status (effect.status + chance).
+  Status — appeal 4 baseline, 5 for a self stage-raise (the
+  showcase buff), 3 for a foe stage-drop; jam 2 for a foe status
+  inflict, 1 for a stage-drop or a seeded snare. Derived values
+  clamp to appeal 1..6 / jam 0..3.
+- **Hand-tuned notables: 36** (suite A03 pins the count + the
+  landmarks): the finales (Hyper Beam 8/0, Solar Beam and Sky
+  Attack 7/0), the spectacle sixes (Fire Blast / Thunder /
+  Blizzard / Earthquake 6/1, Hydro Pump / Psychic / Petal Dance /
+  Swords Dance 6/0), the OHKO set pieces (Guillotine / Horn Drill
+  / Fissure 6/2), Explosion 7/2 and Self-Destruct 6/2, the famous
+  snoozes (Spore / Lovely Kiss / Sleep Powder jam 3, Sing 5/2,
+  Hypnosis 4/2), and Splash at 1/0 — it flops, the crowd is kind.
+- NPC fields: 12 original entrants (3 per hall, `CONTEST_NPCS`),
+  dressed Hoenn-era species, each with a 4-round script of real
+  moves. Every scripted move scores appeal 4–5 and jam ≤ 1 (0 in
+  Verdanturf), which makes the tuning honest by construction: a
+  headliner act (Hyper Beam ×4, min 32) always beats the field's
+  max (28), and a flop act (Splash ×4, max 12) always loses to the
+  field's min (16). Suite A07 pins those bounds.
+
+### The engine — on the shipped battle presentation
+
+- `src/game/contest.mjs` (new; module-order right after
+  battle.mjs): a pure deterministic core (`createContest`,
+  `performRound`, `resolvePerformance`, `standingsOf`,
+  `placementOf`, `awardContestRibbon`) + `ContestScene`.
+- Flow: 4 entrants (player + the hall's 3 NPCs) × 4 rounds.
+  Performance order ROTATES (round r opens with entrant r−1).
+  Each performance scores appeal (table) + a presentation
+  variance of 0..2 drawn from the caller's rng stream (seeded in
+  tests, `g.rng.misc` live). **Jam semantics (the shipped
+  reading):** a jam move cuts the CURRENT ROUND LEADER — the
+  highest round score among entrants who have ALREADY performed
+  this round, never the performer — by min(jam, their round
+  gain). Behind is where jam lives; played from the front (or
+  first in the round) it fizzles. After each round the scene
+  announces the standings. Standings sort: total desc, then
+  final-round gain desc, then entrant order — no coin flips.
+  1st place → the hall's ribbon; replays allowed, never
+  duplicated (`awardContestRibbon` is idempotent).
+- **The scene rides the battle presentation by inheritance:**
+  `ContestScene extends BattleScene` and overrides only
+  `enter` / `update` / `exit` + the contest flow — `render()`
+  (arena, stepped platforms, battler plates, idle life) is
+  BattleScene's own, untouched. `this.foe` tracks the current
+  performer, `this.ally` is the entered mon; move picks ride a
+  'Choose a move' menu over the mon's REAL moveset (labels carry
+  the appeal/jam), narration rides `ui.say` — the same harness
+  seams the battle/overworld drivers already speak. No damage,
+  no HP change, no fainting: B13 asserts the entered mon's HP is
+  untouched after a full contest.
+- **Smell watch — what the battle presentation had to LEARN:
+  nothing.** BattleScene itself is unmodified (the 45/45 hard
+  gate is the point, and it holds). The one integration fact
+  worth recording: `render()` reads a fixed field set
+  unconditionally (fxPool at FX_POOL_MAX 60, entryFx, fxKb,
+  fxRecoil, entryT, _exitStartT, hpAnim, msg/msgOpen, t) — a
+  subclass must initialize ALL of it in its own enter(), since
+  BattleScene.enter() (which normally does) is the battle flow
+  and never runs. ContestScene.enter() initializes exactly that
+  set; the header comment in contest.mjs lists it for H6/H7.
+- Entry seam: `sysInteract` in overworld-systems gains ONE
+  branch — on a map with a `contestHall` field, facing the
+  reception counter tile ('α', the counter furniture all four
+  halls are dressed with, the Center-counter char) calls
+  `startContest()`: a reception greeting (an already-held
+  ribbon is named honestly), a party pick ('Enter which
+  Pokemon?', eggs and fainted mons excluded, with a spoken
+  refusal when nobody is able), then the ContestScene is
+  pushed. Suite B07 proves open floor in a hall opens nothing.
+
+### Ribbon persistence — the quintet, as executed
+
+Shape (mirroring the J6 top-level arc-systems precedent):
+**`state.contest = { ribbons: [...] }`** — a top-level key
+holding a duplicate-free, UNORDERED subset of the four hall ids
+(ribbons can be won in any order, so no prefix rule, unlike
+badges). The five places state lives, all landed:
+
+1. **defaultState** (state.mjs): `contest: { ribbons: [] }`.
+2. **Client schema** (save/schema.mjs): TOP_KEYS += 'contest';
+   validate-if-present block — object with a ribbons array,
+   length ≤ 4, every id in CONTEST_RIBBONS, no duplicates, else
+   `bad-contest-ribbons`.
+3. **Save-fill** (schema.mjs fillV2Defaults via migrate): a
+   pre-H5 save (no contest key) opens with `{ ribbons: [] }`; a
+   present value rebuilds into the closed shape (known ids
+   only, duplicates dropped) — validateSave stays strict.
+4. **gen-tables** (tools/api-scripts/gen-tables.mjs): imports
+   CONTEST_RIBBONS from src/data/contest.mjs and emits
+   `ribbons` into tables.json — regenerated ONLY via the tool
+   (`--check` green; the snapshot was never hand-edited).
+5. **Server validator** (api/_lib/validator.mjs): TOP_KEYS +=
+   'contest'; TABLES.ribbons as a Set; validate-if-present —
+   `bad-contest` (non-object), `bad-contest-ribbons` (non-array
+   / oversize), `bad-ribbon` (unknown id / duplicate). Absent
+   key accepted (pre-H5 cloud saves stay valid).
+
+Suite A09–A15 pins each of the five, including the round-trip:
+a ribboned save validates on BOTH validators, and B10 drives
+the live bundle state's JSON round-trip through migrate +
+validateSave.
+
+### Suite
+
+- **tests/hoenn-contest-checks.mjs: 28/28** (15 pure + 13
+  bundle). Pure: coverage/derivation/notables, NPC field
+  bounds, the quintet. Bundle: the engine driven
+  deterministically (scoring math reconciled event-by-event
+  against the table; the jam A/B on one seed — sing vs splash
+  control — where the NPC field scores EXACTLY the jammed
+  total less, and every jammed entrant's total reconciles;
+  the leader-so-far unit and the nobody-ahead fizzle), then
+  the true path: counter → party pick → ContestScene → 4
+  'Choose a move' menus → Verdanturf ribbon persisted → save
+  round-trip → encore win with NO duplicate → Slateport
+  ribbon (unordered set) → Splash loss, no ribbon, no damage.
+
+### Battery + build
+
+- qa-changed-flows exactly **{b2, d9}**; battle-model
+  **45/45** (HARD — BattleScene unmodified, the gate this
+  stage is built around); campaign-smoke **24/24**; fidelity
+  **35/35**; hoenn-story **88/88**; johto-story **110/110**;
+  johto-systems **62/62**; arc-foundation **47/47**; Track B
+  **114/114**; validator **89** + fuzz **2000/2000** +
+  save-contract **10/10** with the new state; qa-slice exactly
+  **{s6, l8}**; rejuv-phase2 exactly **{A09, C01}**; budgets
+  **all gates pass**; `personal/` byte-identical (restored
+  from HEAD after builds; zero personal/ paths in the diff).
+- **public/game.js: 9,757,130 B (+21,940 vs H4b)**; public
+  static total **9,919,752 B** vs the 10,100,000 B trigger —
+  **margin 180,248 B** (was 202,188 at H4b close; this stage's
+  data+engine spend is proportionate, ~22 KB for the table,
+  the engine, the scene and the validator pair).
+
+### For H6/H7
+
+- Contests are live at all four halls from any save that can
+  reach them (no story gating was added — the halls' own sign
+  text promised exactly this). H7's chain drive can win its
+  one required contest ribbon at Verdanturf with any
+  headliner moveset (Hyper Beam ×4 is a by-construction 1st;
+  suite B02/B08 prove the line end-to-end).
+- `state.contest.ribbons` is the ONLY new state; a ribboned
+  save round-trips both validators (A13/B10). Nothing in H5
+  touches story flags, badges, or May's dressing.

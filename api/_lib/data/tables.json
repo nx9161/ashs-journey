@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "d3528ba8a2c6865aa81be1f2e24690765459c43c6e5c2dfd5046b9947cdc0735",
+  "tablesVersion": "f0664f20914ffe8f38e822416f79ac71159d55fc6d513d7deb511e501a0ca962",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -727,6 +727,12 @@
     "thunderheadpin",
     "tidepearl",
     "tortoisecharm"
+  ],
+  "ribbons": [
+    "verdanturf",
+    "fallarbor",
+    "slateport",
+    "lilycove"
   ],
   "balls": [
     "fastball",

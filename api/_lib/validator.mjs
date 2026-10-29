@@ -53,6 +53,7 @@ function loadTables() {
       moves: new Set(tables.moves),
       items: new Set(tables.items),
       keepsakes: new Set(tables.keepsakes || []),
+      ribbons: new Set(tables.ribbons || []),
       balls: new Set(tables.balls || []),
       forms: new Set(tables.forms || []),
       quests: new Set(tables.quests || []),
@@ -459,7 +460,10 @@ function detectAnomalies(data, summary, anomalies) {
 const TOP_KEYS = new Set(['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story', 'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session',
   // Stage J6: the arc-systems fields — the client schema's TOP_KEYS
   // carries the same six (the matched pair).
-  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder']);
+  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder',
+  // Stage H5: the contest field — the client schema's TOP_KEYS
+  // carries the same key (the matched pair).
+  'contest']);
 
 export function validateSave(data) {
   const errors = [];
@@ -548,6 +552,23 @@ export function validateSave(data) {
   if (data.kurtOrder !== undefined && data.kurtOrder !== null) {
     const o = data.kurtOrder;
     if (!isPlainObj(o) || hasDangerousKey(o) || typeof o.ball !== 'string' || !TABLES.balls.has(o.ball) || !isInt(o.readyAt, 0, 100000000)) errors.push('bad-kurt-order');
+  }
+  // Stage H5: contest.ribbons — a duplicate-free subset of the closed
+  // hall set (TABLES.ribbons, emitted by gen-tables from
+  // src/data/contest.mjs). Optional: a pre-H5 save carries no contest
+  // key and stays valid (the client fills the default on load).
+  // Ribbons are unordered — no prefix rule, unlike badges.
+  if (data.contest !== undefined) {
+    const c = data.contest;
+    if (!isPlainObj(c) || hasDangerousKey(c)) errors.push('bad-contest');
+    else if (!Array.isArray(c.ribbons) || c.ribbons.length > TABLES.ribbons.size) errors.push('bad-contest-ribbons');
+    else {
+      const seenR = new Set();
+      for (const id of c.ribbons) {
+        if (typeof id !== 'string' || !TABLES.ribbons.has(id) || seenR.has(id)) { errors.push('bad-ribbon'); break; }
+        seenR.add(id);
+      }
+    }
   }
 
   checkDex(data.dex, errors, summary);

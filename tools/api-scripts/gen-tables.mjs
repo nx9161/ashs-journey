@@ -27,6 +27,7 @@ const { SPECIES_HOENN } = await import(join(ROOT, 'src', 'data', 'species4.mjs')
 const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
 const { ITEMS, BALLS, KEEPSAKES, BADGE_SETS } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
+const { CONTEST_RIBBONS } = await import(join(ROOT, 'src', 'data', 'contest.mjs'));
 const { ORANGE_QUESTS, ORANGE_LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-orange.mjs'));
 const { JOHTO_QUESTS, JOHTO_TALES, JOHTO_LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-johto.mjs'));
 const { HOENN_QUESTS, HOENN_TALES } = await import(join(ROOT, 'src', 'data', 'story-hoenn.mjs'));
@@ -59,6 +60,9 @@ const tables = {
   // ADR-025 §3 (Phase 3): the closed keepsake id set — the validator
   // accepts mon.keepsake only from this list (never a generic item id).
   keepsakes: Object.keys(KEEPSAKES).sort(),
+  // Stage H5: the closed contest-ribbon id set (the four hall ids) —
+  // the validator accepts state.contest.ribbons only from this list.
+  ribbons: [...CONTEST_RIBBONS],
   balls: Object.keys(BALLS).sort(),
   forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
   quests: [...MAIN_QUESTS.map((q) => q.id), ...ORANGE_QUESTS.map((q) => q.id), ...JOHTO_QUESTS.map((q) => q.id), ...HOENN_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(ORANGE_LEGENDARY_ARCS || {}), ...Object.keys(JOHTO_LEGENDARY_ARCS || {}), ...Object.keys(TOWN_TALES), ...Object.keys(JOHTO_TALES), ...Object.keys(HOENN_TALES)].sort(),
