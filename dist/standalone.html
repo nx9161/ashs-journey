@@ -920,6 +920,26 @@ function xpForLevel(curve, level) {
   }
 }
 
+// Save-validation XP ceiling for a level cap (ADR-027 Amendment 2,
+// Stage J0): the most XP a mon can legitimately hold at that cap.
+// The slowest growth curve among the game's species is 'slow' (the
+// shipped species census uses fast / mediumfast / mediumslow / slow
+// only — erratic and fluctuating have no species), so the ceiling is
+// read off xpForLevel('slow', cap + 1): a mon AT the cap earned its
+// last level against that threshold and its final XP share (or an XP
+// Candy) can carry it past xpForLevel('slow', cap). The x2 slack is
+// the generous margin for post-cap accumulation — the battle XP loop
+// keeps adding shares to a capped mon without levelling it. An
+// open-level cap (Infinity — the Battle Frontier) has no ceiling.
+// The client schema, the server validator (via the gen-tables
+// emission) and this function are the matched pair: one derivation,
+// never a hand-copied number.
+const XP_CEILING_SLACK = 2;
+function xpCeilingForCap(cap) {
+  if (typeof cap !== 'number' || !Number.isFinite(cap)) return Infinity;
+  return XP_CEILING_SLACK * xpForLevel('slow', cap + 1);
+}
+
 // Simplified documented-style XP yield: base * level / 7; trainer battles pay
 // the documented Gen 5-era 1.5x (GD balance: the slice's XP economy runs on
 // trainer payouts, not wild grinding).
@@ -78342,6 +78362,7 @@ function lockedChapters() {
 //                  honest future-tense line — no playable claims)
 //   enRouteLines   the embark crossing card text (original writing)
 
+
 const HOME_TOWN_MAP_ID = 'pallet';
 const HOME_MAP_ID = 'house-pallet-ash'; // Mom's house interior (maps4.mjs)
 
@@ -78576,6 +78597,13 @@ function currentArcOf(state) {
 function levelCapFor(state) {
   const arc = currentArcOf(state);
   return arc.band ? arc.band.max : Infinity;
+}
+
+// Stage J0: the save-validation XP ceiling paired with levelCapFor —
+// the same derivation the server validator enforces via the tables
+// gen-tables emits from this registry (one derivation, both sides).
+function xpCeilingFor(state) {
+  return xpCeilingForCap(levelCapFor(state));
 }
 
 function dexHorizonFor(state) {
@@ -81206,9 +81234,16 @@ const SCHEMA_VERSION = 2;
 // viewer: { team: [{ speciesId, level, nickname }], badges }. Legacy
 // entries shaped { species, level } (the shape the server validator
 // was written against before the viewer shipped) normalize into it.
-function normalizeHofEntry(e) {
+function normalizeHofEntry(e, cap) {
   if (!e || typeof e !== 'object' || Array.isArray(e)) return null;
-  const lvl = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.max(1, Math.min(100, Math.trunc(v))) : 1);
+  // Stage J0: the clamp ceiling is the owning save's arc band cap,
+  // passed by the save-flow callers (schema fillV2Defaults reads it
+  // via levelCapFor on the save being loaded; Second Journey
+  // inheritance reads it off the source save). A bare call with no
+  // save context keeps the historical Kanto ceiling of 100 — the
+  // only callers of that form count entries, never levels.
+  const ceil = typeof cap === 'number' && cap > 0 ? cap : 100;
+  const lvl = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.max(1, Math.min(ceil, Math.trunc(v))) : 1);
   if (Array.isArray(e.team)) {
     const team = [];
     for (const m of e.team) {
@@ -81226,10 +81261,10 @@ function normalizeHofEntry(e) {
   }
   return null;
 }
-function normalizeHofList(list) {
+function normalizeHofList(list, cap) {
   if (!Array.isArray(list)) return [];
   const out = [];
-  for (const e of list) { const n = normalizeHofEntry(e); if (n) out.push(n); }
+  for (const e of list) { const n = normalizeHofEntry(e, cap); if (n) out.push(n); }
   return out;
 }
 // Completion detection (§6): a run has completed Kanto when ITS OWN
@@ -81414,8 +81449,9 @@ function defaultState(inherit) {
     // 2. Keepsake collection: the pieces, in the pocket, from the start.
     for (const id of keepsakeCollectionOf(src)) st.bag[id] = 1;
     // 3. Prior runs' HoF teams stay viewable (this run's hof stays empty).
-    st.story.priorHof = [...normalizeHofList(src.story && src.story.hof),
-      ...normalizeHofList(src.story && src.story.priorHof)];
+    // Stage J0: clamped at the SOURCE save's band cap, not a fixed 100.
+    st.story.priorHof = [...normalizeHofList(src.story && src.story.hof, levelCapFor(src)),
+      ...normalizeHofList(src.story && src.story.priorHof, levelCapFor(src))];
     // 4. Traveler's Memory (door-keeping only). The coin case is the
     // one gate whose "pre-solved" state is a handover: it is in the
     // new run's bag from the start when the source had earned it.
@@ -82398,9 +82434,18 @@ function validateSave(data) {
   if (data.v !== SCHEMA_VERSION) errors.push('bad-schema-version');
   if (!isObj(data.player) || typeof data.player.name !== 'string') errors.push('bad-player');
   if (!Array.isArray(data.party) || data.party.length > 6) errors.push('bad-party');
+  // ADR-027 Amendment 2 (Stage J0): the level cap + XP ceiling are
+  // registry reads off the save's own story.arc (levelCapFor /
+  // xpCeilingFor — the exact derivation gen-tables emits for the
+  // server validator, so the pair cannot drift). Min stays 1; an
+  // absent/invalid arc reads as Kanto here and is rejected on its
+  // own code below.
+  const levelCap = levelCapFor(data);
+  const xpCeiling = xpCeilingFor(data);
   for (const m of (data.party || [])) {
     if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number') { errors.push('bad-mon'); break; }
-    if (m.level < 1 || m.level > 100) { errors.push('bad-mon-level'); break; }
+    if (m.level < 1 || m.level > levelCap) { errors.push('bad-mon-level'); break; }
+    if (m.xp !== undefined && (typeof m.xp !== 'number' || !Number.isFinite(m.xp) || m.xp < 0 || m.xp > xpCeiling)) { errors.push('bad-xp'); break; }
     if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-mon-moves'); break; }
     // ADR-025 §3 (Phase 3): mon.keepsake is a keepsake itemId or null.
     // Rulings patch (2026-10-27): the id must come from the closed
@@ -82459,10 +82504,10 @@ function validateSave(data) {
     for (const e of list) {
       const canon = isObj(e) && Array.isArray(e.team) && e.team.length >= 1 && e.team.length <= 6
         && e.team.every((m) => isObj(m) && typeof m.speciesId === 'string'
-          && typeof m.level === 'number' && m.level >= 1 && m.level <= 100)
+          && typeof m.level === 'number' && m.level >= 1 && m.level <= levelCap)
         && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0));
       const legacy = isObj(e) && typeof e.species === 'string'
-        && typeof e.level === 'number' && e.level >= 1 && e.level <= 100;
+        && typeof e.level === 'number' && e.level >= 1 && e.level <= levelCap;
       if (!canon && !legacy) { errors.push('bad-story-' + key + '-entry'); break; }
     }
   }
@@ -82559,8 +82604,11 @@ function fillV2Defaults(data) {
     // shape on load — legacy { species, level } entries (the shape the
     // server validator was written against) and the pushed
     // { team, badges } shape both land canonical; junk entries drop.
-    data.story.hof = normalizeHofList(data.story.hof);
-    data.story.priorHof = normalizeHofList(data.story.priorHof);
+    // Stage J0: the normalizer clamps at THIS save's arc band cap
+    // (levelCapFor on the save being loaded), so a Johto HoF team's
+    // levels survive load instead of being rewritten to 100.
+    data.story.hof = normalizeHofList(data.story.hof, levelCapFor(data));
+    data.story.priorHof = normalizeHofList(data.story.priorHof, levelCapFor(data));
     // Carried-knowledge lists rebuild into their closed vocabularies.
     data.story.bondEcho = Array.isArray(data.story.bondEcho)
       ? [...new Set(data.story.bondEcho.filter((x) => typeof x === 'string' && /^[a-z0-9_]{1,40}$/.test(x)))].slice(0, 32) : [];
@@ -95175,6 +95223,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:e030c0e2542d3e013f7905fe33c250c1ae072728565a677f271ed8c5584602ec -->
+<!-- contentHash:2dc905367220b028a12320ab3112d125213ed461e085c83e67d49a1a34b4a810 -->
 </body>
 </html>
