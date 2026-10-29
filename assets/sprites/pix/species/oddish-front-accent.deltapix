@@ -2,12 +2,12 @@
 # over oddish-front: the silhouette never changes; the accent reads in
 # alternation with the base frame under the species idle class.
 PIXD oddish-front-accent oddish-front 64 64
-25 34 Y
-26 34 Y
-27 34 Y
-37 34 Y
-38 34 Y
-39 34 Y
-26 37 B
-38 37 D
+21 36 Y
+23 36 Y
+24 36 Y
+37 36 Y
+39 36 Y
+40 36 Y
+23 39 B
+39 39 D
 PAL

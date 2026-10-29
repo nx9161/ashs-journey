@@ -2,26 +2,26 @@
 # over poliwag-front: the silhouette never changes; the accent reads in
 # alternation with the base frame under the species idle class.
 PIXD poliwag-front-accent poliwag-front 64 64
-24 24 Y
-25 24 Y
-26 24 Y
-27 24 Y
-38 24 Y
-39 24 Y
-40 24 Y
-41 24 Y
-22 29 B
-23 29 B
-24 29 B
-25 29 B
-26 29 B
-27 29 B
-28 29 B
-36 29 C
-37 29 C
-38 29 C
-39 29 D
-40 29 D
-41 29 D
-42 29 D
+19 8 Y
+20 8 Y
+22 8 Y
+23 8 Y
+39 8 Y
+40 8 Y
+42 8 Y
+43 8 Y
+16 15 B
+17 15 B
+19 15 B
+20 15 B
+22 15 B
+23 15 B
+24 15 B
+36 15 C
+37 15 C
+39 15 C
+40 15 D
+42 15 D
+43 15 D
+45 15 D
 PAL

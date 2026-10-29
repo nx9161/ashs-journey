@@ -14,6 +14,7 @@ import { ART } from '../../assets/sprites/art-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
 import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
+import { battlerDrawSize } from '../data/battler-tiers.mjs';
 
 // ---- Layered delta frames (Premium+ W0, spec §4 W0 item 1) ----
 // ART entries authored as .deltapix ship in delta form:
@@ -113,7 +114,12 @@ export function speciesBattleArt(doc, speciesId, species) {
       backAccent: mk(speciesId + '-back-accent'),
       frontWhite: artCanvas(doc, speciesId + '-front', 1, true),
       backWhite: artCanvas(doc, speciesId + '-back', 1, true),
-      size: BATTLER_DRAW_SIZE,
+      // Premium+ W8 (SP-1): per-species draw-scale tier (52/64/80,
+      // platform-anchored — the classic draw anchors on the frame's
+      // bottom edge, so a bigger tier grows UP from the disc). Foe
+      // and ally read the same table: staged parity replaces the
+      // Wave 0 uniform-size parity. Forge fallback keeps 64.
+      size: battlerDrawSize(speciesId),
     };
   }
   // Fallback: forge stand-in (documented; replaced when art ships).

@@ -2930,8 +2930,8 @@ export class BattleScene {
     this.ptDisc(r, allyPos.x + 24, allyPos.y + 44, 38, 9);
     // Premium+ W2 (AN-1d): contact shadows ride ON the discs and track
     // each battler's idle offset — a battler never floats.
-    this.contactShadow(r, foePos.x + 24, foePos.y + 45, 26, foeIdle.dy);
-    this.contactShadow(r, allyPos.x + 24, allyPos.y + 45, 30, allyIdle.dy);
+    this.contactShadow(r, foePos.x + 24, foePos.y + 45, Math.round(26 * ((foeArt && foeArt.size) || BATTLER_DRAW_SIZE) / 64), foeIdle.dy);
+    this.contactShadow(r, allyPos.x + 24, allyPos.y + 45, Math.round(30 * ((allyArt && allyArt.size) || BATTLER_DRAW_SIZE) / 64), allyIdle.dy);
     // Wave 3b: during the intro chain (state 'intro' — challenge and
     // send-out messages), the authored trainer figures stand on the
     // platforms instead of the battlers: Ash's battle back on the ally

@@ -2,12 +2,12 @@
 # over ekans-front: the silhouette never changes; the accent reads in
 # alternation with the base frame under the species idle class.
 PIXD ekans-front-accent ekans-front 64 64
-24 13 Y
-25 13 Y
-26 13 Y
-34 13 Y
-35 13 Y
-36 13 Y
-25 16 C
-35 16 D
+21 5 Y
+22 5 Y
+24 5 Y
+33 5 Y
+34 5 Y
+36 5 Y
+22 9 C
+34 9 D
 PAL

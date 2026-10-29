@@ -2,15 +2,15 @@
 # over oddish-back: the silhouette never changes; the accent reads in
 # alternation with the base frame under the species idle class.
 PIXD oddish-back-accent oddish-back 64 64
-31 15 E
-31 16 E
+29 13 E
+29 15 E
+27 16 E
+28 16 E
+29 16 E
+27 17 E
+28 17 E
 29 17 E
-30 17 E
-31 17 E
+28 18 E
 29 18 E
-30 18 E
-31 18 E
-30 19 E
-31 19 E
-31 20 E
+29 19 E
 PAL

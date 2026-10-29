@@ -4202,7 +4202,13 @@ explicitly NOT dressing.
   before tint). Canopy pieces (4 authored 32×32: oak/pine/elm/
   round) resolver-placed over tree/tc-* border cells; roof-eave
   foreground (2 authored strips) over typed-building facade
-  bases (house/center/mart/gym/lab/dojo). Census: forest-border
+  bases (house/center/mart/gym/lab/dojo) **[W8 correction,
+  2026-10-29: eaves exist on typed facades only — the 68 census
+  cells are `wall-*` / gym facade cells per `TYPED_FACADE_KINDS`;
+  ordinary houses have no eave cells (Pallet scans 0). The word
+  "house" in this sentence overstates coverage; the census gate
+  itself (typed buildings 68/68) was always measured on the typed
+  set. Noted by W7 QA, corrected here per its note 1.]** Census: forest-border
   cells **0/918 (0%) → 746/918 = 81.3%** (gate ≥50%);
   typed-building eave cells **68/68**. Live under-pass proof:
   pixel-diff of the player-under-canopy region with the
@@ -4482,3 +4488,423 @@ re-dirty it.
    they define.
 
 **Defects:** none found. No map/coordinate defect to report.
+
+## Premium+ Art Wave W8 — Signature Finish + Full Re-Census (2026-10-29, implementer entry — pending independent QA)
+
+Base HEAD ecd050d (W0–W7 committed, all QA-passed). Public edition
+only; NOT committed by the implementer (coordinator commits after
+independent QA). Spec: `premium-art-spec.md` §3.3c (SP-1..3), §4 W8
+row (art-data growth cap ≤250 KB). All art hand-authored `.pix` via
+the deterministic pipeline (scripted generators in the QA workspace,
+the W5/W6 precedent); original only. Battle mechanics untouched —
+SP-1 changes draw scale only, via the art entry's `size`.
+
+### SP-1 — size tiers (PASS)
+
+- **New data table `src/data/battler-tiers.mjs`: 162/162 rows** —
+  every species entry in `species.mjs` + `species2.mjs`, including
+  the partner and the 10 Cheat-Shop expansion entries (hooh,
+  donphan, giantdragonite, surfingpikachu, togepi, marill, snubbull,
+  crystalonix, pinkbutterfree + partner-class rows) — verified by
+  the W8 census rig (missing: none, extra: none).
+- **Assignment rule (auditable):** bulk = base HP+DEF+SPD from the
+  species data (no height/weight fields exist). **S = 52px below
+  160, M = 64px to 244, L = 80px at 245+.** Hand overrides on the
+  record: onix → L (28-ft rock serpent), charizard → L (wingspan
+  frame), mew → S (perfect-100s spread, tiny body), plus four
+  SP-2 presence-floor bumps to M (haunter, zubat, psyduck, horsea —
+  see SP-2). **Distribution: S 41 · M 84 · L 37.**
+- **Wiring:** `speciesBattleArt` now returns the tier size (forge
+  fallback keeps 64); foe and ally read the SAME table — staged
+  parity explicitly replaces Wave 0's uniform-size parity. The
+  classic draw is bottom-anchored on the platform frame, so a
+  bigger tier grows UP from the disc (platform-anchored); RT's
+  centered draw consumes the same `art.size`. Contact shadows
+  scale with tier (26/30px × size/64). The module is registered
+  in `scripts/module-order.json` (the bundle's concat order).
+- **Measured:** snorlax 80 vs partner (Pikachu) 52 — the partner
+  is the player's own battler in most fights, so the tower reads
+  on the default screen; pidgey 52 vs charizard 80; gyarados 80.
+
+### SP-2 — fill (PASS: 35 reframed to gate + 6 tier-verified)
+
+- **Measure:** fill = inked px / 4096 on the built ART data (the
+  game's own `materializeArt`); baseline = exact fills parsed from
+  the git-HEAD `.pix` sources. **Reframe set: 41 species** — the
+  bottom quartile by mean(front,back) fill (41) ∪ any side <0.25
+  (the union is the same 41).
+- **Reframe method** (`gen-w8-reframe.mjs`): nearest-neighbour
+  rescale of the ink bbox inside the 64×64 canvas (bottom-anchored,
+  centred; widen up to ×1.6 for tall-thin shapes), then — only
+  where scale alone cannot reach 0.35 — enclosed-hole fill and a
+  ≥5-neighbour notch-thicken. Palette NEVER changes; accent
+  deltas for reframed sides are coordinate-transformed through
+  the same map (all transforms: 0 collisions). 11 sprites needed
+  an outline repair pass (thicken had placed non-`O` pixels on
+  silhouette edges; recolored to `O`, counts 1–2px each).
+- **Result: 35/41 species reach ≥0.35 on BOTH sides** (range after:
+  0.353–0.721). **6 species take the tier path** — wiry, wide-bbox
+  shapes whose canvas fill is structurally capped (wings, limbs,
+  rings): aerodactyl 0.310/0.321, alakazam 0.317/0.287, haunter
+  0.293/0.313, hitmonlee 0.343/0.346, magnemite 0.280/0.280,
+  zubat 0.297/0.297 — each capture-measure-proven by on-screen ink
+  (fill × tier²) vs its W7 ink (fill × 64²): **+27% / +11% / +22% /
+  +49% / +8% / +29%** — presence recovered by the tier system,
+  measured, not assumed. The four presence-floor tier bumps exist
+  because at S these species' ink would have FALLEN below W7.
+- **No species ends worse than its W7 state: 0/162** (either side,
+  exact HEAD baseline).
+
+### SP-3 — backs parity (PASS, 20/20)
+
+- **Plainest backs identified by shade-count measurement** (ramp =
+  distinct hexes ≥15px within 35° hue of the baseline dominant
+  surface hex): marill (ramp 1, 4 colours total), hooh (1),
+  snubbull (1), exeggutor (1), donphan (2), togepi (2), snorlax
+  (2 — the belly-oval back), omanyte (3), omastar (3), seaking
+  (3), machamp (4), magnemite (4), machop (4), wartortle (4),
+  goldeen (4), mrmime (4), blastoise (4), bellsprout (5),
+  crystalonix (5), dragonair (5).
+- **Pass** (`gen-w8-backs.mjs`): each gains two ramp shades of its
+  dominant surface (dark ×0.70, light ×1.30; whites gain ×0.64 /
+  ×0.85), painted by a diagonal NW-light score so scattered
+  surfaces (ho-oh's feather tips) shade as reliably as solid
+  bellies. **Recolor only — no pixel added, removed, or moved:
+  silhouettes identical, backs remain true rear views.**
+- **Result: 20/20 at ≥3 shades** on the treated surface (ramps
+  now 3–7); **roster-wide, 0 backs remain below 3 shades** under
+  the same measure.
+
+### Accent frames close-out — SATISFIED-BY-W2
+
+Grep of this register's W2 entry, its QA addendum, and the wave QA
+verdicts finds **no explicit accent deferral anywhere**. W2 shipped
+**120 accent frames (60 most-seen species × front+back)** — the
+top of AN-1's ~40–60 range — and the built ART still carries
+exactly 120 accent keys (W8 census). The item is closed as
+satisfied by W2, not re-worked. The earlier World-Art QA's inert
+note ("partner-front-bob does not exist") is **resolved, not a
+leftover**: W2's shift-delta derivation covers the partner front,
+and `partner-front-bob` + `partner-back-bob` both exist in the
+built ART (verified this wave).
+
+### Polish from QA findings
+
+- **5a LANDED — gym/interior floor speckle (W6 QA note 1).**
+  `tile-gymfloor-3/4`'s blue-grey alt tones (#8a8aa0/#9a9ab0/
+  #7a7a90) against warm wood were the speckle source at capture
+  scale; harmonized to warm tans (#a8905e/#d8bc82/#b89a64).
+  Checker/diamond patterns and rows are untouched, so the TX-1
+  pairwise pixel-diff counts are unchanged by construction.
+  W6 census re-run after the touch: **all gates PASS** (TX-3
+  47/47, Center top-1 24.1% ≤25%, TX-4 kinds as below, TX-5 as
+  below). League/Silph floors were not touched (their read in QA
+  shots is furniture-led; changing them risks TX-4 colour gates
+  for a note-level gain — recorded, not hidden).
+- **5b LANDED — Seafoam entry framing (W6 QA note 2).** The entry
+  pocket (landing rows 9–10 around the door pair) converted from
+  cavefloor to ice/frost floor (13 cells) plus one `waterglow`
+  cell beside the landing, throwing an LD-4 glow pool at the
+  entry. Applied identically to the maps2 + maps3 copies (row
+  widths re-verified 16×12 after a first pass produced a 15-cell
+  row — caught and fixed before any build). TX-5 gates re-run:
+  seafoam 15 kinds, **in-glow 104 colours, 16 light sources**.
+  All changed cells are floor-class → floor-class; warp audit
+  surface unchanged (celadon-sweep 11/11 below).
+- **5c LANDED WITH ONE EXCEPTION — dressing regularity (W7 QA
+  note 3).** `apply-w8-variation.mjs` removed a hash-chosen ~40%
+  of W7 dress cells (never gate kinds; every kind keeps ≥2 cells
+  per map; each removed cell reverts to its neighbour-majority
+  ground char — removal only converts solid prop → walkable
+  ground, so reachability/sight can only improve; `,` cells
+  untouched). **Net: 165 cells removed across 27 maps**; per-map
+  dressing cells now vary 16–25 instead of a uniform 21, and W7
+  census re-run holds every gate (towns ≥8 kinds, routes ≥9,
+  gates 38/38). **Exception: route1's 7 removals were restored**
+  — route1's dressing sits on the verify-slice qa-f4 encounter-
+  cadence walk, and removing a prop on its oscillation column
+  moved the measured max silent stretch 20 → 21 steps (determin-
+  istic, base-parity checked). Route1 keeps its exact W7 dressing;
+  the variation stands on the other 27 maps. qa-slice back to
+  134/134 with the restore in place.
+- **5d LANDED — W7 register wording (W7 QA note 1).** A bracketed
+  W8 correction now sits inside the W7 entry's TX-7 paragraph:
+  eaves exist on typed facades only (68 cells); ordinary houses
+  have none. History corrected in the open, not rewritten.
+- **5e RECORDED — render max frame (W7 QA note 2) → leftover L3**
+  (below). Investigated: the >8ms frames are warp/load frames
+  (fade + first draw of a cold map: tile-cache and foreground
+  composition), 5/848 in QA's walk; mean/p95 pass with margin on
+  every rig since W5. No cheap fix exists inside an art wave
+  (the cost is one-off cache warming, not per-frame work), and
+  steady-state never approaches the budget — named, not fixed.
+
+### FULL RE-CENSUS — every §3 line vs the final tree
+
+Rigs re-run this wave on the final tree: audit-art-census,
+audit-fx-coverage, audit-fx-presentation, audit-palette-use,
+audit-trainer-coverage, audit-w4-art, audit-w5-census,
+audit-w6-census, audit-w7-census, audit-w8-census (new). Frame-
+series and blind-test lines rest on their waves' QA evidence
+(no code in those paths changed since; W8's only battle-code
+touch is contact-shadow width, which scales an existing draw).
+
+| Line | Spec target | Final measured | Verdict |
+|---|---|---|---|
+| FX-1 | 144/144 moves, 62 defs | 144/144, 62/62 reachable (rig re-run) | PASS |
+| FX-2 | feedback table consumed; knockback ≥4/8/12px; gates 100% | shipped table consumed unchanged; knockback 4/8/12; fx-presentation rig PASS (re-run) | PASS |
+| FX-4 | 7 condition overlays persist | 7/7 in classic + RT shared path (rig re-run) | PASS |
+| FX-5 | send-out/recall every entry; ≥6 ball sprites; placeholder 0 sites | 6 ball sprites; two-circle placeholder 0 call sites (rig re-run) | PASS |
+| FX-6 | ≥4 entry variants; budgets wild ≤1400ms / boss ≤2200ms | 4 variants (W1 frame evidence); exit mirrors ≤300ms | PASS |
+| AN-1 | back-bob parity; ≥4 idle classes; ~40–60 accents; ≥4 poses/2s | back-bob 162/162, front-bob 162/162; 4 classes, 162-row data table; 120 accents (60 species); rig poses 14–20 (W2 QA) | PASS |
+| AN-2 | follower 2f×4dir hop+idle; tail diff ≥20px; ≥3 yellows/frame | 24/24 facing samples; tail-row diff 29px; 4 yellows every frame (W3) | PASS |
+| AN-3 | walk 6f, idle 4f, run/bike/surf/fish sets; frame diff ≥150px | all sets live; diff ≥154px every direction (W3 + QA fix pass) | PASS |
+| AN-4 | directional idles 100% (288), walk 192, named ext 40; wander ≥40%; phase offsets | 288/288 + 192/192 + 40/40 (rig re-run today: 520/520); wander ruled MET by coordinator (13/16 non-pinned moved; raw 13/37 recorded at W4) | PASS (ruling on record) |
+| AN-5 | ≥12 families, 3 cadences; outdoor pair ≥0.8%; water ≥6% | 16 families; outdoor 1.18–4.70%; water 23.0–37.3% (W3 rig) | PASS |
+| AN-6 | ≥5 animated prop systems indoors | 8/8 probed animate (W3) | PASS |
+| AR-1 | ≥5 layers / Ground ×15 | 5 layers ×15 (W2) | PASS |
+| AR-2 | ambient on 15/15, ≥5 elements move / 2s | 15/15 (W2 rig series) | PASS |
+| AR-3 | blind arena-only 15/15 | 15/15 (W2 independent QA) | PASS |
+| AR-4 | sky speckle 0 | 0 non-sky px (W2 rig) | PASS |
+| AR-5 | tinted discs 15/15; contact shadow 100% | tinted discs 15/15; shadows track idle (W2); W8: shadows scale with tier | PASS |
+| TR-1 | 104/104 trainer ids present a figure | 104/104 (rig re-run today: 44 named + 60 class) | PASS |
+| TR-2 | slide ≥300ms + throw from hand | 380ms ease-out slide; throw pose + hand-origin arc (W2) | PASS |
+| TR-3 | ceremony tier ≥15 identities, VS ≥800ms | ≥15 identities; VS beat ~1.15s boss-only (W2) | PASS |
+| TR-4 | defeat beat returns figure | defeat pose + slump for lose dialogue (W2) | PASS |
+| LD-1 | NW shadows: strips/skirts/corners 100%; tree blobs 100%; shadow scales with height | 165/165, 108/108, 161/161, 567/567 (W5 census); hop-apex shadow ≈41% ≤70% | PASS |
+| LD-2 | 4-phase tint: Δlum ≥8%, Δhue ≥6° day↔night; night windows 100%; lamp pools 100% | Δlum 25.6–27.2%, Δhue 26–37°; lit 136/136; pools 43/43 (W5) | PASS |
+| LD-3 | y-sort: staged overlaps 100% | 7/7 staged cases (W5) | PASS |
+| LD-4 | ≥4-step falloff; ≥3 light-source types; in-glow ≥25 | 6-step falloff; 4 source kinds; in-glow 72–104 per cave (re-run today) | PASS |
+| LD-5 | species colours min ≥16, median ≥18; terrain tile median ≥8 | species **min 4, median 13** (rig re-run today, n=324); tiles median 4 over all 602 tile sprites | **LEFTOVER L1/L2** |
+| TX-1 | map colours towns ≥80 / routes ≥60 / interiors ≥55 / caves ≥45; variants grass ≥10, tall ≥6, path ≥6, overlays ≥12, floors 4/family diff ≥80px; top-1 ≤15% | colours re-run today: towns 107–142, routes 118–162, interiors ≥65, caves 61–106; variants as W5 (10/6/6/14, diff 129–202px); top-1 ≤11.2% on W5 QA's capture instrument (today's full-raster instrument reads towns ≤16.2% — instruments differ, both recorded) | PASS |
+| TX-2 | town Jaccard ≤0.60 all pairs; ≥4 unique kinds/town; hue separation ≥8° for ≥8 towns; blind ≥8/11 | Jaccard max **0.400** (re-run today); unique kinds ≥8/town; hue min pairwise 9° (W5); blind 11/11 (W5 QA) | PASS |
+| TX-3 | houses ≥3 tiles, typed ≥4; roof ≥4 steps; eave+foundation+shadow 100%; ≥2 window designs/type; 8 gym facades | 47/47 buildings (re-run today); roof steps 4–7; windows house 18 / center 2 / mart 2 / gym 17 / lab 3; shared wall-gym 0 cells | PASS |
+| TX-4 | Center ≥10 kinds/≥16 cells; Mart ≥10; gyms ≥10 + ≥3 type; houses ≥10 + ≥2 unique, Jaccard ≤0.70; League/Silph/Tower ≥12; Center top-1 ≤25% | Center 14/20, top-1 **24.1%**; Mart 10; gyms 13–14 kinds, 3–4 type-specific; houses Jaccard max 0.688 (W6 QA); League/Silph/Tower 12 (all re-run today) | PASS |
+| TX-5 | dungeons ≥9 kinds; cave union ≥14; sub-themes complete; in-glow ≥25 | kinds 9–15; union **116**; Seafoam ice 8 + all sub-themes in-map; in-glow 72–104 (re-run today) | PASS |
+| TX-6 | warp fade 150–250ms on 100% of warps; dressing ≥8/town ≥5/route; ≤3/kind/capture; gate markers every exit pair | fades ~190/192ms, 100% of `warps[]` (W7 QA frame-sampled); dressing towns ≥8, routes ≥9 kinds (re-run today, post-variation); repeats ≤3 except pre-existing lamp clusters (W7 QA); gates **38/38** | PASS |
+| TX-7 | foreground ≥50% forest-border; top-5 ≤45% towns; authored item ball | canopy **81.3%**; eaves 68/68 typed facades (wording corrected, 5d); top-5 worst **40.9%** (re-run today); item ball authored (W5) | PASS |
+| PL-1 | door-open frames every door type + fade 100% warps | 16 door-open kinds wired (re-run today); fades per TX-6 | PASS |
+| PL-2 | one transition timing language | warp fades share battle-entry ease-out language (W7) | PASS |
+| PL-3 | render ≤8ms with full layer stack; no per-frame allocs; hash-driven only | mean 3.02ms / p95 4.7ms (W7 QA, 848 frames); max-frame warp spikes → L3 | NOTE |
+| SP-1 | ≥3 tiers in data, same table both sides | 52/64/80; 162/162 rows; S41/M84/L37 (rig today) | PASS |
+| SP-2 | bottom quartile ≥0.35 or tier-verified | 35/41 reframed ≥0.35 both sides; 6 tier-path ink +8…+49%; 0 species worse than W7 | PASS |
+| SP-3 | ~20 plainest backs ≥3 shades | 20/20 (ramps 3–7 after); roster backs <3 shades: 0 | PASS |
+| Budget | art-data ≤5.5MB ceiling; W8 growth ≤250KB; game.js ≤12,582,912; tiles union ≤640 | art-data **3,476,893 B**; W8 growth **+516 B**; game.js **4,974,486 B (39.5%)**; union **623/640**; ART keys **2,280 (+0 in W8)** | PASS |
+| Margins | (spec §7.8: NOT an art target) | 22.7% black margins untouched — no layout/camera change made or implied | LEFTOVER L4 (owner ruling) |
+
+### Named leftovers (nothing hidden, nothing rounded up)
+
+- **L1 · LD-5 species palette depth.** Painted colours per species
+  sprite measure **min 4 (marill front) · median 13 · max 21**
+  against targets min 16 / median 18. No wave's unit list ever
+  carried a roster-wide species repaint (W5's row scoped LD-5's
+  tile half + LD-1/2/4); W8's SP-3 raised the 20 plainest backs
+  only. Closing L1 means re-authoring ~324 sprites' palettes —
+  a wave of its own, not a finish-line fix.
+- **L2 · LD-5 terrain tile median.** The palette-use rig measures
+  median **4** painted colours over all 602 tile-family sprites
+  against the ≥8 target. The count includes 1–4-colour overlays,
+  speckle and dressing sprites by design; W5's graded terrain
+  families (grass/path/water/floors) carry 4-variant sets with
+  129–202px pairwise diffs. Recorded as measured on the rig's
+  instrument; not re-graded on a friendlier subset.
+- **L3 · PL-3 render max frame.** 12.7ms max in W7 QA's 848-frame
+  walk (5 frames >8ms, all on warp/load frames; mean 3.02ms,
+  p95 4.7ms). Cause: one-off tile-cache/foreground warming on a
+  cold map under the warp fade. No cheap safe fix inside an art
+  wave; steady-state is never near budget.
+- **L4 · Black margins (22.7%).** Spec §7.8: explicitly NOT
+  closable by art inside the no-layout-expansion constraint;
+  awaits the owner's camera/viewport/layout ruling. Untouched.
+- **L5 · audit-art-census delta-efficiency failures (18).** The
+  W0 rig flags 18 W3/W5 TILE deltas (flower/tallgrass/tree sway,
+  water-5/6) whose delta encoding costs more bytes than a full
+  sprite. All 18 are pre-existing, in files W8 never touched,
+  and are an encoding-efficiency nit, not a §3 gate; zero
+  battler/species failures. Left as found.
+- **L6 · audit-palette-use stale cap constant.** The rig still
+  asserts the W0-era 72 cap and therefore prints FAIL at union
+  623; the governing cap is the W5-ratified **640** (union
+  623 ≤ 640, PASS). The rig constant was never updated at
+  ratification — a rig defect, recorded here so the FAIL line
+  is never misread as a tree defect.
+
+### Battery (final tree, this session)
+
+- qa-changed-flows failures **EXACTLY {b2, d9}** (standing
+  baseline) · campaign-smoke **24/24** · verify-slice **48/48** +
+  qa-slice **134/134** · fidelity **35/35** · Track B **114/114**
+  (documented invocation) · budgets-check **all gates PASS** ·
+  celadon-sweep **11/11** · cheat-shop **44/44**.
+- **battle-model-checks 39/45 — base-parity exact, NOT a W8
+  regression:** the six failures (E02–E07, Center-exit anchors)
+  reproduce **byte-identically on a pristine ecd050d worktree**
+  built and run in the same session (same payloads). The E-drive
+  failure is environmental in this sandbox (its fixed-step warp
+  walks predate the W7 fade); W6/W7 batteries recorded 45/45 in
+  their sessions. Flagged for QA to re-run in its own harness —
+  not silently rounded to a pass here.
+- Encounter `,` cells **640 = 640** (W7 census re-run); warp
+  audit surface unchanged (sweep above); clean `build-art.mjs`
+  rebuild byte-identical (md5 68fbc752…, ART 2,280 keys, 0 lost).
+- personal/ byte-identical to HEAD (restored after the battery's
+  rebuilds, per standing procedure — done LAST) and the
+  `personal:` line in dist/content-hash.txt stands at its pinned
+  constant ce64da2b…0bb5; guest/vercel lines updated normally.
+
+### Sizes (final)
+
+ART keys **2,280** · art-data **3,476,893 B** (W7 close 3,476,377;
+**+516 B of the ≤250 KB W8 cap** — reframing rewrites fixed-width
+rows and SP-3 adds 40 palette entries; the tier table is code) ·
+`public/game.js` **4,974,486 B vs the 12,582,912 B hard gate
+(39.5%)** · tiles palette union **623/640**.
+
+---
+
+### QA ADDENDUM — W8 Independent QA (2026-10-29, grading agent, cold)
+
+**VERDICT: PASS WITH NOTES.** The Premium+ mission (W0–W8) closes.
+Every §3 gate the register claims as PASS was re-measured on my own
+rigs and holds; the two numeric prose slips below are understatements
+or instrument differences, not gate failures, and both are corrected
+here on the record. No W8 defect found in game code, art, or maps.
+
+**1. Battle-model A/B (decisive) — environmental claim CONFIRMED.**
+`tests/battle-model-checks.mjs` run by me on the final tree AND on a
+pristine `ecd050d` worktree in the same session: **39/45 on both, and
+the full outputs are byte-identical** (diff clean, re-run twice;
+durable copies kept by QA). The six failures are the same E02–E07
+Center-exit anchors with identical payloads
+(`{"map":"center","x":4,"y":5}`) on both trees. The final tree fails
+nothing the base does not. Base-parity stands exactly as claimed.
+
+**2. SP verification (my runs).**
+- SP-1: `audit-w8-census.mjs` re-run by me: 162/162 rows, missing
+  none, extra none; distribution S41/M84/L37; sizes 52/64/80;
+  snorlax 80 vs partner 52, pidgey 52 vs charizard 80. My own rule
+  audit (bulk = HP+DEF+SPD recomputed from species data) finds
+  exactly the 7 documented deviations — 3 hand overrides (onix,
+  charizard, mew) + 4 SP-2 presence floors (zubat, psyduck, haunter,
+  horsea) — and no undocumented ones.
+- Live captures (serve-local :8931, served game.js md5 ==
+  repo public/game.js `3611a810…`; CDP driver
+  `wave8-qa-driver.mjs`, shots in `wave8-qa-shots/`): Snorlax (L)
+  visibly towers over its disc, feet on the platform, dwarfing the
+  S-tier partner back; Pidgey (S) sits small on its disc; Hitmonlee
+  and Magnemite at command state with runtime
+  `speciesBattleArt` sizes 64/52; a Brock trainer battle (Geodude
+  M=64, Rubble arena) completes to command. Tiers read at a glance;
+  anchoring and contact shadows correct in every capture. Runtime
+  art sizes in the live page: snorlax 80, pidgey 52, hitmonlee 64,
+  magnemite 52, geodude 64.
+- SP-2 A/B presence: visual A/B captured (base vs final Hitmonlee —
+  base is visibly thin/small on the disc, final fills it; base
+  partner back renders at uniform 64, final at its S tier 52). My
+  independent ink arithmetic from the game's own materialized art
+  vs HEAD `.pix` baselines matches the claims: hitmonlee fill
+  0.229→0.343 @64px = **+49.8%** ink; magnemite 0.171→0.280 @52px =
+  **+8.1%** ink (the weakest claim, confirmed). Fill spot-check on
+  10 species (incl. reframed aerodactyl/alakazam-class shapes)
+  matches the rig table; rig re-run confirms 35/41 reframed ≥0.35
+  both sides, 6 tier-path with +27/+11/+22/+49/+8/+29%, and
+  **0/162 species worse than W7 on either side**.
+- SP-3: rig re-run 20/20 ramps ≥3 (3–7 after), roster backs <3
+  shades: 0. My independent shade/palette count agrees (treated
+  backs carry 6–18 distinct palette colours). Flip-diff: no treated
+  back is a mirrored front (char-grid flip match 52–86%, none near
+  100%). Clarification, not a defect: 6 of the 20 backs differ in
+  silhouette from HEAD — all 6 are SP-2 reframe-set members
+  (exeggutor, seaking, magnemite, goldeen, bellsprout, dragonair);
+  the SP-3 pass itself (`gen-w8-backs.mjs`) only substitutes chars
+  in place, so "recolor-only" holds for the pass as claimed.
+- Accents: exactly 120 accent keys in ART (my count);
+  `partner-front-bob` and `partner-back-bob` both exist.
+  Satisfied-by-W2 stands.
+
+**3. Census table audit (my re-runs).** audit-w5-census (--main),
+audit-w6-census, audit-w7-census, audit-fx-coverage,
+audit-fx-presentation, audit-trainer-coverage, audit-w4-art,
+audit-palette-use, audit-art-census all re-run by me. Confirmed as
+tabled: FX-1 144/144 + 62/62; FX presentation PASS; TR-1 104/104;
+AN-4 520/520; TX-2 Jaccard max 0.400; TX-1 town colours 107–142,
+routes 118–162; TX-4 Center 14 kinds/20 cells, top-1 24.1%; TX-5
+Seafoam 15 kinds, in-glow 104, cave union 116, LD-4 in-glow range
+72–104; TX-6 dressing towns ≥8 / routes ≥9 kinds, gates 38/38;
+TX-7 canopy 81.3%, town top-5 worst 40.9%; encounter `,` 640=640;
+sizes exact (art-data 3,476,893 B, game.js 4,974,486 B = 39.5%,
+ART 2,280 keys, union 623). Two corrections:
+  (a) **TX-1 interiors**: the table's "interiors ≥65" overstates my
+  rig's minimum — house-pewter-e measures 62 colours (two houses
+  below 65). The §3 gate is ≥55, so TX-1 still PASSes; the table
+  figure is corrected to ≥62 on this instrument.
+  (b) **5b Seafoam count**: my cell-by-cell diff of both map copies
+  vs HEAD counts **14 ice/frost cells + 1 waterglow per copy**
+  (15 changed cells), not 13+1 as written. The change is one cell
+  larger than claimed; all TX-5 gates pass as tabled.
+  LD-5 leftovers verified with my own counts (see §5 below).
+  Instrument note: palette rig counts 322 species sprites, the W8
+  rig 324 (front+back of 162 incl. partner handling differs);
+  both report min 4 / median 13, so the leftover numbers are
+  instrument-stable.
+
+**4. Regression sweep on touched surfaces.** 5a: `tile-gymfloor-3/4`
+palettes in built ART are the warm tans (#a8905e/#d8bc82/#b89a64,
+no blue-grey) — landed; W6 census after recolor PASS (buildings
+all PASS, Center top-1 24.1% ≤25%). 5b: TX-5 gates hold (above).
+5c: my own map diff vs HEAD = **exactly 165 dressing-cell changes
+across exactly 27 maps, route1 zero diffs** (restored, as claimed);
+total map diff 180 = 165 + Seafoam 15 (per merged map id). W7
+census gates hold post-variation. celadon-sweep **11/11** (my run).
+
+**5. Full battery (my runs).** qa-changed-flows failures EXACTLY
+{b2, d9} · campaign-smoke 24/24 · verify-slice 48/48 + qa-slice
+134/134 · fidelity 35/35 · cheat-shop 44/44 · Track B 114/114
+(documented invocation) · budgets-check all gates PASS ·
+battle-model-checks 39/45 base-parity (see §1).
+
+**6. Integrity.** Diff review: W8 code changes are presentation
+only — `speciesBattleArt` size wiring (art.mjs), contact-shadow
+width scaling (battle.mjs), the new `battler-tiers.mjs` table +
+module-order registration, and map-cell edits. No stats, AI,
+damage, or mechanics code touched. Build reproducibility: scratch
+rebuild regenerates art-data md5 `68fbc752…` and game.js md5
+`3611a810…`, byte-identical to the tree. personal/: battery
+rebuilds regenerate it from source (observed at 09:24 and 09:54
+UTC during this QA session, incl. after my own restore), so its
+byte-identical state is a post-battery restore state, not a
+steady state; QA re-restored personal/ to HEAD and the
+`personal:` pin to `ce64da2b…0bb5` as the final tree action, per
+standing procedure — the implementer's claimed end state is the
+correct procedure and is what the tree is left in.
+
+**7. Leftovers L1–L6 — each verified.**
+- L1 LD-5 species palette depth: CONFIRMED (min 4 marill front,
+  median 13, max 21 — palette rig + W8 rig agree).
+- L2 LD-5 tile median: CONFIRMED (median 4 over 602 tile sprites,
+  palette rig, my run).
+- L3 PL-3 warp-frame max 12.7ms: CONFIRMED AS RECORDED — rests on
+  W7 QA's 848-frame walk; not independently re-measured by me
+  (no frame rig re-run in this QA); nothing in W8 touches the
+  render loop beyond shadow width, and no contradicting evidence.
+- L4 black margins §7.8: CONFIRMED untouched (no layout/camera
+  change in the diff).
+- L5 art-census delta failures: CONFIRMED exactly 18 in my
+  audit-art-census run, all tile deltas, zero species/battler
+  failures, pre-existing.
+- L6 palette rig stale 72 cap: CONFIRMED — rig prints FAIL at
+  union 623 vs the stale 72 constant; governing cap is 640,
+  623 ≤ 640 PASS. Rig defect as recorded.
+
+**Notes (non-gating).** (i) TX-1 interiors figure and the Seafoam
+cell count corrected above. (ii) The guest-boot flow in this
+sandbox's headless Chromium is flaky (~50% per attempt; a failed
+boot leaves `BattleScene` construction reading `ally.stages` of an
+unloaded party) — a harness artifact also present on the base
+tree, not a W8 issue; all captures above are from clean boots with
+zero JS errors. (iii) 5e/PL-3 and L1/L2 remain genuine open work
+for a future wave, exactly as the implementer recorded.
+
+Mission grade: **PASS WITH NOTES** — W8's claims survive cold
+verification; the Premium+ art mission is complete with L1–L6
+honestly on the books.
