@@ -10128,3 +10128,37 @@ server-side under the raised bag cap).
   qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**.
   **public/game.js: 9,808,355 B**, byte-stable (build x2, same
   sha256 986daf919393…). `personal/` byte-identical.
+
+### F0.2 addendum (2026-10-29, coordinator ruling)
+
+- One divergence from `tryHomecoming`'s `finish()` remained after
+  F0.1 (reported by F0.1, ruled a fix by the coordinator):
+  `finish()` also stamps the arc-start snapshots —
+  `story.arcDexStart` = the dex caught count at advance and
+  `story.arcStartPlaytime` = the playtime at advance — but the
+  catch-up set neither, so a repaired save kept its previous
+  arc's stamps and its ARC COMPLETE card (arcCompleteSummary
+  reads both) would overstate "Pokedex gained this arc" and
+  "Playtime this arc". F0.2 completes the mirror: the catch-up
+  branch in `deriveArcDefaults` now also sets
+  `story.arcDexStart` and `story.arcStartPlaytime` from the
+  `caughtCount` / `playtimeSec` it already receives (truncated,
+  non-negative, matching the function's tail normalization).
+  The derivation now mirrors `finish()` in full — arc, region,
+  embark, both snapshots. Nothing else changes.
+- The pin is asserted in tests/frontier-checks.mjs: the
+  consumed-sealed fixtures now carry observable totals (260
+  caught / 54321s played against the carried Hoenn-era stamps
+  151 / 40000); A13 (regionsDone form) and A14 (completionFlag
+  form) assert `arcDexStart === 260` and
+  `arcStartPlaytime === 54321` after derivation, A13
+  idempotently on a second fill; the mid-Hoenn (A15) and
+  already-advanced (A16) fixtures assert their stamps
+  untouched (151 / 40000).
+- Battery (this tree): frontier-checks **27/27**;
+  arc-foundation **47/47**; hoenn-story **88/88**;
+  qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**.
+  **public/game.js: 9,808,494 B**, byte-stable (build x2, same
+  sha256 3fa1145b560d…); public static total 9,971,116 B vs
+  the 10,100,000 B trigger (margin 128,884 B). `personal/`
+  byte-identical; dist/ restored.

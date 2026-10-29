@@ -113,23 +113,34 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     s.story.arc = 'hoenn'; s.story.region = 'hoenn';
     s.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn'];
     s.badges.hoenn = [...BADGE_SETS.hoenn];
+    // Fixture totals at the (would-be) advance: 260 caught / 54321s
+    // played, against the Hoenn-era arc-start stamps (151 / 40000)
+    // a live save would still be carrying — so the catch-up's
+    // re-stamp (or its absence) is observable, not vacuous.
+    s.dex.caught = {}; for (let i = 1; i <= 260; i++) s.dex.caught[i] = true;
+    s.player.playtimeSec = 54321;
+    s.story.arcDexStart = 151; s.story.arcStartPlaytime = 40000;
     if (mut) mut(s);
     return s;
   };
   const consumed = SCH.migrate(frontierSave((s) => { s.story.flags.hook_frontier = true; s.story.flags.homecoming_frontier = true; }));
-  ok('A13 derivation (i): a consumed-SEALED Frontier save (hook_frontier + homecoming_frontier, arc still hoenn, Hoenn complete in regionsDone) derives arc frontier + region kanto (frontier\'s regionKey) + embark_frontier on load — and is idempotent',
+  ok('A13 derivation (i): a consumed-SEALED Frontier save (hook_frontier + homecoming_frontier, arc still hoenn, Hoenn complete in regionsDone) derives arc frontier + region kanto (frontier\'s regionKey) + embark_frontier + the arc-start snapshots (arcDexStart = the fixture\'s 260 caught, arcStartPlaytime = the fixture\'s 54321s) on load — and is idempotent',
     consumed.story.arc === 'frontier' && consumed.story.region === 'kanto' && consumed.story.flags.embark_frontier === true
-    && (() => { const again = SCH.migrate(clone(consumed)); return again.story.arc === 'frontier' && again.story.region === 'kanto' && again.story.flags.embark_frontier === true; })(),
-    JSON.stringify({ arc: consumed.story.arc, region: consumed.story.region, emb: consumed.story.flags.embark_frontier }));
+    && consumed.story.arcDexStart === 260 && consumed.story.arcStartPlaytime === 54321
+    && (() => { const again = SCH.migrate(clone(consumed)); return again.story.arc === 'frontier' && again.story.region === 'kanto' && again.story.flags.embark_frontier === true && again.story.arcDexStart === 260 && again.story.arcStartPlaytime === 54321; })(),
+    JSON.stringify({ arc: consumed.story.arc, region: consumed.story.region, emb: consumed.story.flags.embark_frontier, dexStart: consumed.story.arcDexStart, playStart: consumed.story.arcStartPlaytime }));
   const consumedByFlag = SCH.migrate(frontierSave((s) => { s.story.regionsDone = ['kanto', 'orange', 'johto']; s.story.flags.hoenn_complete = true; s.story.flags.hook_frontier = true; s.story.flags.homecoming_frontier = true; }));
-  ok('A14 derivation (i, flag form): the previous arc\'s completion met via its completionFlag (hoenn_complete, regionsDone without hoenn) derives the same repair',
-    consumedByFlag.story.arc === 'frontier' && consumedByFlag.story.region === 'kanto' && consumedByFlag.story.flags.embark_frontier === true);
+  ok('A14 derivation (i, flag form): the previous arc\'s completion met via its completionFlag (hoenn_complete, regionsDone without hoenn) derives the same repair (incl. arcDexStart 260 + arcStartPlaytime 54321)',
+    consumedByFlag.story.arc === 'frontier' && consumedByFlag.story.region === 'kanto' && consumedByFlag.story.flags.embark_frontier === true
+    && consumedByFlag.story.arcDexStart === 260 && consumedByFlag.story.arcStartPlaytime === 54321);
   const midHoenn = SCH.migrate(frontierSave((s) => { s.story.regionsDone = ['kanto', 'orange', 'johto']; s.story.flags = {}; }));
-  ok('A15 derivation (ii): a mid-Hoenn save (no hook, no homecoming) is untouched — arc stays hoenn, region stays hoenn, no embark_frontier',
-    midHoenn.story.arc === 'hoenn' && midHoenn.story.region === 'hoenn' && !midHoenn.story.flags.embark_frontier);
+  ok('A15 derivation (ii): a mid-Hoenn save (no hook, no homecoming) is untouched — arc stays hoenn, region stays hoenn, no embark_frontier, arc-start stamps untouched (151 / 40000)',
+    midHoenn.story.arc === 'hoenn' && midHoenn.story.region === 'hoenn' && !midHoenn.story.flags.embark_frontier
+    && midHoenn.story.arcDexStart === 151 && midHoenn.story.arcStartPlaytime === 40000);
   const advanced = SCH.migrate(frontierSave((s) => { s.story.arc = 'frontier'; s.story.flags.hook_frontier = true; s.story.flags.homecoming_frontier = true; s.story.flags.embark_frontier = true; }));
-  ok('A16 derivation (iii): an already-advanced save (arc frontier, embark already armed by the live homecoming) is untouched — region untouched',
-    advanced.story.arc === 'frontier' && advanced.story.region === 'hoenn' && advanced.story.flags.embark_frontier === true);
+  ok('A16 derivation (iii): an already-advanced save (arc frontier, embark already armed by the live homecoming) is untouched — region untouched, arc-start stamps untouched (151 / 40000)',
+    advanced.story.arc === 'frontier' && advanced.story.region === 'hoenn' && advanced.story.flags.embark_frontier === true
+    && advanced.story.arcDexStart === 151 && advanced.story.arcStartPlaytime === 40000);
   const pending = SCH.migrate(frontierSave((s) => { s.story.arc_directive = 'frontier'; s.story.flags.hook_frontier = true; }));
   const hookless = SCH.migrate(frontierSave((s) => { s.story.flags.homecoming_frontier = true; }));
   ok('A17 derivation (iv): a pending homecoming (directive set + hook delivered, NO homecoming flag) is untouched; and homecoming without the hook is untouched',

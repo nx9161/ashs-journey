@@ -148701,6 +148701,8 @@ function deriveArcDefaults(story, caughtCount, playtimeSec) {
     if (!arcCompletionMet({ story }, prev)) continue;
     story.arc = a.id;
     story.region = a.regionKey;
+    story.arcDexStart = Math.max(0, Math.trunc(caughtCount || 0));
+    story.arcStartPlaytime = Math.max(0, Math.trunc(playtimeSec || 0));
     if (!story.flags || typeof story.flags !== 'object') story.flags = {};
     story.flags['embark_' + a.id] = true;
   }
