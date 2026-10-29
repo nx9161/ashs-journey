@@ -20,6 +20,7 @@ import { ITEMS, POCKETS, BALLS, KEEPSAKES } from '../data/items.mjs';
 import { giveKeepsake, takeKeepsake } from './keepsakes.mjs';
 import { MAPS } from '../data/maps.mjs';
 import { CHAPTERS, BONUS_SHELF, chapterOf } from '../data/story.mjs';
+import { ARCS, arcStateOf, currentArcOf, arcDexSpan, PLATINUM_DEX_HORIZON } from '../data/arcs.mjs';
 import { displayName, dexCaughtCount, defaultState } from './state.mjs';
 import {
   DIFFICULTY_MODES, DIFFICULTY_LABELS, DIFFICULTY_RANK, HOUSE_RULE_DEFS,
@@ -432,6 +433,7 @@ export class Game {
     this.scenes.update(dt);
     if (this.processQueues) this.processQueues(); // WS6/WS9: learn + evolution prompts
     if (this.checkDiploma) this.checkDiploma(); // WS7: the 151 payoff
+    if (this.checkPlatinumDiploma) this.checkPlatinumDiploma(); // ADR-027 D5: the 493 payoff
   }
 
   toggleMute() {
@@ -819,10 +821,26 @@ export class Game {
     items.unshift({ label: "Prof. Hawthorn's rating", value: 'rating' });
     items.unshift({ label: 'Search / Filter' + (fdesc ? ':' + fdesc : ''), value: 'filter' });
     items.unshift({ label: 'Areas — caught per area', value: 'areas' });
+    // ADR-027 D5 (Stage F): the dex header's Regional + National lines,
+    // both registry-driven. Regional = the current arc's own species
+    // span; National = the Platinum horizon (493) with its percentage.
+    // The chapter header stays items[0] (the qa-changed-flows anchor).
+    const arcNow = currentArcOf(g.state);
+    const span = arcDexSpan(arcNow);
+    const caughtNos = Object.keys(g.state.dex.caught).map(Number);
+    const regCaught = caughtNos.filter((n) => n >= span.lo && n <= span.hi).length;
+    const natCaught = caughtNos.filter((n) => n >= 1 && n <= PLATINUM_DEX_HORIZON).length;
+    const natPct = Math.floor((100 * natCaught) / PLATINUM_DEX_HORIZON);
+    items.unshift({ label: 'National — Platinum horizon: ' + natCaught + '/' + PLATINUM_DEX_HORIZON + ' (' + natPct + '%)', value: null, disabled: true });
+    items.unshift({ label: 'Regional — ' + arcNow.region + ': ' + regCaught + '/' + (span.hi - span.lo + 1), value: null, disabled: true });
     // D2: arc progression surfaced in the Dex — current chapter header row.
     const curCh = chapterOf((g.state.story.chapter || 0) + 1);
     items.unshift({ label: 'Journey — Ch.' + curCh.n + ' · ' + curCh.title, value: null, disabled: true });
     if (!items.length) items.push({ label: '(no matches)', value: null, disabled: true });
+    // ADR-027 D5: the sealed divider — species beyond the Platinum
+    // horizon (the rest of the 1025 frame) sit below it exactly as
+    // undiscovered species render today: ??? rows under this line.
+    items.push({ label: '— More Pokémon are known to exist. Their regions are future arcs. —', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Pokedex', items, (v) => {
       if (!v || v === 'close') return;
@@ -912,19 +930,39 @@ export class Game {
     items.push({ label: 'Regions — the journey chain', value: 'regions' });
     items.push({ label: 'Hall of Fame', value: 'hof' });
     items.push({ label: 'Diploma', value: 'diploma' });
-    items.push({ label: '— ACT I: THE BEGINNING (v1) —', value: null, disabled: true });
-    for (const ch of CHAPTERS) {
-      if (ch.scope === 'playable') {
-        const isCur = (ch.n - 1) === cur;
-        items.push({
-          label: (isCur ? '\u25b8 ' : '  ') + 'Ch.' + ch.n + ' — ' + ch.title + (isCur ? ' (now)' : ''),
-          value: 'ch' + ch.n,
-        });
+    // ADR-027 (Stage F): chapters render grouped under ARC headers
+    // from the registry, each header carrying the arc's state
+    // (Complete / Current / Next / Sealed, from arcStateOf). Chapter
+    // rows keep their existing labels + detail view untouched.
+    const stateWord = { complete: 'COMPLETE', current: 'CURRENT', 'locked-next': 'NEXT', sealed: 'SEALED' };
+    let futureHeaderDone = false;
+    for (const arc of ARCS) {
+      if (arc.future) {
+        if (!futureHeaderDone) {
+          items.push({ label: '— FUTURE ARCS — SEALED —', value: null, disabled: true, band: true });
+          futureHeaderDone = true;
+        }
       } else {
         items.push({
-          label: 'Ch.' + ch.n + ' — ' + ch.title + ' · locked (future act)',
-          value: null, disabled: true,
+          label: '— ' + arc.label.toUpperCase() + ' · ' + arc.region.toUpperCase() + ' — ' + (stateWord[arcStateOf(g.state, arc.id)] || 'SEALED') + ' —',
+          value: null, disabled: true, band: true,
         });
+      }
+      for (const chN of arc.chapters) {
+        const ch = CHAPTERS.find((c) => c.n === chN);
+        if (!ch) continue;
+        if (ch.scope === 'playable') {
+          const isCur = (ch.n - 1) === cur;
+          items.push({
+            label: (isCur ? '\u25b8 ' : '  ') + 'Ch.' + ch.n + ' — ' + ch.title + (isCur ? ' (now)' : ''),
+            value: 'ch' + ch.n,
+          });
+        } else {
+          items.push({
+            label: 'Ch.' + ch.n + ' — ' + ch.title + ' · locked (future act)',
+            value: null, disabled: true,
+          });
+        }
       }
     }
     items.push({ label: '— BONUS SHELF (non-canon, not on the spine) —', value: null, disabled: true });

@@ -13,6 +13,7 @@ import {
 import { roll, intIn } from '../engine/rng.mjs';
 import { TILE, BATTLER_DRAW_SIZE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
+import { levelCapFor } from '../data/arcs.mjs';
 import {
   trainerLevelFor, tuneFoeMon, effectiveAiFor, damageRandomFor,
   xpMultFor, moneyMultFor, catchRateMultFor, difficultyOf, foeKeepsakeFor,
@@ -1754,7 +1755,7 @@ export class BattleScene {
         if (m.hp <= 0 || share <= 0) continue;
         m.xp += share;
         let leveled = false;
-        while (m.xp >= xpForLevel(SPECIES[m.speciesId].growth, m.level + 1) && m.level < 100) {
+        while (m.xp >= xpForLevel(SPECIES[m.speciesId].growth, m.level + 1) && m.level < levelCapFor(g.state)) {
           m.level++;
           leveled = true;
           const sp = SPECIES[m.speciesId];

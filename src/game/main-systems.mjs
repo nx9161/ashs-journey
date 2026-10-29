@@ -12,6 +12,8 @@ import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
 import { FORMS } from '../data/forms.mjs';
+import { ARCS, arcById, currentArcOf, arcStateOf, levelCapFor, PLATINUM_DEX_HORIZON } from '../data/arcs.mjs';
+import { arcDirectiveLines } from './arcs.mjs';
 import { xpForLevel, statValue, hpValue } from '../engine/formulas.mjs';
 
 const REGIONS = [
@@ -73,7 +75,9 @@ Object.assign(Game.prototype, {
     }
     if (it.pocket === 'tm' || it.pocket === 'hm') { this.teachFromBag(id, it); return; }
     if (it.levelUp) { // Rare Candy
-      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= 100 }));
+      // ADR-027 Amendment 2: the cap is a registry read (the current
+      // arc's band max; Arcs 1/1.5 read 100, exactly as before).
+      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= levelCapFor(g.state) }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Use Rare Candy on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
@@ -88,7 +92,7 @@ Object.assign(Game.prototype, {
       return;
     }
     if (it.xpBoost) { // XP Candy (ADR-025 §4): fixed XP, Rare Candy shape
-      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= 100 }));
+      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= levelCapFor(g.state) }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Use XP Candy on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
@@ -96,7 +100,7 @@ Object.assign(Game.prototype, {
         g.state.bag[id]--;
         const before = m.level;
         m.xp += it.xpBoost;
-        while (m.level < 100 && m.xp >= xpForLevel(SPECIES[m.speciesId].growth, m.level + 1)) m.level++;
+        while (m.level < levelCapFor(g.state) && m.xp >= xpForLevel(SPECIES[m.speciesId].growth, m.level + 1)) m.level++;
         if (m.level > before) {
           this.recalcMon(m, true);
           g.audio.playSfx('levelup');
@@ -306,6 +310,14 @@ Object.assign(Game.prototype, {
   openQuestLog() {
     const g = this;
     const items = [];
+    // ADR-027 (Stage F): the pinned arc directive — while story.arc_
+    // directive is set, "Go home" rides above every section and cannot
+    // be completed any other way than walking home (the homecoming in
+    // src/game/arcs.mjs clears it).
+    if (g.state.story.arc_directive) {
+      items.push({ label: '— THE ROAD HOME —', value: null, disabled: true, band: true });
+      items.push({ label: '★ Go home — return to Pallet Town', value: 'arcdirective' });
+    }
     // Section 1 — Main Story (unchanged machinery: the MAIN_QUESTS chain).
     items.push({ label: '— MAIN STORY —', value: null, disabled: true, band: true });
     for (const q of MAIN_QUESTS) {
@@ -350,6 +362,10 @@ Object.assign(Game.prototype, {
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Quest Log', items, (v) => {
       if (!v || v === 'close') return;
+      if (v === 'arcdirective') {
+        g.ui.say(arcDirectiveLines(g.state), () => g.openQuestLog(), 'Journey');
+        return;
+      }
       if (v.startsWith('bond:')) {
         const c = people.find((x) => 'bond:' + x.id === v);
         if (c) g.ui.say([c.name + ' — ' + tierOf(g.state, c.id), c.note], () => g.openQuestLog(), 'People');
@@ -384,14 +400,31 @@ Object.assign(Game.prototype, {
     const g = this;
     const cur = g.state.story.region || 'kanto';
     const doneList = g.state.story.regionsDone || [];
-    const items = REGIONS.map((r) => {
+    // ADR-027 (Stage F): the chain renders grouped under ARC headers
+    // from the registry — the same grouping the Journey menu uses (one
+    // logic, two surfaces). Region rows keep their exact labels.
+    const stateWord = { complete: 'COMPLETE', current: 'CURRENT', 'locked-next': 'NEXT', sealed: 'SEALED' };
+    const items = [];
+    let lastGroup = null;
+    for (const r of REGIONS) {
+      const arc = ARCS.find((a) => !a.future && a.regionKey === r.id) || null;
+      const group = arc ? arc.id : 'future';
+      if (group !== lastGroup) {
+        lastGroup = group;
+        items.push({
+          label: arc
+            ? '— ' + arc.label.toUpperCase() + ' · ' + arc.region.toUpperCase() + ' — ' + (stateWord[arcStateOf(g.state, arc.id)] || 'SEALED') + ' —'
+            : '— FUTURE ARCS — SEALED —',
+          value: null, disabled: true, band: true,
+        });
+      }
       const isDone = doneList.includes(r.id);
       const isCur = r.id === cur;
-      return {
+      items.push({
         label: (isDone ? '★ ' : isCur ? '▶ ' : '· ') + r.name + (isCur ? ' (you are here)' : isDone ? '' : ' — sealed'),
         value: r.id,
-      };
-    });
+      });
+    }
     items.push({ label: 'Close', value: 'close' });
     g.ui.showMenu('Journey — Regions', items, (v) => {
       if (!v || v === 'close') return;
@@ -491,6 +524,17 @@ Object.assign(Game.prototype, {
   // from the Journey menu once the Kanto dex is complete.
   openDiploma() {
     const g = this;
+    // ADR-027 D5 (Stage F): the Platinum Diploma (493) supersedes as
+    // THE diploma once earned; the Kanto plate below remains the Arc 1
+    // honor and is never un-awarded.
+    if (g.state.story.flags.platinum_diploma) {
+      const escP = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+      const htmlP = '<div class="diploma"><div class="diplomatitle">PLATINUM DIPLOMA</div>'
+        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Platinum Pokedex:</div>'
+        + '<div class="diplomabody">all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
+      g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'PLATINUM DIPLOMA', bodyHtml: htmlP }] }, null);
+      return;
+    }
     // Form entries share their base species' dexNo — excluded so the
     // Kanto count stays exactly the 151 species (Cheat Shop, 2026-10-28).
     const kanto = Object.values(SPECIES).filter((s) => !s.form && s.dexNo >= 1 && s.dexNo <= 151);
@@ -576,11 +620,34 @@ Object.assign(Game.prototype, {
       const framed = bondSceneLines(this.state, 'hawthorn', 'rating');
       if (framed && framed.length) return framed[0].replace('{n}', String(n));
     }
-    if (n < 10) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
-    if (n < 50) return n + ' caught! You are learning what a Pokedex is for. Keep going!';
-    if (n < 100) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
-    if (n < 151) return n + ' caught! Nearly there. The last pages are always the hardest.';
-    return 'ALL 151! Every Kanto species, in one journey. This is a historic Pokedex!';
+    // ADR-027 D5 (Stage F): the rating bands key to the PLATINUM
+    // horizon (493, from the registry) — the Kanto 151 completion is
+    // honoured inside its band, and the diploma honors live in
+    // checkDiploma (151, the arc honor) + checkPlatinumDiploma (493).
+    if (n < 25) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
+    if (n < 100) return n + ' caught! You are learning what a Pokedex is for. Keep going!';
+    if (n < 151) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
+    if (n < 300) return n + ' caught! Past the Kanto horizon entirely — and the book still has pages. The Platinum horizon is ' + PLATINUM_DEX_HORIZON + '.';
+    if (n < PLATINUM_DEX_HORIZON) return n + ' caught! Nearly there. The last pages are always the hardest.';
+    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum Pokedex, in one journey. This is a historic Pokedex!';
+  },
+
+  // ADR-027 D5 (Stage F): the Platinum Diploma — the 493 honor, keyed
+  // to the registry's Platinum horizon. It reads the run's OWN catches
+  // (ownCaughtMap), exactly like the Kanto diploma; earning it never
+  // un-awards the 151 diploma, which remains as the Arc 1 honor.
+  checkPlatinumDiploma() {
+    const g = this;
+    if (g.state.story.flags.platinum_diploma) return;
+    const own = ownCaughtMap(g.state.dex);
+    const n = Object.keys(own).filter((k) => Number(k) >= 1 && Number(k) <= PLATINUM_DEX_HORIZON).length;
+    if (n < PLATINUM_DEX_HORIZON) return;
+    g.state.story.flags.platinum_diploma = true;
+    g.audio.playSfx('badge');
+    g.ui.say([
+      'PLATINUM DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Platinum Pokedex:',
+      'all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
+    ], null, 'Prof. Hawthorn');
   },
 
   checkDiploma() {

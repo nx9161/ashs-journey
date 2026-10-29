@@ -22,6 +22,8 @@ import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, c
 import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
 import { CHAPTERS } from '../data/story.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
+import { levelCapFor, HOME_MAP_ID } from '../data/arcs.mjs';
+import { checkArcCompletion, tryHomecoming, arcFerryAllowed, arcFerryGateLine } from './arcs.mjs';
 
 const BOX_COUNT = 12;
 const BOX_CAP = 30; // UI v2.4: Platinum's 30 — matches the save validator's limit (was 20)
@@ -71,6 +73,14 @@ Object.assign(OverworldScene.prototype, {
       g.state.story.flags.echo_card_key = true;
       g.ui.say(['The lobby doors part, and your feet are already sure of the way — the key by the plants, the lift, the long climb. You walked Silph once with a Card Key in hand. The building feels smaller when you know its route by heart.']);
     }
+    // ADR-027 (Stage F): the arc transition machine's map-entry hooks.
+    // The completion check runs first (a legacy save that finished
+    // Kanto before this foundation shipped gets its ARC COMPLETE card
+    // on first entry, exactly once — the flag guards every later
+    // load); the homecoming fires on entering Mom's house with the
+    // directive pinned, and only when the card did not just fire.
+    const arcCardFired = checkArcCompletion(g);
+    if (!arcCardFired && id === HOME_MAP_ID) tryHomecoming(g);
   },
 
   boulderAt(x, y) {
@@ -336,7 +346,14 @@ Object.assign(OverworldScene.prototype, {
       lines.push('The League registrar reaches for the CHAMPION\'S RIBBON — then sees yours, and smiles.');
       if (hofGift.line) lines.push(hofGift.line);
     }
-    g.ui.say(lines, () => { if (done) done(); }, '');
+    g.ui.say(lines, () => {
+      // ADR-027 (Stage F): the credits hand off to the arc machine —
+      // the ARC COMPLETE card + pinned directive REPLACE the retired
+      // static 'TO BE CONTINUED' bridge card, so only one ending
+      // plays. When the card fires, the event chain resumes after it.
+      const fired = checkArcCompletion(g, done);
+      if (!fired && done) done();
+    }, '');
   },
 
   giftMon(speciesId, level, next) {
@@ -652,6 +669,44 @@ Object.assign(OverworldScene.prototype, {
     }
     if (npc.ferry) {
       sayLines(() => {
+        const landFerry = () => {
+          const dest = MAPS[npc.ferry];
+          const st = (dest && dest.start) || { x: 7, y: 7 };
+          this.loadMap(npc.ferry);
+          this.player.tx = st.x; this.player.ty = st.y;
+          this.player.px = st.x * TILE; this.player.py = st.y * TILE;
+          this.player.fx = st.x; this.player.fy = st.y;
+          this.trail = [];
+          g.state.story.position = { map: npc.ferry, x: st.x, y: st.y, dir: 'up' };
+          this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
+          g.audio.playMusic(this.map.music || 'route1-theme');
+        };
+        // ADR-027 §2.4 (Stage F): the inter-region ferry network. An
+        // NPC carrying ferryArc: '<arcId>' is a network port: the
+        // outbound crossing offers only once the homecoming armed the
+        // embark (embark_<id>), while any return — the destination arc
+        // reached before, by any means — is unconditional and forever
+        // (the NO-SOFT-LOCK LAW across regions). Riding stamps
+        // reachedarc_<id> and plays the registry's en-route card
+        // before landing. Plain npc.ferry NPCs (the three shipped
+        // ones) never carry ferryArc and keep the exact path below.
+        if (npc.ferryArc) {
+          const chk = arcFerryAllowed(g.state, npc);
+          if (!chk.allowed) {
+            g.ui.say([arcFerryGateLine(chk.arc)], null, npc.name);
+            return;
+          }
+          g.ui.showMenu('Sail to ' + npc.ferry + '?', [
+            { label: 'Sail', value: 'yes' }, { label: 'Stay', value: 'no' },
+          ], (v) => {
+            if (v !== 'yes') return;
+            if (chk.arc) g.state.story.flags['reachedarc_' + chk.arc.id] = true;
+            const enRoute = chk.arc && chk.arc.enRouteLines ? chk.arc.enRouteLines : [];
+            if (enRoute.length) g.ui.say(enRoute.slice(), () => landFerry(), '');
+            else landFerry();
+          });
+          return;
+        }
         // CINNABAR TRAP FIX (owner report 2026-10-28): a ferry whose def
         // carries ferryGate:'surf' enforces the game's own Surf rule —
         // Soul Badge + a party member that knows Surf, the same pair
@@ -669,16 +724,7 @@ Object.assign(OverworldScene.prototype, {
           { label: 'Sail', value: 'yes' }, { label: 'Stay', value: 'no' },
         ], (v) => {
           if (v !== 'yes') return;
-          const dest = MAPS[npc.ferry];
-          const st = (dest && dest.start) || { x: 7, y: 7 };
-          this.loadMap(npc.ferry);
-          this.player.tx = st.x; this.player.ty = st.y;
-          this.player.px = st.x * TILE; this.player.py = st.y * TILE;
-          this.player.fx = st.x; this.player.fy = st.y;
-          this.trail = [];
-          g.state.story.position = { map: npc.ferry, x: st.x, y: st.y, dir: 'up' };
-          this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
-          g.audio.playMusic(this.map.music || 'route1-theme');
+          landFerry();
         });
       });
       return true;
@@ -1735,7 +1781,8 @@ Object.assign(OverworldScene.prototype, {
       g.ui.showMenu('Get Pokemon — everything $0', rows, (sid) => {
         if (!sid) { this.openCheatShop(); return; }
         const sp = SPECIES[sid];
-        // Level stepper 1-100, opening at 50 (pickQty idiom, own start).
+        // Level stepper, opening at 50 (pickQty idiom, own start);
+        // its cap is the current arc's band max (see the onKey below).
         let level = 50;
         const renderLevel = () => {
           g.ui.showMenu(sp.name + ' — choose a level', [
@@ -1761,12 +1808,17 @@ Object.assign(OverworldScene.prototype, {
             });
           }, {
             onKey: (dir) => {
+              // ADR-027 Amendment 2: the stepper caps at the CURRENT
+              // arc's band max, read from the registry (Arc 1/1.5: 100,
+              // exactly as before; the open-level Frontier reads
+              // Infinity and Math.min passes the value through).
+              const cap = levelCapFor(g.state);
               if (dir === 'left') level = Math.max(1, level - 1);
-              else if (dir === 'right') level = Math.min(100, level + 1);
-              else if (dir === 'up') level = Math.min(100, level + 10);
+              else if (dir === 'right') level = Math.min(cap, level + 1);
+              else if (dir === 'up') level = Math.min(cap, level + 10);
               else if (dir === 'down') level = Math.max(1, level - 10);
               else if (dir === 'pageup') level = Math.max(1, level - 10);
-              else if (dir === 'pagedown') level = Math.min(100, level + 10);
+              else if (dir === 'pagedown') level = Math.min(cap, level + 10);
               else return;
               g.audio.playSfx('ui-tick');
               renderLevel();

@@ -13,6 +13,7 @@
 
 import { statValue, hpValue, gen1Random } from '../engine/formulas.mjs';
 import { SPECIES } from '../data/species.mjs';
+import { levelCapFor } from '../data/arcs.mjs';
 
 export const DIFFICULTY_MODES = ['story', 'classic', 'challenge'];
 export const DIFFICULTY_LABELS = { story: 'STORY', classic: 'CLASSIC', challenge: 'CHALLENGE' };
@@ -50,13 +51,15 @@ export function isLeaderTrainer(trainer) {
 }
 
 // Trainer/gym team levels (§4 table): Story softens every trainer by 2
-// (floor 1); Challenge pushes LEADERS +2 (cap 100) — their authored teams
-// stand in for rematch-grade compositions, which do not exist as separate
-// data. Wild and scripted-presence levels are never touched.
+// (floor 1); Challenge pushes LEADERS +2 (capped at the current arc's
+// band max — a registry read per ADR-027 Amendment 2; 100 in Arc 1) —
+// their authored teams stand in for rematch-grade compositions, which
+// do not exist as separate data. Wild and scripted-presence levels are
+// never touched.
 export function trainerLevelFor(state, trainer, level) {
   const mode = difficultyOf(state);
   if (mode === 'story') return Math.max(1, level - 2);
-  if (mode === 'challenge' && isLeaderTrainer(trainer)) return Math.min(100, level + 2);
+  if (mode === 'challenge' && isLeaderTrainer(trainer)) return Math.min(levelCapFor(state), level + 2);
   return level;
 }
 

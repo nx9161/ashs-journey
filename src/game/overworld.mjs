@@ -5,6 +5,7 @@
 import { MAPS, WALKABLE, TRAINERS } from '../data/maps.mjs';
 import { npcArtKind, NPC_ROAMING_KINDS, hashTile, phaseOfHour, PHASE_TINTS } from '../engine/art.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
+import { dexHorizonFor } from '../data/arcs.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
 import { makeMon, dexRegister, displayName, dexCaughtCount } from './state.mjs';
@@ -1143,7 +1144,11 @@ export class OverworldScene {
       if (obj !== this._hudObj) { this._hudObj = obj; ui.setObjectiveChip(obj); }
     }
     if (ui.setDexChip) {
-      const dex = 'Dex ' + dexCaughtCount(g.state.dex) + '/' + DEX_TOTAL;
+      // ADR-027 D5: the pill answers "what am I completing NOW" — the
+      // current arc's cumulative horizon from the registry (151 in
+      // Arcs 1/1.5), never the 1025 data frame (DEX_TOTAL stays the
+      // data-layer constant; presentation reads the registry).
+      const dex = 'Dex ' + dexCaughtCount(g.state.dex) + '/' + dexHorizonFor(g.state);
       if (dex !== this._hudDex) { this._hudDex = dex; ui.setDexChip(dex); }
     }
     if (ui.hudToast) {
