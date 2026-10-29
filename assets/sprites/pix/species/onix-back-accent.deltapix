@@ -1,0 +1,48 @@
+# onix-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over onix-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD onix-back-accent onix-back 64 64
+34 4 B
+35 4 B
+34 5 B
+35 5 B
+35 6 B
+31 13 B
+32 13 B
+29 14 B
+30 14 B
+31 14 B
+32 14 B
+33 14 B
+34 14 B
+29 15 B
+30 15 B
+31 15 B
+32 15 B
+33 15 B
+34 15 B
+35 15 B
+30 16 B
+32 16 B
+33 16 B
+34 16 B
+35 16 B
+29 17 B
+30 18 B
+31 18 B
+32 18 B
+33 18 B
+32 19 B
+31 25 B
+32 25 B
+33 25 B
+32 26 B
+33 26 B
+34 26 B
+35 26 B
+42 31 B
+43 31 B
+41 32 B
+42 32 B
+43 32 B
+PAL

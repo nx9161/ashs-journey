@@ -1,0 +1,19 @@
+# trainer-gent-battle-throw — Premium+ W2 throw pose delta over trainer-gent-battle.
+PIXD trainer-gent-battle-throw trainer-gent-battle 48 64
+40 27 O
+40 29 O
+41 27 O
+41 29 O
+42 27 O
+42 29 O
+43 27 B
+43 29 O
+44 27 O
+44 29 O
+40 28 O
+41 28 J
+42 28 J
+43 28 B
+44 28 O
+PAL
+B #e03c31

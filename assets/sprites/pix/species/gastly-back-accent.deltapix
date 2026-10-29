@@ -1,0 +1,39 @@
+# gastly-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over gastly-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD gastly-back-accent gastly-back 64 64
+35 7 D
+34 8 D
+35 8 D
+32 9 D
+33 9 D
+34 9 D
+35 9 D
+32 10 D
+56 15 D
+55 16 D
+56 16 D
+15 17 D
+53 17 D
+54 17 D
+55 17 D
+56 17 D
+12 18 D
+14 18 D
+15 18 D
+51 18 D
+52 18 D
+53 18 D
+54 18 D
+55 18 D
+11 19 D
+12 19 D
+13 19 D
+14 19 D
+15 19 D
+52 19 D
+11 20 D
+12 20 D
+13 20 D
+12 21 D
+PAL

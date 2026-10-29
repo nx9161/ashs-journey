@@ -1,0 +1,19 @@
+# trainer-hiker-battle-throw — Premium+ W2 throw pose delta over trainer-hiker-battle.
+PIXD trainer-hiker-battle-throw trainer-hiker-battle 48 64
+40 19 O
+40 21 O
+41 19 O
+41 21 O
+42 19 O
+42 21 O
+43 19 B
+43 21 O
+44 19 O
+44 21 O
+40 20 O
+41 20 J
+42 20 J
+43 20 B
+44 20 O
+PAL
+B #e03c31

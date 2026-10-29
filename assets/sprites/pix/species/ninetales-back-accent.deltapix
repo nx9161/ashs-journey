@@ -1,0 +1,9 @@
+# ninetales-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over ninetales-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD ninetales-back-accent ninetales-back 64 64
+20 34 E
+21 34 E
+42 34 E
+43 34 E
+PAL

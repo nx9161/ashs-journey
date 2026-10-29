@@ -1,0 +1,14 @@
+# venusaur-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over venusaur-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD venusaur-back-accent venusaur-back 64 64
+31 8 I
+32 8 I
+33 8 I
+31 9 I
+32 9 I
+33 9 I
+31 10 I
+32 10 I
+33 10 I
+PAL

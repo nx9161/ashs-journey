@@ -1,0 +1,10 @@
+# blastoise-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over blastoise-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD blastoise-front-accent blastoise-front 64 64
+26 20 Y
+27 20 Y
+36 20 Y
+29 30 E
+30 30 E
+PAL

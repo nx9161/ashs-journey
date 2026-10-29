@@ -1,0 +1,28 @@
+# articuno-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over articuno-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD articuno-back-accent articuno-back 64 64
+9 27 I
+10 27 I
+10 28 I
+11 28 I
+48 28 I
+12 29 I
+46 30 I
+44 31 I
+45 31 I
+46 31 I
+43 32 I
+44 32 I
+45 32 I
+46 32 I
+47 32 I
+48 32 I
+43 33 I
+44 33 I
+45 33 I
+46 33 I
+47 33 I
+43 34 I
+44 34 I
+PAL

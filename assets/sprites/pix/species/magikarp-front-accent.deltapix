@@ -1,0 +1,27 @@
+# magikarp-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over magikarp-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD magikarp-front-accent magikarp-front 64 64
+24 24 Y
+25 24 Y
+26 24 Y
+27 24 Y
+38 24 Y
+39 24 Y
+40 24 Y
+41 24 Y
+22 29 B
+23 29 B
+24 29 B
+25 29 B
+26 29 B
+27 29 B
+28 29 B
+36 29 C
+37 29 C
+38 29 C
+39 29 D
+40 29 D
+41 29 D
+42 29 D
+PAL

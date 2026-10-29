@@ -1,0 +1,17 @@
+# haunter-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over haunter-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD haunter-front-accent haunter-front 64 64
+24 27 Y
+25 27 Y
+26 27 Y
+38 27 Y
+39 27 Y
+40 27 Y
+23 28 B
+27 28 B
+37 28 C
+41 28 D
+25 30 C
+39 30 D
+PAL

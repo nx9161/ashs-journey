@@ -27,7 +27,8 @@ import {
   groundClassicAccuracy, groundCritBonus, groundMireSpeedMult,
 } from '../data/grounds.mjs';
 import { SFX } from '../engine/audio.mjs';
-import { trainerBattleArt, playerBattleBackArt, ballBattleArt } from '../engine/art.mjs';
+import { trainerBattleArt, playerBattleBackArt, ballBattleArt, trainerPoseArt, playerPoseArt } from '../engine/art.mjs';
+import { IDLE_CLASS_PARAMS, idleClassOf, idlePhaseOf } from '../data/idle-classes.mjs';
 import { fxPlanForMove, FX_DEFS } from '../engine/fx.mjs';
 import { SLICE_CAPSTONE } from '../data/dialogue.mjs';
 import { typePill } from './ui.mjs';
@@ -138,6 +139,41 @@ const ARENA_ART = {
   spirit: { sky: ['#8a86a8', '#948fb4', '#9e98c0', '#a8a1cc', '#b2aad8', '#bcb3e4'], ground: ['#8a7f74', '#7f746a', '#746960', '#695e56', '#5e534c', '#534842'], dark: '#3a332e', light: '#f4f1ff', accent: '#c9bfff', motif: 'tombs', tex: 'fleck' },
 };
 
+// Premium+ W2 (AR-2): per-Ground ambient life. One shared drift engine
+// in drawArenaAmbient(); this table only picks the element kind, count
+// and speed per Ground — elements are native to the field (embers rise
+// on the fire grounds, petals drift on the flower grounds, rain falls
+// on Storm, snow on Frost, motes hang on the spirit grounds, bubbles
+// rise on Venom, sparks blink on Volt/Rubble/Mind). Motion is a pure
+// function of the theater clock + arenaHash (phase-varied per element,
+// deterministic — never RNG), and collapses to a static scatter when
+// battleAnims is off or reducedMotion is on.
+const ARENA_AMBIENT = {
+  open:   { kind: 'mote',  n: 10, speed: 5 },
+  bloom:  { kind: 'petal', n: 14, speed: 9 },
+  storm:  { kind: 'rain',  n: 18, speed: 130 },
+  mire:   { kind: 'mote',  n: 10, speed: 4 },
+  grave:  { kind: 'mote',  n: 12, speed: 5 },
+  ember:  { kind: 'ember', n: 14, speed: 16 },
+  frost:  { kind: 'snow',  n: 16, speed: 11 },
+  tide:   { kind: 'mote',  n: 10, speed: 6 },
+  rubble: { kind: 'spark', n: 10, speed: 0 },
+  mind:   { kind: 'spark', n: 12, speed: 0 },
+  venom:  { kind: 'bubble', n: 12, speed: 10 },
+  volt:   { kind: 'spark', n: 14, speed: 0 },
+  marsh:  { kind: 'petal', n: 12, speed: 8 },
+  pyre:   { kind: 'ember', n: 16, speed: 20 },
+  spirit: { kind: 'mote',  n: 12, speed: 5 },
+};
+// Darken/lighten a #rrggbb hex by a factor (arena layer palette steps).
+function arenaShade(hex, f) {
+  const n = parseInt(hex.slice(1), 16);
+  const r = Math.max(0, Math.min(255, Math.round(((n >> 16) & 255) * f)));
+  const g = Math.max(0, Math.min(255, Math.round(((n >> 8) & 255) * f)));
+  const b = Math.max(0, Math.min(255, Math.round((n & 255) * f)));
+  return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
+}
+
 export class BattleScene {
   constructor(opts) {
     this.kind = opts.kind; // 'wild' | 'trainer'
@@ -177,10 +213,19 @@ export class BattleScene {
     // keeps that side's battler, exactly as before. Presentation only.
     this._introFoeArt = null;
     this._introAllyArt = null;
+    // Premium+ W2 (TR-2/TR-4): pose variants of the intro figures —
+    // the throw pose shown while each side's first send-out ball is in
+    // flight, and the foe trainer's defeat pose for the victory beat.
+    this._introFoeThrow = null;
+    this._introAllyThrow = null;
+    this._defeatFoeArt = null;
     if (typeof document !== 'undefined') {
       try {
         this._introFoeArt = trainerBattleArt(document, this.trainer);
         this._introAllyArt = playerBattleBackArt(document);
+        this._introFoeThrow = trainerPoseArt(document, this.trainer, 'throw');
+        this._introAllyThrow = playerPoseArt(document, 'throw');
+        this._defeatFoeArt = trainerPoseArt(document, this.trainer, 'defeat') || this._introFoeArt;
       } catch (e) { this._introFoeArt = null; this._introAllyArt = null; }
     }
     this.t = 0;
@@ -2409,13 +2454,114 @@ export class BattleScene {
   ptDisc(r, cx, cy, rx, ry) {
     const c = r.ctx;
     const steps = 5;
+    // Premium+ W2 (AR-5): the disc is tinted by the battle's Ground —
+    // rim/accent from the field's own palette (light top, ground steps,
+    // dark base, accent rim line) instead of one beige disc on all 15
+    // Grounds. Legacy no-field battles keep the shipped beige disc.
+    const gid = this.field ? (this.field.id || this.field.groundId) : null;
+    const ga = gid ? (ARENA_ART[gid] || null) : null;
+    const cols = ga
+      ? [ga.light, ga.ground[1], ga.ground[3], ga.ground[4], ga.dark]
+      : ['#f2ecd8', '#ddd2ac', '#ddd2ac', '#ddd2ac', '#b3a586'];
     for (let i = 0; i < steps; i++) {
       const t = (i / (steps - 1)) * 2 - 1; // -1 (top) .. 1 (bottom)
       const half = Math.max(4, Math.round(rx * Math.sqrt(Math.max(0.12, 1 - t * t))));
       const y0 = Math.round(cy + t * ry - ry / steps);
       const hh = Math.ceil((2 * ry) / steps) + 1;
-      c.fillStyle = i === 0 ? '#f2ecd8' : (i === steps - 1 ? '#b3a586' : '#ddd2ac');
+      c.fillStyle = cols[i];
       c.fillRect(Math.round(cx - half), y0, half * 2, hh);
+    }
+    if (ga) { // accent rim: a 1px field-accent line on the disc's top edge
+      c.fillStyle = ga.accent;
+      c.fillRect(Math.round(cx - rx * 0.62), Math.round(cy - ry), Math.round(rx * 1.24), 1);
+    }
+  }
+
+  // Premium+ W2 (AN-1d / AR-5): the battler's contact shadow — a soft
+  // dark pool ON the disc, distinct from the disc itself, that tracks
+  // the battler's idle motion: as the battler rises (dy < 0) the shadow
+  // narrows and fades; as it settles (dy > 0) it widens and deepens.
+  // Rects only, pooled state (none — pure function of the idle offset).
+  contactShadow(r, cx, cy, baseRx, dy) {
+    const c = r.ctx;
+    if (!c) return;
+    const lift = Math.max(-4, Math.min(3, dy || 0)); // idle dy range
+    const rx = Math.max(8, Math.round(baseRx * (1 + lift * 0.045)));
+    const a = 0.30 + lift * 0.03;
+    c.save();
+    c.fillStyle = '#101018';
+    c.globalAlpha = Math.max(0.12, a - 0.12);
+    c.fillRect(Math.round(cx - rx), Math.round(cy) - 1, rx * 2, 3);
+    c.globalAlpha = Math.max(0.16, a);
+    c.fillRect(Math.round(cx - rx * 0.72), Math.round(cy), Math.round(rx * 1.44), 2);
+    c.restore();
+  }
+
+  // Premium+ W2 (AN-1): idle motion for one battler — the procedural
+  // class mechanism rendered over the authored frames. Returns the
+  // shared per-side scratch { dx, dy, frame } (frame: 'base' | 'bob' |
+  // 'accent'); writes into preallocated scratch, never allocates.
+  // Gated 100% by the W1 settings gate: battleAnims off or
+  // reducedMotion on => the shipped static pose, exactly as at base.
+  idleMotion(side, speciesId) {
+    if (!this._idleScratch) this._idleScratch = { foe: { dx: 0, dy: 0, frame: 'base' }, ally: { dx: 0, dy: 0, frame: 'base' } };
+    const out = this._idleScratch[side];
+    out.dx = 0; out.dy = 0; out.frame = 'base';
+    if (!this.fxAnimsOn()) return out;
+    const P = IDLE_CLASS_PARAMS[idleClassOf(speciesId)] || IDLE_CLASS_PARAMS.grounded;
+    const t = this.t + idlePhaseOf(speciesId) * 4000 + (side === 'ally' ? 1300 : 0);
+    const w2 = Math.PI * 2;
+    out.dy = Math.round(Math.sin(t * w2 / P.periodY) * P.ampY * 10) / 10;
+    out.dx = P.ampX ? Math.round(Math.sin(t * w2 / P.periodX) * P.ampX * 10) / 10 : 0;
+    const ac = t % P.accentEvery;
+    if (ac < 230) out.frame = 'accent';
+    else if (P.bobRate < P.periodY) out.frame = ((t % P.bobRate) / P.bobRate) < 0.5 ? 'bob' : 'base'; // hover/serpentine flap-flow
+    else if (idleClassOf(speciesId) === 'inert') out.frame = 'base'; // inert life is the accent window + breath pulse
+    else out.frame = Math.sin(t * w2 / P.periodY) > 0.25 ? 'bob' : 'base'; // grounded breathe
+    return out;
+  }
+
+  // Premium+ W2 (AR-2): the animated ambient layer — ARENA_AMBIENT
+  // picks the element per Ground; positions are a pure function of
+  // the theater clock and arenaHash (phase-varied, deterministic).
+  // With the motion gate off (battleAnims off / reducedMotion) the
+  // same elements render as a static scatter at their phase positions.
+  drawArenaAmbient(r, ga, gid, w, h, horizon) {
+    if (!ga || !gid) return;
+    const amb = ARENA_AMBIENT[gid];
+    if (!amb) return;
+    const g = this.game;
+    const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+    const motion = this.fxAnimsOn();
+    const t = motion ? this.t : 0;
+    const fieldH = Math.max(8, h - horizon - 6);
+    for (let i = 0; i < amb.n; i++) {
+      const h1 = arenaHash(i, 211), h2 = arenaHash(i, 223), h3 = arenaHash(i, 227);
+      const drift = (t * amb.speed / 1000) * (0.6 + h3 * 0.7);
+      let x, y;
+      if (amb.kind === 'rain') {
+        x = Math.floor(h1 * w + drift * 2.2) % w;
+        y = horizon + Math.floor((h2 * fieldH + drift * 6) % fieldH);
+        F(ga.light, x, y, 1, 4);
+      } else if (amb.kind === 'ember' || amb.kind === 'bubble') {
+        x = Math.floor(h1 * w + Math.sin((t / 700) + h3 * 6.28) * 3 + w) % w;
+        y = horizon + Math.floor(((h2 * fieldH - drift * 2.4) % fieldH + fieldH) % fieldH);
+        F(i % 3 ? ga.accent : ga.light, x, y, 2, 2);
+      } else if (amb.kind === 'spark') {
+        // sparks blink in place: position is hash-fixed, visibility is
+        // phase — at least half the set is lit at any sampled instant.
+        x = Math.floor(h1 * w); y = horizon + Math.floor(h2 * fieldH);
+        const lit = !motion || Math.sin(t / 300 + h3 * 12.56) > -0.2;
+        if (lit) F(i % 2 ? ga.accent : ga.light, x, y, 2, 2);
+      } else if (amb.kind === 'petal' || amb.kind === 'snow') {
+        x = Math.floor((h1 * w + drift * 3 + Math.sin(t / 500 + h3 * 6.28) * 4 + w * 2) % w);
+        y = horizon + Math.floor((h2 * fieldH + drift * 1.7) % fieldH);
+        F(i % 3 ? ga.light : ga.accent, x, y, 2, amb.kind === 'snow' ? 2 : 1);
+      } else { // mote: slow dust/spirit motes wandering the field
+        x = Math.floor((h1 * w + Math.sin(t / 900 + h3 * 6.28) * 6 + w) % w);
+        y = horizon + Math.floor((h2 * fieldH + Math.cos(t / 1100 + h1 * 6.28) * 4 + fieldH) % fieldH);
+        F(i % 2 ? ga.light : ga.accent, x, y, 2, 1);
+      }
     }
   }
 
@@ -2476,8 +2622,12 @@ export class BattleScene {
         F(ga.light, cx, cy, 16, 3); F(ga.light, cx + 4, cy - 2, 9, 2); F(ga.dark, cx + 2, cy + 3, 12, 2);
       }
       if (ga.motif === 'tombs' || ga.motif === 'runes' || ga.motif === 'rocks') {
+        // Premium+ W2 (AR-4): the speckle is confined to its layer
+        // band — a 12px strip just above the horizon (weathering on
+        // the far silhouette), NEVER scattered over the sky region:
+        // 0 non-sky pixels in the sky for these motifs.
         for (let i = 0; i < Math.floor(w / 3); i++) {
-          const sx = Math.floor(arenaHash(i, 11) * w), sy = Math.floor(arenaHash(i, 23) * Math.max(1, horizon - 4));
+          const sx = Math.floor(arenaHash(i, 11) * w), sy = horizon - 6 - Math.floor(arenaHash(i, 23) * 12);
           F(arenaHash(i, 37) > 0.5 ? ga.dark : ga.accent, sx, sy, 2, 2);
         }
       }
@@ -2535,6 +2685,19 @@ export class BattleScene {
 
     // ---- horizon detail: per-Ground motif, else the legacy kind detail ----
     if (ga) {
+      // Premium+ W2 (AR-1): the FAR SILHOUETTE BAND — a fifth layer
+      // between sky and horizon motif, in its own palette step (the
+      // sky's deepest tone, darkened): a broken ridge of far shapes
+      // whose rhythm is hashed per Ground, so each field has depth
+      // behind its motif row. Drawn before the motif so the motif
+      // row stands in front of it.
+      const farCol = arenaShade(ga.sky[ga.sky.length - 1], 0.66);
+      for (let x = -6, i = 0; x < w + 6; x += 15, i++) {
+        const fh = 10 + Math.floor(arenaHash(i, 97) * 13);
+        const fw = 9 + Math.floor(arenaHash(i, 103) * 8);
+        F(farCol, x, horizon - fh, fw, fh);
+        if (arenaHash(i, 109) > 0.55) F(farCol, x + 3, horizon - fh - 3, Math.max(3, fw - 6), 3);
+      }
       const M = ga.motif, A = ga.accent, D = ga.dark, L = ga.light;
       if (M === 'trees' || M === 'flowers' || M === 'reeds') {
         F(D, 0, horizon - 8, w, 8);
@@ -2667,6 +2830,20 @@ export class BattleScene {
       rh = Math.min(15, Math.ceil(rh * 1.45));
       row++;
     }
+    // Premium+ W2 (AR-1): FOREGROUND OVERLAY — the fifth layer: a
+    // bottom-edge fringe in the field's dark tone (grass blades, ash,
+    // rubble, foam — read from the motif family) that the battlers
+    // stand BEHIND, closing the flat backdrop-card read.
+    if (ga) {
+      for (let x = 2, i = 0; x < w - 2; x += 9, i++) {
+        const fh = 2 + Math.floor(arenaHash(i, 131) * 5);
+        F(ga.dark, x, h - fh, 3, fh);
+        if (i % 3 === 0) F(ga.accent, x + 1, h - fh - 1, 1, 1);
+      }
+      F(ga.dark, 0, h - 2, w, 2);
+    }
+    // Premium+ W2 (AR-2): animated ambient layer (phase-varied drift).
+    this.drawArenaAmbient(r, ga, gid, w, h, horizon);
     // ADR-025 §1: the arena backdrop tint shifts toward the Ground — a
     // flat palette shift of the EXISTING per-area backdrop (no new
     // scenes, no gradients): one translucent flat wash in the Ground's
@@ -2699,12 +2876,22 @@ export class BattleScene {
     // ruling: gameux §4.2's "upper-left" was the spec's error; the build is correct).
     const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
     const allyArt = g.spriteCache[this.ally.speciesId] || g.spriteCache.partner;
-    const bob = Math.sin(this.t * 0.004) * 2;
-    const foePos = { x: w * 0.62, y: h * 0.12 + bob };
-    const allyPos = { x: w * 0.14, y: h * 0.52 - bob };
-    // Idle bob: the build-time derived bob frame alternates with the sine.
-    let foeSpr = (bob > 0 && foeArt.frontBob) ? foeArt.frontBob : foeArt.front;
-    let allySpr = allyArt.back;
+    // Premium+ W2 (AN-1): idle life is per-species class motion over
+    // the authored frames — grounded breathe / hover flap / serpentine
+    // flow / inert accent (src/data/idle-classes.mjs) — replacing the
+    // one shared sine both battlers used to ride. Frame picks: the
+    // authored accent delta inside its window, else the bob frame
+    // (fronts: build-derived since Wave 6; backs: W2 shift-delta
+    // parity, all 162), else the base pose. With the motion gate off
+    // idleMotion returns the static base pose (shipped behaviour).
+    const foeIdle = this.idleMotion('foe', this.foe.speciesId);
+    const allyIdle = this.idleMotion('ally', this.ally.speciesId);
+    const foePos = { x: w * 0.62 + foeIdle.dx, y: h * 0.12 + foeIdle.dy };
+    const allyPos = { x: w * 0.14 + allyIdle.dx, y: h * 0.52 + allyIdle.dy };
+    let foeSpr = foeIdle.frame === 'accent' && foeArt.frontAccent ? foeArt.frontAccent
+      : (foeIdle.frame === 'bob' && foeArt.frontBob) ? foeArt.frontBob : foeArt.front;
+    let allySpr = allyIdle.frame === 'accent' && allyArt.backAccent ? allyArt.backAccent
+      : (allyIdle.frame === 'bob' && allyArt.backBob) ? allyArt.backBob : allyArt.back;
     // README impact transform: white palette-swap on the defender for 2 frames.
     if (this.impactFx) {
       if (this.impactFx.side === 'foe' && foeArt.frontWhite) foeSpr = foeArt.frontWhite;
@@ -2741,6 +2928,10 @@ export class BattleScene {
     // foe disc is smaller — perspective), drawn before the sprites.
     this.ptDisc(r, foePos.x + 24, foePos.y + 44, 34, 8);
     this.ptDisc(r, allyPos.x + 24, allyPos.y + 44, 38, 9);
+    // Premium+ W2 (AN-1d): contact shadows ride ON the discs and track
+    // each battler's idle offset — a battler never floats.
+    this.contactShadow(r, foePos.x + 24, foePos.y + 45, 26, foeIdle.dy);
+    this.contactShadow(r, allyPos.x + 24, allyPos.y + 45, 30, allyIdle.dy);
     // Wave 3b: during the intro chain (state 'intro' — challenge and
     // send-out messages), the authored trainer figures stand on the
     // platforms instead of the battlers: Ash's battle back on the ally
@@ -2748,15 +2939,44 @@ export class BattleScene {
     // when one exists. A side without intro art keeps its battler
     // (graceful degrade). The battlers take over untouched the moment
     // the intro hands off — no state, timing, or message changes.
-    const introFigure = (cv, pos) => {
+    // Premium+ W2 (TR-2): intro figures SLIDE in with the plates —
+    // 380ms ease-out from their screen edge (foe from the right, Ash
+    // from the left) — and THROW: while a side's send-out ball is in
+    // flight during the intro, that side's figure shows its throw
+    // pose (the FX-5 ball arc below originates from its hand).
+    // Motion gate off => figures stand at rest, exactly as shipped.
+    const introFigure = (cv, pos, side) => {
       if (!cv || !cv.width || !cv.height) return false;
-      const hh = 64, ww = Math.round(cv.width * (hh / cv.height));
-      r.blitS(cv, pos.x + 24 - ww / 2, pos.y + 48 - hh, ww, hh);
+      let useCv = cv;
+      const efx = this.entryFx && this.entryFx[side];
+      if (efx && efx.t < 250 && this.state === 'intro') {
+        const throwCv = side === 'foe' ? this._introFoeThrow : this._introAllyThrow;
+        if (throwCv && throwCv.width) useCv = throwCv;
+      }
+      const hh = 64, ww = Math.round(useCv.width * (hh / useCv.height));
+      let ox = 0;
+      if (this.fxAnimsOn()) {
+        const p = Math.max(0, Math.min(1, this.t / 380));
+        const e = 1 - Math.pow(1 - p, 3);
+        ox = (1 - e) * (side === 'foe' ? 90 : -90);
+      }
+      r.blitS(useCv, pos.x + 24 - ww / 2 + ox, pos.y + 48 - hh, ww, hh);
       return true;
     };
     const inIntro = this.state === 'intro';
-    if (!(inIntro && introFigure(this._introFoeArt, foePos))) drawBattler(foeSpr, foePos, 'foe', foeArt);
-    if (!(inIntro && introFigure(this._introAllyArt, allyPos))) drawBattler(allySpr, allyPos, 'ally', allyArt);
+    // Premium+ W2 (TR-4): on victory the foe TRAINER returns — in its
+    // defeat pose — for the lose dialogue, instead of the dialogue
+    // playing over the battlers.
+    const inVictory = this.state === 'victory' && !!this.trainer;
+    let foeFigureDrawn = false;
+    if (inIntro) foeFigureDrawn = introFigure(this._introFoeArt, foePos, 'foe');
+    else if (inVictory && this._defeatFoeArt && this._defeatFoeArt.width) {
+      const cv = this._defeatFoeArt, hh = 64, ww = Math.round(cv.width * (hh / cv.height));
+      r.blitS(cv, foePos.x + 24 - ww / 2, foePos.y + 48 - hh + 3, ww, hh); // +3: the slump
+      foeFigureDrawn = true;
+    }
+    if (!foeFigureDrawn) drawBattler(foeSpr, foePos, 'foe', foeArt);
+    if (!(inIntro && introFigure(this._introAllyArt, allyPos, 'ally'))) drawBattler(allySpr, allyPos, 'ally', allyArt);
     // README faint transform: sink 8px + fade to 0 alpha over 20 frames.
     if (this.faintFx) {
       const k = Math.min(1, this.faintFx.t / 660);
@@ -2791,7 +3011,14 @@ export class BattleScene {
       const tx = pos.x + 24, ty = pos.y + 40;
       if (efx.t < 250) {
         const k = efx.t / 250;
-        const ox = side === 'foe' ? w * 0.94 : w * 0.04, oy = side === 'foe' ? h * 0.08 : h * 0.66;
+        let ox = side === 'foe' ? w * 0.94 : w * 0.04, oy = side === 'foe' ? h * 0.08 : h * 0.66;
+        // Premium+ W2 (TR-2): during the intro the arc originates
+        // from the throwing figure's hand — the foe trainer's hand
+        // on their platform, Ash's hand on his.
+        if (this.state === 'intro') {
+          if (side === 'foe' && this._introFoeArt) { ox = foePos.x + 24 + 15; oy = foePos.y + 20; }
+          if (side === 'ally' && this._introAllyArt) { ox = allyPos.x + 24 - 15; oy = allyPos.y + 20; }
+        }
         this.drawBall(r, efx.ballId, ox + (tx - ox) * k, oy + (ty - oy) * k - Math.sin(k * Math.PI) * 26, 13, false);
       } else if (efx.t < 360) {
         const rr = (efx.t - 250) * 0.35, col = side === 'foe' ? '#ffffff' : '#ffe9a8';
@@ -2863,10 +3090,38 @@ export class BattleScene {
       }
       c.restore();
     }
+    // Premium+ W2 (TR-3): the ceremony tier — boss battles (gym
+    // leaders, Elite Four, Champion, rival) open on a VS beat: dark
+    // letterbox bands, a gold divider, and both figures facing off
+    // large, held ~1.15s across the intro (the ≥800ms beat), a
+    // treatment route trainers never get. Text half is drawn after
+    // end() alongside the plates. Motion gate off => no beat.
+    const vsActive = this.entryVariant === 'boss' && this.state === 'intro'
+      && this.fxAnimsOn() && this.t < 1150 && !!this._introFoeArt;
+    this._vsActive = vsActive;
+    if (vsActive) {
+      const c = r.ctx;
+      const bandH = Math.round(h * 0.17);
+      c.fillStyle = '#12101c'; c.fillRect(0, 0, w, bandH); c.fillRect(0, h - bandH, w, bandH);
+      c.fillStyle = '#f0c81e'; c.fillRect(0, bandH, w, 2); c.fillRect(0, h - bandH - 2, w, 2);
+      const fig = (cv, cx) => {
+        if (!cv || !cv.width) return;
+        const hh = 92, ww = Math.round(cv.width * (hh / cv.height));
+        r.blitS(cv, cx - ww / 2, h * 0.52 - hh, ww, hh);
+      };
+      fig(this._introAllyArt, w * 0.30);
+      fig(this._introFoeArt, w * 0.70);
+      c.fillStyle = '#f0c81e'; c.fillRect(Math.round(w / 2) - 1, bandH + 8, 2, h - bandH * 2 - 16);
+    }
     // W1 FX-6: entry wipe + exit mirror over the arena (under plates).
     this.drawEntryWipe(r, w, h);
     this.drawExitWipe(r, w, h);
     r.end();
+    if (vsActive && this.trainer) {
+      r.text('VS', w / 2, h * 0.40, { size: 22, bold: true, color: '#f0c81e', shadow: false, align: 'center' });
+      r.text(String(this.trainer.name || '').toUpperCase(), w * 0.70, h * 0.56, { size: 14, bold: true, color: '#ffffff', shadow: false, align: 'center' });
+      r.text(String(this.trainer.title || ''), w * 0.70, h * 0.56 + 17, { size: 14, color: '#cfc4ea', shadow: false, align: 'center' });
+    }
     r.camX = pcx; r.camY = pcy;
     // HP plates (Platinum databoxes, original art) — P1/A5: all plate text >= 14px.
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);

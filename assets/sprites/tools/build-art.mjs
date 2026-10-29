@@ -129,6 +129,35 @@ function main() {
     sprites.push(mat);
   }
 
+  // ---- Premium+ W2 (AN-1): back-bob parity via SHIFT deltas ----
+  // Fronts have shipped a derived bob frame since Wave 6; backs had
+  // none (0/162). A bob is a pure 2px downward shift of the base pose,
+  // so the back bob ships as a shift-delta art-data entry
+  // ({ base, shiftY: 2 } — ~60 B) instead of a full 64x64 frame
+  // (~4.5 KB): 162 backs cost ~10 KB, not ~730 KB. The materialized
+  // sprite still packs into the atlas like any other sprite, and the
+  // runtime materializer (src/engine/art.mjs) resolves shiftY.
+  // The partner front (the one battler front without a derived bob —
+  // the species-family derivation above never covered the partner
+  // family) gains its bob the same way.
+  const shiftSprites = [];
+  for (const s of [...sprites]) {
+    const wantsBackBob = (s.family === 'species' || s.family === 'partner') && s.id.endsWith('-back') && !byId.has(s.id + '-bob');
+    const wantsPartnerFrontBob = s.family === 'partner' && s.id.endsWith('-front') && !byId.has(s.id + '-bob');
+    if (!wantsBackBob && !wantsPartnerFrontBob) continue;
+    const shift = 2;
+    const rows = s.rows.map((r) => '.'.repeat(s.w));
+    for (let y = 0; y < s.h - shift; y++) rows[y + shift] = s.rows[y];
+    const mat = {
+      id: s.id + '-bob', w: s.w, h: s.h, rows, pal: s.pal,
+      family: s.family, shiftOf: s.id, shiftY: shift,
+      path: s.path + ' (shift-delta bob)',
+    };
+    shiftSprites.push(mat);
+    byId.set(mat.id, mat);
+    sprites.push(mat);
+  }
+
   // ---- per-family palette budget (Wave 0, 2026-10-27) ----
   // The old tileset-wide cap (<= 16 colors across every tile sprite) is
   // replaced by a per-family budget: the tiles family's color UNION is
@@ -233,6 +262,11 @@ function main() {
   data += '// Regenerate: node assets/sprites/tools/build-art.mjs (deterministic).\n';
   data += 'export const ART = {\n';
   for (const s of sprites) {
+    if (s.shiftOf) {
+      // Shift-delta form (W2 back-bob): base id + vertical shift only.
+      data += `  ${JSON.stringify(s.id)}: { base: ${JSON.stringify(s.shiftOf)}, w: ${s.w}, h: ${s.h}, pal: {}, shiftY: ${s.shiftY} },\n`;
+      continue;
+    }
     if (s.deltaOf) {
       // Delta form: base id + this sprite's OWN palette keys (new hexes
       // only) + the sparse [x, y, char] override list. The runtime
@@ -253,6 +287,7 @@ function main() {
     families: FAMILIES,
     generated: new Date().toISOString().slice(0, 10),
     derived_bob: derived.map((d) => d.id),
+    shift_bob: shiftSprites.map((d) => d.id),
     delta_frames: deltaSprites.map((d) => d.id),
   }, null, 2) + ';\n';
   fs.writeFileSync(path.join(ROOT, 'art-data.mjs'), data);

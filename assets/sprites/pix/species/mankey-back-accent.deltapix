@@ -1,0 +1,12 @@
+# mankey-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over mankey-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD mankey-back-accent mankey-back 64 64
+22 22 A
+42 22 A
+23 23 A
+41 23 A
+42 23 A
+43 23 A
+42 24 A
+PAL

@@ -1,0 +1,19 @@
+# geodude-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over geodude-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD geodude-front-accent geodude-front 64 64
+26 32 Y
+27 32 Y
+38 32 Y
+39 32 Y
+24 35 B
+28 35 A
+36 35 B
+40 35 C
+25 36 B
+26 36 B
+27 36 B
+37 36 B
+38 36 C
+39 36 C
+PAL

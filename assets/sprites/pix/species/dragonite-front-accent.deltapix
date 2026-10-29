@@ -1,0 +1,13 @@
+# dragonite-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over dragonite-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD dragonite-front-accent dragonite-front 64 64
+26 15 Y
+27 15 Y
+28 15 Y
+36 15 Y
+37 15 Y
+38 15 Y
+27 18 C
+37 18 D
+PAL

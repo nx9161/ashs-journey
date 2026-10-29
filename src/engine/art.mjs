@@ -28,11 +28,21 @@ const matCache = new Map();
 export function materializeArt(id) {
   const a = ART[id];
   if (!a) return null;
-  if (!a.deltas) return a;
+  if (!a.deltas && !a.shiftY) return a;
   const hit = matCache.get(id);
   if (hit) return hit;
   const base = materializeArt(a.base);
   if (!base) return null;
+  if (a.shiftY) {
+    // Premium+ W2 shift-delta (back-bob): the base pose shifted down
+    // by shiftY rows, top rows transparent — the build-time derived
+    // bob, shipped in ~60 B instead of a full frame.
+    const rows = base.rows.map(() => '.'.repeat(a.w));
+    for (let y = 0; y < a.h - a.shiftY; y++) rows[y + a.shiftY] = base.rows[y];
+    const out = { w: a.w, h: a.h, pal: base.pal, rows };
+    matCache.set(id, out);
+    return out;
+  }
   const rows = base.rows.map((r) => r.split(''));
   for (const [x, y, ch] of a.deltas) {
     if (rows[y] && x >= 0 && x < rows[y].length) rows[y][x] = ch;
@@ -94,6 +104,13 @@ export function speciesBattleArt(doc, speciesId, species) {
     return {
       front, back,
       frontBob: mk(speciesId + '-front-bob'),
+      // Premium+ W2 (AN-1): back-bob parity (shift-delta derived at
+      // build time for all 162 backs) + authored accent deltas for the
+      // priority species (null where a species has no accent frame —
+      // the idle-class mechanism still animates it procedurally).
+      backBob: mk(speciesId + '-back-bob'),
+      frontAccent: mk(speciesId + '-front-accent'),
+      backAccent: mk(speciesId + '-back-accent'),
       frontWhite: artCanvas(doc, speciesId + '-front', 1, true),
       backWhite: artCanvas(doc, speciesId + '-back', 1, true),
       size: BATTLER_DRAW_SIZE,
@@ -101,7 +118,7 @@ export function speciesBattleArt(doc, speciesId, species) {
   }
   // Fallback: forge stand-in (documented; replaced when art ships).
   const cv = forgeSprite(doc, species, BATTLER_DRAW_SIZE);
-  return { front: cv, back: cv, frontBob: null, frontWhite: null, backWhite: null, size: BATTLER_DRAW_SIZE, forgeFallback: true };
+  return { front: cv, back: cv, frontBob: null, backBob: null, frontAccent: null, backAccent: null, frontWhite: null, backWhite: null, size: BATTLER_DRAW_SIZE, forgeFallback: true };
 }
 
 // ---- overworld ----
@@ -778,7 +795,39 @@ const TRAINER_BATTLE_NAMES = {
   'bruno': 'bruno', 'agatha': 'agatha', 'lance': 'lance',
   'rue & cole': 'rue', 'mara & jules': 'cole',
 };
-export function trainerBattleArt(doc, trainer) {
+// Premium+ W2 (TR-1): trainer-CLASS figures for the generic roster.
+// Every trainer definition in the game carries a class in its title
+// ('Youngster', 'Bug Catcher', 'Jr. Trainer'...); the named 16 above
+// keep their own sprites, and every other id resolves to one of the 14
+// authored class figures (pix/battle/trainer-<kind>-battle.pix) by
+// title keyword, then name keyword, then a youngster default — so
+// 104/104 trainer ids present a human figure in the intro (the W2
+// coverage audit enumerates every trainer table to prove it). Duo
+// battles keep their named resolution above (rue/cole).
+const TRAINER_CLASS_ART = {
+  youngster: 'trainer-youngster-battle', lass: 'trainer-lass-battle',
+  bugcatcher: 'trainer-bugcatcher-battle', camper: 'trainer-camper-battle',
+  hiker: 'trainer-hiker-battle', swimmer: 'trainer-swimmer-battle',
+  gent: 'trainer-gent-battle', beauty: 'trainer-beauty-battle',
+  psychic: 'trainer-psychic-battle', acetrainer: 'trainer-acetrainer-battle',
+  fisher: 'trainer-fisher-battle', biker: 'trainer-biker-battle',
+  grunt: 'trainer-grunt-battle', engineer: 'trainer-engineer-battle',
+};
+const TRAINER_CLASS_BY_TITLE = [
+  ['youngster', 'youngster'], ['lass', 'lass'], ['bug catcher', 'bugcatcher'],
+  ['camper', 'camper'], ['hiker', 'hiker'], ['swimmer', 'swimmer'],
+  ['gentleman', 'gent'], ['beauty', 'beauty'], ['psychic', 'psychic'],
+  ['ace trainer', 'acetrainer'], ['cooltrainer', 'acetrainer'],
+  ['jr. trainer', 'acetrainer'], ['jr trainer', 'acetrainer'],
+  ['trainer', 'acetrainer'], ['fisherman', 'fisher'], ['fisher', 'fisher'],
+  ['biker', 'biker'], ['grunt', 'grunt'], ['rocket admin', 'grunt'],
+  ['engineer', 'engineer'], ['tamer', 'hiker'], ['burglar', 'biker'],
+  ['karate', 'acetrainer'], ['gamer', 'youngster'],
+];
+// Which battle-art kind a trainer presents as: a TRAINER_BATTLE_ART
+// key for the named cast, else a TRAINER_CLASS_ART key. Pure (no doc)
+// so audits can enumerate coverage without a canvas.
+export function trainerArtKind(trainer) {
   if (!trainer) return null;
   const name = String(trainer.name || '').toLowerCase();
   const id = String(trainer.id || '').toLowerCase();
@@ -787,7 +836,41 @@ export function trainerBattleArt(doc, trainer) {
   if (!kind && (name === 'gary' || id.startsWith('gary'))) {
     kind = (id === 'gary_champion' || title.includes('champion')) ? 'garychamp' : 'gary';
   }
-  return kind ? artCanvas(doc, TRAINER_BATTLE_ART[kind], 1) : null;
+  if (kind) return { named: kind };
+  for (const [needle, cls] of TRAINER_CLASS_BY_TITLE) {
+    if (title.includes(needle)) return { cls };
+  }
+  // Name-keyword fallback for the title-less definitions (maps3/4
+  // route trainers): their ids carry the class (r3_lass, moon_grunt...).
+  const hay = id + ' ' + name;
+  for (const [needle, cls] of TRAINER_CLASS_BY_TITLE) {
+    if (hay.includes(needle.replace(/[^a-z]/g, ''))) return { cls };
+  }
+  if (hay.includes('lass')) return { cls: 'lass' };
+  if (hay.includes('bug')) return { cls: 'bugcatcher' };
+  if (hay.includes('grunt')) return { cls: 'grunt' };
+  if (hay.includes('camper')) return { cls: 'camper' };
+  if (hay.includes('gamer')) return { cls: 'youngster' };
+  return { cls: 'youngster' };
+}
+export function trainerBattleArt(doc, trainer) {
+  const res = trainerArtKind(trainer);
+  if (!res) return null;
+  if (res.named) return artCanvas(doc, TRAINER_BATTLE_ART[res.named], 1);
+  return artCanvas(doc, TRAINER_CLASS_ART[res.cls], 1);
+}
+// Premium+ W2 (TR-2/TR-4): pose variants of the same figure — the
+// throw pose (intro send-out) and the defeat pose (victory dialogue),
+// authored as .deltapix over every named + class figure. Returns null
+// when a figure has no such delta (the base figure is drawn instead).
+export function trainerPoseArt(doc, trainer, pose) {
+  const res = trainerArtKind(trainer);
+  if (!res) return null;
+  const base = res.named ? TRAINER_BATTLE_ART[res.named] : TRAINER_CLASS_ART[res.cls];
+  return artCanvas(doc, base + '-' + pose, 1);
+}
+export function playerPoseArt(doc, pose) {
+  return artCanvas(doc, 'ash-battle-back-' + pose, 1);
 }
 export function playerBattleBackArt(doc) {
   return artCanvas(doc, 'ash-battle-back', 1);

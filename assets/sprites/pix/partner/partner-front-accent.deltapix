@@ -1,0 +1,9 @@
+# partner-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over partner-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD partner-front-accent partner-front 64 64
+25 24 Y
+26 24 Y
+37 24 Y
+38 24 Y
+PAL

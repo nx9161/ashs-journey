@@ -1,0 +1,19 @@
+# agatha-battle-throw — Premium+ W2 throw pose delta over agatha-battle.
+PIXD agatha-battle-throw agatha-battle 48 64
+36 27 O
+36 29 O
+37 27 O
+37 29 O
+38 27 O
+38 29 O
+39 27 B
+39 29 O
+40 27 O
+40 29 O
+36 28 O
+37 28 J
+38 28 J
+39 28 B
+40 28 O
+PAL
+B #e03c31

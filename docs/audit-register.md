@@ -3037,3 +3037,159 @@ per-frame allocations in hot paths).
   now hand-authored — the W0 generator must not be re-run over
   FX_DEFS (header updated; MOVE_FX/MOVE_ARCH rows remain
   generator-owned). No verify-live expectation was changed.
+
+## Premium+ Art Wave W2 — Battle Life, Arenas & Trainers (2026-10-28, mission close)
+
+Built on W1 HEAD `5211544` (verified, tree clean at start); NOT
+committed by the implementer (coordinator commits after independent
+QA). Spec: `~/workspace/ashs-journey-qa/premium-art-spec.md` §3.1
+AN-1, §3.3 AR-1..5, §3.3b TR-1..4, §4 W2 row (art-data growth cap
+≤950 KB) + `premium-battle-audit.md` §2.1/2.4/2.6. Public edition
+only; $0, no installs; all art original (hand-authored `.pix` /
+`.deltapix` or code-defined procedural rects — no shadowBlur, no
+gradients, no per-frame allocations, hash/phase determinism). W1's
+shipped timings (hitstop/shake/drain) untouched.
+
+- **AN-1 — battler idle life.** (a) **Back-bob parity 162/162**: a
+  bob is a pure 2px shift of the base pose, so `build-art.mjs` now
+  derives every back's bob as a SHIFT-delta art-data entry
+  (`{ base, shiftY: 2 }`, ~60 B) instead of a full frame (~4.5 KB) —
+  all 162 backs (161 species + partner) cost ~10 KB, and the partner
+  front (the one front the species-family derivation never covered)
+  gains its bob the same way: front-bob 162/162, back-bob 162/162
+  (was 0). `materializeArt` resolves `shiftY`; atlases pack the
+  materialized frames as usual. (b) **4 idle classes in DATA**:
+  `src/data/idle-classes.mjs` — a literal 162-row assignment
+  (grounded 83 / hover 31 / serpentine 20 / inert 28) from body plan
+  + types with a hand override list (floaters, flightless birds,
+  sleepers/objects), plus `IDLE_CLASS_PARAMS`: measurably different
+  amplitude/rate per class (hover 3.4px @1050ms + flap swaps @525ms;
+  serpentine 3.2px lateral @1800ms; grounded 1.6px @2400ms; inert
+  1.0px @3200ms + accent window). The class mechanism is procedural
+  motion in `battle.mjs idleMotion()` over the authored frames,
+  per-species phase-hashed (no two battlers sync). (c) **Accent
+  frames: 60 most-seen species × front+back = 120 `.deltapix`**
+  (blink 56 authored across the set's fronts, flame/wing flicker 15,
+  accent twinkle for the rest — recolor-only deltas, so silhouette-
+  preserving by construction; 4,951 delta pixels total pre-trim,
+  120 files shipped). (d) **Contact shadows** (`contactShadow`):
+  a dark pool on the disc, distinct from the disc, narrowing/fading
+  as the battler's idle offset rises and widening as it settles.
+  **Rig proof** (`premium-rig/frame-sampler-w2.mjs`, live Chromium):
+  in 2.4s idle captures (20 frames), distinct poses — rattata
+  (grounded) 16–19, zubat (hover) 19–20, gyarados (serpentine
+  swimmer) 20, snorlax (inert) 16, charizard ALLY BACK (hover) 20 —
+  every case ≥4 with wide margin.
+- **AR — arenas.** (a) AR-1: **≥5 layers per Ground** — the far
+  silhouette band (own palette step: deepest sky tone darkened,
+  hashed ridge rhythm per Ground) and the foreground overlay
+  (bottom-edge fringe in the field's dark/accent) join sky / horizon
+  motif / ground plane for all 15, extending the code-defined
+  ARENA_ART pattern (no rasterised arenas). (b) AR-2: **ambient
+  layer on 15/15** (`ARENA_AMBIENT` + `drawArenaAmbient`): embers
+  rise on pyre/ember, petals on bloom/marsh, rain on storm, snow on
+  frost, bubbles on venom, sparks blink on volt/rubble/mind, motes
+  on open/mire/grave/tide/spirit — phase-varied by arenaHash,
+  static-scatter when the motion gate is off. Rig: ground-strip
+  series on pyre/bloom/volt show 19–20 distinct frames with
+  ~10% max changed fraction. (c) AR-3: rig one-shot arena hashes
+  **pairwise distinct 15/15**; no two Grounds share both palette
+  family and motif class (the shared motif classes — storm/volt,
+  mire/marsh, ember/pyre, grave/spirit — are separated by palette
+  family AND by ambient kind AND by disc tint). (d) AR-4: the
+  rocks/tombs/runes speckle is confined to a 12px band above the
+  horizon; rig sky-purity check (plate/battler-free sky window,
+  distance-based) finds **0 non-sky pixels** on grave/rubble/mind/
+  spirit. (e) AR-5: `ptDisc` is Ground-tinted (light top, ground
+  steps, dark base, accent rim line from the field palette) on all
+  15 — the single beige disc is gone; contact shadows sit on top.
+- **TR — trainer presentation.** (a) TR-1: **104/104** — 14 authored
+  trainer-class figures (48×64 `.pix`: youngster, lass, bugcatcher,
+  camper, hiker, swimmer, gent, beauty, psychic, acetrainer,
+  fisher, biker, grunt, engineer) resolve by class through the new
+  pure `trainerArtKind()` (named id/name → title keywords → id/name
+  keywords → youngster default); the named 16 keep their sprites.
+  Proof: `premium-rig/audit-trainer-coverage.mjs` enumerates all
+  four trainer tables (8+48+39+9 = 104) — **PASS, 104/104 present a
+  figure** (44 entries resolve to named figures across the tables,
+  60 to class figures; all 14 classes used), each with throw +
+  defeat pose deltas present in ART. (b) TR-2: figures **slide in
+  380ms ease-out** with the plate slide (foe from the right, Ash
+  from the left) and **throw**: while a side's intro send-out ball
+  is in flight its figure swaps to its throw-pose delta (31 throw
+  deltas — named 16 + Ash's back + 14 classes) and the FX-5
+  ball arc originates from the figure's hand position. Rig: Cal's
+  intro shows figure+throw resolved, foe entry running, 14 distinct
+  poses across the slide window. (c) TR-3: **ceremony tier** — boss
+  entry variant (8 leaders + 4 Elite Four + Champion + rival =
+  ≥15 identities) opens on a VS beat: letterbox bands, gold
+  divider, both figures large, name/title card, held ~1.15s across
+  the intro. Rig probe on a live scene: `_vsActive` true under the
+  boss variant, false under the route variant — measurably
+  different entries. (d) TR-4: on victory the foe trainer returns
+  in its **defeat pose** (30 defeat deltas: sweat + closed-glint
+  treatment) with a 3px slump, drawn instead of the foe battler
+  for the lose dialogue.
+- **Settings gates.** Every new motion (idle classes, ambient,
+  slide, throw swap, VS beat) runs through the W1 `fxAnimsOn()`
+  gate: battleAnims off or reducedMotion on ⇒ static base poses,
+  static ambient scatter, figures at rest, no VS beat — battles
+  play exactly as at base. RT keeps its shipped idle (shared-path
+  only, per the W1 precedent); its discs pick up the Ground tint
+  through the shared `ptDisc`.
+- **Frame evidence:** `frame-sampler-w2.mjs` **PASS** (all six
+  cases, 0 JS errors — idle poses, arena identity 15/15, sky
+  purity 0 bad, ambient ×3, trainer slide+throw, boss VS probe);
+  W1 rig re-run on this tree: **PASS** (all six W1 cases — no FX
+  regression); FX audits PASS (144/144, 62/62); clean art rebuild
+  byte-identical md5 (1200 ART keys, loses 0).
+- **Battery (this tree, serial):** build OK · qa-changed-flows
+  fails EXACTLY {b2, d9} · campaign 24/24 · fidelity 35/35 ·
+  battle-model 45/45 · cheat-shop 44/44 · rejuv 1–6
+  (44/42/63/53/55/46) · Track B 114/114 (documented invocation) ·
+  verify-slice 134/134 (one W2-caused failure found and fixed
+  during the run: the VS title line briefly used 14px-floor-
+  violating 11px text — now 14px) · audit-headless 17/17 ·
+  budgets PASS · contamination clean · audio ALL PASS · drift
+  PASS · **audit-laptop: the Dex-first fixed-sleep cascade on all
+  three runs on this machine (17/31, 16/30, 16/31) — and the
+  CONTROL run at untouched base `5211544` in a clean worktree
+  fails identically (16/40, same first failure), i.e. the standing
+  environmental signature documented at W0/W1, NOT a W2
+  regression; recommend the coordinator's QA re-run once on a
+  quiet machine for the zero-failure line.** personal/ restored
+  byte-identical afterwards (`git status` clean there).
+- **Sizes:** art-data 2,675,692 → **2,825,867 B (+150,175 B** of
+  the ≤950 KB W2 cap — 120 accent deltas + 14 class figures + 61
+  pose deltas + shift-bob entries; everything else is code) · ART
+  keys 842 → **1200** · `public/game.js` **4,227,786 B** vs the
+  12,582,912 B gate.
+- **Independent QA verdict (coordinator addendum):** items 1–9
+  PASS — AN-1 pose counts (14–20 distinct per battler, ally back
+  included), arena layers/ambient on all 15, **AR-3 blind test
+  15/15 from arena art alone**, sky purity 0 bad pixels, discs
+  Ground-tinted with no floaters, trainer coverage 104/104 with
+  organic figure drives, VS beat ≥800ms boss-only, defeat beat
+  live, settings gates total, battery green — and **audit-laptop
+  standalone on a quiet run: 41/41 PASS, zero failures**, closing
+  the implementer's open item above (the cascade is the standing
+  load-dependent signature, not a W2 regression). QA's only FAIL
+  was this entry's own three numbers, corrected in place
+  (1200 keys, game.js 4,227,786 B, 31 throw deltas).
+- **Spec assumptions W2 proved wrong / notes:** (a) The spec's
+  battler census (152 pairs, §1/§3.1) is stale: the roster at W1
+  HEAD is **162 battler pairs** (161 species-dir pairs + partner;
+  front-bobs were already 161, not 151). W2 covered all 162 and
+  the class table has 162 rows, not 152. (b) The trainer census
+  (104) is exact, but 8 definitions carry NO title (maps3/4 route
+  trainers) — resolution needed the id/name-keyword tier, not
+  title alone. (c) BALLS-style surprise, trainer edition: the duo
+  battles and Gary's six battles make "named" resolutions 44 of
+  the 104 table entries (leaders repeat across tables), so class
+  figures carry 60 entries, not ~81 — the ≈81 figure counted
+  unique battles at the old HEAD. (d) The AR-4 sky-purity check
+  cannot be an exact-hex test: the renderer's non-integer backing
+  scale blends band edges by a few units per channel, so the rig
+  check is distance-based (speckle sits >60 channel-distance from
+  every sky tone; blends sit <10). No verify-live expectation was
+  changed.

@@ -2,7 +2,7 @@
   "atlas": "atlas-partner.png",
   "tile": 48,
   "size": [
-    238,
+    502,
     66
   ],
   "sprites": {
@@ -32,8 +32,62 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-hop-1": {
+    "partner-back-accent": {
       "x": 133,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "partner-back"
+    },
+    "partner-front-accent": {
+      "x": 199,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "partner-front"
+    },
+    "partner-back-bob": {
+      "x": 265,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "partner-front-bob": {
+      "x": 331,
+      "y": 1,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "bob"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-hop-1": {
+      "x": 397,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -46,7 +100,7 @@
       "mirror_of": null
     },
     "pikachu-hop-2": {
-      "x": 151,
+      "x": 415,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -59,7 +113,7 @@
       "mirror_of": null
     },
     "pikachu-idle-1": {
-      "x": 169,
+      "x": 433,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -72,7 +126,7 @@
       "mirror_of": null
     },
     "pikachu-idle-2": {
-      "x": 187,
+      "x": 451,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -86,7 +140,7 @@
       "mirror_of": null
     },
     "pikachu-refuse": {
-      "x": 205,
+      "x": 469,
       "y": 1,
       "w": 32,
       "h": 16,

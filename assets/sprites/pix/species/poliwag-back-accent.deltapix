@@ -1,0 +1,9 @@
+# poliwag-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over poliwag-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD poliwag-back-accent poliwag-back 64 64
+20 34 D
+21 34 D
+42 34 D
+43 34 D
+PAL

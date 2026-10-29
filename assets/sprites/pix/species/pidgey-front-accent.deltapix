@@ -1,0 +1,21 @@
+# pidgey-front-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over pidgey-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD pidgey-front-accent pidgey-front 64 64
+32 26 F
+31 27 F
+32 27 F
+33 27 F
+30 28 F
+31 28 F
+32 28 F
+33 28 F
+34 28 F
+29 29 F
+30 29 F
+31 29 F
+32 29 F
+33 29 F
+34 29 F
+35 29 F
+PAL

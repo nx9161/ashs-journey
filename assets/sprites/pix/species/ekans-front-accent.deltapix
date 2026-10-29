@@ -1,0 +1,13 @@
+# ekans-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over ekans-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD ekans-front-accent ekans-front 64 64
+24 13 Y
+25 13 Y
+26 13 Y
+34 13 Y
+35 13 Y
+36 13 Y
+25 16 C
+35 16 D
+PAL

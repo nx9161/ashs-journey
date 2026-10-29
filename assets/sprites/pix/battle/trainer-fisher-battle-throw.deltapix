@@ -1,0 +1,19 @@
+# trainer-fisher-battle-throw — Premium+ W2 throw pose delta over trainer-fisher-battle.
+PIXD trainer-fisher-battle-throw trainer-fisher-battle 48 64
+40 18 O
+40 20 O
+41 18 O
+41 20 O
+42 18 O
+42 20 O
+43 18 B
+43 20 O
+44 18 O
+44 20 O
+40 19 O
+41 19 J
+42 19 J
+43 19 B
+44 19 O
+PAL
+B #e03c31

@@ -1,0 +1,9 @@
+# zubat-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over zubat-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD zubat-front-accent zubat-front 64 64
+30 35 F
+34 35 G
+28 36 F
+36 36 G
+PAL

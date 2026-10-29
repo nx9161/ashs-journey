@@ -1,0 +1,31 @@
+# snorlax-front-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over snorlax-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD snorlax-front-accent snorlax-front 64 64
+19 10 A
+45 10 A
+18 11 A
+19 11 A
+44 11 A
+45 11 A
+17 12 A
+18 12 A
+19 12 A
+43 12 A
+44 12 A
+45 12 A
+17 13 A
+18 13 A
+19 13 A
+43 13 A
+44 13 A
+45 13 A
+17 14 A
+18 14 A
+43 14 A
+44 14 A
+17 15 A
+18 15 A
+43 15 A
+44 15 A
+PAL

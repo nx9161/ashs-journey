@@ -1,0 +1,15 @@
+# gyarados-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over gyarados-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD gyarados-front-accent gyarados-front 64 64
+39 11 Y
+46 11 Y
+38 12 B
+40 12 C
+45 12 C
+47 12 D
+38 19 A
+41 19 B
+44 19 B
+47 19 C
+PAL

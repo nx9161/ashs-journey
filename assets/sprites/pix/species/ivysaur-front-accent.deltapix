@@ -1,0 +1,13 @@
+# ivysaur-front-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over ivysaur-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD ivysaur-front-accent ivysaur-front 64 64
+25 10 A
+26 10 A
+23 11 A
+24 11 A
+25 11 A
+26 11 A
+25 12 A
+26 12 A
+PAL

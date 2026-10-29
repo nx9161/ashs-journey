@@ -1,0 +1,9 @@
+# bulbasaur-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over bulbasaur-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD bulbasaur-back-accent bulbasaur-back 64 64
+20 34 M
+21 34 M
+42 34 M
+43 34 M
+PAL

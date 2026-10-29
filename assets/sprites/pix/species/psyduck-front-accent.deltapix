@@ -1,0 +1,16 @@
+# psyduck-front-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over psyduck-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD psyduck-front-accent psyduck-front 64 64
+29 10 B
+30 10 B
+28 11 B
+29 11 B
+30 11 B
+31 11 B
+32 11 B
+28 12 B
+29 12 B
+30 12 B
+31 12 B
+PAL

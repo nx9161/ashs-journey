@@ -1,0 +1,9 @@
+# magikarp-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over magikarp-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD magikarp-back-accent magikarp-back 64 64
+20 34 D
+21 34 D
+42 34 D
+43 34 D
+PAL

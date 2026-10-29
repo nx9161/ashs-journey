@@ -1,0 +1,11 @@
+# raichu-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over raichu-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD raichu-front-accent raichu-front 64 64
+26 23 Y
+27 23 Y
+28 23 Y
+36 23 Y
+37 23 Y
+38 23 Y
+PAL

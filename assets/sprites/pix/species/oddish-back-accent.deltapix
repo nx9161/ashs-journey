@@ -1,0 +1,16 @@
+# oddish-back-accent — Premium+ W2 accent frame (accent twinkle). Recolor-only delta
+# over oddish-back: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD oddish-back-accent oddish-back 64 64
+31 15 E
+31 16 E
+29 17 E
+30 17 E
+31 17 E
+29 18 E
+30 18 E
+31 18 E
+30 19 E
+31 19 E
+31 20 E
+PAL

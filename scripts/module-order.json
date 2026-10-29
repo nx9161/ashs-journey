@@ -28,6 +28,7 @@
  "src/data/merge.mjs",
  "src/engine/fx.mjs",
  "src/data/grounds.mjs",
+ "src/data/idle-classes.mjs",
  "src/game/state.mjs",
  "src/game/rules.mjs",
  "src/game/keepsakes.mjs",

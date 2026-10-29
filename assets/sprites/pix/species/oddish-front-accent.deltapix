@@ -1,0 +1,13 @@
+# oddish-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over oddish-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD oddish-front-accent oddish-front 64 64
+25 34 Y
+26 34 Y
+27 34 Y
+37 34 Y
+38 34 Y
+39 34 Y
+26 37 B
+38 37 D
+PAL

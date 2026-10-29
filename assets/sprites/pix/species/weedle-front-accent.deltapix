@@ -1,0 +1,10 @@
+# weedle-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over weedle-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD weedle-front-accent weedle-front 64 64
+32 26 Y
+42 26 Y
+43 26 Y
+37 32 R
+38 32 R
+PAL

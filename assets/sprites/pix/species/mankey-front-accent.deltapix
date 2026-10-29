@@ -1,0 +1,15 @@
+# mankey-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over mankey-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD mankey-front-accent mankey-front 64 64
+25 25 A
+38 26 Y
+39 26 Y
+36 27 B
+41 27 C
+37 28 C
+40 28 C
+25 29 A
+38 29 C
+39 29 C
+PAL

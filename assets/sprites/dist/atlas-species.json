@@ -3,7 +3,7 @@
   "tile": 48,
   "size": [
     2046,
-    1056
+    1650
   ],
   "sprites": {
     "abra-back": {
@@ -6285,8 +6285,106 @@
       "derived_from": "zubat-front",
       "mirror_of": null
     },
-    "pidgey-front-blink": {
+    "abra-back-accent": {
       "x": 1189,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "abra-back"
+    },
+    "abra-front-accent": {
+      "x": 1255,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "abra-front"
+    },
+    "arbok-back-accent": {
+      "x": 1321,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "arbok-back"
+    },
+    "arbok-front-accent": {
+      "x": 1387,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "arbok-front"
+    },
+    "arcanine-back-accent": {
+      "x": 1453,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "arcanine-back"
+    },
+    "arcanine-front-accent": {
+      "x": 1519,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "arcanine-front"
+    },
+    "articuno-back-accent": {
+      "x": 1585,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "articuno-back"
+    },
+    "articuno-front-accent": {
+      "x": 1651,
       "y": 991,
       "w": 64,
       "h": 64,
@@ -6297,7 +6395,3654 @@
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
+      "delta_of": "articuno-front"
+    },
+    "beedrill-back-accent": {
+      "x": 1717,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "beedrill-back"
+    },
+    "beedrill-front-accent": {
+      "x": 1783,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "beedrill-front"
+    },
+    "blastoise-back-accent": {
+      "x": 1849,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "blastoise-back"
+    },
+    "blastoise-front-accent": {
+      "x": 1915,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "blastoise-front"
+    },
+    "bulbasaur-back-accent": {
+      "x": 1981,
+      "y": 991,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "bulbasaur-back"
+    },
+    "bulbasaur-front-accent": {
+      "x": 1,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "bulbasaur-front"
+    },
+    "butterfree-back-accent": {
+      "x": 67,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 10,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "butterfree-back"
+    },
+    "butterfree-front-accent": {
+      "x": 133,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "butterfree-front"
+    },
+    "caterpie-back-accent": {
+      "x": 199,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "caterpie-back"
+    },
+    "caterpie-front-accent": {
+      "x": 265,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "caterpie-front"
+    },
+    "charizard-back-accent": {
+      "x": 331,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "charizard-back"
+    },
+    "charizard-front-accent": {
+      "x": 397,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "charizard-front"
+    },
+    "charmander-back-accent": {
+      "x": 463,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "charmander-back"
+    },
+    "charmander-front-accent": {
+      "x": 529,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "charmander-front"
+    },
+    "charmeleon-back-accent": {
+      "x": 595,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "charmeleon-back"
+    },
+    "charmeleon-front-accent": {
+      "x": 661,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "charmeleon-front"
+    },
+    "diglett-back-accent": {
+      "x": 727,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "diglett-back"
+    },
+    "diglett-front-accent": {
+      "x": 793,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "diglett-front"
+    },
+    "dragonite-back-accent": {
+      "x": 859,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "dragonite-back"
+    },
+    "dragonite-front-accent": {
+      "x": 925,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "dragonite-front"
+    },
+    "dratini-back-accent": {
+      "x": 991,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "dratini-back"
+    },
+    "dratini-front-accent": {
+      "x": 1057,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "dratini-front"
+    },
+    "eevee-back-accent": {
+      "x": 1123,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "eevee-back"
+    },
+    "eevee-front-accent": {
+      "x": 1189,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "eevee-front"
+    },
+    "ekans-back-accent": {
+      "x": 1255,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ekans-back"
+    },
+    "ekans-front-accent": {
+      "x": 1321,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ekans-front"
+    },
+    "fearow-back-accent": {
+      "x": 1387,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "fearow-back"
+    },
+    "fearow-front-accent": {
+      "x": 1453,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "fearow-front"
+    },
+    "flareon-back-accent": {
+      "x": 1519,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "flareon-back"
+    },
+    "flareon-front-accent": {
+      "x": 1585,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "flareon-front"
+    },
+    "gastly-back-accent": {
+      "x": 1651,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "gastly-back"
+    },
+    "gastly-front-accent": {
+      "x": 1717,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "gastly-front"
+    },
+    "gengar-back-accent": {
+      "x": 1783,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "gengar-back"
+    },
+    "gengar-front-accent": {
+      "x": 1849,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "gengar-front"
+    },
+    "geodude-back-accent": {
+      "x": 1915,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "geodude-back"
+    },
+    "geodude-front-accent": {
+      "x": 1981,
+      "y": 1057,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "geodude-front"
+    },
+    "golbat-back-accent": {
+      "x": 1,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "golbat-back"
+    },
+    "golbat-front-accent": {
+      "x": 67,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "golbat-front"
+    },
+    "growlithe-back-accent": {
+      "x": 133,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "growlithe-back"
+    },
+    "growlithe-front-accent": {
+      "x": 199,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "growlithe-front"
+    },
+    "gyarados-back-accent": {
+      "x": 265,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "gyarados-back"
+    },
+    "gyarados-front-accent": {
+      "x": 331,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "gyarados-front"
+    },
+    "haunter-back-accent": {
+      "x": 397,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "haunter-back"
+    },
+    "haunter-front-accent": {
+      "x": 463,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "haunter-front"
+    },
+    "ivysaur-back-accent": {
+      "x": 529,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ivysaur-back"
+    },
+    "ivysaur-front-accent": {
+      "x": 595,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ivysaur-front"
+    },
+    "jolteon-back-accent": {
+      "x": 661,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "jolteon-back"
+    },
+    "jolteon-front-accent": {
+      "x": 727,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "jolteon-front"
+    },
+    "lapras-back-accent": {
+      "x": 793,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "lapras-back"
+    },
+    "lapras-front-accent": {
+      "x": 859,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "lapras-front"
+    },
+    "magikarp-back-accent": {
+      "x": 925,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "magikarp-back"
+    },
+    "magikarp-front-accent": {
+      "x": 991,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "magikarp-front"
+    },
+    "magnemite-back-accent": {
+      "x": 1057,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "magnemite-back"
+    },
+    "magnemite-front-accent": {
+      "x": 1123,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "magnemite-front"
+    },
+    "mankey-back-accent": {
+      "x": 1189,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "mankey-back"
+    },
+    "mankey-front-accent": {
+      "x": 1255,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "mankey-front"
+    },
+    "meowth-back-accent": {
+      "x": 1321,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "meowth-back"
+    },
+    "meowth-front-accent": {
+      "x": 1387,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "meowth-front"
+    },
+    "mewtwo-back-accent": {
+      "x": 1453,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "mewtwo-back"
+    },
+    "mewtwo-front-accent": {
+      "x": 1519,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "mewtwo-front"
+    },
+    "moltres-back-accent": {
+      "x": 1585,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "moltres-back"
+    },
+    "moltres-front-accent": {
+      "x": 1651,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "moltres-front"
+    },
+    "ninetales-back-accent": {
+      "x": 1717,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ninetales-back"
+    },
+    "ninetales-front-accent": {
+      "x": 1783,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ninetales-front"
+    },
+    "oddish-back-accent": {
+      "x": 1849,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "oddish-back"
+    },
+    "oddish-front-accent": {
+      "x": 1915,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "oddish-front"
+    },
+    "onix-back-accent": {
+      "x": 1981,
+      "y": 1123,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "onix-back"
+    },
+    "onix-front-accent": {
+      "x": 1,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "onix-front"
+    },
+    "pidgeot-back-accent": {
+      "x": 67,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pidgeot-back"
+    },
+    "pidgeot-front-accent": {
+      "x": 133,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 21,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pidgeot-front"
+    },
+    "pidgeotto-back-accent": {
+      "x": 199,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pidgeotto-back"
+    },
+    "pidgeotto-front-accent": {
+      "x": 265,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 21,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pidgeotto-front"
+    },
+    "pidgey-back-accent": {
+      "x": 331,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pidgey-back"
+    },
+    "pidgey-front-accent": {
+      "x": 397,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
       "delta_of": "pidgey-front"
+    },
+    "pidgey-front-blink": {
+      "x": 463,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pidgey-front"
+    },
+    "pikachu-back-accent": {
+      "x": 529,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pikachu-back"
+    },
+    "pikachu-front-accent": {
+      "x": 595,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "pikachu-front"
+    },
+    "poliwag-back-accent": {
+      "x": 661,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "poliwag-back"
+    },
+    "poliwag-front-accent": {
+      "x": 727,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "poliwag-front"
+    },
+    "ponyta-back-accent": {
+      "x": 793,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ponyta-back"
+    },
+    "ponyta-front-accent": {
+      "x": 859,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 19,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "ponyta-front"
+    },
+    "psyduck-back-accent": {
+      "x": 925,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "psyduck-back"
+    },
+    "psyduck-front-accent": {
+      "x": 991,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "psyduck-front"
+    },
+    "raichu-back-accent": {
+      "x": 1057,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "raichu-back"
+    },
+    "raichu-front-accent": {
+      "x": 1123,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "raichu-front"
+    },
+    "raticate-back-accent": {
+      "x": 1189,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "raticate-back"
+    },
+    "raticate-front-accent": {
+      "x": 1255,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "raticate-front"
+    },
+    "rattata-back-accent": {
+      "x": 1321,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "rattata-back"
+    },
+    "rattata-front-accent": {
+      "x": 1387,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "rattata-front"
+    },
+    "sandshrew-back-accent": {
+      "x": 1453,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "sandshrew-back"
+    },
+    "sandshrew-front-accent": {
+      "x": 1519,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "sandshrew-front"
+    },
+    "snorlax-back-accent": {
+      "x": 1585,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "snorlax-back"
+    },
+    "snorlax-front-accent": {
+      "x": 1651,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "snorlax-front"
+    },
+    "spearow-back-accent": {
+      "x": 1717,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "spearow-back"
+    },
+    "spearow-front-accent": {
+      "x": 1783,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "spearow-front"
+    },
+    "squirtle-back-accent": {
+      "x": 1849,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "squirtle-back"
+    },
+    "squirtle-front-accent": {
+      "x": 1915,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "squirtle-front"
+    },
+    "vaporeon-back-accent": {
+      "x": 1981,
+      "y": 1189,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "vaporeon-back"
+    },
+    "vaporeon-front-accent": {
+      "x": 1,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "vaporeon-front"
+    },
+    "venusaur-back-accent": {
+      "x": 67,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "venusaur-back"
+    },
+    "venusaur-front-accent": {
+      "x": 133,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "venusaur-front"
+    },
+    "vulpix-back-accent": {
+      "x": 199,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "vulpix-back"
+    },
+    "vulpix-front-accent": {
+      "x": 265,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "vulpix-front"
+    },
+    "wartortle-back-accent": {
+      "x": 331,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "wartortle-back"
+    },
+    "wartortle-front-accent": {
+      "x": 397,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "wartortle-front"
+    },
+    "weedle-back-accent": {
+      "x": 463,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "weedle-back"
+    },
+    "weedle-front-accent": {
+      "x": 529,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "weedle-front"
+    },
+    "zapdos-back-accent": {
+      "x": 595,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "zapdos-back"
+    },
+    "zapdos-front-accent": {
+      "x": 661,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "zapdos-front"
+    },
+    "zubat-back-accent": {
+      "x": 727,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "zubat-back"
+    },
+    "zubat-front-accent": {
+      "x": 793,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "zubat-front"
+    },
+    "abra-back-bob": {
+      "x": 859,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "aerodactyl-back-bob": {
+      "x": 925,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "alakazam-back-bob": {
+      "x": 991,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "arbok-back-bob": {
+      "x": 1057,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "arcanine-back-bob": {
+      "x": 1123,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "articuno-back-bob": {
+      "x": 1189,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "beedrill-back-bob": {
+      "x": 1255,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "bellsprout-back-bob": {
+      "x": 1321,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "blastoise-back-bob": {
+      "x": 1387,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "bulbasaur-back-bob": {
+      "x": 1453,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "butterfree-back-bob": {
+      "x": 1519,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "caterpie-back-bob": {
+      "x": 1585,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "chansey-back-bob": {
+      "x": 1651,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "charizard-back-bob": {
+      "x": 1717,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "charmander-back-bob": {
+      "x": 1783,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "charmeleon-back-bob": {
+      "x": 1849,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "clefable-back-bob": {
+      "x": 1915,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "clefairy-back-bob": {
+      "x": 1981,
+      "y": 1255,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "cloyster-back-bob": {
+      "x": 1,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "crystalonix-back-bob": {
+      "x": 67,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "cubone-back-bob": {
+      "x": 133,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dewgong-back-bob": {
+      "x": 199,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "diglett-back-bob": {
+      "x": 265,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ditto-back-bob": {
+      "x": 331,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dodrio-back-bob": {
+      "x": 397,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "doduo-back-bob": {
+      "x": 463,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "donphan-back-bob": {
+      "x": 529,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dragonair-back-bob": {
+      "x": 595,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dragonite-back-bob": {
+      "x": 661,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dratini-back-bob": {
+      "x": 727,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "drowzee-back-bob": {
+      "x": 793,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "dugtrio-back-bob": {
+      "x": 859,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "eevee-back-bob": {
+      "x": 925,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ekans-back-bob": {
+      "x": 991,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "electabuzz-back-bob": {
+      "x": 1057,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "electrode-back-bob": {
+      "x": 1123,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "exeggcute-back-bob": {
+      "x": 1189,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "exeggutor-back-bob": {
+      "x": 1255,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "farfetchd-back-bob": {
+      "x": 1321,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "fearow-back-bob": {
+      "x": 1387,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "flareon-back-bob": {
+      "x": 1453,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "flyingpikachu-back-bob": {
+      "x": 1519,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "gastly-back-bob": {
+      "x": 1585,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "gengar-back-bob": {
+      "x": 1651,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "geodude-back-bob": {
+      "x": 1717,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "giantdragonite-back-bob": {
+      "x": 1783,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "gloom-back-bob": {
+      "x": 1849,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golbat-back-bob": {
+      "x": 1915,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "goldeen-back-bob": {
+      "x": 1981,
+      "y": 1321,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golduck-back-bob": {
+      "x": 1,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "golem-back-bob": {
+      "x": 67,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "graveler-back-bob": {
+      "x": 133,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "grimer-back-bob": {
+      "x": 199,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "growlithe-back-bob": {
+      "x": 265,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "gyarados-back-bob": {
+      "x": 331,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "haunter-back-bob": {
+      "x": 397,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hitmonchan-back-bob": {
+      "x": 463,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hitmonlee-back-bob": {
+      "x": 529,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hooh-back-bob": {
+      "x": 595,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "horsea-back-bob": {
+      "x": 661,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "hypno-back-bob": {
+      "x": 727,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ivysaur-back-bob": {
+      "x": 793,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jigglypuff-back-bob": {
+      "x": 859,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jolteon-back-bob": {
+      "x": 925,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "jynx-back-bob": {
+      "x": 991,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kabuto-back-bob": {
+      "x": 1057,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kabutops-back-bob": {
+      "x": 1123,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kadabra-back-bob": {
+      "x": 1189,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kakuna-back-bob": {
+      "x": 1255,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kangaskhan-back-bob": {
+      "x": 1321,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "kingler-back-bob": {
+      "x": 1387,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "koffing-back-bob": {
+      "x": 1453,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "krabby-back-bob": {
+      "x": 1519,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "lapras-back-bob": {
+      "x": 1585,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "lickitung-back-bob": {
+      "x": 1651,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machamp-back-bob": {
+      "x": 1717,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machoke-back-bob": {
+      "x": 1783,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "machop-back-bob": {
+      "x": 1849,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magikarp-back-bob": {
+      "x": 1915,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magmar-back-bob": {
+      "x": 1981,
+      "y": 1387,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magnemite-back-bob": {
+      "x": 1,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "magneton-back-bob": {
+      "x": 67,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mankey-back-bob": {
+      "x": 133,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "marill-back-bob": {
+      "x": 199,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "marowak-back-bob": {
+      "x": 265,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "meowth-back-bob": {
+      "x": 331,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "metapod-back-bob": {
+      "x": 397,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mew-back-bob": {
+      "x": 463,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mewtwo-back-bob": {
+      "x": 529,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "moltres-back-bob": {
+      "x": 595,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "mrmime-back-bob": {
+      "x": 661,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "muk-back-bob": {
+      "x": 727,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidoking-back-bob": {
+      "x": 793,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidoqueen-back-bob": {
+      "x": 859,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidoranf-back-bob": {
+      "x": 925,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidoranm-back-bob": {
+      "x": 991,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidorina-back-bob": {
+      "x": 1057,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "nidorino-back-bob": {
+      "x": 1123,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ninetales-back-bob": {
+      "x": 1189,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "oddish-back-bob": {
+      "x": 1255,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "omanyte-back-bob": {
+      "x": 1321,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "omastar-back-bob": {
+      "x": 1387,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "onix-back-bob": {
+      "x": 1453,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "paras-back-bob": {
+      "x": 1519,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "parasect-back-bob": {
+      "x": 1585,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "persian-back-bob": {
+      "x": 1651,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pidgeot-back-bob": {
+      "x": 1717,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pidgeotto-back-bob": {
+      "x": 1783,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pidgey-back-bob": {
+      "x": 1849,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-back-bob": {
+      "x": 1915,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pinkbutterfree-back-bob": {
+      "x": 1981,
+      "y": 1453,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 11,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pinsir-back-bob": {
+      "x": 1,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwag-back-bob": {
+      "x": 67,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwhirl-back-bob": {
+      "x": 133,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "poliwrath-back-bob": {
+      "x": 199,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ponyta-back-bob": {
+      "x": 265,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "porygon-back-bob": {
+      "x": 331,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "primeape-back-bob": {
+      "x": 397,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "psyduck-back-bob": {
+      "x": 463,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "raichu-back-bob": {
+      "x": 529,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "rapidash-back-bob": {
+      "x": 595,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "raticate-back-bob": {
+      "x": 661,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "rattata-back-bob": {
+      "x": 727,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "rhydon-back-bob": {
+      "x": 793,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "rhyhorn-back-bob": {
+      "x": 859,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "sandshrew-back-bob": {
+      "x": 925,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "sandslash-back-bob": {
+      "x": 991,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "scyther-back-bob": {
+      "x": 1057,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seadra-back-bob": {
+      "x": 1123,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seaking-back-bob": {
+      "x": 1189,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "seel-back-bob": {
+      "x": 1255,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "shellder-back-bob": {
+      "x": 1321,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "slowbro-back-bob": {
+      "x": 1387,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "slowpoke-back-bob": {
+      "x": 1453,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "snorlax-back-bob": {
+      "x": 1519,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "snubbull-back-bob": {
+      "x": 1585,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "spearow-back-bob": {
+      "x": 1651,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "squirtle-back-bob": {
+      "x": 1717,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "starmie-back-bob": {
+      "x": 1783,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "staryu-back-bob": {
+      "x": 1849,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "surfingpikachu-back-bob": {
+      "x": 1915,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tangela-back-bob": {
+      "x": 1981,
+      "y": 1519,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tauros-back-bob": {
+      "x": 1,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tentacool-back-bob": {
+      "x": 67,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "tentacruel-back-bob": {
+      "x": 133,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "togepi-back-bob": {
+      "x": 199,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 5,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "vaporeon-back-bob": {
+      "x": 265,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "venomoth-back-bob": {
+      "x": 331,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "venonat-back-bob": {
+      "x": 397,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "venusaur-back-bob": {
+      "x": 463,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "victreebel-back-bob": {
+      "x": 529,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "vileplume-back-bob": {
+      "x": 595,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "voltorb-back-bob": {
+      "x": 661,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "vulpix-back-bob": {
+      "x": 727,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "wartortle-back-bob": {
+      "x": 793,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "weedle-back-bob": {
+      "x": 859,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "weepinbell-back-bob": {
+      "x": 925,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "weezing-back-bob": {
+      "x": 991,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 12,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "wigglytuff-back-bob": {
+      "x": 1057,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "zapdos-back-bob": {
+      "x": 1123,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 14,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "zubat-back-bob": {
+      "x": 1189,
+      "y": 1585,
+      "w": 64,
+      "h": 64,
+      "frames": [
+        "idle"
+      ],
+      "palette": 13,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
     }
   }
 }

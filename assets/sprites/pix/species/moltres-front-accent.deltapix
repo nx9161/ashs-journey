@@ -1,0 +1,15 @@
+# moltres-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over moltres-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD moltres-front-accent moltres-front 64 64
+27 13 A
+36 15 R
+38 15 R
+31 16 R
+33 16 R
+37 16 R
+32 17 R
+27 20 Y
+35 20 Y
+36 20 Y
+PAL

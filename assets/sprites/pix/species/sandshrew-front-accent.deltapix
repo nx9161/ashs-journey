@@ -1,0 +1,13 @@
+# sandshrew-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
+# over sandshrew-front: the silhouette never changes; the accent reads in
+# alternation with the base frame under the species idle class.
+PIXD sandshrew-front-accent sandshrew-front 64 64
+26 22 Y
+27 22 Y
+28 22 Y
+36 22 Y
+37 22 Y
+38 22 Y
+27 25 C
+37 25 D
+PAL
