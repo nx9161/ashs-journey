@@ -10901,3 +10901,91 @@ server-side under the raised bag cap).
   sha256 77c3411a… — UNMOVED: tables.json is server-side data and
   is not bundled); public static total **10,094,049 B**.
   `personal/` byte-identical; dist/ restored.
+
+## Arc 3.5 Stage F5 — Battle Frontier: chain extension + independent QA + MISSION CLOSE (2026-10-29)
+
+- **Chain drive (F5a)** — extended on the ONE continuous save to
+  **147 checks**: 123 prior − 1 superseded (H34, Homecoming #4's
+  sealed-behaviour assertion; subject kept — Scott's hook delivered,
+  directive cleared; new behaviour asserted: arc advances to
+  'frontier', embark_frontier armed — the C28/J4a precedent) + its
+  replacement + 24 new Frontier checks (F01–F24), all passing.
+  Silvers driven true-path on the chain save (Tower 35, Factory 21
+  with 20/20 swaps, Arena 14 with the judge genuinely reached,
+  Dome tournament 5 vs Tucker, Pike 14 rooms over 2 runs with
+  every driven door's event matching its pre-roll, Palace 21 at
+  zero command input, Pyramid possession canon-loss then plain
+  re-challenge); Golds from NAMED seeded counters (B09 isolation,
+  every seed listed in the F5a report) with the milestone battles
+  driven truly. End state: regionsDone exactly [kanto, orange,
+  johto, hoenn, frontier]; badges.symbols 7× 'gold'; the final
+  save validates on BOTH validators (after the F5-fix below).
+- **Chain-caught bug (fixed at F5-fix, entry above)** — the
+  drive's D08 failed 'bad-regions-done' on the played save: the
+  completionKey set had never been a generated table. Fixed
+  registry-derived (`regionsDoneKeys`); chain re-run unmodified
+  reports **147/147**, D08 green on both validators.
+- **Independent QA (F5b)** — an agent that built nothing graded
+  the fixed tree (a1b1e7d) with its own drivers
+  (~/workspace/ashs-journey-qa/arc35-frontier-qa/, 75/75):
+  **verdict SHIP-WITH-NOTES, no blockers.** First-hour PASS
+  (incl. the consumed-sealed derivation save), all seven
+  signature rules PASS on independent spot-proofs (Tower
+  suspend/save/reload/resume byte-identical; Factory swap +
+  party byte-identity; Arena Body-decides case recomputed live;
+  Pike two doors of one chamber differing per the booked
+  pre-roll after save/reload; Palace zero-input with player
+  send-out on faint; Pyramid bounce/bag/floor-count), Brandon
+  PASS (possession at +10 auto-piloted → canon loss → voiced
+  re-challenge → Silver; Gold never possessed), completion E2E
+  PASS with the QA-drive-produced save validating zero-errors
+  on both validators (the F5-fix case independently
+  reproduced), economics PASS (a facility loss costs $0 and
+  warps nowhere). QA's two first-cut failures were its own
+  fixture bugs, fixed and re-run green, documented in its
+  report for transparency.
+- **QA NOTE F-1 (= the F5-fix leftover, independently
+  reproduced):** the meta.location em-dash charset tension —
+  a save snapshotted while meta.location holds an em-dash map
+  name (e.g. 'Battle Pyramid — AF') is rejected server-side
+  with exactly ['bad-meta-location:charset']; client accepts.
+  Pre-dates this arc, transient (next warp overwrites), named
+  for a future ruling. QA explicitly did NOT re-verify:
+  Brandon's upset-win branch and the other Brains' milestone
+  battles (suite evidence stands: frontier-checks D33 drove
+  the upset true-path, 24/24 sampled seeds in development) and
+  any live-browser rendering grade (headless-bundle live play,
+  as briefed).
+- **Foundation-riding proof** — the Frontier consumed its
+  registry row (badgeSet 'symbols', badgeTotal 7,
+  completionFlag 'frontier_complete', band null/Open Level,
+  embarkPort 'pallet', arrivalMap 'frontierhub') with ZERO
+  changes to src/game/arcs.mjs (the machine is byte-untouched
+  this mission): arming was a status flip + a generic save-fill
+  catch-up; completion fires from the flag alone; the Sinnoh
+  homecoming rode the sealed branch. What the machine had to
+  LEARN (design smells, recorded): (1) the completionKey set
+  was not a generated table (F5-fix — Arc 4 inherits the
+  registry-derived set; its 'sinnoh' key is already in it);
+  (2) warp landings are visible only at the doWarp funnel
+  (F2c's sysWarpLanding seam); (3) the badge-set quintet
+  generalises to slots, but the Cheat Terminal's badge read
+  sites needed an explicit earned-only exclusion (F0).
+- **Battery at close** — frontier-checks **136/136** ·
+  validator **97/97** + fuzz **2000/2000** + save-contract
+  **12/12** · qa-changed-flows exactly **{b2, d9}** ·
+  battle-model **45/45** (HARD) · campaign-smoke **24/24** ·
+  arc-foundation **47/47** · hoenn-story **88/88** ·
+  johto-story **110/110** · johto-systems **62/62** ·
+  cheat-shop **44/44** · chain drive **147/147** ·
+  independent QA **75/75**. Named inheritances unmoved:
+  qa-slice {s6, l8}, rejuv {A09, C01} cluster, audit-laptop
+  unrunnable in this sandbox.
+- **Bundle at close** — public/game.js **9,931,427 B**;
+  public static total **10,094,049 B** (Hoenn close 9,962,951
+  + Frontier actual 131,098). H0 monolith restated at F4:
+  projected Sinnoh close 12,115,538 B vs the 12,582,912 B
+  gate (margin 467,374 B; 217,374 B above the 250,000 B
+  re-open trigger — not fired). `personal/` byte-identical
+  across the whole mission (8225dd1 → close); roster
+  unchanged at 395 entries (no new species, as designed).
