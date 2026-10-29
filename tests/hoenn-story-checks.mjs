@@ -54,10 +54,10 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
   const stJ = defaultState(); stJ.story.arc = 'johto'; stJ.story.regionsDone = ['kanto', 'orange', 'johto']; stJ.story.flags.johto_complete = true; stJ.story.arc_directive = 'hoenn';
   ok('A02 arcStateOf: a Johto-complete save with the directive pinned reads hoenn as locked-next (the road ahead, armed)',
     arcStateOf(stJ, 'hoenn') === 'locked-next');
-  ok('A03 HOENN_QUESTS: the first-half chain in the MAIN_QUESTS idiom (rescue -> arrival -> wally -> stone -> knuckle -> slateport May -> meteor -> dynamo -> verdanturf May -> chimney -> heat -> fallarbor May)',
-    HOENN_QUESTS.length === 12
+  ok('A03 HOENN_QUESTS: the full chain in the MAIN_QUESTS idiom (H4a west rows, then the H4b east rows: balance -> institute -> feather -> lilycove May -> mind -> pyre/orbs -> magma hideout -> submarine -> seafloor -> climax -> rain -> wally -> conference -> tyson/hoenn_complete)',
+    HOENN_QUESTS.length === 26
     && HOENN_QUESTS.every((q) => q.id.startsWith('q_hoenn_') && q.flag && q.text && q.hint)
-    && HOENN_QUESTS.map((q) => q.flag).join(',') === 'birch_rescued,hoenn_arrival,wally_helped,badge_stone,badge_knuckle,may_slateport_done,meteor_falls_done,badge_dynamo,may_verdanturf_done,chimney_clash_done,badge_heat,may_fallarbor_done');
+    && HOENN_QUESTS.map((q) => q.flag).join(',') === 'birch_rescued,hoenn_arrival,wally_helped,badge_stone,badge_knuckle,may_slateport_done,meteor_falls_done,badge_dynamo,may_verdanturf_done,chimney_clash_done,badge_heat,may_fallarbor_done,badge_balance,institute_done,badge_feather,may_lilycove_done,badge_mind,orbs_taken,magma_hideout_done,submarine_stolen,seafloor_done,climax_resolved,badge_rain,wally_final_done,hoenn_conference_registered,hoenn_complete');
   ok('A04 BADGE_SETS.hoenn is the canonical earn order (stone..rain, ruling 6 anime order); every badge is a key-pocket ITEMS row',
     JSON.stringify(BADGE_SETS.hoenn) === JSON.stringify(HOENN_ORDER)
     && HOENN_ORDER.every((id) => ITEMS[id] && ITEMS[id].pocket === 'key'));
@@ -194,8 +194,8 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
     const stp = m.start || { x: 7, y: 10 };
     if (!adjacent(m, n.x, n.y, bfs(m, stp.x, stp.y))) bad.push(n.map + ':' + n.name);
   }
-  ok('A22 every appended Hoenn actor stands reachable-adjacent from its map start (leaders, gym rosters, May x3, Wally, Norman, Cozmo, admins, Birch, the watcher)',
-    HOENN_NPCS.length === 23 && bad.length === 0, bad.join(';'));
+  ok('A22 every appended Hoenn actor stands reachable-adjacent from its map start (leaders, gym rosters, May x5, Wally x2, Norman, Cozmo, admins, Birch, the watcher, Steven, the keeper, the Conference cast)',
+    HOENN_NPCS.length === 45 && bad.length === 0, bad.join(';'));
   // Vermilion captain connectivity (maps2 town, start = its dock entry).
   const v = MAPS2.vermilion || MAPS_BASE.vermilion;
   const vSeen = bfs({ ...v, npcs: [...(v.npcs || []), { x: 16, y: 10, name: 'CAPT HOENN' }] }, 7, 9);
@@ -205,6 +205,80 @@ const { MAPS2 } = await import(join(ROOT, 'src/data/maps2.mjs'));
   ok('A24 module order: story-hoenn folds right after story-johto; weather.mjs loads right after game/arcs.mjs',
     order.indexOf('src/data/story-hoenn.mjs') === order.indexOf('src/data/story-johto.mjs') + 1
     && order.indexOf('src/game/weather.mjs') === order.indexOf('src/game/arcs.mjs') + 1);
+}
+
+// -- H4b east-half pure units --
+{
+  const team = (id) => HOENN_TRAINERS[id].team.map((m) => m.species + ':' + m.level + (m.keepsake ? '+' + m.keepsake : '')).join(',');
+  ok('A25 leader teams III (Norman 249/251/252/255 tortoisecharm, Winona 259/261/263/265 sparrowfeather) — aces at the ruling-6 marks 255/265; badges balance/feather via badgeSet hoenn',
+    team('norman') === 'vigoroth:249,linoone:251,spinda:252,slaking:255+tortoisecharm'
+    && team('winona') === 'swellow:259,pelipper:261,skarmory:263,altaria:265+sparrowfeather'
+    && HOENN_TRAINERS.norman.badge === 'balancebadge' && HOENN_TRAINERS.winona.badge === 'featherbadge'
+    && HOENN_TRAINERS.norman.badgeSet === 'hoenn' && HOENN_TRAINERS.winona.badgeSet === 'hoenn');
+  ok('A26 the twins as a back-to-back pair (Tate 270/274 NO badge; Liza 272/275 ironacorn carries mindbadge) + Juan 279/281/283/285 tidepearl rainbadge — aces at the range tops 275/285',
+    team('tate') === 'xatu:270,solrock:274' && !HOENN_TRAINERS.tate.badge && !HOENN_TRAINERS.tate.badgeSet
+    && team('liza') === 'claydol:272,lunatone:275+ironacorn' && HOENN_TRAINERS.liza.badge === 'mindbadge' && HOENN_TRAINERS.liza.badgeSet === 'hoenn'
+    && team('juan') === 'luvdisc:279,whiscash:281,crawdaunt:283,kingdra:285+tidepearl' && HOENN_TRAINERS.juan.badge === 'rainbadge');
+  ok('A27 east gym rosters in band, rising by gym (petalburg 246-249, fortree 256-260, mossdeep 266-270, sootopolis 276-280), no badges of their own',
+    ['petalburg_gym_1', 'petalburg_gym_2', 'fortree_gym_1', 'fortree_gym_2', 'mossdeep_gym_1', 'mossdeep_gym_2', 'sootopolis_gym_1', 'sootopolis_gym_2']
+      .every((id) => HOENN_TRAINERS[id] && !HOENN_TRAINERS[id].badge && HOENN_TRAINERS[id].team.every((m) => m.level >= 246 && m.level <= 280)));
+  ok('A28 villain convergence in band (Shelly 252-256, Courtney 266-268, Tabitha/Matt 272-275, Maxie/Archie 276-278, ai smart)',
+    team('aqua_admin_institute') === 'mightyena:252,carvanha:254,sharpedo:256'
+    && team('magma_admin_pyre') === 'numel:266,camerupt:268'
+    && ['magma_admin_hideout', 'aqua_admin_hideout'].every((id) => HOENN_TRAINERS[id].team.every((m) => m.level >= 272 && m.level <= 275))
+    && ['maxie', 'archie'].every((id) => HOENN_TRAINERS[id].ai === 'smart' && HOENN_TRAINERS[id].team.every((m) => m.level >= 276 && m.level <= 278)));
+  ok('A29 Wally final in band 286-292 (gardevoir 292 gardeniasash) + Conference cast (prelims 288-293, Morrison 293-296 swampert, Tyson 294-298 metagross — the final at the band ceiling)',
+    team('wally_final') === 'altaria:286,delcatty:288,roselia:289,magneton:290,gardevoir:292+gardeniasash'
+    && team('conference_h_p1') === 'manectric:288,flygon:290,walrein:291'
+    && team('conference_h_p2') === 'breloom:290,aggron:292,milotic:293'
+    && team('morrison') === 'girafarig:293,growlithe:294,swampert:296+tortoisecharm'
+    && team('tyson') === 'hariyama:294,shiftry:295,donphan:296,sceptile:297,meowth:297,metagross:298+ironacorn');
+  const evFlags = (id) => HOENN_EVENTS[id].filter((s) => s.flag).map((s) => s.flag);
+  const evClears = (id) => HOENN_EVENTS[id].filter((s) => s.clearFlag).map((s) => s.clearFlag);
+  ok('A30 Institute event: battleAny Shelly (win/lose branch flags), then the Castform gift (giveMon castform 258), then institute_done + castform_received — Castform\'s obtainable source',
+    (() => { const ev = HOENN_EVENTS.ev_hoenn_institute; const bi = ev.findIndex((s) => s.battleAny); const gi = ev.findIndex((s) => s.giveMon);
+      return bi >= 0 && ev[bi].battleAny.trainer === 'aqua_admin_institute' && gi > bi
+        && ev[gi].giveMon.species === 'castform' && ev[gi].giveMon.level === 258
+        && evFlags('ev_hoenn_institute').join(',') === 'institute_done,castform_received'; })());
+  ok('A31 Pyre + hideouts: Pyre rides battleAny Courtney then orbs_taken (+ both orb flags); each hideout rides TWO battleAny (admin, then leader) and lands its fiction flag (magma_hideout_done+maxie_faced / aqua_hideout_done+archie_faced+submarine_stolen)',
+    HOENN_EVENTS.ev_hoenn_pyre.some((s) => s.battleAny && s.battleAny.trainer === 'magma_admin_pyre')
+    && evFlags('ev_hoenn_pyre').join(',') === 'pyre_done,orbs_taken,red_orb_taken,blue_orb_taken'
+    && HOENN_EVENTS.ev_hoenn_magma_hideout.filter((s) => s.battleAny).map((s) => s.battleAny.trainer).join(',') === 'magma_admin_hideout,maxie'
+    && evFlags('ev_hoenn_magma_hideout').join(',') === 'magma_hideout_done,maxie_faced'
+    && HOENN_EVENTS.ev_hoenn_aqua_hideout.filter((s) => s.battleAny).map((s) => s.battleAny.trainer).join(',') === 'aqua_admin_hideout,archie'
+    && evFlags('ev_hoenn_aqua_hideout').join(',') === 'aqua_hideout_done,archie_faced,submarine_stolen');
+  ok('A32 climax phase design in data: Seafloor sets climax_drought and NEVER climax_deluge; the standoff CLEARS drought and sets deluge (phases never overlap); Rayquaza CLEARS both and sets rayquaza_descended + climax_resolved (the flag H6 keys off)',
+    evFlags('ev_hoenn_seafloor').join(',') === 'seafloor_done,groudon_woken,climax_drought' && evClears('ev_hoenn_seafloor').length === 0
+    && evClears('ev_hoenn_standoff').join(',') === 'climax_drought' && evFlags('ev_hoenn_standoff').join(',') === 'climax_deluge,kyogre_answered,standoff_seen'
+    && evClears('ev_hoenn_rayquaza').join(',') === 'climax_drought,climax_deluge' && evFlags('ev_hoenn_rayquaza').join(',') === 'rayquaza_descended,climax_resolved');
+  ok('A33 the titans are appearances only in H4b: no Hoenn event battles or gifts groudon/kyogre/rayquaza, and no Hoenn trainer fields one (their catch arcs are H6\'s, keyed off climax_resolved)',
+    Object.values(HOENN_EVENTS).every((ev) => ev.every((s) => {
+      const sp = (s.wildBattle && s.wildBattle.species) || (s.giveMon && s.giveMon.species) || (s.giftCapSafe && s.giftCapSafe.species);
+      return !['groudon', 'kyogre', 'rayquaza'].includes(sp);
+    })) && Object.values(HOENN_TRAINERS).every((t) => t.team.every((m) => !['groudon', 'kyogre', 'rayquaza'].includes(m.species))));
+  const { DIVE_PAIRS } = await import(join(ROOT, 'src/data/maps7.mjs'));
+  ok('A34 DIVE_PAIRS audit (data views agree): 10 pairs; every pair\'s surface tile is a diveSpot landing on its underwater map and its underwater tile is a surfaceSpot landing back; the Sootopolis pair (surface sootopolis -> r126-underwater) exists — Sootopolis\'s only way in',
+    DIVE_PAIRS.length === 10 && DIVE_PAIRS.every((p) => {
+      const sm = MAPS7[p.surface], um = MAPS7[p.underwater];
+      const ds = (sm.diveSpots || []).find((s) => s.x === p.surfaceTile.x && s.y === p.surfaceTile.y);
+      const ss = (um.surfaceSpots || []).find((s) => s.x === p.underwaterTile.x && s.y === p.underwaterTile.y);
+      return ds && ds.to.map === p.underwater && ss && ss.to.map === p.surface && um.underwater === true;
+    }) && DIVE_PAIRS.some((p) => p.surface === 'sootopolis' && p.underwater === 'r126-underwater')
+    && (MAPS7['r128-underwater'].warps || []).some((w) => w.to.map === 'seafloor-cavern'));
+  ok('A35 east gym Grounds from the existing 15 (petalburg open, fortree storm, mossdeep mind, sootopolis tide) + landmarks (mt-pyre grave, seafloor tide, cave-of-origin spirit, sky-pillar storm)',
+    MAP_GROUND['gym-petalburg'] === 'open' && MAP_GROUND['gym-fortree'] === 'storm'
+    && MAP_GROUND['gym-mossdeep'] === 'mind' && MAP_GROUND['gym-sootopolis'] === 'tide'
+    && MAP_GROUND['mt-pyre'] === 'grave' && MAP_GROUND['seafloor-cavern'] === 'tide'
+    && MAP_GROUND['cave-of-origin'] === 'spirit' && MAP_GROUND['sky-pillar'] === 'storm');
+  const chron = readFileSync(join(ROOT, 'docs/chronology-mapping.md'), 'utf8');
+  ok('A36 Lucario placement source: docs/chronology-mapping.md Chapter 6 (Rise Through Hoenn, Hoenn) lists "Lucario and the Mystery of Mew" among Hoenn\'s special story events — so the event stages IN-ARC in Hoenn (H4b), not in Arc 3.5',
+    /Rise Through Hoenn/.test(chron) && /Lucario and the Mystery of Mew/.test(chron)
+    && chron.indexOf('Lucario and the Mystery of Mew') < chron.indexOf('Battle Frontier'));
+  const fr = arcById('frontier');
+  ok('A37 Frontier registry row consumed, not rewritten: hookGiver scott with hookLines written, status sealed (the machine\'s sealed-homecoming law: hook delivered, directive cleared, NO arc advance, NO embark — no dangling state)',
+    fr.hookGiver === 'scott' && fr.hookLines.length === 3 && fr.status === 'sealed'
+    && (() => { const s2 = defaultState(); s2.story.arc = 'hoenn'; s2.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn']; s2.story.flags.hoenn_complete = true; s2.story.arc_directive = 'frontier';
+      return arcStateOf(s2, 'frontier') === 'sealed' && arcStateOf(s2, 'hoenn') === 'complete'; })());
 }
 
 // ================= Part B: headless bundle =================
@@ -406,6 +480,127 @@ const driver = `
   ok('B24 a Hoenn Town Tale runs on the shipped tale machine (Bramble offers tale_littleroot; the tale goes active)',
     !!bramble && !!bramble.tale && (function () { owT.sysNpc(bramble); pump(g); return st.story.quests.tale_littleroot === 'active' || st.story.quests.tale_littleroot === 0 || !!st.story.quests.tale_littleroot; })(),
     'quest=' + st.story.quests.tale_littleroot);
+  // ===== H4b: THE EAST HALF (team re-levelled by the harness, the
+  // H4a harness convention — balance is not what this suite proves) =====
+  strongTeam(g, 299);
+  ok('B25 Gym 5: Norman awards the Balance Badge in order (the deferred meeting pays off at full circle)', gym('gym-petalburg', 'norman', 'balancebadge', 'badge_balance') && st.badges.hoenn.join(',') === 'stonebadge,knucklebadge,dynamobadge,heatbadge,balancebadge');
+  ow = gotoMap(g, 'r119', 11, 20); pump(g, 900);
+  ok('B26 the Weather Institute takeover fires with the Balance Badge held and is cleared (institute_done + castform_received; Castform registered caught, dex 351)',
+    !!st.story.flags.institute_done && !!st.story.flags.castform_received && !!st.dex.caught[351]);
+  ok('B27 Gym 6: Winona awards the Feather Badge in order', gym('gym-fortree', 'winona', 'featherbadge', 'badge_feather') && st.badges.hoenn.join(',') === 'stonebadge,knucklebadge,dynamobadge,heatbadge,balancebadge,featherbadge');
+  // Dive refusal I: no Mind Badge yet (r124 trench).
+  ow = gotoMap(g, 'r124', 13, 8); pump(g);
+  ow.sysInteract(13, 7); pump(g);
+  ok('B28 Dive gate I: at the r124 trench without the Mind Badge the dive refuses (still on r124, no warp) — the refusal names the badge in dialogue',
+    st.story.position.map === 'r124' && !st.story.flags.dive_taught);
+  ow = gotoMap(g, 'contest-lilycove', 8, 9); pump(g);
+  var mayL = talkKind(g, ow, 'may_contest_lilycove'); pump(g);
+  ok('B29 May\\'s Lilycove contest beat fires (may_lilycove_done + may_ribbon_lilycove — ribbon #3)', !!mayL && !!st.story.flags.may_lilycove_done && !!st.story.flags.may_ribbon_lilycove);
+  ow = gotoMap(g, 'lilycove', 15, 10); pump(g);
+  var mayFest = talkKind(g, ow, 'may_festival'); pump(g);
+  ok('B30 May\\'s closing beat: the Grand Festival departure (may_festival_done + may_grand_festival_done + may_ribbon_grandfestival — ribbon #4 as story dressing; she exits toward her own final)',
+    !!mayFest && !!st.story.flags.may_festival_done && !!st.story.flags.may_grand_festival_done && !!st.story.flags.may_ribbon_grandfestival);
+  ow = gotoMap(g, 'gym-mossdeep', 7, 9); pump(g);
+  var tateNpc = talkKind(g, ow, 'tate_liza'); pump(g, 1200);
+  ok('B31 Gym 7: the twins\\' back-to-back pair awards the Mind Badge in order (beat_tate AND badge_mind — Tate first, Liza closes, the recorded no-2v2 adaptation)',
+    !!tateNpc && !!st.story.flags.beat_tate && (st.badges.hoenn || []).includes('mindbadge') && !!st.story.flags.badge_mind
+    && st.badges.hoenn.join(',') === 'stonebadge,knucklebadge,dynamobadge,heatbadge,balancebadge,featherbadge,mindbadge');
+  // Dive refusal II: badge held, the move not yet taught (r126 trench).
+  ow = gotoMap(g, 'r126', 13, 8); pump(g);
+  ow.sysInteract(13, 7); pump(g);
+  ok('B32 Dive gate II: at the r126 trench with the Mind Badge but no Dive knowledge the dive still refuses (still on r126) — the refusal names the move',
+    st.story.position.map === 'r126' && !st.story.flags.dive_taught);
+  ow = gotoMap(g, 'mossdeep', 13, 10); pump(g);
+  var stevenNpc = talkKind(g, ow, 'steven'); pump(g);
+  ok('B33 Steven Stone teaches Dive in Mossdeep after the gym (dive_taught; a party member carries dive in hmMoves — the field-knowledge representation, no battle slot, no new move)',
+    !!stevenNpc && !!st.story.flags.dive_taught && ow.partyKnowsDive()
+    && st.party.some(function (m) { return (m.hmMoves || []).includes('dive'); })
+    && st.party.every(function (m) { return !m.moves.some(function (mv) { return mv.id === 'dive'; }); }));
+  // The dive audit: EVERY DIVE_PAIRS entry driven down AND up through
+  // the real sysInteract (standing on the spot; surfacing is
+  // unconditional — this same drive would pass with no badge/move).
+  var diveOk = 0, diveLog = [];
+  DIVE_PAIRS.forEach(function (p) {
+    var o1 = gotoMap(g, p.surface, p.surfaceTile.x, p.surfaceTile.y); pump(g);
+    o1.sysInteract(p.surfaceTile.x, p.surfaceTile.y); pump(g);
+    var down = st.story.position.map === p.underwater;
+    var o2 = gotoMap(g, p.underwater, p.underwaterTile.x, p.underwaterTile.y); pump(g);
+    o2.sysInteract(p.underwaterTile.x, p.underwaterTile.y); pump(g);
+    var up = st.story.position.map === p.surface;
+    if (down && up) diveOk++; else diveLog.push(p.surface + '->' + p.underwater + ' down=' + down + ' up=' + up);
+  });
+  ok('B34 NO-SOFT-LOCK dive audit: all 10 DIVE_PAIRS driven down AND up through sysInteract (incl. the Sootopolis pair — its only way in or out)', diveOk === 10, diveLog.join(';'));
+  ow = gotoMap(g, 'mt-pyre', 11, 15); pump(g, 900);
+  ok('B35 Mt. Pyre fires with the Mind Badge held: the orbs are taken despite the stand (pyre_done + orbs_taken + both orb flags; the admin battle resolved win-or-lose)',
+    !!st.story.flags.pyre_done && !!st.story.flags.orbs_taken && !!st.story.flags.red_orb_taken && !!st.story.flags.blue_orb_taken
+    && (!!st.story.flags.pyre_magma_won || !!st.story.flags.pyre_magma_lost));
+  ow = gotoMap(g, 'magma-hideout', 7, 11); pump(g, 1200);
+  ok('B36 the Magma Hideout raid fires (Tabitha, then Maxie, both battleAny; magma_hideout_done + maxie_faced)',
+    !!st.story.flags.magma_hideout_done && !!st.story.flags.maxie_faced
+    && (!!st.story.flags.magma_hideout_won || !!st.story.flags.magma_hideout_lost) && (!!st.story.flags.maxie_won || !!st.story.flags.maxie_lost));
+  ow = gotoMap(g, 'aqua-hideout', 16, 11); pump(g, 1200);
+  ok('B37 the Aqua Hideout raid fires and the submarine is stolen anyway (Matt, then Archie; aqua_hideout_done + archie_faced + submarine_stolen)',
+    !!st.story.flags.aqua_hideout_done && !!st.story.flags.archie_faced && !!st.story.flags.submarine_stolen);
+  ow = gotoMap(g, 'r128-underwater', 20, 8); pump(g);
+  var seafloorWarp = (ow.map.warps || []).some(function (w) { return w.to.map === 'seafloor-cavern'; });
+  ow = gotoMap(g, 'seafloor-cavern', 8, 11); pump(g, 1200);
+  ok('B38 Seafloor Cavern is entered from r128-underwater\\'s walking warp and Groudon wakes: PHASE 1 — climax_drought set, climax_deluge NOT set (seafloor_done + groudon_woken); the renderer shows heavy sun over a rain map',
+    seafloorWarp && !!st.story.flags.seafloor_done && !!st.story.flags.groudon_woken
+    && st.story.flags.climax_drought === true && !st.story.flags.climax_deluge
+    && weatherForMap(st, MAPS.r119).kind === 'sun' && weatherForMap(st, MAPS.r119).heavy === true && weatherForMap(st, MAPS.r119).source === 'climax');
+  ow = gotoMap(g, 'sootopolis', 13, 10); pump(g, 900);
+  ok('B39 the standoff converges on Sootopolis: PHASE 2 — Kyogre answers, climax_drought CLEARED, climax_deluge set (standoff_seen + kyogre_answered); the renderer shows heavy rain over an ash map; neither titan caught or consumed',
+    !!st.story.flags.standoff_seen && !!st.story.flags.kyogre_answered
+    && st.story.flags.climax_drought === false && st.story.flags.climax_deluge === true
+    && weatherForMap(st, MAPS.r113).kind === 'rain' && weatherForMap(st, MAPS.r113).heavy === true
+    && !st.dex.caught[383] && !st.dex.caught[382]);
+  ow = gotoMap(g, 'cave-of-origin', 8, 10); pump(g);
+  var keeperNpc = talkKind(g, ow, 'origin_keeper'); pump(g);
+  ok('B40 the Cave of Origin guidance beat: the keeper points UP (origin_guidance — Sky Pillar, not the cave, holds the answer)', !!keeperNpc && !!st.story.flags.origin_guidance);
+  ow = gotoMap(g, 'sky-pillar', 8, 15); pump(g, 900);
+  ok('B41 Sky Pillar: Rayquaza descends and the climax RESOLVES — both flags cleared, climax_resolved set (the flag H6 keys off); the renderer falls back to per-map fields (r113 ash again); Rayquaza not caught',
+    !!st.story.flags.climax_resolved && !!st.story.flags.rayquaza_descended
+    && st.story.flags.climax_drought === false && st.story.flags.climax_deluge === false
+    && weatherForMap(st, MAPS.r113).kind === 'ash' && weatherForMap(st, MAPS.r113).source === 'map'
+    && !st.dex.caught[384]);
+  st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
+  ok('B42 Gym 8: Juan awards the Rain Badge in order — badges.hoenn complete, all eight in the canonical earn order', gym('gym-sootopolis', 'juan', 'rainbadge', 'badge_rain') && st.badges.hoenn.join(',') === 'stonebadge,knucklebadge,dynamobadge,heatbadge,balancebadge,featherbadge,mindbadge,rainbadge');
+  ow = gotoMap(g, 'petalburg-woods', 12, 12); pump(g);
+  var auraNpc = talkKind(g, ow, 'lucario_keeper'); pump(g);
+  ok('B43 the Lucario special stages in-arc (chronology Ch.6): the aura flowers open in Petalburg Woods (lucario_event_done + lucario_aura_seen — a legend beat, no fake Sinnoh-dex battle staged)',
+    !!auraNpc && !!st.story.flags.lucario_event_done && !!st.story.flags.lucario_aura_seen);
+  st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
+  ow = gotoMap(g, 'victory-road', 11, 10); pump(g);
+  var walFinal = talkKind(g, ow, 'wally_final'); pump(g, 1200);
+  ok('B44 Wally\\'s payoff in Victory Road: the grown boy is faced and beaten before the league doors (wally_final_done + beat_wally_final)', !!walFinal && !!st.story.flags.wally_final_done && !!st.story.flags.beat_wally_final);
+  st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
+  ow = gotoMap(g, 'league-evergrande', 11, 12); pump(g);
+  var regNpc = talkKind(g, ow, 'hoenn_conference'); pump(g);
+  ok('B45 the Ever Grande Conference registers with eight badges and a resolved climax (hoenn_conference_registered)', !!regNpc && !!st.story.flags.hoenn_conference_registered);
+  st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
+  talkKind(g, ow, 'hoenn_conference'); pump(g, 1200);
+  ok('B46 preliminary one is driven through the registrar (beat_conference_h_p1)', !!st.story.flags.beat_conference_h_p1);
+  st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
+  talkKind(g, ow, 'hoenn_conference'); pump(g, 1200);
+  ok('B47 preliminary two is driven through the registrar (beat_conference_h_p2)', !!st.story.flags.beat_conference_h_p2);
+  st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
+  var morNpc = talkKind(g, ow, 'morrison'); pump(g, 1200);
+  ok('B48 the semi-final: Morrison, the friend-rival beat, is beaten (beat_morrison)', !!morNpc && !!st.story.flags.beat_morrison);
+  st.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; (m.moves || []).forEach(function (mv) { mv.pp = mv.maxPp; }); });
+  var tysNpc = talkKind(g, ow, 'tyson'); pump(g, 2500);
+  ok('B49 THE FINAL vs Tyson resolves on the FACED predicate (tyson_faced; win or loss branch flag recorded honestly) — and completion fires either way: Scott\\'s invitation delivered AT the conference (scott_invitation) + hoenn_complete set',
+    !!tysNpc && !!st.story.flags.tyson_faced && (!!st.story.flags.tyson_won || !!st.story.flags.tyson_lost)
+    && !!st.story.flags.scott_invitation && !!st.story.flags.hoenn_complete,
+    'won=' + !!st.story.flags.tyson_won + ' lost=' + !!st.story.flags.tyson_lost);
+  pump(g, 900);
+  ok('B50 the Foundation machine fires from the flag alone: ARC COMPLETE card (arc_card_hoenn), regionsDone gains hoenn through the machine\\'s own write, and the Frontier directive is pinned (arc_directive frontier)',
+    !!st.story.flags.arc_card_hoenn && st.story.regionsDone.includes('hoenn') && st.story.arc_directive === 'frontier',
+    'directive=' + st.story.arc_directive + ' done=' + st.story.regionsDone.join(','));
+  ow = gotoMap(g, 'house-pallet-ash', 5, 5); pump(g, 900);
+  ok('B51 Homecoming rides the machine: Scott\\'s Frontier hook is delivered at home (hook_frontier), the directive clears, and the sealed-arc law holds — story.arc stays hoenn, NO embark_frontier, no dangling state; Hoenn reads complete',
+    !!st.story.flags.hook_frontier && st.story.arc_directive === null && st.story.arc === 'hoenn'
+    && !st.story.flags.embark_frontier && arcStateOf(st, 'hoenn') === 'complete',
+    'arc=' + st.story.arc + ' hook=' + !!st.story.flags.hook_frontier);
   globalThis.__HOENN_Q__ = Q;
 })();`;
 

@@ -8951,3 +8951,241 @@ ferry handler all rode clean.
   May's Lilycove beat reads may_ribbon_verdanturf /
   may_ribbon_fallarbor as her carried score. The Dive engine +
   contest engine are H4b/H5 scope respectively — untouched here.
+
+## Arc 3 Stage H4b — Hoenn story, SECOND HALF: gyms 5–8, Dive engine, the climax, Conference, completion (2026-10-29)
+
+Base b05dc46 (H4a). ONE commit. `personal/` byte-identical
+(restored from HEAD after builds; zero personal/ paths in the
+diff). Never pushed, never deployed.
+
+### Beats inventory (all appended at H4a's marked seams)
+
+- **Gyms 5–8** (leaders into H3's layout-only gyms, 2 talk-to
+  rosters each, badge-order gate + shared leader runner untouched):
+  Norman/Petalburg, Winona/Fortree, Tate & Liza/Mossdeep,
+  Juan/Sootopolis. Norman's H4a deferral branch now falls through
+  to the leader runner at 4 badges (`norman_met` intro preserved).
+  Juan carries an extra fiction gate: he refuses while the climax
+  stands (`climax_resolved` required — the last gym conducts in a
+  finished world).
+- **Weather Institute** (r119 entry, Balance Badge held): Aqua
+  takeover under Admin Shelly, `battleAny`, the staff's Castform
+  gifted via `giveMon` (Lv 258) — **`castform_received` flags
+  Castform's obtainable source** (dex 351, one entry, no formes,
+  ruling 2). Flags: `institute_done` (+ `institute_aqua_won/lost`).
+- **Villain convergence:** Mt. Pyre (entry, Mind Badge held;
+  Admin Courtney `battleAny`; the orbs are taken in the smoke
+  either way — `orbs_taken`, `red_orb_taken`, `blue_orb_taken`),
+  Magma Hideout (caldera door; Tabitha then Maxie, both
+  `battleAny`; `magma_hideout_done`, `maxie_faced`), Aqua Hideout
+  (Lilycove harbour; Matt then Archie; `aqua_hideout_done`,
+  `archie_faced`, `submarine_stolen` — the submarine escapes
+  despite the battles, by design: the fiction needs it below).
+  Admin names are canon's (Courtney/Tabitha, Matt/Shelly); the
+  H4a-seeded Brask/Selka remain the Chimney/Falls admins.
+- **Steven Stone beat** (Mossdeep, Mind Badge held): teaches Dive
+  (see Dive design). `dive_taught`.
+- **May's closing beats** (H4a pattern, story dressing only):
+  Lilycove contest (gate Feather) → `may_ribbon_lilycove`
+  (ribbon #3); the harbourside Grand Festival departure →
+  `may_festival_done`, `may_grand_festival_done`,
+  `may_ribbon_grandfestival` (ribbon #4 — the Festival's own
+  commendation, staged as dressing; H5 owns the contest engine
+  and the player's own ribbons).
+- **Wally payoff** (Victory Road, Rain Badge held): must-win
+  battle via the leader runner idiom, `wally_final_done` on a
+  win only — a loss retries, nothing soft-locks.
+- **Lucario special** — see placement section below.
+- **Ever Grande Conference** — see the Tyson section below.
+
+### Badge / level table 5–8 (band 201–300, ruling 6)
+
+| Gym | Leader | Team (levels) | Ace | Badge → flag |
+|---|---|---|---|---|
+| Petalburg | Norman | Vigoroth 249, Linoone 251, Spinda 252, Slaking 255+tortoisecharm | 255 | balancebadge → badge_balance |
+| Fortree | Winona | Swellow 259, Pelipper 261, Skarmory 263, Altaria 265+sparrowfeather | 265 | featherbadge → badge_feather |
+| Mossdeep | Tate → Liza | Tate: Xatu 270, Solrock 274 (no badge) · Liza: Claydol 272, Lunatone 275+ironacorn | 275 | mindbadge → badge_mind |
+| Sootopolis | Juan | Luvdisc 279, Whiscash 281, Crawdaunt 283, Kingdra 285+tidepearl | 285 | rainbadge → badge_rain |
+
+**Tate & Liza adaptation (recorded honestly):** the engine has
+NO 2v2 battle anywhere (battle scenes are 1v1 end to end), so
+the twins ship as a **back-to-back pair in one gym visit** —
+Tate opens (no badge on his def), Liza closes and carries the
+Mind Badge through the shipped award idiom. Losing to Liza
+leaves `beat_tate` standing and the pair re-runs in order.
+Nothing presents two foes on the field at once. Gym rosters
+246–280 rising by gym; villain chain 252–278; Wally 286–292
+(Gardevoir 292); Conference prelims 288–293, Morrison 293–296,
+Tyson 294–298 (Metagross 298, the band's working ceiling).
+Gym Grounds (existing 15 only): Petalburg open, Fortree storm,
+Mossdeep mind, Sootopolis tide; landmarks Mt. Pyre grave,
+Seafloor tide, Cave of Origin spirit, Sky Pillar storm.
+
+### Dive engine design (ruling 5, scoped)
+
+- **Gate:** standing ON or facing a defined dive spot with
+  (a) the Mind Badge in `badges.hoenn` and (b) a party member
+  that knows Dive. Refusals are dialogue **naming the missing
+  piece** (badge first, then the move — the ferry-gate idiom).
+- **Idiom:** one branch in `sysInteract` ahead of the Surf/fish
+  water branch, mirroring Surf's menu-then-warp shape; the warp
+  itself rides the shipped `doWarp` (banner, music, autosave,
+  position). Pairing is consumed from BOTH declarations: the
+  current map's `diveSpots`/`surfaceSpots` supply the landing,
+  and maps7's exported `DIVE_PAIRS` is cross-checked — a spot
+  no pair claims is not a dive spot.
+- **The way up is unconditional:** `surfaceSpots` on an
+  underwater map warp back with no badge check, no move check —
+  the no-soft-lock law. The suite's audit drives **all 10
+  DIVE_PAIRS down AND up** through the real `sysInteract`.
+- **Dive the move:** `dive` is NOT in the game's move table and
+  this mission adds no moves, so Dive has no battle slot and no
+  battle effect — recorded plainly. Its knowledge follows Surf's
+  representation with that one difference: where `teachMove`
+  records HM-taught field knowledge on the mon's `hmMoves`
+  list, Steven's teaching writes `'dive'` into the chosen
+  partner's `hmMoves` (no battle slot occupied, nothing for the
+  battle model to read — battle-model stays 45/45 untouched).
+  `partyKnowsDive()` accepts an `hmMoves` entry or, defensively,
+  an in-table `dive` move slot if a future arc adds one.
+- **Sootopolis** is reached only via its r126-underwater pair
+  (proven in the audit); **Seafloor Cavern** is entered from
+  r128-underwater's walking warp (maps7 warp, asserted) and its
+  entry scene is gated on `submarine_stolen`.
+
+### Climax phase design (Emerald staging, original writing)
+
+Three entry scenes move the weather flags, and ONLY these
+(a new generic `clearFlag` step in `runSteps` carries the
+transitions as data; its one other property: it writes `false`,
+never deletes, keeping the validator's flag vocabulary stable):
+
+1. **Seafloor Cavern** (entry, `submarine_stolen`): Maxie
+   `battleAny` at the deep chamber; Groudon wakes →
+   `climax_drought` SET, deluge untouched. Renderer: heavy sun
+   region-wide (asserted over a rain map).
+2. **Sootopolis standoff** (entry, `seafloor_done`): Kyogre
+   answers → `climax_drought` **cleared**, `climax_deluge` set
+   (`standoff_seen`, `kyogre_answered`). The phases NEVER
+   overlap, so the renderer's drought-wins precedence remains
+   a corruption guard, never a staged state. The Cave of
+   Origin keeper (a `hoenn: 'origin_keeper'` actor) then points
+   UP — `origin_guidance`.
+3. **Sky Pillar** (entry, `standoff_seen`): Rayquaza wakes and
+   descends → **BOTH flags cleared**, `rayquaza_descended`,
+   **`climax_resolved`** set. The renderer falls back to
+   per-map fields (asserted: r113 reads ash/source map again).
+
+**The flag H6 keys off is `climax_resolved`.** Groudon, Kyogre
+and Rayquaza are story appearances ONLY here — no event
+battles, gifts, or trainer fields one (asserted in A33), none
+is caught or consumed (dex 382/383/384 asserted uncaught at
+each phase); their catch arcs open post-climax in H6.
+
+### Lucario placement (ruling 9 + mission scope 6)
+
+**Source:** `docs/chronology-mapping.md`, Act II table,
+Chapter 6 "Rise Through Hoenn" (Hoenn) lists among its special
+story events: "Movies: Jirachi: Wish Maker · Destiny Deoxys ·
+**Lucario and the Mystery of Mew**". The map therefore places
+the movie **inside Hoenn's span** (not Arc 3.5's — Chapter 7's
+row names a different movie), so H4b stages it in-arc: a
+self-contained aura-legend beat in Petalburg Woods (an
+`AURA KEEPER` actor at the great tree; time-flowers opening
+for the player's team; the Tree of Beginning abstracted to a
+root-chamber legend in our fiction, no lifted script). Flags:
+`lucario_event_done`, `lucario_aura_seen`. **Honest limit:**
+Lucario is a Sinnoh-dex species (Arc 4's horizon, dex 448 —
+outside this game's species tables), so no Lucario battle or
+catch is staged or faked; the event is the legend/recognition
+beat itself, and the register records that deviation openly.
+
+### Tyson branch design (the Harrison precedent, mirrored)
+
+A scripted forced result is inexpressible in this engine (the
+J4b finding, unchanged), so the final is a **real full-strength
+friendly battle whose completion predicate is FACED**:
+`flags.tyson_faced` + `tyson_won`/`tyson_lost` record the
+honest branch. On a **loss**, the canon-honours text plays the
+narrow loss to Tyson as the standing result (Meowth endures by
+a whisker; the hall rises anyway). On a **win**, the branch
+acknowledges the upset on the floor (the Harrison solution —
+"the card may argue with the papers; I was on the floor").
+Either way Scott then delivers the Battle Frontier invitation
+**at the Conference** (`scott_invitation`), `hoenn_complete`
+is set, and completion proceeds. The suite's deterministic
+drive takes the WIN branch (harness team Lv 299); the loss
+branch is the same code path with its own lines, and the
+FATED predicate — not the branch — is what the gate asserts.
+
+### Machine-riding proof (nothing hand-rolled)
+
+From `hoenn_complete` alone, with zero ending code in H4b:
+`checkArcCompletion` fires the ARC COMPLETE card
+(`arc_card_hoenn`), writes `regionsDone += 'hoenn'` through
+the machine's own write path, and pins `arc_directive =
+'frontier'` (asserted B50). The journey home + Homecoming at
+Mom's house then ride `tryHomecoming`: the Frontier row's
+hook is delivered in person by **Scott** (registry `hookGiver:
+scott`, the row's written hookLines — consumed, not rewritten),
+`hook_frontier` is set and the directive clears (B51).
+**Frontier state, honestly:** the registry row's status is
+`sealed`, so the machine's sealed-homecoming law holds —
+story.arc does NOT advance and NO `embark_frontier` is armed;
+`arcStateOf(frontier)` reads `sealed` (the drawn road ahead),
+Hoenn reads `complete`, and there is **no dangling directive
+or fake embark**. (The mission text's "'next'/locked-next"
+phrasing describes the narrative position; the registry +
+machine law govern the stored state, exactly as the sealed
+Johto-era rows behaved. Flipping the row to 'next' would arm
+an embark to a `frontierhub` map that does not exist — a
+dangling state, refused.) H5/H6/H7 inherit: Frontier content
+is Arc 3.5's build, not this stage's.
+
+### Design smells
+
+- **One small engine addition:** `runSteps` gained a
+  `clearFlag` step — the event vocabulary could set flags but
+  never clear them, and phased story state (weather, and any
+  future two-phase arc) needs clearing as data, not as engine
+  special cases. Generic, one branch, no consumer but the
+  climax scenes.
+- **The badge plumbing smell did NOT recur** (H4a's quintet
+  carried badges 5–8 with zero new plumbing — leaders only,
+  as predicted). The loadMap append idiom, the leader runner,
+  `battleAny`, `giveMon`, and the Foundation machine all rode
+  clean. No other smells.
+
+### Battery + build
+
+- **tests/hoenn-story-checks.mjs: 88/88** (37 pure — grown
+  from H4a's 24 with east leaders/twins/Juan, villains, Wally,
+  Conference cast, Institute/Pyre/hideout/climax event shapes,
+  DIVE_PAIRS cross-view audit, east Grounds, the Lucario
+  chronology source, the Frontier registry law — + 51 bundle:
+  the H4a true path extended through Norman → Institute →
+  Winona → both dive refusals → Steven → **all 10 dive pairs
+  down and up** → Pyre → both hideouts → Seafloor (drought
+  asserted on the renderer) → standoff (deluge asserted) →
+  keeper → Sky Pillar (both flags cleared, renderer back to
+  map fields) → Juan (badge set complete, canonical order) →
+  Lucario → Wally → Conference (register, both prelims,
+  Morrison, Tyson FACED) → Scott's invitation → machine card
+  → directive → Homecoming (Scott hook, sealed law, no
+  dangling state)).
+- qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**
+  (HARD — the stage touches story + one sysInteract branch +
+  one runSteps branch, no battle code); campaign-smoke
+  **24/24**; fidelity **35/35**; johto-story **110/110**;
+  johto-systems **62/62**; arc-foundation **47/47**; cheat-shop
+  **44/44**; orange-story 38/38; orange-climax 42/42; Track B
+  **114/114** (run via `node --import ./register.mjs run.mjs`
+  per run.mjs's own header — the bare `npm test` script lacks
+  the register import and fails identically at base, a
+  pre-existing quirk, not a regression); qa-slice exactly
+  **{s6, l8}**; rejuv-phase2 exactly **{A09, C01}** (A09's
+  assigned count moved 107 → 115 with the eight new Ground
+  rows — verified against a stashed base run at b05dc46:
+  assigned=107, the same single named failure, not a new one);
+  budgets **all gates pass**; `personal/` byte-identical.
+- **public/game.js: 9,735,190 B (+68,496 vs H4a)** (vs H4a's 9,666,694 B).

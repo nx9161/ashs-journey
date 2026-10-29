@@ -198,6 +198,18 @@ export const MAP_GROUND = {
   'gym-lavaridge': 'pyre', // Lavaridge Gym — Flannery
   'meteor-falls': 'rubble',
   'mt-chimney': 'ember',
+  // Stage H4b: Hoenn east gym signature Grounds (existing 15 only):
+  // Norman's honest weight rides the Open, Winona's canopy the
+  // Storm, the twins' shared mind the Mind, Juan's conducted water
+  // the Tide. Landmarks follow their feel likewise.
+  'gym-petalburg': 'open', // Petalburg Gym — Norman
+  'gym-fortree': 'storm', // Fortree Gym — Winona
+  'gym-mossdeep': 'mind', // Mossdeep Gym — Tate & Liza
+  'gym-sootopolis': 'tide', // Sootopolis Gym — Juan
+  'mt-pyre': 'grave',
+  'seafloor-cavern': 'tide',
+  'cave-of-origin': 'spirit',
+  'sky-pillar': 'storm',
   'mt-silver-cave': 'frost',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',

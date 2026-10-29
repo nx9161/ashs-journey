@@ -150934,7 +150934,21 @@ const HOENN_QUESTS = [
   { id: 'q_hoenn_chimney', flag: 'chimney_clash_done', text: 'Break up the clash on Mt. Chimney', hint: 'Two teams, one volcano, and a meteorite that does not belong to either of them. The cable car from Route 112 climbs straight into it.' },
   { id: 'q_hoenn_heat', flag: 'badge_heat', text: 'Win the Heat Badge from Flannery in Lavaridge Town', hint: 'Flannery is new to her grandfather\'s gym and determined to burn bright enough to fill it. Her Fire types fear Water, Ground and Rock moves.' },
   { id: 'q_hoenn_fallarbor_may', flag: 'may_fallarbor_done', text: 'Watch May compete at the Fallarbor Contest Hall', hint: 'Ash country. The Fallarbor crowd judges hard and applauds harder. May knows it — she picked this hall on purpose.' },
-  // --- H4b: the east rows append here ---
+  // --- H4b: the east rows ---
+  { id: 'q_hoenn_balance', flag: 'badge_balance', text: 'Win the Balance Badge from Norman in Petalburg City', hint: 'The deferred meeting, at full circle: Norman has waited behind four badges of road. His Normal types fear Fighting moves — and respect balance.' },
+  { id: 'q_hoenn_institute', flag: 'institute_done', text: 'Clear the team takeover at the Weather Institute on Route 119', hint: 'Red scarves asked about drought records; blue ones about rain. Now the Institute has gone quiet on the radio. Go and make it loud again.' },
+  { id: 'q_hoenn_feather', flag: 'badge_feather', text: 'Win the Feather Badge from Winona in Fortree City', hint: 'Winona fights from the canopy, where the rain road ends. Her Flying types fear Electric, Ice and Rock moves.' },
+  { id: 'q_hoenn_lilycove_may', flag: 'may_lilycove_done', text: 'Watch May compete at the Lilycove Contest Hall', hint: 'The last hall on May\'s road, in the harbour city. Three ribbons ride on this one — hers, and the road\'s opinion of her.' },
+  { id: 'q_hoenn_mind', flag: 'badge_mind', text: 'Win the Mind Badge from Tate and Liza in Mossdeep City', hint: 'Twins, one gym, two battles back to back — the pair fight as one mind in two bodies. Their Psychic types fear Bug, Ghost and Dark moves.' },
+  { id: 'q_hoenn_pyre', flag: 'orbs_taken', text: 'Mt. Pyre — stop the teams taking the orbs', hint: 'The shrine mountain east of Lilycove keeps two old orbs asleep in stone. Both teams have stopped pretending they do not want them.' },
+  { id: 'q_hoenn_magma_hideout', flag: 'magma_hideout_done', text: 'Raid the Magma Hideout in Mt. Chimney\'s caldera', hint: 'A door in the caldera wall, cut while the clash covered the digging. Maxie is done hiding what the orbs are for.' },
+  { id: 'q_hoenn_aqua_hideout', flag: 'submarine_stolen', text: 'Stop Team Aqua stealing the submarine at Lilycove harbour', hint: 'A research submarine, a harbour at low tide, and blue scarves with a schedule. Whatever is under the sea, Archie means to reach it first.' },
+  { id: 'q_hoenn_seafloor', flag: 'seafloor_done', text: 'Dive to the Seafloor Cavern off Route 128', hint: 'Mind Badge, a partner who knows Dive, and a trench that has waited since before there were teams. Steven in Mossdeep can teach the way down.' },
+  { id: 'q_hoenn_climax', flag: 'climax_resolved', text: 'End the clash of the weather titans', hint: 'When the sky chooses sides, the answer is older than either side: a green pillar east of Pacifidlog, and something asleep at its top.' },
+  { id: 'q_hoenn_rain', flag: 'badge_rain', text: 'Win the Rain Badge from Juan in Sootopolis City', hint: 'Sootopolis is reached only from below — surface inside its crater lake. Juan, the last gym, keeps Water types and a conductor\'s patience.' },
+  { id: 'q_hoenn_wally_final', flag: 'wally_final_done', text: 'Face Wally in Victory Road', hint: 'The boy from Petalburg, grown into the road. He asked to be remembered kindly. He did not ask to be gone easy on.' },
+  { id: 'q_hoenn_conference', flag: 'hoenn_conference_registered', text: 'Register for the Ever Grande Conference', hint: 'Eight Hoenn badges open the league hall at Ever Grande. The registrar keeps the bracket; Tyson waits at the end of it.' },
+  { id: 'q_hoenn_tyson', flag: 'hoenn_complete', text: 'The Ever Grande Conference — the final, against Tyson', hint: 'Face him with everything the region taught you. However the card falls, Hoenn ends on the far side of this battle.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -151120,7 +151134,261 @@ const HOENN_TRAINERS = {
     ],
     reward: 2400,
   },
-  // --- H4b trainers append here ---
+  // --- H4b: gyms 5-8 (ruling 6 curve: Norman ace 255, Winona 265,
+  // Tate & Liza 275, Juan 285 — aces at the range tops) ---
+  norman: {
+    id: 'norman', name: 'Norman', title: 'Petalburg Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['Four badges, and the road kept its word — so will I. I am Norman, and this gym tests the one thing every strong trainer eventually runs out of: balance. No tricks in my team, challenger. Only weight, placed honestly. Show me yours does not tip.'],
+    lose: ['Tipped — cleanly, and by the trainer I deferred in this very room. There is a symmetry in that I will be telling people about.', 'The Balance Badge is yours. Five down. The road east gets wetter and stranger from here — Fortree, then the sea itself. Walk it the way you walked to me: honestly.'],
+    team: [
+      { species: 'vigoroth', level: 249 },
+      { species: 'linoone', level: 251 },
+      { species: 'spinda', level: 252 },
+      { species: 'slaking', level: 255, keepsake: 'tortoisecharm' },
+    ],
+    reward: 9000, badge: 'balancebadge',
+  },
+  winona: {
+    id: 'winona', name: 'Winona', title: 'Fortree Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['I am Winona, and I keep the sky over Fortree. Down on the ground a battle is arithmetic. Up here it is weather — it arrives from the direction you were not watching. Mind the canopy, challenger, and mind the wind.'],
+    lose: ['Read the wind, and flown through it... The canopy itself applauds, and so do I.', 'The Feather Badge is yours. East now: Lilycove, the shrine mountain, and a sea that keeps secrets at depth. The sky will be watching. So will I.'],
+    team: [
+      { species: 'swellow', level: 259 },
+      { species: 'pelipper', level: 261 },
+      { species: 'skarmory', level: 263 },
+      { species: 'altaria', level: 265, keepsake: 'sparrowfeather' },
+    ],
+    reward: 9600, badge: 'featherbadge',
+  },
+  // TATE & LIZA — the double-battle adaptation, recorded honestly:
+  // this engine has NO 2v2 battle (battle scenes are 1v1 end to end),
+  // so the twins ship as a back-to-back PAIR in one gym visit: Tate
+  // opens, Liza closes and carries the badge. Nothing here pretends
+  // two foes stood on the field at once.
+  tate: {
+    id: 'tate', name: 'Tate', title: 'Mossdeep Gym Leader', ai: 'smart',
+    intro: ['I am Tate — the left half of this gym. My sister and I share one strategy the way we share everything: completely, and without asking. Beat me, and you have only beaten the half that was talking.'],
+    lose: ['Beaten — and Liza felt it from across the room, which is rather the point of us. Sister! The challenger is warmed up. Finish the lesson we started.'],
+    team: [
+      { species: 'xatu', level: 270 },
+      { species: 'solrock', level: 274 },
+    ],
+    reward: 5000,
+  },
+  liza: {
+    id: 'liza', name: 'Liza', title: 'Mossdeep Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['Liza — the half that was listening. Tate showed me your whole team, challenger; that is what a first half is FOR. Two minds, one gym. Come and meet the second one.'],
+    lose: ['Two minds, one gym — and one better trainer standing in it. Tate is laughing. So am I. That is also rather the point of us.', 'The Mind Badge is yours — from both of us, which in Mossdeep is the only way anything is given. Steven Stone keeps a house by the shore here. What he teaches opens the deep road. You have earned the lesson.'],
+    team: [
+      { species: 'claydol', level: 272 },
+      { species: 'lunatone', level: 275, keepsake: 'ironacorn' },
+    ],
+    reward: 10200, badge: 'mindbadge',
+  },
+  juan: {
+    id: 'juan', name: 'Juan', title: 'Sootopolis Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['Juan, of Sootopolis — a city you reached from beneath the sea, in the middle of the end of the weather. My gym is the last quiet water in Hoenn, challenger. I intend to conduct this battle the way I conduct everything: precisely, and to a finish.'],
+    lose: ['Precisely conducted — by you. Magnificent. The last badge in Hoenn could not have asked for a better keeper to lose it to.', 'The Rain Badge is yours. Eight badges, trainer. Ever Grande is east, the Conference is lit, and a boy named Wally is somewhere on that road with something to prove to both of you. Go and be history.'],
+    team: [
+      { species: 'luvdisc', level: 279 },
+      { species: 'whiscash', level: 281 },
+      { species: 'crawdaunt', level: 283 },
+      { species: 'kingdra', level: 285, keepsake: 'tidepearl' },
+    ],
+    reward: 10800, badge: 'rainbadge',
+  },
+  petalburg_gym_1: {
+    id: 'petalburg_gym_1', name: 'Ace Trainer Dario', title: 'Petalburg Gym Trainer', ai: 'basic',
+    intro: ['Norman\'s rooms test your stance before they test your team. I am the first room. Stand honestly, trainer.'],
+    lose: ['Honest stance, honest win. The keeper by the pond will approve — Norman is at the back.'],
+    team: [{ species: 'linoone', level: 246 }, { species: 'vigoroth', level: 248 }],
+    reward: 900,
+  },
+  petalburg_gym_2: {
+    id: 'petalburg_gym_2', name: 'Cool Trainer Marn', title: 'Petalburg Gym Trainer', ai: 'basic',
+    intro: ['Everyone underestimates a gym with no type tricks. Then the weight arrives, all at once, honestly. Like this.'],
+    lose: ['Weight received — and returned. Norman deferred a meeting with you once, trainer. He is done deferring.'],
+    team: [{ species: 'spinda', level: 247 }, { species: 'zangoose', level: 249 }],
+    reward: 950,
+  },
+  fortree_gym_1: {
+    id: 'fortree_gym_1', name: 'Bird Keeper Ansel', title: 'Fortree Gym Trainer', ai: 'basic',
+    intro: ['The canopy gym turns on rotating gates and bad sightlines. Winona\'s rule: if you cannot see the wind, battle like it sees you.'],
+    lose: ['It saw you fine. Winona is up the last turn, trainer — mind the wind.'],
+    team: [{ species: 'swellow', level: 256 }, { species: 'pelipper', level: 258 }],
+    reward: 1000,
+  },
+  fortree_gym_2: {
+    id: 'fortree_gym_2', name: 'Picnicker Wren', title: 'Fortree Gym Trainer', ai: 'basic',
+    intro: ['I picnic at altitude and battle at altitude. The drop is not part of the test. Probably. Battle!'],
+    lose: ['Grounded, fairly. The Feather Badge is one leader past me, trainer.'],
+    team: [{ species: 'tropius', level: 257 }, { species: 'altaria', level: 260 }],
+    reward: 1050,
+  },
+  mossdeep_gym_1: {
+    id: 'mossdeep_gym_1', name: 'Psychic Hollis', title: 'Mossdeep Gym Trainer', ai: 'basic',
+    intro: ['The twins know what I am about to do before I do it. It makes sparring efficient and losing educational. Your turn to be educated.'],
+    lose: ['Educated, apparently, was me. The pair are at the back — both of them. That is not a warning. It is the whole gym.'],
+    team: [{ species: 'kirlia', level: 266 }, { species: 'xatu', level: 268 }],
+    reward: 1100,
+  },
+  mossdeep_gym_2: {
+    id: 'mossdeep_gym_2', name: 'Hex Maniac Ione', title: 'Mossdeep Gym Trainer', ai: 'basic',
+    intro: ['Two leaders, one mind, zero mercy for a challenger who plans only one battle ahead. Plan for two, trainer. Starting with mine.'],
+    lose: ['Planned, and executed. Tate first, then Liza — and may your second plan be as good as your first.'],
+    team: [{ species: 'claydol', level: 267 }, { species: 'solrock', level: 270 }],
+    reward: 1150,
+  },
+  sootopolis_gym_1: {
+    id: 'sootopolis_gym_1', name: 'Swimmer Cato', title: 'Sootopolis Gym Trainer', ai: 'basic',
+    intro: ['You surfaced in our lake to reach this gym. Juan respects that enormously. He still made me battle you first. Tradition.'],
+    lose: ['Tradition satisfied. Juan conducts at the back, trainer — precisely, and to a finish.'],
+    team: [{ species: 'whiscash', level: 276 }, { species: 'seaking', level: 278 }],
+    reward: 1200,
+  },
+  sootopolis_gym_2: {
+    id: 'sootopolis_gym_2', name: 'Beauty Ondine', title: 'Sootopolis Gym Trainer', ai: 'basic',
+    intro: ['The last gym in Hoenn keeps its water like a held note. I am the note before the conductor. Sing, trainer.'],
+    lose: ['Sung, and answered. The Rain Badge is one conductor past me.'],
+    team: [{ species: 'milotic', level: 277 }, { species: 'kingdra', level: 280 }],
+    reward: 1250,
+  },
+  // --- H4b: the villain chains converge (admins + leaders in band) ---
+  aqua_admin_institute: {
+    id: 'aqua_admin_institute', name: 'Admin Shelly', title: 'Team Aqua Admin', ai: 'smart',
+    intro: ['Shelly, Team Aqua — and this Institute is under new management until its rain records say what we need them to say. The sea is coming back to this region, trainer. We are just reading its mail first.'],
+    lose: ['Read, and answered... The records are yours, then. For all the good dry paper will do anyone when the real rain comes.'],
+    team: [
+      { species: 'mightyena', level: 252 },
+      { species: 'carvanha', level: 254 },
+      { species: 'sharpedo', level: 256 },
+    ],
+    reward: 2600,
+  },
+  magma_admin_pyre: {
+    id: 'magma_admin_pyre', name: 'Admin Courtney', title: 'Team Magma Admin', ai: 'smart',
+    intro: ['Courtney, Team Magma. Analysis complete: you are... an obstacle. The orbs on this mountain are not decorations, trainer. They are leashes. And leashes are for holding — or for letting go, at the chosen moment.'],
+    lose: ['Analysis... revised. You are a larger obstacle than modelled. The orbs are taken anyway — both crews, both leashes, gone in the smoke. Tell the keepers Courtney sends her regrets. And her regards.'],
+    team: [
+      { species: 'numel', level: 266 },
+      { species: 'camerupt', level: 268 },
+    ],
+    reward: 2800,
+  },
+  magma_admin_hideout: {
+    id: 'magma_admin_hideout', name: 'Admin Tabitha', title: 'Team Magma Admin', ai: 'smart',
+    intro: ['Tabitha, Team Magma — and you have walked into the mountain\'s own furnace room, trainer. The leader is below with the orb and the old fire. You get me first. Everyone gets me first. It is my whole personality, and I have made peace with it.'],
+    lose: ['Through — THROUGH, and the furnace room is yours. Maxie! MAXIE, the bystander is done being a bystander!'],
+    team: [
+      { species: 'mightyena', level: 272 },
+      { species: 'camerupt', level: 275 },
+    ],
+    reward: 3000,
+  },
+  maxie: {
+    id: 'maxie', name: 'Maxie', title: 'Team Magma Leader', ai: 'smart',
+    intro: ['Maxie. You have delayed my teams at a falls, a crater, and a shrine, trainer — a pattern any scientist would call data. The land was here before the sea covered it, and it will be here when my work is done. The orb answers the old fire. I merely... hold the leash, until the moment comes to let go.'],
+    lose: ['Beaten — in my own furnace, at the threshold of the work itself. Very well, data is data: the moment is not here. It is BELOW. Everything I need sleeps under the sea your friends worship. Take this hideout, trainer. Take it. The deep does not have doors.'],
+    team: [
+      { species: 'mightyena', level: 276 },
+      { species: 'crobat', level: 277 },
+      { species: 'camerupt', level: 278 },
+    ],
+    reward: 6000,
+  },
+  aqua_admin_hideout: {
+    id: 'aqua_admin_hideout', name: 'Admin Matt', title: 'Team Aqua Admin', ai: 'smart',
+    intro: ['Matt, Team Aqua, bro — and this harbour, this boat, this whole beautiful schedule is OURS now. The boss has waited his whole life to go down where the sea keeps its first heartbeat. You are not postponing that, trainer. Nobody is.'],
+    lose: ['Postponed — me, anyway. Boss! BOSS, the schedule has a trainer-shaped problem!'],
+    team: [
+      { species: 'mightyena', level: 272 },
+      { species: 'sharpedo', level: 275 },
+    ],
+    reward: 3000,
+  },
+  archie: {
+    id: 'archie', name: 'Archie', title: 'Team Aqua Leader', ai: 'smart',
+    intro: ['Archie, of Team Aqua. I have dreamed of the deep since I was a boy the sea kept almost taking. Everything above the water is borrowed, trainer — I am simply returning the region to its owner. The submarine goes down with or without your blessing. Choose how this looks.'],
+    lose: ['Chosen — and chosen well, you magnificent storm warning. But hear the harbour, trainer: the engines are already turning. The submarine is GONE, and so am I. The deep is calling, and for once in my life, I am answering on time.'],
+    team: [
+      { species: 'mightyena', level: 276 },
+      { species: 'crobat', level: 277 },
+      { species: 'sharpedo', level: 278 },
+    ],
+    reward: 6000,
+  },
+  // --- H4b: Wally, grown (Victory Road, in-band 286-292) ---
+  wally_final: {
+    id: 'wally_final', name: 'Wally', title: 'Trainer', ai: 'smart',
+    intro: ['You remembered my name kindly, {player}. I have thought about how this sentence ends for a whole region: not with thanks. With a battle. Ralts is a Gardevoir now, and my hands do not shake at the wrong moments anymore. They shake at the right ones. Face me — the way I always meant to face you.'],
+    lose: ['There it is. There is the whole road, in one battle: the pond grass, the borrowed Zigzagoon, and THIS. I am not the boy who needed help standing anymore — and you are still the trainer who helped him stand. Both of those are true. The league doors are yours. Mine will keep. I will be right behind you, forever, one road back and closing.'],
+    team: [
+      { species: 'altaria', level: 286 },
+      { species: 'delcatty', level: 288 },
+      { species: 'roselia', level: 289 },
+      { species: 'magneton', level: 290 },
+      { species: 'gardevoir', level: 292, keepsake: 'gardeniasash' },
+    ],
+    reward: 7000,
+  },
+  // --- H4b: the Ever Grande Conference bracket ---
+  conference_h_p1: {
+    id: 'conference_h_p1', name: 'Soren', title: 'Conference Trainer', ai: 'smart',
+    intro: ['Preliminary one, and the draw gives me the trainer the whole harbour is talking about. Good. I did not cross the sea roads to be anyone\'s footnote.'],
+    lose: ['Footnote it is — but a loud one. Climb, trainer. The bracket gets heavier from here.'],
+    team: [
+      { species: 'manectric', level: 288 },
+      { species: 'flygon', level: 290 },
+      { species: 'walrein', level: 291 },
+    ],
+    reward: 3400,
+  },
+  conference_h_p2: {
+    id: 'conference_h_p2', name: 'Priya', title: 'Conference Trainer', ai: 'smart',
+    intro: ['Second preliminary. I watched your first match from the rail and took four pages of notes. Page five is titled: how I beat you. Let us write it together.'],
+    lose: ['Page five, revised: how you beat me. Fairly, and in front of everyone I know. Tyson is deeper in, trainer — and Morrison is between you and him, smiling.'],
+    team: [
+      { species: 'breloom', level: 290 },
+      { species: 'aggron', level: 292 },
+      { species: 'milotic', level: 293 },
+    ],
+    reward: 3600,
+  },
+  morrison: {
+    id: 'morrison', name: 'Morrison', title: 'Conference Trainer', ai: 'smart',
+    intro: ['Morrison! Your semi-final, my semi-final, and a friendship the bracket does not care about one bit. I checked: it really does not. So — no holding back, either of us. That IS the friendship, as far as I can tell.'],
+    lose: ['Beaten by my friend, in a semi-final, with the whole region watching — do you know, I would not trade a single part of that sentence. The final is yours, trainer. Tyson is waiting, and his Meowth has never once smiled at anyone. Go and give it a reason to.'],
+    team: [
+      { species: 'girafarig', level: 293 },
+      { species: 'growlithe', level: 294 },
+      { species: 'swampert', level: 296, keepsake: 'tortoisecharm' },
+    ],
+    reward: 5000,
+  },
+  // TYSON — the final, and the Tyson mechanism (the Harrison
+  // precedent, mirrored exactly): a scripted forced result is
+  // INEXPRESSIBLE in this engine (no scripted-outcome step for
+  // trainer battles), so the final ships as a REAL full-strength
+  // battle fought FRIENDLY whose completion predicate is FACED.
+  // The canonical narrow loss STANDS on the loss branch with
+  // canon-honours text; on a win the branch acknowledges the upset
+  // on the floor (the Harrison solution) — and hoenn_complete is
+  // set either way, because the arc's win was never this card:
+  // it was the climax, the eight badges, and Scott's invitation.
+  tyson: {
+    id: 'tyson', name: 'Tyson', title: 'Ever Grande Conference Finalist', ai: 'smart',
+    intro: ['Tyson. You have beaten everyone the bracket put between us, including my friend — he is in the front row now, cheering for both of us, which is very Morrison of him. This is the final, trainer. I did not come to Ever Grande to be a chapter in anyone else\'s story. Come and take the ending, if it is yours.'],
+    lose: ['There it is. There is the final I crossed a region for.'],
+    team: [
+      { species: 'hariyama', level: 294 },
+      { species: 'shiftry', level: 295 },
+      { species: 'donphan', level: 296 },
+      { species: 'sceptile', level: 297 },
+      { species: 'meowth', level: 297 },
+      { species: 'metagross', level: 298, keepsake: 'ironacorn' },
+    ],
+    reward: 12000,
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -151182,7 +151450,118 @@ const HOENN_EVENTS = {
     { flag: 'meteorite_teased' },
     { toast: 'The Chimney clash broke up — for now.' },
   ],
-  // --- H4b events append here ---
+  // -- Weather Institute: the takeover (r119 entry, Balance held) ---
+  // Team Aqua holds the Institute for its rain records (our staging
+  // of the canon institute beat). battleAny: the story survives
+  // either way; the records are freed regardless, and the grateful
+  // staff hand over the Institute's own Castform — canon's gift, and
+  // Castform's obtainable source in this game (flagged for H6/H7:
+  // castform_received; species dex 351, ONE entry, no formes —
+  // ruling 2).
+  ev_hoenn_institute: [
+    { say: ['The Weather Institute stands over Route 119\'s rain like a lighthouse over a harbour — and today its windows are watched by blue scarves. Inside, the great rain-gauges tick in a held breath of a room, and a researcher with a clipboard meets you at the door at a run.'], who: 'NARRATOR' },
+    { say: ['They came an hour ago — polite, at first. Drought records, deluge records, a hundred years of sky, and they would not say WHY. Then polite ran out. Their admin is upstairs with our director and our Castform, and the stairs are watched. Trainer — please. The sky is the one thing this valley reads honestly. Do not let them make it a weapon with footnotes.'], who: 'INSTITUTE DIRECTOR\'S AIDE' },
+    { battleAny: { trainer: 'aqua_admin_institute', winFlag: 'institute_aqua_won', loseFlag: 'institute_aqua_lost' } },
+    { say: ['Win or lose, the moment breaks the takeover\'s nerve: word runs down the stairs that the road has arrived in force, the blue scarves pour out into the rain they came to study, and the Institute exhales all at once — gauges ticking, kettle on, a hundred years of sky safe in its ledgers.', 'From the director, with the whole staff behind her: "Our Castform has lived in this building\'s weather all its life — it has never once been surprised by the sky. Take it with you, trainer. Where you are going, the sky is about to do things our ledgers have no columns for. It should have a witness it trusts."'], who: 'NARRATOR' },
+    { giveMon: { species: 'castform', level: 258 } },
+    { flag: 'institute_done' },
+    { flag: 'castform_received' },
+    { toast: 'The Weather Institute is free — and Castform joined you!' },
+  ],
+
+  // -- Mt. Pyre: the orbs taken (entry, Mind Badge held) --------------
+  // Both teams converge on the shrine; one admin battle (battleAny),
+  // and the orbs are taken in the smoke EITHER WAY — the fiction's
+  // point is that arriving bravely is not the same as arriving in
+  // time. Sets up both hideouts.
+  ev_hoenn_pyre: [
+    { say: ['Mt. Pyre breathes mist and old names. The shrine at its heart keeps two orbs asleep in stone — one the red of banked coals, one the blue of deep water — and today the mist has scarves in it. Red on the lower terraces. Blue on the upper. And between them, two keepers with their backs to the shrine door, doing arithmetic nobody should have to do.'], who: 'NARRATOR' },
+    { say: ['KEEPERS! They mean to take the orbs — the leashes of the old ones! Children, the mountain has kept them sleeping since before there were teams to want them. Whatever else happens on this mountain today — remember that we TRIED to keep the world\'s oldest argument in its bed.'], who: 'PYRE KEEPER SATO' },
+    { battleAny: { trainer: 'magma_admin_pyre', winFlag: 'pyre_magma_won', loseFlag: 'pyre_magma_lost' } },
+    { say: ['The battle\'s noise is the cover, and both crews knew it before you did. In the smoke and the shouting, hands close on stone at the shrine — red-scarfed hands take the red orb, blue-scarfed the blue, and the mountain\'s mist swallows both crews whole before any keeper\'s voice can hold them.', 'The shrine stands empty for the first time in living memory, and somehow the mist is louder than the battle was. The keepers look at the bare stone the way sailors look at a horizon that has started, very carefully, to choose a colour.'], who: 'NARRATOR' },
+    { flag: 'pyre_done' },
+    { flag: 'orbs_taken' },
+    { flag: 'red_orb_taken' },
+    { flag: 'blue_orb_taken' },
+    { toast: 'The orbs were taken from Mt. Pyre.' },
+  ],
+
+  // -- Magma Hideout: the caldera door (entry, orbs taken) -----------
+  ev_hoenn_magma_hideout: [
+    { say: ['The caldera door H3\'s road hinted at stands open on furnace air. Inside Mt. Chimney, Team Magma has built a second crater — orderly, humming, terrified of its own leader\'s patience — and at its heart, under glass, the red orb turns slowly in its cradle like something dreaming of weather.'], who: 'NARRATOR' },
+    { battleAny: { trainer: 'magma_admin_hideout', winFlag: 'magma_hideout_won', loseFlag: 'magma_hideout_lost' } },
+    { battleAny: { trainer: 'maxie', winFlag: 'maxie_won', loseFlag: 'maxie_lost' } },
+    { say: ['Whatever the battles decided, Maxie\'s retreat is a scientist\'s, not a soldier\'s: measured, unhurried, and already elsewhere. The orb cradle stands empty — not smashed, not looted. Carried out the way a surgeon carries a heart. On the console, one line of the plan remains lit, and it is not about land at all. It is a depth sounding.', 'The furnace room ticks as it cools. Somewhere under the sea your rivals worship, an old fire is about to be introduced to salt water — and Maxie is counting on the introduction going exactly the way a mountain would want it to.'], who: 'NARRATOR' },
+    { flag: 'magma_hideout_done' },
+    { flag: 'maxie_faced' },
+    { toast: 'The Magma Hideout is emptied — the orb went deeper.' },
+  ],
+
+  // -- Aqua Hideout: the submarine stolen (entry, Pyre done) ---------
+  ev_hoenn_aqua_hideout: [
+    { say: ['Lilycove harbour, under the warehouse the charts call a boathouse: Team Aqua\'s hideout, all tide-smell and engine light. The research submarine rides her cradle in the flooded dock — a yellow, patient, impossible machine — and blue scarves are casting off her lines one by one with the terrible calm of people ahead of schedule.'], who: 'NARRATOR' },
+    { battleAny: { trainer: 'aqua_admin_hideout', winFlag: 'aqua_hideout_won', loseFlag: 'aqua_hideout_lost' } },
+    { battleAny: { trainer: 'archie', winFlag: 'archie_won', loseFlag: 'archie_lost' } },
+    { say: ['The battles buy minutes, and minutes are not the currency this heist runs on. In the wash of the last exchange the cradle locks sing open, the submarine slides into black harbour water with her lights hooded, and Archie — on her conning tower, saluting no one in particular — goes down with her into the deep he has dreamed about since boyhood.', 'The harbour closes over the theft without a ripple to prosecute. But a stolen submarine leaves one honest clue: her heading. East, then down — toward the trenches off Route 128, where the charts go quiet and the water turns the colour of the first morning.'], who: 'NARRATOR' },
+    { flag: 'aqua_hideout_done' },
+    { flag: 'archie_faced' },
+    { flag: 'submarine_stolen' },
+    { toast: 'The submarine was stolen — it dived toward Route 128.' },
+  ],
+
+  // -- Seafloor Cavern: the first titan wakes (entry, sub stolen) ----
+  // CLIMAX PHASE 1 — DROUGHT. Our staging: Magma reached the deep
+  // chamber first (the depth sounding from the hideout console) and
+  // Maxie, out of patience with the surface, lets the red orb's
+  // leash go in the one place land and sea are the same pressure.
+  // Groudon wakes: climax_drought SET (the deluge flag is not set;
+  // the phases never overlap — see the standoff event).
+  ev_hoenn_seafloor: [
+    { say: ['The Seafloor Cavern is not a cave. It is a held breath the ocean has been holding since the world was young — basalt chambers, water the colour of bottled night, and at its heart a floor that is warm through boot leather. Red scarves have been here. Red scarves are GONE from here, which is worse: their instruments stand abandoned mid-reading, needles pegged, in a silence that is getting hotter.'], who: 'NARRATOR' },
+    { battleAny: { trainer: 'maxie', winFlag: 'seafloor_maxie_won', loseFlag: 'seafloor_maxie_lost' } },
+    { say: ['Whatever the battle\'s verdict, it arrives one heartbeat too late to matter. Maxie — scorched, exultant, halfway to a sermon — holds the red orb up to the chamber\'s heart the way a key is held up to a lock. "The leash," he says, almost gently, "was never for holding. It was for CHOOSING THE MOMENT."', 'The floor answers. Not an earthquake — earthquakes end. This is a waking: heat rolling up through basalt like a sunrise through a wall, light the colour of a kiln\'s heart, and a shape older than the sea floor itself rising out of the world\'s oldest ground with the sun already gathering at its shoulders. Groudon does not roar. The SKY roars for it, all across Hoenn, as the rain simply... stops. Everywhere. At once.', 'Maxie is gone into the light and the steam, laughing or weeping — the cavern does not say. What it says, in heat shimmer and falling dust, is simpler: get to the surface. Get to Sootopolis. A titan is walking toward the sea, and the sea has never once in its life intended to be walked on.'], who: 'NARRATOR' },
+    { flag: 'seafloor_done' },
+    { flag: 'groudon_woken' },
+    { flag: 'climax_drought' },
+    { toast: 'Groudon has woken. The drought begins.' },
+  ],
+
+  // -- Sootopolis: the answer + the standoff (entry, Seafloor done) --
+  // CLIMAX PHASE 2 — DELUGE. Kyogre answers: the drought flag is
+  // CLEARED and the deluge flag SET by this scene's steps (the
+  // clearFlag steps below), so the renderer phases sun -> rain and
+  // the two flags never stand together (the weather module's
+  // drought-wins precedence stays a corruption guard, never a
+  // staged state). The titans CONVERGE here; neither is battled,
+  // caught, or consumed — appearances only (their catch arcs are
+  // H6's, opened by climax_resolved).
+  ev_hoenn_standoff: [
+    { say: ['Sootopolis, from below: a crater lake under a sun that has forgotten how to set, the city\'s white walls shimmering, its people gathered along the water stairs being calm in the specific way of people who have decided to be calm together. The lake is warm. The lake is rising. The lake, a fisherman says to no one, has a heartbeat today.'], who: 'NARRATOR' },
+    { say: ['It comes over the crater rim the way weather used to come when the world was newer: a wall of water with a mind in it, blue as the first deep, and the drought\'s white sky breaks above it like a held note breaking. Kyogre has answered. Rain returns to Hoenn all at once, everywhere, at war with the sun — and between the two titans, in a crater full of steam and screaming gulls, stands one small white city, holding its breath in chorus.'], who: 'NARRATOR' },
+    { clearFlag: 'climax_drought' },
+    { flag: 'climax_deluge' },
+    { flag: 'kyogre_answered' },
+    { say: ['The standoff does not resolve. That is its horror and its mercy: two old answers to the world\'s first question, glaring at each other across a city neither has yet chosen to step on, while the sky tears itself between drought and deluge fast enough to see. An old keeper is waiting by the Cave of Origin\'s mouth, trainer, and she is looking at you the way people look at the last page of a letter.'], who: 'NARRATOR' },
+    { flag: 'standoff_seen' },
+    { toast: 'Kyogre has answered. The standoff holds — for now.' },
+  ],
+
+  // -- Sky Pillar: Rayquaza descends (entry, standoff seen) ----------
+  // CLIMAX RESOLUTION. Rayquaza wakes and descends; BOTH climax
+  // flags are CLEARED by this scene's steps, so the renderer falls
+  // back to per-map fields region-wide (asserted by the suite).
+  // climax_resolved is THE flag H6 keys its titan catch arcs off:
+  // set exactly here, never earlier.
+  ev_hoenn_rayquaza: [
+    { say: ['The Sky Pillar has stood east of Pacifidlog since before there were charts to leave it off of, and its top floor has been slept on, all these centuries, by the sky\'s own answer to the argument below. You climb through weather that cannot decide what it is — rain falling UP past the broken roof-slabs, sunlight arriving in rain\'s clothing — and at the summit, the green serpent of the upper air uncoils from its ring of old stone and considers you the way the horizon considers a ship.'], who: 'NARRATOR' },
+    { say: ['Rayquaza does not battle you. Rayquaza does not even, in any sense the ledgers keep, notice you — and somehow that is the most reassuring thing that has ever happened on this mountain of air. It rises. It shines, once, the green of deep water seen from above. Then the sky over Hoenn simply... opens its hand, and the serpent goes down into the standoff like a verdict coming home.'], who: 'NARRATOR' },
+    { say: ['What the city saw, it will tell for a hundred years: the green light between the titans, the drought guttering out like a candle, the deluge softening to ordinary rain, two old answers turning — slowly, sullenly, ALIVE and unharmed and uncaught — back toward the deep places they came from. The weather over Hoenn becomes weather again: local, arguable, kind. The region breathes. So, eventually, do you.'], who: 'NARRATOR' },
+    { clearFlag: 'climax_drought' },
+    { clearFlag: 'climax_deluge' },
+    { flag: 'rayquaza_descended' },
+    { flag: 'climax_resolved' },
+    { toast: 'Rayquaza descended. The clash of titans is over.' },
+  ],
 };
 
 // ---------------------------------------------------------------------------
@@ -151307,7 +151686,51 @@ const HOENN_NPCS = [
     dialogue: ['Watch the sky, trainer. When it chooses sides, we failed to stop it.'] },
   { map: 'fortree', x: 12, y: 10, name: 'WEATHER WATCHER ILSE', art: 'picnicker', skin: '#e8b888', shirt: '#3a7a6a', pants: '#3a3a2a', hair: '#5a3a2a', hoenn: 'weather_watcher',
     dialogue: ['The Institute up the route reads this valley\'s rain like scripture. Lately the scripture argues back.'] },
-  // --- H4b actors append here ---
+  // --- H4b actors ---
+  { map: 'gym-petalburg', x: 4, y: 5, name: 'ACE TRAINER DARIO', art: 'acetrainer', skin: '#d8a878', shirt: '#4a6a8a', pants: '#2a2a3a', hair: '#1a1a1a', trainer: 'petalburg_gym_1',
+    dialogue: ['Stand honestly, trainer.'] },
+  { map: 'gym-petalburg', x: 11, y: 5, name: 'COOL TRAINER MARN', art: 'lass', skin: '#f0c8a0', shirt: '#7a4a6a', pants: '#2a2a3a', hair: '#3a2a4a', trainer: 'petalburg_gym_2',
+    dialogue: ['Then the weight arrives, all at once, honestly.'] },
+  { map: 'gym-fortree', x: 7, y: 2, name: 'WINONA', art: 'gym3', skin: '#f0c8a0', shirt: '#5a7a9a', pants: '#e8e8e8', hair: '#7a9ab8', hoenn: 'winona',
+    dialogue: ['Mind the canopy, challenger, and mind the wind.'] },
+  { map: 'gym-fortree', x: 4, y: 5, name: 'BIRD KEEPER ANSEL', art: 'camper', skin: '#e8b888', shirt: '#3a7a5a', pants: '#3a3a2a', hair: '#5a3a1a', trainer: 'fortree_gym_1',
+    dialogue: ['If you cannot see the wind, battle like it sees you.'] },
+  { map: 'gym-fortree', x: 11, y: 5, name: 'PICNICKER WREN', art: 'picnicker', skin: '#f0c8a0', shirt: '#c8a03a', pants: '#2a4a3a', hair: '#8a5a2a', trainer: 'fortree_gym_2',
+    dialogue: ['I picnic at altitude and battle at altitude.'] },
+  { map: 'gym-mossdeep', x: 7, y: 2, name: 'TATE', art: 'kid', skin: '#f0d8b8', shirt: '#6a5a9a', pants: '#2a2a3a', hair: '#3a3a6a', hoenn: 'tate_liza',
+    dialogue: ['I am Tate — the left half of this gym.'] },
+  { map: 'gym-mossdeep', x: 9, y: 2, name: 'LIZA', art: 'lass', skin: '#f0d8b8', shirt: '#8a5a9a', pants: '#2a2a3a', hair: '#3a3a6a', hoenn: 'liza_flavor',
+    dialogue: ['Liza — the half that was listening.'] },
+  { map: 'gym-mossdeep', x: 4, y: 5, name: 'PSYCHIC HOLLIS', art: 'scientist', skin: '#d8a878', shirt: '#5a5a7a', pants: '#2a2a3a', hair: '#2a2a3a', trainer: 'mossdeep_gym_1',
+    dialogue: ['Losing here is educational.'] },
+  { map: 'gym-mossdeep', x: 11, y: 5, name: 'HEX MANIAC IONE', art: 'lass', skin: '#e8b888', shirt: '#3a2a4a', pants: '#2a2a3a', hair: '#1a1a2a', trainer: 'mossdeep_gym_2',
+    dialogue: ['Plan for two battles, trainer.'] },
+  { map: 'gym-sootopolis', x: 7, y: 2, name: 'JUAN', art: 'gym5', skin: '#e8b888', shirt: '#2a4a6a', pants: '#e8e8e8', hair: '#e8e8e8', hoenn: 'juan',
+    dialogue: ['Precisely, and to a finish.'] },
+  { map: 'gym-sootopolis', x: 4, y: 5, name: 'SWIMMER CATO', art: 'camper', skin: '#d8a878', shirt: '#2a6a8a', pants: '#2a2a3a', hair: '#2a1a0a', trainer: 'sootopolis_gym_1',
+    dialogue: ['Tradition, trainer.'] },
+  { map: 'gym-sootopolis', x: 11, y: 5, name: 'BEAUTY ONDINE', art: 'lass', skin: '#f0c8a0', shirt: '#4a8a9a', pants: '#2a2a3a', hair: '#6a3a5a', trainer: 'sootopolis_gym_2',
+    dialogue: ['Sing, trainer.'] },
+  { map: 'mossdeep', x: 14, y: 9, name: 'STEVEN', art: 'acetrainer', skin: '#f0c8a0', shirt: '#4a4a5a', pants: '#6a2a2a', hair: '#b8c8d8', hoenn: 'steven',
+    dialogue: ['Stones, steel, and the deep road. I collect all three.'] },
+  { map: 'contest-lilycove', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_lilycove',
+    dialogue: ['The last hall on my road. Watch how it ends.'] },
+  { map: 'lilycove', x: 16, y: 8, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_festival',
+    dialogue: ['The Grand Festival, {player}. My whole road, in one hall.'] },
+  { map: 'victory-road', x: 11, y: 6, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7a9a4a', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally_final',
+    dialogue: ['I have thought about how this sentence ends for a whole region.'] },
+  { map: 'cave-of-origin', x: 8, y: 7, name: 'KEEPER ANTHEA', art: 'elder', skin: '#e8b888', shirt: '#6a5a3a', pants: '#2a2a3a', hair: '#c0c0c0', hoenn: 'origin_keeper',
+    dialogue: ['The cave keeps the first argument. The sky keeps its answer.'] },
+  { map: 'petalburg-woods', x: 12, y: 9, name: 'AURA KEEPER', art: 'elder', skin: '#d8a878', shirt: '#3a5a3a', pants: '#2a2a3a', hair: '#e8e8e8', hoenn: 'lucario_keeper',
+    dialogue: ['The old tree remembers an aura that walked like a friend.'] },
+  { map: 'league-evergrande', x: 9, y: 5, name: 'LEAGUE REGISTRAR', art: 'scientist', skin: '#e8b888', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#4a3a2a', hoenn: 'hoenn_conference',
+    dialogue: ['Eight badges open this bracket, trainer.'] },
+  { map: 'league-evergrande', x: 13, y: 8, name: 'MORRISON', art: 'youngster', skin: '#f0c8a0', shirt: '#c85a2a', pants: '#2a4a3a', hair: '#7a3a1a', hoenn: 'morrison',
+    dialogue: ['No holding back, either of us. That IS the friendship.'] },
+  { map: 'league-evergrande', x: 11, y: 8, name: 'TYSON', art: 'acetrainer', skin: '#d8a878', shirt: '#2a5a4a', pants: '#2a2a3a', hair: '#2a2a1a', hoenn: 'tyson',
+    dialogue: ['Come and take the ending, if it is yours.'] },
+  { map: 'league-evergrande', x: 15, y: 12, name: 'SCOTT', art: 'gent', skin: '#e8b888', shirt: '#7a6a2a', pants: '#3a3a2a', hair: '#5a4a2a', hoenn: 'scott',
+    dialogue: ['I scout battle the way other men scout weather: professionally, and with great enjoyment.'] },
 ];
 
 const HOENN_NPC_PATCHES = [
@@ -152232,6 +152655,18 @@ const MAP_GROUND = {
   'gym-lavaridge': 'pyre', // Lavaridge Gym — Flannery
   'meteor-falls': 'rubble',
   'mt-chimney': 'ember',
+  // Stage H4b: Hoenn east gym signature Grounds (existing 15 only):
+  // Norman's honest weight rides the Open, Winona's canopy the
+  // Storm, the twins' shared mind the Mind, Juan's conducted water
+  // the Tide. Landmarks follow their feel likewise.
+  'gym-petalburg': 'open', // Petalburg Gym — Norman
+  'gym-fortree': 'storm', // Fortree Gym — Winona
+  'gym-mossdeep': 'mind', // Mossdeep Gym — Tate & Liza
+  'gym-sootopolis': 'tide', // Sootopolis Gym — Juan
+  'mt-pyre': 'grave',
+  'seafloor-cavern': 'tide',
+  'cave-of-origin': 'spirit',
+  'sky-pillar': 'storm',
   'mt-silver-cave': 'frost',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
@@ -164735,6 +165170,32 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_hoenn_chimney');
       }
     }
+    // Stage H4b (Hoenn story, second half): map-entry scenes, same
+    // idiom and same gate law — each scene's own completion flag is
+    // its gate, so a fled or stalled beat re-fires on a later entry.
+    // The chain order is the fiction's: Institute (Balance held) ->
+    // Pyre (Mind held) -> the two hideouts (orbs taken / Pyre done)
+    // -> Seafloor (submarine stolen) -> the Sootopolis standoff
+    // (Seafloor done) -> Sky Pillar (standoff seen). The climax
+    // phase flags move ONLY inside these scenes' steps.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const hf = g.state.story.flags;
+      if (id === 'r119' && hf.badge_balance && !hf.institute_done && !hf.ev_hoenn_institute_done) {
+        this.runEvent('ev_hoenn_institute');
+      } else if (id === 'mt-pyre' && hf.badge_mind && !hf.orbs_taken && !hf.ev_hoenn_pyre_done) {
+        this.runEvent('ev_hoenn_pyre');
+      } else if (id === 'magma-hideout' && hf.orbs_taken && !hf.magma_hideout_done && !hf.ev_hoenn_magma_hideout_done) {
+        this.runEvent('ev_hoenn_magma_hideout');
+      } else if (id === 'aqua-hideout' && hf.pyre_done && !hf.submarine_stolen && !hf.ev_hoenn_aqua_hideout_done) {
+        this.runEvent('ev_hoenn_aqua_hideout');
+      } else if (id === 'seafloor-cavern' && hf.submarine_stolen && !hf.seafloor_done && !hf.ev_hoenn_seafloor_done) {
+        this.runEvent('ev_hoenn_seafloor');
+      } else if (id === 'sootopolis' && hf.seafloor_done && !hf.standoff_seen && !hf.ev_hoenn_standoff_done) {
+        this.runEvent('ev_hoenn_standoff');
+      } else if (id === 'sky-pillar' && hf.standoff_seen && !hf.climax_resolved && !hf.ev_hoenn_rayquaza_done) {
+        this.runEvent('ev_hoenn_rayquaza');
+      }
+    }
   },
 
   boulderAt(x, y) {
@@ -164884,6 +165345,11 @@ Object.assign(OverworldScene.prototype, {
     if (s.say) { g.ui.say(s.say, next, s.who || ''); return; }
     if (s.toast) { g.ui.toast(s.toast); next(); return; }
     if (s.flag) { g.state.story.flags[s.flag] = true; next(); return; }
+    // Stage H4b: a flag CLEAR step — the climax's phase transitions
+    // (drought -> deluge -> resolved) are data steps in the Hoenn
+    // events, not engine special cases. Setting false (not delete)
+    // keeps the save's flag vocabulary stable for the validator.
+    if (s.clearFlag) { g.state.story.flags[s.clearFlag] = false; next(); return; }
     if (s.quest) { g.state.story.quests[s.quest] = 'active'; next(); return; }
     if (s.questDone) { g.state.story.quests[s.questDone] = 'complete'; next(); return; }
     if (s.arc) {
@@ -165236,6 +165702,51 @@ Object.assign(OverworldScene.prototype, {
       }
       return true;
     }
+    // Stage H4b: scoped Dive (coordinator ruling 5). A dive spot is
+    // a DEFINED tile only — the current map's diveSpots (surface) or
+    // surfaceSpots (underwater), cross-checked against maps7's
+    // DIVE_PAIRS table (the two declarations are two views of the
+    // same pairing; a spot that no pair claims is not a dive spot).
+    // The player may stand ON the spot (surfing the trench) or face
+    // it from an adjacent tile. Descent is gated exactly like the
+    // ferry gate idiom: the Mind Badge AND a party member that knows
+    // Dive — refusals are dialogue naming the missing piece. The
+    // return (surfaceSpots) is UNCONDITIONAL: no badge, no move, no
+    // menu toll on the way up — the no-soft-lock law.
+    {
+      const px = this.player ? this.player.tx : -1, py = this.player ? this.player.ty : -1;
+      const onOrFaced = (s) => (s.x === fx && s.y === fy) || (s.x === px && s.y === py);
+      const surfSpot = (this.map.surfaceSpots || []).find(onOrFaced);
+      if (surfSpot && this.map.underwater) {
+        const pair = DIVE_PAIRS.find((p) => p.underwater === this.mapId
+          && p.underwaterTile.x === surfSpot.x && p.underwaterTile.y === surfSpot.y);
+        if (pair) {
+          g.ui.showMenu('The light is up there, bright as a door. Surface?', [
+            { label: 'Surface', value: 'yes' }, { label: 'Stay down', value: 'no' },
+          ], (v) => { if (v === 'yes') this.diveWarp(surfSpot.to); });
+          return true;
+        }
+      }
+      const diveSpot = (this.map.diveSpots || []).find(onOrFaced);
+      if (diveSpot) {
+        const pair = DIVE_PAIRS.find((p) => p.surface === this.mapId
+          && p.surfaceTile.x === diveSpot.x && p.surfaceTile.y === diveSpot.y);
+        if (pair) {
+          if (!((g.state.badges && g.state.badges.hoenn) || []).includes('mindbadge')) {
+            g.ui.say(['The water here goes down like a stairway into dark blue — a dive spot, marked by the old sea-charts.', 'Come back with the Mind Badge in your case — Mossdeep\'s gym, out east. The League does not let trainers down into the trenches without it.']);
+            return true;
+          }
+          if (!this.partyKnowsDive()) {
+            g.ui.say(['The water here goes down like a stairway into dark blue — a dive spot, marked by the old sea-charts.', 'You have the Mind Badge, but no partner who knows Dive. Steven Stone, in Mossdeep, teaches the way down — his house stands by the shore.']);
+            return true;
+          }
+          g.ui.showMenu('The water darkens straight down. Dive?', [
+            { label: 'Dive', value: 'yes' }, { label: 'Not now', value: 'no' },
+          ], (v) => { if (v === 'yes') this.diveWarp(diveSpot.to); });
+          return true;
+        }
+      }
+    }
     // Water: Surf or fish.
     if (t === '~' || t === 'W') {
       if (!this.surfing) {
@@ -165264,6 +165775,29 @@ Object.assign(OverworldScene.prototype, {
       }
     }
     return false;
+  },
+
+  // Stage H4b: Dive knowledge, in Surf's exact representation with
+  // one honest difference. Surf is an in-table battle move, so its
+  // knowledge IS a move slot (partyKnows reads moves). 'dive' is NOT
+  // in this game's move table (no new moves this mission), so there
+  // is no battle move to slot: Dive's knowledge is recorded where
+  // teachMove records HM-taught field knowledge — the mon's
+  // hmMoves list — without occupying a battle slot, and a mon that
+  // somehow carries an in-table 'dive' slot also counts. Steven's
+  // teaching (runHoennNpc) writes the hmMoves entry directly.
+  partyKnowsDive() {
+    return this.game.state.party.some((m) => (m.moves || []).some((mv) => mv.id === 'dive')
+      || (m.hmMoves || []).includes('dive'));
+  },
+
+  // The dive/surface warp: the shipped doWarp path (banner, music,
+  // autosave, position) with surfing cleared — underwater maps are
+  // walked, not surfed, and the surface landing is dry land's edge.
+  diveWarp(to) {
+    this.surfing = false;
+    this.doWarp(to, {});
+    this.game.audio.playSfx('map-enter');
   },
 
   startSurf(fx, fy) {
@@ -166506,9 +167040,14 @@ Object.assign(OverworldScene.prototype, {
         say(['Norman. I keep this gym, and the road to it: four badges stand between a challenger and my door, by the League\'s order and by my own judgment.', 'You have the look of a road that ends here eventually, {player}. Walk it honestly. When you stand in this room with four badges, I will not be a formality — I will be the wall the first half of Hoenn was building toward. Go and earn the meeting.'], () => { flags.norman_met = true; });
         return true;
       }
-      if (hBadges.length >= 4) { say(['Four badges. The wall is ready when you are, {player} — but not today. Some meetings deserve their own season. (H4b note, whispered by the gym itself: this battle ships with the east half.)']); return true; }
-      say(['The road is counting, {player}: ' + hBadges.length + ' of the four badges my door asks for. Rustboro, Dewford, Mauville, Lavaridge — in that order, earned honestly. I will be here. Balance keeps.']);
-      return true;
+      if (hBadges.includes('balancebadge')) { say(['Balance, held — by the trainer I deferred in this room, which remains my favourite sentence of the year. East now, {player}: the rain road, the sea, the deep. Keep standing honestly.']); return true; }
+      if (hBadges.length < 4) {
+        say(['The road is counting, {player}: ' + hBadges.length + ' of the four badges my door asks for. Rustboro, Dewford, Mauville, Lavaridge — in that order, earned honestly. I will be here. Balance keeps.']);
+        return true;
+      }
+      // H4b: four badges held — the deferred meeting pays off.
+      // Norman falls through to the shared leader runner below
+      // (LEADERS.norman carries his entry).
     }
 
     if (kind === 'cozmo') {
@@ -166531,6 +167070,227 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
+    // ---- H4b east actors ----
+    if (kind === 'may_contest_lilycove') {
+      return mayContest('Lilycove', 'featherbadge', 'may_lilycove_done', 'may_ribbon_lilycove',
+        ['Lilycove is the last hall, {player} — and the biggest. I am not walking into it until the Feather Badge is yours and the sea road is behind us both. Winona first. Then watch me finish this.'],
+        ['Harbour lights, a full house, and my whole road in one appeal set... and the last card turned MY way, {player}. LILYCOVE. Three ribbons. Slateport\'s half point is IN this one — I spent it here, on the biggest floor in Hoenn, and it was worth every fraction.', 'One thing remains, and it is not in a hall like the others. The Grand Festival. Coordinators from the whole region, one stage, invitations earned in ribbon cases like mine. Mine just qualified. When your road lets you, harbourside — I will tell you the rest where the boats can hear it.'],
+        ['Three ribbons, {player}, and a Festival invitation with my name spelled right. Harbourside, when you are ready — the ending of my road is a boat ride and a promise.']);
+    }
+    if (kind === 'may_festival') {
+      if (flags.may_festival_done) { say(['The Festival is behind me and the whole sea road is ahead, {player}. Whatever hall is next — and there is always a next one — it gets the coordinator Lilycove made. Wish your road the same: endings that are also doors.']); return true; }
+      if (!flags.may_lilycove_done) { say(['You found me rehearsing, {player}. The Lilycove hall first — a coordinator keeps her order too. Three ribbons, then this conversation, in that sequence.']); return true; }
+      say(['Here it is, then — the end of my road, said out loud where the boats can hear it. The Grand Festival committee read my case this morning: Slateport\'s schooling, Verdanturf, Fallarbor, Lilycove. The invitation is real, {player}. I am sailing for the Festival at the next tide.', 'You sat in my world at every hall on this coast. So hear the last of it as my guest, not my audience: whatever the Festival decides, this road was mine, I walked it at full stretch, and I am not afraid of its ending. That is what your gyms taught me, by the way. Do not tell the judges.', 'Four ribbons ride in my case now — the Festival\'s own commendation makes the set, whatever the big stage decides. Go and finish YOUR road, {player}. Ever Grande is lit. I will be cheering loud enough to grade the echo.'], () => {
+        flags.may_festival_done = true;
+        flags.may_grand_festival_done = true;
+        flags.may_ribbon_grandfestival = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('May departed for the Grand Festival — four ribbons in her case.');
+      });
+      return true;
+    }
+
+    if (kind === 'steven') {
+      if (!hBadges.includes('mindbadge')) { say(['Steven Stone. I collect rare stones, rarer battles, and — lately — weather reports I do not enjoy. The twins keep this city\'s gym, trainer. What I teach is for Mind Badge holders only: the deep road is not a shortcut, and it does not forgive tourists.']); return true; }
+      if (flags.dive_taught || this.partyKnowsDive()) { say(['The trenches are open to you now, {player}. Remember what the deep is: not a place that hates you — a place that has never once needed you. Surface whenever you choose; the way up asks nothing. That is the whole ethic of diving, and of most worthwhile roads.']); return true; }
+      say(['Steven Stone — and you hold the Mind Badge, which makes this your lesson to claim. Dive: the field craft of descending at the dark-water spots the old charts mark, trenches off Routes 124, 126, 127, 128, and one very private lake in Sootopolis. It is knowledge, not a battle move — it will ride in your partner\'s field craft, the way the old HM teachings are kept, and it will never take a battle slot.', 'Choose the partner who learns it. Choose a strong swimmer at heart; the deep can tell.'], () => {
+        const items = st.party.map((m, i) => ({ label: displayName(m, SPECIES), value: i }));
+        items.push({ label: 'Not yet', value: -1 });
+        g.ui.showMenu('Who should learn Dive?', items, (v) => {
+          if (v === null || v === -1) return;
+          const mon = st.party[v];
+          if (!mon) return;
+          mon.hmMoves = mon.hmMoves || [];
+          if (!mon.hmMoves.includes('dive')) mon.hmMoves.push('dive');
+          flags.dive_taught = true;
+          g.audio.playSfx('dex-register');
+          g.ui.say([displayName(mon, SPECIES) + ' learned Dive!', 'Mind the gate the League keeps on it: badge and knowledge, both, or the trench refuses you — by name, so you always know what is missing. The way UP asks nothing. Ever. Surface spots are doors that only open outward.'], null, 'STEVEN');
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'liza_flavor') {
+      if (hBadges.includes('mindbadge')) { say(['Two minds, one gym, one badge — given. Tate is replaying your second battle in his head and losing it more slowly each time. That is his way of applauding.']); return true; }
+      if (flags.beat_tate) { say(['My half is next, challenger. Tate was the introduction. I am the argument. Speak to him when you are ready to begin again — we keep our order, even mid-lesson.']); return true; }
+      say(['Tate opens, I close, and the gym is the conversation between us. He is waiting, challenger — left half first.']);
+      return true;
+    }
+    if (kind === 'tate_liza') {
+      if (hBadges.includes('mindbadge')) { say(['The Mind Badge, held — the pair\'s whole lesson, learned. The deep road is yours now, challenger. Steven\'s house, by the shore. Tell him the twins sent their best student.']); return true; }
+      const orderRefusal = badgeOrderRefusal('mindbadge');
+      if (orderRefusal) { say(orderRefusal); return true; }
+      // The pair, staged back to back (the recorded adaptation at
+      // their trainer defs): Tate's battle, then — on a win only —
+      // Liza's, which carries the badge. Losing to Liza leaves
+      // beat_tate standing; the pair re-runs in order.
+      const challengeLiza = () => {
+        const lt = TRAINERS.liza;
+        say([lt.intro[0]], () => {
+          g.ui.showMenu('Face Liza — the second half?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startHoennBattle('liza', null); });
+        }, 'LIZA');
+      };
+      if (flags.beat_tate) { challengeLiza(); return true; }
+      const tt = TRAINERS.tate;
+      say([tt.intro[0]], () => {
+        g.ui.showMenu('Face Tate — the first half?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startHoennBattle('tate', (won) => { if (won) challengeLiza(); });
+        });
+      }, 'TATE');
+      return true;
+    }
+
+    if (kind === 'wally_final') {
+      if (flags.wally_final_done) { say(['Right behind you, forever, one road back and closing, {player}. That was always the promise. The doors are yours — walk through them like the whole of Hoenn is watching. It is. I checked. I am some of it.']); return true; }
+      if (!hBadges.includes('rainbadge')) { say(['You — here? No. Not yet, {player}. Not before Sootopolis, not before the last badge. I waited a whole region for this battle to mean the whole region. Earn the full road first. Then find me where the victories are kept. I will be standing in it.']); return true; }
+      const wt = TRAINERS.wally_final;
+      say([wt.intro[0].replace('{player}', st.player.name)], () => {
+        g.ui.showMenu('Face Wally — Victory Road?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startHoennBattle('wally_final', (won) => { if (won) flags.wally_final_done = true; });
+        });
+      }, 'WALLY');
+      return true;
+    }
+
+    if (kind === 'lucario_keeper') {
+      // The Lucario special (chronology-mapping.md, Chapter 6 —
+      // "Rise Through Hoenn": Lucario and the Mystery of Mew is
+      // listed among Hoenn's special story events, so it stages
+      // IN-ARC, here). Original writing; the Tree of Beginning beat
+      // is abstracted to our fiction — a great-tree root chamber in
+      // Petalburg Woods and an aura that walked like a friend.
+      // Honest limit, recorded: Lucario is a Sinnoh-dex species
+      // (Arc 4's horizon), so no Lucario battle or catch is staged
+      // or faked here; the event is the aura-legend beat itself.
+      if (flags.lucario_event_done) { say(['The tree keeps its counsel and its flowers, {player}. Some meetings are not battles, and some friends are not caught. They are recognised. Walk well — something in the wood is walking well because you stopped here.']); return true; }
+      say(['You feel it too, then. Everyone with a kind team does, eventually, in this part of the wood. Sit a moment, trainer. The old tree is telling its story again, and it tells it in aura, not words — I only translate.', 'Long ago — the keepers\' count says before the gyms, before the League — a guardian walked these woods whose aura burned the blue of deep water. No ball ever held it. No trainer ever commanded it. It came when the tree was threatened, it fought like weather, and it stayed, afterward, the way a friend stays: without being asked twice.', 'The time-flowers still open along the roots when a worthy aura passes. Look — along the north root. Opening. For YOUR team, trainer, the way the stories say they opened for the guardian\'s friend, all those centuries ago. Whatever road that aura walked next... the flowers think yours rhymes with it.', 'Take that with you. Not a badge, not a ribbon — a recognition. The wood remembers a lucario-hearted guardian, and today it decided your team walks in the same light. Somewhere far north, in a region of mountains and snow, that story has a second half. But its first half happened HERE, in Hoenn\'s green dark, and now you are in it.'], () => {
+        flags.lucario_event_done = true;
+        flags.lucario_aura_seen = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('The aura flowers opened — the Lucario legend, witnessed in Hoenn.');
+      });
+      return true;
+    }
+
+    if (kind === 'origin_keeper') {
+      if (flags.climax_resolved) { say(['The cave is quiet, the lake is a lake again, and the sky over my city has gone back to arguing in private, the way weather should. You pointed UP, trainer, when pointing was the hardest work in the world. Sootopolis remembers.']); return true; }
+      if (flags.standoff_seen) {
+        say(['You have seen them, then — the two old answers, glaring across my city\'s water. The cave behind me is where their argument was first carved, and carving is all it can do now. The ANSWER is not down here, trainer. It never was.', 'It is UP. East of Pacifidlog, where the charts go polite and vague, a pillar stands that the sky built for its own guardian. Climb it. Wake what sleeps at its top. And when the green light comes down — be somewhere the whole region can see you standing. It matters that someone stood.'], () => { flags.origin_guidance = true; });
+        return true;
+      }
+      if (flags.climax_drought || flags.climax_deluge) { say(['The cave mouth is weeping steam, trainer, and the old carvings are too hot — or too drowned — to read. Whatever has woken, the answer to it is not in this cave. It is ABOVE. Remember that when the city needs it: above.']); return true; }
+      say(['I keep the Cave of Origin — the first argument, carved in stone, between the land that rose and the sea that covered it. The carvings are quiet today, trainer. Keep them that way, if the road ever gives you the choice.']);
+      return true;
+    }
+
+    if (kind === 'hoenn_conference') {
+      if (flags.hoenn_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Ever Grande book in the good ink, trainer. A man named Scott has been asking after you by name, which at a Conference means exactly what you hope it means.']); return true; }
+      if (hBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Hoenn badges open this bracket; you hold ' + hBadges.length + '. Sootopolis is the usual last stop, and it is reached from below. I will keep your page open.']); return true; }
+      if (!flags.climax_resolved) { say(['Eight badges — counted, verified, well carried. And yet I cannot open the bracket while the sky itself is undecided, trainer. Finish the region\'s weather first. The Conference will be here; it has waited through worse than a titan or two. Well. Comparable.']); return true; }
+      if (!flags.hoenn_conference_registered) {
+        say(['Eight badges, a quiet sky, and a name the harbour has been carrying for weeks. Let me write you into the Ever Grande Conference properly... There. Registered.', 'The bracket: two preliminary battles, here in this hall — then Morrison, who has been telling the stands you are his favourite problem — then the final. Tyson waits at the end of it, with a Meowth that has never smiled at anyone. Begin when you are ready: speak to me for each preliminary.'], () => {
+          flags.hoenn_conference_registered = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Registered for the Ever Grande Conference!');
+        });
+        return true;
+      }
+      if (!flags.beat_conference_h_p1) {
+        say(['Preliminary one, trainer. Soren, of the sea roads — a clean battler with a cleaner record. The floor is yours when you call it.'], () => {
+          g.ui.showMenu('Begin preliminary one?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startHoennBattle('conference_h_p1', null); });
+        });
+        return true;
+      }
+      if (!flags.beat_conference_h_p2) {
+        say(['One down. Preliminary two: Priya, who has taken four pages of notes on you and titled the fifth after your defeat. Correct her, would you?'], () => {
+          g.ui.showMenu('Begin preliminary two?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startHoennBattle('conference_h_p2', null); });
+        });
+        return true;
+      }
+      if (!flags.beat_morrison) { say(['The preliminaries are behind you, and the semi-final has a friend\'s face: Morrison is on the pitch, warming up like the bracket insulted him personally. It did. It put you in his way.']); return true; }
+      if (!flags.tyson_faced) { say(['Morrison is beaten — he is in the front row now, cheering for both finalists at professional volume. Tyson is on the pitch. End this Conference properly, trainer.']); return true; }
+      say(['The Conference is decided, and decided honestly. The book has it. So does everyone who was here.']);
+      return true;
+    }
+
+    if (kind === 'morrison') {
+      if (flags.hoenn_complete) { say(['Front row, finals, my best friend in one and my favourite defeat in the other. Best week of my life, {player}, and I came SECOND-to-last in it. Imagine how the rest of my year feels. Go — Scott has been pacing the harbour steps with an envelope and a grin.']); return true; }
+      if (flags.beat_morrison) { say(['Beaten, fairly, in a semi-final I will be dining out on for years. Tyson, {player}. The final. His Meowth has never smiled at ANYONE. Make it the second-most interesting thing about your day.']); return true; }
+      if (!flags.beat_conference_h_p2) { say(['Morrison! Semi-finalist, optimist, and — between us — the bracket\'s favourite problem. Preliminaries first, friend: Soren, then Priya. THEN you may have my full and undivided defeat.']); return true; }
+      const mt = TRAINERS.morrison;
+      say([mt.intro[0]], () => {
+        g.ui.showMenu('Face Morrison — the semi-final?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => { if (v === 'yes') this.startHoennBattle('morrison', null); });
+      }, 'MORRISON');
+      return true;
+    }
+
+    if (kind === 'tyson') {
+      if (flags.hoenn_complete) { say(['The book is closed and your name is in it in the good ink, trainer. Whatever either of us does next, this hall saw the real thing. Travel well. Meowth and I will be telling this one for years — Meowth is already telling it, to the harbour, at volume.']); return true; }
+      if (!flags.beat_morrison) { say(['Tyson. We are on a collision course, you and I — but Morrison is your road to me, and the bracket does not bend. Beat my friend first. I will be here, and I will be ready either way.']); return true; }
+      // The final (mechanism recorded at his trainer def — the
+      // Harrison precedent, mirrored): a real full-strength battle
+      // fought FRIENDLY, completion predicate FACED. Win or lose,
+      // the branch-true honours play, Scott delivers the Frontier
+      // invitation HERE at the Conference, hoenn_complete is set,
+      // and the Foundation machine fires itself (checkArcCompletion
+      // — ARC COMPLETE card, regionsDone via the machine's own
+      // write, the pinned Frontier directive). Nothing here writes
+      // regionsDone or an ending by hand.
+      say(['So it is us. Morrison is beaten — I watched it from the tunnel, front-row ticket courtesy of my friend\'s enormous heart, and I will carry that match whatever happens here.', 'Final rules, trainer, and Conference stakes. Give me everything you gave him. Meowth and I did not cross this bracket for less.'], () => {
+        g.ui.showMenu('The final — face Tyson?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          const tt2 = bondTrainerVariant(g.state, TRAINERS.tyson);
+          g.scenes.push(new BattleScene({
+            kind: 'trainer', trainer: tt2, returnTo: this, rt: rtOf(g), friendly: true,
+            onEnd: (won, fled) => {
+              if (fled) return;
+              recordBattleBond(g.state, tt2.id, won, fled);
+              flags.tyson_faced = true;
+              if (won) flags.tyson_won = true; else flags.tyson_lost = true;
+              const lines = won ? [
+                '...Well. WELL. The card may argue with the papers, trainer, but I was ON the floor: you out-played me, exchange for exchange, in a final. An upset, they will call it in the harbour. It was not an upset. I was there. It was a better team on the biggest day Hoenn has.',
+                'Take the honours road with my respect — you beat everyone this bracket owns, back to back, and the last of them is standing here applauding. Whatever the book says, this hall knows what it saw.',
+              ] : [
+                '...It is decided. The final exchange — Meowth endures by a whisker and a promise, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Tyson. By the narrowest margin this hall has ever recorded.',
+                'Do not hang your head. DO NOT. You carried eight badges across a region that was ending its own weather, you calmed two titans and a sky, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history. Morrison is on his feet. The whole hall is. Look at them, trainer. That sound is yours.',
+              ];
+              say(lines, () => {
+                say(['Trainer. TYSON\'s trainer — and everyone still standing. My name is Scott. I scout battle the way other men scout weather, and I have watched every match you fought in this hall with an envelope in my pocket getting heavier by the round.', 'Inside it: an invitation. Seven facilities, seven Frontier Brains, one island off Kanto where battle is the whole civilisation. The Battle Frontier, trainer. When you have rested — when HOME has had you back a while — that envelope is your next horizon. Bring the team you trust most. The Frontier does not care where you have been. Only how you fight.'], () => {
+                  flags.scott_invitation = true;
+                  flags.hoenn_complete = true;
+                  g.audio.playSfx('badge');
+                  say(['Ever Grande Conference — the run ends in honours, and Hoenn ends with it: eight badges, two titans calmed, a sky handed back its weather, and a final that will be argued about in Lilycove harbour for a decade. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+                }, 'SCOTT');
+              }, 'TYSON');
+            },
+          }));
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'scott') {
+      if (flags.hoenn_complete) { say(['The envelope is delivered and the scouting is done — my favourite kind of day. Home first, trainer: Pallet Town, your mother\'s cooking, a professor with questions. The Frontier keeps. It has waited this long; it can wait for you to be rested. That, too, is strategy.']); return true; }
+      say(['Scott. I scout battle — facilities, frontiers, trainers worth an envelope. I am not saying you are carrying one of my envelopes in your future, trainer. I am saying I bought the envelope. Finish your Conference. We will talk at the end of it.']);
+      return true;
+    }
+
     // ---- the west leaders ----
     const LEADERS = {
       roxanne: { badge: 'stonebadge', gate: null, gateLines: [],
@@ -166541,6 +167301,12 @@ Object.assign(OverworldScene.prototype, {
         post: 'Wahahaha! Still sparking, Dynamo Badge holder! The Verdanturf hall is west through the tunnel road, and the volcano road is north — an old electrician recommends the volcano second and the hall first. Order matters in wiring AND journeys!' },
       flannery: { badge: 'heatbadge', gate: null, gateLines: [],
         post: 'The springs are that way, Heat Badge holder, and you have earned every degree of them. Fallarbor lies past the ash fields north — take a breath before you go in. The air up there is half mountain already.' },
+      norman: { badge: 'balancebadge', gate: null, gateLines: [],
+        post: 'Balance, held. East now, Balance Badge holder: the rain road to Fortree, then the sea itself. The Institute on Route 119 has gone quiet on the radio, they say. Nothing in Hoenn stays quiet for long this year.' },
+      winona: { badge: 'featherbadge', gate: null, gateLines: [],
+        post: 'The Feather Badge suits you, challenger — light, and earned at altitude. Lilycove is east: a harbour, a hall, and a mountain of the dead beyond it. The sky sends its regards to all three.' },
+      juan: { badge: 'rainbadge', gate: 'climax_resolved', gateLines: ['Ah — the challenger who surfaced in my lake. I know your road, and I know the sky above it is not finished arguing. My gym is the last QUIET water in Hoenn, challenger, and I will not conduct its final while the region\'s weather is still deciding the score. End the titans\' argument first. Then come and take the Rain Badge from a finished world.'],
+        post: 'Eight badges, Rain Badge holder, and a region breathing evenly again. Ever Grande, challenger. The Conference is lit, and I shall be in the stands with the whole of Sootopolis, conducting nothing at all. A holiday.' },
     };
     const L = LEADERS[kind];
     if (!L) return false;
