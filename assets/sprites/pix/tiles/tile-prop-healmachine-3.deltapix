@@ -1,0 +1,15 @@
+# Premium+ W3 (AN-5): heal machine frame 3 (tray scan) — original delta/overlay in the shipped palette.
+PIXD tile-prop-healmachine-3 tile-prop-healmachine 16 16
+3 9 c
+4 9 c
+5 9 c
+6 9 c
+7 9 c
+8 9 c
+9 9 c
+10 9 c
+11 9 c
+12 9 c
+3 10 d
+12 10 d
+PAL

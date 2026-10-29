@@ -1,0 +1,23 @@
+# Premium+ W3 (AN-5): grass sway overlay b frame 3 (lean right) — original delta/overlay in the shipped palette.
+PIX tile-sway-b-3 16 16
+................
+................
+................
+................
+................
+................
+................
+.............sl.
+.....sg......sg.
+.....sh...sh.sh.
+.....sg...sg.sg.
+.....sl...sl.sl.
+.....sh...sh.sh.
+....sl...sl.sl..
+....sg...sg.sg..
+.....h....h..h..
+PAL
+g #5da24a grass
+l #6fb45c grass-light
+h #79c168 grass-highlight
+s #386e2c grass-shadow

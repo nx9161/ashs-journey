@@ -1,0 +1,19 @@
+# Premium+ W3 (AN-5): porthole frame 2 (drift) — original delta/overlay in the shipped palette.
+PIXD tile-prop-porthole-2 tile-prop-porthole 16 16
+5 4 d
+5 6 c
+6 6 d
+8 6 c
+9 6 a
+10 6 b
+5 7 d
+9 7 c
+5 8 d
+9 8 c
+5 9 c
+6 9 d
+8 9 c
+9 9 a
+10 9 b
+10 11 d
+PAL

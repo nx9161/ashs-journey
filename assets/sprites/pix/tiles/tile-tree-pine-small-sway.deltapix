@@ -1,0 +1,32 @@
+# Premium+ W3 (AN-5): canopy sway frame 2 for tile-tree-pine-small — original delta/overlay in the shipped palette.
+PIXD tile-tree-pine-small-sway tile-tree-pine-small 16 16
+7 4 .
+9 4 t
+6 5 .
+7 5 t
+8 5 v
+10 5 t
+5 6 .
+6 6 t
+7 6 v
+11 6 t
+5 7 .
+9 7 t
+10 7 h
+11 7 t
+4 8 .
+6 8 t
+7 8 v
+12 8 t
+3 9 .
+5 9 t
+6 9 v
+10 9 t
+11 9 h
+12 9 e
+13 9 t
+4 10 .
+8 10 u
+9 10 e
+12 10 u
+PAL

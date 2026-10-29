@@ -1,0 +1,9 @@
+# Premium+ W3 (AN-5): lamp flicker frame 3 (dim) — original delta/overlay in the shipped palette.
+PIXD tile-lamp-3 tile-lamp 16 16
+5 2 g
+6 2 g
+9 2 g
+6 3 g
+9 3 g
+10 3 g
+PAL

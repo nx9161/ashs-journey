@@ -1,0 +1,7 @@
+# Premium+ W3 (AN-5): slot machine blink frame 2 — original delta/overlay in the shipped palette.
+PIXD tile-prop-slotmachine-2 tile-prop-slotmachine 16 16
+4 1 c
+4 5 a
+7 5 a
+10 5 a
+PAL

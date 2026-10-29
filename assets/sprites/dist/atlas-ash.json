@@ -2,11 +2,11 @@
   "atlas": "atlas-ash.png",
   "tile": 16,
   "size": [
-    432,
+    1728,
     34
   ],
   "sprites": {
-    "ash-down-idle-1": {
+    "ash-down-bike-1": {
       "x": 1,
       "y": 1,
       "w": 16,
@@ -19,73 +19,72 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-down-idle-2": {
+    "ash-down-bike-2": {
       "x": 19,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "idle",
-        "idle2"
+        "idle"
       ],
       "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-down-walk-1": {
+    "ash-down-bike-3": {
       "x": 37,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "walk-1"
+        "idle"
       ],
       "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-down-walk-2": {
+    "ash-down-bike-4": {
       "x": 55,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "walk-2"
-      ],
-      "palette": 17,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "ash-down-walk-3": {
-      "x": 73,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "walk-3"
+        "idle"
       ],
       "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-down-walk-4": {
+    "ash-down-fish-cast": {
+      "x": 73,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-fish-hold": {
       "x": 91,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "walk-4"
+        "idle"
       ],
-      "palette": 17,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-left-idle-1": {
+    "ash-down-idle-1": {
       "x": 109,
       "y": 1,
       "w": 16,
@@ -98,7 +97,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-left-idle-2": {
+    "ash-down-idle-2": {
       "x": 127,
       "y": 1,
       "w": 16,
@@ -107,64 +106,64 @@
         "idle",
         "idle2"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-left-walk-1": {
+    "ash-down-idle-3": {
       "x": 145,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "walk-1"
+        "idle"
       ],
       "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-left-walk-2": {
+    "ash-down-idle-4": {
       "x": 163,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "walk-2"
-      ],
-      "palette": 17,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null
-    },
-    "ash-left-walk-3": {
-      "x": 181,
-      "y": 1,
-      "w": 16,
-      "h": 32,
-      "frames": [
-        "walk-3"
+        "idle"
       ],
       "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-left-walk-4": {
-      "x": 199,
+    "ash-down-run-1": {
+      "x": 181,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
-        "walk-4"
+        "idle"
       ],
       "palette": 17,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-right-idle-1": {
+    "ash-down-run-2": {
+      "x": 199,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-run-3": {
       "x": 217,
       "y": 1,
       "w": 16,
@@ -177,8 +176,555 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "ash-right-idle-2": {
+    "ash-down-run-4": {
       "x": 235,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-run-5": {
+      "x": 253,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-run-6": {
+      "x": 271,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-surf-1": {
+      "x": 289,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-surf-2": {
+      "x": 307,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-1": {
+      "x": 325,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-2": {
+      "x": 343,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-3": {
+      "x": 361,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-3"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-4": {
+      "x": 379,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-4"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-5": {
+      "x": 397,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-down-walk-6": {
+      "x": 415,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-bike-1": {
+      "x": 433,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-bike-2": {
+      "x": 451,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-bike-3": {
+      "x": 469,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-bike-4": {
+      "x": 487,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-fish-cast": {
+      "x": 505,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-fish-hold": {
+      "x": 523,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-idle-1": {
+      "x": 541,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-idle-2": {
+      "x": 559,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-idle-3": {
+      "x": 577,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-idle-4": {
+      "x": 595,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-run-1": {
+      "x": 613,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-run-2": {
+      "x": 631,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-run-3": {
+      "x": 649,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-run-4": {
+      "x": 667,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-run-5": {
+      "x": 685,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-run-6": {
+      "x": 703,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-surf-1": {
+      "x": 721,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-surf-2": {
+      "x": 739,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 15,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-1": {
+      "x": 757,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-1"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-2": {
+      "x": 775,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-2"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-3": {
+      "x": 793,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-3"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-4": {
+      "x": 811,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "walk-4"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-5": {
+      "x": 829,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-left-walk-6": {
+      "x": 847,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-bike-1": {
+      "x": 865,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-bike-2": {
+      "x": 883,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-bike-3": {
+      "x": 901,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-bike-4": {
+      "x": 919,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-fish-cast": {
+      "x": 937,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-fish-hold": {
+      "x": 955,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-idle-1": {
+      "x": 973,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-idle-2": {
+      "x": 991,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -191,8 +737,138 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "ash-right-idle-3": {
+      "x": 1009,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-idle-4": {
+      "x": 1027,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-run-1": {
+      "x": 1045,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-run-2": {
+      "x": 1063,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-run-3": {
+      "x": 1081,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-run-4": {
+      "x": 1099,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-run-5": {
+      "x": 1117,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-run-6": {
+      "x": 1135,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-surf-1": {
+      "x": 1153,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-surf-2": {
+      "x": 1171,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "ash-right-walk-1": {
-      "x": 253,
+      "x": 1189,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -205,20 +881,20 @@
       "mirror_of": null
     },
     "ash-right-walk-2": {
-      "x": 271,
+      "x": 1207,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
         "walk-2"
       ],
-      "palette": 18,
+      "palette": 17,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "ash-right-walk-3": {
-      "x": 289,
+      "x": 1225,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -231,7 +907,7 @@
       "mirror_of": null
     },
     "ash-right-walk-4": {
-      "x": 307,
+      "x": 1243,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -243,8 +919,112 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "ash-right-walk-5": {
+      "x": 1261,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-right-walk-6": {
+      "x": 1279,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 18,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-bike-1": {
+      "x": 1297,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-bike-2": {
+      "x": 1315,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-bike-3": {
+      "x": 1333,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-bike-4": {
+      "x": 1351,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-fish-cast": {
+      "x": 1369,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-fish-hold": {
+      "x": 1387,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "ash-up-idle-1": {
-      "x": 325,
+      "x": 1405,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -257,7 +1037,7 @@
       "mirror_of": null
     },
     "ash-up-idle-2": {
-      "x": 343,
+      "x": 1423,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -270,8 +1050,138 @@
       "derived_from": null,
       "mirror_of": null
     },
+    "ash-up-idle-3": {
+      "x": 1441,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-idle-4": {
+      "x": 1459,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-run-1": {
+      "x": 1477,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-run-2": {
+      "x": 1495,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-run-3": {
+      "x": 1513,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-run-4": {
+      "x": 1531,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-run-5": {
+      "x": 1549,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-run-6": {
+      "x": 1567,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-surf-1": {
+      "x": 1585,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-surf-2": {
+      "x": 1603,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 16,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
     "ash-up-walk-1": {
-      "x": 361,
+      "x": 1621,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -284,20 +1194,20 @@
       "mirror_of": null
     },
     "ash-up-walk-2": {
-      "x": 379,
+      "x": 1639,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
         "walk-2"
       ],
-      "palette": 17,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "ash-up-walk-3": {
-      "x": 397,
+      "x": 1657,
       "y": 1,
       "w": 16,
       "h": 32,
@@ -310,12 +1220,38 @@
       "mirror_of": null
     },
     "ash-up-walk-4": {
-      "x": 415,
+      "x": 1675,
       "y": 1,
       "w": 16,
       "h": 32,
       "frames": [
         "walk-4"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-walk-5": {
+      "x": 1693,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
+      ],
+      "palette": 17,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "ash-up-walk-6": {
+      "x": 1711,
+      "y": 1,
+      "w": 16,
+      "h": 32,
+      "frames": [
+        "idle"
       ],
       "palette": 17,
       "seed": null,

@@ -123,12 +123,32 @@ export function speciesBattleArt(doc, speciesId, species) {
 
 // ---- overworld ----
 export function ashFrames(doc, dir) {
-  // [idle1, idle2, walk1, walk2, walk3, walk4] — 16x32 canvases since
-  // Wave 3a (the right-facing set is authored art of its own, NOT a
-  // mirror of the left set — cap logo, hip strap buckle, bag pocket).
+  // [idle1..4, walk1..6] — 16x32 canvases since Wave 3a (the right-facing
+  // set is authored art of its own, NOT a mirror of the left set — cap
+  // logo, hip strap buckle, bag pocket). Premium+ W3 (AN-3): idle extends
+  // to 4 frames (breath + hair/strap secondary motion) and the walk cycle
+  // to 6 frames/direction with amplified swing (consecutive-frame diff
+  // >=150px on the sprite canvas, measured in the W3 rig).
   const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
-  const ids = ['idle-1', 'idle-2', 'walk-1', 'walk-2', 'walk-3', 'walk-4'];
+  const ids = ['idle-1', 'idle-2', 'idle-3', 'idle-4',
+    'walk-1', 'walk-2', 'walk-3', 'walk-4', 'walk-5', 'walk-6'];
   return ids.map((f) => artCanvas(doc, 'ash-' + d + '-' + f, 1) || artCanvas(doc, 'ash-down-' + f, 1));
+}
+
+// Premium+ W3 (AN-3): mode-specific locomotion sets. Every traversal
+// mode renders its OWN art (run 6f, bike 4f, surf 2f, fishing cast+hold
+// 2f per direction) — surf/bike are no longer speed changes wearing the
+// walk cycle. Missing frames degrade to null entries; callers fall back
+// to the walk set only when a whole mode set is absent.
+export function ashModeFrames(doc, dir, mode) {
+  const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
+  const names = {
+    run: ['run-1', 'run-2', 'run-3', 'run-4', 'run-5', 'run-6'],
+    bike: ['bike-1', 'bike-2', 'bike-3', 'bike-4'],
+    surf: ['surf-1', 'surf-2'],
+    fish: ['fish-cast', 'fish-hold'],
+  }[mode] || [];
+  return names.map((f) => artCanvas(doc, 'ash-' + d + '-' + f, 1));
 }
 
 // ---- NPC art selection (Wave 0: explicit art field, not name strings) ----
@@ -251,9 +271,11 @@ export function npcFrames(doc, npc) {
   // Authored terminal art (monitor + box-grid screen + cabinet). A PC
   // is a machine: no palette swap, ever.
   if (kind === 'pc') {
-    const a = artCanvas(doc, 'npc-pc-idle-1', 1);
-    const b = artCanvas(doc, 'npc-pc-idle-2', 1);
-    if (a && b) return [a, b];
+    // Premium+ W3 (AN-6): the PC terminal screen cycles 4 frames
+    // (the W3 screen-cycle deltas join the shipped pair).
+    const frames = ['npc-pc-idle-1', 'npc-pc-idle-2', 'npc-pc-idle-3', 'npc-pc-idle-4']
+      .map((id) => artCanvas(doc, id, 1)).filter(Boolean);
+    if (frames.length >= 2) return frames;
   }
   const prefix = kind === 'brock' ? 'brock' : 'npc-' + kind;
   const swap = npcSwapFor(npc, kind);
@@ -265,17 +287,35 @@ export function npcFrames(doc, npc) {
   return [cv, cv];
 }
 
-export function partnerHopFrames(doc) {
-  const a = artCanvas(doc, 'pikachu-hop-1', 1);
-  const b = artCanvas(doc, 'pikachu-hop-2', 1);
+// Premium+ W3 (AN-2): the follower is fully directional — hop + idle
+// pairs for all four facings (down = the Wave 3a front set, redrawn with
+// the wide bolt tail; up = back view with stripes; left/right = profiles),
+// plus the sleep pair and the look-around emote pair. Every frame paints
+// all 4 palette yellows (the shipped 4th yellow painted zero pixels).
+const PARTNER_DIR_PREFIX = { down: 'pikachu', up: 'pikachu-up', left: 'pikachu-left', right: 'pikachu-right' };
+export function partnerHopFrames(doc, dir) {
+  const p = PARTNER_DIR_PREFIX[dir] || 'pikachu';
+  const a = artCanvas(doc, p + '-hop-1', 1);
+  const b = artCanvas(doc, p + '-hop-2', 1);
   return (a && b) ? [a, b] : null;
 }
 
-// Wave 3a: the follower's at-rest pair (blink / ear-twitch), drawn at
-// the same 16x20 canvas as the hop pair.
-export function partnerIdleFrames(doc) {
-  const a = artCanvas(doc, 'pikachu-idle-1', 1);
-  const b = artCanvas(doc, 'pikachu-idle-2', 1);
+export function partnerIdleFrames(doc, dir) {
+  const p = PARTNER_DIR_PREFIX[dir] || 'pikachu';
+  const a = artCanvas(doc, p + '-idle-1', 1);
+  const b = artCanvas(doc, p + '-idle-2', 1);
+  return (a && b) ? [a, b] : null;
+}
+
+export function partnerSleepFrames(doc) {
+  const a = artCanvas(doc, 'pikachu-sleep-1', 1);
+  const b = artCanvas(doc, 'pikachu-sleep-2', 1);
+  return (a && b) ? [a, b] : null;
+}
+
+export function partnerLookFrames(doc) {
+  const a = artCanvas(doc, 'pikachu-look-1', 1);
+  const b = artCanvas(doc, 'pikachu-look-2', 1);
   return (a && b) ? [a, b] : null;
 }
 
@@ -430,7 +470,7 @@ export function buildArtTileCache(doc) {
   // rustle draws over the player's grass cell, which is tufted now.
   if (cache.tallVariants.length) cache.grass = cache.tallVariants[0];
   if (cache.flowerVariants.length) cache.flower = cache.flowerVariants[0];
-  const water = ids(['tile-water-1', 'tile-water-2', 'tile-water-3']);
+  const water = ids(['tile-water-1', 'tile-water-2', 'tile-water-3', 'tile-water-4', 'tile-water-5', 'tile-water-6']);
   if (water.length) cache.water = water;
   else {
     const fb = doc.createElement('canvas');
@@ -438,7 +478,44 @@ export function buildArtTileCache(doc) {
     paintTile(fb.getContext('2d'), 'water', 0, 0);
     cache.water = fb;
   }
-  cache.foamFrames = ids(['tile-foam-1', 'tile-foam-2', 'tile-foam-3']);
+  cache.foamFrames = ids(['tile-foam-1', 'tile-foam-2', 'tile-foam-3', 'tile-foam-4']);
+  // ---- Premium+ W3 (AN-5): environment-motion frame sets ----
+  // Every set is phase-offset per tile at resolve time (animFrame) on
+  // one of three cadence groups — fast 200ms / medium 400ms / slow
+  // 800ms — so nothing in the world pulses in unison.
+  cache.tallSway = [1, 2, 3, 4].map((v) => ids([
+    'tile-tallgrass-' + v, 'tile-tallgrass-' + v + '-sway2', 'tile-tallgrass-' + v + '-sway3',
+  ]));
+  cache.grassSway = {
+    a: ids(['tile-sway-a-1', 'tile-sway-a-2', 'tile-sway-a-3']),
+    b: ids(['tile-sway-b-1', 'tile-sway-b-2', 'tile-sway-b-3']),
+  };
+  cache.treeSway = ['tile-tree', 'tile-tree-oak-small', 'tile-tree-pine',
+    'tile-tree-pine-small', 'tile-tree-elm', 'tile-tree-elm-small', 'tile-bush']
+    .map((id) => artCanvas(doc, id + '-sway', 1));
+  cache.flowerSway = ['tile-flower', 'tile-flower-2', 'tile-flower-3']
+    .map((id) => artCanvas(doc, id + '-sway', 1));
+  cache.lampFrames = ids(['tile-lamp', 'tile-lamp-2', 'tile-lamp-3']);
+  if (cache.lampFrames.length) cache.lamp = cache.lampFrames[0];
+  cache.smokeGrey = ids(['tile-smoke-grey-1', 'tile-smoke-grey-2', 'tile-smoke-grey-3']);
+  cache.smokeWarm = ids(['tile-smoke-warm-1', 'tile-smoke-warm-2', 'tile-smoke-warm-3']);
+  cache.shorePulse = ids(['tile-shorepulse-1', 'tile-shorepulse-2', 'tile-shorepulse-3', 'tile-shorepulse-4']);
+  cache.crystalFrames = ids(['tile-crystal-1', 'tile-crystal-2']);
+  cache.dripFrames = ids(['tile-drip-1', 'tile-drip-2']);
+  cache.wakeFrames = ids(['tile-wake-1', 'tile-wake-2']);
+  // Animated prop sets (AN-5/AN-6): kind -> frames. Heal machine, lab
+  // tank and porthole live indoors too; plant sway + shelf glint are
+  // the interior-life pair; lab/slot/pc-desk form the blink family.
+  cache.propFrames = {
+    healmachine: ids(['tile-prop-healmachine', 'tile-prop-healmachine-2', 'tile-prop-healmachine-3']),
+    labtank: ids(['tile-prop-labtank', 'tile-prop-labtank-2', 'tile-prop-labtank-3']),
+    porthole: ids(['tile-prop-porthole', 'tile-prop-porthole-2']),
+    plant: ids(['tile-prop-plant', 'tile-prop-plant-2']),
+    shelf: ids(['tile-prop-shelf', 'tile-prop-shelf-2']),
+    labmachine: ids(['tile-prop-labmachine', 'tile-prop-labmachine-2', 'tile-prop-labmachine-3']),
+    slotmachine: ids(['tile-prop-slotmachine', 'tile-prop-slotmachine-2', 'tile-prop-slotmachine-3']),
+    pcdesk: ids(['tile-prop-pcdesk', 'tile-prop-pcdesk-2', 'tile-prop-pcdesk-3']),
+  };
   const sides = (base, corners) => {
     const o = {};
     for (const d of ['n', 'e', 's', 'w']) o[d] = artCanvas(doc, base + '-' + d, 1);
@@ -463,8 +540,27 @@ export function buildArtTileCache(doc) {
 export function tileSprite(cache, kind, t) {
   const v = cache[kind];
   if (!v) return null;
-  if (Array.isArray(v)) return v[Math.floor((t || 0) / 600) % v.length]; // water shimmer (3 frames, Wave 1)
+  if (Array.isArray(v)) return v[Math.floor((t || 0) / 400) % v.length]; // water shimmer (6 frames, W3 medium cadence)
   return v;
+}
+
+// Premium+ W3 (AN-5): the animation clock. Cadence groups: fast 200ms,
+// medium 400ms, slow 800ms. EVERY animated tile is phase-offset by its
+// position hash — the frame index is (clock step + per-tile phase), so
+// two tiles of the same family at different positions sit at different
+// phases and nothing in the world pulses in unison. Hash/phase-driven
+// only: no RNG, no per-frame allocation (pure arithmetic on the stack).
+// t < 0 is the reduced-motion sentinel (main.mjs passes it when the
+// Reduced Motion setting is on): every system freezes on frame 0.
+export const CAD_FAST = 200, CAD_MED = 400, CAD_SLOW = 800;
+export function animFrame(t, x, y, cadence, nFrames, salt) {
+  if (!nFrames || nFrames <= 1 || t < 0) return 0;
+  const phase = Math.floor(hashTileSpread(x, y, salt || 0) * nFrames) % nFrames;
+  return (Math.floor(t / cadence) + phase) % nFrames;
+}
+function pickAnim(frames, t, x, y, cadence, salt) {
+  if (!frames || !frames.length) return null;
+  return frames[animFrame(t, x, y, cadence, frames.length, salt)] || frames[0];
 }
 
 // ---- Wave 4: nature & dungeon helpers ----
@@ -549,7 +645,14 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
     return k == null ? kind : k;
   };
   const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
-  const frame = Math.floor((t || 0) / 600);
+  const tt = t || 0; // W3: t < 0 = reduced-motion freeze (animFrame -> 0)
+  const frame = Math.floor(Math.max(0, tt) / 600);
+  const nearWater = DIRS.some((d) => nb[d] === 'water');
+  const pushPulse = (layers) => { // shore wet-pulse on land at the waterline
+    if (!nearWater) return;
+    const f = pickAnim(cache.shorePulse, tt, x, y, CAD_SLOW, 31);
+    if (f) layers.push(f);
+  };
   switch (kind) {
     case 'grassground': {
       // Premium+ W0: textured meadow ground — its own authored tile,
@@ -557,6 +660,9 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       // 'grass' kind only). Building shadow + path dirt-edge dressing
       // match the base-grass treatment so W5 re-dress blends in.
       const layers = [cache.grassground || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
+      const ggSway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
+      if (ggSway) layers.push(ggSway);
+      pushPulse(layers);
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       if (cache.edgeDirt) {
         const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
@@ -575,9 +681,19 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
     case 'grass': {
       const layers = [];
       if (isTallGrass(x, y)) {
-        layers.push(pickVariant(cache.tallVariants, x, y, 12) || cache.grass);
+        // W3: tall grass sways — 3 frames x 4 variants, medium cadence.
+        const vi = Math.floor(hashTile(x, y, 12) * 4) % 4;
+        const swaySet = (cache.tallSway && cache.tallSway[vi] && cache.tallSway[vi].length)
+          ? cache.tallSway[vi] : null;
+        layers.push(swaySet
+          ? pickAnim(swaySet, tt, x, y, CAD_MED, 43)
+          : (pickVariant(cache.tallVariants, x, y, 12) || cache.grass));
       } else {
         layers.push(pickVariant(cache.grassVariants, x, y, 13) || cache.grass);
+        // W3: base-grass sway overlay (3f x 2 variants, slow cadence).
+        const sway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
+        if (sway) layers.push(sway);
+        pushPulse(layers);
         const dh = hashTile(x, y, 14);
         if (dh < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
         else if (dh < 0.18 && cache.detail.dirt) layers.push(cache.detail.dirt);
@@ -608,6 +724,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
     }
     case 'path': {
       const layers = [pickVariant(cache.pathVariants, x, y, 21) || cache.path];
+      pushPulse(layers);
       // Wave 2: a building directly north anchors this cell with its
       // ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
@@ -624,7 +741,10 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
     }
     case 'water': {
       const layers = [];
-      const base = Array.isArray(cache.water) ? cache.water[frame % cache.water.length] : cache.water;
+      // W3: water runs 6 frames on the medium cadence, foam 4 on fast —
+      // both phase-offset per tile (the shipped pair shared one global
+      // 600ms clock and pulsed in unison).
+      const base = Array.isArray(cache.water) ? pickAnim(cache.water, tt, x, y, CAD_MED, 71) : cache.water;
       if (base) layers.push(base);
       // Shore/foam on EVERY bank: any non-water, non-void neighbour is land.
       // Wave 4: a cave bank gets foam only — the sand shore scallop is an
@@ -638,21 +758,33 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
         }
       }
       if (shore && cache.foamFrames && cache.foamFrames.length) {
-        layers.push(cache.foamFrames[frame % cache.foamFrames.length]);
+        layers.push(pickAnim(cache.foamFrames, tt, x, y, CAD_FAST, 73));
       }
       return layers.filter(Boolean);
     }
     case 'cavewall': {
       // Strata walls by position hash; an exposed face (floor to the
       // south) with a lucky hash wears the stalactite face instead.
-      if (nb.s === 'cavefloor' && cache.stalactite && hashTileSpread(x, y, 52) < 0.45) return [cache.stalactite];
-      return [pickVariantSpread(cache.caveWallVariants, x, y, 51) || cache.cavewall].filter(Boolean);
+      const layers = [];
+      if (nb.s === 'cavefloor' && cache.stalactite && hashTileSpread(x, y, 52) < 0.45) layers.push(cache.stalactite);
+      else layers.push(pickVariantSpread(cache.caveWallVariants, x, y, 51) || cache.cavewall);
+      // W3: cave drip on exposed faces (slow cadence, phase-offset).
+      if (nb.s === 'cavefloor' && hashTileSpread(x, y, 83) < 0.5) {
+        const drip = pickAnim(cache.dripFrames, tt, x, y, CAD_SLOW, 83);
+        if (drip) layers.push(drip);
+      }
+      return layers.filter(Boolean);
     }
     case 'cavefloor': case 'towerfloor': case 'silphfloor': case 'plantfloor': {
       const layers = [groundBase(cache, kind, x, y)];
       // A dungeon wall directly north casts the shared shadow strip.
       if (DUNGEON_WALLS.has(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       if (hashTileSpread(x, y, 62) < 0.10 && cache.detail && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+      // W3: glow-crystal clusters pulse on cave floors near walls.
+      if (kind === 'cavefloor' && DIRS.some((d) => nb[d] === 'cavewall') && hashTileSpread(x, y, 81) < 0.14) {
+        const cry = pickAnim(cache.crystalFrames, tt, x, y, CAD_MED, 81);
+        if (cry) layers.push(cry);
+      }
       return layers.filter(Boolean);
     }
     case 'centerfloor': case 'martfloor': case 'housefloor': case 'gymfloor': case 'labfloor': {
@@ -693,10 +825,32 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       const layers = [];
       const base = groundBase(cache, ground, x, y);
       if (base) layers.push(base);
-      if (kind === 'flower') layers.push(pickVariant(cache.flowerVariants, x, y, 31) || cache.flower);
+      if (kind === 'flower') {
+        // W3: flowers sway — the shipped variant is frame 1, the sway
+        // delta is frame 2 (medium cadence, per-tile phase).
+        const fv = pickVariant(cache.flowerVariants, x, y, 31) || cache.flower;
+        const fvi = cache.flowerVariants ? cache.flowerVariants.indexOf(fv) : -1;
+        const swayF = (fvi >= 0 && cache.flowerSway) ? cache.flowerSway[fvi] : null;
+        const fi = swayF ? animFrame(tt, x, y, CAD_MED, 2, 47) : 0;
+        layers.push(fi === 1 && swayF ? swayF : fv);
+      }
       else if (kind === 'tree') {
+        // W3: canopy sway — frame 2 delta per variant (slow cadence).
         const tv = cache.treeVariants;
-        layers.push(tv && tv.length ? tv[treeVariantIndex(x, y, tv.length)] : cache.tree);
+        const baseTree = tv && tv.length ? tv[treeVariantIndex(x, y, tv.length)] : cache.tree;
+        const ti = tv ? tv.indexOf(baseTree) : -1;
+        const swayT = (ti >= 0 && cache.treeSway) ? cache.treeSway[ti] : null;
+        const tfi = swayT ? animFrame(tt, x, y, CAD_SLOW, 2, 53) : 0;
+        layers.push(tfi === 1 && swayT ? swayT : baseTree);
+      } else if (kind === 'lamp') {
+        // W3: lamp flicker, fast cadence.
+        layers.push(pickAnim(cache.lampFrames, tt, x, y, CAD_FAST, 57) || cache.lamp);
+      } else if (cache.propFrames && cache.propFrames[kind] && cache.propFrames[kind].length) {
+        // W3: animated props — heal/lab/porthole (medium), plant sway +
+        // shelf glint (slow), machine/screen blink family (fast).
+        const cad = (kind === 'plant' || kind === 'shelf') ? CAD_SLOW
+          : (kind === 'labmachine' || kind === 'slotmachine' || kind === 'pcdesk') ? CAD_FAST : CAD_MED;
+        layers.push(pickAnim(cache.propFrames[kind], tt, x, y, cad, 61) || cache[kind]);
       } else if (kind === 'rock') {
         const cave = ground === 'cavefloor' || DIRS.some((d) => CAVE_KINDS.has(nb[d]));
         layers.push(boulderCanvasFor(cache, x, y, cave));
@@ -709,6 +863,13 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       const v = cache[kind];
       if (!v) return [];
       if (Array.isArray(v)) return [v[frame % v.length]];
+      // W3: chimney smoke — 3 frames x 2 colourways (colourway by tile
+      // hash), slow cadence, drawn over the chimney cell.
+      if (kind.indexOf('chimney') >= 0) {
+        const set = hashTileSpread(x, y, 67) < 0.5 ? cache.smokeGrey : cache.smokeWarm;
+        const smoke = pickAnim(set, tt, x, y, CAD_SLOW, 67);
+        return smoke ? [v, smoke] : [v];
+      }
       return [v];
     }
   }

@@ -1,0 +1,11 @@
+# Premium+ W3 (AN-5): canopy sway frame 2 for tile-bush — original delta/overlay in the shipped palette.
+PIXD tile-bush-sway tile-bush 16 16
+4 9 .
+12 9 t
+3 10 .
+4 10 t
+7 10 v
+9 10 t
+10 10 v
+13 10 t
+PAL

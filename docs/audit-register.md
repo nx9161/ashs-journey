@@ -3193,3 +3193,171 @@ shipped timings (hitstop/shake/drain) untouched.
   check is distance-based (speckle sits >60 channel-distance from
   every sky tone; blends sit <10). No verify-live expectation was
   changed.
+
+## Premium+ Art Wave W3 — World Life: Motion (2026-10-28, implementer entry — pending independent QA)
+
+**Scope:** spec §3.1 AN-2/AN-3/AN-5/AN-6 + §4 W3 row (art growth cap
+≤220 KB over the W2 close of 2,825,867 B). Public edition only; no
+commits (coordinator commits after independent QA); **zero map-data
+edits** (`git diff` on `src/data/maps*.mjs` is empty — tiles/art/engine
+only, per the wave's hard gate).
+
+- **AN-5 · Environment motion (55 units).** The world no longer runs
+  on one global 600ms clock. A hash/phase animation clock
+  (`animFrame` in `src/engine/art.mjs`) drives **≥12 animated tile
+  families on 3 cadence groups** — fast 200ms (foam, lamp flicker,
+  machine/screen blink), medium 400ms (water, tall-grass sway, flowers,
+  heal machine, lab tank, glow-crystal), slow 800ms (tree canopy sway,
+  base-grass sway overlay, chimney smoke, shore wet-pulse, cave drip,
+  porthole, plant sway, shelf glint) — and **every animated tile is
+  phase-offset by its position hash** (`hashTileSpread`), so nothing
+  pulses in unison. Frame census as built: water 6f, foam 4f, shore
+  wet-pulse 4f, tall-grass sway 3f ×4 variants, base-grass sway
+  overlay 3f ×2 variants, tree canopy sway 2f ×7 variants, flowers
+  2f ×3, lamp flicker 3f, chimney smoke 3f ×2 colourways, heal
+  machine 3f, lab tank bubbles 3f, porthole drift 2f, glow-crystal
+  pulse 2f, cave drip 2f, machine/screen blink 6f+ (lab machine 3f,
+  slot machine 3f, PC desk 3f, PC terminal cycle 4f). New art ships
+  as `.deltapix` deltas over the shipped bases wherever a base frame
+  exists (the W0 delta format), full `.pix` only for transparent
+  overlays (smoke/pulse/sway/crystal/drip/wake). **Rig proof**
+  (`premium-rig/frame-sampler-w3.mjs`, live Chromium): 16 families
+  animate, 14 show ≥2 distinct phases at a fixed clock; an outdoor
+  Pallet capture pair 1s apart (water excluded) differs in
+  **1.18–4.70% of in-map pixels** across runs (target ≥0.8%; the
+  variance is camera/NPC composition, the floor held on every run);
+  a Route 20 water pair differs in **23.0–37.3% of water pixels**
+  (target ≥6%).
+- **AN-6 · Interior life.** Graded explicitly, not assumed: the rig
+  probes each system indoors — heal machine (Center), lab tank,
+  porthole (S.S. Anne), shelf glint, plant sway, PC desk screen, lab
+  machine, slot machine — **8/8 animate** through the resolver; a
+  live Center capture pair 1s apart changes 0.64–1.11% of in-map
+  pixels. The PC terminal NPC cycles its screen 4 frames at the fast
+  cadence (`npcFrame` pc branch).
+- **AN-2 · Follower (20 units: 4 redrawn + 16 new).** Full directional
+  set: hop + idle pairs ×4 directions (front redrawn; back view with
+  stripes; left/right profiles), sleep pair, look-around emote pair.
+  Facing is tracked from the follower's **actual per-tick velocity**
+  (dominant axis) in `overworld.mjs` — the rig drives all four
+  directions in live play: **24/24 moving samples** show facing =
+  travel direction with directional hop art (steady-travel sampling;
+  the shipped `trail[len-2]` target oscillates while the trail is
+  2 long, so drives settle ≥4 steps first). **Tail:** the bolt tail
+  is redrawn wide — silhouette span **13–14px** at 16×20 in hop
+  frames (streaming bolt rows under the body, flicked segment in
+  frame 2); **tail-row frame diff between hop frames = 29px,
+  measured over the bottom-6 rows (rows 14–19 of the 16×20 hop
+  frames; the same 29px on all four directional hop pairs)**
+  (≥20 required), ears change posture every hop frame too.
+  **Palette use:** all **4 yellows paint in every follower frame**
+  (the shipped 4th yellow painted zero pixels — the chin-shade rows
+  now carry it; verified per-frame from ART data). Sleep idle engages
+  after 20s stillness, look-around at 6s (rig-verified set
+  membership). The follower still renders beside, never under, the
+  player (Wave 3a display-offset rule untouched).
+- **AN-3 · Player (≈90 units).** Per direction: **walk 6f** (the
+  shipped 4 redrawn with amplified swing — alternating whole-body
+  bob + arm-swing torso mirror — plus 2 new stride frames),
+  **idle 4f** (breath sink + blink + hair/strap shift), **run 6f**
+  (B held on foot; 140ms gait), **bike 4f**, **surf 2f + wake tile**,
+  **fishing cast+hold 2f** (cast <450ms, then hold, for the fishing
+  window). Measured on the sprite canvas: **consecutive walk-frame
+  diff ≥154px in every direction** (was ~81px on the shipped cycle);
+  6 distinct walk + 4 distinct idle frames per direction in live
+  sampling. Mode proof: the rig drives `playerSprite` for run/bike/
+  surf/fish — every mode returns its own set's canvas and every set
+  differs from the walk set. One shipped defect found and fixed en
+  route: **ash-up idle-1/idle-2 were pixel-identical** (a blink
+  paints nothing on a back view) — up idle-2 redrawn with hair sway
+  **[CORRECTED by the QA fix pass, 2026-10-29: this claim was false
+  as written — the pair was still byte-identical in the W3 tree;
+  the redraw landed only in that fix pass, see the fix-pass note
+  at the end of this entry]**.
+  **Terrain footstep puffs:** engine-emitted on each completed step,
+  4 terrain classes (grass/dust/splash/cave) × 3 procedural frames
+  over 300ms, rects only, allocated on step events only; suppressed
+  under Reduced Motion and while surfing (the wake tile carries it).
+- **Settings law (Reduced Motion).** Reduced Motion stills ALL new
+  world motion: `tileLayers` hands the resolver the −1 freeze
+  sentinel (every family resolves frame 0, water included — the
+  pre-W3 water clock is now gated too), the player idle holds
+  frame 0, follower cycles freeze and sleep/look never engage, and
+  puffs are suppressed. Rig-verified (`RM-gate` case).
+- **Performance (PL-3).** No per-frame allocations in the resolver
+  (pure hash arithmetic; frame sets are build-time canvases), no
+  shadowBlur/gradients anywhere. Render budget re-measured with the
+  new animation load: **tile-layer sweep 0.49–4.03ms per 24×14
+  viewport** across rig runs vs the 8ms `budgets.json` target —
+  PASS (variance is sandbox load; the ceiling held on every run).
+- **Frame evidence:** `frame-sampler-w3.mjs` **PASS** (13/13 cases,
+  0 JS errors); W2 rig re-run on this tree: **PASS** (no battle
+  regression). Clean `build-art.mjs` rebuild is byte-identical
+  (md5 c6394b21…, 1349 ART keys, loses 0).
+- **Battery (this tree, serial):** build OK · qa-changed-flows
+  fails EXACTLY {b2, d9} · campaign 24/24 · fidelity 35/35 ·
+  battle-model 45/45 · cheat-shop 44/44 · rejuv 1–6
+  (44/42/63/53/55/46) · Track B 114/114 (documented invocation) ·
+  verify-slice 134/134 (two early runs under parallel battery load
+  read 132/134 and 133/134; two subsequent serial runs read
+  134/134 — the load-sensitive flakiness pattern, no W3 check
+  implicated) · audit-headless 17/17 · budgets PASS · contamination
+  clean · audio ALL PASS · drift PASS · **audit-laptop: the
+  Dex-first fixed-sleep cascade on all runs on this machine
+  (15/29, same first failure) — and the CONTROL run at untouched
+  base `09a32b7` in a clean worktree fails IDENTICALLY (15/29,
+  byte-identical failure list), i.e. the standing environmental
+  signature documented at W0/W1/W2, NOT a W3 regression; recommend
+  the coordinator's QA re-run once on a quiet machine for the
+  zero-failure line.** personal/ restored byte-identical afterwards
+  (`git status` clean there).
+- **Sizes:** art-data 2,825,867 → **2,946,894 B (+121,027 B** of
+  the ≤220 KB W3 cap) · ART keys 1200 → **1349** · `public/game.js`
+  **4,365,677 B** vs the 12,582,912 B gate.
+- **Spec assumptions W3 proved wrong / notes:** (a) The shipped
+  Ash walk cycle's consecutive-frame diff is ~81px, not the ≥150px
+  AN-3 demands — closing AN-3 required redrawing the shipped walk
+  frames themselves (counted in the spec's own "walk redraw 16"),
+  not just adding frames 5/6. (b) The shipped up-idle pair is a
+  single pose twice (see AN-3 above) — and it was still a single
+  pose twice in the W3 tree, the claimed hair-sway redraw having
+  never landed in the art; the redraw is the QA fix pass dated
+  2026-10-29 recorded below, not part of the original W3 work. (c) The follower's shipped
+  follow logic oscillates its target while the trail is 2 tiles
+  long; facing is therefore graded on steady travel, and the
+  facing signal itself now comes from the follower's velocity,
+  not the target vector. (d) There is no `lab` interior map — the
+  lab tank/machine props live on synthetic-neighbourhood resolver
+  probes in the rig (the kinds exist in the Celadon/lab tileset
+  data); porthole probes run on the real S.S. Anne map. (e) The
+  "run" mode has no pre-existing input: W3 binds it to holding B
+  on foot (the genre convention), 140ms/tile between walk 200 and
+  bike 105. No verify-live expectation was changed.
+- **QA fix pass (2026-10-29, defect D1 + register corrections):**
+  Independent QA found the AN-3 claim above false as shipped in
+  this entry: in the W3 tree the pixel rows of
+  `assets/sprites/pix/ash/ash-up-idle-2.pix` were byte-identical
+  to `ash-up-idle-1.pix` (only the header comment differed), so
+  the up idle had only 3 distinct poses and the claimed hair-sway
+  redraw had never landed in the art. The redraw is THIS fix
+  pass, not the original W3 work: idle-2's hair rows 7–8 now carry
+  a swayed strand (highlight `h` at the left edge, shadow `d` at
+  the right, 2px per row) — **source-row diff vs idle-1 = 4px**
+  (silhouette and palette unchanged; the other directions'
+  idle-1→idle-2 diffs are down 6px, left 2px, right 2px, and no
+  other direction's idle-2 shifts the strap, so none was added
+  here). Clean `build-art.mjs` rebuild: **1349 ART keys, loses
+  0** (byte-identical on re-run; art-data still 2,946,894 B);
+  materialized from the built art-data through the runtime's own
+  `materializeArt`/`artCanvas`, the **built-canvas pairwise diff
+  between ash-up idle frame 0 and frame 1 is now 4px** (was 0px),
+  and the up idle now has 4 distinct poses. Bundles rebuilt
+  (vercel + guest; personal/ untouched). The AN-2 tail claim in
+  this entry originally read "54px" with no measurement basis;
+  it is corrected above to the checkable figure: **29px measured
+  over the bottom-6 rows (rows 14–19 of the 16×20 hop frames),
+  the same 29px on all four directional hop pairs** (≥20
+  required), as measured by independent QA and re-measured in
+  this pass. Spot battery after the fix: build OK (vercel +
+  guest) · verify-slice 134/134 · audit-headless 17/17 ·
+  qa-changed-flows failures exactly {b2, d9} · budgets PASS.

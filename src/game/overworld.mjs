@@ -27,6 +27,13 @@ export class OverworldScene {
     this.player = { tx: p.x, ty: p.y, px: p.x * TILE, py: p.y * TILE, dir: p.dir || 'down', moving: false, moveT: 0, fx: p.x, fy: p.y };
     this.trail = []; // partner path history
     this.partner = { px: this.player.px, py: this.player.py, hop: 0 };
+    // Premium+ W3 state: follower facing/stillness (AN-2), footstep
+    // puffs (AN-3), fishing presentation window, run hold.
+    this.partnerDir = this.player.dir || 'down';
+    this.stillMs = 0;
+    this.puffs = [];
+    this.fishing = null;
+    this.running = false;
     this.enc = null; // encounter sequence state
     this.challenge = null; // Yellow-style trainer spot challenge (sight -> ! -> walk-up)
     this.banner = { text: this.map.name.toUpperCase(), t: 0 };
@@ -192,6 +199,22 @@ export class OverworldScene {
       if (this.tryInteract()) return;
     }
 
+    // Premium+ W3: per-tick presentation state. Run = B held on foot
+    // (not surfing / riding); stillness accumulates while the player
+    // stands (drives the follower's look-around at 6s, sleep at 20s);
+    // the fishing window ticks down; puffs age out at 300ms.
+    this.running = !!(input.isHeld && input.isHeld('b') && !this.surfing && !this.riding);
+    if (this.fishing) { this.fishing.t += dt * 1000; if (this.fishing.t > 2600) this.fishing = null; }
+    if (this.puffs.length) {
+      for (const pf of this.puffs) pf.t += dt * 1000;
+      this.puffs = this.puffs.filter((pf) => pf.t < 300);
+    }
+    const p0 = this.player;
+    p0.mode = this.surfing ? 'surf' : this.riding ? 'bike'
+      : this.fishing ? 'fish' : (p0.moving && this.running) ? 'run' : 'walk';
+    p0.fishPhase = this.fishing && this.fishing.t >= 450 ? 'hold' : 'cast';
+    if (p0.moving) this.stillMs = 0; else this.stillMs += dt * 1000;
+
     // Movement
     const p = this.player;
     if (!p.moving) {
@@ -221,6 +244,7 @@ export class OverworldScene {
     } else {
       p.moveT += dt * 1000;
       const k = Math.min(1, p.moveT / (this.moveMs ? this.moveMs() : WALK_MS));
+      p.cycleK = k; // W3: locomotion cycle position for playerSprite
       p.px = (p.fx + (p.tx - p.fx) * k) * TILE;
       p.py = (p.fy + (p.ty - p.fy) * k) * TILE;
       if (k >= 1) {
@@ -228,14 +252,28 @@ export class OverworldScene {
         p.px = p.tx * TILE; p.py = p.ty * TILE;
         this.trail.push({ x: p.tx, y: p.ty });
         if (this.trail.length > 24) this.trail.shift();
+        this.spawnPuff(p.tx, p.ty);
         this.onStep(p.tx, p.ty);
       }
     }
-    // Partner follows 1 tile behind with hop
+    // Partner follows 1 tile behind with hop. W3 (AN-2): the follower's
+    // facing is its TRAVEL direction — derived from the vector toward
+    // its trail target whenever it is actually moving.
     const tp = this.trail.length >= 2 ? this.trail[this.trail.length - 2] : { x: p.tx, y: p.ty };
     const tpx = tp.x * TILE, tpy = tp.y * TILE;
-    this.partner.px += (tpx - this.partner.px) * Math.min(1, dt * 10);
-    this.partner.py += (tpy - this.partner.py) * Math.min(1, dt * 10);
+    const pdx = tpx - this.partner.px, pdy = tpy - this.partner.py;
+    const oldPx = this.partner.px, oldPy = this.partner.py;
+    this.partner.px += pdx * Math.min(1, dt * 10);
+    this.partner.py += pdy * Math.min(1, dt * 10);
+    // Facing follows the follower's ACTUAL velocity this tick (the
+    // dominant axis of its own displacement), so a turn registers the
+    // moment the follower itself turns — no target-vector lag.
+    const mvx = this.partner.px - oldPx, mvy = this.partner.py - oldPy;
+    if (Math.abs(mvx) + Math.abs(mvy) > 0.3) {
+      this.partnerDir = Math.abs(mvx) >= Math.abs(mvy)
+        ? (mvx > 0 ? 'right' : 'left') : (mvy > 0 ? 'down' : 'up');
+      this.partnerMoving = true;
+    } else this.partnerMoving = false;
     this.partner.hop += dt * 6;
 
     // Playtime + banner
@@ -251,6 +289,22 @@ export class OverworldScene {
         g.state.story.flags.moveTutDone = true;
       }
     }
+  }
+
+  // Premium+ W3 (AN-3): terrain footstep puffs — engine-emitted on each
+  // completed step, 4 terrain classes (grass / dust / splash / cave),
+  // 3 procedural frames over 300ms (rects only, no shadowBlur/gradient,
+  // allocated on step events only — never per frame). Reduced Motion
+  // suppresses them entirely.
+  spawnPuff(x, y) {
+    const g = this.game;
+    if (g.state.settings.reducedMotion) return;
+    if (this.surfing) return; // the wake tile carries surf steps instead
+    const kind = g.tileKind(this.tileAt(x, y));
+    const cls = (kind === 'grass' || kind === 'grassground') ? 'grass'
+      : (kind === 'water') ? 'splash'
+      : (kind === 'cavefloor' || kind === 'towerfloor') ? 'cave' : 'dust';
+    this.puffs.push({ x: x * TILE, y: y * TILE, cls, t: 0 });
   }
 
   onStep(x, y) {
@@ -627,6 +681,25 @@ export class OverworldScene {
       const gspr = g.tileSprite('grass');
       if (gspr) r.blit(gspr, this.player.tx * T + jx, this.player.ty * T);
     }
+    // Premium+ W3: footstep puffs (3 expanding rect frames per class).
+    if (this.puffs.length) {
+      const c = r.ctx;
+      const PUFF_COL = { grass: '111,180,92', dust: '203,178,122', splash: '191,232,240', cave: '154,143,168' };
+      for (const pf of this.puffs) {
+        const f = Math.min(2, Math.floor(pf.t / 100));
+        const s = 4 + f * 4, a = (0.5 - f * 0.18).toFixed(2);
+        c.fillStyle = 'rgba(' + PUFF_COL[pf.cls] + ',' + a + ')';
+        c.fillRect(pf.x + 8 - s / 2, pf.y + 13, s, 2);
+        c.fillRect(pf.x + 2, pf.y + 14 - f, 3, 2);
+        c.fillRect(pf.x + 11, pf.y + 14 - f, 3, 2);
+      }
+    }
+    // Premium+ W3: surf wake under the player while surfing (2f tile).
+    if (this.surfing && g.tileCache && g.tileCache.wakeFrames && g.tileCache.wakeFrames.length) {
+      const still = g.state.settings.reducedMotion;
+      const wf = g.tileCache.wakeFrames[still ? 0 : Math.floor(g._animT / 400) % g.tileCache.wakeFrames.length];
+      if (wf) r.blit(wf, Math.round(this.player.px), Math.round(this.player.py));
+    }
     // Systems world dressing: item balls, boulders, cut stumps, cave darkness.
     if (this.sysRenderWorld) this.sysRenderWorld(r);
     // NPCs (2-frame idle) — challengers render at their walk-up position.
@@ -667,7 +740,10 @@ export class OverworldScene {
     const fpy = Math.round(this.partner.py);
     if (fpx === Math.round(this.player.px) && fpy === Math.round(this.player.py)) fpx -= T;
     else if (fpx === Math.round(this.player.px)) fpx += 10;
-    r.blitCharacter(g.partnerFrame(!this.player.moving), fpx, fpy + T - Math.round(hop), fpy + T);
+    r.blitCharacter(g.partnerFrame(!this.player.moving && !this.partnerMoving, {
+      dir: this.partnerDir || this.player.dir,
+      stillMs: this.player.moving ? 0 : (this.stillMs || 0),
+    }), fpx, fpy + T - Math.round(hop), fpy + T);
     r.blitCharacter(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py) + T);
     // "!" exclamation
     if (this.enc && this.enc.phase === 'exclaim') {

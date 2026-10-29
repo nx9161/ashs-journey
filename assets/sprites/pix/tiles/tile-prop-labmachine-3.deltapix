@@ -1,0 +1,6 @@
+# Premium+ W3 (AN-5): lab machine blink frame 3 — original delta/overlay in the shipped palette.
+PIXD tile-prop-labmachine-3 tile-prop-labmachine 16 16
+4 3 c
+11 3 d
+13 5 e
+PAL

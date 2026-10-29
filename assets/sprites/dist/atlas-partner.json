@@ -2,7 +2,7 @@
   "atlas": "atlas-partner.png",
   "tile": 48,
   "size": [
-    502,
+    790,
     66
   ],
   "sprites": {
@@ -94,7 +94,7 @@
       "frames": [
         "hop-1"
       ],
-      "palette": 8,
+      "palette": 9,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -107,7 +107,7 @@
       "frames": [
         "hop-2"
       ],
-      "palette": 8,
+      "palette": 9,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -120,7 +120,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 8,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -134,13 +134,224 @@
         "idle",
         "idle2"
       ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-left-hop-1": {
+      "x": 469,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "hop-1"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-left-hop-2": {
+      "x": 487,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "hop-2"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-left-idle-1": {
+      "x": 505,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-left-idle-2": {
+      "x": 523,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-look-1": {
+      "x": 541,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-look-2": {
+      "x": 559,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-right-hop-1": {
+      "x": 577,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "hop-1"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-right-hop-2": {
+      "x": 595,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "hop-2"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-right-idle-1": {
+      "x": 613,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-right-idle-2": {
+      "x": 631,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-sleep-1": {
+      "x": 649,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-sleep-2": {
+      "x": 667,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 9,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-up-hop-1": {
+      "x": 685,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "hop-1"
+      ],
+      "palette": 8,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-up-hop-2": {
+      "x": 703,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "hop-2"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-up-idle-1": {
+      "x": 721,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle"
+      ],
+      "palette": 6,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "pikachu-up-idle-2": {
+      "x": 739,
+      "y": 1,
+      "w": 16,
+      "h": 20,
+      "frames": [
+        "idle",
+        "idle2"
+      ],
       "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "pikachu-refuse": {
-      "x": 469,
+      "x": 757,
       "y": 1,
       "w": 32,
       "h": 16,

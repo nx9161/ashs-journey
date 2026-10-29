@@ -1,4 +1,4 @@
-# Pikachu follower (original design), idle frame 1, 16x20. Wave 3a redraw: 4 yellow steps, shaded ear tips, zigzag tail, shaded cheeks.
+# Premium+ W3 (AN-2): follower pikachu-idle-1 redrawn (4th yellow paints) — directional set derived from the Wave 3a authored front frames (face erased/redrawn per view, bolt tail widened); original art.
 PIX pikachu-idle-1 16 20
 ................
 .OO..........OO.
@@ -12,7 +12,7 @@ PIX pikachu-idle-1 16 20
 ...OYYYYYYYYDDO.
 ...OCCYYYYCCDYO.
 ...OCcYOOYcCDYO.
-...OODDDDDDOODO.
+...OOdddDDDOODO.
 .....OyyyyO..OO.
 ....OYYYYYDO.OO.
 .....OYYYYO.....

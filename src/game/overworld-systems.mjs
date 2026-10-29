@@ -89,6 +89,7 @@ Object.assign(OverworldScene.prototype, {
   moveMs() {
     if (this.surfing) return 170;
     if (this.riding) return 105;
+    if (this.running) return 140; // Premium+ W3: run (B held) — own gait art
     return 200;
   },
 
@@ -480,6 +481,9 @@ Object.assign(OverworldScene.prototype, {
 
   startFishing() {
     const g = this.game;
+    // Premium+ W3 (AN-3): the cast+hold presentation window — the player
+    // renders the fishing set (cast <450ms, then hold) while it runs.
+    this.fishing = { t: 0 };
     const rod = (g.state.bag.superrod > 0) ? 'super' : (g.state.bag.goodrod > 0) ? 'good' : (g.state.bag.oldrod > 0) ? 'old' : null;
     if (!rod) { g.ui.say(['The water glitters. If only you had a fishing rod...']); return; }
     const fish = this.map.encounters && this.map.encounters.fish && this.map.encounters.fish[rod];

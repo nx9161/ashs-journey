@@ -2,7 +2,7 @@
   "atlas": "atlas-npcs.png",
   "tile": 16,
   "size": [
-    1728,
+    1764,
     34
   ],
   "sprites": {
@@ -1301,6 +1301,34 @@
       "seed": null,
       "derived_from": null,
       "mirror_of": null
+    },
+    "npc-pc-idle-3": {
+      "x": 1729,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-pc-idle-1"
+    },
+    "npc-pc-idle-4": {
+      "x": 1747,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 7,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null,
+      "delta_of": "npc-pc-idle-1"
     }
   }
 }

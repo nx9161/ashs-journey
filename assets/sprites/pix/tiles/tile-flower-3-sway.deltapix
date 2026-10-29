@@ -1,0 +1,40 @@
+# Premium+ W3 (AN-5): flower sway frame 2 for tile-flower-3 — original delta/overlay in the shipped palette.
+PIXD tile-flower-3-sway tile-flower-3 16 16
+2 0 .
+14 0 g
+15 1 g
+10 2 g
+11 2 l
+3 3 g
+4 3 d
+8 3 g
+9 3 o
+4 4 g
+6 4 u
+12 4 g
+13 4 d
+4 5 g
+5 5 u
+6 5 o
+13 5 g
+14 5 i
+14 6 g
+15 6 l
+7 7 g
+8 7 d
+10 8 g
+11 8 o
+12 8 i
+2 9 g
+3 9 l
+10 9 g
+12 9 i
+13 10 g
+14 10 d
+3 11 g
+4 11 o
+5 12 g
+6 12 d
+12 12 g
+14 12 j
+PAL

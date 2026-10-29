@@ -8,7 +8,7 @@ import { Input, KEYMAP, ACTIONS } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
-import { speciesBattleArt, ashFrames, npcFrames, partnerHopFrames, partnerIdleFrames, buildArtTileCache, tileSprite, resolveTileLayers, boulderCanvasFor, uiIcon } from '../engine/art.mjs';
+import { speciesBattleArt, ashFrames, ashModeFrames, npcFrames, partnerHopFrames, partnerIdleFrames, partnerSleepFrames, partnerLookFrames, buildArtTileCache, tileSprite, resolveTileLayers, boulderCanvasFor, uiIcon } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
 import { UI, typePill } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
@@ -86,7 +86,13 @@ export class Game {
 
   // Wave 1 terrain system: the composed layer stack for one map cell
   // (variants + neighbour-aware transitions). kindAt(x, y) -> kind | null.
-  tileLayers(kind, x, y, kindAt) { return resolveTileLayers(this.tileCache, kind, x, y, kindAt, this._animT); }
+  // Premium+ W3: Reduced Motion stills ALL world animation — the clock
+  // handed to the resolver becomes the -1 freeze sentinel (every
+  // animated family resolves to frame 0, water included).
+  tileLayers(kind, x, y, kindAt) {
+    const still = this.state && this.state.settings && this.state.settings.reducedMotion;
+    return resolveTileLayers(this.tileCache, kind, x, y, kindAt, still ? -1 : this._animT);
+  }
 
   // Wave 4: the Strength-boulder overlay sprite for a position (agrees
   // with the tile resolver's variant at that position; cave context
@@ -104,8 +110,22 @@ export class Game {
       left: ashFrames(doc, 'left'),
       right: ashFrames(doc, 'right'),
     };
-    this._partnerHop = partnerHopFrames(doc);
-    this._partnerIdle = partnerIdleFrames(doc);
+    // Premium+ W3 (AN-3): mode-specific sets (run/bike/surf/fish).
+    this.modeSprites = {};
+    for (const mode of ['run', 'bike', 'surf', 'fish']) {
+      this.modeSprites[mode] = {
+        down: ashModeFrames(doc, 'down', mode), up: ashModeFrames(doc, 'up', mode),
+        left: ashModeFrames(doc, 'left', mode), right: ashModeFrames(doc, 'right', mode),
+      };
+    }
+    // Premium+ W3 (AN-2): directional follower sets + behaviour pairs.
+    this._partnerHop = {}; this._partnerIdle = {};
+    for (const dir of ['down', 'up', 'left', 'right']) {
+      this._partnerHop[dir] = partnerHopFrames(doc, dir);
+      this._partnerIdle[dir] = partnerIdleFrames(doc, dir);
+    }
+    this._partnerSleep = partnerSleepFrames(doc);
+    this._partnerLook = partnerLookFrames(doc);
     this.npcCache = {};
   }
 
@@ -156,14 +176,30 @@ export class Game {
     return url;
   }
 
-  // Overworld Ash: 4-dir walk cycle while moving, 2-frame idle blink at rest.
+  // Overworld Ash (Premium+ W3, AN-3): mode-specific art for 100% of
+  // traversal modes — surf / bike / fishing render their own sets, run
+  // (hold B on foot) its own 6-frame cycle; the walk cycle is 6 frames
+  // and the idle 4 (breath + hair/strap secondary motion). The scene
+  // stamps p.mode / p.cycleK (tile-step progress 0..1) / p.fishPhase.
   playerSprite(p) {
+    const still = this.state && this.state.settings && this.state.settings.reducedMotion;
+    const mode = p.mode || 'walk';
+    if (mode === 'surf' || mode === 'bike' || mode === 'run' || mode === 'fish') {
+      const set = this.modeSprites[mode] && (this.modeSprites[mode][p.dir] || this.modeSprites[mode].down);
+      if (set && set.length && set[0]) {
+        if (mode === 'fish') return set[p.fishPhase === 'hold' ? 1 : 0] || set[0];
+        if (mode === 'surf') return set[still ? 0 : Math.floor(this._animT / 400) % set.length] || set[0];
+        const steps = set.length;
+        const fi = Math.min(steps - 1, Math.floor((p.cycleK || 0) * steps)) % steps;
+        return set[fi] || set[0];
+      }
+    }
     const frames = this.playerSprites[p.dir] || this.playerSprites.down;
     if (p.moving) {
-      const fi = 2 + (Math.floor((p.moveT / 200) * 4) % 4); // 4 walk frames per tile
-      return frames[fi];
+      const fi = 4 + (Math.min(5, Math.floor((p.cycleK != null ? p.cycleK : (p.moveT / 200)) * 6)) % 6);
+      return frames[fi] || frames[4];
     }
-    return frames[Math.floor(this._animT / 500) % 2]; // idle-1 / idle-2 blink
+    return frames[still ? 0 : Math.floor(this._animT / 500) % 4]; // idle 4f breath cycle
   }
 
   npcFrame(npc) {
@@ -175,16 +211,39 @@ export class Game {
       npc.skin || '', npc.shirt || '', npc.pants || '', npc.hair || ''].join('|');
     if (!this.npcCache[cacheKey]) this.npcCache[cacheKey] = npcFrames(doc, npc);
     const f = this.npcCache[cacheKey];
+    // Premium+ W3 (AN-6): the PC terminal cycles its screen at the fast
+    // cadence (200ms x 4 frames); people keep the 600ms idle pair.
+    if (npc.pc && f.length > 2) {
+      const still = this.state && this.state.settings && this.state.settings.reducedMotion;
+      return f[still ? 0 : Math.floor(this._animT / 200) % f.length];
+    }
     return f[Math.floor(this._animT / 600) % 2]; // idle-1 / idle-2
   }
 
-  partnerFrame(idle) {
-    // Wave 3a: at rest (player not moving) the follower plays its idle
-    // pair (blink / ear-twitch, 500ms like the player's idle cadence);
-    // while travelling it hops as before (280ms hop cycle, unchanged).
-    if (idle && this._partnerIdle) return this._partnerIdle[Math.floor(this._animT / 500) % 2];
-    if (!this._partnerHop) return this.spriteCache.partner.front;
-    return this._partnerHop[Math.floor(this._animT / 280) % 2]; // hop-1 / hop-2
+  partnerFrame(idle, opts) {
+    // Premium+ W3 (AN-2): the follower is directional — its facing is
+    // the travel direction (opts.dir, tracked by the scene from the
+    // trail vector). At rest it plays the directional idle pair; after
+    // 6s still it looks around (emote pair); after 20s still it sleeps.
+    // Reduced Motion freezes every follower cycle on frame 0 (and the
+    // sleep/look behaviours never engage — the base idle holds).
+    const still = this.state && this.state.settings && this.state.settings.reducedMotion;
+    const dir = (opts && opts.dir) || 'down';
+    const stillMs = (opts && opts.stillMs) || 0;
+    const t = still ? 0 : this._animT;
+    if (idle) {
+      if (!still && stillMs >= 20000 && this._partnerSleep) {
+        return this._partnerSleep[Math.floor(t / 800) % 2]; // sleep idle (breath pair)
+      }
+      if (!still && stillMs >= 6000 && this._partnerLook && dir === 'down') {
+        return this._partnerLook[Math.floor(t / 2000) % 2]; // look-around emote pair
+      }
+      const set = this._partnerIdle[dir] || this._partnerIdle.down;
+      if (set) return set[Math.floor(t / 500) % 2];
+    }
+    const hop = this._partnerHop[dir] || this._partnerHop.down;
+    if (!hop) return this.spriteCache.partner.front;
+    return hop[Math.floor(t / 280) % 2]; // hop-1 / hop-2 (280ms, unchanged cadence)
   }
 
   // Canvas 2D helpers used by scenes.
