@@ -7696,3 +7696,147 @@ here rather than taken.
 Johto → home, every badge in order, Gary beaten, both J5/J6
 systems arcs closed on the same file, and the full battery at its
 named counts.**
+
+## Arc 2 Stage J7b — INDEPENDENT QA: the verdict on Arc 2 Johto (2026-10-29)
+
+**VERDICT: SHIP-WITH-NOTES.** No blockers found. Every mission claim was
+re-driven independently by an agent that implemented nothing in this
+project: fresh QA drivers (QA workspace `j7b-qa/`), my own battery re-runs,
+and my own re-run of the J7a chain drive. `personal/` byte-identical at
+start and end (game.js sha256 `f434ba63…`); the tree was clean throughout;
+nothing pushed or deployed.
+
+### 1. The first Johto hour, by real inputs (`j7b-drive.mjs` A00–A11, 12/12)
+
+From a post-Orange-complete state (B01's fixture shape, in-band Lv140
+team): Homecoming #2 fires in dialogue (GS Ball / Kurt / Azalea named),
+arc advances, embark arms → CAPT JOHTO sails Pallet → New Bark → Elm
+arrival scene (stolen Totodile) → Cherrygrove loads clean → Route 30
+Silver clash (honest win flag) → report names SILVER → Sprout Tower
+(both monks on the real trainer path, Elder's blessing) → Falkner beaten
+through the real leader runner → Zephyr Badge first in `badges.johto`.
+Quest-log guidance checked at three points against the log's own JOHTO
+section (`j7b-drive2.mjs` AS1–AS4): after Homecoming #2 the active row is
+"▶ Meet Professor Elm in New Bark Town" (hint: "the first building past
+the dock"); after arrival, "▶ Watch for the red-haired thief — and report
+back to Elm" (hint: heading north toward Cherrygrove); after the report,
+"▶ Climb Sprout Tower and earn the Elder's blessing" (hint names Falkner
+expecting tower climbers). At no point in the hour is the player without
+a named next step.
+
+### 2. The band law (`j7b-validator.mjs` 7/7 + drive2 B01–B02)
+
+My own constructed saves, both validators: a `story.arc='johto'` save
+carrying a Lv150 mon and a Lv200 mon at slowest-curve max XP is ACCEPTED
+by the server validator and the client schema, and survives a JSON
+round-trip; the SAME mons in a `story.arc='kanto'` save are rejected
+`bad-mon-level` by both; a Lv250 mon in the Johto save is rejected
+`bad-mon-level` by both. Live play: the Cheat Terminal's level stepper
+caps at **Level 100** in a Kanto-context session and **Level 200** in a
+Johto-context session (menu label read after 30 pagedown presses each).
+
+### 3. Center exits (drive2 C01–C03)
+
+Voluntary exit + blackout exit driven in one town per region, landings
+read against each door's own `via`: Viridian (Kanto) → (viridian, 7, 6);
+Valencia (Orange) → (valencia, 12, 4); Violet (Johto) → (violet, 4, 4).
+All six exits land on the correct door-fronts with `story.lastCenter`
+persisted to match; none lands on the (4,5) fallback. The J6.5 fix holds
+in all three regions, Orange and Johto included.
+
+### 4. Systems in live play (drive2 D01–D06)
+
+Day-Care gift egg received through the keeper path (Togepi), hatched
+through the real step hook (`sysOnStep`) at **Lv101** with dex
+registered. Red Apricorn picked at the Azalea tree (tree rests +200
+steps) → Kurt order (Level Ball, readyAt = steps + 250, apricorn
+consumed) → collected after 250 steps → thrown in a real wild battle
+through the bag menu: lead Lv160 vs foe Lv30, the ball was **consumed**
+(bag 1 → 0) and the catch resolved ("Gotcha! Pidgey was caught!"). The
+rule evaluated is the Level Ball's: `ballBonusFor('levelball', lead 160 /
+foe 30) = ×8` (the ≥4× tier), read from the same `ball-rules` module both
+battle engines import; the systems battery's rule-rate cases (re-run,
+§7) pin the rates in both engines.
+
+### 5. Legendary arcs by play (drive2 E01–E06)
+
+Suicune, the gated one: Raikou caught for real (signs in order → National
+Park face → catch, dex 243). With Entei still uncaught, Suicune's signs
+filed (Ecruteak + Cianwood) and the Bell Tower foot visited — **no face,
+arc not complete**. Entei then caught for real (Burned Tower / Mt. Mortar
+signs → deep-chamber face → catch, dex 244). Suicune's face now fires at
+the Bell Tower foot (Lv184); the catch completes the arc (dex 245).
+Celebi: Kurt returns the GS Ball (whereabouts chain exact), shrine
+encounter at Ilex (Lv170) — **fleeing completes nothing** (done flag
+unset, quest not complete) — the shrine **re-fires** on the next
+interact and the catch completes the arc (dex 251, empty GS Ball stays
+in the bag).
+
+### 6. Blind town-identity test (`shots/towns-blind/`, contact sheet
+`shots/town-contact-sheet.png`, key `town-key.json`)
+
+All 11 settlements captured label-masked (location chip / objective /
+dex chip / hint overlays hidden in-frame; every capture locchip-verified
+before masking) from a town-centre spawn, graded on in-frame landmarks
+and palettes. **Identification: 11/11**, with honest confidence spread —
+strong: Goldenrod (paved plaza grid, vending machines), Cianwood (sand +
+southern shoreline), Blackthorn (grey boulder rock), Azalea (apricorn
+trees), Silvertown (pale league marble), Ecruteak (autumn palette);
+medium: New Bark (flower meadows + lab roofline), Olivine (tidal-shallows
+checkerboard + sailors), Violet (grey stone + pond).
+**Confusable pair (note): Cherrygrove vs Mahogany** — both read as a
+small green town with a south-west pond in the centre frame; they are the
+one pair I could swap. **Framing note:** at a town-centre spawn the
+signature landmarks the J3 gate named — Olivine's lighthouse, Ecruteak's
+towers, Blackthorn's den cliff, Silvertown's stadium — are outside the
+frame; identity there rests on the ground palette, which is distinct in
+every case. (Operator caveat: I ran the capture, so town order was not
+unknown to me; the grades above are the in-frame evidence, and the
+Cherrygrove/Mahogany call is recorded as low-confidence, not dressed up.)
+
+### 7. Independent battery re-runs (my runs, this tree)
+
+| Suite | My result | Stage report |
+|---|---|---|
+| battle-model-checks | **45/45** | 45/45 |
+| johto-story-checks | **110/110** | 110/110 |
+| johto-systems-checks | **62/62** | 62/62 |
+| campaign-smoke | **24/24** | 24/24 |
+| qa-changed-flows | failures exactly **{b2, d9}** | {b2, d9} |
+| arc-chain chain-drive (J7a drive, re-run by me) | **88/88** | 88/88 |
+
+Logs in `j7b-qa/logs/`. Counts match the stage reports exactly.
+
+### Findings
+
+- **Blockers: none.**
+- **Note 1 — Cherrygrove/Mahogany blind similarity** (§6): the one pair
+  a player could not tell apart from a centre-frame view alone; both are
+  small green towns with a pond to the south-west. Distinctiveness
+  elsewhere is palette-strong.
+- **Note 2 — signature landmarks sit off-centre** (§6): lighthouse,
+  towers, den cliff and stadium are not visible from the town-centre
+  spawn frame. A player arriving at the town edge sees them on the walk
+  in; the centre frame alone leans on palette. Polish-grade, recorded
+  because the J3 gate graded on landmarks.
+- **Note 3 — quest log section order:** the Kanto MAIN STORY section
+  always renders above the JOHTO section, so the active Johto row is
+  found by scrolling past the Kanto list. The guidance itself is correct
+  at every point checked (§1); this is findability, not absence.
+- **Harness note (not a game finding):** the CDP browser boot for §6 was
+  flaky across three driver iterations — CDP key timing on the title
+  menu (a Down press landing before the menu opens selects New Game)
+  and, in my second pass, a pixel-probe threshold that never fired and
+  a row-click fraction that hit New Game (0.536) instead of Continue
+  (0.630 of the 384×216 view, from `title.mjs` row geometry). The game
+  itself is proven working by the headless drives (§1–§5) and by the
+  eventual locchip-verified capture of all 11 towns; the flakiness is
+  in my QA harness, and the working sequence is recorded in
+  `j7b-qa/town-shots2.mjs` for the next QA stage.
+
+**Arc 2 Johto stands as shipped: the first hour guides, the band law
+holds on both validators and in the live terminal, Center exits land
+right in all three regions, the systems fire in real play, the gated
+legendary refuses before its gate and completes after it, and fleeing a
+shrine costs nothing. SHIP-WITH-NOTES, the notes being §6's pair and
+framing and §7's log order — none of them a player's blocker.**
