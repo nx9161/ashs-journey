@@ -17,8 +17,8 @@ PIX tile-prop-focuslamp 16 16
 ....DDDDDDDD....
 ................
 PAL
-B #594a72 body
-D #202028 shade
-L #8a7a9a light
-A #ffd873 accent
-C #f0e060 accent-2
+B #695c7d body
+D #3f3f49 shade
+L #8b8097 light
+A #d1bc88 accent
+C #cac177 accent-2

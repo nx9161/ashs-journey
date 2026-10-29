@@ -2,24 +2,24 @@
 PIX tile-plantfloor-2 16 16
 gggggggggggggggg
 gggggggggggggggg
-ggzggggggggggggg
-ggggggggggggzggg
 gggggggggggggggg
-gggggggzgggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
 gggggggggggcgggg
 gggmmggggggggggg
-gggggcggggggggzg
+gggggcgggggggggg
 gggggggggggggggg
 gggggggggggggggg
-ggggzggggggggggg
 gggggggggggggggg
-ggggggggggzggggg
+gggggggggggggggg
+gggggggggggggggg
 gggggggggggggggg
 gggggggggggggggg
 PAL
-g #46536e concrete
-z #3a4357 concrete-dark
-c #c2c6d4 bolt
-m #8d8aa0 crack
+g #59647a concrete
+z #50596b concrete-dark
+c #b0b4c1 bolt
+m #8d8b9b crack
 
 # W5SPLIT2 hue shift 7deg (TX-1 variant split)

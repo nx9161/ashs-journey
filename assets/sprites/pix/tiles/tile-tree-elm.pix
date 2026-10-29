@@ -17,15 +17,15 @@ PIX tile-tree-elm 16 16
 ........kss.....
 ..........ss....
 PAL
-t #4a7a34 leaf
-u #375e28 leaf-dark
-v #63a048 leaf-light
-s #436e2c leaf-shadow
-e #396127 leaf-deep
-d #598a3e grass-dark
-l #7eb45c leaf-pale
-h #88c168 leaf-highlight
-k #5a3124 trunk
-w #7a4f38 trunk-light
+t #5d854b leaf
+u #4e7340 leaf-dark
+v #6f9d5b leaf-light
+s #587e44 leaf-shadow
+e #50753f leaf-deep
+d #688f53 grass-dark
+l #83a86c leaf-pale
+h #8ab273 leaf-highlight
+k #71493d trunk
+w #84614e trunk-light
 
 # W5SPLIT2 hue shift -10deg (TX-1 variant split)

@@ -17,8 +17,8 @@ PIX tile-prop-batterypack 16 16
 ................
 ................
 PAL
-B #6a6a80 body
-D #202028 shade
-L #9a9aa5 light
-A #f0e060 accent
-C #3fa08a accent-2
+B #757585 body
+D #3f3f49 shade
+L #96969f light
+A #cac177 accent
+C #549e8d accent-2

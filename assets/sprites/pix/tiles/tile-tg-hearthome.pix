@@ -1,25 +1,25 @@
 # Stage S3a: hearthome town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-hearthome 16 16
-aaaaaaaaaaccaaaa
-caaaaaaaaaaaabba
-abaabadbaccbacaa
-afabdadaaaabaacc
-bfaaabbabacabcaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabba
+abaabadbaaabaaaa
+afabdadaaaabaaaa
+bfaaabbabaaabaaa
 aaaaaaadaaaaaaaa
-acaaaaaaaabacaaa
-ddacacacfaaacaba
-acaacaaadaaacbaa
-aaaaacabaaaabbab
+aaaaaaaaaabaaaaa
+ddaaaaaafaaaaaba
+aaaaaaaadaaaabaa
+aaaaaaabaaaabbab
 aaaaaaaaabaaaabb
-cfdabacafaafabba
-caaabababacabbba
-acacdfbafdabbcac
-aacabaaaaaababad
-aaacaaabaacaaaaa
+afdabaaafaafabba
+aaaabababaaabbba
+aaaadfbafdabbaaa
+aaaabaaaaaababad
+aaaaaaabaaaaaaaa
 PAL
-a #c9a227 hearthome-ground
-b #9d7e1e ground-dark
-c #edbf2e ground-light
-d #8a5ab0 town-accent
-e #f0e6f8 town-accent-2
-f #796117 ground-deep
+a #b79c47 hearthome-ground
+b #9c853d ground-dark
+c #c0a85c ground-light
+d #8b6ba5 town-accent
+e #d4c0e4 town-accent-2
+f #867234 ground-deep

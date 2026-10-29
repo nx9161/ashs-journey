@@ -17,6 +17,6 @@ PIX tile-decor-papers 16 16
 ................
 ................
 PAL
-p #f5f0dc paper
-i #3a3a4c ink
-e #e2ddc8 paper-shade
+p #e1d9ba paper
+i #515162 ink
+e #cec8b2 paper-shade

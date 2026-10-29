@@ -1,29 +1,29 @@
 # Wave 1: textured grass base variant 2 — cluster texture, 6 greens.
 PIX tile-grass-2 16 16
 gggggggggggggggg
-ggdggggggggggggg
-gdddgggggggggggg
-dddddsgglgdggggg
-gdddssslldddgggg
-ggdggslllldggggg
-gggggggdmlgggggg
-ggggggddddgggggg
-gggggggdggggmggg
-gggggggggmggddgg
-gggggggggddggggg
-gggggldggggdgggg
-ggggldddgghddggg
-gggggldgghhhgggg
+gggggggggggggggg
+gggggggggggggggg
+gggggsgggggggggg
+ggggsssggggggggg
+gggggsgggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggghggggg
+ggggggggghhhgggg
 gggggggggghggggg
 gggggggggggggggg
 PAL
-g #569f47 grass
-d #46873d grass-dark
-l #69b45c grass-light
-m #61aa54 grass-mid
-h #73c168 grass-highlight
-a #84cb74 grass-pale
-s #346e2c grass-shadow
-e #2b6127 grass-deep
+g #669c5a grass
+d #598d52 grass-dark
+l #75a86c grass-light
+m #6fa167 grass-mid
+h #7bb273 grass-highlight
+a #86bb7a grass-pale
+s #4b7e44 grass-shadow
+e #43753f grass-deep
 
 # W5SPLIT2 hue shift 4deg (TX-1 variant split)

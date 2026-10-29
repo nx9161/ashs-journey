@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 labfloor variant 4 — bold diamond (diff>=80px)
 PIX tile-labfloor-4 16 16
-bbbbbbbbbbbbbbbb
-baaabaaacaaabaaa
-baaabaacacaabaaa
-baaabacacacabaaa
-bbbbacacacacbbbb
-baaacacddacacaaa
-baacacddddacacaa
-bacacddddddacaca
-bcacaddddddcacab
-bacacaddddcacaaa
-baacacaddcacaaaa
-baaacacacacabaaa
-bbbbbcacacabbbbb
-baaabacacaaabaaa
-baaabaacaaaabaaa
-baaabaaabaaabaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaddaaaaaaa
+aaaaaaddddaaaaaa
+aaaaaddddddaaaaa
+aaaaaddddddaaaaa
+aaaaaaddddaaaaaa
+aaaaaaaddaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #46586e labfloor-floor
-b #384a5e labfloor-line
-c #54687e labfloor-alt
-d #64788e labfloor-alt2
+a #59687a labfloor-floor
+b #4e5e70 labfloor-line
+c #647485 labfloor-alt
+d #707f8f labfloor-alt2

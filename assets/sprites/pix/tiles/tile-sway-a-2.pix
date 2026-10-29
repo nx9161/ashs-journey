@@ -17,7 +17,7 @@ PIX tile-sway-a-2 16 16
 ...gs...gs..gs..
 ...h....h...h...
 PAL
-g #5da24a grass
-l #6fb45c grass-light
-h #79c168 grass-highlight
-s #386e2c grass-shadow
+g #6b9e5d grass
+l #79a86c grass-light
+h #7fb273 grass-highlight
+s #4e7e44 grass-shadow

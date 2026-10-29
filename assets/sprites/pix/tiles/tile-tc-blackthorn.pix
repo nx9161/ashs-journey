@@ -17,9 +17,9 @@ PIX tile-tc-blackthorn 16 16
 .......kk.......
 ................
 PAL
-a #8a8a96 canopy
-b #6c6c75 canopy-dark
-c #a3a3b1 canopy-light
-d #b03a5a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #8b8b94 canopy
+b #76767d canopy-dark
+c #9c9ca7 canopy-light
+d #a95169 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

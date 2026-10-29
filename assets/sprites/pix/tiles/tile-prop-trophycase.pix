@@ -17,8 +17,8 @@ PIX tile-prop-trophycase 16 16
 ..DDDDDDDDDDDD..
 ................
 PAL
-B #8a6a48 body
-D #54452f shade
-L #ffd873 light
-A #f0e060 accent
-C #c2c8d4 accent-2
+B #8e755b body
+D #6a5c47 shade
+L #d1bc88 light
+A #cac177 accent
+C #b0b6c1 accent-2

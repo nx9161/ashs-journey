@@ -17,9 +17,9 @@ PIX tile-tc-dewford 16 16
 .......kk.......
 ................
 PAL
-a #74aca4 canopy
-b #5a8680 canopy-dark
-c #89cbc2 canopy-light
-d #e87a5a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #7ca39e canopy
+b #698a85 canopy-dark
+c #89bbb4 canopy-light
+d #c78470 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

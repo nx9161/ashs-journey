@@ -17,8 +17,8 @@ PIX tile-td-cianwood 16 16
 ................
 ................
 PAL
-a #b8a878 planter-leaf
-d #4a90a8 town-flower
-e #e86a5a town-flower-2
-k #6a4a2e planter-wood
-w #8a6a42 planter-wood-light
+a #aca17e planter-leaf
+d #5d90a2 town-flower
+e #c77a70 town-flower-2
+k #7b5e46 planter-wood
+w #8e7556 planter-wood-light

@@ -17,8 +17,8 @@ PIX tile-prop-cradle 16 16
 ................
 ................
 PAL
-B #f2ddd5 body
-D #96566b shade
-L #e8b4c4 light
-A #eef7ff accent
-C #ffd873 accent-2
+B #dec1b7 body
+D #956675 shade
+L #d4a2b1 light
+A #c6d8e9 accent
+C #d1bc88 accent-2

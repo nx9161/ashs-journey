@@ -17,6 +17,6 @@ PIX tile-prop-sealstone 16 16
 ................
 ................
 PAL
-a #9aa0a8 seal-stone
-b #62686f seal-stone-dark
-c #3ac8b8 seal-glyph
+a #969ba1 seal-stone
+b #6f7479 seal-stone-dark
+c #55b5aa seal-glyph

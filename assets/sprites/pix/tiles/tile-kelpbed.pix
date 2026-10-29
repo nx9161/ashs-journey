@@ -1,23 +1,23 @@
 # Stage H3b: kelpbed — kelp meadow floor of the underwater maps (full-bleed, walkable).
 PIX tile-kelpbed 16 16
-cabaaabbbcacabaa
-baadabbcacbccaaa
-abacaadbdaaabdca
-ccadaadaaccabbaa
-aaababcbcabcdbaa
-bdcadaabaaaadcaa
-aaaabaaddcbaaaca
-babaacaacbadaaaa
-acabaabcaddccaab
-babbbbaaccabaaba
-cacacabcabbdaaac
-cabaabaaaaccbaaa
-abdaaaacacaacaca
-aaccbaabbacbaacc
-bcdbaabaabcaabaa
-caaaaccbbaacaaaa
+caaaaaaaacacaaaa
+aaadaaacacaccaaa
+aaacaadadaaaadca
+ccadaadaaccaaaaa
+aaaaaacacaacdaaa
+adcadaaaaaaadcaa
+aaaaaaaddcaaaaca
+aaaaacaacaadaaaa
+acaaaaacaddccaaa
+aaaaaaaaccaaaaaa
+cacacaacaaadaaac
+caaaaaaaaaccaaaa
+aadaaaacacaacaca
+aaccaaaaaacaaacc
+acdaaaaaaacaaaaa
+caaaaccaaaacaaaa
 PAL
-a #2e7a5a kelp-bed
-b #1e5a44 kelp-bed-dark
-c #48a878 kelp-bed-light
-d #8ad8a8 kelp-frond-tip
+a #45866b kelp-bed
+b #37735d kelp-bed-dark
+c #5ba27f kelp-bed-light
+d #88c6a0 kelp-frond-tip

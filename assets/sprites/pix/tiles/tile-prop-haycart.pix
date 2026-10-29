@@ -17,8 +17,8 @@ PIX tile-prop-haycart 16 16
 ................
 ................
 PAL
-B #cdb684 hay
-Y #f0e060 hay-light
-W #5f5130 wood
-w #5a3a24 wood-dark
-L #8a6a48 wood-light
+B #bdab85 hay
+Y #cac177 hay-light
+W #726648 wood
+w #71523d wood-dark
+L #8e755b wood-light

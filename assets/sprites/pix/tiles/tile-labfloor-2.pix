@@ -1,24 +1,24 @@
 # Wave 5a: Lab floor v2 — dark slate panels
 PIX tile-labfloor-2 16 16
-bbbbbbbbbbbbbbbb
-bcaaaaaabaaaaacb
-baaaaaaabaaaaaab
-baaaaaaabaaaaaab
-baaaaaaabaaacaab
-baaaaaaabaaaaaab
-baaaaaaabaaaaaab
-baaaaaaabaaaaaab
-bbbbbbbbbbbbbbbb
-baaaaaaabcaaaaab
-baaaaaaabaaaaaab
-baaaacaabaaaaaab
-baaaaaaabaaaaaab
-baaaaaaabaaaaaab
-bcaaaaaabaaaaacb
-bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+acaaaaaaaaaaaaca
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaacaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaacaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+acaaaaaaaaaaaaca
+aaaaaaaaaaaaaaaa
 PAL
-a #46536e lab-floor
-b #3a4357 lab-panel-line
-c #5f6e8f lab-rivet
+a #59647a lab-floor
+b #50596b lab-panel-line
+c #6c7790 lab-rivet
 
 # W5SPLIT2 hue shift 7deg (TX-1 variant split)

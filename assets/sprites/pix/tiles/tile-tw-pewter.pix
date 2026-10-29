@@ -17,10 +17,10 @@ nnnnnnnnnnnnnnnn
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #d9d3c4 pewter-wall
-n #b5a98d wall-shade-band
-s #a19880 wall-shadow
-t #5a3a24 window-frame
-g #ffd873 window-lit
-h #eef7ff glass-shine
-F #6a6a80 foundation-stone
+w #c6c0b1 pewter-wall
+n #aaa18d wall-shade-band
+s #9c9584 wall-shadow
+t #71523d window-frame
+g #d1bc88 window-lit
+h #c6d8e9 glass-shine
+F #757585 foundation-stone

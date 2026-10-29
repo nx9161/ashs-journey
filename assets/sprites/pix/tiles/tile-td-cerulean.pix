@@ -17,11 +17,11 @@ PIX tile-td-cerulean 16 16
 ................
 ................
 PAL
-t #a8845c planter-edge
-s #5a3a24 planter-soil
-n #4c8a3e planter-leaf
-f #bfe8e0 cerulean-bloom
-y #f0e060 bloom-yellow
-w #eef7ff bloom-white
-a #57a8a0 cerulean-sign
-b #202028 sign-mark
+t #a0876c planter-edge
+s #71523d planter-soil
+n #5e8f53 planter-leaf
+f #aad4cc cerulean-bloom
+y #cac177 bloom-yellow
+w #c6d8e9 bloom-white
+a #699f9a cerulean-sign
+b #3f3f49 sign-mark

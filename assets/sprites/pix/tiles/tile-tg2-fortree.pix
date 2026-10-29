@@ -1,25 +1,25 @@
 # Stage H3a: fortree town ground II — cross-hatched plaza texture (full-bleed, walkable).
 PIX tile-tg2-fortree 16 16
-bcccaccbcbabcabc
-cbbccbccaaccbacc
-cccbacbacebcacbc
-abccbccabaccccab
-cacacbbacaaccbcc
-ccbcbcbacccbccac
-bcbcaccccbcaccbc
-bcaccccbacccccbe
-acccbbcccaacbcac
-cacbcccacabcccca
-cbbaabccbcccacab
-ccccccbacccccbca
-aaccbaaacccbccac
-aabccccbcbaacccc
-baabacebcccaccba
-bcaccbaccacabcba
+bccccccbcbcbccbc
+cbbccbccccccbccc
+cccbccbccebcccbc
+cbccbcccbccccccb
+cccccbbccccccbcc
+ccbcbcbccccbcccc
+bcbccccccbccccbc
+bccccccbccccccbe
+ccccbbccccccbccc
+cccbccccccbccccc
+cbbccbccbccccccb
+ccccccbccccccbcc
+ccccbccccccbcccc
+ccbccccbcbcccccc
+bccbccebccccccbc
+bccccbccccccbcbc
 PAL
-a #5d9c66 fortree-ground
-b #497a50 ground-dark
-c #6eb878 ground-light
-d #c8a24a town-accent
-e #7ab0d8 town-accent-2
-f #385e3d ground-deep
+a #6c9872 fortree-ground
+b #5c8361 ground-dark
+c #78ac7f ground-light
+d #b69c5f town-accent
+e #7da6c5 town-accent-2
+f #4e7053 ground-deep

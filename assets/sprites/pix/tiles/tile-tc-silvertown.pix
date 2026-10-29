@@ -17,9 +17,9 @@ PIX tile-tc-silvertown 16 16
 .......kk.......
 ................
 PAL
-a #c8c8d0 canopy
-b #9c9ca2 canopy-dark
-c #ececf5 canopy-light
-d #c9a227 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #b6b6bd canopy
+b #98989c canopy-dark
+c #cacadd canopy-light
+d #b79c47 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

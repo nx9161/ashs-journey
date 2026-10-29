@@ -4,26 +4,26 @@ gggggggggggggggg
 gggggggggggggggg
 gggggggggggggggg
 gggggggggggggggg
-gggggggmgggggggg
-ggggggmmmgggdggg
-glgggmmmmmgdldgg
-lllgggmsmhddmddg
-llmlggsshhhdddgg
-llddgggsghdgmmmg
-glgggglllggggmgg
-gggggglllggggggg
-ggggggglglgggggg
-gggggggglllggggg
-ggggggggglgggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggsghgggggg
+ggggggsshhhggggg
+gggggggsghgggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
 gggggggggggggggg
 PAL
-g #65a84d grass
-d #538f40 grass-dark
-l #75b45c grass-light
-m #6daa54 grass-mid
-h #7fc168 grass-highlight
-a #90cb74 grass-pale
-s #3c6e2c grass-shadow
-e #336127 grass-deep
+g #71a160 grass
+d #639254 grass-dark
+l #7da86c grass-light
+m #78a167 grass-mid
+h #83b273 grass-highlight
+a #8fbb7a grass-pale
+s #527e44 grass-shadow
+e #4b753f grass-deep
 
 # W5SPLIT2 hue shift -4deg (TX-1 variant split)

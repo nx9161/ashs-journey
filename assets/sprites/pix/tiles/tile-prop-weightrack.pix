@@ -33,8 +33,8 @@ PIX tile-prop-weightrack 16 32
 ................
 ................
 PAL
-B #6a6a80 body
-D #202028 shade
-L #9a9aa5 light
-A #e84c3c accent
-C #3a7bd5 accent-2
+B #757585 body
+D #3f3f49 shade
+L #96969f light
+A #c16a61 accent
+C #5681bd accent-2

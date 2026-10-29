@@ -17,9 +17,9 @@ PIX tile-tc-goldenrod 16 16
 .......kk.......
 ................
 PAL
-a #c2a878 canopy
-b #97835e canopy-dark
-c #e5c68e canopy-light
-d #e85a4a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #b4a17e canopy
+b #95876c canopy-dark
+c #d1b789 canopy-light
+d #c47168 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

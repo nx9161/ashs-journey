@@ -3,28 +3,28 @@
 # cluster-stamp texture distinct from the encounter-grass variants. Placed on
 # map char _ (see tiles.mjs); the encounter code paths key on the , char only.
 PIX tile-grassground 16 16
-mmllddddaaaammmm
-mmllddddggggmmmm
-aaddaammaahhlldd
-ggddggmmgghhlldd
-mmddllhhddmmmmhh
-mmddllhhddmmmmhh
-ddllllmmllddllmm
-ddllllmmllddllmm
-aahhddaaddaammdd
-gghhddggddggmmdd
-mmllllaaddmmddhh
-mmllllggddmmddhh
-ddllmmaaddllddll
-ddllmmggddllddll
-llmmddmmllddaahh
-llmmddmmllddgghh
+ddllddddaaaadddd
+ddlldddddddddddd
+aaddaaddaahhlldd
+ddddddddddhhlldd
+ddddllhhddddddhh
+ddddllhhddddddhh
+ddllllddllddlldd
+ddllllddllddlldd
+aahhddaaddaadddd
+ddhhdddddddddddd
+ddllllaaddddddhh
+ddllllddddddddhh
+ddllddaaddllddll
+ddllddddddllddll
+llddddddllddaahh
+llddddddllddddhh
 PAL
-g #5da24a grass
-d #4c8a3e grass
-l #6fb45c grass
-m #67aa54 grass
-h #79c168 grass
-a #8acb74 grass
-s #386e2c grass
-e #2f6127 grass
+g #6b9e5d grass
+d #5e8f53 grass
+l #79a86c grass
+m #73a167 grass
+h #7fb273 grass
+a #8bbb7a grass
+s #4e7e44 grass
+e #47753f grass

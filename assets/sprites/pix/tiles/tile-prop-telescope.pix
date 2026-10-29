@@ -17,8 +17,8 @@ PIX tile-prop-telescope 16 16
 ...DD...DD......
 ...DD...DD......
 PAL
-B #8a8aa0 body
-D #46586e shade
-L #c2c8d4 light
-A #ffd873 accent
-C #202028 accent-2
+B #8b8b9b body
+D #59687a shade
+L #b0b6c1 light
+A #d1bc88 accent
+C #3f3f49 accent-2

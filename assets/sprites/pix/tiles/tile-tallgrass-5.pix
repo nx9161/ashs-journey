@@ -1,27 +1,27 @@
 # Premium+ W5: TX-1 tall grass variant 5
 PIX tile-tallgrass-5 16 16
-gglleedddssheegg
+gghheedddssheegg
 geeeeeddhhhheegg
-heeeeeeehhddllll
-hhmmgeehedddllll
-ghheeehhdmsseeee
-ghhdehhhmggeeeee
-mmsmhhhhgggeeghh
-gghhddllhhggghhe
-gghheellhheemhhe
-llmmllllhhhhmmhh
-ddgehhdgllggeehh
-ddllhhgeemggedde
-mmhhllgeemddddhh
-mmhlllggmmddddhh
-ggssmmmmgmmgmmdd
-ggssmmmmggmmmmdd
+heeeeeeehhddhhhh
+hhhhgeehedddhhhh
+ghheeehhdhsseeee
+ghhdehhhhggeeeee
+hhshhhhhgggeeghh
+gghhddhhhhggghhe
+gghheehhhheehhhe
+hhhhhhhhhhhhhhhh
+ddgehhdghhggeehh
+ddhhhhgeehggedde
+hhhhhhgeehddddhh
+hhhhhhgghhddddhh
+ggsshhhhghhghhdd
+ggsshhhhgghhhhdd
 PAL
-g #579e44 grass
-d #468136 grass-dark
-l #67ae54 grass-light
-m #5f9c4c grass-mid
-h #73ba60 grass-highlight
-a #85c472 grass-pale
-s #386e2c grass-shadow
-e #2f6127 grass-deep
+g #669c58 grass
+d #598a4c grass-dark
+l #74a467 grass-light
+m #6c9a5e grass-mid
+h #7bad6e grass-highlight
+a #87b57a grass-pale
+s #4e7e44 grass-shadow
+e #47753f grass-deep

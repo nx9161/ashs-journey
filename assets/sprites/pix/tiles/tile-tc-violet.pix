@@ -17,9 +17,9 @@ PIX tile-tc-violet 16 16
 .......kk.......
 ................
 PAL
-a #9a94a6 canopy
-b #787381 canopy-dark
-c #b6afc4 canopy-light
-d #7a6ab0 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #97929f canopy
+b #7f7b85 canopy-dark
+c #aaa4b5 canopy-light
+d #8075a6 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

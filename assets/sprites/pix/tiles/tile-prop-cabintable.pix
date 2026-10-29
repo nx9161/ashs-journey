@@ -17,7 +17,7 @@ PIX tile-prop-cabintable 16 16
 .....dddddd.....
 ................
 PAL
-a #f0e060 cabin-lamp
-b #a87f4e cabin-table
-c #5a3a24 cabin-table-edge
-d #5a3a24 cabin-table-leg
+a #cac177 cabin-lamp
+b #a18461 cabin-table
+c #71523d cabin-table-edge
+d #71523d cabin-table-leg

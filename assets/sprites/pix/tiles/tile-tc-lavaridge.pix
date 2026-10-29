@@ -17,9 +17,9 @@ PIX tile-tc-lavaridge 16 16
 .......kk.......
 ................
 PAL
-a #bd7a48 canopy
-b #935f38 canopy-dark
-c #df9055 canopy-light
-d #e83a2a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #ae805e canopy
+b #966d4e canopy-dark
+c #c59069 canopy-light
+d #be6058 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

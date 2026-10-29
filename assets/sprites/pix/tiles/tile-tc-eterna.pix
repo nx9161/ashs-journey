@@ -17,9 +17,9 @@ PIX tile-tc-eterna 16 16
 .......kk.......
 ................
 PAL
-a #4f772d canopy
-b #3e5d23 canopy-dark
-c #5d8c35 canopy-light
-d #c8a24a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #628445 canopy
+b #56733c canopy-dark
+c #6c914c canopy-light
+d #b69c5f canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 martfloor variant 4 — bold diamond (diff>=80px)
 PIX tile-martfloor-4 16 16
 bbbbbbbbbbbbbbbb
-baaabaaacaaabaaa
-baaabaacacaabaaa
-baaabacacacabaaa
-bbbbacacacacbbbb
-baaacacddacacaaa
-baacacddddacacaa
-bacacddddddacaca
-bcacaddddddcacab
-bacacaddddcacaaa
-baacacaddcacaaaa
-baaacacacacabaaa
-bbbbbcacacabbbbb
-baaabacacaaabaaa
-baaabaacaaaabaaa
+baaabaaaaaaabaaa
+baaabaaaaaaabaaa
+baaabaaaaaaabaaa
+bbbbaaaaaaaabbbb
+baaaaaaddaaaaaaa
+baaaaaddddaaaaaa
+baaaaddddddaaaaa
+baaaaddddddaaaab
+baaaaaddddaaaaaa
+baaaaaaddaaaaaaa
+baaaaaaaaaaabaaa
+bbbbbaaaaaabbbbb
+baaabaaaaaaabaaa
+baaabaaaaaaabaaa
 baaabaaabaaabaaa
 PAL
-a #cfd4c2 martfloor-floor
-b #9db894 martfloor-line
-c #bfc9ae martfloor-alt
-d #86a87e martfloor-alt2
+a #bdc1b0 martfloor-floor
+b #98ad91 martfloor-line
+c #b1b9a3 martfloor-alt
+d #89a183 martfloor-alt2

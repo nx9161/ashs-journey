@@ -17,11 +17,11 @@ wwwwwwwwwwwwwwww
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #c9a86a wall-mid
-l #e3c285 wall-light
-s #a88a4e wall-shadow
-t #5a3f24 trim
-g #ffd873 window-lit
-u #2e58b0 window-glass
-h #5a8ee8 glass-shine
-F #6a6a80 foundation-stone
+w #b9a174 wall-mid
+l #cfb483 wall-light
+s #a18c61 wall-shadow
+t #71573d trim
+g #d1bc88 window-lit
+u #4767aa window-glass
+h #7090c7 glass-shine
+F #757585 foundation-stone

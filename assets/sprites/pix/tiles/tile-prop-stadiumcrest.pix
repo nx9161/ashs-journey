@@ -17,7 +17,7 @@ PIX tile-prop-stadiumcrest 16 16
 ................
 ................
 PAL
-a #8a97a8 plaque-stone
-b #6a7a8c plaque-edge
-g #e8b83a crest-gold
-r #b0503c crest-gem
+a #8b94a1 plaque-stone
+b #75808d plaque-edge
+g #c1a660 crest-gold
+r #a96152 crest-gem

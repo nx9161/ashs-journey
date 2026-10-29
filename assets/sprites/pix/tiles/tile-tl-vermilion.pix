@@ -17,11 +17,11 @@ ssssssssssssssss
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #f5f0dc landmark-wall
-e #ebe1b8 landmark-wall-shade
-d #a06a3c vermilion-trim
-s #a87f4e landmark-shadow
-a #f0d0a0 vermilion-crest
-z #e1a03f crest-dark
-h #f1f3b6 crest-light
-F #6a6a80 foundation-stone
+w #e1d9ba landmark-wall
+e #d7cda4 landmark-wall-shade
+d #9e7552 vermilion-trim
+s #a18461 landmark-shadow
+a #d7bd97 vermilion-crest
+z #c1995f crest-dark
+h #dadba4 crest-light
+F #757585 foundation-stone

@@ -17,9 +17,9 @@ PIX tile-tc-floaroma 16 16
 .......kk.......
 ................
 PAL
-a #e88bb0 canopy
-b #b56c89 canopy-dark
-c #ffa4d0 canopy-light
-d #f0f0a0 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #d188a5 canopy
+b #aa768b canopy-dark
+c #daa1bd canopy-light
+d #d7d797 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

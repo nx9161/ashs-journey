@@ -17,10 +17,10 @@ nnnnnnnnnnnnnnnn
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #a4aed3 indigo-wall
-n #6d7db8 wall-shade-band
-s #5c6ca0 wall-shadow
-t #5a3a24 window-frame
-g #ffd873 window-lit
-h #eef7ff glass-shine
-F #6a6a80 foundation-stone
+w #9aa3c2 indigo-wall
+n #7782ac wall-shade-band
+s #6c779a wall-shadow
+t #71523d window-frame
+g #d1bc88 window-lit
+h #c6d8e9 glass-shine
+F #757585 foundation-stone

@@ -17,13 +17,13 @@ PIX tile-caveboulder-3 16 16
 ................
 ................
 PAL
-m #8e8aa0 rock
-z #6e6a80 rock-dark
-c #c2c5d4 rock-light
-k #5a4324 shadow-brown
-a #a8915c strata-brown
-b #b0a068 strata-tan
-y #7a6538 strata-dark
-g #46516e rock-slate
+m #8e8b9b rock
+z #787585 rock-dark
+c #b0b3c1 rock-light
+k #715b3d shadow-brown
+a #a0906c strata-brown
+b #a69b74 strata-tan
+y #84734e strata-dark
+g #59627a rock-slate
 
 # W5SPLIT2 hue shift 10deg (TX-1 variant split)

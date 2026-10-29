@@ -33,8 +33,8 @@ PIX tile-prop-tallbooks 16 32
 ................
 ................
 PAL
-B #5f5130 body
-D #54452f shade
-L #8a5a30 light
-A #e86a8a accent
-C #3a7bd5 accent-2
+B #726648 body
+D #6a5c47 shade
+L #916a47 light
+A #ca788d accent
+C #5681bd accent-2

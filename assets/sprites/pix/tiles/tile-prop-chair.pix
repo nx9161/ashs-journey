@@ -17,6 +17,6 @@ PIX tile-prop-chair 16 16
 ................
 ................
 PAL
-a #a87f4e chair-back
-b #5a3a24 chair-frame
-c #b0503c chair-seat
+a #a18461 chair-back
+b #71523d chair-frame
+c #a96152 chair-seat

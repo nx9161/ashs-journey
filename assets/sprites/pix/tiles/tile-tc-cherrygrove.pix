@@ -17,9 +17,9 @@ PIX tile-tc-cherrygrove 16 16
 .......kk.......
 ................
 PAL
-a #a8c686 canopy
-b #839a69 canopy-dark
-c #c6ea9e canopy-light
-d #e86a8a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #a1b787 canopy
+b #879675 canopy-dark
+c #b6d593 canopy-light
+d #ca788d canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

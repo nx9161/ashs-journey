@@ -17,6 +17,6 @@ PIX tile-smoke-grey-3 16 16
 ................
 ................
 PAL
-a #8a8aa0 smoke-mid
-b #6a6a80 smoke-dark
-c #c2c8d4 smoke-light
+a #8b8b9b smoke-mid
+b #757585 smoke-dark
+c #b0b6c1 smoke-light

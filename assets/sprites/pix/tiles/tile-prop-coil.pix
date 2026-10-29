@@ -33,8 +33,8 @@ PIX tile-prop-coil 16 32
 ................
 ................
 PAL
-B #8a8aa0 body
-D #46586e shade
-L #f0e060 light
-A #202028 accent
-C #e84c3c accent-2
+B #8b8b9b body
+D #59687a shade
+L #cac177 light
+A #3f3f49 accent
+C #c16a61 accent-2

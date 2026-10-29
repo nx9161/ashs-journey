@@ -17,13 +17,13 @@ tttttttvvvtuuutt
 .......kksss....
 .........ssss...
 PAL
-t #3e7a34 leaf
-u #2e5e28 leaf-dark
-v #54a048 leaf-light
-s #386e2c leaf-shadow
-e #2f6127 leaf-deep
-d #4c8a3e grass-dark
-l #6fb45c leaf-pale
-h #79c168 leaf-highlight
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #53854b leaf
+u #467340 leaf-dark
+v #649d5b leaf-light
+s #4e7e44 leaf-shadow
+e #47753f leaf-deep
+d #5e8f53 grass-dark
+l #79a86c leaf-pale
+h #7fb273 leaf-highlight
+k #71523d trunk
+w #846a4e trunk-light

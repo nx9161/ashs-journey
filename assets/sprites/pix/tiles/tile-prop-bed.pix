@@ -17,7 +17,7 @@ PIX tile-prop-bed 16 16
 ..dddddddddddd..
 ................
 PAL
-a #f5f0dc bed-pillow
-b #3a7bd5 bed-blanket
-c #6fb0ee bed-stripe
-d #7a5a38 bed-frame
+a #e1d9ba bed-pillow
+b #5681bd bed-blanket
+c #7da6cd bed-stripe
+d #846a4e bed-frame

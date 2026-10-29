@@ -17,6 +17,6 @@ PIX tile-prop-originstone 16 16
 .....bbbbbb.....
 ................
 PAL
-a #d8d4c8 origin-stone
-b #a8a498 origin-stone-dark
-c #8a7ab0 origin-carving
+a #c4c0b5 origin-stone
+b #a19e95 origin-stone-dark
+c #8b80a6 origin-carving

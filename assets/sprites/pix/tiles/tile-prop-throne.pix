@@ -17,8 +17,8 @@ PIX tile-prop-throne 16 16
 ..eeeeeeeeeeee..
 ................
 PAL
-a #d84040 throne-back
-b #ffd873 throne-trim
-c #ffd873 throne-gem
-d #7a3226 throne-seat
-e #6a4a7a throne-base
+a #bf5b5b throne-back
+b #d1bc88 throne-trim
+c #d1bc88 throne-gem
+d #87493f throne-seat
+e #765c83 throne-base

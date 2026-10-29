@@ -17,8 +17,8 @@ PIX tile-prop-coalscuttle 16 16
 ................
 ................
 PAL
-B #202028 body
-D #202028 shade
-L #46586e light
-A #f07830 accent
-C #54452f accent-2
+B #3f3f49 body
+D #3f3f49 shade
+L #59687a light
+A #c1835f accent
+C #6a5c47 accent-2

@@ -17,8 +17,8 @@ PIX tile-prop-cercrystal 16 16
 ................
 ................
 PAL
-B #8a7a9a body
-D #594a72 shade
-L #e8e4f0 light
-A #7a6a8a accent
-C #8ae8f0 accent-2
+B #8b8097 body
+D #695c7d shade
+L #cbc5d8 light
+A #80758c accent
+C #8ccdd2 accent-2

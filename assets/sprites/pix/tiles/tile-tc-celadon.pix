@@ -17,15 +17,15 @@ tttttxxvvvxxuaat
 .......kk.......
 .......kk.......
 PAL
-t #3e7a34 leaf
-u #2e5e28 leaf-dark
-v #54a048 leaf-light
-s #386e2c leaf-shadow
-e #2f6127 leaf-deep
-h #d0f0c0 celadon-blossom
-a #d0f0c0 celadon-fruit
-x #5cb255 celadon-canopy-tint
-z #d5f5d8 celadon-bloom-light
-n #468d40 celadon-canopy-shade
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #53854b leaf
+u #467340 leaf-dark
+v #649d5b leaf-light
+s #4e7e44 leaf-shadow
+e #47753f leaf-deep
+h #b9dca8 celadon-blossom
+a #b9dca8 celadon-fruit
+x #6ca767 celadon-canopy-tint
+z #b5e1b9 celadon-bloom-light
+n #599154 celadon-canopy-shade
+k #71523d trunk
+w #846a4e trunk-light

@@ -17,6 +17,6 @@ PIX tile-prop-ironarch 16 16
 ................
 ................
 PAL
-a #46586e bridge-iron
-b #2e3c4c bridge-iron-dark
-c #9ac8e8 bridge-rivet
+a #59687a bridge-iron
+b #475564 bridge-iron-dark
+c #90b8d4 bridge-rivet

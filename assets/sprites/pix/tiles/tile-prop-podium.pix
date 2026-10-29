@@ -17,7 +17,7 @@ PIX tile-prop-podium 16 16
 ...dddddddddd...
 ................
 PAL
-a #ffd873 podium-top
-b #7a5a38 podium-body
-c #ffd873 podium-emblem
-d #5a3a24 podium-base
+a #d1bc88 podium-top
+b #846a4e podium-body
+c #d1bc88 podium-emblem
+d #71523d podium-base

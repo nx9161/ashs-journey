@@ -17,8 +17,8 @@ PIX tile-prop-vinepost 16 16
 .......DD.......
 ................
 PAL
-B #386e2c body
-D #2e5e28 shade
-L #67aa54 light
-A #54452f accent
-C #a9e8a8 accent-2
+B #4e7e44 body
+D #467340 shade
+L #73a167 light
+A #6a5c47 accent
+C #9ad499 accent-2

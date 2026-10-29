@@ -17,7 +17,7 @@ PIX tile-decor-bottles 16 16
 ................
 ................
 PAL
-g #57a8a0 bottle-teal
-a #e8a33c bottle-amber
-l #cfe8a8 bottle-glass
-c #8a5a30 cork
+g #699f9a bottle-teal
+a #c19b61 bottle-amber
+l #bdd499 bottle-glass
+c #916a47 cork

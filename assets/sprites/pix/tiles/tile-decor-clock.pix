@@ -17,7 +17,7 @@ PIX tile-decor-clock 16 16
 ................
 ................
 PAL
-f #e8dcc0 clock-face
-r #9c3220 rim
-h #202028 hands
-p #c9a227 pendulum
+f #d4c8aa clock-face
+r #9c4b3d rim
+h #3f3f49 hands
+p #b79c47 pendulum

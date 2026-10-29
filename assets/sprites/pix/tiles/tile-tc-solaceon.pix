@@ -17,9 +17,9 @@ PIX tile-tc-solaceon 16 16
 .......kk.......
 ................
 PAL
-a #a3b18a canopy
-b #7f8a6c canopy-dark
-c #c0d1a3 canopy-light
-d #c0784a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #9da78b canopy
+b #848c76 canopy-dark
+c #b2c09a canopy-light
+d #b07f60 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

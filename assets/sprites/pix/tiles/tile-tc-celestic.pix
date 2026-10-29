@@ -17,9 +17,9 @@ PIX tile-tc-celestic 16 16
 .......kk.......
 ................
 PAL
-a #957fef canopy
-b #7463ba canopy-dark
-c #b096ff canopy-light
-d #e8e4da canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #9486d0 canopy
+b #7c70ad canopy-dark
+c #a99ad8 canopy-light
+d #d1ccbf canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

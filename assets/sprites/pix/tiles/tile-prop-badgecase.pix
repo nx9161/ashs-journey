@@ -17,11 +17,11 @@ PIX tile-prop-badgecase 16 16
 ................
 ................
 PAL
-a #5a3a24 case-frame
-b #6a4a7a case-velvet
-c #8a8aa0 badge-stone
-d #3a7bd5 badge-blue
-e #f0e060 badge-yellow
-f #d84040 badge-red
-g #3fa08a badge-teal
-h #e86a8a badge-pink
+a #71523d case-frame
+b #765c83 case-velvet
+c #8b8b9b badge-stone
+d #5681bd badge-blue
+e #cac177 badge-yellow
+f #bf5b5b badge-red
+g #549e8d badge-teal
+h #ca788d badge-pink

@@ -17,12 +17,12 @@ PIX tile-prop-apricorn 16 16
 .......kk.......
 ................
 PAL
-a #3e7a34 apricorn-leaf
-b #2e5e28 apricorn-leaf-dark
-c #54a048 apricorn-leaf-light
-k #5a3a24 apricorn-trunk
-r #e84a3a apricorn-red
-y #f0d040 apricorn-yellow
-p #f098c0 apricorn-pink
-w #f0ead8 apricorn-white
-g #58b84a apricorn-green
+a #53854b apricorn-leaf
+b #467340 apricorn-leaf-dark
+c #649d5b apricorn-leaf-light
+k #71523d apricorn-trunk
+r #c16960 apricorn-red
+y #c4b367 apricorn-yellow
+p #d593b1 apricorn-pink
+w #dbd3ba apricorn-white
+g #69aa60 apricorn-green

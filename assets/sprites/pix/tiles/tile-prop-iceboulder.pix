@@ -17,8 +17,8 @@ PIX tile-prop-iceboulder 16 16
 ................
 ................
 PAL
-B #8ae8f0 body
-D #2e63b0 shade
-L #eef7ff light
-A #5a9ae8 accent
-C #d2e8ef accent-2
+B #8ccdd2 body
+D #476faa shade
+L #c6d8e9 light
+A #7097c7 accent
+C #b6d1da accent-2

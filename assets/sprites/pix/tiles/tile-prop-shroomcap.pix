@@ -17,8 +17,8 @@ PIX tile-prop-shroomcap 16 16
 ................
 ................
 PAL
-B #e8e4f0 body
-D #8a7a9a shade
-L #fdfdf8 light
-A #e86a8a accent
-C #7a6a8a accent-2
+B #cbc5d8 body
+D #8b8097 shade
+L #e9e9cc light
+A #ca788d accent
+C #80758c accent-2

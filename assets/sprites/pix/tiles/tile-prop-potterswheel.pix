@@ -17,8 +17,8 @@ PIX tile-prop-potterswheel 16 16
 ...DDDDDDDDDD...
 ................
 PAL
-B #8a8aa0 body
-D #46586e shade
-L #b0503c light
-A #c9a06a accent
-C #202028 accent-2
+B #8b8b9b body
+D #59687a shade
+L #a96152 light
+A #b99b74 accent
+C #3f3f49 accent-2

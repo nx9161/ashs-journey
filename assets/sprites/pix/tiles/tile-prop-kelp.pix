@@ -17,6 +17,6 @@ PIX tile-prop-kelp 16 16
 .....b..b..b....
 ................
 PAL
-b #2a8a64 kelp-frond
-c #54c48e kelp-frond-light
-d #a8e8c8 kelp-bulb
+b #429172 kelp-frond
+c #66b48e kelp-frond-light
+d #99d4b7 kelp-bulb

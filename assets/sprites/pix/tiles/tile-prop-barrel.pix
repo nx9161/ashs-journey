@@ -17,7 +17,7 @@ PIX tile-prop-barrel 16 16
 .....WWWWWW.....
 ................
 PAL
-W #5f5130 wood
-w #5a3a24 wood-dark
-L #8a6a48 wood-light
-k #202028 iron-band
+W #726648 wood
+w #71523d wood-dark
+L #8e755b wood-light
+k #3f3f49 iron-band

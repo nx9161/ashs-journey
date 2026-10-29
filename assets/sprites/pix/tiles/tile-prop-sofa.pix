@@ -17,7 +17,7 @@ PIX tile-prop-sofa 16 16
 ..dddddddddddd..
 ................
 PAL
-a #e8b4c4 sofa-back
-b #c97e97 sofa-arm
-c #c97e97 sofa-seat
-d #9e5570 sofa-shadow
+a #d4a2b1 sofa-back
+b #b98194 sofa-arm
+c #b98194 sofa-seat
+d #9b6579 sofa-shadow

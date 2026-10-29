@@ -17,7 +17,7 @@ PIX tile-prop-statue 16 16
 ..dddddddddddd..
 ................
 PAL
-a #8a8aa0 statue-stone
-b #eef7ff statue-eye
-c #c2c8d4 statue-plinth-top
-d #6a6a80 statue-plinth
+a #8b8b9b statue-stone
+b #c6d8e9 statue-eye
+c #b0b6c1 statue-plinth-top
+d #757585 statue-plinth

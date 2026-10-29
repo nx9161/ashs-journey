@@ -17,9 +17,9 @@ PIX tile-tc-pastoria 16 16
 .......kk.......
 ................
 PAL
-a #6a994e canopy
-b #53773d canopy-dark
-c #7db55c canopy-light
-d #d9a441 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #759860 canopy
+b #648252 canopy-dark
+c #82a96c canopy-light
+d #bf9d5c canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

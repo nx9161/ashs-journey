@@ -17,8 +17,8 @@ PIX tile-prop-labdesk 16 16
 ..bb........bb..
 ................
 PAL
-a #c2c8d4 labdesk-top
-b #3a4657 labdesk-leg
-c #6fb0ee labdesk-flask
-d #e86a8a labdesk-liquid
-e #f5f0dc labdesk-papers
+a #b0b6c1 labdesk-top
+b #505b6b labdesk-leg
+c #7da6cd labdesk-flask
+d #ca788d labdesk-liquid
+e #e1d9ba labdesk-papers

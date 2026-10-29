@@ -33,9 +33,9 @@ PIX tile-prop-routearch 16 32
 ..Www...........
 .wwwww..........
 PAL
-W #5f5130 wood
-w #5a3a24 wood-dark
-L #8a6a48 wood-light
-R #d84040 pennant
-r #823936 pennant-shade
-k #202028 bell
+W #726648 wood
+w #71523d wood-dark
+L #8e755b wood-light
+R #bf5b5b pennant
+r #8a4f4c pennant-shade
+k #3f3f49 bell

@@ -751,6 +751,12 @@ export function buildArtTileCache(doc) {
     cache.detail.twig, cache.detail.petals, cache.detail.shells, cache.detail.moss,
     cache.detail.clover, cache.detail.sand, cache.detail.ash, cache.detail.straw,
     cache.detail.blossom, cache.detail.bunting, cache.detail.cobbleRing].filter(Boolean);
+  // Readability pass (2026-10-29): the CALM detail set for outdoor ground —
+  // the confetti kinds (petals / blossom / bunting / cobbleRing) leave the
+  // outdoor rotation; what remains is low-contrast ground texture only.
+  cache.detailCalmSet = [cache.detail.pebbles, cache.detail.dirt, cache.detail.leaves,
+    cache.detail.twig, cache.detail.shells, cache.detail.moss,
+    cache.detail.clover, cache.detail.sand, cache.detail.ash, cache.detail.straw].filter(Boolean);
   // ---- Premium+ W5: light & shadow sets (LD-1/LD-2) ----
   cache.grassgroundVariants = ids(['tile-grassground', 'tile-grassground-2', 'tile-grassground-3', 'tile-grassground-4']);
   if (cache.grassgroundVariants.length) cache.grassground = cache.grassgroundVariants[0];
@@ -1113,13 +1119,16 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
   const pushAtmo = (layers) => {
     if (!cache.atmo) return;
     const cv = cache.atmo[atmoKeyFor(mapId)];
-    if (cv && hashTileSpread(x, y, 151) < 0.5) layers.push(cv);
+    if (cv && hashTileSpread(x, y, 151) < 0.22) layers.push(cv); // readability pass: 0.5 -> 0.22 coverage
   };
   // TX-1: the 12-overlay detail set, spread-hash picked.
-  const pushDetail = (layers, rate, salt) => {
-    if (!cache.detailSet || !cache.detailSet.length) return;
+  // Readability pass (2026-10-29): outdoor ground passes the CALM set —
+  // same mechanism, quieter vocabulary, lower rate (call sites).
+  const pushDetail = (layers, rate, salt, set) => {
+    const pool = set || cache.detailSet;
+    if (!pool || !pool.length) return;
     if (hashTileSpread(x, y, salt) < rate) {
-      const d = cache.detailSet[Math.floor(hashTileSpread(x, y, salt + 1) * cache.detailSet.length) % cache.detailSet.length];
+      const d = pool[Math.floor(hashTileSpread(x, y, salt + 1) * pool.length) % pool.length];
       if (d) layers.push(d);
     }
   };
@@ -1127,10 +1136,12 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
   if (kind.startsWith('tg-') || kind.startsWith('tg2-')) {
     // Town ground: the settlement's own street/meadow texture (walkable).
     const layers = [cache[kind] || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
-    const sway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
+    // Readability pass: sway overlays cover ~35% of ground cells, not all.
+    const sway = hashTileSpread(x, y, 44) < 0.35
+      ? pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41) : null;
     if (sway) layers.push(sway);
     pushLampGlow(layers);
-    pushDetail(layers, 0.30, 17);
+    pushDetail(layers, 0.12, 17, cache.detailCalmSet);
     pushBlends(layers);
     pushAtmo(layers);
     if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
@@ -1173,7 +1184,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
   }
   if (kind.startsWith('flora-')) {
     const layers = [cache[kind] || cache.grass];
-    const sway = pickAnim(cache.grassSway.a, tt, x, y, CAD_SLOW, 41);
+    const sway = hashTileSpread(x, y, 44) < 0.35 ? pickAnim(cache.grassSway.a, tt, x, y, CAD_SLOW, 41) : null;
     if (sway) layers.push(sway);
     if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
     pushSkirts(layers);
@@ -1202,11 +1213,12 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       // match the base-grass treatment so W5 re-dress blends in.
       // Premium+ W5 (TX-1): 4 meadow variants, spread-hash picked.
       const layers = [pickVariantSpread(cache.grassgroundVariants, x, y, 39) || cache.grassground || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
-      const ggSway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
+      const ggSway = hashTileSpread(x, y, 44) < 0.35
+        ? pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41) : null;
       if (ggSway) layers.push(ggSway);
       pushPulse(layers);
       pushLampGlow(layers);
-      pushDetail(layers, 0.30, 19);
+      pushDetail(layers, 0.12, 19, cache.detailCalmSet);
       pushBlends(layers);
       pushAtmo(layers);
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
@@ -1238,11 +1250,12 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       } else {
         layers.push(pickVariant(cache.grassVariants, x, y, 13) || cache.grass);
         // W3: base-grass sway overlay (3f x 2 variants, slow cadence).
-        const sway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
+        const sway = hashTileSpread(x, y, 44) < 0.35
+          ? pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41) : null;
         if (sway) layers.push(sway);
         pushPulse(layers);
         pushLampGlow(layers);
-        pushDetail(layers, 0.30, 15); // W5 TX-1: 12-overlay detail set
+        pushDetail(layers, 0.12, 15, cache.detailCalmSet); // readability pass: was 0.30 full set
         pushBlends(layers);
         pushAtmo(layers);
         // grass<->tallgrass: short tufts lean in from a tall neighbour.
@@ -1279,7 +1292,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       // ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers); // W5 LD-1
-      pushDetail(layers, 0.20, 23); // W5 TX-1 detail set on paths too
+      pushDetail(layers, 0.10, 23, cache.detailCalmSet); // readability pass: was 0.20 full set
       pushBlends(layers);
       pushAtmo(layers);
       const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
@@ -1523,7 +1536,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const fv = pickVariant(cache.flowerVariants, x, y, 31) || cache.flower;
         const fvi = cache.flowerVariants ? cache.flowerVariants.indexOf(fv) : -1;
         const swayF = (fvi >= 0 && cache.flowerSway) ? cache.flowerSway[fvi] : null;
-        const fi = swayF ? animFrame(tt, x, y, CAD_MED, 2, 47) : 0;
+        // Readability pass: only ~25% of flower cells sway; the rest sit still.
+        const fi = (swayF && hashTileSpread(x, y, 49) < 0.25) ? animFrame(tt, x, y, CAD_MED, 2, 47) : 0;
         layers.push(fi === 1 && swayF ? swayF : fv);
       }
       else if (kind === 'tree') {
@@ -1532,7 +1546,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const baseTree = tv && tv.length ? tv[treeVariantIndex(x, y, tv.length)] : cache.tree;
         const ti = tv ? tv.indexOf(baseTree) : -1;
         const swayT = (ti >= 0 && cache.treeSway) ? cache.treeSway[ti] : null;
-        const tfi = swayT ? animFrame(tt, x, y, CAD_SLOW, 2, 53) : 0;
+        // Readability pass: only ~30% of trees sway; a still forest reads calm.
+        const tfi = (swayT && hashTileSpread(x, y, 55) < 0.30) ? animFrame(tt, x, y, CAD_SLOW, 2, 53) : 0;
         layers.push(tfi === 1 && swayT ? swayT : baseTree);
       } else if (kind === 'lamp') {
         // W3: lamp flicker, fast cadence.

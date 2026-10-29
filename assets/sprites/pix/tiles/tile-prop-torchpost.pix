@@ -17,8 +17,8 @@ PIX tile-prop-torchpost 16 16
 .......BB.......
 ................
 PAL
-B #8a5a30 body
-D #54452f shade
-L #c9a06a light
-A #f07830 accent
-C #ffd873 accent-2
+B #916a47 body
+D #6a5c47 shade
+L #b99b74 light
+A #c1835f accent
+C #d1bc88 accent-2

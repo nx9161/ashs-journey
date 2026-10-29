@@ -17,9 +17,9 @@ PIX tile-prop-slotmachine 16 16
 ...aaaaaaaaaa...
 ...ffffffffff...
 PAL
-a #b0503c slot-body
-b #ffd873 slot-top
-c #d84040 slot-light
-d #eef7ff slot-reels
-e #f0e060 slot-coins
-f #3a4657 slot-lever
+a #a96152 slot-body
+b #d1bc88 slot-top
+c #bf5b5b slot-light
+d #c6d8e9 slot-reels
+e #cac177 slot-coins
+f #505b6b slot-lever

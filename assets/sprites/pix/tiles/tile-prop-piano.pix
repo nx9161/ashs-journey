@@ -17,8 +17,8 @@ PIX tile-prop-piano 16 16
 ..DD........DD..
 ..DD........DD..
 PAL
-B #202028 body
-D #202028 shade
-L #46586e light
-A #eef7ff accent
-C #ffd873 accent-2
+B #3f3f49 body
+D #3f3f49 shade
+L #59687a light
+A #c6d8e9 accent
+C #d1bc88 accent-2

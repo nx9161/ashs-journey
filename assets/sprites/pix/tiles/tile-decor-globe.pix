@@ -17,7 +17,7 @@ PIX tile-decor-globe 16 16
 ................
 ................
 PAL
-o #57a8d8 ocean
-l #6ab45c land
-s #8a5a30 stand
-m #c9a227 meridian
+o #67a1c3 ocean
+l #75a86c land
+s #916a47 stand
+m #b79c47 meridian

@@ -2,28 +2,28 @@
 PIX tile-grass-4 16 16
 gggggggggggggggg
 gggggggggggggggg
-glgggggggggggggg
-lllggggggggggggg
-glggggggggdggggg
-gggggggggdddlggg
-ggggggggdddlllgg
-ggggggglgdgglggg
-gggggggmggggdmlg
-ggsggggddggddddl
-gsssggggggggllll
-ggsgggglggggglll
-ggddgghllggggglg
-ggmmmhhhgggggggg
-gggmgghggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+ggsggggggggggggg
+gsssgggggggggggg
+ggsggggggggggggg
+gggggghggggggggg
+ggggghhhgggggggg
+gggggghggggggggg
 gggggggggggggggg
 PAL
-g #4da045 grass
-d #3d8239 grass-dark
-l #63b45c grass-light
-m #5caa54 grass-mid
-h #6dc168 grass-highlight
-a #7ecb74 grass-pale
-s #2f6e2c grass-shadow
-e #276127 grass-deep
+g #5f9d59 grass
+d #528a4f grass-dark
+l #71a86c grass-light
+m #6ca167 grass-mid
+h #77b273 grass-highlight
+a #82bb7a grass-pale
+s #467e44 grass-shadow
+e #3f753f grass-deep
 
 # W5SPLIT2 hue shift 8deg (TX-1 variant split)

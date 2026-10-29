@@ -17,9 +17,9 @@ PIX tile-tc-veilstone 16 16
 .......kk.......
 ................
 PAL
-a #7d8597 canopy
-b #626876 canopy-dark
-c #949db2 canopy-light
-d #5e60ce canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #828894 canopy
+b #6f737e canopy-dark
+c #9298a8 canopy-light
+d #6c6dbc canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

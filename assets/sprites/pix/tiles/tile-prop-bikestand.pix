@@ -17,6 +17,6 @@ PIX tile-prop-bikestand 16 16
 ................
 ................
 PAL
-k #202028 rack-iron
-R #d84040 bike-red
-B #3a7bd5 bike-blue
+k #3f3f49 rack-iron
+R #bf5b5b bike-red
+B #5681bd bike-blue

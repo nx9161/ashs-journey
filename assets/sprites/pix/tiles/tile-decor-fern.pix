@@ -17,7 +17,7 @@ PIX tile-decor-fern 16 16
 ................
 ................
 PAL
-l #3f9e4d fern
-d #2e7a3a fern-dark
-p #7a4a8c pot-violet
-s #5a3a24 soil
+l #549c5f fern
+d #458650 fern-dark
+p #815c8f pot-violet
+s #71523d soil

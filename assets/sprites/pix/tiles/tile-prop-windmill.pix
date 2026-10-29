@@ -17,6 +17,6 @@ PIX tile-prop-windmill 16 16
 .......aa.......
 ................
 PAL
-a #8a94a6 turbine-post
-w #e8eef4 turbine-blade
-d #c03a30 turbine-hub
+a #8b929f turbine-post
+w #c6d1dd turbine-blade
+d #b4514a turbine-hub

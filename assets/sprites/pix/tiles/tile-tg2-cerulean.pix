@@ -1,26 +1,26 @@
 # Premium+ W5: TX-2 cerulean ground tg2 — second accent tone
 PIX tile-tg2-cerulean 16 16
-mmddggdllxxzggxg
-mzzdggddmmzzddgg
-llmmzzmmmmllggll
-xxgmzzmmmmllggll
-dddxxzzlddggzzxx
-ddggllllddggaaxx
-ggzzddxxddxxggll
-ggzzddxxddmmddll
-mmggggmmxxddllmm
-mmggddmmxmmdllmm
-xxddggmmmmmzzlll
-xxdxxdzzllmmllll
-ggxzzmllddmmllmm
-ddxxmmllzzmddlmm
-xxaaggllddggmmgg
-xddagglzzdggmmgg
+mmmmmmmllmmzmmmm
+mzzmmmmmmmzzmmmm
+llmmzzmmmmllmmll
+mmmmzzmmmmllmmll
+mmmmmzzlmmmmzzmm
+mmmmllllmmmmaamm
+mmzzmmmmmmmmmmll
+mmzzmmmmmmmmmmll
+mmmmmmmmmmmmllmm
+mmmmmmmmmmmmllmm
+mmmmmmmmmmmzzlll
+mmmmmmzzllmmllll
+mmmzzmllmmmmllmm
+mmmmmmllzzmmmlmm
+mmaammllmmmmmmmm
+mmmammlzzmmmmmmm
 PAL
-g #579aa8 cerulean-ground
-m #4a8895 ground-mid
-l #6fb1bd ground-light
-d #3a707d ground-dark
-a #bfe8e0 ground-accent
-x #57a88d ground-shift
-z #bfd7e8 ground-accent-2
+g #69969f cerulean-ground
+m #5c8b95 ground-mid
+l #78a7b0 ground-light
+d #4f7c86 ground-dark
+a #aad4cc ground-accent
+x #699f8d ground-shift
+z #aac3d4 ground-accent-2

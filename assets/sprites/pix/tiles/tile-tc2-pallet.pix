@@ -17,15 +17,15 @@ tttxxttvaatuuutt
 .......kk.......
 .......kk.......
 PAL
-t #347a36 leaf
-u #285e2b leaf-dark
-v #48a04b leaf-light
-s #2d6e2c leaf-shadow
-e #276129 leaf-deep
-h #e8e0a0 pallet-blossom
-a #e8e0a0 pallet-fruit
-x #b6a85d pallet-canopy-tint
-z #dbedb5 pallet-bloom-light
-n #948743 pallet-canopy-shade
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #4b854c leaf
+u #407343 leaf-dark
+v #5b9d5d leaf-light
+s #457e44 leaf-shadow
+e #3f7541 leaf-deep
+h #d4cd94 pallet-blossom
+a #d4cd94 pallet-fruit
+x #aaa06c pallet-canopy-tint
+z #c7d9a1 pallet-bloom-light
+n #958b57 pallet-canopy-shade
+k #71523d trunk
+w #846a4e trunk-light

@@ -17,5 +17,5 @@ PIX tile-foam-2 16 16
 .....c......c...
 ................
 PAL
-f #eef7ff foam
-c #6fb0ee water-shallow
+f #c6d8e9 foam
+c #7da6cd water-shallow

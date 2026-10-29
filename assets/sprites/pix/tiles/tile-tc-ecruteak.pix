@@ -17,9 +17,9 @@ PIX tile-tc-ecruteak 16 16
 .......kk.......
 ................
 PAL
-a #c98a5a canopy
-b #9d6c46 canopy-dark
-c #eda36a canopy-light
-d #c03a2a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #b88b6a canopy
+b #9b7659 canopy-dark
+c #cb9e7a canopy-light
+d #b45246 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

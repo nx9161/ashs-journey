@@ -17,8 +17,8 @@ PIX tile-prop-pcdesk 16 16
 ..dd........dd..
 ................
 PAL
-a #3a4657 pc-frame
-b #6fb0ee pc-screen
-c #eef7ff pc-text
-d #46586e pc-stand
-e #7a5a38 pc-desk
+a #505b6b pc-frame
+b #7da6cd pc-screen
+c #c6d8e9 pc-text
+d #59687a pc-stand
+e #846a4e pc-desk

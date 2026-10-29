@@ -17,8 +17,8 @@ PIX tile-prop-honeytree 16 16
 .......kk.......
 ................
 PAL
-a #5f9a42 honey-leaf
-b #4c7d34 honey-leaf-dark
-c #79b657 honey-leaf-light
-d #e8a820 honey-amber
-k #5a3a24 trunk
+a #6c9956 honey-leaf
+b #5e874b honey-leaf-dark
+c #80aa68 honey-leaf-light
+d #bc9a53 honey-amber
+k #71523d trunk

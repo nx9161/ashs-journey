@@ -1,26 +1,26 @@
 # Premium+ W5: TX-2 cinnabar ground tg — second accent tone
 PIX tile-tg-cinnabar 16 16
-mmqqzzmmllzzqggd
-mmmmmmmmllzzqqdd
-qqllqqqqmmmmllll
-qqllqqmmmmmmllll
-ddlddllmqqddgddl
-llllmmmmqqddzzll
-lzzzddmmaagglqql
-llqqlddaaaagllll
-llllggmmllddllmm
-llllggllllddlllm
-ggzzggmgggddmmgg
-ggzzggmmggllmmgg
+mmllzzmmllzzllld
+mmmmmmmmllzzlldd
+llllllllmmmmllll
+llllllmmmmmmllll
+ddlddllmllddlddl
+llllmmmmllddzzll
+lzzzddmmaallllll
+lllllddaaaalllll
+llllllmmllddllmm
+llllllllllddlllm
+llzzllmlllddmmll
+llzzllmmllllmmll
 mmllmmllllllmmdd
-mmlqqmlllllqqmdd
+mmlllmlllllllmdd
 ddmmlllzzmmlmmdd
-dggmllllmddlmmdd
+dllmllllmddlmmdd
 PAL
-g #b0525a cinnabar-ground
-m #9e4d46 ground-mid
-l #c06f66 ground-light
-d #823936 ground-dark
-a #e8ab9a ground-accent
-q #b07052 ground-shift
-z #e8da9a ground-accent-2
+g #a5656b cinnabar-ground
+m #9c5f5a ground-mid
+l #b27872 ground-light
+d #8a4f4c ground-dark
+a #d49f90 ground-accent
+q #a57a65 ground-shift
+z #d4c890 ground-accent-2

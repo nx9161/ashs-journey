@@ -17,11 +17,11 @@ ssssssssssssssss
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #f5f0dc landmark-wall
-e #ebe1b8 landmark-wall-shade
-d #3a7d78 cerulean-trim
-s #a87f4e landmark-shadow
-a #bfe8e0 cerulean-crest
-z #68c9b6 crest-dark
-h #d2e8ef crest-light
-F #6a6a80 foundation-stone
+w #e1d9ba landmark-wall
+e #d7cda4 landmark-wall-shade
+d #4f8682 cerulean-trim
+s #a18461 landmark-shadow
+a #aad4cc cerulean-crest
+z #73b9ab crest-dark
+h #b6d1da crest-light
+F #757585 foundation-stone

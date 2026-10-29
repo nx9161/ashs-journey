@@ -17,8 +17,8 @@ PIX tile-td-ecruteak 16 16
 ................
 ................
 PAL
-a #c98a5a planter-leaf
-d #c03a2a town-flower
-e #f0c060 town-flower-2
-k #6a4a2e planter-wood
-w #8a6a42 planter-wood-light
+a #b88b6a planter-leaf
+d #b45246 town-flower
+e #caae77 town-flower-2
+k #7b5e46 planter-wood
+w #8e7556 planter-wood-light

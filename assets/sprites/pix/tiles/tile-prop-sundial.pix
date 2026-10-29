@@ -17,7 +17,7 @@ PIX tile-prop-sundial 16 16
 .....ssssss.....
 ................
 PAL
-S #9a9aa5 stone
-s #747484 stone-dark
-T #b0b8c6 stone-light
-B #b29540 brass
+S #96969f stone
+s #7c7c87 stone-dark
+T #a5abb7 stone-light
+B #aa9456 brass

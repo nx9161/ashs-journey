@@ -4,23 +4,23 @@ PIX tile-flower 16 16
 ....gggggggg....
 ..gggggggggggg..
 .ggggggggggjggg.
-.gggjgggggjojgd.
-gggjojgggggjgddd
-ggggjgggggggdddd
-gggggggggggggdld
-ggggggggggggglll
-ggggggggjggggglg
+.gggjgggggjojgg.
+gggjojgggggjgggg
+ggggjggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+ggggggggjggggggg
 gggggggjojgggggg
-.ggjggggjlgggjg.
-.gjojggglllljoj.
-..ljlggggllllj..
-...lgggggggl....
+.ggjggggjggggjg.
+.gjojgggggggjoj.
+..gjgggggggggj..
+...ggggggggg....
 .......gg.......
 PAL
-g #5da24a grass
-d #4c8a3e grass-dark
-l #6fb45c grass-light
-m #67aa54 grass-mid
-j #b0503c petal-red
-o #f0e060 center-yellow
-i #e86a8a petal-pink
+g #6b9e5d grass
+d #5e8f53 grass-dark
+l #79a86c grass-light
+m #73a167 grass-mid
+j #a96152 petal-red
+o #cac177 center-yellow
+i #ca788d petal-pink

@@ -17,10 +17,10 @@ nnnnnnnnnnnnnnnn
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #e4bcd2 fuchsia-wall
-n #ca7ba7 wall-shade-band
-s #b26892 wall-shadow
-t #5a3a24 window-frame
-g #ffd873 window-lit
-h #eef7ff glass-shine
-F #6a6a80 foundation-stone
+w #d0a9be fuchsia-wall
+n #ba7fa0 wall-shade-band
+s #a77491 wall-shadow
+t #71523d window-frame
+g #d1bc88 window-lit
+h #c6d8e9 glass-shine
+F #757585 foundation-stone

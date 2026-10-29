@@ -33,8 +33,8 @@ PIX tile-prop-shrine 16 32
 ................
 ................
 PAL
-B #8a7a9a body
-D #54452f shade
-L #e8e4f0 light
-A #ffd873 accent
-C #e86a8a accent-2
+B #8b8097 body
+D #6a5c47 shade
+L #cbc5d8 light
+A #d1bc88 accent
+C #ca788d accent-2

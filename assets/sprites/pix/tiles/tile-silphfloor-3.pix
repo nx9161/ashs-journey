@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 silphfloor variant 3 — bold checker (diff>=80px)
 PIX tile-silphfloor-3 16 16
-aaabccccaaabcccc
-aaabccccaaabcccc
-aaabccccaaabcccc
-bbbbccccbbbbcccc
-ccccaaabccccaaab
-ccccaaabccccaaab
-ccccaaabccccaaab
-ccccbbbbccccbbbb
-aaabccccaaabcccc
-aaabccccaaabcccc
-aaabccccaaabcccc
-bbbbccccbbbbcccc
-ccccaaabccccaaab
-ccccaaabccccaaab
-ccccaaabccccaaab
-ccccbbbbccccbbbb
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
 PAL
-a #c2c8d4 silphfloor-floor
-b #a2aab8 silphfloor-line
-c #b0b8c6 silphfloor-alt
-d #d2d8e4 silphfloor-alt2
+a #b0b6c1 silphfloor-floor
+b #9ba2ac silphfloor-line
+c #a5abb7 silphfloor-alt
+d #bac1ce silphfloor-alt2

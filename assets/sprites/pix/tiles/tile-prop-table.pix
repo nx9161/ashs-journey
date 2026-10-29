@@ -17,7 +17,7 @@ PIX tile-prop-table 16 16
 ................
 ................
 PAL
-a #c9a06a table-top
-b #a87f4e table-edge
-c #5a3a24 table-leg
-d #d84040 table-decor
+a #b99b74 table-top
+b #a18461 table-edge
+c #71523d table-leg
+d #bf5b5b table-decor

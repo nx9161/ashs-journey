@@ -17,8 +17,8 @@ PIX tile-prop-trainingbag 16 16
 ......DDDD......
 ......DDDD......
 PAL
-B #b0503c body
-D #7a3226 shade
-L #d69459 light
-A #202028 accent
-C #c2c8d4 accent-2
+B #a96152 body
+D #87493f shade
+L #c29268 light
+A #3f3f49 accent
+C #b0b6c1 accent-2

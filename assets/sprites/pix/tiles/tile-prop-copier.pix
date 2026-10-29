@@ -17,8 +17,8 @@ PIX tile-prop-copier 16 16
 ..DDDDDDDDDDDD..
 ................
 PAL
-B #c2c8d4 body
-D #6a6a80 shade
-L #eef7ff light
-A #3fa08a accent
-C #202028 accent-2
+B #b0b6c1 body
+D #757585 shade
+L #c6d8e9 light
+A #549e8d accent
+C #3f3f49 accent-2

@@ -1,25 +1,25 @@
 # Stage S3a: pastoria town ground II — cross-hatched plaza texture (full-bleed, walkable).
 PIX tile-tg2-pastoria 16 16
-bcccaccbcbabcabc
-cbbccbccaaccbacc
-cccbacbacebcacbc
-abccbccabaccccab
-cacacbbacaaccbcc
-ccbcbcbacccbccac
-bcbcaccccbcaccbc
-bcaccccbacccccbe
-acccbbcccaacbcac
-cacbcccacabcccca
-cbbaabccbcccacab
-ccccccbacccccbca
-aaccbaaacccbccac
-aabccccbcbaacccc
-baabacebcccaccba
-bcaccbaccacabcba
+eccccccecececcec
+ceeccecccccceccc
+ccceccecceecccec
+ceccecccecccccce
+ccccceeccccccecc
+ccecececcccecccc
+ececccccceccccec
+ecccccceccccccee
+cccceecccccceccc
+cccecccccceccccc
+ceecceccecccccce
+cccccceccccccecc
+cccceccccccecccc
+cceccccececccccc
+eccecceeccccccec
+ecccceccccccecec
 PAL
-a #6a994e pastoria-ground
-b #53773d ground-dark
-c #7db55c ground-light
-d #d9a441 town-accent
-e #8a5a3a town-accent-2
-f #405c2f ground-deep
+a #759860 pastoria-ground
+b #648252 ground-dark
+c #82a96c ground-light
+d #bf9d5c town-accent
+e #8f6950 town-accent-2
+f #567047 ground-deep

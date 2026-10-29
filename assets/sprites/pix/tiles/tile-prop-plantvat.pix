@@ -33,8 +33,8 @@ PIX tile-prop-plantvat 16 32
 ................
 ................
 PAL
-B #3fa08a body
-D #2e5e28 shade
-L #8ae8f0 light
-A #67aa54 accent
-C #f0e060 accent-2
+B #549e8d body
+D #467340 shade
+L #8ccdd2 light
+A #73a167 accent
+C #cac177 accent-2

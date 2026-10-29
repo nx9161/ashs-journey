@@ -17,8 +17,8 @@ PIX tile-prop-starrock 16 16
 ................
 ................
 PAL
-B #9a9aa5 body
-D #6a6a80 shade
-L #c2c8d4 light
-A #ffd873 accent
-C #54452f accent-2
+B #96969f body
+D #757585 shade
+L #b0b6c1 light
+A #d1bc88 accent
+C #6a5c47 accent-2

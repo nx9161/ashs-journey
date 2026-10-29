@@ -17,15 +17,15 @@ ttxxtttaavtaautt
 .......kk.......
 .......kk.......
 PAL
-t #3e7a34 leaf
-u #2e5e28 leaf-dark
-v #54a048 leaf-light
-s #386e2c leaf-shadow
-e #2f6127 leaf-deep
-h #cfe8a8 viridian-blossom
-a #cfe8a8 viridian-fruit
-x #79a552 viridian-canopy-tint
-z #c5edbc viridian-bloom-light
-n #5e8140 viridian-canopy-shade
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #53854b leaf
+u #467340 leaf-dark
+v #649d5b leaf-light
+s #4e7e44 leaf-shadow
+e #47753f leaf-deep
+h #bdd499 viridian-blossom
+a #bdd499 viridian-fruit
+x #809f64 viridian-canopy-tint
+z #afd9a6 viridian-bloom-light
+n #6c8854 viridian-canopy-shade
+k #71523d trunk
+w #846a4e trunk-light

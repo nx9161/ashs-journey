@@ -17,7 +17,7 @@ PIX tile-decor-herb 16 16
 ................
 ................
 PAL
-p #b06a3c pot
-l #4c8a3e herb-leaf
-d #386e2c herb-dark
-s #5a3a24 soil
+p #a97552 pot
+l #5e8f53 herb-leaf
+d #4e7e44 herb-dark
+s #71523d soil

@@ -1,23 +1,23 @@
 # Stage J3a: city pavement — big slabs, grout cross, worn speckle (full-bleed floor, walkable).
 PIX tile-cityfloor 16 16
 aaaaaaabaaaaaaab
-aadaaacbaaaaaaad
-aaaaaaabaaaaaaad
-aacaadabaaaaaaab
-acaaaadbaaaaaaab
-aacaaacbaaaaaaab
-aaaaaaabdaaaaaab
-bbbdbbbbbbbbcbbb
-aaaaacabaaaaaaab
-aacaaaabaaaacaab
-daaaaaabaaaaaaab
-aaaaaaacaaaaaaab
-aaacaaabaaaaaaab
-aaaaaaadaaaaaaab
-aaaaacabadaaaaab
-bbbbbbbbbbbbcbbb
+aaaaaaabaaaaaaaa
+aaaaaaabaaaaaaaa
+aaaaaaabaaaaaaab
+aaaaaaabaaaaaaab
+aaaaaaabaaaaaaab
+aaaaaaabaaaaaaab
+bbbabbbbbbbbabbb
+aaaaaaabaaaaaaab
+aaaaaaabaaaaaaab
+aaaaaaabaaaaaaab
+aaaaaaaaaaaaaaab
+aaaaaaabaaaaaaab
+aaaaaaaaaaaaaaab
+aaaaaaabaaaaaaab
+bbbbbbbbbbbbabbb
 PAL
-a #c8bc9c city-pave
-b #a89a78 city-pave-grout
-c #ddd2b2 city-pave-light
-d #b8a888 city-pave-worn
+a #b9af96 city-pave
+b #a0977f city-pave-grout
+c #cac0a3 city-pave-light
+d #ada189 city-pave-worn

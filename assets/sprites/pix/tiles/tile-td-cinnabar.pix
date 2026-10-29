@@ -17,11 +17,11 @@ PIX tile-td-cinnabar 16 16
 ................
 ................
 PAL
-t #a8845c planter-edge
-s #5a3a24 planter-soil
-n #4c8a3e planter-leaf
-f #e8b89a cinnabar-bloom
-y #f0e060 bloom-yellow
-w #eef7ff bloom-white
-a #b06a52 cinnabar-sign
-b #202028 sign-mark
+t #a0876c planter-edge
+s #71523d planter-soil
+n #5e8f53 planter-leaf
+f #d4aa90 cinnabar-bloom
+y #cac177 bloom-yellow
+w #c6d8e9 bloom-white
+a #a57665 cinnabar-sign
+b #3f3f49 sign-mark

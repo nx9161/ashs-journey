@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 path variant 5 — worn centre
 PIX tile-path-5 16 16
-nnbbqqpbbnnnppnn
-nqqbqqbbnbnnppnn
-nnnnnnbbbbqqpppp
-bbnnnnqbbqqqpppp
-qqqqqqbbbbqnpppp
-qqppqqbbbbnnpppp
-ppqqbbbbbppppppp
-qqqqbbbbpbpppppp
-ppbbbqbpbbnnbqqb
-ppbbqqbbbbqqbbbb
-qqppqbbbpbpppppp
-qqppqqbpbbpppppp
-ppbbqqpbbbnnppqq
-bbbbqqbbbbnnpppp
-bbqqppbnbbpppppp
-bbqqppqbbppppppp
+ppbbpppbbppppppp
+pppbppbbpbpppppp
+ppppppbbbbpppppp
+bbpppppbbppppppp
+ppppppbbbbpppppp
+ppppppbbbbpppppp
+ppppbbbbbppppppp
+ppppbbbbpbpppppp
+ppbbbpbpbbppbppb
+ppbbppbbbbppbbbb
+pppppbbbpbpppppp
+ppppppbpbbpppppp
+ppbbpppbbbpppppp
+bbbbppbbbbpppppp
+bbppppbpbbpppppp
+bbpppppbbppppppp
 PAL
-p #d8c08a path
-q #c2a878 path-dark
-n #ecd9a8 path-pale
-b #b09468 path-worn
+p #c6b388 path
+q #b4a17e path-dark
+n #d7c699 path-pale
+b #a69274 path-worn

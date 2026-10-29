@@ -17,7 +17,7 @@ PIX tile-decor-books 16 16
 ................
 ................
 PAL
-b #a83a3a book-red
-u #3a5aa8 book-blue
-p #e8dcc0 pages
-s #5a3a24 shelf
+b #a35050 book-red
+u #5069a3 book-blue
+p #d4c8aa pages
+s #71523d shelf

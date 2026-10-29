@@ -1,26 +1,26 @@
 # Premium+ W5: TX-2 pallet ground tg2 — second accent tone
 PIX tile-tg2-pallet 16 16
-lddmmmddddggggll
-llggmmddddgggggg
-ddllmmllggggddgg
-ddllxxlllggmmdgg
-ggmmmmmmddaaddgg
-gllmxxmmddzzddgg
-ggxxddxxggggaamm
-ggmzzdzzggggggmm
-dmmlggaammlldggg
-ddlxllaammllgggg
-ggmmxzzmlllgggll
-ggmmxxmzzlllggll
-zzggmmllllzzaall
-mmggmmllaazzddll
-mmmmaallddlmdddd
-mmmlllllmmmmddgg
+gddgggddddgggggg
+ggggggddddgggggg
+ddggggggggggddgg
+ddggxxgggggggdgg
+ggggggggddaaddgg
+ggggxxggddzzddgg
+ggxxddxxggggaagg
+gggzzdzzgggggggg
+dgggggaaggggdggg
+ddgxggaagggggggg
+ggggxzzggggggggg
+ggggxxgzzggggggg
+zzggggggggzzaagg
+ggggggggaazzddgg
+ggggaaggddggdddd
+ggggggggggggddgg
 PAL
-g #84b356 pallet-ground
-m #72a348 ground-mid
-l #9cc46e ground-light
-d #5f903c ground-dark
-a #e8e0a0 ground-accent
-x #b3b356 ground-shift
-z #c5e8a0 ground-accent-2
+g #87a768 pallet-ground
+m #7a9f5b ground-mid
+l #98b577 ground-light
+d #6d9351 ground-dark
+a #d4cd94 ground-accent
+x #a7a768 ground-shift
+z #b5d494 ground-accent-2

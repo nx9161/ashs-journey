@@ -17,8 +17,8 @@ PIX tile-prop-firewood 16 16
 ................
 ................
 PAL
-B #8a5a30 body
-D #54452f shade
-L #c9a06a light
-A #5f5130 accent
-C #b0503c accent-2
+B #916a47 body
+D #6a5c47 shade
+L #b99b74 light
+A #726648 accent
+C #a96152 accent-2

@@ -17,8 +17,8 @@ PIX tile-prop-jshrine 16 16
 ................
 ................
 PAL
-r #7a4a3a shrine-roof
-m #4da653 shrine-moss
-k #5a3a24 shrine-wood
-g #7ae8a8 shrine-glow
-h #d8ffe8 shrine-glow-core
+r #845d4f shrine-roof
+m #5fa064 shrine-moss
+k #71523d shrine-wood
+g #80cea0 shrine-glow
+h #bbe5cc shrine-glow-core

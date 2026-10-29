@@ -33,8 +33,8 @@ PIX tile-prop-rockpress 16 32
 ................
 ................
 PAL
-B #9a9aa5 body
-D #6a6a80 shade
-L #c2c8d4 light
-A #46586e accent
-C #202028 accent-2
+B #96969f body
+D #757585 shade
+L #b0b6c1 light
+A #59687a accent
+C #3f3f49 accent-2

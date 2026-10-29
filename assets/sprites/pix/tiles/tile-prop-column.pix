@@ -33,8 +33,8 @@ PIX tile-prop-column 16 32
 ................
 ................
 PAL
-B #c2c8d4 body
-D #6a6a80 shade
-L #eef7ff light
-A #8a8aa0 accent
-C #ffd873 accent-2
+B #b0b6c1 body
+D #757585 shade
+L #c6d8e9 light
+A #8b8b9b accent
+C #d1bc88 accent-2

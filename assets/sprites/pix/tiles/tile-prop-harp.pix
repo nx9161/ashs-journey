@@ -17,8 +17,8 @@ PIX tile-prop-harp 16 16
 ................
 ................
 PAL
-B #ffd873 body
-D #8a6a48 shade
-L #f0e060 light
-A #c9a06a accent
-C #b0503c accent-2
+B #d1bc88 body
+D #8e755b shade
+L #cac177 light
+A #b99b74 accent
+C #a96152 accent-2

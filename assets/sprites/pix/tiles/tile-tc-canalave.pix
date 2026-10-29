@@ -17,9 +17,9 @@ PIX tile-tc-canalave 16 16
 .......kk.......
 ................
 PAL
-a #468faf canopy
-b #377088 canopy-dark
-c #53a9ce canopy-light
-d #f0c030 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #5b8fa7 canopy
+b #4d7b8e canopy-dark
+c #65a1bb canopy-light
+d #c1a85f canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

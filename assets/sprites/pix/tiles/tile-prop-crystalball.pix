@@ -17,8 +17,8 @@ PIX tile-prop-crystalball 16 16
 ................
 ................
 PAL
-B #e8e4f0 body
-D #8a7a9a shade
-L #c2c8d4 light
-A #7a6a8a accent
-C #ffd873 accent-2
+B #cbc5d8 body
+D #8b8097 shade
+L #b0b6c1 light
+A #80758c accent
+C #d1bc88 accent-2

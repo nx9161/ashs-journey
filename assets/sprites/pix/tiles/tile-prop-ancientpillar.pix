@@ -17,7 +17,7 @@ PIX tile-prop-ancientpillar 16 16
 .....bbbbbb.....
 ................
 PAL
-a #c8a878 ancient-sandstone
-b #a8845a ancient-sandstone-dark
-c #5a8a4a ancient-moss
-d #e8d0a0 ancient-sandstone-light
+a #b8a17d ancient-sandstone
+b #a0876b ancient-sandstone-dark
+c #698e5c ancient-moss
+d #d4bf94 ancient-sandstone-light

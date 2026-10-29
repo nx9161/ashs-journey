@@ -17,10 +17,10 @@ wwwwwwwwwwwwwwww
 ssssssssssssssss
 ssssssssssssssss
 PAL
-w #b0503c brick-mid
-l #c96a52 brick-light
-s #7a3226 brick-deep
-t #5a3a24 trim
-g #ffd873 window-lit
-u #ffd873 window-lit
-h #ffd873 window-lit
+w #a96152 brick-mid
+l #b77564 brick-light
+s #87493f brick-deep
+t #71523d trim
+g #d1bc88 window-lit
+u #d1bc88 window-lit
+h #d1bc88 window-lit

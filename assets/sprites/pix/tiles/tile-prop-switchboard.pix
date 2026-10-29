@@ -17,8 +17,8 @@ PIX tile-prop-switchboard 16 16
 ................
 ................
 PAL
-B #46586e body
-D #202028 shade
-L #8a8aa0 light
-A #e84c3c accent
-C #f0e060 accent-2
+B #59687a body
+D #3f3f49 shade
+L #8b8b9b light
+A #c16a61 accent
+C #cac177 accent-2

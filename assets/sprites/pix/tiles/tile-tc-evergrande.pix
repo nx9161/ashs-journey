@@ -17,9 +17,9 @@ PIX tile-tc-evergrande 16 16
 .......kk.......
 ................
 PAL
-a #a8b8e0 canopy
-b #8390af canopy-dark
-c #c6d9ff canopy-light
-d #f0c030 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #9ba9cd canopy
+b #868fa6 canopy-dark
+c #b2c2e1 canopy-light
+d #c1a85f canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

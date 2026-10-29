@@ -17,8 +17,8 @@ PIX tile-td-eterna 16 16
 ................
 ................
 PAL
-a #4f772d planter-leaf
-d #c8a24a town-flower
-e #e8e4da town-flower-2
-k #6a4a2e planter-wood
-w #8a6a42 planter-wood-light
+a #628445 planter-leaf
+d #b69c5f town-flower
+e #d1ccbf town-flower-2
+k #7b5e46 planter-wood
+w #8e7556 planter-wood-light

@@ -1,24 +1,24 @@
 # Stage O1: tropical shore sand — warm grain, pebble + shell speckle (full-bleed floor).
 PIX tile-sand 16 16
-aaaaaaaaaabcaaca
-aababaacaaaaabaa
-aaaaaaabaaaaabac
-aadaaaacabacaaaa
-aadeaacaaaaaabaa
-aaabaabaaaaaaaba
-aaaaaaaaabaaaaaa
-aaaacaaaaaabaaba
-abcaaaabaaaacaaa
-aacadabaaaaeaaaa
-aaadbaaaaaaaccba
-aaaaabcaaaaaaaaa
-aaaaaaacaabaaaaa
-aaaaaaeabaaaaaaa
-aaaaaaaabaaaaaaa
-acabaaaaaaaaadaa
+aaaaaaaaaaacaaca
+aaaaaaacaaaaaaaa
+aaaaaaaaaaaaaaac
+aaaaaaacaaacaaaa
+aaaeaacaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaacaaaaaaaaaaa
+aacaaaaaaaaacaaa
+aacaaaaaaaaeaaaa
+aaaaaaaaaaaaccaa
+aaaaaacaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaeaaaaaaaaa
+aaaaaaaaaaaaaaaa
+acaaaaaaaaaaaaaa
 PAL
-a #d8c08a sand
-b #cdb684 sand-shade
-c #e8d9ac sand-light
-d #bfae7c sand-pebble
-e #f2e6c8 shell
+a #c6b388 sand
+b #bdab85 sand-shade
+c #d4c69c sand-light
+d #b2a581 sand-pebble
+e #ded0ad shell

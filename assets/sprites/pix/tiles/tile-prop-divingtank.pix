@@ -33,8 +33,8 @@ PIX tile-prop-divingtank 16 32
 ................
 ................
 PAL
-B #3a7bd5 body
-D #2e63b0 shade
-L #8ae8f0 light
-A #5a9ae8 accent
-C #eef7ff accent-2
+B #5681bd body
+D #476faa shade
+L #8ccdd2 light
+A #7097c7 accent
+C #c6d8e9 accent-2

@@ -17,7 +17,7 @@ PIX tile-prop-memorial 16 16
 ...dddddddddd...
 ...dddddddddd...
 PAL
-a #8a8aa0 memorial-stone
-b #6a6a80 memorial-carving
-c #e86a8a memorial-flower
-d #6a6a80 memorial-base
+a #8b8b9b memorial-stone
+b #757585 memorial-carving
+c #ca788d memorial-flower
+d #757585 memorial-base

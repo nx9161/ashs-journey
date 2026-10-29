@@ -17,11 +17,11 @@ PIX tile-prop-shelf 16 16
 .aaaaaaaaaaaaaa.
 .aaaaaaaaaaaaaa.
 PAL
-a #5a3a24 shelf-frame
-b #7a5a38 shelf-back
-c #d84040 book-red
-d #3a7bd5 book-blue
-e #3fa08a book-teal
-f #f0e060 book-yellow
-g #e86a8a book-pink
-h #54a048 book-green
+a #71523d shelf-frame
+b #846a4e shelf-back
+c #bf5b5b book-red
+d #5681bd book-blue
+e #549e8d book-teal
+f #cac177 book-yellow
+g #ca788d book-pink
+h #649d5b book-green

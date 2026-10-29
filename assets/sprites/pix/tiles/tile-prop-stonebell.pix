@@ -17,8 +17,8 @@ PIX tile-prop-stonebell 16 16
 .......CC.......
 ................
 PAL
-B #8a8aa0 body
-D #54452f shade
-L #c2c8d4 light
-A #6a6a80 accent
-C #ffd873 accent-2
+B #8b8b9b body
+D #6a5c47 shade
+L #b0b6c1 light
+A #757585 accent
+C #d1bc88 accent-2

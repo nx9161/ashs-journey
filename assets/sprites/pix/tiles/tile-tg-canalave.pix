@@ -1,25 +1,25 @@
 # Stage S3a: canalave town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-canalave 16 16
-baaaaaaabaaaaffc
+baaaaaaabaaaaffa
 aaaaaaaaaaaaaaaa
 baaaaaadaaaaaaaa
-aaaaaaaaaacaaaaa
-babacacabfaacaac
-cafabaaabaaaaaaa
-aaccaaaacaaaabfc
-aaaafaaaaaabcaab
-bafaaaababaaacaa
-aaacadabbcaacaaa
-aaaaaacadcaaafba
-afcaacabaaccaaaa
-aaafaaacbafaaaaa
-aacaadaaaaaabaaa
-ccaabaaaaaaafaaa
-badacbaaaaaaafaa
+aaaaaaaaaaaaaaaa
+babaaaaabfaaaaaa
+aafabaaabaaaaaaa
+aaaaaaaaaaaaabfa
+aaaafaaaaaabaaab
+bafaaaababaaaaaa
+aaaaadabbaaaaaaa
+aaaaaaaadaaaafba
+afaaaaabaaaaaaaa
+aaafaaaabafaaaaa
+aaaaadaaaaaabaaa
+aaaabaaaaaaafaaa
+badaabaaaaaaafaa
 PAL
-a #468faf canalave-ground
-b #377088 ground-dark
-c #53a9ce ground-light
-d #f0c030 town-accent
-e #e8f4f8 town-accent-2
-f #2a5669 ground-deep
+a #5b8fa7 canalave-ground
+b #4d7b8e ground-dark
+c #65a1bb ground-light
+d #c1a85f town-accent
+e #c2dbe3 town-accent-2
+f #426a7b ground-deep

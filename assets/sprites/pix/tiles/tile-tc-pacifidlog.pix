@@ -17,9 +17,9 @@ PIX tile-tc-pacifidlog 16 16
 .......kk.......
 ................
 PAL
-a #c8a878 canopy
-b #9c835e canopy-dark
-c #ecc68e canopy-light
-d #e86a4a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #b8a17d canopy
+b #98876d canopy-dark
+c #d2b68c canopy-light
+d #c47a68 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

@@ -17,9 +17,9 @@ PIX tile-tc-mahogany 16 16
 .......kk.......
 ................
 PAL
-a #8aa888 canopy
-b #6c836a canopy-dark
-c #a3c6a0 canopy-light
-d #5a8ab0 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #8ba18a canopy
+b #768775 canopy-dark
+c #9bb799 canopy-light
+d #6b8ba5 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

@@ -17,15 +17,15 @@ ttaatttvaatuuaat
 .......kk.......
 .......kk.......
 PAL
-t #3e7a34 leaf
-u #2e5e28 leaf-dark
-v #54a048 leaf-light
-s #386e2c leaf-shadow
-e #2f6127 leaf-deep
-h #c4cfef indigo-blossom
-a #c4cfef indigo-fruit
-x #71a6b4 indigo-canopy-tint
-z #ddd8f4 indigo-bloom-light
-n #4f8796 indigo-canopy-shade
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #53854b leaf
+u #467340 leaf-dark
+v #649d5b leaf-light
+s #4e7e44 leaf-shadow
+e #47753f leaf-deep
+h #abb7db indigo-blossom
+a #abb7db indigo-fruit
+x #7a9fa9 indigo-canopy-tint
+z #bfb8e0 indigo-bloom-light
+n #608a96 indigo-canopy-shade
+k #71523d trunk
+w #846a4e trunk-light

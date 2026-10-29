@@ -4,24 +4,24 @@ pppppppppppppppp
 pppppppppppppppp
 pppbbbpppbbbpppp
 pppbbbpppppppppp
-pppnbppppppppppp
-ppnnnppppppppppp
-pppnpppppppppppp
+ppppbppppppppppp
+pppppppppppppppp
+pppppppppppppppp
 ppppppppppppppbp
 pppppppppppppbbb
 ppppppppppppppbp
 pppppppppppppppp
-pnpppppppppppppp
-nnnppppppppppppp
-pnpbbbppbbbppbqp
-ppppppppppppbqqq
-pppppppppppppbqp
+pppppppppppppppp
+pppppppppppppppp
+pppbbbppbbbppbpp
+ppppppppppppbppp
+pppppppppppppbpp
 PAL
-p #dec08e path
-q #c8aa7d path-dark
-b #b09068 path-worn
-n #ecd6a8 path-pale
-k #a8805c path-edge
-r #5a3724 dirt-brown
+p #cbb28a path
+q #b9a281 path-dark
+b #a69074 path-worn
+n #d7c399 path-pale
+k #a0846c path-edge
+r #714f3d dirt-brown
 
 # W5SPLIT2 hue shift -3deg (TX-1 variant split)

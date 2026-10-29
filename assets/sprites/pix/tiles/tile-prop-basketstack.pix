@@ -17,8 +17,8 @@ PIX tile-prop-basketstack 16 16
 ................
 ................
 PAL
-B #c9a06a body
-D #8a6a48 shade
-L #f0d0a0 light
-A #b0503c accent
-C #3a7bd5 accent-2
+B #b99b74 body
+D #8e755b shade
+L #d7bd97 light
+A #a96152 accent
+C #5681bd accent-2

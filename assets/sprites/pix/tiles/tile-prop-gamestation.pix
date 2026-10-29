@@ -17,8 +17,8 @@ PIX tile-prop-gamestation 16 16
 ..DDDDDDDDDDDD..
 ................
 PAL
-B #202028 body
-D #54452f shade
-L #46586e light
-A #f0e060 accent
-C #e86a8a accent-2
+B #3f3f49 body
+D #6a5c47 shade
+L #59687a light
+A #cac177 accent
+C #ca788d accent-2

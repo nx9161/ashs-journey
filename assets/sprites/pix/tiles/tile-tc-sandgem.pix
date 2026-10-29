@@ -17,9 +17,9 @@ PIX tile-tc-sandgem 16 16
 .......kk.......
 ................
 PAL
-a #d6c98a canopy
-b #a79d6c canopy-dark
-c #fdeda3 canopy-light
-d #4a90c0 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #c4ba88 canopy
+b #9f9977 canopy-dark
+c #dacf9f canopy-light
+d #608fb0 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

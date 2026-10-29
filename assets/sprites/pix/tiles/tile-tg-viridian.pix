@@ -1,26 +1,26 @@
 # Premium+ W5: TX-2 viridian ground tg — second accent tone
 PIX tile-tg-viridian 16 16
-mmaallqqmmddlaam
+mmaallqqmmmmlaam
 mmaallqqmmmmllmm
-qqmmddddgmmgddgg
-qaamllddggggddgg
-zzmmllmmmmllllgg
-ddmmllmmmmllgggg
-ddggddmmddddqmmd
-ddzzggdddddggqdd
-llddmmqqqqaammdd
-lldlllddqqaammdd
-qqggllllggmmllqq
-llggmmggggmmllll
-ggmmllgglggdggaa
-ggmmlgggqggdggqq
-mggmqqddddmmllmm
-mmmaalldddmmqqmm
+qqmmmmmmmmmmmmmm
+qaamllmmmmmmmmmm
+zzmmllmmmmllllmm
+mmmmllmmmmllmmmm
+mmmmmmmmmmmmqmmm
+mmzzmmmmmmmmmqmm
+llmmmmqqqqaammmm
+llmlllmmqqaammmm
+qqmmllllmmmmllqq
+llmmmmmmmmmmllll
+mmmmllmmlmmmmmaa
+mmmmlmmmqmmmmmqq
+mmmmqqmmmmmmllmm
+mmmaallmmmmmqqmm
 PAL
-g #4f9e57 viridian-ground
-m #448c4c ground-mid
-l #63b06b ground-light
-d #35733e ground-dark
-a #cfe8a8 ground-accent
-q #4f9e77 ground-shift
-z #a9e8a8 ground-accent-2
+g #609b66 viridian-ground
+m #58905e ground-mid
+l #71a676 ground-light
+d #4b8053 ground-dark
+a #bdd499 ground-accent
+q #609b7e ground-shift
+z #9ad499 ground-accent-2

@@ -17,9 +17,9 @@ PIX tile-tc-littleroot 16 16
 .......kk.......
 ................
 PAL
-a #a4bd76 canopy
-b #80935c canopy-dark
-c #c2df8b canopy-light
-d #e86a8a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #9eb07d canopy
+b #85936a canopy-dark
+c #b4cb88 canopy-light
+d #ca788d canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

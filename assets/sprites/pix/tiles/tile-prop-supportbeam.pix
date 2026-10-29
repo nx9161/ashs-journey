@@ -17,8 +17,8 @@ PIX tile-prop-supportbeam 16 16
 ..BBB......BBB..
 ................
 PAL
-B #8a5a30 body
-D #54452f shade
-L #c9a06a light
-A #5f5130 accent
-C #202028 accent-2
+B #916a47 body
+D #6a5c47 shade
+L #b99b74 light
+A #726648 accent
+C #3f3f49 accent-2

@@ -17,8 +17,8 @@ PIX tile-td-newbark 16 16
 ................
 ................
 PAL
-a #8fb8a8 planter-leaf
-d #3a7ca5 town-flower
-e #e8f0d8 town-flower-2
-k #6a4a2e planter-wood
-w #8a6a42 planter-wood-light
+a #8eada1 planter-leaf
+d #5082a1 town-flower
+e #d0dbba town-flower-2
+k #7b5e46 planter-wood
+w #8e7556 planter-wood-light

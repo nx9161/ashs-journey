@@ -17,8 +17,8 @@ PIX tile-prop-spicerack 16 16
 ................
 ................
 PAL
-B #8a5a30 body
-D #54452f shade
-L #c9a06a light
-A #e84c3c accent
-C #f0e060 accent-2
+B #916a47 body
+D #6a5c47 shade
+L #b99b74 light
+A #c16a61 accent
+C #cac177 accent-2

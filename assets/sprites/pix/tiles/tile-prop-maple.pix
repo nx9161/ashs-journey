@@ -17,8 +17,8 @@ PIX tile-prop-maple 16 16
 .......kk.......
 ................
 PAL
-a #c05038 maple-red
-b #e07840 maple-orange
-c #f0a848 maple-gold
-d #a03828 maple-deep
-k #4a3020 maple-trunk
+a #b26352 maple-red
+b #c1815f maple-orange
+c #c59f6b maple-gold
+d #a04e41 maple-deep
+k #664b3a maple-trunk

@@ -33,8 +33,8 @@ PIX tile-prop-forge 16 32
 ................
 ................
 PAL
-B #6a6a80 body
-D #202028 shade
-L #9a9aa5 light
-A #f07830 accent
-C #f0e060 accent-2
+B #757585 body
+D #3f3f49 shade
+L #96969f light
+A #c1835f accent
+C #cac177 accent-2

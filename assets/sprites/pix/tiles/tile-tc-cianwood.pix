@@ -17,9 +17,9 @@ PIX tile-tc-cianwood 16 16
 .......kk.......
 ................
 PAL
-a #b8a878 canopy
-b #90835e canopy-dark
-c #d9c68e canopy-light
-d #4a90a8 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #aca17e canopy
+b #91876c canopy-dark
+c #c7b78a canopy-light
+d #5d90a2 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

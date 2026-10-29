@@ -17,8 +17,8 @@ PIX tile-prop-cabinbed 16 16
 ..dddddddddddd..
 ................
 PAL
-a #f5f0dc cabin-pillow
-b #eef7ff cabin-sheet
-c #d84040 cabin-stripe
-d #7a5a38 cabin-frame
-e #ffd873 cabin-brass
+a #e1d9ba cabin-pillow
+b #c6d8e9 cabin-sheet
+c #bf5b5b cabin-stripe
+d #846a4e cabin-frame
+e #d1bc88 cabin-brass

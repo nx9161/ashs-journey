@@ -17,10 +17,10 @@ PIX tile-prop-labmachine 16 16
 ..aaaaaaaaaaaa..
 ..ffffffffffff..
 PAL
-a #5f748f machine-body
-b #3a4657 machine-dial
-c #d84040 machine-light
-d #f0e060 machine-light2
-e #6fb0ee machine-screen
-f #46586e machine-panel
-g #6a6a80 machine-pipe
+a #6c7c90 machine-body
+b #505b6b machine-dial
+c #bf5b5b machine-light
+d #cac177 machine-light2
+e #7da6cd machine-screen
+f #59687a machine-panel
+g #757585 machine-pipe

@@ -1,23 +1,23 @@
 # Stage O1: stadium floor — pale court stone with a painted blue line course (full-bleed floor).
 PIX tile-stadiumfloor 16 16
 llllllllllllllll
-aabababcaaaaaaba
-aaaaaaaaaaaaacaa
-aaaabaabaaaaaaaa
-aaaaaaacaaaaaaaa
-aaaaaaaabaaaaaaa
 aaaaaaaaaaaaaaaa
-abacaaaaaaaaaaaa
-abaaaaaaaaaaaaaa
-aaaaaaccaaaaaaaa
-caaaababaaabaaaa
-aaabaaaaaaaaaaba
-aaaaaaabaaabbaaa
-baaaaabcabaaaaaa
-aaaaacaaaacaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 llllllllllllllll
 PAL
-a #cfc4a8 court-stone
-b #bfb294 court-shade
-c #e2d8bc court-light
-l #3a7bd5 court-line
+a #beb59e court-stone
+b #b2a891 court-shade
+c #cec5a9 court-light
+l #5681bd court-line

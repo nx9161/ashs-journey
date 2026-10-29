@@ -17,8 +17,8 @@ PIX tile-prop-quiltframe 16 16
 ................
 ................
 PAL
-B #a8845c body
-D #54452f shade
-L #d8b47e light
-A #b0503c accent
-C #202028 accent-2
+B #a0876c body
+D #6a5c47 shade
+L #c5a980 light
+A #a96152 accent
+C #3f3f49 accent-2

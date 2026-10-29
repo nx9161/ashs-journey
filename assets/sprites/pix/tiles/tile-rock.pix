@@ -17,6 +17,6 @@ PIX tile-rock 16 16
 ................
 ................
 PAL
-m #8a8aa0 rock
-z #6a6a80 rock-dark
-c #c2c8d4 rock-light
+m #8b8b9b rock
+z #757585 rock-dark
+c #b0b6c1 rock-light

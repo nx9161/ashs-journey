@@ -33,7 +33,7 @@ PIX tile-fg-canopy-pine 32 32
 ................................
 ................................
 PAL
-G #3e7a34 leaf
-g #2e5e28 leaf-dark
-H #54a048 leaf-light
-M #67aa54 leaf-mid
+G #53854b leaf
+g #467340 leaf-dark
+H #649d5b leaf-light
+M #73a167 leaf-mid

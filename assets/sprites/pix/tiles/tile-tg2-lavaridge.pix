@@ -1,25 +1,25 @@
 # Stage H3a: lavaridge town ground II — cross-hatched plaza texture (full-bleed, walkable).
 PIX tile-tg2-lavaridge 16 16
 bccaaacbccccacbc
-cccacbcaeaeabaac
-cccbcccccebccacb
+cccacbcacacabaac
+cccbccccccbccacb
 cbacccccbccaabab
-cccacabceeccbbcc
+cccacabcccccbbcc
 cacabcccccbbccca
-ccbabceecbccaccb
+ccbabccccbccaccb
 bcbcccabcbacbcbb
-acacebcacbccbcca
-cecbccccccbcccca
-abcbecccbecaccab
+acaccbcacbccbcca
+cccbccccccbcccca
+abcbccccbccaccab
 cccccbbcacccabbb
-ceacbcccaccbccce
-ecbcccacbbccaaac
-bcbaaacbceaacabc
+ccacbcccaccbcccc
+ccbcccacbbccaaac
+bcbaaacbccaacabc
 cccacbccccbbbbca
 PAL
-a #bd7a48 lavaridge-ground
-b #935f38 ground-dark
-c #df9055 ground-light
-d #e83a2a town-accent
-e #f0a848 town-accent-2
-f #71492b ground-deep
+a #ae805e lavaridge-ground
+b #966d4e ground-dark
+c #c59069 ground-light
+d #be6058 town-accent
+e #c59f6b town-accent-2
+f #805d43 ground-deep

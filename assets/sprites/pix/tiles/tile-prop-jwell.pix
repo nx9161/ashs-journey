@@ -17,7 +17,7 @@ PIX tile-prop-jwell 16 16
 ................
 ................
 PAL
-s #8a8a95 well-stone
-d #1a1a2a well-depth
-k #5a3a24 well-post
-r #7a4a3a well-roof
+s #8b8b93 well-stone
+d #38384e well-depth
+k #71523d well-post
+r #845d4f well-roof

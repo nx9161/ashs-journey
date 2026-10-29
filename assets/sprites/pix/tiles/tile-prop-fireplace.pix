@@ -17,8 +17,8 @@ PIX tile-prop-fireplace 16 16
 .DDDDDDDDDDDDDD.
 ................
 PAL
-B #b0503c body
-D #7a3226 shade
-L #8a8aa0 light
-A #f07830 accent
-C #f0e060 accent-2
+B #a96152 body
+D #87493f shade
+L #8b8b9b light
+A #c1835f accent
+C #cac177 accent-2

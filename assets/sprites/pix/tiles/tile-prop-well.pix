@@ -17,11 +17,11 @@ PIX tile-prop-well 16 16
 ...SSSSSSSSSS...
 ................
 PAL
-S #9a9aa5 stone
-s #747484 stone-dark
-T #b0b8c6 stone-light
-w #5a3a24 wood-dark
-L #8a6a48 wood-light
-R #b0503c roof-red
-r #823936 roof-dark
-k #202028 bucket
+S #96969f stone
+s #7c7c87 stone-dark
+T #a5abb7 stone-light
+w #71523d wood-dark
+L #8e755b wood-light
+R #a96152 roof-red
+r #8a4f4c roof-dark
+k #3f3f49 bucket

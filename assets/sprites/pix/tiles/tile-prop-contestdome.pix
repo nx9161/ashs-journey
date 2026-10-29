@@ -17,7 +17,7 @@ PIX tile-prop-contestdome 16 16
 ................
 ................
 PAL
-a #c9a227 contest-dome
-b #9a7a1e contest-dome-dark
-c #e8e4da contest-pillar
-d #f0d060 contest-dome-light
+a #b79c47 contest-dome
+b #9a823c contest-dome-dark
+c #d1ccbf contest-pillar
+d #cab877 contest-dome-light

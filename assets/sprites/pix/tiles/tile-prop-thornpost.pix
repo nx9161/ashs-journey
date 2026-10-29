@@ -17,8 +17,8 @@ PIX tile-prop-thornpost 16 16
 ....DDDDDDDD....
 ................
 PAL
-B #2e5e28 body
-D #202028 shade
-L #386e2c light
-A #7a6a8a accent
-C #3fa08a accent-2
+B #467340 body
+D #3f3f49 shade
+L #4e7e44 light
+A #80758c accent
+C #549e8d accent-2

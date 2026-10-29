@@ -17,6 +17,6 @@ PIX tile-edge-dirt-se 16 16
 ...........rrbrr
 ..........rrbrrb
 PAL
-r #5a3a24 dirt-brown
-b #b09468 path-worn
-q #c2a878 path-dark
+r #71523d dirt-brown
+b #a69274 path-worn
+q #b4a17e path-dark

@@ -17,6 +17,6 @@ PIX tile-wake-1 16 16
 ..ff........ff..
 ................
 PAL
-w #3a7bd5 water
-c #6fb0ee water-shallow
-f #eef7ff foam
+w #5681bd water
+c #7da6cd water-shallow
+f #c6d8e9 foam

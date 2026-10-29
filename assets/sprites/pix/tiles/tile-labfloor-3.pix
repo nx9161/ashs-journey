@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 labfloor variant 3 — bold checker (diff>=80px)
 PIX tile-labfloor-3 16 16
-aaabccccaaabcccc
-aaabccccaaabcccc
-aaabccccaaabcccc
+cccbcccccccbcccc
+cccbcccccccbcccc
+cccbcccccccbcccc
 bbbbccccbbbbcccc
-ccccaaabccccaaab
-ccccaaabccccaaab
-ccccaaabccccaaab
+cccccccbcccccccb
+cccccccbcccccccb
+cccccccbcccccccb
 ccccbbbbccccbbbb
-aaabccccaaabcccc
-aaabccccaaabcccc
-aaabccccaaabcccc
+cccbcccccccbcccc
+cccbcccccccbcccc
+cccbcccccccbcccc
 bbbbccccbbbbcccc
-ccccaaabccccaaab
-ccccaaabccccaaab
-ccccaaabccccaaab
+cccccccbcccccccb
+cccccccbcccccccb
+cccccccbcccccccb
 ccccbbbbccccbbbb
 PAL
-a #46586e labfloor-floor
-b #384a5e labfloor-line
-c #54687e labfloor-alt
-d #64788e labfloor-alt2
+a #59687a labfloor-floor
+b #4e5e70 labfloor-line
+c #647485 labfloor-alt
+d #707f8f labfloor-alt2

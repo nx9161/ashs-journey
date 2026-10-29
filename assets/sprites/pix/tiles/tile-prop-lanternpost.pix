@@ -17,8 +17,8 @@ PIX tile-prop-lanternpost 16 16
 .......BB.......
 ....DDDDDDDD....
 PAL
-B #6a6a80 body
-D #202028 shade
-L #9a9aa5 light
-A #ffd873 accent
-C #f07830 accent-2
+B #757585 body
+D #3f3f49 shade
+L #96969f light
+A #d1bc88 accent
+C #c1835f accent-2

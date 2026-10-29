@@ -17,9 +17,9 @@ PIX tile-tc-fortree 16 16
 .......kk.......
 ................
 PAL
-a #5d9c66 canopy
-b #497a50 canopy-dark
-c #6eb878 canopy-light
-d #c8a24a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #6c9872 canopy
+b #5c8361 canopy-dark
+c #78ac7f canopy-light
+d #b69c5f canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

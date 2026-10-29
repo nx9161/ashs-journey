@@ -1,25 +1,25 @@
 # Stage S3a: snowpoint town ground II — cross-hatched plaza texture (full-bleed, walkable).
 PIX tile-tg2-snowpoint 16 16
-bcecbcabccaccaba
-aaacebecccccbccc
-cccbbeccacbcccea
-cbacbcccbccacbcb
-aceaccbacacbcbab
-abccbcbacccbbcea
-cabcaccacbccecac
-bbbbacabcacccaba
+bcecbccbccccccbc
+ccccebecccccbccc
+cccbbeccccbcccec
+cbccbcccbccccbcb
+ccecccbccccbcbcb
+cbccbcbccccbbcec
+ccbccccccbcceccc
+bbbbcccbccccccbc
 bccccbccceccbccc
-eccbcaabcabeaeaa
-cbacaccabaccbccb
-bcccaabcbbeacbcc
-cbcbbccaaccbaccc
-ecbacccccbecbccc
-baccaabbacccaabc
-acccbbccacacbacb
+eccbcccbccbececc
+cbccccccbcccbccb
+bcccccbcbbeccbcc
+cbcbbccccccbcccc
+ecbccccccbecbccc
+bcccccbbccccccbc
+ccccbbccccccbccb
 PAL
-a #caf0f8 snowpoint-ground
-b #9ebbc1 ground-dark
-c #eeffff ground-light
-d #e85a7a town-accent
-e #7ac8e8 town-accent-2
-f #799095 ground-deep
+a #b0d8e0 snowpoint-ground
+b #98afb3 ground-dark
+c #c6e9e9 ground-light
+d #c77084 town-accent
+e #80b7ce town-accent-2
+f #809093 ground-deep

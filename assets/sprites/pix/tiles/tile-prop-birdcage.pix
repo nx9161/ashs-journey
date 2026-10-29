@@ -17,8 +17,8 @@ PIX tile-prop-birdcage 16 16
 ...DDDDDDDDDD...
 ................
 PAL
-B #c2c8d4 body
-D #6a6a80 shade
-L #eef7ff light
-A #3a7bd5 accent
-C #f07830 accent-2
+B #b0b6c1 body
+D #757585 shade
+L #c6d8e9 light
+A #5681bd accent
+C #c1835f accent-2

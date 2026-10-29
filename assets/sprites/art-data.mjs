@@ -81473,7 +81473,7 @@ export const ART = {
     ".......................OO................OO.....................",
     "................................................................",
   ] },
-  "tile-annewall": { w: 16, h: 16, pal: {"f":"#7a5a38","c":"#a87f4e","t":"#ffd873","s":"#5a3a24","b":"#5a3a24"}, rows: [
+  "tile-annewall": { w: 16, h: 16, pal: {"f":"#846a4e","c":"#a18461","t":"#d1bc88","s":"#71523d","b":"#71523d"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -81491,7 +81491,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-ashground": { w: 16, h: 16, pal: {"a":"#a8a294","b":"#8f887a","c":"#c2bcb0","d":"#7d8474"}, rows: [
+  "tile-ashground": { w: 16, h: 16, pal: {"a":"#a19c92","b":"#8f8a80","c":"#b4afa5","d":"#82877c"}, rows: [
     "accdaaaaaaaabdba",
     "aaaaaadaacbadbaa",
     "daccbaaaaaabbaaa",
@@ -81509,13 +81509,13 @@ export const ART = {
     "bccabdaacadaaaaa",
     "bbaabbaaabaaacac",
   ] },
-  "tile-atmo-coast": { w: 16, h: 16, pal: {"A":"#f5f0dc","B":"#f0e060"}, rows: [
+  "tile-atmo-coast": { w: 16, h: 16, pal: {"A":"#e1d9ba","B":"#cac177"}, rows: [
     "................",
-    "..AA............",
-    "..AA............",
+    "...A............",
+    "...A............",
     "................",
     "..........BB....",
-    "..........BB....",
+    "..........B.....",
     "................",
     "................",
     "................",
@@ -81523,83 +81523,83 @@ export const ART = {
     "................",
     "................",
     "................",
-    ".......AA..BB...",
-    ".......AAA.BB...",
+    "........A...B...",
+    ".......AA...B...",
     "........AA......",
   ] },
-  "tile-atmo-dust": { w: 16, h: 16, pal: {"A":"#b0a58e","B":"#9a9aa5"}, rows: [
+  "tile-atmo-dust": { w: 16, h: 16, pal: {"A":"#a79f8e","B":"#96969f"}, rows: [
+    ".......A........",
     "......AA........",
-    "......AA........",
     "................",
     "................",
     "................",
+    ".A..............",
     ".AA.............",
-    ".AA.............",
     "................",
-    "..............BB",
-    ".......AA.....BB",
-    ".......AA.......",
+    "..............B.",
+    "..............B.",
     "................",
     "................",
-    "............BB..",
-    "............BB..",
+    "................",
+    "............B...",
+    "............B...",
     "................",
   ] },
-  "tile-atmo-leaf": { w: 16, h: 16, pal: {"A":"#67aa54","B":"#54a048"}, rows: [
+  "tile-atmo-leaf": { w: 16, h: 16, pal: {"A":"#73a167","B":"#649d5b"}, rows: [
     ".AA.............",
-    ".AA.........BB..",
+    ".............B..",
     "............BB..",
     "................",
-    "AA..............",
-    "AA..............",
     "................",
-    "........BB......",
-    "........BB......",
     "................",
-    "..........AA....",
-    "..........AA....",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
     "................",
     "................",
     "................",
     "................",
   ] },
-  "tile-atmo-sparkle": { w: 16, h: 16, pal: {"A":"#e8e4f0","B":"#b0b8c6"}, rows: [
-    ".....AA.........",
-    ".AA..AA.........",
-    ".AA.............",
+  "tile-atmo-sparkle": { w: 16, h: 16, pal: {"A":"#cbc5d8","B":"#a5abb7"}, rows: [
+    ".....A..........",
+    "......A.........",
+    "................",
     "................",
     "..........BB....",
-    "..........BB....",
+    "..........B.....",
     "................",
     "................",
     "................",
-    ".........BB.....",
-    ".........BB.....",
     "................",
     "................",
     "................",
-    ".AA.............",
-    ".AA.............",
+    "................",
+    "................",
+    "................",
+    "................",
   ] },
-  "tile-atmo-warm": { w: 16, h: 16, pal: {"A":"#f0d0a0","B":"#c98d5a"}, rows: [
-    "................",
-    "........AA......",
-    "........AA......",
-    "...BB...........",
-    "...BB...........",
-    "................",
-    "................",
-    "............BB..",
-    "............BB..",
-    "............AA..",
-    "............AA..",
+  "tile-atmo-warm": { w: 16, h: 16, pal: {"A":"#d7bd97","B":"#b88e6a"}, rows: [
     "................",
     "................",
     "................",
-    "..AA............",
-    "..AA............",
+    "....B...........",
+    "...B............",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
   ] },
-  "tile-bannerwall": { w: 16, h: 16, pal: {"B":"#8c8aa0","D":"#54452f","A":"#b0503c"}, rows: [
+  "tile-bannerwall": { w: 16, h: 16, pal: {"B":"#8d8b9b","D":"#6a5c47","A":"#a96152"}, rows: [
     "DDBBDDBBBBDDBBAA",
     "DDDDDDDDDDDDDBAA",
     "DDDDBDAAAABBBBBB",
@@ -81617,7 +81617,7 @@ export const ART = {
     "BBBBBBBBBBBBAAAA",
     "BBBBBBBBBBBBAAAA",
   ] },
-  "tile-blend-arch": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","P":"#d8c08a"}, rows: [
+  "tile-blend-arch": { w: 16, h: 16, pal: {"S":"#96969f","s":"#7c7c87","T":"#a5abb7","P":"#c6b388"}, rows: [
     "................",
     "....SS..........",
     ".SS.SS..........",
@@ -81635,7 +81635,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-blend-treeline": { w: 16, h: 16, pal: {"G":"#3e7a34","g":"#2e5e28","w":"#5a3a24","L":"#8a6a48"}, rows: [
+  "tile-blend-treeline": { w: 16, h: 16, pal: {"G":"#53854b","g":"#467340","w":"#71523d","L":"#8e755b"}, rows: [
     "................",
     "................",
     ".gg.............",
@@ -81653,25 +81653,25 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-boardwalk": { w: 16, h: 16, pal: {"a":"#9a7648","b":"#6e5230","c":"#b08c58"}, rows: [
-    "caaaaaaacaaaaaaa",
-    "caaaaaaacaaaaaaa",
-    "caaaaaaacaaaaaaa",
+  "tile-boardwalk": { w: 16, h: 16, pal: {"a":"#997e5b","b":"#7d6547","c":"#a58d69"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
-    "aaaaacaaaaaaacaa",
-    "aaaaacaaaaaaacaa",
-    "aaaaacaaaaaaacaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
-    "aacaaaaaaacaaaaa",
-    "aacaaaaaaacaaaaa",
-    "aacaaaaaaacaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
-    "aaaaaaacaaaaaaac",
-    "aaaaaaacaaaaaaac",
-    "aaaaaaacaaaaaaac",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-bush": { w: 16, h: 16, pal: {"t":"#4e7a34","u":"#3b5e28","v":"#69a048","s":"#476e2c","e":"#3d6127","d":"#5e8a3e","l":"#84b45c","h":"#8ec168","k":"#5a2d24","w":"#7a4b38"}, rows: [
+  "tile-bush": { w: 16, h: 16, pal: {"t":"#60854b","u":"#527340","v":"#749d5b","s":"#5b7e44","e":"#54753f","d":"#6c8f53","l":"#87a86c","h":"#8eb273","k":"#71463d","w":"#845e4e"}, rows: [
     "................",
     "................",
     "................",
@@ -81689,7 +81689,7 @@ export const ART = {
     "....uuuuuuuus...",
     "...........s.s..",
   ] },
-  "tile-cablefloor": { w: 16, h: 16, pal: {"B":"#8a8ca0","D":"#6a6a80","A":"#f0e060"}, rows: [
+  "tile-cablefloor": { w: 16, h: 16, pal: {"B":"#8b8d9b","D":"#757585","A":"#cac177"}, rows: [
     "BBBBBBBBDDAADDAA",
     "BBBBBBBBDDDDDDAA",
     "BBBBADDBBBAADBBD",
@@ -81707,7 +81707,7 @@ export const ART = {
     "AABBDDDBBBBBBBBB",
     "AABBBBDAABBBBBBB",
   ] },
-  "tile-caveboulder-1": { w: 16, h: 16, pal: {"m":"#8c8aa0","z":"#6c6a80","c":"#c2c7d4","a":"#a88a5c"}, rows: [
+  "tile-caveboulder-1": { w: 16, h: 16, pal: {"m":"#8d8b9b","z":"#767585","c":"#b0b5c1","a":"#a08b6c"}, rows: [
     "................",
     "................",
     "................",
@@ -81725,7 +81725,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-caveboulder-2": { w: 16, h: 16, pal: {"m":"#8a8ca0","z":"#6a6c80","c":"#c2cad4"}, rows: [
+  "tile-caveboulder-2": { w: 16, h: 16, pal: {"m":"#8b8d9b","z":"#757685","c":"#b0b8c1"}, rows: [
     "................",
     "................",
     "................",
@@ -81743,7 +81743,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-caveboulder-3": { w: 16, h: 16, pal: {"m":"#8e8aa0","z":"#6e6a80","c":"#c2c5d4","k":"#5a4324","a":"#a8915c","b":"#b0a068","y":"#7a6538","g":"#46516e"}, rows: [
+  "tile-caveboulder-3": { w: 16, h: 16, pal: {"m":"#8e8b9b","z":"#787585","c":"#b0b3c1","k":"#715b3d","a":"#a0906c","b":"#a69b74","y":"#84734e","g":"#59627a"}, rows: [
     "................",
     "................",
     "................",
@@ -81779,95 +81779,95 @@ export const ART = {
     "bbyyaaaaaaaabbaa",
     "bbyyaaaaaaaabbaa",
   ] },
-  "tile-cavefloor-1": { w: 16, h: 16, pal: {"m":"#8c8aa0","z":"#6c6a80","c":"#c2c6d4","k":"#5a3f24","a":"#a88c5c","b":"#b09b68","y":"#7a6138","g":"#46546e"}, rows: [
+  "tile-cavefloor-1": { w: 16, h: 16, pal: {"m":"#8d8b9b","z":"#767585","c":"#b0b4c1","k":"#71573d","a":"#a08d6c","b":"#a69774","y":"#84704e","g":"#59657a"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bcbbbbbbbbbbbbbb",
-    "bbabbbmbbbbbbbbb",
-    "bbbbbbbbbbbbabbb",
-    "bbbbbbbabbbbbbbb",
+    "bbbbbbmbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
-    "bbbbbabbbbbbbbcb",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbcb",
     "bbbbbbbbbbbbbybb",
     "bbbbbbbbybbbbbbb",
-    "bbbbabbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
-    "bbbbbbbbbbabbbbb",
     "bbbbbbbbbbbbbbbb",
-    "bbbybbbbbbbbbbab",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
+    "bbbybbbbbbbbbbbb",
     "bbbbbbcbbbbmbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-cavefloor-2": { w: 16, h: 16, pal: {"m":"#8a8ca0","z":"#6a6c80","c":"#c2cad4","k":"#5a3524","a":"#a87c5c","b":"#b08d68","y":"#7a5338","g":"#465c6e"}, rows: [
+  "tile-cavefloor-2": { w: 16, h: 16, pal: {"m":"#8b8d9b","z":"#757685","c":"#b0b8c1","k":"#714d3d","a":"#a0826c","b":"#a68e74","y":"#84644e","g":"#596b7a"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bcbbbbbbbbbbbbbb",
     "bbbbbbbbybbbbbbb",
-    "bbbbbabbbbbbbmbb",
+    "bbbbbbbbbbbbbmbb",
     "bbbbbbbbbbbbbbbb",
-    "bbbbybbbbbbabbbb",
+    "bbbbybbbbbbbbbbb",
     "bbbbbbbbbbbbbbcb",
     "bbbbbbbbbbbbbbbb",
-    "bbabbbbbbbbbbbbb",
-    "bbbbbbbbbbbbbbab",
+    "bbbbbbbbbbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "bbbmbbbbbbbbbbbb",
-    "bbbbbbbbbabbybbb",
+    "bbbbbbbbbbbbybbb",
     "bbbbbbbbbbbbbbbb",
     "bbbbbbcbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-cavefloor-3": { w: 16, h: 16, pal: {"m":"#8e8aa0","z":"#6e6a80","c":"#c2c4d4","k":"#5a4524","a":"#a8935c","b":"#b0a268","y":"#7a6738","g":"#46506e"}, rows: [
+  "tile-cavefloor-3": { w: 16, h: 16, pal: {"m":"#8e8b9b","z":"#787585","c":"#b0b2c1","k":"#715d3d","a":"#a0916c","b":"#a69c74","y":"#84754e","g":"#59627a"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bcbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
-    "bbbabbbbbbbbbbab",
     "bbbbbbbbbbbbbbbb",
-    "bbmbbbbbbbbbabcb",
+    "bbbbbbbbbbbbbbbb",
+    "bbmbbbbbbbbbbbcb",
     "bbbbbbbbbybbbbbb",
     "bbbbbbbbbbbbbbbb",
     "bbbbbybbbbbbbbbb",
-    "bbbbbbbabbbbbbbb",
+    "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbmbbbbybb",
-    "bbbbabcbbbbbbbbb",
+    "bbbbbbcbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-cavefloor-4": { w: 16, h: 16, pal: {"b":"#a8905e","a":"#a8845c","y":"#7a5a38","c":"#e8e4f0","m":"#8a8aa0"}, rows: [
-    "aammbbmmccaayyyy",
-    "aaccbbmcccaayyyy",
-    "bbaabccybbaabbyy",
-    "bbaabbaabbaabbyy",
-    "aayyccyymmaabbbb",
-    "aayyccyymmyybbbb",
-    "ccbbaaaabbaabbbb",
-    "cyybyyaabbaabbbb",
-    "maabaabbmmcyyybb",
-    "mmbmmcbbbbyyyycc",
-    "aaaabbbbbbaayybb",
-    "aaaabbbbbbaayccb",
+  "tile-cavefloor-4": { w: 16, h: 16, pal: {"b":"#a08f6d","a":"#a0876c","y":"#846a4e","c":"#cbc5d8","m":"#8b8b9b"}, rows: [
+    "aammaammccaayyyy",
+    "aaccaamcccaayyyy",
+    "aaaaaccyaaaaaayy",
+    "aaaaaaaaaaaaaayy",
+    "aayyccyymmaaaaaa",
+    "aayyccyymmyyaaaa",
+    "ccaaaaaaaaaaaaaa",
+    "cyyayyaaaaaaaaaa",
+    "maaaaaaammcyyyaa",
+    "mmammcaaaayyyycc",
+    "aaaaaaaaaaaayyaa",
+    "aaaaaaaaaaaaycca",
     "aayyaaaaaayyaaaa",
-    "aayyaaaabbyybbaa",
-    "yyccaabbmmccbyya",
-    "yyccaabbmmcaabaa",
+    "aayyaaaaaayyaaaa",
+    "yyccaaaammccayya",
+    "yyccaaaammcaaaaa",
   ] },
-  "tile-cavefloor-5": { w: 16, h: 16, pal: {"b":"#8a7a54","a":"#77683f","y":"#5f5130","g":"#6fb0ee"}, rows: [
-    "bbggyyaggbbbbbbb",
-    "bbbbyyaabbaabbyy",
-    "ggyyggaabbbbbbaa",
-    "bbbyggayybbbbbaa",
-    "bbggyyyyyaaaggyy",
-    "bbggyyyyyyaaggyy",
-    "aaggaabbaaaaaabb",
-    "aagyyaggaaaaaabb",
-    "ggbbbbbbbbaaggyy",
-    "gbbbggbbyyaaggyy",
-    "bbggggyyaayyggbb",
-    "bbggggyyaayyggbb",
-    "aaaaaayybbbbggaa",
-    "yyaaaayybbbbggbb",
-    "bbggbbbbggaaaagg",
-    "ggggbbbbggaaaagg",
+  "tile-cavefloor-5": { w: 16, h: 16, pal: {"b":"#8d8164","a":"#817554","y":"#726648","g":"#7da6cd"}, rows: [
+    "bbggyybggbbbbbbb",
+    "bbbbyybbbbbbbbyy",
+    "ggyyggbbbbbbbbbb",
+    "bbbyggbyybbbbbbb",
+    "bbggyyyyybbbggyy",
+    "bbggyyyyyybbggyy",
+    "bbggbbbbbbbbbbbb",
+    "bbgyybggbbbbbbbb",
+    "ggbbbbbbbbbbggyy",
+    "gbbbggbbyybbggyy",
+    "bbggggyybbyyggbb",
+    "bbggggyybbyyggbb",
+    "bbbbbbyybbbbggbb",
+    "yybbbbyybbbbggbb",
+    "bbggbbbbggbbbbgg",
+    "ggggbbbbggbbbbgg",
   ] },
   "tile-cavelantern": { w: 16, h: 16, pal: {"b":"#6a5a48","a":"#54452f","y":"#3c3c46","k":"#202028","g":"#ffd873"}, rows: [
     "yyaaaabbyybbybba",
@@ -81887,7 +81887,7 @@ export const ART = {
     "bbyyaaaaaaaabbaa",
     "bbyyaaaaaaaabbaa",
   ] },
-  "tile-cavewall-1": { w: 16, h: 16, pal: {"m":"#8d8aa0","z":"#6d6a80","c":"#c2c6d4","k":"#5a4124","a":"#a88e5c","b":"#b09e68","y":"#7a6338","g":"#46536e"}, rows: [
+  "tile-cavewall-1": { w: 16, h: 16, pal: {"m":"#8d8b9b","z":"#777585","c":"#b0b4c1","k":"#71593d","a":"#a08e6c","b":"#a69974","y":"#84714e","g":"#59647a"}, rows: [
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
@@ -81905,7 +81905,7 @@ export const ART = {
     "gggggggggggggggg",
     "gggggggggggggggg",
   ] },
-  "tile-cavewall-2": { w: 16, h: 16, pal: {"m":"#8a8da0","z":"#6a6d80","c":"#c2cad4","k":"#5a3324","a":"#a87a5c","b":"#b08a68","y":"#7a5138","g":"#465d6e"}, rows: [
+  "tile-cavewall-2": { w: 16, h: 16, pal: {"m":"#8b8d9b","z":"#757785","c":"#b0b8c1","k":"#714b3d","a":"#a0806c","b":"#a68b74","y":"#84634e","g":"#596c7a"}, rows: [
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
     "mmmgmmmmmmmmmmmm",
@@ -81923,7 +81923,7 @@ export const ART = {
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-cavewall-3": { w: 16, h: 16, pal: {"m":"#908aa0","z":"#706a80","c":"#c2c3d4","k":"#5a4824","a":"#a8985c","b":"#b0a768","y":"#7a6c38","g":"#464d6e"}, rows: [
+  "tile-cavewall-3": { w: 16, h: 16, pal: {"m":"#908b9b","z":"#797585","c":"#b0b1c1","k":"#71603d","a":"#a0956c","b":"#a6a074","y":"#84794e","g":"#595f7a"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
     "gggggggggggggggg",
@@ -81941,7 +81941,7 @@ export const ART = {
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-cavewall-4": { w: 16, h: 16, pal: {"b":"#6a5a48","a":"#7a6a8a","y":"#54452f","v":"#8a7a9a"}, rows: [
+  "tile-cavewall-4": { w: 16, h: 16, pal: {"b":"#776a5b","a":"#80758c","y":"#6a5c47","v":"#8b8097"}, rows: [
     "bbbbvvvvvvyyavvb",
     "bbbbvvvvvvyyaabb",
     "bbbbbvvbvvvvyyyy",
@@ -81959,7 +81959,7 @@ export const ART = {
     "vvaayyaaaabbvvyy",
     "vvaayyaaaabbvvyy",
   ] },
-  "tile-cavewall-5": { w: 16, h: 16, pal: {"b":"#4a4a55","a":"#5c5c6a","y":"#36363f","v":"#747484"}, rows: [
+  "tile-cavewall-5": { w: 16, h: 16, pal: {"b":"#5e5e67","a":"#6b6b76","y":"#4f4f58","v":"#7c7c87"}, rows: [
     "bbbbbbbbbbbbbbaa",
     "bbbbbbbbbbbbbbaa",
     "bbbbbbyyyybbaaaa",
@@ -81977,7 +81977,7 @@ export const ART = {
     "vvvvbbvvyybbaabb",
     "vvvvbbvvyybbaabb",
   ] },
-  "tile-centerdoor-open": { w: 16, h: 16, pal: {"h":"#c9a06a","w":"#3a7bd5","y":"#5a9ae8","Z":"#202028"}, rows: [
+  "tile-centerdoor-open": { w: 16, h: 16, pal: {"h":"#b99b74","w":"#5681bd","y":"#7097c7","Z":"#3f3f49"}, rows: [
     "hhhhhhhhhhhhhhhh",
     "hhhhwwwwwwwwhhhh",
     "hhhhwwwwwwwwhhhh",
@@ -81995,7 +81995,7 @@ export const ART = {
     "hhhhhhhhhhhhhhhh",
     "hhhhZZZZZZZhhhhh",
   ] },
-  "tile-centerdoor": { w: 16, h: 16, pal: {"h":"#c9a06a","w":"#3a7bd5","y":"#5a9ae8"}, rows: [
+  "tile-centerdoor": { w: 16, h: 16, pal: {"h":"#b99b74","w":"#5681bd","y":"#7097c7"}, rows: [
     "hhhhhhhhhhhhhhhh",
     "hhhhwwwwwwwwhhhh",
     "hhhhwwwwwwwwhhhh",
@@ -82013,7 +82013,7 @@ export const ART = {
     "hhhhhhhhhhhhhhhh",
     "hhhhhhhhhhhhhhhh",
   ] },
-  "tile-centerfloor-1": { w: 16, h: 16, pal: {"a":"#f2ddd5","b":"#e8b4c4","c":"#d8c08a"}, rows: [
+  "tile-centerfloor-1": { w: 16, h: 16, pal: {"a":"#dec1b7","b":"#d4a2b1","c":"#c6b388"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "baaaaaaabaaaaaab",
     "baaaaaaabaacaaab",
@@ -82031,7 +82031,7 @@ export const ART = {
     "baaaaaaabcaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-centerfloor-2": { w: 16, h: 16, pal: {"a":"#f2e0d5","b":"#e8b4be","c":"#e8b4be"}, rows: [
+  "tile-centerfloor-2": { w: 16, h: 16, pal: {"a":"#dec5b7","b":"#d4a2ac","c":"#d4a2ac"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "baaaaaaabaaaaaac",
     "baaaacaabaaaaaab",
@@ -82049,43 +82049,43 @@ export const ART = {
     "baaaaacabaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-centerfloor-3": { w: 16, h: 16, pal: {"a":"#f2ddd5","b":"#e8b4c4","c":"#eec9bc","d":"#dfa3b5"}, rows: [
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
+  "tile-centerfloor-3": { w: 16, h: 16, pal: {"a":"#dec1b7","b":"#d4a2b1","c":"#dab3a6","d":"#cc98a7"}, rows: [
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
   ] },
-  "tile-centerfloor-4": { w: 16, h: 16, pal: {"a":"#f2ddd5","b":"#e8b4c4","c":"#eec9bc","d":"#dfa3b5"}, rows: [
+  "tile-centerfloor-4": { w: 16, h: 16, pal: {"a":"#dec1b7","b":"#d4a2b1","c":"#dab3a6","d":"#cc98a7"}, rows: [
     "bbbbbbbbbbbbbbbb",
-    "baaabaaacaaabaaa",
-    "baaabaacacaabaaa",
-    "baaabacacacabaaa",
-    "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
-    "baaacacacacabaaa",
-    "bbbbbcacacabbbbb",
-    "baaabacacaaabaaa",
-    "baaabaacaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "bbbbaaaaaaaabbbb",
+    "baaaaaaddaaaaaaa",
+    "baaaaaddddaaaaaa",
+    "baaaaddddddaaaaa",
+    "baaaaddddddaaaab",
+    "baaaaaddddaaaaaa",
+    "baaaaaaddaaaaaaa",
+    "baaaaaaaaaaabaaa",
+    "bbbbbaaaaaabbbbb",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
     "baaabaaabaaabaaa",
   ] },
-  "tile-centerwall-2": { w: 16, h: 16, pal: {"w":"#e8b4c4","l":"#f2ddd5","d":"#c97e97"}, rows: [
+  "tile-centerwall-2": { w: 16, h: 16, pal: {"w":"#d4a2b1","l":"#dec1b7","d":"#b98194"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -82103,7 +82103,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-centerwall-3": { w: 16, h: 16, pal: {"f":"#e8b4c4","c":"#f5f0dc","t":"#c97e97","s":"#c97e97","b":"#9e5570"}, rows: [
+  "tile-centerwall-3": { w: 16, h: 16, pal: {"f":"#d4a2b1","c":"#e1d9ba","t":"#b98194","s":"#b98194","b":"#9b6579"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -82121,7 +82121,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-centerwall": { w: 16, h: 16, pal: {"f":"#e8b4c4","c":"#f5f0dc","t":"#c97e97","s":"#c97e97","b":"#9e5570"}, rows: [
+  "tile-centerwall": { w: 16, h: 16, pal: {"f":"#d4a2b1","c":"#e1d9ba","t":"#b98194","s":"#b98194","b":"#9b6579"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -82139,7 +82139,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-cerfloor": { w: 16, h: 16, pal: {"B":"#7a6738","D":"#54452f","A":"#8a7a9a"}, rows: [
+  "tile-cerfloor": { w: 16, h: 16, pal: {"B":"#84754e","D":"#6a5c47","A":"#8b8097"}, rows: [
     "BBBBAADBBBBBBBAA",
     "BBBBBAADBBDDBBAA",
     "BAAADDBBDDDDBBBB",
@@ -82157,7 +82157,7 @@ export const ART = {
     "DDAAAABBBBBBDDBB",
     "DDAAAABBBBBBDDAA",
   ] },
-  "tile-cerpool": { w: 16, h: 16, pal: {"B":"#6fb0ee","A":"#3fa08a","L":"#8ae8f0"}, rows: [
+  "tile-cerpool": { w: 16, h: 16, pal: {"B":"#7da6cd","A":"#549e8d","L":"#8ccdd2"}, rows: [
     "AAAAAAAALLAAAAAA",
     "AAAALLAALLAABBAA",
     "AAAAABBLAALLAAAA",
@@ -82175,7 +82175,7 @@ export const ART = {
     "AABBLLBBAAAAAABB",
     "AABBLLBBAAAAAABB",
   ] },
-  "tile-cerwall": { w: 16, h: 16, pal: {"B":"#6a6d80","D":"#46516e","A":"#8a7a9a"}, rows: [
+  "tile-cerwall": { w: 16, h: 16, pal: {"B":"#757785","D":"#59627a","A":"#8b8097"}, rows: [
     "BBBBBBAADDDDBBDD",
     "BBBBBBAADDDDBBDD",
     "BBAAAABBBBDDDBBB",
@@ -82193,7 +82193,7 @@ export const ART = {
     "AAAABBAABBBAABBB",
     "AABBBBAABBBBBBBB",
   ] },
-  "tile-citybrick": { w: 16, h: 16, pal: {"a":"#a8583e","m":"#d8c8b0","c":"#c06a4c"}, rows: [
+  "tile-citybrick": { w: 16, h: 16, pal: {"a":"#a36754","m":"#c6b8a2","c":"#b07561"}, rows: [
     "caaaaaamaaaaaaam",
     "aaaaaaamacaaaaam",
     "acaaaaamaaaaaaam",
@@ -82211,25 +82211,25 @@ export const ART = {
     "aaamaaacaaamaaaa",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-cityfloor": { w: 16, h: 16, pal: {"a":"#c8bc9c","b":"#a89a78","c":"#ddd2b2","d":"#b8a888"}, rows: [
+  "tile-cityfloor": { w: 16, h: 16, pal: {"a":"#b9af96","b":"#a0977f","c":"#cac0a3","d":"#ada189"}, rows: [
     "aaaaaaabaaaaaaab",
-    "aadaaacbaaaaaaad",
-    "aaaaaaabaaaaaaad",
-    "aacaadabaaaaaaab",
-    "acaaaadbaaaaaaab",
-    "aacaaacbaaaaaaab",
-    "aaaaaaabdaaaaaab",
-    "bbbdbbbbbbbbcbbb",
-    "aaaaacabaaaaaaab",
-    "aacaaaabaaaacaab",
-    "daaaaaabaaaaaaab",
-    "aaaaaaacaaaaaaab",
-    "aaacaaabaaaaaaab",
-    "aaaaaaadaaaaaaab",
-    "aaaaacabadaaaaab",
-    "bbbbbbbbbbbbcbbb",
+    "aaaaaaabaaaaaaaa",
+    "aaaaaaabaaaaaaaa",
+    "aaaaaaabaaaaaaab",
+    "aaaaaaabaaaaaaab",
+    "aaaaaaabaaaaaaab",
+    "aaaaaaabaaaaaaab",
+    "bbbabbbbbbbbabbb",
+    "aaaaaaabaaaaaaab",
+    "aaaaaaabaaaaaaab",
+    "aaaaaaabaaaaaaab",
+    "aaaaaaaaaaaaaaab",
+    "aaaaaaabaaaaaaab",
+    "aaaaaaaaaaaaaaab",
+    "aaaaaaabaaaaaaab",
+    "bbbbbbbbbbbbabbb",
   ] },
-  "tile-climbwall": { w: 16, h: 16, pal: {"a":"#7a6a58","b":"#584a3c","c":"#9a8a74","d":"#e8dcc0"}, rows: [
+  "tile-climbwall": { w: 16, h: 16, pal: {"a":"#827567","b":"#6b5f52","c":"#968b7c","d":"#d4c8aa"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbaaaaabaaaaabbc",
     "aaaaaaaaaaaaaaaa",
@@ -82247,25 +82247,25 @@ export const ART = {
     "aacaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-coronetfloor": { w: 16, h: 16, pal: {"a":"#8d8578","b":"#6d665a","c":"#aaa294","d":"#7a8698"}, rows: [
+  "tile-coronetfloor": { w: 16, h: 16, pal: {"a":"#8d887f","b":"#787269","c":"#a29c92","d":"#808995"}, rows: [
     "aaaaabcaaaabaaac",
-    "aaaacaaadaadbaad",
+    "aaaacaaaaaaabaaa",
     "bbbaababaabaaaba",
-    "aacabdbabaabaaaa",
-    "aaaabdaaaaaaabdc",
+    "aacabababaabaaaa",
+    "aaaabaaaaaaaabac",
     "abcabaacabaaaaba",
     "aaaaaaaaabaaaaab",
-    "baadabaacaaaabca",
-    "daabaaacacdababa",
-    "adddaadaccaabaaa",
+    "baaaabaacaaaabca",
+    "aaabaaacacaababa",
+    "aaaaaaaaccaabaaa",
     "acaccbaaacaaaaca",
     "aabbaaabaaaaaacb",
     "acaaabaaaaaabaaa",
-    "aaaaaaabdbadacaa",
+    "aaaaaaababaaacaa",
     "cbaaabaaaacaacaa",
-    "abaaaabacacdaadc",
+    "abaaaabacacaaaac",
   ] },
-  "tile-coronetrock": { w: 16, h: 16, pal: {"a":"#6e6258","b":"#4c443c","c":"#8d8074","d":"#7a8698"}, rows: [
+  "tile-coronetrock": { w: 16, h: 16, pal: {"a":"#796f67","b":"#625a53","c":"#8d847c","d":"#808995"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaabcaabcaaaaaca",
     "aaaaaabaabaaabba",
@@ -82283,23 +82283,23 @@ export const ART = {
     "cababbcacacaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-crackedfloor": { w: 16, h: 16, pal: {"B":"#a8905e","D":"#54452f","A":"#b09b68"}, rows: [
-    "DDBBAABBBBDDDDBB",
-    "DDBDDABBBBDDDDBB",
-    "BBBBBBAAAABBBBAA",
-    "BBBBBBAAAABBBBAA",
-    "BBBBAAAABBBBAABB",
-    "BBAAAADDBBBBDDBB",
-    "AABBDDBBBBBBDDDD",
-    "AABBDDBDDBBBDDBB",
-    "BBAAABBBBBBBBBBB",
-    "BBAADDBBAABBBBBB",
+  "tile-crackedfloor": { w: 16, h: 16, pal: {"B":"#a08f6d","D":"#6a5c47","A":"#a69774"}, rows: [
+    "DDBBBBBBBBDDDDBB",
+    "DDBDDBBBBBDDDDBB",
     "BBBBBBBBBBBBBBBB",
-    "BBBBBDDBBBBBBAAB",
-    "BBAAABAABBBBBBBB",
-    "BBAABBAABBAABBBB",
-    "BDDABBBBAABBDDBB",
-    "BBADDABBAABBDAAB",
+    "BBBBBBBBBBBBBBBB",
+    "BBBBBBBBBBBBBBBB",
+    "BBBBBBDDBBBBDDBB",
+    "BBBBDDBBBBBBDDDD",
+    "BBBBDDBDDBBBDDBB",
+    "BBBBBBBBBBBBBBBB",
+    "BBBBDDBBBBBBBBBB",
+    "BBBBBBBBBBBBBBBB",
+    "BBBBBDDBBBBBBBBB",
+    "BBBBBBBBBBBBBBBB",
+    "BBBBBBBBBBBBBBBB",
+    "BDDBBBBBBBBBDDBB",
+    "BBBDDBBBBBBBDBBB",
   ] },
   "tile-crystal-1": { w: 16, h: 16, pal: {"a":"#6fb0ee","b":"#3fa08a","c":"#eef7ff"}, rows: [
     "................",
@@ -82337,7 +82337,7 @@ export const ART = {
     "..ccccccca......",
     "................",
   ] },
-  "tile-current": { w: 16, h: 16, pal: {"a":"#2a6ac0","b":"#3a9ad8","c":"#aee4f8","d":"#e8fcff"}, rows: [
+  "tile-current": { w: 16, h: 16, pal: {"a":"#4675b4","b":"#5896be","c":"#a2ccdb","d":"#c3e3e8"}, rows: [
     "dcaaaaaaccdaabaa",
     "aaaadaccaaaabacc",
     "aaaaccaaaaabccaa",
@@ -82355,7 +82355,7 @@ export const ART = {
     "adaaccaaaaaaccaa",
     "aaccaaaaaaccaaaa",
   ] },
-  "tile-decor-basket": { w: 16, h: 16, pal: {"w":"#c9a06a","d":"#a87f4e","f":"#e86a9a","a":"#e84c3c"}, rows: [
+  "tile-decor-basket": { w: 16, h: 16, pal: {"w":"#b99b74","d":"#a18461","f":"#ca7897","a":"#c16a61"}, rows: [
     "................",
     "................",
     "................",
@@ -82373,7 +82373,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-books": { w: 16, h: 16, pal: {"b":"#a83a3a","u":"#3a5aa8","p":"#e8dcc0","s":"#5a3a24"}, rows: [
+  "tile-decor-books": { w: 16, h: 16, pal: {"b":"#a35050","u":"#5069a3","p":"#d4c8aa","s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -82391,7 +82391,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-bottles": { w: 16, h: 16, pal: {"g":"#57a8a0","a":"#e8a33c","l":"#cfe8a8","c":"#8a5a30"}, rows: [
+  "tile-decor-bottles": { w: 16, h: 16, pal: {"g":"#699f9a","a":"#c19b61","l":"#bdd499","c":"#916a47"}, rows: [
     "................",
     "................",
     "................",
@@ -82409,7 +82409,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-cake": { w: 16, h: 16, pal: {"p":"#e8b4c4","w":"#fdfdf8","c":"#c9452c","s":"#9a958c"}, rows: [
+  "tile-decor-cake": { w: 16, h: 16, pal: {"p":"#d4a2b1","w":"#e9e9cc","c":"#b85b49","s":"#97938d"}, rows: [
     "................",
     "................",
     "................",
@@ -82427,7 +82427,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-clock": { w: 16, h: 16, pal: {"f":"#e8dcc0","r":"#9c3220","h":"#202028","p":"#c9a227"}, rows: [
+  "tile-decor-clock": { w: 16, h: 16, pal: {"f":"#d4c8aa","r":"#9c4b3d","h":"#3f3f49","p":"#b79c47"}, rows: [
     "................",
     "................",
     "................",
@@ -82445,7 +82445,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-cup": { w: 16, h: 16, pal: {"c":"#eef7ff","t":"#8a5a30","p":"#d8d2c0","h":"#c9452c"}, rows: [
+  "tile-decor-cup": { w: 16, h: 16, pal: {"c":"#c6d8e9","t":"#916a47","p":"#c5bfae","h":"#b85b49"}, rows: [
     "................",
     "................",
     "................",
@@ -82463,7 +82463,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-cushion": { w: 16, h: 16, pal: {"c":"#c9452c","d":"#9c3220","s":"#f0d060"}, rows: [
+  "tile-decor-cushion": { w: 16, h: 16, pal: {"c":"#b85b49","d":"#9c4b3d","s":"#cab877"}, rows: [
     "................",
     "................",
     "................",
@@ -82481,7 +82481,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-fern": { w: 16, h: 16, pal: {"l":"#3f9e4d","d":"#2e7a3a","p":"#7a4a8c","s":"#5a3a24"}, rows: [
+  "tile-decor-fern": { w: 16, h: 16, pal: {"l":"#549c5f","d":"#458650","p":"#815c8f","s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -82499,7 +82499,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-globe": { w: 16, h: 16, pal: {"o":"#57a8d8","l":"#6ab45c","s":"#8a5a30","m":"#c9a227"}, rows: [
+  "tile-decor-globe": { w: 16, h: 16, pal: {"o":"#67a1c3","l":"#75a86c","s":"#916a47","m":"#b79c47"}, rows: [
     "................",
     "................",
     "................",
@@ -82517,7 +82517,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-herb": { w: 16, h: 16, pal: {"p":"#b06a3c","l":"#4c8a3e","d":"#386e2c","s":"#5a3a24"}, rows: [
+  "tile-decor-herb": { w: 16, h: 16, pal: {"p":"#a97552","l":"#5e8f53","d":"#4e7e44","s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -82535,7 +82535,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-lamp": { w: 16, h: 16, pal: {"s":"#8a6a48","h":"#f0d060","g":"#ffe89a","b":"#5a3a24"}, rows: [
+  "tile-decor-lamp": { w: 16, h: 16, pal: {"s":"#8e755b","h":"#cab877","g":"#d8cb9c","b":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -82553,7 +82553,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-papers": { w: 16, h: 16, pal: {"p":"#f5f0dc","i":"#3a3a4c","e":"#e2ddc8"}, rows: [
+  "tile-decor-papers": { w: 16, h: 16, pal: {"p":"#e1d9ba","i":"#515162","e":"#cec8b2"}, rows: [
     "................",
     "................",
     "................",
@@ -82571,7 +82571,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-radio": { w: 16, h: 16, pal: {"b":"#3a3a4c","d":"#c9452c","n":"#f0d060","s":"#8a8aa0","a":"#5a3a24"}, rows: [
+  "tile-decor-radio": { w: 16, h: 16, pal: {"b":"#515162","d":"#b85b49","n":"#cab877","s":"#8b8b9b","a":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -82589,7 +82589,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-shoes": { w: 16, h: 16, pal: {"s":"#8a5a30","d":"#5f3d1e","l":"#e8dcc0"}, rows: [
+  "tile-decor-shoes": { w: 16, h: 16, pal: {"s":"#916a47","d":"#765537","l":"#d4c8aa"}, rows: [
     "................",
     "................",
     "................",
@@ -82607,7 +82607,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-typer": { w: 16, h: 16, pal: {"b":"#2e2e3a","k":"#d8d2c0","p":"#f5f0dc","i":"#3a3a4c"}, rows: [
+  "tile-decor-typer": { w: 16, h: 16, pal: {"b":"#494956","k":"#c5bfae","p":"#e1d9ba","i":"#515162"}, rows: [
     "................",
     "................",
     "................",
@@ -82625,7 +82625,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-decor-vase": { w: 16, h: 16, pal: {"v":"#7a5aa8","f":"#e86a9a","w":"#eef7ff","l":"#4c8a3e"}, rows: [
+  "tile-decor-vase": { w: 16, h: 16, pal: {"v":"#806ba0","f":"#ca7897","w":"#c6d8e9","l":"#5e8f53"}, rows: [
     "................",
     "................",
     "................",
@@ -82643,7 +82643,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-desertsand": { w: 16, h: 16, pal: {"a":"#dcbd85","b":"#c4a26a","c":"#eedcae"}, rows: [
+  "tile-desertsand": { w: 16, h: 16, pal: {"a":"#c9b084","b":"#b59c74","c":"#d9c89d"}, rows: [
     "aaabaabaaaaaaaca",
     "aaaaabaccabaaaba",
     "aaabaaaaaacaccaa",
@@ -82661,7 +82661,7 @@ export const ART = {
     "bcaabacbaaaaaaca",
     "baacaaaaaaaaacaa",
   ] },
-  "tile-detail-ash": { w: 16, h: 16, pal: {"a":"#9a9aa5"}, rows: [
+  "tile-detail-ash": { w: 16, h: 16, pal: {"a":"#96969f"}, rows: [
     "................",
     "...aa...........",
     "................",
@@ -82679,7 +82679,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-blossom": { w: 16, h: 16, pal: {"b":"#c97e97","w":"#eef7ff"}, rows: [
+  "tile-detail-blossom": { w: 16, h: 16, pal: {"b":"#b98194","w":"#c6d8e9"}, rows: [
     "................",
     "................",
     "................",
@@ -82697,7 +82697,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-bunting": { w: 16, h: 16, pal: {"r":"#e84c3c","y":"#f0d060","b":"#3c78e8","w":"#eef7ff","s":"#5a3a24"}, rows: [
+  "tile-detail-bunting": { w: 16, h: 16, pal: {"r":"#c16a61","y":"#cab877","b":"#6182c1","w":"#c6d8e9","s":"#71523d"}, rows: [
     "................",
     "................",
     "ssssssssssssssss",
@@ -82715,7 +82715,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-clover": { w: 16, h: 16, pal: {"c":"#67aa54"}, rows: [
+  "tile-detail-clover": { w: 16, h: 16, pal: {"c":"#73a167"}, rows: [
     "................",
     "................",
     "..........cc....",
@@ -82733,7 +82733,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-cobble-ring": { w: 16, h: 16, pal: {"a":"#9a958c","b":"#7a756c","c":"#c0bba8","d":"#5f5a52"}, rows: [
+  "tile-detail-cobble-ring": { w: 16, h: 16, pal: {"a":"#97938d","b":"#817d76","c":"#b2ae9f","d":"#6e6a63"}, rows: [
     "................",
     "................",
     "................",
@@ -82751,7 +82751,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-dirt": { w: 16, h: 16, pal: {"r":"#5a3a24","t":"#7a5a38"}, rows: [
+  "tile-detail-dirt": { w: 16, h: 16, pal: {"r":"#71523d","t":"#846a4e"}, rows: [
     "................",
     "................",
     "................",
@@ -82769,7 +82769,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-leaves": { w: 16, h: 16, pal: {"l":"#54a048"}, rows: [
+  "tile-detail-leaves": { w: 16, h: 16, pal: {"l":"#649d5b"}, rows: [
     "................",
     "................",
     "................",
@@ -82787,7 +82787,7 @@ export const ART = {
     "..........lll...",
     "...........ll...",
   ] },
-  "tile-detail-moss": { w: 16, h: 16, pal: {"m":"#386e2c"}, rows: [
+  "tile-detail-moss": { w: 16, h: 16, pal: {"m":"#4e7e44"}, rows: [
     "................",
     "................",
     "................",
@@ -82805,7 +82805,7 @@ export const ART = {
     "..........mm....",
     "..........mm....",
   ] },
-  "tile-detail-pebbles": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80"}, rows: [
+  "tile-detail-pebbles": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585"}, rows: [
     "................",
     "................",
     "................",
@@ -82823,7 +82823,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-petals": { w: 16, h: 16, pal: {"f":"#e86a8a"}, rows: [
+  "tile-detail-petals": { w: 16, h: 16, pal: {"f":"#ca788d"}, rows: [
     "................",
     "................",
     ".........ff.....",
@@ -82841,7 +82841,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-sand": { w: 16, h: 16, pal: {"s":"#d8c08a"}, rows: [
+  "tile-detail-sand": { w: 16, h: 16, pal: {"s":"#c6b388"}, rows: [
     "................",
     "................",
     "................",
@@ -82859,7 +82859,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-detail-shells": { w: 16, h: 16, pal: {"w":"#eef7ff"}, rows: [
+  "tile-detail-shells": { w: 16, h: 16, pal: {"w":"#c6d8e9"}, rows: [
     "................",
     "................",
     "................",
@@ -82877,7 +82877,7 @@ export const ART = {
     ".............ww.",
     "................",
   ] },
-  "tile-detail-straw": { w: 16, h: 16, pal: {"y":"#f0e060"}, rows: [
+  "tile-detail-straw": { w: 16, h: 16, pal: {"y":"#cac177"}, rows: [
     "................",
     "............yy..",
     "................",
@@ -82895,7 +82895,7 @@ export const ART = {
     "............yy..",
     "................",
   ] },
-  "tile-detail-twig": { w: 16, h: 16, pal: {"t":"#7a5a38"}, rows: [
+  "tile-detail-twig": { w: 16, h: 16, pal: {"t":"#846a4e"}, rows: [
     "................",
     "................",
     "................",
@@ -82913,7 +82913,7 @@ export const ART = {
     "..tt............",
     "...tt...........",
   ] },
-  "tile-distortfalls": { w: 16, h: 16, pal: {"a":"#4a6a9a","b":"#6a9ac8","c":"#38527a","d":"#c8e0f5","e":"#2c4470","f":"#8ad8c8"}, rows: [
+  "tile-distortfalls": { w: 16, h: 16, pal: {"a":"#5d7599","b":"#7497b8","c":"#4e6384","d":"#aec8df","e":"#44597f","f":"#88c6b9"}, rows: [
     "bfaabaaabceabaaa",
     "eaaabadcfaaabaaa",
     "baaaecafbdaabace",
@@ -82931,7 +82931,7 @@ export const ART = {
     "baaabaadbafabaaa",
     "baaafacabaaabaac",
   ] },
-  "tile-distortfloor": { w: 16, h: 16, pal: {"a":"#6a5a8a","b":"#4e4266","c":"#8a7ab0","d":"#b8a8e0","e":"#3a2c52","f":"#a894cc","g":"#c8a24a"}, rows: [
+  "tile-distortfloor": { w: 16, h: 16, pal: {"a":"#75698d","b":"#615675","c":"#8b80a6","d":"#a99bcd","e":"#524569","f":"#a090bc","g":"#b69c5f"}, rows: [
     "baaaaaabaafcafba",
     "aaaaaabaaaaaabaa",
     "acaeabaaaafabaaa",
@@ -82949,7 +82949,7 @@ export const ART = {
     "baaaaaadaadaaabd",
     "aacaaafaaaaafdaa",
   ] },
-  "tile-distortrock": { w: 16, h: 16, pal: {"a":"#54486e","b":"#3a304e","c":"#6e5f8f","d":"#7a6a4a","e":"#241c38","f":"#9a8ab8"}, rows: [
+  "tile-distortrock": { w: 16, h: 16, pal: {"a":"#655b7a","b":"#524865","c":"#776c90","d":"#83765c","e":"#413759","f":"#968bad"}, rows: [
     "fbbbbbbbbbfbbbbb",
     "aacbcefaafccabaa",
     "aaeaacbaaaaaeaaa",
@@ -82967,7 +82967,7 @@ export const ART = {
     "aaacfacaecbaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-door-brick-open": { w: 16, h: 16, pal: {"w":"#b0503c","l":"#c96a52","s":"#7a3226","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","Z":"#202028"}, rows: [
+  "tile-door-brick-open": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -82985,7 +82985,7 @@ export const ART = {
     "wwwlggggggguuuww",
     "wwssZZZZZZZuuuww",
   ] },
-  "tile-door-brick": { w: 16, h: 16, pal: {"w":"#b0503c","l":"#c96a52","s":"#7a3226","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8"}, rows: [
+  "tile-door-brick": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83003,7 +83003,7 @@ export const ART = {
     "wwwllllllllllwww",
     "wwssssssssssssww",
   ] },
-  "tile-door-center-l-open": { w: 16, h: 16, pal: {"w":"#eef7ff","l":"#f5f0dc","s":"#a02828","r":"#d84040","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","g":"#3a7bd5","Z":"#202028"}, rows: [
+  "tile-door-center-l-open": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","Z":"#3f3f49"}, rows: [
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
@@ -83021,7 +83021,7 @@ export const ART = {
     "llllwwwwwwwuuull",
     "ssssZZZZZZZuuuss",
   ] },
-  "tile-door-center-l": { w: 16, h: 16, pal: {"w":"#eef7ff","l":"#f5f0dc","s":"#a02828","r":"#d84040","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","g":"#3a7bd5"}, rows: [
+  "tile-door-center-l": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd"}, rows: [
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
@@ -83039,7 +83039,7 @@ export const ART = {
     "llllllllllllllll",
     "ssssssssssssssss",
   ] },
-  "tile-door-center-r-open": { w: 16, h: 16, pal: {"w":"#eef7ff","l":"#f5f0dc","s":"#a02828","r":"#d84040","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","g":"#3a7bd5","Z":"#202028"}, rows: [
+  "tile-door-center-r-open": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","Z":"#3f3f49"}, rows: [
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
@@ -83057,7 +83057,7 @@ export const ART = {
     "llllwwwwwwwuuull",
     "ssssZZZZZZZuuuss",
   ] },
-  "tile-door-center-r": { w: 16, h: 16, pal: {"w":"#eef7ff","l":"#f5f0dc","s":"#a02828","r":"#d84040","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","g":"#3a7bd5"}, rows: [
+  "tile-door-center-r": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd"}, rows: [
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
@@ -83075,7 +83075,7 @@ export const ART = {
     "llllllllllllllll",
     "ssssssssssssssss",
   ] },
-  "tile-door-gym-l-open": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#6a6a80","t":"#5a3a24","d":"#3a4657","g":"#ffd873","Z":"#202028"}, rows: [
+  "tile-door-gym-l-open": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83093,7 +83093,7 @@ export const ART = {
     "wwttgggggggssstt",
     "ssssZZZZZZZsssss",
   ] },
-  "tile-door-gym-l": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#6a6a80","t":"#5a3a24","d":"#3a4657","g":"#ffd873"}, rows: [
+  "tile-door-gym-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83111,7 +83111,7 @@ export const ART = {
     "wwtttttttttttstt",
     "ssssssssssssssss",
   ] },
-  "tile-door-gym-r-open": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#6a6a80","t":"#5a3a24","d":"#3a4657","g":"#ffd873","Z":"#202028"}, rows: [
+  "tile-door-gym-r-open": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83129,7 +83129,7 @@ export const ART = {
     "ttstgggggggsssww",
     "ssssZZZZZZZsssss",
   ] },
-  "tile-door-gym-r": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#6a6a80","t":"#5a3a24","d":"#3a4657","g":"#ffd873"}, rows: [
+  "tile-door-gym-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83147,7 +83147,7 @@ export const ART = {
     "ttstttttttttttww",
     "ssssssssssssssss",
   ] },
-  "tile-door-house-open": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","Z":"#202028"}, rows: [
+  "tile-door-house-open": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83165,7 +83165,7 @@ export const ART = {
     "wwwlgggggggsssww",
     "wwssZZZZZZZsssww",
   ] },
-  "tile-door-house": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8"}, rows: [
+  "tile-door-house": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83183,7 +83183,7 @@ export const ART = {
     "wwwllllllllllwww",
     "wwssssssssssssww",
   ] },
-  "tile-door-lab-facade": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a"}, rows: [
+  "tile-door-lab-facade": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83201,7 +83201,7 @@ export const ART = {
     "wwwwllllllllwwww",
     "ssssssssssssssss",
   ] },
-  "tile-door-lab-l-open": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a","Z":"#202028"}, rows: [
+  "tile-door-lab-l-open": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83219,7 +83219,7 @@ export const ART = {
     "wwttllllllluuult",
     "ssssZZZZZZZuuuss",
   ] },
-  "tile-door-lab-l": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a"}, rows: [
+  "tile-door-lab-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83237,7 +83237,7 @@ export const ART = {
     "wwttttttttttttlt",
     "ssssssssssssssss",
   ] },
-  "tile-door-lab-r-open": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a","Z":"#202028"}, rows: [
+  "tile-door-lab-r-open": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83255,7 +83255,7 @@ export const ART = {
     "tlttllllllluuuww",
     "ssssZZZZZZZuuuss",
   ] },
-  "tile-door-lab-r": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a"}, rows: [
+  "tile-door-lab-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83273,7 +83273,7 @@ export const ART = {
     "tlttttttttttttww",
     "ssssssssssssssss",
   ] },
-  "tile-door-mart-l-open": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","b":"#2e63b0","e":"#eef7ff","g":"#ffd873","p":"#e86a8a","n":"#67aa54","Z":"#202028"}, rows: [
+  "tile-door-mart-l-open": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "bbbbbbbbbbbbbbbb",
@@ -83291,7 +83291,7 @@ export const ART = {
     "lllleeeeeeesssll",
     "ssssZZZZZZZsssss",
   ] },
-  "tile-door-mart-l": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","b":"#2e63b0","e":"#eef7ff","g":"#ffd873","p":"#e86a8a","n":"#67aa54"}, rows: [
+  "tile-door-mart-l": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "bbbbbbbbbbbbbbbb",
@@ -83309,7 +83309,7 @@ export const ART = {
     "llllllllllllllll",
     "ssssssssssssssss",
   ] },
-  "tile-door-mart-r-open": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","b":"#2e63b0","e":"#eef7ff","g":"#ffd873","p":"#e86a8a","n":"#67aa54","Z":"#202028"}, rows: [
+  "tile-door-mart-r-open": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "bbbbbbbbbbbbbbbb",
@@ -83327,7 +83327,7 @@ export const ART = {
     "lllleeeeeeesssll",
     "ssssZZZZZZZsssss",
   ] },
-  "tile-door-mart-r": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","b":"#2e63b0","e":"#eef7ff","g":"#ffd873","p":"#e86a8a","n":"#67aa54"}, rows: [
+  "tile-door-mart-r": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "bbbbbbbbbbbbbbbb",
@@ -83345,7 +83345,7 @@ export const ART = {
     "llllllllllllllll",
     "ssssssssssssssss",
   ] },
-  "tile-door-open": { w: 16, h: 16, pal: {"h":"#c9a06a","k":"#5a3a24","Z":"#202028"}, rows: [
+  "tile-door-open": { w: 16, h: 16, pal: {"h":"#b99b74","k":"#71523d","Z":"#3f3f49"}, rows: [
     "hhhhhhhhhhhhhhhh",
     "hhkkkkkkkkkkhhhh",
     "hhkhhhhhhhhkhhhh",
@@ -83363,7 +83363,7 @@ export const ART = {
     "hhhhhhhhhhhhhhhh",
     "hhhhZZZZZZZhhhhh",
   ] },
-  "tile-door-wood-facade-open": { w: 16, h: 16, pal: {"w":"#a8845c","l":"#b09468","s":"#7a5a38","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","Z":"#202028"}, rows: [
+  "tile-door-wood-facade-open": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83381,7 +83381,7 @@ export const ART = {
     "wwwlgggggggsssww",
     "wwssZZZZZZZsssww",
   ] },
-  "tile-door-wood-facade": { w: 16, h: 16, pal: {"w":"#a8845c","l":"#b09468","s":"#7a5a38","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8"}, rows: [
+  "tile-door-wood-facade": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83399,7 +83399,7 @@ export const ART = {
     "wwwllllllllllwww",
     "wwssssssssssssww",
   ] },
-  "tile-door-wood-l-open": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","d":"#7a5a38","Z":"#202028"}, rows: [
+  "tile-door-wood-l-open": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","d":"#846a4e","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83417,7 +83417,7 @@ export const ART = {
     "wwsslllllllsssss",
     "ssssZZZZZZZsssss",
   ] },
-  "tile-door-wood-l": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","d":"#7a5a38"}, rows: [
+  "tile-door-wood-l": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","d":"#846a4e"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83435,7 +83435,7 @@ export const ART = {
     "wwssssssssssslss",
     "ssssssssssssssss",
   ] },
-  "tile-door-wood-r-open": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","d":"#7a5a38","Z":"#202028"}, rows: [
+  "tile-door-wood-r-open": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","d":"#846a4e","Z":"#3f3f49"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83453,7 +83453,7 @@ export const ART = {
     "sslslllllllsssww",
     "ssssZZZZZZZsssss",
   ] },
-  "tile-door-wood-r": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","d":"#7a5a38"}, rows: [
+  "tile-door-wood-r": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","d":"#846a4e"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83471,7 +83471,7 @@ export const ART = {
     "sslsssssssssssww",
     "ssssssssssssssss",
   ] },
-  "tile-door": { w: 16, h: 16, pal: {"h":"#c9a06a","k":"#5a3a24"}, rows: [
+  "tile-door": { w: 16, h: 16, pal: {"h":"#b99b74","k":"#71523d"}, rows: [
     "hhhhhhhhhhhhhhhh",
     "hhkkkkkkkkkkhhhh",
     "hhkhhhhhhhhkhhhh",
@@ -83489,7 +83489,7 @@ export const ART = {
     "hhhhhhhhhhhhhhhh",
     "hhhhhhhhhhhhhhhh",
   ] },
-  "tile-dressbanner": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#3a7bd5","L":"#5a9ae8","A":"#ffd873","C":"#eef7ff"}, rows: [
+  "tile-dressbanner": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#5681bd","L":"#7097c7","A":"#d1bc88","C":"#c6d8e9"}, rows: [
     "WWWWWWWWWWWWDDWW",
     "WWWDDDDDDDDDDWWW",
     "DDWWDBBBBBBDDWWW",
@@ -83507,7 +83507,7 @@ export const ART = {
     "WWWWWWWWWWWWWWWW",
     "WWWWDDWWWDDWWWWW",
   ] },
-  "tile-dresscalendar": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#eef7ff","L":"#fdfdf8","A":"#e84c3c","C":"#202028"}, rows: [
+  "tile-dresscalendar": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#c6d8e9","L":"#e9e9cc","A":"#c16a61","C":"#3f3f49"}, rows: [
     "WWWWWDDWDDWWWWWW",
     "WWWWWWWWDWWWWWDD",
     "WWWWAAAAAAAADDWW",
@@ -83525,7 +83525,7 @@ export const ART = {
     "DDWWWWWWWWDDDDWW",
     "DDWWWWWWWWWWDDWW",
   ] },
-  "tile-dressclock": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#eef7ff","L":"#fdfdf8","A":"#202028","C":"#e84c3c"}, rows: [
+  "tile-dressclock": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#c6d8e9","L":"#e9e9cc","A":"#3f3f49","C":"#c16a61"}, rows: [
     "DWWWWDDDWWWWDDWW",
     "DDWWWWDDWWWWDDWW",
     "WWWWBBBBBBBBDDWW",
@@ -83543,7 +83543,7 @@ export const ART = {
     "WWWWDDDDWWWWWWDD",
     "WWWWDDDDWWWWWWDD",
   ] },
-  "tile-dresscurtain": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#b0503c","L":"#d69459","A":"#823936","C":"#f2ddd5"}, rows: [
+  "tile-dresscurtain": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#a96152","L":"#c29268","A":"#8a4f4c","C":"#dec1b7"}, rows: [
     "WWWWWWWWDDWWWWWW",
     "WWWDDDDDDDDDDWWW",
     "WWWDDDDDDDDDDWWW",
@@ -83561,7 +83561,7 @@ export const ART = {
     "DDWWDDWWWWWDDWDD",
     "DDWWDDWDDWWWWWDD",
   ] },
-  "tile-dressmap": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#d8c08a","L":"#f2ddd5","A":"#3a7bd5","C":"#b0503c"}, rows: [
+  "tile-dressmap": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#c6b388","L":"#dec1b7","A":"#5681bd","C":"#a96152"}, rows: [
     "DDWWWWWWWWWWWWDD",
     "DDWWWWWWWWWDDWDD",
     "WWWDDDWWWWWWWWDD",
@@ -83579,7 +83579,7 @@ export const ART = {
     "WDDDWWWWWWWWWWWW",
     "WWDDDDWWWWDDWWWW",
   ] },
-  "tile-dressmirror": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#c2c8d4","L":"#8ae8f0","A":"#eef7ff","C":"#8a8aa0"}, rows: [
+  "tile-dressmirror": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#b0b6c1","L":"#8ccdd2","A":"#c6d8e9","C":"#8b8b9b"}, rows: [
     "WWDDDDWWWWWWWWDD",
     "WWDDDDDWWDDWWWDD",
     "WWWWWBBBBBBWWWWW",
@@ -83597,7 +83597,7 @@ export const ART = {
     "WWWWDDWWWWWDWWWW",
     "WWWWDDWWDDDDWWWW",
   ] },
-  "tile-dresspicture": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#8a5a30","L":"#67aa54","A":"#5a9ae8","C":"#f0e060"}, rows: [
+  "tile-dresspicture": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#916a47","L":"#73a167","A":"#7097c7","C":"#cac177"}, rows: [
     "DDWWWWWWWWWWWWDD",
     "DDWWWWWWWWWWWWDD",
     "WWWDDWWWWWDDWWWW",
@@ -83615,7 +83615,7 @@ export const ART = {
     "DDWWDDWWWDDWDDDD",
     "DDWWDDWWWWWWWWWW",
   ] },
-  "tile-dresspicture2": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#54452f","L":"#e86a8a","A":"#f2ddd5","C":"#8a7a9a"}, rows: [
+  "tile-dresspicture2": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#6a5c47","L":"#ca788d","A":"#dec1b7","C":"#8b8097"}, rows: [
     "WWDDWWWWWWWWWDDW",
     "WWWWWWWWWWWWWWWW",
     "WWDDDBBBBBBWDDWW",
@@ -83633,7 +83633,7 @@ export const ART = {
     "WWWWWWWWWWDDWWWW",
     "WDDWDDDWWWDDWWWW",
   ] },
-  "tile-dressposter": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#e86a8a","L":"#f2ddd5","A":"#3a7bd5","C":"#ffd873"}, rows: [
+  "tile-dressposter": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#ca788d","L":"#dec1b7","A":"#5681bd","C":"#d1bc88"}, rows: [
     "WWWWWWWWWWWWWWWW",
     "WWWWWWWWWWWWWWDD",
     "WWDDBBBBBBBBWWWW",
@@ -83651,7 +83651,7 @@ export const ART = {
     "WWDDWWDDDDWWWWWW",
     "WWDDWWDDDDWWWWWW",
   ] },
-  "tile-dresswindow": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#5a3a24","L":"#8ae8f0","A":"#eef7ff","C":"#ffd873"}, rows: [
+  "tile-dresswindow": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#71523d","L":"#8ccdd2","A":"#c6d8e9","C":"#d1bc88"}, rows: [
     "WWWWWWWWDDWWWWWW",
     "WWWWWWWDDDWWWWWW",
     "WWWWBBBBBBBBWWWW",
@@ -83669,7 +83669,7 @@ export const ART = {
     "WWWWWDDWDDDWWWWW",
     "WDDWWWWWWDWWWWWW",
   ] },
-  "tile-dresswreath": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","B":"#386e2c","L":"#67aa54","A":"#e86a8a","C":"#f0e060"}, rows: [
+  "tile-dresswreath": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","B":"#4e7e44","L":"#73a167","A":"#ca788d","C":"#cac177"}, rows: [
     "WWWWWWWWWWWWWWWW",
     "WWWWWWWWWWWWWWWW",
     "DDWWWWWWWDDWWWWW",
@@ -83687,7 +83687,7 @@ export const ART = {
     "DDWWWWDDWWWWWWDD",
     "DDDDWWDDWWWDDWWW",
   ] },
-  "tile-drip-1": { w: 16, h: 16, pal: {"w":"#3a7bd5","c":"#6fb0ee","f":"#eef7ff"}, rows: [
+  "tile-drip-1": { w: 16, h: 16, pal: {"w":"#5681bd","c":"#7da6cd","f":"#c6d8e9"}, rows: [
     ".......cc.......",
     ".......cc.......",
     ".......ff.......",
@@ -83705,7 +83705,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-drip-2": { w: 16, h: 16, pal: {"w":"#3a7bd5","c":"#6fb0ee","f":"#eef7ff"}, rows: [
+  "tile-drip-2": { w: 16, h: 16, pal: {"w":"#5681bd","c":"#7da6cd","f":"#c6d8e9"}, rows: [
     "................",
     "................",
     "................",
@@ -83723,28 +83723,28 @@ export const ART = {
     "..f..........f..",
     "................",
   ] },
-  "tile-edge-dirt-e": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-e": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "..............bb",
     "...............r",
     "..............bb",
-    ".............qq.",
+    ".............bb.",
     ".............rbb",
     "...............r",
     "..............bb",
     "................",
-    ".............qqb",
+    ".............bbb",
     ".............r.r",
     "..............bb",
     "................",
     "..............bb",
-    ".............qqr",
+    ".............bbr",
     ".............rbb",
     "................",
   ] },
-  "tile-edge-dirt-n": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-n": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "brb.brb.brb.brb.",
-    "b.bqb.b.q.b.bqb.",
-    "...qr...qr...qr.",
+    "b.bbb.b.b.b.bbb.",
+    "...br...br...br.",
     "................",
     "................",
     "................",
@@ -83759,7 +83759,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-edge-dirt-ne": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-ne": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "..........rrbrrb",
     "...........rrbrr",
     "............rrbr",
@@ -83777,7 +83777,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-edge-dirt-nw": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-nw": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "brrbrr..........",
     "rrbrr...........",
     "rbrr............",
@@ -83795,7 +83795,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-edge-dirt-s": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-s": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "................",
     "................",
     "................",
@@ -83809,11 +83809,11 @@ export const ART = {
     "................",
     "................",
     "................",
-    ".rq...rq...rq...",
-    ".bqb.b.q.b.bqb.b",
+    ".rb...rb...rb...",
+    ".bbb.b.b.b.bbb.b",
     ".brb.brb.brb.brb",
   ] },
-  "tile-edge-dirt-se": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-se": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "................",
     "................",
     "................",
@@ -83831,7 +83831,7 @@ export const ART = {
     "...........rrbrr",
     "..........rrbrrb",
   ] },
-  "tile-edge-dirt-sw": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-sw": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "................",
     "................",
     "................",
@@ -83849,47 +83849,47 @@ export const ART = {
     "rrbrr...........",
     "brrbrr..........",
   ] },
-  "tile-edge-dirt-w": { w: 16, h: 16, pal: {"r":"#5a3a24","b":"#b09468","q":"#c2a878"}, rows: [
+  "tile-edge-dirt-w": { w: 16, h: 16, pal: {"r":"#71523d","b":"#a69274","q":"#b4a17e"}, rows: [
     "................",
     "bbr.............",
-    "rqq.............",
+    "rbb.............",
     "bb..............",
     "................",
     "bb..............",
     "r.r.............",
-    "bqq.............",
+    "bbb.............",
     "................",
     "bb..............",
     "r...............",
     "bbr.............",
-    ".qq.............",
+    ".bb.............",
     "bb..............",
     "r...............",
     "bb..............",
   ] },
-  "tile-edge-grass-e": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
+  "tile-edge-grass-e": { w: 16, h: 16, pal: {"m":"#73a167","s":"#4e7e44","d":"#5e8f53","l":"#79a86c"}, rows: [
     "...............m",
-    "............sdlm",
-    "............s...",
+    "............ddlm",
+    "............d...",
     ".............dd.",
     "...............m",
     "...............m",
-    "............sdl.",
-    "............s...",
+    "............ddl.",
+    "............d...",
     ".............ddm",
     "...............m",
-    "............sdl.",
-    "............s...",
+    "............ddl.",
+    "............d...",
     ".............ddm",
     "...............m",
-    "............sdl.",
-    "............s...",
+    "............ddl.",
+    "............d...",
   ] },
-  "tile-edge-grass-n": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
+  "tile-edge-grass-n": { w: 16, h: 16, pal: {"m":"#73a167","s":"#4e7e44","d":"#5e8f53","l":"#79a86c"}, rows: [
     "mm..mm..mm..mm..",
     ".l.d..l.d.l.d.l.",
     ".d.d..d.d.d.d.d.",
-    ".ss...ss..ss..ss",
+    ".dd...dd..dd..dd",
     "................",
     "................",
     "................",
@@ -83903,7 +83903,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-edge-grass-s": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
+  "tile-edge-grass-s": { w: 16, h: 16, pal: {"m":"#73a167","s":"#4e7e44","d":"#5e8f53","l":"#79a86c"}, rows: [
     "................",
     "................",
     "................",
@@ -83916,30 +83916,30 @@ export const ART = {
     "................",
     "................",
     "................",
-    "ss..ss..ss...ss.",
+    "dd..dd..dd...dd.",
     ".d.d.d.d.d..d.d.",
     ".l.d.l.d.l..d.l.",
     "..mm..mm..mm..mm",
   ] },
-  "tile-edge-grass-w": { w: 16, h: 16, pal: {"m":"#67aa54","s":"#386e2c","d":"#4c8a3e","l":"#6fb45c"}, rows: [
-    "...s............",
-    ".lds............",
+  "tile-edge-grass-w": { w: 16, h: 16, pal: {"m":"#73a167","s":"#4e7e44","d":"#5e8f53","l":"#79a86c"}, rows: [
+    "...d............",
+    ".ldd............",
     "m...............",
     "mdd.............",
-    "...s............",
-    ".lds............",
+    "...d............",
+    ".ldd............",
     "m...............",
     "mdd.............",
-    "...s............",
-    ".lds............",
+    "...d............",
+    ".ldd............",
     "m...............",
     "m...............",
     ".dd.............",
-    "...s............",
-    "mlds............",
+    "...d............",
+    "mldd............",
     "m...............",
   ] },
-  "tile-edge-wet-e": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+  "tile-edge-wet-e": { w: 16, h: 16, pal: {"k":"#a0876c","f":"#c6d8e9","q":"#b4a17e"}, rows: [
     "..............kk",
     "...............k",
     "..............qf",
@@ -83957,7 +83957,7 @@ export const ART = {
     "..............kk",
     "...............k",
   ] },
-  "tile-edge-wet-n": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+  "tile-edge-wet-n": { w: 16, h: 16, pal: {"k":"#a0876c","f":"#c6d8e9","q":"#b4a17e"}, rows: [
     "kkfkkkkfkkkkfkkk",
     "k.q.k.kqk.k.q.k.",
     "....qq....qq....",
@@ -83975,7 +83975,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-edge-wet-s": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+  "tile-edge-wet-s": { w: 16, h: 16, pal: {"k":"#a0876c","f":"#c6d8e9","q":"#b4a17e"}, rows: [
     "................",
     "................",
     "................",
@@ -83993,7 +83993,7 @@ export const ART = {
     ".k.q.k.kqk.k.q.k",
     "kkkfkkkkfkkkkfkk",
   ] },
-  "tile-edge-wet-w": { w: 16, h: 16, pal: {"k":"#a8845c","f":"#eef7ff","q":"#c2a878"}, rows: [
+  "tile-edge-wet-w": { w: 16, h: 16, pal: {"k":"#a0876c","f":"#c6d8e9","q":"#b4a17e"}, rows: [
     "k...............",
     "kk..............",
     "k...............",
@@ -84011,7 +84011,7 @@ export const ART = {
     "k...............",
     "kk..............",
   ] },
-  "tile-fence": { w: 16, h: 16, pal: {"t":"#5a3a24","w":"#a8845c","l":"#a8845c"}, rows: [
+  "tile-fence": { w: 16, h: 16, pal: {"t":"#71523d","w":"#a0876c","l":"#a0876c"}, rows: [
     "................",
     "................",
     "................",
@@ -84029,7 +84029,7 @@ export const ART = {
     ".tt....tt....tt.",
     "................",
   ] },
-  "tile-fg-canopy-elm": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+  "tile-fg-canopy-elm": { w: 32, h: 32, pal: {"G":"#53854b","g":"#467340","H":"#649d5b","M":"#73a167"}, rows: [
     "................................",
     "................................",
     "................g...............",
@@ -84063,7 +84063,7 @@ export const ART = {
     "................................",
     "................................",
   ] },
-  "tile-fg-canopy-oak": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+  "tile-fg-canopy-oak": { w: 32, h: 32, pal: {"G":"#53854b","g":"#467340","H":"#649d5b","M":"#73a167"}, rows: [
     "................................",
     "................g...............",
     "..........gMHGGMgHgHHgg.........",
@@ -84097,7 +84097,7 @@ export const ART = {
     "................................",
     "................................",
   ] },
-  "tile-fg-canopy-pine": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+  "tile-fg-canopy-pine": { w: 32, h: 32, pal: {"G":"#53854b","g":"#467340","H":"#649d5b","M":"#73a167"}, rows: [
     "................................",
     "............gGGGgGHgG...........",
     "............GgGgHGgg............",
@@ -84131,7 +84131,7 @@ export const ART = {
     "................................",
     "................................",
   ] },
-  "tile-fg-canopy-round": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+  "tile-fg-canopy-round": { w: 32, h: 32, pal: {"G":"#53854b","g":"#467340","H":"#649d5b","M":"#73a167"}, rows: [
     "................g...............",
     "...........gGMGGGMGgHg..........",
     ".........gGGGHGMGGMGgMGg........",
@@ -84165,7 +84165,7 @@ export const ART = {
     "................................",
     "................................",
   ] },
-  "tile-fg-eave-a": { w: 32, h: 32, pal: {"M":"#b0503c","D":"#202028","L":"#e86a8a"}, rows: [
+  "tile-fg-eave-a": { w: 32, h: 32, pal: {"M":"#a96152","D":"#3f3f49","L":"#ca788d"}, rows: [
     "................................",
     "................................",
     "................................",
@@ -84199,7 +84199,7 @@ export const ART = {
     "................................",
     "................................",
   ] },
-  "tile-fg-eave-b": { w: 32, h: 32, pal: {"M":"#46586e","D":"#202028","L":"#8c94bc"}, rows: [
+  "tile-fg-eave-b": { w: 32, h: 32, pal: {"M":"#59687a","D":"#3f3f49","L":"#8c92b0"}, rows: [
     "................................",
     "................................",
     "................................",
@@ -84233,115 +84233,115 @@ export const ART = {
     "................................",
     "................................",
   ] },
-  "tile-flora-celadon": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#e86a8a","y":"#d84040"}, rows: [
-    "llmmggggddggddgg",
-    "ggmmffdllgggllgg",
-    "dffgyfllllllmmll",
-    "gyfgdgglllddmlaa",
-    "mmaaddddggmmggll",
-    "mmaahhddggmmmmmm",
-    "gggmffmmgghhllgg",
-    "gghhyfdmffffllgg",
-    "llddaaggyfyfffdd",
-    "llddaaggggggyfmm",
-    "ddmmmmllllggggll",
-    "dhhggmllllggggll",
-    "hhaagggffmmddmhh",
-    "hffagffyfmmmmmhh",
-    "gyfglyfgggllmmmm",
-    "aaggddhaagllmmgg",
+  "tile-flora-celadon": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#ca788d","y":"#bf5b5b"}, rows: [
+    "gggggggggggggggg",
+    "ggggffgggggggggg",
+    "gffgyfgggggggggg",
+    "gyfgggggggggggaa",
+    "ggaagggggggggggg",
+    "ggaahhgggggggggg",
+    "ggggffgggghhgggg",
+    "gghhyfggffffgggg",
+    "ggggaaggyfyfffgg",
+    "ggggaaggggggyfgg",
+    "gggggggggggggggg",
+    "ghhggggggggggggg",
+    "hhaagggffggggghh",
+    "hffagffyfggggghh",
+    "gyfggyfggggggggg",
+    "aagggghaaggggggg",
   ] },
-  "tile-flora-cerulean": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#7ab8f0","y":"#5a9ae8"}, rows: [
-    "ggmmggggmmdllaad",
-    "ggmmggggmmhhmmll",
-    "lffmllllllggggmm",
-    "lyfmllllllmmmmmm",
-    "ggllggmmffahgggg",
-    "gglffgmmyfhhgggg",
-    "ggdyfhhgggggdlld",
-    "ggdmmgggggmmdddd",
-    "mmlmmagdffaaggaa",
-    "llllaagayfaahgmm",
-    "ddddggllgffmdddd",
-    "ddddggaadyfmmdmm",
-    "ggddmaamllddffll",
-    "ggddmmmmfffdyfll",
-    "mmmmmmmmyyfmyfgg",
-    "mmmmmmmhhlmmmddg",
+  "tile-flora-cerulean": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#84abcf","y":"#7097c7"}, rows: [
+    "mmmmmmmmmmdmmaad",
+    "mmmmmmmmmmmmmmmm",
+    "mffmmmmmmmmmmmmm",
+    "myfmmmmmmmmmmmmm",
+    "mmmmmmmmffammmmm",
+    "mmmffmmmyfmmmmmm",
+    "mmdyfmmmmmmmdmmd",
+    "mmdmmmmmmmmmdddd",
+    "mmmmmamdffaammaa",
+    "mmmmaamayfaammmm",
+    "ddddmmmmmffmdddd",
+    "ddddmmaadyfmmdmm",
+    "mmddmaammmddffmm",
+    "mmddmmmmfffdyfmm",
+    "mmmmmmmmyyfmyfmm",
+    "mmmmmmmmmmmmmddm",
   ] },
-  "tile-flora-cinnabar": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#d0704f","y":"#f0e060"}, rows: [
-    "ddmmllmmddhhhggm",
-    "ggmmllmmgghhhhmm",
-    "gggggglggaffghll",
-    "ghhgggllmmyfhhll",
-    "ggmmmffaagllgghh",
-    "ggmmmyflghhlgggg",
-    "llhhddgggghhgggg",
-    "llaaddggggaagaag",
-    "gfflfflhhammgggg",
-    "gyfhyfllgghmddgg",
-    "mmffadddmmmdddmm",
-    "mmyfddhhffgmmmmm",
-    "ddmmaaggyffggggg",
-    "ddmmaagggyffgggg",
-    "mmmllllmmmyfggdd",
-    "mmmmggmmmmggggmm",
+  "tile-flora-cinnabar": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#bd7962","y":"#cac177"}, rows: [
+    "gggggggggghhhggg",
+    "gggggggggghhhhgg",
+    "gggggggggaffghgg",
+    "ghhgggggggyfhhgg",
+    "gggggffaaggggghh",
+    "gggggyfgghhggggg",
+    "gghhgggggghhgggg",
+    "ggaaggggggaagaag",
+    "gffgffghhagggggg",
+    "gyfhyfgggghggggg",
+    "ggffaggggggggggg",
+    "ggyfgghhffgggggg",
+    "ggggaaggyffggggg",
+    "ggggaagggyffgggg",
+    "ggggggggggyfgggg",
+    "gggggggggggggggg",
   ] },
-  "tile-flora-fuchsia": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#f0a0c0","y":"#e86a8a"}, rows: [
-    "mmddggaaddggmmaa",
-    "mmddggaadddgmmmm",
-    "affggfflmmggmmgg",
-    "myffmyfggmggmmgg",
-    "ggyfaallhdhhllgg",
-    "gmmhammdddlgglgg",
-    "llllgddmddhhggll",
-    "laalggmhhdllggll",
-    "llffllaahhhhhagg",
-    "lgyfllallhhffllg",
-    "ggggddddllmyfmmm",
-    "ggggddmmfffmmmll",
-    "aamffddgyyfdffhm",
-    "aamyfmggllddyfdd",
-    "ggggggmmdddalddd",
-    "ggggggmmddaalldd",
+  "tile-flora-fuchsia": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#d797b0","y":"#ca788d"}, rows: [
+    "ggggggaaggggggaa",
+    "ggggggaagggggggg",
+    "affggffggggggggg",
+    "gyffgyfggggggggg",
+    "ggyfaagghghhgggg",
+    "ggghaggggggggggg",
+    "gggggggggghhgggg",
+    "gaagggghhggggggg",
+    "ggffggaahhhhhagg",
+    "ggyfggagghhffggg",
+    "gggggggggggyfggg",
+    "ggggggggfffggggg",
+    "aagffgggyyfgffhg",
+    "aagyfgggggggyfgg",
+    "gggggggggggagggg",
+    "ggggggggggaagggg",
   ] },
-  "tile-flora-lavender": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#c4aee0","y":"#9a86b8"}, rows: [
-    "ggllddggllmmgghh",
-    "ggllggggllaadghh",
-    "ddhhffgmmllmggll",
-    "ddhhyfmmmmmmaall",
-    "hhggmmmmgggllffd",
-    "llggmllhhgghhyfd",
-    "ddddggffmmmmgffd",
-    "dhhaagyfmmmmgyfd",
-    "ddggmmmaadllmmmm",
-    "ddgffmmmddggmhhm",
-    "ddgyfgghhldllldd",
-    "ddggggddlffggldd",
-    "llllmggmgyfhaadd",
-    "llllmmmmgfffaamm",
-    "ggllgggggyffgllh",
-    "ggllgllhhgggddhh",
+  "tile-flora-lavender": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#b39fcd","y":"#9688ad"}, rows: [
+    "gggggggggggggghh",
+    "ggggggggggaagghh",
+    "gghhffgggggggggg",
+    "gghhyfggggggaagg",
+    "hhgggggggggggffg",
+    "ggggggghhgghhyfg",
+    "ggggggffgggggffg",
+    "ghhaagyfgggggyfg",
+    "gggggggaaggggggg",
+    "gggffgggggggghhg",
+    "gggyfgghhggggggg",
+    "gggggggggffggggg",
+    "gggggggggyfhaagg",
+    "gggggggggfffaagg",
+    "gggggggggyffgggh",
+    "ggggggghhggggghh",
   ] },
-  "tile-flora-pallet": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#f0e060","y":"#eef7ff"}, rows: [
-    "maamggmmddmllgdd",
-    "mmmhhgggggddggdd",
-    "aagglaamgggmmggg",
-    "hhggllmmgggggggg",
-    "ggffmmmllmllggll",
-    "ggyfmmmffmllggll",
-    "gddmgffyfdmmggmm",
-    "gaamgyfmddmmggmm",
-    "llggddhhggggggdd",
-    "llffddhhgggggffd",
-    "hhyfllhhffhggyfl",
-    "hhggllhhyfhhmmhm",
-    "mmggffggddgggdaa",
-    "mmffyfllddggddaa",
-    "ddyfyfddlddgmmhh",
-    "gggghhhhllggggmm",
+  "tile-flora-pallet": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#cac177","y":"#c6d8e9"}, rows: [
+    "gaaggggggggggggg",
+    "ggghhggggggggggg",
+    "aagggaaggggggggg",
+    "hhgggggggggggggg",
+    "ggffgggggggggggg",
+    "ggyfgggffggggggg",
+    "gggggffyfggggggg",
+    "gaaggyfggggggggg",
+    "gggggghhgggggggg",
+    "ggffgghhgggggffg",
+    "hhyfgghhffhggyfg",
+    "hhgggghhyfhhgghg",
+    "ggggffggggggggaa",
+    "ggffyfggggggggaa",
+    "ggyfyfgggggggghh",
+    "gggghhhhgggggggg",
   ] },
-  "tile-flower-2": { w: 16, h: 16, pal: {"g":"#529e46","d":"#43863c","l":"#66b45c","m":"#5eaa54","i":"#e86a7d","u":"#f5f3dc","o":"#f0ee60"}, rows: [
+  "tile-flower-2": { w: 16, h: 16, pal: {"g":"#639c5a","d":"#578c51","l":"#73a86c","m":"#6da167","i":"#ca7884","u":"#e1deba","o":"#cac977"}, rows: [
     ".......gg.......",
     "....gggggggg....",
     "..gggggggggggg..",
@@ -84350,88 +84350,88 @@ export const ART = {
     "gggioigggggigggg",
     "ggggiguggggggggg",
     "ggggguougggguggg",
-    "ggggggugggmuougg",
-    "ggggggggimmmumgg",
-    "gggggggioimdddmg",
-    ".gdiggggigggdig.",
-    ".dioigggggggioi.",
-    "..diggdggggggi..",
-    "....gdddgggg....",
-    "......dgg.......",
+    "ggggggugggguougg",
+    "ggggggggiggguggg",
+    "gggggggioigggggg",
+    ".ggiggggiggggig.",
+    ".gioigggggggioi.",
+    "..gigggggggggi..",
+    "....gggggggg....",
+    "......ggg.......",
   ] },
-  "tile-flower-3": { w: 16, h: 16, pal: {"g":"#69a94f","d":"#579044","l":"#78b45c","u":"#f5eedc","i":"#e86a97","o":"#f0d260","j":"#b0443c"}, rows: [
+  "tile-flower-3": { w: 16, h: 16, pal: {"g":"#74a162","d":"#669258","l":"#7fa86c","u":"#e1d6ba","i":"#ca7895","o":"#cab977","j":"#a95852"}, rows: [
     "..gggggggggggg..",
     "ggggggggggggggg.",
-    "gggggggggglggggg",
-    "gggdggggoggggggg",
-    "gggguuggggggdggg",
-    "gggguogggggggigg",
-    "gggggggggggggglg",
-    "gggggggdgggggggg",
-    "ggggggggggoigggg",
-    "gglgggggggiigggg",
-    "gggggggggggggdgg",
-    "gggogggggggggggg",
-    "gggggdggggggjjgg",
     "gggggggggggggggg",
-    ".ggggglgggggggg.",
+    "ggggggggoggggggg",
+    "gggguugggggggggg",
+    "gggguogggggggigg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggggggggggoigggg",
+    "ggggggggggiigggg",
+    "gggggggggggggggg",
+    "gggogggggggggggg",
+    "ggggggggggggjjgg",
+    "gggggggggggggggg",
+    ".gggggggggggggg.",
     "..gggggggggggg..",
   ] },
-  "tile-flower-4": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#c97e97","y":"#f5f0dc"}, rows: [
-    "mmggmmhhllhhmmmm",
-    "mhhmmmhhllhhffmm",
-    "aaggggmmmdddyffd",
-    "aaghhgmmffdffyfd",
-    "aaggmmhhyffffmgg",
-    "ddggmddhmhyfmmgg",
-    "aagggffgaahhmmmm",
-    "mmgggyfgaahhllmm",
-    "llllllmmaallggaa",
-    "ddllmmmmaallgllm",
-    "ggggggmmmmmmggdd",
-    "ggggggmggmmffgdd",
-    "gggggghhddmyfdgg",
-    "gggggdddmmdaadhh",
-    "ggmmmmggllllddmm",
-    "ggddmmggglllggmm",
+  "tile-flower-4": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#b98194","y":"#e1d9ba"}, rows: [
+    "gggggghhgghhgggg",
+    "ghhggghhgghhffgg",
+    "aaggggggggggyffg",
+    "aaghhgggffgffyfg",
+    "aagggghhyffffggg",
+    "ggggggghghyfgggg",
+    "aagggffgaahhgggg",
+    "gggggyfgaahhgggg",
+    "ggggggggaaggggaa",
+    "ggggggggaagggggg",
+    "gggggggggggggggg",
+    "gggggggggggffggg",
+    "gggggghhgggyfggg",
+    "gggggggggggaaghh",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
   ] },
-  "tile-flower-5": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#7ab8f0","y":"#e86a8a"}, rows: [
-    "ggmmggggllmmmmgg",
-    "gffffgmmhhllmmgg",
-    "gyfyfdggddmmhhgg",
-    "gddlddggdaamllmm",
-    "lffaagllllmmlaal",
-    "myfmggllllmmllll",
-    "mmmdmmllffddaamm",
-    "mlldmmllyfddaamm",
-    "mmggddgghhmmmmmm",
-    "hhgglmmghddmlmmm",
-    "llddddhhggmmmmdd",
-    "ddddffmmggmammdd",
-    "mmmfyfaagggggmgg",
-    "mmmyfdaagffgmmaa",
-    "llmmgggggyfmmggh",
-    "llmmggldddmmgghh",
+  "tile-flower-5": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","f":"#84abcf","y":"#ca788d"}, rows: [
+    "mmmmmmmmmmmmmmmm",
+    "mffffmmmhhmmmmmm",
+    "myfyfdmmddmmhhmm",
+    "mddmddmmdaammmmm",
+    "mffaammmmmmmmaam",
+    "myfmmmmmmmmmmmmm",
+    "mmmdmmmmffddaamm",
+    "mmmdmmmmyfddaamm",
+    "mmmmddmmhhmmmmmm",
+    "hhmmmmmmhddmmmmm",
+    "mmddddhhmmmmmmdd",
+    "ddddffmmmmmammdd",
+    "mmmfyfaammmmmmmm",
+    "mmmyfdaamffmmmaa",
+    "mmmmmmmmmyfmmmmh",
+    "mmmmmmmdddmmmmhh",
   ] },
-  "tile-flower": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","j":"#b0503c","o":"#f0e060","i":"#e86a8a"}, rows: [
+  "tile-flower": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","j":"#a96152","o":"#cac177","i":"#ca788d"}, rows: [
     ".......gg.......",
     "....gggggggg....",
     "..gggggggggggg..",
     ".ggggggggggjggg.",
-    ".gggjgggggjojgd.",
-    "gggjojgggggjgddd",
-    "ggggjgggggggdddd",
-    "gggggggggggggdld",
-    "ggggggggggggglll",
-    "ggggggggjggggglg",
+    ".gggjgggggjojgg.",
+    "gggjojgggggjgggg",
+    "ggggjggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggggggggjggggggg",
     "gggggggjojgggggg",
-    ".ggjggggjlgggjg.",
-    ".gjojggglllljoj.",
-    "..ljlggggllllj..",
-    "...lgggggggl....",
+    ".ggjggggjggggjg.",
+    ".gjojgggggggjoj.",
+    "..gjgggggggggj..",
+    "...ggggggggg....",
     ".......gg.......",
   ] },
-  "tile-flowerbed": { w: 16, h: 16, pal: {"s":"#5a3a24","d":"#7a5a38","f":"#e86a8a","y":"#f0e060","w":"#eef7ff","n":"#67aa54","t":"#a8845c"}, rows: [
+  "tile-flowerbed": { w: 16, h: 16, pal: {"s":"#71523d","d":"#846a4e","f":"#ca788d","y":"#cac177","w":"#c6d8e9","n":"#73a167","t":"#a0876c"}, rows: [
     "................",
     "................",
     "................",
@@ -84449,7 +84449,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-flowerfield": { w: 16, h: 16, pal: {"a":"#79b657","b":"#5f9a42","c":"#93cc74","d":"#e88bb0","e":"#f0e68a"}, rows: [
+  "tile-flowerfield": { w: 16, h: 16, pal: {"a":"#80aa68","b":"#6c9956","c":"#91bb7a","d":"#d188a5","e":"#d2cb8c"}, rows: [
     "aaabacaabaaaaabb",
     "aaacabbaebcabaea",
     "caacaacaaaacaaaa",
@@ -84467,7 +84467,7 @@ export const ART = {
     "aaaaadaaacaababe",
     "ebaebdbabaaccaaa",
   ] },
-  "tile-foam-1": { w: 16, h: 16, pal: {"f":"#eef7ff","c":"#6fb0ee"}, rows: [
+  "tile-foam-1": { w: 16, h: 16, pal: {"f":"#c6d8e9","c":"#7da6cd"}, rows: [
     "................",
     "............ff..",
     "............c...",
@@ -84485,7 +84485,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-foam-2": { w: 16, h: 16, pal: {"f":"#eef7ff","c":"#6fb0ee"}, rows: [
+  "tile-foam-2": { w: 16, h: 16, pal: {"f":"#c6d8e9","c":"#7da6cd"}, rows: [
     "................",
     "................",
     ".ff...ff........",
@@ -84503,7 +84503,7 @@ export const ART = {
     ".....c......c...",
     "................",
   ] },
-  "tile-foam-3": { w: 16, h: 16, pal: {"f":"#eef7ff","c":"#6fb0ee"}, rows: [
+  "tile-foam-3": { w: 16, h: 16, pal: {"f":"#c6d8e9","c":"#7da6cd"}, rows: [
     "................",
     "................",
     ".ff.............",
@@ -84521,7 +84521,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-foundation-1": { w: 16, h: 16, pal: {"B":"#9a9aa5","D":"#6a6a80"}, rows: [
+  "tile-foundation-1": { w: 16, h: 16, pal: {"B":"#96969f","D":"#757585"}, rows: [
     "................",
     "................",
     "................",
@@ -84539,7 +84539,7 @@ export const ART = {
     "BBBBBBBDBBDDBBBB",
     "DDDDDDDDDDDDDDDD",
   ] },
-  "tile-foundation-2": { w: 16, h: 16, pal: {"B":"#b0503c","D":"#7a3226"}, rows: [
+  "tile-foundation-2": { w: 16, h: 16, pal: {"B":"#a96152","D":"#87493f"}, rows: [
     "................",
     "................",
     "................",
@@ -84557,7 +84557,7 @@ export const ART = {
     "DDBBBBBBBBBBBBDD",
     "DDDDDDDDDDDDDDDD",
   ] },
-  "tile-foundation-3": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#8a6a48"}, rows: [
+  "tile-foundation-3": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#8e755b"}, rows: [
     "................",
     "................",
     "................",
@@ -84575,30 +84575,30 @@ export const ART = {
     "BBBBDDBBBBBBBBDD",
     "DDDDDDDDDDDDDDDD",
   ] },
-  "tile-fringe-tall-e": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+  "tile-fringe-tall-e": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f"}, rows: [
     "................",
     "................",
-    "..........esdml.",
+    "..........eedml.",
     "..........e.....",
     "...........ed...",
     "...........e.mh.",
     "................",
     "................",
-    "..........esdml.",
+    "..........eedml.",
     "..........e.....",
     "...........ed...",
     "...........e.mh.",
     "................",
-    "..........esdml.",
+    "..........eedml.",
     "..........e.....",
     "...........ed...",
   ] },
-  "tile-fringe-tall-n": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+  "tile-fringe-tall-n": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f"}, rows: [
     "................",
     "..l..h..l..h.l..",
     "..m..m..m..m.m..",
     "..d.d...d.d..d.d",
-    "..s.ee..s.ee.s.e",
+    "..e.ee..e.ee.e.e",
     "..ee....ee...ee.",
     "................",
     "................",
@@ -84611,7 +84611,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-fringe-tall-s": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+  "tile-fringe-tall-s": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f"}, rows: [
     "................",
     "................",
     "................",
@@ -84623,47 +84623,47 @@ export const ART = {
     "................",
     "................",
     ".ee...ee....ee..",
-    "e.s.ee.s..ee.s..",
+    "e.e.ee.e..ee.e..",
     "d.d..d.d...d.d..",
     "..m.m..m..m..m..",
     "..l.h..l..h..l..",
     "................",
   ] },
-  "tile-fringe-tall-w": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
+  "tile-fringe-tall-w": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f"}, rows: [
     "...de...........",
     ".....e..........",
-    ".lmdse..........",
+    ".lmdee..........",
     "................",
     ".hm.e...........",
     "...de...........",
     ".....e..........",
-    ".lmdse..........",
+    ".lmdee..........",
     "................",
     "................",
     ".hm.e...........",
     "...de...........",
     ".....e..........",
-    ".lmdse..........",
+    ".lmdee..........",
     "................",
     "................",
   ] },
-  "tile-frostfloor": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#d2e8ef"}, rows: [
-    "LLCCLLCCLLLLCCLL",
-    "LLCCLLCCCCLLCCLL",
-    "LLLBBLLLBBBBCCLL",
-    "LLLLLLLLBBBBCCLL",
-    "LLBBBBBBLLLBBCBB",
-    "LCCBBBBBLLLLCCBB",
-    "BBBBBBLLCCLLLLBB",
-    "BBBBBBLLBBCCLLBB",
-    "LLLLBBLCCCCBBBLL",
+  "tile-frostfloor": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#b6d1da"}, rows: [
+    "LLLLLLLLLLLLLLLL",
+    "LLLLLLLLLLLLLLLL",
+    "LLLBBLLLBBBBLLLL",
+    "LLLLLLLLBBBBLLLL",
+    "LLBBBBBBLLLBBLBB",
+    "LLLBBBBBLLLLLLBB",
+    "BBBBBBLLLLLLLLBB",
+    "BBBBBBLLBBLLLLBB",
+    "LLLLBBLLLLLBBBLL",
     "LLBBBBLLLBBBBBLL",
     "LLLLBBLLLLLLLLBB",
-    "LLLLBBLBCCLBBLBB",
-    "BBLLCCLLLLBBLLLL",
-    "BBLLCCLLLLBBBCCL",
+    "LLLLBBLBLLLBBLBB",
+    "BBLLLLLLLLBBLLLL",
+    "BBLLLLLLLLBBBLLL",
     "LLLLLLBBLBBLBBLL",
-    "LLLLLLBBLLLCCBLL",
+    "LLLLLLBBLLLLLBLL",
   ] },
   "tile-glowpool-1": { w: 16, h: 16, pal: {"g":"#ffd873"}, rows: [
     "................",
@@ -84701,259 +84701,259 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-grass-10": { w: 16, h: 16, pal: {"g":"#5aa646","d":"#488a38","l":"#6ab456","m":"#62a24e","h":"#76c05f","a":"#88c871","s":"#386e2c","e":"#2f6127"}, rows: [
-    "lllllaagmmggglla",
-    "llllllggmmggggaa",
-    "ddgllmddggagggdd",
-    "mmggmmddggaaggdd",
-    "ggggaaggggglllmm",
-    "llggaahgghhlggmm",
-    "ggllddddggggmmll",
-    "ggllhhllddggmmll",
-    "ggddmmlggmddggll",
-    "ggddmlllmmddgggl",
-    "ggggggmaadmmmmmm",
-    "ggggaammddmmmmmm",
-    "llmmllggllddaahh",
-    "llmmllggmmddgghh",
-    "mmllddddddggmaag",
-    "mmllddddmmdgmmgg",
-  ] },
-  "tile-grass-2": { w: 16, h: 16, pal: {"g":"#569f47","d":"#46873d","l":"#69b45c","m":"#61aa54","h":"#73c168","a":"#84cb74","s":"#346e2c","e":"#2b6127"}, rows: [
+  "tile-grass-10": { w: 16, h: 16, pal: {"g":"#69a15a","d":"#5b904e","l":"#75a868","m":"#6f9e60","h":"#7db16d","a":"#89b879","s":"#4e7e44","e":"#47753f"}, rows: [
+    "gggggaagggggggga",
+    "ggggggggggggggaa",
+    "ggggggggggaggggg",
+    "ggggggggggaagggg",
+    "ggggaagggggggggg",
+    "ggggaahgghhggggg",
     "gggggggggggggggg",
-    "ggdggggggggggggg",
-    "gdddgggggggggggg",
-    "dddddsgglgdggggg",
-    "gdddssslldddgggg",
-    "ggdggslllldggggg",
-    "gggggggdmlgggggg",
-    "ggggggddddgggggg",
-    "gggggggdggggmggg",
-    "gggggggggmggddgg",
-    "gggggggggddggggg",
-    "gggggldggggdgggg",
-    "ggggldddgghddggg",
-    "gggggldgghhhgggg",
+    "gggghhgggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggaaggggggg",
+    "ggggaagggggggggg",
+    "ggggggggggggaahh",
+    "gggggggggggggghh",
+    "gggggggggggggaag",
+    "gggggggggggggggg",
+  ] },
+  "tile-grass-2": { w: 16, h: 16, pal: {"g":"#669c5a","d":"#598d52","l":"#75a86c","m":"#6fa167","h":"#7bb273","a":"#86bb7a","s":"#4b7e44","e":"#43753f"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggsgggggggggg",
+    "ggggsssggggggggg",
+    "gggggsgggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggghggggg",
+    "ggggggggghhhgggg",
     "gggggggggghggggg",
     "gggggggggggggggg",
   ] },
-  "tile-grass-3": { w: 16, h: 16, pal: {"g":"#65a84d","d":"#538f40","l":"#75b45c","m":"#6daa54","h":"#7fc168","a":"#90cb74","s":"#3c6e2c","e":"#336127"}, rows: [
+  "tile-grass-3": { w: 16, h: 16, pal: {"g":"#71a160","d":"#639254","l":"#7da86c","m":"#78a167","h":"#83b273","a":"#8fbb7a","s":"#527e44","e":"#4b753f"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
     "gggggggggggggggg",
     "gggggggggggggggg",
-    "gggggggmgggggggg",
-    "ggggggmmmgggdggg",
-    "glgggmmmmmgdldgg",
-    "lllgggmsmhddmddg",
-    "llmlggsshhhdddgg",
-    "llddgggsghdgmmmg",
-    "glgggglllggggmgg",
-    "gggggglllggggggg",
-    "ggggggglglgggggg",
-    "gggggggglllggggg",
-    "ggggggggglgggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggsghgggggg",
+    "ggggggsshhhggggg",
+    "gggggggsghgggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
     "gggggggggggggggg",
   ] },
-  "tile-grass-4": { w: 16, h: 16, pal: {"g":"#4da045","d":"#3d8239","l":"#63b45c","m":"#5caa54","h":"#6dc168","a":"#7ecb74","s":"#2f6e2c","e":"#276127"}, rows: [
+  "tile-grass-4": { w: 16, h: 16, pal: {"g":"#5f9d59","d":"#528a4f","l":"#71a86c","m":"#6ca167","h":"#77b273","a":"#82bb7a","s":"#467e44","e":"#3f753f"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
-    "glgggggggggggggg",
-    "lllggggggggggggg",
-    "glggggggggdggggg",
-    "gggggggggdddlggg",
-    "ggggggggdddlllgg",
-    "ggggggglgdgglggg",
-    "gggggggmggggdmlg",
-    "ggsggggddggddddl",
-    "gsssggggggggllll",
-    "ggsgggglggggglll",
-    "ggddgghllggggglg",
-    "ggmmmhhhgggggggg",
-    "gggmgghggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggsggggggggggggg",
+    "gsssgggggggggggg",
+    "ggsggggggggggggg",
+    "gggggghggggggggg",
+    "ggggghhhgggggggg",
+    "gggggghggggggggg",
     "gggggggggggggggg",
   ] },
-  "tile-grass-5": { w: 16, h: 16, pal: {"g":"#6dab50","d":"#5a9245","l":"#7bb45c","m":"#72aa54","h":"#85c168","a":"#96cb74","s":"#416e2c","e":"#376127"}, rows: [
-    "ggggggggggglgggg",
-    "gggggggggglllggg",
-    "ggggggggggglddgg",
-    "ggggggggggggdggg",
-    "gggggggggggggdgg",
-    "ggggggggggggdddg",
-    "gggggggggggddddd",
-    "ggggdgggggggdddg",
-    "gggdldghdggggdgg",
-    "ggglllhhhdgggggg",
-    "gmlglgdhdddggggg",
-    "mmmggggdddgggggg",
-    "gmddggggdggsgdgg",
-    "ggggggggggsssddg",
-    "ggggggmggggsdddd",
-    "ggggggddggggdddg",
+  "tile-grass-5": { w: 16, h: 16, pal: {"g":"#77a263","d":"#699458","l":"#81a86c","m":"#7ba167","h":"#88b273","a":"#93bb7a","s":"#567e44","e":"#4e753f"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggsgggg",
+    "ggggggggggsssggg",
+    "gggggggggggsgggg",
+    "gggggggggggggggg",
   ] },
-  "tile-grass-6": { w: 16, h: 16, pal: {"g":"#48a24b","d":"#3a843d","l":"#5db45c","m":"#56aa54","h":"#68c169","a":"#79cb74","s":"#2c6e2d","e":"#27612b"}, rows: [
-    "gggdgllllggggggg",
-    "ggddllllllgggggg",
-    "gggdgllllggggggg",
-    "gggggllggggsgggg",
-    "gmgglllgggsssggg",
-    "mmmgglgggggsgggg",
-    "mmmmgggggggggggg",
-    "mlmggggggggggmgg",
-    "gmgggggdggggmmmg",
-    "gddgggdddggggmmm",
-    "gggggdddddggglmg",
-    "ggggggmddggggmgg",
-    "ggggggddggggghdg",
+  "tile-grass-6": { w: 16, h: 16, pal: {"g":"#5b9e5d","d":"#508b52","l":"#6ca86c","m":"#68a167","h":"#73b274","a":"#7ebb7a","s":"#447e45","e":"#3f7543"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggsgggg",
+    "ggggggggggsssggg",
+    "gggggggggggsgggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggggggggggggghgg",
     "gggggggggggghhhg",
     "ggggggggggggghgg",
     "gggggggggggggggg",
   ] },
-  "tile-grass-7": { w: 16, h: 16, pal: {"g":"#62a852","d":"#4e8c40","l":"#72b862","m":"#6aa656","h":"#7ec46c","a":"#8fce7e","s":"#386e2c","e":"#2f6127"}, rows: [
-    "mmmmhhddgggglddh",
-    "gllgghddgggmmggd",
-    "llddggdlldggmmll",
-    "aaddgmmdddggmmll",
-    "ddggggggddggmmll",
-    "ddggggllggggmmll",
-    "llllmmllmmllllll",
-    "llllmmllmmllmmgg",
-    "hhhhmddlggggdddd",
-    "ggllmmlgggggdddd",
-    "mmgghggmmmmmmmll",
-    "mmgghhhhhmggmmll",
-    "ghhgggddggddmmdd",
-    "gdaaggggggddmmdd",
-    "llggddggllllgghh",
-    "llhhllggllmmgllh",
+  "tile-grass-7": { w: 16, h: 16, pal: {"g":"#6fa064","d":"#5f9054","l":"#7bab70","m":"#759f67","h":"#83b576","a":"#8ebd81","s":"#4e7e44","e":"#47753f"}, rows: [
+    "gggghhgggggggggh",
+    "ggggghgggggggggg",
+    "gggggggggggggggg",
+    "aagggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "hhhhgggggggggggg",
+    "gggggggggggggggg",
+    "gggghggggggggggg",
+    "gggghhhhhggggggg",
+    "ghhggggggggggggg",
+    "ggaagggggggggggg",
+    "gggggggggggggghh",
+    "gghhgggggggggggh",
   ] },
-  "tile-grass-8": { w: 16, h: 16, pal: {"g":"#56a144","d":"#458237","l":"#66b154","m":"#5c9c4c","h":"#74bd60","a":"#86c672","s":"#386e2c","e":"#2f6127"}, rows: [
-    "llddmmmmddllhhdd",
-    "llddmmmmdddlhhgg",
-    "ddgddlhhgggglaaa",
-    "ddgglmmhggggllaa",
-    "ddmmllggggddllmm",
-    "ddmmllggggddllgg",
-    "ggllddllllhhddll",
-    "ggllmmddmlhhhddd",
-    "mmddgghhhddhggmm",
-    "ldddgghhddhhggdd",
-    "aagggggaahaammmm",
-    "aggggaaghhggmaam",
-    "llllmgaallddggmm",
-    "lmmlmmdmmgddgaam",
-    "ggggaagghhggggll",
-    "gggggggghhgddghh",
+  "tile-grass-8": { w: 16, h: 16, pal: {"g":"#669e58","d":"#588a4d","l":"#73a667","m":"#6a9a5e","h":"#7caf6e","a":"#88b779","s":"#4e7e44","e":"#47753f"}, rows: [
+    "gggggggggggghhgg",
+    "gggggggggggghhgg",
+    "gggggghhgggggaaa",
+    "ggggggghggggggaa",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggghhgggg",
+    "gggggggggghhhggg",
+    "gggggghhhgghgggg",
+    "gggggghhgghhgggg",
+    "aagggggaahaagggg",
+    "aggggaaghhgggaag",
+    "ggggggaagggggggg",
+    "gggggggggggggaag",
+    "ggggaagghhgggggg",
+    "gggggggghhgggghh",
   ] },
-  "tile-grass-9": { w: 16, h: 16, pal: {"g":"#5ea950","d":"#4c8f42","l":"#6eb95e","m":"#64a758","h":"#7ac468","a":"#8ccb78","s":"#386e2c","e":"#2f6127"}, rows: [
-    "hhggggllhhgglldd",
-    "hhllggllhhggllhh",
-    "ggddggllmllhgmmg",
-    "ddddgggmllhhgggg",
-    "ddgggghhggmmlldd",
-    "ddgggghhmmmmllgg",
-    "hhmmhaammmggmmdd",
-    "hhmmmhhmmmggggdd",
-    "ggggmmmgglmmmmdd",
-    "ggggmmmmaammmmdd",
-    "llggggglllllgggg",
-    "llggggaallllgggg",
-    "mmllllllggllgllg",
-    "mmlllllddgaagggg",
-    "ddddhhaaadllggaa",
-    "ddddhaalddlggadl",
+  "tile-grass-9": { w: 16, h: 16, pal: {"g":"#6da163","d":"#5e9256","l":"#78ac6d","m":"#729f69","h":"#80b573","a":"#8cbb7d","s":"#4e7e44","e":"#47753f"}, rows: [
+    "hhgggggghhgggggg",
+    "hhgggggghhgggghh",
+    "ggggggggggghgggg",
+    "gggggggggghhgggg",
+    "gggggghhgggggggg",
+    "gggggghhgggggggg",
+    "hhgghaaggggggggg",
+    "hhggghhggggggggg",
+    "gggggggggggggggg",
+    "ggggggggaagggggg",
+    "gggggggggggggggg",
+    "ggggggaagggggggg",
+    "gggggggggggggggg",
+    "ggggggggggaagggg",
+    "gggghhaaagggggaa",
+    "gggghaaggggggagg",
   ] },
-  "tile-grass": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
-    "gggggggggdddglgg",
-    "ggggggggdddddllg",
-    "gggggggggddsglgg",
+  "tile-grass": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggsgggg",
     "ggggggggggsssggg",
-    "gggggggggggslggg",
-    "ggggggggggglllgg",
-    "gggggggggllllllg",
-    "gggggggglllllllg",
-    "gglglgggglggllgg",
-    "ggmlllgggghglggg",
-    "ggddlgggghhhllgg",
-    "gggggggggghmlllg",
-    "ggggggggggdddldg",
-    "gggggggggggdldgg",
-    "gmggggggggggdggg",
-    "gddggggggggggggg",
+    "gggggggggggsgggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggghggggg",
+    "ggggggggghhhgggg",
+    "gggggggggghggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
   ] },
-  "tile-grassground-2": { w: 16, h: 16, pal: {"g":"#5fa34b","d":"#4d8a3f","l":"#71b35d","m":"#67a653","h":"#7dbf69","a":"#8fcb7b","s":"#386e2c","e":"#2f6127"}, rows: [
-    "mmmlmmmmaaallggg",
-    "mmlddmmmggllgggg",
-    "ddgaamllllmmmmmm",
-    "ddaammllllmmmmmm",
-    "hhmmddmmhhhhgamm",
-    "mmmmmdmmhhhhggll",
-    "hhggmmggggddgggg",
-    "hhddagggddddgggg",
-    "ggggmllmllllgghh",
-    "ggggammmllllgghh",
-    "mmggammhhgllhhll",
-    "ggggaaggggllhhll",
-    "hhllmmggaaddgggg",
-    "ddllmmggaaddgggg",
-    "ggggllmmmmlggdmm",
-    "ddggggmmmmllddmm",
+  "tile-grassground-2": { w: 16, h: 16, pal: {"g":"#6c9f5d","d":"#5f8f54","l":"#7aa86c","m":"#739f65","h":"#82b174","a":"#8ebb7f","s":"#4e7e44","e":"#47753f"}, rows: [
+    "ggggggggaaaggggg",
+    "gggggggggggggggg",
+    "gggaaggggggggggg",
+    "ggaagggggggggggg",
+    "gggggggggggggagg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggggaggggggggggg",
+    "gggggggggggggggg",
+    "ggggaggggggggggg",
+    "ggggaggggggggggg",
+    "ggggaagggggggggg",
+    "ggggggggaagggggg",
+    "ggggggggaagggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
   ] },
-  "tile-grassground-3": { w: 16, h: 16, pal: {"g":"#58a347","d":"#478439","l":"#68b155","m":"#609e4f","h":"#76bb61","a":"#87c573","s":"#386e2c","e":"#2f6127"}, rows: [
-    "ggmmgggdmmmmmlmm",
-    "ggmmggddmmhmmgll",
-    "llaaggllmmddddll",
-    "ggaaaallmmddhhll",
-    "llmmhhmmhhlldmmg",
-    "llmmhhmmhhllddgg",
-    "llmmggmddlmmaall",
-    "gghhggmaalggllll",
-    "mmggmmggddddggdd",
-    "mmggmmggaaddggdd",
-    "mmmgghahhlaaggll",
-    "mmaahhddllllggll",
-    "dddllmhhllggggmm",
-    "ddaaaaaddhhgggmm",
-    "ggggggllmggdgggg",
-    "gggllgllmaadgggg",
+  "tile-grassground-3": { w: 16, h: 16, pal: {"g":"#679f5a","d":"#5a8b4f","l":"#74a667","m":"#6d9b60","h":"#7dae6f","a":"#89b67a","s":"#4e7e44","e":"#47753f"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggaagggggggggggg",
+    "ggaaaagggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggggggggggggaagg",
+    "gggggggaaggggggg",
+    "gggggggggggggggg",
+    "ggggggggaagggggg",
+    "ggggggagggaagggg",
+    "ggaagggggggggggg",
+    "gggggggggggggggg",
+    "ggaaaaaggggggggg",
+    "gggggggggggggggg",
+    "gggggggggaaggggg",
   ] },
-  "tile-grassground-4": { w: 16, h: 16, pal: {"g":"#63a954","d":"#518e43","l":"#74ba64","m":"#6ba959","h":"#80c56e","a":"#92d082","s":"#386e2c","e":"#2f6127"}, rows: [
-    "lllllgggmgglddgg",
-    "llggllggmmlmmdgg",
-    "ggddggmmddggllmm",
-    "ggmmggmmddggllaa",
-    "gmmgllhhggggllgg",
-    "ggddllddgggglldd",
-    "mmgghhllllmmllll",
-    "mggghhllllhhhlmm",
-    "lddmhhhhgghhllgg",
-    "llmmgghhgghhllgg",
-    "hhaalhhhggaammll",
-    "ggmmllggggaamaal",
-    "hhggaaggggahhmmm",
-    "hhgllhhhggaaggmm",
-    "ggddddllggllgllg",
-    "ggddddllggddlghh",
+  "tile-grassground-4": { w: 16, h: 16, pal: {"g":"#71a066","d":"#629157","l":"#7cad71","m":"#76a06a","h":"#84b677","a":"#90bf83","s":"#4e7e44","e":"#47753f"}, rows: [
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggggggggggggggaa",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "ggaaggggggaagggg",
+    "ggggggggggaagaag",
+    "ggggaaggggaggggg",
+    "ggggggggggaagggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
   ] },
-  "tile-grassground": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127"}, rows: [
-    "mmllddddaaaammmm",
-    "mmllddddggggmmmm",
-    "aaddaammaahhlldd",
-    "ggddggmmgghhlldd",
-    "mmddllhhddmmmmhh",
-    "mmddllhhddmmmmhh",
-    "ddllllmmllddllmm",
-    "ddllllmmllddllmm",
-    "aahhddaaddaammdd",
-    "gghhddggddggmmdd",
-    "mmllllaaddmmddhh",
-    "mmllllggddmmddhh",
-    "ddllmmaaddllddll",
-    "ddllmmggddllddll",
-    "llmmddmmllddaahh",
-    "llmmddmmllddgghh",
+  "tile-grassground": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f"}, rows: [
+    "ddllddddaaaadddd",
+    "ddlldddddddddddd",
+    "aaddaaddaahhlldd",
+    "ddddddddddhhlldd",
+    "ddddllhhddddddhh",
+    "ddddllhhddddddhh",
+    "ddllllddllddlldd",
+    "ddllllddllddlldd",
+    "aahhddaaddaadddd",
+    "ddhhdddddddddddd",
+    "ddllllaaddddddhh",
+    "ddllllddddddddhh",
+    "ddllddaaddllddll",
+    "ddllddddddllddll",
+    "llddddddllddaahh",
+    "llddddddllddddhh",
   ] },
-  "tile-gratefloor": { w: 16, h: 16, pal: {"B":"#46586e","D":"#202028","A":"#6a6a80"}, rows: [
+  "tile-gratefloor": { w: 16, h: 16, pal: {"B":"#59687a","D":"#3f3f49","A":"#757585"}, rows: [
     "DDAADDBBDDBDDBBB",
     "DDAAADBBDDBAABBB",
     "BBBBDDBBDDAABBBB",
@@ -84971,7 +84971,7 @@ export const ART = {
     "BBBBAABBBBBBBBDD",
     "BBBBAABBBBBDDBDD",
   ] },
-  "tile-gym-fire-upper": { w: 16, h: 16, pal: {"W":"#b0503c","D":"#7a3226","A":"#f07830","M":"#f0e060","G":"#eef7ff"}, rows: [
+  "tile-gym-fire-upper": { w: 16, h: 16, pal: {"W":"#a96152","D":"#87493f","A":"#c1835f","M":"#cac177","G":"#c6d8e9"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWAAWWAADDAADDDW",
@@ -84989,7 +84989,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-fire": { w: 16, h: 16, pal: {"W":"#b0503c","D":"#7a3226","A":"#f07830","M":"#f0e060","G":"#eef7ff"}, rows: [
+  "tile-gym-fire": { w: 16, h: 16, pal: {"W":"#a96152","D":"#87493f","A":"#c1835f","M":"#cac177","G":"#c6d8e9"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWAAWWAAWWDDWWWW",
@@ -85007,7 +85007,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-ground-upper": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","A":"#d8c08a","M":"#54452f","G":"#ffd873"}, rows: [
+  "tile-gym-ground-upper": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","A":"#c6b388","M":"#6a5c47","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWWWWWDDAAWWWDDW",
@@ -85025,7 +85025,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-ground": { w: 16, h: 16, pal: {"W":"#c9a06a","D":"#8a6a48","A":"#d8c08a","M":"#54452f","G":"#ffd873"}, rows: [
+  "tile-gym-ground": { w: 16, h: 16, pal: {"W":"#b99b74","D":"#8e755b","A":"#c6b388","M":"#6a5c47","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWWWWWWWAADDDDDD",
@@ -85043,7 +85043,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-leaf-upper": { w: 16, h: 16, pal: {"W":"#67aa54","D":"#2e5e28","A":"#a9e8a8","M":"#386e2c","G":"#ffd873"}, rows: [
+  "tile-gym-leaf-upper": { w: 16, h: 16, pal: {"W":"#73a167","D":"#467340","A":"#9ad499","M":"#4e7e44","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWWWWWWWWWAAAWWD",
@@ -85061,7 +85061,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-leaf": { w: 16, h: 16, pal: {"W":"#67aa54","D":"#2e5e28","A":"#a9e8a8","M":"#386e2c","G":"#ffd873"}, rows: [
+  "tile-gym-leaf": { w: 16, h: 16, pal: {"W":"#73a167","D":"#467340","A":"#9ad499","M":"#4e7e44","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWDDDDDDWWWDDAWW",
@@ -85079,7 +85079,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-poison-upper": { w: 16, h: 16, pal: {"W":"#7a6a8a","D":"#46516e","A":"#3fa08a","M":"#2e5e28","G":"#ffd873"}, rows: [
+  "tile-gym-poison-upper": { w: 16, h: 16, pal: {"W":"#80758c","D":"#59627a","A":"#549e8d","M":"#467340","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "DDAAWWAADDWWDDWW",
@@ -85097,7 +85097,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-poison": { w: 16, h: 16, pal: {"W":"#7a6a8a","D":"#46516e","A":"#3fa08a","M":"#2e5e28","G":"#ffd873"}, rows: [
+  "tile-gym-poison": { w: 16, h: 16, pal: {"W":"#80758c","D":"#59627a","A":"#549e8d","M":"#467340","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWDDWWDDDDAAWWAA",
@@ -85115,7 +85115,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-psy-upper": { w: 16, h: 16, pal: {"W":"#8a7a9a","D":"#594a72","A":"#e8e4f0","M":"#7a6a8a","G":"#ffd873"}, rows: [
+  "tile-gym-psy-upper": { w: 16, h: 16, pal: {"W":"#8b8097","D":"#695c7d","A":"#cbc5d8","M":"#80758c","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWWWWWAAWWWWWWAA",
@@ -85133,7 +85133,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-psy": { w: 16, h: 16, pal: {"W":"#8a7a9a","D":"#594a72","A":"#e8e4f0","M":"#7a6a8a","G":"#ffd873"}, rows: [
+  "tile-gym-psy": { w: 16, h: 16, pal: {"W":"#8b8097","D":"#695c7d","A":"#cbc5d8","M":"#80758c","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "DDWWDDWWDAADWDDW",
@@ -85151,7 +85151,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-rock-upper": { w: 16, h: 16, pal: {"W":"#9a9aa5","D":"#6a6a80","A":"#c2c8d4","M":"#46586e","G":"#ffd873"}, rows: [
+  "tile-gym-rock-upper": { w: 16, h: 16, pal: {"W":"#96969f","D":"#757585","A":"#b0b6c1","M":"#59687a","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWWWWWWWDDWWWWAA",
@@ -85169,7 +85169,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-rock": { w: 16, h: 16, pal: {"W":"#9a9aa5","D":"#6a6a80","A":"#c2c8d4","M":"#46586e","G":"#ffd873"}, rows: [
+  "tile-gym-rock": { w: 16, h: 16, pal: {"W":"#96969f","D":"#757585","A":"#b0b6c1","M":"#59687a","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "DDWWWWDDWWWWWWDD",
@@ -85187,7 +85187,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-volt-upper": { w: 16, h: 16, pal: {"W":"#d8c08a","D":"#8a6a48","A":"#f0e060","M":"#202028","G":"#eef7ff"}, rows: [
+  "tile-gym-volt-upper": { w: 16, h: 16, pal: {"W":"#c6b388","D":"#8e755b","A":"#cac177","M":"#3f3f49","G":"#c6d8e9"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWWWADDAAWAADDDD",
@@ -85205,7 +85205,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-volt": { w: 16, h: 16, pal: {"W":"#d8c08a","D":"#8a6a48","A":"#f0e060","M":"#202028","G":"#eef7ff"}, rows: [
+  "tile-gym-volt": { w: 16, h: 16, pal: {"W":"#c6b388","D":"#8e755b","A":"#cac177","M":"#3f3f49","G":"#c6d8e9"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWAAWWDDWWWWAAWW",
@@ -85223,7 +85223,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-water-upper": { w: 16, h: 16, pal: {"W":"#5a9ae8","D":"#2e63b0","A":"#8ae8f0","M":"#eef7ff","G":"#ffd873"}, rows: [
+  "tile-gym-water-upper": { w: 16, h: 16, pal: {"W":"#7097c7","D":"#476faa","A":"#8ccdd2","M":"#c6d8e9","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "DDWAAWWWWWWWWWAA",
@@ -85241,7 +85241,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-water": { w: 16, h: 16, pal: {"W":"#5a9ae8","D":"#2e63b0","A":"#8ae8f0","M":"#eef7ff","G":"#ffd873"}, rows: [
+  "tile-gym-water": { w: 16, h: 16, pal: {"W":"#7097c7","D":"#476faa","A":"#8ccdd2","M":"#c6d8e9","G":"#d1bc88"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WDDAWWDDWWWWWWWW",
@@ -85259,7 +85259,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gymdoor-open": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","k":"#5a3a24","Z":"#202028"}, rows: [
+  "tile-gymdoor-open": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585","k":"#71523d","Z":"#3f3f49"}, rows: [
     "mmmmmmmmmmmmmmmm",
     "mmmzzzzzzzzzzmmm",
     "mmmzzzzzzzzzzmmm",
@@ -85277,7 +85277,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmZZZZZZZmmmmm",
   ] },
-  "tile-gymdoor": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","k":"#5a3a24"}, rows: [
+  "tile-gymdoor": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585","k":"#71523d"}, rows: [
     "mmmmmmmmmmmmmmmm",
     "mmmzzzzzzzzzzmmm",
     "mmmzzzzzzzzzzmmm",
@@ -85295,7 +85295,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-gymfloor-1": { w: 16, h: 16, pal: {"a":"#c9a06a","b":"#a87f4e","c":"#d8c08a","d":"#f5f0dc"}, rows: [
+  "tile-gymfloor-1": { w: 16, h: 16, pal: {"a":"#b99b74","b":"#a18461","c":"#c6b388","d":"#e1d9ba"}, rows: [
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaacaaaa",
@@ -85313,7 +85313,7 @@ export const ART = {
     "aaaaaaaaacaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-gymfloor-2": { w: 16, h: 16, pal: {"a":"#c9ab6a","b":"#a88a4e","c":"#d8c98a","d":"#f5f3dc"}, rows: [
+  "tile-gymfloor-2": { w: 16, h: 16, pal: {"a":"#b9a374","b":"#a18c61","c":"#c6ba88","d":"#e1deba"}, rows: [
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaac",
     "aaaaacaaaaaaaaaa",
@@ -85331,7 +85331,7 @@ export const ART = {
     "aaaaaacaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-gymfloor-3": { w: 16, h: 16, pal: {"a":"#c9a06a","b":"#a8905e","c":"#d8bc82","d":"#b89a64"}, rows: [
+  "tile-gymfloor-3": { w: 16, h: 16, pal: {"a":"#b99b74","b":"#a08f6d","c":"#c5b083","d":"#ac9771"}, rows: [
     "aaabccccaaabcccc",
     "aaabccccaaabcccc",
     "aaabccccaaabcccc",
@@ -85349,25 +85349,25 @@ export const ART = {
     "ccccaaabccccaaab",
     "ccccbbbbccccbbbb",
   ] },
-  "tile-gymfloor-4": { w: 16, h: 16, pal: {"a":"#c9a06a","b":"#a8905e","c":"#d8bc82","d":"#b89a64"}, rows: [
+  "tile-gymfloor-4": { w: 16, h: 16, pal: {"a":"#b99b74","b":"#a08f6d","c":"#c5b083","d":"#ac9771"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "baaabaaacaaabaaa",
     "baaabaacacaabaaa",
     "baaabacacacabaaa",
     "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
+    "baaacacaaacacaaa",
+    "baacacaaaaacacaa",
+    "bacacaaaaaaacaca",
+    "bcacaaaaaaacacab",
+    "bacacaaaaacacaaa",
+    "baacacaaacacaaaa",
     "baaacacacacabaaa",
     "bbbbbcacacabbbbb",
     "baaabacacaaabaaa",
     "baaabaacaaaabaaa",
     "baaabaaabaaabaaa",
   ] },
-  "tile-gymwall": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80"}, rows: [
+  "tile-gymwall": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585"}, rows: [
     "zzzzzzzzzzzzzzzz",
     "mmmmmmmmmmmmmmmm",
     "mmzmmmmmmzmmmmmm",
@@ -85385,7 +85385,7 @@ export const ART = {
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-gymwallin-2": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","d":"#6a6a80"}, rows: [
+  "tile-gymwallin-2": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","d":"#757585"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -85403,7 +85403,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-gymwallin": { w: 16, h: 16, pal: {"f":"#8a8aa0","c":"#c2c8d4","t":"#b0503c","s":"#6a6a80","b":"#6a6a80"}, rows: [
+  "tile-gymwallin": { w: 16, h: 16, pal: {"f":"#8b8b9b","c":"#b0b6c1","t":"#a96152","s":"#757585","b":"#757585"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -85421,7 +85421,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-harbourstone": { w: 16, h: 16, pal: {"a":"#7d94a6","b":"#5d7484","c":"#9db4c4"}, rows: [
+  "tile-harbourstone": { w: 16, h: 16, pal: {"a":"#82929f","b":"#6b7c88","c":"#97a9b6"}, rows: [
     "caaabaaaabaaacba",
     "aaaabaaaabaaaaba",
     "aaaabaaacbaaaaba",
@@ -85439,7 +85439,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabaaacbaaaaba",
   ] },
-  "tile-house": { w: 16, h: 16, pal: {"j":"#b0503c","k":"#5a3a24","h":"#c9a06a","x":"#2e63b0","p":"#d8c08a"}, rows: [
+  "tile-house": { w: 16, h: 16, pal: {"j":"#a96152","k":"#71523d","h":"#b99b74","x":"#476faa","p":"#c6b388"}, rows: [
     "jjjjjjjjjjjjjjjj",
     "jjjjjjjjjjjjjjjj",
     "jjjjjjjjjjjjjjjj",
@@ -85457,7 +85457,7 @@ export const ART = {
     "pppppppppppppppp",
     "pppppppppppppppp",
   ] },
-  "tile-housefloor-1": { w: 16, h: 16, pal: {"a":"#a87f4e","b":"#5a3a24","c":"#c9a06a"}, rows: [
+  "tile-housefloor-1": { w: 16, h: 16, pal: {"a":"#a18461","b":"#71523d","c":"#b99b74"}, rows: [
     "aaaaaaabaaaaaaaa",
     "aaaaaaabaaaaaaaa",
     "aaaaaaabaaacaaaa",
@@ -85475,7 +85475,7 @@ export const ART = {
     "aaaaabaaacaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-housefloor-2": { w: 16, h: 16, pal: {"a":"#a88a4e","b":"#5a4024","c":"#c9ab6a"}, rows: [
+  "tile-housefloor-2": { w: 16, h: 16, pal: {"a":"#a18c61","b":"#71583d","c":"#b9a374"}, rows: [
     "aaabaaaaaaaaaaaa",
     "aaabaaaaaaaaaaac",
     "aaabacaaaaaaaaaa",
@@ -85493,43 +85493,43 @@ export const ART = {
     "aaaaaacaaaaaabaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-housefloor-3": { w: 16, h: 16, pal: {"a":"#c9a06a","b":"#a87f4e","c":"#bd925c","d":"#d8b47e"}, rows: [
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
+  "tile-housefloor-3": { w: 16, h: 16, pal: {"a":"#b99b74","b":"#a18461","c":"#af916b","d":"#c5a980"}, rows: [
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
   ] },
-  "tile-housefloor-4": { w: 16, h: 16, pal: {"a":"#c9a06a","b":"#a87f4e","c":"#bd925c","d":"#d8b47e"}, rows: [
+  "tile-housefloor-4": { w: 16, h: 16, pal: {"a":"#b99b74","b":"#a18461","c":"#af916b","d":"#c5a980"}, rows: [
     "bbbbbbbbbbbbbbbb",
-    "baaabaaacaaabaaa",
-    "baaabaacacaabaaa",
-    "baaabacacacabaaa",
-    "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
-    "baaacacacacabaaa",
-    "bbbbbcacacabbbbb",
-    "baaabacacaaabaaa",
-    "baaabaacaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "bbbbaaaaaaaabbbb",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaab",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaabaaa",
+    "bbbbbaaaaaabbbbb",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
     "baaabaaabaaabaaa",
   ] },
-  "tile-housewall-2": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","d":"#a87f4e"}, rows: [
+  "tile-housewall-2": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","d":"#a18461"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -85547,7 +85547,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-housewall": { w: 16, h: 16, pal: {"f":"#e3ba85","c":"#d8c08a","t":"#c9a06a","s":"#c9a06a","b":"#7a5a38"}, rows: [
+  "tile-housewall": { w: 16, h: 16, pal: {"f":"#cfae83","c":"#c6b388","t":"#b99b74","s":"#b99b74","b":"#846a4e"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -85565,7 +85565,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-iceface": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#d2e8ef"}, rows: [
+  "tile-iceface": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#b6d1da"}, rows: [
     "BLLABBBBBBAABBAA",
     "BBAABBBBBBAABBAA",
     "AABLLLBBAAAABBAA",
@@ -85583,7 +85583,7 @@ export const ART = {
     "BBLAAALBBBBLLLLL",
     "BLLAAALBBBBLLLLL",
   ] },
-  "tile-icefloor": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#d2e8ef"}, rows: [
+  "tile-icefloor": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#b6d1da"}, rows: [
     "BBLLLAABBBBAABAA",
     "BBBBLLBBBBBBBBBB",
     "LLBBBBBBBBLLBBBB",
@@ -85601,7 +85601,7 @@ export const ART = {
     "ALLALLAABBLLBBBB",
     "BBAALLBBBBLLBBBB",
   ] },
-  "tile-icepool": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#d2e8ef"}, rows: [
+  "tile-icepool": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#b6d1da"}, rows: [
     "LLAAALLBBBAAAALL",
     "LLAAAABBAAAAABBL",
     "AABBAABBLLLLAAAA",
@@ -85619,7 +85619,7 @@ export const ART = {
     "BBAAAAAAAALLBBAA",
     "BBAAAAALLLLLBBAA",
   ] },
-  "tile-icewall": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#d2e8ef"}, rows: [
+  "tile-icewall": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#b6d1da"}, rows: [
     "DDLABBBBDLBBDDBB",
     "DDLABDDBDLBAAABB",
     "BBLABBBBBLBDDBAA",
@@ -85655,97 +85655,97 @@ export const ART = {
     ".....s.s.s......",
     "................",
   ] },
-  "tile-kelpbed": { w: 16, h: 16, pal: {"a":"#2e7a5a","b":"#1e5a44","c":"#48a878","d":"#8ad8a8"}, rows: [
-    "cabaaabbbcacabaa",
-    "baadabbcacbccaaa",
-    "abacaadbdaaabdca",
-    "ccadaadaaccabbaa",
-    "aaababcbcabcdbaa",
-    "bdcadaabaaaadcaa",
-    "aaaabaaddcbaaaca",
-    "babaacaacbadaaaa",
-    "acabaabcaddccaab",
-    "babbbbaaccabaaba",
-    "cacacabcabbdaaac",
-    "cabaabaaaaccbaaa",
-    "abdaaaacacaacaca",
-    "aaccbaabbacbaacc",
-    "bcdbaabaabcaabaa",
-    "caaaaccbbaacaaaa",
+  "tile-kelpbed": { w: 16, h: 16, pal: {"a":"#45866b","b":"#37735d","c":"#5ba27f","d":"#88c6a0"}, rows: [
+    "caaaaaaaacacaaaa",
+    "aaadaaacacaccaaa",
+    "aaacaadadaaaadca",
+    "ccadaadaaccaaaaa",
+    "aaaaaacacaacdaaa",
+    "adcadaaaaaaadcaa",
+    "aaaaaaaddcaaaaca",
+    "aaaaacaacaadaaaa",
+    "acaaaaacaddccaaa",
+    "aaaaaaaaccaaaaaa",
+    "cacacaacaaadaaac",
+    "caaaaaaaaaccaaaa",
+    "aadaaaacacaacaca",
+    "aaccaaaaaacaaacc",
+    "acdaaaaaaacaaaaa",
+    "caaaaccaaaacaaaa",
   ] },
-  "tile-labfloor-1": { w: 16, h: 16, pal: {"a":"#46586e","b":"#3a4657","c":"#5f748f"}, rows: [
-    "bbbbbbbbbbbbbbbb",
-    "bcaaaaaabaaaaacb",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaacaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "bbbbbbbbbbbbbbbb",
-    "baaaaaaabcaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaacaaab",
-    "baaaaaaabaaaaaab",
-    "bcaaaaaabaaaaacb",
-    "bbbbbbbbbbbbbbbb",
+  "tile-labfloor-1": { w: 16, h: 16, pal: {"a":"#59687a","b":"#505b6b","c":"#6c7c90"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "acaaaaaaaaaaaaca",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaacaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaacaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaacaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "acaaaaaaaaaaaaca",
+    "aaaaaaaaaaaaaaaa",
   ] },
-  "tile-labfloor-2": { w: 16, h: 16, pal: {"a":"#46536e","b":"#3a4357","c":"#5f6e8f"}, rows: [
-    "bbbbbbbbbbbbbbbb",
-    "bcaaaaaabaaaaacb",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaacaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "bbbbbbbbbbbbbbbb",
-    "baaaaaaabcaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaacaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "baaaaaaabaaaaaab",
-    "bcaaaaaabaaaaacb",
-    "bbbbbbbbbbbbbbbb",
+  "tile-labfloor-2": { w: 16, h: 16, pal: {"a":"#59647a","b":"#50596b","c":"#6c7790"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "acaaaaaaaaaaaaca",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaacaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaacaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaacaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "acaaaaaaaaaaaaca",
+    "aaaaaaaaaaaaaaaa",
   ] },
-  "tile-labfloor-3": { w: 16, h: 16, pal: {"a":"#46586e","b":"#384a5e","c":"#54687e","d":"#64788e"}, rows: [
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
+  "tile-labfloor-3": { w: 16, h: 16, pal: {"a":"#59687a","b":"#4e5e70","c":"#647485","d":"#707f8f"}, rows: [
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
     "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
     "ccccbbbbccccbbbb",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
     "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
     "ccccbbbbccccbbbb",
   ] },
-  "tile-labfloor-4": { w: 16, h: 16, pal: {"a":"#46586e","b":"#384a5e","c":"#54687e","d":"#64788e"}, rows: [
-    "bbbbbbbbbbbbbbbb",
-    "baaabaaacaaabaaa",
-    "baaabaacacaabaaa",
-    "baaabacacacabaaa",
-    "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
-    "baaacacacacabaaa",
-    "bbbbbcacacabbbbb",
-    "baaabacacaaabaaa",
-    "baaabaacaaaabaaa",
-    "baaabaaabaaabaaa",
+  "tile-labfloor-4": { w: 16, h: 16, pal: {"a":"#59687a","b":"#4e5e70","c":"#647485","d":"#707f8f"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaddaaaaaaa",
+    "aaaaaaddddaaaaaa",
+    "aaaaaddddddaaaaa",
+    "aaaaaddddddaaaaa",
+    "aaaaaaddddaaaaaa",
+    "aaaaaaaddaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
   ] },
-  "tile-labwall-2": { w: 16, h: 16, pal: {"w":"#46586e","l":"#5f748f","d":"#384a5e"}, rows: [
+  "tile-labwall-2": { w: 16, h: 16, pal: {"w":"#59687a","l":"#6c7c90","d":"#4e5e70"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -85763,7 +85763,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-labwall": { w: 16, h: 16, pal: {"f":"#5f748f","c":"#6fb0ee","t":"#3a4657","s":"#46586e","b":"#3a4657"}, rows: [
+  "tile-labwall": { w: 16, h: 16, pal: {"f":"#6c7c90","c":"#7da6cd","t":"#505b6b","s":"#59687a","b":"#505b6b"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -85817,7 +85817,7 @@ export const ART = {
     "bbyyaaaaaaaabbaa",
     "bbyyaaaaaaaabbaa",
   ] },
-  "tile-leaguewall": { w: 16, h: 16, pal: {"f":"#6a6a80","c":"#ffd873","t":"#6a4a7a","s":"#3a4657","b":"#3a4657"}, rows: [
+  "tile-leaguewall": { w: 16, h: 16, pal: {"f":"#757585","c":"#d1bc88","t":"#765c83","s":"#505b6b","b":"#505b6b"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -85835,25 +85835,25 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-marshbog": { w: 16, h: 16, pal: {"a":"#5d7a45","b":"#47603a","c":"#74945a","d":"#3d5a6e"}, rows: [
-    "bcbcbaabcaaacaab",
-    "baacccacaaaaadaa",
-    "bcbbaadbaacbbcac",
-    "caaacaaacdaadaab",
-    "bcbccbabaabaaabc",
-    "aaadbaaaaaaaaacb",
-    "bdacaaaabaaaaaaa",
-    "daabaddcaaaaccaa",
-    "caaaaabaaaaaaaaa",
-    "dadbdaacaacaaaaa",
-    "acaaaadababaaaca",
-    "acbacaaabaaabaca",
-    "aadacaacaabaadaa",
-    "caaacdaadbacbbca",
-    "aaaabcccaabbabaa",
-    "baabaacbbaaaabaa",
+  "tile-marshbog": { w: 16, h: 16, pal: {"a":"#6c8358","b":"#5b7150","c":"#7c9469","d":"#526a7b"}, rows: [
+    "acacaaaacaaacaaa",
+    "aaacccacaaaaadaa",
+    "acaaaadaaacaacac",
+    "caaacaaacdaadaaa",
+    "acaccaaaaaaaaaac",
+    "aaadaaaaaaaaaaca",
+    "adacaaaaaaaaaaaa",
+    "daaaaddcaaaaccaa",
+    "caaaaaaaaaaaaaaa",
+    "dadadaacaacaaaaa",
+    "acaaaadaaaaaaaca",
+    "acaacaaaaaaaaaca",
+    "aadacaacaaaaadaa",
+    "caaacdaadaacaaca",
+    "aaaaacccaaaaaaaa",
+    "aaaaaacaaaaaaaaa",
   ] },
-  "tile-martfloor-1": { w: 16, h: 16, pal: {"a":"#cfd4c2","b":"#a8b85a","c":"#f5f0dc"}, rows: [
+  "tile-martfloor-1": { w: 16, h: 16, pal: {"a":"#bdc1b0","b":"#a0ab6a","c":"#e1d9ba"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "baaaaaaabaaaaaab",
     "baaaaaaabaacaaab",
@@ -85871,7 +85871,7 @@ export const ART = {
     "baaaaaaabcaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-martfloor-2": { w: 16, h: 16, pal: {"a":"#cdd4c2","b":"#9db85a","c":"#f5f3dc"}, rows: [
+  "tile-martfloor-2": { w: 16, h: 16, pal: {"a":"#bbc1b0","b":"#99ab6a","c":"#e1deba"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "baaaaaaabaaaaaac",
     "baaaacaabaaaaaab",
@@ -85889,43 +85889,43 @@ export const ART = {
     "baaaaacabaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-martfloor-3": { w: 16, h: 16, pal: {"a":"#cfd4c2","b":"#9db894","c":"#bfc9ae","d":"#86a87e"}, rows: [
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
+  "tile-martfloor-3": { w: 16, h: 16, pal: {"a":"#bdc1b0","b":"#98ad91","c":"#b1b9a3","d":"#89a183"}, rows: [
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
     "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
     "ccccbbbbccccbbbb",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
     "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
     "ccccbbbbccccbbbb",
   ] },
-  "tile-martfloor-4": { w: 16, h: 16, pal: {"a":"#cfd4c2","b":"#9db894","c":"#bfc9ae","d":"#86a87e"}, rows: [
+  "tile-martfloor-4": { w: 16, h: 16, pal: {"a":"#bdc1b0","b":"#98ad91","c":"#b1b9a3","d":"#89a183"}, rows: [
     "bbbbbbbbbbbbbbbb",
-    "baaabaaacaaabaaa",
-    "baaabaacacaabaaa",
-    "baaabacacacabaaa",
-    "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
-    "baaacacacacabaaa",
-    "bbbbbcacacabbbbb",
-    "baaabacacaaabaaa",
-    "baaabaacaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "bbbbaaaaaaaabbbb",
+    "baaaaaaddaaaaaaa",
+    "baaaaaddddaaaaaa",
+    "baaaaddddddaaaaa",
+    "baaaaddddddaaaab",
+    "baaaaaddddaaaaaa",
+    "baaaaaaddaaaaaaa",
+    "baaaaaaaaaaabaaa",
+    "bbbbbaaaaaabbbbb",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
     "baaabaaabaaabaaa",
   ] },
-  "tile-martwall-2": { w: 16, h: 16, pal: {"w":"#2e7a6a","l":"#cfd4c2","d":"#1f5a4c"}, rows: [
+  "tile-martwall-2": { w: 16, h: 16, pal: {"w":"#458678","l":"#bdc1b0","d":"#387264"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -85943,7 +85943,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-martwall": { w: 16, h: 16, pal: {"f":"#2e7a6a","c":"#3fa08a","t":"#f5f0dc","s":"#1f5a4c","b":"#1f5a4c"}, rows: [
+  "tile-martwall": { w: 16, h: 16, pal: {"f":"#458678","c":"#549e8d","t":"#e1d9ba","s":"#387264","b":"#387264"}, rows: [
     "cccccccccccccccc",
     "cccccccccccccccc",
     "tttttttttttttttt",
@@ -85961,7 +85961,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-moonmoss": { w: 16, h: 16, pal: {"B":"#7a6738","D":"#54452f","A":"#3fa08a"}, rows: [
+  "tile-moonmoss": { w: 16, h: 16, pal: {"B":"#84754e","D":"#6a5c47","A":"#549e8d"}, rows: [
     "BBDDAABBBBDDBBAA",
     "BBAABBBBBBBDDBAA",
     "DDBBBADDBBDDDBBB",
@@ -85979,7 +85979,7 @@ export const ART = {
     "DDBBBBBBDDDDBBAA",
     "DDBBBBBBDDAABBAA",
   ] },
-  "tile-panelwall": { w: 16, h: 16, pal: {"B":"#8a8ca0","D":"#46586e","A":"#3fa08a"}, rows: [
+  "tile-panelwall": { w: 16, h: 16, pal: {"B":"#8b8d9b","D":"#59687a","A":"#549e8d"}, rows: [
     "BBBBBBBBAABBAAAA",
     "BDDBAABBAABBAABB",
     "BBBBDDDDBAADBBBB",
@@ -85997,187 +85997,187 @@ export const ART = {
     "DDBBAABBBBBBABBB",
     "DDBBAABBBBBBAAAA",
   ] },
-  "tile-path-2": { w: 16, h: 16, pal: {"p":"#d3be84","q":"#bdaa71","b":"#b09868","n":"#ecdca8","k":"#a8885c","r":"#5a3d24"}, rows: [
+  "tile-path-2": { w: 16, h: 16, pal: {"p":"#c1b184","q":"#b0a279","b":"#a69574","n":"#d7c999","k":"#a08a6c","r":"#71553d"}, rows: [
     "pppppppppppppppp",
     "pppppppppppppppp",
     "pppppppppppppppp",
     "pppppppppppppppp",
     "pppppppppbpppppp",
     "pppbbbppbbbbpppp",
-    "ppppbbbppbnnnppp",
-    "pppppbpppppnpppp",
+    "ppppbbbppbpppppp",
+    "pppppbpppppppppp",
     "pppppppppppppppp",
     "pppppppppppppppp",
     "pppbbbpbbbpbbbpp",
-    "ppppppnnnppppppp",
-    "pppppppnpnpppppp",
-    "ppppppppnnnqpppp",
-    "pppppppppnqqqppp",
-    "pppppppppppqpppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
   ] },
-  "tile-path-3": { w: 16, h: 16, pal: {"p":"#dec08e","q":"#c8aa7d","b":"#b09068","n":"#ecd6a8","k":"#a8805c","r":"#5a3724"}, rows: [
+  "tile-path-3": { w: 16, h: 16, pal: {"p":"#cbb28a","q":"#b9a281","b":"#a69074","n":"#d7c399","k":"#a0846c","r":"#714f3d"}, rows: [
     "pppppppppppppppp",
     "pppppppppppppppp",
     "pppbbbpppbbbpppp",
     "pppbbbpppppppppp",
-    "pppnbppppppppppp",
-    "ppnnnppppppppppp",
-    "pppnpppppppppppp",
+    "ppppbppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
     "ppppppppppppppbp",
     "pppppppppppppbbb",
     "ppppppppppppppbp",
     "pppppppppppppppp",
-    "pnpppppppppppppp",
-    "nnnppppppppppppp",
-    "pnpbbbppbbbppbqp",
-    "ppppppppppppbqqq",
-    "pppppppppppppbqp",
-  ] },
-  "tile-path-4": { w: 16, h: 16, pal: {"p":"#b8b0a0","q":"#8f887a","n":"#c8c0b0","b":"#a29a88"}, rows: [
-    "nppnqbpppqpnpnqp",
-    "ppnpqppnnqpppnqp",
-    "pnnpqppppqpppnqp",
-    "qqqqqqqqqqqqqqqq",
-    "pnqppppqppppqppp",
-    "ppqbpppqpnpnqpnp",
-    "ppqpppnqbppbqpnp",
-    "qqqqqqqqqqqqqqqq",
-    "qpppnqppbpqpnnpq",
-    "qbnnpqnpppqnpppq",
-    "qppppqpnppqppppq",
-    "qqqqqqqqqqqqqqqq",
-    "pppqpnppqppppqpp",
-    "pppqppnpqnppnqpp",
-    "pppqpnppqppppqnp",
-    "qqqqqqqqqqqqqqqq",
-  ] },
-  "tile-path-5": { w: 16, h: 16, pal: {"p":"#d8c08a","q":"#c2a878","n":"#ecd9a8","b":"#b09468"}, rows: [
-    "nnbbqqpbbnnnppnn",
-    "nqqbqqbbnbnnppnn",
-    "nnnnnnbbbbqqpppp",
-    "bbnnnnqbbqqqpppp",
-    "qqqqqqbbbbqnpppp",
-    "qqppqqbbbbnnpppp",
-    "ppqqbbbbbppppppp",
-    "qqqqbbbbpbpppppp",
-    "ppbbbqbpbbnnbqqb",
-    "ppbbqqbbbbqqbbbb",
-    "qqppqbbbpbpppppp",
-    "qqppqqbpbbpppppp",
-    "ppbbqqpbbbnnppqq",
-    "bbbbqqbbbbnnpppp",
-    "bbqqppbnbbpppppp",
-    "bbqqppqbbppppppp",
-  ] },
-  "tile-path-6": { w: 16, h: 16, pal: {"p":"#cdb684","q":"#bfae7c","n":"#ddca9c","b":"#a89468"}, rows: [
-    "bbqppnqnnnppqqbb",
-    "bbqqnnqqnpppqqbb",
-    "nnbbqqqqppbbppqq",
-    "nnnbnnqqppbbpbbq",
-    "ppqnnnbbbbnnnnqq",
-    "ppqqnnbbqqnnnnqq",
-    "ppppqqbbpppqqqpp",
-    "bbbbqqbbppppqqpp",
-    "qqppbbbbbnnnnnqq",
-    "qqppnnppnnnppnqq",
-    "qnnpnnqqpbbnpppp",
-    "nnppnppqppnnbbpp",
-    "qqpnnppqnnppppnn",
-    "qqqpnnqqnnqbbbnn",
-    "bbppppqqbbnnpppp",
-    "ppqqppqqbbnnpppp",
-  ] },
-  "tile-path": { w: 16, h: 16, pal: {"p":"#d8c08a","q":"#c2a878","b":"#b09468","n":"#ecd9a8","k":"#a8845c","r":"#5a3a24"}, rows: [
     "pppppppppppppppp",
     "pppppppppppppppp",
-    "pqpppppppppppppp",
-    "qqqbpppppppppppp",
-    "pqbbbppppppppppp",
+    "pppbbbppbbbppbpp",
+    "ppppppppppppbppp",
+    "pppppppppppppbpp",
+  ] },
+  "tile-path-4": { w: 16, h: 16, pal: {"p":"#ada69a","q":"#8f8a80","n":"#b9b2a4","b":"#9c978a"}, rows: [
+    "ppppqppppqppppqp",
+    "ppppqppppqppppqp",
+    "ppppqppppqppppqp",
+    "qqqqqqqqqqqqqqqq",
+    "ppqppppqppppqppp",
+    "ppqppppqppppqppp",
+    "ppqppppqppppqppp",
+    "qqqqqqqqqqqqqqqq",
+    "qppppqppppqppppq",
+    "qppppqppppqppppq",
+    "qppppqppppqppppq",
+    "qqqqqqqqqqqqqqqq",
+    "pppqppppqppppqpp",
+    "pppqppppqppppqpp",
+    "pppqppppqppppqpp",
+    "qqqqqqqqqqqqqqqq",
+  ] },
+  "tile-path-5": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","n":"#d7c699","b":"#a69274"}, rows: [
+    "ppbbpppbbppppppp",
+    "pppbppbbpbpppppp",
+    "ppppppbbbbpppppp",
+    "bbpppppbbppppppp",
+    "ppppppbbbbpppppp",
+    "ppppppbbbbpppppp",
+    "ppppbbbbbppppppp",
+    "ppppbbbbpbpppppp",
+    "ppbbbpbpbbppbppb",
+    "ppbbppbbbbppbbbb",
+    "pppppbbbpbpppppp",
+    "ppppppbpbbpppppp",
+    "ppbbpppbbbpppppp",
+    "bbbbppbbbbpppppp",
+    "bbppppbpbbpppppp",
+    "bbpppppbbppppppp",
+  ] },
+  "tile-path-6": { w: 16, h: 16, pal: {"p":"#bdab85","q":"#b2a581","n":"#caba93","b":"#a09274"}, rows: [
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+  ] },
+  "tile-path": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d"}, rows: [
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppbpppppppppppp",
+    "ppbbbppppppppppp",
     "bbbbppbbbpbbbppp",
-    "ppqppppppppppppp",
-    "pqqqpppppppppppp",
-    "ppqppppppppppnpp",
-    "ppppbpppppppnnnp",
-    "pppbbbpppppppnpp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppppppp",
     "pppbbbpbbbpbbbpp",
-    "ppppppppqppppppp",
-    "pppppppqqqpppppp",
-    "ppppppppqppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
     "pppppppppppppppp",
   ] },
-  "tile-plantfloor-1": { w: 16, h: 16, pal: {"g":"#46586e","z":"#3a4657","c":"#c2c8d4","m":"#8a8aa0"}, rows: [
+  "tile-plantfloor-1": { w: 16, h: 16, pal: {"g":"#59687a","z":"#505b6b","c":"#b0b6c1","m":"#8b8b9b"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
-    "ggzggggggggggggg",
-    "ggggggggggggzggg",
     "gggggggggggggggg",
-    "gggggggzgggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
     "gggggggggggcgggg",
     "gggggggggggggggg",
-    "gggggcggggggggzg",
+    "gggggcgggggggggg",
     "gggggggggggggggg",
     "ggggggggmggggggg",
-    "ggggzggggmgggggg",
+    "gggggggggmgggggg",
     "gggggggggggggggg",
-    "ggggggggggzggggg",
+    "gggggggggggggggg",
     "gggggggggggggggg",
     "gggggggggggggggg",
   ] },
-  "tile-plantfloor-2": { w: 16, h: 16, pal: {"g":"#46536e","z":"#3a4357","c":"#c2c6d4","m":"#8d8aa0"}, rows: [
+  "tile-plantfloor-2": { w: 16, h: 16, pal: {"g":"#59647a","z":"#50596b","c":"#b0b4c1","m":"#8d8b9b"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
-    "ggzggggggggggggg",
-    "ggggggggggggzggg",
     "gggggggggggggggg",
-    "gggggggzgggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
     "gggggggggggcgggg",
     "gggmmggggggggggg",
-    "gggggcggggggggzg",
+    "gggggcgggggggggg",
     "gggggggggggggggg",
     "gggggggggggggggg",
-    "ggggzggggggggggg",
     "gggggggggggggggg",
-    "ggggggggggzggggg",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
     "gggggggggggggggg",
     "gggggggggggggggg",
   ] },
-  "tile-plantfloor-3": { w: 16, h: 16, pal: {"a":"#46586e","b":"#5c6e46","c":"#6a7a52","d":"#3c4c5e"}, rows: [
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
+  "tile-plantfloor-3": { w: 16, h: 16, pal: {"a":"#59687a","b":"#6b7a59","c":"#758263","d":"#526070"}, rows: [
+    "aaacccccaaaccccc",
+    "aaacccccaaaccccc",
+    "aaacccccaaaccccc",
+    "cccccccccccccccc",
+    "ccccaaacccccaaac",
+    "ccccaaacccccaaac",
+    "ccccaaacccccaaac",
+    "cccccccccccccccc",
+    "aaacccccaaaccccc",
+    "aaacccccaaaccccc",
+    "aaacccccaaaccccc",
+    "cccccccccccccccc",
+    "ccccaaacccccaaac",
+    "ccccaaacccccaaac",
+    "ccccaaacccccaaac",
+    "cccccccccccccccc",
   ] },
-  "tile-plantfloor-4": { w: 16, h: 16, pal: {"a":"#46586e","b":"#5c6e46","c":"#6a7a52","d":"#3c4c5e"}, rows: [
+  "tile-plantfloor-4": { w: 16, h: 16, pal: {"a":"#59687a","b":"#6b7a59","c":"#758263","d":"#526070"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "baaabaaacaaabaaa",
     "baaabaacacaabaaa",
     "baaabacacacabaaa",
     "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
+    "baaacacaaacacaaa",
+    "baacacaaaaacacaa",
+    "bacacaaaaaaacaca",
+    "bcacaaaaaaacacab",
+    "bacacaaaaacacaaa",
+    "baacacaaacacaaaa",
     "baaacacacacabaaa",
     "bbbbbcacacabbbbb",
     "baaabacacaaabaaa",
     "baaabaacaaaabaaa",
     "baaabaaabaaabaaa",
   ] },
-  "tile-plantwall-2": { w: 16, h: 16, pal: {"w":"#46586e","l":"#6a7a52","d":"#2e3a2e"}, rows: [
+  "tile-plantwall-2": { w: 16, h: 16, pal: {"w":"#59687a","l":"#758263","d":"#495649"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -86195,7 +86195,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-plantwall": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","c":"#c2c8d4","k":"#5a3a24","a":"#a8845c","b":"#b09468","y":"#ffd873","g":"#46586e"}, rows: [
+  "tile-plantwall": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585","c":"#b0b6c1","k":"#71523d","a":"#a0876c","b":"#a69274","y":"#d1bc88","g":"#59687a"}, rows: [
     "zzzzzzzzzzzzzzzz",
     "zggggzggggzggggz",
     "zggggzggggzggggz",
@@ -86213,7 +86213,7 @@ export const ART = {
     "ygygygygygygygyg",
     "zggggzggggzggggz",
   ] },
-  "tile-prop-ancientpillar": { w: 16, h: 16, pal: {"a":"#c8a878","b":"#a8845a","c":"#5a8a4a","d":"#e8d0a0"}, rows: [
+  "tile-prop-ancientpillar": { w: 16, h: 16, pal: {"a":"#b8a17d","b":"#a0876b","c":"#698e5c","d":"#d4bf94"}, rows: [
     "................",
     ".....bbbbbb.....",
     ".....bbbbbb.....",
@@ -86231,7 +86231,7 @@ export const ART = {
     ".....bbbbbb.....",
     "................",
   ] },
-  "tile-prop-apricorn": { w: 16, h: 16, pal: {"a":"#3e7a34","b":"#2e5e28","c":"#54a048","k":"#5a3a24","r":"#e84a3a","y":"#f0d040","p":"#f098c0","w":"#f0ead8","g":"#58b84a"}, rows: [
+  "tile-prop-apricorn": { w: 16, h: 16, pal: {"a":"#53854b","b":"#467340","c":"#649d5b","k":"#71523d","r":"#c16960","y":"#c4b367","p":"#d593b1","w":"#dbd3ba","g":"#69aa60"}, rows: [
     "................",
     "................",
     ".....abaaaa.....",
@@ -86249,7 +86249,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-prop-aquarium": { w: 16, h: 32, pal: {"B":"#3a7bd5","D":"#2e63b0","L":"#8ae8f0","A":"#f07830","C":"#67aa54"}, rows: [
+  "tile-prop-aquarium": { w: 16, h: 32, pal: {"B":"#5681bd","D":"#476faa","L":"#8ccdd2","A":"#c1835f","C":"#73a167"}, rows: [
     "................",
     "................",
     "................",
@@ -86283,7 +86283,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-ashshrub": { w: 16, h: 16, pal: {"a":"#9aa48e","b":"#7d8878","c":"#d8d4c8","k":"#5a4632"}, rows: [
+  "tile-prop-ashshrub": { w: 16, h: 16, pal: {"a":"#979e8e","b":"#828a7f","c":"#c4c0b5","k":"#6e5c49"}, rows: [
     "................",
     "................",
     "................",
@@ -86301,7 +86301,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-badgecase": { w: 16, h: 16, pal: {"a":"#5a3a24","b":"#6a4a7a","c":"#8a8aa0","d":"#3a7bd5","e":"#f0e060","f":"#d84040","g":"#3fa08a","h":"#e86a8a"}, rows: [
+  "tile-prop-badgecase": { w: 16, h: 16, pal: {"a":"#71523d","b":"#765c83","c":"#8b8b9b","d":"#5681bd","e":"#cac177","f":"#bf5b5b","g":"#549e8d","h":"#ca788d"}, rows: [
     "................",
     "................",
     ".aaaaaaaaaaaaaa.",
@@ -86319,7 +86319,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-barrel": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","k":"#202028"}, rows: [
+  "tile-prop-barrel": { w: 16, h: 16, pal: {"W":"#726648","w":"#71523d","L":"#8e755b","k":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -86337,7 +86337,7 @@ export const ART = {
     ".....WWWWWW.....",
     "................",
   ] },
-  "tile-prop-basketstack": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#8a6a48","L":"#f0d0a0","A":"#b0503c","C":"#3a7bd5"}, rows: [
+  "tile-prop-basketstack": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#8e755b","L":"#d7bd97","A":"#a96152","C":"#5681bd"}, rows: [
     "................",
     ".....AAAAAA.....",
     ".....AAAAAA.....",
@@ -86355,7 +86355,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-bath": { w: 16, h: 32, pal: {"B":"#eef7ff","D":"#8a8aa0","L":"#d2e8ef","A":"#5a9ae8","C":"#3fa08a"}, rows: [
+  "tile-prop-bath": { w: 16, h: 32, pal: {"B":"#c6d8e9","D":"#8b8b9b","L":"#b6d1da","A":"#7097c7","C":"#549e8d"}, rows: [
     "................",
     "................",
     "................",
@@ -86389,7 +86389,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-batterypack": { w: 16, h: 16, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#f0e060","C":"#3fa08a"}, rows: [
+  "tile-prop-batterypack": { w: 16, h: 16, pal: {"B":"#757585","D":"#3f3f49","L":"#96969f","A":"#cac177","C":"#549e8d"}, rows: [
     "................",
     "................",
     "......DDDD......",
@@ -86407,7 +86407,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-battlemat": { w: 16, h: 16, pal: {"a":"#46586e","b":"#eef7ff","c":"#d84040"}, rows: [
+  "tile-prop-battlemat": { w: 16, h: 16, pal: {"a":"#59687a","b":"#c6d8e9","c":"#bf5b5b"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "baaaaaaaaaaaaaab",
     "baaaaaaaaaaaaaab",
@@ -86425,7 +86425,7 @@ export const ART = {
     "baaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-prop-bed": { w: 16, h: 16, pal: {"a":"#f5f0dc","b":"#3a7bd5","c":"#6fb0ee","d":"#7a5a38"}, rows: [
+  "tile-prop-bed": { w: 16, h: 16, pal: {"a":"#e1d9ba","b":"#5681bd","c":"#7da6cd","d":"#846a4e"}, rows: [
     ".dddddddddddddd.",
     "..aaaaaaaaaaaa..",
     "..aaaaaaaaaaaa..",
@@ -86443,7 +86443,7 @@ export const ART = {
     "..dddddddddddd..",
     "................",
   ] },
-  "tile-prop-bench": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","k":"#202028"}, rows: [
+  "tile-prop-bench": { w: 16, h: 16, pal: {"W":"#726648","w":"#71523d","L":"#8e755b","k":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -86461,7 +86461,7 @@ export const ART = {
     "..kkkkkkkkkkkk..",
     "................",
   ] },
-  "tile-prop-bigbed": { w: 16, h: 32, pal: {"B":"#e8b4c4","D":"#96566b","L":"#f2ddd5","A":"#e86a8a","C":"#eef7ff"}, rows: [
+  "tile-prop-bigbed": { w: 16, h: 32, pal: {"B":"#d4a2b1","D":"#956675","L":"#dec1b7","A":"#ca788d","C":"#c6d8e9"}, rows: [
     "................",
     "..DDDDDDDDDDDD..",
     "..DDDDDDDDDDDD..",
@@ -86495,7 +86495,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-bikestand": { w: 16, h: 16, pal: {"k":"#202028","R":"#d84040","B":"#3a7bd5"}, rows: [
+  "tile-prop-bikestand": { w: 16, h: 16, pal: {"k":"#3f3f49","R":"#bf5b5b","B":"#5681bd"}, rows: [
     "................",
     "................",
     "................",
@@ -86513,7 +86513,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-birdbath": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","W":"#5a9ae8","B":"#3a7bd5","k":"#202028"}, rows: [
+  "tile-prop-birdbath": { w: 16, h: 16, pal: {"S":"#96969f","s":"#7c7c87","T":"#a5abb7","W":"#7097c7","B":"#5681bd","k":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -86531,7 +86531,7 @@ export const ART = {
     ".....ssssss.....",
     "................",
   ] },
-  "tile-prop-birdcage": { w: 16, h: 16, pal: {"B":"#c2c8d4","D":"#6a6a80","L":"#eef7ff","A":"#3a7bd5","C":"#f07830"}, rows: [
+  "tile-prop-birdcage": { w: 16, h: 16, pal: {"B":"#b0b6c1","D":"#757585","L":"#c6d8e9","A":"#5681bd","C":"#c1835f"}, rows: [
     "................",
     ".......LL.......",
     ".......LL.......",
@@ -86549,7 +86549,7 @@ export const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
-  "tile-prop-boardgames": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
+  "tile-prop-boardgames": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -86567,7 +86567,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-bonsai": { w: 16, h: 16, pal: {"B":"#67aa54","D":"#2e5e28","L":"#b0503c","A":"#386e2c","C":"#54452f"}, rows: [
+  "tile-prop-bonsai": { w: 16, h: 16, pal: {"B":"#73a167","D":"#467340","L":"#a96152","A":"#4e7e44","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "......CCCC......",
@@ -86585,7 +86585,7 @@ export const ART = {
     "....AAAAAAAA....",
     "................",
   ] },
-  "tile-prop-cabinbed": { w: 16, h: 16, pal: {"a":"#f5f0dc","b":"#eef7ff","c":"#d84040","d":"#7a5a38","e":"#ffd873"}, rows: [
+  "tile-prop-cabinbed": { w: 16, h: 16, pal: {"a":"#e1d9ba","b":"#c6d8e9","c":"#bf5b5b","d":"#846a4e","e":"#d1bc88"}, rows: [
     ".eeeeeeeeeeeeee.",
     "..aaaaaaaaaaaa..",
     "..aaaaaaaaaaaa..",
@@ -86603,7 +86603,7 @@ export const ART = {
     "..dddddddddddd..",
     "................",
   ] },
-  "tile-prop-cabintable": { w: 16, h: 16, pal: {"a":"#f0e060","b":"#a87f4e","c":"#5a3a24","d":"#5a3a24"}, rows: [
+  "tile-prop-cabintable": { w: 16, h: 16, pal: {"a":"#cac177","b":"#a18461","c":"#71523d","d":"#71523d"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -86621,7 +86621,7 @@ export const ART = {
     ".....dddddd.....",
     "................",
   ] },
-  "tile-prop-candle": { w: 16, h: 16, pal: {"B":"#e8e4f0","D":"#8a8aa0","L":"#fdfdf8","A":"#f07830","C":"#ffd873"}, rows: [
+  "tile-prop-candle": { w: 16, h: 16, pal: {"B":"#cbc5d8","D":"#8b8b9b","L":"#e9e9cc","A":"#c1835f","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -86639,7 +86639,7 @@ export const ART = {
     ".......BB..BB...",
     "....DDDDDDDD....",
   ] },
-  "tile-prop-cercrystal": { w: 16, h: 16, pal: {"B":"#8a7a9a","D":"#594a72","L":"#e8e4f0","A":"#7a6a8a","C":"#8ae8f0"}, rows: [
+  "tile-prop-cercrystal": { w: 16, h: 16, pal: {"B":"#8b8097","D":"#695c7d","L":"#cbc5d8","A":"#80758c","C":"#8ccdd2"}, rows: [
     "................",
     "......BBBB......",
     "......BLBB......",
@@ -86657,7 +86657,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-cershard": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#594a72","L":"#e8e4f0","A":"#7a6a8a","C":"#3fa08a"}, rows: [
+  "tile-prop-cershard": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#695c7d","L":"#cbc5d8","A":"#80758c","C":"#549e8d"}, rows: [
     "................",
     "................",
     "................",
@@ -86675,7 +86675,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-chair": { w: 16, h: 16, pal: {"a":"#a87f4e","b":"#5a3a24","c":"#b0503c"}, rows: [
+  "tile-prop-chair": { w: 16, h: 16, pal: {"a":"#a18461","b":"#71523d","c":"#a96152"}, rows: [
     "................",
     "................",
     ".....baaaab.....",
@@ -86693,7 +86693,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-chessboard": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
+  "tile-prop-chessboard": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -86711,7 +86711,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-coalscuttle": { w: 16, h: 16, pal: {"B":"#202028","D":"#202028","L":"#46586e","A":"#f07830","C":"#54452f"}, rows: [
+  "tile-prop-coalscuttle": { w: 16, h: 16, pal: {"B":"#3f3f49","D":"#3f3f49","L":"#59687a","A":"#c1835f","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -86729,7 +86729,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-coil": { w: 16, h: 32, pal: {"B":"#8a8aa0","D":"#46586e","L":"#f0e060","A":"#202028","C":"#e84c3c"}, rows: [
+  "tile-prop-coil": { w: 16, h: 32, pal: {"B":"#8b8b9b","D":"#59687a","L":"#cac177","A":"#3f3f49","C":"#c16a61"}, rows: [
     "................",
     ".......AA.......",
     ".......AA.......",
@@ -86763,7 +86763,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-column": { w: 16, h: 32, pal: {"B":"#c2c8d4","D":"#6a6a80","L":"#eef7ff","A":"#8a8aa0","C":"#ffd873"}, rows: [
+  "tile-prop-column": { w: 16, h: 32, pal: {"B":"#b0b6c1","D":"#757585","L":"#c6d8e9","A":"#8b8b9b","C":"#d1bc88"}, rows: [
     "................",
     "...LLLLLLLLLL...",
     "...LLLLLLLLLL...",
@@ -86797,7 +86797,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-contestarch": { w: 16, h: 16, pal: {"a":"#c8b8d8","d":"#e87ab0"}, rows: [
+  "tile-prop-contestarch": { w: 16, h: 16, pal: {"a":"#b7a8c6","d":"#ce80a6"}, rows: [
     "................",
     "................",
     "...aaaaaaaaaa...",
@@ -86815,7 +86815,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-contestdome": { w: 16, h: 16, pal: {"a":"#c9a227","b":"#9a7a1e","c":"#e8e4da","d":"#f0d060"}, rows: [
+  "tile-prop-contestdome": { w: 16, h: 16, pal: {"a":"#b79c47","b":"#9a823c","c":"#d1ccbf","d":"#cab877"}, rows: [
     "................",
     "................",
     ".....dddddd.....",
@@ -86833,7 +86833,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-cooler": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#ffd873"}, rows: [
+  "tile-prop-cooler": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -86851,7 +86851,7 @@ export const ART = {
     "....DDDDDDDD....",
     "................",
   ] },
-  "tile-prop-copier": { w: 16, h: 16, pal: {"B":"#c2c8d4","D":"#6a6a80","L":"#eef7ff","A":"#3fa08a","C":"#202028"}, rows: [
+  "tile-prop-copier": { w: 16, h: 16, pal: {"B":"#b0b6c1","D":"#757585","L":"#c6d8e9","A":"#549e8d","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "...LLLLLLLL.....",
@@ -86869,7 +86869,7 @@ export const ART = {
     "..DDDDDDDDDDDD..",
     "................",
   ] },
-  "tile-prop-coral": { w: 16, h: 16, pal: {"c":"#e07856","h":"#f0a868","p":"#d85a7a","r":"#747484"}, rows: [
+  "tile-prop-coral": { w: 16, h: 16, pal: {"c":"#c5806a","h":"#cca17b","p":"#c36980","r":"#7c7c87"}, rows: [
     "................",
     "................",
     "................",
@@ -86887,7 +86887,7 @@ export const ART = {
     "....rrrrrrrr....",
     "................",
   ] },
-  "tile-prop-counter": { w: 16, h: 16, pal: {"a":"#f5f0dc","b":"#c97e97","c":"#c96a52","d":"#7a3226"}, rows: [
+  "tile-prop-counter": { w: 16, h: 16, pal: {"a":"#e1d9ba","b":"#b98194","c":"#b77564","d":"#87493f"}, rows: [
     "................",
     "................",
     "................",
@@ -86905,7 +86905,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-prop-counterrun": { w: 16, h: 32, pal: {"B":"#f2ddd5","D":"#96566b","L":"#e8b4c4","A":"#e84c3c","C":"#ffd873"}, rows: [
+  "tile-prop-counterrun": { w: 16, h: 32, pal: {"B":"#dec1b7","D":"#956675","L":"#d4a2b1","A":"#c16a61","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "......AAAA......",
@@ -86939,7 +86939,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-cradle": { w: 16, h: 16, pal: {"B":"#f2ddd5","D":"#96566b","L":"#e8b4c4","A":"#eef7ff","C":"#ffd873"}, rows: [
+  "tile-prop-cradle": { w: 16, h: 16, pal: {"B":"#dec1b7","D":"#956675","L":"#d4a2b1","A":"#c6d8e9","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -86957,7 +86957,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-crates": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48"}, rows: [
+  "tile-prop-crates": { w: 16, h: 16, pal: {"W":"#726648","w":"#71523d","L":"#8e755b"}, rows: [
     "................",
     "................",
     "....WWWWWWW.....",
@@ -86975,7 +86975,7 @@ export const ART = {
     "..WWWWWWW.LLWLL.",
     "................",
   ] },
-  "tile-prop-crystalball": { w: 16, h: 16, pal: {"B":"#e8e4f0","D":"#8a7a9a","L":"#c2c8d4","A":"#7a6a8a","C":"#ffd873"}, rows: [
+  "tile-prop-crystalball": { w: 16, h: 16, pal: {"B":"#cbc5d8","D":"#8b8097","L":"#b0b6c1","A":"#80758c","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -86993,7 +86993,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-crystalcluster": { w: 16, h: 16, pal: {"B":"#8a7a9a","D":"#594a72","L":"#e8e4f0","A":"#7a6a8a","C":"#8ae8f0"}, rows: [
+  "tile-prop-crystalcluster": { w: 16, h: 16, pal: {"B":"#8b8097","D":"#695c7d","L":"#cbc5d8","A":"#80758c","C":"#8ccdd2"}, rows: [
     "................",
     "................",
     "................",
@@ -87011,7 +87011,7 @@ export const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
-  "tile-prop-cushion2": { w: 16, h: 16, pal: {"B":"#e86a8a","D":"#96566b","L":"#f2ddd5","A":"#ffd873","C":"#3fa08a"}, rows: [
+  "tile-prop-cushion2": { w: 16, h: 16, pal: {"B":"#ca788d","D":"#956675","L":"#dec1b7","A":"#d1bc88","C":"#549e8d"}, rows: [
     "................",
     "................",
     "................",
@@ -87029,7 +87029,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-divingtank": { w: 16, h: 32, pal: {"B":"#3a7bd5","D":"#2e63b0","L":"#8ae8f0","A":"#5a9ae8","C":"#eef7ff"}, rows: [
+  "tile-prop-divingtank": { w: 16, h: 32, pal: {"B":"#5681bd","D":"#476faa","L":"#8ccdd2","A":"#7097c7","C":"#c6d8e9"}, rows: [
     "................",
     "................",
     "..DLLLLLLLLLLD..",
@@ -87063,7 +87063,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-drum": { w: 16, h: 16, pal: {"B":"#e84c3c","D":"#7a3226","L":"#fdfdf8","A":"#c2c8d4","C":"#ffd873"}, rows: [
+  "tile-prop-drum": { w: 16, h: 16, pal: {"B":"#c16a61","D":"#87493f","L":"#e9e9cc","A":"#b0b6c1","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "..DDDD....DDDD..",
@@ -87081,7 +87081,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-easel": { w: 16, h: 16, pal: {"B":"#a8845c","D":"#54452f","L":"#d8b47e","A":"#b0503c","C":"#202028"}, rows: [
+  "tile-prop-easel": { w: 16, h: 16, pal: {"B":"#a0876c","D":"#6a5c47","L":"#c5a980","A":"#a96152","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "....CCCCCCCC....",
@@ -87099,7 +87099,7 @@ export const ART = {
     "....DD....DD....",
     "....DD....DD....",
   ] },
-  "tile-prop-feststand": { w: 16, h: 16, pal: {"r":"#b0503c","w":"#f5f0dc","y":"#f0e060","k":"#5a3a24","d":"#8a6a42","o":"#e86a8a","p":"#54a048"}, rows: [
+  "tile-prop-feststand": { w: 16, h: 16, pal: {"r":"#a96152","w":"#e1d9ba","y":"#cac177","k":"#71523d","d":"#8e7556","o":"#ca788d","p":"#649d5b"}, rows: [
     "................",
     "................",
     "................",
@@ -87117,7 +87117,7 @@ export const ART = {
     ".k............k.",
     "................",
   ] },
-  "tile-prop-fireplace": { w: 16, h: 16, pal: {"B":"#b0503c","D":"#7a3226","L":"#8a8aa0","A":"#f07830","C":"#f0e060"}, rows: [
+  "tile-prop-fireplace": { w: 16, h: 16, pal: {"B":"#a96152","D":"#87493f","L":"#8b8b9b","A":"#c1835f","C":"#cac177"}, rows: [
     "................",
     ".LLLLLLLLLLLLLL.",
     ".LLLLLLLLLLLLLL.",
@@ -87135,7 +87135,7 @@ export const ART = {
     ".DDDDDDDDDDDDDD.",
     "................",
   ] },
-  "tile-prop-firewood": { w: 16, h: 16, pal: {"B":"#8a5a30","D":"#54452f","L":"#c9a06a","A":"#5f5130","C":"#b0503c"}, rows: [
+  "tile-prop-firewood": { w: 16, h: 16, pal: {"B":"#916a47","D":"#6a5c47","L":"#b99b74","A":"#726648","C":"#a96152"}, rows: [
     "................",
     "................",
     "................",
@@ -87153,7 +87153,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-focuslamp": { w: 16, h: 16, pal: {"B":"#594a72","D":"#202028","L":"#8a7a9a","A":"#ffd873","C":"#f0e060"}, rows: [
+  "tile-prop-focuslamp": { w: 16, h: 16, pal: {"B":"#695c7d","D":"#3f3f49","L":"#8b8097","A":"#d1bc88","C":"#cac177"}, rows: [
     "................",
     "................",
     ".....AAAAAA.....",
@@ -87171,7 +87171,7 @@ export const ART = {
     "....DDDDDDDD....",
     "................",
   ] },
-  "tile-prop-forge": { w: 16, h: 32, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#f07830","C":"#f0e060"}, rows: [
+  "tile-prop-forge": { w: 16, h: 32, pal: {"B":"#757585","D":"#3f3f49","L":"#96969f","A":"#c1835f","C":"#cac177"}, rows: [
     "................",
     "................",
     "......BBBB......",
@@ -87205,7 +87205,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-fossildisplay": { w: 16, h: 16, pal: {"B":"#d8c08a","D":"#8a6a48","L":"#f2ddd5","A":"#54452f","C":"#c2c8d4"}, rows: [
+  "tile-prop-fossildisplay": { w: 16, h: 16, pal: {"B":"#c6b388","D":"#8e755b","L":"#dec1b7","A":"#6a5c47","C":"#b0b6c1"}, rows: [
     "................",
     "................",
     "..DLLLLLLLLLLD..",
@@ -87223,7 +87223,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-freezer": { w: 16, h: 32, pal: {"B":"#c2c8d4","D":"#6a6a80","L":"#eef7ff","A":"#5a9ae8","C":"#ffd873"}, rows: [
+  "tile-prop-freezer": { w: 16, h: 32, pal: {"B":"#b0b6c1","D":"#757585","L":"#c6d8e9","A":"#7097c7","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "..DLLLLLLLLLLD..",
@@ -87257,7 +87257,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-frostrock": { w: 16, h: 16, pal: {"B":"#d2e8ef","D":"#5a9ae8","L":"#eef7ff","A":"#8ae8f0","C":"#2e63b0"}, rows: [
+  "tile-prop-frostrock": { w: 16, h: 16, pal: {"B":"#b6d1da","D":"#7097c7","L":"#c6d8e9","A":"#8ccdd2","C":"#476faa"}, rows: [
     "................",
     "................",
     "................",
@@ -87275,7 +87275,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-gamestation": { w: 16, h: 16, pal: {"B":"#202028","D":"#54452f","L":"#46586e","A":"#f0e060","C":"#e86a8a"}, rows: [
+  "tile-prop-gamestation": { w: 16, h: 16, pal: {"B":"#3f3f49","D":"#6a5c47","L":"#59687a","A":"#cac177","C":"#ca788d"}, rows: [
     "................",
     "................",
     "..BBBBBBBBBBBB..",
@@ -87293,7 +87293,7 @@ export const ART = {
     "..DDDDDDDDDDDD..",
     "................",
   ] },
-  "tile-prop-gascanister": { w: 16, h: 16, pal: {"B":"#7a6a8a","D":"#46516e","L":"#3fa08a","A":"#202028","C":"#f0e060"}, rows: [
+  "tile-prop-gascanister": { w: 16, h: 16, pal: {"B":"#80758c","D":"#59627a","L":"#549e8d","A":"#3f3f49","C":"#cac177"}, rows: [
     "................",
     "................",
     "......DDDD......",
@@ -87311,7 +87311,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-gatearch": { w: 16, h: 32, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6"}, rows: [
+  "tile-prop-gatearch": { w: 16, h: 32, pal: {"S":"#96969f","s":"#7c7c87","T":"#a5abb7"}, rows: [
     "................",
     "................",
     "................",
@@ -87345,7 +87345,7 @@ export const ART = {
     "..........TSSSs.",
     ".........sssssss",
   ] },
-  "tile-prop-gatepost": { w: 16, h: 32, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","Y":"#f0e060","k":"#202028"}, rows: [
+  "tile-prop-gatepost": { w: 16, h: 32, pal: {"W":"#726648","w":"#71523d","L":"#8e755b","Y":"#cac177","k":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -87379,7 +87379,7 @@ export const ART = {
     ".......Www......",
     ".....wwwwwww....",
   ] },
-  "tile-prop-goods": { w: 16, h: 16, pal: {"a":"#6fb0ee","b":"#2e7a6a","c":"#1f5a4c","d":"#d84040","e":"#f0e060","f":"#e86a8a","g":"#ffd873"}, rows: [
+  "tile-prop-goods": { w: 16, h: 16, pal: {"a":"#7da6cd","b":"#458678","c":"#387264","d":"#bf5b5b","e":"#cac177","f":"#ca788d","g":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -87397,7 +87397,7 @@ export const ART = {
     "cccccccccccccccc",
     "cccccccccccccccc",
   ] },
-  "tile-prop-grandclock": { w: 16, h: 16, pal: {"B":"#8a5a30","D":"#54452f","L":"#c9a06a","A":"#ffd873","C":"#eef7ff"}, rows: [
+  "tile-prop-grandclock": { w: 16, h: 16, pal: {"B":"#916a47","D":"#6a5c47","L":"#b99b74","A":"#d1bc88","C":"#c6d8e9"}, rows: [
     "................",
     "....DLLLLLLD....",
     "....DLLLLLLD....",
@@ -87415,7 +87415,7 @@ export const ART = {
     "....DDDDDDDD....",
     "................",
   ] },
-  "tile-prop-gspedestal": { w: 16, h: 16, pal: {"a":"#8a97a8","b":"#6a7a8c","g":"#e8b83a","n":"#b0503c","h":"#f2e6c8"}, rows: [
+  "tile-prop-gspedestal": { w: 16, h: 16, pal: {"a":"#8b94a1","b":"#75808d","g":"#c1a660","n":"#a96152","h":"#ded0ad"}, rows: [
     "................",
     "................",
     "................",
@@ -87433,7 +87433,7 @@ export const ART = {
     "...bbbbbbbbbb...",
     "................",
   ] },
-  "tile-prop-harp": { w: 16, h: 16, pal: {"B":"#ffd873","D":"#8a6a48","L":"#f0e060","A":"#c9a06a","C":"#b0503c"}, rows: [
+  "tile-prop-harp": { w: 16, h: 16, pal: {"B":"#d1bc88","D":"#8e755b","L":"#cac177","A":"#b99b74","C":"#a96152"}, rows: [
     "................",
     "................",
     "....BBBBBBBB....",
@@ -87451,7 +87451,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-haycart": { w: 16, h: 16, pal: {"B":"#cdb684","Y":"#f0e060","W":"#5f5130","w":"#5a3a24","L":"#8a6a48"}, rows: [
+  "tile-prop-haycart": { w: 16, h: 16, pal: {"B":"#bdab85","Y":"#cac177","W":"#726648","w":"#71523d","L":"#8e755b"}, rows: [
     "................",
     "................",
     "................",
@@ -87469,7 +87469,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-healmachine": { w: 16, h: 16, pal: {"a":"#c2c8d4","b":"#3fa08a","c":"#d84040","d":"#5f748f","e":"#6a6a80"}, rows: [
+  "tile-prop-healmachine": { w: 16, h: 16, pal: {"a":"#b0b6c1","b":"#549e8d","c":"#bf5b5b","d":"#6c7c90","e":"#757585"}, rows: [
     "................",
     "..aaaaaaaaaaaa..",
     "..abbbbbbbbbba..",
@@ -87487,7 +87487,7 @@ export const ART = {
     "..aaaaaaaaaaaa..",
     "..eeeeeeeeeeee..",
   ] },
-  "tile-prop-herbdryer": { w: 16, h: 16, pal: {"B":"#67aa54","D":"#2e5e28","L":"#c9a06a","A":"#386e2c","C":"#f0e060"}, rows: [
+  "tile-prop-herbdryer": { w: 16, h: 16, pal: {"B":"#73a167","D":"#467340","L":"#b99b74","A":"#4e7e44","C":"#cac177"}, rows: [
     "................",
     "................",
     "..DDDDDDDDDDDD..",
@@ -87505,7 +87505,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-honeytree": { w: 16, h: 16, pal: {"a":"#5f9a42","b":"#4c7d34","c":"#79b657","d":"#e8a820","k":"#5a3a24"}, rows: [
+  "tile-prop-honeytree": { w: 16, h: 16, pal: {"a":"#6c9956","b":"#5e874b","c":"#80aa68","d":"#bc9a53","k":"#71523d"}, rows: [
     "................",
     "................",
     ".....babcbb.....",
@@ -87523,7 +87523,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-prop-iceboulder": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#d2e8ef"}, rows: [
+  "tile-prop-iceboulder": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#b6d1da"}, rows: [
     "................",
     "................",
     "................",
@@ -87541,7 +87541,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-icecrystal": { w: 16, h: 16, pal: {"B":"#8ae8f0","D":"#2e63b0","L":"#eef7ff","A":"#5a9ae8","C":"#ffd873"}, rows: [
+  "tile-prop-icecrystal": { w: 16, h: 16, pal: {"B":"#8ccdd2","D":"#476faa","L":"#c6d8e9","A":"#7097c7","C":"#d1bc88"}, rows: [
     "................",
     "................",
     ".......BB.......",
@@ -87559,7 +87559,7 @@ export const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
-  "tile-prop-ironarch": { w: 16, h: 16, pal: {"a":"#46586e","b":"#2e3c4c","c":"#9ac8e8"}, rows: [
+  "tile-prop-ironarch": { w: 16, h: 16, pal: {"a":"#59687a","b":"#475564","c":"#90b8d4"}, rows: [
     "................",
     "................",
     "................",
@@ -87577,7 +87577,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-jbell": { w: 16, h: 16, pal: {"b":"#b08a3a","h":"#e8c86a","k":"#4a3020"}, rows: [
+  "tile-prop-jbell": { w: 16, h: 16, pal: {"b":"#a98c51","h":"#cab578","k":"#664b3a"}, rows: [
     "................",
     "................",
     "..kkkkkkkkkkkk..",
@@ -87595,7 +87595,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-jshrine": { w: 16, h: 16, pal: {"r":"#7a4a3a","m":"#4da653","k":"#5a3a24","g":"#7ae8a8","h":"#d8ffe8"}, rows: [
+  "tile-prop-jshrine": { w: 16, h: 16, pal: {"r":"#845d4f","m":"#5fa064","k":"#71523d","g":"#80cea0","h":"#bbe5cc"}, rows: [
     "................",
     "................",
     "..mmmmmmmmmmmm..",
@@ -87613,7 +87613,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-jwell": { w: 16, h: 16, pal: {"s":"#8a8a95","d":"#1a1a2a","k":"#5a3a24","r":"#7a4a3a"}, rows: [
+  "tile-prop-jwell": { w: 16, h: 16, pal: {"s":"#8b8b93","d":"#38384e","k":"#71523d","r":"#845d4f"}, rows: [
     "................",
     "................",
     "...rrrrrrrrrr...",
@@ -87631,7 +87631,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-kelp": { w: 16, h: 16, pal: {"b":"#2a8a64","c":"#54c48e","d":"#a8e8c8"}, rows: [
+  "tile-prop-kelp": { w: 16, h: 16, pal: {"b":"#429172","c":"#66b48e","d":"#99d4b7"}, rows: [
     "................",
     "................",
     "................",
@@ -87649,7 +87649,7 @@ export const ART = {
     ".....b..b..b....",
     "................",
   ] },
-  "tile-prop-kitchen": { w: 16, h: 32, pal: {"B":"#d8c08a","D":"#8a6a48","L":"#f2ddd5","A":"#46586e","C":"#f07830"}, rows: [
+  "tile-prop-kitchen": { w: 16, h: 32, pal: {"B":"#c6b388","D":"#8e755b","L":"#dec1b7","A":"#59687a","C":"#c1835f"}, rows: [
     "................",
     "................",
     "..BBBBBBBBBBBB..",
@@ -87683,7 +87683,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-knittingbasket": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#8a6a48","L":"#e86a8a","A":"#3a7bd5","C":"#f0e060"}, rows: [
+  "tile-prop-knittingbasket": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#8e755b","L":"#ca788d","A":"#5681bd","C":"#cac177"}, rows: [
     "................",
     "................",
     "................",
@@ -87701,7 +87701,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-labdesk": { w: 16, h: 16, pal: {"a":"#c2c8d4","b":"#3a4657","c":"#6fb0ee","d":"#e86a8a","e":"#f5f0dc"}, rows: [
+  "tile-prop-labdesk": { w: 16, h: 16, pal: {"a":"#b0b6c1","b":"#505b6b","c":"#7da6cd","d":"#ca788d","e":"#e1d9ba"}, rows: [
     "................",
     "................",
     "................",
@@ -87719,7 +87719,7 @@ export const ART = {
     "..bb........bb..",
     "................",
   ] },
-  "tile-prop-labmachine": { w: 16, h: 16, pal: {"a":"#5f748f","b":"#3a4657","c":"#d84040","d":"#f0e060","e":"#6fb0ee","f":"#46586e","g":"#6a6a80"}, rows: [
+  "tile-prop-labmachine": { w: 16, h: 16, pal: {"a":"#6c7c90","b":"#505b6b","c":"#bf5b5b","d":"#cac177","e":"#7da6cd","f":"#59687a","g":"#757585"}, rows: [
     "................",
     "..aaaaaaaaaaag..",
     "..aaaaaaaaaaag..",
@@ -87737,7 +87737,7 @@ export const ART = {
     "..aaaaaaaaaaaa..",
     "..ffffffffffff..",
   ] },
-  "tile-prop-labtank": { w: 16, h: 16, pal: {"a":"#6fb0ee","b":"#3fa08a","c":"#1f5a4c","d":"#eef7ff","e":"#3a4657"}, rows: [
+  "tile-prop-labtank": { w: 16, h: 16, pal: {"a":"#7da6cd","b":"#549e8d","c":"#387264","d":"#c6d8e9","e":"#505b6b"}, rows: [
     "................",
     "....aaaaaaaa....",
     "....aeeeeeea....",
@@ -87755,7 +87755,7 @@ export const ART = {
     "...eeeeeeeeee...",
     "...eeeeeeeeee...",
   ] },
-  "tile-prop-lanternpost": { w: 16, h: 16, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#ffd873","C":"#f07830"}, rows: [
+  "tile-prop-lanternpost": { w: 16, h: 16, pal: {"B":"#757585","D":"#3f3f49","L":"#96969f","A":"#d1bc88","C":"#c1835f"}, rows: [
     "................",
     ".....DDDDDD.....",
     ".....DAAAAD.....",
@@ -87773,7 +87773,7 @@ export const ART = {
     ".......BB.......",
     "....DDDDDDDD....",
   ] },
-  "tile-prop-leafplanter": { w: 16, h: 16, pal: {"B":"#67aa54","D":"#2e5e28","L":"#a9e8a8","A":"#386e2c","C":"#b0503c"}, rows: [
+  "tile-prop-leafplanter": { w: 16, h: 16, pal: {"B":"#73a167","D":"#467340","L":"#9ad499","A":"#4e7e44","C":"#a96152"}, rows: [
     "................",
     "................",
     "................",
@@ -87791,7 +87791,7 @@ export const ART = {
     "..AAAAAAAAAAAA..",
     "................",
   ] },
-  "tile-prop-leaguefountain": { w: 16, h: 32, pal: {"B":"#5a9ae8","D":"#2e63b0","L":"#8ae8f0","A":"#eef7ff","C":"#c2c8d4"}, rows: [
+  "tile-prop-leaguefountain": { w: 16, h: 32, pal: {"B":"#7097c7","D":"#476faa","L":"#8ccdd2","A":"#c6d8e9","C":"#b0b6c1"}, rows: [
     "................",
     ".......AA.......",
     "......CAAC......",
@@ -87825,7 +87825,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-lifering": { w: 16, h: 16, pal: {"B":"#eef7ff","D":"#8a8aa0","L":"#fdfdf8","A":"#e84c3c","C":"#b0503c"}, rows: [
+  "tile-prop-lifering": { w: 16, h: 16, pal: {"B":"#c6d8e9","D":"#8b8b9b","L":"#e9e9cc","A":"#c16a61","C":"#a96152"}, rows: [
     "................",
     "................",
     "................",
@@ -87843,7 +87843,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-mapdesk": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
+  "tile-prop-mapdesk": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -87861,7 +87861,7 @@ export const ART = {
     "..DD........DD..",
     "................",
   ] },
-  "tile-prop-maple": { w: 16, h: 16, pal: {"a":"#c05038","b":"#e07840","c":"#f0a848","d":"#a03828","k":"#4a3020"}, rows: [
+  "tile-prop-maple": { w: 16, h: 16, pal: {"a":"#b26352","b":"#c1815f","c":"#c59f6b","d":"#a04e41","k":"#664b3a"}, rows: [
     "................",
     ".....abbcac.....",
     "...aaacbaabca...",
@@ -87879,7 +87879,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-prop-marshreed": { w: 16, h: 16, pal: {"a":"#5d8a4a","b":"#8a6a3a","c":"#47603a","d":"#d9a441"}, rows: [
+  "tile-prop-marshreed": { w: 16, h: 16, pal: {"a":"#6b8e5c","b":"#8f7650","c":"#5b7150","d":"#bf9d5c"}, rows: [
     "................",
     "................",
     "....b.b.b.b.b...",
@@ -87897,7 +87897,7 @@ export const ART = {
     "..cccccccccccc..",
     "..cccccccccccc..",
   ] },
-  "tile-prop-martshelf": { w: 16, h: 16, pal: {"a":"#5f748f","b":"#c2c8d4","c":"#d84040","d":"#f0e060","e":"#6fb0ee","f":"#e86a8a"}, rows: [
+  "tile-prop-martshelf": { w: 16, h: 16, pal: {"a":"#6c7c90","b":"#b0b6c1","c":"#bf5b5b","d":"#cac177","e":"#7da6cd","f":"#ca788d"}, rows: [
     "................",
     ".bbbbbbbbbbbbbb.",
     ".aaaaaaaaaaaaaa.",
@@ -87915,7 +87915,7 @@ export const ART = {
     ".aaaaaaaaaaaaaa.",
     ".bbbbbbbbbbbbbb.",
   ] },
-  "tile-prop-medcabinet": { w: 16, h: 32, pal: {"B":"#e8e4f0","D":"#8a8aa0","L":"#fdfdf8","A":"#e86a8a","C":"#3fa08a"}, rows: [
+  "tile-prop-medcabinet": { w: 16, h: 32, pal: {"B":"#cbc5d8","D":"#8b8b9b","L":"#e9e9cc","A":"#ca788d","C":"#549e8d"}, rows: [
     "................",
     "................",
     "..DLLLLLLLLLLD..",
@@ -87949,7 +87949,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-memorial": { w: 16, h: 16, pal: {"a":"#8a8aa0","b":"#6a6a80","c":"#e86a8a","d":"#6a6a80"}, rows: [
+  "tile-prop-memorial": { w: 16, h: 16, pal: {"a":"#8b8b9b","b":"#757585","c":"#ca788d","d":"#757585"}, rows: [
     "................",
     "................",
     "......aaaa......",
@@ -87967,7 +87967,7 @@ export const ART = {
     "...dddddddddd...",
     "...dddddddddd...",
   ] },
-  "tile-prop-meteorstone": { w: 16, h: 16, pal: {"a":"#6a6f85","b":"#484c60","c":"#a8d8e8"}, rows: [
+  "tile-prop-meteorstone": { w: 16, h: 16, pal: {"a":"#747888","b":"#5b5f70","c":"#99c6d4"}, rows: [
     "................",
     "................",
     "................",
@@ -87985,7 +87985,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-miningcart": { w: 16, h: 16, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#b09468","C":"#54452f"}, rows: [
+  "tile-prop-miningcart": { w: 16, h: 16, pal: {"B":"#757585","D":"#3f3f49","L":"#96969f","A":"#a69274","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -88003,7 +88003,7 @@ export const ART = {
     "...DDD....DDD...",
     "...DDD....DDD...",
   ] },
-  "tile-prop-officedesk": { w: 16, h: 16, pal: {"a":"#3a4657","b":"#3fa08a","c":"#f5f0dc","d":"#46586e","e":"#3a4657"}, rows: [
+  "tile-prop-officedesk": { w: 16, h: 16, pal: {"a":"#505b6b","b":"#549e8d","c":"#e1d9ba","d":"#59687a","e":"#505b6b"}, rows: [
     "................",
     "................",
     ".....aaaaaa.....",
@@ -88021,7 +88021,7 @@ export const ART = {
     "..ee........ee..",
     "................",
   ] },
-  "tile-prop-originstone": { w: 16, h: 16, pal: {"a":"#d8d4c8","b":"#a8a498","c":"#8a7ab0"}, rows: [
+  "tile-prop-originstone": { w: 16, h: 16, pal: {"a":"#c4c0b5","b":"#a19e95","c":"#8b80a6"}, rows: [
     "................",
     "................",
     ".....caaaaa.....",
@@ -88039,7 +88039,7 @@ export const ART = {
     ".....bbbbbb.....",
     "................",
   ] },
-  "tile-prop-palm": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","l":"#54a048","k":"#5a3a24","w":"#7a5a38","n":"#8a6a42","s":"#386e2c"}, rows: [
+  "tile-prop-palm": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","l":"#649d5b","k":"#71523d","w":"#846a4e","n":"#8e7556","s":"#4e7e44"}, rows: [
     "................",
     "...lt......tl...",
     "...u.l....l.u...",
@@ -88057,7 +88057,7 @@ export const ART = {
     "........sss.....",
     ".........ssss...",
   ] },
-  "tile-prop-pcdesk": { w: 16, h: 16, pal: {"a":"#3a4657","b":"#6fb0ee","c":"#eef7ff","d":"#46586e","e":"#7a5a38"}, rows: [
+  "tile-prop-pcdesk": { w: 16, h: 16, pal: {"a":"#505b6b","b":"#7da6cd","c":"#c6d8e9","d":"#59687a","e":"#846a4e"}, rows: [
     "................",
     "................",
     "....aaaaaaaa....",
@@ -88075,7 +88075,7 @@ export const ART = {
     "..dd........dd..",
     "................",
   ] },
-  "tile-prop-piano": { w: 16, h: 16, pal: {"B":"#202028","D":"#202028","L":"#46586e","A":"#eef7ff","C":"#ffd873"}, rows: [
+  "tile-prop-piano": { w: 16, h: 16, pal: {"B":"#3f3f49","D":"#3f3f49","L":"#59687a","A":"#c6d8e9","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -88093,7 +88093,7 @@ export const ART = {
     "..DD........DD..",
     "..DD........DD..",
   ] },
-  "tile-prop-pipecluster": { w: 16, h: 16, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#f07830","C":"#46586e"}, rows: [
+  "tile-prop-pipecluster": { w: 16, h: 16, pal: {"B":"#757585","D":"#3f3f49","L":"#96969f","A":"#c1835f","C":"#59687a"}, rows: [
     "................",
     "................",
     "...BBB.AA..BBB..",
@@ -88111,7 +88111,7 @@ export const ART = {
     "...BBB.AA..BBB..",
     "................",
   ] },
-  "tile-prop-plant": { w: 16, h: 16, pal: {"a":"#54a048","b":"#3e7a34","c":"#d0704f","d":"#7a3226"}, rows: [
+  "tile-prop-plant": { w: 16, h: 16, pal: {"a":"#649d5b","b":"#53854b","c":"#bd7962","d":"#87493f"}, rows: [
     "................",
     "................",
     "......abaa......",
@@ -88129,7 +88129,7 @@ export const ART = {
     ".....cccccc.....",
     ".....dddddd.....",
   ] },
-  "tile-prop-planter": { w: 16, h: 16, pal: {"R":"#b0503c","r":"#823936","w":"#5a3a24","L":"#8a6a48","G":"#3e7a34","g":"#2e5e28","A":"#e86a8a","B":"#f0e060"}, rows: [
+  "tile-prop-planter": { w: 16, h: 16, pal: {"R":"#a96152","r":"#8a4f4c","w":"#71523d","L":"#8e755b","G":"#53854b","g":"#467340","A":"#ca788d","B":"#cac177"}, rows: [
     "................",
     "................",
     "................",
@@ -88147,7 +88147,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-plantvat": { w: 16, h: 32, pal: {"B":"#3fa08a","D":"#2e5e28","L":"#8ae8f0","A":"#67aa54","C":"#f0e060"}, rows: [
+  "tile-prop-plantvat": { w: 16, h: 32, pal: {"B":"#549e8d","D":"#467340","L":"#8ccdd2","A":"#73a167","C":"#cac177"}, rows: [
     "................",
     "................",
     "................",
@@ -88181,7 +88181,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-podium": { w: 16, h: 16, pal: {"a":"#ffd873","b":"#7a5a38","c":"#ffd873","d":"#5a3a24"}, rows: [
+  "tile-prop-podium": { w: 16, h: 16, pal: {"a":"#d1bc88","b":"#846a4e","c":"#d1bc88","d":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -88199,7 +88199,7 @@ export const ART = {
     "...dddddddddd...",
     "................",
   ] },
-  "tile-prop-poolblock": { w: 16, h: 16, pal: {"B":"#5a9ae8","D":"#2e63b0","L":"#8ae8f0","A":"#eef7ff","C":"#3a7bd5"}, rows: [
+  "tile-prop-poolblock": { w: 16, h: 16, pal: {"B":"#7097c7","D":"#476faa","L":"#8ccdd2","A":"#c6d8e9","C":"#5681bd"}, rows: [
     "................",
     "................",
     "................",
@@ -88217,7 +88217,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-porthole": { w: 16, h: 16, pal: {"a":"#7a5a38","b":"#5a3a24","c":"#ffd873","d":"#3a7bd5"}, rows: [
+  "tile-prop-porthole": { w: 16, h: 16, pal: {"a":"#846a4e","b":"#71523d","c":"#d1bc88","d":"#5681bd"}, rows: [
     "aaaaabaaaaabaaaa",
     "aaaaabaaaaabaaaa",
     "aaaaabaaaaabaaaa",
@@ -88235,7 +88235,7 @@ export const ART = {
     "aaaaabaaaaabaaaa",
     "aaaaabaaaaabaaaa",
   ] },
-  "tile-prop-postbox": { w: 16, h: 16, pal: {"R":"#d84040","r":"#823936","w":"#5a3a24","L":"#8a6a48","k":"#202028","F":"#f5f0dc"}, rows: [
+  "tile-prop-postbox": { w: 16, h: 16, pal: {"R":"#bf5b5b","r":"#8a4f4c","w":"#71523d","L":"#8e755b","k":"#3f3f49","F":"#e1d9ba"}, rows: [
     "................",
     "................",
     "................",
@@ -88253,7 +88253,7 @@ export const ART = {
     ".......ww.......",
     ".....wwwwww.....",
   ] },
-  "tile-prop-pottedtree": { w: 16, h: 16, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","w":"#5a3a24","L":"#8a6a48","R":"#b0503c","r":"#823936"}, rows: [
+  "tile-prop-pottedtree": { w: 16, h: 16, pal: {"G":"#53854b","g":"#467340","H":"#649d5b","w":"#71523d","L":"#8e755b","R":"#a96152","r":"#8a4f4c"}, rows: [
     "................",
     "................",
     "......HHHH......",
@@ -88271,7 +88271,7 @@ export const ART = {
     ".....RRRRRR.....",
     "......rrrr......",
   ] },
-  "tile-prop-potterswheel": { w: 16, h: 16, pal: {"B":"#8a8aa0","D":"#46586e","L":"#b0503c","A":"#c9a06a","C":"#202028"}, rows: [
+  "tile-prop-potterswheel": { w: 16, h: 16, pal: {"B":"#8b8b9b","D":"#59687a","L":"#a96152","A":"#b99b74","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -88289,7 +88289,7 @@ export const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
-  "tile-prop-psypod": { w: 16, h: 16, pal: {"B":"#8a7a9a","D":"#594a72","L":"#e8e4f0","A":"#7a6a8a","C":"#ffd873"}, rows: [
+  "tile-prop-psypod": { w: 16, h: 16, pal: {"B":"#8b8097","D":"#695c7d","L":"#cbc5d8","A":"#80758c","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -88307,7 +88307,7 @@ export const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
-  "tile-prop-quiltframe": { w: 16, h: 16, pal: {"B":"#a8845c","D":"#54452f","L":"#d8b47e","A":"#b0503c","C":"#202028"}, rows: [
+  "tile-prop-quiltframe": { w: 16, h: 16, pal: {"B":"#a0876c","D":"#6a5c47","L":"#c5a980","A":"#a96152","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -88325,7 +88325,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-redcarpet": { w: 16, h: 16, pal: {"B":"#b0503c","D":"#54452f","A":"#ffd873"}, rows: [
+  "tile-prop-redcarpet": { w: 16, h: 16, pal: {"B":"#a96152","D":"#6a5c47","A":"#d1bc88"}, rows: [
     "DDDDBBDDDBBBDDDD",
     "DBBBBBBBBBBBBBBD",
     "BBAAAAAAAAAAAABB",
@@ -88343,7 +88343,7 @@ export const ART = {
     "BBBBBBBBBBBBBBBB",
     "BBBBDDBBBDDBBBBB",
   ] },
-  "tile-prop-rockinghorse": { w: 16, h: 16, pal: {"B":"#b0503c","D":"#7a3226","L":"#d69459","A":"#3a7bd5","C":"#202028"}, rows: [
+  "tile-prop-rockinghorse": { w: 16, h: 16, pal: {"B":"#a96152","D":"#87493f","L":"#c29268","A":"#5681bd","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -88361,7 +88361,7 @@ export const ART = {
     "..DDDDDDDDDDDD..",
     "................",
   ] },
-  "tile-prop-rockpress": { w: 16, h: 32, pal: {"B":"#9a9aa5","D":"#6a6a80","L":"#c2c8d4","A":"#46586e","C":"#202028"}, rows: [
+  "tile-prop-rockpress": { w: 16, h: 32, pal: {"B":"#96969f","D":"#757585","L":"#b0b6c1","A":"#59687a","C":"#3f3f49"}, rows: [
     "................",
     "......DDDD......",
     "......DDDD......",
@@ -88395,7 +88395,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-routearch": { w: 16, h: 32, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","R":"#d84040","r":"#823936","k":"#202028"}, rows: [
+  "tile-prop-routearch": { w: 16, h: 32, pal: {"W":"#726648","w":"#71523d","L":"#8e755b","R":"#bf5b5b","r":"#8a4f4c","k":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -88429,7 +88429,7 @@ export const ART = {
     "..Www...........",
     ".wwwww..........",
   ] },
-  "tile-prop-rubble": { w: 16, h: 16, pal: {"B":"#9a9aa5","D":"#6a6a80","L":"#c2c8d4","A":"#8a7a54","C":"#54452f"}, rows: [
+  "tile-prop-rubble": { w: 16, h: 16, pal: {"B":"#96969f","D":"#757585","L":"#b0b6c1","A":"#8d8164","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -88447,7 +88447,7 @@ export const ART = {
     "......DDDD......",
     "................",
   ] },
-  "tile-prop-rug": { w: 16, h: 16, pal: {"a":"#7a3226","b":"#b0503c","c":"#ffd873"}, rows: [
+  "tile-prop-rug": { w: 16, h: 16, pal: {"a":"#87493f","b":"#a96152","c":"#d1bc88"}, rows: [
     "aaaaaaaaaaaaaaaa",
     "abbbbbbbbbbbbbba",
     "abbbbbbbbbbbbbba",
@@ -88465,7 +88465,7 @@ export const ART = {
     "abbbbbbbbbbbbbba",
     "aaaaaaaaaaaaaaaa",
   ] },
-  "tile-prop-rug2": { w: 16, h: 16, pal: {"B":"#3a7bd5","D":"#54452f","A":"#ffd873"}, rows: [
+  "tile-prop-rug2": { w: 16, h: 16, pal: {"B":"#5681bd","D":"#6a5c47","A":"#d1bc88"}, rows: [
     "DDBBBBDDBBBBBBBB",
     "BBBBBBBBBBBBBBBB",
     "BBAAAAAAAAAAAABB",
@@ -88483,7 +88483,7 @@ export const ART = {
     "DBBBBBBBBBBBBBBD",
     "DDBBBBBBBBBBBBDD",
   ] },
-  "tile-prop-rug3": { w: 16, h: 16, pal: {"B":"#386e2c","D":"#54452f","A":"#f0e060"}, rows: [
+  "tile-prop-rug3": { w: 16, h: 16, pal: {"B":"#4e7e44","D":"#6a5c47","A":"#cac177"}, rows: [
     "DDBBBBBBBDDBDDDB",
     "DBBBBBBBBBBBBBBB",
     "BBAAAAAAAAAAAABB",
@@ -88501,7 +88501,7 @@ export const ART = {
     "DBBBBBBBBBBBBBBB",
     "DDBBBBDDBBBBBDDB",
   ] },
-  "tile-prop-sacks": { w: 16, h: 16, pal: {"B":"#cdb684","b":"#8a6a48"}, rows: [
+  "tile-prop-sacks": { w: 16, h: 16, pal: {"B":"#bdab85","b":"#8e755b"}, rows: [
     "................",
     "................",
     "................",
@@ -88519,7 +88519,7 @@ export const ART = {
     "...BBBBBBBBBB...",
     "................",
   ] },
-  "tile-prop-sandcolumn": { w: 16, h: 32, pal: {"B":"#d8c08a","D":"#8a6a48","L":"#f2ddd5","A":"#c9a06a","C":"#54452f"}, rows: [
+  "tile-prop-sandcolumn": { w: 16, h: 32, pal: {"B":"#c6b388","D":"#8e755b","L":"#dec1b7","A":"#b99b74","C":"#6a5c47"}, rows: [
     "................",
     "................",
     ".....LLLLLL.....",
@@ -88553,7 +88553,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-sandcrate": { w: 16, h: 16, pal: {"B":"#a8845c","D":"#54452f","L":"#d8b47e","A":"#b0503c","C":"#202028"}, rows: [
+  "tile-prop-sandcrate": { w: 16, h: 16, pal: {"B":"#a0876c","D":"#6a5c47","L":"#c5a980","A":"#a96152","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -88571,7 +88571,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-sealstone": { w: 16, h: 16, pal: {"a":"#9aa0a8","b":"#62686f","c":"#3ac8b8"}, rows: [
+  "tile-prop-sealstone": { w: 16, h: 16, pal: {"a":"#969ba1","b":"#6f7479","c":"#55b5aa"}, rows: [
     "................",
     "................",
     "....bbbbbbbb....",
@@ -88589,7 +88589,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-seedvault": { w: 16, h: 16, pal: {"B":"#8a6a48","D":"#54452f","L":"#c9a06a","A":"#f0e060","C":"#67aa54"}, rows: [
+  "tile-prop-seedvault": { w: 16, h: 16, pal: {"B":"#8e755b","D":"#6a5c47","L":"#b99b74","A":"#cac177","C":"#73a167"}, rows: [
     "................",
     "................",
     "................",
@@ -88607,7 +88607,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-serverrack": { w: 16, h: 32, pal: {"B":"#46586e","D":"#202028","L":"#8a8aa0","A":"#3fa08a","C":"#f0e060"}, rows: [
+  "tile-prop-serverrack": { w: 16, h: 32, pal: {"B":"#59687a","D":"#3f3f49","L":"#8b8b9b","A":"#549e8d","C":"#cac177"}, rows: [
     "................",
     "..DLLLLLLLLLLD..",
     "..DLLLLLLLLLLD..",
@@ -88641,7 +88641,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-sewingtable": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
+  "tile-prop-sewingtable": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
     ".....AAAAAA.....",
@@ -88659,7 +88659,7 @@ export const ART = {
     "...DD......DD...",
     "................",
   ] },
-  "tile-prop-shelf": { w: 16, h: 16, pal: {"a":"#5a3a24","b":"#7a5a38","c":"#d84040","d":"#3a7bd5","e":"#3fa08a","f":"#f0e060","g":"#e86a8a","h":"#54a048"}, rows: [
+  "tile-prop-shelf": { w: 16, h: 16, pal: {"a":"#71523d","b":"#846a4e","c":"#bf5b5b","d":"#5681bd","e":"#549e8d","f":"#cac177","g":"#ca788d","h":"#649d5b"}, rows: [
     "................",
     ".aaaaaaaaaaaaaa.",
     ".abbbbbbbbbbbba.",
@@ -88677,7 +88677,7 @@ export const ART = {
     ".aaaaaaaaaaaaaa.",
     ".aaaaaaaaaaaaaa.",
   ] },
-  "tile-prop-shelfend": { w: 16, h: 16, pal: {"B":"#a8845c","D":"#54452f","L":"#d8b47e","A":"#b0503c","C":"#202028"}, rows: [
+  "tile-prop-shelfend": { w: 16, h: 16, pal: {"B":"#a0876c","D":"#6a5c47","L":"#c5a980","A":"#a96152","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "..DLLLLLLLLLLD..",
@@ -88695,7 +88695,7 @@ export const ART = {
     "..DDDDDDDDDDDD..",
     "................",
   ] },
-  "tile-prop-shrine": { w: 16, h: 32, pal: {"B":"#8a7a9a","D":"#54452f","L":"#e8e4f0","A":"#ffd873","C":"#e86a8a"}, rows: [
+  "tile-prop-shrine": { w: 16, h: 32, pal: {"B":"#8b8097","D":"#6a5c47","L":"#cbc5d8","A":"#d1bc88","C":"#ca788d"}, rows: [
     "................",
     "................",
     "..DDDDDDDDDDDD..",
@@ -88729,7 +88729,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-shrinegate": { w: 16, h: 16, pal: {"a":"#8a97a8","b":"#6a7a8c","m":"#4da653"}, rows: [
+  "tile-prop-shrinegate": { w: 16, h: 16, pal: {"a":"#8b94a1","b":"#75808d","m":"#5fa064"}, rows: [
     "................",
     ".bbbmbbbbbbbbbb.",
     "..aaaaammaaaaa..",
@@ -88747,7 +88747,7 @@ export const ART = {
     "..ba........ab..",
     "................",
   ] },
-  "tile-prop-shroomcap": { w: 16, h: 16, pal: {"B":"#e8e4f0","D":"#8a7a9a","L":"#fdfdf8","A":"#e86a8a","C":"#7a6a8a"}, rows: [
+  "tile-prop-shroomcap": { w: 16, h: 16, pal: {"B":"#cbc5d8","D":"#8b8097","L":"#e9e9cc","A":"#ca788d","C":"#80758c"}, rows: [
     "................",
     "................",
     "................",
@@ -88765,7 +88765,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-shroomglow": { w: 16, h: 16, pal: {"B":"#3fa08a","D":"#2e5e28","L":"#8ae8f0","A":"#e8e4f0","C":"#ffd873"}, rows: [
+  "tile-prop-shroomglow": { w: 16, h: 16, pal: {"B":"#549e8d","D":"#467340","L":"#8ccdd2","A":"#cbc5d8","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -88783,7 +88783,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-signpost": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48"}, rows: [
+  "tile-prop-signpost": { w: 16, h: 16, pal: {"W":"#726648","w":"#71523d","L":"#8e755b"}, rows: [
     "................",
     "................",
     "................",
@@ -88801,7 +88801,7 @@ export const ART = {
     ".......ww.......",
     "......wwww......",
   ] },
-  "tile-prop-slotmachine": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#ffd873","c":"#d84040","d":"#eef7ff","e":"#f0e060","f":"#3a4657"}, rows: [
+  "tile-prop-slotmachine": { w: 16, h: 16, pal: {"a":"#a96152","b":"#d1bc88","c":"#bf5b5b","d":"#c6d8e9","e":"#cac177","f":"#505b6b"}, rows: [
     "................",
     "....bbbbbbbb....",
     "...abbcbbcbba...",
@@ -88819,7 +88819,7 @@ export const ART = {
     "...aaaaaaaaaa...",
     "...ffffffffff...",
   ] },
-  "tile-prop-snackmachine": { w: 16, h: 16, pal: {"B":"#e86a8a","D":"#96566b","L":"#f2ddd5","A":"#f0e060","C":"#3a7bd5"}, rows: [
+  "tile-prop-snackmachine": { w: 16, h: 16, pal: {"B":"#ca788d","D":"#956675","L":"#dec1b7","A":"#cac177","C":"#5681bd"}, rows: [
     "................",
     "...DLLLLLLLLD...",
     "...DLLLLLLLLD...",
@@ -88837,7 +88837,7 @@ export const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
-  "tile-prop-sofa": { w: 16, h: 16, pal: {"a":"#e8b4c4","b":"#c97e97","c":"#c97e97","d":"#9e5570"}, rows: [
+  "tile-prop-sofa": { w: 16, h: 16, pal: {"a":"#d4a2b1","b":"#b98194","c":"#b98194","d":"#9b6579"}, rows: [
     "................",
     "................",
     "................",
@@ -88855,7 +88855,7 @@ export const ART = {
     "..dddddddddddd..",
     "................",
   ] },
-  "tile-prop-solarpanel": { w: 16, h: 16, pal: {"a":"#2e4a7a","b":"#1e3456","c":"#9ac8e8"}, rows: [
+  "tile-prop-solarpanel": { w: 16, h: 16, pal: {"a":"#455d86","b":"#374d70","c":"#90b8d4"}, rows: [
     "aaaabaaaabaaaaba",
     "aaaabaaaabaaaaba",
     "aacabaaaabaaaaba",
@@ -88873,7 +88873,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabaaaabaaaaba",
   ] },
-  "tile-prop-spicerack": { w: 16, h: 16, pal: {"B":"#8a5a30","D":"#54452f","L":"#c9a06a","A":"#e84c3c","C":"#f0e060"}, rows: [
+  "tile-prop-spicerack": { w: 16, h: 16, pal: {"B":"#916a47","D":"#6a5c47","L":"#b99b74","A":"#c16a61","C":"#cac177"}, rows: [
     "................",
     "................",
     "...DLLLLLLLLD...",
@@ -88891,7 +88891,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-stadiumcrest": { w: 16, h: 16, pal: {"a":"#8a97a8","b":"#6a7a8c","g":"#e8b83a","r":"#b0503c"}, rows: [
+  "tile-prop-stadiumcrest": { w: 16, h: 16, pal: {"a":"#8b94a1","b":"#75808d","g":"#c1a660","r":"#a96152"}, rows: [
     "................",
     "................",
     "................",
@@ -88909,7 +88909,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-stall": { w: 16, h: 16, pal: {"R":"#d84040","r":"#823936","F":"#f5f0dc","W":"#5f5130","w":"#5a3a24","L":"#8a6a48","A":"#e86a8a","B":"#f0e060","G":"#3e7a34"}, rows: [
+  "tile-prop-stall": { w: 16, h: 16, pal: {"R":"#bf5b5b","r":"#8a4f4c","F":"#e1d9ba","W":"#726648","w":"#71523d","L":"#8e755b","A":"#ca788d","B":"#cac177","G":"#53854b"}, rows: [
     "................",
     "................",
     "................",
@@ -88927,7 +88927,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-starglobe": { w: 16, h: 16, pal: {"B":"#3a7bd5","D":"#2e63b0","L":"#8ae8f0","A":"#ffd873","C":"#54452f"}, rows: [
+  "tile-prop-starglobe": { w: 16, h: 16, pal: {"B":"#5681bd","D":"#476faa","L":"#8ccdd2","A":"#d1bc88","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "....BBBBBBBB....",
@@ -88945,7 +88945,7 @@ export const ART = {
     "....DDDDDDDD....",
     "................",
   ] },
-  "tile-prop-starrock": { w: 16, h: 16, pal: {"B":"#9a9aa5","D":"#6a6a80","L":"#c2c8d4","A":"#ffd873","C":"#54452f"}, rows: [
+  "tile-prop-starrock": { w: 16, h: 16, pal: {"B":"#96969f","D":"#757585","L":"#b0b6c1","A":"#d1bc88","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -88963,7 +88963,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-statue": { w: 16, h: 16, pal: {"a":"#8a8aa0","b":"#eef7ff","c":"#c2c8d4","d":"#6a6a80"}, rows: [
+  "tile-prop-statue": { w: 16, h: 16, pal: {"a":"#8b8b9b","b":"#c6d8e9","c":"#b0b6c1","d":"#757585"}, rows: [
     "................",
     "......aaaa......",
     "......abaa......",
@@ -88981,7 +88981,7 @@ export const ART = {
     "..dddddddddddd..",
     "................",
   ] },
-  "tile-prop-stonebell": { w: 16, h: 16, pal: {"B":"#8a8aa0","D":"#54452f","L":"#c2c8d4","A":"#6a6a80","C":"#ffd873"}, rows: [
+  "tile-prop-stonebell": { w: 16, h: 16, pal: {"B":"#8b8b9b","D":"#6a5c47","L":"#b0b6c1","A":"#757585","C":"#d1bc88"}, rows: [
     "................",
     "................",
     "................",
@@ -88999,7 +88999,7 @@ export const ART = {
     ".......CC.......",
     "................",
   ] },
-  "tile-prop-stool": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#ffd873","c":"#5a3a24"}, rows: [
+  "tile-prop-stool": { w: 16, h: 16, pal: {"a":"#a96152","b":"#d1bc88","c":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -89017,7 +89017,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-sundial": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","B":"#b29540"}, rows: [
+  "tile-prop-sundial": { w: 16, h: 16, pal: {"S":"#96969f","s":"#7c7c87","T":"#a5abb7","B":"#aa9456"}, rows: [
     "................",
     "................",
     "................",
@@ -89035,7 +89035,7 @@ export const ART = {
     ".....ssssss.....",
     "................",
   ] },
-  "tile-prop-supportbeam": { w: 16, h: 16, pal: {"B":"#8a5a30","D":"#54452f","L":"#c9a06a","A":"#5f5130","C":"#202028"}, rows: [
+  "tile-prop-supportbeam": { w: 16, h: 16, pal: {"B":"#916a47","D":"#6a5c47","L":"#b99b74","A":"#726648","C":"#3f3f49"}, rows: [
     "................",
     "..LLLLLLLLLLLL..",
     "..LLLLLLLLLLLL..",
@@ -89053,7 +89053,7 @@ export const ART = {
     "..BBB......BBB..",
     "................",
   ] },
-  "tile-prop-switchboard": { w: 16, h: 16, pal: {"B":"#46586e","D":"#202028","L":"#8a8aa0","A":"#e84c3c","C":"#f0e060"}, rows: [
+  "tile-prop-switchboard": { w: 16, h: 16, pal: {"B":"#59687a","D":"#3f3f49","L":"#8b8b9b","A":"#c16a61","C":"#cac177"}, rows: [
     "................",
     "................",
     "..DLLLLLLLLLLD..",
@@ -89071,7 +89071,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-table": { w: 16, h: 16, pal: {"a":"#c9a06a","b":"#a87f4e","c":"#5a3a24","d":"#d84040"}, rows: [
+  "tile-prop-table": { w: 16, h: 16, pal: {"a":"#b99b74","b":"#a18461","c":"#71523d","d":"#bf5b5b"}, rows: [
     "................",
     "................",
     "................",
@@ -89089,7 +89089,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-tallbooks": { w: 16, h: 32, pal: {"B":"#5f5130","D":"#54452f","L":"#8a5a30","A":"#e86a8a","C":"#3a7bd5"}, rows: [
+  "tile-prop-tallbooks": { w: 16, h: 32, pal: {"B":"#726648","D":"#6a5c47","L":"#916a47","A":"#ca788d","C":"#5681bd"}, rows: [
     "................",
     "..DLLLLLLLLLLD..",
     "..DCCLAALCCLAA..",
@@ -89123,7 +89123,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-teacart": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
+  "tile-prop-teacart": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -89141,7 +89141,7 @@ export const ART = {
     "...AA......AA...",
     "...AA......AA...",
   ] },
-  "tile-prop-telescope": { w: 16, h: 16, pal: {"B":"#8a8aa0","D":"#46586e","L":"#c2c8d4","A":"#ffd873","C":"#202028"}, rows: [
+  "tile-prop-telescope": { w: 16, h: 16, pal: {"B":"#8b8b9b","D":"#59687a","L":"#b0b6c1","A":"#d1bc88","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "...........AAA..",
@@ -89159,7 +89159,7 @@ export const ART = {
     "...DD...DD......",
     "...DD...DD......",
   ] },
-  "tile-prop-thornpost": { w: 16, h: 16, pal: {"B":"#2e5e28","D":"#202028","L":"#386e2c","A":"#7a6a8a","C":"#3fa08a"}, rows: [
+  "tile-prop-thornpost": { w: 16, h: 16, pal: {"B":"#467340","D":"#3f3f49","L":"#4e7e44","A":"#80758c","C":"#549e8d"}, rows: [
     "................",
     "................",
     ".......BB.......",
@@ -89177,7 +89177,7 @@ export const ART = {
     "....DDDDDDDD....",
     "................",
   ] },
-  "tile-prop-throne": { w: 16, h: 16, pal: {"a":"#d84040","b":"#ffd873","c":"#ffd873","d":"#7a3226","e":"#6a4a7a"}, rows: [
+  "tile-prop-throne": { w: 16, h: 16, pal: {"a":"#bf5b5b","b":"#d1bc88","c":"#d1bc88","d":"#87493f","e":"#765c83"}, rows: [
     "................",
     "....baaaaaab....",
     "....baaccaab....",
@@ -89195,7 +89195,7 @@ export const ART = {
     "..eeeeeeeeeeee..",
     "................",
   ] },
-  "tile-prop-tombstone": { w: 16, h: 16, pal: {"B":"#9a9aa5","D":"#6a6a80","L":"#c2c8d4","A":"#54452f","C":"#e8e4f0"}, rows: [
+  "tile-prop-tombstone": { w: 16, h: 16, pal: {"B":"#96969f","D":"#757585","L":"#b0b6c1","A":"#6a5c47","C":"#cbc5d8"}, rows: [
     "................",
     "................",
     ".....BBBBBB.....",
@@ -89213,7 +89213,7 @@ export const ART = {
     "...DDDDDDDDDD...",
     "................",
   ] },
-  "tile-prop-toolbench": { w: 16, h: 16, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#f07830","C":"#e84c3c"}, rows: [
+  "tile-prop-toolbench": { w: 16, h: 16, pal: {"B":"#757585","D":"#3f3f49","L":"#96969f","A":"#c1835f","C":"#c16a61"}, rows: [
     "................",
     "................",
     "................",
@@ -89231,7 +89231,7 @@ export const ART = {
     "..DD........DD..",
     "................",
   ] },
-  "tile-prop-torchpost": { w: 16, h: 16, pal: {"B":"#8a5a30","D":"#54452f","L":"#c9a06a","A":"#f07830","C":"#ffd873"}, rows: [
+  "tile-prop-torchpost": { w: 16, h: 16, pal: {"B":"#916a47","D":"#6a5c47","L":"#b99b74","A":"#c1835f","C":"#d1bc88"}, rows: [
     "................",
     "......AAAA......",
     ".....DACCAD.....",
@@ -89249,7 +89249,7 @@ export const ART = {
     ".......BB.......",
     "................",
   ] },
-  "tile-prop-trainingbag": { w: 16, h: 16, pal: {"B":"#b0503c","D":"#7a3226","L":"#d69459","A":"#202028","C":"#c2c8d4"}, rows: [
+  "tile-prop-trainingbag": { w: 16, h: 16, pal: {"B":"#a96152","D":"#87493f","L":"#c29268","A":"#3f3f49","C":"#b0b6c1"}, rows: [
     "......DDDD......",
     "......DDDD......",
     ".....BBBBBB.....",
@@ -89267,7 +89267,7 @@ export const ART = {
     "......DDDD......",
     "......DDDD......",
   ] },
-  "tile-prop-trainset": { w: 16, h: 16, pal: {"B":"#67aa54","D":"#2e5e28","L":"#c9a06a","A":"#e84c3c","C":"#202028"}, rows: [
+  "tile-prop-trainset": { w: 16, h: 16, pal: {"B":"#73a167","D":"#467340","L":"#b99b74","A":"#c16a61","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -89285,7 +89285,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-trophycase": { w: 16, h: 16, pal: {"B":"#8a6a48","D":"#54452f","L":"#ffd873","A":"#f0e060","C":"#c2c8d4"}, rows: [
+  "tile-prop-trophycase": { w: 16, h: 16, pal: {"B":"#8e755b","D":"#6a5c47","L":"#d1bc88","A":"#cac177","C":"#b0b6c1"}, rows: [
     "................",
     "................",
     "..DLLLLLLLLLLD..",
@@ -89303,7 +89303,7 @@ export const ART = {
     "..DDDDDDDDDDDD..",
     "................",
   ] },
-  "tile-prop-tub": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","W":"#5a9ae8","F":"#f5f0dc","P":"#e86a8a"}, rows: [
+  "tile-prop-tub": { w: 16, h: 16, pal: {"S":"#96969f","s":"#7c7c87","T":"#a5abb7","W":"#7097c7","F":"#e1d9ba","P":"#ca788d"}, rows: [
     "................",
     "................",
     "................",
@@ -89321,7 +89321,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-tvstand": { w: 16, h: 32, pal: {"B":"#46586e","D":"#202028","L":"#8a8aa0","A":"#202028","C":"#e86a8a"}, rows: [
+  "tile-prop-tvstand": { w: 16, h: 32, pal: {"B":"#59687a","D":"#3f3f49","L":"#8b8b9b","A":"#3f3f49","C":"#ca788d"}, rows: [
     "................",
     "................",
     "..DDDDDDDDDDDD..",
@@ -89355,7 +89355,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-typewriter": { w: 16, h: 16, pal: {"B":"#46586e","D":"#202028","L":"#8a8aa0","A":"#eef7ff","C":"#e84c3c"}, rows: [
+  "tile-prop-typewriter": { w: 16, h: 16, pal: {"B":"#59687a","D":"#3f3f49","L":"#8b8b9b","A":"#c6d8e9","C":"#c16a61"}, rows: [
     "................",
     "................",
     "................",
@@ -89373,7 +89373,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-urn": { w: 16, h: 16, pal: {"B":"#8a7a9a","D":"#594a72","L":"#c2c8d4","A":"#7a6a8a","C":"#202028"}, rows: [
+  "tile-prop-urn": { w: 16, h: 16, pal: {"B":"#8b8097","D":"#695c7d","L":"#b0b6c1","A":"#80758c","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -89391,7 +89391,7 @@ export const ART = {
     ".....DDDDDD.....",
     "................",
   ] },
-  "tile-prop-uwcoral": { w: 16, h: 16, pal: {"a":"#e86a8a","b":"#f08a4a","c":"#f8c8d8","d":"#b05ab0"}, rows: [
+  "tile-prop-uwcoral": { w: 16, h: 16, pal: {"a":"#ca788d","b":"#c68e6c","c":"#e0afc0","d":"#a56ba5"}, rows: [
     "................",
     "................",
     "................",
@@ -89409,7 +89409,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-venomvat": { w: 16, h: 32, pal: {"B":"#3fa08a","D":"#2e5e28","L":"#8ae8f0","A":"#7a6a8a","C":"#202028"}, rows: [
+  "tile-prop-venomvat": { w: 16, h: 32, pal: {"B":"#549e8d","D":"#467340","L":"#8ccdd2","A":"#80758c","C":"#3f3f49"}, rows: [
     "................",
     "................",
     "................",
@@ -89443,7 +89443,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-vinearch": { w: 16, h: 32, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","G":"#3e7a34","g":"#2e5e28","A":"#e86a8a","B":"#f0e060"}, rows: [
+  "tile-prop-vinearch": { w: 16, h: 32, pal: {"W":"#726648","w":"#71523d","L":"#8e755b","G":"#53854b","g":"#467340","A":"#ca788d","B":"#cac177"}, rows: [
     "................",
     "................",
     "................",
@@ -89477,7 +89477,7 @@ export const ART = {
     "...........wwW..",
     "..........wwwww.",
   ] },
-  "tile-prop-vinepost": { w: 16, h: 16, pal: {"B":"#386e2c","D":"#2e5e28","L":"#67aa54","A":"#54452f","C":"#a9e8a8"}, rows: [
+  "tile-prop-vinepost": { w: 16, h: 16, pal: {"B":"#4e7e44","D":"#467340","L":"#73a167","A":"#6a5c47","C":"#9ad499"}, rows: [
     "................",
     "................",
     ".......DD.......",
@@ -89495,7 +89495,7 @@ export const ART = {
     ".......DD.......",
     "................",
   ] },
-  "tile-prop-violin": { w: 16, h: 16, pal: {"B":"#b0503c","D":"#7a3226","L":"#d69459","A":"#202028","C":"#ffd873"}, rows: [
+  "tile-prop-violin": { w: 16, h: 16, pal: {"B":"#a96152","D":"#87493f","L":"#c29268","A":"#3f3f49","C":"#d1bc88"}, rows: [
     "................",
     "................",
     ".......DD.......",
@@ -89513,7 +89513,7 @@ export const ART = {
     "....DDDDDDDD....",
     "................",
   ] },
-  "tile-prop-waitbench": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
+  "tile-prop-waitbench": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -89531,7 +89531,7 @@ export const ART = {
     "..DD........DD..",
     "..DD........DD..",
   ] },
-  "tile-prop-wardrobe": { w: 16, h: 32, pal: {"B":"#8a5a30","D":"#54452f","L":"#c9a06a","A":"#ffd873","C":"#5f5130"}, rows: [
+  "tile-prop-wardrobe": { w: 16, h: 32, pal: {"B":"#916a47","D":"#6a5c47","L":"#b99b74","A":"#d1bc88","C":"#726648"}, rows: [
     "................",
     "..LLLLLLLLLLLL..",
     "..LLLLLLLLLLLL..",
@@ -89565,7 +89565,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-waterpump": { w: 16, h: 16, pal: {"B":"#3a7bd5","b":"#2e63b0","k":"#202028","W":"#5a9ae8","s":"#747484"}, rows: [
+  "tile-prop-waterpump": { w: 16, h: 16, pal: {"B":"#5681bd","b":"#476faa","k":"#3f3f49","W":"#7097c7","s":"#7c7c87"}, rows: [
     "................",
     "................",
     "................",
@@ -89583,7 +89583,7 @@ export const ART = {
     ".....sssssss....",
     "................",
   ] },
-  "tile-prop-weightrack": { w: 16, h: 32, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#e84c3c","C":"#3a7bd5"}, rows: [
+  "tile-prop-weightrack": { w: 16, h: 32, pal: {"B":"#757585","D":"#3f3f49","L":"#96969f","A":"#c16a61","C":"#5681bd"}, rows: [
     "................",
     "................",
     "................",
@@ -89617,7 +89617,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-prop-well": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","w":"#5a3a24","L":"#8a6a48","R":"#b0503c","r":"#823936","k":"#202028"}, rows: [
+  "tile-prop-well": { w: 16, h: 16, pal: {"S":"#96969f","s":"#7c7c87","T":"#a5abb7","w":"#71523d","L":"#8e755b","R":"#a96152","r":"#8a4f4c","k":"#3f3f49"}, rows: [
     "................",
     "....rrrrrrrr....",
     "..RRRRRRRRRRRR..",
@@ -89635,7 +89635,7 @@ export const ART = {
     "...SSSSSSSSSS...",
     "................",
   ] },
-  "tile-prop-windmill": { w: 16, h: 16, pal: {"a":"#8a94a6","w":"#e8eef4","d":"#c03a30"}, rows: [
+  "tile-prop-windmill": { w: 16, h: 16, pal: {"a":"#8b929f","w":"#c6d1dd","d":"#b4514a"}, rows: [
     "................",
     ".......ww.......",
     ".......ww.......",
@@ -89653,7 +89653,7 @@ export const ART = {
     ".......aa.......",
     "................",
   ] },
-  "tile-prop-workdesk": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
+  "tile-prop-workdesk": { w: 16, h: 16, pal: {"B":"#b99b74","D":"#726648","L":"#d7bd97","A":"#916a47","C":"#6a5c47"}, rows: [
     "................",
     "................",
     "................",
@@ -89671,7 +89671,7 @@ export const ART = {
     "..DD........DD..",
     "................",
   ] },
-  "tile-rock-2": { w: 16, h: 16, pal: {"m":"#8c8aa0","z":"#6c6a80","c":"#c2c6d4"}, rows: [
+  "tile-rock-2": { w: 16, h: 16, pal: {"m":"#8d8b9b","z":"#767585","c":"#b0b4c1"}, rows: [
     "................",
     "................",
     "................",
@@ -89689,7 +89689,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-rock-3": { w: 16, h: 16, pal: {"m":"#8a8ca0","z":"#6a6c80","c":"#c2cad4"}, rows: [
+  "tile-rock-3": { w: 16, h: 16, pal: {"m":"#8b8d9b","z":"#757685","c":"#b0b8c1"}, rows: [
     "................",
     "................",
     "................",
@@ -89707,7 +89707,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-rock": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","c":"#c2c8d4"}, rows: [
+  "tile-rock": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585","c":"#b0b6c1"}, rows: [
     "................",
     "................",
     "................",
@@ -89725,7 +89725,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-roof-center-l": { w: 16, h: 16, pal: {"a":"#d84040","b":"#e86a8a","c":"#a02828","d":"#5a3a24","w":"#eef7ff","r":"#d84040"}, rows: [
+  "tile-roof-center-l": { w: 16, h: 16, pal: {"a":"#bf5b5b","b":"#ca788d","c":"#a04141","d":"#71523d","w":"#c6d8e9","r":"#bf5b5b"}, rows: [
     "ccbaaaaaaaaaaaaa",
     "ccbaaaaaaaaaaaaa",
     "ccbbbbbbbbbbbbbb",
@@ -89743,7 +89743,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-center-m": { w: 16, h: 16, pal: {"a":"#d84040","b":"#e86a8a","c":"#a02828","d":"#5a3a24","w":"#eef7ff","r":"#d84040"}, rows: [
+  "tile-roof-center-m": { w: 16, h: 16, pal: {"a":"#bf5b5b","b":"#ca788d","c":"#a04141","d":"#71523d","w":"#c6d8e9","r":"#bf5b5b"}, rows: [
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
@@ -89761,7 +89761,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-center-r": { w: 16, h: 16, pal: {"a":"#d84040","b":"#e86a8a","c":"#a02828","d":"#5a3a24","w":"#eef7ff","r":"#d84040"}, rows: [
+  "tile-roof-center-r": { w: 16, h: 16, pal: {"a":"#bf5b5b","b":"#ca788d","c":"#a04141","d":"#71523d","w":"#c6d8e9","r":"#bf5b5b"}, rows: [
     "aaaaaaaaaaaaabcc",
     "aaaaaaaaaaaaabcc",
     "bbbbbbbbbbbbbbcc",
@@ -89779,7 +89779,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-slate-l": { w: 16, h: 16, pal: {"a":"#46586e","b":"#5f748f","c":"#3a4657","d":"#5a3a24"}, rows: [
+  "tile-roof-slate-l": { w: 16, h: 16, pal: {"a":"#59687a","b":"#6c7c90","c":"#505b6b","d":"#71523d"}, rows: [
     "ccbaaaaaaaaaaaaa",
     "ccbaaaaaaaaaaaaa",
     "ccbbbbbbbbbbbbbb",
@@ -89797,7 +89797,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-slate-m": { w: 16, h: 16, pal: {"a":"#46586e","b":"#5f748f","c":"#3a4657","d":"#5a3a24"}, rows: [
+  "tile-roof-slate-m": { w: 16, h: 16, pal: {"a":"#59687a","b":"#6c7c90","c":"#505b6b","d":"#71523d"}, rows: [
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
@@ -89815,7 +89815,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-slate-r": { w: 16, h: 16, pal: {"a":"#46586e","b":"#5f748f","c":"#3a4657","d":"#5a3a24"}, rows: [
+  "tile-roof-slate-r": { w: 16, h: 16, pal: {"a":"#59687a","b":"#6c7c90","c":"#505b6b","d":"#71523d"}, rows: [
     "aaaaaaaaaaaaabcc",
     "aaaaaaaaaaaaabcc",
     "bbbbbbbbbbbbbbcc",
@@ -89833,7 +89833,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-teal-l": { w: 16, h: 16, pal: {"a":"#2e7a6a","b":"#3fa08a","c":"#1f5a4c","d":"#5a3a24"}, rows: [
+  "tile-roof-teal-l": { w: 16, h: 16, pal: {"a":"#458678","b":"#549e8d","c":"#387264","d":"#71523d"}, rows: [
     "ccbaaaaaaaaaaaaa",
     "ccbaaaaaaaaaaaaa",
     "ccbbbbbbbbbbbbbb",
@@ -89851,7 +89851,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-teal-m": { w: 16, h: 16, pal: {"a":"#2e7a6a","b":"#3fa08a","c":"#1f5a4c","d":"#5a3a24"}, rows: [
+  "tile-roof-teal-m": { w: 16, h: 16, pal: {"a":"#458678","b":"#549e8d","c":"#387264","d":"#71523d"}, rows: [
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
@@ -89869,7 +89869,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-teal-r": { w: 16, h: 16, pal: {"a":"#2e7a6a","b":"#3fa08a","c":"#1f5a4c","d":"#5a3a24"}, rows: [
+  "tile-roof-teal-r": { w: 16, h: 16, pal: {"a":"#458678","b":"#549e8d","c":"#387264","d":"#71523d"}, rows: [
     "aaaaaaaaaaaaabcc",
     "aaaaaaaaaaaaabcc",
     "bbbbbbbbbbbbbbcc",
@@ -89887,7 +89887,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-terra-chimney": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#d0704f","c":"#7a3226","d":"#5a3a24","e":"#8a8aa0","f":"#6a6a80"}, rows: [
+  "tile-roof-terra-chimney": { w: 16, h: 16, pal: {"a":"#a96152","b":"#bd7962","c":"#87493f","d":"#71523d","e":"#8b8b9b","f":"#757585"}, rows: [
     "aaaaaddddddaaaaa",
     "aaaaaddddddaaaaa",
     "bbbbbbffffbbbbbb",
@@ -89905,7 +89905,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-terra-l": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#d0704f","c":"#7a3226","d":"#5a3a24"}, rows: [
+  "tile-roof-terra-l": { w: 16, h: 16, pal: {"a":"#a96152","b":"#bd7962","c":"#87493f","d":"#71523d"}, rows: [
     "ccbaaaaaaaaaaaaa",
     "ccbaaaaaaaaaaaaa",
     "ccbbbbbbbbbbbbbb",
@@ -89923,7 +89923,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-terra-m": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#d0704f","c":"#7a3226","d":"#5a3a24"}, rows: [
+  "tile-roof-terra-m": { w: 16, h: 16, pal: {"a":"#a96152","b":"#bd7962","c":"#87493f","d":"#71523d"}, rows: [
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
@@ -89941,7 +89941,7 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-roof-terra-r": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#d0704f","c":"#7a3226","d":"#5a3a24"}, rows: [
+  "tile-roof-terra-r": { w: 16, h: 16, pal: {"a":"#a96152","b":"#bd7962","c":"#87493f","d":"#71523d"}, rows: [
     "aaaaaaaaaaaaabcc",
     "aaaaaaaaaaaaabcc",
     "bbbbbbbbbbbbbbcc",
@@ -89959,25 +89959,25 @@ export const ART = {
     "cccccccccccccccc",
     "dddddddddddddddd",
   ] },
-  "tile-sand": { w: 16, h: 16, pal: {"a":"#d8c08a","b":"#cdb684","c":"#e8d9ac","d":"#bfae7c","e":"#f2e6c8"}, rows: [
-    "aaaaaaaaaabcaaca",
-    "aababaacaaaaabaa",
-    "aaaaaaabaaaaabac",
-    "aadaaaacabacaaaa",
-    "aadeaacaaaaaabaa",
-    "aaabaabaaaaaaaba",
-    "aaaaaaaaabaaaaaa",
-    "aaaacaaaaaabaaba",
-    "abcaaaabaaaacaaa",
-    "aacadabaaaaeaaaa",
-    "aaadbaaaaaaaccba",
-    "aaaaabcaaaaaaaaa",
-    "aaaaaaacaabaaaaa",
-    "aaaaaaeabaaaaaaa",
-    "aaaaaaaabaaaaaaa",
-    "acabaaaaaaaaadaa",
+  "tile-sand": { w: 16, h: 16, pal: {"a":"#c6b388","b":"#bdab85","c":"#d4c69c","d":"#b2a581","e":"#ded0ad"}, rows: [
+    "aaaaaaaaaaacaaca",
+    "aaaaaaacaaaaaaaa",
+    "aaaaaaaaaaaaaaac",
+    "aaaaaaacaaacaaaa",
+    "aaaeaacaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaacaaaaaaaaaaa",
+    "aacaaaaaaaaacaaa",
+    "aacaaaaaaaaeaaaa",
+    "aaaaaaaaaaaaccaa",
+    "aaaaaacaaaaaaaaa",
+    "aaaaaaacaaaaaaaa",
+    "aaaaaaeaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "acaaaaaaaaaaaaaa",
   ] },
-  "tile-seasand": { w: 16, h: 16, pal: {"a":"#cfe0d2","b":"#a4c4b2","c":"#eef6e2","d":"#6aa8a0"}, rows: [
+  "tile-seasand": { w: 16, h: 16, pal: {"a":"#b8cbbc","b":"#9cb6a7","c":"#d4e1bf","d":"#75a09b"}, rows: [
     "abbabbababaababd",
     "babaabaaabaadaac",
     "aaaaacaaaacacaaa",
@@ -89995,7 +89995,7 @@ export const ART = {
     "aaaaadbabaaaaabc",
     "aaacaaaaaaaaaaab",
   ] },
-  "tile-shadow-boulder": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-boulder": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90013,7 +90013,7 @@ export const ART = {
     "..s.s.s.s.s.s...",
     "................",
   ] },
-  "tile-shadow-e": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-e": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "s.s.s...........",
     ".s.s............",
     "s.s.s...........",
@@ -90031,7 +90031,7 @@ export const ART = {
     "s.s.s...........",
     ".s.s............",
   ] },
-  "tile-shadow-e2": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-e2": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "sssssss.........",
     "sssssss.........",
     "sssssss.........",
@@ -90049,7 +90049,7 @@ export const ART = {
     "sssssss.........",
     "sssssss.........",
   ] },
-  "tile-shadow-l": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-l": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "s.s.s.s.s.s.s.s.",
     ".s.s.s.s.s.s.s.s",
     "s.s.s.s.s.s.s.s.",
@@ -90067,7 +90067,7 @@ export const ART = {
     "s.s.s...........",
     ".s.s............",
   ] },
-  "tile-shadow-l2": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-l2": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "ssssssssssssssss",
@@ -90085,7 +90085,7 @@ export const ART = {
     "s.s.s.s.........",
     ".s.s.s..........",
   ] },
-  "tile-shadow-prop": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-prop": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90103,7 +90103,7 @@ export const ART = {
     "....s.s.s.s.....",
     "................",
   ] },
-  "tile-shadow-rock": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-rock": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90121,7 +90121,7 @@ export const ART = {
     "....s.s.s.s.s...",
     "................",
   ] },
-  "tile-shadow-scap": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-scap": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "............s.s.",
     "...........s.s.s",
     "............s.s.",
@@ -90139,7 +90139,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-shadow-scap2": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-scap2": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     ".........sssssss",
     ".........sssssss",
     ".........sssssss",
@@ -90157,7 +90157,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-shadow-se": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-se": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "s.s.s...........",
     ".s.s............",
     "s.s.s...........",
@@ -90175,7 +90175,7 @@ export const ART = {
     "s.s.s.s.s.s.s.s.",
     ".s.s.s.s.s.s.s.s",
   ] },
-  "tile-shadow-se2": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-se2": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "sssssss.........",
     "sssssss.........",
     "sssssss.........",
@@ -90193,7 +90193,7 @@ export const ART = {
     "sssssss.s.s.s.s.",
     "ssssssss.s.s.s.s",
   ] },
-  "tile-shadow-tree-1": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-tree-1": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90211,7 +90211,7 @@ export const ART = {
     "....s.s.s.s.....",
     "................",
   ] },
-  "tile-shadow-tree-2": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-tree-2": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90229,7 +90229,7 @@ export const ART = {
     "....s.s.s.s.....",
     "................",
   ] },
-  "tile-shadow-tree-3": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-tree-3": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90247,7 +90247,7 @@ export const ART = {
     "....s.s.s.s.....",
     "................",
   ] },
-  "tile-shadow-tree-4": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-tree-4": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90265,7 +90265,7 @@ export const ART = {
     "....s.s.s.s.s...",
     "................",
   ] },
-  "tile-shadow-tree-5": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-tree-5": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90283,7 +90283,7 @@ export const ART = {
     "..s.s.s.s.s.s...",
     "................",
   ] },
-  "tile-shadow-tree-6": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-tree-6": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90301,7 +90301,7 @@ export const ART = {
     "..s.s.s.s.s.s...",
     "................",
   ] },
-  "tile-shadow-tree-7": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow-tree-7": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "................",
     "................",
     "................",
@@ -90319,7 +90319,7 @@ export const ART = {
     "..s.s.s.s.s.s...",
     "................",
   ] },
-  "tile-shadow": { w: 16, h: 16, pal: {"s":"#5a3a24"}, rows: [
+  "tile-shadow": { w: 16, h: 16, pal: {"s":"#71523d"}, rows: [
     "s.s.s.s.s.s.s.s.",
     ".s.s.s.s.s.s.s.s",
     "s.s.s.s.s.s.s.s.",
@@ -90337,7 +90337,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-shore-e": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+  "tile-shore-e": { w: 16, h: 16, pal: {"p":"#c6b388","f":"#c6d8e9","y":"#7097c7"}, rows: [
     ".............fpp",
     ".............ffp",
     "............y.pp",
@@ -90355,7 +90355,7 @@ export const ART = {
     "............y.pp",
     ".............f.p",
   ] },
-  "tile-shore-n": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+  "tile-shore-n": { w: 16, h: 16, pal: {"p":"#c6b388","f":"#c6d8e9","y":"#7097c7"}, rows: [
     "pppppppppppppppp",
     "pfp.f.pfp.f.pfp.",
     "ff.ff.ff.ff.ff.f",
@@ -90373,7 +90373,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-shore-s": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+  "tile-shore-s": { w: 16, h: 16, pal: {"p":"#c6b388","f":"#c6d8e9","y":"#7097c7"}, rows: [
     "................",
     "................",
     "................",
@@ -90391,7 +90391,7 @@ export const ART = {
     ".pfp.f.pfp.f.pfp",
     "pppppppppppppppp",
   ] },
-  "tile-shore-w": { w: 16, h: 16, pal: {"p":"#d8c08a","f":"#eef7ff","y":"#5a9ae8"}, rows: [
+  "tile-shore-w": { w: 16, h: 16, pal: {"p":"#c6b388","f":"#c6d8e9","y":"#7097c7"}, rows: [
     "p.f.............",
     "pp.y............",
     "pff.............",
@@ -90409,7 +90409,7 @@ export const ART = {
     "pff.............",
     "ppf.............",
   ] },
-  "tile-shorepulse-1": { w: 16, h: 16, pal: {"f":"#eef7ff","y":"#5a9ae8","x":"#2e63b0"}, rows: [
+  "tile-shorepulse-1": { w: 16, h: 16, pal: {"f":"#c6d8e9","y":"#7097c7","x":"#476faa"}, rows: [
     "................",
     "................",
     "................",
@@ -90427,7 +90427,7 @@ export const ART = {
     "................",
     "xyxyxyxyxyxyxyxy",
   ] },
-  "tile-shorepulse-2": { w: 16, h: 16, pal: {"f":"#eef7ff","y":"#5a9ae8","x":"#2e63b0"}, rows: [
+  "tile-shorepulse-2": { w: 16, h: 16, pal: {"f":"#c6d8e9","y":"#7097c7","x":"#476faa"}, rows: [
     "................",
     "................",
     "................",
@@ -90445,7 +90445,7 @@ export const ART = {
     "yxyxyxyxyxyxyxyx",
     "xyxyxyxyxyxyxyxy",
   ] },
-  "tile-shorepulse-3": { w: 16, h: 16, pal: {"f":"#eef7ff","y":"#5a9ae8","x":"#2e63b0"}, rows: [
+  "tile-shorepulse-3": { w: 16, h: 16, pal: {"f":"#c6d8e9","y":"#7097c7","x":"#476faa"}, rows: [
     "................",
     "................",
     "................",
@@ -90463,7 +90463,7 @@ export const ART = {
     "ff.ff.ff.ff.ff.f",
     "yxyxyxyxyxyxyxyx",
   ] },
-  "tile-shorepulse-4": { w: 16, h: 16, pal: {"f":"#eef7ff","y":"#5a9ae8","x":"#2e63b0"}, rows: [
+  "tile-shorepulse-4": { w: 16, h: 16, pal: {"f":"#c6d8e9","y":"#7097c7","x":"#476faa"}, rows: [
     "................",
     "................",
     "................",
@@ -90481,7 +90481,7 @@ export const ART = {
     "................",
     "yxyxyxyxyxyxyxyx",
   ] },
-  "tile-shrinefloor": { w: 16, h: 16, pal: {"a":"#8a97a8","b":"#6a7a8c","c":"#aebac6","d":"#4da653"}, rows: [
+  "tile-shrinefloor": { w: 16, h: 16, pal: {"a":"#8b94a1","b":"#75808d","c":"#a3adb7","d":"#5fa064"}, rows: [
     "bbbbbbbbabbbbbbb",
     "baadaaaaaaaaaaaa",
     "caaaadaaaaaaaaac",
@@ -90499,7 +90499,7 @@ export const ART = {
     "aaaaaaaabaaaaaaa",
     "aaaaaaaabaaaacaa",
   ] },
-  "tile-shrinewall": { w: 16, h: 16, pal: {"a":"#8a97a8","b":"#6a7a8c","c":"#aebac6","d":"#4da653"}, rows: [
+  "tile-shrinewall": { w: 16, h: 16, pal: {"a":"#8b94a1","b":"#75808d","c":"#a3adb7","d":"#5fa064"}, rows: [
     "aaaaadaabaaaaaaa",
     "aaaaaaaabaaaaaaa",
     "adaaaaaabaaaaaaa",
@@ -90625,7 +90625,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-silphfloor-1": { w: 16, h: 16, pal: {"c":"#c2c8d4","m":"#8a8aa0","e":"#eef7ff"}, rows: [
+  "tile-silphfloor-1": { w: 16, h: 16, pal: {"c":"#b0b6c1","m":"#8b8b9b","e":"#c6d8e9"}, rows: [
     "mmmmmmmmmmmmmmmm",
     "cccccmcccccccccc",
     "cccccmcccccccccc",
@@ -90643,7 +90643,7 @@ export const ART = {
     "ccccccccccmccccc",
     "ccccccccccmccccc",
   ] },
-  "tile-silphfloor-2": { w: 16, h: 16, pal: {"c":"#c2c6d4","m":"#8d8aa0","e":"#eef5ff"}, rows: [
+  "tile-silphfloor-2": { w: 16, h: 16, pal: {"c":"#b0b4c1","m":"#8d8b9b","e":"#c6d4e9"}, rows: [
     "mmmmmmmmmmmmmmmm",
     "ccccccccccmccccc",
     "ccccccccccmccccc",
@@ -90661,43 +90661,43 @@ export const ART = {
     "cccccmcccccccccc",
     "cccccmcccccccccc",
   ] },
-  "tile-silphfloor-3": { w: 16, h: 16, pal: {"a":"#c2c8d4","b":"#a2aab8","c":"#b0b8c6","d":"#d2d8e4"}, rows: [
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccbbbbccccbbbb",
+  "tile-silphfloor-3": { w: 16, h: 16, pal: {"a":"#b0b6c1","b":"#9ba2ac","c":"#a5abb7","d":"#bac1ce"}, rows: [
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
+    "cccccccccccccccc",
   ] },
-  "tile-silphfloor-4": { w: 16, h: 16, pal: {"a":"#c2c8d4","b":"#a2aab8","c":"#b0b8c6","d":"#d2d8e4"}, rows: [
+  "tile-silphfloor-4": { w: 16, h: 16, pal: {"a":"#b0b6c1","b":"#9ba2ac","c":"#a5abb7","d":"#bac1ce"}, rows: [
     "bbbbbbbbbbbbbbbb",
-    "baaabaaacaaabaaa",
-    "baaabaacacaabaaa",
-    "baaabacacacabaaa",
-    "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
-    "baaacacacacabaaa",
-    "bbbbbcacacabbbbb",
-    "baaabacacaaabaaa",
-    "baaabaacaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
+    "bbbbaaaaaaaabbbb",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaab",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaaaaaa",
+    "baaaaaaaaaaabaaa",
+    "bbbbbaaaaaabbbbb",
+    "baaabaaaaaaabaaa",
+    "baaabaaaaaaabaaa",
     "baaabaaabaaabaaa",
   ] },
-  "tile-silphwall-2": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","d":"#5f748f"}, rows: [
+  "tile-silphwall-2": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","d":"#6c7c90"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -90715,7 +90715,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-silphwall": { w: 16, h: 16, pal: {"g":"#46586e","c":"#c2c8d4","z":"#6a6a80","t":"#3fa08a"}, rows: [
+  "tile-silphwall": { w: 16, h: 16, pal: {"g":"#59687a","c":"#b0b6c1","z":"#757585","t":"#549e8d"}, rows: [
     "zccccccczccccccc",
     "zccccccczccccccc",
     "zgggggggzggggggg",
@@ -90733,7 +90733,7 @@ export const ART = {
     "zgggggggzggggggg",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-smoke-grey-1": { w: 16, h: 16, pal: {"a":"#8a8aa0","b":"#6a6a80","c":"#c2c8d4"}, rows: [
+  "tile-smoke-grey-1": { w: 16, h: 16, pal: {"a":"#8b8b9b","b":"#757585","c":"#b0b6c1"}, rows: [
     "................",
     "................",
     "................",
@@ -90751,7 +90751,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-smoke-grey-2": { w: 16, h: 16, pal: {"a":"#8a8aa0","b":"#6a6a80","c":"#c2c8d4"}, rows: [
+  "tile-smoke-grey-2": { w: 16, h: 16, pal: {"a":"#8b8b9b","b":"#757585","c":"#b0b6c1"}, rows: [
     "................",
     "................",
     "................",
@@ -90769,7 +90769,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-smoke-grey-3": { w: 16, h: 16, pal: {"a":"#8a8aa0","b":"#6a6a80","c":"#c2c8d4"}, rows: [
+  "tile-smoke-grey-3": { w: 16, h: 16, pal: {"a":"#8b8b9b","b":"#757585","c":"#b0b6c1"}, rows: [
     "...ccc..........",
     "..cabac.........",
     "...ccc..........",
@@ -90787,7 +90787,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-smoke-warm-1": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#7a3226","c":"#d0704f"}, rows: [
+  "tile-smoke-warm-1": { w: 16, h: 16, pal: {"a":"#a96152","b":"#87493f","c":"#bd7962"}, rows: [
     "................",
     "................",
     "................",
@@ -90805,7 +90805,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-smoke-warm-2": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#7a3226","c":"#d0704f"}, rows: [
+  "tile-smoke-warm-2": { w: 16, h: 16, pal: {"a":"#a96152","b":"#87493f","c":"#bd7962"}, rows: [
     "................",
     "................",
     "................",
@@ -90823,7 +90823,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-smoke-warm-3": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#7a3226","c":"#d0704f"}, rows: [
+  "tile-smoke-warm-3": { w: 16, h: 16, pal: {"a":"#a96152","b":"#87493f","c":"#bd7962"}, rows: [
     "...ccc..........",
     "..cabac.........",
     "...ccc..........",
@@ -90841,25 +90841,25 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-stadiumfloor": { w: 16, h: 16, pal: {"a":"#cfc4a8","b":"#bfb294","c":"#e2d8bc","l":"#3a7bd5"}, rows: [
+  "tile-stadiumfloor": { w: 16, h: 16, pal: {"a":"#beb59e","b":"#b2a891","c":"#cec5a9","l":"#5681bd"}, rows: [
     "llllllllllllllll",
-    "aabababcaaaaaaba",
-    "aaaaaaaaaaaaacaa",
-    "aaaabaabaaaaaaaa",
-    "aaaaaaacaaaaaaaa",
-    "aaaaaaaabaaaaaaa",
     "aaaaaaaaaaaaaaaa",
-    "abacaaaaaaaaaaaa",
-    "abaaaaaaaaaaaaaa",
-    "aaaaaaccaaaaaaaa",
-    "caaaababaaabaaaa",
-    "aaabaaaaaaaaaaba",
-    "aaaaaaabaaabbaaa",
-    "baaaaabcabaaaaaa",
-    "aaaaacaaaacaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
     "llllllllllllllll",
   ] },
-  "tile-stadiumwall": { w: 16, h: 16, pal: {"a":"#cfc4a8","b":"#a89a78","g":"#e8b83a","r":"#b0503c"}, rows: [
+  "tile-stadiumwall": { w: 16, h: 16, pal: {"a":"#beb59e","b":"#a0977f","g":"#c1a660","r":"#a96152"}, rows: [
     "bbbbbabbbbbbbbbb",
     "bbbbbabbbbbbbbbb",
     "aaaaaaaaaaabaaaa",
@@ -90877,7 +90877,7 @@ export const ART = {
     "aaaaabaaaaaaaaaa",
     "bbbbbbbbbbbabbbb",
   ] },
-  "tile-stalactite": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","c":"#c2c8d4","k":"#5a3a24","a":"#a8845c","b":"#b09468","y":"#7a5a38","g":"#46586e"}, rows: [
+  "tile-stalactite": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585","c":"#b0b6c1","k":"#71523d","a":"#a0876c","b":"#a69274","y":"#846a4e","g":"#59687a"}, rows: [
     "gggggggggggggggg",
     "gggggggggggggggg",
     "gggggggggggggggg",
@@ -90895,7 +90895,7 @@ export const ART = {
     "mmmmgmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-step": { w: 16, h: 16, pal: {"w":"#b09468","l":"#c2a878","s":"#a8845c","p":"#d8c08a"}, rows: [
+  "tile-step": { w: 16, h: 16, pal: {"w":"#a69274","l":"#b4a17e","s":"#a0876c","p":"#c6b388"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "ssssssssssssssss",
@@ -90913,25 +90913,25 @@ export const ART = {
     "pppppppppssppppp",
     "pppppppppppppppp",
   ] },
-  "tile-stratafloor": { w: 16, h: 16, pal: {"B":"#a88a5c","D":"#7a6738","A":"#b09b68"}, rows: [
-    "DDBDDBBBDDDDDAAB",
-    "DDBBBBBBDDDDAABB",
-    "DDBBAABBBDDBDDDD",
-    "DDBBAABBBBBBDDDD",
-    "DDBBBBBBBBDDAADD",
-    "DDDBBBDDABDDAADD",
-    "BBBBBBAADDDDBBDD",
-    "BBBBBBAAAABBBBDD",
-    "BBBDDDBBDDBBDDAA",
-    "BBBBBBBBDDDBBBAA",
-    "BBDDDDDDBBBBAABB",
-    "BBDDBBDDBBBBAABB",
-    "DDAAAABBBBDDBBAA",
-    "BBAAAABBBBDDBBAA",
-    "BBBBBBAABBAABBBB",
+  "tile-stratafloor": { w: 16, h: 16, pal: {"B":"#a08b6c","D":"#84754e","A":"#a69774"}, rows: [
+    "DDBDDBBBDDDDDBBB",
+    "DDBBBBBBDDDDBBBB",
+    "DDBBBBBBBDDBDDDD",
+    "DDBBBBBBBBBBDDDD",
+    "DDBBBBBBBBDDBBDD",
+    "DDDBBBDDBBDDBBDD",
+    "BBBBBBBBDDDDBBDD",
+    "BBBBBBBBBBBBBBDD",
+    "BBBDDDBBDDBBDDBB",
+    "BBBBBBBBDDDBBBBB",
+    "BBDDDDDDBBBBBBBB",
+    "BBDDBBDDBBBBBBBB",
+    "DDBBBBBBBBDDBBBB",
+    "BBBBBBBBBBDDBBBB",
+    "BBBBBBBBBBBBBBBB",
     "BBBBBBBBBBDDBBDD",
   ] },
-  "tile-stratwall": { w: 16, h: 16, pal: {"B":"#8a7a54","D":"#54452f","A":"#b09468"}, rows: [
+  "tile-stratwall": { w: 16, h: 16, pal: {"B":"#8d8164","D":"#6a5c47","A":"#a69274"}, rows: [
     "AADDDBBBBBDDDDDD",
     "AABBBBBBBBAADDAA",
     "BBDDAABBBBDDDDBB",
@@ -90949,7 +90949,7 @@ export const ART = {
     "BBBBBBBBDDDDDDBB",
     "BBAABBBBDBBDDDBB",
   ] },
-  "tile-sway-a-1": { w: 16, h: 16, pal: {"g":"#5da24a","l":"#6fb45c","h":"#79c168","s":"#386e2c"}, rows: [
+  "tile-sway-a-1": { w: 16, h: 16, pal: {"g":"#6b9e5d","l":"#79a86c","h":"#7fb273","s":"#4e7e44"}, rows: [
     "................",
     "................",
     "................",
@@ -90967,7 +90967,7 @@ export const ART = {
     "...gs...gs..gs..",
     "...h....h...h...",
   ] },
-  "tile-sway-a-2": { w: 16, h: 16, pal: {"g":"#5da24a","l":"#6fb45c","h":"#79c168","s":"#386e2c"}, rows: [
+  "tile-sway-a-2": { w: 16, h: 16, pal: {"g":"#6b9e5d","l":"#79a86c","h":"#7fb273","s":"#4e7e44"}, rows: [
     "................",
     "................",
     "................",
@@ -90985,7 +90985,7 @@ export const ART = {
     "...gs...gs..gs..",
     "...h....h...h...",
   ] },
-  "tile-sway-a-3": { w: 16, h: 16, pal: {"g":"#5da24a","l":"#6fb45c","h":"#79c168","s":"#386e2c"}, rows: [
+  "tile-sway-a-3": { w: 16, h: 16, pal: {"g":"#6b9e5d","l":"#79a86c","h":"#7fb273","s":"#4e7e44"}, rows: [
     "................",
     "................",
     "................",
@@ -91003,7 +91003,7 @@ export const ART = {
     "..sg...sg..sg...",
     "...h....h...h...",
   ] },
-  "tile-sway-b-1": { w: 16, h: 16, pal: {"g":"#5da24a","l":"#6fb45c","h":"#79c168","s":"#386e2c"}, rows: [
+  "tile-sway-b-1": { w: 16, h: 16, pal: {"g":"#6b9e5d","l":"#79a86c","h":"#7fb273","s":"#4e7e44"}, rows: [
     "................",
     "................",
     "................",
@@ -91021,7 +91021,7 @@ export const ART = {
     ".....gs...gs.gs.",
     ".....h....h..h..",
   ] },
-  "tile-sway-b-2": { w: 16, h: 16, pal: {"g":"#5da24a","l":"#6fb45c","h":"#79c168","s":"#386e2c"}, rows: [
+  "tile-sway-b-2": { w: 16, h: 16, pal: {"g":"#6b9e5d","l":"#79a86c","h":"#7fb273","s":"#4e7e44"}, rows: [
     "................",
     "................",
     "................",
@@ -91039,7 +91039,7 @@ export const ART = {
     ".....gs...gs.gs.",
     ".....h....h..h..",
   ] },
-  "tile-sway-b-3": { w: 16, h: 16, pal: {"g":"#5da24a","l":"#6fb45c","h":"#79c168","s":"#386e2c"}, rows: [
+  "tile-sway-b-3": { w: 16, h: 16, pal: {"g":"#6b9e5d","l":"#79a86c","h":"#7fb273","s":"#4e7e44"}, rows: [
     "................",
     "................",
     "................",
@@ -91057,115 +91057,115 @@ export const ART = {
     "....sg...sg.sg..",
     ".....h....h..h..",
   ] },
-  "tile-tallgrass-1": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","o":"#2e5e28","t":"#3e7a34","w":"#54a048"}, rows: [
-    "llgllaagaggaaggg",
-    "mmmmmaaghghhgggg",
-    "ddddhhhgglllgggg",
-    "sssslllggmmmmgag",
-    "eeeemmmggddddmag",
-    "ssssdddggssssgag",
-    "gggdsssagaehehhg",
-    "gghgeeeegaalsllg",
-    "gllsssssghhmmmmg",
-    "gmmmmmmlgllddddg",
-    "gdddddmmmmmssssg",
-    "gsssssdddddeeeee",
-    "geeeeeesssssssss",
-    "gssssseeeeeemmmg",
-    "ggggggsssssggmgg",
+  "tile-tallgrass-1": { w: 16, h: 16, pal: {"g":"#6b9e5d","d":"#5e8f53","l":"#79a86c","m":"#73a167","h":"#7fb273","a":"#8bbb7a","s":"#4e7e44","e":"#47753f","o":"#467340","t":"#53854b","w":"#649d5b"}, rows: [
+    "gggggaagaggaaggg",
+    "gggggaaghghhgggg",
+    "gggghhhggggggggg",
+    "ssssggggggggggag",
+    "eeeeggggggggggag",
+    "ssssgggggssssgag",
+    "ggggsssagaehehhg",
+    "gghgeeeegaagsggg",
+    "gggsssssghhggggg",
     "gggggggggggggggg",
-  ] },
-  "tile-tallgrass-2": { w: 16, h: 16, pal: {"g":"#509e44","d":"#408136","l":"#68b45c","m":"#60aa54","h":"#72c168","a":"#83cb74","s":"#326e2c","e":"#2a6127","o":"#2a5e28","t":"#387a34","w":"#4da048","v":"#d9d77a","y":"#a0b85a"}, rows: [
-    "gllggagaggaaggmg",
-    "gtttgagagaaagmmm",
-    "gdddaagaglllggmg",
-    "geeevvllgttttgag",
-    "goooyattgddddgag",
-    "sssssaddgeeevvgg",
-    "ggaaaeeagoooyoga",
-    "ggaaaooaosssssgl",
-    "gglllssaagmttttt",
-    "ggtttmmlllgddddd",
-    "ggdddmmvvtgeeeee",
-    "gmeeemmyddgooooo",
-    "mmoooomeeegsssss",
-    "gsssssdooooggggg",
+    "gggggggggggssssg",
+    "gsssssgggggeeeee",
+    "geeeeeesssssssss",
+    "gssssseeeeeegggg",
     "ggggggsssssggggg",
     "gggggggggggggggg",
   ] },
-  "tile-tallgrass-3": { w: 16, h: 16, pal: {"g":"#66a74c","d":"#528a3e","l":"#76b45c","m":"#6eaa54","h":"#80c168","a":"#91cb74","s":"#3d6e2c","e":"#346127","o":"#335e28","t":"#447a34","w":"#5ba048"}, rows: [
-    "wwgggggmgaagaggg",
-    "mmgmggammhhhghgg",
-    "ttgtghhmgwwwgwgg",
-    "sssswwwggmmmmggg",
-    "eeeeemmdgttttggg",
+  "tile-tallgrass-2": { w: 16, h: 16, pal: {"g":"#619c58","d":"#548a4c","l":"#74a86c","m":"#6fa167","h":"#7ab273","a":"#85bb7a","s":"#497e44","e":"#42753f","o":"#427340","t":"#4e854b","w":"#5f9d5b","v":"#c6c47d","y":"#9bab6a"}, rows: [
+    "gggggagaggaagggg",
+    "gggggagagaaagggg",
+    "ggggaagagggggggg",
+    "geeevvggggggggag",
+    "goooyaggggggggag",
+    "sssssagggeeevvgg",
+    "ggaaaeeagoooyoga",
+    "ggaaaooaosssssgg",
+    "gggggssaaggggggg",
+    "gggggggggggggggg",
+    "gggggggvvggeeeee",
+    "ggeeeggygggooooo",
+    "ggoooogeeegsssss",
+    "gsssssgooooggggg",
+    "ggggggsssssggggg",
+    "gggggggggggggggg",
+  ] },
+  "tile-tallgrass-3": { w: 16, h: 16, pal: {"g":"#72a15f","d":"#638f53","l":"#7ea86c","m":"#78a167","h":"#84b273","a":"#90bb7a","s":"#537e44","e":"#4c753f","o":"#4b7340","t":"#58854b","w":"#699d5b"}, rows: [
+    "gggggggggaagaggg",
+    "ggggggaggggggggg",
+    "ttgtgggggggggggg",
+    "ssssgggggggggggg",
+    "eeeeeggggttttggg",
     "sssssttggssssggg",
-    "gggasssgaeeeeehg",
-    "gghheeeaasssssww",
-    "gwwsssshhhgmgmmm",
-    "gmmmmmwwwwgttttt",
-    "gtttttmmmmgsssss",
+    "gggasssgaeeeeegg",
+    "ggggeeeaasssssgg",
+    "gggssssggggggggg",
+    "gggggggggggttttt",
+    "gtttttgggggsssss",
     "gsssssttttgeeeee",
     "geeeeeesssgsssss",
     "gssssseeeeeggggg",
     "ggggggsssssggggg",
-    "gggggggggmgggggg",
+    "gggggggggggggggg",
   ] },
-  "tile-tallgrass-4": { w: 16, h: 16, pal: {"g":"#45a041","d":"#368233","l":"#60b45c","m":"#59aa54","h":"#6ac168","a":"#7bcb74","s":"#2d6e2c","e":"#276129","o":"#285e2b","t":"#347a36","w":"#48a04b","u":"#f5f4dc"}, rows: [
-    "wwwwggggggaggggg",
-    "ttttgggmgghhhggg",
-    "ddddggmmhwwwwwgg",
-    "ssssgwwmwtttttgg",
-    "ooooouutgdddddgg",
-    "ssssshddgsssasga",
+  "tile-tallgrass-4": { w: 16, h: 16, pal: {"g":"#599e56","d":"#4c8b4a","l":"#6fa86c","m":"#6aa167","h":"#75b273","a":"#80bb7a","s":"#457e44","e":"#3f7541","o":"#407343","t":"#4b854c","w":"#5b9d5d","u":"#e1dfba"}, rows: [
+    "ggggggggggaggggg",
+    "gggggggggghhhggg",
+    "gggggggghggggggg",
+    "ssssgggggggggggg",
+    "ooooouuggggggggg",
+    "ssssshgggsssasga",
     "ggasssssgooohooh",
-    "ghhohoooossswwmw",
-    "gwgwwhssdhghttmt",
-    "ggtttwmwdwguuddd",
-    "ggdddgttmtthssss",
-    "ggsssgdddddooooo",
+    "ghhohoooosssgggg",
+    "ggggghssghghgggg",
+    "ggggggggggguuggg",
+    "ggggggggggghssss",
+    "ggsssggggggooooo",
     "ggoooossssssssss",
     "gsssssoooooogggg",
     "ggggggsssssggggg",
     "gggggggggggggggg",
   ] },
-  "tile-tallgrass-5": { w: 16, h: 16, pal: {"g":"#579e44","d":"#468136","l":"#67ae54","m":"#5f9c4c","h":"#73ba60","a":"#85c472","s":"#386e2c","e":"#2f6127"}, rows: [
-    "gglleedddssheegg",
+  "tile-tallgrass-5": { w: 16, h: 16, pal: {"g":"#669c58","d":"#598a4c","l":"#74a467","m":"#6c9a5e","h":"#7bad6e","a":"#87b57a","s":"#4e7e44","e":"#47753f"}, rows: [
+    "gghheedddssheegg",
     "geeeeeddhhhheegg",
-    "heeeeeeehhddllll",
-    "hhmmgeehedddllll",
-    "ghheeehhdmsseeee",
-    "ghhdehhhmggeeeee",
-    "mmsmhhhhgggeeghh",
-    "gghhddllhhggghhe",
-    "gghheellhheemhhe",
-    "llmmllllhhhhmmhh",
-    "ddgehhdgllggeehh",
-    "ddllhhgeemggedde",
-    "mmhhllgeemddddhh",
-    "mmhlllggmmddddhh",
-    "ggssmmmmgmmgmmdd",
-    "ggssmmmmggmmmmdd",
+    "heeeeeeehhddhhhh",
+    "hhhhgeehedddhhhh",
+    "ghheeehhdhsseeee",
+    "ghhdehhhhggeeeee",
+    "hhshhhhhgggeeghh",
+    "gghhddhhhhggghhe",
+    "gghheehhhheehhhe",
+    "hhhhhhhhhhhhhhhh",
+    "ddgehhdghhggeehh",
+    "ddhhhhgeehggedde",
+    "hhhhhhgeehddddhh",
+    "hhhhhhgghhddddhh",
+    "ggsshhhhghhghhdd",
+    "ggsshhhhgghhhhdd",
   ] },
-  "tile-tallgrass-6": { w: 16, h: 16, pal: {"g":"#5ea74c","d":"#4c8a3e","l":"#6eb75c","m":"#66a554","h":"#7ac468","a":"#8ccb78","s":"#386e2c","e":"#2f6127"}, rows: [
-    "mssgmeemmmleemss",
-    "mmeeeeemmhheemss",
-    "ggeeehggggdmmmhh",
-    "geeeehhgeeddmllh",
-    "llmeehhhhhddggdd",
-    "llmmmhhhhhheehhd",
-    "ddeemmssllheelss",
-    "ddeeshhsddggldds",
-    "lleedhhseeddhhhh",
-    "leeddhheeeeehhhh",
-    "leehhmhhegeegggg",
-    "hhmhhmhhegghhhhg",
-    "hheemmddmmshhhhm",
-    "hheemlldmmsssshh",
-    "llmggdddssggddee",
-    "llmmdddeesgmmlmm",
+  "tile-tallgrass-6": { w: 16, h: 16, pal: {"g":"#6ca15f","d":"#5e8f53","l":"#78ab6c","m":"#729e66","h":"#80b573","a":"#8cbb7d","s":"#4e7e44","e":"#47753f"}, rows: [
+    "hssgheehhhheehss",
+    "hheeeeehhhheehss",
+    "ggeeehggggdhhhhh",
+    "geeeehhgeeddhhhh",
+    "hhheehhhhhddggdd",
+    "hhhhhhhhhhheehhd",
+    "ddeehhsshhheehss",
+    "ddeeshhsddgghdds",
+    "hheedhhseeddhhhh",
+    "heeddhheeeeehhhh",
+    "heehhhhhegeegggg",
+    "hhhhhhhhegghhhhg",
+    "hheehhddhhshhhhh",
+    "hheehhhdhhsssshh",
+    "hhhggdddssggddee",
+    "hhhhdddeesghhhhh",
   ] },
-  "tile-tc-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","b":"#578853","c":"#83cd7d","d":"#e8b84a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-azalea": { w: 16, h: 16, pal: {"a":"#79a475","b":"#668c63","c":"#85bc80","d":"#c4a868","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbbbb.....",
@@ -91183,7 +91183,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-blackthorn": { w: 16, h: 16, pal: {"a":"#8a8a96","b":"#6c6c75","c":"#a3a3b1","d":"#b03a5a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-blackthorn": { w: 16, h: 16, pal: {"a":"#8b8b94","b":"#76767d","c":"#9c9ca7","d":"#a95169","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bccbba.....",
@@ -91201,7 +91201,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-canalave": { w: 16, h: 16, pal: {"a":"#468faf","b":"#377088","c":"#53a9ce","d":"#f0c030","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-canalave": { w: 16, h: 16, pal: {"a":"#5b8fa7","b":"#4d7b8e","c":"#65a1bb","d":"#c1a85f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bccbba.....",
@@ -91219,7 +91219,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-celadon": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#d0f0c0","a":"#d0f0c0","x":"#5cb255","z":"#d5f5d8","n":"#468d40","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-celadon": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#b9dca8","a":"#b9dca8","x":"#6ca767","z":"#b5e1b9","n":"#599154","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttttttttttt..",
@@ -91237,7 +91237,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-celestic": { w: 16, h: 16, pal: {"a":"#957fef","b":"#7463ba","c":"#b096ff","d":"#e8e4da","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-celestic": { w: 16, h: 16, pal: {"a":"#9486d0","b":"#7c70ad","c":"#a99ad8","d":"#d1ccbf","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....ccbabb.....",
@@ -91255,7 +91255,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-cerulean": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#bfe8e0","a":"#bfe8e0","x":"#5eab78","z":"#d2e8ef","n":"#47885d","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-cerulean": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#aad4cc","a":"#aad4cc","x":"#6da27f","z":"#b6d1da","n":"#5a8d6b","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..ttxxtttttxxa..",
@@ -91273,7 +91273,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","b":"#839a69","c":"#c6ea9e","d":"#e86a8a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-cherrygrove": { w: 16, h: 16, pal: {"a":"#a1b787","b":"#879675","c":"#b6d593","d":"#ca788d","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....abccba.....",
@@ -91291,7 +91291,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-cianwood": { w: 16, h: 16, pal: {"a":"#b8a878","b":"#90835e","c":"#d9c68e","d":"#4a90a8","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-cianwood": { w: 16, h: 16, pal: {"a":"#aca17e","b":"#91876c","c":"#c7b78a","d":"#5d90a2","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbcbcb.....",
@@ -91309,7 +91309,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-cinnabar": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#e8b89a","a":"#e8b89a","x":"#b35984","z":"#ede1af","n":"#8f4267","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-cinnabar": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#d4aa90","a":"#d4aa90","x":"#a76a87","z":"#d9cd9d","n":"#925673","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttttaaaattt..",
@@ -91327,7 +91327,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-dewford": { w: 16, h: 16, pal: {"a":"#74aca4","b":"#5a8680","c":"#89cbc2","d":"#e87a5a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-dewford": { w: 16, h: 16, pal: {"a":"#7ca39e","b":"#698a85","c":"#89bbb4","d":"#c78470","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbccc.....",
@@ -91345,7 +91345,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","b":"#9d6c46","c":"#eda36a","d":"#c03a2a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-ecruteak": { w: 16, h: 16, pal: {"a":"#b88b6a","b":"#9b7659","c":"#cb9e7a","d":"#b45246","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....baabbb.....",
@@ -91363,7 +91363,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-eterna": { w: 16, h: 16, pal: {"a":"#4f772d","b":"#3e5d23","c":"#5d8c35","d":"#c8a24a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-eterna": { w: 16, h: 16, pal: {"a":"#628445","b":"#56733c","c":"#6c914c","d":"#b69c5f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....baabbb.....",
@@ -91381,7 +91381,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-evergrande": { w: 16, h: 16, pal: {"a":"#a8b8e0","b":"#8390af","c":"#c6d9ff","d":"#f0c030","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-evergrande": { w: 16, h: 16, pal: {"a":"#9ba9cd","b":"#868fa6","c":"#b2c2e1","d":"#c1a85f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbccc.....",
@@ -91399,7 +91399,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-fallarbor": { w: 16, h: 16, pal: {"a":"#aca292","b":"#867e72","c":"#cbbfac","d":"#e8e4da","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-fallarbor": { w: 16, h: 16, pal: {"a":"#a49c91","b":"#89837b","c":"#bbb1a1","d":"#d1ccbf","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbcbbb.....",
@@ -91417,7 +91417,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-floaroma": { w: 16, h: 16, pal: {"a":"#e88bb0","b":"#b56c89","c":"#ffa4d0","d":"#f0f0a0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-floaroma": { w: 16, h: 16, pal: {"a":"#d188a5","b":"#aa768b","c":"#daa1bd","d":"#d7d797","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbccc.....",
@@ -91435,7 +91435,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-fortree": { w: 16, h: 16, pal: {"a":"#5d9c66","b":"#497a50","c":"#6eb878","d":"#c8a24a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-fortree": { w: 16, h: 16, pal: {"a":"#6c9872","b":"#5c8361","c":"#78ac7f","d":"#b69c5f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbccb.....",
@@ -91453,7 +91453,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-fuchsia": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#f4cfe2","a":"#f4cfe2","x":"#be82c7","z":"#f9e4e5","n":"#a450b1","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-fuchsia": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#e1b1c9","a":"#e1b1c9","x":"#b184b8","z":"#e6bec0","n":"#9d64a6","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..xxaatttttttaa.",
@@ -91471,7 +91471,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","b":"#97835e","c":"#e5c68e","d":"#e85a4a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-goldenrod": { w: 16, h: 16, pal: {"a":"#b4a17e","b":"#95876c","c":"#d1b789","d":"#c47168","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbccc.....",
@@ -91489,7 +91489,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-hearthome": { w: 16, h: 16, pal: {"a":"#c9a227","b":"#9d7e1e","c":"#edbf2e","d":"#8a5ab0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-hearthome": { w: 16, h: 16, pal: {"a":"#b79c47","b":"#9c853d","c":"#c0a85c","d":"#8b6ba5","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbbcb.....",
@@ -91507,7 +91507,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-indigo": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#c4cfef","a":"#c4cfef","x":"#71a6b4","z":"#ddd8f4","n":"#4f8796","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-indigo": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#abb7db","a":"#abb7db","x":"#7a9fa9","z":"#bfb8e0","n":"#608a96","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..xxtaatxxtttt..",
@@ -91525,7 +91525,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-jubilife": { w: 16, h: 16, pal: {"a":"#8a94a6","b":"#6c7381","c":"#a3afc4","d":"#f0c030","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-jubilife": { w: 16, h: 16, pal: {"a":"#8b929f","b":"#767b86","c":"#9ba5b6","d":"#c1a85f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbccbb.....",
@@ -91543,7 +91543,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-lavaridge": { w: 16, h: 16, pal: {"a":"#bd7a48","b":"#935f38","c":"#df9055","d":"#e83a2a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-lavaridge": { w: 16, h: 16, pal: {"a":"#ae805e","b":"#966d4e","c":"#c59069","d":"#be6058","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bccbba.....",
@@ -91561,7 +91561,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-lavender": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#e0d4f0","a":"#e0d4f0","q":"#8c94bc","z":"#f4e7f7","n":"#5e6aa1","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-lavender": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#c6b7db","a":"#c6b7db","q":"#8c92b0","z":"#dcc2e2","n":"#6d769b","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..ttqqatttaaqq..",
@@ -91579,7 +91579,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-lilycove": { w: 16, h: 16, pal: {"a":"#b8a0c8","b":"#907d9c","c":"#d9bdec","d":"#e85a7a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-lilycove": { w: 16, h: 16, pal: {"a":"#ac99b9","b":"#908298","c":"#c4a7d8","d":"#c77084","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....cbbcbb.....",
@@ -91597,7 +91597,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-littleroot": { w: 16, h: 16, pal: {"a":"#a4bd76","b":"#80935c","c":"#c2df8b","d":"#e86a8a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-littleroot": { w: 16, h: 16, pal: {"a":"#9eb07d","b":"#85936a","c":"#b4cb88","d":"#ca788d","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....cbbcbb.....",
@@ -91615,7 +91615,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-mahogany": { w: 16, h: 16, pal: {"a":"#8aa888","b":"#6c836a","c":"#a3c6a0","d":"#5a8ab0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-mahogany": { w: 16, h: 16, pal: {"a":"#8ba18a","b":"#768775","c":"#9bb799","d":"#6b8ba5","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbcbbb.....",
@@ -91633,7 +91633,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-mauville": { w: 16, h: 16, pal: {"a":"#a3a06b","b":"#7f7d53","c":"#c0bd7e","d":"#f0c030","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-mauville": { w: 16, h: 16, pal: {"a":"#9d9a76","b":"#858463","c":"#b2b082","d":"#c1a85f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbbcb.....",
@@ -91651,7 +91651,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-mossdeep": { w: 16, h: 16, pal: {"a":"#8ab8c8","b":"#6c909c","c":"#a3d9ec","d":"#f0f4f8","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-mossdeep": { w: 16, h: 16, pal: {"a":"#89adb9","b":"#778f98","c":"#97c6d6","d":"#cbd6e0","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....abccba.....",
@@ -91669,7 +91669,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","b":"#709083","c":"#a9d9c6","d":"#3a7ca5","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-newbark": { w: 16, h: 16, pal: {"a":"#8eada1","b":"#7a8f86","c":"#9dc7b6","d":"#5082a1","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....cbbcbb.....",
@@ -91687,7 +91687,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-oldale": { w: 16, h: 16, pal: {"a":"#b3a35e","b":"#8c7f49","c":"#d3c06f","d":"#f0f0e0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-oldale": { w: 16, h: 16, pal: {"a":"#a89d6d","b":"#8f855c","c":"#c1b377","d":"#d9d9c1","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....abccba.....",
@@ -91705,7 +91705,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-olivine": { w: 16, h: 16, pal: {"a":"#7aa8b8","b":"#5f8390","c":"#90c6d9","d":"#e8a13a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-olivine": { w: 16, h: 16, pal: {"a":"#80a1ac","b":"#6c8791","c":"#8cb7c7","d":"#c19960","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbbcb.....",
@@ -91723,7 +91723,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-oreburgh": { w: 16, h: 16, pal: {"a":"#9c6644","b":"#7a5035","c":"#b87850","d":"#f0a848","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-oreburgh": { w: 16, h: 16, pal: {"a":"#9b7258","b":"#85624b","c":"#ab7f64","d":"#c59f6b","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbbbb.....",
@@ -91741,7 +91741,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-pacifidlog": { w: 16, h: 16, pal: {"a":"#c8a878","b":"#9c835e","c":"#ecc68e","d":"#e86a4a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-pacifidlog": { w: 16, h: 16, pal: {"a":"#b8a17d","b":"#98876d","c":"#d2b68c","d":"#c47a68","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbbbb.....",
@@ -91759,7 +91759,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-pallet": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#e8e0a0","a":"#e8e0a0","x":"#b6995d","z":"#dbedb5","n":"#947943","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-pallet": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#d4cd94","a":"#d4cd94","x":"#aa966c","z":"#c7d9a1","n":"#958057","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..ttttaaatxxtt..",
@@ -91777,7 +91777,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-pastoria": { w: 16, h: 16, pal: {"a":"#6a994e","b":"#53773d","c":"#7db55c","d":"#d9a441","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-pastoria": { w: 16, h: 16, pal: {"a":"#759860","b":"#648252","c":"#82a96c","d":"#bf9d5c","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbccb.....",
@@ -91795,7 +91795,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-petalburg": { w: 16, h: 16, pal: {"a":"#79ac8c","b":"#5e866d","c":"#8fcba5","d":"#4a90c0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-petalburg": { w: 16, h: 16, pal: {"a":"#7fa38d","b":"#6c8a77","c":"#8dbb9e","d":"#608fb0","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbccbb.....",
@@ -91813,7 +91813,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-pewter": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#d8d2c0","a":"#d8d2c0","q":"#b49894","z":"#dee2d0","n":"#966f6a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-pewter": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#c5bfae","a":"#c5bfae","q":"#aa9592","z":"#c8cdb9","n":"#937976","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..aaattttqqaaa..",
@@ -91831,7 +91831,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-rustboro": { w: 16, h: 16, pal: {"a":"#a39684","b":"#7f7567","c":"#c0b19c","d":"#c05a3a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-rustboro": { w: 16, h: 16, pal: {"a":"#9d9487","b":"#847d72","c":"#b3a797","d":"#b16a54","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbbbb.....",
@@ -91849,7 +91849,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-saffron": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#f0e2a8","a":"#f0e2a8","x":"#c58356","z":"#e7f4be","n":"#a46438","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-saffron": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#d8cc9b","a":"#d8cc9b","x":"#b58767","z":"#d0dda8","n":"#a1704f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..taatttttxxtt..",
@@ -91867,7 +91867,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-sandgem": { w: 16, h: 16, pal: {"a":"#d6c98a","b":"#a79d6c","c":"#fdeda3","d":"#4a90c0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-sandgem": { w: 16, h: 16, pal: {"a":"#c4ba88","b":"#9f9977","c":"#dacf9f","d":"#608fb0","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....abccba.....",
@@ -91885,7 +91885,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-silvertown": { w: 16, h: 16, pal: {"a":"#c8c8d0","b":"#9c9ca2","c":"#ececf5","d":"#c9a227","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-silvertown": { w: 16, h: 16, pal: {"a":"#b6b6bd","b":"#98989c","c":"#cacadd","d":"#b79c47","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbbccb.....",
@@ -91903,7 +91903,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-slateport": { w: 16, h: 16, pal: {"a":"#c6ad7d","b":"#9a8762","c":"#eacc94","d":"#3a7bd5","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-slateport": { w: 16, h: 16, pal: {"a":"#b7a481","b":"#968970","c":"#d3bb8e","d":"#5681bd","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....baabbb.....",
@@ -91921,7 +91921,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-snowpoint": { w: 16, h: 16, pal: {"a":"#caf0f8","b":"#9ebbc1","c":"#eeffff","d":"#e85a7a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-snowpoint": { w: 16, h: 16, pal: {"a":"#b0d8e0","b":"#98afb3","c":"#c6e9e9","d":"#c77084","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbcbbc.....",
@@ -91939,7 +91939,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-solaceon": { w: 16, h: 16, pal: {"a":"#a3b18a","b":"#7f8a6c","c":"#c0d1a3","d":"#c0784a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-solaceon": { w: 16, h: 16, pal: {"a":"#9da78b","b":"#848c76","c":"#b2c09a","d":"#b07f60","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbcbcb.....",
@@ -91957,7 +91957,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-sootopolis": { w: 16, h: 16, pal: {"a":"#dedbd2","b":"#adaba4","c":"#fffff8","d":"#3a90c8","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-sootopolis": { w: 16, h: 16, pal: {"a":"#c9c5bb","b":"#a4a39d","c":"#ebebcb","d":"#558fb5","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbccbb.....",
@@ -91975,7 +91975,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-sunnyshore": { w: 16, h: 16, pal: {"a":"#ffd166","b":"#c7a350","c":"#fff778","d":"#3a7ac0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-sunnyshore": { w: 16, h: 16, pal: {"a":"#ceb781","b":"#b69d63","c":"#d2cd8a","d":"#5480b1","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....babbba.....",
@@ -91993,7 +91993,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-twinleaf": { w: 16, h: 16, pal: {"a":"#7fb069","b":"#638952","c":"#96d07c","d":"#f2cc8f","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-twinleaf": { w: 16, h: 16, pal: {"a":"#84a674","b":"#6f8c62","c":"#93bf7f","d":"#d4ba90","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....cbbcbb.....",
@@ -92011,7 +92011,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-veilstone": { w: 16, h: 16, pal: {"a":"#7d8597","b":"#626876","c":"#949db2","d":"#5e60ce","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-veilstone": { w: 16, h: 16, pal: {"a":"#828894","b":"#6f737e","c":"#9298a8","d":"#6c6dbc","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbcbbb.....",
@@ -92029,7 +92029,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-verdanturf": { w: 16, h: 16, pal: {"a":"#8cc877","b":"#6d9c5d","c":"#a5ec8c","d":"#e87ab0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-verdanturf": { w: 16, h: 16, pal: {"a":"#8cb87d","b":"#77986c","c":"#9dd28b","d":"#ce80a6","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbcbcb.....",
@@ -92047,7 +92047,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-vermilion": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#f0d0a0","a":"#f0d0a0","q":"#cc626d","z":"#f1f3b6","n":"#b23a46","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-vermilion": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#d7bd97","a":"#d7bd97","q":"#bb6f76","z":"#dadba4","n":"#aa515a","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttttaaqqqtt..",
@@ -92065,7 +92065,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","b":"#787381","c":"#b6afc4","d":"#7a6ab0","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-violet": { w: 16, h: 16, pal: {"a":"#97929f","b":"#7f7b85","c":"#aaa4b5","d":"#8075a6","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".....bbccbb.....",
@@ -92083,7 +92083,7 @@ export const ART = {
     ".......kk.......",
     "................",
   ] },
-  "tile-tc-viridian": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","h":"#cfe8a8","a":"#cfe8a8","x":"#79a552","z":"#c5edbc","n":"#5e8140","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc-viridian": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","h":"#bdd499","a":"#bdd499","x":"#809f64","z":"#afd9a6","n":"#6c8854","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttxxttttxxt..",
@@ -92101,7 +92101,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-celadon": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#d0f0c0","a":"#d0f0c0","x":"#55b25e","z":"#d5f5d8","n":"#408d47","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-celadon": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#b9dca8","a":"#b9dca8","x":"#67a76d","z":"#b5e1b9","n":"#54915a","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..txxatttttttt..",
@@ -92119,7 +92119,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-cerulean": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#bfe8e0","a":"#bfe8e0","q":"#5eab85","z":"#d2e8ef","n":"#478868","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-cerulean": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#aad4cc","a":"#aad4cc","q":"#6da288","z":"#b6d1da","n":"#5a8d74","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..aataaaattttqq.",
@@ -92137,7 +92137,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-cinnabar": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#e8b89a","a":"#e8b89a","x":"#b35975","z":"#ede1af","n":"#8f425a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-cinnabar": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#d4aa90","a":"#d4aa90","x":"#a76a7d","z":"#d9cd9d","n":"#925669","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttxxttttxxa..",
@@ -92155,7 +92155,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-fuchsia": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#f4cfe2","a":"#f4cfe2","q":"#c782c5","z":"#f9e4e5","n":"#b150ae","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-fuchsia": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#e1b1c9","a":"#e1b1c9","q":"#b884b6","z":"#e6bec0","n":"#a664a4","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttttaattttt..",
@@ -92173,7 +92173,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-indigo": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#c4cfef","a":"#c4cfef","x":"#719bb4","z":"#ddd8f4","n":"#4f7b96","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-indigo": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#abb7db","a":"#abb7db","x":"#7a97a9","z":"#bfb8e0","n":"#608196","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttttttaaatt..",
@@ -92191,7 +92191,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-lavender": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#e0d4f0","a":"#e0d4f0","x":"#8c8cbc","z":"#f4e7f7","n":"#5e5fa1","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-lavender": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#c6b7db","a":"#c6b7db","x":"#8c8cb0","z":"#dcc2e2","n":"#6d6e9b","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttttaaxxttt..",
@@ -92209,7 +92209,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-pallet": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#e8e0a0","a":"#e8e0a0","x":"#b6a85d","z":"#dbedb5","n":"#948743","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-pallet": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#d4cd94","a":"#d4cd94","x":"#aaa06c","z":"#c7d9a1","n":"#958b57","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..xxtaatttttxxa.",
@@ -92227,7 +92227,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-pewter": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#d8d2c0","a":"#d8d2c0","q":"#b49d94","z":"#dee2d0","n":"#96766a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-pewter": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#c5bfae","a":"#c5bfae","q":"#aa9892","z":"#c8cdb9","n":"#937e76","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..ttttaatttttt..",
@@ -92245,7 +92245,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-saffron": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#f0e2a8","a":"#f0e2a8","q":"#c59656","z":"#e7f4be","n":"#a47638","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-saffron": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#d8cc9b","a":"#d8cc9b","q":"#b59467","z":"#d0dda8","n":"#a17e4f","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..tttaaataatqq..",
@@ -92263,7 +92263,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-vermilion": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#f0d0a0","a":"#f0d0a0","x":"#cc6962","z":"#f1f3b6","n":"#b2423a","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-vermilion": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#d7bd97","a":"#d7bd97","x":"#bb746f","z":"#dadba4","n":"#aa5751","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..txxtxxtaattaa.",
@@ -92281,7 +92281,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-tc2-viridian": { w: 16, h: 16, pal: {"t":"#347a36","u":"#285e2b","v":"#48a04b","s":"#2d6e2c","e":"#276129","h":"#cfe8a8","a":"#cfe8a8","q":"#6ba552","z":"#c5edbc","n":"#538140","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tc2-viridian": { w: 16, h: 16, pal: {"t":"#4b854c","u":"#407343","v":"#5b9d5d","s":"#457e44","e":"#3f7541","h":"#bdd499","a":"#bdd499","q":"#769f64","z":"#afd9a6","n":"#648854","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     "..ttttttttaaaa..",
@@ -92299,7 +92299,7 @@ export const ART = {
     ".......kk.......",
     ".......kk.......",
   ] },
-  "tile-td-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","d":"#e8b84a","e":"#a05a3a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-azalea": { w: 16, h: 16, pal: {"a":"#79a475","d":"#c4a868","e":"#9e6950","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92317,7 +92317,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-blackthorn": { w: 16, h: 16, pal: {"a":"#8a8a96","d":"#b03a5a","e":"#e8c86a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-blackthorn": { w: 16, h: 16, pal: {"a":"#8b8b94","d":"#a95169","e":"#cab578","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92335,7 +92335,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-canalave": { w: 16, h: 16, pal: {"a":"#468faf","d":"#f0c030","e":"#e8f4f8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-canalave": { w: 16, h: 16, pal: {"a":"#5b8fa7","d":"#c1a85f","e":"#c2dbe3","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92353,7 +92353,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-celadon": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#d0f0c0","y":"#f0e060","w":"#eef7ff","a":"#4fae7e","b":"#202028"}, rows: [
+  "tile-td-celadon": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#b9dca8","y":"#cac177","w":"#c6d8e9","a":"#63a483","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92371,7 +92371,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-celestic": { w: 16, h: 16, pal: {"a":"#957fef","d":"#e8e4da","e":"#c8a24a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-celestic": { w: 16, h: 16, pal: {"a":"#9486d0","d":"#d1ccbf","e":"#b69c5f","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92389,7 +92389,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-cerulean": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#bfe8e0","y":"#f0e060","w":"#eef7ff","a":"#57a8a0","b":"#202028"}, rows: [
+  "tile-td-cerulean": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#aad4cc","y":"#cac177","w":"#c6d8e9","a":"#699f9a","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92407,7 +92407,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","d":"#e86a8a","e":"#f0e060","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-cherrygrove": { w: 16, h: 16, pal: {"a":"#a1b787","d":"#ca788d","e":"#cac177","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92425,7 +92425,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-cianwood": { w: 16, h: 16, pal: {"a":"#b8a878","d":"#4a90a8","e":"#e86a5a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-cianwood": { w: 16, h: 16, pal: {"a":"#aca17e","d":"#5d90a2","e":"#c77a70","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92443,7 +92443,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-cinnabar": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#e8b89a","y":"#f0e060","w":"#eef7ff","a":"#b06a52","b":"#202028"}, rows: [
+  "tile-td-cinnabar": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#d4aa90","y":"#cac177","w":"#c6d8e9","a":"#a57665","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92461,7 +92461,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-dewford": { w: 16, h: 16, pal: {"a":"#74aca4","d":"#e87a5a","e":"#f0e0a8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-dewford": { w: 16, h: 16, pal: {"a":"#7ca39e","d":"#c78470","e":"#d8cb9b","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92479,7 +92479,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","d":"#c03a2a","e":"#f0c060","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-ecruteak": { w: 16, h: 16, pal: {"a":"#b88b6a","d":"#b45246","e":"#caae77","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92497,7 +92497,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-eterna": { w: 16, h: 16, pal: {"a":"#4f772d","d":"#c8a24a","e":"#e8e4da","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-eterna": { w: 16, h: 16, pal: {"a":"#628445","d":"#b69c5f","e":"#d1ccbf","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92515,7 +92515,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-evergrande": { w: 16, h: 16, pal: {"a":"#a8b8e0","d":"#f0c030","e":"#8a5ab0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-evergrande": { w: 16, h: 16, pal: {"a":"#9ba9cd","d":"#c1a85f","e":"#8b6ba5","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92533,7 +92533,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-fallarbor": { w: 16, h: 16, pal: {"a":"#aca292","d":"#e8e4da","e":"#c0784a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-fallarbor": { w: 16, h: 16, pal: {"a":"#a49c91","d":"#d1ccbf","e":"#b07f60","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92551,7 +92551,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-floaroma": { w: 16, h: 16, pal: {"a":"#e88bb0","d":"#f0f0a0","e":"#7ac86a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-floaroma": { w: 16, h: 16, pal: {"a":"#d188a5","d":"#d7d797","e":"#80b874","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92569,7 +92569,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-fortree": { w: 16, h: 16, pal: {"a":"#5d9c66","d":"#c8a24a","e":"#7ab0d8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-fortree": { w: 16, h: 16, pal: {"a":"#6c9872","d":"#b69c5f","e":"#7da6c5","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92587,7 +92587,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-fuchsia": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#f4cfe2","y":"#f0e060","w":"#eef7ff","a":"#c47ba4","b":"#202028"}, rows: [
+  "tile-td-fuchsia": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#e1b1c9","y":"#cac177","w":"#c6d8e9","a":"#b5809e","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92605,7 +92605,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","d":"#e85a4a","e":"#4a90c0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-goldenrod": { w: 16, h: 16, pal: {"a":"#b4a17e","d":"#c47168","e":"#608fb0","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92623,7 +92623,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-hearthome": { w: 16, h: 16, pal: {"a":"#c9a227","d":"#8a5ab0","e":"#f0e6f8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-hearthome": { w: 16, h: 16, pal: {"a":"#b79c47","d":"#8b6ba5","e":"#d4c0e4","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92641,7 +92641,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-indigo": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#c4cfef","y":"#f0e060","w":"#eef7ff","a":"#6a7ab0","b":"#202028"}, rows: [
+  "tile-td-indigo": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#abb7db","y":"#cac177","w":"#c6d8e9","a":"#7580a6","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92659,7 +92659,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-jubilife": { w: 16, h: 16, pal: {"a":"#8a94a6","d":"#f0c030","e":"#e85a7a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-jubilife": { w: 16, h: 16, pal: {"a":"#8b929f","d":"#c1a85f","e":"#c77084","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92677,7 +92677,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-lavaridge": { w: 16, h: 16, pal: {"a":"#bd7a48","d":"#e83a2a","e":"#f0a848","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-lavaridge": { w: 16, h: 16, pal: {"a":"#ae805e","d":"#be6058","e":"#c59f6b","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92695,7 +92695,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-lavender": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#e0d4f0","y":"#f0e060","w":"#eef7ff","a":"#9a86b8","b":"#202028"}, rows: [
+  "tile-td-lavender": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#c6b7db","y":"#cac177","w":"#c6d8e9","a":"#9688ad","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92713,7 +92713,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-lilycove": { w: 16, h: 16, pal: {"a":"#b8a0c8","d":"#e85a7a","e":"#3a9ad8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-lilycove": { w: 16, h: 16, pal: {"a":"#ac99b9","d":"#c77084","e":"#5896be","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92731,7 +92731,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-littleroot": { w: 16, h: 16, pal: {"a":"#a4bd76","d":"#e86a8a","e":"#f0e8c8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-littleroot": { w: 16, h: 16, pal: {"a":"#9eb07d","d":"#ca788d","e":"#dcd3ae","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92749,7 +92749,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-mahogany": { w: 16, h: 16, pal: {"a":"#8aa888","d":"#5a8ab0","e":"#d8e8f0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-mahogany": { w: 16, h: 16, pal: {"a":"#8ba18a","d":"#6b8ba5","e":"#bad0db","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92767,7 +92767,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-mauville": { w: 16, h: 16, pal: {"a":"#a3a06b","d":"#f0c030","e":"#8a5ab0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-mauville": { w: 16, h: 16, pal: {"a":"#9d9a76","d":"#c1a85f","e":"#8b6ba5","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92785,7 +92785,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-mossdeep": { w: 16, h: 16, pal: {"a":"#8ab8c8","d":"#f0f4f8","e":"#3a6ac0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-mossdeep": { w: 16, h: 16, pal: {"a":"#89adb9","d":"#cbd6e0","e":"#5475b1","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92803,7 +92803,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","d":"#3a7ca5","e":"#e8f0d8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-newbark": { w: 16, h: 16, pal: {"a":"#8eada1","d":"#5082a1","e":"#d0dbba","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92821,7 +92821,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-oldale": { w: 16, h: 16, pal: {"a":"#b3a35e","d":"#f0f0e0","e":"#7aa85e","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-oldale": { w: 16, h: 16, pal: {"a":"#a89d6d","d":"#d9d9c1","e":"#80a06d","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92839,7 +92839,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-olivine": { w: 16, h: 16, pal: {"a":"#7aa8b8","d":"#e8a13a","e":"#f0f0e8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-olivine": { w: 16, h: 16, pal: {"a":"#80a1ac","d":"#c19960","e":"#d7d7c9","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92857,7 +92857,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-oreburgh": { w: 16, h: 16, pal: {"a":"#9c6644","d":"#f0a848","e":"#5a7a9a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-oreburgh": { w: 16, h: 16, pal: {"a":"#9b7258","d":"#c59f6b","e":"#698098","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92875,7 +92875,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-pacifidlog": { w: 16, h: 16, pal: {"a":"#c8a878","d":"#e86a4a","e":"#4ab0a8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-pacifidlog": { w: 16, h: 16, pal: {"a":"#b8a17d","d":"#c47a68","e":"#5fa6a0","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92893,7 +92893,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-pallet": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#e8e0a0","y":"#f0e060","w":"#eef7ff","a":"#9db356","b":"#202028"}, rows: [
+  "tile-td-pallet": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#d4cd94","y":"#cac177","w":"#c6d8e9","a":"#98a768","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92911,7 +92911,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-pastoria": { w: 16, h: 16, pal: {"a":"#6a994e","d":"#d9a441","e":"#8a5a3a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-pastoria": { w: 16, h: 16, pal: {"a":"#759860","d":"#bf9d5c","e":"#8f6950","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92929,7 +92929,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-petalburg": { w: 16, h: 16, pal: {"a":"#79ac8c","d":"#4a90c0","e":"#e8b84a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-petalburg": { w: 16, h: 16, pal: {"a":"#7fa38d","d":"#608fb0","e":"#c4a868","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92947,7 +92947,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-pewter": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#d8d2c0","y":"#f0e060","w":"#eef7ff","a":"#b0a58e","b":"#202028"}, rows: [
+  "tile-td-pewter": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#c5bfae","y":"#cac177","w":"#c6d8e9","a":"#a79f8e","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -92965,7 +92965,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-rustboro": { w: 16, h: 16, pal: {"a":"#a39684","d":"#c05a3a","e":"#5a7a9a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-rustboro": { w: 16, h: 16, pal: {"a":"#9d9487","d":"#b16a54","e":"#698098","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -92983,7 +92983,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-saffron": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#f0e2a8","y":"#f0e060","w":"#eef7ff","a":"#c2a44e","b":"#202028"}, rows: [
+  "tile-td-saffron": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#d8cc9b","y":"#cac177","w":"#c6d8e9","a":"#b29d62","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -93001,7 +93001,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-sandgem": { w: 16, h: 16, pal: {"a":"#d6c98a","d":"#4a90c0","e":"#e8f0f8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-sandgem": { w: 16, h: 16, pal: {"a":"#c4ba88","d":"#608fb0","e":"#c2d3e3","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93019,7 +93019,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-silvertown": { w: 16, h: 16, pal: {"a":"#c8c8d0","d":"#c9a227","e":"#7a9ac0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-silvertown": { w: 16, h: 16, pal: {"a":"#b6b6bd","d":"#b79c47","e":"#7f97b2","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93037,7 +93037,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-slateport": { w: 16, h: 16, pal: {"a":"#c6ad7d","d":"#3a7bd5","e":"#e85a7a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-slateport": { w: 16, h: 16, pal: {"a":"#b7a481","d":"#5681bd","e":"#c77084","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93055,7 +93055,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-snowpoint": { w: 16, h: 16, pal: {"a":"#caf0f8","d":"#e85a7a","e":"#7ac8e8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-snowpoint": { w: 16, h: 16, pal: {"a":"#b0d8e0","d":"#c77084","e":"#80b7ce","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93073,7 +93073,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-solaceon": { w: 16, h: 16, pal: {"a":"#a3b18a","d":"#c0784a","e":"#e8dcc0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-solaceon": { w: 16, h: 16, pal: {"a":"#9da78b","d":"#b07f60","e":"#d4c8aa","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93091,7 +93091,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-sootopolis": { w: 16, h: 16, pal: {"a":"#dedbd2","d":"#3a90c8","e":"#e8b84a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-sootopolis": { w: 16, h: 16, pal: {"a":"#c9c5bb","d":"#558fb5","e":"#c4a868","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93109,7 +93109,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-sunnyshore": { w: 16, h: 16, pal: {"a":"#ffd166","d":"#3a7ac0","e":"#e8f4f8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-sunnyshore": { w: 16, h: 16, pal: {"a":"#ceb781","d":"#5480b1","e":"#c2dbe3","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93127,7 +93127,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-twinleaf": { w: 16, h: 16, pal: {"a":"#7fb069","d":"#f2cc8f","e":"#e07a5f","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-twinleaf": { w: 16, h: 16, pal: {"a":"#84a674","d":"#d4ba90","e":"#c7816e","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93145,7 +93145,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-veilstone": { w: 16, h: 16, pal: {"a":"#7d8597","d":"#5e60ce","e":"#e85a3a","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-veilstone": { w: 16, h: 16, pal: {"a":"#828894","d":"#6c6dbc","e":"#c17260","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93163,7 +93163,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-verdanturf": { w: 16, h: 16, pal: {"a":"#8cc877","d":"#e87ab0","e":"#f0f0a0","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-verdanturf": { w: 16, h: 16, pal: {"a":"#8cb87d","d":"#ce80a6","e":"#d7d797","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93181,7 +93181,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-vermilion": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#f0d0a0","y":"#f0e060","w":"#eef7ff","a":"#c98d5a","b":"#202028"}, rows: [
+  "tile-td-vermilion": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#d7bd97","y":"#cac177","w":"#c6d8e9","a":"#b88e6a","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -93199,7 +93199,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","d":"#7a6ab0","e":"#d8d0e8","k":"#6a4a2e","w":"#8a6a42"}, rows: [
+  "tile-td-violet": { w: 16, h: 16, pal: {"a":"#97929f","d":"#8075a6","e":"#c0b7d3","k":"#7b5e46","w":"#8e7556"}, rows: [
     "................",
     "................",
     "................",
@@ -93217,7 +93217,7 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-td-viridian": { w: 16, h: 16, pal: {"t":"#a8845c","s":"#5a3a24","n":"#4c8a3e","f":"#cfe8a8","y":"#f0e060","w":"#eef7ff","a":"#4f9e57","b":"#202028"}, rows: [
+  "tile-td-viridian": { w: 16, h: 16, pal: {"t":"#a0876c","s":"#71523d","n":"#5e8f53","f":"#bdd499","y":"#cac177","w":"#c6d8e9","a":"#609b66","b":"#3f3f49"}, rows: [
     "................",
     "................",
     ".......aa.......",
@@ -93235,25 +93235,25 @@ export const ART = {
     "................",
     "................",
   ] },
-  "tile-tg-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","b":"#578853","c":"#83cd7d","d":"#e8b84a","e":"#a05a3a","f":"#436840"}, rows: [
-    "babbaacbcaacbdaa",
-    "caabaabaafaacaaf",
+  "tile-tg-azalea": { w: 16, h: 16, pal: {"a":"#79a475","b":"#668c63","c":"#85bc80","d":"#c4a868","e":"#9e6950","f":"#577755"}, rows: [
+    "babbaaabaaaabdaa",
+    "aaabaabaafaaaaaf",
     "aaaaabaaaaaaaaad",
-    "aabfaacbaadbaaab",
+    "aabfaaabaadbaaab",
     "aaabaaaaabaaadad",
-    "aaacaaacaaacacaa",
+    "aaaaaaaaaaaaaaaa",
     "aaaaaadabaaaabaa",
-    "baddaabaaaaaffca",
+    "baddaabaaaaaffaa",
     "abaabaababbdaaaa",
-    "aaabcaabaaaaaacc",
-    "aacacaaaafaaacdc",
+    "aaabaaabaaaaaaaa",
+    "aaaaaaaaafaaaada",
     "faaadabaaaaaaafa",
     "baafaaaaaadadaaa",
-    "abdaacaacaaaabaa",
-    "caacabaaaaaaacba",
-    "affaaacfaaacacaa",
+    "abdaaaaaaaaaabaa",
+    "aaaaabaaaaaaaaba",
+    "affaaaafaaaaaaaa",
   ] },
-  "tile-tg-blackthorn": { w: 16, h: 16, pal: {"a":"#8a8a96","b":"#6c6c75","c":"#a3a3b1","d":"#b03a5a","e":"#e8c86a","f":"#53535a"}, rows: [
+  "tile-tg-blackthorn": { w: 16, h: 16, pal: {"a":"#8b8b94","b":"#76767d","c":"#9c9ca7","d":"#a95169","e":"#cab578","f":"#64646a"}, rows: [
     "baaaaaaabaaaaffc",
     "aaaaaaaaaaaaaaaa",
     "baaaaaadaaaaaaaa",
@@ -93271,43 +93271,43 @@ export const ART = {
     "ccaabaaaaaaafaaa",
     "badacbaaaaaaafaa",
   ] },
-  "tile-tg-canalave": { w: 16, h: 16, pal: {"a":"#468faf","b":"#377088","c":"#53a9ce","d":"#f0c030","e":"#e8f4f8","f":"#2a5669"}, rows: [
-    "baaaaaaabaaaaffc",
+  "tile-tg-canalave": { w: 16, h: 16, pal: {"a":"#5b8fa7","b":"#4d7b8e","c":"#65a1bb","d":"#c1a85f","e":"#c2dbe3","f":"#426a7b"}, rows: [
+    "baaaaaaabaaaaffa",
     "aaaaaaaaaaaaaaaa",
     "baaaaaadaaaaaaaa",
-    "aaaaaaaaaacaaaaa",
-    "babacacabfaacaac",
-    "cafabaaabaaaaaaa",
-    "aaccaaaacaaaabfc",
-    "aaaafaaaaaabcaab",
-    "bafaaaababaaacaa",
-    "aaacadabbcaacaaa",
-    "aaaaaacadcaaafba",
-    "afcaacabaaccaaaa",
-    "aaafaaacbafaaaaa",
-    "aacaadaaaaaabaaa",
-    "ccaabaaaaaaafaaa",
-    "badacbaaaaaaafaa",
+    "aaaaaaaaaaaaaaaa",
+    "babaaaaabfaaaaaa",
+    "aafabaaabaaaaaaa",
+    "aaaaaaaaaaaaabfa",
+    "aaaafaaaaaabaaab",
+    "bafaaaababaaaaaa",
+    "aaaaadabbaaaaaaa",
+    "aaaaaaaadaaaafba",
+    "afaaaaabaaaaaaaa",
+    "aaafaaaabafaaaaa",
+    "aaaaadaaaaaabaaa",
+    "aaaabaaaaaaafaaa",
+    "badaabaaaaaaafaa",
   ] },
-  "tile-tg-celadon": { w: 16, h: 16, pal: {"g":"#4fae7e","m":"#429a6e","l":"#63c08f","d":"#32805a","a":"#d0f0c0","x":"#4faea4","z":"#c0f0cd"}, rows: [
-    "ggggddzzddllllgg",
-    "ggggmmmmdgglxxll",
-    "ggggmmddxddgaadd",
-    "ggggmmddxxgmmadd",
-    "zzllmmxxmmggggdd",
-    "ggllmaaxmmggggdd",
-    "xxlllzzlggllllmm",
-    "aallllllggllllll",
-    "aggmddddmmllxxaa",
-    "aammddddmmllddgg",
-    "xxlmggaamddmmmll",
-    "llmmggggmmmmmmll",
-    "ggddamaallddzzaa",
-    "ggaaammmllddzzxx",
-    "gggdllzzmmllddgg",
-    "ggddllggmmllddmm",
+  "tile-tg-celadon": { w: 16, h: 16, pal: {"g":"#63a483","m":"#569978","l":"#70b18f","d":"#49896a","a":"#b9dca8","x":"#63a49d","z":"#a8dcb6"}, rows: [
+    "ggggddzzddgggggg",
+    "ggggggggdggggggg",
+    "ggggggddgddgaadd",
+    "ggggggddgggggadd",
+    "zzggggggggggggdd",
+    "gggggaagggggggdd",
+    "gggggzzggggggggg",
+    "aagggggggggggggg",
+    "agggddddggggggaa",
+    "aaggddddggggddgg",
+    "ggggggaagddggggg",
+    "gggggggggggggggg",
+    "ggddagaaggddzzaa",
+    "ggaaagggggddzzgg",
+    "gggdggzzggggddgg",
+    "ggddggggggggddgg",
   ] },
-  "tile-tg-celestic": { w: 16, h: 16, pal: {"a":"#957fef","b":"#7463ba","c":"#b096ff","d":"#e8e4da","e":"#c8a24a","f":"#594c8f"}, rows: [
+  "tile-tg-celestic": { w: 16, h: 16, pal: {"a":"#9486d0","b":"#7c70ad","c":"#a99ad8","d":"#d1ccbf","e":"#b69c5f","f":"#685e91"}, rows: [
     "abaaabaacaabaaaa",
     "cacacabaaaaaaaaa",
     "aadaaaaaaaacaaaa",
@@ -93325,25 +93325,25 @@ export const ART = {
     "aadaabaaabaabaaa",
     "aaacacaadfababcc",
   ] },
-  "tile-tg-cerulean": { w: 16, h: 16, pal: {"g":"#57a8a0","m":"#4a958e","l":"#6fbdb4","d":"#3a7d78","a":"#bfe8e0","q":"#5790a8","z":"#bfd7e8"}, rows: [
-    "mdddalaazzddgggg",
-    "llggllaaamaagaag",
-    "mmmmllllggaallmm",
-    "mmmmllllggmmqqmm",
-    "ggaqqqaagaaggqqm",
-    "ggaaqqaaggggggmm",
-    "ggggggmmaazzllgg",
-    "ggmmgmmmggggllgg",
-    "ddllmmqqmmaagmmm",
-    "ggllmmqqddaddgmm",
-    "lldmmlggmmgglaad",
-    "llddllddmmgglldd",
-    "ddmmaaggggmmddqq",
-    "ddmmaaggggggddqq",
-    "llmmmmmmqqzzmqql",
-    "llmddmmmggggddll",
+  "tile-tg-cerulean": { w: 16, h: 16, pal: {"g":"#699f9a","m":"#5c9590","l":"#78b0a9","d":"#4f8682","a":"#aad4cc","q":"#698f9f","z":"#aac3d4"}, rows: [
+    "gdddagaazzddgggg",
+    "ggggggaaagaagaag",
+    "ggggggggggaagggg",
+    "gggggggggggggggg",
+    "ggagggaagaaggggg",
+    "ggaaggaagggggggg",
+    "ggggggggaazzgggg",
+    "gggggggggggggggg",
+    "ddggggggggaagggg",
+    "ggggggggddaddggg",
+    "ggdggggggggggaad",
+    "ggddggddggggggdd",
+    "ddggaaggggggddgg",
+    "ddggaaggggggddgg",
+    "ggggggggggzzgggg",
+    "gggddgggggggddgg",
   ] },
-  "tile-tg-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","b":"#839a69","c":"#c6ea9e","d":"#e86a8a","e":"#f0e060","f":"#657750"}, rows: [
+  "tile-tg-cherrygrove": { w: 16, h: 16, pal: {"a":"#a1b787","b":"#879675","c":"#b6d593","d":"#ca788d","e":"#cac177","f":"#728061"}, rows: [
     "aaaadacaacdfaaaa",
     "aaaaabbaaaabaaaa",
     "caaaabcaaaaaabac",
@@ -93361,7 +93361,7 @@ export const ART = {
     "acccabbaaaafaaca",
     "abaaaaaaacaaabaa",
   ] },
-  "tile-tg-cianwood": { w: 16, h: 16, pal: {"a":"#b8a878","b":"#90835e","c":"#d9c68e","d":"#4a90a8","e":"#e86a5a","f":"#6e6548"}, rows: [
+  "tile-tg-cianwood": { w: 16, h: 16, pal: {"a":"#aca17e","b":"#91876c","c":"#c7b78a","d":"#5d90a2","e":"#c77a70","f":"#7a735b"}, rows: [
     "aabaabaaaaaaacba",
     "aaaaadccbaaaabab",
     "baaaabccaacaaaaa",
@@ -93379,25 +93379,25 @@ export const ART = {
     "aaacabcaaaaabaab",
     "aacaaabaacaaaaab",
   ] },
-  "tile-tg-cinnabar": { w: 16, h: 16, pal: {"g":"#b0525a","m":"#9e4d46","l":"#c06f66","d":"#823936","a":"#e8ab9a","q":"#b07052","z":"#e8da9a"}, rows: [
-    "mmqqzzmmllzzqggd",
-    "mmmmmmmmllzzqqdd",
-    "qqllqqqqmmmmllll",
-    "qqllqqmmmmmmllll",
-    "ddlddllmqqddgddl",
-    "llllmmmmqqddzzll",
-    "lzzzddmmaagglqql",
-    "llqqlddaaaagllll",
-    "llllggmmllddllmm",
-    "llllggllllddlllm",
-    "ggzzggmgggddmmgg",
-    "ggzzggmmggllmmgg",
+  "tile-tg-cinnabar": { w: 16, h: 16, pal: {"g":"#a5656b","m":"#9c5f5a","l":"#b27872","d":"#8a4f4c","a":"#d49f90","q":"#a57a65","z":"#d4c890"}, rows: [
+    "mmllzzmmllzzllld",
+    "mmmmmmmmllzzlldd",
+    "llllllllmmmmllll",
+    "llllllmmmmmmllll",
+    "ddlddllmllddlddl",
+    "llllmmmmllddzzll",
+    "lzzzddmmaallllll",
+    "lllllddaaaalllll",
+    "llllllmmllddllmm",
+    "llllllllllddlllm",
+    "llzzllmlllddmmll",
+    "llzzllmmllllmmll",
     "mmllmmllllllmmdd",
-    "mmlqqmlllllqqmdd",
+    "mmlllmlllllllmdd",
     "ddmmlllzzmmlmmdd",
-    "dggmllllmddlmmdd",
+    "dllmllllmddlmmdd",
   ] },
-  "tile-tg-dewford": { w: 16, h: 16, pal: {"a":"#74aca4","b":"#5a8680","c":"#89cbc2","d":"#e87a5a","e":"#f0e0a8","f":"#466762"}, rows: [
+  "tile-tg-dewford": { w: 16, h: 16, pal: {"a":"#7ca39e","b":"#698a85","c":"#89bbb4","d":"#c78470","e":"#d8cb9b","f":"#5a7571"}, rows: [
     "adaaabaaaaaaabaa",
     "cafaaccaaabaaabb",
     "afaacbaaabcaabaa",
@@ -93415,7 +93415,7 @@ export const ART = {
     "fbacacaaafaaacaa",
     "aaaaacaaabfafaaa",
   ] },
-  "tile-tg-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","b":"#9d6c46","c":"#eda36a","d":"#c03a2a","e":"#f0c060","f":"#795336"}, rows: [
+  "tile-tg-ecruteak": { w: 16, h: 16, pal: {"a":"#b88b6a","b":"#9b7659","c":"#cb9e7a","d":"#b45246","e":"#caae77","f":"#84644c"}, rows: [
     "cabafaaaaaaaaaad",
     "bcaccaaaffbaaaaa",
     "acaaaaaaaaaaaaaa",
@@ -93433,25 +93433,25 @@ export const ART = {
     "aaabaabaaacaaaac",
     "caaabbccccbabaca",
   ] },
-  "tile-tg-eterna": { w: 16, h: 16, pal: {"a":"#4f772d","b":"#3e5d23","c":"#5d8c35","d":"#c8a24a","e":"#e8e4da","f":"#2f471b"}, rows: [
-    "cabafaaaaaaaaaad",
-    "bcaccaaaffbaaaaa",
-    "acaaaaaaaaaaaaaa",
-    "caaaaaaaaaaacaaa",
-    "aacaaaaaaadbacaa",
-    "aabaaccaaaacaaaa",
-    "aacaaaaaaaaaaaaa",
-    "abaaacaabbaccaaa",
-    "aacaacafacaacaaf",
-    "aafaabaabcbaadaa",
-    "aadaabaacbfaaaab",
-    "fabaaabcafaaacaa",
-    "abbaccdbacaabaac",
-    "aacaadacaaacaafa",
-    "aaabaabaaacaaaac",
-    "caaabbccccbabaca",
+  "tile-tg-eterna": { w: 16, h: 16, pal: {"a":"#628445","b":"#56733c","c":"#6c914c","d":"#b69c5f","e":"#d1ccbf","f":"#4b6535"}, rows: [
+    "aaaafaaaaaaaaaaa",
+    "aaaaaaaaffaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaafaaaaaaaf",
+    "aafaaaaaaaaaaaaa",
+    "aaaaaaaaaafaaaaa",
+    "faaaaaaaafaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaafa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
   ] },
-  "tile-tg-evergrande": { w: 16, h: 16, pal: {"a":"#a8b8e0","b":"#8390af","c":"#c6d9ff","d":"#f0c030","e":"#8a5ab0","f":"#656e86"}, rows: [
+  "tile-tg-evergrande": { w: 16, h: 16, pal: {"a":"#9ba9cd","b":"#868fa6","c":"#b2c2e1","d":"#c1a85f","e":"#8b6ba5","f":"#717889"}, rows: [
     "adaaabaaaaaaabaa",
     "cafaaccaaabaaabb",
     "afaacbaaabcaabaa",
@@ -93469,7 +93469,7 @@ export const ART = {
     "fbacacaaafaaacaa",
     "aaaaacaaabfafaaa",
   ] },
-  "tile-tg-fallarbor": { w: 16, h: 16, pal: {"a":"#aca292","b":"#867e72","c":"#cbbfac","d":"#e8e4da","e":"#c0784a","f":"#676158"}, rows: [
+  "tile-tg-fallarbor": { w: 16, h: 16, pal: {"a":"#a49c91","b":"#89837b","c":"#bbb1a1","d":"#d1ccbf","e":"#b07f60","f":"#746f68"}, rows: [
     "aaaaacaabbcbfcaf",
     "aaaafdadaaaaaaad",
     "aaaafbbcfacbaada",
@@ -93487,7 +93487,7 @@ export const ART = {
     "aaaaaaaaaacaaaaa",
     "cabbacaaadbaaacc",
   ] },
-  "tile-tg-floaroma": { w: 16, h: 16, pal: {"a":"#e88bb0","b":"#b56c89","c":"#ffa4d0","d":"#f0f0a0","e":"#7ac86a","f":"#8b536a"}, rows: [
+  "tile-tg-floaroma": { w: 16, h: 16, pal: {"a":"#d188a5","b":"#aa768b","c":"#daa1bd","d":"#d7d797","e":"#80b874","f":"#8e6375"}, rows: [
     "adaaabaaaaaaabaa",
     "cafaaccaaabaaabb",
     "afaacbaaabcaabaa",
@@ -93505,43 +93505,43 @@ export const ART = {
     "fbacacaaafaaacaa",
     "aaaaacaaabfafaaa",
   ] },
-  "tile-tg-fortree": { w: 16, h: 16, pal: {"a":"#5d9c66","b":"#497a50","c":"#6eb878","d":"#c8a24a","e":"#7ab0d8","f":"#385e3d"}, rows: [
-    "acaaabaaaaabfafa",
-    "aacacaaaaaaaaacb",
-    "acafbafcaaaafaaa",
-    "aabcaaaacaaaaaac",
-    "aabaacaaacabbaaa",
-    "abaacaaabbacaaac",
-    "aaaaacbbaaaaaadc",
-    "aaacbacaaaacbaaa",
-    "acaaaaaaafcbaaaa",
-    "cabbaaaaacaabbaa",
-    "aaacaaaaaabaaaaa",
-    "babcaabfaafaaaaa",
-    "daabaaabaafbacca",
-    "aaaaaaabaabaacbc",
-    "daacaadaaccbaaaa",
-    "dcccaaababaaaaaa",
+  "tile-tg-fortree": { w: 16, h: 16, pal: {"a":"#6c9872","b":"#5c8361","c":"#78ac7f","d":"#b69c5f","e":"#7da6c5","f":"#4e7053"}, rows: [
+    "aaaaabaaaaabfafa",
+    "aaaaaaaaaaaaaaab",
+    "aaafbafaaaaafaaa",
+    "aabaaaaaaaaaaaaa",
+    "aabaaaaaaaabbaaa",
+    "abaaaaaabbaaaaaa",
+    "aaaaaabbaaaaaada",
+    "aaaabaaaaaaabaaa",
+    "aaaaaaaaafabaaaa",
+    "aabbaaaaaaaabbaa",
+    "aaaaaaaaaabaaaaa",
+    "babaaabfaafaaaaa",
+    "daabaaabaafbaaaa",
+    "aaaaaaabaabaaaba",
+    "daaaaadaaaabaaaa",
+    "daaaaaababaaaaaa",
   ] },
-  "tile-tg-fuchsia": { w: 16, h: 16, pal: {"g":"#c47ba4","m":"#b26892","l":"#d28fb4","d":"#96567c","a":"#f4cfe2","q":"#c47b87","z":"#f4d2cf"}, rows: [
-    "ddzzaaggllddmmmm",
-    "llzzaagllqqzzmmm",
-    "mmddggmmllllmmgg",
-    "mqqdmmmmllllmmgg",
-    "mmddaazzggmmllll",
-    "mlddmmzzqqmgglll",
-    "zzmmggzzmmmmggqq",
-    "mmmmggzzmmmmggqq",
-    "ggaammmmdmmmddgg",
-    "gaaaammmdddddmmg",
-    "ggggmaadqqllggll",
-    "ggggmmgzzzzlggll",
-    "mmmqqqqammmmggdd",
-    "mmmmaaaammmmglll",
-    "qqaagllzzmmmggdd",
-    "qqmmgmmgmmmmggll",
+  "tile-tg-fuchsia": { w: 16, h: 16, pal: {"g":"#b5809e","m":"#a77491","l":"#c18ca9","d":"#956682","a":"#e1b1c9","q":"#b58088","z":"#e1b5b1"}, rows: [
+    "mmzzaammllmmmmmm",
+    "llzzaamllmmzzmmm",
+    "mmmmmmmmllllmmmm",
+    "mmmmmmmmllllmmmm",
+    "mmmmaazzmmmmllll",
+    "mlmmmmzzmmmmmlll",
+    "zzmmmmzzmmmmmmmm",
+    "mmmmmmzzmmmmmmmm",
+    "mmaammmmmmmmmmmm",
+    "maaaammmmmmmmmmm",
+    "mmmmmaammmllmmll",
+    "mmmmmmmzzzzlmmll",
+    "mmmmmmmammmmmmmm",
+    "mmmmaaaammmmmlll",
+    "mmaamllzzmmmmmmm",
+    "mmmmmmmmmmmmmmll",
   ] },
-  "tile-tg-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","b":"#97835e","c":"#e5c68e","d":"#e85a4a","e":"#4a90c0","f":"#746548"}, rows: [
+  "tile-tg-goldenrod": { w: 16, h: 16, pal: {"a":"#b4a17e","b":"#95876c","c":"#d1b789","d":"#c47168","e":"#608fb0","f":"#7e725b"}, rows: [
     "adaaabaaaaaaabaa",
     "cafaaccaaabaaabb",
     "afaacbaaabcaabaa",
@@ -93559,43 +93559,43 @@ export const ART = {
     "fbacacaaafaaacaa",
     "aaaaacaaabfafaaa",
   ] },
-  "tile-tg-hearthome": { w: 16, h: 16, pal: {"a":"#c9a227","b":"#9d7e1e","c":"#edbf2e","d":"#8a5ab0","e":"#f0e6f8","f":"#796117"}, rows: [
-    "aaaaaaaaaaccaaaa",
-    "caaaaaaaaaaaabba",
-    "abaabadbaccbacaa",
-    "afabdadaaaabaacc",
-    "bfaaabbabacabcaa",
+  "tile-tg-hearthome": { w: 16, h: 16, pal: {"a":"#b79c47","b":"#9c853d","c":"#c0a85c","d":"#8b6ba5","e":"#d4c0e4","f":"#867234"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaabba",
+    "abaabadbaaabaaaa",
+    "afabdadaaaabaaaa",
+    "bfaaabbabaaabaaa",
     "aaaaaaadaaaaaaaa",
-    "acaaaaaaaabacaaa",
-    "ddacacacfaaacaba",
-    "acaacaaadaaacbaa",
-    "aaaaacabaaaabbab",
+    "aaaaaaaaaabaaaaa",
+    "ddaaaaaafaaaaaba",
+    "aaaaaaaadaaaabaa",
+    "aaaaaaabaaaabbab",
     "aaaaaaaaabaaaabb",
-    "cfdabacafaafabba",
-    "caaabababacabbba",
-    "acacdfbafdabbcac",
-    "aacabaaaaaababad",
-    "aaacaaabaacaaaaa",
+    "afdabaaafaafabba",
+    "aaaabababaaabbba",
+    "aaaadfbafdabbaaa",
+    "aaaabaaaaaababad",
+    "aaaaaaabaaaaaaaa",
   ] },
-  "tile-tg-indigo": { w: 16, h: 16, pal: {"g":"#6a7ab0","m":"#5c6ca0","l":"#7e8cc0","d":"#49588c","a":"#c4cfef","x":"#766ab0","z":"#d3c4ef"}, rows: [
-    "ddllggddggxxllaa",
-    "llllggddgggglxxa",
-    "lllaamlladddddgg",
-    "lllgggmmaaddddgg",
-    "ddggggmmaxxzllaa",
-    "ddggggggxxazllaa",
-    "mmggddggmmxxllmm",
-    "mmggddddmmxxllmm",
-    "llammddlddmlldxx",
-    "llaaggllddzzddgg",
-    "zddxxallddzgddgg",
-    "ggllaalzzdzzddgg",
-    "ddmmggggggggmmll",
-    "ddmmggggggggmmll",
-    "zzggddaammmmmmxx",
-    "ddggddaxxddgmmxx",
+  "tile-tg-indigo": { w: 16, h: 16, pal: {"g":"#7580a6","m":"#6c779a","l":"#828cb2","d":"#5c678f","a":"#abb7db","x":"#7e75a6","z":"#bcabdb"}, rows: [
+    "ddggggddggggggaa",
+    "ggggggddggggggga",
+    "gggaagggadddddgg",
+    "ggggggggaaddddgg",
+    "ddggggggaggzggaa",
+    "ddggggggggazggaa",
+    "ggggddgggggggggg",
+    "ggggddddgggggggg",
+    "ggaggddgddgggdgg",
+    "ggaaggggddzzddgg",
+    "zddggaggddzgddgg",
+    "ggggaagzzdzzddgg",
+    "ddgggggggggggggg",
+    "ddgggggggggggggg",
+    "zzggddaagggggggg",
+    "ddggddaggddggggg",
   ] },
-  "tile-tg-jubilife": { w: 16, h: 16, pal: {"a":"#8a94a6","b":"#6c7381","c":"#a3afc4","d":"#f0c030","e":"#e85a7a","f":"#535964"}, rows: [
+  "tile-tg-jubilife": { w: 16, h: 16, pal: {"a":"#8b929f","b":"#767b86","c":"#9ba5b6","d":"#c1a85f","e":"#c77084","f":"#646972"}, rows: [
     "cadfaacbcafbaaaa",
     "aaaaaaacabaaaaba",
     "abfaaaaacaaacaaa",
@@ -93613,7 +93613,7 @@ export const ART = {
     "faaacccaaabaabfa",
     "aaccaaaabbaafaaa",
   ] },
-  "tile-tg-lavaridge": { w: 16, h: 16, pal: {"a":"#bd7a48","b":"#935f38","c":"#df9055","d":"#e83a2a","e":"#f0a848","f":"#71492b"}, rows: [
+  "tile-tg-lavaridge": { w: 16, h: 16, pal: {"a":"#ae805e","b":"#966d4e","c":"#c59069","d":"#be6058","e":"#c59f6b","f":"#805d43"}, rows: [
     "baaaaaaabaaaaffc",
     "aaaaaaaaaaaaaaaa",
     "baaaaaadaaaaaaaa",
@@ -93631,25 +93631,25 @@ export const ART = {
     "ccaabaaaaaaafaaa",
     "badacbaaaaaaafaa",
   ] },
-  "tile-tg-lavender": { w: 16, h: 16, pal: {"g":"#9a86b8","m":"#8a76a8","l":"#ac9ac6","d":"#6f5c8e","a":"#e0d4f0","x":"#ae86b8","z":"#f0d4ef"}, rows: [
-    "xllzaallddzzggmm",
-    "xxllaaxxddzzgzzm",
+  "tile-tg-lavender": { w: 16, h: 16, pal: {"g":"#9688ad","m":"#8b7da0","l":"#a395b7","d":"#786a8f","a":"#c6b7db","x":"#a588ad","z":"#dbb7da"}, rows: [
+    "xllzaallddzzmmmm",
+    "xxllaaxxddzzmzzm",
     "mmmmdmmxxlmmzzdd",
     "mmmmddzzllmmzzdd",
-    "xxmmmmggddmmlxxa",
-    "xxggggggddmmllaa",
+    "xxmmmmmmddmmlxxa",
+    "xxmmmmmmddmmllaa",
     "aallllmmllzzdmmm",
     "aammllmmllzzddmm",
-    "llxxmmddggmmmmmm",
-    "llxxmlldggmmmmll",
-    "ggggaammllggxxzz",
-    "gmmddazzllgllxzz",
-    "llxxmmgxxgmmmmgg",
-    "llxxggggggmddggg",
-    "ggaaxxmmzzmmxxgg",
-    "ggaallmmgzzzzxgg",
+    "llxxmmddmmmmmmmm",
+    "llxxmlldmmmmmmll",
+    "mmmmaammllmmxxzz",
+    "mmmddazzllmllxzz",
+    "llxxmmmxxmmmmmmm",
+    "llxxmmmmmmmddmmm",
+    "mmaaxxmmzzmmxxmm",
+    "mmaallmmmzzzzxmm",
   ] },
-  "tile-tg-lilycove": { w: 16, h: 16, pal: {"a":"#b8a0c8","b":"#907d9c","c":"#d9bdec","d":"#e85a7a","e":"#3a9ad8","f":"#6e6078"}, rows: [
+  "tile-tg-lilycove": { w: 16, h: 16, pal: {"a":"#ac99b9","b":"#908298","c":"#c4a7d8","d":"#c77084","e":"#5896be","f":"#786d80"}, rows: [
     "fabaaaabaaaaafba",
     "bacaadaaaaaaaaaa",
     "aacaabaaaaaabaaa",
@@ -93667,7 +93667,7 @@ export const ART = {
     "fbccfbaacbfcaaaa",
     "aabbaaaaaabaabaa",
   ] },
-  "tile-tg-littleroot": { w: 16, h: 16, pal: {"a":"#a4bd76","b":"#80935c","c":"#c2df8b","d":"#e86a8a","e":"#f0e8c8","f":"#627147"}, rows: [
+  "tile-tg-littleroot": { w: 16, h: 16, pal: {"a":"#9eb07d","b":"#85936a","c":"#b4cb88","d":"#ca788d","e":"#dcd3ae","f":"#707c5a"}, rows: [
     "fabaaaabaaaaafba",
     "bacaadaaaaaaaaaa",
     "aacaabaaaaaabaaa",
@@ -93685,7 +93685,7 @@ export const ART = {
     "fbccfbaacbfcaaaa",
     "aabbaaaaaabaabaa",
   ] },
-  "tile-tg-mahogany": { w: 16, h: 16, pal: {"a":"#8aa888","b":"#6c836a","c":"#a3c6a0","d":"#5a8ab0","e":"#d8e8f0","f":"#536552"}, rows: [
+  "tile-tg-mahogany": { w: 16, h: 16, pal: {"a":"#8ba18a","b":"#768775","c":"#9bb799","d":"#6b8ba5","e":"#bad0db","f":"#647363"}, rows: [
     "aaaaacaabbcbfcaf",
     "aaaafdadaaaaaaad",
     "aaaafbbcfacbaada",
@@ -93703,7 +93703,7 @@ export const ART = {
     "aaaaaaaaaacaaaaa",
     "cabbacaaadbaaacc",
   ] },
-  "tile-tg-mauville": { w: 16, h: 16, pal: {"a":"#a3a06b","b":"#7f7d53","c":"#c0bd7e","d":"#f0c030","e":"#8a5ab0","f":"#626040"}, rows: [
+  "tile-tg-mauville": { w: 16, h: 16, pal: {"a":"#9d9a76","b":"#858463","c":"#b2b082","d":"#c1a85f","e":"#8b6ba5","f":"#727055"}, rows: [
     "aaaaaaaaaaccaaaa",
     "caaaaaaaaaaaabba",
     "abaabadbaccbacaa",
@@ -93721,7 +93721,7 @@ export const ART = {
     "aacabaaaaaababad",
     "aaacaaabaacaaaaa",
   ] },
-  "tile-tg-mossdeep": { w: 16, h: 16, pal: {"a":"#8ab8c8","b":"#6c909c","c":"#a3d9ec","d":"#f0f4f8","e":"#3a6ac0","f":"#536e78"}, rows: [
+  "tile-tg-mossdeep": { w: 16, h: 16, pal: {"a":"#89adb9","b":"#778f98","c":"#97c6d6","d":"#cbd6e0","e":"#5475b1","f":"#637980"}, rows: [
     "aaaadacaacdfaaaa",
     "aaaaabbaaaabaaaa",
     "caaaabcaaaaaabac",
@@ -93739,7 +93739,7 @@ export const ART = {
     "acccabbaaaafaaca",
     "abaaaaaaacaaabaa",
   ] },
-  "tile-tg-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","b":"#709083","c":"#a9d9c6","d":"#3a7ca5","e":"#e8f0d8","f":"#566e65"}, rows: [
+  "tile-tg-newbark": { w: 16, h: 16, pal: {"a":"#8eada1","b":"#7a8f86","c":"#9dc7b6","d":"#5082a1","e":"#d0dbba","f":"#667972"}, rows: [
     "fabaaaabaaaaafba",
     "bacaadaaaaaaaaaa",
     "aacaabaaaaaabaaa",
@@ -93757,7 +93757,7 @@ export const ART = {
     "fbccfbaacbfcaaaa",
     "aabbaaaaaabaabaa",
   ] },
-  "tile-tg-oldale": { w: 16, h: 16, pal: {"a":"#b3a35e","b":"#8c7f49","c":"#d3c06f","d":"#f0f0e0","e":"#7aa85e","f":"#6b6238"}, rows: [
+  "tile-tg-oldale": { w: 16, h: 16, pal: {"a":"#a89d6d","b":"#8f855c","c":"#c1b377","d":"#d9d9c1","e":"#80a06d","f":"#7a724e"}, rows: [
     "aaaadacaacdfaaaa",
     "aaaaabbaaaabaaaa",
     "caaaabcaaaaaabac",
@@ -93775,7 +93775,7 @@ export const ART = {
     "acccabbaaaafaaca",
     "abaaaaaaacaaabaa",
   ] },
-  "tile-tg-olivine": { w: 16, h: 16, pal: {"a":"#7aa8b8","b":"#5f8390","c":"#90c6d9","d":"#e8a13a","e":"#f0f0e8","f":"#49656e"}, rows: [
+  "tile-tg-olivine": { w: 16, h: 16, pal: {"a":"#80a1ac","b":"#6c8791","c":"#8cb7c7","d":"#c19960","e":"#d7d7c9","f":"#5c737a"}, rows: [
     "aaaaaaaaaaccaaaa",
     "caaaaaaaaaaaabba",
     "abaabadbaccbacaa",
@@ -93793,7 +93793,25 @@ export const ART = {
     "aacabaaaaaababad",
     "aaacaaabaacaaaaa",
   ] },
-  "tile-tg-oreburgh": { w: 16, h: 16, pal: {"a":"#9c6644","b":"#7a5035","c":"#b87850","d":"#f0a848","e":"#5a7a9a","f":"#5e3d29"}, rows: [
+  "tile-tg-oreburgh": { w: 16, h: 16, pal: {"a":"#9b7258","b":"#85624b","c":"#ab7f64","d":"#c59f6b","e":"#698098","f":"#735441"}, rows: [
+    "babbaaabaaaabaaa",
+    "aaabaabaafaaaaaf",
+    "aaaaabaaaaaaaaaa",
+    "aabfaaabaaabaaab",
+    "aaabaaaaabaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaabaaaabaa",
+    "baaaaabaaaaaffaa",
+    "abaabaababbaaaaa",
+    "aaabaaabaaaaaaaa",
+    "aaaaaaaaafaaaaaa",
+    "faaaaabaaaaaaafa",
+    "baafaaaaaaaaaaaa",
+    "abaaaaaaaaaaabaa",
+    "aaaaabaaaaaaaaba",
+    "affaaaafaaaaaaaa",
+  ] },
+  "tile-tg-pacifidlog": { w: 16, h: 16, pal: {"a":"#b8a17d","b":"#98876d","c":"#d2b68c","d":"#c47a68","e":"#5fa6a0","f":"#81725b"}, rows: [
     "babbaacbcaacbdaa",
     "caabaabaafaacaaf",
     "aaaaabaaaaaaaaad",
@@ -93811,61 +93829,43 @@ export const ART = {
     "caacabaaaaaaacba",
     "affaaacfaaacacaa",
   ] },
-  "tile-tg-pacifidlog": { w: 16, h: 16, pal: {"a":"#c8a878","b":"#9c835e","c":"#ecc68e","d":"#e86a4a","e":"#4ab0a8","f":"#786548"}, rows: [
-    "babbaacbcaacbdaa",
-    "caabaabaafaacaaf",
-    "aaaaabaaaaaaaaad",
-    "aabfaacbaadbaaab",
-    "aaabaaaaabaaadad",
-    "aaacaaacaaacacaa",
-    "aaaaaadabaaaabaa",
-    "baddaabaaaaaffca",
-    "abaabaababbdaaaa",
-    "aaabcaabaaaaaacc",
-    "aacacaaaafaaacdc",
-    "faaadabaaaaaaafa",
-    "baafaaaaaadadaaa",
-    "abdaacaacaaaabaa",
-    "caacabaaaaaaacba",
-    "affaaacfaaacacaa",
+  "tile-tg-pallet": { w: 16, h: 16, pal: {"g":"#98a768","m":"#8c9f5b","l":"#a9b577","d":"#7e9351","a":"#d4cd94","x":"#7fa768","z":"#b5d494"}, rows: [
+    "mmmmmmmmzzmmmmmm",
+    "mmmmmmmmzzmmmmmm",
+    "mmmmllmmllllmmmm",
+    "lzzmllmmllllmmmm",
+    "mmmmmmmmmmmmmmmm",
+    "mmmmmmmmmmmmmmmm",
+    "mmmmmmmmmmmmllll",
+    "mmmmmmmmmllmzzaa",
+    "mmmmzzaallmmzzmm",
+    "mmmmzzaallaammmm",
+    "zzllmmmmmmmmmmmm",
+    "zzmmmmmmmmmmmmmm",
+    "mmmmmmmmmmaaaamm",
+    "mmzmmmmmzzaazzmm",
+    "llmmllmmlzzmmaal",
+    "llmmllmmllmmmmll",
   ] },
-  "tile-tg-pallet": { w: 16, h: 16, pal: {"g":"#9db356","m":"#8aa348","l":"#b3c46e","d":"#75903c","a":"#e8e0a0","x":"#78b356","z":"#c5e8a0"}, rows: [
-    "ggmmmmxxzzggggdd",
-    "ggxxmmxxzzmmggdd",
-    "ggggllxxllllmmmm",
-    "lzzgllxxllllmmxx",
-    "xxmmggddmmddmmxx",
-    "xxmmggddmmddmmmm",
-    "ddmmddddggxxllll",
-    "ddmmddddgllxzzaa",
-    "mmggzzaallggzzmm",
-    "mmggzzaallaammmm",
-    "zzllxxggggddddmm",
-    "zzggxxggggddmmmm",
-    "mmmmggxxggaaaadd",
-    "ggzmddxxzzaazzmm",
-    "llddllgglzzmdaal",
-    "llggllggllmmmmll",
+  "tile-tg-pastoria": { w: 16, h: 16, pal: {"a":"#759860","b":"#648252","c":"#82a96c","d":"#bf9d5c","e":"#8f6950","f":"#567047"}, rows: [
+    "aaaaabaaaaabaaaa",
+    "aaaaaaaaaaaaaaab",
+    "aaaabaaaaaaaaaaa",
+    "aabaaaaaaaaaaaaa",
+    "aabaaaaaaaabbaaa",
+    "abaaaaaabbaaaaaa",
+    "aaaaaabbaaaaaada",
+    "aaaabaaaaaaabaaa",
+    "aaaaaaaaaaabaaaa",
+    "aabbaaaaaaaabbaa",
+    "aaaaaaaaaabaaaaa",
+    "babaaabaaaaaaaaa",
+    "daabaaabaaabaaaa",
+    "aaaaaaabaabaaaba",
+    "daaaaadaaaabaaaa",
+    "daaaaaababaaaaaa",
   ] },
-  "tile-tg-pastoria": { w: 16, h: 16, pal: {"a":"#6a994e","b":"#53773d","c":"#7db55c","d":"#d9a441","e":"#8a5a3a","f":"#405c2f"}, rows: [
-    "acaaabaaaaabfafa",
-    "aacacaaaaaaaaacb",
-    "acafbafcaaaafaaa",
-    "aabcaaaacaaaaaac",
-    "aabaacaaacabbaaa",
-    "abaacaaabbacaaac",
-    "aaaaacbbaaaaaadc",
-    "aaacbacaaaacbaaa",
-    "acaaaaaaafcbaaaa",
-    "cabbaaaaacaabbaa",
-    "aaacaaaaaabaaaaa",
-    "babcaabfaafaaaaa",
-    "daabaaabaafbacca",
-    "aaaaaaabaabaacbc",
-    "daacaadaaccbaaaa",
-    "dcccaaababaaaaaa",
-  ] },
-  "tile-tg-petalburg": { w: 16, h: 16, pal: {"a":"#79ac8c","b":"#5e866d","c":"#8fcba5","d":"#4a90c0","e":"#e8b84a","f":"#496754"}, rows: [
+  "tile-tg-petalburg": { w: 16, h: 16, pal: {"a":"#7fa38d","b":"#6c8a77","c":"#8dbb9e","d":"#608fb0","e":"#c4a868","f":"#5c7565"}, rows: [
     "cadfaacbcafbaaaa",
     "aaaaaaacabaaaaba",
     "abfaaaaacaaacaaa",
@@ -93883,25 +93883,25 @@ export const ART = {
     "faaacccaaabaabfa",
     "aaccaaaabbaafaaa",
   ] },
-  "tile-tg-pewter": { w: 16, h: 16, pal: {"g":"#b0a58e","m":"#a19880","l":"#c0b69e","d":"#8a8069","a":"#d8d2c0","q":"#adb08e","z":"#d0d8c0"}, rows: [
-    "llgqqmmmddqqddmm",
-    "llggmmmmddmmggmm",
-    "aaggmmggmlllzzmm",
-    "gggzzmddmmllzzmm",
-    "mmaaddqqggddaagg",
-    "mmaammqqggddaagg",
-    "mmmmggzzgggadaag",
-    "mzzmggzzggaaddgg",
-    "lmmzzzqqgglllllg",
-    "lggqqmqqggllzzgg",
-    "qqqqqgzzmmqqmmgg",
-    "ggqqggzzggllmmgg",
-    "ggllqqddddllgaaz",
-    "ggllqqddddllggdd",
-    "qqggdgqlllddaaag",
-    "llmmllqqlldggggg",
+  "tile-tg-pewter": { w: 16, h: 16, pal: {"g":"#a79f8e","m":"#9c9584","l":"#b3ab98","d":"#8c8574","a":"#c5bfae","q":"#a4a78e","z":"#bdc5ae"}, rows: [
+    "ggggggggddggddgg",
+    "ggggggggddgggggg",
+    "aaggggggggggzzgg",
+    "gggzzgddggggzzgg",
+    "ggaaddggggddaagg",
+    "ggaaggggggddaagg",
+    "ggggggzzgggadaag",
+    "gzzgggzzggaaddgg",
+    "gggzzzgggggggggg",
+    "ggggggggggggzzgg",
+    "ggggggzzgggggggg",
+    "ggggggzzgggggggg",
+    "ggggggddddgggaaz",
+    "ggggggddddggggdd",
+    "ggggdgggggddaaag",
+    "ggggggggggdggggg",
   ] },
-  "tile-tg-rustboro": { w: 16, h: 16, pal: {"a":"#a39684","b":"#7f7567","c":"#c0b19c","d":"#c05a3a","e":"#5a7a9a","f":"#625a4f"}, rows: [
+  "tile-tg-rustboro": { w: 16, h: 16, pal: {"a":"#9d9487","b":"#847d72","c":"#b3a797","d":"#b16a54","e":"#698098","f":"#716a61"}, rows: [
     "babbaacbcaacbdaa",
     "caabaabaafaacaaf",
     "aaaaabaaaaaaaaad",
@@ -93919,25 +93919,25 @@ export const ART = {
     "caacabaaaaaaacba",
     "affaaacfaaacacaa",
   ] },
-  "tile-tg-saffron": { w: 16, h: 16, pal: {"g":"#c2b94e","m":"#b29040","l":"#d2af62","d":"#96712f","a":"#f0dfa8","q":"#9dc24e","z":"#d6f0a8"}, rows: [
-    "mqqqddlldddmqmaa",
-    "mmddddllddmmqqgg",
-    "gqqmaagglzzggggg",
-    "ggmmaaqqllgggggg",
-    "llddmmllggqqmmgg",
-    "llllqqddggqqggdd",
-    "mmqqmmllgglggdqq",
-    "mmqqmmlmmgllzzqq",
-    "mqqlggddzzmmggaa",
-    "mmllglldggmmggaa",
-    "ggmmggaaddzzllgg",
-    "ggmmggllddmmllgg",
-    "qqmmggggmmlllzll",
-    "qqaagggqqmllllll",
-    "ddmmddllgggmddll",
-    "dllmdgglgllmggll",
+  "tile-tg-saffron": { w: 16, h: 16, pal: {"g":"#b2ac62","m":"#aa9056","l":"#bfa66e","d":"#997b47","a":"#d8ca9b","q":"#98b262","z":"#c2d89b"}, rows: [
+    "mgggddggdddmgmaa",
+    "mmddddggddmmgggg",
+    "gggmaagggzzggggg",
+    "ggmmaagggggggggg",
+    "ggddmmggggggmmgg",
+    "ggggggddggggggdd",
+    "mmggmmgggggggdgg",
+    "mmggmmgmmgggzzgg",
+    "mgggggddzzmmggaa",
+    "mmgggggdggmmggaa",
+    "ggmmggaaddzzgggg",
+    "ggmmggggddmmgggg",
+    "ggmmggggmmgggzgg",
+    "ggaagggggmgggggg",
+    "ddmmddgggggmddgg",
+    "dggmdggggggmgggg",
   ] },
-  "tile-tg-sandgem": { w: 16, h: 16, pal: {"a":"#d6c98a","b":"#a79d6c","c":"#fdeda3","d":"#4a90c0","e":"#e8f0f8","f":"#807953"}, rows: [
+  "tile-tg-sandgem": { w: 16, h: 16, pal: {"a":"#c4ba88","b":"#9f9977","c":"#dacf9f","d":"#608fb0","e":"#c2d3e3","f":"#868163"}, rows: [
     "aaaadacaacdfaaaa",
     "aaaaabbaaaabaaaa",
     "caaaabcaaaaaabac",
@@ -93955,7 +93955,7 @@ export const ART = {
     "acccabbaaaafaaca",
     "abaaaaaaacaaabaa",
   ] },
-  "tile-tg-silvertown": { w: 16, h: 16, pal: {"a":"#c8c8d0","b":"#9c9ca2","c":"#ececf5","d":"#c9a227","e":"#7a9ac0","f":"#78787d"}, rows: [
+  "tile-tg-silvertown": { w: 16, h: 16, pal: {"a":"#b6b6bd","b":"#98989c","c":"#cacadd","d":"#b79c47","e":"#7f97b2","f":"#7f7f82"}, rows: [
     "acaaabaaaaabfafa",
     "aacacaaaaaaaaacb",
     "acafbafcaaaafaaa",
@@ -93973,7 +93973,7 @@ export const ART = {
     "daacaadaaccbaaaa",
     "dcccaaababaaaaaa",
   ] },
-  "tile-tg-slateport": { w: 16, h: 16, pal: {"a":"#c6ad7d","b":"#9a8762","c":"#eacc94","d":"#3a7bd5","e":"#e85a7a","f":"#77684b"}, rows: [
+  "tile-tg-slateport": { w: 16, h: 16, pal: {"a":"#b7a481","b":"#968970","c":"#d3bb8e","d":"#5681bd","e":"#c77084","f":"#80745d"}, rows: [
     "cabafaaaaaaaaaad",
     "bcaccaaaffbaaaaa",
     "acaaaaaaaaaaaaaa",
@@ -93991,25 +93991,25 @@ export const ART = {
     "aaabaabaaacaaaac",
     "caaabbccccbabaca",
   ] },
-  "tile-tg-snowpoint": { w: 16, h: 16, pal: {"a":"#caf0f8","b":"#9ebbc1","c":"#eeffff","d":"#e85a7a","e":"#7ac8e8","f":"#799095"}, rows: [
-    "caafaafacaaaacaa",
+  "tile-tg-snowpoint": { w: 16, h: 16, pal: {"a":"#b0d8e0","b":"#98afb3","c":"#c6e9e9","d":"#c77084","e":"#80b7ce","f":"#809093"}, rows: [
+    "aaafaafaaaaaaaaa",
     "aababaabbbaaaaaa",
     "aaabfabdaaaaabaa",
-    "faaaaaaaaaacaaaa",
-    "aaccacacaaaaaaba",
-    "baacfaaaaaaabbaa",
-    "aaaabaacaaadcaca",
-    "aabfcaaaaaaaafaa",
-    "fdcabacaaaaaaaac",
-    "aaaaaacdacbaabda",
-    "aabbfcaccdaaaaab",
-    "aabcfbacabacbbac",
-    "aaacfaaabbfaaaaa",
-    "bbacaaaaaaafacac",
-    "daaaaacaaaaababc",
-    "caabacaaabbcffaa",
+    "faaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaba",
+    "baaafaaaaaaabbaa",
+    "aaaabaaaaaadaaaa",
+    "aabfaaaaaaaaafaa",
+    "fdaabaaaaaaaaaaa",
+    "aaaaaaadaabaabda",
+    "aabbfaaaadaaaaab",
+    "aabafbaaabaabbaa",
+    "aaaafaaabbfaaaaa",
+    "bbaaaaaaaaafaaaa",
+    "daaaaaaaaaaababa",
+    "aaabaaaaabbaffaa",
   ] },
-  "tile-tg-solaceon": { w: 16, h: 16, pal: {"a":"#a3b18a","b":"#7f8a6c","c":"#c0d1a3","d":"#c0784a","e":"#e8dcc0","f":"#626a53"}, rows: [
+  "tile-tg-solaceon": { w: 16, h: 16, pal: {"a":"#9da78b","b":"#848c76","c":"#b2c09a","d":"#b07f60","e":"#d4c8aa","f":"#707664"}, rows: [
     "aabaabaaaaaaacba",
     "aaaaadccbaaaabab",
     "baaaabccaacaaaaa",
@@ -94027,7 +94027,7 @@ export const ART = {
     "aaacabcaaaaabaab",
     "aacaaabaacaaaaab",
   ] },
-  "tile-tg-sootopolis": { w: 16, h: 16, pal: {"a":"#dedbd2","b":"#adaba4","c":"#fffff8","d":"#3a90c8","e":"#e8b84a","f":"#85837e"}, rows: [
+  "tile-tg-sootopolis": { w: 16, h: 16, pal: {"a":"#c9c5bb","b":"#a4a39d","c":"#ebebcb","d":"#558fb5","e":"#c4a868","f":"#888783"}, rows: [
     "cadfaacbcafbaaaa",
     "aaaaaaacabaaaaba",
     "abfaaaaacaaacaaa",
@@ -94045,25 +94045,25 @@ export const ART = {
     "faaacccaaabaabfa",
     "aaccaaaabbaafaaa",
   ] },
-  "tile-tg-sunnyshore": { w: 16, h: 16, pal: {"a":"#ffd166","b":"#c7a350","c":"#fff778","d":"#3a7ac0","e":"#e8f4f8","f":"#997d3d"}, rows: [
+  "tile-tg-sunnyshore": { w: 16, h: 16, pal: {"a":"#ceb781","b":"#b69d63","c":"#d2cd8a","d":"#5480b1","e":"#c2dbe3","f":"#998452"}, rows: [
     "aabfaaabdaaaabaa",
-    "aaacaafaabafacaa",
-    "baaacbcfaaaaaaab",
-    "aaaafafaaaaacaac",
-    "accaabaacaaaaaaa",
-    "aabaaaabaaccaaaa",
-    "aacaaaaabacacaca",
-    "caaafabcfaafabda",
-    "abaaaabaaabbaafc",
-    "accaaaaaccaaaaaa",
+    "aaaaaafaabafaaaa",
+    "baaaabafaaaaaaab",
+    "aaaafafaaaaaaaaa",
+    "aaaaabaaaaaaaaaa",
+    "aabaaaabaaaaaaaa",
     "aaaaaaaabaaaaaaa",
-    "aaaaaabbbacaaaaa",
-    "aaaaacabbaabaaaa",
-    "baacaaaaaabaaccd",
+    "aaaafabafaafabda",
+    "abaaaabaaabbaafa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaabaaaaaaa",
+    "aaaaaabbbaaaaaaa",
+    "aaaaaaabbaabaaaa",
+    "baaaaaaaaabaaaad",
     "aaabaaaaaaabaaba",
-    "acabaaaabdaabbfa",
+    "aaabaaaabdaabbfa",
   ] },
-  "tile-tg-twinleaf": { w: 16, h: 16, pal: {"a":"#7fb069","b":"#638952","c":"#96d07c","d":"#f2cc8f","e":"#e07a5f","f":"#4c6a3f"}, rows: [
+  "tile-tg-twinleaf": { w: 16, h: 16, pal: {"a":"#84a674","b":"#6f8c62","c":"#93bf7f","d":"#d4ba90","e":"#c7816e","f":"#5f7854"}, rows: [
     "fabaaaabaaaaafba",
     "bacaadaaaaaaaaaa",
     "aacaabaaaaaabaaa",
@@ -94081,25 +94081,25 @@ export const ART = {
     "fbccfbaacbfcaaaa",
     "aabbaaaaaabaabaa",
   ] },
-  "tile-tg-veilstone": { w: 16, h: 16, pal: {"a":"#7d8597","b":"#626876","c":"#949db2","d":"#5e60ce","e":"#e85a3a","f":"#4b505b"}, rows: [
-    "aaaaacaabbcbfcaf",
-    "aaaafdadaaaaaaad",
-    "aaaafbbcfacbaada",
-    "aaaaaaafbaaaafca",
-    "faaaafaaaaacaabb",
-    "facaacaaafbaacaa",
+  "tile-tg-veilstone": { w: 16, h: 16, pal: {"a":"#828894","b":"#6f737e","c":"#9298a8","d":"#6c6dbc","e":"#c17260","f":"#5e626c"}, rows: [
+    "aaaaacaabbcbacaa",
+    "aaaaadadaaaaaaad",
+    "aaaaabbcaacbaada",
+    "aaaaaaaabaaaaaca",
+    "aaaaaaaaaaacaabb",
+    "aacaacaaaabaacaa",
     "bbabaabaaacaccbc",
-    "aaabaaabaacabafc",
-    "aaacfbacbaaacacc",
-    "bbabaaaaafbcaaaa",
-    "aaacaaaafabaaaaa",
+    "aaabaaabaacabaac",
+    "aaacabacbaaacacc",
+    "bbabaaaaaabcaaaa",
+    "aaacaaaaaabaaaaa",
     "aababcaadaabacac",
-    "aaaaaaaafaaacafb",
+    "aaaaaaaaaaaacaab",
     "ccadaaaaacacbcab",
     "aaaaaaaaaacaaaaa",
     "cabbacaaadbaaacc",
   ] },
-  "tile-tg-verdanturf": { w: 16, h: 16, pal: {"a":"#8cc877","b":"#6d9c5d","c":"#a5ec8c","d":"#e87ab0","e":"#f0f0a0","f":"#547847"}, rows: [
+  "tile-tg-verdanturf": { w: 16, h: 16, pal: {"a":"#8cb87d","b":"#77986c","c":"#9dd28b","d":"#ce80a6","e":"#d7d797","f":"#64815a"}, rows: [
     "aabaabaaaaaaacba",
     "aaaaadccbaaaabab",
     "baaaabccaacaaaaa",
@@ -94117,25 +94117,25 @@ export const ART = {
     "aaacabcaaaaabaab",
     "aacaaabaacaaaaab",
   ] },
-  "tile-tg-vermilion": { w: 16, h: 16, pal: {"g":"#c98d5a","m":"#b87f4e","l":"#dba26e","d":"#a06a3c","a":"#f0d0a0","x":"#c9b95a","z":"#e0f0a0"}, rows: [
-    "mmzzxxzzddggaggl",
-    "mmmmmmzzddggaall",
-    "mggxzzmmmmggxxgg",
-    "mmzzzggmmmggllgg",
-    "ggaammxllgggggmm",
-    "ggaammxxggddggmm",
-    "xxdmmlgaalddggdd",
-    "xxddllggxxddggdd",
-    "llzzggggaammmmgg",
-    "ggzzgggxxammmmgg",
-    "maamxxllggdaazaa",
-    "mmzzxxllggmmzzgg",
-    "mddgaallmmlllggm",
-    "mmggaallmgmmllgg",
-    "ddddmaagddzzmmdd",
-    "ggxxddggmmzzlldd",
+  "tile-tg-vermilion": { w: 16, h: 16, pal: {"g":"#b88e6a","m":"#ab8462","l":"#c79c75","d":"#9e7552","a":"#d7bd97","x":"#b8ad6a","z":"#cad797"}, rows: [
+    "ggzzxxzzddggaggg",
+    "ggggggzzddggaagg",
+    "gggxzzggggggxxgg",
+    "ggzzzggggggggggg",
+    "ggaaggxggggggggg",
+    "ggaaggxxggddgggg",
+    "xxdggggaagddggdd",
+    "xxddggggxxddggdd",
+    "ggzzggggaagggggg",
+    "ggzzgggxxagggggg",
+    "gaagxxggggdaazaa",
+    "ggzzxxggggggzzgg",
+    "gddgaagggggggggg",
+    "ggggaagggggggggg",
+    "ddddgaagddzzggdd",
+    "ggxxddggggzzggdd",
   ] },
-  "tile-tg-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","b":"#787381","c":"#b6afc4","d":"#7a6ab0","e":"#d8d0e8","f":"#5c5964"}, rows: [
+  "tile-tg-violet": { w: 16, h: 16, pal: {"a":"#97929f","b":"#7f7b85","c":"#aaa4b5","d":"#8075a6","e":"#c0b7d3","f":"#6b6971"}, rows: [
     "cadfaacbcafbaaaa",
     "aaaaaaacabaaaaba",
     "abfaaaaacaaacaaa",
@@ -94153,43 +94153,43 @@ export const ART = {
     "faaacccaaabaabfa",
     "aaccaaaabbaafaaa",
   ] },
-  "tile-tg-viridian": { w: 16, h: 16, pal: {"g":"#4f9e57","m":"#448c4c","l":"#63b06b","d":"#35733e","a":"#cfe8a8","q":"#4f9e77","z":"#a9e8a8"}, rows: [
-    "mmaallqqmmddlaam",
+  "tile-tg-viridian": { w: 16, h: 16, pal: {"g":"#609b66","m":"#58905e","l":"#71a676","d":"#4b8053","a":"#bdd499","q":"#609b7e","z":"#9ad499"}, rows: [
+    "mmaallqqmmmmlaam",
     "mmaallqqmmmmllmm",
-    "qqmmddddgmmgddgg",
-    "qaamllddggggddgg",
-    "zzmmllmmmmllllgg",
-    "ddmmllmmmmllgggg",
-    "ddggddmmddddqmmd",
-    "ddzzggdddddggqdd",
-    "llddmmqqqqaammdd",
-    "lldlllddqqaammdd",
-    "qqggllllggmmllqq",
-    "llggmmggggmmllll",
-    "ggmmllgglggdggaa",
-    "ggmmlgggqggdggqq",
-    "mggmqqddddmmllmm",
-    "mmmaalldddmmqqmm",
+    "qqmmmmmmmmmmmmmm",
+    "qaamllmmmmmmmmmm",
+    "zzmmllmmmmllllmm",
+    "mmmmllmmmmllmmmm",
+    "mmmmmmmmmmmmqmmm",
+    "mmzzmmmmmmmmmqmm",
+    "llmmmmqqqqaammmm",
+    "llmlllmmqqaammmm",
+    "qqmmllllmmmmllqq",
+    "llmmmmmmmmmmllll",
+    "mmmmllmmlmmmmmaa",
+    "mmmmlmmmqmmmmmqq",
+    "mmmmqqmmmmmmllmm",
+    "mmmaallmmmmmqqmm",
   ] },
-  "tile-tg2-azalea": { w: 16, h: 16, pal: {"a":"#6fae6a","b":"#578853","c":"#83cd7d","d":"#e8b84a","e":"#a05a3a","f":"#436840"}, rows: [
-    "bccbcccbccbcccba",
-    "cccccbaccaacbaac",
-    "cacbbabccabaaacb",
-    "cbcccaebbbcccccb",
-    "cccccabcbccaabca",
-    "cbccbccccccbccac",
-    "cabbbccccbacaccb",
-    "bacccccbacaacabc",
-    "accaabcccaaabbca",
-    "cccbaaacaebeaceb",
-    "cbccccacbbcacaab",
-    "caaccabcacceabcb",
-    "accbbccccaebcacc",
-    "aabccaabcbccccca",
-    "bbcbeaabcaacccba",
-    "caccabacceacbcbc",
+  "tile-tg2-azalea": { w: 16, h: 16, pal: {"a":"#79a475","b":"#668c63","c":"#85bc80","d":"#c4a868","e":"#9e6950","f":"#577755"}, rows: [
+    "bccbcccbccbcccbc",
+    "cccccbccccccbccc",
+    "cccbbcbcccbccccb",
+    "cbccccebbbcccccb",
+    "ccccccbcbccccbcc",
+    "cbccbccccccbcccc",
+    "ccbbbccccbcccccb",
+    "bccccccbccccccbc",
+    "cccccbccccccbbcc",
+    "cccbcccccebecceb",
+    "cbccccccbbcccccb",
+    "ccccccbccccecbcb",
+    "cccbbcccccebcccc",
+    "ccbccccbcbcccccc",
+    "bbcbeccbccccccbc",
+    "cccccbccceccbcbc",
   ] },
-  "tile-tg2-blackthorn": { w: 16, h: 16, pal: {"a":"#8a8a96","b":"#6c6c75","c":"#a3a3b1","d":"#b03a5a","e":"#e8c86a","f":"#53535a"}, rows: [
+  "tile-tg2-blackthorn": { w: 16, h: 16, pal: {"a":"#8b8b94","b":"#76767d","c":"#9c9ca7","d":"#a95169","e":"#cab578","f":"#64646a"}, rows: [
     "bccaaacbccccacbc",
     "cccacbcaeaeabaac",
     "cccbcccccebccacb",
@@ -94207,43 +94207,43 @@ export const ART = {
     "bcbaaacbceaacabc",
     "cccacbccccbbbbca",
   ] },
-  "tile-tg2-canalave": { w: 16, h: 16, pal: {"a":"#468faf","b":"#377088","c":"#53a9ce","d":"#f0c030","e":"#e8f4f8","f":"#2a5669"}, rows: [
-    "bccaaacbccccacbc",
-    "cccacbcaeaeabaac",
-    "cccbcccccebccacb",
-    "cbacccccbccaabab",
-    "cccacabceeccbbcc",
-    "cacabcccccbbccca",
-    "ccbabceecbccaccb",
-    "bcbcccabcbacbcbb",
-    "acacebcacbccbcca",
-    "cecbccccccbcccca",
-    "abcbecccbecaccab",
-    "cccccbbcacccabbb",
-    "ceacbcccaccbccce",
-    "ecbcccacbbccaaac",
-    "bcbaaacbceaacabc",
-    "cccacbccccbbbbca",
+  "tile-tg2-canalave": { w: 16, h: 16, pal: {"a":"#5b8fa7","b":"#4d7b8e","c":"#65a1bb","d":"#c1a85f","e":"#c2dbe3","f":"#426a7b"}, rows: [
+    "bccccccbccccccbc",
+    "cccccbccececbccc",
+    "cccbcccccebccccb",
+    "cbccccccbccccbcb",
+    "ccccccbceeccbbcc",
+    "ccccbcccccbbcccc",
+    "ccbcbceecbcccccb",
+    "bcbccccbcbccbcbb",
+    "ccccebcccbccbccc",
+    "cecbccccccbccccc",
+    "cbcbecccbecccccb",
+    "cccccbbccccccbbb",
+    "ceccbccccccbccce",
+    "ecbcccccbbcccccc",
+    "bcbccccbceccccbc",
+    "cccccbccccbbbbcc",
   ] },
-  "tile-tg2-celadon": { w: 16, h: 16, pal: {"g":"#4fae97","m":"#429a85","l":"#63c0a8","d":"#32806f","a":"#d0f0c0","q":"#4fae68","z":"#c0f0cd"}, rows: [
-    "ggllmmaallggdddd",
-    "ggllmmaaldddllll",
-    "ggggqqllzzllmmll",
-    "ggmmaallzzllmmll",
-    "zzgqqalddzzgggll",
-    "zzddaallzzggggll",
-    "aammggzzmmllgggg",
-    "mmmmgmmzmmllggmm",
-    "glladdmmddaalldd",
-    "ggqqddmmddzaaldd",
-    "ggqqqqgglzzqaamm",
-    "ggqqggmmllqqzllm",
-    "lmmgmmqqddgggggg",
-    "llgmmmaaddgggggg",
-    "zzllggggddmmggll",
-    "zgglgqmmddmmggll",
+  "tile-tg2-celadon": { w: 16, h: 16, pal: {"g":"#63a494","m":"#569989","l":"#70b1a1","d":"#49897b","a":"#b9dca8","q":"#63a474","z":"#a8dcb6"}, rows: [
+    "ggggggaaggggdddd",
+    "ggggggaagdddgggg",
+    "ggggqqggzzgggggg",
+    "ggggaaggzzgggggg",
+    "zzgqqagddzzggggg",
+    "zzddaaggzzgggggg",
+    "aaggggzzgggggggg",
+    "gggggggzgggggggg",
+    "gggaddggddaaggdd",
+    "ggqqddggddzaagdd",
+    "ggqqqqgggzzqaagg",
+    "ggqqggggggqqzggg",
+    "ggggggqqddgggggg",
+    "ggggggaaddgggggg",
+    "zzggggggddgggggg",
+    "zggggqggddgggggg",
   ] },
-  "tile-tg2-celestic": { w: 16, h: 16, pal: {"a":"#957fef","b":"#7463ba","c":"#b096ff","d":"#e8e4da","e":"#c8a24a","f":"#594c8f"}, rows: [
+  "tile-tg2-celestic": { w: 16, h: 16, pal: {"a":"#9486d0","b":"#7c70ad","c":"#a99ad8","d":"#d1ccbf","e":"#b69c5f","f":"#685e91"}, rows: [
     "bcacacbbaaacabbc",
     "ccaccbabcecabacc",
     "cccbccbcccbbaecc",
@@ -94261,25 +94261,25 @@ export const ART = {
     "bcbececbcbecccbc",
     "bccacbcccaccbcac",
   ] },
-  "tile-tg2-cerulean": { w: 16, h: 16, pal: {"g":"#579aa8","m":"#4a8895","l":"#6fb1bd","d":"#3a707d","a":"#bfe8e0","x":"#57a88d","z":"#bfd7e8"}, rows: [
-    "mmddggdllxxzggxg",
-    "mzzdggddmmzzddgg",
-    "llmmzzmmmmllggll",
-    "xxgmzzmmmmllggll",
-    "dddxxzzlddggzzxx",
-    "ddggllllddggaaxx",
-    "ggzzddxxddxxggll",
-    "ggzzddxxddmmddll",
-    "mmggggmmxxddllmm",
-    "mmggddmmxmmdllmm",
-    "xxddggmmmmmzzlll",
-    "xxdxxdzzllmmllll",
-    "ggxzzmllddmmllmm",
-    "ddxxmmllzzmddlmm",
-    "xxaaggllddggmmgg",
-    "xddagglzzdggmmgg",
+  "tile-tg2-cerulean": { w: 16, h: 16, pal: {"g":"#69969f","m":"#5c8b95","l":"#78a7b0","d":"#4f7c86","a":"#aad4cc","x":"#699f8d","z":"#aac3d4"}, rows: [
+    "mmmmmmmllmmzmmmm",
+    "mzzmmmmmmmzzmmmm",
+    "llmmzzmmmmllmmll",
+    "mmmmzzmmmmllmmll",
+    "mmmmmzzlmmmmzzmm",
+    "mmmmllllmmmmaamm",
+    "mmzzmmmmmmmmmmll",
+    "mmzzmmmmmmmmmmll",
+    "mmmmmmmmmmmmllmm",
+    "mmmmmmmmmmmmllmm",
+    "mmmmmmmmmmmzzlll",
+    "mmmmmmzzllmmllll",
+    "mmmzzmllmmmmllmm",
+    "mmmmmmllzzmmmlmm",
+    "mmaammllmmmmmmmm",
+    "mmmammlzzmmmmmmm",
   ] },
-  "tile-tg2-cherrygrove": { w: 16, h: 16, pal: {"a":"#a8c686","b":"#839a69","c":"#c6ea9e","d":"#e86a8a","e":"#f0e060","f":"#657750"}, rows: [
+  "tile-tg2-cherrygrove": { w: 16, h: 16, pal: {"a":"#a1b787","b":"#879675","c":"#b6d593","d":"#ca788d","e":"#cac177","f":"#728061"}, rows: [
     "bccccccbacaaccbc",
     "eccccbceecccbccb",
     "cccbcbccacbaaccc",
@@ -94297,7 +94297,7 @@ export const ART = {
     "bccbcacbcccccabc",
     "bbcccbccceccbaca",
   ] },
-  "tile-tg2-cianwood": { w: 16, h: 16, pal: {"a":"#b8a878","b":"#90835e","c":"#d9c68e","d":"#4a90a8","e":"#e86a5a","f":"#6e6548"}, rows: [
+  "tile-tg2-cianwood": { w: 16, h: 16, pal: {"a":"#aca17e","b":"#91876c","c":"#c7b78a","d":"#5d90a2","e":"#c77a70","f":"#7a735b"}, rows: [
     "bcacccabcacccabc",
     "bccccbacccccbccc",
     "baabccccaabaccaa",
@@ -94315,25 +94315,25 @@ export const ART = {
     "baababcbeacccabc",
     "cccabbccccccbaac",
   ] },
-  "tile-tg2-cinnabar": { w: 16, h: 16, pal: {"g":"#b06352","m":"#9e6446","l":"#c08766","d":"#824d36","a":"#e8ab9a","q":"#b05270","z":"#e8da9a"}, rows: [
-    "llllmmaallzzggqq",
-    "llggdmaaaqqzggqq",
-    "ggqqlqqggdddmmgg",
-    "ggllggggggaammgg",
-    "dlldddggmmmmddaa",
-    "aaddddggmmmmdddd",
-    "mmllmmmdggddqqll",
-    "mdaammddggddqqll",
-    "ddzzzgmmaaggggdd",
-    "ddzzgmmaaaggggdd",
-    "qqggggggzzaaddll",
-    "lddgggggqddaddll",
-    "ggmmggmmqqmmmmqq",
-    "ggmmddmmzggmmmqq",
-    "ddggddqddammmmmm",
-    "ddggqqqqaammmmmm",
+  "tile-tg2-cinnabar": { w: 16, h: 16, pal: {"g":"#a57165","m":"#9c705a","l":"#b28972","d":"#8a5f4c","a":"#d49f90","q":"#a5657a","z":"#d4c890"}, rows: [
+    "llllggaallzzgggg",
+    "llggdgaaaggzgggg",
+    "gggglggggdddgggg",
+    "ggllggggggaagggg",
+    "dlldddggggggddaa",
+    "aaddddggggggdddd",
+    "ggllgggdggddggll",
+    "gdaaggddggddggll",
+    "ddzzzgggaaggggdd",
+    "ddzzgggaaaggggdd",
+    "ggggggggzzaaddll",
+    "lddggggggddaddll",
+    "gggggggggggggggg",
+    "ggggddggzggggggg",
+    "ddggddgddagggggg",
+    "ddggggggaagggggg",
   ] },
-  "tile-tg2-dewford": { w: 16, h: 16, pal: {"a":"#74aca4","b":"#5a8680","c":"#89cbc2","d":"#e87a5a","e":"#f0e0a8","f":"#466762"}, rows: [
+  "tile-tg2-dewford": { w: 16, h: 16, pal: {"a":"#7ca39e","b":"#698a85","c":"#89bbb4","d":"#c78470","e":"#d8cb9b","f":"#5a7571"}, rows: [
     "bccbcccbcccccabc",
     "aecccbcacacabecc",
     "cecbcbccacbbbbce",
@@ -94351,43 +94351,43 @@ export const ART = {
     "becccacbacccccbc",
     "eaabcbccacaabccc",
   ] },
-  "tile-tg2-ecruteak": { w: 16, h: 16, pal: {"a":"#c98a5a","b":"#9d6c46","c":"#eda36a","d":"#c03a2a","e":"#f0c060","f":"#795336"}, rows: [
+  "tile-tg2-ecruteak": { w: 16, h: 16, pal: {"a":"#b88b6a","b":"#9b7659","c":"#cb9e7a","d":"#b45246","e":"#caae77","f":"#84644c"}, rows: [
     "bccccccbcacababa",
     "bcccabbcacacbacc",
-    "cecbaccaacbacccc",
-    "abbcabecbeccceab",
-    "aaccbbbaebcccbbc",
-    "acecbccccccbabcc",
+    "cccbaccaacbacccc",
+    "abbcabccbcccccab",
+    "aaccbbbacbcccbbc",
+    "acccbccccccbabcc",
     "cabcccaccbccccaa",
-    "becbcbcbacaccabc",
+    "bccbcbcbacaccabc",
     "cabacbccccccbcac",
     "aacbacccbcbbacac",
-    "cbecacccbbccabab",
-    "ccccccbccbaccbae",
-    "ccacbcaecacbccaa",
+    "cbccacccbbccabab",
+    "ccccccbccbaccbac",
+    "ccacbcaccacbccaa",
     "babccaaccbacaaaa",
     "bccacbcbcccccabc",
     "acacabcccabcbccc",
   ] },
-  "tile-tg2-eterna": { w: 16, h: 16, pal: {"a":"#4f772d","b":"#3e5d23","c":"#5d8c35","d":"#c8a24a","e":"#e8e4da","f":"#2f471b"}, rows: [
-    "bccccccbcacababa",
-    "bcccabbcacacbacc",
-    "cecbaccaacbacccc",
-    "abbcabecbeccceab",
-    "aaccbbbaebcccbbc",
-    "acecbccccccbabcc",
-    "cabcccaccbccccaa",
-    "becbcbcbacaccabc",
-    "cabacbccccccbcac",
-    "aacbacccbcbbacac",
-    "cbecacccbbccabab",
-    "ccccccbccbaccbae",
-    "ccacbcaecacbccaa",
-    "babccaaccbacaaaa",
-    "bccacbcbcccccabc",
-    "acacabcccabcbccc",
+  "tile-tg2-eterna": { w: 16, h: 16, pal: {"a":"#628445","b":"#56733c","c":"#6c914c","d":"#b69c5f","e":"#d1ccbf","f":"#4b6535"}, rows: [
+    "bccccccbccccbcbc",
+    "bccccbbcccccbccc",
+    "cccbccccccbccccc",
+    "cbbccbccbccccccb",
+    "ccccbbbccbcccbbc",
+    "ccccbccccccbcbcc",
+    "ccbccccccbcccccc",
+    "bccbcbcbccccccbc",
+    "ccbccbccccccbccc",
+    "cccbccccbcbbcccc",
+    "cbccccccbbcccbcb",
+    "ccccccbccbcccbcc",
+    "ccccbccccccbcccc",
+    "bcbccccccbcccccc",
+    "bccccbcbccccccbc",
+    "cccccbccccbcbccc",
   ] },
-  "tile-tg2-evergrande": { w: 16, h: 16, pal: {"a":"#a8b8e0","b":"#8390af","c":"#c6d9ff","d":"#f0c030","e":"#8a5ab0","f":"#656e86"}, rows: [
+  "tile-tg2-evergrande": { w: 16, h: 16, pal: {"a":"#9ba9cd","b":"#868fa6","c":"#b2c2e1","d":"#c1a85f","e":"#8b6ba5","f":"#717889"}, rows: [
     "bccbcccbcccccabc",
     "aecccbcacacabecc",
     "cecbcbccacbbbbce",
@@ -94405,7 +94405,7 @@ export const ART = {
     "becccacbacccccbc",
     "eaabcbccacaabccc",
   ] },
-  "tile-tg2-fallarbor": { w: 16, h: 16, pal: {"a":"#aca292","b":"#867e72","c":"#cbbfac","d":"#e8e4da","e":"#c0784a","f":"#676158"}, rows: [
+  "tile-tg2-fallarbor": { w: 16, h: 16, pal: {"a":"#a49c91","b":"#89837b","c":"#bbb1a1","d":"#d1ccbf","e":"#b07f60","f":"#746f68"}, rows: [
     "bcabaecbeeccacbe",
     "cbeacbccecccbaca",
     "cccbccaabbbccbac",
@@ -94423,7 +94423,7 @@ export const ART = {
     "bcccaaabcccbbbbb",
     "caccbbccccccbaaa",
   ] },
-  "tile-tg2-floaroma": { w: 16, h: 16, pal: {"a":"#e88bb0","b":"#b56c89","c":"#ffa4d0","d":"#f0f0a0","e":"#7ac86a","f":"#8b536a"}, rows: [
+  "tile-tg2-floaroma": { w: 16, h: 16, pal: {"a":"#d188a5","b":"#aa768b","c":"#daa1bd","d":"#d7d797","e":"#80b874","f":"#8e6375"}, rows: [
     "bccbcccbcccccabc",
     "aecccbcacacabecc",
     "cecbcbccacbbbbce",
@@ -94441,43 +94441,43 @@ export const ART = {
     "becccacbacccccbc",
     "eaabcbccacaabccc",
   ] },
-  "tile-tg2-fortree": { w: 16, h: 16, pal: {"a":"#5d9c66","b":"#497a50","c":"#6eb878","d":"#c8a24a","e":"#7ab0d8","f":"#385e3d"}, rows: [
-    "bcccaccbcbabcabc",
-    "cbbccbccaaccbacc",
-    "cccbacbacebcacbc",
-    "abccbccabaccccab",
-    "cacacbbacaaccbcc",
-    "ccbcbcbacccbccac",
-    "bcbcaccccbcaccbc",
-    "bcaccccbacccccbe",
-    "acccbbcccaacbcac",
-    "cacbcccacabcccca",
-    "cbbaabccbcccacab",
-    "ccccccbacccccbca",
-    "aaccbaaacccbccac",
-    "aabccccbcbaacccc",
-    "baabacebcccaccba",
-    "bcaccbaccacabcba",
+  "tile-tg2-fortree": { w: 16, h: 16, pal: {"a":"#6c9872","b":"#5c8361","c":"#78ac7f","d":"#b69c5f","e":"#7da6c5","f":"#4e7053"}, rows: [
+    "bccccccbcbcbccbc",
+    "cbbccbccccccbccc",
+    "cccbccbccebcccbc",
+    "cbccbcccbccccccb",
+    "cccccbbccccccbcc",
+    "ccbcbcbccccbcccc",
+    "bcbccccccbccccbc",
+    "bccccccbccccccbe",
+    "ccccbbccccccbccc",
+    "cccbccccccbccccc",
+    "cbbccbccbccccccb",
+    "ccccccbccccccbcc",
+    "ccccbccccccbcccc",
+    "ccbccccbcbcccccc",
+    "bccbccebccccccbc",
+    "bccccbccccccbcbc",
   ] },
-  "tile-tg2-fuchsia": { w: 16, h: 16, pal: {"g":"#c47b91","m":"#b2687e","l":"#d28fa2","d":"#96566b","a":"#f4cfe2","x":"#c47bb5","z":"#f4d2cf"}, rows: [
-    "mmzzlxxggzzgddgg",
-    "mmzddgggggggddgg",
-    "ddmmlllddmaammll",
-    "ddmmllmmmmddmmll",
-    "zxxgggmmllllmmmm",
-    "zzllgzzmmmllddmm",
-    "ddddmmmmmxxlllgg",
-    "dzzdmmmmmmllllgg",
-    "gggmmmllggmmlldd",
-    "ggggmgglggmmlldd",
-    "ggllgddmllllggdd",
-    "lllddmmggllllgdd",
-    "mmggggddddggmmxx",
-    "mmmmllddmmggmmxx",
-    "dxxgddxxlxxmggdd",
-    "ddgzzdxmmlmmggdd",
+  "tile-tg2-fuchsia": { w: 16, h: 16, pal: {"g":"#b58090","m":"#a77483","l":"#c18c9b","d":"#956675","a":"#e1b1c9","x":"#b580aa","z":"#e1b5b1"}, rows: [
+    "mmzzlxxmmzzmmmmm",
+    "mmzmmmmmmmmmmmmm",
+    "mmmmlllmmmaammll",
+    "mmmmllmmmmmmmmll",
+    "zxxmmmmmllllmmmm",
+    "zzllmzzmmmllmmmm",
+    "mmmmmmmmmxxlllmm",
+    "mzzmmmmmmmllllmm",
+    "mmmmmmllmmmmllmm",
+    "mmmmmmmlmmmmllmm",
+    "mmllmmmmllllmmmm",
+    "lllmmmmmmllllmmm",
+    "mmmmmmmmmmmmmmxx",
+    "mmmmllmmmmmmmmxx",
+    "mxxmmmxxlxxmmmmm",
+    "mmmzzmxmmlmmmmmm",
   ] },
-  "tile-tg2-goldenrod": { w: 16, h: 16, pal: {"a":"#c2a878","b":"#97835e","c":"#e5c68e","d":"#e85a4a","e":"#4a90c0","f":"#746548"}, rows: [
+  "tile-tg2-goldenrod": { w: 16, h: 16, pal: {"a":"#b4a17e","b":"#95876c","c":"#d1b789","d":"#c47168","e":"#608fb0","f":"#7e725b"}, rows: [
     "bccbcccbcccccabc",
     "aecccbcacacabecc",
     "cecbcbccacbbbbce",
@@ -94495,43 +94495,43 @@ export const ART = {
     "becccacbacccccbc",
     "eaabcbccacaabccc",
   ] },
-  "tile-tg2-hearthome": { w: 16, h: 16, pal: {"a":"#c9a227","b":"#9d7e1e","c":"#edbf2e","d":"#8a5ab0","e":"#f0e6f8","f":"#796117"}, rows: [
-    "bacbbacbcecababc",
-    "cbccbbacccacbaaa",
-    "cbcbbaccccbebaec",
-    "abaaccccbcececcb",
-    "ccbcccbbcaccbbac",
-    "accabccabacbcecc",
-    "cabccbbacbccaacc",
-    "bccacccbeaccbcbb",
-    "accccbceccacbacc",
-    "ccbbccaaccbaccac",
-    "cbaaabcabacaaacb",
-    "cccaacbacacabbcc",
-    "aaccbcbcaabbcacc",
-    "acbcbaaccbcbeabc",
-    "bccaaccbacbaccbc",
-    "cccccbcebbabbacc",
+  "tile-tg2-hearthome": { w: 16, h: 16, pal: {"a":"#b79c47","b":"#9c853d","c":"#c0a85c","d":"#8b6ba5","e":"#d4c0e4","f":"#867234"}, rows: [
+    "bccbbccbceccbcbc",
+    "cbccbbccccccbccc",
+    "cbcbbcccccbebcec",
+    "cbccccccbcececcb",
+    "ccbcccbbccccbbcc",
+    "ccccbcccbccbcecc",
+    "ccbccbbccbcccccc",
+    "bccccccbecccbcbb",
+    "cccccbceccccbccc",
+    "ccbbccccccbccccc",
+    "cbcccbccbccccccb",
+    "ccccccbcccccbbcc",
+    "ccccbcbcccbbcccc",
+    "ccbcbccccbcbecbc",
+    "bccccccbccbcccbc",
+    "cccccbcebbcbbccc",
   ] },
-  "tile-tg2-indigo": { w: 16, h: 16, pal: {"g":"#6d6ab0","m":"#5e5ca0","l":"#827ec0","d":"#4c498c","a":"#c4cfef","q":"#6a8ab0","z":"#d3c4ef"}, rows: [
-    "dzzgmmddllggmlld",
-    "ddggmmddllggmlzz",
-    "llllmmggllmmggll",
-    "llllmmgglllmggll",
-    "aazzmmggaaqqggmm",
-    "ddzqqllgammqggdd",
-    "mmlmmlgdddaammqq",
-    "mmllllggdzzammmm",
-    "qqqqddggggddllqq",
-    "qqggddgggddzllqq",
+  "tile-tg2-indigo": { w: 16, h: 16, pal: {"g":"#7775a6","m":"#6d6c9a","l":"#8582b2","d":"#5e5c8f","a":"#abb7db","q":"#758ba6","z":"#bcabdb"}, rows: [
+    "dzzgggddgggggggd",
+    "ddggggddggggggzz",
+    "gggggggggggggggg",
+    "gggggggggggggggg",
+    "aazzggggaagggggg",
+    "ddzgggggagggggdd",
+    "gggggggdddaagggg",
+    "ggggggggdzzagggg",
+    "ggggddggggddgggg",
+    "ggggddgggddzgggg",
     "ggzzggaaggggdddd",
-    "mmddggaaggggddaa",
-    "qqmmddggaaagzzmm",
-    "mmmggdggmmggqqgg",
-    "ggmmlldgglddmmll",
-    "gqqmllddmmggmmll",
+    "ggddggaaggggddaa",
+    "ggggddggaaagzzgg",
+    "gggggdgggggggggg",
+    "ggggggdgggddgggg",
+    "ggggggddgggggggg",
   ] },
-  "tile-tg2-jubilife": { w: 16, h: 16, pal: {"a":"#8a94a6","b":"#6c7381","c":"#a3afc4","d":"#f0c030","e":"#e85a7a","f":"#535964"}, rows: [
+  "tile-tg2-jubilife": { w: 16, h: 16, pal: {"a":"#8b929f","b":"#767b86","c":"#9ba5b6","d":"#c1a85f","e":"#c77084","f":"#646972"}, rows: [
     "bccbacabacbcbcba",
     "ccccebcaccacbcac",
     "cccbacbaccbcaeec",
@@ -94549,43 +94549,43 @@ export const ART = {
     "bccccccbacccacba",
     "cccbebcceccabecc",
   ] },
-  "tile-tg2-lavaridge": { w: 16, h: 16, pal: {"a":"#bd7a48","b":"#935f38","c":"#df9055","d":"#e83a2a","e":"#f0a848","f":"#71492b"}, rows: [
+  "tile-tg2-lavaridge": { w: 16, h: 16, pal: {"a":"#ae805e","b":"#966d4e","c":"#c59069","d":"#be6058","e":"#c59f6b","f":"#805d43"}, rows: [
     "bccaaacbccccacbc",
-    "cccacbcaeaeabaac",
-    "cccbcccccebccacb",
+    "cccacbcacacabaac",
+    "cccbccccccbccacb",
     "cbacccccbccaabab",
-    "cccacabceeccbbcc",
+    "cccacabcccccbbcc",
     "cacabcccccbbccca",
-    "ccbabceecbccaccb",
+    "ccbabccccbccaccb",
     "bcbcccabcbacbcbb",
-    "acacebcacbccbcca",
-    "cecbccccccbcccca",
-    "abcbecccbecaccab",
+    "acaccbcacbccbcca",
+    "cccbccccccbcccca",
+    "abcbccccbccaccab",
     "cccccbbcacccabbb",
-    "ceacbcccaccbccce",
-    "ecbcccacbbccaaac",
-    "bcbaaacbceaacabc",
+    "ccacbcccaccbcccc",
+    "ccbcccacbbccaaac",
+    "bcbaaacbccaacabc",
     "cccacbccccbbbbca",
   ] },
-  "tile-tg2-lavender": { w: 16, h: 16, pal: {"g":"#a786b8","m":"#9776a8","l":"#b89ac6","d":"#7c5c8e","a":"#e0d4f0","x":"#8e86b8","z":"#f0d4ef"}, rows: [
-    "ddddllggddzzddgg",
-    "ddddllggmmggddgg",
-    "mmggdzzmaazmmamm",
-    "mzzgddmmaallaamm",
-    "mmddxxddmmggllmm",
-    "mxxdllddmmggllmm",
-    "ddddmmmmggggmmdd",
-    "ddllmmmmggxmmggd",
-    "ggmmddllmaagxxaa",
-    "ggmmllllmmllmmaa",
-    "mmxxddllddxxggll",
-    "ggxmmdllddmzzggl",
-    "llddggmmggmmllmm",
-    "lldaagggggmmllgg",
-    "mmggxxggllmmmmmm",
-    "mxxgxxgglggmmmmm",
+  "tile-tg2-lavender": { w: 16, h: 16, pal: {"g":"#a088ad","m":"#957da0","l":"#ac95b7","d":"#826a8f","a":"#c6b7db","x":"#8e88ad","z":"#dbb7da"}, rows: [
+    "ddddllmmddzzddmm",
+    "ddddllmmmmmmddmm",
+    "mmmmdzzmaazmmamm",
+    "mzzmddmmaallaamm",
+    "mmddmmddmmmmllmm",
+    "mmmdllddmmmmllmm",
+    "ddddmmmmmmmmmmdd",
+    "ddllmmmmmmmmmmmd",
+    "mmmmddllmaammmaa",
+    "mmmmllllmmllmmaa",
+    "mmmmddllddmmmmll",
+    "mmmmmdllddmzzmml",
+    "llddmmmmmmmmllmm",
+    "lldaammmmmmmllmm",
+    "mmmmmmmmllmmmmmm",
+    "mmmmmmmmlmmmmmmm",
   ] },
-  "tile-tg2-lilycove": { w: 16, h: 16, pal: {"a":"#b8a0c8","b":"#907d9c","c":"#d9bdec","d":"#e85a7a","e":"#3a9ad8","f":"#6e6078"}, rows: [
+  "tile-tg2-lilycove": { w: 16, h: 16, pal: {"a":"#ac99b9","b":"#908298","c":"#c4a7d8","d":"#c77084","e":"#5896be","f":"#786d80"}, rows: [
     "bbcccccbbccccbba",
     "ceceebccccecbaac",
     "bccbcccaccbccceb",
@@ -94603,7 +94603,7 @@ export const ART = {
     "baccbcabccccacbb",
     "ccaacbeecaccbcce",
   ] },
-  "tile-tg2-littleroot": { w: 16, h: 16, pal: {"a":"#a4bd76","b":"#80935c","c":"#c2df8b","d":"#e86a8a","e":"#f0e8c8","f":"#627147"}, rows: [
+  "tile-tg2-littleroot": { w: 16, h: 16, pal: {"a":"#9eb07d","b":"#85936a","c":"#b4cb88","d":"#ca788d","e":"#dcd3ae","f":"#707c5a"}, rows: [
     "bbcccccbbccccbba",
     "ceceebccccecbaac",
     "bccbcccaccbccceb",
@@ -94621,7 +94621,7 @@ export const ART = {
     "baccbcabccccacbb",
     "ccaacbeecaccbcce",
   ] },
-  "tile-tg2-mahogany": { w: 16, h: 16, pal: {"a":"#8aa888","b":"#6c836a","c":"#a3c6a0","d":"#5a8ab0","e":"#d8e8f0","f":"#536552"}, rows: [
+  "tile-tg2-mahogany": { w: 16, h: 16, pal: {"a":"#8ba18a","b":"#768775","c":"#9bb799","d":"#6b8ba5","e":"#bad0db","f":"#647363"}, rows: [
     "bcabaecbeeccacbe",
     "cbeacbccecccbaca",
     "cccbccaabbbccbac",
@@ -94639,7 +94639,7 @@ export const ART = {
     "bcccaaabcccbbbbb",
     "caccbbccccccbaaa",
   ] },
-  "tile-tg2-mauville": { w: 16, h: 16, pal: {"a":"#a3a06b","b":"#7f7d53","c":"#c0bd7e","d":"#f0c030","e":"#8a5ab0","f":"#626040"}, rows: [
+  "tile-tg2-mauville": { w: 16, h: 16, pal: {"a":"#9d9a76","b":"#858463","c":"#b2b082","d":"#c1a85f","e":"#8b6ba5","f":"#727055"}, rows: [
     "bacbbacbcecababc",
     "cbccbbacccacbaaa",
     "cbcbbaccccbebaec",
@@ -94657,7 +94657,7 @@ export const ART = {
     "bccaaccbacbaccbc",
     "cccccbcebbabbacc",
   ] },
-  "tile-tg2-mossdeep": { w: 16, h: 16, pal: {"a":"#8ab8c8","b":"#6c909c","c":"#a3d9ec","d":"#f0f4f8","e":"#3a6ac0","f":"#536e78"}, rows: [
+  "tile-tg2-mossdeep": { w: 16, h: 16, pal: {"a":"#89adb9","b":"#778f98","c":"#97c6d6","d":"#cbd6e0","e":"#5475b1","f":"#637980"}, rows: [
     "bccccccbacaaccbc",
     "eccccbceecccbccb",
     "cccbcbccacbaaccc",
@@ -94675,7 +94675,7 @@ export const ART = {
     "bccbcacbcccccabc",
     "bbcccbccceccbaca",
   ] },
-  "tile-tg2-newbark": { w: 16, h: 16, pal: {"a":"#8fb8a8","b":"#709083","c":"#a9d9c6","d":"#3a7ca5","e":"#e8f0d8","f":"#566e65"}, rows: [
+  "tile-tg2-newbark": { w: 16, h: 16, pal: {"a":"#8eada1","b":"#7a8f86","c":"#9dc7b6","d":"#5082a1","e":"#d0dbba","f":"#667972"}, rows: [
     "bbcccccbbccccbba",
     "ceceebccccecbaac",
     "bccbcccaccbccceb",
@@ -94693,7 +94693,7 @@ export const ART = {
     "baccbcabccccacbb",
     "ccaacbeecaccbcce",
   ] },
-  "tile-tg2-oldale": { w: 16, h: 16, pal: {"a":"#b3a35e","b":"#8c7f49","c":"#d3c06f","d":"#f0f0e0","e":"#7aa85e","f":"#6b6238"}, rows: [
+  "tile-tg2-oldale": { w: 16, h: 16, pal: {"a":"#a89d6d","b":"#8f855c","c":"#c1b377","d":"#d9d9c1","e":"#80a06d","f":"#7a724e"}, rows: [
     "bccccccbacaaccbc",
     "eccccbceecccbccb",
     "cccbcbccacbaaccc",
@@ -94711,7 +94711,7 @@ export const ART = {
     "bccbcacbcccccabc",
     "bbcccbccceccbaca",
   ] },
-  "tile-tg2-olivine": { w: 16, h: 16, pal: {"a":"#7aa8b8","b":"#5f8390","c":"#90c6d9","d":"#e8a13a","e":"#f0f0e8","f":"#49656e"}, rows: [
+  "tile-tg2-olivine": { w: 16, h: 16, pal: {"a":"#80a1ac","b":"#6c8791","c":"#8cb7c7","d":"#c19960","e":"#d7d7c9","f":"#5c737a"}, rows: [
     "bacbbacbcecababc",
     "cbccbbacccacbaaa",
     "cbcbbaccccbebaec",
@@ -94729,7 +94729,25 @@ export const ART = {
     "bccaaccbacbaccbc",
     "cccccbcebbabbacc",
   ] },
-  "tile-tg2-oreburgh": { w: 16, h: 16, pal: {"a":"#9c6644","b":"#7a5035","c":"#b87850","d":"#f0a848","e":"#5a7a9a","f":"#5e3d29"}, rows: [
+  "tile-tg2-oreburgh": { w: 16, h: 16, pal: {"a":"#9b7258","b":"#85624b","c":"#ab7f64","d":"#c59f6b","e":"#698098","f":"#735441"}, rows: [
+    "beebeeebeebeeebe",
+    "eeeeebeeeeeebeee",
+    "eeebbebeeebeeeeb",
+    "ebeeeeebbbeeeeeb",
+    "eeeeeebebeeeebee",
+    "ebeebeeeeeebeeee",
+    "eebbbeeeebeeeeeb",
+    "beeeeeebeeeeeebe",
+    "eeeeebeeeeeebbee",
+    "eeebeeeeeebeeeeb",
+    "ebeeeeeebbeeeeeb",
+    "eeeeeebeeeeeebeb",
+    "eeebbeeeeeebeeee",
+    "eebeeeebebeeeeee",
+    "bbebeeebeeeeeebe",
+    "eeeeebeeeeeebebe",
+  ] },
+  "tile-tg2-pacifidlog": { w: 16, h: 16, pal: {"a":"#b8a17d","b":"#98876d","c":"#d2b68c","d":"#c47a68","e":"#5fa6a0","f":"#81725b"}, rows: [
     "bccbcccbccbcccba",
     "cccccbaccaacbaac",
     "cacbbabccabaaacb",
@@ -94747,61 +94765,43 @@ export const ART = {
     "bbcbeaabcaacccba",
     "caccabacceacbcbc",
   ] },
-  "tile-tg2-pacifidlog": { w: 16, h: 16, pal: {"a":"#c8a878","b":"#9c835e","c":"#ecc68e","d":"#e86a4a","e":"#4ab0a8","f":"#786548"}, rows: [
-    "bccbcccbccbcccba",
-    "cccccbaccaacbaac",
-    "cacbbabccabaaacb",
-    "cbcccaebbbcccccb",
-    "cccccabcbccaabca",
-    "cbccbccccccbccac",
-    "cabbbccccbacaccb",
-    "bacccccbacaacabc",
-    "accaabcccaaabbca",
-    "cccbaaacaebeaceb",
-    "cbccccacbbcacaab",
-    "caaccabcacceabcb",
-    "accbbccccaebcacc",
-    "aabccaabcbccccca",
-    "bbcbeaabcaacccba",
-    "caccabacceacbcbc",
+  "tile-tg2-pallet": { w: 16, h: 16, pal: {"g":"#87a768","m":"#7a9f5b","l":"#98b577","d":"#6d9351","a":"#d4cd94","x":"#a7a768","z":"#b5d494"}, rows: [
+    "gddgggddddgggggg",
+    "ggggggddddgggggg",
+    "ddggggggggggddgg",
+    "ddggxxgggggggdgg",
+    "ggggggggddaaddgg",
+    "ggggxxggddzzddgg",
+    "ggxxddxxggggaagg",
+    "gggzzdzzgggggggg",
+    "dgggggaaggggdggg",
+    "ddgxggaagggggggg",
+    "ggggxzzggggggggg",
+    "ggggxxgzzggggggg",
+    "zzggggggggzzaagg",
+    "ggggggggaazzddgg",
+    "ggggaaggddggdddd",
+    "ggggggggggggddgg",
   ] },
-  "tile-tg2-pallet": { w: 16, h: 16, pal: {"g":"#84b356","m":"#72a348","l":"#9cc46e","d":"#5f903c","a":"#e8e0a0","x":"#b3b356","z":"#c5e8a0"}, rows: [
-    "lddmmmddddggggll",
-    "llggmmddddgggggg",
-    "ddllmmllggggddgg",
-    "ddllxxlllggmmdgg",
-    "ggmmmmmmddaaddgg",
-    "gllmxxmmddzzddgg",
-    "ggxxddxxggggaamm",
-    "ggmzzdzzggggggmm",
-    "dmmlggaammlldggg",
-    "ddlxllaammllgggg",
-    "ggmmxzzmlllgggll",
-    "ggmmxxmzzlllggll",
-    "zzggmmllllzzaall",
-    "mmggmmllaazzddll",
-    "mmmmaallddlmdddd",
-    "mmmlllllmmmmddgg",
+  "tile-tg2-pastoria": { w: 16, h: 16, pal: {"a":"#759860","b":"#648252","c":"#82a96c","d":"#bf9d5c","e":"#8f6950","f":"#567047"}, rows: [
+    "eccccccecececcec",
+    "ceeccecccccceccc",
+    "ccceccecceecccec",
+    "ceccecccecccccce",
+    "ccccceeccccccecc",
+    "ccecececcccecccc",
+    "ececccccceccccec",
+    "ecccccceccccccee",
+    "cccceecccccceccc",
+    "cccecccccceccccc",
+    "ceecceccecccccce",
+    "cccccceccccccecc",
+    "cccceccccccecccc",
+    "cceccccececccccc",
+    "eccecceeccccccec",
+    "ecccceccccccecec",
   ] },
-  "tile-tg2-pastoria": { w: 16, h: 16, pal: {"a":"#6a994e","b":"#53773d","c":"#7db55c","d":"#d9a441","e":"#8a5a3a","f":"#405c2f"}, rows: [
-    "bcccaccbcbabcabc",
-    "cbbccbccaaccbacc",
-    "cccbacbacebcacbc",
-    "abccbccabaccccab",
-    "cacacbbacaaccbcc",
-    "ccbcbcbacccbccac",
-    "bcbcaccccbcaccbc",
-    "bcaccccbacccccbe",
-    "acccbbcccaacbcac",
-    "cacbcccacabcccca",
-    "cbbaabccbcccacab",
-    "ccccccbacccccbca",
-    "aaccbaaacccbccac",
-    "aabccccbcbaacccc",
-    "baabacebcccaccba",
-    "bcaccbaccacabcba",
-  ] },
-  "tile-tg2-petalburg": { w: 16, h: 16, pal: {"a":"#79ac8c","b":"#5e866d","c":"#8fcba5","d":"#4a90c0","e":"#e8b84a","f":"#496754"}, rows: [
+  "tile-tg2-petalburg": { w: 16, h: 16, pal: {"a":"#7fa38d","b":"#6c8a77","c":"#8dbb9e","d":"#608fb0","e":"#c4a868","f":"#5c7565"}, rows: [
     "bccbacabacbcbcba",
     "ccccebcaccacbcac",
     "cccbacbaccbcaeec",
@@ -94819,25 +94819,25 @@ export const ART = {
     "bccccccbacccacba",
     "cccbebcceccabecc",
   ] },
-  "tile-tg2-pewter": { w: 16, h: 16, pal: {"g":"#b0ae8e","m":"#a1a180","l":"#c0bf9e","d":"#8a8969","a":"#d8d2c0","x":"#b09d8e","z":"#d0d8c0"}, rows: [
-    "zzxaadmmmmggmmdd",
-    "ddmxddmxxmggmmdd",
-    "ggllmmzzllmmllgg",
-    "ggllmmzzllmgzzgg",
-    "xxddmmllggllmmaa",
-    "xxddmxxmmlllmmaa",
-    "ggllddaallggllxx",
-    "gglggzlllllgllxx",
-    "aadddmmdmmmgggmm",
-    "aaddddddmggllgmm",
-    "ddmmllzzmmdmmggg",
-    "ddmmllzzmmxxgddg",
-    "mmggggggmmmmmmxx",
-    "mmggggggmmmlllxx",
-    "mmzzllddddzzddxx",
-    "mmzgggddddzzllmm",
+  "tile-tg2-pewter": { w: 16, h: 16, pal: {"g":"#a7a58e","m":"#9c9c84","l":"#b3b298","d":"#8c8b74","a":"#c5bfae","x":"#a7998e","z":"#bdc5ae"}, rows: [
+    "zzmaammmmmmmmmmm",
+    "mmmmmmmmmmmmmmmm",
+    "mmllmmzzllmmllmm",
+    "mmllmmzzllmmzzmm",
+    "mmmmmmllmmllmmaa",
+    "mmmmmmmmmlllmmaa",
+    "mmllmmaallmmllmm",
+    "mmlmmzlllllmllmm",
+    "aammmmmmmmmmmmmm",
+    "aammmmmmmmmllmmm",
+    "mmmmllzzmmmmmmmm",
+    "mmmmllzzmmmmmmmm",
+    "mmmmmmmmmmmmmmmm",
+    "mmmmmmmmmmmlllmm",
+    "mmzzllmmmmzzmmmm",
+    "mmzmmmmmmmzzllmm",
   ] },
-  "tile-tg2-rustboro": { w: 16, h: 16, pal: {"a":"#a39684","b":"#7f7567","c":"#c0b19c","d":"#c05a3a","e":"#5a7a9a","f":"#625a4f"}, rows: [
+  "tile-tg2-rustboro": { w: 16, h: 16, pal: {"a":"#9d9487","b":"#847d72","c":"#b3a797","d":"#b16a54","e":"#698098","f":"#716a61"}, rows: [
     "bccbcccbccbcccba",
     "cccccbaccaacbaac",
     "cacbbabccabaaacb",
@@ -94855,25 +94855,25 @@ export const ART = {
     "bbcbeaabcaacccba",
     "caccabacceacbcbc",
   ] },
-  "tile-tg2-saffron": { w: 16, h: 16, pal: {"g":"#acc24e","m":"#b2ae40","l":"#d2cd62","d":"#968c2f","a":"#f0dfa8","q":"#c29e4e","z":"#d6f0a8"}, rows: [
-    "mmddmdddqqmmmaam",
-    "mmddmaadqqddmmdd",
-    "mmggzzddqqzzllmm",
-    "mmgaagggaazzllqq",
-    "llmmqqggggggllmm",
-    "lgqqqqaagggglldd",
-    "mmqqmmqqmmllaadd",
-    "mmddmqqqmmllaadd",
-    "ddllqqggddgglldd",
-    "ddllgggazzgglldd",
-    "mmmgmmllqqmmmmgm",
-    "mmggmmllzzqmddmm",
-    "llzzzzllllggqqzz",
-    "llqggdllllggqqaa",
-    "mmmlmmmmzzddddqq",
-    "ggllmmmmzggdddqq",
+  "tile-tg2-saffron": { w: 16, h: 16, pal: {"g":"#a3b262","m":"#aaa756","l":"#bfbc6e","d":"#999147","a":"#d8ca9b","q":"#b29962","z":"#c2d89b"}, rows: [
+    "mmddmdddmmmmmaam",
+    "mmddmaadmmddmmdd",
+    "mmmmzzddmmzzllmm",
+    "mmmaammmaazzllmm",
+    "llmmmmmmmmmmllmm",
+    "lmmmmmaammmmlldd",
+    "mmmmmmmmmmllaadd",
+    "mmddmmmmmmllaadd",
+    "ddllmmmmddmmlldd",
+    "ddllmmmazzmmlldd",
+    "mmmmmmllmmmmmmmm",
+    "mmmmmmllzzmmddmm",
+    "llzzzzllllmmmmzz",
+    "llmmmdllllmmmmaa",
+    "mmmlmmmmzzddddmm",
+    "mmllmmmmzmmdddmm",
   ] },
-  "tile-tg2-sandgem": { w: 16, h: 16, pal: {"a":"#d6c98a","b":"#a79d6c","c":"#fdeda3","d":"#4a90c0","e":"#e8f0f8","f":"#807953"}, rows: [
+  "tile-tg2-sandgem": { w: 16, h: 16, pal: {"a":"#c4ba88","b":"#9f9977","c":"#dacf9f","d":"#608fb0","e":"#c2d3e3","f":"#868163"}, rows: [
     "bccccccbacaaccbc",
     "eccccbceecccbccb",
     "cccbcbccacbaaccc",
@@ -94891,7 +94891,7 @@ export const ART = {
     "bccbcacbcccccabc",
     "bbcccbccceccbaca",
   ] },
-  "tile-tg2-silvertown": { w: 16, h: 16, pal: {"a":"#c8c8d0","b":"#9c9ca2","c":"#ececf5","d":"#c9a227","e":"#7a9ac0","f":"#78787d"}, rows: [
+  "tile-tg2-silvertown": { w: 16, h: 16, pal: {"a":"#b6b6bd","b":"#98989c","c":"#cacadd","d":"#b79c47","e":"#7f97b2","f":"#7f7f82"}, rows: [
     "bcccaccbcbabcabc",
     "cbbccbccaaccbacc",
     "cccbacbacebcacbc",
@@ -94909,7 +94909,7 @@ export const ART = {
     "baabacebcccaccba",
     "bcaccbaccacabcba",
   ] },
-  "tile-tg2-slateport": { w: 16, h: 16, pal: {"a":"#c6ad7d","b":"#9a8762","c":"#eacc94","d":"#3a7bd5","e":"#e85a7a","f":"#77684b"}, rows: [
+  "tile-tg2-slateport": { w: 16, h: 16, pal: {"a":"#b7a481","b":"#968970","c":"#d3bb8e","d":"#5681bd","e":"#c77084","f":"#80745d"}, rows: [
     "bccccccbcacababa",
     "bcccabbcacacbacc",
     "cecbaccaacbacccc",
@@ -94927,25 +94927,25 @@ export const ART = {
     "bccacbcbcccccabc",
     "acacabcccabcbccc",
   ] },
-  "tile-tg2-snowpoint": { w: 16, h: 16, pal: {"a":"#caf0f8","b":"#9ebbc1","c":"#eeffff","d":"#e85a7a","e":"#7ac8e8","f":"#799095"}, rows: [
-    "bcecbcabccaccaba",
-    "aaacebecccccbccc",
-    "cccbbeccacbcccea",
-    "cbacbcccbccacbcb",
-    "aceaccbacacbcbab",
-    "abccbcbacccbbcea",
-    "cabcaccacbccecac",
-    "bbbbacabcacccaba",
+  "tile-tg2-snowpoint": { w: 16, h: 16, pal: {"a":"#b0d8e0","b":"#98afb3","c":"#c6e9e9","d":"#c77084","e":"#80b7ce","f":"#809093"}, rows: [
+    "bcecbccbccccccbc",
+    "ccccebecccccbccc",
+    "cccbbeccccbcccec",
+    "cbccbcccbccccbcb",
+    "ccecccbccccbcbcb",
+    "cbccbcbccccbbcec",
+    "ccbccccccbcceccc",
+    "bbbbcccbccccccbc",
     "bccccbccceccbccc",
-    "eccbcaabcabeaeaa",
-    "cbacaccabaccbccb",
-    "bcccaabcbbeacbcc",
-    "cbcbbccaaccbaccc",
-    "ecbacccccbecbccc",
-    "baccaabbacccaabc",
-    "acccbbccacacbacb",
+    "eccbcccbccbececc",
+    "cbccccccbcccbccb",
+    "bcccccbcbbeccbcc",
+    "cbcbbccccccbcccc",
+    "ecbccccccbecbccc",
+    "bcccccbbccccccbc",
+    "ccccbbccccccbccb",
   ] },
-  "tile-tg2-solaceon": { w: 16, h: 16, pal: {"a":"#a3b18a","b":"#7f8a6c","c":"#c0d1a3","d":"#c0784a","e":"#e8dcc0","f":"#626a53"}, rows: [
+  "tile-tg2-solaceon": { w: 16, h: 16, pal: {"a":"#9da78b","b":"#848c76","c":"#b2c09a","d":"#b07f60","e":"#d4c8aa","f":"#707664"}, rows: [
     "bcacccabcacccabc",
     "bccccbacccccbccc",
     "baabccccaabaccaa",
@@ -94963,7 +94963,7 @@ export const ART = {
     "baababcbeacccabc",
     "cccabbccccccbaac",
   ] },
-  "tile-tg2-sootopolis": { w: 16, h: 16, pal: {"a":"#dedbd2","b":"#adaba4","c":"#fffff8","d":"#3a90c8","e":"#e8b84a","f":"#85837e"}, rows: [
+  "tile-tg2-sootopolis": { w: 16, h: 16, pal: {"a":"#c9c5bb","b":"#a4a39d","c":"#ebebcb","d":"#558fb5","e":"#c4a868","f":"#888783"}, rows: [
     "bccbacabacbcbcba",
     "ccccebcaccacbcac",
     "cccbacbaccbcaeec",
@@ -94981,25 +94981,25 @@ export const ART = {
     "bccccccbacccacba",
     "cccbebcceccabecc",
   ] },
-  "tile-tg2-sunnyshore": { w: 16, h: 16, pal: {"a":"#ffd166","b":"#c7a350","c":"#fff778","d":"#3a7ac0","e":"#e8f4f8","f":"#997d3d"}, rows: [
-    "bcccbccbaccaacbc",
-    "ccbcabacaacabcaa",
-    "cbcbcccccabccecc",
-    "abcaaccebcaacccb",
-    "bbaaccbcccccbbca",
-    "ccccbabcaccbaaec",
-    "acbbaacaabaccccc",
-    "bacbccabaccccabc",
-    "acacebccacccbaec",
-    "caabcccaacbcaccb",
-    "abccabcabbcabacb",
-    "cccaccbaccaecbcc",
-    "bccabccabcababcb",
-    "aabccccccbecacae",
-    "bbacaacbccccccbc",
-    "abbccbcccaacbcac",
+  "tile-tg2-sunnyshore": { w: 16, h: 16, pal: {"a":"#ceb781","b":"#b69d63","c":"#d2cd8a","d":"#5480b1","e":"#c2dbe3","f":"#998452"}, rows: [
+    "bcccbccbccccccbc",
+    "ccbccbccccccbccc",
+    "cbcbccccccbccecc",
+    "cbcccccebccccccb",
+    "bbccccbcccccbbcc",
+    "ccccbcbccccbccec",
+    "ccbbcccccbcccccc",
+    "bccbcccbccccccbc",
+    "ccccebccccccbcec",
+    "cccbccccccbccccb",
+    "cbcccbccbbccbccb",
+    "ccccccbccccecbcc",
+    "bcccbcccbccbcbcb",
+    "ccbccccccbecccce",
+    "bbcccccbccccccbc",
+    "cbbccbccccccbccc",
   ] },
-  "tile-tg2-twinleaf": { w: 16, h: 16, pal: {"a":"#7fb069","b":"#638952","c":"#96d07c","d":"#f2cc8f","e":"#e07a5f","f":"#4c6a3f"}, rows: [
+  "tile-tg2-twinleaf": { w: 16, h: 16, pal: {"a":"#84a674","b":"#6f8c62","c":"#93bf7f","d":"#d4ba90","e":"#c7816e","f":"#5f7854"}, rows: [
     "bbcccccbbccccbba",
     "ceceebccccecbaac",
     "bccbcccaccbccceb",
@@ -95017,25 +95017,25 @@ export const ART = {
     "baccbcabccccacbb",
     "ccaacbeecaccbcce",
   ] },
-  "tile-tg2-veilstone": { w: 16, h: 16, pal: {"a":"#7d8597","b":"#626876","c":"#949db2","d":"#5e60ce","e":"#e85a3a","f":"#4b505b"}, rows: [
-    "bcabaecbeeccacbe",
-    "cbeacbccecccbaca",
-    "cccbccaabbbccbac",
-    "bbcccccbbcbcacab",
-    "bbcacabacbcccbaa",
-    "cbcabcccacabccac",
-    "ccbccacccbcccaaa",
-    "baaacccbcacacabc",
-    "cccccbcaccabbcbc",
-    "cbcbccccccbbcacc",
-    "ebcaceaabacaacab",
-    "cebcccbccacccbcc",
-    "cccabbcabecbcbcb",
-    "ccbccbacabcceacc",
-    "bcccaaabcccbbbbb",
-    "caccbbccccccbaaa",
+  "tile-tg2-veilstone": { w: 16, h: 16, pal: {"a":"#828894","b":"#6f737e","c":"#9298a8","d":"#6c6dbc","e":"#c17260","f":"#5e626c"}, rows: [
+    "ecaeaeceeeccacee",
+    "ceeacecceccceaca",
+    "ccceccaaeeecceac",
+    "eeccccceececacae",
+    "eecacaeaceccceaa",
+    "cecaecccacaeccac",
+    "cceccacccecccaaa",
+    "eaaacccecacacaec",
+    "cccccecaccaeecec",
+    "cececccccceecacc",
+    "eecaceaaeacaacae",
+    "ceeccceccacccecc",
+    "cccaeecaeececece",
+    "ccecceacaecceacc",
+    "ecccaaaeccceeeee",
+    "cacceecccccceaaa",
   ] },
-  "tile-tg2-verdanturf": { w: 16, h: 16, pal: {"a":"#8cc877","b":"#6d9c5d","c":"#a5ec8c","d":"#e87ab0","e":"#f0f0a0","f":"#547847"}, rows: [
+  "tile-tg2-verdanturf": { w: 16, h: 16, pal: {"a":"#8cb87d","b":"#77986c","c":"#9dd28b","d":"#ce80a6","e":"#d7d797","f":"#64815a"}, rows: [
     "bcacccabcacccabc",
     "bccccbacccccbccc",
     "baabccccaabaccaa",
@@ -95053,25 +95053,25 @@ export const ART = {
     "baababcbeacccabc",
     "cccabbccccccbaac",
   ] },
-  "tile-tg2-vermilion": { w: 16, h: 16, pal: {"g":"#c9ab5a","m":"#b89b4e","l":"#dbbf6e","d":"#a0853c","a":"#f0d0a0","x":"#c9735a","z":"#e0f0a0"}, rows: [
-    "zzggmmmmzzllzddg",
-    "zzllmmmmdlllzzgg",
-    "zzaaddllddmmggll",
-    "ggaaddllldmmzzdd",
-    "aaggzzddaammggmm",
-    "aaggaaddaammggmm",
-    "xxmmgglzzaalggaa",
-    "mmmmggllmllgggaa",
-    "mmllmmllllddmmmm",
-    "mmllmmggllddmmmm",
-    "mmzzllggddmmggmm",
-    "mmzxxgddggmmgggm",
-    "mmaxxdggggmmllll",
-    "mmmmddgggaadxxzz",
+  "tile-tg2-vermilion": { w: 16, h: 16, pal: {"g":"#b8a36a","m":"#ab9762","l":"#c7b275","d":"#9e8952","a":"#d7bd97","x":"#b87b6a","z":"#cad797"}, rows: [
+    "zzmmmmmmzzllzmmm",
+    "zzllmmmmmlllzzmm",
+    "zzaammllmmmmmmll",
+    "mmaammlllmmmzzmm",
+    "aammzzmmaammmmmm",
+    "aammaammaammmmmm",
+    "xxmmmmlzzaalmmaa",
+    "mmmmmmllmllmmmaa",
+    "mmllmmllllmmmmmm",
+    "mmllmmmmllmmmmmm",
+    "mmzzllmmmmmmmmmm",
+    "mmzxxmmmmmmmmmmm",
+    "mmaxxmmmmmmmllll",
+    "mmmmmmmmmaamxxzz",
     "mmllmmllalaammmm",
-    "mmddmgglaaxxmmmm",
+    "mmmmmmmlaaxxmmmm",
   ] },
-  "tile-tg2-violet": { w: 16, h: 16, pal: {"a":"#9a94a6","b":"#787381","c":"#b6afc4","d":"#7a6ab0","e":"#d8d0e8","f":"#5c5964"}, rows: [
+  "tile-tg2-violet": { w: 16, h: 16, pal: {"a":"#97929f","b":"#7f7b85","c":"#aaa4b5","d":"#8075a6","e":"#c0b7d3","f":"#6b6971"}, rows: [
     "bccbacabacbcbcba",
     "ccccebcaccacbcac",
     "cccbacbaccbcaeec",
@@ -95089,25 +95089,25 @@ export const ART = {
     "bccccccbacccacba",
     "cccbebcceccabecc",
   ] },
-  "tile-tg2-viridian": { w: 16, h: 16, pal: {"g":"#4f9e6c","m":"#448c5f","l":"#63b080","d":"#35734f","a":"#cfe8a8","x":"#599e4f","z":"#a9e8a8"}, rows: [
-    "mmmmddllxxllmmgg",
-    "zzmmddllxxllmaag",
-    "mmllddmmddaammll",
-    "mmllddmmddggmmll",
-    "zzggxzzmzzggggmm",
-    "zzgaaxmmzzggxxmm",
-    "mmxxmmmgggddllll",
-    "mmllmmlmxxddllll",
-    "llggddddaggxmmgg",
-    "lllggdddmmxxggzz",
-    "llammdaammllmmxx",
-    "ggaaxxldmmxxmmmx",
-    "mmddddmmllxaaxmm",
-    "mmddddmmllxxllmm",
-    "llggmaagaammggdd",
-    "llllmmggaammggdd",
+  "tile-tg2-viridian": { w: 16, h: 16, pal: {"g":"#609b76","m":"#58906d","l":"#71a685","d":"#4b8061","a":"#bdd499","x":"#689b60","z":"#9ad499"}, rows: [
+    "mmmmmmllmmllmmmm",
+    "zzmmmmllmmllmaam",
+    "mmllmmmmmmaammll",
+    "mmllmmmmmmmmmmll",
+    "zzmmmzzmzzmmmmmm",
+    "zzmaammmzzmmmmmm",
+    "mmmmmmmmmmmmllll",
+    "mmllmmlmmmmmllll",
+    "llmmmmmmammmmmmm",
+    "lllmmmmmmmmmmmzz",
+    "llammmaammllmmmm",
+    "mmaammlmmmmmmmmm",
+    "mmmmmmmmllmaammm",
+    "mmmmmmmmllmmllmm",
+    "llmmmaamaammmmmm",
+    "llllmmmmaammmmmm",
   ] },
-  "tile-th-azalea": { w: 16, h: 16, pal: {"a":"#6a4a2e","b":"#4c3521","c":"#845c3a","d":"#e8b84a"}, rows: [
+  "tile-th-azalea": { w: 16, h: 16, pal: {"a":"#7b5e46","b":"#674f3b","c":"#8b6b50","d":"#c4a868"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95125,7 +95125,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-blackthorn": { w: 16, h: 16, pal: {"a":"#3e3e55","b":"#2d2d3d","c":"#4e4e6a","d":"#b03a5a"}, rows: [
+  "tile-th-blackthorn": { w: 16, h: 16, pal: {"a":"#545469","b":"#474758","c":"#606077","d":"#a95169"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95143,7 +95143,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-canalave": { w: 16, h: 16, pal: {"a":"#2e5a74","b":"#214154","c":"#3a7091","d":"#f0c030"}, rows: [
+  "tile-th-canalave": { w: 16, h: 16, pal: {"a":"#456b82","b":"#3a5a6d","c":"#507a94","d":"#c1a85f"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95161,7 +95161,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-celadon": { w: 16, h: 48, pal: {"g":"#429a6e","m":"#63c08f","d":"#286648","z":"#1e4d36","a":"#d0f0c0","k":"#5a3a24","r":"#56b786"}, rows: [
+  "tile-th-celadon": { w: 16, h: 48, pal: {"g":"#569978","m":"#70b18f","d":"#40795d","z":"#386951","a":"#b9dca8","k":"#71523d","r":"#68aa89"}, rows: [
     "kkkkkkkaakkkkkkk",
     "kkkkkkkaakkkkkkk",
     "kkkkkkkaakkkkkkk",
@@ -95211,7 +95211,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-celestic": { w: 16, h: 16, pal: {"a":"#4a3a6a","b":"#352a4c","c":"#5c4884","d":"#e8e4da"}, rows: [
+  "tile-th-celestic": { w: 16, h: 16, pal: {"a":"#5d5079","b":"#4e4365","c":"#6a5b8a","d":"#d1ccbf"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95229,7 +95229,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-cerulean": { w: 16, h: 48, pal: {"g":"#4a958e","m":"#6fbdb4","d":"#2e6460","z":"#234b48","a":"#bfe8e0","k":"#5a3a24","r":"#60b0a9"}, rows: [
+  "tile-th-cerulean": { w: 16, h: 48, pal: {"g":"#5c9590","m":"#78b0a9","d":"#467673","z":"#3d6663","a":"#aad4cc","k":"#71523d","r":"#6fa6a1"}, rows: [
     "kkaaaaaaaaaaaakk",
     "kkkmmmmmmmmmmkkk",
     "kkmmmmmmmmmmmmkk",
@@ -95279,7 +95279,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-cherrygrove": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#7f3a2b","c":"#dc644b","d":"#e86a8a"}, rows: [
+  "tile-th-cherrygrove": { w: 16, h: 16, pal: {"a":"#a96152","b":"#8a5043","c":"#c27362","d":"#ca788d"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95297,7 +95297,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-cianwood": { w: 16, h: 16, pal: {"a":"#6a5a48","b":"#4c4134","c":"#84705a","d":"#4a90a8"}, rows: [
+  "tile-th-cianwood": { w: 16, h: 16, pal: {"a":"#776a5b","b":"#63594c","c":"#897969","d":"#5d90a2"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95315,7 +95315,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-cinnabar": { w: 16, h: 48, pal: {"g":"#9e5c46","m":"#c07e66","d":"#68382b","z":"#4e2a20","a":"#e8b89a","k":"#5a3a24","r":"#b8755e"}, rows: [
+  "tile-th-cinnabar": { w: 16, h: 48, pal: {"g":"#9c6a5a","m":"#b28372","d":"#7a4f43","z":"#69443a","a":"#d4aa90","k":"#71523d","r":"#ab7d6d"}, rows: [
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
     "zzzzzzzzzzzzzzzz",
@@ -95365,7 +95365,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-dewford": { w: 16, h: 16, pal: {"a":"#3a6a7a","b":"#2a4c58","c":"#488498","d":"#e87a5a"}, rows: [
+  "tile-th-dewford": { w: 16, h: 16, pal: {"a":"#4f7784","b":"#42636e","c":"#5b8898","d":"#c78470"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95383,7 +95383,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-ecruteak": { w: 16, h: 16, pal: {"a":"#7a3a2a","b":"#582a1e","c":"#984834","d":"#c03a2a"}, rows: [
+  "tile-th-ecruteak": { w: 16, h: 16, pal: {"a":"#865042","b":"#714337","c":"#995b4b","d":"#b45246"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95401,7 +95401,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-eterna": { w: 16, h: 16, pal: {"a":"#4a3a28","b":"#352a1d","c":"#5c4832","d":"#c8a24a"}, rows: [
+  "tile-th-eterna": { w: 16, h: 16, pal: {"a":"#645441","b":"#564939","c":"#705d49","d":"#b69c5f"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95419,7 +95419,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-evergrande": { w: 16, h: 16, pal: {"a":"#4a3a6a","b":"#352a4c","c":"#5c4884","d":"#f0c030"}, rows: [
+  "tile-th-evergrande": { w: 16, h: 16, pal: {"a":"#5d5079","b":"#4e4365","c":"#6a5b8a","d":"#c1a85f"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95437,7 +95437,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-fallarbor": { w: 16, h: 16, pal: {"a":"#6a5a4a","b":"#4c4135","c":"#84705c","d":"#e8e4da"}, rows: [
+  "tile-th-fallarbor": { w: 16, h: 16, pal: {"a":"#776a5d","b":"#63584d","c":"#88796a","d":"#d1ccbf"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95455,7 +95455,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-floaroma": { w: 16, h: 16, pal: {"a":"#7a4a6a","b":"#58354c","c":"#985c84","d":"#f0f0a0"}, rows: [
+  "tile-th-floaroma": { w: 16, h: 16, pal: {"a":"#835c76","b":"#6c4c61","c":"#966a88","d":"#d7d797"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95473,7 +95473,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-fortree": { w: 16, h: 16, pal: {"a":"#5a4028","b":"#412e1d","c":"#705032","d":"#c8a24a"}, rows: [
+  "tile-th-fortree": { w: 16, h: 16, pal: {"a":"#705741","b":"#604b37","c":"#7e6349","d":"#b69c5f"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95491,7 +95491,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-fuchsia": { w: 16, h: 48, pal: {"g":"#b26892","m":"#d28fb4","d":"#784563","z":"#5a344a","a":"#f4cfe2","k":"#5a3a24","r":"#c791b0"}, rows: [
+  "tile-th-fuchsia": { w: 16, h: 48, pal: {"g":"#a77491","m":"#c18ca9","d":"#825871","z":"#6e4b5f","a":"#e1b1c9","k":"#71523d","r":"#b88ea6"}, rows: [
     "zzzzzzzaazzzaazz",
     "zzzzzzdaadzzzzzz",
     "zzzzzdaaaadzzzzz",
@@ -95541,7 +95541,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-goldenrod": { w: 16, h: 16, pal: {"a":"#8a4a3a","b":"#63352a","c":"#ac5c48","d":"#e85a4a"}, rows: [
+  "tile-th-goldenrod": { w: 16, h: 16, pal: {"a":"#8f5c50","b":"#764c42","c":"#a56a5c","d":"#c47168"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95559,7 +95559,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-hearthome": { w: 16, h: 16, pal: {"a":"#6a3a7a","b":"#4c2a58","c":"#844898","d":"#8a5ab0"}, rows: [
+  "tile-th-hearthome": { w: 16, h: 16, pal: {"a":"#774f84","b":"#63426e","c":"#885b98","d":"#8b6ba5"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95577,7 +95577,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-indigo": { w: 16, h: 48, pal: {"g":"#5c6ca0","m":"#7e8cc0","d":"#3a4670","z":"#2c3554","a":"#c4cfef","k":"#5a3a24","r":"#7e8bb5"}, rows: [
+  "tile-th-indigo": { w: 16, h: 48, pal: {"g":"#6c779a","m":"#828cb2","d":"#505a7d","z":"#444d6b","a":"#abb7db","k":"#71523d","r":"#828caa"}, rows: [
     "zzzzzzzaazzzzzzz",
     "zzzzzzzaazzzzzzz",
     "zzzzzzzaazzzzzzz",
@@ -95627,7 +95627,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-jubilife": { w: 16, h: 16, pal: {"a":"#3a4a6a","b":"#2a354c","c":"#485c84","d":"#f0c030"}, rows: [
+  "tile-th-jubilife": { w: 16, h: 16, pal: {"a":"#505d79","b":"#434e65","c":"#5b6a8a","d":"#c1a85f"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95645,7 +95645,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-lavaridge": { w: 16, h: 16, pal: {"a":"#7a2e22","b":"#582118","c":"#983a2a","d":"#e83a2a"}, rows: [
+  "tile-th-lavaridge": { w: 16, h: 16, pal: {"a":"#88453b","b":"#733a31","c":"#9b5043","d":"#be6058"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95663,7 +95663,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-lavender": { w: 16, h: 48, pal: {"g":"#8a76a8","m":"#ac9ac6","d":"#594a72","z":"#433755","a":"#e0d4f0","k":"#5a3a24","r":"#ab9cc0"}, rows: [
+  "tile-th-lavender": { w: 16, h: 48, pal: {"g":"#8b7da0","m":"#a395b7","d":"#695c7d","z":"#594e6a","a":"#c6b7db","k":"#71523d","r":"#a297b3"}, rows: [
     "zzzzzzzaazzzzzzz",
     "zzzzzzdaadzzzzzz",
     "zzzzzdaaaadzzzzz",
@@ -95713,7 +95713,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-lilycove": { w: 16, h: 16, pal: {"a":"#5a3a6a","b":"#412a4c","c":"#704884","d":"#e85a7a"}, rows: [
+  "tile-th-lilycove": { w: 16, h: 16, pal: {"a":"#6b5079","b":"#5a4365","c":"#7a5b8a","d":"#c77084"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95731,7 +95731,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-littleroot": { w: 16, h: 16, pal: {"a":"#8a5a38","b":"#634128","c":"#ac7046","d":"#e86a8a"}, rows: [
+  "tile-th-littleroot": { w: 16, h: 16, pal: {"a":"#90694e","b":"#775740","c":"#a5795a","d":"#ca788d"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95749,7 +95749,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-mahogany": { w: 16, h: 16, pal: {"a":"#6a5138","b":"#4c3a28","c":"#846546","d":"#5a8ab0"}, rows: [
+  "tile-th-mahogany": { w: 16, h: 16, pal: {"a":"#79644e","b":"#665341","c":"#8a7259","d":"#6b8ba5"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95767,7 +95767,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-mauville": { w: 16, h: 16, pal: {"a":"#5a4a7a","b":"#413558","c":"#705c98","d":"#f0c030"}, rows: [
+  "tile-th-mauville": { w: 16, h: 16, pal: {"a":"#695c83","b":"#574c6c","c":"#796a96","d":"#c1a85f"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95785,7 +95785,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-mossdeep": { w: 16, h: 16, pal: {"a":"#3a4a6a","b":"#2a354c","c":"#485c84","d":"#f0f4f8"}, rows: [
+  "tile-th-mossdeep": { w: 16, h: 16, pal: {"a":"#505d79","b":"#434e65","c":"#5b6a8a","d":"#cbd6e0"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95803,7 +95803,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-newbark": { w: 16, h: 16, pal: {"a":"#4a7a8a","b":"#355863","c":"#5c98ac","d":"#3a7ca5"}, rows: [
+  "tile-th-newbark": { w: 16, h: 16, pal: {"a":"#5c818e","b":"#4c6b74","c":"#6c95a3","d":"#5082a1"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95821,7 +95821,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-oldale": { w: 16, h: 16, pal: {"a":"#7a6a3a","b":"#584c2a","c":"#988448","d":"#f0f0e0"}, rows: [
+  "tile-th-oldale": { w: 16, h: 16, pal: {"a":"#84774f","b":"#6e6342","c":"#98885b","d":"#d9d9c1"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95839,7 +95839,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-olivine": { w: 16, h: 16, pal: {"a":"#3a5a7a","b":"#2a4158","c":"#487098","d":"#e8a13a"}, rows: [
+  "tile-th-olivine": { w: 16, h: 16, pal: {"a":"#4f6a84","b":"#42586e","c":"#5b7998","d":"#c19960"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95857,7 +95857,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-oreburgh": { w: 16, h: 16, pal: {"a":"#3e2c26","b":"#2d201b","c":"#4e3730","d":"#f0a848"}, rows: [
+  "tile-th-oreburgh": { w: 16, h: 16, pal: {"a":"#5b4741","b":"#503f38","c":"#654f48","d":"#c59f6b"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95875,7 +95875,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-pacifidlog": { w: 16, h: 16, pal: {"a":"#7a4a2e","b":"#583521","c":"#985c3a","d":"#e86a4a"}, rows: [
+  "tile-th-pacifidlog": { w: 16, h: 16, pal: {"a":"#865d45","b":"#704e3a","c":"#996a50","d":"#c47a68"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95893,7 +95893,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-pallet": { w: 16, h: 48, pal: {"g":"#8aa348","m":"#b3c46e","d":"#5e7330","z":"#465624","a":"#e8e0a0","k":"#5a3a24","r":"#a3bb64"}, rows: [
+  "tile-th-pallet": { w: 16, h: 48, pal: {"g":"#8c9f5b","m":"#a9b577","d":"#6f8147","z":"#5e6e3d","a":"#d4cd94","k":"#71523d","r":"#9dae71"}, rows: [
     "kkkkkkkaakkkaakk",
     "kkkkkkdaadkkkkkk",
     "kkkkkdaaaadkkkkk",
@@ -95943,7 +95943,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-pastoria": { w: 16, h: 16, pal: {"a":"#4a5d23","b":"#354319","c":"#5c742c","d":"#d9a441"}, rows: [
+  "tile-th-pastoria": { w: 16, h: 16, pal: {"a":"#61733c","b":"#536333","c":"#6d8244","d":"#bf9d5c"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95961,7 +95961,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-petalburg": { w: 16, h: 16, pal: {"a":"#4a6a5a","b":"#354c41","c":"#5c8470","d":"#4a90c0"}, rows: [
+  "tile-th-petalburg": { w: 16, h: 16, pal: {"a":"#5d776a","b":"#4d6358","c":"#6a8879","d":"#608fb0"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -95979,7 +95979,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-pewter": { w: 16, h: 48, pal: {"g":"#a19880","m":"#c0b69e","d":"#6e6654","z":"#534d3f","a":"#d8d2c0","k":"#5a3a24","r":"#bcb6a5"}, rows: [
+  "tile-th-pewter": { w: 16, h: 48, pal: {"g":"#9c9584","m":"#b3ab98","d":"#797364","z":"#676255","a":"#c5bfae","k":"#71523d","r":"#afab9d"}, rows: [
     "kkkkkkkkkkkkkkkk",
     "kkkkkkkkkkkkkkkk",
     "kkkkkkkkkkkkkkkk",
@@ -96029,7 +96029,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-rustboro": { w: 16, h: 16, pal: {"a":"#4a4a5e","b":"#353544","c":"#5c5c76","d":"#c05a3a"}, rows: [
+  "tile-th-rustboro": { w: 16, h: 16, pal: {"a":"#5d5d6e","b":"#4e4e5d","c":"#6a6a7e","d":"#b16a54"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96047,7 +96047,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-saffron": { w: 16, h: 48, pal: {"g":"#b29540","m":"#d2b562","d":"#785e26","z":"#5a471c","a":"#f0e2a8","k":"#5a3a24","r":"#c6ac61"}, rows: [
+  "tile-th-saffron": { w: 16, h: 48, pal: {"g":"#aa9456","m":"#bfaa6e","d":"#866f3e","z":"#736035","a":"#d8cc9b","k":"#71523d","r":"#b6a36e"}, rows: [
     "kkkkkkkaakkkkkkk",
     "kkkkkkkaakkkkkkk",
     "kkkkkkkaakkkkkkk",
@@ -96097,7 +96097,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-sandgem": { w: 16, h: 16, pal: {"a":"#4a6a8a","b":"#354c63","c":"#5c84ac","d":"#4a90c0"}, rows: [
+  "tile-th-sandgem": { w: 16, h: 16, pal: {"a":"#5c758e","b":"#4c6074","c":"#6c87a3","d":"#608fb0"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96115,7 +96115,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-silvertown": { w: 16, h: 16, pal: {"a":"#6a6a9a","b":"#4c4c6f","c":"#8484c0","d":"#c9a227"}, rows: [
+  "tile-th-silvertown": { w: 16, h: 16, pal: {"a":"#767696","b":"#5e5e7a","c":"#8686b3","d":"#b79c47"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96133,7 +96133,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-slateport": { w: 16, h: 16, pal: {"a":"#a03a30","b":"#732a23","c":"#c8483c","d":"#3a7bd5"}, rows: [
+  "tile-th-slateport": { w: 16, h: 16, pal: {"a":"#9f5048","b":"#83423c","c":"#b55e56","d":"#5681bd"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96151,7 +96151,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-snowpoint": { w: 16, h: 16, pal: {"a":"#5a7a9a","b":"#41586f","c":"#7098c0","d":"#e85a7a"}, rows: [
+  "tile-th-snowpoint": { w: 16, h: 16, pal: {"a":"#698098","b":"#55687c","c":"#7895b2","d":"#c77084"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96169,7 +96169,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-solaceon": { w: 16, h: 16, pal: {"a":"#6a5a3a","b":"#4c412a","c":"#847048","d":"#c0784a"}, rows: [
+  "tile-th-solaceon": { w: 16, h: 16, pal: {"a":"#796b50","b":"#655a43","c":"#8a7a5b","d":"#b07f60"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96187,7 +96187,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-sootopolis": { w: 16, h: 16, pal: {"a":"#6a7a8a","b":"#4c5863","c":"#8498ac","d":"#3a90c8"}, rows: [
+  "tile-th-sootopolis": { w: 16, h: 16, pal: {"a":"#75808c","b":"#5f6972","c":"#8795a4","d":"#558fb5"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96205,7 +96205,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-sunnyshore": { w: 16, h: 16, pal: {"a":"#b8860b","b":"#846008","c":"#e6a80e","d":"#3a7ac0"}, rows: [
+  "tile-th-sunnyshore": { w: 16, h: 16, pal: {"a":"#a0843e","b":"#846d33","c":"#b89848","d":"#5480b1"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96223,7 +96223,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-twinleaf": { w: 16, h: 16, pal: {"a":"#8a4a3a","b":"#63352a","c":"#ac5c48","d":"#f2cc8f"}, rows: [
+  "tile-th-twinleaf": { w: 16, h: 16, pal: {"a":"#8f5c50","b":"#764c42","c":"#a56a5c","d":"#d4ba90"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96241,7 +96241,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-veilstone": { w: 16, h: 16, pal: {"a":"#4a4a6e","b":"#35354f","c":"#5c5c8a","d":"#5e60ce"}, rows: [
+  "tile-th-veilstone": { w: 16, h: 16, pal: {"a":"#5d5d7a","b":"#4d4d65","c":"#6a6a8d","d":"#6c6dbc"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96259,7 +96259,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-verdanturf": { w: 16, h: 16, pal: {"a":"#5a7a4a","b":"#415835","c":"#70985c","d":"#e87ab0"}, rows: [
+  "tile-th-verdanturf": { w: 16, h: 16, pal: {"a":"#69835c","b":"#576c4c","c":"#79966a","d":"#ce80a6"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96277,7 +96277,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-vermilion": { w: 16, h: 48, pal: {"g":"#b87f4e","m":"#dba26e","d":"#805530","z":"#604024","a":"#f0d0a0","k":"#5a3a24","r":"#c99d77"}, rows: [
+  "tile-th-vermilion": { w: 16, h: 48, pal: {"g":"#ab8462","m":"#c79c75","d":"#8a6647","z":"#75573d","a":"#d7bd97","k":"#71523d","r":"#b9997d"}, rows: [
     "kkkkkkkaakkkkkkk",
     "kkkkkkdaadkkkkkk",
     "kkkkkdaaaadkkkkk",
@@ -96327,7 +96327,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-th-violet": { w: 16, h: 16, pal: {"a":"#5a5a7a","b":"#414158","c":"#707098","d":"#7a6ab0"}, rows: [
+  "tile-th-violet": { w: 16, h: 16, pal: {"a":"#696981","b":"#56566b","c":"#7a7a95","d":"#8075a6"}, rows: [
     "caaaaaaacaaaaaaa",
     "aaaaaaacaaaaaaac",
     "bbbbbbbbbbbbbbbb",
@@ -96345,7 +96345,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-th-viridian": { w: 16, h: 48, pal: {"g":"#448c4c","m":"#63b06b","d":"#2a5c32","z":"#204525","a":"#cfe8a8","k":"#5a3a24","r":"#53ab5d"}, rows: [
+  "tile-th-viridian": { w: 16, h: 48, pal: {"g":"#58905e","m":"#71a676","d":"#42714a","z":"#3a6240","a":"#bdd499","k":"#71523d","r":"#66a26d"}, rows: [
     "zzzzzzzaazzzzzzz",
     "zzzzzzdaadzzzzzz",
     "zzzzzdaaaadzzzzz",
@@ -96395,7 +96395,7 @@ export const ART = {
     "dddddddddddddddd",
     "dddddddddddddddd",
   ] },
-  "tile-tl-azalea": { w: 16, h: 16, pal: {"a":"#78bc72","b":"#4e7a4a","d":"#e8b84a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-azalea": { w: 16, h: 16, pal: {"a":"#7eaf7a","b":"#60835c","d":"#c4a868","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96413,7 +96413,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-blackthorn": { w: 16, h: 16, pal: {"a":"#9595a2","b":"#616169","d":"#b03a5a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-blackthorn": { w: 16, h: 16, pal: {"a":"#93939c","b":"#6e6e75","d":"#a95169","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96431,7 +96431,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-canalave": { w: 16, h: 16, pal: {"a":"#4c9abd","b":"#31647a","d":"#f0c030","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-canalave": { w: 16, h: 16, pal: {"a":"#6196ae","b":"#487385","d":"#c1a85f","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96449,7 +96449,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-celadon": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#32805a","s":"#a87f4e","a":"#d0f0c0","z":"#88c871","h":"#d5f5d8","F":"#6a6a80"}, rows: [
+  "tile-tl-celadon": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#49896a","s":"#a18461","a":"#b9dca8","z":"#89b879","h":"#b5e1b9","F":"#757585"}, rows: [
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
     "dddddddddddddddd",
@@ -96467,7 +96467,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-celestic": { w: 16, h: 16, pal: {"a":"#a189ff","b":"#6859a7","d":"#e8e4da","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-celestic": { w: 16, h: 16, pal: {"a":"#a093d5","b":"#746a9f","d":"#d1ccbf","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96485,7 +96485,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-cerulean": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#3a7d78","s":"#a87f4e","a":"#bfe8e0","z":"#68c9b6","h":"#d2e8ef","F":"#6a6a80"}, rows: [
+  "tile-tl-cerulean": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#4f8682","s":"#a18461","a":"#aad4cc","z":"#73b9ab","h":"#b6d1da","F":"#757585"}, rows: [
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
     "dddddddddddddddd",
@@ -96503,7 +96503,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-cherrygrove": { w: 16, h: 16, pal: {"a":"#b5d691","b":"#768b5e","d":"#e86a8a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-cherrygrove": { w: 16, h: 16, pal: {"a":"#aac48d","b":"#7e8d6c","d":"#ca788d","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96521,7 +96521,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-cianwood": { w: 16, h: 16, pal: {"a":"#c7b582","b":"#817654","d":"#4a90a8","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-cianwood": { w: 16, h: 16, pal: {"a":"#b8aa84","b":"#877e64","d":"#5d90a2","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96539,7 +96539,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-cinnabar": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#824636","s":"#a87f4e","a":"#e8b89a","z":"#d47a42","h":"#ede1af","F":"#6a6a80"}, rows: [
+  "tile-tl-cinnabar": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#8a594c","s":"#a18461","a":"#d4aa90","z":"#bf805a","h":"#d9cd9d","F":"#757585"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -96557,7 +96557,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-dewford": { w: 16, h: 16, pal: {"a":"#7dbab1","b":"#517873","d":"#e87a5a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-dewford": { w: 16, h: 16, pal: {"a":"#82aea7","b":"#62817d","d":"#c78470","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96575,7 +96575,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-ecruteak": { w: 16, h: 16, pal: {"a":"#d99561","b":"#8d613f","d":"#c03a2a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-ecruteak": { w: 16, h: 16, pal: {"a":"#c5936d","b":"#916e54","d":"#b45246","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96593,7 +96593,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-eterna": { w: 16, h: 16, pal: {"a":"#558131","b":"#37531f","d":"#c8a24a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-eterna": { w: 16, h: 16, pal: {"a":"#668a48","b":"#516d38","d":"#b69c5f","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96611,7 +96611,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-evergrande": { w: 16, h: 16, pal: {"a":"#b5c7f2","b":"#76819d","d":"#f0c030","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-evergrande": { w: 16, h: 16, pal: {"a":"#a3b3db","b":"#7e8599","d":"#c1a85f","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96629,7 +96629,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-fallarbor": { w: 16, h: 16, pal: {"a":"#baaf9e","b":"#787166","d":"#e8e4da","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-fallarbor": { w: 16, h: 16, pal: {"a":"#aea698","b":"#7f7a72","d":"#d1ccbf","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96647,7 +96647,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-floaroma": { w: 16, h: 16, pal: {"a":"#fb96be","b":"#a2617b","d":"#f0f0a0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-floaroma": { w: 16, h: 16, pal: {"a":"#d798b1","b":"#9c6f81","d":"#d7d797","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96665,7 +96665,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-fortree": { w: 16, h: 16, pal: {"a":"#64a86e","b":"#416d47","d":"#c8a24a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-fortree": { w: 16, h: 16, pal: {"a":"#71a078","b":"#557a5a","d":"#b69c5f","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96683,7 +96683,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-fuchsia": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#96567c","s":"#a87f4e","a":"#f4cfe2","z":"#dc68a4","h":"#f4e7f7","F":"#6a6a80"}, rows: [
+  "tile-tl-fuchsia": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#956682","s":"#a18461","a":"#e1b1c9","z":"#c7719e","h":"#dcc2e2","F":"#757585"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -96701,7 +96701,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-goldenrod": { w: 16, h: 16, pal: {"a":"#d2b582","b":"#887654","d":"#e85a4a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-goldenrod": { w: 16, h: 16, pal: {"a":"#c1aa83","b":"#8c7e64","d":"#c47168","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96719,7 +96719,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-hearthome": { w: 16, h: 16, pal: {"a":"#d9af2a","b":"#8d711b","d":"#8a5ab0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-hearthome": { w: 16, h: 16, pal: {"a":"#bba150","b":"#927c39","d":"#8b6ba5","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96737,7 +96737,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-indigo": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#49588c","s":"#a87f4e","a":"#c4cfef","z":"#6481d5","h":"#ddd8f4","F":"#6a6a80"}, rows: [
+  "tile-tl-indigo": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#5c678f","s":"#a18461","a":"#abb7db","z":"#6f84c2","h":"#bfb8e0","F":"#757585"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -96755,7 +96755,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-jubilife": { w: 16, h: 16, pal: {"a":"#95a0b3","b":"#616874","d":"#f0c030","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-jubilife": { w: 16, h: 16, pal: {"a":"#929ba9","b":"#6e737d","d":"#c1a85f","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96773,7 +96773,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-lavaridge": { w: 16, h: 16, pal: {"a":"#cc844e","b":"#845532","d":"#e83a2a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-lavaridge": { w: 16, h: 16, pal: {"a":"#b98762","b":"#8c6649","d":"#be6058","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96791,7 +96791,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-lavender": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#6f5c8e","s":"#a87f4e","a":"#e0d4f0","z":"#9c76cf","h":"#f4e7f7","F":"#6a6a80"}, rows: [
+  "tile-tl-lavender": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#786a8f","s":"#a18461","a":"#c6b7db","z":"#987bbe","h":"#dcc2e2","F":"#757585"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -96809,7 +96809,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-lilycove": { w: 16, h: 16, pal: {"a":"#c7add8","b":"#81708c","d":"#e85a7a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-lilycove": { w: 16, h: 16, pal: {"a":"#b7a0c6","b":"#85798d","d":"#c77084","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96827,7 +96827,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-littleroot": { w: 16, h: 16, pal: {"a":"#b1cc7f","b":"#738453","d":"#e86a8a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-littleroot": { w: 16, h: 16, pal: {"a":"#a7bc82","b":"#7c8963","d":"#ca788d","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96845,7 +96845,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-mahogany": { w: 16, h: 16, pal: {"a":"#95b593","b":"#61765f","d":"#5a8ab0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-mahogany": { w: 16, h: 16, pal: {"a":"#92aa91","b":"#6e7e6d","d":"#6b8ba5","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96863,7 +96863,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-mauville": { w: 16, h: 16, pal: {"a":"#b0ad74","b":"#72704b","d":"#f0c030","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-mauville": { w: 16, h: 16, pal: {"a":"#a6a47c","b":"#7d7b5d","d":"#c1a85f","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96881,7 +96881,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-mossdeep": { w: 16, h: 16, pal: {"a":"#95c7d8","b":"#61818c","d":"#f0f4f8","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-mossdeep": { w: 16, h: 16, pal: {"a":"#8fb8c6","b":"#6e868e","d":"#cbd6e0","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96899,7 +96899,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-newbark": { w: 16, h: 16, pal: {"a":"#9ac7b5","b":"#648176","d":"#3a7ca5","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-newbark": { w: 16, h: 16, pal: {"a":"#95b8aa","b":"#70867e","d":"#5082a1","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96917,7 +96917,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-oldale": { w: 16, h: 16, pal: {"a":"#c1b066","b":"#7d7242","d":"#f0f0e0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-oldale": { w: 16, h: 16, pal: {"a":"#b2a672","b":"#857d56","d":"#d9d9c1","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96935,7 +96935,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-olivine": { w: 16, h: 16, pal: {"a":"#84b5c7","b":"#557681","d":"#e8a13a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-olivine": { w: 16, h: 16, pal: {"a":"#85aab8","b":"#657e87","d":"#c19960","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96953,7 +96953,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-oreburgh": { w: 16, h: 16, pal: {"a":"#a86e49","b":"#6d4730","d":"#f0a848","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-oreburgh": { w: 16, h: 16, pal: {"a":"#a2775c","b":"#7c5b47","d":"#c59f6b","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96971,7 +96971,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-pacifidlog": { w: 16, h: 16, pal: {"a":"#d8b582","b":"#8c7654","d":"#e86a4a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-pacifidlog": { w: 16, h: 16, pal: {"a":"#c5aa83","b":"#8e7e64","d":"#c47a68","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -96989,7 +96989,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-pallet": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#75903c","s":"#a87f4e","a":"#e8e0a0","z":"#d3c348","h":"#e7f4be","F":"#6a6a80"}, rows: [
+  "tile-tl-pallet": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#7e9351","s":"#a18461","a":"#d4cd94","z":"#beb35d","h":"#d0dda8","F":"#757585"}, rows: [
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
     "dddddddddddddddd",
@@ -97007,7 +97007,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-pastoria": { w: 16, h: 16, pal: {"a":"#72a554","b":"#4a6b37","d":"#d9a441","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-pastoria": { w: 16, h: 16, pal: {"a":"#7b9e66","b":"#5e7a4d","d":"#bf9d5c","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97025,7 +97025,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-petalburg": { w: 16, h: 16, pal: {"a":"#83ba97","b":"#557862","d":"#4a90c0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-petalburg": { w: 16, h: 16, pal: {"a":"#86ae94","b":"#65806f","d":"#608fb0","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97043,7 +97043,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-pewter": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#8a8069","s":"#a87f4e","a":"#d8d2c0","z":"#aca079","h":"#dee2d0","F":"#6a6a80"}, rows: [
+  "tile-tl-pewter": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#8c8574","s":"#a18461","a":"#c5bfae","z":"#a39b7f","h":"#c8cdb9","F":"#757585"}, rows: [
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
     "dddddddddddddddd",
@@ -97061,7 +97061,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-rustboro": { w: 16, h: 16, pal: {"a":"#b0a28f","b":"#72695c","d":"#c05a3a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-rustboro": { w: 16, h: 16, pal: {"a":"#a79c8e","b":"#7c756a","d":"#b16a54","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97079,7 +97079,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-saffron": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#96762f","s":"#a87f4e","a":"#f0e2a8","z":"#dfc247","h":"#e7f4be","F":"#6a6a80"}, rows: [
+  "tile-tl-saffron": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#997f47","s":"#a18461","a":"#d8cc9b","z":"#c2af62","h":"#d0dda8","F":"#757585"}, rows: [
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
     "dddddddddddddddd",
@@ -97097,7 +97097,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-sandgem": { w: 16, h: 16, pal: {"a":"#e7d995","b":"#968d61","d":"#4a90c0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-sandgem": { w: 16, h: 16, pal: {"a":"#d3c78d","b":"#948e6e","d":"#608fb0","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97115,7 +97115,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-silvertown": { w: 16, h: 16, pal: {"a":"#d8d8e1","b":"#8c8c92","d":"#c9a227","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-silvertown": { w: 16, h: 16, pal: {"a":"#c0c0ca","b":"#8d8d91","d":"#b79c47","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97133,7 +97133,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-slateport": { w: 16, h: 16, pal: {"a":"#d6bb87","b":"#8b7958","d":"#3a7bd5","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-slateport": { w: 16, h: 16, pal: {"a":"#c4af86","b":"#8e8067","d":"#5681bd","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97151,7 +97151,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-snowpoint": { w: 16, h: 16, pal: {"a":"#daffff","b":"#8da8ae","d":"#e85a7a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-snowpoint": { w: 16, h: 16, pal: {"a":"#bce5e5","b":"#8da1a5","d":"#c77084","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97169,7 +97169,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-solaceon": { w: 16, h: 16, pal: {"a":"#b0bf95","b":"#727c61","d":"#c0784a","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-solaceon": { w: 16, h: 16, pal: {"a":"#a6b292","b":"#7b826e","d":"#b07f60","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97187,7 +97187,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-sootopolis": { w: 16, h: 16, pal: {"a":"#f0ede3","b":"#9b9993","d":"#3a90c8","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-sootopolis": { w: 16, h: 16, pal: {"a":"#d9d4c4","b":"#979692","d":"#558fb5","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97205,7 +97205,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-sunnyshore": { w: 16, h: 16, pal: {"a":"#ffe26e","b":"#b29247","d":"#3a7ac0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-sunnyshore": { w: 16, h: 16, pal: {"a":"#d0c185","b":"#a8915c","d":"#5480b1","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97223,7 +97223,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-twinleaf": { w: 16, h: 16, pal: {"a":"#89be71","b":"#597b4a","d":"#f2cc8f","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-twinleaf": { w: 16, h: 16, pal: {"a":"#8ab179","b":"#68835c","d":"#d4ba90","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97241,7 +97241,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-veilstone": { w: 16, h: 16, pal: {"a":"#8790a3","b":"#585d6a","d":"#5e60ce","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-veilstone": { w: 16, h: 16, pal: {"a":"#89909d","b":"#686c76","d":"#6c6dbc","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97259,7 +97259,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-verdanturf": { w: 16, h: 16, pal: {"a":"#97d881","b":"#628c53","d":"#e87ab0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-verdanturf": { w: 16, h: 16, pal: {"a":"#93c582","b":"#6f8f63","d":"#ce80a6","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97277,7 +97277,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-vermilion": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#a06a3c","s":"#a87f4e","a":"#f0d0a0","z":"#e1a03f","h":"#f1f3b6","F":"#6a6a80"}, rows: [
+  "tile-tl-vermilion": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#9e7552","s":"#a18461","a":"#d7bd97","z":"#c1995f","h":"#dadba4","F":"#757585"}, rows: [
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
     "dddddddddddddddd",
@@ -97295,7 +97295,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tl-violet": { w: 16, h: 16, pal: {"a":"#a6a0b3","b":"#6c6874","d":"#7a6ab0","g":"#3a5a7a","h":"#9ac8e8"}, rows: [
+  "tile-tl-violet": { w: 16, h: 16, pal: {"a":"#9f9aa9","b":"#76737c","d":"#8075a6","g":"#4f6a84","h":"#90b8d4"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
@@ -97313,7 +97313,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tl-viridian": { w: 16, h: 16, pal: {"w":"#f5f0dc","e":"#ebe1b8","d":"#35733e","s":"#a87f4e","a":"#cfe8a8","z":"#9ed14f","h":"#d0f0c0","F":"#6a6a80"}, rows: [
+  "tile-tl-viridian": { w: 16, h: 16, pal: {"w":"#e1d9ba","e":"#d7cda4","d":"#4b8053","s":"#a18461","a":"#bdd499","z":"#99bd62","h":"#b9dca8","F":"#757585"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -97331,7 +97331,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-towerfloor-1": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","c":"#c2c8d4","k":"#5a3a24","a":"#a8845c","b":"#b09468","y":"#7a5a38","g":"#46586e"}, rows: [
+  "tile-towerfloor-1": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585","c":"#b0b6c1","k":"#71523d","a":"#a0876c","b":"#a69274","y":"#846a4e","g":"#59687a"}, rows: [
     "mmmmmmmzmmmmmmmm",
     "mmmmmmmzmmmmmmmm",
     "mmcmmmmzmmmmmmmm",
@@ -97349,7 +97349,7 @@ export const ART = {
     "mmmmmmmmzmmmmmmm",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-towerfloor-2": { w: 16, h: 16, pal: {"m":"#8d8aa0","z":"#6d6a80","c":"#c2c6d4","k":"#5a4024","a":"#a88d5c","b":"#b09c68","y":"#7a6238","g":"#46536e"}, rows: [
+  "tile-towerfloor-2": { w: 16, h: 16, pal: {"m":"#8d8b9b","z":"#777585","c":"#b0b4c1","k":"#71583d","a":"#a08d6c","b":"#a69874","y":"#84714e","g":"#59647a"}, rows: [
     "mmmmzmmmmmmmmmmm",
     "mmmmzmmmmmmmmmmm",
     "mmcmzmmmmmmmmmmm",
@@ -97367,43 +97367,43 @@ export const ART = {
     "mmmmmmmmmmmzmmmm",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-towerfloor-3": { w: 16, h: 16, pal: {"a":"#9a9aa5","b":"#8a8aa0","c":"#acaebe","d":"#7e7e94"}, rows: [
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
+  "tile-towerfloor-3": { w: 16, h: 16, pal: {"a":"#96969f","b":"#8b8b9b","c":"#a2a4b1","d":"#838392"}, rows: [
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
     "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
     "ccccbbbbccccbbbb",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
-    "aaabccccaaabcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
+    "cccbcccccccbcccc",
     "bbbbccccbbbbcccc",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
-    "ccccaaabccccaaab",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
+    "cccccccbcccccccb",
     "ccccbbbbccccbbbb",
   ] },
-  "tile-towerfloor-4": { w: 16, h: 16, pal: {"a":"#9a9aa5","b":"#8a8aa0","c":"#acaebe","d":"#7e7e94"}, rows: [
-    "bbbbbbbbbbbbbbbb",
-    "baaabaaacaaabaaa",
-    "baaabaacacaabaaa",
-    "baaabacacacabaaa",
-    "bbbbacacacacbbbb",
-    "baaacacddacacaaa",
-    "baacacddddacacaa",
-    "bacacddddddacaca",
-    "bcacaddddddcacab",
-    "bacacaddddcacaaa",
-    "baacacaddcacaaaa",
-    "baaacacacacabaaa",
-    "bbbbbcacacabbbbb",
-    "baaabacacaaabaaa",
-    "baaabaacaaaabaaa",
-    "baaabaaabaaabaaa",
+  "tile-towerfloor-4": { w: 16, h: 16, pal: {"a":"#96969f","b":"#8b8b9b","c":"#a2a4b1","d":"#838392"}, rows: [
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaddaaaaaaa",
+    "aaaaaaddddaaaaaa",
+    "aaaaaddddddaaaaa",
+    "aaaaaddddddaaaaa",
+    "aaaaaaddddaaaaaa",
+    "aaaaaaaddaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
   ] },
-  "tile-towerwall-2": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#acaebe","d":"#6a4a7a"}, rows: [
+  "tile-towerwall-2": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#a2a4b1","d":"#765c83"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "wwwwwwwdwwwwwwwd",
@@ -97421,7 +97421,7 @@ export const ART = {
     "wwwdwwwdwwwdwwwd",
     "wwwdwwwdwwwdwwwd",
   ] },
-  "tile-towerwall": { w: 16, h: 16, pal: {"m":"#8a8aa0","z":"#6a6a80","c":"#c2c8d4","k":"#5a3a24","a":"#a8845c","b":"#b09468","y":"#7a5a38","g":"#46586e"}, rows: [
+  "tile-towerwall": { w: 16, h: 16, pal: {"m":"#8b8b9b","z":"#757585","c":"#b0b6c1","k":"#71523d","a":"#a0876c","b":"#a69274","y":"#846a4e","g":"#59687a"}, rows: [
     "cccccccccccccccc",
     "mmmmmmmzmmmmmmmm",
     "mmmmmmmzmmmmmmmm",
@@ -97439,7 +97439,7 @@ export const ART = {
     "mmmmmmmzmmmmmmmm",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-towerwood": { w: 16, h: 16, pal: {"a":"#6e4f30","b":"#4e3822","c":"#8a683f"}, rows: [
+  "tile-towerwood": { w: 16, h: 16, pal: {"a":"#7d6247","b":"#69523b","c":"#8f7454"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aacbaaabaaabacab",
     "aaabcaabaaabaaab",
@@ -97457,7 +97457,7 @@ export const ART = {
     "aaabaacbaaabaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-azalea": { w: 16, h: 16, pal: {"a":"#6a4a2e","b":"#4c3521","c":"#845c3a","d":"#e8b84a"}, rows: [
+  "tile-tr-azalea": { w: 16, h: 16, pal: {"a":"#7b5e46","b":"#674f3b","c":"#8b6b50","d":"#c4a868"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -97475,7 +97475,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-blackthorn": { w: 16, h: 16, pal: {"a":"#3e3e55","b":"#2d2d3d","c":"#4e4e6a","d":"#b03a5a"}, rows: [
+  "tile-tr-blackthorn": { w: 16, h: 16, pal: {"a":"#545469","b":"#474758","c":"#606077","d":"#a95169"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -97493,7 +97493,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-canalave": { w: 16, h: 16, pal: {"a":"#2e5a74","b":"#214154","c":"#3a7091","d":"#f0c030"}, rows: [
+  "tile-tr-canalave": { w: 16, h: 16, pal: {"a":"#456b82","b":"#3a5a6d","c":"#507a94","d":"#c1a85f"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -97511,7 +97511,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-celadon": { w: 16, h: 48, pal: {"g":"#429a6e","m":"#63c08f","d":"#32805a","a":"#d0f0c0"}, rows: [
+  "tile-tr-celadon": { w: 16, h: 48, pal: {"g":"#569978","m":"#70b18f","d":"#49896a","a":"#b9dca8"}, rows: [
     "dddddddaaddddddd",
     "dddddddaaddddddd",
     "dddddddaaddddddd",
@@ -97561,7 +97561,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-celestic": { w: 16, h: 16, pal: {"a":"#4a3a6a","b":"#352a4c","c":"#5c4884","d":"#e8e4da"}, rows: [
+  "tile-tr-celestic": { w: 16, h: 16, pal: {"a":"#5d5079","b":"#4e4365","c":"#6a5b8a","d":"#d1ccbf"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -97579,7 +97579,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-cerulean": { w: 16, h: 48, pal: {"g":"#4a958e","m":"#6fbdb4","d":"#3a7d78","a":"#bfe8e0"}, rows: [
+  "tile-tr-cerulean": { w: 16, h: 48, pal: {"g":"#5c9590","m":"#78b0a9","d":"#4f8682","a":"#aad4cc"}, rows: [
     "ddaaaaaaaaaaaadd",
     "dddmmmmmmmmmmddd",
     "ddmmmmmmmmmmmmdd",
@@ -97629,7 +97629,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-cherrygrove": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#7f3a2b","c":"#dc644b","d":"#e86a8a"}, rows: [
+  "tile-tr-cherrygrove": { w: 16, h: 16, pal: {"a":"#a96152","b":"#8a5043","c":"#c27362","d":"#ca788d"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -97647,7 +97647,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-cianwood": { w: 16, h: 16, pal: {"a":"#6a5a48","b":"#4c4134","c":"#84705a","d":"#4a90a8"}, rows: [
+  "tile-tr-cianwood": { w: 16, h: 16, pal: {"a":"#776a5b","b":"#63594c","c":"#897969","d":"#5d90a2"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -97665,7 +97665,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-cinnabar": { w: 16, h: 48, pal: {"g":"#9e5c46","m":"#c07e66","d":"#824636","a":"#e8b89a"}, rows: [
+  "tile-tr-cinnabar": { w: 16, h: 48, pal: {"g":"#9c6a5a","m":"#b28372","d":"#8a594c","a":"#d4aa90"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -97715,7 +97715,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-dewford": { w: 16, h: 16, pal: {"a":"#3a6a7a","b":"#2a4c58","c":"#488498","d":"#e87a5a"}, rows: [
+  "tile-tr-dewford": { w: 16, h: 16, pal: {"a":"#4f7784","b":"#42636e","c":"#5b8898","d":"#c78470"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -97733,7 +97733,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-ecruteak": { w: 16, h: 16, pal: {"a":"#7a3a2a","b":"#582a1e","c":"#984834","d":"#c03a2a"}, rows: [
+  "tile-tr-ecruteak": { w: 16, h: 16, pal: {"a":"#865042","b":"#714337","c":"#995b4b","d":"#b45246"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -97751,7 +97751,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-eterna": { w: 16, h: 16, pal: {"a":"#4a3a28","b":"#352a1d","c":"#5c4832","d":"#c8a24a"}, rows: [
+  "tile-tr-eterna": { w: 16, h: 16, pal: {"a":"#645441","b":"#564939","c":"#705d49","d":"#b69c5f"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -97769,43 +97769,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-evergrande": { w: 16, h: 16, pal: {"a":"#4a3a6a","b":"#352a4c","c":"#5c4884","d":"#f0c030"}, rows: [
-    "dddddddddddddddd",
-    "aaaabaacabaaaaba",
-    "aaacbaaaabaaaaba",
-    "aaaabaaaabcaaaba",
-    "bbbbbbbbbbbbbbbb",
-    "aacabaaaabaaacba",
-    "aaaabaaaabaaaaba",
-    "aaaabcaaabaaaaba",
-    "acaabaaaabaacaba",
-    "bbbbbbbbbbbbbbbb",
-    "aaaabaaaabaaaabc",
-    "caaabaaaabacaaba",
-    "aaaabaacabaaaaba",
-    "aaacbaaaabaaaaba",
-    "bbbbbbbbbbbbbbbb",
-    "aaaabacaabaaaaba",
-  ] },
-  "tile-tr-fallarbor": { w: 16, h: 16, pal: {"a":"#6a5a4a","b":"#4c4135","c":"#84705c","d":"#e8e4da"}, rows: [
-    "dddddddddddddddd",
-    "abcaababcaababca",
-    "acbabaacbabaacba",
-    "caabaacaabaacaab",
-    "aababcaababcaaba",
-    "abaacbabaacbabaa",
-    "baacaabaacaabaac",
-    "abcaababcaababca",
-    "acbabaacbabaacba",
-    "caabaacaabaacaab",
-    "aababcaababcaaba",
-    "abaacbabaacbabaa",
-    "baacaabaacaabaac",
-    "abcaababcaababca",
-    "acbabaacbabaacba",
-    "caabaacaabaacaab",
-  ] },
-  "tile-tr-floaroma": { w: 16, h: 16, pal: {"a":"#7a4a6a","b":"#58354c","c":"#985c84","d":"#f0f0a0"}, rows: [
+  "tile-tr-evergrande": { w: 16, h: 16, pal: {"a":"#5d5079","b":"#4e4365","c":"#6a5b8a","d":"#c1a85f"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -97823,7 +97787,25 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-fortree": { w: 16, h: 16, pal: {"a":"#5a4028","b":"#412e1d","c":"#705032","d":"#c8a24a"}, rows: [
+  "tile-tr-fallarbor": { w: 16, h: 16, pal: {"a":"#776a5d","b":"#63584d","c":"#88796a","d":"#d1ccbf"}, rows: [
+    "dddddddddddddddd",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+    "aababcaababcaaba",
+    "abaacbabaacbabaa",
+    "baacaabaacaabaac",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+    "aababcaababcaaba",
+    "abaacbabaacbabaa",
+    "baacaabaacaabaac",
+    "abcaababcaababca",
+    "acbabaacbabaacba",
+    "caabaacaabaacaab",
+  ] },
+  "tile-tr-floaroma": { w: 16, h: 16, pal: {"a":"#835c76","b":"#6c4c61","c":"#966a88","d":"#d7d797"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -97841,7 +97823,25 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-fuchsia": { w: 16, h: 48, pal: {"g":"#b26892","m":"#d28fb4","d":"#96567c","a":"#f4cfe2"}, rows: [
+  "tile-tr-fortree": { w: 16, h: 16, pal: {"a":"#705741","b":"#604b37","c":"#7e6349","d":"#b69c5f"}, rows: [
+    "dddddddddddddddd",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "aaaabaaaabcaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aacabaaaabaaacba",
+    "aaaabaaaabaaaaba",
+    "aaaabcaaabaaaaba",
+    "acaabaaaabaacaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabaaaabaaaabc",
+    "caaabaaaabacaaba",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabacaabaaaaba",
+  ] },
+  "tile-tr-fuchsia": { w: 16, h: 48, pal: {"g":"#a77491","m":"#c18ca9","d":"#956682","a":"#e1b1c9"}, rows: [
     "dddddddaadddaadd",
     "ddddddmaamdddddd",
     "dddddmaaaamddddd",
@@ -97891,7 +97891,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-goldenrod": { w: 16, h: 16, pal: {"a":"#8a4a3a","b":"#63352a","c":"#ac5c48","d":"#e85a4a"}, rows: [
+  "tile-tr-goldenrod": { w: 16, h: 16, pal: {"a":"#8f5c50","b":"#764c42","c":"#a56a5c","d":"#c47168"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -97909,7 +97909,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-hearthome": { w: 16, h: 16, pal: {"a":"#6a3a7a","b":"#4c2a58","c":"#844898","d":"#8a5ab0"}, rows: [
+  "tile-tr-hearthome": { w: 16, h: 16, pal: {"a":"#774f84","b":"#63426e","c":"#885b98","d":"#8b6ba5"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -97927,7 +97927,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-indigo": { w: 16, h: 48, pal: {"g":"#5c6ca0","m":"#7e8cc0","d":"#49588c","a":"#c4cfef"}, rows: [
+  "tile-tr-indigo": { w: 16, h: 48, pal: {"g":"#6c779a","m":"#828cb2","d":"#5c678f","a":"#abb7db"}, rows: [
     "dddddddaaddddddd",
     "dddddddaaddddddd",
     "dddddddaaddddddd",
@@ -97977,7 +97977,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-jubilife": { w: 16, h: 16, pal: {"a":"#3a4a6a","b":"#2a354c","c":"#485c84","d":"#f0c030"}, rows: [
+  "tile-tr-jubilife": { w: 16, h: 16, pal: {"a":"#505d79","b":"#434e65","c":"#5b6a8a","d":"#c1a85f"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -97995,7 +97995,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-lavaridge": { w: 16, h: 16, pal: {"a":"#7a2e22","b":"#582118","c":"#983a2a","d":"#e83a2a"}, rows: [
+  "tile-tr-lavaridge": { w: 16, h: 16, pal: {"a":"#88453b","b":"#733a31","c":"#9b5043","d":"#be6058"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98013,7 +98013,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-lavender": { w: 16, h: 48, pal: {"g":"#8a76a8","m":"#ac9ac6","d":"#6f5c8e","a":"#e0d4f0"}, rows: [
+  "tile-tr-lavender": { w: 16, h: 48, pal: {"g":"#8b7da0","m":"#a395b7","d":"#786a8f","a":"#c6b7db"}, rows: [
     "dddddddaaddddddd",
     "ddddddmaamdddddd",
     "dddddmaaaamddddd",
@@ -98063,7 +98063,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-lilycove": { w: 16, h: 16, pal: {"a":"#5a3a6a","b":"#412a4c","c":"#704884","d":"#e85a7a"}, rows: [
+  "tile-tr-lilycove": { w: 16, h: 16, pal: {"a":"#6b5079","b":"#5a4365","c":"#7a5b8a","d":"#c77084"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98081,7 +98081,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-littleroot": { w: 16, h: 16, pal: {"a":"#8a5a38","b":"#634128","c":"#ac7046","d":"#e86a8a"}, rows: [
+  "tile-tr-littleroot": { w: 16, h: 16, pal: {"a":"#90694e","b":"#775740","c":"#a5795a","d":"#ca788d"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98099,7 +98099,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-mahogany": { w: 16, h: 16, pal: {"a":"#6a5138","b":"#4c3a28","c":"#846546","d":"#5a8ab0"}, rows: [
+  "tile-tr-mahogany": { w: 16, h: 16, pal: {"a":"#79644e","b":"#665341","c":"#8a7259","d":"#6b8ba5"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -98117,7 +98117,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-mauville": { w: 16, h: 16, pal: {"a":"#5a4a7a","b":"#413558","c":"#705c98","d":"#f0c030"}, rows: [
+  "tile-tr-mauville": { w: 16, h: 16, pal: {"a":"#695c83","b":"#574c6c","c":"#796a96","d":"#c1a85f"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98135,43 +98135,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-mossdeep": { w: 16, h: 16, pal: {"a":"#3a4a6a","b":"#2a354c","c":"#485c84","d":"#f0f4f8"}, rows: [
-    "dddddddddddddddd",
-    "aaaabaacabaaaaba",
-    "aaacbaaaabaaaaba",
-    "aaaabaaaabcaaaba",
-    "bbbbbbbbbbbbbbbb",
-    "aacabaaaabaaacba",
-    "aaaabaaaabaaaaba",
-    "aaaabcaaabaaaaba",
-    "acaabaaaabaacaba",
-    "bbbbbbbbbbbbbbbb",
-    "aaaabaaaabaaaabc",
-    "caaabaaaabacaaba",
-    "aaaabaacabaaaaba",
-    "aaacbaaaabaaaaba",
-    "bbbbbbbbbbbbbbbb",
-    "aaaabacaabaaaaba",
-  ] },
-  "tile-tr-newbark": { w: 16, h: 16, pal: {"a":"#4a7a8a","b":"#355863","c":"#5c98ac","d":"#3a7ca5"}, rows: [
-    "dddddddddddddddd",
-    "caaaaacaaaaacaaa",
-    "caaaaacaaaaacaaa",
-    "bbbbbbbbbbbbbbbb",
-    "aaaacaaaaacaaaaa",
-    "aaaacaaaaacaaaaa",
-    "aaaacaaaaacaaaaa",
-    "bbbbbbbbbbbbbbbb",
-    "aacaaaaacaaaaaca",
-    "aacaaaaacaaaaaca",
-    "aacaaaaacaaaaaca",
-    "bbbbbbbbbbbbbbbb",
-    "caaaaacaaaaacaaa",
-    "caaaaacaaaaacaaa",
-    "caaaaacaaaaacaaa",
-    "bbbbbbbbbbbbbbbb",
-  ] },
-  "tile-tr-oldale": { w: 16, h: 16, pal: {"a":"#7a6a3a","b":"#584c2a","c":"#988448","d":"#f0f0e0"}, rows: [
+  "tile-tr-mossdeep": { w: 16, h: 16, pal: {"a":"#505d79","b":"#434e65","c":"#5b6a8a","d":"#cbd6e0"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -98189,7 +98153,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-olivine": { w: 16, h: 16, pal: {"a":"#3a5a7a","b":"#2a4158","c":"#487098","d":"#e8a13a"}, rows: [
+  "tile-tr-newbark": { w: 16, h: 16, pal: {"a":"#5c818e","b":"#4c6b74","c":"#6c95a3","d":"#5082a1"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98207,7 +98171,25 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-oreburgh": { w: 16, h: 16, pal: {"a":"#3e2c26","b":"#2d201b","c":"#4e3730","d":"#f0a848"}, rows: [
+  "tile-tr-oldale": { w: 16, h: 16, pal: {"a":"#84774f","b":"#6e6342","c":"#98885b","d":"#d9d9c1"}, rows: [
+    "dddddddddddddddd",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "aaaabaaaabcaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aacabaaaabaaacba",
+    "aaaabaaaabaaaaba",
+    "aaaabcaaabaaaaba",
+    "acaabaaaabaacaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabaaaabaaaabc",
+    "caaabaaaabacaaba",
+    "aaaabaacabaaaaba",
+    "aaacbaaaabaaaaba",
+    "bbbbbbbbbbbbbbbb",
+    "aaaabacaabaaaaba",
+  ] },
+  "tile-tr-olivine": { w: 16, h: 16, pal: {"a":"#4f6a84","b":"#42586e","c":"#5b7998","d":"#c19960"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98225,7 +98207,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-pacifidlog": { w: 16, h: 16, pal: {"a":"#7a4a2e","b":"#583521","c":"#985c3a","d":"#e86a4a"}, rows: [
+  "tile-tr-oreburgh": { w: 16, h: 16, pal: {"a":"#5b4741","b":"#503f38","c":"#654f48","d":"#c59f6b"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98243,7 +98225,25 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-pallet": { w: 16, h: 48, pal: {"g":"#8aa348","m":"#b3c46e","d":"#75903c","a":"#e8e0a0"}, rows: [
+  "tile-tr-pacifidlog": { w: 16, h: 16, pal: {"a":"#865d45","b":"#704e3a","c":"#996a50","d":"#c47a68"}, rows: [
+    "dddddddddddddddd",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aaaacaaaaacaaaaa",
+    "aaaacaaaaacaaaaa",
+    "aaaacaaaaacaaaaa",
+    "bbbbbbbbbbbbbbbb",
+    "aacaaaaacaaaaaca",
+    "aacaaaaacaaaaaca",
+    "aacaaaaacaaaaaca",
+    "bbbbbbbbbbbbbbbb",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "caaaaacaaaaacaaa",
+    "bbbbbbbbbbbbbbbb",
+  ] },
+  "tile-tr-pallet": { w: 16, h: 48, pal: {"g":"#8c9f5b","m":"#a9b577","d":"#7e9351","a":"#d4cd94"}, rows: [
     "dddddddaadddaadd",
     "ddddddmaamdddddd",
     "dddddmaaaamddddd",
@@ -98293,7 +98293,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-pastoria": { w: 16, h: 16, pal: {"a":"#4a5d23","b":"#354319","c":"#5c742c","d":"#d9a441"}, rows: [
+  "tile-tr-pastoria": { w: 16, h: 16, pal: {"a":"#61733c","b":"#536333","c":"#6d8244","d":"#bf9d5c"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -98311,7 +98311,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-petalburg": { w: 16, h: 16, pal: {"a":"#4a6a5a","b":"#354c41","c":"#5c8470","d":"#4a90c0"}, rows: [
+  "tile-tr-petalburg": { w: 16, h: 16, pal: {"a":"#5d776a","b":"#4d6358","c":"#6a8879","d":"#608fb0"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -98329,7 +98329,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-pewter": { w: 16, h: 48, pal: {"g":"#a19880","m":"#c0b69e","d":"#8a8069","a":"#d8d2c0"}, rows: [
+  "tile-tr-pewter": { w: 16, h: 48, pal: {"g":"#9c9584","m":"#b3ab98","d":"#8c8574","a":"#c5bfae"}, rows: [
     "dddddddddddddddd",
     "dddddddddddddddd",
     "dddddddddddddddd",
@@ -98379,7 +98379,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-rustboro": { w: 16, h: 16, pal: {"a":"#4a4a5e","b":"#353544","c":"#5c5c76","d":"#c05a3a"}, rows: [
+  "tile-tr-rustboro": { w: 16, h: 16, pal: {"a":"#5d5d6e","b":"#4e4e5d","c":"#6a6a7e","d":"#b16a54"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98397,7 +98397,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-saffron": { w: 16, h: 48, pal: {"g":"#b29540","m":"#d2b562","d":"#96762f","a":"#f0e2a8"}, rows: [
+  "tile-tr-saffron": { w: 16, h: 48, pal: {"g":"#aa9456","m":"#bfaa6e","d":"#997f47","a":"#d8cc9b"}, rows: [
     "dddddddaaddddddd",
     "dddddddaaddddddd",
     "dddddddaaddddddd",
@@ -98447,7 +98447,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-sandgem": { w: 16, h: 16, pal: {"a":"#4a6a8a","b":"#354c63","c":"#5c84ac","d":"#4a90c0"}, rows: [
+  "tile-tr-sandgem": { w: 16, h: 16, pal: {"a":"#5c758e","b":"#4c6074","c":"#6c87a3","d":"#608fb0"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -98465,7 +98465,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-silvertown": { w: 16, h: 16, pal: {"a":"#6a6a9a","b":"#4c4c6f","c":"#8484c0","d":"#c9a227"}, rows: [
+  "tile-tr-silvertown": { w: 16, h: 16, pal: {"a":"#767696","b":"#5e5e7a","c":"#8686b3","d":"#b79c47"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -98483,7 +98483,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-slateport": { w: 16, h: 16, pal: {"a":"#a03a30","b":"#732a23","c":"#c8483c","d":"#3a7bd5"}, rows: [
+  "tile-tr-slateport": { w: 16, h: 16, pal: {"a":"#9f5048","b":"#83423c","c":"#b55e56","d":"#5681bd"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -98501,7 +98501,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-snowpoint": { w: 16, h: 16, pal: {"a":"#5a7a9a","b":"#41586f","c":"#7098c0","d":"#e85a7a"}, rows: [
+  "tile-tr-snowpoint": { w: 16, h: 16, pal: {"a":"#698098","b":"#55687c","c":"#7895b2","d":"#c77084"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98519,7 +98519,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-solaceon": { w: 16, h: 16, pal: {"a":"#6a5a3a","b":"#4c412a","c":"#847048","d":"#c0784a"}, rows: [
+  "tile-tr-solaceon": { w: 16, h: 16, pal: {"a":"#796b50","b":"#655a43","c":"#8a7a5b","d":"#b07f60"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -98537,7 +98537,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-sootopolis": { w: 16, h: 16, pal: {"a":"#6a7a8a","b":"#4c5863","c":"#8498ac","d":"#3a90c8"}, rows: [
+  "tile-tr-sootopolis": { w: 16, h: 16, pal: {"a":"#75808c","b":"#5f6972","c":"#8795a4","d":"#558fb5"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -98555,7 +98555,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-sunnyshore": { w: 16, h: 16, pal: {"a":"#b8860b","b":"#846008","c":"#e6a80e","d":"#3a7ac0"}, rows: [
+  "tile-tr-sunnyshore": { w: 16, h: 16, pal: {"a":"#a0843e","b":"#846d33","c":"#b89848","d":"#5480b1"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -98573,7 +98573,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-twinleaf": { w: 16, h: 16, pal: {"a":"#8a4a3a","b":"#63352a","c":"#ac5c48","d":"#f2cc8f"}, rows: [
+  "tile-tr-twinleaf": { w: 16, h: 16, pal: {"a":"#8f5c50","b":"#764c42","c":"#a56a5c","d":"#d4ba90"}, rows: [
     "dddddddddddddddd",
     "caaaaacaaaaacaaa",
     "caaaaacaaaaacaaa",
@@ -98591,7 +98591,7 @@ export const ART = {
     "caaaaacaaaaacaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tr-veilstone": { w: 16, h: 16, pal: {"a":"#4a4a6e","b":"#35354f","c":"#5c5c8a","d":"#5e60ce"}, rows: [
+  "tile-tr-veilstone": { w: 16, h: 16, pal: {"a":"#5d5d7a","b":"#4d4d65","c":"#6a6a8d","d":"#6c6dbc"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -98609,7 +98609,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-verdanturf": { w: 16, h: 16, pal: {"a":"#5a7a4a","b":"#415835","c":"#70985c","d":"#e87ab0"}, rows: [
+  "tile-tr-verdanturf": { w: 16, h: 16, pal: {"a":"#69835c","b":"#576c4c","c":"#79966a","d":"#ce80a6"}, rows: [
     "dddddddddddddddd",
     "aaaabaacabaaaaba",
     "aaacbaaaabaaaaba",
@@ -98627,7 +98627,7 @@ export const ART = {
     "bbbbbbbbbbbbbbbb",
     "aaaabacaabaaaaba",
   ] },
-  "tile-tr-vermilion": { w: 16, h: 48, pal: {"g":"#b87f4e","m":"#dba26e","d":"#a06a3c","a":"#f0d0a0"}, rows: [
+  "tile-tr-vermilion": { w: 16, h: 48, pal: {"g":"#ab8462","m":"#c79c75","d":"#9e7552","a":"#d7bd97"}, rows: [
     "dddddddaaddddddd",
     "ddddddmaamdddddd",
     "dddddmaaaamddddd",
@@ -98677,7 +98677,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tr-violet": { w: 16, h: 16, pal: {"a":"#5a5a7a","b":"#414158","c":"#707098","d":"#7a6ab0"}, rows: [
+  "tile-tr-violet": { w: 16, h: 16, pal: {"a":"#696981","b":"#56566b","c":"#7a7a95","d":"#8075a6"}, rows: [
     "dddddddddddddddd",
     "abcaababcaababca",
     "acbabaacbabaacba",
@@ -98695,7 +98695,7 @@ export const ART = {
     "acbabaacbabaacba",
     "caabaacaabaacaab",
   ] },
-  "tile-tr-viridian": { w: 16, h: 48, pal: {"g":"#448c4c","m":"#63b06b","d":"#35733e","a":"#cfe8a8"}, rows: [
+  "tile-tr-viridian": { w: 16, h: 48, pal: {"g":"#58905e","m":"#71a676","d":"#4b8053","a":"#bdd499"}, rows: [
     "dddddddaaddddddd",
     "ddddddmaamdddddd",
     "dddddmaaaamddddd",
@@ -98745,7 +98745,7 @@ export const ART = {
     "mmmmmmmmmmmmmmmm",
     "mmmmmmmmmmmmmmmm",
   ] },
-  "tile-tree-elm-small": { w: 16, h: 16, pal: {"t":"#347a38","u":"#285e2d","v":"#48a04e","s":"#2c6e2d","e":"#27612b","d":"#3e8a3f","l":"#5db45c","h":"#68c169","k":"#5a4524","w":"#7a6738"}, rows: [
+  "tile-tree-elm-small": { w: 16, h: 16, pal: {"t":"#4b854e","u":"#407345","v":"#5b9d60","s":"#447e45","e":"#3f7543","d":"#538f54","l":"#6ca86c","h":"#73b274","k":"#715d3d","w":"#84754e"}, rows: [
     "................",
     "................",
     "................",
@@ -98763,7 +98763,7 @@ export const ART = {
     ".......ks.......",
     ".........s......",
   ] },
-  "tile-tree-elm": { w: 16, h: 16, pal: {"t":"#4a7a34","u":"#375e28","v":"#63a048","s":"#436e2c","e":"#396127","d":"#598a3e","l":"#7eb45c","h":"#88c168","k":"#5a3124","w":"#7a4f38"}, rows: [
+  "tile-tree-elm": { w: 16, h: 16, pal: {"t":"#5d854b","u":"#4e7340","v":"#6f9d5b","s":"#587e44","e":"#50753f","d":"#688f53","l":"#83a86c","h":"#8ab273","k":"#71493d","w":"#84614e"}, rows: [
     "................",
     ".....llllll.....",
     "....lhhhllll....",
@@ -98781,7 +98781,7 @@ export const ART = {
     "........kss.....",
     "..........ss....",
   ] },
-  "tile-tree-oak-small": { w: 16, h: 16, pal: {"t":"#397a34","u":"#2a5e28","v":"#4ea048","s":"#346e2c","e":"#2b6127","d":"#478a3e","l":"#69b45c","h":"#73c168","k":"#5a3e24","w":"#7a5e38"}, rows: [
+  "tile-tree-oak-small": { w: 16, h: 16, pal: {"t":"#4f854b","u":"#427340","v":"#609d5b","s":"#4b7e44","e":"#43753f","d":"#5a8f53","l":"#75a86c","h":"#7bb273","k":"#71563d","w":"#846d4e"}, rows: [
     "................",
     "................",
     "................",
@@ -98799,7 +98799,7 @@ export const ART = {
     ".......kss......",
     ".........ss.....",
   ] },
-  "tile-tree-pine-small": { w: 16, h: 16, pal: {"t":"#357a34","u":"#285e29","v":"#48a048","s":"#2f6e2c","e":"#276127","d":"#428a3e","l":"#63b45c","h":"#6dc168","k":"#5a4124","w":"#7a6338"}, rows: [
+  "tile-tree-pine-small": { w: 16, h: 16, pal: {"t":"#4b854b","u":"#407341","v":"#5b9d5b","s":"#467e44","e":"#3f753f","d":"#568f53","l":"#71a86c","h":"#77b273","k":"#71593d","w":"#84714e"}, rows: [
     "................",
     "................",
     "................",
@@ -98817,7 +98817,7 @@ export const ART = {
     ".......ks.......",
     ".........ss.....",
   ] },
-  "tile-tree-pine": { w: 16, h: 16, pal: {"t":"#457a34","u":"#335e28","v":"#5da048","s":"#3f6e2c","e":"#356127","d":"#548a3e","l":"#78b45c","h":"#82c168","k":"#5a3524","w":"#7a5338"}, rows: [
+  "tile-tree-pine": { w: 16, h: 16, pal: {"t":"#59854b","u":"#4b7340","v":"#6b9d5b","s":"#547e44","e":"#4c753f","d":"#648f53","l":"#7fa86c","h":"#86b273","k":"#714d3d","w":"#84644e"}, rows: [
     "................",
     ".......tt.......",
     "......tvtt......",
@@ -98835,7 +98835,7 @@ export const ART = {
     ".......kkss.....",
     "..........ss....",
   ] },
-  "tile-tree": { w: 16, h: 16, pal: {"t":"#3e7a34","u":"#2e5e28","v":"#54a048","s":"#386e2c","e":"#2f6127","d":"#4c8a3e","l":"#6fb45c","h":"#79c168","k":"#5a3a24","w":"#7a5a38"}, rows: [
+  "tile-tree": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","v":"#649d5b","s":"#4e7e44","e":"#47753f","d":"#5e8f53","l":"#79a86c","h":"#7fb273","k":"#71523d","w":"#846a4e"}, rows: [
     "................",
     "................",
     ".ttttttttttttt..",
@@ -98853,25 +98853,25 @@ export const ART = {
     ".......kksss....",
     ".........ssss...",
   ] },
-  "tile-tropgrass": { w: 16, h: 16, pal: {"a":"#4da653","b":"#368233","c":"#66a554","d":"#79c168","e":"#2e7a3a"}, rows: [
-    "abaaaaaacaaaaaaa",
+  "tile-tropgrass": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650"}, rows: [
+    "abaaaaaaaaaaaaaa",
     "baabaaaaaaadaaaa",
-    "cabaaacaaaaaaada",
-    "aaeaaaaaaacdaaab",
+    "aabaaaaaaaaaaada",
+    "aaeaaaaaaaadaaab",
     "baabdbaaaaaaaaaa",
-    "aaaaaacaadabaaca",
-    "abbaaabdaaeadacb",
-    "aaceceabeadcbaac",
-    "ccaaaaacaaacadab",
-    "caaaabaabacaaaaa",
-    "aaaaaaaacbabaeaa",
-    "caaaaaaaacabaaaa",
-    "caeadcbaaaaeaaab",
-    "aeaeabbaacaaaada",
-    "aaaaccaaacaaaaad",
-    "aacacacbaababbab",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeaa",
+    "aaaaaaaaaaabaaaa",
+    "aaeadabaaaaeaaab",
+    "aeaeabbaaaaaaada",
+    "aaaaaaaaaaaaaaad",
+    "aaaaaaabaababbab",
   ] },
-  "tile-tw-azalea": { w: 16, h: 16, pal: {"a":"#78bc72","b":"#4e7a4a","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-azalea": { w: 16, h: 16, pal: {"a":"#7eaf7a","b":"#60835c","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "ababaaaaaaaaaaaa",
@@ -98889,7 +98889,7 @@ export const ART = {
     "aaaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-blackthorn": { w: 16, h: 16, pal: {"a":"#9595a2","b":"#616169","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-blackthorn": { w: 16, h: 16, pal: {"a":"#93939c","b":"#6e6e75","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaabaabaaaa",
     "aaaaaaaaaaaaabaa",
@@ -98907,7 +98907,7 @@ export const ART = {
     "aaaabaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-canalave": { w: 16, h: 16, pal: {"a":"#4c9abd","b":"#31647a","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-canalave": { w: 16, h: 16, pal: {"a":"#6196ae","b":"#487385","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaabaabaaaa",
     "aaaaaaaaaaaaabaa",
@@ -98925,7 +98925,7 @@ export const ART = {
     "aaaabaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-celadon": { w: 16, h: 16, pal: {"w":"#88cfaa","n":"#52b983","s":"#429a6e","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-celadon": { w: 16, h: 16, pal: {"w":"#87bea2","n":"#65ac87","s":"#569978","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -98943,7 +98943,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-celestic": { w: 16, h: 16, pal: {"a":"#a189ff","b":"#6859a7","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-celestic": { w: 16, h: 16, pal: {"a":"#a093d5","b":"#746a9f","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaabaa",
     "aaaaaaaaaaaaaaaa",
@@ -98961,7 +98961,7 @@ export const ART = {
     "abaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-cerulean": { w: 16, h: 16, pal: {"w":"#94cec7","n":"#5fb5ab","s":"#4a958e","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-cerulean": { w: 16, h: 16, pal: {"w":"#90beb8","n":"#6ea9a2","s":"#5c9590","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -98979,7 +98979,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-cherrygrove": { w: 16, h: 16, pal: {"a":"#b5d691","b":"#768b5e","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-cherrygrove": { w: 16, h: 16, pal: {"a":"#aac48d","b":"#7e8d6c","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "abaabaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -98997,7 +98997,7 @@ export const ART = {
     "aaabaabaabaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-cianwood": { w: 16, h: 16, pal: {"a":"#c7b582","b":"#817654","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-cianwood": { w: 16, h: 16, pal: {"a":"#b8aa84","b":"#877e64","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aabaaaaaaaaaaaaa",
     "aaaaaaaaaaabaaaa",
@@ -99015,7 +99015,7 @@ export const ART = {
     "aaaaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-cinnabar": { w: 16, h: 16, pal: {"w":"#cf9e8b","n":"#b97055","s":"#9e5c46","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-cinnabar": { w: 16, h: 16, pal: {"w":"#be988a","n":"#ac7a67","s":"#9c6a5a","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99033,7 +99033,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-dewford": { w: 16, h: 16, pal: {"a":"#7dbab1","b":"#517873","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-dewford": { w: 16, h: 16, pal: {"a":"#82aea7","b":"#62817d","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaabaaaaaaaaaa",
     "aaaaabaaaaaaaaaa",
@@ -99051,7 +99051,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-ecruteak": { w: 16, h: 16, pal: {"a":"#d99561","b":"#8d613f","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-ecruteak": { w: 16, h: 16, pal: {"a":"#c5936d","b":"#916e54","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "aaababaaaaaaaaaa",
@@ -99069,7 +99069,7 @@ export const ART = {
     "aaaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-eterna": { w: 16, h: 16, pal: {"a":"#558131","b":"#37531f","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-eterna": { w: 16, h: 16, pal: {"a":"#668a48","b":"#516d38","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "aaababaaaaaaaaaa",
@@ -99087,7 +99087,7 @@ export const ART = {
     "aaaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-evergrande": { w: 16, h: 16, pal: {"a":"#b5c7f2","b":"#76819d","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-evergrande": { w: 16, h: 16, pal: {"a":"#a3b3db","b":"#7e8599","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaabaaaaaaaaaa",
     "aaaaabaaaaaaaaaa",
@@ -99105,7 +99105,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-fallarbor": { w: 16, h: 16, pal: {"a":"#baaf9e","b":"#787166","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-fallarbor": { w: 16, h: 16, pal: {"a":"#aea698","b":"#7f7a72","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "abaaaaaaaaaaaaaa",
@@ -99123,7 +99123,7 @@ export const ART = {
     "aaaaaabaaaabbaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-floaroma": { w: 16, h: 16, pal: {"a":"#fb96be","b":"#a2617b","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-floaroma": { w: 16, h: 16, pal: {"a":"#d798b1","b":"#9c6f81","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaabaaaaaaaaaa",
     "aaaaabaaaaaaaaaa",
@@ -99141,7 +99141,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-fortree": { w: 16, h: 16, pal: {"a":"#64a86e","b":"#416d47","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-fortree": { w: 16, h: 16, pal: {"a":"#71a078","b":"#557a5a","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99159,7 +99159,7 @@ export const ART = {
     "aaaaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-fuchsia": { w: 16, h: 16, pal: {"w":"#e4bcd2","n":"#ca7ba7","s":"#b26892","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-fuchsia": { w: 16, h: 16, pal: {"w":"#d0a9be","n":"#ba7fa0","s":"#a77491","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99177,7 +99177,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-goldenrod": { w: 16, h: 16, pal: {"a":"#d2b582","b":"#887654","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-goldenrod": { w: 16, h: 16, pal: {"a":"#c1aa83","b":"#8c7e64","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaabaaaaaaaaaa",
     "aaaaabaaaaaaaaaa",
@@ -99195,7 +99195,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-hearthome": { w: 16, h: 16, pal: {"a":"#d9af2a","b":"#8d711b","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-hearthome": { w: 16, h: 16, pal: {"a":"#bba150","b":"#927c39","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaba",
     "aaaaaaaaaaaabaaa",
@@ -99213,7 +99213,7 @@ export const ART = {
     "abaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-indigo": { w: 16, h: 16, pal: {"w":"#a4aed3","n":"#6d7db8","s":"#5c6ca0","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-indigo": { w: 16, h: 16, pal: {"w":"#9aa3c2","n":"#7782ac","s":"#6c779a","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99231,7 +99231,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-jubilife": { w: 16, h: 16, pal: {"a":"#95a0b3","b":"#616874","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-jubilife": { w: 16, h: 16, pal: {"a":"#929ba9","b":"#6e737d","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabbaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99249,7 +99249,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-lavaridge": { w: 16, h: 16, pal: {"a":"#cc844e","b":"#845532","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-lavaridge": { w: 16, h: 16, pal: {"a":"#b98762","b":"#8c6649","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaabaabaaaa",
     "aaaaaaaaaaaaabaa",
@@ -99267,7 +99267,7 @@ export const ART = {
     "aaaabaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-lavender": { w: 16, h: 16, pal: {"w":"#cdc3dd","n":"#9d88bc","s":"#8a76a8","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-lavender": { w: 16, h: 16, pal: {"w":"#b9b0c9","n":"#9989b0","s":"#8b7da0","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99285,7 +99285,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-lilycove": { w: 16, h: 16, pal: {"a":"#c7add8","b":"#81708c","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-lilycove": { w: 16, h: 16, pal: {"a":"#b7a0c6","b":"#85798d","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabaaaaaaaaa",
     "aaaaaaaaaaabaaaa",
@@ -99303,7 +99303,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-littleroot": { w: 16, h: 16, pal: {"a":"#b1cc7f","b":"#738453","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-littleroot": { w: 16, h: 16, pal: {"a":"#a7bc82","b":"#7c8963","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabaaaaaaaaa",
     "aaaaaaaaaaabaaaa",
@@ -99321,7 +99321,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-mahogany": { w: 16, h: 16, pal: {"a":"#95b593","b":"#61765f","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-mahogany": { w: 16, h: 16, pal: {"a":"#92aa91","b":"#6e7e6d","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "abaaaaaaaaaaaaaa",
@@ -99339,7 +99339,7 @@ export const ART = {
     "aaaaaabaaaabbaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-mauville": { w: 16, h: 16, pal: {"a":"#b0ad74","b":"#72704b","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-mauville": { w: 16, h: 16, pal: {"a":"#a6a47c","b":"#7d7b5d","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaba",
     "aaaaaaaaaaaabaaa",
@@ -99357,7 +99357,7 @@ export const ART = {
     "abaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-mossdeep": { w: 16, h: 16, pal: {"a":"#95c7d8","b":"#61818c","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-mossdeep": { w: 16, h: 16, pal: {"a":"#8fb8c6","b":"#6e868e","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "abaabaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99375,7 +99375,7 @@ export const ART = {
     "aaabaabaabaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-newbark": { w: 16, h: 16, pal: {"a":"#9ac7b5","b":"#648176","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-newbark": { w: 16, h: 16, pal: {"a":"#95b8aa","b":"#70867e","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabaaaaaaaaa",
     "aaaaaaaaaaabaaaa",
@@ -99393,7 +99393,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-oldale": { w: 16, h: 16, pal: {"a":"#c1b066","b":"#7d7242","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-oldale": { w: 16, h: 16, pal: {"a":"#b2a672","b":"#857d56","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "abaabaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99411,7 +99411,7 @@ export const ART = {
     "aaabaabaabaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-olivine": { w: 16, h: 16, pal: {"a":"#84b5c7","b":"#557681","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-olivine": { w: 16, h: 16, pal: {"a":"#85aab8","b":"#657e87","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaba",
     "aaaaaaaaaaaabaaa",
@@ -99429,7 +99429,7 @@ export const ART = {
     "abaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-oreburgh": { w: 16, h: 16, pal: {"a":"#a86e49","b":"#6d4730","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-oreburgh": { w: 16, h: 16, pal: {"a":"#a2775c","b":"#7c5b47","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "ababaaaaaaaaaaaa",
@@ -99447,7 +99447,7 @@ export const ART = {
     "aaaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-pacifidlog": { w: 16, h: 16, pal: {"a":"#d8b582","b":"#8c7654","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-pacifidlog": { w: 16, h: 16, pal: {"a":"#c5aa83","b":"#8e7e64","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "ababaaaaaaaaaaaa",
@@ -99465,7 +99465,7 @@ export const ART = {
     "aaaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-pallet": { w: 16, h: 16, pal: {"w":"#c8d495","n":"#aabd5d","s":"#8aa348","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-pallet": { w: 16, h: 16, pal: {"w":"#b9c390","n":"#a2af6c","s":"#8c9f5b","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99483,7 +99483,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-pastoria": { w: 16, h: 16, pal: {"a":"#72a554","b":"#4a6b37","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-pastoria": { w: 16, h: 16, pal: {"a":"#7b9e66","b":"#5e7a4d","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99501,7 +99501,7 @@ export const ART = {
     "aaaaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-petalburg": { w: 16, h: 16, pal: {"a":"#83ba97","b":"#557862","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-petalburg": { w: 16, h: 16, pal: {"a":"#86ae94","b":"#65806f","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabbaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99519,7 +99519,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-pewter": { w: 16, h: 16, pal: {"w":"#d9d3c4","n":"#b5a98d","s":"#a19880","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-pewter": { w: 16, h: 16, pal: {"w":"#c6c0b1","n":"#aaa18d","s":"#9c9584","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99537,7 +99537,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-rustboro": { w: 16, h: 16, pal: {"a":"#b0a28f","b":"#72695c","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-rustboro": { w: 16, h: 16, pal: {"a":"#a79c8e","b":"#7c756a","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "ababaaaaaaaaaaaa",
@@ -99555,7 +99555,7 @@ export const ART = {
     "aaaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-saffron-upper": { w: 16, h: 48, pal: {"w":"#dec98d","n":"#cdac4f","s":"#b29540","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-saffron-upper": { w: 16, h: 48, pal: {"w":"#cbba89","n":"#baa362","s":"#aa9456","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttthhhhtttttt",
     "tttttttttttttttt",
@@ -99605,7 +99605,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-saffron": { w: 16, h: 16, pal: {"w":"#dec98d","n":"#cdac4f","s":"#b29540","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-saffron": { w: 16, h: 16, pal: {"w":"#cbba89","n":"#baa362","s":"#aa9456","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99623,7 +99623,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-sandgem": { w: 16, h: 16, pal: {"a":"#e7d995","b":"#968d61","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-sandgem": { w: 16, h: 16, pal: {"a":"#d3c78d","b":"#948e6e","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "abaabaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99641,7 +99641,7 @@ export const ART = {
     "aaabaabaabaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-silvertown": { w: 16, h: 16, pal: {"a":"#d8d8e1","b":"#8c8c92","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-silvertown": { w: 16, h: 16, pal: {"a":"#c0c0ca","b":"#8d8d91","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99659,7 +99659,7 @@ export const ART = {
     "aaaaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-slateport": { w: 16, h: 16, pal: {"a":"#d6bb87","b":"#8b7958","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-slateport": { w: 16, h: 16, pal: {"a":"#c4af86","b":"#8e8067","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "aaababaaaaaaaaaa",
@@ -99677,7 +99677,7 @@ export const ART = {
     "aaaaaaaaaaaaaaab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-snowpoint": { w: 16, h: 16, pal: {"a":"#daffff","b":"#8da8ae","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-snowpoint": { w: 16, h: 16, pal: {"a":"#bce5e5","b":"#8da1a5","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaabaaaaaaa",
     "aaabbaaaaaaabaaa",
@@ -99695,7 +99695,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-solaceon": { w: 16, h: 16, pal: {"a":"#b0bf95","b":"#727c61","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-solaceon": { w: 16, h: 16, pal: {"a":"#a6b292","b":"#7b826e","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aabaaaaaaaaaaaaa",
     "aaaaaaaaaaabaaaa",
@@ -99713,7 +99713,7 @@ export const ART = {
     "aaaaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-sootopolis": { w: 16, h: 16, pal: {"a":"#f0ede3","b":"#9b9993","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-sootopolis": { w: 16, h: 16, pal: {"a":"#d9d4c4","b":"#979692","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabbaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99731,7 +99731,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-sunnyshore": { w: 16, h: 16, pal: {"a":"#ffe26e","b":"#b29247","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-sunnyshore": { w: 16, h: 16, pal: {"a":"#d0c185","b":"#a8915c","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "abbaaaaaaaaaaaaa",
@@ -99749,7 +99749,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-twinleaf": { w: 16, h: 16, pal: {"a":"#89be71","b":"#597b4a","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-twinleaf": { w: 16, h: 16, pal: {"a":"#8ab179","b":"#68835c","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabaaaaaaaaa",
     "aaaaaaaaaaabaaaa",
@@ -99767,7 +99767,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-veilstone": { w: 16, h: 16, pal: {"a":"#8790a3","b":"#585d6a","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-veilstone": { w: 16, h: 16, pal: {"a":"#89909d","b":"#686c76","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaaaaaaaaaaaa",
     "abaaaaaaaaaaaaaa",
@@ -99785,7 +99785,7 @@ export const ART = {
     "aaaaaabaaaabbaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-verdanturf": { w: 16, h: 16, pal: {"a":"#97d881","b":"#628c53","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-verdanturf": { w: 16, h: 16, pal: {"a":"#93c582","b":"#6f8f63","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aabaaaaaaaaaaaaa",
     "aaaaaaaaaaabaaaa",
@@ -99803,7 +99803,7 @@ export const ART = {
     "aaaaaabaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-vermilion": { w: 16, h: 16, pal: {"w":"#e7c09d","n":"#d69459","s":"#b87f4e","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-vermilion": { w: 16, h: 16, pal: {"w":"#d3b192","n":"#c29268","s":"#ab8462","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99821,7 +99821,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-tw-violet": { w: 16, h: 16, pal: {"a":"#a6a0b3","b":"#6c6874","g":"#e8c86a","h":"#f5e6a8"}, rows: [
+  "tile-tw-violet": { w: 16, h: 16, pal: {"a":"#9f9aa9","b":"#76737c","g":"#cab578","h":"#d9ce9e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaaabbaaaaaaaa",
     "aaaaaaaaaaaaaaaa",
@@ -99839,7 +99839,7 @@ export const ART = {
     "aaaaaaaaaaaaaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-tw-viridian": { w: 16, h: 16, pal: {"w":"#84c18a","n":"#55a85e","s":"#448c4c","t":"#5a3a24","g":"#ffd873","h":"#eef7ff","F":"#6a6a80"}, rows: [
+  "tile-tw-viridian": { w: 16, h: 16, pal: {"w":"#86b38a","n":"#67a06d","s":"#58905e","t":"#71523d","g":"#d1bc88","h":"#c6d8e9","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -99857,7 +99857,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-uwrock": { w: 16, h: 16, pal: {"a":"#3a4a6a","b":"#263248","c":"#5a7a9a","d":"#48b0a8"}, rows: [
+  "tile-uwrock": { w: 16, h: 16, pal: {"a":"#505d79","b":"#404c63","c":"#698098","d":"#5da6a1"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "abaaacabaacadcca",
     "cccdbaaaaaabaabb",
@@ -99875,7 +99875,7 @@ export const ART = {
     "acadaabaaaacaaaa",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-volcrock": { w: 16, h: 16, pal: {"a":"#5e463c","b":"#3e2c26","c":"#8a5a3a","d":"#c8502e"}, rows: [
+  "tile-volcrock": { w: 16, h: 16, pal: {"a":"#705b52","b":"#5b4741","c":"#8f6950","d":"#b8624a"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aaaaadaabcacaaaa",
     "bddaacaaadaaaaaa",
@@ -99893,7 +99893,7 @@ export const ART = {
     "abaaaabbaacbabab",
     "bbbbbbbbbbbbbbbb",
   ] },
-  "tile-wake-1": { w: 16, h: 16, pal: {"w":"#3a7bd5","c":"#6fb0ee","f":"#eef7ff"}, rows: [
+  "tile-wake-1": { w: 16, h: 16, pal: {"w":"#5681bd","c":"#7da6cd","f":"#c6d8e9"}, rows: [
     "................",
     "................",
     "................",
@@ -99911,7 +99911,7 @@ export const ART = {
     "..ff........ff..",
     "................",
   ] },
-  "tile-wake-2": { w: 16, h: 16, pal: {"w":"#3a7bd5","c":"#6fb0ee","f":"#eef7ff"}, rows: [
+  "tile-wake-2": { w: 16, h: 16, pal: {"w":"#5681bd","c":"#7da6cd","f":"#c6d8e9"}, rows: [
     "................",
     "................",
     "................",
@@ -99929,7 +99929,7 @@ export const ART = {
     ".ff..........ff.",
     "................",
   ] },
-  "tile-wall-brick-lit": { w: 16, h: 16, pal: {"w":"#b0503c","l":"#c96a52","s":"#7a3226","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","F":"#6a6a80"}, rows: [
+  "tile-wall-brick-lit": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -99947,7 +99947,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-brick-plain-lit": { w: 16, h: 16, pal: {"w":"#b0503c","l":"#c96a52","s":"#7a3226","t":"#5a3a24","g":"#ffd873","u":"#ffd873","h":"#ffd873"}, rows: [
+  "tile-wall-brick-plain-lit": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#d1bc88","h":"#d1bc88"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -99965,7 +99965,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-brick-plain": { w: 16, h: 16, pal: {"w":"#b0503c","l":"#c96a52","s":"#7a3226","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","F":"#6a6a80"}, rows: [
+  "tile-wall-brick-plain": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -99983,7 +99983,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-center-lit": { w: 16, h: 16, pal: {"w":"#eef7ff","l":"#f5f0dc","s":"#a02828","r":"#d84040","t":"#5a3a24","u":"#ffd873","h":"#ffd873","g":"#3a7bd5"}, rows: [
+  "tile-wall-center-lit": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#d1bc88","h":"#d1bc88","g":"#5681bd"}, rows: [
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
@@ -100001,7 +100001,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-center-upper": { w: 16, h: 16, pal: {"w":"#eef7ff","l":"#f5f0dc","s":"#a02828","r":"#d84040","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","g":"#3a7bd5","F":"#6a6a80"}, rows: [
+  "tile-wall-center-upper": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "rrrrrrrrrrrrrrrr",
@@ -100019,7 +100019,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-center": { w: 16, h: 16, pal: {"w":"#eef7ff","l":"#f5f0dc","s":"#a02828","r":"#d84040","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","g":"#3a7bd5","F":"#6a6a80"}, rows: [
+  "tile-wall-center": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "rrrrrrrrrrrrrrrr",
@@ -100037,7 +100037,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-gym-lit": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#6a6a80","t":"#5a3a24","d":"#3a4657","g":"#ffd873"}, rows: [
+  "tile-wall-gym-lit": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -100055,7 +100055,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-gym": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#6a6a80","t":"#5a3a24","d":"#3a4657","g":"#ffd873","F":"#6a6a80"}, rows: [
+  "tile-wall-gym": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100073,7 +100073,7 @@ export const ART = {
     "tttttttttttttttt",
     "tttttttttttttttt",
   ] },
-  "tile-wall-house-lit": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","F":"#6a6a80"}, rows: [
+  "tile-wall-house-lit": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100091,7 +100091,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-house-plain-lit": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","g":"#ffd873","u":"#ffd873","h":"#ffd873"}, rows: [
+  "tile-wall-house-plain-lit": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","g":"#d1bc88","u":"#d1bc88","h":"#d1bc88"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -100109,7 +100109,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-house-plain": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","F":"#6a6a80"}, rows: [
+  "tile-wall-house-plain": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100127,7 +100127,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-house-unlit": { w: 16, h: 16, pal: {"w":"#c9a86a","l":"#e3c285","s":"#a88a4e","t":"#5a3f24","g":"#ffd873","u":"#2e58b0","h":"#5a8ee8","F":"#6a6a80"}, rows: [
+  "tile-wall-house-unlit": { w: 16, h: 16, pal: {"w":"#b9a174","l":"#cfb483","s":"#a18c61","t":"#71573d","g":"#d1bc88","u":"#4767aa","h":"#7090c7","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100145,7 +100145,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-lab-lit": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#ffd873","t":"#5a3a24","u":"#ffd873","h":"#ffd873","q":"#3fa08a"}, rows: [
+  "tile-wall-lab-lit": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#d1bc88","t":"#71523d","u":"#d1bc88","h":"#d1bc88","q":"#549e8d"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -100163,7 +100163,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-lab-plain-lit": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#ffd873","t":"#5a3a24","u":"#ffd873","h":"#ffd873","q":"#3fa08a"}, rows: [
+  "tile-wall-lab-plain-lit": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#d1bc88","t":"#71523d","u":"#d1bc88","h":"#d1bc88","q":"#549e8d"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -100181,7 +100181,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-lab-plain": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a","F":"#6a6a80"}, rows: [
+  "tile-wall-lab-plain": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100199,7 +100199,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-lab-upper": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a","F":"#6a6a80"}, rows: [
+  "tile-wall-lab-upper": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100217,7 +100217,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-lab": { w: 16, h: 16, pal: {"w":"#8a8aa0","l":"#c2c8d4","s":"#46586e","t":"#5a3a24","u":"#2e63b0","h":"#5a9ae8","q":"#3fa08a","F":"#6a6a80"}, rows: [
+  "tile-wall-lab": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100235,7 +100235,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-mart-lit": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","b":"#ffd873","e":"#eef7ff","g":"#ffd873","p":"#e86a8a","n":"#67aa54"}, rows: [
+  "tile-wall-mart-lit": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#d1bc88","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "wwwwwwwwwwwwwwww",
@@ -100253,7 +100253,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-mart-upper": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","b":"#2e63b0","e":"#eef7ff","g":"#ffd873","p":"#e86a8a","n":"#67aa54","F":"#6a6a80"}, rows: [
+  "tile-wall-mart-upper": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -100271,7 +100271,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-mart": { w: 16, h: 16, pal: {"w":"#c9a06a","l":"#e3ba85","s":"#a87f4e","t":"#5a3a24","b":"#2e63b0","e":"#eef7ff","g":"#ffd873","p":"#e86a8a","n":"#67aa54","F":"#6a6a80"}, rows: [
+  "tile-wall-mart": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "wwwwwwwwwwwwwwww",
@@ -100289,7 +100289,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#a8845c","l":"#b09468","s":"#7a5a38","t":"#5a3a24","g":"#ffd873","u":"#2e63b0","h":"#5a9ae8","F":"#6a6a80"}, rows: [
+  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100307,7 +100307,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-water-1": { w: 16, h: 16, pal: {"w":"#3a73d5","x":"#2e5db0","y":"#5a93e8","z":"#1d4586","c":"#6faaee","f":"#eef6ff"}, rows: [
+  "tile-water-1": { w: 16, h: 16, pal: {"w":"#567cbd","x":"#476baa","y":"#7093c7","z":"#385990","c":"#7da2cd","f":"#c6d6e9"}, rows: [
     "wwwwwwwwwwwwwwww",
     "wwwwwwwwwwwwwwww",
     "wyyyyywwwwwwwwww",
@@ -100325,7 +100325,7 @@ export const ART = {
     "wwwwwwwyyyyywwww",
     "wwwwwwwwwwwwwwww",
   ] },
-  "tile-water-2": { w: 16, h: 16, pal: {"w":"#3a83d5","x":"#2e69b0","y":"#5aa1e8","z":"#1d4f86","c":"#6fb6ee","f":"#eef8ff"}, rows: [
+  "tile-water-2": { w: 16, h: 16, pal: {"w":"#5687bd","x":"#4774aa","y":"#709cc7","z":"#386290","c":"#7daacd","f":"#c6dae9"}, rows: [
     "wwwwwwwwwwwwwwww",
     "wwwwwwwwwwcwwwww",
     "wwwwyyyyycccwwww",
@@ -100343,7 +100343,7 @@ export const ART = {
     "wyyyyywwwwwwwcww",
     "wwwwwwwwwwwwwwww",
   ] },
-  "tile-water-3": { w: 16, h: 16, pal: {"w":"#3a6bd5","x":"#2e56b0","y":"#5a8ce8","z":"#1d4086","c":"#6fa3ee","f":"#eef5ff"}, rows: [
+  "tile-water-3": { w: 16, h: 16, pal: {"w":"#5677bd","x":"#4766aa","y":"#708fc7","z":"#385590","c":"#7d9ecd","f":"#c6d4e9"}, rows: [
     "wwwwwwwwwwwwwwww",
     "wwwwwwwwwwwwwwww",
     "wwwwcwwyyyyywwww",
@@ -100379,7 +100379,7 @@ export const ART = {
     "bbbbaawwwwbbaaww",
     "bbbbaawwwwaaaaww",
   ] },
-  "tile-woodfloor": { w: 16, h: 16, pal: {"a":"#a87c4e","b":"#86603a","c":"#c09a68"}, rows: [
+  "tile-woodfloor": { w: 16, h: 16, pal: {"a":"#a18261","b":"#8d6e50","c":"#b29773"}, rows: [
     "baaaaaaaabaaacaa",
     "baaaaaacabaaaaaa",
     "bcaaaaaaabaaaaca",

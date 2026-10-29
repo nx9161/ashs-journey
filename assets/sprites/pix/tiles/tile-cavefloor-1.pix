@@ -2,28 +2,28 @@
 PIX tile-cavefloor-1 16 16
 bbbbbbbbbbbbbbbb
 bcbbbbbbbbbbbbbb
-bbabbbmbbbbbbbbb
-bbbbbbbbbbbbabbb
-bbbbbbbabbbbbbbb
+bbbbbbmbbbbbbbbb
 bbbbbbbbbbbbbbbb
-bbbbbabbbbbbbbcb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbcb
 bbbbbbbbbbbbbybb
 bbbbbbbbybbbbbbb
-bbbbabbbbbbbbbbb
 bbbbbbbbbbbbbbbb
-bbbbbbbbbbabbbbb
 bbbbbbbbbbbbbbbb
-bbbybbbbbbbbbbab
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbybbbbbbbbbbbb
 bbbbbbcbbbbmbbbb
 bbbbbbbbbbbbbbbb
 PAL
-m #8c8aa0 rock
-z #6c6a80 rock-dark
-c #c2c6d4 rock-light
-k #5a3f24 shadow-brown
-a #a88c5c strata-brown
-b #b09b68 strata-tan
-y #7a6138 strata-dark
-g #46546e rock-slate
+m #8d8b9b rock
+z #767585 rock-dark
+c #b0b4c1 rock-light
+k #71573d shadow-brown
+a #a08d6c strata-brown
+b #a69774 strata-tan
+y #84704e strata-dark
+g #59657a rock-slate
 
 # W5SPLIT2 hue shift 6deg (TX-1 variant split)

@@ -17,9 +17,9 @@ PIX tile-prop-martshelf 16 16
 .aaaaaaaaaaaaaa.
 .bbbbbbbbbbbbbb.
 PAL
-a #5f748f mart-shelf-frame
-b #c2c8d4 mart-shelf-trim
-c #d84040 goods-red
-d #f0e060 goods-yellow
-e #6fb0ee goods-blue
-f #e86a8a goods-pink
+a #6c7c90 mart-shelf-frame
+b #b0b6c1 mart-shelf-trim
+c #bf5b5b goods-red
+d #cac177 goods-yellow
+e #7da6cd goods-blue
+f #ca788d goods-pink

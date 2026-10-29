@@ -17,10 +17,10 @@ PIX tile-flowerbed 16 16
 ................
 ................
 PAL
-s #5a3a24 bed-soil
-d #7a5a38 bed-soil-light
-f #e86a8a flower-pink
-y #f0e060 flower-yellow
-w #eef7ff flower-white
-n #67aa54 leaf
-t #a8845c bed-edge
+s #71523d bed-soil
+d #846a4e bed-soil-light
+f #ca788d flower-pink
+y #cac177 flower-yellow
+w #c6d8e9 flower-white
+n #73a167 leaf
+t #a0876c bed-edge

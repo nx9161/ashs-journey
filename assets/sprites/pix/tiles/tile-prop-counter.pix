@@ -17,7 +17,7 @@ cccccdcccccdcccc
 dddddddddddddddd
 dddddddddddddddd
 PAL
-a #f5f0dc counter-top
-b #c97e97 counter-edge
-c #c96a52 counter-panel
-d #7a3226 counter-shadow
+a #e1d9ba counter-top
+b #b98194 counter-edge
+c #b77564 counter-panel
+d #87493f counter-shadow

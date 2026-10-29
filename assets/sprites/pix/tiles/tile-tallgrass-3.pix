@@ -1,32 +1,32 @@
 # Wave 1: tall grass variant 3 — tufted encounter grass, 5-step tuft shading.
 PIX tile-tallgrass-3 16 16
-wwgggggmgaagaggg
-mmgmggammhhhghgg
-ttgtghhmgwwwgwgg
-sssswwwggmmmmggg
-eeeeemmdgttttggg
+gggggggggaagaggg
+ggggggaggggggggg
+ttgtgggggggggggg
+ssssgggggggggggg
+eeeeeggggttttggg
 sssssttggssssggg
-gggasssgaeeeeehg
-gghheeeaasssssww
-gwwsssshhhgmgmmm
-gmmmmmwwwwgttttt
-gtttttmmmmgsssss
+gggasssgaeeeeegg
+ggggeeeaasssssgg
+gggssssggggggggg
+gggggggggggttttt
+gtttttgggggsssss
 gsssssttttgeeeee
 geeeeeesssgsssss
 gssssseeeeeggggg
 ggggggsssssggggg
-gggggggggmgggggg
+gggggggggggggggg
 PAL
-g #66a74c grass
-d #528a3e grass-dark
-l #76b45c grass-light
-m #6eaa54 grass-mid
-h #80c168 grass-highlight
-a #91cb74 grass-pale
-s #3d6e2c grass-shadow
-e #346127 grass-deep
-o #335e28 leaf-deep
-t #447a34 leaf-mid
-w #5ba048 leaf-light
+g #72a15f grass
+d #638f53 grass-dark
+l #7ea86c grass-light
+m #78a167 grass-mid
+h #84b273 grass-highlight
+a #90bb7a grass-pale
+s #537e44 grass-shadow
+e #4c753f grass-deep
+o #4b7340 leaf-deep
+t #58854b leaf-mid
+w #699d5b leaf-light
 
 # W5SPLIT2 hue shift -5deg (TX-1 variant split)

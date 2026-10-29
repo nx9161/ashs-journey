@@ -17,8 +17,8 @@ PIX tile-td-lavaridge 16 16
 ................
 ................
 PAL
-a #bd7a48 planter-leaf
-d #e83a2a town-flower
-e #f0a848 town-flower-2
-k #6a4a2e planter-wood
-w #8a6a42 planter-wood-light
+a #ae805e planter-leaf
+d #be6058 town-flower
+e #c59f6b town-flower-2
+k #7b5e46 planter-wood
+w #8e7556 planter-wood-light

@@ -17,8 +17,8 @@ PIX tile-td-oldale 16 16
 ................
 ................
 PAL
-a #b3a35e planter-leaf
-d #f0f0e0 town-flower
-e #7aa85e town-flower-2
-k #6a4a2e planter-wood
-w #8a6a42 planter-wood-light
+a #a89d6d planter-leaf
+d #d9d9c1 town-flower
+e #80a06d town-flower-2
+k #7b5e46 planter-wood
+w #8e7556 planter-wood-light

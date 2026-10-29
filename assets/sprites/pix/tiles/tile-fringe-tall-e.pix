@@ -2,26 +2,26 @@
 PIX tile-fringe-tall-e 16 16
 ................
 ................
-..........esdml.
+..........eedml.
 ..........e.....
 ...........ed...
 ...........e.mh.
 ................
 ................
-..........esdml.
+..........eedml.
 ..........e.....
 ...........ed...
 ...........e.mh.
 ................
-..........esdml.
+..........eedml.
 ..........e.....
 ...........ed...
 PAL
-g #5da24a grass
-d #4c8a3e grass-dark
-l #6fb45c grass-light
-m #67aa54 grass-mid
-h #79c168 grass-highlight
-a #8acb74 grass-pale
-s #386e2c grass-shadow
-e #2f6127 grass-deep
+g #6b9e5d grass
+d #5e8f53 grass-dark
+l #79a86c grass-light
+m #73a167 grass-mid
+h #7fb273 grass-highlight
+a #8bbb7a grass-pale
+s #4e7e44 grass-shadow
+e #47753f grass-deep

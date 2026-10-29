@@ -17,8 +17,8 @@ PIX tile-prop-officedesk 16 16
 ..ee........ee..
 ................
 PAL
-a #3a4657 office-frame
-b #3fa08a office-screen
-c #f5f0dc office-papers
-d #46586e office-desk
-e #3a4657 office-leg
+a #505b6b office-frame
+b #549e8d office-screen
+c #e1d9ba office-papers
+d #59687a office-desk
+e #505b6b office-leg

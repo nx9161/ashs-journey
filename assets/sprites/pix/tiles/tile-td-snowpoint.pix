@@ -17,8 +17,8 @@ PIX tile-td-snowpoint 16 16
 ................
 ................
 PAL
-a #caf0f8 planter-leaf
-d #e85a7a town-flower
-e #7ac8e8 town-flower-2
-k #6a4a2e planter-wood
-w #8a6a42 planter-wood-light
+a #b0d8e0 planter-leaf
+d #c77084 town-flower
+e #80b7ce town-flower-2
+k #7b5e46 planter-wood
+w #8e7556 planter-wood-light

@@ -33,8 +33,8 @@ PIX tile-prop-bigbed 16 32
 ................
 ................
 PAL
-B #e8b4c4 body
-D #96566b shade
-L #f2ddd5 light
-A #e86a8a accent
-C #eef7ff accent-2
+B #d4a2b1 body
+D #956675 shade
+L #dec1b7 light
+A #ca788d accent
+C #c6d8e9 accent-2

@@ -17,9 +17,9 @@ PIX tile-tc-verdanturf 16 16
 .......kk.......
 ................
 PAL
-a #8cc877 canopy
-b #6d9c5d canopy-dark
-c #a5ec8c canopy-light
-d #e87ab0 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #8cb87d canopy
+b #77986c canopy-dark
+c #9dd28b canopy-light
+d #ce80a6 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

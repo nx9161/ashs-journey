@@ -17,7 +17,7 @@ PIX tile-prop-ashshrub 16 16
 ................
 ................
 PAL
-a #9aa48e ash-shrub
-b #7d8878 ash-shrub-dark
-c #d8d4c8 ash-shrub-fall
-k #5a4632 shrub-stem
+a #979e8e ash-shrub
+b #828a7f ash-shrub-dark
+c #c4c0b5 ash-shrub-fall
+k #6e5c49 shrub-stem

@@ -17,8 +17,8 @@ PIX tile-prop-fossildisplay 16 16
 ................
 ................
 PAL
-B #d8c08a body
-D #8a6a48 shade
-L #f2ddd5 light
-A #54452f accent
-C #c2c8d4 accent-2
+B #c6b388 body
+D #8e755b shade
+L #dec1b7 light
+A #6a5c47 accent
+C #b0b6c1 accent-2

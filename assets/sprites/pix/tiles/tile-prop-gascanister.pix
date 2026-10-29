@@ -17,8 +17,8 @@ PIX tile-prop-gascanister 16 16
 ................
 ................
 PAL
-B #7a6a8a body
-D #46516e shade
-L #3fa08a light
-A #202028 accent
-C #f0e060 accent-2
+B #80758c body
+D #59627a shade
+L #549e8d light
+A #3f3f49 accent
+C #cac177 accent-2

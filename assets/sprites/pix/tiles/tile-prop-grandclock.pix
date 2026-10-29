@@ -17,8 +17,8 @@ PIX tile-prop-grandclock 16 16
 ....DDDDDDDD....
 ................
 PAL
-B #8a5a30 body
-D #54452f shade
-L #c9a06a light
-A #ffd873 accent
-C #eef7ff accent-2
+B #916a47 body
+D #6a5c47 shade
+L #b99b74 light
+A #d1bc88 accent
+C #c6d8e9 accent-2

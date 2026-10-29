@@ -17,8 +17,8 @@ PIX tile-prop-trainset 16 16
 ................
 ................
 PAL
-B #67aa54 body
-D #2e5e28 shade
-L #c9a06a light
-A #e84c3c accent
-C #202028 accent-2
+B #73a167 body
+D #467340 shade
+L #b99b74 light
+A #c16a61 accent
+C #3f3f49 accent-2

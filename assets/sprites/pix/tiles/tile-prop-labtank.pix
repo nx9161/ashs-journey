@@ -17,8 +17,8 @@ PIX tile-prop-labtank 16 16
 ...eeeeeeeeee...
 ...eeeeeeeeee...
 PAL
-a #6fb0ee tank-glass
-b #3fa08a tank-liquid
-c #1f5a4c tank-specimen
-d #eef7ff tank-eye
-e #3a4657 tank-frame
+a #7da6cd tank-glass
+b #549e8d tank-liquid
+c #387264 tank-specimen
+d #c6d8e9 tank-eye
+e #505b6b tank-frame

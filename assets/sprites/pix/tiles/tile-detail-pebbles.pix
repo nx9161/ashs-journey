@@ -17,5 +17,5 @@ PIX tile-detail-pebbles 16 16
 ................
 ................
 PAL
-m #8a8aa0 pebble
-z #6a6a80 pebble-dark
+m #8b8b9b pebble
+z #757585 pebble-dark

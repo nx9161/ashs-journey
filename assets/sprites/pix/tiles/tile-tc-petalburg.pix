@@ -17,9 +17,9 @@ PIX tile-tc-petalburg 16 16
 .......kk.......
 ................
 PAL
-a #79ac8c canopy
-b #5e866d canopy-dark
-c #8fcba5 canopy-light
-d #4a90c0 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #7fa38d canopy
+b #6c8a77 canopy-dark
+c #8dbb9e canopy-light
+d #608fb0 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

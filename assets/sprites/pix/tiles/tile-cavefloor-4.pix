@@ -1,24 +1,24 @@
 # Premium+ W5: TX-1 cave floor variant 4 — quartz dust
 PIX tile-cavefloor-4 16 16
-aammbbmmccaayyyy
-aaccbbmcccaayyyy
-bbaabccybbaabbyy
-bbaabbaabbaabbyy
-aayyccyymmaabbbb
-aayyccyymmyybbbb
-ccbbaaaabbaabbbb
-cyybyyaabbaabbbb
-maabaabbmmcyyybb
-mmbmmcbbbbyyyycc
-aaaabbbbbbaayybb
-aaaabbbbbbaayccb
+aammaammccaayyyy
+aaccaamcccaayyyy
+aaaaaccyaaaaaayy
+aaaaaaaaaaaaaayy
+aayyccyymmaaaaaa
+aayyccyymmyyaaaa
+ccaaaaaaaaaaaaaa
+cyyayyaaaaaaaaaa
+maaaaaaammcyyyaa
+mmammcaaaayyyycc
+aaaaaaaaaaaayyaa
+aaaaaaaaaaaaycca
 aayyaaaaaayyaaaa
-aayyaaaabbyybbaa
-yyccaabbmmccbyya
-yyccaabbmmcaabaa
+aayyaaaaaayyaaaa
+yyccaaaammccayya
+yyccaaaammcaaaaa
 PAL
-b #a8905e cave-tan
-a #a8845c strata-brown
-y #7a5a38 strata-dark
-c #e8e4f0 quartz
-m #8a8aa0 rock
+b #a08f6d cave-tan
+a #a0876c strata-brown
+y #846a4e strata-dark
+c #cbc5d8 quartz
+m #8b8b9b rock

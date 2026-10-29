@@ -17,8 +17,8 @@ cccccmcccccccccc
 cccccmcccccccccc
 cccccmcccccccccc
 PAL
-c #c2c6d4 floor
-m #8d8aa0 floor-grout
-e #eef5ff floor-sheen
+c #b0b4c1 floor
+m #8d8b9b floor-grout
+e #c6d4e9 floor-sheen
 
 # W5SPLIT2 hue shift 7deg (TX-1 variant split)

@@ -1,26 +1,26 @@
 # Premium+ W5: TX-2 indigo ground tg2 — second accent tone
 PIX tile-tg2-indigo 16 16
-dzzgmmddllggmlld
-ddggmmddllggmlzz
-llllmmggllmmggll
-llllmmgglllmggll
-aazzmmggaaqqggmm
-ddzqqllgammqggdd
-mmlmmlgdddaammqq
-mmllllggdzzammmm
-qqqqddggggddllqq
-qqggddgggddzllqq
+dzzgggddgggggggd
+ddggggddggggggzz
+gggggggggggggggg
+gggggggggggggggg
+aazzggggaagggggg
+ddzgggggagggggdd
+gggggggdddaagggg
+ggggggggdzzagggg
+ggggddggggddgggg
+ggggddgggddzgggg
 ggzzggaaggggdddd
-mmddggaaggggddaa
-qqmmddggaaagzzmm
-mmmggdggmmggqqgg
-ggmmlldgglddmmll
-gqqmllddmmggmmll
+ggddggaaggggddaa
+ggggddggaaagzzgg
+gggggdgggggggggg
+ggggggdgggddgggg
+ggggggddgggggggg
 PAL
-g #6d6ab0 indigo-ground
-m #5e5ca0 ground-mid
-l #827ec0 ground-light
-d #4c498c ground-dark
-a #c4cfef ground-accent
-q #6a8ab0 ground-shift
-z #d3c4ef ground-accent-2
+g #7775a6 indigo-ground
+m #6d6c9a ground-mid
+l #8582b2 ground-light
+d #5e5c8f ground-dark
+a #abb7db ground-accent
+q #758ba6 ground-shift
+z #bcabdb ground-accent-2

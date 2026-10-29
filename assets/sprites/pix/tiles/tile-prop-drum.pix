@@ -17,8 +17,8 @@ PIX tile-prop-drum 16 16
 ................
 ................
 PAL
-B #e84c3c body
-D #7a3226 shade
-L #fdfdf8 light
-A #c2c8d4 accent
-C #ffd873 accent-2
+B #c16a61 body
+D #87493f shade
+L #e9e9cc light
+A #b0b6c1 accent
+C #d1bc88 accent-2

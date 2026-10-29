@@ -12,12 +12,12 @@ PIX tile-edge-grass-s 16 16
 ................
 ................
 ................
-ss..ss..ss...ss.
+dd..dd..dd...dd.
 .d.d.d.d.d..d.d.
 .l.d.l.d.l..d.l.
 ..mm..mm..mm..mm
 PAL
-m #67aa54 grass-mid
-s #386e2c grass-shadow
-d #4c8a3e grass-dark
-l #6fb45c grass-light
+m #73a167 grass-mid
+s #4e7e44 grass-shadow
+d #5e8f53 grass-dark
+l #79a86c grass-light

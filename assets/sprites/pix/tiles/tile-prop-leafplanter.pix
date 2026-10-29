@@ -17,8 +17,8 @@ PIX tile-prop-leafplanter 16 16
 ..AAAAAAAAAAAA..
 ................
 PAL
-B #67aa54 body
-D #2e5e28 shade
-L #a9e8a8 light
-A #386e2c accent
-C #b0503c accent-2
+B #73a167 body
+D #467340 shade
+L #9ad499 light
+A #4e7e44 accent
+C #a96152 accent-2

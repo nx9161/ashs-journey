@@ -4,26 +4,26 @@ bbbbbbbbbbbbbbbb
 bcbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
-bbbabbbbbbbbbbab
 bbbbbbbbbbbbbbbb
-bbmbbbbbbbbbabcb
+bbbbbbbbbbbbbbbb
+bbmbbbbbbbbbbbcb
 bbbbbbbbbybbbbbb
 bbbbbbbbbbbbbbbb
 bbbbbybbbbbbbbbb
-bbbbbbbabbbbbbbb
+bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 bbbbbbbbmbbbbybb
-bbbbabcbbbbbbbbb
+bbbbbbcbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-m #8e8aa0 rock
-z #6e6a80 rock-dark
-c #c2c4d4 rock-light
-k #5a4524 shadow-brown
-a #a8935c strata-brown
-b #b0a268 strata-tan
-y #7a6738 strata-dark
-g #46506e rock-slate
+m #8e8b9b rock
+z #787585 rock-dark
+c #b0b2c1 rock-light
+k #715d3d shadow-brown
+a #a0916c strata-brown
+b #a69c74 strata-tan
+y #84754e strata-dark
+g #59627a rock-slate
 
 # W5SPLIT2 hue shift 12deg (TX-1 variant split)

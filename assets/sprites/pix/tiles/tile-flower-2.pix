@@ -8,21 +8,21 @@ PIX tile-flower-2 16 16
 gggioigggggigggg
 ggggiguggggggggg
 ggggguougggguggg
-ggggggugggmuougg
-ggggggggimmmumgg
-gggggggioimdddmg
-.gdiggggigggdig.
-.dioigggggggioi.
-..diggdggggggi..
-....gdddgggg....
-......dgg.......
+ggggggugggguougg
+ggggggggiggguggg
+gggggggioigggggg
+.ggiggggiggggig.
+.gioigggggggioi.
+..gigggggggggi..
+....gggggggg....
+......ggg.......
 PAL
-g #529e46 grass
-d #43863c grass-dark
-l #66b45c grass-light
-m #5eaa54 grass-mid
-i #e86a7d petal-pink
-u #f5f3dc petal-white
-o #f0ee60 center-yellow
+g #639c5a grass
+d #578c51 grass-dark
+l #73a86c grass-light
+m #6da167 grass-mid
+i #ca7884 petal-pink
+u #e1deba petal-white
+o #cac977 center-yellow
 
 # W5SPLIT2 hue shift 6deg (TX-1 variant split)

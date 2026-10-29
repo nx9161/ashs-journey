@@ -1,23 +1,23 @@
 # Wave 1: path-to-grass fringe (e) — blades spilling onto the path, drawn on the path cell.
 PIX tile-edge-grass-e 16 16
 ...............m
-............sdlm
-............s...
+............ddlm
+............d...
 .............dd.
 ...............m
 ...............m
-............sdl.
-............s...
+............ddl.
+............d...
 .............ddm
 ...............m
-............sdl.
-............s...
+............ddl.
+............d...
 .............ddm
 ...............m
-............sdl.
-............s...
+............ddl.
+............d...
 PAL
-m #67aa54 grass-mid
-s #386e2c grass-shadow
-d #4c8a3e grass-dark
-l #6fb45c grass-light
+m #73a167 grass-mid
+s #4e7e44 grass-shadow
+d #5e8f53 grass-dark
+l #79a86c grass-light

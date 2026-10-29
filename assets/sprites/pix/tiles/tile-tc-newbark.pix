@@ -17,9 +17,9 @@ PIX tile-tc-newbark 16 16
 .......kk.......
 ................
 PAL
-a #8fb8a8 canopy
-b #709083 canopy-dark
-c #a9d9c6 canopy-light
-d #3a7ca5 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #8eada1 canopy
+b #7a8f86 canopy-dark
+c #9dc7b6 canopy-light
+d #5082a1 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

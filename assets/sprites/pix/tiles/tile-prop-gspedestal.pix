@@ -17,8 +17,8 @@ PIX tile-prop-gspedestal 16 16
 ...bbbbbbbbbb...
 ................
 PAL
-a #8a97a8 pedestal-stone
-b #6a7a8c pedestal-dark
-g #e8b83a sphere-gold
-n #b0503c sphere-band
-h #f2e6c8 sphere-glint
+a #8b94a1 pedestal-stone
+b #75808d pedestal-dark
+g #c1a660 sphere-gold
+n #a96152 sphere-band
+h #ded0ad sphere-glint

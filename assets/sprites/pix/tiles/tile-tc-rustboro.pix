@@ -17,9 +17,9 @@ PIX tile-tc-rustboro 16 16
 .......kk.......
 ................
 PAL
-a #a39684 canopy
-b #7f7567 canopy-dark
-c #c0b19c canopy-light
-d #c05a3a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #9d9487 canopy
+b #847d72 canopy-dark
+c #b3a797 canopy-light
+d #b16a54 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

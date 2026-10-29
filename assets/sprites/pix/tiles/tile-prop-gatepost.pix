@@ -33,8 +33,8 @@ PIX tile-prop-gatepost 16 32
 .......Www......
 .....wwwwwww....
 PAL
-W #5f5130 wood
-w #5a3a24 wood-dark
-L #8a6a48 wood-light
-Y #f0e060 lantern-glow
-k #202028 lantern-frame
+W #726648 wood
+w #71523d wood-dark
+L #8e755b wood-light
+Y #cac177 lantern-glow
+k #3f3f49 lantern-frame

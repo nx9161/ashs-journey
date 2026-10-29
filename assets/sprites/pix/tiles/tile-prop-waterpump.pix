@@ -17,8 +17,8 @@ PIX tile-prop-waterpump 16 16
 .....sssssss....
 ................
 PAL
-B #3a7bd5 pump-blue
-b #2e63b0 pump-shade
-k #202028 handle
-W #5a9ae8 water
-s #747484 base
+B #5681bd pump-blue
+b #476faa pump-shade
+k #3f3f49 handle
+W #7097c7 water
+s #7c7c87 base

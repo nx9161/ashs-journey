@@ -17,9 +17,9 @@ PIX tile-tc-snowpoint 16 16
 .......kk.......
 ................
 PAL
-a #caf0f8 canopy
-b #9ebbc1 canopy-dark
-c #eeffff canopy-light
-d #e85a7a canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #b0d8e0 canopy
+b #98afb3 canopy-dark
+c #c6e9e9 canopy-light
+d #c77084 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

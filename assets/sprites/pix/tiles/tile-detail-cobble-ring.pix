@@ -17,7 +17,7 @@ PIX tile-detail-cobble-ring 16 16
 ................
 ................
 PAL
-a #9a958c cobble
-b #7a756c cobble-dark
-c #c0bba8 cobble-light
-d #5f5a52 cobble-deep
+a #97938d cobble
+b #817d76 cobble-dark
+c #b2ae9f cobble-light
+d #6e6a63 cobble-deep

@@ -17,15 +17,15 @@ tttttttvvvtaautt
 .......kk.......
 .......kk.......
 PAL
-t #3e7a34 leaf
-u #2e5e28 leaf-dark
-v #54a048 leaf-light
-s #386e2c leaf-shadow
-e #2f6127 leaf-deep
-h #f0d0a0 vermilion-blossom
-a #f0d0a0 vermilion-fruit
-q #cc626d vermilion-canopy-tint
-z #f1f3b6 vermilion-bloom-light
-n #b23a46 vermilion-canopy-shade
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #53854b leaf
+u #467340 leaf-dark
+v #649d5b leaf-light
+s #4e7e44 leaf-shadow
+e #47753f leaf-deep
+h #d7bd97 vermilion-blossom
+a #d7bd97 vermilion-fruit
+q #bb6f76 vermilion-canopy-tint
+z #dadba4 vermilion-bloom-light
+n #aa515a vermilion-canopy-shade
+k #71523d trunk
+w #846a4e trunk-light

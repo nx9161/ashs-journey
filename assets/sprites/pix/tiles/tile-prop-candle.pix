@@ -17,8 +17,8 @@ PIX tile-prop-candle 16 16
 .......BB..BB...
 ....DDDDDDDD....
 PAL
-B #e8e4f0 body
-D #8a8aa0 shade
-L #fdfdf8 light
-A #f07830 accent
-C #ffd873 accent-2
+B #cbc5d8 body
+D #8b8b9b shade
+L #e9e9cc light
+A #c1835f accent
+C #d1bc88 accent-2

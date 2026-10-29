@@ -169,11 +169,13 @@ export class Renderer {
     const k = s == null ? 1 : s; // W5 LD-1: airborne scale (1 = grounded)
     const c = this.ctx;
     const w1 = Math.max(4, Math.round(10 * k)), w2 = Math.max(6, Math.round(14 * k)), w3 = Math.max(3, Math.round(8 * k));
-    c.fillStyle = 'rgba(16,22,14,' + (0.16 * k).toFixed(3) + ')';
+    // Readability pass (2026-10-29): stronger contact shadow (0.16/0.20 ->
+    // 0.22/0.28) so characters separate from the calmed ground at a glance.
+    c.fillStyle = 'rgba(16,22,14,' + (0.22 * k).toFixed(3) + ')';
     c.fillRect(Math.round(cx - w1 / 2), Math.round(groundY - 3), w1, 1);
     c.fillRect(Math.round(cx - w2 / 2), Math.round(groundY - 2), w2, 2);
     c.fillRect(Math.round(cx - w1 / 2), Math.round(groundY), w1, 1);
-    c.fillStyle = 'rgba(16,22,14,' + (0.20 * k).toFixed(3) + ')';
+    c.fillStyle = 'rgba(16,22,14,' + (0.28 * k).toFixed(3) + ')';
     c.fillRect(Math.round(cx - w3 / 2), Math.round(groundY - 2), w3, 2);
   }
 

@@ -17,7 +17,7 @@ PIX tile-decor-lamp 16 16
 ................
 ................
 PAL
-s #8a6a48 lamp-stand
-h #f0d060 shade
-g #ffe89a glow
-b #5a3a24 base
+s #8e755b lamp-stand
+h #cab877 shade
+g #d8cb9c glow
+b #71523d base

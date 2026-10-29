@@ -17,8 +17,8 @@ PIX tile-prop-rockinghorse 16 16
 ..DDDDDDDDDDDD..
 ................
 PAL
-B #b0503c body
-D #7a3226 shade
-L #d69459 light
-A #3a7bd5 accent
-C #202028 accent-2
+B #a96152 body
+D #87493f shade
+L #c29268 light
+A #5681bd accent
+C #3f3f49 accent-2

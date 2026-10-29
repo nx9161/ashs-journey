@@ -17,8 +17,8 @@ PIX tile-prop-frostrock 16 16
 ................
 ................
 PAL
-B #d2e8ef body
-D #5a9ae8 shade
-L #eef7ff light
-A #8ae8f0 accent
-C #2e63b0 accent-2
+B #b6d1da body
+D #7097c7 shade
+L #c6d8e9 light
+A #8ccdd2 accent
+C #476faa accent-2

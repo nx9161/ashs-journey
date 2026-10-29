@@ -17,8 +17,8 @@ PIX tile-prop-teacart 16 16
 ...AA......AA...
 ...AA......AA...
 PAL
-B #c9a06a body
-D #5f5130 shade
-L #f0d0a0 light
-A #8a5a30 accent
-C #54452f accent-2
+B #b99b74 body
+D #726648 shade
+L #d7bd97 light
+A #916a47 accent
+C #6a5c47 accent-2

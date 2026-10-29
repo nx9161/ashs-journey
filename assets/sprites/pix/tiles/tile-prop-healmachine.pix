@@ -17,8 +17,8 @@ PIX tile-prop-healmachine 16 16
 ..aaaaaaaaaaaa..
 ..eeeeeeeeeeee..
 PAL
-a #c2c8d4 heal-body
-b #3fa08a heal-screen
-c #d84040 heal-cross
-d #5f748f heal-tray
-e #6a6a80 heal-base
+a #b0b6c1 heal-body
+b #549e8d heal-screen
+c #bf5b5b heal-cross
+d #6c7c90 heal-tray
+e #757585 heal-base

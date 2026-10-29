@@ -17,8 +17,8 @@ PIX tile-prop-typewriter 16 16
 ................
 ................
 PAL
-B #46586e body
-D #202028 shade
-L #8a8aa0 light
-A #eef7ff accent
-C #e84c3c accent-2
+B #59687a body
+D #3f3f49 shade
+L #8b8b9b light
+A #c6d8e9 accent
+C #c16a61 accent-2

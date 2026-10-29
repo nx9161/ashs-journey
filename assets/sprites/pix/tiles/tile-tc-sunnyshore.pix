@@ -17,9 +17,9 @@ PIX tile-tc-sunnyshore 16 16
 .......kk.......
 ................
 PAL
-a #ffd166 canopy
-b #c7a350 canopy-dark
-c #fff778 canopy-light
-d #3a7ac0 canopy-fruit
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+a #ceb781 canopy
+b #b69d63 canopy-dark
+c #d2cd8a canopy-light
+d #5480b1 canopy-fruit
+k #71523d trunk
+w #846a4e trunk-light

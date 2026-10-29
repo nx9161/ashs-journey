@@ -33,8 +33,8 @@ PIX tile-prop-wardrobe 16 32
 ................
 ................
 PAL
-B #8a5a30 body
-D #54452f shade
-L #c9a06a light
-A #ffd873 accent
-C #5f5130 accent-2
+B #916a47 body
+D #6a5c47 shade
+L #b99b74 light
+A #d1bc88 accent
+C #726648 accent-2

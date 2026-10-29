@@ -2,24 +2,24 @@
 PIX tile-tg2-ecruteak 16 16
 bccccccbcacababa
 bcccabbcacacbacc
-cecbaccaacbacccc
-abbcabecbeccceab
-aaccbbbaebcccbbc
-acecbccccccbabcc
+cccbaccaacbacccc
+abbcabccbcccccab
+aaccbbbacbcccbbc
+acccbccccccbabcc
 cabcccaccbccccaa
-becbcbcbacaccabc
+bccbcbcbacaccabc
 cabacbccccccbcac
 aacbacccbcbbacac
-cbecacccbbccabab
-ccccccbccbaccbae
-ccacbcaecacbccaa
+cbccacccbbccabab
+ccccccbccbaccbac
+ccacbcaccacbccaa
 babccaaccbacaaaa
 bccacbcbcccccabc
 acacabcccabcbccc
 PAL
-a #c98a5a ecruteak-ground
-b #9d6c46 ground-dark
-c #eda36a ground-light
-d #c03a2a town-accent
-e #f0c060 town-accent-2
-f #795336 ground-deep
+a #b88b6a ecruteak-ground
+b #9b7659 ground-dark
+c #cb9e7a ground-light
+d #b45246 town-accent
+e #caae77 town-accent-2
+f #84644c ground-deep

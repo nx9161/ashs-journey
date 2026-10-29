@@ -17,6 +17,6 @@ PIX tile-prop-stool 16 16
 ................
 ................
 PAL
-a #b0503c stool-seat
-b #ffd873 stool-rim
-c #5a3a24 stool-leg
+a #a96152 stool-seat
+b #d1bc88 stool-rim
+c #71523d stool-leg

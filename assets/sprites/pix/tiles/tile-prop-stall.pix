@@ -17,12 +17,12 @@ PIX tile-prop-stall 16 16
 ................
 ................
 PAL
-R #d84040 awning-red
-r #823936 awning-shade
-F #f5f0dc awning-cream
-W #5f5130 wood
-w #5a3a24 wood-dark
-L #8a6a48 wood-light
-A #e86a8a goods-pink
-B #f0e060 goods-yellow
-G #3e7a34 goods-green
+R #bf5b5b awning-red
+r #8a4f4c awning-shade
+F #e1d9ba awning-cream
+W #726648 wood
+w #71523d wood-dark
+L #8e755b wood-light
+A #ca788d goods-pink
+B #cac177 goods-yellow
+G #53854b goods-green

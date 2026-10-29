@@ -1,24 +1,24 @@
 # Stage O1: tropical ground — lush saturated green, dense tuft speckle (full-bleed floor).
 PIX tile-tropgrass 16 16
-abaaaaaacaaaaaaa
+abaaaaaaaaaaaaaa
 baabaaaaaaadaaaa
-cabaaacaaaaaaada
-aaeaaaaaaacdaaab
+aabaaaaaaaaaaada
+aaeaaaaaaaadaaab
 baabdbaaaaaaaaaa
-aaaaaacaadabaaca
-abbaaabdaaeadacb
-aaceceabeadcbaac
-ccaaaaacaaacadab
-caaaabaabacaaaaa
-aaaaaaaacbabaeaa
-caaaaaaaacabaaaa
-caeadcbaaaaeaaab
-aeaeabbaacaaaada
-aaaaccaaacaaaaad
-aacacacbaababbab
+aaaaaaaaadabaaaa
+abbaaabdaaeadaab
+aaaeaeabeadabaaa
+aaaaaaaaaaaaadab
+aaaaabaabaaaaaaa
+aaaaaaaaababaeaa
+aaaaaaaaaaabaaaa
+aaeadabaaaaeaaab
+aeaeabbaaaaaaada
+aaaaaaaaaaaaaaad
+aaaaaaabaababbab
 PAL
-a #4da653 trop-grass
-b #368233 trop-grass-dark
-c #66a554 grass-light
-d #79c168 leaf-highlight
-e #2e7a3a trop-grass-deep
+a #5fa064 trop-grass
+b #4c8b4a trop-grass-dark
+c #729e66 grass-light
+d #7fb273 leaf-highlight
+e #458650 trop-grass-deep

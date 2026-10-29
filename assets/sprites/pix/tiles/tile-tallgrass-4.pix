@@ -1,33 +1,33 @@
 # Wave 1: tall grass variant 4 — tufted encounter grass, 5-step tuft shading.
 PIX tile-tallgrass-4 16 16
-wwwwggggggaggggg
-ttttgggmgghhhggg
-ddddggmmhwwwwwgg
-ssssgwwmwtttttgg
-ooooouutgdddddgg
-ssssshddgsssasga
+ggggggggggaggggg
+gggggggggghhhggg
+gggggggghggggggg
+ssssgggggggggggg
+ooooouuggggggggg
+ssssshgggsssasga
 ggasssssgooohooh
-ghhohoooossswwmw
-gwgwwhssdhghttmt
-ggtttwmwdwguuddd
-ggdddgttmtthssss
-ggsssgdddddooooo
+ghhohoooosssgggg
+ggggghssghghgggg
+ggggggggggguuggg
+ggggggggggghssss
+ggsssggggggooooo
 ggoooossssssssss
 gsssssoooooogggg
 ggggggsssssggggg
 gggggggggggggggg
 PAL
-g #45a041 grass
-d #368233 grass-dark
-l #60b45c grass-light
-m #59aa54 grass-mid
-h #6ac168 grass-highlight
-a #7bcb74 grass-pale
-s #2d6e2c grass-shadow
-e #276129 grass-deep
-o #285e2b leaf-deep
-t #347a36 leaf-mid
-w #48a04b leaf-light
-u #f5f4dc tiny-flower
+g #599e56 grass
+d #4c8b4a grass-dark
+l #6fa86c grass-light
+m #6aa167 grass-mid
+h #75b273 grass-highlight
+a #80bb7a grass-pale
+s #457e44 grass-shadow
+e #3f7541 grass-deep
+o #407343 leaf-deep
+t #4b854c leaf-mid
+w #5b9d5d leaf-light
+u #e1dfba tiny-flower
 
 # W5SPLIT2 hue shift 10deg (TX-1 variant split)
