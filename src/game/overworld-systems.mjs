@@ -652,18 +652,24 @@ Object.assign(OverworldScene.prototype, {
     });
   },
 
-  sysNpc(npc) {
+  // Stage O3: state-variant dialogue resolution. An NPC may carry
+  // dialogueStates: [{ flag?, flagNot?, dialogue }] — the FIRST entry
+  // whose conditions match the story flags supplies the lines for
+  // this talk; otherwise the base dialogue is used. Only the LINES
+  // are swapped: every downstream flow (ferry menus, marts, gifts,
+  // the plain-dialogue fallback in overworld.mjs) proceeds exactly
+  // as shipped. Both talk paths resolve through this one helper.
+  npcDialogueLines(npc) {
     const g = this.game;
-    // Stage O3: state-variant dialogue. An NPC may carry
-    // dialogueStates: [{ flag?, flagNot?, dialogue }] — the FIRST
-    // entry whose conditions match the story flags supplies the
-    // lines for this talk; otherwise the base dialogue is used.
-    // Only the LINES are swapped: every downstream flow (ferry
-    // menus, marts, gifts) proceeds exactly as shipped.
     const stateDlg = Array.isArray(npc.dialogueStates)
       ? npc.dialogueStates.find((st) => (!st.flag || g.state.story.flags[st.flag]) && (!st.flagNot || !g.state.story.flags[st.flagNot]))
       : null;
-    const sayLines = (cb) => g.ui.say((stateDlg ? stateDlg.dialogue : npc.dialogue).map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
+    return (stateDlg ? stateDlg.dialogue : npc.dialogue).map((l) => l.replace('{player}', g.state.player.name));
+  },
+
+  sysNpc(npc) {
+    const g = this.game;
+    const sayLines = (cb) => g.ui.say(this.npcDialogueLines(npc), cb, npc.name);
     // ADR-025 §6 (Bond echo): a character who was Close in a previous
     // journey says the line, once, the first time the new journey
     // meets them — then their own scene proceeds. Presentation only.

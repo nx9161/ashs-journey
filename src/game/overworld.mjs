@@ -807,7 +807,7 @@ export class OverworldScene {
         ? (fdx > 0 ? 'right' : 'left') : (fdy > 0 ? 'down' : 'up');
       if (this.sysNpc && this.sysNpc(npc)) return true;
       if (npc.trainer) { this.startTrainerBattle(npc); return true; }
-      const lines = npc.dialogue.map((l) => l.replace('{player}', g.state.player.name));
+      const lines = this.npcDialogueLines ? this.npcDialogueLines(npc) : npc.dialogue.map((l) => l.replace('{player}', g.state.player.name));
       // GD balance: data-driven one-time item gifts (ball economy top-ups).
       const after = () => {
         if (npc.give && !g.state.story.flags[npc.give.flag]) {
