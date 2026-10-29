@@ -12549,3 +12549,268 @@ byte-identical post-commit; `personal/` byte-identical
 - The single owner-ordered deploy happens once the whole Sinnoh
   arc chain closes (through Sinnoh); nothing here was pushed or
   deployed.
+
+## Arc 4 Stage S5b — Sinnoh story, second half: climax, Conference, completion (2026-10-29)
+
+Base: main @ 06c9b43 (S5a). Deliverable: the Sinnoh story's second
+half, appended to S5a's chain/file/suite the way H4b appended to
+H4a's — `SINNOH_QUESTS` 14 → 30 rows, eleven new entry events, the
+four remaining leaders on the generic award path, the Galactic
+second half, the Spear Pillar climax and Distortion World
+resolution, Dawn's Grand Festival, the Lake Acuity midpoint, and
+the Lily of the Valley Conference closing in the machine. Platinum
+governs; the anime is the primary canon (ADR-015); all writing is
+original. No push, no deploy (the single owner-ordered deploy waits
+for the whole arc chain). `personal/` byte-identical.
+
+### 0. Budget vs the coordinator allowance
+
+S5b planned to the coordinator-set allowance of **+70,000 B public
+static total max**. **Actuals: public static total 12,318,493 →
+12,388,347 B, Δ +69,854 — inside the allowance by 146 B**
+(`public/game.js` 12,155,871 → 12,225,725 B, the same delta). The
+first full build measured +71,607 (over by 1,607); the overage was
+closed by tightening this stage's own prose and comments only —
+no scope, system, or art was cut, and no other stage's text was
+touched. **Restated projection-to-close:** S6 +45,000 (its cap) +
+S7 +45,000 + S8/S9 ≈ +3,000 → remaining ≈ +93,000 → projection ≈
+**12,481,347 B**, margin ≈ **101,565 B** vs the 12,582,912 B gate
+— below the 150,000 B austerity tripwire, so S6 likewise plans to
+its coordinator-set allowance (+45,000) before it starts. Actual
+headroom remaining: **194,565 B**.
+
+### 1. Gyms 5–8 (the prefix law completes)
+
+The four leaders ride the GENERIC award path (`badgeSet:'sinnoh'`
++ `badge`; winTrainer writes badges.sinnoh + `badge_<root>`), the
+overworld refusal in `runSinnohNpc` reads badges.sinnoh, and two
+talk-to roster trainers per gym rise beneath each leader. The
+suite drives all four in order off the S5a fixture and reads
+badges.sinnoh back as the full Platinum eight, in order.
+
+| Leader | Gym | Ace | Ace level | Badge flag |
+|---|---|---|---|---|
+| Crasher Wake | Pastoria | Floatzel (fencharm) | 355 | badge_fen |
+| Byron | Canalave | Bastiodon (ironacorn) | 363 | badge_mine |
+| Candice | Snowpoint | Abomasnow (frostpetal) | 374 | badge_icicle |
+| Volkner | Sunyshore | Electivire (beaconcoil) | 386 | badge_beacon |
+
+Gym Grounds (the existing 15 Grounds only): Pastoria **tide**,
+Canalave **rubble**, Snowpoint **frost**, Sunyshore **volt**;
+landmarks: galactic-hq volt, lake-valor tide, lake-acuity frost,
+spear-pillar **spirit**, and all six Distortion World floors
+**grave**.
+
+### 2. Team Galactic, second half + the lakes chain
+
+The lakes are GLIMPSES and pressure, never catches (S6 owns every
+trio catch arc): Lake Valor's aftermath (Fen-gated entry —
+the explosion, Azelf taken: `valor_glimpse` + `azelf_glimpsed`),
+Uxie turning beneath Acuity's ice under Galactic pressure
+(Icicle-gated: `uxie_glimpse`), Mesprit slipping the net at Verity
+(all-badges revisit: `mesprit_glimpse`). The Veilstone HQ raid is
+the S5a door opening: Fen-gated entry event, Saturn must-win
+(Toxicroak ace 358) → `galactic_hq_done`; Saturn's NPC branch turns
+honest post-raid. The Coronet climb (all-badges entry beat in the
+north galleries, `coronet_climb_done`) walks the S3a/S3b segment
+chain to the summit.
+
+### 3. The climax — flag mechanics
+
+`ev_sinnoh_spear_pillar` (gated on the climb): Cyrus summons
+Dialga AND Palkia chained in the red chain (Platinum) and is
+FACED — `battleAny cyrus_spear` (Weavile ace 388; `cyrus_spear_won`
+/ `cyrus_spear_lost`) — because the sky overrules the result: the
+chain reaches its note, Giratina tears the sky, Cyrus is taken,
+the titans go free, and the event's warp step puts the player in
+distortion-entrance. The six-map Distortion World chain (S3b's
+warp-proven set) is walked to the platform, where
+`ev_sinnoh_distortion_climax` plays Cyrus's end: a second FACED
+battle (`battleAny cyrus_final`, Weavile ace 392), Cyrus walking
+into the deep of his own accord, Giratina settling, the tear
+stilling.
+
+**The climax flag is `sinnoh_climax_resolved`** — this arc's
+`climax_resolved`-equivalent in the H4b idiom (a per-arc name,
+because Hoenn's literal `climax_resolved` already stands on any
+save that played Hoenn; the mechanism is H4b's exactly: one flag,
+set in exactly one event's step block, at the resolution and
+never earlier — suite A27 pins that no other Sinnoh event sets
+it). In the SAME step block stand the freed titans' S6 unlock
+flags — `dialga_unlocked`, `palkia_unlocked`, `giratina_unlocked`
+— beside `cyrus_end_done` + `distortion_cleared`: S6 builds the
+catch arcs keyed on `sinnoh_climax_resolved`; the unlocks are
+wired now, the arcs are not staged here.
+
+### 4. Paul — the curve completes
+
+| Beat | Shape | Team | Flags |
+|---|---|---|---|
+| Lab (S5a) | battleAny | ace Elekid 312 | paul1_done (+ won/lost) |
+| Veilstone (S5a) | friendly FACED | 342–348, Torterra ace | paul_veilstone_done |
+| **Lake Acuity (S5b)** | **friendly FACED, full 6v6** | **378–384, Electivire ace 384** | **paul_acuity_done + paul_acuity_won / paul_acuity_lost** |
+| **Conference QF (S5b)** | **must-win-with-rechallenge** | **392–398, Electivire ace 398** | **paul_conference_done + paul_conference_won** |
+
+Acuity is the anime's turning point staged on the Brandon
+pattern: a REAL full battle, win or lose, the story continues and
+**no progression gate reads the result**; the loss path carries
+the devastation honestly in original writing (the autopsy speech
+— Chimchar knew first). The Conference settlement is the shipped
+league idiom (the registrar's bracket: one preliminary, Tamsin,
+then Paul): a loss is a defeat and a rechallenge, the flag stays
+unset, and the rivalry resolves with the player's win, as canon
+has it — the engine never hard-locks. The true path wins it
+(suite retry loop = the rechallenge idiom, exercised as designed).
+
+### 5. The Tobias ruling — implementation, line by line
+
+The coordinator's binding ruling, and where each clause lives:
+
+- *"A REAL battle on the Brandon pattern"* — both acts are real
+  `BattleScene` trainer battles staged by the `tobias` branch of
+  `runSinnohNpc`; no scripted outcome exists anywhere in the stage.
+- *"Repeatable until the honour stands"* — Act 1 can be re-fought
+  without limit: its gate is simply `!tobias_darkrai_felled`, and
+  nothing else in the handler advances while it stands unset.
+- *"Darkrai authored beatable in-band (~390)"* — `tobias_darkrai`
+  is Darkrai ALONE at **390** (suite A23). One honest engine note:
+  Darkrai's band-local learnset (the S1 ETL) leaves it Quick
+  Attack as its only damaging move, so a lone healthy band-floor
+  attacker could out-attrition it over ~50 turns — measured in
+  development. The ruling's semantics are unaffected (a win is a
+  win), but the suite's wipe proof therefore fields a Growl-only
+  Starly that can deal no damage at all, so the wipe is the foe's
+  own work, honestly measured (recorded at `weakTeam()`).
+- *"The flag `tobias_darkrai_felled` sets when it falls"* — Act 1
+  rides `startSinnohBattle('tobias_darkrai', onWin)` (the league
+  rechallenge idiom — not friendly, not faced); only its win
+  callback sets `tobias_darkrai_felled` (suite A32 pins the wiring
+  in source).
+- *"A full team wipe before that is a rematch, NOT a conclusion"*
+  — a loss sets nothing: suite B55 proves a full wipe leaves
+  `tobias_darkrai_felled`, `tobias_faced`, `sinnoh_complete` and
+  `arc_card_sinnoh` all unset and regionsDone untouched, with
+  Tobias still offering Act 1.
+- *"Once Darkrai falls, Latios concludes the match win-or-lose —
+  both branch texts real"* — Act 2 (`tobias_latios`, Latios ALONE
+  at 392) is fought FRIENDLY on the FACED predicate
+  (Harrison/Brandon): either outcome sets `tobias_faced` +
+  `tobias_won`/`tobias_lost` and plays its own full branch text —
+  the win an acknowledged upset, the canon loss carrying the
+  honour ("the only victory anyone took from the conference's
+  darkest trainer" — the registry's summaryLines stay true on
+  every completing save). Suite B56 proves the felling stands
+  with the conference NOT yet concluded; B57 concludes via the
+  canon LOSS path.
+- *"Only then does the conference conclude and `sinnoh_complete`
+  fire"* — `sinnoh_complete` is set exactly once in
+  overworld-systems (suite A32 counts the occurrences), inside
+  Act 2's onEnd, and immediately rides `checkArcCompletion(g)`:
+  the machine fires — ARC COMPLETE card with the registry's
+  summaryLines, `regionsDone += sinnoh` by the machine's own
+  write (the handler writes no regionsDone), the directive pinned
+  on Unova (sealed). Suite B58/B59 prove the card fires exactly
+  once and never re-fires. **No hand-rolled ending, no homecoming
+  content** — S7 owns the finale variant; this stage's true path
+  ends at card + directive standing.
+
+### 6. Movie beats + the co-spine's end (chronology map, ch. 8)
+
+- **Darkrai (The Rise of Darkrai)** at Canalave, per the
+  resequencing note: the sailor's plea (Mine Badge held, NPC
+  chain) → Fullmoon Island entry event (Cresselia's glimpse;
+  the **Lunar Wing** granted as a key item — items 192 → 197 with
+  the keepsakes below) → the boy wakes: `darkrai_beat_done` +
+  `darkrai_unlocked` (S6's flavour flag; Darkrai's catch arc is
+  S6's and is not staged here).
+- **Gracidea (Giratina and the Sky Warrior)** at Floaroma
+  (Cobble-gated entry event): the field in impossible bloom, a
+  Shaymin glimpse → `gracidea_beat_done` + `shaymin_glimpsed` +
+  `shaymin_unlocked` (S6 owns the catch).
+- **Zoroark (Master of Illusions)** as a special: one scene on
+  Celestic's shrine street (all-badges entry event) — an illusion
+  with a homesick heart, and the suite pins its honesty (A30):
+  zorua/zoroark exist in no shipped species table, and the scene
+  stages no battle, catch, or gift. Small, and true about what
+  it is.
+- **Dawn's co-spine concludes** at the Grand Festival on Lake
+  Valor (the anime's placement; a dialogue beat riding S4's Super
+  Contest ranks — her final is judged at the hall's highest rank;
+  the player's own contest ladder stays open and ungated): she
+  reaches the final and falls by a checked-twice margin —
+  runner-up honours, the arc resolved in original writing
+  (`dawn_grand_festival_done` + `dawn_festival_ribbon`).
+- **Rock Climb** is granted on Route 217 via S4's `giveHM` hook
+  (`ev_sinnoh_rockclimb`, Icicle-gated entry — Platinum's lost HM
+  in the snow), proven in-suite beside the Defog precedent (B41).
+
+### 7. Extras — final accounting
+
+Town Tales 9 → **13** (Pastoria, Celestic, Snowpoint, Sunyshore —
+the same data-driven machine, giver/stage pairs audited among the
+maps9 townsfolk). Keepsakes: +4 new pieces on EXISTING resolved
+kinds only (fencharm, shrinebell, frostpetal, beaconcoil — each
+paid by exactly one new tale; three double as gym-ace signatures),
+**the Sinnoh arc total lands at 10** (S5a's 6 + these 4), inside
+the mission's 10–12. Items 192 → **197** (+4 keepsakes + the
+Lunar Wing); supersessions BY NAME: validator bag cap 192 → 197;
+sinnoh A11/A12/A18, sinnoh-story A01 (chain 14 → 30) / A12 (actors
+23 → 41) / A14 / A15 / B25 (scoped to the first half; the full
+read is B60), cheat-shop A02 (keepsakes 18 → 22), frontier A12,
+hoenn-story A16, johto-story A15, johto-systems A24,
+rejuv-phase3 A01 (the set 18 → 22), rejuv-phase4 A18 (22 pieces,
+the four new sources read from SINNOH_TALES). tables.json
+regenerated via gen-tables only (the quest vocabulary now
+carries all 30 chain ids + 13 tale ids). TMs: NONE — the H4a
+mirror stands (A17).
+
+### 8. Suite
+
+`tests/sinnoh-story-checks.mjs` **95/95** (S5a's 46, superseded by
+name above, + A2's 13 new pure units + Part B's 35 new rows): the
+second-half leaders/rosters audit, the completed Paul curve, the
+Tobias data shape, the eleven events' shapes + gates, the climax
+flag's single-source pin, the glimpse law, the Zoroark honesty
+pin, and the TRUE PATH continued on the S5a fixture's own save:
+Pastoria tale → Wake → Valor → the HQ raid → Byron → the Darkrai
+chain (plea → Fullmoon → waking) → the Gracidea beat → Snowpoint
+tale → Candice → Acuity glimpse → **Paul FACED** → Rock Climb →
+Sunyshore tale → Volkner (eight badges in order) → the Grand
+Festival → Mesprit → the Zoroark special → Celestic tale → the
+Coronet climb → **Spear Pillar FACED + the warp** → the
+Distortion World traversal → **the platform climax + all unlock
+flags** → registration → preliminary → **Paul settled** → the
+three Tobias proofs (wipe-rematch / felling-then-Latios-loss /
+the machine firing exactly once) → all 30 chain flags standing,
+the Quest Log's SINNOH section starred to the last row.
+
+### 9. Battery
+
+sinnoh-story **95/95** · sinnoh-checks **132/132** ·
+qa-changed-flows failures exactly **{b2, d9}** · battle-model
+**45/45** HARD · campaign **24/24** · arc-foundation **47/47** ·
+frontier **136/136** · hoenn-story **88/88** · hoenn-contest
+**28/28** · cheat-shop **44/44** · johto-story **110/110** ·
+johto-systems **62/62** · fidelity **35/35** · validator **106**
++ fuzz **2000/2000** + save-contract **12/12** (api-scripts).
+rejuv-phase3 60/61 and rejuv-phase4 50/51 — the single failure in
+each is C01, the real-browser chromium harness, unrunnable in
+this sandbox (both suites' data sections fully green, incl. the
+superseded keepsake pins). Fresh build byte-identical
+post-commit (d3cb4852…); `personal/` byte-identical
+(sha f434ba63… / a780af0b…).
+
+### 10. Open items handed on
+
+- S6 owns the thirteen legendary arcs: the lake trio (their
+  glimpses stand), Dialga/Palkia/Giratina keyed on
+  `sinnoh_climax_resolved` with the unlock flags already wired,
+  Darkrai via `darkrai_unlocked` + the carried Lunar Wing,
+  Shaymin via `shaymin_unlocked` + the Gracidea beat.
+- S7 owns the finale variant (registry-driven homecoming, full
+  credits, Master HoF, the Arceus capstone) — nothing of it is
+  staged here; the true path ends at the ARC COMPLETE card with
+  the Unova directive pinned and standing.
+- The single owner-ordered deploy happens once the whole Sinnoh
+  arc chain closes (through Sinnoh); nothing here was pushed or
+  deployed.

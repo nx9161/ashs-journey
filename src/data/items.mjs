@@ -134,6 +134,9 @@ export const ITEMS = {
   coin: { id: 'coin', name: 'Game Coin', pocket: 'key', desc: 'Game Corner currency. Win at the slots; spend at the prize corner.' },
   itemfinder: { id: 'itemfinder', name: 'Itemfinder', pocket: 'key', desc: 'Beeps near hidden items when used (SELECT near a spot).' },
   townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Kanto at a glance. Gary\'s sister would approve.' },
+  // Arc 4 Stage S5b: the Lunar Wing — carried away from Fullmoon
+  // Island in the Darkrai beat; S6's Newmoon arc reads it.
+  lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Pewter. Lets you use FLASH outside battle; Attack rises.' },
@@ -271,6 +274,15 @@ export const KEEPSAKES = {
   meadowcord: { id: 'meadowcord', name: 'Meadow Cord', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
   ruinbell: { id: 'ruinbell', name: 'Ruin Bell', kind: 'typeWard', moveType: 'psychic', factor: 0.8, effect: 'Takes x0.8 damage from Psychic moves.' },
   ribbonclasp: { id: 'ribbonclasp', name: 'Ribbon Clasp', kind: 'statusChance', moveType: 'normal', status: 'confusion', bonus: 10, effect: 'Normal moves gain +10% confusion chance.' },
+  // Arc 4 Stage S5b: Sinnoh's second-half share (4 — the arc total
+  // lands at 10). Existing resolved kinds ONLY, same law as S5a.
+  // Paid in-world by this half's Town Tales; three double as gym-ace
+  // signatures (Wake's Floatzel, Candice's Abomasnow, Volkner's
+  // Electivire).
+  fencharm: { id: 'fencharm', name: 'Fen Charm', kind: 'lowHpDamage', moveType: 'water', factor: 1.15, hpFrac: 0.5, effect: 'Water moves deal x1.15 while at 50% HP or less.' },
+  shrinebell: { id: 'shrinebell', name: 'Shrine Bell', kind: 'matchupDamage', moveType: 'dragon', vsType: 'dragon', factor: 1.2, effect: 'Dragon moves deal x1.2 vs Dragon-types.' },
+  frostpetal: { id: 'frostpetal', name: 'Frost Petal', kind: 'typeWard', moveType: 'fire', factor: 0.8, effect: 'Takes x0.8 damage from Fire moves.' },
+  beaconcoil: { id: 'beaconcoil', name: 'Beacon Coil', kind: 'fasterFoeDamage', moveType: 'electric', factor: 1.15, effect: 'Electric moves deal x1.15 vs faster foes.' },
 };
 // The bag/mart surface of the same pieces (ITEMS is the bag's table).
 // price exists ONLY on the Second-Wind Ribbon (its Celadon shop source);

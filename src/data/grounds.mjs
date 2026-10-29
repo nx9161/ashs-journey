@@ -226,6 +226,28 @@ export const MAP_GROUND = {
   'galactic-eterna': 'volt',
   'lake-verity': 'tide',
   'solaceon-ruins': 'grave',
+  // Arc 4 Stage S5b (the same 15 Grounds — no new Grounds): Wake's
+  // marsh gym rides the Tide, Byron's steel gym the Rubble of the
+  // mine, Candice's the Frost, Volkner's the Volt. Landmarks: the
+  // HQ hums Volt like Eterna's tower, Lake Valor keeps the Tide,
+  // Lake Acuity the Frost, Spear Pillar stands on Spirit ground
+  // (the old earth of the first argument), and the Distortion
+  // World — a grave turned inside out — rides the Grave on all
+  // six of its floors.
+  'gym-pastoria': 'tide', // Pastoria Gym — Crasher Wake
+  'gym-canalave': 'rubble', // Canalave Gym — Byron
+  'gym-snowpoint': 'frost', // Snowpoint Gym — Candice
+  'gym-sunnyshore': 'volt', // Sunyshore Gym — Volkner
+  'galactic-hq': 'volt',
+  'lake-valor': 'tide',
+  'lake-acuity': 'frost',
+  'spear-pillar': 'spirit',
+  'distortion-entrance': 'grave',
+  'distortion-depths': 'grave',
+  'distortion-isles': 'grave',
+  'distortion-falls': 'grave',
+  'distortion-abyss': 'grave',
+  'distortion-platform': 'grave',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',

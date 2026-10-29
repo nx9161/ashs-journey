@@ -331,6 +331,39 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_sinnoh_defog');
       }
     }
+    // Arc 4 Stage S5b (Sinnoh story, second half): map-entry scenes,
+    // same idiom and gate law (each scene's completion flag is its
+    // gate; a stalled chain re-fires on a later entry). Order:
+    // Valor + the HQ raid (Fen) -> Fullmoon (the sailor's plea) ->
+    // Acuity (Icicle) -> Verity pressure + Celestic's illusion (all
+    // badges) -> Coronet -> Spear Pillar -> the platform. Gracidea
+    // rides Floaroma from Cobble on; Rock Climb sleeps on r217.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const sf = g.state.story.flags;
+      if (id === 'lake-valor' && sf.badge_fen && !sf.valor_glimpse && !sf.ev_sinnoh_valor_done) {
+        this.runEvent('ev_sinnoh_valor');
+      } else if (id === 'galactic-hq' && sf.badge_fen && !sf.galactic_hq_done && !sf.ev_sinnoh_hq_raid_done) {
+        this.runEvent('ev_sinnoh_hq_raid');
+      } else if (id === 'fullmoon-island' && sf.darkrai_beat_started && !sf.lunar_wing_received && !sf.ev_sinnoh_fullmoon_done) {
+        this.runEvent('ev_sinnoh_fullmoon');
+      } else if (id === 'floaroma' && sf.badge_cobble && !sf.gracidea_beat_done && !sf.ev_sinnoh_gracidea_done) {
+        this.runEvent('ev_sinnoh_gracidea');
+      } else if (id === 'r217' && sf.badge_icicle && !sf.rockclimb_received && !sf.ev_sinnoh_rockclimb_done) {
+        this.runEvent('ev_sinnoh_rockclimb');
+      } else if (id === 'lake-acuity' && sf.badge_icicle && !sf.uxie_glimpse && !sf.ev_sinnoh_acuity_glimpse_done) {
+        this.runEvent('ev_sinnoh_acuity_glimpse');
+      } else if (id === 'lake-verity' && sf.badge_beacon && sf.verity_glimpse && !sf.mesprit_glimpse && !sf.ev_sinnoh_verity_pressure_done) {
+        this.runEvent('ev_sinnoh_verity_pressure');
+      } else if (id === 'celestic' && sf.badge_beacon && !sf.zoroark_special_seen && !sf.ev_sinnoh_zoroark_done) {
+        this.runEvent('ev_sinnoh_zoroark');
+      } else if (id === 'mt-coronet-north' && sf.badge_beacon && !sf.coronet_climb_done && !sf.ev_sinnoh_coronet_done) {
+        this.runEvent('ev_sinnoh_coronet');
+      } else if (id === 'spear-pillar' && sf.coronet_climb_done && !sf.spear_pillar_done && !sf.ev_sinnoh_spear_pillar_done) {
+        this.runEvent('ev_sinnoh_spear_pillar');
+      } else if (id === 'distortion-platform' && sf.spear_pillar_done && !sf.sinnoh_climax_resolved && !sf.ev_sinnoh_distortion_climax_done) {
+        this.runEvent('ev_sinnoh_distortion_climax');
+      }
+    }
     // Stage H6 (Hoenn legendary arcs): map-entry faces, same idiom —
     // every face is gated on its arc's own progress flags (never on
     // the event-done flag alone), and the catch-only chain
@@ -2926,10 +2959,12 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
     if (kind === 'saturn') {
-      // PACING CALL (S5a register): the full Veilstone HQ raid is
-      // S5b's — here Saturn is presence and a locked door: the anime
-      // spreads the HQ across the arc, and this half ends at the
-      // gyms. His flavour turns colder once Eterna has fallen.
+      // S5b: the raid has happened (the entry event above) — Saturn
+      // stays with his emptied house, and his flavour turns honest.
+      if (flags.galactic_hq_done) { say(['The house is a shell with excellent lighting now, trainer. The count left before you arrived — it always was going to. I keep the door. It is the only duty the new world left me, and I find I do not entirely mind it.']); return true; }
+      // PACING CALL (S5a register): before the raid, Saturn is
+      // presence and a locked door: the anime spreads the HQ across
+      // the arc. His flavour turns colder once Eterna has fallen.
       if (flags.saturn_met) { say(['Still here, trainer? Doors here open inward only — and the building has decided you are weather: noted, and kept outside.']); return true; }
       if (flags.galactic_eterna_done) {
         say(['Saturn. I keep this house for Team Galactic — its doors, its ledgers, its patience. Eterna was a counting house, trainer; you have annoyed an abacus, nothing more.', 'Whatever you imagine is behind me, it will keep imagining back at you until the Commander-in-Chief calls it forward. Go and win your little badges. History is being scheduled elsewhere.'], () => { flags.saturn_met = true; });
@@ -3044,12 +3079,219 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
-    // ---- the first-half leaders ----
+    if (kind === 'paul_acuity') {
+      // THE MIDPOINT (the Brandon pattern): a full 6v6 REAL battle
+      // fought friendly, completion predicate FACED — win or lose,
+      // the story continues and no gate reads the result. The loss
+      // path carries the anime's devastation in original writing.
+      if (flags.paul_acuity_done) {
+        say(flags.paul_acuity_won
+          ? ['The page is written, {player}. The Conference gets the ink. Bring exactly this.']
+          : ['The lake remembers, {player}. So do I. The Conference gets the ink — that has not changed. What HAS changed is the handwriting I intend to bring.']);
+        return true;
+      }
+      if (!sBadges.includes('iciclebadge')) { say(['Not yet. Candice first, {player} — I do not spend my best page on a trainer the north has not finished examining. Win the Icicle Badge. Then come out onto my lake.']); return true; }
+      const t0 = TRAINERS.paul_acuity;
+      say([t0.intro[0], t0.intro[1]], () => {
+        g.ui.showMenu('Face Paul — the full battle at Lake Acuity?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          const t = bondTrainerVariant(g.state, t0);
+          g.scenes.push(new BattleScene({
+            kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g), friendly: true,
+            onEnd: (won, fled) => {
+              if (fled) return;
+              recordBattleBond(g.state, t.id, won, fled);
+              flags.paul_acuity_done = true;
+              if (won) {
+                flags.paul_acuity_won = true;
+                say(t0.lose, null, 'PAUL');
+              } else {
+                flags.paul_acuity_lost = true;
+                say(['...Six. All six, {player}. I did not lose a battle on that lake — I performed an autopsy on one, mid-battle, with the whole of my team as the instrument.', 'This is what my arithmetic was FOR, and do you see what it bought? A full page of evidence that the way I have been counting is not the way winning is counted. Chimchar knew. It knew at Hearthome, standing in the road. I have been the last to know everything important in this region.', 'Again at the Conference — if the bracket is honest. I will not be carrying the same ledger. Neither, I suspect, will you.'], null, 'PAUL');
+              }
+            },
+          }));
+        });
+      }, 'PAUL');
+      return true;
+    }
+
+    if (kind === 'dawn_festival') {
+      // Dawn's co-spine concludes: the Grand Festival at Lake Valor
+      // (the anime's placement), a dialogue beat riding the shipped
+      // Super Contest ranks — her final is judged at the hall's own
+      // highest rank; the player's own contest ladder stays open
+      // and ungated by this beat (the S4/S5a law).
+      if (flags.dawn_grand_festival_done) { say(['Runner-up of the Grand Festival, {player}. It still sounds like weather happening to somebody else. Zoey keeps the cup — and I keep the tape of that final, and I watch it like a map of a country I am going to live in. The Conference is yours now. Go and stand on your stage the way I stood on mine: all the way.']); return true; }
+      if (!sBadges.includes('beaconbadge')) { say(['Not yet — your eighth badge first, {player}. A coordinator keeps her order too: the Festival stage is lit, my rivals are arriving by boat, and I am NOT stepping out there until the Sunyshore lights have had their say about you. Besides — I want you in those seats with nothing left to prove but the sitting.']); return true; }
+      say(['You came. All the way to Valor, with the sky mended and eight badges in your case — you came to watch ME. Okay. OKAY. From the top, one last time...', '...The final card turned her way, {player}. Zoey — by a margin so small the judges checked it twice. Runner-up, at the Grand Festival, in my first full season. Mom cried on the phone in the GOOD direction. I did not win the cup. I won everything the cup was standing in front of.', 'My road forks here — home first, then a new region\'s stages, the way yours forked at a ferry dock a winter ago. Walk the Conference like a stage, {player}. I will be in the seats this time, and I do not breathe until the music starts. A promise, not a threat.'], () => {
+        flags.dawn_grand_festival_done = true;
+        flags.dawn_festival_ribbon = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Dawn took runner-up honours at the Grand Festival!');
+      });
+      return true;
+    }
+
+    if (kind === 'sailor_eldric') {
+      // The Darkrai beat (Canalave): a glimpse chain, staged here —
+      // the plea (Mine Badge held) -> Fullmoon Island's entry event
+      // (Cresselia's glimpse + the Lunar Wing) -> the boy wakes.
+      // Darkrai itself is S6's arc: darkrai_unlocked is its flavour
+      // flag, set on the waking, never a catch here.
+      if (flags.darkrai_beat_done) { say(['Sleeping like a stone in a river, my boy — deep, ordinary, dreamless sleep, the kind with drool in it. A father could frame that drool. Whatever stood over his bed has gone wherever uninvited things go when a light is lit in the room. The wing did it, trainer. You did it.']); return true; }
+      if (flags.lunar_wing_received) {
+        say(['That — that feather. It is shining like the moon got caught in it. Hold it over a sleeping boy, the old sailors say, and the dark has to leave by the door it came in...', '...He is awake. HE IS AWAKE, and asking for breakfast like the last month was a story somebody told HIM. The dreams are gone — all of them, even the ordinary bad ones a boy is entitled to. Whatever waits on the dark island across the water, trainer, it has been noticed now. By her. By you. By a boy who sleeps. That is more notice than it is used to.'], () => {
+          flags.darkrai_beat_done = true;
+          flags.darkrai_unlocked = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('The sailor\'s son is awake — the nightmares are gone.');
+        });
+        return true;
+      }
+      if (flags.darkrai_beat_started) { say(['Fullmoon Island, trainer — the boatman runs there from this very pier, and her island is past it, where the moon stands full. Bring back her feather. Bring back my boy\'s mornings.']); return true; }
+      if (!sBadges.includes('minebadge')) { say(['Mind the gulls, trainer. Everything in this port is watching something. Mine is a window up there with the curtain drawn, where my boy has been asleep a month — asleep, and dreaming of a dark shape that stands over the bed and will not be argued with. When you have the Mine Badge, come back to me. I will have a favour to ask that I do not ask lightly.']); return true; }
+      say(['You have Byron\'s badge — then you are the trainer the harbour says you are, and I can ask it plain. My son, trainer. A month asleep in the house by the pier, and every night the same dream: a dark shape over the bed, patient as debt. The doctors use the word nightmares the way sailors use the word weather — for things they cannot steer.', 'The old cure is not a doctor\'s. On Fullmoon Island, where the moon stands full over a crescent pond, SHE keeps her court — Cresselia, whose feathers are made of the light that ends bad dreams. The boatman will take you. Bring me a Lunar Wing, and I will bring you a boy eating breakfast. That is the whole contract.'], () => { flags.darkrai_beat_started = true; });
+      return true;
+    }
+
+    if (kind === 'sinnoh_conference') {
+      // The registrar (the Hoenn registrar's idiom): registration
+      // is gated on eight badges + the climax resolved — the
+      // Conference does not open its bracket over an unmended sky.
+      if (flags.sinnoh_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Lily of the Valley book in the good ink, trainer — twice: once for the bracket, and once in the margin next to a Darkrai, where the clerks keep the results they still argue about.']); return true; }
+      if (sBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Sinnoh badges open this bracket; you hold ' + sBadges.length + '. Sunyshore is the usual last stop. I will keep your page open.']); return true; }
+      if (!flags.sinnoh_climax_resolved) { say(['Eight badges — counted, verified, well carried. And yet I cannot open the bracket while the sky over Mt. Coronet is still torn, trainer. Finish the region\'s gods first. The Conference will be here; it has waited through worse than a titan or two. Well. Comparable.']); return true; }
+      if (!flags.sinnoh_conference_registered) {
+        say(['Eight badges, a mended sky, and a name the whole region has been carrying since the mountain. Let me write you into the Lily of the Valley Conference properly... There. Registered.', 'The bracket: one preliminary, here in this hall — then the quarter-final, which the draw has made personal: Paul, of Veilstone, who has been telling my clerks for a week that the bracket owes him this match. Then the semi-final. I will not describe the semi-final, trainer. Nobody in this hall describes him. Begin when you are ready: speak to me for the preliminary.'], () => {
+          flags.sinnoh_conference_registered = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Registered for the Lily of the Valley Conference!');
+        });
+        return true;
+      }
+      if (!flags.beat_conference_s_p1) {
+        say(['The preliminary, trainer. Tamsin, of the sea roads — a clean battler with a cleaner record, and Garchomp in the back like a held chord. The floor is yours when you call it.'], () => {
+          g.ui.showMenu('Begin the preliminary?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startSinnohBattle('conference_s_p1', null); });
+        });
+        return true;
+      }
+      if (!flags.paul_conference_done) { say(['The preliminary is behind you, and the quarter-final has a name on it that you know better than my clerks do. Paul is on the floor, trainer. Settle it the way brackets settle things: completely.']); return true; }
+      if (!flags.tobias_darkrai_felled) { say(['Paul is settled — the clerks are still writing that one up. The semi-final is on the floor, trainer, and the hall has gone the particular quiet it goes for him. Tobias. And his first question.']); return true; }
+      say(['The Conference is decided, and decided honestly. The book has it. So does everyone who was here.']);
+      return true;
+    }
+
+    if (kind === 'paul_conference') {
+      // The settlement: must-win-with-rechallenge (the shipped
+      // league idiom — a loss is a defeat, the flag stays unset,
+      // and Paul will be standing here when you come back). The
+      // rivalry resolves with the player's win, as canon has it;
+      // the engine never hard-locks.
+      if (flags.sinnoh_complete) { say(['The book is closed, {player}, and the last page of the ledger is the one I would not change. Semi-finals and semi-legends — go home a while. Even ledgers rest.']); return true; }
+      if (flags.paul_conference_done) { say(['Settled, {player}. In ink. Now go and find out what is standing past me — I have seen his Darkrai work from the tunnel, and my arithmetic has opinions it is keeping to itself for once.']); return true; }
+      if (!flags.beat_conference_s_p1) { say(['The bracket does not bend, {player} — not even for us. Tamsin first. Then you may have the match this whole region has been a draft of.']); return true; }
+      const t0 = TRAINERS.paul_conference;
+      say([t0.intro[0], t0.intro[1]], () => {
+        g.ui.showMenu('Face Paul — the Conference quarter-final?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startSinnohBattle('paul_conference', (won) => {
+            if (!won) return;
+            flags.paul_conference_done = true;
+            flags.paul_conference_won = true;
+            say(t0.lose, null, 'PAUL');
+          });
+        });
+      }, 'PAUL');
+      return true;
+    }
+
+    if (kind === 'tobias') {
+      // THE TOBIAS MECHANISM (the coordinator's S5b ruling, line
+      // by line): Act 1 is a REAL battle on the league rechallenge
+      // idiom (startSinnohBattle — not friendly, not faced): Darkrai
+      // ALONE at 390, authored beatable in-band. A win sets
+      // tobias_darkrai_felled; a full wipe before that is a defeat
+      // and a rematch — nothing concludes, nothing is set. Act 2
+      // (only with the felling standing) is Latios ALONE, fought
+      // FRIENDLY on the FACED predicate (Harrison/Brandon): win or
+      // lose, the match concludes — both branch texts real, the
+      // canon loss carrying the honour — and only then does the
+      // conference conclude: sinnoh_complete is set HERE and the
+      // machine fires (checkArcCompletion — the registry's card,
+      // regionsDone and directive are the machine's own writes).
+      // No hand-rolled ending; S7 owns the finale variant.
+      if (flags.sinnoh_complete) { say(['The book has it now, trainer: the Darkrai that fell, and the match that followed. Trainers will sail to this island for years to argue about that semi-final, and every one of them will get the first line right: you were the one who stood there. Travel well. The road past a Conference is the only undefeated thing left.']); return true; }
+      if (!flags.paul_conference_done) { say(['Tobias. I have watched every match in this hall, including yours — your quarter-final is still ahead of you, and I do not stand in front of unfinished brackets. Settle Paul first, trainer. Then come and ask me the question everyone else has failed.']); return true; }
+      if (!flags.tobias_darkrai_felled) {
+        const t0 = TRAINERS.tobias_darkrai;
+        say([t0.intro[0], t0.intro[1]], () => {
+          g.ui.showMenu('Face Tobias — Darkrai?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => {
+            if (v !== 'yes') return;
+            this.startSinnohBattle('tobias_darkrai', (won) => {
+              if (!won) return;
+              flags.tobias_darkrai_felled = true;
+              say(['...Down. It is DOWN. Do you understand what this hall just saw, trainer? No one — no one — has done that in this entire Conference.', 'There is a second question on my team, and it has been patient all week. When you are ready — Latios. Finish the match. If the match can be finished.'], null, 'TOBIAS');
+            });
+          });
+        }, 'TOBIAS');
+        return true;
+      }
+      if (!flags.tobias_faced) {
+        const t0 = TRAINERS.tobias_latios;
+        say([t0.intro[0]], () => {
+          g.ui.showMenu('Finish the match — face Latios?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => {
+            if (v !== 'yes') return;
+            const t = bondTrainerVariant(g.state, t0);
+            g.scenes.push(new BattleScene({
+              kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g), friendly: true,
+              onEnd: (won, fled) => {
+                if (fled) return;
+                recordBattleBond(g.state, t.id, won, fled);
+                flags.tobias_faced = true;
+                if (won) flags.tobias_won = true; else flags.tobias_lost = true;
+                const lines = won ? [
+                  'Finished. Utterly, honestly finished — by the only trainer who ever got this far into my team, and went the rest of the way on merit. The hall is on its feet, trainer, and so — observe the record — am I.',
+                  'They will write that the darkest trainer of the Conference fell in the semi-final. Let them. What the book cannot hold is the order of it: Darkrai first, by your hand, and then this. History will remember the attempt, they say. It will remember considerably more than that.',
+                ] : [
+                  '...And there the match ends — Latios, untouched by everything but the one exchange that mattered, and the judges\' card turning the way every card in this hall has turned all week. The semi-final is his. The loss stands. That is sport, and it is final.',
+                  'But look at the hall, trainer. LOOK at it. They are not standing for the result — they are standing for the first line of the story, the one no other trainer in this Conference could write: DARKRAI FELL. To you. The only victory anyone took from me here — and you took it in front of everyone. The Conference ends, and that is what it ends WITH. Honours, trainer. Full honours.',
+                ];
+                say(lines, () => {
+                  flags.sinnoh_complete = true;
+                  g.audio.playSfx('badge');
+                  say(['Lily of the Valley Conference — the run ends in honours, and Sinnoh ends with it: eight badges, a god unchained and answered, two rivals settled, and the only victory anyone took from the conference\'s darkest trainer. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+                }, 'TOBIAS');
+              },
+            }));
+          });
+        }, 'TOBIAS');
+        return true;
+      }
+      say(['The match is in the book, trainer. Both questions, asked and answered.']);
+      return true;
+    }
+
+    // ---- the leaders (S5a's four + S5b's four) ----
     const LEADERS = {
       roark: { badge: 'coalbadge', post: 'The road north runs through the mines\' shadow to Jubilife, and west past Floaroma the wind has stopped answering its keeper, they say. Mind the turbines, Coal Badge holder — and mind who else minds them.' },
       gardenia: { badge: 'forestbadge', post: 'The tower with the meteor on it, Forest Badge holder — its lobby is quieter than my forest and twice as watchful. Whatever Team Galactic counts in there, count yourself in carefully.' },
       fantina: { badge: 'relicbadge', post: 'East now, Relic Badge holder: Solaceon\'s ruins keep an old remedy for the fog, and Veilstone keeps a gym that apologizes to no one. And the hall, darling — do come back to the hall. The stage remembers its friends.' },
       maylene: { badge: 'cobblebadge', post: 'Four badges. The lakes are next on every road out of my city, Cobble Badge holder — Valor south, Acuity far north, and Verity behind you, already watching. Whatever is counting that water, it has started. Keep your team close and your eyes open.' },
+      wake: { badge: 'fenbadge', post: 'FIVE BADGES, and the main event rolls on! The lakes, Fen Badge holder — Valor is an hour\'s walk and something has gone wrong on its water, I can smell it over the marsh. Whatever is counting this region\'s lakes, it has started spending. Go and be loud about it.' },
+      byron: { badge: 'minebadge', post: 'Six badges. My son started you in Oreburgh and I have measured you at the face — the family verdict is in, Mine Badge holder, and it is respect. The sailor by the pier has a favour he asks only of trainers he believes in, they say. And the north road is waiting: snow, and my counterpart Candice, who is tougher than her welcome. Everything up there is.' },
+      candice: { badge: 'iciclebadge', post: 'Seven badges, Icicle Badge holder — full marks. The climb walls on Route 217 will take the old HM\'s measure now, and Sunyshore\'s lights are the last stop before the island. And whatever turned beneath my lake\'s ice — it is still turning. The mountain, trainer. Everything in this region points at the mountain now.' },
+      volkner: { badge: 'beaconbadge', post: 'Eight badges, Beacon Badge holder, and a leader awake for the first time in a season. The Conference at Lily of the Valley is lit, and the bracket has both your old scores in it — I checked, out of professional envy. Go and settle them at full voltage. I will be in the stands, conducting nothing at all. A holiday.' },
     };
     const L = LEADERS[kind];
     if (!L) return false;

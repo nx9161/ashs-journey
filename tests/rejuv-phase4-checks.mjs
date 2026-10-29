@@ -205,9 +205,13 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
     meadowcord: STALES.tale_sinnoh_eterna.reward.keepsake === 'meadowcord',
     ribbonclasp: STALES.tale_sinnoh_hearthome.reward.keepsake === 'ribbonclasp',
     ruinbell: STALES.tale_sinnoh_solaceon.reward.keepsake === 'ruinbell',
+    fencharm: STALES.tale_sinnoh_pastoria.reward.keepsake === 'fencharm',
+    shrinebell: STALES.tale_sinnoh_celestic.reward.keepsake === 'shrinebell',
+    frostpetal: STALES.tale_sinnoh_snowpoint.reward.keepsake === 'frostpetal',
+    beaconcoil: STALES.tale_sinnoh_sunnyshore.reward.keepsake === 'beaconcoil',
   };
-  ok('A18 all 18 keepsakes obtainable end-to-end: 4 hidden + shop + HoF gift + 6 Kanto tale rewards + 6 Sinnoh tale rewards (Arc 4 Stage S5a — supersedes the 12-piece count)',
-    Object.keys(KEEPSAKES).length === 18 && Object.entries(sources).every(([k, v]) => v === true && !!KEEPSAKES[k]),
+  ok('A18 all 22 keepsakes obtainable end-to-end: 4 hidden + shop + HoF gift + 6 Kanto tale rewards + 10 Sinnoh tale rewards (Arc 4 Stage S5b — supersedes the S5a 18-piece count)',
+    Object.keys(KEEPSAKES).length === 22 && Object.entries(sources).every(([k, v]) => v === true && !!KEEPSAKES[k]),
     JSON.stringify(sources));
   ok('A19 the six ex-stub pieces are NOT hidden items anywhere in the merged world anymore',
     Object.values(ALL_MAPS).every((m) => !(m.hidden || []).some((h) =>

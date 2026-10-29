@@ -147168,6 +147168,9 @@ const ITEMS = {
   coin: { id: 'coin', name: 'Game Coin', pocket: 'key', desc: 'Game Corner currency. Win at the slots; spend at the prize corner.' },
   itemfinder: { id: 'itemfinder', name: 'Itemfinder', pocket: 'key', desc: 'Beeps near hidden items when used (SELECT near a spot).' },
   townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Kanto at a glance. Gary\'s sister would approve.' },
+  // Arc 4 Stage S5b: the Lunar Wing — carried away from Fullmoon
+  // Island in the Darkrai beat; S6's Newmoon arc reads it.
+  lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Pewter. Lets you use FLASH outside battle; Attack rises.' },
@@ -147305,6 +147308,15 @@ const KEEPSAKES = {
   meadowcord: { id: 'meadowcord', name: 'Meadow Cord', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
   ruinbell: { id: 'ruinbell', name: 'Ruin Bell', kind: 'typeWard', moveType: 'psychic', factor: 0.8, effect: 'Takes x0.8 damage from Psychic moves.' },
   ribbonclasp: { id: 'ribbonclasp', name: 'Ribbon Clasp', kind: 'statusChance', moveType: 'normal', status: 'confusion', bonus: 10, effect: 'Normal moves gain +10% confusion chance.' },
+  // Arc 4 Stage S5b: Sinnoh's second-half share (4 — the arc total
+  // lands at 10). Existing resolved kinds ONLY, same law as S5a.
+  // Paid in-world by this half's Town Tales; three double as gym-ace
+  // signatures (Wake's Floatzel, Candice's Abomasnow, Volkner's
+  // Electivire).
+  fencharm: { id: 'fencharm', name: 'Fen Charm', kind: 'lowHpDamage', moveType: 'water', factor: 1.15, hpFrac: 0.5, effect: 'Water moves deal x1.15 while at 50% HP or less.' },
+  shrinebell: { id: 'shrinebell', name: 'Shrine Bell', kind: 'matchupDamage', moveType: 'dragon', vsType: 'dragon', factor: 1.2, effect: 'Dragon moves deal x1.2 vs Dragon-types.' },
+  frostpetal: { id: 'frostpetal', name: 'Frost Petal', kind: 'typeWard', moveType: 'fire', factor: 0.8, effect: 'Takes x0.8 damage from Fire moves.' },
+  beaconcoil: { id: 'beaconcoil', name: 'Beacon Coil', kind: 'fasterFoeDamage', moveType: 'electric', factor: 1.15, effect: 'Electric moves deal x1.15 vs faster foes.' },
 };
 // The bag/mart surface of the same pieces (ITEMS is the bag's table).
 // price exists ONLY on the Second-Wind Ribbon (its Celadon shop source);
@@ -186154,6 +186166,23 @@ const SINNOH_QUESTS = [
   { id: 'q_sinnoh_defog', text: 'Solaceon Ruins — claim the mist-clearing HM', hint: 'East of Hearthome, the fog roads begin. Deep in the Solaceon Ruins sleeps the old HM the League entrusted to the stones: Defog. The chamber keeps it still.', flag: 'defog_received' },
   { id: 'q_sinnoh_maylene', text: 'Veilstone Gym — challenge Maylene for the Cobble Badge', hint: 'Veilstone: department stores, meteor craters, and a gym leader who trains before dawn and apologizes to no one. Maylene fights bare-knuckle honest.', flag: 'badge_cobble' },
   { id: 'q_sinnoh_paul2', text: "Veilstone — Paul's home turf: settle the measure again", hint: 'Paul is from Veilstone. Here, the ledger he keeps on you gets audited — by him, at full strength, in front of his own streets. Bring everything the first four badges taught you.', flag: 'paul_veilstone_done' },
+  // ---- Stage S5b: the second half (appended the way H4b appended) ----
+  { id: 'q_sinnoh_wake', text: 'Pastoria Gym — challenge Crasher Wake for the Fen Badge', hint: 'South through the marsh roads to Pastoria. Wake is a showman with a wrestler\'s heart and a Floatzel that hits like weather.', flag: 'badge_fen' },
+  { id: 'q_sinnoh_valor', text: 'Lake Valor — what the explosion left', hint: 'Something has happened at Lake Valor — smoke on the water, and the lake sitting wrong in its banks. Go and see it with your own eyes.', flag: 'valor_glimpse' },
+  { id: 'q_sinnoh_hq', text: 'Veilstone — raid the Galactic HQ', hint: 'Saturn\'s door has kept you out long enough. Whatever Team Galactic counted in Eterna and at the Windworks is counted HERE. Go through the door.', flag: 'galactic_hq_done' },
+  { id: 'q_sinnoh_byron', text: 'Canalave Gym — challenge Byron for the Mine Badge', hint: 'West across the water to Canalave, the port of iron. Byron digs deeper than his son and hits harder than the mountain — a steel gym run like a mine face.', flag: 'badge_mine' },
+  { id: 'q_sinnoh_darkrai', text: 'Canalave — the sailor\'s son who cannot wake', hint: 'A sailor in Canalave has a boy who sleeps and sleeps, dreaming of a dark shape over the bed. Sailors say the cure grows where the moon is always full.', flag: 'darkrai_beat_done' },
+  { id: 'q_sinnoh_candice', text: 'Snowpoint Gym — challenge Candice for the Icicle Badge', hint: 'Far north, past the snow routes, Snowpoint keeps the coldest gym in Sinnoh. Candice teaches there — bright, precise, unbothered by the temperature.', flag: 'badge_icicle' },
+  { id: 'q_sinnoh_acuity', text: 'Lake Acuity — Paul, at full strength', hint: 'Paul is waiting at Lake Acuity: a full battle, six against six, on the frozen shore. Whatever it decides, it decides something real.', flag: 'paul_acuity_done' },
+  { id: 'q_sinnoh_rockclimb', text: 'Route 217 — the HM in the snow', hint: 'Somewhere on the white road, a traveller lost a League-sealed disc in the drifts: Rock Climb. Look where the drifts pile deepest.', flag: 'rockclimb_received' },
+  { id: 'q_sinnoh_volkner', text: 'Sunyshore Gym — challenge Volkner for the Beacon Badge', hint: 'The last badge, in the city of sun and panels. Volkner is Sinnoh\'s strongest leader and its most bored — give him a battle worth the lights.', flag: 'badge_beacon' },
+  { id: 'q_sinnoh_festival', text: "Lake Valor — Dawn's Grand Festival", hint: 'The Grand Festival is staged on Lake Valor\'s shore — the biggest stage a coordinator can stand on. Be there when Dawn\'s road arrives.', flag: 'dawn_grand_festival_done' },
+  { id: 'q_sinnoh_coronet', text: 'Mt. Coronet — climb to the summit', hint: 'Galactic is moving on the mountain, all of it at once, toward the pillars at the top of the world. Do not let Cyrus arrive first.', flag: 'coronet_climb_done' },
+  { id: 'q_sinnoh_spear', text: 'Spear Pillar — the chained gods', hint: 'At the summit, the pillars wait where the world was first spoken to. Cyrus intends to speak back — with Dialga and Palkia in red chains. End it there.', flag: 'spear_pillar_done' },
+  { id: 'q_sinnoh_distortion', text: 'The Distortion World — answer the third god', hint: 'The sky tore, and the tear is a door. Beyond it: a world poured wrong, and the god who was banished to it watching you climb toward its platform. Go and finish what the chains began.', flag: 'sinnoh_climax_resolved' },
+  { id: 'q_sinnoh_conference', text: 'Register for the Lily of the Valley Conference', hint: 'Eight badges and a mended sky open the league hall on the island north-east. The registrar keeps the bracket; old scores wait inside it.', flag: 'sinnoh_conference_registered' },
+  { id: 'q_sinnoh_paul_final', text: 'The Conference quarter-final — settle it with Paul', hint: 'The bracket has put Paul in front of you with everything on the table. Settle the rivalry at full strength, in front of everyone.', flag: 'paul_conference_done' },
+  { id: 'q_sinnoh_tobias', flag: 'sinnoh_complete', text: 'The Conference semi-final — the darkest trainer', hint: 'Past Paul stands a trainer no one has beaten — a man whose Darkrai has ended every run it has faced. History is watching this one. So is everyone you have ever beaten. Face him.' },
 ];
 
 const SINNOH_TRAINERS = {
@@ -186299,6 +186328,211 @@ const SINNOH_TRAINERS = {
     ],
     reward: 2400,
   },
+
+  // ================= Stage S5b: the second half =================
+  // ---- the four remaining leaders (badgeSet 'sinnoh': generic) ----
+  wake: {
+    id: 'wake', name: 'CRASHER WAKE', title: 'Pastoria Gym Leader', ai: 'smart', badgeSet: 'sinnoh',
+    intro: ['CRASHER WAKE! That is the name, and this is the ring — my gym, my marsh, my water! I have heard about you, champion of everywhere. Pastoria does not do quiet respect. We do VOLUME.', 'My Floatzel has been bouncing off the walls waiting for a real tide to swim against. Be a tide, challenger!'],
+    lose: ['SPLASHED OUT! Beaten in my own ring, in my own water, and I LOVE IT! That is a main event!', 'The Fen Badge! Take it with both hands — it is heavy with marsh water and main events. The lakes, though... keep an eye on the lakes, champion. Something has been counting them, and it does not applaud.'],
+    team: [
+      { species: 'gyarados', level: 350 },
+      { species: 'quagsire', level: 352 },
+      { species: 'floatzel', level: 355, keepsake: 'fencharm' },
+    ],
+    reward: 3400, badge: 'fenbadge',
+  },
+  byron: {
+    id: 'byron', name: 'BYRON', title: 'Canalave Gym Leader', ai: 'smart', badgeSet: 'sinnoh',
+    intro: ['I am Byron. I dig, I build, and I do not move for weather, titles, or famous trainers. My son holds the first gym in this region; I hold the standard he is measured against.', 'Steel does not argue, challenger. It simply does not break. Come and try to break it.'],
+    lose: ['...Not broken. BENT — and I know good work when it bends mine. Hm. Roark will hear about this, and so will the mountain.', 'The Mine Badge. Earned at the face, the hard way. My wife says I only respect what costs effort. She is right, and it does.'],
+    team: [
+      { species: 'bronzong', level: 358 },
+      { species: 'steelix', level: 360 },
+      { species: 'bastiodon', level: 363, keepsake: 'ironacorn' },
+    ],
+    reward: 3800, badge: 'minebadge',
+  },
+  candice: {
+    id: 'candice', name: 'CANDICE', title: 'Snowpoint Gym Leader', ai: 'smart', badgeSet: 'sinnoh',
+    intro: ['Hi! Candice — Snowpoint Gym, coldest room in Sinnoh, warmest welcome. I teach at the school here, and my first lesson is always the same: focus beats temperature.', 'Everyone thinks ice is slow. Ice is PATIENT. There is a difference, and my team is about to mark your work on it.'],
+    lose: ['Marked — and full marks, too. You kept your focus at temperatures that scatter most challengers. That is rarer than any badge I give.', 'The Icicle Badge, then. The road south has walls the snow built — the old HM for climbing them sleeps somewhere on Route 217, they say. And trainer? Whatever is happening on my lake — I have felt it through the ice. Be careful up there.'],
+    team: [
+      { species: 'sneasel', level: 368 },
+      { species: 'medicham', level: 370 },
+      { species: 'froslass', level: 372 },
+      { species: 'abomasnow', level: 374, keepsake: 'frostpetal' },
+    ],
+    reward: 4200, badge: 'iciclebadge',
+  },
+  volkner: {
+    id: 'volkner', name: 'VOLKNER', title: 'Sunyshore Gym Leader', ai: 'smart', badgeSet: 'sinnoh',
+    intro: ['Volkner. You will forgive the yawn — this gym runs on sunlight and I have been... under-challenged. They say you calmed a sky on your way here. Good. Boredom is the only weather I cannot stand.', 'They call me the strongest leader in Sinnoh. It has been a while since the title cost me anything. Make it cost.'],
+    lose: ['...There it is. There is the voltage I have been missing. Do you know how long it has been since this room surprised me? Neither do I. I stopped counting out of self-defense.', 'The Beacon Badge — the eighth. The Conference is lit at Lily of the Valley, trainer, and for the first time in a long while, I envy the people who will watch you there. Go and be worth the lights.'],
+    team: [
+      { species: 'raichu', level: 380 },
+      { species: 'ambipom', level: 382 },
+      { species: 'luxray', level: 384 },
+      { species: 'electivire', level: 386, keepsake: 'beaconcoil' },
+    ],
+    reward: 4600, badge: 'beaconbadge',
+  },
+
+  // ---- gym rosters, second half (two per gym, rising) ----
+  wake_fisher1: {
+    id: 'wake_fisher1', name: 'FISHER TAMSIN', title: 'Pastoria Gym Trainer', ai: 'smart',
+    intro: ['Wake warms the crowd up with us marsh hands. The water in here has opinions, trainer. So do the fish.'],
+    lose: ['Opinions overruled. The big ring is his, at the back — mind the entrance. He likes an entrance.'],
+    team: [{ species: 'tentacruel', level: 346 }, { species: 'pelipper', level: 348 }], reward: 900,
+  },
+  wake_fisher2: {
+    id: 'wake_fisher2', name: 'FISHER BOGUE', title: 'Pastoria Gym Trainer', ai: 'smart',
+    intro: ['Thirty years I have fished the Great Marsh. Everything I know about patience is in this battle. Everything.'],
+    lose: ['Patience, beaten by its betters. Wake is waiting, and Wake does not do patience at all.'],
+    team: [{ species: 'whiscash', level: 347 }, { species: 'gastrodon', level: 349 }], reward: 950,
+  },
+  byron_miner1: {
+    id: 'byron_miner1', name: 'FOREMAN HOLLIS', title: 'Canalave Gym Trainer', ai: 'smart',
+    intro: ['Byron\'s rule: a challenger gets inspected like ore. I am the inspection. Nothing personal — everything structural.'],
+    lose: ['Structurally sound. Annoyingly sound. The face is his, at the back. Mind Bastiodon — it has a foreman\'s temperament.'],
+    team: [{ species: 'magneton', level: 354 }, { species: 'magnezone', level: 356 }], reward: 1000,
+  },
+  byron_miner2: {
+    id: 'byron_miner2', name: 'FOREMAN ILD', title: 'Canalave Gym Trainer', ai: 'smart',
+    intro: ['I have poured steel in this town since before the gym had a roof. You are not harder than the work. Nobody is.'],
+    lose: ['...Harder than the work. Noted, and filed where Byron will see it. Go on, then. He respects filings.'],
+    team: [{ species: 'bronzong', level: 355 }, { species: 'steelix', level: 357 }], reward: 1050,
+  },
+  candice_skier1: {
+    id: 'candice_skier1', name: 'SKIER WRENNA', title: 'Snowpoint Gym Trainer', ai: 'smart',
+    intro: ['Miss Candice lets us set the slope for challengers. I set it steep. Hold your line, trainer.'],
+    lose: ['Line held — yours. She is at the top of the slope, grading the whole mountain. Go and be graded.'],
+    team: [{ species: 'snorunt', level: 364 }, { species: 'spheal', level: 366 }], reward: 1100,
+  },
+  candice_skier2: {
+    id: 'candice_skier2', name: 'SKIER TOMAS', title: 'Snowpoint Gym Trainer', ai: 'smart',
+    intro: ['Everyone slides their first time in this gym. Everyone. The regulars have a pool on which tile gets you.'],
+    lose: ['No slide. The pool owes me money and you owe me nothing. Her Abomasnow has been watching through the frost. It approves slowly.'],
+    team: [{ species: 'sneasel', level: 367 }, { species: 'snover', level: 369 }], reward: 1150,
+  },
+  volkner_tech1: {
+    id: 'volkner_tech1', name: 'TECHNICIAN SOLENNE', title: 'Sunyshore Gym Trainer', ai: 'smart',
+    intro: ['I keep this gym\'s panels bright and its leader awake. Challengers are my second job. You are both today.'],
+    lose: ['Bright work. He is at the back, and — was that a smile? That might have been a smile. Historic.'],
+    team: [{ species: 'jolteon', level: 376 }, { species: 'pachirisu', level: 378 }], reward: 1200,
+  },
+  volkner_tech2: {
+    id: 'volkner_tech2', name: 'TECHNICIAN VOSS', title: 'Sunyshore Gym Trainer', ai: 'smart',
+    intro: ['Volkner rebuilt this gym three times because the battles bored him. Do not be a fourth rebuild, trainer.'],
+    lose: ['No rebuild needed — that one will be in his report tonight, underlined. Go on. He has already stood up.'],
+    team: [{ species: 'luxio', level: 377 }, { species: 'electabuzz', level: 379 }], reward: 1250,
+  },
+
+  // ---- Team Galactic, second half ----
+  saturn_hq: {
+    id: 'saturn_hq', name: 'COMMANDER SATURN', title: 'Team Galactic Commander', ai: 'smart',
+    intro: ['So the door opens after all — inward, as promised. I am Saturn, and you are standing in the counting house of the new world, trainer.', 'Everything taken at the Windworks, in Eterna, at the lakes, is tallied in these rooms. You are not rescuing anything here. You are auditing a god\'s budget. Allow me to dispute the audit.'],
+    lose: ['Disputed... and overruled. Take the building, then. Take the ledgers. The count that matters left Veilstone before your boat ever docked — it is already walking up a mountain.', 'Cyrus does not need this house anymore. Neither, I suspect, do I. That is the first honest thing I have said all year.'],
+    team: [
+      { species: 'zubat', level: 352 },
+      { species: 'bronzong', level: 355 },
+      { species: 'toxicroak', level: 358 },
+    ],
+    reward: 3600,
+  },
+  cyrus_spear: {
+    id: 'cyrus_spear', name: 'CYRUS', title: 'Team Galactic Boss', ai: 'smart',
+    intro: ['You climbed well. It changes nothing. I am Cyrus, and I have spent a life removing the flaw from the world — the flaw is spirit: incomplete, striving, suffering spirit.', 'Dialga. Palkia. Time and space, held in the red chain, waiting for a voice without a flaw in it. Mine. Stand aside, or be edited out of the draft.'],
+    lose: ['Edited — no. INTERRUPTED. The chain holds, trainer. Whatever you have won here, the sky is about to overrule us both...'],
+    team: [
+      { species: 'honchkrow', level: 383 },
+      { species: 'crobat', level: 385 },
+      { species: 'gyarados', level: 386 },
+      { species: 'weavile', level: 388 },
+    ],
+    reward: 8000,
+  },
+  cyrus_final: {
+    id: 'cyrus_final', name: 'CYRUS', title: 'Team Galactic Boss', ai: 'smart',
+    intro: ['This world rejects my order, and the god of it rejects my chains. Very well. If a flawless world will not have me, trainer, I will take my answer out of the one flaw standing on this platform. You.'],
+    lose: ['No... no world, then. Not mine, not theirs. Leave me in this one, trainer. It is the only sentence that fits the crime of wanting.'],
+    team: [
+      { species: 'crobat', level: 388 },
+      { species: 'honchkrow', level: 389 },
+      { species: 'gyarados', level: 390 },
+      { species: 'weavile', level: 392 },
+    ],
+    reward: 9000,
+  },
+
+  // ---- PAUL: the midpoint and the settlement ----
+  paul_acuity: {
+    id: 'paul_acuity', name: 'PAUL', title: 'Trainer from Veilstone', ai: 'smart',
+    intro: ['Lake Acuity. You came. Good — the ledger has one page left in it, and I have been saving it for weather like this.', 'Six against six, {player}. No audits, no measures, no mercy columns. Everything I have raised since Veilstone, against everything you are. This is the battle the whole region has been a draft of.'],
+    lose: ['...There it is. The page is written, and it does not say what my arithmetic promised me it would say.', 'Again at the Conference, then — IF the bracket is honest. Bring this. Bring exactly this.'],
+    team: [
+      { species: 'gliscor', level: 378 },
+      { species: 'weavile', level: 379 },
+      { species: 'honchkrow', level: 380 },
+      { species: 'magmortar', level: 381 },
+      { species: 'torterra', level: 382 },
+      { species: 'electivire', level: 384, keepsake: 'starshard' },
+    ],
+    reward: 6000,
+  },
+  paul_conference: {
+    id: 'paul_conference', name: 'PAUL', title: 'Conference Quarter-Finalist', ai: 'smart',
+    intro: ['So the bracket is honest after all. Quarter-final, {player}. Everything the lab started, Acuity wrote in pencil — this is the ink.', 'I have rebuilt my team around one question since that lake: what does it take to beat you? Today we both find out what my answer is worth. Everything, trainer. I am holding nothing back, and neither are you. That is the whole rivalry, in one sentence.'],
+    lose: ['...Worth everything I spent on it, and it still was not the answer. Hm.', 'Do not — do not soften it. I lost to the better trainer, at full strength, with the whole of Sinnoh watching. It is the first result in my ledger I would not change a digit of. Whatever is waiting in the semi-final, {player} — it has never faced you. Remember that it is also true the other way. Go.'],
+    team: [
+      { species: 'gliscor', level: 392 },
+      { species: 'drapion', level: 393 },
+      { species: 'gastrodon', level: 394 },
+      { species: 'froslass', level: 395 },
+      { species: 'torterra', level: 396 },
+      { species: 'electivire', level: 398, keepsake: 'starshard' },
+    ],
+    reward: 10000,
+  },
+
+  // ---- the Conference bracket ----
+  conference_s_p1: {
+    id: 'conference_s_p1', name: 'TAMSIN', title: 'Conference Trainer', ai: 'smart',
+    intro: ['Preliminary round, and the draw hands me the trainer the mountain could not hold. Fine. I did not sail to this island to be a warm-up.'],
+    lose: ['Warm-up it is — a thorough one. Climb, trainer. Past me, the bracket stops being polite.'],
+    team: [
+      { species: 'staraptor', level: 388 },
+      { species: 'roserade', level: 389 },
+      { species: 'garchomp', level: 390 },
+    ],
+    reward: 5000,
+  },
+  // TOBIAS — staged in TWO acts (the mechanism is recorded at his
+  // handler in overworld-systems.mjs and in the register, line by
+  // line against the coordinator's ruling): Act 1 is his Darkrai
+  // ALONE, a real battle on the league rechallenge idiom — a full
+  // wipe before it falls is a rematch, never a conclusion; winning
+  // it sets tobias_darkrai_felled. Act 2 is his Latios ALONE, fought
+  // friendly on the FACED predicate (the Harrison/Brandon pattern):
+  // win or lose, the match — and the Conference — concludes.
+  tobias_darkrai: {
+    id: 'tobias_darkrai', name: 'TOBIAS', title: 'Conference Semi-Finalist', ai: 'smart',
+    intro: ['Tobias. You beat Paul — I watched from the tunnel, and I will not pretend it was anything less than it was.', 'Everyone asks about my team. There is, functionally, one question on it, and it is standing in front of you. No trainer in this Conference has taken Darkrai down. The bracket is waiting to see if the record survives you.'],
+    lose: ['...Down. It is DOWN. Do you understand what this hall just saw, trainer? No one — no one — has done that in this entire Conference.'],
+    team: [
+      { species: 'darkrai', level: 390 },
+    ],
+    reward: 8000,
+  },
+  tobias_latios: {
+    id: 'tobias_latios', name: 'TOBIAS', title: 'Conference Semi-Finalist', ai: 'smart',
+    intro: ['One question answered. There is a second on my team, and it has been patient all Conference. Latios, trainer. Finish the match — if the match can be finished.'],
+    lose: ['Finished. Utterly, honestly finished — by the only trainer who ever got this far into my team. The final is yours, Tobias says, and means it like a door opening.'],
+    team: [
+      { species: 'latios', level: 392 },
+    ],
+    reward: 8000,
+  },
 };
 
 const SINNOH_EVENTS = {
@@ -186353,6 +186587,116 @@ const SINNOH_EVENTS = {
     { flag: 'defog_received' },
     { say: ['Defog — the art of beating a white wall into weather. The Fen Badge, from Pastoria in the marsh country, is what licenses it on the fog roads; the ruins keep the knowledge itself.', 'Veilstone lies north-east, past the lost tower and the long grass. The fog will be waiting there to be argued with.'], who: '' },
     { toast: 'Claimed HM06 — Defog — from the Solaceon Ruins.' },
+  ],
+
+  // ================= Stage S5b events =================
+  // Lake Valor, after the Fen Badge: the explosion's aftermath. A
+  // glimpse of Azelf + Galactic pressure — the trio's CATCH arcs
+  // are S6's; this half only ever glimpses.
+  ev_sinnoh_valor: [
+    { say: ['Lake Valor is wrong the moment you see it: the water sits low and steaming in its banks, the shore reeds are flattened outward in a ring, and the air smells of hot stone. Something was done here — recently, and with machinery, not malice aforethought. Malice would have been quieter.', 'Half the lake is simply GONE — blown skyward hours ago, the wardens say, by men in grey who came in boats and left in aircraft. And in the churned shallows, for exactly one breath, something small and blue-gold rises out of the steam, looks at the ruin of its home — and is taken, gently, terribly efficiently, by hands that were waiting for it.'], who: '' },
+    { say: ['Azelf. The being of willpower, the wardens whisper, already carrying the word GALACTIC between their teeth like a stone. The aircraft are specks before the name finishes leaving their mouths.', 'Whatever is being counted at the lakes now has a body count of one lake and one god. The HQ in Veilstone holds the ledgers. It is time the door opened.'], who: '' },
+    { flag: 'valor_glimpse' },
+    { flag: 'azelf_glimpsed' },
+    { toast: 'Lake Valor was bombed — and Azelf was taken.' },
+  ],
+  // The Veilstone HQ raid: the S5a door opens (Fen-gated entry).
+  ev_sinnoh_hq_raid: [
+    { say: ['The Galactic HQ does not resist the way buildings resist. It resists the way paperwork resists — in triplicate, with locks. But the locks were rated for tourists, and you are not one anymore. Past the lobby, past the ledgers, the house\'s keeper is waiting exactly where he always stands: by the door that matters.'], who: '' },
+    { battle: 'saturn_hq' },
+    { flag: 'galactic_hq_done' },
+    { say: ['The building empties the way Eterna\'s did — rehearsed, silent, unhurried — but the ledgers stay, and the ledgers are a confession in columns: energy from the Windworks, history from Eterna, and three lakes, each with a name, a date, and a word in the margin. TAKEN. TAKEN. PENDING.', 'One name is on every page, in a hand the commanders all imitate without knowing it. CYRUS. And one destination, underlined past the paper\'s patience: THE PILLARS.'], who: '' },
+    { toast: 'The Galactic HQ is raided — the count points at Mt. Coronet.' },
+  ],
+  // Route 217: the Rock Climb grant (S4's HM_GRANTS hook), Platinum's
+  // placement — the lost HM in the snow, Icicle-gated entry.
+  ev_sinnoh_rockclimb: [
+    { say: ['The drifts on Route 217 pile deepest against the old route-marker, where the wind gives up carrying the snow any further. Something in the drift catches the flat northern light — a disc, League-sealed, half-buried where a traveller\'s pack must have split a season ago.', 'The inscription is the League\'s, and it is short: FOR THE WALLS THAT STAND IN THE ROAD.'], who: '' },
+    { giveHM: 'rockclimb' },
+    { flag: 'rockclimb_received' },
+    { say: ['Rock Climb — the art of treating a cliff as a staircase that has not admitted it yet. The Icicle Badge, from Snowpoint at the top of the world, is what licenses it on the climb walls; the snow keeps the knowledge itself.', 'Snowpoint lies east, across the lake country. The walls will be waiting to be argued with.'], who: '' },
+    { toast: 'Claimed HM07 — Rock Climb — from the Route 217 snow.' },
+  ],
+  // Lake Acuity, after the Icicle Badge: Uxie's glimpse under
+  // Galactic pressure (pressure and a shadow — S6 owns the catch).
+  ev_sinnoh_acuity_glimpse: [
+    { say: ['Lake Acuity is frozen hard enough to hold the sky, and the far shore is wrong: grey boats on the ice, grey figures measuring the lake like a room they intend to empty. Galactic has come for the north lake — slower here, and warier. The ice is old, and it is watching them.', 'Under the ice at the lake\'s heart, something small and gold turns in its sleep — one slow revolution, like a thought deciding whether to surface. It does not surface. The figures on the far shore pack their instruments with the care of men told, precisely, not to hurry a god.', 'Uxie. The being of knowledge. It knows they are there. It knows you are here. It is letting both facts ripen.'], who: '' },
+    { flag: 'uxie_glimpse' },
+    { toast: 'Something turned beneath Lake Acuity\'s ice...' },
+  ],
+  // Lake Verity revisited, all badges held: Mesprit under pressure —
+  // the last glimpse before the mountain (S6 owns the catch).
+  ev_sinnoh_verity_pressure: [
+    { say: ['Lake Verity again — and not as you left it. Grey hulls quarter the water in a slow grid, instruments trailing like fingers feeling for a pulse. Galactic has come back for the first lake last, and it is being thorough.', 'Then the water at the shore simply... changes its mind about being empty. Small. Crowned. Pink as a held breath let go — Mesprit rises a hand\'s breadth above the surface, looks at the boats, looks at you, and chooses, with ancient courtesy, to be elsewhere. The grid closes on a reflection.', 'The being of emotion, uncaught and unbothered, gone over the pines. Whatever Cyrus counts on taking from this lake, he will count without it — for now. The mountain is calling louder. Answer the mountain.'], who: '' },
+    { flag: 'mesprit_glimpse' },
+    { toast: 'Mesprit slipped the net at Lake Verity.' },
+  ],
+  // Floaroma, from the Cobble Badge on: the Gracidea beat (the Sky
+  // Warrior's flower) — a glimpse chain; S6 owns Shaymin's catch.
+  ev_sinnoh_gracidea: [
+    { say: ['Floaroma\'s meadow has done something the florists will talk about for a decade: overnight, in the wrong season, the Gracidea have opened — all of them, a whole field standing in pink-white bloom like the meadow is holding a celebration it forgot to announce.', 'The beekeepers say the flowers open like this only in gratitude, and only all at once. Gratitude for what, nobody can agree — until the bloom at the field\'s heart moves against the wind, and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm... and settles back down into the flowers, the way a guest settles into a house that is partly theirs.'], who: '' },
+    { say: ['Shaymin. The Gratitude Pokemon, in its own flower field, at its own celebration. It is not yours to disturb today, and it knows you know it. Some meetings are appointments. This one is a promise.'], who: '' },
+    { flag: 'gracidea_beat_done' },
+    { flag: 'shaymin_glimpsed' },
+    { flag: 'shaymin_unlocked' },
+    { toast: 'The Gracidea bloomed — and something small bloomed with them.' },
+  ],
+  // Celestic, all badges held: the Zoroark special — a one-scene
+  // illusion. (No species stands behind it in this region's dex;
+  // the scene is honest about that: an illusion, and nothing else.)
+  ev_sinnoh_zoroark: [
+    { say: ['Celestic\'s shrine street, at the blue hour — and the fog comes down off the mountain wrong. It does not roll. It STALKS. Out of it, soundless, enormous, a shape the old shrine murals would recognise: a great beast with a mane like storm cloud, standing in the middle of the street, looking at the shrine the way exiles look at home.', 'The street empties without a sound. The beast turns its head — and the eyes are wrong for a beast: they are grieving, and they are acting. For one held second the whole shape hangs together. Then the fog closes, the street is only a street, and there is nothing — nothing at all — where a legend was standing.'], who: '' },
+    { say: ['The shrine elder, when the street refills, is unbothered in the way of people who keep very old doors. "An illusion with a homesick heart," she says. "They walk the old towns some years, wearing the shapes of greater stories. Whatever it was looking for, trainer — it was not looking at us. We were just... in its light."'], who: '' },
+    { flag: 'zoroark_special_seen' },
+    { toast: 'An illusion walked Celestic\'s shrine street...' },
+  ],
+  // Fullmoon Island, once the sailor's plea is open: Cresselia's
+  // glimpse and the Lunar Wing (the Darkrai beat's middle act).
+  ev_sinnoh_fullmoon: [
+    { say: ['Fullmoon Island lives up to its billing the way shrines do: quietly, and completely. The moon stands full over the crescent pond at the island\'s heart whether the sky agrees or not, and the water holds its light the way held breath holds a note.', 'Then the pond\'s light stands up. Slow, crescent-winged, trailing ribbons of dawn-pink — Cresselia rises off her own reflection, regards you with the deep patience of a lighthouse, and understands the errand before you can shape it. She does not flee. She provides.'], who: '' },
+    { say: ['One feather, crescent-curved and shining, comes loose on the still air and settles into your hands like it was always addressed to you. The boy in Canalave has been dreaming of a dark shape standing over his bed. This — this is the shape that stands against it.'], who: '' },
+    { give: { items: { lunarwing: 1 } } },
+    { flag: 'lunar_wing_received' },
+    { flag: 'cresselia_glimpsed' },
+    { toast: 'Received the Lunar Wing from Cresselia\'s island.' },
+  ],
+  // Mt. Coronet north galleries, all badges held: the climb beat.
+  ev_sinnoh_coronet: [
+    { say: ['The north galleries of Mt. Coronet are the mountain\'s throat: cold, vertical, echoing with grey boots somewhere above. Galactic has committed everything — one whole organisation poured up a mountain toward a date with its boss.', 'What is left of their rearguard does not fight you. That is the frightening part. They stand aside at the gallery turns, like staff at a ceremony they are no longer sure they believe in, and let you walk past into the weather at the top of the world.', 'Above: the pillars. Below: all of Sinnoh, holding its breath. Cyrus is already up there. The sky has started, very slightly, to sound like a held chord.'], who: '' },
+    { flag: 'coronet_climb_done' },
+    { toast: 'The summit is close — Spear Pillar waits above.' },
+  ],
+  // SPEAR PILLAR: Cyrus summons Dialga AND Palkia chained (Platinum)
+  // — a FACED battle (battleAny: the sky overrules the result), then
+  // the tear, and the warp down into the Distortion World.
+  ev_sinnoh_spear_pillar: [
+    { say: ['Spear Pillar. The top of the world is a floor of old stone and older pillars, and the sky above it hangs in two colours at once — time on one side, space on the other — and between them, chained in red light that crawls like something alive: DIALGA. PALKIA. The gods of the first stories, held like horses at a post.', 'Cyrus stands between them with his arms raised, a conductor at the first bar of the only music he has ever wanted to hear: a world remade without spirit, with himself as its silent god. The red chain sings. The mountain holds its breath. Your footsteps are, somehow, the loudest sound in creation.'], who: '' },
+    { say: ['You climbed well. It changes nothing. I am Cyrus, and I have spent a life removing the flaw from the world — the flaw is spirit: incomplete, striving, suffering spirit.', 'Dialga. Palkia. Time and space, held in the red chain, waiting for a voice without a flaw in it. Mine. Stand aside, or be edited out of the draft.'], who: 'CYRUS' },
+    { battleAny: { trainer: 'cyrus_spear', winFlag: 'cyrus_spear_won', loseFlag: 'cyrus_spear_lost' } },
+    { say: ['Whatever the battle decided, the sky overrules it. The red chain reaches its note — and somewhere beneath the world, something banished before there were words for banishment hears its name in the chord, and answers.', 'The air over Spear Pillar tears. Not opens — TEARS, the way a page tears, and through the rip: a world poured wrong, waterfalls climbing, islands hanging like fruit, and a shadow with six legs and wings of smoke crossing the wound in the sky. GIRATINA. The third god. The one the first stories were too frightened to finish.'], who: '' },
+    { say: ['It takes Cyrus the way weather takes a flag — no malice, no mercy, just physics from an older universe — and the red chain, masterless, comes apart in light. Dialga and Palkia stand unchained for one held second, look at each other, at you, at the tear — and are gone, like candles deciding to be stars instead.', 'The tear stays open. It is, you understand with your whole spine, an invitation — and an accusation. The third god is waiting on the far side of its own wound. Go and answer it.'], who: '' },
+    { flag: 'spear_pillar_done' },
+    { toast: 'The sky tore over Spear Pillar — the Distortion World is open.' },
+    { warp: { map: 'distortion-entrance', x: 10, y: 14 } },
+  ],
+  // THE DISTORTION WORLD platform: Cyrus's end + the climax
+  // resolution. sinnoh_climax_resolved is THIS arc's
+  // climax_resolved-equivalent (the H4b idiom: the one flag the
+  // titan catch arcs key on — S6's Dialga/Palkia/Giratina arcs read
+  // it, and the per-titan unlock flags below are set in the same
+  // step block, never earlier).
+  ev_sinnoh_distortion_climax: [
+    { say: ['The platform at the Distortion World\'s heart is the stillest place in either universe: black glass over nothing, and on it, waiting with the patience of the banished, GIRATINA — vast, gold-crowned, watching you the way the deep watches a diver. It does not attack. It has had eternity to learn the difference between an invader and an answer.', 'And here is Cyrus, set down on the glass beside his ruined century — unharmed, unchained, face to face with a god his philosophy has no column for. It is not finished with him. Neither, it turns out, are you.'], who: '' },
+    { battleAny: { trainer: 'cyrus_final', winFlag: 'cyrus_final_won', loseFlag: 'cyrus_final_lost' } },
+    { say: ['It ends the way it was always going to end: not with the battle, but after it. Cyrus looks at the world he tried to unmake — its wrong waterfalls, its hanging islands, its total refusal to be improved — and something in the flawless voice finally, audibly, cracks.', '"Leave me in this world, trainer. It is the only sentence that fits the crime of wanting." He walks — not dragged, not chased, walking — out across the black glass toward the deep places, and the shadows close behind him. Team Galactic ends here: not defeated. Finished. A man who wanted a world without spirit, granted a world with nothing else in it.'], who: '' },
+    { say: ['Giratina settles — that is the only word — folding its smoke wings like a king concluding an audience. The tear in the sky begins to knit: not sealed, but STILLED, the way a wound stills when the bleeding stops. Below it, two unchained gods are settling back into the deep places of time and space, free, alive, and — in the way of gods who owe a trainer a debt — findable, one day, by the one who broke their chains.', 'The mountain breathes. The lakes calm. Sinnoh\'s sky is a sky again: local, arguable, kind. What is left is a bracket, an island, and two old scores. The Conference is lit, trainer. Go and finish the region properly.'], who: '' },
+    { flag: 'distortion_cleared' },
+    { flag: 'cyrus_end_done' },
+    { flag: 'sinnoh_climax_resolved' },
+    { flag: 'dialga_unlocked' },
+    { flag: 'palkia_unlocked' },
+    { flag: 'giratina_unlocked' },
+    { toast: 'Giratina settled. The chains are broken — the sky is mended.' },
   ],
 };
 
@@ -186417,6 +186761,31 @@ const SINNOH_TALES = {
     ['The meadow is late this year — the flowers are holding their breath, and a florist notices breath. My beds are fine. It is the WILD meadow that is slow.', 'Orin\'s bees read the meadow better than any instrument in Jubilife. Ask him what the bees are waiting for. If it is the wind-works\' trouble, I want to know before the wind does.'],
     ['The bees are waiting on the wind, love — the works went quiet for days and the whole valley\'s air forgot its directions. Bees navigate by a map written in moving air. It is redrawn now, and the meadow will open within the week. Tell Wren the spring was delayed, not cancelled. Bees are never wrong about spring. Only early, or honest.'],
     ['Delayed, not cancelled. I shall put that on the shop sign and charge the season for the wisdom.', 'Two Full Heals, from the shop\'s road-stock — Floaroma pays its messengers in remedies and flowers, and the flowers, as established, are late.']),
+  // ---- Stage S5b: the second half's tales ----
+  tale_sinnoh_pastoria: sinnohTale('tale_sinnoh_pastoria', 'The Charm in the Reeds', 'Pastoria City', 'MARSH GUIDE SOLENNE',
+    ['Ask Bog Kid Mire where the old fen charm was lost', 'Carry the word back to Solenne at the marsh gate'],
+    { keepsake: 'fencharm' }, 'Fen Charm',
+    ['Every marsh guide carries a fen charm — reed-woven, lake-blessed, older than the gym. Mine went into the reeds in the spring flood, and the marsh gives things back only to people it approves of.', 'Young Mire knows every reed bed in the Great Marsh and owes the water no explanations. Ask him where lost things surface. If the marsh approves of the asking, trainer, it approves of you.'],
+    ['Where do lost things surface? At the third reed bed past the sunken fence, when the water drops — everybody knows that except grown-ups. I found a charm there last week, woven one. I was keeping it for luck, but... the marsh said give it back. The marsh talks, you know. Mostly it says things like that.'],
+    ['The third reed bed, and the marsh returning what the flood took — that is the whole of Pastoria in one errand, trainer.', 'The Fen Charm is yours. The marsh has decided you are one of its errands now, which in Pastoria is citizenship. Wear it low, where the water runs.']),
+  tale_sinnoh_celestic: sinnohTale('tale_sinnoh_celestic', 'The Bell That Rings Downhill', 'Celestic Town', 'SHRINE ELDER UME',
+    ['Ask Historian Blythe what the shrine bell\'s inscription says', 'Return the reading to Elder Ume at the shrine'],
+    { keepsake: 'shrinebell' }, 'Shrine Bell',
+    ['Our shrine bell is older than the town, and its inscription is in the first writing — the kind that is half picture, half prayer. I have rung it for sixty years without once knowing what I was saying.', 'Blythe reads the old stones for the museum. Ask her what the bell has been saying, trainer. A woman should know her own longest sentence.'],
+    ['The bell? Oh, I have crawled over that inscription with a lamp, Elder-bound. It is not a prayer TO the gods of time and space. It is a prayer FOR them — that they be left alone, in the old phrase, "to keep their own counsel and their own sky." Whoever cast that bell knew exactly what men would one day try with chains. It is a warning shaped like a blessing.'],
+    ['A warning shaped like a blessing, rung by my hands for sixty years. Then the bell has been standing guard all along, and I its keeper without knowing. A good shape for a life to have taken.', 'Take the Shrine Bell — the small one, from the offering shelf. Ring it where the sky feels thin, trainer. Ring it kindly.']),
+  tale_sinnoh_snowpoint: sinnohTale('tale_sinnoh_snowpoint', 'The Petal in the Ice', 'Snowpoint City', 'TEMPLE ACOLYTE REN',
+    ['Ask Ice Fisher Solvi what she cut out of the lake ice', 'Bring the word back to Ren at the temple steps'],
+    { keepsake: 'frostpetal' }, 'Frost Petal',
+    ['The temple keeps a winter garden behind glass — flowers pressed in ice by the first acolytes, so the dark months remember colour. This winter the ice gave one back, and Solvi cut it out before the lake could change its mind.', 'Ask her what flower the lake has been keeping. The temple should know what it has been guarding.'],
+    ['What did I cut out? A petal, trainer — one perfect petal, pink-white, in ice older than the temple, older than the town. Not frozen-dead. Frozen HELD. My grandfather swore the lake keeps a garden of its own down there, from a summer before there were people to name it. Gracidea, he called the flowers. Said they bloom for gratitude. The lake was grateful about something, once, for a hundred years.'],
+    ['A Gracidea petal, held by the lake since before the town — then the temple\'s winter garden is a page torn from a much older book, and we are footnotes.', 'The Frost Petal goes with you — Solvi\'s word and the temple\'s blessing on it. It has waited in the ice a hundred years for a road, she says. Yours will do nicely.']),
+  tale_sinnoh_sunnyshore: sinnohTale('tale_sinnoh_sunnyshore', 'The Coil in the Lighthouse', 'Sunyshore City', 'LIGHTHOUSE KEEPER BLY',
+    ['Ask Panel Tech Juniper what the lighthouse\'s spare coil is humming', 'Carry the word back to Bly at the lighthouse door'],
+    { keepsake: 'beaconcoil' }, 'Beacon Coil',
+    ['Forty years I have kept this light, and last month the spare coil in the lamp room started humming — on a shelf, unconnected, in key with the beacon. A keeper notices a thing like that the way sailors notice weather.', 'Juniper maintains every panel in this city and half the gym besides. Ask her what my coil is humming ABOUT. Coils in Sunyshore have opinions, but they usually keep them electrical.'],
+    ['The coil? Oh, it is not broken — it is TUNED. Volkner rebuilt the beacon\'s array last spring and the spare picked up the new frequency like a song it already knew. It hums when the gym\'s voltage climbs, keeper. It hums loudest on battle days. Your coil is not haunted, Bly. It is a fan.'],
+    ['A fan. Forty years of keeping the light, and my lamp room has been cheering for the gym the whole season. Sunyshore, trainer. Even the hardware has a favourite.', 'The Beacon Coil is yours — take it before it starts humming at your battles too. If it does... let it. A little extra voltage never decided a match, but it has started a few legends.']),
 };
 
 const SINNOH_NPCS = [
@@ -186453,6 +186822,31 @@ const SINNOH_NPCS = [
   { map: 'gym-hearthome', name: 'ACE TRAINER MIRA', x: 11, y: 5, dir: 'left', art: 'acetrainer', skin: '#f0c8a0', shirt: '#3a3a6a', pants: '#2a2a3a', hair: '#4a2a3a', trainer: 'fantina_ace2', dialogue: ['And — scene. Hers is the stage at the back.'] },
   { map: 'gym-veilstone', name: 'BLACK BELT JON', x: 4, y: 5, dir: 'right', art: 'blackbelt', skin: '#e8b888', shirt: '#e8e8e8', pants: '#2a2a3a', hair: '#1a1a1a', trainer: 'maylene_belt1', dialogue: ['Tested, and passed. She is at the back. Yours cannot wait.'] },
   { map: 'gym-veilstone', name: 'BLACK BELT RUE', x: 11, y: 5, dir: 'left', art: 'blackbelt', skin: '#e8b888', shirt: '#e8e8e8', pants: '#2a2a3a', hair: '#1a1a1a', trainer: 'maylene_belt2', dialogue: ['Two years of mornings. Her Lucario has been listening. It always is.'] },
+  // ---- Stage S5b actors ----
+  // The second-half leaders, at their gyms' hearts ((7,2) idiom).
+  { map: 'gym-pastoria', name: 'CRASHER WAKE', x: 7, y: 2, dir: 'down', art: 'gym1', skin: '#e8b888', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#8a2a1a', sinnoh: 'wake', dialogue: ['CRASHER WAKE! The ring is ready when you are, challenger!'] },
+  { map: 'gym-canalave', name: 'BYRON', x: 7, y: 2, dir: 'down', art: 'gym2', skin: '#e8b888', shirt: '#5a5a6a', pants: '#2a2a3a', hair: '#3a3a3a', sinnoh: 'byron', dialogue: ['Steel does not argue, challenger. It simply does not break.'] },
+  { map: 'gym-snowpoint', name: 'CANDICE', x: 7, y: 2, dir: 'down', art: 'gym3', skin: '#f0c8a0', shirt: '#e8e8f0', pants: '#2a2a3a', hair: '#1a1a2a', sinnoh: 'candice', dialogue: ['Focus beats temperature, challenger. Show me yours.'] },
+  { map: 'gym-sunnyshore', name: 'VOLKNER', x: 7, y: 2, dir: 'down', art: 'gym4', skin: '#f0c8a0', shirt: '#e8c832', pants: '#2a2a3a', hair: '#d8b84a', sinnoh: 'volkner', dialogue: ['Make it cost, challenger.'] },
+  // Gym rosters, second half (base trainer path).
+  { map: 'gym-pastoria', name: 'FISHER TAMSIN', x: 4, y: 5, dir: 'right', art: 'fisher', skin: '#e8b888', shirt: '#3a7a4a', pants: '#4a3a2a', hair: '#3a2a1a', trainer: 'wake_fisher1', dialogue: ['Opinions overruled. The big ring is his, at the back.'] },
+  { map: 'gym-pastoria', name: 'FISHER BOGUE', x: 11, y: 5, dir: 'left', art: 'fisher', skin: '#e8b888', shirt: '#3a7a4a', pants: '#4a3a2a', hair: '#5a4a3a', trainer: 'wake_fisher2', dialogue: ['Wake is waiting, and Wake does not do patience at all.'] },
+  { map: 'gym-canalave', name: 'FOREMAN HOLLIS', x: 4, y: 5, dir: 'right', art: 'hiker', skin: '#e8b888', shirt: '#7a5a3a', pants: '#4a3a2a', hair: '#3a2a1a', trainer: 'byron_miner1', dialogue: ['Structurally sound. The face is his, at the back.'] },
+  { map: 'gym-canalave', name: 'FOREMAN ILD', x: 11, y: 5, dir: 'left', art: 'hiker', skin: '#e8b888', shirt: '#7a5a3a', pants: '#4a3a2a', hair: '#6a6a6a', trainer: 'byron_miner2', dialogue: ['Harder than the work. He respects filings. Go on.'] },
+  { map: 'gym-snowpoint', name: 'SKIER WRENNA', x: 4, y: 5, dir: 'right', art: 'lass', skin: '#f0c8a0', shirt: '#c83a7a', pants: '#2a2a3a', hair: '#8a2a1a', trainer: 'candice_skier1', dialogue: ['Line held — yours. She is at the top of the slope.'] },
+  { map: 'gym-snowpoint', name: 'SKIER TOMAS', x: 11, y: 5, dir: 'left', art: 'kid', skin: '#e8b888', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#2a1a0a', trainer: 'candice_skier2', dialogue: ['No slide. Her Abomasnow approves slowly.'] },
+  { map: 'gym-sunnyshore', name: 'TECHNICIAN SOLENNE', x: 4, y: 5, dir: 'right', art: 'lady', skin: '#f0c8a0', shirt: '#e8c832', pants: '#2a2a3a', hair: '#3a5a8a', trainer: 'volkner_tech1', dialogue: ['Bright work. He is at the back. Was that a smile?'] },
+  { map: 'gym-sunnyshore', name: 'TECHNICIAN VOSS', x: 11, y: 5, dir: 'left', art: 'gent', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#4a3a2a', trainer: 'volkner_tech2', dialogue: ['No rebuild needed. He has already stood up.'] },
+  // Paul at Lake Acuity — the midpoint full battle.
+  { map: 'lake-acuity', name: 'PAUL', x: 20, y: 8, dir: 'left', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_acuity', dialogue: ['Six against six, {player}. This is the battle the whole region has been a draft of.'] },
+  // Dawn at Lake Valor — the Grand Festival beat.
+  { map: 'lake-valor', name: 'DAWN', x: 17, y: 8, dir: 'down', art: 'lass', skin: '#f0c8a0', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#3a5a8a', sinnoh: 'dawn_festival', dialogue: ['The Grand Festival, {player}. My whole road, in one stage. Breathe with me.'] },
+  // The Canalave sailor — the Darkrai beat's shore end.
+  { map: 'canalave', name: 'SAILOR ELDRIC', x: 18, y: 8, dir: 'down', art: 'sailor', skin: '#e8b888', shirt: '#3a5a8a', pants: '#2a2a3a', hair: '#5a3a2a', sinnoh: 'sailor_eldric', dialogue: ['Mind the gulls, trainer. Everything in this port is watching something.'] },
+  // The Conference floor (league-lobby): registrar, Paul, Tobias.
+  { map: 'league-lobby', name: 'LEAGUE REGISTRAR', x: 8, y: 5, dir: 'down', art: 'scientist', skin: '#e8b888', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#4a3a2a', sinnoh: 'sinnoh_conference', dialogue: ['Conference registration, trainer. The bracket is honest here. It only ever is.'] },
+  { map: 'league-lobby', name: 'PAUL', x: 5, y: 7, dir: 'right', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_conference', dialogue: ['Quarter-final, {player}. This is the ink.'] },
+  { map: 'league-lobby', name: 'TOBIAS', x: 11, y: 7, dir: 'left', art: 'acetrainer', skin: '#d8a878', shirt: '#2a2a3a', pants: '#2a2a3a', hair: '#1a1a1a', sinnoh: 'tobias', dialogue: ['Tobias. The bracket is waiting to see if the record survives you.'] },
 ];
 
 // Tale actors among the maps9 townsfolk (giver/stage roles keyed by
@@ -186493,6 +186887,23 @@ const SINNOH_NPC_PATCHES = {
   veilstone: {
     'DEPT CLERK VEE': { tale: 'tale_sinnoh_veilstone', role: 'giver' },
     'METEOR WATCHER SOL': { tale: 'tale_sinnoh_veilstone', role: 'stage' },
+  },
+  // ---- Stage S5b tale actors ----
+  pastoria: {
+    'MARSH GUIDE SOLENNE': { tale: 'tale_sinnoh_pastoria', role: 'giver' },
+    'BOG KID MIRE': { tale: 'tale_sinnoh_pastoria', role: 'stage' },
+  },
+  celestic: {
+    'SHRINE ELDER UME': { tale: 'tale_sinnoh_celestic', role: 'giver' },
+    'HISTORIAN BLYTHE': { tale: 'tale_sinnoh_celestic', role: 'stage' },
+  },
+  snowpoint: {
+    'TEMPLE ACOLYTE REN': { tale: 'tale_sinnoh_snowpoint', role: 'giver' },
+    'ICE FISHER SOLVI': { tale: 'tale_sinnoh_snowpoint', role: 'stage' },
+  },
+  sunnyshore: {
+    'LIGHTHOUSE KEEPER BLY': { tale: 'tale_sinnoh_sunnyshore', role: 'giver' },
+    'PANEL TECH JUNIPER': { tale: 'tale_sinnoh_sunnyshore', role: 'stage' },
   },
 };
 
@@ -187485,6 +187896,28 @@ const MAP_GROUND = {
   'galactic-eterna': 'volt',
   'lake-verity': 'tide',
   'solaceon-ruins': 'grave',
+  // Arc 4 Stage S5b (the same 15 Grounds — no new Grounds): Wake's
+  // marsh gym rides the Tide, Byron's steel gym the Rubble of the
+  // mine, Candice's the Frost, Volkner's the Volt. Landmarks: the
+  // HQ hums Volt like Eterna's tower, Lake Valor keeps the Tide,
+  // Lake Acuity the Frost, Spear Pillar stands on Spirit ground
+  // (the old earth of the first argument), and the Distortion
+  // World — a grave turned inside out — rides the Grave on all
+  // six of its floors.
+  'gym-pastoria': 'tide', // Pastoria Gym — Crasher Wake
+  'gym-canalave': 'rubble', // Canalave Gym — Byron
+  'gym-snowpoint': 'frost', // Snowpoint Gym — Candice
+  'gym-sunnyshore': 'volt', // Sunyshore Gym — Volkner
+  'galactic-hq': 'volt',
+  'lake-valor': 'tide',
+  'lake-acuity': 'frost',
+  'spear-pillar': 'spirit',
+  'distortion-entrance': 'grave',
+  'distortion-depths': 'grave',
+  'distortion-isles': 'grave',
+  'distortion-falls': 'grave',
+  'distortion-abyss': 'grave',
+  'distortion-platform': 'grave',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',
@@ -202129,6 +202562,39 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_sinnoh_defog');
       }
     }
+    // Arc 4 Stage S5b (Sinnoh story, second half): map-entry scenes,
+    // same idiom and gate law (each scene's completion flag is its
+    // gate; a stalled chain re-fires on a later entry). Order:
+    // Valor + the HQ raid (Fen) -> Fullmoon (the sailor's plea) ->
+    // Acuity (Icicle) -> Verity pressure + Celestic's illusion (all
+    // badges) -> Coronet -> Spear Pillar -> the platform. Gracidea
+    // rides Floaroma from Cobble on; Rock Climb sleeps on r217.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const sf = g.state.story.flags;
+      if (id === 'lake-valor' && sf.badge_fen && !sf.valor_glimpse && !sf.ev_sinnoh_valor_done) {
+        this.runEvent('ev_sinnoh_valor');
+      } else if (id === 'galactic-hq' && sf.badge_fen && !sf.galactic_hq_done && !sf.ev_sinnoh_hq_raid_done) {
+        this.runEvent('ev_sinnoh_hq_raid');
+      } else if (id === 'fullmoon-island' && sf.darkrai_beat_started && !sf.lunar_wing_received && !sf.ev_sinnoh_fullmoon_done) {
+        this.runEvent('ev_sinnoh_fullmoon');
+      } else if (id === 'floaroma' && sf.badge_cobble && !sf.gracidea_beat_done && !sf.ev_sinnoh_gracidea_done) {
+        this.runEvent('ev_sinnoh_gracidea');
+      } else if (id === 'r217' && sf.badge_icicle && !sf.rockclimb_received && !sf.ev_sinnoh_rockclimb_done) {
+        this.runEvent('ev_sinnoh_rockclimb');
+      } else if (id === 'lake-acuity' && sf.badge_icicle && !sf.uxie_glimpse && !sf.ev_sinnoh_acuity_glimpse_done) {
+        this.runEvent('ev_sinnoh_acuity_glimpse');
+      } else if (id === 'lake-verity' && sf.badge_beacon && sf.verity_glimpse && !sf.mesprit_glimpse && !sf.ev_sinnoh_verity_pressure_done) {
+        this.runEvent('ev_sinnoh_verity_pressure');
+      } else if (id === 'celestic' && sf.badge_beacon && !sf.zoroark_special_seen && !sf.ev_sinnoh_zoroark_done) {
+        this.runEvent('ev_sinnoh_zoroark');
+      } else if (id === 'mt-coronet-north' && sf.badge_beacon && !sf.coronet_climb_done && !sf.ev_sinnoh_coronet_done) {
+        this.runEvent('ev_sinnoh_coronet');
+      } else if (id === 'spear-pillar' && sf.coronet_climb_done && !sf.spear_pillar_done && !sf.ev_sinnoh_spear_pillar_done) {
+        this.runEvent('ev_sinnoh_spear_pillar');
+      } else if (id === 'distortion-platform' && sf.spear_pillar_done && !sf.sinnoh_climax_resolved && !sf.ev_sinnoh_distortion_climax_done) {
+        this.runEvent('ev_sinnoh_distortion_climax');
+      }
+    }
     // Stage H6 (Hoenn legendary arcs): map-entry faces, same idiom —
     // every face is gated on its arc's own progress flags (never on
     // the event-done flag alone), and the catch-only chain
@@ -204724,10 +205190,12 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
     if (kind === 'saturn') {
-      // PACING CALL (S5a register): the full Veilstone HQ raid is
-      // S5b's — here Saturn is presence and a locked door: the anime
-      // spreads the HQ across the arc, and this half ends at the
-      // gyms. His flavour turns colder once Eterna has fallen.
+      // S5b: the raid has happened (the entry event above) — Saturn
+      // stays with his emptied house, and his flavour turns honest.
+      if (flags.galactic_hq_done) { say(['The house is a shell with excellent lighting now, trainer. The count left before you arrived — it always was going to. I keep the door. It is the only duty the new world left me, and I find I do not entirely mind it.']); return true; }
+      // PACING CALL (S5a register): before the raid, Saturn is
+      // presence and a locked door: the anime spreads the HQ across
+      // the arc. His flavour turns colder once Eterna has fallen.
       if (flags.saturn_met) { say(['Still here, trainer? Doors here open inward only — and the building has decided you are weather: noted, and kept outside.']); return true; }
       if (flags.galactic_eterna_done) {
         say(['Saturn. I keep this house for Team Galactic — its doors, its ledgers, its patience. Eterna was a counting house, trainer; you have annoyed an abacus, nothing more.', 'Whatever you imagine is behind me, it will keep imagining back at you until the Commander-in-Chief calls it forward. Go and win your little badges. History is being scheduled elsewhere.'], () => { flags.saturn_met = true; });
@@ -204842,12 +205310,219 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
-    // ---- the first-half leaders ----
+    if (kind === 'paul_acuity') {
+      // THE MIDPOINT (the Brandon pattern): a full 6v6 REAL battle
+      // fought friendly, completion predicate FACED — win or lose,
+      // the story continues and no gate reads the result. The loss
+      // path carries the anime's devastation in original writing.
+      if (flags.paul_acuity_done) {
+        say(flags.paul_acuity_won
+          ? ['The page is written, {player}. The Conference gets the ink. Bring exactly this.']
+          : ['The lake remembers, {player}. So do I. The Conference gets the ink — that has not changed. What HAS changed is the handwriting I intend to bring.']);
+        return true;
+      }
+      if (!sBadges.includes('iciclebadge')) { say(['Not yet. Candice first, {player} — I do not spend my best page on a trainer the north has not finished examining. Win the Icicle Badge. Then come out onto my lake.']); return true; }
+      const t0 = TRAINERS.paul_acuity;
+      say([t0.intro[0], t0.intro[1]], () => {
+        g.ui.showMenu('Face Paul — the full battle at Lake Acuity?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          const t = bondTrainerVariant(g.state, t0);
+          g.scenes.push(new BattleScene({
+            kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g), friendly: true,
+            onEnd: (won, fled) => {
+              if (fled) return;
+              recordBattleBond(g.state, t.id, won, fled);
+              flags.paul_acuity_done = true;
+              if (won) {
+                flags.paul_acuity_won = true;
+                say(t0.lose, null, 'PAUL');
+              } else {
+                flags.paul_acuity_lost = true;
+                say(['...Six. All six, {player}. I did not lose a battle on that lake — I performed an autopsy on one, mid-battle, with the whole of my team as the instrument.', 'This is what my arithmetic was FOR, and do you see what it bought? A full page of evidence that the way I have been counting is not the way winning is counted. Chimchar knew. It knew at Hearthome, standing in the road. I have been the last to know everything important in this region.', 'Again at the Conference — if the bracket is honest. I will not be carrying the same ledger. Neither, I suspect, will you.'], null, 'PAUL');
+              }
+            },
+          }));
+        });
+      }, 'PAUL');
+      return true;
+    }
+
+    if (kind === 'dawn_festival') {
+      // Dawn's co-spine concludes: the Grand Festival at Lake Valor
+      // (the anime's placement), a dialogue beat riding the shipped
+      // Super Contest ranks — her final is judged at the hall's own
+      // highest rank; the player's own contest ladder stays open
+      // and ungated by this beat (the S4/S5a law).
+      if (flags.dawn_grand_festival_done) { say(['Runner-up of the Grand Festival, {player}. It still sounds like weather happening to somebody else. Zoey keeps the cup — and I keep the tape of that final, and I watch it like a map of a country I am going to live in. The Conference is yours now. Go and stand on your stage the way I stood on mine: all the way.']); return true; }
+      if (!sBadges.includes('beaconbadge')) { say(['Not yet — your eighth badge first, {player}. A coordinator keeps her order too: the Festival stage is lit, my rivals are arriving by boat, and I am NOT stepping out there until the Sunyshore lights have had their say about you. Besides — I want you in those seats with nothing left to prove but the sitting.']); return true; }
+      say(['You came. All the way to Valor, with the sky mended and eight badges in your case — you came to watch ME. Okay. OKAY. From the top, one last time...', '...The final card turned her way, {player}. Zoey — by a margin so small the judges checked it twice. Runner-up, at the Grand Festival, in my first full season. Mom cried on the phone in the GOOD direction. I did not win the cup. I won everything the cup was standing in front of.', 'My road forks here — home first, then a new region\'s stages, the way yours forked at a ferry dock a winter ago. Walk the Conference like a stage, {player}. I will be in the seats this time, and I do not breathe until the music starts. A promise, not a threat.'], () => {
+        flags.dawn_grand_festival_done = true;
+        flags.dawn_festival_ribbon = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Dawn took runner-up honours at the Grand Festival!');
+      });
+      return true;
+    }
+
+    if (kind === 'sailor_eldric') {
+      // The Darkrai beat (Canalave): a glimpse chain, staged here —
+      // the plea (Mine Badge held) -> Fullmoon Island's entry event
+      // (Cresselia's glimpse + the Lunar Wing) -> the boy wakes.
+      // Darkrai itself is S6's arc: darkrai_unlocked is its flavour
+      // flag, set on the waking, never a catch here.
+      if (flags.darkrai_beat_done) { say(['Sleeping like a stone in a river, my boy — deep, ordinary, dreamless sleep, the kind with drool in it. A father could frame that drool. Whatever stood over his bed has gone wherever uninvited things go when a light is lit in the room. The wing did it, trainer. You did it.']); return true; }
+      if (flags.lunar_wing_received) {
+        say(['That — that feather. It is shining like the moon got caught in it. Hold it over a sleeping boy, the old sailors say, and the dark has to leave by the door it came in...', '...He is awake. HE IS AWAKE, and asking for breakfast like the last month was a story somebody told HIM. The dreams are gone — all of them, even the ordinary bad ones a boy is entitled to. Whatever waits on the dark island across the water, trainer, it has been noticed now. By her. By you. By a boy who sleeps. That is more notice than it is used to.'], () => {
+          flags.darkrai_beat_done = true;
+          flags.darkrai_unlocked = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('The sailor\'s son is awake — the nightmares are gone.');
+        });
+        return true;
+      }
+      if (flags.darkrai_beat_started) { say(['Fullmoon Island, trainer — the boatman runs there from this very pier, and her island is past it, where the moon stands full. Bring back her feather. Bring back my boy\'s mornings.']); return true; }
+      if (!sBadges.includes('minebadge')) { say(['Mind the gulls, trainer. Everything in this port is watching something. Mine is a window up there with the curtain drawn, where my boy has been asleep a month — asleep, and dreaming of a dark shape that stands over the bed and will not be argued with. When you have the Mine Badge, come back to me. I will have a favour to ask that I do not ask lightly.']); return true; }
+      say(['You have Byron\'s badge — then you are the trainer the harbour says you are, and I can ask it plain. My son, trainer. A month asleep in the house by the pier, and every night the same dream: a dark shape over the bed, patient as debt. The doctors use the word nightmares the way sailors use the word weather — for things they cannot steer.', 'The old cure is not a doctor\'s. On Fullmoon Island, where the moon stands full over a crescent pond, SHE keeps her court — Cresselia, whose feathers are made of the light that ends bad dreams. The boatman will take you. Bring me a Lunar Wing, and I will bring you a boy eating breakfast. That is the whole contract.'], () => { flags.darkrai_beat_started = true; });
+      return true;
+    }
+
+    if (kind === 'sinnoh_conference') {
+      // The registrar (the Hoenn registrar's idiom): registration
+      // is gated on eight badges + the climax resolved — the
+      // Conference does not open its bracket over an unmended sky.
+      if (flags.sinnoh_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Lily of the Valley book in the good ink, trainer — twice: once for the bracket, and once in the margin next to a Darkrai, where the clerks keep the results they still argue about.']); return true; }
+      if (sBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Sinnoh badges open this bracket; you hold ' + sBadges.length + '. Sunyshore is the usual last stop. I will keep your page open.']); return true; }
+      if (!flags.sinnoh_climax_resolved) { say(['Eight badges — counted, verified, well carried. And yet I cannot open the bracket while the sky over Mt. Coronet is still torn, trainer. Finish the region\'s gods first. The Conference will be here; it has waited through worse than a titan or two. Well. Comparable.']); return true; }
+      if (!flags.sinnoh_conference_registered) {
+        say(['Eight badges, a mended sky, and a name the whole region has been carrying since the mountain. Let me write you into the Lily of the Valley Conference properly... There. Registered.', 'The bracket: one preliminary, here in this hall — then the quarter-final, which the draw has made personal: Paul, of Veilstone, who has been telling my clerks for a week that the bracket owes him this match. Then the semi-final. I will not describe the semi-final, trainer. Nobody in this hall describes him. Begin when you are ready: speak to me for the preliminary.'], () => {
+          flags.sinnoh_conference_registered = true;
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Registered for the Lily of the Valley Conference!');
+        });
+        return true;
+      }
+      if (!flags.beat_conference_s_p1) {
+        say(['The preliminary, trainer. Tamsin, of the sea roads — a clean battler with a cleaner record, and Garchomp in the back like a held chord. The floor is yours when you call it.'], () => {
+          g.ui.showMenu('Begin the preliminary?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => { if (v === 'yes') this.startSinnohBattle('conference_s_p1', null); });
+        });
+        return true;
+      }
+      if (!flags.paul_conference_done) { say(['The preliminary is behind you, and the quarter-final has a name on it that you know better than my clerks do. Paul is on the floor, trainer. Settle it the way brackets settle things: completely.']); return true; }
+      if (!flags.tobias_darkrai_felled) { say(['Paul is settled — the clerks are still writing that one up. The semi-final is on the floor, trainer, and the hall has gone the particular quiet it goes for him. Tobias. And his first question.']); return true; }
+      say(['The Conference is decided, and decided honestly. The book has it. So does everyone who was here.']);
+      return true;
+    }
+
+    if (kind === 'paul_conference') {
+      // The settlement: must-win-with-rechallenge (the shipped
+      // league idiom — a loss is a defeat, the flag stays unset,
+      // and Paul will be standing here when you come back). The
+      // rivalry resolves with the player's win, as canon has it;
+      // the engine never hard-locks.
+      if (flags.sinnoh_complete) { say(['The book is closed, {player}, and the last page of the ledger is the one I would not change. Semi-finals and semi-legends — go home a while. Even ledgers rest.']); return true; }
+      if (flags.paul_conference_done) { say(['Settled, {player}. In ink. Now go and find out what is standing past me — I have seen his Darkrai work from the tunnel, and my arithmetic has opinions it is keeping to itself for once.']); return true; }
+      if (!flags.beat_conference_s_p1) { say(['The bracket does not bend, {player} — not even for us. Tamsin first. Then you may have the match this whole region has been a draft of.']); return true; }
+      const t0 = TRAINERS.paul_conference;
+      say([t0.intro[0], t0.intro[1]], () => {
+        g.ui.showMenu('Face Paul — the Conference quarter-final?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startSinnohBattle('paul_conference', (won) => {
+            if (!won) return;
+            flags.paul_conference_done = true;
+            flags.paul_conference_won = true;
+            say(t0.lose, null, 'PAUL');
+          });
+        });
+      }, 'PAUL');
+      return true;
+    }
+
+    if (kind === 'tobias') {
+      // THE TOBIAS MECHANISM (the coordinator's S5b ruling, line
+      // by line): Act 1 is a REAL battle on the league rechallenge
+      // idiom (startSinnohBattle — not friendly, not faced): Darkrai
+      // ALONE at 390, authored beatable in-band. A win sets
+      // tobias_darkrai_felled; a full wipe before that is a defeat
+      // and a rematch — nothing concludes, nothing is set. Act 2
+      // (only with the felling standing) is Latios ALONE, fought
+      // FRIENDLY on the FACED predicate (Harrison/Brandon): win or
+      // lose, the match concludes — both branch texts real, the
+      // canon loss carrying the honour — and only then does the
+      // conference conclude: sinnoh_complete is set HERE and the
+      // machine fires (checkArcCompletion — the registry's card,
+      // regionsDone and directive are the machine's own writes).
+      // No hand-rolled ending; S7 owns the finale variant.
+      if (flags.sinnoh_complete) { say(['The book has it now, trainer: the Darkrai that fell, and the match that followed. Trainers will sail to this island for years to argue about that semi-final, and every one of them will get the first line right: you were the one who stood there. Travel well. The road past a Conference is the only undefeated thing left.']); return true; }
+      if (!flags.paul_conference_done) { say(['Tobias. I have watched every match in this hall, including yours — your quarter-final is still ahead of you, and I do not stand in front of unfinished brackets. Settle Paul first, trainer. Then come and ask me the question everyone else has failed.']); return true; }
+      if (!flags.tobias_darkrai_felled) {
+        const t0 = TRAINERS.tobias_darkrai;
+        say([t0.intro[0], t0.intro[1]], () => {
+          g.ui.showMenu('Face Tobias — Darkrai?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => {
+            if (v !== 'yes') return;
+            this.startSinnohBattle('tobias_darkrai', (won) => {
+              if (!won) return;
+              flags.tobias_darkrai_felled = true;
+              say(['...Down. It is DOWN. Do you understand what this hall just saw, trainer? No one — no one — has done that in this entire Conference.', 'There is a second question on my team, and it has been patient all week. When you are ready — Latios. Finish the match. If the match can be finished.'], null, 'TOBIAS');
+            });
+          });
+        }, 'TOBIAS');
+        return true;
+      }
+      if (!flags.tobias_faced) {
+        const t0 = TRAINERS.tobias_latios;
+        say([t0.intro[0]], () => {
+          g.ui.showMenu('Finish the match — face Latios?', [
+            { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+          ], (v) => {
+            if (v !== 'yes') return;
+            const t = bondTrainerVariant(g.state, t0);
+            g.scenes.push(new BattleScene({
+              kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g), friendly: true,
+              onEnd: (won, fled) => {
+                if (fled) return;
+                recordBattleBond(g.state, t.id, won, fled);
+                flags.tobias_faced = true;
+                if (won) flags.tobias_won = true; else flags.tobias_lost = true;
+                const lines = won ? [
+                  'Finished. Utterly, honestly finished — by the only trainer who ever got this far into my team, and went the rest of the way on merit. The hall is on its feet, trainer, and so — observe the record — am I.',
+                  'They will write that the darkest trainer of the Conference fell in the semi-final. Let them. What the book cannot hold is the order of it: Darkrai first, by your hand, and then this. History will remember the attempt, they say. It will remember considerably more than that.',
+                ] : [
+                  '...And there the match ends — Latios, untouched by everything but the one exchange that mattered, and the judges\' card turning the way every card in this hall has turned all week. The semi-final is his. The loss stands. That is sport, and it is final.',
+                  'But look at the hall, trainer. LOOK at it. They are not standing for the result — they are standing for the first line of the story, the one no other trainer in this Conference could write: DARKRAI FELL. To you. The only victory anyone took from me here — and you took it in front of everyone. The Conference ends, and that is what it ends WITH. Honours, trainer. Full honours.',
+                ];
+                say(lines, () => {
+                  flags.sinnoh_complete = true;
+                  g.audio.playSfx('badge');
+                  say(['Lily of the Valley Conference — the run ends in honours, and Sinnoh ends with it: eight badges, a god unchained and answered, two rivals settled, and the only victory anyone took from the conference\'s darkest trainer. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+                }, 'TOBIAS');
+              },
+            }));
+          });
+        }, 'TOBIAS');
+        return true;
+      }
+      say(['The match is in the book, trainer. Both questions, asked and answered.']);
+      return true;
+    }
+
+    // ---- the leaders (S5a's four + S5b's four) ----
     const LEADERS = {
       roark: { badge: 'coalbadge', post: 'The road north runs through the mines\' shadow to Jubilife, and west past Floaroma the wind has stopped answering its keeper, they say. Mind the turbines, Coal Badge holder — and mind who else minds them.' },
       gardenia: { badge: 'forestbadge', post: 'The tower with the meteor on it, Forest Badge holder — its lobby is quieter than my forest and twice as watchful. Whatever Team Galactic counts in there, count yourself in carefully.' },
       fantina: { badge: 'relicbadge', post: 'East now, Relic Badge holder: Solaceon\'s ruins keep an old remedy for the fog, and Veilstone keeps a gym that apologizes to no one. And the hall, darling — do come back to the hall. The stage remembers its friends.' },
       maylene: { badge: 'cobblebadge', post: 'Four badges. The lakes are next on every road out of my city, Cobble Badge holder — Valor south, Acuity far north, and Verity behind you, already watching. Whatever is counting that water, it has started. Keep your team close and your eyes open.' },
+      wake: { badge: 'fenbadge', post: 'FIVE BADGES, and the main event rolls on! The lakes, Fen Badge holder — Valor is an hour\'s walk and something has gone wrong on its water, I can smell it over the marsh. Whatever is counting this region\'s lakes, it has started spending. Go and be loud about it.' },
+      byron: { badge: 'minebadge', post: 'Six badges. My son started you in Oreburgh and I have measured you at the face — the family verdict is in, Mine Badge holder, and it is respect. The sailor by the pier has a favour he asks only of trainers he believes in, they say. And the north road is waiting: snow, and my counterpart Candice, who is tougher than her welcome. Everything up there is.' },
+      candice: { badge: 'iciclebadge', post: 'Seven badges, Icicle Badge holder — full marks. The climb walls on Route 217 will take the old HM\'s measure now, and Sunyshore\'s lights are the last stop before the island. And whatever turned beneath my lake\'s ice — it is still turning. The mountain, trainer. Everything in this region points at the mountain now.' },
+      volkner: { badge: 'beaconbadge', post: 'Eight badges, Beacon Badge holder, and a leader awake for the first time in a season. The Conference at Lily of the Valley is lit, and the bracket has both your old scores in it — I checked, out of professional envy. Go and settle them at full voltage. I will be in the stands, conducting nothing at all. A holiday.' },
     };
     const L = LEADERS[kind];
     if (!L) return false;
