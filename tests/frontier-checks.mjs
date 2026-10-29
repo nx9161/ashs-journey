@@ -19,6 +19,14 @@
 // walking drives with NO position seeding (dock -> all 7 facility
 // doors + Center/Mart -> inside -> exit warp -> hub; the full Pike
 // run on foot; the Pyramid floor cycle on foot).
+// Part E (F4): the CAPSTONE — a save seeded (B09-style counter
+// seeding, the established isolation precedent: earned-state counters
+// and slots are seeded directly and named inline, the completion
+// itself is then driven TRUE-PATH) at six gold symbols + Pyramid
+// silver + the possession faced, driven through the Brandon Gold
+// win, the machine's ARC COMPLETE card, the unconditional ferry
+// home, Scott's closing beat on Pallet entry, and the SEALED Sinnoh
+// homecoming at Mom's house.
 // Run: node tests/frontier-checks.mjs   (exit 1 on any failure)
 
 import { dirname, join } from 'node:path';
@@ -1675,5 +1683,306 @@ if (QD) {
   ok('D00 driver completed with no internal failures', QD.failures === 0, QD.failures + ' failures');
 }
 
-console.log('\nFRONTIER (F0+F1) TOTAL: ' + pass + '/' + (pass + fail) + ' passed');
+// ================= Part E: F4 bundle — the CAPSTONE drive =================
+// Seeding note (B09-style counter seeding is the established
+// isolation precedent — see arc-foundation B09 and Part A3/D above):
+// the earned state a full Frontier campaign would have produced
+// (six gold slots, the Pyramid slot at silver, the possession faced,
+// the pyramid run counter at 9 so this entry is climb 10 = Gold due,
+// the crossing flags a real save carries) is seeded directly and
+// named inline below; everything from the Brandon Gold battle onward
+// is TRUE-PATH — the shipped award helper, the shipped arc machine,
+// the shipped ferry, the shipped homecoming.
+const driverE = `
+;(function () {
+  var Q = { results: [], failures: 0 };
+  function ok(name, cond, extra) {
+    Q.results.push({ name: name, pass: !!cond });
+    if (!cond) { Q.failures++; console.error('FR-FAIL ' + name + (extra ? ' \\u2014 ' + extra : '')); }
+    else console.log('fr-pass ' + name);
+  }
+  function mkGame(seed) {
+    globalThis.__QFRESET__();
+    globalThis.__SEED__ = seed;
+    var g = new Game(null);
+    g.state.settings.battleStyle = 'classic';
+    g.ui.init(); g.input.bindKeyboard(); g.buildSprites(); g.applyLayout();
+    return g;
+  }
+  function tk(g, n) { g.loop.stepTicks(n || 2); }
+  function pA(g) { g.input.inject('a'); tk(g, 2); g.input.release('a'); }
+  function drain(g) { var n = 0; while ((g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) && n < 500) { pA(g); n++; } }
+  function boot(g) {
+    g.scenes.push(new BootScene());
+    g.loop.stepMs(3100); tk(g, 2);
+    pA(g); pA(g); pA(g);
+    drain(g); g.ui.debugChoose(0); tk(g, 3); drain(g);
+    return g.scenes.top;
+  }
+  function gotoMap(g, map, x, y) {
+    g.state.story.position = { map: map, x: x, y: y, dir: 'down' };
+    var ow = new OverworldScene();
+    g.scenes.replace(ow); ow.enter(); tk(g, 4);
+    return ow;
+  }
+  function pick(g, value) {
+    var i = g.ui.menu.items.findIndex(function (it) { return it.value === value; });
+    if (i < 0) return false;
+    g.ui.debugChoose(i); tk(g, 3);
+    return true;
+  }
+  function mkM(g, id, level, moves) {
+    var m = makeMon(id, level, SPECIES, MOVES);
+    m.moves = moves.map(function (x) { return { id: x, pp: MOVES[x].pp, maxPp: MOVES[x].pp }; });
+    return m;
+  }
+  function strongParty(g, level) {
+    g.state.party = [
+      mkM(g, 'mewtwo', level, ['psychic', 'thunderbolt', 'icebeam', 'flamethrower']),
+      mkM(g, 'dragonite', level, ['earthquake', 'thunderbolt', 'icebeam', 'flamethrower']),
+      mkM(g, 'snorlax', level, ['bodyslam', 'earthquake', 'surf', 'icebeam']),
+      mkM(g, 'partner', level, ['thunderbolt', 'quickattack', 'slam', 'thunderwave']),
+    ];
+  }
+  function driveBattle(g, onScene) {
+    var guard = 0, firstScene = null;
+    function drainHere() {
+      var sc = g.scenes.top; var n = 0;
+      while ((g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) && g.scenes.top === sc && n < 500) { pA(g); n++; }
+    }
+    while ((g.scenes.top instanceof BattleScene) && guard++ < 3000) {
+      var b = g.scenes.top;
+      if (!firstScene) { firstScene = b; if (onScene) onScene(b); }
+      else if (b !== firstScene) break;
+      drainHere();
+      if (!(g.scenes.top instanceof BattleScene)) break;
+      if (g.scenes.top !== b) continue;
+      b = g.scenes.top;
+      if (g.ui.menuOpen) {
+        var m = g.ui.menu;
+        if (m.kind === 'commands') {
+          var ci = m.items.findIndex(function (it) { return !it.disabled && it.value === 'fight'; });
+          g.ui.debugChoose(ci >= 0 ? ci : 0); tk(g, 3);
+        } else if (m.title === 'Choose a move') {
+          var best = 0, bs = -1;
+          var foeTypes = SPECIES[b.foe.speciesId].types, allyTypes = SPECIES[b.ally.speciesId].types;
+          m.items.forEach(function (it, i) { if (it.disabled) return; var slot = b.ally.moves[i]; if (!slot) return; var md = MOVES[slot.id]; var sc = md.cat === 'status' ? 0.05 : (md.power || 0) * effectiveness(md.type, foeTypes) * (allyTypes.includes(md.type) ? 1.5 : 1); if (sc > bs) { bs = sc; best = i; } });
+          g.ui.debugChoose(best); tk(g, 3);
+        } else if (m.title === 'Choose next Pokemon' || m.title === 'Party') {
+          var pi = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1 && it.value !== null; });
+          g.ui.debugChoose(pi >= 0 ? pi : 0); tk(g, 3);
+        } else {
+          var bi = m.items.findIndex(function (it) { return it.value === null || it.value === -1; });
+          g.ui.debugChoose(bi >= 0 ? bi : m.items.length - 1); tk(g, 3);
+        }
+      } else { pA(g); tk(g, 3); }
+    }
+    if (!(g.scenes.top instanceof BattleScene)) drain(g);
+  }
+  function frontierChoose(menu) {
+    var items = menu.items; var i;
+    i = items.findIndex(function (it) { return !it.disabled && it.value !== null && it.value !== undefined && it.value !== -1; }); if (i >= 0) return i;
+    i = items.findIndex(function (it) { return !it.disabled; }); return i >= 0 ? i : 0;
+  }
+  function talkFrontier(g, ow, facId) {
+    var npc = ow.map.npcs.find(function (n) { return n.frontier === facId; });
+    if (!npc) return null;
+    ow.sysNpc(npc); tk(g, 3);
+    return npc;
+  }
+  function enterRun(g) {
+    var st = g.state; var guard = 0;
+    while (guard++ < 600) {
+      if (st.frontier.run) return true;
+      if (g.ui.menuOpen) { g.ui.debugChoose(frontierChoose(g.ui.menu)); tk(g, 3); continue; }
+      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { pA(g); continue; }
+      tk(g, 3);
+    }
+    return !!st.frontier.run;
+  }
+  function pyrWarp(g, ow, toMap, x, y) {
+    ow.doWarp({ map: toMap, x: x, y: y }, {}); tk(g, 3);
+    var guard = 0;
+    while (g.ui.menuOpen && guard++ < 10) {
+      var oi = g.ui.menu.items.findIndex(function (it) { return it.value === 'on'; });
+      if (oi < 0) break;
+      g.ui.debugChoose(oi); tk(g, 3);
+    }
+    drain(g);
+  }
+  function climbToBrandon(g, ow) {
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    return ow.map.npcs.find(function (n) { return n.frontierBrain === 'pyramid'; });
+  }
+  var FAC_IDS = ['tower', 'factory', 'arena', 'dome', 'pike', 'palace', 'pyramid'];
+  function slotOf(g, facId) { return g.state.badges.symbols[FAC_IDS.indexOf(facId)]; }
+  function scottLogCount(g) {
+    return g.ui.log.filter(function (e) { return e.lines && e.lines.some(function (l) { return l.indexOf('salutes its conqueror') >= 0; }); }).length;
+  }
+
+  // ---------- E01-E02: the Brandon Gold win (TRUE-PATH from the seed) ----------
+  {
+    var g = mkGame(7245); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    var st = g.state;
+    // THE SEED (B09-style counter seeding, named): a Frontier-campaign
+    // save at the last door — current arc frontier, the four earlier
+    // regions done, six slots GOLD with the Pyramid at silver, the
+    // possession already faced (so the Gold audience is the plain
+    // rematch), the pyramid run counter at 9 (this entry books climb
+    // 10, the Gold milestone), and the crossing flags a real save
+    // carries from its Frontier homecoming + outbound sailing.
+    st.story.arc = 'frontier'; st.story.region = 'kanto';
+    st.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn'];
+    st.badges.symbols = ['gold', 'gold', 'gold', 'gold', 'gold', 'gold', 'silver'];
+    st.story.flags.brandon_possessed_faced = true;
+    st.story.flags.embark_frontier = true;
+    st.story.flags.reachedarc_frontier = true;
+    st.frontier.records.pyramid.runs = 9;
+    talkFrontier(g, ow, 'pyramid'); enterRun(g);
+    var brandon = climbToBrandon(g, ow);
+    ok('E00 capstone setup: climb 10 booked (Gold due) and Brandon waits on floor 7',
+      !!st.frontier.run && st.frontier.run.runNo === 10 && !!brandon,
+      'runNo=' + (st.frontier.run && st.frontier.run.runNo) + ' brandon=' + !!brandon);
+    if (brandon) { ow.sysNpc(brandon); tk(g, 3); drain(g); }
+    var guardB = 0;
+    while (guardB++ < 100) {
+      if (g.scenes.top instanceof BattleScene) { driveBattle(g); continue; }
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      break;
+    }
+    drain(g);
+    ok('E01 TRUE-PATH Brandon GOLD win: the last slot turns gold, all seven slots gold, and story.flags.frontier_complete is SET by the shared award helper (run closed in triumph)',
+      slotOf(g, 'pyramid') === 'gold' && st.badges.symbols.every(function (s) { return s === 'gold'; })
+      && st.story.flags.frontier_complete === true && st.frontier.run === null,
+      'slot=' + slotOf(g, 'pyramid') + ' flag=' + st.story.flags.frontier_complete);
+    ok('E02 pre-card state: the flag alone has armed the machine — regionsDone does NOT yet carry frontier, no arc_card_frontier flag, no directive pinned yet',
+      !st.story.regionsDone.includes('frontier') && !st.story.flags.arc_card_frontier && st.story.arc_directive == null,
+      'done=' + JSON.stringify(st.story.regionsDone) + ' dir=' + st.story.arc_directive);
+
+    // ---------- E03-E05: the next map load fires the machine ----------
+    ow = gotoMap(g, 'frontierhub', 18, 20);
+    var cardLines = (g.ui.dlg && g.ui.dlg.lines) ? g.ui.dlg.lines.slice() : [];
+    var frontierArc = arcById('frontier');
+    var sum = arcCompleteSummary(st, frontierArc);
+    ok('E03 next map load fires checkArcCompletion: the ARC COMPLETE card plays — its title names the Battle Frontier, badgeLine reads Badges: 7/7, the registry frontier summaryLines are present verbatim, and the summary forwardLine names Sinnoh and Gary',
+      cardLines.length > 0 && cardLines[0] === sum.title && sum.title.indexOf('BATTLE FRONTIER') >= 0
+      && sum.badgeLine === 'Badges: 7/7' && cardLines.includes('Badges: 7/7')
+      && frontierArc.summaryLines.every(function (l) { return cardLines.includes(l); })
+      && sum.forwardLine.indexOf('Sinnoh') >= 0 && sum.forwardLine.indexOf('Gary') >= 0,
+      'card=' + cardLines.join(' | ').slice(0, 200));
+    drain(g);
+    ok('E04 the machine recorded the card: regionsDone gains frontier EXACTLY once, arc_card_frontier set, the directive is pinned on sinnoh — and Scott has NOT fired on the hub (his beat is Pallet-only)',
+      st.story.regionsDone.filter(function (x) { return x === 'frontier'; }).length === 1
+      && st.story.flags.arc_card_frontier === true && st.story.arc_directive === 'sinnoh'
+      && !st.story.flags.scott_closing_done,
+      'done=' + JSON.stringify(st.story.regionsDone) + ' dir=' + st.story.arc_directive);
+    ow = gotoMap(g, 'frontierhub', 18, 20); tk(g, 4);
+    ok('E05 the ARC COMPLETE card does NOT fire twice on later loads (quiet load, frontier still exactly once in regionsDone, directive unchanged)',
+      !g.ui.dialogueOpen && st.story.regionsDone.filter(function (x) { return x === 'frontier'; }).length === 1
+      && st.story.arc_directive === 'sinnoh');
+
+    // ---------- E06-E08: the ferry home (embark deleted) + Scott ----------
+    var captB = ow.map.npcs.find(function (n) { return n.name === 'CAPT BREAKWATER'; });
+    delete st.story.flags.embark_frontier; // the unconditional return: deleted outright, reachedarc carries the leg
+    ow.sysNpc(captB); tk(g, 3);
+    var seen = [], menuSeen = false, guardF = 0;
+    while (guardF++ < 400) {
+      if (g.ui.dlg && g.ui.dlg.lines) g.ui.dlg.lines.forEach(function (l) { if (!seen.includes(l)) seen.push(l); });
+      if (g.ui.menuOpen) { menuSeen = true; pick(g, 'yes'); continue; }
+      if (st.story.position.map === 'pallet' && !g.ui.dialogueOpen) break;
+      if (g.ui.dialogueOpen) { pA(g); continue; }
+      tk(g, 2);
+    }
+    ok('E06 hub ferry return with embark_frontier DELETED still sails (unconditional — the sail menu was offered and the crossing lands on Pallet)',
+      menuSeen === true && st.story.position.map === 'pallet' && !st.story.flags.embark_frontier,
+      'pos=' + JSON.stringify(st.story.position) + ' menu=' + menuSeen);
+    ok('E07 Scott closing beat fires on the Pallet entry: scott_closing_done set, and his spoken lines salute the conqueror, followed the whole campaign, and point at Hawthorn lab + Gary back from Sinnoh with an Electivire and stories, home first',
+      st.story.flags.scott_closing_done === true
+      && seen.some(function (l) { return l.indexOf('salutes its conqueror') >= 0; })
+      && seen.some(function (l) { return l.indexOf('followed the whole campaign') >= 0; })
+      && seen.some(function (l) { return l.indexOf('Hawthorn') >= 0 && l.indexOf('Gary') >= 0 && l.indexOf('Sinnoh') >= 0 && l.indexOf('Electivire') >= 0; })
+      && seen.some(function (l) { return l.indexOf('Home first') >= 0; }),
+      'seen=' + seen.join(' | ').slice(0, 240));
+    ow = gotoMap(g, 'viridian', 10, 10); drain(g);
+    ow = gotoMap(g, 'pallet', 7, 9); tk(g, 4);
+    ok('E08 leave + re-enter Pallet: Scott does NOT re-fire (quiet load, exactly one closing scene in the UI log)',
+      !g.ui.dialogueOpen && scottLogCount(g) === 1 && st.story.flags.scott_closing_done === true,
+      'logScenes=' + scottLogCount(g));
+
+    // ---------- E09-E10: the SEALED Sinnoh homecoming (machine, untouched) ----------
+    var regionsBefore = st.story.regionsDone.slice();
+    ow = gotoMap(g, 'house-pallet-ash', 4, 4);
+    drain(g);
+    var hookSeen = g.ui.log.some(function (e) { return e.lines && e.lines.some(function (l) { return l.indexOf('Electivire') >= 0 && l.indexOf('Sinnoh') >= 0; }); });
+    ok('E09 the SEALED Sinnoh homecoming completes at Mom house: the machine delivers Gary hook lines itself (the Electivire line), hook_sinnoh + homecoming_sinnoh set, the directive is cleared',
+      hookSeen && st.story.flags.hook_sinnoh === true && st.story.flags.homecoming_sinnoh === true
+      && st.story.arc_directive === null,
+      'hook=' + st.story.flags.hook_sinnoh + ' dir=' + st.story.arc_directive);
+    ok('E10 sealed law holds end-to-end: story.arc STAYS frontier, embark_sinnoh is NOT set, regionsDone is unchanged by the homecoming',
+      st.story.arc === 'frontier' && !st.story.flags.embark_sinnoh
+      && JSON.stringify(st.story.regionsDone) === JSON.stringify(regionsBefore),
+      'arc=' + st.story.arc + ' done=' + JSON.stringify(st.story.regionsDone));
+
+    // ---------- E11-E12: Regions / Journey surfaces ----------
+    g.openJourney(); tk(g, 2);
+    var jLabels = g.ui.menu.items.map(function (i) { return i.label; });
+    pick(g, 'close'); tk(g, 2);
+    g.openRegions(); tk(g, 2);
+    var rLabels = g.ui.menu.items.map(function (i) { return i.label; });
+    pick(g, 'close'); tk(g, 2);
+    ok('E11 Journey surface: the arc headers read ARC 3.5 BATTLE FRONTIER COMPLETE and ARC 4 SINNOH SEALED (arcStateOf agrees: frontier complete, sinnoh sealed)',
+      arcStateOf(st, 'frontier') === 'complete' && arcStateOf(st, 'sinnoh') === 'sealed'
+      && jLabels.some(function (l) { return l.indexOf('BATTLE FRONTIER') >= 0 && l.indexOf('COMPLETE') >= 0; })
+      && jLabels.some(function (l) { return l.indexOf('SINNOH') >= 0 && l.indexOf('SEALED') >= 0; }),
+      jLabels.join(' / ').slice(0, 300));
+    ok('E12 Regions surface: the Sinnoh row reads sealed (not done, not current)',
+      rLabels.some(function (l) { return l.indexOf('Sinnoh') >= 0 && l.indexOf('sealed') >= 0; }),
+      rLabels.join(' / ').slice(0, 300));
+  }
+
+  // ---------- E13-E14: Scott negatives + the seam unit ----------
+  {
+    var g = mkGame(7252); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'pallet', 7, 9); drain(g);
+    ok('E13 Scott negative: a Pallet entry WITHOUT frontier_complete is quiet — no scott_closing_done, no dialogue (the chain drive earlier Pallet visits stay clean)',
+      !g.state.story.flags.scott_closing_done && !g.ui.dialogueOpen);
+    var f1 = tryScottClosing(g, 'viridian');
+    var quiet1 = !g.ui.dialogueOpen && !g.state.story.flags.scott_closing_done;
+    g.state.story.flags.frontier_complete = true;
+    var f2 = tryScottClosing(g, 'viridian');
+    var quiet2 = !g.ui.dialogueOpen && !g.state.story.flags.scott_closing_done;
+    var f3 = tryScottClosing(g, 'pallet');
+    var speaker = g.ui.dlg ? g.ui.dlg.speaker : null;
+    drain(g);
+    var f4 = tryScottClosing(g, 'pallet');
+    ok('E14 seam unit: tryScottClosing fires only on Pallet with frontier_complete set (viridian no-fire with and without the flag), fires ONCE on Pallet with speaker SCOTT (flag set at scene start), and never twice',
+      f1 === false && quiet1 && f2 === false && quiet2 && f3 === true && speaker === 'SCOTT'
+      && g.state.story.flags.scott_closing_done === true && f4 === false && !g.ui.dialogueOpen,
+      'f=' + [f1, f2, f3, f4].join(',') + ' speaker=' + speaker);
+  }
+
+  globalThis.__FRE__ = Q;
+})();
+`;
+let QE = null;
+try {
+  const runnerE = new Function(gameJs + driverE + '\n;return globalThis.__FRE__;');
+  QE = runnerE();
+} catch (e) {
+  console.log('FAIL  Part E bundle evaluation threw: ' + (e && e.stack || e));
+  fail++;
+}
+if (QE) {
+  for (const r of QE.results) ok('E ' + r.name, r.pass);
+  ok('E00 driver completed with no internal failures', QE.failures === 0, QE.failures + ' failures');
+}
+
+console.log('\nFRONTIER TOTAL: ' + pass + '/' + (pass + fail) + ' passed');
 if (fail) process.exit(1);

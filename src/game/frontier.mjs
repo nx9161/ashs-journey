@@ -25,6 +25,7 @@ import {
 } from '../data/frontier.mjs';
 import { makeMon } from './state.mjs';
 import { BattleScene } from './battle.mjs';
+import { HOME_TOWN_MAP_ID } from '../data/arcs.mjs';
 
 // ------------------------------------------------------------------
 // State helpers
@@ -215,6 +216,40 @@ export function frontierScottLines(state) {
 
 export function talkFrontierScott(g, ow) {
   g.ui.say(frontierScottLines(g.state), () => {}, 'SCOTT');
+}
+
+// ------------------------------------------------------------------
+// Scott's closing beat (Stage F4)
+// ------------------------------------------------------------------
+
+// A one-shot map-entry scene on Pallet Town: once the Frontier is
+// complete (story.flags.frontier_complete, set by the shared award
+// helper when the seventh symbol turned gold) and the beat has not
+// played, Scott intercepts the returning conqueror on entry. The
+// done flag is set at scene START — fire-once even if the scene is
+// interrupted, the arc machine's own convention (checkArcCompletion
+// and tryHomecoming both commit before presenting). The scene
+// POINTS at the Sinnoh homecoming — Hawthorn's lab, Gary back from
+// Sinnoh with an Electivire and stories, home first — but does not
+// duplicate the registry's sinnoh hookLines: the machine delivers
+// the hook itself at Mom's house, untouched, and this beat must not
+// block it (separate map, separate load). Registered here in the
+// Frontier controller; sysLoadMap calls it from the same map-entry
+// seam that invokes tryHomecoming. Returns true iff the scene fired.
+export function tryScottClosing(g, mapId) {
+  if (!g || !g.state || !g.state.story) return false;
+  if (mapId !== HOME_TOWN_MAP_ID) return false;
+  const flags = g.state.story.flags;
+  if (!flags || typeof flags !== 'object') return false;
+  if (!flags.frontier_complete || flags.scott_closing_done) return false;
+  flags.scott_closing_done = true; // fire-once, set at scene start
+  g.ui.say([
+    'There you are. I followed the whole campaign, trainer — every facility, every Brain, every last gold strike. I would not have missed the end of it for a quieter island.',
+    'Seven Symbols, all of them gold. The Battle Frontier salutes its conqueror — and its founder got to watch it happen, door by door.',
+    'One thing more, and it is not about my island. Word came in off the water: Professor Hawthorn\'s lab has a visitor — Gary, fresh home from somewhere called Sinnoh, an Electivire shadowing him and stories enough to fill the room.',
+    'Home first, though — your mother has waited out this whole campaign too. Eat. Rest. Then the lab talk, and whatever road it opens next.',
+  ], () => {}, 'SCOTT');
+  return true;
 }
 
 // ------------------------------------------------------------------

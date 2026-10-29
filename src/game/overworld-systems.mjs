@@ -18,7 +18,7 @@ import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './s
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { ContestScene, hasRibbon } from './contest.mjs';
-import { startFrontier, startBrainAudience, talkFrontierScott, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
+import { startFrontier, startBrainAudience, talkFrontierScott, tryScottClosing, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
 import { PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
 import { RIBBON_NAMES } from '../data/contest.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
@@ -101,6 +101,11 @@ Object.assign(OverworldScene.prototype, {
     // directive pinned, and only when the card did not just fire.
     const arcCardFired = checkArcCompletion(g);
     if (!arcCardFired && id === HOME_MAP_ID) tryHomecoming(g);
+    // Stage F4: Scott's closing beat — the Frontier controller's own
+    // map-entry check, on this same seam (it gates itself on Pallet
+    // Town + frontier_complete + its fire-once flag, and yields to
+    // the ARC COMPLETE card exactly as the homecoming does).
+    if (!arcCardFired) tryScottClosing(g, id);
     // Stage O2 (Orange story): map-entry scenes, flag-gated once each.
     // Ivy's intro fires on FIRST entry to her lab; Lapras fires on
     // Valencia once the first Orange badge is held; the pod reunion

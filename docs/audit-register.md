@@ -10711,3 +10711,102 @@ server-side under the raised bag cap).
   measurement trigger — NOT crossed (margin 8,528 B); the
   binding 12.58 MB gate holds with ~2.49 MB to spare.
   `personal/` byte-identical; dist/ restored.
+
+## Arc 3.5 Stage F4 — Battle Frontier: completion + homecoming (2026-10-29)
+
+- Scope: the Frontier's closing layer on the shipped machine —
+  Scott's closing beat on Pallet entry, the capstone drive (Brandon
+  Gold → ARC COMPLETE → ferry home → Scott → the SEALED Sinnoh
+  homecoming), and the budget restatement. The machine in
+  `src/game/arcs.mjs` is NOT modified; one stage commit on
+  e7770d1.
+- **Scott's closing beat (design + seam):** `tryScottClosing(g,
+  mapId)` in `src/game/frontier.mjs`, called from ONE line on the
+  `sysLoadMap` seam beside `tryHomecoming` (yielding to the ARC
+  COMPLETE card on the load that fires it, the homecoming's own
+  precedence). It fires only on Pallet Town (`HOME_TOWN_MAP_ID`)
+  with `story.flags.frontier_complete` set and
+  `scott_closing_done` unset; the done flag is set at scene START
+  (fire-once even if interrupted — the machine's convention). Four
+  original lines, speaker 'SCOTT': he followed the whole campaign
+  door by door; the Frontier salutes its conqueror; then he turns
+  the player's eyes to Professor Hawthorn's lab — Gary, fresh home
+  from somewhere called Sinnoh, an Electivire shadowing him and
+  stories enough to fill the room — and home first, then the lab
+  talk. The beat POINTS at the homecoming and does not duplicate
+  the registry's sinnoh hookLines: the machine delivers the hook
+  itself at Mom's house, untouched, on a separate map load, so the
+  beat cannot block it. With `frontier_complete` unset it never
+  fires — the chain drive's earlier Pallet visits stay clean.
+- **Capstone drive (tests/frontier-checks 120 → 136, new Part E):**
+  B09-style counter seeding is the established isolation precedent
+  (said so in the suite comments): the save is seeded at six gold
+  symbols + Pyramid 'silver' + `brandon_possessed_faced`, the
+  pyramid run counter at 9 (this entry books climb 10, Gold due),
+  arc 'frontier', the four earlier regions done, and the crossing
+  flags a real save carries — every seed named inline. From there
+  TRUE-PATH: E01 the Brandon Gold win turns the last slot gold and
+  the shared award helper sets `frontier_complete` (E02: the flag
+  alone arms the machine — no regionsDone entry, no card flag, no
+  directive yet); E03 the next map load fires `checkArcCompletion`
+  and the ARC COMPLETE card plays with the asserted summary —
+  title 'ARC 3.5 — BATTLE FRONTIER · COMPLETE', badgeLine
+  'Badges: 7/7', the registry's frontier summaryLines verbatim,
+  the forwardLine naming Sinnoh and Gary; E04 regionsDone gains
+  'frontier' exactly once, the directive pins on 'sinnoh', and
+  Scott does NOT fire on the hub (Pallet-only); E05 the card does
+  not fire twice on later loads; E06 the hub ferry return sails
+  with `embark_frontier` DELETED (unconditional —
+  `reachedarc_frontier` carries the leg) and lands on Pallet;
+  E07 Scott's scene fires on that entry (`scott_closing_done` set;
+  the salute, the lab/Gary/Sinnoh/Electivire pointer and 'Home
+  first' all in the spoken lines); E08 leave + re-enter Pallet —
+  no re-fire (exactly one closing scene in the UI log); E09 the
+  SEALED Sinnoh homecoming completes at Mom's house with Gary's
+  hook lines (incl. the Electivire line) delivered BY THE MACHINE
+  — `hook_sinnoh` + `homecoming_sinnoh` set, directive cleared;
+  E10 the sealed law holds — story.arc STAYS 'frontier',
+  `embark_sinnoh` NOT set, regionsDone unchanged; E11/E12 the
+  Journey headers read ARC 3.5 · BATTLE FRONTIER — COMPLETE and
+  ARC 4 · SINNOH — SEALED (arcStateOf agrees) and the Regions
+  surface's Sinnoh row reads sealed; E13/E14 the negatives and
+  the seam unit (no fire without `frontier_complete`, no fire
+  off-Pallet with or without the flag, speaker 'SCOTT', never
+  twice).
+- **Budget restatement (H0 method, arc3-pack-decision.md §4/§6;
+  register only, no new thresholds):** the Frontier's ACTUAL
+  delta over the Hoenn close is **131,098 B** (this build's
+  public static total 10,094,049 B − the Hoenn close 9,962,951 B;
+  the delta is identical on the H0 game+index basis —
+  10,022,987 − 9,891,889 — since game.js is the only mover),
+  against the doc's projected Frontier increment of 102,255 B
+  (+28,843 over projection). The doc's projected Sinnoh-close
+  static total, adjusted by swapping the projected Frontier
+  increment for the actual delta: 12,086,695 − 102,255 +
+  131,098 = **12,115,538 B** projected Sinnoh close. Margin vs
+  the gate (the doc's exact gate bytes, 12,582,912 B):
+  **467,374 B** (3.71% of the gate). Distance to the 250,000 B
+  re-open trigger: **217,374 B** of margin still stands above
+  it — the trigger is not fired. Cross-check, re-anchoring the
+  same method on the ACTUAL Hoenn close (H0 basis 9,891,889 +
+  the actual Frontier delta 131,098 + the doc's Sinnoh central
+  arc total 2,111,475): 12,134,462 B, margin 448,450 B,
+  198,450 B above the trigger — same conclusion. Trigger (i)
+  watch: this build's public static total 10,094,049 B vs
+  10,100,000 B — NOT crossed (margin 5,951 B).
+- **F5 inheritances (by name):** (i) the chain drive's Hoenn-era
+  assertion of Homecoming #4's sealed behaviour must be
+  superseded when F5 extends the drive — the subject is kept,
+  per the C28/J4a precedent (a shipped-branch flip supersedes
+  the sealed-branch assertion, it does not delete it); (ii)
+  F5's independent QA re-drives everything from live play —
+  nothing in this entry's headless evidence substitutes for it.
+- Battery (this tree): frontier-checks **136/136**;
+  qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**
+  (HARD); campaign **24/24**; arc-foundation **47/47**;
+  hoenn-story **88/88**; johto-story **110/110**; cheat-shop
+  **44/44**; validator **89** + fuzz **2000/2000** +
+  save-contract **12/12**. **public/game.js: 9,931,427 B**,
+  byte-stable (build ×2, same sha256 77c3411a…); public static
+  total **10,094,049 B**. `personal/` byte-identical; dist/
+  restored.
