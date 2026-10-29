@@ -5787,11 +5787,15 @@ exactly the standing baseline **{b2, d9}** (its QA section 19/19) ·
 gen-tables --check **clean** · fresh build (vercel + guest) OK —
 guest 2dc90536…, vercel 9110d659…, personal line preserved
 (ce64da2b…) and personal/ files byte-identical. Extra safety on the
-touched normalizer: rejuv-phase1 **44/44** · rejuv-phase3 **63/63** ·
-rejuv-phase6 **44/45** — the one failure is C01's real-browser smoke
-("chromium did not start"), reproduced identically at base 445a195
-in a clean worktree: pre-existing sandbox-Chromium flakiness, not a
-J0 regression.
+touched normalizer: rejuv-phase1 **44/44** · rejuv-phase3 **60/61** ·
+rejuv-phase6 **44/45** — the two failures are the C01 real-browser
+cases in phase3 and phase6 ("chromium did not start"), each
+reproduced identically at base 445a195 in a clean worktree
+(phase3 60/61 and phase6 44/45 at base too): pre-existing
+sandbox-Chromium flakiness, not a J0 regression. [Count corrected
+after the implementer's first report misstated phase3 as 63/63 —
+the suite's current total is 61; the error was in the reporting,
+not the run.]
 
 ### 6. Leftovers, named
 
