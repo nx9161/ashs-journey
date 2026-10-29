@@ -2,7 +2,7 @@
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
 
 import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
-import { KEEPSAKES } from '../data/items.mjs';
+import { KEEPSAKES, BADGE_SETS } from '../data/items.mjs';
 import { ARCS, deriveArcDefaults } from '../data/arcs.mjs';
 
 const ARC_IDS = new Set(ARCS.map((a) => a.id));
@@ -44,6 +44,14 @@ export function validateSave(data) {
     }
   }
   if (!isObj(data.badges) || !Array.isArray(data.badges.kanto)) errors.push('bad-badges');
+  // Stage O2: badges.orange, when present, must be a PREFIX of the
+  // Orange earn order (BADGE_SETS) — the same rule the server
+  // validator enforces; absent = legacy save (filled to [] on load).
+  if (isObj(data.badges) && data.badges.orange !== undefined) {
+    const o = data.badges.orange;
+    const seq = BADGE_SETS.orange;
+    if (!Array.isArray(o) || o.length > seq.length || o.some((id, i) => id !== seq[i])) errors.push('bad-badges-orange');
+  }
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');
@@ -127,6 +135,15 @@ const DIFFICULTY_V1_TO_V2 = { easy: 'story', normal: 'classic', hard: 'challenge
 const HOUSE_RULE_KEYS = ['steadyDamage', 'mercifulFoes', 'fastLearner', 'generousWorld', 'candyCoach', 'skipIntro'];
 
 export function fillV2Defaults(data) {
+  // Stage O2: badges.orange defaults-fill — a legacy save with no
+  // Orange set opens with badges.orange = [] and loses nothing (the
+  // other sets pass through untouched when present and well-shaped).
+  if (isObj(data.badges)) {
+    if (!Array.isArray(data.badges.orange)) data.badges.orange = [];
+    if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
+    if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
+    if (!Array.isArray(data.badges.symbols)) data.badges.symbols = [null, null, null, null, null, null, null];
+  }
   // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
   // on load (party + boxes), so v1 saves and pre-Phase-3 v2 saves open
   // clean with keepsake=null on every mon.

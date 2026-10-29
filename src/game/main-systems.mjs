@@ -9,6 +9,7 @@ import { ITEMS } from '../data/items.mjs';
 import { giveKeepsake } from './keepsakes.mjs';
 import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './state.mjs';
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
+import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
 import { FORMS } from '../data/forms.mjs';
@@ -328,6 +329,28 @@ Object.assign(Game.prototype, {
         value: 'q:' + q.id, disabled: !active && !doneF,
       });
     }
+    // Section 1.5 — Orange Islands (Stage O2): the ORANGE_QUESTS chain
+    // in the MAIN_QUESTS idiom, rendered as its own section once the
+    // Orange arc is reached (the homecoming hook, the current arc, a
+    // first badge, or a completed voyage). The badge stage's text
+    // tracks n/4 from badges.orange while it is the active stage.
+    const orangeReached = currentArcOf(g.state).id === 'orange'
+      || !!g.state.story.flags.hook_orange
+      || ((g.state.badges.orange || []).length > 0)
+      || !!g.state.story.flags.orange_gsball
+      || (g.state.story.regionsDone || []).includes('orange');
+    if (orangeReached) {
+      items.push({ label: '— ORANGE ISLANDS —', value: null, disabled: true, band: true });
+      for (const q of ORANGE_QUESTS) {
+        const doneF = q.flag && g.state.story.flags[q.flag];
+        const active = !doneF && ORANGE_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const count = q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : '';
+        items.push({
+          label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text + (q.badgeCount ? count : ''),
+          value: 'oq:' + q.id, disabled: !active && !doneF,
+        });
+      }
+    }
     // Section 2 — Legendary Arcs (unchanged: arcs list from story.quests,
     // exactly the ids the arc machinery wrote there).
     const arcs = Object.keys(g.state.story.quests || {});
@@ -371,7 +394,14 @@ Object.assign(Game.prototype, {
         if (c) g.ui.say([c.name + ' — ' + tierOf(g.state, c.id), c.note], () => g.openQuestLog(), 'People');
         return;
       }
-      if (v.startsWith('q:')) {
+      if (v.startsWith('oq:')) {
+        const q = ORANGE_QUESTS.find((x) => 'oq:' + x.id === v);
+        if (q) {
+          const lines = [q.text + (q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : ''), q.hint];
+          if (q.id === 'q_orange_league' && g.state.story.flags.orange_champion) lines.push("Winner's Trophy: in your bag, and your winning team is recorded in the Hall of Fame.");
+          g.ui.say(lines, () => g.openQuestLog(), 'Quest');
+        }
+      } else if (v.startsWith('q:')) {
         const q = MAIN_QUESTS.find((x) => 'q:' + x.id === v);
         if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');
       } else if (v.startsWith('arc:')) {

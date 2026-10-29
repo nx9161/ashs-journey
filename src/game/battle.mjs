@@ -2009,8 +2009,15 @@ export class BattleScene {
     this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
     this.msgOpen = false;
     if (t.badge) {
-      if (!g.state.badges.kanto.includes(t.badge)) g.state.badges.kanto.push(t.badge);
+      // Badge award (Kanto representation, generalized Stage O2): the
+      // trainer def names its set (badgeSet, default 'kanto'); the id
+      // lands in badges.<set> and the badge_<root> flag fires — the
+      // exact two writes Kanto shipped, now set-driven.
+      const setId = t.badgeSet || 'kanto';
+      const setArr = g.state.badges[setId] || (g.state.badges[setId] = []);
+      if (!setArr.includes(t.badge)) setArr.push(t.badge);
       g.state.story.flags['badge_' + t.badge.replace(/badge$/, '')] = true; // quest chain (WS6)
+      if (setId === 'orange' && setArr.length >= 4) g.state.story.flags.orange_crew_done = true;
       g.audio.playSfx('badge'); // badge fanfare (visual twin: badge-case shine animation)
       if (t.id === 'brock') {
         // The slice capstone lines are Brock's scene specifically.
