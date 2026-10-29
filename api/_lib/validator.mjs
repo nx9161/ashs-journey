@@ -233,8 +233,8 @@ function checkBadges(badges, errors, anomalies) {
   if (!isPlainObj(badges)) return errors.push('bad-badges');
   const dk = hasDangerousKey(badges);
   if (dk) return errors.push('dangerous-key:' + dk);
-  const counts = { kanto: 0, orange: 0, johto: 0 };
-  for (const region of ['kanto', 'orange', 'johto']) {
+  const counts = { kanto: 0, orange: 0, johto: 0, hoenn: 0 };
+  for (const region of ['kanto', 'orange', 'johto', 'hoenn']) {
     const arr = badges[region];
     const max = TABLES.regionBadgeMax[region];
     if (!Array.isArray(arr) || arr.length > max) { errors.push('bad-badges-' + region); continue; }
@@ -554,7 +554,7 @@ export function validateSave(data) {
 
   let badgeCounts = null;
   if (TABLES) badgeCounts = checkBadges(data.badges, errors, anomalies);
-  summary.badgeCount = badgeCounts ? badgeCounts.kanto + badgeCounts.orange + badgeCounts.johto : 0;
+  summary.badgeCount = badgeCounts ? badgeCounts.kanto + badgeCounts.orange + badgeCounts.johto + badgeCounts.hoenn : 0;
 
   checkStory(data.story, errors);
 
@@ -580,7 +580,7 @@ export function validateSave(data) {
   if (!isPlainObj(bag) || hasDangerousKey(bag)) errors.push('bad-bag');
   else {
     const keys = Object.keys(bag);
-    if (keys.length > 160) errors.push('bad-bag-size');
+    if (keys.length > 168) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (168 since H4a's 8 Hoenn badges; was 160 at J6)
     for (const k of keys) {
       if (!TABLES.items.has(k) || !isInt(bag[k], 0, 999)) { errors.push('bad-bag-item'); break; }
     }

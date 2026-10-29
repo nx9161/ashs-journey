@@ -154,6 +154,19 @@ export const ITEMS = {
   mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Olivine. It shines back at the lighthouse.' },
   glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Mahogany. It will not melt. Neither will you.' },
   risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Blackthorn — awarded in the Dragon\'s Den, by the clan\'s law, after the elder\'s test.' },
+  // Hoenn badges (Stage H4a): the Kanto representation exactly — a
+  // key-pocket ITEMS row per badge, the id in badges.hoenn, and the
+  // badge_<root> story flag. First four are playable in H4a; the east
+  // four rows ship now so the earn order is complete from day one
+  // (H4b's leaders award them without touching this table).
+  stonebadge: { id: 'stonebadge', name: 'Stone Badge', pocket: 'key', desc: 'From Roxanne of Rustboro. Cut from the same stone her gym is built from.' },
+  knucklebadge: { id: 'knucklebadge', name: 'Knuckle Badge', pocket: 'key', desc: 'From Brawly of Dewford. For a team that can take a wave standing up.' },
+  dynamobadge: { id: 'dynamobadge', name: 'Dynamo Badge', pocket: 'key', desc: 'From Wattson of Mauville. It hums faintly in a thunderstorm.' },
+  heatbadge: { id: 'heatbadge', name: 'Heat Badge', pocket: 'key', desc: 'From Flannery of Lavaridge. Warm to the touch, always.' },
+  balancebadge: { id: 'balancebadge', name: 'Balance Badge', pocket: 'key', desc: 'From Norman of Petalburg. Perfectly weighted, either way up.' },
+  featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
+  mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
+  rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
   // Stage J4b key item: the Cianwood pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
@@ -228,6 +241,7 @@ export const BADGE_SETS = {
   kanto: ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'],
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
   johto: ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge', 'glacierbadge', 'risingbadge'],
+  hoenn: ['stonebadge', 'knucklebadge', 'dynamobadge', 'heatbadge', 'balancebadge', 'featherbadge', 'mindbadge', 'rainbadge'],
 };
 export const ORANGE_BADGES = BADGE_SETS.orange;
 

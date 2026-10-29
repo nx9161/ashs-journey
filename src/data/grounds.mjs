@@ -186,6 +186,18 @@ export const MAP_GROUND = {
   // so its battles ride the Storm ground.
   'rocket-hideout': 'storm',
   'silver-stadium': 'open',
+  // Stage H4a: Hoenn west gym signature Grounds (existing 15 only —
+  // no new Grounds this stage): Roxanne's quarry gym rides the Rubble,
+  // Brawly's shore gym the Rubble too (physical moves land true where
+  // the surf hits — the Chuck precedent), Wattson's the Volt, and
+  // Flannery's the Pyre. Landmarks follow their feel: Meteor Falls is
+  // Rubble-dark, Mt. Chimney's crater rim is Ember ground.
+  'gym-rustboro': 'rubble', // Rustboro Gym — Roxanne
+  'gym-dewford': 'rubble', // Dewford Gym — Brawly
+  'gym-mauville': 'volt', // Mauville Gym — Wattson
+  'gym-lavaridge': 'pyre', // Lavaridge Gym — Flannery
+  'meteor-falls': 'rubble',
+  'mt-chimney': 'ember',
   'mt-silver-cave': 'frost',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',

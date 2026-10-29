@@ -114,6 +114,13 @@ export function validateSave(data) {
     const seq = BADGE_SETS.johto;
     if (!Array.isArray(j) || !seq || j.length > seq.length || j.some((id, i) => id !== seq[i])) errors.push('bad-badges-johto');
   }
+  // Stage H4a: badges.hoenn, when present, must be a PREFIX of the
+  // Hoenn earn order (BADGE_SETS) — the same rule, the same source.
+  if (isObj(data.badges) && data.badges.hoenn !== undefined) {
+    const h = data.badges.hoenn;
+    const seq = BADGE_SETS.hoenn;
+    if (!Array.isArray(h) || !seq || h.length > seq.length || h.some((id, i) => id !== seq[i])) errors.push('bad-badges-hoenn');
+  }
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');
@@ -204,6 +211,7 @@ export function fillV2Defaults(data) {
     if (!Array.isArray(data.badges.orange)) data.badges.orange = [];
     if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
     if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
+    if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
     if (!Array.isArray(data.badges.symbols)) data.badges.symbols = [null, null, null, null, null, null, null];
   }
   // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
@@ -329,7 +337,7 @@ export function migrate(data) {
   if (data.v === 0) {
     data.v = 1;
     data.facilities = data.facilities || { registry: [], unlocked: [] };
-    data.badges = data.badges || { kanto: [], orange: [], johto: [], symbols: [null, null, null, null, null, null, null] };
+    data.badges = data.badges || { kanto: [], orange: [], johto: [], hoenn: [], symbols: [null, null, null, null, null, null, null] };
   }
   if (data.v === 1) {
     data.v = 2;

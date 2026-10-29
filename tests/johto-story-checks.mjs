@@ -126,10 +126,10 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 160 (146 + 7 apricorns + 7 apricorn balls, Stage J6 — supersedes the Stage J5 count), quests table carries every q_johto_* + johto tale id',
+  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 168 (160 + 8 Hoenn badges, Stage H4a — supersedes the Stage J6 count), quests table carries every q_johto_* + johto tale id',
     checkOut.includes('tables.json OK')
     && JSON.stringify(t.badgeSequences.johto) === JSON.stringify(JOHTO_ORDER)
-    && t.items.length === 160
+    && t.items.length === 168
     && t.items.includes('secretpotion')
     && JOHTO_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(JOHTO_TALES).every((id) => t.quests.includes(id)), checkOut.trim());
@@ -791,9 +791,9 @@ const driver = `
     JSON.stringify({ card: stE.story.flags.arc_card_johto, done: stE.story.regionsDone, dir: stE.story.arc_directive }));
 
   gotoMap(gE, 'house-pallet-ash', 4, 6); pump(gE);
-  ok('E26 Homecoming #3: Hawthorn’s Hoenn hook is delivered by the ritual, the directive clears, Arc 3 stays SEALED (arc stays johto, no embark flag) and no state dangles',
+  ok('E26 Homecoming #3: Hawthorn’s Hoenn hook is delivered by the ritual, the directive clears, and — Stage H4a having SHIPPED Arc 3 (registry flip, ruling 1; supersedes the sealed-era expectation) — the machine ADVANCES: arc becomes hoenn and embark_hoenn is armed, no state dangles',
     stE.story.flags.hook_hoenn === true && stE.story.arc_directive === null
-    && stE.story.arc === 'johto' && !stE.story.flags.embark_hoenn,
+    && stE.story.arc === 'hoenn' && stE.story.flags.embark_hoenn === true,
     JSON.stringify({ hook: stE.story.flags.hook_hoenn, arc: stE.story.arc }));
 
   // ---- Red, post-completion ----

@@ -8757,3 +8757,197 @@ back to the trench. H4 gates the sysInteract DIVE action on the
   declare fair-weather fields only.
 - Palette union headroom is 14 hexes and art-data headroom is
   99,790 B — any H4+ art re-measures first (J3b procedure).
+
+## Arc 3 Stage H4a — Hoenn story, FIRST HALF + weather renderer + registry flip (2026-10-29)
+
+Base a265457 (all H1–H3 content shipped). ONE commit. `personal/`
+byte-identical (restored from HEAD after builds; zero personal/
+paths in the diff). Never pushed, never deployed.
+
+### Registry flip + embark (rulings 1, scope 1–2)
+
+- `src/data/arcs.mjs`: the Hoenn row's `status: 'sealed'` →
+  `'shipped'` — the ONLY change in the row (band 201–300, horizon
+  386, embark vermilion→littleroot, Hawthorn hookLines all already
+  correct, consumed not rewritten).
+- Embark captain: **CAPT HOENN**, Vermilion dock (16,10) — east of
+  CAPT ORANGE (13,10), clear of SAILOR BRINE (10,10) — appended via
+  the quests.mjs TALE_NPCS loadMap idiom exactly as CAPT JOHTO was
+  wired at Pallet in J3a; carries `ferry: 'littleroot',
+  ferryArc: 'hoenn'`, no tale/role. The Foundation machine does the
+  rest untouched: Homecoming #3 (Johto's close) delivers Hawthorn's
+  hook, sets `story.arc = 'hoenn'` + `embark_hoenn`, and the shipped
+  ferryArc handler sails Vermilion → Littleroot and stamps
+  `reachedarc_hoenn`. The return port shipped in H3 (CAPT MERIDIAN,
+  Slateport) was already correct and is test-pinned.
+- Superseded expectations (count/behaviour supersessions, the J6
+  pattern — NOT regressions): johto-story A15 + cheat-shop A02 +
+  johto-systems A24 item counts 160 → 168 (+8 Hoenn badge ITEMS);
+  validator bag cap 160 → 168 (the cap tracks the ITEMS table, as
+  at J6); johto-story E26 rewritten from the sealed-era expectation
+  ("Arc 3 stays SEALED, no embark flag") to the shipped behaviour
+  (arc advances, `embark_hoenn` armed) — E26's own drive now proves
+  the H4a embark arm end-to-end from the Johto side.
+
+### Beats inventory (src/data/story-hoenn.mjs, NEW; module-order after story-johto)
+
+- **Arrival spine:** `ev_hoenn_rescue` (Littleroot entry, gated on
+  `story.arc === 'hoenn'`): Birch cornered by a wild Poochyena —
+  an uncatchable band-floor face (Lv 203) the carried veteran team
+  drives off (the starter-era beat adapted to a carried-team
+  reality; flee stalls, re-fires). Sets `birch_rescued`.
+  `ev_hoenn_arrival` (first birch-lab entry): registration, the
+  Wally/May pointers. Sets `hoenn_arrival` + `birch_registered`.
+  PROF. BIRCH stands in the lab as a `hoenn: 'birch'` actor with
+  post-Meteor / post-Chimney dialogue states.
+- **May (co-spine):** met in Littleroot (`may_met`); contest beats
+  are story state, not a second system (H5 builds the engine):
+  Slateport (gate: Knuckle Badge) — she competes, loses by half a
+  point, `may_slateport_done`, NO ribbon; Verdanturf (gate: Dynamo)
+  — ribbon #1: `may_verdanturf_done` + `may_ribbon_verdanturf`;
+  Fallarbor (gate: Heat) — ribbon #2: `may_fallarbor_done` +
+  `may_ribbon_fallarbor`. Lilycove is H4b/H5's.
+- **Wally:** Petalburg, first talk plays the whole beat (borrowed
+  Zigzagoon, the pond-grass Ralts catch narrated, no battle — per
+  anime): `wally_helped` + `wally_ralts`. NORMAN stands in his gym
+  and defers honestly (`norman_met`, no badge in H4a — H4b's).
+- **Magma/Aqua seeds (original writing throughout):** Meteor Falls
+  first contact (entry, Stone Badge held): both teams glimpsed,
+  Cozmo + the meteorite, one grunt scuffle via `battleAny`
+  (`meteor_magma_won`/`meteor_magma_lost` branch flags), the
+  meteorite stolen in the confusion: `meteor_falls_done` +
+  `teams_glimpsed` + `cozmo_met`. Mt. Chimney clash (entry, Dynamo
+  held): Admin Brask (Magma) at the crater machine via `battleAny`
+  (`chimney_magma_won`/`chimney_magma_lost`), Admin Selka (Aqua)
+  breaks it up, the meteorite's use teased (crater-feeding), never
+  explained: `chimney_clash_done` + `meteorite_teased`. Both admins
+  also stand as Chimney NPCs with pre/post dialogue. Weather
+  Institute is SEEDED only: a Weather Watcher in Fortree + Birch's
+  post-Chimney lines point at Route 119 — the full beat is H4b's.
+- **Town Tales ×4** (shipped shape law, `hoennTale: true` riding the
+  same data-driven runTaleNpc branch as Johto's): Littleroot
+  (Bramble/Harlow), Petalburg (Orin/Lio), Rustboro (Pell/Moss),
+  Slateport (Vesk/Ana) — patches stamp real maps7 townsfolk.
+- **Quests:** HOENN_QUESTS, 12 first-half rows (flag order in the
+  suite, A03). The HUD objective gains a Hoenn branch on the same
+  find; gen-tables now emits the Hoenn quests/tales + badge
+  sequence (regen only, never hand-edited).
+
+### Badge / level table (band 201–300, ruling 6 curve)
+
+| Gym | Leader | Team (levels) | Ace | Badge → flag |
+|---|---|---|---|---|
+| Rustboro | Roxanne | Geodude 209, Aron 212, Nosepass 215+fossilspur | 215 | stonebadge → badge_stone |
+| Dewford | Brawly | Machop 219, Meditite 222, Makuhita 225+secondwindribbon | 225 | knucklebadge → badge_knuckle |
+| Mauville | Wattson | Voltorb 229, Magneton 231, Electrike 233, Manectric 235+thunderheadpin | 235 | dynamobadge → badge_dynamo |
+| Lavaridge | Flannery | Numel 239, Slugma 241, Camerupt 243, Torkoal 245+embereed | 245 | heatbadge → badge_heat |
+
+Awards ride the shipped idiom untouched: trainer defs carry
+`badgeSet: 'hoenn'` + `badge`; winTrainer writes `badges.hoenn` +
+`badge_<root>`. New plumbing H4a minted (the story stage owns it):
+8 Hoenn badge ITEMS rows (east four included, so the earn order is
+complete from day one), `BADGE_SETS.hoenn`, `badges.hoenn: []` in
+defaultState, the schema prefix pair (`bad-badges-hoenn`) + fill,
+the validator pair (hoenn in checkBadges + badgeCounts), and the
+gen-tables Hoenn rows. Leader battles sit behind the badge-order
+gate (BADGE_SETS.hoenn-driven, the J5 Johto precedent). Gym rosters:
+2 talk-to trainers per gym (205–241, rising by gym) filling H3's
+empty floors via the generic trainer path. Gym Grounds from the
+existing 15: Rustboro rubble, Dewford rubble (the Chuck precedent),
+Mauville volt, Lavaridge pyre; Meteor Falls rubble, Mt. Chimney
+ember.
+
+### Weather mechanism (ruling 4's renderer; NEW src/game/weather.mjs)
+
+- **Resolver** `weatherForMap(state, map)` → `{kind, source, heavy}`
+  — pure, reads ONLY the current map's `weather` field (maps7:
+  clear 36 / sun 10 / rain 4 / ash 3; interiors + underwater declare
+  none). No field / indoor / dark → `{clear, none}`: Kanto/Johto/
+  Orange maps are byte-identical in behaviour.
+- **Renderer** `drawWeatherOverlay(r, game, wstate)` called from
+  OverworldScene.render immediately AFTER the Premium+ time-of-day
+  tint and BEFORE all HUD/text draws: rain = blue wash + hashed
+  diagonal streaks; ash = grey drift motes; sand = haze wash +
+  horizontal streaks; sun = warm glare wash. Particles are
+  hash-placed (zero RNG consumption — gameplay randomness can never
+  be perturbed by a render), animated off `game._animT`, frozen
+  static under Reduced Motion. Presentation only: no battle or
+  encounter code reads weather (battle weather stays Grounds').
+- **Climax override hook (H4b consumes):** flags
+  **`climax_drought`** / **`climax_deluge`** (story.flags booleans).
+  While either stands, Hoenn OUTDOOR maps (maps declaring a field)
+  override: drought → sun heavy, deluge → rain heavy; the override
+  wins over the map field; interiors/underwater/non-Hoenn maps are
+  unaffected even with a flag set; both set → drought wins
+  (documented precedence; H4b never sets both). Proven by the
+  suite's test toggle (A19–A20 pure, B21–B22 in the live bundle).
+
+### Design smells — what the Foundation machine had to LEARN
+
+**One real smell, honestly named: the badge plumbing was NOT
+registry-complete for an unshipped arc.** The Foundation story
+(registry row + machine) rode clean — homecoming, directive,
+embark gating, ferry network, arcStateOf all consumed Hoenn with
+zero machine changes (B01–B04 are the machine's own flows). But a
+new arc's BADGE SET existed nowhere until this stage minted it in
+five places at once (ITEMS, BADGE_SETS, defaultState, schema pair,
+validator pair + gen-tables) — for Johto those five landed inside
+J4a invisibly because the set and its first leaders shipped
+together. Recorded law for Arc 4: a story stage's first commit is
+the badge-set quintet, before any leader is authored. No other
+smells: the loadMap append idiom, the tale branch (generalised by
+one `||` to `hoennTale`), the leader runner, battleAny and the
+ferry handler all rode clean.
+
+### Battery + build
+
+- **NEW tests/hoenn-story-checks.mjs: 48/48** (24 pure + 24 bundle
+  true-path: Homecoming #3 → embark → rescue → arrival → Wally →
+  Norman deferral → roster battle → badges 1–4 in order → Meteor →
+  Slateport/Verdanturf/Fallarbor May beats → Chimney → weather
+  reads incl. the climax toggle).
+- qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**
+  (HARD); campaign-smoke **24/24**; fidelity **35/35**;
+  johto-story **110/110**; johto-systems **62/62**;
+  arc-foundation **47/47**; cheat-shop **44/44**; orange-story
+  38/38; orange-climax 42/42; Track B **114/114**; qa-slice
+  exactly **{s6, l8}**; rejuv-phase2 exactly **{A09, C01}** (A09's
+  assigned count moved 101 → 107 with the six new Ground rows —
+  the same single named failure as at base, not a new one);
+  budgets **all gates pass**; `personal/` byte-identical.
+- **public/game.js: 9,666,694 B** (+64,881 vs HEAD's committed
+  9,601,813 = story-hoenn data + weather module + engine wiring).
+
+### What H4b inherits (exact names + staging)
+
+- **Flags set by H4a it may rely on:** birch_rescued, hoenn_arrival,
+  birch_registered, may_met, may_slateport_done,
+  may_verdanturf_done, may_ribbon_verdanturf, may_fallarbor_done,
+  may_ribbon_fallarbor, wally_helped, wally_ralts, norman_met,
+  meteor_falls_done, teams_glimpsed, cozmo_met, meteor_magma_won /
+  meteor_magma_lost, chimney_clash_done, meteorite_teased,
+  chimney_magma_won / chimney_magma_lost, badge_stone / _knuckle /
+  _dynamo / _heat.
+- **Climax mechanism:** set `climax_drought` / `climax_deluge`
+  (weather.mjs exports CLIMAX_DROUGHT_FLAG / CLIMAX_DELUGE_FLAG);
+  the Rayquaza resolution CLEARS both — the renderer follows with
+  no further work. Never set both at once.
+- **Seams in story-hoenn.mjs** (marked): HOENN_QUESTS east rows,
+  HOENN_TRAINERS, HOENN_EVENTS, HOENN_TALES, HOENN_NPCS/PATCHES all
+  append at their `H4b` markers; runHoennNpc extends at its seam;
+  sysLoadMap's H4a trigger block is the pattern for Institute /
+  Pyre / hideout / Seafloor entry scenes.
+- **Staging notes:** Weather Institute full beat — seeded via the
+  Fortree Weather Watcher + Birch's post-Chimney lines (Route 119);
+  the Institute interior does not exist as a map (H3 shipped no
+  institute map — stage on r119/fortree or add the interior as
+  story dressing, maps7 stays untouched per idiom). Mt. Pyre,
+  magma-hideout, aqua-hideout, seafloor-cavern maps are dressed
+  shells (H3) waiting for locks/story; gym-petalburg already has
+  NORMAN standing at (7,2) with `norman_met` gating his intro —
+  his battle (Balance, ≈255) replaces the deferral branch. Juan
+  (not Wallace) is badge 8 per ruling 6; BADGE_SETS.hoenn +
+  badge ITEMS for 5–8 already exist — H4b authors leaders only.
+  May's Lilycove beat reads may_ribbon_verdanturf /
+  may_ribbon_fallarbor as her carried score. The Dive engine +
+  contest engine are H4b/H5 scope respectively — untouched here.

@@ -143,7 +143,7 @@ export function defaultState(inherit) {
     party: [],
     boxes: {},
     dex: { caught: {}, seen: {}, befriended: {} }, // dexNo -> true
-    badges: { kanto: [], orange: [], johto: [], symbols: [null, null, null, null, null, null, null] },
+    badges: { kanto: [], orange: [], johto: [], hoenn: [], symbols: [null, null, null, null, null, null, null] },
     story: {
       chapter: 0, beat: 0, flags: {},
       // WS6/WS10 story state: quest-log stages + region progression

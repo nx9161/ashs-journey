@@ -120386,6 +120386,19 @@ const ITEMS = {
   mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Olivine. It shines back at the lighthouse.' },
   glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Mahogany. It will not melt. Neither will you.' },
   risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Blackthorn — awarded in the Dragon\'s Den, by the clan\'s law, after the elder\'s test.' },
+  // Hoenn badges (Stage H4a): the Kanto representation exactly — a
+  // key-pocket ITEMS row per badge, the id in badges.hoenn, and the
+  // badge_<root> story flag. First four are playable in H4a; the east
+  // four rows ship now so the earn order is complete from day one
+  // (H4b's leaders award them without touching this table).
+  stonebadge: { id: 'stonebadge', name: 'Stone Badge', pocket: 'key', desc: 'From Roxanne of Rustboro. Cut from the same stone her gym is built from.' },
+  knucklebadge: { id: 'knucklebadge', name: 'Knuckle Badge', pocket: 'key', desc: 'From Brawly of Dewford. For a team that can take a wave standing up.' },
+  dynamobadge: { id: 'dynamobadge', name: 'Dynamo Badge', pocket: 'key', desc: 'From Wattson of Mauville. It hums faintly in a thunderstorm.' },
+  heatbadge: { id: 'heatbadge', name: 'Heat Badge', pocket: 'key', desc: 'From Flannery of Lavaridge. Warm to the touch, always.' },
+  balancebadge: { id: 'balancebadge', name: 'Balance Badge', pocket: 'key', desc: 'From Norman of Petalburg. Perfectly weighted, either way up.' },
+  featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
+  mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
+  rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
   // Stage J4b key item: the Cianwood pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
@@ -120460,6 +120473,7 @@ const BADGE_SETS = {
   kanto: ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'],
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
   johto: ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge', 'glacierbadge', 'risingbadge'],
+  hoenn: ['stonebadge', 'knucklebadge', 'dynamobadge', 'heatbadge', 'balancebadge', 'featherbadge', 'mindbadge', 'rainbadge'],
 };
 const ORANGE_BADGES = BADGE_SETS.orange;
 
@@ -148224,7 +148238,7 @@ const ARCS = [
     band: { min: 201, max: 300, bandIndex: 3 },
     badgeSet: 'hoenn', badgeTotal: 8,
     completionKey: 'hoenn', completionFlag: 'hoenn_complete',
-    status: 'sealed', future: false,
+    status: 'shipped', future: false,
     hookGiver: 'hawthorn', embarkPort: 'vermilion', arrivalMap: 'littleroot', home: 'pallet',
     summaryLines: [
       'Ever Grande Conference — HONOURS.',
@@ -150876,6 +150890,439 @@ const JOHTO_LEGENDARY_ARCS = {
 };
 
 
+// ---- src/data/story-hoenn.mjs ----
+// story-hoenn.mjs — Arc 3 (Hoenn) campaign data, Stage H4a: the FIRST
+// HALF of the Advanced spine (arrival -> Flannery) plus the Magma/Aqua
+// seed chain (Meteor Falls, Mt. Chimney) and May's contest beats.
+// Quest chain, leader / gym / villain trainer defs, scripted events,
+// Town Tales and the loadMap NPC tables, in the story-johto.mjs idiom
+// exactly (the CAPT JOHTO precedent: actors are appended / patched at
+// loadMap, never written into the generated maps7.mjs).
+// Anime is primary canon (ADR-015); ALL dialogue is original writing
+// in the game's voice — no quoted or closely-paraphrased lines.
+//
+// Stage split: H4a ships badges 1-4 (stone / knuckle / dynamo / heat),
+// the Birch rescue + lab arrival, May's co-spine opening and her
+// Slateport / Verdanturf / Fallarbor contest beats, Wally's first beat,
+// and the Magma/Aqua SEEDS. H4b (appended below the marked seams)
+// ships the east: Norman -> Juan, the Weather Institute full beat,
+// Mt. Pyre orbs, the hideouts, Seafloor Cavern, the drought/deluge
+// climax (which sets/clears the weather override flags the H4a
+// renderer reads — src/game/weather.mjs: climax_drought /
+// climax_deluge), the Lucario special, and the Ever Grande Conference
+// -> hoenn_complete through the Foundation machine.
+//
+// The visual weather layer itself lives in src/game/weather.mjs
+// (ruling 4: presentation ONLY — no battle/encounter effects).
+
+// ---------------------------------------------------------------------------
+// HOENN_QUESTS — the Hoenn main-story objective chain (first-half rows),
+// in the MAIN_QUESTS idiom (id / flag / text / hint). `flag` is the story
+// flag that completes the objective. H4b appends the east rows below
+// the marked seam.
+// ---------------------------------------------------------------------------
+const HOENN_QUESTS = [
+  { id: 'q_hoenn_rescue', flag: 'birch_rescued', text: 'Help Professor Birch — something is chasing him near Littleroot', hint: 'Shouting, just off the Littleroot road. A wild Poochyena has the professor cornered — drive it off.' },
+  { id: 'q_hoenn_arrival', flag: 'hoenn_arrival', text: 'Meet Professor Birch in his Littleroot lab', hint: 'Birch\'s lab stands at the north edge of Littleroot. He owes you a proper welcome — and your Hoenn journey needs registering.' },
+  { id: 'q_hoenn_wally', flag: 'wally_helped', text: 'Help Wally catch his first Pokemon in Petalburg', hint: 'A frail boy in Petalburg wants to catch a Pokemon of his own before his family moves. He has the heart; he needs a borrowed partner and a steady friend.' },
+  { id: 'q_hoenn_stone', flag: 'badge_stone', text: 'Win the Stone Badge from Roxanne in Rustboro City', hint: 'Roxanne keeps Rustboro\'s gym with Rock types raised from the quarry stone itself. Water, Grass, Fighting, Ground and Steel moves crack them.' },
+  { id: 'q_hoenn_knuckle', flag: 'badge_knuckle', text: 'Win the Knuckle Badge from Brawly in Dewford Town', hint: 'Brawly trains where the surf breaks. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
+  { id: 'q_hoenn_slateport_may', flag: 'may_slateport_done', text: 'Watch May compete at the Slateport Contest Hall', hint: 'May is entering her first big contest in Slateport. She would never ask you to come. Come anyway.' },
+  { id: 'q_hoenn_meteor', flag: 'meteor_falls_done', text: 'See what the two teams wanted at Meteor Falls', hint: 'North of Rustboro, the falls run cold under old star-stone. Professor Cozmo studies the meteorites there — and lately, he has had watchers.' },
+  { id: 'q_hoenn_dynamo', flag: 'badge_dynamo', text: 'Win the Dynamo Badge from Wattson in Mauville City', hint: 'Wattson built Mauville\'s grid and its gym with his own hands. His Electric types fear Ground moves above all.' },
+  { id: 'q_hoenn_verdanturf_may', flag: 'may_verdanturf_done', text: 'Watch May compete at the Verdanturf Contest Hall', hint: 'Verdanturf\'s hall is small and serious about it. May has been practicing a new appeal all week.' },
+  { id: 'q_hoenn_chimney', flag: 'chimney_clash_done', text: 'Break up the clash on Mt. Chimney', hint: 'Two teams, one volcano, and a meteorite that does not belong to either of them. The cable car from Route 112 climbs straight into it.' },
+  { id: 'q_hoenn_heat', flag: 'badge_heat', text: 'Win the Heat Badge from Flannery in Lavaridge Town', hint: 'Flannery is new to her grandfather\'s gym and determined to burn bright enough to fill it. Her Fire types fear Water, Ground and Rock moves.' },
+  { id: 'q_hoenn_fallarbor_may', flag: 'may_fallarbor_done', text: 'Watch May compete at the Fallarbor Contest Hall', hint: 'Ash country. The Fallarbor crowd judges hard and applauds harder. May knows it — she picked this hall on purpose.' },
+  // --- H4b: the east rows append here ---
+];
+
+// ---------------------------------------------------------------------------
+// HOENN_TRAINERS — merged into TRAINERS by merge.mjs. Leader shape is
+// the Kanto gym idiom exactly, plus badgeSet: 'hoenn' so winTrainer's
+// award path writes badges.hoenn + the badge_<root> flag. Leader aces
+// carry an authored keepsake (the Classic leader-ace pattern).
+// Levels ride the Hoenn band (201-300), ruling 6 curve for H4a:
+// Roxanne ace 215, Brawly 225, Wattson 235, Flannery 245.
+// ---------------------------------------------------------------------------
+const HOENN_TRAINERS = {
+  roxanne: {
+    id: 'roxanne', name: 'Roxanne', title: 'Rustboro Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['I am Roxanne, and this gym is my classroom as much as my arena. Every stone in it was placed to teach one lesson: what looks immovable is only waiting for the right pressure. Show me yours, challenger.'],
+    lose: ['Pressure, perfectly applied... The class is yours today.', 'The Stone Badge is yours. Take the quarry road north sometime — the falls up there have been teaching the same lesson longer than either of us.'],
+    team: [
+      { species: 'geodude', level: 209 },
+      { species: 'aron', level: 212 },
+      { species: 'nosepass', level: 215, keepsake: 'fossilspur' },
+    ],
+    reward: 6600, badge: 'stonebadge',
+  },
+  brawly: {
+    id: 'brawly', name: 'Brawly', title: 'Dewford Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['You crossed open water to stand on my mats — good. Out here we read a challenger the way we read a wave: not by how loud it arrives, but by whether it is still standing after the break. Show me your balance, trainer.'],
+    lose: ['Clean through the break, and still standing... Beautifully surfed.', 'The Knuckle Badge is yours. The tide that carried you here will carry you further — Slateport next, if the sea road calls. Mind the contest crowds; they are louder than the surf.'],
+    team: [
+      { species: 'machop', level: 219 },
+      { species: 'meditite', level: 222 },
+      { species: 'makuhita', level: 225, keepsake: 'secondwindribbon' },
+    ],
+    reward: 7200, badge: 'knucklebadge',
+  },
+  wattson: {
+    id: 'wattson', name: 'Wattson', title: 'Mauville Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['Wahahaha! A challenger with sparks in their step! I built this city\'s grid with these hands, youngster, and I built this gym to trip anyone who walks it carelessly. Mind the barriers — they bite in my favorite key!'],
+    lose: ['Wahaha — BZZT! Beaten, and grinning about it! That has not happened in far too long.', 'The Dynamo Badge is yours! Take the north road when you are ready — but a word from an old electrician: something up by the volcano is drawing current it should not. Teams, arguing over a rock. Watch yourself up there.'],
+    team: [
+      { species: 'voltorb', level: 229 },
+      { species: 'magneton', level: 231 },
+      { species: 'electrike', level: 233 },
+      { species: 'manectric', level: 235, keepsake: 'thunderheadpin' },
+    ],
+    reward: 7800, badge: 'dynamobadge',
+  },
+  flannery: {
+    id: 'flannery', name: 'Flannery', title: 'Lavaridge Gym Leader', ai: 'smart', badgeSet: 'hoenn',
+    intro: ['I — I am Flannery, and this gym was my grandfather\'s before it was mine, and I will thank you not to go easy on either of us. The springs outside are for resting. In here, we burn. Show me you can stand the heat, challenger!'],
+    lose: ['Beaten — fairly, completely beaten, in my own fire... Grandfather would say that is the tuition. He would be right.', 'The Heat Badge is yours. It is warm. It is always warm — that is how you will know it is real. Whatever is smoking up on Chimney, trainer... after this battle, I believe you can face it.'],
+    team: [
+      { species: 'numel', level: 239 },
+      { species: 'slugma', level: 241 },
+      { species: 'camerupt', level: 243 },
+      { species: 'torkoal', level: 245, keepsake: 'embereed' },
+    ],
+    reward: 8400, badge: 'heatbadge',
+  },
+  // Gym rosters (plain talk-to trainers, the Sprout monk idiom).
+  rustboro_gym_1: {
+    id: 'rustboro_gym_1', name: 'Youngster Bram', title: 'Rustboro Gym Trainer', ai: 'basic',
+    intro: ['Roxanne makes us sign the quarry book and check our boots. Then she makes us battle every challenger twice as hard. Boots checked. Book signed. Your turn.'],
+    lose: ['Checked, signed, and beaten. The book has a column for that too, probably.'],
+    team: [
+      { species: 'geodude', level: 205 },
+      { species: 'aron', level: 207 },
+    ],
+    reward: 500,
+  },
+  rustboro_gym_2: {
+    id: 'rustboro_gym_2', name: 'Hiker Sella', title: 'Rustboro Gym Trainer', ai: 'basic',
+    intro: ['I haul stone for this gym on weekdays and defend it on all the others. The stone does not care which day it is. Neither do I.'],
+    lose: ['Hauled down fair and square. Roxanne is at the back, challenger — mind the compass stone. It points at whoever is proudest. Today, that is you.'],
+    team: [
+      { species: 'geodude', level: 207 },
+      { species: 'nosepass', level: 209 },
+    ],
+    reward: 550,
+  },
+  dewford_gym_1: {
+    id: 'dewford_gym_1', name: 'Blackbelt Rook', title: 'Dewford Gym Trainer', ai: 'basic',
+    intro: ['In the dark, footwork is everything. Brawly turns the lights down on purpose. He says the sea does not fight you in daylight either — it fights you in weather. Step up.'],
+    lose: ['Your footwork found me in the dark. Brawly is through the gloom, trainer — follow the sound of the surf in the walls.'],
+    team: [
+      { species: 'machop', level: 216 },
+      { species: 'meditite', level: 218 },
+    ],
+    reward: 600,
+  },
+  dewford_gym_2: {
+    id: 'dewford_gym_2', name: 'Battle Girl Sana', title: 'Dewford Gym Trainer', ai: 'basic',
+    intro: ['Everyone asks why a fighting gym sits on a surf island. Because a wave is just a punch the ocean throws forever, that is why. Catch mine!'],
+    lose: ['Caught, and returned with interest! Brawly felt that one through the mats, I promise you.'],
+    team: [
+      { species: 'makuhita', level: 220 },
+      { species: 'machop', level: 221 },
+    ],
+    reward: 650,
+  },
+  mauville_gym_1: {
+    id: 'mauville_gym_1', name: 'Camper Ilya', title: 'Mauville Gym Trainer', ai: 'basic',
+    intro: ['Wattson wired these barriers himself and still apologizes to them when they trip. I do not apologize. I conduct. Ready?'],
+    lose: ['Grounded. Completely grounded. Wattson is laughing somewhere behind that last barrier — I can hear the grid hum it.'],
+    team: [
+      { species: 'voltorb', level: 226 },
+      { species: 'electrike', level: 228 },
+    ],
+    reward: 700,
+  },
+  mauville_gym_2: {
+    id: 'mauville_gym_2', name: 'Engineer Pask', title: 'Mauville Gym Trainer', ai: 'basic',
+    intro: ['I maintain this gym\'s grid. Every challenger is a load test. You look like a heavy one — good. The grid has been bored all week.'],
+    lose: ['Load test: failed, gloriously. The old man at the back is your prize, trainer. Try not to trip his favorite barrier on the way.'],
+    team: [
+      { species: 'magnemite', level: 229 },
+      { species: 'magneton', level: 231 },
+    ],
+    reward: 750,
+  },
+  lavaridge_gym_1: {
+    id: 'lavaridge_gym_1', name: 'Kindler Fenn', title: 'Lavaridge Gym Trainer', ai: 'basic',
+    intro: ['The floor grates breathe spring steam, and the footing here is a local tradition and a local test. Mind your step — then mind my Slugma.'],
+    lose: ['Out-steamed and out-fought. Flannery is at the back, past the last grate. She has been pacing. Challengers make her nervous; nervous makes her dangerous.'],
+    team: [
+      { species: 'slugma', level: 236 },
+      { species: 'numel', level: 238 },
+    ],
+    reward: 800,
+  },
+  lavaridge_gym_2: {
+    id: 'lavaridge_gym_2', name: 'Hiker Brasa', title: 'Lavaridge Gym Trainer', ai: 'basic',
+    intro: ['Her grandfather\'s portrait watches that door. Every challenger swears he nods at them. He has never nodded at me, and I work here. Battle me, and I will check if he nods at you.'],
+    lose: ['...He nodded. At YOU. Unbelievable. Go on, then — Flannery is waiting, and the portrait has opinions now.'],
+    team: [
+      { species: 'numel', level: 239 },
+      { species: 'vulpix', level: 241 },
+    ],
+    reward: 850,
+  },
+  // Magma / Aqua seed chain (H4a): first contact at Meteor Falls is a
+  // grunt scuffle the story survives either way (battleAny); the
+  // Chimney clash is the first real team battle — admins, also
+  // battleAny: the clash breaks up whatever the outcome, and the
+  // branch flags record what actually happened.
+  magma_grunt_falls: {
+    id: 'magma_grunt_falls', name: 'Magma Grunt', title: 'Team Magma', ai: 'basic',
+    intro: ['This cave is a worksite! Red scarves only! The professor\'s rocks are coming with us — orders — and you are leaving the way you came in!'],
+    lose: ['The rocks — the ADMIN will hear about this! The land will be expanded anyway, you hear me? ANYWAY!'],
+    team: [
+      { species: 'poochyena', level: 212 },
+      { species: 'numel', level: 214 },
+    ],
+    reward: 700,
+  },
+  aqua_grunt_falls: {
+    id: 'aqua_grunt_falls', name: 'Aqua Grunt', title: 'Team Aqua', ai: 'basic',
+    intro: ['Blue scarves, this cave, NOW! Those land-grabbers in red are stealing star-stone to wake things best left asleep — and I am not letting a bystander complicate a rescue!'],
+    lose: ['Fine — FINE. You fight like the tide: annoying, and everywhere. The stone is theirs anyway. It was ALWAYS going to be theirs. That is the problem!'],
+    team: [
+      { species: 'poochyena', level: 212 },
+      { species: 'carvanha', level: 214 },
+    ],
+    reward: 700,
+  },
+  magma_admin_chimney: {
+    id: 'magma_admin_chimney', name: 'Admin Brask', title: 'Team Magma Admin', ai: 'smart',
+    intro: ['Brask, Team Magma. You stand on the throat of the world, trainer, holding a conversation that is over. The meteorite goes into the crater, the mountain remembers what land is FOR — step aside, or be stepped over.'],
+    lose: ['...You delayed a mountain. Do you understand how absurd that is? A trainer, delaying a MOUNTAIN. Very well. The crater keeps. So do we.'],
+    team: [
+      { species: 'mightyena', level: 232 },
+      { species: 'numel', level: 234 },
+      { species: 'camerupt', level: 236 },
+    ],
+    reward: 2400,
+  },
+  aqua_admin_chimney: {
+    id: 'aqua_admin_chimney', name: 'Admin Selka', title: 'Team Aqua Admin', ai: 'smart',
+    intro: ['Selka, Team Aqua — and the only adult on this volcano, apparently. The red scarves mean to feed star-stone to a crater, trainer. Whatever you think of my crew, help me stop THAT first. Questions drown later.'],
+    lose: ['Beaten by the bystander. The sea provides ironies the way it provides everything: constantly, and without asking. The crater is quiet — that is what matters. For today.'],
+    team: [
+      { species: 'mightyena', level: 232 },
+      { species: 'carvanha', level: 234 },
+      { species: 'sharpedo', level: 236 },
+    ],
+    reward: 2400,
+  },
+  // --- H4b trainers append here ---
+};
+
+// ---------------------------------------------------------------------------
+// HOENN_EVENTS — merged into EVENTS by merge.mjs. Map-entry scenes
+// (sysLoadMap fires them once, flag-gated). Leader / May / Wally /
+// Birch scenes live in overworld-systems (runHoennNpc) because they
+// are menu- and state-driven, not step-driven.
+// ---------------------------------------------------------------------------
+const HOENN_EVENTS = {
+  // -- Littleroot: the rescue (first littleroot entry) ----------------
+  // The Advanced opening, adapted to a carried-team reality: the wild
+  // Poochyena is a band-floor face the player's veteran team drives
+  // off — the beat is Birch's peril and gratitude, not a starter pick.
+  // A flee stalls the chain (nothing set), so it re-fires on entry.
+  ev_hoenn_rescue: [
+    { say: ['Shouting — close, and getting closer. Around the bend of the Littleroot road a man in a lab coat is backed against the fence line, briefcase held up like a very small shield, while a wild Poochyena worries at the hem of his coat with the total confidence of the young and territorial.'], who: 'NARRATOR' },
+    { say: ['You — trainer! Yes, you, with the team that walks like it has somewhere to be! A hand, if you would! This youngster objects to my fieldwork, my footwear, and my entire profession, in that order!'], who: 'PROF. BIRCH' },
+    { wildBattle: { species: 'poochyena', level: 203, uncatchable: true } },
+    { say: ['Gone — over the fence and into the long grass, dignity intact on exactly one side of this encounter. ...Thank you. Sincerely. Professor Birch, of the Littleroot lab — you have caught me at my most empirical.', 'Come to the lab, trainer. Proper thanks, a proper registration, and a chair that no Poochyena has opinions about. North side of town. I will put the kettle on and pretend this never happens weekly.'], who: 'PROF. BIRCH' },
+    { flag: 'birch_rescued' },
+    { toast: 'You drove off the Poochyena!' },
+  ],
+
+  // -- Birch's lab: the arrival (first birch-lab entry) --------------
+  ev_hoenn_arrival: [
+    { say: ['Birch\'s lab smells of kettle steam, field mud, and paper — a working lab, not a showroom. Assistants weave between specimen shelves with the ease of people who have dodged the same Poochyena-shaped hazards for years.'], who: 'NARRATOR' },
+    { say: ['There. Registered, stamped, and entirely official: your Hoenn journey begins in this lab, with a rescued professor as its first entry. Professor Hawthorn wrote ahead, you know. The letter just said: "He walks far and arrives kind. Register whatever he asks."', 'You will want the gym road: Petalburg first — mind young Wally there, he is frailer than he looks and braver than he knows — then Rustboro, and Roxanne. And a warning from my own fieldwork: Hoenn is arguing with itself this year. Land people, sea people, and weather that cannot pick a side. Walk carefully, and walk anyway.'], who: 'PROF. BIRCH' },
+    { say: ['Oh — and my neighbor\'s girl, May, is somewhere about town. A beginning coordinator, all nerves and ribbon dreams. If a contest hall ever crosses your road, trainer, that is her world the way gyms are yours. You might learn something in the seats. She would die before saying so, but she hopes you come.'], who: 'PROF. BIRCH' },
+    { flag: 'hoenn_arrival' },
+    { flag: 'birch_registered' },
+    { toast: 'Your Hoenn journey is registered!' },
+  ],
+
+  // -- Meteor Falls: first contact (entry, Stone Badge held) ---------
+  // Both teams glimpsed; one grunt scuffle (battleAny: the story
+  // survives either way, the branch flag records the outcome); the
+  // meteorite changes hands in the confusion — the seed of Chimney.
+  ev_hoenn_meteor: [
+    { say: ['Meteor Falls runs cold and loud, and today it has an audience it did not invite. On the lower ledge: red scarves, hauling equipment. On the upper: blue, watching them do it. Between them, a grey-haired professor with a specimen case clutched to his chest like a hymn book in a storm.'], who: 'NARRATOR' },
+    { say: ['Cozmo. Professor Cozmo — the meteorites of this cave are my life\'s work, and these — these COSTUMES are trying to make them a crowbar! Tell them, trainer! Tell them star-stone is for STUDYING!'], who: 'PROF. COZMO' },
+    { battleAny: { trainer: 'magma_grunt_falls', winFlag: 'meteor_magma_won', loseFlag: 'meteor_magma_lost' } },
+    { say: ['Whatever the scuffle decided, it decided too loudly. In the echo and the spray, a red-scarfed shape slips past the professor — and when the case is opened on the ledge to check the damage, one meteorite is simply not in it anymore.', 'Gone. Forty years of cataloguing, and the finest stone I ever held is a handle in someone else\'s plan. They spoke of a mountain, trainer. A crater. Chimney, unless my ears have gone the way of my specimen. Whatever they mean to feed that rock to — star-stone remembers the sky, and mountains remember being fire. I do not enjoy that arithmetic.'], who: 'PROF. COZMO' },
+    { flag: 'meteor_falls_done' },
+    { flag: 'teams_glimpsed' },
+    { flag: 'cozmo_met' },
+    { toast: 'A meteorite was taken from Meteor Falls.' },
+  ],
+
+  // -- Mt. Chimney: the clash (entry, Dynamo Badge held) -------------
+  // The first REAL team battle: Brask at the crater machine. Selka's
+  // crew breaks it up with you; the meteorite's use is teased, not
+  // explained — the full answer is H4b's Weather Institute / Pyre.
+  ev_hoenn_chimney: [
+    { say: ['The Chimney summit is a argument with a view. A machine squats at the crater rim — red-scarfed engineers swarming it, a specimen case bolted into its heart — and across the ash, blue scarves are coming up the far slope like a tide that has learned to climb.'], who: 'NARRATOR' },
+    { say: ['You are late, trainer, and the mountain is early. Stand with me or stand aside — the crater does not get fed today.'], who: 'ADMIN SELKA' },
+    { battleAny: { trainer: 'magma_admin_chimney', winFlag: 'chimney_magma_won', loseFlag: 'chimney_magma_lost' } },
+    { say: ['Win or lose, the moment breaks the way surf breaks: the machine shudders, the case is wrenched free by blue hands and gone down the far slope, and Brask\'s crew falls back into the ash haze swearing at the weather, the sea, and you — impartially, and at length.', 'They will try again somewhere the mountain cannot argue back. A weather station, a shrine, a cave under the sea — Hoenn is full of old machinery, trainer, and both our crews collect it. Watch the sky. When it starts choosing sides, you will know we failed to.'], who: 'ADMIN SELKA' },
+    { flag: 'chimney_clash_done' },
+    { flag: 'meteorite_teased' },
+    { toast: 'The Chimney clash broke up — for now.' },
+  ],
+  // --- H4b events append here ---
+};
+
+// ---------------------------------------------------------------------------
+// HOENN_TALES — Town Tales for the first-half settlements, folded into
+// QUESTS by merge.mjs (the shipped tales table — one tale system, no
+// parallel). Shape is the quests.mjs shape law (<=3 stages, reward up
+// front, a lore revelation at the end); the Hoenn rows carry their
+// dialogue lines as data (offerLines / stageLines / finishLines) and
+// `hoennTale: true` keys the generic data-driven branch of runTaleNpc
+// (the same branch the Johto tales ride).
+// ---------------------------------------------------------------------------
+const HOENN_TALES = {
+  tale_littleroot: {
+    id: 'tale_littleroot', town: 'Littleroot Town', giver: 'ELDER BRAMBLE', title: 'The Town That Starts', hoennTale: true,
+    stages: [
+      'Ask Ms. Harlow in Littleroot what every journey here starts with',
+      'Tell Elder Bramble what Ms. Harlow said',
+    ],
+    reward: { items: { superpotion: 2 } }, rewardText: '2 Super Potions',
+    bondNpc: 'bramble', bondDelta: 1,
+    revelation: 'Every trainer who ever left Littleroot was seen off from the same fence post — Bramble carved a notch for each one into its back, where only the town can see. Yours went in this morning.',
+    offerLines: ['Seventy years I have watched trainers leave this town, and the town has a ritual for it that nobody wrote down. I am the ritual\'s memory, trainer, and my memory is going where memories go.', 'Ask Ms. Harlow what every journey here starts with. Bring me her answer exactly, and two Super Potions are yours — Littleroot pays its historians.'],
+    stageLines: ['What does every journey here start with? He finally sent someone to ask. It starts with a packed bag checked twice, trainer, and a doorstep stood on longer than necessary.', 'And a wave from the fence post that is not for the road at all — it is for the town, so the town knows to keep the home fires lit for a return it cannot schedule. Tell Bramble: twice-checked, long doorstep, fence-post wave. All three.'],
+    finishLines: ['Twice-checked, long doorstep, fence-post wave. She kept all three pieces. Of course she did — she has performed the ritual four hundred times and never once called it one.', 'I carve a notch in that post for every departure, on the side only the town can see. Yours went in this morning, trainer, while you were busy being rescued by a professor. Two Super Potions. Come home someday and count the notches. Yours will be the one that came back.'],
+  },
+  tale_petalburg: {
+    id: 'tale_petalburg', town: 'Petalburg City', giver: 'BALANCE KEEPER ORIN', title: 'What Balance Weighs', hoennTale: true,
+    stages: [
+      'Ask Fisher Lio in Petalburg what the pond taught him about balance',
+      'Tell Keeper Orin what Lio said',
+    ],
+    reward: { items: { greatball: 2 } }, rewardText: '2 Great Balls',
+    bondNpc: 'orin', bondDelta: 1,
+    revelation: 'The gym\'s balance rooms were built by Orin\'s grandfather, a pond fisherman who believed a trainer\'s stance should be judged the way a heron judges water — by what does not ripple.',
+    offerLines: ['I keep the balance rooms of Norman\'s gym, trainer — sweeping, chalking, judging stances. Thirty years of it, and I still cannot say what balance weighs. The man who taught me could. He fishes the pond now and answers nothing quickly.', 'Ask Fisher Lio what the pond taught him. Bring me the whole answer. Two Great Balls — knowledge should travel with tackle.'],
+    stageLines: ['What the pond taught me? Orin sent you. Sit on the bank a moment — no. Stand. The lesson stands.', 'A heron does not balance, boy. A heron commits. Every ripple it refuses to make is a fish deciding it is safe. Balance is not stillness — it is the weight of everything you chose not to disturb. Tell the keeper the pond said so.'],
+    finishLines: ['The weight of everything you chose not to disturb... Forty years, and the old fox still teaches in riddles that turn out to be instructions.', 'His grandfather built those rooms, you know. A fisherman, building a gym — and every tamer since has stood in them learning to be a heron. Two Great Balls, trainer. Disturb little.'],
+  },
+  tale_rustboro: {
+    id: 'tale_rustboro', town: 'Rustboro City', giver: 'DEVON RESEARCHER PELL', title: 'The Stone That Travels', hoennTale: true,
+    stages: [
+      'Ask Trainer School Kid Moss in Rustboro about the travelling stone',
+      'Tell Researcher Pell what Moss said',
+    ],
+    reward: { items: { superpotion: 2 } }, rewardText: '2 Super Potions',
+    bondNpc: 'pell', bondDelta: 1,
+    revelation: 'The school\'s travelling stone has been carried out of Rustboro and brought home by forty years of departing students — it has seen more of Hoenn than most researchers, and the school registers its journeys like a student.',
+    offerLines: ['Devon keeps records of everything in this city except the one thing that matters to its children. There is a stone at the Trainer School, trainer — a plain river stone — that has travelled further than I have. The school will not explain it to a researcher. They might explain it to you.', 'Ask young Moss about the travelling stone. The full custom, exactly. Two Super Potions for the fieldwork — Devon pays for data, even the embarrassing kind.'],
+    stageLines: ['The stone? You are not a teacher. ...You do not LOOK like a teacher. Fine. The stone goes with whoever leaves.', 'Every student who leaves Rustboro for a journey takes it in their pack, and someone brings it home — a sibling, a friend, a Pidgey in one famous case. It has been to every gym in Hoenn. It is enrolled here, technically. Its attendance is better than mine. Tell the researcher: it travels because leaving is a subject too, and the stone is the only one of us who has passed it forty times.'],
+    finishLines: ['Enrolled. Attendance better than the students. Forty journeys in a school register I was never shown...', 'Devon studies how Pokemon change the world, trainer. That stone is how the world changes BACK — one pack, one road, one homecoming at a time. Two Super Potions. And if you pass the school on your way out... you did not hear this from me, but check your pack. Just in case.'],
+  },
+  tale_slateport: {
+    id: 'tale_slateport', town: 'Slateport City', giver: 'MARKET CRIER VESK', title: 'The Price of the Tide', hoennTale: true,
+    stages: [
+      'Ask Beachcomber Ana in Slateport how the market prices the tide',
+      'Tell Crier Vesk what Ana said',
+    ],
+    reward: { items: { greatball: 3 } }, rewardText: '3 Great Balls',
+    bondNpc: 'vesk', bondDelta: 1,
+    revelation: 'Slateport\'s market has priced by the tide for a hundred years because Ana\'s great-grandmother, its first crier, refused to sell a sailor anything at low water that he would regret at high — the tide table is a kindness, kept as a price list.',
+    offerLines: ['FISH! CLOTH! BERRIES AT TIDE PRICE! — forgive me, trainer, the voice does it on its own now. You have heard the market cry tide prices all morning and wondered. Everyone wonders. Nobody asks the shore.', 'Beachcomber Ana knows why we price by the tide. Ask her, bring me the reason whole, and three Great Balls change hands — a crier pays for his material.'],
+    stageLines: ['Why tide prices? My great-grandmother started this market with one stall and one rule, and the rule outlived the stall by a century.', 'She would not sell a sailor anything at low water that he would regret at high. So the prices breathe with the tide: cheap when the boats are leaving and a man buys brave, dear when they return and he buys honest. It is not commerce, trainer. It is a kindness with numbers on it. Tell Vesk the shore said so.'],
+    finishLines: ['A kindness with numbers on it. A hundred years my family has cried those prices, and the reason was a grandmother refusing to let a sailor shop foolish...', 'That is going in tomorrow\'s cry, trainer — word for word, at full volume, at high tide when honesty is expensive. Three Great Balls. Spend them brave or spend them honest, as the water decides.'],
+  },
+  // --- H4b tales append here ---
+};
+
+// ---------------------------------------------------------------------------
+// HOENN_NPCS / HOENN_NPC_PATCHES — the loadMap-append idiom (quests.mjs
+// CAPT JOHTO precedent): appended actors carry `hoenn` (runHoennNpc
+// owns them) or `trainer` (the generic trainer path) or `tale`+`role`
+// (the tales above); patches stamp tale roles onto existing maps7
+// townsfolk by name. The generated maps7 data is never edited.
+// Gym leaders stand at (7,2), the Johto leader idiom; gym trainers
+// fill the shipped empty gym floors (H3 register: layouts waiting
+// for leaders/rosters).
+// ---------------------------------------------------------------------------
+const HOENN_NPCS = [
+  { map: 'birch-lab', x: 7, y: 3, name: 'PROF. BIRCH', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a2a1a', hoenn: 'birch',
+    dialogue: ['The field is my library, trainer. It keeps trying to eat me, but it IS my library.'] },
+  { map: 'littleroot', x: 15, y: 8, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_littleroot',
+    dialogue: ['Contests are not the soft option, you know. They are battles where the crowd grades your footwork.'] },
+  { map: 'petalburg', x: 13, y: 7, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7a9a4a', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally',
+    dialogue: ['I caught one. Me. A Ralts, by the pond grass — well. We caught each other, I think.'] },
+  { map: 'gym-petalburg', x: 7, y: 2, name: 'NORMAN', art: 'gym5', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#2a2a3a', hoenn: 'norman',
+    dialogue: ['Balance is not standing still, challenger. Come back when the road has taught you that, and I will test it personally.'] },
+  { map: 'gym-rustboro', x: 7, y: 2, name: 'ROXANNE', art: 'gym1', skin: '#f0c8a0', shirt: '#7a3a3a', pants: '#3a3a4a', hair: '#5a2a3a', hoenn: 'roxanne',
+    dialogue: ['Every stone in this gym was placed to teach. Mind the compass stone.'] },
+  { map: 'gym-rustboro', x: 4, y: 5, name: 'YOUNGSTER BRAM', art: 'youngster', skin: '#f0c8a0', shirt: '#3a7a4a', pants: '#2a2a3a', hair: '#7a4a1a', trainer: 'rustboro_gym_1',
+    dialogue: ['Boots checked. Book signed.'] },
+  { map: 'gym-rustboro', x: 11, y: 5, name: 'HIKER SELLA', art: 'hiker', skin: '#d8a878', shirt: '#8a6a3a', pants: '#3a3a2a', hair: '#2a1a0a', trainer: 'rustboro_gym_2',
+    dialogue: ['The stone does not care which day it is.'] },
+  { map: 'gym-dewford', x: 7, y: 2, name: 'BRAWLY', art: 'gym2', skin: '#d8a878', shirt: '#2a6a8a', pants: '#2a2a3a', hair: '#1a2a4a', hoenn: 'brawly',
+    dialogue: ['Read the wave, trainer. Then stand in it.'] },
+  { map: 'gym-dewford', x: 4, y: 5, name: 'BLACKBELT ROOK', art: 'blackbelt', skin: '#c89878', shirt: '#e8e0c8', pants: '#3a3a3a', hair: '#1a1a1a', trainer: 'dewford_gym_1',
+    dialogue: ['In the dark, footwork is everything.'] },
+  { map: 'gym-dewford', x: 11, y: 5, name: 'BATTLE GIRL SANA', art: 'lass', skin: '#f0c8a0', shirt: '#c05a7a', pants: '#2a2a3a', hair: '#2a1a3a', trainer: 'dewford_gym_2',
+    dialogue: ['A wave is a punch the ocean throws forever.'] },
+  { map: 'gym-mauville', x: 7, y: 2, name: 'WATTSON', art: 'elder', skin: '#e8b888', shirt: '#e8c832', pants: '#3a4a5a', hair: '#e8e8e8', hoenn: 'wattson',
+    dialogue: ['Wahahaha! Mind the barriers, youngster!'] },
+  { map: 'gym-mauville', x: 4, y: 5, name: 'CAMPER ILYA', art: 'camper', skin: '#f0c8a0', shirt: '#4a7a3a', pants: '#3a3a2a', hair: '#7a1a1a', trainer: 'mauville_gym_1',
+    dialogue: ['I do not apologize. I conduct.'] },
+  { map: 'gym-mauville', x: 11, y: 5, name: 'ENGINEER PASK', art: 'scientist', skin: '#d8a878', shirt: '#5a6a7a', pants: '#2a2a3a', hair: '#4a4a5a', trainer: 'mauville_gym_2',
+    dialogue: ['Every challenger is a load test.'] },
+  { map: 'gym-lavaridge', x: 7, y: 2, name: 'FLANNERY', art: 'gym4', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a2a3a', hair: '#c83a1a', hoenn: 'flannery',
+    dialogue: ['In here, we burn. That is the whole policy.'] },
+  { map: 'gym-lavaridge', x: 4, y: 5, name: 'KINDLER FENN', art: 'camper', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a2a', hair: '#3a2a1a', trainer: 'lavaridge_gym_1',
+    dialogue: ['Mind your step — then mind my Slugma.'] },
+  { map: 'gym-lavaridge', x: 11, y: 5, name: 'HIKER BRASA', art: 'hiker', skin: '#c89878', shirt: '#6a5a3a', pants: '#3a3a2a', hair: '#1a1a0a', trainer: 'lavaridge_gym_2',
+    dialogue: ['The portrait watches that door. It has never nodded at me.'] },
+  { map: 'contest-slateport', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_slateport',
+    dialogue: ['First big hall. First big crowd. Watch me anyway.'] },
+  { map: 'contest-verdanturf', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_verdanturf',
+    dialogue: ['New appeal. Practiced all week. Do not tell me to relax.'] },
+  { map: 'contest-fallarbor', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_fallarbor',
+    dialogue: ['I picked the hardest crowd in Hoenn on purpose.'] },
+  { map: 'meteor-falls', x: 12, y: 8, name: 'PROF. COZMO', art: 'scientist', skin: '#e8b888', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c0c0c0', hoenn: 'cozmo',
+    dialogue: ['Star-stone is for STUDYING. I shall be saying it in my sleep.'] },
+  { map: 'mt-chimney', x: 12, y: 6, name: 'ADMIN BRASK', art: 'rocket', skin: '#d8a878', shirt: '#a02a2a', pants: '#2a2a3a', hair: '#2a1a0a', hoenn: 'magma_admin_npc',
+    dialogue: ['The crater keeps, trainer. So do we.'] },
+  { map: 'mt-chimney', x: 14, y: 8, name: 'ADMIN SELKA', art: 'rocket', skin: '#f0c8a0', shirt: '#2a4a8a', pants: '#2a2a3a', hair: '#1a3a5a', hoenn: 'aqua_admin_npc',
+    dialogue: ['Watch the sky, trainer. When it chooses sides, we failed to stop it.'] },
+  { map: 'fortree', x: 12, y: 10, name: 'WEATHER WATCHER ILSE', art: 'picnicker', skin: '#e8b888', shirt: '#3a7a6a', pants: '#3a3a2a', hair: '#5a3a2a', hoenn: 'weather_watcher',
+    dialogue: ['The Institute up the route reads this valley\'s rain like scripture. Lately the scripture argues back.'] },
+  // --- H4b actors append here ---
+];
+
+const HOENN_NPC_PATCHES = [
+  { map: 'littleroot', name: 'ELDER BRAMBLE', tale: 'tale_littleroot', role: 'giver' },
+  { map: 'littleroot', name: 'MS. HARLOW', tale: 'tale_littleroot', role: 'stage' },
+  { map: 'petalburg', name: 'BALANCE KEEPER ORIN', tale: 'tale_petalburg', role: 'giver' },
+  { map: 'petalburg', name: 'FISHER LIO', tale: 'tale_petalburg', role: 'stage' },
+  { map: 'rustboro', name: 'DEVON RESEARCHER PELL', tale: 'tale_rustboro', role: 'giver' },
+  { map: 'rustboro', name: 'TRAINER SCHOOL KID MOSS', tale: 'tale_rustboro', role: 'stage' },
+  { map: 'slateport', name: 'MARKET CRIER VESK', tale: 'tale_slateport', role: 'giver' },
+  { map: 'slateport', name: 'BEACHCOMBER ANA', tale: 'tale_slateport', role: 'stage' },
+  // --- H4b patches append here ---
+];
+
+
 // ---- src/data/quests.mjs ----
 // quests.mjs — Rejuvenation Phase 4 (ADR-025 §5): Town Tales.
 //
@@ -151044,6 +151491,19 @@ const TALE_NPCS = [
   { map: 'pallet', x: 11, y: 8, name: 'CAPT JOHTO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
     ferry: 'newbark', ferryArc: 'johto',
     dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+  // Arc 3 Stage H4a: the Hoenn embark captain, appended to Vermilion's
+  // roster through this same loadMap append idiom (Vermilion's map def
+  // in maps2.mjs is NOT rewritten). He carries NO tale/role — the ferry
+  // handler (overworld-systems, ferryArc 'hoenn') owns him entirely:
+  // gated by the Foundation embark leg (embark_hoenn, armed at
+  // Homecoming #3) outbound, and unconditional once Hoenn has been
+  // reached (NO-SOFT-LOCK LAW). He stands at (16,10) on Vermilion's
+  // dock row, east of CAPT ORANGE (13,10) — each port its OWN captain
+  // (the Johto smell, J-register). The return captain stands on the
+  // Slateport dock (maps7.mjs, CAPT MERIDIAN).
+  { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#7a3a2a', pants: '#2a2a3a', hair: '#2a1a0a',
+    ferry: 'littleroot', ferryArc: 'hoenn',
+    dialogue: ['The Littleroot run is the long weather crossing — Hoenn water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
   // own front-door threshold (3,4) — the one-tile gap in the fence
   // row, fed only from (3,5) — so ANY stance in that column seals
@@ -151226,12 +151686,14 @@ Object.assign(SPECIES, SPECIES_JOHTO);
 Object.assign(SPECIES, SPECIES_HOENN);
 Object.assign(MOVES, MOVES2);
 Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5, MAPS6, MAPS7);
-Object.assign(TRAINERS, TRAINERS3, TRAINERS4, ORANGE_TRAINERS, JOHTO_TRAINERS);
-Object.assign(EVENTS, ORANGE_EVENTS, JOHTO_EVENTS);
+Object.assign(TRAINERS, TRAINERS3, TRAINERS4, ORANGE_TRAINERS, JOHTO_TRAINERS, HOENN_TRAINERS);
+Object.assign(EVENTS, ORANGE_EVENTS, JOHTO_EVENTS, HOENN_EVENTS);
 // Stage J4a: Johto Town Tales fold into the ONE tales table (quests.mjs
 // QUESTS) — the shipped tale machine (stage values, Quest Log section,
 // validator quest list via gen-tables) serves them unchanged.
 Object.assign(QUESTS, JOHTO_TALES);
+// Stage H4a: Hoenn Town Tales fold into the same tales table.
+Object.assign(QUESTS, HOENN_TALES);
 Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
 // Stage J5 fold: Johto's live legendary arcs (the beasts + Celebi).
 // arc_celebi here deliberately supersedes the designed entry in
@@ -151758,6 +152220,18 @@ const MAP_GROUND = {
   // so its battles ride the Storm ground.
   'rocket-hideout': 'storm',
   'silver-stadium': 'open',
+  // Stage H4a: Hoenn west gym signature Grounds (existing 15 only —
+  // no new Grounds this stage): Roxanne's quarry gym rides the Rubble,
+  // Brawly's shore gym the Rubble too (physical moves land true where
+  // the surf hits — the Chuck precedent), Wattson's the Volt, and
+  // Flannery's the Pyre. Landmarks follow their feel: Meteor Falls is
+  // Rubble-dark, Mt. Chimney's crater rim is Ember ground.
+  'gym-rustboro': 'rubble', // Rustboro Gym — Roxanne
+  'gym-dewford': 'rubble', // Dewford Gym — Brawly
+  'gym-mauville': 'volt', // Mauville Gym — Wattson
+  'gym-lavaridge': 'pyre', // Lavaridge Gym — Flannery
+  'meteor-falls': 'rubble',
+  'mt-chimney': 'ember',
   'mt-silver-cave': 'frost',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
@@ -152490,7 +152964,7 @@ function defaultState(inherit) {
     party: [],
     boxes: {},
     dex: { caught: {}, seen: {}, befriended: {} }, // dexNo -> true
-    badges: { kanto: [], orange: [], johto: [], symbols: [null, null, null, null, null, null, null] },
+    badges: { kanto: [], orange: [], johto: [], hoenn: [], symbols: [null, null, null, null, null, null, null] },
     story: {
       chapter: 0, beat: 0, flags: {},
       // WS6/WS10 story state: quest-log stages + region progression
@@ -153551,6 +154025,114 @@ function arcFerryGateLine(arc) {
 }
 
 
+// ---- src/game/weather.mjs ----
+// weather.mjs — the visual weather layer (Arc 3 ruling 4, Stage H4a).
+// PRESENTATION ONLY: rain streaks, ash drift, sand haze and harsh-sun
+// glare drawn on the Premium+ atmosphere layer of the overworld render
+// (after the time-of-day tint, before HUD text). Weather NEVER touches
+// battle mechanics (battle weather identity belongs to Grounds) and
+// NEVER touches encounters — this module reads state, it writes none.
+//
+// The field is per-map DATA: maps7.mjs declares `weather` on every
+// Hoenn outdoor map ('clear' | 'rain' | 'sun' | 'ash' | 'sand').
+// Kanto/Johto/Orange maps declare no field and resolve 'clear' —
+// untouched. Indoor and dark maps never render weather.
+//
+// CLIMAX-STATE OVERRIDE (H4a ships the mechanism; H4b's climax drives
+// it): while story.flags.climax_drought stands, every Hoenn outdoor
+// map renders harsh sun; while story.flags.climax_deluge stands,
+// every Hoenn outdoor map renders heavy rain. The override wins over
+// the map's own field and resolves ONLY on maps that declare a
+// weather field (the Hoenn outdoors) — a Kanto map under a set
+// climax flag is byte-identical to today. If both flags stand
+// (a corrupt or mid-transition state), drought wins: the land
+// titan was woken first, and H4b never sets both at once.
+
+const CLIMAX_DROUGHT_FLAG = 'climax_drought';
+const CLIMAX_DELUGE_FLAG = 'climax_deluge';
+const WEATHER_KINDS = ['clear', 'rain', 'sun', 'ash', 'sand'];
+
+// Pure resolver: (state, mapDef) -> { kind, source, heavy }.
+//   kind   one of WEATHER_KINDS (the field value, or the override's)
+//   source 'climax' | 'map' | 'none' — where the kind came from
+//   heavy  true only under a climax override (denser render)
+function weatherForMap(state, map) {
+  if (!map || map.indoor || map.dark) return { kind: 'clear', source: 'none', heavy: false };
+  const field = map.weather;
+  if (!field || !WEATHER_KINDS.includes(field)) return { kind: 'clear', source: 'none', heavy: false };
+  const flags = (state && state.story && state.story.flags) || {};
+  if (flags[CLIMAX_DROUGHT_FLAG]) return { kind: 'sun', source: 'climax', heavy: true };
+  if (flags[CLIMAX_DELUGE_FLAG]) return { kind: 'rain', source: 'climax', heavy: true };
+  return { kind: field, source: 'map', heavy: false };
+}
+
+// Deterministic per-drop hash (no RNG state consumed — the render
+// must never perturb gameplay randomness).
+function hash01(n) {
+  const x = Math.sin(n * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+// The renderer. Called from OverworldScene.render with the already-
+// resolved weather state; draws inside the camera view rect only.
+// Animation rides the game's presentation clock (game._animT) and
+// freezes to a static frame under Reduced Motion.
+function drawWeatherOverlay(r, game, wstate) {
+  if (!wstate || wstate.kind === 'clear') return;
+  const c = r.ctx;
+  if (!c) return;
+  const T = 16;
+  const x0 = r.camX - T, y0 = r.camY - T;
+  const w = r.viewW + 2 * T, h = r.viewH + 2 * T;
+  const still = !!(game.state && game.state.settings && game.state.settings.reducedMotion);
+  const t = still ? 0 : (game._animT || 0);
+  const kind = wstate.kind;
+  if (kind === 'sun') {
+    // Harsh-sun glare: one warm flat wash (heavier under drought).
+    c.fillStyle = wstate.heavy ? 'rgba(255,196,64,0.20)' : 'rgba(255,214,110,0.13)';
+    c.fillRect(x0, y0, w, h);
+    return;
+  }
+  if (kind === 'sand') {
+    c.fillStyle = wstate.heavy ? 'rgba(214,164,92,0.22)' : 'rgba(214,164,92,0.14)';
+    c.fillRect(x0, y0, w, h);
+    c.fillStyle = 'rgba(232,196,130,0.5)';
+    const n = still ? 10 : 22;
+    for (let i = 0; i < n; i++) {
+      const sp = 0.06 + hash01(i * 3 + 1) * 0.10;
+      const px = x0 + ((hash01(i * 7 + 2) * (w + 80) + t * sp) % (w + 80)) - 40;
+      const py = y0 + hash01(i * 13 + 5) * h + Math.sin(t / 700 + i) * 2;
+      c.fillRect(px, py, 10 + hash01(i) * 14, 1);
+    }
+    return;
+  }
+  if (kind === 'ash') {
+    const n = still ? 14 : (wstate.heavy ? 44 : 30);
+    for (let i = 0; i < n; i++) {
+      const fall = 0.008 + hash01(i * 5 + 3) * 0.014;
+      const py = y0 + ((hash01(i * 11 + 1) * (h + 40) + t * fall) % (h + 40)) - 20;
+      const px = x0 + hash01(i * 17 + 4) * w + Math.sin(t / 900 + i * 1.7) * 6;
+      const s = hash01(i * 19) > 0.6 ? 2 : 1;
+      c.fillStyle = hash01(i * 23) > 0.5 ? 'rgba(196,188,178,0.75)' : 'rgba(140,132,124,0.65)';
+      c.fillRect(px, py, s, s);
+    }
+    return;
+  }
+  if (kind === 'rain') {
+    c.fillStyle = wstate.heavy ? 'rgba(70,100,160,0.16)' : 'rgba(70,100,160,0.10)';
+    c.fillRect(x0, y0, w, h);
+    const n = still ? 18 : (wstate.heavy ? 90 : 55);
+    c.fillStyle = 'rgba(178,208,240,0.65)';
+    for (let i = 0; i < n; i++) {
+      const fall = 0.35 + hash01(i * 3 + 8) * 0.3;
+      const py = y0 + ((hash01(i * 7 + 6) * (h + 60) + t * fall) % (h + 60)) - 30;
+      const px = x0 + hash01(i * 13 + 9) * (w + 40) + (py - y0) * 0.18 - 20;
+      c.fillRect(px, py, 1, 6);
+    }
+  }
+}
+
+
 // ---- src/game/ball-rules.mjs ----
 // ball-rules.mjs — Stage J6: apricorn-ball catch rules, ONE shared
 // evaluation for both battle engines (battle.mjs classic + battle-rt.mjs
@@ -154096,6 +154678,13 @@ function validateSave(data) {
     const seq = BADGE_SETS.johto;
     if (!Array.isArray(j) || !seq || j.length > seq.length || j.some((id, i) => id !== seq[i])) errors.push('bad-badges-johto');
   }
+  // Stage H4a: badges.hoenn, when present, must be a PREFIX of the
+  // Hoenn earn order (BADGE_SETS) — the same rule, the same source.
+  if (isObj(data.badges) && data.badges.hoenn !== undefined) {
+    const h = data.badges.hoenn;
+    const seq = BADGE_SETS.hoenn;
+    if (!Array.isArray(h) || !seq || h.length > seq.length || h.some((id, i) => id !== seq[i])) errors.push('bad-badges-hoenn');
+  }
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');
@@ -154186,6 +154775,7 @@ function fillV2Defaults(data) {
     if (!Array.isArray(data.badges.orange)) data.badges.orange = [];
     if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
     if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
+    if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
     if (!Array.isArray(data.badges.symbols)) data.badges.symbols = [null, null, null, null, null, null, null];
   }
   // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
@@ -154311,7 +154901,7 @@ function migrate(data) {
   if (data.v === 0) {
     data.v = 1;
     data.facilities = data.facilities || { registry: [], unlocked: [] };
-    data.badges = data.badges || { kanto: [], orange: [], johto: [], symbols: [null, null, null, null, null, null, null] };
+    data.badges = data.badges || { kanto: [], orange: [], johto: [], hoenn: [], symbols: [null, null, null, null, null, null, null] };
   }
   if (data.v === 1) {
     data.v = 2;
@@ -162830,6 +163420,25 @@ class OverworldScene {
         npcs = [...npcs, ...johtoNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
+      // Stage H4a (Hoenn story): the same append idiom fields the
+      // Hoenn story actors (Birch, May, Wally, Norman, the west
+      // leaders + gym rosters, Cozmo, the admins) and stamps Hoenn
+      // tale roles onto existing maps7 townsfolk by name
+      // (HOENN_NPC_PATCHES). The generated maps7 definitions are
+      // never mutated; the scene works on this copy.
+      const hPatches = HOENN_NPC_PATCHES.filter((p) => p.map === id);
+      if (hPatches.length) {
+        npcs = npcs.map((n) => {
+          const pp = hPatches.find((q) => q.name === n.name);
+          return pp ? { ...n, tale: pp.tale, role: pp.role } : n;
+        });
+        changed = true;
+      }
+      const hoennNpcs = HOENN_NPCS.filter((n) => n.map === id);
+      if (hoennNpcs.length) {
+        npcs = [...npcs, ...hoennNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
+        changed = true;
+      }
       // ADR-025 §2 (Bonds): the Celadon parley pair stand in Celadon
       // only while their scene is unresolved (post-St. Anne window).
       if (id === 'celadon' && parleyVisible(this.game.state)) {
@@ -163785,6 +164394,12 @@ class OverworldScene {
         c.fillRect(r.camX - T, r.camY - T, r.viewW + 2 * T, r.viewH + 2 * T);
       }
     }
+    // Stage H4a (ruling 4): the visual weather layer — the Premium+
+    // atmosphere pass, drawn over the tinted world and under every
+    // HUD/text draw below. Presentation only (src/game/weather.mjs):
+    // the current map's weather field, or the climax-state override
+    // while its flags stand. Maps with no field resolve clear.
+    drawWeatherOverlay(r, g, weatherForMap(g.state, this.map));
     // Yellow-style spot "!" over each challenger during the alert beat.
     if (this.challenge && this.challenge.phase === 'spot') {
       for (const q of this.challenge.parts) {
@@ -164100,6 +164715,24 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_johto_director');
       } else if (id === 'radio-tower-3' && jf.radio_f2_cleared && !jf.radio_tower_cleared && !jf.ev_johto_radio_top_done) {
         this.runEvent('ev_johto_radio_top');
+      }
+    }
+    // Stage H4a (Hoenn story, first half): map-entry scenes, same
+    // idiom — each scene's own completion flag is its gate, so a fled
+    // or stalled beat re-fires on a later entry. The rescue fires on
+    // the ferry landing map itself (Littleroot); Meteor Falls waits
+    // for the Stone Badge and Chimney for the Dynamo Badge (the
+    // anime-true order of the seed chain).
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const hf = g.state.story.flags;
+      if (id === 'littleroot' && g.state.story.arc === 'hoenn' && !hf.birch_rescued && !hf.ev_hoenn_rescue_done) {
+        this.runEvent('ev_hoenn_rescue');
+      } else if (id === 'birch-lab' && !hf.hoenn_arrival && !hf.ev_hoenn_arrival_done) {
+        this.runEvent('ev_hoenn_arrival');
+      } else if (id === 'meteor-falls' && hf.badge_stone && !hf.meteor_falls_done && !hf.ev_hoenn_meteor_done) {
+        this.runEvent('ev_hoenn_meteor');
+      } else if (id === 'mt-chimney' && hf.badge_dynamo && !hf.chimney_clash_done && !hf.ev_hoenn_chimney_done) {
+        this.runEvent('ev_hoenn_chimney');
       }
     }
   },
@@ -164754,6 +165387,9 @@ Object.assign(OverworldScene.prototype, {
     // Stage J4a: Johto story actors (Elm, the west leaders, Kurt, the
     // Sprout Elder, the well Rockets) run their own scenes.
     if (npc.johto) { if (this.runJohtoNpc(npc)) return true; }
+    // Stage H4a: Hoenn story actors (Birch, May, Wally, Norman, the
+    // west leaders, Cozmo, the two admins) run their own scenes.
+    if (npc.hoenn) { if (this.runHoennNpc(npc)) return true; }
     // ADR-025 §2: the Pallet lab Gary is dialogue-only — his lines are
     // tier-variant (the wary set IS his authored dialogue, so a neutral
     // run reads byte-identically to before Phase 5).
@@ -165767,6 +166403,174 @@ Object.assign(OverworldScene.prototype, {
     }));
   },
 
+  // ---------- Stage H4a: Hoenn story actors ----------
+  // One dispatch for every NPC carrying a `hoenn:` key (appended at
+  // loadMap from story-hoenn.mjs HOENN_NPCS). Leaders ride the shared
+  // leader runner (startHoennBattle = the startJohtoBattle idiom:
+  // winTrainer's award writes badges.hoenn + the badge_<root> flag),
+  // behind the same badge-order gate Johto's leaders carry (the
+  // validator's prefix law, data-driven from BADGE_SETS.hoenn).
+  // Birch, May, Wally, Norman, Cozmo and the admins are state-driven
+  // scenes. H4b extends this dispatch at the marked seam.
+  runHoennNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    const hBadges = (st.badges && st.badges.hoenn) || [];
+    const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
+    const kind = npc.hoenn;
+    const HOENN_LEADER_WAITS = {
+      stonebadge: 'Roxanne, in Rustboro City\'s gym',
+      knucklebadge: 'Brawly, in Dewford Town\'s gym',
+      dynamobadge: 'Wattson, in Mauville City\'s gym',
+      heatbadge: 'Flannery, in Lavaridge Town\'s gym',
+      balancebadge: 'Norman, in Petalburg City\'s gym',
+      featherbadge: 'Winona, in Fortree City\'s gym',
+      mindbadge: 'Tate and Liza, in Mossdeep City\'s gym',
+      rainbadge: 'Juan, in Sootopolis City\'s gym',
+    };
+    const badgeOrderRefusal = (badgeId) => {
+      const idx = BADGE_SETS.hoenn.indexOf(badgeId);
+      if (idx <= 0 || hBadges.length >= idx) return null;
+      const miss = BADGE_SETS.hoenn[hBadges.length];
+      const missItem = ITEMS[miss];
+      return ['The League keeps an order in Hoenn, challenger, and I keep it with them: the badges are earned in sequence here, west to east.',
+        'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (HOENN_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
+    };
+
+    if (kind === 'birch') {
+      if (!flags.hoenn_arrival && !flags.ev_hoenn_arrival_done) { this.runEvent('ev_hoenn_arrival'); return true; }
+      if (flags.chimney_clash_done) { say(['Star-stone fed to a crater, and the sky argued about it in two colors. My instruments have been restless ever since, {player}. Whatever those teams are waking, it is older than both of them — and the Weather Institute up Route 119 reads this region\'s sky for a living. If anyone can name what is coming, they can.']); return true; }
+      if (flags.meteor_falls_done) { say(['Cozmo wrote me a letter with shaking handwriting, {player}. A stolen meteorite and two teams with flags — that is not fieldwork anymore, that is a forecast. Keep your eyes on the sky as much as the road. Hoenn\'s weather has opinions this year.']); return true; }
+      say(['Registered, welcomed, and only slightly mauled by the local wildlife — a complete Hoenn arrival, {player}. Petalburg first, then Rustboro. And if a Poochyena ever corners me again, I am retiring to study sedimentary rock. Indoors.']);
+      return true;
+    }
+
+    if (kind === 'may_littleroot') {
+      if (!flags.may_met) {
+        say(['You are the trainer who rescued Dad? He tells it with sound effects now. I am May — I live two doors down and I am going to win a contest ribbon before you win a badge, so... no pressure on either of us.', 'Gyms are your road. Halls are mine. But roads cross, {player} — Slateport has a hall, and so do Verdanturf and Fallarbor. Come and sit in my world sometime. I will sit in yours at Rustboro and try not to grade your footwork. Much.'], () => { flags.may_met = true; });
+        return true;
+      }
+      say(['Slateport, Verdanturf, Fallarbor — that is my road, in order. Yours has more volcanoes. I checked. See you in a hall, {player} — bring your loudest polite applause.']);
+      return true;
+    }
+
+    const mayContest = (hall, gateBadge, doneFlag, ribbonFlag, preLines, beatLines, postLines) => {
+      if (flags[doneFlag]) { say(postLines); return true; }
+      if (!hBadges.includes(gateBadge)) { say(preLines); return true; }
+      say(beatLines, () => {
+        flags[doneFlag] = true;
+        if (ribbonFlag) flags[ribbonFlag] = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('May\'s contest: ' + hall + ' — noted in your Quest Log.');
+      });
+      return true;
+    };
+    if (kind === 'may_contest_slateport') {
+      return mayContest('Slateport', 'knucklebadge', 'may_slateport_done', null,
+        ['Too early, {player} — the hall wants a coordinator with sea legs, and I want one more badge\'s worth of road behind me before I face that crowd. Dewford first. Then watch me.'],
+        ['You came. You actually — okay. Okay! Watch this, then. From the top, just like practice.', '...The hall lights are a different country, {player}. My appeal landed, my timing held, and the Slateport judges still gave the ribbon to a coordinator with six years on me — by half a point. HALF. I am not crying about it. I am taking notes about it. There is a difference, and the difference is Verdanturf.'],
+        ['Half a point, {player}. I have replayed it so many times the judges have started appearing in my dreams to apologize. Verdanturf is next, and I am not losing that one in the last round. I have decided.']);
+    }
+    if (kind === 'may_contest_verdanturf') {
+      return mayContest('Verdanturf', 'dynamobadge', 'may_verdanturf_done', 'may_ribbon_verdanturf',
+        ['Verdanturf is the serious hall, {player} — small room, sharp judges. I am not stepping in there until Mauville is behind you and my new appeal is behind ME. Wattson first. Then this.'],
+        ['Small room. Sharp judges. New appeal. Deep breath... and — YES. Yes! Did you see the last round? The whole hall stood up, {player}, the whole hall!', 'My first ribbon. Verdanturf. It is going on the case exactly like this, dust and all, so I remember what earning one feels like. Your road taught me something, you know: you do not wait to feel ready. You enter, and readiness catches up. Fallarbor next. Their crowd is harsher. So am I, now.'],
+        ['Verdanturf, {player}. First ribbon. I still take it out of the case sometimes just to check it is real. It is. Fallarbor is next — ash, hard judges, harder applause. Perfect.']);
+    }
+    if (kind === 'may_contest_fallarbor') {
+      return mayContest('Fallarbor', 'heatbadge', 'may_fallarbor_done', 'may_ribbon_fallarbor',
+        ['Fallarbor judges have seen everything twice and applauded once, {player}. I picked this hall on purpose — but not before Lavaridge. Flannery first. A coordinator keeps her order too.'],
+        ['Ash on the windows, silence like a held breath — and then the last appeal landed and the whole room came up out of its seats like startled birds. FALLARBOR, {player}! They applauded. THIS crowd applauded!', 'Two ribbons. Slateport taught me the half point, Verdanturf taught me the entry, and Fallarbor — Fallarbor taught me the room is mine if I walk in like it is. Lilycove is the last hall on my road. When your road bends east, come and see how this story ends.'],
+        ['Two ribbons, {player}, and the hardest room in Hoenn stood up for the second one. Lilycove remains — the last hall, out east where your gym road is going anyway. See you there.']);
+    }
+
+    if (kind === 'wally') {
+      if (!flags.wally_helped) {
+        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Verdanturf, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has Ralts in it sometimes. I have a ball, and a borrowed Zigzagoon from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
+          say(['The grass shivers. A Ralts — small, horned, already turning away — and the borrowed Zigzagoon looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. Ralts, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Pokemon. I HAVE a Pokemon, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
+            flags.wally_helped = true;
+            flags.wally_ralts = true;
+            g.audio.playSfx('dex-register');
+            g.ui.toast('Wally caught a Ralts!');
+          }, 'WALLY');
+        });
+        return true;
+      }
+      say(['Ralts is learning my moods faster than my doctors ever did, {player}. Verdanturf soon — the air there, and my uncle\'s house, and a whole new road. When it crosses yours again, I will not be hard to recognize. I will be the one who is ready.']);
+      return true;
+    }
+
+    if (kind === 'norman') {
+      if (!flags.norman_met) {
+        say(['Norman. I keep this gym, and the road to it: four badges stand between a challenger and my door, by the League\'s order and by my own judgment.', 'You have the look of a road that ends here eventually, {player}. Walk it honestly. When you stand in this room with four badges, I will not be a formality — I will be the wall the first half of Hoenn was building toward. Go and earn the meeting.'], () => { flags.norman_met = true; });
+        return true;
+      }
+      if (hBadges.length >= 4) { say(['Four badges. The wall is ready when you are, {player} — but not today. Some meetings deserve their own season. (H4b note, whispered by the gym itself: this battle ships with the east half.)']); return true; }
+      say(['The road is counting, {player}: ' + hBadges.length + ' of the four badges my door asks for. Rustboro, Dewford, Mauville, Lavaridge — in that order, earned honestly. I will be here. Balance keeps.']);
+      return true;
+    }
+
+    if (kind === 'cozmo') {
+      if (!flags.meteor_falls_done) { say(['Mind the spray, mind the ledges, and mind any scarves — red OR blue — that you meet in my cave, trainer. The meteorites here fell before there were teams to want them. I intend them to outlast the wanting.']); return true; }
+      say(['Gone to a crater, my finest stone, and the mountain spat the plan back out — for now. Teams like that do not retire, {player}; they relocate. A weather station, a shrine, a cavern under the sea. Hoenn is old machinery all the way down, and both crews are collectors.']);
+      return true;
+    }
+    if (kind === 'magma_admin_npc') {
+      if (!flags.chimney_clash_done) { say(['Walk away from the crater, trainer. What is bolted into that machine is older than your whole journey, and it is about to remember fire.']); return true; }
+      say(['Delayed by a bystander and a tide with legs. The land keeps, {player}. So do we. Next time we choose ground you cannot reach so politely.']);
+      return true;
+    }
+    if (kind === 'aqua_admin_npc') {
+      if (!flags.chimney_clash_done) { say(['Blue scarves hold the far slope, trainer. Whatever you think of us — the crater does not get fed today. See to the red ones.']); return true; }
+      say(['The crater is quiet and the stone is gone to whichever pocket the sea provided. Watch the sky, {player}. When it starts choosing sides, you will know both crews failed to stop each other.']);
+      return true;
+    }
+    if (kind === 'weather_watcher') {
+      say(['I read this valley\'s rain for the Weather Institute, up Route 119 — every gauge, every gust, written down twice. Lately the instruments argue with the sky, {player}, and when instruments argue, wise people recheck the oldest ones.', 'The Institute is stocking field teams this season, did you hear? Red scarves asking about drought records. Blue ones asking about rain. Scientists are flattered right up until they are frightened. I am at the frightened stage, personally.']);
+      return true;
+    }
+
+    // ---- the west leaders ----
+    const LEADERS = {
+      roxanne: { badge: 'stonebadge', gate: null, gateLines: [],
+        post: 'The quarry road north runs past Meteor Falls, challenger. The stone up there fell out of the sky — Roxanne\'s professional opinion is that it should be admired, not argued over. Mind who else admires it.' },
+      brawly: { badge: 'knucklebadge', gate: null, gateLines: [],
+        post: 'The boatman runs Dewford to Slateport whenever the tide allows, Knuckle Badge holder. May\'s world is showing in the hall there — a surf man recommends the seats. The view is all footwork.' },
+      wattson: { badge: 'dynamobadge', gate: null, gateLines: [],
+        post: 'Wahahaha! Still sparking, Dynamo Badge holder! The Verdanturf hall is west through the tunnel road, and the volcano road is north — an old electrician recommends the volcano second and the hall first. Order matters in wiring AND journeys!' },
+      flannery: { badge: 'heatbadge', gate: null, gateLines: [],
+        post: 'The springs are that way, Heat Badge holder, and you have earned every degree of them. Fallarbor lies past the ash fields north — take a breath before you go in. The air up there is half mountain already.' },
+    };
+    const L = LEADERS[kind];
+    if (!L) return false;
+    if (hBadges.includes(L.badge)) { say([L.post]); return true; }
+    const orderRefusal = badgeOrderRefusal(L.badge);
+    if (orderRefusal) { say(orderRefusal); return true; }
+    if (L.gate && !flags[L.gate]) { say(L.gateLines); return true; }
+    const t0 = TRAINERS[kind];
+    say([t0.intro[0]], () => {
+      g.ui.showMenu('Challenge ' + t0.name + '?', [
+        { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+      ], (v) => { if (v === 'yes') this.startHoennBattle(kind, null); });
+    });
+    return true;
+  },
+
+  // The shared leader runner, Hoenn seat (startJohtoBattle's idiom).
+  startHoennBattle(trainerId, onWin) {
+    const g = this.game;
+    const t0 = TRAINERS[trainerId];
+    if (!t0) { if (onWin) onWin(false); return; }
+    const t = bondTrainerVariant(g.state, t0);
+    g.scenes.push(new BattleScene({
+      kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
+      onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); if (onWin) onWin(!!won && !fled); },
+    }));
+  },
+  // --- H4b: runHoennNpc east actors + the climax/Institute/Pyre/
+  // hideout/Seafloor scenes extend the dispatch above ---
+
   endSafari(msg) {
     const g = this.game;
     g.state.session.safari = null;
@@ -165847,7 +166651,7 @@ Object.assign(OverworldScene.prototype, {
     // giver finishes (finishWith pays the def's reward + bond).
     {
       const jt = QUESTS[id];
-      if (jt && jt.johtoTale) {
+      if (jt && (jt.johtoTale || jt.hoennTale)) {
         if (npc.role === 'giver') {
           if (stage < 0) { say(jt.offerLines, () => acceptTale(st, id)); return true; }
           if (stage === 0) { say(['The road remembers an errand, trainer: ' + jt.stages[0] + '.']); return true; }
@@ -167258,6 +168062,13 @@ Object.assign(OverworldScene.prototype, {
     if (currentArcOf(g.state).id === 'johto') {
       const jq = JOHTO_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (jq) return '▶ ' + jq.text;
+    }
+    // Stage H4a: while the Hoenn arc is current, its chain leads the
+    // HUD objective (the first-half rows; H4b's appended rows join
+    // the same find, in chain order).
+    if (currentArcOf(g.state).id === 'hoenn') {
+      const hq = HOENN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      if (hq) return '▶ ' + hq.text;
     }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;

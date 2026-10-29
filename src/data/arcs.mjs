@@ -130,7 +130,7 @@ export const ARCS = [
     band: { min: 201, max: 300, bandIndex: 3 },
     badgeSet: 'hoenn', badgeTotal: 8,
     completionKey: 'hoenn', completionFlag: 'hoenn_complete',
-    status: 'sealed', future: false,
+    status: 'shipped', future: false,
     hookGiver: 'hawthorn', embarkPort: 'vermilion', arrivalMap: 'littleroot', home: 'pallet',
     summaryLines: [
       'Ever Grande Conference — HONOURS.',

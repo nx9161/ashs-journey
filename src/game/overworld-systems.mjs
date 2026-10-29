@@ -20,6 +20,7 @@ import { BattleScene } from './battle.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
+import { HOENN_QUESTS } from '../data/story-hoenn.mjs';
 import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
 import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
 import { CHAPTERS } from '../data/story.mjs';
@@ -202,6 +203,24 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_johto_director');
       } else if (id === 'radio-tower-3' && jf.radio_f2_cleared && !jf.radio_tower_cleared && !jf.ev_johto_radio_top_done) {
         this.runEvent('ev_johto_radio_top');
+      }
+    }
+    // Stage H4a (Hoenn story, first half): map-entry scenes, same
+    // idiom — each scene's own completion flag is its gate, so a fled
+    // or stalled beat re-fires on a later entry. The rescue fires on
+    // the ferry landing map itself (Littleroot); Meteor Falls waits
+    // for the Stone Badge and Chimney for the Dynamo Badge (the
+    // anime-true order of the seed chain).
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const hf = g.state.story.flags;
+      if (id === 'littleroot' && g.state.story.arc === 'hoenn' && !hf.birch_rescued && !hf.ev_hoenn_rescue_done) {
+        this.runEvent('ev_hoenn_rescue');
+      } else if (id === 'birch-lab' && !hf.hoenn_arrival && !hf.ev_hoenn_arrival_done) {
+        this.runEvent('ev_hoenn_arrival');
+      } else if (id === 'meteor-falls' && hf.badge_stone && !hf.meteor_falls_done && !hf.ev_hoenn_meteor_done) {
+        this.runEvent('ev_hoenn_meteor');
+      } else if (id === 'mt-chimney' && hf.badge_dynamo && !hf.chimney_clash_done && !hf.ev_hoenn_chimney_done) {
+        this.runEvent('ev_hoenn_chimney');
       }
     }
   },
@@ -856,6 +875,9 @@ Object.assign(OverworldScene.prototype, {
     // Stage J4a: Johto story actors (Elm, the west leaders, Kurt, the
     // Sprout Elder, the well Rockets) run their own scenes.
     if (npc.johto) { if (this.runJohtoNpc(npc)) return true; }
+    // Stage H4a: Hoenn story actors (Birch, May, Wally, Norman, the
+    // west leaders, Cozmo, the two admins) run their own scenes.
+    if (npc.hoenn) { if (this.runHoennNpc(npc)) return true; }
     // ADR-025 §2: the Pallet lab Gary is dialogue-only — his lines are
     // tier-variant (the wary set IS his authored dialogue, so a neutral
     // run reads byte-identically to before Phase 5).
@@ -1869,6 +1891,174 @@ Object.assign(OverworldScene.prototype, {
     }));
   },
 
+  // ---------- Stage H4a: Hoenn story actors ----------
+  // One dispatch for every NPC carrying a `hoenn:` key (appended at
+  // loadMap from story-hoenn.mjs HOENN_NPCS). Leaders ride the shared
+  // leader runner (startHoennBattle = the startJohtoBattle idiom:
+  // winTrainer's award writes badges.hoenn + the badge_<root> flag),
+  // behind the same badge-order gate Johto's leaders carry (the
+  // validator's prefix law, data-driven from BADGE_SETS.hoenn).
+  // Birch, May, Wally, Norman, Cozmo and the admins are state-driven
+  // scenes. H4b extends this dispatch at the marked seam.
+  runHoennNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    const hBadges = (st.badges && st.badges.hoenn) || [];
+    const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
+    const kind = npc.hoenn;
+    const HOENN_LEADER_WAITS = {
+      stonebadge: 'Roxanne, in Rustboro City\'s gym',
+      knucklebadge: 'Brawly, in Dewford Town\'s gym',
+      dynamobadge: 'Wattson, in Mauville City\'s gym',
+      heatbadge: 'Flannery, in Lavaridge Town\'s gym',
+      balancebadge: 'Norman, in Petalburg City\'s gym',
+      featherbadge: 'Winona, in Fortree City\'s gym',
+      mindbadge: 'Tate and Liza, in Mossdeep City\'s gym',
+      rainbadge: 'Juan, in Sootopolis City\'s gym',
+    };
+    const badgeOrderRefusal = (badgeId) => {
+      const idx = BADGE_SETS.hoenn.indexOf(badgeId);
+      if (idx <= 0 || hBadges.length >= idx) return null;
+      const miss = BADGE_SETS.hoenn[hBadges.length];
+      const missItem = ITEMS[miss];
+      return ['The League keeps an order in Hoenn, challenger, and I keep it with them: the badges are earned in sequence here, west to east.',
+        'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (HOENN_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
+    };
+
+    if (kind === 'birch') {
+      if (!flags.hoenn_arrival && !flags.ev_hoenn_arrival_done) { this.runEvent('ev_hoenn_arrival'); return true; }
+      if (flags.chimney_clash_done) { say(['Star-stone fed to a crater, and the sky argued about it in two colors. My instruments have been restless ever since, {player}. Whatever those teams are waking, it is older than both of them — and the Weather Institute up Route 119 reads this region\'s sky for a living. If anyone can name what is coming, they can.']); return true; }
+      if (flags.meteor_falls_done) { say(['Cozmo wrote me a letter with shaking handwriting, {player}. A stolen meteorite and two teams with flags — that is not fieldwork anymore, that is a forecast. Keep your eyes on the sky as much as the road. Hoenn\'s weather has opinions this year.']); return true; }
+      say(['Registered, welcomed, and only slightly mauled by the local wildlife — a complete Hoenn arrival, {player}. Petalburg first, then Rustboro. And if a Poochyena ever corners me again, I am retiring to study sedimentary rock. Indoors.']);
+      return true;
+    }
+
+    if (kind === 'may_littleroot') {
+      if (!flags.may_met) {
+        say(['You are the trainer who rescued Dad? He tells it with sound effects now. I am May — I live two doors down and I am going to win a contest ribbon before you win a badge, so... no pressure on either of us.', 'Gyms are your road. Halls are mine. But roads cross, {player} — Slateport has a hall, and so do Verdanturf and Fallarbor. Come and sit in my world sometime. I will sit in yours at Rustboro and try not to grade your footwork. Much.'], () => { flags.may_met = true; });
+        return true;
+      }
+      say(['Slateport, Verdanturf, Fallarbor — that is my road, in order. Yours has more volcanoes. I checked. See you in a hall, {player} — bring your loudest polite applause.']);
+      return true;
+    }
+
+    const mayContest = (hall, gateBadge, doneFlag, ribbonFlag, preLines, beatLines, postLines) => {
+      if (flags[doneFlag]) { say(postLines); return true; }
+      if (!hBadges.includes(gateBadge)) { say(preLines); return true; }
+      say(beatLines, () => {
+        flags[doneFlag] = true;
+        if (ribbonFlag) flags[ribbonFlag] = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('May\'s contest: ' + hall + ' — noted in your Quest Log.');
+      });
+      return true;
+    };
+    if (kind === 'may_contest_slateport') {
+      return mayContest('Slateport', 'knucklebadge', 'may_slateport_done', null,
+        ['Too early, {player} — the hall wants a coordinator with sea legs, and I want one more badge\'s worth of road behind me before I face that crowd. Dewford first. Then watch me.'],
+        ['You came. You actually — okay. Okay! Watch this, then. From the top, just like practice.', '...The hall lights are a different country, {player}. My appeal landed, my timing held, and the Slateport judges still gave the ribbon to a coordinator with six years on me — by half a point. HALF. I am not crying about it. I am taking notes about it. There is a difference, and the difference is Verdanturf.'],
+        ['Half a point, {player}. I have replayed it so many times the judges have started appearing in my dreams to apologize. Verdanturf is next, and I am not losing that one in the last round. I have decided.']);
+    }
+    if (kind === 'may_contest_verdanturf') {
+      return mayContest('Verdanturf', 'dynamobadge', 'may_verdanturf_done', 'may_ribbon_verdanturf',
+        ['Verdanturf is the serious hall, {player} — small room, sharp judges. I am not stepping in there until Mauville is behind you and my new appeal is behind ME. Wattson first. Then this.'],
+        ['Small room. Sharp judges. New appeal. Deep breath... and — YES. Yes! Did you see the last round? The whole hall stood up, {player}, the whole hall!', 'My first ribbon. Verdanturf. It is going on the case exactly like this, dust and all, so I remember what earning one feels like. Your road taught me something, you know: you do not wait to feel ready. You enter, and readiness catches up. Fallarbor next. Their crowd is harsher. So am I, now.'],
+        ['Verdanturf, {player}. First ribbon. I still take it out of the case sometimes just to check it is real. It is. Fallarbor is next — ash, hard judges, harder applause. Perfect.']);
+    }
+    if (kind === 'may_contest_fallarbor') {
+      return mayContest('Fallarbor', 'heatbadge', 'may_fallarbor_done', 'may_ribbon_fallarbor',
+        ['Fallarbor judges have seen everything twice and applauded once, {player}. I picked this hall on purpose — but not before Lavaridge. Flannery first. A coordinator keeps her order too.'],
+        ['Ash on the windows, silence like a held breath — and then the last appeal landed and the whole room came up out of its seats like startled birds. FALLARBOR, {player}! They applauded. THIS crowd applauded!', 'Two ribbons. Slateport taught me the half point, Verdanturf taught me the entry, and Fallarbor — Fallarbor taught me the room is mine if I walk in like it is. Lilycove is the last hall on my road. When your road bends east, come and see how this story ends.'],
+        ['Two ribbons, {player}, and the hardest room in Hoenn stood up for the second one. Lilycove remains — the last hall, out east where your gym road is going anyway. See you there.']);
+    }
+
+    if (kind === 'wally') {
+      if (!flags.wally_helped) {
+        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Verdanturf, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has Ralts in it sometimes. I have a ball, and a borrowed Zigzagoon from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
+          say(['The grass shivers. A Ralts — small, horned, already turning away — and the borrowed Zigzagoon looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. Ralts, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Pokemon. I HAVE a Pokemon, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
+            flags.wally_helped = true;
+            flags.wally_ralts = true;
+            g.audio.playSfx('dex-register');
+            g.ui.toast('Wally caught a Ralts!');
+          }, 'WALLY');
+        });
+        return true;
+      }
+      say(['Ralts is learning my moods faster than my doctors ever did, {player}. Verdanturf soon — the air there, and my uncle\'s house, and a whole new road. When it crosses yours again, I will not be hard to recognize. I will be the one who is ready.']);
+      return true;
+    }
+
+    if (kind === 'norman') {
+      if (!flags.norman_met) {
+        say(['Norman. I keep this gym, and the road to it: four badges stand between a challenger and my door, by the League\'s order and by my own judgment.', 'You have the look of a road that ends here eventually, {player}. Walk it honestly. When you stand in this room with four badges, I will not be a formality — I will be the wall the first half of Hoenn was building toward. Go and earn the meeting.'], () => { flags.norman_met = true; });
+        return true;
+      }
+      if (hBadges.length >= 4) { say(['Four badges. The wall is ready when you are, {player} — but not today. Some meetings deserve their own season. (H4b note, whispered by the gym itself: this battle ships with the east half.)']); return true; }
+      say(['The road is counting, {player}: ' + hBadges.length + ' of the four badges my door asks for. Rustboro, Dewford, Mauville, Lavaridge — in that order, earned honestly. I will be here. Balance keeps.']);
+      return true;
+    }
+
+    if (kind === 'cozmo') {
+      if (!flags.meteor_falls_done) { say(['Mind the spray, mind the ledges, and mind any scarves — red OR blue — that you meet in my cave, trainer. The meteorites here fell before there were teams to want them. I intend them to outlast the wanting.']); return true; }
+      say(['Gone to a crater, my finest stone, and the mountain spat the plan back out — for now. Teams like that do not retire, {player}; they relocate. A weather station, a shrine, a cavern under the sea. Hoenn is old machinery all the way down, and both crews are collectors.']);
+      return true;
+    }
+    if (kind === 'magma_admin_npc') {
+      if (!flags.chimney_clash_done) { say(['Walk away from the crater, trainer. What is bolted into that machine is older than your whole journey, and it is about to remember fire.']); return true; }
+      say(['Delayed by a bystander and a tide with legs. The land keeps, {player}. So do we. Next time we choose ground you cannot reach so politely.']);
+      return true;
+    }
+    if (kind === 'aqua_admin_npc') {
+      if (!flags.chimney_clash_done) { say(['Blue scarves hold the far slope, trainer. Whatever you think of us — the crater does not get fed today. See to the red ones.']); return true; }
+      say(['The crater is quiet and the stone is gone to whichever pocket the sea provided. Watch the sky, {player}. When it starts choosing sides, you will know both crews failed to stop each other.']);
+      return true;
+    }
+    if (kind === 'weather_watcher') {
+      say(['I read this valley\'s rain for the Weather Institute, up Route 119 — every gauge, every gust, written down twice. Lately the instruments argue with the sky, {player}, and when instruments argue, wise people recheck the oldest ones.', 'The Institute is stocking field teams this season, did you hear? Red scarves asking about drought records. Blue ones asking about rain. Scientists are flattered right up until they are frightened. I am at the frightened stage, personally.']);
+      return true;
+    }
+
+    // ---- the west leaders ----
+    const LEADERS = {
+      roxanne: { badge: 'stonebadge', gate: null, gateLines: [],
+        post: 'The quarry road north runs past Meteor Falls, challenger. The stone up there fell out of the sky — Roxanne\'s professional opinion is that it should be admired, not argued over. Mind who else admires it.' },
+      brawly: { badge: 'knucklebadge', gate: null, gateLines: [],
+        post: 'The boatman runs Dewford to Slateport whenever the tide allows, Knuckle Badge holder. May\'s world is showing in the hall there — a surf man recommends the seats. The view is all footwork.' },
+      wattson: { badge: 'dynamobadge', gate: null, gateLines: [],
+        post: 'Wahahaha! Still sparking, Dynamo Badge holder! The Verdanturf hall is west through the tunnel road, and the volcano road is north — an old electrician recommends the volcano second and the hall first. Order matters in wiring AND journeys!' },
+      flannery: { badge: 'heatbadge', gate: null, gateLines: [],
+        post: 'The springs are that way, Heat Badge holder, and you have earned every degree of them. Fallarbor lies past the ash fields north — take a breath before you go in. The air up there is half mountain already.' },
+    };
+    const L = LEADERS[kind];
+    if (!L) return false;
+    if (hBadges.includes(L.badge)) { say([L.post]); return true; }
+    const orderRefusal = badgeOrderRefusal(L.badge);
+    if (orderRefusal) { say(orderRefusal); return true; }
+    if (L.gate && !flags[L.gate]) { say(L.gateLines); return true; }
+    const t0 = TRAINERS[kind];
+    say([t0.intro[0]], () => {
+      g.ui.showMenu('Challenge ' + t0.name + '?', [
+        { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+      ], (v) => { if (v === 'yes') this.startHoennBattle(kind, null); });
+    });
+    return true;
+  },
+
+  // The shared leader runner, Hoenn seat (startJohtoBattle's idiom).
+  startHoennBattle(trainerId, onWin) {
+    const g = this.game;
+    const t0 = TRAINERS[trainerId];
+    if (!t0) { if (onWin) onWin(false); return; }
+    const t = bondTrainerVariant(g.state, t0);
+    g.scenes.push(new BattleScene({
+      kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
+      onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); if (onWin) onWin(!!won && !fled); },
+    }));
+  },
+  // --- H4b: runHoennNpc east actors + the climax/Institute/Pyre/
+  // hideout/Seafloor scenes extend the dispatch above ---
+
   endSafari(msg) {
     const g = this.game;
     g.state.session.safari = null;
@@ -1949,7 +2139,7 @@ Object.assign(OverworldScene.prototype, {
     // giver finishes (finishWith pays the def's reward + bond).
     {
       const jt = QUESTS[id];
-      if (jt && jt.johtoTale) {
+      if (jt && (jt.johtoTale || jt.hoennTale)) {
         if (npc.role === 'giver') {
           if (stage < 0) { say(jt.offerLines, () => acceptTale(st, id)); return true; }
           if (stage === 0) { say(['The road remembers an errand, trainer: ' + jt.stages[0] + '.']); return true; }
@@ -3360,6 +3550,13 @@ Object.assign(OverworldScene.prototype, {
     if (currentArcOf(g.state).id === 'johto') {
       const jq = JOHTO_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (jq) return '▶ ' + jq.text;
+    }
+    // Stage H4a: while the Hoenn arc is current, its chain leads the
+    // HUD objective (the first-half rows; H4b's appended rows join
+    // the same find, in chain order).
+    if (currentArcOf(g.state).id === 'hoenn') {
+      const hq = HOENN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      if (hq) return '▶ ' + hq.text;
     }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;

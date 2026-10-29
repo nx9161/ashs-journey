@@ -13,6 +13,8 @@ import { DIFFICULTY_LABELS, difficultyOf, houseRule } from './rules.mjs';
 import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { TALE_NPCS, TALE_NPC_PATCHES } from '../data/quests.mjs';
 import { JOHTO_NPCS, JOHTO_NPC_PATCHES } from '../data/story-johto.mjs';
+import { HOENN_NPCS, HOENN_NPC_PATCHES } from '../data/story-hoenn.mjs';
+import { weatherForMap, drawWeatherOverlay } from './weather.mjs';
 import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from './bonds.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
@@ -183,6 +185,25 @@ export class OverworldScene {
       const johtoNpcs = JOHTO_NPCS.filter((n) => n.map === id);
       if (johtoNpcs.length) {
         npcs = [...npcs, ...johtoNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
+        changed = true;
+      }
+      // Stage H4a (Hoenn story): the same append idiom fields the
+      // Hoenn story actors (Birch, May, Wally, Norman, the west
+      // leaders + gym rosters, Cozmo, the admins) and stamps Hoenn
+      // tale roles onto existing maps7 townsfolk by name
+      // (HOENN_NPC_PATCHES). The generated maps7 definitions are
+      // never mutated; the scene works on this copy.
+      const hPatches = HOENN_NPC_PATCHES.filter((p) => p.map === id);
+      if (hPatches.length) {
+        npcs = npcs.map((n) => {
+          const pp = hPatches.find((q) => q.name === n.name);
+          return pp ? { ...n, tale: pp.tale, role: pp.role } : n;
+        });
+        changed = true;
+      }
+      const hoennNpcs = HOENN_NPCS.filter((n) => n.map === id);
+      if (hoennNpcs.length) {
+        npcs = [...npcs, ...hoennNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
       // ADR-025 §2 (Bonds): the Celadon parley pair stand in Celadon
@@ -1140,6 +1161,12 @@ export class OverworldScene {
         c.fillRect(r.camX - T, r.camY - T, r.viewW + 2 * T, r.viewH + 2 * T);
       }
     }
+    // Stage H4a (ruling 4): the visual weather layer — the Premium+
+    // atmosphere pass, drawn over the tinted world and under every
+    // HUD/text draw below. Presentation only (src/game/weather.mjs):
+    // the current map's weather field, or the climax-state override
+    // while its flags stand. Maps with no field resolve clear.
+    drawWeatherOverlay(r, g, weatherForMap(g.state, this.map));
     // Yellow-style spot "!" over each challenger during the alert beat.
     if (this.challenge && this.challenge.phase === 'spot') {
       for (const q of this.challenge.parts) {

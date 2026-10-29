@@ -166,6 +166,19 @@ export const TALE_NPCS = [
   { map: 'pallet', x: 11, y: 8, name: 'CAPT JOHTO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
     ferry: 'newbark', ferryArc: 'johto',
     dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+  // Arc 3 Stage H4a: the Hoenn embark captain, appended to Vermilion's
+  // roster through this same loadMap append idiom (Vermilion's map def
+  // in maps2.mjs is NOT rewritten). He carries NO tale/role — the ferry
+  // handler (overworld-systems, ferryArc 'hoenn') owns him entirely:
+  // gated by the Foundation embark leg (embark_hoenn, armed at
+  // Homecoming #3) outbound, and unconditional once Hoenn has been
+  // reached (NO-SOFT-LOCK LAW). He stands at (16,10) on Vermilion's
+  // dock row, east of CAPT ORANGE (13,10) — each port its OWN captain
+  // (the Johto smell, J-register). The return captain stands on the
+  // Slateport dock (maps7.mjs, CAPT MERIDIAN).
+  { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#7a3a2a', pants: '#2a2a3a', hair: '#2a1a0a',
+    ferry: 'littleroot', ferryArc: 'hoenn',
+    dialogue: ['The Littleroot run is the long weather crossing — Hoenn water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
   // own front-door threshold (3,4) — the one-tile gap in the fence
   // row, fed only from (3,5) — so ANY stance in that column seals

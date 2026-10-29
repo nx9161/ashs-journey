@@ -211,8 +211,8 @@ const mon = (id, lv) => makeMon(id, lv || 120, SPECIES, MOVES);
   maximal.player.name = 'ASH'; maximal.player.rivalName = 'GARY';
   for (const id of Object.keys(ITEMS)) maximal.bag[id] = 999;
   const rm = VAL.validateSave(clone(maximal));
-  ok('A24 cheat maximal stock at 160 items validates server-side (146 + 7 apricorns + 7 balls)',
-    Object.keys(ITEMS).length === 160 && rm.ok, JSON.stringify(rm.errors));
+  ok('A24 cheat maximal stock at 168 items validates server-side (160 + 8 Hoenn badges, Stage H4a — supersedes the Stage J6 count)',
+    Object.keys(ITEMS).length === 168 && rm.ok, JSON.stringify(rm.errors));
 }
 
 // ---- apricorn trees ----
