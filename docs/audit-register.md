@@ -6103,3 +6103,91 @@ f434ba63… as at HEAD) and the content-hash personal line preserved
 - Accent deltas for non-starter Johto species are NOT in this stage's
   brief (shipped Kanto coverage is likewise partial); fronts/backs/
   bobs are complete for the range.
+
+## Arc 2 Stage J2b — Species art, dex 202–251 (2026-10-29)
+
+### 1. What landed
+
+- **46 species authored** (dex 202–251; the in-range guests snubbull 209,
+  donphan 232, lugia 249 and hooh 250 already had art): wobbuffet,
+  girafarig, pineco, forretress, dunsparce, gligar, steelix, granbull,
+  qwilfish, scizor, shuckle, heracross, sneasel, teddiursa, ursaring,
+  slugma, magcargo, swinub, piloswine, corsola, remoraid, octillery,
+  delibird, mantine, skarmory, houndour, houndoom, kingdra, phanpy,
+  porygon2, stantler, smeargle, tyrogue, hitmontop, smoochum, elekid,
+  magby, miltank, blissey, raikou, entei, suicune, larvitar, pupitar,
+  tyranitar, celebi.
+- **92 full frames** (`<id>-front` + `<id>-back` .pix, 64×64, original
+  pixel work in the Platinum language — NW-light shading, shared outline
+  colour, true rear views: no eyes, back-specific markings). Backs are
+  NOT mirrors: front/back row data differs for all 46 (census-checked).
+- **92 bob frames** reach the shipped set via the pipeline itself:
+  front-bobs by build-art's marked derivation, back-bobs by the W2
+  shift-delta mechanism — no hand files, exactly as shipped species.
+- **8 accent deltas** for the four marquee legendaries in range
+  (raikou, entei, suicune, celebi): front-accent = blink (recolor-only),
+  back-accent = mane/crest twitch recolor, as .deltapix over the new
+  bases — the J2a starter-accent mechanism, unchanged.
+- Authoring workflow: generator script
+  `~/workspace/ashs-journey-qa/gen-j2b-art.mjs`. Provenance, on the
+  record: the per-species defs were drafted alongside J2a inside
+  gen-j2a-art.mjs but never emitted (its ORDER list stopped at dex
+  201); J2b reviewed, fixed and shipped them as its own generator.
+  Fixes made in the art, never in the validator: delibird + skarmory
+  palettes gained the beak key their shared bird plan paints;
+  heracross's horn-fork tips and skarmory's wing-feather tips were
+  single orphan pixels (tips clustered / feather reach shortened);
+  polish tweaks to slugma (stalk/eye separation), steelix (tail
+  segment tucked in as a coil base), octillery (wider, bumped head)
+  and hitmontop (enlarged top body — it was the set's smallest frame).
+- The beast trio are deliberately NOT recolors of one another:
+  raikou = masked saber-fang face + purple storm-mane saddle, entei =
+  low-slung bulk + grey faceplate/crest, suicune = lean frame +
+  diamond crest + twin ribbon tails; celebi = onion-head silhouette,
+  oversized eyes, translucent wings.
+
+### 2. Census (gate) — FULL roster
+
+- Script: `~/workspace/ashs-journey-qa/arc2-etl/census-j2b.mjs`
+  (extends census-j2a to the whole merged roster).
+- **257/257 registry entries** (dex 1–251 + partner + 5 forms) have
+  front+back keys in art-data.mjs: **missing 0, blanks 0** — zero
+  forge fallbacks anywhere in the roster.
+- **94/94 Johto species have front-bob + back-bob** (missing 0);
+  marquee accents present (missing 0); partner front/back present.
+- Per-sprite stats for the 92 new frames: painted pixels **564–1,329**
+  (min = pupitar/hitmontop class shells by design), palette sizes
+  **4–11** colours (cap 32). Full per-species table is the census
+  script output.
+- **Contact sheet:** `~/workspace/ashs-journey-qa/arc2-etl/census-j2b-contact.png`
+  (1536×1236, 46 labelled fronts at 3×), visually inspected by the
+  implementer: all 46 silhouettes nameable at sheet scale.
+- Atlas: the species family now holds 1,169 sprites and still packs
+  onto **2 pages** (page 2 grew; the page 3 J2a anticipated was not
+  needed — the multi-page packer handles it if a later stage grows).
+
+### 3. Battery at this commit
+
+- build-art clean and **deterministic** (two runs → byte-identical
+  art-data.mjs + species atlases). 2,698 sprites total, 256 derived
+  bobs, 629 delta frames.
+- fidelity-checks **35/35** · campaign-smoke **24/24** ·
+  qa-changed-flows failures exactly **{b2, d9}**.
+- Fresh build (vercel + guest targets) OK — public/game.js
+  **6,633,533 bytes** (gate 12,582,912; J2a left it at 5,966,719).
+  **personal/ byte-identical** (sha256 f434ba63…, untouched by this
+  stage; built targets were vercel+guest only).
+
+### 4. Leftovers, named
+
+- **Hardest silhouettes at 64×64** (flagged for the owner's eye on the
+  contact sheet): octillery (head/tentacle mass still flirts with a
+  flame read), porygon2 (smooth curves on a pixel grid — the head/body
+  join is thin), steelix (segment chain reads light against dark
+  grounds), hitmontop (smallest authored frame). All pass silhouette
+  naming on the sheet; first candidates if a polish pass is ordered.
+- Accent deltas for non-marquee Johto species remain out of scope
+  (shipped Kanto coverage is likewise partial); fronts/backs/bobs are
+  complete for the range.
+- **Stage J2 total (J2a + J2b): 257/257 authored pairs, 94/94 Johto
+  bob sets — the J2 art gate is closed.**

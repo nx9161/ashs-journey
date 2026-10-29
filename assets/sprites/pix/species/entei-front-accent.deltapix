@@ -1,0 +1,16 @@
+# entei-front-accent — Arc2 J2b accent frame (blink). Recolor-only delta over entei-front.
+PIXD entei-front-accent entei-front 64 64
+13 26 O
+12 27 O
+13 27 O
+14 27 O
+11 28 O
+12 28 O
+13 28 O
+14 28 O
+15 28 O
+12 29 O
+13 29 O
+14 29 O
+13 30 O
+PAL

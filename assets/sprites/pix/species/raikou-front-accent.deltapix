@@ -1,0 +1,16 @@
+# raikou-front-accent — Arc2 J2b accent frame (blink). Recolor-only delta over raikou-front.
+PIXD raikou-front-accent raikou-front 64 64
+13 25 O
+12 26 O
+13 26 O
+14 26 O
+11 27 O
+12 27 O
+13 27 O
+14 27 O
+15 27 O
+12 28 O
+13 28 O
+14 28 O
+13 29 O
+PAL
