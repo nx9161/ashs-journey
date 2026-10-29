@@ -1969,6 +1969,30 @@ Object.assign(OverworldScene.prototype, {
     }
   },
 
+  // ---------- Premium+ W7 (TX-7): foreground layer ----------
+  // Canopy overhangs + typed-building roof eaves, drawn by the scene
+  // AFTER the y-sorted character pass (overworld.mjs render hook), so
+  // the player and NPCs pass UNDER them. The per-cell rule is
+  // art.foregroundFor — the same function the W7 census measures, so
+  // shipped coverage == graded coverage. PL-3: visible-rect loop only,
+  // hash-picked pre-rendered canvases, zero per-frame allocation.
+  sysRenderForeground(r) {
+    const g = this.game;
+    if (!g.tileCache || !g.foregroundFor) return;
+    const T = TILE;
+    const vr = r.viewRect();
+    const x0 = Math.max(0, Math.floor(vr.x0 / T)), x1 = Math.min(this.w - 1, Math.ceil(vr.x1 / T));
+    const y0 = Math.max(0, Math.floor(vr.y0 / T)), y1 = Math.min(this.h - 1, Math.ceil(vr.y1 / T));
+    const kindAt = (tx, ty) => (ty < 0 || ty >= this.map.rows.length || tx < 0 || tx >= this.map.rows[ty].length)
+      ? null : g.tileKind(this.map.rows[ty][tx]);
+    for (let y = y0; y <= y1; y++) {
+      for (let x = x0; x <= x1; x++) {
+        const fg = g.foregroundFor(g.tileKind(this.map.rows[y][x]), x, y, kindAt);
+        if (fg) r.blit(fg, x * T - 8, y * T - 16);
+      }
+    }
+  },
+
   // ---------- objective (quest-driven HUD line) ----------
   sysObjective() {
     const g = this.game;

@@ -4137,3 +4137,348 @@ implementer number taken on trust.
   wave6-premium-qa-*.mjs in the QA workspace carry the fix,
   including the poll-driven Continue boot: legal → title →
   menu → Continue → PLAY AS GUEST).
+
+## Premium+ Art Wave W7 — Dressing, Transitions & Composition (2026-10-29, implementer entry — pending independent QA)
+
+Base HEAD 56cab43 (W6 QA PASS WITH NOTES). All art hand-authored
+`.pix`, original only; every new hex snapped to the shipped tiles
+palette union — **union 623/640 before and after, zero growth, cap
+untouched**. Census rig: `premium-rig/audit-w7-census.mjs` (W6
+pattern), run on a pristine HEAD worktree for base and on the
+finished tree for final; live evidence from
+`wave7-premium-impl-driver.mjs` (CDP drive of the built public/
+bundle, guest save boot on Pallet).
+
+**Dressing kind — definition (recorded per spec):** a decorative
+scatter kind in the tile stack's prop class that is not structural
+— the shipped scatter set {fence, lamp, flowerbed, flower} plus
+the 16 W7 dressing kinds and 4 W7 gate kinds below. Town-identity
+kinds (tg/tg2 town grounds, roofs, facades, signs of place) are
+explicitly NOT dressing.
+
+### TX-6 — dressing & place transitions (22 units + ≈600 placements)
+
+- **Warp transition (engine, 0 assets):** `onStep` warps now run
+  `startWarpFade` → `doWarp` (doWarp is byte-for-byte the pre-W7
+  instant warp, incl. centerReturn/martReturn/lastCenter
+  persistence). Door warps (stepped cell has a W6 door-open
+  frame): 50 ms door beat — door-open canvas blit + warm light
+  spill `rgba(255,214,130,0.35)` on the cell south of the door +
+  'click' SFX — then 60 ms fade-out + 60 ms fade-in (170 ms
+  design). Non-door warps: 90 + 90 ms (180 ms). Ease-out
+  `1-(1-k)²` throughout, sharing the battle-entry timing language
+  (PL-2). **Reduced Motion → instant doWarp, no warpFx** (the
+  codebase's standing accessibility pattern). Live frame-sampled
+  evidence (10 ms recorder over warpFx + renderer.fadeA): door
+  warp phases **door>out>in**, fadeA peaks 1.0, ends 0, ~168 ms
+  end-to-end; edge warp **out>in**, ~187 ms; reduced-motion warp
+  instant with warpFx null and fadeA 0 — all PASS, 0 JS errors.
+- **Dressing:** 16 authored kinds (bench, planter, crates, barrel,
+  signpost, well, postbox, bikestand, stall, haycart, sundial,
+  birdbath, tub, sacks, pottedtree, waterpump), all prop class
+  (solid, composited over ground). **588 dressing placements**
+  (21 per town × 11, 21 per route × 17) + **38 gate markers =
+  626 total placements** on existing cells only. Census:
+  dressing kinds per town **min 1 → 8** (gate ≥8), per route
+  **min 0 → 9** (gate ≥5); dressing cells on towns+routes
+  **69 → 693**. Capture-repeat rule (no kind >3× in a 24×14
+  window): every W7 kind ≤3 on both trees; the worst windows
+  (×4–5) are **pre-existing shipped lamp clusters**, identical
+  at base — not touched (they are W5 work, outside W7 scope).
+- **Gate/arch markers:** 4 authored kinds (gatepost, gatearch,
+  routearch, vinearch; 16×32). Census exit-pair coverage
+  **0/38 → 38/38**.
+- **Terrain blends (last pairs):** `tile-blend-treeline`
+  (tree-line→ground, resolver places it on ground cells whose
+  north neighbour is tree/tc-*) and `tile-blend-arch`
+  (arch→ground, north neighbour is an arch kind, hash-gated
+  0.65) — both resolver-driven overlays in the tile stack, no
+  map cells changed.
+
+### TX-7 — composition & presence (12 units)
+
+- **Foreground layer LIVE:** `sysRenderForeground` implemented
+  at the pre-existing render hook (after the LD-3 y-sorted pass,
+  before tint). Canopy pieces (4 authored 32×32: oak/pine/elm/
+  round) resolver-placed over tree/tc-* border cells; roof-eave
+  foreground (2 authored strips) over typed-building facade
+  bases (house/center/mart/gym/lab/dojo). Census: forest-border
+  cells **0/918 (0%) → 746/918 = 81.3%** (gate ≥50%);
+  typed-building eave cells **68/68**. Live under-pass proof:
+  pixel-diff of the player-under-canopy region with the
+  foreground pass on vs shadowed off = **6,441 differing
+  pixels**; captures show the player and NPCs passing under
+  canopy and eaves (wave7-premium-impl-shots/).
+- **Atmosphere:** 5 authored speckle overlays (warm, dust,
+  coast, leaf, sparkle), resolver-placed by map-id biome class
+  (dust = cave maps; coast = the four port towns + route19/
+  route20/safari; sparkle = pewter/saffron/lavender/indigo;
+  leaf = routes + viridian/celadon/pallet/newisland; warm =
+  everything else incl. interiors), hash rate 0.5. Speckles,
+  not a flat tint — a tint cannot move exact-hex shares.
+  Town top-5 colour share (logical raster, the register's
+  standing instrument): worst town **43.3% (celadon) → 41.3%**,
+  all 11 towns ≤45% at final. **Live-capture top-5** (in-map
+  canvas pixels, margins excluded): Pallet **32.6%**, Celadon
+  **40.5%** — both ≤45%.
+- **Item ball:** already shipped in W5 (`tile-itemball.pix` +
+  authored shadow; the procedural circle was replaced then and
+  has zero remaining call sites — re-verified this wave in
+  sysRenderWorld). TX-7's 12th unit is recorded as pre-landed,
+  not re-counted as W7 work.
+
+### Sizes
+
+- ART keys 2,247 → **2,280 (+33 new, 0 lost)**; build-art +
+  build rebuild byte-identical (md5-verified twice this
+  session). art-data 3,452,742 → **3,476,377 B (+23,635 B,
+  under the ≤60 KB W7 cap)**.
+
+### Standing battery (final tree, this session)
+
+- W7 census: every TX-6/TX-7 gate above PASS. qa-changed-flows
+  failures EXACTLY {b2, d9} (pre-existing baseline).
+  campaign-smoke **24/24**. budgets-check **all gates PASS**.
+  scripts/verify-slice **48/48** + qa-slice **134/134** (see
+  harness note below). Track B integration **114/114**.
+- **Connectivity: PASS.** celadon-sweep **11/11** on the final
+  tree. Warp audit (`audit-w5-warps.mjs`) **byte-identical to
+  the HEAD baseline** — 286 triggers, 266 reachable, same 20
+  unreachable.
+- Encounter preservation: `,` cells **640 = 640** vs base,
+  zero moved; footprints unchanged (map diffs are row-content
+  swaps only, 296/296 line-balanced).
+- **PL-3 render re-measurement** (Saffron, FULL new layer stack
+  — foreground + shadows + overlays + atmosphere; W5 method,
+  ~440 frames): **mean 3.15 ms, p95 5.8 ms** vs the 8 ms budget
+  — PASS. `foregroundFor` returns the cached canvas directly
+  (no per-frame allocation in the hot path); no shadowBlur or
+  gradient APIs anywhere in the new code; all variation is
+  hash/phase-driven.
+- personal/ byte-identical to HEAD (restored after the build
+  per standing procedure) and the `personal:` line in
+  dist/content-hash.txt stands at its pinned constant
+  ce64da2b…0bb5; guest/vercel lines updated by the build
+  normally. Note for QA: qa-changed-flows, campaign-smoke and
+  budgets-check each invoke scripts/build.mjs internally, and
+  verify-slice's S3b bundle replay also writes both bundles to
+  disk — running the battery re-dirties personal/, so restore
+  + re-pin after the battery, as done here (done last, after
+  the final verify-slice run).
+
+### Deviations & process corrections (recorded honestly)
+
+1. **Item ball pre-landed in W5** (see TX-7) — counted as
+   verified-present, not as new W7 work.
+2. **Top-5 instrument difference:** the spec's "61–65% today"
+   was measured on prod captures at aa13a96. On the register's
+   standing logical-raster instrument the W7 base already
+   measured ≤45% in every town (worst 43.3%) — W5/W6 work had
+   moved the number before W7 started. W7 reports both
+   instruments: logical raster 43.3% → 41.3% worst-town, and
+   final live captures 32.6%/40.5% (≤45% gate met on both).
+   A same-session base live-capture attempt was invalid
+   (staging race produced identical frames for both towns)
+   and is not quoted.
+3. **Black margins (22.7%) untouched** — per the task's
+   explicit out-of-scope ruling (owner decision still open):
+   no map dimension, camera, or viewport change was made or
+   implied.
+4. **Fade coverage:** 100% of the `warps[]` step-warp system.
+   Scripted transports (ferry, safari entry, blackout, story
+   `s.warp` calls) are dialogue/menu scene beats outside
+   `warps[]` and were not faded; defeat/blackout already
+   fades via its dialogue path.
+5. **Discarded placement passes:** pass 1 (terrain-only BFS
+   gate) fragmented 7 cities under the celadon-sweep's
+   NPC-blocked model; pass 2 still fragmented — root cause:
+   seeding BFS from ALL warps at once cannot see a split that
+   leaves warps on both sides. The final gate is warp-partition
+   invariance + reachable-union preservation under the sweep's
+   exact effective NPC roster (authored NPCs minus mart clerks
+   + TALE_NPCS + PARLEY_NPCS). Map data was reset to HEAD
+   between passes; only the final pass's output ships.
+6. **Two placement rules discovered by verify-slice, now in
+   the placer:** (a) *Warp aprons stay clear* — cells
+   orthogonally adjacent to a warp cell or landing target take
+   no dressing (a route1 bench + gatearch boxed the landing
+   row and broke §4's grass walk); gate markers may use apron
+   FLANK cells but never the throat cell orthogonally adjacent
+   to their own pair's warps. (b) *Sight lines stay clear* —
+   every cell along a trainer's sight ray is protected: a
+   solid prop reads as a wall to checkSightLines and had
+   blinded route2's RUE, making the r2_duo ambush
+   untriggerable (qa y4). Both rules are gameplay laws, not
+   harness appeasement: they bind any future placement wave.
+7. **verify-slice expectation changes (flagged, not silently
+   weakened):** four fixed-length hold-walks (§3, S3b canonical
+   playthrough, qa f1, qa f4) now poll-release — hold the
+   direction until the target map/cell is reached, then
+   release. Reason is mechanical: route1's return warp sits
+   one tile below its landing, so with an authored 180 ms
+   fade a fixed 32-tick hold ping-pongs between maps and its
+   end-state parity flipped. Every assertion is unchanged
+   (same maps, same positions class, same encounter checks);
+   totals are 48/48 + 134/134, identical to HEAD's.
+8. One placer edit briefly shipped a brace error that made an
+   intermediate --write run a no-op (that build carried HEAD
+   maps); caught because POS prints didn't move, fixed, and
+   the full suite above was re-run end-to-end on the corrected
+   final placements. Pre-existing, not W7: palette-audit
+   reports 4 failing checks at HEAD as well.
+
+### QA ADDENDUM — Premium+ W7 INDEPENDENT QA (2026-10-29, grader — did not build this wave)
+
+**VERDICT: PASS WITH NOTES.** Every implementer headline was
+re-measured independently; no FAIL-level defect found. QA drivers:
+`wave7-premium-qa-driver.mjs`, `wave7-premium-qa-supp-driver.mjs`,
+`wave7-premium-qa-supp2-driver.mjs` (QA workspace), shots in
+`wave7-premium-qa-shots/`. Live drives ran on serve-local :8931
+(port verified free first; served `game.js` md5
+`755983ec861d20e00cce79e21f1daddb` == repo `public/game.js`).
+
+**1. Independent census (my run of `audit-w7-census.mjs`):**
+ART keys 2,280; dressing kinds 16 + gate kinds 4; towns min 8
+kinds (gate ≥8), routes min 9 (gate ≥5); dressing cells on
+towns+routes 693; capture-repeat worst = lamp ×5 (pre-existing
+clusters only, see note 4); gate/arch exit pairs **38/38**;
+foreground forest-border **746/918 = 81.3%**, typed-building
+eaves **68/68**; town top-5 colour worst **41.3% (celadon)**,
+all 11 ≤45%; encounter `,` cells **640**. Matches the
+implementer's claims exactly.
+
+**2. Live play — warp fades (real key walks, 5 ms recorder over
+warpFx + renderer.fadeA):** door warp (Pallet → Ash house)
+phases `door>out>in`, fadeA peak 1.0 → 0, **~190 ms**;
+interior-exit warp (house → Pallet) `door>out>in`, **~196 ms**;
+edge warp (Pallet south → Route 1) `out>in`, **~192 ms** — all
+inside the spec's 150–250 ms band (design 170/180 ms; the
+recorder total includes step-boundary samples). No pop/teleport
+cut in any sample (map swap occurs at fadeA = 1.0). Door-open
+frame pixel-proven: canvas region around the door during the
+`door` phase differs from the closed-door region by **4,562
+px** (open frame + warm spill). **Reduced Motion:** Route 1 →
+Pallet warp under `reducedMotion` completed with **0 warpFx
+samples and fadeA pinned 0** across 2,969 recorder samples —
+instant, as specified. Code review concurs: `doWarp` body is
+the pre-W7 warp moved verbatim; `startWarpFade` short-circuits
+to it under Reduced Motion. 0 JS errors across all QA sessions.
+
+**3. Live play — foreground (Reduced-Motion-frozen on/off diff
+inside the player's own 16×32 sprite box, so animation noise is
+excluded):** canopy — player standing at Route 2 (3,12) facing
+the south tree line: **1,822 differing px, 100% of them in the
+box's south 16 px strip** (the band the (3,13) canopy overhangs)
+— the player passes UNDER the canopy. Eave — player at the
+Viridian Center door-front (7,6), under the (6,5) wall-center
+eave's overhang: **144 differing px, all in the north strip**.
+(The cell directly south of that eave, (6,6), is NPC-occupied,
+so the door-front apron was the nearest standable under-eave
+cell.) NPCs and the follower compose sanely in all captures.
+
+**4. Live play — dressing:** my capture windows (24×14) —
+Pallet 8 kinds, Celadon 8, Saffron 9, Route 1 10, Route 2 9;
+every W7 kind ≤3 per window; the only repeats above 3 are
+**lamp ×5 (Celadon) / ×4 (Saffron)**, the pre-existing shipped
+clusters the task explicitly excepts. Gate/arch markers visible
+in captures at both Route 2 exits. Atmosphere top-5 on MY
+captures (in-map pixels): **Pallet 32.4%, Celadon 40.3%,
+Vermilion 34.4%** — all ≤45% (implementer: 32.6/40.5, same
+instrument, staging jitter only). Atmosphere passes are visible:
+Mt. Moon capture shows cave-dust speckling inside the glow +
+coloured crystal pools; Ash-house interior reads warm with
+speckle; Vermilion coast capture is bright. On the spec's
+61–65% base figure: it was an aa13a96 prod-capture number and
+was already stale at W7 base (logical raster 43.3% worst town
+before W7) — the implementer's deviation note is honest, and
+the FINAL state passes ≤45% on both instruments, which is what
+TX-7 grades.
+
+**5. Item ball:** live Route 3 ball cell (16,1): authored
+sprite present (`tileCache.itemball`), **17 distinct colours**
+in the cell with `#d84040` red = 201 px and `#f5f0dc` white =
+237 px at capture scale, cast shadow baked in, visible as a
+shaded red/white ball in `d1-route3-itemball.png` — not a flat
+procedural circle. **My grep count of remaining procedural
+item-circle draw sites: 0** — `sysRenderWorld` draws item
+balls only via the authored sprite blit; the remaining `arc()`
+calls in that file are the cave-glow discs (LD-4), unrelated.
+
+**6. TEST-RIG INTEGRITY — verify-slice diff RULING: PASS.**
+Line-by-line + programmatic proof: the diff removes exactly 6
+fixed-hold walk lines across 4 sections (§3, S3b ×2, qa f1,
+qa f4 ×2) and adds poll-release equivalents (guard `wg < 120`,
+the file's existing guard idiom; settle ticks 6 → 2 ride along
+as hold mechanics). **All 139 `ok()` assertion lines are
+byte-identical in sequence between HEAD and final, including
+every expected value; canonical-playthrough transcript tokens
+identical (`map, party, map2, enc, top, save, seen`).** No
+assertion, threshold, or expected value changed in substance.
+My run: **verify-slice 48/48, qa-slice 134/134**.
+
+**7. Placement laws:** my celadon-sweep **11/11 PASS**; my warp
+audit **byte-identical to a pristine-HEAD worktree run** (286
+triggers, 266 reachable, same 20 unreachable, same door
+approaches). Live spot-walk: Route 2 walked end-to-end south →
+north (west crossing at x=2) and warped into Pewter — no
+dressing blocks the route. **RUE duo fix PROVEN IN LIVE PLAY:**
+approaching along column 4 into (4,7) triggered the duo —
+RUE/COLE banter, then BattleScene with trainer **`r2_duo`**
+(`s5-rue-duo-ambush.png`); qa-slice y4 (duo ambush) also passes
+in my verify-slice run. An earlier QA approach down column 5/6
+was intercepted by ROB (r2_hiker) — ordinary trainer sight
+behaviour, not a defect.
+
+**8. Battery (all my runs):** qa-changed-flows failures
+**exactly {b2, d9}** (55/57 + 19/19); campaign-smoke **24/24**;
+fidelity **35/35**; Track B integration **114/114**
+(`cd tests && node --import ./register.mjs run.mjs`);
+budgets-check **all gates PASS**. Render budget, my own spot
+measurement on dressed Saffron with the full layer stack while
+walking (848 frames): **mean 3.02 ms, p95 4.7 ms** vs 8 ms —
+PASS (implementer: 3.15/5.8 staged).
+
+**9. Integrity:** palette union **623/640 by my palette-audit
+run** (zero growth; its 4 failing checks are the pre-existing
+water-tile slop hits, present at HEAD too); art-data
+3,452,742 → **3,476,377 B (+23,635)** by my byte count; ART
+2,247 → 2,280 with 0 lost. **Build reproducibility proven in a
+scratch copy:** build-art + build regenerate `art-data.mjs`
+(md5 `fa4f6c2e…`), `public/game.js` (`755983ec…`) and
+`dist/standalone.html` (`807485f1…`) byte-identical to the
+tree. Map integrity by direct HEAD-vs-final comparison: **70
+maps, 0 dimension diffs**, encounter cells 640 = 640, warp
+definitions JSON-identical on every map. **No map-dimension /
+camera / viewport change anywhere in the src diff** (the only
+viewport reference is the foreground loop reading the existing
+`viewRect()`); black margins untouched, as ruled.
+`personal/` verified byte-identical to HEAD (clean in git
+status) with the `personal:` dist line pinned at
+`ce64da2b…0bb5` — restored after my battery runs per the
+implementer's documented procedure, since the battery rebuilds
+re-dirty it.
+
+**Notes (non-blocking):**
+1. Eave scope wording: eaves exist only on typed `wall-*` /
+   gym facades (the 68 census cells). Ordinary houses have no
+   eave cells — Pallet scans 0. The register's TX-7 sentence
+   listing "house" among eave facades overstates the code's
+   `TYPED_FACADE_KINDS`; the census gate is internally
+   consistent (typed buildings 68/68) and TX-7's text says
+   "typed buildings", so this is a wording note, not a miss.
+2. Render max frame 12.7 ms in my walk (5/848 frames >8 ms,
+   on warp/load frames) — mean/p95 pass with wide margin;
+   steady-state never approached the budget.
+3. Dressing density is placer-regular (exactly 3 of each kind
+   per capture window at census scale). It satisfies the ≤3
+   capture rule and reads varied in live captures; flagged as
+   an aesthetic observation for W8 polish, not a gate failure.
+4. TX-7's item-ball unit is pre-landed W5 work (disclosed by
+   the implementer, verified present) — 11 of the 12 TX-7
+   units are new W7 work.
+5. Scripted transports (ferry/safari/blackout) remain outside
+   the faded `warps[]` system, as the implementer recorded;
+   TX-6/PL-1's "100% of warps" holds for the step-warp system
+   they define.
+
+**Defects:** none found. No map/coordinate defect to report.

@@ -1,0 +1,38 @@
+# Premium+ W7: TX-6 gate marker: stone arch pillar (arm reaches over the exit path)
+PIX tile-prop-gatearch 16 32
+................
+................
+................
+................
+..TTTTTTTTTTTTT.
+..SSSSSSSSSSSSS.
+..SSSSSSSSSSSSS.
+..sssssssssssss.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........Tssss.
+..........Tssss.
+..........Tssss.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........Tssss.
+..........Tssss.
+..........Tssss.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+..........TSSSs.
+.........sssssss
+PAL
+S #9a9aa5 stone
+s #747484 stone-dark
+T #b0b8c6 stone-light

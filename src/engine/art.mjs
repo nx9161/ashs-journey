@@ -12,7 +12,7 @@
 
 import { ART } from '../../assets/sprites/art-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
-import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS } from './tiles.mjs';
+import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 
 // ---- Layered delta frames (Premium+ W0, spec §4 W0 item 1) ----
@@ -449,6 +449,8 @@ const TILE_ART = {
 for (const k of W6_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W6_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of [...W6_PROP_KINDS, ...W6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' + k;
+// Premium+ W7 (TX-6): dressing + gate/arch props draw tile-prop-<kind>.
+for (const k of W7_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -773,7 +775,54 @@ export function buildArtTileCache(doc) {
   // Wave 2: ground-shadow strip laid on ground cells directly south of
   // a building, anchoring every structure.
   cache.shadowStrip = artCanvas(doc, 'tile-shadow', 1);
+  // ---- Premium+ W7 (TX-6/TX-7): blends, foreground, atmosphere ----
+  cache.blendTreeline = artCanvas(doc, 'tile-blend-treeline', 1);
+  cache.blendArch = artCanvas(doc, 'tile-blend-arch', 1);
+  cache.fgCanopy = ids(['tile-fg-canopy-oak', 'tile-fg-canopy-pine', 'tile-fg-canopy-elm', 'tile-fg-canopy-round']);
+  cache.fgEaves = ids(['tile-fg-eave-a', 'tile-fg-eave-b']);
+  cache.atmo = {
+    warm: artCanvas(doc, 'tile-atmo-warm', 1),
+    dust: artCanvas(doc, 'tile-atmo-dust', 1),
+    coast: artCanvas(doc, 'tile-atmo-coast', 1),
+    leaf: artCanvas(doc, 'tile-atmo-leaf', 1),
+    sparkle: artCanvas(doc, 'tile-atmo-sparkle', 1),
+  };
   return cache;
+}
+
+// ---- Premium+ W7 (TX-7): the foreground layer ----
+// Facade kinds of TYPED buildings (Center / Mart / gym / lab) — their
+// roof rows gain a foreground eave piece, drawn over the y-sorted
+// character pass so eaves and canopies compose with LD-3.
+export const TYPED_FACADE_KINDS = new Set(['wall-center', 'wall-mart', 'wall-gym',
+  'wall-lab', 'wall-lab-plain', 'gym-ground', 'gym-rock', 'gym-water', 'gym-volt',
+  'gym-leaf', 'gym-psy', 'gym-poison', 'gym-fire']);
+// Pure foreground rule — shared by the scene render (overworld-systems
+// sysRenderForeground) and the W7 census, so the measured coverage IS
+// the shipped coverage. Returns the foreground CANVAS for a cell: a
+// canopy piece for a forest-border cell (tree / town canopy whose
+// south neighbour is not a tree), an eave piece for a typed facade
+// cell standing under a roof/sign row, else null. Hash-driven only
+// (PL-3): no RNG, no allocation — the return is a cached canvas.
+export function foregroundFor(cache, kind, x, y, kindAt) {
+  if (!cache || !kind) return null;
+  const isTree = kind === 'tree' || kind.startsWith('tc-');
+  if (isTree) {
+    const s = kindAt(x, y + 1);
+    if (s === 'tree' || (s && s.startsWith('tc-'))) return null; // interior of the forest — no border
+    if (hashTileSpread(x, y, 141) >= 0.75) return null; // broken canopy line, not a wall of leaves
+    const arr = cache.fgCanopy;
+    if (!arr || !arr.length) return null;
+    return arr[Math.floor(hashTileSpread(x, y, 143) * arr.length) % arr.length];
+  }
+  if (TYPED_FACADE_KINDS.has(kind)) {
+    const n = kindAt(x, y - 1);
+    if (!n || !(n.startsWith('roof-') || n.startsWith('sign-') || n.startsWith('tr-') || n.startsWith('th-'))) return null;
+    const arr = cache.fgEaves;
+    if (!arr || !arr.length) return null;
+    return arr[((x % arr.length) + arr.length) % arr.length];
+  }
+  return null;
 }
 
 // ---- Premium+ W5 (LD-2): time-of-day tint (anchor trait P-3) ----
@@ -853,7 +902,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   'porthole', 'slotmachine', 'throne', 'memorial', 'officedesk', 'sofa',
   'stool', 'rug', 'battlemat',
   // Premium+ W6 (TX-4/TX-5): the new prop + rug kinds.
-  ...W6_PROP_KINDS, ...W6_RUG_KINDS]);
+  ...W6_PROP_KINDS, ...W6_RUG_KINDS,
+  // Premium+ W7 (TX-6): dressing + gate/arch props.
+  ...W7_PROP_KINDS]);
 export function groundFamilyOf(kind) {
   if (kind && W6_FLOOR_KINDS.includes(kind)) return kind; // W6 dungeon floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
@@ -909,6 +960,25 @@ export function boulderCanvasFor(cache, x, y, cave) {
 
 const DIRS = ['n', 'e', 's', 'w'];
 
+// ---- Premium+ W7 (TX-7): per-biome atmosphere passes ----
+// Five authored speckle overlays, one per biome class, composited by
+// the resolver on ground/floor cells at a position-hash rate — they
+// break the flat ground read (interior warmth, cave dust, coast
+// brightness, forest dapple, highland clear-air) without a single
+// per-frame overlay allocation: the pass is baked into the tile layer
+// stack exactly like the W5 detail set. Classification is by map id.
+const ATMO_DUST_MAPS = new Set(['moon1', 'moon2', 'rocktunnel', 'seafoam', 'victoryroad', 'ceruleancave']);
+const ATMO_COAST_MAPS = new Set(['vermilion', 'cinnabar', 'cerulean', 'fuchsia', 'route19', 'route20', 'safari']);
+const ATMO_SPARKLE_MAPS = new Set(['pewter', 'saffron', 'lavender', 'indigo']);
+function atmoKeyFor(mapId) {
+  if (!mapId) return null;
+  if (ATMO_DUST_MAPS.has(mapId)) return 'dust';
+  if (ATMO_COAST_MAPS.has(mapId)) return 'coast';
+  if (ATMO_SPARKLE_MAPS.has(mapId)) return 'sparkle';
+  if (mapId.startsWith('route') || mapId === 'viridian' || mapId === 'celadon' || mapId === 'pallet' || mapId === 'newisland') return 'leaf';
+  return 'warm'; // every interior / dungeon-adjacent map: warmth
+}
+
 // Compose the layer stack for one map cell. kindAt(x, y) returns the tile
 // KIND at a map position, or null off-map (off-map neighbours never raise
 // a transition). t is the shared animation clock (water/foam stay in sync
@@ -944,6 +1014,20 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     if (!duskNight || !cache.glowPools || !cache.glowPools.length) return;
     if (nb.n === 'lamp' || nb.e === 'lamp' || nb.s === 'lamp' || nb.w === 'lamp') layers.push(cache.glowPools[0]);
   };
+  // Premium+ W7 (TX-6): terrain-blend overlays — leaf litter where a
+  // tree line meets ground, worn threshold stones where a building
+  // meets ground (the last two unstitched terrain pairs of audit §11).
+  const pushBlends = (layers) => {
+    const nk = nb.n;
+    if ((nk === 'tree' || (nk && nk.startsWith('tc-'))) && cache.blendTreeline) layers.push(cache.blendTreeline);
+    else if (nk && isArchKind(nk) && cache.blendArch && hashTileSpread(x, y, 157) < 0.65) layers.push(cache.blendArch);
+  };
+  // Premium+ W7 (TX-7): the biome atmosphere pass for this map.
+  const pushAtmo = (layers) => {
+    if (!cache.atmo) return;
+    const cv = cache.atmo[atmoKeyFor(mapId)];
+    if (cv && hashTileSpread(x, y, 151) < 0.5) layers.push(cv);
+  };
   // TX-1: the 12-overlay detail set, spread-hash picked.
   const pushDetail = (layers, rate, salt) => {
     if (!cache.detailSet || !cache.detailSet.length) return;
@@ -960,6 +1044,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     if (sway) layers.push(sway);
     pushLampGlow(layers);
     pushDetail(layers, 0.30, 17);
+    pushBlends(layers);
+    pushAtmo(layers);
     if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
     pushSkirts(layers);
     return layers.filter(Boolean);
@@ -1034,6 +1120,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       pushPulse(layers);
       pushLampGlow(layers);
       pushDetail(layers, 0.30, 19);
+      pushBlends(layers);
+      pushAtmo(layers);
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers);
       if (cache.edgeDirt) {
@@ -1068,6 +1156,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         pushPulse(layers);
         pushLampGlow(layers);
         pushDetail(layers, 0.30, 15); // W5 TX-1: 12-overlay detail set
+        pushBlends(layers);
+        pushAtmo(layers);
         // grass<->tallgrass: short tufts lean in from a tall neighbour.
         const off = { n: [0, -1], e: [1, 0], s: [0, 1], w: [-1, 0] };
         for (const d of DIRS) {
@@ -1103,6 +1193,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers); // W5 LD-1
       pushDetail(layers, 0.20, 23); // W5 TX-1 detail set on paths too
+      pushBlends(layers);
+      pushAtmo(layers);
       const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
       for (const d of DIRS) {
         if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
@@ -1168,6 +1260,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const cry = pickAnim(cache.crystalFrames, tt, x, y, CAD_MED, 81);
         if (cry) layers.push(cry);
       }
+      pushAtmo(layers); // W7: cave dust on dungeon floors
       return layers.filter(Boolean);
     }
     case 'centerfloor': case 'martfloor': case 'housefloor': case 'gymfloor': case 'labfloor': {
@@ -1184,6 +1277,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const d = pickVariantSpread(cache.decorSet, x, y, 131);
         if (d) layers.push(d);
       }
+      pushAtmo(layers); // W7: interior warmth on interior floors
       return layers.filter(Boolean);
     }
     case 'tree': case 'rock': case 'caveboulder': case 'sign': case 'flower':
@@ -1296,7 +1390,13 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'cercrystal':
     case 'cershard':
     case 'tombstone':
-    case 'pipecluster': {
+    case 'pipecluster':
+    // Premium+ W7 (TX-6): dressing + gate/arch props composite the same way.
+    case 'bench': case 'planter': case 'crates': case 'barrel':
+    case 'signpost': case 'well': case 'postbox': case 'bikestand':
+    case 'stall': case 'haycart': case 'sundial': case 'birdbath':
+    case 'tub': case 'sacks': case 'pottedtree': case 'waterpump':
+    case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.

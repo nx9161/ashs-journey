@@ -1558,6 +1558,26 @@ const W6_RUG_KINDS = W6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]) => k)
 const W6_FLOOR_KINDS = W6_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const W6_WALL_KINDS = W6_KIND_DEFS.filter(([, c]) => c === 'wall' || c === 'dress').map(([k]) => k);
 const W6_WALKABLE_CHARS = W6_KIND_DEFS.filter(([, c]) => c === 'rug' || c === 'floor').map(([k]) => W6_KIND_CHARS[k]);
+// ---- Premium+ W7 (TX-6): dressing & gate/arch kinds ----
+// Chars continue the W6 block at U+1E00+132 (W6 used idx 0..131).
+// Every W7 kind is class 'prop': a SOLID decorative object composited
+// over the ground it stands on (art.mjs resolver) — placements replace
+// walkable ground cells only and are BFS-gated so no route, door or
+// NPC can be sealed (see the W7 register entry). Dressing kinds are
+// the decorative scatter set of audit §11; gate kinds mark route exits.
+const W7_DRESS_KINDS = [
+  'bench', 'planter', 'crates', 'barrel', 'signpost', 'well', 'postbox',
+  'bikestand', 'stall', 'haycart', 'sundial', 'birdbath', 'tub', 'sacks',
+  'pottedtree', 'waterpump',
+];
+const W7_GATE_KINDS = ['gatepost', 'gatearch', 'routearch', 'vinearch'];
+const W7_KIND_CHARS = {};
+[...W7_DRESS_KINDS, ...W7_GATE_KINDS].forEach((kind, i) => {
+  const ch = String.fromCodePoint(0x1E00 + 132 + i);
+  W7_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const W7_PROP_KINDS = [...W7_DRESS_KINDS, ...W7_GATE_KINDS];
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
 const GYM_KIND_BY_TOWN = {
   viridian: 'gym-ground', pewter: 'gym-rock', cerulean: 'gym-water', vermilion: 'gym-volt',
@@ -37488,6 +37508,96 @@ const ART = {
     "bbbbbbbbbbbbbbbb",
     "bbbbbbbbbbbbbbbb",
   ] },
+  "tile-atmo-coast": { w: 16, h: 16, pal: {"A":"#f5f0dc","B":"#f0e060"}, rows: [
+    "................",
+    "..AA............",
+    "..AA............",
+    "................",
+    "..........BB....",
+    "..........BB....",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    ".......AA..BB...",
+    ".......AAA.BB...",
+    "........AA......",
+  ] },
+  "tile-atmo-dust": { w: 16, h: 16, pal: {"A":"#b0a58e","B":"#9a9aa5"}, rows: [
+    "......AA........",
+    "......AA........",
+    "................",
+    "................",
+    "................",
+    ".AA.............",
+    ".AA.............",
+    "................",
+    "..............BB",
+    ".......AA.....BB",
+    ".......AA.......",
+    "................",
+    "................",
+    "............BB..",
+    "............BB..",
+    "................",
+  ] },
+  "tile-atmo-leaf": { w: 16, h: 16, pal: {"A":"#67aa54","B":"#54a048"}, rows: [
+    ".AA.............",
+    ".AA.........BB..",
+    "............BB..",
+    "................",
+    "AA..............",
+    "AA..............",
+    "................",
+    "........BB......",
+    "........BB......",
+    "................",
+    "..........AA....",
+    "..........AA....",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-atmo-sparkle": { w: 16, h: 16, pal: {"A":"#e8e4f0","B":"#b0b8c6"}, rows: [
+    ".....AA.........",
+    ".AA..AA.........",
+    ".AA.............",
+    "................",
+    "..........BB....",
+    "..........BB....",
+    "................",
+    "................",
+    "................",
+    ".........BB.....",
+    ".........BB.....",
+    "................",
+    "................",
+    "................",
+    ".AA.............",
+    ".AA.............",
+  ] },
+  "tile-atmo-warm": { w: 16, h: 16, pal: {"A":"#f0d0a0","B":"#c98d5a"}, rows: [
+    "................",
+    "........AA......",
+    "........AA......",
+    "...BB...........",
+    "...BB...........",
+    "................",
+    "................",
+    "............BB..",
+    "............BB..",
+    "............AA..",
+    "............AA..",
+    "................",
+    "................",
+    "................",
+    "..AA............",
+    "..AA............",
+  ] },
   "tile-bannerwall": { w: 16, h: 16, pal: {"B":"#8c8aa0","D":"#54452f","A":"#b0503c"}, rows: [
     "DDBBDDBBBBDDBBAA",
     "DDDDDDDDDDDDDBAA",
@@ -37505,6 +37615,42 @@ const ART = {
     "BBBBBBBBBBAABBBB",
     "BBBBBBBBBBBBAAAA",
     "BBBBBBBBBBBBAAAA",
+  ] },
+  "tile-blend-arch": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","P":"#d8c08a"}, rows: [
+    "................",
+    "....SS..........",
+    ".SS.SS..........",
+    ".SS.....ss......",
+    ".......Psss.....",
+    ".......PPss.....",
+    "SS......PP......",
+    "SS......PP......",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+  ] },
+  "tile-blend-treeline": { w: 16, h: 16, pal: {"G":"#3e7a34","g":"#2e5e28","w":"#5a3a24","L":"#8a6a48"}, rows: [
+    "................",
+    "................",
+    ".gg.............",
+    ".gww....gg......",
+    "..ww....gg......",
+    "...GGGgg........",
+    "...GGGgg........",
+    "................",
+    "................",
+    "................",
+    "ww..............",
+    "ww..............",
+    "................",
+    "................",
+    "................",
+    "................",
   ] },
   "tile-bush": { w: 16, h: 16, pal: {"t":"#4e7a34","u":"#3b5e28","v":"#69a048","s":"#476e2c","e":"#3d6127","d":"#5e8a3e","l":"#84b45c","h":"#8ec168","k":"#5a2d24","w":"#7a4b38"}, rows: [
     "................",
@@ -39684,6 +39830,210 @@ const ART = {
     ".tt....tt....tt.",
     "................",
   ] },
+  "tile-fg-canopy-elm": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+    "................................",
+    "................................",
+    "................g...............",
+    ".........gGGHgHgHGGGGMHg........",
+    "......gHGMMgGMHgMHGMGGHGGHg.....",
+    "....gGHGGHgHGGGGGMGGHHGHHGGMg...",
+    "...gHGgGGGggMMgGMgGGHgGgGHHGMg..",
+    "..ggMMMGGgGHgMgGgHGGGHMMGMgGGGg.",
+    ".gGGGMHMMGGGGHHgHMMgGgMGGGMgGGGg",
+    ".gGGHGMGMGHGHGGHgGGHgGHGGHHgHHHg",
+    "gHGMHGMGHMHGGHgGGgGHMHGGGGHMGMGM",
+    ".gMMgMGGMMHGGGgGgHGGGHGGgHGgHGHg",
+    ".gGMGGGGMMHGGMMGMgGGGMHHGgGGGHMg",
+    "..gMHGGGGggHGGGHGMGHGGHHgMGMGg..",
+    "...gMGGMHHHHGMgMMGGGMHHHGMHGG...",
+    "....ggGMHHGMMHMGGHMMHgGMMGHg....",
+    "......gggGGMGGHGMGHGMHGGgg......",
+    ".........gggggggMgggggg.........",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+  ] },
+  "tile-fg-canopy-oak": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+    "................................",
+    "................g...............",
+    "..........gMHGGMgHgHHgg.........",
+    ".......gHGgMMGGgMHMGGGgMGg......",
+    "......gHGGgHGGHMHMGgGGGGgGg.....",
+    "....ggGMGHgHGHGGHHMMGGGHGMGMg...",
+    "....gHMMGGMMgHHMGHGHGGgMMMGHg...",
+    "...gGHMgHMGgGGGHGHHHGGMHMMGHgg..",
+    "..gHGHGHGGHgMHMGGHHHHgGMHgGMGMg.",
+    "..gGGHGGgGHGMGggHHMGMGGGGGGHGHg.",
+    "..gHGMGHGgGHGHGHgHgGMgHGHHGHMGg.",
+    ".gHMgHMMMgGGGHMMGgHGMGgMMGHGMMGg",
+    "..gGGgMgGMGMGGGgHGGGHgGgMggGgGg.",
+    "..gGMGgMGGHMMGGMMHMGGGHMGGGGGHg.",
+    "..gGMgMggGHGgHMGGMHGHMGHgMMGGG..",
+    "...gGGGHHHGGGGGgMHMGMgGMHGGGH...",
+    "....gHHGGMGMMHGGGGMGGHMMHMHGg...",
+    "....ggGMMGHGGHGGGMGMGMHMMGGg....",
+    "......gGMHGGGHMHGHgHGGMMgH......",
+    ".......gggGMGGGGGGHGHGHgg.......",
+    "..........gggggggggggg..........",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+  ] },
+  "tile-fg-canopy-pine": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+    "................................",
+    "............gGGGgGHgG...........",
+    "............GgGgHGgg............",
+    "............GgHGHHgg............",
+    ".............HGGHHG.............",
+    ".............gggGHg.............",
+    "..............GGHgH.............",
+    "........ggHGHggGHHggHgGgG.......",
+    "........GggGGGGgHgggHGGG........",
+    ".........HgGgHGGHgHgGgg.........",
+    "..........GHGHGggHGgGG..........",
+    "...........GggGGGHGGG...........",
+    "............ggGgHgGGH...........",
+    "....GggGGgGHGHgHHGGgGGGGGGgGG...",
+    ".....gHHHGGHGgGHGHggHGgHgGH.....",
+    "......ggGGGgggGGgggGgGGgGg......",
+    ".......GGHGGGGGgGgHGHGgGG.......",
+    "........GHGgGHgGHggggHgG........",
+    "..........HGgGGHgGHgGgG.........",
+    ".HGgGgGgGGGGGGggGGHHHHgGGgGGGHGG",
+    "..gHHHHggggggHgGGGggHGgGgGGGGg..",
+    "....GHHHHGGgGgHGGHHgGGggGHHGG...",
+    ".....GHGGGGgGHggGGGGggGHHHg.....",
+    ".......HGGHgGgGgGHGHGHgHgH......",
+    "........GGHGGgGGGHGgHGgG........",
+    "..........GGGGgGggggGGG.........",
+    "...........HgGGHGGGgG...........",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+  ] },
+  "tile-fg-canopy-round": { w: 32, h: 32, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","M":"#67aa54"}, rows: [
+    "................g...............",
+    "...........gGMGGGMGgHg..........",
+    ".........gGGGHGMGGMGgMGg........",
+    "........gGgHGgMGGGGHMGMMg.......",
+    "......ggHgHgHgMHggMMMgGgMGg.....",
+    "......gGMMggGGHMMGMGMMHMHMg.....",
+    ".....gGGGMgMgHHMMMMMgGHHMGMg....",
+    "....ggGggGGMMMGGHGGGMHGGHGGGg...",
+    "....gMGGHHgMHGMHGHGGHgHMMgMGg...",
+    "....gHHMGGHGGgMMGMgMGGGGgHMGg...",
+    "....ggHGGGHgGGGGGgMGGGgMGGHGg...",
+    "...gMMHMHGGGGMggGGHGMGGGggGGM...",
+    "....gGHGgMMHGGHGGMHMGHgHHgMMg...",
+    "....gHHGMMMGGHGgGHMMHHMHGgGGg...",
+    "....gggHMGgGGMGHgGgGGGHHHGgHg...",
+    "....gMHMGggMGgHHGMGGHgMgGMgM....",
+    ".....gGMHGGGMHGgGHMgMMMMMgG.....",
+    "......ggMgMgGGgGGGGHgGGGGgg.....",
+    "......ggGGHGgHgHHGHHMGGGGg......",
+    "........gGgGGGgGHHGGMHGg........",
+    ".........ggMGgGHMMHHgHg.........",
+    "...........gggggGgggg...........",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+  ] },
+  "tile-fg-eave-a": { w: 32, h: 32, pal: {"M":"#b0503c","D":"#202028","L":"#e86a8a"}, rows: [
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",
+    "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+    "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+    "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+  ] },
+  "tile-fg-eave-b": { w: 32, h: 32, pal: {"M":"#46586e","D":"#202028","L":"#8c94bc"}, rows: [
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL",
+    "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+    "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM",
+    "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+    "................................",
+  ] },
   "tile-flora-celadon": { w: 16, h: 16, pal: {"g":"#5da24a","d":"#4c8a3e","l":"#6fb45c","m":"#67aa54","h":"#79c168","a":"#8acb74","s":"#386e2c","e":"#2f6127","f":"#e86a8a","y":"#d84040"}, rows: [
     "llmmggggddggddgg",
     "ggmmffdllgggllgg",
@@ -41644,6 +41994,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-barrel": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","k":"#202028"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".....LLLLLL.....",
+    ".....WwwwwW.....",
+    "....wWWWWWWw....",
+    "....kkkkkkkk....",
+    "....wWWWWWWw....",
+    "....wWWWWWWw....",
+    "....wWWWWWWw....",
+    "....wWWWWWWw....",
+    "....kkkkkkkk....",
+    "....wWWWWWWw....",
+    ".....WWWWWW.....",
+    ".....WWWWWW.....",
+    "................",
+  ] },
   "tile-prop-basketstack": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#8a6a48","L":"#f0d0a0","A":"#b0503c","C":"#3a7bd5"}, rows: [
     "................",
     ".....AAAAAA.....",
@@ -41750,6 +42118,24 @@ const ART = {
     "..dddddddddddd..",
     "................",
   ] },
+  "tile-prop-bench": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","k":"#202028"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "..LLLLLLLLLLLL..",
+    "..WWWWWWWWWWWW..",
+    "................",
+    "..WWWWWWWWWWWW..",
+    "..WWWWWWWWWWWW..",
+    "...kk......kk...",
+    "...kk......kk...",
+    "...kk......kk...",
+    "..kkkkkkkkkkkk..",
+    "................",
+  ] },
   "tile-prop-bigbed": { w: 16, h: 32, pal: {"B":"#e8b4c4","D":"#96566b","L":"#f2ddd5","A":"#e86a8a","C":"#eef7ff"}, rows: [
     "................",
     "..DDDDDDDDDDDD..",
@@ -41782,6 +42168,42 @@ const ART = {
     "..DDDDDDDDDDDD..",
     "..DDDDDDDDDDDD..",
     "................",
+    "................",
+  ] },
+  "tile-prop-bikestand": { w: 16, h: 16, pal: {"k":"#202028","R":"#d84040","B":"#3a7bd5"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "...RRRRRR.......",
+    "...R....R.......",
+    "...R....R..BBBB.",
+    "...R....R..B..B.",
+    "...R....R..B..B.",
+    "...RRRRRR..B..B.",
+    "..k...k...kBBBB.",
+    "..k...k...k..k..",
+    "..k...k...k..k..",
+    "..kkkkkkkkkkkk..",
+    "................",
+    "................",
+  ] },
+  "tile-prop-birdbath": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","W":"#5a9ae8","B":"#3a7bd5","k":"#202028"}, rows: [
+    "................",
+    "................",
+    "................",
+    "...BB......kk...",
+    "...BB......kk...",
+    "...STTTTTTTTS...",
+    "...SWWWWWWWWS...",
+    "...SSSSSSSSSS...",
+    ".......SS.......",
+    ".......SS.......",
+    ".......SS.......",
+    ".......SS.......",
+    ".......SS.......",
+    ".......SS.......",
+    ".....ssssss.....",
     "................",
   ] },
   "tile-prop-birdcage": { w: 16, h: 16, pal: {"B":"#c2c8d4","D":"#6a6a80","L":"#eef7ff","A":"#3a7bd5","C":"#f07830"}, rows: [
@@ -42156,6 +42578,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-crates": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48"}, rows: [
+    "................",
+    "................",
+    "....WWWWWWW.....",
+    "....LLLWLLL.....",
+    "....LLLWLLL.....",
+    "....LLLWLLL.....",
+    "....LLLWLLL.....",
+    "....WWWWWWW.....",
+    "..WWWWWWW.......",
+    "..LLLWLLL.......",
+    "..LLLWLLL.WWWWW.",
+    "..LLLWLLL.LLWLL.",
+    "..LLLWLLL.LLWLL.",
+    "..LLLWLLL.LLWLL.",
+    "..WWWWWWW.LLWLL.",
+    "................",
+  ] },
   "tile-prop-crystalball": { w: 16, h: 16, pal: {"B":"#e8e4f0","D":"#8a7a9a","L":"#c2c8d4","A":"#7a6a8a","C":"#ffd873"}, rows: [
     "................",
     "................",
@@ -42474,6 +42914,74 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-gatearch": { w: 16, h: 32, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "..TTTTTTTTTTTTT.",
+    "..SSSSSSSSSSSSS.",
+    "..SSSSSSSSSSSSS.",
+    "..sssssssssssss.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........Tssss.",
+    "..........Tssss.",
+    "..........Tssss.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........Tssss.",
+    "..........Tssss.",
+    "..........Tssss.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    "..........TSSSs.",
+    ".........sssssss",
+  ] },
+  "tile-prop-gatepost": { w: 16, h: 32, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","Y":"#f0e060","k":"#202028"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    ".......WWWWWWWWW",
+    ".......WWWWWWWWW",
+    ".......Www......",
+    ".......Www......",
+    "...YY..WwWWWWWW.",
+    "...YY..WwLLLLLL.",
+    "...kk..WwLwwwwL.",
+    "...kk..WwLLLLLL.",
+    "...kk..WwLwwwwL.",
+    "...kk..WwLLLLLL.",
+    "...kk..WwLLLLLL.",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".......Www......",
+    ".....wwwwwww....",
+  ] },
   "tile-prop-goods": { w: 16, h: 16, pal: {"a":"#6fb0ee","b":"#2e7a6a","c":"#1f5a4c","d":"#d84040","e":"#f0e060","f":"#e86a8a","g":"#ffd873"}, rows: [
     "................",
     "................",
@@ -42525,6 +43033,24 @@ const ART = {
     "....BB.AAADD....",
     "....BB....DD....",
     "....BB....DD....",
+    "................",
+    "................",
+  ] },
+  "tile-prop-haycart": { w: 16, h: 16, pal: {"B":"#cdb684","Y":"#f0e060","W":"#5f5130","w":"#5a3a24","L":"#8a6a48"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".....YYYYYY.....",
+    "....BBBBBBBB....",
+    "...BBBBBBBBBB...",
+    "...BBBBBBBBBB...",
+    "...BBBBBBBBBB...",
+    "..LLLLLLLLLLLL..",
+    "..WWWWWWWWWWWwww",
+    "..WWWWWWWWWWWW..",
+    "...www....www...",
+    "...wLw....wLw...",
+    "...www....www...",
     "................",
     "................",
   ] },
@@ -42990,6 +43516,24 @@ const ART = {
     ".....cccccc.....",
     ".....dddddd.....",
   ] },
+  "tile-prop-planter": { w: 16, h: 16, pal: {"R":"#b0503c","r":"#823936","w":"#5a3a24","L":"#8a6a48","G":"#3e7a34","g":"#2e5e28","A":"#e86a8a","B":"#f0e060"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".......GBB......",
+    "...GAA.GBB.GAA..",
+    "...GAA.GGG.GAA..",
+    "...GGG.GGG.GGG..",
+    "...wwwwwwwwww...",
+    "...wwwwwwwwww...",
+    "..rrrrrrrrrrrr..",
+    "..RRRRRRRRRRRR..",
+    "..RRRRRRRRRRRR..",
+    "..RRRRRRRRRRRR..",
+    "..RRRRRRRRRRRR..",
+    "................",
+    "................",
+  ] },
   "tile-prop-plantvat": { w: 16, h: 32, pal: {"B":"#3fa08a","D":"#2e5e28","L":"#8ae8f0","A":"#67aa54","C":"#f0e060"}, rows: [
     "................",
     "................",
@@ -43077,6 +43621,42 @@ const ART = {
     "aaaaabaaaaabaaaa",
     "aaaaabaaaaabaaaa",
     "aaaaabaaaaabaaaa",
+  ] },
+  "tile-prop-postbox": { w: 16, h: 16, pal: {"R":"#d84040","r":"#823936","w":"#5a3a24","L":"#8a6a48","k":"#202028","F":"#f5f0dc"}, rows: [
+    "................",
+    "................",
+    "................",
+    "....rrrrrrrr....",
+    "....RRRRRRRR....",
+    "....RkkkkkkR....",
+    "....RRRRRRRR....",
+    "....RRRFFRRR....",
+    "....RRRRRRRR....",
+    ".......ww.......",
+    ".......ww.......",
+    ".......ww.......",
+    ".......ww.......",
+    ".......ww.......",
+    ".......ww.......",
+    ".....wwwwww.....",
+  ] },
+  "tile-prop-pottedtree": { w: 16, h: 16, pal: {"G":"#3e7a34","g":"#2e5e28","H":"#54a048","w":"#5a3a24","L":"#8a6a48","R":"#b0503c","r":"#823936"}, rows: [
+    "................",
+    "................",
+    "......HHHH......",
+    ".....GGGGGG.....",
+    "....GGGGGGGG....",
+    "....GHHGGGGG....",
+    "....GHHGGGGG....",
+    ".....GGGGGG.....",
+    ".......ww.......",
+    ".......ww.......",
+    ".......ww.......",
+    ".....rrrrrr.....",
+    ".....RRRRRR.....",
+    ".....RRRRRR.....",
+    ".....RRRRRR.....",
+    "......rrrr......",
   ] },
   "tile-prop-potterswheel": { w: 16, h: 16, pal: {"B":"#8a8aa0","D":"#46586e","L":"#b0503c","A":"#c9a06a","C":"#202028"}, rows: [
     "................",
@@ -43202,6 +43782,40 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-routearch": { w: 16, h: 32, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","R":"#d84040","r":"#823936","k":"#202028"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "..LLLLLLLLLLLLL.",
+    "..WWWWWWWWWWWWW.",
+    "..WWWWWWWWWWWWW.",
+    "..Www......rrrr.",
+    "..Www......RRRR.",
+    "..Www......RRRR.",
+    "..Www......RRRR.",
+    "..Www......RRRR.",
+    "..WwwLLLL.......",
+    "..Www.kk........",
+    "..Www.kk........",
+    "..Www.kk........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    "..Www...........",
+    ".wwwww..........",
+  ] },
   "tile-prop-rubble": { w: 16, h: 16, pal: {"B":"#9a9aa5","D":"#6a6a80","L":"#c2c8d4","A":"#8a7a54","C":"#54452f"}, rows: [
     "................",
     "................",
@@ -43273,6 +43887,24 @@ const ART = {
     "BBAAAAAAAAAAAABD",
     "DBBBBBBBBBBBBBBB",
     "DDBBBBDDBBBBBDDB",
+  ] },
+  "tile-prop-sacks": { w: 16, h: 16, pal: {"B":"#cdb684","b":"#8a6a48"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "....BBB.........",
+    "....bbb..BBB....",
+    "...BBBBB.bbb....",
+    "...BBBBBBBBBB...",
+    "...BBBBbbBBBB...",
+    "...BBBBBBBBBB...",
+    "...BBBBBBBBBB...",
+    "...BBBBBBBBBB...",
+    "...BBBBBBBBBB...",
+    "................",
   ] },
   "tile-prop-sandcolumn": { w: 16, h: 32, pal: {"B":"#d8c08a","D":"#8a6a48","L":"#f2ddd5","A":"#c9a06a","C":"#54452f"}, rows: [
     "................",
@@ -43502,6 +44134,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-signpost": { w: 16, h: 16, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "...WWWWWWWWW....",
+    "...LLLLLLLLLLL..",
+    "...LLLLLLLLL....",
+    ".......ww.......",
+    ".....WWWWWWWWW..",
+    "...LLLLLLLLLLL..",
+    ".....LLLLLLLLL..",
+    ".......ww.......",
+    ".......ww.......",
+    ".......ww.......",
+    ".......ww.......",
+    "......wwww......",
+  ] },
   "tile-prop-slotmachine": { w: 16, h: 16, pal: {"a":"#b0503c","b":"#ffd873","c":"#d84040","d":"#eef7ff","e":"#f0e060","f":"#3a4657"}, rows: [
     "................",
     "....bbbbbbbb....",
@@ -43571,6 +44221,24 @@ const ART = {
     "...DDDDDDDDDD...",
     "...DBBBBBBBBD...",
     "...DDDDDDDDDD...",
+    "................",
+    "................",
+  ] },
+  "tile-prop-stall": { w: 16, h: 16, pal: {"R":"#d84040","r":"#823936","F":"#f5f0dc","W":"#5f5130","w":"#5a3a24","L":"#8a6a48","A":"#e86a8a","B":"#f0e060","G":"#3e7a34"}, rows: [
+    "................",
+    "................",
+    "................",
+    "..RRRFFFRRRFFF..",
+    "..RRRFFFRRRFFF..",
+    "..rrrrrrrrrrrr..",
+    "..w..........w..",
+    "..w..........w..",
+    "..wAA.BB.AA.GG..",
+    "..wAA.BB.AA.GG..",
+    "..LLLLLLLLLLLL..",
+    "..WWWWWWWWWWWW..",
+    "..WWWWWWWWWWWW..",
+    "..WWWWWWWWWWWW..",
     "................",
     "................",
   ] },
@@ -43662,6 +44330,24 @@ const ART = {
     ".....cc..cc.....",
     ".....cc..cc.....",
     "................",
+    "................",
+  ] },
+  "tile-prop-sundial": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","B":"#b29540"}, rows: [
+    "................",
+    "................",
+    "................",
+    ".......BB.......",
+    ".......BB.......",
+    "......BBBB......",
+    "....TTTTTTTT....",
+    "....SSSSSSSS....",
+    "....SSSSSSSS....",
+    "......TTTT......",
+    "......SSSS......",
+    "......SSSS......",
+    "......SSSS......",
+    "......SSSS......",
+    ".....ssssss.....",
     "................",
   ] },
   "tile-prop-supportbeam": { w: 16, h: 16, pal: {"B":"#8a5a30","D":"#54452f","L":"#c9a06a","A":"#5f5130","C":"#202028"}, rows: [
@@ -43932,6 +44618,24 @@ const ART = {
     "..DDDDDDDDDDDD..",
     "................",
   ] },
+  "tile-prop-tub": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","W":"#5a9ae8","F":"#f5f0dc","P":"#e86a8a"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    "................",
+    "...........PPP..",
+    "...........FFF..",
+    "...TTTTTTTTFFF..",
+    "...SWWWWWWWFFF..",
+    "...SSSSSSSSFFF..",
+    "...SSSSSSSSSS...",
+    "...SSSSSSSSSS...",
+    "...ssssssssss...",
+    "................",
+    "................",
+    "................",
+  ] },
   "tile-prop-tvstand": { w: 16, h: 32, pal: {"B":"#46586e","D":"#202028","L":"#8a8aa0","A":"#202028","C":"#e86a8a"}, rows: [
     "................",
     "................",
@@ -44036,6 +44740,40 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-vinearch": { w: 16, h: 32, pal: {"W":"#5f5130","w":"#5a3a24","L":"#8a6a48","G":"#3e7a34","g":"#2e5e28","A":"#e86a8a","B":"#f0e060"}, rows: [
+    "................",
+    "................",
+    "................",
+    "................",
+    ".LLLLLLLLLLLLL..",
+    ".WWWWWWWWWWWWW..",
+    ".WWWWWWWWWWWWW..",
+    "...GGGG....wwW..",
+    "...GAAG...GGGG..",
+    "...GAAG...GGGG..",
+    "......GGG.GGGG..",
+    "......GBB..wwW..",
+    "......GBB..wwW..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........GGG..",
+    "...........GAA..",
+    "...........GAA..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........GGG..",
+    "...........GGG..",
+    "...........GGG..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........wwW..",
+    "...........wwW..",
+    "..........wwwww.",
+  ] },
   "tile-prop-vinepost": { w: 16, h: 16, pal: {"B":"#386e2c","D":"#2e5e28","L":"#67aa54","A":"#54452f","C":"#a9e8a8"}, rows: [
     "................",
     "................",
@@ -44124,6 +44862,24 @@ const ART = {
     "................",
     "................",
   ] },
+  "tile-prop-waterpump": { w: 16, h: 16, pal: {"B":"#3a7bd5","b":"#2e63b0","k":"#202028","W":"#5a9ae8","s":"#747484"}, rows: [
+    "................",
+    "................",
+    "................",
+    "..........kkkk..",
+    ".............k..",
+    ".......bbb...k..",
+    ".......BBBk.....",
+    "....BBBBBBk.....",
+    "....BBBBBB......",
+    ".......BBB......",
+    ".......BBB......",
+    ".....WWBBB......",
+    ".....WWBBB......",
+    ".......BBB......",
+    ".....sssssss....",
+    "................",
+  ] },
   "tile-prop-weightrack": { w: 16, h: 32, pal: {"B":"#6a6a80","D":"#202028","L":"#9a9aa5","A":"#e84c3c","C":"#3a7bd5"}, rows: [
     "................",
     "................",
@@ -44156,6 +44912,24 @@ const ART = {
     "..DD........DD..",
     "..DD........DD..",
     "................",
+    "................",
+  ] },
+  "tile-prop-well": { w: 16, h: 16, pal: {"S":"#9a9aa5","s":"#747484","T":"#b0b8c6","w":"#5a3a24","L":"#8a6a48","R":"#b0503c","r":"#823936","k":"#202028"}, rows: [
+    "................",
+    "....rrrrrrrr....",
+    "..RRRRRRRRRRRR..",
+    "..RRRRRRRRRRRR..",
+    "...ww......ww...",
+    "...ww......ww...",
+    "...ww..SSS.ww...",
+    "...ww..kkk.ww...",
+    "...ww..kkk.ww...",
+    "...ww......ww...",
+    "...TTTTTTTTTT...",
+    "...SSSSSSSSSS...",
+    "...SssssssssS...",
+    "...SssssssssS...",
+    "...SSSSSSSSSS...",
     "................",
   ] },
   "tile-prop-workdesk": { w: 16, h: 16, pal: {"B":"#c9a06a","D":"#5f5130","L":"#f0d0a0","A":"#8a5a30","C":"#54452f"}, rows: [
@@ -61966,6 +62740,8 @@ const TILE_ART = {
 for (const k of W6_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of W6_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
 for (const k of [...W6_PROP_KINDS, ...W6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' + k;
+// Premium+ W7 (TX-6): dressing + gate/arch props draw tile-prop-<kind>.
+for (const k of W7_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -62290,7 +63066,54 @@ function buildArtTileCache(doc) {
   // Wave 2: ground-shadow strip laid on ground cells directly south of
   // a building, anchoring every structure.
   cache.shadowStrip = artCanvas(doc, 'tile-shadow', 1);
+  // ---- Premium+ W7 (TX-6/TX-7): blends, foreground, atmosphere ----
+  cache.blendTreeline = artCanvas(doc, 'tile-blend-treeline', 1);
+  cache.blendArch = artCanvas(doc, 'tile-blend-arch', 1);
+  cache.fgCanopy = ids(['tile-fg-canopy-oak', 'tile-fg-canopy-pine', 'tile-fg-canopy-elm', 'tile-fg-canopy-round']);
+  cache.fgEaves = ids(['tile-fg-eave-a', 'tile-fg-eave-b']);
+  cache.atmo = {
+    warm: artCanvas(doc, 'tile-atmo-warm', 1),
+    dust: artCanvas(doc, 'tile-atmo-dust', 1),
+    coast: artCanvas(doc, 'tile-atmo-coast', 1),
+    leaf: artCanvas(doc, 'tile-atmo-leaf', 1),
+    sparkle: artCanvas(doc, 'tile-atmo-sparkle', 1),
+  };
   return cache;
+}
+
+// ---- Premium+ W7 (TX-7): the foreground layer ----
+// Facade kinds of TYPED buildings (Center / Mart / gym / lab) — their
+// roof rows gain a foreground eave piece, drawn over the y-sorted
+// character pass so eaves and canopies compose with LD-3.
+const TYPED_FACADE_KINDS = new Set(['wall-center', 'wall-mart', 'wall-gym',
+  'wall-lab', 'wall-lab-plain', 'gym-ground', 'gym-rock', 'gym-water', 'gym-volt',
+  'gym-leaf', 'gym-psy', 'gym-poison', 'gym-fire']);
+// Pure foreground rule — shared by the scene render (overworld-systems
+// sysRenderForeground) and the W7 census, so the measured coverage IS
+// the shipped coverage. Returns the foreground CANVAS for a cell: a
+// canopy piece for a forest-border cell (tree / town canopy whose
+// south neighbour is not a tree), an eave piece for a typed facade
+// cell standing under a roof/sign row, else null. Hash-driven only
+// (PL-3): no RNG, no allocation — the return is a cached canvas.
+function foregroundFor(cache, kind, x, y, kindAt) {
+  if (!cache || !kind) return null;
+  const isTree = kind === 'tree' || kind.startsWith('tc-');
+  if (isTree) {
+    const s = kindAt(x, y + 1);
+    if (s === 'tree' || (s && s.startsWith('tc-'))) return null; // interior of the forest — no border
+    if (hashTileSpread(x, y, 141) >= 0.75) return null; // broken canopy line, not a wall of leaves
+    const arr = cache.fgCanopy;
+    if (!arr || !arr.length) return null;
+    return arr[Math.floor(hashTileSpread(x, y, 143) * arr.length) % arr.length];
+  }
+  if (TYPED_FACADE_KINDS.has(kind)) {
+    const n = kindAt(x, y - 1);
+    if (!n || !(n.startsWith('roof-') || n.startsWith('sign-') || n.startsWith('tr-') || n.startsWith('th-'))) return null;
+    const arr = cache.fgEaves;
+    if (!arr || !arr.length) return null;
+    return arr[((x % arr.length) + arr.length) % arr.length];
+  }
+  return null;
 }
 
 // ---- Premium+ W5 (LD-2): time-of-day tint (anchor trait P-3) ----
@@ -62370,7 +63193,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   'porthole', 'slotmachine', 'throne', 'memorial', 'officedesk', 'sofa',
   'stool', 'rug', 'battlemat',
   // Premium+ W6 (TX-4/TX-5): the new prop + rug kinds.
-  ...W6_PROP_KINDS, ...W6_RUG_KINDS]);
+  ...W6_PROP_KINDS, ...W6_RUG_KINDS,
+  // Premium+ W7 (TX-6): dressing + gate/arch props.
+  ...W7_PROP_KINDS]);
 function groundFamilyOf(kind) {
   if (kind && W6_FLOOR_KINDS.includes(kind)) return kind; // W6 dungeon floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
@@ -62426,6 +63251,25 @@ function boulderCanvasFor(cache, x, y, cave) {
 
 const DIRS = ['n', 'e', 's', 'w'];
 
+// ---- Premium+ W7 (TX-7): per-biome atmosphere passes ----
+// Five authored speckle overlays, one per biome class, composited by
+// the resolver on ground/floor cells at a position-hash rate — they
+// break the flat ground read (interior warmth, cave dust, coast
+// brightness, forest dapple, highland clear-air) without a single
+// per-frame overlay allocation: the pass is baked into the tile layer
+// stack exactly like the W5 detail set. Classification is by map id.
+const ATMO_DUST_MAPS = new Set(['moon1', 'moon2', 'rocktunnel', 'seafoam', 'victoryroad', 'ceruleancave']);
+const ATMO_COAST_MAPS = new Set(['vermilion', 'cinnabar', 'cerulean', 'fuchsia', 'route19', 'route20', 'safari']);
+const ATMO_SPARKLE_MAPS = new Set(['pewter', 'saffron', 'lavender', 'indigo']);
+function atmoKeyFor(mapId) {
+  if (!mapId) return null;
+  if (ATMO_DUST_MAPS.has(mapId)) return 'dust';
+  if (ATMO_COAST_MAPS.has(mapId)) return 'coast';
+  if (ATMO_SPARKLE_MAPS.has(mapId)) return 'sparkle';
+  if (mapId.startsWith('route') || mapId === 'viridian' || mapId === 'celadon' || mapId === 'pallet' || mapId === 'newisland') return 'leaf';
+  return 'warm'; // every interior / dungeon-adjacent map: warmth
+}
+
 // Compose the layer stack for one map cell. kindAt(x, y) returns the tile
 // KIND at a map position, or null off-map (off-map neighbours never raise
 // a transition). t is the shared animation clock (water/foam stay in sync
@@ -62461,6 +63305,20 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     if (!duskNight || !cache.glowPools || !cache.glowPools.length) return;
     if (nb.n === 'lamp' || nb.e === 'lamp' || nb.s === 'lamp' || nb.w === 'lamp') layers.push(cache.glowPools[0]);
   };
+  // Premium+ W7 (TX-6): terrain-blend overlays — leaf litter where a
+  // tree line meets ground, worn threshold stones where a building
+  // meets ground (the last two unstitched terrain pairs of audit §11).
+  const pushBlends = (layers) => {
+    const nk = nb.n;
+    if ((nk === 'tree' || (nk && nk.startsWith('tc-'))) && cache.blendTreeline) layers.push(cache.blendTreeline);
+    else if (nk && isArchKind(nk) && cache.blendArch && hashTileSpread(x, y, 157) < 0.65) layers.push(cache.blendArch);
+  };
+  // Premium+ W7 (TX-7): the biome atmosphere pass for this map.
+  const pushAtmo = (layers) => {
+    if (!cache.atmo) return;
+    const cv = cache.atmo[atmoKeyFor(mapId)];
+    if (cv && hashTileSpread(x, y, 151) < 0.5) layers.push(cv);
+  };
   // TX-1: the 12-overlay detail set, spread-hash picked.
   const pushDetail = (layers, rate, salt) => {
     if (!cache.detailSet || !cache.detailSet.length) return;
@@ -62477,6 +63335,8 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     if (sway) layers.push(sway);
     pushLampGlow(layers);
     pushDetail(layers, 0.30, 17);
+    pushBlends(layers);
+    pushAtmo(layers);
     if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
     pushSkirts(layers);
     return layers.filter(Boolean);
@@ -62551,6 +63411,8 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       pushPulse(layers);
       pushLampGlow(layers);
       pushDetail(layers, 0.30, 19);
+      pushBlends(layers);
+      pushAtmo(layers);
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers);
       if (cache.edgeDirt) {
@@ -62585,6 +63447,8 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         pushPulse(layers);
         pushLampGlow(layers);
         pushDetail(layers, 0.30, 15); // W5 TX-1: 12-overlay detail set
+        pushBlends(layers);
+        pushAtmo(layers);
         // grass<->tallgrass: short tufts lean in from a tall neighbour.
         const off = { n: [0, -1], e: [1, 0], s: [0, 1], w: [-1, 0] };
         for (const d of DIRS) {
@@ -62620,6 +63484,8 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers); // W5 LD-1
       pushDetail(layers, 0.20, 23); // W5 TX-1 detail set on paths too
+      pushBlends(layers);
+      pushAtmo(layers);
       const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
       for (const d of DIRS) {
         if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
@@ -62685,6 +63551,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const cry = pickAnim(cache.crystalFrames, tt, x, y, CAD_MED, 81);
         if (cry) layers.push(cry);
       }
+      pushAtmo(layers); // W7: cave dust on dungeon floors
       return layers.filter(Boolean);
     }
     case 'centerfloor': case 'martfloor': case 'housefloor': case 'gymfloor': case 'labfloor': {
@@ -62701,6 +63568,7 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const d = pickVariantSpread(cache.decorSet, x, y, 131);
         if (d) layers.push(d);
       }
+      pushAtmo(layers); // W7: interior warmth on interior floors
       return layers.filter(Boolean);
     }
     case 'tree': case 'rock': case 'caveboulder': case 'sign': case 'flower':
@@ -62813,7 +63681,13 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'cercrystal':
     case 'cershard':
     case 'tombstone':
-    case 'pipecluster': {
+    case 'pipecluster':
+    // Premium+ W7 (TX-6): dressing + gate/arch props composite the same way.
+    case 'bench': case 'planter': case 'crates': case 'barrel':
+    case 'signpost': case 'well': case 'postbox': case 'bikestand':
+    case 'stall': case 'haycart': case 'sundial': case 'birdbath':
+    case 'tub': case 'sacks': case 'pottedtree': case 'waterpump':
+    case 'gatepost': case 'gatearch': case 'routearch': case 'vinearch': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -65027,15 +65901,15 @@ const MAPS = {
     id: 'pallet', name: 'Pallet Town', music: 'pallet-theme',
     rows: rows([
       'ËËËËËËËËËËËËËËËË',
-      'ËıııÀııÀÀÀÀÀıÀıË',
-      'ËÀāìāııÀÀıāāāÀÀË',
-      'ËÀęsęıÀÖÖÀęsęıÀË',
-      'ËÀÖÀÖıÀÀıoÀÀıÖÀË',
-      'ËıÀÀıÀÀËËııÀÀııË',
+      'ËẆẈẎẐııÀÀÀÀÀıÀẈË',
+      'ËẊāìāııÀÀıāāāÀÀË',
+      'ËẌęsęıÀÖÖẄęsęẄÀË',
+      'ËẎÖÀÖıÀẌẆoÀÀıÖÀË',
+      'ËıÀÀıÀẎËËẈıÀÀııË',
       'ËÀÀÀÀıÀËËÀıÀıÀıË',
-      'ËıÖ÷÷ıııÀıı÷÷ÖÀË',
+      'ËẊÖ÷÷ıııÀıı÷÷ÖẆË',
       'ËÀÀıııoÀÀoÀıÀıÀË',
-      'ËÀÀÀııÀ,,ııÀÀÀÀË',
+      'ËẄÀẐıẌÀ,,ııÀÀẐẊË',
       'ËËËËËËıÀııËËËËËË',
     ]),
     warps: [
@@ -65067,18 +65941,18 @@ const MAPS = {
     rows: rows([
       '#####....#####',
       '#,,,,....,,,,#',
-      '#,,,,._..,,,,#',
-      '#,,,,._..,,,,#',
+      '#,,,,Ẕ_..,,,,#',
+      '#,,,,ẑẇ..,,,,#',
       '#,,_.....,,,,#',
-      '#,,......,,..#',
-      '#,,..SS._,,..#',
-      '#,,_.....,,..#',
-      '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
-      '#,,......,,,,#',
-      '#,,..FF..,,..#',
-      '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
+      '#,,Ẅ.Ẏẅ..,,.Ẉ#',
+      '#,,.ẋSSẋẎ,,.ẅ#',
+      '#,,_ẇ.Ẉ..,,.ẋ#',
+      '#,,,,.Ẅ..,,,,#',
+      '#,,,,ẑ...,,,,#',
+      '#,,..ẇ...,,,,#',
+      '#,,.ẄFẎ..,,.ẅ#',
+      '#,,,,.Ẉ.ẑ,,,,#',
+      '#,,,,.ẕ..,,,,#',
       '#,,,,....,,,,#',
       '#####....#####',
     ]),
@@ -65192,16 +66066,16 @@ const MAPS = {
     rows: rows([
       '#####....#####',
       '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
-      '#,,......,,,,#',
-      '#,,..RR..,,..#',
-      '#,,......,,..#',
-      '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
-      '#,,,,....,,,,#',
+      '#,,,,ẓ.ẖẐ,,,,#',
+      '#,,,,ẍ.ẉẆ,,,,#',
+      '#,,,,Ẇ...,,,,#',
+      '#,,Ẑ.Ẋ..ẓ,,,,#',
+      '#,,ẍẇRR.ẇ,,ẉẇ#',
+      '#,,......,,ẓẊ#',
+      '#,,,,.Ẋ.Ẇ,,,,#',
+      '#,,,,..ẍẐ,,,,#',
+      '#,,,,..ẉ.,,,,#',
+      '#,,,,..ẗ.,,,,#',
       '#,,,,....,,,,#',
       '#####....#####',
     ]),
@@ -65495,15 +66369,15 @@ const MAPS2 = {
     id: 'pewter', name: 'Pewter City', music: 'pewter-theme',
     rows: rows([
       'ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ',
-      'ÍĵĵĵÂoąîąąoÂĵÂĵÍ',
-      'ÍÂąąąĵḁḁḁḁÂąąąÂÍ',
-      'ÍÂğyğĵḁVYḁĵğyğÂÍ',
+      'ÍẄẒẐẊoąîąąoẊẐẒẄÍ',
+      'ÍẆąąąẌḁḁḁḁẌąąąẆÍ',
+      'ÍÂğyğẎḁVYḁẒğyğÂÍ',
       'ÍÂØÂØĵÂ99ÂÂÂĵØÂÍ',
-      'ÍĵÂÂĵÂÂÍÍĵĵÂÂĵĵÍ',
-      'ÍÂÂØØĵoÂĵoĵØØÂĵÍ',
+      'ÍĵÂÂẆÂÂÍÍĵĵÂÂĵĵÍ',
+      'ÍÂÂØØẄoẐẊoẎØØÂĵÍ',
       'ÍĵÂĵĵĵĵĵÂĵĵĵÂÂÂÂ',
       'ÍÂÂFFĵÂÂÂĵÂFFØÂÍ',
-      'ÍÂÂÂĵĵÂ,,ĵĵÂÂÂÂÍ',
+      'ÍẎÂÂĵĵÂ,,ĵĵÂÂẌÂÍ',
       'ÍÍÍÍÍÍĵÂĵĵÍÍÍÍÍÍ',
     ]),
     warps: [
@@ -65541,15 +66415,15 @@ const MAPS2 = {
     id: 'route3', name: 'Route 3', music: 'route1-theme',
     rows: rows([
       '##################',
-      '#,,,,....._.__...#',
+      '#,,,,..ẏẌẉẋ.Ẉẋ.ẏ.#',
       '#,,,,._RRR__._...#',
-      '#,,,,._RRR_.._...#',
-      '#.__.__...._..___#',
+      '#,,,,.ẒRRR_.._...#',
+      '#.__.__...._..__ẕ#',
       '......._._....__..',
       '#._.._.____,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___._.._#',
+      '#Ẕ._ẒSẋ____,,,,,,#',
+      '#ẅ...__.__.,,,,,,#',
+      '#ẉ.ẏẈẌ_ẅ.__ẈẒẌ.ẅẉ#',
       '##################',
     ]),
     warps: [
@@ -65685,15 +66559,15 @@ const MAPS2 = {
     id: 'route4', name: 'Route 4', music: 'route1-theme',
     rows: rows([
       '##################',
-      '#.___....._.__...#',
+      '#ẋẇ__...ẍẄ_.ẍẋẎẄ.#',
       '#._,,,,_..__.RR..#',
-      '#_.,,,,_.__.__._.#',
-      '#.__.__....__.___#',
+      '#_.,,,,_.__._ẑẇ_.#',
+      '#.__.__....__.__ẗ#',
       '......._._....__..',
       '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__...__._.._#',
+      '#ẖ._ẄS_____,,,,,,#',
+      '#Ẋ...__.__.,,,,,,#',
+      '#ẋ.ẑ.Ẏ_Ẋẍ.__ẇẑ.ẊẎ#',
       '##################',
     ]),
     warps: [
@@ -65736,17 +66610,17 @@ const MAPS2 = {
     id: 'cerulean', name: 'Cerulean City', music: 'viridian-theme',
     rows: rows([
       'ÎÎÎÎÎÎÎÎķÃÎÎÎÎÎÎÎÎ',
-      'ÎķķķÃķķÃÃÃÙÃķÃķķÃÎ',
-      'ÎÃĉĉĉķķÃÃķÃķÃĉXĉÃÎ',
-      'ÎÃġwġķÃķÃÃķķķḂḂḂķÎ',
+      'ÎķķķẏķķÃÃÃÙẓķẇẓẑÃÎ',
+      'ÎÃĉĉĉẉķÃÃķÃķÃĉXĉẅÎ',
+      'ÎÃġwġķÃķÃÃķķẉḂḂḂẏÎ',
       'ÎÃÙÃÙķÃÙÙÃÃÃķVYḂoÎ',
-      'ÃķoÃķÃÃÃÃķķÃÃķķoÃÎ',
+      'ÃķoÃķÃÃẑẇķķÃÃķķoẍÎ',
       'ÎÃÃÃÃķäïääķÃķÃķÃķÎ',
-      'ÎķÃķÙķAJKAķÙÃÃÃÃķÎ',
-      'ÎÃÙøøķoÃÃoÙøøķÃķÙÎ',
-      'ÎÃÃÃķķÃķÃķķÃÃÃÃÃÃÎ',
+      'ÎķÃķÙẏAJKAẍÙÃÃÃÃẇÎ',
+      'ÎẅÙøøķoÃÃoÙẑøķÃķÙÎ',
+      'ÎÃÃÃķķÃķÃķķÃÃÃÃÃẍÎ',
       'ÎķÃÃķÃ,,,,ķķķÃÃķķÎ',
-      'ÎķķķÃķ,,,,ÃÃÃķÃķķÎ',
+      'ÎẅẉķÃķ,,,,ÃÃÃķÃķẓÎ',
       'ÎÎÎÎÎÎÎÎķķÎÎÎÎÎÎÎÎ',
     ]),
     warps: [
@@ -65832,18 +66706,18 @@ const MAPS2 = {
     id: 'route5', name: 'Route 5', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._.__.#',
+      '#ẍẌ___...._Ẕẏ_Ẑ#',
       '#._,,,,_.._,,,,#',
       '#_.,,,,_.__,,,,#',
       '#._,,,,....,,,,#',
-      '#......_._._.._#',
+      '#ẓ....Ẑ_._._..Ẍ#',
       '#._..HH_______.#',
-      '#.._.HH__S._.._#',
-      '#....__.._.....#',
-      '#..,,,,..__,,,,#',
-      '#__,,,,._..,,,,#',
+      '#.._ẆHH__S._.._#',
+      '#ẏ..._ẉ..Ẍ....ẓ#',
+      '#Ẇ.,,,,..__,,,,#',
+      '#ẉ_,,,,._..,,,,#',
       '#..,,,,_...,,,,#',
-      '#._...._.._..__#',
+      '#ẍẆ.ẓ.Ẑ_..ẕẏẉ_ẍ#',
       '########..######',
     ]),
     warps: [
@@ -65884,18 +66758,18 @@ const MAPS2 = {
     id: 'route6', name: 'Route 6', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.___....._.__.#',
+      '#ẏẋ__....._ẖẎẑẒ#',
       '#._,,,,_.._,,,,#',
       '#_.,,,,_~~_,,,,#',
-      '#.__.__.~~.__._#',
-      '#..,,,,.._.,,,,#',
+      '#.__.__.~~Ẏ__.ẋ#',
+      '#ẅ.,,,,.._.,,,,#',
       '#._.._.____.__.#',
-      '#.._.S_____....#',
-      '#..,,,,.__.,,,,#',
-      '#..,,,,..__,,,,#',
-      '#__..._......_.#',
+      '#.._ẈSẑ____....#',
+      '#Ẏ.,,,,.__.,,,,#',
+      '#ẅ.,,,,..__,,,,#',
+      '#ẋ_..._...ẑ.._.#',
       '#..FF_._.~~.._.#',
-      '#......_.~~..__#',
+      '#ẏẈ.ẅ.Ẓẗ.~~ẒẈ_ẏ#',
       '########..######',
     ]),
     warps: [
@@ -65952,17 +66826,17 @@ const MAPS2 = {
     id: 'vermilion', name: 'Vermilion City', music: 'viridian-theme',
     rows: rows([
       'ÏÏÏÏÏÏÏÏĸÄÏÏÏÏÏÏÏÏ',
-      'ÏĸĸĸÄĸĸÄÄÄÚÄĸÄĸĸÄÏ',
+      'ÏẌẊẒẄĸĸÄÄÄÚẐẒÄĸĸẈÏ',
       'ÏÄċċċĸĸÄÄĸċðċÄÄÄÄÏ',
-      'ÏÄģwģĸÄĸÄÄḃḃḃĸÄĸĸÏ',
-      'ÏÄÚÄÚĸÄÚÚÄḃVYĸÄĸÚÏ',
-      'ÄĸoÄĸÄÄÄÄĸĸÄÄĸĸoÄĸ',
+      'ÏÄģwģĸÄĸÄÄḃḃḃĸÄĸẆÏ',
+      'ÏÄÚÄÚĸÄÚÚẒḃVYĸÄẄÚÏ',
+      'ÄĸoÄĸÄÄẊẆĸĸÄÄĸĸoÄĸ',
       'ÏÄÄÄÄĸååååĸÄĸÄĸÄĸÏ',
-      'ÏĸÄĸĸĸAJKAĸĸÄÄÄÄĸÏ',
-      'ÏÄÚFFĸoÄÄoÄFFÚÄĸÚÏ',
-      'ÏÄÄÄĸĸÄĸÄĸĸÄÄÄÄÄÄÏ',
+      'ÏĸÄĸĸĸAJKAĸĸÄÄÄÄẐÏ',
+      'ÏẌÚFFĸoÄÄoÄFFÚÄẌÚÏ',
+      'ÏÄÄÄĸĸÄĸÄĸĸÄÄÄÄÄẆÏ',
       'ÏĸÄÄċċċÄĸĸĸĸĸÄÄĸĸÏ',
-      'ÏĸĸĸģwģĸĸĸÄÄÄĸÚĸĸÏ',
+      'ÏẐĸẈģwģẈĸĸÄÄÄẊÚẄĸÏ',
       'ÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏ',
     ]),
     warps: [
@@ -66083,15 +66957,15 @@ const MAPS2 = {
     id: 'route11', name: 'Route 11', music: 'route1-theme',
     rows: rows([
       '##################',
-      '#.____...._.__...#',
-      '#._,,,,_..__._...#',
-      '#_.,,,,_.__RR_._.#',
-      '#.__.__....__.___#',
+      '#ẑ_ẄẐ_.Ẑ.Ẅ_.Ẋ_ẇ.ẑ#',
+      '#._,,,,_.._ẇ._..ẓ#',
+      '#ẍ.,,,,_.__RR_._ẕ#',
+      '#Ẕ__.__....ẍ_.___#',
       '......._._....__..',
-      '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___.....#',
+      '#._..ẓ_____,,,,,,#',
+      '#.._.Sẇ____,,,,,,#',
+      '#....ẍ_.__.,,,,,,#',
+      '#ẑ.ẄẐ__Ẋ.___Ẋ.ẓ..#',
       '##################',
     ]),
     warps: [
@@ -66131,15 +67005,15 @@ const MAPS2 = {
     id: 'route7', name: 'Route 7', music: 'route1-theme',
     rows: rows([
       '################',
-      '#.___....._.__.#',
+      '#ẓẉ__...ẒẆẅ.Ẓẅẓ#',
       '#._,,,,_..__._.#',
-      '#_.,,,,_.__FF_.#',
-      '#.__.__....__._#',
+      '#_.,,,,_.__FFẗẌ#',
+      '#.__.__....__.ẏ#',
       '......._._...._.',
       '#._..______,,,,#',
-      '#.._.S_____,,,,#',
-      '#....__.__.,,,,#',
-      '#....__..___._.#',
+      '#ẖ._ẌS_____,,,,#',
+      '#ẏ...__.__.,,,,#',
+      '#ẓ.ẉẅẆ_ẏẒ___ẌẉẆ#',
       '################',
     ]),
     warps: [
@@ -66175,17 +67049,17 @@ const MAPS2 = {
     id: 'celadon', name: 'Celadon City', music: 'viridian-theme',
     rows: rows([
       'ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ',
-      'ÐĺĺĺÅĺčXččÅÅĺÅĺĺÅÐ',
-      'ÐÅčččĺḄḄḄḄÅĺčččÅÅÐ',
-      'ÐÅĥsĥĺÛVYḄĺĺĥsĥĺĺÅ',
+      'ÐẏẋẅẇẋčXččẋÅĺÅĺĺẉÐ',
+      'ÐÅčččẍḄḄḄḄÅĺčččÅÅÐ',
+      'ÐÅĥsĥẏÛVYḄĺẍĥsĥĺĺÅ',
       'ÅÅÛÅÛĺÅÅĺÅÅoĺĺÅĺÅÐ',
-      'ÐĺÅÅĺÅææææĺÅčñčččÐ',
-      'ÅÅoÅÛĺAJKAĺÛPPPPPÐ',
-      'ÐĺÅĺĺĺĺĺÅĺoĺ12PPPÐ',
+      'ÐĺÅÅĺÅææææĺẅčñčččÐ',
+      'ẓÅoẅÛẉAJKAẓÛPPPPPÐ',
+      'ÐĺÅĺĺĺẇĺÅẇoĺ12PPPÐ',
       'ÐÅÅĺĺĺoÅÅĺoĺÅĺÅĺĺÐ',
       'ÐÅčñčĺÅĺÅĺĺÅÛÅÅÅÅÅ',
       'ÐĺP12ÅčččĺĺĺĺÅÅĺÛÐ',
-      'ÐĺĺĺÅĺĥsĥÛÅÅÅÛÅĺĺÐ',
+      'ÐĺĺĺÅẉĥsĥÛẍÅẏÛÅĺẓÐ',
       'ÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐÐ',
     ]),
     warps: [
@@ -66355,15 +67229,15 @@ const MAPS2 = {
     id: 'route8', name: 'Route 8', music: 'route1-theme',
     rows: rows([
       '#########..#######',
-      '#.____...._.__...#',
-      '#._,,,,_..__._...#',
-      '#_.,,,,_.__TT_._.#',
+      '#ẅẎ___...._ẖẄẇ.ẋẈ#',
+      '#._,,,,_.._ẋ._..Ẏ#',
+      '#_.,,,,_.__TTẈ._ẕ#',
       '#.__.__....__.___#',
       '......._._....__..',
       '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___._.._#',
+      '#Ẕ._ẑS_____,,,,,,#',
+      '#ẑ...__.__.,,,,,,#',
+      '#ẅ.ẎẇẈ_Ẅẇ___ẑẋ.Ẅẅ#',
       '##################',
     ]),
     warps: [
@@ -66595,15 +67469,15 @@ const MAPS2 = {
     id: 'route9', name: 'Route 9', music: 'route1-theme',
     rows: rows([
       '##################',
-      '#.___....._.__...#',
+      '#ẇẐ_ẉ...ẆẐ_ẍẇẊ.ẍ.#',
       '#._,,,,_.._RRR...#',
-      '#_.,,,,_.__.__._.#',
-      '#.__.__....__.___#',
+      '#_.,,,,_.__.ẉẐ._.#',
+      '#.__.__....__.__Ẕ#',
       '......._._....__..',
       '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___...._#',
+      '#ẗ._ẍS_____,,,,,,#',
+      '#ẓ...__.__.,,,,,,#',
+      '#ẇ..ẉẊ_ẓẆ___ẓ..ẆẊ#',
       '##################',
     ]),
     warps: [
@@ -66641,18 +67515,18 @@ const MAPS2 = {
     id: 'route10', name: 'Route 10', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._~~_.#',
-      '#._,,,,_.._~~_.#',
-      '#__,,,,____~~_.#',
-      '#.__.__....__._#',
+      '#ẏ_Ẓ__....Ẍ~~Ẍẉ#',
+      '#._,,,,_..ẕ~~_ẋ#',
+      '#Ẉ_,,,,____~~_.#',
+      '#.__.__....ẉẒ._#',
       '#..RR.._._.~~._#',
-      '#._,,,,_______.#',
+      '#._,,,,____ẅẈ_.#',
       '#._,,,,____S.__#',
-      '#....__.__......',
-      '#....__..___.__#',
-      '#__,,,,._...._.#',
-      '#._,,,,_...RR__#',
-      '#._...._.._..__#',
+      '#....__.__.ẋ....',
+      '#....__..___._ẖ#',
+      '#Ẉ_,,,,._..ẅ._ẋ#',
+      '#._,,,,_...RR_Ẓ#',
+      '#ẏẅ...._..ẗẉẏ_Ẍ#',
       '######....######',
     ]),
     warps: [
@@ -67010,15 +67884,15 @@ const MAPS2 = {
     id: 'route15', name: 'Route 15', music: 'route1-theme',
     rows: rows([
       '##..##############',
-      '#.___....._.__...#',
-      '#._,,,,_..__._...#',
-      '#_.,,,,_.__RR_._.#',
-      '#.__.__....__.___#',
+      '#.___..Ẍ.Ẑ_ẏẆ_ẓ.ẍ#',
+      '#ẗ_,,,,_.._ẓ._..Ẍ#',
+      '#ẉ.,,,,_.__RR_._.#',
+      '#.__.__....ẉ_.___#',
       '......._._....__.#',
-      '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___._.._#',
+      '#._..Ẍ_____,,,,,,#',
+      '#Ẕ._.SẐ____,,,,,,#',
+      '#ẏ...Ẇ_.__.,,,,,,#',
+      '#ẍ.Ẑẉ__ẓ.___Ẇẏ..ẍ#',
       '##################',
     ]),
     warps: [
@@ -67211,18 +68085,18 @@ const MAPS2 = {
     id: 'route16', name: 'Route 16', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._.__.#',
+      '#ẏ_Ẓẋ_....ẕẑẅ_.#',
       '#._,,,,_.._,,,,#',
-      '#_.,,,,_.__,,,,#',
+      '#Ẉ.,,,,_.__,,,,#',
       '#.__.__....__._#',
-      '#..._HH_._._.._#',
-      '#.__.HH__S.___.#',
-      '#.._..__.___.._#',
+      '#...ẑHH_._._..Ẏ#',
+      '#Ẏ__ẈHHẋ_S.___.#',
+      '#.._..ẅ_.Ẓ__.._#',
       '#..,,,,.__.,,,,#',
-      '#..,,,,..__,,,,#',
-      '#__..._._...._.#',
-      '#..FF___..._.__#',
-      '#._...._.._..__#',
+      '#ẑ.,,,,..__,,,,#',
+      '#Ẉ_..._._...._ẋ#',
+      '#..FF___..._._Ẓ#',
+      '#ẏẅ.Ẏ.._..ẖ.._ẏ#',
       '########..######',
     ]),
     warps: [
@@ -67266,17 +68140,17 @@ const MAPS2 = {
     id: 'route19', name: 'Route 19', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._.__.#',
+      '#Ẅ_ẊẐ_.ẗ.._.__.#',
       '#.___.__.._~~WW#',
-      '#_.,,,,_.__~~WW#',
-      '#._,,,,....__~~#',
-      '#..._.._._._.._#',
-      '#.__.S________.#',
-      '#..,,,,_____.._#',
+      '#ẍ.,,,,_.__~~WW#',
+      '#._,,,,....Ẑẇ~~#',
+      '#..._.._._._..ẑ#',
+      '#ẓ__ẍS________.#',
+      '#..,,,,____ẓẐẇẄ#',
       '#..,,,,.__.~~WW#',
-      '#....__..__.._.#',
-      '#__..._._..~~WW#',
-      '#....___..._.__#',
+      '#ẓ...__..__.._.#',
+      '#Ẋ_..._._.ẍ~~WW#',
+      '#ẑ...___..ẔẊẇẄẑ#',
       '######....######',
     ]),
     warps: [
@@ -67335,15 +68209,15 @@ const MAPS2 = {
     id: 'route20', name: 'Route 20', music: 'route1-theme',
     rows: rows([
       '##..##############',
-      '#.__.~~~~~~~~~~~~#',
-      '#.___~~WWWWWW~~..#',
+      '#.__ẕ~~~~~~~~~~~~#',
+      '#.__ẏ~~WWWWWW~~ẓẗ#',
       '...._~~WWWWWW~~...',
-      '#.__.~~~~~~~~~~__#',
-      '#........_...._..#',
-      '#._,,,,.___._....#',
-      '#..,,,,____S.....#',
-      '#....__.__......_#',
-      '#....__..__.._.._#',
+      '#.__.~~~~~~~~~~ẅ_#',
+      '#ẖ....ẅ.._....Ẍ..#',
+      '#Ẍ_,,,,.___._...Ẓ#',
+      '#Ẓ.,,,,____Sẏ...Ẇ#',
+      '#ẏ...__.__.Ẍ....ẉ#',
+      '#ẓ.Ẇẉ__Ẇ.__.ẉẒẅ.ẓ#',
       '##################',
     ]),
     warps: [
@@ -67581,15 +68455,15 @@ const MAPS2 = {
     id: 'pallet', name: 'Pallet Town', music: 'pallet-theme',
     rows: rows([
       'ËËËËËËËËËËËËËËËË',
-      'ËıııÀııÀÀÀÀÀıÀıË',
-      'ËÀāìāııÀÀıāāāÀÀË',
-      'ËÀęsęıÀÖÖÀęsęıÀË',
-      'ËÀÖÀÖıÀÀıoÀÀıÖÀË',
-      'ËıÀÀıÀÀËËııÀÀııË',
+      'ËẆẈẎẐııÀÀÀÀÀıÀẈË',
+      'ËẊāìāııÀÀıāāāÀÀË',
+      'ËẌęsęıÀÖÖẄęsęẄÀË',
+      'ËẎÖÀÖıÀẌẆoÀÀıÖÀË',
+      'ËıÀÀıÀẎËËẈıÀÀııË',
       'ËÀÀÀÀıÀËËÀıÀıÀıË',
-      'ËıÖ÷÷ıııÀıı÷÷ÖÀË',
+      'ËẊÖ÷÷ıııÀıı÷÷ÖẆË',
       'ËÀÀıııoÀÀoÀıÀıÀË',
-      'ËÀÀÀııÀ,,ııÀÀÀÀË',
+      'ËẄÀẐıẌÀ,,ııÀÀẐẊË',
       'ËËËËËËıÀııËËËËËË',
     ]),
     warps: [
@@ -67704,15 +68578,15 @@ const MAPS2 = {
     id: 'route22', name: 'Route 22', music: 'route1-theme',
     rows: rows([
       '##################',
-      '#.___....._.__...#',
-      '#._,,,,_..__._...#',
-      '#_.,,,,_.__RR_._.#',
-      '#.._.__....__.___#',
+      '#Ẉ_ẋẄ..ẇ.Ẉ_.ẑ_Ẏ.ẅ#',
+      '#._,,,,_.._ẋ._..ẇ#',
+      '#ẑ.,,,,_.__RR_._Ẕ#',
+      '#ẕ._.__....Ẅ_.___#',
       '......._._....__..',
-      '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___._.._#',
+      '#._..ẇ_____,,,,,,#',
+      '#.._.Sẋ____,,,,,,#',
+      '#....ẑ_.__.,,,,,,#',
+      '#ẅ.ẈẄ__Ẏ.___Ẏ_..ẅ#',
       '##################',
     ]),
     warps: [
@@ -68703,15 +69577,15 @@ const MAPS3 = {
     id: 'route8', name: 'Route 8', music: 'route1-theme',
     rows: rows([
       '#########..#######',
-      '#.____...._.__...#',
-      '#._,,,,_..__._...#',
-      '#_.,,,,_.__TT_._.#',
+      '#ẅẎ___...._ẖẄẇ.ẋẈ#',
+      '#._,,,,_.._ẋ._..Ẏ#',
+      '#_.,,,,_.__TTẈ._ẕ#',
       '#.__.__....__.___#',
       '......._._....__..',
       '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___._.._#',
+      '#Ẕ._ẑS_____,,,,,,#',
+      '#ẑ...__.__.,,,,,,#',
+      '#ẅ.ẎẇẈ_Ẅẇ___ẑẋ.Ẅẅ#',
       '##################',
     ]),
     warps: [
@@ -68753,17 +69627,17 @@ const MAPS3 = {
     id: 'saffron', name: 'Saffron City', music: 'viridian-theme',
     rows: rows([
       'ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ',
-      'ÑļļļÆďòďďďďÆļďOďÆÑ',
+      'ÑẐļẒẊďòďďďďẎẈďOďẆÑ',
       'ÑÆÆļļZ6ZZ6ZļÆP12ÆÑ',
       'ÑÆļÆÆZZZ45ZļļļÆļļÑ',
-      'ÑÆÜÆÆļoÆļÆÆÆļļÆļÆļ',
-      'ÑļďďďďÆÆÆļďXďďÜļÆÑ',
-      'ÑÆħħħħÆÜļÆḅḅḅḅļÆļÑ',
-      'Ñļħ78ħļļÆļÜVYḅÆÆÜÑ',
-      'ÑÆÆļļļççççÆļÆļÆļļÑ',
-      'ÑÆÜÆļļAJKAļÆÆÆÆÆÆÑ',
-      'ÑļÆFFÆoÆļoļFFÜÆļļÑ',
-      'ÑļļļÜļÆļļļÆÆoļÆļÜÑ',
+      'ÑÆÜẌÆẆoÆļÆÆÆļļÆļÆļ',
+      'ÑļďďďďẒÆÆļďXďďÜļÆÑ',
+      'ÑÆħħħħẐÜļÆḅḅḅḅẒÆẎÑ',
+      'Ñļħ78ħẈẊÆẈÜVYḅÆÆÜÑ',
+      'ÑÆÆļļļççççÆļÆļÆļẊÑ',
+      'ÑẌÜÆļļAJKAļÆÆÆÆÆÆÑ',
+      'ÑļÆFFÆoÆļoļFẌÜÆļļÑ',
+      'ÑẎļẐÜļÆļļļÆÆoẆÆļÜÑ',
       'ÑÑÑÑÑÑÑÑÑļļÑÑÑÑÑÑÑ',
     ]),
     warps: [
@@ -68953,15 +69827,15 @@ const MAPS3 = {
     id: 'route9', name: 'Route 9', music: 'route1-theme',
     rows: rows([
       '##################',
-      '#.___....._.__...#',
+      '#ẇẐ_ẉ...ẆẐ_ẍẇẊ.ẍ.#',
       '#._,,,,_.._RRR...#',
-      '#_.,,,,_.__.__._.#',
-      '#.__.__....__.___#',
+      '#_.,,,,_.__.ẉẐ._.#',
+      '#.__.__....__.__Ẕ#',
       '......._._....__..',
       '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___...._#',
+      '#ẗ._ẍS_____,,,,,,#',
+      '#ẓ...__.__.,,,,,,#',
+      '#ẇ..ẉẊ_ẓẆ___ẓ..ẆẊ#',
       '##################',
     ]),
     warps: [
@@ -69002,18 +69876,18 @@ const MAPS3 = {
     id: 'route10', name: 'Route 10', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._~~_.#',
-      '#._,,,,_.._~~_.#',
-      '#__,,,,____~~_.#',
-      '#.__.__....__._#',
+      '#ẏ_Ẓ__....Ẍ~~Ẍẉ#',
+      '#._,,,,_..ẕ~~_ẋ#',
+      '#Ẉ_,,,,____~~_.#',
+      '#.__.__....ẉẒ._#',
       '#..RR.._._.~~._#',
-      '#._,,,,_______.#',
+      '#._,,,,____ẅẈ_.#',
       '#._,,,,____S.__#',
-      '#....__.__......',
-      '#....__..___.__#',
-      '#__,,,,._...._.#',
-      '#._,,,,_...RR__#',
-      '#._...._.._..__#',
+      '#....__.__.ẋ....',
+      '#....__..___._ẖ#',
+      '#Ẉ_,,,,._..ẅ._ẋ#',
+      '#._,,,,_...RR_Ẓ#',
+      '#ẏẅ...._..ẗẉẏ_Ẍ#',
       '######....######',
     ]),
     warps: [
@@ -69166,17 +70040,17 @@ const MAPS3 = {
     id: 'lavender', name: 'Lavender Town', music: 'viridian-theme',
     rows: rows([
       'ÒÒÒÒÒÒÒÒľÇÒÒÒÒÒÒÒÒ',
-      'ÒľľľÇľľÇÇÇÝÇľÇľľÇÒ',
+      'ÒľẅẓẉľľÇÇÇÝẉẅẑľľẋÒ',
       'ÒÇđđđľľÇÇľđóđđÇÇÇÒ',
-      'ÒÇĩsĩľÇľÇÇUUUUÇľľÒ',
-      'ÒÇÝÇÝľÇÝÝÇUVYUÝľÇÒ',
-      'ÇľoÇľÇÇÇÇľľÇÇľľoÇÒ',
-      'ÒÇÇÇÇľèèèèľÇľÇľÇľÒ',
-      'ÒľÇľľľAJKAľľÇÇđOđÒ',
-      'ÒÇÝúúľoÇÇoÇúúÝó12Ò',
+      'ÒÇĩsĩľÇľÇÇUUUUẓľľÒ',
+      'ÒÇÝÇÝľÇÝÝẍUVYUÝẅÇÒ',
+      'ÇľoÇľÇÇẋẓľľÇÇľẉoÇÒ',
+      'ÒÇÇÇÇľèèèèľÇľÇľẏẍÒ',
+      'ÒľÇľľľAJKAľľÇẋđOđÒ',
+      'ÒẑÝúúľoÇÇoÇúúÝó12Ò',
       'ÒÇÇÇľľÇľÇľľÇÇÇÇÇÇÒ',
       'ÒľÇÇľÇľÇľľľľľÇÇľľÒ',
-      'ÒľľľÇÝÇľľľÇÇÇľÇľľÒ',
+      'ÒẏľľẍÝẑľľľÇÇÇľÇľẏÒ',
       'ÒÒÒÒÒÒÒÒľľÒÒÒÒÒÒÒÒ',
     ]),
     warps: [
@@ -69326,18 +70200,18 @@ const MAPS3 = {
     id: 'route12', name: 'Route 12', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._~~_.#',
-      '#._,,,,_.._~~_.#',
-      '#__,,,,_.__~~_.#',
-      '#.__.._....__._#',
+      '#Ẏ_ẑẊ_....ẕ~~Ẏẋ#',
+      '#._,,,,_.._~~_ẇ#',
+      '#Ẅ_,,,,_.__~~_.#',
+      '#Ẕ__.._....ẇ_._#',
       '...,,,,_._._.._#',
-      '#._,,,,____S__.#',
-      '#.._..__.___.._#',
+      '#._,,,,___ẊSẑ_.#',
+      '#.._..__.__ẋẍ._#',
       '#..,,,,.__.~~..#',
-      '#..,,,,..__~~__#',
-      '#__..._._...._.#',
-      '#._FF___..._.__#',
-      '#._...._.._..__#',
+      '#ẍ.,,,,..__~~__#',
+      '#ẇ_..._._..Ẅ._Ẋ#',
+      '#._FF___..._._ẑ#',
+      '#ẎẄ.ẍ.._..ẖ.._ẋ#',
       '########..######',
     ]),
     warps: [
@@ -69400,15 +70274,15 @@ const MAPS3 = {
     id: 'route15', name: 'Route 15', music: 'route1-theme',
     rows: rows([
       '##..##############',
-      '#.___....._.__...#',
-      '#._,,,,_..__._...#',
-      '#_.,,,,_.__RR_._.#',
-      '#.__.__....__.___#',
+      '#.___..Ẍ.Ẑ_ẏẆ_ẓ.ẍ#',
+      '#ẗ_,,,,_.._ẓ._..Ẍ#',
+      '#ẉ.,,,,_.__RR_._.#',
+      '#.__.__....ẉ_.___#',
       '......._._....__.#',
-      '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___._.._#',
+      '#._..Ẍ_____,,,,,,#',
+      '#Ẕ._.SẐ____,,,,,,#',
+      '#ẏ...Ẇ_.__.,,,,,,#',
+      '#ẍ.Ẑẉ__ẓ.___Ẇẏ..ẍ#',
       '##################',
     ]),
     warps: [
@@ -69446,17 +70320,17 @@ const MAPS3 = {
     id: 'fuchsia', name: 'Fuchsia City', music: 'viridian-theme',
     rows: rows([
       'ÓÓÓÓÓÓÓÓŀÈÓÓÓÓÓÓÓÓ',
-      'ÓŀŀŀÈŀŀÈÈÈÈÈŀÈŀŀÈÓ',
+      'ÓŀẈẌẎŀŀÈÈÈÈẄẌẈŀŀẆÓ',
       'ÓÈēēēŀŀÈÈŀēXēēÈÈÈÓ',
-      'ÓÈīwīŀÈŀÈÈḆḆḆḆÈŀŀÓ',
-      'ÓÈÞÈÞŀÈÞÞÈḆVYḆÞŀÈÓ',
-      'ÓŀÈÈoÈÈÈÈŀŀÈÈŀŀoÈŀ',
-      'ÓÈÈÈÈŀééééŀÈŀÈŀÈŀÓ',
-      'ÓŀÈŀŀoAJKAoŀÈÈÈÈŀÓ',
-      'ÓÈÞûûŀÈÈÈŀÈûûÞÈŀŀÓ',
+      'ÓÈīwīŀÈŀÈÈḆḆḆḆẒŀŀÓ',
+      'ÓÈÞÈÞŀÈÞÞẎḆVYḆÞẄÈÓ',
+      'ÓŀÈÈoÈÈÈÈŀŀÈÈŀẐoÈŀ',
+      'ÓÈÈÈÈŀééééẐÈŀÈŀÈŀÓ',
+      'ÓŀÈŀŀoAJKAoŀÈẈÈÈŀÓ',
+      'ÓẒÞûûŀÈÈÈẎÈûûÞẆŀŀÓ',
       'ÓÈÈÈŀŀēēēēŀÈÈēôēÈÓ',
-      'ÓŀÈÈŀÈī78īŀŀŀP12ŀÓ',
-      'ÓŀŀŀÈŀÈŀŀŀÈÈÞŀÈŀŀÓ',
+      'ÓŀÈÈŀÈī78īŀŀẒP12ŀÓ',
+      'ÓẆŀŀÈŀÈŀŀŀÈẄÞẌÈŀẐÓ',
       'ÓÓÓÓÓÓÓÓŀŀÓÓÓÓÓÓÓÓ',
     ]),
     warps: [
@@ -69619,18 +70493,18 @@ const MAPS3 = {
     id: 'route16', name: 'Route 16', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._.__.#',
+      '#ẏ_Ẓẋ_....ẕẑẅ_.#',
       '#._,,,,_.._,,,,#',
-      '#_.,,,,_.__,,,,#',
+      '#Ẉ.,,,,_.__,,,,#',
       '#.__.__....__._#',
-      '#..._HH_._._.._#',
-      '#.__.HH__S.___.#',
-      '#.._..__.___.._#',
+      '#...ẑHH_._._..Ẏ#',
+      '#Ẏ__ẈHHẋ_S.___.#',
+      '#.._..ẅ_.Ẓ__.._#',
       '#..,,,,.__.,,,,#',
-      '#..,,,,..__,,,,#',
-      '#__..._._...._.#',
-      '#..FF___..._.__#',
-      '#._...._.._..__#',
+      '#ẑ.,,,,..__,,,,#',
+      '#Ẉ_..._._...._ẋ#',
+      '#..FF___..._._Ẓ#',
+      '#ẏẅ.Ẏ.._..ẖ.._ẏ#',
       '########..######',
     ]),
     warps: [
@@ -69674,17 +70548,17 @@ const MAPS3 = {
     id: 'route19', name: 'Route 19', music: 'route1-theme',
     rows: rows([
       '########..######',
-      '#.____...._.__.#',
+      '#Ẅ_ẊẐ_.ẗ.._.__.#',
       '#.___.__.._~~WW#',
-      '#_.,,,,_.__~~WW#',
-      '#._,,,,....__~~#',
-      '#..._.._._._.._#',
-      '#.__.S________.#',
-      '#..,,,,_____.._#',
+      '#ẍ.,,,,_.__~~WW#',
+      '#._,,,,....Ẑẇ~~#',
+      '#..._.._._._..ẑ#',
+      '#ẓ__ẍS________.#',
+      '#..,,,,____ẓẐẇẄ#',
       '#..,,,,.__.~~WW#',
-      '#....__..__.._.#',
-      '#__..._._..~~WW#',
-      '#....___..._.__#',
+      '#ẓ...__..__.._.#',
+      '#Ẋ_..._._.ẍ~~WW#',
+      '#ẑ...___..ẔẊẇẄẑ#',
       '######....######',
     ]),
     warps: [
@@ -69747,15 +70621,15 @@ const MAPS3 = {
     id: 'route20', name: 'Route 20', music: 'route1-theme',
     rows: rows([
       '##..##############',
-      '#.__.~~~~~~~~~~~~#',
-      '#.___~~WWWWWW~~..#',
+      '#.__ẕ~~~~~~~~~~~~#',
+      '#.__ẏ~~WWWWWW~~ẓẗ#',
       '...._~~WWWWWW~~...',
-      '#.__.~~~~~~~~~~__#',
-      '#........_...._..#',
-      '#._,,,,.___._....#',
-      '#..,,,,____S.....#',
-      '#....__.__......_#',
-      '#....__..__.._.._#',
+      '#.__.~~~~~~~~~~ẅ_#',
+      '#ẖ....ẅ.._....Ẍ..#',
+      '#Ẍ_,,,,.___._...Ẓ#',
+      '#Ẓ.,,,,____Sẏ...Ẇ#',
+      '#ẏ...__.__.Ẍ....ẉ#',
+      '#ẓ.Ẇẉ__Ẇ.__.ẉẒẅ.ẓ#',
       '##################',
     ]),
     warps: [
@@ -69861,17 +70735,17 @@ const MAPS3 = {
     id: 'cinnabar', name: 'Cinnabar Island', music: 'viridian-theme',
     rows: rows([
       'ÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔ',
-      'ÔłłłÉłłÉÉÉÉÉłÉłłÉÔ',
+      'ÔłłłẓłłÉÉÉÉÉłÉłłẅÔ',
       'ÔÉĕõĕłłÉÉłĕXĕĕÉÉÉÔ',
-      'ÔÉĭyĭłÉłÉÉḇḇḇḇÉłłÔ',
-      'ÔÉßÉßłÉßßÉḇVYḇßłÉÔ',
-      'ÉłÉÉłÉÉÉÉłłÉÉłłoÉÔ',
-      'ÔÉÉÉÉłêêêêłÉłÉłÉłÔ',
+      'ÔÉĭyĭłÉłÉÉḇḇḇḇẉłłÔ',
+      'ÔÉßÉßłÉßßẇḇVYḇßẋÉÔ',
+      'ÉłÉÉłÉÉẓẉłłÉÉłẓoẇÔ',
+      'ÔÉÉÉÉẑêêêêẅÉłÉłÉłÔ',
       'ÔłÉłłoAJKAołÉÉÉÉłÔ',
-      'ÔÉßüüłÉÉÉłÉüüłßłłÔ',
-      'ÔĕOĕłĕĕĕĕłłĕ3ĕÉÉÉÔ',
-      'ÔP12łĭ78ĭłłZ0ZÉłßÔ',
-      'ÔłłłÉłÉłłłoÉÉłÉłłÔ',
+      'ÔẑßẋüłẋÉÉłÉüüłßłłÔ',
+      'ÔĕOĕłĕĕĕĕłłĕ3ĕẉÉÉÔ',
+      'ÔP12łĭ78ĭłẑZ0ZÉłßÔ',
+      'ÔẏłłÉłÉłłłoẏẅẇÉłẏÔ',
       'ÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔ',
     ]),
     warps: [
@@ -70009,15 +70883,15 @@ const MAPS3 = {
     id: 'viridian', name: 'Viridian City', music: 'viridian-theme',
     rows: rows([
       'ÌÌÌÌÌÌÁÁĲÁÌÌÌÌÌÌ',
-      'ÌĲ×ĲÁĲĲÌÌÁÁÁĲ×ĲÌ',
-      'ÌÁăíăĲĲÌÌĲăăăÁÁÌ',
-      'ÌÁḀḀḀĲÁĲÁÁěsěĲÁÌ',
-      'ÌÁḀVYĲââââ×Á×ĲÁÌ',
-      'ÌĲÁÁĲÁAJKAĲÁÁĲĲÌ',
-      'ÌÁÁ××ĲoÁĲoĲ××ÁĲÌ',
+      'Ìẇ×ẉÁĲĲÌÌÁÁÁẉ×ẇÌ',
+      'ÌẋăíăĲĲÌÌĲăăăẋẓÌ',
+      'ÌẍḀḀḀĲẑẋẉẏěsěĲÁÌ',
+      'ÌẑḀVYĲââââ×Á×ĲÁÌ',
+      'ÌĲÁÁĲÁAJKAĲÁẍĲẓÌ',
+      'ÌÁẏ××ẇoÁĲoĲ××ÁĲÌ',
       'ĲĲăOăĲĲĲÁĲĲĲÁÁÁÌ',
-      'ÌÁP12ĲÁÁÁĲÁFF×ÁÌ',
-      'ÌÁÁÁĲĲÁ,,ĲĲÁÁÁÁÌ',
+      'ÌÁP12ĲÁÁÁĲÁFF×ẑÌ',
+      'ÌÁÁÁĲĲÁ,,ĲĲÁẓẍẏÌ',
       'ÌÌÌÌÌÌĲÁĲĲÌÌÌÌÌÌ',
     ]),
     warps: [
@@ -70095,15 +70969,15 @@ const MAPS3 = {
     id: 'route22', name: 'Route 22', music: 'route1-theme',
     rows: rows([
       '##################',
-      '#.___....._.__...#',
-      '#._,,,,_..__._...#',
-      '#_.,,,,_.__RR_._.#',
-      '#.._.__....__.___#',
+      '#Ẉ_ẋẄ..ẇ.Ẉ_.ẑ_Ẏ.ẅ#',
+      '#._,,,,_.._ẋ._..ẇ#',
+      '#ẑ.,,,,_.__RR_._Ẕ#',
+      '#ẕ._.__....Ẅ_.___#',
       '......._._....__..',
-      '#._..______,,,,,,#',
-      '#.._.S_____,,,,,,#',
-      '#....__.__.,,,,,,#',
-      '#....__..___._.._#',
+      '#._..ẇ_____,,,,,,#',
+      '#.._.Sẋ____,,,,,,#',
+      '#....ẑ_.__.,,,,,,#',
+      '#ẅ.ẈẄ__Ẏ.___Ẏ_..ẅ#',
       '##################',
     ]),
     warps: [
@@ -70187,15 +71061,15 @@ const MAPS3 = {
     id: 'indigo', name: 'Indigo Plateau', music: 'viridian-theme',
     rows: rows([
       'ÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕÕ',
-      'ÕńńńÊńńÊÊÊÊÊńÊńÕ',
+      'ÕńńńÊńńÊẎÊÊÊńÊńÕ',
       'ÕÊėėėńńÊÊńėXėėÊÕ',
-      'ÕÊįsįńÊńÊÊUUUUÊÕ',
-      'ÕÊàÊàńÊààÊUVYUÊÕ',
-      'ÕńÊÊńoÊÊÊńoÊÊàńÕ',
-      'ÕÊÊÊÊńëöëëńÊńÊńÕ',
-      'ÕńėOėoAJKAońÊÊÊÕ',
-      'ÕÊP12ńÊÊÊńÊFFńàÕ',
-      'ÕÊàÊńńÊńÊńńÊÊÊÊÕ',
+      'ÕÊįsįẊÊńÊÊUUUUÊÕ',
+      'ÕÊàÊàẆÊààẎUVYUÊÕ',
+      'ÕńÊÊẈoẄẈẊẌoÊÊàńÕ',
+      'ÕÊÊÊÊẒëöëëẒÊńÊńÕ',
+      'ÕẆėOėoAJKAońÊÊẆÕ',
+      'ÕẄP12ńÊÊÊẌÊFFẈàÕ',
+      'ÕẒàÊńẊÊńÊńńÊẎẌẄÕ',
       'ÕÕÕÕÕÕńÊńńÕÕÕÕÕÕ',
     ]),
     warps: [
@@ -70377,15 +71251,15 @@ const MAPS3 = {
     id: 'pallet', name: 'Pallet Town', music: 'pallet-theme',
     rows: rows([
       'ËËËËËËËËËËËËËËËË',
-      'ËıııÀııÀÀÀÀÀıÀıË',
-      'ËÀāìāııÀÀıāāāÀÀË',
-      'ËÀęsęıÀÖÖÀęsęıÀË',
-      'ËÀÖÀÖıÀÀıoÀÀıÖÀË',
-      'ËıÀÀıÀÀËËııÀÀııË',
+      'ËẆẈẎẐııÀÀÀÀÀıÀẈË',
+      'ËẊāìāııÀÀıāāāÀÀË',
+      'ËẌęsęıÀÖÖẄęsęẄÀË',
+      'ËẎÖÀÖıÀẌẆoÀÀıÖÀË',
+      'ËıÀÀıÀẎËËẈıÀÀııË',
       'ËÀÀÀÀıÀËËÀıÀıÀıË',
-      'ËıÖ÷÷ıııÀıı÷÷ÖÀË',
+      'ËẊÖ÷÷ıııÀıı÷÷ÖẆË',
       'ËÀÀıııoÀÀoÀıÀıÀË',
-      'ËÀÀÀııÀ,,ııÀÀÀÀË',
+      'ËẄÀẐıẌÀ,,ııÀÀẐẊË',
       'ËËËËËËıÀııËËËËËË',
     ]),
     warps: [
@@ -83346,6 +84220,7 @@ class OverworldScene {
     this.fishing = null;
     this.running = false;
     this.enc = null; // encounter sequence state
+    this.warpFx = null; // Premium+ W7 (TX-6): warp-fade transition state
     this.challenge = null; // Yellow-style trainer spot challenge (sight -> ! -> walk-up)
     // Premium+ W5 (LD-3): the y-sorted draw list — allocated ONCE here
     // and reused/truncated every frame (PL-3: no per-frame allocation).
@@ -83650,6 +84525,7 @@ class OverworldScene {
   update(dt) {
     const g = this.game;
     if (g.ui.update(dt)) return; // modal UI consumes input
+    if (this.warpFx) { this.updateWarpFx(dt); return; } // W7: warp transition owns the tick
     if (this.enc) { this.updateEncounter(dt); return; }
     if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
     if (this.checkSightLines()) return; // spotted this tick — challenge takes over
@@ -83779,6 +84655,85 @@ class OverworldScene {
     this.puffs.push({ x: x * TILE, y: y * TILE, cls, t: 0 });
   }
 
+  // ---- Premium+ W7 (TX-6 / PL-1 / PL-2): the warp transition ----
+  // EVERY step-warp (doors, stairs, edge exits — 100% of the warps[]
+  // system) now plays an authored transition instead of an instant
+  // cut: when the stepped cell is a door kind with a W6 door-open
+  // frame, the door opens first (50ms, with a warm light spill), then
+  // the screen fades out (60ms) and back in (60ms) — 170ms total.
+  // Non-door warps fade out+in at 90ms each — 180ms. Both sit inside
+  // the spec's 150–250ms band and share the battle entry's timing
+  // language (PL-2): short ease-out phases, never linear.
+  // Reduced Motion zeroes the whole transition (the warp fires
+  // instantly, exactly as before W7) — the standing accessibility
+  // pattern: presentation honors settings.reducedMotion everywhere.
+  startWarpFade(to, wp) {
+    const g = this.game;
+    if (g.state.settings.reducedMotion) { this.doWarp(to, wp); return; }
+    const kind = g.tileKind(this.tileAt(this.player.tx, this.player.ty));
+    const door = g.doorOpenSprite ? (g.doorOpenSprite(kind) ? kind : null) : null;
+    this.warpFx = {
+      to, wp, phase: door ? 'door' : 'out', t: 0,
+      doorKind: door, doorX: this.player.tx, doorY: this.player.ty,
+      doorMs: door ? 50 : 0, outMs: door ? 60 : 90, inMs: door ? 60 : 90,
+    };
+    if (door) g.audio.playSfx('click'); // the door latch (visual twin: the open frame below)
+  }
+
+  updateWarpFx(dt) {
+    const g = this.game;
+    const fx = this.warpFx;
+    fx.t += dt * 1000;
+    const easeOut = (k) => 1 - (1 - k) * (1 - k);
+    if (fx.phase === 'door') {
+      g.renderer.fadeA = 0;
+      if (fx.t >= fx.doorMs) { fx.phase = 'out'; fx.t = 0; }
+      return;
+    }
+    if (fx.phase === 'out') {
+      const k = Math.min(1, fx.t / fx.outMs);
+      g.renderer.fadeColor = '#000';
+      g.renderer.fadeA = easeOut(k);
+      if (k >= 1) {
+        this.doWarp(fx.to, fx.wp);
+        fx.phase = 'in'; fx.t = 0;
+        g.renderer.fadeA = 1;
+      }
+      return;
+    }
+    // phase 'in'
+    const k = Math.min(1, fx.t / fx.inMs);
+    g.renderer.fadeA = 1 - easeOut(k);
+    if (k >= 1) { g.renderer.fadeA = 0; this.warpFx = null; }
+  }
+
+  // The warp itself — byte-for-byte the pre-W7 instant warp (via
+  // tickets, position, banner, music, autosave), now executed at the
+  // fade's midpoint by updateWarpFx (or immediately under Reduced
+  // Motion). `to` arrives viaExit-resolved from onStep.
+  doWarp(to, wp) {
+    const g = this.game;
+    if (to.map === 'center' && wp.via) {
+      this.centerReturn = wp.via;
+      // P1: persist the anchor — a save/reload inside the Center
+      // must still exit to THIS town's door-front.
+      g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+    }
+    if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
+    this.loadMap(to.map);
+    this.player.tx = to.x; this.player.ty = to.y;
+    this.player.px = to.x * TILE; this.player.py = to.y * TILE;
+    this.player.fx = to.x; this.player.fy = to.y;
+    this.trail = [];
+    this.partner.px = this.player.px; this.partner.py = this.player.py;
+    g.state.story.position = { map: to.map, x: to.x, y: to.y, dir: this.player.dir };
+    this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
+    g.state.meta.location = this.map.name;
+    g.audio.playMusic(this.map.music || 'route1-theme'); // no-op when the track is already playing
+    g.audio.playSfx('map-enter'); // visual twin: the location banner slide-in
+    g.autosave('area');
+  }
+
   onStep(x, y) {
     const g = this.game;
     const wp = this.warpAt(x, y);
@@ -83789,25 +84744,7 @@ class OverworldScene {
       if (wp.viaExit) to = this.mapId === 'mart'
         ? (this.martReturn || { map: 'viridian', x: 3, y: 9 })
         : this.centerExit();
-      if (to.map === 'center' && wp.via) {
-        this.centerReturn = wp.via;
-        // P1: persist the anchor — a save/reload inside the Center
-        // must still exit to THIS town's door-front.
-        g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
-      }
-      if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
-      this.loadMap(to.map);
-      this.player.tx = to.x; this.player.ty = to.y;
-      this.player.px = to.x * TILE; this.player.py = to.y * TILE;
-      this.player.fx = to.x; this.player.fy = to.y;
-      this.trail = [];
-      this.partner.px = this.player.px; this.partner.py = this.player.py;
-      g.state.story.position = { map: to.map, x: to.x, y: to.y, dir: this.player.dir };
-      this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
-      g.state.meta.location = this.map.name;
-      g.audio.playMusic(this.map.music || 'route1-theme'); // no-op when the track is already playing
-      g.audio.playSfx('map-enter'); // visual twin: the location banner slide-in
-      g.autosave('area');
+      this.startWarpFade(to, wp);
       return;
     }
     // Systems layer: events, safari steps, poison, water/cave encounters.
@@ -84180,6 +85117,17 @@ class OverworldScene {
         if (layers.length) { for (const spr of layers) r.blit(spr, x * T, y * T - Math.max(0, spr.height - T)); }
         else g.ctx2dfill('#101018', x * T, y * T, T, T); // void
       }
+    }
+    // Premium+ W7 (TX-6/PL-1): during the warp transition's door beat,
+    // the stepped door draws its W6 open frame with a warm interior
+    // light spill on the threshold cell south of it.
+    if (this.warpFx && this.warpFx.phase === 'door' && this.warpFx.doorKind) {
+      const fx = this.warpFx;
+      const spr = g.doorOpenSprite ? g.doorOpenSprite(fx.doorKind) : null;
+      const c = r.ctx;
+      c.fillStyle = 'rgba(255,214,130,0.35)';
+      c.fillRect(fx.doorX * T, (fx.doorY + 1) * T, T, T);
+      if (spr) r.blit(spr, fx.doorX * T, fx.doorY * T);
     }
     // Encounter rustle effect
     if (this.enc && this.enc.phase === 'rustle') {
@@ -86371,6 +87319,30 @@ Object.assign(OverworldScene.prototype, {
     }
   },
 
+  // ---------- Premium+ W7 (TX-7): foreground layer ----------
+  // Canopy overhangs + typed-building roof eaves, drawn by the scene
+  // AFTER the y-sorted character pass (overworld.mjs render hook), so
+  // the player and NPCs pass UNDER them. The per-cell rule is
+  // art.foregroundFor — the same function the W7 census measures, so
+  // shipped coverage == graded coverage. PL-3: visible-rect loop only,
+  // hash-picked pre-rendered canvases, zero per-frame allocation.
+  sysRenderForeground(r) {
+    const g = this.game;
+    if (!g.tileCache || !g.foregroundFor) return;
+    const T = TILE;
+    const vr = r.viewRect();
+    const x0 = Math.max(0, Math.floor(vr.x0 / T)), x1 = Math.min(this.w - 1, Math.ceil(vr.x1 / T));
+    const y0 = Math.max(0, Math.floor(vr.y0 / T)), y1 = Math.min(this.h - 1, Math.ceil(vr.y1 / T));
+    const kindAt = (tx, ty) => (ty < 0 || ty >= this.map.rows.length || tx < 0 || tx >= this.map.rows[ty].length)
+      ? null : g.tileKind(this.map.rows[ty][tx]);
+    for (let y = y0; y <= y1; y++) {
+      for (let x = x0; x <= x1; x++) {
+        const fg = g.foregroundFor(g.tileKind(this.map.rows[y][x]), x, y, kindAt);
+        if (fg) r.blit(fg, x * T - 8, y * T - 16);
+      }
+    }
+  },
+
   // ---------- objective (quest-driven HUD line) ----------
   sysObjective() {
     const g = this.game;
@@ -86462,6 +87434,14 @@ class Game {
   // with the tile resolver's variant at that position; cave context
   // selects the cave boulder set).
   boulderSprite(x, y, cave) { return boulderCanvasFor(this.tileCache, x, y, !!cave); }
+
+  // Premium+ W7 (TX-6/PL-1): the authored door-open frame for a door
+  // kind (W6 registry), used by the warp-fade engine's door beat.
+  doorOpenSprite(kind) { return doorOpenCanvas(doc, kind); }
+
+  // Premium+ W7 (TX-7): the foreground rule (canopy overhangs + roof
+  // eaves), shared verbatim with the W7 census.
+  foregroundFor(kind, x, y, kindAt) { return foregroundFor(this.tileCache, kind, x, y, kindAt); }
 
   buildSprites() {
     // Wave 3: real ART data replaces the forge placeholders (README wiring handoff).

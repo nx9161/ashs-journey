@@ -173,6 +173,26 @@ export const W6_RUG_KINDS = W6_KIND_DEFS.filter(([, c]) => c === 'rug').map(([k]
 export const W6_FLOOR_KINDS = W6_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const W6_WALL_KINDS = W6_KIND_DEFS.filter(([, c]) => c === 'wall' || c === 'dress').map(([k]) => k);
 export const W6_WALKABLE_CHARS = W6_KIND_DEFS.filter(([, c]) => c === 'rug' || c === 'floor').map(([k]) => W6_KIND_CHARS[k]);
+// ---- Premium+ W7 (TX-6): dressing & gate/arch kinds ----
+// Chars continue the W6 block at U+1E00+132 (W6 used idx 0..131).
+// Every W7 kind is class 'prop': a SOLID decorative object composited
+// over the ground it stands on (art.mjs resolver) — placements replace
+// walkable ground cells only and are BFS-gated so no route, door or
+// NPC can be sealed (see the W7 register entry). Dressing kinds are
+// the decorative scatter set of audit §11; gate kinds mark route exits.
+export const W7_DRESS_KINDS = [
+  'bench', 'planter', 'crates', 'barrel', 'signpost', 'well', 'postbox',
+  'bikestand', 'stall', 'haycart', 'sundial', 'birdbath', 'tub', 'sacks',
+  'pottedtree', 'waterpump',
+];
+export const W7_GATE_KINDS = ['gatepost', 'gatearch', 'routearch', 'vinearch'];
+export const W7_KIND_CHARS = {};
+[...W7_DRESS_KINDS, ...W7_GATE_KINDS].forEach((kind, i) => {
+  const ch = String.fromCodePoint(0x1E00 + 132 + i);
+  W7_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const W7_PROP_KINDS = [...W7_DRESS_KINDS, ...W7_GATE_KINDS];
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
 export const GYM_KIND_BY_TOWN = {
   viridian: 'gym-ground', pewter: 'gym-rock', cerulean: 'gym-water', vermilion: 'gym-volt',

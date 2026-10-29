@@ -134,7 +134,12 @@ const driver = `
   ok('starts in pallet', ow.mapId === 'pallet' && ow.player.tx === 7 && ow.player.ty === 7);
 
   // ----- 3. walk south to Route 1 (real movement, warp on step) -----
-  holdDir(ow, 'down', 32);
+  // W7 (TX-6): warps now play an authored ~180ms fade before the map
+  // swap (spec-mandated; reduced-motion restores instant). Hold 'down'
+  // until the fade completes on route1, then release — route1's return
+  // warp sits one tile below the landing, so a fixed-length hold now
+  // ping-pongs back to pallet. The assertion itself is unchanged.
+  { input.press('down'); let wg = 0; while (ow.mapId !== 'route1' && wg < 120) { tick(1); wg++; } input.release('down'); tick(2); }
   ok('walked + warped to route1', ow.mapId === 'route1');
   ok('player moved', ow.player.tx !== 7 || ow.player.ty !== 14 || true);
 
@@ -449,9 +454,12 @@ function canonicalPlaythrough(seed) {
   var ow = game.scenes.top;
   T.push('map=' + ow.mapId + ' at=' + ow.player.tx + ',' + ow.player.ty);
   T.push('party=' + game.state.party.map(function (m) { return m.speciesId + ':Lv' + m.level; }).join('|'));
-  input.press('down'); tk(32); input.release('down'); tk(6);
+  // W7 (TX-6): warp fade (~180ms) + return-warp one tile below the
+  // landing make fixed-length holds ping-pong; poll-release instead
+  // (see §3 note in the producer driver). Transcript tokens unchanged.
+  input.press('down'); var wg = 0; while (ow.mapId !== 'route1' && wg < 120) { tk(1); wg++; } input.release('down'); tk(2);
   T.push('map2=' + ow.mapId);
-  input.press('left'); tk(40); input.release('left'); tk(6);   // into the grass band
+  input.press('left'); wg = 0; while (ow.player.tx > 4 && wg < 120) { tk(1); wg++; } input.release('left'); tk(2);   // into the grass band
   var guard = 0;
   while (!(game.scenes.top instanceof BattleScene) && guard < 120) {
     guard++;
@@ -837,7 +845,7 @@ const qaDriver = `
   var gF = mkGame(9003);
   bootToOverworld(gF);
   // route1 has the encounter table (pallet does not): walk south through the warp
-  gF.input.press('down'); tk(gF, 32); gF.input.release('down'); tk(gF, 6);
+  gF.input.press('down'); { let wg = 0; while (gF.scenes.top.mapId !== 'route1' && wg < 120) { tk(gF, 1); wg++; } } gF.input.release('down'); tk(gF, 2); // W7 poll-release (see §3 note)
   var owF = gF.scenes.top;
   owF.startEncounter();
   var encMs = 0;
@@ -894,8 +902,8 @@ const qaDriver = `
   // GD: the scripted tutorial first-catch is not a random encounter — exclude
   // it from cadence sampling (its RUN option is disabled by design).
   g4.state.story.flags.tutorialDone = true;
-  g4.input.press('down'); tk(g4, 32); g4.input.release('down'); tk(g4, 6);
-  g4.input.press('left'); tk(g4, 40); g4.input.release('left'); tk(g4, 6);
+  g4.input.press('down'); { let wg = 0; while (ow4.mapId !== 'route1' && wg < 120) { tk(g4, 1); wg++; } } g4.input.release('down'); tk(g4, 2);
+  g4.input.press('left'); { let wg = 0; while (ow4.player.tx > 4 && wg < 120) { tk(g4, 1); wg++; } } g4.input.release('left'); tk(g4, 2); // W7 poll-release (see §3 note)
   var gaps = [], gap = 0, steps = 0, dir = 'up';
   while (gaps.length < 12 && steps < 900) {
     g4.input.press(dir); tk(g4, 9); g4.input.release(dir); tk(g4, 2);

@@ -1,0 +1,28 @@
+# Premium+ W7: TX-6 dressing: market stall
+PIX tile-prop-stall 16 16
+................
+................
+................
+..RRRFFFRRRFFF..
+..RRRFFFRRRFFF..
+..rrrrrrrrrrrr..
+..w..........w..
+..w..........w..
+..wAA.BB.AA.GG..
+..wAA.BB.AA.GG..
+..LLLLLLLLLLLL..
+..WWWWWWWWWWWW..
+..WWWWWWWWWWWW..
+..WWWWWWWWWWWW..
+................
+................
+PAL
+R #d84040 awning-red
+r #823936 awning-shade
+F #f5f0dc awning-cream
+W #5f5130 wood
+w #5a3a24 wood-dark
+L #8a6a48 wood-light
+A #e86a8a goods-pink
+B #f0e060 goods-yellow
+G #3e7a34 goods-green

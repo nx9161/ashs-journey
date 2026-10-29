@@ -70,6 +70,7 @@ export class OverworldScene {
     this.fishing = null;
     this.running = false;
     this.enc = null; // encounter sequence state
+    this.warpFx = null; // Premium+ W7 (TX-6): warp-fade transition state
     this.challenge = null; // Yellow-style trainer spot challenge (sight -> ! -> walk-up)
     // Premium+ W5 (LD-3): the y-sorted draw list — allocated ONCE here
     // and reused/truncated every frame (PL-3: no per-frame allocation).
@@ -374,6 +375,7 @@ export class OverworldScene {
   update(dt) {
     const g = this.game;
     if (g.ui.update(dt)) return; // modal UI consumes input
+    if (this.warpFx) { this.updateWarpFx(dt); return; } // W7: warp transition owns the tick
     if (this.enc) { this.updateEncounter(dt); return; }
     if (this.challenge) { this.updateChallenge(dt); return; } // input locked: a trainer is walking up
     if (this.checkSightLines()) return; // spotted this tick — challenge takes over
@@ -503,6 +505,85 @@ export class OverworldScene {
     this.puffs.push({ x: x * TILE, y: y * TILE, cls, t: 0 });
   }
 
+  // ---- Premium+ W7 (TX-6 / PL-1 / PL-2): the warp transition ----
+  // EVERY step-warp (doors, stairs, edge exits — 100% of the warps[]
+  // system) now plays an authored transition instead of an instant
+  // cut: when the stepped cell is a door kind with a W6 door-open
+  // frame, the door opens first (50ms, with a warm light spill), then
+  // the screen fades out (60ms) and back in (60ms) — 170ms total.
+  // Non-door warps fade out+in at 90ms each — 180ms. Both sit inside
+  // the spec's 150–250ms band and share the battle entry's timing
+  // language (PL-2): short ease-out phases, never linear.
+  // Reduced Motion zeroes the whole transition (the warp fires
+  // instantly, exactly as before W7) — the standing accessibility
+  // pattern: presentation honors settings.reducedMotion everywhere.
+  startWarpFade(to, wp) {
+    const g = this.game;
+    if (g.state.settings.reducedMotion) { this.doWarp(to, wp); return; }
+    const kind = g.tileKind(this.tileAt(this.player.tx, this.player.ty));
+    const door = g.doorOpenSprite ? (g.doorOpenSprite(kind) ? kind : null) : null;
+    this.warpFx = {
+      to, wp, phase: door ? 'door' : 'out', t: 0,
+      doorKind: door, doorX: this.player.tx, doorY: this.player.ty,
+      doorMs: door ? 50 : 0, outMs: door ? 60 : 90, inMs: door ? 60 : 90,
+    };
+    if (door) g.audio.playSfx('click'); // the door latch (visual twin: the open frame below)
+  }
+
+  updateWarpFx(dt) {
+    const g = this.game;
+    const fx = this.warpFx;
+    fx.t += dt * 1000;
+    const easeOut = (k) => 1 - (1 - k) * (1 - k);
+    if (fx.phase === 'door') {
+      g.renderer.fadeA = 0;
+      if (fx.t >= fx.doorMs) { fx.phase = 'out'; fx.t = 0; }
+      return;
+    }
+    if (fx.phase === 'out') {
+      const k = Math.min(1, fx.t / fx.outMs);
+      g.renderer.fadeColor = '#000';
+      g.renderer.fadeA = easeOut(k);
+      if (k >= 1) {
+        this.doWarp(fx.to, fx.wp);
+        fx.phase = 'in'; fx.t = 0;
+        g.renderer.fadeA = 1;
+      }
+      return;
+    }
+    // phase 'in'
+    const k = Math.min(1, fx.t / fx.inMs);
+    g.renderer.fadeA = 1 - easeOut(k);
+    if (k >= 1) { g.renderer.fadeA = 0; this.warpFx = null; }
+  }
+
+  // The warp itself — byte-for-byte the pre-W7 instant warp (via
+  // tickets, position, banner, music, autosave), now executed at the
+  // fade's midpoint by updateWarpFx (or immediately under Reduced
+  // Motion). `to` arrives viaExit-resolved from onStep.
+  doWarp(to, wp) {
+    const g = this.game;
+    if (to.map === 'center' && wp.via) {
+      this.centerReturn = wp.via;
+      // P1: persist the anchor — a save/reload inside the Center
+      // must still exit to THIS town's door-front.
+      g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
+    }
+    if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
+    this.loadMap(to.map);
+    this.player.tx = to.x; this.player.ty = to.y;
+    this.player.px = to.x * TILE; this.player.py = to.y * TILE;
+    this.player.fx = to.x; this.player.fy = to.y;
+    this.trail = [];
+    this.partner.px = this.player.px; this.partner.py = this.player.py;
+    g.state.story.position = { map: to.map, x: to.x, y: to.y, dir: this.player.dir };
+    this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
+    g.state.meta.location = this.map.name;
+    g.audio.playMusic(this.map.music || 'route1-theme'); // no-op when the track is already playing
+    g.audio.playSfx('map-enter'); // visual twin: the location banner slide-in
+    g.autosave('area');
+  }
+
   onStep(x, y) {
     const g = this.game;
     const wp = this.warpAt(x, y);
@@ -513,25 +594,7 @@ export class OverworldScene {
       if (wp.viaExit) to = this.mapId === 'mart'
         ? (this.martReturn || { map: 'viridian', x: 3, y: 9 })
         : this.centerExit();
-      if (to.map === 'center' && wp.via) {
-        this.centerReturn = wp.via;
-        // P1: persist the anchor — a save/reload inside the Center
-        // must still exit to THIS town's door-front.
-        g.state.story.lastCenter = { map: wp.via.map, x: wp.via.x, y: wp.via.y };
-      }
-      if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
-      this.loadMap(to.map);
-      this.player.tx = to.x; this.player.ty = to.y;
-      this.player.px = to.x * TILE; this.player.py = to.y * TILE;
-      this.player.fx = to.x; this.player.fy = to.y;
-      this.trail = [];
-      this.partner.px = this.player.px; this.partner.py = this.player.py;
-      g.state.story.position = { map: to.map, x: to.x, y: to.y, dir: this.player.dir };
-      this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
-      g.state.meta.location = this.map.name;
-      g.audio.playMusic(this.map.music || 'route1-theme'); // no-op when the track is already playing
-      g.audio.playSfx('map-enter'); // visual twin: the location banner slide-in
-      g.autosave('area');
+      this.startWarpFade(to, wp);
       return;
     }
     // Systems layer: events, safari steps, poison, water/cave encounters.
@@ -904,6 +967,17 @@ export class OverworldScene {
         if (layers.length) { for (const spr of layers) r.blit(spr, x * T, y * T - Math.max(0, spr.height - T)); }
         else g.ctx2dfill('#101018', x * T, y * T, T, T); // void
       }
+    }
+    // Premium+ W7 (TX-6/PL-1): during the warp transition's door beat,
+    // the stepped door draws its W6 open frame with a warm interior
+    // light spill on the threshold cell south of it.
+    if (this.warpFx && this.warpFx.phase === 'door' && this.warpFx.doorKind) {
+      const fx = this.warpFx;
+      const spr = g.doorOpenSprite ? g.doorOpenSprite(fx.doorKind) : null;
+      const c = r.ctx;
+      c.fillStyle = 'rgba(255,214,130,0.35)';
+      c.fillRect(fx.doorX * T, (fx.doorY + 1) * T, T, T);
+      if (spr) r.blit(spr, fx.doorX * T, fx.doorY * T);
     }
     // Encounter rustle effect
     if (this.enc && this.enc.phase === 'rustle') {

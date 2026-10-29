@@ -8,7 +8,7 @@ import { Input, KEYMAP, ACTIONS } from '../engine/input.mjs';
 import { AudioEngine } from '../engine/audio.mjs';
 import { makeRngStreams } from '../engine/rng.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
-import { speciesBattleArt, ashFrames, ashModeFrames, npcFrames, npcFramesFor, partnerHopFrames, partnerIdleFrames, partnerSleepFrames, partnerLookFrames, buildArtTileCache, tileSprite, resolveTileLayers, boulderCanvasFor, uiIcon } from '../engine/art.mjs';
+import { speciesBattleArt, ashFrames, ashModeFrames, npcFrames, npcFramesFor, partnerHopFrames, partnerIdleFrames, partnerSleepFrames, partnerLookFrames, buildArtTileCache, tileSprite, resolveTileLayers, boulderCanvasFor, uiIcon, doorOpenCanvas, foregroundFor } from '../engine/art.mjs';
 import { SceneStack } from './scenes.mjs';
 import { UI, typePill } from './ui.mjs';
 import { BootScene, DISCLAIMER_CREDITS } from './title.mjs';
@@ -101,6 +101,14 @@ export class Game {
   // with the tile resolver's variant at that position; cave context
   // selects the cave boulder set).
   boulderSprite(x, y, cave) { return boulderCanvasFor(this.tileCache, x, y, !!cave); }
+
+  // Premium+ W7 (TX-6/PL-1): the authored door-open frame for a door
+  // kind (W6 registry), used by the warp-fade engine's door beat.
+  doorOpenSprite(kind) { return doorOpenCanvas(doc, kind); }
+
+  // Premium+ W7 (TX-7): the foreground rule (canopy overhangs + roof
+  // eaves), shared verbatim with the W7 census.
+  foregroundFor(kind, x, y, kindAt) { return foregroundFor(this.tileCache, kind, x, y, kindAt); }
 
   buildSprites() {
     // Wave 3: real ART data replaces the forge placeholders (README wiring handoff).
