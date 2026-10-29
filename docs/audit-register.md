@@ -5488,3 +5488,187 @@ preserved, Stage F convention).
 - The stadium official is a gate + flavour NPC only; no League
   undercard / Elite-style gauntlet exists at Pummelo — Drake is
   the League, as in the anime.
+
+## Stage O3 — Pokemon 2000: the Shamouti Climax + the Lugia Legendary Arc (2026-10-29)
+
+Owner mission: the 2000 chain on O1's Shamouti geography and O2's
+quest chain — a storm trigger at 2 Orange badges, three titan quell
+battles, the Lugia climax, and a full Lugia legendary arc with the
+real catch at Shamouti Deep. Build + self-test + local commits
+only; NOT pushed, NOT deployed. `personal/` byte-identical
+(game.js sha256 f434ba63… verified before and after; fresh build =
+vercel + guest targets only, personal line in
+dist/content-hash.txt preserved, Stage F convention).
+
+### 1. Trigger design
+
+- **Gate**: first arrival on `shamouti` with **≥2 Orange badges**
+  (the Sea Ruby held — badges.orange is prefix-ordered, so length
+  ≥2 ⟺ Sea Ruby) and no `orange_2000_active` flag fires
+  `ev_orange_2000_storm` from the sysLoadMap Orange block (the O2
+  entry-scene idiom). At 0–1 badges Shamouti is O1's peaceful
+  festival island, untouched; the shrine caves hold dormant,
+  visit-able shrines (their altar event tiles are flag-gated on
+  `orange_2000_active`, so pre-storm they are inert flavour).
+- **The antagonist is an original character**: **Vance Halloway**, a
+  wealthy sky-collector who cages wonders for a frozen menagerie —
+  the Still Sky Collection. He is not a renamed film character; no
+  line in this stage is borrowed from any film or episode (all
+  writing original, anime as canon reference per ADR-015).
+- **Slowking** counsels from its rock: a new SLOWKING NPC at
+  shamouti (6,12), on the grass beside the west-shore rock tiles
+  (4–5,12) the plaza sign names ("Mind the Slowking rock"), with
+  base / storm / post-storm dialogue states; it also speaks in the
+  trigger and climax scenes (its shrine duty).
+- **Never a gym blocker**: nothing in the chain gates badges 3/4,
+  Drake, or `finishOrangeLeague`; the machine's `orange_champion`
+  flow is byte-identical. Proven both directions (suite B21–B24).
+
+### 2. Quest + arc shape
+
+- `q_orange_storm` APPENDED to ORANGE_QUESTS at the O2 seam (after
+  the League stage, deliberately: completion order in the log is
+  display only; the stage is playable from 2 badges). It carries
+  `titanCount: true` — the badgeCount idiom carried to flags: the
+  Quest Log row and detail card count `orange_2000_<bird>` flags
+  as "n/3 titans calmed", and the HUD objective leads with the
+  storm while it is live. Completion flag:
+  `orange_2000_storm_stilled`. All chain flags are region-scoped
+  story flags (`orange_2000_*`) — **no schema change**; legacy
+  saves at any Orange progress point fill and continue with zero
+  loss (suite A10/A11, B25).
+- **The Lugia legendary arc**: `arc_lugia_shamouti` —
+  "The Guardian of the Sea" — defined in ORANGE_LEGENDARY_ARCS
+  (story-orange.mjs), merged into LEGENDARY_ARCS by merge.mjs and
+  into the validator's quest table by gen-tables (tables
+  regenerated, a91f441a3f04…). It renders in the Quest Log's
+  LEGENDARY ARCS section exactly like Kanto's arcs, with six
+  requirement steps spelled out (Sea Ruby + storm → calm each
+  titan → the proving → return to the deep altar). It is a
+  DIFFERENT arc from the designed Johto `arc_lugia` stub, whose
+  prereqs and lair are untouched. The arc opens (`discovered`) at
+  climax completion and completes at the deep catch event.
+
+### 3. Event-battle mechanics (uncatchability + flee behaviour)
+
+- **Pattern used**: the shipped event-uncatchable idiom — event
+  `wildBattle` steps with `uncatchable: true`, exactly the Tower
+  Marowak ghost / First Movie pattern. In classic battles the ball
+  is deflected with "The ball passed right through it! This
+  presence cannot be caught." (the foe then acts; the ball is
+  spent — the ghost's own terms); in RT battles the ball is
+  refused unspent. The tests assert the refusal from the battle
+  message log + foe-not-caught + battle-continues (B06, B14).
+- **Quells**: Moltres / Zapdos / Articuno, Lv 50, at the
+  fire/lightning/ice shrine-cave altar tiles (6,2)+(7,2), gated
+  `flag: orange_2000_active` + `flagNot: orange_2000_<bird>`. Any
+  order. Winning sets only that bird's flag and clears its storm
+  cell in dialogue. These are NOT the Kanto arc birds: no
+  `arc_zapdos/arc_moltres/arc_articuno` flag or quest entry is
+  read or written anywhere in the stage (data-proven A07,
+  play-proven B07); dex registration is the wildBattle step's
+  standard 'seen' only.
+- **Flee**: the runSteps wildBattle guard (ADR-025 QA D1) advances
+  a chain only on (won && !fled), so a flee completes nothing —
+  the calm flag stays unset and `ev_<id>_done` stays unwritten.
+  For the cave altars the re-fire path is stepping back onto the
+  altar tile (proven B08→B09→B10); for the entry-gated scenes
+  (climax, catch) it is re-entering the map. Losing blacks out to
+  the nearest Center per shipped rules and likewise re-fires.
+- **The proving form — DECISION**: a straight win, the shipped
+  event idiom (no survive-N-turns variant was built). The climax
+  fires on Shamouti Shrine entry at 3/3 titans calmed
+  (sysLoadMap gate), plays the collector's final grab at the
+  shrine, then warps to **shamouti-deep** — the sealed altar under
+  deep water-light is where the sea answers — for the battle:
+  **Lugia Lv 55, uncatchable** ("the guardian tests the one who
+  calmed the titans"; movie canon: the guardian is not yours to
+  take). Winning stills the storm, collapses Halloway's folly
+  (he retreats, humbled, in original lines), sets
+  `orange_2000_storm_stilled`, completes the storm quest, opens
+  the Lugia arc, and warps the player back to Shamouti plaza.
+- **The catch**: entering `shamouti-deep` after the storm is
+  stilled fires `ev_orange_2000_lugia` — Lugia waits in still
+  water at the altar. Standard legendary pattern: Lv 55,
+  `legendary: true`, CATCHABLE. Flee-safe per the Kanto arc
+  idiom: the same (won && !fled) guard means a flee or a loss
+  leaves Lugia waiting and the event re-fires on the next
+  descent; a clean win (catch or KO, the Mewtwo idiom) completes
+  the arc. Catching registers the dex normally — Lugia #249,
+  national (proven B18: owned + dex.caught[249] + arc complete).
+
+### 4. NPC state variants
+
+- A generic `dialogueStates` mechanism: an NPC may carry
+  `[{flag?, flagNot?, dialogue}]`; the first matching entry
+  supplies the talk's lines. Resolution lives in ONE helper
+  (`npcDialogueLines` in overworld-systems) used by BOTH talk
+  paths — sysNpc's sayLines (ferry/mart flows) and the
+  plain-dialogue fallback in overworld.mjs — a split the test
+  suite caught and this stage fixed (elder/Slowking are
+  plain-dialogue NPCs; the ferryman rides sysNpc). NPCs without
+  the field are byte-identical.
+- Variants shipped (storm + post-storm, post-storm first):
+  SLOWKING (rock counsel / sun-patch calm), FEST ELDER MIRA
+  (festival in disarray / "Sixty festivals" restored), CAPT
+  MARINA-PUMM the dock ferryman (foul-weather runs / glass sea —
+  the ferry menu still opens after her lines), SHRINE KEEPER ANO
+  (candles won't stay lit / the song is tonight).
+
+### 5. Order-independence proofs (hard gates)
+
+- (a) **League first**: Drake → machine card + Johto directive →
+  homecoming (hook delivered, directive cleared, sealed Johto
+  does not advance story.arc) → return to Shamouti → storm
+  trigger, 3 quells, climax, and the deep catch ALL complete
+  (B21–B23, incl. dex 249). Regions stay visitable forever, so
+  the arc stays completable after the League + homecoming.
+- (b) **Storm first**: the whole climax completes at 2 badges,
+  then Rudy's gym plays and awards normally (B24).
+- (c) **Fire-once**: trigger, climax, and catch scenes are each
+  flag-gated; re-entries are quiet (B03, B19).
+- (d) **No Kanto arc contamination**: A07 (data) + B07 (play).
+- (e) **Legacy saves**: flags-only state, no schema change;
+  pre-O3 mid-Orange saves migrate + validate with zero loss;
+  the completed-chain bundle save round-trips both validators
+  (A10, A11, B25).
+
+### 6. Verification (all headless, real bundles)
+
+- tests/orange-climax-checks.mjs (NEW): **42/42** — Part A data /
+  validator / placement units (quest shape, battle law, arc
+  entry, tables sync, legacy fill, completed-save validation,
+  Slowking placement, cave tiles, Shamouti-cluster BFS). Part B
+  drives the real bundle: trigger gating (1 badge quiet / 2
+  storm), Slowking storm counsel, Moltres ball-refusal + win,
+  Zapdos flee → re-fire → win, climax gate at 2/3, the proving
+  (deep geography + ball refusal + win), post-storm variants on
+  all key NPCs, the deep catch (dex 249), Quest Log n/3 +
+  LEGENDARY ARCS listing, and both order-independence paths.
+- Battery: campaign-smoke **24/24**, arc-foundation **47/47**,
+  orange-story **38/38** (A01 updated in place for the appended
+  4th quest stage — the count did not move), cheat-shop **44/44**,
+  fidelity **35/35**, validator **51/51** + fuzz 2000/2000,
+  qa-changed-flows failures exactly **{b2, d9}**, Orange sweep
+  **30/30** (the 30 Orange maps' census unchanged; the Shamouti
+  cluster's walkability is BFS-proven in A16 — Slowking's rock
+  position blocks nothing, every cave entry reaches both altar
+  tiles, shrine → deep → altar all connected).
+
+### 7. Leftovers, named
+
+- Slowking's overworld sprite: the NPC carries art kind
+  `slowking`, for which no authored overworld frames exist, so
+  the engine's documented forge fallback renders a stand-in in
+  its authored pink/cream palette (the same fallback class as
+  un-arted species battle sprites). A dedicated overworld
+  Slowking sprite is a world-art wave item, not this stage's.
+- The storm is carried in dialogue, flags, and the HUD objective;
+  there is no global weather/ambience tile state (no such system
+  exists in the engine) — storm cells "clear" in scene text per
+  titan, as the register records.
+- Halloway's sky-barge is scene dressing (dialogue), not a map
+  object; he has no post-game rematch or menagerie content.
+- The O2 register's GS Ball payoff note stands: Ivy's scene still
+  only promises the ball "matters later" — its Johto payoff is
+  the sealed arc's business, not O3's.
