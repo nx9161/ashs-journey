@@ -99,6 +99,15 @@ export const ITEMS = {
   marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Saffron. Up to Lv70 obey.' },
   volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Cinnabar. Special rises.' },
   earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Viridian Gym. All Pokemon obey. The League gate opens.' },
+  // Orange Crew badges (Stage O2): the Kanto representation exactly —
+  // a key-pocket ITEMS row per badge, the id in badges.orange, and the
+  // badge_<root> story flag (winTrainer / cheatClaimBadge write all
+  // three from the trainer def / claim, never a parallel shape).
+  coraleyebadge: { id: 'coraleyebadge', name: 'Coral-Eye Badge', pocket: 'key', desc: 'From Cissy of Mikan. Won on her water range — aim first, battle second.' },
+  searubybadge: { id: 'searubybadge', name: 'Sea Ruby Badge', pocket: 'key', desc: 'From Danny of Navel. The climb was the first half of the challenge.' },
+  spikeshellbadge: { id: 'spikeshellbadge', name: 'Spike Shell Badge', pocket: 'key', desc: 'From Rudy of Trovita. He tests a team type by type, then dances.' },
+  jadestarbadge: { id: 'jadestarbadge', name: 'Jade Star Badge', pocket: 'key', desc: 'From Luana of Kumquat. Her double battle: two pairs, back to back, no rest.' },
+  winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Orange League Winner\'s Trophy, presented at Pummelo Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE
   // in the shop, with no effects of any kind.
@@ -150,5 +159,20 @@ for (const k of Object.values(KEEPSAKES)) {
     ...(k.price ? { price: k.price, minBadges: k.minBadges || 0 } : {}),
   };
 }
+
+// ---------- Badge sets (Stage O2) ----------
+// The canonical earn order per badge set, in ONE place: the leader
+// award path (battle.mjs, via each trainer def's badge + badgeSet),
+// the Cheat Terminal's prefix-complete claim rule, and the server
+// validator's prefix rule (tools/api-scripts/gen-tables.mjs emits
+// badgeSequences FROM this table) all read these lists — a badge set
+// can never drift between the game, the shop, and the cloud.
+// Root flag convention: badge_<id minus the 'badge' suffix>
+// (badge_coraleye, badge_boulder, ...), exactly as Kanto shipped.
+export const BADGE_SETS = {
+  kanto: ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'],
+  orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
+};
+export const ORANGE_BADGES = BADGE_SETS.orange;
 
 export const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key', 'keepsakes'];

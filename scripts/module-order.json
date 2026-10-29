@@ -27,6 +27,7 @@
  "src/data/story.mjs",
  "src/data/arcs.mjs",
  "src/data/story-kanto.mjs",
+ "src/data/story-orange.mjs",
  "src/data/quests.mjs",
  "src/data/merge.mjs",
  "src/engine/fx.mjs",

@@ -3653,6 +3653,18 @@ export const MAPS5 = {
     ],
     "npcs": [
       {
+        "x": 8,
+        "y": 3,
+        "name": "PROF. IVY",
+        "art": "lady",
+        "skin": "#f0c8a0",
+        "shirt": "#5a3a8a",
+        "pants": "#e8e0d0",
+        "hair": "#3a5a2a",
+        "dialogue": ["The GS Ball rides with you now, trainer. Whatever hands finally open it, I suspect they will be old, patient, and far inland.", "My reef transect can wait. Some mysteries only visit a lab once."],
+        "orange": "ivy"
+      },
+      {
         "x": 5,
         "y": 8,
         "name": "AIDE SOLA",
@@ -3714,10 +3726,23 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "MIKAN GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. The Coral-Eye challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "MIKAN GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. Cissy's Coral-Eye challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 2,
+        "name": "CISSY",
+        "art": "lady",
+        "skin": "#f0c8a0",
+        "shirt": "#e86a8a",
+        "pants": "#2a6a8a",
+        "hair": "#c03a2a",
+        "dialogue": ["The lagoon is calm today. If your aim ever needs a tune-up, my range is your range, Coral-Eye holder."],
+        "trainer": "cissy",
+        "orange": "cissy"
+      },
       {
         "x": 3,
         "y": 7,
@@ -3728,7 +3753,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -3780,10 +3805,23 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "NAVEL GYM — The floor tilts like the mountain outside; frost slicks the high lane. The Sea Ruby challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "NAVEL GYM — The floor tilts like the mountain outside; frost slicks the high lane. Danny's Sea Ruby challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 7,
+        "y": 2,
+        "name": "DANNY",
+        "art": "hiker",
+        "skin": "#d8a878",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a2a2a",
+        "dialogue": ["The mountain misses you already. It says so in avalanches. Small ones. Friendly ones."],
+        "trainer": "danny",
+        "orange": "danny"
+      },
       {
         "x": 3,
         "y": 7,
@@ -3794,7 +3832,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -3846,10 +3884,23 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "TROVITA GYM — A rocky arena ringed with carved spike stone. The Spike Shell challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "TROVITA GYM — A rocky arena ringed with carved spike stone. Rudy's Spike Shell challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 2,
+        "name": "RUDY",
+        "art": "gent",
+        "skin": "#e8b888",
+        "shirt": "#c05a7a",
+        "pants": "#2a2a3a",
+        "hair": "#7a2a3a",
+        "dialogue": ["Ah, the Spike Shell holder returns! Trovita still hums the rhythm of our battle."],
+        "trainer": "rudy",
+        "orange": "rudy"
+      },
       {
         "x": 3,
         "y": 7,
@@ -3860,7 +3911,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -3912,10 +3963,23 @@ export const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "KUMQUAT GYM — A resort arena: palm shade, polished stone, doubles under the sun. The Jade Star challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "KUMQUAT GYM — A resort arena: palm shade, polished stone, doubles under the sun. Luana's Jade Star challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 2,
+        "name": "LUANA",
+        "art": "lady",
+        "skin": "#f0c8a0",
+        "shirt": "#7a3a9a",
+        "pants": "#e8d8a0",
+        "hair": "#4a2a1a",
+        "dialogue": ["Darling! The Jade Star holder, in my resort. Both pairs still talk about that match."],
+        "trainer": "luana_a",
+        "orange": "luana"
+      },
       {
         "x": 3,
         "y": 7,
@@ -3926,7 +3990,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -3987,10 +4051,35 @@ export const MAPS5 = {
       {
         "x": 11,
         "y": 5,
-        "text": "PUMMELO STADIUM — The Orange League arena. The champion's battle is staged here. (It arrives with the Orange story stage.)"
+        "text": "PUMMELO STADIUM — The Orange League arena. Drake, the Orange League champion, waits on this floor."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 12,
+        "name": "LEAGUE OFFICIAL",
+        "art": "gent",
+        "skin": "#f0c8a0",
+        "shirt": "#2a4a7a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": ["Orange League rules, trainer — the stadium doors open at four island badges."],
+        "orange": "stadium-official"
+      },
+      {
+        "x": 11,
+        "y": 9,
+        "name": "DRAKE",
+        "art": "gent",
+        "skin": "#d8a878",
+        "shirt": "#8a2a2a",
+        "pants": "#2a2a3a",
+        "hair": "#3a2a1a",
+        "dialogue": ["Still champion. The trophy case by the door has a new centrepiece — go and look at it with my blessing."],
+        "trainer": "drake",
+        "orange": "drake"
+      },
       {
         "x": 8,
         "y": 11,

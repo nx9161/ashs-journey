@@ -133,6 +133,17 @@ export const MAP_GROUND = {
   league: 'open',
   ceruleancave: 'rubble',
   newisland: 'tide',
+  // Stage O2: Orange gym/stadium signature Grounds (existing 15 only —
+  // no new Grounds this stage): Cissy's lagoon range rides the Tide,
+  // Danny's summit gym the Frost, Rudy's spike-stone arena the Rubble,
+  // Luana's resort arena the Mind (her Alakazam's home turf); the
+  // stadium and Ivy's lab take Open, as the Indigo League floor does.
+  'ivy-lab': 'open',
+  'mikan-gym': 'tide',
+  'navel-gym': 'frost',
+  'trovita-gym': 'rubble',
+  'kumquat-gym': 'mind',
+  'pummelo-stadium': 'open',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',
