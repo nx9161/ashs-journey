@@ -10,6 +10,15 @@
 // Pallet's live roster, the ferry gate line with embark_frontier
 // deleted and NO warp (the crossing itself is F1's proof —
 // frontierhub does not exist yet), and the live Cheat Terminal stock.
+// Part A2 (F1): the 11 maps8 maps — hub idioms (shared Center/Mart
+// WITH via, dock start, CAPT BREAKWATER + SCOTT), the receptionist
+// frontier:<facilityId> markers naming facility + Brain, the Pike
+// one-way geometry, the Pyramid dark-floor cycle. Part C (F1): the
+// built bundle — THE CROSSING both ways (post-arm outbound; return
+// with embark_frontier DELETED still sailing, NO-SOFT-LOCK) and
+// walking drives with NO position seeding (dock -> all 7 facility
+// doors + Center/Mart -> inside -> exit warp -> hub; the full Pike
+// run on foot; the Pyramid floor cycle on foot).
 // Run: node tests/frontier-checks.mjs   (exit 1 on any failure)
 
 import { dirname, join } from 'node:path';
@@ -181,6 +190,66 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     'components=' + comps.map((c) => c.length).join(','));
 }
 
+// ================= Part A2: F1 maps (pure) =================
+const { MAPS8 } = await import(join(ROOT, 'src/data/maps8.mjs'));
+const F1_IDS = ['frontierhub', 'frontier-tower', 'frontier-factory', 'frontier-arena', 'frontier-dome', 'frontier-pike', 'frontier-palace', 'frontier-pyramid', 'frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'];
+const BRAIN = { tower: 'Anabel', factory: 'Noland', arena: 'Greta', dome: 'Tucker', pike: 'Lucy', palace: 'Spencer', pyramid: 'Brandon' };
+const FAC_NAME = { tower: 'Battle Tower', factory: 'Battle Factory', arena: 'Battle Arena', dome: 'Battle Dome', pike: 'Battle Pike', palace: 'Battle Palace', pyramid: 'Battle Pyramid' };
+{
+  ok('A22 MAPS8 exports exactly the 11 F1 maps; merge.mjs folds MAPS8 into MAPS and module-order.json loads maps8.mjs after maps7.mjs (the bundle-side merge is proven live in Part C)',
+    JSON.stringify(Object.keys(MAPS8)) === JSON.stringify(F1_IDS)
+    && readFileSync(join(ROOT, 'src/data/merge.mjs'), 'utf8').includes('MAPS7, MAPS8')
+    && (() => { const order = JSON.parse(readFileSync(join(ROOT, 'scripts/module-order.json'), 'utf8')); return order.indexOf('src/data/maps8.mjs') === order.indexOf('src/data/maps7.mjs') + 1; })());
+  const hub = MAPS8.frontierhub;
+  ok('A23 hub: 40x24 outdoor, weather clear, NO wild encounters, start (18,21) on the dock pier (boardwalk); CAPT BREAKWATER (ferry pallet, ferryArc frontier) and SCOTT stand on it',
+    hub.rows.length === 24 && hub.rows[0].length === 40 && hub.weather === 'clear' && hub.encounters === null
+    && hub.start.x === 18 && hub.start.y === 21
+    && hub.npcs.some((n) => n.name === 'CAPT BREAKWATER' && n.ferry === 'pallet' && n.ferryArc === 'frontier')
+    && hub.npcs.some((n) => n.name === 'SCOTT' && Array.isArray(n.dialogue) && n.dialogue.length >= 2));
+  const doorTo = (mid) => hub.warps.filter((w) => w.to.map === mid);
+  ok('A24 hub Center/Mart doors ride the shared interiors WITH via (decision #9): center warps -> center (4,4) via the hub front tiles; mart warps -> mart (5,5) via the hub front tiles',
+    doorTo('center').length === 2 && doorTo('center').every((w) => w.to.x === 4 && w.to.y === 4 && w.via && w.via.map === 'frontierhub' && w.via.x === w.x && w.via.y === w.y + 1)
+    && doorTo('mart').length === 2 && doorTo('mart').every((w) => w.to.x === 5 && w.to.y === 5 && w.via && w.via.map === 'frontierhub' && w.via.x === w.x && w.via.y === w.y + 1));
+  ok('A25 every facility door warp lands exactly on its interior start tile',
+    ['frontier-tower', 'frontier-factory', 'frontier-arena', 'frontier-dome', 'frontier-pike', 'frontier-palace', 'frontier-pyramid']
+      .every((mid) => doorTo(mid).length >= 1 && doorTo(mid).every((w) => w.to.x === MAPS8[mid].start.x && w.to.y === MAPS8[mid].start.y)));
+  let recepOk = true, recepDetail = '';
+  for (const fac of Object.keys(BRAIN)) {
+    const m = MAPS8['frontier-' + fac];
+    const clerks = (m.npcs || []).filter((n) => n.frontier === fac);
+    if (clerks.length !== 1) { recepOk = false; recepDetail = fac + ' clerks=' + clerks.length; break; }
+    const text = clerks[0].dialogue.join(' ');
+    if (!text.includes(FAC_NAME[fac]) || !text.includes(BRAIN[fac])) { recepOk = false; recepDetail = fac + ' dialogue missing facility/Brain'; break; }
+    if ((m.npcs || []).length !== 1) { recepOk = false; recepDetail = fac + ' has extra NPCs (Brain dais must be EMPTY)'; break; }
+    if (!m.rows.some((r) => r.includes('λ'))) { recepOk = false; recepDetail = fac + ' has no podium dais'; break; }
+    if (m.encounters !== null) { recepOk = false; recepDetail = fac + ' encounters not null'; break; }
+  }
+  ok('A26 each facility interior: exactly ONE receptionist carrying frontier:<facilityId>, greeting dialogue naming the facility and its Brain, an EMPTY podium dais (no other NPCs), no encounters', recepOk, recepDetail);
+  const pike = MAPS8['frontier-pike'];
+  let pikeOk = pike.warps.length === 27;
+  for (let i = 1; i <= 7 && pikeOk; i++) {
+    const top = 10 + (7 - i) * 9, nxt = i === 7 ? 8 : (10 + (6 - i) * 9) + 7;
+    for (const dx of [3, 7, 11]) {
+      const w = pike.warps.find((x) => x.x === dx && x.y === top);
+      if (!w || w.to.map !== 'frontier-pike' || w.to.x !== dx || w.to.y !== nxt) pikeOk = false;
+    }
+  }
+  ok('A27 pike geometry: 27 warps; each chamber\'s 3 north doors (x=3/7/11) warp to the NEXT chamber\'s entry row at the same spread x (chamber 7 -> the dais entry row y=8); dais exits (7,0)/(8,0) warp to the hall (7,81); hall exits warp to the hub',
+    pikeOk && [7, 8].every((x) => { const w = pike.warps.find((v) => v.x === x && v.y === 0); return w && w.to.map === 'frontier-pike' && w.to.x === 7 && w.to.y === 81; })
+    && [7, 8].every((x) => { const w = pike.warps.find((v) => v.x === x && v.y === 82); return w && w.to.map === 'frontierhub'; }));
+  const cyc = { 'frontier-pyramid-a': 'frontier-pyramid-b', 'frontier-pyramid-b': 'frontier-pyramid-c', 'frontier-pyramid-c': 'frontier-pyramid-a' };
+  ok('A28 pyramid floors: dark + indoor (the shipped cave-light field), exit warp cycles a->b->c->a onto the next floor\'s start, 3 static item balls each with real item ids; the entrance hall\'s inner doors warp to floor A\'s start',
+    Object.entries(cyc).every(([id, nxt]) => { const m = MAPS8[id];
+      return m.dark === true && m.indoor === true && m.items.length === 3 && m.items.every((it) => ITEMS[it.item])
+        && m.warps.length === 1 && m.warps[0].to.map === nxt && m.warps[0].to.x === MAPS8[nxt].start.x && m.warps[0].to.y === MAPS8[nxt].start.y; })
+    && MAPS8['frontier-pyramid'].warps.filter((w) => w.to.map === 'frontier-pyramid-a')
+      .every((w) => w.to.x === MAPS8['frontier-pyramid-a'].start.x && w.to.y === MAPS8['frontier-pyramid-a'].start.y));
+  ok('A29 music mirrors shipped interiors: hub pallet-theme; the seven facility interiors gym-theme; the dark floors pewter-theme (existing theme ids only)',
+    hub.music === 'pallet-theme'
+    && ['frontier-tower', 'frontier-factory', 'frontier-arena', 'frontier-dome', 'frontier-pike', 'frontier-palace', 'frontier-pyramid'].every((id) => MAPS8[id].music === 'gym-theme')
+    && ['frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'].every((id) => MAPS8[id].music === 'pewter-theme'));
+}
+
 // ================= Part B: headless bundle =================
 const { buildGameJs } = await import(join(ROOT, 'scripts/build.mjs'));
 const gameJs = buildGameJs();
@@ -298,5 +367,202 @@ if (QB) {
   ok('B00 driver completed with no internal failures', QB.failures === 0, QB.failures + ' failures');
 }
 
-console.log('\nFRONTIER (F0) TOTAL: ' + pass + '/' + (pass + fail) + ' passed');
+// ================= Part C: F1 bundle — THE CROSSING + walking drives =================
+const driverC = `
+;(function () {
+  var Q = { results: [], failures: 0 };
+  function ok(name, cond, extra) {
+    Q.results.push({ name: name, pass: !!cond });
+    if (!cond) { Q.failures++; console.error('FR-FAIL ' + name + (extra ? ' — ' + extra : '')); }
+    else console.log('fr-pass ' + name);
+  }
+  function mkGame(seed) {
+    globalThis.__QFRESET__();
+    globalThis.__SEED__ = seed;
+    var g = new Game(null);
+    g.state.settings.battleStyle = 'classic';
+    g.ui.init(); g.input.bindKeyboard(); g.buildSprites(); g.applyLayout();
+    return g;
+  }
+  function tk(g, n) { g.loop.stepTicks(n || 2); }
+  function pA(g) { g.input.inject('a'); tk(g, 2); g.input.release('a'); }
+  function drain(g) { var n = 0; while ((g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) && n < 500) { pA(g); n++; } }
+  function boot(g) {
+    g.scenes.push(new BootScene());
+    g.loop.stepMs(3100); tk(g, 2);
+    pA(g); pA(g); pA(g);
+    drain(g); g.ui.debugChoose(0); tk(g, 3); drain(g);
+    return g.scenes.top;
+  }
+  function gotoMap(g, map, x, y) {
+    g.state.story.position = { map: map, x: x, y: y, dir: 'down' };
+    var ow = new OverworldScene();
+    g.scenes.replace(ow); ow.enter(); tk(g, 4);
+    return ow;
+  }
+  function pick(g, value) {
+    var i = g.ui.menu.items.findIndex(function (it) { return it.value === value; });
+    if (i < 0) return false;
+    g.ui.debugChoose(i); tk(g, 3);
+    return true;
+  }
+  function advanceToMenu(g) {
+    var n = 0;
+    while (!g.ui.menuOpen && n++ < 200) {
+      if (g.ui.dialogueOpen) { pA(g); } else { tk(g, 2); }
+    }
+    return g.ui.menuOpen;
+  }
+  // ---- walking (no position seeding): BFS over the live map, then
+  // real D-pad steps, one tile at a time ----
+  function bfsDirs(ow, tx, ty) {
+    var m = ow.map;
+    var blocked = {};
+    (m.npcs || []).forEach(function (n) { blocked[n.x + ',' + n.y] = 1; });
+    var sx = ow.player.tx, sy = ow.player.ty;
+    var prev = {}; prev[sx + ',' + sy] = null;
+    var q = [[sx, sy]];
+    while (q.length) {
+      var cur = q.shift(), x = cur[0], y = cur[1];
+      if (x === tx && y === ty) break;
+      var DIRS = [[0, -1, 'up'], [0, 1, 'down'], [-1, 0, 'left'], [1, 0, 'right']];
+      for (var di = 0; di < 4; di++) {
+        var nx = x + DIRS[di][0], ny = y + DIRS[di][1], k = nx + ',' + ny;
+        if (k in prev) continue;
+        if (ny < 0 || ny >= m.rows.length || nx < 0 || nx >= m.rows[ny].length) continue;
+        var ch = m.rows[ny][nx];
+        if (!WALKABLE.has(ch) && ch !== '~' && ch !== 'W') continue;
+        if (blocked[k] && !(nx === tx && ny === ty)) continue;
+        prev[k] = { from: x + ',' + y, dir: DIRS[di][2] };
+        q.push([nx, ny]);
+      }
+    }
+    if (!((tx + ',' + ty) in prev)) return null;
+    var dirs = [], k = tx + ',' + ty;
+    while (prev[k]) { dirs.unshift(prev[k].dir); k = prev[k].from; }
+    return dirs;
+  }
+  function stepDir(g, dir) {
+    var ow = g.scenes.top;
+    var px = ow.player.tx, py = ow.player.ty, pm = g.state.story.position.map;
+    g.input.inject(dir);
+    var n = 0;
+    while (n++ < 80) {
+      g.loop.stepTicks(1);
+      var now = g.scenes.top;
+      if (!now || !now.player) break;
+      if (now.player.tx !== px || now.player.ty !== py || g.state.story.position.map !== pm) break;
+    }
+    g.input.release(dir); tk(g, 1);
+  }
+  function walkTo(g, tx, ty) {
+    var ow = g.scenes.top;
+    var dirs = bfsDirs(ow, tx, ty);
+    if (!dirs) return false;
+    var onWarp = (ow.map.warps || []).some(function (w) { return w.x === tx && w.y === ty; });
+    var startTuple = pos(g).map + ',' + pos(g).x + ',' + pos(g).y;
+    for (var i = 0; i < dirs.length; i++) stepDir(g, dirs[i]);
+    if (onWarp) {
+      // the warp fires only once the step onto the tile settles —
+      // wait for the position tuple to change (the warp landing)
+      var n = 0;
+      while (n++ < 100 && (pos(g).map + ',' + pos(g).x + ',' + pos(g).y) === startTuple) tk(g, 1);
+    }
+    tk(g, 3);
+    return true;
+  }
+  function pos(g) { return g.state.story.position; }
+
+  var g = mkGame(702); boot(g);
+  var st = g.state;
+
+  // ---- THE CROSSING (outbound, post-arm fixture) ----
+  st.story.flags.embark_frontier = true;
+  var ow = gotoMap(g, 'pallet', 7, 9); drain(g);
+  var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT FRONTIER'; });
+  ow.sysNpc(capt); tk(g, 3);
+  var menuOk = advanceToMenu(g);
+  ok('C01 THE CROSSING (outbound): with embark_frontier armed, CAPT FRONTIER offers the sail menu',
+    menuOk === true, 'menuOpen=' + g.ui.menuOpen);
+  pick(g, 'yes'); drain(g); tk(g, 4);
+  ok('C02 the crossing lands on frontierhub\\'s dock start (18,21) after the en-route card, with reachedarc_frontier set',
+    pos(g).map === 'frontierhub' && pos(g).x === 18 && pos(g).y === 21 && st.story.flags.reachedarc_frontier === true,
+    'pos=' + JSON.stringify(pos(g)) + ' reached=' + st.story.flags.reachedarc_frontier);
+
+  // ---- walking drives: dock -> each facility door -> inside -> exit -> hub ----
+  var DRIVES = [
+    ['frontier-tower', 4, 3, 9, 14], ['frontier-factory', 11, 3, 9, 13],
+    ['frontier-arena', 18, 3, 8, 12], ['frontier-dome', 26, 3, 11, 16],
+    ['frontier-palace', 12, 12, 9, 13], ['frontier-pyramid', 18, 12, 8, 11],
+    ['center', 34, 3, 4, 5], ['mart', 25, 12, 5, 6],
+  ];
+  DRIVES.forEach(function (d, idx) {
+    var mid = d[0];
+    var walked = walkTo(g, d[1], d[2]);
+    ok('C1' + idx + ' walk dock/plaza -> ' + mid + ' door and step inside (live bundle, no seeding)',
+      walked && pos(g).map === mid, 'walked=' + walked + ' pos=' + JSON.stringify(pos(g)));
+    var back = walkTo(g, d[3], d[4]);
+    ok('C2' + idx + ' ' + mid + ': exit warp walked -> back on frontierhub',
+      back && pos(g).map === 'frontierhub', 'walked=' + back + ' pos=' + JSON.stringify(pos(g)));
+  });
+
+  // ---- pike: door -> hall -> the full one-way run -> dais exit -> hub ----
+  walkTo(g, 4, 12);
+  ok('C30 walk -> Battle Pike door, inside the entrance hall at (7,81)',
+    pos(g).map === 'frontier-pike' && pos(g).x === 7 && pos(g).y === 81, 'pos=' + JSON.stringify(pos(g)));
+  walkTo(g, 7, 73);
+  ok('C31 hall run doors -> chamber 1 entry row (7,71)', pos(g).map === 'frontier-pike' && pos(g).x === 7 && pos(g).y === 71, 'pos=' + JSON.stringify(pos(g)));
+  var tops = [64, 55, 46, 37, 28, 19, 10];
+  var runOk = true, runDetail = '';
+  for (var ci = 0; ci < 7; ci++) {
+    if (!walkTo(g, 3, tops[ci])) { runOk = false; runDetail = 'no path in chamber ' + (ci + 1); break; }
+    var want = ci === 6 ? [3, 8] : [3, tops[ci + 1] + 7]; // entry row of next chamber / dais entry row
+    if (pos(g).x !== want[0] || pos(g).y !== want[1]) { runOk = false; runDetail = 'after chamber ' + (ci + 1) + ' door pos=' + JSON.stringify(pos(g)) + ' want ' + want.join(','); break; }
+  }
+  ok('C32 the Pike run walked end-to-end: left door of every chamber -> next chamber entry (x=3), chamber 7 -> the dais entry row (3,8)', runOk, runDetail);
+  walkTo(g, 7, 0);
+  ok('C33 dais exit door -> back in the entrance hall (7,81)', pos(g).map === 'frontier-pike' && pos(g).x === 7 && pos(g).y === 81, 'pos=' + JSON.stringify(pos(g)));
+  walkTo(g, 7, 82);
+  ok('C34 hall exit warp -> back on frontierhub', pos(g).map === 'frontierhub', 'pos=' + JSON.stringify(pos(g)));
+
+  // ---- pyramid floor cycle, walked ----
+  walkTo(g, 18, 12); walkTo(g, 8, 0);
+  ok('C40 Pyramid inner doors -> floor A entry (10,14)', pos(g).map === 'frontier-pyramid-a' && pos(g).x === 10 && pos(g).y === 14, 'pos=' + JSON.stringify(pos(g)));
+  walkTo(g, 10, 0);
+  ok('C41 floor A exit (lit doorway) -> floor B entry (3,14)', pos(g).map === 'frontier-pyramid-b' && pos(g).x === 3 && pos(g).y === 14, 'pos=' + JSON.stringify(pos(g)));
+  walkTo(g, 18, 0);
+  ok('C42 floor B exit -> floor C entry (18,14)', pos(g).map === 'frontier-pyramid-c' && pos(g).x === 18 && pos(g).y === 14, 'pos=' + JSON.stringify(pos(g)));
+  walkTo(g, 3, 0);
+  ok('C43 floor C exit -> floor A entry (10,14): the a->b->c->a cycle closes on foot', pos(g).map === 'frontier-pyramid-a' && pos(g).x === 10 && pos(g).y === 14, 'pos=' + JSON.stringify(pos(g)));
+
+  // ---- THE CROSSING (return): embark deleted, still sails (NO-SOFT-LOCK) ----
+  ow = gotoMap(g, 'frontierhub', 18, 20); drain(g);
+  var captB = ow.map.npcs.find(function (n) { return n.name === 'CAPT BREAKWATER'; });
+  ok('C50 CAPT BREAKWATER stands on the hub pier roster (ferry pallet, ferryArc frontier)',
+    !!captB && captB.ferry === 'pallet' && captB.ferryArc === 'frontier');
+  delete st.story.flags.embark_frontier;
+  ow.sysNpc(captB); tk(g, 3);
+  var menuOkB = advanceToMenu(g);
+  ok('C51 return leg: with embark_frontier DELETED, CAPT BREAKWATER still offers the sail menu (reachedarc_frontier carries it — unconditional return)',
+    menuOkB === true && !st.story.flags.embark_frontier, 'menuOpen=' + g.ui.menuOpen);
+  pick(g, 'yes'); drain(g); tk(g, 4);
+  ok('C52 the return crossing lands back on Pallet', pos(g).map === 'pallet', 'pos=' + JSON.stringify(pos(g)));
+
+  globalThis.__FRC__ = Q;
+})();
+`;
+let QC = null;
+try {
+  const runnerC = new Function(gameJs + driverC + '\n;return globalThis.__FRC__;');
+  QC = runnerC();
+} catch (e) {
+  console.log('FAIL  Part C bundle evaluation threw: ' + (e && e.stack || e));
+  fail++;
+}
+if (QC) {
+  for (const r of QC.results) ok('C ' + r.name, r.pass);
+  ok('C00 driver completed with no internal failures', QC.failures === 0, QC.failures + ' failures');
+}
+
+console.log('\nFRONTIER (F0+F1) TOTAL: ' + pass + '/' + (pass + fail) + ' passed');
 if (fail) process.exit(1);

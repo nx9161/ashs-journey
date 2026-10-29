@@ -4,7 +4,7 @@ Object.assign(SPECIES, SPECIES2);
 Object.assign(SPECIES, SPECIES_JOHTO);
 Object.assign(SPECIES, SPECIES_HOENN);
 Object.assign(MOVES, MOVES2);
-Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5, MAPS6, MAPS7);
+Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5, MAPS6, MAPS7, MAPS8);
 Object.assign(TRAINERS, TRAINERS3, TRAINERS4, ORANGE_TRAINERS, JOHTO_TRAINERS, HOENN_TRAINERS);
 Object.assign(EVENTS, ORANGE_EVENTS, JOHTO_EVENTS, HOENN_EVENTS);
 // Stage J4a: Johto Town Tales fold into the ONE tales table (quests.mjs
