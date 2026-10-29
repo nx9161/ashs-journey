@@ -781,6 +781,20 @@ export const LEGENDARY_ARCS = {
     ],
     lair: 'hallowedtower',
   },
+  // Arc 4 Stage S7 addition to the designed register: the Arceus
+  // capstone's stub pre-registers arc_arceus in the validator's quest
+  // vocabulary (the S6 arc_spiritomb precedent); S7's live entry in
+  // SINNOH_LEGENDARY_ARCS supersedes it in the merge fold.
+  arc_arceus: {
+    id: 'arc_arceus', title: 'The Hall of Origin', species: 'arceus', region: 'Sinnoh', designedOnly: true,
+    hook: 'Above the oldest pillar in the world there is said to be a first room, and in it the one who was present before the chains, before the lakes, before everything — waiting for a flute only a finished road can be trusted with.',
+    steps: [
+      { text: 'Be entrusted with the Azure Flute at journey\u2019s end' },
+      { text: 'Play it at Spear Pillar, where the stairs should be' },
+      { text: 'Climb to the Hall of Origin', catch: 'arceus' },
+    ],
+    lair: 'halloforigin',
+  },
 
   // ---- Unova (designed) -----------------------------------------------------------
   arc_victini: {

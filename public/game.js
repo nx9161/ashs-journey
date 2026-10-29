@@ -147177,6 +147177,10 @@ const ITEMS = {
   // is its key, by flag).
   oddkeystone: { id: 'oddkeystone', name: 'Odd Keystone', pocket: 'key', desc: 'A cracked stone, cold in a way weather does not explain. Something in it is counting. It wants a tower to go home to.' },
   oaksletter: { id: 'oaksletter', name: "Oak's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
+  // Arc 4 Stage S7: the Azure Flute — the finale's entrusting (the
+  // arc machine grants it at the finale homecoming, never at arc
+  // completion alone); the Arceus capstone at Spear Pillar reads it.
+  azureflute: { id: 'azureflute', name: 'Azure Flute', pocket: 'key', desc: 'A flute of clear blue glass, older than the mountains it was carved under. Its note is said to build stairs where the sky keeps its first room.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Pewter. Lets you use FLASH outside battle; Attack rises.' },
@@ -182475,6 +182479,56 @@ const ARCS = [
   },
 ];
 
+// ---------------------------------------------------------------------------
+// THE FINALE (Arc 4 Stage S7, mission decision 10) — DATA, not machine.
+// When a completed arc's registry successor is NOT playable (a sealed
+// future row), the arc machine plays the FINALE VARIANT of the
+// homecoming instead of the standard ritual. Everything finale-
+// specific lives here as data; the machine (src/game/arcs.mjs) reads
+// it generically and names no region, no item and no flag of its own:
+//   FINALE_GRANT_ITEM_ID  the key item the Professor entrusts at the
+//                         finale homecoming (an ITEMS row id).
+//   FINALE_UNLOCK_FLAG    the story flag the finale — and ONLY the
+//                         finale — sets (arc completion alone never
+//                         sets it; the capstone quest keys on it).
+//   ARC_FINALE_ECHOES     one short bond-echo line per arc, keyed by
+//                         arc id; the machine iterates the save's
+//                         regionsDone and reads the line for each.
+//   FINALE_CREDITS_OPEN / FINALE_CREDITS_CLOSE
+//                         the full credits' frame lines; the arc
+//                         listing between them is built from the
+//                         registry rows of regionsDone, never typed.
+//   FINALE_END_CARD       the end card the credits close on
+//                         (coordinator-approved line, S7).
+// ---------------------------------------------------------------------------
+const FINALE_GRANT_ITEM_ID = 'azureflute';
+const FINALE_UNLOCK_FLAG = 'arceus_unlocked';
+
+const ARC_FINALE_ECHOES = {
+  kanto: 'Kanto first: a borrowed bike voucher, a storm over New Island, and a rival who turned out to be a measuring stick all along. You came home with eight badges and every friend you started with, plus several dozen more.',
+  orange: 'Then the southern sea: four island badges, a ball that would not open, and a trophy heavy as an anchor. The Orange water taught the team to win on strange ground, under stranger stars.',
+  johto: 'Johto asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Pallet Town lane finally burned itself honest at the Silver Conference.',
+  hoenn: 'Hoenn argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
+  frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
+  sinnoh: 'And Sinnoh: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
+};
+
+const FINALE_CREDITS_OPEN = [
+  '— THE LONG ROAD, REMEMBERED —',
+  'Every journey in this book was walked, not wished. Here is the whole of it, in the order the road gave it:',
+];
+
+const FINALE_CREDITS_CLOSE = [
+  'Teams changed. Towns blurred. The one constant was the walking — and the ones who walked beside you, in Pokeballs and out of them.',
+  'This is not a goodbye. Roads like this one do not end; they just go quiet for a while, the way a held note does before the music remembers it.',
+];
+
+const FINALE_END_CARD = [
+  '— THE END —',
+  'Six journeys. Five leagues and a frontier. One road, walked whole.',
+  'Thank you for walking it. When the next road opens — and roads always open — it will find you exactly where this one left you: ready, rested, and already lacing your shoes.',
+];
+
 // The committed national horizon: Platinum (ADR-027 Decision 5). Derived
 // from the Sinnoh row so a registry edit moves every presentation at once.
 const PLATINUM_DEX_HORIZON = (ARCS.find((a) => a.id === 'sinnoh') || { dexHorizon: 493 }).dexHorizon;
@@ -183428,6 +183482,20 @@ const LEGENDARY_ARCS = {
       { text: 'Face what the tower was built to hold', catch: 'spiritomb' },
     ],
     lair: 'hallowedtower',
+  },
+  // Arc 4 Stage S7 addition to the designed register: the Arceus
+  // capstone's stub pre-registers arc_arceus in the validator's quest
+  // vocabulary (the S6 arc_spiritomb precedent); S7's live entry in
+  // SINNOH_LEGENDARY_ARCS supersedes it in the merge fold.
+  arc_arceus: {
+    id: 'arc_arceus', title: 'The Hall of Origin', species: 'arceus', region: 'Sinnoh', designedOnly: true,
+    hook: 'Above the oldest pillar in the world there is said to be a first room, and in it the one who was present before the chains, before the lakes, before everything — waiting for a flute only a finished road can be trusted with.',
+    steps: [
+      { text: 'Be entrusted with the Azure Flute at journey\u2019s end' },
+      { text: 'Play it at Spear Pillar, where the stairs should be' },
+      { text: 'Climb to the Hall of Origin', catch: 'arceus' },
+    ],
+    lair: 'halloforigin',
   },
 
   // ---- Unova (designed) -----------------------------------------------------------
@@ -186876,11 +186944,31 @@ const SINNOH_EVENTS = {
     { flag: 'arc_spiritomb_done' },
     { toast: 'Spiritomb is yours. The tower keeps its silence again — a quieter count of it, this time.' },
   ],
+  // Arc 4 Stage S7: the Arceus capstone. The stairs event is a
+  // ceremony, not a battle: entering Spear Pillar with the finale's
+  // unlock standing, the Azure Flute answers by itself and the way
+  // up opens (arceus_stairs_open). The face itself waits in the
+  // Hall of Origin and rides the same catch-only chain as every
+  // one-of-one (flee AND KO re-fire; nothing dex-locks).
+  ev_sinnoh_arceus_stairs: [
+    { say: ['The Azure Flute is warm before your hands ever reach it. At the pillar\u2019s broken heart, where the sky was chained and unchained, the little glass flute lifts its own note out of your bag — one clear sound, older than the mountain, that the stones answer like a name they were waiting to be called by.', 'And the sky, politely, builds stairs. Light laid over light, rising past the pillar\u2019s crown to a doorway that was always there and never open: the Hall of Origin, the first room, above the top of the world. Whatever waits up there has waited since before waiting had a word. It can wait for you to climb.'], who: '' },
+    { flag: 'arceus_stairs_open' },
+    { toast: 'The Azure Flute sang — and the stairs to the Hall of Origin stand open above Spear Pillar.' },
+  ],
+  ev_sinnoh_arceus: [
+    { say: ['The Hall of Origin is not grand the way temples are grand. It is quiet the way the moment before a first word is quiet — a floor of pale light above all the weather there is, and at its centre, the shape every creation story starts with and none of them finish describing.', 'Arceus regards you the way the sea regards a swimmer who crossed it honestly: without surprise, and without rescue. Everything on the road below — the lakes, the chains, the world behind the world — was, in some old sense, this one\u2019s to lend. It has come to see what the borrower made of the loan. Show it the whole road, trainer. All of it. It will know if you leave any out.'], who: '' },
+    { arc: 'arc_arceus', stage: 'active' },
+    { wildBattleCatch: { species: 'arceus', level: 400, legendary: true } },
+    { arc: 'arc_arceus', stage: 'complete' },
+    { flag: 'arc_arceus_done' },
+    { toast: 'Arceus is yours. Below the Hall, unnoticed by anyone, the whole world goes on — which was rather the point of it.' },
+  ],
 };
 
 // ---------------------------------------------------------------------------
 // SINNOH_LEGENDARY_ARCS — Stage S6. The thirteen Sinnoh legendary
-// arcs, folded into LEGENDARY_ARCS by merge.mjs (the Johto/Hoenn
+// arcs (a fourteenth, the Arceus capstone, is appended by Stage S7),
+// folded into LEGENDARY_ARCS by merge.mjs (the Johto/Hoenn
 // fold idiom); the live entries supersede the story-kanto designed
 // stubs (Dialga/Palkia/Giratina key ONLY on sinnoh_climax_resolved
 // per decision 9; Regigigas' gate is the three Regis' party
@@ -187035,6 +187123,22 @@ const SINNOH_LEGENDARY_ARCS = {
       { text: 'Face the Hallowed Tower\u2019s stones on Route 209 (the weathered rock west of the Lost Tower) with the keystone in hand, and face Spiritomb, level 365', catch: 'spiritomb' },
     ],
     lair: 'r209',
+  },
+  // Arc 4 Stage S7: the fourteenth arc — the capstone, and the only
+  // one gated on the FINALE rather than on any arc's completion:
+  // its prereq flag (arceus_unlocked) is set by the finale
+  // homecoming alone, so the arc cannot appear in any Quest Log
+  // before the whole road has been walked home.
+  arc_arceus: {
+    id: 'arc_arceus', title: 'The Hall of Origin', species: 'arceus', region: 'Sinnoh',
+    prereq: 'arceus_unlocked',
+    hook: 'Above the oldest pillar in the world there is a first room, and in it the one who was present before the chains, before the lakes, before everything. It does not summon. It simply stops being unreachable — for exactly one trainer, the one the whole road was walked by.',
+    steps: [
+      { text: 'Walk the whole road home — the Azure Flute is entrusted only at the finale, in Pallet Town, when every journey stands complete', flag: 'arceus_unlocked' },
+      { text: 'Carry the Azure Flute (it rides in your bag\u2019s key pocket) to Spear Pillar, atop Mt. Coronet — play it where the sky was chained, and let it build the stairs', flag: 'arceus_stairs_open' },
+      { text: 'Climb the stairs to the Hall of Origin, above Spear Pillar, and face Arceus, level 400', catch: 'arceus' },
+    ],
+    lair: 'hall-of-origin',
   },
 };
 
@@ -189003,7 +189107,10 @@ function normalizeHofEntry(e, cap) {
     }
     if (!team.length) return null;
     const badges = typeof e.badges === 'number' && Number.isFinite(e.badges) ? Math.max(0, Math.trunc(e.badges)) : 0;
-    return { team, badges };
+    // Arc 4 Stage S7: the Master entry (the finale's whole-road
+    // record) carries master: true through the round-trip — the one
+    // sanctioned extra field on the canonical shape.
+    return e.master === true ? { team, badges, master: true } : { team, badges };
   }
   if (typeof e.species === 'string' && e.species) {
     return { team: [{ speciesId: e.species, level: lvl(e.level), nickname: null }], badges: 0 };
@@ -190099,6 +190206,116 @@ function arcDirectiveLines(state) {
   ];
 }
 
+// ---------------------------------------------------------------------------
+// THE FINALE VARIANT (Arc 4 Stage S7, mission decision 10 — registry-
+// driven or it doesn't ship). The trigger is a pure registry read: a
+// homecoming is the finale when the directive's arc — the completed
+// arc's successor — is NOT playable in this build (its registry
+// status is neither 'shipped' nor 'next': a sealed future row). The
+// machine names no region, no item and no unlock flag anywhere in
+// this branch: the echoes, the entrusted item, the unlock flag, the
+// credits frame and the end card are ALL data (src/data/arcs.mjs),
+// and the credits' arc listing is built from the registry rows of
+// the save's own regionsDone. A homecoming whose successor IS
+// playable takes the standard ritual below, byte for byte.
+// ---------------------------------------------------------------------------
+
+// The full credits as DATA (the finale's listing): the shipped frame
+// lines, one registry line per completed arc in regionsDone order
+// (label + region + the arc's own league line), the road-so-far
+// totals, the shipped closing lines, and the end card as the final
+// lines. Presentation plays this on the same dialogue surface as
+// every credits sequence in the game (CREDITS_LINES' idiom).
+function finaleCreditsLines(state) {
+  const story = (state && state.story) || {};
+  const done = Array.isArray(story.regionsDone) ? story.regionsDone : [];
+  const lines = FINALE_CREDITS_OPEN.slice();
+  let horizon = 0;
+  for (const key of done) {
+    const arc = arcById(key);
+    if (!arc) continue;
+    if (arc.dexHorizon > horizon) horizon = arc.dexHorizon;
+    lines.push(arc.label + ' · ' + arc.region + ' — ' + (arc.summaryLines[0] || 'COMPLETE.'));
+  }
+  const caught = dexCaughtCount((state && state.dex) || { caught: {} });
+  lines.push('The road so far: ' + done.length + ' journeys complete · National Pokedex ' + caught + (horizon ? '/' + horizon : '') + ' · Playtime ' + fmtPlaytime(state && state.player && state.player.playtimeSec) + '.');
+  lines.push(...FINALE_CREDITS_CLOSE);
+  lines.push(...FINALE_END_CARD);
+  return lines;
+}
+
+// The finale homecoming's committed effects — everything the finale
+// writes, applied up front under the machine's commit-before-present
+// law (the homecoming flag convention): the entrusted key item (once,
+// never duplicated), the capstone unlock flag (set HERE and nowhere
+// else — arc completion alone never sets it), and the Master Hall of
+// Fame entry (the shipped story.hof shape + the master flag, team
+// snapshot of the party that walked the whole road).
+function commitFinale(g, completedArc) {
+  const story = g.state.story;
+  story.flags.finale_done = true;
+  if (!g.state.bag || typeof g.state.bag !== 'object') g.state.bag = {};
+  if (!(g.state.bag[FINALE_GRANT_ITEM_ID] > 0)) g.state.bag[FINALE_GRANT_ITEM_ID] = 1;
+  story.flags[FINALE_UNLOCK_FLAG] = true;
+  const hof = Array.isArray(story.hof) ? story.hof : (story.hof = []);
+  if (!hof.some((e) => e && e.master)) {
+    hof.push({
+      team: (g.state.party || []).map((m) => ({ speciesId: m.speciesId, level: m.level, nickname: m.nickname })),
+      badges: completedArc ? badgeCountFor(g.state, completedArc) : 0,
+      master: true,
+    });
+  }
+}
+
+function playFinaleHomecoming(g, next, finish) {
+  const story = g.state.story;
+  const caught = dexCaughtCount(g.state.dex || { caught: {} });
+  const done = Array.isArray(story.regionsDone) ? story.regionsDone : [];
+  const completedArc = done.length ? arcById(done[done.length - 1]) : null;
+  const horizon = completedArc ? completedArc.dexHorizon : 0;
+  const itemName = (ITEMS[FINALE_GRANT_ITEM_ID] && ITEMS[FINALE_GRANT_ITEM_ID].name) || 'key item';
+  const momLines = [
+    'There\'s my champion. Sit. Eat. Tell me everything — and do not skip the parts where you were in danger. I can tell anyway.',
+    'Your room is just as you left it. Some roads change a trainer. Home is not one of them — home is where the changing gets measured.',
+    'Wait — before the stories. Professor Hawthorn is in the kitchen. He has been here since the ferry was sighted, pretending he was not watching the road. Some things a whole journey cannot change.',
+  ];
+  // One bond echo per completed arc, read from regionsDone — the
+  // machine iterates; the lines themselves are data keyed by arc id.
+  const echoLines = [];
+  for (const key of done) {
+    const line = ARC_FINALE_ECHOES[key];
+    if (line) echoLines.push(line);
+  }
+  const oakLines = [
+    'The Professor looks at the Pokedex counter the way other people look at tide charts — as if it personally owed him money and had finally paid. "'
+      + caught + (horizon ? ' of ' + horizon : '') + '," he says. "The whole horizon. I have rated Pokedexes for forty years, and I am telling you plainly: there is nothing left on my chart to measure you against. You ARE the chart now."',
+    '"One thing remains in my keeping, and it was never really mine." From a cloth older than the lab he unwraps a flute of clear blue glass. "The ' + itemName + '. It answers at the top of the world, where the first room is. Every other trainer I ever sent out, I sent with a beginning. You are the first I am sending with an ending — go and see what it opens."',
+    'Received the ' + itemName.toUpperCase() + '!',
+  ];
+  g.ui.say(momLines, () => {
+    if (echoLines.length) {
+      g.ui.say(echoLines, () => {
+        g.ui.say(oakLines, () => {
+          if (next.hookLines && next.hookLines.length) {
+            g.ui.say(next.hookLines.slice(), () => {
+              finish();
+              g.ui.say(finaleCreditsLines(g.state), null, '');
+            }, giverName(next));
+          } else {
+            finish();
+            g.ui.say(finaleCreditsLines(g.state), null, '');
+          }
+        }, 'PROF. HAWTHORN');
+      }, 'MOM');
+    } else {
+      g.ui.say(oakLines, () => {
+        finish();
+        g.ui.say(finaleCreditsLines(g.state), null, '');
+      }, 'PROF. HAWTHORN');
+    }
+  }, 'MOM');
+}
+
 // The Homecoming (roadmap §2.2 step 4): with the directive active,
 // entering Mom's house fires once — Mom's welcome, the arc summary in
 // fiction (the Professor's dex rating, relayed), then the next arc's
@@ -190110,6 +190327,10 @@ function arcDirectiveLines(state) {
 // cleared — but story.arc does NOT advance and NO embark flag is set:
 // the Journey menu shows that arc as the road ahead (sealed), and
 // there is no dangling directive and no fake embark.
+// FINALE (Stage S7): when the sealed successor is a FUTURE row, the
+// homecoming is the end of the whole road, not of one arc — it plays
+// the finale variant above instead (bond echoes, the entrusting, the
+// full credits, the Master HoF entry), with the same sealed finish.
 // Returns true iff the homecoming fired.
 function tryHomecoming(g) {
   if (!g || !g.state || !g.state.story) return false;
@@ -190140,6 +190361,16 @@ function tryHomecoming(g) {
       story.flags['embark_' + next.id] = true;
     }
   };
+  // Stage S7: the finale trigger — a pure registry read on the
+  // successor row (playable = 'shipped' or 'next'; anything else is
+  // a sealed future the road has not reached). No region is named.
+  const successorPlayable = next.status === 'shipped' || next.status === 'next';
+  if (!successorPlayable && next.future) {
+    const doneKeys = Array.isArray(story.regionsDone) ? story.regionsDone : [];
+    commitFinale(g, doneKeys.length ? arcById(doneKeys[doneKeys.length - 1]) : null);
+    playFinaleHomecoming(g, next, finish);
+    return true;
+  }
   g.ui.say(momLines, () => {
     g.ui.say(ratingLines, () => {
       if (next.hookLines && next.hookLines.length) {
@@ -191080,7 +191311,8 @@ function validateSave(data) {
       const canon = isObj(e) && Array.isArray(e.team) && e.team.length >= 1 && e.team.length <= 6
         && e.team.every((m) => isObj(m) && typeof m.speciesId === 'string'
           && typeof m.level === 'number' && m.level >= 1 && m.level <= levelCap)
-        && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0));
+        && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0))
+        && (e.master === undefined || typeof e.master === 'boolean');
       const legacy = isObj(e) && typeof e.species === 'string'
         && typeof e.level === 'number' && e.level >= 1 && e.level <= levelCap;
       if (!canon && !legacy) { errors.push('bad-story-' + key + '-entry'); break; }
@@ -203019,6 +203251,9 @@ Object.assign(OverworldScene.prototype, {
         ['arc_palkia', 'sinnoh_climax_resolved'], ['arc_giratina', 'sinnoh_climax_resolved'],
         ['arc_darkrai', 'darkrai_unlocked'], ['arc_cresselia', 'cresselia_glimpsed'],
         ['arc_shaymin', 'oaks_letter_received'],
+        // Arc 4 Stage S7: the capstone joins the Quest Log ONLY on
+        // the finale's unlock flag — never on arc completion alone.
+        ['arc_arceus', 'arceus_unlocked'],
       ];
       for (const [arcId, flag] of S6_DISCOVER) if (S6F[flag] && S6Q[arcId] === undefined) S6Q[arcId] = 'discovered';
       // Manaphy completion sweep: the arc completes on the hatch's
@@ -203027,7 +203262,14 @@ Object.assign(OverworldScene.prototype, {
         S6F.arc_manaphy_done = true; S6Q.arc_manaphy = 'complete';
         g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Pokemon!');
       }
-      if (id === 'lake-acuity-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_uxie_done && !S6F.ev_sinnoh_uxie_done) {
+      if (id === 'spear-pillar' && S6F.arceus_unlocked && !S6F.arceus_stairs_open && !S6F.ev_sinnoh_arceus_stairs_done) {
+        // Stage S7: the flute ceremony outranks the pillar's catch
+        // faces on the load it opens (a say-only event; the faces
+        // keep their own appointments on later entries).
+        this.runEvent('ev_sinnoh_arceus_stairs');
+      } else if (id === 'hall-of-origin' && S6F.arceus_unlocked && S6F.arceus_stairs_open && !S6F.arc_arceus_done && !S6F.ev_sinnoh_arceus_done) {
+        this.runEvent('ev_sinnoh_arceus');
+      } else if (id === 'lake-acuity-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_uxie_done && !S6F.ev_sinnoh_uxie_done) {
         this.runEvent('ev_sinnoh_uxie');
       } else if (id === 'lake-valor-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_azelf_done && !S6F.ev_sinnoh_azelf_done) {
         this.runEvent('ev_sinnoh_azelf');
@@ -209766,7 +210008,12 @@ Object.assign(Game.prototype, {
     };
     let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
     for (let e = hof.length - 1; e >= 0; e--) {
-      html += entryHtml(hof[e], 'Entry ' + (e + 1) + ' — ' + (hof[e].badges || 0) + ' badges');
+      // Arc 4 Stage S7: the Master entry (the finale's whole-road
+      // record, master: true) surfaces under its own head, alongside
+      // the per-arc entries it completes.
+      html += entryHtml(hof[e], hof[e].master
+        ? 'MASTER ENTRY — THE WHOLE ROAD'
+        : 'Entry ' + (e + 1) + ' — ' + (hof[e].badges || 0) + ' badges');
     }
     // ADR-025 §6: prior journeys' teams stay viewable from the new
     // run — under their own heading, never counted as this run's.

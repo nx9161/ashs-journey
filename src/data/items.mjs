@@ -143,6 +143,10 @@ export const ITEMS = {
   // is its key, by flag).
   oddkeystone: { id: 'oddkeystone', name: 'Odd Keystone', pocket: 'key', desc: 'A cracked stone, cold in a way weather does not explain. Something in it is counting. It wants a tower to go home to.' },
   oaksletter: { id: 'oaksletter', name: "Oak's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
+  // Arc 4 Stage S7: the Azure Flute — the finale's entrusting (the
+  // arc machine grants it at the finale homecoming, never at arc
+  // completion alone); the Arceus capstone at Spear Pillar reads it.
+  azureflute: { id: 'azureflute', name: 'Azure Flute', pocket: 'key', desc: 'A flute of clear blue glass, older than the mountains it was carved under. Its note is said to build stairs where the sky keeps its first room.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Pewter. Lets you use FLASH outside battle; Attack rises.' },

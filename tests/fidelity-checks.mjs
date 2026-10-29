@@ -159,7 +159,7 @@ ok('species + forms >= owner count 1205 (data layer)', 1025 + FORMS.length >= 12
 
 // ---------- D. story / arcs ----------
 ok('story: 24 main quests with completion flags', QUESTS.length >= 24 && QUESTS.every((q) => q.id && q.text && q.hint));
-ok('story: 57 legendary arcs (56 + the arc_spiritomb designed stub, Arc 4 Stage S6 — supersedes the S5b count); Kanto five are full builds', Object.keys(LEGENDARY_ARCS).length === 57
+ok('story: 58 legendary arcs (57 + the arc_arceus designed stub, Arc 4 Stage S7 — supersedes the S6 count; the live capstone supersedes the stub in the merge fold); Kanto five are full builds', Object.keys(LEGENDARY_ARCS).length === 58
   && ['arc_articuno', 'arc_zapdos', 'arc_moltres', 'arc_mewtwo', 'arc_mew'].every((id) => LEGENDARY_ARCS[id] && !LEGENDARY_ARCS[id].designedOnly));
 ok('story: movie event + champion ending scripted', !!EVENTS.ev_movie_climax && !!EVENTS.ev_champion);
 

@@ -118,8 +118,8 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A12 tables.json in sync (gen-tables --check, regenerated via the tool only); items 199 (197 + the Odd Keystone + Oak\'s Letter, Arc 4 Stage S6 — supersedes the Stage S5b count) and carries all 7 symbol ids; badgeSequences has NO symbols entry and regionBadgeMax no symbols row (no prefix check exists to emit)',
-    checkOut.includes('tables.json OK') && t.items.length === 199
+  ok('A12 tables.json in sync (gen-tables --check, regenerated via the tool only); items 200 (199 + the Azure Flute, Arc 4 Stage S7 — supersedes the Stage S6 count) and carries all 7 symbol ids; badgeSequences has NO symbols entry and regionBadgeMax no symbols row (no prefix check exists to emit)',
+    checkOut.includes('tables.json OK') && t.items.length === 200
     && SYMBOL_ITEM_IDS.every((id) => t.items.includes(id))
     && !('symbols' in t.badgeSequences) && !('symbols' in t.regionBadgeMax), checkOut.trim());
 }

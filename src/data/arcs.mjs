@@ -256,6 +256,56 @@ export const ARCS = [
   },
 ];
 
+// ---------------------------------------------------------------------------
+// THE FINALE (Arc 4 Stage S7, mission decision 10) — DATA, not machine.
+// When a completed arc's registry successor is NOT playable (a sealed
+// future row), the arc machine plays the FINALE VARIANT of the
+// homecoming instead of the standard ritual. Everything finale-
+// specific lives here as data; the machine (src/game/arcs.mjs) reads
+// it generically and names no region, no item and no flag of its own:
+//   FINALE_GRANT_ITEM_ID  the key item the Professor entrusts at the
+//                         finale homecoming (an ITEMS row id).
+//   FINALE_UNLOCK_FLAG    the story flag the finale — and ONLY the
+//                         finale — sets (arc completion alone never
+//                         sets it; the capstone quest keys on it).
+//   ARC_FINALE_ECHOES     one short bond-echo line per arc, keyed by
+//                         arc id; the machine iterates the save's
+//                         regionsDone and reads the line for each.
+//   FINALE_CREDITS_OPEN / FINALE_CREDITS_CLOSE
+//                         the full credits' frame lines; the arc
+//                         listing between them is built from the
+//                         registry rows of regionsDone, never typed.
+//   FINALE_END_CARD       the end card the credits close on
+//                         (coordinator-approved line, S7).
+// ---------------------------------------------------------------------------
+export const FINALE_GRANT_ITEM_ID = 'azureflute';
+export const FINALE_UNLOCK_FLAG = 'arceus_unlocked';
+
+export const ARC_FINALE_ECHOES = {
+  kanto: 'Kanto first: a borrowed bike voucher, a storm over New Island, and a rival who turned out to be a measuring stick all along. You came home with eight badges and every friend you started with, plus several dozen more.',
+  orange: 'Then the southern sea: four island badges, a ball that would not open, and a trophy heavy as an anchor. The Orange water taught the team to win on strange ground, under stranger stars.',
+  johto: 'Johto asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Pallet Town lane finally burned itself honest at the Silver Conference.',
+  hoenn: 'Hoenn argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
+  frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
+  sinnoh: 'And Sinnoh: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
+};
+
+export const FINALE_CREDITS_OPEN = [
+  '— THE LONG ROAD, REMEMBERED —',
+  'Every journey in this book was walked, not wished. Here is the whole of it, in the order the road gave it:',
+];
+
+export const FINALE_CREDITS_CLOSE = [
+  'Teams changed. Towns blurred. The one constant was the walking — and the ones who walked beside you, in Pokeballs and out of them.',
+  'This is not a goodbye. Roads like this one do not end; they just go quiet for a while, the way a held note does before the music remembers it.',
+];
+
+export const FINALE_END_CARD = [
+  '— THE END —',
+  'Six journeys. Five leagues and a frontier. One road, walked whole.',
+  'Thank you for walking it. When the next road opens — and roads always open — it will find you exactly where this one left you: ready, rested, and already lacing your shoes.',
+];
+
 // The committed national horizon: Platinum (ADR-027 Decision 5). Derived
 // from the Sinnoh row so a registry edit moves every presentation at once.
 export const PLATINUM_DEX_HORIZON = (ARCS.find((a) => a.id === 'sinnoh') || { dexHorizon: 493 }).dexHorizon;

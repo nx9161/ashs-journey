@@ -255,7 +255,8 @@ export function validateSave(data) {
       const canon = isObj(e) && Array.isArray(e.team) && e.team.length >= 1 && e.team.length <= 6
         && e.team.every((m) => isObj(m) && typeof m.speciesId === 'string'
           && typeof m.level === 'number' && m.level >= 1 && m.level <= levelCap)
-        && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0));
+        && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0))
+        && (e.master === undefined || typeof e.master === 'boolean');
       const legacy = isObj(e) && typeof e.species === 'string'
         && typeof e.level === 'number' && e.level >= 1 && e.level <= levelCap;
       if (!canon && !legacy) { errors.push('bad-story-' + key + '-entry'); break; }

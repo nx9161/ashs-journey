@@ -420,6 +420,9 @@ Object.assign(OverworldScene.prototype, {
         ['arc_palkia', 'sinnoh_climax_resolved'], ['arc_giratina', 'sinnoh_climax_resolved'],
         ['arc_darkrai', 'darkrai_unlocked'], ['arc_cresselia', 'cresselia_glimpsed'],
         ['arc_shaymin', 'oaks_letter_received'],
+        // Arc 4 Stage S7: the capstone joins the Quest Log ONLY on
+        // the finale's unlock flag — never on arc completion alone.
+        ['arc_arceus', 'arceus_unlocked'],
       ];
       for (const [arcId, flag] of S6_DISCOVER) if (S6F[flag] && S6Q[arcId] === undefined) S6Q[arcId] = 'discovered';
       // Manaphy completion sweep: the arc completes on the hatch's
@@ -428,7 +431,14 @@ Object.assign(OverworldScene.prototype, {
         S6F.arc_manaphy_done = true; S6Q.arc_manaphy = 'complete';
         g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Pokemon!');
       }
-      if (id === 'lake-acuity-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_uxie_done && !S6F.ev_sinnoh_uxie_done) {
+      if (id === 'spear-pillar' && S6F.arceus_unlocked && !S6F.arceus_stairs_open && !S6F.ev_sinnoh_arceus_stairs_done) {
+        // Stage S7: the flute ceremony outranks the pillar's catch
+        // faces on the load it opens (a say-only event; the faces
+        // keep their own appointments on later entries).
+        this.runEvent('ev_sinnoh_arceus_stairs');
+      } else if (id === 'hall-of-origin' && S6F.arceus_unlocked && S6F.arceus_stairs_open && !S6F.arc_arceus_done && !S6F.ev_sinnoh_arceus_done) {
+        this.runEvent('ev_sinnoh_arceus');
+      } else if (id === 'lake-acuity-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_uxie_done && !S6F.ev_sinnoh_uxie_done) {
         this.runEvent('ev_sinnoh_uxie');
       } else if (id === 'lake-valor-cave' && S6F.sinnoh_climax_resolved && !S6F.arc_azelf_done && !S6F.ev_sinnoh_azelf_done) {
         this.runEvent('ev_sinnoh_azelf');

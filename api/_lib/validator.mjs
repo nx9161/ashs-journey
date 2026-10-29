@@ -414,6 +414,9 @@ function checkStory(story, errors) {
       if (Array.isArray(h.team)) {
         if (h.team.length < 1 || h.team.length > 6) return false;
         if (!(h.badges === undefined || isInt(h.badges, 0, 20))) return false;
+        // Arc 4 Stage S7: the Master HoF entry's one sanctioned
+        // extra field — an optional boolean master flag.
+        if (!(h.master === undefined || typeof h.master === 'boolean')) return false;
         for (const m of h.team) {
           if (!isPlainObj(m)) return false;
           // Hybrid members: a canonical team member may carry the
@@ -727,7 +730,7 @@ export function validateSave(data) {
   if (!isPlainObj(bag) || hasDangerousKey(bag)) errors.push('bad-bag');
   else {
     const keys = Object.keys(bag);
-    if (keys.length > 199) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (199 since S6's Odd Keystone + Oak's Letter key items; was 197 at S5b, 192 at S5a, 186 at S4, 183 at S0, 175 at F0, 168 at H4a, 160 at J6)
+    if (keys.length > 200) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (200 since S7's Azure Flute key item; was 199 at S6, 197 at S5b, 192 at S5a, 186 at S4, 183 at S0, 175 at F0, 168 at H4a, 160 at J6)
     for (const k of keys) {
       if (!TABLES.items.has(k) || !isInt(bag[k], 0, 999)) { errors.push('bad-bag-item'); break; }
     }

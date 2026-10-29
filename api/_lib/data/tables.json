@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "3d0f361a76edf3aaeae9316427b5a5d005783398a6207be34e2ffa7c7e5346cc",
+  "tablesVersion": "b7d7fc71f3b2bc9a945e84f44db81a91dcac2f03a74db517bfef35289adc88ad",
   "schemaVersion": 2,
   "species": [
     "abomasnow",
@@ -664,6 +664,7 @@
     "abilitysymbol",
     "antidote",
     "awakening",
+    "azureflute",
     "balancebadge",
     "beaconbadge",
     "beaconcoil",
@@ -1133,6 +1134,7 @@
     "zygarde-complete"
   ],
   "quests": [
+    "arc_arceus",
     "arc_articuno",
     "arc_azelf",
     "arc_calyrex",

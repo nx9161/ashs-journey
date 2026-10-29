@@ -13,9 +13,12 @@
 import {
   ARCS, arcById, nextArcOf, currentArcOf, arcCompletionMet, badgeCountFor,
   ARC_GIVER_NAMES, HOME_MAP_ID,
+  ARC_FINALE_ECHOES, FINALE_CREDITS_OPEN, FINALE_CREDITS_CLOSE, FINALE_END_CARD,
+  FINALE_GRANT_ITEM_ID, FINALE_UNLOCK_FLAG,
 } from '../data/arcs.mjs';
 import { dexCaughtCount } from './state.mjs';
 import { SPECIES } from '../data/species.mjs';
+import { ITEMS } from '../data/items.mjs';
 
 function giverName(arc) {
   if (!arc || !arc.hookGiver) return 'Professor Hawthorn';
@@ -117,6 +120,116 @@ export function arcDirectiveLines(state) {
   ];
 }
 
+// ---------------------------------------------------------------------------
+// THE FINALE VARIANT (Arc 4 Stage S7, mission decision 10 — registry-
+// driven or it doesn't ship). The trigger is a pure registry read: a
+// homecoming is the finale when the directive's arc — the completed
+// arc's successor — is NOT playable in this build (its registry
+// status is neither 'shipped' nor 'next': a sealed future row). The
+// machine names no region, no item and no unlock flag anywhere in
+// this branch: the echoes, the entrusted item, the unlock flag, the
+// credits frame and the end card are ALL data (src/data/arcs.mjs),
+// and the credits' arc listing is built from the registry rows of
+// the save's own regionsDone. A homecoming whose successor IS
+// playable takes the standard ritual below, byte for byte.
+// ---------------------------------------------------------------------------
+
+// The full credits as DATA (the finale's listing): the shipped frame
+// lines, one registry line per completed arc in regionsDone order
+// (label + region + the arc's own league line), the road-so-far
+// totals, the shipped closing lines, and the end card as the final
+// lines. Presentation plays this on the same dialogue surface as
+// every credits sequence in the game (CREDITS_LINES' idiom).
+export function finaleCreditsLines(state) {
+  const story = (state && state.story) || {};
+  const done = Array.isArray(story.regionsDone) ? story.regionsDone : [];
+  const lines = FINALE_CREDITS_OPEN.slice();
+  let horizon = 0;
+  for (const key of done) {
+    const arc = arcById(key);
+    if (!arc) continue;
+    if (arc.dexHorizon > horizon) horizon = arc.dexHorizon;
+    lines.push(arc.label + ' · ' + arc.region + ' — ' + (arc.summaryLines[0] || 'COMPLETE.'));
+  }
+  const caught = dexCaughtCount((state && state.dex) || { caught: {} });
+  lines.push('The road so far: ' + done.length + ' journeys complete · National Pokedex ' + caught + (horizon ? '/' + horizon : '') + ' · Playtime ' + fmtPlaytime(state && state.player && state.player.playtimeSec) + '.');
+  lines.push(...FINALE_CREDITS_CLOSE);
+  lines.push(...FINALE_END_CARD);
+  return lines;
+}
+
+// The finale homecoming's committed effects — everything the finale
+// writes, applied up front under the machine's commit-before-present
+// law (the homecoming flag convention): the entrusted key item (once,
+// never duplicated), the capstone unlock flag (set HERE and nowhere
+// else — arc completion alone never sets it), and the Master Hall of
+// Fame entry (the shipped story.hof shape + the master flag, team
+// snapshot of the party that walked the whole road).
+function commitFinale(g, completedArc) {
+  const story = g.state.story;
+  story.flags.finale_done = true;
+  if (!g.state.bag || typeof g.state.bag !== 'object') g.state.bag = {};
+  if (!(g.state.bag[FINALE_GRANT_ITEM_ID] > 0)) g.state.bag[FINALE_GRANT_ITEM_ID] = 1;
+  story.flags[FINALE_UNLOCK_FLAG] = true;
+  const hof = Array.isArray(story.hof) ? story.hof : (story.hof = []);
+  if (!hof.some((e) => e && e.master)) {
+    hof.push({
+      team: (g.state.party || []).map((m) => ({ speciesId: m.speciesId, level: m.level, nickname: m.nickname })),
+      badges: completedArc ? badgeCountFor(g.state, completedArc) : 0,
+      master: true,
+    });
+  }
+}
+
+function playFinaleHomecoming(g, next, finish) {
+  const story = g.state.story;
+  const caught = dexCaughtCount(g.state.dex || { caught: {} });
+  const done = Array.isArray(story.regionsDone) ? story.regionsDone : [];
+  const completedArc = done.length ? arcById(done[done.length - 1]) : null;
+  const horizon = completedArc ? completedArc.dexHorizon : 0;
+  const itemName = (ITEMS[FINALE_GRANT_ITEM_ID] && ITEMS[FINALE_GRANT_ITEM_ID].name) || 'key item';
+  const momLines = [
+    'There\'s my champion. Sit. Eat. Tell me everything — and do not skip the parts where you were in danger. I can tell anyway.',
+    'Your room is just as you left it. Some roads change a trainer. Home is not one of them — home is where the changing gets measured.',
+    'Wait — before the stories. Professor Hawthorn is in the kitchen. He has been here since the ferry was sighted, pretending he was not watching the road. Some things a whole journey cannot change.',
+  ];
+  // One bond echo per completed arc, read from regionsDone — the
+  // machine iterates; the lines themselves are data keyed by arc id.
+  const echoLines = [];
+  for (const key of done) {
+    const line = ARC_FINALE_ECHOES[key];
+    if (line) echoLines.push(line);
+  }
+  const oakLines = [
+    'The Professor looks at the Pokedex counter the way other people look at tide charts — as if it personally owed him money and had finally paid. "'
+      + caught + (horizon ? ' of ' + horizon : '') + '," he says. "The whole horizon. I have rated Pokedexes for forty years, and I am telling you plainly: there is nothing left on my chart to measure you against. You ARE the chart now."',
+    '"One thing remains in my keeping, and it was never really mine." From a cloth older than the lab he unwraps a flute of clear blue glass. "The ' + itemName + '. It answers at the top of the world, where the first room is. Every other trainer I ever sent out, I sent with a beginning. You are the first I am sending with an ending — go and see what it opens."',
+    'Received the ' + itemName.toUpperCase() + '!',
+  ];
+  g.ui.say(momLines, () => {
+    if (echoLines.length) {
+      g.ui.say(echoLines, () => {
+        g.ui.say(oakLines, () => {
+          if (next.hookLines && next.hookLines.length) {
+            g.ui.say(next.hookLines.slice(), () => {
+              finish();
+              g.ui.say(finaleCreditsLines(g.state), null, '');
+            }, giverName(next));
+          } else {
+            finish();
+            g.ui.say(finaleCreditsLines(g.state), null, '');
+          }
+        }, 'PROF. HAWTHORN');
+      }, 'MOM');
+    } else {
+      g.ui.say(oakLines, () => {
+        finish();
+        g.ui.say(finaleCreditsLines(g.state), null, '');
+      }, 'PROF. HAWTHORN');
+    }
+  }, 'MOM');
+}
+
 // The Homecoming (roadmap §2.2 step 4): with the directive active,
 // entering Mom's house fires once — Mom's welcome, the arc summary in
 // fiction (the Professor's dex rating, relayed), then the next arc's
@@ -128,6 +241,10 @@ export function arcDirectiveLines(state) {
 // cleared — but story.arc does NOT advance and NO embark flag is set:
 // the Journey menu shows that arc as the road ahead (sealed), and
 // there is no dangling directive and no fake embark.
+// FINALE (Stage S7): when the sealed successor is a FUTURE row, the
+// homecoming is the end of the whole road, not of one arc — it plays
+// the finale variant above instead (bond echoes, the entrusting, the
+// full credits, the Master HoF entry), with the same sealed finish.
 // Returns true iff the homecoming fired.
 export function tryHomecoming(g) {
   if (!g || !g.state || !g.state.story) return false;
@@ -158,6 +275,16 @@ export function tryHomecoming(g) {
       story.flags['embark_' + next.id] = true;
     }
   };
+  // Stage S7: the finale trigger — a pure registry read on the
+  // successor row (playable = 'shipped' or 'next'; anything else is
+  // a sealed future the road has not reached). No region is named.
+  const successorPlayable = next.status === 'shipped' || next.status === 'next';
+  if (!successorPlayable && next.future) {
+    const doneKeys = Array.isArray(story.regionsDone) ? story.regionsDone : [];
+    commitFinale(g, doneKeys.length ? arcById(doneKeys[doneKeys.length - 1]) : null);
+    playFinaleHomecoming(g, next, finish);
+    return true;
+  }
   g.ui.say(momLines, () => {
     g.ui.say(ratingLines, () => {
       if (next.hookLines && next.hookLines.length) {

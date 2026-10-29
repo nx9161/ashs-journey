@@ -652,7 +652,12 @@ Object.assign(Game.prototype, {
     };
     let html = '<div class="hofplate"><div class="hoftitle">HALL OF FAME</div>';
     for (let e = hof.length - 1; e >= 0; e--) {
-      html += entryHtml(hof[e], 'Entry ' + (e + 1) + ' — ' + (hof[e].badges || 0) + ' badges');
+      // Arc 4 Stage S7: the Master entry (the finale's whole-road
+      // record, master: true) surfaces under its own head, alongside
+      // the per-arc entries it completes.
+      html += entryHtml(hof[e], hof[e].master
+        ? 'MASTER ENTRY — THE WHOLE ROAD'
+        : 'Entry ' + (e + 1) + ' — ' + (hof[e].badges || 0) + ' badges');
     }
     // ADR-025 §6: prior journeys' teams stay viewable from the new
     // run — under their own heading, never counted as this run's.

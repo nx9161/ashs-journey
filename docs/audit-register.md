@@ -13100,3 +13100,202 @@ framed it.
 - The single owner-ordered deploy happens once the whole
   Sinnoh arc chain closes (through S9); nothing here was
   pushed or deployed.
+
+## Arc 4 Stage S7 — THE FINALE: homecoming variant, credits, Master HoF, Arceus capstone (2026-10-29)
+
+The finale of the whole chain, built exactly to mission decision
+10 — **registry-driven or it doesn't ship** (coordinator allowance
+for S7, binding: +45,000 B static max). Base 982cfb1; nothing
+pushed or deployed; `personal/` byte-identical (sha256 spot-check
+of the tree unchanged at close).
+
+### 1. The generic trigger (the stage's whole law)
+
+`tryHomecoming` (src/game/arcs.mjs) now branches on a **pure
+registry read**: a homecoming is the finale iff the directive's
+arc — the completed arc's successor — is a **sealed future row**
+(`next.status` is neither `'shipped'` nor `'next'`, and
+`next.future` stands). Everything else takes the standard ritual
+**byte-for-byte** (the standard branch's code is untouched; the
+finale branch is entered before it and returns).
+
+**Grep evidence (pinned in sinnoh-story A33):** `src/game/arcs.mjs`
+contains **zero** occurrences of `sinnoh`, `arceus` or `azure`
+(case-insensitive) — the machine names no region, no capstone
+species and no granted item. The finale's specifics are all data
+in `src/data/arcs.mjs`: `FINALE_GRANT_ITEM_ID` (`azureflute`),
+`FINALE_UNLOCK_FLAG` (`arceus_unlocked`), `ARC_FINALE_ECHOES`,
+`FINALE_CREDITS_OPEN` / `FINALE_CREDITS_CLOSE`, `FINALE_END_CARD`.
+The machine writes the unlock only as
+`story.flags[FINALE_UNLOCK_FLAG] = true`, inside the finale commit.
+
+**Machine proofs (pure drives, A36/A37):** a fabricated
+sealed-future homecoming plays the finale (echoes ×6 in
+regionsDone order, flute ×1, unlock set, Master entry written,
+sealed finish law kept); a fabricated **shipped**-successor
+homecoming (the Frontier close shape) stays standard — hook lines
+delivered, arc advances, embark arms, snapshots stamp, and **zero**
+finale side-effects. The bundle repeats both proofs live (C04–C08
+finale; **C21 control** on a second, Frontier-complete fixture),
+and the frontier suite's own E09/E10 Sinnoh homecoming drive stays
+green unmodified inside frontier **136/136**.
+
+### 2. The finale homecoming (content = data)
+
+At Mom's house: Mom's welcome (the standard two lines + her
+Hawthorn-in-the-kitchen beat), then **one bond echo per completed
+arc** — the machine iterates `story.regionsDone` and reads
+`ARC_FINALE_ECHOES[arcId]`; it does not enumerate arcs. Echo
+accounting: exactly **6 lines authored**, keyed `kanto / orange /
+johto / hoenn / frontier / sinnoh`, each a single short beat
+(league + what it cost/taught). Then Oak's rating beat **in
+person** (Prof. Hawthorn, speaker `PROF. HAWTHORN`) at the
+completed arc's registry horizon (the fixture reads **492 of
+493**), and the entrusting: the **Azure Flute** granted once
+(ITEMS row `azureflute`, key pocket; the full item quintet —
+ITEMS row + gen-tables regen via the tool only + the server
+validator's bag cap raised 199 → 200 in its tracking lineage +
+client/server validation pinned A39/A12; items are now **200**,
+superseded by name in sinnoh-checks A11/A12, sinnoh-story A18,
+sinnoh-legendary A08, cheat-shop A02, frontier A12, hoenn-story
+A16, johto-story A15, johto-systems A24).
+
+**Unlock pinning (C01/C02, pre-finale):** the S5b/S6 fixture save
+carries `sinnoh_complete` and the pinned directive, and has **no
+flute, no `arceus_unlocked`, no finale flag, no Master entry, and
+no `arc_arceus` in its Quest Log state**; entering the Hall of
+Origin in that state fires nothing. The unlock exists only after
+the finale homecoming commits it.
+
+### 3. Full credits + the end card
+
+`finaleCreditsLines(state)` (pure, A35) builds the sequence from
+the registry: the shipped frame (`FINALE_CREDITS_OPEN`), **one
+listing line per completed arc** in regionsDone order —
+`Arc N · Region — <the arc's own summaryLines[0]>`, zero titles
+typed twice — the road-so-far line (journeys complete · National
+count/horizon from the registry · playtime), the shipped closing
+lines, and the end card as the final lines. It plays on the same
+dialogue surface as `CREDITS_LINES` (the game's credits idiom; the
+ARC COMPLETE card's own surface). In the true path the finale's
+**last presented scene is the credits scene itself**, and its tail
+deep-equals the end card (C08).
+
+**End card text, as shipped** (`FINALE_END_CARD`, data):
+
+> — THE END —
+> **Six journeys. Five leagues and a frontier. One road, walked whole.**
+> Thank you for walking it. When the next road opens — and roads
+> always open — it will find you exactly where this one left you:
+> ready, rested, and already lacing your shoes.
+
+The middle line is the coordinator-approved line, verbatim, as its
+own line. **Screenshot:** the capture driver + a validated
+finale-ready save stand ready in
+`~/workspace/ashs-journey-qa/arc4-s7-shots/` (`gen-save.mjs`,
+`end-card-shot.mjs`, arc-chain-qa CDP idiom), but the capture
+itself is **environment-blocked at this close**: this sandbox's
+Chromium refuses startup without the Hatch WebGL domain-policy
+file (`/tmp/webgl-domains.txt`, wiped with /tmp; its contract is
+provisioned, not documented) — the same pre-existing blocker as
+the rejuv **C01** chromium-harness failures and audit-laptop.
+S9 should run the driver first once the policy file is restored;
+until then the end card is pinned textually by C08 (the presented
+scene's tail) and A34/A35 (data + builder).
+
+### 4. Master Hall of Fame
+
+Completing the finale commits a HoF entry in the shipped shape
+plus the one sanctioned extra field: `{ team: <the walking
+party>, badges: <the completed arc's badge count>, master: true }`
+(commit-before-present, fire-once, never duplicated). The shape
+change got the full contract treatment: the client normalizer
+(`normalizeHofEntry`) **preserves** `master: true` (and drops a
+non-true value), the client schema accepts an optional boolean
+`master`, the server validator accepts the same and rejects a
+non-boolean (all pinned A39, both sides). The HoF viewer surfaces
+it as **MASTER ENTRY — THE WHOLE ROAD** alongside the per-arc
+entries (C09: the fixture's viewer renders 7 entry plates — 6
+per-arc + the Master). C20 proves the flag also survives the NG+
+normalizer into `priorHof`.
+
+### 5. The Arceus capstone
+
+The fourteenth legendary arc, `arc_arceus` — **The Hall of
+Origin** — lives in `SINNOH_LEGENDARY_ARCS` (S6's A01 superseded
+by name to fourteen, dex list +493; its story-kanto designed stub
+pre-registers the id in the validator's quest vocabulary, the
+arc_spiritomb precedent; fidelity's designed-register count
+superseded 57 → 58). Its quest-log steps spell the requirements:
+(1) the finale's unlock flag, (2) **carry the Azure Flute to
+Spear Pillar** and let it build the stairs (`arceus_stairs_open`),
+(3) climb to the Hall of Origin and face **Arceus at band cap
+400**. Discovery rides the S6 living-section law keyed **only**
+on `arceus_unlocked` (C10: absent before the finale, listed
+after). At Spear Pillar the flute ceremony (say-only
+`ev_sinnoh_arceus_stairs`) outranks the pillar's catch faces on
+the load it opens; the face itself (`ev_sinnoh_arceus`) rides
+`{ wildBattleCatch }` — **flee re-fires (C13), and the KO stall
+is the same chain law** S6 pinned per-face. The catch (C14)
+completes the dex at **493/493**, and the shipped Platinum
+Diploma presentation reads earned on the loop's own check —
+`platinum_diploma` stands after the catch and the viewer
+presents the PLATINUM plate (C15/C16; proven, not rebuilt).
+
+### 6. Post-game integrity (C17–C20)
+
+After finale + capstone: re-entering home is quiet — the Pallet
+directive is complete and **never re-pins**, the finale never
+re-fires (Master count 1, flute 1). The Journey menu shows **six
+arc headers COMPLETE** with the future rows as the one **SEALED**
+silhouette band. The ferry network is whole (CAPT SINNOH sails
+Vermilion → Sandgem on the shipped crossing). A **Second
+Journey starts** from the full-chain save through the shipped
+NG+ path: `ngPlus` 1, own HoF empty, `priorHof` carrying all
+seven entries with the Master's flag intact.
+
+### 7. Battery
+
+sinnoh-story **123/123** (95 + A33–A39 + C01–C21; the finale true
+path AND the Frontier control both in-suite) · sinnoh-legendary
+**27/27** · sinnoh-checks **132/132** · qa-changed-flows failures
+exactly **{b2, d9}** · battle-model **45/45** HARD · campaign
+**24/24** · arc-foundation **47/47** (UNMODIFIED — the machine
+change kept every foundation pin) · frontier **136/136** ·
+hoenn-story **88/88** · hoenn-legendary green · hoenn-contest
+**28/28** · cheat-shop **44/44** · johto-story **110/110** ·
+johto-systems **62/62** · fidelity **35/35** · orange-story
+**38/38** · orange-climax **42/42** · validator **106** + fuzz
+**2000/2000** + save-contract **12/12** (+ config 39, failclosed
+20, http-ip 13) · qa-slice failures exactly **{s6, l8}** ·
+rejuv failures exactly the recorded **{A09, C01}** cluster ·
+budgets **pass** · drift-gate **pass** on the fresh full build ·
+contamination **clean**. Supersessions, all by name: items
+199 → 200 (eight suites, listed in §2), sinnoh-legendary A01
+(thirteen → fourteen arcs), fidelity legendary-register count
+57 → 58, server bag cap 199 → 200. `personal/` byte-identical;
+fresh build byte-identical post-commit.
+
+### 8. Budget
+
+Static (public/) 12,432,909 → **12,449,677 = +16,768 B** against
+the coordinator's +45,000 B S7 allowance (inside by 28,232 B —
+the finale is code + prose, no art, as the allowance model
+assumed). Headroom to the 12,582,912 gate: **133,235 B**.
+**Final restated projection-to-close:** only S8 (campaign gate)
+and S9 (independent QA) remain, at their ~3,000 B planning
+figure → projected close ≈ **12,452,677 B**, ≈ **130,235 B**
+under the gate, with a healthy safety residue surviving S7 as
+ordered.
+
+### 9. Open items handed on
+
+- S8 owns the one-save chain drive through Sinnoh + finale; the
+  finale's inputs all stand ready (regionsDone, the Master HoF
+  contract, `arceus_unlocked`, the capstone arc).
+- S9: run `arc4-s7-shots/end-card-shot.mjs` for the visual
+  end-card re-verification once the Chromium WebGL policy file
+  is provisioned in the sandbox (see §3).
+- The single owner-ordered deploy happens once the whole Sinnoh
+  arc chain closes (through S9); nothing here was pushed or
+  deployed.

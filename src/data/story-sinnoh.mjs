@@ -739,11 +739,31 @@ export const SINNOH_EVENTS = {
     { flag: 'arc_spiritomb_done' },
     { toast: 'Spiritomb is yours. The tower keeps its silence again — a quieter count of it, this time.' },
   ],
+  // Arc 4 Stage S7: the Arceus capstone. The stairs event is a
+  // ceremony, not a battle: entering Spear Pillar with the finale's
+  // unlock standing, the Azure Flute answers by itself and the way
+  // up opens (arceus_stairs_open). The face itself waits in the
+  // Hall of Origin and rides the same catch-only chain as every
+  // one-of-one (flee AND KO re-fire; nothing dex-locks).
+  ev_sinnoh_arceus_stairs: [
+    { say: ['The Azure Flute is warm before your hands ever reach it. At the pillar\u2019s broken heart, where the sky was chained and unchained, the little glass flute lifts its own note out of your bag — one clear sound, older than the mountain, that the stones answer like a name they were waiting to be called by.', 'And the sky, politely, builds stairs. Light laid over light, rising past the pillar\u2019s crown to a doorway that was always there and never open: the Hall of Origin, the first room, above the top of the world. Whatever waits up there has waited since before waiting had a word. It can wait for you to climb.'], who: '' },
+    { flag: 'arceus_stairs_open' },
+    { toast: 'The Azure Flute sang — and the stairs to the Hall of Origin stand open above Spear Pillar.' },
+  ],
+  ev_sinnoh_arceus: [
+    { say: ['The Hall of Origin is not grand the way temples are grand. It is quiet the way the moment before a first word is quiet — a floor of pale light above all the weather there is, and at its centre, the shape every creation story starts with and none of them finish describing.', 'Arceus regards you the way the sea regards a swimmer who crossed it honestly: without surprise, and without rescue. Everything on the road below — the lakes, the chains, the world behind the world — was, in some old sense, this one\u2019s to lend. It has come to see what the borrower made of the loan. Show it the whole road, trainer. All of it. It will know if you leave any out.'], who: '' },
+    { arc: 'arc_arceus', stage: 'active' },
+    { wildBattleCatch: { species: 'arceus', level: 400, legendary: true } },
+    { arc: 'arc_arceus', stage: 'complete' },
+    { flag: 'arc_arceus_done' },
+    { toast: 'Arceus is yours. Below the Hall, unnoticed by anyone, the whole world goes on — which was rather the point of it.' },
+  ],
 };
 
 // ---------------------------------------------------------------------------
 // SINNOH_LEGENDARY_ARCS — Stage S6. The thirteen Sinnoh legendary
-// arcs, folded into LEGENDARY_ARCS by merge.mjs (the Johto/Hoenn
+// arcs (a fourteenth, the Arceus capstone, is appended by Stage S7),
+// folded into LEGENDARY_ARCS by merge.mjs (the Johto/Hoenn
 // fold idiom); the live entries supersede the story-kanto designed
 // stubs (Dialga/Palkia/Giratina key ONLY on sinnoh_climax_resolved
 // per decision 9; Regigigas' gate is the three Regis' party
@@ -898,6 +918,22 @@ export const SINNOH_LEGENDARY_ARCS = {
       { text: 'Face the Hallowed Tower\u2019s stones on Route 209 (the weathered rock west of the Lost Tower) with the keystone in hand, and face Spiritomb, level 365', catch: 'spiritomb' },
     ],
     lair: 'r209',
+  },
+  // Arc 4 Stage S7: the fourteenth arc — the capstone, and the only
+  // one gated on the FINALE rather than on any arc's completion:
+  // its prereq flag (arceus_unlocked) is set by the finale
+  // homecoming alone, so the arc cannot appear in any Quest Log
+  // before the whole road has been walked home.
+  arc_arceus: {
+    id: 'arc_arceus', title: 'The Hall of Origin', species: 'arceus', region: 'Sinnoh',
+    prereq: 'arceus_unlocked',
+    hook: 'Above the oldest pillar in the world there is a first room, and in it the one who was present before the chains, before the lakes, before everything. It does not summon. It simply stops being unreachable — for exactly one trainer, the one the whole road was walked by.',
+    steps: [
+      { text: 'Walk the whole road home — the Azure Flute is entrusted only at the finale, in Pallet Town, when every journey stands complete', flag: 'arceus_unlocked' },
+      { text: 'Carry the Azure Flute (it rides in your bag\u2019s key pocket) to Spear Pillar, atop Mt. Coronet — play it where the sky was chained, and let it build the stairs', flag: 'arceus_stairs_open' },
+      { text: 'Climb the stairs to the Hall of Origin, above Spear Pillar, and face Arceus, level 400', catch: 'arceus' },
+    ],
+    lair: 'hall-of-origin',
   },
 };
 

@@ -15,7 +15,14 @@
 // assessment -> Fantina -> Dawn's Super Contest beat -> the Chimchar
 // gift -> Defog at Solaceon Ruins -> Maylene -> Saturn's door +
 // Reggie -> Paul's Veilstone audit. S5b APPENDS its rows to this
-// file (the H4b precedent).
+// file (the H4b precedent). S7 APPENDS the finale: Part A3 pure
+// units (the generic registry trigger by grep + by machine drive,
+// the finale data, the credits builder, the Master HoF contract,
+// the capstone data) and Part B3/B4 in the bundle — the fixture
+// walks home into the FINALE variant (echoes, entrusting, credits,
+// Master HoF), rides the capstone to 493/493 + the Platinum
+// Diploma, proves post-game integrity + NG+, and a Frontier-close
+// CONTROL fixture proves the standard homecoming is untouched.
 // Run: node --import ./register.mjs sinnoh-story-checks.mjs (from tests/)
 
 import { dirname, join } from 'node:path';
@@ -208,8 +215,8 @@ const CHAIN = [
   let checkOut = '';
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }); } catch (e) { checkOut = String(e.stdout || '') + String(e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A18 tables.json in sync (gen-tables --check, regenerated via the tool only); items 199 (192 + S5b\'s 4 keepsakes + the Lunar Wing key item — supersedes the S5a count); the quest vocabulary carries every q_sinnoh_* chain id (all 30) + all thirteen tale ids; keepsakes table carries the ten Sinnoh pieces; items table carries the Lunar Wing',
-    checkOut.includes('tables.json OK') && t.items.length === 199
+  ok('A18 tables.json in sync (gen-tables --check, regenerated via the tool only); items 200 (199 + the Azure Flute key item, Arc 4 Stage S7 — supersedes the S6 count); the quest vocabulary carries every q_sinnoh_* chain id (all 30) + all thirteen tale ids; keepsakes table carries the ten Sinnoh pieces; items table carries the Lunar Wing',
+    checkOut.includes('tables.json OK') && t.items.length === 200
     && SINNOH_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(SINNOH_TALES).every((id) => t.quests.includes(id))
     && ['dawnribbon', 'starshard', 'coalseamcharm', 'meadowcord', 'ruinbell', 'ribbonclasp', 'fencharm', 'shrinebell', 'frostpetal', 'beaconcoil'].every((id) => t.keepsakes.includes(id))
@@ -321,6 +328,106 @@ const CHAIN = [
     && (owSysSrc.match(/flags\.sinnoh_complete = true/g) || []).length === 1
     && owSysSrc.includes('checkArcCompletion(g)')
     && !owSysSrc.includes("regionsDone.push('sinnoh')") && !owSysSrc.includes('regionsDone.push("sinnoh")'));
+}
+
+// ================= Part A3: S7 pure units (THE FINALE) =================
+const arcsGameSrc = readFileSync(join(ROOT, 'src/game/arcs.mjs'), 'utf8');
+const arcsData = await import(join(ROOT, 'src/data/arcs.mjs'));
+const { ARC_FINALE_ECHOES, FINALE_CREDITS_OPEN, FINALE_CREDITS_CLOSE, FINALE_END_CARD, FINALE_GRANT_ITEM_ID, FINALE_UNLOCK_FLAG, ARCS: REG_ARCS, arcById: regArcById } = arcsData;
+const gameArcs = await import(join(ROOT, 'src/game/arcs.mjs'));
+const SCH7 = await import(join(ROOT, 'src/save/schema.mjs'));
+const VAL7 = await import(join(ROOT, 'api/_lib/validator.mjs'));
+const { normalizeHofList, defaultState } = await import(join(ROOT, 'src/game/state.mjs'));
+const { SINNOH_LEGENDARY_ARCS } = storyMod;
+const { LEGENDARY_ARCS: DESIGNED_ARCS7 } = await import(join(ROOT, 'src/data/story-kanto.mjs'));
+{
+  ok('A33 THE GENERIC TRIGGER (grep pin): the arc machine names NO region, NO capstone species and NO granted item anywhere in its source — the finale trigger is a pure registry read (successor playable = shipped|next; the finale branch keys on the successor row\u2019s future flag), and the unlock is written ONLY through the data-named flag (flags[FINALE_UNLOCK_FLAG])',
+    !/sinnoh/i.test(arcsGameSrc) && !/arceus/i.test(arcsGameSrc) && !/azure/i.test(arcsGameSrc)
+    && arcsGameSrc.includes("next.status === 'shipped'") && arcsGameSrc.includes('next.future')
+    && arcsGameSrc.includes('story.flags[FINALE_UNLOCK_FLAG] = true')
+    && !/flags\.arceus_unlocked\s*=/.test(arcsGameSrc));
+  ok('A34 finale DATA completeness: one bond echo per shipped arc (exactly the six registry completion keys, each a real line); the grant names a real key-pocket ITEMS row; the unlock flag is the capstone flag; the end card carries the coordinator-approved line verbatim as its own line',
+    JSON.stringify(Object.keys(ARC_FINALE_ECHOES).sort()) === JSON.stringify(['frontier', 'hoenn', 'johto', 'kanto', 'orange', 'sinnoh'])
+    && Object.values(ARC_FINALE_ECHOES).every((l) => typeof l === 'string' && l.length > 40)
+    && ITEMS[FINALE_GRANT_ITEM_ID] && ITEMS[FINALE_GRANT_ITEM_ID].pocket === 'key' && FINALE_GRANT_ITEM_ID === 'azureflute'
+    && FINALE_UNLOCK_FLAG === 'arceus_unlocked'
+    && FINALE_END_CARD.includes('Six journeys. Five leagues and a frontier. One road, walked whole.')
+    && FINALE_CREDITS_OPEN.length >= 1 && FINALE_CREDITS_CLOSE.length >= 1);
+  // finaleCreditsLines as a pure function over a fabricated full-road state.
+  const fakeState = {
+    story: { regionsDone: ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh'], flags: {} },
+    dex: { caught: Object.fromEntries(Array.from({ length: 492 }, (_, i) => [i + 1, true])) },
+    player: { playtimeSec: 360000 },
+  };
+  const creditLines = gameArcs.finaleCreditsLines(fakeState);
+  ok('A35 finaleCreditsLines is registry-built: the frame opens it, one listing line per completed arc in regionsDone order (label + region + the arc\u2019s own league line, read from the registry — nothing typed twice), the road-so-far counts 6 journeys + 492/493, and the END CARD closes the sequence (approved line as the penultimate movement)',
+    creditLines[0] === FINALE_CREDITS_OPEN[0]
+    && ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh'].every((id, i) => {
+      const a = regArcById(id);
+      return creditLines[FINALE_CREDITS_OPEN.length + i] === a.label + ' · ' + a.region + ' — ' + a.summaryLines[0];
+    })
+    && creditLines.some((l) => l.includes('6 journeys complete') && l.includes('492/493'))
+    && JSON.stringify(creditLines.slice(-FINALE_END_CARD.length)) === JSON.stringify(FINALE_END_CARD),
+    creditLines.join(' | ').slice(0, 300));
+  // The machine, driven purely with a recording ui: finale variant
+  // (sealed-future successor) vs standard variant (shipped successor).
+  const driveHomecoming = (mut) => {
+    const said = [];
+    const st = {
+      story: { arc: 'sinnoh', region: 'sinnoh', arc_directive: 'unova', regionsDone: ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh'], flags: { sinnoh_complete: true }, hof: [], arcDexStart: 386, arcStartPlaytime: 0 },
+      dex: { caught: Object.fromEntries(Array.from({ length: 492 }, (_, i) => [i + 1, true])) },
+      badges: { kanto: [], orange: [], johto: [], hoenn: [], sinnoh: ['coalbadge', 'forestbadge', 'relicbadge', 'cobblebadge', 'fenbadge', 'minebadge', 'iciclebadge', 'beaconbadge'], symbols: [] },
+      bag: {}, party: [{ speciesId: 'partner', level: 395, nickname: null }], player: { playtimeSec: 360000, name: 'ASH' },
+    };
+    if (mut) mut(st);
+    const g = { state: st, ui: { say: (lines, cb) => { said.push(...lines); if (cb) cb(); } } };
+    const fired = gameArcs.tryHomecoming(g);
+    return { st, said, fired };
+  };
+  const fin = driveHomecoming(null);
+  ok('A36 MACHINE (finale variant): a sealed-FUTURE successor plays the finale — echoes presented once per completed arc (6, in regionsDone order), the flute granted once, the unlock set, the Master HoF entry written (master flag, party snapshot), finale_done set, the sealed finish law kept (directive cleared, hook set, arc NOT advanced, NO embark), and the credits close on the end card',
+    fin.fired === true
+    && ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh'].every((id, i) => fin.said.some((l) => l === ARC_FINALE_ECHOES[id]))
+    && fin.said.filter((l) => Object.values(ARC_FINALE_ECHOES).includes(l)).length === 6
+    && fin.st.bag.azureflute === 1 && fin.st.story.flags.arceus_unlocked === true && fin.st.story.flags.finale_done === true
+    && fin.st.story.hof.length === 1 && fin.st.story.hof[0].master === true && fin.st.story.hof[0].team.length === 1 && fin.st.story.hof[0].badges === 8
+    && fin.st.story.arc_directive === null && fin.st.story.flags.hook_unova === true
+    && fin.st.story.arc === 'sinnoh' && !fin.st.story.flags.embark_unova
+    && fin.said[fin.said.length - 1] === FINALE_END_CARD[FINALE_END_CARD.length - 1]
+    && fin.said.includes('Six journeys. Five leagues and a frontier. One road, walked whole.'),
+    fin.said.join(' | ').slice(0, 200));
+  const ctl = driveHomecoming((st) => {
+    st.story.arc = 'frontier'; st.story.region = 'kanto'; st.story.arc_directive = 'sinnoh';
+    st.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn', 'frontier'];
+    st.story.flags = { frontier_complete: true };
+  });
+  ok('A37 MACHINE (control): a SHIPPED successor homecoming stays the STANDARD variant byte-for-byte in effect — the registry hook lines are delivered, the arc advances + embark arms + snapshots stamp, and there are NO finale side-effects (no echoes, no credits, no end card, no flute, no unlock, no Master entry, no finale flag)',
+    ctl.fired === true
+    && regArcById('sinnoh').hookLines.every((l) => ctl.said.includes(l))
+    && ctl.st.story.arc === 'sinnoh' && ctl.st.story.region === 'sinnoh' && ctl.st.story.flags.embark_sinnoh === true && ctl.st.story.flags.hook_sinnoh === true
+    && ctl.st.story.arc_directive === null && ctl.st.story.arcDexStart === 492
+    && !ctl.st.story.flags.finale_done && !ctl.st.story.flags.arceus_unlocked && !(ctl.st.bag.azureflute > 0)
+    && ctl.st.story.hof.length === 0
+    && !ctl.said.some((l) => Object.values(ARC_FINALE_ECHOES).includes(l))
+    && !ctl.said.includes('Six journeys. Five leagues and a frontier. One road, walked whole.'));
+  const arc7 = SINNOH_LEGENDARY_ARCS.arc_arceus;
+  const evArc = storyMod.SINNOH_EVENTS.ev_sinnoh_arceus, evStairs = storyMod.SINNOH_EVENTS.ev_sinnoh_arceus_stairs;
+  const bi7 = (evArc || []).findIndex((s) => s.wildBattleCatch);
+  ok('A38 the Arceus capstone data: the live arc\u2019s steps spell the requirements (finale flag -> the flute at Spear Pillar -> the stairs -> the catch), its lair is the shipped Hall of Origin map; the stairs event is dialogue-only and opens the stairs; the face rides the catch-only chain at band cap 400 with arc-complete + done flag strictly after; the story-kanto designed stub pre-registers the id for the validator vocabulary',
+    !!arc7 && !arc7.designedOnly && arc7.prereq === 'arceus_unlocked' && arc7.lair === 'hall-of-origin' && !!ALL_MAPS['hall-of-origin']
+    && arc7.steps.length === 3 && arc7.steps[0].flag === 'arceus_unlocked' && arc7.steps[1].flag === 'arceus_stairs_open'
+    && arc7.steps[2].catch === 'arceus' && /Azure Flute/.test(arc7.steps[1].text) && /Spear Pillar/.test(arc7.steps[1].text) && /Hall of Origin/.test(arc7.steps[2].text)
+    && Array.isArray(evStairs) && evStairs.every((s) => !s.wildBattleCatch && !s.battle && !s.battleAny) && evStairs.some((s) => s.flag === 'arceus_stairs_open')
+    && bi7 >= 0 && evArc[bi7].wildBattleCatch.species === 'arceus' && evArc[bi7].wildBattleCatch.level === 400 && evArc[bi7].wildBattleCatch.legendary === true
+    && evArc.slice(bi7 + 1).some((s) => s.arc === 'arc_arceus' && s.stage === 'complete') && evArc.slice(bi7 + 1).some((s) => s.flag === 'arc_arceus_done')
+    && evArc.slice(0, bi7).some((s) => s.arc === 'arc_arceus' && s.stage === 'active')
+    && !!DESIGNED_ARCS7.arc_arceus && DESIGNED_ARCS7.arc_arceus.designedOnly === true);
+  ok('A39 the Master HoF contract (the full quintet treatment): the finale-driven save itself (flute in bag + the master-flagged HoF entry the machine wrote) validates client AND server; the client normalizer round-trips master: true (and drops a non-true master); a non-boolean master is rejected by BOTH validators',
+    normalizeHofList([{ team: [{ speciesId: 'partner', level: 90, nickname: null }], badges: 8, master: true }], 400)[0].master === true
+    && normalizeHofList([{ team: [{ speciesId: 'partner', level: 90, nickname: null }], badges: 8, master: 'yes' }], 400)[0].master === undefined
+    && (() => { const s = defaultState(); s.story.arc = 'sinnoh'; s.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh']; s.bag.azureflute = 1; s.story.hof = [{ team: [{ speciesId: 'partner', level: 395, nickname: null }], badges: 8, master: true }]; const c = JSON.parse(JSON.stringify(s)); return SCH7.validateSave(c).ok && VAL7.validateSave(JSON.parse(JSON.stringify(s))).ok; })()
+    && (() => { const s = defaultState(); s.story.arc = 'sinnoh'; s.story.hof = [{ team: [{ speciesId: 'partner', level: 395, nickname: null }], badges: 8, master: 'yes' }]; return !SCH7.validateSave(JSON.parse(JSON.stringify(s))).ok && !VAL7.validateSave(JSON.parse(JSON.stringify(s))).ok; })(),
+    'flute+master save must validate on both sides');
 }
 
 // ================= Part B: headless bundle =================
@@ -767,6 +874,233 @@ const driver = `
     !!TRAINERS.wake && !!TRAINERS.volkner && !!TRAINERS.paul_conference && !!TRAINERS.tobias_darkrai && !!TRAINERS.tobias_latios
     && !!EVENTS.ev_sinnoh_spear_pillar && !!EVENTS.ev_sinnoh_distortion_climax && !!EVENTS.ev_sinnoh_hq_raid
     && !!QUESTS.tale_sinnoh_pastoria && !!QUESTS.tale_sinnoh_sunnyshore);
+
+  // ================= Part B3: S7 THE FINALE (true path) =================
+  // Continues the SAME fixture save: sinnoh_complete stands, the
+  // directive is pinned on the sealed successor, the road home is
+  // still to walk. Ball/flee helpers ride the S6 legendary idiom.
+  var attemptBall7 = function (ballId) {
+    var guard = 0, threw = false;
+    while (guard++ < 300) {
+      if (!(g.scenes.top instanceof BattleScene)) break;
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      if (g.ui.menuOpen) {
+        var m = g.ui.menu;
+        if (!threw) {
+          var bi = m.items.findIndex(function (it) { return !it.disabled && it.value === 'bag'; });
+          var ti = m.items.findIndex(function (it) { return !it.disabled && it.value === ballId; });
+          if (ti >= 0) { g.ui.debugChoose(ti); tk(g, 3); threw = true; continue; }
+          if (bi >= 0) { g.ui.debugChoose(bi); tk(g, 3); continue; }
+          break;
+        }
+        break;
+      }
+      pA(g); tk(g, 3);
+    }
+    return threw;
+  };
+  var catch7 = function () {
+    var n = 0;
+    while ((g.scenes.top instanceof BattleScene) && n++ < 4) { attemptBall7('masterball'); }
+    drain(g);
+    return !(g.scenes.top instanceof BattleScene);
+  };
+  var flee7 = function () {
+    var guard = 0;
+    while ((g.scenes.top instanceof BattleScene) && guard < 900) {
+      guard++;
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      if (g.ui.menuOpen) {
+        var m = g.ui.menu;
+        var ri = m.items.findIndex(function (it) { return !it.disabled && it.value === 'run'; });
+        if (ri >= 0) { g.ui.debugChoose(ri); tk(g, 3); continue; }
+        var fi = m.items.findIndex(function (it) { return !it.disabled && it.value === 'fight'; });
+        if (fi >= 0) { break; }
+        g.ui.debugChoose(m.items.length - 1); tk(g, 3); continue;
+      }
+      pA(g); tk(g, 3);
+    }
+    drain(g);
+    return !(g.scenes.top instanceof BattleScene);
+  };
+  var toBattle7 = function () {
+    var n = 0;
+    while (!(g.scenes.top instanceof BattleScene) && n < 400) {
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      if (g.ui.menuOpen) break;
+      tk(g, 2); n++;
+    }
+    return g.scenes.top instanceof BattleScene;
+  };
+  var logLines = function (entries) {
+    var out = [];
+    entries.forEach(function (e) { if (e.lines) out.push.apply(out, e.lines); });
+    return out;
+  };
+
+  // ---- C01: the unlock pinning, BEFORE the finale ----
+  ok('C01 UNLOCK PINNING (pre-finale): this sinnoh_complete save has NO Azure Flute, NO arceus_unlocked, NO finale flag, NO Master HoF entry, and arc_arceus is absent from its Quest Log state — completion alone unlocks nothing',
+    st.story.arc_directive === 'unova' && !!st.story.flags.sinnoh_complete
+    && !st.story.flags.arceus_unlocked && !st.story.flags.finale_done
+    && !(st.bag.azureflute > 0) && st.story.quests.arc_arceus === undefined
+    && !(st.story.hof || []).some(function (e) { return e.master; }));
+  ow = gotoMap(g, 'hall-of-origin', 10, 12); pump(g, 200);
+  ok('C02 the Hall of Origin stands SILENT before the finale: entering it fires no face, no stairs, no battle (the capstone is finale-gated, not map-gated)',
+    !(g.scenes.top instanceof BattleScene) && !st.story.flags.arceus_stairs_open && !st.story.flags.arc_arceus_done && st.story.quests.arc_arceus === undefined);
+  // The full-chain save's shelf + book, as a real six-arc save
+  // carries them: one HoF entry per completed league/frontier (the
+  // shipped entry shape) and a dex missing exactly one species.
+  st.story.hof = [
+    { team: [{ speciesId: 'partner', level: 88, nickname: null }, { speciesId: 'venusaur', level: 85, nickname: null }], badges: 8 },
+    { team: [{ speciesId: 'partner', level: 96, nickname: null }, { speciesId: 'charizard', level: 94, nickname: null }], badges: 4 },
+    { team: [{ speciesId: 'partner', level: 186, nickname: null }, { speciesId: 'blastoise', level: 182, nickname: null }], badges: 8 },
+    { team: [{ speciesId: 'partner', level: 288, nickname: null }, { speciesId: 'gengar', level: 285, nickname: null }], badges: 8 },
+    { team: [{ speciesId: 'partner', level: 340, nickname: null }, { speciesId: 'snorlax', level: 338, nickname: null }], badges: 7 },
+    { team: [{ speciesId: 'partner', level: 395, nickname: null }, { speciesId: 'gengar', level: 392, nickname: null }], badges: 8 },
+  ];
+  Object.values(SPECIES).forEach(function (sp) {
+    if (!sp.form && sp.dexNo >= 1 && sp.dexNo <= 493 && sp.id !== 'arceus') { st.dex.caught[sp.dexNo] = true; st.dex.seen[sp.dexNo] = true; }
+  });
+  st.bag.masterball = 99;
+  st.story.flags.scott_closing_done = true; // consumed on an earlier Pallet entry in the real chain (frontier E07 proves the beat itself)
+  ok('C03 the fixture now reads as the full-chain save: 492 of 493 caught (only the capstone outstanding), six per-arc HoF entries on the shelf',
+    Object.keys(st.dex.caught).length === 492 && !st.dex.caught[493] && st.story.hof.length === 6);
+
+  // ---- C04-C08: sail/walk home -> doorstep -> the finale homecoming ----
+  var logMark = g.ui.log.length;
+  ow = gotoMap(g, 'pallet', 7, 9); pump(g, 400);
+  ow = gotoMap(g, 'house-pallet-ash', 4, 4); pump(g, 1500);
+  var finEntries = g.ui.log.slice(logMark);
+  var finLines = logLines(finEntries);
+  var echoVals = Object.values(ARC_FINALE_ECHOES);
+  var presentedEchoes = finLines.filter(function (l) { return echoVals.includes(l); });
+  ok('C04 THE FINALE HOMECOMING fires at Mom\\'s house (the sealed-future successor): finale_done + homecoming_unova stand, the directive is COMPLETE (cleared), hook_unova was delivered, and the sealed law holds — story.arc does NOT advance and NO embark is armed',
+    !!st.story.flags.finale_done && !!st.story.flags.homecoming_unova
+    && st.story.arc_directive === null && !!st.story.flags.hook_unova
+    && st.story.arc === 'sinnoh' && !st.story.flags.embark_unova);
+  ok('C05 BOND ECHOES: exactly one echo beat per completed arc was presented — echo count == regionsDone count == 6, in regionsDone order, each line the data line keyed by that arc',
+    st.story.regionsDone.length === 6 && presentedEchoes.length === 6
+    && st.story.regionsDone.every(function (key, i) { return presentedEchoes[i] === ARC_FINALE_ECHOES[key]; }),
+    'echoes=' + presentedEchoes.length + ' done=' + st.story.regionsDone.join(','));
+  ok('C06 THE ENTRUSTING: Oak\\'s rating beat reads the 493 horizon (492 of 493 at the doorstep) and the finale — not completion — grants the Azure Flute (key pocket, exactly one) and sets arceus_unlocked',
+    finLines.some(function (l) { return l.indexOf('492 of 493') >= 0; })
+    && finLines.some(function (l) { return l.indexOf('AZURE FLUTE') >= 0; })
+    && st.bag.azureflute === 1 && !!st.story.flags.arceus_unlocked);
+  ok('C07 MASTER HALL OF FAME: the finale wrote the seventh entry, flagged master, with the walking party as its team (alongside the six per-arc entries, none of them master)',
+    st.story.hof.length === 7 && st.story.hof.filter(function (e) { return e.master; }).length === 1
+    && st.story.hof[6].master === true && st.story.hof[6].team.length === st.party.length
+    && st.story.hof.slice(0, 6).every(function (e) { return !e.master; }));
+  var arcTitlesOk = ARCS.filter(function (a) { return !a.future; }).every(function (a) {
+    return finLines.some(function (l) { return l.indexOf(a.label + ' · ' + a.region + ' — ') === 0; });
+  });
+  var lastEntry = finEntries[finEntries.length - 1];
+  ok('C08 FULL CREDITS: the finale\\'s last presented scene IS the credits — every completed arc listed by its registry title (six, from regionsDone), the road-so-far counts 6 journeys at 492/493, and the sequence CLOSES on the end card (approved line verbatim, card lines as the tail)',
+    arcTitlesOk
+    && finLines.some(function (l) { return l.indexOf('The road so far:') === 0 && l.indexOf('6 journeys complete') >= 0 && l.indexOf('492/493') >= 0; })
+    && !!lastEntry && Array.isArray(lastEntry.lines)
+    && JSON.stringify(lastEntry.lines.slice(-FINALE_END_CARD.length)) === JSON.stringify(FINALE_END_CARD)
+    && lastEntry.lines.includes('Six journeys. Five leagues and a frontier. One road, walked whole.'),
+    finLines.slice(-4).join(' | '));
+  // ---- C09: the Master entry is READABLE in the HoF viewer ----
+  g.openHallOfFame(); tk(g, 2);
+  var hofHtml = (g.ui.summary && g.ui.summary.data && g.ui.summary.data.tabs[0].bodyHtml) || '';
+  if (g.ui.closeSummary) g.ui.closeSummary();
+  ok('C09 the HoF viewer surfaces the Master entry ALONGSIDE the per-arc entries: 7 entry plates rendered, the MASTER ENTRY head present, per-arc Entry heads intact',
+    (hofHtml.match(/hofentry/g) || []).length === 7 && hofHtml.indexOf('MASTER ENTRY') >= 0
+    && hofHtml.indexOf('Entry 6') >= 0 && hofHtml.indexOf('HALL OF FAME') >= 0,
+    hofHtml.slice(0, 160));
+  // ---- C10: the Quest Log gains the capstone ONLY now ----
+  ow = gotoMap(g, 'pallet', 7, 9); pump(g, 200);
+  g.openQuestLog(); tk(g, 2);
+  var logItems3 = g.ui.menu ? g.ui.menu.items : [];
+  var logLabels3 = logItems3.map(function (i) { return i.label; }).join(' | ');
+  if (g.ui.menuOpen) { var li3 = logItems3.findIndex(function (i) { return i.value === 'close'; }); if (li3 >= 0) g.ui.debugChoose(li3); tk(g, 3); }
+  drain(g);
+  ok('C10 THE CAPSTONE APPEARS: after the finale, the Quest Log\\'s Legendary Arcs section lists The Hall of Origin (discovered on the unlock) with its requirement steps spelled out in its card (Azure Flute -> Spear Pillar -> the stairs)',
+    st.story.quests.arc_arceus === 'discovered' && logLabels3.indexOf('The Hall of Origin') >= 0,
+    logLabels3.slice(0, 240));
+
+  // ---- C11-C13: Spear Pillar -> the stairs -> Arceus at the cap ----
+  strongTeam(g, 395); healUp(g);
+  ow = gotoMap(g, 'spear-pillar', 13, 12); pump(g, 600);
+  ok('C11 THE FLUTE AT SPEAR PILLAR: with the unlock standing, entering the pillar plays the flute ceremony (arceus_stairs_open) — a say-only opening, no battle forced',
+    !!st.story.flags.arceus_stairs_open && !(g.scenes.top instanceof BattleScene));
+  ow = gotoMap(g, 'hall-of-origin', 10, 12);
+  var faced = toBattle7();
+  var foe7 = (g.scenes.top instanceof BattleScene) ? g.scenes.top.foe : null;
+  ok('C12 THE CAPSTONE FACES: Arceus stands in the Hall of Origin at the band cap, level 400',
+    faced && !!foe7 && foe7.speciesId === 'arceus' && foe7.level === 400,
+    foe7 ? foe7.speciesId + '@' + foe7.level : 'no battle');
+  flee7(); pump(g, 200);
+  ok('C13 FLEE RE-FIRES (the catch law, even here): fleeing Arceus completes nothing — no done flag, no dex, the arc stays open',
+    !st.story.flags.arc_arceus_done && !st.dex.caught[493] && st.story.quests.arc_arceus !== 'complete');
+  healUp(g);
+  ow = gotoMap(g, 'hall-of-origin', 10, 12);
+  var faced2 = toBattle7();
+  catch7(); pump(g, 300);
+  ok('C14 THE CATCH COMPLETES THE 493: the re-fired face is caught — arc_arceus_done stands, the Quest Log entry completes, and the dex reads 493/493 at the Platinum horizon',
+    faced2 && !!st.story.flags.arc_arceus_done && st.story.quests.arc_arceus === 'complete'
+    && !!st.dex.caught[493] && Object.keys(st.dex.caught).length === 493,
+    'caught=' + Object.keys(st.dex.caught).length);
+  tk(g, 30);
+  ok('C15 THE PLATINUM DIPLOMA READS EARNED on the completed dex (the shipped Foundation presentation, keyed to 493 — proven, not rebuilt): platinum_diploma stands after the catch',
+    !!st.story.flags.platinum_diploma);
+  g.openDiploma(); tk(g, 2);
+  var dipHtml = (g.ui.summary && g.ui.summary.data && g.ui.summary.data.tabs[0].bodyHtml) || '';
+  if (g.ui.closeSummary) g.ui.closeSummary();
+  ok('C16 the Diploma viewer presents the PLATINUM plate (all 493 species of the Platinum horizon)',
+    dipHtml.indexOf('PLATINUM DIPLOMA') >= 0 && dipHtml.indexOf('493') >= 0, dipHtml.slice(0, 120));
+
+  // ---- C17-C20: post-game integrity ----
+  ow = gotoMap(g, 'house-pallet-ash', 4, 4); pump(g, 300);
+  ok('C17 NO DANGLING DIRECTIVE: re-entering home is quiet — the directive stays complete and never re-pins, the finale never re-fires (Master count still exactly one, flute still exactly one)',
+    st.story.arc_directive === null && st.story.hof.filter(function (e) { return e.master; }).length === 1 && st.bag.azureflute === 1);
+  g.openJourney(); tk(g, 2);
+  var jItems = g.ui.menu ? g.ui.menu.items : [];
+  var jLabels = jItems.map(function (i) { return i.label; }).join(' | ');
+  if (g.ui.menuOpen) { var ji = jItems.findIndex(function (i) { return i.value === 'close'; }); if (ji >= 0) g.ui.debugChoose(ji); tk(g, 3); }
+  drain(g);
+  ok('C18 the Journey menu reads the finished road: all six arc headers COMPLETE, and the future rows stand as one SEALED silhouette band (nothing fake-playable)',
+    ['KANTO — COMPLETE', 'ORANGE ISLANDS — COMPLETE', 'JOHTO — COMPLETE', 'HOENN — COMPLETE', 'BATTLE FRONTIER — COMPLETE', 'SINNOH — COMPLETE']
+      .every(function (s) { return jLabels.indexOf(s) >= 0; })
+    && jLabels.indexOf('FUTURE ARCS — SEALED') >= 0,
+    jLabels.slice(0, 300));
+  ow = gotoMap(g, 'vermilion', 13, 9); pump(g);
+  var capt7 = ow.map.npcs.find(function (n) { return n.name === 'CAPT SINNOH'; });
+  if (capt7) { ow.sysNpc(capt7); pump(g, 600); }
+  ok('C19 THE FERRY NETWORK IS WHOLE after the finale + capstone: CAPT SINNOH still sails Vermilion -> Sandgem on the shipped crossing (returns unconditional)',
+    !!capt7 && st.story.position.map === 'sandgem', 'pos=' + st.story.position.map);
+  g.beginSecondJourney(st); tk(g, 3);
+  ok('C20 A SECOND JOURNEY STARTS from the full-chain save (the shipped NG+ path): ngPlus climbs to 1, the new run\\'s own HoF is empty, and the prior-journey shelf carries all seven entries — the Master entry among them, its flag intact through the normalizer',
+    g.state.meta.ngPlus === 1 && g.state.story.hof.length === 0
+    && g.state.story.priorHof.length === 7 && g.state.story.priorHof.some(function (e) { return e.master === true; }),
+    'ngPlus=' + g.state.meta.ngPlus + ' prior=' + (g.state.story.priorHof || []).length);
+
+  // ================= Part B4: CONTROL — the Frontier homecoming =================
+  // A Frontier-complete save whose successor IS shipped: its
+  // homecoming must remain the standard variant with NO finale
+  // side-effects (the frontier suite's E09/E10 drive the same
+  // machine from its own fixture; this is the in-suite control).
+  var g2 = mkGame(902); boot(g2); strongTeam(g2, 360);
+  var s2 = g2.state;
+  s2.story.arc = 'frontier'; s2.story.region = 'kanto';
+  s2.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn', 'frontier'];
+  s2.badges.kanto = ['boulderbadge','cascadebadge','thunderbadge','rainbowbadge','soulbadge','marshbadge','volcanobadge','earthbadge'];
+  s2.badges.orange = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'];
+  s2.badges.johto = ['zephyrbadge','hivebadge','plainbadge','fogbadge','stormbadge','mineralbadge','glacierbadge','risingbadge'];
+  s2.badges.hoenn = ['stonebadge','knucklebadge','dynamobadge','heatbadge','balancebadge','featherbadge','mindbadge','rainbadge'];
+  s2.badges.symbols = ['gold','gold','gold','gold','gold','gold','gold'];
+  s2.story.flags.frontier_complete = true; s2.story.flags.arc_card_frontier = true;
+  s2.story.arc_directive = 'sinnoh';
+  var ow2 = gotoMap(g2, 'house-pallet-ash', 4, 4); pump(g2, 900);
+  var ctlLines = logLines(g2.ui.log);
+  ok('C21 CONTROL (the Frontier close): the homecoming whose successor is SHIPPED remains the standard variant — hook delivered, directive cleared, arc advances, embark arms — with NO finale side-effects: no finale flag, no flute, no unlock, no Master entry, no echoes, no credits, no end card',
+    s2.story.arc === 'sinnoh' && s2.story.flags.hook_sinnoh === true && s2.story.flags.embark_sinnoh === true && s2.story.arc_directive === null
+    && !s2.story.flags.finale_done && !s2.story.flags.arceus_unlocked && !(s2.bag.azureflute > 0)
+    && !(s2.story.hof || []).some(function (e) { return e.master; })
+    && !ctlLines.some(function (l) { return echoVals.includes(l); })
+    && !ctlLines.includes('Six journeys. Five leagues and a frontier. One road, walked whole.'),
+    'arc=' + s2.story.arc + ' finale=' + !!s2.story.flags.finale_done);
 
   globalThis.__SQ5__ = Q;
 })();`;

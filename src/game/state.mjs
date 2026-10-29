@@ -38,7 +38,10 @@ export function normalizeHofEntry(e, cap) {
     }
     if (!team.length) return null;
     const badges = typeof e.badges === 'number' && Number.isFinite(e.badges) ? Math.max(0, Math.trunc(e.badges)) : 0;
-    return { team, badges };
+    // Arc 4 Stage S7: the Master entry (the finale's whole-road
+    // record) carries master: true through the round-trip — the one
+    // sanctioned extra field on the canonical shape.
+    return e.master === true ? { team, badges, master: true } : { team, badges };
   }
   if (typeof e.species === 'string' && e.species) {
     return { team: [{ speciesId: e.species, level: lvl(e.level), nickname: null }], badges: 0 };

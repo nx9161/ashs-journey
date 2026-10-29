@@ -48,6 +48,10 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 const { defaultState, makeMon } = await import(join(ROOT, 'src/game/state.mjs'));
 
 const THIRTEEN = ['arc_uxie', 'arc_mesprit', 'arc_azelf', 'arc_dialga', 'arc_palkia', 'arc_giratina', 'arc_heatran', 'arc_regigigas', 'arc_cresselia', 'arc_darkrai', 'arc_manaphy', 'arc_shaymin', 'arc_spiritomb'];
+// Arc 4 Stage S7 supersession: the register gains a FOURTEENTH arc —
+// the Arceus capstone (finale-gated, not climax-gated). A01 below is
+// re-scoped to the S6 thirteen + the capstone read separately.
+const FOURTEEN = THIRTEEN.concat(['arc_arceus']);
 const FACE = {
   arc_uxie: ['ev_sinnoh_uxie', 'uxie', 370],
   arc_azelf: ['ev_sinnoh_azelf', 'azelf', 370],
@@ -64,11 +68,12 @@ const FACE = {
 };
 
 {
-  ok('A01 the live register carries exactly the thirteen Sinnoh arcs, none designedOnly, every species real (dex 442 + 480-488 + 490 + 492); the designed register in story-kanto carries the arc_spiritomb stub S6 added (the validator-vocabulary pre-registration, Hoenn/Johto precedent)',
-    JSON.stringify(Object.keys(SINNOH_LEGENDARY_ARCS).sort()) === JSON.stringify(THIRTEEN.slice().sort())
-    && THIRTEEN.every((id) => { const a = SINNOH_LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Sinnoh' && SPECIES[a.species]; })
-    && JSON.stringify(THIRTEEN.map((id) => SPECIES[SINNOH_LEGENDARY_ARCS[id].species].dexNo).sort((x, y) => x - y)) === JSON.stringify([442, 480, 481, 482, 483, 484, 485, 486, 487, 488, 490, 491, 492])
-    && !!DESIGNED_ARCS.arc_spiritomb && DESIGNED_ARCS.arc_spiritomb.designedOnly === true);
+  ok('A01 the live register carries the thirteen S6 arcs PLUS the S7 Arceus capstone (fourteen, supersedes the S6 exactly-thirteen count), none designedOnly, every species real (dex 442 + 480-488 + 490 + 492 + 493); the designed register in story-kanto carries the arc_spiritomb stub S6 added AND the arc_arceus stub S7 added (the validator-vocabulary pre-registration, Hoenn/Johto precedent)',
+    JSON.stringify(Object.keys(SINNOH_LEGENDARY_ARCS).sort()) === JSON.stringify(FOURTEEN.slice().sort())
+    && FOURTEEN.every((id) => { const a = SINNOH_LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Sinnoh' && SPECIES[a.species]; })
+    && JSON.stringify(FOURTEEN.map((id) => SPECIES[SINNOH_LEGENDARY_ARCS[id].species].dexNo).sort((x, y) => x - y)) === JSON.stringify([442, 480, 481, 482, 483, 484, 485, 486, 487, 488, 490, 491, 492, 493])
+    && !!DESIGNED_ARCS.arc_spiritomb && DESIGNED_ARCS.arc_spiritomb.designedOnly === true
+    && !!DESIGNED_ARCS.arc_arceus && DESIGNED_ARCS.arc_arceus.designedOnly === true);
   ok('A02 every arc states its quest-log requirements: >=2 steps, exactly one catch step naming its own species, every other step flag-keyed and spelled out',
     THIRTEEN.every((id) => { const a = SINNOH_LEGENDARY_ARCS[id];
       return a.steps.length >= 2 && a.steps.filter((s) => s.catch).length === 1
@@ -127,9 +132,9 @@ const FACE = {
   const t6 = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
   let checkOut = '';
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); } catch (e) { checkOut = String(e.stdout || ''); }
-  ok('A08 the two new key items exist (oddkeystone + oaksletter, key pocket, never consumed); tables.json in sync via the tool (items 199; the quest vocabulary carries arc_spiritomb); NO member-card/magma-stone item was invented for Darkrai/Heatran',
+  ok('A08 the two new key items exist (oddkeystone + oaksletter, key pocket, never consumed); tables.json in sync via the tool (items 200 — 199 + the Azure Flute, Arc 4 Stage S7; the quest vocabulary carries arc_spiritomb + arc_arceus); NO member-card/magma-stone item was invented for Darkrai/Heatran',
     ITEMS.oddkeystone && ITEMS.oddkeystone.pocket === 'key' && ITEMS.oaksletter && ITEMS.oaksletter.pocket === 'key'
-    && Object.keys(ITEMS).length === 199 && t6.items.length === 199 && t6.quests.includes('arc_spiritomb')
+    && Object.keys(ITEMS).length === 200 && t6.items.length === 200 && t6.quests.includes('arc_spiritomb') && t6.quests.includes('arc_arceus') && t6.items.includes('azureflute')
     && checkOut.includes('tables.json OK') && !ITEMS.membercard && !ITEMS.magmastone);
   ok('A09 the Regigigas quest-log step SAYS the gate: it names Regirock, Regice AND Registeel and the words "in your party" (the spelled-out requirement the S6 handler reads live)',
     (() => { const s = SINNOH_LEGENDARY_ARCS.arc_regigigas.steps[0]; return s.flag === 'regi_trio_present' && /Regirock/.test(s.text) && /Regice/.test(s.text) && /Registeel/.test(s.text) && /in your party/i.test(s.text); })());
