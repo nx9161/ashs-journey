@@ -11,6 +11,11 @@ Object.assign(EVENTS, ORANGE_EVENTS, JOHTO_EVENTS);
 // validator quest list via gen-tables) serves them unchanged.
 Object.assign(QUESTS, JOHTO_TALES);
 Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
+// Stage J5 fold: Johto's live legendary arcs (the beasts + Celebi).
+// arc_celebi here deliberately supersedes the designed entry in
+// story-kanto.mjs (its steps described an errand the shipped game
+// never told); arc_hooh was activated in place in LEGENDARY_ARCS.
+Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
 // Story patch (fidelity audit): the movie invite's island landing was
 // scripted out of bounds (8,14 on a 12-row map) — land on the shore (8,9).
 for (const ev of Object.values(EVENTS)) {

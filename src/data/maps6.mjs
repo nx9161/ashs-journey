@@ -1,5 +1,9 @@
 // maps6.mjs — Arc 2 Stages J3a+J3b: JOHTO (maps, world art data, wild
-// tables). 82 maps: 11 towns, 33 routes/dungeons/waters, 38 interiors.
+// tables). 83 maps: 11 towns, 33 routes/dungeons/waters, 39 interiors.
+// Stage J5 adds one interior: the Rocket Hideout under Mahogany's
+// souvenir shop — the map J4b's scripted descent was staged without.
+// Its stair entry is an NPC/event warp in the engine (maps6 geography
+// itself only gains this one map).
 // Travel law: the Johto embark lands at newbark (registry: pallet ->
 // newbark, ferryArc 'johto' — the Pallet dock captain is appended at
 // loadMap via quests.mjs TALE_NPCS, the Vermilion/CAPT ORANGE pattern);
@@ -11897,6 +11901,71 @@ export const MAPS6 = {
     "events": [],
     "start": {
       "x": 11,
+      "y": 14
+    },
+    "indoor": true
+  },
+  "rocket-hideout": {
+    "id": "rocket-hideout",
+    "name": "Rocket Hideout",
+    "music": "pewter-theme",
+    "rows": [
+      "GGGGGGGGGGGGGGGGGGGGGGGGGG",
+      "GLLLLNLLLLLLLLýLNLLLLLLLLG",
+      "GLLṳṳṳṳṳṳLṅṆḛḛṆṅLṳṳṳṳṳṳLLG",
+      "GLLṳḯṳḯṳḯLṇLLLNṇLḯṳḯṳḯṳLLG",
+      "GLLṳṳẇṳẆṳLẁLLLLẁLṳẇṳẆṳṳLLG",
+      "GLLLṶṶṶṶṶLLLẂẂLLLṶṶṶṶṶLLLG",
+      "GLLLṶṶṶṶṶLLLẂẂLLLṶṶṶṶṶLLLG",
+      "GLṴLLLLNLLLẃẃẃẃLLLLLLLLṴLG",
+      "GLLLLLLLLLLẃẃẃẃLLLýLLLLLLG",
+      "GLLLLẆLNLLLẃẃẃẃLLLLLẇLLLLG",
+      "GLLLNýLLLLLẃẃẃẃLLLLLLLṷLLG",
+      "GNLṷLýLLLLLLLLLLLLLLLLLLLG",
+      "GLLLLLLLLṵLLLLLLṵLLLLLLLLG",
+      "GLLLLLSLLLLLLLLLLLLSLLLLLG",
+      "GLLNLLLLLLNLLLLLLLLLLLLLLG",
+      "GGGGGGGGGGGGLLGGGGGGGGGGGG"
+    ],
+    "warps": [
+      {
+        "x": 12,
+        "y": 15,
+        "to": {
+          "map": "mahogany",
+          "x": 18,
+          "y": 8
+        }
+      },
+      {
+        "x": 13,
+        "y": 15,
+        "to": {
+          "map": "mahogany",
+          "x": 18,
+          "y": 8
+        }
+      }
+    ],
+    "signs": [
+      {
+        "x": 6,
+        "y": 13,
+        "text": "CAGE ROW — INVENTORY IS NOT TO BE FED, WATERED, OR APOLOGISED TO. — MGMT"
+      },
+      {
+        "x": 19,
+        "y": 13,
+        "text": "TRANSMITTER CORE — IF THE LAKE STOPS SCREAMING, CHECK THE ELECTRODE LINE FIRST."
+      }
+    ],
+    "npcs": [],
+    "encounters": null,
+    "items": [],
+    "hidden": [],
+    "events": [],
+    "start": {
+      "x": 12,
       "y": 14
     },
     "indoor": true

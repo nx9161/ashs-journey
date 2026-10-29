@@ -123,6 +123,29 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_orange_2000_lugia');
       }
     }
+    // Stage J5 (legendary arcs + hideout re-home): map-entry scenes,
+    // same idiom — every legendary face is gated on its arc's own
+    // progress flags (never on the event-done flag alone), and the
+    // catch-only chain (wildBattleCatch) leaves everything unwritten
+    // on a flee or a KO, so each face re-fires until the catch.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const jf = g.state.story.flags;
+      if (id === 'r29' && g.state.story.arc === 'johto' && !jf.hooh_history && !jf.hooh_glimpsed && !jf.ev_johto_hooh_glimpse_done) {
+        this.runEvent('ev_johto_hooh_glimpse');
+      } else if (id === 'rocket-hideout' && jf.red_gyarados_done && !jf.johto_hideout_cleared && !jf.ev_johto_hideout_done) {
+        // The J4b descent, re-homed: the same event, now staged on
+        // the hideout map itself (entry via Lance or the shop stairs).
+        this.runEvent('ev_johto_hideout');
+      } else if (id === 'national-park' && jf.arc_raikou_sign1 && jf.arc_raikou_sign2 && !jf.arc_raikou_done && !jf.ev_johto_raikou_done) {
+        this.runEvent('ev_johto_raikou');
+      } else if (id === 'mt-mortar-2' && jf.arc_entei_sign1 && jf.arc_entei_sign2 && !jf.arc_entei_done && !jf.ev_johto_entei_done) {
+        this.runEvent('ev_johto_entei');
+      } else if (id === 'bell-tower-1' && jf.arc_suicune_sign1 && jf.arc_suicune_sign2 && jf.arc_raikou_done && jf.arc_entei_done && !jf.arc_suicune_done && !jf.ev_johto_suicune_done) {
+        this.runEvent('ev_johto_suicune');
+      } else if (id === 'bell-tower-2' && jf.hooh_bell_received && !jf.arc_hooh_done && !jf.ev_johto_hooh_done) {
+        this.runEvent('ev_johto_hooh');
+      }
+    }
     // Stage J4a (Johto story, west): map-entry scenes, flag-gated once
     // each, in the Orange idiom — a scene's own completion flag is its
     // gate, so a stalled chain re-fires on a later entry. The Silver
@@ -478,6 +501,26 @@ Object.assign(OverworldScene.prototype, {
       }));
       return;
     }
+    // Stage J5: a one-of-one legendary face. Same battle as
+    // wildBattle, but the chain advances ONLY on a catch: a flee OR
+    // a KO stalls it with nothing set (the arc step and the
+    // event-done flag both stay unwritten), so the encounter
+    // re-fires until the species is caught — a one-of-one species
+    // must never dex-lock a player who knocked it out.
+    if (s.wildBattleCatch) {
+      const wb = s.wildBattleCatch;
+      const foe = makeMon(wb.species, wb.level, SPECIES, MOVES);
+      dexRegister(g.state.dex, 'seen', SPECIES[wb.species].dexNo);
+      g.scenes.push(new BattleScene({
+        kind: 'wild', foe, returnTo: this, rt: rtOf(g),
+        legendary: !!wb.legendary,
+        onEnd: (won, fled) => {
+          const caught = !!(g.state.dex && g.state.dex.caught && g.state.dex.caught[SPECIES[wb.species].dexNo]);
+          if (won && !fled && caught) next();
+        },
+      }));
+      return;
+    }
     if (s.ending) { this.runEnding(next); return; }
     next();
   },
@@ -541,6 +584,9 @@ Object.assign(OverworldScene.prototype, {
     // their exact behavior the rest of the time.
     const taleSpot = taleSpotAt(this.mapId, fx, fy);
     if (taleSpot && this.taleSpotInteract(taleSpot)) return true;
+    // Stage J5: the Ilex Forest shrine (the JSHRINE prop at (14,3))
+    // is Celebi's door — faced-tile, exactly like a tale spot.
+    if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
     const t = this.tileAt(fx, fy);
     // Item balls.
     if (this.map.items) {
@@ -1170,6 +1216,35 @@ Object.assign(OverworldScene.prototype, {
     const jBadges = (st.badges && st.badges.johto) || [];
     const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
     const kind = npc.johto;
+    // Stage J5 badge-order gate (register, J5 addendum): the server
+    // validator refuses any save whose badges are not a PREFIX of
+    // the earn order (bad-badge-order), but Johto's geography would
+    // otherwise let a player earn Fog before Plain, Mineral before
+    // Storm, or Glacier before Mineral — a legitimate playthrough
+    // producing a save the server rejects. Fixed at the source:
+    // every Johto leader's BATTLE (never their scenes or errands)
+    // requires the earlier Johto badges. Data-driven from
+    // BADGE_SETS.johto — leader index i refuses while the player
+    // holds fewer than i Johto badges, naming where the first
+    // missing badge's leader waits. Falkner (index 0) is always open.
+    const JOHTO_LEADER_WAITS = {
+      zephyrbadge: 'Falkner, in Violet City\'s gym',
+      hivebadge: 'Bugsy, in Azalea Town\'s gym',
+      plainbadge: 'Whitney, in Goldenrod City\'s gym',
+      fogbadge: 'Morty, in Ecruteak City\'s gym',
+      stormbadge: 'Chuck, in Cianwood City\'s gym',
+      mineralbadge: 'Jasmine, in Olivine City\'s gym',
+      glacierbadge: 'Pryce, in Mahogany Town\'s gym',
+      risingbadge: 'Clair, in Blackthorn City\'s gym',
+    };
+    const badgeOrderRefusal = (badgeId) => {
+      const idx = BADGE_SETS.johto.indexOf(badgeId);
+      if (idx <= 0 || jBadges.length >= idx) return null;
+      const miss = BADGE_SETS.johto[jBadges.length];
+      const missItem = ITEMS[miss];
+      return ['The League keeps an order in Johto, challenger, and I keep it with them: the badges are earned in sequence here, first to last.',
+        'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (JOHTO_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
+    };
 
     if (kind === 'elm') {
       if (!flags.johto_arrival && !flags.ev_johto_arrival_done) { this.runEvent('ev_johto_arrival'); return true; }
@@ -1226,6 +1301,33 @@ Object.assign(OverworldScene.prototype, {
         }
         say(['The well is quiet, the Slowpoke are whole, and Azalea can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
           'Hawthorn wrote that you carry a ball no machine can open. Bring it to this house when you can — an old pair of hands would like its turn at being defeated by it.']);
+        return true;
+      }
+      // Stage J5: the ball stirs. Once the tower has woken
+      // (beasts_awakened), Kurt's study scene resolves: he returns
+      // the ball to the bag and the whereabouts chain moves exactly —
+      // kurt_has_ball / gsball_at_kurt_house clear, the ball is back
+      // with the player, and the historical gsball_delivered stands.
+      if (flags.beasts_awakened && !flags.gsball_back_with_player) {
+        say(['You have come at the right hour, {player}. Sit — no. Stand. You will want to be standing for this.',
+          'The night the tower woke — and do not ask me how an old man in Azalea knows which night that was, the BALL told me — it began to hum. Not at the Ilex wind, the way it used to. Through it. Like something far away had finally answered, and the answer was a place, and the place was a shrine.',
+          'Forty years of craft, and the conclusion of all my study is this: it was never mine to keep, and it is done being studied. Here. Take it back, trainer. Whatever it has been waiting for is awake now — and it is waiting in Ilex Forest, at the old shrine, for the hands that carried it here.'], () => {
+          st.bag.gsball = (st.bag.gsball || 0) + 1;
+          flags.kurt_has_ball = false;
+          flags.gsball_at_kurt_house = false;
+          flags.gsball_back_with_player = true;
+          if (!st.story.quests.arc_celebi) st.story.quests.arc_celebi = 'discovered';
+          g.audio.playSfx('dex-register');
+          g.ui.toast('Kurt returned the GS Ball.');
+        });
+        return true;
+      }
+      if (flags.gsball_back_with_player && !flags.arc_celebi_done) {
+        say(['It is yours again, and louder than ever, I\'ll wager. The shrine in Ilex, {player} — through the forest gate, in the old clearing. Go and let the ball finish its one errand.']);
+        return true;
+      }
+      if (flags.arc_celebi_done) {
+        say(['An open ball, an answered forest, and news that walked here faster than you did. Keep the ball, {player}. Some tools a craftsman makes once in a lifetime. That one, nobody made — and now it is a souvenir of the day time itself said hello to Azalea.']);
         return true;
       }
       say(['The ball sits in my study and hums at the Ilex wind. Patience, trainer. Some locks are not picked. They are answered.']);
@@ -1292,10 +1394,10 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'lance_mahogany') {
       if (flags.johto_hideout_cleared) { say(['The signal is dead and the lake is calm — I checked from the air at dawn. Team Rocket\'s Johto operation ended in that basement, trainer. What remains is the honest work: Pryce, Blackthorn, and a Conference with your name rising up its bracket.']); return true; }
       if (!flags.red_gyarados_done) { say(['You have the look of a trainer between errands, so let me lend you one: the Lake of Rage, north of here. Something red is tearing it apart, and I do not believe in coincidences with scales. Look into it. Then come back and tell me what the water said.']); return true; }
-      say(['You saw the lake. You heard the signal in its screaming. The source is here, {player} — under the souvenir shop, behind the postcards: a transmitter, a power core, and the whole Johto operation of a team that should have stayed beaten.', 'Dragonite and I take the front. You take everything that moves behind us. Are you ready to go down?'], () => {
+      say(['You saw the lake. You heard the signal in its screaming. The source is here, {player} — under the souvenir shop, behind the postcards: a transmitter, a power core, and the whole Johto operation of a team that should have stayed beaten.', 'Dragonite and I take the front, through the shop\'s stair. You take everything that moves behind us. Are you ready to go down?'], () => {
         g.ui.showMenu('Enter the Rocket Hideout with Lance?', [
           { label: 'Descend', value: 'yes' }, { label: 'Not yet', value: 'no' },
-        ], (v) => { if (v === 'yes') this.runEvent('ev_johto_hideout'); });
+        ], (v) => { if (v === 'yes') this.enterJohtoHideout(); });
       });
       return true;
     }
@@ -1303,6 +1405,10 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'clair') {
       if (jBadges.includes('risingbadge')) { say(['The Rising Badge sits well on you, {player}. The den chose, the shrine approved, and I — I concur, which the clan will tell you is the rarest of the three. The Conference road is yours. Do not waste it.']); return true; }
       if (flags.clair_beaten) { say(['The gym is settled between us — the DEN is not. North of the town, through the cliff mouth: the Dragon\'s Den, the elder, the old questions, the shrine. The badge waits there, {player}. It has only ever waited there.']); return true; }
+      // Stage J5: Clair's battle gates at index 7 like every other
+      // leader's (the den award path beyond it is unchanged).
+      const clairRefusal = badgeOrderRefusal('risingbadge');
+      if (clairRefusal) { say(clairRefusal); return true; }
       const ct = TRAINERS.clair;
       say([ct.intro[0]], () => {
         g.ui.showMenu('Challenge Clair?', [
@@ -1485,6 +1591,118 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
+    // ---- Stage J5: legendary witnesses, elders, and the stairs ----
+    // The beast chases' sign-steps. Each beast has TWO witnesses in
+    // order: the first reports the passing and points to the second;
+    // the second points to the lair. A witness only files their
+    // report after beasts_awakened, and the second only after the
+    // first (a trail reads from the beginning) — the flags they set
+    // are the arc steps' flags.
+    const BEAST_SIGNS = {
+      beast_sign_raikou_1: { arc: 'arc_raikou', sign: 'arc_raikou_sign1', prev: null, toast: 'Raikou\'s trail: a storm-split pine on Route 35. It went east.',
+        dormant: ['Storms I can read. That one last week, I could not. It came out of a clear sky, struck the old pine twice — and here is the part my report left out: the second bolt had already happened when the first one\'s thunder arrived. Backwards weather. I have stopped writing that down where supervisors can see it.'],
+        lines: ['There — see the pine? Black on the east side, and the grass around it combed FLAT, all one way, like something enormous stood here letting the storm off its back in waves.',
+          'I was up the pole when it happened, trainer. The lightning came twice, and between the flashes something stood in the road looking at the tree — four legs, a mane like a storm deciding to be hair, and fast the way ideas are fast. It did not flee. It departed. There is a difference, and my hands knew it before I did.',
+          'It went east, toward the park road. Thunder that hunts, hunts open ground — if you are following it, the National Park is where I would stand and wait to be found.'],
+        again: ['The pine is still black, the grass still combed. East, trainer — the National Park\'s open ground, when the air starts standing up on your arms.'],
+        after: ['They say the park\'s storm has a keeper now, and the keeper has a trainer. My reports have gone back to being very dull, and I have never been happier to file one.'] },
+      beast_sign_raikou_2: { arc: 'arc_raikou', sign: 'arc_raikou_sign2', prev: 'arc_raikou_sign1', toast: 'Raikou\'s trail ends at the National Park\'s storm field.',
+        tooEarly: ['The meadow stones, you mean? Scorch marks shaped almost like writing. Something passed here, certainly — but if you want the start of the trail it is west: Route 35, the storm-split pine, and a watcher named Iben who saw more of it than I did. Trails, like sentences, read best from the beginning.'],
+        lines: ['Look at the stones — no. LOOK at them. Scorch in spirals, and at the centre of every spiral, a print. A pawprint, trainer, burned into meadow stone like a signature pressed into sealing wax.',
+          'Whatever signed this meadow was not passing through. It was announcing. East of here the land opens out — the National Park, all that flat green under all that sky. A creature made of storm does not hide in woods and alleys. It waits in the open, daring the weather to argue.'],
+        again: ['The stones keep their signature. The park, trainer — open ground, when your hair starts to rise.'],
+        after: ['I heard the thunder over the park stop all at once, like a sentence finishing. Rangers talk, trainer. Congratulations — the meadow stones make sense now: it was practising its autograph.'] },
+      beast_sign_entei_1: { arc: 'arc_entei', sign: 'arc_entei_sign1', prev: null, toast: 'Entei\'s trail: warm pawprints in the Burned Tower\'s ash. It went toward heat.',
+        dormant: ['One hundred and fifty years of ash, and my whole duty is to keep it unstepped-in. Something died in this tower, trainer, and something else has been keeping the grief warm ever since. I sweep around the prints. That is all I will say while the basement sleeps.'],
+        lines: ['You have been below — I can tell; everyone who has wears the same quiet for a day. Then look, and do not step: the ash by the north wall. Prints. Enormous, fresh, and warm to the back of the hand, in a tower that has been cold since before my grandfather\'s grandfather.',
+          'The monks\' old books say the fire-beast walks out of this ash when it walks at all, and goes where the earth itself is hot. Mortar, trainer. The mountain east of us has a furnace in it that no one dug. Whatever was reborn in fire will go home to heat eventually.'],
+        again: ['Prints in the ash, pointing east. Mt. Mortar, trainer — follow the warmth.'],
+        after: ['The ash is cold this morning — truly cold, for the first time in my tenure. The tower feels... finished with something. Whatever you did on that mountain, monk\'s honour: the old tower thanks you.'] },
+      beast_sign_entei_2: { arc: 'arc_entei', sign: 'arc_entei_sign2', prev: 'arc_entei_sign1', toast: 'Entei\'s trail ends in Mt. Mortar\'s deep chamber.',
+        tooEarly: ['You feel it too? The warm draught from the upper halls. Master says it is geology. Master also says I imagine the smell of woodsmoke. Start where the prints are, trainer — the Burned Tower in Ecruteak keeps an ashkeeper who reads ash the way you read a map.'],
+        lines: ['Shh — feel the floor. There. Again. The mountain has a heartbeat, and it is not mine. It started the week the tower in Ecruteak woke; Master doubled our training and tripled his pretending not to notice.',
+          'Twice now I have seen the steam burst UP the chimney vents with nothing cooking below, and once — once — I heard a sound come down the shafts like a furnace clearing its throat. Whatever is using the deep chamber has a volcano\'s manners. Go carefully, trainer. The upper halls, and mind the heat.'],
+        again: ['The heartbeat is still there, under the floor. The deep chamber, trainer — upper halls, and mind the heat.'],
+        after: ['The mountain is quiet. Not cold — quiet, the way a dojo is quiet after the last bow. Master has started admitting he noticed things. Progress on every front, then.'] },
+      beast_sign_suicune_1: { arc: 'arc_suicune', sign: 'arc_suicune_sign1', prev: null, toast: 'Suicune was seen at the Bell Tower\'s foot. The wardens say it comes for the last time when its kin are quiet.',
+        dormant: ['I wind the tower bells and polish what the wind leaves. On certain mornings the big bell is wet — WET, trainer — though the night was dry as paper. The last keeper wrote it in the log for forty years and never once explained it. Keepers do not explain. We record.'],
+        lines: ['Then you are the one the logbook has been waiting for, because I am recording it now: three mornings since the tower woke, I have come at dawn and found it standing at the Bell Tower\'s foot. Still as a held breath. Ribbons moving in a wind that was not blowing anything else.',
+          'It did not run from me. It does not run, the old texts say — it arrives, when the water of the world needs carrying somewhere. The texts also say it will not come to the tower for the last time until its kin are quiet. The thunder and the fire first, trainer. Then, the tower\'s foot, at dawn.'],
+        again: ['Dawn, the tower\'s foot — but only when the others are quiet. It keeps its own order, that one.'],
+        after: ['This morning the big bell was dry, and the tower felt ordinary, and ordinary has never felt so much like a gift. The logbook has your name in it now, trainer. Keepers record. That is the highest honour we have.'] },
+      beast_sign_suicune_2: { arc: 'arc_suicune', sign: 'arc_suicune_sign2', prev: 'arc_suicune_sign1', toast: 'Suicune\'s route ends at the Bell Tower\'s foot.',
+        tooEarly: ['Fishers notice water, trainer — it is most of the job. If it is the clear-running water you are asking after, start in Ecruteak. The bell wardens keep a log of strange mornings, and lately every morning in it is strange.'],
+        lines: ['You see this shore? The northernmost rocks of Cianwood, where the inlet runs muddy nine days in ten. Last week it ran CLEAR — clear as a poured glass, all the way out to the second buoy — and a shape went along the waterline faster than the current, not swimming, not flying. Walking on the skin of the sea like it was a road it owned.',
+          'My grandmother had a word for water that cleans itself as it goes, and the word was a name, and I am not saying it out loud where the gulls can steal it. But the Ecruteak wardens will. It was travelling, trainer, settling its route. Where it ends, they say, is a tower — when the time is right.'],
+        again: ['The inlet has gone back to muddy, which almost disappoints me. The tower in Ecruteak, trainer — its foot, at dawn, when the others are quiet.'],
+        after: ['The harbourmaster asked me why the fish have been calm all week. I told him the water signed a treaty. He laughed. Let him — you and I know what walked the shoreline.'] },
+    };
+    const BS = BEAST_SIGNS[kind];
+    if (BS) {
+      if (!flags.beasts_awakened) { say(BS.dormant); return true; }
+      if (flags[BS.arc + '_done']) { say(BS.after); return true; }
+      if (flags[BS.sign]) { say(BS.again); return true; }
+      if (BS.prev && !flags[BS.prev]) { say(BS.tooEarly); return true; }
+      say(BS.lines, () => {
+        flags[BS.sign] = true;
+        if (BS.prev && st.story.quests[BS.arc] !== 'complete') st.story.quests[BS.arc] = 'active';
+        g.ui.toast(BS.toast);
+      });
+      return true;
+    }
+
+    if (kind === 'hooh_elder') {
+      if (flags.hooh_history) {
+        if (flags.hooh_bell_received) { say(['The bell, the summit, the dawn. Go, trainer — the sky has waited a hundred and fifty years for somebody specific, and my money is on the shape of your shadow.']); return true; }
+        if (flags.arc_raikou_done && flags.arc_entei_done && flags.arc_suicune_done) { say(['The beasts are quiet and the sisters are waiting, {player}. The dance theatre, across town — ask for the eldest dance, and mind your manners: they are older than they look, and so is their gift.']); return true; }
+        say(['The history you have; the bell you have not, and the bell waits on the beasts. Quiet the thunder, the fire, and the north wind first, {player} — then the sisters. The tower keeps its order, and so do I.']);
+        return true;
+      }
+      say(['You ask an old man about towers, in Ecruteak, in this year of all years. Walk with me — my knees teach better than my chair does.',
+        'A hundred and fifty years ago this town kept two towers, so that whichever way the great bird came over the hills there would be bells beneath it. The bells were never alarms, child. They were doorbells. Then lightning — ordinary, stupid, indifferent lightning — took the western tower, and three Pokemon who slept in its basement died in a fire no one could outrun.',
+        'And the bird came back. That is the part the histories whisper: it came down through the smoke and it CALLED — and the three who died stood up out of the ash and ran, remade: one into thunder, one into the mountain\'s fire, one into the north wind itself. Then it circled the new tower once, and it has been waiting ever since — not for worship. For a heart it could trust with what it protects.',
+        'You saw it, didn\'t you. On the road, in the morning, most likely — it likes to look at candidates before candidates know there is a test. The sisters at the dance theatre keep its bell. When the three it raised are quiet, ask them. And climb at dawn. Everything about that bird happens at dawn.'], () => {
+        flags.hooh_history = true;
+        if (!st.story.quests.arc_hooh) st.story.quests.arc_hooh = 'discovered';
+        g.ui.toast('Elder Gensai told you the tower\'s history.');
+      });
+      return true;
+    }
+
+    if (kind === 'kimono_bell') {
+      if (flags.hooh_bell_received) { say(['The bell is lighter than it looks, isn\'t it. Crystal should be heavy. It is not, because it was never really ours — we were only ever its shelf. The summit, trainer. At dawn. Dance attendance is not required, but it is tradition to bow to the sky.']); return true; }
+      if (!flags.hooh_history) { say(['You have come about the bell — do not look surprised; the theatre hears everything the tower hears, and the tower hears the town think. But the order of things matters here, trainer: the history first. Elder Gensai walks the east street by the towers most days. Let him tell you about the fire, and the three, and the waiting. Then we will talk about what we keep.']); return true; }
+      if (!(flags.arc_raikou_done && flags.arc_entei_done && flags.arc_suicune_done)) { say(['We know about the waking — the theatre\'s floor hummed the night it happened, and three of our dances have been restless ever since. The bell we keep is for the bird, trainer, and the bird will not be called while the three it raised are still abroad and unsettled. Quiet Raikou. Quiet Entei. Let Suicune finish its errand last, the way it likes. Then come back to us, and bring your best listening.']); return true; }
+      say(['Then it is time. Sisters — the eldest dance. The one we perform when the tower\'s guest is finally expected.',
+        'They dance it without music, and the silence is the music: five women becoming weather, becoming wings, becoming a tower standing and a tower remembered — and at the dance\'s still centre, Moeko lifts a box of pale cedar and opens it on a bell of clear crystal, cold as well-water, older than the theatre, older than the town\'s second skyline.',
+        'The Clear Bell. It has been rung exactly never, trainer. Bells like this are not rung — they are ANSWERED. Take it to the summit at dawn, and hold it where the sky can see it. If the heart is right, the sky will do the rest. It usually does, with hearts like yours.'], () => {
+        st.bag.clearbell = (st.bag.clearbell || 0) + 1;
+        flags.hooh_bell_received = true;
+        if (st.story.quests.arc_hooh !== 'complete') st.story.quests.arc_hooh = 'active';
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Received the Clear Bell!');
+      });
+      return true;
+    }
+
+    if (kind === 'hideout_stairs') {
+      if (!flags.red_gyarados_done) { say(['Storage, trainer — postcards, keyrings, forty cases of commemorative spoons. Nothing down those stairs but stock and spiders, and the spiders pay no rent. Move along and browse the mugs.']); return true; }
+      if (flags.johto_hideout_cleared) {
+        say(['The basement is quiet again — stock, spiders, and a fine set of empty cages we keep as a warning to future inventory. Have a look if you like; you have earned the tour.'], () => {
+          g.ui.showMenu('Take the shop stairs down?', [
+            { label: 'Go down', value: 'yes' }, { label: 'Stay up here', value: 'no' },
+          ], (v) => { if (v === 'yes') this.enterJohtoHideout(); });
+        });
+        return true;
+      }
+      say(['You are with the dragon man? Then you already know what my "storage" really is. The stairs are behind the counter, trainer, and whatever is making my stock vibrate is at the bottom of them. Go — and come back with my shop quiet again.'], () => {
+        g.ui.showMenu('Take the shop stairs down?', [
+          { label: 'Go down', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => { if (v === 'yes') this.enterJohtoHideout(); });
+      });
+      return true;
+    }
+
     // ---- the west leaders ----
     const LEADERS = {
       falkner: { badge: 'zephyrbadge', gate: 'sprout_tower_done',
@@ -1497,9 +1715,13 @@ Object.assign(OverworldScene.prototype, {
       morty: { badge: 'fogbadge', gate: null, gateLines: [],
         post: 'The fog keeps its counsel and so do I. Walk carefully in it, Fog Badge holder — it has decided you are interesting.' },
       // Stage J4b east leaders on the same runner: Jasmine's battle
-      // is gated on the potion delivery ONLY (amphy_healed — either
-      // gym order works; nothing else gates her), and Pryce's on the
-      // hideout (canon order — the occupation ends first).
+      // story-gate is the potion delivery (amphy_healed), and Pryce's
+      // is the hideout (canon order — the occupation ends first).
+      // Stage J5 adds the badge-order gate ahead of both (see
+      // badgeOrderRefusal): Storm (4) must precede Mineral (5) and
+      // Glacier (6) may not precede either — the J4b note's
+      // either-order freedom survives only where the prefix law
+      // allows it (Chuck before Jasmine was already prefix-true).
       chuck: { badge: 'stormbadge', gate: null, gateLines: [],
         post: 'Any time the sea brings you back, Storm Badge holder, my gym is its loudest address. Bring your hands — and your appetite. My wife insists on feeding challengers who survive me.' },
       jasmine: { badge: 'mineralbadge', gate: 'amphy_healed',
@@ -1519,6 +1741,11 @@ Object.assign(OverworldScene.prototype, {
       }
       say([L.post]); return true;
     }
+    // Stage J5: the badge-order gate composes ahead of each leader's
+    // own story gate (the League's order is the outer law; Sprout
+    // Tower / Amphy / the hideout keep their inner gates untouched).
+    const orderRefusal = badgeOrderRefusal(L.badge);
+    if (orderRefusal) { say(orderRefusal); return true; }
     if (L.gate && !flags[L.gate]) { say(L.gateLines); return true; }
     if (kind === 'morty' && !flags.beasts_awakened) {
       say(['Morty of Ecruteak. Before we battle, a keeper\'s courtesy: the Burned Tower stands open in the west of town, and its basement has been... restless. Look into it, trainer. A leader likes to know what his challengers have seen. Then come back, and we will see each other clearly.']);
@@ -2090,6 +2317,47 @@ Object.assign(OverworldScene.prototype, {
 
   // Faced-tile tale searches (sysInteract hook). Returns true only
   // when the spot did tale business; false lets signs/fishing speak.
+  // Stage J5: the Ilex shrine. With the returned GS Ball in the bag
+  // and Celebi uncaught, facing the shrine runs the opening scene
+  // (the catch-only event — a flee or KO leaves the shrine ready to
+  // try again). Otherwise it is a shrine: flavour, and after the
+  // catch, a memento line. Always handled (the prop is a set piece).
+  johtoShrineInteract() {
+    const g = this.game;
+    const f = g.state.story.flags;
+    if (f.arc_celebi_done) {
+      g.ui.say(['The shrine is quiet, and the forest is its own age again — all of its ages, really, but polite about it. The empty GS Ball in your bag weighs nothing at all, which for a souvenir is exactly right.']);
+      return true;
+    }
+    if (f.gsball_back_with_player && (g.state.bag.gsball || 0) > 0) {
+      this.runEvent('ev_johto_celebi');
+      return true;
+    }
+    if (f.beasts_awakened) {
+      g.ui.say(['A small shrine, moss-bearded and patient. Travellers leave flowers here for whatever keeps the deep forest. Something about the place makes your bag feel one object too light — as if something that belongs to the forest is sleeping somewhere else, in a craftsman\'s study, say.']);
+    } else {
+      g.ui.say(['A small shrine, moss-bearded and patient. Travellers leave flowers here for whatever keeps the deep forest. The carving is too weathered to read, which the forest clearly considers none of your business yet.']);
+    }
+    return true;
+  },
+
+  // Stage J5: descend into the Rocket Hideout — the Mahogany shop's
+  // stairs (Lance leads the way, or the shopkeeper lets you down).
+  // Landing on the map fires the re-homed descent event through the
+  // sysLoadMap gate when its conditions hold; after the clear, the
+  // same stairs simply visit the quiet base.
+  enterJohtoHideout() {
+    const g = this.game;
+    this.loadMap('rocket-hideout');
+    const m = this.map;
+    const sx = m.start ? m.start.x : 12, sy = m.start ? m.start.y : 14;
+    this.player.tx = sx; this.player.ty = sy;
+    this.player.px = sx * TILE; this.player.py = sy * TILE;
+    this.player.fx = sx; this.player.fy = sy; this.player.dir = 'up';
+    this.trail = [];
+    g.state.story.position = { map: 'rocket-hideout', x: sx, y: sy, dir: 'up' };
+  },
+
   taleSpotInteract(spot) {
     const g = this.game;
     const st = g.state;

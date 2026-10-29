@@ -496,16 +496,23 @@ export const LEGENDARY_ARCS = {
   },
 
   // ---- Johto (designed) -----------------------------------------------------
+  // Stage J5: arc_hooh is LIVE (the designed entry, activated in
+  // place). Two designed facts are superseded and recorded in the
+  // register: the encounter level 70 predates the arc bands (ruling
+  // 3) — the live face is Lv 182, inside Johto's band; and the lair
+  // id 'tintower' never existed as a map — the shipped tower is the
+  // Bell Tower ('bell-tower': bell-tower-1 / bell-tower-2, the
+  // summit where the face fires).
   arc_hooh: {
-    id: 'arc_hooh', title: 'The Rainbow Over the Ashes', species: 'hooh', region: 'Johto', designedOnly: true,
+    id: 'arc_hooh', title: 'The Rainbow Over the Ashes', species: 'hooh', region: 'Johto',
     hook: 'A tower in Ecruteak burned a hundred and fifty years ago — and something has circled its replacement ever since, waiting for a trainer with a pure heart.',
     steps: [
-      { text: 'Hear the tower’s history from Ecruteak’s elders' },
-      { text: 'Receive the Clear Bell from the Kimono sisters' },
-      { text: 'Climb the Tin Tower at dawn' },
-      { text: 'Face Ho-Oh, level 70', catch: 'hooh' },
+      { text: 'Hear the tower’s history from Ecruteak’s elders', flag: 'hooh_history' },
+      { text: 'Receive the Clear Bell from the Kimono sisters', flag: 'hooh_bell_received' },
+      { text: 'Climb the Bell Tower at dawn', flag: 'hooh_summit' },
+      { text: 'Face Ho-Oh, level 182', catch: 'hooh' },
     ],
-    lair: 'tintower',
+    lair: 'bell-tower',
   },
   arc_lugia: {
     id: 'arc_lugia', title: 'The Song Under the Whirlpools', species: 'lugia', region: 'Johto', designedOnly: true,

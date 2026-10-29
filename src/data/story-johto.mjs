@@ -17,9 +17,20 @@
 // AT THE DEN, not in the gym), the route-silver badge gate, the Silver
 // Conference (Gary must-win centrepiece, then Harrison — see the
 // Harrison mechanism note at his trainer def), johto_complete through
-// the Foundation machine, and Red on Mt. Silver as post-game. J5 owns
-// the beast / Celebi / Ho-Oh encounters (J4a only set their arming
-// flags — see the flag map in docs/audit-register.md).
+// the Foundation machine, and Red on Mt. Silver as post-game. J5 (this
+// stage, appended at the marked seams) ships the legendary arcs the
+// earlier stages armed: the three beasts (chases + lair faces on
+// `beasts_awakened`), Celebi (the GS Ball's return and the Ilex
+// shrine), and Ho-Oh (the designed arc_hooh, activated in
+// story-kanto.mjs) — plus the badge-order leader gate and the Rocket
+// Hideout interior map's re-homed staging (engine side).
+//
+// New event-step kind consumed by runSteps (Stage J5):
+//   { wildBattleCatch: { species, level, legendary } }
+//     — a one-of-one legendary face: the chain advances ONLY on a
+//       catch (a flee OR a KO stalls it with nothing set, so the
+//       encounter re-fires until the species is caught — a one-of-one
+//       can never dex-lock a player). See overworld-systems.
 //
 // New event-step kinds consumed by runSteps (overworld-systems.mjs):
 //   { battleAny: { trainer, winFlag, loseFlag } }
@@ -485,6 +496,9 @@ export const JOHTO_EVENTS = {
     { say: ['The basement of the Burned Tower smells of rain that fell a hundred and fifty years ago. Three plinths stand in a row at the chamber\'s heart, worn smooth by centuries of reverence — and all three are empty. Whatever slept here as statues is not sleeping here anymore.'], who: 'NARRATOR' },
     { say: ['A sound. Not a footstep — a held breath, released. At the far edge of the lamplight, where the broken stairs fall away: a shape. Tall. Blue as deep water under ice, with a crest like a wave deciding. It is watching you the way weather watches a coastline.'], who: 'NARRATOR' },
     { say: ['You do not reach for a ball. Some meetings are not battles, and your hand knows it before your head does. The shape holds your gaze for one long, measuring moment — then it is simply gone, and the basement is a basement again, and your heart is very loud in it.', 'Three plinths. Three absences. Ecruteak is going to want to hear about this — and Morty most of all.'], who: 'NARRATOR' },
+    { arc: 'arc_raikou', stage: 'discovered' },
+    { arc: 'arc_entei', stage: 'discovered' },
+    { arc: 'arc_suicune', stage: 'discovered' },
     { flag: 'beasts_awakened' },
     { flag: 'beast_seen_suicune' },
     { flag: 'johto_burned_tower' },
@@ -612,6 +626,72 @@ export const JOHTO_EVENTS = {
     { say: ['Whatever the battle decided, he stands in the settling dust doing the arithmetic he has avoided all arc — and then, astonishingly, he laughs. Once. Like it hurts and helps at the same time.', '"There is the gap. Not luck. Not the road. You trained yours like partners and I trained mine like weapons, and the weapons kept... looking at me. Waiting to be asked, not aimed." He looks at Feraligatr. Feraligatr looks back, patient as a tide. "...We are going back to Azalea. There is a man there who makes balls by hand, and a lab with a page missing. I do not know how you return a beginning. I am going to learn."', 'He steps out of the road. The whole road, all of it, held his breath with him — Silver Pass is yours, trainer. The Conference is at the top of it. Go and be measured by better judges than me.'], who: 'SILVER' },
     { flag: 'silver_route_done' },
     { toast: 'The road to the Conference is clear.' },
+  ],
+
+  // ================= Stage J5: legendary staging =================
+  // The episode-1 echo: a one-time glimpse on Route 29, fired by the
+  // sysLoadMap gate the first time the player enters r29 in the Johto
+  // arc before the tower history is heard. Dialogue-only flavour —
+  // it sets hooh_glimpsed, never a quest requirement.
+  ev_johto_hooh_glimpse: [
+    { say: ['The morning is doing its best impression of an ordinary one — and then the light changes.', 'Something crosses the sun: vast, unhurried, wings like a flag of every colour the sky owns. It does not look down. It does not need to. For three heartbeats the whole route is beneath a rainbow that is going somewhere on purpose — and then the sky is just the sky again, and a little poorer for it.'], who: 'NARRATOR' },
+    { arc: 'arc_hooh', stage: 'discovered' },
+    { flag: 'hooh_glimpsed' },
+    { toast: 'Something rainbow-winged crossed the morning. Ecruteak\'s elders would know that shape.' },
+  ],
+  // Raikou's face: the storm field of the National Park, after both
+  // trail signs. Catch-only chain (wildBattleCatch) — flee or KO and
+  // the storm simply gathers again another day.
+  ev_johto_raikou: [
+    { say: ['The park\'s open ground has been holding its breath all day — the fountain still, the grass combed flat by a wind that only blows at ankle height. Then the thunder arrives, except the sky is empty, and the thunder has legs.', 'It stands in the storm field looking at you the way weather looks at a house: without malice, without negotiation. Every hair on your arms stands up to greet it.'], who: 'NARRATOR' },
+    { arc: 'arc_raikou', stage: 'active' },
+    { wildBattleCatch: { species: 'raikou', level: 178, legendary: true } },
+    { arc: 'arc_raikou', stage: 'complete' },
+    { flag: 'arc_raikou_done' },
+    { toast: 'Raikou is yours. The storm lets go of the park all at once, like a held breath let out.' },
+  ],
+  // Entei's face: Mt. Mortar's deep chamber — the volcanic heart.
+  ev_johto_entei: [
+    { say: ['The mountain has been warm all the way up, but this chamber is the warmth\'s source — the rock ticks with cooling and heating, and somewhere below the floor something enormous turns over in the earth\'s sleep.', 'It steps out of the heat-shimmer already awake, already looking at you, ash sliding off a back broad as a lintel. The chamber\'s whole held breath goes out of it in one long, low note.'], who: 'NARRATOR' },
+    { arc: 'arc_entei', stage: 'active' },
+    { wildBattleCatch: { species: 'entei', level: 180, legendary: true } },
+    { arc: 'arc_entei', stage: 'complete' },
+    { flag: 'arc_entei_done' },
+    { toast: 'Entei is yours. The mountain settles around you like a dog deciding to stay.' },
+  ],
+  // Suicune's face: the Bell Tower's foot (bell-tower-1 entry), gated
+  // by its signs AND by both other beasts being caught — it comes to
+  // the tower when the others are quieted.
+  ev_johto_suicune: [
+    { say: ['It is standing at the tower\'s foot when you come in, exactly as the wardens said it would be once the others were quiet: patient as frost, ribbons hanging in air that has forgotten how to move.', 'It regards you the way deep water regards the shore — with total, courteous attention. The north wind, arriving politely late, moves through the tower bells and every one of them almost rings.'], who: 'NARRATOR' },
+    { arc: 'arc_suicune', stage: 'active' },
+    { wildBattleCatch: { species: 'suicune', level: 184, legendary: true } },
+    { arc: 'arc_suicune', stage: 'complete' },
+    { flag: 'arc_suicune_done' },
+    { toast: 'Suicune is yours. Somewhere above you, one bell rings once, very softly, on nobody\'s hand.' },
+  ],
+  // Celebi: the GS Ball at the Ilex shrine (fired by the shrine's
+  // faced-tile interact in overworld-systems, not a map-entry gate —
+  // the shrine is a place you go to, not a room you pass through).
+  ev_johto_celebi: [
+    { say: ['The GS Ball comes out of your bag already warm. At the shrine\'s foot it clicks — a small, definite sound, like a latch being asked a question and answering yes — and the two halves open on nothing at all, and the nothing is looking at you.', 'Then the forest breathes in. For one held moment Ilex is young: saplings where the old oaks stand, light the colour of first mornings, leaf-mould unstepped-on by any boot that has ever existed. A small green shape hangs in that younger light, wings ticking like a clock that counts in seasons, and it is laughing — delighted, entirely unafraid — and the laugh says: you took the long way round, and the long way round was the way.'], who: 'NARRATOR' },
+    { flag: 'celebi_shrine_opened' },
+    { arc: 'arc_celebi', stage: 'active' },
+    { wildBattleCatch: { species: 'celebi', level: 170, legendary: true } },
+    { arc: 'arc_celebi', stage: 'complete' },
+    { flag: 'arc_celebi_done' },
+    { say: ['When it is over the forest is old again, and kind about it. The GS Ball hangs open and empty in your hand — an ordinary impossible object, its one errand run. You keep it. Some souvenirs are proof; this one is a receipt.'], who: 'NARRATOR' },
+    { toast: 'Celebi is yours. The empty GS Ball stays in your bag — a memento.' },
+  ],
+  // Ho-Oh: the Bell Tower summit, with the Clear Bell in hand.
+  ev_johto_hooh: [
+    { say: ['The summit bells take the Clear Bell\'s chime up like a relay — hand to hand, bronze to crystal — and throw it out over Ecruteak in a single widening ring.', 'Then the sky answers. It comes down out of the morning in no hurry at all: seven colours in good order, a crest like a sunrise deciding to stay, eyes that have watched a tower burn and a tower rise and are interested — genuinely, courteously interested — in what you are. The perch takes its weight the way the tower takes weather. Five hundred years of ash settle, very quietly, in your chest.'], who: 'NARRATOR' },
+    { flag: 'hooh_summit' },
+    { arc: 'arc_hooh', stage: 'active' },
+    { wildBattleCatch: { species: 'hooh', level: 182, legendary: true } },
+    { arc: 'arc_hooh', stage: 'complete' },
+    { flag: 'arc_hooh_done' },
+    { toast: 'Ho-Oh is yours. Every bell in Ecruteak rings once — the sisters will say it was the wind, and smile when they say it.' },
   ],
 };
 
@@ -815,6 +895,28 @@ export const JOHTO_NPCS = [
     dialogue: ['Harrison, from Littleroot. I have been watching your side of the bracket with great interest.'] },
   { map: 'mt-silver-cave', x: 8, y: 2, name: 'RED', art: 'rival', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a3a5a', hair: '#2a1a0a', johto: 'red',
     dialogue: ['...'] },
+  // ---- Stage J5: legendary witnesses, elders, and the hideout stairs.
+  // The beast "signs" are witness NPCs placed by this same append
+  // idiom — generated signs are inert text (no flags), and a tracked
+  // chase needs state. Their handlers live with runJohtoNpc.
+  { map: 'r35', x: 17, y: 7, name: 'STORMWATCHER IBEN', art: 'camper', dir: 'down', johto: 'beast_sign_raikou_1',
+    dialogue: ['I watch weather for the park service. Lately the weather watches back.'] },
+  { map: 'r36', x: 22, y: 6, name: 'RANGER SOLVEIG', art: 'picnicker', dir: 'down', johto: 'beast_sign_raikou_2',
+    dialogue: ['Mind the meadow stones. Something has been signing them.'] },
+  { map: 'burned-tower-1', x: 5, y: 8, name: 'ASHKEEPER MONK', art: 'elder', dir: 'down', johto: 'beast_sign_entei_1',
+    dialogue: ['I keep the ashes of the old tower. Some of them, lately, are warm.'] },
+  { map: 'mt-mortar-1', x: 15, y: 5, name: 'KARATE TRAINEE BO', art: 'blackbelt', dir: 'down', johto: 'beast_sign_entei_2',
+    dialogue: ['Master trains above. Something else trains above too, I think.'] },
+  { map: 'ecruteak', x: 24, y: 6, name: 'BELL WARDEN YUKI', art: 'elder', dir: 'down', johto: 'beast_sign_suicune_1',
+    dialogue: ['The tower bells know more weather than the sky does.'] },
+  { map: 'cianwood', x: 24, y: 5, name: 'FISHERWOMAN NOOR', art: 'fisher', dir: 'down', johto: 'beast_sign_suicune_2',
+    dialogue: ['The north shore keeps a secret most mornings.'] },
+  { map: 'ecruteak', x: 20, y: 5, name: 'ELDER GENSAI', art: 'elder', dir: 'down', johto: 'hooh_elder',
+    dialogue: ['Two towers, one skyline, and a story older than both. Ask, if you have the time it deserves.'] },
+  { map: 'dance-theater', x: 5, y: 8, name: 'KIMONO SISTER MOEKO', art: 'kimono', dir: 'down', johto: 'kimono_bell',
+    dialogue: ['We dance the tower\'s seasons. The eldest of us keeps something for the tower, too.'] },
+  { map: 'mahogany', x: 20, y: 6, name: 'SHOPKEEPER PELL', art: 'clerk', dir: 'down', johto: 'hideout_stairs', hideoutWarp: 'rocket-hideout',
+    dialogue: ['Souvenirs above. Storage below. Mind the stairs — they are steeper than they look, and they look steep.'] },
 ];
 
 export const JOHTO_NPC_PATCHES = [
@@ -846,3 +948,70 @@ export const JOHTO_NPC_PATCHES = [
   { map: 'route-silver', name: 'VETERAN HALD', johto: 'silver_gate' },
   { map: 'silver-stadium', name: 'CONFERENCE OFFICIAL', johto: 'conference' },
 ];
+
+// ---------------------------------------------------------------------------
+// JOHTO_LEGENDARY_ARCS — Stage J5. The five Johto legendary arcs,
+// folded into LEGENDARY_ARCS by merge.mjs exactly the way Orange's
+// arcs fold (one arcs table, one quest log). arc_hooh is NOT here:
+// it was designed inside LEGENDARY_ARCS (story-kanto.mjs) and J5
+// activated it in place there. arc_celebi IS here, and Object.assign
+// order makes this live entry supersede the designed one in
+// story-kanto.mjs — the designed steps (a Farfetch'd errand) never
+// matched the shipped GS Ball story J4a actually told.
+//
+// Shared laws (all five arcs):
+//  - prereq `beasts_awakened` for the beasts and Celebi; Ho-Oh's
+//    prereq rides its steps (beasts complete before the bell).
+//  - Every face uses the catch-only wildBattleCatch chain: flee OR
+//    KO stalls the event with nothing set, so the encounter re-fires
+//    until the species is CAUGHT. Arc completion = the catch.
+//  - Levels sit in Johto's band (101-200): the beasts at 178/180/184,
+//    Celebi 170, Ho-Oh 182 (in LEGENDARY_ARCS; ruling 3 supersedes
+//    the designed Lv 70).
+// ---------------------------------------------------------------------------
+export const JOHTO_LEGENDARY_ARCS = {
+  arc_raikou: {
+    id: 'arc_raikou', title: 'The Thunder That Walks', species: 'raikou', region: 'Johto',
+    prereq: 'beasts_awakened',
+    hook: 'The Burned Tower\'s basement stands empty — and on clear nights since, the thunder over Goldenrod has had a shape in it, and the shape has been getting closer.',
+    steps: [
+      { text: 'Talk to Stormwatcher Iben on Route 35 — she saw lightning strike the same pine twice and then walk away from it', flag: 'arc_raikou_sign1' },
+      { text: 'Talk to Ranger Solveig on Route 36 about the scorch-signed meadow stones', flag: 'arc_raikou_sign2' },
+      { text: 'Face Raikou, level 178, in the National Park\'s storm field — its thunder hunts open ground', catch: 'raikou' },
+    ],
+    lair: 'national-park',
+  },
+  arc_entei: {
+    id: 'arc_entei', title: 'The Mountain\'s Heartbeat', species: 'entei', region: 'Johto',
+    prereq: 'beasts_awakened',
+    hook: 'It was born, the old monks say, in the lightning that burned the tower — and ash on the Burned Tower floor has been warm on cold mornings ever since the awakening.',
+    steps: [
+      { text: 'Talk to the Ashkeeper Monk in the Burned Tower about the pawprints in the ash', flag: 'arc_entei_sign1' },
+      { text: 'Talk to Karate Trainee Bo in Mt. Mortar about the heat below the upper halls', flag: 'arc_entei_sign2' },
+      { text: 'Face Entei, level 180, in Mt. Mortar\'s deep chamber — the volcanic heart of the mountain', catch: 'entei' },
+    ],
+    lair: 'mt-mortar-2',
+  },
+  arc_suicune: {
+    id: 'arc_suicune', title: 'The North Wind\'s Errand', species: 'suicune', region: 'Johto',
+    prereq: 'beasts_awakened',
+    hook: 'Of the three that woke beneath the Burned Tower, one runs with the north wind and purifies what it passes — and the tower wardens say it saves its last call for the tower itself, when its kin are quiet.',
+    steps: [
+      { text: 'Talk to Bell Warden Yuki in Ecruteak about the shape seen at the Bell Tower\'s foot', flag: 'arc_suicune_sign1' },
+      { text: 'Talk to Fisherwoman Noor on Cianwood\'s north shore about the water that ran clear', flag: 'arc_suicune_sign2' },
+      { text: 'Quiet Raikou and Entei first — then face Suicune, level 184, at the Bell Tower\'s foot, where it comes when the others are still', catch: 'suicune' },
+    ],
+    lair: 'bell-tower',
+  },
+  arc_celebi: {
+    id: 'arc_celebi', title: 'The Ball That Hums at Shrines', species: 'celebi', region: 'Johto',
+    prereq: 'beasts_awakened',
+    hook: 'The GS Ball Kurt has been studying began to hum the night the tower woke — and Kurt, who trusts old objects the way sailors trust weather, says it is not his to keep any longer.',
+    steps: [
+      { text: 'Return to Kurt in Azalea Town — the GS Ball stirred the night the tower woke, and he is giving it back', flag: 'gsball_back_with_player' },
+      { text: 'Take the GS Ball to the forest shrine in Ilex Forest and stand before it', flag: 'celebi_shrine_opened' },
+      { text: 'Face Celebi, level 170, in the forest\'s younger light', catch: 'celebi' },
+    ],
+    lair: 'ilex-forest',
+  },
+};

@@ -30,7 +30,8 @@ const JOHTO_ORDER = ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stor
 
 // ================= Part A: pure units =================
 const { arcById } = await import(join(ROOT, 'src/data/arcs.mjs'));
-const { JOHTO_QUESTS, JOHTO_TRAINERS, JOHTO_EVENTS, JOHTO_TALES, JOHTO_NPCS, JOHTO_NPC_PATCHES } = await import(join(ROOT, 'src/data/story-johto.mjs'));
+const { JOHTO_QUESTS, JOHTO_TRAINERS, JOHTO_EVENTS, JOHTO_TALES, JOHTO_NPCS, JOHTO_NPC_PATCHES, JOHTO_LEGENDARY_ARCS } = await import(join(ROOT, 'src/data/story-johto.mjs'));
+const { LEGENDARY_ARCS: KANTO_FILE_ARCS } = await import(join(ROOT, 'src/data/story-kanto.mjs'));
 const { ITEMS, BADGE_SETS } = await import(join(ROOT, 'src/data/items.mjs'));
 const { MAP_GROUND, groundForMap } = await import(join(ROOT, 'src/data/grounds.mjs'));
 const { defaultState, makeMon } = await import(join(ROOT, 'src/game/state.mjs'));
@@ -125,10 +126,10 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 145 (144 + secretpotion, Stage J4b), quests table carries every q_johto_* + johto tale id',
+  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 146 (145 + the Clear Bell key item, Stage J5 — supersedes the Stage J4b count), quests table carries every q_johto_* + johto tale id',
     checkOut.includes('tables.json OK')
     && JSON.stringify(t.badgeSequences.johto) === JSON.stringify(JOHTO_ORDER)
-    && t.items.length === 145
+    && t.items.length === 146
     && t.items.includes('secretpotion')
     && JOHTO_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(JOHTO_TALES).every((id) => t.quests.includes(id)), checkOut.trim());
@@ -232,6 +233,58 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
     && (() => { const won = JOHTO_EVENTS.ev_johto_silver_ilex_won, lost = JOHTO_EVENTS.ev_johto_silver_ilex_lost;
       return won.some((s) => s.battleAny && s.battleAny.trainer === 'silver_ilex') && lost.some((s) => s.battleAny && s.battleAny.trainer === 'silver_ilex')
         && JSON.stringify(won) !== JSON.stringify(lost); })());
+}
+
+// -- Stage J5: legendary arcs + badge gate + hideout map (pure units) --
+{
+  ok('A30 JOHTO_LEGENDARY_ARCS: the beasts + Celebi, prereq beasts_awakened, lairs authored (national-park / mt-mortar-2 / bell-tower / ilex-forest), every step carrying its flag or its catch',
+    JSON.stringify(Object.keys(JOHTO_LEGENDARY_ARCS).sort()) === JSON.stringify(['arc_celebi', 'arc_entei', 'arc_raikou', 'arc_suicune'])
+    && JOHTO_LEGENDARY_ARCS.arc_raikou.lair === 'national-park' && JOHTO_LEGENDARY_ARCS.arc_entei.lair === 'mt-mortar-2'
+    && JOHTO_LEGENDARY_ARCS.arc_suicune.lair === 'bell-tower' && JOHTO_LEGENDARY_ARCS.arc_celebi.lair === 'ilex-forest'
+    && Object.values(JOHTO_LEGENDARY_ARCS).every((a) => a.prereq === 'beasts_awakened' && a.steps.length === 3
+      && a.steps.slice(0, 2).every((s) => typeof s.flag === 'string') && a.steps[2].catch === a.species)
+    && JOHTO_LEGENDARY_ARCS.arc_raikou.steps[0].flag === 'arc_raikou_sign1' && JOHTO_LEGENDARY_ARCS.arc_raikou.steps[1].flag === 'arc_raikou_sign2'
+    && JOHTO_LEGENDARY_ARCS.arc_suicune.steps[2].text.includes('Raikou and Entei'));
+  ok('A31 arc_hooh ACTIVATED in place: no designedOnly, lair bell-tower (supersedes tintower), the four designed steps with flags, the face written at level 182 (ruling 3 supersedes the designed 70)',
+    !KANTO_FILE_ARCS.arc_hooh.designedOnly && KANTO_FILE_ARCS.arc_hooh.lair === 'bell-tower'
+    && KANTO_FILE_ARCS.arc_hooh.steps.length === 4
+    && KANTO_FILE_ARCS.arc_hooh.steps[0].flag === 'hooh_history' && KANTO_FILE_ARCS.arc_hooh.steps[1].flag === 'hooh_bell_received'
+    && KANTO_FILE_ARCS.arc_hooh.steps[2].flag === 'hooh_summit' && KANTO_FILE_ARCS.arc_hooh.steps[3].catch === 'hooh'
+    && KANTO_FILE_ARCS.arc_hooh.steps[3].text.includes('182'));
+  ok('A32 Clear Bell is a key-pocket ITEMS row; the GS Ball stays an ordinary bag item (its post-arc memento state needs no data change)',
+    ITEMS.clearbell && ITEMS.clearbell.pocket === 'key' && ITEMS.gsball && ITEMS.gsball.pocket === 'items');
+  const faceShape = (evId, species, level, doneFlag) => {
+    const ev = JOHTO_EVENTS[evId];
+    const bi = ev.findIndex((s) => s.wildBattleCatch);
+    return bi >= 0 && ev[bi].wildBattleCatch.species === species && ev[bi].wildBattleCatch.level === level && ev[bi].wildBattleCatch.legendary === true
+      && ev.every((s) => !s.wildBattle)
+      && ev.findIndex((s) => s.arc && s.stage === 'complete') > bi
+      && ev.findIndex((s) => s.flag === doneFlag) > bi;
+  };
+  ok('A33 J5 face events ride the catch-only chain: raikou 178 / entei 180 / suicune 184 / celebi 170 / hooh 182, arc-complete + done flags strictly AFTER the battle step, no plain wildBattle anywhere in them; the glimpse is dialogue-only; the Burned Tower event now writes the three beast arcs discovered',
+    faceShape('ev_johto_raikou', 'raikou', 178, 'arc_raikou_done')
+    && faceShape('ev_johto_entei', 'entei', 180, 'arc_entei_done')
+    && faceShape('ev_johto_suicune', 'suicune', 184, 'arc_suicune_done')
+    && faceShape('ev_johto_celebi', 'celebi', 170, 'arc_celebi_done')
+    && faceShape('ev_johto_hooh', 'hooh', 182, 'arc_hooh_done')
+    && JOHTO_EVENTS.ev_johto_hooh_glimpse.every((s) => !s.wildBattle && !s.wildBattleCatch && !s.battle && !s.battleAny)
+    && JOHTO_EVENTS.ev_johto_hooh_glimpse.some((s) => s.flag === 'hooh_glimpsed')
+    && ['arc_raikou', 'arc_entei', 'arc_suicune'].every((a) => JOHTO_EVENTS.ev_johto_burned.some((s) => s.arc === a && s.stage === 'discovered')));
+  const t5 = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
+  ok('A34 tables.json carries the five live arc ids + the clearbell item (validator quest/id plumbing for J5 saves)',
+    ['arc_raikou', 'arc_entei', 'arc_suicune', 'arc_celebi', 'arc_hooh'].every((id) => t5.quests.includes(id))
+    && t5.items.includes('clearbell'));
+  ok('A35 rocket-hideout is a shipped interior map: 26x16, indoor, start (12,14), both stair doors warp back to Mahogany (18,8), Storm ground',
+    !!MAPS6['rocket-hideout'] && MAPS6['rocket-hideout'].indoor === true
+    && MAPS6['rocket-hideout'].rows.length === 16 && MAPS6['rocket-hideout'].rows[0].length === 26
+    && MAPS6['rocket-hideout'].start.x === 12 && MAPS6['rocket-hideout'].start.y === 14
+    && MAPS6['rocket-hideout'].warps.length === 2
+    && MAPS6['rocket-hideout'].warps.every((w) => w.to.map === 'mahogany' && w.to.x === 18 && w.to.y === 8)
+    && MAP_GROUND['rocket-hideout'] === 'storm');
+  ok('A36 the J5 actors are placed by the append idiom: six beast witnesses (ordered sign kinds), the Ecruteak elder, the Kimono sister, and the Mahogany shopkeeper carrying the hideout stair warp',
+    ['beast_sign_raikou_1', 'beast_sign_raikou_2', 'beast_sign_entei_1', 'beast_sign_entei_2', 'beast_sign_suicune_1', 'beast_sign_suicune_2', 'hooh_elder', 'kimono_bell', 'hideout_stairs']
+      .every((k) => JOHTO_NPCS.some((n) => n.johto === k))
+    && JOHTO_NPCS.find((n) => n.johto === 'hideout_stairs').hideoutWarp === 'rocket-hideout');
 }
 
 // ================= Part B: headless bundle =================
@@ -854,6 +907,268 @@ const driver = `
   ok('E36 staging order: with the hideout uncleared, the Radio Tower is QUIET — no takeover, no battle (the takeover is post-hideout only)',
     !st12.story.flags.radio_takeover_active && !g12.ui.dialogueOpen && !(g12.scenes.top instanceof BattleScene));
 
+  // ================= Stage J5: legendary arcs + badge gate + hideout =================
+  function legendGame(seed) {
+    var gg = mkGame(seed); boot(gg); strongTeam(gg, 200);
+    var ss = westComplete(gg);
+    ss.bag.masterball = 99;
+    return [gg, ss];
+  }
+  function catchWithBall(g) {
+    var n = 0;
+    while ((g.scenes.top instanceof BattleScene) && n++ < 4) { attemptBall(g, 'masterball'); }
+    pump(g);
+    return !(g.scenes.top instanceof BattleScene);
+  }
+  function healParty(g) { g.state.party.forEach(function (m) { m.hp = m.maxHp; m.status = null; }); }
+
+  // F01: the glimpse fires once on r29 (johto arc active, pre-history).
+  {
+    var [gF1, stF1] = legendGame(501);
+    seenLines = [];
+    gotoMap(gF1, 'r29', 12, 8); pump(gF1);
+    var glimpsedOnce = stF1.story.flags.hooh_glimpsed === true && stF1.story.quests.arc_hooh === 'discovered'
+      && seenLines.join(' ').includes('crosses the sun');
+    seenLines = [];
+    gotoMap(gF1, 'r29', 12, 8); pump(gF1);
+    ok('F01 the Ho-Oh glimpse: fires on first r29 entry in the Johto arc (dialogue-only, sets hooh_glimpsed + arc discovered) and NEVER twice',
+      glimpsedOnce && !seenLines.join(' ').includes('crosses the sun') && !(gF1.scenes.top instanceof BattleScene),
+      seenLines.join(' | ').slice(0, 80));
+  }
+
+  // F02: beasts stay dormant before the awakening / before the signs.
+  {
+    var [gF2, stF2] = legendGame(502);
+    stF2.story.flags.beasts_awakened = false;
+    var owF2 = gotoMap(gF2, 'r35', 15, 8); pump(gF2);
+    talkKind(gF2, owF2, 'beast_sign_raikou_1'); pump(gF2);
+    var dormantOk = !stF2.story.flags.arc_raikou_sign1;
+    stF2.story.flags.beasts_awakened = true;
+    gotoMap(gF2, 'national-park', 15, 14); pump(gF2);
+    ok('F02 beast arcs arm only after beasts_awakened and only after the chase: the witness files no report before the awakening, and the park holds no face before the signs',
+      dormantOk && !(gF2.scenes.top instanceof BattleScene) && !stF2.story.flags.arc_raikou_done);
+  }
+
+  // F03+F04: Raikou's chase order, then flee / KO re-fire, catch completes.
+  {
+    var [gF3, stF3] = legendGame(503);
+    stF3.story.quests.arc_raikou = 'discovered'; // the Burned Tower staging (J4a event writes this)
+    var owF3a = gotoMap(gF3, 'r36', 20, 8); pump(gF3);
+    talkKind(gF3, owF3a, 'beast_sign_raikou_2'); pump(gF3);
+    var outOfOrder = !stF3.story.flags.arc_raikou_sign2;
+    var owF3b = gotoMap(gF3, 'r35', 15, 8); pump(gF3);
+    talkKind(gF3, owF3b, 'beast_sign_raikou_1'); pump(gF3);
+    var owF3c = gotoMap(gF3, 'r36', 20, 8); pump(gF3);
+    talkKind(gF3, owF3c, 'beast_sign_raikou_2'); pump(gF3);
+    ok('F03 Raikou chase order: the second witness points you back to the first (no flag out of order); the signs set in order and the arc goes active',
+      outOfOrder && stF3.story.flags.arc_raikou_sign1 === true && stF3.story.flags.arc_raikou_sign2 === true
+      && stF3.story.quests.arc_raikou === 'active');
+    gotoMap(gF3, 'national-park', 15, 14);
+    var met1 = drainToBattle(gF3);
+    var foeOk = met1 && gF3.scenes.top.foe && gF3.scenes.top.foe.speciesId === 'raikou' && gF3.scenes.top.foe.level === 178;
+    driveFlee(gF3); pump(gF3);
+    var fledOk = foeOk && !stF3.story.flags.arc_raikou_done && stF3.story.quests.arc_raikou !== 'complete' && !stF3.dex.caught[SPECIES.raikou.dexNo];
+    healParty(gF3);
+    gotoMap(gF3, 'national-park', 15, 14);
+    var met2 = drainToBattle(gF3);
+    driveBattle(gF3); pump(gF3); // a KO, not a catch
+    var koOk = met2 && !stF3.story.flags.arc_raikou_done && !stF3.story.flags.ev_johto_raikou_done && !stF3.dex.caught[SPECIES.raikou.dexNo];
+    healParty(gF3);
+    gotoMap(gF3, 'national-park', 15, 14);
+    var met3 = drainToBattle(gF3);
+    catchWithBall(gF3);
+    ok('F04 Raikou face (Lv 178, National Park storm field): flee re-fires, KO re-fires (a one-of-one never dex-locks), the CATCH completes the arc + quest state',
+      fledOk && koOk && met3 && stF3.story.flags.arc_raikou_done === true && stF3.story.quests.arc_raikou === 'complete'
+      && !!stF3.dex.caught[SPECIES.raikou.dexNo]);
+  }
+
+  // F05: Entei's chase + face (flee, then catch) in Mt. Mortar's deep chamber.
+  {
+    var [gF5, stF5] = legendGame(505);
+    stF5.story.quests.arc_entei = 'discovered';
+    var owF5a = gotoMap(gF5, 'burned-tower-1', 5, 10); pump(gF5);
+    talkKind(gF5, owF5a, 'beast_sign_entei_1'); pump(gF5);
+    var owF5b = gotoMap(gF5, 'mt-mortar-1', 15, 7); pump(gF5);
+    talkKind(gF5, owF5b, 'beast_sign_entei_2'); pump(gF5);
+    gotoMap(gF5, 'mt-mortar-2', 17, 11);
+    var metE = drainToBattle(gF5);
+    var foeE = metE && gF5.scenes.top.foe && gF5.scenes.top.foe.speciesId === 'entei' && gF5.scenes.top.foe.level === 180;
+    driveFlee(gF5); pump(gF5);
+    var fledE = foeE && !stF5.story.flags.arc_entei_done;
+    healParty(gF5);
+    gotoMap(gF5, 'mt-mortar-2', 17, 11);
+    var metE2 = drainToBattle(gF5);
+    catchWithBall(gF5);
+    ok('F05 Entei face (Lv 180, Mt. Mortar deep chamber): signs in order arm it, flee re-fires, the catch completes the arc',
+      stF5.story.flags.arc_entei_sign1 === true && stF5.story.flags.arc_entei_sign2 === true && fledE && metE2
+      && stF5.story.flags.arc_entei_done === true && stF5.story.quests.arc_entei === 'complete');
+  }
+
+  // F06: Suicune waits for its kin.
+  {
+    var [gF6, stF6] = legendGame(506);
+    stF6.story.quests.arc_suicune = 'discovered';
+    var owF6a = gotoMap(gF6, 'ecruteak', 22, 8); pump(gF6);
+    talkKind(gF6, owF6a, 'beast_sign_suicune_1'); pump(gF6);
+    var owF6b = gotoMap(gF6, 'cianwood', 22, 7); pump(gF6);
+    talkKind(gF6, owF6b, 'beast_sign_suicune_2'); pump(gF6);
+    gotoMap(gF6, 'bell-tower-1', 8, 10); pump(gF6);
+    var tooSoon = !(gF6.scenes.top instanceof BattleScene) && !stF6.story.flags.arc_suicune_done;
+    stF6.story.flags.arc_raikou_done = true; stF6.story.flags.arc_entei_done = true; // F04/F05 prove the catches; the gate reads the flags
+    gotoMap(gF6, 'bell-tower-1', 8, 10);
+    var metS = drainToBattle(gF6);
+    var foeS = metS && gF6.scenes.top.foe && gF6.scenes.top.foe.speciesId === 'suicune' && gF6.scenes.top.foe.level === 184;
+    catchWithBall(gF6);
+    ok('F06 Suicune face (Lv 184, the Bell Tower foot): signs through Ecruteak + Cianwood north shore, but NO face while Raikou/Entei are unquieted — then the catch completes',
+      stF6.story.flags.arc_suicune_sign1 === true && stF6.story.flags.arc_suicune_sign2 === true && tooSoon && foeS
+      && stF6.story.flags.arc_suicune_done === true && stF6.story.quests.arc_suicune === 'complete');
+  }
+
+  // F07: Ho-Oh's lock chain: history -> (beasts) -> bell -> summit.
+  {
+    var [gF7, stF7] = legendGame(507);
+    var owF7a = gotoMap(gF7, 'dance-theater', 9, 10); pump(gF7);
+    talkKind(gF7, owF7a, 'kimono_bell'); pump(gF7);
+    var noBellEarly = !stF7.bag.clearbell && !stF7.story.flags.hooh_bell_received;
+    var owF7b = gotoMap(gF7, 'ecruteak', 18, 7); pump(gF7);
+    talkKind(gF7, owF7b, 'hooh_elder'); pump(gF7);
+    var histOk = stF7.story.flags.hooh_history === true;
+    gotoMap(gF7, 'bell-tower-2', 8, 9); pump(gF7);
+    var summitQuiet = !(gF7.scenes.top instanceof BattleScene);
+    talkKind(gF7, owF7a, 'kimono_bell'); pump(gF7);
+    var noBellBeasts = !stF7.bag.clearbell;
+    stF7.story.flags.arc_raikou_done = true; stF7.story.flags.arc_entei_done = true; stF7.story.flags.arc_suicune_done = true;
+    var owF7c = gotoMap(gF7, 'dance-theater', 9, 10); pump(gF7);
+    talkKind(gF7, owF7c, 'kimono_bell'); pump(gF7);
+    var bellOk = (stF7.bag.clearbell || 0) >= 1 && stF7.story.flags.hooh_bell_received === true && stF7.story.quests.arc_hooh === 'active';
+    gotoMap(gF7, 'bell-tower-2', 8, 9);
+    var metH = drainToBattle(gF7);
+    var foeH = metH && gF7.scenes.top.foe && gF7.scenes.top.foe.speciesId === 'hooh' && gF7.scenes.top.foe.level === 182;
+    driveFlee(gF7); pump(gF7);
+    var fledH = foeH && !stF7.story.flags.arc_hooh_done;
+    healParty(gF7);
+    gotoMap(gF7, 'bell-tower-2', 8, 9);
+    var metH2 = drainToBattle(gF7);
+    catchWithBall(gF7);
+    ok('F07 Ho-Oh lock chain: no bell before the history, no bell before the beasts are quiet, no summit face without the bell — then flee re-fires and the catch (Lv 182) completes the arc',
+      noBellEarly && histOk && summitQuiet && noBellBeasts && bellOk && fledH && metH2
+      && stF7.story.flags.arc_hooh_done === true && stF7.story.quests.arc_hooh === 'complete' && stF7.story.flags.hooh_summit === true);
+  }
+
+  // F08: Celebi — locked until Kurt's return; the shrine; the memento.
+  {
+    var [gF8, stF8] = legendGame(508);
+    stF8.story.flags.silver_ilex_done = true; // the forest's other appointment, kept elsewhere (E34)
+    var owF8a = gotoMap(gF8, 'ilex-forest', 14, 5); pump(gF8);
+    owF8a.player.tx = 14; owF8a.player.ty = 4; owF8a.player.dir = 'up';
+    owF8a.tryInteract(); pump(gF8);
+    var shrineLocked = !stF8.story.flags.celebi_shrine_opened && !(gF8.scenes.top instanceof BattleScene);
+    var owF8b = gotoMap(gF8, 'kurt-house', 4, 6); pump(gF8);
+    talkKind(gF8, owF8b, 'kurt'); pump(gF8);
+    var returned = (stF8.bag.gsball || 0) === 1 && stF8.story.flags.gsball_back_with_player === true
+      && !stF8.story.flags.kurt_has_ball && !stF8.story.flags.gsball_at_kurt_house && stF8.story.flags.gsball_delivered === true
+      && stF8.story.quests.arc_celebi === 'discovered';
+    var owF8c = gotoMap(gF8, 'ilex-forest', 14, 5); pump(gF8);
+    owF8c.player.tx = 14; owF8c.player.ty = 4; owF8c.player.dir = 'up';
+    owF8c.tryInteract();
+    var metC = drainToBattle(gF8);
+    var foeC = metC && gF8.scenes.top.foe && gF8.scenes.top.foe.speciesId === 'celebi' && gF8.scenes.top.foe.level === 170;
+    driveFlee(gF8); pump(gF8);
+    var fledC = foeC && !stF8.story.flags.arc_celebi_done;
+    healParty(gF8);
+    owF8c.player.tx = 14; owF8c.player.ty = 4; owF8c.player.dir = 'up';
+    owF8c.tryInteract();
+    var metC2 = drainToBattle(gF8);
+    catchWithBall(gF8);
+    ok('F08 Celebi: the shrine is inert until Kurt RETURNS the ball (whereabouts chain exact: delivered stands, kurt_has_ball / at_kurt_house clear, back_with_player set) — then the ball opens, flee re-fires, the catch (Lv 170) completes and the empty GS Ball stays in the bag',
+      shrineLocked && returned && fledC && metC2 && stF8.story.flags.arc_celebi_done === true
+      && stF8.story.quests.arc_celebi === 'complete' && (stF8.bag.gsball || 0) === 1 && stF8.story.flags.celebi_shrine_opened === true);
+  }
+
+  // F09: the Quest Log's own data join lists the live arcs.
+  {
+    var [gF9, stF9] = legendGame(509);
+    stF9.story.flags.arc_raikou_done = true;
+    stF9.story.quests.arc_raikou = 'complete'; stF9.story.quests.arc_hooh = 'active'; stF9.story.quests.arc_celebi = 'discovered';
+    var logJoin = Object.keys(stF9.story.quests).filter(function (qid) { return qid.startsWith('arc_'); })
+      .every(function (qid) { var a = LEGENDARY_ARCS[qid]; return a && a.title && Array.isArray(a.steps) && a.steps.length >= 3 && a.steps.every(function (s) { return typeof s.text === 'string'; }); });
+    var allFive = ['arc_raikou', 'arc_entei', 'arc_suicune', 'arc_celebi', 'arc_hooh'].every(function (id) { return LEGENDARY_ARCS[id] && !LEGENDARY_ARCS[id].designedOnly; });
+    gotoMap(gF9, 'newbark', 8, 8); pump(gF9);
+    var logOpens = true;
+    try { gF9.openQuestLog(); drain(gF9); } catch (e) { logOpens = false; }
+    ok('F09 Quest Log listing (the shipped path: story.quests x merged LEGENDARY_ARCS): every started arc resolves to a live entry with actionable steps, all five Johto arcs are live in the merged table, and the log opens on the bundle',
+      logJoin && allFive && logOpens);
+  }
+
+  // F10: the badge-order gate.
+  {
+    var [gG1, stG1] = legendGame(510);
+    stG1.badges.johto = ['zephyrbadge', 'hivebadge'];
+    var owG1 = gotoMap(gG1, 'gym-ecruteak', 7, 8); pump(gG1);
+    seenLines = [];
+    talkKind(gG1, owG1, 'morty'); pump(gG1);
+    var mortyRefuses = !stG1.badges.johto.includes('fogbadge') && !(gG1.scenes.top instanceof BattleScene)
+      && seenLines.join(' ').includes('Goldenrod City');
+    stG1.badges.johto = ['zephyrbadge', 'hivebadge', 'plainbadge'];
+    talkKind(gG1, owG1, 'morty'); drain(gG1);
+    var mortyMenu = gG1.ui.menuOpen === true;
+    if (mortyMenu) { gG1.ui.debugChoose(0); }
+    var metM = drainToBattle(gG1);
+    driveBattle(gG1); pump(gG1);
+    ok('F10a badge-order gate: Morty REFUSES at 2 badges, naming the missing road (Whitney, Goldenrod City) with no battle — and at 3 badges the challenge opens and the Fog Badge is earned',
+      mortyRefuses && mortyMenu && metM && stG1.badges.johto.includes('fogbadge'));
+  }
+  {
+    var [gG2, stG2] = legendGame(511);
+    // westComplete holds 4 badges (through fog); Amphy is unhealed here.
+    var owG2 = gotoMap(gG2, 'gym-olivine', 7, 8); pump(gG2);
+    seenLines = [];
+    talkKind(gG2, owG2, 'jasmine'); pump(gG2);
+    var jasmineRefuses = !stG2.badges.johto.includes('mineralbadge') && !(gG2.scenes.top instanceof BattleScene)
+      && seenLines.join(' ').includes('Cianwood City');
+    stG2.badges.johto.push('stormbadge'); stG2.story.flags.badge_storm = true; stG2.story.flags.amphy_healed = true;
+    talkKind(gG2, owG2, 'jasmine'); drain(gG2);
+    var jasmineMenu = gG2.ui.menuOpen === true;
+    if (jasmineMenu) { gG2.ui.debugChoose(0); }
+    var metJ = drainToBattle(gG2);
+    driveBattle(gG2); pump(gG2);
+    ok('F10b badge-order gate: Jasmine refuses before Chuck (her line sends you to Cianwood’s gym) even though her errand gates are story-side — after the Storm Badge + Amphy healed, the Mineral Badge battle opens and is won',
+      jasmineRefuses && jasmineMenu && metJ && stG2.badges.johto.includes('mineralbadge'));
+  }
+  {
+    var [gG3, stG3] = legendGame(512);
+    stG3.badges.johto = [];
+    var owG3 = gotoMap(gG3, 'gym-violet', 7, 8); pump(gG3);
+    talkKind(gG3, owG3, 'falkner'); drain(gG3);
+    var falknerOpen = gG3.ui.menuOpen === true;
+    if (falknerOpen) { gG3.ui.debugChoose(gG3.ui.menu.items.length - 1); drain(gG3); }
+    stG3.badges.johto = ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge'];
+    var owG3b = gotoMap(gG3, 'gym-blackthorn', 7, 8); pump(gG3);
+    seenLines = [];
+    talkKind(gG3, owG3b, 'clair'); pump(gG3);
+    var clairRefuses = !stG3.story.flags.clair_beaten && !(gG3.scenes.top instanceof BattleScene)
+      && seenLines.join(' ').includes('Mahogany Town');
+    stG3.badges.johto.push('glacierbadge'); stG3.story.flags.badge_glacier = true;
+    talkKind(gG3, owG3b, 'clair'); drain(gG3);
+    var clairMenu = gG3.ui.menuOpen === true;
+    if (clairMenu) { gG3.ui.debugChoose(gG3.ui.menu.items.length - 1); drain(gG3); }
+    ok('F10c badge-order gate: Falkner is open at 0 badges; Clair refuses at 6 (missing Glacier — Pryce, Mahogany Town) and offers her challenge at 7',
+      falknerOpen && clairRefuses && clairMenu);
+  }
+
+  // F11: the hideout re-home — in through the shop stairs, cleared ON the map.
+  {
+    var [gH1, stH1] = legendGame(513);
+    stH1.story.flags.red_gyarados_done = true;
+    stH1.badges.johto = ['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge'];
+    var owH1 = gotoMap(gH1, 'mahogany', 18, 10); pump(gH1);
+    talkKind(gH1, owH1, 'hideout_stairs'); pump(gH1, 900);
+    ok('F11 hideout re-home: the Mahogany shop stairs (Shopkeeper Pell) take you down, the J4b gauntlet plays ON the rocket-hideout map, and johto_hideout_cleared lands exactly as before',
+      stH1.story.position.map === 'rocket-hideout' && stH1.story.flags.johto_hideout_cleared === true
+      && stH1.story.flags.ev_johto_hideout_done === true,
+      'map=' + stH1.story.position.map + ' cleared=' + stH1.story.flags.johto_hideout_cleared);
+  }
+
   globalThis.__JQ__ = Q;
 })();
 `;
@@ -887,5 +1202,5 @@ ok('B00 driver completed with no internal failures', Q.failures === 0, Q.failure
     JSON.stringify(VAL.validateSave(badEast).errors));
 }
 
-console.log('\nJOHTO STORY (J4a+J4b) TOTAL: ' + pass + '/' + (pass + fail) + ' passed');
+console.log('\nJOHTO STORY (J4a+J4b+J5) TOTAL: ' + pass + '/' + (pass + fail) + ' passed');
 if (fail) process.exit(1);

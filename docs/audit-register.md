@@ -7006,3 +7006,181 @@ league-floor precedent), Mt. Silver summit cave Frost.
   authors one under Mahogany's shop, the descent event's battles
   can be re-homed into it without flag changes — every flag the
   gauntlet sets is location-independent.
+
+## Arc 2 Stage J5 — Johto legendary arcs + badge-order gate + Rocket Hideout map (2026-10-29)
+
+Stage J5 ships the five legendary arcs J4a/J4b only armed, closes
+the badge-order invalid-save class J4b surfaced, and authors the
+Rocket Hideout interior J4b staged without. Suite:
+`tests/johto-story-checks.mjs` grows Part A units A30–A36 and the
+headless Part F drives (F01–F11) — **110/110**.
+
+### 1. The five arcs (JOHTO_LEGENDARY_ARCS + arc_hooh activated)
+
+`JOHTO_LEGENDARY_ARCS` (story-johto.mjs) folds into `LEGENDARY_ARCS`
+in merge.mjs exactly the way Orange's arcs fold — one arcs table,
+one Quest Log (the log enumerates `state.story.quests` × the merged
+table; F09 proves the join by reading the log's data and opening it
+on the bundle). Arc stages are written by `{arc}` steps / handlers;
+the Burned Tower event now also writes the three beast arcs
+`discovered` at the awakening.
+
+SHARED LAW: every face rides the new runSteps step kind
+`{ wildBattleCatch }` — the chain advances ONLY on a catch. A flee
+OR a KO stalls it with nothing set (no arc-complete step, no
+event-done flag), so every legendary encounter re-fires until the
+species is CAUGHT. A one-of-one can never dex-lock a player. Arc
+completion = the catch, everywhere.
+
+- **arc_raikou — Lv 178, National Park storm field.** Prereq
+  `beasts_awakened`. Chase: Stormwatcher Iben (r35, the storm-split
+  pine) → Ranger Solveig (r36, the scorch-signed meadow stones);
+  face fires on National Park entry once both signs are filed.
+- **arc_entei — Lv 180, Mt. Mortar deep chamber (mt-mortar-2).**
+  Chase: the Ashkeeper Monk (Burned Tower floor 1, warm pawprints
+  in the ash) → Karate Trainee Bo (Mt. Mortar floor 1, the
+  mountain's heartbeat); face on mt-mortar-2 entry.
+- **arc_suicune — Lv 184, the Bell Tower's foot (bell-tower-1).**
+  Chase: Bell Warden Yuki (Ecruteak) → Fisherwoman Noor (Cianwood's
+  north shore). Face ADDITIONALLY requires `arc_raikou_done` +
+  `arc_entei_done` — it comes to the tower when the others are
+  quieted (Crystal's staging). F06 proves the no-face state with
+  signs complete but kin unquieted.
+- The "signs" are witness NPCs placed via the JOHTO_NPCS append
+  idiom (handlers in runJohtoNpc): generated sign objects are inert
+  text and cannot set flags, so a tracked chase needs actors. Each
+  witness is order-enforced (the second points you back to the
+  first), dormant before `beasts_awakened`, and files post-catch
+  lines after.
+- **arc_celebi — Lv 170, Ilex Forest shrine (14,3).** Steps: (1)
+  after `beasts_awakened`, Kurt (kurt-house) returns the GS Ball —
+  the whereabouts chain moves exactly: `bag.gsball` +1,
+  `kurt_has_ball`/`gsball_at_kurt_house` cleared (set false),
+  `gsball_back_with_player` set, the historical `gsball_delivered`
+  stands, quest `arc_celebi` discovered; (2) the shrine is a
+  faced-tile interact (sysInteract, JSHRINE at (14,3)) → the ball
+  opens → the time-ripple scene (`celebi_shrine_opened`); (3) the
+  catch. After the catch the empty GS Ball stays in the bag as a
+  memento — its ITEMS desc already told that truth, unchanged.
+  Before the return, the shrine gives only flavour (F08 proves it
+  inert). NOTE: this live entry supersedes the designed arc_celebi
+  in story-kanto.mjs via Object.assign order (its Farfetch'd-errand
+  steps never matched the shipped GS Ball story) — recorded here.
+- **arc_hooh — ACTIVATED in place** (story-kanto.mjs
+  LEGENDARY_ARCS): `designedOnly` removed; the designed four steps
+  stand with flags — tower history from Elder Gensai (appended
+  Ecruteak NPC, sets `hooh_history`) → the Clear Bell from the
+  Kimono sisters (Kimono Sister Moeko, dance-theater; scene prereq
+  = all three beast arcs complete; grants the new key item
+  **`clearbell`**, pocket 'key', sets `hooh_bell_received`) → the
+  climb (`hooh_summit`, set by the face event) → the face at the
+  Bell Tower summit (bell-tower-2 entry, Lv 182, catch-only).
+  SUPERSESSIONS (coordinator ruling 3): the designed "level 70"
+  predates the arc bands and is superseded by **Lv 182** (Johto
+  band 101–200); the designed lair id `'tintower'` never existed
+  as a map and is corrected to **`'bell-tower'`** (the shipped
+  bell-tower-1/-2 maps). Also the episode-1 echo: a one-time
+  glimpse on r29 (`ev_johto_hooh_glimpse`, sysLoadMap-gated on the
+  Johto arc active + before `hooh_history`) — dialogue-only, sets
+  `hooh_glimpsed` + arc discovered; flavour, never a requirement
+  (F01 proves it fires exactly once). Ruling 4 honoured by
+  omission: Lugia stays one-of-one at Shamouti; the Whirl Islands
+  gain no second encounter.
+- **Quest-table plumbing:** gen-tables now folds
+  JOHTO_LEGENDARY_ARCS keys into tables.json quests (raikou/entei/
+  suicune were new ids); items count 145 → **146** (clearbell) —
+  cheat-shop A02 and johto-story A15 updated in place with the
+  supersession recorded in their check text.
+
+### 2. Badge-order gate (J4b addendum — the invalid-save class, closed)
+
+The server validator rejects non-prefix badge sets
+(`bad-badge-order`), but Johto's geography let a player earn Fog
+before Plain, Mineral before Storm, or Glacier before Mineral — a
+legitimate save the server would refuse. Fixed at the source in
+runJohtoNpc (`badgeOrderRefusal`, data-driven from
+`BADGE_SETS.johto` — no per-leader code): each Johto leader's
+BATTLE requires the earlier Johto badges; leader index i refuses
+politely while `badges.johto.length < i`, naming the first missing
+badge and where its leader waits (Falkner, index 0, always open;
+Clair's battle gates at 7 inside her bespoke handler; the den award
+path beyond it is unchanged). Only battles gate: Jasmine's
+lighthouse ask and potion delivery stay ungated, and each leader's
+own story gate (Sprout Tower / Amphy / hideout) keeps its inner
+place — the order gate composes ahead of it. Jasmine at 4 badges
+refuses toward Cianwood's gym (Storm precedes Mineral), matching
+the honest geography. Suite: F10a (Morty refuses at 2 naming
+Whitney/Goldenrod, accepts at 3 and the Fog Badge is earned), F10b
+(Jasmine refuses before Chuck, accepts after Storm + Amphy), F10c
+(Falkner open at 0; Clair refuses at 6 naming Pryce/Mahogany,
+offers at 7). The full playthrough still earns 1→8 in order (the
+B/E true paths + B23/B24 prefix pins, unchanged and green). The
+J4b leftover note about this exposure is thereby RESOLVED.
+
+### 3. Rocket Hideout map (J4b addendum — the descent, re-homed)
+
+`rocket-hideout` is authored in the generator of record
+(~/workspace/ashs-journey-qa/johto-j3a/gen_maps6.py): one interior,
+26×16, cage rows (birdcage props over strata floors, north-west and
+north-east) + the power-core chamber (serverrack/coil/batterypack/
+switchboard/pipecluster around a grate dais, cablefloor approach)
+from the shipped underground/cave/strata families; signs carry the
+base's own notices; no wild table (occupied, not a habitat).
+maps6.mjs regenerates deterministically (83 maps; the diff is the
+header + this one map). The stair doors on the south wall warp back
+to Mahogany (18,8). Ground: Storm (the transmitter hum).
+Re-homing: the map's own geography is the ONLY maps6 change — the
+stair entry is the NPC/event idiom: Lance's Mahogany scene now
+descends for real (`enterJohtoHideout`), and Shopkeeper Pell
+(appended in Mahogany, `hideout_stairs`, `hideoutWarp` field) keeps
+the stairs usable before (refused — "storage"), during, and after
+the clear. `ev_johto_hideout` itself is byte-unchanged and now
+fires from the sysLoadMap gate ON the hideout map — the gauntlet
+battles + Electrode core play where the player stands, and
+`johto_hideout_cleared` + every downstream consumer (Pryce's gate,
+Radio Tower staging) behave byte-identically (F11 proves the
+stairs entry + on-map clear; E11 proves Lance's route still lands
+the same clear; E35/E36 + the B east path re-prove the consumers).
+No beat stayed in event form for structural reasons — the event WAS
+the staging; only its room was missing. The sweep models the stair
+warp as a graph edge (ferry pattern) and passes all 85 maps in
+scope; richness passes the hideout at 83 colours (interior floor
+55).
+
+### 4. Battery (all green, this stage)
+
+- johto-story **110/110** (was 90/90 at J4b; +A30–A36, +F01–F11)
+  · fidelity **35/35** · validator **78/78** · save-contract
+  **6/6** · cheat-shop **44/44** · arc-foundation **47/47** ·
+  orange-story **38/38** · orange-climax **42/42** ·
+  campaign-smoke **24/24** · qa-changed-flows failures exactly
+  **{b2, d9}** · Johto sweep PASS (85 maps incl. rocket-hideout) ·
+  Johto richness PASS (83 maps).
+- Fresh build (vercel + guest) OK — `public/game.js`
+  **7,118,446 bytes**. **personal/ byte-identical** (sha256
+  f434ba63…, a780af0b…; untouched — vercel+guest targets only).
+  NOT pushed, NOT deployed.
+
+### 5. Leftovers, named
+
+- **Lugia (ruling 4):** Whirl Islands dressing/lore only; the one
+  Lugia remains the Shamouti catch of Stage O3. If a future stage
+  wants a Whirl Islands beat, it is scenery, never a second catch.
+- **Beast witnesses are single-visit actors:** the six witnesses
+  keep their post-catch lines forever (no roaming beasts); a
+  roaming-encounter system was not briefed and is not implied.
+- **Glimpse window:** the r29 glimpse gates on the Johto arc being
+  active and `hooh_history` unheard; a player who hears the history
+  before ever re-entering r29 (impossible on the walking chain —
+  Ecruteak is reached through r29's successors — but possible via
+  ferry/fast-travel seams) simply misses a flavour scene. No flag
+  depends on it.
+- **Cheat Terminal interplay (honest note):** a species claimed
+  from the Cheat Terminal registers `dex.caught`, which satisfies
+  a wildBattleCatch chain's catch check on a later KO — the
+  terminal is owner-sanctioned stock, so this is consistent with
+  its existing badge-prefix behaviour, not a new hole.
+- **J6/J7 unchanged:** Day-Care/breeding (J6) and the arc-chain
+  drive + Hoenn hook (J7) read the flags this stage sets
+  (`arc_*_done`, `hooh_glimpsed`, `gsball_back_with_player`) as
+  ordinary history.

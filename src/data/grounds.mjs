@@ -182,6 +182,9 @@ export const MAP_GROUND = {
   'radio-tower-2': 'storm',
   'radio-tower-3': 'storm',
   'dragons-den': 'grave',
+  // Stage J5: the Rocket Hideout interior — a transmitter base hums,
+  // so its battles ride the Storm ground.
+  'rocket-hideout': 'storm',
   'silver-stadium': 'open',
   'mt-silver-cave': 'frost',
   // World Art Wave 5b: house interiors (shared template family).

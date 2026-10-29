@@ -125,6 +125,10 @@ export const ITEMS = {
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
   secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Cianwood pharmacy. For Amphy, the lighthouse Pokemon — handle with both hands.' },
+  // Stage J5 key item: the Clear Bell, given by Ecruteak's Kimono
+  // sisters once the three awakened beasts are quieted — its chime is
+  // the Bell Tower summit's invitation to Ho-Oh (arc_hooh).
+  clearbell: { id: 'clearbell', name: 'Clear Bell', pocket: 'key', desc: 'A bell of clear, cold crystal, kept by the Kimono sisters of Ecruteak. Its chime carries further than sound should — something in the high sky is meant to hear it.' },
   winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Orange League Winner\'s Trophy, presented at Pummelo Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE
