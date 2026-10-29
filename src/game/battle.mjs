@@ -13,6 +13,7 @@ import {
 import { roll, intIn } from '../engine/rng.mjs';
 import { TILE, BATTLER_DRAW_SIZE, PT_FRAME, PT_FRAME2, PT_PAPER } from '../engine/render.mjs';
 import { dexRegister, displayName, makeMon } from './state.mjs';
+import { ballCatchRate, FRIEND_BALL_FRIENDSHIP } from './ball-rules.mjs';
 import { levelCapFor } from '../data/arcs.mjs';
 import {
   trainerLevelFor, tuneFoeMon, effectiveAiFor, damageRandomFor,
@@ -197,6 +198,11 @@ export class BattleScene {
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.arena = opts.arena || null; // UI v2.3: explicit backdrop variant (fishing = 'water'); else derived in arenaKind()
+    // Stage J6: the fishing marker — set ONCE by startFishing (the
+    // rod's battle start, shared by BOTH engines since BattleScene is
+    // the one class) and read by the Lure Ball rule at throw time.
+    this.fished = !!opts.fished;
+    this._lastBallId = null; // Stage J6: the Friend Ball's post-catch effect reads it in catchSuccess
     this.groundPin = opts.ground || opts.groundId || null; // ADR-025 §1: scripted events may pin a Ground id explicitly
     this.field = null;      // ADR-025 §1: battle.field — resolved ONCE in enter() from the battle's map
     this.fieldBanner = null; // the Ground announcement line (null on Open Ground)
@@ -390,8 +396,12 @@ export class BattleScene {
   }
 
   firstAble(g) {
-    for (const m of g.state.party) if (m.hp > 0) return m;
-    return g.state.party[0];
+    // Stage J6: an Egg can never be the battle lead — the first able
+    // NON-EGG mon leads; the all-egg fallback keeps the historical
+    // party[0] shape (an all-egg party is unreachable: the deposit
+    // guards refuse to create one).
+    for (const m of g.state.party) if (m.hp > 0 && !m.egg) return m;
+    return g.state.party.find((m) => !m.egg) || g.state.party[0];
   }
 
   say(text, cb) {
@@ -681,7 +691,7 @@ export class BattleScene {
     const items = g.state.party.map((m, i) => {
       const sp = SPECIES[m.speciesId];
       const tag = m === this.ally ? ' (active)' : '';
-      return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally };
+      return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally || !!m.egg }; // J6: eggs can't be sent out
     });
     // AUDIT FIX (S-12, blocker): a forced faint switch has NO way out in
     // Platinum — offering Back (or honouring B/Esc) consumed the menu and
@@ -1867,6 +1877,7 @@ export class BattleScene {
       return;
     }
     g.state.bag[ballId]--;
+    this._lastBallId = ballId;
     const ball = BALLS[ballId];
     this.state = 'catchseq';
     this.catchState = { ball, ballId, phase: 'throw', t: 0, shakes: 0, need: 0, a: 0 };
@@ -1880,6 +1891,10 @@ export class BattleScene {
     if (this.safari) rate = Math.max(3, Math.min(255, Math.round(rate * (this.safariRock ? 2 : this.safariBait ? 0.5 : 1))));
     // ADR-025 §4: Story's ball bonus (x1.1) scales the effective rate.
     rate = Math.max(3, Math.min(255, Math.round(rate * catchRateMultFor(g.state))));
+    // Stage J6: an apricorn ball's rule scales the rate against the
+    // LIVE battle (shared ball-rules.mjs — the RT engine calls the
+    // same helper, so the two catch calcs can never drift).
+    rate = ballCatchRate(rate, ballId, { lead: this.ally, foe, fished: this.fished });
     const res = gen1Catch(foe.maxHp, foe.hp, rate, ballId, foe.status, g.rng.battle);
     this.catchState.willCatch = res.caught;
     this.catchState.need = res.caught ? 3 : res.shakes;
@@ -1928,6 +1943,10 @@ export class BattleScene {
     this.catchFx = { t: 0 }; // P1/E10: success starburst radiates from the ball
     const foe = this.foe;
     const name = displayName(foe, SPECIES);
+    // Stage J6: the Friend Ball's whole effect — a mon caught in one
+    // starts out trusting its trainer (friendship set high). Shared
+    // by both engines: RT catches land here too.
+    if (this._lastBallId === 'friendball') foe.friendship = FRIEND_BALL_FRIENDSHIP;
     dexRegister(g.state.dex, 'caught', SPECIES[foe.speciesId].dexNo);
     let dest = 'party';
     if (g.state.party.length >= 6) {

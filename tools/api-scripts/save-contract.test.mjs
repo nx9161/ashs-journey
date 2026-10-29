@@ -134,5 +134,53 @@ body = await res.json();
 t('non-keepsake id in keepsake slot -> 422',
   res.status === 422);
 
+// 6. Stage J6: an arc-systems payload round-trips the contract —
+// a Day-Care pair, a party Egg (egg/eggSteps mon fields), gather
+// rows, a Kurt order and the persisted step counter all validate.
+scenario = 'insert-ok';
+seen.length = 0;
+const { SPECIES: SC_SPECIES } = await import('../../src/data/species.mjs');
+const { SPECIES2: SC_SPECIES2 } = await import('../../src/data/species2.mjs');
+const { SPECIES_JOHTO: SC_JOHTO } = await import('../../src/data/species3.mjs');
+const { MOVES: SC_MOVES } = await import('../../src/data/moves.mjs');
+const { MOVES2: SC_MOVES2 } = await import('../../src/data/moves2.mjs');
+const SC_ALL_SPECIES = Object.assign({}, SC_SPECIES, SC_SPECIES2, SC_JOHTO);
+const SC_ALL_MOVES = Object.assign({}, SC_MOVES, SC_MOVES2);
+const { makeMon: scMakeMon } = await import('../../src/game/state.mjs');
+const j6Payload = goodPayload();
+j6Payload.player.playtimeSec = 3600;
+j6Payload.story.arc = 'johto'; j6Payload.story.region = 'johto';
+const j6Egg = scMakeMon('togepi', 1, SC_ALL_SPECIES, SC_ALL_MOVES);
+j6Egg.egg = true; j6Egg.eggSteps = 250;
+j6Payload.party.push(scMakeMon('charizard', 150, SC_ALL_SPECIES, SC_ALL_MOVES), j6Egg);
+j6Payload.daycare.push(scMakeMon('ditto', 120, SC_ALL_SPECIES, SC_ALL_MOVES), scMakeMon('eevee', 121, SC_ALL_SPECIES, SC_ALL_MOVES));
+j6Payload.daycareEgg = { speciesId: 'pichu', eggSteps: 250 };
+j6Payload.daycareEggAt = null;
+j6Payload.stepsTotal = 4321;
+j6Payload.gather = { 'azalea:19,1': 4521, 'r37:20,12': 4000 };
+j6Payload.kurtOrder = { ball: 'levelball', readyAt: 4571 };
+res = await handler(putRequest({ slot: 1, payload: j6Payload, expectedVersion: 0 }));
+body = await res.json();
+t('J6 arc-systems payload (daycare + party egg + gather + kurt order) -> 200',
+  res.status === 200 && body.version === 1);
+
+// 7. Stage J6 negatives: a third Day-Care guest and a negative step
+// counter are each a 422 validation error.
+const j6Bad1 = JSON.parse(JSON.stringify(j6Payload));
+j6Bad1.daycare.push(scMakeMon('pidgey', 110, SC_ALL_SPECIES, SC_ALL_MOVES));
+res = await handler(putRequest({ slot: 1, payload: j6Bad1, expectedVersion: 0 }));
+body = await res.json();
+t('three Day-Care guests -> 422', res.status === 422);
+const j6Bad2 = JSON.parse(JSON.stringify(j6Payload));
+j6Bad2.stepsTotal = -5;
+res = await handler(putRequest({ slot: 1, payload: j6Bad2, expectedVersion: 0 }));
+body = await res.json();
+t('negative stepsTotal -> 422', res.status === 422);
+const j6Bad3 = JSON.parse(JSON.stringify(j6Payload));
+j6Bad3.party[1].eggSteps = -1;
+res = await handler(putRequest({ slot: 1, payload: j6Bad3, expectedVersion: 0 }));
+body = await res.json();
+t('negative eggSteps -> 422', res.status === 422);
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

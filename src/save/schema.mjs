@@ -2,7 +2,7 @@
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
 
 import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
-import { KEEPSAKES, BADGE_SETS } from '../data/items.mjs';
+import { KEEPSAKES, BADGE_SETS, BALLS } from '../data/items.mjs';
 import { ARCS, deriveArcDefaults, levelCapFor, xpCeilingFor } from '../data/arcs.mjs';
 
 const ARC_IDS = new Set(ARCS.map((a) => a.id));
@@ -11,7 +11,10 @@ export const SAVE_KEY = 'pdr.save.guest';
 
 // Whitelisted top-level keys. Unknown keys => reject (architecture §3.4).
 const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
-  'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session'];
+  'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session',
+  // Stage J6: the arc-systems fields (johto-systems.mjs) — the server
+  // validator's TOP_KEYS carries the same six, the matched pair.
+  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder'];
 
 function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
 
@@ -44,6 +47,49 @@ export function validateSave(data) {
     // validator's set from it), so client and cloud can never drift.
     if (m.keepsake !== undefined && m.keepsake !== null
       && (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake])) { errors.push('bad-mon-keepsake'); break; }
+    // Stage J6: egg fields — egg is a boolean, eggSteps a bounded
+    // non-negative integer (the server validator enforces the same).
+    if (m.egg !== undefined && typeof m.egg !== 'boolean') { errors.push('bad-mon-egg'); break; }
+    if (m.eggSteps !== undefined && (!Number.isInteger(m.eggSteps) || m.eggSteps < 0 || m.eggSteps > 100000)) { errors.push('bad-mon-egg-steps'); break; }
+  }
+  // Stage J6: Day-Care guests — at most 2 mon records, validated with
+  // the same level/XP/move/egg rules as the party (the server runs
+  // its full checkMon over them).
+  if (data.daycare !== undefined) {
+    if (!Array.isArray(data.daycare) || data.daycare.length > 2) errors.push('bad-daycare');
+    else for (const m of data.daycare) {
+      if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number') { errors.push('bad-daycare-mon'); break; }
+      if (m.level < 1 || m.level > levelCap) { errors.push('bad-daycare-mon-level'); break; }
+      if (m.xp !== undefined && (typeof m.xp !== 'number' || !Number.isFinite(m.xp) || m.xp < 0 || m.xp > xpCeiling)) { errors.push('bad-daycare-xp'); break; }
+      if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-daycare-mon-moves'); break; }
+      if (m.egg !== undefined && typeof m.egg !== 'boolean') { errors.push('bad-daycare-mon-egg'); break; }
+      if (m.eggSteps !== undefined && (!Number.isInteger(m.eggSteps) || m.eggSteps < 0 || m.eggSteps > 100000)) { errors.push('bad-daycare-mon-egg-steps'); break; }
+    }
+  }
+  if (data.daycareEgg !== undefined && data.daycareEgg !== null) {
+    const e = data.daycareEgg;
+    if (!isObj(e) || typeof e.speciesId !== 'string'
+      || !Number.isInteger(e.eggSteps) || e.eggSteps < 0 || e.eggSteps > 100000) errors.push('bad-daycare-egg');
+  }
+  if (data.daycareEggAt !== undefined && data.daycareEggAt !== null
+    && (!Number.isInteger(data.daycareEggAt) || data.daycareEggAt < 0 || data.daycareEggAt > 100000000)) errors.push('bad-daycare-egg-at');
+  if (data.stepsTotal !== undefined
+    && (!Number.isInteger(data.stepsTotal) || data.stepsTotal < 0 || data.stepsTotal > 100000000)) errors.push('bad-steps-total');
+  if (data.gather !== undefined) {
+    if (!isObj(data.gather)) errors.push('bad-gather');
+    else {
+      const keys = Object.keys(data.gather);
+      if (keys.length > 64) errors.push('bad-gather-size');
+      else for (const k of keys) {
+        const v = data.gather[k];
+        if (!/^[a-z0-9-]+:-?\d+,-?\d+$/.test(k) || !Number.isInteger(v) || v < 0 || v > 100000000) { errors.push('bad-gather-entry'); break; }
+      }
+    }
+  }
+  if (data.kurtOrder !== undefined && data.kurtOrder !== null) {
+    const o = data.kurtOrder;
+    if (!isObj(o) || typeof o.ball !== 'string' || !BALLS[o.ball]
+      || !Number.isInteger(o.readyAt) || o.readyAt < 0 || o.readyAt > 100000000) errors.push('bad-kurt-order');
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -172,6 +218,29 @@ export function fillV2Defaults(data) {
   if (isObj(data.boxes)) for (const arr of Object.values(data.boxes)) {
     if (Array.isArray(arr)) for (const m of arr) fillMon(m);
   }
+  // Stage J6: arc-systems fields defaults-fill / rebuild into their
+  // closed shapes (a legacy save opens with an empty Day-Care, a zero
+  // step counter, no tree rests and no Kurt order; validateSave stays
+  // strict for saves that carry malformed values of their own).
+  if (!Array.isArray(data.daycare)) data.daycare = [];
+  data.daycare = data.daycare.slice(0, 2);
+  for (const m of data.daycare) fillMon(m);
+  if (!isObj(data.daycareEgg) || typeof data.daycareEgg.speciesId !== 'string'
+    || !Number.isInteger(data.daycareEgg.eggSteps)) data.daycareEgg = null;
+  if (data.daycareEgg) data.daycareEgg = { speciesId: data.daycareEgg.speciesId, eggSteps: Math.max(0, Math.min(100000, data.daycareEgg.eggSteps)) };
+  if (!Number.isInteger(data.daycareEggAt) || data.daycareEggAt < 0) data.daycareEggAt = null;
+  if (!Number.isInteger(data.stepsTotal) || data.stepsTotal < 0) data.stepsTotal = 0;
+  const gather = {};
+  if (isObj(data.gather)) {
+    for (const k of Object.keys(data.gather)) {
+      const v = data.gather[k];
+      if (/^[a-z0-9-]+:-?\d+,-?\d+$/.test(k) && Number.isInteger(v) && v >= 0) gather[k] = v;
+    }
+  }
+  data.gather = gather;
+  if (!isObj(data.kurtOrder) || typeof data.kurtOrder.ball !== 'string' || !BALLS[data.kurtOrder.ball]
+    || !Number.isInteger(data.kurtOrder.readyAt) || data.kurtOrder.readyAt < 0) data.kurtOrder = null;
+  if (data.kurtOrder) data.kurtOrder = { ball: data.kurtOrder.ball, readyAt: data.kurtOrder.readyAt };
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
       data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';

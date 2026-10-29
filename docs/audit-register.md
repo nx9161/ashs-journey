@@ -7184,3 +7184,223 @@ scope; richness passes the hideout at 83 colours (interior floor
   drive + Hoenn hook (J7) read the flags this stage sets
   (`arc_*_done`, `hooh_glimpsed`, `gsball_back_with_player`) as
   ordinary history.
+
+## Arc 2 Stage J6 — Arc systems: eggs/breeding + apricorn balls + Link Transfer widening (2026-10-29)
+
+Stage J6 wires the three systems the earlier stages only staged:
+breeding at the Route 34 Day-Care (the J3a building/interior get
+their couple and a full egg economy), apricorn trees + Kurt's ball
+crafting (J3a's `apricorn` tile kind and J4a's Kurt NPC become a
+working supply chain for seven new balls, live in BOTH battle
+engines), and the J1 Link Transfer leftover (the candidate scan now
+sees `evos` trade branches). Suite: NEW
+`tests/johto-systems-checks.mjs` — Part A pure units A01–A39 +
+headless bundle drives B01–B22 — **62/62**.
+
+### 1. Part A — egg-group data completion (facts only)
+
+`~/workspace/ashs-journey-qa/arc2-etl/etl-kanto-eggs.mjs` extends
+J1's PokeAPI facts route: live `pokemon-species` fetches for dex
+1–151 + the six species2 guests (175/183/209/232/249/250), cached
+under `arc2-etl/raw-eggs/`, inserted ADDITIVELY as one line per
+entry (`eggGroups`, `hatchCounter`, `baby: true` only where
+PokeAPI `is_baby`) — 158 insertions, 0 deletions, no other entry
+changes (species.mjs 14 + species2.mjs 144). Every non-form
+species dex 1–251 + partner now carries egg data (A01). Facts
+spot-proven (A02/A03): bulbasaur monster/plant 20, mew no-eggs
+120, articuno no-eggs 80, togepi baby + no-eggs 10. The legendary
+exclusion is DATA, not a list: every legendary/mythical in
+1–251 carries `no-eggs` from the source.
+
+### 2. State design — six new persisted fields, each a matched pair
+
+Hard law honoured (J4a): `story.flags` stays booleans-only; all
+J6 numeric state is real state. Every field below exists in
+`defaultState` (state.mjs), the client schema
+(src/save/schema.mjs fill + validate), AND the server validator
+(api/_lib/validator.mjs) — the pairs were extended together,
+with save-contract cases (tools/api-scripts/save-contract.test.mjs
+grows 6 → 10: a full J6 payload validates; 3 daycare guests /
+negative stepsTotal / negative eggSteps are 422).
+
+- `state.daycare` — array of mon records, max 2. Server runs the
+  FULL `checkMon` on each guest; client mirrors shape + cap.
+- `state.daycareEgg` — null | `{ speciesId, eggSteps }`, the one
+  egg waiting at the Day-Care.
+- `state.daycareEggAt` — null | step total at which the waiting
+  egg materializes (the production schedule).
+- `state.stepsTotal` — the PERSISTED walked-step counter. The
+  shipped game counted steps only per session (Safari/poison),
+  so J6 adds this; `sysOnStep` increments it every real step.
+  It is the single clock for egg production, egg countdowns,
+  apricorn rest, and Kurt crafting.
+- `state.gather` — `{}` treeId → stepsTotal at which that
+  apricorn tree is pickable again. Bounded: ≤64 rows, treeId
+  grammar `map:x,y`, values 0..1e9 (both validators).
+- `state.kurtOrder` — null | `{ ball, readyAt }`; `ball` must be
+  a real BALLS id (the server validator's table set now carries
+  `balls`, gen-tables regenerated: 160 items).
+- Mon records gain optional `egg` (boolean) + `eggSteps`
+  (int 0..100000), validated identically in party, boxes, and
+  daycare entries on both sides.
+
+### 3. Breeding / eggs (src/game/johto-systems.mjs, pure; menus in overworld-systems.mjs)
+
+- The couple: the r34 keeper is stamped `johto: 'daycare'` via
+  JOHTO_NPC_PATCHES (johto-story A18 count 24 → 25, recorded
+  there); his wife `DAY-CARE WOMAN` is appended via JOHTO_NPCS
+  at daycare (4,7). Both faces run the same `openDaycare` menu
+  (leave / take back / collect egg / status / leave).
+- Compatibility is GROUP-ONLY: the pair shares an egg group, or
+  one is Ditto (group `ditto`) with a breedable partner.
+  SIMPLIFICATION RECORDED: the engine has no gender, so canon's
+  gender pairing is dropped — group membership is the whole
+  rule. `no-eggs` species, babies (`baby: true`), and forms
+  never breed; legendaries/mythicals fall out of the data
+  (all carry `no-eggs`), never a hard-coded list.
+- Offspring: the base stage (evo-graph walk-back over evo +
+  evos) of the non-Ditto parent if one parent is Ditto, else
+  the FIRST-deposited parent. RECORDED simplification (canon
+  uses the female parent; there is no gender to read).
+- Production: a compatible deposited pair arms
+  `daycareEggAt = stepsTotal + 200`; the step that reaches it
+  materializes the one waiting egg. Withdrawing either guest
+  disarms; collecting re-arms. The couple's dialogue reports
+  readiness honestly (pair state, egg waiting, steps to go).
+- The egg is a mon record `{ species, egg: true, eggSteps }`
+  with eggSteps = offspring `hatchCounter` × **25** steps
+  (CALIBRATION: typical species 500 steps, baby pool 250 — a
+  walk across a route or two, not a marathon). Delivery is the
+  cap-safe gift idiom: party if room, else first PC box with
+  room; all-full refusal mutates NOTHING (proven byte-equal,
+  A19) and the egg stays waiting.
+- Hatching: party eggs count down on the same persisted step
+  hook; at zero the hatch scene fires on the step (dialogue
+  idiom, the step is claimed), egg fields are cleared, dex
+  registers 'caught', and **level = the current arc's band
+  floor** via `currentArcOf` (Johto 101, Kanto/Orange 1 —
+  proven both, A17/A18 + B09).
+- Guards: eggs cannot be a battle lead or be sent out
+  (`firstAble` skips them, the classic party menu disables the
+  row, both proven in-bundle B14/B15); an egg cannot be
+  deposited at the Day-Care, Link-Transferred, stone/level
+  evolved, taught a TM/HM, given a keepsake, or targeted by
+  Rare Candy / XP Candy / medicine (bag + party-menu target
+  rows disabled, B22); the player can never be left with an
+  all-egg party — Day-Care deposit AND both PC place/swap
+  directions simulate the resulting party and refuse the last
+  non-egg mon (the engine's "can't deposit your last mon"
+  precedent, extended). The partner refuses Day-Care deposit
+  via the existing `boxCheck` precedent.
+- Story egg: the couple's one-time gift (flag
+  `daycare_story_egg`, boolean) on the first visit — an egg
+  from the baby pool (pichu, cleffa, igglybuff, togepi, magby,
+  elekid, smoochum, tyrogue; shipped RNG picks). All-full
+  refusal sets no flag, so the gift re-offers next visit.
+
+### 4. Apricorn balls (Part C)
+
+- 7 apricorn items (pocket 'items') + 7 balls join BALLS and
+  ITEMS (pocket 'balls'), canon mapping red→Level, blue→Lure,
+  yellow→Moon, green→Friend, pink→Love, white→Fast,
+  black→Heavy. NO prices: balls are Kurt-only (never mart
+  stock — the mart filter reads price), apricorns are gathered,
+  never sold. The Cheat Terminal stocks everything from data:
+  its A02 count and johto-story A15 move 146 → **160** items
+  (supersessions recorded in both suites).
+- Trees: all 20 `apricorn` tiles across maps6 (azalea 10,
+  kurt-house 2, r33 6, r37 2 — both halves of Johto) form
+  APRICORN_TREES {map, x, y, item}; colours cycle the canon
+  seven over the sorted table (every colour ≥2 trees, A25).
+  Facing a tree picks its apricorn; the tree then rests
+  **200 steps** (persisted in `state.gather`); facing a resting
+  tree reports the real steps remaining.
+- Kurt (kurt-house, the J4a NPC): talking to him preempts the
+  story chain ONLY for J6 business — a pending order collects
+  on talk when ready (progress reported honestly before that),
+  a carried apricorn opens the craft menu (one order at a
+  time, the apricorn is taken), and the menu's "Just talk"
+  option re-enters the handler once with a session marker so
+  the GS Ball story chain runs byte-identically. Crafting
+  takes **250 steps** (mission number). A28/B11–B13 prove the
+  lifecycle incl. no double-order.
+- Catch mechanics: ONE shared helper (src/game/ball-rules.mjs,
+  `ballBonusFor`/`ballCatchRate`) is called by BOTH engines —
+  the fixedLevel lesson applied prospectively: classic
+  `beginCatch` and RT `rtUpdateBall` scale the species catch
+  rate BEFORE `gen1Catch`, so both engines share the exact
+  calc. Rules: **level** — lead/foe ratio ≥4 → 8, >2 → 4,
+  >1 → 2, else 1. **lure** — ×3 iff the battle began by
+  fishing: `startFishing` is the single rod→battle start path
+  for both engines (one BattleScene class), so the `fished`
+  marker is set in exactly one place and lands on the one
+  constructor both engines share. **moon** — ×4 iff the foe's
+  species evolves by Moon Stone (evo/evos stone fields).
+  **love** — ×8 iff foe species == lead species; RECORDED:
+  canon's opposite-gender clause is dropped (no gender
+  system). **fast** — ×4 iff foe base Speed ≥ 100; RECORDED
+  proxy for canon's flee-rate table (the game keeps no flee
+  rates; base Speed is its own published bulk/speed data).
+  **friend** — flat ×1 by design; its effect is post-catch:
+  the shared `catchSuccess` sets the caught mon's `friendship`
+  to 200 (mons DO carry the field, default 70; B18 proves it
+  in the real engine). **heavy** — by the foe's battler tier
+  (battler-tiers.mjs: S → 1, M → 1.5, L → 2.5, XL → 4);
+  RECORDED adaptation of canon's weight table to the game's
+  own bulk measure — no XL-tier species exists in dex 1–251,
+  so ×4 is currently unreachable through play (the mapping
+  carries it for future dexes). The RT bag menu now iterates
+  the BALLS table (was a hard-coded 4-ball list), so apricorn
+  balls are throwable in RT too (B21). Every ball's desc text
+  states its real condition — no fake flavour (A29). All six
+  rate rules are proven INSIDE gen1Catch (A37) and in the real
+  engines: classic for moon + friend (B16–B18), RT spot-proofs
+  for level + heavy against plain-ball controls (B19/B20).
+
+### 5. Link Transfer widening (Part D)
+
+The candidate scan in openPc (overworld-systems) now reads
+`tradeEvolutionsOf` (johto-systems): the species' primary
+`evo` plus EVERY `evos` branch with method 'trade' — each
+branch is its own menu row, and `evolveMon` gained a 4th
+parameter (`forcedEvo`) so the CHOSEN branch is the one that
+evolves. All ten lines proven candidates (A38): Kanto —
+kadabra→alakazam, machoke→machamp, graveler→golem,
+haunter→gengar; Johto — onix→steelix, scyther→scizor,
+seadra→kingdra, porygon→porygon2, and the two branch lines
+this stage exists for: **poliwhirl→politoed** and
+**slowpoke→slowking** (poliwhirl's primary water-stone
+poliwrath path is untouched, A39).
+
+### 6. Verification (all 2026-10-29, this tree)
+
+- **johto-systems 62/62** (new) · johto-story **110/110** ·
+  fidelity **35/35** · validator **78/78** · save-contract
+  **10 passed** · cheat-shop **44/44** · arc-foundation
+  **47/47** · orange **38/38 + 42/42** · campaign-smoke
+  **24/24** · qa-changed-flows failures exactly the standing
+  baseline **{b2, d9}** · battle-model 39/45 with failures
+  E02–E07 verified IDENTICAL at base commit 01a8994 (standing
+  Center-exit baseline, not a J6 regression).
+- Fresh build (vercel + guest) OK — `public/game.js`
+  **7,169,311 bytes**. **personal/ byte-identical** (sha256
+  f434ba63…, dbf2112b…, a9242398…, a780af0b…; untouched —
+  vercel+guest targets only). NOT pushed, NOT deployed.
+
+### 7. Leftovers, named
+
+- **No in-game step display reads stepsTotal:** the counter is
+  infrastructure (couple/Kurt/tree dialogue compute remainders
+  from it); no HUD or summary surface shows the raw total.
+- **Ditto × Ditto pairs produce** under the group rule (Ditto
+  is breedable and shares its group with itself); canon
+  forbids it. Harmless (offspring = Ditto), left as a
+  consequence of the recorded group-only simplification.
+- **Egg movesets are the Lv1 set:** a hatched mon keeps the
+  moves makeMon dealt at level 1 (the hatch raises level/stats
+  only, like a gift mon). A future polish could re-deal the
+  learnset at the band floor.
+- **Heavy Ball ×4 (XL tier) is unreachable** in dex 1–251 (no
+  XL-tier species); the tier mapping carries it for Hoenn.
+- **J7 unchanged:** the arc-chain drive + Hoenn hook read J6's
+  fields as ordinary save data; nothing in J6 gates J7.

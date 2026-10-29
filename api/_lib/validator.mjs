@@ -53,6 +53,7 @@ function loadTables() {
       moves: new Set(tables.moves),
       items: new Set(tables.items),
       keepsakes: new Set(tables.keepsakes || []),
+      balls: new Set(tables.balls || []),
       forms: new Set(tables.forms || []),
       quests: new Set(tables.quests || []),
       regions: new Set(tables.regions || ['kanto']),
@@ -163,6 +164,9 @@ function checkMon(m, errors, depth, caps) {
   if (!(m.status === null || ['paralysis', 'burn', 'poison', 'sleep', 'freeze', 'confusion'].includes(m.status))) errors.push('bad-status');
   if (!(m.ot === undefined || m.ot === null || isSafeText(m.ot, 1, 12))) errors.push('bad-ot:' + NAME_CHARSET_NOTE);
   if (!(m.friendship === undefined || isInt(m.friendship, 0, 255))) errors.push('bad-friendship');
+  // Stage J6: egg fields (mon.egg boolean; mon.eggSteps bounded int).
+  if (!(m.egg === undefined || typeof m.egg === 'boolean')) errors.push('bad-egg');
+  if (!(m.eggSteps === undefined || isInt(m.eggSteps, 0, 100000))) errors.push('bad-egg-steps');
   if (m.hp !== undefined && (!isInt(m.hp, 0, 9999) || (isInt(m.maxHp, 1, 9999) && m.hp > m.maxHp))) errors.push('bad-hp');
 }
 
@@ -452,7 +456,10 @@ function detectAnomalies(data, summary, anomalies) {
   }
 }
 
-const TOP_KEYS = new Set(['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story', 'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session']);
+const TOP_KEYS = new Set(['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story', 'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session',
+  // Stage J6: the arc-systems fields — the client schema's TOP_KEYS
+  // carries the same six (the matched pair).
+  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder']);
 
 export function validateSave(data) {
   const errors = [];
@@ -506,10 +513,41 @@ export function validateSave(data) {
         if (!isInt(m.level, 1, caps.levelCap)) { errors.push('bad-mon-level'); break; }
         if (!(m.nickname === undefined || m.nickname === null || isSafeText(m.nickname, 1, 12))) { errors.push('bad-nickname:' + NAME_CHARSET_NOTE); break; }
         if (!(m.keepsake === undefined || m.keepsake === null || (typeof m.keepsake === 'string' && TABLES.keepsakes.has(m.keepsake)))) { errors.push('bad-keepsake'); break; }
+        if (!(m.egg === undefined || typeof m.egg === 'boolean')) { errors.push('bad-egg'); break; }
+        if (!(m.eggSteps === undefined || isInt(m.eggSteps, 0, 100000))) { errors.push('bad-egg-steps'); break; }
         if (!Array.isArray(m.moves) || m.moves.length > 4 || m.moves.some((mv) => !isPlainObj(mv) || !TABLES.moves.has(mv.id))) { errors.push('bad-move'); break; }
       }
       if (errors.length > 24) break;
     }
+  }
+
+  // Stage J6 arc systems: Day-Care guests run the FULL mon checker
+  // (species/moves/IVs/keepsake/egg — deposited mons are real mons);
+  // the waiting egg, the step counter, the tree-rest map and Kurt's
+  // order are closed bounded shapes.
+  if (data.daycare !== undefined) {
+    if (!Array.isArray(data.daycare) || data.daycare.length > 2) errors.push('bad-daycare');
+    else for (const m of data.daycare) { checkMon(m, errors, 2, caps); if (errors.length > 24) break; }
+  }
+  if (data.daycareEgg !== undefined && data.daycareEgg !== null) {
+    const e = data.daycareEgg;
+    if (!isPlainObj(e) || hasDangerousKey(e) || !TABLES.species.has(e.speciesId) || !isInt(e.eggSteps, 0, 100000)) errors.push('bad-daycare-egg');
+  }
+  if (data.daycareEggAt !== undefined && data.daycareEggAt !== null && !isInt(data.daycareEggAt, 0, 100000000)) errors.push('bad-daycare-egg-at');
+  if (data.stepsTotal !== undefined && !isInt(data.stepsTotal, 0, 100000000)) errors.push('bad-steps-total');
+  if (data.gather !== undefined) {
+    if (!isPlainObj(data.gather) || hasDangerousKey(data.gather)) errors.push('bad-gather');
+    else {
+      const gkeys = Object.keys(data.gather);
+      if (gkeys.length > 64) errors.push('bad-gather-size');
+      else for (const k of gkeys) {
+        if (!/^[a-z0-9-]+:-?\d+,-?\d+$/.test(k) || !isInt(data.gather[k], 0, 100000000)) { errors.push('bad-gather-entry'); break; }
+      }
+    }
+  }
+  if (data.kurtOrder !== undefined && data.kurtOrder !== null) {
+    const o = data.kurtOrder;
+    if (!isPlainObj(o) || hasDangerousKey(o) || typeof o.ball !== 'string' || !TABLES.balls.has(o.ball) || !isInt(o.readyAt, 0, 100000000)) errors.push('bad-kurt-order');
   }
 
   checkDex(data.dex, errors, summary);

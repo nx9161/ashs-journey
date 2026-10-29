@@ -8,7 +8,8 @@
 
 import { SPECIES } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
-import { ITEMS } from '../data/items.mjs';
+import { ITEMS, BALLS } from '../data/items.mjs';
+import { ballCatchRate } from './ball-rules.mjs';
 import {
   effectiveness, calcDamage, stageMultiplier, accStageMultiplier,
   gen1Random, critChance, gen1Catch,
@@ -638,9 +639,12 @@ Object.assign(BattleScene.prototype, {
   rtBagMenu() {
     const g = this.game;
     const items = [];
-    for (const bid of ['pokeball', 'greatball', 'ultraball', 'masterball']) {
+    // Stage J6: the RT bag reads the BALLS table like the classic bag
+    // (the apricorn balls were unreachable in RT under the old
+    // hard-coded four-ball list).
+    for (const bid of Object.keys(BALLS)) {
       const n = g.state.bag[bid] || 0;
-      items.push({ label: (bid === 'pokeball' ? 'Poke Ball' : bid === 'greatball' ? 'Great Ball' : bid === 'ultraball' ? 'Ultra Ball' : 'Master Ball') + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
+      items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
     }
     const meds = this.battleMedicineIds();
     for (const mid of meds) {
@@ -698,6 +702,7 @@ Object.assign(BattleScene.prototype, {
     if (this.uncatchable) { this.rtFloat(this.friendly ? 'The Coach bats the ball away!' : 'It cannot be caught!'); return; }
     if ((g.state.bag[ballId] || 0) <= 0) return;
     g.state.bag[ballId]--;
+    this._lastBallId = ballId; // Stage J6: shared catchSuccess reads it (Friend Ball)
     const rt = this.rt;
     rt.ballFlight = { x: rt.ax, y: rt.ay, t: 0, dur: 330, ballId, fromX: rt.ax, fromY: rt.ay };
     g.audio.playSfx('catch-throw');
@@ -721,7 +726,11 @@ Object.assign(BattleScene.prototype, {
       }
       const foe = this.foe;
       // ADR-025 §4: Story's ball bonus (x1.1) scales the effective rate.
-      const rate = Math.max(3, Math.min(255, Math.round(SPECIES[foe.speciesId].catchRate * catchRateMultFor(g.state))));
+      let rate = Math.max(3, Math.min(255, Math.round(SPECIES[foe.speciesId].catchRate * catchRateMultFor(g.state))));
+      // Stage J6: the SAME apricorn-rule scaling the classic engine
+      // applies (shared ball-rules.mjs) — level/heavy spot-proven in
+      // tests/johto-systems-checks.mjs, all seven proven for classic.
+      rate = ballCatchRate(rate, b.ballId, { lead: this.ally, foe, fished: this.fished });
       const res = gen1Catch(foe.maxHp, foe.hp, rate, b.ballId, foe.status, g.rng.battle);
       rt.catchSeq = { t: 0, shakes: 0, need: res.caught ? 3 : res.shakes, willCatch: res.caught, ballId: b.ballId };
       g.audio.playSfx('catch-rattle');

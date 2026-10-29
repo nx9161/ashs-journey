@@ -126,10 +126,10 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 146 (145 + the Clear Bell key item, Stage J5 — supersedes the Stage J4b count), quests table carries every q_johto_* + johto tale id',
+  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 160 (146 + 7 apricorns + 7 apricorn balls, Stage J6 — supersedes the Stage J5 count), quests table carries every q_johto_* + johto tale id',
     checkOut.includes('tables.json OK')
     && JSON.stringify(t.badgeSequences.johto) === JSON.stringify(JOHTO_ORDER)
-    && t.items.length === 146
+    && t.items.length === 160
     && t.items.includes('secretpotion')
     && JOHTO_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(JOHTO_TALES).every((id) => t.quests.includes(id)), checkOut.trim());
@@ -166,10 +166,10 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
     if (!reached) { reachOk = false; reachDetail.push(n.map + ':' + n.name); }
   }
   ok('A17 walk-to-actor: every map entry reaches a tile beside every appended Johto actor (nobody seals a door)', reachOk, reachDetail.join(' '));
-  ok('A18 patch table: 24 patches (10 tale givers + 10 stage actors + 4 functional johto stamps: pharmacist/den elder/pass veteran/conference official), every patched name exists in its maps6 roster',
-    JOHTO_NPC_PATCHES.length === 24
+  ok('A18 patch table: 25 patches (10 tale givers + 10 stage actors + 5 functional johto stamps: pharmacist/den elder/pass veteran/conference official + the Day-Care keeper, Stage J6 — supersedes the Stage J5 count of 24), every patched name exists in its maps6 roster',
+    JOHTO_NPC_PATCHES.length === 25
     && JOHTO_NPC_PATCHES.filter((p) => p.tale).length === 20
-    && JOHTO_NPC_PATCHES.filter((p) => p.johto).map((p) => p.johto).join(',') === 'pharmacist,den_elder,silver_gate,conference'
+    && JOHTO_NPC_PATCHES.filter((p) => p.johto).map((p) => p.johto).join(',') === 'pharmacist,den_elder,silver_gate,conference,daycare'
     && JOHTO_NPC_PATCHES.every((p) => (MAPS6[p.map].npcs || []).some((n) => n.name === p.name)));
 }
 

@@ -26,6 +26,11 @@ import { CHAPTERS } from '../data/story.mjs';
 import { statValue, hpValue } from '../engine/formulas.mjs';
 import { levelCapFor, HOME_MAP_ID, currentArcOf } from '../data/arcs.mjs';
 import { checkArcCompletion, tryHomecoming, arcFerryAllowed, arcFerryGateLine } from './arcs.mjs';
+import {
+  ensureJohtoSystems, johtoStepTick, apricornTreeAt, pickApricorn, tradeEvolutionsOf,
+  depositToDaycare, withdrawFromDaycare, collectDaycareEgg, giveStoryEgg, pairCompatible,
+  APRICORN_IDS, APRICORN_TO_BALL, kurtOrderStatus, kurtPlaceOrder, kurtCollect,
+} from './johto-systems.mjs';
 
 const BOX_COUNT = 12;
 const BOX_CAP = 30; // UI v2.4: Platinum's 30 — matches the save validator's limit (was 20)
@@ -247,6 +252,20 @@ Object.assign(OverworldScene.prototype, {
       if (!anyAlive && g.state.party.length) { this.blackout(); return true; }
       const hurt = g.state.party.find((m) => (m.status === 'poison' || m.status === 'badlyPoisoned') && m.hp > 0);
       if (hurt) g.ui.toast(displayName(hurt, SPECIES) + ' is hurt by poison...');
+    }
+    // Stage J6: the persisted step systems — the walked-step counter,
+    // Day-Care egg production, and party-egg countdowns/hatching. A
+    // hatch scene claims the step (no encounter rides over it).
+    const j6tick = johtoStepTick(g.state);
+    if (j6tick.hatched.length) {
+      const lines = [];
+      for (const m of j6tick.hatched) {
+        lines.push('Oh? The Egg is hatching!');
+        lines.push(displayName(m, SPECIES) + ' hatched from the Egg!');
+      }
+      g.audio.playSfx('dex-register');
+      g.ui.say(lines);
+      return true;
     }
     // Water + cave encounters (grass handled by the base onStep).
     if (this.sysEncounterStep(x, y, t)) return true;
@@ -587,6 +606,28 @@ Object.assign(OverworldScene.prototype, {
     // Stage J5: the Ilex Forest shrine (the JSHRINE prop at (14,3))
     // is Celebi's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
+    // Stage J6: apricorn trees (the J3a `apricorn` prop kind). Facing
+    // a tree picks its apricorn when it has rested enough walked
+    // steps; the rest is counted on the persisted step counter and
+    // reported honestly.
+    {
+      const facedKind = TILE_CHARS[this.tileAt(fx, fy)];
+      if (facedKind === 'apricorn') {
+        const tree = apricornTreeAt(this.mapId, fx, fy);
+        if (tree) {
+          const res = pickApricorn(g.state, tree);
+          if (res.ok) {
+            g.audio.playSfx('dex-register');
+            g.ui.say(['Picked the ' + ITEMS[tree.item].name + '!', 'The tree settles back to growing. It will fruit again after a good walk.']);
+          } else {
+            g.ui.say(['The apricorn tree is resting. Its next fruit ripens in about ' + res.remaining + ' steps of walking.']);
+          }
+          return true;
+        }
+        g.ui.say(['An apricorn tree, bare of ripe fruit.']);
+        return true;
+      }
+    }
     const t = this.tileAt(fx, fy);
     // Item balls.
     if (this.map.items) {
@@ -721,7 +762,10 @@ Object.assign(OverworldScene.prototype, {
     g.ui.say(['Oh! A bite!'], () => {
       g.audio.stopMusic();
       g.audio.encounter();
-      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g), arena: 'water' }));
+      // Stage J6: fished:true is the Lure Ball's marker — the rod's
+      // battle start for BOTH engines (one BattleScene class; the RT
+      // throw path reads this.fished exactly as the classic one does).
+      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g), arena: 'water', fished: true }));
     });
   },
 
@@ -1246,6 +1290,8 @@ Object.assign(OverworldScene.prototype, {
         'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (JOHTO_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
     };
 
+    if (kind === 'daycare') { this.openDaycare(npc); return true; }
+
     if (kind === 'elm') {
       if (!flags.johto_arrival && !flags.ev_johto_arrival_done) { this.runEvent('ev_johto_arrival'); return true; }
       if (flags.silver_r30_done && !flags.silver_reported) {
@@ -1276,6 +1322,45 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'kurt') {
+      // Stage J6: apricorn crafting rides AHEAD of Kurt's story chain
+      // (a pending order reports/collects first; a carried apricorn
+      // offers the craft menu, whose "Just talk" re-enters this
+      // handler with a one-shot session pass so the GS Ball chain
+      // below runs byte-identically).
+      st.session = st.session || { learnQueue: [] };
+      const kStatus = kurtOrderStatus(st);
+      if (kStatus.busy) {
+        if (kStatus.ready) {
+          say(['It is done, {player}. Smell that — fresh shell, warm as bread. One ball at a time, made properly.'], () => {
+            const res = kurtCollect(st);
+            if (res.ok) { g.audio.playSfx('dex-register'); g.ui.toast('Got the ' + ITEMS[res.ball].name + '!'); }
+          });
+          return true;
+        }
+        say(['The ball is on the bench, and the bench does not hurry. Walk about ' + kStatus.remaining + ' more steps out there — the work settles at walking pace, like everything true in this town.']);
+        return true;
+      }
+      if (st.session.kurtTalkOnce) {
+        delete st.session.kurtTalkOnce;
+      } else {
+        const ownedApricorns = APRICORN_IDS.filter((id) => (st.bag[id] || 0) > 0);
+        if (ownedApricorns.length) {
+          say(['Forty years I have worked Poke Balls by hand, trainer — and my eyes still catch an apricorn in a bag before the bag is even open. You are carrying ripe ones.',
+            'One ball at a time — that is the workbench law — and it settles over 250 steps of your walking. Shall I work one for you?'], () => {
+            const items = ownedApricorns.map((id) => ({ label: 'Craft: ' + ITEMS[id].name + ' -> ' + ITEMS[APRICORN_TO_BALL[id]].name, value: id }));
+            items.push({ label: 'Just talk', value: '__talk' });
+            items.push({ label: 'Leave', value: null });
+            g.ui.showMenu('Hand Kurt an apricorn?', items, (v) => {
+              if (v === '__talk') { st.session.kurtTalkOnce = true; this.runJohtoNpc(npc); return; }
+              if (!v) return;
+              const res = kurtPlaceOrder(st, v);
+              if (res.ok) say(['He takes the ' + ITEMS[v].name + ' in both hands, the way you would take a sleeping bird.', 'Come back after 250 steps of walking, {player}. The ball will be on the bench, and so will I.']);
+              else say(['The workbench is busy, trainer. One ball at a time.']);
+            });
+          });
+          return true;
+        }
+      }
       if (!flags.johto_well_cleared) {
         if (flags.kurt_well_plea) { say(['Still sitting, still useless, still proud — the back has union rules, apparently. The well, trainer. Three Rockets, and Slowpoke who deserve better. My house will keep.']); return true; }
         say(['Mind the well on your way past, trainer. Something down there smells like a market that should not exist. If you find an old man investigating it badly — that will be me, shortly.']); return true; }
@@ -2397,6 +2482,107 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- PC boxes ----------
+  // ---------- Stage J6: the Day-Care (Route 34) ----------
+  // Both keepers (the maps6 keeper, johto-patched, and his wife,
+  // appended in JOHTO_NPCS) run this one flow. All state moves ride
+  // the pure johto-systems functions; this layer is menus + lines.
+  openDaycare(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    ensureJohtoSystems(st);
+    const say = (lines, cb) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, npc.name);
+    const destLine = (res, what) => res.dest === 'box'
+      ? what + ' was sent to ' + String(res.boxId).replace('box', 'Box ') + ' — no room in the party, but safe and warm there.'
+      : what + ' is in your party. Walk with it.';
+    const menu = () => {
+      const items = [];
+      if (st.daycareEgg) items.push({ label: 'Collect the Egg we found', value: 'egg' });
+      items.push({ label: 'Leave a Pokemon with us', value: 'dep', disabled: st.daycare.length >= 2 });
+      items.push({ label: 'Take a Pokemon back', value: 'wd', disabled: !st.daycare.length });
+      items.push({ label: 'How are my Pokemon?', value: 'status' });
+      items.push({ label: 'Leave', value: null });
+      g.ui.showMenu('Pokemon Day-Care — we raise them with patient hands.', items, (v) => {
+        if (v === 'egg') {
+          const res = collectDaycareEgg(st);
+          if (!res.ok) { say(['There is no room anywhere — party full and every PC box full. Make room, and the Egg will still be here, warm in the straw.'], () => menu()); return; }
+          g.audio.playSfx('dex-register');
+          say(['Here it is, still warm. We do not know how it got here — your two guests are not telling.', destLine(res, 'The Egg')], () => menu());
+          return;
+        }
+        if (v === 'dep') {
+          const rows = st.party.map((m, i) => ({
+            label: displayName(m, SPECIES) + ' Lv' + m.level + (m.egg ? ' (Egg)' : ''), value: i, disabled: !!m.egg,
+          }));
+          rows.push({ label: 'Back', value: -1 });
+          g.ui.showMenu('Leave which Pokemon?', rows, (iv) => {
+            if (iv === null || iv === -1) { menu(); return; }
+            const mon = st.party[iv];
+            const res = depositToDaycare(st, iv);
+            if (res.ok) {
+              say(['We will take good care of ' + displayName(mon, SPECIES) + '. Walk the routes, trainer — eggs and friendships both happen at walking pace.'], () => menu());
+            } else if (res.reason === 'partner') say([res.line], () => menu());
+            else if (res.reason === 'last-non-egg') say(['Not your last travelling partner, dear. An Egg cannot walk the roads alone — someone has to carry it, and battle for it. Leave us a Pokemon when another able one walks with you.'], () => menu());
+            else if (res.reason === 'is-egg') say(['An Egg needs its trainer\'s own walking to hatch. Keep it in your party, dear.'], () => menu());
+            else say(['We are full up just now — two guests is our honest limit.'], () => menu());
+          });
+          return;
+        }
+        if (v === 'wd') {
+          const rows = st.daycare.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
+          rows.push({ label: 'Back', value: -1 });
+          g.ui.showMenu('Take back which Pokemon?', rows, (iv) => {
+            if (iv === null || iv === -1) { menu(); return; }
+            const mon = st.daycare[iv];
+            const res = withdrawFromDaycare(st, iv);
+            if (res.ok) say([displayName(mon, SPECIES) + ' is glad to see you. They always are, whatever they pretend.'], () => menu());
+            else say(['Your party is full, dear. Make room first — ' + displayName(mon, SPECIES) + ' can wait a little longer.'], () => menu());
+          });
+          return;
+        }
+        if (v === 'status') {
+          const lines = [];
+          if (!st.daycare.length) lines.push('No guests just now. The garden is quiet, the naps are ahead of schedule.');
+          else {
+            for (const m of st.daycare) lines.push(displayName(m, SPECIES) + ' (Lv' + m.level + ') is resting well — fed, brushed, and sung to at noon.');
+            if (st.daycare.length === 2) {
+              if (st.daycareEgg) lines.push('And — we found an Egg with them! It is waiting for you, warm in the straw.');
+              else if (pairCompatible(st.daycare[0], st.daycare[1])) {
+                const left = st.daycareEggAt !== null ? Math.max(0, st.daycareEggAt - st.stepsTotal) : 0;
+                lines.push('Those two get along famously. Walk about ' + left + ' more steps with them in our care, and check back — these things keep their own hours.');
+              } else lines.push('Those two prefer their own corners, truth be told. No egg will come of this pairing — different kinds keep different company.');
+            }
+          }
+          say(lines, () => menu());
+          return;
+        }
+      });
+    };
+    // The story egg: the couple's one-time gift, offered on the first
+    // visit, so every player meets the system. A full-everywhere
+    // refusal sets NO flag — the offer stands on the next visit.
+    if (!flags.daycare_story_egg) {
+      say(['Welcome to our little house, trainer. Forty years we have raised other folks\' Pokemon here, one nap at a time.',
+        'Before anything else — a gift. Travellers leave us all sorts here, and this was left with a note: "for a trainer who walks." It is a Pokemon Egg, and we would like you to walk with it.'], () => {
+        const res = giveStoryEgg(st, () => g.rng.misc());
+        if (!res.ok) {
+          say(['Ah — no room anywhere, party and boxes both full. Make a little room, dear, and come back. The Egg will keep.']);
+          return;
+        }
+        flags.daycare_story_egg = true;
+        g.audio.playSfx('dex-register');
+        say(['Received a Pokemon Egg!', destLine(res, 'The Egg'), 'Walk with it in your party. When it is ready, it will not ask permission — eggs never do.'], () => menu());
+      });
+      return true;
+    }
+    if (st.daycareEgg) {
+      say(['You came at the right moment, {player} — we found an Egg with your two guests! We do not know how it got there. They are not telling.'], () => menu());
+      return true;
+    }
+    say(['Eggs and friendships both happen at walking pace, trainer. What can this house do for you?'], () => menu());
+    return true;
+  },
+
   // UI v2.4 (defect 4): a real box SCREEN (ui.showPcPanel) instead of the
   // list-modal flow — wallpaper field, a 30-slot grid that renders even
   // when empty, the party strip alongside, a framed info window, and box
@@ -2426,25 +2612,32 @@ Object.assign(OverworldScene.prototype, {
     const openLink = () => {
       // Bill's Link Transfer: trade-evolution species evolve here —
       // the honest single-player resolution (WS7 design call, ADR-019).
-      const cand = g.state.party.filter((m) => {
-        const sp = SPECIES[m.speciesId];
-        return sp && sp.evo && sp.evo.method === 'trade';
-      });
+      // Stage J6 widening: the candidate scan reads `evos` branch
+      // entries too (tradeEvolutionsOf), so poliwhirl->politoed and
+      // slowpoke->slowking — whose `evo` slots carry their primary
+      // branches — are reachable; each trade branch is its own row,
+      // and the evolution runs the CHOSEN branch (evolveMon's
+      // forcedEvo), never the slot default.
+      const cand = [];
+      for (const m of g.state.party) {
+        if (m.egg) continue; // J6: an Egg can't be sent out, traded, or evolved
+        for (const evo of tradeEvolutionsOf(m.speciesId)) cand.push({ mon: m, evo });
+      }
       // AUDIT FIX (S-10): the link flow used to close the PC first and
       // never come back — checking (or backing out) cost the whole PC
       // session. The panel now stays open underneath (menus and dialogue
       // route above it) and every exit path returns to it.
       if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.'], () => render()); return; }
-      const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
+      const items = cand.map((c, i) => ({ label: displayName(c.mon, SPECIES) + ' -> ' + SPECIES[c.evo.to].name, value: i }));
       items.push({ label: 'Back', value: null, wide: true });
       const linkRowHtml = (it) => {
-        const mon = cand.find((m) => m.monId === it.value) || null;
-        if (!mon) return '<span>' + it.label + '</span>';
-        return '<img class="picon" src="' + sprite(mon) + '" alt=""><span>' + it.label + '</span>';
+        const c = cand[it.value] || null;
+        if (!c) return '<span>' + it.label + '</span>';
+        return '<img class="picon" src="' + sprite(c.mon) + '" alt=""><span>' + it.label + '</span>';
       };
       g.ui.showMenu('Link Transfer which?', items, (iv) => {
-        const mon = cand.find((m) => m.monId === iv);
-        if (mon) this.evolveMon(mon, null, () => render());
+        const c = cand[iv];
+        if (c) this.evolveMon(c.mon, null, () => render(), c.evo);
         else render();
       }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
     };
@@ -2515,6 +2708,12 @@ Object.assign(OverworldScene.prototype, {
         const occ = arr[idx];
         if (held.from === 'party') {
           if (g.state.party.length <= 1) { g.ui.say(['You need at least one Pokemon with you!']); return; }
+          // Stage J6: the all-egg guard (the deposit-your-last-mon
+          // precedent, sharpened) — a move whose RESULTING party
+          // holds only Eggs (or nothing able) is refused.
+          const simParty = g.state.party.filter((_, i2) => i2 !== held.idx);
+          if (occ) simParty.splice(held.idx, 0, occ);
+          if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
           const chk = boxCheck(held.mon);
           if (!chk.ok) { g.ui.say([chk.line]); return; }
           g.state.party.splice(held.idx, 1);
@@ -2534,6 +2733,9 @@ Object.assign(OverworldScene.prototype, {
           if (occ) {
             const chk = boxCheck(occ);
             if (!chk.ok) { g.ui.say([chk.line]); return; }
+            // Stage J6: the same all-egg guard on the swap direction.
+            const simParty = g.state.party.slice(); simParty[idx] = held.mon;
+            if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
             src[held.idx] = occ; g.state.party[idx] = held.mon;
           } else {
             src.splice(held.idx, 1); g.state.party.push(held.mon);
@@ -2951,13 +3153,18 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- evolution ----------
-  evolveMon(mon, stoneId, onDone) {
+  evolveMon(mon, stoneId, onDone, forcedEvo) {
     const g = this.game;
     const chk = evolutionCheck(mon);
     if (!chk.ok) { g.ui.say([chk.line], onDone || undefined); return false; }
+    if (mon.egg) { g.ui.say(['The Egg is in no state to evolve. It has not even met the world yet.'], onDone || undefined); return false; }
     const sp = SPECIES[mon.speciesId];
     let evo = null;
-    if (stoneId) {
+    if (forcedEvo) {
+      // Stage J6: Link Transfer names its branch explicitly (a trade
+      // entry from `evos` may not be the species' `evo` slot).
+      evo = forcedEvo;
+    } else if (stoneId) {
       const evos = sp.evos || (sp.evo ? [sp.evo] : []);
       evo = evos.find((e) => e.method === 'stone' && e.stone === stoneId) || null;
     } else {

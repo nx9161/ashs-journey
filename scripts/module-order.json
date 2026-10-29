@@ -41,6 +41,8 @@
  "src/game/keepsakes.mjs",
  "src/game/bonds.mjs",
  "src/game/arcs.mjs",
+ "src/game/ball-rules.mjs",
+ "src/game/johto-systems.mjs",
  "src/save/schema.mjs",
  "src/save/store.mjs",
  "src/game/scenes.mjs",

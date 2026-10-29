@@ -741,7 +741,7 @@ export class Game {
       const heldDef = m.keepsake && ITEMS[m.keepsake] ? ITEMS[m.keepsake] : null;
       const bagKs = Object.keys(KEEPSAKES).filter((id) => (g.state.bag[id] || 0) > 0);
       if (heldDef) rows.push({ label: 'Take ' + heldDef.name, value: 'ks-take' });
-      if (!heldDef && bagKs.length) rows.push({ label: 'Give keepsake', value: 'ks-give' });
+      if (!heldDef && bagKs.length && !m.egg) rows.push({ label: 'Give keepsake', value: 'ks-give' }); // J6: an Egg holds nothing
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
       rows.push({ label: 'Close', value: 'close' });
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {

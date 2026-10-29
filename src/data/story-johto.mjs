@@ -917,6 +917,12 @@ export const JOHTO_NPCS = [
     dialogue: ['We dance the tower\'s seasons. The eldest of us keeps something for the tower, too.'] },
   { map: 'mahogany', x: 20, y: 6, name: 'SHOPKEEPER PELL', art: 'clerk', dir: 'down', johto: 'hideout_stairs', hideoutWarp: 'rocket-hideout',
     dialogue: ['Souvenirs above. Storage below. Mind the stairs — they are steeper than they look, and they look steep.'] },
+  // ---- Stage J6: the Day-Care couple. The keeper already stands in
+  // the maps6 interior (stamped johto:'daycare' by JOHTO_NPC_PATCHES
+  // below); his wife joins him by this same append idiom. Both run
+  // the one Day-Care flow (overworld-systems openDaycare).
+  { map: 'daycare', x: 4, y: 7, name: 'DAY-CARE WOMAN', art: 'lady', skin: '#f0c8a0', shirt: '#7a9a4a', pants: '#4a3a2a', hair: '#8a8a8a', johto: 'daycare',
+    dialogue: ['Every guest gets a name, a nap schedule, and a song. No exceptions in forty years.'] },
 ];
 
 export const JOHTO_NPC_PATCHES = [
@@ -947,6 +953,9 @@ export const JOHTO_NPC_PATCHES = [
   { map: 'dragons-den', name: 'DEN ELDER', johto: 'den_elder' },
   { map: 'route-silver', name: 'VETERAN HALD', johto: 'silver_gate' },
   { map: 'silver-stadium', name: 'CONFERENCE OFFICIAL', johto: 'conference' },
+  // Stage J6: the Day-Care keeper (a maps6 roster NPC) joins the
+  // runJohtoNpc dispatch as the breeding/eggs host.
+  { map: 'daycare', name: 'DAY-CARE KEEPER', johto: 'daycare' },
 ];
 
 // ---------------------------------------------------------------------------

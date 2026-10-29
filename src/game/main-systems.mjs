@@ -61,8 +61,8 @@ Object.assign(Game.prototype, {
       // ADR-025 §3 (Phase 3): selecting a keepsake in the bag gives it
       // to a party member (non-consumable; one held slot per mon).
       const targets = g.state.party.map((m, i) => ({
-        label: displayName(m, SPECIES) + (m.keepsake ? ' (holding ' + (ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : m.keepsake) + ')' : ''), value: i,
-        disabled: !!m.keepsake,
+        label: displayName(m, SPECIES) + (m.egg ? ' (Egg)' : m.keepsake ? ' (holding ' + (ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : m.keepsake) + ')' : ''), value: i,
+        disabled: !!m.keepsake || !!m.egg, // J6: an Egg holds nothing
       }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Give ' + it.name + ' to...', targets, (t) => {
@@ -79,7 +79,8 @@ Object.assign(Game.prototype, {
     if (it.levelUp) { // Rare Candy
       // ADR-027 Amendment 2: the cap is a registry read (the current
       // arc's band max; Arcs 1/1.5 read 100, exactly as before).
-      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= levelCapFor(g.state) }));
+      // J6: an Egg cannot eat candy (it would level + evolve unhatched).
+      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: !!m.egg || m.level >= levelCapFor(g.state) }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Use Rare Candy on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
@@ -94,7 +95,7 @@ Object.assign(Game.prototype, {
       return;
     }
     if (it.xpBoost) { // XP Candy (ADR-025 §4): fixed XP, Rare Candy shape
-      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= levelCapFor(g.state) }));
+      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: !!m.egg || m.level >= levelCapFor(g.state) }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Use XP Candy on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
@@ -116,11 +117,11 @@ Object.assign(Game.prototype, {
     }
     if (it.pocket === 'medicine') {
       const targets = g.state.party.map((m, i) => {
-        let dis = false;
-        if (it.revive) dis = m.hp > 0;
-        else if (it.cure) dis = m.hp <= 0 || (it.cure !== 'all' && m.status !== it.cure) || (it.cure === 'all' && !m.status);
-        else if (it.heal) dis = m.hp <= 0 || m.hp >= m.maxHp;
-        else if (it.ppRestore || it.ppRestoreAll) dis = m.hp <= 0;
+        let dis = !!m.egg; // J6: medicine does nothing for an Egg
+        if (it.revive) dis = dis || m.hp > 0;
+        else if (it.cure) dis = dis || m.hp <= 0 || (it.cure !== 'all' && m.status !== it.cure) || (it.cure === 'all' && !m.status);
+        else if (it.heal) dis = dis || m.hp <= 0 || m.hp >= m.maxHp;
+        else if (it.ppRestore || it.ppRestoreAll) dis = dis || m.hp <= 0;
         return { label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''), value: i, disabled: dis };
       });
       targets.push({ label: 'Back', value: -1 });
@@ -157,6 +158,7 @@ Object.assign(Game.prototype, {
     }
     if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone', 'sunstone'].includes(id)) {
       const stoneTargets = g.state.party.filter((m) => {
+        if (m.egg) return false; // J6: an Egg cannot evolve
         const sp = SPECIES[m.speciesId];
         const evos = sp.evos || (sp.evo ? [sp.evo] : []);
         return evos.some((e) => e.method === 'stone' && e.stone === id);
@@ -253,7 +255,7 @@ Object.assign(Game.prototype, {
         ? (!sp.tm || sp.tm.includes(100 + parseInt(itemId.slice(2), 10)))
         : (!sp.tm || sp.tm.includes(parseInt(itemId.slice(2), 10)));
       const knows = m.moves.some((x) => x.id === moveId);
-      return { label: displayName(m, SPECIES) + (knows ? ' (knows it)' : can ? '' : ' (cannot learn)'), value: i, disabled: knows || !can };
+      return { label: displayName(m, SPECIES) + (m.egg ? ' (Egg)' : knows ? ' (knows it)' : can ? '' : ' (cannot learn)'), value: i, disabled: !!m.egg || knows || !can };
     });
     targets.push({ label: 'Back', value: -1 });
     g.ui.showMenu('Teach ' + mv.name + ' (' + itemId.toUpperCase() + ') to...', targets, (t) => {

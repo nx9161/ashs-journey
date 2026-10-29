@@ -85524,6 +85524,7 @@ const SPECIES = {
     id: 'partner', name: 'Pikachu', dexNo: 25, types: ['electric'],
     base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
     catchRate: 190, growth: 'mediumfast', baseXp: 82, body: 'quad', spriteSeed: 2501,
+    eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl'], 5: ['quickattack'] },
     flavor: 'A spirited partner who refused the easy path. Never leaves your side.',
     // Yellow homage (hard rules): never boxed, never evolved. Guards in state.mjs.
@@ -85534,6 +85535,7 @@ const SPECIES = {
     id: 'pidgey', name: 'Pidgey', dexNo: 16, types: ['normal', 'flying'],
     base: { hp: 40, atk: 45, def: 40, spa: 35, spd: 35, spe: 56 },
     catchRate: 255, growth: 'mediumslow', baseXp: 50, body: 'bird', spriteSeed: 1601,
+    eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['tackle'], 3: ['gust'], 5: ['quickattack'] },
     flavor: 'Common on quiet routes. Gusts up dust when it takes off.',
   },
@@ -85541,6 +85543,7 @@ const SPECIES = {
     id: 'rattata', name: 'Rattata', dexNo: 19, types: ['normal'],
     base: { hp: 30, atk: 56, def: 35, spa: 25, spd: 35, spe: 72 },
     catchRate: 255, growth: 'mediumfast', baseXp: 51, body: 'quad', spriteSeed: 1901,
+    eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'tailwhip'], 4: ['quickattack'] },
     flavor: 'Quick teeth, quicker feet. Nibbles anything left unattended.',
   },
@@ -85548,6 +85551,7 @@ const SPECIES = {
     id: 'caterpie', name: 'Caterpie', dexNo: 10, types: ['bug'],
     base: { hp: 45, atk: 30, def: 35, spa: 20, spd: 20, spe: 45 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1001,
+    eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'stringshot'] },
     flavor: 'Gentle and green. Its antennae taste the air for friends.',
   },
@@ -85555,6 +85559,7 @@ const SPECIES = {
     id: 'weedle', name: 'Weedle', dexNo: 13, types: ['bug', 'poison'],
     base: { hp: 40, atk: 35, def: 30, spa: 20, spd: 20, spe: 50 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1301,
+    eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['poisonsting', 'stringshot'] },
     flavor: 'Mind the stinger. It only uses it when startled.',
   },
@@ -85562,6 +85567,7 @@ const SPECIES = {
     id: 'spearow', name: 'Spearow', dexNo: 21, types: ['normal', 'flying'],
     base: { hp: 40, atk: 60, def: 30, spa: 31, spd: 31, spe: 70 },
     catchRate: 255, growth: 'mediumfast', baseXp: 52, body: 'bird', spriteSeed: 2101,
+    eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['peck', 'growl'] },
     flavor: 'Territorial and loud. Best admired from a respectful distance.',
   },
@@ -85569,6 +85575,7 @@ const SPECIES = {
     id: 'zubat', name: 'Zubat', dexNo: 41, types: ['poison', 'flying'],
     base: { hp: 40, atk: 45, def: 35, spa: 30, spd: 40, spe: 55 },
     catchRate: 255, growth: 'mediumfast', baseXp: 49, body: 'bird', spriteSeed: 4101,
+    eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['leechlife', 'supersonic'] },
     flavor: 'Navigates by sound. Startles easily in dark tunnels.',
   },
@@ -85576,6 +85583,7 @@ const SPECIES = {
     id: 'geodude', name: 'Geodude', dexNo: 74, types: ['rock', 'ground'],
     base: { hp: 40, atk: 80, def: 100, spa: 30, spd: 30, spe: 20 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'blob', spriteSeed: 7401,
+    eggGroups: ['mineral'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'defensecurl'], 6: ['rockthrow'] },
     flavor: 'Arms of living stone. Often mistaken for an ordinary boulder.',
   },
@@ -85583,6 +85591,7 @@ const SPECIES = {
     id: 'onix', name: 'Onix', dexNo: 95, types: ['rock', 'ground'],
     base: { hp: 35, atk: 45, def: 160, spa: 30, spd: 45, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9501,
+    eggGroups: ['mineral'], hatchCounter: 25,
     learnset: { 1: ['tackle', 'harden'], 8: ['rockthrow'] },
     flavor: 'A chain of boulders given will. The gym leader\u2019s ace.',
     evo: { to: 'steelix', method: 'trade' },
@@ -85591,6 +85600,7 @@ const SPECIES = {
     id: 'bulbasaur', name: 'Bulbasaur', dexNo: 1, types: ['grass', 'poison'],
     base: { hp: 45, atk: 49, def: 49, spa: 65, spd: 65, spe: 45 },
     catchRate: 45, growth: 'mediumslow', baseXp: 64, body: 'quad', spriteSeed: 101,
+    eggGroups: ['monster', 'plant'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl'], 5: ['vinewhip'] },
     flavor: 'A seed on its back drinks the morning sun.',
   },
@@ -85598,6 +85608,7 @@ const SPECIES = {
     id: 'charmander', name: 'Charmander', dexNo: 4, types: ['fire'],
     base: { hp: 39, atk: 52, def: 43, spa: 60, spd: 50, spe: 65 },
     catchRate: 45, growth: 'mediumslow', baseXp: 62, body: 'biped', spriteSeed: 401,
+    eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'], 5: ['ember'] },
     flavor: 'Its tail flame mirrors its spirit — bright and stubborn.',
   },
@@ -85605,6 +85616,7 @@ const SPECIES = {
     id: 'squirtle', name: 'Squirtle', dexNo: 7, types: ['water'],
     base: { hp: 44, atk: 48, def: 65, spa: 50, spd: 64, spe: 43 },
     catchRate: 45, growth: 'mediumslow', baseXp: 63, body: 'biped', spriteSeed: 701,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip'], 5: ['watergun'] },
     flavor: 'Withdraws into its shell, then answers with a jet of water.',
   },
@@ -85612,6 +85624,7 @@ const SPECIES = {
     id: 'nidoranm', name: 'Nidoran\u2642', dexNo: 32, types: ['poison'],
     base: { hp: 46, atk: 57, def: 40, spa: 40, spd: 40, spe: 50 },
     catchRate: 235, growth: 'mediumslow', baseXp: 55, body: 'quad', spriteSeed: 3201,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'] },
     flavor: 'Ears always up. Hears a trainer\u2019s step long before seeing one.',
   },
@@ -85619,6 +85632,7 @@ const SPECIES = {
     id: 'mankey', name: 'Mankey', dexNo: 56, types: ['fighting'],
     base: { hp: 40, atk: 80, def: 35, spa: 35, spd: 45, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 61, body: 'biped', spriteSeed: 5601,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'leer', 'lowkick'] },
     flavor: 'Angers fast, forgives faster — usually after a good battle.',
   },
@@ -85662,6 +85676,7 @@ const SPECIES2 = {
     id: 'ivysaur', name: 'Ivysaur', dexNo: 2, types: ['grass', 'poison'],
     base: { hp: 60, atk: 62, def: 63, spa: 80, spd: 80, spe: 60 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'quad', spriteSeed: 201,
+    eggGroups: ['monster', 'plant'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl', 'leechseed', 'vinewhip'], 13: ['poisonpowder'], 14: ['sleeppowder'], 20: ['razorleaf'], 27: ['growth'], 34: ['solarbeam'] },
     flavor: 'Its bud drinks sunlight and swells a little more each dawn.',
     evo: { to: 'venusaur', method: 'level', level: 32 }, tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
@@ -85670,6 +85685,7 @@ const SPECIES2 = {
     id: 'venusaur', name: 'Venusaur', dexNo: 3, types: ['grass', 'poison'],
     base: { hp: 80, atk: 82, def: 83, spa: 100, spd: 100, spe: 80 },
     catchRate: 45, growth: 'mediumslow', baseXp: 263, body: 'quad', spriteSeed: 301,
+    eggGroups: ['monster', 'plant'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl', 'leechseed', 'vinewhip', 'petaldance'], 13: ['poisonpowder'], 14: ['sleeppowder'], 20: ['razorleaf'], 27: ['growth'], 34: ['solarbeam'], 46: ['petaldance'] },
     flavor: 'A walking garden. Bees follow it from route to route.',
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
@@ -85678,6 +85694,7 @@ const SPECIES2 = {
     id: 'charmeleon', name: 'Charmeleon', dexNo: 5, types: ['fire'],
     base: { hp: 58, atk: 64, def: 58, spa: 80, spd: 65, spe: 80 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'biped', spriteSeed: 501,
+    eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'ember'], 12: ['leer'], 24: ['rage'], 36: ['slash'], 42: ['flamethrower'], 56: ['firespin'] },
     flavor: 'Impatient and proud. Its claws spark against cave stone.',
     evo: { to: 'charizard', method: 'level', level: 36 }, tm: [1, 3, 6, 8, 9, 10, 17, 18, 19, 20, 28, 31, 32, 34, 38, 40, 44, 50, 101, 104],
@@ -85686,6 +85703,7 @@ const SPECIES2 = {
     id: 'charizard', name: 'Charizard', dexNo: 6, types: ['fire', 'flying'],
     base: { hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 267, body: 'biped', spriteSeed: 601,
+    eggGroups: ['monster', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'ember', 'wingattack'], 12: ['leer'], 24: ['rage'], 36: ['slash'], 46: ['flamethrower'], 55: ['firespin'] },
     flavor: 'It circles high on warm updrafts, scouting far beyond the ridge.',
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
@@ -85694,6 +85712,7 @@ const SPECIES2 = {
     id: 'wartortle', name: 'Wartortle', dexNo: 8, types: ['water'],
     base: { hp: 59, atk: 63, def: 80, spa: 65, spd: 80, spe: 58 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'biped', spriteSeed: 801,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip', 'bubble'], 10: ['watergun'], 18: ['bite'], 27: ['withdraw'], 36: ['skullbash'], 45: ['hydropump'] },
     flavor: 'Its fluffy tail reads the current before it dives.',
     evo: { to: 'blastoise', method: 'level', level: 36 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
@@ -85702,6 +85721,7 @@ const SPECIES2 = {
     id: 'blastoise', name: 'Blastoise', dexNo: 9, types: ['water'],
     base: { hp: 79, atk: 83, def: 100, spa: 85, spd: 105, spe: 78 },
     catchRate: 45, growth: 'mediumslow', baseXp: 265, body: 'biped', spriteSeed: 901,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip', 'bubble', 'watergun'], 18: ['bite'], 27: ['withdraw'], 39: ['skullbash'], 52: ['hydropump'] },
     flavor: 'Twin cannons, calm aim. Lakes go quiet when it surfaces.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 50, 103, 104],
@@ -85710,6 +85730,7 @@ const SPECIES2 = {
     id: 'metapod', name: 'Metapod', dexNo: 11, types: ['bug'],
     base: { hp: 50, atk: 20, def: 55, spa: 25, spd: 25, spe: 30 },
     catchRate: 120, growth: 'mediumfast', baseXp: 72, body: 'blob', spriteSeed: 1101,
+    eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['harden'] },
     flavor: 'Still as a leaf, dreaming of wings it cannot yet feel.',
     evo: { to: 'butterfree', method: 'level', level: 10 }, tm: [],
@@ -85718,6 +85739,7 @@ const SPECIES2 = {
     id: 'butterfree', name: 'Butterfree', dexNo: 12, types: ['bug', 'flying'],
     base: { hp: 60, atk: 45, def: 50, spa: 90, spd: 80, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 198, body: 'bird', spriteSeed: 1201,
+    eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['confusion'], 12: ['poisonpowder'], 13: ['stunspore'], 14: ['sleeppowder'], 16: ['supersonic'], 21: ['gust'], 26: ['psybeam'] },
     flavor: 'It rides spring thermals, scattering sleepy dust over meadows.',
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
@@ -85726,6 +85748,7 @@ const SPECIES2 = {
     id: 'kakuna', name: 'Kakuna', dexNo: 14, types: ['bug', 'poison'],
     base: { hp: 45, atk: 25, def: 50, spa: 25, spd: 25, spe: 35 },
     catchRate: 120, growth: 'mediumfast', baseXp: 72, body: 'blob', spriteSeed: 1401,
+    eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['harden'] },
     flavor: 'It waits in bark shadow, saving every scrap of strength.',
     evo: { to: 'beedrill', method: 'level', level: 10 }, tm: [],
@@ -85734,6 +85757,7 @@ const SPECIES2 = {
     id: 'beedrill', name: 'Beedrill', dexNo: 15, types: ['bug', 'poison'],
     base: { hp: 65, atk: 90, def: 40, spa: 45, spd: 80, spe: 75 },
     catchRate: 45, growth: 'mediumfast', baseXp: 198, body: 'bird', spriteSeed: 1501,
+    eggGroups: ['bug'], hatchCounter: 15,
     learnset: { 1: ['furyattack'], 12: ['focusenergy'], 16: ['twineedle'], 20: ['rage'], 25: ['pinmissile'], 30: ['agility'] },
     flavor: 'Three lances and no patience. Hear the swarm before you see it.',
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 33, 34, 44, 50, 101],
@@ -85742,6 +85766,7 @@ const SPECIES2 = {
     id: 'pidgeotto', name: 'Pidgeotto', dexNo: 17, types: ['normal', 'flying'],
     base: { hp: 63, atk: 60, def: 55, spa: 50, spd: 50, spe: 71 },
     catchRate: 120, growth: 'mediumslow', baseXp: 122, body: 'bird', spriteSeed: 1701,
+    eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'gust', 'sandattack'], 5: ['quickattack'], 12: ['wingattack'], 27: ['agility'] },
     flavor: 'It patrols a wide territory and knows every fence post in it.',
     evo: { to: 'pidgeot', method: 'level', level: 36 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
@@ -85750,6 +85775,7 @@ const SPECIES2 = {
     id: 'pidgeot', name: 'Pidgeot', dexNo: 18, types: ['normal', 'flying'],
     base: { hp: 83, atk: 80, def: 75, spa: 70, spd: 70, spe: 101 },
     catchRate: 45, growth: 'mediumslow', baseXp: 216, body: 'bird', spriteSeed: 1801,
+    eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'gust', 'sandattack', 'quickattack'], 12: ['wingattack'], 27: ['agility'] },
     flavor: 'Crest streaming, it outruns storm fronts for the fun of it.',
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
@@ -85758,6 +85784,7 @@ const SPECIES2 = {
     id: 'raticate', name: 'Raticate', dexNo: 20, types: ['normal'],
     base: { hp: 55, atk: 81, def: 60, spa: 50, spd: 70, spe: 97 },
     catchRate: 90, growth: 'mediumfast', baseXp: 145, body: 'quad', spriteSeed: 2001,
+    eggGroups: ['ground'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'tailwhip', 'quickattack'], 14: ['focusenergy'], 27: ['takedown'] },
     flavor: 'Its fangs can worry through fence wire and old timber alike.',
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 28, 31, 32, 34, 39, 44, 50],
@@ -85766,6 +85793,7 @@ const SPECIES2 = {
     id: 'fearow', name: 'Fearow', dexNo: 22, types: ['normal', 'flying'],
     base: { hp: 65, atk: 90, def: 65, spa: 61, spd: 61, spe: 100 },
     catchRate: 90, growth: 'mediumfast', baseXp: 155, body: 'bird', spriteSeed: 2201,
+    eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['peck', 'growl', 'leer', 'furyattack'], 15: ['drillpeck'], 26: ['agility'] },
     flavor: 'A spear of a bird. It stoops before its shadow arrives.',
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
@@ -85774,6 +85802,7 @@ const SPECIES2 = {
     id: 'ekans', name: 'Ekans', dexNo: 23, types: ['poison'],
     base: { hp: 35, atk: 60, def: 44, spa: 40, spd: 54, spe: 55 },
     catchRate: 255, growth: 'mediumfast', baseXp: 58, body: 'serpent', spriteSeed: 2301,
+    eggGroups: ['ground', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['wrap', 'leer'], 10: ['poisonsting'], 17: ['bite'], 24: ['glare'], 31: ['acid'], 38: ['haze'] },
     flavor: 'It unhinges its jaw around meals bigger than its head.',
     evo: { to: 'arbok', method: 'level', level: 22 }, tm: [6, 9, 10, 20, 21, 26, 27, 28, 31, 32, 34, 44, 48, 50],
@@ -85782,6 +85811,7 @@ const SPECIES2 = {
     id: 'arbok', name: 'Arbok', dexNo: 24, types: ['poison'],
     base: { hp: 60, atk: 95, def: 69, spa: 65, spd: 79, spe: 80 },
     catchRate: 90, growth: 'mediumfast', baseXp: 157, body: 'serpent', spriteSeed: 2401,
+    eggGroups: ['ground', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['wrap', 'leer', 'poisonsting', 'bite'], 17: ['bite'], 27: ['glare'], 36: ['acid'], 47: ['haze'] },
     flavor: 'The pattern on its hood never repeats between two Arbok.',
     tm: [6, 9, 10, 15, 20, 21, 26, 27, 28, 31, 32, 34, 44, 48, 50, 104],
@@ -85790,6 +85820,7 @@ const SPECIES2 = {
     id: 'pikachu', name: 'Pikachu', dexNo: 25, types: ['electric'],
     base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
     catchRate: 190, growth: 'mediumfast', baseXp: 112, body: 'quad', spriteSeed: 2502,
+    eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl'], 6: ['tailwhip'], 8: ['thunderwave'], 11: ['quickattack'], 20: ['swift'], 26: ['agility'], 33: ['thunderbolt'], 43: ['thunder'] },
     flavor: 'A wild spark-hoarder of the deep forest clearings.',
     evo: { to: 'raichu', method: 'stone', stone: 'thunderstone' }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
@@ -85798,6 +85829,7 @@ const SPECIES2 = {
     id: 'raichu', name: 'Raichu', dexNo: 26, types: ['electric'],
     base: { hp: 60, atk: 90, def: 55, spa: 90, spd: 80, spe: 110 },
     catchRate: 75, growth: 'mediumfast', baseXp: 243, body: 'quad', spriteSeed: 2601,
+    eggGroups: ['ground', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['thundershock', 'growl', 'tailwhip', 'thunderwave'] },
     flavor: 'Surplus charge spills from its cheeks on humid nights.',
     tm: [1, 5, 6, 9, 10, 15, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
@@ -85806,6 +85838,7 @@ const SPECIES2 = {
     id: 'sandshrew', name: 'Sandshrew', dexNo: 27, types: ['ground'],
     base: { hp: 50, atk: 75, def: 85, spa: 20, spd: 30, spe: 40 },
     catchRate: 255, growth: 'mediumfast', baseXp: 60, body: 'quad', spriteSeed: 2701,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 6: ['sandattack'], 12: ['poisonsting'], 20: ['slash'], 28: ['swift'] },
     flavor: 'It curls into a brick-hard ball when the desert wind turns.',
     evo: { to: 'sandslash', method: 'level', level: 22 }, tm: [3, 6, 8, 9, 10, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101],
@@ -85814,6 +85847,7 @@ const SPECIES2 = {
     id: 'sandslash', name: 'Sandslash', dexNo: 28, types: ['ground'],
     base: { hp: 75, atk: 100, def: 110, spa: 45, spd: 55, spe: 65 },
     catchRate: 90, growth: 'mediumfast', baseXp: 158, body: 'quad', spriteSeed: 2801,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'sandattack', 'poisonsting'], 12: ['poisonsting'], 24: ['slash'], 36: ['swift'] },
     flavor: 'Spines up, it rolls downhill faster than gossip travels.',
     tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
@@ -85822,6 +85856,7 @@ const SPECIES2 = {
     id: 'nidoranf', name: 'Nidoran♀', dexNo: 29, types: ['poison'],
     base: { hp: 55, atk: 47, def: 52, spa: 40, spd: 40, spe: 41 },
     catchRate: 235, growth: 'mediumslow', baseXp: 55, body: 'quad', spriteSeed: 2901,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'], 8: ['tailwhip'], 14: ['doubleslap'], 21: ['bite'], 30: ['bodyslam'] },
     flavor: 'Gentle until cornered. Her horn carries a quiet warning.',
     evo: { to: 'nidorina', method: 'level', level: 16 }, tm: [6, 8, 9, 10, 11, 12, 24, 25, 31, 32, 33, 34, 44, 50],
@@ -85830,6 +85865,7 @@ const SPECIES2 = {
     id: 'nidorina', name: 'Nidorina', dexNo: 30, types: ['poison'],
     base: { hp: 70, atk: 62, def: 67, spa: 55, spd: 55, spe: 56 },
     catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'quad', spriteSeed: 3001,
+    eggGroups: ['no-eggs'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'tailwhip'], 14: ['doubleslap'], 23: ['bite'], 36: ['bodyslam'] },
     flavor: 'She herds her young with soft calls and a ready stance.',
     evo: { to: 'nidoqueen', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
@@ -85838,6 +85874,7 @@ const SPECIES2 = {
     id: 'nidoqueen', name: 'Nidoqueen', dexNo: 31, types: ['poison', 'ground'],
     base: { hp: 90, atk: 92, def: 87, spa: 75, spd: 85, spe: 76 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 3101,
+    eggGroups: ['no-eggs'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'tailwhip', 'doubleslap', 'bodyslam'] },
     flavor: 'Armor-plated and maternal. Nothing gets past her guard.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
@@ -85846,6 +85883,7 @@ const SPECIES2 = {
     id: 'nidorino', name: 'Nidorino', dexNo: 33, types: ['poison'],
     base: { hp: 61, atk: 72, def: 57, spa: 55, spd: 55, spe: 65 },
     catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'quad', spriteSeed: 3301,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['leer', 'peck'], 8: ['focusenergy'], 14: ['doubleslap'], 23: ['furyattack'], 36: ['horndrill'] },
     flavor: 'Quick to charge. Its horn finds gaps in any defense.',
     evo: { to: 'nidoking', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
@@ -85854,6 +85892,7 @@ const SPECIES2 = {
     id: 'nidoking', name: 'Nidoking', dexNo: 34, types: ['poison', 'ground'],
     base: { hp: 81, atk: 102, def: 77, spa: 85, spd: 75, spe: 85 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 3401,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'peck', 'focusenergy', 'doubleslap'] },
     flavor: 'Its tail sweep can level saplings. It knows it, too.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
@@ -85862,6 +85901,7 @@ const SPECIES2 = {
     id: 'clefairy', name: 'Clefairy', dexNo: 35, types: ['fairy'],
     base: { hp: 70, atk: 45, def: 48, spa: 60, spd: 65, spe: 35 },
     catchRate: 150, growth: 'fast', baseXp: 113, body: 'biped', spriteSeed: 3501,
+    eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['pound', 'growl', 'sing'], 13: ['doubleslap'], 18: ['minimize'], 24: ['metronome'], 31: ['lightscreen'], 40: ['defensecurl'] },
     flavor: 'It dances on moonlit clearings and giggles at the stars.',
     evo: { to: 'clefable', method: 'stone', stone: 'moonstone' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
@@ -85870,6 +85910,7 @@ const SPECIES2 = {
     id: 'clefable', name: 'Clefable', dexNo: 36, types: ['fairy'],
     base: { hp: 95, atk: 70, def: 73, spa: 95, spd: 90, spe: 60 },
     catchRate: 25, growth: 'fast', baseXp: 242, body: 'biped', spriteSeed: 3601,
+    eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['pound', 'sing', 'doubleslap', 'minimize', 'metronome'] },
     flavor: 'Shy and moon-touched. It hears footsteps a valley away.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
@@ -85878,6 +85919,7 @@ const SPECIES2 = {
     id: 'vulpix', name: 'Vulpix', dexNo: 37, types: ['fire'],
     base: { hp: 38, atk: 41, def: 40, spa: 50, spd: 65, spe: 65 },
     catchRate: 190, growth: 'mediumfast', baseXp: 60, body: 'quad', spriteSeed: 3701,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember', 'tailwhip'], 16: ['quickattack'], 21: ['confuseray'], 28: ['flamethrower'], 35: ['firespin'] },
     flavor: 'Six tails, each curled with care. It preens by firelight.',
     evo: { to: 'ninetales', method: 'stone', stone: 'firestone' }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
@@ -85886,6 +85928,7 @@ const SPECIES2 = {
     id: 'ninetales', name: 'Ninetales', dexNo: 38, types: ['fire'],
     base: { hp: 73, atk: 76, def: 75, spa: 81, spd: 100, spe: 100 },
     catchRate: 75, growth: 'mediumfast', baseXp: 198, body: 'quad', spriteSeed: 3801,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember', 'tailwhip', 'quickattack', 'confuseray'] },
     flavor: 'Old stories say its tails carry nine different grudges.',
     tm: [6, 8, 9, 10, 15, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
@@ -85894,6 +85937,7 @@ const SPECIES2 = {
     id: 'jigglypuff', name: 'Jigglypuff', dexNo: 39, types: ['normal', 'fairy'],
     base: { hp: 115, atk: 45, def: 20, spa: 45, spd: 25, spe: 20 },
     catchRate: 170, growth: 'fast', baseXp: 95, body: 'blob', spriteSeed: 3901,
+    eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['sing', 'pound'], 9: ['disable'], 14: ['defensecurl'], 19: ['doubleslap'], 24: ['bodyslam'], 34: ['doubleedge'], 39: ['rest'] },
     flavor: 'Its lullaby has ended more arguments than any referee.',
     evo: { to: 'wigglytuff', method: 'stone', stone: 'moonstone' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
@@ -85902,6 +85946,7 @@ const SPECIES2 = {
     id: 'wigglytuff', name: 'Wigglytuff', dexNo: 40, types: ['normal', 'fairy'],
     base: { hp: 140, atk: 70, def: 45, spa: 85, spd: 50, spe: 45 },
     catchRate: 50, growth: 'fast', baseXp: 196, body: 'blob', spriteSeed: 4001,
+    eggGroups: ['fairy'], hatchCounter: 10,
     learnset: { 1: ['sing', 'disable', 'defensecurl', 'doubleslap'] },
     flavor: 'Soft as fresh dough. Hugging one is a contact sport.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
@@ -85910,6 +85955,7 @@ const SPECIES2 = {
     id: 'golbat', name: 'Golbat', dexNo: 42, types: ['poison', 'flying'],
     base: { hp: 75, atk: 80, def: 70, spa: 65, spd: 75, spe: 90 },
     catchRate: 90, growth: 'mediumfast', baseXp: 159, body: 'bird', spriteSeed: 4201,
+    eggGroups: ['flying'], hatchCounter: 15,
     learnset: { 1: ['leechlife', 'supersonic', 'screech', 'bite'], 10: ['confuseray'], 15: ['wingattack'], 21: ['haze'] },
     flavor: 'It drinks its fill, then vanishes before feathers settle.',
     evo: { to: 'crobat', method: 'level', level: 40 }, tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
@@ -85918,6 +85964,7 @@ const SPECIES2 = {
     id: 'oddish', name: 'Oddish', dexNo: 43, types: ['grass', 'poison'],
     base: { hp: 45, atk: 50, def: 55, spa: 75, spd: 65, spe: 30 },
     catchRate: 255, growth: 'mediumslow', baseXp: 64, body: 'biped', spriteSeed: 4301,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['absorb'], 15: ['poisonpowder'], 17: ['stunspore'], 19: ['sleeppowder'], 24: ['acid'], 33: ['petaldance'], 39: ['solarbeam'] },
     flavor: 'By day it buries itself. By night it wanders, leaves first.',
     evo: { to: 'gloom', method: 'level', level: 21 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
@@ -85926,6 +85973,7 @@ const SPECIES2 = {
     id: 'gloom', name: 'Gloom', dexNo: 44, types: ['grass', 'poison'],
     base: { hp: 60, atk: 65, def: 70, spa: 85, spd: 75, spe: 40 },
     catchRate: 120, growth: 'mediumslow', baseXp: 138, body: 'biped', spriteSeed: 4401,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['absorb', 'poisonpowder', 'stunspore', 'sleeppowder'], 24: ['acid'], 28: ['petaldance'], 38: ['solarbeam'] },
     flavor: 'Its drool smells like a swamp arguing with a flower shop.',
     evo: { to: 'vileplume', method: 'stone', stone: 'leafstone' },
@@ -85938,6 +85986,7 @@ const SPECIES2 = {
     id: 'vileplume', name: 'Vileplume', dexNo: 45, types: ['grass', 'poison'],
     base: { hp: 75, atk: 80, def: 85, spa: 110, spd: 90, spe: 50 },
     catchRate: 45, growth: 'mediumslow', baseXp: 245, body: 'biped', spriteSeed: 4501,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['absorb', 'stunspore', 'sleeppowder', 'acid', 'petaldance'] },
     flavor: 'Each step sheds pollen thick enough to dim the sun.',
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
@@ -85946,6 +85995,7 @@ const SPECIES2 = {
     id: 'paras', name: 'Paras', dexNo: 46, types: ['bug', 'grass'],
     base: { hp: 35, atk: 70, def: 55, spa: 45, spd: 55, spe: 25 },
     catchRate: 190, growth: 'mediumfast', baseXp: 57, body: 'quad', spriteSeed: 4601,
+    eggGroups: ['bug', 'plant'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 9: ['stunspore'], 17: ['leechlife'], 25: ['spore'], 33: ['growth'], 41: ['slash'] },
     flavor: 'Mushrooms ride its back, steering it toward damp shade.',
     evo: { to: 'parasect', method: 'level', level: 24 }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
@@ -85954,6 +86004,7 @@ const SPECIES2 = {
     id: 'parasect', name: 'Parasect', dexNo: 47, types: ['bug', 'grass'],
     base: { hp: 60, atk: 95, def: 80, spa: 60, spd: 80, spe: 30 },
     catchRate: 75, growth: 'mediumfast', baseXp: 142, body: 'quad', spriteSeed: 4701,
+    eggGroups: ['bug', 'plant'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'stunspore', 'leechlife'], 25: ['spore'], 39: ['growth'], 48: ['slash'] },
     flavor: 'The cap does the thinking now. The eyes look far away.',
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
@@ -85962,6 +86013,7 @@ const SPECIES2 = {
     id: 'venonat', name: 'Venonat', dexNo: 48, types: ['bug', 'poison'],
     base: { hp: 60, atk: 55, def: 50, spa: 40, spd: 55, spe: 45 },
     catchRate: 190, growth: 'mediumfast', baseXp: 61, body: 'biped', spriteSeed: 4801,
+    eggGroups: ['bug'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'disable', 'confusion'], 13: ['supersonic'], 19: ['poisonpowder'], 24: ['leechlife'], 27: ['stunspore'], 30: ['psybeam'], 38: ['sleeppowder'], 41: ['psychic'] },
     flavor: 'Its radar eyes track moths through pitch-black thickets.',
     evo: { to: 'venomoth', method: 'level', level: 31 }, tm: [6, 9, 10, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
@@ -85970,6 +86022,7 @@ const SPECIES2 = {
     id: 'venomoth', name: 'Venomoth', dexNo: 49, types: ['bug', 'poison'],
     base: { hp: 70, atk: 65, def: 60, spa: 90, spd: 75, spe: 90 },
     catchRate: 75, growth: 'mediumfast', baseXp: 158, body: 'bird', spriteSeed: 4901,
+    eggGroups: ['bug'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'disable', 'confusion', 'supersonic'], 19: ['poisonpowder'], 24: ['leechlife'], 27: ['stunspore'], 30: ['psybeam'], 38: ['gust'], 47: ['sleeppowder'], 52: ['psychic'] },
     flavor: 'Scale-dust drifts from its wings like slow, patient snow.',
     tm: [2, 4, 6, 9, 10, 15, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
@@ -85978,6 +86031,7 @@ const SPECIES2 = {
     id: 'diglett', name: 'Diglett', dexNo: 50, types: ['ground'],
     base: { hp: 10, atk: 55, def: 25, spa: 35, spd: 45, spe: 95 },
     catchRate: 255, growth: 'mediumfast', baseXp: 53, body: 'blob', spriteSeed: 5001,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 15: ['sandattack'], 19: ['dig'], 24: ['slash'], 31: ['earthquake'] },
     flavor: 'Farms love it. Its tunnels turn soil better than any plow.',
     evo: { to: 'dugtrio', method: 'level', level: 26 }, tm: [6, 8, 9, 10, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
@@ -85986,6 +86040,7 @@ const SPECIES2 = {
     id: 'dugtrio', name: 'Dugtrio', dexNo: 51, types: ['ground'],
     base: { hp: 35, atk: 100, def: 50, spa: 50, spd: 70, spe: 120 },
     catchRate: 50, growth: 'mediumfast', baseXp: 149, body: 'blob', spriteSeed: 5101,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'sandattack', 'dig'], 19: ['dig'], 24: ['slash'], 35: ['earthquake'], 41: ['fissure'] },
     flavor: 'Three heads, one temper. The ground answers when it calls.',
     tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
@@ -85994,6 +86049,7 @@ const SPECIES2 = {
     id: 'meowth', name: 'Meowth', dexNo: 52, types: ['normal'],
     base: { hp: 40, atk: 45, def: 35, spa: 40, spd: 40, spe: 90 },
     catchRate: 255, growth: 'mediumfast', baseXp: 58, body: 'quad', spriteSeed: 5201,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl'], 12: ['bite'], 17: ['payday'], 24: ['screech'], 33: ['furyattack'], 44: ['slash'] },
     flavor: 'It naps all day to prowl all night for shiny things.',
     evo: { to: 'persian', method: 'level', level: 28 }, tm: [6, 9, 10, 11, 12, 16, 24, 25, 31, 32, 34, 39, 44, 50],
@@ -86002,6 +86058,7 @@ const SPECIES2 = {
     id: 'persian', name: 'Persian', dexNo: 53, types: ['normal'],
     base: { hp: 65, atk: 70, def: 60, spa: 65, spd: 65, spe: 115 },
     catchRate: 90, growth: 'mediumfast', baseXp: 154, body: 'quad', spriteSeed: 5301,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'growl', 'bite', 'payday'], 24: ['screech'], 37: ['furyattack'], 51: ['slash'] },
     flavor: 'All grace and grievance. It forgives nothing, elegantly.',
     tm: [6, 9, 10, 11, 12, 15, 16, 20, 24, 25, 31, 32, 34, 39, 44, 50],
@@ -86010,6 +86067,7 @@ const SPECIES2 = {
     id: 'psyduck', name: 'Psyduck', dexNo: 54, types: ['water'],
     base: { hp: 50, atk: 52, def: 48, spa: 65, spd: 50, spe: 55 },
     catchRate: 190, growth: 'mediumfast', baseXp: 64, body: 'biped', spriteSeed: 5401,
+    eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch'], 15: ['tailwhip'], 22: ['disable'], 28: ['confusion'], 31: ['furyattack'], 36: ['hydropump'], 43: ['amnesia'] },
     flavor: 'Its headache is a loaded spring. Best not to wind it.',
     evo: { to: 'golduck', method: 'level', level: 33 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
@@ -86018,6 +86076,7 @@ const SPECIES2 = {
     id: 'golduck', name: 'Golduck', dexNo: 55, types: ['water'],
     base: { hp: 80, atk: 82, def: 78, spa: 95, spd: 80, spe: 85 },
     catchRate: 75, growth: 'mediumfast', baseXp: 175, body: 'biped', spriteSeed: 5501,
+    eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'tailwhip', 'disable', 'confusion'], 28: ['confusion'], 31: ['furyattack'], 39: ['hydropump'], 48: ['amnesia'] },
     flavor: 'It cuts through rapids like the river made way for it.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
@@ -86026,6 +86085,7 @@ const SPECIES2 = {
     id: 'primeape', name: 'Primeape', dexNo: 57, types: ['fighting'],
     base: { hp: 65, atk: 105, def: 60, spa: 60, spd: 70, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 159, body: 'biped', spriteSeed: 5701,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'leer', 'lowkick', 'karatechop'], 15: ['rage'], 21: ['seismictoss'], 27: ['screech'], 37: ['submission'] },
     flavor: 'It stays angry through sleep, meals, and mild weather.',
     tm: [1, 5, 6, 8, 9, 10, 16, 17, 18, 19, 20, 24, 25, 28, 31, 32, 34, 39, 44, 48, 50, 104],
@@ -86034,6 +86094,7 @@ const SPECIES2 = {
     id: 'growlithe', name: 'Growlithe', dexNo: 58, types: ['fire'],
     base: { hp: 55, atk: 70, def: 45, spa: 70, spd: 50, spe: 60 },
     catchRate: 190, growth: 'mediumfast', baseXp: 70, body: 'quad', spriteSeed: 5801,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['bite', 'ember'], 18: ['leer'], 23: ['takedown'], 30: ['agility'], 36: ['flamethrower'] },
     flavor: 'Loyal to a fault. It barks at threats ten times its size.',
     evo: { to: 'arcanine', method: 'stone', stone: 'firestone' }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
@@ -86042,6 +86103,7 @@ const SPECIES2 = {
     id: 'arcanine', name: 'Arcanine', dexNo: 59, types: ['fire'],
     base: { hp: 90, atk: 110, def: 80, spa: 100, spd: 80, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 194, body: 'quad', spriteSeed: 5901,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['bite', 'takedown', 'leer', 'ember'] },
     flavor: 'Old murals show it running beside emperors and messengers.',
     tm: [6, 8, 9, 10, 15, 20, 28, 30, 31, 32, 33, 34, 38, 39, 44, 50, 104],
@@ -86050,6 +86112,7 @@ const SPECIES2 = {
     id: 'poliwag', name: 'Poliwag', dexNo: 60, types: ['water'],
     base: { hp: 40, atk: 50, def: 40, spa: 40, spd: 40, spe: 90 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'fish', spriteSeed: 6001,
+    eggGroups: ['water1'], hatchCounter: 20,
     learnset: { 1: ['bubble'], 16: ['hypnosis'], 19: ['watergun'], 25: ['doubleslap'], 31: ['bodyslam'], 38: ['amnesia'], 40: ['hydropump'] },
     flavor: 'Its spiral belly shows through skin thin as wet paper.',
     evo: { to: 'poliwhirl', method: 'level', level: 25 }, tm: [6, 9, 10, 11, 12, 13, 14, 31, 32, 34, 44, 46, 50, 103],
@@ -86058,6 +86121,7 @@ const SPECIES2 = {
     id: 'poliwhirl', name: 'Poliwhirl', dexNo: 61, types: ['water'],
     base: { hp: 65, atk: 65, def: 65, spa: 50, spd: 50, spe: 90 },
     catchRate: 120, growth: 'mediumslow', baseXp: 135, body: 'biped', spriteSeed: 6101,
+    eggGroups: ['water1'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'hypnosis', 'watergun'], 19: ['watergun'], 26: ['doubleslap'], 33: ['bodyslam'], 41: ['amnesia'], 49: ['hydropump'] },
     flavor: 'Watch its spiral too long and the room starts to tilt.',
     evo: { to: 'poliwrath', method: 'stone', stone: 'waterstone' },
@@ -86070,6 +86134,7 @@ const SPECIES2 = {
     id: 'poliwrath', name: 'Poliwrath', dexNo: 62, types: ['water', 'fighting'],
     base: { hp: 90, atk: 95, def: 95, spa: 70, spd: 90, spe: 70 },
     catchRate: 45, growth: 'mediumslow', baseXp: 255, body: 'biped', spriteSeed: 6201,
+    eggGroups: ['water1'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'hypnosis', 'watergun', 'doubleslap', 'submission'] },
     flavor: 'A swimmer and a brawler. Rivers respect it; so do rivals.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
@@ -86078,6 +86143,7 @@ const SPECIES2 = {
     id: 'abra', name: 'Abra', dexNo: 63, types: ['psychic'],
     base: { hp: 25, atk: 20, def: 15, spa: 105, spd: 55, spe: 90 },
     catchRate: 200, growth: 'mediumslow', baseXp: 62, body: 'biped', spriteSeed: 6301,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['teleport'] },
     flavor: 'It sleeps eighteen hours a day and vanishes mid-snore.',
     evo: { to: 'kadabra', method: 'level', level: 16 }, tm: [1, 5, 6, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 40, 42, 44, 45, 46, 49, 50, 105],
@@ -86086,6 +86152,7 @@ const SPECIES2 = {
     id: 'kadabra', name: 'Kadabra', dexNo: 64, types: ['psychic'],
     base: { hp: 40, atk: 35, def: 30, spa: 120, spd: 70, spe: 105 },
     catchRate: 100, growth: 'mediumslow', baseXp: 140, body: 'biped', spriteSeed: 6401,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['teleport', 'confusion', 'disable'], 20: ['psybeam'], 25: ['recover'], 31: ['reflect'], 38: ['psychic'] },
     flavor: 'Its spoon bends a little more every time it concentrates.',
     evo: { to: 'alakazam', method: 'trade' }, tm: [1, 5, 6, 9, 10, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
@@ -86094,6 +86161,7 @@ const SPECIES2 = {
     id: 'alakazam', name: 'Alakazam', dexNo: 65, types: ['psychic'],
     base: { hp: 55, atk: 50, def: 45, spa: 135, spd: 95, spe: 120 },
     catchRate: 50, growth: 'mediumslow', baseXp: 225, body: 'biped', spriteSeed: 6501,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['teleport', 'confusion', 'disable'], 20: ['psybeam'], 25: ['recover'], 31: ['reflect'], 38: ['psychic'] },
     flavor: 'It forgets nothing. Every battle is a solved problem.',
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
@@ -86102,6 +86170,7 @@ const SPECIES2 = {
     id: 'machop', name: 'Machop', dexNo: 66, types: ['fighting'],
     base: { hp: 70, atk: 80, def: 50, spa: 35, spd: 35, spe: 35 },
     catchRate: 180, growth: 'mediumslow', baseXp: 61, body: 'biped', spriteSeed: 6601,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['lowkick', 'leer'], 10: ['karatechop'], 20: ['seismictoss'], 25: ['focusenergy'], 32: ['submission'] },
     flavor: 'It trains by lifting boulders, then apologizes to them.',
     evo: { to: 'machoke', method: 'level', level: 28 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
@@ -86110,6 +86179,7 @@ const SPECIES2 = {
     id: 'machoke', name: 'Machoke', dexNo: 67, types: ['fighting'],
     base: { hp: 80, atk: 100, def: 70, spa: 50, spd: 60, spe: 45 },
     catchRate: 90, growth: 'mediumslow', baseXp: 146, body: 'biped', spriteSeed: 6701,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['lowkick', 'leer', 'karatechop'], 20: ['seismictoss'], 27: ['focusenergy'], 36: ['submission'] },
     flavor: 'Its belt keeps its own strength from running wild.',
     evo: { to: 'machamp', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
@@ -86118,6 +86188,7 @@ const SPECIES2 = {
     id: 'machamp', name: 'Machamp', dexNo: 68, types: ['fighting'],
     base: { hp: 90, atk: 130, def: 80, spa: 65, spd: 85, spe: 55 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 6801,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['lowkick', 'leer', 'karatechop'], 20: ['seismictoss'], 27: ['focusenergy'], 36: ['submission'] },
     flavor: 'Four arms, zero hesitation. It can tie knots and win.',
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
@@ -86126,6 +86197,7 @@ const SPECIES2 = {
     id: 'bellsprout', name: 'Bellsprout', dexNo: 69, types: ['grass', 'poison'],
     base: { hp: 50, atk: 75, def: 35, spa: 70, spd: 30, spe: 40 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'biped', spriteSeed: 6901,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['vinewhip', 'growth'], 10: ['wrap'], 13: ['poisonpowder'], 15: ['sleeppowder'], 18: ['stunspore'], 21: ['acid'], 26: ['razorleaf'], 33: ['solarbeam'] },
     flavor: 'It sways like laundry on a line, roots barely holding.',
     evo: { to: 'weepinbell', method: 'level', level: 21 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
@@ -86134,6 +86206,7 @@ const SPECIES2 = {
     id: 'weepinbell', name: 'Weepinbell', dexNo: 70, types: ['grass', 'poison'],
     base: { hp: 65, atk: 90, def: 50, spa: 85, spd: 45, spe: 55 },
     catchRate: 120, growth: 'mediumslow', baseXp: 137, body: 'blob', spriteSeed: 7001,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['vinewhip', 'growth', 'wrap', 'poisonpowder'], 15: ['sleeppowder'], 18: ['stunspore'], 23: ['acid'], 29: ['razorleaf'], 38: ['solarbeam'] },
     flavor: 'It hangs from branches, a bell that rings for dinner.',
     evo: { to: 'victreebel', method: 'stone', stone: 'leafstone' }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
@@ -86142,6 +86215,7 @@ const SPECIES2 = {
     id: 'victreebel', name: 'Victreebel', dexNo: 71, types: ['grass', 'poison'],
     base: { hp: 80, atk: 105, def: 65, spa: 100, spd: 70, spe: 70 },
     catchRate: 45, growth: 'mediumslow', baseXp: 245, body: 'blob', spriteSeed: 7101,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['vinewhip', 'growth', 'wrap', 'sleeppowder', 'stunspore', 'acid', 'razorleaf'] },
     flavor: 'Its sweet scent writes invitations nothing should accept.',
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
@@ -86150,6 +86224,7 @@ const SPECIES2 = {
     id: 'tentacool', name: 'Tentacool', dexNo: 72, types: ['water', 'poison'],
     base: { hp: 40, atk: 40, def: 35, spa: 50, spd: 100, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 67, body: 'blob', spriteSeed: 7201,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['acid', 'supersonic'], 7: ['wrap'], 12: ['poisonsting'], 18: ['constrict'], 22: ['barrier'], 27: ['screech'], 33: ['hydropump'] },
     flavor: 'It drifts like a dropped lantern beneath the waves.',
     evo: { to: 'tentacruel', method: 'level', level: 30 }, tm: [3, 6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 101, 103],
@@ -86158,6 +86233,7 @@ const SPECIES2 = {
     id: 'tentacruel', name: 'Tentacruel', dexNo: 73, types: ['water', 'poison'],
     base: { hp: 80, atk: 70, def: 65, spa: 80, spd: 120, spe: 100 },
     catchRate: 60, growth: 'mediumfast', baseXp: 180, body: 'blob', spriteSeed: 7301,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['acid', 'supersonic', 'wrap', 'poisonsting'], 18: ['constrict'], 22: ['barrier'], 27: ['screech'], 36: ['hydropump'] },
     flavor: 'Eighty arms of bad news. Sailors cross themselves twice.',
     tm: [3, 6, 9, 10, 11, 12, 13, 14, 15, 20, 21, 22, 31, 32, 34, 44, 50, 101, 103],
@@ -86166,6 +86242,7 @@ const SPECIES2 = {
     id: 'graveler', name: 'Graveler', dexNo: 75, types: ['rock', 'ground'],
     base: { hp: 55, atk: 95, def: 115, spa: 45, spd: 45, spe: 35 },
     catchRate: 120, growth: 'mediumslow', baseXp: 137, body: 'blob', spriteSeed: 7501,
+    eggGroups: ['mineral'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'defensecurl', 'rockthrow'], 11: ['rockthrow'], 16: ['selfdestruct'], 21: ['harden'], 29: ['earthquake'], 36: ['explosion'] },
     flavor: 'It rolls downhill for travel and stops by hitting things.',
     evo: { to: 'golem', method: 'trade' }, tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
@@ -86174,6 +86251,7 @@ const SPECIES2 = {
     id: 'golem', name: 'Golem', dexNo: 76, types: ['rock', 'ground'],
     base: { hp: 80, atk: 120, def: 130, spa: 55, spd: 65, spe: 45 },
     catchRate: 45, growth: 'mediumslow', baseXp: 223, body: 'blob', spriteSeed: 7601,
+    eggGroups: ['mineral'], hatchCounter: 15,
     learnset: { 1: ['tackle', 'defensecurl', 'rockthrow'], 16: ['selfdestruct'], 21: ['harden'], 29: ['earthquake'], 36: ['explosion'] },
     flavor: 'Once a year it sheds its whole shell and starts heavier.',
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
@@ -86182,6 +86260,7 @@ const SPECIES2 = {
     id: 'ponyta', name: 'Ponyta', dexNo: 77, types: ['fire'],
     base: { hp: 50, atk: 85, def: 55, spa: 65, spd: 65, spe: 90 },
     catchRate: 190, growth: 'mediumfast', baseXp: 82, body: 'quad', spriteSeed: 7701,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember'], 12: ['tailwhip'], 19: ['stomp'], 26: ['growl'], 32: ['takedown'], 38: ['agility'], 44: ['firespin'] },
     flavor: 'Its mane flames up when it runs and settles when it rests.',
     evo: { to: 'rapidash', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 20, 31, 32, 33, 34, 38, 39, 44, 50],
@@ -86190,6 +86269,7 @@ const SPECIES2 = {
     id: 'rapidash', name: 'Rapidash', dexNo: 78, types: ['fire'],
     base: { hp: 65, atk: 100, def: 70, spa: 80, spd: 80, spe: 105 },
     catchRate: 60, growth: 'mediumfast', baseXp: 175, body: 'quad', spriteSeed: 7801,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['ember', 'tailwhip', 'stomp', 'growl'], 32: ['takedown'], 38: ['agility'], 47: ['firespin'] },
     flavor: 'At full gallop its hooves barely bother touching ground.',
     tm: [6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50],
@@ -86198,6 +86278,7 @@ const SPECIES2 = {
     id: 'slowpoke', name: 'Slowpoke', dexNo: 79, types: ['water', 'psychic'],
     base: { hp: 90, atk: 65, def: 65, spa: 40, spd: 40, spe: 15 },
     catchRate: 190, growth: 'mediumfast', baseXp: 99, body: 'quad', spriteSeed: 7901,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['confusion', 'disable'], 18: ['growl'], 22: ['watergun'], 27: ['headbutt'], 33: ['amnesia'], 40: ['psychic'] },
     flavor: 'It fishes with its tail and forgets why it sat down.',
     evo: { to: 'slowbro', method: 'level', level: 37 },
@@ -86210,6 +86291,7 @@ const SPECIES2 = {
     id: 'slowbro', name: 'Slowbro', dexNo: 80, types: ['water', 'psychic'],
     base: { hp: 95, atk: 75, def: 110, spa: 100, spd: 80, spe: 30 },
     catchRate: 75, growth: 'mediumfast', baseXp: 172, body: 'quad', spriteSeed: 8001,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
     learnset: { 1: ['confusion', 'disable', 'growl', 'watergun'], 27: ['headbutt'], 33: ['withdraw'], 40: ['amnesia'], 48: ['psychic'] },
     flavor: 'The shell on its tail does the reacting for both of them.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 104, 105],
@@ -86218,6 +86300,7 @@ const SPECIES2 = {
     id: 'magnemite', name: 'Magnemite', dexNo: 81, types: ['electric', 'steel'],
     base: { hp: 25, atk: 35, def: 70, spa: 95, spd: 55, spe: 45 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'blob', spriteSeed: 8101,
+    eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 21: ['thundershock'], 25: ['supersonic'], 29: ['thunderwave'], 35: ['swift'], 41: ['screech'] },
     flavor: 'It hovers on static and complains loudly in thunderstorms.',
     evo: { to: 'magneton', method: 'level', level: 30 }, tm: [6, 9, 10, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 50, 105],
@@ -86226,6 +86309,7 @@ const SPECIES2 = {
     id: 'magneton', name: 'Magneton', dexNo: 82, types: ['electric', 'steel'],
     base: { hp: 50, atk: 60, def: 95, spa: 120, spd: 70, spe: 70 },
     catchRate: 60, growth: 'mediumfast', baseXp: 163, body: 'blob', spriteSeed: 8201,
+    eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'thundershock', 'supersonic'], 25: ['supersonic'], 35: ['thunderwave'], 43: ['swift'], 50: ['screech'], 54: ['triattack'] },
     flavor: 'Three magnets in an argument that never quite resolves.',
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
@@ -86234,6 +86318,7 @@ const SPECIES2 = {
     id: 'farfetchd', name: "Farfetch'd", dexNo: 83, types: ['normal', 'flying'],
     base: { hp: 52, atk: 90, def: 55, spa: 58, spd: 62, spe: 60 },
     catchRate: 45, growth: 'mediumfast', baseXp: 132, body: 'bird', spriteSeed: 8301,
+    eggGroups: ['flying', 'ground'], hatchCounter: 20,
     learnset: { 1: ['peck', 'sandattack'], 7: ['leer'], 15: ['furyattack'], 23: ['swordsdance'], 31: ['agility'], 39: ['slash'] },
     flavor: 'It guards its leek like a family heirloom with edges.',
     tm: [2, 3, 4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 50, 101, 102],
@@ -86242,6 +86327,7 @@ const SPECIES2 = {
     id: 'doduo', name: 'Doduo', dexNo: 84, types: ['normal', 'flying'],
     base: { hp: 35, atk: 85, def: 45, spa: 35, spd: 35, spe: 75 },
     catchRate: 190, growth: 'mediumfast', baseXp: 62, body: 'bird', spriteSeed: 8401,
+    eggGroups: ['flying'], hatchCounter: 20,
     learnset: { 1: ['peck'], 9: ['growl'], 14: ['furyattack'], 20: ['drillpeck'], 24: ['rage'], 30: ['triattack'], 36: ['agility'] },
     flavor: 'Two heads take turns sleeping so one always watches.',
     evo: { to: 'dodrio', method: 'level', level: 31 }, tm: [4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
@@ -86250,6 +86336,7 @@ const SPECIES2 = {
     id: 'dodrio', name: 'Dodrio', dexNo: 85, types: ['normal', 'flying'],
     base: { hp: 60, atk: 110, def: 70, spa: 60, spd: 60, spe: 110 },
     catchRate: 45, growth: 'mediumfast', baseXp: 165, body: 'bird', spriteSeed: 8501,
+    eggGroups: ['flying'], hatchCounter: 20,
     learnset: { 1: ['peck', 'growl', 'furyattack'], 20: ['drillpeck'], 24: ['rage'], 30: ['triattack'], 38: ['agility'] },
     flavor: 'Three heads, three moods, one very fast set of legs.',
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
@@ -86258,6 +86345,7 @@ const SPECIES2 = {
     id: 'seel', name: 'Seel', dexNo: 86, types: ['water'],
     base: { hp: 65, atk: 45, def: 55, spa: 45, spd: 70, spe: 45 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'fish', spriteSeed: 8601,
+    eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['headbutt', 'growl'], 15: ['aurorabeam'], 25: ['rest'], 30: ['takedown'], 35: ['icebeam'] },
     flavor: 'It naps on drifting ice, one eye always on the water.',
     evo: { to: 'dewgong', method: 'level', level: 34 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 31, 32, 34, 44, 50, 103],
@@ -86266,6 +86354,7 @@ const SPECIES2 = {
     id: 'dewgong', name: 'Dewgong', dexNo: 87, types: ['water', 'ice'],
     base: { hp: 90, atk: 70, def: 80, spa: 70, spd: 95, spe: 70 },
     catchRate: 75, growth: 'mediumfast', baseXp: 166, body: 'fish', spriteSeed: 8701,
+    eggGroups: ['water1', 'ground'], hatchCounter: 20,
     learnset: { 1: ['headbutt', 'growl', 'aurorabeam'], 25: ['rest'], 44: ['takedown'], 56: ['icebeam'] },
     flavor: 'It stores warmth in thick blubber and glides like silk.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
@@ -86274,6 +86363,7 @@ const SPECIES2 = {
     id: 'grimer', name: 'Grimer', dexNo: 88, types: ['poison'],
     base: { hp: 80, atk: 80, def: 50, spa: 40, spd: 50, spe: 25 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'blob', spriteSeed: 8801,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['pound', 'disable'], 20: ['acidarmor'], 25: ['minimize'], 30: ['sludge'], 37: ['harden'], 42: ['screech'], 48: ['acid'] },
     flavor: 'Born of dockside sludge. It oozes toward anything warm.',
     evo: { to: 'muk', method: 'level', level: 38 }, tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
@@ -86282,6 +86372,7 @@ const SPECIES2 = {
     id: 'muk', name: 'Muk', dexNo: 89, types: ['poison'],
     base: { hp: 105, atk: 105, def: 75, spa: 65, spd: 100, spe: 50 },
     catchRate: 75, growth: 'mediumfast', baseXp: 175, body: 'blob', spriteSeed: 8901,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['pound', 'disable', 'acidarmor', 'sludge'], 25: ['minimize'], 45: ['screech'], 53: ['acid'] },
     flavor: 'Footprints it leaves behind stay toxic for a full year.',
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
@@ -86290,6 +86381,7 @@ const SPECIES2 = {
     id: 'shellder', name: 'Shellder', dexNo: 90, types: ['water'],
     base: { hp: 30, atk: 65, def: 100, spa: 45, spd: 25, spe: 40 },
     catchRate: 190, growth: 'slow', baseXp: 61, body: 'blob', spriteSeed: 9001,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'withdraw'], 18: ['supersonic'], 23: ['clamp'], 30: ['aurorabeam'], 39: ['leer'], 50: ['icebeam'] },
     flavor: 'Its tongue lolls out even when its shell slams shut.',
     evo: { to: 'cloyster', method: 'stone', stone: 'waterstone' }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
@@ -86298,6 +86390,7 @@ const SPECIES2 = {
     id: 'cloyster', name: 'Cloyster', dexNo: 91, types: ['water', 'ice'],
     base: { hp: 50, atk: 95, def: 180, spa: 85, spd: 45, spe: 70 },
     catchRate: 60, growth: 'slow', baseXp: 184, body: 'blob', spriteSeed: 9101,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'withdraw', 'supersonic', 'clamp', 'aurorabeam'] },
     flavor: 'Nothing short of a torpedo gets through that shell.',
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
@@ -86306,6 +86399,7 @@ const SPECIES2 = {
     id: 'gastly', name: 'Gastly', dexNo: 92, types: ['ghost', 'poison'],
     base: { hp: 30, atk: 35, def: 30, spa: 100, spd: 35, spe: 80 },
     catchRate: 190, growth: 'mediumslow', baseXp: 62, body: 'blob', spriteSeed: 9201,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['lick', 'confuseray', 'nightshade'], 15: ['hypnosis'], 27: ['dreameater'] },
     flavor: 'Mostly gas and mischief. Strong wind is its worst enemy.',
     evo: { to: 'haunter', method: 'level', level: 25 }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
@@ -86314,6 +86408,7 @@ const SPECIES2 = {
     id: 'haunter', name: 'Haunter', dexNo: 93, types: ['ghost', 'poison'],
     base: { hp: 45, atk: 50, def: 45, spa: 115, spd: 55, spe: 95 },
     catchRate: 90, growth: 'mediumslow', baseXp: 142, body: 'blob', spriteSeed: 9301,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['lick', 'confuseray', 'nightshade'], 15: ['hypnosis'], 29: ['dreameater'] },
     flavor: 'It hides in walls and practices its scariest face.',
     evo: { to: 'gengar', method: 'trade' }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
@@ -86322,6 +86417,7 @@ const SPECIES2 = {
     id: 'gengar', name: 'Gengar', dexNo: 94, types: ['ghost', 'poison'],
     base: { hp: 60, atk: 65, def: 60, spa: 130, spd: 75, spe: 110 },
     catchRate: 45, growth: 'mediumslow', baseXp: 250, body: 'biped', spriteSeed: 9401,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['lick', 'confuseray', 'nightshade', 'hypnosis'], 29: ['dreameater'] },
     flavor: 'Your shadow, but grinning. It was never your shadow.',
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 20, 21, 24, 25, 29, 31, 32, 34, 35, 36, 42, 44, 46, 47, 50, 104],
@@ -86330,6 +86426,7 @@ const SPECIES2 = {
     id: 'drowzee', name: 'Drowzee', dexNo: 96, types: ['psychic'],
     base: { hp: 60, atk: 48, def: 45, spa: 43, spd: 90, spe: 42 },
     catchRate: 190, growth: 'mediumfast', baseXp: 66, body: 'biped', spriteSeed: 9601,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['pound', 'hypnosis'], 12: ['disable'], 17: ['confusion'], 24: ['headbutt'], 29: ['meditate'], 34: ['psychic'] },
     flavor: 'It can smell a good dream from three streets away.',
     evo: { to: 'hypno', method: 'level', level: 26 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
@@ -86338,6 +86435,7 @@ const SPECIES2 = {
     id: 'hypno', name: 'Hypno', dexNo: 97, types: ['psychic'],
     base: { hp: 85, atk: 73, def: 70, spa: 73, spd: 115, spe: 67 },
     catchRate: 75, growth: 'mediumfast', baseXp: 169, body: 'biped', spriteSeed: 9701,
+    eggGroups: ['humanshape'], hatchCounter: 20,
     learnset: { 1: ['pound', 'hypnosis', 'disable', 'confusion'], 24: ['headbutt'], 31: ['meditate'], 37: ['psychic'] },
     flavor: 'Its pendulum swings at the tempo of a slowing heart.',
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
@@ -86346,6 +86444,7 @@ const SPECIES2 = {
     id: 'krabby', name: 'Krabby', dexNo: 98, types: ['water'],
     base: { hp: 30, atk: 105, def: 90, spa: 25, spd: 25, spe: 50 },
     catchRate: 225, growth: 'mediumfast', baseXp: 52, body: 'quad', spriteSeed: 9801,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'leer'], 20: ['harden'], 25: ['stomp'], 30: ['bubblebeam'], 35: ['haze'] },
     flavor: 'It blows foam when nervous, which is nearly always.',
     evo: { to: 'kingler', method: 'level', level: 28 }, tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 19, 31, 32, 34, 44, 50, 101, 103, 104],
@@ -86354,6 +86453,7 @@ const SPECIES2 = {
     id: 'kingler', name: 'Kingler', dexNo: 99, types: ['water'],
     base: { hp: 55, atk: 130, def: 115, spa: 50, spd: 50, spe: 75 },
     catchRate: 60, growth: 'mediumfast', baseXp: 166, body: 'quad', spriteSeed: 9901,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'leer', 'harden'], 25: ['stomp'], 34: ['bubblebeam'], 42: ['haze'] },
     flavor: 'One claw does the crushing. The other does the waving.',
     tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 19, 31, 32, 34, 44, 50, 101, 103, 104],
@@ -86362,6 +86462,7 @@ const SPECIES2 = {
     id: 'voltorb', name: 'Voltorb', dexNo: 100, types: ['electric'],
     base: { hp: 40, atk: 30, def: 50, spa: 55, spd: 55, spe: 100 },
     catchRate: 190, growth: 'mediumfast', baseXp: 66, body: 'blob', spriteSeed: 10001,
+    eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'screech'], 17: ['swift'], 22: ['selfdestruct'], 29: ['lightscreen'], 36: ['explosion'] },
     flavor: 'It appeared the same year the first Ball factory opened.',
     evo: { to: 'electrode', method: 'level', level: 30 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
@@ -86370,6 +86471,7 @@ const SPECIES2 = {
     id: 'electrode', name: 'Electrode', dexNo: 101, types: ['electric'],
     base: { hp: 60, atk: 50, def: 70, spa: 80, spd: 80, spe: 150 },
     catchRate: 60, growth: 'mediumfast', baseXp: 172, body: 'blob', spriteSeed: 10101,
+    eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'screech', 'swift'], 22: ['selfdestruct'], 29: ['lightscreen'], 40: ['explosion'] },
     flavor: 'It stores storm energy and spends it all at once.',
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 47, 50, 105],
@@ -86378,6 +86480,7 @@ const SPECIES2 = {
     id: 'exeggcute', name: 'Exeggcute', dexNo: 102, types: ['grass', 'psychic'],
     base: { hp: 60, atk: 40, def: 80, spa: 60, spd: 45, spe: 40 },
     catchRate: 90, growth: 'mediumslow', baseXp: 65, body: 'blob', spriteSeed: 10201,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['hypnosis', 'leechseed'], 25: ['stunspore'], 28: ['poisonpowder'], 32: ['sleeppowder'], 37: ['solarbeam'], 42: ['reflect'] },
     flavor: 'Six minds, one cluster. They finish each others thoughts.',
     evo: { to: 'exeggutor', method: 'stone', stone: 'leafstone' }, tm: [6, 9, 10, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 42, 44, 46, 47, 50],
@@ -86386,6 +86489,7 @@ const SPECIES2 = {
     id: 'exeggutor', name: 'Exeggutor', dexNo: 103, types: ['grass', 'psychic'],
     base: { hp: 95, atk: 95, def: 85, spa: 125, spd: 75, spe: 55 },
     catchRate: 45, growth: 'mediumslow', baseXp: 186, body: 'biped', spriteSeed: 10301,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['hypnosis', 'leechseed', 'stomp', 'eggbomb'] },
     flavor: 'Each head argues for a different direction to walk.',
     tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
@@ -86394,6 +86498,7 @@ const SPECIES2 = {
     id: 'cubone', name: 'Cubone', dexNo: 104, types: ['ground'],
     base: { hp: 50, atk: 50, def: 95, spa: 40, spd: 50, spe: 35 },
     catchRate: 190, growth: 'mediumfast', baseXp: 64, body: 'biped', spriteSeed: 10401,
+    eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['boneclub', 'growl'], 13: ['leer'], 18: ['focusenergy'], 25: ['rage'], 31: ['bonemerang'], 38: ['takedown'] },
     flavor: 'Its cries echo inside the skull it never takes off.',
     evo: { to: 'marowak', method: 'level', level: 28 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
@@ -86402,6 +86507,7 @@ const SPECIES2 = {
     id: 'marowak', name: 'Marowak', dexNo: 105, types: ['ground'],
     base: { hp: 60, atk: 80, def: 110, spa: 50, spd: 80, spe: 45 },
     catchRate: 75, growth: 'mediumfast', baseXp: 149, body: 'biped', spriteSeed: 10501,
+    eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['boneclub', 'growl', 'leer', 'focusenergy'], 25: ['rage'], 33: ['bonemerang'], 41: ['takedown'] },
     flavor: 'It spins its bone club in slow, practiced funeral arcs.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
@@ -86410,6 +86516,7 @@ const SPECIES2 = {
     id: 'hitmonlee', name: 'Hitmonlee', dexNo: 106, types: ['fighting'],
     base: { hp: 50, atk: 120, def: 53, spa: 35, spd: 110, spe: 87 },
     catchRate: 45, growth: 'mediumslow', baseXp: 159, body: 'biped', spriteSeed: 10601,
+    eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['doubleslap', 'meditate'], 28: ['megakick'], 33: ['submission'] },
     flavor: 'Its legs stretch mid-kick. Distance is a suggestion.',
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
@@ -86418,6 +86525,7 @@ const SPECIES2 = {
     id: 'hitmonchan', name: 'Hitmonchan', dexNo: 107, types: ['fighting'],
     base: { hp: 50, atk: 105, def: 79, spa: 35, spd: 110, spe: 76 },
     catchRate: 45, growth: 'mediumslow', baseXp: 159, body: 'biped', spriteSeed: 10701,
+    eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['cometpunch', 'agility'], 28: ['firepunch'], 30: ['icepunch'], 32: ['thunderpunch'], 38: ['counter'], 43: ['submission'] },
     flavor: 'It jabs faster than the eye files the paperwork.',
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
@@ -86426,6 +86534,7 @@ const SPECIES2 = {
     id: 'lickitung', name: 'Lickitung', dexNo: 108, types: ['normal'],
     base: { hp: 90, atk: 55, def: 75, spa: 60, spd: 75, spe: 30 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'biped', spriteSeed: 10801,
+    eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['lick', 'supersonic'], 7: ['stomp'], 15: ['disable'], 23: ['defensecurl'], 31: ['bodyslam'], 39: ['screech'] },
     flavor: 'Its tongue runs twice its body length and misses nothing.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 50, 101, 103, 104],
@@ -86434,6 +86543,7 @@ const SPECIES2 = {
     id: 'koffing', name: 'Koffing', dexNo: 109, types: ['poison'],
     base: { hp: 40, atk: 65, def: 95, spa: 60, spd: 45, spe: 35 },
     catchRate: 190, growth: 'mediumfast', baseXp: 68, body: 'blob', spriteSeed: 10901,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'smog'], 30: ['sludge'], 37: ['haze'], 44: ['selfdestruct'], 48: ['explosion'] },
     flavor: 'Thin skin, thick fumes. Handle like a loaded balloon.',
     evo: { to: 'weezing', method: 'level', level: 35 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
@@ -86442,6 +86552,7 @@ const SPECIES2 = {
     id: 'weezing', name: 'Weezing', dexNo: 110, types: ['poison'],
     base: { hp: 65, atk: 90, def: 120, spa: 85, spd: 70, spe: 60 },
     catchRate: 60, growth: 'mediumfast', baseXp: 172, body: 'blob', spriteSeed: 11001,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'smog', 'sludge'], 37: ['haze'], 46: ['selfdestruct'], 51: ['explosion'] },
     flavor: 'Two heads trading fumes, each convinced theirs is finer.',
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
@@ -86450,6 +86561,7 @@ const SPECIES2 = {
     id: 'rhyhorn', name: 'Rhyhorn', dexNo: 111, types: ['ground', 'rock'],
     base: { hp: 80, atk: 85, def: 95, spa: 30, spd: 30, spe: 25 },
     catchRate: 120, growth: 'mediumslow', baseXp: 69, body: 'quad', spriteSeed: 11101,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 19: ['stomp'], 25: ['tailwhip'], 30: ['furyattack'], 35: ['leer'], 40: ['takedown'], 45: ['horndrill'] },
     flavor: 'It charges in straight lines and lets the world dodge.',
     evo: { to: 'rhydon', method: 'level', level: 42 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
@@ -86458,6 +86570,7 @@ const SPECIES2 = {
     id: 'rhydon', name: 'Rhydon', dexNo: 112, types: ['ground', 'rock'],
     base: { hp: 105, atk: 130, def: 120, spa: 45, spd: 45, spe: 40 },
     catchRate: 60, growth: 'mediumslow', baseXp: 170, body: 'biped', spriteSeed: 11201,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'stomp', 'tailwhip', 'furyattack'], 35: ['leer'], 40: ['takedown'], 48: ['horndrill'] },
     flavor: 'Its drill horn can punch through solid diamond seams.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 103, 104],
@@ -86466,6 +86579,7 @@ const SPECIES2 = {
     id: 'chansey', name: 'Chansey', dexNo: 113, types: ['normal'],
     base: { hp: 250, atk: 5, def: 5, spa: 35, spd: 105, spe: 50 },
     catchRate: 30, growth: 'fast', baseXp: 395, body: 'blob', spriteSeed: 11301,
+    eggGroups: ['fairy'], hatchCounter: 40,
     learnset: { 1: ['pound', 'doubleslap'], 8: ['sing'], 16: ['growl'], 23: ['minimize'], 30: ['defensecurl'], 38: ['lightscreen'], 44: ['eggbomb'], 50: ['softboiled'] },
     flavor: 'It shares its egg with the hurt and the hungry alike.',
     evo: { to: 'blissey', method: 'level', level: 40 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 103, 105],
@@ -86474,6 +86588,7 @@ const SPECIES2 = {
     id: 'tangela', name: 'Tangela', dexNo: 114, types: ['grass'],
     base: { hp: 65, atk: 55, def: 115, spa: 100, spd: 40, spe: 60 },
     catchRate: 45, growth: 'mediumfast', baseXp: 87, body: 'blob', spriteSeed: 11401,
+    eggGroups: ['plant'], hatchCounter: 20,
     learnset: { 1: ['constrict', 'absorb'], 25: ['poisonpowder'], 27: ['stunspore'], 30: ['growth'], 33: ['megadrain'], 37: ['sleeppowder'], 40: ['bind'] },
     flavor: 'Nobody has seen its face. The vines prefer it that way.',
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 34, 39, 44, 50, 101],
@@ -86482,6 +86597,7 @@ const SPECIES2 = {
     id: 'kangaskhan', name: 'Kangaskhan', dexNo: 115, types: ['normal'],
     base: { hp: 105, atk: 95, def: 80, spa: 40, spd: 80, spe: 90 },
     catchRate: 45, growth: 'mediumfast', baseXp: 172, body: 'biped', spriteSeed: 11501,
+    eggGroups: ['monster'], hatchCounter: 20,
     learnset: { 1: ['cometpunch', 'leer'], 19: ['bite'], 26: ['tailwhip'], 34: ['megapunch'], 40: ['rage'] },
     flavor: 'The pouch is a nursery, a fortress, and a promise.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
@@ -86490,6 +86606,7 @@ const SPECIES2 = {
     id: 'horsea', name: 'Horsea', dexNo: 116, types: ['water'],
     base: { hp: 30, atk: 40, def: 70, spa: 70, spd: 35, spe: 60 },
     catchRate: 225, growth: 'mediumfast', baseXp: 59, body: 'fish', spriteSeed: 11601,
+    eggGroups: ['water1', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['bubble'], 8: ['smokescreen'], 19: ['leer'], 27: ['watergun'], 35: ['agility'], 44: ['hydropump'] },
     flavor: 'It anchors to coral in currents that would scatter shells.',
     evo: { to: 'seadra', method: 'level', level: 32 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 39, 44, 50, 103],
@@ -86498,6 +86615,7 @@ const SPECIES2 = {
     id: 'seadra', name: 'Seadra', dexNo: 117, types: ['water'],
     base: { hp: 55, atk: 65, def: 95, spa: 95, spd: 45, spe: 85 },
     catchRate: 75, growth: 'mediumfast', baseXp: 154, body: 'fish', spriteSeed: 11701,
+    eggGroups: ['water1', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['bubble', 'smokescreen', 'leer', 'watergun'], 27: ['watergun'], 35: ['agility'], 44: ['hydropump'] },
     flavor: 'Its spines carry venom. Even its shed skin stays sharp.',
     evo: { to: 'kingdra', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 39, 44, 50, 103],
@@ -86506,6 +86624,7 @@ const SPECIES2 = {
     id: 'goldeen', name: 'Goldeen', dexNo: 118, types: ['water'],
     base: { hp: 45, atk: 67, def: 60, spa: 35, spd: 50, spe: 63 },
     catchRate: 225, growth: 'mediumfast', baseXp: 64, body: 'fish', spriteSeed: 11801,
+    eggGroups: ['water2'], hatchCounter: 20,
     learnset: { 1: ['peck', 'tailwhip'], 10: ['supersonic'], 19: ['furyattack'], 24: ['watergun'], 30: ['agility'], 38: ['horndrill'] },
     flavor: 'A flash of white and gold under still pond water.',
     evo: { to: 'seaking', method: 'level', level: 33 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
@@ -86514,6 +86633,7 @@ const SPECIES2 = {
     id: 'seaking', name: 'Seaking', dexNo: 119, types: ['water'],
     base: { hp: 80, atk: 92, def: 65, spa: 65, spd: 80, spe: 68 },
     catchRate: 60, growth: 'mediumfast', baseXp: 158, body: 'fish', spriteSeed: 11901,
+    eggGroups: ['water2'], hatchCounter: 20,
     learnset: { 1: ['peck', 'tailwhip', 'supersonic', 'furyattack'], 24: ['watergun'], 30: ['agility'], 41: ['horndrill'] },
     flavor: 'In autumn it swims upstream wearing brighter colors.',
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 44, 50, 103],
@@ -86522,6 +86642,7 @@ const SPECIES2 = {
     id: 'staryu', name: 'Staryu', dexNo: 120, types: ['water'],
     base: { hp: 30, atk: 45, def: 55, spa: 70, spd: 55, spe: 85 },
     catchRate: 225, growth: 'slow', baseXp: 68, body: 'blob', spriteSeed: 12001,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'watergun'], 13: ['harden'], 18: ['recover'], 23: ['swift'], 28: ['minimize'], 33: ['lightscreen'], 38: ['hydropump'] },
     flavor: 'Its core blinks in rhythm with the stars overhead.',
     evo: { to: 'starmie', method: 'stone', stone: 'waterstone' }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 103, 105],
@@ -86530,6 +86651,7 @@ const SPECIES2 = {
     id: 'starmie', name: 'Starmie', dexNo: 121, types: ['water', 'psychic'],
     base: { hp: 60, atk: 75, def: 85, spa: 100, spd: 85, spe: 115 },
     catchRate: 60, growth: 'slow', baseXp: 182, body: 'blob', spriteSeed: 12101,
+    eggGroups: ['water3'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'watergun', 'harden'] },
     flavor: 'People once read its flashing core as a signal from space.',
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 103, 105],
@@ -86538,6 +86660,7 @@ const SPECIES2 = {
     id: 'mrmime', name: 'Mr. Mime', dexNo: 122, types: ['psychic', 'fairy'],
     base: { hp: 40, atk: 45, def: 65, spa: 100, spd: 120, spe: 90 },
     catchRate: 45, growth: 'mediumfast', baseXp: 161, body: 'biped', spriteSeed: 12201,
+    eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['confusion', 'barrier'], 15: ['doubleslap'], 21: ['meditate'], 27: ['lightscreen'], 33: ['substitute'] },
     flavor: 'It builds real walls out of pantomime and pure cheek.',
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
@@ -86546,6 +86669,7 @@ const SPECIES2 = {
     id: 'scyther', name: 'Scyther', dexNo: 123, types: ['bug', 'flying'],
     base: { hp: 70, atk: 110, def: 80, spa: 55, spd: 80, spe: 105 },
     catchRate: 45, growth: 'mediumfast', baseXp: 100, body: 'biped', spriteSeed: 12301,
+    eggGroups: ['bug'], hatchCounter: 25,
     learnset: { 1: ['quickattack'], 17: ['leer'], 20: ['focusenergy'], 24: ['doubleslap'], 29: ['slash'], 39: ['swordsdance'], 44: ['agility'], 50: ['wingattack'] },
     flavor: 'Its scythes part tall grass and arguments with equal ease.',
     evo: { to: 'scizor', method: 'trade' }, tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
@@ -86554,6 +86678,7 @@ const SPECIES2 = {
     id: 'jynx', name: 'Jynx', dexNo: 124, types: ['ice', 'psychic'],
     base: { hp: 65, atk: 50, def: 35, spa: 115, spd: 95, spe: 95 },
     catchRate: 45, growth: 'mediumfast', baseXp: 159, body: 'biped', spriteSeed: 12401,
+    eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['pound', 'lovelykiss', 'lick'], 12: ['doubleslap'], 18: ['icepunch'], 23: ['bodyslam'], 31: ['blizzard'], 39: ['psychic'] },
     flavor: 'It sways as it walks, humming in a language of weather.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
@@ -86562,6 +86687,7 @@ const SPECIES2 = {
     id: 'electabuzz', name: 'Electabuzz', dexNo: 125, types: ['electric'],
     base: { hp: 65, atk: 83, def: 57, spa: 95, spd: 85, spe: 105 },
     catchRate: 45, growth: 'mediumfast', baseXp: 172, body: 'biped', spriteSeed: 12501,
+    eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['quickattack', 'leer', 'thundershock'], 29: ['lightscreen'], 34: ['thunderpunch'], 37: ['thunderbolt'], 42: ['thunder'] },
     flavor: 'Power plants post guards. It treats blackouts as buffets.',
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 39, 40, 42, 44, 45, 46, 49, 50, 104, 105],
@@ -86570,6 +86696,7 @@ const SPECIES2 = {
     id: 'magmar', name: 'Magmar', dexNo: 126, types: ['fire'],
     base: { hp: 65, atk: 95, def: 57, spa: 100, spd: 85, spe: 93 },
     catchRate: 45, growth: 'mediumfast', baseXp: 173, body: 'biped', spriteSeed: 12601,
+    eggGroups: ['humanshape'], hatchCounter: 25,
     learnset: { 1: ['ember', 'leer'], 26: ['smokescreen'], 30: ['firepunch'], 34: ['confuseray'], 39: ['flamethrower'], 44: ['firespin'] },
     flavor: 'It bathes in lava to mend its wounds and its mood.',
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 31, 32, 33, 34, 35, 38, 39, 40, 42, 44, 46, 49, 50, 104],
@@ -86578,6 +86705,7 @@ const SPECIES2 = {
     id: 'pinsir', name: 'Pinsir', dexNo: 127, types: ['bug'],
     base: { hp: 65, atk: 125, def: 100, spa: 55, spd: 70, spe: 85 },
     catchRate: 45, growth: 'slow', baseXp: 175, body: 'biped', spriteSeed: 12701,
+    eggGroups: ['bug'], hatchCounter: 25,
     learnset: { 1: ['focusenergy'], 25: ['seismictoss'], 31: ['slash'], 37: ['swordsdance'], 43: ['submission'] },
     flavor: 'Its horns can snap a log or flip a careless boulder.',
     tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 31, 32, 34, 44, 50, 101, 104],
@@ -86586,6 +86714,7 @@ const SPECIES2 = {
     id: 'tauros', name: 'Tauros', dexNo: 128, types: ['normal'],
     base: { hp: 75, atk: 100, def: 95, spa: 40, spd: 70, spe: 110 },
     catchRate: 45, growth: 'slow', baseXp: 172, body: 'quad', spriteSeed: 12801,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 21: ['stomp'], 26: ['leer'], 33: ['rage'], 42: ['takedown'] },
     flavor: 'It whips its own flanks with three tails, then charges.',
     tm: [6, 8, 9, 10, 13, 14, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
@@ -86594,6 +86723,7 @@ const SPECIES2 = {
     id: 'magikarp', name: 'Magikarp', dexNo: 129, types: ['water'],
     base: { hp: 20, atk: 10, def: 55, spa: 15, spd: 20, spe: 80 },
     catchRate: 255, growth: 'slow', baseXp: 40, body: 'fish', spriteSeed: 12901,
+    eggGroups: ['water2', 'dragon'], hatchCounter: 5,
     learnset: { 1: ['splash'], 15: ['tackle'] },
     flavor: 'Patient, splashy, and quietly plotting a waterfall.',
     evo: { to: 'gyarados', method: 'level', level: 20 }, tm: [],
@@ -86602,6 +86732,7 @@ const SPECIES2 = {
     id: 'gyarados', name: 'Gyarados', dexNo: 130, types: ['water', 'flying'],
     base: { hp: 95, atk: 125, def: 79, spa: 60, spd: 100, spe: 81 },
     catchRate: 45, growth: 'slow', baseXp: 189, body: 'serpent', spriteSeed: 13001,
+    eggGroups: ['water2', 'dragon'], hatchCounter: 5,
     learnset: { 1: ['bite', 'leer', 'hydropump'], 25: ['rage'], 32: ['hyperbeam'] },
     flavor: 'Old maps mark its lakes with a simple warning: no.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
@@ -86610,6 +86741,7 @@ const SPECIES2 = {
     id: 'lapras', name: 'Lapras', dexNo: 131, types: ['water', 'ice'],
     base: { hp: 130, atk: 85, def: 80, spa: 85, spd: 95, spe: 60 },
     catchRate: 45, growth: 'slow', baseXp: 187, body: 'fish', spriteSeed: 13101,
+    eggGroups: ['monster', 'water1'], hatchCounter: 40,
     learnset: { 1: ['watergun', 'growl', 'sing'], 16: ['mist'], 20: ['bodyslam'], 25: ['confuseray'], 32: ['icebeam'], 38: ['hydropump'] },
     flavor: 'It ferries travelers across cold bays, singing under stars.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 29, 31, 32, 34, 39, 42, 44, 46, 50, 103, 104],
@@ -86618,6 +86750,7 @@ const SPECIES2 = {
     id: 'ditto', name: 'Ditto', dexNo: 132, types: ['normal'],
     base: { hp: 48, atk: 48, def: 48, spa: 48, spd: 48, spe: 48 },
     catchRate: 35, growth: 'mediumfast', baseXp: 101, body: 'blob', spriteSeed: 13201,
+    eggGroups: ['ditto'], hatchCounter: 20,
     learnset: { 1: ['transform'] },
     flavor: 'A puddle with ambitions. Every shape is a borrowed suit.',
     tm: [],
@@ -86626,6 +86759,7 @@ const SPECIES2 = {
     id: 'eevee', name: 'Eevee', dexNo: 133, types: ['normal'],
     base: { hp: 55, atk: 55, def: 50, spa: 45, spd: 65, spe: 55 },
     catchRate: 45, growth: 'mediumfast', baseXp: 87, body: 'quad', spriteSeed: 13301,
+    eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip'], 16: ['sandattack'], 23: ['quickattack'], 30: ['bite'], 37: ['focusenergy'], 45: ['takedown'] },
     flavor: 'Its genes hold a dozen answers to the same question.',
     evos: [
@@ -86641,6 +86775,7 @@ const SPECIES2 = {
     id: 'vaporeon', name: 'Vaporeon', dexNo: 134, types: ['water'],
     base: { hp: 130, atk: 65, def: 60, spa: 110, spd: 95, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13401,
+    eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip', 'sandattack', 'watergun'], 16: ['quickattack'], 27: ['bite'], 33: ['acidarmor'], 42: ['haze'], 48: ['hydropump'] },
     flavor: 'It can melt into rain puddles and be gone by morning.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 28, 31, 32, 34, 39, 44, 50, 103],
@@ -86649,6 +86784,7 @@ const SPECIES2 = {
     id: 'jolteon', name: 'Jolteon', dexNo: 135, types: ['electric'],
     base: { hp: 65, atk: 65, def: 60, spa: 110, spd: 95, spe: 130 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13501,
+    eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip', 'sandattack', 'thundershock'], 16: ['quickattack'], 27: ['thunderwave'], 33: ['pinmissile'], 42: ['agility'], 48: ['thunder'] },
     flavor: 'Every bristled hair is a small, furious thundercloud.',
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
@@ -86657,6 +86793,7 @@ const SPECIES2 = {
     id: 'flareon', name: 'Flareon', dexNo: 136, types: ['fire'],
     base: { hp: 65, atk: 130, def: 60, spa: 95, spd: 110, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13601,
+    eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip', 'sandattack', 'ember'], 16: ['quickattack'], 27: ['bite'], 33: ['smog'], 42: ['flamethrower'], 48: ['firespin'] },
     flavor: 'Its fluffy collar vents heat like a living chimney.',
     tm: [6, 8, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50],
@@ -86665,6 +86802,7 @@ const SPECIES2 = {
     id: 'porygon', name: 'Porygon', dexNo: 137, types: ['normal'],
     base: { hp: 65, atk: 60, def: 70, spa: 85, spd: 75, spe: 40 },
     catchRate: 45, growth: 'mediumfast', baseXp: 79, body: 'blob', spriteSeed: 13701,
+    eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'psybeam', 'conversion'], 12: ['disable'], 18: ['agility'], 24: ['recover'], 30: ['triattack'], 36: ['psychic'] },
     flavor: 'Built from code and corners. It prefers cyberspace weather.',
     evo: { to: 'porygon2', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 105],
@@ -86673,6 +86811,7 @@ const SPECIES2 = {
     id: 'omanyte', name: 'Omanyte', dexNo: 138, types: ['rock', 'water'],
     base: { hp: 35, atk: 40, def: 100, spa: 90, spd: 55, spe: 35 },
     catchRate: 45, growth: 'mediumfast', baseXp: 71, body: 'blob', spriteSeed: 13801,
+    eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['watergun', 'withdraw'], 22: ['leer'], 29: ['bubblebeam'], 36: ['hydropump'] },
     flavor: 'A fossil that woke up and decided to keep swimming.',
     evo: { to: 'omastar', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
@@ -86681,6 +86820,7 @@ const SPECIES2 = {
     id: 'omastar', name: 'Omastar', dexNo: 139, types: ['rock', 'water'],
     base: { hp: 70, atk: 60, def: 125, spa: 115, spd: 70, spe: 55 },
     catchRate: 45, growth: 'mediumfast', baseXp: 173, body: 'blob', spriteSeed: 13901,
+    eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['watergun', 'withdraw', 'leer'], 36: ['hydropump'] },
     flavor: 'Its spiral shell is a library older than the coastline.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 44, 50, 103, 104],
@@ -86689,6 +86829,7 @@ const SPECIES2 = {
     id: 'kabuto', name: 'Kabuto', dexNo: 140, types: ['rock', 'water'],
     base: { hp: 30, atk: 80, def: 90, spa: 55, spd: 45, spe: 55 },
     catchRate: 45, growth: 'mediumfast', baseXp: 71, body: 'blob', spriteSeed: 14001,
+    eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['scratch', 'harden'], 28: ['absorb'], 34: ['leer'], 39: ['slash'], 44: ['hydropump'] },
     flavor: 'It hid under its dome for three hundred million years.',
     evo: { to: 'kabutops', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
@@ -86697,6 +86838,7 @@ const SPECIES2 = {
     id: 'kabutops', name: 'Kabutops', dexNo: 141, types: ['rock', 'water'],
     base: { hp: 60, atk: 115, def: 105, spa: 65, spd: 70, spe: 80 },
     catchRate: 45, growth: 'mediumfast', baseXp: 173, body: 'biped', spriteSeed: 14101,
+    eggGroups: ['water1', 'water3'], hatchCounter: 30,
     learnset: { 1: ['scratch', 'harden', 'absorb', 'slash'], 34: ['leer'], 46: ['hydropump'] },
     flavor: 'Scythe arms, ancient patience. The shallows were its court.',
     tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 28, 31, 32, 34, 39, 44, 50, 101, 103, 104],
@@ -86705,6 +86847,7 @@ const SPECIES2 = {
     id: 'aerodactyl', name: 'Aerodactyl', dexNo: 142, types: ['rock', 'flying'],
     base: { hp: 80, atk: 105, def: 65, spa: 60, spd: 75, spe: 130 },
     catchRate: 45, growth: 'slow', baseXp: 180, body: 'bird', spriteSeed: 14201,
+    eggGroups: ['flying'], hatchCounter: 35,
     learnset: { 1: ['wingattack', 'agility'], 28: ['bite'], 33: ['supersonic'], 38: ['takedown'], 45: ['hyperbeam'] },
     flavor: 'The old sky had teeth. Amber kept the memory safe.',
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
@@ -86713,6 +86856,7 @@ const SPECIES2 = {
     id: 'snorlax', name: 'Snorlax', dexNo: 143, types: ['normal'],
     base: { hp: 160, atk: 110, def: 65, spa: 65, spd: 110, spe: 30 },
     catchRate: 25, growth: 'slow', baseXp: 189, body: 'biped', spriteSeed: 14301,
+    eggGroups: ['monster'], hatchCounter: 40,
     learnset: { 1: ['tackle', 'headbutt'], 10: ['amnesia'], 17: ['rest'], 24: ['bodyslam'], 31: ['harden'], 38: ['doubleedge'], 45: ['hyperbeam'] },
     flavor: 'A roadblock with a heartbeat. Bring snacks or detour.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
@@ -86721,6 +86865,7 @@ const SPECIES2 = {
     id: 'articuno', name: 'Articuno', dexNo: 144, types: ['ice', 'flying'],
     base: { hp: 90, atk: 85, def: 100, spa: 95, spd: 125, spe: 85 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14401,
+    eggGroups: ['no-eggs'], hatchCounter: 80,
     learnset: { 1: ['peck', 'icebeam'], 51: ['blizzard'], 55: ['agility'], 60: ['mist'] },
     flavor: 'Snow falls upward where its wings have just passed.',
     tm: [2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 50, 102],
@@ -86729,6 +86874,7 @@ const SPECIES2 = {
     id: 'zapdos', name: 'Zapdos', dexNo: 145, types: ['electric', 'flying'],
     base: { hp: 90, atk: 90, def: 85, spa: 125, spd: 90, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14501,
+    eggGroups: ['no-eggs'], hatchCounter: 80,
     learnset: { 1: ['peck', 'thundershock'], 51: ['thunder'], 55: ['agility'], 60: ['lightscreen'] },
     flavor: 'It nests inside thunderheads and argues with the storm.',
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
@@ -86737,6 +86883,7 @@ const SPECIES2 = {
     id: 'moltres', name: 'Moltres', dexNo: 146, types: ['fire', 'flying'],
     base: { hp: 90, atk: 100, def: 90, spa: 125, spd: 85, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14601,
+    eggGroups: ['no-eggs'], hatchCounter: 80,
     learnset: { 1: ['peck', 'firespin'], 51: ['leer'], 55: ['agility'] },
     flavor: 'Embers trail it like a comet that refuses to burn out.',
     tm: [2, 4, 6, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50, 102],
@@ -86745,6 +86892,7 @@ const SPECIES2 = {
     id: 'dratini', name: 'Dratini', dexNo: 147, types: ['dragon'],
     base: { hp: 41, atk: 64, def: 45, spa: 50, spd: 50, spe: 50 },
     catchRate: 45, growth: 'slow', baseXp: 60, body: 'serpent', spriteSeed: 14701,
+    eggGroups: ['water1', 'dragon'], hatchCounter: 40,
     learnset: { 1: ['wrap', 'leer'], 10: ['thunderwave'], 20: ['agility'], 30: ['takedown'], 40: ['hyperbeam'] },
     flavor: 'It sheds its skin in hidden pools and grows bolder.',
     evo: { to: 'dragonair', method: 'level', level: 30 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 24, 25, 31, 32, 34, 38, 39, 44, 50, 103],
@@ -86753,6 +86901,7 @@ const SPECIES2 = {
     id: 'dragonair', name: 'Dragonair', dexNo: 148, types: ['dragon'],
     base: { hp: 61, atk: 84, def: 65, spa: 70, spd: 70, spe: 70 },
     catchRate: 45, growth: 'slow', baseXp: 147, body: 'serpent', spriteSeed: 14801,
+    eggGroups: ['water1', 'dragon'], hatchCounter: 40,
     learnset: { 1: ['wrap', 'leer', 'thunderwave'], 20: ['agility'], 30: ['takedown'], 45: ['hyperbeam'] },
     flavor: 'Weather shifts when it swims. Fishermen watch its pearls.',
     evo: { to: 'dragonite', method: 'level', level: 55 }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 31, 32, 34, 38, 39, 44, 50, 103],
@@ -86761,6 +86910,7 @@ const SPECIES2 = {
     id: 'dragonite', name: 'Dragonite', dexNo: 149, types: ['dragon', 'flying'],
     base: { hp: 91, atk: 134, def: 95, spa: 100, spd: 100, spe: 80 },
     catchRate: 45, growth: 'slow', baseXp: 300, body: 'biped', spriteSeed: 14901,
+    eggGroups: ['water1', 'dragon'], hatchCounter: 40,
     learnset: { 1: ['wrap', 'leer', 'thunderwave', 'agility'], 30: ['takedown'], 45: ['hyperbeam'] },
     flavor: 'It guides lost ships home, then vanishes into the gale.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
@@ -86769,6 +86919,7 @@ const SPECIES2 = {
     id: 'mewtwo', name: 'Mewtwo', dexNo: 150, types: ['psychic'],
     base: { hp: 106, atk: 110, def: 90, spa: 154, spd: 90, spe: 130 },
     catchRate: 3, growth: 'slow', baseXp: 340, body: 'biped', spriteSeed: 15001,
+    eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['confusion', 'disable'], 55: ['barrier'], 60: ['psychic'], 66: ['recover'], 70: ['mist'], 75: ['amnesia'], 81: ['swift'] },
     flavor: 'It asks questions no laboratory ever thought to answer.',
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 42, 44, 45, 46, 49, 50, 103, 104, 105],
@@ -86777,6 +86928,7 @@ const SPECIES2 = {
     id: 'mew', name: 'Mew', dexNo: 151, types: ['psychic'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 300, body: 'biped', spriteSeed: 15101,
+    eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['pound'], 10: ['transform'], 20: ['megapunch'], 30: ['metronome'], 40: ['psychic'], 50: ['softboiled'] },
     flavor: 'It plays hide and seek with history itself.',
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
@@ -86845,6 +86997,7 @@ const SPECIES2 = {
     id: 'togepi', name: 'Togepi', dexNo: 175, types: ['fairy'],
     base: { hp: 35, atk: 20, def: 65, spa: 40, spd: 65, spe: 20 },
     catchRate: 190, growth: 'fast', baseXp: 49, body: 'biped', spriteSeed: 17501,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
     learnset: { 1: ['pound', 'growl'], 9: ['metronome'], 17: ['doubleedge'] },
     flavor: 'It totters after whoever makes it happiest, shell and all.',
     evo: { to: 'togetic', method: 'level', level: 25 },
@@ -86853,6 +87006,7 @@ const SPECIES2 = {
     id: 'marill', name: 'Marill', dexNo: 183, types: ['water', 'fairy'],
     base: { hp: 70, atk: 20, def: 50, spa: 20, spd: 50, spe: 40 },
     catchRate: 190, growth: 'fast', baseXp: 88, body: 'quad', spriteSeed: 18301,
+    eggGroups: ['water1', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['tackle', 'tailwhip', 'watergun'], 6: ['bubblebeam'], 10: ['defensecurl'], 20: ['doubleedge'], 30: ['hydropump'] },
     flavor: 'Its round tail bobs on the water like a tiny blue buoy.',
     evo: { to: 'azumarill', method: 'level', level: 18 },
@@ -86861,6 +87015,7 @@ const SPECIES2 = {
     id: 'snubbull', name: 'Snubbull', dexNo: 209, types: ['fairy'],
     base: { hp: 60, atk: 80, def: 50, spa: 40, spd: 40, spe: 30 },
     catchRate: 190, growth: 'fast', baseXp: 60, body: 'quad', spriteSeed: 20901,
+    eggGroups: ['ground', 'fairy'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'tailwhip', 'growl'], 7: ['bite'], 13: ['lick'], 19: ['headbutt'], 31: ['rage'], 37: ['takedown'] },
     flavor: 'All scowl and no bite — it would rather be carried home.',
     evo: { to: 'granbull', method: 'level', level: 23 },
@@ -86869,6 +87024,7 @@ const SPECIES2 = {
     id: 'donphan', name: 'Donphan', dexNo: 232, types: ['ground'],
     base: { hp: 90, atk: 120, def: 120, spa: 60, spd: 60, spe: 50 },
     catchRate: 60, growth: 'mediumfast', baseXp: 175, body: 'quad', spriteSeed: 23201,
+    eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'growl'], 6: ['defensecurl'], 24: ['slam'], 37: ['takedown'], 43: ['earthquake'] },
     flavor: 'It curls into a living boulder and rolls clean through trouble.',
   },
@@ -86876,6 +87032,7 @@ const SPECIES2 = {
     id: 'hooh', name: 'Ho-Oh', dexNo: 250, types: ['fire', 'flying'],
     base: { hp: 106, atk: 130, def: 90, spa: 110, spd: 154, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 25001,
+    eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['gust', 'whirlwind'], 23: ['recover'], 29: ['fireblast'], 43: ['swift'], 90: ['skyattack'] },
     flavor: 'Where its rainbow passes, the ash of old sorrow turns green.',
   },
@@ -86891,6 +87048,7 @@ const SPECIES2 = {
     id: 'lugia', name: 'Lugia', dexNo: 249, types: ['psychic', 'flying'],
     base: { hp: 106, atk: 90, def: 130, spa: 90, spd: 154, spe: 110 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 24901,
+    eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['gust', 'whirlwind'], 20: ['mist'], 29: ['recover'], 43: ['swift'], 55: ['psychic'], 71: ['hydropump'], 90: ['skyattack'] },
     flavor: 'It sleeps in the deep current so its wings need never trouble the sky.',
   },
@@ -88166,6 +88324,19 @@ const BALLS = {
   ultraball: { id: 'ultraball', name: 'Ultra Ball', bonus: 2, desc: 'The best standard ball.' },
   masterball: { id: 'masterball', name: 'Master Ball', bonus: 999, desc: 'Catches without fail. One exists.' },
   safariball: { id: 'safariball', name: 'Safari Ball', bonus: 1, desc: 'Issued at the Safari Zone gate.' },
+  // Stage J6: Kurt's apricorn balls. Each carries a `rule` that the
+  // catch calculation in BOTH battle engines evaluates against the
+  // live battle (src/game/ball-rules.mjs) — the bonus is NEVER flat
+  // flavour: the desc states the real condition, and a rule that does
+  // not meet its condition multiplies by exactly 1. `bonus` stays the
+  // nominal 1; the rule supplies the true multiplier.
+  levelball: { id: 'levelball', name: 'Level Ball', bonus: 1, rule: 'level', desc: 'Kurt-made. The bigger your lead\'s level edge over the wild foe, the stronger it pulls: over 4x its level x8, over 2x x4, over 1x x2, otherwise x1.' },
+  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Kurt-made. x3 on a Pokemon hooked while fishing; x1 on any other encounter.' },
+  moonball: { id: 'moonball', name: 'Moon Ball', bonus: 1, rule: 'moon', desc: 'Kurt-made. x4 on a species that evolves by Moon Stone; x1 on anything else.' },
+  loveball: { id: 'loveball', name: 'Love Ball', bonus: 1, rule: 'love', desc: 'Kurt-made. x8 when the wild foe is the same species as your lead; x1 otherwise.' },
+  fastball: { id: 'fastball', name: 'Fast Ball', bonus: 1, rule: 'fast', desc: 'Kurt-made. x4 on a species whose base Speed is 100 or more; x1 on slower species.' },
+  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Kurt-made. A plain x1 catch — but a Pokemon caught in it starts out trusting you (friendship set high).' },
+  heavyball: { id: 'heavyball', name: 'Heavy Ball', bonus: 1, rule: 'heavy', desc: 'Kurt-made. Pulls harder the bulkier the foe\'s battler tier: S x1, M x1.5, L x2.5, XL x4.' },
 };
 
 // TM number -> move id (canonical Gen-1 assignments; moves live in moves data).
@@ -88197,6 +88368,26 @@ const ITEMS = {
   ultraball: { id: 'ultraball', name: 'Ultra Ball', pocket: 'balls', price: 1200, desc: BALLS.ultraball.desc },
   masterball: { id: 'masterball', name: 'Master Ball', pocket: 'balls', desc: BALLS.masterball.desc },
   safariball: { id: 'safariball', name: 'Safari Ball', pocket: 'balls', desc: BALLS.safariball.desc },
+  // Stage J6: apricorn balls — Kurt-only (canon): no price, so no mart
+  // ever stocks them; the Cheat Terminal stocks them from data like
+  // everything else.
+  levelball: { id: 'levelball', name: 'Level Ball', pocket: 'balls', desc: BALLS.levelball.desc },
+  lureball: { id: 'lureball', name: 'Lure Ball', pocket: 'balls', desc: BALLS.lureball.desc },
+  moonball: { id: 'moonball', name: 'Moon Ball', pocket: 'balls', desc: BALLS.moonball.desc },
+  loveball: { id: 'loveball', name: 'Love Ball', pocket: 'balls', desc: BALLS.loveball.desc },
+  fastball: { id: 'fastball', name: 'Fast Ball', pocket: 'balls', desc: BALLS.fastball.desc },
+  friendball: { id: 'friendball', name: 'Friend Ball', pocket: 'balls', desc: BALLS.friendball.desc },
+  heavyball: { id: 'heavyball', name: 'Heavy Ball', pocket: 'balls', desc: BALLS.heavyball.desc },
+  // Stage J6: apricorns (pocket 'items') — picked from apricorn trees
+  // across Johto (src/game/johto-systems.mjs APRICORN_TREES); Kurt in
+  // Azalea crafts one into its matching ball. No price: never mart stock.
+  redapricorn: { id: 'redapricorn', name: 'Red Apricorn', pocket: 'items', desc: 'A ripe red apricorn. Kurt of Azalea can work it into a Level Ball.' },
+  blueapricorn: { id: 'blueapricorn', name: 'Blue Apricorn', pocket: 'items', desc: 'A ripe blue apricorn. Kurt of Azalea can work it into a Lure Ball.' },
+  yellowapricorn: { id: 'yellowapricorn', name: 'Yellow Apricorn', pocket: 'items', desc: 'A ripe yellow apricorn. Kurt of Azalea can work it into a Moon Ball.' },
+  greenapricorn: { id: 'greenapricorn', name: 'Green Apricorn', pocket: 'items', desc: 'A ripe green apricorn. Kurt of Azalea can work it into a Friend Ball.' },
+  pinkapricorn: { id: 'pinkapricorn', name: 'Pink Apricorn', pocket: 'items', desc: 'A ripe pink apricorn. Kurt of Azalea can work it into a Love Ball.' },
+  whiteapricorn: { id: 'whiteapricorn', name: 'White Apricorn', pocket: 'items', desc: 'A ripe white apricorn. Kurt of Azalea can work it into a Fast Ball.' },
+  blackapricorn: { id: 'blackapricorn', name: 'Black Apricorn', pocket: 'items', desc: 'A ripe black apricorn. Kurt of Azalea can work it into a Heavy Ball.' },
   // Medicine
   potion: { id: 'potion', name: 'Potion', pocket: 'medicine', price: 300, heal: 20, desc: 'Restores 20 HP.' },
   superpotion: { id: 'superpotion', name: 'Super Potion', pocket: 'medicine', price: 700, heal: 50, desc: 'Restores 50 HP.' },
@@ -114354,6 +114545,12 @@ const JOHTO_NPCS = [
     dialogue: ['We dance the tower\'s seasons. The eldest of us keeps something for the tower, too.'] },
   { map: 'mahogany', x: 20, y: 6, name: 'SHOPKEEPER PELL', art: 'clerk', dir: 'down', johto: 'hideout_stairs', hideoutWarp: 'rocket-hideout',
     dialogue: ['Souvenirs above. Storage below. Mind the stairs — they are steeper than they look, and they look steep.'] },
+  // ---- Stage J6: the Day-Care couple. The keeper already stands in
+  // the maps6 interior (stamped johto:'daycare' by JOHTO_NPC_PATCHES
+  // below); his wife joins him by this same append idiom. Both run
+  // the one Day-Care flow (overworld-systems openDaycare).
+  { map: 'daycare', x: 4, y: 7, name: 'DAY-CARE WOMAN', art: 'lady', skin: '#f0c8a0', shirt: '#7a9a4a', pants: '#4a3a2a', hair: '#8a8a8a', johto: 'daycare',
+    dialogue: ['Every guest gets a name, a nap schedule, and a song. No exceptions in forty years.'] },
 ];
 
 const JOHTO_NPC_PATCHES = [
@@ -114384,6 +114581,9 @@ const JOHTO_NPC_PATCHES = [
   { map: 'dragons-den', name: 'DEN ELDER', johto: 'den_elder' },
   { map: 'route-silver', name: 'VETERAN HALD', johto: 'silver_gate' },
   { map: 'silver-stadium', name: 'CONFERENCE OFFICIAL', johto: 'conference' },
+  // Stage J6: the Day-Care keeper (a maps6 roster NPC) joins the
+  // runJohtoNpc dispatch as the breeding/eggs host.
+  { map: 'daycare', name: 'DAY-CARE KEEPER', johto: 'daycare' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -115966,6 +116166,17 @@ function defaultState(inherit) {
       difficulty: 'classic',
     },
     currentBox: 'box1',
+    // Stage J6 arc systems (src/game/johto-systems.mjs): Day-Care
+    // guests (mon records, max 2), the waiting egg + its ready step,
+    // the PERSISTED walked-step counter, apricorn-tree rest times,
+    // and Kurt's one crafting order. All defaults-filled on load
+    // (schema.mjs) so legacy saves open unchanged in shape.
+    daycare: [],
+    daycareEgg: null,
+    daycareEggAt: null,
+    stepsTotal: 0,
+    gather: {},
+    kurtOrder: null,
     session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {
@@ -116974,6 +117185,437 @@ function arcFerryGateLine(arc) {
 }
 
 
+// ---- src/game/ball-rules.mjs ----
+// ball-rules.mjs — Stage J6: apricorn-ball catch rules, ONE shared
+// evaluation for both battle engines (battle.mjs classic + battle-rt.mjs
+// both call ballBonusFor / ballCatchRate — the fixedLevel lesson: the
+// catch calc must never be fixed in only one engine).
+//
+// A BALLS entry may carry a `rule`; the rule is evaluated against the
+// LIVE battle at throw time:
+//   ctx = { lead, foe, fished }
+//     lead   the player's active mon (level + species comparisons)
+//     foe    the wild foe mon
+//     fished true when the battle began by fishing (BattleScene.fished,
+//            set by startFishing in BOTH engines' start path — one
+//            constructor, one marker)
+// The returned multiplier scales the foe's effective catch rate inside
+// the Gen-1 two-roll (gen1Catch), exactly where the shipped balls get
+// their ranges — a rule that misses its condition returns exactly 1.
+//
+// Recorded adaptations (register, Stage J6):
+//  - love: canon also requires the opposite gender; the engine has no
+//    gender system, so the clause is dropped — same species only.
+//  - fast: canon keys on the foe's flee rate, which this engine does
+//    not model; the proxy is the foe species' BASE SPEED >= 100.
+//  - heavy: canon keys on the foe's weight in kg, which the species
+//    data does not carry; the game's own bulk measure — the battler
+//    tier (src/data/battler-tiers.mjs) — stands in: S x1, M x1.5,
+//    L x2.5, XL x4.
+//  - friend: no rate bonus at all (x1 always). Its effect lands on a
+//    successful catch: the caught mon's friendship is set high
+//    (FRIEND_BALL_FRIENDSHIP), applied in the shared catchSuccess.
+
+
+// Full species table (the bundle's merge.mjs folds these into SPECIES
+// at runtime; building the union here keeps this module correct when
+// imported standalone, e.g. by the suites).
+const BALL_SPECIES_ALL = Object.assign({}, SPECIES, SPECIES2, SPECIES_JOHTO);
+
+const FRIEND_BALL_FRIENDSHIP = 200;
+const HEAVY_TIER_BONUS = { S: 1, M: 1.5, L: 2.5, XL: 4 };
+
+// Does this species evolve by Moon Stone (its own evo / evos entries)?
+function evolvesByMoonStone(speciesId) {
+  const sp = BALL_SPECIES_ALL[speciesId];
+  if (!sp) return false;
+  const evos = sp.evos || (sp.evo ? [sp.evo] : []);
+  return evos.some((e) => e && e.method === 'stone' && e.stone === 'moonstone');
+}
+
+function ballBonusFor(ballId, ctx) {
+  const ball = BALLS[ballId];
+  if (!ball || !ball.rule) return 1;
+  const lead = ctx && ctx.lead, foe = ctx && ctx.foe;
+  if (!foe) return 1;
+  switch (ball.rule) {
+    case 'level': {
+      if (!lead || !(foe.level > 0)) return 1;
+      const ratio = lead.level / foe.level;
+      if (ratio >= 4) return 8;
+      if (ratio > 2) return 4;
+      if (ratio > 1) return 2;
+      return 1;
+    }
+    case 'lure': return ctx && ctx.fished ? 3 : 1;
+    case 'moon': return evolvesByMoonStone(foe.speciesId) ? 4 : 1;
+    case 'love': return lead && lead.speciesId === foe.speciesId ? 8 : 1;
+    case 'fast': {
+      const sp = BALL_SPECIES_ALL[foe.speciesId];
+      return sp && sp.base && sp.base.spe >= 100 ? 4 : 1;
+    }
+    case 'friend': return 1; // the effect is post-catch (see header)
+    case 'heavy': {
+      const tier = BATTLER_TIERS[foe.speciesId];
+      return HEAVY_TIER_BONUS[tier] !== undefined ? HEAVY_TIER_BONUS[tier] : 1;
+    }
+    default: return 1;
+  }
+}
+
+// The effective catch rate a throw of ballId works against: the base
+// rate (already safari/story adjusted by the calling engine) scaled by
+// the rule bonus, clamped to the Gen-1 byte range the two-roll expects.
+function ballCatchRate(baseRate, ballId, ctx) {
+  const bonus = ballBonusFor(ballId, ctx);
+  return Math.max(3, Math.min(255, Math.round(baseRate * bonus)));
+}
+
+
+// ---- src/game/johto-systems.mjs ----
+// johto-systems.mjs — Stage J6 arc systems: breeding/eggs at the
+// Route 34 Day-Care, apricorn trees, and Kurt's ball crafting. PURE
+// logic over the save-shaped state (the overworld layer wires menus
+// and dialogue onto these functions; the suites prove them here).
+//
+// Persisted state (Stage J6 fields — every one has a matched pair in
+// src/save/schema.mjs (client) and api/_lib/validator.mjs (server),
+// and save-contract cases in tools/api-scripts/save-contract.test.mjs):
+//   state.daycare      [] of mon records (max 2) — deposited guests.
+//   state.daycareEgg   null | { speciesId, eggSteps } — an egg ready
+//                      and waiting at the Day-Care (one at a time).
+//   state.daycareEggAt null | step total at which the waiting egg
+//                      becomes ready (set when a compatible pair is
+//                      deposited; the egg materializes on that step).
+//   state.stepsTotal   integer, the PERSISTED walked-step counter
+//                      (the shipped game counted steps only per
+//                      session — Safari/poison — so J6 adds this).
+//   state.gather       {} treeId -> stepsTotal at which the tree is
+//                      pickable again (apricorn tree rest).
+//   state.kurtOrder    null | { ball, readyAt } — Kurt's one order.
+// Mon-record additions (same matched pair): mon.egg (boolean) and
+// mon.eggSteps (integer steps remaining) on party/box/daycare mons.
+//
+// Calibrations (recorded, Stage J6 register):
+//   EGG_STEP_UNIT = 25 steps per PokeAPI hatchCounter unit — a
+//     typical hatchCounter-20 egg hatches in 500 steps, a baby-pool
+//     egg (counter 10) in 250: a walk, not a marathon.
+//   EGG_PRODUCTION_STEPS = 200 walked steps with a compatible pair
+//     deposited before their egg is ready.
+//   APRICORN_REGROW_STEPS = 200 steps of rest per picked tree.
+//   KURT_CRAFT_STEPS = 250 steps per crafted ball (the mission's
+//     number; readiness is computed from stepsTotal, honestly).
+
+
+// Full tables (the bundle's merge.mjs folds these into the base
+// tables at runtime; building the unions here keeps this module
+// correct when imported standalone, e.g. by the suites).
+const SPECIES_ALL = Object.assign({}, SPECIES, SPECIES2, SPECIES_JOHTO);
+const MOVES_ALL = Object.assign({}, MOVES, MOVES2);
+
+const EGG_STEP_UNIT = 25;
+const EGG_PRODUCTION_STEPS = 200;
+const APRICORN_REGROW_STEPS = 200;
+const KURT_CRAFT_STEPS = 250;
+const DAYCARE_CAP = 2;
+const STORY_EGG_POOL = ['pichu', 'cleffa', 'igglybuff', 'togepi', 'magby', 'elekid', 'smoochum', 'tyrogue'];
+const APRICORN_IDS = ['redapricorn', 'blueapricorn', 'yellowapricorn', 'greenapricorn', 'pinkapricorn', 'whiteapricorn', 'blackapricorn'];
+const APRICORN_TO_BALL = {
+  redapricorn: 'levelball', blueapricorn: 'lureball', yellowapricorn: 'moonball',
+  greenapricorn: 'friendball', pinkapricorn: 'loveball', whiteapricorn: 'fastball',
+  blackapricorn: 'heavyball',
+};
+
+// ---------- APRICORN_TREES ----------
+// Every `apricorn` prop tile across maps6 (the J3a tile kind), scanned
+// from the shipped map rows (register, Stage J6): Azalea's grove, the
+// Route 33 + Route 37 roadside trees, and Kurt's own two house trees.
+// Colours cycle red/blue/yellow/green/pink/white/black over the sorted
+// table so every colour grows in both halves of Johto.
+const APRICORN_TILE_SPOTS = [
+  ['azalea', 19, 1], ['azalea', 20, 1], ['azalea', 25, 3], ['azalea', 2, 4], ['azalea', 4, 6],
+  ['azalea', 20, 7], ['azalea', 2, 10], ['azalea', 17, 10], ['azalea', 13, 15], ['azalea', 22, 16],
+  ['kurt-house', 9, 1], ['kurt-house', 11, 2],
+  ['r33', 15, 2], ['r33', 19, 2], ['r33', 22, 2], ['r33', 13, 6], ['r33', 3, 13], ['r33', 22, 14],
+  ['r37', 18, 5], ['r37', 20, 12],
+];
+const APRICORN_TREES = APRICORN_TILE_SPOTS.map(([map, x, y], i) => ({
+  id: map + ':' + x + ',' + y, map, x, y, item: APRICORN_IDS[i % APRICORN_IDS.length],
+}));
+function apricornTreeAt(map, x, y) {
+  return APRICORN_TREES.find((t) => t.map === map && t.x === x && t.y === y) || null;
+}
+
+// ---------- state shape ----------
+function ensureJohtoSystems(state) {
+  if (!Array.isArray(state.daycare)) state.daycare = [];
+  if (state.daycareEgg !== null && !(state.daycareEgg && typeof state.daycareEgg === 'object')) state.daycareEgg = null;
+  if (state.daycareEggAt !== null && !(Number.isInteger(state.daycareEggAt) && state.daycareEggAt >= 0)) state.daycareEggAt = null;
+  if (!Number.isInteger(state.stepsTotal) || state.stepsTotal < 0) state.stepsTotal = 0;
+  if (!state.gather || typeof state.gather !== 'object' || Array.isArray(state.gather)) state.gather = {};
+  if (state.kurtOrder !== null && !(state.kurtOrder && typeof state.kurtOrder === 'object')) state.kurtOrder = null;
+  return state;
+}
+
+// ---------- breeding rules ----------
+// The engine has NO gender system: compatibility is egg-GROUP only
+// (recorded simplification). A species never produces when it is a
+// baby, carries the no-eggs group (which is also where every
+// legendary/mythical in dex 1-251 sits in the PokeAPI facts — data-
+// proven at J6), is a form, or has no egg data at all.
+function speciesBreedable(speciesId) {
+  const sp = SPECIES_ALL[speciesId];
+  if (!sp || sp.form || sp.baby) return false;
+  const groups = sp.eggGroups;
+  if (!Array.isArray(groups) || !groups.length) return false;
+  if (groups.includes('no-eggs')) return false;
+  return true;
+}
+function isDittoMon(mon) {
+  const sp = mon && SPECIES_ALL[mon.speciesId];
+  return !!(sp && Array.isArray(sp.eggGroups) && sp.eggGroups.includes('ditto'));
+}
+function pairCompatible(a, b) {
+  if (!a || !b || a.egg || b.egg) return false;
+  if (!speciesBreedable(a.speciesId) || !speciesBreedable(b.speciesId)) {
+    // Ditto exception: a Ditto pairs with any breedable partner.
+    if (isDittoMon(a) && speciesBreedable(b.speciesId)) return true;
+    if (isDittoMon(b) && speciesBreedable(a.speciesId)) return true;
+    return false;
+  }
+  if (isDittoMon(a) || isDittoMon(b)) return true;
+  const ga = SPECIES_ALL[a.speciesId].eggGroups, gb = SPECIES_ALL[b.speciesId].eggGroups;
+  return ga.some((g) => gb.includes(g));
+}
+// The base stage of a species' line, walking the evo graph backwards
+// (branch-aware: any predecessor counts; the first found by dex order
+// is taken — lines in this data are linear up to the base).
+function baseStageOf(speciesId) {
+  let cur = speciesId, guard = 0;
+  while (guard++ < 12) {
+    let prev = null;
+    for (const sp of Object.values(SPECIES_ALL)) {
+      if (sp.form) continue;
+      const evos = sp.evos || (sp.evo ? [sp.evo] : []);
+      if (evos.some((e) => e && e.to === cur)) { if (!prev || sp.dexNo < SPECIES_ALL[prev].dexNo) prev = sp.id; }
+    }
+    if (!prev) return cur;
+    cur = prev;
+  }
+  return cur;
+}
+// Offspring rule (recorded simplification): the non-Ditto parent when
+// one parent is Ditto, else the FIRST-deposited parent; the offspring
+// is that parent's line's base stage.
+function offspringOf(daycare) {
+  if (!Array.isArray(daycare) || daycare.length < 2) return null;
+  const [a, b] = daycare;
+  const parent = isDittoMon(a) && !isDittoMon(b) ? b : (isDittoMon(b) && !isDittoMon(a) ? a : a);
+  return baseStageOf(parent.speciesId);
+}
+function eggStepsFor(speciesId) {
+  const sp = SPECIES_ALL[speciesId];
+  const counter = sp && Number.isInteger(sp.hatchCounter) ? sp.hatchCounter : 20;
+  return counter * EGG_STEP_UNIT;
+}
+function makeEggMon(speciesId) {
+  const mon = makeMon(speciesId, 1, SPECIES_ALL, MOVES_ALL);
+  mon.egg = true;
+  mon.eggSteps = eggStepsFor(speciesId);
+  return mon;
+}
+
+// ---------- delivery (the cap-safe gift idiom) ----------
+// Party if it has room, else the first PC box with room; all-full
+// refusal mutates NOTHING (space is verified before any write).
+function deliverMonCapSafe(state, mon) {
+  if (state.party.length < 6) { state.party.push(mon); return { ok: true, dest: 'party' }; }
+  for (let i = 1; i <= 12; i++) {
+    const id = 'box' + i;
+    const arr = state.boxes[id];
+    if (!arr || arr.length < 30) {
+      (state.boxes[id] || (state.boxes[id] = [])).push(mon);
+      return { ok: true, dest: 'box', boxId: id };
+    }
+  }
+  return { ok: false, reason: 'all-full' };
+}
+function deliverEggCapSafe(state, speciesId) {
+  // Build nothing until room is proven (an egg mon is cheap, but the
+  // refusal contract is byte-identical state, dex included).
+  const hasRoom = state.party.length < 6
+    || Array.from({ length: 12 }, (_, i) => state.boxes['box' + (i + 1)]).some((a) => !a || a.length < 30);
+  if (!hasRoom) return { ok: false, reason: 'all-full' };
+  const mon = makeEggMon(speciesId);
+  const res = deliverMonCapSafe(state, mon);
+  return { ...res, mon };
+}
+
+// ---------- Day-Care deposit / withdraw ----------
+// The all-egg guard (the engine's "can't deposit your last mon"
+// precedent, sharpened): a move that would leave the party holding
+// ONLY eggs (or nothing) is refused — a party of eggs can neither
+// battle nor hatch its way out.
+function partyHasNonEgg(state) {
+  return state.party.some((m) => m && !m.egg);
+}
+function depositToDaycare(state, partyIdx) {
+  ensureJohtoSystems(state);
+  const mon = state.party[partyIdx];
+  if (!mon) return { ok: false, reason: 'no-mon' };
+  if (state.daycare.length >= DAYCARE_CAP) return { ok: false, reason: 'daycare-full' };
+  if (mon.egg) return { ok: false, reason: 'is-egg' };
+  const chk = boxCheck(mon);
+  if (!chk.ok) return { ok: false, reason: 'partner', line: chk.line };
+  const remaining = state.party.filter((_, i) => i !== partyIdx);
+  if (!remaining.some((m) => m && !m.egg)) return { ok: false, reason: 'last-non-egg' };
+  state.party.splice(partyIdx, 1);
+  mon.status = null;
+  state.daycare.push(mon);
+  rescheduleEgg(state);
+  return { ok: true, mon };
+}
+function withdrawFromDaycare(state, daycareIdx) {
+  ensureJohtoSystems(state);
+  const mon = state.daycare[daycareIdx];
+  if (!mon) return { ok: false, reason: 'no-mon' };
+  if (state.party.length >= 6) return { ok: false, reason: 'party-full' };
+  state.daycare.splice(daycareIdx, 1);
+  state.party.push(mon);
+  rescheduleEgg(state);
+  return { ok: true, mon };
+}
+// (Re)arm the production schedule after any deposit/withdraw: a
+// compatible pair with no egg waiting and none scheduled starts the
+// 200-step clock; anything else clears a pending schedule (a waiting
+// egg, once ready, is never taken away).
+function rescheduleEgg(state) {
+  ensureJohtoSystems(state);
+  if (state.daycareEgg) { state.daycareEggAt = null; return; }
+  if (state.daycare.length === 2 && pairCompatible(state.daycare[0], state.daycare[1])) {
+    if (state.daycareEggAt === null) state.daycareEggAt = state.stepsTotal + EGG_PRODUCTION_STEPS;
+  } else state.daycareEggAt = null;
+}
+// Collect the waiting egg (cap-safe; a refusal leaves it waiting).
+function collectDaycareEgg(state) {
+  ensureJohtoSystems(state);
+  if (!state.daycareEgg) return { ok: false, reason: 'no-egg' };
+  const res = deliverEggCapSafe(state, state.daycareEgg.speciesId);
+  if (!res.ok) return res;
+  state.daycareEgg = null;
+  rescheduleEgg(state); // the pair may produce again
+  return res;
+}
+// The story egg (one-time; the caller's flag owns the once-ness):
+// a random baby species from the fixed pool, cap-safe delivered.
+function giveStoryEgg(state, rng) {
+  const pick = STORY_EGG_POOL[Math.floor((rng ? rng() : Math.random()) * STORY_EGG_POOL.length) % STORY_EGG_POOL.length];
+  return { ...deliverEggCapSafe(state, pick), speciesId: pick };
+}
+
+// ---------- per-step tick ----------
+// Called once per walked step by the overworld (sysOnStep). Returns
+// the events that fired so the caller can stage their scenes:
+//   { hatched: [mon...], eggReady: bool }
+function johtoStepTick(state) {
+  ensureJohtoSystems(state);
+  state.stepsTotal++;
+  const out = { hatched: [], eggReady: false };
+  // Egg production materializes on its scheduled step.
+  if (state.daycareEggAt !== null && !state.daycareEgg && state.stepsTotal >= state.daycareEggAt) {
+    const sp = state.daycare.length === 2 ? offspringOf(state.daycare) : null;
+    if (sp) {
+      state.daycareEgg = { speciesId: sp, eggSteps: eggStepsFor(sp) };
+      state.daycareEggAt = null;
+      out.eggReady = true;
+    } else state.daycareEggAt = null;
+  }
+  // Party eggs count down; at zero the egg hatches at the CURRENT
+  // arc's band floor (registry read: band.min; open-level arcs fall
+  // back to 1).
+  for (const mon of state.party) {
+    if (!mon || !mon.egg) continue;
+    mon.eggSteps = Math.max(0, (mon.eggSteps || 0) - 1);
+    if (mon.eggSteps > 0) continue;
+    hatchMon(state, mon);
+    out.hatched.push(mon);
+  }
+  return out;
+}
+function hatchMon(state, mon) {
+  const arc = currentArcOf(state);
+  const floor = arc && arc.band ? arc.band.min : 1;
+  const fresh = makeMon(mon.speciesId, floor, SPECIES_ALL, MOVES_ALL);
+  mon.level = fresh.level; mon.xp = fresh.xp; mon.moves = fresh.moves;
+  mon.maxHp = fresh.maxHp; mon.hp = fresh.maxHp; mon.stats = fresh.stats;
+  mon.status = null;
+  delete mon.egg; delete mon.eggSteps;
+  dexRegister(state.dex, 'caught', SPECIES_ALL[mon.speciesId].dexNo);
+  return mon;
+}
+
+// ---------- Link Transfer widening (Part D) ----------
+// The candidate scan reads the single `evo` AND every `evos` branch
+// entry with method 'trade' — poliwhirl->politoed and slowpoke->
+// slowking keep their primary branches in `evo`, so a scan of `evo`
+// alone could never see their trade branches.
+function tradeEvolutionsOf(speciesId) {
+  const sp = SPECIES_ALL[speciesId];
+  if (!sp) return [];
+  const all = [...(sp.evo ? [sp.evo] : []), ...(Array.isArray(sp.evos) ? sp.evos : [])];
+  const out = [];
+  for (const e of all) {
+    if (e && e.method === 'trade' && !out.some((o) => o.to === e.to)) out.push(e);
+  }
+  return out;
+}
+
+// ---------- apricorn trees ----------
+function treeReadyAt(state, tree) {
+  ensureJohtoSystems(state);
+  const v = state.gather[tree.id];
+  return Number.isInteger(v) ? v : 0;
+}
+function pickApricorn(state, tree) {
+  ensureJohtoSystems(state);
+  const readyAt = treeReadyAt(state, tree);
+  if (state.stepsTotal < readyAt) return { ok: false, reason: 'resting', remaining: readyAt - state.stepsTotal };
+  state.bag[tree.item] = (state.bag[tree.item] || 0) + 1;
+  state.gather[tree.id] = state.stepsTotal + APRICORN_REGROW_STEPS;
+  return { ok: true, item: tree.item };
+}
+
+// ---------- Kurt's crafting ----------
+function kurtOrderStatus(state) {
+  ensureJohtoSystems(state);
+  const o = state.kurtOrder;
+  if (!o) return { busy: false, ready: false, remaining: 0 };
+  const remaining = Math.max(0, o.readyAt - state.stepsTotal);
+  return { busy: true, ready: remaining <= 0, remaining, ball: o.ball };
+}
+function kurtPlaceOrder(state, apricornId) {
+  ensureJohtoSystems(state);
+  const ball = APRICORN_TO_BALL[apricornId];
+  if (!ball || !ITEMS[apricornId]) return { ok: false, reason: 'not-apricorn' };
+  if (state.kurtOrder) return { ok: false, reason: 'busy' };
+  if ((state.bag[apricornId] || 0) <= 0) return { ok: false, reason: 'none-owned' };
+  state.bag[apricornId]--;
+  if (state.bag[apricornId] <= 0) delete state.bag[apricornId];
+  state.kurtOrder = { ball, readyAt: state.stepsTotal + KURT_CRAFT_STEPS };
+  return { ok: true, ball, readyAt: state.kurtOrder.readyAt };
+}
+function kurtCollect(state) {
+  ensureJohtoSystems(state);
+  const st = kurtOrderStatus(state);
+  if (!st.busy) return { ok: false, reason: 'no-order' };
+  if (!st.ready) return { ok: false, reason: 'not-ready', remaining: st.remaining };
+  const ball = state.kurtOrder.ball;
+  state.bag[ball] = (state.bag[ball] || 0) + 1;
+  state.kurtOrder = null;
+  return { ok: true, ball };
+}
+
+
 // ---- src/save/schema.mjs ----
 // schema.mjs — save schema validation + migration (current: v2).
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
@@ -116985,7 +117627,10 @@ const SAVE_KEY = 'pdr.save.guest';
 
 // Whitelisted top-level keys. Unknown keys => reject (architecture §3.4).
 const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
-  'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session'];
+  'pikachu', 'settings', 'facilities', 'bag', 'meta', 'currentBox', 'session',
+  // Stage J6: the arc-systems fields (johto-systems.mjs) — the server
+  // validator's TOP_KEYS carries the same six, the matched pair.
+  'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder'];
 
 function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
 
@@ -117018,6 +117663,49 @@ function validateSave(data) {
     // validator's set from it), so client and cloud can never drift.
     if (m.keepsake !== undefined && m.keepsake !== null
       && (typeof m.keepsake !== 'string' || !KEEPSAKES[m.keepsake])) { errors.push('bad-mon-keepsake'); break; }
+    // Stage J6: egg fields — egg is a boolean, eggSteps a bounded
+    // non-negative integer (the server validator enforces the same).
+    if (m.egg !== undefined && typeof m.egg !== 'boolean') { errors.push('bad-mon-egg'); break; }
+    if (m.eggSteps !== undefined && (!Number.isInteger(m.eggSteps) || m.eggSteps < 0 || m.eggSteps > 100000)) { errors.push('bad-mon-egg-steps'); break; }
+  }
+  // Stage J6: Day-Care guests — at most 2 mon records, validated with
+  // the same level/XP/move/egg rules as the party (the server runs
+  // its full checkMon over them).
+  if (data.daycare !== undefined) {
+    if (!Array.isArray(data.daycare) || data.daycare.length > 2) errors.push('bad-daycare');
+    else for (const m of data.daycare) {
+      if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number') { errors.push('bad-daycare-mon'); break; }
+      if (m.level < 1 || m.level > levelCap) { errors.push('bad-daycare-mon-level'); break; }
+      if (m.xp !== undefined && (typeof m.xp !== 'number' || !Number.isFinite(m.xp) || m.xp < 0 || m.xp > xpCeiling)) { errors.push('bad-daycare-xp'); break; }
+      if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-daycare-mon-moves'); break; }
+      if (m.egg !== undefined && typeof m.egg !== 'boolean') { errors.push('bad-daycare-mon-egg'); break; }
+      if (m.eggSteps !== undefined && (!Number.isInteger(m.eggSteps) || m.eggSteps < 0 || m.eggSteps > 100000)) { errors.push('bad-daycare-mon-egg-steps'); break; }
+    }
+  }
+  if (data.daycareEgg !== undefined && data.daycareEgg !== null) {
+    const e = data.daycareEgg;
+    if (!isObj(e) || typeof e.speciesId !== 'string'
+      || !Number.isInteger(e.eggSteps) || e.eggSteps < 0 || e.eggSteps > 100000) errors.push('bad-daycare-egg');
+  }
+  if (data.daycareEggAt !== undefined && data.daycareEggAt !== null
+    && (!Number.isInteger(data.daycareEggAt) || data.daycareEggAt < 0 || data.daycareEggAt > 100000000)) errors.push('bad-daycare-egg-at');
+  if (data.stepsTotal !== undefined
+    && (!Number.isInteger(data.stepsTotal) || data.stepsTotal < 0 || data.stepsTotal > 100000000)) errors.push('bad-steps-total');
+  if (data.gather !== undefined) {
+    if (!isObj(data.gather)) errors.push('bad-gather');
+    else {
+      const keys = Object.keys(data.gather);
+      if (keys.length > 64) errors.push('bad-gather-size');
+      else for (const k of keys) {
+        const v = data.gather[k];
+        if (!/^[a-z0-9-]+:-?\d+,-?\d+$/.test(k) || !Number.isInteger(v) || v < 0 || v > 100000000) { errors.push('bad-gather-entry'); break; }
+      }
+    }
+  }
+  if (data.kurtOrder !== undefined && data.kurtOrder !== null) {
+    const o = data.kurtOrder;
+    if (!isObj(o) || typeof o.ball !== 'string' || !BALLS[o.ball]
+      || !Number.isInteger(o.readyAt) || o.readyAt < 0 || o.readyAt > 100000000) errors.push('bad-kurt-order');
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -117146,6 +117834,29 @@ function fillV2Defaults(data) {
   if (isObj(data.boxes)) for (const arr of Object.values(data.boxes)) {
     if (Array.isArray(arr)) for (const m of arr) fillMon(m);
   }
+  // Stage J6: arc-systems fields defaults-fill / rebuild into their
+  // closed shapes (a legacy save opens with an empty Day-Care, a zero
+  // step counter, no tree rests and no Kurt order; validateSave stays
+  // strict for saves that carry malformed values of their own).
+  if (!Array.isArray(data.daycare)) data.daycare = [];
+  data.daycare = data.daycare.slice(0, 2);
+  for (const m of data.daycare) fillMon(m);
+  if (!isObj(data.daycareEgg) || typeof data.daycareEgg.speciesId !== 'string'
+    || !Number.isInteger(data.daycareEgg.eggSteps)) data.daycareEgg = null;
+  if (data.daycareEgg) data.daycareEgg = { speciesId: data.daycareEgg.speciesId, eggSteps: Math.max(0, Math.min(100000, data.daycareEgg.eggSteps)) };
+  if (!Number.isInteger(data.daycareEggAt) || data.daycareEggAt < 0) data.daycareEggAt = null;
+  if (!Number.isInteger(data.stepsTotal) || data.stepsTotal < 0) data.stepsTotal = 0;
+  const gather = {};
+  if (isObj(data.gather)) {
+    for (const k of Object.keys(data.gather)) {
+      const v = data.gather[k];
+      if (/^[a-z0-9-]+:-?\d+,-?\d+$/.test(k) && Number.isInteger(v) && v >= 0) gather[k] = v;
+    }
+  }
+  data.gather = gather;
+  if (!isObj(data.kurtOrder) || typeof data.kurtOrder.ball !== 'string' || !BALLS[data.kurtOrder.ball]
+    || !Number.isInteger(data.kurtOrder.readyAt) || data.kurtOrder.readyAt < 0) data.kurtOrder = null;
+  if (data.kurtOrder) data.kurtOrder = { ball: data.kurtOrder.ball, readyAt: data.kurtOrder.readyAt };
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
       data.story.difficulty = DIFFICULTY_V1_TO_V2[data.story.difficulty] || 'classic';
@@ -121616,6 +122327,11 @@ class BattleScene {
     this.tutorial = !!opts.tutorial; // GD: scripted first-catch gate — certainty, not luck
     this.returnTo = opts.returnTo;
     this.arena = opts.arena || null; // UI v2.3: explicit backdrop variant (fishing = 'water'); else derived in arenaKind()
+    // Stage J6: the fishing marker — set ONCE by startFishing (the
+    // rod's battle start, shared by BOTH engines since BattleScene is
+    // the one class) and read by the Lure Ball rule at throw time.
+    this.fished = !!opts.fished;
+    this._lastBallId = null; // Stage J6: the Friend Ball's post-catch effect reads it in catchSuccess
     this.groundPin = opts.ground || opts.groundId || null; // ADR-025 §1: scripted events may pin a Ground id explicitly
     this.field = null;      // ADR-025 §1: battle.field — resolved ONCE in enter() from the battle's map
     this.fieldBanner = null; // the Ground announcement line (null on Open Ground)
@@ -121809,8 +122525,12 @@ class BattleScene {
   }
 
   firstAble(g) {
-    for (const m of g.state.party) if (m.hp > 0) return m;
-    return g.state.party[0];
+    // Stage J6: an Egg can never be the battle lead — the first able
+    // NON-EGG mon leads; the all-egg fallback keeps the historical
+    // party[0] shape (an all-egg party is unreachable: the deposit
+    // guards refuse to create one).
+    for (const m of g.state.party) if (m.hp > 0 && !m.egg) return m;
+    return g.state.party.find((m) => !m.egg) || g.state.party[0];
   }
 
   say(text, cb) {
@@ -122100,7 +122820,7 @@ class BattleScene {
     const items = g.state.party.map((m, i) => {
       const sp = SPECIES[m.speciesId];
       const tag = m === this.ally ? ' (active)' : '';
-      return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally };
+      return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally || !!m.egg }; // J6: eggs can't be sent out
     });
     // AUDIT FIX (S-12, blocker): a forced faint switch has NO way out in
     // Platinum — offering Back (or honouring B/Esc) consumed the menu and
@@ -123286,6 +124006,7 @@ class BattleScene {
       return;
     }
     g.state.bag[ballId]--;
+    this._lastBallId = ballId;
     const ball = BALLS[ballId];
     this.state = 'catchseq';
     this.catchState = { ball, ballId, phase: 'throw', t: 0, shakes: 0, need: 0, a: 0 };
@@ -123299,6 +124020,10 @@ class BattleScene {
     if (this.safari) rate = Math.max(3, Math.min(255, Math.round(rate * (this.safariRock ? 2 : this.safariBait ? 0.5 : 1))));
     // ADR-025 §4: Story's ball bonus (x1.1) scales the effective rate.
     rate = Math.max(3, Math.min(255, Math.round(rate * catchRateMultFor(g.state))));
+    // Stage J6: an apricorn ball's rule scales the rate against the
+    // LIVE battle (shared ball-rules.mjs — the RT engine calls the
+    // same helper, so the two catch calcs can never drift).
+    rate = ballCatchRate(rate, ballId, { lead: this.ally, foe, fished: this.fished });
     const res = gen1Catch(foe.maxHp, foe.hp, rate, ballId, foe.status, g.rng.battle);
     this.catchState.willCatch = res.caught;
     this.catchState.need = res.caught ? 3 : res.shakes;
@@ -123347,6 +124072,10 @@ class BattleScene {
     this.catchFx = { t: 0 }; // P1/E10: success starburst radiates from the ball
     const foe = this.foe;
     const name = displayName(foe, SPECIES);
+    // Stage J6: the Friend Ball's whole effect — a mon caught in one
+    // starts out trusting its trainer (friendship set high). Shared
+    // by both engines: RT catches land here too.
+    if (this._lastBallId === 'friendball') foe.friendship = FRIEND_BALL_FRIENDSHIP;
     dexRegister(g.state.dex, 'caught', SPECIES[foe.speciesId].dexNo);
     let dest = 'party';
     if (g.state.party.length >= 6) {
@@ -125265,9 +125994,12 @@ Object.assign(BattleScene.prototype, {
   rtBagMenu() {
     const g = this.game;
     const items = [];
-    for (const bid of ['pokeball', 'greatball', 'ultraball', 'masterball']) {
+    // Stage J6: the RT bag reads the BALLS table like the classic bag
+    // (the apricorn balls were unreachable in RT under the old
+    // hard-coded four-ball list).
+    for (const bid of Object.keys(BALLS)) {
       const n = g.state.bag[bid] || 0;
-      items.push({ label: (bid === 'pokeball' ? 'Poke Ball' : bid === 'greatball' ? 'Great Ball' : bid === 'ultraball' ? 'Ultra Ball' : 'Master Ball') + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
+      items.push({ label: BALLS[bid].name + ' x' + n, value: bid, disabled: n <= 0 || this.kind !== 'wild', pocket: 'balls' });
     }
     const meds = this.battleMedicineIds();
     for (const mid of meds) {
@@ -125325,6 +126057,7 @@ Object.assign(BattleScene.prototype, {
     if (this.uncatchable) { this.rtFloat(this.friendly ? 'The Coach bats the ball away!' : 'It cannot be caught!'); return; }
     if ((g.state.bag[ballId] || 0) <= 0) return;
     g.state.bag[ballId]--;
+    this._lastBallId = ballId; // Stage J6: shared catchSuccess reads it (Friend Ball)
     const rt = this.rt;
     rt.ballFlight = { x: rt.ax, y: rt.ay, t: 0, dur: 330, ballId, fromX: rt.ax, fromY: rt.ay };
     g.audio.playSfx('catch-throw');
@@ -125348,7 +126081,11 @@ Object.assign(BattleScene.prototype, {
       }
       const foe = this.foe;
       // ADR-025 §4: Story's ball bonus (x1.1) scales the effective rate.
-      const rate = Math.max(3, Math.min(255, Math.round(SPECIES[foe.speciesId].catchRate * catchRateMultFor(g.state))));
+      let rate = Math.max(3, Math.min(255, Math.round(SPECIES[foe.speciesId].catchRate * catchRateMultFor(g.state))));
+      // Stage J6: the SAME apricorn-rule scaling the classic engine
+      // applies (shared ball-rules.mjs) — level/heavy spot-proven in
+      // tests/johto-systems-checks.mjs, all seven proven for classic.
+      rate = ballCatchRate(rate, b.ballId, { lead: this.ally, foe, fished: this.fished });
       const res = gen1Catch(foe.maxHp, foe.hp, rate, b.ballId, foe.status, g.rng.battle);
       rt.catchSeq = { t: 0, shakes: 0, need: res.caught ? 3 : res.shakes, willCatch: res.caught, ballId: b.ballId };
       g.audio.playSfx('catch-rattle');
@@ -127018,6 +127755,20 @@ Object.assign(OverworldScene.prototype, {
       const hurt = g.state.party.find((m) => (m.status === 'poison' || m.status === 'badlyPoisoned') && m.hp > 0);
       if (hurt) g.ui.toast(displayName(hurt, SPECIES) + ' is hurt by poison...');
     }
+    // Stage J6: the persisted step systems — the walked-step counter,
+    // Day-Care egg production, and party-egg countdowns/hatching. A
+    // hatch scene claims the step (no encounter rides over it).
+    const j6tick = johtoStepTick(g.state);
+    if (j6tick.hatched.length) {
+      const lines = [];
+      for (const m of j6tick.hatched) {
+        lines.push('Oh? The Egg is hatching!');
+        lines.push(displayName(m, SPECIES) + ' hatched from the Egg!');
+      }
+      g.audio.playSfx('dex-register');
+      g.ui.say(lines);
+      return true;
+    }
     // Water + cave encounters (grass handled by the base onStep).
     if (this.sysEncounterStep(x, y, t)) return true;
     // Story event tiles.
@@ -127357,6 +128108,28 @@ Object.assign(OverworldScene.prototype, {
     // Stage J5: the Ilex Forest shrine (the JSHRINE prop at (14,3))
     // is Celebi's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
+    // Stage J6: apricorn trees (the J3a `apricorn` prop kind). Facing
+    // a tree picks its apricorn when it has rested enough walked
+    // steps; the rest is counted on the persisted step counter and
+    // reported honestly.
+    {
+      const facedKind = TILE_CHARS[this.tileAt(fx, fy)];
+      if (facedKind === 'apricorn') {
+        const tree = apricornTreeAt(this.mapId, fx, fy);
+        if (tree) {
+          const res = pickApricorn(g.state, tree);
+          if (res.ok) {
+            g.audio.playSfx('dex-register');
+            g.ui.say(['Picked the ' + ITEMS[tree.item].name + '!', 'The tree settles back to growing. It will fruit again after a good walk.']);
+          } else {
+            g.ui.say(['The apricorn tree is resting. Its next fruit ripens in about ' + res.remaining + ' steps of walking.']);
+          }
+          return true;
+        }
+        g.ui.say(['An apricorn tree, bare of ripe fruit.']);
+        return true;
+      }
+    }
     const t = this.tileAt(fx, fy);
     // Item balls.
     if (this.map.items) {
@@ -127491,7 +128264,10 @@ Object.assign(OverworldScene.prototype, {
     g.ui.say(['Oh! A bite!'], () => {
       g.audio.stopMusic();
       g.audio.encounter();
-      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g), arena: 'water' }));
+      // Stage J6: fished:true is the Lure Ball's marker — the rod's
+      // battle start for BOTH engines (one BattleScene class; the RT
+      // throw path reads this.fished exactly as the classic one does).
+      g.scenes.push(new BattleScene({ kind: 'wild', foe, returnTo: this, rt: rtOf(g), arena: 'water', fished: true }));
     });
   },
 
@@ -128016,6 +128792,8 @@ Object.assign(OverworldScene.prototype, {
         'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (JOHTO_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
     };
 
+    if (kind === 'daycare') { this.openDaycare(npc); return true; }
+
     if (kind === 'elm') {
       if (!flags.johto_arrival && !flags.ev_johto_arrival_done) { this.runEvent('ev_johto_arrival'); return true; }
       if (flags.silver_r30_done && !flags.silver_reported) {
@@ -128046,6 +128824,45 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'kurt') {
+      // Stage J6: apricorn crafting rides AHEAD of Kurt's story chain
+      // (a pending order reports/collects first; a carried apricorn
+      // offers the craft menu, whose "Just talk" re-enters this
+      // handler with a one-shot session pass so the GS Ball chain
+      // below runs byte-identically).
+      st.session = st.session || { learnQueue: [] };
+      const kStatus = kurtOrderStatus(st);
+      if (kStatus.busy) {
+        if (kStatus.ready) {
+          say(['It is done, {player}. Smell that — fresh shell, warm as bread. One ball at a time, made properly.'], () => {
+            const res = kurtCollect(st);
+            if (res.ok) { g.audio.playSfx('dex-register'); g.ui.toast('Got the ' + ITEMS[res.ball].name + '!'); }
+          });
+          return true;
+        }
+        say(['The ball is on the bench, and the bench does not hurry. Walk about ' + kStatus.remaining + ' more steps out there — the work settles at walking pace, like everything true in this town.']);
+        return true;
+      }
+      if (st.session.kurtTalkOnce) {
+        delete st.session.kurtTalkOnce;
+      } else {
+        const ownedApricorns = APRICORN_IDS.filter((id) => (st.bag[id] || 0) > 0);
+        if (ownedApricorns.length) {
+          say(['Forty years I have worked Poke Balls by hand, trainer — and my eyes still catch an apricorn in a bag before the bag is even open. You are carrying ripe ones.',
+            'One ball at a time — that is the workbench law — and it settles over 250 steps of your walking. Shall I work one for you?'], () => {
+            const items = ownedApricorns.map((id) => ({ label: 'Craft: ' + ITEMS[id].name + ' -> ' + ITEMS[APRICORN_TO_BALL[id]].name, value: id }));
+            items.push({ label: 'Just talk', value: '__talk' });
+            items.push({ label: 'Leave', value: null });
+            g.ui.showMenu('Hand Kurt an apricorn?', items, (v) => {
+              if (v === '__talk') { st.session.kurtTalkOnce = true; this.runJohtoNpc(npc); return; }
+              if (!v) return;
+              const res = kurtPlaceOrder(st, v);
+              if (res.ok) say(['He takes the ' + ITEMS[v].name + ' in both hands, the way you would take a sleeping bird.', 'Come back after 250 steps of walking, {player}. The ball will be on the bench, and so will I.']);
+              else say(['The workbench is busy, trainer. One ball at a time.']);
+            });
+          });
+          return true;
+        }
+      }
       if (!flags.johto_well_cleared) {
         if (flags.kurt_well_plea) { say(['Still sitting, still useless, still proud — the back has union rules, apparently. The well, trainer. Three Rockets, and Slowpoke who deserve better. My house will keep.']); return true; }
         say(['Mind the well on your way past, trainer. Something down there smells like a market that should not exist. If you find an old man investigating it badly — that will be me, shortly.']); return true; }
@@ -129167,6 +129984,107 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- PC boxes ----------
+  // ---------- Stage J6: the Day-Care (Route 34) ----------
+  // Both keepers (the maps6 keeper, johto-patched, and his wife,
+  // appended in JOHTO_NPCS) run this one flow. All state moves ride
+  // the pure johto-systems functions; this layer is menus + lines.
+  openDaycare(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    ensureJohtoSystems(st);
+    const say = (lines, cb) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, npc.name);
+    const destLine = (res, what) => res.dest === 'box'
+      ? what + ' was sent to ' + String(res.boxId).replace('box', 'Box ') + ' — no room in the party, but safe and warm there.'
+      : what + ' is in your party. Walk with it.';
+    const menu = () => {
+      const items = [];
+      if (st.daycareEgg) items.push({ label: 'Collect the Egg we found', value: 'egg' });
+      items.push({ label: 'Leave a Pokemon with us', value: 'dep', disabled: st.daycare.length >= 2 });
+      items.push({ label: 'Take a Pokemon back', value: 'wd', disabled: !st.daycare.length });
+      items.push({ label: 'How are my Pokemon?', value: 'status' });
+      items.push({ label: 'Leave', value: null });
+      g.ui.showMenu('Pokemon Day-Care — we raise them with patient hands.', items, (v) => {
+        if (v === 'egg') {
+          const res = collectDaycareEgg(st);
+          if (!res.ok) { say(['There is no room anywhere — party full and every PC box full. Make room, and the Egg will still be here, warm in the straw.'], () => menu()); return; }
+          g.audio.playSfx('dex-register');
+          say(['Here it is, still warm. We do not know how it got here — your two guests are not telling.', destLine(res, 'The Egg')], () => menu());
+          return;
+        }
+        if (v === 'dep') {
+          const rows = st.party.map((m, i) => ({
+            label: displayName(m, SPECIES) + ' Lv' + m.level + (m.egg ? ' (Egg)' : ''), value: i, disabled: !!m.egg,
+          }));
+          rows.push({ label: 'Back', value: -1 });
+          g.ui.showMenu('Leave which Pokemon?', rows, (iv) => {
+            if (iv === null || iv === -1) { menu(); return; }
+            const mon = st.party[iv];
+            const res = depositToDaycare(st, iv);
+            if (res.ok) {
+              say(['We will take good care of ' + displayName(mon, SPECIES) + '. Walk the routes, trainer — eggs and friendships both happen at walking pace.'], () => menu());
+            } else if (res.reason === 'partner') say([res.line], () => menu());
+            else if (res.reason === 'last-non-egg') say(['Not your last travelling partner, dear. An Egg cannot walk the roads alone — someone has to carry it, and battle for it. Leave us a Pokemon when another able one walks with you.'], () => menu());
+            else if (res.reason === 'is-egg') say(['An Egg needs its trainer\'s own walking to hatch. Keep it in your party, dear.'], () => menu());
+            else say(['We are full up just now — two guests is our honest limit.'], () => menu());
+          });
+          return;
+        }
+        if (v === 'wd') {
+          const rows = st.daycare.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
+          rows.push({ label: 'Back', value: -1 });
+          g.ui.showMenu('Take back which Pokemon?', rows, (iv) => {
+            if (iv === null || iv === -1) { menu(); return; }
+            const mon = st.daycare[iv];
+            const res = withdrawFromDaycare(st, iv);
+            if (res.ok) say([displayName(mon, SPECIES) + ' is glad to see you. They always are, whatever they pretend.'], () => menu());
+            else say(['Your party is full, dear. Make room first — ' + displayName(mon, SPECIES) + ' can wait a little longer.'], () => menu());
+          });
+          return;
+        }
+        if (v === 'status') {
+          const lines = [];
+          if (!st.daycare.length) lines.push('No guests just now. The garden is quiet, the naps are ahead of schedule.');
+          else {
+            for (const m of st.daycare) lines.push(displayName(m, SPECIES) + ' (Lv' + m.level + ') is resting well — fed, brushed, and sung to at noon.');
+            if (st.daycare.length === 2) {
+              if (st.daycareEgg) lines.push('And — we found an Egg with them! It is waiting for you, warm in the straw.');
+              else if (pairCompatible(st.daycare[0], st.daycare[1])) {
+                const left = st.daycareEggAt !== null ? Math.max(0, st.daycareEggAt - st.stepsTotal) : 0;
+                lines.push('Those two get along famously. Walk about ' + left + ' more steps with them in our care, and check back — these things keep their own hours.');
+              } else lines.push('Those two prefer their own corners, truth be told. No egg will come of this pairing — different kinds keep different company.');
+            }
+          }
+          say(lines, () => menu());
+          return;
+        }
+      });
+    };
+    // The story egg: the couple's one-time gift, offered on the first
+    // visit, so every player meets the system. A full-everywhere
+    // refusal sets NO flag — the offer stands on the next visit.
+    if (!flags.daycare_story_egg) {
+      say(['Welcome to our little house, trainer. Forty years we have raised other folks\' Pokemon here, one nap at a time.',
+        'Before anything else — a gift. Travellers leave us all sorts here, and this was left with a note: "for a trainer who walks." It is a Pokemon Egg, and we would like you to walk with it.'], () => {
+        const res = giveStoryEgg(st, () => g.rng.misc());
+        if (!res.ok) {
+          say(['Ah — no room anywhere, party and boxes both full. Make a little room, dear, and come back. The Egg will keep.']);
+          return;
+        }
+        flags.daycare_story_egg = true;
+        g.audio.playSfx('dex-register');
+        say(['Received a Pokemon Egg!', destLine(res, 'The Egg'), 'Walk with it in your party. When it is ready, it will not ask permission — eggs never do.'], () => menu());
+      });
+      return true;
+    }
+    if (st.daycareEgg) {
+      say(['You came at the right moment, {player} — we found an Egg with your two guests! We do not know how it got there. They are not telling.'], () => menu());
+      return true;
+    }
+    say(['Eggs and friendships both happen at walking pace, trainer. What can this house do for you?'], () => menu());
+    return true;
+  },
+
   // UI v2.4 (defect 4): a real box SCREEN (ui.showPcPanel) instead of the
   // list-modal flow — wallpaper field, a 30-slot grid that renders even
   // when empty, the party strip alongside, a framed info window, and box
@@ -129196,25 +130114,32 @@ Object.assign(OverworldScene.prototype, {
     const openLink = () => {
       // Bill's Link Transfer: trade-evolution species evolve here —
       // the honest single-player resolution (WS7 design call, ADR-019).
-      const cand = g.state.party.filter((m) => {
-        const sp = SPECIES[m.speciesId];
-        return sp && sp.evo && sp.evo.method === 'trade';
-      });
+      // Stage J6 widening: the candidate scan reads `evos` branch
+      // entries too (tradeEvolutionsOf), so poliwhirl->politoed and
+      // slowpoke->slowking — whose `evo` slots carry their primary
+      // branches — are reachable; each trade branch is its own row,
+      // and the evolution runs the CHOSEN branch (evolveMon's
+      // forcedEvo), never the slot default.
+      const cand = [];
+      for (const m of g.state.party) {
+        if (m.egg) continue; // J6: an Egg can't be sent out, traded, or evolved
+        for (const evo of tradeEvolutionsOf(m.speciesId)) cand.push({ mon: m, evo });
+      }
       // AUDIT FIX (S-10): the link flow used to close the PC first and
       // never come back — checking (or backing out) cost the whole PC
       // session. The panel now stays open underneath (menus and dialogue
       // route above it) and every exit path returns to it.
       if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.'], () => render()); return; }
-      const items = cand.map((m) => ({ label: displayName(m, SPECIES) + ' -> ' + SPECIES[SPECIES[m.speciesId].evo.to].name, value: m.monId }));
+      const items = cand.map((c, i) => ({ label: displayName(c.mon, SPECIES) + ' -> ' + SPECIES[c.evo.to].name, value: i }));
       items.push({ label: 'Back', value: null, wide: true });
       const linkRowHtml = (it) => {
-        const mon = cand.find((m) => m.monId === it.value) || null;
-        if (!mon) return '<span>' + it.label + '</span>';
-        return '<img class="picon" src="' + sprite(mon) + '" alt=""><span>' + it.label + '</span>';
+        const c = cand[it.value] || null;
+        if (!c) return '<span>' + it.label + '</span>';
+        return '<img class="picon" src="' + sprite(c.mon) + '" alt=""><span>' + it.label + '</span>';
       };
       g.ui.showMenu('Link Transfer which?', items, (iv) => {
-        const mon = cand.find((m) => m.monId === iv);
-        if (mon) this.evolveMon(mon, null, () => render());
+        const c = cand[iv];
+        if (c) this.evolveMon(c.mon, null, () => render(), c.evo);
         else render();
       }, { menuClass: 'pcbox', rowHtml: linkRowHtml });
     };
@@ -129285,6 +130210,12 @@ Object.assign(OverworldScene.prototype, {
         const occ = arr[idx];
         if (held.from === 'party') {
           if (g.state.party.length <= 1) { g.ui.say(['You need at least one Pokemon with you!']); return; }
+          // Stage J6: the all-egg guard (the deposit-your-last-mon
+          // precedent, sharpened) — a move whose RESULTING party
+          // holds only Eggs (or nothing able) is refused.
+          const simParty = g.state.party.filter((_, i2) => i2 !== held.idx);
+          if (occ) simParty.splice(held.idx, 0, occ);
+          if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
           const chk = boxCheck(held.mon);
           if (!chk.ok) { g.ui.say([chk.line]); return; }
           g.state.party.splice(held.idx, 1);
@@ -129304,6 +130235,9 @@ Object.assign(OverworldScene.prototype, {
           if (occ) {
             const chk = boxCheck(occ);
             if (!chk.ok) { g.ui.say([chk.line]); return; }
+            // Stage J6: the same all-egg guard on the swap direction.
+            const simParty = g.state.party.slice(); simParty[idx] = held.mon;
+            if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
             src[held.idx] = occ; g.state.party[idx] = held.mon;
           } else {
             src.splice(held.idx, 1); g.state.party.push(held.mon);
@@ -129721,13 +130655,18 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- evolution ----------
-  evolveMon(mon, stoneId, onDone) {
+  evolveMon(mon, stoneId, onDone, forcedEvo) {
     const g = this.game;
     const chk = evolutionCheck(mon);
     if (!chk.ok) { g.ui.say([chk.line], onDone || undefined); return false; }
+    if (mon.egg) { g.ui.say(['The Egg is in no state to evolve. It has not even met the world yet.'], onDone || undefined); return false; }
     const sp = SPECIES[mon.speciesId];
     let evo = null;
-    if (stoneId) {
+    if (forcedEvo) {
+      // Stage J6: Link Transfer names its branch explicitly (a trade
+      // entry from `evos` may not be the species' `evo` slot).
+      evo = forcedEvo;
+    } else if (stoneId) {
       const evos = sp.evos || (sp.evo ? [sp.evo] : []);
       evo = evos.find((e) => e.method === 'stone' && e.stone === stoneId) || null;
     } else {
@@ -130651,7 +131590,7 @@ class Game {
       const heldDef = m.keepsake && ITEMS[m.keepsake] ? ITEMS[m.keepsake] : null;
       const bagKs = Object.keys(KEEPSAKES).filter((id) => (g.state.bag[id] || 0) > 0);
       if (heldDef) rows.push({ label: 'Take ' + heldDef.name, value: 'ks-take' });
-      if (!heldDef && bagKs.length) rows.push({ label: 'Give keepsake', value: 'ks-give' });
+      if (!heldDef && bagKs.length && !m.egg) rows.push({ label: 'Give keepsake', value: 'ks-give' }); // J6: an Egg holds nothing
       if (fieldMoves.length) rows.push({ label: 'Field moves', value: 'field' });
       rows.push({ label: 'Close', value: 'close' });
       g.ui.showMenu(displayName(m, SPECIES), rows, (a) => {
@@ -131277,8 +132216,8 @@ Object.assign(Game.prototype, {
       // ADR-025 §3 (Phase 3): selecting a keepsake in the bag gives it
       // to a party member (non-consumable; one held slot per mon).
       const targets = g.state.party.map((m, i) => ({
-        label: displayName(m, SPECIES) + (m.keepsake ? ' (holding ' + (ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : m.keepsake) + ')' : ''), value: i,
-        disabled: !!m.keepsake,
+        label: displayName(m, SPECIES) + (m.egg ? ' (Egg)' : m.keepsake ? ' (holding ' + (ITEMS[m.keepsake] ? ITEMS[m.keepsake].name : m.keepsake) + ')' : ''), value: i,
+        disabled: !!m.keepsake || !!m.egg, // J6: an Egg holds nothing
       }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Give ' + it.name + ' to...', targets, (t) => {
@@ -131295,7 +132234,8 @@ Object.assign(Game.prototype, {
     if (it.levelUp) { // Rare Candy
       // ADR-027 Amendment 2: the cap is a registry read (the current
       // arc's band max; Arcs 1/1.5 read 100, exactly as before).
-      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= levelCapFor(g.state) }));
+      // J6: an Egg cannot eat candy (it would level + evolve unhatched).
+      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: !!m.egg || m.level >= levelCapFor(g.state) }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Use Rare Candy on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
@@ -131310,7 +132250,7 @@ Object.assign(Game.prototype, {
       return;
     }
     if (it.xpBoost) { // XP Candy (ADR-025 §4): fixed XP, Rare Candy shape
-      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: m.level >= levelCapFor(g.state) }));
+      const targets = g.state.party.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i, disabled: !!m.egg || m.level >= levelCapFor(g.state) }));
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Use XP Candy on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
@@ -131332,11 +132272,11 @@ Object.assign(Game.prototype, {
     }
     if (it.pocket === 'medicine') {
       const targets = g.state.party.map((m, i) => {
-        let dis = false;
-        if (it.revive) dis = m.hp > 0;
-        else if (it.cure) dis = m.hp <= 0 || (it.cure !== 'all' && m.status !== it.cure) || (it.cure === 'all' && !m.status);
-        else if (it.heal) dis = m.hp <= 0 || m.hp >= m.maxHp;
-        else if (it.ppRestore || it.ppRestoreAll) dis = m.hp <= 0;
+        let dis = !!m.egg; // J6: medicine does nothing for an Egg
+        if (it.revive) dis = dis || m.hp > 0;
+        else if (it.cure) dis = dis || m.hp <= 0 || (it.cure !== 'all' && m.status !== it.cure) || (it.cure === 'all' && !m.status);
+        else if (it.heal) dis = dis || m.hp <= 0 || m.hp >= m.maxHp;
+        else if (it.ppRestore || it.ppRestoreAll) dis = dis || m.hp <= 0;
         return { label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''), value: i, disabled: dis };
       });
       targets.push({ label: 'Back', value: -1 });
@@ -131373,6 +132313,7 @@ Object.assign(Game.prototype, {
     }
     if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone', 'sunstone'].includes(id)) {
       const stoneTargets = g.state.party.filter((m) => {
+        if (m.egg) return false; // J6: an Egg cannot evolve
         const sp = SPECIES[m.speciesId];
         const evos = sp.evos || (sp.evo ? [sp.evo] : []);
         return evos.some((e) => e.method === 'stone' && e.stone === id);
@@ -131469,7 +132410,7 @@ Object.assign(Game.prototype, {
         ? (!sp.tm || sp.tm.includes(100 + parseInt(itemId.slice(2), 10)))
         : (!sp.tm || sp.tm.includes(parseInt(itemId.slice(2), 10)));
       const knows = m.moves.some((x) => x.id === moveId);
-      return { label: displayName(m, SPECIES) + (knows ? ' (knows it)' : can ? '' : ' (cannot learn)'), value: i, disabled: knows || !can };
+      return { label: displayName(m, SPECIES) + (m.egg ? ' (Egg)' : knows ? ' (knows it)' : can ? '' : ' (cannot learn)'), value: i, disabled: !!m.egg || knows || !can };
     });
     targets.push({ label: 'Back', value: -1 });
     g.ui.showMenu('Teach ' + mv.name + ' (' + itemId.toUpperCase() + ') to...', targets, (t) => {

@@ -8,6 +8,19 @@ export const BALLS = {
   ultraball: { id: 'ultraball', name: 'Ultra Ball', bonus: 2, desc: 'The best standard ball.' },
   masterball: { id: 'masterball', name: 'Master Ball', bonus: 999, desc: 'Catches without fail. One exists.' },
   safariball: { id: 'safariball', name: 'Safari Ball', bonus: 1, desc: 'Issued at the Safari Zone gate.' },
+  // Stage J6: Kurt's apricorn balls. Each carries a `rule` that the
+  // catch calculation in BOTH battle engines evaluates against the
+  // live battle (src/game/ball-rules.mjs) — the bonus is NEVER flat
+  // flavour: the desc states the real condition, and a rule that does
+  // not meet its condition multiplies by exactly 1. `bonus` stays the
+  // nominal 1; the rule supplies the true multiplier.
+  levelball: { id: 'levelball', name: 'Level Ball', bonus: 1, rule: 'level', desc: 'Kurt-made. The bigger your lead\'s level edge over the wild foe, the stronger it pulls: over 4x its level x8, over 2x x4, over 1x x2, otherwise x1.' },
+  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Kurt-made. x3 on a Pokemon hooked while fishing; x1 on any other encounter.' },
+  moonball: { id: 'moonball', name: 'Moon Ball', bonus: 1, rule: 'moon', desc: 'Kurt-made. x4 on a species that evolves by Moon Stone; x1 on anything else.' },
+  loveball: { id: 'loveball', name: 'Love Ball', bonus: 1, rule: 'love', desc: 'Kurt-made. x8 when the wild foe is the same species as your lead; x1 otherwise.' },
+  fastball: { id: 'fastball', name: 'Fast Ball', bonus: 1, rule: 'fast', desc: 'Kurt-made. x4 on a species whose base Speed is 100 or more; x1 on slower species.' },
+  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Kurt-made. A plain x1 catch — but a Pokemon caught in it starts out trusting you (friendship set high).' },
+  heavyball: { id: 'heavyball', name: 'Heavy Ball', bonus: 1, rule: 'heavy', desc: 'Kurt-made. Pulls harder the bulkier the foe\'s battler tier: S x1, M x1.5, L x2.5, XL x4.' },
 };
 
 // TM number -> move id (canonical Gen-1 assignments; moves live in moves data).
@@ -39,6 +52,26 @@ export const ITEMS = {
   ultraball: { id: 'ultraball', name: 'Ultra Ball', pocket: 'balls', price: 1200, desc: BALLS.ultraball.desc },
   masterball: { id: 'masterball', name: 'Master Ball', pocket: 'balls', desc: BALLS.masterball.desc },
   safariball: { id: 'safariball', name: 'Safari Ball', pocket: 'balls', desc: BALLS.safariball.desc },
+  // Stage J6: apricorn balls — Kurt-only (canon): no price, so no mart
+  // ever stocks them; the Cheat Terminal stocks them from data like
+  // everything else.
+  levelball: { id: 'levelball', name: 'Level Ball', pocket: 'balls', desc: BALLS.levelball.desc },
+  lureball: { id: 'lureball', name: 'Lure Ball', pocket: 'balls', desc: BALLS.lureball.desc },
+  moonball: { id: 'moonball', name: 'Moon Ball', pocket: 'balls', desc: BALLS.moonball.desc },
+  loveball: { id: 'loveball', name: 'Love Ball', pocket: 'balls', desc: BALLS.loveball.desc },
+  fastball: { id: 'fastball', name: 'Fast Ball', pocket: 'balls', desc: BALLS.fastball.desc },
+  friendball: { id: 'friendball', name: 'Friend Ball', pocket: 'balls', desc: BALLS.friendball.desc },
+  heavyball: { id: 'heavyball', name: 'Heavy Ball', pocket: 'balls', desc: BALLS.heavyball.desc },
+  // Stage J6: apricorns (pocket 'items') — picked from apricorn trees
+  // across Johto (src/game/johto-systems.mjs APRICORN_TREES); Kurt in
+  // Azalea crafts one into its matching ball. No price: never mart stock.
+  redapricorn: { id: 'redapricorn', name: 'Red Apricorn', pocket: 'items', desc: 'A ripe red apricorn. Kurt of Azalea can work it into a Level Ball.' },
+  blueapricorn: { id: 'blueapricorn', name: 'Blue Apricorn', pocket: 'items', desc: 'A ripe blue apricorn. Kurt of Azalea can work it into a Lure Ball.' },
+  yellowapricorn: { id: 'yellowapricorn', name: 'Yellow Apricorn', pocket: 'items', desc: 'A ripe yellow apricorn. Kurt of Azalea can work it into a Moon Ball.' },
+  greenapricorn: { id: 'greenapricorn', name: 'Green Apricorn', pocket: 'items', desc: 'A ripe green apricorn. Kurt of Azalea can work it into a Friend Ball.' },
+  pinkapricorn: { id: 'pinkapricorn', name: 'Pink Apricorn', pocket: 'items', desc: 'A ripe pink apricorn. Kurt of Azalea can work it into a Love Ball.' },
+  whiteapricorn: { id: 'whiteapricorn', name: 'White Apricorn', pocket: 'items', desc: 'A ripe white apricorn. Kurt of Azalea can work it into a Fast Ball.' },
+  blackapricorn: { id: 'blackapricorn', name: 'Black Apricorn', pocket: 'items', desc: 'A ripe black apricorn. Kurt of Azalea can work it into a Heavy Ball.' },
   // Medicine
   potion: { id: 'potion', name: 'Potion', pocket: 'medicine', price: 300, heal: 20, desc: 'Restores 20 HP.' },
   superpotion: { id: 'superpotion', name: 'Super Potion', pocket: 'medicine', price: 700, heal: 50, desc: 'Restores 50 HP.' },

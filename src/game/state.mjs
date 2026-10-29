@@ -185,6 +185,17 @@ export function defaultState(inherit) {
       difficulty: 'classic',
     },
     currentBox: 'box1',
+    // Stage J6 arc systems (src/game/johto-systems.mjs): Day-Care
+    // guests (mon records, max 2), the waiting egg + its ready step,
+    // the PERSISTED walked-step counter, apricorn-tree rest times,
+    // and Kurt's one crafting order. All defaults-filled on load
+    // (schema.mjs) so legacy saves open unchanged in shape.
+    daycare: [],
+    daycareEgg: null,
+    daycareEggAt: null,
+    stepsTotal: 0,
+    gather: {},
+    kurtOrder: null,
     session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {
