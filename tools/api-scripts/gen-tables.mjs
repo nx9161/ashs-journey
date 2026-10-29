@@ -24,7 +24,8 @@ const { SPECIES } = await import(join(ROOT, 'src', 'data', 'species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src', 'data', 'species2.mjs'));
 const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
-const { ITEMS, BALLS, KEEPSAKES } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
+const { ITEMS, BALLS, KEEPSAKES, BADGE_SETS } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
+const { ORANGE_QUESTS } = await import(join(ROOT, 'src', 'data', 'story-orange.mjs'));
 const { FORMS } = await import(join(ROOT, 'src', 'data', 'forms.mjs'));
 const { MAIN_QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
 const { QUESTS: TOWN_TALES } = await import(join(ROOT, 'src', 'data', 'quests.mjs'));
@@ -37,8 +38,12 @@ const ALL_MOVES = { ...MOVES, ...MOVES2 };
 // Canonical badge earn-order per region: the campaign's story order (ADR-019),
 // NOT an alphabetical sort. The validator enforces "prefix of the earn order"
 // (no badge #N without #1..N-1) against this list.
-const KANTO_EARN_ORDER = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
+// Stage O2: earn orders are read from the game's own BADGE_SETS table
+// (src/data/items.mjs) — the single source the leader award path and
+// the Cheat Terminal also read, so the validator can never drift.
+const KANTO_EARN_ORDER = BADGE_SETS.kanto;
 const KNOWN_BADGES = KANTO_EARN_ORDER.filter((id) => ITEMS[id]);
+const ORANGE_EARN_ORDER = (BADGE_SETS.orange || []).filter((id) => ITEMS[id]);
 
 const tables = {
   schemaVersion: SCHEMA_VERSION,
@@ -50,7 +55,7 @@ const tables = {
   keepsakes: Object.keys(KEEPSAKES).sort(),
   balls: Object.keys(BALLS).sort(),
   forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
-  quests: [...MAIN_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(TOWN_TALES)].sort(),
+  quests: [...MAIN_QUESTS.map((q) => q.id), ...ORANGE_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(TOWN_TALES)].sort(),
   regions: ['kanto', 'orange', 'johto', 'hoenn', 'sinnoh', 'unova', 'kalos', 'alola', 'galar', 'paldea', 'liko'],
   // ADR-027 (Stage F): the closed arc-id vocabulary — the validator
   // accepts story.arc / story.arc_directive only from the registry.
@@ -58,7 +63,7 @@ const tables = {
   // Ordered earn sequences.
   badgeSequences: {
     kanto: KNOWN_BADGES,
-    orange: [],
+    orange: ORANGE_EARN_ORDER,
     johto: [],
   },
   regionBadgeMax: { kanto: 8, orange: 4, johto: 8 },

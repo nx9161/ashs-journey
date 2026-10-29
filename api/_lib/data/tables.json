@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "c77b60e92870d4822baa6c1b4c1abf6830df6889b46868249e14fa56d124e8a0",
+  "tablesVersion": "9490647279a2328de4d6a0dc8eab1f93dd2c2b785ba830d6354e9132e6b30268",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -324,6 +324,7 @@
     "championsribbon",
     "coin",
     "coincase",
+    "coraleyebadge",
     "domefossil",
     "earthbadge",
     "elixir",
@@ -350,6 +351,7 @@
     "iceheal",
     "ironacorn",
     "itemfinder",
+    "jadestarbadge",
     "leafstone",
     "marshbadge",
     "masterball",
@@ -372,12 +374,14 @@
     "rarecandy",
     "revive",
     "safariball",
+    "searubybadge",
     "secondwindribbon",
     "secretkey",
     "silphscope",
     "soulbadge",
     "sparrowfeather",
     "spectrebell",
+    "spikeshellbadge",
     "ssticket",
     "stardust",
     "starpiece",
@@ -442,6 +446,7 @@
     "ultraball",
     "volcanobadge",
     "waterstone",
+    "winnerstrophy",
     "xpcandy"
   ],
   "keepsakes": [
@@ -740,6 +745,9 @@
     "q_marsh",
     "q_mewtwo",
     "q_movie",
+    "q_orange_crew",
+    "q_orange_gsball",
+    "q_orange_league",
     "q_partner",
     "q_rainbow",
     "q_scope",
@@ -798,7 +806,12 @@
       "volcanobadge",
       "earthbadge"
     ],
-    "orange": [],
+    "orange": [
+      "coraleyebadge",
+      "searubybadge",
+      "spikeshellbadge",
+      "jadestarbadge"
+    ],
     "johto": []
   },
   "regionBadgeMax": {
