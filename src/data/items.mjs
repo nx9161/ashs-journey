@@ -36,7 +36,18 @@ export const TM_MOVES = {
   41: 'softboiled', 42: 'dreameater', 43: 'skyattack', 44: 'rest', 45: 'thunderwave',
   46: 'psywave', 47: 'explosion', 48: 'rockslide', 49: 'triattack', 50: 'substitute',
 };
-export const HM_MOVES = { 1: 'cut', 2: 'fly', 3: 'surf', 4: 'strength', 5: 'flash' };
+export const HM_MOVES = { 1: 'cut', 2: 'fly', 3: 'surf', 4: 'strength', 5: 'flash', 6: 'defog', 7: 'rockclimb' };
+// Arc 4 Stage S4: HM06 Defog + HM07 Rock Climb (this game's HM
+// numbering continues the shipped 1-5 sequence; Platinum calls them
+// HM05/HM08). The grant hooks S5's story stage calls — data, in the
+// s.give event idiom ({ give: { items: { hm06: 1 } } }) and the
+// runSteps giveHM step: badge = the Platinum field-use gate the
+// overworld reads (badges.sinnoh prefix law), source = the Platinum
+// placement S5 stages.
+export const HM_GRANTS = {
+  defog: { item: 'hm06', move: 'defog', badge: 'fenbadge', source: 'Solaceon Ruins (Platinum)' },
+  rockclimb: { item: 'hm07', move: 'rockclimb', badge: 'iciclebadge', source: 'Route 217 (Platinum)' },
+};
 const TM_PRICES = {
   1: 3000, 2: 2000, 3: 2000, 4: 1000, 5: 3000, 6: 4000, 7: 2000, 8: 4000, 9: 3000, 10: 4000,
   11: 2000, 12: 1000, 13: 4000, 14: 5500, 15: 5500, 16: 2000, 17: 3000, 18: 2000, 19: 2000, 20: 2000,
@@ -200,6 +211,10 @@ export const ITEMS = {
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
   secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Cianwood pharmacy. For Amphy, the lighthouse Pokemon — handle with both hands.' },
+  // Arc 4 Stage S4: the Gracidea — Shaymin's forme key item. Use it
+  // on a Shaymin in the party to swap land <-> sky (the S4 forme
+  // switch, game/sinnoh-systems.mjs). Never consumed.
+  gracidea: { id: 'gracidea', name: 'Gracidea', pocket: 'key', desc: 'A flower of gratitude that blooms only for Shaymin. Use it on Shaymin to swap between its land and sky formes.' },
   // Stage J5 key item: the Clear Bell, given by Ecruteak's Kimono
   // sisters once the three awakened beasts are quieted — its chime is
   // the Bell Tower summit's invitation to Ho-Oh (arc_hooh).
@@ -219,7 +234,7 @@ for (let n = 1; n <= 50; n++) {
   const id = 'tm' + String(n).padStart(2, '0');
   ITEMS[id] = { id, name: 'TM' + String(n).padStart(2, '0'), pocket: 'tm', move: TM_MOVES[n], price: TM_PRICES[n], desc: 'Teaches ' + TM_MOVES[n] + '. One use.' };
 }
-for (let n = 1; n <= 5; n++) {
+for (let n = 1; n <= 7; n++) {
   const id = 'hm0' + n;
   ITEMS[id] = { id, name: 'HM0' + n, pocket: 'hm', move: HM_MOVES[n], desc: 'Teaches ' + HM_MOVES[n] + '. Unlimited use; the move cannot be forgotten normally.' };
 }

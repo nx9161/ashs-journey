@@ -9,7 +9,7 @@ import { MAPS, TRAINERS, WALKABLE } from '../data/maps.mjs';
 import { TILE_CHARS } from '../engine/tiles.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
-import { ITEMS, BADGE_SETS } from '../data/items.mjs';
+import { ITEMS, BADGE_SETS, HM_GRANTS } from '../data/items.mjs';
 import { grantKeepsake, grantKeepsakeFromSource, dupeKeepsakeLine, DUPE_KEEPSAKE_CASH, ownsKeepsake } from './keepsakes.mjs';
 import { hasTravelersMemory } from './state.mjs';
 import { TILE } from '../engine/render.mjs';
@@ -20,7 +20,8 @@ import { BattleScene } from './battle.mjs';
 import { ContestScene, hasRibbon } from './contest.mjs';
 import { startFrontier, startBrainAudience, talkFrontierScott, tryScottClosing, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
 import { PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
-import { RIBBON_NAMES } from '../data/contest.mjs';
+import { RIBBON_NAMES, CONTEST_RANKS } from '../data/contest.mjs';
+import { switchForme, FORME_FAMILIES, FORME_OF, ROTOM_APPLIANCES, partyKnowsFieldMove, badgeHeld } from './sinnoh-systems.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
@@ -52,10 +53,50 @@ Object.assign(OverworldScene.prototype, {
   // (Pike chamber entries, Pyramid floor law).
   sysWarpLanding(to, from) {
     frontierOnWarpLanding(this.game, this, to, from);
+    // Arc 4 Stage S4: the Safari session's map law, generic over the
+    // session's own data (maps/hub/exit planted by the gate NPC's
+    // map-data config — the Kanto session carries maps ['safari'] and
+    // no hub, and its behaviour is unchanged). Landing in the hub
+    // ends the visit (the player walked back to the gatehouse);
+    // landing anywhere outside the zone while a session stands ends
+    // it too. Landing IN a zoned map with NO session bounces back to
+    // the hub: the zone is entered through its gate, never by a warp.
+    const g = this.game;
+    const saf = g.state.session && g.state.session.safari;
+    if (saf) {
+      // Zone-style sessions only (a hub is planted): the Kanto
+      // session (no hub) keeps its exact legacy warp behaviour.
+      if (saf.hub && to === saf.hub && from !== saf.hub) { this.endSafari('You left the ' + (saf.name || 'Safari Zone') + '.'); return; }
+      if (saf.hub && !(saf.maps || []).includes(to) && to !== saf.hub) this.endSafari('You left the ' + (saf.name || 'Safari Zone') + '.');
+      return;
+    }
+    const dest = MAPS[to];
+    if (dest && dest.safariZone) {
+      const hubId = Object.keys(MAPS).find((id) => MAPS[id].safariHub === dest.safariZone);
+      const hub = hubId && MAPS[hubId];
+      if (hub) {
+        const st = hub.start || { x: 8, y: 10 };
+        this.loadMap(hubId);
+        this.player.tx = st.x; this.player.ty = st.y;
+        this.player.px = st.x * TILE; this.player.py = st.y * TILE;
+        this.player.fx = st.x; this.player.fy = st.y;
+        this.trail = [];
+        g.state.story.position = { map: hubId, x: st.x, y: st.y, dir: 'down' };
+        this.banner = { text: hub.name.toUpperCase(), t: 1.6 };
+        g.ui.say(['The gatehouse warden waves you back: "The marsh is entered at the gate, friend — fee, balls, and a fair warning included. No slipping in the back way."']);
+      }
+    }
   },
 
   sysLoadMap(id) {
     const g = this.game;
+    // Arc 4 Stage S4: Defog's cleared-fog flag is per-visit — loading
+    // any other map lets the fog back (canon: the fog returns when
+    // you leave the area). The flag lives in story.flags (the map-flag
+    // idiom), so a save made mid-visit keeps its cleared sky.
+    for (const k of Object.keys(g.state.story.flags)) {
+      if (k.startsWith('defogged_') && k !== 'defogged_' + id) delete g.state.story.flags[k];
+    }
     this.fxState = {
       cut: new Set(),           // cut trees (regrow on map re-entry, as the original)
       boulders: new Map(),      // 'x,y' -> {x,y} current boulder positions
@@ -327,6 +368,14 @@ Object.assign(OverworldScene.prototype, {
   sysOnStep(x, y) {
     const g = this.game;
     const t = this.tileAt(x, y);
+    // Arc 4 Stage S4: Shaymin's simplified reversion — a fainted
+    // Sky-forme Shaymin settles back to its land forme (canon's
+    // night/freeze reversion, recorded in the register).
+    for (const m of g.state.party) {
+      if (m && m.speciesId === 'shayminsky' && m.hp <= 0 && switchForme(m, 'shaymin', SPECIES)) {
+        g.ui.toast(displayName(m, SPECIES) + ' settled back into its land forme.');
+      }
+    }
     // Landing on shore ends surfing.
     if (this.surfing && t !== '~' && t !== 'W') this.surfing = false;
     // Safari session step budget.
@@ -429,7 +478,11 @@ Object.assign(OverworldScene.prototype, {
     if (!g.state.party.some((m) => m && m.hp > 0)) return false;
     const saf = g.state.session.safari;
     let table = null, rate = 0;
-    if (saf && this.mapId === 'safari' && t === ',') { table = enc.table; rate = enc.rate; }
+    // Safari encounters (generic): any map in the session's own map
+    // set, on tall grass or on a marshbog floor tile (the zone's
+    // encounter terrain, read by tile kind — the engine names no
+    // zone). The Kanto session's set is ['safari'], as shipped.
+    if (saf && (saf.maps || ['safari']).includes(this.mapId) && (t === ',' || TILE_CHARS[t] === 'marshbog')) { table = enc.table; rate = enc.rate; }
     else if (this.surfing && (t === '~' || t === 'W') && enc.water) { table = enc.water; rate = enc.waterRate || 0.08; }
     else if (enc.cave && (t === '.' || t === 'R')) { table = enc.table; rate = enc.rate; }
     if (!table) return false;
@@ -443,7 +496,7 @@ Object.assign(OverworldScene.prototype, {
     g.audio.encounter();
     if (saf) {
       g.scenes.push(new BattleScene({
-        kind: 'wild', foe, returnTo: this, safari: true,
+        kind: 'wild', foe, returnTo: this, safari: true, safariRock: saf.rock || 'ROCK',
         onSafariAction: () => { const s = g.state.session.safari; if (s) { s.steps -= 5; } },
       }));
     } else {
@@ -551,6 +604,19 @@ Object.assign(OverworldScene.prototype, {
         g.state.bag[item] = (g.state.bag[item] || 0) + s.give.items[item];
       }
       if (s.give.text) g.ui.toast(s.give.text);
+      next(); return;
+    }
+    // Arc 4 Stage S4: the giveHM step — a story beat grants an HM by
+    // move id (data/items.mjs HM_GRANTS is the hook table S5 calls:
+    // { giveHM: 'defog' }). Idempotent like the GS Ball grant: a
+    // trainer already carrying the HM is never handed a duplicate.
+    if (s.giveHM) {
+      const grant = HM_GRANTS[s.giveHM];
+      if (grant && !(g.state.bag[grant.item] > 0)) {
+        g.state.bag[grant.item] = 1;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Received ' + ITEMS[grant.item].name + '!');
+      }
       next(); return;
     }
     if (s.giveMon) { this.giftMon(s.giveMon.species, s.giveMon.level, next); return; }
@@ -758,6 +824,19 @@ Object.assign(OverworldScene.prototype, {
     // whenever the faced tile is not one of its own.
     if (this.hoennTombInteract(fx, fy)) return true;
     if (this.mapId === 'meteor-falls' && TILE_CHARS[this.tileAt(fx, fy)] === 'meteorstone' && this.hoennMeteorInteract(fx, fy)) return true;
+    // Arc 4 Stage S4: the forme-switch objects (the shrine idiom —
+    // each handler declines when its partner is not in the party, so
+    // the authored sign text speaks exactly as before): the Griseous
+    // Orb's chamber sign in Turnback Cave (11,5), the Distortion
+    // World's platform dais sign (10,8), and the Old Chateau's
+    // television sign (16,4) — Rotom's room, appliances included.
+    if (this.mapId === 'turnback-cave' && fx === 11 && fy === 5 && this.griseousInteract()) return true;
+    if (this.mapId === 'distortion-platform' && fx === 10 && fy === 8 && this.griseousInteract()) return true;
+    if (this.mapId === 'old-chateau' && fx === 16 && fy === 4 && this.rotomInteract()) return true;
+    // Arc 4 Stage S4: Rock Climb — facing a climbwall gate tile (the
+    // tile-kind marker S3b authored; the Cut-tree idiom: the gate
+    // lives in the tile, the move in the party).
+    if (TILE_CHARS[this.tileAt(fx, fy)] === 'climbwall') { this.climbInteract(fx, fy); return true; }
     // Stage J6: apricorn trees (the J3a `apricorn` prop kind). Facing
     // a tree picks its apricorn when it has rested enough walked
     // steps; the rest is counted on the persisted step counter and
@@ -940,6 +1019,14 @@ Object.assign(OverworldScene.prototype, {
       }
       return false;
     }
+    // Arc 4 Stage S4: Defog — on a fog map, an interact that claimed
+    // nothing else (no NPC, no sign on the faced tile) offers the
+    // field move. The fog is the obstacle; the whole map is its tile.
+    if (this.map.weather === 'fog' && !g.state.story.flags['defogged_' + this.mapId]
+      && !this.npcAt(fx, fy) && !this.signAt(fx, fy)) {
+      this.defogInteract();
+      return true;
+    }
     // Itemfinder hint on an empty interact.
     if ((g.state.bag.itemfinder || 0) > 0 && this.map.hidden) {
       for (const hb of this.map.hidden) {
@@ -960,6 +1047,30 @@ Object.assign(OverworldScene.prototype, {
   startContest() {
     const g = this.game;
     const hall = this.map.contestHall;
+    // Arc 4 Stage S4: a hall with ranks (data/contest.mjs
+    // CONTEST_RANKS — Hearthome's Super Contests) picks its rank
+    // first: a rank is open when its required ribbon is held (the
+    // sequential Platinum ladder), and the chosen rank key then runs
+    // the shipped entry flow unchanged as the scene's hall.
+    const ranks = CONTEST_RANKS[hall];
+    if (ranks) {
+      g.ui.say(['The receptionist beams: "Welcome to the Super Contest Hall! Four ranks take this stage — Normal, Great, Ultra and Master — and each rank opens when the last is ribboned."', '"Which rank will you enter?"'], () => {
+        g.ui.showMenu('Choose a rank', ranks.map((r) => ({
+          label: r.label + (hasRibbon(g.state, r.key) ? ' ★' : ''),
+          value: r.key,
+          disabled: !!r.requires && !hasRibbon(g.state, r.requires),
+        })).concat([{ label: 'Not now', value: 'no' }]), (v) => {
+          if (!v || v === 'no') return;
+          this.beginContest(v);
+        });
+      });
+      return;
+    }
+    this.beginContest(hall);
+  },
+
+  beginContest(hall) {
+    const g = this.game;
     const able = g.state.party.filter((m) => m && !m.egg && m.hp > 0);
     if (!able.length) {
       g.ui.say(['The receptionist smiles apologetically: "Oh — none of your partners is ready to take the stage. Rest them at a Center and come back!"']);
@@ -1003,6 +1114,121 @@ Object.assign(OverworldScene.prototype, {
     this.surfing = false;
     this.doWarp(to, {});
     this.game.audio.playSfx('map-enter');
+  },
+
+  // ---------- Arc 4 Stage S4: Defog + Rock Climb ----------
+  // Both are real HM battle moves (hm06/hm07) taught through the
+  // shipped HM-teach path, so knowledge reads exactly like Surf's:
+  // a move slot OR the hmMoves field-craft list (partyKnowsFieldMove
+  // is partyKnows + the Dive representation). Badge gates are
+  // Platinum's (Defog <- Fen Badge, Rock Climb <- Icicle Badge) read
+  // generically off the badge case (badgeHeld names no region), and
+  // refusals name the missing piece, the Dive idiom. Neither gate
+  // exists on any shipped region's tiles: climbwall tiles stand only
+  // in Sinnoh, and fog is a maps9-only weather field.
+  defogInteract() {
+    const g = this.game;
+    if (!badgeHeld(g.state, HM_GRANTS.defog.badge)) {
+      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'Come back with the Fen Badge in your case — Pastoria\'s gym, in the marsh country. The League does not let trainers clear Sinnoh\'s fog roads without it.']);
+      return;
+    }
+    if (!partyKnowsFieldMove(g.state.party, 'defog')) {
+      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'You have the Fen Badge, but no partner who knows Defog. The HM waits in the Solaceon Ruins, east of Hearthome — the old stones keep it.']);
+      return;
+    }
+    g.ui.showMenu('The fog is a white wall. Use Defog?', [
+      { label: 'Defog', value: 'yes' }, { label: 'Not now', value: 'no' },
+    ], (v) => {
+      if (v !== 'yes') return;
+      g.state.story.flags['defogged_' + this.mapId] = true;
+      g.audio.playSfx('map-enter');
+      g.ui.say(['A partner beats the air flat — once, twice — and the fog comes apart like a curtain pulled by its hem. The road stands clear. (It will gather again when you leave; fog keeps its tenancy.)']);
+    });
+  },
+
+  climbInteract(fx, fy) {
+    const g = this.game;
+    const p = this.player;
+    const dx = fx - p.tx, dy = fy - p.ty;
+    const lx = fx + dx, ly = fy + dy;
+    if (!this.walkable(lx, ly)) {
+      g.ui.say(['A cliff face veined with old handholds — but the far side offers no footing from here. This stretch of wall goes nowhere a trainer can stand.']);
+      return;
+    }
+    if (!badgeHeld(g.state, HM_GRANTS.rockclimb.badge)) {
+      g.ui.say(['A cliff face veined with old handholds, worn smooth by weather and other climbers.', 'Come back with the Icicle Badge in your case — Snowpoint\'s gym, at the top of the world. The League does not let trainers scale Sinnoh\'s walls without it.']);
+      return;
+    }
+    if (!partyKnowsFieldMove(g.state.party, 'rockclimb')) {
+      g.ui.say(['A cliff face veined with old handholds, worn smooth by weather and other climbers.', 'You have the Icicle Badge, but no partner who knows Rock Climb. The HM was lost on Route 217, in the snow country — a hiker there is still apologising for it.']);
+      return;
+    }
+    g.ui.showMenu('The wall is climbable. Rock Climb?', [
+      { label: 'Climb', value: 'yes' }, { label: 'Not now', value: 'no' },
+    ], (v) => {
+      if (v !== 'yes') return;
+      p.fx = p.tx; p.fy = p.ty;
+      p.tx = lx; p.ty = ly;
+      p.px = lx * TILE; p.py = ly * TILE;
+      this.trail = [];
+      g.state.story.position = { map: this.mapId, x: lx, y: ly, dir: p.dir };
+      g.audio.playSfx('map-enter');
+      g.ui.toast('Climbed the wall!');
+    });
+  },
+
+  // ---------- Arc 4 Stage S4: the forme switches ----------
+  // The Deoxys swap generalised (game/sinnoh-systems.mjs): the same
+  // evolution-idiom species exchange, preserving the individual.
+  switchSinnohForme(mon, formeId) {
+    if (!switchForme(mon, formeId, SPECIES)) return false;
+    this.game.state.story.flags[FORME_OF[formeId] + '_forme_touched'] = true;
+    return true;
+  },
+  formeInParty(base) {
+    return this.game.state.party.find((m) => m && FORME_OF[m.speciesId] === base) || null;
+  },
+  griseousInteract() {
+    const g = this.game;
+    const mon = this.formeInParty('giratina');
+    if (!mon) return false;
+    const name = displayName(mon, SPECIES);
+    const other = mon.speciesId === 'giratina' ? 'giratinaorigin' : 'giratina';
+    const label = other === 'giratinaorigin' ? 'Origin Forme — the serpent shape of the reversed world' : 'Altered Forme — the shape it wears in this world';
+    g.ui.say(['Set into the chamber floor, where no floor should hold it, rests the GRISEOUS ORB — a stone that is heavier from underneath. At ' + name + '\'s nearness it turns, slowly, the way a sleeper turns toward a voice.'], () => {
+      g.ui.showMenu('Let the Orb turn ' + name + ' toward another shape:', [
+        { label: SPECIES[other].name + ' — ' + label.split(' — ')[1], value: other },
+        { label: 'Not now', value: 'no' },
+      ], (v) => {
+        if (!v || v === 'no') return;
+        if (this.switchSinnohForme(mon, v)) {
+          g.audio.playSfx('levelup');
+          g.ui.say(['The Orb\'s weight shifts — the world tips a degree — and ' + name + ' comes undone and re-knots itself along the grain of the other world. Same partner. Same memories. New edges.', name + ' is now in its ' + SPECIES[v].name.replace('Giratina (', '').replace(')', '') + ' shape.']);
+        }
+      });
+    });
+    return true;
+  },
+  rotomInteract() {
+    const g = this.game;
+    const mon = this.formeInParty('rotom');
+    if (!mon) return false;
+    const name = displayName(mon, SPECIES);
+    const items = FORME_FAMILIES.rotom.filter((id) => id !== mon.speciesId).map((id) => ({
+      label: SPECIES[id].name + (ROTOM_APPLIANCES[id] ? ' — ' + ROTOM_APPLIANCES[id] : ' — leave the appliances behind'),
+      value: id,
+    }));
+    items.push({ label: 'Not now', value: 'no' });
+    g.ui.say(['The old television hums — and around the little room, the chateau\'s dead appliances hum back: an oven, a washer, a refrigerator, a fan, a lawn mower, all plugged into nothing, all patient. ' + name + ' is watching them the way a hermit crab watches shells.'], () => {
+      g.ui.showMenu('Let ' + name + ' try a new housing:', items, (v) => {
+        if (!v || v === 'no' || v === mon.speciesId) return;
+        if (this.switchSinnohForme(mon, v)) {
+          g.audio.playSfx('levelup');
+          g.ui.say([name + ' pours itself out of one housing and into another — a spark changing its mind about furniture — and settles, crackling, into its ' + SPECIES[v].name + ' shape. The move set rides along untouched: in this house, the spark keeps its own tricks.']);
+        }
+      });
+    });
+    return true;
   },
 
   startSurf(fx, fy) {
@@ -1294,24 +1520,37 @@ Object.assign(OverworldScene.prototype, {
     }
     if (npc.safariGate) {
       sayLines(() => {
-        if (g.state.session.safari) { this.endSafari('You left the Safari Zone.'); return; }
-        g.ui.showMenu('Safari Zone: $500 for 500 steps + 30 Safari Balls.', [
-          { label: 'Enter ($500)', value: 'yes', disabled: g.state.player.money < 500 },
+        // Arc 4 Stage S4: the gate is generic — fee/steps/balls, the
+        // entry map, the zone's map set, its hub and exit, its name
+        // and its rock-word all ride the NPC's map-data config (the
+        // Great Marsh warden plants them; the Kanto warden plants
+        // none and reads every default below, byte-identical).
+        const fee = npc.safariFee !== undefined ? npc.safariFee : 500;
+        const steps = npc.safariSteps !== undefined ? npc.safariSteps : 500;
+        const balls = npc.safariBalls !== undefined ? npc.safariBalls : 30;
+        const entryMap = npc.safariMap || 'safari';
+        const zoneName = npc.safariName || 'Safari Zone';
+        if (g.state.session.safari) { this.endSafari('You left the ' + (g.state.session.safari.name || 'Safari Zone') + '.'); return; }
+        g.ui.showMenu(zoneName + ': $' + fee + ' for ' + steps + ' steps + ' + balls + ' Safari Balls.', [
+          { label: 'Enter ($' + fee + ')', value: 'yes', disabled: g.state.player.money < fee },
           { label: 'Not now', value: 'no' },
         ], (v) => {
           if (v !== 'yes') return;
-          g.state.player.money -= 500;
-          g.state.session.safari = { steps: 500 };
-          g.state.bag.safariball = (g.state.bag.safariball || 0) + 30;
-          const st = MAPS.safari.start || { x: 10, y: 17 };
-          this.loadMap('safari');
+          g.state.player.money -= fee;
+          g.state.session.safari = {
+            steps, maps: npc.safariMaps || [entryMap], hub: npc.safariHub || null,
+            name: zoneName, rock: npc.safariRock || 'ROCK', exit: npc.safariExit || null,
+          };
+          g.state.bag.safariball = (g.state.bag.safariball || 0) + balls;
+          const st = MAPS[entryMap].start || { x: 10, y: 17 };
+          this.loadMap(entryMap);
           this.player.tx = st.x; this.player.ty = st.y;
           this.player.px = st.x * TILE; this.player.py = st.y * TILE;
           this.player.fx = st.x; this.player.fy = st.y;
           this.trail = [];
-          g.state.story.position = { map: 'safari', x: st.x, y: st.y, dir: 'up' };
-          this.banner = { text: 'SAFARI ZONE', t: 1.6 };
-          g.ui.toast('Safari started: 500 steps, 30 balls!');
+          g.state.story.position = { map: entryMap, x: st.x, y: st.y, dir: 'up' };
+          this.banner = { text: MAPS[entryMap].name.toUpperCase(), t: 1.6 };
+          g.ui.toast(zoneName + ' started: ' + steps + ' steps, ' + balls + ' balls!');
         });
       });
       return true;
@@ -2592,20 +2831,26 @@ Object.assign(OverworldScene.prototype, {
 
   endSafari(msg) {
     const g = this.game;
+    // S4: the exit is the session's own data (the Marsh session exits
+    // to Pastoria's gatehouse door); a session without one exits to
+    // Fuchsia exactly as the Kanto original.
+    const saf = g.state.session.safari;
+    const exit = (saf && saf.exit) || null;
     g.state.session.safari = null;
     // AUDIT FIX (C241): unspent Safari Balls used to vanish silently —
     // the exit text now says what happened to them.
     const left = g.state.bag.safariball || 0;
     g.state.bag.safariball = 0;
     g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg], () => {
-      const st = MAPS.fuchsia.start || { x: 10, y: 10 };
-      this.loadMap('fuchsia');
+      const destMap = exit ? exit.map : 'fuchsia';
+      const st = exit || MAPS.fuchsia.start || { x: 10, y: 10 };
+      this.loadMap(destMap);
       this.player.tx = st.x; this.player.ty = st.y;
       this.player.px = st.x * TILE; this.player.py = st.y * TILE;
       this.player.fx = st.x; this.player.fy = st.y;
       this.trail = [];
-      g.state.story.position = { map: 'fuchsia', x: st.x, y: st.y, dir: 'down' };
-      this.banner = { text: 'FUCHSIA CITY', t: 1.6 };
+      g.state.story.position = { map: destMap, x: st.x, y: st.y, dir: 'down' };
+      this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
       g.audio.playMusic(this.map.music || 'route1-theme');
     });
   },

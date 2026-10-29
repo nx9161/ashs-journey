@@ -12169,3 +12169,186 @@ which excludes admin). Fresh build byte-identical post-commit;
   S7: reaching the Hall of Origin.
 - The Slowking-class forge-fallback watch carries on: every S3b
   tile is authored (S3b-13 pins it), nothing new rides the forge.
+
+## Arc 4 Stage S4 — Sinnoh systems: Defog/Rock Climb, Great Marsh, Super Contests, forme-switch (2026-10-29)
+
+Base: main @ a942943 (S3b). Deliverable: the four Sinnoh systems
+wired onto shipped engines — two new HMs in the shipped HM idiom,
+the Great Marsh as a data-only Safari reskin, Super Contests as a
+data-only contest-lite reskin with the Platinum rank ladder, and
+the Giratina/Shaymin/Rotom forme-switch riding the Deoxys mechanic
+exactly. One new module (`src/game/sinnoh-systems.mjs`, registered
+in `scripts/module-order.json` after johto-systems); everything
+else is edits to shipped files. No new persisted state was minted
+(state-quintet accounting in §5).
+
+### 0. Budget vs the coordinator allowance
+
+S4 planned to the coordinator-set allowance of **+55,000 B public
+static total max** (the S3b §0 tripwire fired; the allowance is
+recorded in the mission doc). **Actuals: public static total
+12,224,915 → 12,251,036 B, Δ +26,121 — inside the allowance by
+28,879 B** (`public/game.js` 12,062,293 → 12,088,414 B, the same
+delta; index/admin carry no S4 growth beyond the build's content
+hash). The stage also lands under the S3b projection's original
+S4 estimate (+40,000). **Restated projection-to-close:** S5a+S5b
+≈ +135,000, S6 ≈ +50,000, S7 ≈ +25,000, S8/S9 ≈ +3,000 (unchanged
+analogues) → remaining ≈ +213,000 → projection ≈ **12,464,036 B**,
+margin ≈ **118,876 B** vs the 12,582,912 B gate — still below the
+150,000 B austerity tripwire, so **S5 likewise plans to a
+coordinator-set byte allowance before it starts.**
+
+### 1. HM06 Defog + HM07 Rock Climb (the shipped HM idiom)
+
+`HM_MOVES` continues the shipped sequence (6: defog, 7: rockclimb
+— the in-game numbering continues the shipped 1–5; Platinum's
+HM05/HM08 numbering is noted in the data comments). ITEMS gains
+the two hm-pocket rows through the same generation loop as
+HM01–05, plus the Gracidea (§4). Moves are real battle moves in
+moves2 (defog: flying/status, eva −1, PP 15; rockclimb: normal
+90/85, PP 20, confusion 20%). Field use lives in
+overworld-systems beside Dive's: `defogInteract` (any faced
+position on a fog map) and `climbInteract` on S3b's authored
+`climbwall` tiles (landing = the tile beyond the wall in the
+facing direction, walkable-checked; up/down are the same gate read
+from either side — the r217 x16 pairing is the suite-proven one,
+beside the authored sign at (17,6)). Badge gates are **generic
+badge-set reads** (`badgeHeld` scans every badge set; nothing
+names Sinnoh): Defog after the Fen Badge, Rock Climb after the
+Icicle Badge, per Platinum. Knowledge reads are the shipped
+representation — a battle move slot OR the `hmMoves` field-craft
+list (`partyKnowsFieldMove`). Grant hooks ship as data for S5:
+`HM_GRANTS` (defog → hm06/Fen/Solaceon Ruins, rockclimb →
+hm07/Icicle/Route 217, both Platinum) plus a `giveHM` runSteps
+event step in the Dive-grant idiom — idempotent, proven in-suite.
+**Teachability adaptation (recorded):** no species `tm` list
+carries 106/107 (the S1 tables predate the moves), so the shipped
+teach path's eligibility gains a type rule for exactly these two:
+hm06 learnable by Flying types, hm07 by grounded body types
+(normal/ground/rock/fighting/fire/grass/poison/steel/ice/dark/
+electric/bug). **Fog persistence call (recorded):** the cleared
+state persists as the per-map story flag `defogged_<mapId>` (the
+established map-flag idiom); the flag is dropped when the player
+leaves the map, so the fog gathers again on re-entry — the canon
+behaviour. The weather layer reads the flag: r210-north resolves
+`fog`, or clear with source `defog` while the flag stands; a new
+`fog` weather kind + overlay renderer joins weather.mjs. **No
+retro-gating:** S4-11 pins that outside maps9 no shipped map
+declares fog and no shipped row contains a climbwall tile.
+
+### 2. Great Marsh = Safari Zone reskin (data only)
+
+The shipped Kanto Safari engine is generalized by session data,
+not by region words: a safari session now carries its own map
+set, hub, exit, fee/steps/balls and "rock" word, all planted by
+the gate NPC's data (Kanto's warden plants none of it and walks
+the legacy defaults path byte-for-byte — S4-05 pins both sides).
+maps9 data only: the three marsh maps carry `safariZone:
+'great-marsh'`, the gatehouse carries `safariHub`, and MARSH
+WARDEN IO plants fee 500 / 500 steps / 30 balls / entry
+great-marsh-west / the 3-map set / Pastoria exit / rock-word
+**MUD** (battle.mjs reads the label from the session; the thrown
+state variable is untouched). Encounters roll on `marshbog`
+tiles against the marsh maps' own tables. Two engine laws ride
+along, both generic: a warp landing in a zoned map **with a live
+session** keeps the session (intra-zone travel); a landing in a
+zoned map with **no session** bounces to the hub with the warden
+line (the Marsh is entered at its gate only) — hub-less Kanto
+sessions keep their legacy landing untouched. Suite-proven end
+to end (S4B-06…10): pay → session → bog encounter → MUD-labelled
+Safari battle → resolve → steps-out exit at Pastoria with balls
+reclaimed → no-session bounce.
+
+### 3. Super Contests = contest-lite reskin (data only)
+
+Hearthome's hall runs on the H5 engine unchanged; Sinnoh is data
+in contest.mjs: `CONTEST_RANKS.hearthome` is the Platinum truth —
+**one hall, four ranks** (Normal → Great → Ultra → Master), each
+rank `requires` the previous rank's ribbon, implemented as rank
+keys on the shipped engine (the recorded ranks call). The
+counter flow gains a rank-picker menu (locked ranks show their
+missing ribbon); each rank fields its own 3-entrant NPC field in
+CONTEST_NPCS. Ribbons persist through the **shipped H5 quintet
+unchanged** — `CONTEST_RIBBONS` grows by data to the 4 Hoenn
+halls + the 4 rank keys, and gen-tables carries all 8 into
+tables.json (validator closed set regenerated via the tool only).
+Suite-proven (S4B-11): rank gating, a full Normal Rank round on
+the battle presentation, and the Hearthome Ribbon (Normal Rank)
+persisted in `state.contest.ribbons`.
+
+### 4. Forme-switch — Giratina / Shaymin / Rotom (the Deoxys idiom, exactly)
+
+`switchForme` in sinnoh-systems.mjs is the H6 meteorite swap
+re-read: speciesId exchange inside a family, stats/maxHp
+recomputed from the target's base, HP carried by the max-delta
+rule, nickname/level/moves/IVs preserved verbatim; cross-family
+and same-forme swaps refuse. Three object seams, all authored by
+S3b: the **Griseous Orb** is the Turnback Cave chamber sign
+(interact → altered ⇄ origin menu); **Rotom's appliances** are
+the Old Chateau television-room sign (5 appliances ⇄ 5 formes +
+leave-form back to base); the **Gracidea** is a key-pocket ITEMS
+row — bag use on Shaymin swaps land ⇄ sky and is never consumed.
+**Gracidea reversion simplification (recorded):** sky persists
+until the Gracidea is used again or Shaymin faints (a fainted sky
+Shaymin settles back to land on the next overworld step); canon's
+night/freeze reversion is not modelled. **Move delta vs canon
+(recorded):** no appliance move is auto-taught or forgotten —
+moves ride untouched because every forme in a family shares one
+learnset pool (the Deoxys precedent in species5 data); the
+validator checks move ids, never per-forme learnsets. The Deoxys
+`switchDeoxysForme` path itself is untouched. **Both validators
+round-trip all 10 family formes** (7 non-base) in played-shape
+saves with zero errors (S4-10).
+
+### 5. Persisted-state accounting (the quintet law)
+
+**No new persisted state was minted; no schema, defaultState, or
+save-contract change was needed.** Fog → `story.flags` (existing
+idiom). The Marsh → the transient `session.safari` object (the
+Kanto precedent; the validator checks session queues only).
+Ribbons → the existing `contest` quintet (data growth + the
+gen-tables regeneration only). Formes → the mon's `speciesId`
+(the Deoxys precedent). The one validator touch is the bag-size
+cap 183 → **186**, tracking the three new ITEMS rows (the
+established count-supersession pattern).
+
+### 6. Suite
+
+sinnoh-checks **105 → 132/132**: new S4-01…12 (Part A: HM data +
+grants, fog resolver, generic gate reads, Marsh data config,
+rank ladder data, the pure swaps, the reversion predicate, both
+validators over all formes, the no-retro-gate scan, the ribbon
+quintet) and S4B-01…15 (Part B true paths: HM06 teach menu +
+teach, fog refuse/clear/restore, Rock Climb refuse/teach/up/
+down, the full Marsh session, the Super Contest rank gate +
+round + ribbon, all three forme switches on their true seams,
+the giveHM idempotence pin). Count supersessions BY NAME:
+sinnoh A11/A12, cheat-shop A02, frontier A12, hoenn-story A16,
+johto-story A15, johto-systems A24 → items **186**; hoenn-contest
+A01 moves 144 → **146**, A06 superseded (the ribbon set is halls
++ rank keys), A12 wording.
+
+### 7. Battery
+
+sinnoh-checks **132/132** · qa-changed-flows failures exactly
+**{b2, d9}** (verified identical at base a942943) ·
+battle-model **45/45** HARD · campaign **24/24** ·
+arc-foundation **47/47** · frontier **136/136** · hoenn-story
+**88/88** · hoenn-contest **28/28** · cheat-shop **44/44** ·
+johto-story **110/110** · johto-systems **62/62** · validator
+**106** + fuzz + save-contract (api-scripts, all pass). Fresh
+build byte-identical post-commit; `personal/` byte-identical
+(sha f434ba63… / a780af0b…).
+
+### 8. Open items handed on
+
+- **S5 plans to a coordinator-set byte allowance** (the §0
+  tripwire: restated margin ≈ 118,876 B < 150,000 B).
+- S5 calls the shipped hooks: `HM_GRANTS` + the `giveHM` step
+  place HM06 (Solaceon Ruins) and HM07 (Route 217) in story;
+  Dawn's Super Contest beats dress the Hearthome hall whose
+  system now stands; the League/Galactic story rides maps whose
+  field systems are all live.
+- Rotom's appliance move (canon: the forme's signature move
+  swaps with the forme) stays unmodelled under the recorded §4
+  delta unless a later stage rules otherwise.

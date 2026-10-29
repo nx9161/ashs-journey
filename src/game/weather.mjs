@@ -22,7 +22,7 @@
 
 export const CLIMAX_DROUGHT_FLAG = 'climax_drought';
 export const CLIMAX_DELUGE_FLAG = 'climax_deluge';
-export const WEATHER_KINDS = ['clear', 'rain', 'sun', 'ash', 'sand'];
+export const WEATHER_KINDS = ['clear', 'rain', 'sun', 'ash', 'sand', 'fog'];
 
 // Pure resolver: (state, mapDef) -> { kind, source, heavy }.
 //   kind   one of WEATHER_KINDS (the field value, or the override's)
@@ -35,6 +35,11 @@ export function weatherForMap(state, map) {
   const flags = (state && state.story && state.story.flags) || {};
   if (flags[CLIMAX_DROUGHT_FLAG]) return { kind: 'sun', source: 'climax', heavy: true };
   if (flags[CLIMAX_DELUGE_FLAG]) return { kind: 'rain', source: 'climax', heavy: true };
+  // Arc 4 Stage S4: Defog. A fog map reads clear while its per-map
+  // defog flag stands (story.flags['defogged_' + map.id], written by
+  // the Defog field use in overworld-systems and cleared when the
+  // player leaves the map — the fog returns on re-entry, per canon).
+  if (field === 'fog' && flags['defogged_' + map.id]) return { kind: 'clear', source: 'defog', heavy: false };
   return { kind: field, source: 'map', heavy: false };
 }
 
@@ -87,6 +92,21 @@ export function drawWeatherOverlay(r, game, wstate) {
       const s = hash01(i * 19) > 0.6 ? 2 : 1;
       c.fillStyle = hash01(i * 23) > 0.5 ? 'rgba(196,188,178,0.75)' : 'rgba(140,132,124,0.65)';
       c.fillRect(px, py, s, s);
+    }
+    return;
+  }
+  if (kind === 'fog') {
+    // Fog: a pale wash plus slow drifting banks (hash-placed rects,
+    // the ash/sand idiom — no RNG state consumed).
+    c.fillStyle = 'rgba(216,222,228,0.34)';
+    c.fillRect(x0, y0, w, h);
+    c.fillStyle = 'rgba(232,236,240,0.30)';
+    const n = still ? 6 : 12;
+    for (let i = 0; i < n; i++) {
+      const sp = 0.010 + hash01(i * 3 + 2) * 0.012;
+      const px = x0 + ((hash01(i * 7 + 1) * (w + 120) + t * sp) % (w + 120)) - 60;
+      const py = y0 + hash01(i * 13 + 4) * h;
+      c.fillRect(px, py, 52 + hash01(i) * 60, 7 + hash01(i * 5) * 8);
     }
     return;
   }

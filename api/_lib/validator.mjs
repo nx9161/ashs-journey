@@ -727,7 +727,7 @@ export function validateSave(data) {
   if (!isPlainObj(bag) || hasDangerousKey(bag)) errors.push('bad-bag');
   else {
     const keys = Object.keys(bag);
-    if (keys.length > 183) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (183 since S0's 8 Sinnoh badges; was 175 at F0, 168 at H4a, 160 at J6)
+    if (keys.length > 186) errors.push('bad-bag-size'); // cap tracks the ITEMS table size (186 since S4's HM06/HM07 + Gracidea; was 183 at S0, 175 at F0, 168 at H4a, 160 at J6)
     for (const k of keys) {
       if (!TABLES.items.has(k) || !isInt(bag[k], 0, 999)) { errors.push('bad-bag-item'); break; }
     }

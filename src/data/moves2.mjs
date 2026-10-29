@@ -70,6 +70,14 @@ export const MOVES2 = {
   wingattack:   { id: 'wingattack', name: 'Wing Attack', type: 'flying', cat: 'physical', power: 35, acc: 100, pp: 35, priority: 0 },
   drillpeck:    { id: 'drillpeck', name: 'Drill Peck', type: 'flying', cat: 'physical', power: 80, acc: 100, pp: 20, priority: 0 },
   fly:          { id: 'fly', name: 'Fly', type: 'flying', cat: 'physical', power: 70, acc: 95, pp: 15, priority: 0, charge: true },
+  // Arc 4 Stage S4: the two Sinnoh field moves join the table (the HM
+  // items hm06/hm07 in items.mjs teach them through the shipped HM
+  // path, so they must be real battle moves like cut/surf/fly).
+  // Defog (Platinum): clears fog in the field; in battle it lowers
+  // the foe's evasion one stage. Rock Climb (Platinum): 90/85 with a
+  // 20% confusion chance.
+  defog:        { id: 'defog', name: 'Defog', type: 'flying', cat: 'status', power: 0, acc: 100, pp: 15, priority: 0, effect: { target: 'foe', eva: -1 } },
+  rockclimb:    { id: 'rockclimb', name: 'Rock Climb', type: 'normal', cat: 'physical', power: 90, acc: 85, pp: 20, priority: 0, effect: { target: 'foe', status: 'confusion', chance: 20 } },
   confusion:    { id: 'confusion', name: 'Confusion', type: 'psychic', cat: 'special', power: 50, acc: 100, pp: 25, priority: 0, effect: { target: 'foe', status: 'confusion', chance: 10 } },
   psybeam:      { id: 'psybeam', name: 'Psybeam', type: 'psychic', cat: 'special', power: 65, acc: 100, pp: 20, priority: 0, effect: { target: 'foe', status: 'confusion', chance: 10 } },
   psychic:      { id: 'psychic', name: 'Psychic', type: 'psychic', cat: 'special', power: 90, acc: 100, pp: 10, priority: 0, effect: { target: 'foe', spa: -1, spd: -1, stageChance: 30 } },

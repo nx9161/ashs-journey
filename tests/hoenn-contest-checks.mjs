@@ -51,8 +51,8 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
       || !Number.isInteger(aj.jam) || aj.jam < 0 || aj.jam > 3
       || C.appealJamFor(id) !== aj;
   });
-  ok('A01 coverage: EVERY move in the table (144) resolves to appeal/jam through MOVE_APPEAL + appealJamFor — no move lacks values',
-    ids.length === 144 && bad.length === 0, bad.join(','));
+  ok('A01 coverage: EVERY move in the table (146 — 144 + defog/rockclimb, Arc 4 Stage S4 supersession) resolves to appeal/jam through MOVE_APPEAL + appealJamFor — no move lacks values',
+    ids.length === 146 && bad.length === 0, bad.join(','));
   ok('A02 the resolver never throws on an unknown id (floor values {1,0} — a contest cannot crash on a move id)',
     C.appealJamFor('not-a-move').appeal === 1 && C.appealJamFor('not-a-move').jam === 0);
   const n = C.CONTEST_NOTABLES;
@@ -78,9 +78,9 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 }
 
 {
-  ok('A06 the four halls are exactly maps7\'s contestHall fields (verdanturf/fallarbor/slateport/lilycove) and CONTEST_RIBBONS is that closed set',
+  ok('A06 the four Hoenn halls are exactly maps7\'s contestHall fields (verdanturf/fallarbor/slateport/lilycove); CONTEST_RIBBONS is that closed set PLUS the four Hearthome Super Contest rank ribbons (Arc 4 Stage S4 supersession — the H5 closed set grows by data, Hoenn halls untouched)',
     JSON.stringify(C.CONTEST_HALLS) === JSON.stringify(['verdanturf', 'fallarbor', 'slateport', 'lilycove'])
-    && JSON.stringify(C.CONTEST_RIBBONS) === JSON.stringify(C.CONTEST_HALLS)
+    && JSON.stringify(C.CONTEST_RIBBONS) === JSON.stringify([...C.CONTEST_HALLS, 'hearthome-normal', 'hearthome-great', 'hearthome-ultra', 'hearthome-master'])
     && Object.values(MAPS7).filter((m) => m.contestHall).map((m) => m.contestHall).sort().join(',')
       === [...C.CONTEST_HALLS].sort().join(','));
   const scriptBad = [];
@@ -132,7 +132,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A12 gen-tables (quintet 4/5): tables.json in sync and carries ribbons = the four hall ids (emitted from src/data/contest.mjs, never hand-edited)',
+  ok('A12 gen-tables (quintet 4/5): tables.json in sync and carries ribbons = the four Hoenn hall ids + the four Hearthome rank ribbons (emitted from src/data/contest.mjs, never hand-edited; S4 supersession)',
     checkOut.includes('tables.json OK') && JSON.stringify(t.ribbons) === JSON.stringify(C.CONTEST_RIBBONS), checkOut.trim());
   const cloud = clone(defaultState());
   cloud.player.name = 'ASH'; cloud.player.rivalName = 'GARY';

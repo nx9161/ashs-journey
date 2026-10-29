@@ -112,14 +112,14 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A11 tables.json in sync (gen-tables --check, regenerated via the tool only); items 183 carries all 8 sinnoh ids; badgeSequences.sinnoh is the Platinum order and regionBadgeMax.sinnoh is 8',
-    checkOut.includes('tables.json OK') && t.items.length === 183
+  ok('A11 tables.json in sync (gen-tables --check, regenerated via the tool only); items 186 (183 + HM06 Defog + HM07 Rock Climb + the Gracidea, Arc 4 Stage S4 — supersedes the Stage S0 count) carries all 8 sinnoh ids; badgeSequences.sinnoh is the Platinum order and regionBadgeMax.sinnoh is 8',
+    checkOut.includes('tables.json OK') && t.items.length === 186
     && SINNOH_ORDER.every((id) => t.items.includes(id))
     && JSON.stringify(t.badgeSequences.sinnoh) === JSON.stringify(SINNOH_ORDER)
     && t.regionBadgeMax.sinnoh === 8, checkOut.trim());
   const maximal = cloud((s) => { for (const id of Object.keys(ITEMS)) s.bag[id] = 999; });
-  ok('A12 bag cap tracks the ITEMS table: a maximal bag (all 183 items @999) validates server-side',
-    Object.keys(ITEMS).length === 183 && VAL.validateSave(maximal).ok,
+  ok('A12 bag cap tracks the ITEMS table: a maximal bag (all 186 items @999) validates server-side',
+    Object.keys(ITEMS).length === 186 && VAL.validateSave(maximal).ok,
     JSON.stringify(VAL.validateSave(maximal).errors));
   ok('A13 registry-driven display read: badgeCountFor counts badges.sinnoh through the arc row (3 earned -> 3; absent array -> 0)',
     badgeCountFor({ badges: { sinnoh: SINNOH_ORDER.slice(0, 3) } }, arcById('sinnoh')) === 3
@@ -662,6 +662,120 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     && (MAPS9['r230'].warps || []).some((w) => w.to.map === 'fight-area'));
 }
 
+// ================= Part S4: systems (Arc 4 Stage S4) =================
+// Defog + Rock Climb HMs, the Great Marsh Safari reskin, Super
+// Contests, and the Giratina/Shaymin/Rotom forme switch. Part A:
+// pure units (data, weather resolver, gates, safari config, contest
+// ranks, the forme swap + both validators over all 7 formes, the
+// no-retro-gate scan). Part B (bundle, below): true-path drives.
+{
+  const { HM_MOVES, HM_GRANTS } = await import(join(ROOT, 'src/data/items.mjs'));
+  const { MOVES: MV1B } = await import(join(ROOT, 'src/data/moves.mjs'));
+  const { MOVES2: MV2B } = await import(join(ROOT, 'src/data/moves2.mjs'));
+  const ALLMV = { ...MV1B, ...MV2B };
+  const { weatherForMap, WEATHER_KINDS } = await import(join(ROOT, 'src/game/weather.mjs'));
+  const SYS = await import(join(ROOT, 'src/game/sinnoh-systems.mjs'));
+  const { makeMon: mkMon } = await import(join(ROOT, 'src/game/state.mjs'));
+  const rosterS4 = {};
+  for (const f of ['species.mjs', 'species2.mjs', 'species3.mjs', 'species4.mjs', 'species5.mjs']) {
+    const mod = await import(join(ROOT, 'src/data', f));
+    for (const v of Object.values(mod)) if (v && typeof v === 'object') Object.assign(rosterS4, v);
+  }
+  ok('S4-01 HM data: HM_MOVES continues the shipped sequence (6 defog, 7 rockclimb); ITEMS hm06/hm07 are hm-pocket rows teaching the moves; both moves are real battle moves (defog flying status eva-1 PP15, rockclimb normal 90/85 PP20 confusion 20%)',
+    HM_MOVES[6] === 'defog' && HM_MOVES[7] === 'rockclimb'
+    && ITEMS.hm06.pocket === 'hm' && ITEMS.hm06.move === 'defog' && ITEMS.hm07.pocket === 'hm' && ITEMS.hm07.move === 'rockclimb'
+    && ALLMV.defog.type === 'flying' && ALLMV.defog.cat === 'status' && ALLMV.defog.effect.eva === -1 && ALLMV.defog.pp === 15
+    && ALLMV.rockclimb.power === 90 && ALLMV.rockclimb.acc === 85 && ALLMV.rockclimb.pp === 20 && ALLMV.rockclimb.effect.status === 'confusion');
+  ok('S4-02 grant hooks as data (HM_GRANTS, the table S5 calls): defog -> hm06 gated on fenbadge from the Solaceon Ruins (Platinum); rockclimb -> hm07 gated on iciclebadge from Route 217 (Platinum); the Gracidea is a key-pocket item',
+    HM_GRANTS.defog.item === 'hm06' && HM_GRANTS.defog.badge === 'fenbadge' && HM_GRANTS.defog.source.includes('Solaceon')
+    && HM_GRANTS.rockclimb.item === 'hm07' && HM_GRANTS.rockclimb.badge === 'iciclebadge' && HM_GRANTS.rockclimb.source.includes('217')
+    && ITEMS.gracidea.pocket === 'key');
+  const fogMap = ALL_MAPS['r210-north'];
+  const fogState = (cleared) => { const s = clone(defaultState()); if (cleared) s.story.flags['defogged_r210-north'] = true; return s; };
+  ok('S4-03 fog weather: WEATHER_KINDS carries fog; r210-north resolves fog from its map field; with the per-map defogged flag it resolves clear (source defog); a Kanto map under the same flags is untouched (clear/none)',
+    WEATHER_KINDS.includes('fog')
+    && weatherForMap(fogState(false), fogMap).kind === 'fog'
+    && weatherForMap(fogState(true), fogMap).kind === 'clear' && weatherForMap(fogState(true), fogMap).source === 'defog'
+    && weatherForMap(fogState(true), ALL_MAPS.pallet).kind === 'clear' && weatherForMap(fogState(true), ALL_MAPS.pallet).source === 'none');
+  ok('S4-04 field gates are generic reads: badgeHeld finds a badge in ANY set (a hoenn-set fenbadge-shaped read works — the read names no region); partyKnowsFieldMove reads a move slot OR the hmMoves field-craft list (the Dive representation)',
+    SYS.badgeHeld({ badges: { hoenn: ['fenbadge'] } }, 'fenbadge') === true
+    && SYS.badgeHeld({ badges: { sinnoh: ['coalbadge'] } }, 'fenbadge') === false
+    && SYS.partyKnowsFieldMove([{ moves: [{ id: 'defog' }], hmMoves: [] }], 'defog') === true
+    && SYS.partyKnowsFieldMove([{ moves: [], hmMoves: ['rockclimb'] }], 'rockclimb') === true
+    && SYS.partyKnowsFieldMove([{ moves: [{ id: 'surf' }], hmMoves: [] }], 'defog') === false);
+  const { MAPS9: M9S4 } = await import(join(ROOT, 'src/data/maps9.mjs'));
+  const warden = (M9S4['great-marsh-gate'].npcs || []).find((n) => n.name === 'MARSH WARDEN IO');
+  ok('S4-05 Marsh reskin is DATA: the three marsh maps carry safariZone great-marsh, the gatehouse carries safariHub, and the warden plants the generic gate config (fee 500, 500 steps, 30 balls, entry great-marsh-west, the 3-map set, hub, Pastoria exit, rock-word MUD) — while the Kanto warden (maps3) plants NONE of it (defaults path, legacy behaviour)',
+    ['great-marsh-west', 'great-marsh-east', 'great-marsh-north'].every((id) => M9S4[id].safariZone === 'great-marsh')
+    && M9S4['great-marsh-gate'].safariHub === 'great-marsh'
+    && !!warden && warden.safariGate === true && warden.safariFee === 500 && warden.safariSteps === 500 && warden.safariBalls === 30
+    && warden.safariMap === 'great-marsh-west' && JSON.stringify(warden.safariMaps) === JSON.stringify(['great-marsh-west', 'great-marsh-east', 'great-marsh-north'])
+    && warden.safariHub === 'great-marsh-gate' && warden.safariExit.map === 'pastoria' && warden.safariRock === 'MUD'
+    && !(Object.values(ALL_MAPS).find((m) => (m.npcs || []).some((n) => n.safariGate && n.safariFee !== undefined && m.id !== 'great-marsh-gate'))));
+  const CD = await import(join(ROOT, 'src/data/contest.mjs'));
+  ok('S4-06 Super Contest data: CONTEST_RANKS.hearthome is the Platinum ladder (Normal -> Great -> Ultra -> Master, each requiring the previous rank ribbon); CONTEST_RIBBONS = the 4 Hoenn halls + the 4 rank keys; every rank has a 3-entrant NPC field of real species scripting real moves, and a ribbon name',
+    CD.CONTEST_RANKS.hearthome.length === 4
+    && CD.CONTEST_RANKS.hearthome[0].requires === null
+    && CD.CONTEST_RANKS.hearthome.every((r, i) => i === 0 || r.requires === CD.CONTEST_RANKS.hearthome[i - 1].key)
+    && JSON.stringify(CD.CONTEST_RIBBONS) === JSON.stringify([...CD.CONTEST_HALLS, ...CD.CONTEST_RANKS.hearthome.map((r) => r.key)])
+    && CD.CONTEST_RANKS.hearthome.every((r) => (CD.CONTEST_NPCS[r.key] || []).length === 3
+      && CD.CONTEST_NPCS[r.key].every((n) => rosterS4[n.species] && n.script.length === 4 && n.script.every((mv) => ALLMV[mv]))
+      && typeof CD.RIBBON_NAMES[r.key] === 'string'));
+  // The forme swap, pure (the Deoxys idiom): identity preserved,
+  // stats recomputed, cross-family + same-forme rejected.
+  const formeProbe = (from, to) => {
+    const mon = mkMon(from, 360, rosterS4, ALLMV);
+    mon.nickname = 'PROBE'; mon.hp = Math.floor(mon.maxHp / 2);
+    const before = { maxHp: mon.maxHp, hp: mon.hp, moves: JSON.stringify(mon.moves), atk: mon.stats.atk };
+    const swapped = SYS.switchForme(mon, to, rosterS4);
+    return { mon, before, swapped };
+  };
+  const gp = formeProbe('giratina', 'giratinaorigin');
+  ok('S4-07 Giratina swap (pure): altered -> origin succeeds; nickname/level/moves preserved verbatim; stats recompute from the origin base (atk rises: base 100 -> 120); HP carries by the max-delta rule (same base HP 150, so maxHp and hp are unchanged)',
+    gp.swapped && gp.mon.speciesId === 'giratinaorigin' && gp.mon.nickname === 'PROBE' && gp.mon.level === 360
+    && JSON.stringify(gp.mon.moves) === gp.before.moves && gp.mon.stats.atk > gp.before.atk
+    && gp.mon.maxHp === gp.before.maxHp && gp.mon.hp === gp.before.hp);
+  const rp = formeProbe('rotom', 'rotomwash');
+  const rpTo = rp.mon.speciesId;
+  const rpBack = SYS.switchForme(rp.mon, 'rotom', rosterS4);
+  ok('S4-08 Rotom + Shaymin swaps (pure): rotom -> wash -> base round-trips; every rotom appliance forme is reachable from base and back; shaymin land -> sky -> land round-trips; cross-family (rotom -> giratinaorigin) and same-forme swaps are refused',
+    rp.swapped && rpTo === 'rotomwash' && rpBack && rp.mon.speciesId === 'rotom'
+    && ['rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow'].every((f) => { const m = mkMon('rotom', 340, rosterS4, ALLMV); return SYS.switchForme(m, f, rosterS4) && SYS.switchForme(m, 'rotom', rosterS4); })
+    && (() => { const m = mkMon('shaymin', 350, rosterS4, ALLMV); return SYS.switchForme(m, 'shayminsky', rosterS4) && SYS.switchForme(m, 'shaymin', rosterS4); })()
+    && !SYS.switchForme(mkMon('rotom', 340, rosterS4, ALLMV), 'giratinaorigin', rosterS4)
+    && !SYS.switchForme(mkMon('giratina', 360, rosterS4, ALLMV), 'giratina', rosterS4));
+  ok('S4-09 Shaymin reversion predicate (the recorded simplification): a fainted sky Shaymin reverts; a healthy sky or a fainted land Shaymin does not',
+    SYS.shayminReverted({ speciesId: 'shayminsky', hp: 0 }) === true
+    && SYS.shayminReverted({ speciesId: 'shayminsky', hp: 12 }) === false
+    && SYS.shayminReverted({ speciesId: 'shaymin', hp: 0 }) === false);
+  // Both validators round-trip every forme in a played-shape save.
+  const ALL_FORMES = ['giratina', 'giratinaorigin', 'shaymin', 'shayminsky', 'rotom', 'rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow'];
+  const formeSave = (fid) => {
+    const s = clone(defaultState());
+    s.player.name = 'ASH'; s.player.rivalName = 'GARY';
+    s.story.arc = 'sinnoh'; s.story.region = 'sinnoh';
+    const mon = mkMon(fid, 360, rosterS4, ALLMV);
+    mon.nickname = 'FORME';
+    s.party.push(mon);
+    s.badges.sinnoh = SINNOH_ORDER.slice(0, 5);
+    return s;
+  };
+  ok('S4-10 validator round-trip: a played-shape Sinnoh save carrying EACH of the 10 family formes (7 non-base) validates with ZERO errors server-side AND client-side — a switched forme can never strand a save',
+    ALL_FORMES.every((fid) => { const s = formeSave(fid); const v = VAL.validateSave(clone(s)); return v.ok && v.errors.length === 0 && SCH.validateSave(clone(s)).ok; }),
+    ALL_FORMES.map((fid) => fid + ':' + VAL.validateSave(formeSave(fid)).errors.join(',')).join(' '));
+  const tilesS4 = await import(join(ROOT, 'src/engine/tiles.mjs'));
+  const climbCh4 = tilesS4.S3B_KIND_CHARS.climbwall;
+  const shippedMaps = Object.entries(ALL_MAPS).filter(([id]) => !M9S4[id]);
+  ok('S4-11 no retro-gating: outside maps9, NO shipped map declares fog weather and NO shipped map row contains a climbwall tile — Kanto/Johto/Hoenn saves meet no new gate (the gates exist only where S3b authored them)',
+    shippedMaps.every(([, m]) => m.weather !== 'fog' && !(m.rows || []).some((r) => r.includes(climbCh4)))
+    && ['r217', 'victory-road', 'mt-coronet-north'].every((id) => M9S4[id].rows.some((r) => r.includes(climbCh4))));
+  ok('S4-12 ribbon persistence rides the H5 quintet unchanged: a save holding all four Hearthome rank ribbons validates client + server, and save-fill preserves them (no new persisted state was minted for S4 — fog lives in story.flags, the Marsh in session, formes in speciesId)',
+    (() => { const s = clone(defaultState()); s.player.name = 'ASH'; s.player.rivalName = 'GARY';
+      s.contest.ribbons = ['hearthome-normal', 'hearthome-great', 'hearthome-ultra', 'hearthome-master'];
+      return SCH.validateSave(clone(s)).ok && VAL.validateSave(clone(s)).ok
+        && JSON.stringify(SCH.migrate(clone(s)).contest.ribbons) === JSON.stringify(s.contest.ribbons); })());
+}
+
 // ================= Part B: headless bundle =================
 const { buildGameJs } = await import(join(ROOT, 'scripts/build.mjs'));
 const gameJs = buildGameJs();
@@ -848,6 +962,191 @@ const driver = `
   ok('B09 ARC COMPLETE summary for Sinnoh reads Badges: 8/8 through badgeCountFor (the registry badgeSet read — the Journal/dex display path picks Sinnoh up with no special-casing)',
     sum.badgeLine === 'Badges: 8/8' && sum.arcId === 'sinnoh',
     'badgeLine=' + sum.badgeLine);
+
+  // ================= S4 bundle drives (Arc 4 Stage S4) =================
+  var pickS = function (g, v) { if (g.ui.menuOpen) pick(g, v); };
+  var g2 = mkGame(802); boot(g2);
+  var st2 = g2.state;
+  st2.player.money = 5000;
+  st2.badges.sinnoh = SN_IDS.slice(0, 5); // through the Fen Badge
+  var star = makeMon('staraptor', 340, SPECIES, MOVES); star.nickname = 'GALE';
+  var gar = makeMon('garchomp', 345, SPECIES, MOVES); gar.moves = [{ id: 'hyperbeam', pp: 5, maxPp: 5 }];
+  var gir = makeMon('giratina', 360, SPECIES, MOVES); gir.nickname = 'RENE';
+  var shay = makeMon('shaymin', 350, SPECIES, MOVES);
+  var rot = makeMon('rotom', 340, SPECIES, MOVES);
+  st2.party = [gar, star, gir, shay, rot];
+  st2.bag.hm06 = 1; st2.bag.hm07 = 1; st2.bag.gracidea = 1;
+
+  // --- teach Defog through the shipped HM-teach path ---
+  g2.useBagItem('hm06'); tk(g2, 2);
+  var teachMenu = g2.ui.menu ? g2.ui.menu.items : [];
+  ok('S4B-01 HM06 teach menu (the shipped teachFromBag path): the Flying-type Staraptor is enabled for Defog, the non-flying party members are not (the S4 type-rule eligibility)',
+    teachMenu.length === 6 && teachMenu[1] && !teachMenu[1].disabled
+    && teachMenu[0].disabled && teachMenu[2].disabled && teachMenu[4].disabled,
+    'menu=' + teachMenu.map(function (i) { return i.label + ':' + (i.disabled ? 'off' : 'on'); }).join('|'));
+  pickS(g2, 1); tk(g2, 2);
+  if (g2.ui.menuOpen) pickS(g2, 0); // the forget-a-move prompt (Staraptor carries 4)
+  drain(g2);
+  ok('S4B-02 Defog taught: Staraptor knows Defog as a battle move AND in its hmMoves field craft (the HM representation)',
+    star.moves.some(function (m) { return m.id === 'defog'; }) && (star.hmMoves || []).includes('defog'));
+
+  // --- Defog clears the r210-north fog; leaving restores it ---
+  var ow2 = gotoMap(g2, 'r210-north', 11, 16); drain(g2);
+  var fogBefore = weatherForMap(st2, ow2.map).kind;
+  st2.badges.sinnoh = SN_IDS.slice(0, 4); // Fen Badge removed
+  ow2.defogInteract(); drain(g2);
+  var badgeRefused = !st2.story.flags['defogged_r210-north'];
+  st2.badges.sinnoh = SN_IDS.slice(0, 5);
+  var savedMoves = star.moves; var savedHm = star.hmMoves;
+  star.moves = star.moves.filter(function (m) { return m.id !== 'defog'; });
+  star.hmMoves = (star.hmMoves || []).filter(function (m) { return m !== 'defog'; });
+  ow2.defogInteract(); drain(g2);
+  var knowRefused = !st2.story.flags['defogged_r210-north'];
+  star.moves = savedMoves; star.hmMoves = savedHm;
+  ow2.defogInteract(); tk(g2, 2); pickS(g2, 'yes'); drain(g2);
+  ok('S4B-03 Defog on Route 210 North: the map resolves fog; without the Fen Badge the field use refuses; with the badge but no Defog knowledge it refuses again (both refusals name their gate by leaving the fog standing); with both, the fog clears (weather resolves clear)',
+    fogBefore === 'fog' && badgeRefused && knowRefused
+    && st2.story.flags['defogged_r210-north'] === true && weatherForMap(st2, ow2.map).kind === 'clear');
+  gotoMap(g2, 'celestic', 12, 8); drain(g2);
+  var fogRestored = !st2.story.flags['defogged_r210-north'];
+  ow2 = gotoMap(g2, 'r210-north', 11, 16); drain(g2);
+  ok('S4B-04 fog persistence call: leaving the map clears the defogged flag (the canon return — the fog gathers again on re-entry)',
+    fogRestored && weatherForMap(st2, ow2.map).kind === 'fog');
+
+  // --- Rock Climb on the r217 wall ---
+  ow2 = gotoMap(g2, 'r217', 13, 14); drain(g2);
+  var faceWall = function (ow, x, y, dir) {
+    ow.player.tx = x; ow.player.ty = y; ow.player.fx = x; ow.player.fy = y;
+    ow.player.px = x * TILE; ow.player.py = y * TILE; ow.player.dir = dir;
+  };
+  faceWall(ow2, 16, 6, 'up'); ow2.sysInteract(16, 5); drain(g2);
+  var climbBadgeRefused = ow2.player.ty === 6;
+  st2.badges.sinnoh = SN_IDS.slice(0, 7); // through the Icicle Badge
+  faceWall(ow2, 16, 6, 'up'); ow2.sysInteract(16, 5); drain(g2);
+  var climbKnowRefused = ow2.player.ty === 6;
+  g2.useBagItem('hm07'); tk(g2, 2); if (g2.ui.menuOpen) pickS(g2, 0); drain(g2); // teach Garchomp (ground body; 1-move mon learns directly)
+  var garKnows = gar.moves.some(function (m) { return m.id === 'rockclimb'; });
+  faceWall(ow2, 16, 6, 'up'); ow2.sysInteract(16, 5); drain(g2); tk(g2, 2); pickS(g2, 'yes'); tk(g2, 3);
+  var climbedUp = ow2.player.tx === 16 && ow2.player.ty === 4;
+  faceWall(ow2, 16, 4, 'down'); ow2.sysInteract(16, 5); drain(g2); tk(g2, 2); pickS(g2, 'yes'); tk(g2, 3);
+  ok('S4B-05 Rock Climb on Route 217: no Icicle Badge refuses; badge without knowledge refuses; HM07 taught to Garchomp through the bag; the climb crosses the climbwall band up (16,6 -> 16,4) and back down — the authored pairing, both directions',
+    climbBadgeRefused && climbKnowRefused && garKnows && climbedUp
+    && ow2.player.tx === 16 && ow2.player.ty === 6);
+
+  // --- Great Marsh session, end to end ---
+  ow2 = gotoMap(g2, 'great-marsh-gate', 8, 10); drain(g2);
+  var wardenNpc = ow2.map.npcs.find(function (n) { return n.name === 'MARSH WARDEN IO'; });
+  var money0 = st2.player.money;
+  ow2.sysNpc(wardenNpc); drain(g2); tk(g2, 3);
+  var gateMenuOk = g2.ui.menuOpen && g2.ui.menu.items.some(function (i) { return i.value === 'yes'; });
+  pickS(g2, 'yes'); tk(g2, 4); drain(g2);
+  var saf = st2.session.safari;
+  ok('S4B-06 Marsh entry at the warden (the generic Safari gate): $500 paid, a session stands with the 3-map Marsh set + 500 steps, 30 Safari Balls in the bag, and the player lands in Great Marsh West',
+    gateMenuOk && !!saf && saf.maps.length === 3 && saf.steps === 500
+    && st2.bag.safariball === 30 && st2.player.money === money0 - 500
+    && pos(g2).map === 'great-marsh-west',
+    'saf=' + JSON.stringify(saf) + ' pos=' + JSON.stringify(pos(g2)));
+  ow2 = g2.scenes.top;
+  var bogChar = null;
+  for (var chK in TILE_CHARS) if (TILE_CHARS[chK] === 'marshbog') bogChar = chK;
+  var bogTile = null;
+  for (var by = 0; by < ow2.map.rows.length && !bogTile; by++)
+    for (var bx = 0; bx < ow2.map.rows[by].length; bx++)
+      if (ow2.map.rows[by][bx] === bogChar) { bogTile = { x: bx, y: by }; break; }
+  var inBattle = false;
+  for (var ei = 0; ei < 500 && !inBattle; ei++) {
+    ow2.sysEncounterStep(bogTile.x, bogTile.y, bogChar);
+    if (g2.scenes.top !== ow2) inBattle = true;
+  }
+  var bat = g2.scenes.top;
+  ok('S4B-07 a Marsh encounter fires on a marshbog tile under the session (Safari rules on the Marsh tables)',
+    inBattle && bat.safari === true && bat.safariRockLabel === 'MUD');
+  var bGuard = 0;
+  while (g2.scenes.top === bat && bGuard++ < 400) {
+    if (g2.ui.menuOpen) {
+      var its = g2.ui.menu.items;
+      var bi = its.findIndex(function (it) { return it.value === 'safariball' && !it.disabled; });
+      var ri = its.findIndex(function (it) { return it.value === 'safarirun'; });
+      g2.ui.debugChoose(bi >= 0 ? bi : ri); tk(g2, 3);
+    } else if (g2.ui.dialogueOpen || (bat && bat.msgOpen)) pA(g2);
+    else tk(g2, 2);
+  }
+  ok('S4B-08 the Marsh battle resolves through Safari commands (balls / bait / mud / run — catch, flee or run all end it) and control returns to the Marsh with the session alive: no soft-lock',
+    g2.scenes.top === ow2 && !!st2.session.safari);
+  st2.session.safari.steps = 1;
+  ow2.sysOnStep(ow2.player.tx, ow2.player.ty); drain(g2); tk(g2, 3);
+  ok('S4B-09 steps-out ends the Marsh session cleanly: session cleared, unspent Safari Balls reclaimed by the park, and the player exits at Pastoria (the session exit data)',
+    st2.session.safari === null && st2.bag.safariball === 0 && pos(g2).map === 'pastoria',
+    'pos=' + JSON.stringify(pos(g2)));
+  ow2 = g2.scenes.top;
+  ow2.sysWarpLanding('great-marsh-west', 'great-marsh-gate'); tk(g2, 2); drain(g2);
+  ok('S4B-10 the warp guard: landing in a zoned Marsh map with NO session bounces the player back to the gatehouse with the warden line (the Marsh is entered at its gate only)',
+    ow2.mapId === 'great-marsh-gate', 'map=' + ow2.mapId);
+
+  // --- Super Contest: Hearthome Normal Rank ---
+  ow2 = gotoMap(g2, 'contest-hearthome', 8, 10); drain(g2);
+  ow2.sysInteract(9, 2); tk(g2, 2); drain(g2); tk(g2, 2);
+  var rankMenu = g2.ui.menu ? g2.ui.menu.items : [];
+  var rankGateOk = rankMenu.some(function (i) { return i.value === 'hearthome-normal' && !i.disabled; })
+    && rankMenu.some(function (i) { return i.value === 'hearthome-great' && i.disabled; })
+    && rankMenu.some(function (i) { return i.value === 'hearthome-master' && i.disabled; });
+  pickS(g2, 'hearthome-normal'); tk(g2, 2); drain(g2); tk(g2, 2);
+  var cGuard = 0, sawContest = false, moveMenus = 0;
+  while (cGuard++ < 4000) {
+    if (g2.scenes.top instanceof ContestScene) sawContest = true;
+    if (g2.ui.dialogueOpen) { drain(g2); continue; }
+    if (g2.ui.menuOpen) {
+      var cm = g2.ui.menu;
+      if (cm.title === 'Enter which Pokemon?') { g2.ui.debugChoose(0); tk(g2, 3); continue; }
+      if (cm.title === 'Choose a move') { moveMenus++; g2.ui.debugChoose(0); tk(g2, 3); continue; }
+      g2.ui.debugChoose(0); tk(g2, 3); continue;
+    }
+    if (g2.scenes.top instanceof ContestScene) { tk(g2, 2); continue; }
+    if (g2.scenes.top instanceof OverworldScene) break;
+    tk(g2, 2);
+  }
+  drain(g2);
+  ok('S4B-11 Super Contest (Hearthome): the rank menu gates Great/Master behind their ladder ribbons; the Normal Rank runs end-to-end on the shipped contest engine (4 move menus) with Garchomp headlining Hyper Beam, and FIRST PLACE persists the Hearthome Ribbon (Normal Rank) in state.contest.ribbons — the H5 persistence quintet, no new state',
+    rankGateOk && sawContest && moveMenus === 4 && st2.contest.ribbons.includes('hearthome-normal'),
+    'gate=' + rankGateOk + ' saw=' + sawContest + ' menus=' + moveMenus + ' ribbons=' + JSON.stringify(st2.contest.ribbons));
+
+  // --- forme switches on their true paths ---
+  var ow3 = gotoMap(g2, 'turnback-cave', 11, 14); drain(g2);
+  ow3.player.tx = 11; ow3.player.ty = 6; ow3.player.fx = 11; ow3.player.fy = 6;
+  ow3.player.px = 11 * TILE; ow3.player.py = 6 * TILE; ow3.player.dir = 'up';
+  ow3.tryInteract(); tk(g2, 2); drain(g2); tk(g2, 2);
+  pickS(g2, 'giratinaorigin'); drain(g2);
+  var girSwitched = gir.speciesId === 'giratinaorigin' && gir.nickname === 'RENE';
+  ow3.tryInteract(); tk(g2, 2); drain(g2); tk(g2, 2);
+  pickS(g2, 'giratina'); drain(g2);
+  ok('S4B-12 Giratina at the Griseous Orb (Turnback Cave chamber sign): altered -> origin -> altered, the individual preserved (nickname RENE rides both ways)',
+    girSwitched && gir.speciesId === 'giratina');
+  var ow4 = gotoMap(g2, 'old-chateau', 9, 12); drain(g2);
+  ow4.player.tx = 16; ow4.player.ty = 5; ow4.player.fx = 16; ow4.player.fy = 5;
+  ow4.player.px = 16 * TILE; ow4.player.py = 5 * TILE; ow4.player.dir = 'up';
+  ow4.tryInteract(); tk(g2, 2); drain(g2); tk(g2, 2);
+  pickS(g2, 'rotomheat'); drain(g2);
+  var rotSwitched = rot.speciesId === 'rotomheat';
+  ow4.tryInteract(); tk(g2, 2); drain(g2); tk(g2, 2);
+  pickS(g2, 'rotom'); drain(g2);
+  ok('S4B-13 Rotom at the Old Chateau appliances (the television room): base -> Heat forme via the oven, then back to base by leaving the appliances',
+    rotSwitched && rot.speciesId === 'rotom');
+  g2.useBagItem('gracidea'); tk(g2, 2); pickS(g2, 3); drain(g2);
+  var shaySky = shay.speciesId === 'shayminsky';
+  g2.useBagItem('gracidea'); tk(g2, 2); pickS(g2, 3); drain(g2);
+  var shayLand = shay.speciesId === 'shaymin';
+  g2.useBagItem('gracidea'); tk(g2, 2); pickS(g2, 3); drain(g2);
+  shay.hp = 0;
+  var ow5 = g2.scenes.top; ow5.sysOnStep(ow5.player.tx, ow5.player.ty); tk(g2, 2);
+  ok('S4B-14 Shaymin via the Gracidea (bag use, never consumed): land -> sky -> land by the flower, sky again, and the faint reversion settles a fainted sky Shaymin back to land on the next step',
+    shaySky && shayLand && shay.speciesId === 'shaymin' && st2.bag.gracidea === 1);
+  st2.bag.hm07 = 0;
+  var ow6 = g2.scenes.top;
+  ow6.runSteps([{ giveHM: 'rockclimb' }], 0, null); tk(g2, 2);
+  var grantOnce = st2.bag.hm07 === 1;
+  ow6.runSteps([{ giveHM: 'rockclimb' }], 0, null); tk(g2, 2);
+  ok('S4B-15 the giveHM event step (the S5 grant hook): { giveHM: rockclimb } grants HM07 once — a second firing never duplicates it',
+    grantOnce && st2.bag.hm07 === 1);
 
   globalThis.__SNQ__ = Q;
 })();

@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "b041ad21f8ef1709f31113a60387f37223faee055f1c2254c83bcaaa28316765",
+  "tablesVersion": "f53878820a42f491c70c6a586e9e28e66c7805d27cfea35c6ba8a93e3bfb6bea",
   "schemaVersion": 2,
   "species": [
     "abomasnow",
@@ -538,6 +538,7 @@
     "counter",
     "cut",
     "defensecurl",
+    "defog",
     "dig",
     "disable",
     "doubleedge",
@@ -608,6 +609,7 @@
     "recover",
     "reflect",
     "rest",
+    "rockclimb",
     "rockslide",
     "rockthrow",
     "sandattack",
@@ -702,6 +704,7 @@
     "gloomfang",
     "goldteeth",
     "goodrod",
+    "gracidea",
     "greatball",
     "greenapricorn",
     "gsball",
@@ -715,6 +718,8 @@
     "hm03",
     "hm04",
     "hm05",
+    "hm06",
+    "hm07",
     "hyperpotion",
     "iceheal",
     "iciclebadge",
@@ -861,7 +866,11 @@
     "verdanturf",
     "fallarbor",
     "slateport",
-    "lilycove"
+    "lilycove",
+    "hearthome-normal",
+    "hearthome-great",
+    "hearthome-ultra",
+    "hearthome-master"
   ],
   "frontierFacilities": [
     "tower",

@@ -215,6 +215,7 @@ export class BattleScene {
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
     this.safari = !!opts.safari; // Safari Zone: no ally actions, BALL/BAIT/ROCK/RUN
+    this.safariRockLabel = opts.safariRock || 'ROCK'; // S4: the zone's own word for the rock throw (the Great Marsh throws MUD) — data, from the session (the boolean below stays the thrown state)
     this.onEnd = opts.onEnd || null; // story-event continuation callback
     this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
     this.friendly = !!opts.friendly; // no-stakes battle (Candy Coach spar): defeat costs nothing
@@ -622,7 +623,7 @@ export class BattleScene {
       const items = [
         { label: 'SAFARI BALL x' + balls, value: 'safariball', disabled: balls <= 0 },
         { label: 'BAIT', value: 'bait' },
-        { label: 'ROCK', value: 'rock' },
+        { label: this.safariRockLabel, value: 'rock' },
         { label: 'RUN', value: 'safarirun' },
       ];
       this.game.ui.showCommands(items, (value) => this.onCommand(value), { stickyCancel: true });
@@ -668,7 +669,7 @@ export class BattleScene {
         if (value === 'bait') { this.safariBait = true; this.safariRock = false; }
         else { this.safariRock = true; this.safariBait = false; }
         const name = displayName(this.foe, SPECIES);
-        this.say(value === 'bait' ? 'You threw bait! ' + name + ' is eating...' : 'You threw a rock! ' + name + ' is angry!', () => {
+        this.say(value === 'bait' ? 'You threw bait! ' + name + ' is eating...' : 'You threw ' + (this.safariRockLabel === 'ROCK' ? 'a rock' : this.safariRockLabel.toLowerCase()) + '! ' + name + ' is angry!', () => {
           if (this.safariFleeCheck()) return;
           this.toCommand();
         });

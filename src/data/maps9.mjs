@@ -3886,6 +3886,7 @@ export const MAPS9 = {
   },
   "great-marsh-gate": {
     "id": "great-marsh-gate",
+    "safariHub": "great-marsh",
     "name": "Great Marsh Gatehouse",
     "music": "viridian-theme",
     "indoor": true,
@@ -3913,7 +3914,7 @@ export const MAPS9 = {
       {"x": 8, "y": 3, "text": "GREAT MARSH GATEHOUSE — North doors: the marsh proper. The bog keeps its own hours, its own depth, and — the wardens insist — its own opinions about visitors."},
     ],
     "npcs": [
-      {"x": 5, "y": 5, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Boots laced, eyes up, and if the bog takes a shoe, let it — shoes are replaceable and so, fortunately, are afternoons.", "The deep pools keep the rarest tempers. Wade patient; the marsh rewards the unhurried."]},
+      {"x": 5, "y": 5, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "safariGate": true, "safariFee": 500, "safariSteps": 500, "safariBalls": 30, "safariMap": "great-marsh-west", "safariMaps": ["great-marsh-west", "great-marsh-east", "great-marsh-north"], "safariHub": "great-marsh-gate", "safariName": "Great Marsh", "safariRock": "MUD", "safariExit": {"map": "pastoria", "x": 4, "y": 13}, "dialogue": ["Boots laced, eyes up, and if the bog takes a shoe, let it — shoes are replaceable and so, fortunately, are afternoons.", "The deep pools keep the rarest tempers. Wade patient; the marsh rewards the unhurried."]},
     ],
     "encounters": null,
     "items": [],
@@ -3923,6 +3924,7 @@ export const MAPS9 = {
   },
   "great-marsh-west": {
     "id": "great-marsh-west",
+    "safariZone": "great-marsh",
     "name": "Great Marsh — West",
     "music": "viridian-theme",
     "weather": "rain",
@@ -3963,6 +3965,7 @@ export const MAPS9 = {
   },
   "great-marsh-east": {
     "id": "great-marsh-east",
+    "safariZone": "great-marsh",
     "name": "Great Marsh — East",
     "music": "viridian-theme",
     "weather": "rain",
@@ -4003,6 +4006,7 @@ export const MAPS9 = {
   },
   "great-marsh-north": {
     "id": "great-marsh-north",
+    "safariZone": "great-marsh",
     "name": "Great Marsh — North",
     "music": "viridian-theme",
     "weather": "rain",

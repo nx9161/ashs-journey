@@ -146533,6 +146533,14 @@ const MOVES2 = {
   wingattack:   { id: 'wingattack', name: 'Wing Attack', type: 'flying', cat: 'physical', power: 35, acc: 100, pp: 35, priority: 0 },
   drillpeck:    { id: 'drillpeck', name: 'Drill Peck', type: 'flying', cat: 'physical', power: 80, acc: 100, pp: 20, priority: 0 },
   fly:          { id: 'fly', name: 'Fly', type: 'flying', cat: 'physical', power: 70, acc: 95, pp: 15, priority: 0, charge: true },
+  // Arc 4 Stage S4: the two Sinnoh field moves join the table (the HM
+  // items hm06/hm07 in items.mjs teach them through the shipped HM
+  // path, so they must be real battle moves like cut/surf/fly).
+  // Defog (Platinum): clears fog in the field; in battle it lowers
+  // the foe's evasion one stage. Rock Climb (Platinum): 90/85 with a
+  // 20% confusion chance.
+  defog:        { id: 'defog', name: 'Defog', type: 'flying', cat: 'status', power: 0, acc: 100, pp: 15, priority: 0, effect: { target: 'foe', eva: -1 } },
+  rockclimb:    { id: 'rockclimb', name: 'Rock Climb', type: 'normal', cat: 'physical', power: 90, acc: 85, pp: 20, priority: 0, effect: { target: 'foe', status: 'confusion', chance: 20 } },
   confusion:    { id: 'confusion', name: 'Confusion', type: 'psychic', cat: 'special', power: 50, acc: 100, pp: 25, priority: 0, effect: { target: 'foe', status: 'confusion', chance: 10 } },
   psybeam:      { id: 'psybeam', name: 'Psybeam', type: 'psychic', cat: 'special', power: 65, acc: 100, pp: 20, priority: 0, effect: { target: 'foe', status: 'confusion', chance: 10 } },
   psychic:      { id: 'psychic', name: 'Psychic', type: 'psychic', cat: 'special', power: 90, acc: 100, pp: 10, priority: 0, effect: { target: 'foe', spa: -1, spd: -1, stageChance: 30 } },
@@ -146634,12 +146642,33 @@ const ALL_MOVES = { ...MOVES, ...MOVES2 };
 // validators check state.contest.ribbons against (emitted into
 // tables.json by gen-tables — never hand-edit the generated table).
 const CONTEST_HALLS = ['verdanturf', 'fallarbor', 'slateport', 'lilycove'];
-const CONTEST_RIBBONS = [...CONTEST_HALLS];
+// Arc 4 Stage S4: Super Contests — Hearthome is THE Super Contest
+// hall in Platinum: one hall, four ranks (Normal/Great/Ultra/Master),
+// implemented as data on the shipped contest engine. Each rank is a
+// hall key of its own (its own NPC field below, its own ribbon), and
+// ranks unlock in sequence: a rank's `requires` is the previous
+// rank's ribbon. CONTEST_RIBBONS (the validators' closed set) is the
+// Hoenn halls PLUS the four rank ribbons — one persistence shape
+// (state.contest.ribbons, the H5 quintet) serves both regions.
+const CONTEST_RANKS = {
+  hearthome: [
+    { key: 'hearthome-normal', label: 'Normal Rank', requires: null },
+    { key: 'hearthome-great', label: 'Great Rank', requires: 'hearthome-normal' },
+    { key: 'hearthome-ultra', label: 'Ultra Rank', requires: 'hearthome-great' },
+    { key: 'hearthome-master', label: 'Master Rank', requires: 'hearthome-ultra' },
+  ],
+};
+const CONTEST_RIBBONS = [...CONTEST_HALLS,
+  ...Object.values(CONTEST_RANKS).flat().map((r) => r.key)];
 const RIBBON_NAMES = {
   verdanturf: 'Verdanturf Ribbon',
   fallarbor: 'Fallarbor Ribbon',
   slateport: 'Slateport Ribbon',
   lilycove: 'Lilycove Ribbon',
+  'hearthome-normal': 'Hearthome Ribbon (Normal Rank)',
+  'hearthome-great': 'Hearthome Ribbon (Great Rank)',
+  'hearthome-ultra': 'Hearthome Ribbon (Ultra Rank)',
+  'hearthome-master': 'Hearthome Ribbon (Master Rank)',
 };
 const CONTEST_ROUNDS = 4;
 
@@ -146751,6 +146780,30 @@ const CONTEST_NPCS = {
     { name: 'OPAL', species: 'gardevoir', script: ['triattack', 'thunderbolt', 'triattack', 'thunderbolt'] },
     { name: 'NOCT', species: 'banette', script: ['slash', 'firepunch', 'slash', 'firepunch'] },
     { name: 'LUMEN', species: 'milotic', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
+  ],
+  // Arc 4 Stage S4: the Super Contest fields, one per Hearthome rank.
+  // Scripts escalate with rank (appeal 4-5 at Normal, headliners and
+  // jam at Master) on the same winnable-with-headliner-play tuning
+  // law as the Hoenn fields.
+  'hearthome-normal': [
+    { name: 'MIMI', species: 'buneary', script: ['razorleaf', 'growth', 'razorleaf', 'growth'] },
+    { name: 'VOLT', species: 'pachirisu', script: ['thunderbolt', 'swift', 'thunderbolt', 'swift'] },
+    { name: 'PEPPER', species: 'piplup', script: ['bubblebeam', 'icebeam', 'bubblebeam', 'icebeam'] },
+  ],
+  'hearthome-great': [
+    { name: 'SOLENNE', species: 'roserade', script: ['petaldance', 'growth', 'petaldance', 'growth'] },
+    { name: 'VOLT', species: 'luxio', script: ['thunderbolt', 'slash', 'thunderbolt', 'slash'] },
+    { name: 'MARIS', species: 'floatzel', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
+  ],
+  'hearthome-ultra': [
+    { name: 'SOLENNE', species: 'roserade', script: ['petaldance', 'solarbeam', 'petaldance', 'solarbeam'] },
+    { name: 'ORIN', species: 'luxray', script: ['thunder', 'thunderbolt', 'thunder', 'thunderbolt'] },
+    { name: 'MARIS', species: 'milotic', script: ['hydropump', 'icebeam', 'hydropump', 'icebeam'] },
+  ],
+  'hearthome-master': [
+    { name: 'FANTINA', species: 'gengar', script: ['psychic', 'hyperbeam', 'psychic', 'hyperbeam'] },
+    { name: 'ORIN', species: 'garchomp', script: ['earthquake', 'fireblast', 'earthquake', 'fireblast'] },
+    { name: 'SOLENNE', species: 'roserade', script: ['solarbeam', 'petaldance', 'solarbeam', 'petaldance'] },
   ],
 };
 
@@ -147017,7 +147070,18 @@ const TM_MOVES = {
   41: 'softboiled', 42: 'dreameater', 43: 'skyattack', 44: 'rest', 45: 'thunderwave',
   46: 'psywave', 47: 'explosion', 48: 'rockslide', 49: 'triattack', 50: 'substitute',
 };
-const HM_MOVES = { 1: 'cut', 2: 'fly', 3: 'surf', 4: 'strength', 5: 'flash' };
+const HM_MOVES = { 1: 'cut', 2: 'fly', 3: 'surf', 4: 'strength', 5: 'flash', 6: 'defog', 7: 'rockclimb' };
+// Arc 4 Stage S4: HM06 Defog + HM07 Rock Climb (this game's HM
+// numbering continues the shipped 1-5 sequence; Platinum calls them
+// HM05/HM08). The grant hooks S5's story stage calls — data, in the
+// s.give event idiom ({ give: { items: { hm06: 1 } } }) and the
+// runSteps giveHM step: badge = the Platinum field-use gate the
+// overworld reads (badges.sinnoh prefix law), source = the Platinum
+// placement S5 stages.
+const HM_GRANTS = {
+  defog: { item: 'hm06', move: 'defog', badge: 'fenbadge', source: 'Solaceon Ruins (Platinum)' },
+  rockclimb: { item: 'hm07', move: 'rockclimb', badge: 'iciclebadge', source: 'Route 217 (Platinum)' },
+};
 const TM_PRICES = {
   1: 3000, 2: 2000, 3: 2000, 4: 1000, 5: 3000, 6: 4000, 7: 2000, 8: 4000, 9: 3000, 10: 4000,
   11: 2000, 12: 1000, 13: 4000, 14: 5500, 15: 5500, 16: 2000, 17: 3000, 18: 2000, 19: 2000, 20: 2000,
@@ -147181,6 +147245,10 @@ const ITEMS = {
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
   secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Cianwood pharmacy. For Amphy, the lighthouse Pokemon — handle with both hands.' },
+  // Arc 4 Stage S4: the Gracidea — Shaymin's forme key item. Use it
+  // on a Shaymin in the party to swap land <-> sky (the S4 forme
+  // switch, game/sinnoh-systems.mjs). Never consumed.
+  gracidea: { id: 'gracidea', name: 'Gracidea', pocket: 'key', desc: 'A flower of gratitude that blooms only for Shaymin. Use it on Shaymin to swap between its land and sky formes.' },
   // Stage J5 key item: the Clear Bell, given by Ecruteak's Kimono
   // sisters once the three awakened beasts are quieted — its chime is
   // the Bell Tower summit's invitation to Ho-Oh (arc_hooh).
@@ -147200,7 +147268,7 @@ for (let n = 1; n <= 50; n++) {
   const id = 'tm' + String(n).padStart(2, '0');
   ITEMS[id] = { id, name: 'TM' + String(n).padStart(2, '0'), pocket: 'tm', move: TM_MOVES[n], price: TM_PRICES[n], desc: 'Teaches ' + TM_MOVES[n] + '. One use.' };
 }
-for (let n = 1; n <= 5; n++) {
+for (let n = 1; n <= 7; n++) {
   const id = 'hm0' + n;
   ITEMS[id] = { id, name: 'HM0' + n, pocket: 'hm', move: HM_MOVES[n], desc: 'Teaches ' + HM_MOVES[n] + '. Unlimited use; the move cannot be forgotten normally.' };
 }
@@ -180038,6 +180106,7 @@ const MAPS9 = {
   },
   "great-marsh-gate": {
     "id": "great-marsh-gate",
+    "safariHub": "great-marsh",
     "name": "Great Marsh Gatehouse",
     "music": "viridian-theme",
     "indoor": true,
@@ -180065,7 +180134,7 @@ const MAPS9 = {
       {"x": 8, "y": 3, "text": "GREAT MARSH GATEHOUSE — North doors: the marsh proper. The bog keeps its own hours, its own depth, and — the wardens insist — its own opinions about visitors."},
     ],
     "npcs": [
-      {"x": 5, "y": 5, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Boots laced, eyes up, and if the bog takes a shoe, let it — shoes are replaceable and so, fortunately, are afternoons.", "The deep pools keep the rarest tempers. Wade patient; the marsh rewards the unhurried."]},
+      {"x": 5, "y": 5, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "safariGate": true, "safariFee": 500, "safariSteps": 500, "safariBalls": 30, "safariMap": "great-marsh-west", "safariMaps": ["great-marsh-west", "great-marsh-east", "great-marsh-north"], "safariHub": "great-marsh-gate", "safariName": "Great Marsh", "safariRock": "MUD", "safariExit": {"map": "pastoria", "x": 4, "y": 13}, "dialogue": ["Boots laced, eyes up, and if the bog takes a shoe, let it — shoes are replaceable and so, fortunately, are afternoons.", "The deep pools keep the rarest tempers. Wade patient; the marsh rewards the unhurried."]},
     ],
     "encounters": null,
     "items": [],
@@ -180075,6 +180144,7 @@ const MAPS9 = {
   },
   "great-marsh-west": {
     "id": "great-marsh-west",
+    "safariZone": "great-marsh",
     "name": "Great Marsh — West",
     "music": "viridian-theme",
     "weather": "rain",
@@ -180115,6 +180185,7 @@ const MAPS9 = {
   },
   "great-marsh-east": {
     "id": "great-marsh-east",
+    "safariZone": "great-marsh",
     "name": "Great Marsh — East",
     "music": "viridian-theme",
     "weather": "rain",
@@ -180155,6 +180226,7 @@ const MAPS9 = {
   },
   "great-marsh-north": {
     "id": "great-marsh-north",
+    "safariZone": "great-marsh",
     "name": "Great Marsh — North",
     "music": "viridian-theme",
     "weather": "rain",
@@ -188934,7 +189006,7 @@ function arcFerryGateLine(arc) {
 
 const CLIMAX_DROUGHT_FLAG = 'climax_drought';
 const CLIMAX_DELUGE_FLAG = 'climax_deluge';
-const WEATHER_KINDS = ['clear', 'rain', 'sun', 'ash', 'sand'];
+const WEATHER_KINDS = ['clear', 'rain', 'sun', 'ash', 'sand', 'fog'];
 
 // Pure resolver: (state, mapDef) -> { kind, source, heavy }.
 //   kind   one of WEATHER_KINDS (the field value, or the override's)
@@ -188947,6 +189019,11 @@ function weatherForMap(state, map) {
   const flags = (state && state.story && state.story.flags) || {};
   if (flags[CLIMAX_DROUGHT_FLAG]) return { kind: 'sun', source: 'climax', heavy: true };
   if (flags[CLIMAX_DELUGE_FLAG]) return { kind: 'rain', source: 'climax', heavy: true };
+  // Arc 4 Stage S4: Defog. A fog map reads clear while its per-map
+  // defog flag stands (story.flags['defogged_' + map.id], written by
+  // the Defog field use in overworld-systems and cleared when the
+  // player leaves the map — the fog returns on re-entry, per canon).
+  if (field === 'fog' && flags['defogged_' + map.id]) return { kind: 'clear', source: 'defog', heavy: false };
   return { kind: field, source: 'map', heavy: false };
 }
 
@@ -188999,6 +189076,21 @@ function drawWeatherOverlay(r, game, wstate) {
       const s = hash01(i * 19) > 0.6 ? 2 : 1;
       c.fillStyle = hash01(i * 23) > 0.5 ? 'rgba(196,188,178,0.75)' : 'rgba(140,132,124,0.65)';
       c.fillRect(px, py, s, s);
+    }
+    return;
+  }
+  if (kind === 'fog') {
+    // Fog: a pale wash plus slow drifting banks (hash-placed rects,
+    // the ash/sand idiom — no RNG state consumed).
+    c.fillStyle = 'rgba(216,222,228,0.34)';
+    c.fillRect(x0, y0, w, h);
+    c.fillStyle = 'rgba(232,236,240,0.30)';
+    const n = still ? 6 : 12;
+    for (let i = 0; i < n; i++) {
+      const sp = 0.010 + hash01(i * 3 + 2) * 0.012;
+      const px = x0 + ((hash01(i * 7 + 1) * (w + 120) + t * sp) % (w + 120)) - 60;
+      const py = y0 + hash01(i * 13 + 4) * h;
+      c.fillRect(px, py, 52 + hash01(i) * 60, 7 + hash01(i * 5) * 8);
     }
     return;
   }
@@ -189445,6 +189537,84 @@ function kurtCollect(state) {
   state.bag[ball] = (state.bag[ball] || 0) + 1;
   state.kurtOrder = null;
   return { ok: true, ball };
+}
+
+
+// ---- src/game/sinnoh-systems.mjs ----
+// sinnoh-systems.mjs — Arc 4 Stage S4: the pure Sinnoh systems core.
+//
+// FORME-SWITCH (coordinator decision 6): rides the Deoxys mechanic
+// EXACTLY (overworld-systems switchDeoxysForme, Stage H6): a speciesId
+// exchange in the evolution idiom — level, XP, nickname, held item,
+// keepsake, IVs/EVs, status and the move set are the individual's own
+// and are NOT touched; maxHp/stats recompute from the new forme's base
+// stats with HP carried by the max-delta rule. This module is that
+// same swap, generalised over the three Sinnoh families; the Deoxys
+// path itself is untouched. MOVE DELTA (recorded): canon swaps
+// Rotom's appliance move per forme; here every forme family's
+// learnsets draw from one shared pool (species5 data — the Deoxys
+// design), so moves stay legal in every forme untouched, and no
+// appliance move is auto-taught or auto-forgotten.
+
+const FORME_FAMILIES = {
+  giratina: ['giratina', 'giratinaorigin'],
+  shaymin: ['shaymin', 'shayminsky'],
+  rotom: ['rotom', 'rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow'],
+};
+const FORME_OF = {};
+for (const [base, formes] of Object.entries(FORME_FAMILIES)) {
+  for (const id of formes) FORME_OF[id] = base;
+}
+// Rotom's appliances (Old Chateau, S4): forme id -> the room's object.
+const ROTOM_APPLIANCES = {
+  rotomheat: 'the oven', rotomwash: 'the washing machine',
+  rotomfrost: 'the refrigerator', rotomfan: 'the electric fan',
+  rotommow: 'the lawn mower',
+};
+
+// The Deoxys swap, generalised. Returns true on a real switch.
+function switchForme(mon, formeId, speciesTable) {
+  if (!mon || !FORME_OF[mon.speciesId] || !FORME_OF[formeId]) return false;
+  if (FORME_OF[mon.speciesId] !== FORME_OF[formeId]) return false;
+  if (mon.speciesId === formeId) return false;
+  const to = speciesTable[formeId];
+  if (!to) return false;
+  const ivs = mon.ivs || {};
+  const oldMax = mon.maxHp;
+  mon.speciesId = formeId;
+  mon.maxHp = hpValue(to.base.hp, mon.level, ivs.hp);
+  if (mon.hp > 0) mon.hp = Math.min(mon.maxHp, mon.hp + (mon.maxHp - oldMax));
+  mon.stats = {
+    atk: statValue(to.base.atk, mon.level, ivs.atk), def: statValue(to.base.def, mon.level, ivs.def),
+    spa: statValue(to.base.spa, mon.level, ivs.spa), spd: statValue(to.base.spd, mon.level, ivs.spd),
+    spe: statValue(to.base.spe, mon.level, ivs.spe),
+  };
+  return true;
+}
+
+// A party member's field-move knowledge, in the shipped HM
+// representation: a battle move slot (partyKnows) OR the hmMoves
+// field-craft list (the Dive representation).
+function partyKnowsFieldMove(party, moveId) {
+  return (party || []).some((m) => m && ((m.moves || []).some((mv) => mv.id === moveId)
+    || (m.hmMoves || []).includes(moveId)));
+}
+
+// The badge gate for a Sinnoh field move, read generically off the
+// save's badge case: the gate badge must sit in SOME badge set (the
+// prefix law minted it into badges.sinnoh; the read names no region).
+function badgeHeld(state, badgeId) {
+  const sets = (state && state.badges) || {};
+  return Object.values(sets).some((v) => Array.isArray(v) && v.includes(badgeId));
+}
+
+// Shaymin's sky reversion, simplified (recorded in the register):
+// canon reverts sky -> land at nightfall or when frozen; here the
+// sky forme persists until the player uses the Gracidea again or
+// Shaymin faints (hp reaches 0 — checked by the caller on the field
+// and after battles through this helper).
+function shayminReverted(mon) {
+  return !!mon && mon.speciesId === 'shayminsky' && mon.hp <= 0;
 }
 
 
@@ -194353,6 +194523,7 @@ class BattleScene {
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
     this.safari = !!opts.safari; // Safari Zone: no ally actions, BALL/BAIT/ROCK/RUN
+    this.safariRockLabel = opts.safariRock || 'ROCK'; // S4: the zone's own word for the rock throw (the Great Marsh throws MUD) — data, from the session (the boolean below stays the thrown state)
     this.onEnd = opts.onEnd || null; // story-event continuation callback
     this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
     this.friendly = !!opts.friendly; // no-stakes battle (Candy Coach spar): defeat costs nothing
@@ -194760,7 +194931,7 @@ class BattleScene {
       const items = [
         { label: 'SAFARI BALL x' + balls, value: 'safariball', disabled: balls <= 0 },
         { label: 'BAIT', value: 'bait' },
-        { label: 'ROCK', value: 'rock' },
+        { label: this.safariRockLabel, value: 'rock' },
         { label: 'RUN', value: 'safarirun' },
       ];
       this.game.ui.showCommands(items, (value) => this.onCommand(value), { stickyCancel: true });
@@ -194806,7 +194977,7 @@ class BattleScene {
         if (value === 'bait') { this.safariBait = true; this.safariRock = false; }
         else { this.safariRock = true; this.safariBait = false; }
         const name = displayName(this.foe, SPECIES);
-        this.say(value === 'bait' ? 'You threw bait! ' + name + ' is eating...' : 'You threw a rock! ' + name + ' is angry!', () => {
+        this.say(value === 'bait' ? 'You threw bait! ' + name + ' is eating...' : 'You threw ' + (this.safariRockLabel === 'ROCK' ? 'a rock' : this.safariRockLabel.toLowerCase()) + '! ' + name + ' is angry!', () => {
           if (this.safariFleeCheck()) return;
           this.toCommand();
         });
@@ -201239,10 +201410,50 @@ Object.assign(OverworldScene.prototype, {
   // (Pike chamber entries, Pyramid floor law).
   sysWarpLanding(to, from) {
     frontierOnWarpLanding(this.game, this, to, from);
+    // Arc 4 Stage S4: the Safari session's map law, generic over the
+    // session's own data (maps/hub/exit planted by the gate NPC's
+    // map-data config — the Kanto session carries maps ['safari'] and
+    // no hub, and its behaviour is unchanged). Landing in the hub
+    // ends the visit (the player walked back to the gatehouse);
+    // landing anywhere outside the zone while a session stands ends
+    // it too. Landing IN a zoned map with NO session bounces back to
+    // the hub: the zone is entered through its gate, never by a warp.
+    const g = this.game;
+    const saf = g.state.session && g.state.session.safari;
+    if (saf) {
+      // Zone-style sessions only (a hub is planted): the Kanto
+      // session (no hub) keeps its exact legacy warp behaviour.
+      if (saf.hub && to === saf.hub && from !== saf.hub) { this.endSafari('You left the ' + (saf.name || 'Safari Zone') + '.'); return; }
+      if (saf.hub && !(saf.maps || []).includes(to) && to !== saf.hub) this.endSafari('You left the ' + (saf.name || 'Safari Zone') + '.');
+      return;
+    }
+    const dest = MAPS[to];
+    if (dest && dest.safariZone) {
+      const hubId = Object.keys(MAPS).find((id) => MAPS[id].safariHub === dest.safariZone);
+      const hub = hubId && MAPS[hubId];
+      if (hub) {
+        const st = hub.start || { x: 8, y: 10 };
+        this.loadMap(hubId);
+        this.player.tx = st.x; this.player.ty = st.y;
+        this.player.px = st.x * TILE; this.player.py = st.y * TILE;
+        this.player.fx = st.x; this.player.fy = st.y;
+        this.trail = [];
+        g.state.story.position = { map: hubId, x: st.x, y: st.y, dir: 'down' };
+        this.banner = { text: hub.name.toUpperCase(), t: 1.6 };
+        g.ui.say(['The gatehouse warden waves you back: "The marsh is entered at the gate, friend — fee, balls, and a fair warning included. No slipping in the back way."']);
+      }
+    }
   },
 
   sysLoadMap(id) {
     const g = this.game;
+    // Arc 4 Stage S4: Defog's cleared-fog flag is per-visit — loading
+    // any other map lets the fog back (canon: the fog returns when
+    // you leave the area). The flag lives in story.flags (the map-flag
+    // idiom), so a save made mid-visit keeps its cleared sky.
+    for (const k of Object.keys(g.state.story.flags)) {
+      if (k.startsWith('defogged_') && k !== 'defogged_' + id) delete g.state.story.flags[k];
+    }
     this.fxState = {
       cut: new Set(),           // cut trees (regrow on map re-entry, as the original)
       boulders: new Map(),      // 'x,y' -> {x,y} current boulder positions
@@ -201514,6 +201725,14 @@ Object.assign(OverworldScene.prototype, {
   sysOnStep(x, y) {
     const g = this.game;
     const t = this.tileAt(x, y);
+    // Arc 4 Stage S4: Shaymin's simplified reversion — a fainted
+    // Sky-forme Shaymin settles back to its land forme (canon's
+    // night/freeze reversion, recorded in the register).
+    for (const m of g.state.party) {
+      if (m && m.speciesId === 'shayminsky' && m.hp <= 0 && switchForme(m, 'shaymin', SPECIES)) {
+        g.ui.toast(displayName(m, SPECIES) + ' settled back into its land forme.');
+      }
+    }
     // Landing on shore ends surfing.
     if (this.surfing && t !== '~' && t !== 'W') this.surfing = false;
     // Safari session step budget.
@@ -201616,7 +201835,11 @@ Object.assign(OverworldScene.prototype, {
     if (!g.state.party.some((m) => m && m.hp > 0)) return false;
     const saf = g.state.session.safari;
     let table = null, rate = 0;
-    if (saf && this.mapId === 'safari' && t === ',') { table = enc.table; rate = enc.rate; }
+    // Safari encounters (generic): any map in the session's own map
+    // set, on tall grass or on a marshbog floor tile (the zone's
+    // encounter terrain, read by tile kind — the engine names no
+    // zone). The Kanto session's set is ['safari'], as shipped.
+    if (saf && (saf.maps || ['safari']).includes(this.mapId) && (t === ',' || TILE_CHARS[t] === 'marshbog')) { table = enc.table; rate = enc.rate; }
     else if (this.surfing && (t === '~' || t === 'W') && enc.water) { table = enc.water; rate = enc.waterRate || 0.08; }
     else if (enc.cave && (t === '.' || t === 'R')) { table = enc.table; rate = enc.rate; }
     if (!table) return false;
@@ -201630,7 +201853,7 @@ Object.assign(OverworldScene.prototype, {
     g.audio.encounter();
     if (saf) {
       g.scenes.push(new BattleScene({
-        kind: 'wild', foe, returnTo: this, safari: true,
+        kind: 'wild', foe, returnTo: this, safari: true, safariRock: saf.rock || 'ROCK',
         onSafariAction: () => { const s = g.state.session.safari; if (s) { s.steps -= 5; } },
       }));
     } else {
@@ -201738,6 +201961,19 @@ Object.assign(OverworldScene.prototype, {
         g.state.bag[item] = (g.state.bag[item] || 0) + s.give.items[item];
       }
       if (s.give.text) g.ui.toast(s.give.text);
+      next(); return;
+    }
+    // Arc 4 Stage S4: the giveHM step — a story beat grants an HM by
+    // move id (data/items.mjs HM_GRANTS is the hook table S5 calls:
+    // { giveHM: 'defog' }). Idempotent like the GS Ball grant: a
+    // trainer already carrying the HM is never handed a duplicate.
+    if (s.giveHM) {
+      const grant = HM_GRANTS[s.giveHM];
+      if (grant && !(g.state.bag[grant.item] > 0)) {
+        g.state.bag[grant.item] = 1;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Received ' + ITEMS[grant.item].name + '!');
+      }
       next(); return;
     }
     if (s.giveMon) { this.giftMon(s.giveMon.species, s.giveMon.level, next); return; }
@@ -201945,6 +202181,19 @@ Object.assign(OverworldScene.prototype, {
     // whenever the faced tile is not one of its own.
     if (this.hoennTombInteract(fx, fy)) return true;
     if (this.mapId === 'meteor-falls' && TILE_CHARS[this.tileAt(fx, fy)] === 'meteorstone' && this.hoennMeteorInteract(fx, fy)) return true;
+    // Arc 4 Stage S4: the forme-switch objects (the shrine idiom —
+    // each handler declines when its partner is not in the party, so
+    // the authored sign text speaks exactly as before): the Griseous
+    // Orb's chamber sign in Turnback Cave (11,5), the Distortion
+    // World's platform dais sign (10,8), and the Old Chateau's
+    // television sign (16,4) — Rotom's room, appliances included.
+    if (this.mapId === 'turnback-cave' && fx === 11 && fy === 5 && this.griseousInteract()) return true;
+    if (this.mapId === 'distortion-platform' && fx === 10 && fy === 8 && this.griseousInteract()) return true;
+    if (this.mapId === 'old-chateau' && fx === 16 && fy === 4 && this.rotomInteract()) return true;
+    // Arc 4 Stage S4: Rock Climb — facing a climbwall gate tile (the
+    // tile-kind marker S3b authored; the Cut-tree idiom: the gate
+    // lives in the tile, the move in the party).
+    if (TILE_CHARS[this.tileAt(fx, fy)] === 'climbwall') { this.climbInteract(fx, fy); return true; }
     // Stage J6: apricorn trees (the J3a `apricorn` prop kind). Facing
     // a tree picks its apricorn when it has rested enough walked
     // steps; the rest is counted on the persisted step counter and
@@ -202127,6 +202376,14 @@ Object.assign(OverworldScene.prototype, {
       }
       return false;
     }
+    // Arc 4 Stage S4: Defog — on a fog map, an interact that claimed
+    // nothing else (no NPC, no sign on the faced tile) offers the
+    // field move. The fog is the obstacle; the whole map is its tile.
+    if (this.map.weather === 'fog' && !g.state.story.flags['defogged_' + this.mapId]
+      && !this.npcAt(fx, fy) && !this.signAt(fx, fy)) {
+      this.defogInteract();
+      return true;
+    }
     // Itemfinder hint on an empty interact.
     if ((g.state.bag.itemfinder || 0) > 0 && this.map.hidden) {
       for (const hb of this.map.hidden) {
@@ -202147,6 +202404,30 @@ Object.assign(OverworldScene.prototype, {
   startContest() {
     const g = this.game;
     const hall = this.map.contestHall;
+    // Arc 4 Stage S4: a hall with ranks (data/contest.mjs
+    // CONTEST_RANKS — Hearthome's Super Contests) picks its rank
+    // first: a rank is open when its required ribbon is held (the
+    // sequential Platinum ladder), and the chosen rank key then runs
+    // the shipped entry flow unchanged as the scene's hall.
+    const ranks = CONTEST_RANKS[hall];
+    if (ranks) {
+      g.ui.say(['The receptionist beams: "Welcome to the Super Contest Hall! Four ranks take this stage — Normal, Great, Ultra and Master — and each rank opens when the last is ribboned."', '"Which rank will you enter?"'], () => {
+        g.ui.showMenu('Choose a rank', ranks.map((r) => ({
+          label: r.label + (hasRibbon(g.state, r.key) ? ' ★' : ''),
+          value: r.key,
+          disabled: !!r.requires && !hasRibbon(g.state, r.requires),
+        })).concat([{ label: 'Not now', value: 'no' }]), (v) => {
+          if (!v || v === 'no') return;
+          this.beginContest(v);
+        });
+      });
+      return;
+    }
+    this.beginContest(hall);
+  },
+
+  beginContest(hall) {
+    const g = this.game;
     const able = g.state.party.filter((m) => m && !m.egg && m.hp > 0);
     if (!able.length) {
       g.ui.say(['The receptionist smiles apologetically: "Oh — none of your partners is ready to take the stage. Rest them at a Center and come back!"']);
@@ -202190,6 +202471,121 @@ Object.assign(OverworldScene.prototype, {
     this.surfing = false;
     this.doWarp(to, {});
     this.game.audio.playSfx('map-enter');
+  },
+
+  // ---------- Arc 4 Stage S4: Defog + Rock Climb ----------
+  // Both are real HM battle moves (hm06/hm07) taught through the
+  // shipped HM-teach path, so knowledge reads exactly like Surf's:
+  // a move slot OR the hmMoves field-craft list (partyKnowsFieldMove
+  // is partyKnows + the Dive representation). Badge gates are
+  // Platinum's (Defog <- Fen Badge, Rock Climb <- Icicle Badge) read
+  // generically off the badge case (badgeHeld names no region), and
+  // refusals name the missing piece, the Dive idiom. Neither gate
+  // exists on any shipped region's tiles: climbwall tiles stand only
+  // in Sinnoh, and fog is a maps9-only weather field.
+  defogInteract() {
+    const g = this.game;
+    if (!badgeHeld(g.state, HM_GRANTS.defog.badge)) {
+      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'Come back with the Fen Badge in your case — Pastoria\'s gym, in the marsh country. The League does not let trainers clear Sinnoh\'s fog roads without it.']);
+      return;
+    }
+    if (!partyKnowsFieldMove(g.state.party, 'defog')) {
+      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'You have the Fen Badge, but no partner who knows Defog. The HM waits in the Solaceon Ruins, east of Hearthome — the old stones keep it.']);
+      return;
+    }
+    g.ui.showMenu('The fog is a white wall. Use Defog?', [
+      { label: 'Defog', value: 'yes' }, { label: 'Not now', value: 'no' },
+    ], (v) => {
+      if (v !== 'yes') return;
+      g.state.story.flags['defogged_' + this.mapId] = true;
+      g.audio.playSfx('map-enter');
+      g.ui.say(['A partner beats the air flat — once, twice — and the fog comes apart like a curtain pulled by its hem. The road stands clear. (It will gather again when you leave; fog keeps its tenancy.)']);
+    });
+  },
+
+  climbInteract(fx, fy) {
+    const g = this.game;
+    const p = this.player;
+    const dx = fx - p.tx, dy = fy - p.ty;
+    const lx = fx + dx, ly = fy + dy;
+    if (!this.walkable(lx, ly)) {
+      g.ui.say(['A cliff face veined with old handholds — but the far side offers no footing from here. This stretch of wall goes nowhere a trainer can stand.']);
+      return;
+    }
+    if (!badgeHeld(g.state, HM_GRANTS.rockclimb.badge)) {
+      g.ui.say(['A cliff face veined with old handholds, worn smooth by weather and other climbers.', 'Come back with the Icicle Badge in your case — Snowpoint\'s gym, at the top of the world. The League does not let trainers scale Sinnoh\'s walls without it.']);
+      return;
+    }
+    if (!partyKnowsFieldMove(g.state.party, 'rockclimb')) {
+      g.ui.say(['A cliff face veined with old handholds, worn smooth by weather and other climbers.', 'You have the Icicle Badge, but no partner who knows Rock Climb. The HM was lost on Route 217, in the snow country — a hiker there is still apologising for it.']);
+      return;
+    }
+    g.ui.showMenu('The wall is climbable. Rock Climb?', [
+      { label: 'Climb', value: 'yes' }, { label: 'Not now', value: 'no' },
+    ], (v) => {
+      if (v !== 'yes') return;
+      p.fx = p.tx; p.fy = p.ty;
+      p.tx = lx; p.ty = ly;
+      p.px = lx * TILE; p.py = ly * TILE;
+      this.trail = [];
+      g.state.story.position = { map: this.mapId, x: lx, y: ly, dir: p.dir };
+      g.audio.playSfx('map-enter');
+      g.ui.toast('Climbed the wall!');
+    });
+  },
+
+  // ---------- Arc 4 Stage S4: the forme switches ----------
+  // The Deoxys swap generalised (game/sinnoh-systems.mjs): the same
+  // evolution-idiom species exchange, preserving the individual.
+  switchSinnohForme(mon, formeId) {
+    if (!switchForme(mon, formeId, SPECIES)) return false;
+    this.game.state.story.flags[FORME_OF[formeId] + '_forme_touched'] = true;
+    return true;
+  },
+  formeInParty(base) {
+    return this.game.state.party.find((m) => m && FORME_OF[m.speciesId] === base) || null;
+  },
+  griseousInteract() {
+    const g = this.game;
+    const mon = this.formeInParty('giratina');
+    if (!mon) return false;
+    const name = displayName(mon, SPECIES);
+    const other = mon.speciesId === 'giratina' ? 'giratinaorigin' : 'giratina';
+    const label = other === 'giratinaorigin' ? 'Origin Forme — the serpent shape of the reversed world' : 'Altered Forme — the shape it wears in this world';
+    g.ui.say(['Set into the chamber floor, where no floor should hold it, rests the GRISEOUS ORB — a stone that is heavier from underneath. At ' + name + '\'s nearness it turns, slowly, the way a sleeper turns toward a voice.'], () => {
+      g.ui.showMenu('Let the Orb turn ' + name + ' toward another shape:', [
+        { label: SPECIES[other].name + ' — ' + label.split(' — ')[1], value: other },
+        { label: 'Not now', value: 'no' },
+      ], (v) => {
+        if (!v || v === 'no') return;
+        if (this.switchSinnohForme(mon, v)) {
+          g.audio.playSfx('levelup');
+          g.ui.say(['The Orb\'s weight shifts — the world tips a degree — and ' + name + ' comes undone and re-knots itself along the grain of the other world. Same partner. Same memories. New edges.', name + ' is now in its ' + SPECIES[v].name.replace('Giratina (', '').replace(')', '') + ' shape.']);
+        }
+      });
+    });
+    return true;
+  },
+  rotomInteract() {
+    const g = this.game;
+    const mon = this.formeInParty('rotom');
+    if (!mon) return false;
+    const name = displayName(mon, SPECIES);
+    const items = FORME_FAMILIES.rotom.filter((id) => id !== mon.speciesId).map((id) => ({
+      label: SPECIES[id].name + (ROTOM_APPLIANCES[id] ? ' — ' + ROTOM_APPLIANCES[id] : ' — leave the appliances behind'),
+      value: id,
+    }));
+    items.push({ label: 'Not now', value: 'no' });
+    g.ui.say(['The old television hums — and around the little room, the chateau\'s dead appliances hum back: an oven, a washer, a refrigerator, a fan, a lawn mower, all plugged into nothing, all patient. ' + name + ' is watching them the way a hermit crab watches shells.'], () => {
+      g.ui.showMenu('Let ' + name + ' try a new housing:', items, (v) => {
+        if (!v || v === 'no' || v === mon.speciesId) return;
+        if (this.switchSinnohForme(mon, v)) {
+          g.audio.playSfx('levelup');
+          g.ui.say([name + ' pours itself out of one housing and into another — a spark changing its mind about furniture — and settles, crackling, into its ' + SPECIES[v].name + ' shape. The move set rides along untouched: in this house, the spark keeps its own tricks.']);
+        }
+      });
+    });
+    return true;
   },
 
   startSurf(fx, fy) {
@@ -202481,24 +202877,37 @@ Object.assign(OverworldScene.prototype, {
     }
     if (npc.safariGate) {
       sayLines(() => {
-        if (g.state.session.safari) { this.endSafari('You left the Safari Zone.'); return; }
-        g.ui.showMenu('Safari Zone: $500 for 500 steps + 30 Safari Balls.', [
-          { label: 'Enter ($500)', value: 'yes', disabled: g.state.player.money < 500 },
+        // Arc 4 Stage S4: the gate is generic — fee/steps/balls, the
+        // entry map, the zone's map set, its hub and exit, its name
+        // and its rock-word all ride the NPC's map-data config (the
+        // Great Marsh warden plants them; the Kanto warden plants
+        // none and reads every default below, byte-identical).
+        const fee = npc.safariFee !== undefined ? npc.safariFee : 500;
+        const steps = npc.safariSteps !== undefined ? npc.safariSteps : 500;
+        const balls = npc.safariBalls !== undefined ? npc.safariBalls : 30;
+        const entryMap = npc.safariMap || 'safari';
+        const zoneName = npc.safariName || 'Safari Zone';
+        if (g.state.session.safari) { this.endSafari('You left the ' + (g.state.session.safari.name || 'Safari Zone') + '.'); return; }
+        g.ui.showMenu(zoneName + ': $' + fee + ' for ' + steps + ' steps + ' + balls + ' Safari Balls.', [
+          { label: 'Enter ($' + fee + ')', value: 'yes', disabled: g.state.player.money < fee },
           { label: 'Not now', value: 'no' },
         ], (v) => {
           if (v !== 'yes') return;
-          g.state.player.money -= 500;
-          g.state.session.safari = { steps: 500 };
-          g.state.bag.safariball = (g.state.bag.safariball || 0) + 30;
-          const st = MAPS.safari.start || { x: 10, y: 17 };
-          this.loadMap('safari');
+          g.state.player.money -= fee;
+          g.state.session.safari = {
+            steps, maps: npc.safariMaps || [entryMap], hub: npc.safariHub || null,
+            name: zoneName, rock: npc.safariRock || 'ROCK', exit: npc.safariExit || null,
+          };
+          g.state.bag.safariball = (g.state.bag.safariball || 0) + balls;
+          const st = MAPS[entryMap].start || { x: 10, y: 17 };
+          this.loadMap(entryMap);
           this.player.tx = st.x; this.player.ty = st.y;
           this.player.px = st.x * TILE; this.player.py = st.y * TILE;
           this.player.fx = st.x; this.player.fy = st.y;
           this.trail = [];
-          g.state.story.position = { map: 'safari', x: st.x, y: st.y, dir: 'up' };
-          this.banner = { text: 'SAFARI ZONE', t: 1.6 };
-          g.ui.toast('Safari started: 500 steps, 30 balls!');
+          g.state.story.position = { map: entryMap, x: st.x, y: st.y, dir: 'up' };
+          this.banner = { text: MAPS[entryMap].name.toUpperCase(), t: 1.6 };
+          g.ui.toast(zoneName + ' started: ' + steps + ' steps, ' + balls + ' balls!');
         });
       });
       return true;
@@ -203779,20 +204188,26 @@ Object.assign(OverworldScene.prototype, {
 
   endSafari(msg) {
     const g = this.game;
+    // S4: the exit is the session's own data (the Marsh session exits
+    // to Pastoria's gatehouse door); a session without one exits to
+    // Fuchsia exactly as the Kanto original.
+    const saf = g.state.session.safari;
+    const exit = (saf && saf.exit) || null;
     g.state.session.safari = null;
     // AUDIT FIX (C241): unspent Safari Balls used to vanish silently —
     // the exit text now says what happened to them.
     const left = g.state.bag.safariball || 0;
     g.state.bag.safariball = 0;
     g.ui.say(left > 0 ? [msg, '(The park keeps the ' + left + ' unused Safari Balls.)'] : [msg], () => {
-      const st = MAPS.fuchsia.start || { x: 10, y: 10 };
-      this.loadMap('fuchsia');
+      const destMap = exit ? exit.map : 'fuchsia';
+      const st = exit || MAPS.fuchsia.start || { x: 10, y: 10 };
+      this.loadMap(destMap);
       this.player.tx = st.x; this.player.ty = st.y;
       this.player.px = st.x * TILE; this.player.py = st.y * TILE;
       this.player.fx = st.x; this.player.fy = st.y;
       this.trail = [];
-      g.state.story.position = { map: 'fuchsia', x: st.x, y: st.y, dir: 'down' };
-      this.banner = { text: 'FUCHSIA CITY', t: 1.6 };
+      g.state.story.position = { map: destMap, x: st.x, y: st.y, dir: 'down' };
+      this.banner = { text: this.map.name.toUpperCase(), t: 1.6 };
       g.audio.playMusic(this.map.music || 'route1-theme');
     });
   },
@@ -206892,6 +207307,28 @@ Object.assign(Game.prototype, {
       return;
     }
     if (it.pocket === 'tm' || it.pocket === 'hm') { this.teachFromBag(id, it); return; }
+    if (id === 'gracidea') {
+      // Arc 4 Stage S4: the Gracidea swaps a party Shaymin between
+      // its land and sky formes (the Deoxys-idiom switch). Never
+      // consumed; a party with no Shaymin hears the honest line.
+      const targets = g.state.party.map((m, i) => ({
+        label: displayName(m, SPECIES) + ' Lv' + m.level, value: i,
+        disabled: !!m.egg || FORME_OF[m.speciesId] !== 'shaymin',
+      }));
+      if (!targets.some((t) => !t.disabled)) { g.ui.say(['The Gracidea stays folded. It blooms only for Shaymin, and none is travelling with you.']); return; }
+      targets.push({ label: 'Back', value: -1 });
+      g.ui.showMenu('Use the Gracidea on...', targets, (t) => {
+        if (t === null || t === -1) { finish(); return; }
+        const m = g.state.party[t];
+        const to = m.speciesId === 'shaymin' ? 'shayminsky' : 'shaymin';
+        if (switchForme(m, to, SPECIES)) {
+          g.state.story.flags.shaymin_forme_touched = true;
+          g.audio.playSfx('levelup');
+          g.ui.say(['The Gracidea opens all at once — a flower that was waiting for exactly this — and ' + displayName(m, SPECIES) + ' rises into its ' + SPECIES[to].name.replace('Shaymin (', '').replace(')', '') + ' shape. Same partner, skyward. (Use the Gracidea again to settle it back; a fainted sky Shaymin settles on its own.)'], () => finish());
+        } else finish();
+      }, { rowHtml: (it2) => g.partyTargetRowHtml(it2) });
+      return;
+    }
     if (it.levelUp) { // Rare Candy
       // ADR-027 Amendment 2: the cap is a registry read (the current
       // arc's band max; Arcs 1/1.5 read 100, exactly as before).
@@ -207067,9 +207504,18 @@ Object.assign(Game.prototype, {
       // TM eligibility from the species' tm list; HMs encode as 100+n there.
       // Species without a tm list (the original slice roster) predate the
       // data and are allowed, as before.
-      const can = isHm
+      // Arc 4 Stage S4 adaptation (recorded): the species tables were
+      // minted before hm06/hm07 existed, so no tm list carries 106/107.
+      // The two new HMs read eligibility from a type rule instead —
+      // Defog: Flying-types (canon's Defog learners are flyers, near
+      // enough whole); Rock Climb: any species with a grounded,
+      // climbing body type (canon's list is broad; pure Water/Flying/
+      // Ghost/Psychic/Dragon/Fairy-only species sit it out).
+      let can = isHm
         ? (!sp.tm || sp.tm.includes(100 + parseInt(itemId.slice(2), 10)))
         : (!sp.tm || sp.tm.includes(parseInt(itemId.slice(2), 10)));
+      if (isHm && !can && itemId === 'hm06') can = sp.types.includes('flying');
+      if (isHm && !can && itemId === 'hm07') can = sp.types.some((t) => ['normal', 'ground', 'rock', 'fighting', 'fire', 'grass', 'poison', 'steel', 'ice', 'dark', 'electric', 'bug'].includes(t));
       const knows = m.moves.some((x) => x.id === moveId);
       return { label: displayName(m, SPECIES) + (m.egg ? ' (Egg)' : knows ? ' (knows it)' : can ? '' : ' (cannot learn)'), value: i, disabled: !!m.egg || knows || !can };
     });

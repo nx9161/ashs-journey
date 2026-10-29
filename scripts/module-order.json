@@ -52,6 +52,7 @@
  "src/game/weather.mjs",
  "src/game/ball-rules.mjs",
  "src/game/johto-systems.mjs",
+ "src/game/sinnoh-systems.mjs",
  "src/save/schema.mjs",
  "src/save/store.mjs",
  "src/game/scenes.mjs",

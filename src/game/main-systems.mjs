@@ -18,6 +18,7 @@ import { FORMS } from '../data/forms.mjs';
 import { ARCS, arcById, currentArcOf, arcStateOf, levelCapFor, PLATINUM_DEX_HORIZON } from '../data/arcs.mjs';
 import { arcDirectiveLines } from './arcs.mjs';
 import { xpForLevel, statValue, hpValue } from '../engine/formulas.mjs';
+import { switchForme, FORME_OF } from './sinnoh-systems.mjs';
 
 const REGIONS = [
   { id: 'kanto', name: 'Kanto', note: 'The beginning. Eight badges, one League, a storm over New Island.' },
@@ -77,6 +78,28 @@ Object.assign(Game.prototype, {
       return;
     }
     if (it.pocket === 'tm' || it.pocket === 'hm') { this.teachFromBag(id, it); return; }
+    if (id === 'gracidea') {
+      // Arc 4 Stage S4: the Gracidea swaps a party Shaymin between
+      // its land and sky formes (the Deoxys-idiom switch). Never
+      // consumed; a party with no Shaymin hears the honest line.
+      const targets = g.state.party.map((m, i) => ({
+        label: displayName(m, SPECIES) + ' Lv' + m.level, value: i,
+        disabled: !!m.egg || FORME_OF[m.speciesId] !== 'shaymin',
+      }));
+      if (!targets.some((t) => !t.disabled)) { g.ui.say(['The Gracidea stays folded. It blooms only for Shaymin, and none is travelling with you.']); return; }
+      targets.push({ label: 'Back', value: -1 });
+      g.ui.showMenu('Use the Gracidea on...', targets, (t) => {
+        if (t === null || t === -1) { finish(); return; }
+        const m = g.state.party[t];
+        const to = m.speciesId === 'shaymin' ? 'shayminsky' : 'shaymin';
+        if (switchForme(m, to, SPECIES)) {
+          g.state.story.flags.shaymin_forme_touched = true;
+          g.audio.playSfx('levelup');
+          g.ui.say(['The Gracidea opens all at once — a flower that was waiting for exactly this — and ' + displayName(m, SPECIES) + ' rises into its ' + SPECIES[to].name.replace('Shaymin (', '').replace(')', '') + ' shape. Same partner, skyward. (Use the Gracidea again to settle it back; a fainted sky Shaymin settles on its own.)'], () => finish());
+        } else finish();
+      }, { rowHtml: (it2) => g.partyTargetRowHtml(it2) });
+      return;
+    }
     if (it.levelUp) { // Rare Candy
       // ADR-027 Amendment 2: the cap is a registry read (the current
       // arc's band max; Arcs 1/1.5 read 100, exactly as before).
@@ -252,9 +275,18 @@ Object.assign(Game.prototype, {
       // TM eligibility from the species' tm list; HMs encode as 100+n there.
       // Species without a tm list (the original slice roster) predate the
       // data and are allowed, as before.
-      const can = isHm
+      // Arc 4 Stage S4 adaptation (recorded): the species tables were
+      // minted before hm06/hm07 existed, so no tm list carries 106/107.
+      // The two new HMs read eligibility from a type rule instead —
+      // Defog: Flying-types (canon's Defog learners are flyers, near
+      // enough whole); Rock Climb: any species with a grounded,
+      // climbing body type (canon's list is broad; pure Water/Flying/
+      // Ghost/Psychic/Dragon/Fairy-only species sit it out).
+      let can = isHm
         ? (!sp.tm || sp.tm.includes(100 + parseInt(itemId.slice(2), 10)))
         : (!sp.tm || sp.tm.includes(parseInt(itemId.slice(2), 10)));
+      if (isHm && !can && itemId === 'hm06') can = sp.types.includes('flying');
+      if (isHm && !can && itemId === 'hm07') can = sp.types.some((t) => ['normal', 'ground', 'rock', 'fighting', 'fire', 'grass', 'poison', 'steel', 'ice', 'dark', 'electric', 'bug'].includes(t));
       const knows = m.moves.some((x) => x.id === moveId);
       return { label: displayName(m, SPECIES) + (m.egg ? ' (Egg)' : knows ? ' (knows it)' : can ? '' : ' (cannot learn)'), value: i, disabled: !!m.egg || knows || !can };
     });

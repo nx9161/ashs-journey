@@ -37,12 +37,33 @@ const ALL_MOVES = { ...MOVES, ...MOVES2 };
 // validators check state.contest.ribbons against (emitted into
 // tables.json by gen-tables — never hand-edit the generated table).
 export const CONTEST_HALLS = ['verdanturf', 'fallarbor', 'slateport', 'lilycove'];
-export const CONTEST_RIBBONS = [...CONTEST_HALLS];
+// Arc 4 Stage S4: Super Contests — Hearthome is THE Super Contest
+// hall in Platinum: one hall, four ranks (Normal/Great/Ultra/Master),
+// implemented as data on the shipped contest engine. Each rank is a
+// hall key of its own (its own NPC field below, its own ribbon), and
+// ranks unlock in sequence: a rank's `requires` is the previous
+// rank's ribbon. CONTEST_RIBBONS (the validators' closed set) is the
+// Hoenn halls PLUS the four rank ribbons — one persistence shape
+// (state.contest.ribbons, the H5 quintet) serves both regions.
+export const CONTEST_RANKS = {
+  hearthome: [
+    { key: 'hearthome-normal', label: 'Normal Rank', requires: null },
+    { key: 'hearthome-great', label: 'Great Rank', requires: 'hearthome-normal' },
+    { key: 'hearthome-ultra', label: 'Ultra Rank', requires: 'hearthome-great' },
+    { key: 'hearthome-master', label: 'Master Rank', requires: 'hearthome-ultra' },
+  ],
+};
+export const CONTEST_RIBBONS = [...CONTEST_HALLS,
+  ...Object.values(CONTEST_RANKS).flat().map((r) => r.key)];
 export const RIBBON_NAMES = {
   verdanturf: 'Verdanturf Ribbon',
   fallarbor: 'Fallarbor Ribbon',
   slateport: 'Slateport Ribbon',
   lilycove: 'Lilycove Ribbon',
+  'hearthome-normal': 'Hearthome Ribbon (Normal Rank)',
+  'hearthome-great': 'Hearthome Ribbon (Great Rank)',
+  'hearthome-ultra': 'Hearthome Ribbon (Ultra Rank)',
+  'hearthome-master': 'Hearthome Ribbon (Master Rank)',
 };
 export const CONTEST_ROUNDS = 4;
 
@@ -154,5 +175,29 @@ export const CONTEST_NPCS = {
     { name: 'OPAL', species: 'gardevoir', script: ['triattack', 'thunderbolt', 'triattack', 'thunderbolt'] },
     { name: 'NOCT', species: 'banette', script: ['slash', 'firepunch', 'slash', 'firepunch'] },
     { name: 'LUMEN', species: 'milotic', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
+  ],
+  // Arc 4 Stage S4: the Super Contest fields, one per Hearthome rank.
+  // Scripts escalate with rank (appeal 4-5 at Normal, headliners and
+  // jam at Master) on the same winnable-with-headliner-play tuning
+  // law as the Hoenn fields.
+  'hearthome-normal': [
+    { name: 'MIMI', species: 'buneary', script: ['razorleaf', 'growth', 'razorleaf', 'growth'] },
+    { name: 'VOLT', species: 'pachirisu', script: ['thunderbolt', 'swift', 'thunderbolt', 'swift'] },
+    { name: 'PEPPER', species: 'piplup', script: ['bubblebeam', 'icebeam', 'bubblebeam', 'icebeam'] },
+  ],
+  'hearthome-great': [
+    { name: 'SOLENNE', species: 'roserade', script: ['petaldance', 'growth', 'petaldance', 'growth'] },
+    { name: 'VOLT', species: 'luxio', script: ['thunderbolt', 'slash', 'thunderbolt', 'slash'] },
+    { name: 'MARIS', species: 'floatzel', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
+  ],
+  'hearthome-ultra': [
+    { name: 'SOLENNE', species: 'roserade', script: ['petaldance', 'solarbeam', 'petaldance', 'solarbeam'] },
+    { name: 'ORIN', species: 'luxray', script: ['thunder', 'thunderbolt', 'thunder', 'thunderbolt'] },
+    { name: 'MARIS', species: 'milotic', script: ['hydropump', 'icebeam', 'hydropump', 'icebeam'] },
+  ],
+  'hearthome-master': [
+    { name: 'FANTINA', species: 'gengar', script: ['psychic', 'hyperbeam', 'psychic', 'hyperbeam'] },
+    { name: 'ORIN', species: 'garchomp', script: ['earthquake', 'fireblast', 'earthquake', 'fireblast'] },
+    { name: 'SOLENNE', species: 'roserade', script: ['solarbeam', 'petaldance', 'solarbeam', 'petaldance'] },
   ],
 };
