@@ -66490,6 +66490,15 @@ const ITEMS = {
   marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Saffron. Up to Lv70 obey.' },
   volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Cinnabar. Special rises.' },
   earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Viridian Gym. All Pokemon obey. The League gate opens.' },
+  // Orange Crew badges (Stage O2): the Kanto representation exactly —
+  // a key-pocket ITEMS row per badge, the id in badges.orange, and the
+  // badge_<root> story flag (winTrainer / cheatClaimBadge write all
+  // three from the trainer def / claim, never a parallel shape).
+  coraleyebadge: { id: 'coraleyebadge', name: 'Coral-Eye Badge', pocket: 'key', desc: 'From Cissy of Mikan. Won on her water range — aim first, battle second.' },
+  searubybadge: { id: 'searubybadge', name: 'Sea Ruby Badge', pocket: 'key', desc: 'From Danny of Navel. The climb was the first half of the challenge.' },
+  spikeshellbadge: { id: 'spikeshellbadge', name: 'Spike Shell Badge', pocket: 'key', desc: 'From Rudy of Trovita. He tests a team type by type, then dances.' },
+  jadestarbadge: { id: 'jadestarbadge', name: 'Jade Star Badge', pocket: 'key', desc: 'From Luana of Kumquat. Her double battle: two pairs, back to back, no rest.' },
+  winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Orange League Winner\'s Trophy, presented at Pummelo Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE
   // in the shop, with no effects of any kind.
@@ -66541,6 +66550,21 @@ for (const k of Object.values(KEEPSAKES)) {
     ...(k.price ? { price: k.price, minBadges: k.minBadges || 0 } : {}),
   };
 }
+
+// ---------- Badge sets (Stage O2) ----------
+// The canonical earn order per badge set, in ONE place: the leader
+// award path (battle.mjs, via each trainer def's badge + badgeSet),
+// the Cheat Terminal's prefix-complete claim rule, and the server
+// validator's prefix rule (tools/api-scripts/gen-tables.mjs emits
+// badgeSequences FROM this table) all read these lists — a badge set
+// can never drift between the game, the shop, and the cloud.
+// Root flag convention: badge_<id minus the 'badge' suffix>
+// (badge_coraleye, badge_boulder, ...), exactly as Kanto shipped.
+const BADGE_SETS = {
+  kanto: ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'],
+  orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],
+};
+const ORANGE_BADGES = BADGE_SETS.orange;
 
 const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key', 'keepsakes'];
 
@@ -76434,6 +76458,18 @@ const MAPS5 = {
     ],
     "npcs": [
       {
+        "x": 8,
+        "y": 3,
+        "name": "PROF. IVY",
+        "art": "lady",
+        "skin": "#f0c8a0",
+        "shirt": "#5a3a8a",
+        "pants": "#e8e0d0",
+        "hair": "#3a5a2a",
+        "dialogue": ["The GS Ball rides with you now, trainer. Whatever hands finally open it, I suspect they will be old, patient, and far inland.", "My reef transect can wait. Some mysteries only visit a lab once."],
+        "orange": "ivy"
+      },
+      {
         "x": 5,
         "y": 8,
         "name": "AIDE SOLA",
@@ -76495,10 +76531,23 @@ const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "MIKAN GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. The Coral-Eye challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "MIKAN GYM — A floating range over the lagoon: ring targets, water lanes, and a very smug stopwatch. Cissy's Coral-Eye challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 2,
+        "name": "CISSY",
+        "art": "lady",
+        "skin": "#f0c8a0",
+        "shirt": "#e86a8a",
+        "pants": "#2a6a8a",
+        "hair": "#c03a2a",
+        "dialogue": ["The lagoon is calm today. If your aim ever needs a tune-up, my range is your range, Coral-Eye holder."],
+        "trainer": "cissy",
+        "orange": "cissy"
+      },
       {
         "x": 3,
         "y": 7,
@@ -76509,7 +76558,7 @@ const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -76561,10 +76610,23 @@ const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "NAVEL GYM — The floor tilts like the mountain outside; frost slicks the high lane. The Sea Ruby challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "NAVEL GYM — The floor tilts like the mountain outside; frost slicks the high lane. Danny's Sea Ruby challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 7,
+        "y": 2,
+        "name": "DANNY",
+        "art": "hiker",
+        "skin": "#d8a878",
+        "shirt": "#3a7a4a",
+        "pants": "#4a3a2a",
+        "hair": "#2a2a2a",
+        "dialogue": ["The mountain misses you already. It says so in avalanches. Small ones. Friendly ones."],
+        "trainer": "danny",
+        "orange": "danny"
+      },
       {
         "x": 3,
         "y": 7,
@@ -76575,7 +76637,7 @@ const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -76627,10 +76689,23 @@ const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "TROVITA GYM — A rocky arena ringed with carved spike stone. The Spike Shell challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "TROVITA GYM — A rocky arena ringed with carved spike stone. Rudy's Spike Shell challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 2,
+        "name": "RUDY",
+        "art": "gent",
+        "skin": "#e8b888",
+        "shirt": "#c05a7a",
+        "pants": "#2a2a3a",
+        "hair": "#7a2a3a",
+        "dialogue": ["Ah, the Spike Shell holder returns! Trovita still hums the rhythm of our battle."],
+        "trainer": "rudy",
+        "orange": "rudy"
+      },
       {
         "x": 3,
         "y": 7,
@@ -76641,7 +76716,7 @@ const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -76693,10 +76768,23 @@ const MAPS5 = {
       {
         "x": 2,
         "y": 1,
-        "text": "KUMQUAT GYM — A resort arena: palm shade, polished stone, doubles under the sun. The Jade Star challenge is staged here. (Battles arrive with the Orange story stage.)"
+        "text": "KUMQUAT GYM — A resort arena: palm shade, polished stone, doubles under the sun. Luana's Jade Star challenge is staged here."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 2,
+        "name": "LUANA",
+        "art": "lady",
+        "skin": "#f0c8a0",
+        "shirt": "#7a3a9a",
+        "pants": "#e8d8a0",
+        "hair": "#4a2a1a",
+        "dialogue": ["Darling! The Jade Star holder, in my resort. Both pairs still talk about that match."],
+        "trainer": "luana_a",
+        "orange": "luana"
+      },
       {
         "x": 3,
         "y": 7,
@@ -76707,7 +76795,7 @@ const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The arena is dressed and ready — the Leader's challenge opens with the Orange story stage.",
+          "The arena is dressed and ready — the Leader is waiting at the far end.",
           "Trainers are welcome to walk the floor and plan. Planning is half the badge."
         ]
       }
@@ -76768,10 +76856,35 @@ const MAPS5 = {
       {
         "x": 11,
         "y": 5,
-        "text": "PUMMELO STADIUM — The Orange League arena. The champion's battle is staged here. (It arrives with the Orange story stage.)"
+        "text": "PUMMELO STADIUM — The Orange League arena. Drake, the Orange League champion, waits on this floor."
       }
     ],
     "npcs": [
+      {
+        "x": 8,
+        "y": 12,
+        "name": "LEAGUE OFFICIAL",
+        "art": "gent",
+        "skin": "#f0c8a0",
+        "shirt": "#2a4a7a",
+        "pants": "#2a2a3a",
+        "hair": "#c0c0c0",
+        "dialogue": ["Orange League rules, trainer — the stadium doors open at four island badges."],
+        "orange": "stadium-official"
+      },
+      {
+        "x": 11,
+        "y": 9,
+        "name": "DRAKE",
+        "art": "gent",
+        "skin": "#d8a878",
+        "shirt": "#8a2a2a",
+        "pants": "#2a2a3a",
+        "hair": "#3a2a1a",
+        "dialogue": ["Still champion. The trophy case by the door has a new centrepiece — go and look at it with my blessing."],
+        "trainer": "drake",
+        "orange": "drake"
+      },
       {
         "x": 8,
         "y": 11,
@@ -79134,6 +79247,163 @@ const CREDITS_LINES = [
 ];
 
 
+// ---- src/data/story-orange.mjs ----
+// story-orange.mjs — Arc 1.5 (Orange Islands) campaign data: the quest
+// chain, the Orange Crew + Drake trainer defs, and the scripted story
+// events (Ivy / the GS Ball, Lapras, the pod reunion). Anime is primary
+// canon (ADR-015); ALL dialogue/copy is original writing in the anime's
+// spirit — no quoted or closely-paraphrased anime/game lines.
+//
+// Structured for O3 to APPEND: the Lugia / Pokemon 2000 stages join
+// ORANGE_QUESTS and ORANGE_EVENTS below the marked seam — nothing here
+// needs reshaping when they land.
+//
+// New event-step kinds consumed by runSteps (overworld-systems.mjs):
+//   { gsBall }       — the Ivy grant beat: grants the GS Ball item, or
+//                      plays the already-own-one variant (Cheat
+//                      Terminal owners) with NO duplicate grant.
+//   { giftCapSafe }  — cap-safe gift delivery (cheatDeliverMon idiom):
+//                      party if room, else the first PC box with
+//                      space, with a toast naming the box. On total
+//                      refusal the chain STALLS (no flag, no done) so
+//                      the beat can be re-run — never a soft-fail.
+
+// ---------------------------------------------------------------------------
+// ORANGE_QUESTS — the Orange main-story objective chain, in the
+// MAIN_QUESTS idiom (id / flag / text / hint). `flag` is the story flag
+// that completes the objective; the badge stage additionally carries a
+// dynamic count (the Quest Log renders "n/4" from badges.orange while
+// the stage is active — see main-systems openQuestLog).
+// ---------------------------------------------------------------------------
+const ORANGE_QUESTS = [
+  { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Ball from Prof. Ivy on Valencia Island', hint: 'Professor Ivy\'s lab stands at the north edge of Valencia. The ball on her pedestal has defeated every machine she owns.' },
+  { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Orange Crew badges', hint: 'Cissy on Mikan, Danny on Navel, Rudy on Trovita, Luana on Kumquat. Each leader tests something before the battle — that is the Orange way.', badgeCount: true },
+  { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Pummelo Stadium and win the Orange League', hint: 'Four island badges open the stadium doors. Drake, the Orange League champion, waits inside with six partners and no intention of moving.' },
+  // --- O3 APPEND SEAM: the Lugia / 2000 stages join here. ---
+];
+
+// ---------------------------------------------------------------------------
+// ORANGE_TRAINERS — merged into TRAINERS by merge.mjs. Leader shape is
+// the Kanto gym idiom exactly (intro / lose / team / reward / badge),
+// plus badgeSet: 'orange' so winTrainer's award path writes
+// badges.orange + the badge_<root> flag (the Kanto representation).
+// Teams carry species + level only: foe movesets resolve from the
+// learnset idiom in makeMon, exactly as Kanto's leaders do.
+// ---------------------------------------------------------------------------
+const ORANGE_TRAINERS = {
+  cissy: {
+    id: 'cissy', name: 'Cissy', title: 'Mikan Gym Leader', ai: 'smart', badgeSet: 'orange',
+    intro: ['Range rules are range rules — you passed the targets, so now you get the real thing. My water team does not miss, challenger. Neither do I.'],
+    lose: ['Beaten on my own lagoon... clean and fair.', 'The Coral-Eye Badge is yours. Aim true out there — the sea rewards it.'],
+    team: [
+      { species: 'seadra', level: 38 },
+      { species: 'starmie', level: 40 },
+    ],
+    reward: 4000, badge: 'coraleyebadge',
+  },
+  danny: {
+    id: 'danny', name: 'Danny', title: 'Navel Gym Leader', ai: 'smart', badgeSet: 'orange',
+    intro: ['You climbed my mountain, so you already know half my philosophy: the hard way up is the honest way. Now the other half — battle.'],
+    lose: ['Winded, beaten, and grinning. That is a summit day.', 'The Sea Ruby Badge, earned at altitude. Mind the sled on your way down — ceremony rules.'],
+    team: [
+      { species: 'nidoqueen', level: 41 },
+      { species: 'machoke', level: 42 },
+      { species: 'scyther', level: 44 },
+    ],
+    reward: 4400, badge: 'searubybadge',
+  },
+  rudy: {
+    id: 'rudy', name: 'Rudy', title: 'Trovita Gym Leader', ai: 'smart', badgeSet: 'orange',
+    intro: ['You showed me your team\'s types with an open hand. I respect that. Now show me their rhythm — Trovita battles are danced as much as fought.'],
+    lose: ['What a number. What a finish. I am applauding and I do not even mind.', 'The Spike Shell Badge is yours. Dance on, champion-to-be.'],
+    team: [
+      { species: 'electabuzz', level: 44 },
+      { species: 'exeggutor', level: 45 },
+      { species: 'starmie', level: 47 },
+    ],
+    reward: 4700, badge: 'spikeshellbadge',
+  },
+  // Luana's double battle, honestly adapted to the singles engine as a
+  // TWO-STAGE match (deliberate, disclosed deviation — see the audit
+  // register): stage A leads with Alakazam, stage B with Marowak, party
+  // state carries between stages with NO heal. Only stage B carries
+  // the badge, so the award fires once, on clearing both.
+  luana_a: {
+    id: 'luana_a', name: 'Luana', title: 'Kumquat Gym Leader', ai: 'smart', badgeSet: 'orange',
+    intro: ['Pair one. Alakazam takes the floor — mind the spoons, dear, they bend toward trouble.'],
+    lose: ['Pair one, down! No resting — that is the whole point. Pair two, straight away!'],
+    team: [
+      { species: 'alakazam', level: 48 },
+      { species: 'hypno', level: 46 },
+    ],
+    reward: 0,
+  },
+  luana_b: {
+    id: 'luana_b', name: 'Luana', title: 'Kumquat Gym Leader', ai: 'smart', badgeSet: 'orange',
+    intro: ['Pair two. Marowak, darling — show them the ground remembers every step.'],
+    lose: ['Both pairs. Both! Oh, that was a match to frame.', 'The Jade Star Badge is yours, with the resort\'s compliments — and mine, which are rarer.'],
+    team: [
+      { species: 'marowak', level: 50 },
+      { species: 'gengar', level: 48 },
+    ],
+    reward: 5000, badge: 'jadestarbadge',
+  },
+  drake: {
+    id: 'drake', name: 'Drake', title: 'Orange League Champion', ai: 'smart',
+    intro: ['Four badges, and every one of them earned the island way. Good. I have waited all season for a final worth the stadium. Give me a battle the sea can hear.'],
+    lose: ['...Listen to that crowd. They know. I know.', 'Champion of the Orange League — the title is yours, and so is the Winner\'s Trophy. Hold it high. You carried a strange ball across my whole sea to earn it.'],
+    team: [
+      { species: 'ditto', level: 52 },
+      { species: 'onix', level: 53 },
+      { species: 'gengar', level: 54 },
+      { species: 'venusaur', level: 55 },
+      { species: 'electabuzz', level: 56 },
+      { species: 'dragonite', level: 58 },
+    ],
+    reward: 8000,
+  },
+};
+
+// ---------------------------------------------------------------------------
+// ORANGE_EVENTS — merged into EVENTS by merge.mjs. Map-entry scenes
+// (sysLoadMap fires them once, flag-gated): Ivy's intro on first entry
+// to ivy-lab, Lapras on Valencia after the first Orange badge, and the
+// pod reunion pre-League. Leader / Drake scenes live in
+// overworld-systems (runOrangeLeader / runOrangeDrake) because their
+// challenges are menu-driven, not step-driven.
+// ---------------------------------------------------------------------------
+const ORANGE_EVENTS = {
+  ev_orange_ivy: [
+    { say: ['The lab smells of salt, paper, and hot electronics. On a pedestal at its heart, under a glass hood: a Poke Ball banded in gold and silver, humming very faintly, like a kettle thinking about it.'], who: 'NARRATOR' },
+    { say: ['You must be Professor Hawthorn\'s runner. I am Professor Ivy — welcome to Valencia.', 'Forgive the mess. Marine research is ninety percent waiting for the sea to finish a sentence.'], who: 'PROF. IVY' },
+    { say: ['That is the famous ball. It turned up in these waters, and in three months it has beaten every opener, scanner, and polite request this lab owns. No machine can open it. I have stopped taking that personally. Mostly.'], who: 'PROF. IVY' },
+    { gsBall: true },
+    { say: ['Carry it carefully. Whatever is inside has waited this long — it can wait for the one pair of hands in the world that works the old way. Hawthorn will know whose those are.', 'And since you are here — the Orange Crew are taking challengers this season. Four islands, four badges, and a champion at Pummelo who has forgotten how to lose. The sea would love to watch you try.'], who: 'PROF. IVY' },
+    { flag: 'orange_gsball' },
+    { toast: 'The Orange Crew quest is open!' },
+  ],
+
+  ev_orange_lapras: [
+    { say: ['Down at the waterline, something is wrong. A young Lapras lies in the shallows, breathing hard — one flipper scraped raw, its song coming out thin and lost. Its pod\'s voices answer from far out at sea, farther every minute.'], who: 'NARRATOR' },
+    { say: ['Laa... laaa...'], who: 'LAPRAS' },
+    { say: ['You work the way the Center nurses taught you: clean water, pressure, patience. The bleeding slows. The breathing steadies. Big dark eyes follow your hands the whole time — frightened, and deciding not to be.'], who: 'NARRATOR' },
+    { say: ['By dusk it can swim again — slow circles, close to shore, never far from you. The pod is a day gone. This Lapras has made a decision about that, and it is looking at you when it makes it.'], who: 'NARRATOR' },
+    { giftCapSafe: { species: 'lapras', level: 30 } },
+    { flag: 'orange_lapras_joined' },
+    { say: ['Lapras joined you! It sings once from the shallows — steadier already — and falls in beside you like it was always going to.'], who: 'NARRATOR' },
+  ],
+
+  ev_orange_lapras_pod: [
+    { say: ['A sound rolls over the water — many voices, one song, the harmony Lapras answers in its sleep. Out beyond the surf line, backs are breaking the surface in a slow, travelling line. The pod. Passing, at last, on its old road.'], who: 'NARRATOR' },
+    { say: ['Lapras goes very still. Then it sings — the thin, lost note from the Valencia shallows, grown strong. An older voice answers from the line, and for a while the two songs braid around each other: news, and grief, and pride, all in the family key.'], who: 'NARRATOR' },
+    { say: ['It swims out. It rides a long circle with its own kind, touching flippers, learning the road it missed. The stadium lights behind you can wait. Some things a trainer simply stands back for.'], who: 'NARRATOR' },
+    { say: ['Then — a turn. A choice, made the way it made the first one: with its whole heart, in the open. Lapras cuts back through the surf and beaches itself at your feet, singing fit to burst. It visited home. It is choosing its other home. Yours.'], who: 'NARRATOR' },
+    { flag: 'orange_lapras_pod' },
+    { toast: 'Lapras chose to stay with you.' },
+  ],
+};
+
+
 // ---- src/data/quests.mjs ----
 // quests.mjs — Rejuvenation Phase 4 (ADR-025 §5): Town Tales.
 //
@@ -79469,7 +79739,8 @@ const IOU_PRIORITY = [
 Object.assign(SPECIES, SPECIES2);
 Object.assign(MOVES, MOVES2);
 Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5);
-Object.assign(TRAINERS, TRAINERS3, TRAINERS4);
+Object.assign(TRAINERS, TRAINERS3, TRAINERS4, ORANGE_TRAINERS);
+Object.assign(EVENTS, ORANGE_EVENTS);
 // Story patch (fidelity audit): the movie invite's island landing was
 // scripted out of bounds (8,14 on a 12-row map) — land on the shore (8,9).
 for (const ev of Object.values(EVENTS)) {
@@ -79937,6 +80208,17 @@ const MAP_GROUND = {
   league: 'open',
   ceruleancave: 'rubble',
   newisland: 'tide',
+  // Stage O2: Orange gym/stadium signature Grounds (existing 15 only —
+  // no new Grounds this stage): Cissy's lagoon range rides the Tide,
+  // Danny's summit gym the Frost, Rudy's spike-stone arena the Rubble,
+  // Luana's resort arena the Mind (her Alakazam's home turf); the
+  // stadium and Ivy's lab take Open, as the Indigo League floor does.
+  'ivy-lab': 'open',
+  'mikan-gym': 'tide',
+  'navel-gym': 'frost',
+  'trovita-gym': 'rubble',
+  'kumquat-gym': 'mind',
+  'pummelo-stadium': 'open',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',
@@ -81513,6 +81795,14 @@ function validateSave(data) {
     }
   }
   if (!isObj(data.badges) || !Array.isArray(data.badges.kanto)) errors.push('bad-badges');
+  // Stage O2: badges.orange, when present, must be a PREFIX of the
+  // Orange earn order (BADGE_SETS) — the same rule the server
+  // validator enforces; absent = legacy save (filled to [] on load).
+  if (isObj(data.badges) && data.badges.orange !== undefined) {
+    const o = data.badges.orange;
+    const seq = BADGE_SETS.orange;
+    if (!Array.isArray(o) || o.length > seq.length || o.some((id, i) => id !== seq[i])) errors.push('bad-badges-orange');
+  }
   if (!isObj(data.story) || !isObj(data.story.position)) errors.push('bad-story');
   if (isObj(data.story) && data.story.quests !== undefined) {
     if (!isObj(data.story.quests)) errors.push('bad-story-quests');
@@ -81596,6 +81886,15 @@ const DIFFICULTY_V1_TO_V2 = { easy: 'story', normal: 'classic', hard: 'challenge
 const HOUSE_RULE_KEYS = ['steadyDamage', 'mercifulFoes', 'fastLearner', 'generousWorld', 'candyCoach', 'skipIntro'];
 
 function fillV2Defaults(data) {
+  // Stage O2: badges.orange defaults-fill — a legacy save with no
+  // Orange set opens with badges.orange = [] and loses nothing (the
+  // other sets pass through untouched when present and well-shaped).
+  if (isObj(data.badges)) {
+    if (!Array.isArray(data.badges.orange)) data.badges.orange = [];
+    if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
+    if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
+    if (!Array.isArray(data.badges.symbols)) data.badges.symbols = [null, null, null, null, null, null, null];
+  }
   // ADR-025 §3 (Phase 3): mon.keepsake joins the v2 shape — defaults-filled
   // on load (party + boxes), so v1 saves and pre-Phase-3 v2 saves open
   // clean with keepsake=null on every mon.
@@ -87887,8 +88186,15 @@ class BattleScene {
     this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
     this.msgOpen = false;
     if (t.badge) {
-      if (!g.state.badges.kanto.includes(t.badge)) g.state.badges.kanto.push(t.badge);
+      // Badge award (Kanto representation, generalized Stage O2): the
+      // trainer def names its set (badgeSet, default 'kanto'); the id
+      // lands in badges.<set> and the badge_<root> flag fires — the
+      // exact two writes Kanto shipped, now set-driven.
+      const setId = t.badgeSet || 'kanto';
+      const setArr = g.state.badges[setId] || (g.state.badges[setId] = []);
+      if (!setArr.includes(t.badge)) setArr.push(t.badge);
       g.state.story.flags['badge_' + t.badge.replace(/badge$/, '')] = true; // quest chain (WS6)
+      if (setId === 'orange' && setArr.length >= 4) g.state.story.flags.orange_crew_done = true;
       g.audio.playSfx('badge'); // badge fanfare (visual twin: badge-case shine animation)
       if (t.id === 'brock') {
         // The slice capstone lines are Brock's scene specifically.
@@ -91279,6 +91585,25 @@ Object.assign(OverworldScene.prototype, {
     // directive pinned, and only when the card did not just fire.
     const arcCardFired = checkArcCompletion(g);
     if (!arcCardFired && id === HOME_MAP_ID) tryHomecoming(g);
+    // Stage O2 (Orange story): map-entry scenes, flag-gated once each.
+    // Ivy's intro fires on FIRST entry to her lab; Lapras fires on
+    // Valencia once the first Orange badge is held; the pod reunion
+    // fires pre-League (4 badges) on Pummelo / the north sea. Each
+    // scene's own completion flag is the gate, so a stalled chain
+    // (e.g. a gift that found no room) re-fires on a later entry
+    // instead of soft-failing.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const of = g.state.story.flags;
+      const oBadges = (g.state.badges && g.state.badges.orange) || [];
+      if (id === 'ivy-lab' && !of.orange_gsball && !of.ev_orange_ivy_done) {
+        this.runEvent('ev_orange_ivy');
+      } else if (id === 'valencia' && oBadges.length >= 1 && !of.orange_lapras_joined) {
+        this.runEvent('ev_orange_lapras');
+      } else if ((id === 'pummelo' || id === 'orange-sea-north') && oBadges.length >= 4
+        && of.orange_lapras_joined && !of.orange_lapras_pod) {
+        this.runEvent('ev_orange_lapras_pod');
+      }
+    }
   },
 
   boulderAt(x, y) {
@@ -91470,6 +91795,48 @@ Object.assign(OverworldScene.prototype, {
       next(); return;
     }
     if (s.giveMon) { this.giftMon(s.giveMon.species, s.giveMon.level, next); return; }
+    // Stage O2: the GS Ball grant beat. The story GS Ball IS the Cheat
+    // Shop collectible item (one id, one representation): a player who
+    // already owns one hears the variant line and is NOT granted a
+    // duplicate — the errand beat can never soft-fail on shop stock.
+    if (s.gsBall) {
+      if ((g.state.bag.gsball || 0) > 0) {
+        g.ui.say([
+          'Ivy lifts the glass hood — then stops, and laughs. "Wait. You are already carrying one."',
+          '"A twin of it, out in the world, in a trainer\'s bag. Then the errand is half done already, and the mystery is twice as big. Keep yours close — no machine can open it, and I have the bruised equipment to prove it."',
+        ], next, 'PROF. IVY');
+      } else {
+        g.state.bag.gsball = 1;
+        g.audio.playSfx('dex-register');
+        g.ui.say([
+          'Ivy lifts the glass hood with both hands, the way you would lift a sleeping bird, and sets the ball in yours. It is heavier than it looks. It is warmer than it should be.',
+          'Received the GS Ball!',
+          '"There. It is yours to carry now. Study it all you like on the road — I did. It studies back."',
+        ], next, 'PROF. IVY');
+      }
+      return;
+    }
+    // Stage O2: cap-safe gift delivery (the Cheat Shop stage's
+    // cheatDeliverMon, NOT giftMon's blind push): party if room, else
+    // the first PC box with space, with a toast naming the box. Total
+    // refusal STALLS the chain — no flag, no event-done — so the beat
+    // re-fires on a later entry once room exists.
+    if (s.giftCapSafe) {
+      const spec = s.giftCapSafe;
+      const res = g.state.party.length < 6
+        ? this.cheatDeliverMon(spec.species, spec.level, 'party')
+        : this.cheatDeliverMon(spec.species, spec.level, 'box');
+      if (!res.ok) {
+        g.ui.say(['There is no room anywhere — party full and every PC box full. Make room, and come back. Some meetings should not be rushed, and this is one of them.'], null, '');
+        return;
+      }
+      if (res.dest === 'box' && res.boxId) {
+        g.ui.toast(SPECIES[spec.species].name + ' was sent to ' + res.boxId.replace('box', 'Box ') + '!');
+      } else {
+        g.ui.toast('Received ' + SPECIES[spec.species].name + '!');
+      }
+      next(); return;
+    }
     if (s.chapterCard !== undefined) {
       const ch = CHAPTERS[s.chapterCard];
       if (ch && g.ui.showChapterCard) g.ui.showChapterCard(ch);
@@ -91781,6 +92148,11 @@ Object.assign(OverworldScene.prototype, {
     if (npc.sparCoach) { this.startSpar(npc); return true; }
     // ADR-025 §2 (Bonds): the Celadon parley pair run their scene.
     if (npc.parley) { if (this.runParleyNpc(npc)) return true; }
+    // Stage O2: Orange story actors (Ivy, the four Crew leaders, the
+    // stadium official, Drake) run their own scenes — challenges,
+    // gates, and the two-stage Kumquat match are menu/battle flows,
+    // not plain dialogue or a single trainer battle.
+    if (npc.orange) { if (this.runOrangeNpc(npc)) return true; }
     // ADR-025 §2: the Pallet lab Gary is dialogue-only — his lines are
     // tier-variant (the wary set IS his authored dialogue, so a neutral
     // run reads byte-identically to before Phase 5).
@@ -91972,6 +92344,203 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
     return false;
+  },
+
+  // ---------- Stage O2: Orange story actors ----------
+  // One dispatch for every Orange NPC carrying an `orange:` key.
+  // Leaders: challenge scene -> real leader battle (the Kanto gym
+  // idiom, via BattleScene + TRAINERS defs whose badge award writes
+  // badges.orange) -> post-badge dialogue on later talks. Drake: the
+  // 4-badge gate, the 6v6, then the trophy / HoF / orange_champion
+  // wiring that hands completion to the Stage F transition machine.
+  runOrangeNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    const oBadges = (st.badges && st.badges.orange) || [];
+    const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
+    const kind = npc.orange;
+
+    if (kind === 'ivy') {
+      if (!flags.orange_gsball && !flags.ev_orange_ivy_done) { this.runEvent('ev_orange_ivy'); return true; }
+      say(npc.dialogue && npc.dialogue.length ? npc.dialogue : ['The GS Ball is riding with you now. Treat it gently — it has seniority.']);
+      return true;
+    }
+
+    if (kind === 'stadium-official') {
+      if (flags.orange_champion) { say(['Champion. The stadium still talks about that final — walk in like you own the carpet. You do.']); return true; }
+      if (oBadges.length < 4) {
+        say(['Orange League rules, trainer — the stadium doors open at four island badges.',
+          'You hold ' + oBadges.length + ' of the 4. ' + (4 - oBadges.length) + ' to go: the Crew keeps the sea road — Mikan, Navel, Trovita, Kumquat.']);
+        return true;
+      }
+      say(['Four badges. Counted, checked, and gleaming. Drake is waiting on the arena floor, champion — give the islands a final.']);
+      return true;
+    }
+
+    if (kind === 'drake') {
+      if (flags.orange_champion) { say(['Still champion. The trophy case by the door has a new centrepiece — go and look at it with my blessing. Then go home, hero. The road is not done with you, but my stadium is.']); return true; }
+      if (oBadges.length < 4) {
+        say(['I only take finals from trainers the whole Crew has passed, {player}.',
+          'You hold ' + oBadges.length + ' of the 4 island badges. Finish the Crew — then come and take my title properly.']);
+        return true;
+      }
+      say(['So. Four badges, a full sea behind you, and my stadium gone quiet. This is the match I keep this floor polished for.'], () => {
+        g.ui.showMenu('Challenge Drake for the Orange League title?', [
+          { label: 'Challenge Drake', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startOrangeBattle('drake', (won) => { if (won) this.finishOrangeLeague(); });
+        });
+      });
+      return true;
+    }
+
+    // ---- the Orange Crew ----
+    const LEADER_BADGE = { cissy: 'coraleyebadge', danny: 'searubybadge', rudy: 'spikeshellbadge', luana: 'jadestarbadge' };
+    const POST = {
+      cissy: 'The lagoon is calm today. If your aim ever needs a tune-up, my range is your range, Coral-Eye holder.',
+      danny: 'The mountain misses you already. It says so in avalanches. Small ones. Friendly ones.',
+      rudy: 'Ah, the Spike Shell holder returns! Trovita still hums the rhythm of our battle. My Starmie asks after your team — dancer to dancer.',
+      luana: 'Darling! The Jade Star holder, in my resort. Both pairs still talk about that match — Alakazam sulks beautifully about it.',
+    };
+    if (!LEADER_BADGE[kind]) return false;
+    if (oBadges.includes(LEADER_BADGE[kind])) { say([POST[kind]]); return true; }
+
+    if (kind === 'cissy') {
+      say(['Welcome to Mikan Gym, challenger. I am Cissy — and on Mikan we do this properly: first my water range, then my team.',
+        'Three rings ride the lagoon swell. Call your aim for each one. It is a test of nerve, not a trap — the range is generous, and so am I. Mostly.'], () => {
+        g.ui.showMenu('Take Cissy\'s target challenge?', [
+          { label: 'Take the range', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          const shots = [
+            { prompt: 'Ring one bobs left on the swell. You aim —', options: ['Lead it left', 'Dead centre', 'Wait for the dip'] },
+            { prompt: 'Ring two rides higher, shining wet. You aim —', options: ['High and early', 'Dead centre', 'Low at the base'] },
+            { prompt: 'The last ring spins slow as a coin. You aim —', options: ['At the glint', 'Dead centre', 'Where it will be'] },
+          ];
+          const fire = (i) => {
+            if (i >= shots.length) {
+              say(['Three rings, three splashes of light. The stopwatch approves — and so do I.', 'Now the real thing. My team, your team, the whole lagoon watching.'], () => {
+                this.startOrangeBattle('cissy', null);
+              });
+              return;
+            }
+            g.ui.showMenu(shots[i].prompt, shots[i].options.map((o) => ({ label: o, value: o })), (pick) => {
+              const praise = pick === shots[i].options[0]
+                ? 'Clean! The ring sings as it flips.'
+                : 'A splash at the edge — close enough. The range rewards nerve, not perfection.';
+              say([praise], () => fire(i + 1));
+            });
+          };
+          fire(0);
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'danny') {
+      say(['You made the summit. Sit a second — no, do not sit, the wind steals chairs up here.',
+        'I am Danny. My gym has no door puzzle and no trick floor: the mountain was the challenge, and you are standing on its answer. What is left is the battle — and after it, win or lose, the sled run down is this island\'s oldest ceremony.'], () => {
+        g.ui.showMenu('Challenge Danny?', [
+          { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startOrangeBattle('danny', (won) => {
+            if (!won) return;
+            say(['And now — ceremony. Two sleds, one groomed run, and the whole mountain holding its breath.',
+              'You ride like you climb, champion-in-the-making. The Sea Ruby suits you. Come back any winter — the summit keeps a sled with your name chalked on it.'], null, npc.name);
+          });
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'rudy') {
+      const types = [];
+      for (const m of st.party) {
+        const sp = SPECIES[m.speciesId];
+        if (sp) for (const t of sp.types) if (!types.includes(t)) types.push(t);
+      }
+      const typeLine = types.length
+        ? 'I have been watching your team warm up. ' + types.slice(0, 4).map((t) => t[0].toUpperCase() + t.slice(1)).join(', ') + ' — a bold palette, challenger. My challenge is simple: show me you know what those types are FOR.'
+        : 'My challenge is simple: a leader should know a team by its types. Show me yours in battle — that will be introduction enough.';
+      say(['Rudy of Trovita. Dancer, romantic, and — ask anyone on this island — a leader who tests before he battles.',
+        typeLine], () => {
+        const drill = types.length
+          ? types.slice(0, 4).map((t) => ({ label: 'Show the ' + t + ' heart of the team', value: t }))
+          : [{ label: 'Show your best', value: 'best' }];
+        g.ui.showMenu('Rudy\'s type drill — answer his test:', drill, (v) => {
+          if (!v) return;
+          say(['Yes. That. A type is not a label, it is a promise about how a Pokemon meets the world — and you keep your promises.',
+            'Now we dance properly. Battle tempo, challenger — try to keep up with my Starmie. It has never once stood still.'], () => {
+            this.startOrangeBattle('rudy', null);
+          });
+        });
+      });
+      return true;
+    }
+
+    if (kind === 'luana') {
+      say(['Luana, of the Kumquat resort gym. My format is famous on four islands, so I will say it plainly, darling:',
+        'Mine is a double battle — two pairs, back to back, no rest. Alakazam\'s pair first, then Marowak\'s, with your team carrying every scratch from one into the other. Clear both, and the Jade Star is yours.'], () => {
+        g.ui.showMenu('Take Luana\'s two-stage match?', [
+          { label: 'Take the match', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          this.startOrangeBattle('luana_a', (wonA) => {
+            if (!wonA) return;
+            say(['No heal, no pause — pair two, straight onto the floor. Show me the same heart at half strength, darling.'], () => {
+              this.startOrangeBattle('luana_b', null);
+            }, npc.name);
+          });
+        });
+      });
+      return true;
+    }
+    return false;
+  },
+
+  // A leader/champion battle in the Kanto gym idiom: the trainer def's
+  // intro lines, then a BattleScene whose badge award (winTrainer)
+  // writes the badge itself. onWin(won) fires from the battle's onEnd
+  // — a loss simply leaves every flag unset, so the talk re-runs.
+  startOrangeBattle(trainerId, onWin) {
+    const g = this.game;
+    const t0 = TRAINERS[trainerId];
+    if (!t0) { if (onWin) onWin(false); return; }
+    const t = bondTrainerVariant(g.state, t0);
+    g.ui.say(t.intro, () => {
+      g.scenes.push(new BattleScene({
+        kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
+        onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); if (onWin) onWin(!!won && !fled); },
+      }));
+    }, t.name);
+  },
+
+  // Drake beaten: the Winner's Trophy (collectible grant), the Orange
+  // Hall of Fame entry (the shipped story.hof shape, team snapshot),
+  // orange_champion + 'orange' in regionsDone — then the Stage F
+  // transition machine itself fires the ARC COMPLETE card and pins
+  // the "Go home" directive. No second ending is hand-rolled here.
+  finishOrangeLeague() {
+    const g = this.game;
+    const st = g.state;
+    st.story.flags.orange_champion = true;
+    if (!Array.isArray(st.story.regionsDone)) st.story.regionsDone = [];
+    if (!st.story.regionsDone.includes('orange')) st.story.regionsDone.push('orange');
+    if (!(st.bag.winnerstrophy > 0)) st.bag.winnerstrophy = 1;
+    const hof = st.story.hof || (st.story.hof = []);
+    hof.push({
+      team: st.party.map((m) => ({ speciesId: m.speciesId, level: m.level, nickname: m.nickname })),
+      badges: ((st.badges && st.badges.orange) || []).length,
+    });
+    g.audio.playSfx('badge');
+    g.ui.say([
+      'The stadium erupts. Somewhere above the roar, an announcer is saying your name like it is a place the sea has always known.',
+      'Drake presents the WINNER\'S TROPHY — gold, salt-bright, and heavier than four badges put together. Your team is recorded in the Orange League\'s Hall of Fame.',
+      'Orange League — WINNER. The GS Ball rides in your bag, the trophy in your hands, and the whole southern sea behind you.',
+    ], () => { checkArcCompletion(g); }, '');
   },
 
   endSafari(msg) {
@@ -92841,21 +93410,27 @@ Object.assign(OverworldScene.prototype, {
   cheatClaimBadge(badgeId) {
     // OWNER OVERRIDE: badges are stock. The claim writes the exact
     // representation the leader-award path writes (battle.mjs: the id
-    // pushed into badges.kanto + the badge_<name> story flag) — no
+    // pushed into badges.<set> + the badge_<name> story flag) — no
     // parallel representation. The server validator requires badges to
     // be a PREFIX of the canonical earn order, so claiming badge #N
-    // also grants any missing earlier badges (in earn order); a claim
-    // can therefore never produce an invalid save.
+    // also grants any missing earlier badges OF THE SAME SET (Stage
+    // O2: the prefix rule extends across sets independently — Kanto
+    // claims never touch badges.orange and vice versa); a claim can
+    // therefore never produce an invalid save.
     const g = this.game;
-    const ORDER = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
+    const setId = Object.keys(BADGE_SETS).find((k) => BADGE_SETS[k].includes(badgeId));
+    if (!setId) return false;
+    const ORDER = BADGE_SETS[setId];
+    const arr = g.state.badges[setId] || (g.state.badges[setId] = []);
     const idx = ORDER.indexOf(badgeId);
-    if (idx < 0 || g.state.badges.kanto.includes(badgeId)) return false;
+    if (idx < 0 || arr.includes(badgeId)) return false;
     for (let i = 0; i <= idx; i++) {
-      if (!g.state.badges.kanto.includes(ORDER[i])) {
-        g.state.badges.kanto.push(ORDER[i]);
+      if (!arr.includes(ORDER[i])) {
+        arr.push(ORDER[i]);
         g.state.story.flags['badge_' + ORDER[i].replace(/badge$/, '')] = true;
       }
     }
+    if (setId === 'orange' && arr.length >= 4) g.state.story.flags.orange_crew_done = true;
     return true;
   },
 
@@ -92884,7 +93459,11 @@ Object.assign(OverworldScene.prototype, {
 
   openCheatShop() {
     const g = this.game;
-    const BADGE_IDS = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'];
+    // Badge stock is data-driven from BADGE_SETS (Stage O2): the
+    // Kanto eight plus the Orange four, each set claimed under its
+    // own prefix rule (cheatClaimBadge resolves the set from the id).
+    const BADGE_IDS = Object.values(BADGE_SETS).flat();
+    const badgeOwned = (id) => Object.values(g.state.badges || {}).some((arr) => Array.isArray(arr) && arr.includes(id));
     const SECTIONS = [
       { label: 'Balls', value: 'balls' }, { label: 'Medicine', value: 'medicine' },
       { label: 'Items', value: 'items' }, { label: 'TMs', value: 'tm' }, { label: 'HMs', value: 'hm' },
@@ -92903,7 +93482,7 @@ Object.assign(OverworldScene.prototype, {
       const rows = stockOf(section).map((id) => {
         const it = ITEMS[id];
         if (section === 'badges') {
-          return { label: it.name + ' — $0', value: id, disabled: g.state.badges.kanto.includes(id) };
+          return { label: it.name + ' — $0', value: id, disabled: badgeOwned(id) };
         }
         if (section === 'keepsakes') {
           return { label: it.name + ' — $0 (own ' + (g.state.bag[id] || 0) + ')', value: id, disabled: ownsKeepsake(g.state, id) };
@@ -93246,6 +93825,12 @@ Object.assign(OverworldScene.prototype, {
   // ---------- objective (quest-driven HUD line) ----------
   sysObjective() {
     const g = this.game;
+    // Stage O2: while the Orange arc is current, its chain leads the
+    // HUD objective (the badge stage counts n/4, as in the Quest Log).
+    if (currentArcOf(g.state).id === 'orange') {
+      const oq = ORANGE_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '');
+    }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;
     const active = Object.keys(g.state.story.quests).find((k) => g.state.story.quests[k] === 'active');
@@ -94868,6 +95453,28 @@ Object.assign(Game.prototype, {
         value: 'q:' + q.id, disabled: !active && !doneF,
       });
     }
+    // Section 1.5 — Orange Islands (Stage O2): the ORANGE_QUESTS chain
+    // in the MAIN_QUESTS idiom, rendered as its own section once the
+    // Orange arc is reached (the homecoming hook, the current arc, a
+    // first badge, or a completed voyage). The badge stage's text
+    // tracks n/4 from badges.orange while it is the active stage.
+    const orangeReached = currentArcOf(g.state).id === 'orange'
+      || !!g.state.story.flags.hook_orange
+      || ((g.state.badges.orange || []).length > 0)
+      || !!g.state.story.flags.orange_gsball
+      || (g.state.story.regionsDone || []).includes('orange');
+    if (orangeReached) {
+      items.push({ label: '— ORANGE ISLANDS —', value: null, disabled: true, band: true });
+      for (const q of ORANGE_QUESTS) {
+        const doneF = q.flag && g.state.story.flags[q.flag];
+        const active = !doneF && ORANGE_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        const count = q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : '';
+        items.push({
+          label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text + (q.badgeCount ? count : ''),
+          value: 'oq:' + q.id, disabled: !active && !doneF,
+        });
+      }
+    }
     // Section 2 — Legendary Arcs (unchanged: arcs list from story.quests,
     // exactly the ids the arc machinery wrote there).
     const arcs = Object.keys(g.state.story.quests || {});
@@ -94911,7 +95518,14 @@ Object.assign(Game.prototype, {
         if (c) g.ui.say([c.name + ' — ' + tierOf(g.state, c.id), c.note], () => g.openQuestLog(), 'People');
         return;
       }
-      if (v.startsWith('q:')) {
+      if (v.startsWith('oq:')) {
+        const q = ORANGE_QUESTS.find((x) => 'oq:' + x.id === v);
+        if (q) {
+          const lines = [q.text + (q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : ''), q.hint];
+          if (q.id === 'q_orange_league' && g.state.story.flags.orange_champion) lines.push("Winner's Trophy: in your bag, and your winning team is recorded in the Hall of Fame.");
+          g.ui.say(lines, () => g.openQuestLog(), 'Quest');
+        }
+      } else if (v.startsWith('q:')) {
         const q = MAIN_QUESTS.find((x) => 'q:' + x.id === v);
         if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');
       } else if (v.startsWith('arc:')) {
