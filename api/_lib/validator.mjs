@@ -60,6 +60,13 @@ function loadTables() {
       quests: new Set(tables.quests || []),
       regions: new Set(tables.regions || ['kanto']),
       arcs: new Set(tables.arcs || []),
+      // Arc 3.5 Stage F2: the Frontier facility id list (emitted by
+      // gen-tables from BADGE_SETS.symbols — slot order, the single
+      // source) and the closed Pike event-category list (emitted
+      // from src/data/frontier.mjs). The state.frontier shape check
+      // below is data-driven from exactly these two sets.
+      frontierFacilities: new Set(tables.frontierFacilities || []),
+      frontierPikeEvents: new Set(tables.frontierPikeEvents || []),
       // Stage J0: per-arc band data emitted by gen-tables from
       // src/data/arcs.mjs — arc id -> band max / paired XP ceiling.
       // A null value is the open-level band (no cap). Absent maps
@@ -477,7 +484,10 @@ const TOP_KEYS = new Set(['v', 'player', 'party', 'boxes', 'dex', 'badges', 'sto
   'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder',
   // Stage H5: the contest field — the client schema's TOP_KEYS
   // carries the same key (the matched pair).
-  'contest']);
+  'contest',
+  // Arc 3.5 Stage F2: the Frontier run state — the client schema's
+  // TOP_KEYS carries the same key (the matched pair).
+  'frontier']);
 
 export function validateSave(data) {
   const errors = [];
@@ -581,6 +591,73 @@ export function validateSave(data) {
       for (const id of c.ribbons) {
         if (typeof id !== 'string' || !TABLES.ribbons.has(id) || seenR.has(id)) { errors.push('bad-ribbon'); break; }
         seenR.add(id);
+      }
+    }
+  }
+
+  // Arc 3.5 Stage F2: state.frontier — per-facility records (bounded
+  // counters over the closed per-facility field lists), the Pyramid
+  // run bag (item ids from the build's table), and ONE active run
+  // whose payload is shape-checked per component: rentals run the
+  // FULL mon checker, the Dome bracket and the Pike pre-roll are
+  // closed bounded shapes. Optional: a pre-F2 save carries no
+  // frontier key and stays valid (the client fills it on load).
+  if (data.frontier !== undefined) {
+    const fr = data.frontier;
+    if (!isPlainObj(fr) || hasDangerousKey(fr)) errors.push('bad-frontier');
+    else {
+      const REC_FIELDS = {
+        tower: ['bestStreak', 'totalWins'], factory: ['bestStreak', 'totalWins'],
+        arena: ['bestStreak', 'totalWins'], dome: ['tournaments', 'tournamentWins', 'bestFinish'],
+        pike: ['bestRun', 'totalRooms'], palace: ['bestStreak', 'totalWins'],
+        pyramid: ['bestFloor', 'runs'],
+      };
+      if (fr.records !== undefined) {
+        if (!isPlainObj(fr.records) || hasDangerousKey(fr.records)) errors.push('bad-frontier-records');
+        else for (const id of Object.keys(fr.records)) {
+          const rec = fr.records[id];
+          if (!TABLES.frontierFacilities.has(id) || !isPlainObj(rec) || hasDangerousKey(rec)
+            || Object.keys(rec).some((k) => !(REC_FIELDS[id] || []).includes(k))
+            || Object.values(rec).some((v) => !isInt(v, 0, 1000000))) { errors.push('bad-frontier-records'); break; }
+        }
+      }
+      if (fr.pyramidBag !== undefined) {
+        if (!Array.isArray(fr.pyramidBag) || fr.pyramidBag.length > 99
+          || fr.pyramidBag.some((id) => typeof id !== 'string' || !TABLES.items.has(id))) errors.push('bad-frontier-bag');
+      }
+      if (fr.run !== undefined && fr.run !== null) {
+        const r = fr.run;
+        let badRun = !isPlainObj(r) || hasDangerousKey(r) || !TABLES.frontierFacilities.has(r.facility)
+          || !isInt(r.foeLevel, 1, 9999)
+          || !Array.isArray(r.enteredTeam) || r.enteredTeam.length > 3
+          || r.enteredTeam.some((x) => typeof x !== 'string' || x.length > 40)
+          || (r.streak !== undefined && !isInt(r.streak, 0, 100000));
+        if (!badRun && r.rentals !== undefined && r.rentals !== null) {
+          if (!Array.isArray(r.rentals) || r.rentals.length > 3) badRun = true;
+          else { const before = errors.length; for (const m of r.rentals) checkMon(m, errors, 2, caps); if (errors.length > before) { errors.length = before; badRun = true; } }
+        }
+        if (!badRun && r.bracket !== undefined && r.bracket !== null) {
+          const b = r.bracket;
+          if (!isPlainObj(b) || hasDangerousKey(b) || !Array.isArray(b.entrants) || b.entrants.length > 16
+            || b.entrants.some((e) => !isPlainObj(e) || typeof e.name !== 'string' || e.name.length > 40
+              || !Array.isArray(e.species) || e.species.length > 3 || e.species.some((s) => typeof s !== 'string' || !TABLES.species.has(s))
+              || !isInt(e.power, 0, 10000000))
+            || !isInt(b.round, 0, 3)
+            || !Array.isArray(b.alive) || b.alive.length > 16 || b.alive.some((x) => !isInt(x, 0, 15))
+            || !Array.isArray(b.results) || b.results.length > 15) badRun = true;
+        }
+        if (!badRun && r.events !== undefined && r.events !== null) {
+          if (!Array.isArray(r.events) || r.events.length !== 7
+            || r.events.some((row) => !Array.isArray(row) || row.length !== 3 || row.some((c) => !TABLES.frontierPikeEvents.has(c)))) badRun = true;
+        }
+        if (!badRun && r.spots !== undefined && r.spots !== null) {
+          const FLOORS = ['frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'];
+          if (!Array.isArray(r.spots) || r.spots.length > 6
+            || r.spots.some((s) => !isPlainObj(s) || !FLOORS.includes(s.map)
+              || !isInt(s.x, 0, 40) || !isInt(s.y, 0, 40) || !['item', 'trainer'].includes(s.kind)
+              || (s.item !== undefined && (typeof s.item !== 'string' || !TABLES.items.has(s.item))))) badRun = true;
+        }
+        if (badRun) errors.push('bad-frontier-run');
       }
     }
   }

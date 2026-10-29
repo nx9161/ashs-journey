@@ -182,5 +182,33 @@ res = await handler(putRequest({ slot: 1, payload: j6Bad3, expectedVersion: 0 })
 body = await res.json();
 t('negative eggSteps -> 422', res.status === 422);
 
+// 8. Arc 3.5 Stage F2 pins (grown by F2, recorded in the register):
+// a mid-run Frontier payload (Factory rentals through the FULL mon
+// checker + a Dome bracket + the Pyramid bag) round-trips at 200; a
+// run naming an unknown facility is a 422.
+const { freshRecords: scFreshRecords } = await import('../../src/data/frontier.mjs');
+const f2Payload = goodPayload();
+f2Payload.frontier = {
+  records: scFreshRecords(),
+  pyramidBag: ['potion', 'revive'],
+  run: {
+    facility: 'factory', foeLevel: 100, enteredTeam: [], streak: 20,
+    rentals: [scMakeMon('snorlax', 100, SC_ALL_SPECIES, SC_ALL_MOVES)],
+    bracket: { entrants: [{ name: 'YOU', species: ['snorlax', 'lapras', 'gengar'], power: 4321 }], round: 1, alive: [0, 3], results: [{ round: 0, a: 1, c: 2, winner: 1 }] },
+    tournamentNo: 0, events: null, rooms: 0, lastChamber: 0, banked: false,
+    floor: 1, runNo: 0, spots: [], spotsFloor: null, lucyFaced: false, brandonFaced: false,
+  },
+};
+f2Payload.frontier.records.factory.bestStreak = 20;
+res = await handler(putRequest({ slot: 1, payload: f2Payload, expectedVersion: 0 }));
+body = await res.json();
+t('F2 mid-run Frontier payload (rentals + bracket + pyramid bag) -> 200',
+  res.status === 200 && body.version === 1);
+const f2Bad = JSON.parse(JSON.stringify(f2Payload));
+f2Bad.frontier.run.facility = 'nowhere';
+res = await handler(putRequest({ slot: 1, payload: f2Bad, expectedVersion: 0 }));
+body = await res.json();
+t('F2 run with an unknown facility id -> 422', res.status === 422);
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

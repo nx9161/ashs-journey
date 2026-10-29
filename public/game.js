@@ -120664,6 +120664,269 @@ const ORANGE_BADGES = BADGE_SETS.orange;
 const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key', 'keepsakes'];
 
 
+// ---- src/data/frontier.mjs ----
+// frontier.mjs — Arc 3.5 Stage F2: Battle Frontier facility DATA.
+//
+// Pure data for the seven facilities (src/game/frontier.mjs is the
+// controller). Facility ids ARE the BADGE_SETS.symbols slot order
+// (items.mjs): slot i of badges.symbols belongs to facility
+// FACILITIES[i]. Everything player-facing here is original writing.
+//
+// Recorded design calls (F2 register entry):
+// - GENERATED pools (random opponents, Factory rentals, Dome fields,
+//   Pike/Pyramid wilds) never contain a legendary/mythical species or
+//   a form entry — LEGENDARY_IDS below is the closed roster list the
+//   suite checks the pools against. BRAIN teams are authored, not
+//   generated, and are exempt where canon demands it: Brandon's
+//   Regi trio is his identity (the mission names it explicitly).
+// - Brain team entries ride the shipped trainer-def format
+//   ({ species, level, keepsake? }) — that format has NO moves field
+//   (BattleScene builds foes with makeMon from the species learnset),
+//   so "authored moves" are not expressible and none are claimed.
+// - Arena generated trainers field ONE mon (see the judge note in
+//   game/frontier.mjs): the 3-turn judgement is a single-battler law.
+
+
+const FACILITY_IDS = [...BADGE_SETS.symbols]; // [tower, factory, arena, dome, pike, palace, pyramid]
+
+const LEGENDARY_IDS = [
+  'articuno', 'zapdos', 'moltres', 'mewtwo', 'mew',
+  'raikou', 'entei', 'suicune', 'lugia', 'hooh', 'celebi',
+  'regirock', 'regice', 'registeel', 'kyogre', 'groudon', 'rayquaza',
+  'latias', 'latios', 'jirachi', 'deoxys',
+];
+
+// Pike chamber events: the closed category vocabulary. Client +
+// server save validators check run.events against exactly this list
+// (gen-tables emits it from here — never hand-edit the snapshot).
+const PIKE_EVENT_KINDS = [
+  'battle-trainer', 'battle-wild', 'heal-full', 'heal-half',
+  'cure-status', 'inflict-status', 'quiet', 'hint',
+];
+// Weighted draw for the Pike pre-roll (weights sum to 100).
+const PIKE_EVENT_WEIGHTS = [
+  ['battle-trainer', 22], ['battle-wild', 22], ['heal-full', 8],
+  ['heal-half', 10], ['cure-status', 8], ['inflict-status', 10],
+  ['quiet', 10], ['hint', 10],
+];
+// What a hint truthfully calls each category (original attendant
+// phrasing — the hint NAMES the category, never fakes it).
+const PIKE_HINT_PHRASES = {
+  'battle-trainer': 'a trainer itching for a fight',
+  'battle-wild': 'something wild moving in the walls',
+  'heal-full': 'a nurse with a full tray and a kind face',
+  'heal-half': 'a nurse with a half tray and an apologetic face',
+  'cure-status': 'a nurse with a remedy kit',
+  'inflict-status': 'a nurse whose smile you should not trust',
+  quiet: 'nothing at all. Suspiciously nothing',
+  hint: 'an attendant who loves to talk',
+};
+
+// Pyramid run-bag loot (medicine pocket only — the bag's whole law).
+const PYRAMID_LOOT = [
+  ['potion', 18], ['superpotion', 16], ['hyperpotion', 12],
+  ['fullrestore', 8], ['revive', 10], ['maxrevive', 5],
+  ['antidote', 6], ['parlyzheal', 6], ['awakening', 5],
+  ['burnheal', 4], ['iceheal', 4], ['fullheal', 6],
+];
+
+// Pyramid virtual spots: authored candidate tiles per floor map
+// (kind pre-authored; the run seeds a subset per floor entry).
+// Coordinates are plain floor tiles ('L') on each maze — the suite
+// verifies every one against maps8.
+const PYRAMID_SPOT_CANDIDATES = {
+  'frontier-pyramid-a': [
+    { x: 2, y: 7, kind: 'trainer' }, { x: 16, y: 9, kind: 'trainer' }, { x: 6, y: 13, kind: 'trainer' },
+    { x: 12, y: 7, kind: 'item' }, { x: 3, y: 4, kind: 'item' }, { x: 17, y: 13, kind: 'item' },
+  ],
+  'frontier-pyramid-b': [
+    { x: 3, y: 2, kind: 'trainer' }, { x: 10, y: 7, kind: 'trainer' }, { x: 16, y: 13, kind: 'trainer' },
+    { x: 5, y: 13, kind: 'item' }, { x: 13, y: 2, kind: 'item' }, { x: 8, y: 10, kind: 'item' },
+  ],
+  'frontier-pyramid-c': [
+    { x: 4, y: 9, kind: 'trainer' }, { x: 15, y: 12, kind: 'trainer' }, { x: 8, y: 2, kind: 'trainer' },
+    { x: 12, y: 12, kind: 'item' }, { x: 5, y: 13, kind: 'item' }, { x: 16, y: 5, kind: 'item' },
+  ],
+};
+const PYRAMID_SPOTS_PER_FLOOR = 3;
+const PYRAMID_ENCOUNTER_RATE = 0.10;
+const PYRAMID_FLOOR_MAPS = ['frontier-pyramid-a', 'frontier-pyramid-b', 'frontier-pyramid-c'];
+// The fixed warp cycle (F1 geometry): a -> b -> c -> a.
+const PYRAMID_NEXT_FLOOR = {
+  'frontier-pyramid-a': 'frontier-pyramid-b',
+  'frontier-pyramid-b': 'frontier-pyramid-c',
+  'frontier-pyramid-c': 'frontier-pyramid-a',
+};
+// Exit warp tile per floor map (Brandon waits near it on floor 7).
+const PYRAMID_EXIT_TILES = {
+  'frontier-pyramid-a': { x: 10, y: 0 },
+  'frontier-pyramid-b': { x: 18, y: 0 },
+  'frontier-pyramid-c': { x: 3, y: 0 },
+};
+const BRANDON_TILE = { x: 10, y: 2 }; // floor 7 is always map A (1,4 are A; 7 = A in the cycle)
+const LUCY_TILE = { x: 7, y: 3 };     // the Pike dais chamber, below the podium
+
+// Pike chamber entry landings (F1 geometry): landing y -> chamber
+// number; the door index is the landing x's place in [3, 7, 11].
+const PIKE_ENTRY_ROWS = { 71: 1, 62: 2, 53: 3, 44: 4, 35: 5, 26: 6, 17: 7 };
+const PIKE_DOOR_XS = [3, 7, 11];
+const PIKE_DAIS_Y = 8;
+
+// The symbol ITEMS row per facility ('<name>symbol', items.mjs F0).
+const SYMBOL_ITEMS = {
+  tower: 'abilitysymbol', factory: 'knowledgesymbol', arena: 'gutssymbol',
+  dome: 'tacticssymbol', pike: 'lucksymbol', palace: 'spiritsymbol', pyramid: 'bravesymbol',
+};
+
+// Per-facility defs. pools: generated-opponent species (roster only).
+// names/titles: generated trainer dressing. brain: the Frontier Brain.
+const FACILITIES = {
+  tower: {
+    id: 'tower', name: 'Battle Tower', brain: 'Anabel', brainTitle: 'Salon Maiden',
+    setSize: 7, healBetween: true,
+    intro: 'Seven straight wins make a set at the Tower. No tricks, no mercy rounds — just trainers, one after another.',
+    pools: ['alakazam', 'gengar', 'snorlax', 'lapras', 'dragonite', 'machamp', 'arcanine', 'gyarados', 'venusaur', 'charizard', 'blastoise', 'jolteon', 'aerodactyl', 'tauros'],
+    title: 'Tower Adept',
+    names: ['MIRA', 'OSLO', 'PETRA', 'JUNO', 'CASPIAN', 'VERA', 'HUGO', 'LENA', 'ORIN', 'TAMSIN'],
+    brainIntro: ['So the streak brings you to me at last. I am Anabel — I read a battle the way you read a letter, all at once.', 'Show me the page you are proudest of.'],
+    brainLose: ['...Ah. I saw the ending a breath too late. The Ability Symbol is yours — you earned every line of it.'],
+  },
+  factory: {
+    id: 'factory', name: 'Battle Factory', brain: 'Noland', brainTitle: 'Factory Head',
+    setSize: 7, healBetween: true,
+    intro: 'Nobody fights with their own team at the Factory. You draft three rentals from six, and after every win you may swap one of yours for one of theirs.',
+    pools: ['heracross', 'aerodactyl', 'venusaur', 'pinsir', 'scyther', 'kangaskhan', 'starmie', 'electabuzz', 'magmar', 'jynx', 'omastar', 'kabutops', 'ampharos', 'sudowoodo', 'charizard', 'blastoise'],
+    title: 'Factory Hand',
+    names: ['BRUNO', 'KESTREL', 'MABLE', 'IVO', 'SORREL', 'DUKE', 'PETAL', 'RANCE', 'ODILE', 'FERN'],
+    brainIntro: ['Noland. I built half the machines in this building and I still like a fair draft better than any of them.', 'Your rentals against mine, Head to team. Let us see whose homework shows.'],
+    brainLose: ['Ha! Out-drafted in my own factory. Take the Knowledge Symbol — you knew my team better than I did.'],
+  },
+  arena: {
+    id: 'arena', name: 'Battle Arena', brain: 'Greta', brainTitle: 'Arena Tycoon',
+    setSize: 7, healBetween: true,
+    intro: 'Three turns. That is all the Arena gives you. If nobody falls, the judge scores Mind, Skill and Body — and a tie goes against the challenger. The Frontier demands a winner.',
+    pools: ['heracross', 'primeape', 'hitmonlee', 'hitmonchan', 'poliwrath', 'machamp', 'breloom', 'medicham', 'hariyama', 'blaziken', 'vigoroth', 'exploud'],
+    title: 'Arena Brawler',
+    names: ['BRIX', 'TOMA', 'JUNIPER', 'KOBA', 'MARLOWE', 'SABLE', 'REN', 'OTTO', 'VESPER', 'HALCYON'],
+    brainIntro: ['Greta. Three turns, challenger — I have ended title hopes in two. Come at me like you mean it.'],
+    brainLose: ['Clean. Decisive. Everything the Arena asks for. The Guts Symbol is yours.'],
+  },
+  dome: {
+    id: 'dome', name: 'Battle Dome', brain: 'Tucker', brainTitle: 'Dome Ace',
+    setSize: 0, healBetween: true,
+    intro: 'Sixteen entrants, one bracket, no second chances. Win four matches and the Dome is yours — the crowd does the rest.',
+    pools: ['swampert', 'charizard', 'salamence', 'metagross', 'flygon', 'altaria', 'aggron', 'walrein', 'camerupt', 'sceptile', 'blaziken', 'gardevoir', 'milotic', 'kingdra'],
+    title: 'Dome Contender',
+    names: ['ASHFORD', 'BLAZE', 'COMET', 'DARIO', 'EMBER', 'FLINT', 'GLORIA', 'HAIL', 'IRIS', 'JET', 'KARMA', 'LOTUS', 'MAGNUM', 'NOVA', 'ONYX'],
+    brainIntro: ['The crowd saved its loudest for last, and so did I. Tucker — the Dome Ace. Give them a final worth the noise.'],
+    brainLose: ['Listen to that crowd — they are cheering for YOU now. The Tactics Symbol, champion. You read the bracket like a book.'],
+  },
+  pike: {
+    id: 'pike', name: 'Battle Pike', brain: 'Lucy', brainTitle: 'Pike Queen',
+    setSize: 0, healBetween: false,
+    intro: 'Seven chambers, three doors each, and every door already knows what is behind it. Luck is just information you have not earned yet.',
+    pools: ['seviper', 'arbok', 'weezing', 'muk', 'crobat', 'tentacruel', 'gengar', 'shuckle', 'dunsparce', 'qwilfish', 'roselia', 'dustox', 'banette', 'ariados'],
+    title: 'Pike Delver',
+    names: ['MOSS', 'QUILL', 'RUE', 'THISTLE', 'UMBRA', 'VIPER', 'WREN', 'YEW'],
+    brainIntro: ['You walked my whole serpent and arrived unbitten. I am Lucy. Let us see if your luck holds against intent.'],
+    brainLose: ['...The doors themselves applaud you. Take the Luck Symbol. You make your own luck — I checked.'],
+  },
+  palace: {
+    id: 'palace', name: 'Battle Palace', brain: 'Spencer', brainTitle: 'Palace Maven',
+    setSize: 7, healBetween: true,
+    intro: 'At the Palace you do not call a single move. Your partners choose for themselves — you find out what kind of team you really raised.',
+    pools: ['crobat', 'slaking', 'lapras', 'arcanine', 'exeggutor', 'slowbro', 'starmie', 'gardevoir', 'altaria', 'tropius', 'grumpig', 'xatu', 'noctowl', 'togetic'],
+    title: 'Palace Guest',
+    names: ['ALDER', 'BRIAR', 'CEDAR', 'DAPHNE', 'ELDER', 'FENNEL', 'GROVE', 'HAZEL', 'IRVING', 'LAUREL'],
+    brainIntro: ['Spencer. Here, trainer, we both simply watch — the partners decide, as they should. May yours speak well of you.'],
+    brainLose: ['Your partners chose beautifully. They trust their own hearts because you trusted them first. The Spirit Symbol is yours.'],
+  },
+  pyramid: {
+    id: 'pyramid', name: 'Battle Pyramid', brain: 'Brandon', brainTitle: 'Pyramid King',
+    setSize: 0, healBetween: false,
+    intro: 'Seven floors up through the dark. No free healing, no shop, no way back but through — only what the mountain lets you carry in the Pyramid Bag.',
+    pools: ['golbat', 'graveler', 'onix', 'steelix', 'claydol', 'nosepass', 'solrock', 'lunatone', 'geodude', 'rhyhorn', 'phanpy', 'larvitar', 'aron', 'baltoy'],
+    title: 'Pyramid Delver',
+    names: ['BASALT', 'CINDER', 'DELTA', 'EMBER', 'FLINT', 'GRANITE', 'OCHRE', 'SLATE'],
+    brainIntro: ['Seven floors of dark, and you climbed them all to stand in my light. I am Brandon. The mountain vouches for you — now convince ME.'],
+    brainLose: ['HA! The mountain bows, and so do I. The Brave Symbol, climber — carved out of this old hill by your own two hands, near enough.'],
+  },
+};
+
+// Authored Brain teams (species only + the ace's keepsake — see the
+// header note on the trainer-def format). Levels come from the run's
+// foeLevel at battle time (Open Level, decision #4).
+const BRAIN_TEAMS = {
+  tower: {
+    silver: [{ species: 'alakazam' }, { species: 'snorlax' }, { species: 'lapras', keepsake: 'tidepearl' }],
+    gold: [{ species: 'alakazam' }, { species: 'dragonite' }, { species: 'snorlax', keepsake: 'championsribbon' }],
+  },
+  factory: {
+    silver: [{ species: 'heracross' }, { species: 'aerodactyl' }, { species: 'venusaur', keepsake: 'gardeniasash' }],
+    gold: [{ species: 'salamence' }, { species: 'metagross' }, { species: 'venusaur', keepsake: 'gardeniasash' }],
+  },
+  arena: {
+    silver: [{ species: 'heracross' }, { species: 'umbreon' }, { species: 'gengar', keepsake: 'gloomfang' }],
+    gold: [{ species: 'breloom' }, { species: 'umbreon' }, { species: 'gengar', keepsake: 'gloomfang' }],
+  },
+  dome: {
+    silver: [{ species: 'swampert' }, { species: 'charizard' }, { species: 'salamence', keepsake: 'thunderheadpin' }],
+    gold: [{ species: 'swampert' }, { species: 'charizard' }, { species: 'metagross', keepsake: 'thunderheadpin' }],
+  },
+  pike: {
+    silver: [{ species: 'seviper' }, { species: 'shuckle' }, { species: 'milotic', keepsake: 'tidepearl' }],
+    gold: [{ species: 'seviper' }, { species: 'gyarados' }, { species: 'milotic', keepsake: 'tidepearl' }],
+  },
+  palace: {
+    silver: [{ species: 'crobat' }, { species: 'slaking' }, { species: 'lapras', keepsake: 'gardeniasash' }],
+    gold: [{ species: 'crobat' }, { species: 'arcanine' }, { species: 'slaking', keepsake: 'secondwindribbon' }],
+  },
+  pyramid: {
+    silver: [{ species: 'regirock' }, { species: 'registeel' }, { species: 'regice', keepsake: 'spectrebell' }],
+    gold: [{ species: 'registeel', keepsake: 'ironacorn' }, { species: 'regirock', keepsake: 'fossilspur' }, { species: 'regice', keepsake: 'spectrebell' }],
+  },
+};
+
+// Brain milestone battle numbers (Emerald structures, mission #5).
+// Set facilities: the streak battle number at which the Brain stands.
+// dome: the tournament number whose FINAL is the Brain's.
+// pike: cumulative banked rooms at which the Brain waits on the dais.
+// pyramid: the run number whose floor 7 is the Brain's.
+const BRAIN_MILESTONES = {
+  tower: { silver: 35, gold: 70 },
+  factory: { silver: 21, gold: 42 },
+  arena: { silver: 14, gold: 56 },
+  dome: { silver: 5, gold: 10 },
+  pike: { silver: 14, gold: 140 },
+  palace: { silver: 21, gold: 42 },
+  pyramid: { silver: 3, gold: 10 },
+};
+
+// The per-facility record shapes (state.frontier.records.<id>) — the
+// single source the default state, the client save-fill and (via
+// these field names) both validators rebuild against.
+const RECORD_FIELDS = {
+  tower: ['bestStreak', 'totalWins'],
+  factory: ['bestStreak', 'totalWins'],
+  arena: ['bestStreak', 'totalWins'],
+  dome: ['tournaments', 'tournamentWins', 'bestFinish'],
+  pike: ['bestRun', 'totalRooms'],
+  palace: ['bestStreak', 'totalWins'],
+  pyramid: ['bestFloor', 'runs'],
+};
+function freshRecords() {
+  const out = {};
+  for (const id of FACILITY_IDS) {
+    out[id] = {};
+    for (const f of RECORD_FIELDS[id]) out[id][f] = 0;
+  }
+  return out;
+}
+function freshFrontierState() {
+  return { records: freshRecords(), run: null, pyramidBag: [] };
+}
+
+
 // ---- src/data/maps.mjs ----
 // maps.mjs — Kanto opening slice: Pallet -> Route 1 -> Viridian -> Route 2 -> Pewter (+ interiors).
 // Tile legend: # tree | . path | , grass | ~ water | H house | D door | S sign |
@@ -155210,6 +155473,13 @@ function defaultState(inherit) {
     // CONTEST_RIBBONS). Defaults-filled on load (schema.mjs) so
     // pre-H5 saves open unchanged in shape.
     contest: { ribbons: [] },
+    // Arc 3.5 Stage F2: Battle Frontier run state (game/frontier.mjs)
+    // — per-facility records, ONE active run across all facilities,
+    // and the Pyramid run bag. The J6 treatment: defaultState here +
+    // client schema (validate-if-present + fill) + server validator
+    // + gen-tables (the facility id list is emitted from
+    // BADGE_SETS.symbols). Mid-run saves must round-trip.
+    frontier: freshFrontierState(),
     session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {
@@ -156774,7 +157044,10 @@ const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
   'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder',
   // Stage H5: the contest field (contest.mjs) — the server validator's
   // TOP_KEYS carries the same key, the matched pair.
-  'contest'];
+  'contest',
+  // Arc 3.5 Stage F2: the Frontier run state (game/frontier.mjs) —
+  // the server validator's TOP_KEYS carries the same key, the pair.
+  'frontier'];
 
 function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
 
@@ -156862,6 +157135,68 @@ function validateSave(data) {
     if (!isObj(c) || !Array.isArray(c.ribbons) || c.ribbons.length > CONTEST_RIBBONS.length
       || c.ribbons.some((id) => !CONTEST_RIBBONS.includes(id))
       || new Set(c.ribbons).size !== c.ribbons.length) errors.push('bad-contest-ribbons');
+  }
+  // Arc 3.5 Stage F2: state.frontier, when present — records are
+  // per-facility bounded counters (RECORD_FIELDS is the closed field
+  // list), the Pyramid bag holds medicine item ids only, and a run
+  // is ONE facility's bounded payload (mid-run saves round-trip:
+  // rentals are full mon records, the Dome bracket and the Pike
+  // pre-roll are closed shapes). Absent = pre-F2 save (filled on
+  // load). The server validator enforces the same shapes.
+  if (data.frontier !== undefined) {
+    const fr = data.frontier;
+    if (!isObj(fr)) errors.push('bad-frontier');
+    else {
+      if (fr.records !== undefined) {
+        if (!isObj(fr.records) || Object.keys(fr.records).some((k) => !FACILITY_IDS.includes(k))) errors.push('bad-frontier-records');
+        else for (const id of Object.keys(fr.records)) {
+          const rec = fr.records[id];
+          if (!isObj(rec) || Object.keys(rec).some((k) => !RECORD_FIELDS[id].includes(k))
+            || Object.values(rec).some((v) => !Number.isInteger(v) || v < 0 || v > 1000000)) { errors.push('bad-frontier-records'); break; }
+        }
+      }
+      if (fr.pyramidBag !== undefined) {
+        if (!Array.isArray(fr.pyramidBag) || fr.pyramidBag.length > 99
+          || fr.pyramidBag.some((id) => typeof id !== 'string' || !ITEMS[id] || ITEMS[id].pocket !== 'medicine')) errors.push('bad-frontier-bag');
+      }
+      if (fr.run !== undefined && fr.run !== null) {
+        const r = fr.run;
+        let badRun = !isObj(r) || !FACILITY_IDS.includes(r.facility)
+          || !Number.isInteger(r.foeLevel) || r.foeLevel < 1 || r.foeLevel > 9999
+          || !Array.isArray(r.enteredTeam) || r.enteredTeam.length > 3
+          || r.enteredTeam.some((x) => typeof x !== 'string' || x.length > 40)
+          || (r.streak !== undefined && (!Number.isInteger(r.streak) || r.streak < 0 || r.streak > 100000));
+        if (!badRun && r.rentals !== undefined && r.rentals !== null) {
+          if (!Array.isArray(r.rentals) || r.rentals.length > 3) badRun = true;
+          else for (const m of r.rentals) {
+            if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number'
+              || m.level < 1 || m.level > levelCap || !Array.isArray(m.moves) || m.moves.length > 4) { badRun = true; break; }
+          }
+        }
+        if (!badRun && r.bracket !== undefined && r.bracket !== null) {
+          const b = r.bracket;
+          if (!isObj(b) || !Array.isArray(b.entrants) || b.entrants.length > 16
+            || b.entrants.some((e) => !isObj(e) || typeof e.name !== 'string' || e.name.length > 40
+              || !Array.isArray(e.species) || e.species.length > 3 || e.species.some((s) => typeof s !== 'string')
+              || !Number.isInteger(e.power) || e.power < 0 || e.power > 10000000)
+            || !Number.isInteger(b.round) || b.round < 0 || b.round > 3
+            || !Array.isArray(b.alive) || b.alive.length > 16 || b.alive.some((x) => !Number.isInteger(x) || x < 0 || x > 15)
+            || !Array.isArray(b.results) || b.results.length > 15) badRun = true;
+        }
+        if (!badRun && r.events !== undefined && r.events !== null) {
+          if (!Array.isArray(r.events) || r.events.length !== 7
+            || r.events.some((row) => !Array.isArray(row) || row.length !== 3 || row.some((c) => !PIKE_EVENT_KINDS.includes(c)))) badRun = true;
+        }
+        if (!badRun && r.spots !== undefined && r.spots !== null) {
+          if (!Array.isArray(r.spots) || r.spots.length > 6
+            || r.spots.some((s) => !isObj(s) || !PYRAMID_FLOOR_MAPS.includes(s.map)
+              || !Number.isInteger(s.x) || s.x < 0 || s.x > 40 || !Number.isInteger(s.y) || s.y < 0 || s.y > 40
+              || !['item', 'trainer'].includes(s.kind)
+              || (s.item !== undefined && (typeof s.item !== 'string' || !ITEMS[s.item])))) badRun = true;
+        }
+        if (badRun) errors.push('bad-frontier-run');
+      }
+    }
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -157051,6 +157386,56 @@ function fillV2Defaults(data) {
       }
     }
     data.contest = { ribbons };
+  }
+  // Arc 3.5 Stage F2: Frontier defaults-fill — a pre-F2 save opens
+  // with empty records, no run and an empty Pyramid bag; a present
+  // value rebuilds into the closed shapes (known facilities/fields
+  // only, counters clamped, a malformed run drops to null rather
+  // than stranding the save), so validateSave stays strict for
+  // saves that carry malformed values of their own.
+  {
+    const raw = isObj(data.frontier) ? data.frontier : {};
+    const records = {};
+    for (const id of FACILITY_IDS) {
+      const src = isObj(raw.records) && isObj(raw.records[id]) ? raw.records[id] : {};
+      records[id] = {};
+      for (const f of RECORD_FIELDS[id]) {
+        records[id][f] = Number.isInteger(src[f]) && src[f] >= 0 ? Math.min(1000000, src[f]) : 0;
+      }
+    }
+    const pyramidBag = Array.isArray(raw.pyramidBag)
+      ? raw.pyramidBag.filter((id) => typeof id === 'string' && ITEMS[id] && ITEMS[id].pocket === 'medicine').slice(0, 99) : [];
+    let run = null;
+    const r = raw.run;
+    if (isObj(r) && FACILITY_IDS.includes(r.facility)
+      && Number.isInteger(r.foeLevel) && r.foeLevel >= 1 && r.foeLevel <= 9999
+      && Array.isArray(r.enteredTeam) && r.enteredTeam.every((x) => typeof x === 'string')) {
+      const intOr = (v, d, max) => (Number.isInteger(v) && v >= 0 && v <= (max || 1000000) ? v : d);
+      run = {
+        facility: r.facility,
+        foeLevel: r.foeLevel,
+        enteredTeam: r.enteredTeam.slice(0, 3),
+        streak: intOr(r.streak, 0, 100000),
+        rentals: Array.isArray(r.rentals) ? r.rentals.slice(0, 3) : null,
+        bracket: isObj(r.bracket) && Array.isArray(r.bracket.entrants) && Array.isArray(r.bracket.alive) && Array.isArray(r.bracket.results)
+          ? { entrants: r.bracket.entrants.slice(0, 16), round: intOr(r.bracket.round, 0, 3), alive: r.bracket.alive.slice(0, 16), results: r.bracket.results.slice(0, 15) } : null,
+        tournamentNo: intOr(r.tournamentNo, 0, 100000),
+        events: Array.isArray(r.events) && r.events.length === 7 && r.events.every((row) => Array.isArray(row) && row.length === 3 && row.every((c) => PIKE_EVENT_KINDS.includes(c)))
+          ? r.events.map((row) => [...row]) : null,
+        rooms: intOr(r.rooms, 0, 100000),
+        lastChamber: intOr(r.lastChamber, 0, 7),
+        banked: r.banked === true,
+        floor: Number.isInteger(r.floor) && r.floor >= 1 && r.floor <= 7 ? r.floor : 1,
+        runNo: intOr(r.runNo, 0, 100000),
+        spots: Array.isArray(r.spots) ? r.spots.filter((s) => isObj(s) && PYRAMID_FLOOR_MAPS.includes(s.map)
+          && Number.isInteger(s.x) && Number.isInteger(s.y) && ['item', 'trainer'].includes(s.kind)).slice(0, 6) : [],
+        spotsFloor: typeof r.spotsFloor === 'string' ? r.spotsFloor : null,
+        lucyFaced: r.lucyFaced === true,
+        brandonFaced: r.brandonFaced === true,
+      };
+      if (Array.isArray(run.rentals)) for (const m of run.rentals) fillMon(m);
+    }
+    data.frontier = { records, run, pyramidBag };
   }
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {
@@ -161500,6 +161885,39 @@ function arenaShade(hex, f) {
   return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
 }
 
+// F2: the SHARED move-choice AI — extracted verbatim from
+// BattleScene.chooseFoeAction so the foe and the Palace's autoAlly
+// ally run the SAME decision code (mission: reuse, don't fork).
+// opts.smart enables the leader line-picking; opts.openerSetup
+// enables the turn-1 self-buff opener. A non-smart actor picks
+// near-randomly, exactly as ordinary trainer foes always have.
+function aiActionFor(g, mon, target, opts) {
+  const usable = mon.moves.map((m, i) => i).filter((i) => mon.moves[i].pp > 0
+    && !(mon.disableT > 0 && mon.disabledMove === i));
+  if (!usable.length) return { type: 'move', idx: 0, struggle: true };
+  if (opts && opts.openerSetup) {
+    const setup = usable.find((i) => {
+      const mv = MOVES[mon.moves[i].id];
+      return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
+    });
+    if (setup !== undefined) return { type: 'move', idx: setup };
+  }
+  if (!opts || !opts.smart) {
+    return { type: 'move', idx: usable[Math.floor(g.rng.battle() * usable.length)] };
+  }
+  const targetTypes = SPECIES[target.speciesId].types;
+  let best = usable[0], bestScore = -1;
+  for (const i of usable) {
+    const mv = MOVES[mon.moves[i].id];
+    if (mv.cat === 'status') continue;
+    const e = effectiveness(mv.type, targetTypes);
+    const score = e * (0.5 + g.rng.battle());
+    if (score > bestScore) { bestScore = score; best = i; }
+  }
+  if (g.rng.battle() < 0.25) best = usable[Math.floor(g.rng.battle() * usable.length)];
+  return { type: 'move', idx: best };
+}
+
 class BattleScene {
   constructor(opts) {
     this.kind = opts.kind; // 'wild' | 'trainer'
@@ -161509,6 +161927,17 @@ class BattleScene {
     this.onEnd = opts.onEnd || null; // story-event continuation callback
     this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
     this.friendly = !!opts.friendly; // no-stakes battle (Candy Coach spar): defeat costs nothing
+    // Arc 3.5 Stage F2: the FACILITY seam (game/frontier.mjs) — null
+    // for every ordinary battle; when set, the battle obeys Frontier
+    // law (mission decision #3): defeat takes the friendly branch
+    // (no money halving, no Center warp), no XP is awarded, no prize
+    // is paid, the bag stays closed (except the Pyramid run-bag
+    // mode), balls are refused at facility wilds, the ally team is
+    // read through facility.partyOverride when given, and the
+    // optional Arena judge (maxTurns + judge) / Palace autoAlly
+    // laws apply. Call sites pass rt: false (classic engine only).
+    this.facility = opts.facility || null;
+    if (this.facility) this.friendly = true;
     this.foeAi = null; // ADR-025: effective foe AI class, resolved in enter() via rules.mjs
     this.onSafariAction = opts.onSafariAction || null; // overworld spends a step per action
     this.safariBait = false;
@@ -161598,6 +162027,16 @@ class BattleScene {
     this.participants = new Set([this.ally]);
     this.runAttempts = 0;
     this.turn = 1;
+    // F2: per-side judge counters, tracked ONLY under facility (the
+    // Arena's Mind/Skill inputs; Body is read live from team HP).
+    // foeMaxTrail records each foe's maxHp as it enters so Body's
+    // foe fraction stays exact even after tuneFoeMon's IV rescale.
+    this.facilityStats = this.facility ? {
+      ally: { moves: new Set(), attempted: 0, landed: 0 },
+      foe: { moves: new Set(), attempted: 0, landed: 0 },
+    } : null;
+    this._judged = false;
+    this.foeMaxTrail = this.foe ? [this.foe.maxHp] : [];
     this.actions = [];
     this.animQ = [];
     this.hpAnim = { ally: this.ally.hp, foe: this.foe.hp };
@@ -161719,13 +162158,23 @@ class BattleScene {
     return false;
   }
 
+  // F2: the ally team source — the facility override array when the
+  // battle carries one (the entered/rental team objects; state.party
+  // is never swapped), else the real party. Every battle-relevant
+  // state.party read routes through here (the register lists the
+  // routed reads and the deliberately-left cosmetic ones).
+  allyTeam(g) {
+    return (this.facility && this.facility.partyOverride) || g.state.party;
+  }
+
   firstAble(g) {
     // Stage J6: an Egg can never be the battle lead — the first able
     // NON-EGG mon leads; the all-egg fallback keeps the historical
     // party[0] shape (an all-egg party is unreachable: the deposit
     // guards refuse to create one).
-    for (const m of g.state.party) if (m.hp > 0 && !m.egg) return m;
-    return g.state.party.find((m) => !m.egg) || g.state.party[0];
+    const team = this.allyTeam(g);
+    for (const m of team) if (m.hp > 0 && !m.egg) return m;
+    return team.find((m) => !m.egg) || team[0];
   }
 
   say(text, cb) {
@@ -161854,6 +162303,20 @@ class BattleScene {
 
   toCommand() {
     this.state = 'command';
+    // F2 facility laws at the command-phase gate (this is the one
+    // place every turn funnels through): the Arena judge resolves
+    // BEFORE a new command opens when the turn cap has passed with
+    // the battle unresolved; the Palace never opens a command at
+    // all — the ally acts on the shared AI (autoAlly).
+    if (this.facility && !this._judged && this.foe && this.foe.hp > 0 && this.ally && this.ally.hp > 0) {
+      if (this.facility.maxTurns && this.facility.judge && this.turn > this.facility.maxTurns) { this.resolveJudge(); return; }
+      if (this.facility.autoAlly) {
+        this.playerAction = aiActionFor(this.game, this.ally, this.foe, {});
+        this.foeAction = this.chooseFoeAction();
+        this.beginTurn();
+        return;
+      }
+    }
     if (this.rtMode) {
       // ADR-020: real-time flow replaces the command menu. First call enters
       // the arena; a NEW foe (trainer sent out the next mon) resets it;
@@ -161882,7 +162345,9 @@ class BattleScene {
       { label: 'BAG', value: 'bag', dimmed: tut && this._tutStage !== 'bag' },
       { label: 'PARTY', value: 'party', dimmed: tut },
       // GD: no running from the scripted tutorial — it's a lesson, not a gamble.
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || tut },
+      // F2: no running from a facility battle either — a Frontier
+      // contest is finished or forfeited at the desk, never fled.
+      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || tut || !!this.facility },
     ];
     let focus = null;
     if (tut && !this._tutFightDone) focus = 'fight';
@@ -161949,6 +162414,14 @@ class BattleScene {
         this.beginTurn();
       }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx, items.length - 1), rowHtml, menuClass: 'battlewin' });
     } else if (value === 'bag') {
+      // F2: the Frontier supplies the contest — the player's own bag
+      // stays closed, EXCEPT the Pyramid run bag (pyramidBag mode),
+      // whose menu lists ONLY the run-bag items.
+      if (this.facility && !this.facility.pyramidBag) {
+        this.say('The Frontier supplies the contest — your bag stays closed.', () => this.toCommand());
+        return;
+      }
+      if (this.facility && this.facility.pyramidBag) { this.openPyramidBag(); return; }
       this.state = 'bag';
       const items = [];
       for (const bid of Object.keys(BALLS)) {
@@ -162012,7 +162485,7 @@ class BattleScene {
 
   openPartyMenu(inFaint) {
     const g = this.game;
-    const items = g.state.party.map((m, i) => {
+    const items = this.allyTeam(g).map((m, i) => {
       const sp = SPECIES[m.speciesId];
       const tag = m === this.ally ? ' (active)' : '';
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally || !!m.egg }; // J6: eggs can't be sent out
@@ -162025,7 +162498,7 @@ class BattleScene {
     g.ui.showMenu(inFaint ? 'Choose next Pokemon' : 'Party', items, (v) => {
       if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
-      this.ally = g.state.party[v];
+      this.ally = this.allyTeam(g)[v];
       this.allyStages = this.ally.stages;
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.participants.add(this.ally); // switched-in mons share this foe's XP
@@ -162121,7 +162594,8 @@ class BattleScene {
   useBattleItem(itemId) {
     const g = this.game;
     const it = ITEMS[itemId];
-    const targets = g.state.party.map((m, i) => ({
+    const team = this.allyTeam(g);
+    const targets = team.map((m, i) => ({
       label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''),
       value: i, disabled: this.medicineDisabledFor(it, m),
     }));
@@ -162130,9 +162604,15 @@ class BattleScene {
       // AUDIT FIX (S-37b): Back returns to the battle Bag it came from,
       // not all the way to the command grid.
       if (v === null || v === -1) { this.onCommand('bag'); return; }
-      const m = g.state.party[v];
+      const m = team[v];
       const finishUse = (line) => {
-        g.state.bag[itemId]--;
+        // F2: under the Pyramid run bag the item is consumed from
+        // state.frontier.pyramidBag, never from the player's bag.
+        if (this.facility && this.facility.pyramidBag) {
+          const arr = g.state.frontier.pyramidBag;
+          const ix = arr.indexOf(itemId);
+          if (ix >= 0) arr.splice(ix, 1);
+        } else g.state.bag[itemId]--;
         if (m === this.ally) this.hpAnim.ally = m.hp; // snap if active
         g.audio.playSfx('heal');
         this.say(line, () => {
@@ -162156,40 +162636,88 @@ class BattleScene {
     }, { menuClass: 'battlewin' });
   }
 
-  chooseFoeAction() {
+  // F2: the Pyramid run-bag menu — lists ONLY the items the mountain
+  // let the player find (state.frontier.pyramidBag), one row per
+  // distinct usable medicine with its run-bag count. Using one flows
+  // through useBattleItem, whose consumption reads the run bag.
+  openPyramidBag() {
     const g = this.game;
-    const usable = this.foe.moves.map((m, i) => i).filter((i) => this.foe.moves[i].pp > 0
-      && !(this.foe.disableT > 0 && this.foe.disabledMove === i));
-    if (!usable.length) return { type: 'move', idx: 0, struggle: true };
-    // GD balance: gym-leader opener — a leader with a self-buff setup move
-    // opens with it (classic Brock Defense Curl): gives the player a free
-    // turn, teaches setup play, and makes the fight about strategy.
-    if (this.trainer && this.foeAi === 'opener-setup' && this.turn === 1) {
-      const setup = usable.find((i) => {
-        const mv = MOVES[this.foe.moves[i].id];
-        return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
+    this.state = 'bag';
+    const counts = {};
+    for (const id of g.state.frontier.pyramidBag) counts[id] = (counts[id] || 0) + 1;
+    const items = Object.keys(counts)
+      .filter((id) => ITEMS[id] && !ITEMS[id].levelUp)
+      .map((id) => ({ label: ITEMS[id].name + ' x' + counts[id], value: id, pocket: 'medicine' }));
+    items.push({ label: 'Back', value: null });
+    if (items.length === 1) {
+      this.say('The Pyramid Bag is empty. The mountain provides — eventually.', () => this.toCommand());
+      return;
+    }
+    g.ui.showMenu('Pyramid Bag', items, (v) => {
+      if (v === null) { this.toCommand(); return; }
+      this.useBattleItem(v);
+    }, { menuClass: 'battlewin bagwin' });
+  }
+
+  // F2 (Arena): the live judge inputs for one side — the tracked
+  // counters plus Body read live from team HP (ally: the override
+  // team's fractions; foe: fainted foes count 0, the current foe its
+  // live fraction, unfielded foes full — via foeMaxTrail).
+  facilityTeamStats(side) {
+    const g = this.game;
+    const c = this.facilityStats[side];
+    let total = 0, rem = 0;
+    if (side === 'ally') {
+      for (const m of this.allyTeam(g)) { total += m.maxHp; rem += Math.max(0, m.hp); }
+    } else if (this.kind === 'trainer' && this.trainer) {
+      this.trainer.team.forEach((t, i) => {
+        const mh = this.foeMaxTrail[i] !== undefined ? this.foeMaxTrail[i]
+          : hpValue(SPECIES[t.species].base.hp, t.level, 31);
+        total += mh;
+        if (i < this.foeIndex) { /* fainted: 0 remaining */ }
+        else if (i === this.foeIndex) rem += Math.max(0, this.foe.hp);
+        else rem += mh;
       });
-      if (setup !== undefined) return { type: 'move', idx: setup };
-    }
-    // Gen-1 AI tempering (ADR-018): ordinary trainers pick near-randomly —
-    // the original's AI rarely optimizes. Leaders (ai:'smart') and the
-    // Elite Four prefer super-effective lines. ADR-025: this.foeAi is the
-    // difficulty-resolved class (Story flattens, Challenge promotes).
-    const smart = this.trainer && (this.foeAi === 'smart' || this.foeAi === 'opener-setup');
-    if (!smart) {
-      return { type: 'move', idx: usable[Math.floor(g.rng.battle() * usable.length)] };
-    }
-    const allyTypes = SPECIES[this.ally.speciesId].types;
-    let best = usable[0], bestScore = -1;
-    for (const i of usable) {
-      const mv = MOVES[this.foe.moves[i].id];
-      if (mv.cat === 'status') continue;
-      const e = effectiveness(mv.type, allyTypes);
-      const score = e * (0.5 + g.rng.battle());
-      if (score > bestScore) { bestScore = score; best = i; }
-    }
-    if (g.rng.battle() < 0.25) best = usable[Math.floor(g.rng.battle() * usable.length)];
-    return { type: 'move', idx: best };
+    } else if (this.foe) { total = this.foe.maxHp; rem = Math.max(0, this.foe.hp); }
+    return {
+      movesUsed: [...c.moves], attempted: c.attempted, landed: c.landed,
+      hpFrac: total > 0 ? rem / total : 0,
+    };
+  }
+
+  // F2 (Arena): the turn cap passed unresolved — the judge decides.
+  // The controller's judge (game/frontier.mjs judgeArena) may stamp
+  // .total/.parts onto each stats object for the spoken card. The
+  // battle then ends through the NORMAL win/defeat paths (which
+  // under facility pay no prize, award no XP and cost nothing).
+  resolveJudge() {
+    this._judged = true;
+    this.state = 'resolve';
+    const allyStats = this.facilityTeamStats('ally');
+    const foeStats = this.facilityTeamStats('foe');
+    const verdict = this.facility.judge(allyStats, foeStats) === 'win' ? 'win' : 'loss';
+    const card = (allyStats.total !== undefined && foeStats.total !== undefined)
+      ? ' The card reads ' + allyStats.total + ' to ' + foeStats.total + '.' : '';
+    const foeName = this.trainer ? this.trainer.name : 'the wild side';
+    this.say('Time! Three turns are spent — the Arena judge steps in.' + card, () => {
+      if (verdict === 'win') {
+        this.say('The decision goes to the challenger!', () => { this.state = 'victory'; this.winTrainer(); });
+      } else {
+        this.say('The decision goes to ' + foeName + '. The Frontier demands a winner.', () => { this.state = 'defeat'; this.finishDefeat(); });
+      }
+    });
+  }
+
+  chooseFoeAction() {
+    // F2: the decision itself lives in aiActionFor (above) so the
+    // Palace's autoAlly runs the identical code. Behaviour is
+    // unchanged: the GD leader opener fires on turn 1 for
+    // 'opener-setup' classes; smart classes line-pick; everyone
+    // else picks near-randomly (ADR-018/ADR-025).
+    return aiActionFor(this.game, this.foe, this.ally, {
+      smart: !!(this.trainer && (this.foeAi === 'smart' || this.foeAi === 'opener-setup')),
+      openerSetup: !!(this.trainer && this.foeAi === 'opener-setup' && this.turn === 1),
+    });
   }
 
   effStats(mon, stages) {
@@ -162403,6 +162931,16 @@ class BattleScene {
       }
     }
 
+    // F2 judge counters (facility only): a move that passed its
+    // accuracy gate counts as ATTEMPTED, and its id joins the side's
+    // distinct-move set (the Arena's Mind input). Landed is stamped
+    // where damage/status actually applies (below / applyStatusMove).
+    if (this.facilityStats) {
+      const c = this.facilityStats[entry.side];
+      c.attempted++;
+      if (entry.action && entry.action.type === 'move' && atk.moves[entry.action.idx]) c.moves.add(atk.moves[entry.action.idx].id);
+    }
+
     this.say(atkName + ' used ' + mv.name + '!', () => {
       if (mv.cat === 'status') { this.applyStatusMove(entry, mv); return; }
       const efx = mv.effect || {};
@@ -162488,6 +163026,7 @@ class BattleScene {
         dmg = 0;
       }
       if (dmg > 0) {
+        if (this.facilityStats) this.facilityStats[entry.side].landed++; // F2 judge Skill input
         def.hp = Math.max(0, def.hp - dmg);
         noteHitTaken(def); // ADR-025 §3: the holder took a hit (Iron Acorn window)
         this._ksHit = { side: foeSide, hpBefore: defHpBefore }; // attack context for checkFaint's Tortoise gate
@@ -162671,6 +163210,9 @@ class BattleScene {
     const aName = displayName(atk, SPECIES);
     // W1 FX-1: every status move presents through its vis.* definition.
     this.fxStartMove(mv, selfSide, target === atk ? selfSide : foeSide, { status: true, dmg: 0 });
+    // F2 judge Skill input: a status move that reached application
+    // (accuracy already passed) counts as landed.
+    if (this.facilityStats) this.facilityStats[selfSide].landed++;
     const done = (msg) => this.say(msg, () => this.nextAction());
     // Teleport: flee a wild battle; fails against trainers.
     if (ef.flee) {
@@ -162874,7 +163416,7 @@ class BattleScene {
         this.afterFaintFoe();
       } else {
         const g = this.game;
-        const anyLeft = g.state.party.some((m) => m.hp > 0);
+        const anyLeft = this.allyTeam(g).some((m) => m.hp > 0); // F2: routed (facility override team)
         if (!anyLeft) {
           this.state = 'defeat';
           this.say('You have no Pokemon left!', () => this.afterMsg());
@@ -162905,6 +163447,7 @@ class BattleScene {
         const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
         if (ksN) this.foe.keepsake = ksN;
         this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
+        this.foeMaxTrail[this.trainerIdx] = this.foe.maxHp; // F2 judge Body bookkeeping
         this.participants = new Set([this.ally]); // XP pool resets per foe
         this.hpAnim.foe = this.foe.hp;
         const foeName = displayName(this.foe, SPECIES);
@@ -163042,6 +163585,9 @@ class BattleScene {
 
   awardXpFor(foeMon, partsSet, cb) {
     const g = this.game;
+    // F2: no XP under facility law (Open Level — the entered team's
+    // levels are the contest; growth would unbalance the streak).
+    if (this.facility) { cb(); return; }
     const base = SPECIES[foeMon.speciesId].baseXp;
     // ADR-025 §4: mode + Fast Learner XP multipliers scale the pool before
     // the participant split (x1.25 Story; x1.5 Fast Learner; they compose).
@@ -163180,6 +163726,13 @@ class BattleScene {
   // ---- Catch sequence: the theater (gameux §4.2) ----
   beginCatch(ballId) {
     const g = this.game;
+    if (this.facility && this.kind === 'wild') {
+      // F2: facility wilds (Pike/Pyramid) are the Frontier's own —
+      // never catchable, and the ball is NOT spent (the refusal
+      // happens at the throw, before any decrement below).
+      this.say('The attendant shakes her head — Frontier grounds. Nothing here can be taken home.', () => this.toCommand());
+      return;
+    }
     if (this.uncatchable && this.friendly) {
       // Candy Coach spar (ADR-025): the Coach bats the ball away — the
       // ball is NOT spent and the spar simply continues at command.
@@ -163341,15 +163894,22 @@ class BattleScene {
     this.state = 'victory';
     if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6: exit mirror wipe
     // ADR-025 §4: Generous World scales prize money (x1.5).
-    const prize = Math.floor(t.reward * moneyMultFor(g.state));
+    // F2: under facility law there is NO prize (generated trainers
+    // also carry reward: 0 — the flag is the second lock) and NO
+    // beat_<id> flag (run-battle ids are unique per battle; writing
+    // them would burn the validator's 500-flag budget on noise).
+    const prize = this.facility ? 0 : Math.floor(t.reward * moneyMultFor(g.state));
     g.state.player.money += prize;
-    g.state.story.flags['beat_' + t.id] = true;
+    if (!this.facility) g.state.story.flags['beat_' + t.id] = true;
     // Yellow homage: winning with the partner conscious leaves it buzzing.
     if (g.state.party.some((m) => m.speciesId === 'partner' && m.hp > 0)) {
       g.state.pikachu.mood = 'excited';
     }
     // No battle-message here: the capstone dialogue below ends the battle exactly once.
-    this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
+    // F2: the facility victory line names no money (there is none).
+    this.msg = this.facility
+      ? 'You defeated ' + t.title + ' ' + t.name + '!'
+      : 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
     this.msgOpen = false;
     if (t.badge) {
       // Badge award (Kanto representation, generalized Stage O2): the
@@ -163410,7 +163970,15 @@ class BattleScene {
     g.audio.restoreAreaMusic(); // back to the overworld's track
     g.renderer.shakeX = 0; g.renderer.shakeY = 0; g.renderer.flashA = 0;
     // Reset battle temp state on party mons (incl. Transform restoration).
-    for (const m of g.state.party) {
+    // F2: under a partyOverride, reset ONLY the mons that actually
+    // battled (the override team + this battle's participants) —
+    // never the whole party: Factory rentals must leave state.party
+    // byte-identical, and unentered party mons have no battle-temp
+    // state to shed. (For entered-team facilities the override team
+    // IS the battler set; participants/ally are belt-and-braces.)
+    const resetTeam = (this.facility && this.facility.partyOverride)
+      ? [...new Set([...this.facility.partyOverride, ...(this.participants || []), this.ally].filter(Boolean))] : g.state.party;
+    for (const m of resetTeam) {
       if (m._preTransform) {
         m.speciesId = m._preTransform.speciesId;
         m.stats = m._preTransform.stats;
@@ -164834,6 +165402,686 @@ class ContestScene extends BattleScene {
       if (this.onEnd) this.onEnd(result);
     });
   }
+}
+
+
+// ---- src/game/frontier.mjs ----
+// frontier.mjs — Arc 3.5 Stage F2: the Battle Frontier controller.
+//
+// Systems layer in the contest.mjs shape: pure helpers + the
+// receptionist entry (startFrontier, dispatched from the overworld
+// NPC handler for NPCs carrying frontier: '<id>'), the seven
+// facility drivers, and the shared Brain award. All battles ride the
+// BattleScene FACILITY seam (battle.mjs): rt:false, no XP, no prize,
+// friendly defeat, the entered/rental team via partyOverride —
+// state.party is NEVER swapped for a Frontier contest.
+//
+// Run state lives in state.frontier (J6 persistence treatment —
+// defaultState + client schema + server validator + gen-tables).
+// ONE run is active across all facilities: starting facility B
+// while a run is open in facility A closes A's run (records kept),
+// and the receptionist says so before it happens.
+
+
+// ------------------------------------------------------------------
+// State helpers
+// ------------------------------------------------------------------
+
+// Runtime shape-repair in the ensureJohtoSystems idiom — the save
+// layer (schema fill) is the real repair path; this covers live
+// states built before F2 in this session.
+function ensureFrontier(state) {
+  if (!state.frontier || typeof state.frontier !== 'object') {
+    state.frontier = { records: freshRecords(), run: null, pyramidBag: [] };
+  }
+  const F = state.frontier;
+  if (!F.records || typeof F.records !== 'object') F.records = freshRecords();
+  for (const id of FACILITY_IDS) {
+    if (!F.records[id] || typeof F.records[id] !== 'object') F.records[id] = freshRecords()[id];
+  }
+  if (!Array.isArray(F.pyramidBag)) F.pyramidBag = [];
+  if (F.run === undefined) F.run = null;
+  return F;
+}
+
+function symbolSlot(state, facilityId) {
+  return state.badges.symbols[FACILITY_IDS.indexOf(facilityId)];
+}
+
+function healTeam(team) {
+  for (const m of team) {
+    if (!m) continue;
+    m.hp = m.maxHp;
+    m.status = null; m.confused = false; m.confusedTurns = null; m.sleepTurns = null;
+    for (const mv of m.moves) mv.pp = mv.maxPp;
+  }
+}
+
+// The team a run fights with: Factory rentals (serialized mons in
+// the run itself) or the entered party mons, resolved by monId —
+// the party array itself is never reordered or swapped.
+function activeTeam(state, run) {
+  if (!run) return [];
+  if (run.facility === 'factory') return (run.rentals || []).filter(Boolean);
+  return (run.enteredTeam || [])
+    .map((id) => state.party.find((m) => m && m.monId === id))
+    .filter(Boolean);
+}
+
+function newRun(facility, foeLevel, enteredTeam) {
+  return {
+    facility, foeLevel, enteredTeam: enteredTeam || [],
+    streak: 0, rentals: null, bracket: null, tournamentNo: 0,
+    events: null, rooms: 0, lastChamber: 0, banked: false,
+    floor: 1, runNo: 0, spots: [], spotsFloor: null,
+    lucyFaced: false, brandonFaced: false,
+  };
+}
+
+function closeRun(state) { state.frontier.run = null; }
+
+// ------------------------------------------------------------------
+// Opponents (generated + Brains)
+// ------------------------------------------------------------------
+
+function pickSpecies(g, pool, n, used) {
+  const out = [];
+  let guard = 0;
+  while (out.length < n && guard++ < 200) {
+    const sp = pool[Math.floor(g.rng.misc() * pool.length)];
+    if (used && used.has(sp)) continue;
+    if (out.includes(sp)) continue;
+    out.push(sp);
+  }
+  return out;
+}
+
+// A generated Frontier trainer. id is unique per run battle (rng
+// suffix) so nothing keyed on trainer id can collide across runs.
+// teamSize: 3 for the set/dome facilities, 1 for the Arena's judged
+// single-battler bouts (see judgeArena) — Pike chamber trainers use 2.
+function genTrainer(g, facilityId, battleNo, foeLevel, teamSize) {
+  const fac = FACILITIES[facilityId];
+  const size = teamSize || 3;
+  const species = pickSpecies(g, fac.pools, size, null);
+  const name = fac.names[Math.floor(g.rng.misc() * fac.names.length)];
+  const late = battleNo >= 14; // late sets sharpen (mission: ai 'smart' for late sets)
+  return {
+    id: 'frontier-' + facilityId + '-' + battleNo + '-' + Math.floor(g.rng.misc() * 1e9).toString(36),
+    name, title: fac.title, reward: 0,
+    ai: late ? 'smart' : undefined,
+    team: species.map((sp) => ({ species: sp, level: foeLevel })),
+    intro: [fac.name + ', battle ' + battleNo + '. ' + name + ' steps up — no prizes here, only the streak.'],
+    lose: ['Cleanly done. The ' + fac.name + ' keeps your streak honest — onward.'],
+  };
+}
+
+function brainTrainer(facilityId, tier, foeLevel) {
+  const fac = FACILITIES[facilityId];
+  return {
+    id: 'frontier-brain-' + facilityId + '-' + tier,
+    name: fac.brain, title: fac.brainTitle, reward: 0, ai: 'smart',
+    team: BRAIN_TEAMS[facilityId][tier].map((e) => ({ ...e, level: foeLevel })),
+    intro: fac.brainIntro,
+    lose: fac.brainLose,
+  };
+}
+
+// Which Brain tier (if any) stands at this set-facility battle
+// number: slot null -> Silver milestone, slot 'silver' -> Gold
+// milestone, slot 'gold' -> the Brain no longer appears.
+function setMilestone(state, facilityId, battleNo) {
+  const slot = symbolSlot(state, facilityId);
+  const M = BRAIN_MILESTONES[facilityId];
+  if (slot === null && battleNo === M.silver) return 'silver';
+  if (slot === 'silver' && battleNo === M.gold) return 'gold';
+  return null;
+}
+
+// ------------------------------------------------------------------
+// The shared Brain award
+// ------------------------------------------------------------------
+
+// On a Brain win: the slot takes the tier, the badge fanfare plays,
+// and the symbol lines are spoken. When the seventh slot turns gold
+// the registry completion flag is set — the Foundation machine
+// fires the Frontier ARC COMPLETE card from the flag alone on the
+// next map load; this helper never calls the card itself.
+function awardSymbol(g, facilityId, tier, cb) {
+  const state = g.state;
+  const idx = FACILITY_IDS.indexOf(facilityId);
+  state.badges.symbols[idx] = tier;
+  g.audio.playSfx('badge');
+  const item = ITEMS[SYMBOL_ITEMS[facilityId]];
+  const fac = FACILITIES[facilityId];
+  const lines = [
+    'Received the ' + item.name + ' — struck in ' + tier.toUpperCase() + '!',
+    '(' + fac.brain + ' of the ' + fac.name + ' has acknowledged your team. One symbol closer to the Frontier\'s heart.)',
+  ];
+  if (state.badges.symbols.every((s) => s === 'gold')) {
+    state.story.flags.frontier_complete = true;
+    lines.push('(Every symbol now shines gold. Something on this island has been waiting for exactly that...)');
+  }
+  g.ui.say(lines, cb || (() => {}), '');
+}
+
+// ------------------------------------------------------------------
+// Receptionist entry
+// ------------------------------------------------------------------
+
+function startFrontier(g, facilityId, ow) {
+  const state = g.state;
+  const F = ensureFrontier(state);
+  const fac = FACILITIES[facilityId];
+  const say = (lines, cb) => g.ui.say(lines, cb || (() => {}), fac.name.toUpperCase() + ' DESK');
+  if (F.run && F.run.facility !== facilityId) {
+    const other = FACILITIES[F.run.facility];
+    say(['You still hold an open run at the ' + other.name + ' — starting here closes it where it stands.',
+      'Its records stay written; the run itself ends. Shall I close it and book you into the ' + fac.name + '?'], () => {
+      g.ui.showMenu('Close the ' + other.name + ' run?', [
+        { label: 'Close it — book me in here', value: 'yes' },
+        { label: 'Not yet', value: 'no' },
+      ], (v) => {
+        if (v !== 'yes') return;
+        closeRun(state);
+        startFrontier(g, facilityId, ow);
+      });
+    });
+    return;
+  }
+  if (F.run && F.run.facility === facilityId) {
+    const run = F.run;
+    const progress = runProgressLine(facilityId, run);
+    say(['Your ' + fac.name + ' run is still open — ' + progress + '.', 'Shall we pick it back up?'], () => {
+      g.ui.showMenu(fac.name + ' run', [
+        { label: 'Resume the run', value: 'resume' },
+        { label: 'Retire the run', value: 'retire' },
+        { label: 'Just looking', value: 'leave' },
+      ], (v) => {
+        if (v === 'resume') resumeRun(g, facilityId, ow);
+        else if (v === 'retire') { closeRun(state); say(['Retired and recorded. The ' + fac.name + ' will be here when the streak calls again.']); }
+      });
+    });
+    return;
+  }
+  say([fac.intro], () => beginEntry(g, facilityId, ow));
+}
+
+function runProgressLine(facilityId, run) {
+  if (facilityId === 'dome') return 'tournament ' + run.tournamentNo + ', round ' + ((run.bracket && run.bracket.round + 1) || 1) + ' of 4';
+  if (facilityId === 'pike') return run.rooms + ' chambers cleared this run';
+  if (facilityId === 'pyramid') return 'floor ' + run.floor + ' of 7, climb ' + run.runNo;
+  return 'streak ' + run.streak;
+}
+
+function resumeRun(g, facilityId, ow) {
+  const run = g.state.frontier.run;
+  if (!run) return;
+  if (facilityId === 'dome') { domeNextMatch(g, ow); return; }
+  if (facilityId === 'pike' || facilityId === 'pyramid') {
+    g.ui.say(['Your run stands where you left it. The doors remember you.'], () => {}, FACILITIES[facilityId].name.toUpperCase() + ' DESK');
+    return;
+  }
+  launchSetBattle(g, ow);
+}
+
+// Party pick of exactly 3 able non-egg mons (the contest idiom):
+// sequential menus over the able list, no repeats. cb(teamMons).
+function partyPick3(g, fac, cb) {
+  const able = g.state.party.filter((m) => m && !m.egg && m.hp > 0);
+  if (able.length < 3) {
+    g.ui.say(['The ' + fac.name + ' books teams of three able partners — you have ' + able.length + '.',
+      'Heal up at the island Center and come back with three ready to fight.'], () => {}, fac.name.toUpperCase() + ' DESK');
+    return;
+  }
+  const picked = [];
+  const step = () => {
+    if (picked.length === 3) { cb(picked); return; }
+    const rest = able.filter((m) => !picked.includes(m));
+    g.ui.showMenu('Enter partner ' + (picked.length + 1) + ' of 3', rest.map((m) => ({
+      label: m.nickname || SPECIES[m.speciesId].name + ' Lv' + m.level, value: m.monId,
+    })), (v) => {
+      if (v === null || v === undefined) return; // desk cancel: entry simply does not start
+      picked.push(able.find((m) => m.monId === v));
+      step();
+    });
+  };
+  step();
+}
+
+function beginEntry(g, facilityId, ow) {
+  const state = g.state;
+  const fac = FACILITIES[facilityId];
+  if (facilityId === 'factory') { factoryDraft(g, ow); return; }
+  partyPick3(g, fac, (team) => {
+    const foeLevel = Math.max(...team.map((m) => m.level));
+    healTeam(team); // the desk books a fresh team (canon); Pike/Pyramid take run damage from here
+    const run = newRun(facilityId, foeLevel, team.map((m) => m.monId));
+    if (facilityId === 'dome') {
+      run.tournamentNo = state.frontier.records.dome.tournaments + 1;
+      state.frontier.records.dome.tournaments = run.tournamentNo;
+      run.bracket = buildBracket(g, team);
+      state.frontier.run = run;
+      g.ui.say(['The bracket is drawn — sixteen names, one Dome. Your first match is ready when you are.'],
+        () => domeNextMatch(g, ow), 'BATTLE DOME DESK');
+      return;
+    }
+    if (facilityId === 'pike') {
+      run.events = preRollPike(g);
+      state.frontier.run = run;
+      g.ui.say(['Your Pike run is booked. Every door ahead already knows its secret — walk the hall and choose.',
+        'Seven chambers. Behind the dais, the way out. Good luck — you will need a little.'], () => {}, 'BATTLE PIKE DESK');
+      return;
+    }
+    if (facilityId === 'pyramid') {
+      run.runNo = state.frontier.records.pyramid.runs + 1;
+      state.frontier.records.pyramid.runs = run.runNo;
+      state.frontier.pyramidBag = [];
+      state.frontier.run = run;
+      g.ui.say(['Climb ' + run.runNo + ' is booked, and the Pyramid Bag hangs empty at your hip.',
+        'The inner doors will open for you now. Seven floors, no free healing — take what the mountain offers.'], () => {}, 'BATTLE PYRAMID DESK');
+      return;
+    }
+    state.frontier.run = run;
+    launchSetBattle(g, ow);
+  });
+}
+
+// ------------------------------------------------------------------
+// Set facilities: Tower / Arena / Palace (+ Factory battles)
+// ------------------------------------------------------------------
+
+function facilityOpts(run, team, extra) {
+  return Object.assign({
+    id: run.facility,
+    partyOverride: team,
+    pyramidBag: run.facility === 'pyramid',
+  }, extra || {});
+}
+
+function launchSetBattle(g, ow) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run) return;
+  const facId = run.facility;
+  const battleNo = run.streak + 1;
+  const tier = setMilestone(state, facId, battleNo);
+  const trainer = tier ? brainTrainer(facId, tier, run.foeLevel)
+    : genTrainer(g, facId, battleNo, run.foeLevel, facId === 'arena' ? 1 : 3);
+  const team = activeTeam(state, run);
+  const extra = {};
+  if (facId === 'arena') { extra.maxTurns = 3; extra.judge = judgeArena; }
+  if (facId === 'palace') { extra.autoAlly = true; }
+  const b = new BattleScene({
+    kind: 'trainer', trainer, returnTo: ow, rt: false,
+    facility: facilityOpts(run, team, extra),
+  });
+  b.onEnd = (won, fled) => {
+    if (!won || fled) {
+      const closedAt = run.streak;
+      closeRun(state);
+      g.ui.say(['The streak closes at ' + closedAt + '. The desk writes it down — bests are kept, and the ' + FACILITIES[facId].name + ' will test you again whenever you ask.'], () => {}, FACILITIES[facId].name.toUpperCase() + ' DESK');
+      return;
+    }
+    run.streak++;
+    const rec = state.frontier.records[facId];
+    rec.totalWins++;
+    if (run.streak > rec.bestStreak) rec.bestStreak = run.streak;
+    if (FACILITIES[facId].healBetween) healTeam(team);
+    const after = () => {
+      if (facId === 'factory') factorySwapOffer(g, ow, trainer, () => setBoundary(g, ow));
+      else setBoundary(g, ow);
+    };
+    if (tier) awardSymbol(g, facId, tier, after);
+    else after();
+  };
+  g.scenes.push(b);
+  b.enter();
+}
+
+// After each battle: inside a set, the next battle launches at once;
+// at a set boundary the player chooses Continue / Rest / Retire.
+function setBoundary(g, ow) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run) return;
+  const fac = FACILITIES[run.facility];
+  if (run.streak % fac.setSize !== 0) { launchSetBattle(g, ow); return; }
+  g.ui.say(['Set complete — ' + run.streak + ' straight. The desk offers the honest three choices.'], () => {
+    g.ui.showMenu('Streak ' + run.streak + ' at the ' + fac.name, [
+      { label: 'Continue the streak', value: 'continue' },
+      { label: 'Rest (run saved)', value: 'rest' },
+      { label: 'Retire the run', value: 'retire' },
+    ], (v) => {
+      if (v === 'continue') launchSetBattle(g, ow);
+      else if (v === 'rest') g.ui.say(['Rested and recorded at ' + run.streak + '. The desk will resume this run the moment you ask.'], () => {}, fac.name.toUpperCase() + ' DESK');
+      else if (v === 'retire') { closeRun(state); g.ui.say(['Retired at ' + run.streak + '. A clean sheet for next time.'], () => {}, fac.name.toUpperCase() + ' DESK'); }
+    });
+  }, fac.name.toUpperCase() + ' DESK');
+}
+
+// ------------------------------------------------------------------
+// Arena judge (data-authored scoring; the battle feeds the inputs)
+// ------------------------------------------------------------------
+
+// Mind = distinct moves used (cap 4) · Skill = attacks landed
+// (cap 6) · Body = round(3 x team's remaining HP fraction).
+// Higher total wins; a TIE resolves as challenger loss (recorded
+// adaptation — the Frontier demands a winner). Stamps totals on the
+// stat objects so the battle can speak the card.
+function arenaScore(s) {
+  return {
+    mind: Math.min(4, (s.movesUsed || []).length),
+    skill: Math.min(6, s.landed || 0),
+    body: Math.round(3 * (s.hpFrac || 0)),
+  };
+}
+function judgeArena(allyStats, foeStats) {
+  const a = arenaScore(allyStats); const f = arenaScore(foeStats);
+  allyStats.parts = a; foeStats.parts = f;
+  allyStats.total = a.mind + a.skill + a.body;
+  foeStats.total = f.mind + f.skill + f.body;
+  return allyStats.total > foeStats.total ? 'win' : 'loss';
+}
+
+// ------------------------------------------------------------------
+// Factory: draft + swap
+// ------------------------------------------------------------------
+
+// foeLevel for the Factory is the top level among the player's ABLE
+// party (no team is entered — that is the Factory's whole point).
+function factoryDraft(g, ow) {
+  const state = g.state;
+  const able = state.party.filter((m) => m && !m.egg && m.hp > 0);
+  if (!able.length) {
+    g.ui.say(['Even borrowed partners need a trainer standing upright. Come back with at least one able partner in your party.'], () => {}, 'BATTLE FACTORY DESK');
+    return;
+  }
+  const foeLevel = Math.max(...able.map((m) => m.level));
+  const pool = [...FACILITIES.factory.pools];
+  const candidates = [];
+  while (candidates.length < 6) {
+    const sp = pool.splice(Math.floor(g.rng.misc() * pool.length), 1)[0];
+    candidates.push(makeMon(sp, foeLevel, SPECIES, MOVES));
+  }
+  const partyJson = JSON.stringify(state.party); // the byte-identity proof rides the run (tests assert it)
+  const picked = [];
+  const step = () => {
+    if (picked.length === 3) {
+      const run = newRun('factory', foeLevel, []);
+      run.rentals = picked;
+      run.realPartyNote = partyJson;
+      state.frontier.run = run;
+      healTeam(picked);
+      g.ui.say(['Drafted and stamped. Those three are yours until the streak says otherwise — your own partners rest, untouched.'],
+        () => launchSetBattle(g, ow), 'BATTLE FACTORY DESK');
+      return;
+    }
+    const rest = candidates.filter((m) => !picked.includes(m));
+    g.ui.showMenu('Draft rental ' + (picked.length + 1) + ' of 3 (of 6)', rest.map((m) => ({
+      label: SPECIES[m.speciesId].name + ' Lv' + m.level, value: m.monId,
+    })), (v) => {
+      if (v === null || v === undefined) return;
+      picked.push(candidates.find((m) => m.monId === v));
+      step();
+    });
+  };
+  g.ui.say(['Six rentals on the table, all stamped Lv' + foeLevel + ' to match your best. Pick three — choose like you mean it.'], step, 'BATTLE FACTORY DESK');
+}
+
+// After a Factory WIN: the swap offer — one of the foe's team for
+// one of the player's rentals, or decline. The received rental is a
+// fresh Factory stamp of the species faced (the Factory re-issues
+// rentals between rounds; recorded in the register).
+function factorySwapOffer(g, ow, foeTrainer, cb) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run || !run.rentals) { cb(); return; }
+  g.ui.say(['Factory rules: you may trade one of your rentals for one of the team you just beat — or keep your three.'], () => {
+    const items = foeTrainer.team.map((t, i) => ({ label: 'Take their ' + SPECIES[t.species].name, value: i }));
+    items.push({ label: 'Keep my team', value: -1 });
+    g.ui.showMenu('Swap a rental?', items, (v) => {
+      if (v === null || v === undefined || v === -1) { cb(); return; }
+      const taken = foeTrainer.team[v];
+      const mine = run.rentals.map((m, i) => ({ label: 'Give up my ' + SPECIES[m.speciesId].name, value: i }));
+      g.ui.showMenu('Exchange which rental?', mine, (w) => {
+        if (w === null || w === undefined) { cb(); return; }
+        run.rentals[w] = makeMon(taken.species, run.foeLevel, SPECIES, MOVES);
+        healTeam(run.rentals);
+        g.ui.say(['Stamped and swapped. The ' + SPECIES[taken.species].name + ' fights for you now.'], cb, 'BATTLE FACTORY DESK');
+      });
+    });
+  }, 'BATTLE FACTORY DESK');
+}
+
+// ------------------------------------------------------------------
+// Dome: the 16-entrant tournament
+// ------------------------------------------------------------------
+
+// Team power for the simulated matches: the sum of the entrants'
+// level-scaled stat totals (built from real mons at foeLevel).
+function teamPower(speciesIds, level) {
+  let total = 0;
+  for (const id of speciesIds) {
+    const m = makeMon(id, level, SPECIES, MOVES);
+    total += m.maxHp + m.stats.atk + m.stats.def + m.stats.spa + m.stats.spd + m.stats.spe;
+  }
+  return total;
+}
+
+function buildBracket(g, playerTeam) {
+  const fac = FACILITIES.dome;
+  const foeLevel = Math.max(...playerTeam.map((m) => m.level));
+  const entrants = [{ name: 'YOU', species: playerTeam.map((m) => m.speciesId), power: teamPower(playerTeam.map((m) => m.speciesId), foeLevel) }];
+  const usedNames = new Set();
+  for (let i = 0; i < 15; i++) {
+    let name = fac.names[Math.floor(g.rng.misc() * fac.names.length)];
+    let guard = 0;
+    while (usedNames.has(name) && guard++ < 50) name = fac.names[Math.floor(g.rng.misc() * fac.names.length)];
+    usedNames.add(name);
+    const species = pickSpecies(g, fac.pools, 3, null);
+    entrants.push({ name, species, power: teamPower(species, foeLevel) });
+  }
+  // Seed the player at slot 0; shuffle the rest.
+  const rest = entrants.slice(1);
+  for (let i = rest.length - 1; i > 0; i--) {
+    const j = Math.floor(g.rng.misc() * (i + 1));
+    [rest[i], rest[j]] = [rest[j], rest[i]];
+  }
+  const all = [entrants[0], ...rest];
+  return { entrants: all, round: 0, alive: all.map((_, i) => i), results: [] };
+}
+
+const DOME_ROUNDS = ['the round of 16', 'the quarter-final', 'the semi-final', 'the FINAL'];
+
+// Simulate every non-player match of the current round; returns the
+// narration lines. Winners advance; the player's pairing is skipped
+// (it is a real battle).
+function simRound(g, run) {
+  const b = run.bracket;
+  const lines = [];
+  const nextAlive = [];
+  for (let i = 0; i < b.alive.length; i += 2) {
+    const a = b.alive[i], c = b.alive[i + 1];
+    if (a === 0 || c === 0) { nextAlive.push(0); continue; } // player's pairing resolved by the real battle
+    const ea = b.entrants[a], ec = b.entrants[c];
+    const upset = g.rng.misc();
+    let winner;
+    if (ea.power === ec.power) winner = upset < 0.5 ? a : c;
+    else {
+      const fav = ea.power > ec.power ? a : c;
+      const dog = fav === a ? c : a;
+      winner = upset < 0.22 ? dog : fav; // the Dome loves an upset, but power usually tells
+    }
+    b.results.push({ round: b.round, a, c, winner });
+    lines.push(b.entrants[winner].name + ' def. ' + b.entrants[winner === a ? c : a].name + ' (' + DOME_ROUNDS[b.round] + ').');
+    nextAlive.push(winner);
+  }
+  b.alive = nextAlive;
+  return lines;
+}
+
+function domePlayerFoeIdx(run) {
+  const alive = run.bracket.alive;
+  const pos = alive.indexOf(0);
+  return alive[pos % 2 === 0 ? pos + 1 : pos - 1];
+}
+
+function domeNextMatch(g, ow) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run || run.facility !== 'dome' || !run.bracket) return;
+  const b = run.bracket;
+  const isFinal = b.round === 3;
+  const foeIdx = domePlayerFoeIdx(run);
+  const foeEntrant = b.entrants[foeIdx];
+  const tier = isFinal ? domeMilestone(state, run.tournamentNo) : null;
+  const trainer = tier ? brainTrainer('dome', tier, run.foeLevel)
+    : {
+      id: 'frontier-dome-' + run.tournamentNo + '-' + b.round + '-' + Math.floor(g.rng.misc() * 1e9).toString(36),
+      name: foeEntrant.name, title: FACILITIES.dome.title, reward: 0,
+      ai: b.round >= 2 ? 'smart' : undefined,
+      team: foeEntrant.species.map((sp) => ({ species: sp, level: run.foeLevel })),
+      intro: ['Dome ' + DOME_ROUNDS[b.round] + '. The crowd is already chanting somebody\'s name — make it yours.'],
+      lose: ['The Dome roars for the winner. Onward, contender.'],
+    };
+  const team = activeTeam(state, run);
+  const battle = new BattleScene({
+    kind: 'trainer', trainer, returnTo: ow, rt: false,
+    facility: facilityOpts(run, team),
+  });
+  battle.onEnd = (won, fled) => {
+    if (!won || fled) {
+      const finish = ['R16 exit', 'quarter-finalist', 'semi-finalist', 'finalist'][b.round] || 'entrant';
+      const rec = state.frontier.records.dome;
+      if (b.round > (rec.bestFinish || 0)) rec.bestFinish = b.round;
+      closeRun(state);
+      g.ui.say(['Out in ' + DOME_ROUNDS[b.round] + ' — a ' + finish + ' finish, written into the Dome book. The bracket plays on without you.'], () => {}, 'BATTLE DOME DESK');
+      return;
+    }
+    healTeam(team);
+    const narration = simRound(g, run);
+    b.round++;
+    const advance = () => {
+      if (b.round > 3) {
+        state.frontier.records.dome.tournamentWins++;
+        if (state.frontier.records.dome.bestFinish < 4) state.frontier.records.dome.bestFinish = 4;
+        closeRun(state);
+        const done = () => g.ui.say(['CHAMPION OF THE DOME! Sixteen names went up; yours is the one still lit.'], () => {}, 'BATTLE DOME DESK');
+        if (tier) awardSymbol(g, 'dome', tier, done); else done();
+        return;
+      }
+      g.ui.say(['You advance! Elsewhere in ' + DOME_ROUNDS[b.round - 1] + ':', ...narration, 'Next match: ' + DOME_ROUNDS[b.round] + '. The desk will call you.'],
+        () => {}, 'BATTLE DOME DESK');
+    };
+    advance();
+  };
+  g.scenes.push(battle);
+  battle.enter();
+}
+
+function domeMilestone(state, tournamentNo) {
+  const slot = symbolSlot(state, 'dome');
+  const M = BRAIN_MILESTONES.dome;
+  if (slot === null && tournamentNo === M.silver) return 'silver';
+  if (slot === 'silver' && tournamentNo === M.gold) return 'gold';
+  return null;
+}
+
+// ------------------------------------------------------------------
+// Pike: pre-roll, chamber events, dais, Lucy
+// ------------------------------------------------------------------
+
+// The whole run's door table, rolled ONCE at entry from the game
+// rng: events[chamber-1][door] for chambers 1..7, doors 0..2.
+function preRollPike(g) {
+  const rows = [];
+  for (let c = 0; c < 7; c++) {
+    const row = [];
+    for (let d = 0; d < 3; d++) {
+      let roll = g.rng.misc() * 100;
+      let kind = 'quiet';
+      for (const [k, w] of PIKE_EVENT_WEIGHTS) { if (roll < w) { kind = k; break; } roll -= w; }
+      row.push(kind);
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+
+// Brandon waits on floor 7 of a qualifying climb: run number 3
+// with the slot empty (Silver due), run number 10 with the slot
+// silver (Gold due). One audience per run (brandonFaced).
+function brandonDue(state) {
+  const run = state.frontier && state.frontier.run;
+  if (!run || run.facility !== 'pyramid' || run.brandonFaced || run.floor !== 7) return null;
+  const slot = symbolSlot(state, 'pyramid');
+  const M = BRAIN_MILESTONES.pyramid;
+  if (slot === null && run.runNo === M.silver) return 'silver';
+  if (slot === 'silver' && run.runNo === M.gold) return 'gold';
+  return null;
+}
+
+// The appended-Brain audience (Lucy / Brandon): talk -> the Brain's
+// own intro -> the milestone battle -> award or the run's end.
+// ==== F3 HOOK (Stage F3, Brandon possession staging) ====
+// Brandon's battle here is the PLAIN milestone battle the F2 brief
+// commissions. F3's two-stage possession staging attaches at THIS
+// function: when F3 lands, startBrainAudience('pyramid') gains the
+// pre-battle possession scene and the second-stage battle before
+// falling through to launchBrainBattle below — the award, the
+// brandonFaced marking and the run closing all stay shared.
+function startBrainAudience(g, facilityId, ow) {
+  const state = g.state;
+  const run = state.frontier && state.frontier.run;
+  if (!run || run.facility !== facilityId) return;
+  const tier = facilityId === 'pike' ? lucyDue(state) : brandonDue(state);
+  if (!tier) return;
+  const fac = FACILITIES[facilityId];
+  g.ui.say(fac.brainIntro, () => launchBrainBattle(g, ow, facilityId, tier), fac.brain.toUpperCase());
+}
+
+function launchBrainBattle(g, ow, facilityId, tier) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run) return;
+  if (facilityId === 'pike') run.lucyFaced = true;
+  if (facilityId === 'pyramid') run.brandonFaced = true;
+  const team = activeTeam(state, run);
+  const trainer = brainTrainer(facilityId, tier, run.foeLevel);
+  const b = new BattleScene({
+    kind: 'trainer', trainer, returnTo: ow, rt: false,
+    facility: facilityOpts(run, team),
+  });
+  b.onEnd = (won, fled) => {
+    if (!won || fled) {
+      closeRun(state);
+      g.ui.say(['The Brain keeps the symbol — and the run closes here. The desk has written it all down.'], () => {}, FACILITIES[facilityId].name.toUpperCase() + ' DESK');
+      return;
+    }
+    awardSymbol(g, facilityId, tier, () => {
+      closeRun(state);
+      g.ui.say(['The run closes in triumph — the desk strikes it in ' + tier + ' ink.'], () => {}, FACILITIES[facilityId].name.toUpperCase() + ' DESK');
+    });
+  };
+  g.scenes.push(b);
+  b.enter();
+}
+
+// Lucy waits on the dais when the cumulative banked rooms plus this
+// run's rooms reach the next milestone AND she has not been faced
+// this run (one audience per run — the run closes after her battle
+// either way: a loss ends it by facility law, a win retires it in
+// triumph at the desk).
+function lucyDue(state) {
+  const run = state.frontier && state.frontier.run;
+  if (!run || run.facility !== 'pike' || run.lucyFaced) return null;
+  const total = state.frontier.records.pike.totalRooms + (run.banked ? 0 : run.rooms);
+  const slot = symbolSlot(state, 'pike');
+  const M = BRAIN_MILESTONES.pike;
+  if (slot === null && total >= M.silver) return 'silver';
+  if (slot === 'silver' && total >= M.gold) return 'gold';
+  return null;
 }
 
 
@@ -168149,6 +169397,12 @@ Object.assign(OverworldScene.prototype, {
     if (npc.pc) { sayLines(() => this.openPc()); return true; }
     if (npc.mart) { sayLines(() => this.openMart(npc.mart.stock || [])); return true; }
     if (npc.cheat) { sayLines(() => this.openCheatShop()); return true; }
+    // Arc 3.5 Stage F2: Battle Frontier receptionists (F1 maps carry
+    // frontier: '<facilityId>') and the appended Brain audiences
+    // (Lucy on the Pike dais, Brandon on Pyramid floor 7) — the
+    // controller lives in game/frontier.mjs (startFrontier et al).
+    if (npc.frontier) { startFrontier(g, npc.frontier, this); return true; }
+    if (npc.frontierBrain) { startBrainAudience(g, npc.frontierBrain, this); return true; }
     if (npc.slots) { sayLines(() => this.openSlots()); return true; }
     if (npc.prize) {
       sayLines(() => {

@@ -4,6 +4,8 @@
 import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
 import { KEEPSAKES, BADGE_SETS, BALLS } from '../data/items.mjs';
 import { CONTEST_RIBBONS } from '../data/contest.mjs';
+import { FACILITY_IDS, RECORD_FIELDS, PIKE_EVENT_KINDS, PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
+import { ITEMS } from '../data/items.mjs';
 import { ARCS, deriveArcDefaults, levelCapFor, xpCeilingFor } from '../data/arcs.mjs';
 
 const ARC_IDS = new Set(ARCS.map((a) => a.id));
@@ -18,7 +20,10 @@ const TOP_KEYS = ['v', 'player', 'party', 'boxes', 'dex', 'badges', 'story',
   'daycare', 'daycareEgg', 'daycareEggAt', 'stepsTotal', 'gather', 'kurtOrder',
   // Stage H5: the contest field (contest.mjs) — the server validator's
   // TOP_KEYS carries the same key, the matched pair.
-  'contest'];
+  'contest',
+  // Arc 3.5 Stage F2: the Frontier run state (game/frontier.mjs) —
+  // the server validator's TOP_KEYS carries the same key, the pair.
+  'frontier'];
 
 function isObj(x) { return x !== null && typeof x === 'object' && !Array.isArray(x); }
 
@@ -106,6 +111,68 @@ export function validateSave(data) {
     if (!isObj(c) || !Array.isArray(c.ribbons) || c.ribbons.length > CONTEST_RIBBONS.length
       || c.ribbons.some((id) => !CONTEST_RIBBONS.includes(id))
       || new Set(c.ribbons).size !== c.ribbons.length) errors.push('bad-contest-ribbons');
+  }
+  // Arc 3.5 Stage F2: state.frontier, when present — records are
+  // per-facility bounded counters (RECORD_FIELDS is the closed field
+  // list), the Pyramid bag holds medicine item ids only, and a run
+  // is ONE facility's bounded payload (mid-run saves round-trip:
+  // rentals are full mon records, the Dome bracket and the Pike
+  // pre-roll are closed shapes). Absent = pre-F2 save (filled on
+  // load). The server validator enforces the same shapes.
+  if (data.frontier !== undefined) {
+    const fr = data.frontier;
+    if (!isObj(fr)) errors.push('bad-frontier');
+    else {
+      if (fr.records !== undefined) {
+        if (!isObj(fr.records) || Object.keys(fr.records).some((k) => !FACILITY_IDS.includes(k))) errors.push('bad-frontier-records');
+        else for (const id of Object.keys(fr.records)) {
+          const rec = fr.records[id];
+          if (!isObj(rec) || Object.keys(rec).some((k) => !RECORD_FIELDS[id].includes(k))
+            || Object.values(rec).some((v) => !Number.isInteger(v) || v < 0 || v > 1000000)) { errors.push('bad-frontier-records'); break; }
+        }
+      }
+      if (fr.pyramidBag !== undefined) {
+        if (!Array.isArray(fr.pyramidBag) || fr.pyramidBag.length > 99
+          || fr.pyramidBag.some((id) => typeof id !== 'string' || !ITEMS[id] || ITEMS[id].pocket !== 'medicine')) errors.push('bad-frontier-bag');
+      }
+      if (fr.run !== undefined && fr.run !== null) {
+        const r = fr.run;
+        let badRun = !isObj(r) || !FACILITY_IDS.includes(r.facility)
+          || !Number.isInteger(r.foeLevel) || r.foeLevel < 1 || r.foeLevel > 9999
+          || !Array.isArray(r.enteredTeam) || r.enteredTeam.length > 3
+          || r.enteredTeam.some((x) => typeof x !== 'string' || x.length > 40)
+          || (r.streak !== undefined && (!Number.isInteger(r.streak) || r.streak < 0 || r.streak > 100000));
+        if (!badRun && r.rentals !== undefined && r.rentals !== null) {
+          if (!Array.isArray(r.rentals) || r.rentals.length > 3) badRun = true;
+          else for (const m of r.rentals) {
+            if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number'
+              || m.level < 1 || m.level > levelCap || !Array.isArray(m.moves) || m.moves.length > 4) { badRun = true; break; }
+          }
+        }
+        if (!badRun && r.bracket !== undefined && r.bracket !== null) {
+          const b = r.bracket;
+          if (!isObj(b) || !Array.isArray(b.entrants) || b.entrants.length > 16
+            || b.entrants.some((e) => !isObj(e) || typeof e.name !== 'string' || e.name.length > 40
+              || !Array.isArray(e.species) || e.species.length > 3 || e.species.some((s) => typeof s !== 'string')
+              || !Number.isInteger(e.power) || e.power < 0 || e.power > 10000000)
+            || !Number.isInteger(b.round) || b.round < 0 || b.round > 3
+            || !Array.isArray(b.alive) || b.alive.length > 16 || b.alive.some((x) => !Number.isInteger(x) || x < 0 || x > 15)
+            || !Array.isArray(b.results) || b.results.length > 15) badRun = true;
+        }
+        if (!badRun && r.events !== undefined && r.events !== null) {
+          if (!Array.isArray(r.events) || r.events.length !== 7
+            || r.events.some((row) => !Array.isArray(row) || row.length !== 3 || row.some((c) => !PIKE_EVENT_KINDS.includes(c)))) badRun = true;
+        }
+        if (!badRun && r.spots !== undefined && r.spots !== null) {
+          if (!Array.isArray(r.spots) || r.spots.length > 6
+            || r.spots.some((s) => !isObj(s) || !PYRAMID_FLOOR_MAPS.includes(s.map)
+              || !Number.isInteger(s.x) || s.x < 0 || s.x > 40 || !Number.isInteger(s.y) || s.y < 0 || s.y > 40
+              || !['item', 'trainer'].includes(s.kind)
+              || (s.item !== undefined && (typeof s.item !== 'string' || !ITEMS[s.item])))) badRun = true;
+        }
+        if (badRun) errors.push('bad-frontier-run');
+      }
+    }
   }
   if (!isObj(data.dex)) errors.push('bad-dex');
   if (isObj(data.dex) && data.dex.forms !== undefined) {
@@ -295,6 +362,56 @@ export function fillV2Defaults(data) {
       }
     }
     data.contest = { ribbons };
+  }
+  // Arc 3.5 Stage F2: Frontier defaults-fill — a pre-F2 save opens
+  // with empty records, no run and an empty Pyramid bag; a present
+  // value rebuilds into the closed shapes (known facilities/fields
+  // only, counters clamped, a malformed run drops to null rather
+  // than stranding the save), so validateSave stays strict for
+  // saves that carry malformed values of their own.
+  {
+    const raw = isObj(data.frontier) ? data.frontier : {};
+    const records = {};
+    for (const id of FACILITY_IDS) {
+      const src = isObj(raw.records) && isObj(raw.records[id]) ? raw.records[id] : {};
+      records[id] = {};
+      for (const f of RECORD_FIELDS[id]) {
+        records[id][f] = Number.isInteger(src[f]) && src[f] >= 0 ? Math.min(1000000, src[f]) : 0;
+      }
+    }
+    const pyramidBag = Array.isArray(raw.pyramidBag)
+      ? raw.pyramidBag.filter((id) => typeof id === 'string' && ITEMS[id] && ITEMS[id].pocket === 'medicine').slice(0, 99) : [];
+    let run = null;
+    const r = raw.run;
+    if (isObj(r) && FACILITY_IDS.includes(r.facility)
+      && Number.isInteger(r.foeLevel) && r.foeLevel >= 1 && r.foeLevel <= 9999
+      && Array.isArray(r.enteredTeam) && r.enteredTeam.every((x) => typeof x === 'string')) {
+      const intOr = (v, d, max) => (Number.isInteger(v) && v >= 0 && v <= (max || 1000000) ? v : d);
+      run = {
+        facility: r.facility,
+        foeLevel: r.foeLevel,
+        enteredTeam: r.enteredTeam.slice(0, 3),
+        streak: intOr(r.streak, 0, 100000),
+        rentals: Array.isArray(r.rentals) ? r.rentals.slice(0, 3) : null,
+        bracket: isObj(r.bracket) && Array.isArray(r.bracket.entrants) && Array.isArray(r.bracket.alive) && Array.isArray(r.bracket.results)
+          ? { entrants: r.bracket.entrants.slice(0, 16), round: intOr(r.bracket.round, 0, 3), alive: r.bracket.alive.slice(0, 16), results: r.bracket.results.slice(0, 15) } : null,
+        tournamentNo: intOr(r.tournamentNo, 0, 100000),
+        events: Array.isArray(r.events) && r.events.length === 7 && r.events.every((row) => Array.isArray(row) && row.length === 3 && row.every((c) => PIKE_EVENT_KINDS.includes(c)))
+          ? r.events.map((row) => [...row]) : null,
+        rooms: intOr(r.rooms, 0, 100000),
+        lastChamber: intOr(r.lastChamber, 0, 7),
+        banked: r.banked === true,
+        floor: Number.isInteger(r.floor) && r.floor >= 1 && r.floor <= 7 ? r.floor : 1,
+        runNo: intOr(r.runNo, 0, 100000),
+        spots: Array.isArray(r.spots) ? r.spots.filter((s) => isObj(s) && PYRAMID_FLOOR_MAPS.includes(s.map)
+          && Number.isInteger(s.x) && Number.isInteger(s.y) && ['item', 'trainer'].includes(s.kind)).slice(0, 6) : [],
+        spotsFloor: typeof r.spotsFloor === 'string' ? r.spotsFloor : null,
+        lucyFaced: r.lucyFaced === true,
+        brandonFaced: r.brandonFaced === true,
+      };
+      if (Array.isArray(run.rentals)) for (const m of run.rentals) fillMon(m);
+    }
+    data.frontier = { records, run, pyramidBag };
   }
   if (isObj(data.story)) {
     if (!['story', 'classic', 'challenge'].includes(data.story.difficulty)) {

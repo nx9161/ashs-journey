@@ -18,6 +18,7 @@ import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './s
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { ContestScene, hasRibbon } from './contest.mjs';
+import { startFrontier, startBrainAudience } from './frontier.mjs';
 import { RIBBON_NAMES } from '../data/contest.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
@@ -1133,6 +1134,12 @@ Object.assign(OverworldScene.prototype, {
     if (npc.pc) { sayLines(() => this.openPc()); return true; }
     if (npc.mart) { sayLines(() => this.openMart(npc.mart.stock || [])); return true; }
     if (npc.cheat) { sayLines(() => this.openCheatShop()); return true; }
+    // Arc 3.5 Stage F2: Battle Frontier receptionists (F1 maps carry
+    // frontier: '<facilityId>') and the appended Brain audiences
+    // (Lucy on the Pike dais, Brandon on Pyramid floor 7) — the
+    // controller lives in game/frontier.mjs (startFrontier et al).
+    if (npc.frontier) { startFrontier(g, npc.frontier, this); return true; }
+    if (npc.frontierBrain) { startBrainAudience(g, npc.frontierBrain, this); return true; }
     if (npc.slots) { sayLines(() => this.openSlots()); return true; }
     if (npc.prize) {
       sayLines(() => {

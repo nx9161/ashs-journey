@@ -176,6 +176,39 @@ function arenaShade(hex, f) {
   return '#' + ((r << 16) | (g << 8) | b).toString(16).padStart(6, '0');
 }
 
+// F2: the SHARED move-choice AI — extracted verbatim from
+// BattleScene.chooseFoeAction so the foe and the Palace's autoAlly
+// ally run the SAME decision code (mission: reuse, don't fork).
+// opts.smart enables the leader line-picking; opts.openerSetup
+// enables the turn-1 self-buff opener. A non-smart actor picks
+// near-randomly, exactly as ordinary trainer foes always have.
+export function aiActionFor(g, mon, target, opts) {
+  const usable = mon.moves.map((m, i) => i).filter((i) => mon.moves[i].pp > 0
+    && !(mon.disableT > 0 && mon.disabledMove === i));
+  if (!usable.length) return { type: 'move', idx: 0, struggle: true };
+  if (opts && opts.openerSetup) {
+    const setup = usable.find((i) => {
+      const mv = MOVES[mon.moves[i].id];
+      return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
+    });
+    if (setup !== undefined) return { type: 'move', idx: setup };
+  }
+  if (!opts || !opts.smart) {
+    return { type: 'move', idx: usable[Math.floor(g.rng.battle() * usable.length)] };
+  }
+  const targetTypes = SPECIES[target.speciesId].types;
+  let best = usable[0], bestScore = -1;
+  for (const i of usable) {
+    const mv = MOVES[mon.moves[i].id];
+    if (mv.cat === 'status') continue;
+    const e = effectiveness(mv.type, targetTypes);
+    const score = e * (0.5 + g.rng.battle());
+    if (score > bestScore) { bestScore = score; best = i; }
+  }
+  if (g.rng.battle() < 0.25) best = usable[Math.floor(g.rng.battle() * usable.length)];
+  return { type: 'move', idx: best };
+}
+
 export class BattleScene {
   constructor(opts) {
     this.kind = opts.kind; // 'wild' | 'trainer'
@@ -185,6 +218,17 @@ export class BattleScene {
     this.onEnd = opts.onEnd || null; // story-event continuation callback
     this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
     this.friendly = !!opts.friendly; // no-stakes battle (Candy Coach spar): defeat costs nothing
+    // Arc 3.5 Stage F2: the FACILITY seam (game/frontier.mjs) — null
+    // for every ordinary battle; when set, the battle obeys Frontier
+    // law (mission decision #3): defeat takes the friendly branch
+    // (no money halving, no Center warp), no XP is awarded, no prize
+    // is paid, the bag stays closed (except the Pyramid run-bag
+    // mode), balls are refused at facility wilds, the ally team is
+    // read through facility.partyOverride when given, and the
+    // optional Arena judge (maxTurns + judge) / Palace autoAlly
+    // laws apply. Call sites pass rt: false (classic engine only).
+    this.facility = opts.facility || null;
+    if (this.facility) this.friendly = true;
     this.foeAi = null; // ADR-025: effective foe AI class, resolved in enter() via rules.mjs
     this.onSafariAction = opts.onSafariAction || null; // overworld spends a step per action
     this.safariBait = false;
@@ -274,6 +318,16 @@ export class BattleScene {
     this.participants = new Set([this.ally]);
     this.runAttempts = 0;
     this.turn = 1;
+    // F2: per-side judge counters, tracked ONLY under facility (the
+    // Arena's Mind/Skill inputs; Body is read live from team HP).
+    // foeMaxTrail records each foe's maxHp as it enters so Body's
+    // foe fraction stays exact even after tuneFoeMon's IV rescale.
+    this.facilityStats = this.facility ? {
+      ally: { moves: new Set(), attempted: 0, landed: 0 },
+      foe: { moves: new Set(), attempted: 0, landed: 0 },
+    } : null;
+    this._judged = false;
+    this.foeMaxTrail = this.foe ? [this.foe.maxHp] : [];
     this.actions = [];
     this.animQ = [];
     this.hpAnim = { ally: this.ally.hp, foe: this.foe.hp };
@@ -395,13 +449,23 @@ export class BattleScene {
     return false;
   }
 
+  // F2: the ally team source — the facility override array when the
+  // battle carries one (the entered/rental team objects; state.party
+  // is never swapped), else the real party. Every battle-relevant
+  // state.party read routes through here (the register lists the
+  // routed reads and the deliberately-left cosmetic ones).
+  allyTeam(g) {
+    return (this.facility && this.facility.partyOverride) || g.state.party;
+  }
+
   firstAble(g) {
     // Stage J6: an Egg can never be the battle lead — the first able
     // NON-EGG mon leads; the all-egg fallback keeps the historical
     // party[0] shape (an all-egg party is unreachable: the deposit
     // guards refuse to create one).
-    for (const m of g.state.party) if (m.hp > 0 && !m.egg) return m;
-    return g.state.party.find((m) => !m.egg) || g.state.party[0];
+    const team = this.allyTeam(g);
+    for (const m of team) if (m.hp > 0 && !m.egg) return m;
+    return team.find((m) => !m.egg) || team[0];
   }
 
   say(text, cb) {
@@ -530,6 +594,20 @@ export class BattleScene {
 
   toCommand() {
     this.state = 'command';
+    // F2 facility laws at the command-phase gate (this is the one
+    // place every turn funnels through): the Arena judge resolves
+    // BEFORE a new command opens when the turn cap has passed with
+    // the battle unresolved; the Palace never opens a command at
+    // all — the ally acts on the shared AI (autoAlly).
+    if (this.facility && !this._judged && this.foe && this.foe.hp > 0 && this.ally && this.ally.hp > 0) {
+      if (this.facility.maxTurns && this.facility.judge && this.turn > this.facility.maxTurns) { this.resolveJudge(); return; }
+      if (this.facility.autoAlly) {
+        this.playerAction = aiActionFor(this.game, this.ally, this.foe, {});
+        this.foeAction = this.chooseFoeAction();
+        this.beginTurn();
+        return;
+      }
+    }
     if (this.rtMode) {
       // ADR-020: real-time flow replaces the command menu. First call enters
       // the arena; a NEW foe (trainer sent out the next mon) resets it;
@@ -558,7 +636,9 @@ export class BattleScene {
       { label: 'BAG', value: 'bag', dimmed: tut && this._tutStage !== 'bag' },
       { label: 'PARTY', value: 'party', dimmed: tut },
       // GD: no running from the scripted tutorial — it's a lesson, not a gamble.
-      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || tut },
+      // F2: no running from a facility battle either — a Frontier
+      // contest is finished or forfeited at the desk, never fled.
+      { label: this.kind === 'wild' ? 'RUN' : 'RUN', value: 'run', disabled: this.kind !== 'wild' || tut || !!this.facility },
     ];
     let focus = null;
     if (tut && !this._tutFightDone) focus = 'fight';
@@ -625,6 +705,14 @@ export class BattleScene {
         this.beginTurn();
       }, { battle: true, grid: true, initialIdx: Math.min(this._lastMoveIdx, items.length - 1), rowHtml, menuClass: 'battlewin' });
     } else if (value === 'bag') {
+      // F2: the Frontier supplies the contest — the player's own bag
+      // stays closed, EXCEPT the Pyramid run bag (pyramidBag mode),
+      // whose menu lists ONLY the run-bag items.
+      if (this.facility && !this.facility.pyramidBag) {
+        this.say('The Frontier supplies the contest — your bag stays closed.', () => this.toCommand());
+        return;
+      }
+      if (this.facility && this.facility.pyramidBag) { this.openPyramidBag(); return; }
       this.state = 'bag';
       const items = [];
       for (const bid of Object.keys(BALLS)) {
@@ -688,7 +776,7 @@ export class BattleScene {
 
   openPartyMenu(inFaint) {
     const g = this.game;
-    const items = g.state.party.map((m, i) => {
+    const items = this.allyTeam(g).map((m, i) => {
       const sp = SPECIES[m.speciesId];
       const tag = m === this.ally ? ' (active)' : '';
       return { label: displayName(m, SPECIES) + ' Lv' + m.level + ' ' + m.hp + '/' + m.maxHp + tag, value: i, disabled: m.hp <= 0 || m === this.ally || !!m.egg }; // J6: eggs can't be sent out
@@ -701,7 +789,7 @@ export class BattleScene {
     g.ui.showMenu(inFaint ? 'Choose next Pokemon' : 'Party', items, (v) => {
       if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
-      this.ally = g.state.party[v];
+      this.ally = this.allyTeam(g)[v];
       this.allyStages = this.ally.stages;
       if (this.allyStages.acc === undefined) { this.allyStages.acc = 0; this.allyStages.eva = 0; }
       this.participants.add(this.ally); // switched-in mons share this foe's XP
@@ -797,7 +885,8 @@ export class BattleScene {
   useBattleItem(itemId) {
     const g = this.game;
     const it = ITEMS[itemId];
-    const targets = g.state.party.map((m, i) => ({
+    const team = this.allyTeam(g);
+    const targets = team.map((m, i) => ({
       label: displayName(m, SPECIES) + ' ' + m.hp + '/' + m.maxHp + (m.status ? ' [' + m.status + ']' : ''),
       value: i, disabled: this.medicineDisabledFor(it, m),
     }));
@@ -806,9 +895,15 @@ export class BattleScene {
       // AUDIT FIX (S-37b): Back returns to the battle Bag it came from,
       // not all the way to the command grid.
       if (v === null || v === -1) { this.onCommand('bag'); return; }
-      const m = g.state.party[v];
+      const m = team[v];
       const finishUse = (line) => {
-        g.state.bag[itemId]--;
+        // F2: under the Pyramid run bag the item is consumed from
+        // state.frontier.pyramidBag, never from the player's bag.
+        if (this.facility && this.facility.pyramidBag) {
+          const arr = g.state.frontier.pyramidBag;
+          const ix = arr.indexOf(itemId);
+          if (ix >= 0) arr.splice(ix, 1);
+        } else g.state.bag[itemId]--;
         if (m === this.ally) this.hpAnim.ally = m.hp; // snap if active
         g.audio.playSfx('heal');
         this.say(line, () => {
@@ -832,40 +927,88 @@ export class BattleScene {
     }, { menuClass: 'battlewin' });
   }
 
-  chooseFoeAction() {
+  // F2: the Pyramid run-bag menu — lists ONLY the items the mountain
+  // let the player find (state.frontier.pyramidBag), one row per
+  // distinct usable medicine with its run-bag count. Using one flows
+  // through useBattleItem, whose consumption reads the run bag.
+  openPyramidBag() {
     const g = this.game;
-    const usable = this.foe.moves.map((m, i) => i).filter((i) => this.foe.moves[i].pp > 0
-      && !(this.foe.disableT > 0 && this.foe.disabledMove === i));
-    if (!usable.length) return { type: 'move', idx: 0, struggle: true };
-    // GD balance: gym-leader opener — a leader with a self-buff setup move
-    // opens with it (classic Brock Defense Curl): gives the player a free
-    // turn, teaches setup play, and makes the fight about strategy.
-    if (this.trainer && this.foeAi === 'opener-setup' && this.turn === 1) {
-      const setup = usable.find((i) => {
-        const mv = MOVES[this.foe.moves[i].id];
-        return mv.cat === 'status' && mv.effect && mv.effect.target === 'self';
+    this.state = 'bag';
+    const counts = {};
+    for (const id of g.state.frontier.pyramidBag) counts[id] = (counts[id] || 0) + 1;
+    const items = Object.keys(counts)
+      .filter((id) => ITEMS[id] && !ITEMS[id].levelUp)
+      .map((id) => ({ label: ITEMS[id].name + ' x' + counts[id], value: id, pocket: 'medicine' }));
+    items.push({ label: 'Back', value: null });
+    if (items.length === 1) {
+      this.say('The Pyramid Bag is empty. The mountain provides — eventually.', () => this.toCommand());
+      return;
+    }
+    g.ui.showMenu('Pyramid Bag', items, (v) => {
+      if (v === null) { this.toCommand(); return; }
+      this.useBattleItem(v);
+    }, { menuClass: 'battlewin bagwin' });
+  }
+
+  // F2 (Arena): the live judge inputs for one side — the tracked
+  // counters plus Body read live from team HP (ally: the override
+  // team's fractions; foe: fainted foes count 0, the current foe its
+  // live fraction, unfielded foes full — via foeMaxTrail).
+  facilityTeamStats(side) {
+    const g = this.game;
+    const c = this.facilityStats[side];
+    let total = 0, rem = 0;
+    if (side === 'ally') {
+      for (const m of this.allyTeam(g)) { total += m.maxHp; rem += Math.max(0, m.hp); }
+    } else if (this.kind === 'trainer' && this.trainer) {
+      this.trainer.team.forEach((t, i) => {
+        const mh = this.foeMaxTrail[i] !== undefined ? this.foeMaxTrail[i]
+          : hpValue(SPECIES[t.species].base.hp, t.level, 31);
+        total += mh;
+        if (i < this.foeIndex) { /* fainted: 0 remaining */ }
+        else if (i === this.foeIndex) rem += Math.max(0, this.foe.hp);
+        else rem += mh;
       });
-      if (setup !== undefined) return { type: 'move', idx: setup };
-    }
-    // Gen-1 AI tempering (ADR-018): ordinary trainers pick near-randomly —
-    // the original's AI rarely optimizes. Leaders (ai:'smart') and the
-    // Elite Four prefer super-effective lines. ADR-025: this.foeAi is the
-    // difficulty-resolved class (Story flattens, Challenge promotes).
-    const smart = this.trainer && (this.foeAi === 'smart' || this.foeAi === 'opener-setup');
-    if (!smart) {
-      return { type: 'move', idx: usable[Math.floor(g.rng.battle() * usable.length)] };
-    }
-    const allyTypes = SPECIES[this.ally.speciesId].types;
-    let best = usable[0], bestScore = -1;
-    for (const i of usable) {
-      const mv = MOVES[this.foe.moves[i].id];
-      if (mv.cat === 'status') continue;
-      const e = effectiveness(mv.type, allyTypes);
-      const score = e * (0.5 + g.rng.battle());
-      if (score > bestScore) { bestScore = score; best = i; }
-    }
-    if (g.rng.battle() < 0.25) best = usable[Math.floor(g.rng.battle() * usable.length)];
-    return { type: 'move', idx: best };
+    } else if (this.foe) { total = this.foe.maxHp; rem = Math.max(0, this.foe.hp); }
+    return {
+      movesUsed: [...c.moves], attempted: c.attempted, landed: c.landed,
+      hpFrac: total > 0 ? rem / total : 0,
+    };
+  }
+
+  // F2 (Arena): the turn cap passed unresolved — the judge decides.
+  // The controller's judge (game/frontier.mjs judgeArena) may stamp
+  // .total/.parts onto each stats object for the spoken card. The
+  // battle then ends through the NORMAL win/defeat paths (which
+  // under facility pay no prize, award no XP and cost nothing).
+  resolveJudge() {
+    this._judged = true;
+    this.state = 'resolve';
+    const allyStats = this.facilityTeamStats('ally');
+    const foeStats = this.facilityTeamStats('foe');
+    const verdict = this.facility.judge(allyStats, foeStats) === 'win' ? 'win' : 'loss';
+    const card = (allyStats.total !== undefined && foeStats.total !== undefined)
+      ? ' The card reads ' + allyStats.total + ' to ' + foeStats.total + '.' : '';
+    const foeName = this.trainer ? this.trainer.name : 'the wild side';
+    this.say('Time! Three turns are spent — the Arena judge steps in.' + card, () => {
+      if (verdict === 'win') {
+        this.say('The decision goes to the challenger!', () => { this.state = 'victory'; this.winTrainer(); });
+      } else {
+        this.say('The decision goes to ' + foeName + '. The Frontier demands a winner.', () => { this.state = 'defeat'; this.finishDefeat(); });
+      }
+    });
+  }
+
+  chooseFoeAction() {
+    // F2: the decision itself lives in aiActionFor (above) so the
+    // Palace's autoAlly runs the identical code. Behaviour is
+    // unchanged: the GD leader opener fires on turn 1 for
+    // 'opener-setup' classes; smart classes line-pick; everyone
+    // else picks near-randomly (ADR-018/ADR-025).
+    return aiActionFor(this.game, this.foe, this.ally, {
+      smart: !!(this.trainer && (this.foeAi === 'smart' || this.foeAi === 'opener-setup')),
+      openerSetup: !!(this.trainer && this.foeAi === 'opener-setup' && this.turn === 1),
+    });
   }
 
   effStats(mon, stages) {
@@ -1079,6 +1222,16 @@ export class BattleScene {
       }
     }
 
+    // F2 judge counters (facility only): a move that passed its
+    // accuracy gate counts as ATTEMPTED, and its id joins the side's
+    // distinct-move set (the Arena's Mind input). Landed is stamped
+    // where damage/status actually applies (below / applyStatusMove).
+    if (this.facilityStats) {
+      const c = this.facilityStats[entry.side];
+      c.attempted++;
+      if (entry.action && entry.action.type === 'move' && atk.moves[entry.action.idx]) c.moves.add(atk.moves[entry.action.idx].id);
+    }
+
     this.say(atkName + ' used ' + mv.name + '!', () => {
       if (mv.cat === 'status') { this.applyStatusMove(entry, mv); return; }
       const efx = mv.effect || {};
@@ -1164,6 +1317,7 @@ export class BattleScene {
         dmg = 0;
       }
       if (dmg > 0) {
+        if (this.facilityStats) this.facilityStats[entry.side].landed++; // F2 judge Skill input
         def.hp = Math.max(0, def.hp - dmg);
         noteHitTaken(def); // ADR-025 §3: the holder took a hit (Iron Acorn window)
         this._ksHit = { side: foeSide, hpBefore: defHpBefore }; // attack context for checkFaint's Tortoise gate
@@ -1347,6 +1501,9 @@ export class BattleScene {
     const aName = displayName(atk, SPECIES);
     // W1 FX-1: every status move presents through its vis.* definition.
     this.fxStartMove(mv, selfSide, target === atk ? selfSide : foeSide, { status: true, dmg: 0 });
+    // F2 judge Skill input: a status move that reached application
+    // (accuracy already passed) counts as landed.
+    if (this.facilityStats) this.facilityStats[selfSide].landed++;
     const done = (msg) => this.say(msg, () => this.nextAction());
     // Teleport: flee a wild battle; fails against trainers.
     if (ef.flee) {
@@ -1550,7 +1707,7 @@ export class BattleScene {
         this.afterFaintFoe();
       } else {
         const g = this.game;
-        const anyLeft = g.state.party.some((m) => m.hp > 0);
+        const anyLeft = this.allyTeam(g).some((m) => m.hp > 0); // F2: routed (facility override team)
         if (!anyLeft) {
           this.state = 'defeat';
           this.say('You have no Pokemon left!', () => this.afterMsg());
@@ -1581,6 +1738,7 @@ export class BattleScene {
         const ksN = foeKeepsakeFor(g.state, this.trainer, this.trainerIdx, this.trainer.team.length);
         if (ksN) this.foe.keepsake = ksN;
         this.foeStages = { atk: 0, def: 0, spa: 0, spd: 0, spe: 0, acc: 0, eva: 0 };
+        this.foeMaxTrail[this.trainerIdx] = this.foe.maxHp; // F2 judge Body bookkeeping
         this.participants = new Set([this.ally]); // XP pool resets per foe
         this.hpAnim.foe = this.foe.hp;
         const foeName = displayName(this.foe, SPECIES);
@@ -1718,6 +1876,9 @@ export class BattleScene {
 
   awardXpFor(foeMon, partsSet, cb) {
     const g = this.game;
+    // F2: no XP under facility law (Open Level — the entered team's
+    // levels are the contest; growth would unbalance the streak).
+    if (this.facility) { cb(); return; }
     const base = SPECIES[foeMon.speciesId].baseXp;
     // ADR-025 §4: mode + Fast Learner XP multipliers scale the pool before
     // the participant split (x1.25 Story; x1.5 Fast Learner; they compose).
@@ -1856,6 +2017,13 @@ export class BattleScene {
   // ---- Catch sequence: the theater (gameux §4.2) ----
   beginCatch(ballId) {
     const g = this.game;
+    if (this.facility && this.kind === 'wild') {
+      // F2: facility wilds (Pike/Pyramid) are the Frontier's own —
+      // never catchable, and the ball is NOT spent (the refusal
+      // happens at the throw, before any decrement below).
+      this.say('The attendant shakes her head — Frontier grounds. Nothing here can be taken home.', () => this.toCommand());
+      return;
+    }
     if (this.uncatchable && this.friendly) {
       // Candy Coach spar (ADR-025): the Coach bats the ball away — the
       // ball is NOT spent and the spar simply continues at command.
@@ -2017,15 +2185,22 @@ export class BattleScene {
     this.state = 'victory';
     if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6: exit mirror wipe
     // ADR-025 §4: Generous World scales prize money (x1.5).
-    const prize = Math.floor(t.reward * moneyMultFor(g.state));
+    // F2: under facility law there is NO prize (generated trainers
+    // also carry reward: 0 — the flag is the second lock) and NO
+    // beat_<id> flag (run-battle ids are unique per battle; writing
+    // them would burn the validator's 500-flag budget on noise).
+    const prize = this.facility ? 0 : Math.floor(t.reward * moneyMultFor(g.state));
     g.state.player.money += prize;
-    g.state.story.flags['beat_' + t.id] = true;
+    if (!this.facility) g.state.story.flags['beat_' + t.id] = true;
     // Yellow homage: winning with the partner conscious leaves it buzzing.
     if (g.state.party.some((m) => m.speciesId === 'partner' && m.hp > 0)) {
       g.state.pikachu.mood = 'excited';
     }
     // No battle-message here: the capstone dialogue below ends the battle exactly once.
-    this.msg = 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
+    // F2: the facility victory line names no money (there is none).
+    this.msg = this.facility
+      ? 'You defeated ' + t.title + ' ' + t.name + '!'
+      : 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
     this.msgOpen = false;
     if (t.badge) {
       // Badge award (Kanto representation, generalized Stage O2): the
@@ -2086,7 +2261,15 @@ export class BattleScene {
     g.audio.restoreAreaMusic(); // back to the overworld's track
     g.renderer.shakeX = 0; g.renderer.shakeY = 0; g.renderer.flashA = 0;
     // Reset battle temp state on party mons (incl. Transform restoration).
-    for (const m of g.state.party) {
+    // F2: under a partyOverride, reset ONLY the mons that actually
+    // battled (the override team + this battle's participants) —
+    // never the whole party: Factory rentals must leave state.party
+    // byte-identical, and unentered party mons have no battle-temp
+    // state to shed. (For entered-team facilities the override team
+    // IS the battler set; participants/ally are belt-and-braces.)
+    const resetTeam = (this.facility && this.facility.partyOverride)
+      ? [...new Set([...this.facility.partyOverride, ...(this.participants || []), this.ally].filter(Boolean))] : g.state.party;
+    for (const m of resetTeam) {
       if (m._preTransform) {
         m.speciesId = m._preTransform.speciesId;
         m.stats = m._preTransform.stats;

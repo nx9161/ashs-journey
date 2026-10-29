@@ -7,6 +7,7 @@
 
 import { xpForLevel } from '../engine/formulas.mjs';
 import { KEEPSAKES } from '../data/items.mjs';
+import { freshFrontierState } from '../data/frontier.mjs';
 import { levelCapFor } from '../data/arcs.mjs';
 
 export const SCHEMA_VERSION = 2;
@@ -201,6 +202,13 @@ export function defaultState(inherit) {
     // CONTEST_RIBBONS). Defaults-filled on load (schema.mjs) so
     // pre-H5 saves open unchanged in shape.
     contest: { ribbons: [] },
+    // Arc 3.5 Stage F2: Battle Frontier run state (game/frontier.mjs)
+    // — per-facility records, ONE active run across all facilities,
+    // and the Pyramid run bag. The J6 treatment: defaultState here +
+    // client schema (validate-if-present + fill) + server validator
+    // + gen-tables (the facility id list is emitted from
+    // BADGE_SETS.symbols). Mid-run saves must round-trip.
+    frontier: freshFrontierState(),
     session: { learnQueue: [] }, // post-battle move-learning prompts (not persisted server-side)
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {

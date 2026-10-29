@@ -28,6 +28,7 @@ const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
 const { ITEMS, BALLS, KEEPSAKES, BADGE_SETS } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
 const { CONTEST_RIBBONS } = await import(join(ROOT, 'src', 'data', 'contest.mjs'));
+const { PIKE_EVENT_KINDS } = await import(join(ROOT, 'src', 'data', 'frontier.mjs'));
 const { ORANGE_QUESTS, ORANGE_LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-orange.mjs'));
 const { JOHTO_QUESTS, JOHTO_TALES, JOHTO_LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-johto.mjs'));
 const { HOENN_QUESTS, HOENN_TALES } = await import(join(ROOT, 'src', 'data', 'story-hoenn.mjs'));
@@ -63,6 +64,13 @@ const tables = {
   // Stage H5: the closed contest-ribbon id set (the four hall ids) —
   // the validator accepts state.contest.ribbons only from this list.
   ribbons: [...CONTEST_RIBBONS],
+  // Arc 3.5 Stage F2: the Frontier facility id list, emitted from
+  // BADGE_SETS.symbols (the slot order — the single source; the
+  // server validator's state.frontier shape check is data-driven
+  // from this array), and the closed Pike event-category list
+  // (src/data/frontier.mjs PIKE_EVENT_KINDS).
+  frontierFacilities: [...BADGE_SETS.symbols],
+  frontierPikeEvents: [...PIKE_EVENT_KINDS],
   balls: Object.keys(BALLS).sort(),
   forms: (Array.isArray(FORMS) ? FORMS.map((f) => f.id) : Object.keys(FORMS)).sort(),
   quests: [...MAIN_QUESTS.map((q) => q.id), ...ORANGE_QUESTS.map((q) => q.id), ...JOHTO_QUESTS.map((q) => q.id), ...HOENN_QUESTS.map((q) => q.id), ...Object.keys(LEGENDARY_ARCS), ...Object.keys(ORANGE_LEGENDARY_ARCS || {}), ...Object.keys(JOHTO_LEGENDARY_ARCS || {}), ...Object.keys(TOWN_TALES), ...Object.keys(JOHTO_TALES), ...Object.keys(HOENN_TALES)].sort(),

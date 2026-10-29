@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "a1344cf957ba779bbfb0935dab1627561d72be2e272d52214fd6bd9d38b6288c",
+  "tablesVersion": "1d1733d198563aafa8fd3166195df6e133638d2316119cfef308753dbaf7209f",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -740,6 +740,25 @@
     "fallarbor",
     "slateport",
     "lilycove"
+  ],
+  "frontierFacilities": [
+    "tower",
+    "factory",
+    "arena",
+    "dome",
+    "pike",
+    "palace",
+    "pyramid"
+  ],
+  "frontierPikeEvents": [
+    "battle-trainer",
+    "battle-wild",
+    "heal-full",
+    "heal-half",
+    "cure-status",
+    "inflict-status",
+    "quiet",
+    "hint"
   ],
   "balls": [
     "fastball",
