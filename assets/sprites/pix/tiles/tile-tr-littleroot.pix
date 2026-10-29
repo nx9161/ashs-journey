@@ -1,0 +1,23 @@
+# Stage H3a: littleroot roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-littleroot 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #8a5a38 littleroot-roof
+b #634128 roof-dark
+c #ac7046 roof-light
+d #e86a8a roof-trim

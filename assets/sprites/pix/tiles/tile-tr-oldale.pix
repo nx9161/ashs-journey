@@ -1,0 +1,23 @@
+# Stage H3a: oldale roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-oldale 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #7a6a3a oldale-roof
+b #584c2a roof-dark
+c #988448 roof-light
+d #f0f0e0 roof-trim

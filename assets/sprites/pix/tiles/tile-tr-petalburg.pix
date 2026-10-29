@@ -1,0 +1,23 @@
+# Stage H3a: petalburg roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-petalburg 16 16
+dddddddddddddddd
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+PAL
+a #4a6a5a petalburg-roof
+b #354c41 roof-dark
+c #5c8470 roof-light
+d #4a90c0 roof-trim

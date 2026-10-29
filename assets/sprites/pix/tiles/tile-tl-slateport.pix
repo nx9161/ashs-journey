@@ -1,0 +1,24 @@
+# Stage H3a: slateport landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-slateport 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #d6bb87 slateport-landmark-wall
+b #8b7958 landmark-trim
+d #3a7bd5 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

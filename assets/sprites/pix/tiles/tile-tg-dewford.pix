@@ -1,0 +1,25 @@
+# Stage H3a: dewford town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-dewford 16 16
+adaaabaaaaaaabaa
+cafaaccaaabaaabb
+afaacbaaabcaabaa
+abaaaaaaaaaacaaa
+caaaacbacaaaaaaa
+bbcbaaacacaaaaaa
+acabaacaacaadaaa
+fabacaaaacababaa
+afaaaaaaaaaabaac
+aafbaaccaadadbba
+aaaacaaaaaaabaaa
+babaaaacaaaaaafa
+baaaaaaaaaababac
+afbfcaaaacaaaaaa
+fbacacaaafaaacaa
+aaaaacaaabfafaaa
+PAL
+a #74aca4 dewford-ground
+b #5a8680 ground-dark
+c #89cbc2 ground-light
+d #e87a5a town-accent
+e #f0e0a8 town-accent-2
+f #466762 ground-deep

@@ -1,0 +1,24 @@
+# Stage H3a: mauville landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-mauville 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #b0ad74 mauville-landmark-wall
+b #72704b landmark-trim
+d #f0c030 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

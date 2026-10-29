@@ -1,0 +1,23 @@
+# Stage H3a: verdanturf roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-verdanturf 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #5a7a4a verdanturf-roof
+b #415835 roof-dark
+c #70985c roof-light
+d #e87ab0 roof-trim

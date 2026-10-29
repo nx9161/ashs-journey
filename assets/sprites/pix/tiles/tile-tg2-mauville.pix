@@ -1,0 +1,25 @@
+# Stage H3a: mauville town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-mauville 16 16
+bacbbacbcecababc
+cbccbbacccacbaaa
+cbcbbaccccbebaec
+abaaccccbcececcb
+ccbcccbbcaccbbac
+accabccabacbcecc
+cabccbbacbccaacc
+bccacccbeaccbcbb
+accccbceccacbacc
+ccbbccaaccbaccac
+cbaaabcabacaaacb
+cccaacbacacabbcc
+aaccbcbcaabbcacc
+acbcbaaccbcbeabc
+bccaaccbacbaccbc
+cccccbcebbabbacc
+PAL
+a #a3a06b mauville-ground
+b #7f7d53 ground-dark
+c #c0bd7e ground-light
+d #f0c030 town-accent
+e #8a5ab0 town-accent-2
+f #626040 ground-deep

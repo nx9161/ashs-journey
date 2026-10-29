@@ -1,0 +1,23 @@
+# Stage H3a: ashground — ash-dusted meadow floor of Route 113 / Fallarbor (full-bleed, walkable).
+PIX tile-ashground 16 16
+accdaaaaaaaabdba
+aaaaaadaacbadbaa
+daccbaaaaaabbaaa
+babbabadcaaaaadb
+cbaaaaabbabaaaaa
+aaaabaaaabbacaaa
+aacaaaacbacbaaab
+abaaaaaabaaadaaa
+baacacaaaaaaaaac
+abaadaaaaaacbaaa
+aaabbbacdaacaaaa
+baabbbaaaaaacabb
+abaaadaacaaaaaaa
+aaabbaaacaabaaca
+bccabdaacadaaaaa
+bbaabbaaabaaacac
+PAL
+a #a8a294 ash-meadow
+b #8f887a ash-meadow-dark
+c #c2bcb0 ash-fall-light
+d #7d8474 ash-grass-ghost

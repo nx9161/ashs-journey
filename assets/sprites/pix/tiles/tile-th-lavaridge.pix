@@ -1,0 +1,23 @@
+# Stage H3a: lavaridge house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-lavaridge 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #7a2e22 lavaridge-roof
+b #582118 roof-dark
+c #983a2a roof-light
+d #e83a2a roof-trim

@@ -1,0 +1,22 @@
+# Stage H3a: desertsand — rippled desert floor of Route 111 (full-bleed, walkable).
+PIX tile-desertsand 16 16
+aaabaabaaaaaaaca
+aaaaabaccabaaaba
+aaabaaaaaacaccaa
+abbaaaababaaabba
+aabaaabaacbaaaaa
+bacaabaacaaaaaaa
+ababcaaaababaaaa
+aaaaaabbcaaabaab
+cbaaaaaaaaabaaaa
+cabaaabacaccaabb
+aaaabaaaaaaaaaaa
+caaaaaabacbacaca
+babcbaaaaaaaaaaa
+acaaccaacababbac
+bcaabacbaaaaaaca
+baacaaaaaaaaacaa
+PAL
+a #dcbd85 desert-sand
+b #c4a26a desert-sand-dark
+c #eedcae desert-sand-light

@@ -1,0 +1,25 @@
+# Stage H3a: slateport town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-slateport 16 16
+bccccccbcacababa
+bcccabbcacacbacc
+cecbaccaacbacccc
+abbcabecbeccceab
+aaccbbbaebcccbbc
+acecbccccccbabcc
+cabcccaccbccccaa
+becbcbcbacaccabc
+cabacbccccccbcac
+aacbacccbcbbacac
+cbecacccbbccabab
+ccccccbccbaccbae
+ccacbcaecacbccaa
+babccaaccbacaaaa
+bccacbcbcccccabc
+acacabcccabcbccc
+PAL
+a #c6ad7d slateport-ground
+b #9a8762 ground-dark
+c #eacc94 ground-light
+d #3a7bd5 town-accent
+e #e85a7a town-accent-2
+f #77684b ground-deep

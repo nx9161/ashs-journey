@@ -1,0 +1,25 @@
+# Stage H3a: oldale town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-oldale 16 16
+bccccccbacaaccbc
+eccccbceecccbccb
+cccbcbccacbaaccc
+cbaccbccbcccaceb
+ecccccbbbcbcabcc
+acccbcccaacbcccc
+aabccaabcbbcacac
+bccaeacbccaccaba
+aaaccbcaeaccbccc
+aacbecccccbccacc
+abaaabacbcccceab
+ceaacabecacccbcc
+ccccbccacacbbccc
+cebbacccabbccccc
+bccbcacbcccccabc
+bbcccbccceccbaca
+PAL
+a #b3a35e oldale-ground
+b #8c7f49 ground-dark
+c #d3c06f ground-light
+d #f0f0e0 town-accent
+e #7aa85e town-accent-2
+f #6b6238 ground-deep

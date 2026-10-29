@@ -204,7 +204,13 @@ function main() {
   // 783 hexes, so the cap is set just above the measured union, no
   // headroom banked beyond it. Recorded in docs/audit-register.md
   // (J3b section), same precedent.
-  const FAMILY_PALETTE_BUDGETS = { tiles: 800 };
+  // Stage H3a: 800 -> 940 — the eleven west/central-Hoenn settlements
+  // (littleroot..fortree) add 88 identity tiles + 7 Hoenn kinds on the
+  // same per-town anchor programme; the union MEASURES 920 hexes, so
+  // the cap is set just above the measured union, no headroom banked
+  // beyond it. Recorded in docs/audit-register.md (H3a section), same
+  // precedent. (H3b's five east settlements will re-measure.)
+  const FAMILY_PALETTE_BUDGETS = { tiles: 940 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

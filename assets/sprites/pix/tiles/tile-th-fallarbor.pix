@@ -1,0 +1,23 @@
+# Stage H3a: fallarbor house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-fallarbor 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #6a5a4a fallarbor-roof
+b #4c4135 roof-dark
+c #84705c roof-light
+d #e8e4da roof-trim

@@ -1,0 +1,24 @@
+# Stage H3a: petalburg landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-petalburg 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #83ba97 petalburg-landmark-wall
+b #557862 landmark-trim
+d #4a90c0 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

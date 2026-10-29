@@ -1,0 +1,25 @@
+# Stage H3a: fallarbor town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-fallarbor 16 16
+aaaaacaabbcbfcaf
+aaaafdadaaaaaaad
+aaaafbbcfacbaada
+aaaaaaafbaaaafca
+faaaafaaaaacaabb
+facaacaaafbaacaa
+bbabaabaaacaccbc
+aaabaaabaacabafc
+aaacfbacbaaacacc
+bbabaaaaafbcaaaa
+aaacaaaafabaaaaa
+aababcaadaabacac
+aaaaaaaafaaacafb
+ccadaaaaacacbcab
+aaaaaaaaaacaaaaa
+cabbacaaadbaaacc
+PAL
+a #aca292 fallarbor-ground
+b #867e72 ground-dark
+c #cbbfac ground-light
+d #e8e4da town-accent
+e #c0784a town-accent-2
+f #676158 ground-deep

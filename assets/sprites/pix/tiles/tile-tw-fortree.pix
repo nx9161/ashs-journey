@@ -1,0 +1,23 @@
+# Stage H3a: fortree house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-fortree 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaaaaaaab
+aaaggggaaaaabaaa
+aaaggggaaaaaaaab
+aaaggggaaaaaaaaa
+aabggggaaaaaaaaa
+aabbbbbaaaaaaaaa
+abaaaaaaaaaabaaa
+aabaabaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaabaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #64a86e fortree-house-wall
+b #416d47 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

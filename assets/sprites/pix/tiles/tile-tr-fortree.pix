@@ -1,0 +1,23 @@
+# Stage H3a: fortree roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-fortree 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #5a4028 fortree-roof
+b #412e1d roof-dark
+c #705032 roof-light
+d #c8a24a roof-trim

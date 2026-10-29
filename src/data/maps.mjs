@@ -363,6 +363,16 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
     .map((i) => String.fromCodePoint(0x1E00 + i)),
   ...[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     .flatMap((i) => [173 + i * 8, 174 + i * 8])
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Arc 3 Stage H3a: the Hoenn floor kinds (ashground / desertsand /
+  // boardwalk — H3_KIND_DEFS idx 0,1,2 at U+1E00+261, tiles.mjs) and
+  // the eleven Hoenn settlements' town-ground chars (tg at idx
+  // 268+i*8, tg2 at +1, tiles.mjs HOENN_TOWN_CHARS) are walkable
+  // ground, swapped from walkable ground chars, so floor stays floor.
+  ...[261, 262, 263]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  ...[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    .flatMap((i) => [268 + i * 8, 269 + i * 8])
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

@@ -1,0 +1,25 @@
+# Stage H3a: lavaridge town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-lavaridge 16 16
+baaaaaaabaaaaffc
+aaaaaaaaaaaaaaaa
+baaaaaadaaaaaaaa
+aaaaaaaaaacaaaaa
+babacacabfaacaac
+cafabaaabaaaaaaa
+aaccaaaacaaaabfc
+aaaafaaaaaabcaab
+bafaaaababaaacaa
+aaacadabbcaacaaa
+aaaaaacadcaaafba
+afcaacabaaccaaaa
+aaafaaacbafaaaaa
+aacaadaaaaaabaaa
+ccaabaaaaaaafaaa
+badacbaaaaaaafaa
+PAL
+a #bd7a48 lavaridge-ground
+b #935f38 ground-dark
+c #df9055 ground-light
+d #e83a2a town-accent
+e #f0a848 town-accent-2
+f #71492b ground-deep

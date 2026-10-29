@@ -1,0 +1,23 @@
+# Stage H3a: volcrock — volcanic strata wall, Mt. Chimney / Fiery Path (full-bleed, solid).
+PIX tile-volcrock 16 16
+bbbbbbbbbbbbbbbb
+aaaaadaabcacaaaa
+bddaacaaadaaaaaa
+aaaaabaabbbbcdaa
+abbabbaadaaaaaaa
+dabaabdbbabaaaaa
+aadabbaaaaaadaaa
+dbabcbaacaaaabaa
+aacaacaaabaaaaaa
+baabaaaaaaacaada
+aaaaaabaabacaaab
+aababdaaaabbbaba
+aadbaaadaaaaaaaa
+cbbabdaabaacaaaa
+abaaaabbaacbabab
+bbbbbbbbbbbbbbbb
+PAL
+a #5e463c volcanic-rock
+b #3e2c26 volcanic-dark
+c #8a5a3a volcanic-ember-bed
+d #c8502e volcanic-ember

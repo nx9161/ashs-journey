@@ -1,0 +1,23 @@
+# Stage H3a: verdanturf house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-verdanturf 16 16
+bbbbbbbbbbbbbbbb
+aabaaaaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaaaaaaabaaab
+aaahgggaaaaaaaaa
+aaaggggaaaabaaaa
+aaaggggbaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaabaaa
+aaabbbbaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaaaaaaaaaaaab
+baaaaaaaaaaaaaaa
+aaabaaaaaabaaaaa
+aaaaaabaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #97d881 verdanturf-house-wall
+b #628c53 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

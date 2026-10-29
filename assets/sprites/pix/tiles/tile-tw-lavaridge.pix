@@ -1,0 +1,23 @@
+# Stage H3a: lavaridge house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-lavaridge 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaabaabaaaa
+aaaaaaaaaaaaabaa
+aaaaaabaaaaaaaaa
+aaahgggaaaaaaaaa
+aaaggggbaaaaaaaa
+aaaggggabaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaabbbbaaaaaaaaa
+aaabababaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaabaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaabaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #cc844e lavaridge-house-wall
+b #845532 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

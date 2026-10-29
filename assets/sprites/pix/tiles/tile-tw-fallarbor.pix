@@ -1,0 +1,23 @@
+# Stage H3a: fallarbor house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-fallarbor 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+abaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaaaaaaaa
+aaaggggaaaaabaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaabaaa
+baabbbbabaaaaaaa
+aaaaaaaaaaaaabaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaabaaaabbaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #baaf9e fallarbor-house-wall
+b #787166 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

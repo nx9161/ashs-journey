@@ -1,0 +1,22 @@
+# Stage H3a: boardwalk — plank walkway floor, Fortree canopy walks / Slateport pier (full-bleed, walkable).
+PIX tile-boardwalk 16 16
+caaaaaaacaaaaaaa
+caaaaaaacaaaaaaa
+caaaaaaacaaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaaacaaaaaaacaa
+aaaaacaaaaaaacaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+aacaaaaaaacaaaaa
+aacaaaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaaacaaaaaaac
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+PAL
+a #9a7648 boardwalk-plank
+b #6e5230 boardwalk-gap
+c #b08c58 boardwalk-light

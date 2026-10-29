@@ -8367,3 +8367,186 @@ change beyond the regenerated tables the validator suite pins).
   fronts/backs/bobs are complete for the range.
 - **Hoenn species art (H2) is now COMPLETE across both halves:**
   138/138 entries authored, zero forge fallbacks roster-wide.
+
+## Arc 3 Stage H3a — Hoenn maps, WEST/CENTRAL: Littleroot → Fortree (2026-10-29)
+
+Base: main @ aa45784 (H2b). Deliverable: NEW `src/data/maps7.mjs`
+(export `MAPS7`; registered in `scripts/module-order.json` after
+`maps6.mjs`; folded in `merge.mjs` exactly as maps6 was), generated
+deterministically by `~/workspace/ashs-journey-qa/hoenn-h3a/gen_maps7.py`
+(two runs byte-identical; edit the generator, not the file).
+
+### 1. What landed — 59 maps
+
+- **Settlements (11):** `littleroot` 28×18, `oldale` 28×18,
+  `petalburg` 30×18, `rustboro` 30×18, `dewford` 28×18, `slateport`
+  30×20, `mauville` 30×18, `verdanturf` 28×18, `fallarbor` 28×18,
+  `lavaridge` 28×18, `fortree` 30×18 — all ≥24×14 viewport-filling
+  (P-1). Shared `center`/`mart` interiors serve the towns via `via{}`
+  tickets exactly as Johto. **Verdanturf fields no mart** (center +
+  contest hall only) — the nearest marts are Rustboro through the
+  tunnel and Mauville via Route 117; recorded as a deliberate
+  canon-flavoured gap, not an oversight.
+- **Routes (19):** `r101`–`r119` as applicable to this half —
+  101, 102, 103, 104, 105–109 (the Dewford/Slateport surf roads),
+  110, 111 (the desert is a dressed north-east zone of the same map:
+  `desertsand` floor + sandcolumn landmark + ruin scatter), 112, 113
+  (ash road), 114, 115, 116, 117, 118, 119. Routes 120+ belong to
+  H3b's east half and are NOT authored here.
+- **Dungeons (7):** `petalburg-woods` (Route 104 through-passage,
+  the Union Cave idiom), `rusturf-tunnel` (Route 116 ↔ Verdanturf
+  through-passage), `granite-cave` (Dewford cliff mouth), `fiery-path`
+  (Route 112 through-passage), `mt-chimney` (summit exterior),
+  `jagged-pass`, `meteor-falls` (two-mouthed: Route 114 south door,
+  Route 115 north door, one connected cave).
+- **Interiors (22):** `birch-lab` (Littleroot), houses ×12
+  (`house-littleroot` + `house-littleroot-rival`, and one per other
+  settlement — the Rustboro house is the Devon Residence dressing,
+  Slateport's is the Oceanic Museum, Mauville's the Game Corner,
+  Fallarbor's the Cozmo Residence, Fortree's a treehouse), gyms ×6
+  layouts-only in the shipped gym idiom (`gym-rustboro/dewford/
+  mauville/lavaridge/petalburg/fortree` — leaders/battles are H4),
+  contest halls ×3 (`contest-verdanturf/fallarbor/slateport`):
+  dressed, **NPC-free** hall floors with a reception counter
+  (`α` pair flanked by `contestarch` props), a battlemat stage, and a
+  `contestHall: '<town>'` data field naming each hall — H5 wires the
+  contest engine inside them. Lilycove's hall is H3b's.
+
+### 2. Identity + tile art
+
+- **Hoenn identity system extended** (the W5/J3 machinery, third
+  region): `HOENN_TOWN_ORDER`/`HOENN_TOWN_STYLE`/`HOENN_TOWN_CHARS`
+  in `src/engine/tiles.mjs` — the eleven settlements own the eight
+  signature kinds (tg/tg2/tc/td/tr/tl/th/tw) at U+1E00 idx
+  268+i·8…275+i·8 (Johto towns end at 260); `WALKABLE` in
+  `src/data/maps.mjs` gains the Hoenn tg/tg2 chars + the H3 floor
+  chars by the same spread precedent; `src/engine/art.mjs` wires
+  `HOENN_TOWN_ORDER` into TILE_ART / FACADE_GROUPS / floor-variant /
+  prop / ground-family paths exactly as Johto.
+- **Seven Hoenn kinds** (`H3_KIND_DEFS`, U+1E00+261…267): floors
+  `ashground` (113/Fallarbor ash country), `desertsand` (111 desert),
+  `boardwalk` (Fortree canopy walks, Slateport pier, fords); wall
+  `volcrock` (Chimney/Fiery Path strata); props `ashshrub`,
+  `meteorstone`, `contestarch`.
+- **95 new tile .pix sources** (88 town-identity + 7 kinds) under
+  `assets/sprites/pix/tiles/`, authored by
+  `~/workspace/ashs-journey-qa/hoenn-h3a/gen_h3_art.py`;
+  `art-data.mjs` regenerated via `build-art.mjs` only (two runs
+  byte-identical). **Spend: 48,798 B** (6,926,787 → 6,975,585 B;
+  ≈4.4 KB/settlement, on the Johto rate) against the stage's
+  ~173 KB room — **the 7,100,000 ceiling is NOT raised**; headroom
+  remaining for H3b: **124,415 B**.
+- **Palette budget:** the tiles family union rose 783 → **920**
+  painted hexes (eleven new town anchors + shades by design), so
+  `FAMILY_PALETTE_BUDGETS.tiles` is raised 800 → **940** in
+  `build-art.mjs` (cap just above the measured union, no headroom
+  banked; `palette-audit.mjs` mirror updated) — the J3a/J3b
+  ratified-raise procedure. H3b's five east settlements will
+  re-measure (their town chars continue at idx 356+).
+
+### 3. Connectivity (gate) — PASS
+
+- Script: `~/workspace/ashs-journey-qa/hoenn-h3a/hoenn-sweep.mjs`
+  (celadon discipline: real BFS walking on the engine WALKABLE set +
+  Surf assumed, loadMap-faithful NPC model incl. the outdoor
+  mart-clerk filter, interiors as connectors to fixpoint; NO
+  position seeding). **All 59 maps PASS**: every entry reaches every
+  warp, **zero bad warp landings**, and the map graph from
+  `littleroot` reaches all 59 (walking chain littleroot → … →
+  fortree incl. all three through-passages, the Meteor Falls
+  two-mouth ring, and the full sea chain r104 → dewford → slateport).
+- **No-soft-lock judgments, recorded:** (a) the sea legs run on the
+  surf roads AND on plain boatmen — BOATMAN HALE (r104 shore →
+  dewford) and BOATMAN SULA (dewford → slateport) — so every
+  water-reachable shore fields a boat return as map content; a
+  full-strength carry (Amendment 1) means Surf is provably in hand
+  regardless. (b) No map in this half is gated behind a badge/tool
+  the player cannot provably hold at first reach. (c) Dive spots:
+  none — the dive set is east water (H3b owns it), per the brief.
+
+### 4. Richness + identity (gate) — PASS
+
+- Script: `~/workspace/ashs-journey-qa/hoenn-h3a/hoenn-richness.mjs`
+  (W5 logical-raster method, real resolver + ART). **All 59 maps
+  pass their floors.** Towns 144–176 colours (floor 80; mauville
+  144 is the minimum); town ground-family shares ≤27.8% and top
+  single ground KIND ≤27.8% (gate ≤40%). Land routes 122–188
+  (floor 60); seas 61–68 (water maps, floor 60); interiors 59–70
+  (floor 55); caves 50–85 (floor 45; fiery-path 50 is the minimum).
+- **Tile-kind Jaccard, settlements (pairwise, target ≤0.60): all 55
+  pairs PASS** — max **0.548** (rustboro~mauville), min 0.255
+  (rustboro~verdanturf). Every settlement carries its 8 signature
+  kinds plus a landmark: Littleroot (Birch's lab), Oldale (flower
+  clock), Petalburg (the twin ponds), Rustboro (Devon HQ),
+  Dewford (Granite Cave mouth + beach), Slateport (market + harbor
+  pier), Mauville (Game Corner), Verdanturf (contest garden),
+  Fallarbor (ash fields), Lavaridge (the hot spring, waterglow
+  pool), Fortree (the canopy boardwalks).
+
+### 5. Encounters + weather + ferry
+
+- Audit: `~/workspace/ashs-journey-qa/hoenn-h3a/hoenn-enc-audit.mjs`
+  — **PASS: 359 entries across 37 encounter-bearing maps**; every
+  species exists in the merged roster; no legendaries; levels span
+  **201–255**, inside band 201–300 on the ruling-6 curve
+  (r101 201–205 → Petalburg Woods 206–212 → the tunnel/granite
+  country 210–218 → Mauville 216–223 → the chimney/jagged country
+  222–238 → ash road 230–240 → Meteor Falls 235–245 → r119
+  243–253 → Fortree 245–255). Kanto/Johto species appear only where
+  canon puts them (zubat/geodude/abra/machop in the caves,
+  tentacool/magikarp in Hoenn water, sandshrew + skarmory on the
+  ash/desert roads, oddish on 117/119).
+- **H1 obligations, discharged:** Petalburg Woods carries
+  **shedinja as a rare wild encounter (weight 2, Lv209–212)** and
+  **silcoon (w12) + cascoon (w12)** wild-obtainable (Emerald
+  precedent), so both Wurmple branches complete without evolution.
+  Bonus canon placement: **feebas rides the r119 water table as a
+  rare entry (w3, Lv244–250)** — its canon Route 119 fishing spot,
+  on this half's map, so H1's beauty-evolution line is completable
+  from wild water here.
+- **Weather field per outdoor map** (ruling 4, data only — H4
+  builds the renderer): 33 outdoor maps — clear ×24, **ash ×3**
+  (r113, fallarbor, mt-chimney), **sun ×4** (r111, r112,
+  jagged-pass, lavaridge), **rain ×2** (r119, fortree). No outdoor
+  map lacks the field; interiors carry none.
+- **Slateport ferry port:** CAPT MERIDIAN stands on the harbor pier
+  boardwalk at (20,16) — `ferry: 'vermilion', ferryArc: 'hoenn'` —
+  wired exactly as maps6's Olivine port (CAPT EASTWIND); the network
+  join on first reach is the Foundation machinery's job, return legs
+  unconditional by construction. The Vermilion-side embark captain
+  is H4's (story stage), as is the `hoenn` registry flip.
+
+### 6. Battery at this commit
+
+- fidelity **35/35** · campaign-smoke **24/24** · battle-model
+  **45/45** · qa-changed-flows failures exactly **{b2, d9}** (55/57)
+  · qa-slice failures exactly **{s6, l8}** (132/134) ·
+  rejuv-phase2 failures exactly **{A09, C01}** (38/40; C01 is the
+  pre-existing chromium-start harness failure) · budgets: all gates
+  pass. palette-audit: the tiles-palette line passes at 920 ≤ 940;
+  the audit's 4 summary failures are identical at base aa45784
+  (pre-existing, not introduced here).
+- build-art clean + deterministic; fresh build (vercel + guest) OK —
+  `public/game.js` **9,467,580 bytes** (+193,662 vs H2b's 9,273,918
+  = maps7 data 140,158 + tile art 48,798 + engine wiring ≈4,706).
+  maps7.mjs itself is 140,158 B for 59 maps (2,374 B/map — a denser
+  single-line-entry emitter than maps6's expanded JSON; the stage
+  lands inside the brief's +130–160 KB map-data guidance).
+  **personal/ byte-identical** (sha256 f434ba63…, restored from HEAD
+  after budgets-check regenerated it during the battery — zero
+  personal/ paths in this diff; vercel+guest targets only).
+
+### 7. Leftovers, named (H3b/H4/H5's list)
+
+- Gym interiors are layouts only (leaders/battles/story are H4);
+  the contest halls are inert dressed floors until H5 wires the
+  engine (the `contestHall` field + counter + stage are the seam).
+- Weather is declared, not rendered (H4); the drought/deluge climax
+  states are H4's. Dive: no spots in this half by design (H3b).
+- H3b heads-up: art-data headroom is **124,415 B** (east tile art
+  must fit it or re-derive the ceiling on the record); east town
+  chars continue at U+1E00 idx 356+; the tiles palette union will
+  grow again (~+60 projected) — re-measure before raising.
+- The r119 land table's masquerain/surskit line and the Weather
+  Institute dressing are scenery only until H4's story pass; no
+  institute interior is authored in this half.

@@ -1,0 +1,23 @@
+# Stage H3a: mauville roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-mauville 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #5a4a7a mauville-roof
+b #413558 roof-dark
+c #705c98 roof-light
+d #f0c030 roof-trim

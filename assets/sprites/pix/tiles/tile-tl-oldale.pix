@@ -1,0 +1,24 @@
+# Stage H3a: oldale landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-oldale 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #c1b066 oldale-landmark-wall
+b #7d7242 landmark-trim
+d #f0f0e0 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

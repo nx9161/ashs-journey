@@ -1,0 +1,25 @@
+# Stage H3a: verdanturf town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-verdanturf 16 16
+bcacccabcacccabc
+bccccbacccccbccc
+baabccccaabaccaa
+abccabaebcccaabb
+ccbccbbacccccbeb
+baaabcabcacbcccc
+cbbcccbcabccacec
+bbcbcccbacccccbc
+bacbcbcaeccebccc
+cbcbbcaecbbcacca
+cbcbacccbccccaab
+caccbcbcaeecabac
+cbcabcbccaebbccc
+ecbcaabbcbceccca
+baababcbeacccabc
+cccabbccccccbaac
+PAL
+a #8cc877 verdanturf-ground
+b #6d9c5d ground-dark
+c #a5ec8c ground-light
+d #e87ab0 town-accent
+e #f0f0a0 town-accent-2
+f #547847 ground-deep

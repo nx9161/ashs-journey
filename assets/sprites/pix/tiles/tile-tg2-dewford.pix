@@ -1,0 +1,25 @@
+# Stage H3a: dewford town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-dewford 16 16
+bccbcccbcccccabc
+aecccbcacacabecc
+cecbcbccacbbbbce
+cbacacccbbccaecb
+eccbcebccbbbbbbc
+cabebcccaccbacae
+ccbcccacabbcaaab
+baaacbcbabbbcabe
+cccccbbccccabcec
+accbacaaccbaacce
+ebabbaacbccccabb
+cbceccbbcacccbcb
+ccbcbbcccaabcbac
+abbcceaaebcccacc
+becccacbacccccbc
+eaabcbccacaabccc
+PAL
+a #74aca4 dewford-ground
+b #5a8680 ground-dark
+c #89cbc2 ground-light
+d #e87a5a town-accent
+e #f0e0a8 town-accent-2
+f #466762 ground-deep

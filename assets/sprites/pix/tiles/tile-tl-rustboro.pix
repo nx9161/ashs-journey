@@ -1,0 +1,24 @@
+# Stage H3a: rustboro landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-rustboro 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #b0a28f rustboro-landmark-wall
+b #72695c landmark-trim
+d #c05a3a landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

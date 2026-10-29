@@ -1,0 +1,24 @@
+# Stage H3a: fallarbor landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-fallarbor 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #baaf9e fallarbor-landmark-wall
+b #787166 landmark-trim
+d #e8e4da landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

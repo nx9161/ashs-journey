@@ -1,0 +1,24 @@
+# Stage H3a: lavaridge landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-lavaridge 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #cc844e lavaridge-landmark-wall
+b #845532 landmark-trim
+d #e83a2a landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

@@ -1,0 +1,25 @@
+# Stage H3a: fallarbor town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-fallarbor 16 16
+bcabaecbeeccacbe
+cbeacbccecccbaca
+cccbccaabbbccbac
+bbcccccbbcbcacab
+bbcacabacbcccbaa
+cbcabcccacabccac
+ccbccacccbcccaaa
+baaacccbcacacabc
+cccccbcaccabbcbc
+cbcbccccccbbcacc
+ebcaceaabacaacab
+cebcccbccacccbcc
+cccabbcabecbcbcb
+ccbccbacabcceacc
+bcccaaabcccbbbbb
+caccbbccccccbaaa
+PAL
+a #aca292 fallarbor-ground
+b #867e72 ground-dark
+c #cbbfac ground-light
+d #e8e4da town-accent
+e #c0784a town-accent-2
+f #676158 ground-deep

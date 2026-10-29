@@ -1,0 +1,24 @@
+# Stage H3a: verdanturf landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-verdanturf 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #97d881 verdanturf-landmark-wall
+b #628c53 landmark-trim
+d #e87ab0 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

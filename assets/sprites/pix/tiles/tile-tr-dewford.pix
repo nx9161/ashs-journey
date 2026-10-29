@@ -1,0 +1,23 @@
+# Stage H3a: dewford roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-dewford 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #3a6a7a dewford-roof
+b #2a4c58 roof-dark
+c #488498 roof-light
+d #e87a5a roof-trim

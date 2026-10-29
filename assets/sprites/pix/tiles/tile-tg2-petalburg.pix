@@ -1,0 +1,25 @@
+# Stage H3a: petalburg town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-petalburg 16 16
+bccbacabacbcbcba
+ccccebcaccacbcac
+cccbacbaccbcaeec
+bbccaaacbccccccb
+aacacabcccaccbac
+ccbcbccceccbbbcc
+bbbbcccaebcecacc
+bcccccabcccccaba
+aecccbcacaacbcce
+eccbaaccbbbcccac
+abbbecccbaacaccb
+ccbbcbbcacacabca
+cbccbacaceabcccc
+ccbcebaccbccccac
+bccccccbacccacba
+cccbebcceccabecc
+PAL
+a #79ac8c petalburg-ground
+b #5e866d ground-dark
+c #8fcba5 ground-light
+d #4a90c0 town-accent
+e #e8b84a town-accent-2
+f #496754 ground-deep

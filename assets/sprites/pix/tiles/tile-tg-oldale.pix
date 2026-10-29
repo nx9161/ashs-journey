@@ -1,0 +1,25 @@
+# Stage H3a: oldale town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-oldale 16 16
+aaaadacaacdfaaaa
+aaaaabbaaaabaaaa
+caaaabcaaaaaabac
+aaccbacabacaccda
+aaaafaaaacaaabbc
+abbacaacaaabacbc
+acaaabacafaaaaac
+aaabacabcdbcaaaa
+baaaacaaaaacacad
+aaaaaaaaaaaacbaa
+aaaaafaabcfaabdc
+baaaacacaabaaaca
+ababcbaaaaaaaaac
+cbdabafabaabaaaa
+acccabbaaaafaaca
+abaaaaaaacaaabaa
+PAL
+a #b3a35e oldale-ground
+b #8c7f49 ground-dark
+c #d3c06f ground-light
+d #f0f0e0 town-accent
+e #7aa85e town-accent-2
+f #6b6238 ground-deep
