@@ -151721,6 +151721,239 @@ const HOENN_EVENTS = {
     { flag: 'climax_resolved' },
     { toast: 'Rayquaza descended. The clash of titans is over.' },
   ],
+
+  // ================= Stage H6: legendary arcs =================
+  // The ten faces. Every face rides the shipped catch-only chain
+  // ({ wildBattleCatch } — flee OR KO stalls the event with nothing
+  // set, so the encounter re-fires until the species is CAUGHT; arc
+  // completion = the catch). The weather trio + Rayquaza key off
+  // climax_resolved (set ONLY by ev_hoenn_rayquaza above): their
+  // climax roles were appearances, no catch state existed — H6 opens
+  // every catch. Levels ride the late band (285-300).
+  ev_hoenn_regirock: [
+    { say: ['Beyond the parted sealstones, the inner chamber is older than the desert that buried it — and it is occupied. A shape unfolds from the gloom with the patience of geology: arms first, then shoulders, then a head with no face at all, only seven small lights arranged like a held thought.', 'It does not roar. Mountains do not roar. It simply stands where it has stood since before Hoenn had a name, and waits to see whether you are another century, or something new.'], who: 'NARRATOR' },
+    { arc: 'arc_regirock', stage: 'active' },
+    { wildBattleCatch: { species: 'regirock', level: 285, legendary: true } },
+    { arc: 'arc_regirock', stage: 'complete' },
+    { flag: 'arc_regirock_done' },
+    { toast: 'Regirock is yours. The tomb settles back into its long, unbothered silence.' },
+  ],
+  ev_hoenn_regice: [
+    { say: ['The inner chamber is a held breath of blue-white. The cold coming off the figure at its heart is not weather — it is a decision, made a very long time ago, to never melt. Crystals tick and settle in its surface like a slow clock.', 'Seven lights wake in its featureless face, one by one, the way stars come out. It has been cold for three thousand years. It can spare you a battle.'], who: 'NARRATOR' },
+    { arc: 'arc_regice', stage: 'active' },
+    { wildBattleCatch: { species: 'regice', level: 285, legendary: true } },
+    { arc: 'arc_regice', stage: 'complete' },
+    { flag: 'arc_regice_done' },
+    { toast: 'Regice is yours. Behind you, the cave\'s cold softens by one honest degree.' },
+  ],
+  ev_hoenn_registeel: [
+    { say: ['The inner chamber gleams dully, every surface worn smooth by centuries of stillness. At its heart, something the colour of old iron unfolds from a crouch it has held since the cliff above was young — slowly, joint by joint, like a gate deciding to be a guardian instead.', 'Seven lights arrange themselves in its face. The metal of it is wrong for any forge: too dark, too patient, fallen out of the sky before there were smiths to wonder at it.'], who: 'NARRATOR' },
+    { arc: 'arc_registeel', stage: 'active' },
+    { wildBattleCatch: { species: 'registeel', level: 285, legendary: true } },
+    { arc: 'arc_registeel', stage: 'complete' },
+    { flag: 'arc_registeel_done' },
+    { toast: 'Registeel is yours. The tomb\'s gleam dims, its long watch handed over.' },
+  ],
+  // Latias: the roaming face — fired by the sysLoadMap roam hook
+  // when the player enters whichever staged landing she currently
+  // holds (the rotation rides the persisted walked-step counter).
+  ev_hoenn_latias: [
+    { say: ['You almost miss her — the light here has a red edge to it that light should not have, and then the air folds, and she is simply THERE: small, bright, curious, hanging a wingspan away with her head tipped like a question.', 'She has crossed half of Hoenn ahead of you and behind you, outrunning weather and rumour alike, and now she has stopped running — not cornered, never cornered. Choosing. The choice, apparently, is a battle.'], who: 'NARRATOR' },
+    { arc: 'arc_latias', stage: 'active' },
+    { wildBattleCatch: { species: 'latias', level: 290, legendary: true } },
+    { arc: 'arc_latias', stage: 'complete' },
+    { flag: 'arc_latias_done' },
+    { toast: 'Latias is yours. The red streak over Hoenn has a name in your log now — and a home.' },
+  ],
+  // Latios: the event face at the Eon stop (the Shoal Cave island
+  // shore on Route 125), fired by the sysOnStep shore hook.
+  ev_hoenn_latios: [
+    { say: ['The island\'s shore is quiet in the particular way of a place that is waited-in. Then the water offshore stands up in a clean blue line, and the line has wings, and the wings have opinions about you.', 'Latios folds out of his own speed at the tideline and regards you with the bright, measuring calm of something that has watched this shore for a very long time, waiting to see who would finally think to land on it.'], who: 'NARRATOR' },
+    { arc: 'arc_latios', stage: 'active' },
+    { wildBattleCatch: { species: 'latios', level: 290, legendary: true } },
+    { arc: 'arc_latios', stage: 'complete' },
+    { flag: 'arc_latios_done' },
+    { toast: 'Latios is yours. The Eon stop keeps its quiet — it is just sharing it now.' },
+  ],
+  ev_hoenn_groudon: [
+    { say: ['The hideout\'s foundry floors are cold. Its owners are gone. But the magma pool at the back of the deep chamber is NOT cold, and it is not still, and as you come down the last slope it begins, unmistakably, to rise.', 'It withdrew here when the sky settled its argument — back to the earth\'s own heat, to sleep the way continents sleep. It is not asleep now. The pool stands up in red-black armour, and the whole mountain remembers whose house this actually is.'], who: 'NARRATOR' },
+    { arc: 'arc_groudon', stage: 'active' },
+    { wildBattleCatch: { species: 'groudon', level: 298, legendary: true } },
+    { arc: 'arc_groudon', stage: 'complete' },
+    { flag: 'arc_groudon_done' },
+    { toast: 'Groudon is yours. The magma pool settles, ordinary as a forge at closing time.' },
+  ],
+  ev_hoenn_kyogre: [
+    { say: ['The trench water below the dive light is doing something water should not do: it is holding a shape. A vast shape. The shape opens one eye the size of a porthole in the blue dark, and the pressure of its attention arrives a half-second before the sight of it does.', 'It sleeps here, in the deep it nearly drowned the world with — and it has decided, in the unhurried way of tides, to see what the trainer who ended the deluge actually is. The trench holds its breath. So does everything in it.'], who: 'NARRATOR' },
+    { arc: 'arc_kyogre', stage: 'active' },
+    { wildBattleCatch: { species: 'kyogre', level: 298, legendary: true } },
+    { arc: 'arc_kyogre', stage: 'complete' },
+    { flag: 'arc_kyogre_done' },
+    { toast: 'Kyogre is yours. The trench exhales, slow as a sleeping tide.' },
+  ],
+  // The catch face — NOT ev_hoenn_rayquaza (that was the climax
+  // appearance, an uncatchable descent). This is the return ascent.
+  ev_hoenn_rayquaza_face: [
+    { say: ['The pillar is quieter than your first climb — no argument below for its sleeper to settle, only wind, coming home to roost. At the summit the ring of old stone is empty for exactly one heartbeat.', 'Then the sky folds, green as deep water seen from above, and Rayquaza is coiled in its ring again, considering you with the total, courteous attention of the oldest thing in Hoenn\'s sky. It descended once for the world. This time, it has come down for you.'], who: 'NARRATOR' },
+    { arc: 'arc_rayquaza', stage: 'active' },
+    { wildBattleCatch: { species: 'rayquaza', level: 300, legendary: true } },
+    { arc: 'arc_rayquaza', stage: 'complete' },
+    { flag: 'arc_rayquaza_done' },
+    { toast: 'Rayquaza is yours. The summit wind, for once, has nothing to say.' },
+  ],
+  // Jirachi I: the star fall, witnessed at Meteor Falls once the
+  // Space Center\'s news is in hand (entry gate in sysLoadMap).
+  ev_hoenn_jirachi_witness: [
+    { say: ['The falls are loud the way they always are — and then, for exactly three seconds, they are not the loudest thing in the cave. Light comes down the north shaft in a clean white line, unhurried, deliberate: a star, falling indoors, on appointment.', 'It lands beyond the lower falls without a sound, and the spray where it fell keeps glowing faintly, like the water is remembering it. The Space Center said a Wish Maker wakes beneath the comet. The comet, it seems, has sent a piece of itself ahead — down there. By the meteorstone. Go and be polite.'], who: 'NARRATOR' },
+    { arc: 'arc_jirachi', stage: 'active' },
+    { flag: 'jirachi_star_fell' },
+    { toast: 'A star fell at Meteor Falls. Something small is waking by the lower falls.' },
+  ],
+  // Jirachi II: the wish beat at the lower-falls meteorstone
+  // (13,11), fired by the meteorstone interact once the star fell.
+  ev_hoenn_jirachi: [
+    { say: ['The meteorstone is warm. Curled against it, no bigger than a secret, is a small yellow shape with streamers like ribbons on a parcel — asleep on its feet, swaying, humming a note you feel in your teeth more than hear.', 'One eye opens. Then the other. Then the third one — the true one, in its belly, the one that hears wishes the way ears hear thunder — and the little Wish Maker looks at you, looks at the comet going over far above, and makes a decision older than the Space Center, older than the falls: a wish is only real if somebody has to work for it. Catch, then. Earn the wish.'], who: 'NARRATOR' },
+    { arc: 'arc_jirachi', stage: 'active' },
+    { wildBattleCatch: { species: 'jirachi', level: 292, legendary: true } },
+    { arc: 'arc_jirachi', stage: 'complete' },
+    { flag: 'arc_jirachi_done' },
+    { toast: 'Jirachi is yours. Somewhere above the falls, a comet files the wish away under "answered".' },
+  ],
+  // Deoxys: the crater face at the north-chamber meteorite (21,4),
+  // fired by the meteorstone interact once the rumour is in hand.
+  ev_hoenn_deoxys: [
+    { say: ['The crater meteorite is not warm the way sun-warmed stone is warm. It is warm the way a held hand is warm — recently, and on purpose. As you reach it, the stone\'s heart answers with light: a core of orange fire, unfolding out of the rock in limbs that cannot decide what shape honesty requires.', 'It came down with the old shower, before there were falls to name it by, and it has been rehearsing shapes ever since — waiting for an audience worth the performance. The rehearsals are over. This is the performance.'], who: 'NARRATOR' },
+    { arc: 'arc_deoxys', stage: 'active' },
+    { wildBattleCatch: { species: 'deoxys', level: 295, legendary: true } },
+    { arc: 'arc_deoxys', stage: 'complete' },
+    { flag: 'arc_deoxys_done' },
+    { toast: 'Deoxys is yours. The crater stone goes quiet — its tenant has moved into your party.' },
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// HOENN_LEGENDARY_ARCS — Stage H6. The ten Hoenn legendary arcs,
+// folded into LEGENDARY_ARCS by merge.mjs exactly the way Johto's
+// fold works (one arcs table, one quest log). Object.assign order
+// makes these LIVE entries supersede the designed stubs in
+// story-kanto.mjs — the stubs' lair ids ('deserttomb', 'skypillar',
+// 'birthisland', 'forina') never existed as maps, their levels (40/70)
+// predate the arc bands, and arc_rayquaza's designed prereq
+// ({ arcs: [kyogre, groudon] }) is superseded by the H4b ruling: the
+// trio + Rayquaza key off the `climax_resolved` flag alone.
+//
+// Shared laws (all ten arcs):
+//  - Every face uses the catch-only wildBattleCatch chain: flee OR
+//    KO stalls the event with nothing set, so the encounter re-fires
+//    until the species is CAUGHT. Arc completion = the catch.
+//  - The Regi tombs are SELF-CONTAINED: there is no Sealed Chamber
+//    map in the shipped Hoenn, so no cross-tomb prerequisite chain
+//    exists — each tomb's own inscription is its only key (the
+//    simplification is recorded in the register).
+//  - Levels sit in Hoenn's late band: Regis 285, the Eon pair 290,
+//    Jirachi 292, Deoxys 295, the titans 298, Rayquaza 300 (ceiling).
+// ---------------------------------------------------------------------------
+const HOENN_LEGENDARY_ARCS = {
+  arc_regirock: {
+    id: 'arc_regirock', title: 'The Tomb in the Sand', species: 'regirock', region: 'Hoenn',
+    hook: 'Under the Route 111 desert, a sand-drowned chamber keeps a tenant older than the road above it — and its door is a riddle about patience.',
+    steps: [
+      { text: 'Read the dotted inscription on the stone by the Desert Ruins door', flag: 'regi_rock_read' },
+      { text: 'Stand before the sealstone and wait out the six slow breaths it asks for', flag: 'regi_rock_open' },
+      { text: 'Face Regirock, level 285, beyond the parted sealstones', catch: 'regirock' },
+    ],
+    lair: 'desert-ruins',
+  },
+  arc_regice: {
+    id: 'arc_regice', title: 'The Tomb in the Ice', species: 'regice', region: 'Hoenn',
+    hook: 'Inside the Route 105 island rock, a chamber floored in old ice keeps its tenant the way winter keeps a lake — and its door is a riddle about order.',
+    steps: [
+      { text: 'Read the dotted inscription on the stone by the Island Cave door', flag: 'regi_ice_read' },
+      { text: 'Greet the chamber\'s two boulders in the inscription\'s order — west first, then east', flag: 'regi_ice_open' },
+      { text: 'Face Regice, level 285, beyond the parted sealstones', catch: 'regice' },
+    ],
+    lair: 'island-cave',
+  },
+  arc_registeel: {
+    id: 'arc_registeel', title: 'The Tomb in the Ruin', species: 'registeel', region: 'Hoenn',
+    hook: 'A cliff chamber east of the rain road, older than any map of Hoenn. Its door is a riddle about kinship: iron opens to iron.',
+    steps: [
+      { text: 'Read the dotted inscription on the stone by the Ancient Tomb door', flag: 'regi_steel_read' },
+      { text: 'Press your hand to the sealstone with a Steel-type partner standing beside you', flag: 'regi_steel_open' },
+      { text: 'Face Registeel, level 285, beyond the parted sealstones', catch: 'registeel' },
+    ],
+    lair: 'ancient-tomb',
+  },
+  arc_latias: {
+    id: 'arc_latias', title: 'The Red Streak Over Hoenn', species: 'latias', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'Since the titans settled, something red, kind and impossibly fast has been crossing Hoenn\'s routes and waters — landing, watching, and moving on. It is not fleeing. It is deciding where to be met.',
+    steps: [
+      { text: 'End the clash of the weather titans — she only came down once the sky was safe', flag: 'climax_resolved' },
+      { text: 'Meet Latias, level 290, where she lands — her landings turn with your walking: Routes 110, 118, 123, the Route 127 sea and Route 134, in turn', catch: 'latias' },
+    ],
+    lair: 'hoenn-routes',
+  },
+  arc_latios: {
+    id: 'arc_latios', title: 'The Jet Over the Water', species: 'latios', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'Fishermen keep reporting the same impossible thing: a blue jet-shaped shadow that outruns their boats — except at one quiet shore, where it slows, and waits.',
+    steps: [
+      { text: 'End the clash of the weather titans — he only slowed down once the sea was calm', flag: 'climax_resolved' },
+      { text: 'Land on the Shoal Cave island on Route 125 — the Eon stop — and face Latios, level 290, at its tideline', catch: 'latios' },
+    ],
+    lair: 'r125',
+  },
+  arc_groudon: {
+    id: 'arc_groudon', title: 'The Land That Wants Everything', species: 'groudon', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'When the sky settled the argument, the land\'s answer did not die and was not caught — it withdrew, sullen and alive, to the earth\'s own heat.',
+    steps: [
+      { text: 'End the clash of the weather titans at the Sky Pillar', flag: 'climax_resolved' },
+      { text: 'Return to the deep chamber of Team Magma\'s old hideout and face Groudon, level 298, risen from its magma pool', catch: 'groudon' },
+    ],
+    lair: 'magma-hideout',
+  },
+  arc_kyogre: {
+    id: 'arc_kyogre', title: 'The Sea That Wants Everything', species: 'kyogre', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'The deluge ended, but the sea\'s answer was never caught — it sleeps now in the deep it nearly drowned the world with, and it knows your name.',
+    steps: [
+      { text: 'End the clash of the weather titans at the Sky Pillar', flag: 'climax_resolved' },
+      { text: 'Dive the Route 127 trench and face Kyogre, level 298, in the deep (Mind Badge + a partner who knows Dive)', catch: 'kyogre' },
+    ],
+    lair: 'r127-underwater',
+  },
+  arc_rayquaza: {
+    id: 'arc_rayquaza', title: 'The Sky Settles It', species: 'rayquaza', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'It descended once, for the world, and asked nothing. The summit keeps its ring of old stone — and the sleeper, the wardens say, has started watching the road up.',
+    steps: [
+      { text: 'End the clash of the weather titans — the descent was an appearance, not a meeting', flag: 'climax_resolved' },
+      { text: 'Climb the Sky Pillar again and face Rayquaza, level 300, at the summit', catch: 'rayquaza' },
+    ],
+    lair: 'sky-pillar',
+  },
+  arc_jirachi: {
+    id: 'arc_jirachi', title: 'The Thousand-Year Wish', species: 'jirachi', region: 'Hoenn',
+    hook: 'A comet is crossing Hoenn, and the Space Center\'s oldest file says a Wish Maker wakes beneath it — briefly, and only for wishes worth working for.',
+    steps: [
+      { text: 'Ask Researcher Orbit at the Mossdeep Space Center about the comet crossing Hoenn', flag: 'arc_jirachi_news' },
+      { text: 'Witness the star fall at Meteor Falls', flag: 'jirachi_star_fell' },
+      { text: 'Follow the fallen light to the meteorstone by the lower falls and face Jirachi, level 292 — earn the wish', catch: 'jirachi' },
+    ],
+    lair: 'meteor-falls',
+  },
+  arc_deoxys: {
+    id: 'arc_deoxys', title: 'The Triangle That Moves', species: 'deoxys', region: 'Hoenn',
+    hook: 'Something fell with the old meteor shower at Meteor Falls and never cooled. The Space Center tracks it the way you track weather: respectfully, and from a distance.',
+    steps: [
+      { text: 'Hear the Space Center\'s rumour from Researcher Orbit in Mossdeep', flag: 'arc_deoxys_rumor' },
+      { text: 'Face Deoxys, level 295, at the crater meteorite in Meteor Falls\' north chamber', catch: 'deoxys' },
+      { text: 'Return to the meteorite with Deoxys in your party — it remembers every shape it has ever been', flag: 'deoxys_forme_touched' },
+    ],
+    lair: 'meteor-falls',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -152282,6 +152515,12 @@ Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
 // story-kanto.mjs (its steps described an errand the shipped game
 // never told); arc_hooh was activated in place in LEGENDARY_ARCS.
 Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
+// Stage H6 fold: Hoenn's ten live legendary arcs (the Regi tombs,
+// the Eon pair, the weather trio + Rayquaza, Jirachi, Deoxys) —
+// every one supersedes its story-kanto.mjs designed stub (dead lair
+// ids, pre-band levels, and arc_rayquaza's arcs-prereq, replaced by
+// the climax_resolved flag key per the H4b ruling).
+Object.assign(LEGENDARY_ARCS, HOENN_LEGENDARY_ARCS);
 // Story patch (fidelity audit): the movie invite's island landing was
 // scripted out of bounds (8,14 on a 12-row map) — land on the shore (8,9).
 for (const ev of Object.values(EVENTS)) {
@@ -165656,6 +165895,40 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_hoenn_rayquaza');
       }
     }
+    // Stage H6 (Hoenn legendary arcs): map-entry faces, same idiom —
+    // every face is gated on its arc's own progress flags (never on
+    // the event-done flag alone), and the catch-only chain
+    // (wildBattleCatch) leaves everything unwritten on a flee or a
+    // KO, so each face re-fires until the catch.
+    //  - The weather trio + Rayquaza key off climax_resolved ONLY
+    //    (H4b ruling: their climax roles were appearances — no catch
+    //    state exists, and NONE of these can fire before it).
+    //  - Jirachi's star fall is witnessed on Meteor Falls entry once
+    //    the Space Center's news is in hand and the falls' own story
+    //    beat (H4a) is behind the player.
+    //  - Latias ROAMS: no roaming engine shipped (the Johto beasts
+    //    are fixed lairs), so she rides the lightest honest
+    //    equivalent — five staged landing maps whose turn is derived
+    //    deterministically from the PERSISTED walked-step counter
+    //    (state.stepsTotal: one landing per 50 walked steps, cycling
+    //    r110 -> r118 -> r123 -> r127 -> r134). Entering the map she
+    //    currently holds fires her face; walking Hoenn turns her.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const hf = g.state.story.flags;
+      if (id === 'magma-hideout' && hf.climax_resolved && !hf.arc_groudon_done && !hf.ev_hoenn_groudon_done) {
+        this.runEvent('ev_hoenn_groudon');
+      } else if (id === 'r127-underwater' && hf.climax_resolved && !hf.arc_kyogre_done && !hf.ev_hoenn_kyogre_done) {
+        this.runEvent('ev_hoenn_kyogre');
+      } else if (id === 'sky-pillar' && hf.climax_resolved && !hf.arc_rayquaza_done && !hf.ev_hoenn_rayquaza_face_done) {
+        this.runEvent('ev_hoenn_rayquaza_face');
+      } else if (id === 'meteor-falls' && hf.arc_jirachi_news && hf.meteor_falls_done && !hf.jirachi_star_fell && !hf.ev_hoenn_jirachi_witness_done) {
+        this.runEvent('ev_hoenn_jirachi_witness');
+      } else if (hf.climax_resolved && !hf.arc_latias_done && !hf.ev_hoenn_latias_done) {
+        const LATIAS_LANDINGS = ['r110', 'r118', 'r123', 'r127', 'r134'];
+        const landing = LATIAS_LANDINGS[Math.floor((g.state.stepsTotal || 0) / 50) % LATIAS_LANDINGS.length];
+        if (id === landing) this.runEvent('ev_hoenn_latias');
+      }
+    }
   },
 
   boulderAt(x, y) {
@@ -165718,6 +165991,47 @@ Object.assign(OverworldScene.prototype, {
       g.audio.playSfx('dex-register');
       g.ui.say(lines);
       return true;
+    }
+    // Stage H6: the Regi tombs' seals + the Eon stop. Both pre-empt
+    // random encounters: the seal is a wall that talks, and Latios
+    // is an appointment, not an ambush.
+    //  - A tomb's inner chamber is rows 0-4, north of the sealstone
+    //    row (row 5, whose single floor gap at x=8 is the door).
+    //    Stepping north of the row before the tomb's puzzle is
+    //    solved meets the seal: narration + a step back south (the
+    //    Route Silver gate idiom — turned back, never stuck). Once
+    //    solved, stepping in meets the Regi (the face re-fires on
+    //    every entry until the catch — flee/KO consume nothing).
+    {
+      const H6_TOMBS = {
+        'desert-ruins': { open: 'regi_rock_open', done: 'arc_regirock_done', ev: 'ev_hoenn_regirock', evDone: 'ev_hoenn_regirock_done', name: 'Regirock' },
+        'island-cave': { open: 'regi_ice_open', done: 'arc_regice_done', ev: 'ev_hoenn_regice', evDone: 'ev_hoenn_regice_done', name: 'Regice' },
+        'ancient-tomb': { open: 'regi_steel_open', done: 'arc_registeel_done', ev: 'ev_hoenn_registeel', evDone: 'ev_hoenn_registeel_done', name: 'Registeel' },
+      };
+      const tomb = H6_TOMBS[this.mapId];
+      if (tomb && y <= 4) {
+        const hf = g.state.story.flags;
+        if (!hf[tomb.open]) {
+          g.ui.say(['The sealstones grind — not open, not quite shut, but AWAKE — and the chamber\'s old patience pushes you back a step, the way deep water pushes back a hand. The seal is not a wall. It is a question, and it is still waiting for its answer.'], () => {
+            this.player.tx = 8; this.player.ty = 7;
+            this.player.px = 8 * TILE; this.player.py = 7 * TILE;
+            this.player.fx = 8; this.player.fy = 7;
+            this.trail = [];
+            g.state.story.position = { map: this.mapId, x: 8, y: 7, dir: 'up' };
+          });
+          return true;
+        }
+        if (!hf[tomb.done] && !hf[tomb.evDone]) { this.runEvent(tomb.ev); return true; }
+      }
+      // Latios, the Eon stop: the Shoal Cave island's shore apron
+      // (r125, the island landmass x12-18 / y4-8). Post-climax only.
+      if (this.mapId === 'r125' && x >= 12 && x <= 18 && y >= 4 && y <= 8) {
+        const hf = g.state.story.flags;
+        if (hf.climax_resolved && !hf.arc_latios_done && !hf.ev_hoenn_latios_done) {
+          this.runEvent('ev_hoenn_latios');
+          return true;
+        }
+      }
     }
     // Water + cave encounters (grass handled by the base onStep).
     if (this.sysEncounterStep(x, y, t)) return true;
@@ -166063,6 +166377,13 @@ Object.assign(OverworldScene.prototype, {
     // Stage J5: the Ilex Forest shrine (the JSHRINE prop at (14,3))
     // is Celebi's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
+    // Stage H6: the Regi tombs (inscriptions, seals, puzzle stones)
+    // and Meteor Falls' meteorstones (the Jirachi wish stone; the
+    // Deoxys crater meteorite + its forme switch). Faced-tile, the
+    // shrine idiom exactly: each handler declines (returns false)
+    // whenever the faced tile is not one of its own.
+    if (this.hoennTombInteract(fx, fy)) return true;
+    if (this.mapId === 'meteor-falls' && TILE_CHARS[this.tileAt(fx, fy)] === 'meteorstone' && this.hoennMeteorInteract(fx, fy)) return true;
     // Stage J6: apricorn trees (the J3a `apricorn` prop kind). Facing
     // a tree picks its apricorn when it has rested enough walked
     // steps; the rest is counted on the persisted step counter and
@@ -166423,6 +166744,10 @@ Object.assign(OverworldScene.prototype, {
     // Stage H4a: Hoenn story actors (Birch, May, Wally, Norman, the
     // west leaders, Cozmo, the two admins) run their own scenes.
     if (npc.hoenn) { if (this.runHoennNpc(npc)) return true; }
+    // Stage H6: the Mossdeep Space Center's facade researcher
+    // (SPACE RESEARCHER ORBIT, a maps7 townsfolk — no interior
+    // exists and none is faked) carries the two star arcs' briefings.
+    if (npc.name === 'SPACE RESEARCHER ORBIT') { if (this.runSpaceCenterNpc(npc)) return true; }
     // ADR-025 §2: the Pallet lab Gary is dialogue-only — his lines are
     // tier-variant (the wary set IS his authored dialogue, so a neutral
     // run reads byte-identically to before Phase 5).
@@ -167445,6 +167770,37 @@ Object.assign(OverworldScene.prototype, {
   // validator's prefix law, data-driven from BADGE_SETS.hoenn).
   // Birch, May, Wally, Norman, Cozmo and the admins are state-driven
   // scenes. H4b extends this dispatch at the marked seam.
+  // Stage H6: the Space Center briefing (see the sysNpc dispatch —
+  // SPACE RESEARCHER ORBIT, the Mossdeep Space Center's facade
+  // researcher, is the information source for BOTH star arcs: the
+  // comet news opens Jirachi's chain, and the crater rumour arms
+  // Deoxys. Later talks track the two arcs' states.
+  runSpaceCenterNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
+
+    if (!flags.arc_jirachi_news) {
+      say(['You found the one person in Mossdeep who is paid to look UP. Researcher Orbit, Space Center — the telescopes are mine, the comet is everyone\'s, and the paperwork is forever.', 'The comet, trainer. THE comet — the old one, the one in the Center\'s oldest file, the one that comes over Hoenn so rarely the file is mostly other centuries\' handwriting. It is crossing NOW. And the file says — every hand in it says — that when it crosses, a Wish Maker wakes under it. A small star that sleeps a thousand years and grants what it is asked. The last note in the file, in the shakiest hand, says where: wherever a piece of the sky has already fallen. Meteor Falls, trainer. The falls are FULL of fallen sky.', 'And since you have the look of someone who collects impossible errands, a second one, free: something fell with the old meteor shower in that same cave and never cooled. We track it. It does not move. It does not cool. It just — waits, in the crater in the north chamber, being warm at us through three generations of instruments. If you go to the falls for the comet, {player}, go and be warm back at it. Professionally.'], () => {
+        flags.arc_jirachi_news = true;
+        flags.arc_deoxys_rumor = true;
+        st.story.quests.arc_jirachi = 'discovered';
+        st.story.quests.arc_deoxys = 'discovered';
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Two sky errands, logged: the Wish Maker, and the thing that never cooled.');
+      });
+      return true;
+    }
+    if (flags.arc_jirachi_done && flags.arc_deoxys_done) { say(['Both of my sky errands, closed by one trainer. The comet has gone over, the crater stone is cold, and the Center\'s oldest file finally has a last page that ends the story instead of asking about it. I wrote it myself, {player}. In my best hand. It mostly says: told you so.']); return true; }
+    if (flags.arc_deoxys_done && !flags.arc_jirachi_done) { say(['The crater stone went cold the day you met its tenant — our instruments noticed before our pride did. The comet is still up there, though, and the Wish Maker with it. Meteor Falls, {player}. Wishes do not keep.']); return true; }
+    if (flags.jirachi_star_fell && !flags.arc_jirachi_done) { say(['You SAW it come down? At the falls? Then stop standing in my telescope light, trainer — it fell by the lower falls, and a Wish Maker\'s waking is measured in days, not in however long you are about to spend admiring my instruments. Go. Be polite. Earn it.']); return true; }
+    if (flags.arc_jirachi_done && !flags.arc_deoxys_done) { say(['A granted wish and a filed report — the Center is calling it the best week since the building went up. One file remains open: the crater stone in Meteor Falls\' north chamber, still warm, still waiting. It has waited this long, {player}. It can wait for you to be ready. Barely.']); return true; }
+    say(['The comet is up there now, trainer, crossing whether anyone watches or not. Meteor Falls is where the sky has already fallen once — the Wish Maker wakes where the falling is familiar. And the crater stone is still warm. It is always, professionally speaking, still warm.']);
+    return true;
+    return true;
+  },
+
   runHoennNpc(npc) {
     const g = this.game;
     const st = g.state;
@@ -168391,6 +168747,241 @@ Object.assign(OverworldScene.prototype, {
       g.ui.say(['A small shrine, moss-bearded and patient. Travellers leave flowers here for whatever keeps the deep forest. The carving is too weathered to read, which the forest clearly considers none of your business yet.']);
     }
     return true;
+  },
+
+  // Stage H6: the Deoxys formes — the meteorite switch (coordinator
+  // ruling 2, the REAL mechanic). The four entries share dexNo 386
+  // and one in-table Psychic learnset pool (H1's design), so the
+  // swap is a speciesId exchange in the evolution idiom: level, XP,
+  // nickname, held item, keepsake, IVs/EVs, status and the move set
+  // are the individual's own and are NOT touched; maxHp/stats are
+  // recomputed from the new forme's base stats exactly as
+  // evolveMon does, with HP carried by the max-delta rule. Moves
+  // stay legal in every forme because all four learnsets draw from
+  // the same pool. A switched Deoxys round-trips save validation in
+  // every forme (asserted in tests/hoenn-legendary-checks.mjs).
+  DEOXYS_FORMES: ['deoxys', 'deoxysattack', 'deoxysdefense', 'deoxysspeed'],
+  deoxysInParty() {
+    return this.game.state.party.find((m) => m && this.DEOXYS_FORMES.includes(m.speciesId)) || null;
+  },
+  switchDeoxysForme(mon, formeId) {
+    const g = this.game;
+    if (!mon || !this.DEOXYS_FORMES.includes(mon.speciesId) || !this.DEOXYS_FORMES.includes(formeId)) return false;
+    if (mon.speciesId === formeId) return false;
+    const to = SPECIES[formeId];
+    const ivs = mon.ivs || {};
+    const oldMax = mon.maxHp;
+    mon.speciesId = formeId;
+    mon.maxHp = hpValue(to.base.hp, mon.level, ivs.hp);
+    if (mon.hp > 0) mon.hp = Math.min(mon.maxHp, mon.hp + (mon.maxHp - oldMax));
+    mon.stats = {
+      atk: statValue(to.base.atk, mon.level, ivs.atk), def: statValue(to.base.def, mon.level, ivs.def),
+      spa: statValue(to.base.spa, mon.level, ivs.spa), spd: statValue(to.base.spd, mon.level, ivs.spd),
+      spe: statValue(to.base.spe, mon.level, ivs.spe),
+    };
+    g.state.story.flags.deoxys_forme_touched = true;
+    return true;
+  },
+
+  // Stage H6: Meteor Falls' meteorstones. Three stones carry H3a's
+  // meteorstone dressing; two are H6's set pieces:
+  //  - (21,4), the crater meteorite in the north chamber: Deoxys'
+  //    door (the rumour arms it) and, after the catch, the forme
+  //    switch — interact with a Deoxys in the party and pick the
+  //    shape; the stone remembers every shape it has ever been.
+  //  - (13,11), the lower-falls stone: Jirachi's wish stone, live
+  //    only once the star has fallen (the witness event).
+  //  - (12,5) answers with plain flavour.
+  hoennMeteorInteract(fx, fy) {
+    const g = this.game;
+    const f = g.state.story.flags;
+    if (fx === 21 && fy === 4) {
+      if (!f.arc_deoxys_done) {
+        if (f.arc_deoxys_rumor) { this.runEvent('ev_hoenn_deoxys'); return true; }
+        g.ui.say(['A meteorite the size of a cart, glassy and dark — and warm, which stops you mid-thought. Fallen stone should be cold. This one is warm the way a held hand is warm. The researchers at the Mossdeep Space Center would have opinions about this. Loud ones.']);
+        return true;
+      }
+      const mon = this.deoxysInParty();
+      if (!mon) {
+        g.ui.say(['The crater meteorite has gone quiet and cold — ordinary fallen stone, its tenant gone. Whatever it remembers, it remembers alone now. (Bring the one who came from the sky, and it may remember out loud.)']);
+        return true;
+      }
+      const name = displayName(mon, SPECIES);
+      const labels = {
+        deoxys: 'Balanced forme — the shape it fell in',
+        deoxysattack: 'Attack forme — all striking whips',
+        deoxysdefense: 'Defense forme — broad and braced',
+        deoxysspeed: 'Speed forme — a needle that outruns radar',
+      };
+      g.ui.say(['The crater meteorite wakes at ' + name + '\'s nearness — light moving under its surface like something turning over in its sleep. It remembers every shape its tenant has ever been. Shapes, it turns out, are just memories with edges.'], () => {
+        g.ui.showMenu('Let the meteorite remind ' + name + ' of a shape:', this.DEOXYS_FORMES.map((id) => ({
+          label: SPECIES[id].name.replace('Deoxys', 'Deoxys') + ' — ' + labels[id].split(' — ')[1],
+          value: id,
+          disabled: mon.speciesId === id,
+        })).concat([{ label: 'Not now', value: 'no' }]), (v) => {
+          if (!v || v === 'no' || v === mon.speciesId) return;
+          if (this.switchDeoxysForme(mon, v)) {
+            g.audio.playSfx('levelup');
+            g.ui.say(['The light under the stone\'s surface reaches out — not hands, not quite — and ' + name + ' comes apart gently, the way a knot comes undone, and re-knots itself into a new geometry. Same partner. Same memories. New edges.', name + ' is now in its ' + SPECIES[v].name.replace('Deoxys (', '').replace(')', '') + ' shape.']);
+          }
+        });
+      });
+      return true;
+    }
+    if (fx === 13 && fy === 11) {
+      if (f.arc_jirachi_done) {
+        g.ui.say(['The meteorstone by the lower falls is cool and ordinary, and the spray on it is lit only by the falls themselves. Whatever woke here has gone back to its long sleep — in your party, this time.']);
+        return true;
+      }
+      if (f.jirachi_star_fell) { this.runEvent('ev_hoenn_jirachi'); return true; }
+      if (f.arc_jirachi_news) {
+        g.ui.say(['A fallen stone, old and glassy, keeping the lower falls\' spray. The Space Center says a star is coming down somewhere in this cave — but not yet, and not here. The stone is only a stone, for now.']);
+        return true;
+      }
+      g.ui.say(['A fallen stone, old and glassy, keeping the lower falls\' spray. Star-stone, the locals call it. Most of it is only ever a stone.']);
+      return true;
+    }
+    g.ui.say(['A fallen stone, cold as the cave around it. Whatever fell here finished falling a very long time ago.']);
+    return true;
+  },
+
+  // Stage H6: the Regi tombs. Each tomb is self-contained (there is
+  // no Sealed Chamber map in the shipped Hoenn — no cross-tomb
+  // chain): its inscription, read from the stone by the door (the
+  // sign tile at (9,11)), is the only key, and its solution is a
+  // concrete action performed in the chamber:
+  //  - Desert Ruins (Regirock): THE STANDING BEAT. Read, then stand
+  //    before the sealstone (face the sealstone row) and choose to
+  //    wait — the shipped choice idiom carries the beat; the desert
+  //    counts six slow breaths and the sealstones part.
+  //  - Island Cave (Regice): THE GREETING ORDER. Read, then greet
+  //    the chamber's two boulders (caveboulder tiles) in the
+  //    inscription's order — west (2,12) first, east (14,11)
+  //    second. The wrong order is politely forgotten by the cold.
+  //  - Ancient Tomb (Registeel): IRON ANSWERS IRON. Read, then
+  //    press the sealstone with a living Steel-type partner in the
+  //    party (partyHasType — the shipped field check).
+  // Solving parts the sealstone row (its flag stands; the sysOnStep
+  // seal guard reads it) and the Regi's face fires at once; after a
+  // flee/KO the face re-fires from the seal or the chamber step.
+  hoennTombInteract(fx, fy) {
+    const g = this.game;
+    const f = g.state.story.flags;
+    const kind = TILE_CHARS[this.tileAt(fx, fy)];
+    const TOMBS = {
+      'desert-ruins': {
+        arc: 'arc_regirock', read: 'regi_rock_read', open: 'regi_rock_open', done: 'arc_regirock_done', ev: 'ev_hoenn_regirock',
+        inscription: [
+          'The stone by the door is covered in raised dots — a writing you read with your fingertips. It translates, slowly, the way old things do:',
+          '"THE STONE REMEMBERS WHO WAITS. STAND BEFORE THE SEAL WITH A QUIET HEART, AND LET THE DESERT COUNT SIX SLOW BREATHS. THE IMPATIENT KNOCK FOREVER. THE PATIENT ARE LET IN."',
+          'Below the words, smaller dots add: "(Face the sealstones, trainer, and be still. That is the whole key. It always was.)"',
+        ],
+      },
+      'island-cave': {
+        arc: 'arc_regice', read: 'regi_ice_read', open: 'regi_ice_open', done: 'arc_regice_done', ev: 'ev_hoenn_regice',
+        inscription: [
+          'The stone by the door is covered in raised dots, rimed with frost that does not melt under your fingertips. It translates, slowly, the way cold things do:',
+          '"THE COLD KEEPS WHAT IT IS GIVEN, IN ORDER. GREET THE WEST STONE FIRST, WHERE THE DOOR\'S WIND FALLS. GREET THE EAST STONE SECOND, WHERE THE LONG ROOM ENDS. REVERSE THE GREETING, AND THE COLD FORGETS YOU."',
+          'Two boulders stand in the outer room, west and east. They have the look of stones that have been greeted correctly perhaps once.',
+        ],
+      },
+      'ancient-tomb': {
+        arc: 'arc_registeel', read: 'regi_steel_read', open: 'regi_steel_open', done: 'arc_registeel_done', ev: 'ev_hoenn_registeel',
+        inscription: [
+          'The stone by the door is covered in raised dots, worn smooth as river pebbles. It translates, slowly, the way patient things do:',
+          '"IRON OPENS TO IRON. LET A PARTNER OF LIVING STEEL STAND WITH YOU, AND PRESS YOUR HAND TO THE SEAL. THE TOMB KNOWS ITS OWN METAL, AND NO OTHER KEY WAS EVER CUT."',
+          'The sealstones across the chamber gleam dully — the colour of old iron, and of one particular kind of partner.',
+        ],
+      },
+    };
+    const tomb = TOMBS[this.mapId];
+    if (!tomb) return false;
+    // The inscription stone (the tomb's sign tile).
+    if (fx === 9 && fy === 11) {
+      if (!f[tomb.read]) {
+        g.ui.say(tomb.inscription, () => {
+          f[tomb.read] = true;
+          if (!f[tomb.done]) g.state.story.quests[tomb.arc] = 'discovered';
+        });
+      } else {
+        g.ui.say(tomb.inscription);
+      }
+      return true;
+    }
+    // Regice's greeting stones.
+    if (this.mapId === 'island-cave' && kind === 'caveboulder' && ((fx === 2 && fy === 12) || (fx === 14 && fy === 11))) {
+      if (f.regi_ice_open || f.arc_regice_done) {
+        g.ui.say(['The boulder is cold and faintly pleased with itself, in the manner of furniture that has been thanked.']);
+        return true;
+      }
+      if (!f.regi_ice_read) {
+        g.ui.say(['A boulder, old as the cave. It feels, somehow, like it is waiting to be greeted — but in what order, and as what, the stone by the door would know.']);
+        return true;
+      }
+      if (fx === 2 && fy === 12) {
+        if (!f.regi_ice_west) {
+          f.regi_ice_west = true;
+          g.ui.say(['You greet the west stone, where the door\'s wind falls. Somewhere across the chamber, ice ticks — a small, approving sound, like a clock agreeing with itself. One more. The east stone, where the long room ends.']);
+        } else {
+          g.ui.say(['The west stone has been greeted. The east stone, where the long room ends, is still waiting its turn.']);
+        }
+        return true;
+      }
+      // The east stone.
+      if (!f.regi_ice_west) {
+        g.ui.say(['You greet the east stone first — and the cold, politely and completely, forgets you. The inscription was specific: west first, where the door\'s wind falls. The chamber resets its patience. So can you.']);
+        return true;
+      }
+      f.regi_ice_open = true;
+      g.audio.playSfx('map-enter');
+      g.ui.say(['You greet the east stone, second, in the inscription\'s order — and from the north wall comes a sound like a lake turning over in its sleep. The sealstones are GRINDING apart, frost falling from them in sheets.', 'The cold keeps what it is given, in order. You gave it courtesy, in order. It is keeping its side of the bargain.'], () => {
+        if (!f.arc_regice_done) this.runEvent(tomb.ev);
+      });
+      return true;
+    }
+    // The sealstone row itself (the door at its gap, x=8, reads as
+    // floor — the row's stones are the interactable face).
+    if (kind === 'sealstone' || (fy === 5 && fx >= 1 && fx <= 16)) {
+      if (f[tomb.done]) {
+        g.ui.say(['The sealstones stand parted and quiet. The chamber beyond has given up its tenant; what remains is old stone, older silence, and the feeling of a question answered so thoroughly it will never need asking again.']);
+        return true;
+      }
+      if (f[tomb.open]) { this.runEvent(tomb.ev); return true; }
+      if (!f[tomb.read]) {
+        g.ui.say(['A row of sealstones, each covered in raised dots you cannot read. The stone by the door — south, by the entrance — is covered in them too, and stones by doors are usually the ones doing the explaining.']);
+        return true;
+      }
+      if (this.mapId === 'desert-ruins') {
+        g.ui.showMenu('The sealstones wait. The inscription asked for stillness, not force.', [
+          { label: 'Stand before the seal and wait, unmoving', value: 'wait' },
+          { label: 'Step back', value: 'no' },
+        ], (v) => {
+          if (v !== 'wait') return;
+          f.regi_rock_open = true;
+          g.audio.playSfx('map-enter');
+          g.ui.say(['You stand before the seal and do the hardest thing the road has ever asked of you: nothing. Breath one. The sand in the seams of the floor stops drifting. Breath two. Somewhere above, the desert goes on being a desert, without you. Breath three. Your partners, unasked, go quiet with you. Breath four. The chamber\'s held century settles around your shoulders like a hand deciding not to strike. Breath five. A single grain of sand falls off the middle sealstone, and it is the loudest sound in Hoenn. Breath six—', 'The sealstones PART — not broken, not forced: released, the way a held breath is released, grinding aside with the deep patience of stone that was only ever waiting to be waited at.', 'The impatient knock forever. You did not knock. Go and meet what the desert has been keeping.'], () => {
+            if (!f.arc_regirock_done) this.runEvent(tomb.ev);
+          });
+        });
+        return true;
+      }
+      if (this.mapId === 'ancient-tomb') {
+        if (this.partyHasType('steel')) {
+          f.regi_steel_open = true;
+          g.audio.playSfx('map-enter');
+          g.ui.say(['You press your palm to the middle sealstone, and beside you, your Steel-type partner leans its weight against the stone as if it had been waiting all its life to be a key. For a moment nothing happens. Then the sealstone warms — no. The sealstone RECOGNIZES. Iron has answered iron, and the whole row shudders, and grinds, and parts.', 'The tomb knows its own metal. It has decided you are carrying some of it honestly. Beyond the stones, something ancient is unfolding.'], () => {
+            if (!f.arc_registeel_done) this.runEvent(tomb.ev);
+          });
+        } else {
+          g.ui.say(['You press your palm to the sealstone. It is cold, and faintly, courteously unimpressed. "IRON OPENS TO IRON," said the stone by the door. No Steel-type partner stands with you — and the tomb, which has waited this long, is content to wait for you to come back with the right company.']);
+        }
+        return true;
+      }
+      // island-cave's seal, before its greeting is complete.
+      g.ui.say(['The sealstones are rimed shut and entirely unbothered. "THE COLD KEEPS WHAT IT IS GIVEN, IN ORDER," said the stone by the door. Two boulders in this room are still waiting to be greeted — in the right order.']);
+      return true;
+    }
+    return false;
   },
 
   // Stage J5: descend into the Rocket Hideout — the Mahogany shop's

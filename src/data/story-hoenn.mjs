@@ -669,6 +669,239 @@ export const HOENN_EVENTS = {
     { flag: 'climax_resolved' },
     { toast: 'Rayquaza descended. The clash of titans is over.' },
   ],
+
+  // ================= Stage H6: legendary arcs =================
+  // The ten faces. Every face rides the shipped catch-only chain
+  // ({ wildBattleCatch } — flee OR KO stalls the event with nothing
+  // set, so the encounter re-fires until the species is CAUGHT; arc
+  // completion = the catch). The weather trio + Rayquaza key off
+  // climax_resolved (set ONLY by ev_hoenn_rayquaza above): their
+  // climax roles were appearances, no catch state existed — H6 opens
+  // every catch. Levels ride the late band (285-300).
+  ev_hoenn_regirock: [
+    { say: ['Beyond the parted sealstones, the inner chamber is older than the desert that buried it — and it is occupied. A shape unfolds from the gloom with the patience of geology: arms first, then shoulders, then a head with no face at all, only seven small lights arranged like a held thought.', 'It does not roar. Mountains do not roar. It simply stands where it has stood since before Hoenn had a name, and waits to see whether you are another century, or something new.'], who: 'NARRATOR' },
+    { arc: 'arc_regirock', stage: 'active' },
+    { wildBattleCatch: { species: 'regirock', level: 285, legendary: true } },
+    { arc: 'arc_regirock', stage: 'complete' },
+    { flag: 'arc_regirock_done' },
+    { toast: 'Regirock is yours. The tomb settles back into its long, unbothered silence.' },
+  ],
+  ev_hoenn_regice: [
+    { say: ['The inner chamber is a held breath of blue-white. The cold coming off the figure at its heart is not weather — it is a decision, made a very long time ago, to never melt. Crystals tick and settle in its surface like a slow clock.', 'Seven lights wake in its featureless face, one by one, the way stars come out. It has been cold for three thousand years. It can spare you a battle.'], who: 'NARRATOR' },
+    { arc: 'arc_regice', stage: 'active' },
+    { wildBattleCatch: { species: 'regice', level: 285, legendary: true } },
+    { arc: 'arc_regice', stage: 'complete' },
+    { flag: 'arc_regice_done' },
+    { toast: 'Regice is yours. Behind you, the cave\'s cold softens by one honest degree.' },
+  ],
+  ev_hoenn_registeel: [
+    { say: ['The inner chamber gleams dully, every surface worn smooth by centuries of stillness. At its heart, something the colour of old iron unfolds from a crouch it has held since the cliff above was young — slowly, joint by joint, like a gate deciding to be a guardian instead.', 'Seven lights arrange themselves in its face. The metal of it is wrong for any forge: too dark, too patient, fallen out of the sky before there were smiths to wonder at it.'], who: 'NARRATOR' },
+    { arc: 'arc_registeel', stage: 'active' },
+    { wildBattleCatch: { species: 'registeel', level: 285, legendary: true } },
+    { arc: 'arc_registeel', stage: 'complete' },
+    { flag: 'arc_registeel_done' },
+    { toast: 'Registeel is yours. The tomb\'s gleam dims, its long watch handed over.' },
+  ],
+  // Latias: the roaming face — fired by the sysLoadMap roam hook
+  // when the player enters whichever staged landing she currently
+  // holds (the rotation rides the persisted walked-step counter).
+  ev_hoenn_latias: [
+    { say: ['You almost miss her — the light here has a red edge to it that light should not have, and then the air folds, and she is simply THERE: small, bright, curious, hanging a wingspan away with her head tipped like a question.', 'She has crossed half of Hoenn ahead of you and behind you, outrunning weather and rumour alike, and now she has stopped running — not cornered, never cornered. Choosing. The choice, apparently, is a battle.'], who: 'NARRATOR' },
+    { arc: 'arc_latias', stage: 'active' },
+    { wildBattleCatch: { species: 'latias', level: 290, legendary: true } },
+    { arc: 'arc_latias', stage: 'complete' },
+    { flag: 'arc_latias_done' },
+    { toast: 'Latias is yours. The red streak over Hoenn has a name in your log now — and a home.' },
+  ],
+  // Latios: the event face at the Eon stop (the Shoal Cave island
+  // shore on Route 125), fired by the sysOnStep shore hook.
+  ev_hoenn_latios: [
+    { say: ['The island\'s shore is quiet in the particular way of a place that is waited-in. Then the water offshore stands up in a clean blue line, and the line has wings, and the wings have opinions about you.', 'Latios folds out of his own speed at the tideline and regards you with the bright, measuring calm of something that has watched this shore for a very long time, waiting to see who would finally think to land on it.'], who: 'NARRATOR' },
+    { arc: 'arc_latios', stage: 'active' },
+    { wildBattleCatch: { species: 'latios', level: 290, legendary: true } },
+    { arc: 'arc_latios', stage: 'complete' },
+    { flag: 'arc_latios_done' },
+    { toast: 'Latios is yours. The Eon stop keeps its quiet — it is just sharing it now.' },
+  ],
+  ev_hoenn_groudon: [
+    { say: ['The hideout\'s foundry floors are cold. Its owners are gone. But the magma pool at the back of the deep chamber is NOT cold, and it is not still, and as you come down the last slope it begins, unmistakably, to rise.', 'It withdrew here when the sky settled its argument — back to the earth\'s own heat, to sleep the way continents sleep. It is not asleep now. The pool stands up in red-black armour, and the whole mountain remembers whose house this actually is.'], who: 'NARRATOR' },
+    { arc: 'arc_groudon', stage: 'active' },
+    { wildBattleCatch: { species: 'groudon', level: 298, legendary: true } },
+    { arc: 'arc_groudon', stage: 'complete' },
+    { flag: 'arc_groudon_done' },
+    { toast: 'Groudon is yours. The magma pool settles, ordinary as a forge at closing time.' },
+  ],
+  ev_hoenn_kyogre: [
+    { say: ['The trench water below the dive light is doing something water should not do: it is holding a shape. A vast shape. The shape opens one eye the size of a porthole in the blue dark, and the pressure of its attention arrives a half-second before the sight of it does.', 'It sleeps here, in the deep it nearly drowned the world with — and it has decided, in the unhurried way of tides, to see what the trainer who ended the deluge actually is. The trench holds its breath. So does everything in it.'], who: 'NARRATOR' },
+    { arc: 'arc_kyogre', stage: 'active' },
+    { wildBattleCatch: { species: 'kyogre', level: 298, legendary: true } },
+    { arc: 'arc_kyogre', stage: 'complete' },
+    { flag: 'arc_kyogre_done' },
+    { toast: 'Kyogre is yours. The trench exhales, slow as a sleeping tide.' },
+  ],
+  // The catch face — NOT ev_hoenn_rayquaza (that was the climax
+  // appearance, an uncatchable descent). This is the return ascent.
+  ev_hoenn_rayquaza_face: [
+    { say: ['The pillar is quieter than your first climb — no argument below for its sleeper to settle, only wind, coming home to roost. At the summit the ring of old stone is empty for exactly one heartbeat.', 'Then the sky folds, green as deep water seen from above, and Rayquaza is coiled in its ring again, considering you with the total, courteous attention of the oldest thing in Hoenn\'s sky. It descended once for the world. This time, it has come down for you.'], who: 'NARRATOR' },
+    { arc: 'arc_rayquaza', stage: 'active' },
+    { wildBattleCatch: { species: 'rayquaza', level: 300, legendary: true } },
+    { arc: 'arc_rayquaza', stage: 'complete' },
+    { flag: 'arc_rayquaza_done' },
+    { toast: 'Rayquaza is yours. The summit wind, for once, has nothing to say.' },
+  ],
+  // Jirachi I: the star fall, witnessed at Meteor Falls once the
+  // Space Center\'s news is in hand (entry gate in sysLoadMap).
+  ev_hoenn_jirachi_witness: [
+    { say: ['The falls are loud the way they always are — and then, for exactly three seconds, they are not the loudest thing in the cave. Light comes down the north shaft in a clean white line, unhurried, deliberate: a star, falling indoors, on appointment.', 'It lands beyond the lower falls without a sound, and the spray where it fell keeps glowing faintly, like the water is remembering it. The Space Center said a Wish Maker wakes beneath the comet. The comet, it seems, has sent a piece of itself ahead — down there. By the meteorstone. Go and be polite.'], who: 'NARRATOR' },
+    { arc: 'arc_jirachi', stage: 'active' },
+    { flag: 'jirachi_star_fell' },
+    { toast: 'A star fell at Meteor Falls. Something small is waking by the lower falls.' },
+  ],
+  // Jirachi II: the wish beat at the lower-falls meteorstone
+  // (13,11), fired by the meteorstone interact once the star fell.
+  ev_hoenn_jirachi: [
+    { say: ['The meteorstone is warm. Curled against it, no bigger than a secret, is a small yellow shape with streamers like ribbons on a parcel — asleep on its feet, swaying, humming a note you feel in your teeth more than hear.', 'One eye opens. Then the other. Then the third one — the true one, in its belly, the one that hears wishes the way ears hear thunder — and the little Wish Maker looks at you, looks at the comet going over far above, and makes a decision older than the Space Center, older than the falls: a wish is only real if somebody has to work for it. Catch, then. Earn the wish.'], who: 'NARRATOR' },
+    { arc: 'arc_jirachi', stage: 'active' },
+    { wildBattleCatch: { species: 'jirachi', level: 292, legendary: true } },
+    { arc: 'arc_jirachi', stage: 'complete' },
+    { flag: 'arc_jirachi_done' },
+    { toast: 'Jirachi is yours. Somewhere above the falls, a comet files the wish away under "answered".' },
+  ],
+  // Deoxys: the crater face at the north-chamber meteorite (21,4),
+  // fired by the meteorstone interact once the rumour is in hand.
+  ev_hoenn_deoxys: [
+    { say: ['The crater meteorite is not warm the way sun-warmed stone is warm. It is warm the way a held hand is warm — recently, and on purpose. As you reach it, the stone\'s heart answers with light: a core of orange fire, unfolding out of the rock in limbs that cannot decide what shape honesty requires.', 'It came down with the old shower, before there were falls to name it by, and it has been rehearsing shapes ever since — waiting for an audience worth the performance. The rehearsals are over. This is the performance.'], who: 'NARRATOR' },
+    { arc: 'arc_deoxys', stage: 'active' },
+    { wildBattleCatch: { species: 'deoxys', level: 295, legendary: true } },
+    { arc: 'arc_deoxys', stage: 'complete' },
+    { flag: 'arc_deoxys_done' },
+    { toast: 'Deoxys is yours. The crater stone goes quiet — its tenant has moved into your party.' },
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// HOENN_LEGENDARY_ARCS — Stage H6. The ten Hoenn legendary arcs,
+// folded into LEGENDARY_ARCS by merge.mjs exactly the way Johto's
+// fold works (one arcs table, one quest log). Object.assign order
+// makes these LIVE entries supersede the designed stubs in
+// story-kanto.mjs — the stubs' lair ids ('deserttomb', 'skypillar',
+// 'birthisland', 'forina') never existed as maps, their levels (40/70)
+// predate the arc bands, and arc_rayquaza's designed prereq
+// ({ arcs: [kyogre, groudon] }) is superseded by the H4b ruling: the
+// trio + Rayquaza key off the `climax_resolved` flag alone.
+//
+// Shared laws (all ten arcs):
+//  - Every face uses the catch-only wildBattleCatch chain: flee OR
+//    KO stalls the event with nothing set, so the encounter re-fires
+//    until the species is CAUGHT. Arc completion = the catch.
+//  - The Regi tombs are SELF-CONTAINED: there is no Sealed Chamber
+//    map in the shipped Hoenn, so no cross-tomb prerequisite chain
+//    exists — each tomb's own inscription is its only key (the
+//    simplification is recorded in the register).
+//  - Levels sit in Hoenn's late band: Regis 285, the Eon pair 290,
+//    Jirachi 292, Deoxys 295, the titans 298, Rayquaza 300 (ceiling).
+// ---------------------------------------------------------------------------
+export const HOENN_LEGENDARY_ARCS = {
+  arc_regirock: {
+    id: 'arc_regirock', title: 'The Tomb in the Sand', species: 'regirock', region: 'Hoenn',
+    hook: 'Under the Route 111 desert, a sand-drowned chamber keeps a tenant older than the road above it — and its door is a riddle about patience.',
+    steps: [
+      { text: 'Read the dotted inscription on the stone by the Desert Ruins door', flag: 'regi_rock_read' },
+      { text: 'Stand before the sealstone and wait out the six slow breaths it asks for', flag: 'regi_rock_open' },
+      { text: 'Face Regirock, level 285, beyond the parted sealstones', catch: 'regirock' },
+    ],
+    lair: 'desert-ruins',
+  },
+  arc_regice: {
+    id: 'arc_regice', title: 'The Tomb in the Ice', species: 'regice', region: 'Hoenn',
+    hook: 'Inside the Route 105 island rock, a chamber floored in old ice keeps its tenant the way winter keeps a lake — and its door is a riddle about order.',
+    steps: [
+      { text: 'Read the dotted inscription on the stone by the Island Cave door', flag: 'regi_ice_read' },
+      { text: 'Greet the chamber\'s two boulders in the inscription\'s order — west first, then east', flag: 'regi_ice_open' },
+      { text: 'Face Regice, level 285, beyond the parted sealstones', catch: 'regice' },
+    ],
+    lair: 'island-cave',
+  },
+  arc_registeel: {
+    id: 'arc_registeel', title: 'The Tomb in the Ruin', species: 'registeel', region: 'Hoenn',
+    hook: 'A cliff chamber east of the rain road, older than any map of Hoenn. Its door is a riddle about kinship: iron opens to iron.',
+    steps: [
+      { text: 'Read the dotted inscription on the stone by the Ancient Tomb door', flag: 'regi_steel_read' },
+      { text: 'Press your hand to the sealstone with a Steel-type partner standing beside you', flag: 'regi_steel_open' },
+      { text: 'Face Registeel, level 285, beyond the parted sealstones', catch: 'registeel' },
+    ],
+    lair: 'ancient-tomb',
+  },
+  arc_latias: {
+    id: 'arc_latias', title: 'The Red Streak Over Hoenn', species: 'latias', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'Since the titans settled, something red, kind and impossibly fast has been crossing Hoenn\'s routes and waters — landing, watching, and moving on. It is not fleeing. It is deciding where to be met.',
+    steps: [
+      { text: 'End the clash of the weather titans — she only came down once the sky was safe', flag: 'climax_resolved' },
+      { text: 'Meet Latias, level 290, where she lands — her landings turn with your walking: Routes 110, 118, 123, the Route 127 sea and Route 134, in turn', catch: 'latias' },
+    ],
+    lair: 'hoenn-routes',
+  },
+  arc_latios: {
+    id: 'arc_latios', title: 'The Jet Over the Water', species: 'latios', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'Fishermen keep reporting the same impossible thing: a blue jet-shaped shadow that outruns their boats — except at one quiet shore, where it slows, and waits.',
+    steps: [
+      { text: 'End the clash of the weather titans — he only slowed down once the sea was calm', flag: 'climax_resolved' },
+      { text: 'Land on the Shoal Cave island on Route 125 — the Eon stop — and face Latios, level 290, at its tideline', catch: 'latios' },
+    ],
+    lair: 'r125',
+  },
+  arc_groudon: {
+    id: 'arc_groudon', title: 'The Land That Wants Everything', species: 'groudon', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'When the sky settled the argument, the land\'s answer did not die and was not caught — it withdrew, sullen and alive, to the earth\'s own heat.',
+    steps: [
+      { text: 'End the clash of the weather titans at the Sky Pillar', flag: 'climax_resolved' },
+      { text: 'Return to the deep chamber of Team Magma\'s old hideout and face Groudon, level 298, risen from its magma pool', catch: 'groudon' },
+    ],
+    lair: 'magma-hideout',
+  },
+  arc_kyogre: {
+    id: 'arc_kyogre', title: 'The Sea That Wants Everything', species: 'kyogre', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'The deluge ended, but the sea\'s answer was never caught — it sleeps now in the deep it nearly drowned the world with, and it knows your name.',
+    steps: [
+      { text: 'End the clash of the weather titans at the Sky Pillar', flag: 'climax_resolved' },
+      { text: 'Dive the Route 127 trench and face Kyogre, level 298, in the deep (Mind Badge + a partner who knows Dive)', catch: 'kyogre' },
+    ],
+    lair: 'r127-underwater',
+  },
+  arc_rayquaza: {
+    id: 'arc_rayquaza', title: 'The Sky Settles It', species: 'rayquaza', region: 'Hoenn',
+    prereq: 'climax_resolved',
+    hook: 'It descended once, for the world, and asked nothing. The summit keeps its ring of old stone — and the sleeper, the wardens say, has started watching the road up.',
+    steps: [
+      { text: 'End the clash of the weather titans — the descent was an appearance, not a meeting', flag: 'climax_resolved' },
+      { text: 'Climb the Sky Pillar again and face Rayquaza, level 300, at the summit', catch: 'rayquaza' },
+    ],
+    lair: 'sky-pillar',
+  },
+  arc_jirachi: {
+    id: 'arc_jirachi', title: 'The Thousand-Year Wish', species: 'jirachi', region: 'Hoenn',
+    hook: 'A comet is crossing Hoenn, and the Space Center\'s oldest file says a Wish Maker wakes beneath it — briefly, and only for wishes worth working for.',
+    steps: [
+      { text: 'Ask Researcher Orbit at the Mossdeep Space Center about the comet crossing Hoenn', flag: 'arc_jirachi_news' },
+      { text: 'Witness the star fall at Meteor Falls', flag: 'jirachi_star_fell' },
+      { text: 'Follow the fallen light to the meteorstone by the lower falls and face Jirachi, level 292 — earn the wish', catch: 'jirachi' },
+    ],
+    lair: 'meteor-falls',
+  },
+  arc_deoxys: {
+    id: 'arc_deoxys', title: 'The Triangle That Moves', species: 'deoxys', region: 'Hoenn',
+    hook: 'Something fell with the old meteor shower at Meteor Falls and never cooled. The Space Center tracks it the way you track weather: respectfully, and from a distance.',
+    steps: [
+      { text: 'Hear the Space Center\'s rumour from Researcher Orbit in Mossdeep', flag: 'arc_deoxys_rumor' },
+      { text: 'Face Deoxys, level 295, at the crater meteorite in Meteor Falls\' north chamber', catch: 'deoxys' },
+      { text: 'Return to the meteorite with Deoxys in your party — it remembers every shape it has ever been', flag: 'deoxys_forme_touched' },
+    ],
+    lair: 'meteor-falls',
+  },
 };
 
 // ---------------------------------------------------------------------------

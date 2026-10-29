@@ -9361,3 +9361,225 @@ validateSave.
 - `state.contest.ribbons` is the ONLY new state; a ribboned
   save round-trips both validators (A13/B10). Nothing in H5
   touches story flags, badges, or May's dressing.
+
+## Arc 3 Stage H6 — Hoenn legendary arcs ×10: the Regi tombs, the Eon pair, the weather trio catches, Jirachi, Deoxys + the meteorite forme switch (2026-10-29)
+
+Stage H6 ships the ten Hoenn legendary arcs on the shipped
+legendary-arc pattern (J5 precedent throughout): quest-log entries
+with stated requirements in the ONE LEGENDARY_ARCS table, an
+in-fiction gate per arc, and a `{ wildBattleCatch }` face — flee AND
+KO stall the event with nothing set and nothing consumed, so every
+encounter re-fires until the catch; arc completion = the catch, and
+the dex registers it. `HOENN_LEGENDARY_ARCS` (story-hoenn.mjs) folds
+into LEGENDARY_ARCS via merge.mjs, superseding all ten
+story-kanto.mjs designed stubs (dead lair ids `deserttomb` /
+`islandcave` / `ancienttomb` / `caveoforigin` / `skypillar` /
+`hoennsearoutes` / `southernisland` / `forina` / `birthisland`,
+pre-band levels 40/70). No new save state anywhere in this stage:
+every gate reads story flags the campaign already writes, plus the
+persisted `stepsTotal` counter (J6) for the Latias rotation.
+tables.json needed NO regen (the stubs had pre-registered all ten
+arc ids in the validator's quest vocabulary; gen-tables --check
+stays green untouched).
+
+### Per-arc staging table
+
+| Arc | Gate | Location (trigger) | Lv |
+|---|---|---|---|
+| Regirock | inscription + the standing beat | desert-ruins inner chamber (sealstone interact / chamber step) | 285 |
+| Regice | inscription + the greeting order (west boulder, then east) | island-cave inner chamber (boulder + sealstone interacts / chamber step) | 285 |
+| Registeel | inscription + iron-to-iron (Steel-type partner in party) | ancient-tomb inner chamber (sealstone interact / chamber step) | 285 |
+| Latias | `climax_resolved` + be on her current landing | ROAMS: r110 → r118 → r123 → r127 → r134 (sysLoadMap) | 290 |
+| Latios | `climax_resolved` + step onto the island shore | r125, the Shoal Cave island (x12–18, y4–8) — the Eon stop (sysOnStep) | 290 |
+| Groudon | `climax_resolved` | magma-hideout, the deep chamber / magma pool (sysLoadMap entry) | 298 |
+| Kyogre | `climax_resolved` (+ Dive by construction) | r127-underwater, the deep trench (sysLoadMap entry) | 298 |
+| Rayquaza | `climax_resolved` | sky-pillar summit (sysLoadMap entry; `ev_hoenn_rayquaza_face`, NOT the H4b appearance event) | 300 |
+| Jirachi | Space Center news → witness the star fall → the wish beat | mossdeep (ORBIT) → meteor-falls entry → meteorstone (13,11) | 292 |
+| Deoxys | Space Center rumour → the crater meteorite | meteor-falls meteorstone (21,4); the same stone is the forme switch | 295 |
+
+### The Regi puzzles (one per tomb, all original)
+
+Each tomb carries its inscription on the stone by the door (the
+H3b sign tile at (9,11), intercepted in sysInteract): original
+riddle text in a braille-FLAVOURED presentation — raised-dot
+writing the narration translates in our own words; our text, our
+puzzles, no canonical inscription is reproduced. The seal itself
+is enforced in sysOnStep: the sealstone row (y=5) has its single
+floor gap at x=8 (H3b's seam), and stepping north of the row
+(y ≤ 4) unsolved meets the seal — narration + a step back south
+(the Route Silver gate idiom: turned back, never stuck). Solved,
+the same step meets the Regi.
+
+- **Desert Ruins — the standing beat.** "THE STONE REMEMBERS WHO
+  WAITS… LET THE DESERT COUNT SIX SLOW BREATHS. THE IMPATIENT
+  KNOCK FOREVER." Read, then face the sealstone and choose to
+  stand and wait (the shipped choice idiom carries the beat; the
+  narration counts the six breaths) → `regi_rock_open`, the
+  sealstones part, the face fires.
+- **Island Cave — the greeting order.** "GREET THE WEST STONE
+  FIRST, WHERE THE DOOR'S WIND FALLS. GREET THE EAST STONE
+  SECOND… REVERSE THE GREETING, AND THE COLD FORGETS YOU."
+  Interact the outer chamber's two boulders in order — west
+  (2,12), then east (14,11). East-first is politely forgotten
+  (no progress kept); west-then-east sets `regi_ice_open`.
+- **Ancient Tomb — iron answers iron.** "LET A PARTNER OF LIVING
+  STEEL STAND WITH YOU, AND PRESS YOUR HAND TO THE SEAL."
+  Interact the sealstone with a living Steel-type in the party
+  (the shipped `partyHasType('steel')` field check) →
+  `regi_steel_open`. Without one, the seal names the missing
+  company and refuses.
+- **SIMPLIFICATION (recorded per the brief):** the tombs are
+  SELF-CONTAINED. There is no Sealed Chamber map in the shipped
+  Hoenn, so no cross-tomb prerequisite chain exists — each
+  tomb's inscription is its only key, and the designed stubs'
+  "Read the braille in the Sealed Chamber" first step is
+  superseded by reading the tomb's own door stone.
+
+### The Eon pair — the roaming call + the site call
+
+- **No roaming engine exists to ride.** The Johto beasts are
+  fixed lairs despite their trail-sign fiction; nothing in the
+  engine moves an encounter between maps. Per the brief's
+  fallback, Latias rides the lightest honest equivalent: five
+  staged landing maps whose turn is derived deterministically
+  from the PERSISTED walked-step counter — landing =
+  `landings[floor(stepsTotal / 50) % 5]`, cycling r110 → r118
+  → r123 → r127 (surface sea) → r134. Entering her current
+  landing (sysLoadMap, post-`climax_resolved` only) fires the
+  face; walking Hoenn turns her to the next landing, so a flee
+  genuinely loses her until the rotation comes round. No new
+  save fields; the rotation is a pure function of state that
+  already validates. The quest-log step names all five landings.
+- **Latios' site call: the Shoal Cave island, r125.** The east
+  seas' water routes are unbroken surf (r129–r134 hold only
+  one-tile sandbars), but r125 carries a real island landmass —
+  the Shoal Cave island (sand + cavefloor shore, x12–18 / y4–8)
+  — a lone island in the east seas with its own landing. The
+  fiction names it the Eon stop; the face fires on stepping
+  onto the shore apron, post-`climax_resolved`. **No Southern
+  Island map was built**: staging on an existing map did not
+  fail, so the permission was not used; Hoenn stays at 99 maps.
+
+### The weather trio, catchable at last
+
+All three key off the single post-climax flag `climax_resolved`
+(H4b's key flag, set only inside `ev_hoenn_rayquaza`) — NONE is
+reachable before it, and the suite asserts the absence on the
+same maps pre-flag. The H4b climax wrote NO catch state (titans
+were appearances only), so H6 opens every catch fresh:
+
+- **Groudon** withdrew to the earth's heat: the magma pool at
+  the back of the Magma Hideout's deep chamber (entry trigger).
+- **Kyogre** sleeps in the deep it nearly drowned the world
+  with: the r127 underwater trench — Dive-gated by construction
+  (the map is only reachable through the shipped Dive pair).
+- **Rayquaza** is met on the return ascent: the Sky Pillar
+  summit, in a NEW face event (`ev_hoenn_rayquaza_face`) — the
+  H4b climax visit was an appearance and its event is untouched.
+  Traversal is the shipped walking idiom; no crack-floor gimmick
+  exists or was added (H3b/H4b's recorded simplification stands).
+
+### Jirachi — the star chain (original writing)
+
+Mossdeep Space Center is the quest's information source, exactly
+as briefed: its facade researcher — SPACE RESEARCHER ORBIT, the
+shipped maps7 townsfolk — carries the briefing (a name-keyed
+sysNpc branch, the GARY precedent; NO interior exists and none
+is faked, and NO new actor was appended — hoenn-story's A22
+census of HOENN_NPCS stands undisturbed at 45). One conversation
+sets `arc_jirachi_news` + `arc_deoxys_rumor` and marks both arcs
+discovered. Then: enter Meteor Falls → the star fall is
+witnessed (`ev_hoenn_jirachi_witness`, dialogue-only, sets
+`jirachi_star_fell`) → follow the fallen light to the meteorstone
+by the lower falls (13,11) → the wish beat → the face, Lv 292.
+
+### Deoxys + the meteorite forme switch — RULING 2: THE REAL MECHANIC SHIPS
+
+The catch stages at Meteor Falls' crater (the Space Center apron
+carries the rumour instead — ORBIT, above): the crater meteorite
+at (21,4) in the north chamber fires the face once the rumour is
+in hand, Lv 295, Normal forme. After the catch, the SAME
+meteorite is the forme switch: interact with a Deoxys in the
+party → a menu of the four formes (current forme disabled) →
+`switchDeoxysForme` performs a speciesId swap among
+deoxys / deoxysattack / deoxysdefense / deoxysspeed in the
+evolution idiom — level, XP, nickname, keepsake (the engine's
+held-item slot), IVs, status and the move set are the
+individual's own and are NOT touched; maxHp/stats recompute from
+the new forme's base stats with HP carried by evolveMon's
+max-delta rule. The first switch sets `deoxys_forme_touched`
+(the arc's post-catch quest step).
+
+**The invariant check the brief demanded, by name:** the swap
+was audited against every invariant that could have forced the
+fallback, and none breaks — (i) all four speciesIds sit in
+tables.species with the shared dexNo 386, so dex/diploma
+accounting is forme-blind; (ii) save move legality is
+TABLE-scoped in both validators (a mon's moves must exist in
+the move table — they are NEVER checked against the species'
+learnset), so the individual's kept moves validate under every
+forme even though H1 authored the formes' learnsets as
+different slices of the one Psychic pool; (iii) the mon record's
+shape is species-agnostic (makeMon fields only). The suite
+proves the consequence, not just the argument: the switched
+Deoxys round-trips BOTH validators in EVERY forme (B12), and
+the full cycle preserves level/XP/nickname/keepsake/moves
+losslessly (B11). The Cheat-Terminal fallback was therefore
+NOT taken.
+
+### Suite
+
+- **tests/hoenn-legendary-checks.mjs: 24/24** (12 pure + 11
+  bundle + the node-side forme-validation check). Pure: the
+  live register (ids, steps, lairs, climax keying, the
+  superseded arcs-prereq), all ten face shapes on the
+  catch-only chain at their levels, the H3b tomb seam read back
+  from maps7, the staging tiles, the forme data, the tables
+  plumbing, band-ceiling validation. Bundle: EVERY arc driven
+  locked-before-its-gate → gate solved → flee → re-fire →
+  catch → arc complete + dex registered; the three puzzles
+  solved in-fiction (incl. the wrong-order and no-Steel
+  refusals); Latias met on r110, lost on the turn to r118,
+  caught on r123; the Deoxys cycle through all four formes.
+
+### Battery + build
+
+- qa-changed-flows exactly **{b2, d9}**; battle-model
+  **45/45** (HARD); campaign-smoke **24/24**; fidelity
+  **35/35**; hoenn-story **88/88**; hoenn-contest **28/28**;
+  johto-story **110/110**; johto-systems **62/62**;
+  arc-foundation **47/47**; Track B **114/114**; validator
+  **89** + fuzz **2000/2000** + save-contract **10/10**;
+  qa-slice exactly **{s6, l8}**; rejuv-phase2 exactly
+  **{A09, C01}** (verified as the same named inheritances);
+  cheat-shop 44/44 also green; budgets **all gates pass**;
+  `personal/` byte-identical (restored from HEAD after builds;
+  zero personal/ paths in the diff).
+- **public/game.js: 9,800,329 B (+43,199 vs H5)**; public
+  static total **9,962,951 B** vs the 10,100,000 B trigger —
+  **margin 137,049 B** (was 180,248 at H5 close; the spend is
+  the ten arcs' data + the tomb/meteorite/roam engine surface
+  + the suite-driven bundle growth, data-scale as projected —
+  no stop required).
+
+### For H7
+
+- All ten arcs are completable on a post-climax save
+  independently and in any order; the chain drive needs only
+  ONE legendary completion — Regirock is the cheapest honest
+  line (read the door stone at desert-ruins (9,11), face the
+  sealstone row and choose the wait, masterball). Jirachi's
+  chain is the longest (ORBIT → falls entry → stone (13,11)).
+- Latias' landing is a pure function of `stepsTotal`
+  (`floor(stepsTotal/50) % 5` over [r110, r118, r123, r127,
+  r134]) — the chain drive can set or walk the counter to aim
+  her; she is the one arc whose face cannot be forced by
+  position alone.
+- The Deoxys in the chain save will sit in a PC box if the
+  party is full when caught (catch delivery is the shipped
+  one); the meteorite switch reads the PARTY only — move it
+  into the party before interacting with the stone at (21,4).
+- Nothing in H6 fires before its gate on a campaign save:
+  every sysLoadMap/sysOnStep/sysInteract branch is keyed on
+  H6/H4b flags a true-path save only holds in order, and the
+  full hoenn-story true path re-ran green against them.

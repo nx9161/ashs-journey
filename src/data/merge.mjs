@@ -19,6 +19,12 @@ Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
 // story-kanto.mjs (its steps described an errand the shipped game
 // never told); arc_hooh was activated in place in LEGENDARY_ARCS.
 Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
+// Stage H6 fold: Hoenn's ten live legendary arcs (the Regi tombs,
+// the Eon pair, the weather trio + Rayquaza, Jirachi, Deoxys) —
+// every one supersedes its story-kanto.mjs designed stub (dead lair
+// ids, pre-band levels, and arc_rayquaza's arcs-prereq, replaced by
+// the climax_resolved flag key per the H4b ruling).
+Object.assign(LEGENDARY_ARCS, HOENN_LEGENDARY_ARCS);
 // Story patch (fidelity audit): the movie invite's island landing was
 // scripted out of bounds (8,14 on a 12-row map) — land on the shore (8,9).
 for (const ev of Object.values(EVENTS)) {
