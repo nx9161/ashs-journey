@@ -9583,3 +9583,216 @@ NOT taken.
   every sysLoadMap/sysOnStep/sysInteract branch is keyed on
   H6/H4b flags a true-path save only holds in order, and the
   full hoenn-story true path re-ran green against them.
+
+## Arc 3 Stage H7a — CAMPAIGN GATE: the continuous chain drive through Hoenn + the complete battery (2026-10-29)
+
+### 1. What this stage is
+
+Proof only — no game code changed. The independent chain drive
+(`~/workspace/ashs-journey-qa/arc-chain-qa/chain-drive.mjs`, 88/88
+through Johto at J7a) is extended through Arc 3 on **one continuous
+save**, and the **complete battery** is run without exception. Base:
+`main @ 01918eb` (H6). NOT pushed, NOT deployed.
+
+### 2. The chain drive: 123/123 on one save
+
+88 existing checks (C01–C40 + J01–J40 + D01–D08) + 35 new Hoenn
+checks (H01–H35), all green, exit 0. The save runs: Kanto complete
+→ Orange complete → Johto complete → Homecoming #3 (Hoenn hook;
+arc advances, embark armed — §3.1) → Vermilion embark (CAPT HOENN)
+→ Littleroot (Birch rescue, lab arrival, May met, Wally's first
+beat, Norman's deferral) → the spine in order: Roxanne (1) →
+Meteor Falls → Brawly (2) → Wattson (3) → **the Verdanturf contest
+ribbon won on this save** (the drive's own Snorlax, Hyper Beam ×4
+through the real counter → ContestScene → 4 move menus → 1st place
+→ `contest.ribbons == ['verdanturf']`) → Mt. Chimney → Flannery (4)
+→ Norman (5, the deferral paid off) → Weather Institute (Castform
+gift, dex 351) → Winona (6) → the twins (7) → Steven teaches Dive →
+**a Dive round-trip on the real r124 pair, the ascent proven
+unconditional** (Mind Badge and Dive knowledge stripped before
+surfacing, restored after; the return fired regardless) → Mt. Pyre
+orbs → Magma Hideout → Aqua Hideout → Seafloor Cavern (**drought
+read while set**: flag true, deluge unset, renderer heavy sun over
+a rain map, source climax) → the Sootopolis standoff (**deluge read
+while set**: drought cleared to false, deluge true, renderer heavy
+rain over an ash map; neither titan caught) → Sky Pillar (**both
+states cleared**, `climax_resolved`, renderer back to per-map
+fields) → Juan (8) → Victory Road (Wally's payoff) → the Ever
+Grande Conference (registration, both preliminaries, Morrison) →
+**Tyson faced** (this drive's honest branch: WON — the upset
+branch; completion rides the FACED predicate either way, the
+anime-true narrow loss stands as the other branch) → Scott's
+invitation at the conference → `hoenn_complete` → the Foundation
+machine fires (ARC COMPLETE card, `regionsDone` gains hoenn,
+Frontier directive pinned) → **the Regirock arc completed** (seal
+turn-back unsolved → door stone (9,11) read → the standing beat
+chosen at the sealstone → flee completes nothing → the seal
+re-fires → catch; quest complete, dex registers Regirock) → **the
+Deoxys forme switch exercised once** (ORBIT's rumour → the crater
+meteorite (21,4) → Lv295 catch, dex 386 → the same meteorite
+switches the party Deoxys to Attack forme preserving
+level/XP/nickname/keepsake/moves, `deoxys_forme_touched` set, and
+the save still validates with the switched forme) → ferry home
+(CAPT MERIDIAN, Slateport → Vermilion) → Homecoming (Scott's
+Frontier hook delivered, directive cleared, `story.arc` STILL
+hoenn, NO `embark_frontier` — the sealed law H4b designed, asserted
+as an absence).
+
+**End-state assertions (H35 + D08, on the final snapshot):**
+`regionsDone = [kanto, orange, johto, hoenn]` exactly;
+`badges.hoenn` = the 8 badges in canonical earn order (the full
+order asserted at H25 and again at H35); the Verdanturf ribbon
+held; dex caught includes Regirock and Deoxys (386, the Hoenn
+horizon; the drive's honest caught count is 13 — it never claimed
+a dex it didn't walk); Hoenn reads `complete` on the registry;
+the final save validates through **both** the server validator
+and the client schema (D08, whose snapshot now sits at the true
+end of the drive — the Hoenn leg re-stamps `__CHAINSAVE__` after
+H35, so D08 proves the Hoenn-complete file, not the Johto one).
+
+### 3. Two superseded checks, both named (the J7a C28 practice)
+
+At `01918eb` the unmodified J7a drive stood at **86/88**: exactly
+J29 and J31 failed, each with the H4a registry flip's signature.
+Both were A/B-verified against a stashed `eaac542` worktree: the
+original drive (original J29/J31 text restored, Hoenn section
+absent) passes **88/88 there**. Neither is a regression; both are
+the flip working as designed, and the stage suites prove the same
+flows (hoenn-story B02, johto-systems' band-floor hatch).
+
+1. **J29 — Homecoming #3 advances.** Written at J7a, when Hoenn
+   was sealed, it asserted the homecoming leaves `arc = johto`
+   with no embark. Since H4a shipped the arc, the same homecoming
+   advances `arc = hoenn` and arms `embark_hoenn` (the failure
+   extra read exactly `{hook: true, arc: 'hoenn'}`). J29 now
+   asserts the shipped behaviour, keeping its subject (hook
+   delivered, directive cleared).
+2. **J31 — the gift egg hatches at Lv201, not Lv101.**
+   `hatchMon` hatches at the CURRENT arc's band floor (a registry
+   read: `band.min` of `currentArcOf(state)`). The systems proofs
+   run after Homecoming #3, which now advances the arc — so the
+   floor the registry hands the hatch is Hoenn's 201, not Johto's
+   101 (the failure extra read exactly `smoochum lv201`). J31 now
+   asserts 201 and names the mechanism. The egg, the step hook,
+   the dex registration are unchanged and still proven.
+
+One drive-idiom fix, also named: H10's first run failed with
+`menus=0` because the contest entrant (Snorlax, party slot 5) had
+been left fainted by the H09 gym battles — a fainted entrant's
+party-menu row is disabled, so the counter pick never landed.
+`heal(g)` before the contest (the drive's own convention before
+every major beat) fixed it; no game code was at fault, and the
+re-run is 123/123.
+
+### 4. The complete battery (this tree, 2026-10-29)
+
+| Suite | Result | Note |
+|---|---|---|
+| chain-drive (H7a) | **123/123** | §2 above (88 + 35) |
+| qa-changed-flows | failures exactly **{b2, d9}** | standing set, name-for-name |
+| battle-model-checks | **45/45** | HARD GATE holds |
+| campaign-smoke | **24/24** | |
+| fidelity-checks | **35/35** | |
+| hoenn-story-checks | **88/88** | |
+| hoenn-contest-checks | **28/28** | |
+| hoenn-legendary-checks | **24/24** | |
+| johto-story-checks | **110/110** | |
+| johto-systems-checks | **62/62** | |
+| arc-foundation-checks | **47/47** | |
+| cheat-shop-checks | 44/44 | |
+| Track B (`run.mjs`) | **114/114** | |
+| validator.test | **89/89** | |
+| validator.fuzz.test | **2000/2000** | |
+| save-contract.test | **10/10** | |
+| qa-slice (verify-slice) | 132/134 | failures exactly **{s6, l8}** — §5.1 |
+| verify-slice (own checks) | 48/48 | |
+| rejuv-phase1-checks | 44/44 | |
+| rejuv-phase2-checks | 38/40 | failures exactly **{A09, C01}** — §5.2 |
+| rejuv-phase3-checks | 60/61 | C01 chromium-start, environmental |
+| rejuv-phase4-checks | 50/51 | C01 chromium-start, environmental |
+| rejuv-phase5-checks | 52/53 | C01 chromium-start, environmental |
+| rejuv-phase6-checks | 44/45 | C01 chromium-start, environmental |
+| orange-story / orange-climax | 38/38 · 42/42 | beyond the named list; run anyway |
+| audit-headless | 17/17 | |
+| config / failclosed / http-ip | 39/39 · 20/20 · 13/13 | beyond the named list; run anyway |
+| gen-tables --check | clean | tables.json OK (395 species, 144 moves, 168 items) |
+| budgets-check | all gates pass | §6 |
+
+### 5. Discrepancies — investigated to named causes
+
+**5.1 qa-slice {s6, l8} — standing, unchanged.** The identical
+pair recorded at J7a §5.1 (A/B-proven there to predate Johto at
+`445a195`); the failure texts are byte-identical this run. Not a
+Hoenn regression; the open standing item stands.
+
+**5.2 rejuv-phase2 A09 — standing; the assigned count did NOT
+move this mission.** A09 reads `assigned=115` at HEAD, and the
+A/B run in the stashed `eaac542` worktree reads `assigned=101`
+with the identical failure set {A09, C01} at the identical 38/40.
+The +14 delta is the Hoenn MAP_GROUND assignments landed by
+H3/H4 (gyms + landmarks, deliberate and proven by hoenn-story
+A10/A35) — the same growth-by-design J7a §5.2 and H4b recorded
+(107 → 115 during H4); it has not moved since H4b. C01 across
+phases 2–6 is the standing chromium cluster (the sandbox cannot
+start chromium; base-identical, per J7a §5.3).
+
+**5.3 The committed guest bundle is stale (pre-H5) — flagged,
+not silently rebuilt.** `verify-slice` rebuilds all targets; its
+fresh guest build differs from the committed
+`dist/standalone.html` (198,516 B larger; first divergence at the
+H5 module-order change — the committed bundle has no
+`contest.mjs` segment). The vercel build, by contrast, reproduced
+the committed `public/game.js` **byte-identically** (§6), so this
+is staleness, not nondeterminism: the tree's guest bundle was
+last built before H5, the same class of finding J7a §5.4 recorded
+for `personal/`. `dist/` and `personal/` were both restored from
+HEAD after the battery; whether the guest/personal editions get
+a deliberate rebuild is an owner call, recorded here rather than
+taken. (`personal/game.js` sha256 **f434ba63…**, re-verified
+after restore — byte-identical, zero personal/ paths in this
+stage's diff.)
+
+### 6. Hoenn-close accounting vs H0 (the pack decision's closing audit)
+
+Fresh build this stage (vercel, then guest), from unmodified
+`01918eb` source:
+
+- **`public/game.js`: 9,800,329 B** — byte-identical to the H6
+  close (sha256 `4daaf7f4…`; `git status` clean on `public/`
+  after the rebuild: the build is deterministic and this stage
+  changed no game code).
+- **Vercel static total** (the stage-register basis since H1:
+  every file Vercel serves from `public/` — game.js 9,800,329 +
+  index.html 91,560 + admin.html 52,951 + admin.js 18,111):
+  **9,962,951 B — identical to the H6 close**, the number of
+  record for Hoenn close.
+- **Vs the 10,100,000 B re-open trigger: NOT crossed.** Margin
+  **137,049 B**. The pack stage does not re-open.
+- **Vs the H0 projection:** H0 measured on its own narrower basis
+  (game.js + index.html only), under which this same build reads
+  **9,891,889 B** — **+18,924 B (+0.19%) over the central
+  projection 9,872,965**, comfortably inside the projected band
+  **9,823,613–9,982,310**. On the stage-register basis the
+  9,962,951 total also sits inside that band (19,359 B under its
+  top). Either basis: Hoenn closes inside the H0 band, under the
+  trigger, on the monolith H0 chose. The Arc-5 pack mandate and
+  the Sinnoh-close thin margin recorded by H0 are untouched by
+  anything in Arc 3.
+
+### 7. Close state
+
+- Changes in this stage: the chain drive (QA workspace, not a
+  git tree — as at Foundation and J7a) + this register section.
+  No game-code changes; no defect was exposed by the drive (the
+  one drive failure encountered was the harness's own fainted
+  entrant, §3). NOT pushed, NOT deployed.
+- `personal/` byte-identical (sha256 f434ba63…).
+
+**Arc 3 Hoenn is campaign-proven: one save, Kanto → Orange →
+Johto → Hoenn → home, every badge in order, the climax's two
+weather states witnessed and cleared, a ribbon, a Dive round-trip,
+two legendary arcs (Regirock; Deoxys + its forme switch) closed
+on the same file, and the full battery at its named counts. The
+Foundation machine needed to learn nothing new: the Hoenn
+completion, card, directive, ferry and sealed-Frontier homecoming
+all rode the shipped machinery.**
