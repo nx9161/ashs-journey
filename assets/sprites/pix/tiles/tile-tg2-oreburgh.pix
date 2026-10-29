@@ -1,0 +1,25 @@
+# Stage S3a: oreburgh town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-oreburgh 16 16
+bccbcccbccbcccba
+cccccbaccaacbaac
+cacbbabccabaaacb
+cbcccaebbbcccccb
+cccccabcbccaabca
+cbccbccccccbccac
+cabbbccccbacaccb
+bacccccbacaacabc
+accaabcccaaabbca
+cccbaaacaebeaceb
+cbccccacbbcacaab
+caaccabcacceabcb
+accbbccccaebcacc
+aabccaabcbccccca
+bbcbeaabcaacccba
+caccabacceacbcbc
+PAL
+a #9c6644 oreburgh-ground
+b #7a5035 ground-dark
+c #b87850 ground-light
+d #f0a848 town-accent
+e #5a7a9a town-accent-2
+f #5e3d29 ground-deep

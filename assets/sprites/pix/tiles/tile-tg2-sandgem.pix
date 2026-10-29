@@ -1,0 +1,25 @@
+# Stage S3a: sandgem town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-sandgem 16 16
+bccccccbacaaccbc
+eccccbceecccbccb
+cccbcbccacbaaccc
+cbaccbccbcccaceb
+ecccccbbbcbcabcc
+acccbcccaacbcccc
+aabccaabcbbcacac
+bccaeacbccaccaba
+aaaccbcaeaccbccc
+aacbecccccbccacc
+abaaabacbcccceab
+ceaacabecacccbcc
+ccccbccacacbbccc
+cebbacccabbccccc
+bccbcacbcccccabc
+bbcccbccceccbaca
+PAL
+a #d6c98a sandgem-ground
+b #a79d6c ground-dark
+c #fdeda3 ground-light
+d #4a90c0 town-accent
+e #e8f0f8 town-accent-2
+f #807953 ground-deep

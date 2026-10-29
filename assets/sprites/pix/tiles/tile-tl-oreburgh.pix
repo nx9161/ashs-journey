@@ -1,0 +1,24 @@
+# Stage S3a: oreburgh landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-oreburgh 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #a86e49 oreburgh-landmark-wall
+b #6d4730 landmark-trim
+d #f0a848 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

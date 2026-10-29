@@ -1,0 +1,23 @@
+# Stage S3a: floaroma house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-floaroma 16 16
+bbbbbbbbbbbbbbbb
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaahgggaaaaaaaaa
+abbggggbaaaaaaaa
+baaggggaaaaaaaaa
+aaaggggaaaaaaaab
+aaaggggaaaaaaaaa
+aaabbbbaaaaaaaba
+aaaaaaaaaaabaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaba
+bbaaaaaabaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #fb96be floaroma-house-wall
+b #a2617b house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

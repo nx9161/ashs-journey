@@ -1,0 +1,25 @@
+# Stage S3a: hearthome town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-hearthome 16 16
+bacbbacbcecababc
+cbccbbacccacbaaa
+cbcbbaccccbebaec
+abaaccccbcececcb
+ccbcccbbcaccbbac
+accabccabacbcecc
+cabccbbacbccaacc
+bccacccbeaccbcbb
+accccbceccacbacc
+ccbbccaaccbaccac
+cbaaabcabacaaacb
+cccaacbacacabbcc
+aaccbcbcaabbcacc
+acbcbaaccbcbeabc
+bccaaccbacbaccbc
+cccccbcebbabbacc
+PAL
+a #c9a227 hearthome-ground
+b #9d7e1e ground-dark
+c #edbf2e ground-light
+d #8a5ab0 town-accent
+e #f0e6f8 town-accent-2
+f #796117 ground-deep

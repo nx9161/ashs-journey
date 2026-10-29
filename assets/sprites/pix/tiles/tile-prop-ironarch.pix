@@ -1,0 +1,22 @@
+# Stage S3a: ironarch — riveted drawbridge ironwork of Canalave (prop).
+PIX tile-prop-ironarch 16 16
+................
+................
+................
+..caacaacaacac..
+..aaaaaaaaaaaa..
+..aa........aa..
+..aa........aa..
+..ac........ca..
+..aa........aa..
+..aa........aa..
+..aa........aa..
+..ac........ca..
+..aabbbbbbbbaa..
+................
+................
+................
+PAL
+a #46586e bridge-iron
+b #2e3c4c bridge-iron-dark
+c #9ac8e8 bridge-rivet

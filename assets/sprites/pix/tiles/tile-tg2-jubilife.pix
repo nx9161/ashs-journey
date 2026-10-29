@@ -1,0 +1,25 @@
+# Stage S3a: jubilife town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-jubilife 16 16
+bccbacabacbcbcba
+ccccebcaccacbcac
+cccbacbaccbcaeec
+bbccaaacbccccccb
+aacacabcccaccbac
+ccbcbccceccbbbcc
+bbbbcccaebcecacc
+bcccccabcccccaba
+aecccbcacaacbcce
+eccbaaccbbbcccac
+abbbecccbaacaccb
+ccbbcbbcacacabca
+cbccbacaceabcccc
+ccbcebaccbccccac
+bccccccbacccacba
+cccbebcceccabecc
+PAL
+a #8a94a6 jubilife-ground
+b #6c7381 ground-dark
+c #a3afc4 ground-light
+d #f0c030 town-accent
+e #e85a7a town-accent-2
+f #535964 ground-deep

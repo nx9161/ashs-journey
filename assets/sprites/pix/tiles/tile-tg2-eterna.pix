@@ -1,0 +1,25 @@
+# Stage S3a: eterna town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-eterna 16 16
+bccccccbcacababa
+bcccabbcacacbacc
+cecbaccaacbacccc
+abbcabecbeccceab
+aaccbbbaebcccbbc
+acecbccccccbabcc
+cabcccaccbccccaa
+becbcbcbacaccabc
+cabacbccccccbcac
+aacbacccbcbbacac
+cbecacccbbccabab
+ccccccbccbaccbae
+ccacbcaecacbccaa
+babccaaccbacaaaa
+bccacbcbcccccabc
+acacabcccabcbccc
+PAL
+a #4f772d eterna-ground
+b #3e5d23 ground-dark
+c #5d8c35 ground-light
+d #c8a24a town-accent
+e #e8e4da town-accent-2
+f #2f471b ground-deep

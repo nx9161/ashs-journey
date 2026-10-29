@@ -1,0 +1,25 @@
+# Stage S3a: twinleaf town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-twinleaf 16 16
+bbcccccbbccccbba
+ceceebccccecbaac
+bccbcccaccbccceb
+cbcecaecbaaaccbb
+baccabbcaacacbac
+ecccbcccacabacac
+cbbcbaacabbaebee
+bccbeaabbacecabb
+caaecbeccaccbccb
+aacbcccccabccacc
+cbaeccccbbbbbbab
+ccabcabcccbcebcc
+acacbacbcabbacca
+cabacceabbccccbb
+baccbcabccccacbb
+ccaacbeecaccbcce
+PAL
+a #7fb069 twinleaf-ground
+b #638952 ground-dark
+c #96d07c ground-light
+d #f2cc8f town-accent
+e #e07a5f town-accent-2
+f #4c6a3f ground-deep

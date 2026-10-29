@@ -12,7 +12,7 @@
 
 import { ART } from '../../assets/sprites/art-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
-import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER } from './tiles.mjs';
+import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, SINNOH_TOWN_ORDER } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 import { battlerDrawSize } from '../data/battler-tiers.mjs';
 
@@ -470,6 +470,9 @@ for (const k of H3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 3 Stage H3b: Hoenn east/water kinds — same convention as H3a.
 for (const k of [...H3B_WALL_KINDS, ...H3B_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of H3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Arc 4 Stage S3a: Sinnoh kinds — same convention as H3/H3b.
+for (const k of [...S3_WALL_KINDS, ...S3_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
+for (const k of S3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -508,6 +511,7 @@ for (const t of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
   'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo']) FACADE_GROUPS['tw-' + t] = 'house';
 for (const t of JOHTO_TOWN_ORDER) FACADE_GROUPS['tw-' + t] = 'house';
 for (const t of HOENN_TOWN_ORDER) FACADE_GROUPS['tw-' + t] = 'house';
+for (const t of SINNOH_TOWN_ORDER) FACADE_GROUPS['tw-' + t] = 'house';
 for (const k of ['wall-house-lit', 'wall-house-unlit', 'wall-house-plain',
   'wall-wood-lit', 'wall-brick-lit', 'wall-brick-plain']) FACADE_GROUPS[k] = 'house';
 FACADE_GROUPS['wall-center'] = 'center';
@@ -553,6 +557,16 @@ for (const id of JOHTO_TOWN_ORDER) {
 }
 // Arc 3 Stage H3a: Hoenn town identity kinds -> their authored tiles
 // (same resolver prefix branches as Johto).
+for (const id of SINNOH_TOWN_ORDER) {
+  TILE_ART['tg-' + id] = 'tile-tg-' + id;
+  TILE_ART['tg2-' + id] = 'tile-tg2-' + id;
+  TILE_ART['tc-' + id] = 'tile-tc-' + id;
+  TILE_ART['td-' + id] = 'tile-td-' + id;
+  TILE_ART['tr-' + id] = 'tile-tr-' + id;
+  TILE_ART['tl-' + id] = 'tile-tl-' + id;
+  TILE_ART['th-' + id] = 'tile-th-' + id;
+  TILE_ART['tw-' + id] = 'tile-tw-' + id;
+}
 for (const id of HOENN_TOWN_ORDER) {
   TILE_ART['tg-' + id] = 'tile-tg-' + id;
   TILE_ART['tg2-' + id] = 'tile-tg2-' + id;
@@ -791,6 +805,7 @@ export function buildArtTileCache(doc) {
   for (const k of J3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of H3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   for (const k of H3B_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  for (const k of S3_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
   cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
   // P-1 side walls: the SAME authored art rasterized through a palette
   // swap that darkens every hex by one full shade step (x0.72 — the
@@ -942,6 +957,7 @@ for (const k of O1_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of J3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of H3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 for (const k of H3B_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
+for (const k of S3_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
@@ -966,9 +982,11 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Arc 3 Stage H3a: Hoenn props composite over their ground too.
   ...H3_PROP_KINDS,
   // Arc 3 Stage H3b: Hoenn east props composite over their ground too.
-  ...H3B_PROP_KINDS]);
+  ...H3B_PROP_KINDS,
+  // Arc 4 Stage S3a: Sinnoh props composite over their ground too.
+  ...S3_PROP_KINDS]);
 export function groundFamilyOf(kind) {
-  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B floors are own families
+  if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3 floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||

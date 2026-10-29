@@ -216,7 +216,14 @@ function main() {
   // the cap is set just above the measured union, no headroom banked
   // beyond it. Recorded in docs/audit-register.md (H3b section), same
   // precedent.
-  const FAMILY_PALETTE_BUDGETS = { tiles: 1010 };
+  // Stage S3a: 1010 -> 1120 — the ten west/central-Sinnoh settlements
+  // (twinleaf..canalave) add 80 identity tiles + 8 S3 kinds on the
+  // same per-town anchor programme; the union MEASURES 1106 hexes, so
+  // the cap is set just above the measured union, no headroom banked
+  // beyond it. Recorded in docs/audit-register.md (Arc 4 Stage S3a
+  // section), same precedent. (S3b's four east settlements will
+  // re-measure.)
+  const FAMILY_PALETTE_BUDGETS = { tiles: 1120 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

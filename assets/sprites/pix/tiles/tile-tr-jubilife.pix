@@ -1,0 +1,23 @@
+# Stage S3a: jubilife roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-jubilife 16 16
+dddddddddddddddd
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+PAL
+a #3a4a6a jubilife-roof
+b #2a354c roof-dark
+c #485c84 roof-light
+d #f0c030 roof-trim

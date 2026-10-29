@@ -1,0 +1,25 @@
+# Stage S3a: floaroma town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-floaroma 16 16
+bccbcccbcccccabc
+aecccbcacacabecc
+cecbcbccacbbbbce
+cbacacccbbccaecb
+eccbcebccbbbbbbc
+cabebcccaccbacae
+ccbcccacabbcaaab
+baaacbcbabbbcabe
+cccccbbccccabcec
+accbacaaccbaacce
+ebabbaacbccccabb
+cbceccbbcacccbcb
+ccbcbbcccaabcbac
+abbcceaaebcccacc
+becccacbacccccbc
+eaabcbccacaabccc
+PAL
+a #e88bb0 floaroma-ground
+b #b56c89 ground-dark
+c #ffa4d0 ground-light
+d #f0f0a0 town-accent
+e #7ac86a town-accent-2
+f #8b536a ground-deep

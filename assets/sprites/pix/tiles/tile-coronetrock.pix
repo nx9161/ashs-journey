@@ -1,0 +1,23 @@
+# Stage S3a: coronetrock — banded strata wall of Mt. Coronet (full-bleed, solid).
+PIX tile-coronetrock 16 16
+bbbbbbbbbbbbbbbb
+aaabcaabcaaaaaca
+aaaaaabaabaaabba
+abaaababaaaaaaab
+aacaaacaaaaaccba
+dddddddddddddddd
+dddddddddddddddd
+aaaaaacaacaaaaaa
+aaaabcaabbaaabaa
+acaacaaaaaabaaaa
+aaaaaaaabbabaaab
+dddddddddddddddd
+aaaaaaaacaabaaaa
+aabaaaaaaaacaaca
+cababbcacacaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #6e6258 coronet-rock
+b #4c443c coronet-rock-dark
+c #8d8074 coronet-rock-light
+d #7a8698 coronet-slate-band

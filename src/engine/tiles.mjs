@@ -357,6 +357,70 @@ export const H3B_PROP_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'prop').map(
 export const H3B_FLOOR_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const H3B_WALL_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const H3B_WALKABLE_CHARS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => H3B_KIND_CHARS[k]);
+// ---- Arc 4 Stage S3a: Sinnoh kinds ----
+// Chars continue the block at U+1E00+404 (W6 0..131, W7 132..151, O1
+// 152..163, J3 kinds 164..172, Johto towns 173..260, H3 kinds 261..267,
+// Hoenn towns 268..395, H3b kinds 396..403). Same class convention:
+// floor = WALKABLE ground family of its own, wall = solid, prop =
+// solid object composited over the ground it stands on. Authored
+// art: assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage S3a).
+export const S3_KIND_DEFS = [
+  ['flowerfield', 'floor'], ['harbourstone', 'floor'], ['coronetfloor', 'floor'],
+  ['coronetrock', 'wall'],
+  ['honeytree', 'prop'], ['windmill', 'prop'], ['ironarch', 'prop'], ['contestdome', 'prop'],
+];
+export const S3_KIND_CHARS = {};
+S3_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 404 + i);
+  S3_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const S3_PROP_KINDS = S3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const S3_FLOOR_KINDS = S3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+export const S3_WALL_KINDS = S3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const S3_WALKABLE_CHARS = S3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => S3_KIND_CHARS[k]);
+// ---- Arc 4 Stage S3a: Sinnoh per-town identity kinds (the W5/J3/H3
+// machinery, extended a fourth time) ----
+// The fourteen Sinnoh settlements own the same eight signature kinds
+// as the Kanto/Johto/Hoenn towns. Chars continue the block after the
+// S3 kinds: town i owns idx 412+i*8 .. 419+i*8 in the order
+// [tg, tg2, tc, td, tr, tl, th, tw]. S3a authors the ten west/central
+// towns (twinleaf..canalave, idx 412..491); the four east towns
+// (pastoria..sunnyshore, idx 492..523) are reserved here exactly as
+// Hoenn reserved its east towns at H3a — S3b authors their tiles.
+// The art.mjs resolver keys on the kind-name prefixes, so Sinnoh
+// kinds ride the shipped W5 rendering paths unchanged.
+export const SINNOH_TOWN_ORDER = ['twinleaf', 'sandgem', 'jubilife', 'oreburgh', 'floaroma',
+  'eterna', 'hearthome', 'solaceon', 'veilstone', 'canalave',
+  'pastoria', 'celestic', 'snowpoint', 'sunnyshore'];
+export const SINNOH_TOWN_STYLE = {
+  twinleaf:  { ground: '#7fb069', form: 'two-leaf village timber' },
+  sandgem:   { ground: '#d6c98a', form: 'beach-lab research modern' },
+  jubilife:  { ground: '#8a94a6', form: 'broadcast-city glass slab' },
+  oreburgh:  { ground: '#9c6644', form: 'coal-town industrial iron' },
+  floaroma:  { ground: '#e88bb0', form: 'flower-meadow trellis' },
+  eterna:    { ground: '#4f772d', form: 'historic forest stone' },
+  hearthome: { ground: '#c9a227', form: 'contest-hall gold + violet' },
+  solaceon:  { ground: '#a3b18a', form: 'ruin-meadow weathered stone' },
+  veilstone: { ground: '#7d8597', form: 'department-store meteor slate' },
+  canalave:  { ground: '#468faf', form: 'harbour iron + sailcloth' },
+  pastoria:  { ground: '#6a994e', form: 'great-marsh boardwalk reed' },
+  celestic:  { ground: '#957fef', form: 'shrine-town ancient timber' },
+  snowpoint: { ground: '#caf0f8', form: 'snow-port pale stone' },
+  sunnyshore:{ ground: '#ffd166', form: 'solar-panel modern' },
+};
+const SINNOH_KIND_SUFFIXES = ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'];
+export const SINNOH_TOWN_CHARS = {};
+SINNOH_TOWN_ORDER.forEach((id, i) => {
+  SINNOH_TOWN_CHARS[id] = {};
+  SINNOH_KIND_SUFFIXES.forEach((sfx, j) => {
+    const ch = String.fromCodePoint(0x1E00 + 412 + i * 8 + j);
+    SINNOH_TOWN_CHARS[id][sfx] = ch;
+    TILE_CHARS[ch] = sfx + '-' + id;
+  });
+});
+export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
+export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
 export const GYM_KIND_BY_TOWN = {
   viridian: 'gym-ground', pewter: 'gym-rock', cerulean: 'gym-water', vermilion: 'gym-volt',

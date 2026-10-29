@@ -1,0 +1,25 @@
+# Stage S3a: jubilife town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-jubilife 16 16
+cadfaacbcafbaaaa
+aaaaaaacabaaaaba
+abfaaaaacaaacaaa
+aaabcaaaaacaacba
+aaabfcaaaaaaaaaa
+aabbaaabbabbaaba
+acadbaabaaaaaafa
+accacaaaabbcafbc
+aaaafaaacaabaaaa
+adaabaacaaaacaaa
+aaafabaabaaaaaaa
+aaaabcbaaaacacdb
+daaaaaaaacaaaaab
+cabbaaaaadbaabaa
+faaacccaaabaabfa
+aaccaaaabbaafaaa
+PAL
+a #8a94a6 jubilife-ground
+b #6c7381 ground-dark
+c #a3afc4 ground-light
+d #f0c030 town-accent
+e #e85a7a town-accent-2
+f #535964 ground-deep

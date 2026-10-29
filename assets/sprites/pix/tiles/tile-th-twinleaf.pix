@@ -1,0 +1,23 @@
+# Stage S3a: twinleaf house roof — fine-scale family shingles (full-bleed, solid).
+PIX tile-th-twinleaf 16 16
+caaaaaaacaaaaaaa
+aaaaaaacaaaaaaac
+bbbbbbbbbbbbbbbb
+aaaaacaaaaaaacaa
+aaaacaaaaaaacaaa
+bbbbbbbbbbbbbbbb
+aacaaaaaaacaaaaa
+acaaaaaaacaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaacaaaaaaac
+aaaaaacaaaaaaaca
+bbbbbbbbbbbbbbbb
+aaaacaaaaaaacaaa
+aaacaaaaaaacaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #8a4a3a twinleaf-roof
+b #63352a roof-dark
+c #ac5c48 roof-light
+d #f2cc8f roof-trim

@@ -49,7 +49,8 @@ Object.assign(ALL_MAPS, mapsMod.MAPS,
   (await import(join(ROOT, 'src/data/maps5.mjs'))).MAPS5,
   (await import(join(ROOT, 'src/data/maps6.mjs'))).MAPS6,
   (await import(join(ROOT, 'src/data/maps7.mjs'))).MAPS7,
-  (await import(join(ROOT, 'src/data/maps8.mjs'))).MAPS8);
+  (await import(join(ROOT, 'src/data/maps8.mjs'))).MAPS8,
+  (await import(join(ROOT, 'src/data/maps9.mjs'))).MAPS9);
 const { defaultState } = await import(join(ROOT, 'src/game/state.mjs'));
 const SCH = await import(join(ROOT, 'src/save/schema.mjs'));
 const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
@@ -246,8 +247,8 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     if (typeof m.name !== 'string') continue;
     for (const ch of m.name.normalize('NFKC')) if (!SAFE.test(ch)) offending.add(ch);
   }
-  ok('A27 F-1 census (the register count): the shipped maps*.mjs name fields hold 38 map entries whose display name contains the em-dash, 36 unique names — and U+2014 is the ONLY character in any shipped map display name outside the SAFE_TEXT set',
-    emNames.length === 38 && new Set(emNames).size === 36
+  ok('A27 F-1 census (the register count; S3a supersession — maps9 adds three em-dash names: Route 212 — North, Mt. Coronet — South, Mt. Coronet — Central, all covered by the same F-1 charset): the shipped maps*.mjs name fields hold 41 map entries whose display name contains the em-dash, 39 unique names — and U+2014 is the ONLY character in any shipped map display name outside the SAFE_TEXT set',
+    emNames.length === 41 && new Set(emNames).size === 39
     && offending.size === 1 && offending.has('—'),
     'entries=' + emNames.length + ' unique=' + new Set(emNames).size + ' offending=' + [...offending].join(','));
 }
@@ -431,6 +432,108 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   ok('S2b-09 ROSTER-WIDE census: all 509 entries resolve authored front+back (forge-fallback count = 0 across the whole roster; Sinnoh species art complete)',
     rosterList.length === 509 && rosterList.every((s) => painted(s.id + '-front') > 0 && painted(s.id + '-back') > 0),
     rosterList.filter((s) => painted(s.id + '-front') === 0 || painted(s.id + '-back') === 0).map((s) => s.id).join(','));
+}
+
+// ================= Part S3a: maps, west/central (Arc 4 Stage S3a) ========
+// maps9.mjs (gen: arc4-etl/gen_maps9.py): 62 maps — 10 settlements,
+// 14 routes, 13 dungeons/places, 25 interiors. Full walking sweep /
+// richness / encounter audit rigs: arc4-etl/sinnoh-{sweep,richness,
+// enc-audit}.mjs; this section pins the load-bearing facts in-suite.
+{
+  const { MAPS9 } = await import(join(ROOT, 'src/data/maps9.mjs'));
+  const TOWNS9 = ['twinleaf', 'sandgem', 'jubilife', 'oreburgh', 'floaroma', 'eterna', 'hearthome', 'solaceon', 'veilstone', 'canalave'];
+  const ROUTES9 = ['r201', 'r202', 'r203', 'r204', 'r205', 'r206', 'r207', 'r208', 'r209', 'r210', 'r211', 'r212', 'r215', 'r218'];
+  const PLACES9 = ['lake-verity', 'lake-verity-cave', 'oreburgh-mine', 'ravaged-path', 'valley-windworks', 'eterna-forest', 'old-chateau', 'wayward-cave', 'mt-coronet-south', 'mt-coronet-central', 'solaceon-ruins', 'lost-tower', 'amity-square'];
+  const INTERIORS9 = ['house-twinleaf', 'house-twinleaf-rival', 'house-sandgem', 'house-jubilife', 'house-jubilife-condo', 'house-oreburgh', 'house-floaroma', 'house-eterna', 'house-hearthome', 'house-hearthome-poffin', 'house-solaceon', 'house-solaceon-daycare', 'house-veilstone', 'house-canalave', 'canalave-library', 'rowan-lab', 'jubilife-tv', 'galactic-eterna', 'galactic-hq', 'gym-oreburgh', 'gym-eterna', 'gym-hearthome', 'gym-veilstone', 'gym-canalave', 'contest-hearthome'];
+  const ALL9 = [...TOWNS9, ...ROUTES9, ...PLACES9, ...INTERIORS9];
+  ok('S3a-01 maps9 accounting: exactly 62 maps (10 settlements + 14 routes + 13 dungeons/places + 25 interiors), every expected id present exactly once, rows rectangular',
+    Object.keys(MAPS9).length === 62 && ALL9.every((id) => MAPS9[id] && MAPS9[id].id === id)
+    && Object.values(MAPS9).every((m) => m.rows.every((r) => r.length === m.rows[0].length)),
+    'count=' + Object.keys(MAPS9).length + ' missing=' + ALL9.filter((id) => !MAPS9[id]).join(','));
+  ok('S3a-02 viewport law: every settlement outdoor map is authored >= 24 wide x >= 14 tall (the standing new-region viewport-filling law)',
+    TOWNS9.every((id) => MAPS9[id].rows[0].length >= 24 && MAPS9[id].rows.length >= 14),
+    TOWNS9.filter((id) => MAPS9[id].rows[0].length < 24 || MAPS9[id].rows.length < 14).join(','));
+  ok('S3a-03 every settlement fields a Pokemon Center + Mart through the shared interiors WITH via{} tickets (lastCenter lineage, the Johto/Hoenn idiom)',
+    TOWNS9.every((id) => ['center', 'mart'].every((t) => (MAPS9[id].warps || []).some((w) => w.to.map === t && w.via && w.via.map === id))));
+  ok('S3a-04 story places exist as maps: rowan-lab (Sandgem), gyms for oreburgh/eterna/hearthome/veilstone/canalave, contest-hearthome with contestHall field, galactic-eterna + galactic-hq, canalave-library, jubilife-tv — all indoor, all with a return warp to their town',
+    ['rowan-lab', 'gym-oreburgh', 'gym-eterna', 'gym-hearthome', 'gym-veilstone', 'gym-canalave', 'contest-hearthome', 'galactic-eterna', 'galactic-hq', 'canalave-library', 'jubilife-tv']
+      .every((id) => MAPS9[id] && MAPS9[id].indoor === true && (MAPS9[id].warps || []).length >= 2)
+    && MAPS9['contest-hearthome'].contestHall === 'hearthome');
+  ok('S3a-05 warp integrity: every maps9 warp target exists in the merged map set and lands on a walkable (or water) tile — zero bad landings in data',
+    Object.values(MAPS9).every((m) => (m.warps || []).every((w) => {
+      const d = ALL_MAPS[w.to.map];
+      if (!d) return false;
+      const ch = d.rows[w.to.y] && d.rows[w.to.y][w.to.x];
+      return ch !== undefined && (WALKABLE.has(ch) || ch === '~' || ch === 'W');
+    })));
+  // map-graph reachability from sandgem (warps + ferry jumps), the
+  // in-suite mirror of the arc4-etl walking sweep's graph check
+  const adj = {};
+  for (const m of Object.values(ALL_MAPS)) {
+    adj[m.id] = adj[m.id] || new Set();
+    for (const w of m.warps || []) if (w.to && ALL_MAPS[w.to.map]) adj[m.id].add(w.to.map);
+    for (const n of m.npcs || []) if (n.ferry && ALL_MAPS[n.ferry]) adj[m.id].add(n.ferry);
+  }
+  const seen9 = new Set(['sandgem']); const q9 = ['sandgem'];
+  while (q9.length) { const c = q9.shift(); for (const nx of adj[c] || []) if (!seen9.has(nx)) { seen9.add(nx); q9.push(nx); } }
+  ok('S3a-06 fresh-game reachability: the map graph from sandgem (the registry arrivalMap, present in maps9 with a start tile) reaches all 62 new maps — the whole west/central half is walkable end-to-end from the arrival port',
+    !!MAPS9.sandgem && !!MAPS9.sandgem.start && ALL9.every((id) => seen9.has(id)),
+    'unreached=' + ALL9.filter((id) => !seen9.has(id)).join(','));
+  const roster9 = {};
+  for (const f of ['species.mjs', 'species2.mjs', 'species3.mjs', 'species4.mjs', 'species5.mjs']) {
+    const mod = await import(join(ROOT, 'src/data', f));
+    for (const v of Object.values(mod)) if (v && typeof v === 'object') Object.assign(roster9, v);
+  }
+  const LEG9 = new Set(['articuno', 'zapdos', 'moltres', 'mewtwo', 'mew', 'raikou', 'entei', 'suicune', 'lugia', 'hooh', 'celebi', 'regirock', 'regice', 'registeel', 'latias', 'latios', 'kyogre', 'groudon', 'rayquaza', 'jirachi', 'deoxys', 'uxie', 'mesprit', 'azelf', 'dialga', 'palkia', 'heatran', 'regigigas', 'giratina', 'giratinaorigin', 'cresselia', 'phione', 'manaphy', 'darkrai', 'shaymin', 'shayminsky', 'arceus', 'rotom', 'rotomheat', 'rotomwash', 'rotomfrost', 'rotomfan', 'rotommow', 'spiritomb']);
+  const START9 = new Set(['turtwig', 'grotle', 'torterra', 'chimchar', 'monferno', 'infernape', 'piplup', 'prinplup', 'empoleon']);
+  let encEntries = 0, encLo = 999, encHi = 0, encBad = [];
+  for (const m of Object.values(MAPS9)) {
+    if (!m.encounters) continue;
+    for (const t of [...(m.encounters.table || []), ...(m.encounters.water || [])]) {
+      encEntries++;
+      encLo = Math.min(encLo, t.min); encHi = Math.max(encHi, t.max);
+      if (!roster9[t.species] || LEG9.has(t.species) || START9.has(t.species) || t.min < 301 || t.max > 400 || t.min > t.max || !(t.weight > 0)) encBad.push(m.id + ':' + t.species);
+    }
+  }
+  ok('S3a-07 encounter audit in-suite: 289 entries across the maps9 tables — every species exists in the merged roster, every level inside band 301-400, no legendaries, no starter lines, no Rotom, no Spiritomb placed wild',
+    encEntries === 289 && encBad.length === 0 && encLo === 301 && encHi <= 345,
+    'entries=' + encEntries + ' span=' + encLo + '-' + encHi + ' bad=' + encBad.join(','));
+  const tab9 = (id) => (MAPS9[id].encounters && MAPS9[id].encounters.table) || [];
+  ok('S3a-08 deferred placements discharged: Mothim is wild in eterna-forest (w6, 320-326) and on r205 (w4) — the honey-tree country; Drifloon rides r205 (the windworks ground); Gible nests in wayward-cave; Spiritomb appears in NO maps9 table (S6 summoning decision)',
+    (() => { const f = tab9('eterna-forest').find((t) => t.species === 'mothim'); const r = tab9('r205').find((t) => t.species === 'mothim');
+      return f && f.weight === 6 && r && r.weight === 4; })()
+    && tab9('r205').some((t) => t.species === 'drifloon')
+    && tab9('wayward-cave').some((t) => t.species === 'gible')
+    && Object.values(MAPS9).every((m) => !m.encounters || [...(m.encounters.table || []), ...(m.encounters.water || [])].every((t) => t.species !== 'spiritomb')));
+  const captW = (MAPS9.canalave.npcs || []).find((n) => n.ferry);
+  ok('S3a-09 Canalave ferry port: CAPT WESTWIND stands on canalave with ferry vermilion + ferryArc sinnoh (the Olivine/Slateport port idiom — return unconditional once reached)',
+    !!captW && captW.name === 'CAPT WESTWIND' && captW.ferry === 'vermilion' && captW.ferryArc === 'sinnoh');
+  ok('S3a-10 Mt. Coronet spine: mt-coronet-south doors to r207 (west), r208 (south) and mt-coronet-central (north); the central cavern doors back south and west to r211, and carries >= 2 internal stair warps (lower hall <-> upper gallery) — the two-storey floor graph S3b extends at the gallery north wall',
+    ['r207', 'r208', 'mt-coronet-central'].every((t) => (MAPS9['mt-coronet-south'].warps || []).some((w) => w.to.map === t))
+    && ['mt-coronet-south', 'r211'].every((t) => (MAPS9['mt-coronet-central'].warps || []).some((w) => w.to.map === t))
+    && (MAPS9['mt-coronet-central'].warps || []).filter((w) => w.to.map === 'mt-coronet-central').length >= 2);
+  ok('S3a-11 Old Chateau: the Rotom room exists as a place (the television sign in old-chateau) while Rotom itself is placed nowhere wild (its forme system lands S4)',
+    (MAPS9['old-chateau'].signs || []).some((s) => s.text.includes('television')));
+  ok('S3a-12 Route 212 honesty: r212 is the NORTH segment only — its only warp target is hearthome (the Pastoria leg is S3b, fenced + signed, never faked)',
+    (MAPS9.r212.warps || []).length > 0 && (MAPS9.r212.warps || []).every((w) => w.to.map === 'hearthome')
+    && (MAPS9.r212.signs || []).some((s) => s.text.includes('212')));
+  const tiles9 = await import(join(ROOT, 'src/engine/tiles.mjs'));
+  ok('S3a-13 Sinnoh tile identity: SINNOH_TOWN_ORDER reserves all 14 settlements; the 10 S3a towns each own 8 distinct signature chars (tg/tg2/tc/td/tr/tl/th/tw at U+1E00 idx 412+i*8) registered in TILE_CHARS, and the tg/tg2 ground chars + the 3 S3 floor kinds are in the engine WALKABLE set',
+    tiles9.SINNOH_TOWN_ORDER.length === 14
+    && TOWNS9.every((id, i) => ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'].every((sfx, j) =>
+      tiles9.SINNOH_TOWN_CHARS[id][sfx] === String.fromCodePoint(0x1E00 + 412 + i * 8 + j)
+      && tiles9.TILE_CHARS[tiles9.SINNOH_TOWN_CHARS[id][sfx]] === sfx + '-' + id))
+    && TOWNS9.every((id) => WALKABLE.has(tiles9.SINNOH_TOWN_CHARS[id].tg) && WALKABLE.has(tiles9.SINNOH_TOWN_CHARS[id].tg2))
+    && tiles9.S3_FLOOR_KINDS.length === 3 && tiles9.S3_FLOOR_KINDS.every((k) => WALKABLE.has(tiles9.S3_KIND_CHARS[k])));
+  const { ART: ART9 } = await import(join(ROOT, 'assets/sprites/art-data.mjs'));
+  ok('S3a-14 authored tile art resolves for all 10 towns x 8 identity tiles + the 8 S3 kinds (88 .pix tiles through build-art; no forge fallbacks for the Sinnoh kinds)',
+    TOWNS9.every((id) => ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'].every((sfx) => ART9['tile-' + sfx + '-' + id] && ART9['tile-' + sfx + '-' + id].rows))
+    && ['flowerfield', 'harbourstone', 'coronetfloor', 'coronetrock'].every((k) => ART9['tile-' + k] && ART9['tile-' + k].rows)
+    && ['honeytree', 'windmill', 'ironarch', 'contestdome'].every((k) => ART9['tile-prop-' + k] && ART9['tile-prop-' + k].rows));
+  ok('S3a-15 weather law: every outdoor maps9 map declares a weather field; every interior maps9 map is indoor:true (and no interior declares weather)',
+    [...TOWNS9, ...ROUTES9, 'lake-verity', 'eterna-forest', 'amity-square'].every((id) => typeof MAPS9[id].weather === 'string')
+    && INTERIORS9.every((id) => MAPS9[id].indoor === true && MAPS9[id].weather === undefined)
+    && PLACES9.filter((id) => !['lake-verity', 'eterna-forest', 'amity-square'].includes(id)).every((id) => MAPS9[id].indoor === true));
 }
 
 // ================= Part B: headless bundle =================

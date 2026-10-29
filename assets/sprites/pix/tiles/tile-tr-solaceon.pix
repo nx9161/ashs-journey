@@ -1,0 +1,23 @@
+# Stage S3a: solaceon roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-solaceon 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #6a5a3a solaceon-roof
+b #4c412a roof-dark
+c #847048 roof-light
+d #c0784a roof-trim

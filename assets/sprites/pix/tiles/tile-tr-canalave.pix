@@ -1,0 +1,23 @@
+# Stage S3a: canalave roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-canalave 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #2e5a74 canalave-roof
+b #214154 roof-dark
+c #3a7091 roof-light
+d #f0c030 roof-trim

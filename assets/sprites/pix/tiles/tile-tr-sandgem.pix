@@ -1,0 +1,23 @@
+# Stage S3a: sandgem roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-sandgem 16 16
+dddddddddddddddd
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+aaaabaaaabcaaaba
+bbbbbbbbbbbbbbbb
+aacabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabcaaabaaaaba
+acaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaaaabaaaabc
+caaabaaaabacaaba
+aaaabaacabaaaaba
+aaacbaaaabaaaaba
+bbbbbbbbbbbbbbbb
+aaaabacaabaaaaba
+PAL
+a #4a6a8a sandgem-roof
+b #354c63 roof-dark
+c #5c84ac roof-light
+d #4a90c0 roof-trim

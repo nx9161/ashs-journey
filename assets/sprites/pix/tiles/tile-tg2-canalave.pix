@@ -1,0 +1,25 @@
+# Stage S3a: canalave town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-canalave 16 16
+bccaaacbccccacbc
+cccacbcaeaeabaac
+cccbcccccebccacb
+cbacccccbccaabab
+cccacabceeccbbcc
+cacabcccccbbccca
+ccbabceecbccaccb
+bcbcccabcbacbcbb
+acacebcacbccbcca
+cecbccccccbcccca
+abcbecccbecaccab
+cccccbbcacccabbb
+ceacbcccaccbccce
+ecbcccacbbccaaac
+bcbaaacbceaacabc
+cccacbccccbbbbca
+PAL
+a #468faf canalave-ground
+b #377088 ground-dark
+c #53a9ce ground-light
+d #f0c030 town-accent
+e #e8f4f8 town-accent-2
+f #2a5669 ground-deep

@@ -1,0 +1,23 @@
+# Stage S3a: veilstone house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-veilstone 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+abaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaaaaaaaa
+aaaggggaaaaabaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaabaaa
+baabbbbabaaaaaaa
+aaaaaaaaaaaaabaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaabaaaabbaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #8790a3 veilstone-house-wall
+b #585d6a house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

@@ -1,0 +1,23 @@
+# Stage S3a: veilstone roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-veilstone 16 16
+dddddddddddddddd
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+PAL
+a #4a4a6e veilstone-roof
+b #35354f roof-dark
+c #5c5c8a roof-light
+d #5e60ce roof-trim

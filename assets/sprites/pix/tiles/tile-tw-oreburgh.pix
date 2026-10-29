@@ -1,0 +1,23 @@
+# Stage S3a: oreburgh house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-oreburgh 16 16
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+ababaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaaaabaaa
+aaaggggbaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaabaa
+aaabbbbaaaaaaaaa
+aaaaaaaaaaabaaaa
+aabaaaaaaaaaaaab
+aaaaabaaaabaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaab
+bbbbbbbbbbbbbbbb
+PAL
+a #a86e49 oreburgh-house-wall
+b #6d4730 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

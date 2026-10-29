@@ -1,0 +1,23 @@
+# Stage S3a: twinleaf roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-twinleaf 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #8a4a3a twinleaf-roof
+b #63352a roof-dark
+c #ac5c48 roof-light
+d #f2cc8f roof-trim

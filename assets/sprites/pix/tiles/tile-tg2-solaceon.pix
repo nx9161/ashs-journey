@@ -1,0 +1,25 @@
+# Stage S3a: solaceon town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-solaceon 16 16
+bcacccabcacccabc
+bccccbacccccbccc
+baabccccaabaccaa
+abccabaebcccaabb
+ccbccbbacccccbeb
+baaabcabcacbcccc
+cbbcccbcabccacec
+bbcbcccbacccccbc
+bacbcbcaeccebccc
+cbcbbcaecbbcacca
+cbcbacccbccccaab
+caccbcbcaeecabac
+cbcabcbccaebbccc
+ecbcaabbcbceccca
+baababcbeacccabc
+cccabbccccccbaac
+PAL
+a #a3b18a solaceon-ground
+b #7f8a6c ground-dark
+c #c0d1a3 ground-light
+d #c0784a town-accent
+e #e8dcc0 town-accent-2
+f #626a53 ground-deep

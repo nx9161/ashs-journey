@@ -1,0 +1,23 @@
+# Stage S3a: hearthome roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-hearthome 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #6a3a7a hearthome-roof
+b #4c2a58 roof-dark
+c #844898 roof-light
+d #8a5ab0 roof-trim

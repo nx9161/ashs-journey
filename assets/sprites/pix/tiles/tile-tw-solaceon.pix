@@ -1,0 +1,23 @@
+# Stage S3a: solaceon house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-solaceon 16 16
+bbbbbbbbbbbbbbbb
+aabaaaaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaaaaaaabaaab
+aaahgggaaaaaaaaa
+aaaggggaaaabaaaa
+aaaggggbaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaabaaa
+aaabbbbaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaaaaaaaaaaaab
+baaaaaaaaaaaaaaa
+aaabaaaaaabaaaaa
+aaaaaabaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #b0bf95 solaceon-house-wall
+b #727c61 house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

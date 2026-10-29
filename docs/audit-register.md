@@ -11716,3 +11716,239 @@ with the primary branch duplicated in the singular `evo` slot.
 - **Sinnoh species art (S2) is now COMPLETE across both halves:**
   114/114 entries authored (387–493 + formes), zero forge
   fallbacks roster-wide (509/509).
+
+---
+
+## Arc 4 Stage S3a — Sinnoh maps, west/central (2026-10-29)
+
+Base: main @ 71f98ff (S2b). Deliverable: NEW `src/data/maps9.mjs`
+(export `MAPS9`; registered in `scripts/module-order.json` after
+`maps8.mjs`; folded in `merge.mjs` exactly as maps8 was), generated
+deterministically by `~/workspace/ashs-journey-qa/arc4-etl/gen_maps9.py`
+(two runs byte-identical; edit the generator, not the file). Rigs in
+the same folder: `sinnoh-sweep.mjs`, `sinnoh-richness.mjs`,
+`sinnoh-enc-audit.mjs`, `gen_s3a_art.py`.
+
+### ⚠ BUDGET — PROJECTION INSIDE THE 250K STOP TRIGGER (coordinator ruling required before S3b)
+
+Measured at this commit: `public/game.js` **11,863,277 B** (byte
+length; S2b close 11,675,671, **Δ +187,606**), public static total
+**12,025,899 B** (S2b close 11,838,293, same delta; index/admin
+unchanged). Restated full-mission projection-to-close, built from
+MEASURED per-stage analogues in this repo's own history (not the
+S2b model, whose remaining-stages allowance of 289,288 B for all of
+S3–S9 is now demonstrably too small — S3a alone consumed 187,606 B
+of it): S3b maps ≈ +140,000 (H3b measured +134,233 / J3b +150,066),
+S5a+S5b story ≈ +135,000 (H4a +64,881 / H4b +68,496), S4 systems
+≈ +40,000 (J6 +50,865 / H5 +21,940), S6 legendary ≈ +50,000 (H6
++43,199 ×13 arcs), S7 finale ≈ +25,000, S8/S9 ≈ +3,000 → remaining
+≈ **+393,000**, projection-to-close ≈ **12,418,899 B** vs gate
+12,582,912 B → **margin ≈ 164,013 B, INSIDE the coordinator's
+250,000 B stop trigger.** Per the budget law this is surfaced, not
+solved: no art was shrunk, no ceiling raised by this stage beyond
+the recorded palette-cap procedure (§2), and **S3b should not start
+until the coordinator rules** (options are theirs: trim S3b scope,
+re-derive the gate, or accept the margin). This stage is committed
+complete because its own gates are all green and the trigger is a
+projection-to-close ruling, not a defect in the landed work.
+
+### 1. What landed — 62 maps
+
+- **Settlements (10):** `twinleaf` 28×18, `sandgem` 28×18,
+  `jubilife` 30×20, `oreburgh` 30×18, `floaroma` 28×18, `eterna`
+  30×18, `hearthome` 30×20, `solaceon` 28×18, `veilstone` 30×18,
+  `canalave` 30×18 — all ≥24×14 viewport-filling (P-1). Shared
+  `center`/`mart` interiors serve every settlement via `via{}`
+  tickets exactly as Johto/Hoenn (Twinleaf fields both, per the
+  brief's per-settlement law). Gyms ×5 (`gym-oreburgh/eterna/
+  hearthome/veilstone/canalave`, layouts only — leaders/battles
+  are S5), plus `rowan-lab` (Sandgem), `jubilife-tv` +
+  `house-jubilife-condo` (Jubilife flavour), `galactic-eterna`,
+  `galactic-hq` (dressed places; their story is S5's),
+  `contest-hearthome` (dressed, NPC-free hall floor, reception
+  counter + stage + `contestHall: 'hearthome'` — S4 wires the
+  Super Contest reskin), `canalave-library`, houses ×14.
+- **Routes (14):** `r201`–`r212` as the geography requires (201,
+  202, 203, 204, 205, 206, 207, 208, 209, 210, 211 west, 212
+  north), `r215` (the Solaceon→Veilstone road), `r218` (the
+  Jubilife→Canalave causeway — a boardwalk footpath over open
+  water, so the Canalave leg is walkable on foot, not surf-only).
+  **Route 212 is the NORTH segment only:** its south end is fenced
+  and signed ("the maps, for now, stop"); Pastoria is S3b and is
+  never faked.
+- **Dungeons/places (13):** `lake-verity` + `lake-verity-cave`,
+  `oreburgh-mine`, `ravaged-path` (the Route 204↔Floaroma
+  through-passage, Union Cave idiom), `valley-windworks` (interior;
+  its building stands on r205), `eterna-forest` (through-passage),
+  `old-chateau` (interior — Rotom's room exists as a place: the
+  small north-east chamber with the old television + its sign; the
+  forme system lands S4), `wayward-cave` (dark; Gible's nest),
+  `mt-coronet-south` (doors west r207 / south r208 / north
+  central), `mt-coronet-central` (two-storey cavern: lower hall +
+  upper gallery joined by a one-way stair pair, west door r211),
+  `solaceon-ruins`, `lost-tower` (on r209), `amity-square`
+  (Hearthome's north-gate park).
+- **Coronet extension seam (for S3b):** the central cavern's upper
+  gallery north wall (row 0, cols 13–14) is where the north stair
+  to the summit floors will be cut — no other tile, warp, or
+  landing in either Coronet map needs to move. The unfinished
+  stair is signed in-fiction at the gallery's north edge.
+
+### 2. Identity + tile art
+
+- **Sinnoh identity system extended** (the W5/J3/H3 machinery,
+  fourth region): `SINNOH_TOWN_ORDER`/`SINNOH_TOWN_STYLE`/
+  `SINNOH_TOWN_CHARS` in `src/engine/tiles.mjs` — all fourteen
+  settlements reserved at U+1E00 idx 412+i·8…419+i·8 (Hoenn towns
+  end at 395, H3b kinds at 403, S3 kinds at 404..411); the ten
+  S3a towns own the eight signature kinds (tg/tg2/tc/td/tr/tl/th/
+  tw); the four east towns (pastoria/celestic/snowpoint/sunnyshore,
+  idx 492..523) are reserved exactly as Hoenn reserved its east
+  towns at H3a — S3b authors their tiles. `WALKABLE` in
+  `src/data/maps.mjs` gains the ten towns' tg/tg2 chars + the S3
+  floor chars by the same spread precedent; `src/engine/art.mjs`
+  wires `SINNOH_TOWN_ORDER` into TILE_ART / FACADE_GROUPS /
+  floor-variant / prop / ground-family paths exactly as Hoenn.
+- **Eight Sinnoh kinds** (`S3_KIND_DEFS`, U+1E00+404…411): floors
+  `flowerfield` (Floaroma meadows), `harbourstone` (Canalave
+  harbour), `coronetfloor` (Coronet scree); wall `coronetrock`
+  (banded strata); props `honeytree`, `windmill` (Valley
+  Windworks), `ironarch` (Canalave drawbridge), `contestdome`
+  (Hearthome grandeur). Town idioms ride the identity palettes:
+  Oreburgh industrial (mine building + carts + museum), Eterna
+  historic (stone quarter + statue keeper), Hearthome contest
+  grandeur (dome props + flower plaza + Amity gate), Canalave
+  harbour (canal + drawbridge + pier), Veilstone meteor field +
+  department store.
+- **88 new tile .pix sources** (80 town-identity + 8 kinds) under
+  `assets/sprites/pix/tiles/`, authored by
+  `~/workspace/ashs-journey-qa/arc4-etl/gen_s3a_art.py`;
+  `art-data.mjs` regenerated via `build-art.mjs` only (two runs
+  byte-identical). **Spend: 45,210 B** (8,663,315 → 8,708,525 B)
+  against the stage's 136,685 B headroom under the **8,800,000 B
+  ceiling — NOT raised**; headroom remaining for S3b: **91,475 B**
+  (≈40 east-town tiles + kinds at this stage's measured
+  ≈514 B/tile ≈ 21–26 KB — S3b's tile plan fits the residue).
+- **Palette budget:** the tiles family union rose 996 →
+  **1106** painted hexes (ten new town anchors + shades by
+  design), so `FAMILY_PALETTE_BUDGETS.tiles` is raised 1010 →
+  **1120** in `build-art.mjs` (cap just above the measured union,
+  no headroom banked; `palette-audit.mjs` mirror updated; the
+  audit's tiles line PASSes at 1106 ≤ 1120 — its 4 summary
+  failures are the pre-existing slop-blacklist hits in shipped
+  tile-water files, identical at base 71f98ff) — the
+  J3a/J3b/H3a/H3b ratified-raise procedure.
+
+### 3. Connectivity (gate) — PASS
+
+- Script: `~/workspace/ashs-journey-qa/arc4-etl/sinnoh-sweep.mjs`
+  (celadon discipline: real BFS walking on the engine WALKABLE set
+  + Surf assumed, loadMap-faithful NPC model incl. the outdoor
+  mart-clerk filter, interiors as connectors to fixpoint; NO
+  position seeding). **All 62 maps PASS**: every entry reaches
+  every warp, **zero bad warp landings**, and the map graph from
+  `sandgem` reaches all 62 (Twinleaf + Lake Verity west; Jubilife
+  + the r218 causeway to Canalave; Oreburgh + mine; the Ravaged
+  Path through-passage to Floaroma; r205 + Eterna Forest to
+  Eterna; the 206/207/208 foothill web into both Coronet caverns;
+  the Hearthome → r209/Lost Tower → Solaceon → r210 → r215 →
+  Veilstone north loop; Amity Square; r212-north as a signed
+  dead-end segment).
+- **Canalave ferry port:** CAPT WESTWIND stands on the harbour
+  pier boardwalk at (13,13) — `ferry: 'vermilion', ferryArc:
+  'sinnoh'` — wired exactly as maps6's Olivine port and maps7's
+  Slateport port; the return is unconditional once reached. The
+  Sandgem↔Canalave leg is proven on foot by the sweep (r202 →
+  Jubilife → r218 causeway).
+
+### 4. Richness + identity (gate) — PASS
+
+- Script: `~/workspace/ashs-journey-qa/arc4-etl/sinnoh-richness.mjs`
+  (W5 logical-raster method, real resolver + ART). **All 62 maps
+  pass their floors.** Towns 137–159 colours (floor 80; floaroma
+  137 is the minimum); town ground-family shares ≤25.7% and top
+  single ground KIND ≤25.7% (gate ≤40%). Land routes 148–189
+  (floor 60); r218 causeway 104 (water map, floor 60); interiors
+  55–70 (floor 55; canalave-library 55 is the minimum); caves
+  47–81 (floor 45; mt-coronet-central 47 is the minimum — the
+  two-storey slate cavern is deliberately spare).
+- **Tile-kind Jaccard, settlements (pairwise, target ≤0.60): all
+  45 pairs PASS** — max **0.533** (oreburgh~veilstone), min 0.255
+  (twinleaf~canalave). Every settlement carries its 8 signature
+  kinds plus a landmark: Twinleaf (the two starter houses),
+  Sandgem (Rowan's lab + beach), Jubilife (TV tower + condos),
+  Oreburgh (the mine + museum), Floaroma (honey-tree meadows),
+  Eterna (the tall building + statue quarter), Hearthome (Contest
+  Hall dome + Amity Square), Solaceon (the ruins + day care),
+  Veilstone (meteor field + department store + HQ), Canalave
+  (canal + drawbridge + library + pier).
+
+### 5. Encounters + weather + placements
+
+- Audit: `~/workspace/ashs-journey-qa/arc4-etl/sinnoh-enc-audit.mjs`
+  — **PASS: 289 entries across 36 encounter-bearing maps**, 72
+  distinct species; every species exists in the merged roster; no
+  legendaries; no starter lines; levels span **301–343**, inside
+  band 301–400 on the progression curve (Twinleaf country
+  301–308 → Oreburgh 310–318 → Eterna Forest 319–326 → Coronet
+  central 326–338 → r215/Veilstone 334–343, Canalave water
+  332–340).
+- **S1 deferrals, discharged:** **Mothim is wild-obtainable** —
+  Eterna Forest (w6, Lv320–326) and Route 205 (w4, Lv317–322),
+  the honey-tree country (honeytree props stand on both maps and
+  Floaroma's meadows; the Floaroma sign names the placement).
+  **Spiritomb is NOT placed wild anywhere** — its summoning
+  remains an S6 arc decision, confirmed here per the brief.
+  Bonus canon placements: Drifloon rides r205 (the windworks'
+  own ground — the interior carries no table, as interior floors
+  never trigger the encounter branches), Gible + Gabite in
+  Wayward Cave, Cranidos + Shieldon rare in Oreburgh Mine,
+  Feebas-class honesty: no equivalent was forced.
+- **Weather field per outdoor map** (data only): 25 outdoor maps
+  — clear ×21, **sun ×2** (oreburgh, r207), **rain ×2** (r218,
+  eterna-forest). Interiors carry none.
+
+### 6. Battery at this commit
+
+- **sinnoh-checks 74 → 89/89** (15 new S3a checks: accounting,
+  viewport law, center/mart-via per settlement, story places,
+  warp integrity, sandgem graph reachability, in-suite encounter
+  audit, deferral placements, ferry port, Coronet spine, Rotom
+  room, r212 honesty, tile identity, authored-art resolution,
+  weather law). **Supersession by name:** A27's F-1 census moves
+  38 entries / 36 unique → **41 entries / 39 unique** (maps9 adds
+  Route 212 — North, Mt. Coronet — South, Mt. Coronet — Central —
+  all covered by the same F-1 em-dash charset; totals otherwise
+  unchanged).
+- fidelity **35/35** · campaign-smoke **24/24** · battle-model
+  **45/45** · arc-foundation **47/47** · frontier **136/136** ·
+  hoenn-story **88/88** · qa-changed-flows failures exactly
+  **{b2, d9}** (55/57) · qa-slice failures exactly **{s6, l8}**
+  (132/134) · rejuv-phase2 failures exactly **{A09, C01}** (38/40)
+  · validator **106** + fuzz **2000/2000** + save-contract
+  **12/12** · budgets: all gates pass (vercel static 12,025,899 ≤
+  12,582,912).
+- build-art clean + deterministic; gen_maps9 deterministic;
+  fresh build byte-identical to committed public/game.js
+  (sha256 38f8b032…). **personal/ byte-identical** (sha256
+  f434ba63…, restored from HEAD after the build — zero personal/
+  paths in this diff; vercel+guest targets only, dist/ restored).
+
+### 7. Leftovers, named (S3b/S4/S5's list)
+
+- Gym interiors are layouts only (leaders/battles/story are S5);
+  the Contest Hall is an inert dressed floor until S4 wires the
+  Super Contest reskin (the `contestHall` field + counter + stage
+  are the seam); the Galactic buildings are dressed places until
+  S5's story pass; Rotom's room is a place until S4's forme
+  system; Wayward Cave is `dark: true` with no HM gating in this
+  stage (Defog/Rock Climb are S4 — no shipped-region map was
+  retro-gated).
+- The Coronet central stair pair is one-way by design (west stair
+  climbs, east stair descends — the Pike-door idiom); the gallery
+  north wall seam is S3b's cut point (see §1).
+- S3b heads-up: art-data headroom is **91,475 B**; east town chars
+  continue at U+1E00 idx 492+; the tiles palette union will grow
+  again (~+55 projected for four towns) — re-measure before
+  raising. **And the §0 projection flag stands: S3b does not
+  start without the coordinator's budget ruling.**

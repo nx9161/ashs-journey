@@ -1,0 +1,25 @@
+# Stage S3a: veilstone town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-veilstone 16 16
+bcabaecbeeccacbe
+cbeacbccecccbaca
+cccbccaabbbccbac
+bbcccccbbcbcacab
+bbcacabacbcccbaa
+cbcabcccacabccac
+ccbccacccbcccaaa
+baaacccbcacacabc
+cccccbcaccabbcbc
+cbcbccccccbbcacc
+ebcaceaabacaacab
+cebcccbccacccbcc
+cccabbcabecbcbcb
+ccbccbacabcceacc
+bcccaaabcccbbbbb
+caccbbccccccbaaa
+PAL
+a #7d8597 veilstone-ground
+b #626876 ground-dark
+c #949db2 ground-light
+d #5e60ce town-accent
+e #e85a3a town-accent-2
+f #4b505b ground-deep

@@ -1,0 +1,25 @@
+# Stage S3a: sandgem town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-sandgem 16 16
+aaaadacaacdfaaaa
+aaaaabbaaaabaaaa
+caaaabcaaaaaabac
+aaccbacabacaccda
+aaaafaaaacaaabbc
+abbacaacaaabacbc
+acaaabacafaaaaac
+aaabacabcdbcaaaa
+baaaacaaaaacacad
+aaaaaaaaaaaacbaa
+aaaaafaabcfaabdc
+baaaacacaabaaaca
+ababcbaaaaaaaaac
+cbdabafabaabaaaa
+acccabbaaaafaaca
+abaaaaaaacaaabaa
+PAL
+a #d6c98a sandgem-ground
+b #a79d6c ground-dark
+c #fdeda3 ground-light
+d #4a90c0 town-accent
+e #e8f0f8 town-accent-2
+f #807953 ground-deep

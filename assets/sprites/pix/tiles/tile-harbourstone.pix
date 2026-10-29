@@ -1,0 +1,22 @@
+# Stage S3a: harbourstone — dressed harbour stone floor of Canalave (full-bleed, walkable).
+PIX tile-harbourstone 16 16
+caaabaaaabaaacba
+aaaabaaaabaaaaba
+aaaabaaacbaaaaba
+aaaabaaaabaacaba
+bbbbbbbbbbbbbbbb
+aaaabaacabaaaaba
+aaaabaaaabacaaba
+aacabaaaabaaaabc
+aaaabacaabaaaaba
+bbbbbbbbbbbbbbbb
+acaabaaaabaaaaba
+aaaabcaaabaaaaba
+aaaabaaaabaaaaba
+caaabaaaabaaacba
+bbbbbbbbbbbbbbbb
+aaaabaaacbaaaaba
+PAL
+a #7d94a6 harbour-stone
+b #5d7484 harbour-stone-gap
+c #9db4c4 harbour-stone-light

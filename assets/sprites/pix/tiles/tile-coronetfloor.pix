@@ -1,0 +1,23 @@
+# Stage S3a: coronetfloor — slate scree floor of Mt. Coronet (full-bleed, walkable).
+PIX tile-coronetfloor 16 16
+aaaaabcaaaabaaac
+aaaacaaadaadbaad
+bbbaababaabaaaba
+aacabdbabaabaaaa
+aaaabdaaaaaaabdc
+abcabaacabaaaaba
+aaaaaaaaabaaaaab
+baadabaacaaaabca
+daabaaacacdababa
+adddaadaccaabaaa
+acaccbaaacaaaaca
+aabbaaabaaaaaacb
+acaaabaaaaaabaaa
+aaaaaaabdbadacaa
+cbaaabaaaacaacaa
+abaaaabacacdaadc
+PAL
+a #8d8578 coronet-floor
+b #6d665a coronet-floor-dark
+c #aaa294 coronet-floor-light
+d #7a8698 coronet-slate-chip
