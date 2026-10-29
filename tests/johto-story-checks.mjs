@@ -126,10 +126,10 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
   try { checkOut = execFileSync('node', [join(ROOT, 'tools/api-scripts/gen-tables.mjs'), '--check'], { encoding: 'utf8' }); }
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 186 (183 + HM06 Defog + HM07 Rock Climb + the Gracidea, Arc 4 Stage S4 — supersedes the Stage S0 count), quests table carries every q_johto_* + johto tale id',
+  ok('A15 tables.json in sync; badgeSequences.johto is the earn order, items count 192 (186 + 6 Sinnoh keepsakes, Arc 4 Stage S5a — supersedes the Stage S4 count), quests table carries every q_johto_* + johto tale id',
     checkOut.includes('tables.json OK')
     && JSON.stringify(t.badgeSequences.johto) === JSON.stringify(JOHTO_ORDER)
-    && t.items.length === 186
+    && t.items.length === 192
     && t.items.includes('secretpotion')
     && JOHTO_QUESTS.every((q) => t.quests.includes(q.id))
     && Object.keys(JOHTO_TALES).every((id) => t.quests.includes(id)), checkOut.trim());

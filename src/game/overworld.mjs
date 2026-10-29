@@ -14,6 +14,7 @@ import { PARTNER_MOODS } from '../data/dialogue.mjs';
 import { TALE_NPCS, TALE_NPC_PATCHES } from '../data/quests.mjs';
 import { JOHTO_NPCS, JOHTO_NPC_PATCHES } from '../data/story-johto.mjs';
 import { HOENN_NPCS, HOENN_NPC_PATCHES } from '../data/story-hoenn.mjs';
+import { SINNOH_NPCS, SINNOH_NPC_PATCHES } from '../data/story-sinnoh.mjs';
 import { weatherForMap, drawWeatherOverlay } from './weather.mjs';
 import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from './bonds.mjs';
 import { MOVES } from '../data/moves.mjs';
@@ -205,6 +206,25 @@ export class OverworldScene {
       const hoennNpcs = HOENN_NPCS.filter((n) => n.map === id);
       if (hoennNpcs.length) {
         npcs = [...npcs, ...hoennNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
+        changed = true;
+      }
+      // Arc 4 Stage S5a (Sinnoh story): the same append idiom fields
+      // the Sinnoh story actors (Rowan, Dawn, Barry, Paul, the
+      // commanders, Reggie, the four leaders + gym rosters) and stamps
+      // Sinnoh tale roles onto existing maps9 townsfolk by name
+      // (SINNOH_NPC_PATCHES, keyed map -> name). The generated maps9
+      // definitions are never mutated; the scene works on this copy.
+      const sPatches = SINNOH_NPC_PATCHES[id];
+      if (sPatches) {
+        npcs = npcs.map((n) => {
+          const pp = sPatches[n.name];
+          return pp ? { ...n, tale: pp.tale, role: pp.role } : n;
+        });
+        changed = true;
+      }
+      const sinnohNpcs = SINNOH_NPCS.filter((n) => n.map === id);
+      if (sinnohNpcs.length) {
+        npcs = [...npcs, ...sinnohNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
       // ADR-025 §2 (Bonds): the Celadon parley pair stand in Celadon

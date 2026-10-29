@@ -11,6 +11,7 @@ import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './sta
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
+import { SINNOH_QUESTS } from '../data/story-sinnoh.mjs';
 import { FACILITIES, FACILITY_IDS } from '../data/frontier.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
@@ -409,6 +410,27 @@ Object.assign(Game.prototype, {
         });
       }
     }
+    // Section 1.8 — Sinnoh (Stage S5a): the SINNOH_QUESTS chain in
+    // the same idiom, rendered once the Sinnoh arc is reached (the
+    // homecoming hook, the current arc, a first badge, the arrival,
+    // or a completed journey). S5b's appended rows render here
+    // unchanged — the chain order is the data order.
+    const sinnohReached = currentArcOf(g.state).id === 'sinnoh'
+      || !!g.state.story.flags.hook_sinnoh
+      || ((g.state.badges.sinnoh || []).length > 0)
+      || !!g.state.story.flags.sinnoh_arrival
+      || (g.state.story.regionsDone || []).includes('sinnoh');
+    if (sinnohReached) {
+      items.push({ label: '— SINNOH —', value: null, disabled: true, band: true });
+      for (const q of SINNOH_QUESTS) {
+        const doneF = q.flag && g.state.story.flags[q.flag];
+        const active = !doneF && SINNOH_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
+        items.push({
+          label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text,
+          value: 'sq:' + q.id, disabled: !active && !doneF,
+        });
+      }
+    }
     // Section 1.9 — Battle Frontier (Stage F3): one row per facility
     // in the Johto section's idiom, rendered once the Frontier is
     // reached (its homecoming hook, the crossing, the current arc,
@@ -483,6 +505,9 @@ Object.assign(Game.prototype, {
           const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'SILVER' : 'not yet earned';
           g.ui.say([fac.name + ' — Frontier Brain ' + fac.brain + ', ' + fac.brainTitle + '.', 'Your symbol here: ' + word + '. The facility desk books the runs; the Brain keeps the symbol.'], () => g.openQuestLog(), 'Frontier');
         }
+      } else if (v.startsWith('sq:')) {
+        const q = SINNOH_QUESTS.find((x) => 'sq:' + x.id === v);
+        if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');
       } else if (v.startsWith('jq:')) {
         const q = JOHTO_QUESTS.find((x) => 'jq:' + x.id === v);
         if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');

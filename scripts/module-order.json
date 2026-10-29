@@ -39,6 +39,7 @@
  "src/data/story-orange.mjs",
  "src/data/story-johto.mjs",
  "src/data/story-hoenn.mjs",
+ "src/data/story-sinnoh.mjs",
  "src/data/quests.mjs",
  "src/data/merge.mjs",
  "src/engine/fx.mjs",

@@ -58,10 +58,10 @@ const MV = (type, cat) => ({ type, cat: cat || 'physical', power: 40 });
 // -- the set, the pocket, the shape law --
 {
   const ids = Object.keys(KEEPSAKES).sort();
-  ok('A01 exactly the 12 specced keepsakes', JSON.stringify(ids) === JSON.stringify([
-    'championsribbon', 'embereed', 'fossilspur', 'gardeniasash', 'gloomfang',
-    'ironacorn', 'secondwindribbon', 'sparrowfeather', 'spectrebell',
-    'thunderheadpin', 'tidepearl', 'tortoisecharm',
+  ok('A01 the keepsake set: the 12 specced pieces + 6 Sinnoh pieces (Arc 4 Stage S5a — supersedes the Phase 3 closed set; the 12 keep their ids/shapes)', JSON.stringify(ids) === JSON.stringify([
+    'championsribbon', 'coalseamcharm', 'dawnribbon', 'embereed', 'fossilspur', 'gardeniasash', 'gloomfang',
+    'ironacorn', 'meadowcord', 'ribbonclasp', 'ruinbell', 'secondwindribbon', 'sparrowfeather', 'spectrebell',
+    'starshard', 'thunderheadpin', 'tidepearl', 'tortoisecharm',
   ]), ids.join(','));
   ok('A02 every piece is a bag item in the keepsakes pocket; pocket exists; only the ribbon has a price',
     ids.every((id) => ITEMS[id] && ITEMS[id].pocket === 'keepsakes')

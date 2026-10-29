@@ -26,6 +26,7 @@ import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/stor
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
 import { HOENN_QUESTS } from '../data/story-hoenn.mjs';
+import { SINNOH_QUESTS } from '../data/story-sinnoh.mjs';
 import { DIVE_PAIRS } from '../data/maps7.mjs';
 import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
 import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
@@ -305,6 +306,29 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_hoenn_standoff');
       } else if (id === 'sky-pillar' && hf.standoff_seen && !hf.climax_resolved && !hf.ev_hoenn_rayquaza_done) {
         this.runEvent('ev_hoenn_rayquaza');
+      }
+    }
+    // Arc 4 Stage S5a (Sinnoh story, first half): map-entry scenes,
+    // same idiom — each scene's own completion flag is its gate, so a
+    // stalled chain (a fled battleAny, a lost must-win) re-fires on a
+    // later entry. The chain order is the fiction's: the landing ->
+    // the lab (Rowan + Paul's first measure) -> the Verity glimpse
+    // (registered trainers only) -> the Windworks (Coal held) -> the
+    // Eterna building (Forest held) -> the Defog grant in the ruins.
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const sf = g.state.story.flags;
+      if (id === 'sandgem' && g.state.story.arc === 'sinnoh' && !sf.sinnoh_arrival && !sf.ev_sinnoh_arrival_done) {
+        this.runEvent('ev_sinnoh_arrival');
+      } else if (id === 'rowan-lab' && sf.sinnoh_arrival && !sf.paul1_done && !sf.ev_sinnoh_lab_done) {
+        this.runEvent('ev_sinnoh_lab');
+      } else if (id === 'lake-verity' && sf.rowan_registered && !sf.verity_glimpse && !sf.ev_sinnoh_verity_done) {
+        this.runEvent('ev_sinnoh_verity');
+      } else if (id === 'valley-windworks' && sf.badge_coal && !sf.windworks_cleared && !sf.ev_sinnoh_windworks_done) {
+        this.runEvent('ev_sinnoh_windworks');
+      } else if (id === 'galactic-eterna' && sf.badge_forest && !sf.galactic_eterna_done && !sf.ev_sinnoh_galactic_done) {
+        this.runEvent('ev_sinnoh_galactic');
+      } else if (id === 'solaceon-ruins' && sf.badge_relic && !sf.defog_received && !sf.ev_sinnoh_defog_done) {
+        this.runEvent('ev_sinnoh_defog');
       }
     }
     // Stage H6 (Hoenn legendary arcs): map-entry faces, same idiom —
@@ -1355,6 +1379,9 @@ Object.assign(OverworldScene.prototype, {
     // Stage H4a: Hoenn story actors (Birch, May, Wally, Norman, the
     // west leaders, Cozmo, the two admins) run their own scenes.
     if (npc.hoenn) { if (this.runHoennNpc(npc)) return true; }
+    // Arc 4 Stage S5a: Sinnoh story actors (Rowan, Dawn, Barry, Paul,
+    // the commanders, Reggie, the four leaders) run their own scenes.
+    if (npc.sinnoh) { if (this.runSinnohNpc(npc)) return true; }
     // Stage H6: the Mossdeep Space Center's facade researcher
     // (SPACE RESEARCHER ORBIT, a maps7 townsfolk — no interior
     // exists and none is faked) carries the two star arcs' briefings.
@@ -2826,6 +2853,229 @@ Object.assign(OverworldScene.prototype, {
       onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); if (onWin) onWin(!!won && !fled); },
     }));
   },
+
+  // ---------- Arc 4 Stage S5a: Sinnoh story actors ----------
+  // One dispatch for every NPC carrying a `sinnoh:` key (the actors
+  // loadMap appends from story-sinnoh.mjs SINNOH_NPCS). Leaders ride
+  // the shared leader runner; the badge-order refusal reads
+  // badges.sinnoh (the generic Johto/Hoenn path). Paul's beats are
+  // the arc's spine: the lab battle is an entry EVENT (ev_sinnoh_lab);
+  // here are his Eterna assessment, the Hearthome Chimchar beat, and
+  // the Veilstone audit battle. Dawn's Hearthome beat mirrors May's
+  // contest beats (dialogue-only story state on the shipped Super
+  // Contest system — the player's own ranked entries are S4's).
+  runSinnohNpc(npc) {
+    const g = this.game;
+    const st = g.state;
+    const flags = st.story.flags;
+    const sBadges = (st.badges && st.badges.sinnoh) || [];
+    const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
+    const kind = npc.sinnoh;
+    const SINNOH_LEADER_WAITS = {
+      coalbadge: 'Roark, in Oreburgh City\'s gym',
+      forestbadge: 'Gardenia, in Eterna City\'s gym',
+      relicbadge: 'Fantina, in Hearthome City\'s gym',
+      cobblebadge: 'Maylene, in Veilstone City\'s gym',
+      fenbadge: 'Crasher Wake, in Pastoria City\'s gym',
+      minebadge: 'Byron, in Canalave City\'s gym',
+      iciclebadge: 'Candice, in Snowpoint City\'s gym',
+      beaconbadge: 'Volkner, in Sunyshore City\'s gym',
+    };
+    const badgeOrderRefusal = (badgeId) => {
+      const idx = BADGE_SETS.sinnoh.indexOf(badgeId);
+      if (idx <= 0 || sBadges.length >= idx) return null;
+      const miss = BADGE_SETS.sinnoh[sBadges.length];
+      const missItem = ITEMS[miss];
+      return ['The League keeps an order in Sinnoh, challenger, and I keep it with them: the badges are earned in sequence here, coast to mountain.',
+        'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (SINNOH_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
+    };
+
+    if (kind === 'rowan') {
+      if (!flags.sinnoh_arrival && !flags.ev_sinnoh_arrival_done) { say(['The lab is at the north end of Sandgem, trainer — tall windows, taller reputation.']); return true; }
+      if (flags.galactic_eterna_done) { say(['Jupiter left a page behind, I am told. The lakes, underlined. My oldest books are missing their statue rubbings, {player} — and a thief who steals HISTORY is planning to use it. Walk carefully, and watch the water.']); return true; }
+      say(['Registered, measured, and only slightly audited by my least diplomatic colleague. Oreburgh first, {player}: east through Jubilife, then the mine road. Roark keeps the Coal Badge, and a fossil collection worth the walk on its own.']);
+      return true;
+    }
+
+    if (kind === 'dawn_twinleaf') {
+      if (!flags.dawn_met) {
+        say(['Oh — you are HIM. The ferry trainer. Mom said a champion was landing in Sandgem and the whole street has been pretending not to look out of its windows since dawn. I am Dawn. This is Twinleaf — my town, my pond, my starting line.', 'Everyone assumes a road like yours is all gyms. Mine is contests: appeal rounds, stage lights, a crowd that grades your footwork while your partner performs. Hearthome\'s Super Contest Hall is my first real stage, {player}. When your road bends there — come and sit in my world. I will be the one not breathing until the music starts.'], () => { flags.dawn_met = true; });
+        return true;
+      }
+      say(['Hearthome, {player}. First stage, full lights. I rehearse in the mirror and the mirror has started applauding early, which I choose to take as a good sign.']);
+      return true;
+    }
+
+    if (kind === 'barry') {
+      if (!flags.barry_met) {
+        say(['WHAM— oh. Oh no. Did I hit you? I hit you. That is a fine! I am fining MYSELF ten million for the collision and you a hundred million for standing in a doorway shaped exactly like a Barry-corridor— wait. WAIT. You are the ferry champion!', 'Barry. Future greatest trainer in Sinnoh, currently undefeated at running late. You are here for the badges, I am here for the badges, the badges are THEREFORE a race, and I am already winning it. Oreburgh! Now! If I am not at Roark\'s door in ten seconds I am fining myself again!'], () => { flags.barry_met = true; });
+        return true;
+      }
+      say(['Still racing you, {player}! The fine for losing to me is everything you own plus interest! I accept badges as payment! ...What do you mean that is not how fines work—']);
+      return true;
+    }
+
+    if (kind === 'mars') {
+      if (flags.windworks_cleared) { say(['Gone, darling. Long gone. What stays is the count — and you cannot un-count a number.']); return true; }
+      say(['The turbines answer to us today, darling. The keeper is indisposed, the keeper\'s key is indisposed — come through the door properly if you want to argue about it.']);
+      return true;
+    }
+    if (kind === 'jupiter') {
+      if (flags.galactic_eterna_done) { say(['The building is yours, child — stone and paper. What we needed left before you arrived.']); return true; }
+      say(['Everything counted in these rooms belongs to a future you are not dressed for, child. The top floor is not a public floor.']);
+      return true;
+    }
+    if (kind === 'saturn') {
+      // PACING CALL (S5a register): the full Veilstone HQ raid is
+      // S5b's — here Saturn is presence and a locked door: the anime
+      // spreads the HQ across the arc, and this half ends at the
+      // gyms. His flavour turns colder once Eterna has fallen.
+      if (flags.saturn_met) { say(['Still here, trainer? Doors here open inward only — and the building has decided you are weather: noted, and kept outside.']); return true; }
+      if (flags.galactic_eterna_done) {
+        say(['Saturn. I keep this house for Team Galactic — its doors, its ledgers, its patience. Eterna was a counting house, trainer; you have annoyed an abacus, nothing more.', 'Whatever you imagine is behind me, it will keep imagining back at you until the Commander-in-Chief calls it forward. Go and win your little badges. History is being scheduled elsewhere.'], () => { flags.saturn_met = true; });
+        return true;
+      }
+      say(['Saturn. I keep this house — its doors, its ledgers, its patience. Tourists mistake it for a destination, trainer. It is a door, and doors here open inward only.', 'You have the look of a storm the building has been briefed about. Noted. Filed. Kept outside.'], () => { flags.saturn_met = true; });
+      return true;
+    }
+
+    if (kind === 'paul_eterna') {
+      if (flags.paul_veilstone_done) { say(['Still ahead of my projections, {player}. The lakes will re-audit us both. Be there.']); return true; }
+      if (!flags.paul_eterna_seen) {
+        say(['You took Gardenia\'s measure. Adequate. The Roserade folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Pokemon. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
+        return true;
+      }
+      say(['Still counting, {player}. Hearthome next — Fantina\'s theatre. Try not to be decorative about it.']);
+      return true;
+    }
+
+    if (kind === 'paul_hearthome') {
+      if (flags.chimchar_beat_done) {
+        say(flags.chimchar_taken
+          ? ['It follows you now. Of course it does. Sentiment is a strategy I leave to trainers with margins to spare, {player}. Yours, apparently, are spare. We will see what the lakes say about both our methods.']
+          : ['Still standing there, last I looked. Some trainer with more patience than ambition will ruin it with kindness. Not my entry to make anymore.']);
+        return true;
+      }
+      if (!sBadges.includes('relicbadge')) {
+        say(['A trainer of mine is about to stop being a trainer of mine, in this city. Watch, if your road has the time. Yours usually finds time for strays.', 'Fantina first, {player}. Order matters. Even in discarding.']);
+        return true;
+      }
+      // ---- the Chimchar beat ----
+      say(['There. Look at it, since you are here. A Chimchar I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Pokemon\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
+        say(['The little fire-type watches Paul walk away without a sound. Its flame is lit. Its stance, when it turns to you, is a question it has clearly been practicing: not can I win — but will anyone stay long enough to find out?'], () => {
+          g.ui.showMenu('Take the Chimchar in?', [
+            { label: 'Take it in', value: 'yes' },
+            { label: 'Leave it to the road', value: 'no' },
+          ], (v) => {
+            if (v !== 'yes') {
+              flags.chimchar_beat_done = true;
+              flags.chimchar_left = true;
+              say(['You leave it to the road, and the road — Hearthome is kind, as cities go — will find it a softer arithmetic than Paul\'s. Its flame stays lit as you go. Some stories in this region are not yours to carry.'], null, '');
+              return;
+            }
+            const res = st.party.length < 6
+              ? this.cheatDeliverMon('chimchar', 320, 'party')
+              : this.cheatDeliverMon('chimchar', 320, 'box');
+            if (!res.ok) {
+              g.ui.say(['There is no room anywhere — party full and every PC box full. Make room, and come back. The Chimchar waits; it has had practice at waiting.'], null, '');
+              return;
+            }
+            flags.chimchar_beat_done = true;
+            flags.chimchar_taken = true;
+            g.audio.playSfx('dex-register');
+            if (res.dest === 'box' && res.boxId) g.ui.toast('Chimchar was sent to ' + res.boxId.replace('box', 'Box ') + '!');
+            else g.ui.toast('Chimchar joined the party!');
+            say(['It does not hesitate. Whatever Paul\'s ledger said, the Chimchar has done its own arithmetic about you — the whole of it, in one look — and chosen.', 'Train it however you train yours, {player}. If it wins for you where it could not win for him, then one of our ledgers is wrong. I find I am... content to let the lakes decide which.'], null, 'PAUL');
+          });
+        }, '');
+      });
+      return true;
+    }
+
+    if (kind === 'reggie') {
+      if (!flags.reggie_met) {
+        say(['I am Reggie. I breed Pokemon here in Veilstone — feed them, raise them, teach them the shape of a good life. My little brother Paul passed your name to me in a letter of exactly eleven words, which for Paul is a memoir.', '"Trainer from the ferry. Underestimated by everyone counting. Watch him." That is the whole letter. He has never once written watch him about anybody, {player}. Whatever you did at that lab, it is still walking around in his head.'], () => { flags.reggie_met = true; });
+        return true;
+      }
+      say(flags.chimchar_taken
+        ? ['A Chimchar with a Paul-shaped past and a {player}-shaped future. Feed it steady, train it honest, and let it win at its own pace. That is the whole method, and it has never once been the slow one that mattered.']
+        : ['Paul trains the way winter farms — nothing kept that cannot survive the season. I keep everything and feed it twice. Veilstone raised us both, trainer. The city declines to pick a favorite.']);
+      return true;
+    }
+
+    if (kind === 'dawn_contest') {
+      // Dawn's first Super Contest beat (the mayContest idiom: a
+      // dialogue-only story state riding the shipped hall — the
+      // player's own ranked Super Contest entries are S4's system,
+      // entered at the counter, and are not gated by this beat).
+      if (flags.dawn_hearthome_done) { say(['My ribbon is in the case and my heart has only just come down out of the lights, {player}. The road east has fog on it, they say. Good. I have decided fog is just stage mist that lost its hall.']); return true; }
+      if (!sBadges.includes('relicbadge')) { say(['Not yet — Fantina first, {player}. A coordinator keeps her order too: I am not stepping onto this stage until the gym across town has had its performance. Besides — SHE is one of the judges\' favorite stories. I intend to be another.']); return true; }
+      say(['You came. Okay. OKAY. From the top, just like the mirror taught me...', '...The last appeal card turned MY way, {player}. The judges stood. The whole hall stood! My first Super Contest — a ribbon, earned in Hearthome, in front of a champion who once crossed four regions to sit in the third row.', 'Mom is going to hear about this from three towns away before I even call her. The road east is yours — Solaceon, the fog, Veilstone. Mine runs beside it a while longer. Walk it like a stage, {player}. That is what I intend to do.'], () => {
+        flags.dawn_hearthome_done = true;
+        flags.dawn_ribbon_hearthome = true;
+        g.audio.playSfx('dex-register');
+        g.ui.toast('Dawn won her first Super Contest ribbon at Hearthome!');
+      });
+      return true;
+    }
+
+    if (kind === 'paul_veilstone') {
+      if (flags.paul_veilstone_done) { say(['The ledger is closed until the lakes, {player}. Whatever is counting this region\'s water, it will want both our numbers. Bring yours current.']); return true; }
+      if (!sBadges.includes('cobblebadge')) { say(['Not here. Not yet. Maylene first, {player} — I do not audit a trainer my own city\'s gym has not finished examining. Win the Cobble Badge. Then come and be measured on ground that knows my name.']); return true; }
+      const t0 = TRAINERS.paul_veilstone;
+      say([t0.intro[0], t0.intro[1]], () => {
+        g.ui.showMenu('Face Paul — the Veilstone audit?', [
+          { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
+        ], (v) => {
+          if (v !== 'yes') return;
+          const t = bondTrainerVariant(g.state, t0);
+          g.scenes.push(new BattleScene({
+            kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g), friendly: true,
+            onEnd: (won, fled) => {
+              if (fled) return;
+              recordBattleBond(g.state, t.id, won, fled);
+              flags.paul_veilstone_done = true;
+              if (won) flags.paul_veilstone_won = true; else flags.paul_veilstone_lost = true;
+              say(won ? t0.lose : ['...The audit closes early, then — the numbers went my way this time, and I will not pretend otherwise to spare your feelings. I do not spare anyone\'s. That includes mine.', 'The lakes are next, for both of us. Whatever is coming for this region, it will not wait for either of us to be ready. Be ready anyway.'], null, 'PAUL');
+            },
+          }));
+        });
+      }, 'PAUL');
+      return true;
+    }
+
+    // ---- the first-half leaders ----
+    const LEADERS = {
+      roark: { badge: 'coalbadge', post: 'The road north runs through the mines\' shadow to Jubilife, and west past Floaroma the wind has stopped answering its keeper, they say. Mind the turbines, Coal Badge holder — and mind who else minds them.' },
+      gardenia: { badge: 'forestbadge', post: 'The tower with the meteor on it, Forest Badge holder — its lobby is quieter than my forest and twice as watchful. Whatever Team Galactic counts in there, count yourself in carefully.' },
+      fantina: { badge: 'relicbadge', post: 'East now, Relic Badge holder: Solaceon\'s ruins keep an old remedy for the fog, and Veilstone keeps a gym that apologizes to no one. And the hall, darling — do come back to the hall. The stage remembers its friends.' },
+      maylene: { badge: 'cobblebadge', post: 'Four badges. The lakes are next on every road out of my city, Cobble Badge holder — Valor south, Acuity far north, and Verity behind you, already watching. Whatever is counting that water, it has started. Keep your team close and your eyes open.' },
+    };
+    const L = LEADERS[kind];
+    if (!L) return false;
+    if (sBadges.includes(L.badge)) { say([L.post]); return true; }
+    const orderRefusal = badgeOrderRefusal(L.badge);
+    if (orderRefusal) { say(orderRefusal); return true; }
+    const t0 = TRAINERS[kind];
+    say([t0.intro[0]], () => {
+      g.ui.showMenu('Challenge ' + t0.name + '?', [
+        { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
+      ], (v) => { if (v === 'yes') this.startSinnohBattle(kind, null); });
+    });
+    return true;
+  },
+
+  // The shared leader runner, Sinnoh seat (startHoennBattle's idiom).
+  startSinnohBattle(trainerId, onWin) {
+    const g = this.game;
+    const t0 = TRAINERS[trainerId];
+    if (!t0) { if (onWin) onWin(false); return; }
+    const t = bondTrainerVariant(g.state, t0);
+    g.scenes.push(new BattleScene({
+      kind: 'trainer', trainer: t, returnTo: this, rt: rtOf(g),
+      onEnd: (won, fled) => { recordBattleBond(g.state, t.id, won, fled); if (onWin) onWin(!!won && !fled); },
+    }));
+  },
   // --- H4b: runHoennNpc east actors + the climax/Institute/Pyre/
   // hideout/Seafloor scenes extend the dispatch above ---
 
@@ -2915,7 +3165,7 @@ Object.assign(OverworldScene.prototype, {
     // giver finishes (finishWith pays the def's reward + bond).
     {
       const jt = QUESTS[id];
-      if (jt && (jt.johtoTale || jt.hoennTale)) {
+      if (jt && (jt.johtoTale || jt.hoennTale || jt.sinnohTale)) {
         if (npc.role === 'giver') {
           if (stage < 0) { say(jt.offerLines, () => acceptTale(st, id)); return true; }
           if (stage === 0) { say(['The road remembers an errand, trainer: ' + jt.stages[0] + '.']); return true; }
@@ -4581,6 +4831,13 @@ Object.assign(OverworldScene.prototype, {
     if (currentArcOf(g.state).id === 'hoenn') {
       const hq = HOENN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (hq) return '▶ ' + hq.text;
+    }
+    // Stage S5a: while the Sinnoh arc is current, its chain leads the
+    // HUD objective (the first-half rows; S5b's appended rows join
+    // the same find, in chain order).
+    if (currentArcOf(g.state).id === 'sinnoh') {
+      const sq = SINNOH_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
+      if (sq) return '▶ ' + sq.text;
     }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;

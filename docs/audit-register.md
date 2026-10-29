@@ -12352,3 +12352,200 @@ build byte-identical post-commit; `personal/` byte-identical
 - Rotom's appliance move (canon: the forme's signature move
   swaps with the forme) stays unmodelled under the recorded §4
   delta unless a later stage rules otherwise.
+
+## Arc 4 Stage S5a — Sinnoh story, first half (2026-10-29)
+
+Base: main @ 59547e5 (S4). Deliverable: the Sinnoh story's first
+half in the H4a anatomy — one new data module
+(`src/data/story-sinnoh.mjs`, module-order after story-hoenn) plus
+the wiring this half needs (merge folds, loadMap append/patches,
+sysLoadMap entry gates, `runSinnohNpc`/`startSinnohBattle`, the
+tale machine's `sinnohTale` branch, a Quest Log SINNOH section, the
+HUD objective branch). Platinum governs; the anime is the primary
+canon (ADR-015); all writing is original — no borrowed dialogue.
+The Darkrai/Canalave beat sits in S5b by the coordinator's
+resequencing note; this half ends at Veilstone / Lake Valor's door.
+
+### 0. Budget vs the coordinator allowance
+
+S5a planned to the coordinator-set allowance of **+70,000 B public
+static total max**. **Actuals: public static total 12,251,036 →
+12,318,493 B, Δ +67,457 — inside the allowance by 2,543 B**
+(`public/game.js` 12,088,414 → 12,155,871 B, the same delta).
+**Restated projection-to-close:** S5b +70,000 (its allowance) +
+S6 +45,000 + S7 +45,000 + S8/S9 ≈ +3,000 → remaining ≈ +163,000 →
+projection ≈ **12,481,493 B**, margin ≈ **101,419 B** vs the
+12,582,912 B gate — still below the 150,000 B austerity tripwire,
+so **S5b likewise plans to its coordinator-set allowance (+70,000)
+before it starts.**
+
+### 1. The arrival + the rivals
+
+The true path starts from a Frontier-complete save whose
+sealed-Sinnoh homecoming was already consumed (S0 proved the
+derivation): Vermilion → CAPT SINNOH → embark (the registry's
+enRouteLines, consumed not rewritten) → Sandgem, where
+`ev_sinnoh_arrival` lands the player — no send-off committee, no
+starter ceremony, NO team reset: the player is Ash, champion-tier,
+travelling at full strength (Amendment 1). `ev_sinnoh_lab` (Rowan's
+lab, entry-gated on the arrival) registers a veteran, then Paul
+walks in: his first battle is the event's `battleAny` step
+(win/lose branch flags `paul1_won`/`paul1_lost`, `paul1_done` on
+either). BARRY opens in Jubilife (`barry_met`) — frantic,
+fine-obsessed, original writing. Dawn opens in Twinleaf
+(`dawn_met`) as the contest co-spine.
+
+### 2. Quest chain + the four leaders
+
+`SINNOH_QUESTS` — 14 rows in the MAIN_QUESTS idiom, rendered as the
+Quest Log's SINNOH section (`sq:` rows) and leading the HUD
+objective while the arc is current: arrival `sinnoh_arrival` → lab
+`rowan_registered` → Paul 1 `paul1_done` → Verity `verity_glimpse`
+→ Roark `badge_coal` → Windworks `windworks_cleared` → Gardenia
+`badge_forest` → Galactic Eterna `galactic_eterna_done` → Fantina
+`badge_relic` → Dawn's contest `dawn_hearthome_done` → Chimchar
+`chimchar_beat_done` → Defog `defog_received` → Maylene
+`badge_cobble` → Paul's audit `paul_veilstone_done`. The leaders
+ride the GENERIC award path (trainer defs carry
+`badgeSet:'sinnoh'` + `badge`; winTrainer writes badges.sinnoh +
+`badge_<root>`), and the overworld refusal in `runSinnohNpc` reads
+badges.sinnoh — the Johto/Hoenn prefix law, suite-proven by a live
+badge-skip attempt on Gardenia. Two talk-to roster trainers per
+gym, rising beneath their leader.
+
+| Leader | Gym | Ace | Ace level | Badge flag |
+|---|---|---|---|---|
+| Roark | Oreburgh | Cranidos (coalseamcharm) | 312 | badge_coal |
+| Gardenia | Eterna | Roserade (meadowcord) | 322 | badge_forest |
+| Fantina | Hearthome | Mismagius (spectrebell) | 332 | badge_relic |
+| Maylene | Veilstone | Lucario (thunderheadpin) | 345 | badge_cobble |
+
+### 3. Team Galactic, first half
+
+Lake Verity's opening beat is a GLIMPSE (`ev_sinnoh_verity`: the
+lake guardian's shadow crosses the reflection; no battle, no gift,
+no catch — S6 owns the trio). Jubilife carries flavour pressure
+(Barry's race + the broadcast-intern tale's measured skyline).
+Valley Windworks (`ev_sinnoh_windworks`, Coal-gated entry): Mars
+holds the keeper hostage — a must-win `battle` step (Purugly ace
+318) → `windworks_cleared`. The Eterna building
+(`ev_sinnoh_galactic`, Forest-gated entry): Jupiter, must-win
+(Skuntank ace 330) → `galactic_eterna_done`, and the page she
+leaves behind names the lakes. **PACING CALL (recorded): the full
+Veilstone HQ raid is S5b's.** S5a's Saturn is presence only —
+`saturn_met`, a locked door and a colder greeting once Eterna has
+fallen; he has NO trainer def this half (suite-pinned). The anime
+spreads the HQ across the arc; the raid lands with the lakes half.
+
+### 4. The Paul spine
+
+| Beat | Where | Form | Team levels |
+|---|---|---|---|
+| Introduction | Rowan's lab (event) | battleAny | 308 / 310 / **312** (Elekid, starshard) |
+| Cold assessment | Eterna | dialogue (`paul_eterna_seen`) | — |
+| The Chimchar beat | Hearthome (Relic-gated) | gift event | — |
+| Home-turf audit | Veilstone (Cobble-gated) | friendly battle | 342 / 344 / 346 / **348** (Torterra, starshard) |
+
+The Chimchar beat: Paul discards a Chimchar his ledger calls
+finished; the player chooses. Taking it in rides the shipped
+cap-safe delivery (`cheatDeliverMon`, party else PC box, stall if
+no room anywhere) — a Lv 320 Chimchar, in band, dex-registered
+(`chimchar_taken`); leaving it is an honest branch
+(`chimchar_left`). Both close `chimchar_beat_done`. REGGIE, the
+Veilstone breeder (an original analogue), carries the
+eleven-word-letter beat (`reggie_met`).
+
+### 5. Dawn + contests
+
+Dawn's first Super Contest beat at Hearthome rides S4's shipped
+system in the mayContest idiom: an NPC beat in the hall
+(Relic-gated, dialogue story state — `dawn_hearthome_done` +
+`dawn_ribbon_hearthome`), while the player's OWN ranked Super
+Contest entry at the counter stands open beside it, ungated by the
+beat (the rank ladder's own gates rule it; suite-pinned).
+
+### 6. Extras accounting (H4a proportions, split with S5b)
+
+- **Grounds (8, existing 15 only):** gym signatures — Oreburgh
+  rubble, Eterna bloom, Hearthome grave, Veilstone mind; landmarks
+  — Valley Windworks storm, Galactic Eterna volt, Lake Verity
+  tide, Solaceon Ruins grave.
+- **Town Tales (9 — one per first-half settlement):** Twinleaf,
+  Sandgem, Jubilife, Oreburgh, Floaroma, Eterna, Hearthome,
+  Solaceon, Veilstone — the data-driven JOHTO/HOENN_TALES idiom
+  (`sinnohTale: true`; giver/stage roles stamped onto maps9
+  townsfolk via SINNOH_NPC_PATCHES).
+- **Keepsakes (6 of the arc's 8–12; S5b authors the rest):**
+  dawnribbon (xpBoost), starshard (underdogDamage), coalseamcharm
+  (lowHpDamage rock), meadowcord (healBoost), ruinbell (typeWard
+  psychic), ribbonclasp (statusChance confusion) — EXISTING
+  resolved kinds only, no new engine kind (the battle-model gate
+  is untouched); each is paid by exactly one Sinnoh tale, and two
+  double as gym-ace signatures (Roark's, Gardenia's).
+- **TMs: NONE — mirroring H4a exactly.** H4a added no Gen-3 TM
+  rows (TM_MOVES is still the Gen-1 50), so S5a adds no Gen-4 TM
+  rows either; suite A17 pins the count and names the mirror so
+  S5b inherits the answer.
+- **Items total 186 → 192** (the six keepsake ITEMS rows);
+  supersessions BY NAME: validator bag cap 186 → 192; sinnoh
+  A11/A12, cheat-shop A02 (keepsakes 12 → 18), frontier A12,
+  hoenn-story A16, johto-story A15, johto-systems A24 →
+  items 192; rejuv-phase3 A01 (the closed 12-piece set gains the
+  six, ids/shapes of the 12 untouched), rejuv-phase4 A18 (18
+  pieces, the six new sources read from SINNOH_TALES).
+  tables.json regenerated via gen-tables only (the quest
+  vocabulary now carries the 14 chain ids + 9 tale ids).
+
+### 7. The Defog grant
+
+`ev_sinnoh_defog` (Solaceon Ruins entry, Relic-gated — Platinum's
+order) places S4's data hook where the pacing reaches it: a
+`{ giveHM: 'defog' }` step (idempotent) + `defog_received`. The
+Fen Badge still licenses field use (S4's generic gate); the ruins
+keep the knowledge itself. Rock Climb's grant stays S5b's
+(Route 217, per HM_GRANTS).
+
+### 8. Suite
+
+New `tests/sinnoh-story-checks.mjs` **46/46** (S5b extends this
+file): Part A (19) — the chain, the leader/Paul/Galactic audits,
+the six events' shapes + gates, the placement BFS over all 23
+authored actors, the tale-patch audit, keepsakes/Grounds/TM
+mirrors, tables sync, wiring. Part B (27) — the bundle TRUE PATH:
+embark → arrival → lab + Paul 1 → Dawn + the Twinleaf tale
+end-to-end → Verity glimpse → the Gardenia badge-skip refusal →
+Roark (+ a roster battle) → Barry → Windworks → Gardenia →
+Eterna Galactic → Paul's assessment → Fantina → Dawn's contest
+beat + the player's rank-menu gate → the Chimchar gift → Defog →
+Maylene → Saturn's door → Reggie → Paul's Veilstone audit →
+badges [coal, forest, relic, cobble] in order, all 14 chain flags
+standing, the Quest Log's SINNOH section starred.
+
+### 9. Battery
+
+sinnoh-story **46/46** · sinnoh-checks **132/132** ·
+qa-changed-flows failures exactly **{b2, d9}** · battle-model
+**45/45** HARD · campaign **24/24** · arc-foundation **47/47** ·
+frontier **136/136** · hoenn-story **88/88** · hoenn-contest
+**28/28** · cheat-shop **44/44** · johto-story **110/110** ·
+johto-systems **62/62** · fidelity **35/35** · validator **106**
++ fuzz **2000/2000** + save-contract **12/12** (api-scripts).
+rejuv-phase3 60/61 and rejuv-phase4 50/51 — the single failure in
+each is C01, the real-browser chromium harness, which cannot
+launch a browser in this environment (both suites' data sections
+are fully green, incl. the superseded keepsake pins). Fresh build
+byte-identical post-commit; `personal/` byte-identical
+(sha f434ba63… / a780af0b…).
+
+### 10. Open items handed on
+
+- **S5b** (allowance +70,000, same gate discipline): gyms 5–8
+  (Wake → Byron → Candice → Volkner), Lake Valor + the lakes
+  chain, the Veilstone HQ raid (Saturn's door opens), Coronet →
+  Spear Pillar, Dawn's remaining contest beats, Paul's remaining
+  beats, the Rock Climb grant (Route 217), the arc's remaining
+  keepsakes (2–6), tales for the second-half settlements — all
+  appended to this stage's chain/file/suite, never rewritten.
+- The single owner-ordered deploy happens once the whole Sinnoh
+  arc chain closes (through Sinnoh); nothing here was pushed or
+  deployed.

@@ -260,6 +260,17 @@ export const KEEPSAKES = {
   thunderheadpin: { id: 'thunderheadpin', name: 'Thunderhead Pin', kind: 'lowHpDamage', moveType: 'electric', factor: 1.15, hpFrac: 0.5, effect: 'Electric moves deal x1.15 while at 50% HP or less.' },
   fossilspur: { id: 'fossilspur', name: 'Fossil Spur', kind: 'fasterFoeDamage', moveType: 'rock', factor: 1.15, effect: 'Rock moves deal x1.15 vs faster foes.' },
   championsribbon: { id: 'championsribbon', name: "Champion's Ribbon", kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
+  // Arc 4 Stage S5a: Sinnoh's first-half share (6 of the arc's 8–12) —
+  // existing resolved kinds ONLY (no new engine kind; the battle-model
+  // gate is untouched). Every piece is acquired in-world: the six Town
+  // Tales of this half pay them (see SINNOH_TALES), and two double as
+  // gym-ace signatures (Roark's Cranidos, Gardenia's Roserade).
+  dawnribbon: { id: 'dawnribbon', name: 'Dawn Ribbon', kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
+  starshard: { id: 'starshard', name: 'Star Shard', kind: 'underdogDamage', factor: 1.25, levelGap: 3, effect: 'Deals x1.25 damage while 3+ levels below the foe.' },
+  coalseamcharm: { id: 'coalseamcharm', name: 'Coal Seam Charm', kind: 'lowHpDamage', moveType: 'rock', factor: 1.15, hpFrac: 0.5, effect: 'Rock moves deal x1.15 while at 50% HP or less.' },
+  meadowcord: { id: 'meadowcord', name: 'Meadow Cord', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
+  ruinbell: { id: 'ruinbell', name: 'Ruin Bell', kind: 'typeWard', moveType: 'psychic', factor: 0.8, effect: 'Takes x0.8 damage from Psychic moves.' },
+  ribbonclasp: { id: 'ribbonclasp', name: 'Ribbon Clasp', kind: 'statusChance', moveType: 'normal', status: 'confusion', bonus: 10, effect: 'Normal moves gain +10% confusion chance.' },
 };
 // The bag/mart surface of the same pieces (ITEMS is the bag's table).
 // price exists ONLY on the Second-Wind Ribbon (its Celadon shop source);

@@ -183,6 +183,9 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
   const hiddenHas = (mapId, item) => ((ALL_MAPS[mapId] || {}).hidden || []).some((h) => h.item === item);
   const celadonClerk = (ALL_MAPS.celadon.npcs || []).find((n) => n.mart);
   const owSys = readFileSync(join(ROOT, 'src/game/overworld-systems.mjs'), 'utf8');
+  // Arc 4 Stage S5a: the Sinnoh tales live in their own module (the
+  // merge fold is a bundle artifact; this suite imports data directly).
+  const { SINNOH_TALES: STALES } = await import(join(ROOT, 'src/data/story-sinnoh.mjs'));
   const sources = {
     sparrowfeather: hiddenHas('route2', 'sparrowfeather'),
     fossilspur: hiddenHas('moon1', 'fossilspur'),
@@ -196,9 +199,15 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
     spectrebell: TALES.tale_lavender.reward.keepsake === 'spectrebell',
     gardeniasash: TALES.tale_celadon.reward.keepsake === 'gardeniasash',
     embereed: TALES.tale_cinnabar.reward.keepsake === 'embereed',
+    dawnribbon: STALES.tale_sinnoh_twinleaf.reward.keepsake === 'dawnribbon',
+    starshard: STALES.tale_sinnoh_sandgem.reward.keepsake === 'starshard',
+    coalseamcharm: STALES.tale_sinnoh_oreburgh.reward.keepsake === 'coalseamcharm',
+    meadowcord: STALES.tale_sinnoh_eterna.reward.keepsake === 'meadowcord',
+    ribbonclasp: STALES.tale_sinnoh_hearthome.reward.keepsake === 'ribbonclasp',
+    ruinbell: STALES.tale_sinnoh_solaceon.reward.keepsake === 'ruinbell',
   };
-  ok('A18 all 12 keepsakes obtainable end-to-end: 4 hidden + shop + HoF gift + 6 tale rewards',
-    Object.keys(KEEPSAKES).length === 12 && Object.entries(sources).every(([k, v]) => v === true && !!KEEPSAKES[k]),
+  ok('A18 all 18 keepsakes obtainable end-to-end: 4 hidden + shop + HoF gift + 6 Kanto tale rewards + 6 Sinnoh tale rewards (Arc 4 Stage S5a — supersedes the 12-piece count)',
+    Object.keys(KEEPSAKES).length === 18 && Object.entries(sources).every(([k, v]) => v === true && !!KEEPSAKES[k]),
     JSON.stringify(sources));
   ok('A19 the six ex-stub pieces are NOT hidden items anywhere in the merged world anymore',
     Object.values(ALL_MAPS).every((m) => !(m.hidden || []).some((h) =>

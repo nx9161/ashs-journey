@@ -211,6 +211,21 @@ export const MAP_GROUND = {
   'cave-of-origin': 'spirit',
   'sky-pillar': 'storm',
   'mt-silver-cave': 'frost',
+  // Arc 4 Stage S5a: Sinnoh first-half gym signature Grounds (existing
+  // 15 only — no new Grounds this stage): Roark's quarry gym rides the
+  // Rubble, Gardenia's greenhouse the Bloom, Fantina's theatre of the
+  // unseen the Grave, Maylene's bare-knuckle hall the Mind (a fighter's
+  // focus). Landmarks follow their feel: the Windworks ride the Storm,
+  // the Galactic tower hums Volt, Lake Verity keeps the Tide, and the
+  // Solaceon Ruins rest on Grave ground.
+  'gym-oreburgh': 'rubble', // Oreburgh Gym — Roark
+  'gym-eterna': 'bloom', // Eterna Gym — Gardenia
+  'gym-hearthome': 'grave', // Hearthome Gym — Fantina
+  'gym-veilstone': 'mind', // Veilstone Gym — Maylene
+  'valley-windworks': 'storm',
+  'galactic-eterna': 'volt',
+  'lake-verity': 'tide',
+  'solaceon-ruins': 'grave',
   // World Art Wave 5b: house interiors (shared template family).
   'house-pallet-ash': 'open',
   'house-pallet-gary': 'open',
