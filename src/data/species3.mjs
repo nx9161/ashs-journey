@@ -224,7 +224,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['flying', 'fairy'], hatchCounter: 10,
     learnset: { 1: ['growl', 'pound'], 107: ['metronome'], 138: ['doubleedge'] },
     flavor: 'It drifts toward kind people as if happiness were a current.',
-    tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+    evo: { to: 'togekiss', method: 'stone', stone: 'sunstone' }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   natu: {
     id: 'natu', name: 'Natu', dexNo: 177, types: ['psychic', 'flying'],
@@ -341,7 +341,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'tailwhip'], 106: ['sandattack'], 127: ['swift'], 136: ['screech'], 146: ['agility'] },
     flavor: 'The hand on its tail is quicker and considerably less honest.',
-    tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
+    evo: { to: 'ambipom', method: 'level', level: 310 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   sunkern: {
     id: 'sunkern', name: 'Sunkern', dexNo: 191, types: ['grass'],
@@ -368,7 +368,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['bug'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 107: ['quickattack'], 113: ['doubletam'], 131: ['supersonic'], 137: ['wingattack'], 143: ['screech'] },
     flavor: 'Its eyes take in every direction; its wings beat the air dizzy.',
-    tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+    evo: { to: 'yanmega', method: 'level', level: 310 }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   wooper: {
     id: 'wooper', name: 'Wooper', dexNo: 194, types: ['water', 'ground'],
@@ -413,7 +413,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['flying'], hatchCounter: 20,
     learnset: { 1: ['peck', 'bite'], 116: ['haze'], 126: ['nightshade'] },
     flavor: 'It collects bright things and bad omens with equal delight.',
-    tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+    evo: { to: 'honchkrow', method: 'stone', stone: 'moonstone' }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   slowking: {
     id: 'slowking', name: 'Slowking', dexNo: 199, types: ['water', 'psychic'],
@@ -431,7 +431,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['indeterminate'], hatchCounter: 25,
     learnset: { 1: ['growl', 'psywave'], 112: ['confuseray'], 127: ['psybeam'] },
     flavor: 'It practices its wail on windy nights and grades the echoes.',
-    tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
+    evo: { to: 'mismagius', method: 'stone', stone: 'moonstone' }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   unown: {
     id: 'unown', name: 'Unown', dexNo: 201, types: ['psychic'],
@@ -494,7 +494,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['bug'], hatchCounter: 20,
     learnset: { 1: ['poisonsting'], 106: ['sandattack'], 113: ['harden'], 120: ['quickattack'], 136: ['slash'], 144: ['screech'], 152: ['guillotine'] },
     flavor: 'It glides face-first off cliff winds, claws spread for landing.',
-    tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
+    evo: { to: 'gliscor', method: 'level', level: 310 }, tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   steelix: {
     id: 'steelix', name: 'Steelix', dexNo: 208, types: ['steel', 'ground'],
@@ -557,7 +557,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 1: ['scratch', 'leer'], 109: ['quickattack'], 117: ['screech'], 141: ['agility'], 149: ['slash'] },
     flavor: 'It scales ice and pine bark with the same hooked ease.',
-    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
+    evo: { to: 'weavile', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   teddiursa: {
     id: 'teddiursa', name: 'Teddiursa', dexNo: 216, types: ['normal'],
@@ -611,7 +611,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['ground'], hatchCounter: 20,
     learnset: { 128: ['takedown'], 133: ['furyattack'], 142: ['mist'], 156: ['blizzard'], 170: ['amnesia'] },
     flavor: 'Ice-locked fur and poor eyes; its nose does all the steering.',
-    tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
+    evo: { to: 'mamoswine', method: 'level', level: 310 }, tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
   },
   corsola: {
     id: 'corsola', name: 'Corsola', dexNo: 222, types: ['water', 'rock'],
@@ -710,7 +710,7 @@ export const SPECIES_JOHTO = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle', 'conversion'], 109: ['agility'], 112: ['psybeam'], 120: ['recover'], 124: ['defensecurl'], 136: ['triattack'] },
     flavor: 'Rebuilt for other worlds, it still wobbles in this one.',
-    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
+    evo: { to: 'porygonz', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   stantler: {
     id: 'stantler', name: 'Stantler', dexNo: 234, types: ['normal'],

@@ -283,7 +283,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['humanshape', 'indeterminate'], hatchCounter: 20,
     learnset: { 1: ['growl', 'confusion', 'teleport', 'doubletam'], 226: ['psychic'], 247: ['hypnosis'], 254: ['dreameater'] },
     flavor: 'It dances on the mornings its trainer wakes up happy.',
-    evo: { to: 'gardevoir', method: 'level', level: 230 }, tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
+    evo: { to: 'gardevoir', method: 'level', level: 230 }, evos: [{ to: 'gardevoir', method: 'level', level: 230 }, { to: 'gallade', method: 'stone', stone: 'sunstone' }], tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   gardevoir: {
     id: 'gardevoir', name: 'Gardevoir', dexNo: 282, types: ['psychic', 'fairy'],
@@ -445,7 +445,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['mineral'], hatchCounter: 20,
     learnset: { 1: ['tackle'], 207: ['harden'], 213: ['rockthrow'], 222: ['thunderwave'], 228: ['rockslide'], 237: ['rest'] },
     flavor: 'It faces north like a compass that grew opinions.',
-    tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
+    evo: { to: 'probopass', method: 'level', level: 310 }, tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   skitty: {
     id: 'skitty', name: 'Skitty', dexNo: 300, types: ['normal'],
@@ -589,7 +589,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
     learnset: { 1: ['absorb'], 205: ['growth'], 209: ['poisonsting'], 213: ['stunspore'], 217: ['megadrain'], 221: ['leechseed'], 245: ['toxic'], 249: ['petaldance'] },
     flavor: 'Sweet scent, poison thorns — a compliment with conditions.',
-    tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
+    evo: { to: 'roserade', method: 'stone', stone: 'sunstone' }, tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   gulpin: {
     id: 'gulpin', name: 'Gulpin', dexNo: 316, types: ['poison'],
@@ -958,7 +958,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['indeterminate'], hatchCounter: 25,
     learnset: { 1: ['bind', 'leer', 'disable', 'nightshade'], 223: ['confuseray'] },
     flavor: 'Its body is a hollow that echoes like a far bell.',
-    tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
+    evo: { to: 'dusknoir', method: 'trade' }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   tropius: {
     id: 'tropius', name: 'Tropius', dexNo: 357, types: ['grass', 'flying'],
@@ -1003,7 +1003,7 @@ export const SPECIES_HOENN = {
     eggGroups: ['fairy', 'mineral'], hatchCounter: 20,
     learnset: { 1: ['leer'], 207: ['doubletam'], 210: ['bite'], 219: ['headbutt'], 234: ['icebeam'], 243: ['blizzard'] },
     flavor: 'It visits hearths in winter and steals only the cold.',
-    evo: { to: 'glalie', method: 'level', level: 242 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
+    evo: { to: 'glalie', method: 'level', level: 242 }, evos: [{ to: 'glalie', method: 'level', level: 242 }, { to: 'froslass', method: 'stone', stone: 'sunstone' }], tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   glalie: {
     id: 'glalie', name: 'Glalie', dexNo: 362, types: ['ice'],

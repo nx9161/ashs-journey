@@ -5,6 +5,7 @@
 // on both sides of the field — staged parity, not uniform parity.
 //
 // Stage H1 (Arc 3): +138 Hoenn rows appended (395 rows total).
+// Stage S1 (Arc 4): +114 Sinnoh rows appended (509 rows total).
 // Assignment rule (auditable): bulk = base HP + DEF + SPD from the
 // species data (the mass proxy the data carries — no height/weight
 // fields exist). S (52px) below 160, L (80px) at 245+, M (64px)
@@ -415,6 +416,121 @@ export const BATTLER_TIERS = {
   deoxysattack: 'S', // bulk 90
   deoxysdefense: 'L', // bulk 370
   deoxysspeed: 'M', // bulk 230
+  // Stage S1 (Arc 4): +114 Sinnoh rows by the same bulk rule (HP+DEF+SPD).
+turtwig: 'M', // bulk 174
+  grotle: 'M', // bulk 225
+  torterra: 'L', // bulk 285
+  chimchar: 'S', // bulk 132
+  monferno: 'M', // bulk 168
+  infernape: 'M', // bulk 218
+  piplup: 'M', // bulk 162
+  prinplup: 'M', // bulk 208
+  empoleon: 'L', // bulk 273
+  starly: 'S', // bulk 100
+  staravia: 'S', // bulk 145
+  staraptor: 'M', // bulk 215
+  bidoof: 'S', // bulk 139
+  bibarel: 'M', // bulk 199
+  kricketot: 'S', // bulk 119
+  kricketune: 'M', // bulk 179
+  shinx: 'S', // bulk 113
+  luxio: 'S', // bulk 158
+  luxray: 'M', // bulk 238
+  budew: 'S', // bulk 145
+  roserade: 'M', // bulk 230
+  cranidos: 'S', // bulk 137
+  rampardos: 'M', // bulk 207
+  shieldon: 'M', // bulk 236
+  bastiodon: 'L', // bulk 366
+  burmy: 'S', // bulk 130
+  wormadam: 'L', // bulk 250
+  mothim: 'M', // bulk 170
+  combee: 'S', // bulk 114
+  vespiquen: 'L', // bulk 274
+  pachirisu: 'M', // bulk 220
+  buizel: 'S', // bulk 120
+  floatzel: 'M', // bulk 190
+  cherubi: 'S', // bulk 143
+  cherrim: 'M', // bulk 218
+  shellos: 'M', // bulk 186
+  gastrodon: 'L', // bulk 261
+  ambipom: 'M', // bulk 207
+  drifloon: 'M', // bulk 168
+  drifblim: 'L', // bulk 248
+  buneary: 'S', // bulk 155
+  lopunny: 'L', // bulk 245
+  mismagius: 'M', // bulk 225
+  honchkrow: 'M', // bulk 204
+  glameow: 'S', // bulk 128
+  purugly: 'M', // bulk 194
+  chingling: 'S', // bulk 145
+  stunky: 'S', // bulk 151
+  skuntank: 'M', // bulk 231
+  bronzor: 'M', // bulk 229
+  bronzong: 'L', // bulk 299
+  bonsly: 'M', // bulk 190
+  mimejr: 'S', // bulk 155
+  happiny: 'M', // bulk 170
+  chatot: 'M', // bulk 163
+  spiritomb: 'L', // bulk 266
+  gible: 'S', // bulk 148
+  gabite: 'M', // bulk 188
+  garchomp: 'L', // bulk 288
+  munchlax: 'L', // bulk 260
+  riolu: 'S', // bulk 120
+  lucario: 'M', // bulk 210
+  hippopotas: 'M', // bulk 188
+  hippowdon: 'L', // bulk 298
+  skorupi: 'M', // bulk 185
+  drapion: 'L', // bulk 255
+  croagunk: 'S', // bulk 128
+  toxicroak: 'M', // bulk 213
+  carnivine: 'M', // bulk 218
+  finneon: 'M', // bulk 166
+  lumineon: 'M', // bulk 231
+  mantyke: 'M', // bulk 215
+  snover: 'M', // bulk 170
+  abomasnow: 'L', // bulk 250
+  weavile: 'M', // bulk 220
+  magnezone: 'L', // bulk 275
+  lickilicky: 'L', // bulk 300
+  rhyperior: 'L', // bulk 300
+  tangrowth: 'L', // bulk 275
+  electivire: 'M', // bulk 227
+  magmortar: 'M', // bulk 237
+  togekiss: 'L', // bulk 295
+  yanmega: 'M', // bulk 228
+  leafeon: 'L', // bulk 260
+  glaceon: 'L', // bulk 270
+  gliscor: 'L', // bulk 275
+  mamoswine: 'L', // bulk 250
+  porygonz: 'M', // bulk 230
+  gallade: 'L', // bulk 248
+  probopass: 'L', // bulk 355
+  dusknoir: 'L', // bulk 315
+  froslass: 'M', // bulk 210
+  rotom: 'M', // bulk 204
+  uxie: 'L', // bulk 335
+  mesprit: 'L', // bulk 290
+  azelf: 'M', // bulk 215
+  dialga: 'L', // bulk 320
+  palkia: 'L', // bulk 310
+  heatran: 'L', // bulk 303
+  regigigas: 'L', // bulk 330
+  giratina: 'L', // bulk 390
+  cresselia: 'L', // bulk 350
+  phione: 'M', // bulk 240
+  manaphy: 'L', // bulk 300
+  darkrai: 'L', // bulk 250
+  shaymin: 'L', // bulk 300
+  arceus: 'L', // bulk 360
+  rotomheat: 'L', // bulk 264
+  rotomwash: 'L', // bulk 264
+  rotomfrost: 'L', // bulk 264
+  rotomfan: 'L', // bulk 264
+  rotommow: 'L', // bulk 264
+  giratinaorigin: 'L', // bulk 350
+  shayminsky: 'L', // bulk 250
 };
 export const TIER_DRAW_SIZES = { S: 52, M: 64, L: 80 };
 export function battlerTierFor(speciesId) { return BATTLER_TIERS[speciesId] || 'M'; }

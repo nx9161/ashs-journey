@@ -24,6 +24,7 @@ const { SPECIES } = await import(join(ROOT, 'src', 'data', 'species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src', 'data', 'species2.mjs'));
 const { SPECIES_JOHTO } = await import(join(ROOT, 'src', 'data', 'species3.mjs'));
 const { SPECIES_HOENN } = await import(join(ROOT, 'src', 'data', 'species4.mjs'));
+const { SPECIES_SINNOH } = await import(join(ROOT, 'src', 'data', 'species5.mjs'));
 const { MOVES } = await import(join(ROOT, 'src', 'data', 'moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src', 'data', 'moves2.mjs'));
 const { ITEMS, BALLS, KEEPSAKES, BADGE_SETS } = await import(join(ROOT, 'src', 'data', 'items.mjs'));
@@ -38,7 +39,7 @@ const { QUESTS: TOWN_TALES } = await import(join(ROOT, 'src', 'data', 'quests.mj
 const { ARCS, levelCapFor, xpCeilingFor } = await import(join(ROOT, 'src', 'data', 'arcs.mjs'));
 const { SCHEMA_VERSION } = await import(join(ROOT, 'src', 'game', 'state.mjs'));
 
-const ALL_SPECIES = { ...SPECIES, ...SPECIES2, ...SPECIES_JOHTO, ...SPECIES_HOENN };
+const ALL_SPECIES = { ...SPECIES, ...SPECIES2, ...SPECIES_JOHTO, ...SPECIES_HOENN, ...SPECIES_SINNOH };
 const ALL_MOVES = { ...MOVES, ...MOVES2 };
 
 // Canonical badge earn-order per region: the campaign's story order (ADR-019),

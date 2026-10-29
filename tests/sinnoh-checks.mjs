@@ -252,6 +252,93 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     'entries=' + emNames.length + ' unique=' + new Set(emNames).size + ' offending=' + [...offending].join(','));
 }
 
+// ================= Part S1: species data (Arc 4 Stage S1) =================
+// +107 Gen-4 species (dex 387-493) in src/data/species5.mjs via the
+// facts-only PokeAPI ETL (arc4-etl), band-local learnsets (+300),
+// growth substitutions, the 7 mission formes as partner-pattern form
+// entries, and the cross-gen parent amendments in species2/3/4.
+{
+  const { SPECIES_SINNOH } = await import(join(ROOT, 'src/data/species5.mjs'));
+  const { SPECIES: SP1 } = await import(join(ROOT, 'src/data/species.mjs'));
+  const { SPECIES2: SP2 } = await import(join(ROOT, 'src/data/species2.mjs'));
+  const { SPECIES_JOHTO: SP3 } = await import(join(ROOT, 'src/data/species3.mjs'));
+  const { SPECIES_HOENN: SP4 } = await import(join(ROOT, 'src/data/species4.mjs'));
+  const { MOVES: MV1 } = await import(join(ROOT, 'src/data/moves.mjs'));
+  const { MOVES2: MV2 } = await import(join(ROOT, 'src/data/moves2.mjs'));
+  const ALL = { ...SP1, ...SP2, ...SP3, ...SP4, ...SPECIES_SINNOH };
+  const ALL_MOVES = { ...MV1, ...MV2 };
+  const SN = Object.values(SPECIES_SINNOH);
+  const base = SN.filter((e) => !e.form);
+  const formes = SN.filter((e) => e.form);
+  ok('S1-01 species5 roster accounting: 114 entries = 107 base species (dex 387-493, each exactly once, file order is dex order) + 7 form entries; merged roster is 509',
+    SN.length === 114 && base.length === 107 && formes.length === 7
+    && base.every((e, i) => e.dexNo === 387 + i)
+    && Object.keys(ALL).length === 509,
+    'entries=' + SN.length + ' base=' + base.length + ' formes=' + formes.length + ' merged=' + Object.keys(ALL).length);
+  ok('S1-02 National dex complete: the merged non-form roster covers dexNo 1-493 with no gaps; the only shared dexNo among non-form entries is the shipped partner pair at 25 (partner + pikachu, pre-S1 design), so non-form entries total 494',
+    (() => { const seen = new Set(); let nonForm = 0; for (const e of Object.values(ALL)) { if (e.form) continue; nonForm++; seen.add(e.dexNo); } return seen.size === 493 && nonForm === 494 && Math.min(...seen) === 1 && Math.max(...seen) === 493; })());
+  ok('S1-03 every Sinnoh entry is complete: 1-2 types, six positive base stats, supported growth curve, egg groups + hatch counter, original flavor, resolving TM list',
+    SN.every((e) => e.types.length >= 1 && e.types.length <= 2
+      && ['hp', 'atk', 'def', 'spa', 'spd', 'spe'].every((k) => e.base[k] > 0)
+      && ['fast', 'mediumfast', 'mediumslow', 'slow'].includes(e.growth)
+      && Array.isArray(e.eggGroups) && e.eggGroups.length >= 1 && typeof e.hatchCounter === 'number'
+      && typeof e.flavor === 'string' && e.flavor.length > 10 && Array.isArray(e.tm))); // tm may be empty — the shipped cocoon precedent (metapod/kakuna/wurmple carry tm: []); kricketot (analogue wurmple) and burmy (analogue shedinja) are the two S1 cases, recorded in the ETL notes
+  ok('S1-04 the breeding frame is complete: every entry in the merged 509 roster carries eggGroups (Johto J6 / Hoenn completed 1-386; S1 completes 387-493 + formes)',
+    Object.values(ALL).every((e) => Array.isArray(e.eggGroups) && e.eggGroups.length >= 1));
+  ok('S1-05 band law: every Sinnoh learnset key is 1 (the Lv1 starter set) or inside the Sinnoh band 301-400 — no exceptions',
+    SN.every((e) => Object.keys(e.learnset).every((k) => +k === 1 || (+k >= 301 && +k <= 400))));
+  ok('S1-06 no degenerate learnsets: every Sinnoh entry knows at least 4 distinct moves (the ETL top-up rule: type staples, then type-matching canon TM/HM moves, then Normal staples, all placed at level 1)',
+    SN.every((e) => new Set(Object.values(e.learnset).flat()).size >= 4));
+  ok('S1-07 ETL integrity: every learnset move in species5 exists in the shipped move table (moves + moves2)',
+    SN.every((e) => Object.values(e.learnset).flat().every((m) => ALL_MOVES[m])));
+  ok('S1-08 evolution integrity: every evo/evos target named by a Sinnoh entry exists in the merged roster, and every level evolution lands inside 301-400',
+    SN.every((e) => [...(e.evo ? [e.evo] : []), ...(e.evos || [])].every((v) => ALL[v.to] && (v.method !== 'level' || (v.level >= 301 && v.level <= 400)))));
+  ok('S1-09 growth substitutions by name (nearest supported curve by level-100 total; erratic/fluctuating never assigned): cranidos/rampardos/shieldon/bastiodon/finneon/lumineon erratic->fast, drifloon/drifblim fluctuating->slow',
+    ['cranidos', 'rampardos', 'shieldon', 'bastiodon', 'finneon', 'lumineon'].every((id) => SPECIES_SINNOH[id].growth === 'fast')
+    && ['drifloon', 'drifblim'].every((id) => SPECIES_SINNOH[id].growth === 'slow')
+    && SN.every((e) => e.growth !== 'erratic' && e.growth !== 'fluctuating'));
+  const FORME_PIN = { rotomheat: [479, 'rotom', 'electric,fire'], rotomwash: [479, 'rotom', 'electric,water'], rotomfrost: [479, 'rotom', 'electric,ice'], rotomfan: [479, 'rotom', 'electric,flying'], rotommow: [479, 'rotom', 'electric,grass'], giratinaorigin: [487, 'giratina', 'ghost,dragon'], shayminsky: [492, 'shaymin', 'grass,flying'] };
+  ok('S1-10 the 7 mission formes: partner-pattern entries sharing the base dexNo, form:true + baseSpecies set, canon forme types from their own PokeAPI records',
+    Object.entries(FORME_PIN).every(([id, [dex, b, types]]) => { const e = SPECIES_SINNOH[id]; return e && e.form === true && e.baseSpecies === b && e.dexNo === dex && e.types.join() === types; }));
+  ok('S1-11 formes are excluded from dex/diploma counts exactly like the shipped forms: 15 form:true entries total (5 shipped + 3 Deoxys + 7 S1), each sharing its dexNo with its base species; apart from the formes and the partner pair, no dexNo repeats',
+    (() => { const forms = Object.values(ALL).filter((e) => e.form); if (forms.length !== 15) return false; const byDex = {}; for (const e of Object.values(ALL)) (byDex[e.dexNo] = byDex[e.dexNo] || []).push(e); return Object.entries(byDex).every(([dex, list]) => { const nf = list.filter((e) => !e.form).length; return nf === 1 || (+dex === 25 && nf === 2); }); })());
+  ok('S1-12 band-shift pins: turtwig->grotle at 318 (canon 18 +300), starly->staravia 314, gible->gabite 324, gabite->garchomp 348',
+    SPECIES_SINNOH.turtwig.evo.level === 318 && SPECIES_SINNOH.starly.evo.level === 314
+    && SPECIES_SINNOH.gible.evo.level === 324 && SPECIES_SINNOH.gabite.evo.level === 348);
+  ok('S1-13 the condition class (310 = band floor +9, the Hoenn happiness analogue): budew->roselia, chingling->chimecho, buneary->lopunny, riolu->lucario, munchlax->snorlax (happiness); bonsly->sudowoodo, mimejr->mrmime (mimic); happiny->chansey (oval stone); mantyke->mantine (remoraid party) — all level 310',
+    [['budew', 'roselia'], ['chingling', 'chimecho'], ['buneary', 'lopunny'], ['riolu', 'lucario'], ['munchlax', 'snorlax'], ['bonsly', 'sudowoodo'], ['mimejr', 'mrmime'], ['happiny', 'chansey'], ['mantyke', 'mantine']]
+      .every(([a, b]) => SPECIES_SINNOH[a].evo && SPECIES_SINNOH[a].evo.to === b && SPECIES_SINNOH[a].evo.level === 310));
+  ok('S1-14 burmy branch (wurmple precedent): singular evo wormadam at 320 with BOTH branches in evos[]; combee->vespiquen plain level 321 (gender gate inexpressible, recorded)',
+    SPECIES_SINNOH.burmy.evo.to === 'wormadam' && SPECIES_SINNOH.burmy.evo.level === 320
+    && SPECIES_SINNOH.burmy.evos.length === 2 && SPECIES_SINNOH.burmy.evos[1].to === 'mothim'
+    && SPECIES_SINNOH.combee.evo.to === 'vespiquen' && SPECIES_SINNOH.combee.evo.level === 321);
+  ok('S1-15 cross-gen parents amended in their shipped files: magneton->magnezone 310, lickitung->lickilicky 310, tangela->tangrowth 310 (condition class); rhydon->rhyperior, electabuzz->electivire, magmar->magmortar, porygon2->porygonz, dusclops->dusknoir (held-item trades -> bare Link Transfer trades)',
+    SP2.magneton.evo.to === 'magnezone' && SP2.magneton.evo.level === 310
+    && SP2.lickitung.evo.to === 'lickilicky' && SP2.tangela.evo.to === 'tangrowth'
+    && SP2.rhydon.evo.method === 'trade' && SP2.rhydon.evo.to === 'rhyperior'
+    && SP2.electabuzz.evo.to === 'electivire' && SP2.magmar.evo.to === 'magmortar'
+    && SP3.porygon2.evo.to === 'porygonz' && SP4.dusclops.evo.to === 'dusknoir');
+  ok('S1-16 shipped-stone fallbacks + remaining parents: roselia->roserade sunstone, togetic->togekiss sunstone, murkrow->honchkrow moonstone, misdreavus->mismagius moonstone; kirlia evos carry the gallade sunstone branch beside gardevoir 230; snorunt evos carry the froslass sunstone branch beside glalie 242; sneasel->weavile / gligar->gliscor / piloswine->mamoswine / yanma->yanmega / aipom->ambipom / nosepass->probopass all level 310',
+    SP4.roselia.evo.stone === 'sunstone' && SP3.togetic.evo.stone === 'sunstone'
+    && SP3.murkrow.evo.stone === 'moonstone' && SP3.misdreavus.evo.stone === 'moonstone'
+    && SP4.kirlia.evos.some((v) => v.to === 'gallade' && v.stone === 'sunstone') && SP4.kirlia.evo.to === 'gardevoir'
+    && SP4.snorunt.evos.some((v) => v.to === 'froslass' && v.stone === 'sunstone') && SP4.snorunt.evo.to === 'glalie'
+    && [['sneasel', 'weavile'], ['gligar', 'gliscor'], ['piloswine', 'mamoswine'], ['yanma', 'yanmega'], ['aipom', 'ambipom']].every(([a, b]) => SP3[a].evo.to === b && SP3[a].evo.level === 310)
+    && SP4.nosepass.evo.to === 'probopass' && SP4.nosepass.evo.level === 310);
+  ok('S1-17 eevee branches: the shipped evos[] gains leafeon (leafstone) and glaceon (level 310, Ice Rock class) beside the five shipped branches — seven branches, no singular evo invented',
+    SP2.eevee.evo === undefined && SP2.eevee.evos.length === 7
+    && SP2.eevee.evos.some((v) => v.to === 'leafeon' && v.stone === 'leafstone')
+    && SP2.eevee.evos.some((v) => v.to === 'glaceon' && v.level === 310));
+  ok('S1-18 Phione / Manaphy judgment calls ride the data: phione has NO evo and canon egg groups water1+fairy (breed-only obtainability, S6); manaphy has NO evo and keeps its canon water1+fairy egg groups (NOT no-eggs — it breeds Phione in canon and the shipped breeding system reads eggGroups)',
+    !SPECIES_SINNOH.phione.evo && !SPECIES_SINNOH.phione.evos && SPECIES_SINNOH.phione.eggGroups.join() === 'water1,fairy'
+    && !SPECIES_SINNOH.manaphy.evo && SPECIES_SINNOH.manaphy.eggGroups.join() === 'water1,fairy');
+  ok('S1-19 babies flagged: budew, chingling, bonsly, mimejr, happiny, munchlax, riolu, mantyke carry baby:true (PokeAPI is_baby) for the breeding system',
+    ['budew', 'chingling', 'bonsly', 'mimejr', 'happiny', 'munchlax', 'riolu', 'mantyke'].every((id) => SPECIES_SINNOH[id].baby === true));
+  const tables = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
+  ok('S1-20 server tables regenerated through gen-tables only: tables.json carries 509 species incl. all 114 Sinnoh ids (the validator + Cheat Terminal read from data, no dex ceiling)',
+    tables.species.length === 509 && Object.keys(SPECIES_SINNOH).every((id) => tables.species.includes(id)));
+}
+
 // ================= Part B: headless bundle =================
 const { buildGameJs } = await import(join(ROOT, 'scripts/build.mjs'));
 const gameJs = buildGameJs();

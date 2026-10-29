@@ -11163,3 +11163,274 @@ Fantina / Maylene / Crasher Wake / Byron / Candice / Volkner).
   derived); a save mid-homecoming (directive pinned, not yet
   home) still walks the ritual live, through the shipped branch
   (frontier-checks E09–E12 prove that branch end-to-end).
+
+## Arc 4 Stage S1 — Species data: +107 → National dex 493 (2026-10-29)
+
+Implementer pass on main @ fbfc33a (S0 committed). Data only — no maps,
+story, or sprites (S2 owns the 114 new entries' art; until then they
+render through the shipped forge fallback from spriteSeed, exactly as
+Johto's did between J1 and J2). Nothing pushed, nothing deployed.
+`personal/` byte-identical (restored from HEAD after the battery's
+builds, per the frozen-retired-edition precedent).
+
+### 1. What landed
+
+- **ETL (reproducible, not hand-typed):**
+  `~/workspace/ashs-journey-qa/arc4-etl/fetch-sinnoh.mjs` stages the
+  PokeAPI facts cache (`arc4-etl/raw/`: pokemon/species 387–493, 71
+  evolution chains, and the 7 forme pokemon 10006–10012 discovered
+  from the species varieties of rotom/giratina/shaymin — facts only,
+  no sprites or art ever fetched, and no sprite URL appears anywhere
+  in the pipeline); `etl-sinnoh.mjs` mirrors the Hoenn machinery and
+  EMITS `src/data/species5.mjs` (`export const SPECIES_SINNOH`,
+  **114 entries**). Per-species audit trail in
+  `arc4-etl/etl-notes.json`. Registered in
+  `scripts/module-order.json` after species4.mjs; folded in
+  `src/data/merge.mjs` (`Object.assign(SPECIES, SPECIES_SINNOH)`);
+  `tools/api-scripts/gen-tables.mjs` folds it the same way and the
+  validator tables were regenerated ONLY through it (tablesVersion
+  0525370a… → **b041ad21…**, **509 species** / 144 moves / 183 items;
+  `--check` green).
+- **Accounting (as gen-tables produces it):** species entries
+  **395 → 509** = 493 National dex + partner + 5 shipped forms +
+  3 Deoxys formes + **7 S1 formes** (§4). Non-form entries total 494
+  (493 + the shipped partner, who shares dexNo 25 with pikachu by
+  pre-S1 design — the only non-form dex share in the roster).
+  **Expected 509 = actual 509; no delta.** Diploma accounting
+  untouched (Kanto-151 counts non-form dexNo 1–151 exactly as before;
+  cheat-shop/fidelity proofs green). `DEX_TOTAL` stands.
+- **Field mapping** follows the shipped schema exactly: PokeAPI
+  stats/types (current typings), capture_rate, base_experience,
+  spriteSeed dexNo*100+1 (formes dexNo*100+2… on the shipped
+  form-seed pattern), body from PokeAPI `shape` with two recorded
+  overrides (giratina + giratina-origin → serpent; skorupi/drapion →
+  quad). Every entry carries `eggGroups` + `hatchCounter`
+  (+ `baby: true` for the 8 babies: budew, chingling, bonsly,
+  mimejr, happiny, munchlax, riolu, mantyke) and an ORIGINAL
+  one-line flavor (hand-authored in the ETL's FLAVOR table; no
+  PokeAPI flavour text exists in the pipeline or was copied).
+- **Breeding frame completed:** the 5 shipped species2 formes
+  (crystalonix, pinkbutterfree, surfingpikachu, flyingpikachu,
+  giantdragonite) were the only merged-roster entries with NO
+  eggGroups; they now carry their base species' groups +
+  hatchCounter (mineral/25, bug/15, ground+fairy/10 ×2,
+  water1+dragon/40). Every one of the 509 entries now reads
+  eggGroups (sinnoh-checks S1-04).
+- **TM lists:** copied from the closest shipped analogue (now incl.
+  the Hoenn roster) by type overlap then BST distance; analogue per
+  species recorded in the ETL notes. Two entries ship `tm: []` —
+  kricketot (analogue wurmple) and burmy (analogue shedinja) — the
+  shipped cocoon precedent (14 shipped entries carry `tm: []`,
+  metapod/kakuna/wurmple among them), recorded here by name.
+- **Support tables:** `battler-tiers.mjs` + `idle-classes.mjs` gain
+  **114 rows each (509 total in both)** by the shipped rules — tiers
+  by bulk (HP+DEF+SPD: S <160, M 160–244, L ≥245); idle by body plan
+  with hand overrides for floaters (the rotom set, giratina pair,
+  bronzong, magnezone, mismagius, froslass, drifloon line, the lake
+  trio, cresselia, darkrai, shaymin-sky, spiritomb, carnivine,
+  chingling → hover). Row generation script:
+  `arc4-etl/gen-tiers-idle.mjs`.
+
+### 2. Growth curves (J0 law, discharged with substitutions)
+
+The ETL asserts no entry is ever ASSIGNED 'erratic' or 'fluctuating';
+canon cases map to the nearest supported curve by level-100 total
+(Hoenn precedent), recorded per species in the ETL notes:
+**erratic (600,000) → 'fast' (800,000)** for 6 species
+(cranidos/rampardos, shieldon/bastiodon, finneon/lumineon) and
+**fluctuating (1,640,000) → 'slow' (1,250,000)** for 2
+(drifloon/drifblim). All other raw curves map directly
+(base-species raw counts: medium-slow 28 · 'medium'→mediumfast 35 ·
+slow 28 · fast 8 — 99 direct + 8 substituted = 107). The literal curve names appear in NO entry.
+
+### 3. Learnsets (mission decision 4)
+
+- Source: PokeAPI `moves`, version_group **platinum preferred**
+  (Platinum governs), diamond-pearl / heartgold-soulsilver fallback,
+  level-up only, restricted to the game's existing move table.
+  **All 114 entries took a surviving platinum set** — no fallback
+  was needed.
+- **Levels:** canonical level-1 moves stay at key **1**; every
+  canonical level ≥2 shifts **+300** (band-local, Amendment 2).
+  Every entry's learnset keys are 1 or inside 301–400
+  (machine-checked, sinnoh-checks S1-05).
+- **Dropped: 859 (species, move) pairs, 221 distinct canonical
+  moves** with no game counterpart (full list in etl-notes.json).
+- **Top-ups (<4 distinct surviving moves): 60 moves across 32
+  entries**, placed at level 1, type-staples first, then
+  type-matching canon TM/HM moves, then Normal staples (the Johto
+  rule, unchanged): kricketot +leechlife, pinmissile · shinx/luxio/
+  luxray +thundershock · roserade +absorb, razorleaf · shieldon/
+  bastiodon +rockthrow, rockslide · burmy/combee +leechlife,
+  pinmissile, twineedle · shellos/gastrodon +watergun · mismagius
+  +lick, nightshade · honchkrow +bite, nightshade · chingling
+  +psybeam · happiny +tackle, quickattack, swift · spiritomb +lick
+  · riolu/lucario +lowkick · croagunk/toxicroak +acid, smog, sludge
+  · finneon/lumineon +bubblebeam · togekiss +pound, swift,
+  metronome · mesprit +psybeam · dialga +tackle, quickattack,
+  dragonrage · palkia +watergun, bubblebeam, surf · heatran +ember,
+  flamethrower · giratina + giratina-origin +lick, nightshade,
+  confuseray · shaymin +absorb, megadrain · shaymin-sky +absorb ·
+  arceus +tackle. After top-ups every entry knows ≥4 distinct moves
+  (S1-06).
+
+### 4. Formes (mission decision 4)
+
+- **Rotom (479)** is the base entry in the main loop; **heat / wash /
+  frost / fan / mow** ship as partner-pattern FORM entries
+  (`rotomheat` electric/fire, `rotomwash` electric/water,
+  `rotomfrost` electric/ice, `rotomfan` electric/flying, `rotommow`
+  electric/grass) from their own PokeAPI pokemon records
+  (10008–10012), spriteSeeds 47902–47906. **Giratina (487)** is the
+  base (altered) entry; `giratinaorigin` (10007, seed 48702) shares
+  dexNo 487. **Shaymin (492)** is the base (land) entry;
+  `shayminsky` (10006, grass/flying, seed 49202) shares dexNo 492.
+  All 7 carry `form: true` + `baseSpecies` and are excluded from
+  dex/diploma counts by the same form mechanism as the shipped
+  forms (S1-10/S1-11: 15 form entries roster-wide).
+- **Reconciliation with forms.mjs:** the FORMS catalogue already
+  carried all 7 rows (giratina-origin, shaymin-sky, rotom-heat/
+  wash/frost/fan/mow) — catalogue data only. **No FORMS rows were
+  added or duplicated** (forms count stays 202; cheat-shop A02 pins
+  it). The new species entries are the playable counterparts (the
+  Deoxys precedent). The S4 forme-switch consumes these entries;
+  nothing in S1 wires the switch.
+- **Not shipped as entries:** wormadam/burmy cloaks, shellos/
+  gastrodon east–west, cherrim sunshine, unown letters — single
+  base entries, recorded as a call (the formes catalogue describes
+  them; no dex math turns on them).
+
+### 5. Evolutions — mappings and judgment calls (each recorded)
+
+Engine vocabulary only: level / stone / trade, branching via `evos`
+with the primary branch duplicated in the singular `evo` slot.
+
+- **Band-local level evos (canon +300), chain-derived:** all Sinnoh
+  lines (starters 314/318→332/336, starly 314, staravia 334,
+  bidoof 315, kricketot 310, shinx 315, luxio 330, cranidos 330,
+  shieldon 330, cherubi 325, buizel 326, buneary-class below,
+  shellos 330, drifloon 328, glameow 338, stunky 334, bronzor 333,
+  croagunk 337, finneon 331, snover 340, gible 324, gabite 348,
+  hippopotas 334, skorupi 340).
+- **THE CONDITION CLASS → level 310** (band floor 301 + 9, the
+  Hoenn happiness analogue azurill 210): Gen-4's condition
+  evolutions are inexpressible in the engine, so happiness,
+  known-move, held-item level-up, location, and party-species
+  conditions all resolve to 310, per species: **budew→roselia,
+  chingling→chimecho, buneary→lopunny, riolu→lucario,
+  munchlax→snorlax** (happiness); **bonsly→sudowoodo,
+  mimejr→mrmime** (mimic); **happiny→chansey** (oval stone held);
+  **mantyke→mantine** (remoraid in party). The same class amends
+  cross-gen parents in their shipped files: **lickitung→lickilicky,
+  tangela→tangrowth, yanma→yanmega, piloswine→mamoswine** (known
+  move), **aipom→ambipom** (double-hit), **sneasel→weavile,
+  gligar→gliscor** (razor items), **magneton→magnezone,
+  nosepass→probopass** (Mt. Coronet), **eevee→glaceon** (Ice Rock).
+  Flavor lines on the baby entries name the 310 honestly.
+- **Shipped-stone fallbacks** (items.mjs carries only fire/water/
+  thunder/leaf/moon/sun — the Hoenn clamperl fallback precedent):
+  shiny-stone → **sunstone** (roselia→roserade, togetic→togekiss),
+  dusk-stone → **moonstone** (murkrow→honchkrow,
+  misdreavus→mismagius), dawn-stone → **sunstone**
+  (kirlia→gallade and snorunt→froslass branches, added as `evos`
+  dual representations beside the shipped level evos; their canon
+  gender conditions are inexpressible and dropped, recorded here).
+- **Held-item trades → bare Link Transfer trades** (Kanto/Johto
+  precedent): electabuzz→electivire, magmar→magmortar,
+  rhydon→rhyperior, porygon2→porygonz, dusclops→dusknoir (the last
+  three parents amended in species3/species4; dusclops/roselia/
+  nosepass/kirlia/snorunt amendments land in the GENERATED
+  species4.mjs as hand amendments — the arc3 ETL is frozen history;
+  regenerating it would need the same amendments re-applied).
+- **eevee→leafeon = leafstone** branch in `evos[]` (later-gen canon
+  made it a Leaf Stone evolution; the Gen-4 moss rock is a location,
+  inexpressible); eevee keeps NO singular `evo` (shipped shape).
+- **burmy branch:** singular `evo` = **wormadam at 320** (canon 20
+  +300), both branches in `evos[]` — the wurmple precedent (the mon
+  record carries no gender the level trigger can read). Mothim-line
+  obtainability is S3 placement, as cascoon's was H3's.
+- **combee→vespiquen = plain level 321**: canon is female-only;
+  the engine has no gender gate. Recorded, not hidden.
+- **Phione:** ships as a normal dex entry (489) with NO evo (true
+  to canon) and its canon egg groups (water1/fairy). Judgment call:
+  it is obtainable ONLY through breeding Manaphy in the shipped egg
+  system (mission decision 9 gives Manaphy as an egg-gift event in
+  S6); no wild placement is implied by this data stage.
+- **Manaphy:** ships with its canon egg groups (water1/fairy) —
+  deliberately NOT 'no-eggs': canonically it breeds (with Ditto)
+  and the egg hatches Phione, and the shipped breeding system reads
+  eggGroups, so the canon semantics ride the data unchanged. No
+  special case anywhere.
+- **Spiritomb:** plain dex entry with canon data. Its canon
+  Odd-Keystone summoning (108 spirits) is inexpressible as data;
+  judgment call: obtainability is a placement call for S3/S6 (a
+  keystone-site encounter), recorded here so the data stage does
+  not silently improvise one. Its flavor line names the keystone.
+- **Happiny (incense semantics):** the evolution side resolves via
+  the condition class (310, above). The breeding side (Chansey
+  holding Luck Incense) is not modelled by the shipped breeding
+  system for ANY line — Johto/Hoenn babies shipped the same way —
+  so no incense item is invented in this stage.
+- **Post-493 evolutions emit NO evo** (out of scope, recorded in
+  the ETL notes): eevee→sylveon, sneasel→sneasler, mrmime→mrrime
+  targets are post-493 and never referenced.
+
+### 6. Consumers verified (no hardcoded dex ceiling found)
+
+- **Cheat Terminal species picker** reads the gen-tables species
+  list (509) — cheat-shop A02/A03-class proofs green at 509.
+- **Dex / diploma** read dexNo + form flags from data (S1-02/11).
+- **Validator pair:** no new pins needed — gen-tables already emits
+  the sinnoh band row from the registry (validator 106 + fuzz
+  2000/2000 + save-contract 12/12 green unchanged).
+- **Frontier A31 reviewed, NOT superseded:** that suite's SP_ALL is
+  deliberately the ≤386 fold and the facility pools are authored
+  data; its "merged 395 roster" text remains accurate to what it
+  checks, so it stands unedited (136/136).
+
+### 7. Supersessions (by name; totals unchanged)
+
+- **cheat-shop A02:** species count 395 → **509** (assertion text
+  superseded in place, items 183 / keepsakes 12 / forms 202
+  unchanged).
+- **fidelity roster assertion:** 395 → **509** (text superseded in
+  place; fidelity also folds SPECIES_SINNOH into ALL_SPECIES, which
+  is what lets its evo-target resolution see the §5 parents).
+
+### 8. Gate (this tree)
+
+| Suite | Result |
+|---|---|
+| sinnoh-checks | **57/57** (37 S0 + 20 new S1) |
+| validator.test | **106 passed, 0 failed** |
+| validator.fuzz | **2000/2000** |
+| save-contract | **12/12** |
+| battle-model-checks | **45/45** (hard gate holds) |
+| campaign-smoke | **24/24** |
+| arc-foundation-checks | **47/47** |
+| frontier-checks | **136/136** |
+| cheat-shop-checks | **44/44** (A02 supersession above) |
+| fidelity-checks | **35/35** (roster supersession above) |
+| hoenn-story / contest / legendary | **88/88 · 28/28 · 24/24** |
+| johto-story / johto-systems | **110/110 · 62/62** |
+| orange-story / orange-climax | **38/38 · 42/42** |
+| audit-headless | **17/17** |
+| verify-slice | **48/48** |
+| qa-slice | **132/134** — failures exactly the named inheritances {s6, l8}, untouched |
+| qa-changed-flows | failures exactly **{b2, d9}** |
+| rejuv-phase6 | 44/45 — C01 chromium-did-not-start, the named sandbox inheritance, untouched |
+| budgets-check | **all gates pass** · contamination **clean** · drift guest ≡ strip(vercel) PASS |
+
+### 9. Budget
+
+- `public/game.js`: 9,935,642 → **10,012,566 B** (+76,924).
+- `public/` static total: 10,098,264 → **10,175,188 B** (+76,924).
+- Reference: the F4 projection-to-close was **12,115,538 B** vs the
+  12,582,912 B gate. At this stage's close the actual total sits
+  **2,407,724 B under the gate** — nowhere near the 250,000 B
+  stop-tripwire; S1's own delta (+76,924 B for 114 entries incl.
+  tiers/idle rows) is the data stage's full cost, and the remaining
+  projection headroom is unchanged in kind.
+- Fresh build byte-identical to the committed `public/game.js`
+  (verified post-commit per the standing drift lesson).
+- `personal/` byte-identical to HEAD.
