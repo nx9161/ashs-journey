@@ -38,11 +38,12 @@ const MOVES = Object.assign({}, MV1, MOVES2);
 const ORANGE_ORDER = ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'];
 
 {
-  ok('A01 ORANGE_QUESTS: 3 stages in the MAIN_QUESTS idiom (gsball -> crew -> league), crew stage counts badges, league flag is orange_champion',
-    ORANGE_QUESTS.length === 3
+  ok('A01 ORANGE_QUESTS: the O2 chain (gsball -> crew -> league) in the MAIN_QUESTS idiom, crew stage counts badges, league flag is orange_champion; the O3 storm stage APPENDS at the seam (4th, titanCount, flag orange_2000_storm_stilled — never a gym blocker)',
+    ORANGE_QUESTS.length === 4
     && ORANGE_QUESTS.every((q) => q.id && q.flag && q.text && q.hint)
     && ORANGE_QUESTS[0].flag === 'orange_gsball' && ORANGE_QUESTS[1].flag === 'orange_crew_done'
-    && ORANGE_QUESTS[1].badgeCount === true && ORANGE_QUESTS[2].flag === 'orange_champion');
+    && ORANGE_QUESTS[1].badgeCount === true && ORANGE_QUESTS[2].flag === 'orange_champion'
+    && ORANGE_QUESTS[3].id === 'q_orange_storm' && ORANGE_QUESTS[3].flag === 'orange_2000_storm_stilled' && ORANGE_QUESTS[3].titanCount === true);
   ok('A02 BADGE_SETS.orange is the canonical earn order; every badge + the trophy is a real ITEMS row (badges key-pocket, trophy collectible)',
     JSON.stringify(BADGE_SETS.orange) === JSON.stringify(ORANGE_ORDER)
     && ORANGE_ORDER.every((id) => ITEMS[id] && ITEMS[id].pocket === 'key')

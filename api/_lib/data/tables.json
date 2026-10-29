@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "9490647279a2328de4d6a0dc8eab1f93dd2c2b785ba830d6354e9132e6b30268",
+  "tablesVersion": "a91f441a3f04250935954604d616ac53e10b88201c6c1abc6eb1fd02fc5dddd3",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -698,6 +698,7 @@
     "arc_latias",
     "arc_latios",
     "arc_lugia",
+    "arc_lugia_shamouti",
     "arc_lunala",
     "arc_magearna",
     "arc_manaphy",
@@ -748,6 +749,7 @@
     "q_orange_crew",
     "q_orange_gsball",
     "q_orange_league",
+    "q_orange_storm",
     "q_partner",
     "q_rainbow",
     "q_scope",

@@ -345,8 +345,9 @@ Object.assign(Game.prototype, {
         const doneF = q.flag && g.state.story.flags[q.flag];
         const active = !doneF && ORANGE_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
         const count = q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : '';
+        const tcount = q.titanCount ? ' — ' + ((g.state.story.flags.orange_2000_moltres ? 1 : 0) + (g.state.story.flags.orange_2000_zapdos ? 1 : 0) + (g.state.story.flags.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed' : '';
         items.push({
-          label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text + (q.badgeCount ? count : ''),
+          label: (doneF ? '★ ' : active ? '▶ ' : '· ') + q.text + (q.badgeCount ? count : '') + tcount,
           value: 'oq:' + q.id, disabled: !active && !doneF,
         });
       }
@@ -397,7 +398,7 @@ Object.assign(Game.prototype, {
       if (v.startsWith('oq:')) {
         const q = ORANGE_QUESTS.find((x) => 'oq:' + x.id === v);
         if (q) {
-          const lines = [q.text + (q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : ''), q.hint];
+          const lines = [q.text + (q.badgeCount ? ' — ' + ((g.state.badges.orange || []).length) + '/4 badges' : '') + (q.titanCount ? ' — ' + ((g.state.story.flags.orange_2000_moltres ? 1 : 0) + (g.state.story.flags.orange_2000_zapdos ? 1 : 0) + (g.state.story.flags.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed' : ''), q.hint];
           if (q.id === 'q_orange_league' && g.state.story.flags.orange_champion) lines.push("Winner's Trophy: in your bag, and your winning team is recorded in the Hall of Fame.");
           g.ui.say(lines, () => g.openQuestLog(), 'Quest');
         }

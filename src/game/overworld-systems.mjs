@@ -101,6 +101,27 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_orange_lapras_pod');
       }
     }
+    // Stage O3 (Pokemon 2000): the Shamouti storm chain. The trigger
+    // is chronology-true mid-arc — first Shamouti arrival with the
+    // Sea Ruby held (>= 2 Orange badges) — and is NEVER a gym
+    // blocker: nothing here gates badges 3/4, Drake, or the machine's
+    // league flow. Each scene's own flag is its gate, so a chain
+    // stalled by a flee or a blackout re-fires on a later entry
+    // (the runSteps fled guard leaves the done flag unwritten).
+    if (!arcCardFired && !g.ui.dialogueOpen) {
+      const of = g.state.story.flags;
+      const oBadges = (g.state.badges && g.state.badges.orange) || [];
+      const titans = (of.orange_2000_moltres ? 1 : 0) + (of.orange_2000_zapdos ? 1 : 0) + (of.orange_2000_articuno ? 1 : 0);
+      if (id === 'shamouti' && oBadges.length >= 2 && !of.orange_2000_active && !of.ev_orange_2000_storm_done) {
+        this.runEvent('ev_orange_2000_storm');
+      } else if (id === 'shamouti-shrine' && of.orange_2000_active && titans >= 3
+        && !of.orange_2000_storm_stilled && !of.ev_orange_2000_climax_done) {
+        this.runEvent('ev_orange_2000_climax');
+      } else if (id === 'shamouti-deep' && of.orange_2000_storm_stilled
+        && !of.orange_2000_lugia_done && !of.ev_orange_2000_lugia_done) {
+        this.runEvent('ev_orange_2000_lugia');
+      }
+    }
   },
 
   boulderAt(x, y) {
@@ -633,7 +654,16 @@ Object.assign(OverworldScene.prototype, {
 
   sysNpc(npc) {
     const g = this.game;
-    const sayLines = (cb) => g.ui.say(npc.dialogue.map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
+    // Stage O3: state-variant dialogue. An NPC may carry
+    // dialogueStates: [{ flag?, flagNot?, dialogue }] — the FIRST
+    // entry whose conditions match the story flags supplies the
+    // lines for this talk; otherwise the base dialogue is used.
+    // Only the LINES are swapped: every downstream flow (ferry
+    // menus, marts, gifts) proceeds exactly as shipped.
+    const stateDlg = Array.isArray(npc.dialogueStates)
+      ? npc.dialogueStates.find((st) => (!st.flag || g.state.story.flags[st.flag]) && (!st.flagNot || !g.state.story.flags[st.flagNot]))
+      : null;
+    const sayLines = (cb) => g.ui.say((stateDlg ? stateDlg.dialogue : npc.dialogue).map((l) => l.replace('{player}', g.state.player.name)), cb, npc.name);
     // ADR-025 §6 (Bond echo): a character who was Close in a previous
     // journey says the line, once, the first time the new journey
     // meets them — then their own scene proceeds. Presentation only.
@@ -2325,8 +2355,18 @@ Object.assign(OverworldScene.prototype, {
     // Stage O2: while the Orange arc is current, its chain leads the
     // HUD objective (the badge stage counts n/4, as in the Quest Log).
     if (currentArcOf(g.state).id === 'orange') {
+      // Stage O3: while the storm is live it leads the objective,
+      // wherever the badge chain stands (the chain is never a gym
+      // blocker, but the sky is hard to ignore).
+      const f = g.state.story.flags;
+      if (f.orange_2000_active && !f.orange_2000_storm_stilled) {
+        const n = (f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0);
+        return n >= 3
+          ? '▶ The Storm over Shamouti — return to Shamouti Shrine: the guardian rises'
+          : '▶ The Storm over Shamouti — calm the three titans (' + n + '/3)';
+      }
       const oq = ORANGE_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
-      if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '');
+      if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '') + (oq.titanCount ? ' (' + ((f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed)' : '');
     }
     const q = MAIN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
     if (q) return '▶ ' + q.text;

@@ -30,6 +30,14 @@ export const ORANGE_QUESTS = [
   { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Orange Crew badges', hint: 'Cissy on Mikan, Danny on Navel, Rudy on Trovita, Luana on Kumquat. Each leader tests something before the battle — that is the Orange way.', badgeCount: true },
   { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Pummelo Stadium and win the Orange League', hint: 'Four island badges open the stadium doors. Drake, the Orange League champion, waits inside with six partners and no intention of moving.' },
   // --- O3 APPEND SEAM: the Lugia / 2000 stages join here. ---
+  // The storm chain is chronology-true mid-arc content (it unlocks at
+  // 2 Orange badges — see the sysLoadMap gate in overworld-systems)
+  // but APPENDS after the League stage: it is never a gym blocker,
+  // and the League completion flow is untouched by it. Its stage text
+  // tracks titans calmed n/3 (titanCount — the Quest Log and the HUD
+  // objective count the orange_2000_<bird> flags, the badgeCount
+  // idiom carried to flags).
+  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Shamouti — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Ice Isle, and the currents are tearing themselves apart. Free and calm Moltres, Zapdos and Articuno at their shrine caves (any order), then return to Shamouti Shrine — Slowking counsels from its rock on Shamouti\'s west shore.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -151,4 +159,129 @@ export const ORANGE_EVENTS = {
     { flag: 'orange_lapras_pod' },
     { toast: 'Lapras chose to stay with you.' },
   ],
+
+  // =====================================================================
+  // Stage O3 — Pokemon 2000: the Shamouti climax + the Lugia arc.
+  // The antagonist is an ORIGINAL character: Vance Halloway, a wealthy
+  // sky-collector who cages wonders for a frozen menagerie he calls
+  // the Still Sky Collection. He is not a renamed film character and
+  // no line here is borrowed from any film or episode.
+  //
+  // Battle law (the shipped event idiom, story-kanto's ghost/movie
+  // pattern): every quell battle and the climax are event wildBattles
+  // with uncatchable: true — balls are refused in-battle exactly as
+  // the Tower ghost refuses them. The runSteps wildBattle guard
+  // (ADR-025 QA D1) advances the chain only on (won && !fled), so
+  // fleeing completes NOTHING: the event's done flag stays unwritten
+  // and the scene re-fires (cave altar tiles / shrine & deep entry).
+  // Losing blacks out to the nearest Center per shipped rules and
+  // likewise leaves the chain unstalled-but-unfinished — re-entry
+  // re-fires. These event birds are NOT the Kanto legendary-arc
+  // birds: no arc_zapdos / arc_moltres / arc_articuno flag or quest
+  // entry is read or written anywhere below.
+  // =====================================================================
+
+  // -- The storm trigger (first Shamouti arrival with the Sea Ruby held;
+  //    sysLoadMap gate: >= 2 Orange badges, no storm flag yet) ----------
+  ev_orange_2000_storm: [
+    { say: ['The ferry rope is singing in the wind before the dock is even under your feet. Shamouti\'s festival banners snap like sails, the plaza lanterns swing wild, and out past the shrine isles the sky is the colour of a bruise — three storm cells, turning slowly around an empty centre, like something enormous is being wound up.'], who: 'NARRATOR' },
+    { say: ['Trainer! Off the dock, quickly — mind the crates, the sea keeps throwing them back. You have come for the festival, poor soul. So had we all.'], who: 'FEST ELDER MIRA' },
+    { say: ['Three nights ago a sky-barge came over the shrine isles — all glass and brass and quiet engines. Since then: cages of light on the shrines, the currents running wrong, and the birds — oh, the birds. When the three titans rage, the whole sky argues with itself.'], who: 'FEST ELDER MIRA' },
+    { say: ['A pleasure to be introduced by my weather. Vance Halloway, collector — the Still Sky Collection, soon to be the wonder of every port that matters. Three titans, stilled forever in glass and frost-light. No more storms. No more moods. Perfection, kept.'], who: 'VANCE HALLOWAY' },
+    { say: ['You mistake me for a villain, child. I am a curator. The sea cannot be trusted with its own treasures — look at it! I am simply... tidying the sky.'], who: 'VANCE HALLOWAY' },
+    { say: ['The barge lifts away toward Fire Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the Slowking speaks first.'], who: 'NARRATOR' },
+    { say: ['Slow... king. King. Slowking slow, king — slow.'], who: 'SLOWKING' },
+    { say: ['It turns its great head toward the three isles, one by one. Fire. Lightning. Ice. Then toward the shrine above the plaza, and down — deep down — with a patience like the bottom of the sea. The meaning arrives the way its speech does: slowly, and all at once. Free the shrines. Calm the titans. Then the guardian will decide what the sea does next.'], who: 'NARRATOR' },
+    { flag: 'orange_2000_active' },
+    { toast: 'The Storm over Shamouti has begun!' },
+  ],
+
+  // -- The three titan quells (shrine-cave altar tiles; any order) -----
+  ev_orange_2000_moltres: [
+    { say: ['The shrine niche is wrapped in bars of hard light, humming — Halloway\'s cage, sunk into the old stone like a fence into a grave. Behind it, the kind fires have gone white and furious, and the heat coming off the altar has a heartbeat.'], who: 'NARRATOR' },
+    { say: ['You work the cage the only way cages understand. Stone chips. Light cracks — and the shrine\'s tenant answers the noise the way it has answered everything for a thousand years: all at once, and on fire.'], who: 'NARRATOR' },
+    { wildBattle: { species: 'moltres', level: 50, uncatchable: true } },
+    { say: ['The great wings fold. The white rage banks down to ember, to glow, to the warm breathing dark the cave remembers. Moltres regards you for a long moment — then the cave roof is sky, and it is gone into the clearing south wind, free and unhurried.'], who: 'NARRATOR' },
+    { flag: 'orange_2000_moltres' },
+    { toast: 'Moltres is calmed. The southern storm cell breaks.' },
+  ],
+
+  ev_orange_2000_zapdos: [
+    { say: ['Copper offerings have fused into the cage bars, and the whole shrine rings at a pitch just below hearing. Halloway\'s light-cage is drinking the storm out of the stone — and the stone\'s owner has noticed the theft, and the thief\'s timing, and you.'], who: 'NARRATOR' },
+    { say: ['The bars come down in a smell of hot rain. What rises out of the shrine is not angry the way fire is angry. It is angry the way weather is angry: personally, and at everything, all at once.'], who: 'NARRATOR' },
+    { wildBattle: { species: 'zapdos', level: 50, uncatchable: true } },
+    { say: ['One last thunderclap — closer to a sentence than a sound — and Zapdos shakes the cage-light off its wings like rain. It circles the cave once, sparks settling, then takes the east wind out over a sky that is suddenly, noticeably quieter.'], who: 'NARRATOR' },
+    { flag: 'orange_2000_zapdos' },
+    { toast: 'Zapdos is calmed. The eastern storm cell breaks.' },
+  ],
+
+  ev_orange_2000_articuno: [
+    { say: ['The cage bars are rimes of black ice over hard light, and the shrine\'s frozen offerings hang mid-gesture inside it, preserved like flies in amber. Halloway would call that a preview. The cold coming through the bars has an opinion of its own.'], who: 'NARRATOR' },
+    { say: ['The cage shatters outward in a ring of snow that never touches you. Articuno unfolds from the shrine the way winter unfolds from a mountain: slowly, beautifully, and with complete indifference to your plans.'], who: 'NARRATOR' },
+    { wildBattle: { species: 'articuno', level: 50, uncatchable: true } },
+    { say: ['The vast wings settle. Frost flowers close like eyes. Articuno bows its head — a fraction, no more than courtesy owes — and lifts away north over water that has stopped arguing with itself. One storm remains, and it is the one in the middle.'], who: 'NARRATOR' },
+    { flag: 'orange_2000_articuno' },
+    { toast: 'Articuno is calmed. The northern storm cell breaks.' },
+  ],
+
+  // -- The Lugia climax (Shamouti Shrine entry at 3/3 titans calmed;
+  //    sysLoadMap gate. The proving is a straight win — the shipped
+  //    event idiom — fought UNcatchable at the deep altar.) ------------
+  ev_orange_2000_climax: [
+    { say: ['The shrine is too quiet. Three candles burn straight up in windless air, and the keeper\'s hands are folded the way hands fold at sickbeds and weddings. Slowking stands in the doorway — it has climbed from its rock, which no living islander has seen it do.'], who: 'NARRATOR' },
+    { say: ['Slow... king.'], who: 'SLOWKING' },
+    { say: ['It means: now. Above the plaza, glass and brass descend through the breaking cloud — Halloway\'s barge, every light it owns burning, one enormous empty cage swinging beneath it like a bell.'], who: 'NARRATOR' },
+    { say: ['Three titans, loose — my collection, scattered by a child with a ferry pass! No matter. No matter! The centre of the storm is still empty, curator\'s law: empty centres are filled by whoever arrives with a cage big enough. Guardian! I have come to tidy YOU.'], who: 'VANCE HALLOWAY' },
+    { say: ['Slowking walks — unhurried, absolute — to the back passage, and down toward the deep chamber. It does not look back. It does not need to. You follow it into the cold, deep water-light, where the sealed altar waits... and the sea, at last, answers.'], who: 'NARRATOR' },
+    { warp: { map: 'shamouti-deep', x: 7, y: 10 } },
+    { say: ['It rises the way the tide rises: not fast, not slow — inevitably. Wings like white headlands. Eyes that have watched ten thousand festivals and every storm since the first one. The guardian of the sea does not rage. It MEASURES. The one who calmed the titans will be tested the way the sea tests everything: completely.'], who: 'NARRATOR' },
+    { wildBattle: { species: 'lugia', level: 55, uncatchable: true } },
+    { say: ['Lugia folds its wings. The proving is over — and somewhere far above, audible even here, the storm simply... stops. Rain first, then wind, then the long grinding argument of the currents, settling one by one into their old, kind roads.'], who: 'NARRATOR' },
+    { say: ['Halloway\'s barge comes down in the harbour like a tired bird — cage swinging empty, lights drowned, engines full of seawater and second thoughts. Its owner stands on Shamouti\'s dock in the returning sunlight, holding his hat, looking at the calm he tried to steal and somehow helped to save.'], who: 'NARRATOR' },
+    { say: ['...Stilled. All of it. And not one piece of it mine. Do you know, I believe that is the first honest thing the sea has ever said to me. Keep your guardian, island. Keep your storms. A collection, it turns out, is a poor substitute for a sky.'], who: 'VANCE HALLOWAY' },
+    { flag: 'orange_2000_storm_stilled' },
+    { arc: 'arc_lugia_shamouti', stage: 'discovered' },
+    { questDone: 'q_orange_storm' },
+    { toast: 'The storm is stilled. The festival can begin again.' },
+    { warp: { map: 'shamouti', x: 14, y: 14 } },
+  ],
+
+  // -- The catch: Lugia waits at the deep altar (Shamouti Deep entry
+  //    once the storm is stilled; sysLoadMap gate). Standard legendary
+  //    pattern — Lv 55, CATCHABLE, and flee-safe per the Kanto arc
+  //    idiom: the runSteps guard completes the arc only on a clean
+  //    win, so a flee (or a loss) leaves Lugia waiting and the event
+  //    re-fires on the next descent. -------------------------------
+  ev_orange_2000_lugia: [
+    { say: ['The deep chamber is still as held breath. In the water-light at the altar, immense and patient, the guardian waits — not sleeping, not wary. Waiting the way the sea waits: because it can, and because you came back.'], who: 'NARRATOR' },
+    { arc: 'arc_lugia_shamouti', stage: 'active' },
+    { wildBattle: { species: 'lugia', level: 55, legendary: true } },
+    { arc: 'arc_lugia_shamouti', stage: 'complete' },
+    { flag: 'orange_2000_lugia_done' },
+    { toast: 'The guardian of the sea has given its answer.' },
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// ORANGE_LEGENDARY_ARCS — merged into LEGENDARY_ARCS by merge.mjs and
+// into the validator's quest table by gen-tables (the Kanto table's
+// presentation: hook + requirement steps spelled out in the Quest
+// Log's LEGENDARY ARCS section). This is the Orange Lugia — a
+// DIFFERENT arc from the designed Johto arc_lugia stub in
+// story-kanto (that arc's prereqs and lair are untouched).
+// ---------------------------------------------------------------------------
+export const ORANGE_LEGENDARY_ARCS = {
+  arc_lugia_shamouti: {
+    id: 'arc_lugia_shamouti', title: 'The Guardian of the Sea', species: 'lugia', region: 'Orange Islands',
+    hook: 'When the three titans raged over Shamouti, the sea\'s guardian rose to measure the one who calmed them — and having measured, it waits now in still water for the meeting to be finished properly.',
+    steps: [
+      { text: 'Hold the Sea Ruby Badge and come to Shamouti as the storm breaks', flag: 'orange_2000_active' },
+      { text: 'Calm Moltres at the Fire Isle shrine cave', flag: 'orange_2000_moltres' },
+      { text: 'Calm Zapdos at the Lightning Isle shrine cave', flag: 'orange_2000_zapdos' },
+      { text: 'Calm Articuno at the Ice Isle shrine cave', flag: 'orange_2000_articuno' },
+      { text: 'Face the guardian\'s proving at the deep altar (it cannot be caught there)', flag: 'orange_2000_storm_stilled' },
+      { text: 'Return to the altar in Shamouti Deep, where Lugia waits in still water', catch: 'lugia' },
+    ],
+    lair: 'shamouti-deep',
+  },
 };

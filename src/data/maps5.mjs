@@ -2336,6 +2336,22 @@ export const MAPS5 = {
           "The Pummelo Island boat ties up at this dock — I run her both ways, fair weather or foul.",
           "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
         ],
+        "dialogueStates": [
+          {
+            "flag": "orange_2000_storm_stilled",
+            "dialogue": [
+              "The Pummelo boat sails on a sea like glass today — I have not seen the currents run this kind since I was a girl.",
+              "Whatever you did up at that shrine, trainer, every sailor in the archipelago owes you a fair wind. Step aboard when you're ready."
+            ]
+          },
+          {
+            "flag": "orange_2000_active",
+            "dialogue": [
+              "The Pummelo boat still runs — I run her both ways, fair weather or foul, and this is as foul as I have ever seen it.",
+              "Three storm cells out there, turning like millstones. You sail careful, trainer. The isles need their shrines back."
+            ]
+          }
+        ],
         "ferry": "pummelo"
       },
       {
@@ -2395,6 +2411,52 @@ export const MAPS5 = {
         "dialogue": [
           "Shamouti keeps the old festival: three isles, three shrines, one guardian of the sea.",
           "When the birds quarrel, the whole sky argues. The shrine keeps the peace."
+        ],
+        "dialogueStates": [
+          {
+            "flag": "orange_2000_storm_stilled",
+            "dialogue": [
+              "The lanterns are lit, the banners are dry, and the song will be sung from the shrine floor tonight — because of you, trainer.",
+              "Sixty festivals I have kept. This is the one they will tell stories about. The guardian rose, the storm knelt, and the sea went kind again."
+            ]
+          },
+          {
+            "flag": "orange_2000_active",
+            "dialogue": [
+              "The festival can wait — festivals are patient, storms are not. The shrine isles, trainer: free the three titans from that collector's cages.",
+              "Slowking counsels from its rock on the west shore. It has never once been wrong. It has also never once hurried, so listen slowly."
+            ]
+          }
+        ]
+      },
+      {
+        "x": 6,
+        "y": 12,
+        "name": "SLOWKING",
+        "art": "slowking",
+        "skin": "#f0c8d8",
+        "shirt": "#e8a0b8",
+        "pants": "#c8b898",
+        "hair": "#f0e0c8",
+        "dialogue": [
+          "Slowking sits on the shore rocks where it has sat since before the plaza had a name, watching the three shrine isles the way old sailors watch weather.",
+          "Slow... king. (It regards you with enormous, unhurried calm. Some questions, its eyes suggest, the sea will answer when it is ready.)"
+        ],
+        "dialogueStates": [
+          {
+            "flag": "orange_2000_storm_stilled",
+            "dialogue": [
+              "Slowking is back on its rock, in the sun, in the exact patch of warmth it has occupied for longer than anyone can prove.",
+              "Slow... king. King. (The storm is a story now. Slowking has already heard it — it was there. So were you.)"
+            ]
+          },
+          {
+            "flag": "orange_2000_active",
+            "dialogue": [
+              "Slowking turns its head — slowly — from isle to isle to isle. Fire. Lightning. Ice. Then it looks at you, and waits, with the patience of deep water.",
+              "Slow... king. (Free the shrines. Calm the titans. Then climb to the shrine, and let the sea decide. It is not advice. It is a tide table.)"
+            ]
+          }
         ]
       },
       {
@@ -4167,7 +4229,7 @@ export const MAPS5 = {
       {
         "x": 7,
         "y": 1,
-        "text": "The back passage breathes cold, deep water. (The deep chamber waits beyond — its story arrives with the 2000 stage.)"
+        "text": "The back passage breathes cold, deep water. The deep chamber waits beyond — still, sealed, and listening."
       }
     ],
     "npcs": [
@@ -4183,6 +4245,22 @@ export const MAPS5 = {
         "dialogue": [
           "I keep the candles and the quiet. Both take daily work.",
           "On festival night the song is sung from this floor. The sea listens. It always has."
+        ],
+        "dialogueStates": [
+          {
+            "flag": "orange_2000_storm_stilled",
+            "dialogue": [
+              "The candles burn straight tonight. First time since the barge came. I have relit this shrine's quiet, trainer — you relit the sea's.",
+              "Slowking is back on its rock, the deep chamber sleeps, and the song is tonight. Stay for it, if the road allows."
+            ]
+          },
+          {
+            "flag": "orange_2000_active",
+            "dialogue": [
+              "The candles will not stay lit — the wind down the back passage is wrong, all wrong. You are the one Elder Mira is praying for, aren't you.",
+              "The three shrine caves, trainer. And when the titans are calm — this floor. Slowking will know the hour. It always does."
+            ]
+          }
         ]
       }
     ],
@@ -4293,7 +4371,10 @@ export const MAPS5 = {
     "encounters": null,
     "items": [],
     "hidden": [],
-    "events": [],
+    "events": [
+      { "id": "ev_orange_2000_moltres", "x": 6, "y": 2, "when": { "flag": "orange_2000_active", "flagNot": "orange_2000_moltres" } },
+      { "id": "ev_orange_2000_moltres", "x": 7, "y": 2, "when": { "flag": "orange_2000_active", "flagNot": "orange_2000_moltres" } }
+    ],
     "start": null
   },
   "ice-cave": {
@@ -4344,7 +4425,10 @@ export const MAPS5 = {
     "encounters": null,
     "items": [],
     "hidden": [],
-    "events": [],
+    "events": [
+      { "id": "ev_orange_2000_articuno", "x": 6, "y": 2, "when": { "flag": "orange_2000_active", "flagNot": "orange_2000_articuno" } },
+      { "id": "ev_orange_2000_articuno", "x": 7, "y": 2, "when": { "flag": "orange_2000_active", "flagNot": "orange_2000_articuno" } }
+    ],
     "start": null
   },
   "lightning-cave": {
@@ -4395,7 +4479,10 @@ export const MAPS5 = {
     "encounters": null,
     "items": [],
     "hidden": [],
-    "events": [],
+    "events": [
+      { "id": "ev_orange_2000_zapdos", "x": 6, "y": 2, "when": { "flag": "orange_2000_active", "flagNot": "orange_2000_zapdos" } },
+      { "id": "ev_orange_2000_zapdos", "x": 7, "y": 2, "when": { "flag": "orange_2000_active", "flagNot": "orange_2000_zapdos" } }
+    ],
     "start": null
   },
   "house-valencia": {
