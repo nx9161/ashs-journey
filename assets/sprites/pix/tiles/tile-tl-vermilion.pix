@@ -1,7 +1,7 @@
-# Premium+ W5: TX-2 vermilion landmark facade — crest dark tone
+# Premium+ W6: TX-3 landmark facade: eave shadow line + foundation course, vermilion
 PIX tile-tl-vermilion 16 16
-dddddddddddddddd
-dddddddddddddddd
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 dddddddddddddddd
 wwwwwwaaaawwwwww
 wwweeaaaazzweeww
@@ -14,8 +14,8 @@ eewwwwaaaawwwwww
 wwwwweewwwwwwwww
 wwwweewwwwweewww
 ssssssssssssssss
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #f5f0dc landmark-wall
 e #ebe1b8 landmark-wall-shade
@@ -23,4 +23,5 @@ d #a06a3c vermilion-trim
 s #a87f4e landmark-shadow
 a #f0d0a0 vermilion-crest
 z #e1a03f crest-dark
-h #f4eeba crest-light
+h #f1f3b6 crest-light
+F #6a6a80 foundation-stone

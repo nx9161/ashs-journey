@@ -1,0 +1,27 @@
+# Premium+ W6: TX-3 Silph/lab upper storey (window design B) 16x16 — resolver upper-row variant
+PIX tile-wall-lab-upper 16 16
+tttttttttttttttt
+tttttttttttttttt
+llllllllllllllll
+wllwwwwllwwwwwll
+wwttttllllttttww
+wwtllthuuutlltww
+wwtllthhuutlltww
+wwtttthhuuttttww
+sstlltuuuutlltss
+wwtlltuuuutlltww
+wwttttuuuuttttww
+wwwwsssssssswwww
+wwwwwwwwswwwwwww
+wwwwwwwwwwwwwwww
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+PAL
+w #8a8aa0 metal-mid
+l #c2c8d4 metal-light
+s #46586e metal-dark
+t #5a3a24 trim
+u #2e63b0 porthole-glass
+h #5a9ae8 glass-shine
+q #3fa08a panel-teal
+F #6a6a80 foundation-stone

@@ -1,0 +1,24 @@
+# Premium+ W6: TX-5 Power Plant pipe cluster (object)
+PIX tile-prop-pipecluster 16 16
+................
+................
+...BBB.AA..BBB..
+...BCB.AA..BBB..
+...BCB.AA..BBB..
+...BBB.AA..BBB..
+...DDDDDDDDDDD..
+...DDDDDDDDDDD..
+...BBB.AA..BBB..
+...BBB.AA..BBB..
+...BBB.AA..BBB..
+...BBB.AA..BBB..
+...BBB.AA..BBB..
+...BBB.AA..BBB..
+...BBB.AA..BBB..
+................
+PAL
+B #6a6a80 body
+D #202028 shade
+L #9a9aa5 light
+A #f07830 accent
+C #46586e accent-2

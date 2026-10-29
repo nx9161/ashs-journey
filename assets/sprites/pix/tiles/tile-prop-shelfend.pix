@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 mart shelf end-cap
+PIX tile-prop-shelfend 16 16
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBBBBBBBBBBD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBCCCCCCCCBD..
+..DBCCCCCCCCBD..
+..DBBBBBBBBBBD..
+..DBDDDDDDDDBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+PAL
+B #a8845c body
+D #54452f shade
+L #d8b47e light
+A #b0503c accent
+C #202028 accent-2

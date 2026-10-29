@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 house-unique prop: chessboard
+PIX tile-prop-chessboard 16 16
+................
+................
+................
+................
+................
+..BBBBBBBBBBBB..
+..BBBBCCBBCCBB..
+..BBBACCBBCCBB..
+..BBCCBBCCBBBB..
+..BBCCBBCCBBBB..
+..BBBBCCBBCCBB..
+..BBBBCCBBACBB..
+..BBCCBBCCBBBB..
+..BBCCBBCCBBBB..
+................
+................
+PAL
+B #c9a06a body
+D #5f5130 shade
+L #f0d0a0 light
+A #8a5a30 accent
+C #54452f accent-2

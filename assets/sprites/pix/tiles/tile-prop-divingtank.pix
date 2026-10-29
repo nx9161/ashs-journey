@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 gym type-specific prop: divingtank
+PIX tile-prop-divingtank 16 32
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBBBBBBBBBBD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAACCCAAABD..
+..DBAACCCAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAALLLABD..
+..DBAAAALLLABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #3a7bd5 body
+D #2e63b0 shade
+L #8ae8f0 light
+A #5a9ae8 accent
+C #eef7ff accent-2

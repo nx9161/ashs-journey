@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 gym type-specific prop: forge
+PIX tile-prop-forge 16 32
+................
+................
+......BBBB......
+......BBBB......
+......BBBB......
+......BBBB......
+......BBBB......
+......BBBB......
+.DLLLLLLLLLLLLD.
+.DLLLLLLLLLLLLD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBDDDDDDBBBD.
+.DBBBDDDDDDBBBD.
+.DBBBDAAAADBBBD.
+.DBBBDAAAADBBBD.
+.DBBBDACCADBBBD.
+.DBBBDACCADBBBD.
+.DBBBDACCADBBBD.
+.DBBBDDDDDDBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DDDDDDDDDDDDDD.
+................
+................
+PAL
+B #6a6a80 body
+D #202028 shade
+L #9a9aa5 light
+A #f07830 accent
+C #f0e060 accent-2

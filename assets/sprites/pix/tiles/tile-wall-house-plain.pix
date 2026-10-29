@@ -1,7 +1,7 @@
-# Wave 2 architecture: plaster house wall, plain with trim
+# Premium+ W6: TX-3 facade: eave shadow line + foundation course on tile-wall-house-plain
 PIX tile-wall-house-plain 16 16
-ssssssssssssssss
-ssssssssssssssss
+tttttttttttttttt
+tttttttttttttttt
 llllllllllllllll
 wwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwww
@@ -14,8 +14,8 @@ wwwwwwwwwwwwwwww
 wwwwwwllllwwwwww
 wwwwwwllllwwwwww
 wwwwwwwwwwwwwwww
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #c9a06a wall-mid
 l #e3ba85 wall-light
@@ -24,3 +24,4 @@ t #5a3a24 trim
 g #ffd873 window-lit
 u #2e63b0 window-glass
 h #5a9ae8 glass-shine
+F #6a6a80 foundation-stone

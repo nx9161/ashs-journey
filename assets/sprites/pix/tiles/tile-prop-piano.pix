@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 house-unique prop: piano
+PIX tile-prop-piano 16 16
+................
+................
+................
+................
+.BBBBBBBBBBBBB..
+.BBBBBBBBBBBBB..
+.BCCCCCCCCCCCB..
+.BCBBCCBBCCBBB..
+.BCCCCCCCCCCCB..
+.BBBBBBBBBBBBB..
+.BBBBBBBBBBBBB..
+.BBBBBBBBBBBBB..
+.BBBBBBBBBBBBB..
+.BBBBBBBBBBBBB..
+..DD........DD..
+..DD........DD..
+PAL
+B #202028 body
+D #202028 shade
+L #46586e light
+A #eef7ff accent
+C #ffd873 accent-2

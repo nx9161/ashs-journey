@@ -1,4 +1,4 @@
-# Premium+ W5: TX-2 fuchsia landmark facade — crest dark tone
+# Premium+ W6: TX-3 landmark facade: eave shadow line + foundation course, fuchsia
 PIX tile-tl-fuchsia 16 16
 dddddddddddddddd
 dddddddddddddddd
@@ -14,8 +14,8 @@ wwwwaawweewaawww
 wwwwwazzazzawwww
 wwwwwwwwwwwwwwww
 ssssssssssssssss
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #f5f0dc landmark-wall
 e #ebe1b8 landmark-wall-shade
@@ -23,4 +23,5 @@ d #96567c fuchsia-trim
 s #a87f4e landmark-shadow
 a #f4cfe2 fuchsia-crest
 z #dc68a4 crest-dark
-h #fae8ec crest-light
+h #f4e7f7 crest-light
+F #6a6a80 foundation-stone

@@ -1,7 +1,7 @@
-# Wave 2 architecture: center sign on roof fascia: white panel, original plus glyph
+# Premium+ W6: TX-3 facade: eave shadow line + foundation course on tile-sign-center
 PIX tile-sign-center 16 16
-aaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaa
+dddddddddddddddd
+dddddddddddddddd
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
@@ -14,8 +14,8 @@ arwwwwwrrrwwwwra
 arwwwwwwwwwwwwra
 arrrrrrrrrrrrrrc
 aaaaaaaaaaaaaaaa
-cccccccccccccccc
-dddddddddddddddd
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 a #d84040 center-roof
 b #e86a8a center-roof-light
@@ -23,3 +23,4 @@ c #a02828 center-roof-deep
 d #5a3a24 eave-trim
 w #eef7ff sign-white
 r #d84040 sign-red
+F #6a6a80 foundation-stone

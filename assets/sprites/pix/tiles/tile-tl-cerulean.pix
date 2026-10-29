@@ -1,7 +1,7 @@
-# Premium+ W5: TX-2 cerulean landmark facade — crest dark tone
+# Premium+ W6: TX-3 landmark facade: eave shadow line + foundation course, cerulean
 PIX tile-tl-cerulean 16 16
-dddddddddddddddd
-dddddddddddddddd
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 dddddddddddddddd
 wweewwwwwwwwwwww
 wwwwaaawwwaaawww
@@ -14,8 +14,8 @@ wwwwaazzwwaaaeew
 eewwwwwwwwwwwwww
 eewwwwwwwwweewww
 ssssssssssssssss
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #f5f0dc landmark-wall
 e #ebe1b8 landmark-wall-shade
@@ -23,4 +23,5 @@ d #3a7d78 cerulean-trim
 s #a87f4e landmark-shadow
 a #bfe8e0 cerulean-crest
 z #68c9b6 crest-dark
-h #d6edf0 crest-light
+h #d2e8ef crest-light
+F #6a6a80 foundation-stone

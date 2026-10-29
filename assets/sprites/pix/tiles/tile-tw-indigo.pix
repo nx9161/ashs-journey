@@ -1,7 +1,7 @@
-# Premium+ W5: TX-2 indigo house wall — shade band, lit window
+# Premium+ W6: TX-3 town facade: eave shadow line + foundation course, indigo
 PIX tile-tw-indigo 16 16
-ssssssssssssssss
-ssssssssssssssss
+tttttttttttttttt
+tttttttttttttttt
 wwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwww
 wwwwwttttttwwwww
@@ -14,8 +14,8 @@ wwwwwtggggtwwwww
 wwwwwttttttwwwww
 nnnnnnnnnnnnnnnn
 nnnnnnnnnnnnnnnn
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #a4aed3 indigo-wall
 n #6d7db8 wall-shade-band
@@ -23,3 +23,4 @@ s #5c6ca0 wall-shadow
 t #5a3a24 window-frame
 g #ffd873 window-lit
 h #eef7ff glass-shine
+F #6a6a80 foundation-stone

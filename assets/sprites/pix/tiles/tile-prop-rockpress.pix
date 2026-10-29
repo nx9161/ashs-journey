@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 gym type-specific prop: rockpress
+PIX tile-prop-rockpress 16 32
+................
+......DDDD......
+......DDDD......
+......DDDD......
+....AAAAAAAA....
+....AAAAAAAA....
+....AAAAAAAA....
+....AAAAAAAA....
+..BBAAAAAAAABB..
+..BBAAAAAAAABB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..DDDDDDDDDDDD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #9a9aa5 body
+D #6a6a80 shade
+L #c2c8d4 light
+A #46586e accent
+C #202028 accent-2

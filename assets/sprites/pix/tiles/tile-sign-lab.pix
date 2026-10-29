@@ -1,7 +1,7 @@
-# Wave 2 architecture: lab sign on slate fascia: metal panel, original flask glyph
+# Premium+ W6: TX-3 facade: eave shadow line + foundation course on tile-sign-lab
 PIX tile-sign-lab 16 16
-aaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaa
+dddddddddddddddd
+dddddddddddddddd
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
@@ -14,8 +14,8 @@ admmwwttttwwmmda
 admmwttttttwmmda
 addddddddddddddc
 aaaaaaaaaaaaaaaa
-cccccccccccccccc
-dddddddddddddddd
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 a #46586e slate-mid
 b #5f748f slate-light
@@ -24,3 +24,4 @@ d #5a3a24 eave-trim
 m #46586e sign-metal
 w #eef7ff glyph-light
 t #3fa08a flask-liquid
+F #6a6a80 foundation-stone

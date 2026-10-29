@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 gym type-specific prop: switchboard
+PIX tile-prop-switchboard 16 16
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBBBBBBBBBBD..
+..DBAABBAABBAA..
+..DBAABBAABBAA..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBCCBBCCBBCC..
+..DBCCBBCCBBCC..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #46586e body
+D #202028 shade
+L #8a8aa0 light
+A #e84c3c accent
+C #f0e060 accent-2

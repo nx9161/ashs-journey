@@ -1,5 +1,37 @@
-# Premium+ W5: TX-2 viridian roof — gabled slate family
-PIX tile-tr-viridian 16 16
+# Premium+ W6: TX-3 tall roof 16x48 (ridge/gable + slope + eave), viridian gabled slate — bottom-anchored on the existing roof cell
+PIX tile-tr-viridian 16 48
+dddddddaaddddddd
+ddddddmaamdddddd
+dddddmaaaamddddd
+ddddmmmmmmmmdddd
+mmmmmmmmmmmmmmmm
+ddmmmmmmmmmmmmdd
+gmmmmmmmmmmmmmma
+mmmmmmmmmmmmmmmm
+ggggaaggggaagggg
+ggaaggggaagggggg
+aaggggaagggggggg
+ggggggggggggggaa
+ggggggggggggaagg
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+ggaggggaggggaggg
+aggggaggggaggggg
+gggaggggaggggaag
+gaggggaggggagggg
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+ggaggggaggggaggg
+aggggaggggaggggg
+gggaggggaggggaag
+gaggggaggggagggg
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
 dddddddddddddddd
 dddddddddddddddd
 mmmmmmmmmmmmmmmm

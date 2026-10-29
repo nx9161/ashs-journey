@@ -1,0 +1,24 @@
+# Premium+ W6: TX-5 Rock Tunnel support beams (object)
+PIX tile-prop-supportbeam 16 16
+................
+..LLLLLLLLLLLL..
+..LLLLLLLLLLLL..
+..LLLLLLLLLLLL..
+..BBB......BBB..
+..BBB......BBB..
+..BBB......BBB..
+..BBB......BBB..
+..DDDDDDDDDDDD..
+..DDDDDDDDDDDD..
+..BBB......BBB..
+..BBB......BBB..
+..BBB......BBB..
+..BBB......BBB..
+..BBB......BBB..
+................
+PAL
+B #8a5a30 body
+D #54452f shade
+L #c9a06a light
+A #5f5130 accent
+C #202028 accent-2

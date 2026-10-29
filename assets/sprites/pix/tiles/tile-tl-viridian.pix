@@ -1,4 +1,4 @@
-# Premium+ W5: TX-2 viridian landmark facade — crest dark tone
+# Premium+ W6: TX-3 landmark facade: eave shadow line + foundation course, viridian
 PIX tile-tl-viridian 16 16
 dddddddddddddddd
 dddddddddddddddd
@@ -14,8 +14,8 @@ wwwwwwazzawwwwww
 wwwwwwwaawwwwwww
 wwwweewwweewwwww
 ssssssssssssssss
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #f5f0dc landmark-wall
 e #ebe1b8 landmark-wall-shade
@@ -23,4 +23,5 @@ d #35733e viridian-trim
 s #a87f4e landmark-shadow
 a #cfe8a8 viridian-crest
 z #9ed14f crest-dark
-h #ceeec0 crest-light
+h #d0f0c0 crest-light
+F #6a6a80 foundation-stone

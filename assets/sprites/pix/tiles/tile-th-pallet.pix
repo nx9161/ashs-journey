@@ -1,5 +1,37 @@
-# Premium+ W5: TX-2/P-4 pallet house roof — enriched form family
-PIX tile-th-pallet 16 16
+# Premium+ W6: TX-3 tall roof 16x48 (ridge/gable + slope + eave), pallet hipped terracotta — bottom-anchored on the existing roof cell
+PIX tile-th-pallet 16 48
+kkkkkkkaakkkaakk
+kkkkkkdaadkkkkkk
+kkkkkdaaaadkkkkk
+kkkkdddzdddzkkkk
+mmmzdddzdddzkkmm
+mmdzdddzdddzkkmm
+kddzdddzdddzdddk
+dddzdddzdddzdddz
+aaggggaaggaagggg
+gggggggggggggggg
+aaggggggggaagggg
+gggggggggggggggg
+aaggaaggggaagggg
+gggggggggggggggg
+dddddddddddddddd
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+agggggagggggaggg
+ggagggggaggggggg
+ggggagggggagggag
+dddddddddddddddd
+rrrrrrrrrrrrrrrr
+dzdddzdddzdddzdd
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+agggggagggggaggg
+ggagggggaggggggg
+ggggagggggagggag
+dddddddddddddddd
+rrrrrrrrrrrrrrrr
+dzdddzdddzdddzdd
 rrrrrrrrrrrrrrrr
 dddzdddzdddzdddz
 dddzdddzdddzdddz

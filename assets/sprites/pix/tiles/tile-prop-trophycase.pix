@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 trophy case (gym/league)
+PIX tile-prop-trophycase 16 16
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBCCCCCCCCBD..
+..DBCAACCBBCBD..
+..DBCAACCBBCBD..
+..DBCAACCBBCBD..
+..DBCAACCBBCBD..
+..DBCAACCBBCBD..
+..DBCCCCCCCCBD..
+..DBBBBBBBBBBD..
+..DBBBDDDDBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+PAL
+B #8a6a48 body
+D #54452f shade
+L #ffd873 light
+A #f0e060 accent
+C #c2c8d4 accent-2

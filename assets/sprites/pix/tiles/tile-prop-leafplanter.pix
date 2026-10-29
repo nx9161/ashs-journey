@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 gym type-specific prop: leafplanter
+PIX tile-prop-leafplanter 16 16
+................
+................
+................
+................
+...CCC...CCC....
+...CCC...CCC....
+...CCCBBBCCCBBB.
+...CCCBBBCCCBBB.
+...CCCBBBCCCBBB.
+..AAAABBBAAABBB.
+..AAAABBBAAABBB.
+..AAAAAAAAAAAA..
+..AAAAAAAAAAAA..
+..AAAAAAAAAAAA..
+..AAAAAAAAAAAA..
+................
+PAL
+B #67aa54 body
+D #2e5e28 shade
+L #a9e8a8 light
+A #386e2c accent
+C #b0503c accent-2

@@ -3835,3 +3835,305 @@ Render budget met on mean/p95 in both QA runs (tails track
 sandbox load). Two evidence gaps closed by exact code/geometry
 measurement rather than live pixels (follower-shadow isolation,
 crystal-pool screenshot) — recorded, not hidden.
+
+## Premium+ Art Wave W6 — Buildings, Interiors & Dungeons (2026-10-29, implementer entry — pending independent QA)
+
+TX-3 + TX-4 + TX-5 delivered. Base 5849dae (W0–W5 committed);
+public edition only; not committed (coordinator commits after
+independent QA). All art hand-authored .pix via the deterministic
+generator (`~/workspace/ashs-journey-qa/gen-w6-art.mjs`, hash-seeded,
+cluster textures, every new hex snapped to the shipped tiles union —
+zero palette-union growth, no cap raise); placements by
+`apply-w6-placements.mjs` (coordinate edits applied to every
+identical file copy; every prop placement BFS-verified: all warps /
+NPCs / signs / start cells reachable before stay reachable after,
+no placed cell was a protected cell; floor/wall swaps asserted
+class-preserving per cell). Census rig:
+`premium-rig/audit-w6-census.mjs` (recording FakeCanvas, real
+resolver, Wave-2 logical tiles-only raster method).
+
+**Process note (recorded honestly):** the first W6 implementer
+session was interrupted at ~80%; its generators and the bulk of the
+wave were already in the tree. The completion pass (facade fixes,
+the league/silph/tower kind top-ups, center colour diversification,
+final placements) landed from the resumed implementer session on
+2026-10-29 07:34–07:39 UTC, concurrently with this entry's
+verification pass — early readings taken during that window (39/47
+buildings, gym kind shortfalls, house Jaccard 0.737) describe the
+mid-flight tree, not the final state. All numbers below are from
+the finished tree, census run twice with identical output.
+Nothing was discarded from the inherited working tree.
+
+### TX-3 — buildings & architecture (63 planned units)
+
+- Authored: 22 tall roofs (11 towns × th/tr, 16×48: ridge/gable +
+  slope + shipped eave band, bottom-anchored on the existing roof
+  cells — footprints unchanged), eave-shadow + foundation-course
+  bands on 11 town facades + 15 typed facade/sign tiles, dojo upper
+  facade 16×48, lab upper-storey variant, 8 gym type-accent facades
+  × base + upper (original rock/strata/wave/bolt/leaf/rings/thorn/
+  flame motifs — the shared `wall-gym` exterior reaches 0 cells in
+  every gym town), 3 foundation/step tiles, 16 door-open frames
+  wired (DOOR_OPEN_ART + cache.doorOpen; the warp-fade player is
+  W7 scope per PL-1).
+- **Census: 47/47 buildings PASS** — every building in the 11
+  settlements meets visual height (houses ≥3 tiles, typed ≥4),
+  eave shadow line, foundation course, LD-1 cast shadow, side-wall
+  shade step, roof shading ≥4 steps (measured 4–7).
+- **Window designs per building type ≥2:** house 18, center 2,
+  mart 2, gym 17, lab 3 distinct facade arts (base + upper-storey
+  window-B variants, resolver-placed on 2-row facades).
+
+### TX-4 — interiors & furniture (55 planned units + ~170 placements)
+
+- Authored: 16 large props at 16×32 (gate ≥12: medcabinet,
+  aquarium, freezer, kitchen, bath, tvstand, wardrobe, tallbooks,
+  bigbed, counterrun, weightrack, column, serverrack, shrine,
+  leaguefountain, plantvat + 6 gym/dungeon larges), 13 small props,
+  26 house-unique props, 24 gym type-specific props, 11 wall-
+  dressing tiles (gate ≥10), 3 rug patterns.
+- **Census kind counts:** Center 14 kinds / 20 prop cells (gate
+  ≥10 / ≥16), Mart 10, every gym 13–14 kinds with **3–4
+  type-specific kinds each** (gate ≥10 / ≥3: rockpress/stonebell/
+  miningcart, poolblock/lifering/divingtank, coil/batterypack/
+  switchboard, vinepost/leafplanter/seedvault, crystalball/
+  focuslamp/psypod, gascanister/venomvat/thornpost, coalscuttle/
+  firewood/forge, sandcrate/fossildisplay/sandcolumn), League 12,
+  Silph 12/12, Tower 12/12 (all ≥12).
+- **Houses:** 13–14 kinds each, exactly 2 kinds unique to each
+  house, pairwise kind-Jaccard **max 0.688** (gate ≤0.70).
+- **Center top-1 in-map colour share 24.2%** (gate ≤25%, logical
+  raster; diversified via rug2/rug3 floor dressing + prop colour
+  variety, Center identity intact).
+- **Added prop placements vs the W6 base census: +255** (381 →
+  636 prop cells across all maps; gate ≈170), all inside existing
+  rooms, footprints unchanged.
+- Deviation, named: the League/Silph/Tower top-ups to 12 kinds
+  reuse existing prop kinds new to those maps (League +urn/candle,
+  Silph +sofa/stool, Tower +stool) rather than authoring
+  map-exclusive kinds. The spec's letter (≥12 kinds per map) is
+  met; flagged so QA can rule if exclusivity was intended.
+
+### TX-5 — caves & dungeons (32 planned units)
+
+- Sub-theme sets complete, census-verified in-map: Seafoam ice 8
+  (icewall, iceface, icefloor, frostfloor, icepool, iceboulder,
+  frostrock, icecrystal — the ice dungeon previously had zero ice
+  tiles), Mt. Moon glow-crystal/mushroom 5, Rock Tunnel
+  strata/supports 4, Victory Road rubble/banner 4, Cerulean Cave
+  crystal/water-glow 5, tower/silph/plant extras 6.
+- **Every dungeon ≥9 tile kinds:** moon1 10, moon2 10, rocktunnel
+  9, seafoam 15, victoryroad 10, ceruleancave 12. **In-glow unique
+  colours 70–102** per cave map (gate ≥25, logical raster, LD-4
+  falloff live). **Cave family palette union 115 hexes** (gate
+  ≥14; base was 7).
+
+### Sizes
+
+- ART keys 2,083 → **2,247 (+164 new, 0 lost)**; `build-art.mjs`
+  rebuild byte-identical (md5-verified on art-data + tiles atlas
+  this session). art-data 3,341,006 → **3,452,742 B (+111,736 B,
+  under the ≤160 KB W6 cap)**. public/game.js 4,931,183 B
+  (hard gate 12,582,912 — PASS).
+
+### Standing battery (final tree, this session)
+
+- W6 census: every TX-3/TX-4/TX-5 gate above PASS, two
+  consecutive runs identical. qa-changed-flows failures EXACTLY
+  {b2, d9} (the pre-existing baseline). campaign-smoke 24/24.
+- Encounter preservation: `,` cells **640 = 640** vs the W6 base
+  census, zero moved; all placements/swaps walkability-class
+  preserving (asserted in the placement tooling).
+- personal/ byte-identical to HEAD (restored after the build per
+  standing procedure; personal/game.js sha256 matches HEAD) and
+  the `personal:` line in dist/content-hash.txt stands at its
+  pinned constant ce64da2b…0bb5; guest/vercel lines updated by
+  the build normally.
+
+**Implementer completion addendum (2026-10-29, resumed session):**
+connectivity (owner amendment) + the full battery, run on the
+finished tree after the entry above was drafted.
+
+- **Connectivity: PASS.** celadon-sweep **11/11 on the W6 tree and
+  11/11 on a pristine 5849dae worktree** (identical SWEEPJSON).
+  Warp audit (`audit-w5-warps.mjs`, both trees): outputs
+  **byte-identical** — 286 warp triggers, 266 reachable, the same
+  20 unreachable, doors 139 (south-front 76, any-adjacent 124,
+  no-approach 15). Redressed interiors walked by construction and
+  audit: every placement was BFS-verified at placement time (all
+  previously reachable cells stay reachable; NPCs reachable or
+  adjacent; no warp/NPC/sign/start cell touched), and the warp
+  audit proves every interior door approach unchanged vs base.
+- **Cell ledger (merged maps, vs base): 485 cells changed** — 471
+  hold W6 kinds (props, dressings, rugs, dungeon floor/wall swaps),
+  40 of them the gym-facade exterior swaps; the rest are shipped-
+  kind placements (chair/plant/sofa/stool/martshelf/goods).
+  Encounter (`,`) cells 640 = 640, zero moved.
+- **Battery, line by line:** Track B integration 114/114;
+  campaign-smoke 24/24; fidelity-checks 35/35; battle-model 45/45;
+  cheat-shop 44/44; rejuv p1 44/44, p2 39/40, p3 60/61, p4 50/51,
+  p5 52/53, p6 44/45 — the sole failure in p2–p6 is C01
+  (chromium-start), reproduced identically at base (p2 39/40) —
+  the post-restart environment gate, not a W6 signal (no
+  char-whitelist failures: no rejuv whitelist needed extension —
+  W6 walkable kinds are floor/rug class only, and no test actor
+  stands on them in the suites' staged maps); qa-changed-flows
+  failures EXACTLY {b2, d9}; audit-headless 17/17; verify-slice
+  134/134; budgets-check all gates PASS; contamination-scan
+  clean; verify-audio ALL PASS; drift-gate PASS (personal/
+  restored byte-identical after the run). Render (W5 rig,
+  Saffron, tall roofs live): **mean 2.19 ms, p95 5.60 ms** ≤ 8 ms.
+  audit-laptop under the CHROME-POLICY recipe (patched copies,
+  both trees): **15/29 on W6 and 15/29 at base with identical
+  14-failure sets** (Dex/Bag/Options/wild-battle — pre-existing
+  environmental). Clean rebuild: 2,247 ART keys, **0 lost /
+  0 gained**, art-data byte-identical across rebuild (sha256).
+- **Spec assumptions proved wrong (measured):**
+  1. TX-5's "cave palette union ≥14 (today 7)": the 7 was
+     pre-elevation. Post-W5 the art-level cave union already
+     measured **63 hexes** before W6 authored a tile; the real
+     gap was per-map tile kinds (4–7). Final in-map union across
+     the 6 cave maps: 115 (logical raster). The entry above's
+     "base was 7" repeats the spec's stale figure — corrected
+     here.
+  2. TX-3's "roof assembly 2 tiles (16×32)": typed buildings ship
+     2-row exteriors, so their ≥4-tile visual height requires a
+     **16×48** assembly (ridge + slope + eave band) on the roof
+     cell; houses use the same 16×48 under one bottom-anchor
+     rule. Height numbers met as specified; piece size is not.
+  3. Palette headroom: the tiles union at base was **624 of the
+     640 cap** (16 spare hexes), so W6 snapped every new hex to
+     the shipped union — zero union growth, no cap raise.
+- **Process corrections (recorded honestly):** the placement
+  write-back initially missed two source formats (maps4's
+  quoted keys + plain `rows:` arrays; quoted gym keys in
+  maps2/maps3) — the census caught it; re-runs used
+  target-total (deficit) semantics so no map was double-placed.
+  The generator's tallRoof was not idempotent (roofs stacked to
+  16×176 across reruns) — fixed to compose from the shipped
+  16-row band; all 22 roofs verified 16×48. Two census measures
+  were corrected to the spec's intent: foundation = a uniform
+  bottom band in a colour that is not the wall's mid-dominant
+  (wall-gym's own grey IS the standard foundation hex, so its
+  course is authored in the darkest tone), and side-wall ends
+  are segment ends (a facade cell beside a same-group door is
+  interior, not an edge).
+
+**Independent QA addendum (Premium+ W6, 2026-10-29):** Verdict
+**PASS WITH NOTES**. Graded cold from live play + own runs; no
+implementer number taken on trust.
+
+- **Independent census (QA run of premium-rig/audit-w6-census.mjs,
+  this session):** ART keys 2,247. TX-3: **47/47 buildings PASS**
+  (height houses 4 / typed 4–5 tiles, eave + foundation + cast
+  shadow + side-wall step all true, roof steps 4–7); window
+  designs house 18 / center 2 / mart 2 / gym 17 / lab 3; door-open
+  frames 16 kinds / 16 canvases; shared `wall-gym` = **0 cells**
+  in all 8 gym towns (facades gym-ground/rock/water/volt/leaf/
+  psy/poison/fire). TX-4: Center 14 kinds / 20 cells, Mart 10;
+  gyms 13–14 kinds with 3–4 type-specific each; League 12,
+  Silph 12/12, Tower 12/12; houses 13–14 kinds, exactly 2 unique
+  per house, pairwise Jaccard max **0.688** (≤0.70); large props
+  22 kinds, wall dressing 11 kinds; Center top-1 in-map colour
+  **24.2%** (≤25%). TX-5: dungeons moon1 10 / moon2 10 /
+  rocktunnel 9 / seafoam 15 / victoryroad 10 / ceruleancave 12
+  kinds (all ≥9); in-glow colours 70–102 per cave map (≥25);
+  cave palette union **115** (≥14). Sub-theme sets verified
+  in-map from the census kind lists: Seafoam ice 8 (icewall,
+  iceface, icefloor, frostfloor, icepool, iceboulder, frostrock,
+  icecrystal), Mt. Moon 5, Rock Tunnel 4, Victory Road 4,
+  Cerulean Cave 5, tower/silph/plant extras 6. **Prop placements
+  re-measured with the census instrument on both trees: 381
+  (HEAD maps) → 636 (W6), +255 exactly** (gate ≈170).
+- **Live play (serve-local :8931, served game.js md5
+  c1588255… = repo public/game.js, CDP drives, 30 captures in
+  ~/workspace/ashs-journey-qa/wave6-premium-qa-shots/, zero JS
+  errors):** 10 town exteriors (Pallet, Viridian, Pewter,
+  Cerulean, Vermilion, Celadon, Saffron, Lavender, Fuchsia,
+  Cinnabar) — buildings read volumetric everywhere: tall ridge/
+  gable roofs, eave shadow, foundation courses, side shade;
+  gym facades type-distinct at a glance (Pewter stone strata,
+  Cerulean blue wave, Celadon leaf-green, Fuchsia poison-teal).
+  Gym interiors ×5 (Cerulean, Vermilion, Pewter, Celadon,
+  Fuchsia): type props visible with body — Cerulean pools +
+  diving tank + lifering, Vermilion switchboard/coil machines,
+  Celadon vine posts + leaf planters + seed vault. Center:
+  heal machine, med cabinet, aquarium, counter run, rugs;
+  Mart: stocked shelves, freezer, counter, basket stack.
+  League (columns, thrones, five arena mats, league fountain),
+  Silph lobby (server racks, office desks, cable floors), Tower
+  (shrines, tombstones, memorials) all furnished and mutually
+  distinct. Houses: Ash's house shows its unique piano +
+  telescope in situ. Caves under LD-4 lighting: Seafoam reads
+  as an ice cave (pale ice boulders, frost spikes, ice pool,
+  blue crystal glow; entry framing is dim — see notes), Mt.
+  Moon teal crystal + purple shroom glow, Rock Tunnel amber
+  lanterns + strata/supports, Cerulean Cave crystal/water glow.
+- **Connectivity:** celadon-sweep (QA run) **11/11 cities PASS**,
+  all warps reachable. Personally walked gate-to-doors in two
+  cities: Pallet south gate → Ash house (interior crossed,
+  exit) → Gary house; Viridian south gate → gym door (locked-
+  plaque narrator dialogue dismissed, entered gym-viridian) →
+  Center door → Mart door → house door, every entry + exit
+  live-proven. Spot-walks: Center heal counter prompt "A: Talk"
+  at (4,4)→Nurse and "A: PC" at (7,3)→PC terminal; Cerulean
+  Gym leader reached — stood at (8,3) facing Misty, prompt
+  "A: Talk"; Ash house interior traversed entry → east side →
+  exit. Early walk freezes in QA's own drivers were dialogue
+  modals (Diana / ACE RUE3 / locked-gym plaque) eaten by the
+  inherited BFS walker's arrow-only stepping — proven driver
+  artifacts by raw-tap + dialogue-aware re-drives, not game
+  blocks; no placement blocks any door, path, or counter.
+- **Battery (QA runs, this tree):** qa-changed-flows failures
+  EXACTLY {b2, d9} (55/57 + QA total 19/19); campaign-smoke
+  **24/24**; scripts/verify-slice **48/48** + qa-slice 134/134;
+  fidelity-checks 35/35; Track B (`cd tests && node --import
+  ./register.mjs run.mjs`) **114/114**; budgets-check all gates
+  PASS; rejuv p1 44/44, p2 39/40, p3 60/61, p4 50/51, p5 52/53,
+  p6 44/45 — each phase's sole failure is C01 "chromium did
+  not start" (bare-spawn environmental, CHROME-POLICY class;
+  QA's own policy-patched Chromium drove the live game all
+  session, so the browser path itself is proven).
+- **Integrity:** encounter `,` cells **640 = 640** (HEAD maps
+  vs W6, counted both sides). Scratch rebuild reproduced
+  public/game.js byte-identically (md5 c1588255bc3afe8fc1c8040
+  7489dee13 before and after `node scripts/build.mjs` in a
+  scratch copy); `build-art.mjs` rebuild in a scratch copy is
+  byte-identical (art-data md5 e74f0161…, atlas-tiles.png
+  83476a2e…, atlas-tiles.json fc63bb96…), ART 2,083 → 2,247
+  (+164, 0 lost); art-data +111,736 B (3,341,006 → 3,452,742,
+  under the 160 KB wave cap). personal/: as received it was
+  NOT clean (personal/game.js was the ff609481… rebuild, git-
+  dirty) — the battery's rebuild cycle restored it, and QA
+  verified the final state byte-identical to HEAD (game.js
+  sha256 f434ba63…, index.html a780af0b…, git status clean)
+  with the `personal:` line in dist/content-hash.txt reset to
+  the pinned constant ce64da2b…0bb5 per standing procedure;
+  guest/vercel lines carry the W6 build hashes (78faf9c1… /
+  e92d6ad5…).
+- **Deviation ruling — League/Silph/Tower kind top-ups: PASS.**
+  TX-4's letter sets kind-count thresholds per interior
+  (≥12 for League/Silph/Tower) and demands exclusivity only
+  where it says so: ≥3 type-specific kinds per gym (met with
+  authored kinds) and ≥2 unique kinds per house (met with
+  authored kinds). No exclusivity clause binds League/Silph/
+  Tower, so reaching 12 partly with existing kinds new to
+  those maps (League +urn/candle, Silph +sofa/stool, Tower
+  +stool) satisfies the spec as written. The reuse is also
+  thematically inert (urns/candles in a memorial tower and a
+  champions' hall, stools/sofa in an office HQ read correctly
+  in the live captures). Ruled PASS, not merely noted.
+- **Notes (non-blocking):** (1) The shared gym/interior floor
+  texture reads busy/speckled at capture scale in the gym,
+  League, and Silph shots — furniture and type props still
+  read clearly over it; a future polish wave could calm the
+  floor, but no §3 gate measures it and it predates W6's
+  placement work. (2) Seafoam's entry framing under cave
+  lighting is dim — ice identity is carried by boulders/
+  spikes/pool and strengthens deeper in (west-area capture);
+  in-glow measures 102 colours, far over gate. (3) QA driver
+  lesson recorded for W7/W8: the inherited walkTo cannot cross
+  dialogue modals — use tap-stepping + advanceDlg (drivers
+  wave6-premium-qa-*.mjs in the QA workspace carry the fix,
+  including the poll-driven Continue boot: legal → title →
+  menu → Continue → PLAY AS GUEST).

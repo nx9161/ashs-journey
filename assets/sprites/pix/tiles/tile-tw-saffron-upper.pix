@@ -1,0 +1,58 @@
+# Premium+ W6: TX-3 dojo upper facade 16x48 (belt course + shipped saffron wall)
+PIX tile-tw-saffron-upper 16 48
+tttttttttttttttt
+tttttthhhhtttttt
+tttttttttttttttt
+................
+ttFFFFtttttttttt
+tttFFFttttttFFtt
+ttFFFFttttttttFF
+ttttFFttttttttFF
+ttFFFFtttttttttt
+ttttFFtttttttttt
+tFFtttFFFFFFFFtt
+ttttttFFFFtttttt
+ttFFFFttttFFFFtt
+tFFFFFttttFFFFtt
+ttFFtttttttttttt
+tFFFtttttttttttt
+tttttttttttttttt
+tttttttttttttttt
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwttttttwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtghhgtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwttttttwwwww
+nnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnn
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+tttttttttttttttt
+tttttttttttttttt
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwttttttwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtghhgtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwttttttwwwww
+nnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnn
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+PAL
+w #dec98d saffron-wall
+n #cdac4f wall-shade-band
+s #b29540 wall-shadow
+t #5a3a24 window-frame
+g #ffd873 window-lit
+h #eef7ff glass-shine
+F #6a6a80 foundation-stone

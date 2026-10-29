@@ -1,0 +1,40 @@
+# Premium+ W6: TX-5/TX-4 large: power-plant vat
+PIX tile-prop-plantvat 16 32
+................
+................
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAALLAAABD..
+..DBAAALLAAABD..
+..DBAACLLCAABD..
+..DBAACCCCAABD..
+..DBAACCCCAABD..
+..DBAACCCCAABD..
+..DBAACCCCAABD..
+..DBAACCCCAABD..
+..DBAACCCCAABD..
+..DBAACCCCAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+..DDDDDDDDDDDD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #3fa08a body
+D #2e5e28 shade
+L #8ae8f0 light
+A #67aa54 accent
+C #f0e060 accent-2

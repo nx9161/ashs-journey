@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 Center wall variant 3: shade course lines
+PIX tile-centerwall-3 16 16
+cccccccccccccccc
+cccccccccccccccc
+tttttttttttttttt
+fffffsfffffsffff
+fffffsfffffsffff
+bbbbbbbbbbbbbbbb
+fffffsfffffsffff
+fffffsfffffsffff
+tttttstttttstttt
+tttttstttttstttt
+bbbbbbbbbbbbbbbb
+tttttstttttstttt
+tttttstttttstttt
+tttttttttttttttt
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+f #e8b4c4 center-wall
+c #f5f0dc center-crown
+t #c97e97 center-trim
+s #c97e97 center-seam
+b #9e5570 center-baseboard

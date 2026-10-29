@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 silph copier
+PIX tile-prop-copier 16 16
+................
+................
+...LLLLLLLL.....
+...LLLLLLLL.....
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBBBBBBBBCBD..
+..DBAAAAABBBBD..
+..DBAAAAABBBBD..
+..DBAAAAABBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+PAL
+B #c2c8d4 body
+D #6a6a80 shade
+L #eef7ff light
+A #3fa08a accent
+C #202028 accent-2

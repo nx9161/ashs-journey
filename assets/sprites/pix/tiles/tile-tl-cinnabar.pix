@@ -1,4 +1,4 @@
-# Premium+ W5: TX-2 cinnabar landmark facade — crest dark tone
+# Premium+ W6: TX-3 landmark facade: eave shadow line + foundation course, cinnabar
 PIX tile-tl-cinnabar 16 16
 dddddddddddddddd
 dddddddddddddddd
@@ -14,8 +14,8 @@ wwweeawwwwwaawww
 wwwwwaaaaaazzwww
 wwwwwwwwwwwwwwww
 ssssssssssssssss
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #f5f0dc landmark-wall
 e #ebe1b8 landmark-wall-shade
@@ -23,4 +23,5 @@ d #824636 cinnabar-trim
 s #a87f4e landmark-shadow
 a #e8b89a cinnabar-crest
 z #d47a42 crest-dark
-h #eedbb3 crest-light
+h #ede1af crest-light
+F #6a6a80 foundation-stone

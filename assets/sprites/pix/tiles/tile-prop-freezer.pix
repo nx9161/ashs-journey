@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 large: mart freezer chest
+PIX tile-prop-freezer 16 32
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBBBBBBBBBBD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBAAAAAAAADD..
+..DBAAAAAAAADD..
+..DBAAAAAAAADD..
+..DBAAAAAAAADD..
+..DBAAAAAAAADD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBCCCCCCCCBD..
+..DBCCCCCCCCBD..
+..DBCCCCCCCCBD..
+..DBCCCCCCCCDD..
+..DBCCCCCCCCDD..
+..DBCCCCCCCCDD..
+..DBCCCCCCCCDD..
+..DBCCCCCCCCDD..
+..DBCCCCCCCCBD..
+..DBCCCCCCCCBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #c2c8d4 body
+D #6a6a80 shade
+L #eef7ff light
+A #5a9ae8 accent
+C #ffd873 accent-2

@@ -1,0 +1,27 @@
+# Premium+ W6: TX-3/PL-1 door-open frame for tile-door-house (W7 warp-fade engine plays it)
+PIX tile-door-house-open 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwwZZZZZZZsssww
+wwwwZtttttZsssww
+wwwwZtttttZsssww
+wwwwZtttttZsssww
+wwwwZtttttZsssww
+wwwwZtttttZsssww
+wwwwZtttttZssgww
+wwwwZtttttZsssww
+wwwwZtttttZsssww
+wwwwZtttttZsssww
+wwwwZtttttZsssww
+wwwlgggggggsssww
+wwssZZZZZZZsssww
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 trim
+g #ffd873 window-lit
+u #2e63b0 window-glass
+h #5a9ae8 glass-shine
+Z #202028 open-dark

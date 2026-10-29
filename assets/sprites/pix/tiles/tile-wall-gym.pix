@@ -1,7 +1,7 @@
-# Wave 2 architecture: gym wall: stone, pillars, slit window
+# Premium+ W6: TX-3 facade: eave shadow line + foundation course on tile-wall-gym
 PIX tile-wall-gym 16 16
-ssssssssssssssss
-ssssssssssssssss
+tttttttttttttttt
+tttttttttttttttt
 llllllllllllllll
 sslwwwwwwwwwwlss
 sslwwwwwwwwwwlss
@@ -14,8 +14,8 @@ sslwwwsssswwwlss
 sslwwwwwwwwwwlss
 sslwwwwwwwwwwlss
 wwwwwwwwwwwwwwww
-ssssssssssssssss
-ssssssssssssssss
+tttttttttttttttt
+tttttttttttttttt
 PAL
 w #8a8aa0 stone-mid
 l #c2c8d4 stone-light
@@ -23,3 +23,4 @@ s #6a6a80 stone-dark
 t #5a3a24 trim
 d #3a4657 door-iron
 g #ffd873 window-lit
+F #6a6a80 foundation-stone

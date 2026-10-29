@@ -1945,6 +1945,12 @@ Object.assign(OverworldScene.prototype, {
       const GLOWS = {
         cavecrystal: '138,232,240', cavelantern: '255,216,115',
         lavaglow: '240,120,48', waterglow: '111,176,238',
+        // Premium+ W6 (TX-5): the sub-theme light sources throw pools
+        // in their own colours around the LD-4 sources W5 placed.
+        lanternpost: '255,216,115', torchpost: '240,120,48',
+        shroomglow: '95,220,190', crystalcluster: '168,140,220',
+        cercrystal: '168,140,220', icecrystal: '138,232,240',
+        icepool: '111,176,238', cerpool: '111,176,238',
       };
       for (let ty = 0; ty < this.map.rows.length; ty++) {
         const row = this.map.rows[ty];

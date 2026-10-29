@@ -1,7 +1,7 @@
-# Premium+ W5: TX-2 cerulean house wall — shade band, lit window
+# Premium+ W6: TX-3 town facade: eave shadow line + foundation course, cerulean
 PIX tile-tw-cerulean 16 16
-ssssssssssssssss
-ssssssssssssssss
+tttttttttttttttt
+tttttttttttttttt
 wwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwww
 wwwwwttttttwwwww
@@ -14,8 +14,8 @@ wwwwwtggggtwwwww
 wwwwwttttttwwwww
 nnnnnnnnnnnnnnnn
 nnnnnnnnnnnnnnnn
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #94cec7 cerulean-wall
 n #5fb5ab wall-shade-band
@@ -23,3 +23,4 @@ s #4a958e wall-shadow
 t #5a3a24 window-frame
 g #ffd873 window-lit
 h #eef7ff glass-shine
+F #6a6a80 foundation-stone

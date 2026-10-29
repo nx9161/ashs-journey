@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 large: medical cabinet (Center)
+PIX tile-prop-medcabinet 16 32
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBBBBBBBBBBD..
+..DBAAACCAAABD..
+..DBAAACCAAABD..
+..DBAAACCAAABD..
+..DBAAACCAAABD..
+..DBAAACCAAABD..
+..DBAAACCAAABD..
+..DBAAACCAAABD..
+..DBAAACCAAABD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBDDDDDDDDBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBCCCBBAAABD..
+..DBCCCBBAAABD..
+..DBCCCBBAAABD..
+..DBCCCBBAAABD..
+..DBCCCBBAAABD..
+..DBCCCBBAAABD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #e8e4f0 body
+D #8a8aa0 shade
+L #fdfdf8 light
+A #e86a8a accent
+C #3fa08a accent-2

@@ -1,0 +1,29 @@
+# Premium+ W6: TX-3/PL-1 door-open frame for tile-door-mart-l (W7 warp-fade engine plays it)
+PIX tile-door-mart-l-open 16 16
+ssssssssssssssss
+ssssssssssssssss
+bbbbbbbbbbbbbbbb
+bbbbZZZZZZZsssbb
+ttttZtttttZssstt
+wwttZtttttZsssst
+wwteZtttttZssssb
+wwteZtttttZssssb
+wwtbZtttttZssssb
+wwtbZtttttZssesb
+wwtbZtttttZssssb
+wwtbZtttttZssssb
+wwtbZtttttZssssb
+wwttZtttttZsssst
+lllleeeeeeesssll
+ssssZZZZZZZsssss
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 trim
+b #2e63b0 awning-blue
+e #eef7ff awning-white
+g #ffd873 goods-glow
+p #e86a8a goods-pink
+n #67aa54 goods-green
+Z #202028 open-dark

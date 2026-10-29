@@ -12,7 +12,7 @@
 
 import { ART } from '../../assets/sprites/art-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
-import { paintTile } from './tiles.mjs';
+import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 
 // ---- Layered delta frames (Premium+ W0, spec §4 W0 item 1) ----
@@ -443,6 +443,66 @@ const TILE_ART = {
   lavaglow: 'tile-lavaglow', waterglow: 'tile-waterglow',
   itemball: 'tile-itemball',
 };
+// Premium+ W6 (TX-3/TX-4/TX-5): gym facades + wall dressing draw their
+// own tile; props/rugs are tile-prop-<kind>; dungeon floors/walls are
+// tile-<kind> (dungeon object props are tile-prop-<kind> too).
+for (const k of W6_WALL_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of W6_FLOOR_KINDS) TILE_ART[k] = 'tile-' + k;
+for (const k of [...W6_PROP_KINDS, ...W6_RUG_KINDS]) TILE_ART[k] = 'tile-prop-' + k;
+
+// Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
+// door kind. The warp-fade engine that plays them lands in W7 — W6
+// wires the frames (this registry + cache.doorOpen + doorOpenCanvas)
+// so W7 only adds timing.
+export const DOOR_OPEN_ART = {
+  'door-house': 'tile-door-house-open',
+  'door-wood-facade': 'tile-door-wood-facade-open',
+  'door-brick': 'tile-door-brick-open',
+  'door-center-l': 'tile-door-center-l-open',
+  'door-center-r': 'tile-door-center-r-open',
+  'door-mart-l': 'tile-door-mart-l-open',
+  'door-mart-r': 'tile-door-mart-r-open',
+  'door-gym-l': 'tile-door-gym-l-open',
+  'door-gym-r': 'tile-door-gym-r-open',
+  'door-lab-l': 'tile-door-lab-l-open',
+  'door-lab-r': 'tile-door-lab-r-open',
+  'door-wood-l': 'tile-door-wood-l-open',
+  'door-wood-r': 'tile-door-wood-r-open',
+  door: 'tile-door-open',
+  gymdoor: 'tile-gymdoor-open',
+  centerdoor: 'tile-centerdoor-open',
+};
+export function doorOpenCanvas(doc, kind) {
+  const id = DOOR_OPEN_ART[kind];
+  return id ? artCanvas(doc, id, 1) : null;
+}
+
+// Premium+ W6 (TX-3, anchor P-1/P-4): facade groups. A facade cell is
+// part of one building run (its group); the resolver renders the run's
+// EDGE cells as side walls (one full shade step darker, P-1) and cells
+// with a same-group facade/door to their south as the upper storey
+// (window design B where an -upper variant is authored).
+const FACADE_GROUPS = {};
+for (const t of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
+  'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo']) FACADE_GROUPS['tw-' + t] = 'house';
+for (const k of ['wall-house-lit', 'wall-house-unlit', 'wall-house-plain',
+  'wall-wood-lit', 'wall-brick-lit', 'wall-brick-plain']) FACADE_GROUPS[k] = 'house';
+FACADE_GROUPS['wall-center'] = 'center';
+FACADE_GROUPS['wall-mart'] = 'mart';
+FACADE_GROUPS['wall-gym'] = 'gym';
+for (const k of ['gym-ground', 'gym-rock', 'gym-water', 'gym-volt',
+  'gym-leaf', 'gym-psy', 'gym-poison', 'gym-fire']) FACADE_GROUPS[k] = 'gym';
+FACADE_GROUPS['wall-lab'] = 'lab';
+FACADE_GROUPS['wall-lab-plain'] = 'lab';
+const DOOR_GROUP = {
+  'door-house': 'house', 'door-wood-facade': 'house', 'door-brick': 'house',
+  'door-wood-l': 'house', 'door-wood-r': 'house',
+  'door-center-l': 'center', 'door-center-r': 'center',
+  'door-mart-l': 'mart', 'door-mart-r': 'mart',
+  'door-gym-l': 'gym', 'door-gym-r': 'gym',
+  'door-lab-l': 'lab', 'door-lab-r': 'lab', 'door-lab-facade': 'lab',
+};
+const FACADE_KIND_LIST = Object.keys(FACADE_GROUPS);
 // Premium+ W5 (TX-2): per-town identity kinds -> their authored tiles.
 for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
   'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo']) {
@@ -655,7 +715,7 @@ export function buildArtTileCache(doc) {
     'tile-decor-fern', 'tile-decor-lamp', 'tile-decor-clock', 'tile-decor-basket']);
   // Premium+ W5 (TX-1): interior wall second variants, spread-hash picked.
   cache.wallVariants = {
-    centerwall: ids(['tile-centerwall', 'tile-centerwall-2']),
+    centerwall: ids(['tile-centerwall', 'tile-centerwall-2', 'tile-centerwall-3']),
     martwall: ids(['tile-martwall', 'tile-martwall-2']),
     housewall: ids(['tile-housewall', 'tile-housewall-2']),
     gymwallin: ids(['tile-gymwallin', 'tile-gymwallin-2']),
@@ -677,6 +737,39 @@ export function buildArtTileCache(doc) {
     'wall-brick-plain': artCanvas(doc, 'tile-wall-brick-plain-lit', 1),
     'sign-center': artCanvas(doc, 'tile-sign-center-lit', 1),
   };
+  // ---- Premium+ W6: floors, foundations, facades, door-open frames ----
+  for (const k of W6_FLOOR_KINDS) cache[k + 'Variants'] = ids(['tile-' + k]);
+  cache.foundationVariants = ids(['tile-foundation-1', 'tile-foundation-2', 'tile-foundation-3']);
+  // P-1 side walls: the SAME authored art rasterized through a palette
+  // swap that darkens every hex by one full shade step (x0.72 — the
+  // shipped palettes step at ~0.75/stone-step ratios). Deterministic,
+  // no extra .pix, exactly the NPC palette-swap discipline.
+  const shadeStep = (hex) => {
+    const f = (v) => Math.max(0, Math.min(255, Math.round(parseInt(hex.slice(v, v + 2), 16) * 0.72)));
+    return '#' + [1, 3, 5].map((v) => f(v).toString(16).padStart(2, '0')).join('');
+  };
+  cache.facadeArt = {};
+  for (const kind of FACADE_KIND_LIST) {
+    const baseId = TILE_ART[kind];
+    if (!baseId) continue;
+    const a = materializeArt(baseId);
+    if (!a) continue;
+    const swap = {};
+    for (const [ch, hex] of Object.entries(a.pal)) swap[ch] = shadeStep(hex);
+    const upperId = baseId + '-upper';
+    const upperA = materializeArt(upperId);
+    cache.facadeArt[kind] = {
+      base: artCanvas(doc, baseId, 1),
+      side: artCanvas(doc, baseId, 1, false, swap),
+      upper: upperA ? artCanvas(doc, upperId, 1) : null,
+      sideUpper: upperA ? artCanvas(doc, upperId, 1, false, swap) : null,
+    };
+  }
+  cache.doorOpen = {};
+  for (const [kind, id] of Object.entries(DOOR_OPEN_ART)) {
+    const cv = artCanvas(doc, id, 1);
+    if (cv) cache.doorOpen[kind] = cv;
+  }
   // Wave 2: ground-shadow strip laid on ground cells directly south of
   // a building, anchoring every structure.
   cache.shadowStrip = artCanvas(doc, 'tile-shadow', 1);
@@ -736,24 +829,33 @@ function pickAnim(frames, t, x, y, cadence, salt) {
 // Kind families for the Wave 4 sets (used for ground compositing under
 // object tiles and for cave-context detection around rocks/boulders).
 const CAVE_KINDS = new Set(['cavewall', 'cavefloor', 'caveboulder']);
-const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall']);
+const DUNGEON_WALLS = new Set(['cavewall', 'towerwall', 'silphwall', 'plantwall',
+  // Premium+ W6 (TX-5): the sub-theme wall kinds cast the same strip.
+  'icewall', 'iceface', 'stratwall', 'bannerwall', 'cerwall', 'panelwall']);
 const FLOOR_VARIANTS = {
   grass: 'grassVariants', path: 'pathVariants', cavefloor: 'caveFloorVariants',
   towerfloor: 'towerFloorVariants', silphfloor: 'silphFloorVariants', plantfloor: 'plantFloorVariants',
   centerfloor: 'centerFloorVariants', martfloor: 'martFloorVariants',
   housefloor: 'houseFloorVariants', gymfloor: 'gymFloorVariants', labfloor: 'labFloorVariants',
 };
+for (const k of W6_FLOOR_KINDS) FLOOR_VARIANTS[k] = k + 'Variants';
 // Wave 5a: interior floor kinds are ground families of their own (a prop
 // inside a Center stands on Center floor, never on grass or path), and
 // interior walls cast the shared shadow strip onto the floor below.
 const INTERIOR_FLOORS = new Set(['centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor']);
-const INTERIOR_WALLS = new Set(['centerwall', 'martwall', 'housewall', 'gymwallin', 'labwall', 'annewall', 'leaguewall']);
+const INTERIOR_WALLS = new Set(['centerwall', 'martwall', 'housewall', 'gymwallin', 'labwall', 'annewall', 'leaguewall',
+  // Premium+ W6 (TX-4): wall-dressing tiles are wall class indoors.
+  'dressposter', 'dressclock', 'dresscurtain', 'dressbanner', 'dresspicture',
+  'dresspicture2', 'dresswindow', 'dressmirror', 'dresscalendar', 'dressmap', 'dresswreath']);
 const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   'chair', 'shelf', 'plant', 'martshelf', 'goods', 'podium', 'statue',
   'badgecase', 'labmachine', 'labtank', 'labdesk', 'cabinbed', 'cabintable',
   'porthole', 'slotmachine', 'throne', 'memorial', 'officedesk', 'sofa',
-  'stool', 'rug', 'battlemat']);
+  'stool', 'rug', 'battlemat',
+  // Premium+ W6 (TX-4/TX-5): the new prop + rug kinds.
+  ...W6_PROP_KINDS, ...W6_RUG_KINDS]);
 export function groundFamilyOf(kind) {
+  if (kind && W6_FLOOR_KINDS.includes(kind)) return kind; // W6 dungeon floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
@@ -891,8 +993,10 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     }
     return layers.filter(Boolean);
   }
-  if (kind.startsWith('tr-') || kind.startsWith('tl-') || kind.startsWith('th-') || kind.startsWith('tw-')) {
-    return [cache[kind]].filter(Boolean); // town roof / landmark facade / house roof+wall (solid)
+  if (kind.startsWith('tr-') || kind.startsWith('tl-') || kind.startsWith('th-')) {
+    return [cache[kind]].filter(Boolean); // town roof / landmark facade / house roof (solid)
+    // tw- house facades fall through to the switch: the TX-3 facade
+    // branch gives them side-wall + upper-storey variants (P-1).
   }
   if (kind.startsWith('flora-')) {
     const layers = [cache[kind] || cache.grass];
@@ -1045,14 +1149,17 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       }
       return layers.filter(Boolean);
     }
-    case 'cavefloor': case 'towerfloor': case 'silphfloor': case 'plantfloor': {
+    case 'cavefloor': case 'towerfloor': case 'silphfloor': case 'plantfloor':
+    case 'icefloor': case 'frostfloor': case 'icepool': case 'moonmoss':
+    case 'stratafloor': case 'crackedfloor': case 'cerfloor': case 'cerpool':
+    case 'gratefloor': case 'cablefloor': {
       const layers = [groundBase(cache, kind, x, y)];
       // A dungeon wall directly north casts the shared shadow strip.
       if (DUNGEON_WALLS.has(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       if (hashTileSpread(x, y, 62) < 0.10 && cache.detail && cache.detail.pebbles) layers.push(cache.detail.pebbles);
       // W5 round 3: tower/silph/plant floors are interiors — decor too
       // (cavefloor keeps its pebbles + crystals only).
-      if (kind !== 'cavefloor' && cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.75) {
+      if ((kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') && cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.75) {
         const d = pickVariantSpread(cache.decorSet, x, y, 131);
         if (d) layers.push(d);
       }
@@ -1092,7 +1199,104 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     case 'badgecase': case 'labmachine': case 'labtank': case 'labdesk':
     case 'cabinbed': case 'cabintable': case 'porthole': case 'slotmachine':
     case 'throne': case 'memorial': case 'officedesk': case 'sofa':
-    case 'stool': case 'rug': case 'battlemat': {
+    case 'stool': case 'rug': case 'battlemat':
+    case 'medcabinet':
+    case 'aquarium':
+    case 'waitbench':
+    case 'snackmachine':
+    case 'freezer':
+    case 'shelfend':
+    case 'basketstack':
+    case 'kitchen':
+    case 'bath':
+    case 'tvstand':
+    case 'gamestation':
+    case 'wardrobe':
+    case 'tallbooks':
+    case 'bigbed':
+    case 'counterrun':
+    case 'trainingbag':
+    case 'weightrack':
+    case 'trophycase':
+    case 'column':
+    case 'serverrack':
+    case 'copier':
+    case 'cooler':
+    case 'workdesk':
+    case 'candle':
+    case 'urn':
+    case 'shrine':
+    case 'cushion2':
+    case 'leaguefountain':
+    case 'plantvat':
+    case 'piano':
+    case 'telescope':
+    case 'fireplace':
+    case 'sewingtable':
+    case 'trainset':
+    case 'easel':
+    case 'cradle':
+    case 'drum':
+    case 'chessboard':
+    case 'harp':
+    case 'birdcage':
+    case 'typewriter':
+    case 'rockinghorse':
+    case 'teacart':
+    case 'spicerack':
+    case 'quiltframe':
+    case 'potterswheel':
+    case 'starglobe':
+    case 'bonsai':
+    case 'violin':
+    case 'boardgames':
+    case 'knittingbasket':
+    case 'toolbench':
+    case 'herbdryer':
+    case 'mapdesk':
+    case 'grandclock':
+    case 'rockpress':
+    case 'stonebell':
+    case 'miningcart':
+    case 'poolblock':
+    case 'lifering':
+    case 'divingtank':
+    case 'coil':
+    case 'batterypack':
+    case 'switchboard':
+    case 'leafplanter':
+    case 'seedvault':
+    case 'vinepost':
+    case 'psypod':
+    case 'crystalball':
+    case 'focuslamp':
+    case 'venomvat':
+    case 'thornpost':
+    case 'gascanister':
+    case 'forge':
+    case 'coalscuttle':
+    case 'firewood':
+    case 'sandcrate':
+    case 'fossildisplay':
+    case 'sandcolumn':
+    case 'rug2':
+    case 'rug3':
+    case 'redcarpet':
+    case 'iceboulder':
+    case 'frostrock':
+    case 'icecrystal':
+    case 'shroomglow':
+    case 'shroomcap':
+    case 'crystalcluster':
+    case 'starrock':
+    case 'supportbeam':
+    case 'lanternpost':
+    case 'rubble':
+    case 'torchpost':
+    case 'cercrystal':
+    case 'cershard':
+    case 'tombstone':
+    case 'pipecluster': {
       // Object tiles carry transparent surrounds (Wave 1): lay the ground
       // the object stands on beneath it — south neighbour's family first
       // (the contact edge), else the neighbour majority, else grass.
@@ -1123,7 +1327,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         if (cache.shadowRock) layers.push(cache.shadowRock);
       } else if (kind === 'lamp') {
         if (duskNight && cache.glowPools && cache.glowPools[1]) layers.push(cache.glowPools[1]); // LD-2 core pool
-      } else if (kind !== 'rug' && kind !== 'battlemat' && cache.shadowProp) {
+      } else if (kind !== 'rug' && kind !== 'battlemat' && kind !== 'rug2' && kind !== 'rug3' && kind !== 'redcarpet' && cache.shadowProp) {
         layers.push(cache.shadowProp);
       }
       if (kind === 'flower') {
@@ -1165,6 +1369,28 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       // render their lit variants (100% of window kinds with a lit
       // counterpart in cache.litMap).
       if (night && cache.litMap && cache.litMap[kind]) return [cache.litMap[kind]];
+      // Premium+ W6 (TX-3, P-1/P-4): facade runs — edge cells render
+      // as side walls one full shade step darker; cells standing over
+      // a same-group facade/door render the upper-storey variant.
+      if (cache.facadeArt && cache.facadeArt[kind]) {
+        const grp = FACADE_GROUPS[kind];
+        const inGrp = (k) => !!k && (FACADE_GROUPS[k] === grp || DOOR_GROUP[k] === grp);
+        const fa = cache.facadeArt[kind];
+        const upper = inGrp(nb.s);
+        const side = !inGrp(nb.w) || !inGrp(nb.e);
+        const cv = upper
+          ? (side ? (fa.sideUpper || fa.side) : (fa.upper || fa.base))
+          : (side && fa.side ? fa.side : fa.base);
+        return [cv].filter(Boolean);
+      }
+      // Premium+ W6 (TX-3): entrance steps pick a foundation variant;
+      // a building directly north anchors the step with its strip.
+      if (kind === 'step' && cache.foundationVariants && cache.foundationVariants.length) {
+        const layers = [];
+        if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+        layers.push(pickVariantSpread(cache.foundationVariants, x, y, 77) || cache.step);
+        return layers.filter(Boolean);
+      }
       // W5 TX-1: interior walls pick between their two variants.
       if (cache.wallVariants && cache.wallVariants[kind] && cache.wallVariants[kind].length > 1) {
         return [pickVariantSpread(cache.wallVariants[kind], x, y, 71) || cache[kind]].filter(Boolean);

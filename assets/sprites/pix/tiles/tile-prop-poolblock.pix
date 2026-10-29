@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 gym type-specific prop: poolblock
+PIX tile-prop-poolblock 16 16
+................
+................
+................
+................
+................
+.BBBBBBBBBBBBBB.
+.BBBBBBBBBBBBBB.
+.BBAAAAAAAAAABB.
+.BBAALLAAAAAABB.
+.BBAALLAALLAABB.
+.BBAAAAAALLAABB.
+.BBAAAAAAAAAABB.
+.BBBBBBBBBBBBBB.
+.BBBBBBBBBBBBBB.
+................
+................
+PAL
+B #5a9ae8 body
+D #2e63b0 shade
+L #8ae8f0 light
+A #eef7ff accent
+C #3a7bd5 accent-2

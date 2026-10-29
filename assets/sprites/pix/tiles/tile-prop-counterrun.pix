@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 large: center counter run with heal dome
+PIX tile-prop-counterrun 16 32
+................
+................
+......AAAA......
+......ACCA......
+......ACCA......
+......AAAA......
+......AAAA......
+......AAAA......
+.LLLLLLLLLLLLLL.
+.LLLLLLLLLLLLLL.
+.LLLLLLLLLLLLLL.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBDDDDDDDDBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBDDDDDDDDBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DDDDDDDDDDDDDD.
+................
+................
+PAL
+B #f2ddd5 body
+D #96566b shade
+L #e8b4c4 light
+A #e84c3c accent
+C #ffd873 accent-2

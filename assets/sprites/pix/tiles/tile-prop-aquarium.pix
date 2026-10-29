@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 large: aquarium tank
+PIX tile-prop-aquarium 16 32
+................
+................
+................
+................
+................
+................
+.DLLLLLLLLLLLLD.
+.DLLLLLLLLLLLLD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DAAAAAAAALLAAD.
+.DAAAAAAAAAAAAD.
+.DACCCCAAAAAAAD.
+.DACCCCAAAAAAAD.
+.DACCCCAAAAAAAD.
+.DAAAAAAAAAAAAD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DDDDDDDDDDDDDD.
+..DDDDDDDDDDDD..
+..DDDDDDDDDDDD..
+..DDDDDDDDDDDD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #3a7bd5 body
+D #2e63b0 shade
+L #8ae8f0 light
+A #f07830 accent
+C #67aa54 accent-2

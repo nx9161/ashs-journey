@@ -1,7 +1,7 @@
-# Premium+ W5: TX-2 viridian house wall — shade band, lit window
+# Premium+ W6: TX-3 town facade: eave shadow line + foundation course, viridian
 PIX tile-tw-viridian 16 16
-ssssssssssssssss
-ssssssssssssssss
+tttttttttttttttt
+tttttttttttttttt
 wwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwww
 wwwwwttttttwwwww
@@ -14,8 +14,8 @@ wwwwwtggggtwwwww
 wwwwwttttttwwwww
 nnnnnnnnnnnnnnnn
 nnnnnnnnnnnnnnnn
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #84c18a viridian-wall
 n #55a85e wall-shade-band
@@ -23,3 +23,4 @@ s #448c4c wall-shadow
 t #5a3a24 window-frame
 g #ffd873 window-lit
 h #eef7ff glass-shine
+F #6a6a80 foundation-stone

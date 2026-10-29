@@ -1,0 +1,28 @@
+# Premium+ W6: TX-3 Center upper storey (window design B) 16x16 — resolver upper-row variant
+PIX tile-wall-center-upper 16 16
+tttttttttttttttt
+tttttttttttttttt
+rrrrrrrrrrrrrrrr
+ssssssssssssssss
+wwttttwwwwttttww
+wwtwwtrrrrtwwtww
+wwtwwthuuutwwtww
+wwtttthhuuttttww
+wwtwwthhuutwwtww
+wwtwwtuuuutwwtww
+wwttttuuuuttttww
+wwwwrrrrrrrrwwww
+wwwwllllllllwwww
+llllllllllllllll
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
+PAL
+w #eef7ff center-white
+l #f5f0dc center-cream
+s #a02828 center-red-dark
+r #d84040 center-red
+t #5a3a24 trim
+u #2e63b0 window-glass
+h #5a9ae8 glass-shine
+g #3a7bd5 door-glass
+F #6a6a80 foundation-stone

@@ -1,7 +1,7 @@
-# Wave 2 architecture: mart wall: striped awning over goods window
+# Premium+ W6: TX-3 facade: eave shadow line + foundation course on tile-wall-mart
 PIX tile-wall-mart 16 16
-ssssssssssssssss
-ssssssssssssssss
+tttttttttttttttt
+tttttttttttttttt
 wwwwwwwwwwwwwwww
 wbbeebbeebbeebbw
 wbbeebbeebbeebbw
@@ -14,8 +14,8 @@ wwtegggennggetww
 wwteeeeeeeeeetww
 wwttttttttttttww
 llllllllllllllll
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #c9a06a wall-mid
 l #e3ba85 wall-light
@@ -26,3 +26,4 @@ e #eef7ff awning-white
 g #ffd873 goods-glow
 p #e86a8a goods-pink
 n #67aa54 goods-green
+F #6a6a80 foundation-stone

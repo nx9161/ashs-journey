@@ -142,12 +142,12 @@ export const MAPS = {
   center: {
     id: 'center', name: 'Pokemon Center', music: 'center-theme', indoor: true,
     rows: rows([
-      '::::::::::',
-      ':θ!!!β!!γ:',
-      ':!!!!!!!!:',
-      ':!!!αα!!!:',
+      'ṗṘ::::::::',
+      ':θḈḉḖβṢθγ:',
+      ':ḋ!!!ζ!!ṣ:',
+      ':ḝ!!αα!!!:',
       ':ω!!!!!!ζ:',
-      ':!!!DD!!!:',
+      ':ḊṢ!DD!ṣḊ:',
       '::::::::::',
     ]),
     warps: [
@@ -251,8 +251,8 @@ export const MAPS = {
     rows: rows([
       'ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ',
       'ÍĵĵĵÂoąîąąoÂĵÂĵÍ',
-      'ÍÂąąąĵUUUUÂąąąÂÍ',
-      'ÍÂğyğĵUVYUĵğyğÂÍ',
+      'ÍÂąąąĵḁḁḁḁÂąąąÂÍ',
+      'ÍÂğyğĵḁVYḁĵğyğÂÍ',
       'ÍÂØÂØĵÂ99ÂÂÂĵØÂÍ',
       'ÍĵÂÂĵÂÂÍÍĵĵÂÂĵĵÍ',
       'ÍÂÂØØĵoÂĵoĵØØÂĵÍ',
@@ -285,9 +285,9 @@ export const MAPS = {
   gym: {
     id: 'gym', name: 'Pewter Gym', music: 'gym-theme', indoor: true,
     rows: rows([
-      '============',
-      '=ν++λ+λ+++θ=',
-      '=+μ++++++μ+=',
+      'Ṛ===========',
+      '=νḿṀλṁλ++Ḙθ=',
+      '=ḙμṢ+++++μḗ=',
       '=++++++++++=',
       '=++++//++++=',
       '=++++//++++=',
@@ -339,7 +339,15 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê',
   '÷', 'ø', 'ù', 'ú', 'û', 'ü', 'Ā',
   // Premium+ W5 round 2: town ground II chars (U+0131..U+0144 subset).
-  'ı', 'Ĳ', 'ĵ', 'ķ', 'ĸ', 'ĺ', 'ļ', 'ľ', 'ŀ', 'ł', 'ń']);
+  'ı', 'Ĳ', 'ĵ', 'ķ', 'ĸ', 'ĺ', 'ļ', 'ľ', 'ŀ', 'ł', 'ń',
+  // Premium+ W6 (TX-4/TX-5): the walkable W6 kinds — rug patterns
+  // (rug2/rug3/redcarpet, W6_KIND_DEFS idx 98-100) and the dungeon
+  // floor families (icefloor/frostfloor/icepool idx 103-105, moonmoss
+  // 109, stratafloor 115, crackedfloor 118, cerfloor/cerpool 123-124,
+  // gratefloor/cablefloor 130-131), chars U+1E00+idx (tiles.mjs). Each
+  // was swapped 1:1 from a walkable floor char, so floor stays floor.
+  ...[98, 99, 100, 103, 104, 105, 109, 115, 118, 123, 124, 130, 131]
+    .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
 // ai: 'opener-setup' = gym-leader flavor: open with a self-buff setup move if known

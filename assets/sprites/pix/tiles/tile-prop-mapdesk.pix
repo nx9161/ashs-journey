@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 house-unique prop: mapdesk
+PIX tile-prop-mapdesk 16 16
+................
+................
+................
+................
+................
+.BBBBBBBBBBBBBB.
+.BBCCCCCCCCCCBB.
+.BBCCCCCCCCCCBB.
+.BBCCAAAACCCCBB.
+.BBCCCCCCCAACBB.
+.BBCCCCCCCAACBB.
+.BBCCCCCCCCCCBB.
+.BBBBBBBBBBBBBB.
+..DD........DD..
+..DD........DD..
+................
+PAL
+B #c9a06a body
+D #5f5130 shade
+L #f0d0a0 light
+A #8a5a30 accent
+C #54452f accent-2

@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 large: gym weight rack
+PIX tile-prop-weightrack 16 32
+................
+................
+................
+................
+..BBBBBBBBBBBB..
+..BBBBBBBBBBBB..
+..DD........DD..
+..DD........DD..
+..DD........DD..
+..DD........DD..
+.AAAA......CCCC.
+.AAABBBBBBBBCCC.
+.AAAA......CCCC.
+.AAAA......CCCC.
+..DD........DD..
+..DD........DD..
+..DD........DD..
+.AAAA......CCCC.
+.AAABBBBBBBBCCC.
+.AAAA......CCCC.
+.AAAA......CCCC.
+..DD........DD..
+..DD........DD..
+..DD........DD..
+.AAAA......CCCC.
+.AAABBBBBBBBCCC.
+.AAAA......CCCC.
+.AAAA......CCCC.
+..DD........DD..
+..DD........DD..
+................
+................
+PAL
+B #6a6a80 body
+D #202028 shade
+L #9a9aa5 light
+A #e84c3c accent
+C #3a7bd5 accent-2

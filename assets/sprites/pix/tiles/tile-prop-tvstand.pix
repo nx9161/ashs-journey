@@ -1,0 +1,40 @@
+# Premium+ W6: TX-4 large: TV + stand (house)
+PIX tile-prop-tvstand 16 32
+................
+................
+..DDDDDDDDDDDD..
+..DAAAAAAAAAAD..
+..DACCCCAAAAAD..
+..DACCCCAAAAAD..
+..DACCCCAAAAAD..
+..DAAAAAAAAAAD..
+..DAAAAAAAAAAD..
+..DAAAAAAAAAAD..
+..DAAAAAAAAAAD..
+..DAAAAAAAAAAD..
+..DAAAAAAAAAAD..
+..DDDDDDDDDDDD..
+.......DD.......
+.......DD.......
+.......DD.......
+.DLLLLLLLLLLLLD.
+.DLLLLLLLLLLLLD.
+.DBBBBBBBBBBBBD.
+.DBCCCCBBDDDDBD.
+.DBCCCCBBDDDDBD.
+.DBCCCCBBDDDDBD.
+.DBCCCCBBDDDDBD.
+.DBCCCCBBDDDDBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DBBBBBBBBBBBBD.
+.DDDDDDDDDDDDDD.
+................
+................
+................
+PAL
+B #46586e body
+D #202028 shade
+L #8a8aa0 light
+A #202028 accent
+C #e86a8a accent-2

@@ -1,5 +1,37 @@
-# Premium+ W5: TX-2 fuchsia roof — safari thatch family
-PIX tile-tr-fuchsia 16 16
+# Premium+ W6: TX-3 tall roof 16x48 (ridge/gable + slope + eave), fuchsia safari thatch — bottom-anchored on the existing roof cell
+PIX tile-tr-fuchsia 16 48
+dddddddaadddaadd
+ddddddmaamdddddd
+dddddmaaaamddddd
+ddddmmmmmmmmdddd
+mmmmmmmmmmmmddmm
+ddmmmmmmmmmmdddd
+gmmmmmmmmmmmmmma
+mmmmmmmmmmmmmmmm
+ggggaaggggaagggg
+ggaaggggaagggggg
+aaggggaagggggggg
+ggggggggggggggaa
+ggggggggggggaagg
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+ggaggggaggggaggg
+aggggaggggaggggg
+gggaggggaggggaag
+gaggggaggggagggg
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+ggaggggaggggaggg
+aggggaggggaggggg
+gggaggggaggggaag
+gaggggaggggagggg
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
 dddddddddddddddd
 dddddddddddddddd
 mmmmmmmmmmmmmmmm

@@ -11,9 +11,9 @@ export const MAPS4 = {
   'gym-saffron': {
     id: 'gym-saffron', name: 'Saffron Gym', music: 'gym-theme', indoor: true,
     rows: [
-      '================',
-      '=ν+++λ+SSλ++++θ=',
-      '=++++++++++++++=',
+      'Ṛ===============',
+      '=νṌṍḗλṋSSλḘ+++θ=',
+      '=++++ḙ++++++++Ṣ=',
       '=++++μ++++μ++++=',
       '=++++++++++++++=',
       '=++++++//++++++=',
@@ -41,9 +41,9 @@ export const MAPS4 = {
   'gym-cinnabar': {
     id: 'gym-cinnabar', name: 'Cinnabar Gym', music: 'gym-theme', indoor: true,
     rows: [
-      '================',
-      '=ν++++λSS+λ+++θ=',
-      '=++++++++++++++=',
+      'Ṛ===============',
+      '=νṒṓḙḗλSSṑλḘ++θ=',
+      '=++++Ṣ+++++++++=',
       '=++++ξ++++ξ++++=',
       '=++++++++++++++=',
       '=++++++//++++++=',
@@ -71,18 +71,18 @@ export const MAPS4 = {
   silph2: {
     id: 'silph2', name: 'Silph Co. — Executive Floor', music: 'pewter-theme', indoor: true,
     rows: [
-      'IIIIIIIIIIIIIIIIII',
-      'Iθ%%%%%%%%%%%%%%θI',
-      'I%%%%%%SSSS%%%%%%I',
+      'ṛṠIIIIIIIIIIIIIIẀI',
+      'Iθḛω%%%(%%%%%%%%θI',
+      'IḞ%ẃẃ%%SSSS%%%%%%I',
       'I%%%%%%%%%%%%%%%%I',
+      'Ẁ%%%%%ẃ%%%%%%%%%%I',
+      'I%%ξḜψζ%ẃ%%%%%ξ%%I',
+      'Iẃ%%%%%%ε%%%%%%%%I',
       'I%%%%%%%%%%%%%%%%I',
-      'I%%ξ%ψζ%%%%%%%ξ%%I',
-      'I%%%%%%%ε%%%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'I%%ξ%%%%%%%%γ%ξ%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'I%%%%%%%%%%%%%%%%I',
-      'IIIIIIIIIIIIIIIIII',
+      'I%%ξ%%%%%%%%γ%ξ%ẃI',
+      'I%ẃ%%%%%%%%%%%%%%I',
+      'Ẁ%%%%%%ẃ%%%%%%%%ḝẀ',
+      'IIIIIIẀIIIIIIẀIIII',
     ],
     warps: [
       { x: 8, y: 3, to: { map: 'silph1', x: 8, y: 6 } },
@@ -128,13 +128,13 @@ export const MAPS4 = {
   mart: {
     id: 'mart', name: 'Pokemon Mart', music: 'viridian-theme', indoor: true,
     rows: [
-      ';;;;;;;;;;;;',
-      ';ιι$$$$$$κκ;',
-      ';$$$$$$$$$$;',
+      'Ṛṟ;;;;;;;;;;',
+      ';ιιḌ$$$$$κκ;',
+      ';ḍḋι$$$$$$ḍ;',
       ';$$$ααα$$$θ;',
       ';$$$$$$$$$$;',
-      ';$$)$$$$ζ$$;',
-      ';$$$$DD$$$$;',
+      ';κ$)$$$$ζ$$;',
+      ';Ḏ$$$DD$$$$;',
       ';;;;;;;;;;;;',
     ],
     warps: [
@@ -148,9 +148,9 @@ export const MAPS4 = {
   'house-pallet-ash': {
     id: 'house-pallet-ash', name: 'Your House', music: 'pallet-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<δ**η**θ*<',
-      '<********<',
+      'ṛ<<<<<<<<<',
+      '<δḥḦηḑḒθḏ<',
+      '<ḓ*******<',
       '<*εζ***(*<',
       '<**)***ω*<',
       '<***DD***<',
@@ -169,12 +169,12 @@ export const MAPS4 = {
   'house-pallet-gary': {
     id: 'house-pallet-gary', name: "Gary's House", music: 'pallet-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<θ*η****δ<',
+      'ṙ<<<<<<<<<',
+      '<θḏηḧḔḕḉδ<',
       '<********<',
       '<*γ***εζ*<',
       '<ω***))**<',
-      '<***DD***<',
+      '<Ḩ**DD***<',
       '<<<<<<<<<<',
     ],
     warps: [
@@ -190,9 +190,9 @@ export const MAPS4 = {
   'house-viridian': {
     id: 'house-viridian', name: 'Viridian City — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<η**θ***η<',
-      '<δ*******<',
+      'ṡ<<<<<<<<<',
+      '<ηḏḩθḐḢṢη<',
+      '<δḪ******<',
       '<*(*εζ***<',
       '<*****))*<',
       '<***DD**ζ<',
@@ -209,12 +209,12 @@ export const MAPS4 = {
   'house-pewter-w': {
     id: 'house-pewter-w', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<θ*η****δ<',
+      'Ṟ<<<<<<<<<',
+      '<θḏηḫṣḑγδ<',
       '<********<',
       '<*(***εζ*<',
       '<ω***))**<',
-      '<***DD***<',
+      '<Ḭ**DD***<',
       '<<<<<<<<<<',
     ],
     warps: [
@@ -228,8 +228,8 @@ export const MAPS4 = {
   'house-pewter-e': {
     id: 'house-pewter-e', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<θ**η****<',
+      'ṛ<<<<<<<<<',
+      '<θḭḮηγḑḒḏ<',
       '<*******δ<',
       '<ω**εζ***<',
       '<*))*****<',
@@ -247,9 +247,9 @@ export const MAPS4 = {
   'house-cerulean': {
     id: 'house-cerulean', name: 'Cerulean City — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<δ**η**θ*<',
-      '<********<',
+      'ṙ<<<<<<<<<',
+      '<δḯḰηḒḓθḏ<',
+      '<Ḕ*******<',
       '<*εζ***(*<',
       '<**)***ω*<',
       '<***DD***<',
@@ -266,10 +266,10 @@ export const MAPS4 = {
   'house-vermilion': {
     id: 'house-vermilion', name: 'Vermilion City — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<θ*η****δ<',
+      'ṡ<<<<<<<<<',
+      '<θḏηḱḕḉḐδ<',
       '<********<',
-      '<*(***εζ*<',
+      '<Ḳ(***εζ*<',
       '<ω***))**<',
       '<***DD***<',
       '<<<<<<<<<<',
@@ -285,8 +285,8 @@ export const MAPS4 = {
   'house-celadon-w': {
     id: 'house-celadon-w', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<θ**η****<',
+      'Ṟ<<<<<<<<<',
+      '<θḳḴηḢṢṣḏ<',
       '<*******δ<',
       '<ω**εζ***<',
       '<*))*****<',
@@ -304,9 +304,9 @@ export const MAPS4 = {
   'house-celadon-e': {
     id: 'house-celadon-e', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<δ**η**θ*<',
-      '<********<',
+      'ṛ<<<<<<<<<',
+      '<δḵḶηγḑθḏ<',
+      '<Ḓ*******<',
       '<*εζ***(*<',
       '<**)***ω*<',
       '<***DD***<',
@@ -323,9 +323,9 @@ export const MAPS4 = {
   'house-lavender': {
     id: 'house-lavender', name: 'Lavender Town — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<η**θ***η<',
-      '<δ*******<',
+      'ṙ<<<<<<<<<',
+      '<ηḏḷθḑḒḓη<',
+      '<δḸ******<',
       '<*(*εζ***<',
       '<*****))*<',
       '<***DD**ζ<',
@@ -342,9 +342,9 @@ export const MAPS4 = {
   'house-fuchsia': {
     id: 'house-fuchsia', name: "Auntie Moss's House", music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<θ**η****<',
-      '<*******δ<',
+      'ṡ<<<<<<<<<',
+      '<θḹḓηḔḕ*ḏ<',
+      '<Ḻ******δ<',
       '<ω**εζ***<',
       '<*))*****<',
       '<***DD***<',
@@ -367,10 +367,10 @@ export const MAPS4 = {
   'house-cinnabar': {
     id: 'house-cinnabar', name: 'Cinnabar Island — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<θ*η****δ<',
+      'Ṟ<<<<<<<<<',
+      '<θḏηḻḉḐḢδ<',
       '<********<',
-      '<*(***εζ*<',
+      '<Ḽ(***εζ*<',
       '<ω***))**<',
       '<***DD***<',
       '<<<<<<<<<<',
@@ -386,9 +386,9 @@ export const MAPS4 = {
   'house-indigo': {
     id: 'house-indigo', name: 'Indigo Plateau — House', music: 'viridian-theme', indoor: true,
     rows: [
-      '<<<<<<<<<<',
-      '<δ**η**θ*<',
-      '<********<',
+      'ṛ<<<<<<<<<',
+      '<δḽḾηṢṣθḏ<',
+      '<γ*******<',
       '<*εζ***(*<',
       '<**)***ω*<',
       '<***DD***<',

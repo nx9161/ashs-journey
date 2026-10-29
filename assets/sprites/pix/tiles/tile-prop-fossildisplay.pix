@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 gym type-specific prop: fossildisplay
+PIX tile-prop-fossildisplay 16 16
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBCCCCCCCCBD..
+..DBCCCCCCCCBD..
+..DBCCAAAACCBD..
+..DBCCAAAACCBD..
+..DBCCAAAACCBD..
+..DBCCCDDCCCBD..
+..DBCCCDDCCCBD..
+..DBCCCCCCCCBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #d8c08a body
+D #8a6a48 shade
+L #f2ddd5 light
+A #54452f accent
+C #c2c8d4 accent-2

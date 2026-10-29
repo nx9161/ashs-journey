@@ -898,7 +898,10 @@ export class OverworldScene {
       for (let x = x0; x <= x1; x++) {
         const ch = this.map.rows[y][x];
         const layers = g.tileLayers(g.tileKind(ch), x, y, kindAt, wPhase, this.mapId);
-        if (layers.length) { for (const spr of layers) r.blit(spr, x * T, y * T); }
+        // Premium+ W6 (TX-3): tall art (16x32 / 16x48 pieces) is
+        // BOTTOM-ANCHORED on its existing cell — the piece overhangs
+        // upward, footprints never change. 16px layers draw as before.
+        if (layers.length) { for (const spr of layers) r.blit(spr, x * T, y * T - Math.max(0, spr.height - T)); }
         else g.ctx2dfill('#101018', x * T, y * T, T, T); // void
       }
     }

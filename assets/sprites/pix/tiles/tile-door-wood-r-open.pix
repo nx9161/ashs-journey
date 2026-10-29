@@ -1,0 +1,25 @@
+# Premium+ W6: TX-3/PL-1 door-open frame for tile-door-wood-r (W7 warp-fade engine plays it)
+PIX tile-door-wood-r-open 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+sslsZZZZZZZsssww
+ttltZtttttZsssww
+ttltZtttttZsssww
+ttltZtttttZsssww
+ttltZtttttZsssww
+ttltZtttttZsssww
+ttllZtttttZsslww
+ttltZtttttZsssww
+ttltZtttttZsssww
+ttltZtttttZsssww
+ttltZtttttZsssww
+sslslllllllsssww
+ssssZZZZZZZsssss
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 door-wood
+d #7a5a38 door-panel
+Z #202028 open-dark

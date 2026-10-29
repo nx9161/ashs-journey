@@ -1,7 +1,7 @@
-# Premium+ W5: TX-2 celadon landmark facade — crest dark tone
+# Premium+ W6: TX-3 landmark facade: eave shadow line + foundation course, celadon
 PIX tile-tl-celadon 16 16
-dddddddddddddddd
-dddddddddddddddd
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 dddddddddddddddd
 wwwwwaawwaawwwww
 wwwwaaaaaaaawwww
@@ -14,13 +14,14 @@ wwwaawwaawwaawww
 eewweewwwwwweeww
 wwwweewwwwwwwwww
 ssssssssssssssss
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #f5f0dc landmark-wall
 e #ebe1b8 landmark-wall-shade
 d #32805a celadon-trim
 s #a87f4e landmark-shadow
 a #d0f0c0 celadon-crest
-z #87d95e crest-dark
-h #daf6d9 crest-light
+z #88c871 crest-dark
+h #d5f5d8 crest-light
+F #6a6a80 foundation-stone

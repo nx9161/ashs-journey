@@ -1,5 +1,37 @@
-# Premium+ W5: TX-2 saffron roof — gold spire family
-PIX tile-tr-saffron 16 16
+# Premium+ W6: TX-3 tall roof 16x48 (ridge/gable + slope + eave), saffron gold spire — bottom-anchored on the existing roof cell
+PIX tile-tr-saffron 16 48
+dddddddaaddddddd
+dddddddaaddddddd
+dddddddaaddddddd
+dddddddaaddddddd
+mmmmmmmaammmmmmm
+dddddddaaddddddd
+ggggggddddggggaa
+ggggggddddggaagg
+ggggaaaaaaaagggg
+ggaaggggaagggggg
+aaggggaagggggggg
+ggggggggggggggaa
+ggggggggggggaagg
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+ggaggggaggggaggg
+aggggaggggaggggg
+gggaggggaggggaag
+gaggggaggggagggg
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+ggaggggaggggaggg
+aggggaggggaggggg
+gggaggggaggggaag
+gaggggaggggagggg
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
 dddddddddddddddd
 dddddddddddddddd
 mmmmmmmmmmmmmmmm

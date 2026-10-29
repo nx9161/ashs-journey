@@ -1,4 +1,4 @@
-# Premium+ W5: TX-2 indigo landmark facade — crest dark tone
+# Premium+ W6: TX-3 landmark facade: eave shadow line + foundation course, indigo
 PIX tile-tl-indigo 16 16
 dddddddddddddddd
 dddddddddddddddd
@@ -14,8 +14,8 @@ wwwaaawwwwwaaaww
 wwwwwwwweewwwwww
 wwwwweewwwwwwwww
 ssssssssssssssss
-ssssssssssssssss
-ssssssssssssssss
+FFFFFFFFFFFFFFFF
+FFFFFFFFFFFFFFFF
 PAL
 w #f5f0dc landmark-wall
 e #ebe1b8 landmark-wall-shade
@@ -23,4 +23,5 @@ d #49588c indigo-trim
 s #a87f4e landmark-shadow
 a #c4cfef indigo-crest
 z #6481d5 crest-dark
-h #dddcf6 crest-light
+h #ddd8f4 crest-light
+F #6a6a80 foundation-stone

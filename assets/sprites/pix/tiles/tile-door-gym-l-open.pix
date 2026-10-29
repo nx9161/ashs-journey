@@ -1,0 +1,26 @@
+# Premium+ W6: TX-3/PL-1 door-open frame for tile-door-gym-l (W7 warp-fade engine plays it)
+PIX tile-door-gym-l-open 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwttZZZZZZZssstt
+wwtdZtttttZssstd
+wwtdZtttttZssstd
+wwtdZtttttZssstd
+wwtdZtttttZssstd
+wwtdZtttttZssstd
+wwtdZtttttZssgtd
+wwtdZtttttZssstd
+wwtdZtttttZssstd
+wwtdZtttttZssstd
+wwtdZtttttZssstd
+wwttgggggggssstt
+ssssZZZZZZZsssss
+PAL
+w #8a8aa0 stone-mid
+l #c2c8d4 stone-light
+s #6a6a80 stone-dark
+t #5a3a24 trim
+d #3a4657 door-iron
+g #ffd873 window-lit
+Z #202028 open-dark

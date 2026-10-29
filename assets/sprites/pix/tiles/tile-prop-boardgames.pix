@@ -1,0 +1,24 @@
+# Premium+ W6: TX-4 house-unique prop: boardgames
+PIX tile-prop-boardgames 16 16
+................
+................
+................
+..DLLLLLLLLLLD..
+..DLLLLLLLLLLD..
+..DBAAAAAAAABD..
+..DBAAAAAAAABD..
+..DBBBBBBBBBBD..
+..DBCCCCCCCCBD..
+..DBCCCCCCCCBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DBBBBBBBBBBD..
+..DDDDDDDDDDDD..
+................
+................
+PAL
+B #c9a06a body
+D #5f5130 shade
+L #f0d0a0 light
+A #8a5a30 accent
+C #54452f accent-2
