@@ -792,3 +792,15 @@ export function trainerBattleArt(doc, trainer) {
 export function playerBattleBackArt(doc) {
   return artCanvas(doc, 'ash-battle-back', 1);
 }
+
+// Premium+ W1 (FX-5): per-ball battle sprites — 6 authored 16x16 .pix
+// balls (pix/ui/ball-*.pix), one per ball id in BALLS plus the GS Ball.
+// Returns the rasterized canvas or null when unavailable (headless /
+// minimal doc), in which case battle.mjs falls back to its procedural
+// rect rendering of the same palettes. `open` draws the burst-open
+// variant used on catch break-out (top hemisphere lifted + tilted is
+// faked by the caller via two half draws; the base sprite is closed).
+export function ballBattleArt(doc, ballId) {
+  if (!doc || !ballId) return null;
+  return artCanvas(doc, 'ball-' + ballId, 1);
+}

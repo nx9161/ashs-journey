@@ -2,11 +2,11 @@
   "atlas": "atlas-ui.png",
   "tile": 16,
   "size": [
-    270,
+    378,
     18
   ],
   "sprites": {
-    "icon-badge": {
+    "ball-greatball": {
       "x": 1,
       "y": 1,
       "w": 16,
@@ -14,12 +14,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-championsribbon": {
+    "ball-gsball": {
       "x": 19,
       "y": 1,
       "w": 16,
@@ -27,12 +27,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-embereed": {
+    "ball-masterball": {
       "x": 37,
       "y": 1,
       "w": 16,
@@ -40,12 +40,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-fossilspur": {
+    "ball-pokeball": {
       "x": 55,
       "y": 1,
       "w": 16,
@@ -53,12 +53,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-gardeniasash": {
+    "ball-safariball": {
       "x": 73,
       "y": 1,
       "w": 16,
@@ -66,12 +66,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-gloomfang": {
+    "ball-ultraball": {
       "x": 91,
       "y": 1,
       "w": 16,
@@ -79,12 +79,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 3,
+      "palette": 6,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-ironacorn": {
+    "icon-badge": {
       "x": 109,
       "y": 1,
       "w": 16,
@@ -97,7 +97,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-secondwindribbon": {
+    "icon-keepsake-championsribbon": {
       "x": 127,
       "y": 1,
       "w": 16,
@@ -105,12 +105,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 2,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-sparrowfeather": {
+    "icon-keepsake-embereed": {
       "x": 145,
       "y": 1,
       "w": 16,
@@ -123,7 +123,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-spectrebell": {
+    "icon-keepsake-fossilspur": {
       "x": 163,
       "y": 1,
       "w": 16,
@@ -136,7 +136,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-thunderheadpin": {
+    "icon-keepsake-gardeniasash": {
       "x": 181,
       "y": 1,
       "w": 16,
@@ -144,12 +144,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 1,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-tidepearl": {
+    "icon-keepsake-gloomfang": {
       "x": 199,
       "y": 1,
       "w": 16,
@@ -157,12 +157,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 4,
+      "palette": 3,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-keepsake-tortoisecharm": {
+    "icon-keepsake-ironacorn": {
       "x": 217,
       "y": 1,
       "w": 16,
@@ -175,8 +175,86 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "icon-pokeball": {
+    "icon-keepsake-secondwindribbon": {
       "x": 235,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 2,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-sparrowfeather": {
+      "x": 253,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-spectrebell": {
+      "x": 271,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-thunderheadpin": {
+      "x": 289,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 1,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-tidepearl": {
+      "x": 307,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 4,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-keepsake-tortoisecharm": {
+      "x": 325,
+      "y": 1,
+      "w": 16,
+      "h": 16,
+      "frames": [
+        "idle"
+      ],
+      "palette": 3,
+      "seed": null,
+      "derived_from": null,
+      "mirror_of": null
+    },
+    "icon-pokeball": {
+      "x": 343,
       "y": 1,
       "w": 16,
       "h": 16,
@@ -189,7 +267,7 @@
       "mirror_of": null
     },
     "icon-potion": {
-      "x": 253,
+      "x": 361,
       "y": 1,
       "w": 16,
       "h": 16,

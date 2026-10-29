@@ -2893,3 +2893,147 @@ after independent QA). Spec: `~/workspace/ashs-journey-qa/premium-art-spec.md`
   12,582,912 B gate. personal/ untouched (restored byte-identical
   after the full-build suites; `git status --porcelain personal/`
   empty; content-hash carries guest+vercel lines only).
+
+## Premium+ Art Wave W1 — Battle Impact (2026-10-28, mission close)
+
+Built on W0 HEAD `8ed572e`; NOT committed by the implementer
+(coordinator commits after independent QA). Spec:
+`~/workspace/ashs-journey-qa/premium-art-spec.md` §3.2 (FX-1/2/4/5/6)
++ §4 W1 row (growth cap ≤120 KB). Public edition only; $0, no
+installs; all art original (hand-authored `.pix` or code-defined
+procedural rects/pooled particles — no shadowBlur, no gradients, no
+per-frame allocations in hot paths).
+
+- **Step 0 — inventory (shipped vs added).** The battle-model mission
+  had already shipped in `src/game/battle.mjs`: hitstop **70 ms**
+  (`_nextMsgHold` on the damage line), trauma shake (0.35 ordinary /
+  0.55 super-effective / 0.28 resisted, +0.25 crit, KO ≈0.47 via
+  +0.12 — offset = 12px × trauma², decay 2.2/s), universal impact
+  flash (every damaging hit white-swaps; flashT 60 SE / 90 crit),
+  600 ms HP-drain cap, 450 ms faint beat, SELECT Ground readout.
+  Those values are the shipped feedback table and were **consumed,
+  not rebuilt — no shipped timing value was changed** (they sit
+  inside the spec's research ranges; where they differ, e.g. a flat
+  70 ms hitstop vs the audit's 40/80/130 tiers, the shipped table
+  won per the re-base rule). What did NOT exist: any move-effect
+  system (0 presentations for 144 moves), knockback (0px), tiered
+  white-swap (fixed 66 ms), immune/miss visuals, condition visuals
+  on battlers, send-out/recall animation, per-ball art (two flat
+  circles ×5 types), entry variants (one overworld flash), catch
+  settle/break-out. W1 added exactly that visual layer.
+- **FX-1 — effect system.** `src/engine/fx.mjs`: all 62 definitions
+  authored for real (status/contact/condition rows left the W0
+  white/grey stubs: distinct ≥3-colour palettes + named silhouettes
+  each; signatures carry `scale: 2` with 800 ms/48 particles vs kit
+  360 ms/24). ONE shared player in the classic engine
+  (`fxStartMove`/`fxTick`/`fxSpawn` in battle.mjs): pooled particles
+  (fixed pool of 60 preallocated objects, rects only), travel +
+  impact-burst per plan layer (signature > status > contact > kit,
+  via `fxPlanForMove` — the only routing). Damaging, status, immune
+  and miss paths all route through it. Every sequence carries its
+  def's marked `truncateMs` (≈65%): a consecutive repeat of the same
+  move by the same side plays the truncated cut (live-proven: a
+  repeated Tackle resolved at 195 ms vs 300 ms full). Durations
+  ≤600 ms standard, ≤900 ms signatures. New rig audit
+  `premium-rig/audit-fx-presentation.mjs`: **144/144 moves
+  presentable, no move resolves to "no effect"**, all wiring +
+  caps + balls verified from data/source — PASS (W0's registry
+  audit also still PASS 144/144, 62/62).
+- **FX-2 — impact visuals on the shipped timings.** Knockback
+  4/8/12 px (ordinary / SE-or-crit / KO) with 40 ms out + ease-out
+  return by 200 ms; contact recoil 2 px; white-swap tiered 66 ms
+  ordinary / 110 ms SE-crit (`impactFx.dur`, default unchanged);
+  flinch = the knockback displacement itself; immune hits get a
+  dull grey puff + 2 px nudge (no flash, no trauma); misses get a
+  defender sidestep; multi-hit moves burst once per hit
+  (`_fxHits`). 100% gated by `fxAnimsOn()` = battleAnims on AND
+  reducedMotion off (shake setting still gates shake only, as
+  shipped): with anims off or reduced-motion on, no sequence, no
+  particles, no displacement, no entry motion — battles play
+  exactly as at base (battery suites drive both modes green).
+- **FX-4 — condition overlays.** All 7 (burn embers, poison
+  bubbles, paralysis sparks, sleep Zzz, freeze ice shell, confusion
+  stars, seeded vines) render persistently on the battler while the
+  condition holds (status / `confused` / `seeded`), rects only,
+  phase-driven by the theater clock (deterministic, no RNG). In RT
+  too — the shared `drawConditionOverlay` rides both RT battlers.
+- **FX-5 — send-out / recall / catch + balls.** Send-out on EVERY
+  entry (battle start both sides, trainer next-mon incl. the Shift
+  send-out, player switch-in): ball arc ≤250 ms → release burst →
+  materialize scale-in ≤200 ms (total ≤500 ms; cries were already
+  synced to the send-out lines by WP3 and are unchanged). Recall
+  (switch-out + catch absorb) shrinks/beams the battler ≤250 ms,
+  replacing the bare white swap; the absorbed foe leaves the field
+  into the ball. **6 ball sprites** authored as `.pix`
+  (`pix/ui/ball-{poke,great,ultra,master,safari,gs}ball.pix`, 16×16,
+  own palettes; `ballBattleArt` in art.mjs) used at throw / settle /
+  shakes / send-out / RT flight, with a same-palette procedural
+  rect fallback for headless draws. The two-flat-circles placeholder
+  is at **0 call sites in both engines** (grep + audit). Catch: ball
+  drops and settles (≤2 bounces, 260 ms) BEFORE the shakes;
+  break-out bursts the ball open in its own colours. Faint (660 ms
+  sink+fade) retained unregressed.
+- **FX-6 — battle entry.** 4 transition variants resolved from
+  battle context at enter(): wild (terrain-tinted shutter — grass /
+  water / cave / indoor via `arenaKind()`), trainer (blinds), boss
+  (leader/E4/Champion/rival: white accent flash — the bare flash
+  survives ONLY here — + gold/black chevron bands + VS divider
+  beat), scripted-legendary (violet wash + contracting rings).
+  Arena reveal is sequenced backdrop (wipe) → entrances (FX-5) →
+  plates (the shipped 450 ms slide) — no hard cut. Exit mirrors
+  entry as a ≤300 ms closing wipe over the victory/defeat beat.
+  Wipes: wild 500 ms / trainer 600 ms / legendary 800 ms / boss
+  900 ms (inside the 1,400/2,200 ms trigger→control budgets, whose
+  remaining span is the pre-existing player-paced intro text).
+  Reduced-motion collapses all variants to a 200 ms fade.
+- **RT disposition.** Shared-path only, per the standing owner
+  decision: RT projectiles now draw their move's type-kit travel
+  element (the projectile already carried its move object), RT
+  catch/flight balls use the ball sprites, and condition overlays
+  ride RT battlers. No separate RT investment: no RT effect player,
+  no RT send-out/entry system (RT's arena entry is its own).
+- **Frame evidence** (`premium-rig/frame-sampler-w1.mjs`, live
+  Chromium drives of the local build): **PASS, 0 JS errors** —
+  animated entry in 4/4 cases (battle start: variant `wild` +
+  foe/ally entry FX observed; switch: entry + recall both observed;
+  trainer next-mon: `trainerIdx` 1 + foe entry after the KO; catch:
+  phase order throw → settle → shakes recorded live); signature vs
+  kit vs contact measurably different (Flamethrower seq 800 ms/48
+  particles vs Ember 360 ms/24 vs Tackle 300 ms/18, pooled live
+  counts 22–26, knockback dist observed); burn overlay persists
+  across turns (foe region 20/20 distinct poses at turn N and N+1,
+  status still `burn` after the turn). W0 sampler smoke re-run:
+  PASS (foe region 9 distinct poses, meanAbsDiff 20.46).
+- **Battery (this tree, serial):** build OK (vercel + guest) ·
+  qa-changed-flows fails EXACTLY {b2, d9} · campaign-smoke 24/24 ·
+  fidelity 35/35 · battle-model 45/45 · cheat-shop 44/44 · rejuv
+  1–6 (44/42/63/53/55/46) · Track B 114/114 (documented invocation
+  `node --import ./register.mjs run.mjs`; the bare `npm test`
+  script omits the register flag in this checkout — pre-existing) ·
+  verify-slice 134/134 · audit-headless 17/17 · audit-laptop
+  (public) zero failures on the clean re-run (40/40 — the suite's
+  total is 40 or 41 depending on its conditional auto-focus check;
+  independent W1 QA also ran 40/40 clean, first attempt; earlier
+  runs on either side hit the known fixed-sleep cascade from "Dex
+  opens from the pause menu", the standing environmental
+  signature) · budgets PASS ·
+  contamination clean · audio ALL PASS · drift PASS (personal
+  restored byte-identical afterwards). FX audits PASS (above).
+  **Sizes:** art-data 2,672,490 → **2,675,692 B (+3,202 B** of the
+  ≤120 KB W1 cap — the 6 ball sprites; everything else is code) ·
+  ART keys 836 → **842, clean rebuild loses 0 keys** (byte-identical
+  md5 across rebuilds) · `public/game.js` **4,052,809 B** vs the
+  12,582,912 B gate. personal/ untouched (`git status` clean).
+- **Spec assumptions W1 proved wrong / notes:** (a) BALLS holds 5
+  ball types, not 6 — the 6th sprite is the GS Ball (an existing
+  item ball), so ≥6 per-ball sprites exist without inventing a new
+  ball type. (b) The shipped hitstop is a flat 70 ms, not the
+  audit's 40/80/130 tiers — consumed as shipped per the re-base
+  rule; the tiering W1 added lives in the visuals (knockback /
+  white-swap durations), not in rewritten timings. (c) RT
+  projectiles already carried their move object, so kit travel
+  elements WERE a genuinely shared path and landed; RT send-out
+  was not shared and was left alone. (d) `fx.mjs` definitions are
+  now hand-authored — the W0 generator must not be re-run over
+  FX_DEFS (header updated; MOVE_FX/MOVE_ARCH rows remain
+  generator-owned). No verify-live expectation was changed.

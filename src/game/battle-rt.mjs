@@ -822,19 +822,29 @@ Object.assign(BattleScene.prototype, {
     }
     const allySpr = this.ally.status === 'sleep' ? allyArt.back : allyArt.back;
     r.blitS(allySpr, rt.ax * sx - allySize / 2, rt.ay * sy - allySize / 2 - bobA, allySize, allySize);
-    // Projectiles.
+    // Projectiles — W1 FX-1 (shared path): the travel element is the
+    // move's own type kit (the projectile carries its move object), so
+    // RT specials read by type instead of one side-coloured circle.
     for (const p of rt.projs) {
-      g.ctx2dcircle(p.x * sx, p.y * sy, 4, p.side === 'ally' ? '#ffe27a' : '#ff9a7a');
+      const kit = (typeof FX_DEFS !== 'undefined' && p.mv && FX_DEFS['kit.' + p.mv.type]) || null;
+      const cols = kit ? kit.colors : (p.side === 'ally' ? ['#ffe27a', '#f8a018', '#fff8b0'] : ['#ff9a7a', '#e84818', '#ffd8c8']);
+      const px = p.x * sx, py = p.y * sy;
+      const back = p.tx >= p.x ? -1 : 1;
+      g.ctx2dfill(cols[1], px + back * 5, py - 1, 4, 2);
+      g.ctx2dfill(cols[0], px - 3, py - 3, 6, 6);
+      g.ctx2dfill(cols[2], px - 1, py - 1, 2, 2);
     }
-    // Ball flight + catch shakes.
+    // Ball flight + catch shakes — W1 FX-5 (shared path): real ball art.
     if (rt.ballFlight) {
-      g.ctx2dcircle(rt.ballFlight.x * sx, rt.ballFlight.y * sy, 5, '#e84040');
+      this.drawBall(r, rt.ballFlight.ballId || 'pokeball', rt.ballFlight.x * sx, rt.ballFlight.y * sy, 13, false);
     }
     if (rt.catchSeq) {
       const wob = Math.sin(rt.catchSeq.t * 0.05) * 3;
-      g.ctx2dcircle(rt.fx * sx + wob, rt.fy * sy, 6, '#e8e8f0');
-      g.ctx2dcircle(rt.fx * sx + wob, rt.fy * sy - 2, 6, '#e84040');
+      this.drawBall(r, rt.catchSeq.ballId || 'pokeball', rt.fx * sx + wob, rt.fy * sy, 13, false);
     }
+    // W1 FX-4 (shared path): condition overlays ride the RT battlers too.
+    this.drawConditionOverlay(r, this.foe, rt.fx * sx, rt.fy * sy + foeSize / 2, foeSize);
+    this.drawConditionOverlay(r, this.ally, rt.ax * sx, rt.ay * sy + allySize / 2, allySize);
     r.end();
     r.camX = pcx; r.camY = pcy;
     this.plate(r, 6, 6, this.foe, this.hpAnim.foe, false);

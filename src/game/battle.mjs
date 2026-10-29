@@ -27,11 +27,43 @@ import {
   groundClassicAccuracy, groundCritBonus, groundMireSpeedMult,
 } from '../data/grounds.mjs';
 import { SFX } from '../engine/audio.mjs';
-import { trainerBattleArt, playerBattleBackArt } from '../engine/art.mjs';
+import { trainerBattleArt, playerBattleBackArt, ballBattleArt } from '../engine/art.mjs';
+import { fxPlanForMove, FX_DEFS } from '../engine/fx.mjs';
 import { SLICE_CAPSTONE } from '../data/dialogue.mjs';
 import { typePill } from './ui.mjs';
 
 const HP_DRAIN_PER_SEC = 90; // ADR-004 feel budget
+
+// ---- Premium+ W1 (FX-1/FX-2/FX-4/FX-5/FX-6): battle impact layer ----
+// All W1 presentation is VISUAL ONLY: it never calls g.rng, never
+// changes a timing the battle-model mission shipped (hitstop 70ms,
+// trauma tiers, 600ms drain cap, 450ms faint beat all stand verbatim),
+// and collapses to nothing when battleAnims is off or reducedMotion is
+// on (battles then play exactly as at the W0 base). Particles are a
+// fixed pool of 60 plain objects allocated once per battle — no
+// per-frame allocation in the hot path; all drawing is rects (the
+// engine idiom: no shadowBlur, no gradient APIs).
+const FX_POOL_MAX = 60;
+// Per-ball procedural palettes — the same colours as the authored
+// pix/ui/ball-*.pix sprites; used when no canvas art is available
+// (headless) and to tint catch bursts. [top, highlight, bottom, shade]
+const BALL_PALETTES = {
+  pokeball: ['#e84040', '#ff9a8a', '#f4f4f8', '#b8b8c8'],
+  greatball: ['#3868d8', '#8ab8ff', '#f4f4f8', '#b8b8c8'],
+  ultraball: ['#2a2a32', '#f8d030', '#f4f4f8', '#b8b8c8'],
+  masterball: ['#7030a0', '#f858a8', '#f4f4f8', '#b8b8c8'],
+  safariball: ['#58a838', '#b8e888', '#f4f4f8', '#b8b8c8'],
+  gsball: ['#d8a018', '#ffe898', '#c8ccd8', '#9098a8'],
+};
+const LEGENDARY_SPECIES = new Set(['mewtwo', 'articuno', 'zapdos', 'moltres', 'mew']);
+const BOSS_TRAINER_IDS = new Set(['brock', 'misty', 'surge', 'erika', 'koga', 'sabrina', 'blaine', 'giovanni',
+  'lorelei', 'bruno', 'agatha', 'lance', 'gary', 'gary_champion', 'rue', 'cole']);
+// Deterministic 0..1 hash for FX placement (hash-driven, never RNG).
+function fxHash(n) {
+  let x = (Math.imul((n | 0) + 1, 374761393) + 668265263) | 0;
+  x = Math.imul(x ^ (x >>> 13), 1274126177);
+  return ((x ^ (x >>> 16)) >>> 0) / 4294967296;
+}
 
 // UI v2 (Platinum standard): status chips for the databox — a solid DS-toned
 // rect with the white bold 3-letter code as TEXT on it (never color alone).
@@ -214,6 +246,24 @@ export class BattleScene {
     this._tutFightDone = false; // P0/C7: guided first-catch tutorial stage flags
     this._tutStage = null;
     this.catchFx = null; // P1/E10: success starburst after the catch click
+    // W1 FX state (see the W1 header block): pooled particles, the one
+    // active effect sequence, knockback/recoil displacement, send-out /
+    // recall entries, and the FX-6 entry variant. All preallocated or
+    // plain scalars — nothing here allocates per frame.
+    this.fxPool = [];
+    for (let i = 0; i < FX_POOL_MAX; i++) this.fxPool.push({ on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, life: 1, sz: 2, col: '#fff', grav: 0 });
+    this.fxSeq = null;   // { def, plan, t, dur, atkSide, defSide, seed, burstAt, bursts, dull }
+    this.fxKb = { ally: { t: 1e9, dist: 0 }, foe: { t: 1e9, dist: 0 } }; // knockback clock/dist per side
+    this.fxRecoil = { ally: { t: 1e9 }, foe: { t: 1e9 } };
+    this._fxLastMove = { ally: null, foe: null }; // consecutive-repeat truncation tracking
+    this.entryFx = { ally: null, foe: null };     // { t, ballId } send-out in flight
+    this.recallFx = null;                          // { side, spr, t } switch-out shrink
+    this._ballArtCache = {};
+    this.entryVariant = this.kind === 'trainer'
+      ? ((this.trainer && (this.trainer.badge || BOSS_TRAINER_IDS.has(String(this.trainer.id || '').toLowerCase()))) ? 'boss' : 'trainer')
+      : (LEGENDARY_SPECIES.has(this.foeMon && this.foeMon.speciesId) || this.uncatchable ? 'legendary' : 'wild');
+    this.entryT = 0; // FX-6 transition clock (ms since enter)
+    this._exitStartT = -1;
     this.catchState = null;
     this.fled = false;
     this.critCap = false;
@@ -222,6 +272,11 @@ export class BattleScene {
     const foeName = displayName(this.foe, SPECIES);
     g.audio.playCry(this.foe.speciesId);   // synthesized cry, never sampled
     g.audio.playCry(this.ally.speciesId);
+    // W1 FX-5: every battle opens with both send-outs (ball arc ->
+    // burst -> materialize, <=500ms). The cries above land with the
+    // appearance lines; the materialize burst is timed to the same
+    // opening beat. RT runs its own arena entry and is untouched.
+    if (!this.rtMode) { this.fxStartEntry('foe', 'pokeball'); this.fxStartEntry('ally', 'pokeball'); }
     if (this.tutorial) {
       // Scripted first-catch gate: the tips teach the loop (weaken -> throw),
       // the engine guarantees the outcome (endure + weakened auto-catch).
@@ -342,9 +397,19 @@ export class BattleScene {
     }
     // README runtime transforms.
     if (this.atkFx) { this.atkFx.t += dt * 1000; if (this.atkFx.t > 100) this.atkFx = null; } // 3 frames @30Hz
-    if (this.impactFx) { this.impactFx.t += dt * 1000; if (this.impactFx.t > 66) this.impactFx = null; } // 2 frames
+    if (this.impactFx) { this.impactFx.t += dt * 1000; if (this.impactFx.t > (this.impactFx.dur || 66)) this.impactFx = null; } // W1 FX-2: tiered white-swap (66ms ordinary / 110ms SE-crit); default stays 66
     if (this.faintFx) { this.faintFx.t += dt * 1000; if (this.faintFx.t > 660) this.faintFx = null; } // 20 frames
     if (this.catchFx) { this.catchFx.t += dt * 1000; if (this.catchFx.t > 500) this.catchFx = null; } // P1/E10 starburst
+    // W1 FX clocks (visual only; particle integration lives here so
+    // render() stays a pure draw).
+    this.entryT += dt * 1000;
+    this.fxTick(dt * 1000);
+    for (const sd of ['ally', 'foe']) {
+      this.fxKb[sd].t += dt * 1000;
+      this.fxRecoil[sd].t += dt * 1000;
+      if (this.entryFx[sd]) { this.entryFx[sd].t += dt * 1000; if (this.entryFx[sd].t > 500) this.entryFx[sd] = null; }
+    }
+    if (this.recallFx) { this.recallFx.t += dt * 1000; if (this.recallFx.t > 250) this.recallFx = null; }
     if (this.xpFlashT > 0) this.xpFlashT -= dt * 1000;
     if (this._lowHpPulseT > 0) this._lowHpPulseT -= dt * 1000;
 
@@ -591,6 +656,13 @@ export class BattleScene {
       // the Tortoise Charm can never fire here).
       const ksLines = this.ksApplyTriggers('ally', {});
       const proceedSwitch = () => {
+        // W1 FX-5: switch-out recall (old mon shrinks to its ball)
+        // layered under the incoming mon's send-out arc.
+        if (!inFaint && !this.rtMode) {
+          const oldArt = g.spriteCache[old.speciesId] || g.spriteCache.partner;
+          if (oldArt) this.fxStartRecall('ally', oldArt.back);
+        }
+        if (!this.rtMode) this.fxStartEntry('ally', 'pokeball');
         // ADR-026 WP3 (presentation only, classic theater): the incoming
         // mon's cry lands WITH its "Go!" line — switch-ins were the one
         // send-out in the classic flow with no cry at all. RT keeps its
@@ -929,6 +1001,7 @@ export class BattleScene {
       const pOhko = Math.max(0, Math.min(255, atk.level - def.level + 30)) / 256;
       if (!roll(pOhko, g.rng.battle)) {
         this.say(atkName + ' used ' + mv.name + '!', () => {
+          this.fxWhiff(foeSide); // W1 FX-2: defender sidestep on a miss
           this.say('But it missed!', () => this.nextAction());
         });
         return;
@@ -943,6 +1016,7 @@ export class BattleScene {
       if (p >= 1) p = 255 / 256;
       if (!roll(p, g.rng.battle)) {
         this.say(atkName + ' used ' + mv.name + '!', () => {
+          this.fxWhiff(foeSide); // W1 FX-2: defender sidestep on a miss
           this.say('But it missed!', () => this.nextAction());
         });
         return;
@@ -957,6 +1031,8 @@ export class BattleScene {
       const eff = effectiveness(mv.type, defTypes);
       const stab = atkTypes.includes(mv.type);
       if (eff === 0) {
+        this.fxDullHit(foeSide); // W1 FX-2: dull grey puff for immune hits (no flash/trauma)
+        this.fxStartMove(mv, entry.side, foeSide, { immune: true, dmg: 0 });
         this.say('It doesn\'t affect ' + defName + '...', () => this.nextAction());
         return;
       }
@@ -1007,6 +1083,7 @@ export class BattleScene {
       else if (efx.psywave) dmg = Math.max(1, Math.floor(atk.level * (0.5 + g.rng.battle())));
       else {
         const hits = efx.hits ? (efx.hits[0] + Math.floor(g.rng.battle() * (efx.hits[1] - efx.hits[0] + 1))) : 1;
+        this._fxHits = hits; // W1 FX-2: per-hit bursts for multi-hit moves
         dmg = 0;
         // ADR-025 §3 owner ruling (2026-10-27): Iron Acorn factors only
         // the FIRST HIT of a multi-hit move — hits after the first
@@ -1088,6 +1165,11 @@ export class BattleScene {
         this.fadeT = 100;
       }
       g.audio.hitFeedback(eff); // sound picks the effectiveness tier (visual twin: shake/flash)
+      // W1 FX-1/FX-2: the shared effect player + tiered knockback/
+      // recoil, driven by the shipped tiers above (visual only).
+      if (this.impactFx && this.impactFx.side === foeSide) this.impactFx.dur = (eff > 1 || crit) ? 110 : 66;
+      this.fxStartMove(mv, entry.side, foeSide, { eff, crit, dmg, ko: def.hp <= 0 && dmg > 0, hits: this._fxHits || 1 });
+      this._fxHits = 0;
       let extra = '';
       if (crit) extra = ' A critical hit!';
       if (eff > 1) extra += " It's super effective!";
@@ -1207,6 +1289,8 @@ export class BattleScene {
     const stages = ef.target === 'self' ? (selfSide === 'ally' ? this.allyStages : this.foeStages) : (foeSide === 'ally' ? this.allyStages : this.foeStages);
     const tName = displayName(target, SPECIES);
     const aName = displayName(atk, SPECIES);
+    // W1 FX-1: every status move presents through its vis.* definition.
+    this.fxStartMove(mv, selfSide, target === atk ? selfSide : foeSide, { status: true, dmg: 0 });
     const done = (msg) => this.say(msg, () => this.nextAction());
     // Teleport: flee a wild battle; fails against trainers.
     if (ef.flee) {
@@ -1447,6 +1531,7 @@ export class BattleScene {
         // ADR-026 WP3 (presentation only): the incoming mon's cry lands
         // WITH the send-out line, not after the player dismisses it.
         g.audio.playCry(t.species);
+        this.fxStartEntry('foe', 'pokeball'); // W1 FX-5: send-out on trainer next-mon
         this.say(this.trainer.name + ' sent out ' + foeName + '!', () => {
           this.state = 'resolve';
           this.awardXp(() => this.toCommand());
@@ -1457,6 +1542,7 @@ export class BattleScene {
     } else {
       this.awardXp(() => {
         this.state = 'victory';
+        if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6
         g.audio.playSfx('victory'); // wild-win sting (visual twin: the "defeated" message)
         this.say('Wild ' + displayName(this.foe, SPECIES) + ' was defeated!', () => this.afterMsg());
       });
@@ -1545,6 +1631,7 @@ export class BattleScene {
       const ksLines = this.ksApplyTriggers('ally', {});
       const go = () => {
         g.audio.playCry(this.ally.speciesId);
+        this.fxStartEntry('ally', 'pokeball'); // W1 FX-5
         this.say('Go! ' + displayName(this.ally, SPECIES) + '!', () => this._shiftSendOut());
       };
       if (ksLines.length) this.say(ksLines.join(' '), go);
@@ -1564,6 +1651,7 @@ export class BattleScene {
     this.hpAnim.foe = this.foe.hp;
     const foeName = displayName(this.foe, SPECIES);
     g.audio.playCry(this.foe.speciesId); // WP3: cry with the line, as Set
+    this.fxStartEntry('foe', 'pokeball'); // W1 FX-5
     this.say(this.trainer.name + ' sent out ' + foeName + '!', () => {
       this._shiftInProgress = false;
       this.toCommand();
@@ -1735,7 +1823,7 @@ export class BattleScene {
     g.state.bag[ballId]--;
     const ball = BALLS[ballId];
     this.state = 'catchseq';
-    this.catchState = { ball, phase: 'throw', t: 0, shakes: 0, need: 0, a: 0 };
+    this.catchState = { ball, ballId, phase: 'throw', t: 0, shakes: 0, need: 0, a: 0 };
     g.audio.playSfx('catch-throw');
     this.msg = 'You threw a ' + ball.name + '!'; // throw plays immediately, no modal
     this.msgOpen = false;
@@ -1761,13 +1849,18 @@ export class BattleScene {
     const g = this.game;
     const c = this.catchState;
     c.t += dt * 1000;
-    // throw 26f (~430ms) -> absorb -> ball drop -> 3x800ms shakes -> click
+    // throw 26f (~430ms) -> absorb (W1 FX-5 recall shrink) -> ball
+    // settle (<=2 bounces, 260ms) -> 3x800ms shakes -> click
     if (c.phase === 'throw' && c.t >= 430) {
-      c.phase = 'shakes'; c.t = 0;
+      c.phase = 'settle'; c.t = 0;
       // P1/E10: absorb flash (the mon is drawn into the ball) — white-swap 2 frames.
       const foeArt = g.spriteCache[this.foe.speciesId] || g.spriteCache.partner;
       if (foeArt.frontWhite && !g.state.settings.reducedMotion) this.impactFx = { side: 'foe', t: 0 };
+      // W1 FX-5: catch absorb is a recall — the foe shrinks into the ball.
+      if (foeArt.front) this.fxStartRecall('foe', foeArt.front);
+      c.absorbed = true;
     }
+    else if (c.phase === 'settle' && c.t >= 260) { c.phase = 'shakes'; c.t = 0; }
     else if (c.phase === 'shakes') {
       const want = c.need;
       const doneShakes = Math.floor(c.t / 800);
@@ -1824,6 +1917,9 @@ export class BattleScene {
       return;
     }
     g.audio.catchBreakout(); // visual twin: break-out burst
+    // W1 FX-5: break-out bursts the ball open (ball-coloured burst).
+    this.breakFx = { t: 0, ballId: (this.catchState && this.catchState.ballId) || 'pokeball' };
+    if (this.catchState) this.catchState.absorbed = false;
     // P0/E11: break-out flash gated like battle flashes; reduced motion -> fade.
     if (!g.state.settings.reducedMotion && g.state.settings.shake) g.renderer.flashA = 0.8;
     else if (g.state.settings.reducedMotion) { g.renderer.fadeA = 0.35; g.renderer.fadeColor = '#ffffff'; }
@@ -1854,6 +1950,7 @@ export class BattleScene {
     const g = this.game;
     const t = this.trainer;
     this.state = 'victory';
+    if (this._exitStartT < 0) this._exitStartT = this.t; // W1 FX-6: exit mirror wipe
     // ADR-025 §4: Generous World scales prize money (x1.5).
     const prize = Math.floor(t.reward * moneyMultFor(g.state));
     g.state.player.money += prize;
@@ -1942,6 +2039,322 @@ export class BattleScene {
     // that pay a WIN prize (the Candy Coach spar) must check the second
     // argument; a flee is neither a win nor a loss.
     if (this.onEnd) { const f = this.onEnd; this.onEnd = null; f(won, this.fled === true); }
+  }
+
+  // ================= Premium+ W1: effect player + presentation =================
+  // fxAnimsOn is THE settings gate for every W1 system: battleAnims off
+  // or reducedMotion on => no sequence, no particles, no knockback, no
+  // entry/send-out motion (send-outs become the base instant swap).
+  fxAnimsOn() {
+    const st = this.game && this.game.state && this.game.state.settings;
+    return !!st && st.battleAnims !== false && !st.reducedMotion;
+  }
+
+  fxAnchor(side) {
+    const v = this._fxView || { w: 384, h: 216 };
+    return side === 'foe'
+      ? { x: v.w * 0.62 + 24, y: v.h * 0.12 + 24 }
+      : { x: v.w * 0.14 + 24, y: v.h * 0.52 + 24 };
+  }
+
+  fxSpawn(x, y, vx, vy, life, sz, col, grav) {
+    for (let i = 0; i < FX_POOL_MAX; i++) {
+      const p = this.fxPool[i];
+      if (!p.on) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.life = life; p.sz = sz; p.col = col; p.grav = grav || 0; return; }
+    }
+  }
+
+  // Start the ONE active move-effect sequence (a new sequence replaces
+  // the old — one shake at a time has its visual twin: one effect at a
+  // time). Truncation: a consecutive repeat of the same move by the
+  // same side plays the sequence cut at its marked truncateMs.
+  fxStartMove(move, atkSide, defSide, opts) {
+    if (!this.fxPool || !this._fxLastMove || !this.fxKb || !this.fxRecoil) return; // QA minimal-this stub
+    if (this.rtMode || !move || !this.fxAnimsOn()) return;
+    const plan = fxPlanForMove(move);
+    if (!plan || !plan.primary) return;
+    let def = FX_DEFS[plan.primary];
+    if (!def || !(def.durationMs > 0)) def = FX_DEFS[plan.kit]; // condition primaries ride their kit for the hit itself
+    if (!def) return;
+    const repeat = this._fxLastMove[atkSide] === move.id;
+    this._fxLastMove[atkSide] = move.id;
+    const dur = repeat ? def.truncateMs : def.durationMs;
+    this.fxSeq = {
+      def, plan, t: 0, dur: Math.max(120, dur), atkSide, defSide,
+      seed: (move.id.charCodeAt(0) * 131 + move.id.length * 17) | 0,
+      burstAt: Math.max(80, dur * 0.55), bursts: Math.max(1, Math.min(4, (opts && opts.hits) || 1)),
+      spawnAcc: 0, dull: !!(opts && opts.immune),
+    };
+    // FX-2 displacement, parameterised by the shipped feedback tiers:
+    // knockback 4px ordinary / 8px super-effective-or-crit / 12px KO,
+    // ease-out return in the render (<=200ms); contact recoil 2px.
+    if (opts && opts.dmg > 0) {
+      const dist = opts.ko ? 12 : ((opts.eff > 1 || opts.crit) ? 8 : 4);
+      this.fxKb[defSide] = { t: 0, dist };
+      if (move.cat === 'physical') this.fxRecoil[atkSide] = { t: 0 };
+    }
+  }
+
+  // FX-2 dull feedback for immune / blocked hits: a flat grey puff and
+  // a 2px nudge — visibly LESS than any real hit (no flash, no trauma).
+  fxDullHit(defSide) {
+    if (!this.fxPool || !this.fxKb) return; // QA minimal-this stub
+    if (this.rtMode || !this.fxAnimsOn()) return;
+    const a = this.fxAnchor(defSide);
+    for (let i = 0; i < 6; i++) {
+      const h1 = fxHash(i * 31 + 7), h2 = fxHash(i * 57 + 3);
+      this.fxSpawn(a.x + (h1 - 0.5) * 30, a.y + (h2 - 0.5) * 30, (h1 - 0.5) * 22, -8 - h2 * 14, 260, 3, i % 2 ? '#9a9aa8' : '#c8c8d4', 30);
+    }
+    this.fxKb[defSide] = { t: 0, dist: 2 };
+  }
+
+  // FX-2 miss feedback: the defender sidesteps (4px lateral ease) and
+  // the travel element passes through — spawned by the caller via
+  // fxStartMove on the NEXT damaging attempt; the sidestep is here.
+  fxWhiff(defSide) {
+    if (!this.fxKb) return; // QA minimal-this stub
+    if (this.rtMode || !this.fxAnimsOn()) return;
+    this.fxKb[defSide] = { t: 0, dist: 4 };
+  }
+
+  fxTick(dtms) {
+    const seq = this.fxSeq;
+    if (seq) {
+      seq.t += dtms;
+      const def = seq.def;
+      const atkA = this.fxAnchor(seq.atkSide), defA = this.fxAnchor(seq.defSide);
+      const isStatus = def.kind === 'status';
+      const origin = isStatus ? defA : atkA;
+      const target = defA;
+      // Travel/ambient spawning (pooled; spawn budget from the def).
+      const total = def.maxParticles || 16;
+      seq.spawnAcc += (total * dtms) / Math.max(1, seq.dur);
+      while (seq.spawnAcc >= 1) {
+        seq.spawnAcc -= 1;
+        const i = (seq.seed + Math.floor(seq.t) + Math.floor(fxHash(seq.seed + seq.t) * 997)) | 0;
+        const h1 = fxHash(i * 13 + 1), h2 = fxHash(i * 29 + 5), h3 = fxHash(i * 43 + 9);
+        const shape = def.shape || '';
+        let vx = (target.x - origin.x) * 2.2, vy = (target.y - origin.y) * 2.2;
+        let grav = 0, spread = 16;
+        if (shape.includes('flame') || shape.includes('ember')) { vy = -30 - h2 * 30; vx = (h1 - 0.5) * 26; grav = -18; spread = 20; }
+        else if (shape.includes('bubble')) { vy = -16 - h2 * 18; vx = (h1 - 0.5) * 14; spread = 18; }
+        else if (shape.includes('leaf') || shape.includes('petal')) { vx = (target.x - origin.x) * 1.6 + (h1 - 0.5) * 30; vy = 12 + h2 * 16; grav = 22; spread = 22; }
+        else if (shape.includes('bolt') || shape.includes('spark') || shape.includes('needle') || shape.includes('shard')) { spread = 6; vx *= 1.5; vy *= 1.5; }
+        else if (shape.includes('aura') || shape.includes('sparkle') || shape.includes('rising')) { vx = (h1 - 0.5) * 10; vy = -26 - h2 * 22; spread = 24; }
+        const sx = origin.x + (h2 - 0.5) * spread, sy = origin.y + (h3 - 0.5) * spread;
+        const col = seq.dull ? '#b0b0bc' : def.colors[Math.floor(h1 * def.colors.length) % def.colors.length];
+        this.fxSpawn(sx, sy, vx, vy, 190 + h3 * 160, 2 + Math.floor(h2 * 2), col, grav);
+      }
+      // Impact bursts (multi-hit moves burst once per hit).
+      if (seq.t >= seq.burstAt && seq.bursts > 0) {
+        seq.bursts--;
+        seq.burstAt += 130;
+        for (let i = 0; i < 8; i++) {
+          const ang = (i / 8) * Math.PI * 2 + fxHash(seq.seed + i) * 0.5;
+          const sp = 34 + fxHash(i * 7 + seq.seed) * 30;
+          const col = seq.dull ? '#b0b0bc' : def.colors[i % def.colors.length];
+          this.fxSpawn(defA.x, defA.y, Math.cos(ang) * sp, Math.sin(ang) * sp, 240, 2, col, 26);
+        }
+      }
+      if (seq.t > seq.dur && seq.bursts <= 0) this.fxSeq = null;
+      else if (seq.t > seq.dur + 400) this.fxSeq = null;
+    }
+    for (let i = 0; i < FX_POOL_MAX; i++) {
+      const p = this.fxPool[i];
+      if (!p.on) continue;
+      p.t += dtms;
+      if (p.t >= p.life) { p.on = false; continue; }
+      const dt = dtms / 1000;
+      p.x += p.vx * dt; p.y += p.vy * dt; p.vy += (p.grav || 0) * dt;
+    }
+    if (this.breakFx) { this.breakFx.t += dtms; if (this.breakFx.t > 320) this.breakFx = null; }
+  }
+
+  // Knockback offset for a side at render time: fast out (40ms), then
+  // an ease-out return completing by 200ms. Direction: away from the
+  // attacker (foe knocked right/up-field, ally knocked left).
+  fxKbOffset(side) {
+    const kb = this.fxKb[side];
+    if (!kb || kb.t > 200 || !kb.dist) return 0;
+    const dir = side === 'foe' ? 1 : -1;
+    const t = kb.t;
+    const k = t < 40 ? (t / 40) : Math.pow(1 - (t - 40) / 160, 2); // out in 40ms, ease-out return by 200ms
+    return dir * kb.dist * k;
+  }
+
+  fxRecoilOffset(side) {
+    const rc = this.fxRecoil[side];
+    if (!rc || rc.t > 160) return 0;
+    const dir = side === 'foe' ? 1 : -1; // recoil pushes the attacker back, away from its target
+    const k = Math.pow(1 - rc.t / 160, 2);
+    return dir * 2 * k;
+  }
+
+  fxStartEntry(side, ballId) {
+    if (this.rtMode || !this.fxAnimsOn()) { this.entryFx[side] = null; return; }
+    this.entryFx[side] = { t: 0, ballId: ballId || 'pokeball' };
+  }
+
+  fxStartRecall(side, spr) {
+    if (this.rtMode || !this.fxAnimsOn() || !spr) { this.recallFx = null; return; }
+    this.recallFx = { side, spr, t: 0 };
+  }
+
+  ballArtFor(ballId) {
+    if (!this._ballArtCache) this._ballArtCache = {};
+    if (typeof document === 'undefined') return null;
+    if (!(ballId in this._ballArtCache)) {
+      try { this._ballArtCache[ballId] = ballBattleArt(document, ballId); } catch (e) { this._ballArtCache[ballId] = null; }
+    }
+    return this._ballArtCache[ballId];
+  }
+
+  // Draw one ball: the authored sprite when a canvas exists, else a
+  // procedural rect ball in the SAME palette (rows of rects forming
+  // the circle: top colour, dark band, button, bottom colour).
+  drawBall(r, ballId, cx, cy, size, open) {
+    const g = this.game;
+    const cv = this.ballArtFor(ballId);
+    if (cv && r.blitS) {
+      if (open) {
+        // Break-out: top hemisphere lifted and split from the bottom.
+        const hw = size, hh = size / 2;
+        r.blitS(cv, cx - size / 2 - 3, cy - size / 2 - 4, hw, size);
+        return;
+      }
+      r.blitS(cv, cx - size / 2, cy - size / 2, size, size);
+      return;
+    }
+    const pal = BALL_PALETTES[ballId] || BALL_PALETTES.pokeball;
+    const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+    const rad = size / 2;
+    const rows = 8;
+    for (let i = 0; i < rows; i++) {
+      const yy = cy - rad + (i * size) / rows;
+      const dy = Math.abs((i + 0.5) / rows - 0.5) * 2;
+      const half = rad * Math.sqrt(Math.max(0.05, 1 - dy * dy));
+      const col = i < 3 ? pal[0] : i === 3 ? '#202028' : i < 6 ? pal[2] : pal[3];
+      F(col, cx - half, yy, half * 2, size / rows + 1);
+    }
+    F(pal[1], cx - rad * 0.45, cy - rad * 0.72, rad * 0.5, 2);
+    F('#202028', cx - 2, cy - 2, 4, 4);
+    F('#ffffff', cx - 1, cy - 1, 2, 2);
+    if (open) F('#ffffff', cx - rad, cy - rad - 3, size, 2);
+  }
+
+  // Persistent condition overlay (FX-4) for one battler, drawn from
+  // rects only, phase-driven by this.t (deterministic, no RNG).
+  drawConditionOverlay(r, mon, cx, bottom, size) {
+    if (!mon) return;
+    const g = this.game;
+    if (!this.fxAnimsOn()) return;
+    const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+    const step = Math.floor(this.t / 150);
+    const top = bottom - size;
+    const cond = mon.status === 'burn' ? 'cond.burn'
+      : mon.status === 'poison' || mon.status === 'badlyPoisoned' ? 'cond.poison'
+      : mon.status === 'paralysis' ? 'cond.paralysis'
+      : mon.status === 'sleep' ? 'cond.sleep'
+      : mon.status === 'freeze' ? 'cond.freeze' : null;
+    const drawZ = (x, y, s, col) => { F(col, x, y, s, 2); F(col, x + s - 3, y + 2, 2, 2); F(col, x + s - 5, y + 4, 2, 2); F(col, x, y + 6, s, 2); };
+    if (cond === 'cond.burn') {
+      for (let i = 0; i < 5; i++) {
+        const hx = fxHash(i * 17 + step * 3), rise = (step * 7 + i * 19) % 44;
+        F(i % 2 ? '#f8d050' : '#f08030', cx + (hx - 0.5) * size * 0.7, bottom - 6 - rise, 3, 3);
+      }
+    } else if (cond === 'cond.poison') {
+      for (let i = 0; i < 4; i++) {
+        const hx = fxHash(i * 23 + step * 2), rise = (step * 5 + i * 23) % 40;
+        F(i % 2 ? '#e0a8f0' : '#b058c8', cx + (hx - 0.5) * size * 0.6, bottom - 8 - rise, i % 2 ? 3 : 4, i % 2 ? 3 : 4);
+      }
+    } else if (cond === 'cond.paralysis') {
+      for (let i = 0; i < 3; i++) {
+        const hx = fxHash(i * 41 + step * 7), hy = fxHash(i * 13 + step * 5);
+        const x = cx + (hx - 0.5) * size * 0.8, y = top + hy * size * 0.7;
+        F('#f8e038', x, y, 2, 5); F('#f8e038', x + 2, y + 4, 2, 4); F('#e8a818', x + 1, y + 2, 2, 2);
+      }
+    } else if (cond === 'cond.sleep') {
+      const rise = (step % 4) * 4;
+      drawZ(cx + size * 0.28, top - 10 - rise, 8, '#a8b8e8');
+      drawZ(cx + size * 0.42, top - 18 - rise, 11, '#6878b8');
+    } else if (cond === 'cond.freeze') {
+      const c = r.ctx;
+      if (c) { c.save(); c.globalAlpha = 0.38; c.fillStyle = '#a8e4f8'; c.fillRect(cx - size / 2 + 4, top + 4, size - 8, size - 8); c.restore(); }
+      F('#e8fbff', cx - size / 2 + 4, top + 4, size - 8, 2); F('#e8fbff', cx - size / 2 + 4, bottom - 6, size - 8, 2);
+      F('#78d8e8', cx - size / 2 + 4, top + 4, 2, size - 8); F('#78d8e8', cx + size / 2 - 6, top + 4, 2, size - 8);
+    }
+    if (mon.confused) {
+      for (let i = 0; i < 3; i++) {
+        const a = step * 0.9 + i * 2.1;
+        const x = cx + Math.cos(a) * size * 0.42, y = top - 2 + Math.sin(a) * 3;
+        F('#f8d030', x - 1, y - 3, 2, 6); F('#f8d030', x - 3, y - 1, 6, 2);
+      }
+    }
+    if (mon.seeded) {
+      F('#2e7a28', cx - size * 0.4, bottom - 3, size * 0.8, 2);
+      for (let i = 0; i < 4; i++) {
+        const x = cx - size * 0.4 + i * size * 0.22;
+        F('#58b838', x, bottom - 6 - (i % 2) * 2, 2, 4); F('#b8e888', x + 2, bottom - 7 - (i % 2) * 2, 3, 2);
+      }
+    }
+  }
+
+  // FX-6 entry wipe (variant by battle context) + exit mirror.
+  drawEntryWipe(r, w, h) {
+    const g = this.game;
+    const st = g.state.settings || {};
+    const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+    if (st.reducedMotion) {
+      if (this.entryT >= 200) return;
+      const c = r.ctx; if (!c) return;
+      c.save(); c.globalAlpha = (1 - this.entryT / 200) * 0.6; c.fillStyle = '#000'; c.fillRect(0, 0, w, h); c.restore();
+      return;
+    }
+    if (!this.fxAnimsOn()) return;
+    const dur = this.entryVariant === 'boss' ? 900 : this.entryVariant === 'legendary' ? 800 : this.entryVariant === 'trainer' ? 600 : 500;
+    if (this.entryT >= dur) return;
+    const k = this.entryT / dur, open = 1 - Math.pow(1 - k, 2); // ease-out reveal
+    const kind = this.arenaKind ? this.arenaKind() : 'grass';
+    if (this.entryVariant === 'boss') {
+      if (this.entryT < 110) { const c = r.ctx; if (c) { c.save(); c.globalAlpha = 0.85 * (1 - this.entryT / 110); c.fillStyle = '#fff'; c.fillRect(0, 0, w, h); c.restore(); } }
+      // Chevron bands sweep in from alternating edges and clear.
+      for (let i = 0; i < 5; i++) {
+        const y = (i * h) / 5, rem = (1 - open) * w;
+        F(i % 2 ? '#c8a03a' : '#14141c', i % 2 ? w - rem : 0, y, rem, h / 5 + 1);
+      }
+      // VS beat: a gold divider sweeps the middle while the boss wipe runs.
+      if (k > 0.25 && k < 0.95) F('#c8a03a', 0, h / 2 - 2, w * Math.min(1, (k - 0.25) * 2), 4);
+    } else if (this.entryVariant === 'legendary') {
+      const c = r.ctx; if (c) { c.save(); c.globalAlpha = (1 - k) * 0.45; c.fillStyle = '#483878'; c.fillRect(0, 0, w, h); c.restore(); }
+      for (let ring = 0; ring < 3; ring++) {
+        const inset = (ring * 14 + open * 60) % 70;
+        F('#8878c8', inset, inset, w - inset * 2, 2); F('#8878c8', inset, h - inset - 2, w - inset * 2, 2);
+        F('#8878c8', inset, inset, 2, h - inset * 2); F('#8878c8', w - inset - 2, inset, 2, h - inset * 2);
+      }
+    } else if (this.entryVariant === 'trainer') {
+      const slats = 8, sh = h / slats;
+      for (let i = 0; i < slats; i++) {
+        const rem = (1 - open) * (w / 2);
+        F('#20242e', 0, i * sh, rem, sh + 1); F('#20242e', w - rem, i * sh, rem, sh + 1);
+      }
+    } else { // wild — shutter tinted by terrain flavour
+      const tint = kind === 'water' ? '#2050c8' : kind === 'cave' ? '#241d2e' : kind === 'gym' ? '#5a3a52' : '#2e7a28';
+      const bands = 6, bh = h / bands;
+      for (let i = 0; i < bands; i++) {
+        const rem = (1 - open) * w * (i % 2 ? 0.9 : 0.7);
+        F(tint, i % 2 ? w - rem : 0, i * bh, rem, bh + 1);
+      }
+    }
+  }
+
+  drawExitWipe(r, w, h) {
+    if (this._exitStartT < 0 || !this.fxAnimsOn()) return;
+    const k = Math.min(1, (this.t - this._exitStartT) / 300);
+    if (k <= 0) return;
+    const g = this.game;
+    const F = (col, x, y, fw, fh) => g.ctx2dfill(col, x, y, fw, fh);
+    const bands = 6, bh = h / bands;
+    for (let i = 0; i < bands; i++) F('#101018', i % 2 ? w - w * k * 0.6 : 0, i * bh, w * k * 0.6, bh + 1);
   }
 
   drainHp(dt) {
@@ -2276,6 +2689,7 @@ export class BattleScene {
     const g = this.game;
     if (this.rtMode && this.rt && (this.state === 'rt' || this.state === 'xp')) { this.renderRt(r); return; }
     const w = r.viewW, h = r.viewH;
+    this._fxView = { w, h }; // W1: FX anchors track the live view
     // Transform discipline (title/intro pattern): pin the camera to the
     // origin for the screen-space theater, restore it after end().
     const pcx = r.camX, pcy = r.camY; r.camX = 0; r.camY = 0;
@@ -2305,8 +2719,17 @@ export class BattleScene {
     // sprite's extent grows, identically for foe and ally (parity).
     const drawBattler = (spr, pos, side, art) => {
       if (this.faintFx && this.faintFx.side === side) return; // faint anim draws it
-      const size = (art && art.size) || BATTLER_DRAW_SIZE;
-      const cx = pos.x + 24, bottom = pos.y + 48;
+      if (this.recallFx && this.recallFx.side === side) return; // W1: recall shrink draws it
+      if (side === 'foe' && this.state === 'catchseq' && this.catchState && this.catchState.absorbed) return; // W1: absorbed into the ball
+      const efx = this.entryFx[side];
+      if (efx && efx.t < 250) return; // W1 FX-5: ball still in flight, battler not yet materialized
+      let size = (art && art.size) || BATTLER_DRAW_SIZE;
+      if (efx && efx.t < 450) { // materialize: ease-out scale-in over 200ms
+        const k = (efx.t - 250) / 200, e = 1 - Math.pow(1 - k, 2);
+        size = Math.max(8, Math.round(size * (0.3 + 0.7 * e)));
+      }
+      // W1 FX-2: knockback + recoil displacement ride the same anchor.
+      const cx = pos.x + 24 + this.fxKbOffset(side) + this.fxRecoilOffset(side), bottom = pos.y + 48;
       // README attack transform: 1.2x scale for 3 frames, then back
       // (size derived from the same standard, centered on the battler).
       if (this.atkFx && this.atkFx.side === side) {
@@ -2346,17 +2769,82 @@ export class BattleScene {
       r.blitS(this.faintFx.spr, pos.x + 24 - size / 2, pos.y + 48 - size + 8 * k, size, size);
       c.restore();
     }
-    // Catch ball arc
+    // W1 FX-5: recall shrink (switch-out / catch absorb) — the old
+    // battler beams down toward its ball point over 250ms.
+    if (this.recallFx) {
+      const rf = this.recallFx, k = Math.min(1, rf.t / 250);
+      const pos = rf.side === 'foe' ? foePos : allyPos;
+      const art2 = rf.side === 'foe' ? foeArt : allyArt;
+      const size0 = (art2 && art2.size) || BATTLER_DRAW_SIZE;
+      const sz = Math.max(6, Math.round(size0 * (1 - k * 0.85)));
+      const cx = pos.x + 24, bottom = pos.y + 48 - k * 12;
+      const c = r.ctx; c.save(); c.globalAlpha = 1 - k * 0.55;
+      r.blitS(rf.spr, cx - sz / 2, bottom - sz, sz, sz);
+      c.restore();
+      g.ctx2dfill('#ffffff', cx - 1, bottom - sz - 7, 2, 7); // recall beam
+    }
+    // W1 FX-5: send-out ball arcs + release bursts.
+    for (const side of ['foe', 'ally']) {
+      const efx = this.entryFx[side];
+      if (!efx) continue;
+      const pos = side === 'foe' ? foePos : allyPos;
+      const tx = pos.x + 24, ty = pos.y + 40;
+      if (efx.t < 250) {
+        const k = efx.t / 250;
+        const ox = side === 'foe' ? w * 0.94 : w * 0.04, oy = side === 'foe' ? h * 0.08 : h * 0.66;
+        this.drawBall(r, efx.ballId, ox + (tx - ox) * k, oy + (ty - oy) * k - Math.sin(k * Math.PI) * 26, 13, false);
+      } else if (efx.t < 360) {
+        const rr = (efx.t - 250) * 0.35, col = side === 'foe' ? '#ffffff' : '#ffe9a8';
+        g.ctx2dfill(col, tx - rr, ty - 1, rr * 2, 2); g.ctx2dfill(col, tx - 1, ty - rr * 0.6, 2, rr * 1.2);
+      }
+    }
+    // W1 FX-1: effect-sequence elements (impact ring, wall panel,
+    // substitute doll) + the pooled particles themselves.
+    if (this.fxSeq) {
+      const seq = this.fxSeq, defA = this.fxAnchor(seq.defSide);
+      if (seq.t >= seq.dur * 0.55) {
+        const rr = Math.min(26, (seq.t - seq.dur * 0.55) * 0.22), col = seq.def.colors[0];
+        g.ctx2dfill(col, defA.x - rr, defA.y - 1, rr * 2, 2); g.ctx2dfill(col, defA.x - 1, defA.y - rr * 0.7, 2, rr * 1.4);
+      }
+      if (seq.plan && seq.plan.primary === 'vis.wall-screen') {
+        const c = r.ctx; c.save(); c.globalAlpha = 0.3; c.fillStyle = '#7ac8f8'; c.fillRect(defA.x - 30, defA.y - 30, 60, 62); c.restore();
+      }
+      if (seq.plan && seq.plan.primary === 'vis.substitute-doll') {
+        g.ctx2dfill('#58a838', defA.x - 6, defA.y + 18, 12, 10); g.ctx2dfill('#f0e8d0', defA.x - 4, defA.y + 10, 8, 8);
+      }
+    }
+    for (let i = 0; i < FX_POOL_MAX; i++) {
+      const p = this.fxPool[i];
+      if (p.on) g.ctx2dfill(p.col, p.x, p.y, p.sz, p.sz);
+    }
+    // W1 FX-4: persistent condition overlays on both battlers.
+    this.drawConditionOverlay(r, this.foe, foePos.x + 24 + this.fxKbOffset('foe'), foePos.y + 48, (foeArt && foeArt.size) || BATTLER_DRAW_SIZE);
+    this.drawConditionOverlay(r, this.ally, allyPos.x + 24 + this.fxKbOffset('ally'), allyPos.y + 48, (allyArt && allyArt.size) || BATTLER_DRAW_SIZE);
+    // Catch ball (W1 FX-5): the thrown ball is the actual ball-type
+    // sprite; after the absorb it drops and settles (<=2 bounces)
+    // BEFORE the shakes, wobbling on its ground contact point.
     if (this.state === 'catchseq' && this.catchState.phase === 'throw') {
       const k = Math.min(1, this.catchState.t / 430);
       const bx = w * 0.2 + (w * 0.5) * k;
       const by = h * 0.6 - Math.sin(k * Math.PI) * h * 0.35;
-      g.ctx2dcircle(bx, by, 5, '#e84040');
+      this.drawBall(r, this.catchState.ballId, bx, by, 13, false);
     }
-    if (this.state === 'catchseq' && this.catchState.phase === 'shakes') {
-      const wob = Math.sin(this.catchState.t * 0.05) * 3;
-      g.ctx2dcircle(w * 0.7 + wob, h * 0.3, 6, '#e8e8f0');
-      g.ctx2dcircle(w * 0.7 + wob, h * 0.3 - 2, 6, '#e84040');
+    if (this.state === 'catchseq' && (this.catchState.phase === 'settle' || this.catchState.phase === 'shakes')) {
+      const cs = this.catchState, gx = w * 0.7, gy = foePos.y + 46;
+      let bx = gx, by = gy;
+      if (cs.phase === 'settle') { const k = Math.min(1, cs.t / 260); by = gy - (1 - k) * 14 - Math.abs(Math.sin(k * Math.PI * 2)) * 9 * (1 - k); }
+      else bx = gx + Math.sin(cs.t * 0.05) * 3;
+      this.drawBall(r, cs.ballId, bx, by, 13, false);
+    }
+    // W1 FX-5: break-out — the ball bursts open in its own colours.
+    if (this.breakFx) {
+      const bf = this.breakFx, pal = BALL_PALETTES[bf.ballId] || BALL_PALETTES.pokeball;
+      const gx = w * 0.7, gy = foePos.y + 46;
+      this.drawBall(r, bf.ballId, gx, gy, 13, true);
+      for (let i = 0; i < 6; i++) {
+        const a = (i / 6) * Math.PI * 2, rr = 6 + bf.t * 0.09;
+        g.ctx2dfill(pal[i % 2], gx + Math.cos(a) * rr, gy + Math.sin(a) * rr, 3, 3);
+      }
     }
     // P1/E10: success starburst — 8 gold rays radiating from the ball, fading.
     if (this.catchFx) {
@@ -2375,6 +2863,9 @@ export class BattleScene {
       }
       c.restore();
     }
+    // W1 FX-6: entry wipe + exit mirror over the arena (under plates).
+    this.drawEntryWipe(r, w, h);
+    this.drawExitWipe(r, w, h);
     r.end();
     r.camX = pcx; r.camY = pcy;
     // HP plates (Platinum databoxes, original art) — P1/A5: all plate text >= 14px.
