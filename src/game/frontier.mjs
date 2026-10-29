@@ -574,8 +574,11 @@ function domeNextMatch(g, ow) {
         if (tier) awardSymbol(g, 'dome', tier, done); else done();
         return;
       }
-      g.ui.say(['You advance! Elsewhere in ' + DOME_ROUNDS[b.round - 1] + ':', ...narration, 'Next match: ' + DOME_ROUNDS[b.round] + '. The desk will call you.'],
-        () => {}, 'BATTLE DOME DESK');
+      // The desk calls the next match itself (the narration line
+      // promises exactly that): the bracket flows match to match
+      // without a desk re-talk in between.
+      g.ui.say(['You advance! Elsewhere in ' + DOME_ROUNDS[b.round - 1] + ':', ...narration, 'Next match: ' + DOME_ROUNDS[b.round] + '. The desk calls your name —'],
+        () => domeNextMatch(g, ow), 'BATTLE DOME DESK');
     };
     advance();
   };

@@ -10406,3 +10406,71 @@ server-side under the raised bag cap).
   public static total 10,062,272 B vs the 10,100,000 B trigger
   (margin 37,728 B — F2b/F2c must stay lean). `personal/`
   byte-identical; dist/ restored.
+
+## Arc 3.5 Stage F2b — Battle Frontier: Arena judge + Dome bracket + Palace autoAlly drivers (2026-10-29)
+
+- **Scope (mission F2, commit 2 of 3):** the remaining set/bracket
+  facility DRIVERS on the F2a seams — Arena (maxTurns + judge in
+  real sets), Dome (the 16-entrant tournament), Palace (autoAlly
+  sets) — plus their bundle drives. No new engine surface: the
+  judge, counters and autoAlly all shipped in F2a and are exercised
+  end-to-end here.
+- **Arena (driver wiring in `launchSetBattle`):** every Arena
+  battle carries `facility { maxTurns: 3, judge: judgeArena }` and
+  generated Arena trainers field ONE mon (recorded in F2a's data
+  header: the 3-turn judgement is a single-battler law; Brain
+  battles field the authored 3). **Judge formula (data-authored,
+  recorded):** Mind = distinct moves used (cap 4) · Skill = attacks
+  landed (cap 6) · Body = round(3 × team's remaining HP fraction);
+  higher total wins; **a tie resolves as challenger loss** — the
+  Frontier demands a winner (recorded adaptation). The judge speaks
+  the card (totals stamped onto the stats objects by judgeArena)
+  and the battle ends through the normal win/defeat paths.
+- **Dome:** one tournament = 16 entrants (the player at seed 0 +
+  15 generated name/team specs), serialized in `run.bracket`
+  `{ entrants, round, alive, results }`. Player matches are real
+  battles (R16/QF/SF/F, heal between); **non-player matches are
+  simulated by team power** — the sum of the entrants' level-scaled
+  stat totals from real `makeMon` builds — **with an rng upset
+  roll** (the underdog takes ~22% of pairings; equal power is a
+  coin flip), and every result is narrated by name between rounds
+  and recorded in the bracket. Tucker is the FINAL opponent of
+  tournament 5 (Silver) / 10 (Gold) when the player reaches that
+  final; other finals are generated aces; losing before a milestone
+  final earns no symbol (canon). Tournament count persists in
+  records across runs. **Controller fix found by the drives:** the
+  next match now LAUNCHES from the narration callback ("the desk
+  calls your name") — the first cut left advancement to a desk
+  Resume talk, which stranded the bracket mid-tournament for any
+  player who believed the narration line.
+- **Palace:** sets of 7 with `facility { autoAlly: true }` — the
+  ally's move each turn is chosen by `aiActionFor`, the SAME helper
+  the foe uses (extracted in F2a, not forked). **Recorded
+  adaptation:** the forced send-out after a faint stays
+  PLAYER-chosen (it is not a move choice) — the bundle drive proves
+  a full battle completes with zero command input while the faint
+  prompt still opens for the player. Spencer at 21/42.
+- **Tests (tests/frontier-checks.mjs 91 → 99, Part D grows
+  D16–D23):** Arena — a fixture-stalled battle reaching the judge
+  and winning the card (Mind 2 vs 1 on two distinct status moves),
+  the honest set of 7, a CONSTRUCTED judged loss (Splash vs Body
+  Slam: Body decides against the challenger, run closes, nothing
+  recorded), Greta Silver at 14. Dome — one full honest tournament
+  (all 11 non-player results in the bracket record), Tucker final
+  at tournament 5 → Silver. Palace — the zero-input battle + faint
+  prompt, Spencer Silver at 21. **Driver lessons recorded for the
+  suite's future authors:** driveBattle drives ONE scene per call
+  with a scene-bounded drain and samples hooks before draining (a
+  scene-blind drain swallows whole autoAlly battles — it produced
+  three separate ghost failures before it was understood); entry
+  flows single-step via `enterRun` for the same reason; a battle
+  fixture that rewrites a mon's moves must restore them (the stall
+  fixture left the set's lead unarmed for battle 2).
+- Battery (this tree): frontier-checks **99/99**;
+  qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**
+  (HARD); campaign-smoke **24/24**; arc-foundation **47/47**;
+  validator **89** + fuzz **2000/2000** + save-contract **12/12**;
+  cheat-shop **44/44**. **public/game.js: 9,899,849 B**,
+  byte-stable (build ×2, same sha256 00b1b832…); public static
+  total 10,062,471 B vs the 10,100,000 B trigger (margin
+  37,529 B). `personal/` byte-identical; dist/ restored.

@@ -682,12 +682,30 @@ const driverD = `
     ];
   }
   function driveBattle(g, onScene) {
-    var guard = 0, seenScene = null;
+    // ONE scene per call: the next battle launches synchronously in
+    // onEnd, and a drain() can swallow an entire autoAlly battle —
+    // so this driver returns the moment the top scene is a NEW
+    // BattleScene, and every caller loops. onScene fires once, for
+    // the scene this call actually drove.
+    var guard = 0, firstScene = null;
+    // Scene-bounded drain: the plain drain() is scene-blind — a
+    // battle launched mid-drain (onEnd) chains straight into it and
+    // an autoAlly battle can be swallowed whole. This variant stops
+    // the moment the top scene changes.
+    function drainHere() {
+      var sc = g.scenes.top; var n = 0;
+      while ((g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) && g.scenes.top === sc && n < 500) { pA(g); n++; }
+    }
     while ((g.scenes.top instanceof BattleScene) && guard++ < 3000) {
-      drain(g);
-      if (!(g.scenes.top instanceof BattleScene)) break;
+      // Hook BEFORE any drain: a drain can swallow an entire
+      // autoAlly battle, so the scene must be sampled on sight.
       var b = g.scenes.top;
-      if (onScene && b !== seenScene) { seenScene = b; onScene(b); }
+      if (!firstScene) { firstScene = b; if (onScene) onScene(b); }
+      else if (b !== firstScene) break;
+      drainHere();
+      if (!(g.scenes.top instanceof BattleScene)) break;
+      if (g.scenes.top !== b) continue; // scene changed mid-drain: the firstScene test above ends this call
+      b = g.scenes.top;
       if (g.ui.menuOpen) {
         var m = g.ui.menu;
         if (m.kind === 'commands') {
@@ -707,7 +725,10 @@ const driverD = `
         }
       } else { pA(g); tk(g, 3); }
     }
-    drain(g);
+    // Trailing drain ONLY when no fresh battle is waiting: if this
+    // call ended on a scene change, the new battle is the caller's
+    // business — draining here would swallow an autoAlly battle.
+    if (!(g.scenes.top instanceof BattleScene)) drain(g);
   }
   // The master pump: dialogues drain, battles drive, menus go through
   // the chooser (default: the Frontier-savvy order below).
@@ -733,6 +754,20 @@ const driverD = `
     if (!npc) return null;
     ow.sysNpc(npc); tk(g, 3);
     return npc;
+  }
+  // Entry stepper: talk -> intro -> picks/draft -> run created, ONE
+  // press at a time. A full drain() here is a trap: the moment the
+  // first battle launches, its msgOpen chain lets a drain swallow
+  // whole autoAlly battles (Palace) before the caller ever sees them.
+  function enterRun(g, choose) {
+    var st = g.state; var guard = 0;
+    while (guard++ < 600) {
+      if (st.frontier.run) return true;
+      if (g.ui.menuOpen) { g.ui.debugChoose((choose || frontierChoose)(g.ui.menu)); tk(g, 3); continue; }
+      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { pA(g); continue; }
+      tk(g, 3);
+    }
+    return !!st.frontier.run;
   }
   var FAC_IDS = ['tower', 'factory', 'arena', 'dome', 'pike', 'palace', 'pyramid'];
   function slotOf(g, facId) { return g.state.badges.symbols[FAC_IDS.indexOf(facId)]; }
@@ -881,12 +916,7 @@ const driverD = `
       }
       return frontierChoose(menu);
     };
-    var guardS = 0;
-    while (!st.frontier.run && guardS++ < 300) {
-      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { drain(g); continue; }
-      if (g.ui.menuOpen) { g.ui.debugChoose(entryChoose(g.ui.menu)); tk(g, 3); continue; }
-      break;
-    }
+    enterRun(g, entryChoose);
     if (!st.frontier.run) return { g: g, st: st, brainName: null };
     if (facId === 'factory' && st.frontier.run.rentals) {
       var kits = [['psychic', 'thunderbolt', 'icebeam', 'flamethrower'], ['earthquake', 'thunderbolt', 'icebeam', 'flamethrower'], ['bodyslam', 'earthquake', 'surf', 'icebeam']];
@@ -898,11 +928,14 @@ const driverD = `
     while (guard++ < 400) {
       if (slotOf(g, facId) === wantSlot && !(g.scenes.top instanceof BattleScene)) break; // the award lands in onEnd, before any boundary menu
       if (st.frontier.run && st.frontier.run.streak >= wantStreak && !(g.scenes.top instanceof BattleScene) && !g.ui.menuOpen) break;
-      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { drain(g); continue; }
+      // Battle BEFORE dialogue: a freshly launched battle's intro is
+      // msgOpen, and draining here would swallow a whole autoAlly
+      // battle (Palace) before the sampler could see its trainer.
       if (g.scenes.top instanceof BattleScene) {
         driveBattle(g, function (b) { if (st.frontier.run && st.frontier.run.streak === wantStreak - 1) brainName = b.trainer.name; });
         continue;
       }
+      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { drain(g); continue; }
       if (g.ui.menuOpen) { g.ui.debugChoose(frontierChoose(g.ui.menu)); tk(g, 3); continue; }
       break;
     }
@@ -930,12 +963,7 @@ const driverD = `
     var st = g.state;
     var partyJson0 = JSON.stringify(st.party);
     talkFrontier(g, ow, 'factory');
-    var guardS = 0;
-    while (!st.frontier.run && guardS++ < 300) {
-      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { drain(g); continue; }
-      if (g.ui.menuOpen) { g.ui.debugChoose(frontierChoose(g.ui.menu)); tk(g, 3); continue; }
-      break;
-    }
+    enterRun(g);
     var run = st.frontier.run;
     ok('D12 Factory draft: 3 rentals drafted into RUN STATE ONLY (run.rentals, level = party top 100), enteredTeam empty, state.party untouched so far',
       !!run && run.facility === 'factory' && run.rentals.length === 3 && run.rentals.every(function (m) { return m.level === 100; })
@@ -976,6 +1004,178 @@ const driverD = `
     ok('D15 Noland at 21 (streak seeded 19, battles 20-21 driven): battle 21 is Noland, slot strikes SILVER, streak continues at 21',
       r.brainName === 'Noland' && slotOf(r.g, 'factory') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 21,
       'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'factory'));
+  }
+
+  // ---------- D16-D18: Arena — judged set, constructed judged loss, Greta ----------
+  {
+    var g = mkGame(7220); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-arena', 10, 5); drain(g);
+    var st = g.state;
+    talkFrontier(g, ow, 'arena');
+    enterRun(g);
+    // Battle 1, the STALL: fixture both kits — the ally alternates
+    // Tail Whip / Splash (2 distinct status moves), the foe only
+    // Splashes. Nobody can be KO'd; the turn-4 command gate must
+    // reach the judge, and the card must favour the challenger
+    // (Mind 2 vs 1, Skill 3-3, Body 3-3 -> 8 to 7).
+    var stallScene = null, realMoves = null;
+    var guard1 = 0, movePick = 0;
+    while (guard1++ < 2000) {
+      if (g.scenes.top instanceof BattleScene && stallScene && g.scenes.top !== stallScene) break; // battle 1 done — the set continues in the pump below
+      if (g.scenes.top instanceof BattleScene) {
+        var b = g.scenes.top;
+        if (b !== stallScene) {
+          stallScene = b;
+          // Fixture BOTH kits for the stall — and snapshot the lead's
+          // real kit: the fixture writes the mon object itself, so
+          // without a restore the set's later battles fight unarmed.
+          realMoves = b.ally.moves;
+          b.ally.moves = ['tailwhip', 'splash'].map(function (x) { return { id: x, pp: MOVES[x].pp, maxPp: MOVES[x].pp }; });
+          b.foe.moves = [{ id: 'splash', pp: 99, maxPp: 99 }];
+        }
+        drain(g);
+        if (!(g.scenes.top instanceof BattleScene)) break;
+        if (g.ui.menuOpen) {
+          var m = g.ui.menu;
+          if (m.kind === 'commands') { var ci = m.items.findIndex(function (it) { return !it.disabled && it.value === 'fight'; }); g.ui.debugChoose(ci >= 0 ? ci : 0); tk(g, 3); }
+          else if (m.title === 'Choose a move') { g.ui.debugChoose(movePick++ % 2); tk(g, 3); }
+          else { var bi = m.items.findIndex(function (it) { return it.value === null || it.value === -1; }); g.ui.debugChoose(bi >= 0 ? bi : m.items.length - 1); tk(g, 3); }
+        } else { pA(g); tk(g, 3); }
+        continue;
+      }
+      break;
+    }
+    if (stallScene && realMoves) stallScene.ally.moves = realMoves; // restore the lead's real kit for battles 2-7
+    drain(g);
+    var judged = g.ui.log.some(function (e) { return e.text && e.text.indexOf('Arena judge steps in') >= 0; });
+    ok('D16 Arena stall battle reaches the judge at the turn cap and the judged WIN lands (2 distinct status moves beat 1 on Mind): streak 1, run open',
+      judged && !!st.frontier.run && st.frontier.run.streak === 1,
+      'judged=' + judged + ' streak=' + (st.frontier.run && st.frontier.run.streak));
+    // Battles 2-7 honestly, then rest at the boundary.
+    pump(g, 6000, function (menu) {
+      if (menu.title && menu.title.indexOf('Streak 7') === 0) { var ri = menu.items.findIndex(function (it) { return it.value === 'rest'; }); return ri; }
+      return frontierChoose(menu);
+    });
+    ok('D17 Arena honest set completes (7 straight, records written, slot still null — Greta waits at 14)',
+      !!st.frontier.run && st.frontier.run.streak === 7 && st.frontier.records.arena.bestStreak === 7 && slotOf(g, 'arena') === null);
+  }
+  {
+    // Constructed judged LOSS: the ally only Splashes while the foe
+    // lands Body Slams — Mind 1-1, Skill 3-3, Body 2 vs 3 -> the
+    // decision goes against the challenger and the run closes.
+    var g = mkGame(7221); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-arena', 10, 5); drain(g);
+    var st = g.state;
+    talkFrontier(g, ow, 'arena');
+    enterRun(g);
+    var lossScene = null;
+    var guard2 = 0;
+    while (guard2++ < 2000) {
+      if (g.scenes.top instanceof BattleScene) {
+        var b2 = g.scenes.top;
+        if (b2 !== lossScene) {
+          lossScene = b2;
+          b2.ally.moves = [{ id: 'splash', pp: 99, maxPp: 99 }];
+          b2.foe.moves = [{ id: 'bodyslam', pp: 99, maxPp: 99 }];
+        }
+        driveBattle(g);
+        continue;
+      }
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      break;
+    }
+    drain(g);
+    var judgedLoss = g.ui.log.some(function (e) { return e.text && e.text.indexOf('decision goes to') >= 0; });
+    ok('D18 constructed judged LOSS: the judge decides against the stalling challenger, the run closes at streak 0, no symbol, no wins recorded',
+      judgedLoss && st.frontier.run === null && slotOf(g, 'arena') === null && st.frontier.records.arena.totalWins === 0,
+      'judged=' + judgedLoss + ' run=' + JSON.stringify(st.frontier.run));
+  }
+  {
+    var r = milestoneDrive(7222, 'frontier-arena', 'arena', 12, null, 14, 'silver');
+    ok('D19 Greta at 14 (streak seeded 12, battles 13-14 driven): battle 14 is Greta, slot strikes SILVER, streak continues at 14',
+      r.brainName === 'Greta' && slotOf(r.g, 'arena') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 14,
+      'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'arena'));
+  }
+
+  // ---------- D20-D21: Dome — a full tournament, Tucker final ----------
+  function domeDrive(seed, seedTournaments) {
+    var g = mkGame(seed); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-dome', 12, 5); drain(g);
+    var st = g.state;
+    if (seedTournaments) st.frontier.records.dome.tournaments = seedTournaments;
+    talkFrontier(g, ow, 'dome');
+    var finalFoe = null, maxResults = 0, guard = 0;
+    while (guard++ < 500) {
+      if (st.frontier.run && st.frontier.run.bracket) {
+        maxResults = Math.max(maxResults, st.frontier.run.bracket.results.length);
+        if (st.frontier.run.bracket.round === 3 && g.scenes.top instanceof BattleScene) finalFoe = g.scenes.top.trainer.name;
+      }
+      if (!st.frontier.run && st.frontier.records.dome.tournamentWins > 0) break;
+      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { drain(g); continue; }
+      if (g.scenes.top instanceof BattleScene) { driveBattle(g); continue; }
+      if (g.ui.menuOpen) { g.ui.debugChoose(frontierChoose(g.ui.menu)); tk(g, 3); continue; }
+      if (!st.frontier.run) break;
+      tk(g, 3);
+    }
+    drain(g);
+    return { g: g, st: st, finalFoe: finalFoe, maxResults: maxResults };
+  }
+  {
+    var r = domeDrive(7223, 0);
+    ok('D20 Dome honest tournament: 16 entrants, four player wins, ALL 11 non-player matches simulated into the bracket record, tournament + win recorded, run closed',
+      r.st.frontier.records.dome.tournaments === 1 && r.st.frontier.records.dome.tournamentWins === 1
+      && r.maxResults === 11 && r.st.frontier.run === null && r.finalFoe !== 'Tucker',
+      'results=' + r.maxResults + ' finalFoe=' + r.finalFoe);
+  }
+  {
+    var r = domeDrive(7224, 4);
+    ok('D21 Tucker final (tournaments seeded 4 -> this is tournament 5): the FINAL opponent is Tucker himself, the win strikes slot SILVER',
+      r.finalFoe === 'Tucker' && slotOf(r.g, 'dome') === 'silver' && r.st.frontier.records.dome.tournamentWins === 1,
+      'finalFoe=' + r.finalFoe + ' slot=' + slotOf(r.g, 'dome'));
+  }
+
+  // ---------- D22-D23: Palace — zero-input battles, Spencer ----------
+  {
+    var g = mkGame(7225); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-palace', 10, 5); drain(g);
+    var st = g.state;
+    talkFrontier(g, ow, 'palace');
+    enterRun(g);
+    // ZERO command input from here: only dialogue presses and, when
+    // the lead is fixture-fainted, the forced send-out choice (which
+    // the register records as player-chosen by design).
+    var commandMenuSeen = false, faintMenuSeen = false, scene0 = null, guard = 0;
+    while (guard++ < 4000) {
+      if (g.ui.menuOpen && g.ui.menu.kind === 'commands') commandMenuSeen = true;
+      if (g.scenes.top instanceof BattleScene && scene0 && g.scenes.top !== scene0) break; // battle 1 done
+      if (g.scenes.top instanceof BattleScene) {
+        var b = g.scenes.top;
+        if (!scene0) { scene0 = b; b.ally.hp = 1; } // fixture (battle 1 only): the lead faints to the first real hit
+        if (g.ui.menuOpen) {
+          var m = g.ui.menu;
+          if (m.title === 'Choose next Pokemon') {
+            faintMenuSeen = true;
+            var pi = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1 && it.value !== null; });
+            g.ui.debugChoose(pi >= 0 ? pi : 0); tk(g, 3);
+          } else if (m.kind === 'commands' || m.title === 'Choose a move') {
+            commandMenuSeen = true; tk(g, 3); // never choose: if autoAlly failed, the battle stalls and the guard fails the check
+          } else { tk(g, 3); }
+        } else { pA(g); tk(g, 3); }
+        continue;
+      }
+      break;
+    }
+    // NO trailing drain here: it would drive the rest of the set
+    // (autoAlly battles chain through msgOpen) and inflate the streak.
+    ok('D22 Palace autoAlly: a full battle completes with ZERO command input (no command/move menu ever opens), and the fixture faint still prompts the PLAYER send-out choice',
+      !commandMenuSeen && faintMenuSeen && !!st.frontier.run && st.frontier.run.streak === 1,
+      'cmdMenu=' + commandMenuSeen + ' faintMenu=' + faintMenuSeen + ' streak=' + (st.frontier.run && st.frontier.run.streak));
+  }
+  {
+    var r = milestoneDrive(7226, 'frontier-palace', 'palace', 19, null, 21, 'silver');
+    ok('D23 Spencer at 21 (streak seeded 19, battles 20-21 driven under autoAlly): battle 21 is Spencer, slot strikes SILVER, streak continues at 21',
+      r.brainName === 'Spencer' && slotOf(r.g, 'palace') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 21,
+      'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'palace'));
   }
 
   globalThis.__FRD__ = Q;
