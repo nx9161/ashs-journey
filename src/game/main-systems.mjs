@@ -11,6 +11,7 @@ import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './sta
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
+import { FACILITIES, FACILITY_IDS } from '../data/frontier.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
 import { FORMS } from '../data/forms.mjs';
@@ -376,6 +377,29 @@ Object.assign(Game.prototype, {
         });
       }
     }
+    // Section 1.9 — Battle Frontier (Stage F3): one row per facility
+    // in the Johto section's idiom, rendered once the Frontier is
+    // reached (its homecoming hook, the crossing, the current arc,
+    // or any symbol earned). The rows are INFORMATIONAL — they carry
+    // no quest flags and complete nothing; each reads its state word
+    // straight off badges.symbols (— / SILVER / GOLD), with the
+    // facility + Brain names from data/frontier.mjs.
+    const frontierReached = currentArcOf(g.state).id === 'frontier'
+      || !!g.state.story.flags.hook_frontier
+      || !!g.state.story.flags.reachedarc_frontier
+      || ((g.state.badges.symbols || []).some((s) => !!s));
+    if (frontierReached) {
+      items.push({ label: '— BATTLE FRONTIER —', value: null, disabled: true, band: true });
+      const symbols = g.state.badges.symbols || [];
+      for (const fid of FACILITY_IDS) {
+        const slot = symbols[FACILITY_IDS.indexOf(fid)];
+        const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'SILVER' : '—';
+        items.push({
+          label: '· ' + FACILITIES[fid].name + ' — ' + FACILITIES[fid].brain + ' — ' + word,
+          value: 'fq:' + fid,
+        });
+      }
+    }
     // Section 2 — Legendary Arcs (unchanged: arcs list from story.quests,
     // exactly the ids the arc machinery wrote there).
     const arcs = Object.keys(g.state.story.quests || {});
@@ -419,7 +443,15 @@ Object.assign(Game.prototype, {
         if (c) g.ui.say([c.name + ' — ' + tierOf(g.state, c.id), c.note], () => g.openQuestLog(), 'People');
         return;
       }
-      if (v.startsWith('jq:')) {
+      if (v.startsWith('fq:')) {
+        const fid = v.slice(3);
+        const fac = FACILITIES[fid];
+        if (fac) {
+          const slot = (g.state.badges.symbols || [])[FACILITY_IDS.indexOf(fid)];
+          const word = slot === 'gold' ? 'GOLD' : slot === 'silver' ? 'SILVER' : 'not yet earned';
+          g.ui.say([fac.name + ' — Frontier Brain ' + fac.brain + ', ' + fac.brainTitle + '.', 'Your symbol here: ' + word + '. The facility desk books the runs; the Brain keeps the symbol.'], () => g.openQuestLog(), 'Frontier');
+        }
+      } else if (v.startsWith('jq:')) {
         const q = JOHTO_QUESTS.find((x) => 'jq:' + x.id === v);
         if (q) g.ui.say([q.text, q.hint], () => g.openQuestLog(), 'Quest');
       } else if (v.startsWith('oq:')) {

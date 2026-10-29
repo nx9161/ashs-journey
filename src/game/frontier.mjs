@@ -170,6 +170,54 @@ export function awardSymbol(g, facilityId, tier, cb) {
 }
 
 // ------------------------------------------------------------------
+// Scott, deepened (Stage F3)
+// ------------------------------------------------------------------
+
+// Scott's hub lines are keyed on the SYMBOL STATE — counts over
+// badges.symbols, which the dialogueStates idiom (single flag /
+// flagNot keys on story.flags) cannot express. Per the F3 brief the
+// smallest honest route is this talk-branch in the Frontier
+// controller, dispatched from sysNpc for the frontierhub Scott (the
+// SPACE RESEARCHER ORBIT name-keyed precedent) — no new engine
+// mechanism, and his F1 base dialogue is state (a) verbatim.
+export function frontierScottLines(state) {
+  const flags = state.story.flags || {};
+  const slots = (state.badges && state.badges.symbols) || [];
+  const earned = slots.filter(Boolean).length;
+  const silvers = slots.filter((s) => s === 'silver').length;
+  const golds = slots.filter((s) => s === 'gold').length;
+  if (flags.frontier_complete) {
+    return [
+      'There it is. Seven Symbols, all of them gold — I have watched a great many trainers land on that pier, and this island has exactly one of you.',
+      'I scouted every brick of this place into being, trainer, and you just became its favourite story. The Frontier salutes you. So do I.',
+    ];
+  }
+  if (earned === 7) {
+    return [
+      'Seven Symbols. Every Brain on my island has looked at your team and nodded — in silver, at least, and ' + golds + ' of them in gold already.',
+      'Now the truth I saved for this moment: silver was the introduction. Gold is the argument. Every Brain here keeps a harder team for the trainer who comes back.',
+      'And when you hunt the last of the gold, finish at the Pyramid. Brandon is the last word on this island — what he says on that summit, nobody overrules.',
+    ];
+  }
+  if (earned > 0) {
+    return [
+      'Counted your case on the way in, trainer — ' + earned + ' of seven Symbols in hand: ' + silvers + ' silver, ' + golds + ' gold.',
+      'Silver is a Brain respecting you. Gold is a Brain with nothing left to teach you — and gold, trainer, is the standard I built this island to demand.',
+      'Keep pushing door to door. The Brains you have only met in silver are keeping their real teams warm for you.',
+    ];
+  }
+  return [
+    'Welcome to the Battle Frontier! I\'m Scott — I scouted every brick of this place into being.',
+    'Seven facilities, seven Frontier Brains, seven Symbols waiting for someone stubborn enough. That grin says it might be you.',
+    'No rush and no shortcuts here. Heal at the Center, stock up at the Mart — then pick a door and make it famous.',
+  ];
+}
+
+export function talkFrontierScott(g, ow) {
+  g.ui.say(frontierScottLines(g.state), () => {}, 'SCOTT');
+}
+
+// ------------------------------------------------------------------
 // Receptionist entry
 // ------------------------------------------------------------------
 
@@ -631,13 +679,13 @@ export function brandonDue(state) {
 
 // The appended-Brain audience (Lucy / Brandon): talk -> the Brain's
 // own intro -> the milestone battle -> award or the run's end.
-// ==== F3 HOOK (Stage F3, Brandon possession staging) ====
-// Brandon's battle here is the PLAIN milestone battle the F2 brief
-// commissions. F3's two-stage possession staging attaches at THIS
-// function: when F3 lands, startBrainAudience('pyramid') gains the
-// pre-battle possession scene and the second-stage battle before
-// falling through to launchBrainBattle below — the award, the
-// brandonFaced marking and the run closing all stay shared.
+// Stage F3 (the hook F2c left here): Brandon's audience gains its
+// two-stage spine — the FIRST due-Silver audience (slot null, the
+// qualifying climb, brandon_possessed_faced unset) is the POSSESSED
+// battle staged below; every later audience is the plain milestone
+// battle, with Brandon's rematch voice once the possession is faced.
+// The record of exactly what shipped lives at Brandon's def in
+// data/frontier.mjs (the Harrison format).
 export function startBrainAudience(g, facilityId, ow) {
   const state = g.state;
   const run = state.frontier && state.frontier.run;
@@ -645,7 +693,90 @@ export function startBrainAudience(g, facilityId, ow) {
   const tier = facilityId === 'pike' ? lucyDue(state) : brandonDue(state);
   if (!tier) return;
   const fac = FACILITIES[facilityId];
-  g.ui.say(fac.brainIntro, () => launchBrainBattle(g, ow, facilityId, tier), fac.brain.toUpperCase());
+  if (facilityId === 'pyramid' && tier === 'silver' && !state.story.flags.brandon_possessed_faced) {
+    startPossessedBrandon(g, ow);
+    return;
+  }
+  const intro = facilityId === 'pyramid' && state.story.flags.brandon_possessed_faced
+    ? fac.brainRematchIntro : fac.brainIntro;
+  g.ui.say(intro, () => launchBrainBattle(g, ow, facilityId, tier), fac.brain.toUpperCase());
+}
+
+// ------------------------------------------------------------------
+// Brandon two-stage, stage one: the possessed battle (Stage F3)
+// ------------------------------------------------------------------
+
+// The pre-scene, then the battle: the player's REAL entered team
+// under autoAlly (the spirit chooses every move — the Palace
+// mechanism, an honest engine truth, not a rigged outcome) against
+// Brandon's silver Regi trio at foeLevel + 10, the margin Brandon
+// speaks aloud below. The milestone is NOT consumed by this battle:
+// run.brandonFaced stays unset, so a loss leaves Brandon standing
+// for the immediate plain re-challenge (see launchPossessedBattle).
+function startPossessedBrandon(g, ow) {
+  const state = g.state;
+  const voice = String(state.player.name || '???').toUpperCase() + '??';
+  g.ui.say([
+    'Brandon\'s chamber is older than the Pyramid around it. Against its heart stands a sealed stone in black iron bands — the King of Pokélantis, the keeper whispers, asleep inside it for three thousand years.',
+    'The bands hum. Dust falls upward. The seal cracks a hair\'s width — and something is suddenly standing where you stand, wearing your stance, your grin, your voice.',
+  ], () => {
+    g.ui.say([
+      'At last. A body that CLIMBS. Three thousand years in the dark, and the mountain delivers me hands.',
+      'King Brandon! I have crossed an age for this summit. Give me its symbol. Give me EVERYTHING on this island.',
+    ], () => {
+      g.ui.say([
+        'Whatever wears the boy has his fire and none of his manners. Very well, King of Pokélantis — I accept YOUR challenge.',
+        'Hear the terms, spirit: my Regis will stand TEN levels above the team the boy climbed with, and I will not hold back one stone\'s weight. If his team breaks you, it breaks you honestly.',
+      ], () => launchPossessedBattle(g, ow), 'BRANDON');
+    }, voice);
+  }, '');
+}
+
+function launchPossessedBattle(g, ow) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run) return;
+  const team = activeTeam(state, run);
+  const trainer = brainTrainer('pyramid', 'silver', run.foeLevel + 10);
+  trainer.id = 'frontier-brain-pyramid-possessed';
+  trainer.lose = ['There — did you see it, climber? Every time your partners faltered, they looked back for YOU. Not for the thing wearing you.'];
+  const b = new BattleScene({
+    kind: 'trainer', trainer, returnTo: ow, rt: false,
+    facility: facilityOpts(run, team, { autoAlly: true }),
+  });
+  b.onEnd = (won, fled) => {
+    const flags = state.story.flags;
+    if (won && !fled) {
+      // The upset: the spirit broke against the bond mid-battle.
+      flags.brandon_possessed_faced = true;
+      flags.brandon_possession_broken = true;
+      g.ui.say([
+        'HA! There it is! Halfway through, its orders stopped landing — your team kept fighting like partners, not puppets, and a borrowed voice cannot hold partners.',
+        'The bond between a trainer and his team broke it, climber. Not I. Remember that — and take what you earned under your own name.',
+      ], () => {
+        awardSymbol(g, 'pyramid', 'silver', () => {
+          closeRun(state);
+          g.ui.say(['The run closes in triumph — the desk strikes it in silver ink.'], () => {}, 'BATTLE PYRAMID DESK');
+        });
+      }, 'BRANDON');
+      return;
+    }
+    // The canon path: the broken battle breaks the possession.
+    flags.brandon_possessed_faced = true;
+    healTeam(team); // the keeper tends the team inside the scene below — Brandon will not fight a half-dead team for his symbol
+    g.ui.say([
+      'The battle breaks — and the breaking breaks something else. The grin that is not yours flickers. Thins. Tears at the edges like wet paper.',
+    ], () => {
+      g.ui.say([
+        'KEEPER! The stone — NOW, while its hold is broken!',
+        'It is done. Brass and old words, and the seal holds again. You are yourself, climber — shaken is not beaten.',
+        'My keeper has tended your team while the stone was re-sealed; I will not take a symbol\'s measure from a half-dead team. It would prove nothing.',
+        'Challenge me again when you are ready. This time I battle YOU.',
+      ], () => {}, 'BRANDON');
+    }, '');
+  };
+  g.scenes.push(b);
+  b.enter();
 }
 
 function launchBrainBattle(g, ow, facilityId, tier) {

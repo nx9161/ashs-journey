@@ -636,7 +636,7 @@ if (QC) {
   ok('C00 driver completed with no internal failures', QC.failures === 0, QC.failures + ' failures');
 }
 
-// ================= Part D: F2 bundle — facility seams + Tower/Factory true-path drives =================
+// ================= Part D: F2 bundle — facility seams + Tower/Factory true-path drives (F3: Arena 3-mon re-proofs + D18B, Brandon two-stage D32/D33, Scott D34, quest log D35) =================
 // Fixture seeding (B09 precedent): milestone drives seed run.streak
 // (and, for gold, the slot) directly so the milestone battle itself
 // is reached by the shipped launch path; every seed is named inline.
@@ -1467,6 +1467,196 @@ const driverD = `
     ok('D31 cross-facility honesty: with a Pike run open, the Tower desk WARNS that starting closes it (records kept), and on confirmation the Tower run replaces it',
       pikeRunOpen && warned && !!st.frontier.run && st.frontier.run.facility === 'tower',
       'warned=' + warned + ' run=' + (st.frontier.run && st.frontier.run.facility));
+  }
+
+  // ---------- D32-D33: Brandon two-stage (F3) — possessed loss + re-challenge, the upset ----------
+  // Zero-input battle drive for an autoAlly battle (the D22 idiom):
+  // dialogue presses + the forced send-out choice ONLY; returns
+  // { scene, cmdMenu } for the battle this call drove.
+  function driveAutoAlly(g) {
+    var scene = null, cmdMenu = false, guard = 0;
+    while (guard++ < 30000) {
+      if (g.scenes.top instanceof BattleScene) {
+        var b = g.scenes.top;
+        if (!scene) scene = b;
+        if (g.ui.menuOpen) {
+          var m = g.ui.menu;
+          if (m.kind === 'commands' || m.title === 'Choose a move') { cmdMenu = true; tk(g, 3); }
+          else if (m.title === 'Choose next Pokemon') {
+            var pi = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1 && it.value !== null; });
+            g.ui.debugChoose(pi >= 0 ? pi : 0); tk(g, 3);
+          } else { tk(g, 3); }
+        } else { pA(g); tk(g, 3); }
+        continue;
+      }
+      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { pA(g); continue; }
+      break;
+    }
+    return { scene: scene, cmdMenu: cmdMenu };
+  }
+  function climbToBrandon(g, ow) {
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    return ow.map.npcs.find(function (n) { return n.frontierBrain === 'pyramid'; });
+  }
+  {
+    var g = mkGame(7247); boot(g);
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    var st = g.state;
+    // Fixture for a guaranteed canon LOSS: the entered team is three
+    // frail Abra whose ONLY move is Explosion. Under autoAlly the
+    // spirit immolates them one by one against the Regis' walls
+    // (an Abra's Explosion dents a Regi for ~20-40 HP) — the team
+    // wipes with all three Regis standing, no foe cooperation
+    // needed. (A merely-passive team does NOT lose this battle:
+    // the Regis carry Explosion in their own kits and suicide
+    // against anything bulky enough to survive the blast.)
+    st.party = [
+      mkM(g, 'abra', 100, ['explosion']),
+      mkM(g, 'abra', 100, ['explosion']),
+      mkM(g, 'abra', 100, ['explosion']),
+      mkM(g, 'partner', 100, ['thunderbolt', 'quickattack', 'slam', 'thunderwave']),
+    ];
+    st.frontier.records.pyramid.runs = 2; // seeded: this entry is climb 3 (Silver due)
+    talkFrontier(g, ow, 'pyramid'); enterRun(g);
+    var run = st.frontier.run;
+    var team = st.party.slice(0, 3);
+    var brandon = climbToBrandon(g, ow);
+    ow.sysNpc(brandon); tk(g, 3);
+    var pv = driveAutoAlly(g);
+    drain(g);
+    ok('D32a the POSSESSED battle launches first at due-Silver: autoAlly facility battle (zero command input — no command/move menu ever opens), Brandon\\'s Regi trio at foeLevel + 10 (110), possessed trainer id',
+      !!pv.scene && pv.scene.facility.autoAlly === true && pv.cmdMenu === false
+      && pv.scene.trainer.id === 'frontier-brain-pyramid-possessed'
+      && pv.scene.trainer.team.every(function (t) { return t.level === 110; }),
+      'scene=' + (pv.scene && pv.scene.trainer.id) + ' cmdMenu=' + pv.cmdMenu);
+    ok('D32b canon LOSS branch: brandon_possessed_faced set, possession_broken NOT set, NO symbol, the run stays OPEN with Brandon still standing, and the team is tended back to full (the scene\\'s heal)',
+      st.story.flags.brandon_possessed_faced === true && !st.story.flags.brandon_possession_broken
+      && slotOf(g, 'pyramid') === null && !!st.frontier.run && st.frontier.run.facility === 'pyramid'
+      && team.every(function (m) { return m.hp === m.maxHp; })
+      && !!ow.map.npcs.find(function (n) { return n.frontierBrain === 'pyramid'; }));
+  }
+  {
+    // The re-challenge after the canon loss (fresh game; the faced
+    // flag is fixture-seeded exactly as D32b leaves it — the same
+    // seeding idiom as records.runs): Brandon must greet the player
+    // with the rematch voice and fight the PLAIN F2 battle.
+    var g = mkGame(7246); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    var st = g.state;
+    st.story.flags.brandon_possessed_faced = true; // D32b's outcome, seeded
+    st.frontier.records.pyramid.runs = 2; // seeded: this entry is climb 3 (Silver due)
+    talkFrontier(g, ow, 'pyramid'); enterRun(g);
+    var brandon = climbToBrandon(g, ow);
+    ow.sysNpc(brandon); tk(g, 3);
+    var reLines = [], guardR = 0, plainScene = null;
+    while (guardR++ < 400) {
+      if (g.ui.dlg && g.ui.dlg.lines) g.ui.dlg.lines.forEach(function (l) { if (!reLines.includes(l)) reLines.push(l); });
+      if (g.scenes.top instanceof BattleScene) { plainScene = g.scenes.top; break; }
+      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { pA(g); continue; }
+      break;
+    }
+    var plainAuto = plainScene && plainScene.facility.autoAlly;
+    var plainLevels = plainScene && plainScene.trainer.team.map(function (t) { return t.level; }).join(',');
+    if (plainScene) driveBattle(g);
+    drain(g);
+    ok('D32c the re-challenge is the PLAIN F2 battle, available immediately: rematch voice ("This time I battle YOU."), NOT autoAlly, Regis at foeLevel (100) — and the win awards SILVER through the shared helper, run closed',
+      reLines.some(function (l) { return l.indexOf('This time I battle YOU.') >= 0; })
+      && !!plainScene && !plainAuto && plainLevels === '100,100,100'
+      && slotOf(g, 'pyramid') === 'silver' && st.frontier.run === null && !st.story.flags.brandon_possession_broken,
+      'levels=' + plainLevels + ' slot=' + slotOf(g, 'pyramid'));
+  }
+  {
+    // The upset, TRUE-PATH (seed 7305): the entered team is built
+    // from typed counters with authored moves — Seismic Toss (fixed
+    // level damage through the Regis' walls) + Earthquake / Fire
+    // coverage — and the game's OWN autoAlly (uniform-random move
+    // choice, the non-smart aiActionFor path) wins at +10 with zero
+    // command input. No margin change, no AI change: in development
+    // this construction won on 24/24 sampled seeds.
+    var g = mkGame(7305); boot(g);
+    var st = g.state;
+    st.party = [
+      mkM(g, 'machamp', 100, ['seismictoss', 'earthquake', 'submission', 'karatechop']),
+      mkM(g, 'dragonite', 100, ['earthquake', 'fireblast', 'seismictoss', 'flamethrower']),
+      mkM(g, 'mewtwo', 100, ['psychic', 'fireblast', 'seismictoss', 'earthquake']),
+      mkM(g, 'partner', 100, ['thunderbolt', 'quickattack', 'slam', 'thunderwave']),
+    ];
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    st.frontier.records.pyramid.runs = 2; // seeded: climb 3 (Silver due)
+    talkFrontier(g, ow, 'pyramid'); enterRun(g);
+    var brandon = climbToBrandon(g, ow);
+    ow.sysNpc(brandon); tk(g, 3);
+    var pv = driveAutoAlly(g);
+    drain(g);
+    ok('D33 the UPSET win (true-path): the spirit\\'s battle is autoAlly at +10 with zero command input — and the bond breaks it: brandon_possessed_faced AND brandon_possession_broken set, SILVER awarded via the shared helper, other slots null, run closed in triumph',
+      !!pv.scene && pv.scene.facility.autoAlly === true && pv.cmdMenu === false
+      && st.story.flags.brandon_possessed_faced === true && st.story.flags.brandon_possession_broken === true
+      && slotOf(g, 'pyramid') === 'silver' && st.frontier.run === null
+      && FAC_IDS.every(function (id) { return id === 'pyramid' || slotOf(g, id) === null; }),
+      'slot=' + slotOf(g, 'pyramid') + ' broken=' + st.story.flags.brandon_possession_broken);
+  }
+
+  // ---------- D34-D35: Scott states + the quest-log Frontier section (F3) ----------
+  {
+    var g = mkGame(7248); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontierhub', 18, 20); drain(g);
+    var st = g.state;
+    var scott = ow.map.npcs.find(function (n) { return n.name === 'SCOTT'; });
+    function talkScott() {
+      var lines = [], guard = 0;
+      ow.sysNpc(scott); tk(g, 3);
+      while (guard++ < 80) {
+        if (g.ui.dlg && g.ui.dlg.lines) g.ui.dlg.lines.forEach(function (l) { if (!lines.includes(l)) lines.push(l); });
+        if (!g.ui.dialogueOpen) break;
+        pA(g);
+      }
+      drain(g);
+      return lines.join(' | ');
+    }
+    var sA = talkScott();
+    st.badges.symbols = ['silver', 'silver', null, null, null, null, null];
+    var sB = talkScott();
+    st.badges.symbols = ['silver', 'silver', 'silver', 'silver', 'silver', 'silver', 'silver'];
+    var sC = talkScott();
+    st.badges.symbols = ['gold', 'gold', 'gold', 'gold', 'gold', 'gold', 'gold'];
+    st.story.flags.frontier_complete = true;
+    var sD = talkScott();
+    ok('D34 Scott, deepened: four symbol-state talks give four state-correct voices — (a) first arrival (seven facilities, seven Brains), (b) some silver/no gold (names the count 2 of seven, pushes the Gold standard), (c) all seven silver (the Gold push, Brandon named the last word), (d) frontier_complete (the salute)',
+      sA.indexOf('Seven facilities, seven Frontier Brains') >= 0
+      && sB.indexOf('2 of seven Symbols') >= 0 && sB.indexOf('gold, trainer, is the standard') >= 0
+      && sC.indexOf('Seven Symbols.') >= 0 && sC.indexOf('Brandon is the last word') >= 0
+      && sD.indexOf('all of them gold') >= 0 && sD.indexOf('The Frontier salutes you') >= 0,
+      'A=' + sA.slice(0, 60) + ' B=' + sB.slice(0, 60) + ' C=' + sC.slice(0, 60) + ' D=' + sD.slice(0, 60));
+  }
+  {
+    var g = mkGame(7249); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'pallet', 7, 9); drain(g);
+    var st = g.state;
+    st.badges.symbols = ['gold', 'silver', null, null, null, null, null];
+    st.story.flags.hook_frontier = true;
+    g.openQuestLog(); tk(g, 2);
+    var labels = g.ui.menu.items.map(function (i) { return i.label; });
+    var joined = labels.join(' | ');
+    var ci = g.ui.menu.items.findIndex(function (it) { return it.value === 'close'; });
+    if (ci >= 0) { g.ui.debugChoose(ci); tk(g, 2); }
+    st.badges.symbols = [null, null, null, null, null, null, null];
+    delete st.story.flags.hook_frontier;
+    g.openQuestLog(); tk(g, 2);
+    var labels2 = g.ui.menu.items.map(function (i) { return i.label; }).join(' | ');
+    ok('D35 quest log Frontier section: with the Frontier reached, the section renders one informational row per facility from badges.symbols — Tower/GOLD, Factory/SILVER, the unearned rows at — (Arena Greta, Pyramid Brandon by name); with no hook, no crossing and no symbols it does not render',
+      joined.indexOf('— BATTLE FRONTIER —') >= 0
+      && joined.indexOf('Battle Tower — Anabel — GOLD') >= 0
+      && joined.indexOf('Battle Factory — Noland — SILVER') >= 0
+      && joined.indexOf('Battle Arena — Greta — —') >= 0
+      && joined.indexOf('Battle Pyramid — Brandon — —') >= 0
+      && labels2.indexOf('BATTLE FRONTIER') < 0,
+      joined.slice(0, 200));
   }
 
   globalThis.__FRD__ = Q;

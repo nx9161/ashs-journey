@@ -123,11 +123,11 @@ export const FACILITIES = {
   tower: {
     id: 'tower', name: 'Battle Tower', brain: 'Anabel', brainTitle: 'Salon Maiden',
     setSize: 7, healBetween: true,
-    intro: 'Seven straight wins make a set at the Tower. No tricks, no mercy rounds — just trainers, one after another.',
+    intro: 'Seven straight wins make a set at the Tower. No tricks, no mercy rounds — just trainers, one after another. At a set\'s end you may rest and resume later: the streak waits where you left it.',
     pools: ['alakazam', 'gengar', 'snorlax', 'lapras', 'dragonite', 'machamp', 'arcanine', 'gyarados', 'venusaur', 'charizard', 'blastoise', 'jolteon', 'aerodactyl', 'tauros'],
     title: 'Tower Adept',
     names: ['MIRA', 'OSLO', 'PETRA', 'JUNO', 'CASPIAN', 'VERA', 'HUGO', 'LENA', 'ORIN', 'TAMSIN'],
-    brainIntro: ['So the streak brings you to me at last. I am Anabel — I read a battle the way you read a letter, all at once.', 'Show me the page you are proudest of.'],
+    brainIntro: ['So the streak brings you to me at last. I am Anabel — I read a battle the way you read a letter, all at once, every turn counted before it is taken.', 'Show me the page you are proudest of. I will be reading for the one move you did not plan.'],
     brainLose: ['...Ah. I saw the ending a breath too late. The Ability Symbol is yours — you earned every line of it.'],
   },
   factory: {
@@ -153,7 +153,7 @@ export const FACILITIES = {
   dome: {
     id: 'dome', name: 'Battle Dome', brain: 'Tucker', brainTitle: 'Dome Ace',
     setSize: 0, healBetween: true,
-    intro: 'Sixteen entrants, one bracket, no second chances. Win four matches and the Dome is yours — the crowd does the rest.',
+    intro: 'Sixteen entrants, one bracket, no second chances. Win four matches and the Dome is yours — the crowd does the rest. The matches you are not in are decided off-screen, and the desk calls every result by name.',
     pools: ['swampert', 'charizard', 'salamence', 'metagross', 'flygon', 'altaria', 'aggron', 'walrein', 'camerupt', 'sceptile', 'blaziken', 'gardevoir', 'milotic', 'kingdra'],
     title: 'Dome Contender',
     names: ['ASHFORD', 'BLAZE', 'COMET', 'DARIO', 'EMBER', 'FLINT', 'GLORIA', 'HAIL', 'IRIS', 'JET', 'KARMA', 'LOTUS', 'MAGNUM', 'NOVA', 'ONYX'],
@@ -163,7 +163,7 @@ export const FACILITIES = {
   pike: {
     id: 'pike', name: 'Battle Pike', brain: 'Lucy', brainTitle: 'Pike Queen',
     setSize: 0, healBetween: false,
-    intro: 'Seven chambers, three doors each, and every door already knows what is behind it. Luck is just information you have not earned yet.',
+    intro: 'Seven chambers, three doors each, and every door already knows what is behind it. Luck is just information you have not earned yet. And there is no free healing inside — only what the doors themselves offer.',
     pools: ['seviper', 'arbok', 'weezing', 'muk', 'crobat', 'tentacruel', 'gengar', 'shuckle', 'dunsparce', 'qwilfish', 'roselia', 'dustox', 'banette', 'ariados'],
     title: 'Pike Delver',
     names: ['MOSS', 'QUILL', 'RUE', 'THISTLE', 'UMBRA', 'VIPER', 'WREN', 'YEW'],
@@ -173,22 +173,26 @@ export const FACILITIES = {
   palace: {
     id: 'palace', name: 'Battle Palace', brain: 'Spencer', brainTitle: 'Palace Maven',
     setSize: 7, healBetween: true,
-    intro: 'At the Palace you do not call a single move. Your partners choose for themselves — you find out what kind of team you really raised.',
+    intro: 'At the Palace your Pokémon choose their own moves — you are the heart, not the hand. You call nothing; you simply learn what kind of team you really raised.',
     pools: ['crobat', 'slaking', 'lapras', 'arcanine', 'exeggutor', 'slowbro', 'starmie', 'gardevoir', 'altaria', 'tropius', 'grumpig', 'xatu', 'noctowl', 'togetic'],
     title: 'Palace Guest',
     names: ['ALDER', 'BRIAR', 'CEDAR', 'DAPHNE', 'ELDER', 'FENNEL', 'GROVE', 'HAZEL', 'IRVING', 'LAUREL'],
-    brainIntro: ['Spencer. Here, trainer, we both simply watch — the partners decide, as they should. May yours speak well of you.'],
+    brainIntro: ['Spencer. Rest a moment in the garden quiet, trainer. Here we both simply watch — the partners decide, as they should, the way a river decides its course. May yours speak well of you.'],
     brainLose: ['Your partners chose beautifully. They trust their own hearts because you trusted them first. The Spirit Symbol is yours.'],
   },
   pyramid: {
     id: 'pyramid', name: 'Battle Pyramid', brain: 'Brandon', brainTitle: 'Pyramid King',
     setSize: 0, healBetween: false,
-    intro: 'Seven floors up through the dark. No free healing, no shop, no way back but through — only what the mountain lets you carry in the Pyramid Bag.',
+    intro: 'Seven floors up through the dark. No free healing, no shop, no way back but through — only what the mountain lets you carry in the Pyramid Bag. And the Bag empties when the climb ends, so spend what you find while the mountain lets you.',
     pools: ['golbat', 'graveler', 'onix', 'steelix', 'claydol', 'nosepass', 'solrock', 'lunatone', 'geodude', 'rhyhorn', 'phanpy', 'larvitar', 'aron', 'baltoy'],
     title: 'Pyramid Delver',
     names: ['BASALT', 'CINDER', 'DELTA', 'EMBER', 'FLINT', 'GRANITE', 'OCHRE', 'SLATE'],
     brainIntro: ['Seven floors of dark, and you climbed them all to stand in my light. I am Brandon. The mountain vouches for you — now convince ME.'],
     brainLose: ['HA! The mountain bows, and so do I. The Brave Symbol, climber — carved out of this old hill by your own two hands, near enough.'],
+    // F3: spoken instead of brainIntro whenever brandon_possessed_faced
+    // is set — the silver re-challenge after the canon loss, and the
+    // Gold finale. The first meeting is never repeated.
+    brainRematchIntro: ['Your stance is your own again — I can see it from here, climber. Good. The stone sleeps, and so does its king.', 'This time I battle YOU. My Regis, the mountain, and no ghosts between us. Climb into it.'],
   },
 };
 
@@ -220,6 +224,31 @@ export const BRAIN_TEAMS = {
     silver: [{ species: 'crobat' }, { species: 'slaking' }, { species: 'lapras', keepsake: 'gardeniasash' }],
     gold: [{ species: 'crobat' }, { species: 'arcanine' }, { species: 'slaking', keepsake: 'secondwindribbon' }],
   },
+  // BRANDON — the Pyramid King, and the Brandon mechanism
+  // (RECORDED DECISION, Stage F3): the FIRST time the player reaches
+  // Brandon with Silver due (slot null, climb 3, floor 7), the plain
+  // milestone battle does NOT fire. What fires is the POSSESSED
+  // battle, staged in game/frontier.mjs (startPossessedBrandon):
+  // the sealed stone of the King of Pokélantis in Brandon's chamber
+  // stirs, the spirit takes the player's voice and stance, and
+  // Brandon accepts its challenge. The battle is the player's REAL
+  // entered team under facility autoAlly — the Palace mechanism, the
+  // spirit choosing every move; that is the honest engine truth of
+  // the possession, not a rigged outcome (the forced send-out after
+  // a faint stays player-chosen, the Palace adaptation) — against
+  // this silver Regi trio at foeLevel + 10, a margin Brandon speaks
+  // aloud in the pre-scene. Completion is FACED (the Harrison
+  // predicate): a LOSS (the canon path) breaks the possession —
+  // Brandon and the keeper drive the spirit back into the stone,
+  // brandon_possessed_faced is set, NO symbol is awarded, the team
+  // is tended inside the scene, the run stays OPEN with Brandon
+  // still standing, and the plain player-controlled Silver battle
+  // is re-challengeable immediately by talking to him again. An
+  // upset WIN sets brandon_possessed_faced AND
+  // brandon_possession_broken and awards SILVER through the shared
+  // awardSymbol helper. The GOLD battle (and any later audience)
+  // is never possessed: with the faced flag set, Brandon's
+  // brainRematchIntro plays instead ("This time I battle YOU.").
   pyramid: {
     silver: [{ species: 'regirock' }, { species: 'registeel' }, { species: 'regice', keepsake: 'spectrebell' }],
     gold: [{ species: 'registeel', keepsake: 'ironacorn' }, { species: 'regirock', keepsake: 'fossilspur' }, { species: 'regice', keepsake: 'spectrebell' }],

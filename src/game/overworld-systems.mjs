@@ -18,7 +18,7 @@ import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './s
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { ContestScene, hasRibbon } from './contest.mjs';
-import { startFrontier, startBrainAudience, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
+import { startFrontier, startBrainAudience, talkFrontierScott, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
 import { PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
 import { RIBBON_NAMES } from '../data/contest.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
@@ -1162,6 +1162,13 @@ Object.assign(OverworldScene.prototype, {
     // controller lives in game/frontier.mjs (startFrontier et al).
     if (npc.frontier) { startFrontier(g, npc.frontier, this); return true; }
     if (npc.frontierBrain) { startBrainAudience(g, npc.frontierBrain, this); return true; }
+    // Stage F3: the frontierhub Scott's lines are keyed on the symbol
+    // state (counts over badges.symbols), which dialogueStates'
+    // flag/flagNot keys cannot express — his talk-branch lives in the
+    // Frontier controller (the name-keyed SPACE RESEARCHER precedent;
+    // the Hoenn Scott is a different actor and never reaches here,
+    // his hoenn: key dispatches above).
+    if (npc.name === 'SCOTT' && this.mapId === 'frontierhub') { talkFrontierScott(g, this); return true; }
     if (npc.slots) { sayLines(() => this.openSlots()); return true; }
     if (npc.prize) {
       sayLines(() => {

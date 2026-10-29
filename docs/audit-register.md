@@ -10583,3 +10583,131 @@ server-side under the raised bag cap).
   byte-stable (build ×2, same sha256 8002a41f…); public static
   total 10,078,774 B vs the 10,100,000 B trigger (margin
   21,226 B). `personal/` byte-identical; dist/ restored.
+
+## Arc 3.5 Stage F3 — Battle Frontier: story spine + Brandon two-stage (2026-10-29)
+
+- Scope: the Frontier's story layer on the shipped F2 drivers —
+  Scott deepened, desk rules audited, Brain voices, the Brandon
+  possession two-stage at the F2c F3 hook, the quest-log Frontier
+  section — plus one coordinator-ruled F2 fidelity fix. Two
+  commits: F3a `561144d` (the Arena fix, separable) and F3b (this
+  commit, everything else).
+- **Arena fidelity fix (F3a, SUPERSESSION of an F2 adaptation,
+  coordinator-ruled):** generated Arena foe teams field THREE
+  mons, not one (`launchSetBattle` passes teamSize 3 for every set
+  facility; Brains already fielded 3). Reason: the F2 judge's Body
+  category reads whole-team HP fractions exactly as Emerald does;
+  a 1-mon foe conceded Body almost every time — its only mon
+  absorbs all damage while the player's bench stays untouched —
+  so the variant's core mechanic was skewed. The F2 data note
+  recording the 1-mon adaptation is replaced in place with this
+  supersession. The re-proof SURFACED A LATENT JUDGE BUG, fixed in
+  the same commit: `facilityTeamStats` read `this.foeIndex`, a
+  field that never exists (the field is `trainerIdx`), so the
+  active foe — and every fainted foe — always counted at FULL HP
+  and the foe's Body score never moved; with 1-mon foes the two
+  errors cancelled often enough to stay invisible. Drives:
+  D16/D17/D19 re-proven unchanged against 3-mon foes, D18's judged
+  loss rebuilt (all entered allies Splash-fixtured so a lead faint
+  cannot hand the bout to a real kit), and new D18B — a Body case
+  that flips under the old shape: a 3-mon foe worn to 30% on its
+  active mon with a full bench reads hpFrac ≈ 0.767 → Body 2,
+  where the old 1-mon reading of the same battle scores 1; the
+  card goes to the challenger 7–6.
+- **Scott, deepened:** his hub lines are keyed on the SYMBOL STATE
+  in `frontierScottLines` (game/frontier.mjs), dispatched from
+  sysNpc for the frontierhub Scott (the name-keyed SPACE
+  RESEARCHER ORBIT precedent; the Hoenn Scott is a different actor
+  and never reaches the branch). `dialogueStates`' flag/flagNot
+  keys operate on story.flags and cannot express symbol COUNTS,
+  so — per the brief — the smallest honest route is this
+  talk-branch in the Frontier controller, no new engine mechanism.
+  Four states, original writing: (a) no symbols — the F1 welcome
+  verbatim (seven facilities, seven Brains); (b) some symbols,
+  not all — names the earned count with its silver/gold split and
+  pushes the Gold standard; (c) all seven earned — silver was the
+  introduction, gold is the argument, and Brandon is named the
+  last word on the island; (d) `frontier_complete` — his salute.
+  D34 talks all four states in the bundle and asserts the
+  state-correct lines.
+- **Desk rules audit (per facility):** Factory (rentals + the
+  winner's swap) and Arena (three-turn judging, tie goes against
+  the challenger) already covered their rules and adaptations in
+  F2's shipped intros — left untouched. Completed where thin:
+  Tower (the streak suspends — "the streak waits where you left
+  it"), Dome (off-screen matches decided and called by name),
+  Pike (no free healing inside — only what the doors offer),
+  Palace (rewritten around the adaptation a player feels: "your
+  Pokémon choose their own moves — you are the heart, not the
+  hand"), Pyramid (the Bag empties when the climb ends). All in
+  the desk's first-talk line, F2's shipped interaction shape.
+- **Brain voices:** Anabel (calm precision) and Brandon's intro
+  already read distinct — Anabel sharpened one notch (the planned
+  move she reads for), the rest left. Deepened: Greta (a judge's
+  verdict register), Tucker (the showman counting the house),
+  Lucy (quiet menace, a promise the poison keeps), Spencer
+  (serene, the river decides its course), Brandon's lose
+  (monumental weight). Same 1–2 line length class throughout.
+- **Brandon two-stage (the centrepiece):** the first due-Silver
+  audience (slot null, the qualifying climb,
+  `brandon_possessed_faced` unset) fires the POSSESSED battle
+  from `startBrainAudience` instead of the plain milestone:
+  pre-scene (the sealed stone of the King of Pokélantis stirs in
+  Brandon's chamber; the spirit takes the player's voice and
+  stance; Brandon accepts its challenge, naming the +10 margin
+  aloud), then the player's REAL entered team under facility
+  `autoAlly` — the Palace mechanism, the spirit choosing every
+  move — against the silver Regi trio at foeLevel + 10. FACED
+  discipline in the battle's onEnd: a LOSS (canon) breaks the
+  possession in the post-scene (Brandon + the keeper drive the
+  spirit back into the stone), sets `brandon_possessed_faced`,
+  awards NO symbol, tends the team inside the scene, and leaves
+  the run OPEN with Brandon standing — the milestone is NOT
+  consumed (`run.brandonFaced` stays unset), so the plain
+  player-controlled Silver battle is re-challengeable
+  immediately. An upset WIN sets `brandon_possessed_faced` AND
+  `brandon_possession_broken` and awards SILVER through the
+  shared `awardSymbol` helper (Brandon names it: the bond broke
+  the spirit mid-battle). Once faced, Brandon's audiences use
+  `brainRematchIntro` ("This time I battle YOU.") — the silver
+  re-challenge and the Gold finale alike; Gold is never
+  possessed. The full record (mechanism, margin, both branches,
+  why autoAlly is honest) is written at Brandon's def in
+  data/frontier.mjs, Harrison format. Both flags live in
+  `story.flags`, the open map — no state-shape change (validator
+  89 + save-contract 12/12 unmoved).
+- **Quest log — Frontier section:** `openQuestLog` gains Section
+  1.9 after the Johto section, in its idiom (band header + one
+  row per facility from `FACILITY_IDS`), rendered once the
+  Frontier is reached (`hook_frontier || reachedarc_frontier ||
+  arc === 'frontier' || any symbol`). Rows read `badges.symbols`
+  directly — facility + Brain name, state word — / SILVER /
+  GOLD — and are INFORMATIONAL (no quest flags), said so in the
+  code comment; picking a row speaks the facility, its Brain and
+  title, and the symbol state, then reopens the log.
+- Tests (frontier-checks 113 → **120**): D18B (above), D32a the
+  possessed launch (autoAlly, zero command input — no command or
+  move menu ever opens — Regis at 110), D32b the canon loss
+  (fixture: three Explosion-only Abra — the spirit immolates the
+  team against the Regis' walls; a merely passive team does NOT
+  lose this battle, the Regis carry Explosion and suicide
+  against bulk), D32c the plain re-challenge with the rematch
+  voice awarding silver, D33 the upset as a TRUE-PATH drive
+  (entered Machamp/Dragonite/Mewtwo with Seismic Toss +
+  Earthquake/Fire coverage; the game's own uniform-random
+  autoAlly wins at +10 with zero command input — in development
+  this construction won on 24/24 sampled seeds; no margin or AI
+  change), D34 Scott's four states, D35 the quest-log section
+  (fixture symbols [gold, silver, null…] render the right state
+  words; unrendered when unreached).
+- Battery (this tree): frontier-checks **120/120**;
+  qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**
+  (HARD); campaign-smoke **24/24**; arc-foundation **47/47**;
+  hoenn-story **88/88**; johto-story **110/110**; cheat-shop
+  **44/44**; validator **89** + fuzz **2000/2000** +
+  save-contract **12/12**. **public/game.js: 9,928,850 B**,
+  byte-stable (build ×2, same sha256 74bec4d9…); public static
+  total **10,091,472 B** vs the 10,100,000 B Hoenn-close
+  measurement trigger — NOT crossed (margin 8,528 B); the
+  binding 12.58 MB gate holds with ~2.49 MB to spare.
+  `personal/` byte-identical; dist/ restored.
