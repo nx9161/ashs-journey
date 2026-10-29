@@ -2,7 +2,7 @@
 // Load order (module-order.json) guarantees the sources exist first.
 Object.assign(SPECIES, SPECIES2);
 Object.assign(MOVES, MOVES2);
-Object.assign(MAPS, MAPS2, MAPS3, MAPS4);
+Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5);
 Object.assign(TRAINERS, TRAINERS3, TRAINERS4);
 // Story patch (fidelity audit): the movie invite's island landing was
 // scripted out of bounds (8,14 on a 12-row map) — land on the shore (8,9).
