@@ -193,6 +193,13 @@ export function validateData() {
     const { SPECIES } = await import(path.join(SRC, 'data', 'species.mjs'));
     const { MOVES } = await import(path.join(SRC, 'data', 'moves.mjs'));
     const { ITEMS } = await import(path.join(SRC, 'data', 'items.mjs'));
+    const { ARCS } = await import(path.join(SRC, 'data', 'arcs.mjs'));
+    // Stage J0 touchpoint fix: authored trainer levels are bounded by
+    // the widest FINITE band in the ARCS registry (trainer data is
+    // authored content spanning every arc, not one save's band) —
+    // a registry read, not the old hard-coded 100 that would have
+    // failed the build the day a Johto trainer (Lv 101-200) landed.
+    const MAX_AUTHORED_LEVEL = Math.max(...ARCS.filter((a) => a.band).map((a) => a.band.max));
 
     // Map row lengths consistent
     for (const [id, m] of Object.entries(MAPS)) {
@@ -221,7 +228,7 @@ export function validateData() {
     for (const [id, t] of Object.entries(TRAINERS)) {
       for (const mon of t.team) {
         if (!SPECIES[mon.species]) fail('trainer ' + id + ': unknown species ' + mon.species);
-        if (mon.level < 1 || mon.level > 100) fail('trainer ' + id + ': bad level');
+        if (mon.level < 1 || mon.level > MAX_AUTHORED_LEVEL) fail('trainer ' + id + ': bad level');
       }
       if (t.badge && !ITEMS[t.badge]) fail('trainer ' + id + ': unknown badge item ' + t.badge);
     }

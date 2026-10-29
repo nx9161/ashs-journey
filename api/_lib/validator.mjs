@@ -57,6 +57,13 @@ function loadTables() {
       quests: new Set(tables.quests || []),
       regions: new Set(tables.regions || ['kanto']),
       arcs: new Set(tables.arcs || []),
+      // Stage J0: per-arc band data emitted by gen-tables from
+      // src/data/arcs.mjs — arc id -> band max / paired XP ceiling.
+      // A null value is the open-level band (no cap). Absent maps
+      // (a pre-J0 tables snapshot cannot occur — the version hash
+      // pins the snapshot — but fail safe anyway) read as Kanto.
+      arcBandMax: tables.arcBandMax || {},
+      arcXpCeiling: tables.arcXpCeiling || {},
       badgeSequences: tables.badgeSequences,
       regionBadgeMax: tables.regionBadgeMax,
     };
@@ -100,16 +107,41 @@ function isSafeText(x, min, max) {
 }
 const NAME_CHARSET_NOTE = 'charset'; // error code suffix only; never echoes values
 
+// --- Stage J0: arc-band derivation (ADR-027 Amendment 2) ---
+// A save's mon level cap + XP ceiling come from the save's OWN
+// story.arc, read through the emitted band tables (gen-tables
+// evaluates the client registry's levelCapFor / xpCeilingFor per
+// arc row — the matched pair, one derivation both sides). An absent
+// story.arc is a pre-foundation save, which is a Kanto save by
+// definition (the client's deriveArcDefaults agrees); an arc id
+// outside the emitted map falls back to the same Kanto caps and is
+// rejected separately as bad-arc by checkStory. A null emitted value
+// is the open-level band: no cap (Infinity, the levelCapFor
+// convention). Min level stays 1 for every arc.
+const DEFAULT_ARC_ID = 'kanto';
+function arcCapsFor(story) {
+  const arcId = isPlainObj(story) && typeof story.arc === 'string'
+    && Object.prototype.hasOwnProperty.call(TABLES.arcBandMax, story.arc)
+    ? story.arc : DEFAULT_ARC_ID;
+  const cap = TABLES.arcBandMax[arcId];
+  const xpCeiling = TABLES.arcXpCeiling[arcId];
+  return {
+    arcId,
+    levelCap: typeof cap === 'number' ? cap : Infinity,
+    xpCeiling: typeof xpCeiling === 'number' ? xpCeiling : Infinity,
+  };
+}
+
 // --- section validators (each pushes codes, never values) ---
-function checkMon(m, errors, depth) {
+function checkMon(m, errors, depth, caps) {
   if (depth > MAX_DEPTH) return errors.push('depth');
   if (!isPlainObj(m)) return errors.push('bad-mon');
   const dk = hasDangerousKey(m);
   if (dk) return errors.push('dangerous-key:' + dk);
   if (!TABLES.species.has(m.speciesId)) errors.push('bad-species');
   if (!(m.nickname === null || isSafeText(m.nickname, 1, 12))) errors.push('bad-nickname:' + NAME_CHARSET_NOTE);
-  if (!isInt(m.level, 1, 100)) errors.push('bad-mon-level');
-  if (typeof m.xp !== 'number' || !Number.isFinite(m.xp) || m.xp < 0 || m.xp > 2000000) errors.push('bad-xp');
+  if (!isInt(m.level, 1, caps.levelCap)) errors.push('bad-mon-level');
+  if (typeof m.xp !== 'number' || !Number.isFinite(m.xp) || m.xp < 0 || m.xp > caps.xpCeiling) errors.push('bad-xp');
   if (!Array.isArray(m.moves) || m.moves.length > 4) errors.push('bad-mon-moves');
   else for (const mv of m.moves) {
     if (!isPlainObj(mv) || !TABLES.moves.has(mv.id)) { errors.push('bad-move'); break; }
@@ -315,6 +347,10 @@ function checkStory(story, errors) {
   // the client normalizer maps it the same way, so both sides agree.
   // story.priorHof (a Second Journey run's inherited teams) carries
   // the same shapes.
+  // Stage J0: HoF snapshot levels are bounded by the save-arc's band
+  // cap, exactly like party/box mons (a Johto champion's team stands
+  // at Johto levels in its own save).
+  const hofCaps = arcCapsFor(story);
   const checkHofList = (list) => {
     if (!Array.isArray(list) || list.length > 40) return false;
     for (const h of list) {
@@ -330,10 +366,10 @@ function checkStory(story, errors) {
           // so the server validates the same effective id (speciesId
           // wins when it is a string, exactly as the client resolves).
           const sid = typeof m.speciesId === 'string' ? m.speciesId : m.species;
-          if (!TABLES.species.has(sid) || !isInt(m.level, 1, 100)) return false;
+          if (!TABLES.species.has(sid) || !isInt(m.level, 1, hofCaps.levelCap)) return false;
           if (!(m.nickname === undefined || m.nickname === null || isSafeText(m.nickname, 1, 12))) return false;
         }
-      } else if (!(typeof h.species === 'string' && h.species.length >= 1 && h.species.length <= 40 && isInt(h.level, 1, 100))) {
+      } else if (!(typeof h.species === 'string' && h.species.length >= 1 && h.species.length <= 40 && isInt(h.level, 1, hofCaps.levelCap))) {
         return false;
       }
     }
@@ -359,9 +395,11 @@ function checkStory(story, errors) {
   // directive's target are closed-vocabulary registry ids (emitted by
   // gen-tables from src/data/arcs.mjs, so client and cloud cannot
   // drift); the arc-start snapshots are bounded counters. Absent =
-  // pre-foundation save (the client derives them on load); the mon
-  // level bounds stay 1..100 in this stage — bands above 100 arrive
-  // with the first arc whose band needs them, registry-driven then.
+  // pre-foundation save (the client derives them on load). Stage J0:
+  // the mon level bounds are now band reads off this same field —
+  // arcCapsFor above selects the cap from the emitted per-arc band
+  // max (Kanto/Orange 100, Johto 200, later arcs per the registry);
+  // min stays 1.
   if (story.arc !== undefined && !(TABLES.arcs && TABLES.arcs.has(story.arc))) errors.push('bad-arc');
   if (story.arc_directive !== undefined && story.arc_directive !== null
     && !(TABLES.arcs && TABLES.arcs.has(story.arc_directive))) errors.push('bad-arc-directive');
@@ -404,7 +442,12 @@ function detectAnomalies(data, summary, anomalies) {
   }
   if (summary.dexCaught > TABLES.species.size) anomalies.push('dex-exceeds-tables');
   if (totalBadges === 20 && data.story.chapter < 3) anomalies.push('all-badges-early-chapter');
-  if (data.party.length > 0 && data.party.every((m) => m.level === 100) && playtime < 3600) {
+  // Stage J0: cap-relative — a party entirely at the SAVE-ARC's band
+  // cap (100 in Kanto, 200 in Johto), not a hard-coded 100. An
+  // open-level arc's cap is Infinity, which no mon level equals, so
+  // the heuristic simply never fires there.
+  const caps = arcCapsFor(data.story);
+  if (data.party.length > 0 && data.party.every((m) => m.level === caps.levelCap) && playtime < 3600) {
     anomalies.push('maxed-party-low-playtime');
   }
 }
@@ -439,9 +482,13 @@ export function validateSave(data) {
     summary.playtimeSec = pl.playtimeSec;
   }
 
+  // Stage J0: one band derivation for every mon in this save,
+  // selected by the save's own story.arc.
+  const caps = arcCapsFor(data.story);
+
   // party
   if (!Array.isArray(data.party) || data.party.length > 6) errors.push('bad-party');
-  else for (const m of data.party) { checkMon(m, errors, 2); if (errors.length > 24) break; }
+  else for (const m of data.party) { checkMon(m, errors, 2, caps); if (errors.length > 24) break; }
 
   // boxes
   const bx = data.boxes;
@@ -456,7 +503,7 @@ export function validateSave(data) {
       for (const m of arr) {
         if (!isPlainObj(m) || hasDangerousKey(m)) { errors.push('bad-boxmon'); break; }
         if (!TABLES.species.has(m.speciesId)) { errors.push('bad-species'); break; }
-        if (!isInt(m.level, 1, 100)) { errors.push('bad-mon-level'); break; }
+        if (!isInt(m.level, 1, caps.levelCap)) { errors.push('bad-mon-level'); break; }
         if (!(m.nickname === undefined || m.nickname === null || isSafeText(m.nickname, 1, 12))) { errors.push('bad-nickname:' + NAME_CHARSET_NOTE); break; }
         if (!(m.keepsake === undefined || m.keepsake === null || (typeof m.keepsake === 'string' && TABLES.keepsakes.has(m.keepsake)))) { errors.push('bad-keepsake'); break; }
         if (!Array.isArray(m.moves) || m.moves.length > 4 || m.moves.some((mv) => !isPlainObj(mv) || !TABLES.moves.has(mv.id))) { errors.push('bad-move'); break; }

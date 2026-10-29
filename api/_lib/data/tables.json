@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "a91f441a3f04250935954604d616ac53e10b88201c6c1abc6eb1fd02fc5dddd3",
+  "tablesVersion": "60fc23ecb7fe917a758cfcb51e692a361844e9bca14cc975ef40a69ae1f63e69",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -797,6 +797,32 @@
     "journeys",
     "horizons"
   ],
+  "arcBandMax": {
+    "kanto": 100,
+    "orange": 100,
+    "johto": 200,
+    "hoenn": 300,
+    "frontier": null,
+    "sinnoh": 400,
+    "unova": 500,
+    "kalos": 600,
+    "alola": 700,
+    "journeys": 800,
+    "horizons": 900
+  },
+  "arcXpCeiling": {
+    "kanto": 2575752,
+    "orange": 2575752,
+    "johto": 20301502,
+    "hoenn": 68177252,
+    "frontier": null,
+    "sinnoh": 161203002,
+    "unova": 314378752,
+    "kalos": 542704502,
+    "alola": 861180252,
+    "journeys": 1284806002,
+    "horizons": 1828581752
+  },
   "badgeSequences": {
     "kanto": [
       "boulderbadge",

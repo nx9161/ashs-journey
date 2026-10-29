@@ -3,6 +3,9 @@
 
 import { validateSave, checkNestingDepth, tablesReady, tablesStatus } from '../../api/_lib/validator.mjs';
 import { defaultState, SCHEMA_VERSION } from '../../src/game/state.mjs';
+import { validateSave as validateSaveClient } from '../../src/save/schema.mjs';
+import { xpForLevel } from '../../src/engine/formulas.mjs';
+import { xpCeilingFor } from '../../src/data/arcs.mjs';
 
 let pass = 0, fail = 0;
 function t(name, cond) {
@@ -121,6 +124,80 @@ t('accept pure legacy hof entry', okWith((s) => { s.story.hof = [{ species: 'pid
 t('reject garbage hybrid: unknown species via legacy key', bad((s) => { s.story.hof = [{ team: [{ species: 'notaspecies', level: 55 }], badges: 8 }]; }, 'bad-hof'));
 t('reject garbage hybrid: level out of bounds via legacy key', bad((s) => { s.story.hof = [{ team: [{ species: 'pidgeot', level: 101 }], badges: 8 }]; }, 'bad-hof'));
 t('reject garbage hybrid: member with no species key at all', bad((s) => { s.story.hof = [{ team: [{ level: 55 }], badges: 8 }]; }, 'bad-hof'));
+
+// 9. Stage J0 (ADR-027 Amendment 2): arc-banded level bounds + the
+// paired XP ceiling. The cap is a read of the SAVE's own story.arc:
+// Kanto/Orange share band 1-100, Johto is 101-200 (min stays 1 — a
+// Lv150 mon is legal in Johto, a Lv5 mon is equally legal there:
+// bands cap, they do not floor carried mons).
+const arcSave = (arc, mut) => {
+  const s = JSON.parse(JSON.stringify(good));
+  s.story.arc = arc;
+  if (mut) mut(s);
+  return s;
+};
+const okArc = (arc, mut) => validateSave(arcSave(arc, mut)).ok;
+const badArc = (arc, mut, code) => {
+  const rr = validateSave(arcSave(arc, mut));
+  return !rr.ok && rr.errors.some((e) => e.startsWith(code));
+};
+// (a) Lv150 mon in a Johto-arc save validates clean — party, box, HoF.
+t('J0 accept Lv150 party mon in Johto save', okArc('johto', (s) => { s.party[0].level = 150; s.party[0].xp = xpForLevel('mediumfast', 150); }));
+t('J0 accept Lv150 box mon in Johto save', okArc('johto', (s) => { s.boxes.box1[0].level = 150; }));
+t('J0 accept Lv150 HoF team in Johto save', okArc('johto', (s) => { s.story.hof = [{ team: [{ speciesId: 'pidgeot', level: 150 }], badges: 8 }]; }));
+t('J0 accept Lv200 party mon in Johto save (band cap)', okArc('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpForLevel('mediumfast', 200); }));
+t('J0 accept Lv5 party mon in Johto save (min stays 1, no band floor)', okArc('johto', (s) => { s.party[0].level = 5; s.party[0].xp = 100; }));
+// (b) Lv150 in a Kanto-arc save -> bad-mon-level (and Orange shares Kanto's band).
+t('J0 reject Lv150 party mon in Kanto save', badArc('kanto', (s) => { s.party[0].level = 150; }, 'bad-mon-level'));
+t('J0 reject Lv150 box mon in Kanto save', badArc('kanto', (s) => { s.boxes.box1[0].level = 150; }, 'bad-mon-level'));
+t('J0 reject Lv150 HoF team in Kanto save', badArc('kanto', (s) => { s.story.hof = [{ team: [{ speciesId: 'pidgeot', level: 150 }], badges: 8 }]; }, 'bad-hof'));
+t('J0 reject Lv101 party mon in Orange save (shared Kanto band)', badArc('orange', (s) => { s.party[0].level = 101; }, 'bad-mon-level'));
+// (c) Lv250 in a Johto-arc save -> bad-mon-level; Lv201 is the exact boundary.
+t('J0 reject Lv250 party mon in Johto save', badArc('johto', (s) => { s.party[0].level = 250; }, 'bad-mon-level'));
+t('J0 reject Lv201 party mon in Johto save (cap boundary)', badArc('johto', (s) => { s.party[0].level = 201; }, 'bad-mon-level'));
+// (d) Lv200 mon with max-arc XP in a Johto save -> no bad-xp. Max-arc
+// XP = the slowest curve's total at the band cap ('slow' at Lv200 =
+// 10,000,000 — above mediumfast 8.0M and mediumslow ~9.02M, both of
+// which the old flat 2,000,000 ceiling would have wrongly rejected).
+t('J0 accept Lv200 mon with slowest-curve XP in Johto save', okArc('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpForLevel('slow', 200); }));
+t('J0 accept Lv200 mon with mediumslow XP in Johto save', okArc('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpForLevel('mediumslow', 200); }));
+t('J0 accept mon at exactly the Johto XP ceiling', okArc('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpCeilingFor({ story: { arc: 'johto' } }); }));
+t('J0 reject mon one XP over the Johto ceiling', badArc('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpCeilingFor({ story: { arc: 'johto' } }) + 1; }, 'bad-xp'));
+// (e) Kanto behaviour unchanged: the Kanto ceiling is the same
+// derivation at cap 100 (2 x slow(101) = 2,575,752 — at/above the old
+// flat 2,000,000 for every legit Kanto mon, stricter nowhere legit).
+t('J0 accept Kanto Lv100 mon at slowest-curve XP', okArc('kanto', (s) => { s.party[0].level = 100; s.party[0].xp = xpForLevel('slow', 100); }));
+t('J0 reject Kanto mon one XP over the Kanto ceiling', badArc('kanto', (s) => { s.party[0].level = 100; s.party[0].xp = xpCeilingFor({ story: { arc: 'kanto' } }) + 1; }, 'bad-xp'));
+// Anti-cheat heuristic is cap-relative: whole party AT the save-arc's
+// cap with <1h playtime flags; a Johto party at 100 (not its cap)
+// does not, and the Kanto form of the heuristic is unchanged.
+t('J0 anomaly: Johto party all at cap 200, low playtime', (() => {
+  const rr = validateSave(arcSave('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpForLevel('mediumfast', 200); s.player.playtimeSec = 100; }));
+  return rr.ok && rr.anomalies.includes('maxed-party-low-playtime');
+})());
+t('J0 no anomaly: Johto party all at 100 (below its cap), low playtime', (() => {
+  const rr = validateSave(arcSave('johto', (s) => { s.party[0].level = 100; s.party[0].xp = xpForLevel('mediumfast', 100); s.player.playtimeSec = 100; }));
+  return rr.ok && !rr.anomalies.includes('maxed-party-low-playtime');
+})());
+t('J0 anomaly unchanged: Kanto party all at 100, low playtime', (() => {
+  const rr = validateSave(arcSave('kanto', (s) => { s.party[0].level = 100; s.party[0].xp = xpForLevel('mediumfast', 100); s.player.playtimeSec = 100; }));
+  return rr.ok && rr.anomalies.includes('maxed-party-low-playtime');
+})());
+// Matched pair: the CLIENT schema (src/save/schema.mjs) derives the
+// same caps from the same registry — the two validators must agree
+// on every case above that the client checks (party level/xp, HoF).
+const okClientArc = (arc, mut) => validateSaveClient(arcSave(arc, mut)).ok;
+const badClientArc = (arc, mut, code) => {
+  const rr = validateSaveClient(arcSave(arc, mut));
+  return !rr.ok && rr.errors.some((e) => e.startsWith(code));
+};
+t('J0 client accepts Lv150 party mon in Johto save', okClientArc('johto', (s) => { s.party[0].level = 150; s.party[0].xp = xpForLevel('mediumfast', 150); }));
+t('J0 client rejects Lv150 party mon in Kanto save', badClientArc('kanto', (s) => { s.party[0].level = 150; }, 'bad-mon-level'));
+t('J0 client rejects Lv250 party mon in Johto save', badClientArc('johto', (s) => { s.party[0].level = 250; }, 'bad-mon-level'));
+t('J0 client accepts Lv200 mon with slowest-curve XP in Johto save', okClientArc('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpForLevel('slow', 200); }));
+t('J0 client rejects mon one XP over the Johto ceiling', badClientArc('johto', (s) => { s.party[0].level = 200; s.party[0].xp = xpCeilingFor({ story: { arc: 'johto' } }) + 1; }, 'bad-xp'));
+t('J0 client accepts Lv180 HoF team in Johto save', okClientArc('johto', (s) => { s.story.hof = [{ team: [{ speciesId: 'pidgeot', level: 180, nickname: null }], badges: 8 }]; }));
+t('J0 client rejects Lv180 HoF team in Kanto save', badClientArc('kanto', (s) => { s.story.hof = [{ team: [{ speciesId: 'pidgeot', level: 180, nickname: null }], badges: 8 }]; }, 'bad-story-hof-entry'));
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

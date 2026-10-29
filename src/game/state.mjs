@@ -7,6 +7,7 @@
 
 import { xpForLevel } from '../engine/formulas.mjs';
 import { KEEPSAKES } from '../data/items.mjs';
+import { levelCapFor } from '../data/arcs.mjs';
 
 export const SCHEMA_VERSION = 2;
 
@@ -16,9 +17,16 @@ export const SCHEMA_VERSION = 2;
 // viewer: { team: [{ speciesId, level, nickname }], badges }. Legacy
 // entries shaped { species, level } (the shape the server validator
 // was written against before the viewer shipped) normalize into it.
-export function normalizeHofEntry(e) {
+export function normalizeHofEntry(e, cap) {
   if (!e || typeof e !== 'object' || Array.isArray(e)) return null;
-  const lvl = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.max(1, Math.min(100, Math.trunc(v))) : 1);
+  // Stage J0: the clamp ceiling is the owning save's arc band cap,
+  // passed by the save-flow callers (schema fillV2Defaults reads it
+  // via levelCapFor on the save being loaded; Second Journey
+  // inheritance reads it off the source save). A bare call with no
+  // save context keeps the historical Kanto ceiling of 100 — the
+  // only callers of that form count entries, never levels.
+  const ceil = typeof cap === 'number' && cap > 0 ? cap : 100;
+  const lvl = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.max(1, Math.min(ceil, Math.trunc(v))) : 1);
   if (Array.isArray(e.team)) {
     const team = [];
     for (const m of e.team) {
@@ -36,10 +44,10 @@ export function normalizeHofEntry(e) {
   }
   return null;
 }
-export function normalizeHofList(list) {
+export function normalizeHofList(list, cap) {
   if (!Array.isArray(list)) return [];
   const out = [];
-  for (const e of list) { const n = normalizeHofEntry(e); if (n) out.push(n); }
+  for (const e of list) { const n = normalizeHofEntry(e, cap); if (n) out.push(n); }
   return out;
 }
 // Completion detection (§6): a run has completed Kanto when ITS OWN
@@ -224,8 +232,9 @@ export function defaultState(inherit) {
     // 2. Keepsake collection: the pieces, in the pocket, from the start.
     for (const id of keepsakeCollectionOf(src)) st.bag[id] = 1;
     // 3. Prior runs' HoF teams stay viewable (this run's hof stays empty).
-    st.story.priorHof = [...normalizeHofList(src.story && src.story.hof),
-      ...normalizeHofList(src.story && src.story.priorHof)];
+    // Stage J0: clamped at the SOURCE save's band cap, not a fixed 100.
+    st.story.priorHof = [...normalizeHofList(src.story && src.story.hof, levelCapFor(src)),
+      ...normalizeHofList(src.story && src.story.priorHof, levelCapFor(src))];
     // 4. Traveler's Memory (door-keeping only). The coin case is the
     // one gate whose "pre-solved" state is a handover: it is in the
     // new run's bag from the start when the source had earned it.

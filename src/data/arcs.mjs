@@ -53,6 +53,8 @@
 //                  honest future-tense line — no playable claims)
 //   enRouteLines   the embark crossing card text (original writing)
 
+import { xpCeilingForCap } from '../engine/formulas.mjs';
+
 export const HOME_TOWN_MAP_ID = 'pallet';
 export const HOME_MAP_ID = 'house-pallet-ash'; // Mom's house interior (maps4.mjs)
 
@@ -287,6 +289,13 @@ export function currentArcOf(state) {
 export function levelCapFor(state) {
   const arc = currentArcOf(state);
   return arc.band ? arc.band.max : Infinity;
+}
+
+// Stage J0: the save-validation XP ceiling paired with levelCapFor —
+// the same derivation the server validator enforces via the tables
+// gen-tables emits from this registry (one derivation, both sides).
+export function xpCeilingFor(state) {
+  return xpCeilingForCap(levelCapFor(state));
 }
 
 export function dexHorizonFor(state) {

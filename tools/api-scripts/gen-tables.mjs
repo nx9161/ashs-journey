@@ -29,7 +29,7 @@ const { ORANGE_QUESTS, ORANGE_LEGENDARY_ARCS } = await import(join(ROOT, 'src', 
 const { FORMS } = await import(join(ROOT, 'src', 'data', 'forms.mjs'));
 const { MAIN_QUESTS, LEGENDARY_ARCS } = await import(join(ROOT, 'src', 'data', 'story-kanto.mjs'));
 const { QUESTS: TOWN_TALES } = await import(join(ROOT, 'src', 'data', 'quests.mjs'));
-const { ARCS } = await import(join(ROOT, 'src', 'data', 'arcs.mjs'));
+const { ARCS, levelCapFor, xpCeilingFor } = await import(join(ROOT, 'src', 'data', 'arcs.mjs'));
 const { SCHEMA_VERSION } = await import(join(ROOT, 'src', 'game', 'state.mjs'));
 
 const ALL_SPECIES = { ...SPECIES, ...SPECIES2 };
@@ -60,6 +60,23 @@ const tables = {
   // ADR-027 (Stage F): the closed arc-id vocabulary — the validator
   // accepts story.arc / story.arc_directive only from the registry.
   arcs: ARCS.map((a) => a.id),
+  // ADR-027 Amendment 2 (Stage J0): per-arc level bands for the save
+  // validator — the band max (the mon level cap for a save whose
+  // story.arc is that arc) and the paired XP ceiling, both evaluated
+  // through the registry's own levelCapFor / xpCeilingFor on a
+  // minimal { story: { arc } } state per row, so the emitted numbers
+  // ARE the client's derivation and cannot drift from it. An
+  // open-level band (the Frontier) emits null for both — the
+  // validator reads null as "no cap" (its Infinity equivalent in
+  // JSON). Min level stays 1 everywhere and is not emitted.
+  arcBandMax: Object.fromEntries(ARCS.map((a) => {
+    const cap = levelCapFor({ story: { arc: a.id } });
+    return [a.id, Number.isFinite(cap) ? cap : null];
+  })),
+  arcXpCeiling: Object.fromEntries(ARCS.map((a) => {
+    const ceiling = xpCeilingFor({ story: { arc: a.id } });
+    return [a.id, Number.isFinite(ceiling) ? ceiling : null];
+  })),
   // Ordered earn sequences.
   badgeSequences: {
     kanto: KNOWN_BADGES,

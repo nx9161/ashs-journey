@@ -3,7 +3,7 @@
 
 import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
 import { KEEPSAKES, BADGE_SETS } from '../data/items.mjs';
-import { ARCS, deriveArcDefaults } from '../data/arcs.mjs';
+import { ARCS, deriveArcDefaults, levelCapFor, xpCeilingFor } from '../data/arcs.mjs';
 
 const ARC_IDS = new Set(ARCS.map((a) => a.id));
 
@@ -24,9 +24,18 @@ export function validateSave(data) {
   if (data.v !== SCHEMA_VERSION) errors.push('bad-schema-version');
   if (!isObj(data.player) || typeof data.player.name !== 'string') errors.push('bad-player');
   if (!Array.isArray(data.party) || data.party.length > 6) errors.push('bad-party');
+  // ADR-027 Amendment 2 (Stage J0): the level cap + XP ceiling are
+  // registry reads off the save's own story.arc (levelCapFor /
+  // xpCeilingFor — the exact derivation gen-tables emits for the
+  // server validator, so the pair cannot drift). Min stays 1; an
+  // absent/invalid arc reads as Kanto here and is rejected on its
+  // own code below.
+  const levelCap = levelCapFor(data);
+  const xpCeiling = xpCeilingFor(data);
   for (const m of (data.party || [])) {
     if (!isObj(m) || typeof m.speciesId !== 'string' || typeof m.level !== 'number') { errors.push('bad-mon'); break; }
-    if (m.level < 1 || m.level > 100) { errors.push('bad-mon-level'); break; }
+    if (m.level < 1 || m.level > levelCap) { errors.push('bad-mon-level'); break; }
+    if (m.xp !== undefined && (typeof m.xp !== 'number' || !Number.isFinite(m.xp) || m.xp < 0 || m.xp > xpCeiling)) { errors.push('bad-xp'); break; }
     if (!Array.isArray(m.moves) || m.moves.length > 4) { errors.push('bad-mon-moves'); break; }
     // ADR-025 §3 (Phase 3): mon.keepsake is a keepsake itemId or null.
     // Rulings patch (2026-10-27): the id must come from the closed
@@ -85,10 +94,10 @@ export function validateSave(data) {
     for (const e of list) {
       const canon = isObj(e) && Array.isArray(e.team) && e.team.length >= 1 && e.team.length <= 6
         && e.team.every((m) => isObj(m) && typeof m.speciesId === 'string'
-          && typeof m.level === 'number' && m.level >= 1 && m.level <= 100)
+          && typeof m.level === 'number' && m.level >= 1 && m.level <= levelCap)
         && (e.badges === undefined || (typeof e.badges === 'number' && e.badges >= 0));
       const legacy = isObj(e) && typeof e.species === 'string'
-        && typeof e.level === 'number' && e.level >= 1 && e.level <= 100;
+        && typeof e.level === 'number' && e.level >= 1 && e.level <= levelCap;
       if (!canon && !legacy) { errors.push('bad-story-' + key + '-entry'); break; }
     }
   }
@@ -185,8 +194,11 @@ export function fillV2Defaults(data) {
     // shape on load — legacy { species, level } entries (the shape the
     // server validator was written against) and the pushed
     // { team, badges } shape both land canonical; junk entries drop.
-    data.story.hof = normalizeHofList(data.story.hof);
-    data.story.priorHof = normalizeHofList(data.story.priorHof);
+    // Stage J0: the normalizer clamps at THIS save's arc band cap
+    // (levelCapFor on the save being loaded), so a Johto HoF team's
+    // levels survive load instead of being rewritten to 100.
+    data.story.hof = normalizeHofList(data.story.hof, levelCapFor(data));
+    data.story.priorHof = normalizeHofList(data.story.priorHof, levelCapFor(data));
     // Carried-knowledge lists rebuild into their closed vocabularies.
     data.story.bondEcho = Array.isArray(data.story.bondEcho)
       ? [...new Set(data.story.bondEcho.filter((x) => typeof x === 'string' && /^[a-z0-9_]{1,40}$/.test(x)))].slice(0, 32) : [];

@@ -163,6 +163,26 @@ export function xpForLevel(curve, level) {
   }
 }
 
+// Save-validation XP ceiling for a level cap (ADR-027 Amendment 2,
+// Stage J0): the most XP a mon can legitimately hold at that cap.
+// The slowest growth curve among the game's species is 'slow' (the
+// shipped species census uses fast / mediumfast / mediumslow / slow
+// only — erratic and fluctuating have no species), so the ceiling is
+// read off xpForLevel('slow', cap + 1): a mon AT the cap earned its
+// last level against that threshold and its final XP share (or an XP
+// Candy) can carry it past xpForLevel('slow', cap). The x2 slack is
+// the generous margin for post-cap accumulation — the battle XP loop
+// keeps adding shares to a capped mon without levelling it. An
+// open-level cap (Infinity — the Battle Frontier) has no ceiling.
+// The client schema, the server validator (via the gen-tables
+// emission) and this function are the matched pair: one derivation,
+// never a hand-copied number.
+export const XP_CEILING_SLACK = 2;
+export function xpCeilingForCap(cap) {
+  if (typeof cap !== 'number' || !Number.isFinite(cap)) return Infinity;
+  return XP_CEILING_SLACK * xpForLevel('slow', cap + 1);
+}
+
 // Simplified documented-style XP yield: base * level / 7; trainer battles pay
 // the documented Gen 5-era 1.5x (GD balance: the slice's XP economy runs on
 // trainer payouts, not wild grinding).
