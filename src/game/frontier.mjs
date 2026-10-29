@@ -674,6 +674,315 @@ function launchBrainBattle(g, ow, facilityId, tier) {
   b.enter();
 }
 
+// ------------------------------------------------------------------
+// Pike: chamber events (fired from the warp-landing hook)
+// ------------------------------------------------------------------
+
+const DOOR_NAMES = ['the left door', 'the center door', 'the right door'];
+
+function bankPikeRooms(state) {
+  const run = state.frontier.run;
+  if (!run || run.facility !== 'pike' || run.banked) return;
+  run.banked = true;
+  const rec = state.frontier.records.pike;
+  rec.totalRooms += run.rooms;
+  if (run.rooms > rec.bestRun) rec.bestRun = run.rooms;
+}
+
+// Fire the pre-rolled event for (chamber, door). Chambers count as
+// cleared when their event resolves (battle events: on a win or a
+// clean escape; a battle loss closes the run by facility law).
+export function pikeChamberEvent(g, ow, chamber, door) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run || run.facility !== 'pike' || !run.events) return;
+  const kind = run.events[chamber - 1][door];
+  const team = activeTeam(state, run);
+  const say = (lines, cb) => g.ui.say(lines, cb || (() => {}), 'BATTLE PIKE');
+  const cleared = () => { run.rooms++; };
+  if (kind === 'battle-trainer' || kind === 'battle-wild') {
+    const facility = { id: 'pike', partyOverride: team };
+    const b = kind === 'battle-trainer'
+      ? new BattleScene({ kind: 'trainer', trainer: genTrainer(g, 'pike', chamber, run.foeLevel, 2), returnTo: ow, rt: false, facility })
+      : new BattleScene({ kind: 'wild', foe: makeMon(pickSpecies(g, FACILITIES.pike.pools, 1, null)[0], run.foeLevel, SPECIES, MOVES), returnTo: ow, rt: false, facility, uncatchable: true });
+    b.onEnd = (won, fled) => {
+      if (won) { cleared(); say(['Chamber ' + chamber + ' cleared. The serpent offers its next three doors.']); }
+      else { closeRun(state); say(['The Pike closes this run here. The desk has the record — and the doors will shuffle for next time.']); }
+    };
+    g.scenes.push(b);
+    b.enter();
+    return;
+  }
+  cleared();
+  if (kind === 'heal-full') { healTeam(team); say(['A nurse with a full tray! Your entered team is restored completely.']); }
+  else if (kind === 'heal-half') {
+    for (const m of team) if (m.hp > 0) m.hp = Math.min(m.maxHp, m.hp + Math.floor(m.maxHp / 2));
+    say(['A nurse with a half tray — better than nothing. Your team recovers half its strength.']);
+  } else if (kind === 'cure-status') {
+    for (const m of team) { m.status = null; m.confused = false; }
+    say(['A nurse with a remedy kit! Every status is lifted from your team.']);
+  } else if (kind === 'inflict-status') {
+    const target = team.find((m) => m.hp > 0 && !m.status);
+    if (target) { target.status = 'poison'; say(['The nurse\'s smile was a warning unheeded — ' + (target.nickname || 'your partner') + ' was poisoned by a doctored draught!']); }
+    else say(['A nurse whose smile you should not trust — but there is nothing healthy left for her to spoil.']);
+  } else if (kind === 'hint') {
+    if (chamber >= 7) say(['An attendant whispers: "Beyond the next doors lies the dais. Whatever waits there has been expecting you."']);
+    else {
+      const d = Math.floor(g.rng.misc() * 3);
+      const next = run.events[chamber][d];
+      say(['An attendant who loves to talk whispers: "Next chamber — behind ' + DOOR_NAMES[d] + ' waits ' + PIKE_HINT_PHRASES[next] + '."', '(The Pike\'s attendants never lie. It is the one rule of the house.)']);
+    }
+  } else {
+    say(['Silence. Dust. Three doors onward, and nothing behind this one but the quiet.', '(Chamber ' + chamber + ' cleared.)']);
+  }
+}
+
+// ------------------------------------------------------------------
+// Pyramid: spots, step encounters, the bag prompt, climb end
+// ------------------------------------------------------------------
+
+function rollPyramidLoot(g) {
+  let roll = g.rng.misc() * 100;
+  for (const [id, w] of PYRAMID_LOOT) { if (roll < w) return id; roll -= w; }
+  return 'potion';
+}
+
+export function seedPyramidSpots(g, run, mapId) {
+  const cands = [...(PYRAMID_SPOT_CANDIDATES[mapId] || [])];
+  const chosen = [];
+  while (chosen.length < Math.min(PYRAMID_SPOTS_PER_FLOOR, cands.length)) {
+    chosen.push(cands.splice(Math.floor(g.rng.misc() * cands.length), 1)[0]);
+  }
+  run.spots = chosen.map((c) => ({ map: mapId, x: c.x, y: c.y, kind: c.kind, item: c.kind === 'item' ? rollPyramidLoot(g) : undefined }));
+  run.spotsFloor = mapId;
+}
+
+function endPyramidClimb(g, ow, line) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (run && run.facility === 'pyramid') {
+    if (run.floor > state.frontier.records.pyramid.bestFloor) state.frontier.records.pyramid.bestFloor = run.floor;
+  }
+  closeRun(state);
+  state.frontier.pyramidBag = [];
+  ow.loadMap('frontier-pyramid');
+  ow.player.tx = 8; ow.player.ty = 10; ow.player.px = 8 * 16; ow.player.py = 10 * 16;
+  ow.player.fx = 8; ow.player.fy = 10; ow.player.dir = 'down';
+  state.story.position = { map: 'frontier-pyramid', x: 8, y: 10, dir: 'down' };
+  g.ui.say([line], () => {}, 'PYRAMID KEEPER');
+}
+
+function pyramidBattle(g, ow, makeBattle) {
+  const state = g.state;
+  const run = state.frontier.run;
+  const team = activeTeam(state, run);
+  const b = makeBattle(team);
+  b.onEnd = (won, fled) => {
+    if (!won) endPyramidClimb(g, ow, 'The mountain gives you back. The climb is over — the keeper strikes the attempt.');
+  };
+  g.scenes.push(b);
+  b.enter();
+}
+
+// The step hook (sysOnStep): spots first, then the floor's wilds.
+// Returns true when it consumed the step (a battle started).
+export function frontierOnStep(g, ow, x, y) {
+  const state = g.state;
+  const run = state.frontier && state.frontier.run;
+  if (!run || run.facility !== 'pyramid') return false;
+  const mapId = ow.mapId;
+  if (!PYRAMID_FLOOR_MAPS.includes(mapId)) return false;
+  const team = activeTeam(state, run);
+  if (!team.length) return false; // a teamless fixture state (the F1 geometry walks) — no battles
+  if (run.spotsFloor === mapId) {
+    const ix = run.spots.findIndex((s) => s.x === x && s.y === y);
+    if (ix >= 0) {
+      const spot = run.spots[ix];
+      run.spots.splice(ix, 1);
+      if (spot.kind === 'item') {
+        state.frontier.pyramidBag.push(spot.item);
+        g.audio.playSfx('dex-register');
+        g.ui.say(['Found ' + ITEMS[spot.item].name + '! It goes into the Pyramid Bag.'], () => {}, '');
+        return false; // no battle — the step itself is not consumed
+      }
+      pyramidBattle(g, ow, (t) => new BattleScene({
+        kind: 'trainer', trainer: genTrainer(g, 'pyramid', run.floor, run.foeLevel, 2), returnTo: ow, rt: false,
+        facility: { id: 'pyramid', partyOverride: t, pyramidBag: true },
+      }));
+      return true;
+    }
+  }
+  const tile = ow.map.rows[y] && ow.map.rows[y][x];
+  if (tile === 'L' && g.rng.encounter() < PYRAMID_ENCOUNTER_RATE) {
+    const sp = pickSpecies(g, FACILITIES.pyramid.pools, 1, null)[0];
+    pyramidBattle(g, ow, (t) => new BattleScene({
+      kind: 'wild', foe: makeMon(sp, run.foeLevel, SPECIES, MOVES), returnTo: ow, rt: false,
+      facility: { id: 'pyramid', partyOverride: t, pyramidBag: true }, uncatchable: true,
+    }));
+    return true;
+  }
+  return false;
+}
+
+// The between-floors Pyramid Bag prompt: use a run-bag medicine on
+// an entered mon in the field, or press on.
+export function pyramidBagPrompt(g, ow, cb) {
+  const state = g.state;
+  const run = state.frontier.run;
+  if (!run || run.facility !== 'pyramid') { cb(); return; }
+  const bag = state.frontier.pyramidBag;
+  const usable = [...new Set(bag)].filter((id) => ITEMS[id] && !ITEMS[id].levelUp);
+  if (!usable.length) { cb(); return; }
+  const team = activeTeam(state, run);
+  g.ui.showMenu('Pyramid Bag — floor ' + run.floor + ' reached', [
+    ...usable.map((id) => ({ label: ITEMS[id].name + ' x' + bag.filter((x) => x === id).length, value: id })),
+    { label: 'Press on', value: 'on' },
+  ], (v) => {
+    if (v === null || v === undefined || v === 'on') { cb(); return; }
+    const itemId = v;
+    const it = ITEMS[itemId];
+    g.ui.showMenu('Use ' + it.name + ' on...', [
+      ...team.map((m, i) => ({ label: (m.nickname || 'Partner') + ' ' + m.hp + '/' + m.maxHp, value: i })),
+      { label: 'Back', value: -1 },
+    ], (w) => {
+      if (w === null || w === undefined || w === -1) { pyramidBagPrompt(g, ow, cb); return; }
+      const m = team[w];
+      const consume = () => {
+        const ix = bag.indexOf(itemId);
+        if (ix >= 0) bag.splice(ix, 1);
+      };
+      // Medicine semantics ride the shipped battle applier (its
+      // `this` is unused for these paths).
+      if (it.ppRestore && !it.ppRestoreAll) {
+        g.ui.showMenu('Restore which move?', [
+          ...m.moves.map((mv, mi) => ({ label: mv.id + ' ' + mv.pp + '/' + mv.maxPp, value: mi })),
+          { label: 'Back', value: -1 },
+        ], (mi) => {
+          if (mi === null || mi === undefined || mi === -1) { pyramidBagPrompt(g, ow, cb); return; }
+          const line = BattleScene.prototype.applyMedicineTo.call({}, itemId, m, mi);
+          consume();
+          g.ui.say([line], () => pyramidBagPrompt(g, ow, cb), '');
+        });
+        return;
+      }
+      const line = BattleScene.prototype.applyMedicineTo.call({}, itemId, m, null);
+      consume();
+      g.audio.playSfx('heal');
+      g.ui.say([line], () => pyramidBagPrompt(g, ow, cb), '');
+    });
+  });
+}
+
+// ------------------------------------------------------------------
+// Warp landings + Brain appends (the overworld seams)
+// ------------------------------------------------------------------
+
+// Called from loadMap's append phase (overworld.mjs): the Brain
+// audiences, appended under exactly their milestone conditions.
+export function frontierBrainNpcs(state, mapId) {
+  const F = state.frontier;
+  if (!F || !F.run) return [];
+  if (mapId === 'frontier-pike' && F.run.facility === 'pike' && lucyDue(state)) {
+    return [{
+      name: 'LUCY', x: LUCY_TILE.x, y: LUCY_TILE.y, art: 'lady', dir: 'down', frontierBrain: 'pike',
+      skin: '#f0c8a0', shirt: '#5a2a6a', pants: '#2a2a3a', hair: '#3a2a1a',
+      dialog: ['So the serpent delivers you to me at last.'],
+    }];
+  }
+  if (mapId === 'frontier-pyramid-a' && F.run.facility === 'pyramid' && brandonDue(state)) {
+    return [{
+      name: 'BRANDON', x: BRANDON_TILE.x, y: BRANDON_TILE.y, art: 'hiker', dir: 'down', frontierBrain: 'pyramid',
+      skin: '#e8b888', shirt: '#7a4a22', pants: '#3a3a2a', hair: '#1a1a1a',
+      dialog: ['You climbed into my light, climber.'],
+    }];
+  }
+  return [];
+}
+
+// The warp-landing funnel (doWarp -> sysWarpLanding -> here). Pike
+// chamber entries key on the landing tile (F1 geometry); the
+// Pyramid floor law (guard, floor counting, completion) keys on
+// (from, to) map ids.
+export function frontierOnWarpLanding(g, ow, to, from) {
+  const state = g.state;
+  const F = state.frontier;
+  if (!F) return;
+  const run = F.run;
+  // Leaving the Pike building ends an unbanked run (banked at dais).
+  if (to === 'frontierhub' && from === 'frontier-pike' && run && run.facility === 'pike') {
+    bankPikeRooms(state);
+    closeRun(state);
+    return;
+  }
+  // Leaving the Pyramid hall with a climb open ends the climb.
+  if (to === 'frontierhub' && from === 'frontier-pyramid' && run && run.facility === 'pyramid') {
+    if (run.floor > F.records.pyramid.bestFloor) F.records.pyramid.bestFloor = run.floor;
+    closeRun(state);
+    F.pyramidBag = [];
+    return;
+  }
+  if (run && run.facility === 'pike' && to === 'frontier-pike') {
+    const x = ow.player.tx, y = ow.player.ty;
+    if (y === PIKE_DAIS_Y) {
+      bankPikeRooms(state);
+      return;
+    }
+    const chamber = PIKE_ENTRY_ROWS[y];
+    const door = PIKE_DOOR_XS.indexOf(x);
+    if (chamber && door >= 0 && chamber === run.lastChamber + 1) {
+      run.lastChamber = chamber;
+      pikeChamberEvent(g, ow, chamber, door);
+    }
+    return;
+  }
+  if (PYRAMID_FLOOR_MAPS.includes(to)) {
+    // The run gate: no active climb, no floors. The keeper returns
+    // the walker to the entrance hall with the law stated plainly.
+    if (!run || run.facility !== 'pyramid') {
+      ow.loadMap('frontier-pyramid');
+      ow.player.tx = 8; ow.player.ty = 10; ow.player.px = 8 * 16; ow.player.py = 10 * 16;
+      ow.player.fx = 8; ow.player.fy = 10; ow.player.dir = 'down';
+      state.story.position = { map: 'frontier-pyramid', x: 8, y: 10, dir: 'down' };
+      g.ui.say(['The inner doors are barred to you. The Pyramid books climbs at the desk — no booking, no floors. That is the law of this house.'], () => {}, 'PYRAMID KEEPER');
+      return;
+    }
+    if (from === 'frontier-pyramid') {
+      run.floor = 1;
+      seedPyramidSpots(g, run, to);
+      return;
+    }
+    if (PYRAMID_FLOOR_MAPS.includes(from)) {
+      if (run.floor === 7) {
+        if (7 > F.records.pyramid.bestFloor) F.records.pyramid.bestFloor = 7;
+        closeRun(state);
+        F.pyramidBag = [];
+        ow.loadMap('frontier-pyramid');
+        ow.player.tx = 8; ow.player.ty = 10; ow.player.px = 8 * 16; ow.player.py = 10 * 16;
+        ow.player.fx = 8; ow.player.fy = 10; ow.player.dir = 'down';
+        state.story.position = { map: 'frontier-pyramid', x: 8, y: 10, dir: 'down' };
+        g.ui.say(['Seven floors. The mountain bows — the climb is COMPLETE, and the keeper writes your name in the stone book.'], () => {}, 'PYRAMID KEEPER');
+        return;
+      }
+      run.floor++;
+      seedPyramidSpots(g, run, to);
+      // Floor 7's Brandon: the loadMap append phase ran BEFORE this
+      // hook counted the floor (doWarp loads the map, then lands),
+      // so a Brandon who becomes due exactly on this landing is
+      // appended to the already-loaded map here (minimal loadMap
+      // stamps replicated). A save reloaded ON floor 7 catches him
+      // through the loadMap append instead — both doors, one Brain.
+      if (brandonDue(state)) {
+        const npc = frontierBrainNpcs(state, to)[0];
+        if (npc && !ow.map.npcs.some((n) => n.frontierBrain === 'pyramid')) {
+          const c = { ...npc, _pk: to + ':frontier-brain', _phaseMs: 0, _face: 'down' };
+          ow.map = { ...ow.map, npcs: [...ow.map.npcs, c] };
+        }
+      }
+      pyramidBagPrompt(g, ow, () => {});
+    }
+  }
+}
+
 // Lucy waits on the dais when the cumulative banked rooms plus this
 // run's rooms reach the next milestone AND she has not been faced
 // this run (one audience per run — the run closes after her battle

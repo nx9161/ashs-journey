@@ -19,6 +19,7 @@ import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
 import { BattleScene } from './battle.mjs';
+import { frontierBrainNpcs } from './frontier.mjs';
 import { BootScene } from './title.mjs';
 
 const WALK_MS = 200; // ~200ms per walked tile (GD feel note)
@@ -212,6 +213,12 @@ export class OverworldScene {
         npcs = [...npcs, ...PARLEY_NPCS.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
+      // Arc 3.5 Stage F2: the Frontier Brain audiences — Lucy on the
+      // Pike dais, Brandon on Pyramid floor 7 — appended under
+      // exactly their milestone conditions (game/frontier.mjs
+      // frontierBrainNpcs; state-only, so the append is safe here).
+      const brainNpcs = frontierBrainNpcs(this.game.state, id);
+      if (brainNpcs.length) { npcs = [...npcs, ...brainNpcs]; changed = true; }
       if (changed) this.map = { ...this.map, npcs };
     }
     // Premium+ W4 (AN-4): EVERY load now works on per-NPC copies so the
@@ -639,6 +646,7 @@ export class OverworldScene {
   // Motion). `to` arrives viaExit-resolved from onStep.
   doWarp(to, wp) {
     const g = this.game;
+    const fromMap = this.mapId; // F2: captured for the warp-landing hook below
     if (to.map === 'center' && wp.via) {
       // Idempotent re-assert: the authoritative capture happens at
       // step time in startWarpFade (J6.5); this keeps a direct
@@ -661,6 +669,14 @@ export class OverworldScene {
     g.audio.playMusic(this.map.music || 'route1-theme'); // no-op when the track is already playing
     g.audio.playSfx('map-enter'); // visual twin: the location banner slide-in
     g.autosave('area');
+    // Arc 3.5 Stage F2: the warp-landing hook — doWarp is the ONE
+    // funnel every warp passes (direct, fade-midpoint, reduced
+    // motion), and neither loadMap (player coords not yet set) nor
+    // onStep (never fires for a landing) can see a landing tile.
+    // overworld-systems' sysWarpLanding routes it to the Frontier
+    // (Pike chamber entries key on the landing tile; the Pyramid
+    // floor law keys on (from, to)).
+    if (this.sysWarpLanding) this.sysWarpLanding(to.map, fromMap);
   }
 
   onStep(x, y) {

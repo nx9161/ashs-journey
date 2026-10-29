@@ -10474,3 +10474,112 @@ server-side under the raised bag cap).
   byte-stable (build ×2, same sha256 00b1b832…); public static
   total 10,062,471 B vs the 10,100,000 B trigger (margin
   37,529 B). `personal/` byte-identical; dist/ restored.
+
+## Arc 3.5 Stage F2c — Battle Frontier: Pike chambers + Pyramid climb (2026-10-29)
+
+- Scope: the last two facility drivers on the F2a seams — the Pike's
+  pre-rolled chamber events with Lucy on the dais, and the Pyramid's
+  run-gated floors, seeded spots, step encounters, Pyramid Bag, floor
+  law and Brandon on floor 7. Stage F2 is complete with this commit
+  (F2a 2f8de4b · F2b 4484ca5 · F2c this commit).
+- **The warp-landing hook (new seam, recorded):** neither shipped
+  seam can see a Pike chamber entry — loadMap appends run before
+  the player's landing tile exists, and onStep never fires for a
+  warp landing. `OverworldScene.doWarp` is the ONE funnel every
+  warp passes (direct call, warpFx fade midpoint, reduced-motion),
+  so it now captures the origin map at entry and, after the landing
+  completes (position set, autosave done), calls
+  `sysWarpLanding(to, from)` → `frontierOnWarpLanding`. All Pike /
+  Pyramid warp law lives behind that one call; nothing else in the
+  warp path moved.
+- **Pike pre-roll + hint honesty:** at run start the whole run is
+  rolled ONCE from the authored weighted table (battle-trainer 22,
+  battle-wild 22, heal-full 8, heal-half 10, cure-status 8,
+  inflict-status 10, quiet 10, hint 10 — of 100) into
+  `run.events[7][3]`, persisted in the run. A chamber fires exactly
+  when a warp lands on one of its three entry tiles (door from the
+  landing x ∈ {3,7,11}, chamber from the entry-row y) AND it is the
+  next uncleared chamber (`chamber === run.lastChamber + 1`, so
+  revisits and backtracking never re-fire). Battles ride
+  partyOverride (trainer: 2-mon generated team; wild: uncatchable
+  facility wild); a battle loss closes the run by facility law.
+  Rooms count on event resolution; the dais landing BANKS them
+  (records.pike.totalRooms/bestRun), and leaving the building with
+  an unbanked run banks + closes it. HINT events read the pre-roll:
+  the attendant names the category of ONE of the NEXT chamber's
+  doors, verbatim from the table — the information is true by
+  construction (the suite asserts fired categories against the
+  booked table, never against a re-roll).
+- **Lucy (loadMap append):** `frontierBrainNpcs(state, mapId)` —
+  called from loadMap's append phase — fields Lucy on the Pike map
+  at the dais tile (7,3) exactly when `lucyDue` (banked + this run's
+  rooms ≥ 14 Silver / ≥ 140 Gold, not yet faced this run). Her
+  condition is already true when the dais loadMap runs (rooms are
+  counted by chamber events, before the dais warp), so the plain
+  append idiom suffices for her.
+- **Pyramid spot/guard design:** floors are RUN-GATED at the warp
+  landing: entering any floor map without an active pyramid run
+  returns the player to the entrance hall (8,10) with the keeper's
+  law spoken ("no booking, no floors"). Hall→floor seeds floor 1;
+  floor→floor transitions count `run.floor`, re-seed spots, and
+  offer the between-floors Pyramid Bag prompt (usable medicines
+  only; application rides `BattleScene.prototype.applyMedicineTo`
+  so field semantics are the battle semantics, PP-restore via a
+  move pick; level-up items never offered — they are not medicines
+  here). The floor-7 exit completes the climb (bestFloor 7, run
+  closed, bag surrendered, hall landing + keeper's line). Per floor,
+  3 spots are rng-picked from 6 authored candidates per floor map
+  (fixed kinds: A = trainer/item/trainer/item/item/trainer across
+  its candidates, etc.); item spots roll the weighted loot table
+  (superpotion 30, hyperpotion 25, fullheal 15, revive 12,
+  maxpotion 10, fullrestore 5, maxrevive 3) into the Pyramid Bag;
+  trainer spots start a partyOverride + pyramidBag battle. Steps on
+  floor maps check spots first, then the authored wild rate (0.10
+  on 'L' tiles, encounter stream, pool wilds at foeLevel,
+  uncatchable); a battle loss ends the climb (hall + keeper line).
+  **Item-ball redirect (recorded):** during an active climb, the
+  F1 floor item balls grant into the Pyramid Bag instead of the
+  player's bag (the mountain's supplies stay the mountain's); with
+  no climb open they grant as F1 shipped. Rare Candy sits in the
+  run bag unusable in battle (battle + field menus exclude
+  level-up items) — surrendered with the bag at climb end.
+- **Brandon + the floor-count ordering (recorded):** Brandon
+  appends on floor A when `brandonDue` (floor 7 of climb 3 Silver /
+  climb 10 Gold, not faced). The loadMap append alone MISSES the
+  qualifying landing: doWarp loads the map BEFORE the landing hook
+  counts the floor, so at append time the run still reads floor 6.
+  The landing hook therefore ALSO appends Brandon to the
+  already-loaded map when a transition makes him due (minimal
+  loadMap stamps replicated: _pk/_phaseMs/_face). A save reloaded
+  on floor 7 catches him through the loadMap append — both doors,
+  one Brain. **==== F3 HOOK ====** (in `launchBrainBattle`,
+  game/frontier.mjs): Brandon's possession staging attaches at the
+  marked block in the shared audience launcher — the plain
+  milestone battle ships here; F3 hangs its staging on that seam.
+- **Part C supersession (recorded):** F1's C40–C43 walk the Pyramid
+  floor cycle with no run booked — impossible under the new gate.
+  The walk now seeds an active TEAMLESS pyramid run fixture first
+  (B09 precedent; `frontierOnStep` fields no battles for a teamless
+  run, and floor counting does not disturb the position asserts),
+  so the geometry proof stands verbatim and the gate itself is
+  proven separately in D24.
+- Tests (frontier-checks 99 → **113**): D24 the run gate (bounce +
+  keeper line), D25 the climb (booking, floor-1 spots, item spot →
+  bag, trainer spot battle with the run bag used + consumed inside
+  it, floor counting 1→2→3, floor-7 completion), D26 Brandon
+  appended on floor 7 of climb 3 → Silver with other slots null,
+  D27 a full Pike run asserted chamber-by-chamber against its own
+  booked pre-roll (battles by kind; heal/cure/poison by measured
+  effect), D28 dais banking + building-exit close, D29 Lucy Silver
+  at banked 7 + 7, D30 the seventh GOLD (six slots seeded gold,
+  Brandon's gold Regi team on climb 10) setting
+  `story.flags.frontier_complete`, D31 cross-facility honesty
+  (Tower desk warns + confirms before closing an open Pike run).
+- Battery (this tree): frontier-checks **113/113**;
+  qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**
+  (HARD); campaign-smoke **24/24**; arc-foundation **47/47**;
+  validator **89** + fuzz **2000/2000** + save-contract **12/12**;
+  cheat-shop **44/44**. **public/game.js: 9,916,152 B**,
+  byte-stable (build ×2, same sha256 8002a41f…); public static
+  total 10,078,774 B vs the 10,100,000 B trigger (margin
+  21,226 B). `personal/` byte-identical; dist/ restored.

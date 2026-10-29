@@ -591,6 +591,13 @@ const driverC = `
   ok('C34 hall exit warp -> back on frontierhub', pos(g).map === 'frontierhub', 'pos=' + JSON.stringify(pos(g)));
 
   // ---- pyramid floor cycle, walked ----
+  // F2 SUPERSESSION (recorded in the F2c register entry): F1 walked
+  // these floors freely; F2's run gate bars floor entry without an
+  // active climb, so the geometry drive now seeds an active run
+  // fixture first (B09 precedent). The fixture is TEAMLESS —
+  // frontierOnStep fields no battles for it — so the walk stays the
+  // pure geometry proof it was; the guard itself is proven in D24.
+  st.frontier.run = { facility: 'pyramid', foeLevel: 50, enteredTeam: [], streak: 0, rentals: null, bracket: null, tournamentNo: 0, events: null, rooms: 0, lastChamber: 0, banked: false, floor: 1, runNo: 1, spots: [], spotsFloor: null, lucyFaced: false, brandonFaced: false };
   walkTo(g, 18, 12); walkTo(g, 8, 0);
   ok('C40 Pyramid inner doors -> floor A entry (10,14)', pos(g).map === 'frontier-pyramid-a' && pos(g).x === 10 && pos(g).y === 14, 'pos=' + JSON.stringify(pos(g)));
   walkTo(g, 10, 0);
@@ -1176,6 +1183,260 @@ const driverD = `
     ok('D23 Spencer at 21 (streak seeded 19, battles 20-21 driven under autoAlly): battle 21 is Spencer, slot strikes SILVER, streak continues at 21',
       r.brainName === 'Spencer' && slotOf(r.g, 'palace') === 'silver' && !!r.st.frontier.run && r.st.frontier.run.streak === 21,
       'brain=' + r.brainName + ' slot=' + slotOf(r.g, 'palace'));
+  }
+
+  // ---------- D24-D26: Pyramid — the run gate, spots + bag, floor law, Brandon ----------
+  function pyrWarp(g, ow, toMap, x, y) {
+    ow.doWarp({ map: toMap, x: x, y: y }, {}); tk(g, 3);
+    // The between-floors bag prompt may be open: press on.
+    var guard = 0;
+    while (g.ui.menuOpen && guard++ < 10) {
+      var oi = g.ui.menu.items.findIndex(function (it) { return it.value === 'on'; });
+      if (oi < 0) break;
+      g.ui.debugChoose(oi); tk(g, 3);
+    }
+    drain(g);
+  }
+  {
+    var g = mkGame(7240); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    var st = g.state;
+    // No run booked: the inner doors must bounce the walker to the hall.
+    ow.doWarp({ map: 'frontier-pyramid-a', x: 10, y: 14 }, {}); tk(g, 3);
+    var keeperLine = false;
+    var guardK = 0;
+    while (guardK++ < 40) {
+      if (g.ui.dlg && g.ui.dlg.lines && g.ui.dlg.lines.join(' ').indexOf('no booking, no floors') >= 0) keeperLine = true;
+      if (!g.ui.dialogueOpen) break;
+      pA(g);
+    }
+    ok('D24 Pyramid run gate: entering a floor map with NO active climb bounces the player to the entrance hall (8,10) with the keeper law spoken',
+      ow.mapId === 'frontier-pyramid' && ow.player.tx === 8 && ow.player.ty === 10 && keeperLine && st.frontier.run === null,
+      'map=' + ow.mapId + ' pos=' + ow.player.tx + ',' + ow.player.ty + ' line=' + keeperLine);
+  }
+  {
+    var g = mkGame(7241); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    var st = g.state;
+    talkFrontier(g, ow, 'pyramid'); enterRun(g);
+    var run = st.frontier.run;
+    ok('D25a Pyramid entry: the desk books climb 1 (records.runs = 1), foeLevel = entered top, bag emptied',
+      !!run && run.facility === 'pyramid' && run.runNo === 1 && st.frontier.records.pyramid.runs === 1 && run.foeLevel === 100 && st.frontier.pyramidBag.length === 0);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    ok('D25b floor 1 begins on A with 3 seeded spots for the floor', run.floor === 1 && run.spotsFloor === 'frontier-pyramid-a' && run.spots.length === 3,
+      'floor=' + run.floor + ' spots=' + run.spots.length);
+    // Item spot -> bag grows.
+    var itemSpot = run.spots.find(function (s) { return s.kind === 'item'; });
+    var trainerSpot = run.spots.find(function (s) { return s.kind === 'trainer'; });
+    if (itemSpot) {
+      ow.player.tx = itemSpot.x; ow.player.ty = itemSpot.y;
+      ow.sysOnStep(itemSpot.x, itemSpot.y); tk(g, 3); drain(g);
+    }
+    ok('D25c item spot fires on the step: the loot lands in the Pyramid Bag (and the spot is consumed)',
+      !!itemSpot && st.frontier.pyramidBag.length === 1 && st.frontier.pyramidBag[0] === itemSpot.item && !run.spots.includes(itemSpot),
+      'bag=' + JSON.stringify(st.frontier.pyramidBag));
+    // Trainer spot -> battle; inside it, use the run bag (consumed).
+    var bagUsedInBattle = false;
+    if (trainerSpot) {
+      ow.player.tx = trainerSpot.x; ow.player.ty = trainerSpot.y;
+      ow.sysOnStep(trainerSpot.x, trainerSpot.y); tk(g, 3); drain(g);
+      if (g.scenes.top instanceof BattleScene) {
+        g.scenes.top.ally.hp = 100; // wound the battler so the medicine row is enabled
+        var guardB = 0;
+        while ((g.scenes.top instanceof BattleScene) && guardB++ < 300) {
+          if (g.ui.menuOpen) {
+            var m = g.ui.menu;
+            if (m.kind === 'commands' && st.frontier.pyramidBag.length) {
+              var ci = m.items.findIndex(function (it) { return !it.disabled && it.value === 'bag'; });
+              g.ui.debugChoose(ci); tk(g, 3); continue;
+            }
+            if (m.title === 'Pyramid Bag') { g.ui.debugChoose(0); tk(g, 3); continue; }
+            if (m.title && m.title.indexOf('Use ') === 0) {
+              var ti = m.items.findIndex(function (it) { return !it.disabled && it.value !== -1; });
+              g.ui.debugChoose(ti); tk(g, 3); bagUsedInBattle = st.frontier.pyramidBag.length === 0; continue;
+            }
+            break;
+          }
+          pA(g); tk(g, 3);
+        }
+        driveBattle(g);
+      }
+    }
+    ok('D25d trainer spot fires a facility battle, and the Pyramid Bag is usable inside it (the item is consumed from the run bag)',
+      !!trainerSpot && bagUsedInBattle && !(g.scenes.top instanceof BattleScene),
+      'bagUsed=' + bagUsedInBattle);
+    // Floor law: advance the cycle, then seed floor 7 and exit -> complete.
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    var floorAfterB = run.floor;
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    run.floor = 7; // fixture: the seventh floor is C's next landing (A)
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    ok('D25e floor counting advances over the cycle (1 -> 2 -> 3), and the floor-7 exit routes to the entrance hall: climb COMPLETE, bestFloor 7, run closed, bag surrendered',
+      floorAfterB === 2 && st.frontier.run === null && st.frontier.records.pyramid.bestFloor === 7 && st.frontier.pyramidBag.length === 0 && ow.mapId === 'frontier-pyramid',
+      'floorB=' + floorAfterB + ' best=' + st.frontier.records.pyramid.bestFloor);
+  }
+  {
+    var g = mkGame(7242); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    var st = g.state;
+    st.frontier.records.pyramid.runs = 2; // seeded: this entry is climb 3 (Silver due)
+    talkFrontier(g, ow, 'pyramid'); enterRun(g);
+    var run = st.frontier.run;
+    // Climb the cycle to floor 7 (map A again): 1A 2B 3C 4A 5B 6C 7A.
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    var brandon = ow.map.npcs.find(function (n) { return n.frontierBrain === 'pyramid'; });
+    ok('D26a Brandon waits on floor 7 of climb 3 (Silver due): appended near the exit by the loadMap idiom',
+      run.floor === 7 && !!brandon && brandon.name === 'BRANDON', 'floor=' + run.floor + ' brandon=' + !!brandon);
+    if (brandon) { ow.sysNpc(brandon); tk(g, 3); drain(g); }
+    var brainName = null;
+    var guardB = 0;
+    while (guardB++ < 100) {
+      if (g.scenes.top instanceof BattleScene) { brainName = g.scenes.top.trainer.name; driveBattle(g); continue; }
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      if (g.ui.menuOpen) { g.ui.debugChoose(frontierChoose(g.ui.menu)); tk(g, 3); continue; }
+      break;
+    }
+    drain(g);
+    ok('D26b Brandon battle (the authored Regi trio): the win strikes slot SILVER, the other slots stay null, the climb closes in triumph',
+      brainName === 'Brandon' && slotOf(g, 'pyramid') === 'silver' && st.frontier.run === null
+      && FAC_IDS.every(function (id) { return id === 'pyramid' || slotOf(g, id) === null; }),
+      'brain=' + brainName + ' slot=' + slotOf(g, 'pyramid'));
+  }
+
+  // ---------- D27-D28: Pike — a full run against its own pre-roll, Lucy ----------
+  var PIKE_ENTRY_Y = { 1: 71, 2: 62, 3: 53, 4: 44, 5: 35, 6: 26, 7: 17 };
+  function resolveFrontierMoment(g, ow) {
+    // Whatever a chamber entry fired: a battle (drive it) or lines.
+    var guard = 0;
+    while (guard++ < 60) {
+      if (g.scenes.top instanceof BattleScene) { driveBattle(g); continue; }
+      if (g.ui.dialogueOpen || (g.scenes.top && g.scenes.top.msgOpen)) { drain(g); continue; }
+      if (g.ui.menuOpen) { g.ui.debugChoose(frontierChoose(g.ui.menu)); tk(g, 3); continue; }
+      break;
+    }
+    drain(g);
+  }
+  {
+    var g = mkGame(7243); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pike', 7, 76); drain(g);
+    var st = g.state;
+    talkFrontier(g, ow, 'pike'); enterRun(g);
+    var run = st.frontier.run;
+    var tableOk = !!run && Array.isArray(run.events) && run.events.length === 7 && run.events.every(function (r) { return r.length === 3; });
+    var team = st.party.slice(0, 3);
+    var firedOk = tableOk, firedDetail = '';
+    for (var chamber = 1; chamber <= 7 && firedOk; chamber++) {
+      var cat = run.events[chamber - 1][0]; // left door (x=3) every time
+      // Observable preconditions per category.
+      if (cat === 'heal-full' || cat === 'heal-half') team[0].hp = 10;
+      if (cat === 'cure-status') { team[0].status = 'poison'; }
+      if (cat === 'inflict-status') { team.forEach(function (m) { m.status = null; }); }
+      var hpBefore = team[0].hp;
+      ow.doWarp({ map: 'frontier-pike', x: 3, y: PIKE_ENTRY_Y[chamber] }, {}); tk(g, 3);
+      var sawBattle = g.scenes.top instanceof BattleScene ? g.scenes.top.kind : null;
+      resolveFrontierMoment(g, ow);
+      if (cat === 'battle-trainer' && sawBattle !== 'trainer') { firedOk = false; firedDetail = 'ch' + chamber + ' wanted trainer battle, saw ' + sawBattle; }
+      else if (cat === 'battle-wild' && sawBattle !== 'wild') { firedOk = false; firedDetail = 'ch' + chamber + ' wanted wild battle, saw ' + sawBattle; }
+      else if (cat === 'heal-full' && !(team[0].hp === team[0].maxHp)) { firedOk = false; firedDetail = 'ch' + chamber + ' heal-full left hp ' + team[0].hp; }
+      else if (cat === 'heal-half' && !(team[0].hp === Math.min(team[0].maxHp, 10 + Math.floor(team[0].maxHp / 2)))) { firedOk = false; firedDetail = 'ch' + chamber + ' heal-half hp ' + team[0].hp; }
+      else if (cat === 'cure-status' && team[0].status !== null) { firedOk = false; firedDetail = 'ch' + chamber + ' cure left status ' + team[0].status; }
+      else if (cat === 'inflict-status' && !team.some(function (m) { return m.status === 'poison'; })) { firedOk = false; firedDetail = 'ch' + chamber + ' inflict poisoned nobody'; }
+      else if ((cat === 'quiet' || cat === 'hint') && sawBattle) { firedOk = false; firedDetail = 'ch' + chamber + ' ' + cat + ' fired a battle'; }
+      if (!st.frontier.run) { firedOk = false; firedDetail = 'run closed early at ch' + chamber + ' (' + cat + ')'; }
+    }
+    ok('D27 Pike full run: the pre-roll table (7x3) is booked at entry, and the LEFT-door event of every chamber fires exactly its pre-rolled category (battles by kind, heals/cures/poison by effect)',
+      firedOk && run.rooms === 7, firedDetail + ' rooms=' + (run && run.rooms));
+    ow.doWarp({ map: 'frontier-pike', x: 3, y: 8 }, {}); tk(g, 3); drain(g);
+    var banked = st.frontier.records.pike.totalRooms === 7 && st.frontier.records.pike.bestRun === 7;
+    ow.doWarp({ map: 'frontier-pike', x: 7, y: 81 }, {}); tk(g, 3);
+    ow.doWarp({ map: 'frontierhub', x: 18, y: 13 }, {}); tk(g, 3); drain(g);
+    ok('D28 Pike banking: the dais banks the run (totalRooms 7, bestRun 7), and leaving the building closes the run',
+      banked && st.frontier.run === null, 'total=' + st.frontier.records.pike.totalRooms);
+  }
+  {
+    var g = mkGame(7244); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pike', 7, 76); drain(g);
+    var st = g.state;
+    st.frontier.records.pike.totalRooms = 7; // seeded banked: this run's 7 chambers reach 14 (Silver due)
+    talkFrontier(g, ow, 'pike'); enterRun(g);
+    for (var chamber = 1; chamber <= 7; chamber++) {
+      ow.doWarp({ map: 'frontier-pike', x: 7, y: PIKE_ENTRY_Y[chamber] }, {}); tk(g, 3);
+      resolveFrontierMoment(g, ow);
+      if (!st.frontier.run) break;
+    }
+    ow.doWarp({ map: 'frontier-pike', x: 7, y: 8 }, {}); tk(g, 3); drain(g);
+    var lucy = ow.map.npcs.find(function (n) { return n.frontierBrain === 'pike'; });
+    ok('D29a Lucy waits on the dais when the cumulative rooms reach 14 (7 banked + 7 this run): appended by the loadMap idiom',
+      !!lucy && lucy.name === 'LUCY', 'lucy=' + !!lucy);
+    if (lucy) { ow.sysNpc(lucy); tk(g, 3); drain(g); }
+    var brainName = null; var guardB = 0;
+    while (guardB++ < 100) {
+      if (g.scenes.top instanceof BattleScene) { brainName = g.scenes.top.trainer.name; driveBattle(g); continue; }
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      break;
+    }
+    drain(g);
+    ok('D29b Lucy battle: the win strikes slot SILVER, other slots untouched, run closed',
+      brainName === 'Lucy' && slotOf(g, 'pike') === 'silver' && st.frontier.run === null
+      && FAC_IDS.every(function (id) { return id === 'pike' || slotOf(g, id) === null; }),
+      'brain=' + brainName + ' slot=' + slotOf(g, 'pike'));
+  }
+
+  // ---------- D30-D31: the seventh gold, cross-facility honesty ----------
+  {
+    var g = mkGame(7245); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pyramid', 8, 6); drain(g);
+    var st = g.state;
+    FAC_IDS.forEach(function (id, i) { st.badges.symbols[i] = id === 'pyramid' ? 'silver' : 'gold'; });
+    st.frontier.records.pyramid.runs = 9; // seeded: this entry is climb 10 (Gold due)
+    talkFrontier(g, ow, 'pyramid'); enterRun(g);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-b', 3, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-c', 18, 14);
+    pyrWarp(g, ow, 'frontier-pyramid-a', 10, 14);
+    var brandon = ow.map.npcs.find(function (n) { return n.frontierBrain === 'pyramid'; });
+    if (brandon) { ow.sysNpc(brandon); tk(g, 3); drain(g); }
+    var guardB = 0;
+    while (guardB++ < 100) {
+      if (g.scenes.top instanceof BattleScene) { driveBattle(g); continue; }
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      break;
+    }
+    drain(g);
+    ok('D30 the seventh GOLD: the Brandon gold team on climb 10 turns the last slot gold — and story.flags.frontier_complete is SET by the award helper (the machine fires the card from the flag alone)',
+      slotOf(g, 'pyramid') === 'gold' && st.badges.symbols.every(function (s) { return s === 'gold'; }) && st.story.flags.frontier_complete === true,
+      'slot=' + slotOf(g, 'pyramid') + ' flag=' + st.story.flags.frontier_complete);
+  }
+  {
+    var g = mkGame(7246); boot(g); strongParty(g, 100);
+    var ow = gotoMap(g, 'frontier-pike', 7, 76); drain(g);
+    var st = g.state;
+    talkFrontier(g, ow, 'pike'); enterRun(g);
+    var pikeRunOpen = !!st.frontier.run && st.frontier.run.facility === 'pike';
+    ow = gotoMap(g, 'frontier-tower', 10, 5); drain(g);
+    talkFrontier(g, ow, 'tower');
+    // The desk warns, we confirm the close, the Tower entry proceeds.
+    var guard = 0, warned = false;
+    while (guard++ < 300) {
+      if (g.ui.dlg && g.ui.dlg.lines && g.ui.dlg.lines.join(' ').indexOf('closes it where it stands') >= 0) warned = true;
+      if (st.frontier.run && st.frontier.run.facility === 'tower') break;
+      if (g.ui.dialogueOpen) { drain(g); continue; }
+      if (g.ui.menuOpen) { g.ui.debugChoose(frontierChoose(g.ui.menu)); tk(g, 3); continue; }
+      if (g.scenes.top instanceof BattleScene) break;
+      tk(g, 3);
+    }
+    ok('D31 cross-facility honesty: with a Pike run open, the Tower desk WARNS that starting closes it (records kept), and on confirmation the Tower run replaces it',
+      pikeRunOpen && warned && !!st.frontier.run && st.frontier.run.facility === 'tower',
+      'warned=' + warned + ' run=' + (st.frontier.run && st.frontier.run.facility));
   }
 
   globalThis.__FRD__ = Q;

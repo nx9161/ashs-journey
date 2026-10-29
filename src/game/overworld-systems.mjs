@@ -18,7 +18,8 @@ import { makeMon, dexRegister, displayName, evolutionCheck, boxCheck } from './s
 import { sparLevelFor } from './rules.mjs';
 import { BattleScene } from './battle.mjs';
 import { ContestScene, hasRibbon } from './contest.mjs';
-import { startFrontier, startBrainAudience } from './frontier.mjs';
+import { startFrontier, startBrainAudience, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
+import { PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
 import { RIBBON_NAMES } from '../data/contest.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
@@ -46,6 +47,13 @@ function rtOf(game) { return game.state.settings.battleStyle !== 'classic'; }
 
 Object.assign(OverworldScene.prototype, {
   // ---------- map lifecycle ----------
+  // Arc 3.5 Stage F2: the warp-landing seam (overworld.mjs doWarp
+  // calls this for EVERY warp) — routes to the Frontier controller
+  // (Pike chamber entries, Pyramid floor law).
+  sysWarpLanding(to, from) {
+    frontierOnWarpLanding(this.game, this, to, from);
+  },
+
   sysLoadMap(id) {
     const g = this.game;
     this.fxState = {
@@ -391,6 +399,9 @@ Object.assign(OverworldScene.prototype, {
         }
       }
     }
+    // Arc 3.5 Stage F2: Pyramid floor law during a climb — seeded
+    // spots and floor wilds (game/frontier.mjs frontierOnStep).
+    if (frontierOnStep(g, this, x, y)) return true;
     // Water + cave encounters (grass handled by the base onStep).
     if (this.sysEncounterStep(x, y, t)) return true;
     // Story event tiles.
@@ -786,6 +797,17 @@ Object.assign(OverworldScene.prototype, {
             const res = grantKeepsakeFromSource(g.state, b.item);
             g.audio.playSfx('dex-register');
             g.ui.say([res.status === 'granted' ? 'Found ' + ITEMS[b.item].name + '!' : res.line]);
+            return true;
+          }
+          // Arc 3.5 Stage F2: on a Pyramid floor during an active
+          // climb, a found medicine goes into the PYRAMID BAG — the
+          // mountain's supplies stay the mountain's until the climb
+          // ends (recorded in the F2 register).
+          if (PYRAMID_FLOOR_MAPS.includes(this.mapId) && g.state.frontier && g.state.frontier.run
+            && g.state.frontier.run.facility === 'pyramid' && ITEMS[b.item] && ITEMS[b.item].pocket === 'medicine') {
+            g.state.frontier.pyramidBag.push(b.item);
+            g.audio.playSfx('dex-register');
+            g.ui.say(['Found ' + ITEMS[b.item].name + '! It goes into the Pyramid Bag.']);
             return true;
           }
           g.state.bag[b.item] = (g.state.bag[b.item] || 0) + (b.n || 1);
