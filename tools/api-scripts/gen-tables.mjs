@@ -78,6 +78,18 @@ const tables = {
   // ADR-027 (Stage F): the closed arc-id vocabulary — the validator
   // accepts story.arc / story.arc_directive only from the registry.
   arcs: ARCS.map((a) => a.id),
+  // Arc 3.5 Stage F5-fix: the closed story.regionsDone vocabulary —
+  // the completionKey of EVERY ARCS row, emitted from the registry
+  // (the J0 gen-tables precedent: the registry is the single source).
+  // This set is NOT the regions list above: regionsDone carries
+  // completionKeys, and an arc's completionKey is not always a region
+  // name — the Frontier arc's regionKey is 'kanto' but its
+  // completionKey is 'frontier', so the hardcoded regions list (which
+  // has no 'frontier', and carries non-arc names like 'galar') could
+  // never accept a real Frontier-complete save. The validator's
+  // regionsDone membership check reads THIS set; its story.region
+  // check keeps reading `regions` above, unchanged.
+  regionsDoneKeys: ARCS.map((a) => a.completionKey),
   // ADR-027 Amendment 2 (Stage J0): per-arc level bands for the save
   // validator — the band max (the mon level cap for a save whose
   // story.arc is that arc) and the paired XP ceiling, both evaluated

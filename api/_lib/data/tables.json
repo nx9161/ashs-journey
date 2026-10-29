@@ -1,5 +1,5 @@
 {
-  "tablesVersion": "1d1733d198563aafa8fd3166195df6e133638d2316119cfef308753dbaf7209f",
+  "tablesVersion": "008f46510d26503bb3589a834779b00b2c9417c70aa580ffa327805823b878ef",
   "schemaVersion": 2,
   "species": [
     "abra",
@@ -1155,6 +1155,19 @@
     "liko"
   ],
   "arcs": [
+    "kanto",
+    "orange",
+    "johto",
+    "hoenn",
+    "frontier",
+    "sinnoh",
+    "unova",
+    "kalos",
+    "alola",
+    "journeys",
+    "horizons"
+  ],
+  "regionsDoneKeys": [
     "kanto",
     "orange",
     "johto",

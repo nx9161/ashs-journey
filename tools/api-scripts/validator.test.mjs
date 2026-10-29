@@ -5,7 +5,7 @@ import { validateSave, checkNestingDepth, tablesReady, tablesStatus } from '../.
 import { defaultState, SCHEMA_VERSION } from '../../src/game/state.mjs';
 import { validateSave as validateSaveClient } from '../../src/save/schema.mjs';
 import { xpForLevel } from '../../src/engine/formulas.mjs';
-import { xpCeilingFor } from '../../src/data/arcs.mjs';
+import { xpCeilingFor, ARCS } from '../../src/data/arcs.mjs';
 
 let pass = 0, fail = 0;
 function t(name, cond) {
@@ -215,6 +215,49 @@ t('H1 client accepts Lv300 party mon in Hoenn save', okClientArc('hoenn', (s) =>
 t('H1 client rejects Lv300 party mon in Johto save', badClientArc('johto', (s) => { s.party[0].level = 300; }, 'bad-mon-level'));
 t('H1 client accepts Lv300 mon with slowest-curve XP in Hoenn save', okClientArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpForLevel('slow', 300); }));
 t('H1 client rejects mon one XP over the Hoenn ceiling', badClientArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpCeilingFor({ story: { arc: 'hoenn' } }) + 1; }, 'bad-xp'));
+
+// 11. Arc 3.5 Stage F5-fix: the regionsDone vocabulary is the ARCS
+// registry's completionKeys (emitted by gen-tables as
+// tables.regionsDoneKeys), NOT the hardcoded regions list. The bug
+// (caught by the F5a chain drive on one continuous played save,
+// D08): the Frontier arc's regionKey is 'kanto' but its
+// completionKey is 'frontier' — the first arc whose completionKey
+// is not a region name — so every real Frontier-complete save was
+// rejected 'bad-regions-done' server-side while the client schema
+// accepted it. The story.region check is NOT part of this fix: it
+// keeps reading TABLES.regions exactly as at base (proven both
+// ways below).
+const COMPLETION_KEYS = ['kanto', 'orange', 'johto', 'hoenn', 'frontier', 'sinnoh', 'unova', 'kalos', 'alola', 'journeys', 'horizons'];
+t('F5-fix registry completionKeys are the expected regionsDone vocabulary (incl frontier, excl galar/paldea/liko)',
+  JSON.stringify(ARCS.map((a) => a.completionKey)) === JSON.stringify(COMPLETION_KEYS));
+// The D08 case, played shape: the four earlier arcs done, the
+// Frontier done, all seven symbols gold, the current arc frontier —
+// and story.region 'kanto', the Frontier arc's regionKey (a real
+// Frontier save never carries region 'frontier').
+const frontierComplete = (mut) => {
+  const s = JSON.parse(JSON.stringify(good));
+  s.story.arc = 'frontier';
+  s.story.region = 'kanto';
+  s.story.regionsDone = ['kanto', 'orange', 'johto', 'hoenn', 'frontier'];
+  s.story.flags.frontier_complete = true;
+  s.badges.symbols = ['gold', 'gold', 'gold', 'gold', 'gold', 'gold', 'gold'];
+  if (mut) mut(s);
+  return s;
+};
+t('F5-fix (i) played-shape Frontier-complete save validates server-side with ZERO errors (the D08 case)',
+  (() => { const rr = validateSave(frontierComplete()); return rr.ok && rr.errors.length === 0; })());
+t('F5-fix (iv) client schema result for the same Frontier-complete save is unchanged (accepted)',
+  (() => { const rr = validateSaveClient(frontierComplete()); return rr.ok && rr.errors.length === 0; })());
+t('F5-fix (ii) reject bogus regionsDone entry frontier2', bad((s) => { s.story.regionsDone = ['kanto', 'frontier2']; }, 'bad-regions-done'));
+t('F5-fix (ii) reject regionsDone entry galar (in the old regions list, not a registry completionKey)',
+  (() => { const rr = validateSave(frontierComplete((s) => { s.story.regionsDone = ['kanto', 'galar']; })); return !rr.ok && rr.errors.includes('bad-regions-done'); })());
+t('F5-fix (iii) accept regionsDone carrying any other registry completionKey (each singly, and the full 11-key list)',
+  COMPLETION_KEYS.every((k) => validateSave(frontierComplete((s) => { s.story.regionsDone = [k]; })).ok)
+  && validateSave(frontierComplete((s) => { s.story.regionsDone = [...COMPLETION_KEYS]; })).ok);
+t('F5-fix story.region frontier stays rejected bad-region server-side (unchanged from base)',
+  (() => { const rr = validateSave(frontierComplete((s) => { s.story.region = 'frontier'; })); return !rr.ok && rr.errors.includes('bad-region'); })());
+t('F5-fix story.region kanto (the Frontier regionKey) stays accepted server-side (unchanged from base)',
+  validateSave(frontierComplete((s) => { s.story.region = 'kanto'; })).ok);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

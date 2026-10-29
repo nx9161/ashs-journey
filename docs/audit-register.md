@@ -10810,3 +10810,94 @@ server-side under the raised bag cap).
   byte-stable (build ×2, same sha256 77c3411a…); public static
   total **10,094,049 B**. `personal/` byte-identical; dist/
   restored.
+
+## Arc 3.5 Stage F5-fix — SERVER VALIDATOR regionsDone GAP (2026-10-29)
+
+- **The bug (named honestly):** every real Frontier-complete save
+  was rejected by the cloud-save server validator with
+  `bad-regions-done`, while the client schema accepted it. Caught
+  by the F5a INDEPENDENT chain drive (D08) on one continuous played
+  save — not by any stage battery. Root cause is a Foundation-era
+  latent gap: the arc machine (`src/game/arcs.mjs`) writes the
+  registry `completionKey` into `story.regionsDone`, and the
+  Frontier is the first arc whose completionKey is not a region
+  name (its `regionKey` is 'kanto', its completionKey is
+  'frontier'); but the completionKey SET was never a generated
+  table. The server validator checked regionsDone membership
+  against `TABLES.regions`, emitted by `gen-tables` from a
+  hardcoded region-key list with no 'frontier' in it. The stage
+  batteries missed it because their synthetic fixtures never
+  carried a played `regionsDone` containing 'frontier' — only a
+  save actually played through the whole chain could see it.
+- **Consumer inventory (TABLES.regions, at base d754b28):** exactly
+  TWO readers, both in `checkStory` in `api/_lib/validator.mjs`:
+  (1) the `story.region` validity check — `story.region` must be
+  in `TABLES.regions`, else `bad-region`; (2) the
+  `story.regionsDone` membership check — every entry must be in
+  `TABLES.regions` (plus the duplicate and length->11 checks),
+  else `bad-regions-done`. No other consumer exists anywhere in
+  `api/` (grep-verified): badge sequences, arc ids, band caps and
+  every other table are separate emitted sets and never read
+  `regions`.
+- **The fix (registry-derived, the J0 gen-tables precedent — the
+  ARCS registry is the single source):** `gen-tables` now emits a
+  NEW set, `regionsDoneKeys: ARCS.map((a) => a.completionKey)` —
+  today [kanto, orange, johto, hoenn, frontier, sinnoh, unova,
+  kalos, alola, journeys, horizons] — and `tables.json` was
+  regenerated ONLY via the tool (`--check` green after; new
+  tablesVersion 008f46510d26…). The validator loads it as
+  `TABLES.regionsDoneKeys`, and ONLY the regionsDone membership
+  check reads it now. ALL other checks read exactly what they read
+  at base — in particular `story.region` validation still reads
+  `TABLES.regions` and did NOT gain 'frontier': a save claiming
+  `story.region` 'frontier' is still rejected `bad-region`
+  (pinned both ways: 'frontier' rejected, 'kanto' — the Frontier
+  arc's regionKey — accepted). Side effect, intended and correct:
+  'galar' / 'paldea' / 'liko' sat in the old regions list but are
+  no completionKey of any registry arc, so they are no longer
+  accepted in regionsDone (pinned for 'galar').
+- **Pins (validator suite 89 → 97, +8; save-contract unchanged at
+  12 — the contract shape did not move):** (i) a played-shape
+  Frontier-complete save — regionsDone [kanto, orange, johto,
+  hoenn, frontier], badges.symbols all 'gold', story.arc
+  'frontier', story.region 'kanto', `frontier_complete` set —
+  validates server-side with ZERO errors (the D08 case); (ii) a
+  bogus regionsDone entry still rejected `bad-regions-done`
+  ('frontier2', and 'galar'); (iii) regionsDone containing any
+  other registry completionKey accepted (each of the 11 singly,
+  and the full 11-key list at the length cap); (iv) the client
+  schema result for the same Frontier-complete save is unchanged
+  (accepted, zero errors); plus the registry-vocabulary pin (the
+  ARCS completionKeys equal the expected 11, incl. 'frontier',
+  excl. galar/paldea/liko) and the two story.region pins above.
+- **Closing proof — the F5a chain drive re-run:** the unmodified
+  drive (`~/workspace/ashs-journey-qa/arc-chain-qa/chain-drive.mjs`)
+  now reports, in its own output line: `CHAIN DRIVE TOTAL:
+  147/147 passed`, with D08 green — `{"server":[],"client":[]}`
+  (was 146/147, D08 failing on `bad-regions-done` only). The
+  drive's `chain-results.json` updated itself in place and is left
+  as it landed (147/147); its notes constant still carries F5a's
+  KNOWN FAILURE wording because the drive was run unmodified —
+  its results, not its notes, are the current evidence.
+- **PRE-EXISTING leftover (named, NOT fixed here): the
+  meta.location charset tension.** ~22 shipped map names contain
+  em-dashes (F5a's count; e.g. 'Bell Tower — Summit'); `meta.location`
+  is written by `doWarp` from the current map's name
+  (`src/game/overworld.mjs`: `g.state.meta.location =
+  this.map.name`), and the server validator's SAFE_TEXT charset
+  rejects the em-dash (`bad-meta-location:charset`). So a save
+  written immediately after warping into such a map carries a
+  charset-failing location string. It pre-dates this arc, is
+  transient (the next warp overwrites it), and is out of this
+  fix's scope — recorded for a future ruling. Evidence pointer:
+  F5a's report (the chain drive's SNAPSHOT FAITHFULNESS note,
+  where a Pyramid floor name — 'Battle Pyramid — AF' — surfaced
+  exactly this code before the drive's real-warp snapshot step).
+- Battery (this tree): validator **97** (89 + 8 new pins) + fuzz
+  **2000/2000** + save-contract **12/12**; frontier-checks
+  **136/136**; qa-changed-flows exactly **{b2, d9}**; battle-model
+  **45/45** (HARD); arc-foundation **47/47**; cheat-shop **44/44**.
+  **public/game.js: 9,931,427 B**, byte-stable (build ×2, same
+  sha256 77c3411a… — UNMOVED: tables.json is server-side data and
+  is not bundled); public static total **10,094,049 B**.
+  `personal/` byte-identical; dist/ restored.

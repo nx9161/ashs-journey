@@ -59,6 +59,16 @@ function loadTables() {
       forms: new Set(tables.forms || []),
       quests: new Set(tables.quests || []),
       regions: new Set(tables.regions || ['kanto']),
+      // Arc 3.5 Stage F5-fix: the story.regionsDone vocabulary —
+      // emitted by gen-tables from src/data/arcs.mjs as the
+      // completionKey of every ARCS row (registry-derived, the J0
+      // precedent). Distinct from `regions` above: regionsDone
+      // carries completionKeys, and the Frontier arc's completionKey
+      // is 'frontier' while its regionKey is 'kanto', so the regions
+      // list can never contain it. Only the regionsDone membership
+      // check in checkStory reads this set; the story.region check
+      // keeps reading `regions`, unchanged.
+      regionsDoneKeys: new Set(tables.regionsDoneKeys || []),
       arcs: new Set(tables.arcs || []),
       // Arc 3.5 Stage F2: the Frontier facility id list (emitted by
       // gen-tables from BADGE_SETS.symbols — slot order, the single
@@ -351,13 +361,20 @@ function checkStory(story, errors) {
     }
   }
   // Region chain (owner rule: regions unlock in story order).
+  // F5-fix consumer inventory for TABLES.regions: this story.region
+  // validity check is its ONLY remaining reader after the fix (the
+  // regionsDone check below was its other reader at base). It keeps
+  // reading `regions` exactly as at base — 'frontier' is a
+  // completionKey, not a regionKey (the Frontier arc's regionKey is
+  // 'kanto'), so a save claiming story.region 'frontier' stays
+  // rejected here, exactly as before.
   if (story.region !== undefined && (typeof story.region !== 'string' || !TABLES.regions.has(story.region))) errors.push('bad-region');
   if (story.regionsDone !== undefined) {
     if (!Array.isArray(story.regionsDone) || story.regionsDone.length > 11) errors.push('bad-regions-done');
     else {
       const seen = new Set();
       for (const r of story.regionsDone) {
-        if (typeof r !== 'string' || !TABLES.regions.has(r) || seen.has(r)) { errors.push('bad-regions-done'); break; }
+        if (typeof r !== 'string' || !TABLES.regionsDoneKeys.has(r) || seen.has(r)) { errors.push('bad-regions-done'); break; }
         seen.add(r);
       }
     }
