@@ -1,0 +1,25 @@
+# Stage H3b: mossdeep town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-mossdeep 16 16
+aaaadacaacdfaaaa
+aaaaabbaaaabaaaa
+caaaabcaaaaaabac
+aaccbacabacaccda
+aaaafaaaacaaabbc
+abbacaacaaabacbc
+acaaabacafaaaaac
+aaabacabcdbcaaaa
+baaaacaaaaacacad
+aaaaaaaaaaaacbaa
+aaaaafaabcfaabdc
+baaaacacaabaaaca
+ababcbaaaaaaaaac
+cbdabafabaabaaaa
+acccabbaaaafaaca
+abaaaaaaacaaabaa
+PAL
+a #8ab8c8 mossdeep-ground
+b #6c909c ground-dark
+c #a3d9ec ground-light
+d #f0f4f8 town-accent
+e #3a6ac0 town-accent-2
+f #536e78 ground-deep

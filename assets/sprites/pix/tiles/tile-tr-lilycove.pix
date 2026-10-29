@@ -1,0 +1,23 @@
+# Stage H3b: lilycove roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-lilycove 16 16
+dddddddddddddddd
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+aaaacaaaaacaaaaa
+bbbbbbbbbbbbbbbb
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+aacaaaaacaaaaaca
+bbbbbbbbbbbbbbbb
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+caaaaacaaaaacaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #5a3a6a lilycove-roof
+b #412a4c roof-dark
+c #704884 roof-light
+d #e85a7a roof-trim

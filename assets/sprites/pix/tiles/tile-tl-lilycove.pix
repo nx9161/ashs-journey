@@ -1,0 +1,24 @@
+# Stage H3b: lilycove landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-lilycove 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #c7add8 lilycove-landmark-wall
+b #81708c landmark-trim
+d #e85a7a landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

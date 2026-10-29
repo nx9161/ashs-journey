@@ -1,0 +1,23 @@
+# Stage H3b: current — fast-current streak floor of Routes 132-134 (full-bleed, walkable surf).
+PIX tile-current 16 16
+dcaaaaaaccdaabaa
+aaaadaccaaaabacc
+aaaaccaaaaabccaa
+aaccaaaaaaccaaad
+ccaaaadadcaaaaaa
+aaaaaaccbaaaaacc
+aaaaccabaaaaccaa
+aacdaabdaaccaaaa
+ccaaabaaccaaaaaa
+aaaabadcaaaaaacc
+aaabccaaaaaaccdd
+aaccaaaaaaccaaab
+ccaaaaaacdaaaaba
+baaaaaccaaaaabcc
+adaaccaaaaaaccaa
+aaccaaaaaaccaaaa
+PAL
+a #2a6ac0 current-deep
+b #3a9ad8 current-mid
+c #aee4f8 current-foam
+d #e8fcff current-spark

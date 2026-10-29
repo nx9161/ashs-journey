@@ -1,0 +1,25 @@
+# Stage H3b: evergrande town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-evergrande 16 16
+adaaabaaaaaaabaa
+cafaaccaaabaaabb
+afaacbaaabcaabaa
+abaaaaaaaaaacaaa
+caaaacbacaaaaaaa
+bbcbaaacacaaaaaa
+acabaacaacaadaaa
+fabacaaaacababaa
+afaaaaaaaaaabaac
+aafbaaccaadadbba
+aaaacaaaaaaabaaa
+babaaaacaaaaaafa
+baaaaaaaaaababac
+afbfcaaaacaaaaaa
+fbacacaaafaaacaa
+aaaaacaaabfafaaa
+PAL
+a #a8b8e0 evergrande-ground
+b #8390af ground-dark
+c #c6d9ff ground-light
+d #f0c030 town-accent
+e #8a5ab0 town-accent-2
+f #656e86 ground-deep

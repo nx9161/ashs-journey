@@ -1,0 +1,23 @@
+# Stage H3b: sootopolis roof — the town's roof-form family (full-bleed, solid).
+PIX tile-tr-sootopolis 16 16
+dddddddddddddddd
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+aababcaababcaaba
+abaacbabaacbabaa
+baacaabaacaabaac
+abcaababcaababca
+acbabaacbabaacba
+caabaacaabaacaab
+PAL
+a #6a7a8a sootopolis-roof
+b #4c5863 roof-dark
+c #8498ac roof-light
+d #3a90c8 roof-trim

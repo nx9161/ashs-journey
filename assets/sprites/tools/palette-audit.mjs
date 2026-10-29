@@ -67,7 +67,7 @@ function main() {
   // History: 48 (Wave 0) -> 54 (Wave 5a) -> 72 (Premium+ W0, spec §5 —
   // the deliberate, on-the-record raise; this line was stale at 48
   // through the 54 era and is corrected as part of the W0 raise).
-  ok('tiles family palette <= 940 colors (per-family budget)', tileHex.size <= 940, `${tileHex.size} colors`);
+  ok('tiles family palette <= 1010 colors (per-family budget)', tileHex.size <= 1010, `${tileHex.size} colors`);
 
   // 4. UI palette cap: 24 colors
   const uiPal = JSON.parse(fs.readFileSync(path.join(ROOT, 'ui', 'ui-palette.json'), 'utf8'));

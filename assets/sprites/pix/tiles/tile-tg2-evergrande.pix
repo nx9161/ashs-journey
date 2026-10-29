@@ -1,0 +1,25 @@
+# Stage H3b: evergrande town ground II — cross-hatched plaza texture (full-bleed, walkable).
+PIX tile-tg2-evergrande 16 16
+bccbcccbcccccabc
+aecccbcacacabecc
+cecbcbccacbbbbce
+cbacacccbbccaecb
+eccbcebccbbbbbbc
+cabebcccaccbacae
+ccbcccacabbcaaab
+baaacbcbabbbcabe
+cccccbbccccabcec
+accbacaaccbaacce
+ebabbaacbccccabb
+cbceccbbcacccbcb
+ccbcbbcccaabcbac
+abbcceaaebcccacc
+becccacbacccccbc
+eaabcbccacaabccc
+PAL
+a #a8b8e0 evergrande-ground
+b #8390af ground-dark
+c #c6d9ff ground-light
+d #f0c030 town-accent
+e #8a5ab0 town-accent-2
+f #656e86 ground-deep

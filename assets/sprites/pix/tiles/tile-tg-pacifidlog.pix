@@ -1,0 +1,25 @@
+# Stage H3b: pacifidlog town ground — signature street/meadow texture (full-bleed, walkable).
+PIX tile-tg-pacifidlog 16 16
+babbaacbcaacbdaa
+caabaabaafaacaaf
+aaaaabaaaaaaaaad
+aabfaacbaadbaaab
+aaabaaaaabaaadad
+aaacaaacaaacacaa
+aaaaaadabaaaabaa
+baddaabaaaaaffca
+abaabaababbdaaaa
+aaabcaabaaaaaacc
+aacacaaaafaaacdc
+faaadabaaaaaaafa
+baafaaaaaadadaaa
+abdaacaacaaaabaa
+caacabaaaaaaacba
+affaaacfaaacacaa
+PAL
+a #c8a878 pacifidlog-ground
+b #9c835e ground-dark
+c #ecc68e ground-light
+d #e86a4a town-accent
+e #4ab0a8 town-accent-2
+f #786548 ground-deep

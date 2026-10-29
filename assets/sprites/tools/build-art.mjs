@@ -210,7 +210,13 @@ function main() {
   // the cap is set just above the measured union, no headroom banked
   // beyond it. Recorded in docs/audit-register.md (H3a section), same
   // precedent. (H3b's five east settlements will re-measure.)
-  const FAMILY_PALETTE_BUDGETS = { tiles: 940 };
+  // Stage H3b: 940 -> 1010 — the five east-Hoenn settlements
+  // (lilycove..evergrande) add 40 identity tiles + 8 H3b kinds on the
+  // same per-town anchor programme; the union MEASURES 996 hexes, so
+  // the cap is set just above the measured union, no headroom banked
+  // beyond it. Recorded in docs/audit-register.md (H3b section), same
+  // precedent.
+  const FAMILY_PALETTE_BUDGETS = { tiles: 1010 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

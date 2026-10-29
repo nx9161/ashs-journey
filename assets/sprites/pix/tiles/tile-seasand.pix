@@ -1,0 +1,23 @@
+# Stage H3b: seasand — pale underwater sand floor of the dive set (full-bleed, walkable).
+PIX tile-seasand 16 16
+abbabbababaababd
+babaabaaabaadaac
+aaaaacaaaacacaaa
+acaaaacabcaadaaa
+acaadaacaadabaab
+aabcaabbbaaadaaa
+baababcaacbaaaba
+aaaabaabcbaadbad
+baaaaaabaaaaaaaa
+bdcaaaaccaabaaaa
+ccabbaabbcabaaaa
+aaaababcacaacaac
+aaddacbacaaaaaaa
+ababbcaaaaaaabca
+aaaaadbabaaaaabc
+aaacaaaaaaaaaaab
+PAL
+a #cfe0d2 sea-sand
+b #a4c4b2 sea-sand-dark
+c #eef6e2 sea-sand-light
+d #6aa8a0 sea-sand-algae

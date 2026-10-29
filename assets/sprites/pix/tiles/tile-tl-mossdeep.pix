@@ -1,0 +1,24 @@
+# Stage H3b: mossdeep landmark facade — grand wall, lit window pair, town band (full-bleed, solid).
+PIX tile-tl-mossdeep 16 16
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahggaaaahggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaagggaaaagggaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaddddddddddddaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+PAL
+a #95c7d8 mossdeep-landmark-wall
+b #61818c landmark-trim
+d #f0f4f8 landmark-band
+g #3a5a7a landmark-glass
+h #9ac8e8 landmark-glass-light

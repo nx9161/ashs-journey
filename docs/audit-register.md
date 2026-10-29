@@ -8550,3 +8550,210 @@ deterministically by `~/workspace/ashs-journey-qa/hoenn-h3a/gen_maps7.py`
 - The r119 land table's masquerain/surskit line and the Weather
   Institute dressing are scenery only until H4's story pass; no
   institute interior is authored in this half.
+
+---
+
+## H3b — Hoenn maps, east/water + underwater set (Arc 3, Stage H3b)
+
+Authored on top of H3a (base `9a3ba1f`). Tooling:
+`~/workspace/ashs-journey-qa/hoenn-h3b/` (`gen_h3b.py` — extends the
+H3a base round-tripped from git, applies the base patches, appends
+the east set, deterministic; `gen_h3b_art.py` for the tile art;
+`hoenn-sweep.mjs` / `hoenn-richness.mjs` / `hoenn-enc-audit.mjs`
+extended from the H3a tools). All craft law from H3a/H0 applies.
+
+### What landed — 40 new maps, Hoenn total 99 (roadmap band 85–100)
+
+- **Settlements (5):** lilycove 30×20, mossdeep 28×18, sootopolis
+  28×18, pacifidlog 28×18, evergrande 30×18.
+- **Land routes (3):** r120 24×22 (rain, Ancient Tomb bluff),
+  r121 30×16 (rain; Safari fence scenery north, Mt. Pyre pier
+  south-east), r123 26×16 (Berry Master's garden; west door to
+  r118's new SE avenue, east door to r122's south shore).
+- **Water routes (12):** r122 28×16 (Mt. Pyre island approach),
+  r124–r134 28×16 each. r125 dresses Shoal Cave's bay; r126 carries
+  the Sootopolis crater ring; r131 carries Pacifidlog's west edge +
+  the Sky Pillar islet; r132–r134 dress the canon currents as a new
+  `current` floor kind (dressing only — no push mechanic; each
+  current lane keeps a calm, fully walkable return lane, proven by
+  the sweep).
+- **Underwater (4):** r124-underwater, r126-underwater,
+  r127-underwater, r128-underwater, all 26×16, `underwater: true`,
+  dressed kelp/rock/sand trenches with their own encounter tables.
+- **Dungeons (12):** mt-pyre 24×18 (ONE map, two dressed zones —
+  misty interior halls south, open summit north with the twin
+  shrines and both orb pedestals), magma-hideout 24×14 (entered
+  from Mt. Chimney's caldera door, H3a patch), aqua-hideout 24×14
+  (Lilycove harbour), seafloor-cavern 24×14, cave-of-origin 22×14,
+  shoal-cave 24×14 (ice + low-tide sand), sky-pillar 20×18 (tower
+  floors as dressed bands, sky-garden summit), victory-road 26×16
+  (a through-passage INSIDE evergrande: south town ↔ league
+  plateau, four cliff mouths), desert-ruins 18×14, island-cave
+  18×14, ancient-tomb 18×14, scorched-slab 16×12.
+- **Gyms (2, layouts only):** gym-mossdeep (psychic star-mat),
+  gym-sootopolis (ice-floe mat) — shipped gym idiom.
+- **Contest hall (1):** contest-lilycove, `contestHall: 'lilycove'`
+  — the 4th hall, same idiom/field as H3a's three (H5's seam).
+- **League (1):** league-evergrande — Elite Four doors west,
+  Champion door north, honour hall; the Silver Stadium idiom.
+  Conference staging itself is H4's.
+- **Base patches on H3a maps (5):** fortree (east road rows 8–9 →
+  r120), r111 (Desert Ruins mouth (19,2)/(20,2) + sign), r105
+  (Island Cave islet mouth rows 4–5), r118 (SE avenue x22–23 →
+  r123), mt-chimney (caldera lip warp tiles (13,4)/(14,4) → the
+  magma-hideout doors; the caldera ring itself unchanged).
+
+**Judgment calls recorded:** Mt. Pyre ships as ONE map with two
+zones (like New Mauville's two halves in H3a) rather than a pair —
+the interior/summit seam is a dressed stair band, no warp needed.
+The east towns gain NO new house interiors: their landmark
+buildings (Lilycove Department Store + museum, Mossdeep Space
+Center tower, Steven's house, Pacifidlog's raft houses, Ever
+Grande's plateau houses) are closed dressed landmarks in the
+H3a town idiom, which is what keeps the Hoenn total at an honest
+99 inside the roadmap band. H4 may open interiors as story needs.
+
+### Identity + tile art
+
+- East town chars: U+1E00 idx **356–395** (HOENN_TOWN_ORDER extended
+  lilycove/mossdeep/sootopolis/pacifidlog/evergrande; ground tones
+  lavender / glacier teal / crater white / driftwood tan / league
+  slate-blue). **8 new H3B tile kinds** at idx 396–403: `seasand`
+  (floor), `kelpbed` (floor), `current` (floor), `uwrock` (wall),
+  `kelp` (prop), `uwcoral` (prop), `sealstone` (prop),
+  `ancientpillar` (prop) — wired exactly as H3's kinds were
+  (tiles.mjs defs, art.mjs loops/variants/families, maps.mjs
+  WALKABLE floors + east town tg/tg2 extension).
+- **Tile spend: 24,625 B** — art-data 6,975,585 → **7,000,210 B**;
+  headroom left under the 7,100,000 ceiling: **99,790 B** (ceiling
+  not raised). 48 new .pix (40 town + 8 kinds). Build deterministic
+  (identical md5 across rebuilds).
+- **Palette (J3b procedure, measured):** tiles family union
+  920 → **996** hexes after the east art, so `FAMILY_PALETTE_BUDGETS
+  .tiles` was raised 940 → **1010** in build-art.mjs and mirrored
+  in palette-audit.mjs. Palette audit: tiles-family line PASS
+  (996 ≤ 1010); the audit's 4 summary failures are the pre-existing
+  base ones (todo-marker slop in tile-water-1/2/3.pix), unchanged,
+  not chased. New union headroom: 14 hexes — H4+ tile art must
+  re-measure before assuming room.
+- **Jaccard (16 settlements, 120 pairs): max 0.585
+  (slateport~lilycove)** ≤ 0.60 ✓. New-settlement worst pairs:
+  lilycove~slateport 0.585, sootopolis~petalburg 0.581,
+  mossdeep~petalburg 0.522, evergrande~sootopolis 0.511,
+  pacifidlog~lilycove 0.341. Every settlement keeps ≥4 signature
+  kinds + a landmark (dept-store + lighthouse lilycove; space
+  rocket mossdeep; crater + Cave of Origin sootopolis; raft
+  platform pacifidlog; falls + league plateau evergrande).
+
+### The dive pairing (ruling 5, data half) — format for H4
+
+Declared in `src/data/maps7.mjs` three consistent ways:
+1. **Exported table `DIVE_PAIRS`** — the machine-readable list.
+   Each entry: `{surface: {map, x, y}, underwater: {map, x, y}}`
+   naming the exact paired TILES.
+2. **Per-map fields** mirroring it: surface maps carry
+   `diveSpots: [{x, y, to: {map, x, y}}]`; underwater maps carry
+   `surfaceSpots: [{x, y, to: {map, x, y}}]` (and `underwater:
+   true`). Dive tiles render as `W` (dark water) on the surface,
+   `Ā` (waterglow) below.
+3. Every paired tile's LANDING (the tile the traveller steps onto
+   after the transition) is one step south of the receiving spot
+   and is plain walkable floor/water — the sweep proves tiles +
+   landings on both sides of every pair.
+
+The 10 tile pairs: r124 (13,7)/(14,7) ↔ r124-underwater (7,6)/
+(8,6); r126 ↔ r126-underwater same shape; r127 ↔ r127-underwater;
+r128 ↔ r128-underwater; **sootopolis (13,12)/(14,12) in its crater
+lake ↔ r126-underwater (20,6)/(21,6)** — Sootopolis has NO surface
+gate: entry is the r126 dive pair then trenches, exit is the same
+pair in reverse, unconditional once entered (no-soft-lock law).
+Seafloor Cavern is NOT a dive pair: it is a walking warp inside
+r128-underwater (tiles (22,5)/(23,5) → cavern south doors), exits
+back to the trench. H4 gates the sysInteract DIVE action on the
+`diveSpots`/`surfaceSpots` declarations; nothing else is needed.
+
+### Connectivity — walking sweep PASS (99/99)
+
+- Every Hoenn map (H3a's 59 re-proven + 40 new) is one walkable
+  component; every warp/dive landing walkable; the map graph from
+  littleroot reaches **99/99** maps. Dive pairs: **10 declared,
+  all two-way consistent, tiles + landings proven**.
+- Chains: Fortree→r120→r121→Lilycove→r124→Mossdeep; Mossdeep→
+  r125/r126; south sea loop r126→r127→r128→r134→Ever Grande;
+  Pacifidlog loop r126→r129→r130→r131→r132→r133→r134; Victory
+  Road loops inside Ever Grande. Pacifidlog and Sky Pillar both
+  have walking returns; no east map is a trap.
+
+### Richness census (hoenn-richness, per-tile pixel colours)
+
+- Towns (floor 144): lilycove 182, mossdeep 165, sootopolis 175,
+  pacifidlog 144, evergrande 185; top ground shares ≤31.5%
+  (town caps: family ≤40% / kind ≤55%). H3a towns unchanged.
+- New land routes (floor 60): r120 183, r121 162, r123 168.
+  New seas (floor 61): 62–85 (min r128/r129 62). **Underwater
+  (floor 50): 51–57.**
+- New caves/dungeons (floor 50): 58–148 (min ancient-tomb 58;
+  mt-pyre 148). New interiors (floor 55): gyms 62/62, contest 70,
+  league 80. **Richness: PASS — all 99 maps.**
+
+### Encounters + weather (rulings 4/6)
+
+- Encounter audit: **747 entries** (H3a 359 → +388), **70 maps**
+  with tables, global span **201–295** — every entry a real
+  species in the 201–300 band, no legendaries anywhere.
+  East curve: r120 250–258 → Lilycove/Mossdeep waters 258–274 →
+  Sootopolis 270–281 → underwater slices 264–288 (clamperl,
+  chinchou, lanturn, corsola, seadra, relicanth w3) → Ever
+  Grande / Victory Road 285–295. Land tables carry their places
+  (r120 absol/shuppet; mt-pyre chimecho rare at the summit;
+  sky-pillar claydol/altaria high band).
+- **Regi tombs ship EMPTY** (`encounters: null`): dressing +
+  sealed chamber only — a sealstone row with ONE floor gap, a
+  shrine and ancient pillars behind it. H6 places the puzzle +
+  tenants; the gap is not a soft-lock (walking in/out is free).
+- Weather on all 20 new outdoor maps: **rain r120, r121** (canon
+  feel); **sun** pacifidlog, evergrande, r128, r132, r133, r134;
+  **clear** the other 12. **Underwater maps carry NO weather
+  field** (recorded choice — `underwater: true` is the marker);
+  interiors none, as H3a.
+
+### Battery + build (base gates, unchanged expectations)
+
+- qa-changed-flows failures exactly **{b2, d9}**; battle-model
+  **45/45**; campaign-smoke **24/24**; fidelity **35/35**;
+  qa-slice exactly **{s6, l8}**; rejuv-phase2 exactly **{A09,
+  C01}** (environmental chromium, as at base); budgets **all
+  gates pass**; `personal/` byte-identical (sha256 f434ba63…,
+  restored from HEAD after the battery regenerated it).
+- **public/game.js: 9,601,813 B** (+134,233 vs H3a's 9,467,580 =
+  maps7 +106,988, art-data +24,625, engine wiring ~+2,620).
+  **Static total (game.js + index.html): 9,693,373 B** vs the
+  **10,100,000 B re-open trigger: 406,627 B of margin.**
+  Hoenn-close running estimate: H4/H5/H6 add story/systems data
+  (Johto's story file is 90,163 B as the scale guide) — projecting
+  ≈9.85–9.89 MB at Hoenn close, in line with H0's ~9.87 MB
+  projection and under the trigger. The 12 MiB hard budget is
+  untouched (guest bundle 9,626,843 B).
+
+### Leftovers / what H4 must know
+
+- Dive ENGINE is yours: gate sysInteract on `diveSpots` /
+  `surfaceSpots` / `DIVE_PAIRS` above. Sootopolis access is
+  dive-only by design (fly point may be added by story, never a
+  surface gate). Seafloor Cavern is reached by walking warp from
+  r128-underwater, not by dive.
+- `current` tiles on r132–r134 are DRESSING (a floor kind), not a
+  push mechanic — if H4 wants canon current-push, it builds on the
+  kind; every lane already has a calm walkable return.
+- The two hideouts are dressed shells with encounter tables and
+  working doors (magma via Mt. Chimney's caldera, aqua via the
+  Lilycove harbour); team story, locks and the submarine are H4's.
+- Gyms are layouts only; the Lilycove contest hall is inert until
+  H5 (`contestHall: 'lilycove'` is the seam); league-evergrande is
+  dressed staging — the Conference itself is H4's story work.
+- Regi tombs: empty + sealed-with-one-gap by design (H6). The
+  r121 Safari fence is scenery (no safari map in this stage).
+  Weather climax states (drought/deluge) remain H4's; east maps
+  declare fair-weather fields only.
+- Palette union headroom is 14 hexes and art-data headroom is
+  99,790 B — any H4+ art re-measures first (J3b procedure).

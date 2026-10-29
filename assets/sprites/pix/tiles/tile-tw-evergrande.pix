@@ -1,0 +1,23 @@
+# Stage H3b: evergrande house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-evergrande 16 16
+bbbbbbbbbbbbbbbb
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaahgggaaaaaaaaa
+abbggggbaaaaaaaa
+baaggggaaaaaaaaa
+aaaggggaaaaaaaab
+aaaggggaaaaaaaaa
+aaabbbbaaaaaaaba
+aaaaaaaaaaabaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaba
+bbaaaaaabaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #b5c7f2 evergrande-house-wall
+b #76819d house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

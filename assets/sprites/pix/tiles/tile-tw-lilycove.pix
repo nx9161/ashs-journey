@@ -1,0 +1,23 @@
+# Stage H3b: lilycove house wall — wall + one lit window + sill (full-bleed facade).
+PIX tile-tw-lilycove 16 16
+bbbbbbbbbbbbbbbb
+aaaaaabaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaaaabaaaaaba
+aaahgggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggaaaaaaaaa
+aaaggggbaaaaabaa
+aaabbbbaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaabaaaaaaaa
+aabaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #c7add8 lilycove-house-wall
+b #81708c house-wall-trim
+g #e8c86a house-window-lit
+h #f5e6a8 house-window-light

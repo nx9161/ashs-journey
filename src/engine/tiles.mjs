@@ -303,7 +303,8 @@ export const H3_WALKABLE_CHARS = H3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
 // kind-name prefixes, so Hoenn kinds ride the shipped W5 paths.
 export const HOENN_TOWN_ORDER = ['littleroot', 'oldale', 'petalburg', 'rustboro', 'dewford',
-  'slateport', 'mauville', 'verdanturf', 'fallarbor', 'lavaridge', 'fortree'];
+  'slateport', 'mauville', 'verdanturf', 'fallarbor', 'lavaridge', 'fortree',
+  'lilycove', 'mossdeep', 'sootopolis', 'pacifidlog', 'evergrande'];
 export const HOENN_TOWN_STYLE = {
   littleroot: { ground: '#a4bd76', form: 'quiet starter-village timber' },
   oldale:     { ground: '#b3a35e', form: 'dry-meadow crossroads gable' },
@@ -316,6 +317,11 @@ export const HOENN_TOWN_STYLE = {
   fallarbor:  { ground: '#aca292', form: 'ash-country weathered timber' },
   lavaridge:  { ground: '#bd7a48', form: 'hot-spring volcanic stone' },
   fortree:    { ground: '#5d9c66', form: 'canopy treehouse' },
+  lilycove:   { ground: '#b8a0c8', form: 'contest-port lavender tile' },
+  mossdeep:   { ground: '#8ab8c8', form: 'space-center pale slab' },
+  sootopolis: { ground: '#e8e4da', form: 'crater white stone' },
+  pacifidlog: { ground: '#c8a878', form: 'raft-timber float' },
+  evergrande: { ground: '#a8b8e0', form: 'league marble + gold' },
 };
 const HOENN_KIND_SUFFIXES = ['tg', 'tg2', 'tc', 'td', 'tr', 'tl', 'th', 'tw'];
 export const HOENN_TOWN_CHARS = {};
@@ -329,6 +335,28 @@ HOENN_TOWN_ORDER.forEach((id, i) => {
 });
 export const HOENN_TOWN_GROUND_CHARS = HOENN_TOWN_ORDER.map((id) => HOENN_TOWN_CHARS[id].tg);
 export const HOENN_TOWN_GROUND2_CHARS = HOENN_TOWN_ORDER.map((id) => HOENN_TOWN_CHARS[id].tg2);
+// ---- Arc 3 Stage H3b: Hoenn east/water kinds ----
+// Chars continue the block at U+1E00+396 (H3a kinds 261..267, Hoenn
+// towns 268..395 — the five east settlements own idx 356..395 in
+// HOENN_TOWN_CHARS above). Same class convention as H3: floor =
+// WALKABLE ground family of its own, wall = solid, prop = solid
+// object composited over the ground it stands on. Authored art:
+// assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (Stage H3b).
+export const H3B_KIND_DEFS = [
+  ['seasand', 'floor'], ['kelpbed', 'floor'], ['current', 'floor'],
+  ['uwrock', 'wall'],
+  ['kelp', 'prop'], ['uwcoral', 'prop'], ['sealstone', 'prop'], ['ancientpillar', 'prop'],
+];
+export const H3B_KIND_CHARS = {};
+H3B_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 396 + i);
+  H3B_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const H3B_PROP_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) => k);
+export const H3B_FLOOR_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
+export const H3B_WALL_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
+export const H3B_WALKABLE_CHARS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => H3B_KIND_CHARS[k]);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
 export const GYM_KIND_BY_TOWN = {
   viridian: 'gym-ground', pewter: 'gym-rock', cerulean: 'gym-water', vermilion: 'gym-volt',

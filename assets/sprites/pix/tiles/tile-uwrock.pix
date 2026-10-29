@@ -1,0 +1,23 @@
+# Stage H3b: uwrock — underwater rock wall of the dive set (full-bleed, solid).
+PIX tile-uwrock 16 16
+bbbbbbbbbbbbbbbb
+abaaacabaacadcca
+cccdbaaaaaabaabb
+bcbcaaaabbaadacb
+aabaaaacaaddaaac
+aaabaabaaaacaaaa
+aaabaaacabaaacbb
+aaddbabcaabaaaac
+aaaabbaaaadbbaca
+aabaabaacaaaacaa
+aaaacbaaacaaaabb
+aaaabdbaaaacaaab
+baaaabaababbabac
+daababbcbaaaaaad
+acadaabaaaacaaaa
+bbbbbbbbbbbbbbbb
+PAL
+a #3a4a6a uw-rock
+b #263248 uw-rock-dark
+c #5a7a9a uw-rock-light
+d #48b0a8 uw-rock-glint
