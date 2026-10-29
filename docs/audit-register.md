@@ -7840,3 +7840,240 @@ right in all three regions, the systems fire in real play, the gated
 legendary refuses before its gate and completes after it, and fleeing a
 shrine costs nothing. SHIP-WITH-NOTES, the notes being §6's pair and
 framing and §7's log order — none of them a player's blocker.**
+
+## Arc 3 Stage H1 — Species data: +135 → National dex 386 (2026-10-29)
+
+Implementer pass on main @ eaac542 (Foundation + Orange + Johto shipped).
+Data only — no maps, story, or sprites (H2 owns the 138 new species' art;
+until then the new entries render through the shipped forge fallback from
+spriteSeed, exactly as Johto's did between J1 and J2). Nothing pushed,
+nothing deployed. `personal/` byte-identical (the build regenerates the
+personal bundle from source; it was restored from HEAD after the build,
+per the frozen-retired-edition precedent — `git status` shows no
+personal/ paths in this stage's diff).
+
+### 1. What landed
+
+- **ETL (reproducible, not hand-typed):**
+  `~/workspace/ashs-journey-qa/arc3-etl/fetch-hoenn.mjs` stages the
+  PokeAPI facts cache (`arc3-etl/raw/`: pokemon/species 252–386, 75
+  evolution chains, pokemon 10001–10003 for the Deoxys formes — facts
+  only, no sprites or art ever fetched); `etl-hoenn.mjs` mirrors the
+  Johto machinery and EMITS `src/data/species4.mjs`
+  (`export const SPECIES_HOENN`, **138 entries**). Per-species audit
+  trail (learnset source, dropped moves, top-ups/fills, TM analogue,
+  evolution mapping, growth raw→assigned) in `arc3-etl/etl-notes.json`.
+  Registered in `scripts/module-order.json` after species3.mjs; folded
+  in `src/data/merge.mjs` (`Object.assign(SPECIES, SPECIES_HOENN)`);
+  `tools/api-scripts/gen-tables.mjs` folds it the same way and the
+  validator tables were regenerated ONLY through it (tablesVersion
+  44eb8c22… → **0525370a…**, 395 species / 144 moves / 160 items).
+- **Accounting:** species entries **257 → 395** = 386 National dex +
+  partner + 5 shipped forms + **3 Deoxys form entries** (§5). No Hoenn
+  species duplicated a shipped entry (the Johto guests problem does not
+  recur in this band). **Diploma accounting untouched:** the Kanto-151
+  diploma still counts exactly the dexNo 1–151 non-form species and the
+  National-493 keying stands (cheat-shop A13/B-diploma proofs green);
+  `DEX_TOTAL` stays **1025**; the **386 horizon** is read from the
+  Foundation registry's Hoenn row, as designed — no registry edit in
+  this stage (the `sealed` → `shipped` flip is H4's, ruling 1).
+- **Field mapping** follows the shipped schema exactly: PokeAPI
+  stats/types (current typings), capture_rate, base_experience,
+  spriteSeed dexNo*100+1, body from PokeAPI `shape` with recorded
+  overrides (shedinja/ninjask/masquerain→bird, metagross/tropius/
+  walrein line→quad, the three Regis + deoxys→biped, milotic/huntail/
+  gorebyss→serpent, baltoy/claydol line/castform/glalie→blob, … — full
+  list in the ETL's BODY_OVERRIDE). Every entry carries `eggGroups` +
+  `hatchCounter` (+ `baby: true` for azurill/wynaut) for the shipped
+  breeding system, and an ORIGINAL one-line flavor (hand-authored in
+  the ETL's FLAVOR table).
+- **TM lists:** copied from the closest shipped analogue (now incl.
+  the Johto roster) by type overlap then BST distance; analogue per
+  species recorded in the ETL notes; all ids resolve (fidelity-verified).
+- **Support tables:** `battler-tiers.mjs` + `idle-classes.mjs` gain
+  **138 rows each (395 total in both)** by the shipped rules — tiers by
+  bulk (HP+DEF+SPD: S <160, M 160–244, L ≥245); idle by body plan
+  (bird→hover, fish/serpent→serpentine, blob→inert, else grounded) with
+  hand overrides for floaters/levitators (castform, lunatone, solrock,
+  chimecho, shedinja, beldum, metang, claydol, shuppet, duskull,
+  jirachi, latias, latios, the four Deoxys entries, tropius, salamence,
+  flygon → hover; regice → inert). Row generation script:
+  `arc3-etl/gen-tiers-idle.mjs`.
+
+### 2. Growth curves (J0 law, discharged with substitutions)
+
+The ETL asserts no entry is ever ASSIGNED 'erratic' or 'fluctuating'.
+Hoenn is the first band where canon actually uses them — PokeAPI's
+current names are 'slow-then-very-fast' (erratic) and
+'fast-then-very-slow' (fluctuating) — so, the Johto throw-rule being
+unusable here, they are mapped to the **nearest supported curve by
+canon level-100 total** and every substitution is recorded in the ETL
+notes: **erratic (600,000) → 'fast' (800,000)** for 16 species
+(nincada/ninjask/shedinja, volbeat, swablu/altaria, zangoose,
+lileep/cradily, anorith/armaldo, feebas/milotic, clamperl/huntail/
+gorebyss) and **fluctuating (1,640,000) → 'slow' (1,250,000)** for 12
+(shroomish/breloom, makuhita/hariyama, illumise, gulpin/swalot,
+wailmer/wailord, seviper, corphish/crawdaunt). All other raw curves
+map directly (medium-slow 32 · 'medium'→mediumfast 29 · slow 31 ·
+fast 15, before substitutions). The literal curve names
+'erratic'/'fluctuating' appear in NO entry.
+
+### 3. Learnsets (ruling 3)
+
+- Source: PokeAPI `moves`, version_group **emerald preferred**,
+  ruby-sapphire fallback, level-up only, restricted to the game's
+  existing move table (moves.mjs + moves2.mjs — no new moves).
+  **134 of 135 species took a surviving emerald set**; the one
+  fallback is deoxys (normal) — PokeAPI carries no emerald level-up
+  set for the normal forme, so its ruby-sapphire set ships.
+- **Levels:** canonical level-1 moves stay at key **1**; every
+  canonical level ≥2 shifts **+200** (band-local, Amendment 2). Every
+  entry's learnset keys are 1 or inside 202–300 (machine-checked).
+- **Dropped: 716 (species, move) pairs, 158 distinct canonical moves**
+  with no game counterpart (full list in etl-notes.json — aerial-ace,
+  ancient-power, crunch, dragon-claw, …).
+- **Fills (<4 distinct surviving moves): 48 moves across 27 entries**
+  (25 species + the Deoxys attack/defense formes), placed at level 1,
+  type-staples first, then type-matching canon TM/HM moves, then
+  Normal staples: wurmple +leechlife · silcoon/cascoon +leechlife,
+  pinmissile, twineedle · lombre +watergun · ludicolo +watergun,
+  bubblebeam · shiftry +absorb · slakoth/slaking/delcatty +tackle ·
+  mawile +tackle, slash, quickattack · illumise +leechlife, pinmissile
+  · feebas +watergun, bubblebeam · castform +quickattack · shuppet/
+  banette +lick, confuseray · wynaut +confusion, psybeam · clamperl
+  +bubblebeam, surf · huntail +watergun · beldum +tackle, slash,
+  quickattack (canon: takedown alone) · regirock +rockslide · regice
+  +aurorabeam · registeel +tackle · latias/latios/rayquaza
+  +dragonrage · deoxysattack/deoxysdefense +confusion, psybeam,
+  psychic, teleport (the shared in-table Psychic pool of ruling 2).
+
+### 4. Evolutions — mappings and the hard cases (ruling 3, resolved)
+
+Engine vocabulary only: level / stone / trade, branching via `evos`
+with the primary branch duplicated in the singular `evo` slot (the
+shipped poliwhirl/slowpoke dual representation).
+
+- **Band-local level evos (canon +200), chain-derived:** all Hoenn
+  lines (starters 216/236, poochyena 218, zigzagoon 220, lotad 214,
+  seedot 214, taillow 222, wingull 225, ralts 220, kirlia 230,
+  surskit 222, shroomish 223, slakoth 218, vigoroth 236, whismur 220,
+  loudred 240, makuhita 224, aron 232, lairon 242, meditite 237,
+  electrike 226, gulpin 226, carvanha 230, wailmer 240, numel 233,
+  spoink 232, trapinch 235, vibrava 245, cacnea 232, swablu 235,
+  barboach 230, corphish 230, baltoy 236, lileep 240, anorith 240,
+  shuppet 237, duskull 237, wynaut 215, snorunt 242, spheal 232,
+  sealeo 244, bagon 230, shelgon 250, beldum 220, metang 245,
+  silcoon/cascoon 210).
+- **Stones (chain-derived use-item):** lombre→ludicolo waterstone,
+  nuzleaf→shiftry leafstone, skitty→delcatty moonstone.
+- **Happiness → level 210:** azurill→marill (band analogue of the
+  Johto babies' 110 = band floor +9).
+- **Feebas → Milotic = level 220** (ruling 3: no beauty stat exists;
+  both entries' flavor lines note it honestly — "beauty, in this
+  region, is patience").
+- **Wurmple branch:** the engine cannot pick a branch per individual
+  at level-up — the level trigger reads only the singular `evo` slot
+  (battle.mjs / main-systems.mjs), `evolveMon` has no branch pick, and
+  the mon record carries no individual seed (spriteSeed is
+  per-species, so a "spriteSeed-parity pick" would be a constant, not
+  a per-individual pick). Lightest supported route, on the tyrogue
+  precedent: singular `evo` = **silcoon at 207** (canon 7 +200); both
+  branches are recorded in `evos[]` for the record. **H3 owns the
+  cascoon line's obtainability** (wild placement of cascoon/dustox —
+  the silcoon line evolves in-data: silcoon→beautifly 210,
+  cascoon→dustox 210).
+- **Clamperl → Huntail/Gorebyss:** `items.mjs` was checked — **no
+  deepseatooth / deepseascale exists** in the shipped item list, so
+  the held-item trade cannot be expressed. Fallback per ruling 3 =
+  item-use evolutions on shipped stones, dual representation:
+  `evo` huntail via **waterstone** (the shipped water item-use; the
+  tooth is a water fang), `evos` adds gorebyss via **moonstone** (the
+  shipped stone of the pink/grace lines — skitty/jigglypuff
+  precedent). Recorded as an adaptation, not a claim of canon.
+- **Nincada → Ninjask = level 220; Shedinja spawn-on-evolve NOT
+  shipped.** `evolveMon` is shared by battle level-ups, stone use and
+  Link Transfer with no party-slot/ball bookkeeping, and a spawned
+  mon would need save-contract coverage this data stage should not
+  improvise. Per ruling 3's either/or, **Shedinja's DATA entry ships
+  here and H3 MUST place it as a rare wild encounter on a fitting map**
+  (its flavor line carries the same note in-game). Never neither.
+- **Post-386 evolutions emit NO evo** (out of scope, recorded in the
+  ETL notes): linoone→obstagoon, kirlia→gallade, nosepass→probopass,
+  roselia→roserade, dusclops→dusknoir, snorunt→froslass.
+
+### 5. Deoxys formes + Castform (ruling 2)
+
+- **Deoxys (Normal)** is species dex 386 in the main loop. **Attack /
+  Defense / Speed** ship as partner-pattern FORM entries in
+  species4.mjs — `deoxysattack` / `deoxysdefense` / `deoxysspeed`:
+  own speciesId, **shared dexNo 386**, `form: true` +
+  `baseSpecies: 'deoxys'`, canon per-forme stats from their own
+  PokeAPI pokemon records (10001/10002/10003; all BST 600, redistributed
+  per forme), band-local learnsets from their own Gen-3 sets (attack/
+  defense filtered below 4 and filled from the shared Psychic pool,
+  §3), spriteSeeds 38602/38603/38604 on the shipped form-seed pattern.
+  They are excluded from diploma counts by the same form mechanism as
+  the 5 shipped forms (fidelity's dex-uniqueness assertion skips form
+  entries by design).
+- **Reconciliation with forms.mjs:** the FORMS catalogue already
+  carried `deoxys-attack` / `deoxys-defense` / `deoxys-speed` rows
+  (speciesId 386) and the Hoenn mega/primal rows (mega-sceptile …
+  primal-kyogre) — catalogue data only, like the other non-playable
+  form rows. **No FORMS rows were added or duplicated** (forms count
+  stays 202; cheat-shop A02 pins it). The new species entries are the
+  playable counterparts, on the crystalonix precedent (catalogue row
+  + form species entry sharing the dex number). The H6 meteorite
+  forme-switch consumes these entries; nothing in H1 wires the switch.
+- **Castform ships as ONE entry, no weather formes** (ruling 2); its
+  flavor line notes the gimmick honestly. The pre-existing
+  castform-sunny/rainy/snowy FORMS catalogue rows stay catalogue-only.
+
+### 6. Band machinery re-verified at cap 300 (no engine fix needed)
+
+- **Validator pair:** 11 new pins in `tools/api-scripts/validator.test.mjs`
+  (§10, H1): a Lv300 mon validates in a hoenn-arc save (party + box,
+  server + client); **Lv300 in a johto-arc save fails bad-mon-level**;
+  Lv301 in a Hoenn save fails (cap boundary); a max-XP Lv300 mon on the
+  slowest curve ('slow' at 300) does **not** trip bad-xp; a mon at
+  exactly the Hoenn XP ceiling validates and one XP over fails bad-xp
+  — both sides of the pair. All pass (89 total, §7). No validator code
+  changed: gen-tables already emitted the hoenn band row
+  (`arcBandMax.hoenn = 300`) from the registry.
+- **Cheat Terminal stepper:** CONFIRMED registry-driven, no fix
+  required — the level stepper's onKey caps at `levelCapFor(g.state)`
+  (src/game/overworld-systems.mjs, the ADR-027 Amendment 2 read), so
+  under `story.arc = 'hoenn'` it caps at **300** by the same read
+  arc-foundation A08 pins (levelCapFor: fresh 100, johto 200,
+  hoenn 300).
+
+### 7. Gate (this tree)
+
+| Suite | Result |
+|---|---|
+| fidelity-checks | **35/35** (roster assertion 257 → **395**, supersession recorded in the assertion text) |
+| validator.test | **89 passed, 0 failed** (78 + 11 new H1 pins) |
+| validator.fuzz | **2000/2000** clean shapes |
+| save-contract.test | **10 passed, 0 failed** |
+| cheat-shop-checks | **44/44** (A02 species count 257 → **395**, supersession recorded in the assertion text; items 160 / keepsakes 12 / forms 202 unchanged) |
+| arc-foundation-checks | **47/47** |
+| battle-model-checks | **45/45** (hard gate holds) |
+| campaign-smoke | **24/24** |
+| johto-story-checks | **110/110** |
+| johto-systems-checks | **62/62** |
+| qa-changed-flows | failures exactly **{b2, d9}** |
+| qa-slice (verify-slice) | failures exactly **{s6, l8}** — named inheritance, not grown |
+| rejuv-phase2-checks | failures exactly **{A09, C01}** — named inheritance, not grown |
+| budgets-check | all gates pass — vercel static **7,352,905 B ≤ 12,582,912** |
+
+**Bundle:** public/game.js rebuilt at **7,261,345 B** (J7 close:
+7,171,109 B; +90,236 B for 138 species + support rows). No other
+count assertions moved; Track B was not re-run (no api/auth/save-shape
+change beyond the regenerated tables the validator suite pins).
+
+### 8. Leftovers handed forward (named, not hidden)
+
+- **H2:** authored art for all 138 entries (forge fallback until then).
+- **H3:** shedinja rare-wild placement (§4) and cascoon/dustox wild
+  obtainability (§4) are H3 obligations created by this stage's
+  rulings; both are recorded in `arc3-etl/etl-notes.json` as well.
+- **H6:** the Deoxys meteorite forme-switch consumes §5's entries.

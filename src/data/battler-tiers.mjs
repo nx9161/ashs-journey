@@ -4,6 +4,7 @@
 // SAME table through speciesBattleArt, so a species is the same size
 // on both sides of the field — staged parity, not uniform parity.
 //
+// Stage H1 (Arc 3): +138 Hoenn rows appended (395 rows total).
 // Assignment rule (auditable): bulk = base HP + DEF + SPD from the
 // species data (the mass proxy the data carries — no height/weight
 // fields exist). S (52px) below 160, L (80px) at 245+, M (64px)
@@ -275,6 +276,145 @@ export const BATTLER_TIERS = {
   pupitar: 'M', // bulk 210
   tyranitar: 'L', // bulk 310
   celebi: 'L', // bulk 300
+  // Stage H1 (Arc 3): +138 Hoenn rows by the same bulk rule (HP+DEF+SPD).
+  treecko: 'S', // bulk 130
+  grovyle: 'M', // bulk 160
+  sceptile: 'M', // bulk 220
+  torchic: 'S', // bulk 135
+  combusken: 'M', // bulk 180
+  blaziken: 'M', // bulk 220
+  mudkip: 'S', // bulk 150
+  marshtomp: 'M', // bulk 210
+  swampert: 'L', // bulk 280
+  poochyena: 'S', // bulk 100
+  mightyena: 'M', // bulk 200
+  zigzagoon: 'S', // bulk 120
+  linoone: 'M', // bulk 200
+  wurmple: 'S', // bulk 110
+  silcoon: 'S', // bulk 130
+  beautifly: 'M', // bulk 160
+  cascoon: 'S', // bulk 130
+  dustox: 'M', // bulk 220
+  lotad: 'S', // bulk 120
+  lombre: 'M', // bulk 180
+  ludicolo: 'L', // bulk 250
+  seedot: 'S', // bulk 120
+  nuzleaf: 'S', // bulk 150
+  shiftry: 'M', // bulk 210
+  taillow: 'S', // bulk 100
+  swellow: 'M', // bulk 170
+  wingull: 'S', // bulk 100
+  pelipper: 'M', // bulk 230
+  ralts: 'S', // bulk 88
+  kirlia: 'S', // bulk 128
+  gardevoir: 'L', // bulk 248
+  surskit: 'S', // bulk 124
+  masquerain: 'M', // bulk 214
+  shroomish: 'M', // bulk 180
+  breloom: 'M', // bulk 200
+  slakoth: 'S', // bulk 155
+  vigoroth: 'M', // bulk 215
+  slaking: 'L', // bulk 315
+  nincada: 'S', // bulk 151
+  ninjask: 'S', // bulk 156
+  shedinja: 'S', // bulk 76
+  whismur: 'S', // bulk 110
+  loudred: 'M', // bulk 170
+  exploud: 'M', // bulk 240
+  makuhita: 'S', // bulk 132
+  hariyama: 'L', // bulk 264
+  azurill: 'S', // bulk 130
+  nosepass: 'L', // bulk 255
+  skitty: 'S', // bulk 130
+  delcatty: 'M', // bulk 190
+  sableye: 'M', // bulk 190
+  mawile: 'M', // bulk 190
+  aron: 'M', // bulk 190
+  lairon: 'L', // bulk 250
+  aggron: 'L', // bulk 310
+  meditite: 'S', // bulk 140
+  medicham: 'M', // bulk 210
+  electrike: 'S', // bulk 120
+  manectric: 'M', // bulk 190
+  plusle: 'M', // bulk 175
+  minun: 'M', // bulk 195
+  volbeat: 'M', // bulk 225
+  illumise: 'M', // bulk 225
+  roselia: 'M', // bulk 175
+  gulpin: 'M', // bulk 176
+  swalot: 'L', // bulk 266
+  carvanha: 'S', // bulk 85
+  sharpedo: 'S', // bulk 150
+  wailmer: 'M', // bulk 200
+  wailord: 'L', // bulk 260
+  numel: 'S', // bulk 145
+  camerupt: 'M', // bulk 215
+  torkoal: 'L', // bulk 280
+  spoink: 'M', // bulk 175
+  grumpig: 'L', // bulk 255
+  spinda: 'M', // bulk 180
+  trapinch: 'S', // bulk 135
+  vibrava: 'S', // bulk 150
+  flygon: 'M', // bulk 240
+  cacnea: 'S', // bulk 130
+  cacturne: 'M', // bulk 190
+  swablu: 'M', // bulk 180
+  altaria: 'L', // bulk 270
+  zangoose: 'M', // bulk 193
+  seviper: 'M', // bulk 193
+  lunatone: 'M', // bulk 240
+  solrock: 'M', // bulk 240
+  barboach: 'S', // bulk 134
+  whiscash: 'L', // bulk 254
+  corphish: 'S', // bulk 143
+  crawdaunt: 'M', // bulk 203
+  baltoy: 'M', // bulk 165
+  claydol: 'L', // bulk 285
+  lileep: 'M', // bulk 230
+  cradily: 'L', // bulk 290
+  anorith: 'S', // bulk 145
+  armaldo: 'L', // bulk 255
+  feebas: 'S', // bulk 95
+  milotic: 'L', // bulk 299
+  castform: 'M', // bulk 210
+  kecleon: 'L', // bulk 250
+  shuppet: 'S', // bulk 112
+  banette: 'M', // bulk 192
+  duskull: 'M', // bulk 200
+  dusclops: 'L', // bulk 300
+  tropius: 'L', // bulk 269
+  chimecho: 'L', // bulk 245
+  absol: 'M', // bulk 185
+  wynaut: 'M', // bulk 191
+  snorunt: 'S', // bulk 150
+  glalie: 'M', // bulk 240
+  spheal: 'M', // bulk 170
+  sealeo: 'M', // bulk 230
+  walrein: 'L', // bulk 290
+  clamperl: 'M', // bulk 175
+  huntail: 'M', // bulk 235
+  gorebyss: 'M', // bulk 235
+  relicanth: 'L', // bulk 295
+  luvdisc: 'M', // bulk 163
+  bagon: 'S', // bulk 135
+  shelgon: 'M', // bulk 215
+  salamence: 'L', // bulk 255
+  beldum: 'M', // bulk 180
+  metang: 'M', // bulk 240
+  metagross: 'L', // bulk 300
+  regirock: 'L', // bulk 380
+  regice: 'L', // bulk 380
+  registeel: 'L', // bulk 380
+  latias: 'L', // bulk 300
+  latios: 'L', // bulk 270
+  kyogre: 'L', // bulk 330
+  groudon: 'L', // bulk 330
+  rayquaza: 'L', // bulk 285
+  jirachi: 'L', // bulk 300
+  deoxys: 'S', // bulk 150
+  deoxysattack: 'S', // bulk 90
+  deoxysdefense: 'L', // bulk 370
+  deoxysspeed: 'M', // bulk 230
 };
 export const TIER_DRAW_SIZES = { S: 52, M: 64, L: 80 };
 export function battlerTierFor(speciesId) { return BATTLER_TIERS[speciesId] || 'M'; }

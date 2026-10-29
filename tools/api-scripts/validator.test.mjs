@@ -199,5 +199,22 @@ t('J0 client rejects mon one XP over the Johto ceiling', badClientArc('johto', (
 t('J0 client accepts Lv180 HoF team in Johto save', okClientArc('johto', (s) => { s.story.hof = [{ team: [{ speciesId: 'pidgeot', level: 180, nickname: null }], badges: 8 }]; }));
 t('J0 client rejects Lv180 HoF team in Kanto save', badClientArc('kanto', (s) => { s.story.hof = [{ team: [{ speciesId: 'pidgeot', level: 180, nickname: null }], badges: 8 }]; }, 'bad-story-hof-entry'));
 
+// 10. Stage H1 (Arc 3): the same registry band machinery re-verified at
+// the Hoenn cap — Lv300 validates in a hoenn-arc save, fails
+// bad-mon-level in a johto-arc save, and the paired XP ceiling holds at
+// Lv300 on the slowest curve (no new code: gen-tables emits the hoenn
+// row from the registry, both validators read it).
+t('H1 accept Lv300 party mon in Hoenn save (band cap)', okArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpForLevel('mediumfast', 300); }));
+t('H1 accept Lv300 box mon in Hoenn save', okArc('hoenn', (s) => { s.boxes.box1[0].level = 300; }));
+t('H1 accept Lv300 mon with slowest-curve XP in Hoenn save', okArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpForLevel('slow', 300); }));
+t('H1 accept mon at exactly the Hoenn XP ceiling', okArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpCeilingFor({ story: { arc: 'hoenn' } }); }));
+t('H1 reject mon one XP over the Hoenn ceiling', badArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpCeilingFor({ story: { arc: 'hoenn' } }) + 1; }, 'bad-xp'));
+t('H1 reject Lv300 party mon in Johto save', badArc('johto', (s) => { s.party[0].level = 300; }, 'bad-mon-level'));
+t('H1 reject Lv301 party mon in Hoenn save (cap boundary)', badArc('hoenn', (s) => { s.party[0].level = 301; }, 'bad-mon-level'));
+t('H1 client accepts Lv300 party mon in Hoenn save', okClientArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpForLevel('mediumfast', 300); }));
+t('H1 client rejects Lv300 party mon in Johto save', badClientArc('johto', (s) => { s.party[0].level = 300; }, 'bad-mon-level'));
+t('H1 client accepts Lv300 mon with slowest-curve XP in Hoenn save', okClientArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpForLevel('slow', 300); }));
+t('H1 client rejects mon one XP over the Hoenn ceiling', badClientArc('hoenn', (s) => { s.party[0].level = 300; s.party[0].xp = xpCeilingFor({ story: { arc: 'hoenn' } }) + 1; }, 'bad-xp'));
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail ? 1 : 0);

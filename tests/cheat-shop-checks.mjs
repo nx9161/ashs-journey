@@ -23,7 +23,8 @@ function ok(name, cond, extra) {
 const { SPECIES: SP1 } = await import(join(ROOT, 'src/data/species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src/data/species2.mjs'));
 const { SPECIES_JOHTO } = await import(join(ROOT, 'src/data/species3.mjs'));
-const SPECIES = Object.assign({}, SP1, SPECIES2, SPECIES_JOHTO);
+const { SPECIES_HOENN } = await import(join(ROOT, 'src/data/species4.mjs'));
+const SPECIES = Object.assign({}, SP1, SPECIES2, SPECIES_JOHTO, SPECIES_HOENN);
 const { MOVES: MV1 } = await import(join(ROOT, 'src/data/moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src/data/moves2.mjs'));
 const MOVES = Object.assign({}, MV1, MOVES2);
@@ -48,8 +49,8 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   ok('A01 tables.json in sync with src/data (gen-tables --check)', checkOut.includes('tables.json OK'), checkOut.trim());
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A02 counts: species 257 (163 + 94 Johto species, Stage J1 — supersedes the Stage O1 count), items 160 (146 + 7 apricorns + 7 apricorn balls, Stage J6 — supersedes the Stage J5 count), keepsakes 12, forms 202 (197+5)',
-    t.species.length === 257 && t.items.length === 160 && t.keepsakes.length === 12 && t.forms.length === 202,
+  ok('A02 counts: species 395 (257 + 135 Hoenn species + 3 Deoxys form entries, Stage H1 — supersedes the Stage J1 count), items 160 (146 + 7 apricorns + 7 apricorn balls, Stage J6 — supersedes the Stage J5 count), keepsakes 12, forms 202 (197+5)',
+    t.species.length === 395 && t.items.length === 160 && t.keepsakes.length === 12 && t.forms.length === 202,
     JSON.stringify({ s: t.species.length, i: t.items.length, k: t.keepsakes.length, f: t.forms.length }));
   ok('A03 server tables carry every expansion id',
     [...FORM_IDS, ...NEW_IDS].every((id) => t.species.includes(id) && t.forms.includes(id) === FORM_IDS.includes(id))

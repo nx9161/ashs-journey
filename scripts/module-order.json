@@ -14,6 +14,7 @@
  "src/data/species.mjs",
  "src/data/species2.mjs",
  "src/data/species3.mjs",
+ "src/data/species4.mjs",
  "src/data/moves.mjs",
  "src/data/moves2.mjs",
  "src/data/forms.mjs",
