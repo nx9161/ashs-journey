@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 path variant 6 — packed gravel
+PIX tile-path-6 16 16
+bbqppnqnnnppqqbb
+bbqqnnqqnpppqqbb
+nnbbqqqqppbbppqq
+nnnbnnqqppbbpbbq
+ppqnnnbbbbnnnnqq
+ppqqnnbbqqnnnnqq
+ppppqqbbpppqqqpp
+bbbbqqbbppppqqpp
+qqppbbbbbnnnnnqq
+qqppnnppnnnppnqq
+qnnpnnqqpbbnpppp
+nnppnppqppnnbbpp
+qqpnnppqnnppppnn
+qqqpnnqqnnqbbbnn
+bbppppqqbbnnpppp
+ppqqppqqbbnnpppp
+PAL
+p #cdb684 gravel
+q #bfae7c gravel-dark
+n #ddca9c gravel-pale
+b #a89468 gravel-worn

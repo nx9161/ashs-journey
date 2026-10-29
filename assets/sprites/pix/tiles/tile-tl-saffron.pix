@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 saffron landmark facade — crest dark tone
+PIX tile-tl-saffron 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+wwwwwwwaawwwwwww
+wwwwwwwaawwwwwww
+eewwwwaaaawwwwww
+eewwwwaaaawwwwee
+wwwwwaaaaaawwwww
+eewwwaawwaawwwww
+wwwwaawwwwazzwww
+wwwwaaawwaaawwww
+wwwazzwwwweeawww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #96762f saffron-trim
+s #a87f4e landmark-shadow
+a #f0e2a8 saffron-crest
+z #dfc247 crest-dark
+h #eff5c2 crest-light

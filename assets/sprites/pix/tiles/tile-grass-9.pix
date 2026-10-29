@@ -1,0 +1,27 @@
+# Premium+ W5: TX-1 grass base variant 9 — bright turf
+PIX tile-grass-9 16 16
+hhggggllhhgglldd
+hhllggllhhggllhh
+ggddggllmllhgmmg
+ddddgggmllhhgggg
+ddgggghhggmmlldd
+ddgggghhmmmmllgg
+hhmmhaammmggmmdd
+hhmmmhhmmmggggdd
+ggggmmmgglmmmmdd
+ggggmmmmaammmmdd
+llggggglllllgggg
+llggggaallllgggg
+mmllllllggllgllg
+mmlllllddgaagggg
+ddddhhaaadllggaa
+ddddhaalddlggadl
+PAL
+g #5ea950 grass
+d #4c8f42 grass-dark
+l #6eb95e grass-light
+m #64a758 grass-mid
+h #7ac468 grass-highlight
+a #8ccb78 grass-pale
+s #386e2c grass-shadow
+e #2f6127 grass-deep

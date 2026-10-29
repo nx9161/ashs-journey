@@ -1,0 +1,23 @@
+# Premium+ W5: TX-2 vermilion roof — copper gable family
+PIX tile-tr-vermilion 16 16
+dddddddddddddddd
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+ggggaggggaggggag
+gggaggggaggggagg
+ggaggggaggggaggg
+gaggggaggggagggg
+aggggaggggagggga
+ggggaggggaggggag
+gggaggggaggggagg
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+PAL
+g #b87f4e vermilion-roof
+m #dba26e roof-light
+d #a06a3c roof-deep
+a #f0d0a0 roof-accent

@@ -17,9 +17,11 @@ ppppppppnnnqpppp
 pppppppppnqqqppp
 pppppppppppqpppp
 PAL
-p #d8c08a path
-q #c2a878 path-dark
-b #b09468 path-worn
-n #ecd9a8 path-pale
-k #a8845c path-edge
-r #5a3a24 dirt-brown
+p #d3be84 path
+q #bdaa71 path-dark
+b #b09868 path-worn
+n #ecdca8 path-pale
+k #a8885c path-edge
+r #5a3d24 dirt-brown
+
+# W5SPLIT2 hue shift 3deg (TX-1 variant split)

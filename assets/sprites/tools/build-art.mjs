@@ -178,7 +178,22 @@ function main() {
   // sub-themes, light system) needs hues the shipped union never had;
   // the cap is set ONCE here, before any Premium+ tile is drawn, and
   // palette-audit.mjs mirrors it. Current union at the raise: 54.
-  const FAMILY_PALETTE_BUDGETS = { tiles: 72 };
+  // Premium+ W5 raise (2026-10-29, third deliberate raise, on the
+  // record): 72 -> 640. Forced by arithmetic, not appetite: spec TX-1
+  // requires >= 80 unique colours on a single town's logical raster,
+  // which is impossible while the whole tiles family holds <= 72 hexes
+  // (a map cannot show more colours than the family contains). The W5
+  // town-identity programme (11 ground palettes with pairwise-distant
+  // dominant hues) plus the TX-1 texture families were first sized at
+  // ~486 hexes (cap 512), but as finally authored (11 town palettes
+  // with HSL-derived tones, per-variant palette splits across the
+  // ground/cave/tree/floor families) the union MEASURES 624 hexes
+  // (palette-audit.mjs, verified by independent QA) — above 512, so
+  // the cap is set at 640: just above the measured union, no headroom
+  // banked beyond it. palette-audit.mjs mirrors it. [Comment
+  // corrected at QA: the first draft of this note stopped at the
+  // 486/512 estimate while the code already carried 640.]
+  const FAMILY_PALETTE_BUDGETS = { tiles: 640 };
   for (const [fam, budget] of Object.entries(FAMILY_PALETTE_BUDGETS)) {
     const hexes = new Set();
     for (const s of sprites) {

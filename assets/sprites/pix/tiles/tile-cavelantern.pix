@@ -1,0 +1,24 @@
+# Premium+ W5: LD-4 cave light source — lantern (wall)
+PIX tile-cavelantern 16 16
+yyaaaabbyybbybba
+yyaaaayyyybbyyaa
+bbbbbbbbaaaayybb
+bbbbbbbbaaaayybb
+aayybbyyyybbaayy
+aayybbkkkkbbaayy
+aaaabbkggkyyaabb
+aaaayykggkyaaabb
+bbbbbbkggkaaaabb
+aabbbbkggkaaaabb
+bbyybbkkkkbbbbyy
+bbyybbaabbbbbbaa
+yybbaaaabbyybbbb
+aaaaaaaabbyybbbb
+bbyyaaaaaaaabbaa
+bbyyaaaaaaaabbaa
+PAL
+b #6a5a48 cave-wall
+a #54452f strata
+y #3c3c46 deep
+k #202028 lantern-frame
+g #ffd873 lantern-glow

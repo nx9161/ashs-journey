@@ -17,6 +17,8 @@ baaaaaaabaaaacab
 baaaaacabaaaaaab
 bbbbbbbbbbbbbbbb
 PAL
-a #f2ddd5 center-floor
-b #e8b4c4 center-tile-line
-c #e8b4c4 center-check
+a #f2e0d5 center-floor
+b #e8b4be center-tile-line
+c #e8b4be center-check
+
+# W5SPLIT2 hue shift 7deg (TX-1 variant split)

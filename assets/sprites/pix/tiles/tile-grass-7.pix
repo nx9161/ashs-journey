@@ -1,0 +1,27 @@
+# Premium+ W5: TX-1 grass base variant 7 — fern meadow
+PIX tile-grass-7 16 16
+mmmmhhddgggglddh
+gllgghddgggmmggd
+llddggdlldggmmll
+aaddgmmdddggmmll
+ddggggggddggmmll
+ddggggllggggmmll
+llllmmllmmllllll
+llllmmllmmllmmgg
+hhhhmddlggggdddd
+ggllmmlgggggdddd
+mmgghggmmmmmmmll
+mmgghhhhhmggmmll
+ghhgggddggddmmdd
+gdaaggggggddmmdd
+llggddggllllgghh
+llhhllggllmmgllh
+PAL
+g #62a852 grass
+d #4e8c40 grass-dark
+l #72b862 grass-light
+m #6aa656 grass-mid
+h #7ec46c grass-highlight
+a #8fce7e grass-pale
+s #386e2c grass-shadow
+e #2f6127 grass-deep

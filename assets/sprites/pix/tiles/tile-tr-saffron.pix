@@ -1,0 +1,23 @@
+# Premium+ W5: TX-2 saffron roof — gold spire family
+PIX tile-tr-saffron 16 16
+dddddddddddddddd
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+ggggaggggaggggag
+gggaggggaggggagg
+ggaggggaggggaggg
+gaggggaggggagggg
+aggggaggggagggga
+ggggaggggaggggag
+gggaggggaggggagg
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+PAL
+g #b29540 saffron-roof
+m #d2b562 roof-light
+d #96762f roof-deep
+a #f0e2a8 roof-accent

@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 vermilion ground tg — second accent tone
+PIX tile-tg-vermilion 16 16
+mmzzxxzzddggaggl
+mmmmmmzzddggaall
+mggxzzmmmmggxxgg
+mmzzzggmmmggllgg
+ggaammxllgggggmm
+ggaammxxggddggmm
+xxdmmlgaalddggdd
+xxddllggxxddggdd
+llzzggggaammmmgg
+ggzzgggxxammmmgg
+maamxxllggdaazaa
+mmzzxxllggmmzzgg
+mddgaallmmlllggm
+mmggaallmgmmllgg
+ddddmaagddzzmmdd
+ggxxddggmmzzlldd
+PAL
+g #c98d5a vermilion-ground
+m #b87f4e ground-mid
+l #dba26e ground-light
+d #a06a3c ground-dark
+a #f0d0a0 ground-accent
+x #c9b95a ground-shift
+z #e0f0a0 ground-accent-2

@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 cave wall variant 5 — basalt columns
+PIX tile-cavewall-5 16 16
+bbbbbbbbbbbbbbaa
+bbbbbbbbbbbbbbaa
+bbbbbbyyyybbaaaa
+bbbbbbyyyybbaaaa
+bbyybbbbaabbvvaa
+bbyybbbbaabbyyaa
+aaaayybbaaavaavv
+aaaayyyyaavvaavv
+bbvvbbyyaaaaabbb
+bbbbbbyyaaaaaabb
+aabbbbaayaavyyaa
+ayybbbaayybbyyaa
+bbbbyyvvbbbbbbaa
+bbbbyyyybbvvbbaa
+vvvvbbvvyybbaabb
+vvvvbbvvyybbaabb
+PAL
+b #4a4a55 basalt
+a #5c5c6a basalt-light
+y #36363f basalt-dark
+v #747484 basalt-pale

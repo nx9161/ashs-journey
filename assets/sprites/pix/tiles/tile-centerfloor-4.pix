@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 centerfloor variant 4 — bold diamond (diff>=80px)
+PIX tile-centerfloor-4 16 16
+bbbbbbbbbbbbbbbb
+baaabaaacaaabaaa
+baaabaacacaabaaa
+baaabacacacabaaa
+bbbbacacacacbbbb
+baaacacddacacaaa
+baacacddddacacaa
+bacacddddddacaca
+bcacaddddddcacab
+bacacaddddcacaaa
+baacacaddcacaaaa
+baaacacacacabaaa
+bbbbbcacacabbbbb
+baaabacacaaabaaa
+baaabaacaaaabaaa
+baaabaaabaaabaaa
+PAL
+a #f2ddd5 centerfloor-floor
+b #e8b4c4 centerfloor-line
+c #eec9bc centerfloor-alt
+d #dfa3b5 centerfloor-alt2

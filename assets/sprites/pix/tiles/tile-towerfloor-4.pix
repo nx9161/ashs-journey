@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 towerfloor variant 4 — bold diamond (diff>=80px)
+PIX tile-towerfloor-4 16 16
+bbbbbbbbbbbbbbbb
+baaabaaacaaabaaa
+baaabaacacaabaaa
+baaabacacacabaaa
+bbbbacacacacbbbb
+baaacacddacacaaa
+baacacddddacacaa
+bacacddddddacaca
+bcacaddddddcacab
+bacacaddddcacaaa
+baacacaddcacaaaa
+baaacacacacabaaa
+bbbbbcacacabbbbb
+baaabacacaaabaaa
+baaabaacaaaabaaa
+baaabaaabaaabaaa
+PAL
+a #9a9aa5 towerfloor-floor
+b #8a8aa0 towerfloor-line
+c #acaebe towerfloor-alt
+d #7e7e94 towerfloor-alt2

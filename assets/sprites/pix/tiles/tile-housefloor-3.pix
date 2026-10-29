@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 housefloor variant 3 — bold checker (diff>=80px)
+PIX tile-housefloor-3 16 16
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+PAL
+a #c9a06a housefloor-floor
+b #a87f4e housefloor-line
+c #bd925c housefloor-alt
+d #d8b47e housefloor-alt2

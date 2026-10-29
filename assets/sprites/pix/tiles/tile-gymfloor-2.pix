@@ -17,7 +17,9 @@ aaaaaaaaaaaaacaa
 aaaaaacaaaaaaaaa
 bbbbbbbbbbbbbbbb
 PAL
-a #c9a06a gym-wood
-b #a87f4e gym-board-line
-c #d8c08a gym-worn
-d #f5f0dc gym-court-line
+a #c9ab6a gym-wood
+b #a88a4e gym-board-line
+c #d8c98a gym-worn
+d #f5f3dc gym-court-line
+
+# W5SPLIT2 hue shift 7deg (TX-1 variant split)

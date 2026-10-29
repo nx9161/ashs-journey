@@ -1,0 +1,22 @@
+# Premium+ W5: TX-1 interior wall variant 2 — tower panel
+PIX tile-towerwall-2 16 16
+dddddddddddddddd
+dddddddddddddddd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+llllllllllllllll
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+PAL
+w #8a8aa0 tower panel
+l #acaebe wall-light
+d #6a4a7a wall-deep

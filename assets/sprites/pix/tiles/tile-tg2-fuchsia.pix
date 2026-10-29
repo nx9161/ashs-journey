@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 fuchsia ground tg2 — second accent tone
+PIX tile-tg2-fuchsia 16 16
+mmzzlxxggzzgddgg
+mmzddgggggggddgg
+ddmmlllddmaammll
+ddmmllmmmmddmmll
+zxxgggmmllllmmmm
+zzllgzzmmmllddmm
+ddddmmmmmxxlllgg
+dzzdmmmmmmllllgg
+gggmmmllggmmlldd
+ggggmgglggmmlldd
+ggllgddmllllggdd
+lllddmmggllllgdd
+mmggggddddggmmxx
+mmmmllddmmggmmxx
+dxxgddxxlxxmggdd
+ddgzzdxmmlmmggdd
+PAL
+g #c47b91 fuchsia-ground
+m #b2687e ground-mid
+l #d28fa2 ground-light
+d #96566b ground-dark
+a #f4cfe2 ground-accent
+x #c47bb5 ground-shift
+z #f4d2cf ground-accent-2

@@ -1,0 +1,25 @@
+# Premium+ W5: TX-2 cinnabar house wall — shade band, lit window
+PIX tile-tw-cinnabar 16 16
+ssssssssssssssss
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwttttttwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtghhgtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwttttttwwwww
+nnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnn
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #cf9e8b cinnabar-wall
+n #b97055 wall-shade-band
+s #9e5c46 wall-shadow
+t #5a3a24 window-frame
+g #ffd873 window-lit
+h #eef7ff glass-shine

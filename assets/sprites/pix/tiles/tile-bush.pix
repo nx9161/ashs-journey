@@ -17,13 +17,15 @@ PIX tile-bush 16 16
 ....uuuuuuuus...
 ...........s.s..
 PAL
-t #3e7a34 leaf
-u #2e5e28 leaf-dark
-v #54a048 leaf-light
-s #386e2c leaf-shadow
-e #2f6127 leaf-deep
-d #4c8a3e grass-dark
-l #6fb45c leaf-pale
-h #79c168 leaf-highlight
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #4e7a34 leaf
+u #3b5e28 leaf-dark
+v #69a048 leaf-light
+s #476e2c leaf-shadow
+e #3d6127 leaf-deep
+d #5e8a3e grass-dark
+l #84b45c leaf-pale
+h #8ec168 leaf-highlight
+k #5a2d24 trunk
+w #7a4b38 trunk-light
+
+# W5SPLIT2 hue shift -14deg (TX-1 variant split)

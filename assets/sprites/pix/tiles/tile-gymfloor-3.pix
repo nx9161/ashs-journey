@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 gymfloor variant 3 — bold checker (diff>=80px)
+PIX tile-gymfloor-3 16 16
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+PAL
+a #c9a06a gymfloor-floor
+b #8a8aa0 gymfloor-line
+c #9a9ab0 gymfloor-alt
+d #7a7a90 gymfloor-alt2

@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 celadon landmark facade — crest dark tone
+PIX tile-tl-celadon 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+wwwwwaawwaawwwww
+wwwwaaaaaaaawwww
+wwwwwaaaaaawwwww
+wwwaawwaawwaawww
+wwwwaawwwwaawwww
+wwwwwaawwaawwwww
+wwwwaaaaaaaawwww
+wwwaawwaawwaawww
+eewweewwwwwweeww
+wwwweewwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #32805a celadon-trim
+s #a87f4e landmark-shadow
+a #d0f0c0 celadon-crest
+z #87d95e crest-dark
+h #daf6d9 crest-light

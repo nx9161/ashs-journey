@@ -3,7 +3,7 @@
 // NPCs, signs, warps, pause menu (Bag/Party/Dex/Save/Options).
 
 import { MAPS, WALKABLE, TRAINERS } from '../data/maps.mjs';
-import { npcArtKind, NPC_ROAMING_KINDS, hashTile } from '../engine/art.mjs';
+import { npcArtKind, NPC_ROAMING_KINDS, hashTile, phaseOfHour, PHASE_TINTS } from '../engine/art.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { TILE } from '../engine/render.mjs';
 import { roll, intIn, pickWeighted } from '../engine/rng.mjs';
@@ -71,6 +71,9 @@ export class OverworldScene {
     this.running = false;
     this.enc = null; // encounter sequence state
     this.challenge = null; // Yellow-style trainer spot challenge (sight -> ! -> walk-up)
+    // Premium+ W5 (LD-3): the y-sorted draw list — allocated ONCE here
+    // and reused/truncated every frame (PL-3: no per-frame allocation).
+    this._drawList = [];
     this.banner = { text: this.map.name.toUpperCase(), t: 0 };
     this.stepsSinceEncounter = 0;
     this.chainCount = 0;
@@ -855,9 +858,30 @@ export class OverworldScene {
     return { caught, total: species.length };
   }
 
+  // Premium+ W5 (LD-2): the scene's time-of-day phase. One source of
+  // truth with the clock glyph: the wall hour. A rig/QA override may be
+  // set on the game object (_tintPhase) to capture a chosen phase.
+  // Caves own their darkness (no tint, no swaps) and interiors keep
+  // their authored palettes — both resolve as day.
+  currentPhase() {
+    const g = this.game;
+    let ph = g._tintPhase || null;
+    if (!ph) {
+      let hour = 12;
+      try { hour = new Date().getHours(); } catch (e) { /* headless */ }
+      ph = phaseOfHour(hour);
+    }
+    return ph;
+  }
+  worldPhase() {
+    if (!this.map || this.map.dark || this.map.indoor) return 'day';
+    return this.currentPhase();
+  }
+
   render(r) {
     const g = this.game;
     const T = TILE;
+    const wPhase = this.worldPhase();
     // Camera centers on player
     r.centerOn(this.player.px + T / 2, this.player.py + T / 2, this.w * T, this.h * T);
     r.begin();
@@ -873,7 +897,7 @@ export class OverworldScene {
     for (let y = y0; y <= y1; y++) {
       for (let x = x0; x <= x1; x++) {
         const ch = this.map.rows[y][x];
-        const layers = g.tileLayers(g.tileKind(ch), x, y, kindAt);
+        const layers = g.tileLayers(g.tileKind(ch), x, y, kindAt, wPhase, this.mapId);
         if (layers.length) { for (const spr of layers) r.blit(spr, x * T, y * T); }
         else g.ctx2dfill('#101018', x * T, y * T, T, T); // void
       }
@@ -903,14 +927,21 @@ export class OverworldScene {
       const wf = g.tileCache.wakeFrames[still ? 0 : Math.floor(g._animT / 400) % g.tileCache.wakeFrames.length];
       if (wf) r.blit(wf, Math.round(this.player.px), Math.round(this.player.py));
     }
-    // Systems world dressing: item balls, boulders, cut stumps, cave darkness.
+    // Systems world dressing: item balls, cut stumps, cave darkness
+    // (ground decals + lighting overlay — boulders moved to the sorted
+    // pass below in W5, they are world OBJECTS with a feet line).
     if (this.sysRenderWorld) this.sysRenderWorld(r);
-    // NPCs (2-frame idle) — challengers render at their walk-up position.
-    // Wave 0 draw standard: bottom-anchored to the 1-tile footprint via
-    // blitCharacter (taller 16x32 art overhangs upward). The legacy feet
-    // line is preserved exactly: a 16x16 sprite's bottom sat at
-    // tileY - 4 + 16 (the old hardcoded -4 offset), so existing art
-    // renders pixel-identical.
+    // Premium+ W5 (LD-3): Y-SORTED character/object draw. NPCs,
+    // challengers, boulders, the follower and the player draw in ONE
+    // pass sorted by feet line (ascending) — whoever stands further
+    // south draws later and occludes correctly. The list is the
+    // enter()-allocated array, truncated and refilled (no per-frame
+    // allocation); the sort is stable and the player is pushed last,
+    // so the player wins exact feet-line ties (readability rule).
+    // Wave 0 draw standard: bottom-anchored via blitCharacter; the
+    // legacy NPC feet line (tileY - 4 + 16) is preserved exactly.
+    const list = this._drawList || (this._drawList = []);
+    list.length = 0;
     for (const n of this.map.npcs) {
       let nx = n.x * T, footY = n.y * T - 4 + T;
       const cq = this.challenge && this.challenge.parts.find((q) => q.npc === n);
@@ -928,7 +959,51 @@ export class OverworldScene {
         nx = rx * T; footY = ry * T - 4 + T;
       }
       const moving = !!cq || !!(n._wander && n._wander.glide > 0);
-      r.blitCharacter(g.npcFrame(n, { dir: n._face || 'down', moving }), nx, footY);
+      const spr = g.npcFrame(n, { dir: n._face || 'down', moving });
+      list.push({ y: footY, spr, x: nx, footY });
+    }
+    if (this.sysCollectDrawItems) this.sysCollectDrawItems(list);
+    // Partner (hop) + player positions (drawn via the list below).
+    // Wave 3a follower visibility (PRESENTATION ONLY — the partner's
+    // logical position, the trail and every interaction check keep
+    // using this.partner.px/py untouched): the follower steps aside a
+    // full tile west when stacked on the player's tile, ~10px east
+    // when sharing the player's column — always BESIDE Ash.
+    const hop = Math.abs(Math.sin(this.partner.hop)) * 3;
+    let fpx = Math.round(this.partner.px);
+    const fpy = Math.round(this.partner.py);
+    if (fpx === Math.round(this.player.px) && fpy === Math.round(this.player.py)) fpx -= T;
+    else if (fpx === Math.round(this.player.px)) fpx += 10;
+    const partnerSpr = g.partnerFrame(!this.player.moving && !this.partnerMoving, {
+      dir: this.partnerDir || this.player.dir,
+      stillMs: this.player.moving ? 0 : (this.stillMs || 0),
+    });
+    list.push({ y: fpy + T, spr: partnerSpr, x: fpx, footY: fpy + T - Math.round(hop), groundY: fpy + T });
+    list.push({ y: Math.round(this.player.py) + T, spr: g.playerSprite(this.player), x: Math.round(this.player.px), footY: Math.round(this.player.py) + T });
+    list.sort((a, b) => a.y - b.y);
+    for (const e of list) {
+      if (e.draw) { e.draw(r); continue; }
+      if (e.groundY != null) r.blitCharacter(e.spr, e.x, e.footY, e.groundY);
+      else r.blitCharacter(e.spr, e.x, e.footY);
+    }
+    // W7 hook (TX-7): the foreground layer (canopy overhangs, roof
+    // eaves) composes ON TOP of this sorted pass — the scene calls
+    // sysRenderForeground here when W7 ships it. Nothing draws today.
+    if (this.sysRenderForeground) this.sysRenderForeground(r);
+    // Premium+ W5 (LD-2): time-of-day tint — ONE flat overlay over the
+    // WORLD layer only, drawn after the sorted world pass and before
+    // every HUD/canvas-text draw below (banner, clock glyph, prompts),
+    // so text is never tinted. Day = alpha 0 (no draw). Off in caves
+    // and interiors (worldPhase pins those to day). Reduced Motion
+    // changes nothing here: the tint is illumination, it snaps with
+    // the phase and never animates/pulses.
+    if (wPhase !== 'day') {
+      const tint = PHASE_TINTS[wPhase];
+      if (tint && tint.alpha > 0) {
+        const c = r.ctx;
+        c.fillStyle = 'rgba(' + tint.rgb[0] + ',' + tint.rgb[1] + ',' + tint.rgb[2] + ',' + tint.alpha + ')';
+        c.fillRect(r.camX - T, r.camY - T, r.viewW + 2 * T, r.viewH + 2 * T);
+      }
     }
     // Yellow-style spot "!" over each challenger during the alert beat.
     if (this.challenge && this.challenge.phase === 'spot') {
@@ -936,31 +1011,6 @@ export class OverworldScene {
         r.text('!', q.cx * T + 4, q.cy * T - 16, { size: 14, bold: true, color: '#e84040' });
       }
     }
-    // Partner (hop) + player (walk cycle / idle blink)
-    // Wave 0 draw standard: bottom-anchored (blitCharacter) — for the
-    // current 16x16 art the bottoms are py + T (partner: minus the hop
-    // lift), so these draws are pixel-identical to the old unscaled
-    // blits; 16x32 art will overhang upward from the same feet line.
-    // Wave 3a follower visibility (PRESENTATION ONLY — the partner's
-    // logical position, the trail and every interaction check keep
-    // using this.partner.px/py untouched): the follower used to spawn
-    // stacked exactly under the player (empty trail -> partner tile =
-    // player tile) and, trailing in the same column, its body landed
-    // on the tall Ash sprite's head. The DISPLAY position therefore
-    // steps aside: a full tile west when stacked on the player's tile
-    // (spawn / warp landing), and ~10px east whenever it shares the
-    // player's column, so it is always visible BESIDE Ash, never
-    // under or on him.
-    const hop = Math.abs(Math.sin(this.partner.hop)) * 3;
-    let fpx = Math.round(this.partner.px);
-    const fpy = Math.round(this.partner.py);
-    if (fpx === Math.round(this.player.px) && fpy === Math.round(this.player.py)) fpx -= T;
-    else if (fpx === Math.round(this.player.px)) fpx += 10;
-    r.blitCharacter(g.partnerFrame(!this.player.moving && !this.partnerMoving, {
-      dir: this.partnerDir || this.player.dir,
-      stillMs: this.player.moving ? 0 : (this.stillMs || 0),
-    }), fpx, fpy + T - Math.round(hop), fpy + T);
-    r.blitCharacter(g.playerSprite(this.player), Math.round(this.player.px), Math.round(this.player.py) + T);
     // "!" exclamation
     if (this.enc && this.enc.phase === 'exclaim') {
       r.text('!', this.player.px + 4, this.player.py - 14, { size: 14, bold: true, color: '#e84040' });

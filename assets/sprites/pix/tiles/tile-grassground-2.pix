@@ -1,0 +1,27 @@
+# Premium+ W5: TX-1 grassground variant 2 — meadow (non-encounter)
+PIX tile-grassground-2 16 16
+mmmlmmmmaaallggg
+mmlddmmmggllgggg
+ddgaamllllmmmmmm
+ddaammllllmmmmmm
+hhmmddmmhhhhgamm
+mmmmmdmmhhhhggll
+hhggmmggggddgggg
+hhddagggddddgggg
+ggggmllmllllgghh
+ggggammmllllgghh
+mmggammhhgllhhll
+ggggaaggggllhhll
+hhllmmggaaddgggg
+ddllmmggaaddgggg
+ggggllmmmmlggdmm
+ddggggmmmmllddmm
+PAL
+g #5fa34b grass
+d #4d8a3f grass-dark
+l #71b35d grass-light
+m #67a653 grass-mid
+h #7dbf69 grass-highlight
+a #8fcb7b grass-pale
+s #386e2c grass-shadow
+e #2f6127 grass-deep

@@ -17,6 +17,8 @@ aaaaaaaaaaaaacaa
 aaaaaacaaaaaabaa
 bbbbbbbbbbbbbbbb
 PAL
-a #a87f4e house-plank
-b #5a3a24 house-plank-line
-c #c9a06a house-grain
+a #a88a4e house-plank
+b #5a4024 house-plank-line
+c #c9ab6a house-grain
+
+# W5SPLIT2 hue shift 7deg (TX-1 variant split)

@@ -1,0 +1,25 @@
+# Premium+ W5: TX-2 cerulean house wall — shade band, lit window
+PIX tile-tw-cerulean 16 16
+ssssssssssssssss
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwttttttwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtghhgtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwttttttwwwww
+nnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnn
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #94cec7 cerulean-wall
+n #5fb5ab wall-shade-band
+s #4a958e wall-shadow
+t #5a3a24 window-frame
+g #ffd873 window-lit
+h #eef7ff glass-shine

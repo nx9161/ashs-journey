@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 pallet canopy v1 — enriched town tones
+PIX tile-tc-pallet 16 16
+................
+................
+..ttttaaatxxtt..
+ttvvaahhttttttt.
+ttvvvvzzvxxttxxt
+txxvvhaazzetaatt
+ttaaaatvvvtuaatt
+.tttsstxxtxxutt.
+.ttttesaasuuutt.
+..uueueuuuuuu...
+...uuuuunnn.....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #3e7a34 leaf
+u #2e5e28 leaf-dark
+v #54a048 leaf-light
+s #386e2c leaf-shadow
+e #2f6127 leaf-deep
+h #e8e0a0 pallet-blossom
+a #e8e0a0 pallet-fruit
+x #b6995d pallet-canopy-tint
+z #dbedb5 pallet-bloom-light
+n #947943 pallet-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

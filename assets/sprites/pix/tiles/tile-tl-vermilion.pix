@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 vermilion landmark facade — crest dark tone
+PIX tile-tl-vermilion 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+wwwwwwaaaawwwwww
+wwweeaaaazzweeww
+wwwwaawaawaawwww
+wweezzwaawwaawww
+wwwaawwwaawaawww
+wwwwaawwaaawwwww
+wwwwwaawwwwwwwww
+eewwwwaaaawwwwww
+wwwwweewwwwwwwww
+wwwweewwwwweewww
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #a06a3c vermilion-trim
+s #a87f4e landmark-shadow
+a #f0d0a0 vermilion-crest
+z #e1a03f crest-dark
+h #f4eeba crest-light

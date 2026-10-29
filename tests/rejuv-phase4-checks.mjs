@@ -148,7 +148,13 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
       const ch = m.rows[n.y] && m.rows[n.y][n.x];
       // Wave 5b: '$' (Mart floor) joins the walkable-floor whitelist —
       // the SHOPKEEPER tale actor now stands in the shared Mart scene.
-      if (!['.', ',', '$'].includes(ch)) return false;
+      // Premium+ W5: the 11 settlements' town-ground chars (TG
+      // U+00C0..U+00CA + TG2 U+0131..U+0144) are walkable floor by
+      // engine law (src/data/maps.mjs WALKABLE) — tale actors standing
+      // on redressed town ground are on walkable floor tiles.
+      if (!['.', ',', '$'].includes(ch)
+        && !(ch >= 'À' && ch <= 'Ê')
+        && !(ch >= 'ı' && ch <= 'ń')) return false;
       if ((m.npcs || []).some((b) => b.x === n.x && b.y === n.y)) return false;
       if ((m.warps || []).some((w) => w.x === n.x && w.y === n.y)) return false;
       if ((m.signs || []).some((s2) => s2.x === n.x && s2.y === n.y)) return false;

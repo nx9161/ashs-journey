@@ -17,11 +17,13 @@ zzzzzzzzzzzzzzzz
 zzzzzzzzzzzzzzzz
 zzzzzzzzzzzzzzzz
 PAL
-m #8a8aa0 rock
-z #6a6a80 rock-dark
-c #c2c8d4 rock-light
-k #5a3a24 shadow-brown
-a #a8845c strata-brown
-b #b09468 strata-tan
-y #7a5a38 strata-dark
-g #46586e rock-slate
+m #908aa0 rock
+z #706a80 rock-dark
+c #c2c3d4 rock-light
+k #5a4824 shadow-brown
+a #a8985c strata-brown
+b #b0a768 strata-tan
+y #7a6c38 strata-dark
+g #464d6e rock-slate
+
+# W5SPLIT2 hue shift 16deg (TX-1 variant split)

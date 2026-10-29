@@ -1,0 +1,28 @@
+# Premium+ W5: LD-2 lit-window variant of tile-wall-mart (night)
+PIX tile-wall-mart-lit 16 16
+ssssssssssssssss
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wbbeebbeebbeebbw
+wbbeebbeebbeebbw
+wbbeebbeebbeebbw
+wttttttttttttttw
+wwwwwwwwwwwwwwww
+wwttttttttttttww
+wwteeeeppeepptww
+wwtegggennggetww
+wwteeeeeeeeeetww
+wwttttttttttttww
+llllllllllllllll
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 trim
+b #ffd873 window-lit
+e #eef7ff awning-white
+g #ffd873 goods-glow
+p #e86a8a goods-pink
+n #67aa54 goods-green

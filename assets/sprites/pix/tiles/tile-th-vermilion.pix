@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2/P-4 vermilion house roof — enriched form family
+PIX tile-th-vermilion 16 16
+rrrrrrrrrrrrrrrr
+dddzdddzdddzdddz
+dddzdddzdddzdddz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+g #b87f4e vermilion-houseroof
+m #dba26e houseroof-light
+d #805530 houseroof-deep
+z #604024 houseroof-deep-2
+a #f0d0a0 houseroof-accent
+k #5a3a24 eave-trim
+r #c99d77 ridge-light

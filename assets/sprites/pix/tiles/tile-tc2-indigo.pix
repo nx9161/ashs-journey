@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 indigo canopy v2 — enriched town tones
+PIX tile-tc2-indigo 16 16
+................
+................
+..tttttttaaatt..
+ttvvaaaaxxttxxt.
+ttvvvvvhvtttxxtt
+tthvvhhzztettutt
+ttttttaavvtaaaat
+.xxtsstxxaaautt.
+.xxaaesxxsnnnnx.
+..uueueuuuuuu...
+...nnunnuuu.....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #347a36 leaf
+u #285e2b leaf-dark
+v #48a04b leaf-light
+s #2d6e2c leaf-shadow
+e #276129 leaf-deep
+h #c4cfef indigo-blossom
+a #c4cfef indigo-fruit
+x #719bb4 indigo-canopy-tint
+z #ddd8f4 indigo-bloom-light
+n #4f7b96 indigo-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

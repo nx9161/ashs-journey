@@ -1,0 +1,22 @@
+# Premium+ W5: TX-1 interior wall variant 2 — silph panel
+PIX tile-silphwall-2 16 16
+dddddddddddddddd
+dddddddddddddddd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+wwwwwwwdwwwwwwwd
+llllllllllllllll
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+wwwdwwwdwwwdwwwd
+PAL
+w #8a8aa0 silph panel
+l #c2c8d4 wall-light
+d #5f748f wall-deep

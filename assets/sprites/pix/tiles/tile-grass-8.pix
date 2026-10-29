@@ -1,0 +1,27 @@
+# Premium+ W5: TX-1 grass base variant 8 — deep lawn
+PIX tile-grass-8 16 16
+llddmmmmddllhhdd
+llddmmmmdddlhhgg
+ddgddlhhgggglaaa
+ddgglmmhggggllaa
+ddmmllggggddllmm
+ddmmllggggddllgg
+ggllddllllhhddll
+ggllmmddmlhhhddd
+mmddgghhhddhggmm
+ldddgghhddhhggdd
+aagggggaahaammmm
+aggggaaghhggmaam
+llllmgaallddggmm
+lmmlmmdmmgddgaam
+ggggaagghhggggll
+gggggggghhgddghh
+PAL
+g #56a144 grass
+d #458237 grass-dark
+l #66b154 grass-light
+m #5c9c4c grass-mid
+h #74bd60 grass-highlight
+a #86c672 grass-pale
+s #386e2c grass-shadow
+e #2f6127 grass-deep

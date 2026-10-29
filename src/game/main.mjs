@@ -89,9 +89,12 @@ export class Game {
   // Premium+ W3: Reduced Motion stills ALL world animation — the clock
   // handed to the resolver becomes the -1 freeze sentinel (every
   // animated family resolves to frame 0, water included).
-  tileLayers(kind, x, y, kindAt) {
+  tileLayers(kind, x, y, kindAt, phase, mapId) {
     const still = this.state && this.state.settings && this.state.settings.reducedMotion;
-    return resolveTileLayers(this.tileCache, kind, x, y, kindAt, still ? -1 : this._animT);
+    // Premium+ W5 (LD-2): phase threads through to the resolver for the
+    // night window/lamp swaps; callers that pass no phase get day (the
+    // reference) — caves/interiors are pinned to day by the scene.
+    return resolveTileLayers(this.tileCache, kind, x, y, kindAt, still ? -1 : this._animT, phase || 'day', mapId || null);
   }
 
   // Wave 4: the Strength-boulder overlay sprite for a position (agrees

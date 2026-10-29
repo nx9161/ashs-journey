@@ -17,9 +17,11 @@ wwwwwcwwwwwwwwww
 wwwwwwwyyyyywwww
 wwwwwwwwwwwwwwww
 PAL
-w #3a7bd5 water
-x #2e63b0 water-dark
-y #5a9ae8 water-light
-z #1d4a86 water-deep
-c #6fb0ee water-shallow
-f #eef7ff foam
+w #3a73d5 water
+x #2e5db0 water-dark
+y #5a93e8 water-light
+z #1d4586 water-deep
+c #6faaee water-shallow
+f #eef6ff foam
+
+# W5SPLIT2 hue shift 3deg (TX-1 variant split)

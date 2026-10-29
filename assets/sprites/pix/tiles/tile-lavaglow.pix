@@ -1,0 +1,23 @@
+# Premium+ W5: LD-4 cave light source — lava glow (wall)
+PIX tile-lavaglow 16 16
+yyaaaabbyybbybba
+yyaaaayyyybbyyaa
+bbbbbbbbaaaayybb
+bbbbbbbbaaaayybb
+aayybbyyyybbaayy
+aayybbyyyybbaayy
+aaaabbyybbyyaabb
+aaaayyyybbyaaabb
+bbbbbbyyyyaaaabb
+aabbbbvyyyaaaabb
+bbyybvvabbbbbbyy
+bbyvvbaabbbbbbaa
+yyvvaaaabbyvvbbb
+aaaaaaaabbvvbbbb
+bbyyaaaaaaaabbaa
+bbyyaaaaaaaabbaa
+PAL
+b #4a4a55 basalt
+a #36363f basalt-dark
+y #5c5c6a basalt-light
+v #f07830 lava-glow

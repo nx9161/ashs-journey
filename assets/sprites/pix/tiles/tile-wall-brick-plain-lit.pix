@@ -1,0 +1,26 @@
+# Premium+ W5: LD-2 lit-window variant of tile-wall-brick-plain (night)
+PIX tile-wall-brick-plain-lit 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wllwwwwwllwwwwll
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wllwwwwwllwwwwll
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #b0503c brick-mid
+l #c96a52 brick-light
+s #7a3226 brick-deep
+t #5a3a24 trim
+g #ffd873 window-lit
+u #ffd873 window-lit
+h #ffd873 window-lit

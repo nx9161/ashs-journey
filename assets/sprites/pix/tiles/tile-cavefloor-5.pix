@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 cave floor variant 5 — mica deep
+PIX tile-cavefloor-5 16 16
+bbggyyaggbbbbbbb
+bbbbyyaabbaabbyy
+ggyyggaabbbbbbaa
+bbbyggayybbbbbaa
+bbggyyyyyaaaggyy
+bbggyyyyyyaaggyy
+aaggaabbaaaaaabb
+aagyyaggaaaaaabb
+ggbbbbbbbbaaggyy
+gbbbggbbyyaaggyy
+bbggggyyaayyggbb
+bbggggyyaayyggbb
+aaaaaayybbbbggaa
+yyaaaayybbbbggbb
+bbggbbbbggaaaagg
+ggggbbbbggaaaagg
+PAL
+b #8a7a54 cave-tan-deep
+a #77683f strata-olive
+y #5f5130 strata-deep
+g #6fb0ee glow-mica

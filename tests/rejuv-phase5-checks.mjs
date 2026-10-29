@@ -204,7 +204,10 @@ const { TRAINERS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
     B.PARLEY_NPCS.length === 2 && B.PARLEY_NPCS.every((n) => {
       const m = ALL_MAPS[n.map]; if (!m) return false;
       const ch = m.rows[n.y] && m.rows[n.y][n.x];
-      return ['.', ','].includes(ch) && !(m.npcs || []).some((b) => b.x === n.x && b.y === n.y)
+      // Premium+ W5: Celadon's town-ground chars are walkable floor
+      // (see rejuv-phase4 A14) — the parley pair stands on town ground.
+      return (['.', ','].includes(ch) || (ch >= 'À' && ch <= 'Ê') || (ch >= 'ı' && ch <= 'ń'))
+        && !(m.npcs || []).some((b) => b.x === n.x && b.y === n.y)
         && !(m.warps || []).some((w) => w.x === n.x && w.y === n.y) && !(m.signs || []).some((sg) => sg.x === n.x && sg.y === n.y);
     }));
   const s = defaultState();

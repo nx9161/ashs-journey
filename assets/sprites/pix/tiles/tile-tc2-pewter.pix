@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 pewter canopy v2 — enriched town tones
+PIX tile-tc2-pewter 16 16
+................
+................
+..ttttaatttttt..
+ttaavvhhtaatttt.
+ttvvvvvhvqqtaatt
+tthzzahvvtaaqqtt
+ttttqqqqaaaauaat
+.tttssttttqqutt.
+.ttttesttsaautt.
+..uuennuuunnu...
+...unnunnnu.....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #347a36 leaf
+u #285e2b leaf-dark
+v #48a04b leaf-light
+s #2d6e2c leaf-shadow
+e #276129 leaf-deep
+h #d8d2c0 pewter-blossom
+a #d8d2c0 pewter-fruit
+q #b49d94 pewter-canopy-tint
+z #dee2d0 pewter-bloom-light
+n #96766a pewter-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

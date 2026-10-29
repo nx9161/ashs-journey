@@ -1,0 +1,26 @@
+# Premium+ W5: LD-2 lit-window variant of tile-wall-house-plain (night)
+PIX tile-wall-house-plain-lit 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwllllwwwwllllww
+wwllllwwwwllllww
+wwllllwwwwllllww
+wwllllwwwwllllww
+wwwwwwwwwwwwwwww
+wwwwwwllllwwwwww
+wwwwwwllllwwwwww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #c9a06a wall-mid
+l #e3ba85 wall-light
+s #a87f4e wall-shadow
+t #5a3a24 trim
+g #ffd873 window-lit
+u #ffd873 window-lit
+h #ffd873 window-lit

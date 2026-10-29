@@ -6,6 +6,7 @@
 // Attached to OverworldScene.prototype; overworld.mjs calls the sys* hooks.
 
 import { MAPS, TRAINERS, WALKABLE } from '../data/maps.mjs';
+import { TILE_CHARS } from '../engine/tiles.mjs';
 import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS } from '../data/items.mjs';
@@ -1868,6 +1869,36 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- world dressing ----------
+  // Premium+ W5 (LD-3): boulders are world OBJECTS with a feet line —
+  // the scene's y-sorted pass collects them here and draws them in
+  // feet order with the characters (a boulder south of the player
+  // occludes him; north, it stands behind him). Wave 4 sprite rule is
+  // unchanged (position-hashed variant, cave set near cave tiles), and
+  // LD-1 gives every boulder a ground shadow blob beneath it.
+  sysCollectDrawItems(list) {
+    const g = this.game;
+    const T = TILE;
+    if (!this.fxState) return;
+    for (const b of this.fxState.boulders.values()) {
+      const rowsNow = this.map.rows;
+      const caveNear = [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
+        const row = rowsNow[b.y + dy]; const ch = row && row[b.x + dx];
+        return ch === 'G' || ch === 'L' || ch === 'N';
+      });
+      const spr = g.boulderSprite ? g.boulderSprite(b.x, b.y, caveNear) : g.tileSprite('rock');
+      if (!spr) continue;
+      const bx = b.x, by = b.y;
+      list.push({
+        y: by * T + T, x: bx * T, footY: by * T + T,
+        draw: (r) => {
+          const sh = g.tileCache && g.tileCache.shadowBoulder;
+          if (sh) r.blit(sh, bx * T, by * T);
+          r.blit(spr, bx * T, by * T);
+        },
+      });
+    }
+  },
+
   sysRenderWorld(r) {
     const g = this.game;
     const T = TILE;
@@ -1878,20 +1909,6 @@ Object.assign(OverworldScene.prototype, {
         const spr = g.tileSprite('path');
         if (spr) r.blit(spr, cx * T, cy * T);
       }
-      // Boulders at their runtime positions. Wave 4: the sprite is the
-      // position-hashed boulder variant (cave set when the boulder's
-      // neighbourhood is cave tiles), not one global rock stamp — and at
-      // the boulder's home position it is exactly the sprite the tile
-      // resolver already drew, so the overlay is idempotent.
-      for (const b of this.fxState.boulders.values()) {
-        const rowsNow = this.map.rows;
-        const caveNear = [[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => {
-          const row = rowsNow[b.y + dy]; const ch = row && row[b.x + dx];
-          return ch === 'G' || ch === 'L' || ch === 'N';
-        });
-        const spr = g.boulderSprite ? g.boulderSprite(b.x, b.y, caveNear) : g.tileSprite('rock');
-        if (spr) r.blit(spr, b.x * T, b.y * T);
-      }
     }
     // Item balls: the classic red-and-white sphere on the ground.
     if (this.map.items) {
@@ -1900,25 +1917,48 @@ Object.assign(OverworldScene.prototype, {
         if (g.state.story.flags[flag]) continue;
         if ((b.item === 'helixfossil' || b.item === 'domefossil') && g.state.story.flags.fossil_taken
           && !hasTravelersMemory(g.state, 'fossil-choice')) continue;
-        const c = r.ctx;
-        c.save();
-        c.fillStyle = '#e84040';
-        c.beginPath(); c.arc(b.x * T + 8, b.y * T + 8, 5, Math.PI, 0); c.fill();
-        c.fillStyle = '#f8f8f0';
-        c.beginPath(); c.arc(b.x * T + 8, b.y * T + 8, 5, 0, Math.PI); c.fill();
-        c.fillStyle = '#202028';
-        c.fillRect(b.x * T + 3, b.y * T + 7, 10, 2);
-        c.restore();
+        // Premium+ W5 (LD-1/TX-7): authored item-ball art with its
+        // ground shadow baked in replaces the procedural two-circle
+        // placeholder (zero arc call sites remain for item balls).
+        const spr = g.tileCache && g.tileCache.itemball ? g.tileCache.itemball
+          : (g.tileSprite ? g.tileSprite('itemball') : null);
+        if (spr) r.blit(spr, b.x * T, b.y * T);
       }
     }
     // Dark caves: gloom with a glow around the player until FLASH is used.
+    // Premium+ W5 (LD-4): the flat fill + hard 34px disc becomes a
+    // >=4-step radial falloff (concentric warm discs, alpha rising to
+    // the core), and the LD-4 light-source tiles (glow crystal /
+    // lantern / lava / water glow) throw their own smaller 3-step
+    // pools, breaking the single-disc read.
     if (this.map.dark && !(this.fxState && this.fxState.flashLit)) {
       const c = r.ctx;
       c.save();
       c.fillStyle = 'rgba(6,6,18,0.86)';
       c.fillRect(0, 0, this.w * T, this.h * T);
-      c.fillStyle = 'rgba(255,240,180,0.12)';
-      c.beginPath(); c.arc(this.player.px + 8, this.player.py + 8, 34, 0, Math.PI * 2); c.fill();
+      const px = this.player.px + 8, py = this.player.py + 8;
+      const steps = [[52, 0.05], [42, 0.08], [34, 0.12], [25, 0.17], [16, 0.23], [8, 0.30]];
+      for (const [rad, a] of steps) {
+        c.fillStyle = 'rgba(255,240,180,' + a + ')';
+        c.beginPath(); c.arc(px, py, rad, 0, Math.PI * 2); c.fill();
+      }
+      const GLOWS = {
+        cavecrystal: '138,232,240', cavelantern: '255,216,115',
+        lavaglow: '240,120,48', waterglow: '111,176,238',
+      };
+      for (let ty = 0; ty < this.map.rows.length; ty++) {
+        const row = this.map.rows[ty];
+        for (let tx = 0; tx < row.length; tx++) {
+          const kind = TILE_CHARS[row[tx]];
+          const rgb = kind && GLOWS[kind];
+          if (!rgb) continue;
+          const gx = tx * T + 8, gy = ty * T + 8;
+          for (const [rad, a] of [[20, 0.10], [13, 0.16], [7, 0.24]]) {
+            c.fillStyle = 'rgba(' + rgb + ',' + a + ')';
+            c.beginPath(); c.arc(gx, gy, rad, 0, Math.PI * 2); c.fill();
+          }
+        }
+      }
       c.restore();
     }
   },

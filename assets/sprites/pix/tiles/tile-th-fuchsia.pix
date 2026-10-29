@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2/P-4 fuchsia house roof — enriched form family
+PIX tile-th-fuchsia 16 16
+rrrrrrrrrrrrrrrr
+dddzdddzdddzdddz
+dddzdddzdddzdddz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+g #b26892 fuchsia-houseroof
+m #d28fb4 houseroof-light
+d #784563 houseroof-deep
+z #5a344a houseroof-deep-2
+a #f4cfe2 houseroof-accent
+k #5a3a24 eave-trim
+r #c791b0 ridge-light

@@ -17,6 +17,8 @@ baaaaaaabaaaaaab
 bcaaaaaabaaaaacb
 bbbbbbbbbbbbbbbb
 PAL
-a #46586e lab-floor
-b #3a4657 lab-panel-line
-c #5f748f lab-rivet
+a #46536e lab-floor
+b #3a4357 lab-panel-line
+c #5f6e8f lab-rivet
+
+# W5SPLIT2 hue shift 7deg (TX-1 variant split)

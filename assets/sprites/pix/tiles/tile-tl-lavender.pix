@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 lavender landmark facade — crest dark tone
+PIX tile-tl-lavender 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+wwwwwweeaawwwwww
+wwwwwwaawaawwwww
+wwwwwwaawaawwwww
+wwwwwazzwwaawwww
+wwwwwaawwwaawwww
+wwwwaawwwwwaawww
+wwwwaaazzaaaaeew
+wwwwwwwaaawwwwww
+wwwweewzzawwwwww
+weewwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #6f5c8e lavender-trim
+s #a87f4e landmark-shadow
+a #e0d4f0 lavender-crest
+z #9c76cf crest-dark
+h #f4ebf8 crest-light

@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2/P-4 cerulean house roof — enriched form family
+PIX tile-th-cerulean 16 16
+rrrrrrrrrrrrrrrr
+dddzdddzdddzdddz
+dddzdddzdddzdddz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+g #4a958e cerulean-houseroof
+m #6fbdb4 houseroof-light
+d #2e6460 houseroof-deep
+z #234b48 houseroof-deep-2
+a #bfe8e0 houseroof-accent
+k #5a3a24 eave-trim
+r #60b0a9 ridge-light

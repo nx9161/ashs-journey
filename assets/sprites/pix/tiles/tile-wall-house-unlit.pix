@@ -17,10 +17,12 @@ wwwwwwwwwwwwwwww
 ssssssssssssssss
 ssssssssssssssss
 PAL
-w #c9a06a wall-mid
-l #e3ba85 wall-light
-s #a87f4e wall-shadow
-t #5a3a24 trim
-g #ffd873 window-lit
-u #2e63b0 window-glass
-h #5a9ae8 glass-shine
+w #c9a86a wall-mid
+l #e3c285 wall-light
+s #a8874e wall-shadow
+t #5a3f24 trim
+g #ffe473 window-lit
+u #2e58b0 window-glass
+h #5a8ee8 glass-shine
+
+# W5SPLIT2 hue shift 5deg (TX-1 variant split)

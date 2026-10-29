@@ -1,0 +1,22 @@
+# Premium+ W5: LD-4 cave light source — water glow (floor, walkable)
+PIX tile-waterglow 16 16
+aawwaabbaaaawwww
+aawwbwwbaaaawaaw
+bbaabbbbaabbwwww
+bbaabbbbaabbwwaa
+wwbbaaaaaaaawwww
+wwbbaaaaaaabbwww
+bbbbbbaawwaaabww
+bbbbbbaawwaabbww
+wwbbwwwwbbaawwaa
+wwbbwwwwbbaawwaa
+bbwaaaaaabbabbww
+aawwaaaaaawwbbww
+aawwbbwwwbwwbbbb
+aawwbbwwaawwbbbb
+bbbbaawwwwbbaaww
+bbbbaawwwwaaaaww
+PAL
+b #b09468 cave-floor
+a #a8845c strata-brown
+w #6fb0ee water-glow

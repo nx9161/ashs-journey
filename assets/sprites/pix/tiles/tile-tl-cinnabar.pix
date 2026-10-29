@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 cinnabar landmark facade — crest dark tone
+PIX tile-tl-cinnabar 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+wweewwweeawwwwww
+wwwwwwwaaawwwwww
+wwwwwwwaaaawwwww
+wwwwwwaawaawwwww
+wwwwwazzwwaawwww
+wwwwwaawweeawwww
+wwwwaawaaaeeawww
+wwweeawwwwwaawww
+wwwwwaaaaaazzwww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #824636 cinnabar-trim
+s #a87f4e landmark-shadow
+a #e8b89a cinnabar-crest
+z #d47a42 crest-dark
+h #eedbb3 crest-light

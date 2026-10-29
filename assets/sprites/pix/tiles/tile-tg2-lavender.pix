@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 lavender ground tg2 — second accent tone
+PIX tile-tg2-lavender 16 16
+ddddllggddzzddgg
+ddddllggmmggddgg
+mmggdzzmaazmmamm
+mzzgddmmaallaamm
+mmddxxddmmggllmm
+mxxdllddmmggllmm
+ddddmmmmggggmmdd
+ddllmmmmggxmmggd
+ggmmddllmaagxxaa
+ggmmllllmmllmmaa
+mmxxddllddxxggll
+ggxmmdllddmzzggl
+llddggmmggmmllmm
+lldaagggggmmllgg
+mmggxxggllmmmmmm
+mxxgxxgglggmmmmm
+PAL
+g #a786b8 lavender-ground
+m #9776a8 ground-mid
+l #b89ac6 ground-light
+d #7c5c8e ground-dark
+a #e0d4f0 ground-accent
+x #8e86b8 ground-shift
+z #f0d4ef ground-accent-2

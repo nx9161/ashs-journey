@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 fuchsia canopy v1 — enriched town tones
+PIX tile-tc-fuchsia 16 16
+................
+................
+..xxaatttttttaa.
+ttvvvvhhxxaattt.
+ttvvvvvhvtttxxtt
+tthaahhvvtettutt
+tttttttvvvtuuutt
+.tttaatxxatuuaa.
+.tttaasaasunntt.
+..uueueuunnuu...
+...uuunnuuu.....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #3e7a34 leaf
+u #2e5e28 leaf-dark
+v #54a048 leaf-light
+s #386e2c leaf-shadow
+e #2f6127 leaf-deep
+h #f4cfe2 fuchsia-blossom
+a #f4cfe2 fuchsia-fruit
+x #be82c7 fuchsia-canopy-tint
+z #f9e4e5 fuchsia-bloom-light
+n #a450b1 fuchsia-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

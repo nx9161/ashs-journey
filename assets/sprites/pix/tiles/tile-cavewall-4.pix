@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 cave wall variant 4 — violet strata
+PIX tile-cavewall-4 16 16
+bbbbvvvvvvyyavvb
+bbbbvvvvvvyyaabb
+bbbbbvvbvvvvyyyy
+bbbbbbbbvvvvyyyy
+bbbbbyyvbbyyvvyy
+bbbbbbvvbbyyvvyy
+bbvvvvbbbbyybbyy
+baavvvbbvvyybbyy
+aaaabbvvaabbvvaa
+aaaabbvvaabbvvaa
+vvvvbbbbbbvvaabb
+vvbbbvvbbbvvaabb
+yaaybbbbaabbyybb
+yyyybbbbaabbyybb
+vvaayyaaaabbvvyy
+vvaayyaaaabbvvyy
+PAL
+b #6a5a48 cave-wall
+a #7a6a8a violet-strata
+y #54452f strata-dark
+v #8a7a9a violet-light

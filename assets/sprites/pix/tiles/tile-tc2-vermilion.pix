@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 vermilion canopy v2 — enriched town tones
+PIX tile-tc2-vermilion 16 16
+................
+................
+..txxtxxtaattaa.
+ttvzzvhhtttttaa.
+txxvvvvhvttxxaat
+tthvzzaaatettaat
+tttttttvaatuuutt
+.tttsstttttuutt.
+.txxtesttsunntt.
+..uueueuuunnu...
+...uuunnnnnn....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #347a36 leaf
+u #285e2b leaf-dark
+v #48a04b leaf-light
+s #2d6e2c leaf-shadow
+e #276129 leaf-deep
+h #f0d0a0 vermilion-blossom
+a #f0d0a0 vermilion-fruit
+x #cc6962 vermilion-canopy-tint
+z #f1f3b6 vermilion-bloom-light
+n #b2423a vermilion-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

@@ -17,6 +17,8 @@ PIX tile-rock-3 16 16
 ................
 ................
 PAL
-m #8a8aa0 rock
-z #6a6a80 rock-dark
-c #c2c8d4 rock-light
+m #8a8ca0 rock
+z #6a6c80 rock-dark
+c #c2cad4 rock-light
+
+# W5SPLIT2 hue shift -6deg (TX-1 variant split)

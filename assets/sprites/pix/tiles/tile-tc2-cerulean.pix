@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 cerulean canopy v2 — enriched town tones
+PIX tile-tc2-cerulean 16 16
+................
+................
+..aataaaattttqq.
+ttvvvvhhaaaattt.
+ttvvvvvhvttttttt
+tqqvvhhvvtettaat
+ttttqqtvvvaauutt
+.taasstqqqquutt.
+.tttaasqqannutt.
+..uueuennnnuu...
+...unnuuuuu.....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #347a36 leaf
+u #285e2b leaf-dark
+v #48a04b leaf-light
+s #2d6e2c leaf-shadow
+e #276129 leaf-deep
+h #bfe8e0 cerulean-blossom
+a #bfe8e0 cerulean-fruit
+q #5eab85 cerulean-canopy-tint
+z #d2e8ef cerulean-bloom-light
+n #478868 cerulean-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

@@ -17,13 +17,15 @@ PIX tile-tree-oak-small 16 16
 .......kss......
 .........ss.....
 PAL
-t #3e7a34 leaf
-u #2e5e28 leaf-dark
-v #54a048 leaf-light
-s #386e2c leaf-shadow
-e #2f6127 leaf-deep
-d #4c8a3e grass-dark
-l #6fb45c leaf-pale
-h #79c168 leaf-highlight
-k #5a3a24 trunk
-w #7a5a38 trunk-light
+t #397a34 leaf
+u #2a5e28 leaf-dark
+v #4ea048 leaf-light
+s #346e2c leaf-shadow
+e #2b6127 leaf-deep
+d #478a3e grass-dark
+l #69b45c leaf-pale
+h #73c168 leaf-highlight
+k #5a3e24 trunk
+w #7a5e38 trunk-light
+
+# W5SPLIT2 hue shift 4deg (TX-1 variant split)

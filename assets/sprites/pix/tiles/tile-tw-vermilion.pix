@@ -1,0 +1,25 @@
+# Premium+ W5: TX-2 vermilion house wall — shade band, lit window
+PIX tile-tw-vermilion 16 16
+ssssssssssssssss
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wwwwwwwwwwwwwwww
+wwwwwttttttwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtghhgtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwtggggtwwwww
+wwwwwttttttwwwww
+nnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnn
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #e7c09d vermilion-wall
+n #d69459 wall-shade-band
+s #b87f4e wall-shadow
+t #5a3a24 window-frame
+g #ffd873 window-lit
+h #eef7ff glass-shine

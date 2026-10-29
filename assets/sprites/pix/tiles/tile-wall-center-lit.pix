@@ -1,0 +1,27 @@
+# Premium+ W5: LD-2 lit-window variant of tile-wall-center (night)
+PIX tile-wall-center-lit 16 16
+rrrrrrrrrrrrrrrr
+rrrrrrrrrrrrrrrr
+rrrrrrrrrrrrrrrr
+ssssssssssssssss
+wwwwwwwwwwwwwwww
+wwwwrrrrrrrrwwww
+wwwwrhhuuuurwwww
+wwwwrhhhuuurwwww
+wwwwruhhuuurwwww
+wwwwruuuuuurwwww
+wwwwruuuuuurwwww
+wwwwrrrrrrrrwwww
+wwwwllllllllwwww
+llllllllllllllll
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #eef7ff center-white
+l #f5f0dc center-cream
+s #a02828 center-red-dark
+r #d84040 center-red
+t #5a3a24 trim
+u #ffd873 window-lit
+h #ffd873 window-lit
+g #3a7bd5 door-glass

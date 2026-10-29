@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 pewter landmark facade — crest dark tone
+PIX tile-tl-pewter 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+wwwwwwaaazzwwwww
+wwwwwaawwaawwwww
+eewwaaweewaawwww
+weeaawwaawwaawww
+wwwaawaaaawaawww
+wwwwaawwwwazzeww
+wwwwwaawwaawwwww
+wwwwwwaaaawwwwww
+wwwweewaawwwwwww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #8a8069 pewter-trim
+s #a87f4e landmark-shadow
+a #d8d2c0 pewter-crest
+z #aca079 crest-dark
+h #e3e4d3 crest-light

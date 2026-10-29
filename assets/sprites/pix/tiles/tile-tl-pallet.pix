@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 pallet landmark facade — crest dark tone
+PIX tile-tl-pallet 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+weewwwaaawwwwwww
+wwwwwaawaawwwwww
+wwwwazzwwaawweew
+wwwaawaaawaawwww
+wwwaaaawazzawwww
+wwwaawaaawaawwww
+wwwwazzwwaawwwee
+wwwwwaawaawwwwww
+wwwwwwaaawwwwwww
+wwwwwweewwwweeee
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #75903c pallet-trim
+s #a87f4e landmark-shadow
+a #e8e0a0 pallet-crest
+z #d3c348 crest-dark
+h #e4eeb9 crest-light

@@ -17,10 +17,12 @@ gggggggggggggggg
 .ggggglgggggggg.
 ..gggggggggggg..
 PAL
-g #5da24a grass
-d #4c8a3e grass-dark
-l #6fb45c grass-light
-u #f5f0dc petal-white
-i #e86a8a petal-pink
-o #f0e060 center-yellow
-j #b0503c petal-red
+g #69a94f grass
+d #579044 grass-dark
+l #78b45c grass-light
+u #f5eedc petal-white
+i #e86a97 petal-pink
+o #f0d260 center-yellow
+j #b0443c petal-red
+
+# W5SPLIT2 hue shift -6deg (TX-1 variant split)

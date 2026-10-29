@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2/P-4 pallet house roof — enriched form family
+PIX tile-th-pallet 16 16
+rrrrrrrrrrrrrrrr
+dddzdddzdddzdddz
+dddzdddzdddzdddz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+g #8aa348 pallet-houseroof
+m #b3c46e houseroof-light
+d #5e7330 houseroof-deep
+z #465624 houseroof-deep-2
+a #e8e0a0 houseroof-accent
+k #5a3a24 eave-trim
+r #a3bb64 ridge-light

@@ -1,0 +1,23 @@
+# Premium+ W5: TX-2 cinnabar roof — basalt slab family
+PIX tile-tr-cinnabar 16 16
+dddddddddddddddd
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+ggggaggggaggggag
+gggaggggaggggagg
+ggaggggaggggaggg
+gaggggaggggagggg
+aggggaggggagggga
+ggggaggggaggggag
+gggaggggaggggagg
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+PAL
+g #9e5c46 cinnabar-roof
+m #c07e66 roof-light
+d #824636 roof-deep
+a #e8b89a roof-accent

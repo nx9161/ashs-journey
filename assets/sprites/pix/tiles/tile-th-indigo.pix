@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2/P-4 indigo house roof — enriched form family
+PIX tile-th-indigo 16 16
+rrrrrrrrrrrrrrrr
+dddzdddzdddzdddz
+dddzdddzdddzdddz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+g #5c6ca0 indigo-houseroof
+m #7e8cc0 houseroof-light
+d #3a4670 houseroof-deep
+z #2c3554 houseroof-deep-2
+a #c4cfef houseroof-accent
+k #5a3a24 eave-trim
+r #7e8bb5 ridge-light

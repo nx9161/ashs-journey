@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 viridian canopy v1 — enriched town tones
+PIX tile-tc-viridian 16 16
+................
+................
+..tttxxttttxxt..
+ttvvvzzhaatttaa.
+ttvvaaaavttaaatt
+tthvvhhzztexxutt
+ttxxtttaavtaautt
+.tttsstttttuaat.
+.ttttesttsuuuxx.
+..unnueuuuuuu...
+...nnuuunnu.....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #3e7a34 leaf
+u #2e5e28 leaf-dark
+v #54a048 leaf-light
+s #386e2c leaf-shadow
+e #2f6127 leaf-deep
+h #cfe8a8 viridian-blossom
+a #cfe8a8 viridian-fruit
+x #79a552 viridian-canopy-tint
+z #c5edbc viridian-bloom-light
+n #5e8140 viridian-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

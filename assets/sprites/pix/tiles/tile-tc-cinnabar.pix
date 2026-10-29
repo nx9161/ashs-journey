@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 cinnabar canopy v1 — enriched town tones
+PIX tile-tc-cinnabar 16 16
+................
+................
+..tttttaaaattt..
+ttvvzzhhtaaattt.
+ttvvvvvhaaattttt
+txxvvhhvaaexxutt
+txxttaavvvtuuutt
+.xxaastttttuutt.
+.tttteaatsnnutt.
+..uueuennunnnn..
+...uuuunnuu.....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #3e7a34 leaf
+u #2e5e28 leaf-dark
+v #54a048 leaf-light
+s #386e2c leaf-shadow
+e #2f6127 leaf-deep
+h #e8b89a cinnabar-blossom
+a #e8b89a cinnabar-fruit
+x #b35984 cinnabar-canopy-tint
+z #ede1af cinnabar-bloom-light
+n #8f4267 cinnabar-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

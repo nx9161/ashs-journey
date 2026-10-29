@@ -1,0 +1,31 @@
+# Premium+ W5: TX-2 lavender canopy v1 — enriched town tones
+PIX tile-tc-lavender 16 16
+................
+................
+..ttqqatttaaqq..
+ttaaavhhtqqtqqt.
+ttvvvaahvtttqqat
+tthvvaavzzetaatt
+tttttqqqvvtuuutt
+.tttsstttaauutt.
+.ttttesaasunnnt.
+..uueuennuuuu...
+...uuuunnunn....
+.......wk.......
+.......kk.......
+......kkkk......
+.......kk.......
+.......kk.......
+PAL
+t #3e7a34 leaf
+u #2e5e28 leaf-dark
+v #54a048 leaf-light
+s #386e2c leaf-shadow
+e #2f6127 leaf-deep
+h #e0d4f0 lavender-blossom
+a #e0d4f0 lavender-fruit
+q #8c94bc lavender-canopy-tint
+z #f4e7f7 lavender-bloom-light
+n #5e6aa1 lavender-canopy-shade
+k #5a3a24 trunk
+w #7a5a38 trunk-light

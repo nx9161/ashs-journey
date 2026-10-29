@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 plantfloor variant 3 — bold checker (diff>=80px)
+PIX tile-plantfloor-3 16 16
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+PAL
+a #46586e plantfloor-floor
+b #5c6e46 plantfloor-line
+c #6a7a52 plantfloor-alt
+d #3c4c5e plantfloor-alt2

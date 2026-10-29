@@ -149,7 +149,13 @@ export class Renderer {
     if (!sprite || !sprite.width || !sprite.height) return;
     const w = TILE;
     const h = Math.round(TILE * sprite.height / sprite.width);
-    this.characterShadow(dx + w / 2, groundY == null ? bottomY : groundY);
+    // Premium+ W5 (LD-1): the ground shadow SCALES with airborne height
+    // — the higher the sprite's bottom floats above its ground line,
+    // the smaller/fainter its shadow (hop apex ~64% of grounded area).
+    const gy = groundY == null ? bottomY : groundY;
+    const lift = Math.max(0, gy - bottomY);
+    const s = Math.max(0.5, 1 - lift * 0.12);
+    this.characterShadow(dx + w / 2, gy, s);
     this.blitS(sprite, dx, bottomY - h, w, h);
   }
 
@@ -159,14 +165,16 @@ export class Renderer {
   // headless recording ctx renders it identically). Centered on the
   // footprint, sitting on the feet line: subtle and consistent for
   // every overworld character (player, follower, NPCs).
-  characterShadow(cx, groundY) {
+  characterShadow(cx, groundY, s) {
+    const k = s == null ? 1 : s; // W5 LD-1: airborne scale (1 = grounded)
     const c = this.ctx;
-    c.fillStyle = 'rgba(16,22,14,0.16)';
-    c.fillRect(Math.round(cx - 5), Math.round(groundY - 3), 10, 1);
-    c.fillRect(Math.round(cx - 7), Math.round(groundY - 2), 14, 2);
-    c.fillRect(Math.round(cx - 5), Math.round(groundY), 10, 1);
-    c.fillStyle = 'rgba(16,22,14,0.20)';
-    c.fillRect(Math.round(cx - 4), Math.round(groundY - 2), 8, 2);
+    const w1 = Math.max(4, Math.round(10 * k)), w2 = Math.max(6, Math.round(14 * k)), w3 = Math.max(3, Math.round(8 * k));
+    c.fillStyle = 'rgba(16,22,14,' + (0.16 * k).toFixed(3) + ')';
+    c.fillRect(Math.round(cx - w1 / 2), Math.round(groundY - 3), w1, 1);
+    c.fillRect(Math.round(cx - w2 / 2), Math.round(groundY - 2), w2, 2);
+    c.fillRect(Math.round(cx - w1 / 2), Math.round(groundY), w1, 1);
+    c.fillStyle = 'rgba(16,22,14,' + (0.20 * k).toFixed(3) + ')';
+    c.fillRect(Math.round(cx - w3 / 2), Math.round(groundY - 2), w3, 2);
   }
 
   // Scaled blit for authored battlers (32px art -> 48px draw size).

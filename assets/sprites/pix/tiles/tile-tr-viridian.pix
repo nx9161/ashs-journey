@@ -1,0 +1,23 @@
+# Premium+ W5: TX-2 viridian roof — gabled slate family
+PIX tile-tr-viridian 16 16
+dddddddddddddddd
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+dddddddddddddddd
+ggggaggggaggggag
+gggaggggaggggagg
+ggaggggaggggaggg
+gaggggaggggagggg
+aggggaggggagggga
+ggggaggggaggggag
+gggaggggaggggagg
+dddddddddddddddd
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+PAL
+g #448c4c viridian-roof
+m #63b06b roof-light
+d #35733e roof-deep
+a #cfe8a8 roof-accent

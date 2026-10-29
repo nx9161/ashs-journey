@@ -3566,3 +3566,272 @@ checks (Dex ×6, Bag ×5, Options ×2, wild battle ×1) in code paths
 W4 does not touch; the pre-restart standalone 29/29 above stands
 as history. The Chrome WebGL-policy spawn recipe for all future
 QA is recorded at `~/workspace/ashs-journey-qa/premium-rig/CHROME-POLICY.md`.
+
+## Premium+ Art Wave W5 — Identity, Texture & Light (2026-10-29, implementer entry — pending independent QA)
+
+TX-2 + TX-1 + LD-1/2/3/4 delivered. Base b8200b3; public edition
+only; not committed (coordinator commits after independent QA). All
+art hand-authored by deterministic generators
+(`~/workspace/ashs-journey-qa/gen-w5-art.mjs`, `gen-w5-art2.mjs`,
+`gen-w5-art3.mjs`; mulberry32 seeded per tile id, cluster textures,
+orphan-safe); cell edits by `apply-w5-redress.mjs` (segment-based,
+asserts per-cell walkability class preserved and `,` encounter cells
+never modified); palette splits by `apply-w5-splits*.mjs` (PAL hexes
+only, pixel rows untouched). Census rig:
+`premium-rig/audit-w5-census.mjs` (recording FakeCanvas, real
+resolver, Wave-2 logical tiles-only raster method; capture shares
+read on the same raster's composited pixels — methods never mixed).
+
+### TX-2 — town identity (61 planned units; 99 authored town tiles)
+
+- Per town: tg + tg2 ground kinds, tc + tc2 canopy kinds, td dress,
+  tr center-roof, th house-roof, tw house-wall, tl landmark facade
+  (motif crest: dome/leaf/gem/wave/shell/bloom/spire/bell/paw/flame/
+  star), plus signature flora in the 6 flora towns. Roof-form
+  families (P-4) as data in `TOWN_STYLE` (src/engine/tiles.mjs):
+  pallet hipped terracotta, viridian gabled slate, pewter flat stone
+  parapet, cerulean mansard blue-tile, vermilion copper gable,
+  celadon glass dome, saffron gold spire, lavender steep dark
+  shingle, fuchsia safari thatch, cinnabar basalt slab, indigo
+  marble league crest — carried by th/tr/tl tiles per town.
+- **Jaccard (tile-kind sets, census method): max 0.419
+  (viridian~indigo), median 0.242** — every pair ≤0.60 (base: max
+  1.00 lavender≡indigo, median ≈0.61). Every settlement has 8–11
+  kinds found in no other (gate ≥4). Full matrix in the QA census
+  output (`audit-w5-census.mjs --main`).
+- **Dominant ground hue** (saturation-weighted circular mean over
+  ground-cell pixels): pallet 86, viridian 120, pewter 67, cerulean
+  164, vermilion 46, celadon 141, saffron 58, lavender 274, fuchsia
+  352, cinnabar 22, indigo 222 — minimum pairwise separation 9°
+  (pewter~saffron), all 11 towns pairwise ≥8°. (Saffron and
+  cinnabar grounds were hue-rotated during tuning — net +8° and
+  −20° on their base tones — to break the pewter/saffron and
+  vermilion/cinnabar near-ties; TOWN_STYLE ground hexes synced to
+  the authored bases #c2b94e / #b0525a.)
+- **Self-blind-test: 9/11** named from unlabeled full-map renders
+  (`~/workspace/ashs-journey-qa/blind-w5/`, key sealed until after
+  naming): pallet, pewter, vermilion, cerulean, cinnabar, fuchsia,
+  saffron, viridian, celadon correct; lavender↔indigo swapped (the
+  two blue-violet towns — measured hues 271 vs 220, confusable by
+  eye). Gate ≥8/11 met.
+
+### TX-1 — ground texture (39 planned tiles; 115 authored + 2,906 cell edits)
+
+- Variants: grass base 10, tall grass 6, path 6 (incl. tile-path-4
+  town cobble + tile-path-5 worn-centre + tile-path-6 gravel),
+  grassground 4, detail overlays 14 (≥12), interior floors 4 per
+  family × 8 families with min pairwise diff 129–202px (gate ≥80px),
+  interior walls 2 per family, interior decor overlays 16 kinds
+  hash-scattered on interior floors (rate 0.75).
+- **Unique colours per map (logical raster): towns 82–120 (gate
+  ≥80), routes 105–153 (≥60), interiors all ≥55 (min 56), caves
+  61–79 (≥45).** In-map top-1 colour share ≤11.2% on every
+  town/route (gate ≤15%).
+- **Ground-family shares:** towns — top family (own tg/tg2 kind)
+  23.5–31.3% of cells (gate ≤40%); routes — path cut 62%→32.3%
+  (gate ≤45% for the family the spec names). Route encounter-grass
+  (kind `grass`, char `,`) sits at 4.0–43.9% of all route cells,
+  byte-identical BEFORE and AFTER [corrected by independent QA —
+  the original "59–68%, unsatisfiable by construction" figure did
+  not reproduce under the spec's denominator and is withdrawn:
+  under the spec's own text ("45% of any route's cells") the
+  kind-level gate HOLDS on every route; the family that violated
+  the gate was path, and it is fixed]. At variant level no single
+  ground variant exceeds ~15% of any route. Path→grass re-dress
+  used ONLY the `grassground` kind;
+  redress asserts prove every `,` cell byte-identical and every
+  edited cell's walkability class preserved.
+- **Cell edits (live merged maps): 2,906** — towns 2,081, routes
+  792, caves 33 (all file copies edited consistently; maps are
+  duplicated cumulatively maps.mjs→maps4.mjs).
+- **Palette-cap arithmetic (recorded raise):** TX-1's ≥80
+  colours/town is impossible under the tiles-family palette-union
+  cap of 72 (a map cannot show more colours than the family
+  contains; union measured 54 at W5 start). Cap raised in steps
+  with the arithmetic written into `build-art.mjs`: 72 → 240 →
+  512 → 640; final authored union measures 624 (palette-audit,
+  QA-verified — an earlier ~590 figure in this entry was wrong)
+  across 11 distinct town palettes with HSL-derived tones +
+  per-variant palette splits across grass/cave/tree/floor
+  families.
+
+### LD-1 — directional shadows (NW light)
+
+- Resolver coverage audit (`--night` census, object-identity on
+  layer stacks, all 11 towns): south strips 165/165 arch cells with
+  a ground south neighbour, east skirts 108/108, SE corners 161/161,
+  tree canopy blobs 567/567 tree cells (incl. tc- kinds), boulder
+  shadow in the sorted draw, prop contact shadows on the object
+  branch. First audit found object cells (td/tc/lamp neighbours)
+  missing strip/skirts; the tc/td and object branches now push
+  strip+skirts under the object art — re-audit 100% everywhere.
+- Item balls: procedural two-circle placeholder deleted; authored
+  `tile-itemball` with baked ground shadow renders instead.
+- Character shadows scale with airborne height
+  (`blitCharacter`: s = max(0.5, 1 − lift×0.12)); follower hop apex
+  lift 3 → s = 0.64, shadow area ≈41% of grounded on the
+  alpha-weighted measure (geometric area 62.5% — both readings
+  under the ≤70% gate; basis stated per independent QA).
+
+### LD-2 — time-of-day tint (anchor P-3)
+
+- `PHASE_TINTS` + `phaseOfHour` in src/engine/art.mjs; phase from
+  the wall clock (same source as the clock glyph), `game._tintPhase`
+  QA override. One flat overlay after the sorted world pass, before
+  all HUD/canvas text (DOM HUD structurally untintable); pinned OFF
+  (phase 'day') in caves and interiors; flash/reduced-motion gates
+  untouched (tint snaps, never animates).
+- Measured on the logical raster with the render-identical alpha
+  blend: day→night Δ mean-luminance 25.6–27.2% (gate ≥8%), Δ hue
+  26–37° (gate ≥6°) on pallet/route1/viridian; luminance ordering
+  dawn > day > dusk > night on every measured map (dawn tint is a
+  bright warm wash, dusk a deep warm cut — tuned so the ordering is
+  monotonic on all scenes, per the design's acceptance line).
+  Adjacent-phase shifts recorded honestly: dawn Δlum 7.6–11.3%,
+  dusk Δlum 4.2–6.6% (hue 25–41°) — the design's numeric gate is
+  day↔night and passes with 3× headroom.
+- Night coverage: house/typed wall cells rendering lit gold
+  (#ffd873) 136/136 (100%), lamp cells with glow-pool layer 43/43
+  (100%, core at dusk+night, bleed on 4-neighbours).
+
+### LD-3 — y-sorted draw
+
+- NPCs + Strength boulders (sysCollectDrawItems) + partner + player
+  draw in ONE stable feet-line-sorted pass (player pushed last,
+  wins ties); the list is allocated once in enter() (no per-frame
+  allocation); `sysRenderForeground` hook left at the seam for W7
+  (no-op today). Staged live cases
+  (`~/workspace/ashs-journey-qa/audit-w5-ysort.mjs`, draw-list order
+  read back from the running game): **7/7 PASS** — NPC north/south
+  of player, same-tile player-on-top, partner north/south, boulder
+  north/south.
+
+### LD-4 — cave light
+
+- Player glow: flat fill + hard 34px disc replaced by a 6-step
+  radial falloff (radii 52/42/34/25/16/8, alphas .05–.30). Four
+  light-source tile kinds throw their own 3-step pools: cavecrystal
+  `ý`, cavelantern `þ`, lavaglow `ÿ`, waterglow `Ā` (33 cells placed
+  across moon1/moon2/rocktunnel/seafoam/victoryroad/ceruleancave,
+  all on exposed wall/floor-water cells, walkability preserved —
+  crystal/lantern/lava solid like the wall they replace, waterglow
+  walkable like the floor it replaces). W6/TX-5 coordination: these
+  are lighting-model sources only; no TX-5 tile sets duplicated.
+
+### Connectivity (owner amendment — hard gate)
+
+- **celadon-sweep: 11/11 cities PASS**, 1 relevant fragment each,
+  every door/gate reachable from every entry on foot.
+- **Non-circular warp audit** (re-implemented as
+  `~/workspace/ashs-journey-qa/audit-w5-warps.mjs`: full-graph BFS
+  from the Pallet start component over engine WALKABLE + warp
+  graph): W5 tree and pristine b8200b3 worktree give IDENTICAL
+  output — 286 warp triggers, 266 reachable, the same 20-entry
+  unreachable set (Indigo Plateau behind Victory Road's
+  boulder/Surf traversal, S.S. Anne's gated entry, New Island's
+  standing decorative doors, victoryroad@(17,5)); doors 139,
+  south-front 76, any-adjacent 124, no-approach 15 — the 2,906
+  cell edits changed reachability by zero.
+
+### Sizes
+
+- ART keys 1,869 → 2,083 (**+214 new, 0 lost** on clean rebuild;
+  rebuild byte-identical, sha256-verified). art-data 3,227,323 →
+  3,341,006 B = **+113,683 B (111.0 KB of the ≤140 KB cap)**.
+  Authored-file ledger: 335 generator writes, 121 of them
+  re-authors of existing tiles (palette splits / enrichment), net
+  +214 keys. public/game.js 4,803,373 B (budgets PASS).
+
+### Standing battery (this tree vs b8200b3 base where noted)
+
+- campaign 24/24 · fidelity 35/35 · battle-model 45/45 ·
+  cheat-shop 44/44 · rejuv phases 44/44, 39/40, 60/61, 50/51,
+  52/53, 44/45 — p2/p3/p6 identical at base; p4/p5 initially showed
+  one extra failure each (A14/A28): both are hardcoded walkable-
+  floor char whlists in the tests (`['.', ',', '$']`) that predate
+  the town-ground chars; the whitelists were extended to the W5
+  TG/TG2 ranges with the precedent comment style of the Wave 5b
+  '$' note (the actors stand on engine-walkable town ground —
+  redress asserts prove it), after which p4/p5 match base exactly.
+  The remaining failure in each is C01 "chromium did not start"
+  (bare spawn, environmental, identical at base).
+- Track B 114/114 · verify-slice 134/134 · audit-headless 17/17 ·
+  qa-changed-flows failures EXACTLY {b2, d9} (55/57; identical set
+  at base) · budgets PASS (all gates) · contamination clean ·
+  audio ALL PASS · drift PASS.
+- audit-laptop (patched copies with the CHROME-POLICY recipe, both
+  trees): **15/29 on W5 and 15/29 at base with the identical 14
+  failures** (Dex ×6, Bag ×5, Options ×2, wild battle ×1) —
+  base-parity exact; the cluster is the known post-restart
+  environmental failure, not a W5 signal.
+- Render cost with tint + y-sort + shadows live (Saffron, night
+  forced via the QA hook, 473 frames while walking): mean 1.81ms,
+  p95 4.20ms, max 8.40ms (one post-teleport spike; 472/473 frames
+  ≤8ms). Budget ≤8ms met on mean/p95.
+- personal/ untouched (restored byte-identical after the battery's
+  verify-slice rebuild, per standing procedure).
+
+### Spec / design assumptions proved wrong
+
+1. **TX-1 colour targets vs the palette cap:** ≥80 colours/town is
+   arithmetically impossible under the tiles-family union cap of
+   72 (union measured 54 at start). The cap — not the targets —
+   moved, with the proof recorded in build-art.mjs (final cap 640,
+   authored union 624).
+2. **Route ground-family ≤45% at kind level [framing corrected by
+   independent QA]:** the gate in fact HOLDS on every route under
+   the spec's denominator — route `,` cells (the encounter grass;
+   overworld.mjs keys encounters on the char, and `grassground` is
+   its non-encounter twin) measure 4.0–43.9% of all route cells,
+   byte-identical before and after. The original claim here
+   (59–68%, "unsatisfiable") rested on an unstated denominator and
+   is withdrawn. The family that actually violated the gate was
+   path (49.0–61.6% → 31.8–33.5%), fixed via `grassground` only,
+   and no ground VARIANT exceeds ~15% of any route.
+3. **"Capture shares on in-map pixels" vs the census method:** the
+   standing Wave-2 discipline measures shares on the logical
+   tiles-only raster; W5 reports top-1 shares from that raster
+   (≤11.2%) and notes real captures only dilute the top colour
+   further (characters/HUD add non-ground pixels). No method
+   mixing: colour counts are logical-raster, shares are the same
+   raster's composited pixels, tint shifts are blend-modelled on
+   the same histograms.
+4. **Tint design's phase table values were placeholders:** the
+   first authored dawn/dusk tints produced ≤3.5% luminance shift
+   and non-monotonic ordering on greener scenes; final values are
+   tuned per the design's own instruction ("alpha/color values are
+   W5's tuning against the acceptance") — dawn brightens, dusk
+   deepens, ordering monotonic everywhere measured.
+
+**Independent QA addendum (coordinator, 2026-10-29):** W5 verdict
+PASS on substance. QA's own measurements: Jaccard max 0.419 with
+every pair ≤0.60; **blind test 11/11** on QA's own render set
+(including the lavender/indigo pair the implementer's self-test
+swapped); per-map colours at the register's ranges over ALL maps;
+encounter preservation proven exactly (`,` cells 640 = 640, zero
+moved; 2,906 changed cells, zero walkability-class violations);
+connectivity identical to base (sweep 11/11; warp audit outputs
+byte-identical, 286/266/same-20) with three cities personally
+walked gate-to-doors; tint day↔night 25.6–27.2% luminance /
+26–38° hue with 100% night window/lamp coverage and provable
+cave/interior/HUD exclusion; y-sort 7/7 + organic occlusion;
+cave falloff ≥6 steps with 4 light-source kinds placed; battery
+green with audit-laptop base-parity exact. **Ruling 1 — palette
+cap 72 → 640: RATIFIED.** TX-1's ≥80 colours/town is
+arithmetically impossible under a 72-hex tiles union (QA verified
+the subset argument); the §3 acceptance numbers govern over the
+W0 planning cap. The raise is disclosed at both enforcement
+points; the stale in-file arithmetic (486/512 prose vs 640 code
+vs 624 measured) is corrected in build-art.mjs and this entry —
+the documentation defect, not the raise, was the finding.
+**Ruling 2 — route ground-family gate: PASSES OUTRIGHT** on the
+spec's literal denominator (encounter-grass 4.0–43.9% of route
+cells; path 49.0–61.6% → 31.8–33.5%); the implementer's
+"unsatisfiable" narrative is withdrawn in place above. The rejuv
+p4/p5 whitelist extensions are audited clean: char-literal ranges
+matching tiles.mjs TG/TG2 exactly, no assertion touched, failure
+sets equal to base (empty) under the CHROME-POLICY recipe.
+Render budget met on mean/p95 in both QA runs (tails track
+sandbox load). Two evidence gaps closed by exact code/geometry
+measurement rather than live pixels (follower-shadow isolation,
+crystal-pool screenshot) — recorded, not hidden.

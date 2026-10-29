@@ -1,0 +1,23 @@
+# Premium+ W5: TX-1 towerfloor variant 3 — bold checker (diff>=80px)
+PIX tile-towerfloor-3 16 16
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+aaabccccaaabcccc
+aaabccccaaabcccc
+aaabccccaaabcccc
+bbbbccccbbbbcccc
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccaaabccccaaab
+ccccbbbbccccbbbb
+PAL
+a #9a9aa5 towerfloor-floor
+b #8a8aa0 towerfloor-line
+c #acaebe towerfloor-alt
+d #7e7e94 towerfloor-alt2

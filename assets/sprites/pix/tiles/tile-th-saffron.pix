@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2/P-4 saffron house roof — enriched form family
+PIX tile-th-saffron 16 16
+rrrrrrrrrrrrrrrr
+dddzdddzdddzdddz
+dddzdddzdddzdddz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+g #b29540 saffron-houseroof
+m #d2b562 houseroof-light
+d #785e26 houseroof-deep
+z #5a471c houseroof-deep-2
+a #f0e2a8 houseroof-accent
+k #5a3a24 eave-trim
+r #c6ac61 ridge-light

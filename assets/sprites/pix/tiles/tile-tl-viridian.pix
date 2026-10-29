@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 viridian landmark facade — crest dark tone
+PIX tile-tl-viridian 16 16
+dddddddddddddddd
+dddddddddddddddd
+dddddddddddddddd
+wwwweewaawwwwwww
+wwwwwwaaaawwwwww
+wwwwwaaaaaaeewww
+wwweeawaawaawwww
+wwwaawwaawwaawww
+wwwwzzwaawaawwww
+wwwwwaaaaaawweew
+wwwwwwazzawwwwww
+wwwwwwwaawwwwwww
+wwwweewwweewwwww
+ssssssssssssssss
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #f5f0dc landmark-wall
+e #ebe1b8 landmark-wall-shade
+d #35733e viridian-trim
+s #a87f4e landmark-shadow
+a #cfe8a8 viridian-crest
+z #9ed14f crest-dark
+h #ceeec0 crest-light

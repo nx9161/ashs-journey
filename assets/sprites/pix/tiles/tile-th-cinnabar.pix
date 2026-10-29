@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2/P-4 cinnabar house roof — enriched form family
+PIX tile-th-cinnabar 16 16
+rrrrrrrrrrrrrrrr
+dddzdddzdddzdddz
+dddzdddzdddzdddz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+kkkkkkkkkkkkkkkk
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+ggagggggagggggag
+agggggagggggaggg
+ggggagggggaggggg
+dddddddddddddddd
+dddddddddddddddd
+PAL
+g #9e5c46 cinnabar-houseroof
+m #c07e66 houseroof-light
+d #68382b houseroof-deep
+z #4e2a20 houseroof-deep-2
+a #e8b89a houseroof-accent
+k #5a3a24 eave-trim
+r #b8755e ridge-light

@@ -61,6 +61,67 @@ export const TILE_CHARS = {
   ')': 'rug', '/': 'battlemat',
 };
 
+// ---- Premium+ W5 (TX-2): per-town identity kinds ----
+// Every settlement owns five signature kinds, stamped with chars from the
+// Latin-1 supplement block (single UTF-16 units, unused by any other
+// system): tg = town ground (walkable, the town's street/meadow texture),
+// tc = town canopy (solid, town-tinted tree), td = town dress (solid
+// planter/signpost), tr = town roof (solid, the town's roof-form family),
+// tl = town landmark facade (solid). Six towns also own a flora ground
+// (walkable). The chars are assigned by town index in TOWN_ORDER.
+export const TOWN_ORDER = ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
+  'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo'];
+const TG_CHARS = 'ÀÁÂÃÄÅÆÇÈÉÊ';   // U+00C0..U+00CA town ground
+const TC_CHARS = 'ËÌÍÎÏÐÑÒÓÔÕ';   // U+00CB..U+00D5 town canopy
+const TD_CHARS = 'Ö×ØÙÚÛÜÝÞßà';   // U+00D6..U+00E0 town dress
+const TR_CHARS = 'áâãäåæçèéêë';   // U+00E1..U+00EB town roof
+const TL_CHARS = 'ìíîïðñòóôõö';   // U+00EC..U+00F6 town landmark
+const FLORA_CHARS = { pallet: '÷', cerulean: 'ø', celadon: 'ù', lavender: 'ú', fuchsia: 'û', cinnabar: 'ü' };
+// Per-town DATA table (TX-2 palette swaps + P-4 roof-form families):
+// dominant ground hex is the measured anchor of the town's ground tile
+// (pairwise hue distance >= 8 deg between every pair — see W5 register).
+export const TOWN_STYLE = {
+  pallet:    { ground: '#9db356', form: 'hipped terracotta' },
+  viridian:  { ground: '#4f9e57', form: 'gabled slate' },
+  pewter:    { ground: '#b0a58e', form: 'flat stone parapet' },
+  cerulean:  { ground: '#57a8a0', form: 'mansard blue-tile' },
+  vermilion: { ground: '#c98d5a', form: 'copper gable' },
+  celadon:   { ground: '#4fae7e', form: 'glass dome' },
+  saffron:   { ground: '#c2b94e', form: 'gold spire' },
+  lavender:  { ground: '#9a86b8', form: 'steep dark shingle' },
+  fuchsia:   { ground: '#c47ba4', form: 'safari thatch' },
+  cinnabar:  { ground: '#b0525a', form: 'basalt slab' },
+  indigo:    { ground: '#6a7ab0', form: 'marble league crest' },
+};
+TOWN_ORDER.forEach((id, i) => {
+  TILE_CHARS[TG_CHARS[i]] = 'tg-' + id;
+  TILE_CHARS[TC_CHARS[i]] = 'tc-' + id;
+  TILE_CHARS[TD_CHARS[i]] = 'td-' + id;
+  TILE_CHARS[TR_CHARS[i]] = 'tr-' + id;
+  TILE_CHARS[TL_CHARS[i]] = 'tl-' + id;
+});
+for (const [id, ch] of Object.entries(FLORA_CHARS)) TILE_CHARS[ch] = 'flora-' + id;
+// Premium+ W5 round 2: tg2 (second town ground, walkable), th (town
+// house-roof, solid — the P-4 form family on houses), tw (town
+// house-wall, solid, lit window). Latin Extended-A chars, one per town.
+const TG2_CHARS = 'ıĲĵķĸĺļľŀłń';   // U+0131..U+0144 town ground II
+const TH_CHARS = 'āăąĉċčďđēĕė';       // U+0101..U+0117 town house-roof
+const TW_CHARS = 'ęěğġģĥħĩīĭį';       // U+0119..U+012F town house-wall
+TOWN_ORDER.forEach((id, i) => {
+  TILE_CHARS[TG2_CHARS[i]] = 'tg2-' + id;
+  TILE_CHARS[TH_CHARS[i]] = 'th-' + id;
+  TILE_CHARS[TW_CHARS[i]] = 'tw-' + id;
+});
+export const TOWN_GROUND2_CHARS = TG2_CHARS;
+// Premium+ W5 (LD-4): cave light-source kinds — crystal/lantern/lava are
+// wall-class (solid, embedded in cave walls), waterglow is floor-class.
+TILE_CHARS['ý'] = 'cavecrystal';
+TILE_CHARS['þ'] = 'cavelantern';
+TILE_CHARS['ÿ'] = 'lavaglow';
+TILE_CHARS['Ā'] = 'waterglow';
+export const TOWN_GROUND_CHARS = TG_CHARS;
+export const FLORA_CHAR_BY_TOWN = FLORA_CHARS;
+
 const PAL = {
   // Dither tones softened (UI audit: the old dots read dirty/noisy):
   // grassDark/grassLight/pathDark are moved ~halfway toward their base

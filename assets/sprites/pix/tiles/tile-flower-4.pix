@@ -1,0 +1,29 @@
+# Premium+ W5: TX-1 flower variant 4 — mauve blooms
+PIX tile-flower-4 16 16
+mmggmmhhllhhmmmm
+mhhmmmhhllhhffmm
+aaggggmmmdddyffd
+aaghhgmmffdffyfd
+aaggmmhhyffffmgg
+ddggmddhmhyfmmgg
+aagggffgaahhmmmm
+mmgggyfgaahhllmm
+llllllmmaallggaa
+ddllmmmmaallgllm
+ggggggmmmmmmggdd
+ggggggmggmmffgdd
+gggggghhddmyfdgg
+gggggdddmmdaadhh
+ggmmmmggllllddmm
+ggddmmggglllggmm
+PAL
+g #5da24a grass
+d #4c8a3e grass-dark
+l #6fb45c grass-light
+m #67aa54 grass-mid
+h #79c168 grass-highlight
+a #8acb74 grass-pale
+s #386e2c grass-shadow
+e #2f6127 grass-deep
+f #c97e97 bloom-mauve
+y #f5f0dc bloom-cream

@@ -1,0 +1,26 @@
+# Premium+ W5: LD-2 lit-window variant of tile-wall-lab (night)
+PIX tile-wall-lab-lit 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wllwwwwllwwwwwll
+wwwwllllllllwwww
+wwwwshhuuuuswwww
+wwwwshhhuuuswwww
+wwwwsuhhuuuswwww
+sssssuuuuuusssss
+wwwwsuuuuuuswwww
+wwwwsuuuuuuswwww
+wwwwsssssssswwww
+wwwwwwwwswwwwwww
+wwwwwwwwwwwwwwww
+ssssssssssssssss
+ssssssssssssssss
+PAL
+w #8a8aa0 metal-mid
+l #c2c8d4 metal-light
+s #ffd873 window-lit
+t #5a3a24 trim
+u #ffd873 window-lit
+h #ffd873 window-lit
+q #3fa08a panel-teal

@@ -1,0 +1,27 @@
+# Premium+ W5: TX-1 grass base variant 10 — clover turf
+PIX tile-grass-10 16 16
+lllllaagmmggglla
+llllllggmmggggaa
+ddgllmddggagggdd
+mmggmmddggaaggdd
+ggggaaggggglllmm
+llggaahgghhlggmm
+ggllddddggggmmll
+ggllhhllddggmmll
+ggddmmlggmddggll
+ggddmlllmmddgggl
+ggggggmaadmmmmmm
+ggggaammddmmmmmm
+llmmllggllddaahh
+llmmllggmmddgghh
+mmllddddddggmaag
+mmllddddmmdgmmgg
+PAL
+g #5aa646 grass
+d #488a38 grass-dark
+l #6ab456 grass-light
+m #62a24e grass-mid
+h #76c05f grass-highlight
+a #88c871 grass-pale
+s #386e2c grass-shadow
+e #2f6127 grass-deep

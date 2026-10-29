@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 saffron ground tg2 — second accent tone
+PIX tile-tg2-saffron 16 16
+mmddmdddqqmmmaam
+mmddmaadqqddmmdd
+mmggzzddqqzzllmm
+mmgaagggaazzllqq
+llmmqqggggggllmm
+lgqqqqaagggglldd
+mmqqmmqqmmllaadd
+mmddmqqqmmllaadd
+ddllqqggddgglldd
+ddllgggazzgglldd
+mmmgmmllqqmmmmgm
+mmggmmllzzqmddmm
+llzzzzllllggqqzz
+llqggdllllggqqaa
+mmmlmmmmzzddddqq
+ggllmmmmzggdddqq
+PAL
+g #acc24e saffron-ground
+m #b2ae40 ground-mid
+l #d2cd62 ground-light
+d #968c2f ground-dark
+a #f0dfa8 ground-accent
+q #c29e4e ground-shift
+z #d6f0a8 ground-accent-2

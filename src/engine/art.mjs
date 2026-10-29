@@ -438,13 +438,42 @@ const TILE_ART = {
   throne: 'tile-prop-throne', memorial: 'tile-prop-memorial',
   officedesk: 'tile-prop-officedesk', sofa: 'tile-prop-sofa',
   stool: 'tile-prop-stool', rug: 'tile-prop-rug', battlemat: 'tile-prop-battlemat',
+  // Premium+ W5 (LD-4): cave light sources + authored item ball.
+  cavecrystal: 'tile-cavecrystal', cavelantern: 'tile-cavelantern',
+  lavaglow: 'tile-lavaglow', waterglow: 'tile-waterglow',
+  itemball: 'tile-itemball',
 };
+// Premium+ W5 (TX-2): per-town identity kinds -> their authored tiles.
+for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
+  'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo']) {
+  TILE_ART['tg-' + id] = 'tile-tg-' + id;
+  TILE_ART['tc-' + id] = 'tile-tc-' + id;
+  TILE_ART['td-' + id] = 'tile-td-' + id;
+  TILE_ART['tr-' + id] = 'tile-tr-' + id;
+  TILE_ART['tl-' + id] = 'tile-tl-' + id;
+}
+for (const id of ['pallet', 'cerulean', 'celadon', 'lavender', 'fuchsia', 'cinnabar']) {
+  TILE_ART['flora-' + id] = 'tile-flora-' + id;
+}
+// Premium+ W5 round 2: second town ground + town house roof/wall kinds.
+for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
+  'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo']) {
+  TILE_ART['tg2-' + id] = 'tile-tg2-' + id;
+  TILE_ART['th-' + id] = 'tile-th-' + id;
+  TILE_ART['tw-' + id] = 'tile-tw-' + id;
+  TILE_ART['tc2-' + id] = 'tile-tc2-' + id;
+}
 
 // Wave 2: kinds that are part of a building (for ground-shadow anchoring
 // and for the ground a dressing object stands on).
+// Premium+ W5: town ground/canopy/dress/flora kinds, grassground,
+// waterglow and the item ball are NOT architecture (they cast no
+// building shadow strip and anchor no dressing ground).
 const ARCH_KINDS = new Set([
   'house', 'door', 'gymwall', 'gymdoor', 'centerdoor',
-  ...Object.keys(TILE_ART).filter((k) => !['tree', 'path', 'grass', 'sign', 'flower', 'rock', 'fence', 'lamp', 'flowerbed'].includes(k)),
+  ...Object.keys(TILE_ART).filter((k) => !['tree', 'path', 'grass', 'grassground', 'sign', 'flower', 'rock', 'fence', 'lamp', 'flowerbed',
+    'waterglow', 'itemball'].includes(k) &&
+    !k.startsWith('tg-') && !k.startsWith('tg2-') && !k.startsWith('tc-') && !k.startsWith('td-') && !k.startsWith('flora-')),
 ]);
 export function isArchKind(kind) { return ARCH_KINDS.has(kind); }
 
@@ -479,10 +508,10 @@ export function buildArtTileCache(doc) {
     cache[kind] = fb;
   }
   const ids = (list) => list.map((id) => artCanvas(doc, id, 1)).filter(Boolean);
-  cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6']);
-  cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4']);
-  cache.pathVariants = ids(['tile-path', 'tile-path-2', 'tile-path-3']);
-  cache.flowerVariants = ids(['tile-flower', 'tile-flower-2', 'tile-flower-3']);
+  cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6', 'tile-grass-7', 'tile-grass-8', 'tile-grass-9', 'tile-grass-10']); // W5 TX-1: 10 base variants
+  cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4', 'tile-tallgrass-5', 'tile-tallgrass-6']); // W5 TX-1: 6 tall variants
+  cache.pathVariants = ids(['tile-path', 'tile-path-2', 'tile-path-3', 'tile-path-4', 'tile-path-5', 'tile-path-6']); // W5 TX-1: 6 path variants (cobble + worn-centre)
+  cache.flowerVariants = ids(['tile-flower', 'tile-flower-2', 'tile-flower-3', 'tile-flower-4', 'tile-flower-5']);
   // Wave 4: tree-variant pool = 3 species (oak / pine / elm) x 2 sizes +
   // the bush. The resolver picks by the (x + 2y) mod n rule documented in
   // resolveTileLayers, so orthogonally adjacent trees never share a stamp.
@@ -491,29 +520,29 @@ export function buildArtTileCache(doc) {
   if (cache.treeVariants.length) cache.tree = cache.treeVariants[0];
   cache.rockVariants = ids(['tile-rock', 'tile-rock-2', 'tile-rock-3']);
   if (cache.rockVariants.length) cache.rock = cache.rockVariants[0];
-  cache.caveWallVariants = ids(['tile-cavewall-1', 'tile-cavewall-2', 'tile-cavewall-3']);
+  cache.caveWallVariants = ids(['tile-cavewall-1', 'tile-cavewall-2', 'tile-cavewall-3', 'tile-cavewall-4', 'tile-cavewall-5']); // W5: +violet strata +basalt
   if (cache.caveWallVariants.length) cache.cavewall = cache.caveWallVariants[0];
   cache.stalactite = artCanvas(doc, 'tile-stalactite', 1);
-  cache.caveFloorVariants = ids(['tile-cavefloor-1', 'tile-cavefloor-2', 'tile-cavefloor-3']);
+  cache.caveFloorVariants = ids(['tile-cavefloor-1', 'tile-cavefloor-2', 'tile-cavefloor-3', 'tile-cavefloor-4', 'tile-cavefloor-5']); // W5 TX-1: 5 cave floors
   if (cache.caveFloorVariants.length) cache.cavefloor = cache.caveFloorVariants[0];
   cache.caveBoulderVariants = ids(['tile-caveboulder-1', 'tile-caveboulder-2', 'tile-caveboulder-3']);
   if (cache.caveBoulderVariants.length) cache.caveboulder = cache.caveBoulderVariants[0];
-  cache.towerFloorVariants = ids(['tile-towerfloor-1', 'tile-towerfloor-2']);
+  cache.towerFloorVariants = ids(['tile-towerfloor-1', 'tile-towerfloor-2', 'tile-towerfloor-3', 'tile-towerfloor-4']);
   if (cache.towerFloorVariants.length) cache.towerfloor = cache.towerFloorVariants[0];
-  cache.silphFloorVariants = ids(['tile-silphfloor-1', 'tile-silphfloor-2']);
+  cache.silphFloorVariants = ids(['tile-silphfloor-1', 'tile-silphfloor-2', 'tile-silphfloor-3', 'tile-silphfloor-4']);
   if (cache.silphFloorVariants.length) cache.silphfloor = cache.silphFloorVariants[0];
-  cache.plantFloorVariants = ids(['tile-plantfloor-1', 'tile-plantfloor-2']);
+  cache.plantFloorVariants = ids(['tile-plantfloor-1', 'tile-plantfloor-2', 'tile-plantfloor-3', 'tile-plantfloor-4']);
   if (cache.plantFloorVariants.length) cache.plantfloor = cache.plantFloorVariants[0];
   // Wave 5a interior floor variants (2 per family, spread-hash picked).
-  cache.centerFloorVariants = ids(['tile-centerfloor-1', 'tile-centerfloor-2']);
+  cache.centerFloorVariants = ids(['tile-centerfloor-1', 'tile-centerfloor-2', 'tile-centerfloor-3', 'tile-centerfloor-4']); // W5 TX-1: 4/family
   if (cache.centerFloorVariants.length) cache.centerfloor = cache.centerFloorVariants[0];
-  cache.martFloorVariants = ids(['tile-martfloor-1', 'tile-martfloor-2']);
+  cache.martFloorVariants = ids(['tile-martfloor-1', 'tile-martfloor-2', 'tile-martfloor-3', 'tile-martfloor-4']);
   if (cache.martFloorVariants.length) cache.martfloor = cache.martFloorVariants[0];
-  cache.houseFloorVariants = ids(['tile-housefloor-1', 'tile-housefloor-2']);
+  cache.houseFloorVariants = ids(['tile-housefloor-1', 'tile-housefloor-2', 'tile-housefloor-3', 'tile-housefloor-4']);
   if (cache.houseFloorVariants.length) cache.housefloor = cache.houseFloorVariants[0];
-  cache.gymFloorVariants = ids(['tile-gymfloor-1', 'tile-gymfloor-2']);
+  cache.gymFloorVariants = ids(['tile-gymfloor-1', 'tile-gymfloor-2', 'tile-gymfloor-3', 'tile-gymfloor-4']);
   if (cache.gymFloorVariants.length) cache.gymfloor = cache.gymFloorVariants[0];
-  cache.labFloorVariants = ids(['tile-labfloor-1', 'tile-labfloor-2']);
+  cache.labFloorVariants = ids(['tile-labfloor-1', 'tile-labfloor-2', 'tile-labfloor-3', 'tile-labfloor-4']);
   if (cache.labFloorVariants.length) cache.labfloor = cache.labFloorVariants[0];
   // Legacy single-tile callers (rustle overlay) get a tufted tile: the
   // rustle draws over the player's grass cell, which is tufted now.
@@ -532,7 +561,7 @@ export function buildArtTileCache(doc) {
   // Every set is phase-offset per tile at resolve time (animFrame) on
   // one of three cadence groups — fast 200ms / medium 400ms / slow
   // 800ms — so nothing in the world pulses in unison.
-  cache.tallSway = [1, 2, 3, 4].map((v) => ids([
+  cache.tallSway = [1, 2, 3, 4, 5, 6].map((v) => ids([
     'tile-tallgrass-' + v, 'tile-tallgrass-' + v + '-sway2', 'tile-tallgrass-' + v + '-sway3',
   ]));
   cache.grassSway = {
@@ -542,7 +571,7 @@ export function buildArtTileCache(doc) {
   cache.treeSway = ['tile-tree', 'tile-tree-oak-small', 'tile-tree-pine',
     'tile-tree-pine-small', 'tile-tree-elm', 'tile-tree-elm-small', 'tile-bush']
     .map((id) => artCanvas(doc, id + '-sway', 1));
-  cache.flowerSway = ['tile-flower', 'tile-flower-2', 'tile-flower-3']
+  cache.flowerSway = ['tile-flower', 'tile-flower-2', 'tile-flower-3', 'tile-flower-4', 'tile-flower-5']
     .map((id) => artCanvas(doc, id + '-sway', 1));
   cache.lampFrames = ids(['tile-lamp', 'tile-lamp-2', 'tile-lamp-3']);
   if (cache.lampFrames.length) cache.lamp = cache.lampFrames[0];
@@ -579,11 +608,102 @@ export function buildArtTileCache(doc) {
   cache.detail = {
     pebbles: artCanvas(doc, 'tile-detail-pebbles', 1),
     dirt: artCanvas(doc, 'tile-detail-dirt', 1),
+    // Premium+ W5 (TX-1): detail overlays 2 -> 12.
+    leaves: artCanvas(doc, 'tile-detail-leaves', 1),
+    twig: artCanvas(doc, 'tile-detail-twig', 1),
+    petals: artCanvas(doc, 'tile-detail-petals', 1),
+    shells: artCanvas(doc, 'tile-detail-shells', 1),
+    moss: artCanvas(doc, 'tile-detail-moss', 1),
+    clover: artCanvas(doc, 'tile-detail-clover', 1),
+    sand: artCanvas(doc, 'tile-detail-sand', 1),
+    ash: artCanvas(doc, 'tile-detail-ash', 1),
+    straw: artCanvas(doc, 'tile-detail-straw', 1),
+    blossom: artCanvas(doc, 'tile-detail-blossom', 1),
+    bunting: artCanvas(doc, 'tile-detail-bunting', 1),
+    cobbleRing: artCanvas(doc, 'tile-detail-cobble-ring', 1),
+  };
+  cache.detailSet = [cache.detail.pebbles, cache.detail.dirt, cache.detail.leaves,
+    cache.detail.twig, cache.detail.petals, cache.detail.shells, cache.detail.moss,
+    cache.detail.clover, cache.detail.sand, cache.detail.ash, cache.detail.straw,
+    cache.detail.blossom, cache.detail.bunting, cache.detail.cobbleRing].filter(Boolean);
+  // ---- Premium+ W5: light & shadow sets (LD-1/LD-2) ----
+  cache.grassgroundVariants = ids(['tile-grassground', 'tile-grassground-2', 'tile-grassground-3', 'tile-grassground-4']);
+  if (cache.grassgroundVariants.length) cache.grassground = cache.grassgroundVariants[0];
+  cache.shadowE = artCanvas(doc, 'tile-shadow-e', 1);
+  cache.shadowE2 = artCanvas(doc, 'tile-shadow-e2', 1);
+  cache.shadowSE = artCanvas(doc, 'tile-shadow-se', 1);
+  cache.shadowSE2 = artCanvas(doc, 'tile-shadow-se2', 1);
+  cache.shadowScap = artCanvas(doc, 'tile-shadow-scap', 1);
+  cache.shadowScap2 = artCanvas(doc, 'tile-shadow-scap2', 1);
+  cache.shadowL = artCanvas(doc, 'tile-shadow-l', 1);
+  cache.shadowL2 = artCanvas(doc, 'tile-shadow-l2', 1);
+  cache.treeShadows = ids(['tile-shadow-tree-1', 'tile-shadow-tree-2', 'tile-shadow-tree-3',
+    'tile-shadow-tree-4', 'tile-shadow-tree-5', 'tile-shadow-tree-6', 'tile-shadow-tree-7']);
+  cache.shadowRock = artCanvas(doc, 'tile-shadow-rock', 1);
+  cache.shadowProp = artCanvas(doc, 'tile-shadow-prop', 1);
+  cache.shadowBoulder = artCanvas(doc, 'tile-shadow-boulder', 1);
+  cache.glowPools = ids(['tile-glowpool-1', 'tile-glowpool-2']);
+  // Premium+ W5 round 3: canopy variant pairs + interior decor overlays.
+  cache.canopyVariants = {};
+  for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
+    'celadon', 'saffron', 'lavender', 'fuchsia', 'cinnabar', 'indigo']) {
+    cache.canopyVariants['tc-' + id] = ids(['tile-tc-' + id, 'tile-tc2-' + id]);
+  }
+  cache.decorSet = ids(['tile-decor-books', 'tile-decor-herb', 'tile-decor-cup', 'tile-decor-papers',
+    'tile-decor-cushion', 'tile-decor-bottles', 'tile-decor-vase', 'tile-decor-shoes',
+    'tile-decor-radio', 'tile-decor-cake', 'tile-decor-globe', 'tile-decor-typer',
+    'tile-decor-fern', 'tile-decor-lamp', 'tile-decor-clock', 'tile-decor-basket']);
+  // Premium+ W5 (TX-1): interior wall second variants, spread-hash picked.
+  cache.wallVariants = {
+    centerwall: ids(['tile-centerwall', 'tile-centerwall-2']),
+    martwall: ids(['tile-martwall', 'tile-martwall-2']),
+    housewall: ids(['tile-housewall', 'tile-housewall-2']),
+    gymwallin: ids(['tile-gymwallin', 'tile-gymwallin-2']),
+    labwall: ids(['tile-labwall', 'tile-labwall-2']),
+    towerwall: ids(['tile-towerwall', 'tile-towerwall-2']),
+    silphwall: ids(['tile-silphwall', 'tile-silphwall-2']),
+    plantwall: ids(['tile-plantwall', 'tile-plantwall-2']),
+  };
+  // Night lit-window swaps (LD-2): day kind -> lit canvas. House unlit
+  // reuses the shipped lit wall; the other 8 are W5 authored variants.
+  cache.litMap = {
+    'wall-house-unlit': artCanvas(doc, 'tile-wall-house-lit', 1),
+    'wall-house-plain': artCanvas(doc, 'tile-wall-house-plain-lit', 1),
+    'wall-center': artCanvas(doc, 'tile-wall-center-lit', 1),
+    'wall-mart': artCanvas(doc, 'tile-wall-mart-lit', 1),
+    'wall-gym': artCanvas(doc, 'tile-wall-gym-lit', 1),
+    'wall-lab': artCanvas(doc, 'tile-wall-lab-lit', 1),
+    'wall-lab-plain': artCanvas(doc, 'tile-wall-lab-plain-lit', 1),
+    'wall-brick-plain': artCanvas(doc, 'tile-wall-brick-plain-lit', 1),
+    'sign-center': artCanvas(doc, 'tile-sign-center-lit', 1),
   };
   // Wave 2: ground-shadow strip laid on ground cells directly south of
   // a building, anchoring every structure.
   cache.shadowStrip = artCanvas(doc, 'tile-shadow', 1);
   return cache;
+}
+
+// ---- Premium+ W5 (LD-2): time-of-day tint (anchor trait P-3) ----
+// Four phases derived from the SAME wall-hour source that drives the
+// clock glyph (overworld renderClockGlyph) — one source of truth, the
+// glyph and the tint can never disagree. The tint is a single flat
+// overlay on the WORLD layer only (drawn by the scene after the world
+// pass, before any HUD/canvas text; DOM HUD is never tinted by
+// construction). Day is the reference capture (alpha 0 — no draw).
+// Values tuned so a same-position town capture shifts >= 8% mean
+// luminance and >= 6 deg mean hue between day and night on in-map
+// pixels (measured in the W5 rig on the logical raster + blend).
+export const PHASE_TINTS = {
+  dawn: { color: '#f2cf9f', rgb: [242, 207, 159], alpha: 0.18 },
+  day: { color: '#000000', rgb: [0, 0, 0], alpha: 0 },
+  dusk: { color: '#c05a1c', rgb: [192, 90, 28], alpha: 0.24 },
+  night: { color: '#1c2a55', rgb: [28, 42, 85], alpha: 0.38 },
+};
+export function phaseOfHour(h) {
+  if (h >= 5 && h < 8) return 'dawn';
+  if (h >= 8 && h < 17) return 'day';
+  if (h >= 17 && h < 20) return 'dusk';
+  return 'night';
 }
 
 export function tileSprite(cache, kind, t) {
@@ -633,7 +753,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   'badgecase', 'labmachine', 'labtank', 'labdesk', 'cabinbed', 'cabintable',
   'porthole', 'slotmachine', 'throne', 'memorial', 'officedesk', 'sofa',
   'stool', 'rug', 'battlemat']);
-function groundFamilyOf(kind) {
+export function groundFamilyOf(kind) {
+  if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
+  if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
   if (kind === 'grass' || kind === 'grassground' || kind === 'flower' || kind === 'tree' || kind === 'rock' || kind === 'sign' ||
       kind === 'fence' || kind === 'lamp' || kind === 'flowerbed') return 'grass';
   if (kind === 'cavefloor' || kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') return kind;
@@ -660,6 +782,7 @@ function pickVariantSpread(arr, x, y, salt) {
 }
 function groundBase(cache, family, x, y) {
   if (!family) return null;
+  if (family.startsWith('tg-') || family.startsWith('tg2-')) return cache[family] || null; // W5 town ground underlay
   const arr = cache[FLOOR_VARIANTS[family]];
   if (family === 'grass') return pickVariant(arr, x, y, 13) || cache[family] || null;
   if (family === 'path') return pickVariant(arr, x, y, 21) || cache[family] || null;
@@ -688,13 +811,105 @@ const DIRS = ['n', 'e', 's', 'w'];
 // KIND at a map position, or null off-map (off-map neighbours never raise
 // a transition). t is the shared animation clock (water/foam stay in sync
 // with tileSprite's 600ms frame step). Returns canvases in draw order.
-export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
+export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
   const at = (dx, dy) => {
     const k = kindAt(x + dx, y + dy);
     return k == null ? kind : k;
   };
   const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
   const tt = t || 0; // W3: t < 0 = reduced-motion freeze (animFrame -> 0)
+  // Premium+ W5 (LD-2): time-of-day phase, threaded from the scene
+  // (day is the reference; caves/interiors always resolve as day).
+  const ph = phase || 'day';
+  const night = ph === 'night';
+  const duskNight = night || ph === 'dusk';
+  // LD-1 directional cast shadows (light from the NW): besides the
+  // shipped south strip, a building throws an EAST skirt on the cell to
+  // its east and an SE corner on the cell to its south-east; L-caps and
+  // strip caps close junctions. Ground cases call this after the strip.
+  const pushSkirts = (layers) => {
+    const wA = isArchKind(at(-1, 0)), nwA = isArchKind(at(-1, -1)), nA = isArchKind(nb.n);
+    if (wA && cache.shadowE) layers.push(nwA && cache.shadowE2 ? cache.shadowE2 : cache.shadowE);
+    else if (nwA && cache.shadowSE) layers.push(nA && cache.shadowSE2 ? cache.shadowSE2 : cache.shadowSE);
+    if (nA && wA && cache.shadowL) layers.push(cache.shadowL);
+    // Strip cap: this cell sits east of the strip's last cell (the cell
+    // west has a building north of it; this one does not).
+    if (!nA && isArchKind(at(-1, -1)) && cache.shadowScap) layers.push(cache.shadowScap);
+  };
+  // LD-2: lamp glow pools bleed onto the cells around a lamp at
+  // dusk/night (the lamp cell itself gets the bright core, below).
+  const pushLampGlow = (layers) => {
+    if (!duskNight || !cache.glowPools || !cache.glowPools.length) return;
+    if (nb.n === 'lamp' || nb.e === 'lamp' || nb.s === 'lamp' || nb.w === 'lamp') layers.push(cache.glowPools[0]);
+  };
+  // TX-1: the 12-overlay detail set, spread-hash picked.
+  const pushDetail = (layers, rate, salt) => {
+    if (!cache.detailSet || !cache.detailSet.length) return;
+    if (hashTileSpread(x, y, salt) < rate) {
+      const d = cache.detailSet[Math.floor(hashTileSpread(x, y, salt + 1) * cache.detailSet.length) % cache.detailSet.length];
+      if (d) layers.push(d);
+    }
+  };
+  // ---- W5 prefix kinds: town identity + cave light sources ----
+  if (kind.startsWith('tg-') || kind.startsWith('tg2-')) {
+    // Town ground: the settlement's own street/meadow texture (walkable).
+    const layers = [cache[kind] || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
+    const sway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
+    if (sway) layers.push(sway);
+    pushLampGlow(layers);
+    pushDetail(layers, 0.30, 17);
+    if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    pushSkirts(layers);
+    return layers.filter(Boolean);
+  }
+  if (kind.startsWith('tc-') || kind.startsWith('td-')) {
+    // Town canopy / dress: objects standing on the town ground.
+    let ground = groundFamilyOf(nb.s);
+    if (!ground) {
+      const counts = {};
+      for (const d of DIRS) { const f = groundFamilyOf(nb[d]); if (f) counts[f] = (counts[f] || 0) + 1; }
+      ground = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] || 'grass';
+    }
+    const layers = [];
+    const base = groundBase(cache, ground, x, y);
+    if (base) layers.push(base);
+    // W5 LD-1: a building north/west casts strip + skirts onto the
+    // ground beneath canopy/dress cells too.
+    if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    pushSkirts(layers);
+    if (kind.startsWith('tc-')) {
+      const blob = cache.treeShadows && cache.treeShadows.length
+        ? cache.treeShadows[treeVariantIndex(x, y, cache.treeShadows.length)] : null;
+      if (blob) layers.push(blob); // LD-1: canopy shadow blob, 100% of tree cells
+      // W5 round 3: hash-pick between the town's two canopy variants.
+      const pair = (cache.canopyVariants && cache.canopyVariants[kind]) || [cache[kind]];
+      const cv = pickVariantSpread(pair, x, y, 59) || cache[kind];
+      if (cv) layers.push(cv);
+    } else {
+      if (cache.shadowProp) layers.push(cache.shadowProp);
+      if (cache[kind]) layers.push(cache[kind]);
+    }
+    return layers.filter(Boolean);
+  }
+  if (kind.startsWith('tr-') || kind.startsWith('tl-') || kind.startsWith('th-') || kind.startsWith('tw-')) {
+    return [cache[kind]].filter(Boolean); // town roof / landmark facade / house roof+wall (solid)
+  }
+  if (kind.startsWith('flora-')) {
+    const layers = [cache[kind] || cache.grass];
+    const sway = pickAnim(cache.grassSway.a, tt, x, y, CAD_SLOW, 41);
+    if (sway) layers.push(sway);
+    if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    pushSkirts(layers);
+    return layers.filter(Boolean);
+  }
+  if (kind === 'cavecrystal' || kind === 'cavelantern' || kind === 'lavaglow') {
+    return [cache[kind]].filter(Boolean); // LD-4 light sources (wall class)
+  }
+  if (kind === 'waterglow') {
+    const layers = [cache[kind] || cache.cavefloor];
+    if (DUNGEON_WALLS.has(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    return layers.filter(Boolean);
+  }
   const frame = Math.floor(Math.max(0, tt) / 600);
   const nearWater = DIRS.some((d) => nb[d] === 'water');
   const pushPulse = (layers) => { // shore wet-pulse on land at the waterline
@@ -708,11 +923,15 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       // never a tall/encounter variant (isTallGrass applies to the
       // 'grass' kind only). Building shadow + path dirt-edge dressing
       // match the base-grass treatment so W5 re-dress blends in.
-      const layers = [cache.grassground || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
+      // Premium+ W5 (TX-1): 4 meadow variants, spread-hash picked.
+      const layers = [pickVariantSpread(cache.grassgroundVariants, x, y, 39) || cache.grassground || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
       const ggSway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
       if (ggSway) layers.push(ggSway);
       pushPulse(layers);
+      pushLampGlow(layers);
+      pushDetail(layers, 0.30, 19);
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      pushSkirts(layers);
       if (cache.edgeDirt) {
         const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
         const used = new Set();
@@ -743,9 +962,8 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
         const sway = pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41);
         if (sway) layers.push(sway);
         pushPulse(layers);
-        const dh = hashTile(x, y, 14);
-        if (dh < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
-        else if (dh < 0.18 && cache.detail.dirt) layers.push(cache.detail.dirt);
+        pushLampGlow(layers);
+        pushDetail(layers, 0.30, 15); // W5 TX-1: 12-overlay detail set
         // grass<->tallgrass: short tufts lean in from a tall neighbour.
         const off = { n: [0, -1], e: [1, 0], s: [0, 1], w: [-1, 0] };
         for (const d of DIRS) {
@@ -756,6 +974,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       }
       // Wave 2: building directly north -> ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      pushSkirts(layers); // W5 LD-1: east skirt + SE corner
       // grass<->path: worn dirt edge on the grass side (corners first).
       if (cache.edgeDirt) {
         const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
@@ -774,10 +993,12 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
     case 'path': {
       const layers = [pickVariant(cache.pathVariants, x, y, 21) || cache.path];
       pushPulse(layers);
+      pushLampGlow(layers);
       // Wave 2: a building directly north anchors this cell with its
       // ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
-      if (hashTile(x, y, 22) < 0.10 && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+      pushSkirts(layers); // W5 LD-1
+      pushDetail(layers, 0.20, 23); // W5 TX-1 detail set on paths too
       const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
       for (const d of DIRS) {
         if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
@@ -829,6 +1050,12 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       // A dungeon wall directly north casts the shared shadow strip.
       if (DUNGEON_WALLS.has(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       if (hashTileSpread(x, y, 62) < 0.10 && cache.detail && cache.detail.pebbles) layers.push(cache.detail.pebbles);
+      // W5 round 3: tower/silph/plant floors are interiors — decor too
+      // (cavefloor keeps its pebbles + crystals only).
+      if (kind !== 'cavefloor' && cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.75) {
+        const d = pickVariantSpread(cache.decorSet, x, y, 131);
+        if (d) layers.push(d);
+      }
       // W3: glow-crystal clusters pulse on cave floors near walls.
       if (kind === 'cavefloor' && DIRS.some((d) => nb[d] === 'cavewall') && hashTileSpread(x, y, 81) < 0.14) {
         const cry = pickAnim(cache.crystalFrames, tt, x, y, CAD_MED, 81);
@@ -840,8 +1067,16 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       // Wave 5a interior floors: own variant pair; an interior or
       // dungeon wall directly north casts the shared shadow strip.
       // Interiors are swept — no pebble detail indoors.
+      // Premium+ W5 (TX-1): variants are 4 per family (bold patterns).
       const layers = [groundBase(cache, kind, x, y)];
       if ((INTERIOR_WALLS.has(nb.n) || DUNGEON_WALLS.has(nb.n)) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      // Premium+ W5 round 3 (TX-1): hash-scattered decor overlays give
+      // small interiors texture + colour depth (books, herb pots, cups,
+      // papers, cushions, bottles, vases, shoes).
+      if (cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.75) {
+        const d = pickVariantSpread(cache.decorSet, x, y, 131);
+        if (d) layers.push(d);
+      }
       return layers.filter(Boolean);
     }
     case 'tree': case 'rock': case 'caveboulder': case 'sign': case 'flower':
@@ -874,6 +1109,23 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       const layers = [];
       const base = groundBase(cache, ground, x, y);
       if (base) layers.push(base);
+      // W5 LD-1: a building north/west casts strip + skirts onto the
+      // ground beneath object cells too.
+      if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      pushSkirts(layers);
+      // Premium+ W5 (LD-1): every object class casts — canopy blob under
+      // trees, contact shadow under rocks/boulders/props/dressing.
+      if (kind === 'tree') {
+        const blob = cache.treeShadows && cache.treeShadows.length
+          ? cache.treeShadows[treeVariantIndex(x, y, cache.treeShadows.length)] : null;
+        if (blob) layers.push(blob);
+      } else if (kind === 'rock' || kind === 'caveboulder') {
+        if (cache.shadowRock) layers.push(cache.shadowRock);
+      } else if (kind === 'lamp') {
+        if (duskNight && cache.glowPools && cache.glowPools[1]) layers.push(cache.glowPools[1]); // LD-2 core pool
+      } else if (kind !== 'rug' && kind !== 'battlemat' && cache.shadowProp) {
+        layers.push(cache.shadowProp);
+      }
       if (kind === 'flower') {
         // W3: flowers sway — the shipped variant is frame 1, the sway
         // delta is frame 2 (medium cadence, per-tile phase).
@@ -909,8 +1161,26 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t) {
       return layers.filter(Boolean);
     }
     default: {
+      // Premium+ W5 (LD-2): at night, house/typed-building windows
+      // render their lit variants (100% of window kinds with a lit
+      // counterpart in cache.litMap).
+      if (night && cache.litMap && cache.litMap[kind]) return [cache.litMap[kind]];
+      // W5 TX-1: interior walls pick between their two variants.
+      if (cache.wallVariants && cache.wallVariants[kind] && cache.wallVariants[kind].length > 1) {
+        return [pickVariantSpread(cache.wallVariants[kind], x, y, 71) || cache[kind]].filter(Boolean);
+      }
       const v = cache[kind];
       if (!v) return [];
+      // W5 round 3 (TX-1): interior floors get hash-scattered decor
+      // overlays (books, herb pots, cups, papers, cushions, bottles,
+      // vases, shoes) — texture + colour depth for small interiors.
+      if (cache.decorSet && cache.decorSet.length &&
+        ['centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor',
+         'towerfloor', 'silphfloor', 'plantfloor'].includes(kind) &&
+        hashTile(x, y, 97) < 0.75) {
+        const d = pickVariantSpread(cache.decorSet, x, y, 131);
+        if (d) return [v, d];
+      }
       if (Array.isArray(v)) return [v[frame % v.length]];
       // W3: chimney smoke — 3 frames x 2 colourways (colourway by tile
       // hash), slow cadence, drawn over the chimney cell.

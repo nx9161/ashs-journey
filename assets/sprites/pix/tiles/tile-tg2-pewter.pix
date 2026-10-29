@@ -1,0 +1,26 @@
+# Premium+ W5: TX-2 pewter ground tg2 — second accent tone
+PIX tile-tg2-pewter 16 16
+zzxaadmmmmggmmdd
+ddmxddmxxmggmmdd
+ggllmmzzllmmllgg
+ggllmmzzllmgzzgg
+xxddmmllggllmmaa
+xxddmxxmmlllmmaa
+ggllddaallggllxx
+gglggzlllllgllxx
+aadddmmdmmmgggmm
+aaddddddmggllgmm
+ddmmllzzmmdmmggg
+ddmmllzzmmxxgddg
+mmggggggmmmmmmxx
+mmggggggmmmlllxx
+mmzzllddddzzddxx
+mmzgggddddzzllmm
+PAL
+g #b0ae8e pewter-ground
+m #a1a180 ground-mid
+l #c0bf9e ground-light
+d #8a8969 ground-dark
+a #d8d2c0 ground-accent
+x #b09d8e ground-shift
+z #d0d8c0 ground-accent-2
