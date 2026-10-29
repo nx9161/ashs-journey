@@ -1055,8 +1055,8 @@ const driverD = `
     if (stallScene && realMoves) stallScene.ally.moves = realMoves; // restore the lead's real kit for battles 2-7
     drain(g);
     var judged = g.ui.log.some(function (e) { return e.text && e.text.indexOf('Arena judge steps in') >= 0; });
-    ok('D16 Arena stall battle reaches the judge at the turn cap and the judged WIN lands (2 distinct status moves beat 1 on Mind): streak 1, run open',
-      judged && !!st.frontier.run && st.frontier.run.streak === 1,
+    ok('D16 Arena stall battle reaches the judge at the turn cap and the judged WIN lands (2 distinct status moves beat 1 on Mind): streak 1, run open, and the generated foe fields THREE mons (F3 shape)',
+      judged && !!st.frontier.run && st.frontier.run.streak === 1 && !!stallScene && stallScene.trainer.team.length === 3,
       'judged=' + judged + ' streak=' + (st.frontier.run && st.frontier.run.streak));
     // Battles 2-7 honestly, then rest at the boundary.
     pump(g, 6000, function (menu) {
@@ -1067,9 +1067,11 @@ const driverD = `
       !!st.frontier.run && st.frontier.run.streak === 7 && st.frontier.records.arena.bestStreak === 7 && slotOf(g, 'arena') === null);
   }
   {
-    // Constructed judged LOSS: the ally only Splashes while the foe
-    // lands Body Slams — Mind 1-1, Skill 3-3, Body 2 vs 3 -> the
-    // decision goes against the challenger and the run closes.
+    // Constructed judged LOSS (rebuilt for the F3 3-mon shape): EVERY
+    // entered ally mon only Splashes (a lead faint cannot hand the
+    // bout to a real kit) while the foe's lead lands Body Slams —
+    // Mind 1-1, Body reads the whole teams, and the decision goes
+    // against the challenger; the run closes.
     var g = mkGame(7221); boot(g); strongParty(g, 100);
     var ow = gotoMap(g, 'frontier-arena', 10, 5); drain(g);
     var st = g.state;
@@ -1082,7 +1084,7 @@ const driverD = `
         var b2 = g.scenes.top;
         if (b2 !== lossScene) {
           lossScene = b2;
-          b2.ally.moves = [{ id: 'splash', pp: 99, maxPp: 99 }];
+          b2.facility.partyOverride.forEach(function (m) { m.moves = [{ id: 'splash', pp: 99, maxPp: 99 }]; });
           b2.foe.moves = [{ id: 'bodyslam', pp: 99, maxPp: 99 }];
         }
         driveBattle(g);
@@ -1093,9 +1095,37 @@ const driverD = `
     }
     drain(g);
     var judgedLoss = g.ui.log.some(function (e) { return e.text && e.text.indexOf('decision goes to') >= 0; });
-    ok('D18 constructed judged LOSS: the judge decides against the stalling challenger, the run closes at streak 0, no symbol, no wins recorded',
-      judgedLoss && st.frontier.run === null && slotOf(g, 'arena') === null && st.frontier.records.arena.totalWins === 0,
+    ok('D18 constructed judged LOSS (3-mon foes): the judge decides against the stalling challenger, the run closes at streak 0, no symbol, no wins recorded',
+      judgedLoss && st.frontier.run === null && slotOf(g, 'arena') === null && st.frontier.records.arena.totalWins === 0
+      && !!lossScene && lossScene.trainer.team.length === 3,
       'judged=' + judgedLoss + ' run=' + JSON.stringify(st.frontier.run));
+  }
+  {
+    // F3 Body-category flip case (seam drive, D05 idiom): the foe's
+    // ACTIVE mon is worn to 30% while its two bench mons stand full.
+    // Emerald's whole-team reading gives the foe Body = round(3 x
+    // (0.3+1+1)/3) = 2; the superseded 1-mon shape would have read
+    // the same battle as round(3 x 0.3) = 1 — the point FLIPS, which
+    // is exactly the skew the fix removes. Both sides Splash-stall
+    // to the cap so nothing else moves the fractions.
+    var g = mkGame(7227); boot(g); strongParty(g, 50);
+    var ow = gotoMap(g, 'pallet', 7, 9); drain(g);
+    var st = g.state;
+    var team = [st.party[0], st.party[1], st.party[2]];
+    team.forEach(function (m) { m.moves = [{ id: 'splash', pp: 99, maxPp: 99 }]; });
+    var cap = null;
+    var tr = { id: 'frontier-judge-body', name: 'BODYBOX', title: 'Tester', reward: 0,
+      team: [{ species: 'rattata', level: 50 }, { species: 'pidgey', level: 50 }, { species: 'caterpie', level: 50 }], intro: [' b.'], lose: ['Judged.'] };
+    var bb = new BattleScene({ kind: 'trainer', trainer: tr, returnTo: ow, rt: false,
+      facility: { id: 'arena', partyOverride: team, maxTurns: 3, judge: function (a, f) { var v = judgeArena(a, f); cap = { a: a, f: f, v: v }; return v; } } });
+    g.scenes.push(bb); bb.enter();
+    bb.foe.moves = [{ id: 'splash', pp: 99, maxPp: 99 }];
+    bb.foe.hp = Math.floor(bb.foe.maxHp * 0.3); // fixture: the active foe is worn; the bench is untouched
+    driveBattle(g);
+    ok('D18B Body reads WHOLE-TEAM fractions (F3): a foe worn to 30% with a full bench scores Body 2 (hpFrac ~0.767) — the old 1-mon reading of the same battle scores 1; the card goes to the challenger 7-6',
+      !!cap && Math.abs(cap.f.hpFrac - (0.3 + 1 + 1) / 3) < 0.02 && cap.f.parts.body === 2 && Math.round(3 * 0.3) === 1
+      && cap.a.parts.body === 3 && cap.v === 'win' && !(g.scenes.top instanceof BattleScene),
+      cap ? 'hpFrac=' + cap.f.hpFrac + ' foeBody=' + cap.f.parts.body + ' totals=' + cap.a.total + '-' + cap.f.total : 'judge never fired');
   }
   {
     var r = milestoneDrive(7222, 'frontier-arena', 'arena', 12, null, 14, 'silver');

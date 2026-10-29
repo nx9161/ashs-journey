@@ -16,8 +16,13 @@
 //   ({ species, level, keepsake? }) — that format has NO moves field
 //   (BattleScene builds foes with makeMon from the species learnset),
 //   so "authored moves" are not expressible and none are claimed.
-// - Arena generated trainers field ONE mon (see the judge note in
-//   game/frontier.mjs): the 3-turn judgement is a single-battler law.
+// - Arena generated trainers field THREE mons (Stage F3
+//   SUPERSESSION of the F2 one-mon note): the judge's Body category
+//   reads WHOLE-TEAM HP fractions exactly as Emerald does, so a
+//   1-mon foe — its only mon absorbing all the damage while the
+//   challenger's bench stayed untouched — conceded Body almost
+//   every time and skewed the variant's core mechanic. Brain teams
+//   already fielded 3; generated teams now match them.
 
 import { BADGE_SETS } from './items.mjs';
 

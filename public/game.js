@@ -120683,8 +120683,13 @@ const POCKETS = ['balls', 'items', 'medicine', 'tm', 'hm', 'key', 'keepsakes'];
 //   ({ species, level, keepsake? }) — that format has NO moves field
 //   (BattleScene builds foes with makeMon from the species learnset),
 //   so "authored moves" are not expressible and none are claimed.
-// - Arena generated trainers field ONE mon (see the judge note in
-//   game/frontier.mjs): the 3-turn judgement is a single-battler law.
+// - Arena generated trainers field THREE mons (Stage F3
+//   SUPERSESSION of the F2 one-mon note): the judge's Body category
+//   reads WHOLE-TEAM HP fractions exactly as Emerald does, so a
+//   1-mon foe — its only mon absorbing all the damage while the
+//   challenger's bench stayed untouched — conceded Body almost
+//   every time and skewed the variant's core mechanic. Brain teams
+//   already fielded 3; generated teams now match them.
 
 
 const FACILITY_IDS = [...BADGE_SETS.symbols]; // [tower, factory, arena, dome, pike, palace, pyramid]
@@ -162663,6 +162668,9 @@ class BattleScene {
   // counters plus Body read live from team HP (ally: the override
   // team's fractions; foe: fainted foes count 0, the current foe its
   // live fraction, unfielded foes full — via foeMaxTrail).
+  // F3 fix: the foe index is trainerIdx — this once read a foeIndex
+  // field that never existed, so the active foe (and fainted foes)
+  // always counted at FULL HP and the foe's Body never moved.
   facilityTeamStats(side) {
     const g = this.game;
     const c = this.facilityStats[side];
@@ -162674,8 +162682,8 @@ class BattleScene {
         const mh = this.foeMaxTrail[i] !== undefined ? this.foeMaxTrail[i]
           : hpValue(SPECIES[t.species].base.hp, t.level, 31);
         total += mh;
-        if (i < this.foeIndex) { /* fainted: 0 remaining */ }
-        else if (i === this.foeIndex) rem += Math.max(0, this.foe.hp);
+        if (i < this.trainerIdx) { /* fainted: 0 remaining */ }
+        else if (i === this.trainerIdx) rem += Math.max(0, this.foe.hp);
         else rem += mh;
       });
     } else if (this.foe) { total = this.foe.maxHp; rem = Math.max(0, this.foe.hp); }
@@ -165498,8 +165506,9 @@ function pickSpecies(g, pool, n, used) {
 
 // A generated Frontier trainer. id is unique per run battle (rng
 // suffix) so nothing keyed on trainer id can collide across runs.
-// teamSize: 3 for the set/dome facilities, 1 for the Arena's judged
-// single-battler bouts (see judgeArena) — Pike chamber trainers use 2.
+// teamSize: 3 for the set/dome facilities AND the Arena (F3: its
+// judged bouts are whole-team bouts — see judgeArena) — Pike
+// chamber trainers use 2.
 function genTrainer(g, facilityId, battleNo, foeLevel, teamSize) {
   const fac = FACILITIES[facilityId];
   const size = teamSize || 3;
@@ -165707,7 +165716,7 @@ function launchSetBattle(g, ow) {
   const battleNo = run.streak + 1;
   const tier = setMilestone(state, facId, battleNo);
   const trainer = tier ? brainTrainer(facId, tier, run.foeLevel)
-    : genTrainer(g, facId, battleNo, run.foeLevel, facId === 'arena' ? 1 : 3);
+    : genTrainer(g, facId, battleNo, run.foeLevel, 3);
   const team = activeTeam(state, run);
   const extra = {};
   if (facId === 'arena') { extra.maxTurns = 3; extra.judge = judgeArena; }

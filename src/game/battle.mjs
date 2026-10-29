@@ -954,6 +954,9 @@ export class BattleScene {
   // counters plus Body read live from team HP (ally: the override
   // team's fractions; foe: fainted foes count 0, the current foe its
   // live fraction, unfielded foes full — via foeMaxTrail).
+  // F3 fix: the foe index is trainerIdx — this once read a foeIndex
+  // field that never existed, so the active foe (and fainted foes)
+  // always counted at FULL HP and the foe's Body never moved.
   facilityTeamStats(side) {
     const g = this.game;
     const c = this.facilityStats[side];
@@ -965,8 +968,8 @@ export class BattleScene {
         const mh = this.foeMaxTrail[i] !== undefined ? this.foeMaxTrail[i]
           : hpValue(SPECIES[t.species].base.hp, t.level, 31);
         total += mh;
-        if (i < this.foeIndex) { /* fainted: 0 remaining */ }
-        else if (i === this.foeIndex) rem += Math.max(0, this.foe.hp);
+        if (i < this.trainerIdx) { /* fainted: 0 remaining */ }
+        else if (i === this.trainerIdx) rem += Math.max(0, this.foe.hp);
         else rem += mh;
       });
     } else if (this.foe) { total = this.foe.maxHp; rem = Math.max(0, this.foe.hp); }

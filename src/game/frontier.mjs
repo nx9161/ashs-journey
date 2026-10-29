@@ -101,8 +101,9 @@ function pickSpecies(g, pool, n, used) {
 
 // A generated Frontier trainer. id is unique per run battle (rng
 // suffix) so nothing keyed on trainer id can collide across runs.
-// teamSize: 3 for the set/dome facilities, 1 for the Arena's judged
-// single-battler bouts (see judgeArena) — Pike chamber trainers use 2.
+// teamSize: 3 for the set/dome facilities AND the Arena (F3: its
+// judged bouts are whole-team bouts — see judgeArena) — Pike
+// chamber trainers use 2.
 export function genTrainer(g, facilityId, battleNo, foeLevel, teamSize) {
   const fac = FACILITIES[facilityId];
   const size = teamSize || 3;
@@ -310,7 +311,7 @@ function launchSetBattle(g, ow) {
   const battleNo = run.streak + 1;
   const tier = setMilestone(state, facId, battleNo);
   const trainer = tier ? brainTrainer(facId, tier, run.foeLevel)
-    : genTrainer(g, facId, battleNo, run.foeLevel, facId === 'arena' ? 1 : 3);
+    : genTrainer(g, facId, battleNo, run.foeLevel, 3);
   const team = activeTeam(state, run);
   const extra = {};
   if (facId === 'arena') { extra.maxTurns = 3; extra.judge = judgeArena; }
