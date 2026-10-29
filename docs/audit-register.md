@@ -13389,3 +13389,279 @@ Sealed derivation + embark: S01 homecoming read-back (arc/region sinnoh, embark 
 **Pins (+3, validator 106 → 109):** (i) a played-shape full-chain save carrying 650 story flags (the measured finale count) validates server-side with ZERO errors; (ii) the client schema result for the same save is unchanged (accepted); (iii) the bound still stands — 1001 flags reject `bad-flags-size`. Fuzz 2000/2000, save-contract 12/12, Track B 114/114 all re-run green over the change.
 
 **Guilty stage, named:** no S-stage introduced the bound — it predates the arcs (Track B). What outgrew it is the shipped campaign itself, accreting stage by stage (S5a/S5b's story flags carried a Frontier-complete save's 433 past 500 during Sinnoh); S8 is the first gate whose continuous save could measure it. Recorded as its own entry per the campaign-gate rule — not buried in the S8 battery table.
+
+## Arc 4 Stage S9 — INDEPENDENT QA: the verdict on Arc 4 Sinnoh + MISSION CLOSE (2026-10-29)
+
+**VERDICT: SHIP-WITH-NOTES.** No blockers found. Every mission claim
+was re-driven independently by an agent that implemented nothing in
+this mission and changed no game code: fresh QA drivers (QA
+workspace `arc4-s9-qa/`: `s9-drive.mjs`, `s9-validator.mjs`,
+`render-sinnoh-towns.mjs`), my own battery re-runs, my own fresh
+re-run of the S8 chain drive, and a pristine-base A/B worktree.
+`personal/` byte-identical at start and end (game.js sha256
+`f434ba63…`); fresh build byte-identical to the committed
+`public/game.js` (sha256 `b1f77766…`); the tree was clean
+throughout except this section; nothing pushed or deployed (the
+owner's single deploy is the parent's, after this close).
+
+### 1. The first Sinnoh hour (`s9-drive.mjs` P01 + A01–A09, 10/10)
+
+From a Frontier-complete save I constructed: **derivation** —
+re-shaped to the sealed-consumed form (hook + homecoming set, arc
+`frontier`, no embark), `SCH.migrate` derives arc `sinnoh` +
+region `sinnoh` + `embark_sinnoh`, regionsDone untouched,
+idempotent (P01). **Embark** — CAPT SINNOH sails Vermilion →
+Sandgem, `reachedarc_sinnoh` stamped, arrival scene completes
+(A01). **Arrival presentation** — the dex pill reads **Dex 13/493**
+(my fixture caught exactly 13), the location chip names Sandgem
+Town, Journey shows ARC 4 SINNOH **CURRENT** under BATTLE FRONTIER
+COMPLETE, Regions reads Sinnoh — you are here (A02/A03). **Quest
+Log guidance at three points** — after arrival the SINNOH active
+row is "▶ Report to Professor Rowan's lab in Sandgem" (HUD
+objective agrees verbatim); after the lab, "▶ Lake Verity —
+something moved on the water"; after Roark (Verity glimpsed on the
+true path), objective + active row both lead with "▶ Valley
+Windworks — break the lock-in" (A04/A06/A09). **Lab + Paul 1** —
+Rowan registers, Paul resolves with exactly one branch flag (won)
+(A05). **Badge-prefix refusal** — Gardenia with zero Sinnoh badges
+refuses, no battle (A07). **Roark** — MINER COLE battles first,
+Coal Badge first in badges.sinnoh (A08).
+
+### 2. Mid-arc sampling (B01–B04, 4/4 — the verifier's picks)
+
+**Defog** on Route 210 North: taught to Staraptor through the bag;
+refuses without the Fen Badge, refuses again with the badge but no
+knowledge, clears with both (B01). **Great Marsh**: one session
+start-to-exit — $500 at the warden, 30 Safari Balls, lands Great
+Marsh West, a marshbog encounter fires under Safari rules and
+resolves back into the Marsh with the session alive, steps-out
+exits cleanly at Pastoria with balls reclaimed (B02). **Super
+Contest** at Hearthome: rank gating VISIBLE at the counter (Normal
+open, Great + Master disabled), Normal Rank runs end-to-end
+(4 move menus), FIRST PLACE persists `hearthome-normal` (B03).
+**Forme switch (my pick, Rotom → Wash)** at the Old Chateau
+appliances, back to base on leaving; the individual rides the swap
+(B04).
+
+### 3. Climax → conference → finale (C01–C12, 12/12, own fixture)
+
+Spear Pillar: climb beat + Cyrus FACED (won) + the warp (C01).
+**Distortion World traversal** — entrance → depths → isles → falls
+→ abyss, no soft lock, every floor `distortion:true` with a warp
+out (C02); as a place it reads as one escalating authored set
+(Threshold / Depths / Isles / Falls / Abyss / Platform), the
+platform's black-glass prose landing on the floors before it.
+Climax resolves on the platform: Cyrus FACED + ended
+(`cyrus_final_won`), `sinnoh_climax_resolved`, all three titan
+unlocks (C03). **Paul settlement**: registrar + preliminary, then
+the quarter-final WIN in 1 attempt (C04). **Tobias**: Darkrai
+FALLS on the felling path with the conference not yet concluded
+(C05); Latios concludes (won) and **the honour text fires** — the
+machine card's HONOURS line ("the only victory anyone took from
+the conference's darkest trainer… and the Darkrai that fell") and
+Tobias's post-match book line both present (C06). **Machine card**:
+`sinnoh_complete` via the handler, regionsDone +sinnoh exactly
+once, directive pinned `unova` (C07). **Sail home**: CAPT WESTWIND
+→ Vermilion (C08). **Finale homecoming**: 6 bond echoes in
+regionsDone order, Oak's 492-of-493 entrusting, Azure Flute ×1 +
+`arceus_unlocked`, sealed law held (C09); **credits + end card**
+— the last presented scene's tail deep-equals `FINALE_END_CARD`,
+approved line verbatim (C10, the independent re-pin of S7's C08);
+**Master HoF viewer**: 7 plates, exactly one MASTER ENTRY (C11).
+**Hall of Origin + Arceus**: stairs ceremony say-only; Arceus at
+Lv 400; **fled once — nothing completed — then caught** on the
+re-fired face: dex 493/493, Platinum Diploma earned (C12).
+
+### 4. Blind town identity (`arc4-s9-qa/shots/towns-blind/`)
+
+All 14 settlements rendered as full-map stills from tile data
+(the render-w5 rig method), slot-named, named from the still
+alone before the key was opened (guesses sealed in
+`blind-guesses.md`). **Identification: 10/14.** Strong: Canalave
+(canals/dock), Sunyshore (solar panels), Floaroma (pink blossom),
+Snowpoint (snow), Jubilife (paved grid), Sandgem (beach), Twinleaf,
+Hearthome, Celestic, Solaceon. **Wrong, named — two confusable
+pairs:** Oreburgh ↔ Veilstone (Oreburgh's autumn-brown earth read
+as Pastoria; Veilstone's blue-grey industrial ground read as
+Oreburgh — the hard-ground industrial pair, Veilstone's signature
+indoors) and Eterna ↔ Pastoria (Pastoria's marsh-green + gated
+ponds read as Eterna; Eterna's plain green fell to elimination).
+In play the pairs separate (bog tiles, Safari gates, NPCs, arrival
+context); in a flat still they are genuinely ambiguous. Operator
+caveat as in J7b/H7b: I ran the renders; the calls are the
+in-frame evidence.
+
+### 5. End-card capture attempt — environmental, as inherited
+
+S7's driver run exactly as left: **FAIL — chromium did not
+start**; a bare probe returns the verbatim block, `Hatch WebGL
+domain policy is required for browser startup`. The only policy
+file present (`/tmp/webgl-domains.txt`, pre-existing) is invalid
+under the documented contract (no contract line; non-registrable
+domains). No browser policy file was created or modified by this
+stage. The capture remains environment-blocked — the rejuv C01
+inheritance — and the end card stands on S7's C08 textual pin,
+independently re-proved by §3's C10 this session.
+
+### 6. Both-validators re-proof (`s9-validator.mjs`, 12/12)
+
+Zero errors on BOTH validators for: my played Frontier-complete
+save (the §1 snapshot), my played Sinnoh-complete save (at the
+machine card), my played finale-complete save (after the Arceus
+catch), S7's finale-ready save, and an em-dash fixture (my
+Sinnoh-complete save with `meta.location = 'Route 212 — North'`,
+verified verbatim in the maps9 name fields). The F-1 widening
+stays scoped: a `<`-carrying location still rejects server-side.
+
+### 7. Center exits (F01–F04)
+
+Voluntary + blackout exits in **Jubilife, Hearthome, Pastoria,
+Snowpoint** — 4 towns, 8 exits — all land on each town's OWN
+door-front via its (4,4) ticket, never the (4,5) fallback. The
+J6.5 class does not recur in Sinnoh.
+
+### 8. Battery spot re-runs (my runs, this tree)
+
+| Suite | My result | Stage report |
+|---|---|---|
+| battle-model-checks | **45/45** | 45/45 HARD |
+| campaign-smoke | **24/24** | 24/24 |
+| qa-changed-flows | failures exactly **{b2, d9}** (55/57, QA TOTAL 19/19) | {b2, d9} |
+| api-scripts validator | **109/109** | 109/109 |
+| sinnoh-legendary-checks (my pick) | **27/27** | 27/27 |
+| arc-chain chain-drive (re-run by me) | **211/211** | 211/211 |
+
+**A/B:** qa-changed-flows in a pristine worktree at base
+`8cf87e3` reads the identical 55/57 with failures exactly
+{b2, d9} — a standing inheritance, not a Sinnoh regression.
+(My first run, from `tests/`, hit a post-results ENOENT on the
+suite's relative `personal/index.html` read; from the repo root
+it completes at exit 0 — a harness CWD quirk, recorded, not a
+game finding.) Named inheritances untouched and unmoved:
+qa-slice {s6, l8}, rejuv {A09, C01}, audit-laptop unrunnable.
+
+### 9. Discrepancies — all A/B-named, none a game defect
+
+My drive's first pass read 23/27; the four failures were the
+driver's, each proven: (1) A09 asserted the Windworks objective
+before the Verity glimpse stood — the chain order makes Verity
+the correct active row there; driving the true path lands it.
+(2) B-section fixture used move ids outside the shipped 146-move
+table (`dragonclaw`/`shadowball`/`shadowforce`/`uproar`/
+`doubleteam` do not exist). (3) C03 asserted `cyrus_end_*`; the
+event's real branch pair is `cyrus_final_won/lost`. (4) C08's
+first fixture lacked `reachedarc_sinnoh`, the stamp the return
+ferry's gate reads — real play always stamps it on the outbound
+crossing (A01 proves the stamp), so no player-reachable save can
+stand in Sinnoh without it: fixture anatomy, not a soft-lock.
+Corrected drive: **30/30** (P01 + A01–A09 + B01–B04 + C01–C12 +
+F01–F04). No genuine blocker was found, so no base-A/B game
+defect exists to report; the one A/B this stage owed (the
+battery inheritance, §8) is discharged above.
+
+### 10. The mission's honest leftovers — gathered from S0–S8, named
+
+Standing OPEN at this close (nothing below was hidden by its
+stage; each is recorded in its own entry):
+
+- **S1 data simplifications:** growth-rate substitutions
+  (erratic→fast ×6, fluctuating→slow ×2 — the engine lacks the
+  curves); shipped-stone evolution fallbacks (shiny→sun,
+  dusk→moon, dawn→sun), held-item trades flattened to bare Link
+  Transfer trades, condition-class evolutions at flat Lv 310;
+  gender gates inexpressible (burmy dual-branch on the wurmple
+  precedent; combee→vespiquen a plain Lv 321 — the mon record
+  carries no gender); Happiny's breeding-side incense semantics
+  unmodelled (no Luck Incense, as for every shipped line);
+  post-493 evolutions emit no evo (sylveon / sneasler / mr-rime
+  out of scope); TM lists assigned from the closest shipped
+  analogue, not canon Gen-4 lists; 859 learnset pairs (221
+  distinct moves) dropped as out-of-table in the ETL.
+- **S2 weakest silhouettes (owner's-eye polish list):** S2a —
+  burmy + wormadam (weakest pair), starly, mothim, stunky,
+  shieldon; chingling the smallest frame (482 px). S2b —
+  porygonz, yanmega, giratinaorigin (lightest legendary frame),
+  skorupi, tangrowth; riolu's back carries an odd dark-ring
+  patch, flagged rather than smoothed.
+- **S3a:** the Coronet central stair pair is one-way by design;
+  Wayward Cave is `dark: true` with no HM gating — no Flash-class
+  HM was ever added, and that stands.
+- **S3b:** the Distortion World is honestly bounded — no gravity
+  or z-axis exists in the engine; `distortfalls` is walked as a
+  floor family; the Battle Zone's three areas stand at the
+  settlement-lite standard (24×14, Center + Mart via tickets);
+  the sprite audit's 4 failing water-tile TODO markers are
+  inherited (also failing at S3a close).
+- **S4:** the Gracidea reversion simplification (sky persists
+  until the flower is reused or Shaymin faints; canon's
+  night/freeze reversion unmodelled); Rotom's appliance move is
+  not auto-taught or forgotten — the forme's signature-move swap
+  stays unmodelled.
+- **S5a/S5b:** no Gen-4 TM rows were ever added (TM_MOVES remains
+  the Gen-1 50, the H4a mirror); the Zoroark special is one
+  illusion scene with no species, battle or catch (zorua/zoroark
+  exist in no shipped table); Paul's Acuity midpoint is FACED by
+  design — no progression gate reads its result.
+- **S5b→S6 rider, closed but recorded:** Tobias's Darkrai
+  band-local learnset tops out at Quick Attack / Dream Eater for
+  damage; the conference sets are authored explicitly under S6's
+  `authoredMoves` support — the learnset itself was not widened.
+- **S6 design calls:** Giratina has ONE door (Turnback Cave);
+  the Distortion World return is deliberately not a second
+  trigger. Cresselia roams (no direct Fullmoon catch). Darkrai
+  has no member-card item (none was invented). Heatran's Magma
+  Stone is a flag, not an item.
+- **S7/S8:** the end-card screenshot remained environment-blocked
+  at S7 and again at S9 (§5); the drift-gate fails on the
+  COMMITTED tree identically at base (stale committed
+  `dist/standalone.html` vs committed `public/game.js` from the
+  S5b–S7 per-target builds — standing bookkeeping, A/B-proven
+  at S8, not a regression); audit-laptop unrunnable in this
+  sandbox (chromium).
+- **S9's own notes:** the two blind-still pairs (§4); the
+  quest-log section-order findability carried since J7b Note 3
+  (earlier arcs render above SINNOH — guidance correct,
+  findability is the note).
+- **Discharged on the way (named so they are not re-counted as
+  open):** S0's crossing proof + state-only badge path (S3/S5);
+  S1's Mothim placement (S3a wild) and Spiritomb placement (S6);
+  S3a's layout-only gyms / inert Contest Hall / dressed Galactic
+  buildings / Rotom room (S4/S5); S5a's Saturn pacing call (the
+  S5b HQ raid); S8's bad-flags-size bug (fixed + pinned as
+  S8-fix, validator 109).
+
+### 11. Final mission accounting
+
+- **Commits base → HEAD:** base `8cf87e3` (Frontier close) →
+  HEAD `9a81ed9`: **12 stage commits** — `fbfc33a` S0 ·
+  `00b1479` S1 · `a5b7b10` S2a · `71f98ff` S2b · `5a8838b` S3a ·
+  `a942943` S3b · `59547e5` S4 · `06c9b43` S5a · `9794398` S5b ·
+  `982cfb1` S6 · `b45001b` S7 · `9a81ed9` S8 (carrying the S8-fix
+  validator change + pins in the same commit). (The S9 brief's
+  "19+" figure does not match the tree; the measured count and
+  hashes are these, listed so the close rests on the tree, not
+  the brief.) This S9 register commit is the 13th.
+- **Roster:** 509 authored entries (National dex 493 + 7 Sinnoh
+  formes + the shipped formes/partner), census 509/509, 0 forge
+  fallbacks (S2b rig, re-proven at S8).
+- **Maps:** 431 merged unique maps game-wide; by region —
+  Sinnoh **139** (maps9), Hoenn **99**, Battle Frontier **11**,
+  Johto **84**, Orange **31**, Kanto + shared interiors **67**
+  (module counts, cross-file overlaps absorbed in the remainder).
+  Sinnoh sweep 139/139 from Sandgem (S3b, re-proven at S8).
+- **Bundle close:** `public/game.js` **12,287,055 B**; public
+  static total **12,449,677 B** vs the **12,582,912 B** gate —
+  **133,235 B under**, the gate never raised, every stage inside
+  its coordinator allowance. Fresh build byte-identical at this
+  close (sha256 `b1f77766…`).
+- **The chain:** one continuous save, Kanto → Orange → Johto →
+  Hoenn → Frontier → Sinnoh → finale → Arceus, re-run by this
+  verifier at **211/211**.
+
+**Arc 4 Sinnoh stands as shipped, and with it the whole arc chain
+through Platinum: six journeys, five leagues and a frontier, one
+road — walked whole, and now independently verified whole.
+SHIP-WITH-NOTES, the notes being §10's named leftovers and §4/§5's
+two S9 observations — none of them a player's blocker. What
+remains is the parent's: the Player's Guide revision and the
+owner's single deploy.**
