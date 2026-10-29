@@ -10104,3 +10104,27 @@ server-side under the raised bag cap).
   now loads as a Frontier save (arc + embark derived); a save
   mid-homecoming (directive pinned, not yet home) still walks
   the ritual live, through the shipped branch.
+
+### F0.1 addendum (2026-10-29, coordinator catch)
+
+- The derivation's catch-up mirrored only half of the homecoming
+  advance: `tryHomecoming`'s `finish()` sets `story.arc`,
+  `story.region = next.regionKey`, and `embark_<id>` together,
+  but the F0 catch-up set arc + embark only — leaving a repaired
+  save at arc 'frontier' with region still 'hoenn', while
+  `openRegions()` reads `story.region` as the current region.
+  F0.1 pins the derivation to the machine's own advance in full:
+  the catch-up branch now also sets
+  `story.region = a.regionKey` (the arc being advanced into).
+  Nothing else changes.
+- The pin is asserted in tests/frontier-checks.mjs: the
+  consumed-sealed fixtures (A13 regionsDone form, A14
+  completionFlag form) assert `story.region === 'kanto'`
+  (frontier's regionKey) after derivation, A13 idempotently;
+  the mid-Hoenn (A15) and already-advanced (A16) fixtures assert
+  region untouched.
+- Battery (this tree): frontier-checks **27/27**;
+  arc-foundation **47/47**; hoenn-story **88/88**;
+  qa-changed-flows exactly **{b2, d9}**; battle-model **45/45**.
+  **public/game.js: 9,808,355 B**, byte-stable (build x2, same
+  sha256 986daf919393…). `personal/` byte-identical.

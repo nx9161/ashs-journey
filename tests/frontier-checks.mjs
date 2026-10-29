@@ -117,19 +117,19 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     return s;
   };
   const consumed = SCH.migrate(frontierSave((s) => { s.story.flags.hook_frontier = true; s.story.flags.homecoming_frontier = true; }));
-  ok('A13 derivation (i): a consumed-SEALED Frontier save (hook_frontier + homecoming_frontier, arc still hoenn, Hoenn complete in regionsDone) derives arc frontier + embark_frontier on load — and is idempotent',
-    consumed.story.arc === 'frontier' && consumed.story.flags.embark_frontier === true
-    && (() => { const again = SCH.migrate(clone(consumed)); return again.story.arc === 'frontier' && again.story.flags.embark_frontier === true; })(),
-    JSON.stringify({ arc: consumed.story.arc, emb: consumed.story.flags.embark_frontier }));
+  ok('A13 derivation (i): a consumed-SEALED Frontier save (hook_frontier + homecoming_frontier, arc still hoenn, Hoenn complete in regionsDone) derives arc frontier + region kanto (frontier\'s regionKey) + embark_frontier on load — and is idempotent',
+    consumed.story.arc === 'frontier' && consumed.story.region === 'kanto' && consumed.story.flags.embark_frontier === true
+    && (() => { const again = SCH.migrate(clone(consumed)); return again.story.arc === 'frontier' && again.story.region === 'kanto' && again.story.flags.embark_frontier === true; })(),
+    JSON.stringify({ arc: consumed.story.arc, region: consumed.story.region, emb: consumed.story.flags.embark_frontier }));
   const consumedByFlag = SCH.migrate(frontierSave((s) => { s.story.regionsDone = ['kanto', 'orange', 'johto']; s.story.flags.hoenn_complete = true; s.story.flags.hook_frontier = true; s.story.flags.homecoming_frontier = true; }));
   ok('A14 derivation (i, flag form): the previous arc\'s completion met via its completionFlag (hoenn_complete, regionsDone without hoenn) derives the same repair',
-    consumedByFlag.story.arc === 'frontier' && consumedByFlag.story.flags.embark_frontier === true);
+    consumedByFlag.story.arc === 'frontier' && consumedByFlag.story.region === 'kanto' && consumedByFlag.story.flags.embark_frontier === true);
   const midHoenn = SCH.migrate(frontierSave((s) => { s.story.regionsDone = ['kanto', 'orange', 'johto']; s.story.flags = {}; }));
-  ok('A15 derivation (ii): a mid-Hoenn save (no hook, no homecoming) is untouched — arc stays hoenn, no embark_frontier',
-    midHoenn.story.arc === 'hoenn' && !midHoenn.story.flags.embark_frontier);
+  ok('A15 derivation (ii): a mid-Hoenn save (no hook, no homecoming) is untouched — arc stays hoenn, region stays hoenn, no embark_frontier',
+    midHoenn.story.arc === 'hoenn' && midHoenn.story.region === 'hoenn' && !midHoenn.story.flags.embark_frontier);
   const advanced = SCH.migrate(frontierSave((s) => { s.story.arc = 'frontier'; s.story.flags.hook_frontier = true; s.story.flags.homecoming_frontier = true; s.story.flags.embark_frontier = true; }));
-  ok('A16 derivation (iii): an already-advanced save (arc frontier, embark already armed by the live homecoming) is untouched',
-    advanced.story.arc === 'frontier' && advanced.story.flags.embark_frontier === true);
+  ok('A16 derivation (iii): an already-advanced save (arc frontier, embark already armed by the live homecoming) is untouched — region untouched',
+    advanced.story.arc === 'frontier' && advanced.story.region === 'hoenn' && advanced.story.flags.embark_frontier === true);
   const pending = SCH.migrate(frontierSave((s) => { s.story.arc_directive = 'frontier'; s.story.flags.hook_frontier = true; }));
   const hookless = SCH.migrate(frontierSave((s) => { s.story.flags.homecoming_frontier = true; }));
   ok('A17 derivation (iv): a pending homecoming (directive set + hook delivered, NO homecoming flag) is untouched; and homecoming without the hook is untouched',

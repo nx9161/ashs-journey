@@ -408,6 +408,7 @@ export function deriveArcDefaults(story, caughtCount, playtimeSec) {
     if (!fl['hook_' + a.id] || !fl['homecoming_' + a.id]) continue;
     if (!arcCompletionMet({ story }, prev)) continue;
     story.arc = a.id;
+    story.region = a.regionKey;
     if (!story.flags || typeof story.flags !== 'object') story.flags = {};
     story.flags['embark_' + a.id] = true;
   }
