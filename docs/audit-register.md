@@ -9796,3 +9796,135 @@ on the same file, and the full battery at its named counts. The
 Foundation machine needed to learn nothing new: the Hoenn
 completion, card, directive, ferry and sealed-Frontier homecoming
 all rode the shipped machinery.**
+
+## Arc 3 Stage H7b — INDEPENDENT QA: the verdict on Arc 3 Hoenn (2026-10-29)
+
+**VERDICT: SHIP-WITH-NOTES.** No blockers found. Every mission claim was
+re-driven independently by an agent that implemented nothing in this
+mission: fresh QA drivers (QA workspace `arc3-h7b-qa/`), my own battery
+re-runs, my own fresh re-run of the H7a chain drive, and real Chromium
+captures via the local harness (production CSP). `personal/`
+byte-identical at start and end (game.js sha256 `f434ba63…`);
+`public/game.js` sha256 `4daaf7f4…` (the H7a close); the tree was clean
+throughout except this section; nothing pushed or deployed.
+
+### 1. The first Hoenn hour, by real inputs (`h7b-drive.mjs` A01–A09, 9/9)
+
+From a Johto-complete state built in the chain drive's idiom:
+Homecoming fires (arc → hoenn, directive cleared, embark armed, dialogue
+names Hoenn/Birch) → Vermilion CAPT HOENN sails → Littleroot landing →
+Birch rescue completes (Poochyena not faked into the dex) → lab arrival
+→ May met → **Route 101 walked on foot** tile-by-tile over real onStep
+calls (13 steps, exits into Oldale, no stall) → Petalburg: Wally beat
+completes, Norman defers honestly (no Balance Badge) → Rustboro:
+Roxanne beaten through the real leader path, Stone Badge first in
+badges.hoenn. The arrival reads as a new region (palettes, weather,
+NPC life). No dead sign, unwalkable surprise, or wrong-name text found.
+
+### 2. Blind town identity (`arc3-h7b-qa/shots/towns-blind/`, key `town-key.json`)
+
+All 16 settlements captured label-masked (locchip/objective/dex/hint
+hidden; every capture locchip-verified before masking) from a
+town-centre spawn, tags shuffled. **Identification: 16/16**, no confused
+pair — strong: Fortree (walkways + rain), Pacifidlog (raft houses),
+Sootopolis (white marble + lake), Fallarbor (ash ground), Mossdeep
+(water channels), Lavaridge (volcanic soil + spring), Verdanturf
+(flower meadows), Ever Grande (league marble), Dewford (beach +
+shallows), Slateport (market stalls + dock); medium: Rustboro,
+Mauville, Lilycove, Petalburg; weakest frame Oldale (plainest town,
+identified correctly). Caveats: Notes 2–3 below.
+
+### 3. Connectivity re-sweep, independent (`h7b-sweep.mjs`)
+
+My own probe over the merged map data (engine WALKABLE + Surf water,
+celadon discipline), all **99 Hoenn maps**: **0 bad warp landings,
+every warp tile reachable from its map's entries**. DIVE_PAIRS: 10 spot
+entries over 5 surface maps, cross-checked two-way in data and in live
+play (§5). **Sootopolis has no outdoor warp-in at all** — warp-ins only
+from cave-of-origin and its own gym — so it is reachable only via the
+r126 dive pair, as designed. 7 maps carry small unreachable decorative
+strips (Note 4).
+
+### 4. Band law (`h7b-validator.mjs` 6/6 + drive D/E)
+
+My own constructed saves, both validators: a hoenn-arc save carrying
+Lv201 + Lv250 + Lv300 (slow-curve max XP) is ACCEPTED by server and
+client and round-trips re-validating; the SAME party in a johto-arc
+save is REJECTED `bad-mon-level` by both; Lv301 in a hoenn save is
+rejected at the cap boundary. Live play: a Lv300 lead fought the Lv285
+Regice battle with its level read as 300 in-battle, no clamp error;
+the Cheat Terminal stepper under story.arc='hoenn' caps at exactly
+**Level 300** after 30 pagedowns in the live UI.
+
+### 5. Systems spots, my picks — not the suites' paths (drive B/C/D/F/G)
+
+(a) **Fallarbor contest** (suites drove Verdanturf + Slateport):
+ContestScene from the counter, exactly 4 rounds playable — **WON**,
+Fallarbor Ribbon persisted. (b) **Dive r126/Sootopolis pair** (suites
+featured r124): descent refused without Mind Badge + Dive, fires with
+both, ascent UNCONDITIONAL with badge and Dive stripped. (c) **Regice
+arc** (H7a drove Regirock + Deoxys): boulders decline pre-reading,
+EAST-first forgotten, WEST→EAST opens; flee completes nothing; the
+seal re-fires; catch completes the arc + dex. (d) **Climax weather**
+on Sootopolis in Chromium (`shots/weather/`): renderer states distinct
+in data (heavy sun/climax vs heavy rain/climax vs per-map field) and in
+pixels (drought↔deluge 67.8% strong-differing frame pixels; each
+climax state vs clear 12–16% strong). (e) **Center exits**: voluntary
++ blackout exits in Rustboro, Mossdeep and Sootopolis all land on each
+town's own door-front via (4,4), never the (4,5) fallback — the J6.5
+regression class does not recur in Hoenn.
+
+### 6. Independent battery re-runs (my runs, this tree)
+
+| Suite | My result | Stage report |
+|---|---|---|
+| battle-model-checks | **45/45** | 45/45 |
+| hoenn-story-checks | **88/88** | 88/88 |
+| qa-changed-flows | failures exactly **{b2, d9}** | {b2, d9} |
+| arc-chain chain-drive (re-run fresh by me) | **123/123** (Hoenn tail H01–H35 green) | 123/123 |
+
+Nothing beyond the named inheritance sets ({s6, l8}, {A09, C01})
+appeared anywhere in my runs. Logs in `arc3-h7b-qa/logs/`.
+
+### Findings
+
+- **Blockers: none.**
+- **Note 1 — quest-log section order (inherited from J7b Note 3):**
+  the Kanto MAIN STORY section renders above the HOENN section, so the
+  first-hour Hoenn next step is found by scrolling past the Kanto list
+  (A06's first 12 rows are all Kanto). Guidance is correct everywhere
+  checked; findability only, now spanning three regions of backlog.
+- **Note 2 — t08 (Littleroot) blind frame leaked its name:** the
+  centre-spawn save landed on the Birch-rescue trigger, so the frame
+  contains the narrator line "Around the bend of the Littleroot
+  road…". Identification there was textual, not palette evidence; a
+  real player gets that scene by design. Recorded so the 16/16 is not
+  over-read; the other 15 frames carried no name text.
+- **Note 3 — operator caveat (as J7b recorded):** I ran the captures,
+  so tag order was not unknown to me; grades are the in-frame evidence,
+  and every capture was locchip-verified before masking.
+- **Note 4 — decorative unreachable strips:** 7 maps (rustboro 4
+  tiles, verdanturf 2, fortree 13, r108 2, mt-chimney 2, mossdeep 2,
+  sootopolis 1) hold small walkable-class strips no entry reaches —
+  north-edge rows behind buildings/treelines, and two lone water tiles
+  among r108's rocks. No warp, NPC, item, sign or encounter stands on
+  any of them. Polish-grade scenery.
+- **Note 5 — drought reads subtlest in stills:** drought (a warm
+  heavy-sun wash) is the least distinct of the three climax states in
+  a single frame; deluge's rain is unmistakable and the pixel diff
+  proves all three differ materially. Presentation polish, not a state
+  bug — the renderer returns the correct state in every phase.
+- **Harness note (not a game finding):** the CDP boot was flaky across
+  the capture run (terminal timeouts on ~5 of 19 boots, all recovered
+  on retry; Slateport needed a dedicated re-run), with **zero JS
+  errors** across all 19 successful boots — the same QA-harness class
+  J7b recorded, not a game defect.
+
+**Arc 3 Hoenn stands as shipped: the first hour guides and lands as a
+new region, the band law holds on both validators and in live play at
+the cap, the contest/Dive/legendary systems fire on paths the suites
+never drove, Center exits land right, Sootopolis is dive-only, and all
+16 towns are tellable apart from a single frame. SHIP-WITH-NOTES, the
+notes being §6's log order, two test-method caveats, a handful of
+decorative unreachable tiles, and the drought signature — none of them
+a player's blocker.**
