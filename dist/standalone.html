@@ -63337,6 +63337,100 @@ const BATTLER_TIERS = {
   donphan: 'L', // bulk 270
   hooh: 'L', // bulk 350
   lugia: 'L', // bulk 350
+  chikorita: 'M', // bulk 175
+  bayleef: 'M', // bulk 220
+  meganium: 'L', // bulk 280
+  cyndaquil: 'S', // bulk 132
+  quilava: 'M', // bulk 181
+  typhlosion: 'M', // bulk 241
+  totodile: 'M', // bulk 162
+  croconaw: 'M', // bulk 208
+  feraligatr: 'L', // bulk 268
+  sentret: 'S', // bulk 114
+  furret: 'M', // bulk 204
+  hoothoot: 'S', // bulk 146
+  noctowl: 'L', // bulk 246
+  ledyba: 'S', // bulk 150
+  ledian: 'M', // bulk 215
+  spinarak: 'S', // bulk 120
+  ariados: 'M', // bulk 210
+  crobat: 'L', // bulk 245
+  chinchou: 'M', // bulk 169
+  lanturn: 'L', // bulk 259
+  pichu: 'S', // bulk 70
+  cleffa: 'S', // bulk 133
+  igglybuff: 'S', // bulk 125
+  togetic: 'L', // bulk 245
+  natu: 'S', // bulk 130
+  xatu: 'M', // bulk 205
+  mareep: 'S', // bulk 140
+  flaaffy: 'M', // bulk 185
+  ampharos: 'L', // bulk 265
+  bellossom: 'L', // bulk 270
+  azumarill: 'L', // bulk 260
+  sudowoodo: 'L', // bulk 250
+  politoed: 'L', // bulk 265
+  hoppip: 'S', // bulk 130
+  skiploom: 'M', // bulk 170
+  jumpluff: 'M', // bulk 240
+  aipom: 'M', // bulk 165
+  sunkern: 'S', // bulk 90
+  sunflora: 'M', // bulk 215
+  yanma: 'S', // bulk 155
+  wooper: 'S', // bulk 125
+  quagsire: 'L', // bulk 245
+  espeon: 'M', // bulk 220
+  umbreon: 'L', // bulk 335
+  murkrow: 'S', // bulk 144
+  slowking: 'L', // bulk 285
+  misdreavus: 'M', // bulk 205
+  unown: 'S', // bulk 144
+  wobbuffet: 'L', // bulk 306
+  girafarig: 'M', // bulk 200
+  pineco: 'M', // bulk 175
+  forretress: 'L', // bulk 275
+  dunsparce: 'M', // bulk 235
+  gligar: 'M', // bulk 235
+  steelix: 'L', // bulk 340
+  granbull: 'M', // bulk 225
+  qwilfish: 'M', // bulk 205
+  scizor: 'L', // bulk 250
+  shuckle: 'L', // bulk 480
+  heracross: 'L', // bulk 250
+  sneasel: 'M', // bulk 185
+  teddiursa: 'M', // bulk 160
+  ursaring: 'M', // bulk 240
+  slugma: 'S', // bulk 120
+  magcargo: 'L', // bulk 260
+  swinub: 'S', // bulk 120
+  piloswine: 'M', // bulk 240
+  corsola: 'L', // bulk 255
+  remoraid: 'S', // bulk 105
+  octillery: 'M', // bulk 225
+  delibird: 'S', // bulk 135
+  mantine: 'L', // bulk 295
+  skarmory: 'L', // bulk 275
+  houndour: 'S', // bulk 125
+  houndoom: 'M', // bulk 205
+  kingdra: 'L', // bulk 265
+  phanpy: 'M', // bulk 190
+  porygon2: 'L', // bulk 270
+  stantler: 'M', // bulk 200
+  smeargle: 'S', // bulk 135
+  tyrogue: 'S', // bulk 105
+  hitmontop: 'L', // bulk 255
+  smoochum: 'S', // bulk 125
+  elekid: 'S', // bulk 137
+  magby: 'S', // bulk 137
+  miltank: 'L', // bulk 270
+  blissey: 'L', // bulk 400
+  raikou: 'L', // bulk 265
+  entei: 'L', // bulk 275
+  suicune: 'L', // bulk 330
+  larvitar: 'S', // bulk 150
+  pupitar: 'M', // bulk 210
+  tyranitar: 'L', // bulk 310
+  celebi: 'L', // bulk 300
 };
 const TIER_DRAW_SIZES = { S: 52, M: 64, L: 80 };
 function battlerTierFor(speciesId) { return BATTLER_TIERS[speciesId] || 'M'; }
@@ -65121,6 +65215,7 @@ const SPECIES = {
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9501,
     learnset: { 1: ['tackle', 'harden'], 8: ['rockthrow'] },
     flavor: 'A chain of boulders given will. The gym leader\u2019s ace.',
+    evo: { to: 'steelix', method: 'trade' },
   },
   bulbasaur: {
     id: 'bulbasaur', name: 'Bulbasaur', dexNo: 1, types: ['grass', 'poison'],
@@ -65447,7 +65542,7 @@ const SPECIES2 = {
     catchRate: 90, growth: 'mediumfast', baseXp: 159, body: 'bird', spriteSeed: 4201,
     learnset: { 1: ['leechlife', 'supersonic', 'screech', 'bite'], 10: ['confuseray'], 15: ['wingattack'], 21: ['haze'] },
     flavor: 'It drinks its fill, then vanishes before feathers settle.',
-    tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
+    evo: { to: 'crobat', method: 'level', level: 40 }, tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   oddish: {
     id: 'oddish', name: 'Oddish', dexNo: 43, types: ['grass', 'poison'],
@@ -65463,7 +65558,11 @@ const SPECIES2 = {
     catchRate: 120, growth: 'mediumslow', baseXp: 138, body: 'biped', spriteSeed: 4401,
     learnset: { 1: ['absorb', 'poisonpowder', 'stunspore', 'sleeppowder'], 24: ['acid'], 28: ['petaldance'], 38: ['solarbeam'] },
     flavor: 'Its drool smells like a swamp arguing with a flower shop.',
-    evo: { to: 'vileplume', method: 'stone', stone: 'leafstone' }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
+    evo: { to: 'vileplume', method: 'stone', stone: 'leafstone' },
+    evos: [
+      { to: 'vileplume', method: 'stone', stone: 'leafstone' },
+      { to: 'bellossom', method: 'stone', stone: 'sunstone' },
+    ], tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   vileplume: {
     id: 'vileplume', name: 'Vileplume', dexNo: 45, types: ['grass', 'poison'],
@@ -65591,7 +65690,11 @@ const SPECIES2 = {
     catchRate: 120, growth: 'mediumslow', baseXp: 135, body: 'biped', spriteSeed: 6101,
     learnset: { 1: ['bubble', 'hypnosis', 'watergun'], 19: ['watergun'], 26: ['doubleslap'], 33: ['bodyslam'], 41: ['amnesia'], 49: ['hydropump'] },
     flavor: 'Watch its spiral too long and the room starts to tilt.',
-    evo: { to: 'poliwrath', method: 'stone', stone: 'waterstone' }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
+    evo: { to: 'poliwrath', method: 'stone', stone: 'waterstone' },
+    evos: [
+      { to: 'poliwrath', method: 'stone', stone: 'waterstone' },
+      { to: 'politoed', method: 'trade' },
+    ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
   },
   poliwrath: {
     id: 'poliwrath', name: 'Poliwrath', dexNo: 62, types: ['water', 'fighting'],
@@ -65727,7 +65830,11 @@ const SPECIES2 = {
     catchRate: 190, growth: 'mediumfast', baseXp: 99, body: 'quad', spriteSeed: 7901,
     learnset: { 1: ['confusion', 'disable'], 18: ['growl'], 22: ['watergun'], 27: ['headbutt'], 33: ['amnesia'], 40: ['psychic'] },
     flavor: 'It fishes with its tail and forgets why it sat down.',
-    evo: { to: 'slowbro', method: 'level', level: 37 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
+    evo: { to: 'slowbro', method: 'level', level: 37 },
+    evos: [
+      { to: 'slowbro', method: 'level', level: 37 },
+      { to: 'slowking', method: 'trade' },
+    ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   slowbro: {
     id: 'slowbro', name: 'Slowbro', dexNo: 80, types: ['water', 'psychic'],
@@ -65991,7 +66098,7 @@ const SPECIES2 = {
     catchRate: 30, growth: 'fast', baseXp: 395, body: 'blob', spriteSeed: 11301,
     learnset: { 1: ['pound', 'doubleslap'], 8: ['sing'], 16: ['growl'], 23: ['minimize'], 30: ['defensecurl'], 38: ['lightscreen'], 44: ['eggbomb'], 50: ['softboiled'] },
     flavor: 'It shares its egg with the hurt and the hungry alike.',
-    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 103, 105],
+    evo: { to: 'blissey', method: 'level', level: 40 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 103, 105],
   },
   tangela: {
     id: 'tangela', name: 'Tangela', dexNo: 114, types: ['grass'],
@@ -66023,7 +66130,7 @@ const SPECIES2 = {
     catchRate: 75, growth: 'mediumfast', baseXp: 154, body: 'fish', spriteSeed: 11701,
     learnset: { 1: ['bubble', 'smokescreen', 'leer', 'watergun'], 27: ['watergun'], 35: ['agility'], 44: ['hydropump'] },
     flavor: 'Its spines carry venom. Even its shed skin stays sharp.',
-    tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 39, 44, 50, 103],
+    evo: { to: 'kingdra', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 39, 44, 50, 103],
   },
   goldeen: {
     id: 'goldeen', name: 'Goldeen', dexNo: 118, types: ['water'],
@@ -66071,7 +66178,7 @@ const SPECIES2 = {
     catchRate: 45, growth: 'mediumfast', baseXp: 100, body: 'biped', spriteSeed: 12301,
     learnset: { 1: ['quickattack'], 17: ['leer'], 20: ['focusenergy'], 24: ['doubleslap'], 29: ['slash'], 39: ['swordsdance'], 44: ['agility'], 50: ['wingattack'] },
     flavor: 'Its scythes part tall grass and arguments with equal ease.',
-    tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
+    evo: { to: 'scizor', method: 'trade' }, tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   jynx: {
     id: 'jynx', name: 'Jynx', dexNo: 124, types: ['ice', 'psychic'],
@@ -66155,6 +66262,8 @@ const SPECIES2 = {
       { to: 'vaporeon', method: 'stone', stone: 'waterstone' },
       { to: 'jolteon', method: 'stone', stone: 'thunderstone' },
       { to: 'flareon', method: 'stone', stone: 'firestone' },
+      { to: 'espeon', method: 'stone', stone: 'sunstone' },
+      { to: 'umbreon', method: 'stone', stone: 'moonstone' },
     ],
     tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 39, 44, 50],
   },
@@ -66188,7 +66297,7 @@ const SPECIES2 = {
     catchRate: 45, growth: 'mediumfast', baseXp: 79, body: 'blob', spriteSeed: 13701,
     learnset: { 1: ['tackle', 'psybeam', 'conversion'], 12: ['disable'], 18: ['agility'], 24: ['recover'], 30: ['triattack'], 36: ['psychic'] },
     flavor: 'Built from code and corners. It prefers cyberspace weather.',
-    tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 105],
+    evo: { to: 'porygon2', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 105],
   },
   omanyte: {
     id: 'omanyte', name: 'Omanyte', dexNo: 138, types: ['rock', 'water'],
@@ -66359,14 +66468,16 @@ const SPECIES2 = {
   // diploma's 151 cannot move). Canon facts (types/base stats/catch
   // rate/growth/base XP) verified against PokeAPI at build time;
   // learnsets restricted to this game's move table; flavor written for
-  // this project. NO evolution entries, deliberately: their evolved
-  // forms are out of scope, so claims arrive as themselves.
+  // this project. (Stage J1, Arc 2: togepi/marill/snubbull gained their
+  // canonical-frame evolution entries below — ruling 2; donphan/hooh/
+  // lugia correctly have none.)
   togepi: {
     id: 'togepi', name: 'Togepi', dexNo: 175, types: ['fairy'],
     base: { hp: 35, atk: 20, def: 65, spa: 40, spd: 65, spe: 20 },
     catchRate: 190, growth: 'fast', baseXp: 49, body: 'biped', spriteSeed: 17501,
     learnset: { 1: ['pound', 'growl'], 9: ['metronome'], 17: ['doubleedge'] },
     flavor: 'It totters after whoever makes it happiest, shell and all.',
+    evo: { to: 'togetic', method: 'level', level: 25 },
   },
   marill: {
     id: 'marill', name: 'Marill', dexNo: 183, types: ['water', 'fairy'],
@@ -66374,6 +66485,7 @@ const SPECIES2 = {
     catchRate: 190, growth: 'fast', baseXp: 88, body: 'quad', spriteSeed: 18301,
     learnset: { 1: ['tackle', 'tailwhip', 'watergun'], 6: ['bubblebeam'], 10: ['defensecurl'], 20: ['doubleedge'], 30: ['hydropump'] },
     flavor: 'Its round tail bobs on the water like a tiny blue buoy.',
+    evo: { to: 'azumarill', method: 'level', level: 18 },
   },
   snubbull: {
     id: 'snubbull', name: 'Snubbull', dexNo: 209, types: ['fairy'],
@@ -66381,6 +66493,7 @@ const SPECIES2 = {
     catchRate: 190, growth: 'fast', baseXp: 60, body: 'quad', spriteSeed: 20901,
     learnset: { 1: ['tackle', 'tailwhip', 'growl'], 7: ['bite'], 13: ['lick'], 19: ['headbutt'], 31: ['rage'], 37: ['takedown'] },
     flavor: 'All scowl and no bite — it would rather be carried home.',
+    evo: { to: 'granbull', method: 'level', level: 23 },
   },
   donphan: {
     id: 'donphan', name: 'Donphan', dexNo: 232, types: ['ground'],
@@ -66418,6 +66531,868 @@ for (const _id of ['kadabra', 'alakazam']) {
   const _sp = SPECIES2[_id];
   if (_sp && !Array.isArray(_sp.learnset)) { _sp.learnset['15'] = ['kinesis']; }
 }
+
+
+// ---- src/data/species3.mjs ----
+// species3.mjs — Gen-2 roster (dex #152-251) for Arc 2 (Johto), Stage J1.
+// GENERATED by ~/workspace/ashs-journey-qa/arc2-etl/etl-johto.mjs from the
+// pre-staged PokeAPI cache (build-time facts only; no sprites ever fetched).
+// 94 entries: the 6 shipped guests (togepi/marill/snubbull/donphan/hooh/lugia)
+// stay in species2.mjs. Learnsets: crystal level-up preferred (gold-silver
+// fallback), restricted to the game's move table (ruling 5 — no new moves);
+// canonical level-1 moves stay at key 1, every canonical level >=2 shifts
+// +100 (band-local, Amendment 2). Growth curves assert into the game's
+// supported set only — 'erratic'/'fluctuating' are never assigned (J0 law).
+// Flavor lines are original to this project. spriteSeed = dexNo*100+1.
+
+const SPECIES_JOHTO = {
+  chikorita: {
+    id: 'chikorita', name: 'Chikorita', dexNo: 152, types: ['grass'],
+    base: { hp: 45, atk: 49, def: 65, spa: 49, spd: 65, spe: 45 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 64, body: 'quad', spriteSeed: 15201,
+    eggGroups: ['monster', 'plant'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'growl'], 108: ['razorleaf'], 112: ['reflect'], 115: ['poisonpowder'], 129: ['bodyslam'], 136: ['lightscreen'], 150: ['solarbeam'] },
+    flavor: 'A leaf that smells of spring rain; it naps in any patch of sun.',
+    evo: { to: 'bayleef', method: 'level', level: 116 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
+  },
+  bayleef: {
+    id: 'bayleef', name: 'Bayleef', dexNo: 153, types: ['grass'],
+    base: { hp: 60, atk: 62, def: 80, spa: 63, spd: 80, spe: 60 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'quad', spriteSeed: 15301,
+    eggGroups: ['monster', 'plant'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'growl', 'razorleaf', 'reflect'], 115: ['poisonpowder'], 131: ['bodyslam'], 139: ['lightscreen'], 155: ['solarbeam'] },
+    flavor: 'Its neck leaves breathe out a warm spice that settles tempers.',
+    evo: { to: 'meganium', method: 'level', level: 132 }, tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
+  },
+  meganium: {
+    id: 'meganium', name: 'Meganium', dexNo: 154, types: ['grass'],
+    base: { hp: 80, atk: 82, def: 100, spa: 83, spd: 100, spe: 80 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 236, body: 'quad', spriteSeed: 15401,
+    eggGroups: ['monster', 'plant'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'growl', 'razorleaf', 'reflect'], 115: ['poisonpowder'], 131: ['bodyslam'], 141: ['lightscreen'], 161: ['solarbeam'] },
+    flavor: 'Where it walks in winter, the grass remembers how to be green.',
+    tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
+  },
+  cyndaquil: {
+    id: 'cyndaquil', name: 'Cyndaquil', dexNo: 155, types: ['fire'],
+    base: { hp: 39, atk: 52, def: 43, spa: 60, spd: 50, spe: 65 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 62, body: 'quad', spriteSeed: 15501,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'leer'], 106: ['smokescreen'], 112: ['ember'], 119: ['quickattack'], 136: ['swift'], 146: ['flamethrower'] },
+    flavor: 'Shy until startled — then its back answers with a crown of flame.',
+    evo: { to: 'quilava', method: 'level', level: 114 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
+  },
+  quilava: {
+    id: 'quilava', name: 'Quilava', dexNo: 156, types: ['fire'],
+    base: { hp: 58, atk: 64, def: 58, spa: 80, spd: 65, spe: 80 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'quad', spriteSeed: 15601,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'leer', 'smokescreen'], 112: ['ember'], 121: ['quickattack'], 142: ['swift'], 154: ['flamethrower'] },
+    flavor: 'It twists mid-leap, and the fire on its back draws the turn.',
+    evo: { to: 'typhlosion', method: 'level', level: 136 }, tm: [1, 3, 6, 8, 9, 10, 17, 18, 19, 20, 28, 31, 32, 34, 38, 40, 44, 50, 101, 104],
+  },
+  typhlosion: {
+    id: 'typhlosion', name: 'Typhlosion', dexNo: 157, types: ['fire'],
+    base: { hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 240, body: 'quad', spriteSeed: 15701,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'leer', 'ember', 'smokescreen'], 121: ['quickattack'], 145: ['swift'], 160: ['flamethrower'] },
+    flavor: 'Heat shimmers off its mane before the roar ever arrives.',
+    tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
+  },
+  totodile: {
+    id: 'totodile', name: 'Totodile', dexNo: 158, types: ['water'],
+    base: { hp: 50, atk: 65, def: 64, spa: 44, spd: 48, spe: 43 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 63, body: 'biped', spriteSeed: 15801,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
+    learnset: { 1: ['scratch', 'leer'], 107: ['rage'], 113: ['watergun'], 120: ['bite'], 135: ['slash'], 143: ['screech'], 152: ['hydropump'] },
+    flavor: 'It bites first and asks what it caught somewhere around dessert.',
+    evo: { to: 'croconaw', method: 'level', level: 118 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
+  },
+  croconaw: {
+    id: 'croconaw', name: 'Croconaw', dexNo: 159, types: ['water'],
+    base: { hp: 65, atk: 80, def: 80, spa: 59, spd: 63, spe: 58 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'biped', spriteSeed: 15901,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
+    learnset: { 1: ['scratch', 'leer', 'rage'], 113: ['watergun'], 121: ['bite'], 137: ['slash'], 145: ['screech'], 155: ['hydropump'] },
+    flavor: 'A lost fang is replaced by morning. It has never once minded.',
+    evo: { to: 'feraligatr', method: 'level', level: 130 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
+  },
+  feraligatr: {
+    id: 'feraligatr', name: 'Feraligatr', dexNo: 160, types: ['water'],
+    base: { hp: 85, atk: 105, def: 100, spa: 79, spd: 83, spe: 78 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 239, body: 'biped', spriteSeed: 16001,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
+    learnset: { 1: ['scratch', 'leer', 'watergun', 'rage'], 121: ['bite'], 138: ['slash'], 147: ['screech'], 158: ['hydropump'] },
+    flavor: 'Still water, patient eyes — then the whole river moves at once.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 50, 103, 104],
+  },
+  sentret: {
+    id: 'sentret', name: 'Sentret', dexNo: 161, types: ['normal'],
+    base: { hp: 35, atk: 46, def: 34, spa: 35, spd: 45, spe: 20 },
+    catchRate: 255, growth: 'mediumfast', baseXp: 43, body: 'quad', spriteSeed: 16101,
+    eggGroups: ['ground'], hatchCounter: 15,
+    learnset: { 1: ['tackle'], 105: ['defensecurl'], 111: ['quickattack'], 125: ['slam'], 133: ['rest'], 141: ['amnesia'] },
+    flavor: 'It stands on its tail to scout, one lookout for the whole warren.',
+    evo: { to: 'furret', method: 'level', level: 115 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
+  },
+  furret: {
+    id: 'furret', name: 'Furret', dexNo: 162, types: ['normal'],
+    base: { hp: 85, atk: 76, def: 64, spa: 45, spd: 55, spe: 90 },
+    catchRate: 90, growth: 'mediumfast', baseXp: 145, body: 'quad', spriteSeed: 16201,
+    eggGroups: ['ground'], hatchCounter: 15,
+    learnset: { 1: ['scratch', 'quickattack', 'defensecurl'], 128: ['slam'], 138: ['rest'], 148: ['amnesia'] },
+    flavor: 'Its burrow has more turns than the road it was dug beneath.',
+    tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 28, 31, 32, 34, 39, 44, 50],
+  },
+  hoothoot: {
+    id: 'hoothoot', name: 'Hoothoot', dexNo: 163, types: ['normal', 'flying'],
+    base: { hp: 60, atk: 30, def: 30, spa: 36, spd: 56, spe: 50 },
+    catchRate: 255, growth: 'mediumfast', baseXp: 52, body: 'bird', spriteSeed: 16301,
+    eggGroups: ['flying'], hatchCounter: 15,
+    learnset: { 1: ['tackle', 'growl'], 111: ['peck'], 116: ['hypnosis'], 122: ['reflect'], 128: ['takedown'], 134: ['confusion'], 148: ['dreameater'] },
+    flavor: 'It keeps perfect time in its head and hoots the hours to the wood.',
+    evo: { to: 'noctowl', method: 'level', level: 120 }, tm: [4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
+  },
+  noctowl: {
+    id: 'noctowl', name: 'Noctowl', dexNo: 164, types: ['normal', 'flying'],
+    base: { hp: 100, atk: 50, def: 50, spa: 86, spd: 96, spe: 70 },
+    catchRate: 90, growth: 'mediumfast', baseXp: 158, body: 'bird', spriteSeed: 16401,
+    eggGroups: ['flying'], hatchCounter: 15,
+    learnset: { 1: ['tackle', 'growl', 'peck'], 116: ['hypnosis'], 125: ['reflect'], 133: ['takedown'], 141: ['confusion'], 157: ['dreameater'] },
+    flavor: 'Silent wings, unblinking verdict. The night shift suits it.',
+    tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
+  },
+  ledyba: {
+    id: 'ledyba', name: 'Ledyba', dexNo: 165, types: ['bug', 'flying'],
+    base: { hp: 40, atk: 20, def: 30, spa: 40, spd: 80, spe: 55 },
+    catchRate: 255, growth: 'fast', baseXp: 53, body: 'bird', spriteSeed: 16501,
+    eggGroups: ['bug'], hatchCounter: 15,
+    learnset: { 1: ['tackle'], 108: ['supersonic'], 115: ['cometpunch'], 122: ['lightscreen', 'reflect'], 136: ['swift'], 143: ['agility'], 150: ['doubleedge'] },
+    flavor: 'Five together at dawn is a promise the day will stay gentle.',
+    evo: { to: 'ledian', method: 'level', level: 118 }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+  },
+  ledian: {
+    id: 'ledian', name: 'Ledian', dexNo: 166, types: ['bug', 'flying'],
+    base: { hp: 55, atk: 35, def: 50, spa: 55, spd: 110, spe: 85 },
+    catchRate: 90, growth: 'fast', baseXp: 137, body: 'bird', spriteSeed: 16601,
+    eggGroups: ['bug'], hatchCounter: 15,
+    learnset: { 1: ['tackle', 'supersonic'], 115: ['cometpunch'], 124: ['lightscreen', 'reflect'], 142: ['swift'], 151: ['agility'], 160: ['doubleedge'] },
+    flavor: 'Starlight settles on its back and it carries the glow home.',
+    tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+  },
+  spinarak: {
+    id: 'spinarak', name: 'Spinarak', dexNo: 167, types: ['bug', 'poison'],
+    base: { hp: 40, atk: 60, def: 40, spa: 40, spd: 40, spe: 30 },
+    catchRate: 255, growth: 'fast', baseXp: 50, body: 'blob', spriteSeed: 16701,
+    eggGroups: ['bug'], hatchCounter: 15,
+    learnset: { 1: ['poisonsting', 'stringshot'], 111: ['constrict'], 117: ['nightshade'], 123: ['leechlife'], 145: ['agility'], 153: ['psychic'] },
+    flavor: 'It weaves one patient thread and lets dinner come to it.',
+    evo: { to: 'ariados', method: 'level', level: 122 }, tm: [],
+  },
+  ariados: {
+    id: 'ariados', name: 'Ariados', dexNo: 168, types: ['bug', 'poison'],
+    base: { hp: 70, atk: 90, def: 70, spa: 60, spd: 70, spe: 40 },
+    catchRate: 90, growth: 'fast', baseXp: 140, body: 'blob', spriteSeed: 16801,
+    eggGroups: ['bug'], hatchCounter: 15,
+    learnset: { 1: ['poisonsting', 'stringshot', 'constrict'], 117: ['nightshade'], 125: ['leechlife'], 153: ['agility'], 163: ['psychic'] },
+    flavor: 'It leaves a single silk line behind, a fuse the dark can follow.',
+    tm: [3, 6, 9, 10, 15, 20, 31, 32, 33, 34, 44, 50, 101],
+  },
+  crobat: {
+    id: 'crobat', name: 'Crobat', dexNo: 169, types: ['poison', 'flying'],
+    base: { hp: 85, atk: 90, def: 80, spa: 70, spd: 80, spe: 130 },
+    catchRate: 90, growth: 'mediumfast', baseXp: 241, body: 'bird', spriteSeed: 16901,
+    eggGroups: ['flying'], hatchCounter: 15,
+    learnset: { 1: ['supersonic', 'screech', 'leechlife'], 112: ['bite'], 119: ['confuseray'], 130: ['wingattack'], 155: ['haze'] },
+    flavor: 'Four wings, no sound. It is past before the cave air stirs.',
+    tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
+  },
+  chinchou: {
+    id: 'chinchou', name: 'Chinchou', dexNo: 170, types: ['water', 'electric'],
+    base: { hp: 75, atk: 38, def: 38, spa: 56, spd: 56, spe: 67 },
+    catchRate: 190, growth: 'slow', baseXp: 66, body: 'fish', spriteSeed: 17001,
+    eggGroups: ['water2'], hatchCounter: 20,
+    learnset: { 1: ['thunderwave', 'bubble'], 105: ['supersonic'], 117: ['watergun'], 129: ['confuseray'], 137: ['takedown'], 141: ['hydropump'] },
+    flavor: 'Twin lanterns bob in the black water, fishing for the curious.',
+    evo: { to: 'lanturn', method: 'level', level: 127 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
+  },
+  lanturn: {
+    id: 'lanturn', name: 'Lanturn', dexNo: 171, types: ['water', 'electric'],
+    base: { hp: 125, atk: 58, def: 58, spa: 76, spd: 76, spe: 67 },
+    catchRate: 75, growth: 'slow', baseXp: 161, body: 'fish', spriteSeed: 17101,
+    eggGroups: ['water2'], hatchCounter: 20,
+    learnset: { 1: ['supersonic', 'thunderwave', 'bubble'], 117: ['watergun'], 133: ['confuseray'], 145: ['takedown'], 153: ['hydropump'] },
+    flavor: 'Its light has guided lost sailors and older, stranger swimmers.',
+    tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
+  },
+  pichu: {
+    id: 'pichu', name: 'Pichu', dexNo: 172, types: ['electric'],
+    base: { hp: 20, atk: 40, def: 15, spa: 35, spd: 35, spe: 60 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 41, body: 'quad', spriteSeed: 17201,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
+    learnset: { 1: ['thundershock', 'thunderbolt'], 106: ['tailwhip'], 108: ['thunderwave'] },
+    flavor: 'Its cheeks spark when it laughs; it has not learned brakes yet.',
+    evo: { to: 'pikachu', method: 'level', level: 110 }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
+  },
+  cleffa: {
+    id: 'cleffa', name: 'Cleffa', dexNo: 173, types: ['fairy'],
+    base: { hp: 50, atk: 25, def: 28, spa: 45, spd: 55, spe: 15 },
+    catchRate: 150, growth: 'fast', baseXp: 44, body: 'biped', spriteSeed: 17301,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
+    learnset: { 1: ['pound', 'swift', 'metronome'], 108: ['sing'] },
+    flavor: 'It dances on meteor-lit nights and is shy again by breakfast.',
+    evo: { to: 'clefairy', method: 'level', level: 110 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
+  },
+  igglybuff: {
+    id: 'igglybuff', name: 'Igglybuff', dexNo: 174, types: ['normal', 'fairy'],
+    base: { hp: 90, atk: 30, def: 15, spa: 40, spd: 20, spe: 15 },
+    catchRate: 170, growth: 'fast', baseXp: 42, body: 'biped', spriteSeed: 17401,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
+    learnset: { 1: ['sing', 'tackle'], 104: ['defensecurl'], 109: ['pound'] },
+    flavor: 'Soft as warm dough, it bounces where other babies crawl.',
+    evo: { to: 'jigglypuff', method: 'level', level: 110 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
+  },
+  togetic: {
+    id: 'togetic', name: 'Togetic', dexNo: 176, types: ['fairy', 'flying'],
+    base: { hp: 55, atk: 40, def: 85, spa: 80, spd: 105, spe: 40 },
+    catchRate: 75, growth: 'fast', baseXp: 142, body: 'biped', spriteSeed: 17601,
+    eggGroups: ['flying', 'fairy'], hatchCounter: 10,
+    learnset: { 1: ['growl', 'pound'], 107: ['metronome'], 138: ['doubleedge'] },
+    flavor: 'It drifts toward kind people as if happiness were a current.',
+    tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+  },
+  natu: {
+    id: 'natu', name: 'Natu', dexNo: 177, types: ['psychic', 'flying'],
+    base: { hp: 40, atk: 50, def: 45, spa: 70, spd: 45, spe: 70 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 64, body: 'bird', spriteSeed: 17701,
+    eggGroups: ['flying'], hatchCounter: 20,
+    learnset: { 1: ['leer', 'peck'], 110: ['nightshade'], 120: ['teleport'], 140: ['confuseray'], 150: ['psychic'] },
+    flavor: 'It stares at the sun all day, reading something no one else sees.',
+    evo: { to: 'xatu', method: 'level', level: 125 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
+  },
+  xatu: {
+    id: 'xatu', name: 'Xatu', dexNo: 178, types: ['psychic', 'flying'],
+    base: { hp: 65, atk: 75, def: 70, spa: 95, spd: 70, spe: 95 },
+    catchRate: 75, growth: 'mediumfast', baseXp: 165, body: 'bird', spriteSeed: 17801,
+    eggGroups: ['flying'], hatchCounter: 20,
+    learnset: { 1: ['leer', 'peck', 'nightshade'], 120: ['teleport'], 150: ['confuseray'], 165: ['psychic'] },
+    flavor: 'One eye on yesterday, one on tomorrow; today it keeps to itself.',
+    tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
+  },
+  mareep: {
+    id: 'mareep', name: 'Mareep', dexNo: 179, types: ['electric'],
+    base: { hp: 55, atk: 40, def: 40, spa: 65, spd: 45, spe: 35 },
+    catchRate: 235, growth: 'mediumslow', baseXp: 56, body: 'quad', spriteSeed: 17901,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'growl'], 109: ['thundershock'], 116: ['thunderwave'], 130: ['lightscreen'], 137: ['thunder'] },
+    flavor: 'Its wool swells with static until the whole flock crackles.',
+    evo: { to: 'flaaffy', method: 'level', level: 115 }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
+  },
+  flaaffy: {
+    id: 'flaaffy', name: 'Flaaffy', dexNo: 180, types: ['electric'],
+    base: { hp: 70, atk: 55, def: 55, spa: 80, spd: 60, spe: 45 },
+    catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'biped', spriteSeed: 18001,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'growl', 'thundershock'], 118: ['thunderwave'], 136: ['lightscreen'], 145: ['thunder'] },
+    flavor: 'Bare patches in its fleece glow faintly when storms gather.',
+    evo: { to: 'ampharos', method: 'level', level: 130 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
+  },
+  ampharos: {
+    id: 'ampharos', name: 'Ampharos', dexNo: 181, types: ['electric'],
+    base: { hp: 90, atk: 75, def: 85, spa: 115, spd: 90, spe: 55 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 230, body: 'biped', spriteSeed: 18101,
+    eggGroups: ['monster', 'ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'growl', 'thundershock', 'thunderwave'], 130: ['thunderpunch'], 142: ['lightscreen'], 157: ['thunder'] },
+    flavor: 'Its tail-light turns with the fog — harbours trust it like kin.',
+    tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
+  },
+  bellossom: {
+    id: 'bellossom', name: 'Bellossom', dexNo: 182, types: ['grass'],
+    base: { hp: 75, atk: 80, def: 95, spa: 90, spd: 100, spe: 50 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 221, body: 'biped', spriteSeed: 18201,
+    eggGroups: ['plant'], hatchCounter: 20,
+    learnset: { 1: ['absorb', 'stunspore', 'petaldance'], 155: ['solarbeam'] },
+    flavor: 'It dances at dusk in a skirt of petals, and the rain stays polite.',
+    tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
+  },
+  azumarill: {
+    id: 'azumarill', name: 'Azumarill', dexNo: 184, types: ['water', 'fairy'],
+    base: { hp: 100, atk: 50, def: 80, spa: 60, spd: 80, spe: 50 },
+    catchRate: 75, growth: 'fast', baseXp: 189, body: 'biped', spriteSeed: 18401,
+    eggGroups: ['water1', 'fairy'], hatchCounter: 10,
+    learnset: { 1: ['tackle', 'tailwhip', 'watergun', 'defensecurl'], 125: ['bubblebeam'], 136: ['doubleedge'] },
+    flavor: 'Its ears hear a drowning cry through running river water.',
+    tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
+  },
+  sudowoodo: {
+    id: 'sudowoodo', name: 'Sudowoodo', dexNo: 185, types: ['rock'],
+    base: { hp: 70, atk: 100, def: 115, spa: 30, spd: 65, spe: 30 },
+    catchRate: 65, growth: 'mediumfast', baseXp: 144, body: 'biped', spriteSeed: 18501,
+    eggGroups: ['mineral'], hatchCounter: 20,
+    learnset: { 1: ['rockthrow', 'mimic'], 119: ['lowkick'], 128: ['rockslide'], 146: ['slam'] },
+    flavor: 'It holds its pose through every season except the rainy one.',
+    tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
+  },
+  politoed: {
+    id: 'politoed', name: 'Politoed', dexNo: 186, types: ['water'],
+    base: { hp: 90, atk: 75, def: 75, spa: 90, spd: 100, spe: 70 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 225, body: 'biped', spriteSeed: 18601,
+    eggGroups: ['water1'], hatchCounter: 20,
+    learnset: { 1: ['doubleslap', 'watergun', 'hypnosis', 'bubblebeam'] },
+    flavor: 'Its evening chorus sets the tempo every pond singer follows.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
+  },
+  hoppip: {
+    id: 'hoppip', name: 'Hoppip', dexNo: 187, types: ['grass', 'flying'],
+    base: { hp: 35, atk: 35, def: 40, spa: 35, spd: 55, spe: 50 },
+    catchRate: 255, growth: 'mediumslow', baseXp: 50, body: 'biped', spriteSeed: 18701,
+    eggGroups: ['fairy', 'plant'], hatchCounter: 20,
+    learnset: { 1: ['splash'], 105: ['tailwhip'], 110: ['tackle'], 113: ['poisonpowder'], 115: ['stunspore'], 117: ['sleeppowder'], 120: ['leechseed'], 130: ['megadrain'] },
+    flavor: 'A strong breeze can relocate it two towns over. It adapts.',
+    evo: { to: 'skiploom', method: 'level', level: 118 }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
+  },
+  skiploom: {
+    id: 'skiploom', name: 'Skiploom', dexNo: 188, types: ['grass', 'flying'],
+    base: { hp: 55, atk: 45, def: 50, spa: 45, spd: 65, spe: 80 },
+    catchRate: 120, growth: 'mediumslow', baseXp: 119, body: 'biped', spriteSeed: 18801,
+    eggGroups: ['fairy', 'plant'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'tailwhip', 'splash'], 113: ['poisonpowder'], 115: ['stunspore'], 117: ['sleeppowder'], 122: ['leechseed'], 136: ['megadrain'] },
+    flavor: 'When its flower opens wide, the whole meadow checks the weather.',
+    evo: { to: 'jumpluff', method: 'level', level: 127 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
+  },
+  jumpluff: {
+    id: 'jumpluff', name: 'Jumpluff', dexNo: 189, types: ['grass', 'flying'],
+    base: { hp: 75, atk: 55, def: 70, spa: 55, spd: 95, spe: 110 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 207, body: 'biped', spriteSeed: 18901,
+    eggGroups: ['fairy', 'plant'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'tailwhip', 'splash'], 113: ['poisonpowder'], 115: ['stunspore'], 117: ['sleeppowder'], 122: ['leechseed'], 144: ['megadrain'] },
+    flavor: 'It rides trade winds between continents on three cotton puffs.',
+    tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
+  },
+  aipom: {
+    id: 'aipom', name: 'Aipom', dexNo: 190, types: ['normal'],
+    base: { hp: 55, atk: 70, def: 55, spa: 40, spd: 55, spe: 85 },
+    catchRate: 45, growth: 'fast', baseXp: 72, body: 'biped', spriteSeed: 19001,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['scratch', 'tailwhip'], 106: ['sandattack'], 127: ['swift'], 136: ['screech'], 146: ['agility'] },
+    flavor: 'The hand on its tail is quicker and considerably less honest.',
+    tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
+  },
+  sunkern: {
+    id: 'sunkern', name: 'Sunkern', dexNo: 191, types: ['grass'],
+    base: { hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30 },
+    catchRate: 235, growth: 'mediumslow', baseXp: 36, body: 'blob', spriteSeed: 19101,
+    eggGroups: ['plant'], hatchCounter: 20,
+    learnset: { 1: ['absorb', 'razorleaf'], 104: ['growth'], 110: ['megadrain'] },
+    flavor: 'It barely moves, saving everything it is for one bright day.',
+    evo: { to: 'sunflora', method: 'stone', stone: 'sunstone' }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
+  },
+  sunflora: {
+    id: 'sunflora', name: 'Sunflora', dexNo: 192, types: ['grass'],
+    base: { hp: 75, atk: 75, def: 55, spa: 105, spd: 85, spe: 30 },
+    catchRate: 120, growth: 'mediumslow', baseXp: 149, body: 'biped', spriteSeed: 19201,
+    eggGroups: ['plant'], hatchCounter: 20,
+    learnset: { 1: ['pound', 'absorb'], 104: ['growth'], 110: ['razorleaf'], 131: ['petaldance'], 146: ['solarbeam'] },
+    flavor: 'It tracks the sun like a slow clock and sleeps facing east.',
+    tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 34, 39, 44, 50, 101],
+  },
+  yanma: {
+    id: 'yanma', name: 'Yanma', dexNo: 193, types: ['bug', 'flying'],
+    base: { hp: 65, atk: 65, def: 45, spa: 75, spd: 45, spe: 95 },
+    catchRate: 75, growth: 'mediumfast', baseXp: 78, body: 'bird', spriteSeed: 19301,
+    eggGroups: ['bug'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 107: ['quickattack'], 113: ['doubletam'], 131: ['supersonic'], 137: ['wingattack'], 143: ['screech'] },
+    flavor: 'Its eyes take in every direction; its wings beat the air dizzy.',
+    tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+  },
+  wooper: {
+    id: 'wooper', name: 'Wooper', dexNo: 194, types: ['water', 'ground'],
+    base: { hp: 55, atk: 45, def: 45, spa: 25, spd: 25, spe: 15 },
+    catchRate: 255, growth: 'mediumfast', baseXp: 42, body: 'quad', spriteSeed: 19401,
+    eggGroups: ['water1', 'ground'], hatchCounter: 20,
+    learnset: { 1: ['tailwhip', 'watergun'], 111: ['slam'], 121: ['amnesia'], 131: ['earthquake'], 151: ['mist', 'haze'] },
+    flavor: 'It surfaces at dusk, unbothered, wearing pondweed like a hat.',
+    evo: { to: 'quagsire', method: 'level', level: 120 }, tm: [],
+  },
+  quagsire: {
+    id: 'quagsire', name: 'Quagsire', dexNo: 195, types: ['water', 'ground'],
+    base: { hp: 95, atk: 85, def: 85, spa: 65, spd: 65, spe: 35 },
+    catchRate: 90, growth: 'mediumfast', baseXp: 151, body: 'biped', spriteSeed: 19501,
+    eggGroups: ['water1', 'ground'], hatchCounter: 20,
+    learnset: { 1: ['tailwhip', 'watergun'], 111: ['slam'], 123: ['amnesia'], 135: ['earthquake'], 159: ['mist', 'haze'] },
+    flavor: 'It bumps into things, considers them, and drifts on content.',
+    tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
+  },
+  espeon: {
+    id: 'espeon', name: 'Espeon', dexNo: 196, types: ['psychic'],
+    base: { hp: 65, atk: 65, def: 60, spa: 130, spd: 95, spe: 110 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 19601,
+    eggGroups: ['ground'], hatchCounter: 35,
+    learnset: { 1: ['tackle', 'tailwhip'], 108: ['sandattack'], 116: ['confusion'], 123: ['quickattack'], 130: ['swift'], 136: ['psybeam'], 147: ['psychic'] },
+    flavor: 'It reads the air on its forked tail and steps aside in time.',
+    tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
+  },
+  umbreon: {
+    id: 'umbreon', name: 'Umbreon', dexNo: 197, types: ['dark'],
+    base: { hp: 95, atk: 65, def: 110, spa: 60, spd: 130, spe: 65 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 19701,
+    eggGroups: ['ground'], hatchCounter: 35,
+    learnset: { 1: ['tackle', 'tailwhip'], 108: ['sandattack'], 123: ['quickattack'], 130: ['confuseray'], 147: ['screech'] },
+    flavor: 'Its rings kindle when it is cornered — a warning in gold.',
+    tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
+  },
+  murkrow: {
+    id: 'murkrow', name: 'Murkrow', dexNo: 198, types: ['dark', 'flying'],
+    base: { hp: 60, atk: 85, def: 42, spa: 85, spd: 42, spe: 91 },
+    catchRate: 30, growth: 'mediumslow', baseXp: 81, body: 'bird', spriteSeed: 19801,
+    eggGroups: ['flying'], hatchCounter: 20,
+    learnset: { 1: ['peck', 'bite'], 116: ['haze'], 126: ['nightshade'] },
+    flavor: 'It collects bright things and bad omens with equal delight.',
+    tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
+  },
+  slowking: {
+    id: 'slowking', name: 'Slowking', dexNo: 199, types: ['water', 'psychic'],
+    base: { hp: 95, atk: 75, def: 80, spa: 100, spd: 110, spe: 30 },
+    catchRate: 70, growth: 'mediumfast', baseXp: 172, body: 'biped', spriteSeed: 19901,
+    eggGroups: ['monster', 'water1'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 106: ['growl'], 115: ['watergun'], 120: ['confusion'], 129: ['disable'], 134: ['headbutt'], 148: ['psychic'] },
+    flavor: 'A shell crown, a slow blink: the answer arrives fully formed.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 104, 105],
+  },
+  misdreavus: {
+    id: 'misdreavus', name: 'Misdreavus', dexNo: 200, types: ['ghost'],
+    base: { hp: 60, atk: 60, def: 60, spa: 85, spd: 85, spe: 85 },
+    catchRate: 45, growth: 'fast', baseXp: 87, body: 'blob', spriteSeed: 20001,
+    eggGroups: ['indeterminate'], hatchCounter: 25,
+    learnset: { 1: ['growl', 'psywave'], 112: ['confuseray'], 127: ['psybeam'] },
+    flavor: 'It practices its wail on windy nights and grades the echoes.',
+    tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
+  },
+  unown: {
+    id: 'unown', name: 'Unown', dexNo: 201, types: ['psychic'],
+    base: { hp: 48, atk: 72, def: 48, spa: 72, spd: 48, spe: 48 },
+    catchRate: 225, growth: 'mediumfast', baseXp: 118, body: 'blob', spriteSeed: 20101,
+    eggGroups: ['no-eggs'], hatchCounter: 40,
+    learnset: { 1: ['confusion', 'psybeam', 'psychic', 'teleport'] },
+    flavor: 'A single letter with a single thought, spelled out in the dark.',
+    tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
+  },
+  wobbuffet: {
+    id: 'wobbuffet', name: 'Wobbuffet', dexNo: 202, types: ['psychic'],
+    base: { hp: 190, atk: 33, def: 58, spa: 33, spd: 58, spe: 33 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 142, body: 'blob', spriteSeed: 20201,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
+    learnset: { 1: ['counter', 'confusion', 'psybeam', 'psychic'] },
+    flavor: 'It endures. Whatever happened, it endures that too, patiently.',
+    tm: [1, 5, 6, 9, 10, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
+  },
+  girafarig: {
+    id: 'girafarig', name: 'Girafarig', dexNo: 203, types: ['normal', 'psychic'],
+    base: { hp: 70, atk: 80, def: 65, spa: 90, spd: 65, spe: 85 },
+    catchRate: 60, growth: 'mediumfast', baseXp: 159, body: 'quad', spriteSeed: 20301,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['stomp', 'tackle', 'growl', 'confusion'], 120: ['agility'], 141: ['psybeam'] },
+    flavor: 'The small head on its tail keeps watch while the big one dreams.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
+  },
+  pineco: {
+    id: 'pineco', name: 'Pineco', dexNo: 204, types: ['bug'],
+    base: { hp: 50, atk: 65, def: 90, spa: 35, spd: 35, spe: 15 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 58, body: 'blob', spriteSeed: 20401,
+    eggGroups: ['bug'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 108: ['selfdestruct'], 115: ['takedown'], 129: ['bide'], 136: ['explosion'], 150: ['doubleedge'] },
+    flavor: 'It glues bark to its shell and drops on the overly curious.',
+    evo: { to: 'forretress', method: 'level', level: 131 }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
+  },
+  forretress: {
+    id: 'forretress', name: 'Forretress', dexNo: 205, types: ['bug', 'steel'],
+    base: { hp: 75, atk: 90, def: 140, spa: 60, spd: 60, spe: 40 },
+    catchRate: 75, growth: 'mediumfast', baseXp: 163, body: 'blob', spriteSeed: 20501,
+    eggGroups: ['bug'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'selfdestruct'], 115: ['takedown'], 129: ['bide'], 139: ['explosion'], 159: ['doubleedge'] },
+    flavor: 'A fortress with a temper; the shell opens only to fire.',
+    tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
+  },
+  dunsparce: {
+    id: 'dunsparce', name: 'Dunsparce', dexNo: 206, types: ['normal'],
+    base: { hp: 100, atk: 70, def: 70, spa: 65, spd: 65, spe: 45 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 145, body: 'serpent', spriteSeed: 20601,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['rage'], 105: ['defensecurl'], 113: ['glare'], 130: ['screech'], 138: ['takedown'] },
+    flavor: 'It digs backwards out of trouble and forwards into naps.',
+    tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 28, 31, 32, 34, 39, 44, 50],
+  },
+  gligar: {
+    id: 'gligar', name: 'Gligar', dexNo: 207, types: ['ground', 'flying'],
+    base: { hp: 65, atk: 75, def: 105, spa: 35, spd: 65, spe: 85 },
+    catchRate: 60, growth: 'mediumslow', baseXp: 86, body: 'bird', spriteSeed: 20701,
+    eggGroups: ['bug'], hatchCounter: 20,
+    learnset: { 1: ['poisonsting'], 106: ['sandattack'], 113: ['harden'], 120: ['quickattack'], 136: ['slash'], 144: ['screech'], 152: ['guillotine'] },
+    flavor: 'It glides face-first off cliff winds, claws spread for landing.',
+    tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
+  },
+  steelix: {
+    id: 'steelix', name: 'Steelix', dexNo: 208, types: ['steel', 'ground'],
+    base: { hp: 75, atk: 85, def: 200, spa: 55, spd: 65, spe: 30 },
+    catchRate: 25, growth: 'mediumfast', baseXp: 179, body: 'serpent', spriteSeed: 20801,
+    eggGroups: ['mineral'], hatchCounter: 25,
+    learnset: { 1: ['tackle', 'screech'], 110: ['bind'], 114: ['rockthrow'], 123: ['harden'], 127: ['rage'], 140: ['slam'] },
+    flavor: 'Buried pressure forged its body harder than the mountain above.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
+  },
+  granbull: {
+    id: 'granbull', name: 'Granbull', dexNo: 210, types: ['fairy'],
+    base: { hp: 90, atk: 120, def: 75, spa: 60, spd: 60, spe: 45 },
+    catchRate: 75, growth: 'fast', baseXp: 158, body: 'biped', spriteSeed: 21001,
+    eggGroups: ['ground', 'fairy'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 104: ['tailwhip'], 113: ['bite'], 119: ['lick'], 138: ['rage'], 151: ['takedown'] },
+    flavor: 'The jaw is real, the menace is theatre. It startles at thunder.',
+    tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
+  },
+  qwilfish: {
+    id: 'qwilfish', name: 'Qwilfish', dexNo: 211, types: ['water', 'poison'],
+    base: { hp: 65, atk: 95, def: 85, spa: 55, spd: 55, spe: 85 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 88, body: 'fish', spriteSeed: 21101,
+    eggGroups: ['water2'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'poisonsting'], 110: ['harden', 'minimize'], 119: ['watergun'], 128: ['pinmissile'], 137: ['takedown'], 146: ['hydropump'] },
+    flavor: 'It inflates on insult and drifts, spined and satisfied.',
+    tm: [3, 6, 9, 10, 11, 12, 13, 14, 15, 20, 21, 22, 31, 32, 34, 44, 50, 101, 103],
+  },
+  scizor: {
+    id: 'scizor', name: 'Scizor', dexNo: 212, types: ['bug', 'steel'],
+    base: { hp: 70, atk: 130, def: 100, spa: 55, spd: 80, spe: 65 },
+    catchRate: 25, growth: 'mediumfast', baseXp: 175, body: 'bird', spriteSeed: 21201,
+    eggGroups: ['bug'], hatchCounter: 25,
+    learnset: { 1: ['leer', 'quickattack'], 106: ['focusenergy'], 124: ['agility'], 136: ['slash'], 142: ['swordsdance'], 148: ['doubletam'] },
+    flavor: 'Steel claws with eyes in them — it sizes you up three ways.',
+    tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
+  },
+  shuckle: {
+    id: 'shuckle', name: 'Shuckle', dexNo: 213, types: ['bug', 'rock'],
+    base: { hp: 20, atk: 10, def: 230, spa: 10, spd: 230, spe: 5 },
+    catchRate: 190, growth: 'mediumslow', baseXp: 177, body: 'blob', spriteSeed: 21301,
+    eggGroups: ['bug'], hatchCounter: 20,
+    learnset: { 1: ['withdraw', 'constrict'], 109: ['wrap'], 128: ['bide'], 137: ['rest'] },
+    flavor: 'It ferments berries in its shell and shares the juice with no one.',
+    tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
+  },
+  heracross: {
+    id: 'heracross', name: 'Heracross', dexNo: 214, types: ['bug', 'fighting'],
+    base: { hp: 80, atk: 125, def: 75, spa: 40, spd: 95, spe: 85 },
+    catchRate: 45, growth: 'slow', baseXp: 175, body: 'biped', spriteSeed: 21401,
+    eggGroups: ['bug'], hatchCounter: 25,
+    learnset: { 1: ['tackle', 'leer'], 119: ['furyattack'], 127: ['counter'], 135: ['takedown'] },
+    flavor: 'It can heft a whole tree trunk and prefers to nap under one.',
+    tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
+  },
+  sneasel: {
+    id: 'sneasel', name: 'Sneasel', dexNo: 215, types: ['dark', 'ice'],
+    base: { hp: 55, atk: 95, def: 55, spa: 35, spd: 75, spe: 115 },
+    catchRate: 60, growth: 'mediumslow', baseXp: 86, body: 'biped', spriteSeed: 21501,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['scratch', 'leer'], 109: ['quickattack'], 117: ['screech'], 141: ['agility'], 149: ['slash'] },
+    flavor: 'It scales ice and pine bark with the same hooked ease.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
+  },
+  teddiursa: {
+    id: 'teddiursa', name: 'Teddiursa', dexNo: 216, types: ['normal'],
+    base: { hp: 60, atk: 80, def: 50, spa: 50, spd: 50, spe: 40 },
+    catchRate: 120, growth: 'mediumfast', baseXp: 66, body: 'biped', spriteSeed: 21601,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['scratch', 'leer'], 108: ['lick'], 129: ['rest'], 136: ['slash'] },
+    flavor: 'Its paws taste of whatever it last foraged; honey is the hope.',
+    evo: { to: 'ursaring', method: 'level', level: 130 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 39, 44, 50],
+  },
+  ursaring: {
+    id: 'ursaring', name: 'Ursaring', dexNo: 217, types: ['normal'],
+    base: { hp: 90, atk: 130, def: 75, spa: 75, spd: 75, spe: 55 },
+    catchRate: 60, growth: 'mediumfast', baseXp: 175, body: 'biped', spriteSeed: 21701,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['scratch', 'leer', 'lick'], 129: ['rest'], 139: ['slash'] },
+    flavor: 'Whole forests give its grazing grounds a respectful berth.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
+  },
+  slugma: {
+    id: 'slugma', name: 'Slugma', dexNo: 218, types: ['fire'],
+    base: { hp: 40, atk: 40, def: 40, spa: 70, spd: 40, spe: 20 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 50, body: 'serpent', spriteSeed: 21801,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
+    learnset: { 1: ['smog'], 108: ['ember'], 115: ['rockthrow'], 122: ['harden'], 129: ['amnesia'], 136: ['flamethrower'], 143: ['rockslide'], 150: ['bodyslam'] },
+    flavor: 'It must keep moving or cool into stone; it chooses moving, barely.',
+    evo: { to: 'magcargo', method: 'level', level: 138 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
+  },
+  magcargo: {
+    id: 'magcargo', name: 'Magcargo', dexNo: 219, types: ['fire', 'rock'],
+    base: { hp: 60, atk: 50, def: 120, spa: 90, spd: 80, spe: 30 },
+    catchRate: 75, growth: 'mediumfast', baseXp: 151, body: 'serpent', spriteSeed: 21901,
+    eggGroups: ['indeterminate'], hatchCounter: 20,
+    learnset: { 1: ['ember', 'rockthrow', 'smog'], 122: ['harden'], 129: ['amnesia'], 136: ['flamethrower'], 148: ['rockslide'], 160: ['bodyslam'] },
+    flavor: 'Its shell is cracked magma, still deciding whether to erupt.',
+    tm: [6, 8, 9, 10, 20, 31, 32, 33, 34, 38, 39, 44, 50],
+  },
+  swinub: {
+    id: 'swinub', name: 'Swinub', dexNo: 220, types: ['ice', 'ground'],
+    base: { hp: 50, atk: 50, def: 40, spa: 30, spd: 30, spe: 50 },
+    catchRate: 225, growth: 'slow', baseXp: 50, body: 'quad', spriteSeed: 22001,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 128: ['takedown'], 137: ['mist'], 146: ['blizzard'], 155: ['amnesia'] },
+    flavor: 'It snuffles out hot springs through snowdrifts two feet deep.',
+    evo: { to: 'piloswine', method: 'level', level: 133 }, tm: [6, 8, 9, 10, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
+  },
+  piloswine: {
+    id: 'piloswine', name: 'Piloswine', dexNo: 221, types: ['ice', 'ground'],
+    base: { hp: 100, atk: 100, def: 80, spa: 60, spd: 60, spe: 50 },
+    catchRate: 75, growth: 'slow', baseXp: 158, body: 'quad', spriteSeed: 22101,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 128: ['takedown'], 133: ['furyattack'], 142: ['mist'], 156: ['blizzard'], 170: ['amnesia'] },
+    flavor: 'Ice-locked fur and poor eyes; its nose does all the steering.',
+    tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
+  },
+  corsola: {
+    id: 'corsola', name: 'Corsola', dexNo: 222, types: ['water', 'rock'],
+    base: { hp: 65, atk: 55, def: 95, spa: 65, spd: 95, spe: 35 },
+    catchRate: 60, growth: 'fast', baseXp: 144, body: 'blob', spriteSeed: 22201,
+    eggGroups: ['water1', 'water3'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 107: ['harden'], 113: ['bubble'], 119: ['recover'], 125: ['bubblebeam'] },
+    flavor: 'Where its branches thrive, the whole reef signs a truce.',
+    tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
+  },
+  remoraid: {
+    id: 'remoraid', name: 'Remoraid', dexNo: 223, types: ['water'],
+    base: { hp: 35, atk: 65, def: 35, spa: 65, spd: 35, spe: 65 },
+    catchRate: 190, growth: 'mediumfast', baseXp: 60, body: 'fish', spriteSeed: 22301,
+    eggGroups: ['water1', 'water2'], hatchCounter: 20,
+    learnset: { 1: ['watergun'], 122: ['psybeam', 'bubblebeam', 'aurorabeam'], 133: ['focusenergy'], 144: ['icebeam'], 155: ['hyperbeam'] },
+    flavor: 'It shoots water like a marksman and hitches rides on giants.',
+    evo: { to: 'octillery', method: 'level', level: 125 }, tm: [6, 9, 10, 11, 12, 13, 14, 31, 32, 34, 44, 46, 50, 103],
+  },
+  octillery: {
+    id: 'octillery', name: 'Octillery', dexNo: 224, types: ['water'],
+    base: { hp: 75, atk: 105, def: 75, spa: 105, spd: 75, spe: 45 },
+    catchRate: 75, growth: 'mediumfast', baseXp: 168, body: 'blob', spriteSeed: 22401,
+    eggGroups: ['water1', 'water2'], hatchCounter: 20,
+    learnset: { 1: ['watergun'], 111: ['constrict'], 122: ['psybeam', 'bubblebeam', 'aurorabeam'], 138: ['focusenergy'], 154: ['icebeam'], 170: ['hyperbeam'] },
+    flavor: 'It anchors in rock crevices and negotiates with eight arms.',
+    tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
+  },
+  delibird: {
+    id: 'delibird', name: 'Delibird', dexNo: 225, types: ['ice', 'flying'],
+    base: { hp: 45, atk: 55, def: 45, spa: 65, spd: 45, spe: 75 },
+    catchRate: 45, growth: 'fast', baseXp: 116, body: 'bird', spriteSeed: 22501,
+    eggGroups: ['water1', 'ground'], hatchCounter: 20,
+    learnset: { 1: ['aurorabeam', 'icebeam', 'blizzard', 'icepunch'] },
+    flavor: 'It shares its food with lost travellers and bills no one.',
+    tm: [2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 50, 102],
+  },
+  mantine: {
+    id: 'mantine', name: 'Mantine', dexNo: 226, types: ['water', 'flying'],
+    base: { hp: 85, atk: 40, def: 70, spa: 80, spd: 140, spe: 70 },
+    catchRate: 25, growth: 'slow', baseXp: 170, body: 'bird', spriteSeed: 22601,
+    eggGroups: ['water1'], hatchCounter: 25,
+    learnset: { 1: ['tackle', 'bubble'], 110: ['supersonic'], 118: ['bubblebeam'], 125: ['takedown'], 132: ['agility'], 140: ['wingattack'], 149: ['confuseray'] },
+    flavor: 'A gentle wing over the shallows; small fish ride its shadow.',
+    tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
+  },
+  skarmory: {
+    id: 'skarmory', name: 'Skarmory', dexNo: 227, types: ['steel', 'flying'],
+    base: { hp: 65, atk: 80, def: 140, spa: 40, spd: 70, spe: 70 },
+    catchRate: 25, growth: 'slow', baseXp: 163, body: 'bird', spriteSeed: 22701,
+    eggGroups: ['flying'], hatchCounter: 25,
+    learnset: { 1: ['leer', 'peck'], 113: ['sandattack'], 119: ['swift'], 125: ['agility'], 137: ['furyattack'] },
+    flavor: 'Its shed feathers were once gathered up and honed as blades.',
+    tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
+  },
+  houndour: {
+    id: 'houndour', name: 'Houndour', dexNo: 228, types: ['dark', 'fire'],
+    base: { hp: 45, atk: 60, def: 30, spa: 80, spd: 50, spe: 65 },
+    catchRate: 120, growth: 'slow', baseXp: 66, body: 'quad', spriteSeed: 22801,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['leer', 'ember'], 113: ['smog'], 120: ['bite'], 135: ['flamethrower'] },
+    flavor: 'The pack hunts by chorus — each howl a course correction.',
+    evo: { to: 'houndoom', method: 'level', level: 124 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
+  },
+  houndoom: {
+    id: 'houndoom', name: 'Houndoom', dexNo: 229, types: ['dark', 'fire'],
+    base: { hp: 75, atk: 90, def: 50, spa: 110, spd: 80, spe: 95 },
+    catchRate: 45, growth: 'slow', baseXp: 175, body: 'quad', spriteSeed: 22901,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['leer', 'ember'], 113: ['smog'], 120: ['bite'], 141: ['flamethrower'] },
+    flavor: 'Old stories swear its howl sends other spirits hurrying home.',
+    tm: [6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50],
+  },
+  kingdra: {
+    id: 'kingdra', name: 'Kingdra', dexNo: 230, types: ['water', 'dragon'],
+    base: { hp: 75, atk: 95, def: 95, spa: 95, spd: 95, spe: 85 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 243, body: 'fish', spriteSeed: 23001,
+    eggGroups: ['water1', 'dragon'], hatchCounter: 20,
+    learnset: { 1: ['leer', 'watergun', 'smokescreen', 'bubble'], 140: ['agility'], 151: ['hydropump'] },
+    flavor: 'It sleeps in currents where the surface storms cannot reach.',
+    tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
+  },
+  phanpy: {
+    id: 'phanpy', name: 'Phanpy', dexNo: 231, types: ['ground'],
+    base: { hp: 90, atk: 60, def: 60, spa: 40, spd: 40, spe: 40 },
+    catchRate: 120, growth: 'mediumfast', baseXp: 66, body: 'quad', spriteSeed: 23101,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'growl'], 109: ['defensecurl'], 125: ['takedown'], 149: ['doubleedge'] },
+    flavor: 'It swings its trunk in greeting and flattens fences by accident.',
+    evo: { to: 'donphan', method: 'level', level: 125 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
+  },
+  porygon2: {
+    id: 'porygon2', name: 'Porygon2', dexNo: 233, types: ['normal'],
+    base: { hp: 85, atk: 80, def: 90, spa: 105, spd: 95, spe: 60 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 180, body: 'blob', spriteSeed: 23301,
+    eggGroups: ['mineral'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'conversion'], 109: ['agility'], 112: ['psybeam'], 120: ['recover'], 124: ['defensecurl'], 136: ['triattack'] },
+    flavor: 'Rebuilt for other worlds, it still wobbles in this one.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
+  },
+  stantler: {
+    id: 'stantler', name: 'Stantler', dexNo: 234, types: ['normal'],
+    base: { hp: 73, atk: 95, def: 62, spa: 85, spd: 65, spe: 85 },
+    catchRate: 45, growth: 'slow', baseXp: 163, body: 'quad', spriteSeed: 23401,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 108: ['leer'], 115: ['hypnosis'], 123: ['stomp'], 131: ['sandattack'], 140: ['takedown'], 149: ['confuseray'] },
+    flavor: 'Meet the gaze of its antler orbs and the path stops making sense.',
+    tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
+  },
+  smeargle: {
+    id: 'smeargle', name: 'Smeargle', dexNo: 235, types: ['normal'],
+    base: { hp: 55, atk: 20, def: 35, spa: 20, spd: 45, spe: 75 },
+    catchRate: 45, growth: 'fast', baseXp: 88, body: 'biped', spriteSeed: 23501,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle', 'quickattack', 'swift', 'takedown'] },
+    flavor: 'It marks its ground in its own colours and signs every wall.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
+  },
+  tyrogue: {
+    id: 'tyrogue', name: 'Tyrogue', dexNo: 236, types: ['fighting'],
+    base: { hp: 35, atk: 35, def: 35, spa: 35, spd: 35, spe: 35 },
+    catchRate: 75, growth: 'mediumfast', baseXp: 42, body: 'biped', spriteSeed: 23601,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
+    learnset: { 1: ['tackle', 'lowkick', 'karatechop', 'submission'] },
+    flavor: 'It picks fights with anything standing, to see what it becomes.',
+    evo: { to: 'hitmontop', method: 'level', level: 120 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
+  },
+  hitmontop: {
+    id: 'hitmontop', name: 'Hitmontop', dexNo: 237, types: ['fighting'],
+    base: { hp: 50, atk: 95, def: 95, spa: 35, spd: 110, spe: 70 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 159, body: 'biped', spriteSeed: 23701,
+    eggGroups: ['humanshape'], hatchCounter: 25,
+    learnset: { 107: ['focusenergy'], 119: ['quickattack'], 131: ['counter'], 137: ['agility'] },
+    flavor: 'It spins into battle head-down and somehow lands every kick.',
+    tm: [1, 5, 6, 8, 9, 10, 16, 17, 18, 19, 20, 24, 25, 28, 31, 32, 34, 39, 44, 48, 50, 104],
+  },
+  smoochum: {
+    id: 'smoochum', name: 'Smoochum', dexNo: 238, types: ['ice', 'psychic'],
+    base: { hp: 45, atk: 30, def: 15, spa: 85, spd: 65, spe: 65 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 61, body: 'biped', spriteSeed: 23801,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
+    learnset: { 1: ['pound', 'lick'], 121: ['confusion'], 125: ['sing'], 137: ['psychic'], 149: ['blizzard'] },
+    flavor: 'It checks every new feeling twice with a kiss-shaped test.',
+    evo: { to: 'jynx', method: 'level', level: 130 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
+  },
+  elekid: {
+    id: 'elekid', name: 'Elekid', dexNo: 239, types: ['electric'],
+    base: { hp: 45, atk: 63, def: 37, spa: 65, spd: 55, spe: 95 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 72, body: 'biped', spriteSeed: 23901,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
+    learnset: { 1: ['leer', 'quickattack'], 109: ['thunderpunch'], 117: ['lightscreen'], 125: ['swift'], 133: ['screech'], 141: ['thunderbolt'], 149: ['thunder'] },
+    flavor: 'It spins its arms to charge and butts heads when the charge fades.',
+    evo: { to: 'electabuzz', method: 'level', level: 130 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
+  },
+  magby: {
+    id: 'magby', name: 'Magby', dexNo: 240, types: ['fire'],
+    base: { hp: 45, atk: 75, def: 37, spa: 70, spd: 55, spe: 83 },
+    catchRate: 45, growth: 'mediumfast', baseXp: 73, body: 'biped', spriteSeed: 24001,
+    eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
+    learnset: { 1: ['ember'], 107: ['leer'], 113: ['smog'], 119: ['firepunch'], 125: ['smokescreen'], 137: ['flamethrower'], 143: ['confuseray'], 149: ['fireblast'] },
+    flavor: 'Each breath leaks a little fire; puddles hiss where it toddles.',
+    evo: { to: 'magmar', method: 'level', level: 130 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
+  },
+  miltank: {
+    id: 'miltank', name: 'Miltank', dexNo: 241, types: ['normal'],
+    base: { hp: 95, atk: 80, def: 105, spa: 40, spd: 70, spe: 100 },
+    catchRate: 45, growth: 'slow', baseXp: 172, body: 'biped', spriteSeed: 24101,
+    eggGroups: ['ground'], hatchCounter: 20,
+    learnset: { 1: ['tackle'], 104: ['growl'], 108: ['defensecurl'], 113: ['stomp'], 126: ['bide'], 143: ['bodyslam'] },
+    flavor: 'Its milk has settled sickrooms and sieges of bad temper alike.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
+  },
+  blissey: {
+    id: 'blissey', name: 'Blissey', dexNo: 242, types: ['normal'],
+    base: { hp: 255, atk: 10, def: 10, spa: 75, spd: 135, spe: 55 },
+    catchRate: 30, growth: 'fast', baseXp: 608, body: 'biped', spriteSeed: 24201,
+    eggGroups: ['fairy'], hatchCounter: 40,
+    learnset: { 1: ['pound'], 104: ['growl'], 107: ['tailwhip'], 110: ['softboiled'], 113: ['doubleslap'], 118: ['minimize'], 123: ['sing'], 128: ['eggbomb'], 133: ['defensecurl'], 140: ['lightscreen'], 147: ['doubleedge'] },
+    flavor: 'It will feed its egg to a stranger’s sorrow before its own.',
+    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
+  },
+  raikou: {
+    id: 'raikou', name: 'Raikou', dexNo: 243, types: ['electric'],
+    base: { hp: 90, atk: 85, def: 75, spa: 115, spd: 100, spe: 115 },
+    catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24301,
+    eggGroups: ['no-eggs'], hatchCounter: 80,
+    learnset: { 1: ['leer', 'bite'], 111: ['thundershock'], 131: ['quickattack'], 151: ['reflect'], 171: ['thunder'] },
+    flavor: 'Thunder walks on four legs; storms follow a step behind.',
+    tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
+  },
+  entei: {
+    id: 'entei', name: 'Entei', dexNo: 244, types: ['fire'],
+    base: { hp: 115, atk: 115, def: 85, spa: 90, spd: 75, spe: 100 },
+    catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24401,
+    eggGroups: ['no-eggs'], hatchCounter: 80,
+    learnset: { 1: ['leer', 'bite'], 111: ['ember'], 131: ['firespin'], 141: ['stomp'], 151: ['flamethrower'], 171: ['fireblast'] },
+    flavor: 'Mountains clear their throat when it runs; lava answers.',
+    tm: [2, 4, 6, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50, 102],
+  },
+  suicune: {
+    id: 'suicune', name: 'Suicune', dexNo: 245, types: ['water'],
+    base: { hp: 100, atk: 75, def: 115, spa: 90, spd: 115, spe: 85 },
+    catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24501,
+    eggGroups: ['no-eggs'], hatchCounter: 80,
+    learnset: { 1: ['leer', 'bite'], 111: ['bubblebeam'], 131: ['gust'], 141: ['aurorabeam'], 151: ['mist'], 171: ['hydropump'] },
+    flavor: 'It quarters the north wind and leaves fouled water clean.',
+    tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
+  },
+  larvitar: {
+    id: 'larvitar', name: 'Larvitar', dexNo: 246, types: ['rock', 'ground'],
+    base: { hp: 50, atk: 64, def: 50, spa: 45, spd: 50, spe: 41 },
+    catchRate: 45, growth: 'slow', baseXp: 60, body: 'biped', spriteSeed: 24601,
+    eggGroups: ['monster'], hatchCounter: 40,
+    learnset: { 1: ['leer', 'bite'], 115: ['screech'], 122: ['rockslide'], 150: ['earthquake'], 157: ['hyperbeam'] },
+    flavor: 'It eats a hillside of earth, then sleeps until it is a mountain.',
+    evo: { to: 'pupitar', method: 'level', level: 130 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
+  },
+  pupitar: {
+    id: 'pupitar', name: 'Pupitar', dexNo: 247, types: ['rock', 'ground'],
+    base: { hp: 70, atk: 84, def: 70, spa: 65, spd: 70, spe: 51 },
+    catchRate: 45, growth: 'slow', baseXp: 144, body: 'blob', spriteSeed: 24701,
+    eggGroups: ['monster'], hatchCounter: 40,
+    learnset: { 1: ['leer', 'bite', 'screech'], 122: ['rockslide'], 156: ['earthquake'], 165: ['hyperbeam'] },
+    flavor: 'A shell full of coming weather; it thrashes at its own future.',
+    evo: { to: 'tyranitar', method: 'level', level: 155 }, tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
+  },
+  tyranitar: {
+    id: 'tyranitar', name: 'Tyranitar', dexNo: 248, types: ['rock', 'dark'],
+    base: { hp: 100, atk: 134, def: 110, spa: 95, spd: 100, spe: 61 },
+    catchRate: 45, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 24801,
+    eggGroups: ['monster'], hatchCounter: 40,
+    learnset: { 1: ['leer', 'bite', 'screech'], 122: ['rockslide'], 161: ['earthquake'], 175: ['hyperbeam'] },
+    flavor: 'Maps get redrawn after it crosses a range in a bad mood.',
+    tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
+  },
+  celebi: {
+    id: 'celebi', name: 'Celebi', dexNo: 251, types: ['psychic', 'grass'],
+    base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
+    catchRate: 45, growth: 'mediumslow', baseXp: 270, body: 'biped', spriteSeed: 25101,
+    eggGroups: ['no-eggs'], hatchCounter: 120,
+    learnset: { 1: ['leechseed', 'confusion', 'recover', 'psybeam'] },
+    flavor: 'A green minute between centuries; forests keep its secrets.',
+    tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
+  },
+};
 
 
 // ---- src/data/moves.mjs ----
@@ -66878,6 +67853,7 @@ const ITEMS = {
   thunderstone: { id: 'thunderstone', name: 'Thunder Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Electric lines. The partner refuses it — firmly.' },
   leafstone: { id: 'leafstone', name: 'Leaf Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Grass lines.' },
   moonstone: { id: 'moonstone', name: 'Moon Stone', pocket: 'items', price: 0, desc: 'A stone that fell with the Clefairy legends of Mt. Moon.' },
+  sunstone: { id: 'sunstone', name: 'Sun Stone', pocket: 'items', price: 0, desc: 'A stone that glows like bottled morning. Evolves certain sun-loving lines.' },
   // Treasures / misc
   nugget: { id: 'nugget', name: 'Nugget', pocket: 'items', price: 10000, desc: 'A gold nugget. Sell it at a mart.' },
   stardust: { id: 'stardust', name: 'Stardust', pocket: 'items', price: 2000, desc: 'Fine red sand. Sell it at a mart.' },
@@ -80387,6 +81363,7 @@ const IOU_PRIORITY = [
 // merge.mjs — folds the expansion data modules into the base tables.
 // Load order (module-order.json) guarantees the sources exist first.
 Object.assign(SPECIES, SPECIES2);
+Object.assign(SPECIES, SPECIES_JOHTO);
 Object.assign(MOVES, MOVES2);
 Object.assign(MAPS, MAPS2, MAPS3, MAPS4, MAPS5);
 Object.assign(TRAINERS, TRAINERS3, TRAINERS4, ORANGE_TRAINERS);
@@ -81015,8 +81992,11 @@ function groundDodgeIframesBonus(field) {
 // The class mechanism is PROCEDURAL motion in battle.mjs rendered over
 // the authored frames (base / derived bob / authored accent delta): the
 // class only sets amplitude, rate and pattern per species. Assigned per
-// species in DATA — every battler species in the game (163 rows: the 162
+// species in DATA — every battler species in the game (257 rows: the 256
 // authored species pairs + the partner) appears exactly once below.
+// Stage J1 (Arc 2): +94 Johto rows by the same rule (bird->hover, fish/
+// serpent->serpentine, blob->inert, else grounded; hand overrides for the
+// floaters misdreavus/unown/togetic/celebi/jumpluff -> hover).
 // Classes (measurably different amplitude/rate — see IDLE_CLASS_PARAMS):
 //   grounded    breathe: slow low bob, bob-frame on the inhale
 //   hover       flap: fast high bob + lateral sway, bob-frame flaps
@@ -81191,7 +82171,102 @@ const IDLE_CLASS = {
   snubbull: 'grounded',
   donphan: 'grounded',
   hooh: 'hover',
-  lugia: 'hover',};
+  lugia: 'hover',
+  chikorita: 'grounded',
+  bayleef: 'grounded',
+  meganium: 'grounded',
+  cyndaquil: 'grounded',
+  quilava: 'grounded',
+  typhlosion: 'grounded',
+  totodile: 'grounded',
+  croconaw: 'grounded',
+  feraligatr: 'grounded',
+  sentret: 'grounded',
+  furret: 'grounded',
+  hoothoot: 'hover',
+  noctowl: 'hover',
+  ledyba: 'hover',
+  ledian: 'hover',
+  spinarak: 'inert',
+  ariados: 'inert',
+  crobat: 'hover',
+  chinchou: 'serpentine',
+  lanturn: 'serpentine',
+  pichu: 'grounded',
+  cleffa: 'grounded',
+  igglybuff: 'grounded',
+  togetic: 'hover',
+  natu: 'hover',
+  xatu: 'hover',
+  mareep: 'grounded',
+  flaaffy: 'grounded',
+  ampharos: 'grounded',
+  bellossom: 'grounded',
+  azumarill: 'grounded',
+  sudowoodo: 'grounded',
+  politoed: 'grounded',
+  hoppip: 'grounded',
+  skiploom: 'grounded',
+  jumpluff: 'hover',
+  aipom: 'grounded',
+  sunkern: 'inert',
+  sunflora: 'grounded',
+  yanma: 'hover',
+  wooper: 'grounded',
+  quagsire: 'grounded',
+  espeon: 'grounded',
+  umbreon: 'grounded',
+  murkrow: 'hover',
+  slowking: 'grounded',
+  misdreavus: 'hover',
+  unown: 'hover',
+  wobbuffet: 'inert',
+  girafarig: 'grounded',
+  pineco: 'inert',
+  forretress: 'inert',
+  dunsparce: 'serpentine',
+  gligar: 'hover',
+  steelix: 'serpentine',
+  granbull: 'grounded',
+  qwilfish: 'serpentine',
+  scizor: 'hover',
+  shuckle: 'inert',
+  heracross: 'grounded',
+  sneasel: 'grounded',
+  teddiursa: 'grounded',
+  ursaring: 'grounded',
+  slugma: 'serpentine',
+  magcargo: 'serpentine',
+  swinub: 'grounded',
+  piloswine: 'grounded',
+  corsola: 'inert',
+  remoraid: 'serpentine',
+  octillery: 'inert',
+  delibird: 'hover',
+  mantine: 'hover',
+  skarmory: 'hover',
+  houndour: 'grounded',
+  houndoom: 'grounded',
+  kingdra: 'serpentine',
+  phanpy: 'grounded',
+  porygon2: 'inert',
+  stantler: 'grounded',
+  smeargle: 'grounded',
+  tyrogue: 'grounded',
+  hitmontop: 'grounded',
+  smoochum: 'grounded',
+  elekid: 'grounded',
+  magby: 'grounded',
+  miltank: 'grounded',
+  blissey: 'grounded',
+  raikou: 'grounded',
+  entei: 'grounded',
+  suicune: 'grounded',
+  larvitar: 'grounded',
+  pupitar: 'inert',
+  tyranitar: 'grounded',
+  celebi: 'hover',
+};
 
 // Motion parameters per class (battle.mjs idleMotion consumes these —
 // amplitude in logical px, periods in ms). No two classes share both
@@ -94555,7 +95630,7 @@ Object.assign(Game.prototype, {
       showTargets();
       return;
     }
-    if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone'].includes(id)) {
+    if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone', 'sunstone'].includes(id)) {
       const stoneTargets = g.state.party.filter((m) => {
         const sp = SPECIES[m.speciesId];
         const evos = sp.evos || (sp.evo ? [sp.evo] : []);
@@ -95223,6 +96298,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:2dc905367220b028a12320ab3112d125213ed461e085c83e67d49a1a34b4a810 -->
+<!-- contentHash:b2500a0ff029c4f5c0f834b0c20e151c0b723825c810e51554e343545d5ca7a9 -->
 </body>
 </html>

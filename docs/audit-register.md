@@ -5814,3 +5814,210 @@ not the run.]
   legitimate reaches them — but J1's species ETL must not assign
   either curve to a Johto species without extending the formulas
   first. Flagged forward, not fixed here.
+
+## Arc 2 Stage J1 — Species data: +100 → National dex 251 (2026-10-29)
+
+Implementer pass on main @ 37a3e42 (J0 landed). Data only — no maps,
+story, or sprites (J2 owns the 94 new species' art). Nothing pushed,
+nothing deployed.
+
+### 1. What landed
+
+- **ETL (reproducible, not hand-typed):**
+  `~/workspace/ashs-journey-qa/arc2-etl/etl-johto.mjs` reads the
+  pre-staged PokeAPI cache (`arc2-etl/raw/`: pokemon/species 152–251,
+  68 evolution chains) + the game's own modules (move table, TM table,
+  shipped species) and EMITS `src/data/species3.mjs`
+  (`export const SPECIES_JOHTO`, 94 entries). Per-species audit trail
+  (learnset source, dropped moves, top-ups, TM analogue, evolution
+  mapping) in `arc2-etl/etl-notes.json`. Registered in
+  `scripts/module-order.json` after species2.mjs; folded in
+  `src/data/merge.mjs` (`Object.assign(SPECIES, SPECIES_JOHTO)`);
+  `tools/api-scripts/gen-tables.mjs` folds it the same way and the
+  validator tables were regenerated ONLY through it (tablesVersion
+  60fc23ec… → **44eb8c22…**, 257 species / 136 items).
+- **Accounting:** species entries **163 → 257** = 151 Kanto + partner
+  + 5 forms + 100 National (dex 152–251). The 6 shipped guests
+  (togepi 175, marill 183, snubbull 209, donphan 232, hooh 250,
+  lugia 249) were NOT duplicated — they stay in species2.mjs; the 94
+  new entries are dex 152–251 minus those six. **Diploma math
+  untouched:** the Kanto diploma still counts exactly 151 non-form
+  species at dexNo 1–151 (cheat-shop A13/B23/B24 prove it), and the
+  National-493 dex keying stands; the 251 horizon comes from the
+  Foundation registry row, as designed.
+- **Field mapping** follows the shipped schema exactly: PokeAPI
+  stats/types (current typings — Togepi-line fairy consistent with
+  the shipped guest), capture_rate, base_experience, spriteSeed
+  dexNo*100+1, body derived from PokeAPI `shape` (quadruped→quad,
+  upright/humanoid→biped, wings/bug-wings→bird, fish→fish,
+  squiggle→serpent, armor/ball/blob/legs/tentacles→blob/quad per
+  judgment) with recorded overrides where the shape misleads
+  (kingdra→fish, pupitar→blob, porygon2→blob, wooper→quad,
+  cyndaquil→quad). Every entry carries an ORIGINAL one-line flavor
+  (hand-authored in the ETL's FLAVOR table, shipped voice).
+- **J6 pre-wiring:** every new entry emits `eggGroups` (the species'
+  PokeAPI egg-group names), `hatchCounter`, and `baby: true` where
+  PokeAPI marks is_baby (pichu, cleffa, igglybuff, tyrogue, smoochum,
+  elekid, magby — 7 of the 94; togepi is the 8th baby and already
+  ships in species2).
+- **TM lists:** copied from the closest shipped analogue by type
+  overlap then BST distance (per-species analogue recorded in the
+  ETL notes; umbreon — pure Dark, no shipped type overlap — takes
+  its pre-evolution eevee's list). All ids resolve in the game's
+  TM/HM tables (fidelity-verified).
+
+### 2. Growth-curve assertion (the J0 leftover flag, discharged)
+
+The ETL maps growth_rate {medium-slow→mediumslow, medium-fast AND
+PokeAPI's current alias 'medium'→mediumfast, fast→fast, slow→slow}
+and THROWS if a species' raw curve is 'erratic' or 'fluctuating' or
+maps outside the supported set {fast, mediumfast, mediumslow, slow}.
+**Result: assertion held over all 94** — raw distribution
+medium 38 · medium-slow 24 · slow 17 · fast 15; zero erratic, zero
+fluctuating assigned.
+
+### 3. Learnsets (ruling 2 + ruling 5)
+
+- Source: PokeAPI `moves`, version_group **crystal preferred**,
+  move_learn_method level-up only, names normalized to game ids
+  (hyphens stripped; 'double-team' aliased to the game's 'doubletam').
+  **91 of 94 species took a surviving crystal set directly.** No
+  species needed a gold-silver fallback for a surviving set: the
+  remaining 3 (unown, delibird, smeargle) had their ENTIRE canonical
+  level-up sets (crystal and gold-silver alike) outside the game's
+  move table (hidden-power / present / sketch are not game moves)
+  and were filled entirely by top-ups.
+- **Dropped (ruling 5, no new moves): 235 (species, move) pairs,
+  66 distinct canonical moves** with no game counterpart — the full
+  list is in etl-notes.json (ancient-power, crunch, flame-wheel,
+  giga-drain, megahorn, sketch, present, hidden-power, …).
+- **Levels:** canonical level-1 moves stay at key **1**; every
+  canonical level ≥2 shifts **+100** (band-local). Evolution levels
+  shift the same way (§4).
+- **Top-ups (<4 distinct moves after filtering): 27 moves across
+  13 species**, placed at level 1, ordered type-staples first, then
+  type-matching canon TM/HM moves, then Normal staples:
+  pichu +thunderbolt · cleffa +swift, metronome · igglybuff +tackle
+  · togetic +pound · politoed +bubblebeam · sunkern +razorleaf ·
+  murkrow +bite · celebi +psybeam · wobbuffet +confusion, psybeam,
+  psychic (canon counter survives alone) · unown +confusion,
+  psybeam, psychic, teleport · delibird +aurorabeam, icebeam,
+  blizzard, icepunch · smeargle +tackle, quickattack, swift,
+  takedown · tyrogue +lowkick, karatechop, submission.
+
+### 4. Evolution mappings — every decision on the record
+
+Engine vocabulary only: level / stone / trade, branching via `evos`.
+
+- **Band-local level evos (canon +100), chain-derived by the ETL:**
+  chikorita→bayleef 116, bayleef→meganium 132, cyndaquil→quilava
+  114, quilava→typhlosion 136, totodile→croconaw 118,
+  croconaw→feraligatr 130, sentret→furret 115, hoothoot→noctowl
+  120, ledyba→ledian 118, spinarak→ariados 122, chinchou→lanturn
+  127, natu→xatu 125, mareep→flaaffy 115, flaaffy→ampharos 130,
+  hoppip→skiploom 118, skiploom→jumpluff 127, wooper→quagsire 120,
+  pineco→forretress 131, teddiursa→ursaring 130, slugma→magcargo
+  138, swinub→piloswine 133, remoraid→octillery 125,
+  houndour→houndoom 124, phanpy→donphan 125, smoochum→jynx 130,
+  elekid→electabuzz 130, magby→magmar 130, larvitar→pupitar 130,
+  pupitar→tyranitar 155.
+- **Happiness → coordinator-set levels:** golbat→crobat **Lv40** and
+  chansey→blissey **Lv40** (Kanto species — canonical frame, they
+  work inside Kanto's band too; single `evo` added in species2);
+  pichu→pikachu, cleffa→clefairy, igglybuff→jigglypuff **Lv110**
+  (Johto-frame babies, band-local).
+- **Guests (canonical frame, ruling 2)** — entries added in
+  species2.mjs: togepi→togetic **Lv25** (the coordinator's fallback:
+  no bond/friendship method exists in the engine), marill→azumarill
+  **Lv18**, snubbull→granbull **Lv23**. Donphan/Ho-Oh/Lugia: none
+  (correct canon). The guests' own shipped learnsets are untouched.
+- **NEW ITEM `sunstone`** in items.mjs: pocket 'items', price/shop
+  treatment mirroring moonstone (price 0 — a found stone, not mart
+  stock), Sun-Stone presentation matching the other stones; the
+  stone-use list in main-systems.mjs accepts it. Mappings:
+  sunkern→sunflora (sunstone, in species3); **gloom→bellossom**
+  (sunstone branch) and **eevee→espeon** (sunstone) /
+  **eevee→umbreon** (moonstone) added to the parents' `evos`
+  arrays — the engine-true day/night adaptation, recorded here.
+- **Trade evos (bare, Kanto precedent — kadabra/machoke/graveler/
+  haunter trade without held items):** onix→steelix (species.mjs),
+  scyther→scizor, seadra→kingdra, porygon→porygon2 (species2).
+- **Branching parents keep a dual representation, deliberately:**
+  gloom, poliwhirl and slowpoke keep their original single `evo`
+  (the engine's level path and Link Transfer read `sp.evo`) AND
+  gain a full `evos` array (the stone path and branch consumers
+  read `evos || [evo]`): gloom evos [leafstone→vileplume,
+  sunstone→bellossom]; poliwhirl evos [waterstone→poliwrath,
+  trade→politoed]; slowpoke evos [Lv37→slowbro, trade→slowking].
+  Kanto parents touched — golbat, chansey, eevee, gloom, poliwhirl,
+  slowpoke, onix, scyther, seadra, porygon — NOTHING else in their
+  entries changed.
+- **Tyrogue:** canon stat-comparison branching (atk/def at Lv20) is
+  inexpressible in the engine vocabulary → single level evo to
+  **hitmontop at Lv120** (canon 20 +100). Hitmonlee/Hitmonchan
+  remain Kanto-obtainable; recorded as an adaptation, not a claim
+  of canon.
+- **Post-251 evolutions are out of scope and emit NO evo:**
+  aipom→ambipom, yanma→yanmega, wooper→clodsire, murkrow→honchkrow,
+  misdreavus→mismagius, girafarig→farigiraf, dunsparce→dudunsparce,
+  gligar→gliscor, qwilfish→overqwil, sneasel→weavile/sneasler,
+  ursaring→ursaluna, piloswine→mamoswine, corsola→cursola,
+  porygon2→porygon-z, stantler→wyrdeer, togetic→togekiss (all
+  recorded per-species in etl-notes.json).
+
+### 5. Support tables + count supersessions
+
+- `battler-tiers.mjs` +94 rows by the file's own rule (bulk =
+  HP+DEF+SPD; S <160, L ≥245, else M — no hand overrides needed);
+  `idle-classes.mjs` +94 rows by its rule (bird→hover,
+  fish/serpent→serpentine, blob→inert, else grounded) with floater
+  overrides misdreavus/unown/togetic/celebi/jumpluff→hover. Both
+  tables now carry exactly **257** rows.
+- **fidelity-checks:** roster assertion **163 → 257** (the count of
+  record, updated the way the Cheat Shop expansion did, with the
+  supersession in the assertion text); the suite now folds
+  SPECIES_JOHTO into its roster. Everything else passes as-is.
+- **cheat-shop-checks:** folds SPECIES_JOHTO; **A02** counts move
+  species **163 → 257** and items **135 → 136** (the Sun Stone),
+  recorded in the assertion text; **A11** superseded — the O1-era
+  "guests have no evolutions" rule is replaced by the J1 guest-evo
+  assertions (togepi/marill/snubbull carry theirs; donphan/hooh/
+  lugia still none). The Cheat Terminal itself is data-driven and
+  now stocks **257 claimable species** with no code change; B22/B25
+  prove the maximal 257-species stock through the real claim paths
+  and the server validator.
+
+### 6. Battery at this commit
+
+fidelity **35/35** · validator test **78/78** · save-contract
+**6/6** · cheat-shop **44/44** · arc-foundation **47/47** ·
+campaign-smoke **24/24** · qa-changed-flows failures exactly the
+standing baseline **{b2, d9}** (QA section 19/19) · gen-tables
+--check **clean** · fresh build (vercel + guest) OK — guest
+b2500a0f…, vercel acc38711…, **personal/ byte-identical** (game.js
+f434ba63… as at HEAD) and the content-hash personal line preserved
+(ce64da2b…). Nothing pushed, nothing deployed.
+
+### 7. Leftovers, named
+
+- **Babies are not wild-obtainable:** pichu, cleffa, igglybuff,
+  togepi, magby, elekid, smoochum, tyrogue exist as data (dex,
+  claims, J6 eggs) only — no wild tables place them; J3 must not
+  add them as wild encounters, J6's breeding/claims are their
+  route in.
+- **Species art is J2:** the 94 new species currently resolve
+  through the forge-fallback sprite path (no authored pairs yet);
+  the J2 census target is 257/257.
+- **Trade branches in `evos` vs Link Transfer:** Bill's Link
+  Transfer candidate scan reads only the single `sp.evo` with
+  method 'trade' — poliwhirl→politoed and slowpoke→slowking (whose
+  `evo` slots carry their primary branches) are data-complete but
+  not yet Link-Transfer-reachable. A small engine widening
+  (scan `evos` too) belongs to a systems pass (J6-adjacent), not
+  this data stage; recorded, not silently worked around.
+- **Sun Stone acquisition:** price 0 like the Moon Stone — it is
+  found/awarded, never mart stock; placing its pickup is J3/J4
+  scope. Until then it is Cheat-Terminal-claimable like every item.
+- Day/night encounter variants remain OUT of this mission
+  (ruling 6) — the eevee sun/moonstone adaptation is an evolution
+  mapping only, not an encounter system.

@@ -22,7 +22,8 @@ function ok(name, cond, extra) {
 // ================= Part A: pure units =================
 const { SPECIES: SP1 } = await import(join(ROOT, 'src/data/species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src/data/species2.mjs'));
-const SPECIES = Object.assign({}, SP1, SPECIES2);
+const { SPECIES_JOHTO } = await import(join(ROOT, 'src/data/species3.mjs'));
+const SPECIES = Object.assign({}, SP1, SPECIES2, SPECIES_JOHTO);
 const { MOVES: MV1 } = await import(join(ROOT, 'src/data/moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src/data/moves2.mjs'));
 const MOVES = Object.assign({}, MV1, MOVES2);
@@ -47,8 +48,8 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
   catch (e) { checkOut = 'STALE: ' + (e.stdout || '') + (e.stderr || ''); }
   ok('A01 tables.json in sync with src/data (gen-tables --check)', checkOut.includes('tables.json OK'), checkOut.trim());
   const t = JSON.parse(readFileSync(join(ROOT, 'api/_lib/data/tables.json'), 'utf8'));
-  ok('A02 counts: species 163 (152+5 forms+5 species+1 Lugia, Stage O1), items 135 (130 + 4 Orange badge items + Winner\'s Trophy, Stage O2 content-count ripple), keepsakes 12, forms 202 (197+5)',
-    t.species.length === 163 && t.items.length === 135 && t.keepsakes.length === 12 && t.forms.length === 202,
+  ok('A02 counts: species 257 (163 + 94 Johto species, Stage J1 — supersedes the Stage O1 count), items 136 (135 + Sun Stone, Stage J1), keepsakes 12, forms 202 (197+5)',
+    t.species.length === 257 && t.items.length === 136 && t.keepsakes.length === 12 && t.forms.length === 202,
     JSON.stringify({ s: t.species.length, i: t.items.length, k: t.keepsakes.length, f: t.forms.length }));
   ok('A03 server tables carry every expansion id',
     [...FORM_IDS, ...NEW_IDS].every((id) => t.species.includes(id) && t.forms.includes(id) === FORM_IDS.includes(id))
@@ -91,8 +92,11 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
       return s.dexNo === c.dexNo && JSON.stringify(s.types) === JSON.stringify(c.types)
         && JSON.stringify(s.base) === JSON.stringify(c.base) && s.catchRate === c.catchRate
         && s.growth === c.growth && s.baseXp === c.baseXp; }));
-  ok('A11 no evolution entries on the new species (deliberate)',
-    NEW_IDS.every((id) => !SPECIES[id].evo && !SPECIES[id].evos));
+  ok('A11 guest evolutions (Stage J1 supersedes the O1 no-evo rule): togepi/marill/snubbull carry canonical-frame evos; donphan/hooh/lugia correctly have none',
+    SPECIES.togepi.evo?.to === 'togetic' && SPECIES.togepi.evo?.level === 25
+    && SPECIES.marill.evo?.to === 'azumarill' && SPECIES.marill.evo?.level === 18
+    && SPECIES.snubbull.evo?.to === 'granbull' && SPECIES.snubbull.evo?.level === 23
+    && ['donphan', 'hooh', 'lugia'].every((id) => !SPECIES[id].evo && !SPECIES[id].evos));
   ok('A12 every learnset move exists in the move table',
     [...FORM_IDS, ...NEW_IDS].every((id) => Object.values(SPECIES[id].learnset).flat().every((m) => MOVES[m])));
   ok('A13 Kanto diploma set unchanged: exactly 151 non-form species at dexNo 1-151 (partner excluded, as in the dex lists)',

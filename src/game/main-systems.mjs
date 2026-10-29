@@ -154,7 +154,7 @@ Object.assign(Game.prototype, {
       showTargets();
       return;
     }
-    if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone'].includes(id)) {
+    if (['firestone', 'waterstone', 'thunderstone', 'leafstone', 'moonstone', 'sunstone'].includes(id)) {
       const stoneTargets = g.state.party.filter((m) => {
         const sp = SPECIES[m.speciesId];
         const evos = sp.evos || (sp.evo ? [sp.evo] : []);

@@ -68,6 +68,7 @@ export const SPECIES = {
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9501,
     learnset: { 1: ['tackle', 'harden'], 8: ['rockthrow'] },
     flavor: 'A chain of boulders given will. The gym leader\u2019s ace.',
+    evo: { to: 'steelix', method: 'trade' },
   },
   bulbasaur: {
     id: 'bulbasaur', name: 'Bulbasaur', dexNo: 1, types: ['grass', 'poison'],

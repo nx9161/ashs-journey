@@ -17,6 +17,7 @@ function ok(name, cond, extra) {
 
 const { SPECIES } = await import(join(ROOT, 'src/data/species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src/data/species2.mjs'));
+const { SPECIES_JOHTO } = await import(join(ROOT, 'src/data/species3.mjs'));
 const { MOVES } = await import(join(ROOT, 'src/data/moves.mjs'));
 const { MOVES2 } = await import(join(ROOT, 'src/data/moves2.mjs'));
 const { ITEMS, TM_MOVES, HM_MOVES } = await import(join(ROOT, 'src/data/items.mjs'));
@@ -31,13 +32,13 @@ const { MAIN_QUESTS: QUESTS, LEGENDARY_ARCS, EVENTS } = await import(join(ROOT, 
 const F = await import(join(ROOT, 'src/engine/formulas.mjs'));
 const { KEYMAP, ACTIONS } = await import(join(ROOT, 'src/engine/input.mjs'));
 
-const ALL_SPECIES = { ...SPECIES, ...SPECIES2 };
+const ALL_SPECIES = { ...SPECIES, ...SPECIES2, ...SPECIES_JOHTO };
 const ALL_MOVES = { ...MOVES, ...MOVES2 };
 const ALL_MAPS = { ...MAPS, ...MAPS2, ...MAPS3, ...MAPS4 };
 const ALL_TRAINERS = { ...TRAINERS_BASE, ...TRAINERS, ...TRAINERS3, ...TRAINERS4 };
 
 // ---------- A. roster / data integrity ----------
-ok('roster: 151 Kanto species + partner + 5 forms + 6 National species (Cheat Shop expansion 2026-10-28 + Lugia, Stage O1 2026-10-29)', Object.keys(ALL_SPECIES).length === 163);
+ok('roster: 151 Kanto species + partner + 5 forms + 100 National species (Cheat Shop expansion 2026-10-28 + Lugia, Stage O1 2026-10-29; +94 Johto species, Stage J1 2026-10-29 — supersedes the 163 count)', Object.keys(ALL_SPECIES).length === 257);
 {
   const byDex = {};
   // Form entries share their base species' dexNo by design (like partner

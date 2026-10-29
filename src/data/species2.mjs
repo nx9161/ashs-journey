@@ -258,7 +258,7 @@ export const SPECIES2 = {
     catchRate: 90, growth: 'mediumfast', baseXp: 159, body: 'bird', spriteSeed: 4201,
     learnset: { 1: ['leechlife', 'supersonic', 'screech', 'bite'], 10: ['confuseray'], 15: ['wingattack'], 21: ['haze'] },
     flavor: 'It drinks its fill, then vanishes before feathers settle.',
-    tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
+    evo: { to: 'crobat', method: 'level', level: 40 }, tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   oddish: {
     id: 'oddish', name: 'Oddish', dexNo: 43, types: ['grass', 'poison'],
@@ -274,7 +274,11 @@ export const SPECIES2 = {
     catchRate: 120, growth: 'mediumslow', baseXp: 138, body: 'biped', spriteSeed: 4401,
     learnset: { 1: ['absorb', 'poisonpowder', 'stunspore', 'sleeppowder'], 24: ['acid'], 28: ['petaldance'], 38: ['solarbeam'] },
     flavor: 'Its drool smells like a swamp arguing with a flower shop.',
-    evo: { to: 'vileplume', method: 'stone', stone: 'leafstone' }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
+    evo: { to: 'vileplume', method: 'stone', stone: 'leafstone' },
+    evos: [
+      { to: 'vileplume', method: 'stone', stone: 'leafstone' },
+      { to: 'bellossom', method: 'stone', stone: 'sunstone' },
+    ], tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   vileplume: {
     id: 'vileplume', name: 'Vileplume', dexNo: 45, types: ['grass', 'poison'],
@@ -402,7 +406,11 @@ export const SPECIES2 = {
     catchRate: 120, growth: 'mediumslow', baseXp: 135, body: 'biped', spriteSeed: 6101,
     learnset: { 1: ['bubble', 'hypnosis', 'watergun'], 19: ['watergun'], 26: ['doubleslap'], 33: ['bodyslam'], 41: ['amnesia'], 49: ['hydropump'] },
     flavor: 'Watch its spiral too long and the room starts to tilt.',
-    evo: { to: 'poliwrath', method: 'stone', stone: 'waterstone' }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
+    evo: { to: 'poliwrath', method: 'stone', stone: 'waterstone' },
+    evos: [
+      { to: 'poliwrath', method: 'stone', stone: 'waterstone' },
+      { to: 'politoed', method: 'trade' },
+    ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 46, 50, 103, 104],
   },
   poliwrath: {
     id: 'poliwrath', name: 'Poliwrath', dexNo: 62, types: ['water', 'fighting'],
@@ -538,7 +546,11 @@ export const SPECIES2 = {
     catchRate: 190, growth: 'mediumfast', baseXp: 99, body: 'quad', spriteSeed: 7901,
     learnset: { 1: ['confusion', 'disable'], 18: ['growl'], 22: ['watergun'], 27: ['headbutt'], 33: ['amnesia'], 40: ['psychic'] },
     flavor: 'It fishes with its tail and forgets why it sat down.',
-    evo: { to: 'slowbro', method: 'level', level: 37 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
+    evo: { to: 'slowbro', method: 'level', level: 37 },
+    evos: [
+      { to: 'slowbro', method: 'level', level: 37 },
+      { to: 'slowking', method: 'trade' },
+    ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   slowbro: {
     id: 'slowbro', name: 'Slowbro', dexNo: 80, types: ['water', 'psychic'],
@@ -802,7 +814,7 @@ export const SPECIES2 = {
     catchRate: 30, growth: 'fast', baseXp: 395, body: 'blob', spriteSeed: 11301,
     learnset: { 1: ['pound', 'doubleslap'], 8: ['sing'], 16: ['growl'], 23: ['minimize'], 30: ['defensecurl'], 38: ['lightscreen'], 44: ['eggbomb'], 50: ['softboiled'] },
     flavor: 'It shares its egg with the hurt and the hungry alike.',
-    tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 103, 105],
+    evo: { to: 'blissey', method: 'level', level: 40 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 30, 31, 32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 103, 105],
   },
   tangela: {
     id: 'tangela', name: 'Tangela', dexNo: 114, types: ['grass'],
@@ -834,7 +846,7 @@ export const SPECIES2 = {
     catchRate: 75, growth: 'mediumfast', baseXp: 154, body: 'fish', spriteSeed: 11701,
     learnset: { 1: ['bubble', 'smokescreen', 'leer', 'watergun'], 27: ['watergun'], 35: ['agility'], 44: ['hydropump'] },
     flavor: 'Its spines carry venom. Even its shed skin stays sharp.',
-    tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 39, 44, 50, 103],
+    evo: { to: 'kingdra', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 34, 39, 44, 50, 103],
   },
   goldeen: {
     id: 'goldeen', name: 'Goldeen', dexNo: 118, types: ['water'],
@@ -882,7 +894,7 @@ export const SPECIES2 = {
     catchRate: 45, growth: 'mediumfast', baseXp: 100, body: 'biped', spriteSeed: 12301,
     learnset: { 1: ['quickattack'], 17: ['leer'], 20: ['focusenergy'], 24: ['doubleslap'], 29: ['slash'], 39: ['swordsdance'], 44: ['agility'], 50: ['wingattack'] },
     flavor: 'Its scythes part tall grass and arguments with equal ease.',
-    tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
+    evo: { to: 'scizor', method: 'trade' }, tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   jynx: {
     id: 'jynx', name: 'Jynx', dexNo: 124, types: ['ice', 'psychic'],
@@ -966,6 +978,8 @@ export const SPECIES2 = {
       { to: 'vaporeon', method: 'stone', stone: 'waterstone' },
       { to: 'jolteon', method: 'stone', stone: 'thunderstone' },
       { to: 'flareon', method: 'stone', stone: 'firestone' },
+      { to: 'espeon', method: 'stone', stone: 'sunstone' },
+      { to: 'umbreon', method: 'stone', stone: 'moonstone' },
     ],
     tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 39, 44, 50],
   },
@@ -999,7 +1013,7 @@ export const SPECIES2 = {
     catchRate: 45, growth: 'mediumfast', baseXp: 79, body: 'blob', spriteSeed: 13701,
     learnset: { 1: ['tackle', 'psybeam', 'conversion'], 12: ['disable'], 18: ['agility'], 24: ['recover'], 30: ['triattack'], 36: ['psychic'] },
     flavor: 'Built from code and corners. It prefers cyberspace weather.',
-    tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 105],
+    evo: { to: 'porygon2', method: 'trade' }, tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 29, 30, 31, 32, 33, 34, 39, 42, 44, 45, 46, 49, 50, 105],
   },
   omanyte: {
     id: 'omanyte', name: 'Omanyte', dexNo: 138, types: ['rock', 'water'],
@@ -1170,14 +1184,16 @@ export const SPECIES2 = {
   // diploma's 151 cannot move). Canon facts (types/base stats/catch
   // rate/growth/base XP) verified against PokeAPI at build time;
   // learnsets restricted to this game's move table; flavor written for
-  // this project. NO evolution entries, deliberately: their evolved
-  // forms are out of scope, so claims arrive as themselves.
+  // this project. (Stage J1, Arc 2: togepi/marill/snubbull gained their
+  // canonical-frame evolution entries below — ruling 2; donphan/hooh/
+  // lugia correctly have none.)
   togepi: {
     id: 'togepi', name: 'Togepi', dexNo: 175, types: ['fairy'],
     base: { hp: 35, atk: 20, def: 65, spa: 40, spd: 65, spe: 20 },
     catchRate: 190, growth: 'fast', baseXp: 49, body: 'biped', spriteSeed: 17501,
     learnset: { 1: ['pound', 'growl'], 9: ['metronome'], 17: ['doubleedge'] },
     flavor: 'It totters after whoever makes it happiest, shell and all.',
+    evo: { to: 'togetic', method: 'level', level: 25 },
   },
   marill: {
     id: 'marill', name: 'Marill', dexNo: 183, types: ['water', 'fairy'],
@@ -1185,6 +1201,7 @@ export const SPECIES2 = {
     catchRate: 190, growth: 'fast', baseXp: 88, body: 'quad', spriteSeed: 18301,
     learnset: { 1: ['tackle', 'tailwhip', 'watergun'], 6: ['bubblebeam'], 10: ['defensecurl'], 20: ['doubleedge'], 30: ['hydropump'] },
     flavor: 'Its round tail bobs on the water like a tiny blue buoy.',
+    evo: { to: 'azumarill', method: 'level', level: 18 },
   },
   snubbull: {
     id: 'snubbull', name: 'Snubbull', dexNo: 209, types: ['fairy'],
@@ -1192,6 +1209,7 @@ export const SPECIES2 = {
     catchRate: 190, growth: 'fast', baseXp: 60, body: 'quad', spriteSeed: 20901,
     learnset: { 1: ['tackle', 'tailwhip', 'growl'], 7: ['bite'], 13: ['lick'], 19: ['headbutt'], 31: ['rage'], 37: ['takedown'] },
     flavor: 'All scowl and no bite — it would rather be carried home.',
+    evo: { to: 'granbull', method: 'level', level: 23 },
   },
   donphan: {
     id: 'donphan', name: 'Donphan', dexNo: 232, types: ['ground'],
