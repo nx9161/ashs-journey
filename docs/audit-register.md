@@ -8117,3 +8117,115 @@ change beyond the regenerated tables the validator suite pins).
   build (frozen retired edition; its budget reading is meaningless
   until the parent rebuilds that target). Untouched by this mission,
   consistent with the J7 leftover of the same name.
+
+## Arc 3 Stage H2a — Species art, FIRST half (dex 252–319) (2026-10-29)
+
+### 1. What landed
+
+- **68 species authored** (dex 252–319, treecko → sharpedo): treecko,
+  grovyle, sceptile, torchic, combusken, blaziken, mudkip, marshtomp,
+  swampert, poochyena, mightyena, zigzagoon, linoone, wurmple, silcoon,
+  beautifly, cascoon, dustox, lotad, lombre, ludicolo, seedot, nuzleaf,
+  shiftry, taillow, swellow, wingull, pelipper, ralts, kirlia,
+  gardevoir, surskit, masquerain, shroomish, breloom, slakoth,
+  vigoroth, slaking, nincada, ninjask, shedinja, whismur, loudred,
+  exploud, makuhita, hariyama, azurill, nosepass, skitty, delcatty,
+  sableye, mawile, aron, lairon, aggron, meditite, medicham,
+  electrike, manectric, plusle, minun, volbeat, illumise, roselia,
+  gulpin, swalot, carvanha, sharpedo.
+- **136 full frames** (`<id>-front` + `<id>-back` .pix, 64×64, original
+  pixel work in the Platinum language — NW-light shading, true rear
+  views: no eyes, back-specific markings: sceptile's seed spheres,
+  swampert's fan tail, mawile's great jaw dominating the rear,
+  shedinja's hollow crack, exploud's rear pipes). Backs are NOT
+  mirrors: front/back row data differs for all 68 (census-checked).
+- **136 bob frames** reach the shipped set via the pipeline itself:
+  front-bobs by build-art's marked derivation, back-bobs by the W2
+  shift-delta mechanism — no hand files, exactly as Johto species.
+- **18 accent deltas** for the 9 Hoenn starter-line species (treecko…
+  swampert): front-accent = blink (recolor-only), back-accent =
+  crest/fin twitch recolor, as .deltapix over the new bases — the J2a
+  starter-accent mechanism, unchanged.
+- Authoring workflow: generator script
+  `~/workspace/ashs-journey-qa/arc3-etl/gen-h2a-art.mjs` composes
+  per-species authored silhouettes/palettes/markings into .pix
+  sources; the repo's own build-art validation is the gate (palette
+  cap, outline, margins, orphans). 14 orphan pixels across 7 species
+  (thin cheek-spike / ear / forked-tail tips) were fixed in the art,
+  never in the validator; three visual fixes after contact-sheet
+  review: silcoon's eye was painted under its own silk patch
+  (reordered), blaziken's torso now carries its red body colour
+  (cream is the chest/head hair only), surskit scaled up a step.
+
+### 2. Pipeline change (on the record)
+
+- **Art-data ceiling raised 5,500,000 → 7,100,000 B** in
+  `assets/sprites/tools/build-art.mjs` (the only enforcement site).
+  Forced by measured arithmetic under the ratified H0 monolith
+  decision: H2a alone takes art-data to 5,904,995 B, already past the
+  old cap, with zero validator errors. The new cap is sized to the
+  H0 Hoenn-close projection (4,914,208 + 138 × 14,483 = 6,912,862 B,
+  plus ~70 KB of H3 tile art) with no further headroom banked;
+  `budgets.json`'s 12,582,912 B hard gate is unchanged and still
+  governs the shipped bundles (all budgets pass, §4). Arc 4
+  re-measures before Sinnoh art per the H0 re-open triggers.
+
+### 3. Census (gate)
+
+- Script: `~/workspace/ashs-journey-qa/arc3-etl/census-h2a.mjs`
+  (on the census-j2a pattern).
+- Every registry entry dex 1–319 (**325 entries** incl. partner +
+  forms) has front+back keys in art-data.mjs: **missing 0, blanks
+  0**. The 68 new species: front-bob + back-bob present for all
+  (**missing 0**); starter accents present (**missing 0**); front ≠
+  back for all 68. **Zero forge fallbacks for dex 252–319.**
+- Per-sprite stats for the 136 new frames: painted pixels
+  **616–1,391** (median 1,059; Johto J2a floor was 437), palette
+  sizes **5–11** colours (median 8; cap 32) — at or above the Johto
+  art's observed palette-depth range (J2a 5–11, J2b 4–11).
+- **Contact sheets:** `~/workspace/ashs-journey-qa/arc3-etl/census-h2a-contact.png`
+  (fronts, 1536×1854, 68 labelled at 3×) +
+  `census-h2a-contact-backs.png` (backs, same format), visually
+  inspected by the implementer: silhouettes nameable at sheet scale
+  with the §5 exceptions flagged.
+
+### 4. Battery at this commit
+
+- build-art clean and **deterministic** (two runs → byte-identical
+  art-data.mjs + species atlases). 3,085 sprites total, 324 derived
+  bobs, 647 delta frames.
+- fidelity-checks **35/35** · campaign-smoke **24/24** ·
+  battle-model-checks **45/45** · qa-changed-flows failures exactly
+  **{b2, d9}** · qa-slice failures exactly **{s6, l8}** ·
+  rejuv-phase2 failures exactly **{A09, C01}** (named inheritances,
+  not grown) · budgets-check **all gates pass** (vercel static
+  **8,343,692 B ≤ 12,582,912**).
+- Fresh build (vercel + guest targets): public/game.js
+  **8,252,132 B** (H1 close: 7,261,345; **Δ +990,787 B = 14,570 B
+  per species** vs the H0 measured art unit of 14,483 B/species —
+  +0.6%, on projection; art-data 4,914,208 → 5,904,995 B, the same
+  delta). H0 re-open trigger (1) is Hoenn-CLOSE static >
+  10,100,000 B; H2a alone does not approach it and the Hoenn-close
+  projection (~9.87 MB) is unchanged. **personal/ byte-identical**
+  (sha256 f434ba63…, restored from HEAD after verify-slice's
+  rebuild; built targets were vercel+guest only).
+
+### 5. Leftovers, named
+
+- **Hardest silhouettes at 64×64** (flagged for the owner's eye on
+  the contact sheet): mawile (the rear jaw worn behind the head
+  reads as a dark mass on the front view), lairon (armour plates
+  flatten the side profile toward a table read; aron shares the
+  family risk to a lesser degree), nincada (pale wing shells read
+  fluffy against the cream body), wurmple (back spikes read as
+  candles at sheet scale). All pass silhouette naming on the sheet;
+  first candidates if a polish pass is ordered.
+- **Silcoon/cascoon** are near-plain cocoons by canon design; the
+  silk-strand + peeking-eye treatment is the honest read at this
+  size.
+- Accent deltas for non-starter Hoenn species are NOT in this
+  stage's brief (Johto coverage is likewise starter/marquee-only);
+  fronts/backs/bobs are complete for the range.
+- **H2b (dex 320–386 + 3 Deoxys formes)** remains: ~70 more entries
+  at this stage's measured unit cost ≈ +1.02 MB art, landing
+  art-data ≈ 6.93 MB — inside the §2 ceiling as sized.
