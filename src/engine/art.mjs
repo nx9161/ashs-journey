@@ -1263,7 +1263,10 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
   // the Orange Islands, so this branch is region-scoped in effect.
   const pushEdgeDirtVsPath = (layers) => {
     if (!cache.edgeDirt) return;
-    const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
+    // psand kinds are path material wearing its sand edge — the dirt
+    // grammar treats them as path neighbours too.
+    const isPathMat = (k) => k === 'path' || (k != null && k.startsWith('psand-'));
+    const p = { n: isPathMat(nb.n), e: isPathMat(nb.e), s: isPathMat(nb.s), w: isPathMat(nb.w) };
     const used = new Set();
     for (const c of ['ne', 'se', 'sw', 'nw']) {
       if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
