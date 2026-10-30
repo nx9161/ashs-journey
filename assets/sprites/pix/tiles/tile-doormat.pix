@@ -1,25 +1,26 @@
-# Readability Round 2 (lever 1, QA-fix v2): the shared doormat — a flat
-# wide slab with a single gold stripe (v1's concentric rings read as
-# targets). Resolver-drawn south of every door kind + interior exits.
+# Perfection Pass Stage 1 (W3): the shared door step — a light warm-grey
+# STONE STEP (dark edge outline, centre seam), resolver-drawn south of
+# every door kind. Reads as a step, not a rug/target.
 PIX tile-doormat 16 16
 ................
 ................
+................
+................
 ..kkkkkkkkkkkk..
-..krrrrrrrrrrk..
-..krrrrrrrrrrk..
-..krrrrrrrrrrk..
-..kggggggggggk..
-..krrrrrrrrrrk..
-..krrrrrrrrrrk..
+..khhhhhhhhhhk..
+..kffffffffffk..
+..kfffffmffffk..
+..kfffffmffffk..
+..kfffffmffffk..
+..kmmmmmmmmmmk..
 ..kkkkkkkkkkkk..
 ..ssssssssssss..
 ................
 ................
 ................
-................
-................
 PAL
-k #202028 outline
-r #a02828 mat-red
-g #ffd873 mat-gold
+k #38332c step-edge
+f #bcb3a1 step-face
+h #cdc4b0 step-highlight
+m #9c937f step-seam
 s #4a4a3a contact-shadow

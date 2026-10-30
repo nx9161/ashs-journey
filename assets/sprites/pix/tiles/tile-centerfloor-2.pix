@@ -1,22 +1,22 @@
 # Wave 5a: Pokemon Center floor v2 — rose check speckle
 PIX tile-centerfloor-2 16 16
-bbbbbbbbbbbbbbbb
-baaaaaaabaaaaaac
-baaaacaabaaaaaab
-baaaaaaabaaaaaab
-baaaaaaabaaacaab
-baaaaaaabaabaaab
-baaaaaaabaaaaaab
-baacaaaabaaaaaab
-bbbbbbbbbbcbbbbb
-baaaaaaabaaaaaab
-baaaabaabaaaaaab
-baaaaaaacaaaaaab
-baaaaaaabaaaaaab
-baaaaaaabaaaacab
-baaaaacabaaaaaab
-bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaacaaaaaaa
+aaaaaaaaacaaaaaa
+acaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aaaaacaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #dcc7bc center-floor
-b #cea1aa center-tile-line
-c #cea1aa center-check
+a #e6dbc0 center-floor
+b #d9caa9 center-tile-line
+c #ddd0b0 center-check

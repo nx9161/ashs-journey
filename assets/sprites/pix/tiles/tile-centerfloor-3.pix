@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 centerfloor variant 3 — bold checker (diff>=80px)
 PIX tile-centerfloor-3 16 16
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
-cccccccccccccccc
+aaacaaaaaaaaaaaa
+aaaaaaaaaacaaaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaacaa
+aaaaaaaaaaaaaaca
+aaaaaacaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaacaaaaaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #dcc4bc centerfloor-floor
-b #cea1ae centerfloor-line
-c #d5b8ae centerfloor-alt
-d #c19aa5 centerfloor-alt2
+a #ebdfc6 centerfloor-floor
+b #d9caa9 centerfloor-line
+c #ddd0b0 centerfloor-alt
+d #d5c6a4 centerfloor-alt2

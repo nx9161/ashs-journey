@@ -20,11 +20,11 @@ PAL
 w #b99b74 wall-mid
 l #cfae83 wall-light
 s #a18461 wall-shadow
-t #71523d trim
+t #1f3252 trim
 g #d1bc88 window-lit
 u #476faa window-glass
 h #7097c7 glass-shine
 Z #3f3f49 open-dark
 F #f5f0dc door-frame
 Q #202028 door-frame-dark
-% #a02828 door-threshold
+% #e3dcc4 door-threshold

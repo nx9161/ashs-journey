@@ -1,26 +1,26 @@
 # Premium+ W5: TX-2 celadon ground tg — second accent tone
 PIX tile-tg-celadon 16 16
-ggggddzzddgggggg
-ggggggggdggggggg
-ggggggddgddgaadd
-ggggggddgggggadd
-zzggggggggggggdd
-gggggaagggggggdd
-gggggzzggggggggg
-aagggggggggggggg
-agggddddggggggaa
-aaggddddggggddgg
-ggggggaagddggggg
+gggggggggggggggd
+gggggggggggggggd
+gggagggggggggagd
+gggggggggggggggd
+ggggggggggaggggd
+gggggggggggggggd
+gggggggggagggggd
+ggaggggggggggggd
 gggggggggggggggg
-ggddagaaggddzzaa
-ggaaagggggddzzgg
-gggdggzzggggddgg
-ggddggggggggddgg
+ggggggaggggggggg
+gggggggggggggggg
+ggggggggggggaggg
+ggggaggggggggggg
+gggggggggggggggg
+gggggggggggggggg
+dddddddddddddddd
 PAL
-g #63a483 celadon-ground
-m #569978 ground-mid
-l #70b18f ground-light
-d #49896a ground-dark
-a #b9dca8 ground-accent
-x #63a49d ground-shift
-z #a8dcb6 ground-accent-2
+g #a79b7d celadon-ground
+m #a79b7d ground-mid
+l #b3a789 ground-light
+d #978a6c ground-dark
+a #b3a789 ground-accent
+x #978a6c ground-shift
+z #b3a789 ground-accent-2

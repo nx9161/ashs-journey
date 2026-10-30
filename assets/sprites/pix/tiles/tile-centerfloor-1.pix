@@ -1,22 +1,22 @@
 # Wave 5a: Pokemon Center floor v1 — cream-rose tile
 PIX tile-centerfloor-1 16 16
-bbbbbbbbbbbbbbbb
-baaaaaaabaaaaaab
-baaaaaaabaacaaab
-bacaaaaabaaaaaab
-baaabaaabaaaaaab
-baaaaaacbaaaaaab
-baaaaaaabaaaaacb
-baaaaaaabaaaaaab
-bcbbbbbbbbbbbbbb
-baaaaaaabaaaacab
-baaaaaaabaaaaaab
-baaaaaaabaaaaaab
-baaacaaabaaabaab
-baaaaaaabaaaaaab
-baaaaaaabcaaaaab
-bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaacaaaaaaaaaaa
+aaaaaaaaaaaacaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aaaaaaaaaaaaaaaa
+aaaaaaaacaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaacaaaaaa
+caaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaacaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #dcc4bc center-floor
-b #cea1ae center-tile-line
-c #c1af86 center-speckle
+a #e9dec8 center-floor
+b #d9caa9 center-tile-line
+c #ddd0b0 center-speckle

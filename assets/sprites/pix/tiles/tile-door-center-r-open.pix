@@ -21,11 +21,11 @@ w #c6d8e9 center-white
 l #e1d9ba center-cream
 s #a04141 center-red-dark
 r #bf5b5b center-red
-t #71523d trim
+t #1f3252 trim
 u #476faa window-glass
 h #7097c7 glass-shine
-g #5681bd door-glass
+g #263d63 door-glass
 Z #3f3f49 open-dark
 F #f5f0dc door-frame
 Q #202028 door-frame-dark
-% #a02828 door-threshold
+% #e3dcc4 door-threshold

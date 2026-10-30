@@ -20,10 +20,10 @@ PAL
 w #8b8b9b stone-mid
 l #b0b6c1 stone-light
 s #757585 stone-dark
-t #71523d trim
+t #1f3252 trim
 d #505b6b door-iron
 g #d1bc88 window-lit
 Z #3f3f49 open-dark
 F #f5f0dc door-frame
 Q #202028 door-frame-dark
-% #a02828 door-threshold
+% #e3dcc4 door-threshold
