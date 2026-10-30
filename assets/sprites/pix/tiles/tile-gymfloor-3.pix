@@ -3,22 +3,22 @@
 # capture-scale speckle calmed. Original W5 note follows.
 # Premium+ W5: TX-1 gymfloor variant 3 — bold checker (diff>=80px)
 PIX tile-gymfloor-3 16 16
-cccbcccccccbcccc
-cccbcccccccbcccc
-cccbcccccccbcccc
-bbbbccccbbbbcccc
-cccccccbcccccccb
-cccccccbcccccccb
-cccccccbcccccccb
-ccccbbbbccccbbbb
-cccbcccccccbcccc
-cccbcccccccbcccc
-cccbcccccccbcccc
-bbbbccccbbbbcccc
-cccccccbcccccccb
-cccccccbcccccccb
-cccccccbcccccccb
-ccccbbbbccccbbbb
+cccccccccccccccc
+cccccccccccccccc
+cccbcccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccbcccc
+cccccccccccccccc
+bbbbbbbbbbbbbbbb
+cccccccccccccccc
+cccccccccccccccc
+cccccccbcccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccbcccccccccccc
+cccccccccccccccc
+bbbbbbbbbbbbbbbb
 PAL
 a #b19c81 gymfloor-floor
 b #988b71 gymfloor-line

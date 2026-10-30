@@ -1,21 +1,21 @@
 # Wave 4: Silph Co. floor variant 1 — pale corporate tile grid.
 PIX tile-silphfloor-1 16 16
 mmmmmmmmmmmmmmmm
-cccccmcccccccccc
-cccccmcccccccccc
-cccecmcccccccccc
-cccccmcccccccccc
-cccccmcccccccccc
-cccccmcccccccccc
-cccccmcccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccecccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
 mmmmmmmmmmmmmmmm
-ccccccccccmccccc
-ccccccccccmccccc
-ccccccccccmceccc
-ccccccccccmccccc
-ccccccccccmccccc
-ccccccccccmccccc
-ccccccccccmccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccceccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
 PAL
 c #b2b6bd floor
 m #868698 floor-grout

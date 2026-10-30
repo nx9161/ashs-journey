@@ -1,20 +1,20 @@
 # Wave 5a: House floor v2 — wood planks
 PIX tile-housefloor-2 16 16
-aaabaaaaaaaaaaaa
-aaabaaaaaaaaaaaa
-aaabaaaaaaaaaaaa
-bbbbbbbbbbbbbbbb
-aaaaaaaaaaabaaaa
-aaaaaaaaaaabaaaa
-aaaaaaaaaaabaaaa
-bbbabbbbbbbbbbbb
-aaaaaaabaaaaaaaa
-aaaaaaabaaaaaaaa
-aaaaaaabaaaaaaaa
-bbbbbbbbabbbbbbb
-aaaaaaaaaaaaabaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaaaaabaa
+aaaaaaaaaaaaaaaa
+aaabaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaabaaaa
+aaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaabaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaabaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 PAL
 a #8b7a55 house-plank

@@ -1,20 +1,20 @@
 # Wave 5a: Mart floor v2 — pale sage tile
 PIX tile-martfloor-2 16 16
 bbbbbbbbbbbbbbbb
-baaaaaaabaaaaaac
-baaaacaabaaaaaab
-baaaaaaabaaaaaab
-baaaaaaabaaacaab
-baaaaaaabaaaaaab
-baaaaaaabaaaaaab
-baacaaaabaaaaaab
-bbbbbbbbbbcbbbbb
-baaaaaaabaaaaaab
-baaaaaaabaaaaaab
-baaaaaaacaaaaaab
-baaaaaaabaaaaaab
-baaaaaaabaaaacab
-baaaaacabaaaaaab
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaacaaaa
+aaaaaaaaacaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaacaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaacaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 PAL
 a #b9bdb2 mart-floor
