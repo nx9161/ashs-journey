@@ -2273,6 +2273,38 @@ G0_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 const G0_WALKABLE_CHARS = G0_KIND_DEFS.filter(([, c]) => c === 'facade').map(([k]) => G0_KIND_CHARS[k]);
+// ---- Perfection Pass Stage 2 Gate 2 (G2): beach transition kinds ----
+// Thirty new kinds continuing the block at idx 533..562 (G0 ends at
+// 532; idx 533..562 = U+2015..U+2032, verified free in TILE_CHARS and
+// unused by every map row game-wide). beach-<dir> is a tropgrass cell
+// whose <dir> edge(s) feather sand speckle (tile-beach-<dir>), placed
+// on tropgrass cells bordering sand; psand-<dir> is the same grammar
+// on the path side (tile-psand-<dir>). All are floor class (WALKABLE),
+// swapped 1:1 from tropgrass/path cells in the Orange Islands, so
+// walkable stays walkable and encounter eligibility is unchanged
+// (neither family is ',' / water / cavefloor).
+const G2_KIND_DEFS = [
+  ['beach-n', 'floor'], ['beach-s', 'floor'], ['beach-e', 'floor'], ['beach-w', 'floor'],
+  ['beach-ne', 'floor'], ['beach-nw', 'floor'], ['beach-se', 'floor'], ['beach-sw', 'floor'],
+  ['psand-n', 'floor'], ['psand-s', 'floor'], ['psand-e', 'floor'], ['psand-w', 'floor'],
+  ['psand-ne', 'floor'], ['psand-nw', 'floor'], ['psand-se', 'floor'], ['psand-sw', 'floor'],
+  // Multi-side completions (idx 549..562, U+2025..U+2032, verified free
+  // the same way): 1-wide district strips and islet cells touch sand on
+  // opposite / three / four sides — these kinds feather every named
+  // side, so no placed beach/psand cell keeps a raw sand edge.
+  ['beach-ns', 'floor'], ['beach-ew', 'floor'], ['beach-nse', 'floor'], ['beach-nsw', 'floor'],
+  ['beach-new', 'floor'], ['beach-sew', 'floor'], ['beach-nesw', 'floor'],
+  ['psand-ns', 'floor'], ['psand-ew', 'floor'], ['psand-nse', 'floor'], ['psand-nsw', 'floor'],
+  ['psand-new', 'floor'], ['psand-sew', 'floor'], ['psand-nesw', 'floor'],
+];
+const G2_KIND_CHARS = {};
+G2_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 533 + i);
+  G2_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const G2_KINDS = G2_KIND_DEFS.map(([k]) => k);
+const G2_WALKABLE_CHARS = G2_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => G2_KIND_CHARS[k]);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -84135,6 +84167,276 @@ const ART = {
     "BBBBBBBBBBBBAAAA",
     "BBBBBBBBBBBBAAAA",
   ] },
+  "tile-beach-e": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "abaaaaaaaaaaaaas",
+    "baabaaaaaaadaasa",
+    "aabaaaaaaaaaaada",
+    "aaeaaaaaaaadaatb",
+    "baabdbaaaaaaaavs",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaat",
+    "aaaeaeabeadabaas",
+    "aaaaaaaaaaaaatat",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaess",
+    "aaaaaaaaaaabaaaa",
+    "aaeadabaaaaeaaab",
+    "aeaeabbaaaaaaada",
+    "aaaaaaaaaaaaaaas",
+    "aaaaaaabaababbts",
+  ] },
+  "tile-beach-ew": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "sssaaaaaaaaaaaat",
+    "basbaaaaaaadasss",
+    "ttvaaaaaaaaaaadt",
+    "aaeaaaaaaaadaaab",
+    "taasdbaaaaaaaaaa",
+    "saaaaaaaadabaaat",
+    "tbbaaabdaaeadass",
+    "saaeaeabeadabaaa",
+    "ttaaaaaaaaaaasas",
+    "sttaabaabaaaasss",
+    "asasaaaaababatas",
+    "aaaaaaaaaaabaaaa",
+    "aaeadabaaaaeaaas",
+    "veseabbaaaaaaada",
+    "sattaaaaaaaaaass",
+    "ssaaaaabaababbav",
+  ] },
+  "tile-beach-n": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "asstatsststssvsa",
+    "bsavsasaatsdvssa",
+    "asbaasaaaaaaatda",
+    "aaeaaaasssadaaab",
+    "baabdbaaaaaaaaaa",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeaa",
+    "aaaaaaaaaaabaaaa",
+    "aaeadabaaaaeaaab",
+    "aeaeabbaaaaaaada",
+    "aaaaaaaaaaaaaaad",
+    "aaaaaaabaababbab",
+  ] },
+  "tile-beach-ne": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "abaaaaaaaasaaata",
+    "baabaaaaaaadaaat",
+    "aabaaaasaataaads",
+    "aaeaaaaaaaadaaab",
+    "baabdbaaaaaaaass",
+    "aaaaaaaaadabasav",
+    "abbaaabdaaeasaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeaa",
+    "aaaaaaaaaaabaaaa",
+    "aaeadabaaaaeaaab",
+    "aeaeabbaaaaaaada",
+    "aaaaaaaaaaaaaaad",
+    "aaaaaaabaababbab",
+  ] },
+  "tile-beach-nesw": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "absavssasasvsaaa",
+    "stabaaaaavvdasas",
+    "ssbaaaaavaasaadt",
+    "saeaaasaaaadaast",
+    "saabdbaaaaaaaaas",
+    "asaaaaaaadabaasa",
+    "abbaaabdaaeadaas",
+    "staeaeabeadabssa",
+    "asaaaaaaaaaaadsv",
+    "saaaabaabaaaaaaa",
+    "sasaaaaaababaeav",
+    "aaaaaaaaaaabaass",
+    "vaeadabaaaaeaaab",
+    "vvatasbsaaaasada",
+    "stsaataaaaatsaas",
+    "satsaaasssbabstb",
+  ] },
+  "tile-beach-new": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "assasaaasvaassss",
+    "saasaaastaadaaas",
+    "sabaaaaaataaaads",
+    "aseaaaasasadaaas",
+    "baabdbaaaaaaatss",
+    "saaaaaaaadabavaa",
+    "asbaaabdaaeadass",
+    "saseaeabeadabavs",
+    "tasaaaaaaaaaadas",
+    "aaaaabaabaaaataa",
+    "saaaaaaaababaeat",
+    "ssaaaaaaaaabaaas",
+    "aaeadabaaaaeasts",
+    "seseabbaaaaaaada",
+    "stssaaaaaaaaaaad",
+    "ssaaaaabaababbss",
+  ] },
+  "tile-beach-ns": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "ssasatsaatassstt",
+    "vaavaasaasavaaaa",
+    "vabaaaaaataaaada",
+    "aseaaaaaaaadaaab",
+    "baabdbaaaaaaaaaa",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeaa",
+    "aaaaaaaaaaabaaaa",
+    "aaeadabaaaaeaatb",
+    "aeaessvaaaaaaasa",
+    "ataasastataasaad",
+    "tasstaataattsbat",
+  ] },
+  "tile-beach-nse": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "sstssvvaassassas",
+    "bassaavatavdasat",
+    "aabaatsaassaaads",
+    "aaesaasaaaadaasb",
+    "baabdbaaaaaaaaat",
+    "aaaaaaaaadabaaat",
+    "abbaaabdaaeadass",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadst",
+    "aaaaabaabaaaaasa",
+    "aaaaaaaaababataa",
+    "aaaaaaaaaaabvaaa",
+    "saeadabaaaaeaaas",
+    "aeaeasbaaaaaaata",
+    "satsaastavaaaaat",
+    "svavstssaabsbbts",
+  ] },
+  "tile-beach-nsw": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "stasatsvtstssaat",
+    "ssabsaaaavvdaasa",
+    "aasaaaaaaaataads",
+    "aaetaaaaaaadsaab",
+    "bsabdbaaaaaaaaaa",
+    "atsaaaaaadabaaaa",
+    "tbbaaabdaaeadaab",
+    "taaeaeabeadabaaa",
+    "asaaaaaaaaaaadab",
+    "vvaaabaabaaaaaaa",
+    "saaaaaaaababaeaa",
+    "staaaaaaaaabaaaa",
+    "saeadasaaaaeaaas",
+    "aeaeabbaaaavatds",
+    "ssaatsaavasaassd",
+    "aasstsssstbsbstv",
+  ] },
+  "tile-beach-nw": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "avsasaaaaaaaaaaa",
+    "basbaaaaaaadaaaa",
+    "atbaaaasaaaaaada",
+    "sssaaaaaaaadaaab",
+    "baabdbaaaaaaaaaa",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeaa",
+    "aaaaaaaaaaabaaaa",
+    "aaeadabaaaaeaaab",
+    "aeaeabbaaaaaaada",
+    "aaaaaaaaaaaaaaad",
+    "aaaaaaabaababbab",
+  ] },
+  "tile-beach-s": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "abaaaaaaaaaaaaaa",
+    "baabaaaaaaadaaaa",
+    "aabaaaaaaaaaaada",
+    "aaeaaaaaaaadaaab",
+    "baabdbaaaaaaaaaa",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeaa",
+    "aaaaaaaaaaabaaaa",
+    "aatadabaaaasaaab",
+    "aeaeasttasaaaada",
+    "avataaasaaasaatd",
+    "stsvtassassassat",
+  ] },
+  "tile-beach-se": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "abaaaaaaaaaaaaaa",
+    "baabaaaaaaadaaaa",
+    "aabaaaaaaaaaaada",
+    "aaeaaaaaaaadaaab",
+    "baabdbaaaaaaaaaa",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeas",
+    "aaaaaaaaaaabaaat",
+    "aaeadabaaaaeaaas",
+    "aeaeabbaaassaadv",
+    "aaaaaaaaaasaasad",
+    "aaaaaaasvasabbss",
+  ] },
+  "tile-beach-sew": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "abaaaaaaaaaaaaaa",
+    "batbaaaaaaadaaat",
+    "sassaaaaaaaaaasa",
+    "aaeaaaaaaaadaaav",
+    "baabdbaaaaaaataa",
+    "saaaaaaaadabaass",
+    "abbaaabdaaeadavs",
+    "svaeaeabeadabsas",
+    "vasaaaaaaaaaadss",
+    "sataabaabaaaaaaa",
+    "aaaaaaaaababaesa",
+    "asaaaaaaaaabaass",
+    "saeadasaaaaeaaat",
+    "staeabbaaaaaassa",
+    "tattsaaaaavtaasd",
+    "stssssabatbabssb",
+  ] },
+  "tile-beach-sw": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "abaaaaaaaaaaaaaa",
+    "baabaaaaaaadaaaa",
+    "aabaaaaaaaaaaada",
+    "aaeaaaaaaaadaaab",
+    "baabdbaaaaaaaaaa",
+    "aaaaaaaaadabaaaa",
+    "abbaaabdaaeadaab",
+    "aaaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "aaaaabaabaaaaaaa",
+    "aaaaaaaaababaeaa",
+    "staaaaaaaaabaaaa",
+    "aaeattbaaaaeaaab",
+    "teaeabsaaaaaaada",
+    "asvasaaaaaaaaaad",
+    "tvaaaaabaababbab",
+  ] },
+  "tile-beach-w": { w: 16, h: 16, pal: {"a":"#5fa064","b":"#4c8b4a","c":"#729e66","d":"#7fb273","e":"#458650","s":"#c6b388","t":"#d4c69c","v":"#ded0ad"}, rows: [
+    "abaaaaaaaaaaaaaa",
+    "sssbaaaaaaadaaaa",
+    "aabaaaaaaaaaaada",
+    "aaeaaaaaaaadaaab",
+    "btabdbaaaaaaaaaa",
+    "tsaaaaaaadabaaaa",
+    "vbbsaabdaaeadaab",
+    "saaeaeabeadabaaa",
+    "aaaaaaaaaaaaadab",
+    "asaaabaabaaaaaaa",
+    "staaaaaaababaeaa",
+    "asaaaaaaaaabaaaa",
+    "stesdabaaaaeaaab",
+    "asteabbaaaaaaada",
+    "atsaaaaaaaaaaaad",
+    "vaaaaaabaababbab",
+  ] },
   "tile-blend-arch": { w: 16, h: 16, pal: {"S":"#96969f","s":"#7c7c87","T":"#a5abb7","P":"#c6b388"}, rows: [
     "................",
     "....SS..........",
@@ -90593,7 +90895,7 @@ const ART = {
     ".....cccccc.....",
     "................",
   ] },
-  "tile-prop-palm": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","l":"#649d5b","k":"#71523d","w":"#846a4e","n":"#8e7556","s":"#4e7e44","F":"#87b181","Q":"#4c7246"}, rows: [
+  "tile-prop-palm": { w: 16, h: 16, pal: {"t":"#53854b","u":"#467340","l":"#87b181","k":"#71523d","w":"#846a4e","n":"#8e7556","s":"#4e7e44","F":"#87b181","Q":"#4c7246"}, rows: [
     "................",
     "...Fw......wF...",
     "...t.l....l.t...",
@@ -92225,6 +92527,276 @@ const ART = {
     "..CC........CC..",
     "................",
   ] },
+  "tile-psand-e": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "pppppppppppppppp",
+    "ppppppppppppvtut",
+    "pppppppppppppptu",
+    "pppbpppppppppppv",
+    "ppbbbppppppppptp",
+    "bbbbppbbbpbbbppt",
+    "pppppppppppppppp",
+    "pppppppppppppupp",
+    "pppppppppppppppt",
+    "ppppbppppppppupu",
+    "pppbbbppppppptvu",
+    "pppbbbpbbbpbbtpt",
+    "pppppppppppppptt",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+  ] },
+  "tile-psand-ew": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "tppppppppppppput",
+    "tpppppppppppppvt",
+    "vppppppppppptptt",
+    "tppbpppppppppppp",
+    "ppbbbppppppppptp",
+    "utbbppbbbpbbbpup",
+    "pptppppppppppppp",
+    "ptpppppppppppppp",
+    "pppppppppppppppt",
+    "ppupbppppppppppp",
+    "upubbbpppppppptu",
+    "vtpbbbpbbbpbbtpv",
+    "pppppppppppppppu",
+    "vppppppppppppppu",
+    "uupppppppppppppp",
+    "vvppppppppppptpt",
+  ] },
+  "tile-psand-n": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "vtppptptptptpppt",
+    "ppppttupttpptppp",
+    "pppvtppppppppppp",
+    "tppbpppupppppppp",
+    "ppbbbppppppppppp",
+    "bbbbppbbbpbbbppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppppppp",
+    "pppbbbpbbbpbbbpp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+  ] },
+  "tile-psand-ne": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "ppppppppppppttpp",
+    "pppppppppvpppppp",
+    "pppppppppppptppp",
+    "pppbpppppppppppp",
+    "ppbbbppppppppppv",
+    "bbbbppbbbpbbbptp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppppppp",
+    "pppbbbpbbbpbbbpp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+  ] },
+  "tile-psand-nesw": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "tpvttptptppptptt",
+    "tppvvvpptpppppvu",
+    "vppupppppppppppp",
+    "uppbpppppppppptu",
+    "tvbbbpppppppptpu",
+    "ttbvppbbbpbbbppp",
+    "pppppppppppppptv",
+    "tppppppppppppvpu",
+    "pppppppppppppppt",
+    "tpppbppppppppppp",
+    "vtpbbbpppppppppt",
+    "tppbbbpbbbpbbvtt",
+    "pttppppptppppppp",
+    "tvppptpppppppptv",
+    "putppppppvttpppt",
+    "pvpttttpppttpvvv",
+  ] },
+  "tile-psand-new": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "pppttvptpptttppp",
+    "ppppvpvppvpptvpt",
+    "vppppppppppvpppv",
+    "ttpbpptpptppppvp",
+    "ppbbbppppppppppt",
+    "vbtuppbbbpbbtvpv",
+    "uppppppppppppppp",
+    "pppvpppppppppppv",
+    "ppppppppppppptpv",
+    "puppbppppppppppp",
+    "pppbbbpppppppptp",
+    "tppbbbpbbbpbbbpp",
+    "tppppppppppppppv",
+    "ptpppppppppppppt",
+    "tptppppppppppppv",
+    "vptppppppppppppp",
+  ] },
+  "tile-psand-ns": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "tptpuptvptutvtpt",
+    "tppuptppvtpppttv",
+    "puptppupupvttttp",
+    "pppbptppppvppvpp",
+    "ppbbbppppppppppp",
+    "bbbbppbbbpbbbppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppppppp",
+    "pppbbbpbbbpbbbpp",
+    "ppppppppppppptpp",
+    "tpptvppvupvtptpt",
+    "pvppuppppptpptpv",
+    "tvttvtppptpptppt",
+  ] },
+  "tile-psand-nse": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "uttuppvpvpttpppv",
+    "ppptuppppttttptp",
+    "vppppppppvpppppt",
+    "pppbpptppppppptp",
+    "ppbbbppppppptppp",
+    "bbbbppbbbpbbbptu",
+    "pppppppppppppvpp",
+    "pppppppppppppppt",
+    "ppppppppppppppvp",
+    "ppppbppppppppptt",
+    "pppbbbpppppppppp",
+    "pppbbbpbbbpbbbpt",
+    "pppppppppppvpppu",
+    "pppppppppuvppppt",
+    "tutvtptptppppptt",
+    "vpvtptpppttptptv",
+  ] },
+  "tile-psand-nsw": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "ttpupuptvptvpvpt",
+    "vptppppptppppppp",
+    "tppptppptppppupp",
+    "pppbpppppppppppp",
+    "tpbbbppppppppppp",
+    "tubbppbbbpbbbppp",
+    "tvpppppppppppppp",
+    "pppppppppppppppp",
+    "ttpppppppppppppp",
+    "ppttbppppppppppp",
+    "vvpbbbpppppppppp",
+    "ptpbbbpbbbpbbbpp",
+    "ptpppppvpppppppp",
+    "utppppppppvpptpt",
+    "tpptpvptppppptpp",
+    "vptvppuppvptputp",
+  ] },
+  "tile-psand-nw": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "puptpvpppppppppp",
+    "pppppppppppppppp",
+    "tpptppppvppppppp",
+    "tvpbpppppppppppp",
+    "tpbbbppppppppppp",
+    "bbtbppbbbpbbbppp",
+    "uppppppppppppppp",
+    "ptpppppppppppppp",
+    "pppppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppppppp",
+    "pppbbbpbbbpbbbpp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+  ] },
+  "tile-psand-s": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppbpppppppppppp",
+    "ppbbbppppppppppp",
+    "bbbbppbbbpbbbppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppppppp",
+    "pppbbbpbbbpbbbpp",
+    "pppppppppppppppp",
+    "ppptpppuptpppppp",
+    "pptppppuppppvppp",
+    "ttvtvtptvtppvptp",
+  ] },
+  "tile-psand-se": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppbpppppppppppp",
+    "ppbbbppppppppppp",
+    "bbbbppbbbpbbbppp",
+    "pppppppppppppppp",
+    "ppppppppppppppvp",
+    "pppppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppptppp",
+    "pppbbbpbbbpbbupt",
+    "ppppppppppppppvp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ppppppppupuptppp",
+  ] },
+  "tile-psand-sew": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "vppppppppppppppt",
+    "vttppppppppptvpt",
+    "vppppppppppppppt",
+    "pvpbppppppppppvt",
+    "ppbbbppppppppvpu",
+    "ttbbppbbbpbbbppp",
+    "tpptpppppppppptt",
+    "ppppppppppppppup",
+    "vttppppppppppppu",
+    "tpppbppppppppvpp",
+    "pppbbbppppppppvp",
+    "tvpubbpbbbpbbttt",
+    "upppppppppupppup",
+    "vttppppppvpppppt",
+    "pvvpuvtpvtpppppt",
+    "tpppptpttpttpttv",
+  ] },
+  "tile-psand-sw": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "pppbpppppppppppp",
+    "ppbbbppppppppppp",
+    "bbbbppbbbpbbbppp",
+    "pppppppppppppppp",
+    "pppppppppppppppp",
+    "ptpppppppppppppp",
+    "ppppbppppppppppp",
+    "pppbbbpppppppppp",
+    "pppbbbpbbbpbbbpp",
+    "pppppppupppppppp",
+    "ttpppppppppppppp",
+    "ptppppppuppppppp",
+    "uppppupppppppppp",
+  ] },
+  "tile-psand-w": { w: 16, h: 16, pal: {"p":"#c6b388","q":"#b4a17e","b":"#a69274","n":"#d7c699","k":"#a0876c","r":"#71523d","t":"#d4c69c","v":"#ded0ad","u":"#bdab85"}, rows: [
+    "ptpppppppppppppp",
+    "vvpppppppppppppp",
+    "pppppppppppppppp",
+    "uputpppppppppppp",
+    "pptbbppppppppppp",
+    "tbbbppbbbpbbbppp",
+    "vppppppppppppppp",
+    "upuppppppppppppp",
+    "tppppppppppppppp",
+    "utppbppppppppppp",
+    "ptpbbbpppppppppp",
+    "ttvbbbpbbbpbbbpp",
+    "vppppppppppppppp",
+    "pppppppppppppppp",
+    "vppppppppppppppp",
+    "uppppppppppppppp",
+  ] },
   "tile-rock-2": { w: 16, h: 16, pal: {"m":"#8d8b9b","z":"#767585","c":"#b0b4c1"}, rows: [
     "................",
     "................",
@@ -93036,24 +93608,24 @@ const ART = {
     "yxyxyxyxyxyxyxyx",
   ] },
   "tile-shrinefloor": { w: 16, h: 16, pal: {"a":"#8b94a1","b":"#75808d","c":"#a3adb7","d":"#5fa064"}, rows: [
-    "bbbbbbbbabbbbbbb",
-    "baadaaaaaaaaaaaa",
+    "baabaabaabaabaab",
+    "aaadaaaaaaaaaaaa",
     "caaaadaaaaaaaaac",
     "bacaaaaaaaaaacaa",
-    "badaaaaaaaaaaaaa",
-    "baaaaaaaaaaaaaaa",
+    "aadaaaaaaaaaaaaa",
+    "aaaaaaaaaaaaaaaa",
     "baaaaaaaadaaacac",
-    "baadaaaacaaaacaa",
-    "abbdbbdbcbbbbbcb",
+    "aaadaaaacaaaacaa",
+    "aaadaadacbaabacb",
     "aacaaaaabaaaccaa",
-    "aaaaaaaabaacaaaa",
-    "aacaaaaabaaaaaaa",
+    "aaaaaaaaaaacaaaa",
+    "aacaaaaaaaaaaaaa",
     "aaaaaaaabaaaaaaa",
-    "aaaaaaaabaaaadaa",
-    "aaaaaaaabaaaaaaa",
+    "aaaaaaaaaaaaadaa",
+    "aaaaaaaaaaaaaaaa",
     "aaaaaaaabaaaacaa",
   ] },
-  "tile-shrinewall": { w: 16, h: 16, pal: {"a":"#8b94a1","b":"#75808d","c":"#a3adb7","d":"#5fa064"}, rows: [
+  "tile-shrinewall": { w: 16, h: 16, pal: {"a":"#535961","b":"#5e6d82","c":"#8b94a1","d":"#5fa064"}, rows: [
     "aaaaadaabaaaaaaa",
     "aaaaaaaabaaaaaaa",
     "adaaaaaabaaaaaaa",
@@ -93413,7 +93985,7 @@ const ART = {
     "aaaaaaaaaaaaaaaa",
     "llllllllllllllll",
   ] },
-  "tile-stadiumwall": { w: 16, h: 16, pal: {"a":"#beb59e","b":"#a0977f","g":"#c1a660","r":"#a96152"}, rows: [
+  "tile-stadiumwall": { w: 16, h: 16, pal: {"a":"#84754e","b":"#71523d","g":"#c1a660","r":"#a96152"}, rows: [
     "bbbbbabbbbbbbbbb",
     "bbbbbabbbbbbbbbb",
     "aaaaaaaaaaabaaaa",
@@ -140841,6 +141413,10 @@ for (const k of S3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Perfection Pass Stage 2 Gate 0 (G0-4): the shuttered facade panel draws
 // its own tile and renders as-is (no facade group, no upper/side variant).
 TILE_ART['facade-panel'] = 'tile-facade-panel';
+// Perfection Pass Stage 2 Gate 2 (G2): beach transition kinds draw their
+// own feathered tiles (tile-beach-<dir> on the tropgrass side,
+// tile-psand-<dir> on the path side).
+for (const k of G2_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -141370,6 +141946,10 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Arc 4 Stage S3b: Sinnoh east/north props composite over their ground too.
   ...S3B_PROP_KINDS]);
 function groundFamilyOf(kind) {
+  // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
+  // psand kinds stand on path (props composite over the parent ground).
+  if (kind && kind.startsWith('beach-')) return 'tropgrass';
+  if (kind && kind.startsWith('psand-')) return 'path';
   if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
@@ -141608,6 +142188,71 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     const f = pickAnim(cache.shorePulse, tt, x, y, CAD_SLOW, 31);
     if (f) layers.push(f);
   };
+  // Perfection Pass Stage 2 Gate 2 (G2): the tropgrass ground family gets
+  // the grassground ground treatment (sway / pulse / detail / blends /
+  // atmo / shadow / doormat) PLUS the edge-dirt set against path — until
+  // now tropgrass fell through to the bare default tile, so every
+  // tropgrass<->path border in the Orange Islands rendered untreated
+  // even though the pair is classified FULL. Tropgrass occurs only in
+  // the Orange Islands, so this branch is region-scoped in effect.
+  const pushEdgeDirtVsPath = (layers) => {
+    if (!cache.edgeDirt) return;
+    // psand kinds are path material wearing its sand edge — the dirt
+    // grammar treats them as path neighbours too.
+    const isPathMat = (k) => k === 'path' || (k != null && k.startsWith('psand-'));
+    const p = { n: isPathMat(nb.n), e: isPathMat(nb.e), s: isPathMat(nb.s), w: isPathMat(nb.w) };
+    const used = new Set();
+    for (const c of ['ne', 'se', 'sw', 'nw']) {
+      if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
+        layers.push(cache.edgeDirt[c]); used.add(c[0]); used.add(c[1]);
+      }
+    }
+    for (const d of DIRS) {
+      if (p[d] && !used.has(d) && cache.edgeDirt[d]) layers.push(cache.edgeDirt[d]);
+    }
+  };
+  if (kind === 'tropgrass') {
+    const layers = [cache[kind] || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
+    const tgSway = hashTileSpread(x, y, 44) < 0.35
+      ? pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41) : null;
+    if (tgSway) layers.push(tgSway);
+    pushPulse(layers);
+    pushLampGlow(layers);
+    pushDetail(layers, 0.10, 19, cache.detailCalmSet);
+    pushBlends(layers);
+    pushAtmo(layers);
+    if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    pushSkirts(layers);
+    pushDoorMat(layers);
+    pushEdgeDirtVsPath(layers);
+    return layers.filter(Boolean);
+  }
+  // G2: beach / psand transition kinds — the feather toward sand is baked
+  // into their own tiles; this branch restores the ground extras the
+  // parent kinds carry (pulse, glow, shadow, doormat) plus the remaining
+  // open borders: edge-dirt against path on beach cells, wet edge against
+  // water and hash-gated grass fringe against grass-family on psand cells
+  // (mirroring the path branch's grammar).
+  if (kind.startsWith('beach-') || kind.startsWith('psand-')) {
+    const layers = [cache[kind]];
+    pushPulse(layers);
+    pushLampGlow(layers);
+    if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    pushSkirts(layers);
+    pushDoorMat(layers);
+    if (kind.startsWith('beach-')) {
+      pushEdgeDirtVsPath(layers);
+    } else {
+      const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'tropgrass' || k === 'flower' ||
+        (k != null && (k.startsWith('beach-') || k.startsWith('tg-') || k.startsWith('tg2-')));
+      for (const d of DIRS) {
+        if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
+        else if (grassy(nb[d]) && cache.edgeGrass && cache.edgeGrass[d] &&
+                 hashTile(x, y, 23 + d.charCodeAt(0)) < 0.7) layers.push(cache.edgeGrass[d]);
+      }
+    }
+    return layers.filter(Boolean);
+  }
   switch (kind) {
     case 'grassground': {
       // Premium+ W0: textured meadow ground — its own authored tile,
@@ -148616,6 +149261,13 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
   // walkable false-door chars 1:1 ('s'/'w'/'D' at cells with no warp),
   // so walkable stays walkable.
   ...[532]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Perfection Pass Stage 2 Gate 2 (G2): the beach transition chars
+  // (block idx 533..562, tiles.mjs G2_KIND_DEFS) are walkable floor,
+  // swapped 1:1 from walkable tropgrass/path cells in the Orange
+  // Islands, so floor stays floor.
+  ...[533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548,
+    549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -154516,20 +155168,20 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞdeeeefẞẞjklm.ẞdeefẞẞabc~~",
-      "~~ẞZZ45ZZ_ẞAJKA._P12Pẟẞrst~~",
-      "~~ẞ.....Sẟ_....._....__...~~",
-      "~~........................~~",
-      "~~ẞ_ẞẞ___n_F_ẞ..ẟẟ______ẘẞ~~",
-      "~~ẞ_ẟẟẞ______ẘ..ẟ_ẞ_ẞ__o_ẞ~~",
-      "~~ẞẞ,,,ẞ_ṃ_ẟ__..__ẟ__ẟ__ẟẟ~~",
-      "~~ẞẞ,,,ẟẟẞ____..ẟẟẞẞ_ẟ_nẟẞ~~",
-      "~~ẞo__ẅ_______.._______Rẞẟ~~",
-      "~~ẞẞṃ_ẟ___ẘ__ẟ..ẞẞẟ___ẟ_ẟẞ~~",
-      "~~ẞ_,,,__ẞ_ẞẞ_.._ẞẟ__,,,_ẅ~~",
-      "~~ẞẟ,,,_ẟ_ẞẟẟF..ẟoẞ__,,,ẞẞ~~",
-      "~~ẞẟ_____ṃ___ẞ.._ẘ___ẟẟẟẟẞ~~",
-      "~~ẞẞẞẞẞẞoẞRẞẞẞ..ẞSẞẞ_ẞẞ#ẞẞ~~",
+      "~~ẞdeeeefẞẞjklm‟ẞdeefẞẞabc~~",
+      "~~ẞZZ45ZZ’ẞAJKA.―P12P’ẞrst~~",
+      "~~ẞ†....Sẟ―.....ẟ....ẟ―...~~",
+      "~~‬.„„.......„...........„~~",
+      "~~ẞ…ẞẞ“ẟẟnẟF‗ẞ†.ẟẟ‖ẟ‖ẟẟẟẘẞ~~",
+      "~~ẞ“―’ẞ“ẟẟẟẟẟẘ..ẟ‗ẞ…ẞ‘ẟo‗ẞ~~",
+      "~~ẞẞ,,,ẞ‘ṃẟẟẟẟ..ẟẟ‥‖―ẟẟẟẟ‥~~",
+      "~~ẞẞ,,,―‗ẞ‘ẟẟẟ..ẟ‗ẞẞ‘ẟẟn‛ẞ~~",
+      "~~ẞoẟẟẅẟẟ―ẟẟẟẟ..‖‖――ẟẟẟRẞ ~~",
+      "~~ẞẞṃẟẟẟẟ‖ẘ‖‖ẟ.‟ẞẞ‘ẟẟẟẟẟ’ẞ~~",
+      "~~ẞ‚,,,ẟ‗ẞ‪ẞẞ‘..’ẞ“ẟẟ,,,‖ẅ~~",
+      "~~ẞ‘,,,ẟẟ’ẞ‚―F..ẟoẞ‘ẟ,,,ẞẞ~~",
+      "~~ẞ“‖‖‖‖ẟṃ―‖‛ẞ†.‖ẘ‥‖ẟ‖‖ẟ‧ẞ~~",
+      "~~ẞẞẞẞẞẞoẞRẞẞẞ†‟ẞSẞẞ…ẞẞ#ẞẞ~~",
       "~~~~~~~~~~~~~~..~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~..~~~~~~~~~~~~"
     ],
@@ -154855,17 +155507,17 @@ const MAPS5 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~ẞdeefẞẞjklm..deefẞẞabc~~",
-      "~~ẞUVYU_ẟAJKA..P12P__rst~~",
-      "~~ẞ...S__..........ẞ_...~~",
-      "~~......................~~",
-      "~~oẟ___ẟ_ẞ_ẞ_..ẟ_ẟ____ẞẞ~~",
-      "~~ẞẞ__ẟ_ẞ_ẞ_ẟ..ẞẞẞ__ẟ__ẞ~~",
-      "~~ẞ_,,,__ẟ___..ẟẞ_ẟ___#ẞ~~",
-      "~~ẞẞ,,,ẟ___ẟẞ.._ẟ_ẟẟ___ẞ~~",
-      "~~ẟ_,,,___ẟ__..____,,,_ẞ~~",
-      "~~ẞ_,,,ẟẞ___ṃ..__n_,,,_ẞ~~",
-      "~~ẟẞ_ẞẞẟ_ẟẞ__..__ẟẟẞ_ẟ_ẞ~~",
-      "~~ẞẞẞẞẞẞẞẞẞẞẞ..ẞSẟẘẞẞẞẞẞ~~",
+      "~~ẞUVYU――AJKA..P12P‥―rst~~",
+      "~~ẞ†..Sẟẟ.........‟ẞ‘...~~",
+      "~~”......„.„.......”..„„~~",
+      "~~o‖ẟẟẟẟ‛ẞ‪ẞ‘..‖‖‖ẟẟẟ‗ẞẞ~~",
+      "~~ẞẞ‘ẟẟ‗ẞ ẞ‚ẟ.‟ẞẞẞ‘ẟẟẟ’ẞ~~",
+      "~~ẞ ,,,ẟ―ẟ―ẟ‖..’ẞ‚ẟẟẟẟ#ẞ~~",
+      "~~ẞẞ,,,ẟẟẟẟ‗ẞ†.ẟ―ẟẟẟẟẟ‗ẞ~~",
+      "~~‥―,,,ẟ‖ẟẟẟ―..ẟẟẟẟ,,,‗ẞ~~",
+      "~~ẞ“,,,‗ẞ‘‖ẟṃ..ẟẟnẟ,,,‗ẞ~~",
+      "~~‧ẞ‪ẞẞ“‥‛ẞ“‖..‖ẟẟ‗ẞ“‖‛ẞ~~",
+      "~~ẞẞẞẞẞẞẞẞẞẞẞ†‟ẞSẟẘẞẞẞẞẞ~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~"
     ],
@@ -155173,20 +155825,20 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẟdeefẞFjklm..RRRẈRRRRR~~",
-      "~~ẞUVYUF_AJKA..RẘRRR...S~~",
-      "~~ẞ...Sẟ_......RRR...RRR~~",
-      "~~......................~~",
-      "~~ẞẟ_n___ẞ_ẟẟ..R.RRRRRRR~~",
-      "~~ẞ____n_ẞ_ẟẞ....ṃRRRRRR~~",
-      "~~ẟ_,,,ẞ___ẟẞ.._______ẞẞ~~",
-      "~~ẞẟ,,,ẟ_____..______ẟẄẞ~~",
-      "~~ẞ____ẟẞ__ẘ_..__ẟẟẞẈ_ẟẞ~~",
-      "~~ẞ__ẟ_Ẇ_____..Ẅ__ẟẟ_ẟ_ẞ~~",
-      "~~Ẅẞ,,,ẞo___ẟ..__n_,,,ẟẞ~~",
-      "~~ẞẟ,,,ẞẟẈ_ẟ_..___ẟ,,,_ẞ~~",
-      "~~ẟ__ẟ_____ẟ_.._ẟ_____ẟẞ~~",
-      "~~ẞẞẞẞẞẞẞẞẞẞẞ..ẞSẞẞẞẞẞẞẞ~~",
+      "~~‖deefẞFjklm..RRRẈRRRRR~~",
+      "~~ẞUVYUFẟAJKA..RẘRRR...S~~",
+      "~~ẞ†..Sẟẟ......RRR...RRR~~",
+      "~~‬......„..............~~",
+      "~~ẞ‘ẟnẟẟ‗ẞ‘ẟ‖..R.RRRRRRR~~",
+      "~~ẞ‘ẟẟẟn‗ẞ‘‗ẞ†...ṃRRRRRR~~",
+      "~~‥ẟ,,,ẞ‘―ẟ‗ẞ†.ẟẟẟẟẟẟ‗ẞẞ~~",
+      "~~ẞ‘,,,―‖ẟẟẟ―..ẟẟẟẟ‖ẟẟẄẞ~~",
+      "~~ẞ‘ẟẟẟ‗ẞ‘ẟẘẟ..ẟẟẟ‗ẞẈẟ‗ẞ~~",
+      "~~ẞ“ẟẟẟẆ―ẟẟẟẟ..Ẅẟẟẟ―ẟẟ‗ẞ~~",
+      "~~Ẅẞ,,,ẞoẟẟẟẟ..ẟẟnẟ,,,‗ẞ~~",
+      "~~ẞ‚,,,ẞ‘Ẉẟẟẟ..ẟẟẟẟ,,,‗ẞ~~",
+      "~~‥‖‖‖‖‥‖‖‖‖‖..‖ẟ‖‖‖‖‖‛ẞ~~",
+      "~~ẞẞẞẞẞẞẞẞẞẞẞ†‟ẞSẞẞẞẞẞẞẞ~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~"
     ],
@@ -155461,18 +156113,18 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẟjklmẟẞẞẄẞẘ..ẞẞẞẞẞẞẞẞẞ~~",
-      "~~ẞAJKAẈ__ẟ__..__ẟẟ__ẞẟẞ~~",
-      "~~ẟ....ẟ__ẟ__..ẟ__ẟẞ__ẟẞ~~",
-      "~~......................~~",
-      "~~ẞẞẞẞẟ___ẞạạ..ạạ_____ẟẞ~~",
-      "~~ẞ__ẟ___ẟ_ạẞ.._ạ____Ẅ_ẞ~~",
-      "~~ẞẞ,,,ẟ__ẞ_ẞṿ.ẟẟo_ẞ_ẞ_ẞ~~",
-      "~~ẞ_,,,______.ṿẘẟ___Fẞ_ẞ~~",
-      "~~ẞẞ,,,_ẟ__ạ#.._ạẟ_,,,ṿẞ~~",
-      "~~ẞ_,,,ẄFẟ_ẟạ..ạ___,,,_ẞ~~",
-      "~~ẞ___ẟ_ẟẟẞẟ_..___ẞẟ__ẟẟ~~",
-      "~~ẞẞẞẞẞẞẞẞẞẞẞ..ẞSẞẞẟoẞẞẞ~~",
+      "~~‖jklm‗ẞẞẄẞẘ.‟ẞẞẞẞẞẞẞẞẞ~~",
+      "~~ẞAJKAẈ――ẟ―ẟ..――――‥’ẞ ẞ~~",
+      "~~―....ẟẟẟẟẟẟ..ẟẟẟ‗ẞ‘―‗ẞ~~",
+      "~~„„„„....„........”...‬~~",
+      "~~ẞẞẞẞ‘ẟẟ‗ẞạạ..ạạẟẟẟẟẟ‗ẞ~~",
+      "~~ẞ ――ẟẟẟẟ‥ạẞ†.ẟạẟẟ‖ẟẄ‗ẞ~~",
+      "~~ẞẞ,,,ẟẟ‗ẞ…ẞṿ.ẟẟo‗ẞ…ẞ…ẞ~~",
+      "~~ẞ ,,,ẟẟẟ―ẟ―.ṿẘẟẟẟ―Fẞ…ẞ~~",
+      "~~ẞẞ,,,ẟẟẟẟạ#..ẟạẟẟ,,,ṿẞ~~",
+      "~~ẞ‚,,,ẄFẟ‖ẟạ..ạẟẟ‖,,,‗ẞ~~",
+      "~~ẞ“‖‖‖‖‖‛ẞ“‖..‖ẟ‛ẞ‘ẟ‖‖‥~~",
+      "~~ẞẞẞẞẞẞẞẞẞẞẞ†‟ẞSẞẞ‘oẞẞẞ~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~"
     ],
@@ -155703,18 +156355,18 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞdeefẞẞjklm..deefẞẞFẞẟ~~",
-      "~~ẞUVYU__AJKA..P12Pn_ẟ_ẞ~~",
-      "~~ẞ...Sẟẟ..........____ẞ~~",
-      "~~......................~~",
-      "~~ẞẞ_ẞ.ẟẟ___ẟ..___ẞẟẟẞ_ẞ~~",
-      "~~ẞ_F___ẟ____..___ẞ___ẟ#~~",
-      "~~ẞ_,,,Ẇ___ẞẞ..__ẟẟ__#ẟẟ~~",
-      "~~ẞẘ,,,_ẟ_ẟ__..ẞ_ẟ____ẟẞ~~",
-      "~~ẞẞ,,,____ẞ_..___R,,,ẘẟ~~",
-      "~~ẞẟ,,,__ẞẘẟ_..ẟẞẟẟ,,,_ẞ~~",
-      "~~ẞ____ẟ_ẟẞẟ_.._ẟẟẘẟR__ẞ~~",
-      "~~ẞẞẞẟẞ_ẟẞẞẞẞ..ẞSẟẞẞẞẞẞẞ~~",
+      "~~ẞdeefẞẞjklm..deefẞẞFẞ“~~",
+      "~~ẞUVYU――AJKA..P12Pn―ẟ’ẞ~~",
+      "~~ẞ†..Sẟẟ..........ẟẟẟ‗ẞ~~",
+      "~~‬„.„............„..„.‬~~",
+      "~~ẞẞ…ẞ†ẟẟẟẟẟẟ..ẟẟ‗ẞ‘‗ẞ…ẞ~~",
+      "~~ẞ‚F―ẟẟẟẟẟ‖‖..ẟẟ‗ẞ‘ẟ―ẟ#~~",
+      "~~ẞ‘,,,Ẇẟẟ‗ẞẞ†.‖ẟẟ―ẟẟ#ẟ‖~~",
+      "~~ẞẘ,,,ẟẟẟẟ‥―.‟ẞ‘ẟẟẟẟẟ‗ẞ~~",
+      "~~ẞẞ,,,ẟẟ‖‗ẞ‘..―‖ẟR,,,ẘ‥~~",
+      "~~ẞ‚,,,ẟ‗ẞẘ―ẟ..‗ẞ‘ẟ,,,‗ẞ~~",
+      "~~ẞ“‖ẟ‖ẟẟ‧ẞ“‖..‖―ẟẘ‖R‖‛ẞ~~",
+      "~~ẞẞẞ…ẞ‘‗ẞẞẞẞ†‟ẞS‗ẞẞẞẞẞẞ~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~",
       "~~~~~~~~~~~~~..~~~~~~~~~~~"
     ],
@@ -156028,18 +156680,18 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞdeefẞẞjklmẞ.deefẞẞabcẞẞ~~",
-      "~~ẘUVYUẟ_AJKAẞ.P12Pẟẘrst_ẞ~~",
-      "~~ẞ...S_ẟ....ẟ....._ẞ..._ẞ~~",
-      "~~........................~~",
-      "~~ẞ_ẟ__ẟ_ẟẞ___..__ẞ_ẟ_ẞ__R~~",
-      "~~ẞ_ẞ_ẟẟn__ẞẞẟ..____ẟ_ẞ__ẞ~~",
-      "~~ẞ_,,,ẟ__ẞ___.._ẞ__ẟ_ẟ__ẞ~~",
-      "~~ẞ_,,,_ẚẟẞẟẟ_.._ẞ______ẟẞ~~",
-      "~~ẞ_,,,_ẞẛ___ẞ..ẞ__ẛ_,,,_ẞ~~",
-      "~~ẟ_,,,__Ẅẟẞẟ...ẟẟẛẟ_,,,ẟẞ~~",
-      "~~ẞẞ____ẟẟ___ẚ.._ẞ___#_ẟnẞ~~",
-      "~~ẞẞẞoẞẘẞẟẞẚẞẞ..ẞSẞẞẞẞẟẞẛẞ~~",
+      "~~ẞdeefẞẞjklmẞ†deefẞẞabcẞẞ~~",
+      "~~ẘUVYU――AJKAẞ†P12P―ẘrst’ẞ~~",
+      "~~ẞ†..Sẟẟ....―.....‗ẞ†..‗ẞ~~",
+      "~~‬.......„.......„.”.„..”~~",
+      "~~ẞ‘‖ẟẟẟẟ‗ẞ“‖ẟ..ẟ‗ẞ‘ẟ‗ẞ‘ẟR~~",
+      "~~ẞ…ẞ‘ẟẟnẟ‧ẞẞ‘..ẟ‖―ẟẟ‗ẞ‘‗ẞ~~",
+      "~~ẞ‘,,,ẟẟ‗ẞ‚―ẟ..‗ẞ‘ẟẟẟ―ẟ‗ẞ~~",
+      "~~ẞ‘,,,ẟẚ‗ẞ‘ẟ‖..‛ẞ‘ẟẟẟẟẟ‗ẞ~~",
+      "~~ẞ‘,,,‗ẞẛ―‖‗ẞ†‟ẞ‚ẟẛẟ,,,‗ẞ~~",
+      "~~‥‖,,,ẟ―Ẅ‗ẞ‘”..―‖ẛẟẟ,,,‗ẞ~~",
+      "~~ẞẞ“ẟ‖ẟ‖ẟ‖―‖ẚ..‛ẞ“‖‖#ẟ‖nẞ~~",
+      "~~ẞẞẞoẞẘẞ…ẞẚẞẞ†‟ẞSẞẞẞẞ…ẞẛẞ~~",
       "~~~~~~~~~~~~~~..~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~..~~~~~~~~~~~~"
     ],
@@ -156347,20 +156999,20 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~FjklmẟẞdeefẞảảảảảẝẝảảảảảẞR~~",
-      "~~ẞAJKARẞP12P_eeeeeeeeeeee_ẞ~~",
-      "~~ẞ....__....ẟUUUUUVYUUUUU_ẞ~~",
-      "~~..........................~~",
-      "~~ẞ_ẞ_ẟẟ__ẟẞẞ__.._R____ẟo_ẟẞ~~",
-      "~~ẞ___ẟẞ__ẞẟ_ẟ_.._o__ẟẟn__ẟẈ~~",
-      "~~ẞ_,,,_ẞẟ__ẞ__..ẟ__ẞ___ẟ_ẟẞ~~",
-      "~~ẞ_,,,_ẟ__ẟẟ__..___ẞ______ẞ~~",
-      "~~ẞ_ẟẞ_ẘ_ẞRẟ___..___ẟẟẟẞẟ_ẞẞ~~",
-      "~~ẟẟ_ẞẈ_ẟ___ẞẟ_..ẞ_ẞ__ẞ_ẞẞ_ẞ~~",
-      "~~ẟ_,,,ẘẞ___ẞẞ_..___ṃ__,,,_ẞ~~",
-      "~~ẞẞ,,,_____ẞ__..ẟ___ẟ_,,,_ẞ~~",
-      "~~ẞ___ẟ__ẟ_ẟẟ_ẟ..ẘẟẟ___ẟ__ẟẘ~~",
-      "~~#ẟẞẞẟẞ_ẞẞṃẞẄẞ..ẞSẟẆẞẟ#ẞẞẞẞ~~",
+      "~~Fjklm‗ẞdeefẞảảảảảẝẝảảảảảẞR~~",
+      "~~ẞAJKARẞP12P―eeeeeeeeeeee’ẞ~~",
+      "~~ẞ†...ẟ―....ẟUUUUUVYUUUUU‗ẞ~~",
+      "~~‬.„......„„..............‬~~",
+      "~~ẞ…ẞ‘ẟ‖ẟẟ‛ẞẞ‘ẟ..ẟRẟẟẟẟẟoẟ‗ẞ~~",
+      "~~ẞ‘―ẟ‗ẞ“‗ẞ‚‥ẟẟ..ẟoẟ‖ẟẟnẟẟẟẈ~~",
+      "~~ẞ‘,,,’ẞ‘―‗ẞ‘ẟ..ẟẟ‗ẞ‘ẟẟẟẟ‗ẞ~~",
+      "~~ẞ‘,,,ẟ―‖ẟẟ―ẟẟ..ẟẟ‗ẞ‘ẟ‖ẟẟ‛ẞ~~",
+      "~~ẞ‘‗ẞ‘ẘ‗ẞRẟ‖ẟẟ..‖ẟ‖―ẟ‛ẞ“‛ẞẞ~~",
+      "~~―ẟ‗ẞẈẟ‖―ẟ‗ẞ“ẟ.‟ẞ…ẞ‘‗ẞ ẞẞ ẞ~~",
+      "~~‖‖,,,ẘẞ‘ẟ‗ẞẞ‘..―ẟ―ṃẟ―,,,‗ẞ~~",
+      "~~ẞẞ,,,ẟ―ẟẟ‗ẞ‚ẟ..ẟẟẟẟẟẟ,,,‗ẞ~~",
+      "~~ẞ‚‖‖ẟ‖ẟ‖‖ẟ‥ẟ‖..ẘẟẟẟ‖ẟẟ‖‖‖ẘ~~",
+      "~~#‗ẞẞ…ẞ…ẞẞṃẞẄẞ†‟ẞSẟẆẞ‘#ẞẞẞẞ~~",
       "~~~~~~~~~~~~~~~..~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~..~~~~~~~~~~~~~"
     ],
@@ -156674,20 +157326,20 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞghhiẞ_jklmẟ.abcẞẞFẞẞẞẛẞ~~",
-      "~~ẞxyzx__AJKA_.rstẞ___ẟ_ẟẞ~~",
-      "~~ẞ....ẞ_....ẟ....___ẟ_ẞ_ẞ~~",
-      "~~........................~~",
-      "~~ẞ____ẟo__ẟẞ_.._____ẞẟẞ#ẞ~~",
-      "~~ẞẟ__#ẟ__ẞẚẞẚẚ._ẟ_ẟ__ẘ_ẞẞ~~",
-      "~~ẞ_,,,_ẟẞẠẛẠẠẠẠẛẠẟẟ_ẟ__ẟẞ~~",
-      "~~ẞ_,,,ẟ_ẟẠẠẠẠẠẠẠẠ_ẟ__Ẉẛẘẞ~~",
-      "~~ẞ___ẟ___ẠẠẠẠẠẠẠẠ__ẞ__ẟẟẞ~~",
-      "~~ẞ_ẞ_ẛ_#ẞẠẠẠẠẠẠẠẠẞ___ẟ_ẞẞ~~",
-      "~~ẞẟRR,_ẟ_ẟẞẞ_.._ẞ_ṃẟ,,,ẟẞ~~",
-      "~~ẞ_R,,ẞẟ_ẟẟẞẟ..ẞ____,,,ẟẞ~~",
-      "~~ẟẟ_ẚ__ẟ___ẞ_..ẟẞẟ_ẞẞẟẞṃẟ~~",
-      "~~ẞẞẞ_ẟẞẞẞẞẞẄẞ..ẞoṃẞẞẞẞẟẘẞ~~",
+      "~~ẞghhiẞ‘jklmẟ.abcẞẞFẞẞẞẛẞ~~",
+      "~~ẞxyzx‥ẟAJKAẟ.rstẞ‚ẟ――‥‗ẞ~~",
+      "~~ẞ†..‟ẞ‘....ẟ....―ẟẟẟ‗ẞ…ẞ~~",
+      "~~‬....”....„........„.‬.‬~~",
+      "~~ẞ‘ẟẟẟẟoẟ‖‗ẞ‘..ẟẟẟẟ‗ẞ…ẞ#ẞ~~",
+      "~~ẞ‘ẟẟ#ẟẟ‛ẞẚẞẚẚ.ẟẟẟẟẟ―ẘ’ẞẞ~~",
+      "~~ẞ‘,,,ẟ‗ẞẠẛẠẠẠẠẛẠẟẟẟẟẟẟ’ẞ~~",
+      "~~ẞ‘,,,ẟẟ―ẠẠẠẠẠẠẠẠẟẟ‖ẟẈẛẘẞ~~",
+      "~~ẞ‘‖ẟẟẟẟ‖ẠẠẠẠẠẠẠẠ‖‗ẞ‘ẟẟ‛ẞ~~",
+      "~~ẞ…ẞ‘ẛẟ#ẞẠẠẠẠẠẠẠẠẞ‘―ẟẟ‗ẞẞ~~",
+      "~~ẞ‘RR,‖ẟ―‗ẞẞ‘..‛ẞ‚ṃẟ,,,’ẞ~~",
+      "~~ẞ‘R,,ẞ‘ẟẟ’ẞ‘.‟ẞ ẟẟ‖,,,‗ẞ~~",
+      "~~‥‖‖ẚẟ‥‖‖‖‛ẞ“..‧ẞ‘‛ẞẞ‪ẞṃ‥~~",
+      "~~ẞẞẞ‘‗ẞẞẞẞẞẄẞ†‟ẞoṃẞẞẞẞ‚ẘẞ~~",
       "~~~~~~~~~~~~~~..~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~..~~~~~~~~~~~~"
     ],
@@ -157077,16 +157729,16 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẘẞẟẞẈẘẞẞẞGGGẞẞẞẘẞẞẞẞ~~",
-      "~~ẞ________GDG__ẟẞ___R~~",
-      "~~ẞẟ_ẞẞẞẞ___.._____ẞ_ẞ~~",
-      "~~....................~~",
-      "~~ẞẟẟ_ẟ__ẞ._..ẟẅẞẞ___ẞ~~",
-      "~~ẟẞẟ_#___ẟ_..ẞ__ẘ_ẟ_ẞ~~",
-      "~~#_,,,___ẞ_..__ẟ,,,ẟẞ~~",
-      "~~ẞẟ,,,ẟẞR__..___,,,ẟẞ~~",
-      "~~ẞẟ___ẟẞẞ__..__ẟoẞẟ_ẞ~~",
-      "~~ẞẞẞẞẟẞẞẞẞẞ..ẞSẞẞẞẟẞẞ~~",
+      "~~ẘẞ…ẞẈẘẞẞẞGGGẞẞẞẘẞẞẞẞ~~",
+      "~~ẞ‚ẟ‥‖‖‥――GDG――’ẞ‚‥―R~~",
+      "~~ẞ‘‗ẞẞẞẞ‘ẟẟ..ẟẟẟ―‗ẞ…ẞ~~",
+      "~~‬..””””„......„„.”.‬~~",
+      "~~ẞ“ẟẟẟẟ‗ẞ†ẟ..‖ẅẞẞ‘ẟ‗ẞ~~",
+      "~~’ẞ‘ẟ#ẟẟ―‖ẟ.‟ẞ‘―ẘẟẟ‗ẞ~~",
+      "~~#―,,,ẟ‖‗ẞ‘..―ẟẟ,,,‗ẞ~~",
+      "~~ẞ‘,,,‗ẞR―ẟ..ẟẟẟ,,,‗ẞ~~",
+      "~~ẞ“‖‖ẟ‛ẞẞ“‖..‖ẟ‖oẞ‘‛ẞ~~",
+      "~~ẞẞẞẞ…ẞẞẞẞẞ†‟ẞSẞẞẞ…ẞẞ~~",
       "~~~~~~~~~~~~..~~~~~~~~~~",
       "~~~~~~~~~~~~..~~~~~~~~~~"
     ],
@@ -157245,16 +157897,16 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞẞẞẞẞẞẞẞẞGGGẞẞẞẞẟẟẞẞ~~",
-      "~~ẞ___ẘ_ẟ_ẞGDGẟṃẟ__ẟẞẞ~~",
-      "~~ẞ_ẟ_ẟẟ__ẟ_..ẟ____ẟẟẞ~~",
-      "~~....................~~",
-      "~~.__ẟẞ_ẞ_ẟẟ..ẟẟ___ẟẟẟ~~",
-      "~~ẞẞ____F_ẟẞ.._ẘẞ_ẟ__ẟ~~",
-      "~~ẞ_,,,ẟ__ẞẞ..ẟẟ_,,,_ẞ~~",
-      "~~ẞ_,,,___ẟ_..ẅ__,,,_ẞ~~",
-      "~~ẟ__F__ẟ___..__ẟ_ẟ_ẞẞ~~",
-      "~~ẞẞẞẞẞẞẞẞẞẞ..ẞSẟẞẞẞẞẟ~~",
+      "~~ẞẞẞẞẞẞẞẞẞGGGẞẞẞẞ‘‗ẞẞ~~",
+      "~~ẞ‚――ẘ――’ẞGDG―ṃ――ẟ‗ẞẞ~~",
+      "~~ẞ‘ẟẟẟẟẟẟ―ẟ..ẟẟẟẟẟẟ’ẞ~~",
+      "~~”...„.„............”~~",
+      "~~„‖ẟ‗ẞ…ẞ‘ẟ‖..ẟẟ‖ẟẟẟẟẟ~~",
+      "~~ẞẞ‘ẟ―ẟFẟ‛ẞ†.ẟẘẞ‘ẟẟẟ‖~~",
+      "~~ẞ‚,,,ẟẟ‗ẞẞ†.ẟẟ―,,,‗ẞ~~",
+      "~~ẞ‘,,,ẟẟẟ――..ẅẟẟ,,,‛ẞ~~",
+      "~~‥‖‖F‖‖‖‖‖‖..‖ẟẟ‖‖‛ẞẞ~~",
+      "~~ẞẞẞẞẞẞẞẞẞẞ†‟ẞS‗ẞẞẞẞ‚~~",
       "~~~~~~~~~~~~..~~~~~~~~~~",
       "~~~~~~~~~~~~..~~~~~~~~~~"
     ],
@@ -157413,16 +158065,16 @@ const MAPS5 = {
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~ẞẘẞẟẞẞẞẞẞGGGẞẞẞẞẞẞẞẞ~~",
-      "~~ẞẞ__ẞRẟ__GDG_ẞ____ẟẞ~~",
-      "~~ẞ_ẟ____ẞẞẞ..ẞ____ẞ_ẞ~~",
-      "~~....................~~",
-      "~~ẟṃ___ẟ_ẟ__.._ẞẟnẟẟ_ẞ~~",
-      "~~ẞ___ẟ_ẞ_oẅ...ẞ_ẟẟẟ_ẞ~~",
-      "~~F_,,,ẟ____..ẟ__,,,ẘẞ~~",
-      "~~ẞ_,,,ẞẟ_ẟ_..__ẟ,,,ẞẞ~~",
-      "~~ẞẟ___ẞẞẟ__.._R__Fẞ_ẞ~~",
-      "~~ẟẞẞẞẞẞẞẞẟẞ..ẞSẞẞẞẞẞẞ~~",
+      "~~ẞẘẞ…ẞẞẞẞẞGGGẞẞẞẞẞẞẞẞ~~",
+      "~~ẞẞ‚‗ẞR―‥‥GDG‧ẞ‚――‥’ẞ~~",
+      "~~ẞ‚ẟẟ―ẟ‗ẞẞẞ†‟ẞ‚ẟẟ‗ẞ…ẞ~~",
+      "~~”......”””..”„...”.‬~~",
+      "~~‖ṃẟẟẟẟ‖ẟẟẟ..‗ẞ‘nẟẟ‗ẞ~~",
+      "~~ẞ‘ẟẟẟ‗ẞ‘oẅ..‟ẞ‘ẟẟẟ‗ẞ~~",
+      "~~Fẟ,,,‖―ẟẟẟ..ẟ―ẟ,,,ẘẞ~~",
+      "~~ẞ‘,,,ẞ“ẟẟẟ..ẟẟẟ,,,ẞẞ~~",
+      "~~ẞ“‖‖‛ẞẞ“ẟ‖..‖R‖‖Fẞ‫ẞ~~",
+      "~~’ẞẞẞẞẞẞẞ…ẞ†‟ẞSẞẞẞẞẞẞ~~",
       "~~~~~~~~~~~~..~~~~~~~~~~",
       "~~~~~~~~~~~~..~~~~~~~~~~"
     ],
@@ -157596,8 +158248,8 @@ const MAPS5 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~ẙ~~~~~",
       "~~~~~~~~~~~~ẙ~~~~~~~~~~~~~~~~~",
-      "~~~~~F__~~~~~~~~~~~~~~ẞẘẞ~~~~~",
-      "~~~~~_,#~~~~~ẙẞẘẞ~~~~~ẞẞẞ~~~~~",
+      "~~~~~Fẟẟ~~~~~~~~~~~~~~ẞẘẞ~~~~~",
+      "~~~~~ẟ,#~~~~~ẙẞẘẞ~~~~~ẞẞẞ~~~~~",
       "~~ẙ~~~ẙ~~~~~~~ẞẞẞ~ẙ~~~~~~~R~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -157734,8 +158386,8 @@ const MAPS5 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~~R~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~ẙ~~~~~~~~~~~~~~~~~~",
-      "~~~~~~F__~~~~~~~~~~~~~~~~~~ẙ~~",
-      "~~~~~R_,#~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~Fẟẟ~~~~~~~~~~~~~~~~~~ẙ~~",
+      "~~~~~Rẟ,#~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~R~~~~~~~~ẙ~~~~~~~ẞẘẞ~~~~~",
       "~~ẙẙ~~~~~~~~~~ẞẘẞ~~~~~ẞẞẞ~~~~~",
       "~~~~~~~~~ẙ~~~~ẞẞẞ~~~~~~~~~~~~~",
@@ -157892,8 +158544,8 @@ const MAPS5 = {
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~R~~~ẙ~~~~ẙ~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~F__~~~~~~~~~~~~~~~~~ẙ~ẙ~~~",
-      "~~~~_,#~~~~R~~~~ẙR~ẙ~~~~~~~~~~",
+      "~~~~Fẟẟ~~~~~~~~~~~~~~~~~ẙ~ẙ~~~",
+      "~~~~ẟ,#~~~~R~~~~ẙR~ẙ~~~~~~~~~~",
       "~~~ẙ~~~~~~~~~~~~~~~~~~ẞẘẞ~~~~~",
       "~~~~~~~~~~~~~~ẞẘẞ~ẙ~~~ẞẞẞ~~~~~",
       "~~~~~~~~~~~~~ẙẞẞẞ~~~~~ẙ~~~~~~~",
@@ -158051,8 +158703,8 @@ const MAPS5 = {
       "~~~~~~~~~ẙ~ẙ~ẙ~~~~~ẙ~~~~~~~~~~",
       "~~~~~~~~~~~~~ẙ~~ẙ~~~~~~~~~~~~~",
       "~~R~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~F__~~~~~~~~~~~~~~~~~~~~~~~",
-      "~~~~_,#~~~~~~~~~~~~~~~ẞẘẞ~~~~~",
+      "~~~~Fẟẟ~~~~~~~~~~~~~~~~~~~~~~~",
+      "~~~~ẟ,#~~~~~~~~~~~~~~~ẞẘẞ~~~~~",
       "~~~R~~~~~~~ẙ~~ẞẘẞ~~~~~ẞẞẞ~R~~~",
       "~~~~~~~~~~~~~~ẞẞẞ~~~~~~~~~~R~~",
       "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
@@ -158251,14 +158903,14 @@ const MAPS5 = {
     "rows": [
       "================",
       "=+ṃ++++++++++ṃ+=",
-      "=+ṼṼṼṼ+++++++++=",
-      "=+ṼṼṼṄ++++Ṅ++++=",
-      "=+ṼṼṼṼ+++++++++=",
+      "=++++++++++++++=",
+      "=++++Ṅ++++Ṅ++++=",
+      "=++++++++++++++=",
       "=+++++////+++++=",
       "=+++++////+++++=",
       "=++++++++++++++=",
       "=+++)++++++)+++=",
-      "=======++======="
+      "=======DD======="
     ],
     "warps": [
       {
@@ -158330,14 +158982,14 @@ const MAPS5 = {
     "rows": [
       "================",
       "=+Ṫ++++++++++Ṫ+=",
-      "=+++++++++ṧṧṧṧ+=",
-      "=++++ṫ++++ṫṧṧṧ+=",
+      "=++++++++++++++=",
+      "=++++ṫ++++ṫ++++=",
       "=++++++++++++++=",
       "=+++++////+++++=",
       "=+++++////+++++=",
       "=++++++++++++++=",
       "=+++)++++++)+++=",
-      "=======++======="
+      "=======DD======="
     ],
     "warps": [
       {
@@ -158409,14 +159061,14 @@ const MAPS5 = {
     "rows": [
       "================",
       "=+ḿ++++++++++ḿ+=",
-      "=+ṳṳṳṳ+++++++++=",
-      "=+ṳṳṳṀ++++Ṁ++++=",
+      "=++++++++++++++=",
+      "=++++Ṁ++++Ṁ++++=",
       "=++++++++++++++=",
       "=+++++////+++++=",
       "=+++++////+++++=",
       "=++++++++++++++=",
       "=+++)++++++)+++=",
-      "=======++======="
+      "=======DD======="
     ],
     "warps": [
       {
@@ -158495,7 +159147,7 @@ const MAPS5 = {
       "=+θ+++////+++θ+=",
       "=++++++++++++++=",
       "=+++)++++++)+++=",
-      "=======++======="
+      "=======DD======="
     ],
     "warps": [
       {
@@ -158565,7 +159217,7 @@ const MAPS5 = {
     "music": "gym-theme",
     "indoor": true,
     "rows": [
-      "ảảảảṚảṸảảảảẝẝảảảảṸảṚảảảả",
+      "ảảảảṚảảảảảảẝẝảảảảảảṚảảảả",
       "ảẢẢμẢẢẢẢμẢẢẢẢẢẢμẢẢẢẢμẢẢả",
       "ảẢẢảảảảảảảảḣẢảảảảảảảảẢẢả",
       "ảẢẢṤṤṤṤṤṤṤṤẢẢṤṤṤṤṤṤṤṤẢẢả",
@@ -158667,14 +159319,14 @@ const MAPS5 = {
     "rows": [
       "ạạạạạạạạạạạạạạạạ",
       "ạẠẠḠẠḟẠẠẠẠḟẠχẠẠạ",
-      "ạẠQQẠẠḡẠẠḡẠẠQQẠạ",
+      "ạẠẠẠẠẠḡẠẠḡẠẠẠẠẠạ",
       "ạẠẠẠẠẠḢẠẠḢẠẠẠẠẠạ",
       "ạẠẠẠẠẠẠṤṤẠẠẠẠẠẠạ",
       "ạẠẠẚẠẠẠṤṤẠẠẠẚẠẠạ",
       "ạẠẠẠẠẠẠṤṤẠẠẠẠẠẠạ",
       "ạẠẠẠẠẠẠṤṤẠẠẠẠẠẠạ",
       "ạẠẠẠẠẠẠṤṤẠẠẠẠẠẠạ",
-      "ạẠQẠẠẠẠṤṤẠẠẠẠQẠạ",
+      "ạẠẠẠẠẠẠṤṤẠẠẠẠẠẠạ",
       "ạẠẠẠθẠẠṤṤẠẠθẠẠẠạ",
       "ạạạạạạạẠẠạạạạạạạ"
     ],
@@ -158776,7 +159428,7 @@ const MAPS5 = {
       "ṺṻṻṻṽṻḟφμḟṻṽṻṻṻṺ",
       "ṺṻṻṻṻλĀṼṼĀλṻṻṻṻṺ",
       "ṺṻṻLṻṻṻṻṻṻṻṻLṻṻṺ",
-      "ṺṻṻṻẠẠṼṻṻṼẠẠṻṻṻṺ",
+      "ṺṻṻṻṻṻṼṻṻṼṻṻṻṻṻṺ",
       "ṺṻṻḉṻṰṻṻṻṻṱṻḉṻṻṺ",
       "ṺṻṻṾṻṻṍṻṻṌṻṻṾṻṻṺ",
       "ṺṻṻṻṭṭṻṻṻṻṭṭṻṻṻṺ",
@@ -209409,6 +210061,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:1b689338916952cf18981561219e23e6e3b0c9bf0c8ff924f0a35c88bc89ccca -->
+<!-- contentHash:8f8f012793d34303c4c7b3bd3da09aa59c127a81a1f0f32a8ee17613a2d9aa4a -->
 </body>
 </html>
