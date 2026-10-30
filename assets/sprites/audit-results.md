@@ -5381,7 +5381,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-cavefloor-1 <= 32 colors | PASS | 4 |
 | sprite tile-cavefloor-2 <= 32 colors | PASS | 4 |
 | sprite tile-cavefloor-3 <= 32 colors | PASS | 4 |
-| sprite tile-cavefloor-4 <= 32 colors | PASS | 4 |
+| sprite tile-cavefloor-4 <= 32 colors | PASS | 2 |
 | sprite tile-cavefloor-5 <= 32 colors | PASS | 3 |
 | sprite tile-cavelantern <= 32 colors | PASS | 5 |
 | sprite tile-cavewall-1 <= 32 colors | PASS | 4 |
@@ -6388,7 +6388,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | png atlas-species-2.png valid signature | PASS | 544.3 KB |
 | png atlas-species-3.png valid signature | PASS | 187.1 KB |
 | png atlas-species.png valid signature | PASS | 423.7 KB |
-| png atlas-tiles.png valid signature | PASS | 83.6 KB |
+| png atlas-tiles.png valid signature | PASS | 83.5 KB |
 | png atlas-ui.png valid signature | PASS | 1.2 KB |
 
 ## FAILURES

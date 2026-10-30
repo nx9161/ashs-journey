@@ -3,19 +3,19 @@ PIX tile-cavefloor-5 16 16
 bbggyybggbbbbbbb
 bbbbyybbbbbbbbyy
 ggyyggbbbbbbbbbb
-bbbyggbyybbbbbbb
-bbggyyyyybbbggyy
-bbggyyyyyybbggyy
-bbggbbbbbbbbbbbb
-bbgyybggbbbbbbbb
-ggbbbbbbbbbbggyy
-gbbbggbbyybbggyy
-bbggggyybbyyggbb
-bbggggyybbyyggbb
-bbbbbbyybbbbggbb
-yybbbbyybbbbggbb
-bbggbbbbggbbbbgg
-ggggbbbbggbbbbgg
+bbbybbbyybbbbbbb
+bbbbyyyyybbbbbyy
+bbbbyyyyyybbbbyy
+bbbbbbbbbbbbbbbb
+bbbyybbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
 PAL
 b #8d8164 cave-tan-deep
 a #817554 strata-olive
