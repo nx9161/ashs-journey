@@ -99947,7 +99947,7 @@ export const ART = {
     ".ff..........ff.",
     "................",
   ] },
-  "tile-wall-brick-lit": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-brick-lit": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -99983,7 +99983,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-brick-plain": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-brick-plain": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100001,7 +100001,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-center-lit": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#d1bc88","h":"#d1bc88","g":"#5681bd"}, rows: [
+  "tile-wall-center-lit": { w: 16, h: 16, pal: {"w":"#e8ccd6","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#d1bc88","h":"#d1bc88","g":"#a87f36"}, rows: [
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
@@ -100019,7 +100019,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-center-upper": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","F":"#757585"}, rows: [
+  "tile-wall-center-upper": { w: 16, h: 16, pal: {"w":"#e8ccd6","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#a87f36","h":"#cfa860","g":"#a87f36","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "rrrrrrrrrrrrrrrr",
@@ -100037,7 +100037,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-center": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","F":"#757585"}, rows: [
+  "tile-wall-center": { w: 16, h: 16, pal: {"w":"#e8ccd6","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#a87f36","h":"#cfa860","g":"#a87f36","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "rrrrrrrrrrrrrrrr",
@@ -100091,7 +100091,7 @@ export const ART = {
     "tttttttttttttttt",
     "tttttttttttttttt",
   ] },
-  "tile-wall-house-lit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-house-lit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100127,7 +100127,7 @@ export const ART = {
     "tttttttttttttttt",
     "tttttttttttttttt",
   ] },
-  "tile-wall-house-plain": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-house-plain": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100145,7 +100145,7 @@ export const ART = {
     "tttttttttttttttt",
     "tttttttttttttttt",
   ] },
-  "tile-wall-house-unlit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71573d","g":"#d1bc88","u":"#4767aa","h":"#7090c7","F":"#757585"}, rows: [
+  "tile-wall-house-unlit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71573d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100199,7 +100199,7 @@ export const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-lab-plain": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
+  "tile-wall-lab-plain": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#7a6f63","t":"#71523d","u":"#a87f36","h":"#cfa860","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100217,7 +100217,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-lab-upper": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
+  "tile-wall-lab-upper": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#7a6f63","t":"#71523d","u":"#a87f36","h":"#cfa860","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100235,7 +100235,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-lab": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
+  "tile-wall-lab": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#7a6f63","t":"#71523d","u":"#a87f36","h":"#cfa860","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -100307,7 +100307,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",

@@ -17,12 +17,12 @@ llllllllllllllll
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #c6d8e9 center-white
+w #e8ccd6 center-white
 l #e1d9ba center-cream
 s #a04141 center-red-dark
 r #bf5b5b center-red
 t #71523d trim
-u #476faa window-glass
-h #7097c7 glass-shine
-g #5681bd door-glass
+u #a87f36 window-glass
+h #cfa860 glass-shine
+g #a87f36 door-glass
 F #757585 foundation-stone

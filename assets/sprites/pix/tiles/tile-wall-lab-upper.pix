@@ -19,9 +19,9 @@ FFFFFFFFFFFFFFFF
 PAL
 w #8b8b9b metal-mid
 l #b0b6c1 metal-light
-s #59687a metal-dark
+s #7a6f63 metal-dark
 t #71523d trim
-u #476faa porthole-glass
-h #7097c7 glass-shine
+u #a87f36 porthole-glass
+h #cfa860 glass-shine
 q #549e8d panel-teal
 F #757585 foundation-stone
