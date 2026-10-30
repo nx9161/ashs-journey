@@ -17,15 +17,15 @@ eetttttvvvteeevv
 .......kk.......
 .......kk.......
 PAL
-t #53854b leaf
-u #467340 leaf-dark
-v #649d5b leaf-light
-s #4e7e44 leaf-shadow
-e #47753f leaf-deep
-h #e1b1c9 fuchsia-blossom
-a #e1b1c9 fuchsia-fruit
-x #b184b8 fuchsia-canopy-tint
-z #e6bec0 fuchsia-bloom-light
-n #9d64a6 fuchsia-canopy-shade
+t #55884a leaf
+u #33582f leaf-dark
+v #84bd6d leaf-light
+s #487a41 leaf-shadow
+e #3c6b38 leaf-deep
+h #8fbc74 fuchsia-blossom
+a #8fbc74 fuchsia-fruit
+x #55884a fuchsia-canopy-tint
+z #a9cf92 fuchsia-bloom-light
+n #3c6b38 fuchsia-canopy-shade
 k #71523d trunk
 w #846a4e trunk-light

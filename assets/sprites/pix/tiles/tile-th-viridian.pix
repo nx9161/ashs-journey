@@ -3,56 +3,56 @@ PIX tile-th-viridian 16 48
 zzzzzzzaazzzzzzz
 zzzzzzdaadzzzzzz
 zzzzzdaaaadzzzzz
-zzzzdddzdddzzzzz
-mmmzdddzdddzdmmm
-mmdzdddzdddzddmm
-kddzdddzdddzdddk
-dddzdddzdddzdddz
-aaggggaaggaagggg
+zzzzdddzzdddzzzz
+mmmzdddzzdddzmmm
+mmdzdddzzdddzdmm
+kddzdddzzdddzddk
+dddzdddzzdddzddd
+aaggggaaaaggggaa
 gggggggggggggggg
-aaggggggggaagggg
+aaggggggggggggaa
 gggggggggggggggg
-aaggaaggggaagggg
+aaggaaggggaaggaa
 gggggggggggggggg
 dddddddddddddddd
 dddddddddddddddd
 mmmmmmmmmmmmmmmm
 kkkkkkkkkkkkkkkk
-agggggagggggaggg
-ggagggggaggggggg
-ggggagggggagggag
+agggggaggaggggga
+ggaggggggggggagg
+ggggaggggggagggg
 dddddddddddddddd
 rrrrrrrrrrrrrrrr
-dzdddzdddzdddzdd
+dzdddzddddzdddzd
 mmmmmmmmmmmmmmmm
 kkkkkkkkkkkkkkkk
-agggggagggggaggg
-ggagggggaggggggg
-ggggagggggagggag
+agggggaggaggggga
+ggaggggggggggagg
+ggggaggggggagggg
 dddddddddddddddd
 rrrrrrrrrrrrrrrr
-dzdddzdddzdddzdd
+dzdddzddddzdddzd
 rrrrrrrrrrrrrrrr
-dddzdddzdddzdddz
-dddzdddzdddzdddz
+dddzdddzzdddzddd
+dddzdddzzdddzddd
 mmmmmmmmmmmmmmmm
 mmmmmmmmmmmmmmmm
 mmmmmmmmmmmmmmmm
 kkkkkkkkkkkkkkkk
-ggggagggggaggggg
-ggagggggagggggag
-agggggagggggaggg
-ggggagggggaggggg
-ggagggggagggggag
-agggggagggggaggg
-ggggagggggaggggg
+ggggaggggggagggg
+ggaggggggggggagg
+agggggaggaggggga
+ggggaggggggagggg
+ggaggggggggggagg
+agggggaggaggggga
+ggggaggggggagggg
 kkkkkkkkkkkkkkkk
 kkkkkkkkkkkkkkkk
 PAL
-g #8b6255 viridian-houseroof
-m #aa8074 houseroof-light
-d #725046 houseroof-deep
-z #65473e houseroof-deep-2
-a #d4a89b houseroof-accent
-k #794c3e eave-trim
-r #a27567 ridge-light
+g #8b5c55 viridian-houseroof
+m #aa7a74 houseroof-light
+d #724b46 houseroof-deep
+z #65423e houseroof-deep-2
+a #d4a19b houseroof-accent
+k #79453e eave-trim
+r #a26e67 ridge-light

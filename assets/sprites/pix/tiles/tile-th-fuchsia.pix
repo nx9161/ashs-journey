@@ -1,58 +1,58 @@
 # Premium+ W6: TX-3 tall roof 16x48 (ridge/gable + slope + eave), fuchsia safari thatch — bottom-anchored on the existing roof cell
 PIX tile-th-fuchsia 16 48
-zzzzzzzaazzzaazz
+zzzzzzzaazzzzzzz
 zzzzzzdaadzzzzzz
 zzzzzdaaaadzzzzz
-zzzzdddzdddzzzzz
-mmmzdddzdddzzzmm
-mmdzdddzdddzzzmm
-kddzdddzdddzdddk
-dddzdddzdddzdddz
-aaggggaaggaagggg
+zzzzdddzzdddzzzz
+mmmzdddzzdddzmmm
+mmdzdddzzdddzdmm
+kddzdddzzdddzddk
+dddzdddzzdddzddd
+aaggggaaaaggggaa
 gggggggggggggggg
-aaggggggggaagggg
+aaggggggggggggaa
 gggggggggggggggg
-aaggaaggggaagggg
+aaggaaggggaaggaa
 gggggggggggggggg
 dddddddddddddddd
 dddddddddddddddd
 mmmmmmmmmmmmmmmm
 kkkkkkkkkkkkkkkk
-agggggagggggaggg
-ggagggggaggggggg
-ggggagggggagggag
+agggggaggaggggga
+ggaggggggggggagg
+ggggaggggggagggg
 dddddddddddddddd
 rrrrrrrrrrrrrrrr
-dzdddzdddzdddzdd
+dzdddzddddzdddzd
 mmmmmmmmmmmmmmmm
 kkkkkkkkkkkkkkkk
-agggggagggggaggg
-ggagggggaggggggg
-ggggagggggagggag
+agggggaggaggggga
+ggaggggggggggagg
+ggggaggggggagggg
 dddddddddddddddd
 rrrrrrrrrrrrrrrr
-dzdddzdddzdddzdd
+dzdddzddddzdddzd
 rrrrrrrrrrrrrrrr
-dddzdddzdddzdddz
-dddzdddzdddzdddz
+dddzdddzzdddzddd
+dddzdddzzdddzddd
 mmmmmmmmmmmmmmmm
 mmmmmmmmmmmmmmmm
 mmmmmmmmmmmmmmmm
 kkkkkkkkkkkkkkkk
-ggggagggggaggggg
-ggagggggagggggag
-agggggagggggaggg
-ggggagggggaggggg
-ggagggggagggggag
-agggggagggggaggg
-ggggagggggaggggg
+ggggaggggggagggg
+ggaggggggggggagg
+agggggaggaggggga
+ggggaggggggagggg
+ggaggggggggggagg
+agggggaggaggggga
+ggggaggggggagggg
 kkkkkkkkkkkkkkkk
 kkkkkkkkkkkkkkkk
 PAL
-g #748aaa fuchsia-houseroof
-m #869ec1 houseroof-light
-d #5e6d82 houseroof-deep
-z #4d596a houseroof-deep-2
-a #b8c9e0 houseroof-accent
-k #3e5779 eave-trim
-r #8da0b9 ridge-light
+g #74aaaa fuchsia-houseroof
+m #86c1c1 houseroof-light
+d #5e8281 houseroof-deep
+z #4d6a6a houseroof-deep-2
+a #b8e0df houseroof-accent
+k #3e7978 eave-trim
+r #8db9b8 ridge-light

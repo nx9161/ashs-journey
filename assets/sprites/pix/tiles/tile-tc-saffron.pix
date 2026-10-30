@@ -17,15 +17,15 @@ eetttxxvvvteezzn
 .......kk.......
 .......kk.......
 PAL
-t #53854b leaf
-u #467340 leaf-dark
-v #649d5b leaf-light
-s #4e7e44 leaf-shadow
-e #47753f leaf-deep
-h #d8cc9b saffron-blossom
-a #d8cc9b saffron-fruit
-x #b58767 saffron-canopy-tint
-z #d0dda8 saffron-bloom-light
-n #a1704f saffron-canopy-shade
+t #55884a leaf
+u #33582f leaf-dark
+v #84bd6d leaf-light
+s #487a41 leaf-shadow
+e #3c6b38 leaf-deep
+h #8fbc74 saffron-blossom
+a #8fbc74 saffron-fruit
+x #55884a saffron-canopy-tint
+z #a9cf92 saffron-bloom-light
+n #3c6b38 saffron-canopy-shade
 k #71523d trunk
 w #846a4e trunk-light

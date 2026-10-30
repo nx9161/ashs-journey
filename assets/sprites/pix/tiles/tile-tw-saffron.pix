@@ -17,10 +17,10 @@ nnnnnnnnnnnnnnnn
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #c8b493 saffron-wall
-n #b3986b wall-shade-band
-s #ac8f5d wall-shadow
-t #71523d window-frame
-g #d1bc88 window-lit
-h #c6d8e9 glass-shine
-F #757585 foundation-stone
+w #c8ad93 saffron-wall
+n #b38e6b wall-shade-band
+s #ac845d wall-shadow
+t #714b3d window-frame
+g #d1b288 window-lit
+h #c6dde9 glass-shine
+F #757785 foundation-stone

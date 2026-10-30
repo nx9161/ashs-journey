@@ -17,15 +17,15 @@ eeqqtttvvvteeevv
 .......kk.......
 .......kk.......
 PAL
-t #53854b leaf
-u #467340 leaf-dark
-v #649d5b leaf-light
-s #4e7e44 leaf-shadow
-e #47753f leaf-deep
-h #c5bfae pewter-blossom
-a #c5bfae pewter-fruit
-q #aa9592 pewter-canopy-tint
-z #c8cdb9 pewter-bloom-light
-n #937976 pewter-canopy-shade
+t #55884a leaf
+u #33582f leaf-dark
+v #84bd6d leaf-light
+s #487a41 leaf-shadow
+e #3c6b38 leaf-deep
+h #8fbc74 pewter-blossom
+a #8fbc74 pewter-fruit
+q #55884a pewter-canopy-tint
+z #a9cf92 pewter-bloom-light
+n #3c6b38 pewter-canopy-shade
 k #71523d trunk
 w #846a4e trunk-light

@@ -17,15 +17,15 @@ eeaataavvvxhzevv
 .......kk.......
 .......kk.......
 PAL
-t #4b854c leaf
-u #407343 leaf-dark
-v #5b9d5d leaf-light
-s #457e44 leaf-shadow
-e #3f7541 leaf-deep
-h #c6b7db lavender-blossom
-a #c6b7db lavender-fruit
-x #8c8cb0 lavender-canopy-tint
-z #dcc2e2 lavender-bloom-light
-n #6d6e9b lavender-canopy-shade
+t #55884a leaf
+u #33582f leaf-dark
+v #84bd6d leaf-light
+s #487a41 leaf-shadow
+e #3c6b38 leaf-deep
+h #8fbc74 lavender-blossom
+a #8fbc74 lavender-fruit
+x #55884a lavender-canopy-tint
+z #a9cf92 lavender-bloom-light
+n #33582f lavender-canopy-shade
 k #71523d trunk
 w #846a4e trunk-light

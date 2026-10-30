@@ -17,15 +17,15 @@ eetttxxvvvteeenn
 .......kk.......
 .......kk.......
 PAL
-t #53854b leaf
-u #467340 leaf-dark
-v #649d5b leaf-light
-s #4e7e44 leaf-shadow
-e #47753f leaf-deep
-h #aad4cc cerulean-blossom
-a #aad4cc cerulean-fruit
-x #6da27f cerulean-canopy-tint
-z #b6d1da cerulean-bloom-light
-n #5a8d6b cerulean-canopy-shade
+t #55884a leaf
+u #33582f leaf-dark
+v #84bd6d leaf-light
+s #487a41 leaf-shadow
+e #3c6b38 leaf-deep
+h #8fbc74 cerulean-blossom
+a #8fbc74 cerulean-fruit
+x #55884a cerulean-canopy-tint
+z #a9cf92 cerulean-bloom-light
+n #3c6b38 cerulean-canopy-shade
 k #71523d trunk
 w #846a4e trunk-light
