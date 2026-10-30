@@ -1167,6 +1167,23 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
     pushSkirts(layers);
     pushDoorMat(layers);
+    // Perfection Pass Stage 1 (W2): tg<->path transition set — the same
+    // edge-dirt treatment the grass family carries against path (corners
+    // first, then sides), keyed on neighbours of kind 'path'. Town ground
+    // is the edge-dirt art's second home; this ships the missing set for
+    // every town-ground/path border game-wide.
+    if (cache.edgeDirt) {
+      const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
+      const used = new Set();
+      for (const c of ['ne', 'se', 'sw', 'nw']) {
+        if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
+          layers.push(cache.edgeDirt[c]); used.add(c[0]); used.add(c[1]);
+        }
+      }
+      for (const d of DIRS) {
+        if (p[d] && !used.has(d) && cache.edgeDirt[d]) layers.push(cache.edgeDirt[d]);
+      }
+    }
     return layers.filter(Boolean);
   }
   if (kind.startsWith('tc-') || kind.startsWith('td-')) {
@@ -1319,7 +1336,10 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       pushDetail(layers, 0.10, 23, cache.detailCalmSet); // readability pass: was 0.20 full set
       pushBlends(layers);
       pushAtmo(layers);
-      const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign';
+      // Perfection Pass Stage 1 (W2): town ground (tg-/tg2-) joins the
+      // grassy family — edgeGrass fringe now fires on path cells bordering
+      // town ground, completing the tg<->path set on the path side.
+      const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'flower' || k === 'tree' || k === 'rock' || k === 'sign' || (k != null && (k.startsWith('tg-') || k.startsWith('tg2-')));
       for (const d of DIRS) {
         if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
         // Fringe on ~70% of path cells (position hash): a fringe on every
