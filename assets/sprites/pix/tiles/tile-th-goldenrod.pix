@@ -1,23 +1,23 @@
 # Stage J3a: goldenrod house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-goldenrod 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+caaaaaaaaaaaaaac
+aaaaaaaccaaaaaaa
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #945d4c goldenrod-roof
-b #794c3e roof-dark
-c #ac705d roof-light
-d #c28370 roof-trim
+a #995a53 goldenrod-roof
+b #79453e roof-dark
+c #a95852 roof-light
+d #c47168 roof-trim

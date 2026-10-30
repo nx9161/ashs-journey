@@ -1,23 +1,23 @@
 # Stage J3a: blackthorn house wall — town-toned facade, one lit window (full-bleed, solid).
 PIX tile-tw-blackthorn 16 16
 bbbbbbbbbbbbbbbb
-aaaaaaaabaabaaaa
-aaaaaaaaaaaaabaa
-aaaaaabaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggbaaaaaaaa
-aaaggggabaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-aaabababaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaabaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaabaabaaaaaa
+aaahgggaaggghaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaabababbababaaa
+aaaaaaaaaaaaaaaa
+aaaaaabaabaaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #a19b91 blackthorn-house-wall
-b #6e6e75 house-wall-trim
-g #cab578 house-window-lit
-h #d9ce9e house-window-light
+a #b4afa5 blackthorn-house-wall
+b #7c7c87 house-wall-trim
+g #e0d0a4 house-window-lit
+h #f0d89c house-window-light

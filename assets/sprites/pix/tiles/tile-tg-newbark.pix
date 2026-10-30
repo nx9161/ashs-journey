@@ -1,25 +1,25 @@
 # Stage J3a: newbark town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-newbark 16 16
-fabaaaabaaaaafba
-bacaadaaaaaaaaaa
-aacaabaaaaaabaaa
-aabaaaaaaacaaaaa
-baaaaabaaaacaaaa
-aaadaaaafaafaaaa
-aacaaadadbaaafdf
-badcbbbaacaacaab
-adcaaccaaaaaaaaa
-acaaabbaaaaaaaba
-aacaaaadbdcaaaaa
-acdabaaacdcaaada
-acbdfaabadaaaaaa
-aaaabaaaaabdacaa
-fbccfbaacbfcaaaa
-aabbaaaaaabaabaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #8eada1 newbark-ground
 b #7a8f86 ground-dark
 c #9dc7b6 ground-light
-d #717d84 town-accent
-e #d0dbba town-accent-2
-f #667972 ground-deep
+d #7a8f86 town-accent
+e #9dc7b6 town-accent-2
+f #7a8f86 ground-deep

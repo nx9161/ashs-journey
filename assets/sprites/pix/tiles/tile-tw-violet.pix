@@ -1,23 +1,23 @@
 # Stage J3a: violet house wall — town-toned facade, one lit window (full-bleed, solid).
 PIX tile-tw-violet 16 16
 bbbbbbbbbbbbbbbb
-aaaaaabbaaaaaaaa
+aaaaaabbbbaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaahgggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaabaaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaabaaaaaaaab
+aaahgggbbggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaabaabaaaaaa
 aaaaaaaaaaaaaaaa
-aaabaaaabaaaaaaa
+aaabaaaaaaaabaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #aba59c violet-house-wall
-b #76737c house-wall-trim
-g #cab578 house-window-lit
-h #d9ce9e house-window-light
+a #b2a795 violet-house-wall
+b #7f7b85 house-wall-trim
+g #d1bc88 house-window-lit
+h #dcd3ae house-window-light

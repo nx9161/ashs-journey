@@ -1,23 +1,23 @@
 # Stage J3a: cherrygrove house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-cherrygrove 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+caaaaaaaaaaaaaac
+aaaaaaaccaaaaaaa
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #a26653 cherrygrove-roof
-b #875545 roof-dark
-c #bc7762 roof-light
-d #c8907e roof-trim
+a #a95852 cherrygrove-roof
+b #874e45 roof-dark
+c #c16a61 roof-light
+d #c77a70 roof-trim

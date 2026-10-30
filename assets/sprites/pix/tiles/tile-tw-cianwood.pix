@@ -1,23 +1,23 @@
 # Stage J3a: cianwood house wall — town-toned facade, one lit window (full-bleed, solid).
 PIX tile-tw-cianwood 16 16
 bbbbbbbbbbbbbbbb
-aabaaaaaaaaaaaaa
-aaaaaaaaaaabaaaa
-aaaaaaaaaaabaaab
-aaahgggaaaaaaaaa
-aaaggggaaaabaaaa
-aaaggggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaabaaa
-aaabbbbaaaaaaaaa
-aaaaabaaaaaaaaaa
-aaaaaaaaaaaaaaab
-baaaaaaaaaaaaaaa
-aaabaaaaaabaaaaa
+aabaaaaaaaaaabaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaabaaaabaaaaa
+aaaaaaaaaaaaaaaa
+baaaaaaaaaaaaaab
+aaabaaaaaaaabaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #b1a081 cianwood-house-wall
+a #cebea1 cianwood-house-wall
 b #877e64 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

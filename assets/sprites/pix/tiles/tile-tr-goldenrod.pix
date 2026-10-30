@@ -1,23 +1,23 @@
 # Stage J3a: goldenrod roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-goldenrod 16 16
 dddddddddddddddd
-aaaabaacabaaaaba
-aaacbaaaabaaaaba
-aaaabaaaabcaaaba
+aaaabaaccaabaaaa
+aaacbaaaaaabcaaa
+aaaabaaaaaabaaaa
 bbbbbbbbbbbbbbbb
-aacabaaaabaaacba
-aaaabaaaabaaaaba
-aaaabcaaabaaaaba
-acaabaaaabaacaba
+aacabaaaaaabacaa
+aaaabaaaaaabaaaa
+aaaabcaaaacbaaaa
+acaabaaaaaabaaca
 bbbbbbbbbbbbbbbb
-aaaabaaaabaaaabc
-caaabaaaabacaaba
-aaaabaacabaaaaba
-aaacbaaaabaaaaba
+aaaabaaaaaabaaaa
+caaabaaaaaabaaac
+aaaabaaccaabaaaa
+aaacbaaaaaabcaaa
 bbbbbbbbbbbbbbbb
-bbbbbbabbbbbbbbb
+bbbbbbabbabbbbbb
 PAL
-a #945d4c goldenrod-roof
-b #794c3e roof-dark
-c #ac705d roof-light
-d #c28370 roof-trim
+a #995a53 goldenrod-roof
+b #79453e roof-dark
+c #a95852 roof-light
+d #c47168 roof-trim

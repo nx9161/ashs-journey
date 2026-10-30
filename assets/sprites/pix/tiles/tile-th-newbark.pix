@@ -1,23 +1,23 @@
 # Stage J3a: newbark house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-newbark 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+caaaaaaaaaaaaaac
+aaaaaaaccaaaaaaa
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #8b6255 newbark-roof
-b #725046 roof-dark
-c #a27567 roof-light
-d #a26653 roof-trim
+a #8b5c55 newbark-roof
+b #724b46 roof-dark
+c #a26e67 roof-light
+d #a95852 roof-trim

@@ -1,25 +1,25 @@
 # Stage J3a: azalea town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-azalea 16 16
-babbaaabaaaabdaa
-aaabaabaafaaaaaf
-aaaaabaaaaaaaaad
-aabfaaabaadbaaab
-aaabaaaaabaaadad
 aaaaaaaaaaaaaaaa
-aaaaaadabaaaabaa
-baddaabaaaaaffaa
-abaabaababbdaaaa
-aaabaaabaaaaaaaa
-aaaaaaaaafaaaada
-faaadabaaaaaaafa
-baafaaaaaadadaaa
-abdaaaaaaaaaabaa
-aaaaabaaaaaaaaba
-affaaaafaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #79a475 azalea-ground
 b #668c63 ground-dark
 c #85bc80 ground-light
-d #c4a868 town-accent
-e #9e6950 town-accent-2
-f #577755 ground-deep
+d #85bc80 town-accent
+e #668c63 town-accent-2
+f #668c63 ground-deep

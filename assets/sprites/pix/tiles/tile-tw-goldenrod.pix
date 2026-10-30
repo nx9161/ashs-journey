@@ -1,23 +1,23 @@
 # Stage J3a: goldenrod house wall — town-toned facade, one lit window (full-bleed, solid).
 PIX tile-tw-goldenrod 16 16
 bbbbbbbbbbbbbbbb
-aaaaabaaaaaaaaaa
-aaaaabaaaaaaaaaa
-aaaaaaaaaaabaaaa
-aaahgggaaaaaaaaa
-abbggggbaaaaaaaa
-baaggggaaaaaaaaa
-aaaggggaaaaaaaab
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaba
-aaaaaaaaaaabaaaa
+aaaaabaaaabaaaaa
+aaaaabaaaabaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaba
-bbaaaaaabaaaaaaa
+aaahgggaaggghaaa
+abbggggbbggggbba
+baaggggaaggggaab
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+bbaaaaaaaaaaaabb
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #c1ab86 goldenrod-house-wall
+a #e2d2a8 goldenrod-house-wall
 b #8c7e64 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

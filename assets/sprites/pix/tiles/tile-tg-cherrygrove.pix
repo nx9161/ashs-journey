@@ -1,25 +1,25 @@
 # Stage J3a: cherrygrove town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-cherrygrove 16 16
-aaaadacaacdfaaaa
-aaaaabbaaaabaaaa
-caaaabcaaaaaabac
-aaccbacabacaccda
-aaaafaaaacaaabbc
-abbacaacaaabacbc
-acaaabacafaaaaac
-aaabacabcdbcaaaa
-baaaacaaaaacacad
-aaaaaaaaaaaacbaa
-aaaaafaabcfaabdc
-baaaacacaabaaaca
-ababcbaaaaaaaaac
-cbdabafabaabaaaa
-acccabbaaaafaaca
-abaaaaaaacaaabaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #a1b787 cherrygrove-ground
 b #879675 ground-dark
 c #b6d593 ground-light
-d #ca788d town-accent
-e #cac177 town-accent-2
-f #728061 ground-deep
+d #b6d593 town-accent
+e #b6d593 town-accent-2
+f #879675 ground-deep

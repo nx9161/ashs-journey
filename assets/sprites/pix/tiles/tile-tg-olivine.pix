@@ -1,25 +1,25 @@
 # Stage J3a: olivine town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-olivine 16 16
-aaaaaaaaaaccaaaa
-caaaaaaaaaaaabba
-abaabadbaccbacaa
-afabdadaaaabaacc
-bfaaabbabacabcaa
-aaaaaaadaaaaaaaa
-acaaaaaaaabacaaa
-ddacacacfaaacaba
-acaacaaadaaacbaa
-aaaaacabaaaabbab
-aaaaaaaaabaaaabb
-cfdabacafaafabba
-caaabababacabbba
-acacdfbafdabbcac
-aacabaaaaaababad
-aaacaaabaacaaaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #80a1ac olivine-ground
 b #6c8791 ground-dark
-c #8cb7c7 ground-light
-d #c19960 town-accent
-e #d7d7c9 town-accent-2
-f #5c737a ground-deep
+c #8fb8c6 ground-light
+d #8fb8c6 town-accent
+e #8fb8c6 town-accent-2
+f #6c8791 ground-deep

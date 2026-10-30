@@ -1,25 +1,25 @@
 # Stage J3a: violet town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-violet 16 16
-cadfaacbcafbaaaa
-aaaaaaacabaaaaba
-abfaaaaacaaacaaa
-aaabcaaaaacaacba
-aaabfcaaaaaaaaaa
-aabbaaabbabbaaba
-acadbaabaaaaaafa
-accacaaaabbcafbc
-aaaafaaacaabaaaa
-adaabaacaaaacaaa
-aaafabaabaaaaaaa
-aaaabcbaaaacacdb
-daaaaaaaacaaaaab
-cabbaaaaadbaabaa
-faaacccaaabaabfa
-aaccaaaabbaafaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #97929f violet-ground
 b #7f7b85 ground-dark
 c #aaa4b5 ground-light
-d #8075a6 town-accent
-e #c0b7d3 town-accent-2
-f #6b6971 ground-deep
+d #aaa4b5 town-accent
+e #aaa4b5 town-accent-2
+f #7f7b85 ground-deep

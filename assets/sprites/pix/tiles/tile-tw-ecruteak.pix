@@ -2,22 +2,22 @@
 PIX tile-tw-ecruteak 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-aaababaaaaaaaaaa
+aaababaaaababaaa
 aaaaaaaaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggabaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaba
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+baaaaaaaaaaaaaab
+baaaaaaaaaaaaaab
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #baa278 ecruteak-house-wall
+a #d8c08a ecruteak-house-wall
 b #916e54 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

@@ -1,25 +1,25 @@
 # Stage J3a: ecruteak town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-ecruteak 16 16
-cabafaaaaaaaaaad
-bcaccaaaffbaaaaa
-acaaaaaaaaaaaaaa
-caaaaaaaaaaacaaa
-aacaaaaaaadbacaa
-aabaaccaaaacaaaa
-aacaaaaaaaaaaaaa
-abaaacaabbaccaaa
-aacaacafacaacaaf
-aafaabaabcbaadaa
-aadaabaacbfaaaab
-fabaaabcafaaacaa
-abbaccdbacaabaac
-aacaadacaaacaafa
-aaabaabaaacaaaac
-caaabbccccbabaca
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #b88b6a ecruteak-ground
 b #9b7659 ground-dark
-c #cb9e7a ground-light
-d #b45246 town-accent
-e #caae77 town-accent-2
-f #84644c ground-deep
+c #d4aa90 ground-light
+d #9b7659 town-accent
+e #d4aa90 town-accent-2
+f #9b7659 ground-deep

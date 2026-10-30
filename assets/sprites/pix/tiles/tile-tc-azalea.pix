@@ -17,9 +17,9 @@ PIX tile-tc-azalea 16 16
 .......kk.......
 ................
 PAL
-a #79a475 canopy
-b #668c63 canopy-dark
-c #85bc80 canopy-light
-d #c4a868 canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light

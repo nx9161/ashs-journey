@@ -2,22 +2,22 @@
 PIX tile-tw-mahogany 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-abaaaaaaaaaaaaaa
+abaaaaaaaaaaaaba
 aaaaaaaaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaabaaa
-baabbbbabaaaaaaa
-aaaaaaaaaaaaabaa
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+baabbbbaabbbbaab
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaaabaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #a99d89 mahogany-house-wall
-b #6e7e6d house-wall-trim
-g #cab578 house-window-lit
-h #d9ce9e house-window-light
+a #b2a795 mahogany-house-wall
+b #768775 house-wall-trim
+g #d1bc88 house-window-lit
+h #e1d9ba house-window-light
