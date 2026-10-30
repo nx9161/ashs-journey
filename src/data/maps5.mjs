@@ -3679,7 +3679,7 @@ export const MAPS5 = {
       ">---------------->",
       ">---------------->",
       ">---------------->",
-      ">>>>>>>>-->>>>>>>>"
+      ">>>>>>>>DD>>>>>>>>"
     ],
     "warps": [
       {
@@ -4082,7 +4082,7 @@ export const MAPS5 = {
       "ảẢẢḚẢẢθẢ+ẢẢṤṤẢẢ+ẢθẢẢḚẢẢả",
       "ảẢẢẢẢẢẢẢẢẢẢṤṤẢẢẢẢẢẢẢẢẢẢả",
       "ảẢẢẢẢẢẢẢẢẢẢṤṤẢẢẢẢẢẢẢẢẢẢả",
-      "ảảảảảảảảảảảẢẢảảảảảảảảảảả"
+      "ảảảảảảảảảảảDDảảảảảảảảảảả"
     ],
     "warps": [
       {
@@ -4180,7 +4180,7 @@ export const MAPS5 = {
       "ạẠẠẠẠẠẠṤṤẠẠẠẠẠẠạ",
       "ạẠẠẠẠẠẠṤṤẠẠẠẠẠẠạ",
       "ạẠẠẠθẠẠṤṤẠẠθẠẠẠạ",
-      "ạạạạạạạẠẠạạạạạạạ"
+      "ạạạạạạạDDạạạạạạạ"
     ],
     "warps": [
       {
@@ -4287,7 +4287,7 @@ export const MAPS5 = {
       "ṺṻṻṻQṩṻṻṻṻṩQṻṻṻṺ",
       "ṺṻṻṮṻṽṻṻṻṻṽṻṮṻṻṺ",
       "ṺṻṻṻθṻṻṻṻṻṻθṻṻṻṺ",
-      "ṺṺṺṺṺṺṺṻṻṺṺṺṺṺṺṺ"
+      "ṺṺṺṺṺṺṺDDṺṺṺṺṺṺṺ"
     ],
     "warps": [
       {
@@ -4338,7 +4338,7 @@ export const MAPS5 = {
       "GLLLLLLLLLLLLG",
       "GLLLLLLLLLLLLG",
       "GLLLLLLLLLLLLG",
-      "GGGGGGLLGGGGGG"
+      "GGGGGGDDGGGGGG"
     ],
     "warps": [
       {
@@ -4392,7 +4392,7 @@ export const MAPS5 = {
       "GLLLLLLLLLLLLG",
       "GLLLLLLLLLLLLG",
       "GLLLLLLLLLLLLG",
-      "GGGGGGLLGGGGGG"
+      "GGGGGGDDGGGGGG"
     ],
     "warps": [
       {
@@ -4446,7 +4446,7 @@ export const MAPS5 = {
       "GLLLLLLLLLLLLG",
       "GLLLLLLLLLLLLG",
       "GLLLLLLLLLLLLG",
-      "GGGGGGLLGGGGGG"
+      "GGGGGGDDGGGGGG"
     ],
     "warps": [
       {
