@@ -17,10 +17,10 @@ wwwwwwwwwwwwwwww
 tttttttttttttttt
 tttttttttttttttt
 PAL
-w #8b8b9b stone-mid
-l #b0b6c1 stone-light
-s #757585 stone-dark
-t #71523d trim
-d #505b6b door-iron
-g #d1bc88 window-lit
-F #757585 foundation-stone
+w #9c9ca7 stone-mid
+l #b7bdc9 stone-light
+s #7c7c8d stone-dark
+t #795841 trim
+d #566273 door-iron
+g #d9c38d window-lit
+F #7c7c8d foundation-stone
