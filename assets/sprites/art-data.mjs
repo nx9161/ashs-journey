@@ -83093,7 +83093,7 @@ export const ART = {
     "wwttFQQQQQFssstt",
     "ssssFFFFFFFsssss",
   ] },
-  "tile-door-gym-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#c9a227","V":"#2e4a7d"}, rows: [
+  "tile-door-gym-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1e2f52","Z":"#c9a227","V":"#2a4066"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83129,7 +83129,7 @@ export const ART = {
     "ttstFQQQQQFsssww",
     "ssssFFFFFFFsssss",
   ] },
-  "tile-door-gym-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#2e4a7d","Z":"#263d63","V":"#2e4a7d"}, rows: [
+  "tile-door-gym-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#2a4066","Z":"#1e2f52","V":"#2a4066"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83183,7 +83183,7 @@ export const ART = {
     "wwwllllllllllwww",
     "wwssssssssssssww",
   ] },
-  "tile-door-lab-facade": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#1f3252","V":"#ffd873"}, rows: [
+  "tile-door-lab-facade": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#1f3252","V":"#ffd873"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83219,7 +83219,7 @@ export const ART = {
     "wwttFQQQQQFuuult",
     "ssssFFFFFFFuuuss",
   ] },
-  "tile-door-lab-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#2e4a7d","V":"#ffd873"}, rows: [
+  "tile-door-lab-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#263d63","V":"#ffd873"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83255,7 +83255,7 @@ export const ART = {
     "tlttFQQQQQFuuuww",
     "ssssFFFFFFFuuuss",
   ] },
-  "tile-door-lab-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#2e4a7d","V":"#ffd873"}, rows: [
+  "tile-door-lab-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#263d63","V":"#ffd873"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83471,7 +83471,7 @@ export const ART = {
     "sslsssssssssssww",
     "ssssssssssssssss",
   ] },
-  "tile-door": { w: 16, h: 16, pal: {"h":"#b99b74","k":"#71523d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#ffd873"}, rows: [
+  "tile-door": { w: 16, h: 16, pal: {"h":"#b99b74","k":"#71523d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#ffd873"}, rows: [
     "hhhhhhhhhhhhhhhh",
     "hhFFFFFFFFFFhhhh",
     "hhFQQQQQQQQFhhhh",
