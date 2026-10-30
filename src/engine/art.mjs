@@ -1377,9 +1377,11 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     }
     case 'cavewall': {
       // Strata walls by position hash; an exposed face (floor to the
-      // south) with a lucky hash wears the stalactite face instead.
+      // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
+      // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
+      // faces render it (was hash-gated at <45%).
       const layers = [];
-      if (nb.s === 'cavefloor' && cache.stalactite && hashTileSpread(x, y, 52) < 0.45) layers.push(cache.stalactite);
+      if (nb.s === 'cavefloor' && cache.stalactite) layers.push(cache.stalactite);
       else layers.push(pickVariantSpread(cache.caveWallVariants, x, y, 51) || cache.cavewall);
       // W3: cave drip on exposed faces (slow cadence, phase-offset).
       if (nb.s === 'cavefloor' && hashTileSpread(x, y, 83) < 0.5) {
