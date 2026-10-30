@@ -1,7 +1,7 @@
 # Stage J3a: cianwood house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-cianwood 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,9 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #776a5b cianwood-roof
-b #63594c roof-dark
-c #897969 roof-light
-d #5d90a2 roof-trim
+a #765d56 cianwood-roof
+b #6a544d roof-dark
+c #8e7067 roof-light
+d #a27567 roof-trim
+F #987a71 r2-highlight
+Q #53413c r2-shade

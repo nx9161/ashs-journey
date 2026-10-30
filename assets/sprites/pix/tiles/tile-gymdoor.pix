@@ -3,15 +3,15 @@ PIX tile-gymdoor 16 16
 mmmmmmmmmmmmmmmm
 mmmzzzzzzzzzzmmm
 mmmzzzzzzzzzzmmm
-mmmzkkkkkkkkzmmm
-mmmkzzzzzzzzkmmm
-mmmkzzzzzzzzkmmm
-mmmkzzzzzzzzkmmm
-mmmkzzzzzzzzkmmm
-mmmkzzzzzzzzkmmm
-mmmkzzzzzzzzkmmm
-mmmkzzzzzzzzkmmm
-mmmzkkkkkkkkzmmm
+mmmFFFFFFFFFFmmm
+mmmFQQQQQQQQFmmm
+mmmFQ&&&&&&QFmmm
+mmmFQ&&&&&&QFmmm
+mmmFQ&&&&&ZQFmmm
+mmmFQ%%%%%%QFmmm
+mmmFQ%%%%%%QFmmm
+mmmFQQQQQQQQFmmm
+mmmFFFFFFFFFFmmm
 mmmzzzzzzzzzzmmm
 mmmzzzzzzzzzzmmm
 mmmmmmmmmmmmmmmm
@@ -20,3 +20,8 @@ PAL
 m #8b8b9b stone
 z #757585 stone-dark
 k #71523d door-wood
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #464650 door-panel-deep
+Z #ffd873 door-knob

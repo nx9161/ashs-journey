@@ -1,21 +1,26 @@
 # hand-drawn (no draft).
 PIX tile-door 16 16
 hhhhhhhhhhhhhhhh
-hhkkkkkkkkkkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkhhhhhhhhkhhhh
-hhkkkkkkkkkkhhhh
+hhFFFFFFFFFFhhhh
+hhFQQQQQQQQFhhhh
+hhFQ&&&&&&QFhhhh
+hhFQ&&&&&&QFhhhh
+hhFQ&&&&&&QFhhhh
+hhFQ&&&&&&QFhhhh
+hhFQ&&&&&ZQFhhhh
+hhFQ&&&&&&QFhhhh
+hhFQ&&&&&&QFhhhh
+hhFQ%%%%%%QFhhhh
+hhFQ%%%%%%QFhhhh
+hhFQQQQQQQQFhhhh
+hhFFFFFFFFFFhhhh
 hhhhhhhhhhhhhhhh
 hhhhhhhhhhhhhhhh
 PAL
 h #b99b74 wall
 k #71523d door-wood
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #6f5d46 door-panel-deep
+Z #ffd873 door-knob

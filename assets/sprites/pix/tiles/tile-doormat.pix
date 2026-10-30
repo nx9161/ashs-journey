@@ -1,0 +1,25 @@
+# Readability Round 2 (lever 1, QA-fix v2): the shared doormat — a flat
+# wide slab with a single gold stripe (v1's concentric rings read as
+# targets). Resolver-drawn south of every door kind + interior exits.
+PIX tile-doormat 16 16
+................
+................
+..kkkkkkkkkkkk..
+..krrrrrrrrrrk..
+..krrrrrrrrrrk..
+..krrrrrrrrrrk..
+..kggggggggggk..
+..krrrrrrrrrrk..
+..krrrrrrrrrrk..
+..kkkkkkkkkkkk..
+..ssssssssssss..
+................
+................
+................
+................
+................
+PAL
+k #202028 outline
+r #a02828 mat-red
+g #ffd873 mat-gold
+s #4a4a3a contact-shadow

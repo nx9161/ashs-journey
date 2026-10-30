@@ -3,24 +3,24 @@
 # capture-scale speckle calmed. Original W5 note follows.
 # Premium+ W5: TX-1 gymfloor variant 4 — bold diamond (diff>=80px)
 PIX tile-gymfloor-4 16 16
-bbbbbbbbbbbbbbbb
-baaabaaacaaabaaa
-baaabaacacaabaaa
-baaabacacacabaaa
-bbbbacacacacbbbb
-baaacacaaacacaaa
-baacacaaaaacacaa
-bacacaaaaaaacaca
-bcacaaaaaaacacab
-bacacaaaaacacaaa
-baacacaaacacaaaa
-baaacacacacabaaa
-bbbbbcacacabbbbb
-baaabacacaaabaaa
-baaabaacaaaabaaa
-baaabaaabaaabaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #b99b74 gymfloor-floor
-b #a08f6d gymfloor-line
-c #c5b083 gymfloor-alt
-d #ac9771 gymfloor-alt2
+a #b19c81 gymfloor-floor
+b #988b71 gymfloor-line
+c #c1ae86 gymfloor-alt
+d #aa9774 gymfloor-alt2

@@ -532,6 +532,11 @@ const DOOR_GROUP = {
   'door-gym-l': 'gym', 'door-gym-r': 'gym',
   'door-lab-l': 'lab', 'door-lab-r': 'lab', 'door-lab-facade': 'lab',
 };
+// Readability Round 2 (lever 1): the full door-kind set — every door in
+// the game gets the same two glance signals (cream frame surgery in the
+// .pix sources + a shared doormat on the ground cell directly south).
+const DOOR_KINDS = new Set(['door', 'gymdoor', 'centerdoor', ...Object.keys(DOOR_GROUP)]);
+const isDoorKind = (k) => !!k && DOOR_KINDS.has(k);
 const FACADE_KIND_LIST = Object.keys(FACADE_GROUPS);
 // Premium+ W5 (TX-2): per-town identity kinds -> their authored tiles.
 for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
@@ -772,6 +777,7 @@ export function buildArtTileCache(doc) {
     'tile-shadow-tree-4', 'tile-shadow-tree-5', 'tile-shadow-tree-6', 'tile-shadow-tree-7']);
   cache.shadowRock = artCanvas(doc, 'tile-shadow-rock', 1);
   cache.shadowProp = artCanvas(doc, 'tile-shadow-prop', 1);
+  cache.doorMat = artCanvas(doc, 'tile-doormat', 1); // R2 lever 1: shared door signal
   cache.shadowBoulder = artCanvas(doc, 'tile-shadow-boulder', 1);
   cache.glowPools = ids(['tile-glowpool-1', 'tile-glowpool-2']);
   // Premium+ W5 round 3: canopy variant pairs + interior decor overlays.
@@ -1115,6 +1121,20 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     if ((nk === 'tree' || (nk && nk.startsWith('tc-'))) && cache.blendTreeline) layers.push(cache.blendTreeline);
     else if (nk && isArchKind(nk) && cache.blendArch && hashTileSpread(x, y, 157) < 0.65) layers.push(cache.blendArch);
   };
+  // Readability Round 2 (lever 1): a ground cell directly south of ANY
+  // door kind wears the shared doormat — one consistent entrance signal
+  // that no wall, path or lawn shares, indoors and out.
+  // QA-fix refinement: a two-wide door assembly (door-*-l + door-*-r)
+  // gets ONE mat, under its left half — paired mats read as window
+  // dressing and diluted the cue (re-grade §2/§6).
+  const pushDoorMat = (layers) => {
+    if (!cache.doorMat || !isDoorKind(nb.n)) return;
+    if (nb.n.endsWith('-r')) {
+      const west = at(-1, -1);
+      if (west && west.endsWith('-l') && DOOR_GROUP[west] && DOOR_GROUP[west] === DOOR_GROUP[nb.n]) return;
+    }
+    layers.push(cache.doorMat);
+  };
   // Premium+ W7 (TX-7): the biome atmosphere pass for this map.
   const pushAtmo = (layers) => {
     if (!cache.atmo) return;
@@ -1146,6 +1166,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     pushAtmo(layers);
     if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
     pushSkirts(layers);
+    pushDoorMat(layers);
     return layers.filter(Boolean);
   }
   if (kind.startsWith('tc-') || kind.startsWith('td-')) {
@@ -1223,6 +1244,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       pushAtmo(layers);
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers);
+      pushDoorMat(layers);
       if (cache.edgeDirt) {
         const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
         const used = new Set();
@@ -1269,6 +1291,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       // Wave 2: building directly north -> ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers); // W5 LD-1: east skirt + SE corner
+      pushDoorMat(layers);
       // grass<->path: worn dirt edge on the grass side (corners first).
       if (cache.edgeDirt) {
         const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
@@ -1292,6 +1315,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       // ground-shadow strip.
       if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
       pushSkirts(layers); // W5 LD-1
+      pushDoorMat(layers);
       pushDetail(layers, 0.10, 23, cache.detailCalmSet); // readability pass: was 0.20 full set
       pushBlends(layers);
       pushAtmo(layers);
@@ -1351,7 +1375,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       if (hashTileSpread(x, y, 62) < 0.10 && cache.detail && cache.detail.pebbles) layers.push(cache.detail.pebbles);
       // W5 round 3: tower/silph/plant floors are interiors — decor too
       // (cavefloor keeps its pebbles + crystals only).
-      if ((kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') && cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.75) {
+      if ((kind === 'towerfloor' || kind === 'silphfloor' || kind === 'plantfloor') && cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.25) { // R2 lever 6: decor diet (was 0.75)
         const d = pickVariantSpread(cache.decorSet, x, y, 131);
         if (d) layers.push(d);
       }
@@ -1360,6 +1384,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
         const cry = pickAnim(cache.crystalFrames, tt, x, y, CAD_MED, 81);
         if (cry) layers.push(cry);
       }
+      pushDoorMat(layers); // R2 QA-fix: cave/dungeon exits get the mat too (moon1)
       pushAtmo(layers); // W7: cave dust on dungeon floors
       return layers.filter(Boolean);
     }
@@ -1370,13 +1395,26 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       // Premium+ W5 (TX-1): variants are 4 per family (bold patterns).
       const layers = [groundBase(cache, kind, x, y)];
       if ((INTERIOR_WALLS.has(nb.n) || DUNGEON_WALLS.has(nb.n)) && cache.shadowStrip) layers.push(cache.shadowStrip);
+      // Readability Round 2 (QA fix): interior EXIT notches — gym-style
+      // exits are bare floor cells IN the south wall row: raw kindAt
+      // south of them is out of bounds (the at() wrapper masks this in
+      // nb, so kindAt is asked directly), with a wall to at least one
+      // side. They get the same doormat signal as an outdoor door.
+      if (cache.doorMat && kindAt(x, y + 1) == null &&
+        (INTERIOR_WALLS.has(nb.e) || INTERIOR_WALLS.has(nb.w) || DUNGEON_WALLS.has(nb.e) || DUNGEON_WALLS.has(nb.w))) {
+        layers.push(cache.doorMat);
+      }
       // Premium+ W5 round 3 (TX-1): hash-scattered decor overlays give
       // small interiors texture + colour depth (books, herb pots, cups,
       // papers, cushions, bottles, vases, shoes).
-      if (cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.75) {
+      // Readability Round 2 (lever 6): the scatter was the interiors'
+      // worst congestion source — 75% of floor cells wore a random prop
+      // fleck. Dieted to 20%: a floor reads as a floor again.
+      if (cache.decorSet && cache.decorSet.length && hashTile(x, y, 97) < 0.20) {
         const d = pickVariantSpread(cache.decorSet, x, y, 131);
         if (d) layers.push(d);
       }
+      pushDoorMat(layers); // R2 lever 1/6: interior exit doors get the mat too
       pushAtmo(layers); // W7: interior warmth on interior floors
       return layers.filter(Boolean);
     }
@@ -1605,7 +1643,7 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
       if (cache.decorSet && cache.decorSet.length &&
         ['centerfloor', 'martfloor', 'housefloor', 'gymfloor', 'labfloor',
          'towerfloor', 'silphfloor', 'plantfloor'].includes(kind) &&
-        hashTile(x, y, 97) < 0.75) {
+        hashTile(x, y, 97) < 0.25) { // R2 lever 6: decor diet (was 0.75)
         const d = pickVariantSpread(cache.decorSet, x, y, 131);
         if (d) return [v, d];
       }

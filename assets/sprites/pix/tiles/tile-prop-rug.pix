@@ -1,8 +1,8 @@
 # Wave 5a prop: Rug — deep red with gold motif (walkable)
 PIX tile-prop-rug 16 16
-aaaaaaaaaaaaaaaa
-abbbbbbbbbbbbbba
-abbbbbbbbbbbbbba
+bbbbbbbbbbbbbbbb
+bccccccccccccccb
+bccccccccccccccb
 abbaaaaaaaaaabba
 abbaaaaaaaaaabba
 abbaaaaccaaaabba
@@ -14,7 +14,7 @@ abbaaaaccaaaabba
 abbaaaaaaaaaabba
 abbaaaaaaaaaabba
 abbbbbbbbbbbbbba
-abbbbbbbbbbbbbba
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 PAL
 a #87493f rug-border

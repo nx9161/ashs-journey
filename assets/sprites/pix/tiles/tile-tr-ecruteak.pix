@@ -1,7 +1,7 @@
 # Stage J3a: ecruteak roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-ecruteak 16 16
 dddddddddddddddd
-abcaababcaababca
+FbcFFbFbcFFbFbcF
 acbabaacbabaacba
 caabaacaabaacaab
 aababcaababcaaba
@@ -14,10 +14,12 @@ aababcaababcaaba
 abaacbabaacbabaa
 baacaabaacaabaac
 abcaababcaababca
-acbabaacbabaacba
-caabaacaabaacaab
+bQbbbbbQbbbbbQbb
+QbbbbbQbbbbbQbbb
 PAL
-a #865042 ecruteak-roof
-b #714337 roof-dark
-c #995b4b roof-light
-d #b45246 roof-trim
+a #875545 ecruteak-roof
+b #6c4437 roof-dark
+c #945d4c roof-light
+d #ab6049 roof-trim
+F #ac705d r2-highlight
+Q #5e3c31 r2-shade

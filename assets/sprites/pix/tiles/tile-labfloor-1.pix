@@ -1,22 +1,22 @@
 # Wave 5a: Lab floor v1 — dark slate panels
 PIX tile-labfloor-1 16 16
 aaaaaaaaaaaaaaaa
-acaaaaaaaaaaaaca
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaacaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaacaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaaacaaaa
 aaaaaaaaaaaaaaaa
-acaaaaaaaaaaaaca
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 PAL
-a #59687a lab-floor
-b #505b6b lab-panel-line
-c #6c7c90 lab-rivet
+a #5e656e lab-floor
+b #545a63 lab-panel-line
+c #717984 lab-rivet

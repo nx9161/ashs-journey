@@ -30,9 +30,11 @@ PIX tile-prop-gatearch 16 32
 ..........TSSSs.
 ..........TSSSs.
 ..........TSSSs.
-..........TSSSs.
+..........Qssss.
 .........sssssss
 PAL
 S #96969f stone
 s #7c7c87 stone-dark
 T #a5abb7 stone-light
+F #b2b2bd r2-highlight
+Q #717184 r2-shade

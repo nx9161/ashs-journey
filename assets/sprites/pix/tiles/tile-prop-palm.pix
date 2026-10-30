@@ -1,8 +1,8 @@
 # Stage O1: palm tree — curved trunk, six-frond crown, coconuts, down-right cast shadow (P-2).
 PIX tile-prop-palm 16 16
 ................
-...lt......tl...
-...u.l....l.u...
+...Fw......wF...
+...t.l....l.t...
 ..tl..t..t...tl.
 .l..t.l.l.tl...t
 .u...l...l.....u
@@ -24,3 +24,5 @@ k #71523d trunk
 w #846a4e trunk-light
 n #8e7556 coconut
 s #4e7e44 cast-shadow
+F #87b181 r2-highlight
+Q #4c7246 r2-shade

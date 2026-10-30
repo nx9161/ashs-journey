@@ -1,8 +1,8 @@
 # Wave 5a prop: Lab machine — dials, lights, screen, pipe
 PIX tile-prop-labmachine 16 16
 ................
-..aaaaaaaaaaag..
-..aaaaaaaaaaag..
+..ccccccccccca..
+..ccccccccccca..
 ..aabbbbaeeeeg..
 ..aabcbbaeeeeg..
 ..aabbbbaeeeeg..
@@ -14,8 +14,8 @@ PIX tile-prop-labmachine 16 16
 ..aaffffffffaa..
 ..aaffffffffaa..
 ..aaaaaaaaaaaa..
-..aaaaaaaaaaaa..
-..ffffffffffff..
+..gggggggggggg..
+..bbbbbbbbbbbb..
 PAL
 a #6c7c90 machine-body
 b #505b6b machine-dial

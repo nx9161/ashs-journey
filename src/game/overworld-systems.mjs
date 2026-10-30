@@ -5113,6 +5113,15 @@ Object.assign(OverworldScene.prototype, {
         if (spr) r.blit(spr, cx * T, cy * T);
       }
     }
+    // Readability Round 2 (lever 1): data signs get a real board. Before
+    // R2 a map's signs were invisible interaction points — nothing at the
+    // cell read as "sign" at any zoom. Same authored tile the tile
+    // resolver draws for 'S' cells, blitted under the item balls.
+    if (this.map.signs) {
+      const sspr = g.tileCache && g.tileCache.sign ? g.tileCache.sign
+        : (g.tileSprite ? g.tileSprite('sign') : null);
+      if (sspr) for (const s of this.map.signs) r.blit(sspr, s.x * T, s.y * T);
+    }
     // Item balls: the classic red-and-white sphere on the ground.
     if (this.map.items) {
       for (const b of this.map.items) {

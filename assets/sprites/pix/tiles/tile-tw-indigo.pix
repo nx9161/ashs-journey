@@ -17,9 +17,9 @@ nnnnnnnnnnnnnnnn
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #9aa3c2 indigo-wall
-n #7782ac wall-shade-band
-s #6c779a wall-shadow
+w #c1b39a indigo-wall
+n #aa9674 wall-shade-band
+s #988a71 wall-shadow
 t #71523d window-frame
 g #d1bc88 window-lit
 h #c6d8e9 glass-shine

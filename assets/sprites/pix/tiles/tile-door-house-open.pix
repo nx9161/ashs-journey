@@ -3,19 +3,19 @@ PIX tile-door-house-open 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-wwwwZZZZZZZsssww
-wwwwZtttttZsssww
-wwwwZtttttZsssww
-wwwwZtttttZsssww
-wwwwZtttttZsssww
-wwwwZtttttZsssww
-wwwwZtttttZssgww
-wwwwZtttttZsssww
-wwwwZtttttZsssww
-wwwwZtttttZsssww
-wwwwZtttttZsssww
-wwwlgggggggsssww
-wwssZZZZZZZsssww
+wwwwFFFFFFFsssww
+wwwwFQQQQQFsssww
+wwwwFQtttQFsssww
+wwwwFQtttQFsssww
+wwwwFQtttQFsssww
+wwwwFQtttQFsssww
+wwwwFQtttQFssgww
+wwwwFQtttQFsssww
+wwwwFQtttQFsssww
+wwwwFQ%%%QFsssww
+wwwwFQ%%%QFsssww
+wwwlFQQQQQFsssww
+wwssFFFFFFFsssww
 PAL
 w #b99b74 wall-mid
 l #cfae83 wall-light
@@ -25,3 +25,6 @@ g #d1bc88 window-lit
 u #476faa window-glass
 h #7097c7 glass-shine
 Z #3f3f49 open-dark
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold

@@ -1,22 +1,22 @@
 # Stage J3a: wood floor — plank rows, seams + grain (full-bleed floor, walkable).
 PIX tile-woodfloor 16 16
-baaaaaaaabaaacaa
-baaaaaacabaaaaaa
-bcaaaaaaabaaaaca
-bbbbbbbbbbbbbbbb
-aacabaaaaaaaabac
-aaaabaaaacaaabaa
-aaacbaaaaaaaabaa
-bbbbbbbbbbbbbbbb
-aaaacaaabaaaaaaa
-aaaaaaaabaacaaaa
-aaaaacaabaaaaaaa
-bbbbbbbbbbbbbbbb
-aaabaacaaaaabaaa
-caabaaaaaaaabcaa
-aaabaaacaaaabaaa
-bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #a18261 wood-plank
-b #8d6e50 wood-plank-seam
-c #b29773 wood-grain
+a #a28667 wood-plank
+b #8b7055 wood-plank-seam
+c #aa9374 wood-grain

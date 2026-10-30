@@ -3,17 +3,17 @@ PIX tile-door-lab-facade 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-wwwwwttttttwwwww
-wwwwwtuuuutwwwww
-wwwwwtuuuutwwwww
-wwwwwtuuuutwwwww
-wwwwwtuuuutwwwww
-ssssstsssstsssss
-wwwwwtsssstwwwww
-wwwwwtsssstwwwww
-wwwwwtsssstwwwww
-wwwwwtsssstwwwww
-wwwwwtsssstwwwww
+wwwwwFFFFFFwwwww
+wwwwwFQQQQFwwwww
+wwwwwFQ&&QFwwwww
+wwwwwFQ&&QFwwwww
+wwwwwFQ&&QFwwwww
+sssssFQZVQFsssss
+wwwwwFQZZQFwwwww
+wwwwwFQ%%QFwwwww
+wwwwwFQ%%QFwwwww
+wwwwwFQQQQFwwwww
+wwwwwFFFFFFwwwww
 wwwwllllllllwwww
 ssssssssssssssss
 PAL
@@ -24,3 +24,9 @@ t #71523d trim
 u #476faa porthole-glass
 h #7097c7 glass-shine
 q #549e8d panel-teal
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #2b4366 door-panel-deep
+Z #353e49 door-panel-deep
+V #ffd873 door-knob

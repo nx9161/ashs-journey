@@ -3,17 +3,17 @@ PIX tile-door-wood-facade 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-wwswttttttttwsww
-wwswtsssssstwsww
-wwswtsssssstwsww
-wwswtsssssstwsww
-wwswtsssssstwsww
-wwswtssstgstwsww
-wwswtsssststwsww
-wwswtsssssstwsww
-wwswtsssssstwsww
-wwswtsssssstwsww
-wwswtsttttstwsww
+wwswFFFFFFFFwsww
+wwswFQQQQQQFwsww
+wwswFQ&&&&QFwsww
+wwswFQ&&&&QFwsww
+wwswFQ&&&&QFwsww
+wwswFQ&&ZVQFwsww
+wwswFQ&&&ZQFwsww
+wwswFQ%%%%QFwsww
+wwswFQ%%%%QFwsww
+wwswFQQQQQQFwsww
+wwswFFFFFFFFwsww
 wwwllllllllllwww
 wwssssssssssssww
 PAL
@@ -24,3 +24,9 @@ t #71523d trim
 g #d1bc88 window-lit
 u #476faa window-glass
 h #7097c7 glass-shine
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #4f402f door-panel-deep
+Z #443125 door-panel-deep
+V #7d7152 door-panel-deep

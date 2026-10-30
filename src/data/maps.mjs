@@ -79,7 +79,7 @@ export const MAPS = {
       { x: 5, y: 6, text: 'ROUTE 1 — Pallet Town to Viridian City. Tall grass rustles with wild Pokemon.' },
     ],
     npcs: [
-      { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#1a1a1a',
+      { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#1a1a1a',
         dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
       { x: 6, y: 4, name: 'CAL', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
@@ -132,7 +132,7 @@ export const MAPS = {
       { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
     ],
     encounters: null,
@@ -200,11 +200,11 @@ export const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 6, y: 3, name: 'RICK', art: 'youngster', skin: '#e8b888', shirt: '#6aa03a', pants: '#3a4a2a', hair: '#2a1a0a',
+      { x: 6, y: 3, name: 'RICK', art: 'youngster', skin: '#e8b888', shirt: '#a03a5f', pants: '#2a304a', hair: '#2a1a0a',
         trainer: 'r2_bug',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a Caterpie under a boot."] },
-      { x: 7, y: 5, name: 'BEA', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#a05a2a',
+      { x: 7, y: 5, name: 'BEA', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#a05a2a',
         trainer: 'r2_camper',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["I picnic here every day — battle me before you sit down!", "Not even a snack break slows you down!"] },
@@ -212,7 +212,7 @@ export const MAPS = {
         trainer: 'r2_jr',
         sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["Route 2 is MY training ground! Prove you belong here!", "You're stronger than the rumors said..."] },
-      { x: 5, y: 10, name: 'ROB', art: 'camper', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 5, y: 10, name: 'ROB', art: 'camper', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r2_hiker',
         sight: { dir: 'up', range: 4 }, // Yellow-style: spots you, "!", walks up
         dialogue: ["These boulders are my training weights! Let's see your form!", "Rock-solid... defeat. Heh. Good scrap."] },
@@ -301,7 +301,7 @@ export const MAPS = {
     ],
     signs: [],
     npcs: [
-      { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#4a5a3a', hair: '#1a1a1a',
+      { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#3a405a', hair: '#1a1a1a',
         trainer: 'brock',
         dialogue: ["I'm Brock! I'm Pewter's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],

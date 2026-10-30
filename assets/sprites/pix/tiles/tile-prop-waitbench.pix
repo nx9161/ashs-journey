@@ -14,8 +14,8 @@ PIX tile-prop-waitbench 16 16
 .LLLLLLLLLLLLLL.
 .LLLLLLLLLLLLLL.
 ..DD........DD..
-..DD........DD..
-..DD........DD..
+..CC........CC..
+..CC........CC..
 PAL
 B #b99b74 body
 D #726648 shade

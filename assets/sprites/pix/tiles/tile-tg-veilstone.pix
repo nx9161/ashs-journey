@@ -1,21 +1,21 @@
 # Stage S3a: veilstone town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-veilstone 16 16
-aaaaacaabbcbacaa
+aaaaaaaaaaaaaaaa
 aaaaadadaaaaaaad
-aaaaabbcaacbaada
-aaaaaaaabaaaaaca
-aaaaaaaaaaacaabb
-aacaacaaaabaacaa
-bbabaabaaacaccbc
-aaabaaabaacabaac
-aaacabacbaaacacc
-bbabaaaaaabcaaaa
-aaacaaaaaabaaaaa
-aababcaadaabacac
-aaaaaaaaaaaacaab
-ccadaaaaacacbcab
-aaaaaaaaaacaaaaa
-cabbacaaadbaaacc
+aaaaaaaaaaaaaada
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaadaaaaaaa
+aaaaaaaaaaaaaaaa
+aaadaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaadaaaaaa
 PAL
 a #828894 veilstone-ground
 b #6f737e ground-dark

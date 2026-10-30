@@ -1,8 +1,8 @@
 # Wave 5a prop: Battle mat — arena ring marking (walkable)
 PIX tile-prop-battlemat 16 16
 bbbbbbbbbbbbbbbb
-baaaaaaaaaaaaaab
-baaaaaaaaaaaaaab
+bccccccccccccccb
+bccccccccccccccb
 baaaaaabbaaaaaab
 baaaaaaaaaaaaaab
 baaaabaaaabaaaab
@@ -14,8 +14,8 @@ baaaabaaaabaaaab
 baaaaaaaaaaaaaab
 baaaaaabbaaaaaab
 baaaaaaaaaaaaaab
-baaaaaaaaaaaaaab
-bbbbbbbbbbbbbbbb
+caaaaaaaaaaaaaac
+cccccccccccccccc
 PAL
 a #59687a mat-field
 b #c6d8e9 mat-line

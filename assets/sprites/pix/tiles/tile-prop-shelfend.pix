@@ -2,7 +2,7 @@
 PIX tile-prop-shelfend 16 16
 ................
 ................
-..DLLLLLLLLLLD..
+..ALLLLLLLLLLA..
 ..DLLLLLLLLLLD..
 ..DBBBBBBBBBBD..
 ..DBAAAAAAAABD..
@@ -14,7 +14,7 @@ PIX tile-prop-shelfend 16 16
 ..DBBBBBBBBBBD..
 ..DBDDDDDDDDBD..
 ..DBBBBBBBBBBD..
-..DDDDDDDDDDDD..
+..CCCCCCCCCCCC..
 ................
 PAL
 B #a0876c body

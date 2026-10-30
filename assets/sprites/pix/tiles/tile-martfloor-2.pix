@@ -17,8 +17,6 @@ baaaaaaabaaaacab
 baaaaacabaaaaaab
 bbbbbbbbbbbbbbbb
 PAL
-a #bbc1b0 mart-floor
-b #99ab6a mart-grid
-c #e1deba mart-speckle
-
-# W5SPLIT2 hue shift 7deg (TX-1 variant split)
+a #b9bdb2 mart-floor
+b #9baa74 mart-grid
+c #dcdabc mart-speckle

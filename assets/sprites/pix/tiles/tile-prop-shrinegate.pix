@@ -1,8 +1,8 @@
 # Stage O1: shrine gate — twin stone pillars, capped lintel, moss in the joints (prop).
 PIX tile-prop-shrinegate 16 16
 ................
-.bbbmbbbbbbbbbb.
-..aaaaammaaaaa..
+.aaabaaaaaaaaaa.
+..aaaaabbaaaaa..
 ..aaaaaaaaaaaa..
 ..bb........bb..
 ..am........aa..
@@ -14,7 +14,7 @@ PIX tile-prop-shrinegate 16 16
 ..aa........aa..
 ..aa........aa..
 ..aa........aa..
-..ba........ab..
+..mb........bm..
 ................
 PAL
 a #8b94a1 shrine-stone

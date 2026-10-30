@@ -1,7 +1,7 @@
 # Stage H3b: sootopolis house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-sootopolis 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,8 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #75808c sootopolis-roof
-b #5f6972 roof-dark
-c #8795a4 roof-light
-d #558fb5 roof-trim
+a #718198 sootopolis-roof
+b #566376 roof-dark
+c #8996a9 roof-light
+d #547cb6 roof-trim
+F #95a1b2 r2-highlight

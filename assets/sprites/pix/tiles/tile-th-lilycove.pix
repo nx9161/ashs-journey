@@ -1,7 +1,7 @@
 # Stage H3b: lilycove house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-lilycove 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,9 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #6b5079 lilycove-roof
-b #5a4365 roof-dark
-c #7a5b8a roof-light
-d #c77084 roof-trim
+a #4e627e lilycove-roof
+b #3e4e65 roof-dark
+c #556c8b roof-light
+d #7092c2 roof-trim
+F #6780a2 r2-highlight
+Q #364559 r2-shade

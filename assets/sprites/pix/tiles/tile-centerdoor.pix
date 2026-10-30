@@ -1,22 +1,25 @@
 # hand-drawn (no draft).
 PIX tile-centerdoor 16 16
 hhhhhhhhhhhhhhhh
-hhhhwwwwwwwwhhhh
-hhhhwwwwwwwwhhhh
-hhhhwwyyyywwhhhh
-hhhhywywwywyhhhh
-hhhhwwyyyywwhhhh
-hhhhywywwywyhhhh
-hhhhwwyyyywwhhhh
-hhhhwwwwwwwwhhhh
-hhhhwwwwwwwwhhhh
-hhhhwwwwwwwwhhhh
-hhhhwwwwwwwwhhhh
-hhhhwwwwwwwwhhhh
-hhhhwwwwwwwwhhhh
+hhhhFFFFFFFFhhhh
+hhhhFQQQQQQFhhhh
+hhhhFQyyyyQFhhhh
+hhhhFQywwyQFhhhh
+hhhhFQyyyyQFhhhh
+hhhhFQywwyQFhhhh
+hhhhFQyyyyQFhhhh
+hhhhFQwwwwQFhhhh
+hhhhFQwwwwQFhhhh
+hhhhFQ%%%%QFhhhh
+hhhhFQ%%%%QFhhhh
+hhhhFQQQQQQFhhhh
+hhhhFFFFFFFFhhhh
 hhhhhhhhhhhhhhhh
 hhhhhhhhhhhhhhhh
 PAL
 h #b99b74 wall
-w #5681bd door-glass
+w #496ea1 door-glass
 y #7097c7 cross-light
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold

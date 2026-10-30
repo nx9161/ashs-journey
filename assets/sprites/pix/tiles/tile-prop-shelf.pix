@@ -1,8 +1,8 @@
 # Wave 5a prop: Bookshelf — three shelves of bright book spines
 PIX tile-prop-shelf 16 16
 ................
-.aaaaaaaaaaaaaa.
-.abbbbbbbbbbbba.
+.bbbbbbbbbbbbbb.
+.beeeeeeeeeeeeb.
 .abcdefghcdefba.
 .abefghcdefghba.
 .abaaaaaaaaaaba.

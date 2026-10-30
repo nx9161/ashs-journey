@@ -1,7 +1,7 @@
 # Stage J3a: blackthorn roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-blackthorn 16 16
 dddddddddddddddd
-caaaaacaaaaacaaa
+cFFFFFcFFFFFcFFF
 caaaaacaaaaacaaa
 bbbbbbbbbbbbbbbb
 aaaacaaaaacaaaaa
@@ -14,10 +14,12 @@ aacaaaaacaaaaaca
 bbbbbbbbbbbbbbbb
 caaaaacaaaaacaaa
 caaaaacaaaaacaaa
-caaaaacaaaaacaaa
+QbbbbbQbbbbbQbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #545469 blackthorn-roof
-b #474758 roof-dark
-c #606077 roof-light
-d #a95169 roof-trim
+a #6a544d blackthorn-roof
+b #5f4b45 roof-dark
+c #82675e roof-light
+d #a26653 roof-trim
+F #8e7067 r2-highlight
+Q #473833 r2-shade

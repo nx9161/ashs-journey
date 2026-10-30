@@ -2,22 +2,22 @@
 PIX tile-gymfloor-1 16 16
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaaacaaaa
-aacaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-bbbbbbbcbbbbbbbb
-aaaaaaaaaaaaaaca
 aaaaaaaaaaaaaaaa
-acaaaaaaaaaaaaaa
-aaaaaaaaaaaaacaa
-bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-aaaacaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaacaaaaaa
-bbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #b99b74 gym-wood
-b #a18461 gym-board-line
-c #c6b388 gym-worn
-d #e1d9ba gym-court-line
+a #b19c81 gym-wood
+b #a28767 gym-board-line
+c #c1af86 gym-worn
+d #dcd6bc gym-court-line

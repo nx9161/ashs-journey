@@ -1,7 +1,7 @@
 # Stage S3a: veilstone house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-veilstone 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,9 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #5d5d7a veilstone-roof
-b #4d4d65 roof-dark
-c #6a6a8d roof-light
-d #6c6dbc roof-trim
+a #5e6d82 veilstone-roof
+b #4d596a roof-dark
+c #67778e roof-light
+d #7092c2 roof-trim
+F #7d8ca1 r2-highlight
+Q #454f5f r2-shade

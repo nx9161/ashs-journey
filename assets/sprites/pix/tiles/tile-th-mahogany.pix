@@ -1,7 +1,7 @@
 # Stage J3a: mahogany house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-mahogany 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cdddddddcddddddd
+dddddddcdddddddc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,8 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #79644e mahogany-roof
-b #665341 roof-dark
-c #8a7259 roof-light
-d #6b8ba5 roof-trim
+a #7e594e mahogany-roof
+b #65473e roof-dark
+c #8b6255 roof-light
+d #a27567 roof-trim
+F #593e36 r2-shade

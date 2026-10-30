@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 housefloor variant 4 — bold diamond (diff>=80px)
 PIX tile-housefloor-4 16 16
-bbbbbbbbbbbbbbbb
-baaabaaaaaaabaaa
-baaabaaaaaaabaaa
-baaabaaaaaaabaaa
-bbbbaaaaaaaabbbb
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaab
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaabaaa
-bbbbbaaaaaabbbbb
-baaabaaaaaaabaaa
-baaabaaaaaaabaaa
-baaabaaabaaabaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #b99b74 housefloor-floor
-b #a18461 housefloor-line
-c #af916b housefloor-alt
-d #c5a980 housefloor-alt2
+a #b19c81 housefloor-floor
+b #a28767 housefloor-line
+c #aa9274 housefloor-alt
+d #c1a986 housefloor-alt2

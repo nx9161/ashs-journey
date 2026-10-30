@@ -2,7 +2,7 @@
 PIX tile-prop-healmachine 16 16
 ................
 ..aaaaaaaaaaaa..
-..abbbbbbbbbba..
+..aeeeeeeeeeea..
 ..abbbbccbbbba..
 ..abbbccccbbba..
 ..abbbccccbbba..
@@ -14,8 +14,8 @@ PIX tile-prop-healmachine 16 16
 ..aaaaaaaaaaaa..
 ..aaeeeeeeeeaa..
 ..aaaaaaaaaaaa..
-..aaaaaaaaaaaa..
-..eeeeeeeeeeee..
+..cccccccccccc..
+..bbbbbbbbbbbb..
 PAL
 a #b0b6c1 heal-body
 b #549e8d heal-screen

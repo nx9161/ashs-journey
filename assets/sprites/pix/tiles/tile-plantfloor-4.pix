@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 plantfloor variant 4 — bold diamond (diff>=80px)
 PIX tile-plantfloor-4 16 16
-bbbbbbbbbbbbbbbb
-baaabaaacaaabaaa
-baaabaacacaabaaa
-baaabacacacabaaa
-bbbbacacacacbbbb
-baaacacaaacacaaa
-baacacaaaaacacaa
-bacacaaaaaaacaca
-bcacaaaaaaacacab
-bacacaaaaacacaaa
-baacacaaacacaaaa
-baaacacacacabaaa
-bbbbbcacacabbbbb
-baaabacacaaabaaa
-baaabaacaaaabaaa
-baaabaaabaaabaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaacaaaaaaa
+aaaaaaacacaaaaaa
+aaaaaacacacaaaaa
+aaaaacacacacaaaa
+aaaacacaaacacaaa
+aaacacaaaaacacaa
+aacacaaaaaaacaca
+acacaaaaaaacacaa
+aacacaaaaacacaaa
+aaacacaaacacaaaa
+aaaacacacacaaaaa
+aaaaacacacaaaaaa
+aaaaaacacaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #59687a plantfloor-floor
-b #6b7a59 plantfloor-line
-c #758263 plantfloor-alt
-d #526070 plantfloor-alt2
+a #5e656e plantfloor-floor
+b #677656 plantfloor-line
+c #727967 plantfloor-alt
+d #5e656e plantfloor-alt2

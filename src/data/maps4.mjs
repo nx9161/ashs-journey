@@ -63,7 +63,7 @@ export const MAPS4 = {
     npcs: [
       { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a4a', hair: '#e8e4da', trainer: 'blaine',
         dialogue: ['Wahaha! A challenger climbs MY mountain of fire? Riddle me this first: what burns hotter — magma, or regret? Battle me and find out!', 'Scalded but smiling — that is the correct answer. The Volcano Badge, hot off the press!'] },
-      { x: 11, y: 5, name: 'BURGLAR OTIS', art: 'biker', skin: '#c89878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
+      { x: 11, y: 5, name: 'BURGLAR OTIS', art: 'biker', skin: '#c89878', shirt: '#51296b', pants: '#2a2a3a', hair: '#3a2a1a', trainer: 'gym_cinnabar_1', sight: { dir: 'left', range: 3 },
         dialogue: ['I only came in to warm my hands, honest! ...Fine. Battle first, alibi later.', 'Hot hands, cold heart. Story of my life.'] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,
@@ -359,7 +359,7 @@ export const MAPS4 = {
       // Wave 5b: the one resident whose dialogue names her house ("My
       // house? The warden borrows it half the year...") — same NPC,
       // same lines, now standing inside it (was Fuchsia (2,5)).
-      { x: 6, y: 2, name: 'AUNTIE MOSS', art: 'elder', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 6, y: 2, name: 'AUNTIE MOSS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["My house? The warden borrows it half the year and leaves it smelling of bait and boot polish.", "If I'd a spare set of teeth I'd trade him for his, just to end the mumbling. Family rates, of course."] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,

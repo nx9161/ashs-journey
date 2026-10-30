@@ -1031,7 +1031,7 @@ export const SINNOH_NPCS = [
   // Dawn, at home in Twinleaf.
   { map: 'twinleaf', name: 'DAWN', x: 12, y: 10, dir: 'down', art: 'lass', skin: '#f0c8a0', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#3a5a8a', sinnoh: 'dawn_twinleaf', dialogue: ['Twinleaf is home — the pond, the pines, Mom\'s cooking in the evening. Every road I have starts here.'] },
   // Barry, in Jubilife, at speed.
-  { map: 'jubilife', name: 'BARRY', x: 13, y: 10, dir: 'left', art: 'kid', skin: '#f0c8a0', shirt: '#e8a818', pants: '#4a3a2a', hair: '#2a1a0a', sinnoh: 'barry', dialogue: ['No time! No time at all! The gym road is THAT way and I am already behind myself!'] },
+  { map: 'jubilife', name: 'BARRY', x: 13, y: 10, dir: 'left', art: 'kid', skin: '#f0c8a0', shirt: '#e8a818', pants: '#2c3049', hair: '#2a1a0a', sinnoh: 'barry', dialogue: ['No time! No time at all! The gym road is THAT way and I am already behind myself!'] },
   // The commanders, holding their floors (their battles are events).
   { map: 'valley-windworks', name: 'COMMANDER MARS', x: 8, y: 3, dir: 'down', art: 'rocket', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a2a3a', hair: '#8a2a4a', sinnoh: 'mars', dialogue: ['The wind is ours until it finishes singing, darling.'] },
   { map: 'galactic-eterna', name: 'COMMANDER JUPITER', x: 8, y: 3, dir: 'down', art: 'rocket', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a2a3a', hair: '#8a2a4a', sinnoh: 'jupiter', dialogue: ['Everything in these rooms is already counted, child. Including you.'] },
@@ -1046,13 +1046,13 @@ export const SINNOH_NPCS = [
   // she is this stage's one authored addition there).
   { map: 'contest-hearthome', name: 'DAWN', x: 5, y: 7, dir: 'right', art: 'lass', skin: '#f0c8a0', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#3a5a8a', sinnoh: 'dawn_contest', dialogue: ['Deep breath. Stage lights. Okay. OKAY. Watch me, {player}.'] },
   // The leaders, at their gyms' hearts (Hoenn's (7,2) idiom).
-  { map: 'gym-oreburgh', name: 'ROARK', x: 7, y: 2, dir: 'down', art: 'gym1', skin: '#e8b888', shirt: '#8a6a3a', pants: '#2a2a3a', hair: '#5a3a2a', sinnoh: 'roark', dialogue: ['Welcome to Oreburgh Gym. Records are strata, trainer — show me the present tense.'] },
-  { map: 'gym-eterna', name: 'GARDENIA', x: 7, y: 2, dir: 'down', art: 'gym2', skin: '#f0c8a0', shirt: '#3a7a4a', pants: '#2a2a3a', hair: '#2a4a2a', sinnoh: 'gardenia', dialogue: ['Everything in this gym grows, challenger, including the difficulty.'] },
+  { map: 'gym-oreburgh', name: 'ROARK', x: 7, y: 2, dir: 'down', art: 'gym1', skin: '#e8b888', shirt: '#50368e', pants: '#2a2a3a', hair: '#5a3a2a', sinnoh: 'roark', dialogue: ['Welcome to Oreburgh Gym. Records are strata, trainer — show me the present tense.'] },
+  { map: 'gym-eterna', name: 'GARDENIA', x: 7, y: 2, dir: 'down', art: 'gym2', skin: '#f0c8a0', shirt: '#324a83', pants: '#2a2a3a', hair: '#2a4a2a', sinnoh: 'gardenia', dialogue: ['Everything in this gym grows, challenger, including the difficulty.'] },
   { map: 'gym-hearthome', name: 'FANTINA', x: 7, y: 2, dir: 'down', art: 'gym3', skin: '#f0c8a0', shirt: '#6a3a8a', pants: '#2a2a3a', hair: '#c0a0d8', sinnoh: 'fantina', dialogue: ['A battle is an appeal performed at speed, darling. Show me your grace.'] },
   { map: 'gym-veilstone', name: 'MAYLENE', x: 7, y: 2, dir: 'down', art: 'gym4', skin: '#f0c8a0', shirt: '#c85a3a', pants: '#2a2a3a', hair: '#8a3a5a', sinnoh: 'maylene', dialogue: ['No speeches in this gym. Stance up.'] },
   // Gym rosters (base trainer path: `trainer:` + beaten-flag dialogue).
-  { map: 'gym-oreburgh', name: 'MINER COLE', x: 4, y: 5, dir: 'right', art: 'hiker', skin: '#e8b888', shirt: '#7a5a3a', pants: '#4a3a2a', hair: '#3a2a1a', trainer: 'roark_miner1', dialogue: ['Stubborn met stubborn. Roark is at the back, past the seam.'] },
-  { map: 'gym-oreburgh', name: 'MINER FENN', x: 11, y: 5, dir: 'left', art: 'hiker', skin: '#e8b888', shirt: '#7a5a3a', pants: '#4a3a2a', hair: '#3a2a1a', trainer: 'roark_miner2', dialogue: ['The museum upstairs sells my fossils now. Fame is a drafty thing.'] },
+  { map: 'gym-oreburgh', name: 'MINER COLE', x: 4, y: 5, dir: 'right', art: 'hiker', skin: '#e8b888', shirt: '#833732', pants: '#2c3049', hair: '#3a2a1a', trainer: 'roark_miner1', dialogue: ['Stubborn met stubborn. Roark is at the back, past the seam.'] },
+  { map: 'gym-oreburgh', name: 'MINER FENN', x: 11, y: 5, dir: 'left', art: 'hiker', skin: '#e8b888', shirt: '#833732', pants: '#2c3049', hair: '#3a2a1a', trainer: 'roark_miner2', dialogue: ['The museum upstairs sells my fossils now. Fame is a drafty thing.'] },
   { map: 'gym-eterna', name: 'AROMA ADEPT LIA', x: 4, y: 5, dir: 'right', art: 'lass', skin: '#f0c8a0', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#3a5a8a', trainer: 'gardenia_adept1', dialogue: ['Watered, weeded, and beaten. The greenhouse door at the back is hers.'] },
   { map: 'gym-eterna', name: 'AROMA ADEPT ROSALIE', x: 11, y: 5, dir: 'left', art: 'lady', skin: '#f0c8a0', shirt: '#c83a7a', pants: '#2a2a3a', hair: '#8a2a1a', trainer: 'gardenia_adept2', dialogue: ['Everything blooms on schedule here. Even rematches. Ask another day.'] },
   { map: 'gym-hearthome', name: 'ACE TRAINER VERE', x: 4, y: 5, dir: 'right', art: 'acetrainer', skin: '#f0c8a0', shirt: '#3a3a6a', pants: '#2a2a3a', hair: '#4a2a3a', trainer: 'fantina_ace1', dialogue: ['Rehearsal concluded. The performance is through the curtain.'] },
@@ -1066,10 +1066,10 @@ export const SINNOH_NPCS = [
   { map: 'gym-snowpoint', name: 'CANDICE', x: 7, y: 2, dir: 'down', art: 'gym3', skin: '#f0c8a0', shirt: '#e8e8f0', pants: '#2a2a3a', hair: '#1a1a2a', sinnoh: 'candice', dialogue: ['Focus beats temperature, challenger. Show me yours.'] },
   { map: 'gym-sunnyshore', name: 'VOLKNER', x: 7, y: 2, dir: 'down', art: 'gym4', skin: '#f0c8a0', shirt: '#e8c832', pants: '#2a2a3a', hair: '#d8b84a', sinnoh: 'volkner', dialogue: ['Make it cost, challenger.'] },
   // Gym rosters, second half (base trainer path).
-  { map: 'gym-pastoria', name: 'FISHER TAMSIN', x: 4, y: 5, dir: 'right', art: 'fisher', skin: '#e8b888', shirt: '#3a7a4a', pants: '#4a3a2a', hair: '#3a2a1a', trainer: 'wake_fisher1', dialogue: ['Opinions overruled. The big ring is his, at the back.'] },
-  { map: 'gym-pastoria', name: 'FISHER BOGUE', x: 11, y: 5, dir: 'left', art: 'fisher', skin: '#e8b888', shirt: '#3a7a4a', pants: '#4a3a2a', hair: '#5a4a3a', trainer: 'wake_fisher2', dialogue: ['Wake is waiting, and Wake does not do patience at all.'] },
-  { map: 'gym-canalave', name: 'FOREMAN HOLLIS', x: 4, y: 5, dir: 'right', art: 'hiker', skin: '#e8b888', shirt: '#7a5a3a', pants: '#4a3a2a', hair: '#3a2a1a', trainer: 'byron_miner1', dialogue: ['Structurally sound. The face is his, at the back.'] },
-  { map: 'gym-canalave', name: 'FOREMAN ILD', x: 11, y: 5, dir: 'left', art: 'hiker', skin: '#e8b888', shirt: '#7a5a3a', pants: '#4a3a2a', hair: '#6a6a6a', trainer: 'byron_miner2', dialogue: ['Harder than the work. He respects filings. Go on.'] },
+  { map: 'gym-pastoria', name: 'FISHER TAMSIN', x: 4, y: 5, dir: 'right', art: 'fisher', skin: '#e8b888', shirt: '#324a83', pants: '#2c3049', hair: '#3a2a1a', trainer: 'wake_fisher1', dialogue: ['Opinions overruled. The big ring is his, at the back.'] },
+  { map: 'gym-pastoria', name: 'FISHER BOGUE', x: 11, y: 5, dir: 'left', art: 'fisher', skin: '#e8b888', shirt: '#324a83', pants: '#2c3049', hair: '#5a4a3a', trainer: 'wake_fisher2', dialogue: ['Wake is waiting, and Wake does not do patience at all.'] },
+  { map: 'gym-canalave', name: 'FOREMAN HOLLIS', x: 4, y: 5, dir: 'right', art: 'hiker', skin: '#e8b888', shirt: '#833732', pants: '#2c3049', hair: '#3a2a1a', trainer: 'byron_miner1', dialogue: ['Structurally sound. The face is his, at the back.'] },
+  { map: 'gym-canalave', name: 'FOREMAN ILD', x: 11, y: 5, dir: 'left', art: 'hiker', skin: '#e8b888', shirt: '#833732', pants: '#2c3049', hair: '#6a6a6a', trainer: 'byron_miner2', dialogue: ['Harder than the work. He respects filings. Go on.'] },
   { map: 'gym-snowpoint', name: 'SKIER WRENNA', x: 4, y: 5, dir: 'right', art: 'lass', skin: '#f0c8a0', shirt: '#c83a7a', pants: '#2a2a3a', hair: '#8a2a1a', trainer: 'candice_skier1', dialogue: ['Line held — yours. She is at the top of the slope.'] },
   { map: 'gym-snowpoint', name: 'SKIER TOMAS', x: 11, y: 5, dir: 'left', art: 'kid', skin: '#e8b888', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#2a1a0a', trainer: 'candice_skier2', dialogue: ['No slide. Her Abomasnow approves slowly.'] },
   { map: 'gym-sunnyshore', name: 'TECHNICIAN SOLENNE', x: 4, y: 5, dir: 'right', art: 'lady', skin: '#f0c8a0', shirt: '#e8c832', pants: '#2a2a3a', hair: '#3a5a8a', trainer: 'volkner_tech1', dialogue: ['Bright work. He is at the back. Was that a smile?'] },
@@ -1086,8 +1086,8 @@ export const SINNOH_NPCS = [
   { map: 'league-lobby', name: 'TOBIAS', x: 11, y: 7, dir: 'left', art: 'acetrainer', skin: '#d8a878', shirt: '#2a2a3a', pants: '#2a2a3a', hair: '#1a1a1a', sinnoh: 'tobias', dialogue: ['Tobias. The bracket is waiting to see if the record survives you.'] },
   // ---- Stage S6 actors: Buck (Heatran's accompaniment) + the
   // Route 209 traveller (the keystone's giver). ----
-  { map: 'survival-area', name: 'BUCK', x: 14, y: 11, dir: 'down', art: 'hiker', skin: '#e8b888', shirt: '#c85a2a', pants: '#4a3a2a', hair: '#8a2a1a', sinnoh: 'buck', dialogue: ['Stark Mountain keeps its own counsel, trainer. And its own stone.'] },
-  { map: 'r209', name: 'TRAVELLER MAREN', x: 11, y: 13, dir: 'down', art: 'gent', skin: '#d8a878', shirt: '#5a4a3a', pants: '#2a2a3a', hair: '#6a6a6a', sinnoh: 'keystone_traveller', dialogue: ['Mind the tower road, trainer. Some stones on it are heavier than they look.'] },
+  { map: 'survival-area', name: 'BUCK', x: 14, y: 11, dir: 'down', art: 'hiker', skin: '#e8b888', shirt: '#c85a2a', pants: '#2c3049', hair: '#8a2a1a', sinnoh: 'buck', dialogue: ['Stark Mountain keeps its own counsel, trainer. And its own stone.'] },
+  { map: 'r209', name: 'TRAVELLER MAREN', x: 11, y: 13, dir: 'down', art: 'gent', skin: '#d8a878', shirt: '#51296b', pants: '#2a2a3a', hair: '#6a6a6a', sinnoh: 'keystone_traveller', dialogue: ['Mind the tower road, trainer. Some stones on it are heavier than they look.'] },
 ];
 
 // Tale actors among the maps9 townsfolk (giver/stage roles keyed by

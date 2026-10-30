@@ -2,7 +2,7 @@
 PIX tile-prop-pipecluster 16 16
 ................
 ................
-...BBB.AA..BBB..
+...AAA.LL..AAA..
 ...BCB.AA..BBB..
 ...BCB.AA..BBB..
 ...BBB.AA..BBB..
@@ -14,7 +14,7 @@ PIX tile-prop-pipecluster 16 16
 ...BBB.AA..BBB..
 ...BBB.AA..BBB..
 ...BBB.AA..BBB..
-...BBB.AA..BBB..
+...CCC.BB..CCC..
 ................
 PAL
 B #757585 body

@@ -1,7 +1,7 @@
 # Stage H3a: dewford house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-dewford 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,9 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #4f7784 dewford-roof
-b #42636e roof-dark
-c #5b8898 roof-light
-d #c78470 roof-trim
+a #4e627e dewford-roof
+b #465872 roof-dark
+c #5d7698 roof-light
+d #7092c2 roof-trim
+F #6780a2 r2-highlight
+Q #364559 r2-shade

@@ -4,16 +4,16 @@ rrrrrrrrrrrrrrrr
 rrrrrrrrrrrrrrrr
 rrrrrrrrrrrrrrrr
 ssssssssssssssss
-wwtttttttttttsts
-wwthhhhhhggggsts
-wwthhhhhhhgggsts
-wwtghhhhhhgggsts
-wwtggggggggggsts
-wwtggggggggggsts
-wwtggggggggggsts
-wwtggggggggggsts
-wwtggggggggggsts
-wwtttttttttttsts
+wwFFFFFFFFFFFFFs
+wwFQQQQQQQQQQQFs
+wwFQhhhhhhgggQFs
+wwFQhhhhhhgggQFs
+wwFQgggggggggQFs
+wwFQgggggggggQFs
+wwFQ%%%%%%%%%QFs
+wwFQ%%%%%%%%%QFs
+wwFQQQQQQQQQQQFs
+wwFFFFFFFFFFFFFs
 llllllllllllllll
 ssssssssssssssss
 PAL
@@ -22,6 +22,9 @@ l #e1d9ba center-cream
 s #a04141 center-red-dark
 r #bf5b5b center-red
 t #71523d trim
-u #476faa window-glass
-h #7097c7 glass-shine
-g #5681bd door-glass
+u #3c5e91 window-glass
+h #5f80a9 glass-shine
+g #496ea1 door-glass
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold

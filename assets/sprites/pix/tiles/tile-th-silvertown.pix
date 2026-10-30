@@ -1,7 +1,7 @@
 # Stage J3a: silvertown house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-silvertown 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,9 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #767696 silvertown-roof
-b #5e5e7a roof-dark
-c #8686b3 roof-light
-d #b79c47 roof-trim
+a #718198 silvertown-roof
+b #5e6d82 roof-dark
+c #8195b1 roof-light
+d #4972ab roof-trim
+F #95a1b2 r2-highlight
+Q #566376 r2-shade

@@ -3,19 +3,19 @@ PIX tile-door-lab-r-open 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-tlttZZZZZZZuuuww
-slssZtttttZuuuww
-wlwwZtttttZuuuww
-wlwwZtttttZuuuww
-wlwwZtttttZuuuww
-wlwwZtttttZuuuww
-wlwwZtttttZuulww
-wlwwZtttttZuuuww
-wlwwZtttttZuuuww
-wlwwZtttttZuuuww
-slssZtttttZuuuww
-tlttllllllluuuww
-ssssZZZZZZZuuuss
+tlttFFFFFFFuuuww
+slssFQQQQQFuuuww
+wlwwFQtttQFuuuww
+wlwwFQtttQFuuuww
+wlwwFQtttQFuuuww
+wlwwFQtttQFuuuww
+wlwwFQtttQFuulww
+wlwwFQtttQFuuuww
+wlwwFQtttQFuuuww
+wlwwFQ%%%QFuuuww
+slssFQ%%%QFuuuww
+tlttFQQQQQFuuuww
+ssssFFFFFFFuuuss
 PAL
 w #8b8b9b metal-mid
 l #b0b6c1 metal-light
@@ -25,3 +25,6 @@ u #476faa porthole-glass
 h #7097c7 glass-shine
 q #549e8d panel-teal
 Z #3f3f49 open-dark
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold

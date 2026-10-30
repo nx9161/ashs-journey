@@ -4,16 +4,16 @@ ssssssssssssssss
 ssssssssssssssss
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
-tttttttttttttttt
-tsttttttttttttww
-bsbbbbbeeeeeetww
-bsbbbbbeeeeeetww
-bsbbbbbbbbbbbtww
-bsbbbbbbbbbbbtww
-bsbbbbbbbbbbbtww
-bsbbbbbbbbbbbtww
-bsbbbbbbbbbbbtww
-tsttttttttttttww
+FFFFFFFFFFFFFFFF
+FQQQQQQQQQQQQQQF
+FQ&&&&&ZZZZZZVQF
+FQ&&&&&ZZZZZZVQF
+FQ&&&&&&&&&&&VQF
+FQ&&&&&&&&&&&VQF
+FQ%%%%%%%%%%%%QF
+FQ%%%%%%%%%%%%QF
+FQQQQQQQQQQQQQQF
+FFFFFFFFFFFFFFFF
 llllllllllllllll
 ssssssssssssssss
 PAL
@@ -26,3 +26,9 @@ e #c6d8e9 awning-white
 g #d1bc88 goods-glow
 p #ca788d goods-pink
 n #73a167 goods-green
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #2b4366 door-panel-deep
+Z #77828c door-panel-deep
+V #443125 door-panel-deep

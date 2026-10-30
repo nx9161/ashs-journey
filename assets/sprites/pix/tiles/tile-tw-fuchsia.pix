@@ -17,9 +17,9 @@ nnnnnnnnnnnnnnnn
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #d0a9be fuchsia-wall
-n #ba7fa0 wall-shade-band
-s #a77491 wall-shadow
+w #cebea1 fuchsia-wall
+n #baa278 wall-shade-band
+s #aa9674 wall-shadow
 t #71523d window-frame
 g #d1bc88 window-lit
 h #c6d8e9 glass-shine

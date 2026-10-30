@@ -3,19 +3,19 @@ PIX tile-door-brick-open 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-wwwwZZZZZZZuuuww
-wwwwZtttttZuuuww
-ssssZtttttZuuuss
-wwwwZtttttZuuuww
-wwwwZtttttZuuuww
-wwwwZtttttZuuuww
-ssssZtttttZuugss
-wwwwZtttttZuuuww
-wwwwZtttttZuuuww
-wwwwZtttttZuuuww
-wwwwZtttttZuuuww
-wwwlggggggguuuww
-wwssZZZZZZZuuuww
+wwwwFFFFFFFuuuww
+wwwwFQQQQQFuuuww
+ssssFQtttQFuuuss
+wwwwFQtttQFuuuww
+wwwwFQtttQFuuuww
+wwwwFQtttQFuuuww
+ssssFQtttQFuugss
+wwwwFQtttQFuuuww
+wwwwFQtttQFuuuww
+wwwwFQ%%%QFuuuww
+wwwwFQ%%%QFuuuww
+wwwlFQQQQQFuuuww
+wwssFFFFFFFuuuww
 PAL
 w #a96152 brick-mid
 l #b77564 brick-light
@@ -25,3 +25,6 @@ g #d1bc88 window-lit
 u #476faa window-glass
 h #7097c7 glass-shine
 Z #3f3f49 open-dark
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold

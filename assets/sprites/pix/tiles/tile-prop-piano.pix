@@ -14,11 +14,13 @@ PIX tile-prop-piano 16 16
 .BBBBBBBBBBBBB..
 .BBBBBBBBBBBBB..
 .BBBBBBBBBBBBB..
-..DD........DD..
-..DD........DD..
+..QQ........QQ..
+..QQ........QQ..
 PAL
 B #3f3f49 body
 D #3f3f49 shade
 L #59687a light
 A #c6d8e9 accent
 C #d1bc88 accent-2
+F #5e5e6e r2-highlight
+Q #1c1c21 r2-shade

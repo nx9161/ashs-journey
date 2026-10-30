@@ -17,16 +17,14 @@ gssssseeeeeggggg
 ggggggsssssggggg
 gggggggggggggggg
 PAL
-g #72a15f grass
-d #638f53 grass-dark
-l #7ea86c grass-light
-m #78a167 grass-mid
-h #84b273 grass-highlight
-a #90bb7a grass-pale
-s #537e44 grass-shadow
-e #4c753f grass-deep
-o #4b7340 leaf-deep
-t #58854b leaf-mid
-w #699d5b leaf-light
-
-# W5SPLIT2 hue shift -5deg (TX-1 variant split)
+g #658b55 grass
+d #5b7e4e grass-dark
+l #6f985d grass-light
+m #6e985d grass-mid
+h #73ac5d grass-highlight
+a #83b36b grass-pale
+s #4e793e grass-shadow
+e #446c37 grass-deep
+o #436c37 leaf-deep
+t #507246 leaf-mid
+w #618b55 leaf-light

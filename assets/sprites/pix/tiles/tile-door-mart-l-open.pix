@@ -3,19 +3,19 @@ PIX tile-door-mart-l-open 16 16
 ssssssssssssssss
 ssssssssssssssss
 bbbbbbbbbbbbbbbb
-bbbbZZZZZZZsssbb
-ttttZtttttZssstt
-wwttZtttttZsssst
-wwteZtttttZssssb
-wwteZtttttZssssb
-wwtbZtttttZssssb
-wwtbZtttttZssesb
-wwtbZtttttZssssb
-wwtbZtttttZssssb
-wwtbZtttttZssssb
-wwttZtttttZsssst
-lllleeeeeeesssll
-ssssZZZZZZZsssss
+bbbbFFFFFFFsssbb
+ttttFQQQQQFssstt
+wwttFQtttQFsssst
+wwteFQtttQFssssb
+wwteFQtttQFssssb
+wwtbFQtttQFssssb
+wwtbFQtttQFssesb
+wwtbFQtttQFssssb
+wwtbFQtttQFssssb
+wwtbFQ%%%QFssssb
+wwttFQ%%%QFsssst
+llllFQQQQQFsssll
+ssssFFFFFFFsssss
 PAL
 w #b99b74 wall-mid
 l #cfae83 wall-light
@@ -27,3 +27,6 @@ g #d1bc88 goods-glow
 p #ca788d goods-pink
 n #73a167 goods-green
 Z #3f3f49 open-dark
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold

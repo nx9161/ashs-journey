@@ -4,16 +4,16 @@ ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
 sslsssssssssssww
-ttlttttttttttsww
-ttlttttttttttsww
-ttltttdddddttsww
-ttltttdddddttsww
-ttltttdddddttsww
-ttlltttttttttsww
-ttltttdddddttsww
-ttltttdddddttsww
-ttltttdddddttsww
-ttlttttttttttsww
+FFFFFFFFFFFFFsww
+FQQQQQQQQQQQFsww
+FQ&ZZZVVVVVQFsww
+FQ&ZZZVVVVVQFsww
+FQ&ZZZVVVVVQFsww
+FQ&&ZZZZZZZQFsww
+FQ%%%%%%%%%QFsww
+FQ%%%%%%%%%QFsww
+FQQQQQQQQQQQFsww
+FFFFFFFFFFFFFsww
 sslsssssssssssww
 ssssssssssssssss
 PAL
@@ -22,3 +22,9 @@ l #cfae83 wall-light
 s #a18461 wall-shadow
 t #71523d door-wood
 d #846a4e door-panel
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #7c684f door-panel-deep
+Z #443125 door-panel-deep
+V #4f402f door-panel-deep

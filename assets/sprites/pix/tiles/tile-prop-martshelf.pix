@@ -2,11 +2,7 @@
 PIX tile-prop-martshelf 16 16
 ................
 .bbbbbbbbbbbbbb.
-.aaaaaaaaaaaaaa.
-.aaaaaaaaaaaaaa.
-.afcdefcdefcdea.
-.adefcdefcdefca.
-.aaaaaaaaaaaaaa.
+.cccccccccccccc.
 .aaaaaaaaaaaaaa.
 .afcdefcdefcdea.
 .adefcdefcdefca.
@@ -15,7 +11,11 @@ PIX tile-prop-martshelf 16 16
 .afcdefcdefcdea.
 .adefcdefcdefca.
 .aaaaaaaaaaaaaa.
-.bbbbbbbbbbbbbb.
+.aaaaaaaaaaaaaa.
+.afcdefcdefcdea.
+.adefcdefcdefca.
+.aaaaaaaaaaaaaa.
+.eeeeeeeeeeeeee.
 PAL
 a #6c7c90 mart-shelf-frame
 b #b0b6c1 mart-shelf-trim

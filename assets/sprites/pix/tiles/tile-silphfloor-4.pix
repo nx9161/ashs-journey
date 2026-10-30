@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 silphfloor variant 4 — bold diamond (diff>=80px)
 PIX tile-silphfloor-4 16 16
-bbbbbbbbbbbbbbbb
-baaabaaaaaaabaaa
-baaabaaaaaaabaaa
-baaabaaaaaaabaaa
-bbbbaaaaaaaabbbb
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaab
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaabaaa
-bbbbbaaaaaabbbbb
-baaabaaaaaaabaaa
-baaabaaaaaaabaaa
-baaabaaabaaabaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #b0b6c1 silphfloor-floor
-b #9ba2ac silphfloor-line
-c #a5abb7 silphfloor-alt
-d #bac1ce silphfloor-alt2
+a #b2b6bd silphfloor-floor
+b #9ca2ab silphfloor-line
+c #a7abb4 silphfloor-alt
+d #b8bfcc silphfloor-alt2

@@ -1,7 +1,7 @@
 # Stage H3b: pacifidlog house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-pacifidlog 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,9 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #865d45 pacifidlog-roof
-b #704e3a roof-dark
-c #996a50 roof-light
-d #c47a68 roof-trim
+a #875545 pacifidlog-roof
+b #6c4437 roof-dark
+c #945d4c roof-light
+d #c28370 roof-trim
+F #ac705d r2-highlight
+Q #5e3c31 r2-shade

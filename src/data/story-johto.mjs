@@ -852,13 +852,13 @@ export const JOHTO_NPCS = [
     dialogue: ['The lab keeps records, trainer. Today, one page is missing — and I mean to see it found.'] },
   { map: 'gym-violet', x: 7, y: 2, name: 'FALKNER', art: 'gym1', skin: '#e8b888', shirt: '#3a5a8a', pants: '#2a2a3a', hair: '#2a3a6a', johto: 'falkner',
     dialogue: ['My father kept this gym before me. The birds keep it with me now.'] },
-  { map: 'sprout-tower-1', x: 10, y: 6, name: 'MONK JIN', art: 'monk', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a3a2a', hair: '#2a1a0a', trainer: 'sprout_monk_1',
+  { map: 'sprout-tower-1', x: 10, y: 6, name: 'MONK JIN', art: 'monk', skin: '#e8b888', shirt: '#50368e', pants: '#2c3049', hair: '#2a1a0a', trainer: 'sprout_monk_1',
     dialogue: ['You bend well, traveler. The stairs are yours.'] },
-  { map: 'sprout-tower-2', x: 10, y: 5, name: 'MONK REI', art: 'monk', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a3a2a', hair: '#1a1a1a', trainer: 'sprout_monk_2',
+  { map: 'sprout-tower-2', x: 10, y: 5, name: 'MONK REI', art: 'monk', skin: '#d8a878', shirt: '#50368e', pants: '#2c3049', hair: '#1a1a1a', trainer: 'sprout_monk_2',
     dialogue: ['They dance, your legs. The Elder is expecting you.'] },
   { map: 'sprout-tower-2', x: 8, y: 2, name: 'ELDER LI', art: 'elder', skin: '#e8b888', shirt: '#5a4a6a', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'sprout_elder',
     dialogue: ['The tower sways, and so do we all. That is not weakness, child. That is how tall things survive.'] },
-  { map: 'gym-azalea', x: 7, y: 2, name: 'BUGSY', art: 'gym2', skin: '#f0c8a0', shirt: '#4a7a3a', pants: '#3a3a2a', hair: '#3a6a2a', johto: 'bugsy',
+  { map: 'gym-azalea', x: 7, y: 2, name: 'BUGSY', art: 'gym2', skin: '#f0c8a0', shirt: '#324a83', pants: '#3a3a2a', hair: '#3a6a2a', johto: 'bugsy',
     dialogue: ['Every web in this room is load-bearing, challenger.'] },
   { map: 'slowpoke-well', x: 5, y: 2, name: 'ROCKET GRUNT', art: 'rocket', skin: '#e8b888', shirt: '#2a2a2a', pants: '#2a2a3a', hair: '#3a2a1a', johto: 'rocket_well_1',
     dialogue: ['This well is a work site. Scram!'] },
@@ -866,7 +866,7 @@ export const JOHTO_NPCS = [
     dialogue: ['You people are bad for business.'] },
   { map: 'slowpoke-well', x: 10, y: 10, name: 'ROCKET SENIOR', art: 'rocket', skin: '#c89878', shirt: '#3a2a3a', pants: '#2a2a3a', hair: '#5a5a5a', johto: 'rocket_well_3',
     dialogue: ['I run this well crew.'] },
-  { map: 'kurt-house', x: 4, y: 3, name: 'KURT', art: 'elder', skin: '#e8b888', shirt: '#6a5a3a', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'kurt',
+  { map: 'kurt-house', x: 4, y: 3, name: 'KURT', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'kurt',
     dialogue: ['Balls made by hand remember the hand. Machines never learned that.'] },
   { map: 'gym-goldenrod', x: 7, y: 2, name: 'WHITNEY', art: 'gym3', skin: '#f0c8a0', shirt: '#e88ab0', pants: '#4a3a5a', hair: '#e8a0b8', johto: 'whitney',
     dialogue: ['My Miltank has been waiting ALL week for a real challenger.'] },
@@ -891,7 +891,7 @@ export const JOHTO_NPCS = [
     dialogue: ['The clan keeps dragons. I keep this gym. Completely.'] },
   { map: 'silver-stadium', x: 13, y: 5, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a', johto: 'gary_stadium',
     dialogue: ['Took you long enough. The bracket has been boring without you.'] },
-  { map: 'silver-stadium', x: 9, y: 5, name: 'HARRISON', art: 'acetrainer', skin: '#d8a878', shirt: '#7a4a2a', pants: '#3a3a2a', hair: '#a03a2a', johto: 'harrison',
+  { map: 'silver-stadium', x: 9, y: 5, name: 'HARRISON', art: 'acetrainer', skin: '#d8a878', shirt: '#7a672a', pants: '#3a3a2a', hair: '#a03a2a', johto: 'harrison',
     dialogue: ['Harrison, from Littleroot. I have been watching your side of the bracket with great interest.'] },
   { map: 'mt-silver-cave', x: 8, y: 2, name: 'RED', art: 'rival', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a3a5a', hair: '#2a1a0a', johto: 'red',
     dialogue: ['...'] },
@@ -921,7 +921,7 @@ export const JOHTO_NPCS = [
   // the maps6 interior (stamped johto:'daycare' by JOHTO_NPC_PATCHES
   // below); his wife joins him by this same append idiom. Both run
   // the one Day-Care flow (overworld-systems openDaycare).
-  { map: 'daycare', x: 4, y: 7, name: 'DAY-CARE WOMAN', art: 'lady', skin: '#f0c8a0', shirt: '#7a9a4a', pants: '#4a3a2a', hair: '#8a8a8a', johto: 'daycare',
+  { map: 'daycare', x: 4, y: 7, name: 'DAY-CARE WOMAN', art: 'lady', skin: '#f0c8a0', shirt: '#7c3fa5', pants: '#2c3049', hair: '#8a8a8a', johto: 'daycare',
     dialogue: ['Every guest gets a name, a nap schedule, and a song. No exceptions in forty years.'] },
 ];
 

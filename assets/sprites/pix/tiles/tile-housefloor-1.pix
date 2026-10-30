@@ -2,21 +2,21 @@
 PIX tile-housefloor-1 16 16
 aaaaaaabaaaaaaaa
 aaaaaaabaaaaaaaa
-aaaaaaabaaacaaaa
-bbcbbbbbbbbbbbbb
+aaaaaaabaaaaaaaa
+bbabbbbbbbbbbbbb
 aaabaaaaaaaaaaaa
-aaabaaacaaaaaaaa
-aaabaaaaaaaaaaca
+aaabaaaaaaaaaaaa
+aaabaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
-acaaaaaaaaabaaaa
-aaaaaaaaaaabacaa
+aaaaaaaaaaabaaaa
+aaaaaaaaaaabaaaa
 aaaaaaaaaaabaaaa
 bbbbbbbbbbbbbbbb
-aaaacbaaaaaaaaaa
 aaaaabaaaaaaaaaa
-aaaaabaaacaaaaaa
+aaaaabaaaaaaaaaa
+aaaaabaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 PAL
-a #a18461 house-plank
-b #71523d house-plank-line
-c #b99b74 house-grain
+a #a28767 house-plank
+b #725846 house-plank-line
+c #b19c81 house-grain

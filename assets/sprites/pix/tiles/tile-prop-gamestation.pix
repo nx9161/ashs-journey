@@ -2,7 +2,7 @@
 PIX tile-prop-gamestation 16 16
 ................
 ................
-..BBBBBBBBBBBB..
+..DDDDDDDDDDDD..
 ..BBBBBBBBBBBB..
 ..BBAAAAAAAABB..
 ..BBAAAAAAAABB..
@@ -14,7 +14,7 @@ PIX tile-prop-gamestation 16 16
 ..DDDDDDDDDDDD..
 ..DDDCCDDCCDDD..
 ..DDDDDDDDDDDD..
-..DDDDDDDDDDDD..
+..BBBBBBBBBBBB..
 ................
 PAL
 B #3f3f49 body

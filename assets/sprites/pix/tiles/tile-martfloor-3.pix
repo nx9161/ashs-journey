@@ -1,23 +1,23 @@
 # Premium+ W5: TX-1 martfloor variant 3 — bold checker (diff>=80px)
 PIX tile-martfloor-3 16 16
-cccbcccccccbcccc
-cccbcccccccbcccc
-cccbcccccccbcccc
-bbbbccccbbbbcccc
-cccccccbcccccccb
-cccccccbcccccccb
-cccccccbcccccccb
-ccccbbbbccccbbbb
-cccbcccccccbcccc
-cccbcccccccbcccc
-cccbcccccccbcccc
-bbbbccccbbbbcccc
-cccccccbcccccccb
-cccccccbcccccccb
-cccccccbcccccccb
-ccccbbbbccccbbbb
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
 PAL
-a #bdc1b0 martfloor-floor
-b #98ad91 martfloor-line
-c #b1b9a3 martfloor-alt
-d #89a183 martfloor-alt2
+a #bbbdb2 martfloor-floor
+b #a0ab9c martfloor-line
+c #afb4a7 martfloor-alt
+d #899886 martfloor-alt2

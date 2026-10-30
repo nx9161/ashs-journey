@@ -17,6 +17,6 @@ PIX tile-crystal-1 16 16
 ..bbbbbbbb......
 ................
 PAL
-a #6fb0ee crystal-light
+a #a76cef crystal-light
 b #3fa08a crystal-teal
-c #eef7ff crystal-glint
+c #f4eaff crystal-glint

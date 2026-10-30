@@ -74,7 +74,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'LT. SURGE', art: 'surge', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0a03a',
+      { x: 8, y: 2, name: 'LT. SURGE', art: 'surge', skin: '#d8a878', shirt: '#324a83', pants: '#2a304a', hair: '#c0a03a',
         trainer: 'surge',
         dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
       { x: 4, y: 6, name: 'WALT', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
@@ -108,10 +108,10 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 8, y: 2, name: 'ERIKA', art: 'erika', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a5a3a', hair: '#1a1a1a',
+      { x: 8, y: 2, name: 'ERIKA', art: 'erika', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a405a', hair: '#1a1a1a',
         trainer: 'erika',
         dialogue: ["I am Erika, of Celadon Gym. My flower arrangements... and my battles... both demand a gentle, exact hand.", "How lovely — a storm in my garden. The Rainbow Badge is yours."] },
-      { x: 4, y: 6, name: 'TAMIA', art: 'lass', skin: '#e8b888', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a1a1a',
+      { x: 4, y: 6, name: 'TAMIA', art: 'lass', skin: '#e8b888', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a1a1a',
         trainer: 'gym_celadon_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Erika's napping again, so I weed out the unworthy. That's you, apparently.", "Ugh. Even the weeds respect you now. Go on, then."] },
     ],
@@ -395,10 +395,10 @@ export const MAPS3 = {
       { x: 5, y: 7, text: 'ROUTE 9 — The rocky road east. Hikers consider this their personal gym.' },
     ],
     npcs: [
-      { x: 13, y: 9, name: 'HIKER BRANT', art: 'hiker', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 13, y: 9, name: 'HIKER BRANT', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
         trainer: 'r9_hiker', sight: { dir: 'up', range: 3 },
         dialogue: ["Every stone on this route has met my boots. Now my team wants to meet YOU!", "Boots: scuffed. Team: scuffed-er. Well fought!"] },
-      { x: 4, y: 8, name: 'CAMPER LIO', art: 'camper', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 4, y: 8, name: 'CAMPER LIO', art: 'camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         trainer: 'r9_camper', sight: { dir: 'right', range: 3 },
         dialogue: ["I pitched my tent on the best battling spot on the route. Coincidence? Never.", "Tent's yours if you want it. The view's great; the company was better."] },
     ],
@@ -510,7 +510,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 10, name: 'CARETAKER', art: 'worker', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 3, y: 10, name: 'CARETAKER', art: 'worker', skin: '#c89878', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Plant's been abandoned twenty years, but the turbines still sing. The wild electrics keep them warm.", "Deeper in, the air itself crackles. Something enormous nests by the main coil. Something with wings."] },
     ],
     encounters: {
@@ -564,7 +564,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 4, y: 5, name: 'HIKER DOSS', art: 'hiker', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#4a3a2a',
+      { x: 4, y: 5, name: 'HIKER DOSS', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
         dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The Zubat union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
     ],
     encounters: {
@@ -712,7 +712,7 @@ export const MAPS3 = {
       { x: 12, y: 2, text: 'The oldest stone in the tower. Its inscription is in a language of scratches and pawprints.' },
     ],
     npcs: [
-      { x: 8, y: 2, name: 'MR. FUJI', art: 'elder', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#c0c0c0',
+      { x: 8, y: 2, name: 'MR. FUJI', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Easy, children... the old man means you no harm. I am Fuji — I keep this tower, and it keeps me.", "You calmed a grieving mother and freed an old fool. Lavender will not forget it. Neither will I."] },
       // Wave 4 addendum (world-art): the Wave 0 why-not below is RESOLVED.
       // Wave 0 (world-art): CUBONE + MAROWAK SPIRIT deliberately carried
@@ -724,7 +724,7 @@ export const MAPS3 = {
       // the kinds carry no NPC_SWAP_KEYS entry, so the authored ghost
       // palettes render as drawn (the skin/shirt fields below stay as
       // data, unused by the rasterizer for these kinds).
-      { x: 5, y: 6, name: 'CUBONE', art: 'cubonespirit', skin: '#e8b888', shirt: '#c8b898', pants: '#8a7a5a', hair: '#3a2a1a',
+      { x: 5, y: 6, name: 'CUBONE', art: 'cubonespirit', skin: '#e8b888', shirt: '#c8b898', pants: '#5a628a', hair: '#3a2a1a',
         dialogue: ["A small Cubone sits by the topmost grave, helmet polished, bone laid across its knees like an offering.", "It is not crying. Whatever grieved on this floor... it grieves quieter now."] },
       { x: 11, y: 6, name: 'MAROWAK SPIRIT', art: 'marowakspirit', skin: '#e8e0f0', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         dialogue: ["A shape like a Marowak drifts between the stones, neither hostile nor at rest — a mother, still counting her children.", "The Silph Scope might let you see her clearly. Without it, she is only a sorrow in the air."] },
@@ -903,9 +903,9 @@ export const MAPS3 = {
       { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
     ],
     npcs: [
-      { x: 10, y: 9, name: 'SAFARI WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#c0c0c0', safariGate: true,
+      { x: 10, y: 9, name: 'SAFARI WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
         dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Safari Zone mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Pokemon to push boulders like foam. Mmh!"] },
-      { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#4a3a2a', hair: '#7a4a1a',
+      { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's Chansey waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
@@ -979,11 +979,11 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 16, y: 8, name: 'RANGER', art: 'ranger', skin: '#e8b888', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#2a1a0a',
+      { x: 16, y: 8, name: 'RANGER', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#2a1a0a',
         dialogue: ["Safari rules: no battling the wildlife — bait, rocks, and quick feet. The rare ones reward patience.", "Chansey and Kangaskhan nest deep in the center grass. Tauros stampede the east field at dawn."] },
-      { x: 10, y: 11, name: 'GATE RANGER', art: 'ranger', skin: '#d8a878', shirt: '#4a7a3a', pants: '#3a4a2a', hair: '#1a1a1a', safariExit: true,
+      { x: 10, y: 11, name: 'GATE RANGER', art: 'ranger', skin: '#d8a878', shirt: '#324a83', pants: '#2a304a', hair: '#1a1a1a', safariExit: true,
         dialogue: ["Heading out? The gatehouse is right here — step up when your Safari Balls or your courage run dry.", "Mind the mud on your way. The warden lost something precious in it, and he has NOT stopped mentioning it."] },
-      { x: 14, y: 11, name: 'KEEPER', art: 'ranger', skin: '#f0c8a0', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#a05a2a',
+      { x: 14, y: 11, name: 'KEEPER', art: 'ranger', skin: '#f0c8a0', shirt: '#50368e', pants: '#4a4a5a', hair: '#a05a2a',
         dialogue: ["The rest house is open to every Safari guest. Sit a spell — the grass will still be rustling when you get back.", "A trainer once fished a Dratini out of the west pond with the Super Rod. Once. In thirty years."] },
     ],
     encounters: {
@@ -1249,7 +1249,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 3, y: 9, name: 'EXPLORER', art: 'hiker', skin: '#c89878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 3, y: 9, name: 'EXPLORER', art: 'hiker', skin: '#c89878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["The boulders here roll into the sea-holes and calm the currents below. Muscle work, trainer work.", "At the heart of the cold, something sleeps with one eye open. Tread like snowfall."] },
     ],
     encounters: {
@@ -1362,7 +1362,7 @@ export const MAPS3 = {
       { x: 8, y: 4, text: "DIARY — 'It dreams of its mother. We hear it through the walls on still nights. God forgive the quiet we keep.'" },
     ],
     npcs: [
-      { x: 3, y: 8, name: 'JOURNAL', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 3, y: 8, name: 'JOURNAL', art: 'youngster', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["A charred journal page: 'We named the newborn MEWTWO. The mother dreams beneath the island still...'", "Another page: 'If anyone reads this — the Gym key is hidden where we worked. Forgive us.'"] },
     ],
     encounters: {
@@ -1413,7 +1413,7 @@ export const MAPS3 = {
       { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
         dialogue: ["Blaine's the name — quiz-master of Cinnabar and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
-      { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#7a3a2a', pants: '#2a2a2a', hair: '#e07830',
+      { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#5a2a7a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
     ],
@@ -1466,7 +1466,7 @@ export const MAPS3 = {
       { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
     ],
     npcs: [
-      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
       { x: 5, y: 7, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
@@ -1581,7 +1581,7 @@ export const MAPS3 = {
     ],
     signs: [],
     npcs: [
-      { x: 9, y: 8, name: 'VETERAN', art: 'elder', skin: '#c89878', shirt: '#7a6a5a', pants: '#3a3a3a', hair: '#c0c0c0',
+      { x: 9, y: 8, name: 'VETERAN', art: 'elder', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#c0c0c0',
         dialogue: ["Thirty years ago I pushed these same boulders with younger knees. The mountain remembers every trainer who crosses it.", "Deep in the dark, something burns without wood or coal. The old ones called it a second sun."] },
     ],
     encounters: {
@@ -1781,7 +1781,7 @@ export const MAPS3 = {
       { x: 9, y: 7, text: 'Below the scratches, one line survives in a careful hand: THE STRONGEST TRAINER IS INVITED.' },
     ],
     npcs: [
-      { x: 12, y: 8, name: 'WRECKED LOG', art: 'youngster', skin: '#e8b888', shirt: '#8a6a3a', pants: '#4a4a5a', hair: '#3a2a1a',
+      { x: 12, y: 8, name: 'WRECKED LOG', art: 'youngster', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         dialogue: ["A waterlogged logbook in a shattered case. The last entry is dated the night the storm swallowed the harbor lights.", "'The master of this island has made a Pokemon stronger than any that nature —' The rest is salt and ash."] },
     ],
     encounters: null,
@@ -1876,7 +1876,7 @@ export const MAPS3 = {
         dialogue: ["Someone's PC — Pokemon Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
       { x: 6, y: 2, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
         dialogue: ["CHEAT TERMINAL — a humming machine the nurses don't talk about. Everything on it is free: items, badges, even legendary Pokemon."] },
-      { x: 2, y: 3, name: 'WAITING TRAINER', art: 'youngster', skin: '#f0c8a0', shirt: '#4a9a4a', pants: '#3a3a4a', hair: '#2a1a0a',
+      { x: 2, y: 3, name: 'WAITING TRAINER', art: 'youngster', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         dialogue: ["Every Center in Kanto runs the same boxes off Bill's system. Deposit a friend here, withdraw them a mountain away.", "Technology's incredible — and the nurse still heals for free. Some things never change."] },
     ],
     encounters: null,

@@ -1,7 +1,7 @@
 # Stage S3a: hearthome house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-hearthome 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cdddddddcddddddd
+dddddddcdddddddc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,8 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #774f84 hearthome-roof
-b #63426e roof-dark
-c #885b98 roof-light
-d #8b6ba5 roof-trim
+a #4e627e hearthome-roof
+b #465872 roof-dark
+c #5d7698 roof-light
+d #6780a2 roof-trim
+F #364559 r2-shade

@@ -1,25 +1,25 @@
 # Stage S3a: oreburgh town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-oreburgh 16 16
-babbaaabaaaabaaa
-aaabaabaafaaaaaf
-aaaaabaaaaaaaaaa
-aabfaaabaaabaaab
-aaabaaaaabaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaabaaaabaa
-baaaaabaaaaaffaa
-abaabaababbaaaaa
-aaabaaabaaaaaaaa
+aaaaaaaaafaaaaaf
+aaaaaaaaaaaaaaaa
+aaafaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaffaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 aaaaaaaaafaaaaaa
-faaaaabaaaaaaafa
-baafaaaaaaaaaaaa
-abaaaaaaaaaaabaa
-aaaaabaaaaaaaaba
+faaaaaaaaaaaaafa
+aaafaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 affaaaafaaaaaaaa
 PAL
 a #9b7258 oreburgh-ground
 b #85624b ground-dark
 c #ab7f64 ground-light
 d #c59f6b town-accent
-e #698098 town-accent-2
+e #77593d town-accent-2
 f #735441 ground-deep

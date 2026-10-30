@@ -142,13 +142,13 @@ export const QUESTS = {
 // flow would show if the tale handler ever declines.
 const APPEAR = {
   mom: { skin: '#f0c8a0', shirt: '#c05a7a', pants: '#4a3a5a', hair: '#5a3a2a' },
-  shop: { skin: '#e8b888', shirt: '#3a7a4a', pants: '#2a2a3a', hair: '#2a1a0a' },
-  ace: { skin: '#d8a878', shirt: '#6a5a3a', pants: '#3a3a4a', hair: '#c0c0c0' },
-  brock: { skin: '#c89878', shirt: '#7a9a4a', pants: '#4a4a3a', hair: '#3a2a1a' },
+  shop: { skin: '#e8b888', shirt: '#324a83', pants: '#2a2a3a', hair: '#2a1a0a' },
+  ace: { skin: '#d8a878', shirt: '#2d4377', pants: '#3a3a4a', hair: '#c0c0c0' },
+  brock: { skin: '#c89878', shirt: '#7c3fa5', pants: '#4a4a3a', hair: '#3a2a1a' },
   kid: { skin: '#f0c8a0', shirt: '#e8b832', pants: '#2a4a6a', hair: '#7a1a1a' },
   harbor: { skin: '#d8a878', shirt: '#2a4a6a', pants: '#2a2a3a', hair: '#4a4a5a' },
   elder: { skin: '#e8b888', shirt: '#5a4a6a', pants: '#3a3a4a', hair: '#e8e8e8' },
-  gardener: { skin: '#c89878', shirt: '#4a8a5a', pants: '#5a4a3a', hair: '#2a4a2a' },
+  gardener: { skin: '#c89878', shirt: '#573a9a', pants: '#3a3f5a', hair: '#2a4a2a' },
   janine: { skin: '#f0c8a0', shirt: '#7a3a6a', pants: '#2a2a3a', hair: '#2a1a3a' },
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
@@ -196,7 +196,7 @@ export const TALE_NPCS = [
   // dock row, east of CAPT ORANGE (13,10) — each port its OWN captain
   // (the Johto smell, J-register). The return captain stands on the
   // Slateport dock (maps7.mjs, CAPT MERIDIAN).
-  { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#7a3a2a', pants: '#2a2a3a', hair: '#2a1a0a',
+  { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#5a2a7a', pants: '#2a2a3a', hair: '#2a1a0a',
     ferry: 'littleroot', ferryArc: 'hoenn',
     dialogue: ['The Littleroot run is the long weather crossing — Hoenn water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Arc 4 Stage S0: the Sinnoh embark captain, appended to Vermilion's

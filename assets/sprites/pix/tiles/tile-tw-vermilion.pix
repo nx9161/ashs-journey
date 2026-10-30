@@ -17,9 +17,9 @@ nnnnnnnnnnnnnnnn
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #d3b192 vermilion-wall
-n #c29268 wall-shade-band
-s #ab8462 wall-shadow
+w #cebea1 vermilion-wall
+n #baa278 wall-shade-band
+s #ac8f5d wall-shadow
 t #71523d window-frame
 g #d1bc88 window-lit
 h #c6d8e9 glass-shine

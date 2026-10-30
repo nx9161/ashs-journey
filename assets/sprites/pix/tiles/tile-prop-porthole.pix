@@ -1,8 +1,8 @@
 # Wave 5a prop: Porthole wall — brass ring, sea beyond
 PIX tile-prop-porthole 16 16
-aaaaabaaaaabaaaa
-aaaaabaaaaabaaaa
-aaaaabaaaaabaaaa
+dddddadddddadddd
+dddddadddddadddd
+dddddadddddadddd
 aaaaabaaaaabaaaa
 aaaaabaccaabaaaa
 aaaaabcaacabaaaa
@@ -14,8 +14,8 @@ aaaaabcaacabaaaa
 aaaaabaccaabaaaa
 aaaaabaaaaabaaaa
 aaaaabaaaaabaaaa
-aaaaabaaaaabaaaa
-aaaaabaaaaabaaaa
+bbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbb
 PAL
 a #846a4e port-wall
 b #71523d port-seam

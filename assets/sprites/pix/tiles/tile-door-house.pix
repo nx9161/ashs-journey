@@ -3,17 +3,17 @@ PIX tile-door-house 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-wwwwttttttttwwww
-wwwwtsssssstwwww
-wwwwtsssssstwwww
-wwwwtsssssstwwww
-wwwwtsssssstwwww
-wwwwtssstgstwwww
-wwwwtsssststwwww
-wwwwtsssssstwwww
-wwwwtsssssstwwww
-wwwwtsssssstwwww
-wwwwtsttttstwwww
+wwwwFFFFFFFFwwww
+wwwwFQQQQQQFwwww
+wwwwFQ&&&&QFwwww
+wwwwFQ&&&&QFwwww
+wwwwFQ&&&&QFwwww
+wwwwFQ&&ZVQFwwww
+wwwwFQ&&&ZQFwwww
+wwwwFQ%%%%QFwwww
+wwwwFQ%%%%QFwwww
+wwwwFQQQQQQFwwww
+wwwwFFFFFFFFwwww
 wwwllllllllllwww
 wwssssssssssssww
 PAL
@@ -24,3 +24,9 @@ t #71523d trim
 g #d1bc88 window-lit
 u #476faa window-glass
 h #7097c7 glass-shine
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #614f3a door-panel-deep
+Z #443125 door-panel-deep
+V #7d7152 door-panel-deep

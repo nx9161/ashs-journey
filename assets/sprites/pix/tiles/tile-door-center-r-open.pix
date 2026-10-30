@@ -3,19 +3,19 @@ PIX tile-door-center-r-open 16 16
 rrrrrrrrrrrrrrrr
 rrrrrrrrrrrrrrrr
 rrrrrrrrrrrrrrrr
-ssssZZZZZZZuuuss
-ststZtttttZuuuww
-stsgZtttttZuuuww
-stsgZtttttZuuuww
-stsgZtttttZuuuww
-stsgZtttttZuuuww
-stsgZtttttZuuwww
-stsgZtttttZuuuww
-stsgZtttttZuuuww
-stsgZtttttZuuuww
-ststZtttttZuuuww
-llllwwwwwwwuuull
-ssssZZZZZZZuuuss
+ssssFFFFFFFuuuss
+ststFQQQQQFuuuww
+stsgFQtttQFuuuww
+stsgFQtttQFuuuww
+stsgFQtttQFuuuww
+stsgFQtttQFuuuww
+stsgFQtttQFuuwww
+stsgFQtttQFuuuww
+stsgFQtttQFuuuww
+stsgFQ%%%QFuuuww
+ststFQ%%%QFuuuww
+llllFQQQQQFuuull
+ssssFFFFFFFuuuss
 PAL
 w #c6d8e9 center-white
 l #e1d9ba center-cream
@@ -26,3 +26,6 @@ u #476faa window-glass
 h #7097c7 glass-shine
 g #5681bd door-glass
 Z #3f3f49 open-dark
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold

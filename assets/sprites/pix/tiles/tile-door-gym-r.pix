@@ -3,18 +3,18 @@ PIX tile-door-gym-r 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-ttstttttttttttww
-dtsddddddddddtww
-dtsddddddddddtww
-dtsllddllddlltww
-dtsddddddddddtww
-dtsddddddddddtww
-dtsddddddddddtww
-dtsllddllddlltww
-dtsddddddddddtww
-dtsddddddddddtww
-dtsddddddddddtww
-ttstttttttttttww
+FFFFFFFFFFFFFFww
+FQQQQQQQQQQQQFww
+FQ&ZZZZZZZZZQFww
+FQ&VVZZVVZZVQFww
+FQ&ZZZZZZZZZQFww
+FQ&ZZZZZZZZZQFww
+FQ&ZZZZZZZZZQFww
+FQ&VVZZVVZZVQFww
+FQ%%%%%%%%%%QFww
+FQ%%%%%%%%%%QFww
+FQQQQQQQQQQQQFww
+FFFFFFFFFFFFFFww
 ssssssssssssssss
 PAL
 w #8b8b9b stone-mid
@@ -23,3 +23,9 @@ s #757585 stone-dark
 t #71523d trim
 d #505b6b door-iron
 g #d1bc88 window-lit
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
+& #464650 door-panel-deep
+Z #303740 door-panel-deep
+V #6a6d74 door-panel-deep

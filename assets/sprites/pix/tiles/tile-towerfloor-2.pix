@@ -1,29 +1,27 @@
 # Wave 4: Pokemon Tower floor variant 2 — offset slab joints, different wear.
 PIX tile-towerfloor-2 16 16
-mmmmzmmmmmmmmmmm
-mmmmzmmmmmmmmmmm
-mmcmzmmmmmmmmmmm
-mmmmzmmmmmmmmmmm
-mmmmzmmmmmmmcmmm
-mmmmzmmmmmmmmmmm
-mmmmzmmmmmmmmmmm
-zzzzzzzzzzzzzzzz
-mmmmmmmmmmmzmmmm
-mmmmmmmmmmmzmmmm
-mmmmmmmmmmmzmmmm
-mmmmmcmmmmmzmmmm
-mmmggmmmmmmzmmmm
-mmmmmmmmmmmzmcmm
-mmmmmmmmmmmzmmmm
-zzzzzzzzzzzzzzzz
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmcmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmcmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
+mmmmmcmmmmmmmmmm
+mmmggmmmmmmmmmmm
+mmmmmmmmmmmmmcmm
+mmmmmmmmmmmmmmmm
+mmmmmmmmmmmmmmmm
 PAL
-m #8d8b9b rock
-z #777585 rock-dark
-c #b0b4c1 rock-light
-k #71583d shadow-brown
-a #a08d6c strata-brown
-b #a69874 strata-tan
-y #84714e strata-dark
-g #59647a rock-slate
-
-# W5SPLIT2 hue shift 7deg (TX-1 variant split)
+m #888698 rock
+z #737184 rock-dark
+c #b2b5bd rock-light
+k #725d46 shadow-brown
+a #988a71 strata-brown
+b #a1977d strata-tan
+y #7e6d4e strata-dark
+g #566176 rock-slate

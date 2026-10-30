@@ -1,7 +1,7 @@
 # Stage S3a: canalave house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-canalave 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+cFFFFFFFcFFFFFFF
+FFFFFFFcFFFFFFFc
 bbbbbbbbbbbbbbbb
 aaaaacaaaaaaacaa
 aaaacaaaaaaacaaa
@@ -17,7 +17,9 @@ aaacaaaaaaacaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #456b82 canalave-roof
-b #3a5a6d roof-dark
-c #507a94 roof-light
-d #c1a85f roof-trim
+a #456187 canalave-roof
+b #374d6c roof-dark
+c #4c6a94 roof-light
+d #6287bc roof-trim
+F #5d7fac r2-highlight
+Q #31445e r2-shade

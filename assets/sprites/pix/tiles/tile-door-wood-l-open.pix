@@ -3,19 +3,19 @@ PIX tile-door-wood-l-open 16 16
 ssssssssssssssss
 ssssssssssssssss
 llllllllllllllll
-wwssZZZZZZZsssss
-wwstZtttttZssstt
-wwstZtttttZssstt
-wwstZtttttZssstt
-wwstZtttttZssstt
-wwstZtttttZssstt
-wwstZtttttZssltt
-wwstZtttttZssstt
-wwstZtttttZssstt
-wwstZtttttZssstt
-wwstZtttttZssstt
-wwsslllllllsssss
-ssssZZZZZZZsssss
+wwssFFFFFFFsssss
+wwstFQQQQQFssstt
+wwstFQtttQFssstt
+wwstFQtttQFssstt
+wwstFQtttQFssstt
+wwstFQtttQFssstt
+wwstFQtttQFssltt
+wwstFQtttQFssstt
+wwstFQtttQFssstt
+wwstFQ%%%QFssstt
+wwstFQ%%%QFssstt
+wwssFQQQQQFsssss
+ssssFFFFFFFsssss
 PAL
 w #b99b74 wall-mid
 l #cfae83 wall-light
@@ -23,3 +23,6 @@ s #a18461 wall-shadow
 t #71523d door-wood
 d #846a4e door-panel
 Z #3f3f49 open-dark
+F #f5f0dc door-frame
+Q #202028 door-frame-dark
+% #a02828 door-threshold
