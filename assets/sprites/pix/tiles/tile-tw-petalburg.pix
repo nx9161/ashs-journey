@@ -1,23 +1,23 @@
 # Stage H3a: petalburg house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-petalburg 16 16
 bbbbbbbbbbbbbbbb
-aaaaaabbaaaaaaaa
+aaaaaabbbbaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaahgggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaabaaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaabaaaaaaaab
+aaahgggbbggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaabaabaaaaaa
 aaaaaaaaaaaaaaaa
-aaabaaaabaaaaaaa
+aaabaaaaaaaabaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #a99d89 petalburg-house-wall
-b #65806f house-wall-trim
-g #cab578 house-window-lit
-h #d9ce9e house-window-light
+a #b2a795 petalburg-house-wall
+b #6c8a77 house-wall-trim
+g #d1bc88 house-window-lit
+h #e1d9ba house-window-light

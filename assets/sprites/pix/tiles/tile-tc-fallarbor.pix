@@ -17,9 +17,9 @@ PIX tile-tc-fallarbor 16 16
 .......kk.......
 ................
 PAL
-a #a49c91 canopy
-b #89837b canopy-dark
-c #bbb1a1 canopy-light
-d #d1ccbf canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light

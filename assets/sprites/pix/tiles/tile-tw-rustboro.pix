@@ -2,22 +2,22 @@
 PIX tile-tw-rustboro 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-ababaaaaaaaaaaaa
+ababaaaaaaaababa
 aaaaaaaaaaaaaaaa
-aaahgggaaaaabaaa
-aaaggggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaabaa
-aaabbbbaaaaaaaaa
-aaaaaaaaaaabaaaa
-aabaaaaaaaaaaaab
+aaahgggaaggghaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aabaaaaaaaaaabaa
 aaaaabaaaabaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #a99d89 rustboro-house-wall
+a #c9bca6 rustboro-house-wall
 b #7c756a house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

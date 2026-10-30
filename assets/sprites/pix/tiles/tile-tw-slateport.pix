@@ -2,22 +2,22 @@
 PIX tile-tw-slateport 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-aaababaaaaaaaaaa
+aaababaaaababaaa
 aaaaaaaaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggabaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-baaaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaba
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+baaaaaaaaaaaaaab
+baaaaaaaaaaaaaab
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #c1ab86 slateport-house-wall
+a #e2d2a8 slateport-house-wall
 b #8e8067 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

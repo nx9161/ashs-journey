@@ -1,25 +1,25 @@
 # Stage H3a: fortree town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-fortree 16 16
-aaaaabaaaaabfafa
-aaaaaaaaaaaaaaab
-aaafbafaaaaafaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
 aabaaaaaaaaaaaaa
-aabaaaaaaaabbaaa
-abaaaaaabbaaaaaa
-aaaaaabbaaaaaada
-aaaabaaaaaaabaaa
-aaaaaaaaafabaaaa
-aabbaaaaaaaabbaa
-aaaaaaaaaabaaaaa
-babaaabfaafaaaaa
-daabaaabaafbaaaa
-aaaaaaabaabaaaba
-daaaaadaaaabaaaa
-daaaaaababaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #6c9872 fortree-ground
-b #5c8361 ground-dark
+b #557a5a ground-dark
 c #78ac7f ground-light
-d #b69c5f town-accent
-e #9ca4ab town-accent-2
-f #4e7053 ground-deep
+d #78ac7f town-accent
+e #78ac7f town-accent-2
+f #557a5a ground-deep

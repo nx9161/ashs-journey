@@ -1,20 +1,20 @@
 # Stage H3a: lavaridge roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-lavaridge 16 16
 dddddddddddddddd
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
+caaaaacaacaaaaac
+caaaaacaacaaaaac
 bbbbbbbbbbbbbbbb
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
 bbbbbbbbbbbbbbbb
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
-abbbbbabbbbbabbb
+caaaaacaacaaaaac
+caaaaacaacaaaaac
+abbbbbabbabbbbba
 bbbbbbbbbbbbbbbb
 PAL
 a #3d5f8f lavaridge-roof

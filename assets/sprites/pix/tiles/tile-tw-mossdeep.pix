@@ -1,17 +1,17 @@
 # Stage H3b: mossdeep house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-mossdeep 16 16
 bbbbbbbbbbbbbbbb
-abaabaaaaaaaaaaa
+abaabaaaaaabaaba
 aaaaaaaaaaaaaaaa
-abaaaabaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaabaaabaa
-aaaggggbaaaaaaaa
-aaaggggaaaaaaaba
-abaggggabaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaaaaabaaaaaa
-aaaaaaaaaaaaaaab
+abaaaabaabaaaaba
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+abaggggaaggggaba
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb

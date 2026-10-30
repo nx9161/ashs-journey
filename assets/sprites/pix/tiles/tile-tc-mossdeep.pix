@@ -17,9 +17,9 @@ PIX tile-tc-mossdeep 16 16
 .......kk.......
 ................
 PAL
-a #89adb9 canopy
-b #778f98 canopy-dark
-c #97c6d6 canopy-light
-d #cbd6e0 canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light

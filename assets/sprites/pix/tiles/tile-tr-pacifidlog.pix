@@ -1,23 +1,23 @@
 # Stage H3b: pacifidlog roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-pacifidlog 16 16
 dddddddddddddddd
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
+caaaaacaacaaaaac
+caaaaacaacaaaaac
 bbbbbbbbbbbbbbbb
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
 bbbbbbbbbbbbbbbb
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
-abbbbbabbbbbabbb
+caaaaacaacaaaaac
+caaaaacaacaaaaac
+abbbbbabbabbbbba
 bbbbbbbbbbbbbbbb
 PAL
-a #875545 pacifidlog-roof
-b #6c4437 roof-dark
-c #945d4c roof-light
-d #c28370 roof-trim
+a #8a4f4c pacifidlog-roof
+b #6c3f37 roof-dark
+c #995a53 roof-light
+d #c47168 roof-trim

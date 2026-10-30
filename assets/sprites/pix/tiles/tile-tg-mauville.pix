@@ -1,25 +1,25 @@
 # Stage H3a: mauville town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-mauville 16 16
-aaaaaaaaaaccaaaa
-caaaaaaaaaaaabba
-abaabadbaccbacaa
-afabdadaaaabaacc
-bfaaabbabacabcaa
-aaaaaaadaaaaaaaa
-acaaaaaaaabacaaa
-ddacacacfaaacaba
-acaacaaadaaacbaa
-aaaaacabaaaabbab
-aaaaaaaaabaaaabb
-cfdabacafaafabba
-caaabababacabbba
-acacdfbafdabbcac
-aacabaaaaaababad
-aaacaaabaacaaaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #9d9a76 mauville-ground
-b #858463 ground-dark
-c #b2b082 ground-light
-d #c1a85f town-accent
-e #8b6ba5 town-accent-2
-f #727055 ground-deep
+b #7d7b5d ground-dark
+c #bab378 ground-light
+d #bab378 town-accent
+e #bab378 town-accent-2
+f #7d7b5d ground-deep

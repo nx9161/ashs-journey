@@ -17,9 +17,9 @@ PIX tile-tc-oldale 16 16
 .......kk.......
 ................
 PAL
-a #a89d6d canopy
-b #8f855c canopy-dark
-c #c1b377 canopy-light
-d #d9d9c1 canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light

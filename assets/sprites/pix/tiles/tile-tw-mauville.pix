@@ -1,23 +1,23 @@
 # Stage H3a: mauville house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-mauville 16 16
 bbbbbbbbbbbbbbbb
-aaaaaaaaaaaaaaba
-aaaaaaaaaaaabaaa
-aaaaaaabaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-baaggggabaaaaaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaaaaabaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaabaaaaa
+aaaaaaabbaaaaaaa
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+baaggggaaggggaab
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #a1947d mauville-house-wall
+a #c1b39a mauville-house-wall
 b #7d7b5d house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

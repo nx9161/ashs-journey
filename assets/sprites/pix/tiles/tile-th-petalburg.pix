@@ -1,25 +1,25 @@
 # Stage H3a: petalburg house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-petalburg 16 16
-cFFFFFFFcFFFFFFF
-FFFFFFFcFFFFFFFc
+cFFFFFFFFFFFFFFc
+FFFFFFFccFFFFFFF
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #765d56 petalburg-roof
-b #6a544d roof-dark
-c #8e7067 roof-light
-d #ac705d roof-trim
-F #987a71 r2-highlight
+a #724b46 petalburg-roof
+b #65423e roof-dark
+c #8b5c55 roof-light
+d #a95852 roof-trim
+F #98655d r2-highlight
 Q #53413c r2-shade

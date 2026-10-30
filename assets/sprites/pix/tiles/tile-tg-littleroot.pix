@@ -1,25 +1,25 @@
 # Stage H3a: littleroot town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-littleroot 16 16
-fabaaaabaaaaafba
-bacaadaaaaaaaaaa
-aacaabaaaaaabaaa
-aabaaaaaaacaaaaa
-baaaaabaaaacaaaa
-aaadaaaafaafaaaa
-aacaaadadbaaafdf
-badcbbbaacaacaab
-adcaaccaaaaaaaaa
-acaaabbaaaaaaaba
-aacaaaadbdcaaaaa
-acdabaaacdcaaada
-acbdfaabadaaaaaa
-aaaabaaaaabdacaa
-fbccfbaacbfcaaaa
-aabbaaaaaabaabaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #9eb07d littleroot-ground
 b #85936a ground-dark
 c #b4cb88 ground-light
-d #ca788d town-accent
-e #dcd3ae town-accent-2
-f #707c5a ground-deep
+d #b4cb88 town-accent
+e #b4cb88 town-accent-2
+f #85936a ground-deep

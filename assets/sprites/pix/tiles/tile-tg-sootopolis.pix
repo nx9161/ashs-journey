@@ -1,25 +1,25 @@
 # Stage H3b: sootopolis town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-sootopolis 16 16
-cadfaacbcafbaaaa
-aaaaaaacabaaaaba
-abfaaaaacaaacaaa
-aaabcaaaaacaacba
-aaabfcaaaaaaaaaa
-aabbaaabbabbaaba
-acadbaabaaaaaafa
-accacaaaabbcafbc
-aaaafaaacaabaaaa
-adaabaacaaaacaaa
-aaafabaabaaaaaaa
-aaaabcbaaaacacdb
-daaaaaaaacaaaaab
-cabbaaaaadbaabaa
-faaacccaaabaabfa
-aaccaaaabbaafaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #c9c5bb sootopolis-ground
-b #a4a39d ground-dark
-c #ebebcb ground-light
-d #7b878e town-accent
-e #c4a868 town-accent-2
-f #888783 ground-deep
+b #b2ae9f ground-dark
+c #e6dbc0 ground-light
+d #b2ae9f town-accent
+e #b2ae9f town-accent-2
+f #b2ae9f ground-deep

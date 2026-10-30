@@ -1,25 +1,25 @@
 # Stage H3b: mossdeep house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-mossdeep 16 16
-cFFFFFFFcFFFFFFF
-FFFFFFFcFFFFFFFc
+cFFFFFFFFFFFFFFc
+FFFFFFFccFFFFFFF
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #7e594e mossdeep-roof
-b #65473e roof-dark
-c #8b6255 roof-light
-d #e0d1cc roof-trim
-F #a27567 r2-highlight
+a #7e534e mossdeep-roof
+b #65423e roof-dark
+c #8b5c55 roof-light
+d #e1b5b1 roof-trim
+F #a26e67 r2-highlight
 Q #593e36 r2-shade

@@ -1,25 +1,25 @@
 # Stage H3a: rustboro house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-rustboro 16 16
-cFFFFFFFcFFFFFFF
-FFFFFFFcFFFFFFFc
+cFFFFFFFFFFFFFFc
+FFFFFFFccFFFFFFF
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #765d56 rustboro-roof
-b #5f4b45 roof-dark
-c #82675e roof-light
-d #b66a54 roof-trim
-F #987a71 r2-highlight
+a #724b46 rustboro-roof
+b #65423e roof-dark
+c #7e534e roof-light
+d #b4514a roof-trim
+F #98655d r2-highlight
 Q #53413c r2-shade

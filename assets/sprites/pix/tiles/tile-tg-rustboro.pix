@@ -1,25 +1,25 @@
 # Stage H3a: rustboro town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-rustboro 16 16
-babbaacbcaacbdaa
-caabaabaafaacaaf
-aaaaabaaaaaaaaad
-aabfaacbaadbaaab
-aaabaaaaabaaadad
-aaacaaacaaacacaa
-aaaaaadabaaaabaa
-baddaabaaaaaffca
-abaabaababbdaaaa
-aaabcaabaaaaaacc
-aacacaaaafaaacdc
-faaadabaaaaaaafa
-baafaaaaaadadaaa
-abdaacaacaaaabaa
-caacabaaaaaaacba
-affaaacfaaacacaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #9d9487 rustboro-ground
-b #847d72 ground-dark
-c #b3a797 ground-light
-d #b16a54 town-accent
-e #7b848e town-accent-2
-f #716a61 ground-deep
+b #7f7a72 ground-dark
+c #bbb1a1 ground-light
+d #bbb1a1 town-accent
+e #7f7a72 town-accent-2
+f #7f7a72 ground-deep

@@ -2,7 +2,7 @@
 
 Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v1, forge-base v1)
 
-**6349/6353 checks PASS**
+**6380/6384 checks PASS**
 
 | check | result | detail |
 |---|---|---|
@@ -5354,6 +5354,21 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-atmo-sparkle <= 32 colors | PASS | 2 |
 | sprite tile-atmo-warm <= 32 colors | PASS | 1 |
 | sprite tile-bannerwall <= 32 colors | PASS | 3 |
+| sprite tile-beach-e <= 32 colors | PASS | 7 |
+| sprite tile-beach-ew <= 32 colors | PASS | 7 |
+| sprite tile-beach-n <= 32 colors | PASS | 7 |
+| sprite tile-beach-ne <= 32 colors | PASS | 7 |
+| sprite tile-beach-nesw <= 32 colors | PASS | 7 |
+| sprite tile-beach-new <= 32 colors | PASS | 7 |
+| sprite tile-beach-ns <= 32 colors | PASS | 7 |
+| sprite tile-beach-nse <= 32 colors | PASS | 7 |
+| sprite tile-beach-nsw <= 32 colors | PASS | 7 |
+| sprite tile-beach-nw <= 32 colors | PASS | 7 |
+| sprite tile-beach-s <= 32 colors | PASS | 7 |
+| sprite tile-beach-se <= 32 colors | PASS | 7 |
+| sprite tile-beach-sew <= 32 colors | PASS | 7 |
+| sprite tile-beach-sw <= 32 colors | PASS | 7 |
+| sprite tile-beach-w <= 32 colors | PASS | 7 |
 | sprite tile-blend-arch <= 32 colors | PASS | 3 |
 | sprite tile-blend-treeline <= 32 colors | PASS | 3 |
 | sprite tile-boardwalk <= 32 colors | PASS | 2 |
@@ -5376,10 +5391,10 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-cavewall-5 <= 32 colors | PASS | 4 |
 | sprite tile-centerdoor-open <= 32 colors | PASS | 5 |
 | sprite tile-centerdoor <= 32 colors | PASS | 6 |
-| sprite tile-centerfloor-1 <= 32 colors | PASS | 3 |
+| sprite tile-centerfloor-1 <= 32 colors | PASS | 2 |
 | sprite tile-centerfloor-2 <= 32 colors | PASS | 2 |
-| sprite tile-centerfloor-3 <= 32 colors | PASS | 1 |
-| sprite tile-centerfloor-4 <= 32 colors | PASS | 3 |
+| sprite tile-centerfloor-3 <= 32 colors | PASS | 2 |
+| sprite tile-centerfloor-4 <= 32 colors | PASS | 2 |
 | sprite tile-centerwall-2 <= 32 colors | PASS | 3 |
 | sprite tile-centerwall-3 <= 32 colors | PASS | 4 |
 | sprite tile-centerwall <= 32 colors | PASS | 4 |
@@ -5438,7 +5453,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-door-gym-l-open <= 32 colors | PASS | 9 |
 | sprite tile-door-gym-l <= 32 colors | PASS | 9 |
 | sprite tile-door-gym-r-open <= 32 colors | PASS | 9 |
-| sprite tile-door-gym-r <= 32 colors | PASS | 9 |
+| sprite tile-door-gym-r <= 32 colors | PASS | 8 |
 | sprite tile-door-house-open <= 32 colors | PASS | 8 |
 | sprite tile-door-house <= 32 colors | PASS | 9 |
 | sprite tile-door-lab-facade <= 32 colors | PASS | 9 |
@@ -5454,11 +5469,11 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-door-wood-facade-open <= 32 colors | PASS | 8 |
 | sprite tile-door-wood-facade <= 32 colors | PASS | 9 |
 | sprite tile-door-wood-l-open <= 32 colors | PASS | 7 |
-| sprite tile-door-wood-l <= 32 colors | PASS | 9 |
+| sprite tile-door-wood-l <= 32 colors | PASS | 8 |
 | sprite tile-door-wood-r-open <= 32 colors | PASS | 7 |
-| sprite tile-door-wood-r <= 32 colors | PASS | 9 |
+| sprite tile-door-wood-r <= 32 colors | PASS | 8 |
 | sprite tile-door <= 32 colors | PASS | 6 |
-| sprite tile-doormat <= 32 colors | PASS | 4 |
+| sprite tile-doormat <= 32 colors | PASS | 5 |
 | sprite tile-dressbanner <= 32 colors | PASS | 4 |
 | sprite tile-dresscalendar <= 32 colors | PASS | 5 |
 | sprite tile-dressclock <= 32 colors | PASS | 6 |
@@ -5488,6 +5503,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-edge-wet-n <= 32 colors | PASS | 3 |
 | sprite tile-edge-wet-s <= 32 colors | PASS | 3 |
 | sprite tile-edge-wet-w <= 32 colors | PASS | 3 |
+| sprite tile-facade-panel <= 32 colors | PASS | 7 |
 | sprite tile-fence <= 32 colors | PASS | 2 |
 | sprite tile-flora-celadon <= 32 colors | PASS | 5 |
 | sprite tile-flora-cerulean <= 32 colors | PASS | 5 |
@@ -5674,7 +5690,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-prop-miningcart <= 32 colors | PASS | 3 |
 | sprite tile-prop-officedesk <= 32 colors | PASS | 4 |
 | sprite tile-prop-originstone <= 32 colors | PASS | 3 |
-| sprite tile-prop-palm <= 32 colors | PASS | 8 |
+| sprite tile-prop-palm <= 32 colors | PASS | 7 |
 | sprite tile-prop-pcdesk <= 32 colors | PASS | 5 |
 | sprite tile-prop-piano <= 32 colors | PASS | 3 |
 | sprite tile-prop-pipecluster <= 32 colors | PASS | 5 |
@@ -5742,6 +5758,21 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-prop-well <= 32 colors | PASS | 7 |
 | sprite tile-prop-windmill <= 32 colors | PASS | 3 |
 | sprite tile-prop-workdesk <= 32 colors | PASS | 4 |
+| sprite tile-psand-e <= 32 colors | PASS | 5 |
+| sprite tile-psand-ew <= 32 colors | PASS | 5 |
+| sprite tile-psand-n <= 32 colors | PASS | 5 |
+| sprite tile-psand-ne <= 32 colors | PASS | 4 |
+| sprite tile-psand-nesw <= 32 colors | PASS | 5 |
+| sprite tile-psand-new <= 32 colors | PASS | 5 |
+| sprite tile-psand-ns <= 32 colors | PASS | 5 |
+| sprite tile-psand-nse <= 32 colors | PASS | 5 |
+| sprite tile-psand-nsw <= 32 colors | PASS | 5 |
+| sprite tile-psand-nw <= 32 colors | PASS | 5 |
+| sprite tile-psand-s <= 32 colors | PASS | 5 |
+| sprite tile-psand-se <= 32 colors | PASS | 5 |
+| sprite tile-psand-sew <= 32 colors | PASS | 5 |
+| sprite tile-psand-sw <= 32 colors | PASS | 4 |
+| sprite tile-psand-w <= 32 colors | PASS | 5 |
 | sprite tile-rock-2 <= 32 colors | PASS | 3 |
 | sprite tile-rock-3 <= 32 colors | PASS | 3 |
 | sprite tile-rock <= 32 colors | PASS | 3 |
@@ -5828,12 +5859,12 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tc-azalea <= 32 colors | PASS | 6 |
 | sprite tile-tc-blackthorn <= 32 colors | PASS | 6 |
 | sprite tile-tc-canalave <= 32 colors | PASS | 6 |
-| sprite tile-tc-celadon <= 32 colors | PASS | 11 |
+| sprite tile-tc-celadon <= 32 colors | PASS | 10 |
 | sprite tile-tc-celestic <= 32 colors | PASS | 6 |
-| sprite tile-tc-cerulean <= 32 colors | PASS | 11 |
+| sprite tile-tc-cerulean <= 32 colors | PASS | 9 |
 | sprite tile-tc-cherrygrove <= 32 colors | PASS | 6 |
 | sprite tile-tc-cianwood <= 32 colors | PASS | 6 |
-| sprite tile-tc-cinnabar <= 32 colors | PASS | 11 |
+| sprite tile-tc-cinnabar <= 32 colors | PASS | 9 |
 | sprite tile-tc-dewford <= 32 colors | PASS | 6 |
 | sprite tile-tc-ecruteak <= 32 colors | PASS | 6 |
 | sprite tile-tc-eterna <= 32 colors | PASS | 6 |
@@ -5841,13 +5872,13 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tc-fallarbor <= 32 colors | PASS | 6 |
 | sprite tile-tc-floaroma <= 32 colors | PASS | 6 |
 | sprite tile-tc-fortree <= 32 colors | PASS | 6 |
-| sprite tile-tc-fuchsia <= 32 colors | PASS | 11 |
+| sprite tile-tc-fuchsia <= 32 colors | PASS | 9 |
 | sprite tile-tc-goldenrod <= 32 colors | PASS | 6 |
 | sprite tile-tc-hearthome <= 32 colors | PASS | 6 |
-| sprite tile-tc-indigo <= 32 colors | PASS | 11 |
+| sprite tile-tc-indigo <= 32 colors | PASS | 9 |
 | sprite tile-tc-jubilife <= 32 colors | PASS | 6 |
 | sprite tile-tc-lavaridge <= 32 colors | PASS | 6 |
-| sprite tile-tc-lavender <= 32 colors | PASS | 11 |
+| sprite tile-tc-lavender <= 32 colors | PASS | 9 |
 | sprite tile-tc-lilycove <= 32 colors | PASS | 6 |
 | sprite tile-tc-littleroot <= 32 colors | PASS | 6 |
 | sprite tile-tc-mahogany <= 32 colors | PASS | 6 |
@@ -5858,12 +5889,12 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tc-olivine <= 32 colors | PASS | 6 |
 | sprite tile-tc-oreburgh <= 32 colors | PASS | 6 |
 | sprite tile-tc-pacifidlog <= 32 colors | PASS | 5 |
-| sprite tile-tc-pallet <= 32 colors | PASS | 11 |
+| sprite tile-tc-pallet <= 32 colors | PASS | 9 |
 | sprite tile-tc-pastoria <= 32 colors | PASS | 6 |
 | sprite tile-tc-petalburg <= 32 colors | PASS | 6 |
-| sprite tile-tc-pewter <= 32 colors | PASS | 11 |
+| sprite tile-tc-pewter <= 32 colors | PASS | 9 |
 | sprite tile-tc-rustboro <= 32 colors | PASS | 5 |
-| sprite tile-tc-saffron <= 32 colors | PASS | 11 |
+| sprite tile-tc-saffron <= 32 colors | PASS | 9 |
 | sprite tile-tc-sandgem <= 32 colors | PASS | 6 |
 | sprite tile-tc-silvertown <= 32 colors | PASS | 6 |
 | sprite tile-tc-slateport <= 32 colors | PASS | 6 |
@@ -5874,20 +5905,20 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tc-twinleaf <= 32 colors | PASS | 6 |
 | sprite tile-tc-veilstone <= 32 colors | PASS | 6 |
 | sprite tile-tc-verdanturf <= 32 colors | PASS | 6 |
-| sprite tile-tc-vermilion <= 32 colors | PASS | 11 |
+| sprite tile-tc-vermilion <= 32 colors | PASS | 9 |
 | sprite tile-tc-violet <= 32 colors | PASS | 6 |
-| sprite tile-tc-viridian <= 32 colors | PASS | 11 |
-| sprite tile-tc2-celadon <= 32 colors | PASS | 11 |
-| sprite tile-tc2-cerulean <= 32 colors | PASS | 11 |
-| sprite tile-tc2-cinnabar <= 32 colors | PASS | 11 |
-| sprite tile-tc2-fuchsia <= 32 colors | PASS | 11 |
-| sprite tile-tc2-indigo <= 32 colors | PASS | 11 |
-| sprite tile-tc2-lavender <= 32 colors | PASS | 11 |
-| sprite tile-tc2-pallet <= 32 colors | PASS | 11 |
-| sprite tile-tc2-pewter <= 32 colors | PASS | 11 |
-| sprite tile-tc2-saffron <= 32 colors | PASS | 11 |
-| sprite tile-tc2-vermilion <= 32 colors | PASS | 11 |
-| sprite tile-tc2-viridian <= 32 colors | PASS | 11 |
+| sprite tile-tc-viridian <= 32 colors | PASS | 9 |
+| sprite tile-tc2-celadon <= 32 colors | PASS | 10 |
+| sprite tile-tc2-cerulean <= 32 colors | PASS | 9 |
+| sprite tile-tc2-cinnabar <= 32 colors | PASS | 9 |
+| sprite tile-tc2-fuchsia <= 32 colors | PASS | 9 |
+| sprite tile-tc2-indigo <= 32 colors | PASS | 9 |
+| sprite tile-tc2-lavender <= 32 colors | PASS | 9 |
+| sprite tile-tc2-pallet <= 32 colors | PASS | 9 |
+| sprite tile-tc2-pewter <= 32 colors | PASS | 9 |
+| sprite tile-tc2-saffron <= 32 colors | PASS | 9 |
+| sprite tile-tc2-vermilion <= 32 colors | PASS | 9 |
+| sprite tile-tc2-viridian <= 32 colors | PASS | 9 |
 | sprite tile-td-azalea <= 32 colors | PASS | 5 |
 | sprite tile-td-blackthorn <= 32 colors | PASS | 5 |
 | sprite tile-td-canalave <= 32 colors | PASS | 5 |
@@ -5940,58 +5971,58 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-td-vermilion <= 32 colors | PASS | 8 |
 | sprite tile-td-violet <= 32 colors | PASS | 5 |
 | sprite tile-td-viridian <= 32 colors | PASS | 8 |
-| sprite tile-tg-azalea <= 32 colors | PASS | 4 |
-| sprite tile-tg-blackthorn <= 32 colors | PASS | 5 |
+| sprite tile-tg-azalea <= 32 colors | PASS | 3 |
+| sprite tile-tg-blackthorn <= 32 colors | PASS | 3 |
 | sprite tile-tg-canalave <= 32 colors | PASS | 4 |
-| sprite tile-tg-celadon <= 32 colors | PASS | 4 |
+| sprite tile-tg-celadon <= 32 colors | PASS | 3 |
 | sprite tile-tg-celestic <= 32 colors | PASS | 5 |
-| sprite tile-tg-cerulean <= 32 colors | PASS | 4 |
-| sprite tile-tg-cherrygrove <= 32 colors | PASS | 5 |
-| sprite tile-tg-cianwood <= 32 colors | PASS | 5 |
-| sprite tile-tg-cinnabar <= 32 colors | PASS | 5 |
-| sprite tile-tg-dewford <= 32 colors | PASS | 5 |
-| sprite tile-tg-ecruteak <= 32 colors | PASS | 5 |
+| sprite tile-tg-cerulean <= 32 colors | PASS | 3 |
+| sprite tile-tg-cherrygrove <= 32 colors | PASS | 3 |
+| sprite tile-tg-cianwood <= 32 colors | PASS | 3 |
+| sprite tile-tg-cinnabar <= 32 colors | PASS | 3 |
+| sprite tile-tg-dewford <= 32 colors | PASS | 3 |
+| sprite tile-tg-ecruteak <= 32 colors | PASS | 3 |
 | sprite tile-tg-eterna <= 32 colors | PASS | 2 |
-| sprite tile-tg-evergrande <= 32 colors | PASS | 5 |
-| sprite tile-tg-fallarbor <= 32 colors | PASS | 5 |
+| sprite tile-tg-evergrande <= 32 colors | PASS | 3 |
+| sprite tile-tg-fallarbor <= 32 colors | PASS | 3 |
 | sprite tile-tg-floaroma <= 32 colors | PASS | 5 |
-| sprite tile-tg-fortree <= 32 colors | PASS | 4 |
-| sprite tile-tg-fuchsia <= 32 colors | PASS | 4 |
-| sprite tile-tg-goldenrod <= 32 colors | PASS | 4 |
+| sprite tile-tg-fortree <= 32 colors | PASS | 3 |
+| sprite tile-tg-fuchsia <= 32 colors | PASS | 3 |
+| sprite tile-tg-goldenrod <= 32 colors | PASS | 3 |
 | sprite tile-tg-hearthome <= 32 colors | PASS | 4 |
-| sprite tile-tg-indigo <= 32 colors | PASS | 4 |
+| sprite tile-tg-indigo <= 32 colors | PASS | 3 |
 | sprite tile-tg-jubilife <= 32 colors | PASS | 5 |
-| sprite tile-tg-lavaridge <= 32 colors | PASS | 5 |
-| sprite tile-tg-lavender <= 32 colors | PASS | 6 |
-| sprite tile-tg-lilycove <= 32 colors | PASS | 5 |
-| sprite tile-tg-littleroot <= 32 colors | PASS | 5 |
-| sprite tile-tg-mahogany <= 32 colors | PASS | 5 |
-| sprite tile-tg-mauville <= 32 colors | PASS | 5 |
-| sprite tile-tg-mossdeep <= 32 colors | PASS | 5 |
-| sprite tile-tg-newbark <= 32 colors | PASS | 5 |
-| sprite tile-tg-oldale <= 32 colors | PASS | 5 |
-| sprite tile-tg-olivine <= 32 colors | PASS | 5 |
+| sprite tile-tg-lavaridge <= 32 colors | PASS | 3 |
+| sprite tile-tg-lavender <= 32 colors | PASS | 3 |
+| sprite tile-tg-lilycove <= 32 colors | PASS | 3 |
+| sprite tile-tg-littleroot <= 32 colors | PASS | 3 |
+| sprite tile-tg-mahogany <= 32 colors | PASS | 3 |
+| sprite tile-tg-mauville <= 32 colors | PASS | 3 |
+| sprite tile-tg-mossdeep <= 32 colors | PASS | 3 |
+| sprite tile-tg-newbark <= 32 colors | PASS | 3 |
+| sprite tile-tg-oldale <= 32 colors | PASS | 3 |
+| sprite tile-tg-olivine <= 32 colors | PASS | 3 |
 | sprite tile-tg-oreburgh <= 32 colors | PASS | 2 |
-| sprite tile-tg-pacifidlog <= 32 colors | PASS | 5 |
-| sprite tile-tg-pallet <= 32 colors | PASS | 4 |
+| sprite tile-tg-pacifidlog <= 32 colors | PASS | 3 |
+| sprite tile-tg-pallet <= 32 colors | PASS | 3 |
 | sprite tile-tg-pastoria <= 32 colors | PASS | 3 |
-| sprite tile-tg-petalburg <= 32 colors | PASS | 5 |
-| sprite tile-tg-pewter <= 32 colors | PASS | 4 |
-| sprite tile-tg-rustboro <= 32 colors | PASS | 5 |
-| sprite tile-tg-saffron <= 32 colors | PASS | 5 |
+| sprite tile-tg-petalburg <= 32 colors | PASS | 3 |
+| sprite tile-tg-pewter <= 32 colors | PASS | 3 |
+| sprite tile-tg-rustboro <= 32 colors | PASS | 3 |
+| sprite tile-tg-saffron <= 32 colors | PASS | 3 |
 | sprite tile-tg-sandgem <= 32 colors | PASS | 5 |
-| sprite tile-tg-silvertown <= 32 colors | PASS | 5 |
-| sprite tile-tg-slateport <= 32 colors | PASS | 5 |
+| sprite tile-tg-silvertown <= 32 colors | PASS | 3 |
+| sprite tile-tg-slateport <= 32 colors | PASS | 3 |
 | sprite tile-tg-snowpoint <= 32 colors | PASS | 4 |
 | sprite tile-tg-solaceon <= 32 colors | PASS | 5 |
-| sprite tile-tg-sootopolis <= 32 colors | PASS | 5 |
+| sprite tile-tg-sootopolis <= 32 colors | PASS | 3 |
 | sprite tile-tg-sunnyshore <= 32 colors | PASS | 4 |
 | sprite tile-tg-twinleaf <= 32 colors | PASS | 5 |
 | sprite tile-tg-veilstone <= 32 colors | PASS | 2 |
-| sprite tile-tg-verdanturf <= 32 colors | PASS | 5 |
-| sprite tile-tg-vermilion <= 32 colors | PASS | 5 |
-| sprite tile-tg-violet <= 32 colors | PASS | 5 |
-| sprite tile-tg-viridian <= 32 colors | PASS | 5 |
+| sprite tile-tg-verdanturf <= 32 colors | PASS | 3 |
+| sprite tile-tg-vermilion <= 32 colors | PASS | 3 |
+| sprite tile-tg-violet <= 32 colors | PASS | 3 |
+| sprite tile-tg-viridian <= 32 colors | PASS | 3 |
 | sprite tile-tg2-azalea <= 32 colors | PASS | 3 |
 | sprite tile-tg2-blackthorn <= 32 colors | PASS | 4 |
 | sprite tile-tg2-canalave <= 32 colors | PASS | 3 |
@@ -6045,7 +6076,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tg2-violet <= 32 colors | PASS | 4 |
 | sprite tile-tg2-viridian <= 32 colors | PASS | 4 |
 | sprite tile-th-azalea <= 32 colors | PASS | 3 |
-| sprite tile-th-blackthorn <= 32 colors | PASS | 3 |
+| sprite tile-th-blackthorn <= 32 colors | PASS | 2 |
 | sprite tile-th-canalave <= 32 colors | PASS | 4 |
 | sprite tile-th-celestic <= 32 colors | PASS | 4 |
 | sprite tile-th-cherrygrove <= 32 colors | PASS | 3 |
@@ -6085,8 +6116,8 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-th-veilstone <= 32 colors | PASS | 4 |
 | sprite tile-th-verdanturf <= 32 colors | PASS | 3 |
 | sprite tile-th-violet <= 32 colors | PASS | 3 |
-| sprite tile-tl-azalea <= 32 colors | PASS | 5 |
-| sprite tile-tl-blackthorn <= 32 colors | PASS | 5 |
+| sprite tile-tl-azalea <= 32 colors | PASS | 4 |
+| sprite tile-tl-blackthorn <= 32 colors | PASS | 4 |
 | sprite tile-tl-canalave <= 32 colors | PASS | 5 |
 | sprite tile-tl-celadon <= 32 colors | PASS | 6 |
 | sprite tile-tl-celestic <= 32 colors | PASS | 5 |
@@ -6094,13 +6125,13 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tl-cherrygrove <= 32 colors | PASS | 5 |
 | sprite tile-tl-cianwood <= 32 colors | PASS | 5 |
 | sprite tile-tl-cinnabar <= 32 colors | PASS | 7 |
-| sprite tile-tl-dewford <= 32 colors | PASS | 5 |
+| sprite tile-tl-dewford <= 32 colors | PASS | 4 |
 | sprite tile-tl-ecruteak <= 32 colors | PASS | 5 |
 | sprite tile-tl-eterna <= 32 colors | PASS | 5 |
 | sprite tile-tl-evergrande <= 32 colors | PASS | 5 |
 | sprite tile-tl-fallarbor <= 32 colors | PASS | 5 |
 | sprite tile-tl-floaroma <= 32 colors | PASS | 5 |
-| sprite tile-tl-fortree <= 32 colors | PASS | 5 |
+| sprite tile-tl-fortree <= 32 colors | PASS | 4 |
 | sprite tile-tl-fuchsia <= 32 colors | PASS | 7 |
 | sprite tile-tl-goldenrod <= 32 colors | PASS | 5 |
 | sprite tile-tl-hearthome <= 32 colors | PASS | 5 |
@@ -6110,19 +6141,19 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tl-lavender <= 32 colors | PASS | 7 |
 | sprite tile-tl-lilycove <= 32 colors | PASS | 5 |
 | sprite tile-tl-littleroot <= 32 colors | PASS | 5 |
-| sprite tile-tl-mahogany <= 32 colors | PASS | 5 |
-| sprite tile-tl-mauville <= 32 colors | PASS | 5 |
+| sprite tile-tl-mahogany <= 32 colors | PASS | 4 |
+| sprite tile-tl-mauville <= 32 colors | PASS | 4 |
 | sprite tile-tl-mossdeep <= 32 colors | PASS | 5 |
 | sprite tile-tl-newbark <= 32 colors | PASS | 5 |
-| sprite tile-tl-oldale <= 32 colors | PASS | 5 |
+| sprite tile-tl-oldale <= 32 colors | PASS | 4 |
 | sprite tile-tl-olivine <= 32 colors | PASS | 5 |
 | sprite tile-tl-oreburgh <= 32 colors | PASS | 5 |
 | sprite tile-tl-pacifidlog <= 32 colors | PASS | 5 |
 | sprite tile-tl-pallet <= 32 colors | PASS | 7 |
 | sprite tile-tl-pastoria <= 32 colors | PASS | 5 |
 | sprite tile-tl-petalburg <= 32 colors | PASS | 5 |
-| sprite tile-tl-pewter <= 32 colors | PASS | 7 |
-| sprite tile-tl-rustboro <= 32 colors | PASS | 5 |
+| sprite tile-tl-pewter <= 32 colors | PASS | 6 |
+| sprite tile-tl-rustboro <= 32 colors | PASS | 4 |
 | sprite tile-tl-saffron <= 32 colors | PASS | 7 |
 | sprite tile-tl-sandgem <= 32 colors | PASS | 5 |
 | sprite tile-tl-silvertown <= 32 colors | PASS | 5 |
@@ -6135,7 +6166,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tl-veilstone <= 32 colors | PASS | 5 |
 | sprite tile-tl-verdanturf <= 32 colors | PASS | 5 |
 | sprite tile-tl-vermilion <= 32 colors | PASS | 7 |
-| sprite tile-tl-violet <= 32 colors | PASS | 5 |
+| sprite tile-tl-violet <= 32 colors | PASS | 4 |
 | sprite tile-tl-viridian <= 32 colors | PASS | 7 |
 | sprite tile-towerfloor-1 <= 32 colors | PASS | 3 |
 | sprite tile-towerfloor-2 <= 32 colors | PASS | 3 |
@@ -6151,7 +6182,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tr-cherrygrove <= 32 colors | PASS | 4 |
 | sprite tile-tr-cianwood <= 32 colors | PASS | 4 |
 | sprite tile-tr-dewford <= 32 colors | PASS | 4 |
-| sprite tile-tr-ecruteak <= 32 colors | PASS | 6 |
+| sprite tile-tr-ecruteak <= 32 colors | PASS | 4 |
 | sprite tile-tr-eterna <= 32 colors | PASS | 6 |
 | sprite tile-tr-evergrande <= 32 colors | PASS | 4 |
 | sprite tile-tr-fallarbor <= 32 colors | PASS | 4 |
@@ -6267,7 +6298,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-wall-lab <= 32 colors | PASS | 7 |
 | sprite tile-wall-mart-lit <= 32 colors | PASS | 8 |
 | sprite tile-wall-mart-upper <= 32 colors | PASS | 9 |
-| sprite tile-wall-mart <= 32 colors | PASS | 9 |
+| sprite tile-wall-mart <= 32 colors | PASS | 10 |
 | sprite tile-wall-wood-lit <= 32 colors | PASS | 6 |
 | sprite tile-water-1 <= 32 colors | PASS | 5 |
 | sprite tile-water-2 <= 32 colors | PASS | 5 |
@@ -6340,10 +6371,10 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite icon-keepsake-tortoisecharm <= 32 colors | PASS | 3 |
 | sprite icon-pokeball <= 32 colors | PASS | 3 |
 | sprite icon-potion <= 32 colors | PASS | 4 |
-| atlas sprite count > 0 | PASS | 4050 sprites |
+| atlas sprite count > 0 | PASS | 4081 sprites |
 | art-data.mjs exists | PASS |  |
 | art-data.mjs parses (node --check) | PASS | checked separately |
-| all source sprites pass pixel checks | PASS | 2428 sprites, 0 failures |
+| all source sprites pass pixel checks | PASS | 2459 sprites, 0 failures |
 | tiles family palette <= 1180 colors (per-family budget) | PASS | 1095 colors |
 | ui-palette.json <= 24 tokens | PASS | 24 tokens |
 | slop: todo markers in pix/tiles/tile-water-1.pix | FAIL | blacklist hit |
@@ -6357,7 +6388,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | png atlas-species-2.png valid signature | PASS | 544.3 KB |
 | png atlas-species-3.png valid signature | PASS | 187.1 KB |
 | png atlas-species.png valid signature | PASS | 423.7 KB |
-| png atlas-tiles.png valid signature | PASS | 84.4 KB |
+| png atlas-tiles.png valid signature | PASS | 83.6 KB |
 | png atlas-ui.png valid signature | PASS | 1.2 KB |
 
 ## FAILURES

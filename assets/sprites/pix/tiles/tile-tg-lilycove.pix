@@ -1,25 +1,25 @@
 # Stage H3b: lilycove town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-lilycove 16 16
-fabaaaabaaaaafba
-bacaadaaaaaaaaaa
-aacaabaaaaaabaaa
-aabaaaaaaacaaaaa
-baaaaabaaaacaaaa
-aaadaaaafaafaaaa
-aacaaadadbaaafdf
-badcbbbaacaacaab
-adcaaccaaaaaaaaa
-acaaabbaaaaaaaba
-aacaaaadbdcaaaaa
-acdabaaacdcaaada
-acbdfaabadaaaaaa
-aaaabaaaaabdacaa
-fbccfbaacbfcaaaa
-aabbaaaaaabaabaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #ac99b9 lilycove-ground
-b #908298 ground-dark
+b #907da0 ground-dark
 c #c4a7d8 ground-light
-d #c77084 town-accent
-e #869198 town-accent-2
-f #786d80 ground-deep
+d #c4a7d8 town-accent
+e #907da0 town-accent-2
+f #907da0 ground-deep

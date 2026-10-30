@@ -1,21 +1,21 @@
 # Stage H3b: evergrande roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-evergrande 16 16
 dddddddddddddddd
-aaaabaacabaaaaba
-aaacbaaaabaaaaba
-aaaabaaaabcaaaba
+aaaabaaccaabaaaa
+aaacbaaaaaabcaaa
+aaaabaaaaaabaaaa
 bbbbbbbbbbbbbbbb
-aacabaaaabaaacba
-aaaabaaaabaaaaba
-aaaabcaaabaaaaba
-acaabaaaabaacaba
+aacabaaaaaabacaa
+aaaabaaaaaabaaaa
+aaaabcaaaacbaaaa
+acaabaaaaaabaaca
 bbbbbbbbbbbbbbbb
-aaaabaaaabaaaabc
-caaabaaaabacaaba
-aaaabaacabaaaaba
-aaacbaaaabaaaaba
+aaaabaaaaaabaaaa
+caaabaaaaaabaaac
+aaaabaaccaabaaaa
+aaacbaaaaaabcaaa
 bbbbbbbbbbbbbbbb
-bbbbbbabbbbbbbbb
+bbbbbbabbabbbbbb
 PAL
 a #4e627e evergrande-roof
 b #3e4e65 roof-dark

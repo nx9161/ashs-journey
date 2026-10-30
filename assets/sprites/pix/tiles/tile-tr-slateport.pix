@@ -1,21 +1,21 @@
 # Stage H3a: slateport roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-slateport 16 16
 dddddddddddddddd
-abcaababcaababca
-acbabaacbabaacba
-caabaacaabaacaab
-aababcaababcaaba
-abaacbabaacbabaa
-baacaabaacaabaac
-abcaababcaababca
-acbabaacbabaacba
-caabaacaabaacaab
-aababcaababcaaba
-abaacbabaacbabaa
-baacaabaacaabaac
-abcaababcaababca
-babbbbbabbbbbabb
-abbbbbabbbbbabbb
+abcaababbabaacba
+acbabaaccaababca
+caabaacaacaabaac
+aababcaaaacbabaa
+abaacbabbabcaaba
+baacaabaabaacaab
+abcaababbabaacba
+acbabaaccaababca
+caabaacaacaabaac
+aababcaaaacbabaa
+abaacbabbabcaaba
+baacaabaabaacaab
+abcaababbabaacba
+babbbbbaabbbbbab
+abbbbbabbabbbbba
 PAL
 a #9d5843 slateport-roof
 b #814837 roof-dark

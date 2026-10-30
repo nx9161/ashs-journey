@@ -1,23 +1,23 @@
 # Stage H3a: rustboro roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-rustboro 16 16
 dddddddddddddddd
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
+caaaaacaacaaaaac
+caaaaacaacaaaaac
 bbbbbbbbbbbbbbbb
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
 bbbbbbbbbbbbbbbb
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
-abbbbbabbbbbabbb
+caaaaacaacaaaaac
+caaaaacaacaaaaac
+abbbbbabbabbbbba
 bbbbbbbbbbbbbbbb
 PAL
-a #765d56 rustboro-roof
-b #5f4b45 roof-dark
-c #82675e roof-light
-d #b66a54 roof-trim
+a #724b46 rustboro-roof
+b #65423e roof-dark
+c #7e534e roof-light
+d #b4514a roof-trim

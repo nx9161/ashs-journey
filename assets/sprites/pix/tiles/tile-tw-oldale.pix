@@ -1,23 +1,23 @@
 # Stage H3a: oldale house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-oldale 16 16
 bbbbbbbbbbbbbbbb
-abaabaaaaaaaaaaa
+abaabaaaaaabaaba
 aaaaaaaaaaaaaaaa
-abaaaabaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaabaaabaa
-aaaggggbaaaaaaaa
-aaaggggaaaaaaaba
-abaggggabaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaaaaabaaaaaa
-aaaaaaaaaaaaaaab
+abaaaabaabaaaaba
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+abaggggaaggggaba
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #b3986b oldale-house-wall
+a #d1b789 oldale-house-wall
 b #857d56 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

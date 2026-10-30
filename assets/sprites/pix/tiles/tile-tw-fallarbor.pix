@@ -2,22 +2,22 @@
 PIX tile-tw-fallarbor 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-abaaaaaaaaaaaaaa
+abaaaaaaaaaaaaba
 aaaaaaaaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaabaaa
-baabbbbabaaaaaaa
-aaaaaaaaaaaaabaa
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+baabbbbaabbbbaab
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaaabaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #aba59c fallarbor-house-wall
-b #7f7a72 house-wall-trim
-g #cab578 house-window-lit
-h #d9ce9e house-window-light
+a #cebea1 fallarbor-house-wall
+b #847d72 house-wall-trim
+g #d1bc88 house-window-lit
+h #dcd3ae house-window-light

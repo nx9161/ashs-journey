@@ -1,23 +1,23 @@
 # Stage H3b: sootopolis house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-sootopolis 16 16
 bbbbbbbbbbbbbbbb
-aaaaaabbaaaaaaaa
+aaaaaabbbbaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaahgggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaabaaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaabaaaaaaaab
+aaahgggbbggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaabaabaaaaaa
 aaaaaaaaaaaaaaaa
-aaabaaaabaaaaaaa
+aaabaaaaaaaabaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #d8cfc0 sootopolis-house-wall
+a #f8efcd sootopolis-house-wall
 b #979692 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

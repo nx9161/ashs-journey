@@ -1,21 +1,21 @@
 # Stage H3b: mossdeep roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-mossdeep 16 16
 dddddddddddddddd
-aaaabaacabaaaaba
-aaacbaaaabaaaaba
-aaaabaaaabcaaaba
+aaaabaaccaabaaaa
+aaacbaaaaaabcaaa
+aaaabaaaaaabaaaa
 bbbbbbbbbbbbbbbb
-aacabaaaabaaacba
-aaaabaaaabaaaaba
-aaaabcaaabaaaaba
-acaabaaaabaacaba
+aacabaaaaaabacaa
+aaaabaaaaaabaaaa
+aaaabcaaaacbaaaa
+acaabaaaaaabaaca
 bbbbbbbbbbbbbbbb
-aaaabaaaabaaaabc
-caaabaaaabacaaba
-aaaabaacabaaaaba
-aaacbaaaabaaaaba
+aaaabaaaaaabaaaa
+caaabaaaaaabaaac
+aaaabaaccaabaaaa
+aaacbaaaaaabcaaa
 bbbbbbbbbbbbbbbb
-bbbbbbabbbbbbbbb
+bbbbbbabbabbbbbb
 PAL
 a #7e594e mossdeep-roof
 b #65473e roof-dark

@@ -1,25 +1,25 @@
 # Stage H3a: petalburg town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-petalburg 16 16
-cadfaacbcafbaaaa
-aaaaaaacabaaaaba
-abfaaaaacaaacaaa
-aaabcaaaaacaacba
-aaabfcaaaaaaaaaa
-aabbaaabbabbaaba
-acadbaabaaaaaafa
-accacaaaabbcafbc
-aaaafaaacaabaaaa
-adaabaacaaaacaaa
-aaafabaabaaaaaaa
-aaaabcbaaaacacdb
-daaaaaaaacaaaaab
-cabbaaaaadbaabaa
-faaacccaaabaabfa
-aaccaaaabbaafaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #7fa38d petalburg-ground
 b #6c8a77 ground-dark
 c #8dbb9e ground-light
-d #7b868e town-accent
-e #c4a868 town-accent-2
-f #5c7565 ground-deep
+d #6c8a77 town-accent
+e #8dbb9e town-accent-2
+f #6c8a77 ground-deep

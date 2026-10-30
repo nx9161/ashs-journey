@@ -2,22 +2,22 @@
 PIX tile-tw-pacifidlog 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-ababaaaaaaaaaaaa
+ababaaaaaaaababa
 aaaaaaaaaaaaaaaa
-aaahgggaaaaabaaa
-aaaggggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaabaa
-aaabbbbaaaaaaaaa
-aaaaaaaaaaabaaaa
-aabaaaaaaaaaaaab
+aaahgggaaggghaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aabaaaaaaaaaabaa
 aaaaabaaaabaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #c1ab86 pacifidlog-house-wall
+a #e2d2a8 pacifidlog-house-wall
 b #8e7e64 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

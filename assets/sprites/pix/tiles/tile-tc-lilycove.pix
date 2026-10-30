@@ -17,9 +17,9 @@ PIX tile-tc-lilycove 16 16
 .......kk.......
 ................
 PAL
-a #ac99b9 canopy
-b #908298 canopy-dark
-c #c4a7d8 canopy-light
-d #c77084 canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light

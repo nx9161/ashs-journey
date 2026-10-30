@@ -1,25 +1,25 @@
 # Stage H3a: verdanturf town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-verdanturf 16 16
-aabaabaaaaaaacba
-aaaaadccbaaaabab
-baaaabccaacaaaaa
-bbaaaafbaaccaaac
-aaaaaaadaaabcbaa
-caaaabaafaaaabaa
-aaaaabaaaaaacafc
-cabcaaccadaaabaa
-aaaabaaaafaaaabb
-aaaaaababaaaaaba
 aaaaaaaaaaaaaaaa
-cacafbcaaabacaac
-aaaaaaaaabaaabab
-baaacaaaaaaaabaa
-aaacabcaaaaabaab
-aacaaabaacaaaaab
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #8cb87d verdanturf-ground
 b #77986c ground-dark
 c #9dd28b ground-light
-d #ce80a6 town-accent
-e #d7d797 town-accent-2
-f #64815a ground-deep
+d #9dd28b town-accent
+e #9dd28b town-accent-2
+f #77986c ground-deep

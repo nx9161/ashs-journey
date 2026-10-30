@@ -1,25 +1,25 @@
 # Stage H3a: slateport town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-slateport 16 16
-cabafaaaaaaaaaad
-bcaccaaaffbaaaaa
-acaaaaaaaaaaaaaa
-caaaaaaaaaaacaaa
-aacaaaaaaadbacaa
-aabaaccaaaacaaaa
-aacaaaaaaaaaaaaa
-abaaacaabbaccaaa
-aacaacafacaacaaf
-aafaabaabcbaadaa
-aadaabaacbfaaaab
-fabaaabcafaaacaa
-abbaccdbacaabaac
-aacaadacaaacaafa
-aaabaabaaacaaaac
-caaabbccccbabaca
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #b7a481 slateport-ground
-b #968970 ground-dark
+b #988a71 ground-dark
 c #d3bb8e ground-light
-d #7b838e town-accent
-e #c77084 town-accent-2
-f #80745d ground-deep
+d #988a71 town-accent
+e #d3bb8e town-accent-2
+f #988a71 ground-deep
