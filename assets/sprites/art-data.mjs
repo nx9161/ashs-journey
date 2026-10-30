@@ -98015,7 +98015,7 @@ export const ART = {
     "mmmmmmmzmmmmmmmm",
     "zzzzzzzzzzzzzzzz",
   ] },
-  "tile-towerwood": { w: 16, h: 16, pal: {"a":"#7d6247","b":"#69523b","c":"#8f7454"}, rows: [
+  "tile-towerwood": { w: 16, h: 16, pal: {"a":"#71573d","b":"#5d4c3a","c":"#846a4e"}, rows: [
     "bbbbbbbbbbbbbbbb",
     "aacbaaabaaabacab",
     "aaabcaabaaabaaab",
