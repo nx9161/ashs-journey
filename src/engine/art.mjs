@@ -12,7 +12,7 @@
 
 import { ART } from '../../assets/sprites/art-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
-import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER } from './tiles.mjs';
+import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 import { battlerDrawSize } from '../data/battler-tiers.mjs';
 
@@ -479,6 +479,10 @@ for (const k of S3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Perfection Pass Stage 2 Gate 0 (G0-4): the shuttered facade panel draws
 // its own tile and renders as-is (no facade group, no upper/side variant).
 TILE_ART['facade-panel'] = 'tile-facade-panel';
+// Perfection Pass Stage 2 Gate 2 (G2): beach transition kinds draw their
+// own feathered tiles (tile-beach-<dir> on the tropgrass side,
+// tile-psand-<dir> on the path side).
+for (const k of G2_KINDS) TILE_ART[k] = 'tile-' + k;
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -1008,6 +1012,10 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   // Arc 4 Stage S3b: Sinnoh east/north props composite over their ground too.
   ...S3B_PROP_KINDS]);
 export function groundFamilyOf(kind) {
+  // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
+  // psand kinds stand on path (props composite over the parent ground).
+  if (kind && kind.startsWith('beach-')) return 'tropgrass';
+  if (kind && kind.startsWith('psand-')) return 'path';
   if (kind && (W6_FLOOR_KINDS.includes(kind) || O1_FLOOR_KINDS.includes(kind) || J3_FLOOR_KINDS.includes(kind) || H3_FLOOR_KINDS.includes(kind) || H3B_FLOOR_KINDS.includes(kind) || S3_FLOOR_KINDS.includes(kind) || S3B_FLOOR_KINDS.includes(kind))) return kind; // W6/O1/J3/H3/H3B/S3/S3B floors are own families
   if (kind && (kind.startsWith('tg-') || kind.startsWith('tg2-'))) return kind; // W5: town ground is its own family
   if (kind && (kind.startsWith('tc-') || kind.startsWith('td-') || kind.startsWith('flora-'))) return 'grass';
@@ -1246,6 +1254,68 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     const f = pickAnim(cache.shorePulse, tt, x, y, CAD_SLOW, 31);
     if (f) layers.push(f);
   };
+  // Perfection Pass Stage 2 Gate 2 (G2): the tropgrass ground family gets
+  // the grassground ground treatment (sway / pulse / detail / blends /
+  // atmo / shadow / doormat) PLUS the edge-dirt set against path — until
+  // now tropgrass fell through to the bare default tile, so every
+  // tropgrass<->path border in the Orange Islands rendered untreated
+  // even though the pair is classified FULL. Tropgrass occurs only in
+  // the Orange Islands, so this branch is region-scoped in effect.
+  const pushEdgeDirtVsPath = (layers) => {
+    if (!cache.edgeDirt) return;
+    const p = { n: nb.n === 'path', e: nb.e === 'path', s: nb.s === 'path', w: nb.w === 'path' };
+    const used = new Set();
+    for (const c of ['ne', 'se', 'sw', 'nw']) {
+      if (p[c[0]] && p[c[1]] && cache.edgeDirt[c]) {
+        layers.push(cache.edgeDirt[c]); used.add(c[0]); used.add(c[1]);
+      }
+    }
+    for (const d of DIRS) {
+      if (p[d] && !used.has(d) && cache.edgeDirt[d]) layers.push(cache.edgeDirt[d]);
+    }
+  };
+  if (kind === 'tropgrass') {
+    const layers = [cache[kind] || pickVariant(cache.grassVariants, x, y, 13) || cache.grass];
+    const tgSway = hashTileSpread(x, y, 44) < 0.35
+      ? pickAnim(hashTileSpread(x, y, 42) < 0.5 ? cache.grassSway.a : cache.grassSway.b, tt, x, y, CAD_SLOW, 41) : null;
+    if (tgSway) layers.push(tgSway);
+    pushPulse(layers);
+    pushLampGlow(layers);
+    pushDetail(layers, 0.10, 19, cache.detailCalmSet);
+    pushBlends(layers);
+    pushAtmo(layers);
+    if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    pushSkirts(layers);
+    pushDoorMat(layers);
+    pushEdgeDirtVsPath(layers);
+    return layers.filter(Boolean);
+  }
+  // G2: beach / psand transition kinds — the feather toward sand is baked
+  // into their own tiles; this branch restores the ground extras the
+  // parent kinds carry (pulse, glow, shadow, doormat) plus the remaining
+  // open borders: edge-dirt against path on beach cells, wet edge against
+  // water and hash-gated grass fringe against grass-family on psand cells
+  // (mirroring the path branch's grammar).
+  if (kind.startsWith('beach-') || kind.startsWith('psand-')) {
+    const layers = [cache[kind]];
+    pushPulse(layers);
+    pushLampGlow(layers);
+    if (isArchKind(nb.n) && cache.shadowStrip) layers.push(cache.shadowStrip);
+    pushSkirts(layers);
+    pushDoorMat(layers);
+    if (kind.startsWith('beach-')) {
+      pushEdgeDirtVsPath(layers);
+    } else {
+      const grassy = (k) => k === 'grass' || k === 'grassground' || k === 'tropgrass' || k === 'flower' ||
+        (k != null && (k.startsWith('beach-') || k.startsWith('tg-') || k.startsWith('tg2-')));
+      for (const d of DIRS) {
+        if (nb[d] === 'water' && cache.edgeWet && cache.edgeWet[d]) layers.push(cache.edgeWet[d]);
+        else if (grassy(nb[d]) && cache.edgeGrass && cache.edgeGrass[d] &&
+                 hashTile(x, y, 23 + d.charCodeAt(0)) < 0.7) layers.push(cache.edgeGrass[d]);
+      }
+    }
+    return layers.filter(Boolean);
+  }
   switch (kind) {
     case 'grassground': {
       // Premium+ W0: textured meadow ground — its own authored tile,

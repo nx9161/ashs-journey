@@ -1,20 +1,20 @@
 # Stage O1: shrine floor — large blue-grey slabs, moss in the joints (full-bleed floor).
 PIX tile-shrinefloor 16 16
-bbbbbbbbabbbbbbb
-baadaaaaaaaaaaaa
+baabaabaabaabaab
+aaadaaaaaaaaaaaa
 caaaadaaaaaaaaac
 bacaaaaaaaaaacaa
-badaaaaaaaaaaaaa
-baaaaaaaaaaaaaaa
+aadaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 baaaaaaaadaaacac
-baadaaaacaaaacaa
-abbdbbdbcbbbbbcb
+aaadaaaacaaaacaa
+aaadaadacbaabacb
 aacaaaaabaaaccaa
-aaaaaaaabaacaaaa
-aacaaaaabaaaaaaa
+aaaaaaaaaaacaaaa
+aacaaaaaaaaaaaaa
 aaaaaaaabaaaaaaa
-aaaaaaaabaaaadaa
-aaaaaaaabaaaaaaa
+aaaaaaaaaaaaadaa
+aaaaaaaaaaaaaaaa
 aaaaaaaabaaaacaa
 PAL
 a #8b94a1 shrine-slab

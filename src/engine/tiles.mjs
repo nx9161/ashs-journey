@@ -464,6 +464,30 @@ G0_KIND_DEFS.forEach(([kind], i) => {
   TILE_CHARS[ch] = kind;
 });
 export const G0_WALKABLE_CHARS = G0_KIND_DEFS.filter(([, c]) => c === 'facade').map(([k]) => G0_KIND_CHARS[k]);
+// ---- Perfection Pass Stage 2 Gate 2 (G2): beach transition kinds ----
+// Sixteen new kinds continuing the block at idx 533..548 (G0 ends at
+// 532; idx 533..548 = U+2015..U+2024, verified free in TILE_CHARS and
+// unused by every map row game-wide). beach-<dir> is a tropgrass cell
+// whose <dir> edge(s) feather sand speckle (tile-beach-<dir>), placed
+// on tropgrass cells bordering sand; psand-<dir> is the same grammar
+// on the path side (tile-psand-<dir>). All are floor class (WALKABLE),
+// swapped 1:1 from tropgrass/path cells in the Orange Islands, so
+// walkable stays walkable and encounter eligibility is unchanged
+// (neither family is ',' / water / cavefloor).
+export const G2_KIND_DEFS = [
+  ['beach-n', 'floor'], ['beach-s', 'floor'], ['beach-e', 'floor'], ['beach-w', 'floor'],
+  ['beach-ne', 'floor'], ['beach-nw', 'floor'], ['beach-se', 'floor'], ['beach-sw', 'floor'],
+  ['psand-n', 'floor'], ['psand-s', 'floor'], ['psand-e', 'floor'], ['psand-w', 'floor'],
+  ['psand-ne', 'floor'], ['psand-nw', 'floor'], ['psand-se', 'floor'], ['psand-sw', 'floor'],
+];
+export const G2_KIND_CHARS = {};
+G2_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 533 + i);
+  G2_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const G2_KINDS = G2_KIND_DEFS.map(([k]) => k);
+export const G2_WALKABLE_CHARS = G2_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => G2_KIND_CHARS[k]);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

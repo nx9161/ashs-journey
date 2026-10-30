@@ -1,0 +1,27 @@
+# Stage 2 Gate 2: beach transition (tropgrass side, sand to the n) — sand speckle feather on tropgrass, sand tones from tile-sand, grass tones from tile-tropgrass. Original art.
+PIX tile-beach-n 16 16
+asstatsststssvsa
+bsavsasaatsdvssa
+asbaasaaaaaaatda
+aaeaaaasssadaaab
+baabdbaaaaaaaaaa
+aaaaaaaaadabaaaa
+abbaaabdaaeadaab
+aaaeaeabeadabaaa
+aaaaaaaaaaaaadab
+aaaaabaabaaaaaaa
+aaaaaaaaababaeaa
+aaaaaaaaaaabaaaa
+aaeadabaaaaeaaab
+aeaeabbaaaaaaada
+aaaaaaaaaaaaaaad
+aaaaaaabaababbab
+PAL
+a #5fa064 trop-grass
+b #4c8b4a trop-grass-dark
+c #729e66 grass-light
+d #7fb273 leaf-highlight
+e #458650 trop-grass-deep
+s #c6b388 sand
+t #d4c69c sand-light
+v #ded0ad shell
