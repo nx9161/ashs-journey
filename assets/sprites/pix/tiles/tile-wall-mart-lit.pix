@@ -1,4 +1,5 @@
-# Premium+ W5: LD-2 lit-window variant of tile-wall-mart (night)
+# Perfection Pass Stage 2 (G0-2): lit-window variant of tile-wall-mart
+# (night) — plum family, amber glass (G0-1 family).
 PIX tile-wall-mart-lit 16 16
 ssssssssssssssss
 ssssssssssssssss
@@ -17,12 +18,12 @@ llllllllllllllll
 ssssssssssssssss
 ssssssssssssssss
 PAL
-w #b99b74 wall-mid
-l #cfae83 wall-light
-s #a18461 wall-shadow
-t #71523d trim
+w #b57fb5 wall-plum
+l #c9a3c9 wall-plum-light
+s #8a5f8a wall-plum-shadow
+t #7d557d trim-plum
 b #d1bc88 window-lit
-e #c6d8e9 awning-white
+e #e8dcc0 glass-amber-pale
 g #d1bc88 goods-glow
 p #ca788d goods-pink
 n #73a167 goods-green

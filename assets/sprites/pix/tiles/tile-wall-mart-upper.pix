@@ -1,7 +1,8 @@
-# Premium+ W6: TX-3 Mart upper storey (window design B) 16x16 — resolver upper-row variant
+# Perfection Pass Stage 2 (G0-2): mart upper storey (window design B),
+# plum family repaint of tile-wall-mart-upper — resolver upper-row variant.
 PIX tile-wall-mart-upper 16 16
 tttttttttttttttt
-tttttttttttttttt
+wwwwwwwwwwwwwwww
 wwwwwwwwwwwwwwww
 wbbeebbeebbeebbw
 wbttttbeebttttbw
@@ -17,12 +18,12 @@ llllllllllllllll
 FFFFFFFFFFFFFFFF
 FFFFFFFFFFFFFFFF
 PAL
-w #b99b74 wall-mid
-l #cfae83 wall-light
-s #a18461 wall-shadow
-t #71523d trim
-b #476faa awning-blue
-e #c6d8e9 awning-white
+w #cc99cc wall-plum
+l #e3c3e3 wall-plum-light
+s #a87ba8 wall-plum-shadow
+t #7d557d trim-plum
+b #b57fb5 awning-plum
+e #e8dcc0 glass-amber-pale
 g #d1bc88 goods-glow
 p #ca788d goods-pink
 n #73a167 goods-green
