@@ -413,10 +413,11 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   ...[532]
     .map((i) => String.fromCodePoint(0x1E00 + i)),
   // Perfection Pass Stage 2 Gate 2 (G2): the beach transition chars
-  // (block idx 533..548, tiles.mjs G2_KIND_DEFS) are walkable floor,
+  // (block idx 533..562, tiles.mjs G2_KIND_DEFS) are walkable floor,
   // swapped 1:1 from walkable tropgrass/path cells in the Orange
   // Islands, so floor stays floor.
-  ...[533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548]
+  ...[533, 534, 535, 536, 537, 538, 539, 540, 541, 542, 543, 544, 545, 546, 547, 548,
+    549, 550, 551, 552, 553, 554, 555, 556, 557, 558, 559, 560, 561, 562]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.

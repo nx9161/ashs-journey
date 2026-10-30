@@ -1,0 +1,28 @@
+# Stage 2 Gate 2: path-on-sand transition (path side, sand to the new) — sand speckle feather on path, tones from tile-path/tile-sand only. Original art.
+PIX tile-psand-new 16 16
+pppttvptpptttppp
+ppppvpvppvpptvpt
+vppppppppppvpppv
+ttpbpptpptppppvp
+ppbbbppppppppppt
+vbtuppbbbpbbtvpv
+uppppppppppppppp
+pppvpppppppppppv
+ppppppppppppptpv
+puppbppppppppppp
+pppbbbpppppppptp
+tppbbbpbbbpbbbpp
+tppppppppppppppv
+ptpppppppppppppt
+tptppppppppppppv
+vptppppppppppppp
+PAL
+p #c6b388 path
+q #b4a17e path-dark
+b #a69274 path-worn
+n #d7c699 path-pale
+k #a0876c path-edge
+r #71523d dirt-brown
+t #d4c69c sand-light
+v #ded0ad shell
+u #bdab85 sand-shade

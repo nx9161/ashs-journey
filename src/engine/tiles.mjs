@@ -465,8 +465,8 @@ G0_KIND_DEFS.forEach(([kind], i) => {
 });
 export const G0_WALKABLE_CHARS = G0_KIND_DEFS.filter(([, c]) => c === 'facade').map(([k]) => G0_KIND_CHARS[k]);
 // ---- Perfection Pass Stage 2 Gate 2 (G2): beach transition kinds ----
-// Sixteen new kinds continuing the block at idx 533..548 (G0 ends at
-// 532; idx 533..548 = U+2015..U+2024, verified free in TILE_CHARS and
+// Thirty new kinds continuing the block at idx 533..562 (G0 ends at
+// 532; idx 533..562 = U+2015..U+2032, verified free in TILE_CHARS and
 // unused by every map row game-wide). beach-<dir> is a tropgrass cell
 // whose <dir> edge(s) feather sand speckle (tile-beach-<dir>), placed
 // on tropgrass cells bordering sand; psand-<dir> is the same grammar
@@ -479,6 +479,14 @@ export const G2_KIND_DEFS = [
   ['beach-ne', 'floor'], ['beach-nw', 'floor'], ['beach-se', 'floor'], ['beach-sw', 'floor'],
   ['psand-n', 'floor'], ['psand-s', 'floor'], ['psand-e', 'floor'], ['psand-w', 'floor'],
   ['psand-ne', 'floor'], ['psand-nw', 'floor'], ['psand-se', 'floor'], ['psand-sw', 'floor'],
+  // Multi-side completions (idx 549..562, U+2025..U+2032, verified free
+  // the same way): 1-wide district strips and islet cells touch sand on
+  // opposite / three / four sides — these kinds feather every named
+  // side, so no placed beach/psand cell keeps a raw sand edge.
+  ['beach-ns', 'floor'], ['beach-ew', 'floor'], ['beach-nse', 'floor'], ['beach-nsw', 'floor'],
+  ['beach-new', 'floor'], ['beach-sew', 'floor'], ['beach-nesw', 'floor'],
+  ['psand-ns', 'floor'], ['psand-ew', 'floor'], ['psand-nse', 'floor'], ['psand-nsw', 'floor'],
+  ['psand-new', 'floor'], ['psand-sew', 'floor'], ['psand-nesw', 'floor'],
 ];
 export const G2_KIND_CHARS = {};
 G2_KIND_DEFS.forEach(([kind], i) => {
