@@ -1,23 +1,23 @@
 # Stage S3a: hearthome house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-hearthome 16 16
 bbbbbbbbbbbbbbbb
-aaaaaaaaaaaaaaba
-aaaaaaaaaaaabaaa
-aaaaaaabaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-baaggggabaaaaaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaaaaabaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaabaaaaa
+aaaaaaabbaaaaaaa
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+baaggggaaggggaab
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #ac8f5d hearthome-house-wall
-b #927c39 house-wall-trim
-g #cab578 house-window-lit
-h #d9ce9e house-window-light
+a #d1b789 hearthome-house-wall
+b #9a823c house-wall-trim
+g #d1bc88 house-window-lit
+h #e1d9ba house-window-light

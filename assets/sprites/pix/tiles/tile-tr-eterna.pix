@@ -1,21 +1,21 @@
 # Stage S3a: eterna roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-eterna 16 16
 dddddddddddddddd
-FbcFFbFbcFFbFbcF
-acbabaacbabaacba
-caabaacaabaacaab
-aababcaababcaaba
-abaacbabaacbabaa
-baacaabaacaabaac
-abcaababcaababca
-acbabaacbabaacba
-caabaacaabaacaab
-aababcaababcaaba
-abaacbabaacbabaa
-baacaabaacaabaac
-abcaababcaababca
-bQbbbbbQbbbbbQbb
-QbbbbbQbbbbbQbbb
+FbcFFbFbbFbFFcbF
+acbabaaccaababca
+caabaacaacaabaac
+aababcaaaacbabaa
+abaacbabbabcaaba
+baacaabaabaacaab
+abcaababbabaacba
+acbabaaccaababca
+caabaacaacaabaac
+aababcaaaacbabaa
+abaacbabbabcaaba
+baacaabaabaacaab
+abcaababbabaacba
+bQbbbbbQQbbbbbQb
+QbbbbbQbbQbbbbbQ
 PAL
 a #3e4e65 eterna-roof
 b #364559 roof-dark

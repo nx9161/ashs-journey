@@ -1,23 +1,23 @@
 # Stage S3a: jubilife house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-jubilife 16 16
 bbbbbbbbbbbbbbbb
-aaaaaabbaaaaaaaa
+aaaaaabbbbaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
-aaahgggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaabaaa
-aaaggggaaaabaaaa
-aaaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaabaaaaaaaab
+aaahgggbbggghaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaabaabaaaaaa
 aaaaaaaaaaaaaaaa
-aaabaaaabaaaaaaa
+aaabaaaaaaaabaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #a19b91 jubilife-house-wall
-b #6e737d house-wall-trim
-g #cab578 house-window-lit
-h #d9ce9e house-window-light
+a #b2a795 jubilife-house-wall
+b #83868c house-wall-trim
+g #d9c38d house-window-lit
+h #e9d298 house-window-light

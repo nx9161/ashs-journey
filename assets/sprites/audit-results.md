@@ -5443,7 +5443,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-detail-twig <= 32 colors | PASS | 1 |
 | sprite tile-distortfalls <= 32 colors | PASS | 6 |
 | sprite tile-distortfloor <= 32 colors | PASS | 6 |
-| sprite tile-distortrock <= 32 colors | PASS | 6 |
+| sprite tile-distortrock <= 32 colors | PASS | 5 |
 | sprite tile-door-brick-open <= 32 colors | PASS | 9 |
 | sprite tile-door-brick <= 32 colors | PASS | 9 |
 | sprite tile-door-center-l-open <= 32 colors | PASS | 11 |
@@ -5973,9 +5973,9 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-td-viridian <= 32 colors | PASS | 8 |
 | sprite tile-tg-azalea <= 32 colors | PASS | 3 |
 | sprite tile-tg-blackthorn <= 32 colors | PASS | 3 |
-| sprite tile-tg-canalave <= 32 colors | PASS | 4 |
+| sprite tile-tg-canalave <= 32 colors | PASS | 3 |
 | sprite tile-tg-celadon <= 32 colors | PASS | 3 |
-| sprite tile-tg-celestic <= 32 colors | PASS | 5 |
+| sprite tile-tg-celestic <= 32 colors | PASS | 3 |
 | sprite tile-tg-cerulean <= 32 colors | PASS | 3 |
 | sprite tile-tg-cherrygrove <= 32 colors | PASS | 3 |
 | sprite tile-tg-cianwood <= 32 colors | PASS | 3 |
@@ -5985,13 +5985,13 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tg-eterna <= 32 colors | PASS | 2 |
 | sprite tile-tg-evergrande <= 32 colors | PASS | 3 |
 | sprite tile-tg-fallarbor <= 32 colors | PASS | 3 |
-| sprite tile-tg-floaroma <= 32 colors | PASS | 5 |
+| sprite tile-tg-floaroma <= 32 colors | PASS | 3 |
 | sprite tile-tg-fortree <= 32 colors | PASS | 3 |
 | sprite tile-tg-fuchsia <= 32 colors | PASS | 3 |
 | sprite tile-tg-goldenrod <= 32 colors | PASS | 3 |
-| sprite tile-tg-hearthome <= 32 colors | PASS | 4 |
+| sprite tile-tg-hearthome <= 32 colors | PASS | 3 |
 | sprite tile-tg-indigo <= 32 colors | PASS | 3 |
-| sprite tile-tg-jubilife <= 32 colors | PASS | 5 |
+| sprite tile-tg-jubilife <= 32 colors | PASS | 3 |
 | sprite tile-tg-lavaridge <= 32 colors | PASS | 3 |
 | sprite tile-tg-lavender <= 32 colors | PASS | 3 |
 | sprite tile-tg-lilycove <= 32 colors | PASS | 3 |
@@ -6010,14 +6010,14 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | sprite tile-tg-pewter <= 32 colors | PASS | 3 |
 | sprite tile-tg-rustboro <= 32 colors | PASS | 3 |
 | sprite tile-tg-saffron <= 32 colors | PASS | 3 |
-| sprite tile-tg-sandgem <= 32 colors | PASS | 5 |
+| sprite tile-tg-sandgem <= 32 colors | PASS | 3 |
 | sprite tile-tg-silvertown <= 32 colors | PASS | 3 |
 | sprite tile-tg-slateport <= 32 colors | PASS | 3 |
-| sprite tile-tg-snowpoint <= 32 colors | PASS | 4 |
-| sprite tile-tg-solaceon <= 32 colors | PASS | 5 |
+| sprite tile-tg-snowpoint <= 32 colors | PASS | 3 |
+| sprite tile-tg-solaceon <= 32 colors | PASS | 3 |
 | sprite tile-tg-sootopolis <= 32 colors | PASS | 3 |
-| sprite tile-tg-sunnyshore <= 32 colors | PASS | 4 |
-| sprite tile-tg-twinleaf <= 32 colors | PASS | 5 |
+| sprite tile-tg-sunnyshore <= 32 colors | PASS | 3 |
+| sprite tile-tg-twinleaf <= 32 colors | PASS | 3 |
 | sprite tile-tg-veilstone <= 32 colors | PASS | 2 |
 | sprite tile-tg-verdanturf <= 32 colors | PASS | 3 |
 | sprite tile-tg-vermilion <= 32 colors | PASS | 3 |
@@ -6375,7 +6375,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | art-data.mjs exists | PASS |  |
 | art-data.mjs parses (node --check) | PASS | checked separately |
 | all source sprites pass pixel checks | PASS | 2459 sprites, 0 failures |
-| tiles family palette <= 1180 colors (per-family budget) | PASS | 1095 colors |
+| tiles family palette <= 1180 colors (per-family budget) | PASS | 1071 colors |
 | ui-palette.json <= 24 tokens | PASS | 24 tokens |
 | slop: todo markers in pix/tiles/tile-water-1.pix | FAIL | blacklist hit |
 | slop: todo markers in pix/tiles/tile-water-2.pix | FAIL | blacklist hit |
@@ -6388,7 +6388,7 @@ Date: 2026-10-15 · pipeline: assets/sprites/tools/ (pix v1, png v1, build-art v
 | png atlas-species-2.png valid signature | PASS | 544.3 KB |
 | png atlas-species-3.png valid signature | PASS | 187.1 KB |
 | png atlas-species.png valid signature | PASS | 423.7 KB |
-| png atlas-tiles.png valid signature | PASS | 83.5 KB |
+| png atlas-tiles.png valid signature | PASS | 82.0 KB |
 | png atlas-ui.png valid signature | PASS | 1.2 KB |
 
 ## FAILURES

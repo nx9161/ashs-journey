@@ -1,20 +1,20 @@
 # Stage S3a: oreburgh roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-oreburgh 16 16
 dddddddddddddddd
-cFFFFFcFFFFFcFFF
-caaaaacaaaaacaaa
+cFFFFFcFFcFFFFFc
+caaaaacaacaaaaac
 bbbbbbbbbbbbbbbb
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
 bbbbbbbbbbbbbbbb
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
-QbbbbbQbbbbbQbbb
+caaaaacaacaaaaac
+caaaaacaacaaaaac
+QbbbbbQbbQbbbbbQ
 bbbbbbbbbbbbbbbb
 PAL
 a #5f4b45 oreburgh-roof

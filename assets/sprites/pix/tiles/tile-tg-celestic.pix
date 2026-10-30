@@ -1,25 +1,25 @@
 # Stage S3a: celestic town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-celestic 16 16
-abaaabaacaabaaaa
-cacacabaaaaaaaaa
-aadaaaaaaaacaaaa
-aacbaaaafaaafaca
-aaaaaacaaaaaaaba
-aaabaabacababaaa
-baccaaaafacaaaaa
-acaaabaaaaacaaaa
-abaaaacafabaaacc
-afaaaaaacaaaaaaa
-aacbaafccaaaaaac
-baadaaaabaacccaa
-daaaaabaaaaaacca
-baabcbbaaaaaaaac
-aadaabaaabaabaaa
-aaacacaadfababcc
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #9486d0 celestic-ground
 b #7c70ad ground-dark
 c #a99ad8 ground-light
-d #d1ccbf town-accent
-e #b69c5f town-accent-2
-f #685e91 ground-deep
+d #9486d0 town-accent
+e #9486d0 town-accent-2
+f #9486d0 ground-deep

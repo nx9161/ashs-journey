@@ -1,19 +1,19 @@
 # Stage S3a: snowpoint roof — the town's roof-form family (full-bleed, solid).
 PIX tile-tr-snowpoint 16 16
 dddddddddddddddd
-cFFFFFcFFFFFcFFF
-caaaaacaaaaacaaa
+cFFFFFcFFcFFFFFc
+caaaaacaacaaaaac
 bbbbbbbbbbbbbbbb
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
-aaaacaaaaacaaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
-aacaaaaacaaaaaca
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
+aacaaaaaaaaaacaa
 bbbbbbbbbbbbbbbb
-caaaaacaaaaacaaa
-caaaaacaaaaacaaa
+caaaaacaacaaaaac
+caaaaacaacaaaaac
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL

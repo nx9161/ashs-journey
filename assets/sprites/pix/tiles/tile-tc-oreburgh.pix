@@ -17,9 +17,9 @@ PIX tile-tc-oreburgh 16 16
 .......kk.......
 ................
 PAL
-a #9b7258 canopy
-b #85624b canopy-dark
-c #ab7f64 canopy-light
-d #c59f6b canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light

@@ -1,25 +1,25 @@
 # Stage S3a: twinleaf town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-twinleaf 16 16
-fabaaaabaaaaafba
-bacaadaaaaaaaaaa
-aacaabaaaaaabaaa
-aabaaaaaaacaaaaa
-baaaaabaaaacaaaa
-aaadaaaafaafaaaa
-aacaaadadbaaafdf
-badcbbbaacaacaab
-adcaaccaaaaaaaaa
-acaaabbaaaaaaaba
-aacaaaadbdcaaaaa
-acdabaaacdcaaada
-acbdfaabadaaaaaa
-aaaabaaaaabdacaa
-fbccfbaacbfcaaaa
-aabbaaaaaabaabaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #84a674 twinleaf-ground
 b #6f8c62 ground-dark
 c #93bf7f ground-light
-d #d4ba90 town-accent
-e #c7816e town-accent-2
-f #5f7854 ground-deep
+d #84a674 town-accent
+e #84a674 town-accent-2
+f #84a674 ground-deep

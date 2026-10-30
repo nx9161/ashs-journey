@@ -1,25 +1,25 @@
 # Stage S3a: solaceon town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-solaceon 16 16
-aabaabaaaaaaacba
-aaaaadccbaaaabab
-baaaabccaacaaaaa
-bbaaaafbaaccaaac
-aaaaaaadaaabcbaa
-caaaabaafaaaabaa
-aaaaabaaaaaacafc
-cabcaaccadaaabaa
-aaaabaaaafaaaabb
-aaaaaababaaaaaba
 aaaaaaaaaaaaaaaa
-cacafbcaaabacaac
-aaaaaaaaabaaabab
-baaacaaaaaaaabaa
-aaacabcaaaaabaab
-aacaaabaacaaaaab
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #9da78b solaceon-ground
 b #848c76 ground-dark
-c #b2c09a ground-light
-d #b07f60 town-accent
-e #d4c8aa town-accent-2
-f #707664 ground-deep
+c #bdc5ae ground-light
+d #9da78b town-accent
+e #9da78b town-accent-2
+f #9da78b ground-deep

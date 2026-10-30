@@ -1,23 +1,23 @@
 # Stage S3a: oreburgh house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-oreburgh 16 16
-caaaaaaacaaaaaaa
-aaaaaaacaaaaaaac
+caaaaaaaaaaaaaac
+aaaaaaaccaaaaaaa
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #5f4b45 oreburgh-roof
+a #65423e oreburgh-roof
 b #53413c roof-dark
-c #8a6248 roof-light
-d #c28370 roof-trim
+c #8a594c roof-light
+d #c47168 roof-trim

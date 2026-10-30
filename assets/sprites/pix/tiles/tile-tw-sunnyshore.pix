@@ -2,22 +2,22 @@
 PIX tile-tw-sunnyshore 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-abbaaaaaaaaaaaaa
+abbaaaaaaaaaabba
 aaaaaaaaaaaaaaaa
-aabhgggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-baaggggaaaaaaaaa
-aaabbbbaaaaaaaaa
+aabhgggaaggghbaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+baaggggaaggggaab
+aaabbbbaabbbbaaa
 aaaaaaaaaaaaaaaa
-aaaaaaaaaaaaabaa
-aaaaaaaaaaaabaab
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #c8b493 sunnyshore-house-wall
+a #f0d89c sunnyshore-house-wall
 b #a8915c house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

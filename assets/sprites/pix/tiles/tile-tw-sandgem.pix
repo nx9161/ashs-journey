@@ -1,23 +1,23 @@
 # Stage S3a: sandgem house wall — wall + one lit window + sill (full-bleed facade).
 PIX tile-tw-sandgem 16 16
 bbbbbbbbbbbbbbbb
-abaabaaaaaaaaaaa
+abaabaaaaaabaaba
 aaaaaaaaaaaaaaaa
-abaaaabaaaaaaaaa
-aaahgggaaaaaaaaa
-aaaggggaabaaabaa
-aaaggggbaaaaaaaa
-aaaggggaaaaaaaba
-abaggggabaaaaaaa
-aaabbbbaaaaaaaaa
-aaaaaaaaabaaaaaa
-aaaaaaaaaaaaaaab
+abaaaabaabaaaaba
+aaahgggaaggghaaa
+aaaggggaaggggaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+abaggggaaggggaba
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #c8b493 sandgem-house-wall
+a #e8dcc0 sandgem-house-wall
 b #948e6e house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

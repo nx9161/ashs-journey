@@ -2,22 +2,22 @@
 PIX tile-tw-oreburgh 16 16
 bbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaa
-ababaaaaaaaaaaaa
+ababaaaaaaaababa
 aaaaaaaaaaaaaaaa
-aaahgggaaaaabaaa
-aaaggggbaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaaaaa
-aaaggggaaaaaabaa
-aaabbbbaaaaaaaaa
-aaaaaaaaaaabaaaa
-aabaaaaaaaaaaaab
+aaahgggaaggghaaa
+aaaggggbbggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaaggggaaggggaaa
+aaabbbbaabbbbaaa
+aaaaaaaaaaaaaaaa
+aabaaaaaaaaaabaa
 aaaaabaaaabaaaaa
 aaaaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #98825d oreburgh-house-wall
+a #b59c74 oreburgh-house-wall
 b #7c5b47 house-wall-trim
 g #cab578 house-window-lit
 h #d9ce9e house-window-light

@@ -1,25 +1,25 @@
 # Stage S3a: floaroma town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-floaroma 16 16
-adaaabaaaaaaabaa
-cafaaccaaabaaabb
-afaacbaaabcaabaa
-abaaaaaaaaaacaaa
-caaaacbacaaaaaaa
-bbcbaaacacaaaaaa
-acabaacaacaadaaa
-fabacaaaacababaa
-afaaaaaaaaaabaac
-aafbaaccaadadbba
-aaaacaaaaaaabaaa
-babaaaacaaaaaafa
-baaaaaaaaaababac
-afbfcaaaacaaaaaa
-fbacacaaafaaacaa
-aaaaacaaabfafaaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
 a #d188a5 floaroma-ground
-b #aa768b ground-dark
-c #daa1bd ground-light
-d #d7d797 town-accent
-e #80b874 town-accent-2
-f #8e6375 ground-deep
+b #b98194 ground-dark
+c #e8ccd6 ground-light
+d #d188a5 town-accent
+e #d188a5 town-accent-2
+f #d188a5 ground-deep

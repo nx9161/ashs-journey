@@ -17,9 +17,9 @@ PIX tile-tc-hearthome 16 16
 .......kk.......
 ................
 PAL
-a #b79c47 canopy
-b #9c853d canopy-dark
-c #c0a85c canopy-light
-d #8b6ba5 canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light

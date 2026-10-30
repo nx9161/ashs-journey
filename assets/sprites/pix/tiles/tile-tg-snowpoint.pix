@@ -1,25 +1,25 @@
 # Stage S3a: snowpoint town ground — signature street/meadow texture (full-bleed, walkable).
 PIX tile-tg-snowpoint 16 16
-aaafaafaaaaaaaaa
-aababaabbbaaaaaa
-aaabfabdaaaaabaa
-faaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaba
-baaafaaaaaaabbaa
-aaaabaaaaaadaaaa
-aabfaaaaaaaaafaa
-fdaabaaaaaaaaaaa
-aaaaaaadaabaabda
-aabbfaaaadaaaaab
-aabafbaaabaabbaa
-aaaafaaabbfaaaaa
-bbaaaaaaaaafaaaa
-daaaaaaaaaaababa
-aaabaaaaabbaffaa
+aaaaaaaaaaaaaaaa
+aacaaaaaaaabaaaa
+aaaaaabaacaaaaaa
+aaaaaacaaaaaacaa
+aaaaaaaaaaaaaaaa
+aaaaacaaaaaabaaa
+abaaaaaaaaacaaaa
+aaaaaaaaaaaaaaaa
+aaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaca
+aabaaaaaaaaaaaaa
+aaaaaaacaaaaaaaa
+aaaaaaaaabaacaaa
+aaaacaaaaaaaaaba
+aaaaabaaaacaaaaa
+aaaaaaaaaaaaaaaa
 PAL
-a #b0d8e0 snowpoint-ground
-b #98afb3 ground-dark
-c #c6e9e9 ground-light
-d #c77084 town-accent
-e #80b7ce town-accent-2
-f #809093 ground-deep
+a #c6d8e9 snowpoint-ground
+b #aac3d4 ground-dark
+c #dbedff ground-light
+d #c6d8e9 town-accent
+e #c6d8e9 town-accent-2
+f #c6d8e9 ground-deep

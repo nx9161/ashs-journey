@@ -1,25 +1,25 @@
 # Stage S3a: jubilife house roof — fine-scale family shingles (full-bleed, solid).
 PIX tile-th-jubilife 16 16
-cFFFFFFFcFFFFFFF
-FFFFFFFcFFFFFFFc
+cFFFFFFFFFFFFFFc
+FFFFFFFccFFFFFFF
 bbbbbbbbbbbbbbbb
-aaaaacaaaaaaacaa
-aaaacaaaaaaacaaa
+aaaaacaaaacaaaaa
+aaaacaaaaaacaaaa
 bbbbbbbbbbbbbbbb
-aacaaaaaaacaaaaa
-acaaaaaaacaaaaaa
+aacaaaaaaaaaacaa
+acaaaaaaaaaaaaca
 bbbbbbbbbbbbbbbb
-aaaaaaacaaaaaaac
-aaaaaacaaaaaaaca
+aaaaaaaccaaaaaaa
+aaaaaacaacaaaaaa
 bbbbbbbbbbbbbbbb
-aaaacaaaaaaacaaa
-aaacaaaaaaacaaaa
+aaaacaaaaaacaaaa
+aaacaaaaaaaacaaa
 bbbbbbbbbbbbbbbb
 bbbbbbbbbbbbbbbb
 PAL
-a #7e594e jubilife-roof
-b #65473e roof-dark
-c #8b6255 roof-light
-d #bc7762 roof-trim
-F #a27567 r2-highlight
+a #7e534e jubilife-roof
+b #65423e roof-dark
+c #8b5c55 roof-light
+d #be6058 roof-trim
+F #a26e67 r2-highlight
 Q #593e36 r2-shade

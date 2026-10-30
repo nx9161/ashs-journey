@@ -17,9 +17,9 @@ PIX tile-tc-twinleaf 16 16
 .......kk.......
 ................
 PAL
-a #84a674 canopy
-b #6f8c62 canopy-dark
-c #93bf7f canopy-light
-d #d4ba90 canopy-fruit
+a #55884a canopy
+b #33582f canopy-dark
+c #84bd6d canopy-light
+d #8fbc74 canopy-fruit
 k #71523d trunk
 w #846a4e trunk-light
