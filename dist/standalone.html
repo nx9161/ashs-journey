@@ -2256,6 +2256,23 @@ const S3B_PROP_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'prop').map(([k]) =
 const S3B_FLOOR_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 const S3B_WALL_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 const S3B_WALKABLE_CHARS = S3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => S3B_KIND_CHARS[k]);
+// ---- Perfection Pass Stage 2 Gate 0 (G0-4): facade-panel ----
+// One new kind after the S3B block at U+1E00+532 (S3B ends at 524+7=531;
+// 532 verified free in TILE_CHARS and unused by every map row). A closed,
+// shuttered facade panel in neutral wall tones — no blue panel, no knob,
+// no step surround — that replaces WALKABLE false-door cells (door-kind
+// cells carrying no warp). It is walkable class exactly like the chars it
+// replaces ('s'/'w'/'D'), is NOT a door kind (the resolver's pushDoorMat
+// keys on door kinds, so the ground south of a panel draws no step/mat),
+// and renders as-is via TILE_ART like other facade tiles.
+const G0_KIND_DEFS = [['facade-panel', 'facade']];
+const G0_KIND_CHARS = {};
+G0_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 532 + i);
+  G0_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+const G0_WALKABLE_CHARS = G0_KIND_DEFS.filter(([, c]) => c === 'facade').map(([k]) => G0_KIND_CHARS[k]);
 const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).
@@ -85594,7 +85611,7 @@ const ART = {
     "wwttFQQQQQFssstt",
     "ssssFFFFFFFsssss",
   ] },
-  "tile-door-gym-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#c9a227","V":"#2e4a7d"}, rows: [
+  "tile-door-gym-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1e2f52","Z":"#c9a227","V":"#2a4066"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -85630,7 +85647,7 @@ const ART = {
     "ttstFQQQQQFsssww",
     "ssssFFFFFFFsssss",
   ] },
-  "tile-door-gym-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#2e4a7d","Z":"#263d63","V":"#2e4a7d"}, rows: [
+  "tile-door-gym-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#757585","t":"#71523d","d":"#505b6b","g":"#d1bc88","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#2a4066","Z":"#1e2f52","V":"#2a4066"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -85684,7 +85701,7 @@ const ART = {
     "wwwllllllllllwww",
     "wwssssssssssssww",
   ] },
-  "tile-door-lab-facade": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#1f3252","V":"#ffd873"}, rows: [
+  "tile-door-lab-facade": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#1f3252","V":"#ffd873"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -85720,7 +85737,7 @@ const ART = {
     "wwttFQQQQQFuuult",
     "ssssFFFFFFFuuuss",
   ] },
-  "tile-door-lab-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#2e4a7d","V":"#ffd873"}, rows: [
+  "tile-door-lab-l": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#263d63","V":"#ffd873"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -85756,7 +85773,7 @@ const ART = {
     "tlttFQQQQQFuuuww",
     "ssssFFFFFFFuuuss",
   ] },
-  "tile-door-lab-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#2e4a7d","V":"#ffd873"}, rows: [
+  "tile-door-lab-r": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#263d63","V":"#ffd873"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -85972,7 +85989,7 @@ const ART = {
     "sslsssssssssssww",
     "ssssssssssssssss",
   ] },
-  "tile-door": { w: 16, h: 16, pal: {"h":"#b99b74","k":"#71523d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#ffd873"}, rows: [
+  "tile-door": { w: 16, h: 16, pal: {"h":"#b99b74","k":"#71523d","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1d2c4d","Z":"#ffd873"}, rows: [
     "hhhhhhhhhhhhhhhh",
     "hhFFFFFFFFFFhhhh",
     "hhFQQQQQQQQFhhhh",
@@ -86529,6 +86546,24 @@ const ART = {
     "fq..............",
     "k...............",
     "kk..............",
+  ] },
+  "tile-facade-panel": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","F":"#8f867a","a":"#97826a","b":"#857259","d":"#6e5b45"}, rows: [
+    "ssssssssssssssss",
+    "ssssssssssssssss",
+    "llllllllllllllll",
+    "wwwwFFFFFFFFwwww",
+    "wwwwFaaaaaaFwwww",
+    "wwwwFddddddFwwww",
+    "wwwwFbbbbbbFwwww",
+    "wwwwFddddddFwwww",
+    "wwwwFaaaaaaFwwww",
+    "wwwwFddddddFwwww",
+    "wwwwFbbbbbbFwwww",
+    "wwwwFddddddFwwww",
+    "wwwwFaaaaaaFwwww",
+    "wwwwFFFFFFFFwwww",
+    "wwwllllllllllwww",
+    "wwssssssssssssww",
   ] },
   "tile-fence": { w: 16, h: 16, pal: {"t":"#71523d","w":"#a0876c","l":"#a0876c"}, rows: [
     "................",
@@ -102448,7 +102483,7 @@ const ART = {
     ".ff..........ff.",
     "................",
   ] },
-  "tile-wall-brick-lit": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-brick-lit": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102484,7 +102519,7 @@ const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-brick-plain": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-brick-plain": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102502,7 +102537,7 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-center-lit": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#d1bc88","h":"#d1bc88","g":"#5681bd"}, rows: [
+  "tile-wall-center-lit": { w: 16, h: 16, pal: {"w":"#e8ccd6","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#d1bc88","h":"#d1bc88","g":"#a87f36"}, rows: [
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
     "rrrrrrrrrrrrrrrr",
@@ -102520,7 +102555,7 @@ const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-center-upper": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","F":"#757585"}, rows: [
+  "tile-wall-center-upper": { w: 16, h: 16, pal: {"w":"#e8ccd6","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#a87f36","h":"#cfa860","g":"#a87f36","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "rrrrrrrrrrrrrrrr",
@@ -102538,7 +102573,7 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-center": { w: 16, h: 16, pal: {"w":"#c6d8e9","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#476faa","h":"#7097c7","g":"#5681bd","F":"#757585"}, rows: [
+  "tile-wall-center": { w: 16, h: 16, pal: {"w":"#e8ccd6","l":"#e1d9ba","s":"#a04141","r":"#bf5b5b","t":"#71523d","u":"#a87f36","h":"#cfa860","g":"#a87f36","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "rrrrrrrrrrrrrrrr",
@@ -102592,7 +102627,7 @@ const ART = {
     "tttttttttttttttt",
     "tttttttttttttttt",
   ] },
-  "tile-wall-house-lit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-house-lit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102628,7 +102663,7 @@ const ART = {
     "tttttttttttttttt",
     "tttttttttttttttt",
   ] },
-  "tile-wall-house-plain": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-house-plain": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102646,7 +102681,7 @@ const ART = {
     "tttttttttttttttt",
     "tttttttttttttttt",
   ] },
-  "tile-wall-house-unlit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71573d","g":"#d1bc88","u":"#4767aa","h":"#7090c7","F":"#757585"}, rows: [
+  "tile-wall-house-unlit": { w: 16, h: 16, pal: {"w":"#baa278","l":"#c8b493","s":"#a28c67","t":"#71573d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102700,7 +102735,7 @@ const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-lab-plain": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
+  "tile-wall-lab-plain": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#7a6f63","t":"#71523d","u":"#a87f36","h":"#cfa860","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102718,7 +102753,7 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-lab-upper": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
+  "tile-wall-lab-upper": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#7a6f63","t":"#71523d","u":"#a87f36","h":"#cfa860","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102736,7 +102771,7 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-lab": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#59687a","t":"#71523d","u":"#476faa","h":"#7097c7","q":"#549e8d","F":"#757585"}, rows: [
+  "tile-wall-lab": { w: 16, h: 16, pal: {"w":"#8b8b9b","l":"#b0b6c1","s":"#7a6f63","t":"#71523d","u":"#a87f36","h":"#cfa860","q":"#549e8d","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -102754,7 +102789,7 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-mart-lit": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#d1bc88","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167"}, rows: [
+  "tile-wall-mart-lit": { w: 16, h: 16, pal: {"w":"#b57fb5","l":"#c9a3c9","s":"#8a5f8a","t":"#7d557d","b":"#d1bc88","e":"#e8dcc0","g":"#d1bc88","p":"#ca788d","n":"#73a167"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "wwwwwwwwwwwwwwww",
@@ -102772,9 +102807,9 @@ const ART = {
     "ssssssssssssssss",
     "ssssssssssssssss",
   ] },
-  "tile-wall-mart-upper": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167","F":"#757585"}, rows: [
+  "tile-wall-mart-upper": { w: 16, h: 16, pal: {"w":"#cc99cc","l":"#e3c3e3","s":"#a87ba8","t":"#7d557d","b":"#b57fb5","e":"#e8dcc0","g":"#d1bc88","p":"#ca788d","n":"#73a167","F":"#757585"}, rows: [
     "tttttttttttttttt",
-    "tttttttttttttttt",
+    "wwwwwwwwwwwwwwww",
     "wwwwwwwwwwwwwwww",
     "wbbeebbeebbeebbw",
     "wbttttbeebttttbw",
@@ -102790,14 +102825,14 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-mart": { w: 16, h: 16, pal: {"w":"#b99b74","l":"#cfae83","s":"#a18461","t":"#71523d","b":"#476faa","e":"#c6d8e9","g":"#d1bc88","p":"#ca788d","n":"#73a167","F":"#757585"}, rows: [
+  "tile-wall-mart": { w: 16, h: 16, pal: {"w":"#cc99cc","l":"#e3c3e3","s":"#a87ba8","t":"#7d557d","b":"#b57fb5","e":"#e8dcc0","g":"#d1bc88","p":"#ca788d","n":"#73a167","F":"#757585"}, rows: [
     "tttttttttttttttt",
-    "tttttttttttttttt",
+    "wwwwwwwwwwwwwwww",
     "wwwwwwwwwwwwwwww",
     "wbbeebbeebbeebbw",
     "wbbeebbeebbeebbw",
     "wbbeebbeebbeebbw",
-    "wttttttttttttttw",
+    "wssssssssssssssw",
     "wwwwwwwwwwwwwwww",
     "wwttttttttttttww",
     "wwteeeeppeepptww",
@@ -102808,7 +102843,7 @@ const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#757585"}, rows: [
+  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
@@ -140803,6 +140838,9 @@ for (const k of S3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 4 Stage S3b: Sinnoh east/north kinds — same convention as S3a.
 for (const k of [...S3B_WALL_KINDS, ...S3B_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of S3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Perfection Pass Stage 2 Gate 0 (G0-4): the shuttered facade panel draws
+// its own tile and renders as-is (no facade group, no upper/side variant).
+TILE_ART['facade-panel'] = 'tile-facade-panel';
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6
@@ -141701,9 +141739,11 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     }
     case 'cavewall': {
       // Strata walls by position hash; an exposed face (floor to the
-      // south) with a lucky hash wears the stalactite face instead.
+      // south) wears the stalactite face. Perfection Pass Stage 2 Gate 0
+      // (G0-5, standard B3): the face is DETERMINISTIC — 100% of exposed
+      // faces render it (was hash-gated at <45%).
       const layers = [];
-      if (nb.s === 'cavefloor' && cache.stalactite && hashTileSpread(x, y, 52) < 0.45) layers.push(cache.stalactite);
+      if (nb.s === 'cavefloor' && cache.stalactite) layers.push(cache.stalactite);
       else layers.push(pickVariantSpread(cache.caveWallVariants, x, y, 51) || cache.cavewall);
       // W3: cave drip on exposed faces (slow cadence, phase-offset).
       if (nb.s === 'cavefloor' && hashTileSpread(x, y, 83) < 0.5) {
@@ -148570,6 +148610,12 @@ const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2', 'V',
     .flatMap((i) => [492 + i * 8, 493 + i * 8])
     .map((i) => String.fromCodePoint(0x1E00 + i)),
   ...[524, 525, 526]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Perfection Pass Stage 2 Gate 0 (G0-4): the facade-panel char
+  // (U+1E00+532, tiles.mjs G0_KIND_DEFS) is walkable — it replaces
+  // walkable false-door chars 1:1 ('s'/'w'/'D' at cells with no warp),
+  // so walkable stays walkable.
+  ...[532]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
@@ -149168,7 +149214,7 @@ const MAPS2 = {
       'ÏẌÚFFĸoÄÄoÄFFÚÄÄÚÏ',
       'ÏÄÄÄĸĸÄĸÄĸĸÄÄÄÄÄẆÏ',
       'ÏĸÄÄċċċÄĸĸĸĸĸÄÄĸĸÏ',
-      'ÏẐĸĸģwģẈĸĸÄÄÄÄÚẄĸÏ',
+      'ÏẐĸĸģ—ģẈĸĸÄÄÄÄÚẄĸÏ',
       'ÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏÏ',
     ]),
     warps: [
@@ -149391,7 +149437,7 @@ const MAPS2 = {
       'ÐÅÅÅÅÅoÅÅÅoÅÅÅÅÅÅÐ',
       'ÐÅčñčÅÅÅÅÅÅÅÅÅÅÅÅÅ',
       'ÐÅP12ÅčččÅÅÅÅÅÅÅÅÐ',
-      'ÐÅÅÅÅÅĥsĥÛÅÅÅÅÅÅÅÐ',
+      'ÐÅÅÅÅÅĥ—ĥÛÅÅÅÅÅÅÅÐ',
       'ÐÐÐÐÐÐÛÐÐÐÐÛÐÐÐÐÐÐ',
     ]),
     warps: [
@@ -150664,7 +150710,7 @@ const MAPS2 = {
       'ÔłÉłłoAJKAołÉÉÉÉłÔ',
       'ÔÉßüüłÉÉÉłÉüüłßłłÔ',
       'ÔÉÉÉłĕĕĕĕłłĕ3ĕÉÉÉÔ',
-      'ÔłÉÉłĭ78ĭłłZ0ZÉłßÔ',
+      'ÔłÉÉłĭ78ĭłłZ6ZÉłßÔ',
       'ÔłłłÉłÉłłłoÉÉłÉłłÔ',
       'ÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔ',
     ]),
@@ -153076,7 +153122,7 @@ const MAPS3 = {
       'ÔłÉłłoAJKAołÉÉÉÉłÔ',
       'ÔẑßüüłłÉÉłÉüüłÉłłÔ',
       'ÔĕOĕłĕĕĕĕłłĕ3ĕłÉÉÔ',
-      'ÔP12łĭ78ĭłẑZ0ZÉłÉÔ',
+      'ÔP12łĭ78ĭłẑZ6ZÉłÉÔ',
       'ÔłłłÉłÉłłłoÉÉÉÉłłÔ',
       'ÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔÔ',
     ]),
@@ -153551,7 +153597,7 @@ const MAPS3 = {
       '#..~~........~~..#',
       '#......HHHH......#',
       '#......HHHH......#',
-      '#......HDDH......#',
+      '#......H——H......#',
       '#.......SS.......#',
       '#................#',
       '#................#',
@@ -173677,7 +173723,7 @@ const MAPS7 = {
       "ὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦὦ",
       "ὦnὤ_ὥ_ὥoὤὥὤὤὥ_ὤ_ὤ__ὥ_RRRRRLRLὦ",
       "ὦὥ_jklmὥὤdeefὥὥὨὨὨὨ_ὤὨὨὨὨὤ.ὥ.ὦ",
-      "ὦὥὥAJKAὥὥP12P__ὩsὩὩὥὤὩsὩὩὥ_ὤὤὦ",
+      "ὦὥὥAJKAὥὥP12P__ὩsὩὩὥὤὩ—ὩὩὥ_ὤὤὦ",
       "ὦὤὥ....nὥ....ὤὧ....ὥὥ....ὥὤ__ὦ",
       "ὦ.S.................S...S....ὦ",
       "ὦὤὤὥὥὤὤὤὤὥὤἋ_ὤὥὤὤ_ὤὤ__ὥὤ__ὥὥὤὦ",
@@ -173744,7 +173790,7 @@ const MAPS7 = {
       "Ὦ_Ὤ_ὭὭὬ__ὬὭn_Ὤ___Ὤ_Ὥ~~ὬὭὬὬὭὮ",
       "ὮὬ___ὬὬὬ_ὭὬὬὭὭὭὬ_Ὥ_Ὤ~~ὭὭ_S_Ὦ",
       "Ὦ__Ὥ,,,,__Ὤ_ὬὭὭὬὭὬὭὬ~~_ὬὲὲὲὮ",
-      "ὮὭὬ_,,,,ὭὭ,,,__ὭὬḶ_Ὤ~~_ὬέsέὮ",
+      "ὮὭὬ_,,,,ὭὭ,,,__ὭὬḶ_Ὤ~~_Ὤέ—έὮ",
       "ὮὬ_Ὥ_ḦὬ_ὭὭ,,,Ὤ_Ὥn__Ḷ~~ὬὬὬ__Ὦ",
       "Ὦ__Ὤ__ὬὬ_ὭὬὬ_Ὥ_ὬὬὬ_o~~ὭὬḦὬὭὮ",
       "ὮὬὭὬὭὬὭὬὬὬὬ_ὬὬὭὭὭ__Ḷ~~ὭnὬὭὬὮ",
@@ -173850,10 +173896,10 @@ const MAPS7 = {
       "~~~ἇώ_ὼὼώώ_὿ώώὼἇ_ὼώὼώώὼὼἇ~~~",
       "~~~ἇὼὼὼἇώἇὼὼἇἇἇ_ώὼὼὼ_ώὼώἇ~~ẙ",
       "~~~ἇ_ὼjklmὼὼᾂᾂᾂἇώᾂᾂᾂFώἇὼἇ~~~",
-      "~~~ἇ__AJKAὼ_ᾃsᾃὼώᾃsᾃὼ_ὼὼἇ~~~",
+      "~~~ἇ__AJKAὼ_ᾃ—ᾃὼώᾃ—ᾃὼ_ὼὼἇ~~~",
       "~~~ἇώἇ...._ὼ..........ώὼἇ~~ẙ",
       "~~~ἇώSἇὼḷἇ_ṃώẐḷὼώώ_ώἇᾂᾂᾂἇ~~~",
-      "~~~ἇ_ώἇὼὼ__ώ_Fώώὼώ_ἇὼᾃsᾃἇ~~~",
+      "~~~ἇ_ώἇὼὼ__ώ_Fώώὼώ_ἇὼᾃ—ᾃἇ~~~",
       "~~~ἇὼ_ὼ_ὼὼ_ώὼὼὼ_ὼὼἇSώ_ὼώἇ~~~",
       "~ẙ~ἇἇ,,,ὼώ_ὼώὼὼὼὼ_,,,,_ώἇ~~~",
       "~Ā~ἇώ,,,ὼὼἇὼḷὼἇὼώἇ,,,,__ἇ~ẙ~",
@@ -173899,7 +173945,7 @@ const MAPS7 = {
       "ᾆᾅFoᾅᾄᾄᾅᾄᾅ_ᾄᾅᾄᾄ__ᾄᾅᾄᾄᾅ_ᾅᾅᾅᾅᾄ_ᾆ",
       "ᾆ___ᾅᾅᾄᾄᾄ__ᾅ_Ḛᾅᾄᾅᾄ_ᾄᾅᾄᾅᾅᾄᾄᾅᾅᾄᾆ",
       "ᾆᾅᾄjklmᾄᾄdeefᾅᾄᾊᾊᾊᾄᾄᾊᾊᾊᾄᾅᾄ__ᾇᾆ",
-      "ᾆ_ᾄAJKAᾄoP12Pᾄᾄᾋsᾋᾅᾄᾋsᾋ_ᾄᾄ_ᾅᾄᾆ",
+      "ᾆ_ᾄAJKAᾄoP12Pᾄᾄᾋ—ᾋᾅᾄᾋ—ᾋ_ᾄᾄ_ᾅᾄᾆ",
       "~ᾄ_..........ᾄᾅᾄ_ᾅᾅ_Fᾅᾄ_ᾄᾅᾄᾅᾄᾆ",
       "~ᾄᾅᾅᾄᾄᾇ_ᾅᾅᾅ_ᾅᾄ_Fᾄᾅ__ᾅ__ᾄᾄᾄᾅ__ᾆ",
       "ᾆᾅᾄ__,,,,ᾅᾅ_ᾄᾅᾅᾄᾄᾄ_ᾅᾅ_ᾄ,,,,ᾅᾅᾆ",
@@ -209363,6 +209409,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:b4138448cb839764670ecbb72be86a11bec5a260bd7fa7ea87c2c669d9dd2f81 -->
+<!-- contentHash:3dddaaa4dc58350f2daa92ff1dd78a7583565d5f4e1a098d1c573c1676ca7609 -->
 </body>
 </html>
