@@ -476,6 +476,9 @@ for (const k of S3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 4 Stage S3b: Sinnoh east/north kinds — same convention as S3a.
 for (const k of [...S3B_WALL_KINDS, ...S3B_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of S3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
+// Perfection Pass Stage 2 Gate 0 (G0-4): the shuttered facade panel draws
+// its own tile and renders as-is (no facade group, no upper/side variant).
+TILE_ART['facade-panel'] = 'tile-facade-panel';
 
 // Premium+ W6 (TX-3/PL-1): door-open frames, authored in TX-3 for every
 // door kind. The warp-fade engine that plays them lands in W7 — W6

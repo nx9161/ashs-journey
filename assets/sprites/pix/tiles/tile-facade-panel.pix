@@ -1,0 +1,29 @@
+# Perfection Pass Stage 2 (G0-4): closed shuttered facade panel — neutral
+# wall tones, horizontal slats in a stone frame. NOT a door: no blue panel,
+# no knob, no threshold/step surround. Replaces walkable false-door cells.
+PIX tile-facade-panel 16 16
+ssssssssssssssss
+ssssssssssssssss
+llllllllllllllll
+wwwwFFFFFFFFwwww
+wwwwFaaaaaaFwwww
+wwwwFddddddFwwww
+wwwwFbbbbbbFwwww
+wwwwFddddddFwwww
+wwwwFaaaaaaFwwww
+wwwwFddddddFwwww
+wwwwFbbbbbbFwwww
+wwwwFddddddFwwww
+wwwwFaaaaaaFwwww
+wwwwFFFFFFFFwwww
+wwwllllllllllwww
+wwssssssssssssww
+PAL
+w #b99b74 wall-mid
+l #cfae83 wall-light
+s #a18461 wall-shadow
+t #71523d trim
+F #8f867a panel-frame
+a #97826a slat-light
+b #857259 slat-mid
+d #6e5b45 slat-shadow

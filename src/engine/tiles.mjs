@@ -447,6 +447,23 @@ export const S3B_PROP_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'prop').map(
 export const S3B_FLOOR_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const S3B_WALL_KINDS = S3B_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const S3B_WALKABLE_CHARS = S3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => S3B_KIND_CHARS[k]);
+// ---- Perfection Pass Stage 2 Gate 0 (G0-4): facade-panel ----
+// One new kind after the S3B block at U+1E00+532 (S3B ends at 524+7=531;
+// 532 verified free in TILE_CHARS and unused by every map row). A closed,
+// shuttered facade panel in neutral wall tones — no blue panel, no knob,
+// no step surround — that replaces WALKABLE false-door cells (door-kind
+// cells carrying no warp). It is walkable class exactly like the chars it
+// replaces ('s'/'w'/'D'), is NOT a door kind (the resolver's pushDoorMat
+// keys on door kinds, so the ground south of a panel draws no step/mat),
+// and renders as-is via TILE_ART like other facade tiles.
+export const G0_KIND_DEFS = [['facade-panel', 'facade']];
+export const G0_KIND_CHARS = {};
+G0_KIND_DEFS.forEach(([kind], i) => {
+  const ch = String.fromCodePoint(0x1E00 + 532 + i);
+  G0_KIND_CHARS[kind] = ch;
+  TILE_CHARS[ch] = kind;
+});
+export const G0_WALKABLE_CHARS = G0_KIND_DEFS.filter(([, c]) => c === 'facade').map(([k]) => G0_KIND_CHARS[k]);
 export const SINNOH_TOWN_GROUND_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg);
 export const SINNOH_TOWN_GROUND2_CHARS = SINNOH_TOWN_ORDER.map((id) => SINNOH_TOWN_CHARS[id].tg2);
 // TX-3: the 8 gym exteriors by town (original type-accent motifs).

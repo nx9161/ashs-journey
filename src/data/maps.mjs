@@ -405,6 +405,12 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
     .flatMap((i) => [492 + i * 8, 493 + i * 8])
     .map((i) => String.fromCodePoint(0x1E00 + i)),
   ...[524, 525, 526]
+    .map((i) => String.fromCodePoint(0x1E00 + i)),
+  // Perfection Pass Stage 2 Gate 0 (G0-4): the facade-panel char
+  // (U+1E00+532, tiles.mjs G0_KIND_DEFS) is walkable — it replaces
+  // walkable false-door chars 1:1 ('s'/'w'/'D' at cells with no warp),
+  // so walkable stays walkable.
+  ...[532]
     .map((i) => String.fromCodePoint(0x1E00 + i))]);
 
 // Trainer definitions for the slice.
