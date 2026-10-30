@@ -82985,7 +82985,7 @@ export const ART = {
     "wwwlFQQQQQFuuuww",
     "wwssFFFFFFFuuuww",
   ] },
-  "tile-door-brick": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#1f3252","V":"#c9a227"}, rows: [
+  "tile-door-brick": { w: 16, h: 16, pal: {"w":"#a96152","l":"#b77564","s":"#87493f","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1e2f52","Z":"#1f3252","V":"#c9a227"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83363,7 +83363,7 @@ export const ART = {
     "hhhhFQQQQQFhhhhh",
     "hhhhFFFFFFFhhhhh",
   ] },
-  "tile-door-wood-facade-open": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#1f3252","g":"#d1bc88","u":"#476faa","h":"#7097c7","Z":"#3f3f49","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4"}, rows: [
+  "tile-door-wood-facade-open": { w: 16, h: 16, pal: {"w":"#b59a7d","l":"#bfae8f","s":"#a88a68","t":"#1f3252","g":"#d1bc88","u":"#476faa","h":"#7097c7","Z":"#3f3f49","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -83381,7 +83381,7 @@ export const ART = {
     "wwwlFQQQQQFsssww",
     "wwssFFFFFFFsssww",
   ] },
-  "tile-door-wood-facade": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#263d63","Z":"#1f3252","V":"#c9a227"}, rows: [
+  "tile-door-wood-facade": { w: 16, h: 16, pal: {"w":"#b59a7d","l":"#bfae8f","s":"#a88a68","t":"#8a6a4e","g":"#d1bc88","u":"#476faa","h":"#7097c7","F":"#f5f0dc","Q":"#202028","%":"#e3dcc4","&":"#1e2f52","Z":"#1f3252","V":"#c9a227"}, rows: [
     "ssssssssssssssss",
     "ssssssssssssssss",
     "llllllllllllllll",
@@ -85025,7 +85025,7 @@ export const ART = {
     "MMMMMMMMMMMMMMMM",
     "MMMMMMMMMMMMMMMM",
   ] },
-  "tile-gym-fire": { w: 16, h: 16, pal: {"W":"#874d42","D":"#6c3a33","A":"#a56640","M":"#b7ac48","G":"#87add1"}, rows: [
+  "tile-gym-fire": { w: 16, h: 16, pal: {"W":"#a96152","D":"#87493f","A":"#c1835f","M":"#cac177","G":"#c6d8e9"}, rows: [
     "DDDDDDDDDDDDDDDD",
     "DDDDDDDDDDDDDDDD",
     "WWAAWWAAWWDDWWWW",
@@ -100325,7 +100325,7 @@ export const ART = {
     "FFFFFFFFFFFFFFFF",
     "FFFFFFFFFFFFFFFF",
   ] },
-  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#a0876c","l":"#a69274","s":"#846a4e","t":"#71523d","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#757585"}, rows: [
+  "tile-wall-wood-lit": { w: 16, h: 16, pal: {"w":"#b59a7d","l":"#bfae8f","s":"#a88a68","t":"#8a6a4e","g":"#d1bc88","u":"#a87f36","h":"#cfa860","F":"#8b8b99"}, rows: [
     "tttttttttttttttt",
     "tttttttttttttttt",
     "llllllllllllllll",
