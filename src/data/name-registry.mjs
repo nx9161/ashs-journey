@@ -89,6 +89,24 @@ export const NAME_REGISTRY = {
     jigglypuff: { name: 'PUFFUNE', status: 'named', wave: 'G-KT2', design: 'puffune' },
     wigglytuff: { name: 'ARIABLOOM', status: 'named', wave: 'G-KT2', design: 'ariabloom' },
     farfetchd: { name: 'POSTDUCK', status: 'named', wave: 'G-KT2', design: 'postduck' },
+    // -- Wave G Kanto Completion, Tranche 3 (coordinator-named) --
+    // zubat line: chain continues to crobat (Johto) — lines entry
+    // waits for the Johto wave so `lines` only lists complete chains.
+    zubat:     { name: 'SKREEP', status: 'named', wave: 'G-KT3', design: 'skreep' },
+    golbat:    { name: 'GLOOMBITE', status: 'named', wave: 'G-KT3', design: 'gloombite' },
+    oddish:    { name: 'NIGHTBUD', status: 'named', wave: 'G-KT3', design: 'nightbud' },
+    gloom:     { name: 'DROOPETAL', status: 'named', wave: 'G-KT3', design: 'droopetal' },
+    vileplume: { name: 'BLOOMROT', status: 'named', wave: 'G-KT3', design: 'bloomrot' },
+    paras:     { name: 'FUNGLING', status: 'named', wave: 'G-KT3', design: 'fungling' },
+    parasect:  { name: 'MYCELORD', status: 'named', wave: 'G-KT3', design: 'mycelord' },
+    venonat:   { name: 'FUZZMITE', status: 'named', wave: 'G-KT3', design: 'fuzzmite' },
+    venomoth:  { name: 'DUSTVEIL', status: 'named', wave: 'G-KT3', design: 'dustveil' },
+    diglett:   { name: 'MOLING', status: 'named', wave: 'G-KT3', design: 'moling' },
+    dugtrio:   { name: 'TRIMOLE', status: 'named', wave: 'G-KT3', design: 'trimole' },
+    meowth:    { name: 'TINKLETOM', status: 'named', wave: 'G-KT3', design: 'tinkletom' },
+    persian:   { name: 'MAJESTOM', status: 'named', wave: 'G-KT3', design: 'majestom' },
+    psyduck:   { name: 'DIZDUCK', status: 'named', wave: 'G-KT3', design: 'dizduck' },
+    golduck:   { name: 'TORRIDUCK', status: 'named', wave: 'G-KT3', design: 'torriduck' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -109,6 +127,12 @@ export const NAME_REGISTRY = {
     moonlet: ['clefairy', 'clefable'],
     vulcanis: ['vulpix', 'ninetales'],
     puffune: ['jigglypuff', 'wigglytuff'],
+    nightbud: ['oddish', 'gloom', 'vileplume'],
+    fungling: ['paras', 'parasect'],
+    fuzzmite: ['venonat', 'venomoth'],
+    moling: ['diglett', 'dugtrio'],
+    tinkletom: ['meowth', 'persian'],
+    dizduck: ['psyduck', 'golduck'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

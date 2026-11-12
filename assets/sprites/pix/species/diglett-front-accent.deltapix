@@ -1,9 +1,0 @@
-# diglett-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
-# over diglett-front: the silhouette never changes; the accent reads in
-# alternation with the base frame under the species idle class.
-PIXD diglett-front-accent diglett-front 64 64
-20 12 Y
-22 12 Y
-39 12 Y
-40 12 Y
-PAL

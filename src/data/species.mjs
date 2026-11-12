@@ -55,7 +55,7 @@ export const SPECIES = {
     flavor: 'Territorial and loud. Best admired from a respectful distance.',
   },
   zubat: {
-    id: 'zubat', name: 'Zubat', dexNo: 41, types: ['poison', 'flying'],
+    id: 'zubat', name: 'SKREEP', dexNo: 41, types: ['poison', 'flying'],
     base: { hp: 40, atk: 45, def: 35, spa: 30, spd: 40, spe: 55 },
     catchRate: 255, growth: 'mediumfast', baseXp: 49, body: 'bird', spriteSeed: 4101,
     eggGroups: ['flying'], hatchCounter: 15,
