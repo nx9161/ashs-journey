@@ -170,3 +170,13 @@ Game Freak through official channels).
   screen time (player + partner first, then town casts, leaders,
   battlers by usage), each wave QA-graded on live screenshots before
   the next begins. Palette discipline stays B2-G2 (≤16 colors).
+- **B2-G8 (uniformity & occlusion, owner wording 2026-11-11):** pixel
+  art holds the same standard in every space — towns, stores, gyms,
+  houses, caves, routes — no exceptions by map type. No pixels block
+  one another: draw order is y-sorted with the foreground layer
+  reserved for true overhead elements (canopies, rooflines), never
+  for ground objects; presentation stays at the B2-G5 integer
+  multiple everywhere (DS uniformity). The measurable half is already
+  gated (audit-reachability + audit-towns cover all 431 maps,
+  interiors included); the visual half grades per map on screenshots
+  in the style-pass waves.
