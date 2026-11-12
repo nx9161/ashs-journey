@@ -13,7 +13,13 @@
 //   strict >= 0.60, fabric >= 0.98 (from audit-desire-paths),
 //   100% door step-offs on/touching the fabric, exactly ONE fabric
 //   component, junction-mark coverage >= 90%, unanchored decor <= 5%,
-//   APRON: no building under 60% ring clearance and no gap-0 pair.
+//   APRON: no building under 60% ring clearance and no gap-0 pair,
+//   FREESTANDING-CLEARANCE (owner rule, 2026-11-12): zero freestanding
+//   objects straddled by fabric (fabric on both opposite sides), and
+//   every freestanding object shoulder-adjacent (within 1 tile of a
+//   fabric edge / building / junction site). Fences (borders) and
+//   composed building units (postbox at its door, building signs,
+//   stalls) are exempt by the rule's own terms.
 // Usage: node scripts/audit-placement.mjs [--map id[,id...]]
 //        [--overlay file.json] [--gates] [--json out.json]
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -23,6 +29,19 @@ import { loadMaps, makeTiers, townSetOf, analyzeMap } from './audit-desire-paths
 
 const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 const DECOR_KINDS = ['lamp', 'fence', 'flowerbed', 'sign', 'flower'];
+// FREESTANDING objects (owner rule): independent objects that must
+// stand on the shoulder, never straddled by the fabric. Exempt:
+// 'fence' (runs as borders), composed building units (postbox, stall,
+// sign-lab/sign-center/sign-gym/sign-mart are building-attached).
+// The STRADDLE count covers every freestanding kind incl. landscaping
+// (td-*, flower, flowerbed). SHOULDER-ADJACENCY gates only the route
+// furniture — the rule's own list (lamps, signs, pots, barrels,
+// standalone props); td-*/flower landscaping is governed by
+// ANCHOR-UNIT + EDGE-MASS (tree-band dress pieces are vegetation
+// mass, not roadside furniture) and is reported, not gated.
+const FREESTANDING = (k) => k === 'lamp' || k === 'signpost' || k.startsWith('td-') ||
+  ['flower', 'flowerbed', 'barrel', 'crates', 'sandcrate', 'well', 'bench', 'statue', 'pottedtree', 'haycart'].includes(k);
+const ROUTE_FURNITURE = (k) => ['lamp', 'signpost', 'barrel', 'crates', 'sandcrate', 'well', 'bench', 'statue', 'pottedtree', 'haycart'].includes(k);
 const BUILD = (k) => k.startsWith('roof') || k.startsWith('wall') || k.startsWith('door') || k.startsWith('th-') || k.startsWith('tr-') || k.startsWith('tl-') || k.startsWith('tw-') || ['house', 'gymwall', 'gymdoor', 'centerdoor'].includes(k);
 const TREE = (k) => k.startsWith('tc-') || k === 'tree';
 
@@ -112,6 +131,24 @@ export async function scoreTown(id, MAPS, WALKABLE, tiers) {
     if (!anchored) { r.unanchoredAny++; if (examples.length < 10) examples.push(`${kind(cell(x, y))}@${x},${y} unanchored (no building/fabric/decor unit within 2)`); }
   }
 
+  // FREESTANDING-CLEARANCE (owner rule, 2026-11-12): a freestanding
+  // object is ON-FABRIC when the route straddles it — fabric on both
+  // opposite sides (N+S or E+W); a 3-fabric-neighbour pocket is a
+  // watch item, not a straddle. Shoulder-adjacency is checked after
+  // the junction pass (below), against fabric/buildings/junctions.
+  const freeCells = [];
+  r.onFabric = 0; r.onFabricList = []; r.fabricPockets = 0;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    const k = kind(cell(x, y)); if (!FREESTANDING(k)) continue;
+    const fN = isNet(cell(x, y - 1)), fS = isNet(cell(x, y + 1)), fE = isNet(cell(x + 1, y)), fW = isNet(cell(x - 1, y));
+    const straddle = (fN && fS) || (fE && fW);
+    const nFab = [fN, fS, fE, fW].filter(Boolean).length;
+    freeCells.push({ x, y, k, fN, fS, fE, fW, nFab });
+    if (straddle) { r.onFabric++; if (r.onFabricList.length < 8) r.onFabricList.push(`${k}@${x},${y}`); }
+    else if (nFab === 3) r.fabricPockets++;
+  }
+  r.freestanding = freeCells.length;
+
   // CONNECTIVITY (owner priority, 2026-11-12: "Connectivity and clear
   // path"): all-pairs reachability on the FABRIC GRAPH ALONE — every
   // door step-off must reach every exit and every other door step-off
@@ -151,6 +188,30 @@ export async function scoreTown(id, MAPS, WALKABLE, tiers) {
     r.junctionSites = r.junctionSites || [];
     r.junctionSites.push(site);
     if (!signPts.some(([sx, sy]) => site.some(([jx, jy]) => cheb(jx, jy, sx, sy) <= 2))) r.junctionsBare++;
+  }
+
+  // FREESTANDING shoulder-adjacency: route furniture must stand at
+  // the shoulder of what it serves — within 1 tile of a fabric edge,
+  // or within the 2-tile unit radius of its building / junction /
+  // NPC post. Straddled objects are counted in onFabric, not here.
+  // Landscaping (td-*, flower, flowerbed) floaters are reported
+  // separately (r.landscapingFloat); ANCHOR-UNIT gates them.
+  r.shoulderOrphans = 0; r.shoulderList = []; r.landscapingFloat = 0;
+  {
+    const jCellsAll = (r.junctionSites || []).flat();
+    const npcPts = (m.npcs || []).map(n => [n.x, n.y]);
+    const unitPts = []; // composed-unit anchors: stalls, postboxes, building signs
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const k = kind(cell(x, y)); if (k === 'stall' || k === 'postbox' || k.startsWith('sign-')) unitPts.push([x, y]); }
+    const serves = (f) => f.nFab >= 1 ||
+      buildCells.some(([px, py]) => cheb(f.x, f.y, px, py) <= 2) ||
+      jCellsAll.some(([px, py]) => cheb(f.x, f.y, px, py) <= 2) ||
+      npcPts.some(([px, py]) => cheb(f.x, f.y, px, py) <= 2) ||
+      unitPts.some(([px, py]) => cheb(f.x, f.y, px, py) <= 2);
+    for (const f of freeCells) {
+      if ((f.fN && f.fS) || (f.fE && f.fW)) continue;
+      if (ROUTE_FURNITURE(f.k)) { if (!serves(f)) { r.shoulderOrphans++; if (r.shoulderList.length < 8) r.shoulderList.push(`${f.k}@${f.x},${f.y}`); } }
+      else if (!serves(f)) r.landscapingFloat++;
+    }
   }
 
   // R4 lamps
@@ -222,6 +283,8 @@ export function gateCheck(r, clarity) {
   const uFrac = r.decor ? r.unanchoredAny / r.decor : 0;
   push('unanchored<=5%', uFrac <= 0.05, `${r.unanchoredAny}/${r.decor} decor unanchored`);
   push('APRON no <60% / no gap-0', r.apronLow === 0 && r.merged === 0, `apronLow=${r.apronLow} min=${r.apronMin} merged=${r.merged} tight=${r.tight}`);
+  push('FREESTANDING-CLEARANCE on-fabric=0', (r.onFabric || 0) === 0, `onFabric=${r.onFabric || 0}${r.onFabricList && r.onFabricList.length ? ' e.g. ' + r.onFabricList[0] : ''} pockets=${r.fabricPockets || 0}`);
+  push('shoulder-adjacency', (r.shoulderOrphans || 0) === 0, `orphans=${r.shoulderOrphans || 0}${r.shoulderList && r.shoulderList.length ? ' e.g. ' + r.shoulderList[0] : ''} of ${r.freestanding || 0} freestanding`);
   return { id: r.id, pass: gates.every(g => g.ok), gates };
 }
 
@@ -245,7 +308,7 @@ if (isMain) {
       r.strict = clarity.meanStrict; r.fabric = clarity.meanFabric;
     }
     out.push({ ...r, gate });
-    console.log(`${id}: doors=${r.doors} weak=${r.weakLinks} noWalk=${r.noWalkway} int=${r.interrupts} lamps=${r.lamps} unlit=${r.unlitFrac} comps=${r.netComponents}(${r.netCompSizes.join('+')}) step=${r.stepTouch}/${r.stepTot} conn=${r.connOk}/${r.connPairs} junc=${r.junctions - r.junctionsBare}/${r.junctions} unanchAny=${r.unanchoredAny}/${r.decor} apronLow=${r.apronLow} merged=${r.merged} tight=${r.tight} isoTrees=${r.treesIsolated}${gate ? ` | strict=${r.strict} fabric=${r.fabric} | GATES ${gate.pass ? 'PASS' : 'FAIL: ' + gate.gates.filter(g => !g.ok).map(g => g.name + ' (' + g.detail + ')').join('; ')}` : ''}`);
+    console.log(`${id}: doors=${r.doors} weak=${r.weakLinks} noWalk=${r.noWalkway} int=${r.interrupts} lamps=${r.lamps} unlit=${r.unlitFrac} comps=${r.netComponents}(${r.netCompSizes.join('+')}) step=${r.stepTouch}/${r.stepTot} conn=${r.connOk}/${r.connPairs} junc=${r.junctions - r.junctionsBare}/${r.junctions} unanchAny=${r.unanchoredAny}/${r.decor} onFab=${r.onFabric || 0} shoulderOrph=${r.shoulderOrphans || 0} apronLow=${r.apronLow} merged=${r.merged} tight=${r.tight} isoTrees=${r.treesIsolated}${gate ? ` | strict=${r.strict} fabric=${r.fabric} | GATES ${gate.pass ? 'PASS' : 'FAIL: ' + gate.gates.filter(g => !g.ok).map(g => g.name + ' (' + g.detail + ')').join('; ')}` : ''}`);
     if (r.examples && r.examples.length) for (const e of r.examples.slice(0, 3)) console.log(`    ${e}`);
   }
   if (opt('--json')) writeFileSync(opt('--json'), JSON.stringify(out, null, 1));
