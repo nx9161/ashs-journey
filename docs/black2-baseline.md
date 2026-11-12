@@ -194,3 +194,16 @@ Game Freak through official channels).
   before it adds. Working targets: decorative objects per screen at
   most half the current density; >=2 ground tiles between any two
   buildings; interior walking floor >=60% open.
+  Rollout requirements (owner-forwarded critique, accepted 2026-11-11):
+  (1) ANTI-REPETITION — the kit's single cabin/tree cannot stamp 62
+  towns identically: per-town variants are mandatory (roof and trim
+  palettes keyed to each town's existing style identity, fence/sign
+  mixes vary), and the game's original tile vocabulary stays in
+  service, re-paletted into the kit family, as the variety reservoir.
+  (2) BIOME COVERAGE — kit first where it has the tiles; biomes it
+  lacks (snow, desert, volcanic, cave) are carried by original tiles
+  drawn in the kit's palette/outline family, never by stretching the
+  cabin set where it does not belong. (3) The re-dress is a SKIN:
+  layouts, warps, progression geometry and placement intent are the
+  game's existing hand-designed layer and do not change (guarded by
+  the reachability and town audits).
