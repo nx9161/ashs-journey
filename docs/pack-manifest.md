@@ -62,7 +62,7 @@ audio subsystem (B2-R3) 25652 B in audio/ + src/engine/audio.mjs.
 | src/data/merge.mjs | 2347 | 41 | content pack (NARC analogue — B2-R2) |
 | src/data/moves.mjs | 3419 | 28 | content pack (NARC analogue — B2-R2) |
 | src/data/moves2.mjs | 21558 | 141 | content pack (NARC analogue — B2-R2) |
-| src/data/name-registry.mjs | 55068 | 741 | content pack (NARC analogue — B2-R2) |
+| src/data/name-registry.mjs | 56403 | 759 | content pack (NARC analogue — B2-R2) |
 | src/data/narrative-db.mjs | 63169 | 379 | content pack (NARC analogue — B2-R2) |
 | src/data/quests.mjs | 24878 | 395 | content pack (NARC analogue — B2-R2) |
 | src/data/rivals.mjs | 1386 | 30 | content pack (NARC analogue — B2-R2) |
@@ -70,7 +70,7 @@ audio subsystem (B2-R3) 25652 B in audio/ + src/engine/audio.mjs.
 | src/data/species2.mjs | 91138 | 1400 | content pack (NARC analogue — B2-R2) |
 | src/data/species3.mjs | 57190 | 859 | content pack (NARC analogue — B2-R2) |
 | src/data/species4.mjs | 83076 | 1263 | content pack (NARC analogue — B2-R2) |
-| src/data/species5.mjs | 69323 | 1057 | content pack (NARC analogue — B2-R2) |
+| src/data/species5.mjs | 69331 | 1057 | content pack (NARC analogue — B2-R2) |
 | src/data/story-hoenn.mjs | 95440 | 1086 | content pack (NARC analogue — B2-R2) |
 | src/data/story-johto.mjs | 90088 | 1026 | content pack (NARC analogue — B2-R2) |
 | src/data/story-kanto.mjs | 71233 | 1101 | content pack (NARC analogue — B2-R2) |
