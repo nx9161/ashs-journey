@@ -104,7 +104,7 @@ export const SPECIES = {
     flavor: 'Withdraws into its shell, then answers with a jet of water.',
   },
   nidoranm: {
-    id: 'nidoranm', name: 'Nidoran\u2642', dexNo: 32, types: ['poison'],
+    id: 'nidoranm', name: 'TOXIBUCK', dexNo: 32, types: ['poison'],
     base: { hp: 46, atk: 57, def: 40, spa: 40, spd: 40, spe: 50 },
     catchRate: 235, growth: 'mediumslow', baseXp: 55, body: 'quad', spriteSeed: 3201,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,

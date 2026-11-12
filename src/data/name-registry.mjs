@@ -73,6 +73,22 @@ export const NAME_REGISTRY = {
     fearow:    { name: 'GLAREHAWK', status: 'named', wave: 'G-KT1', design: 'glarehawk' },
     ekans:     { name: 'VIPLET', status: 'named', wave: 'G-KT1', design: 'viplet' },
     arbok:     { name: 'DREADHOOD', status: 'named', wave: 'G-KT1', design: 'dreadhood' },
+    // -- Wave G Kanto Completion, Tranche 2 (coordinator-named) --
+    raichu:    { name: 'GALVANIK', status: 'named', wave: 'G-KT2', design: 'galvanik' },
+    sandshrew: { name: 'ARMADUNE', status: 'named', wave: 'G-KT2', design: 'armadune' },
+    sandslash: { name: 'QUILLDUNE', status: 'named', wave: 'G-KT2', design: 'quilldune' },
+    nidoranf:  { name: 'TOXIKIT', status: 'named', wave: 'G-KT2', design: 'toxikit' },
+    nidorina:  { name: 'VENOBELLE', status: 'named', wave: 'G-KT2', design: 'venobelle' },
+    nidoqueen: { name: 'REGITOXA', status: 'named', wave: 'G-KT2', design: 'regitoxa' },
+    nidoranm:  { name: 'TOXIBUCK', status: 'named', wave: 'G-KT2', design: 'toxibuck' },
+    nidorino:  { name: 'THORNBUCK', status: 'named', wave: 'G-KT2', design: 'thornbuck' },
+    nidoking:  { name: 'REGITHORN', status: 'named', wave: 'G-KT2', design: 'regithorn' },
+    clefairy:  { name: 'MOONLET', status: 'named', wave: 'G-KT2', design: 'moonlet' },
+    clefable:  { name: 'LUNAVEIL', status: 'named', wave: 'G-KT2', design: 'lunaveil' },
+    ninetales: { name: 'PYCANIS', status: 'named', wave: 'G-KT2', design: 'pycanis' },
+    jigglypuff: { name: 'PUFFUNE', status: 'named', wave: 'G-KT2', design: 'puffune' },
+    wigglytuff: { name: 'ARIABLOOM', status: 'named', wave: 'G-KT2', design: 'ariabloom' },
+    farfetchd: { name: 'POSTDUCK', status: 'named', wave: 'G-KT2', design: 'postduck' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -86,6 +102,13 @@ export const NAME_REGISTRY = {
     scurrat: ['rattata', 'raticate'],
     keenbeak: ['spearow', 'fearow'],
     viplet: ['ekans', 'arbok'],
+    voltik: ['pikachu', 'raichu'],
+    armadune: ['sandshrew', 'sandslash'],
+    toxikit: ['nidoranf', 'nidorina', 'nidoqueen'],
+    toxibuck: ['nidoranm', 'nidorino', 'nidoking'],
+    moonlet: ['clefairy', 'clefable'],
+    vulcanis: ['vulpix', 'ninetales'],
+    puffune: ['jigglypuff', 'wigglytuff'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

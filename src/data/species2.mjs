@@ -158,7 +158,7 @@ export const SPECIES2 = {
     evo: { to: 'raichu', method: 'stone', stone: 'thunderstone' }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   raichu: {
-    id: 'raichu', name: 'Raichu', dexNo: 26, types: ['electric'],
+    id: 'raichu', name: 'GALVANIK', dexNo: 26, types: ['electric'],
     base: { hp: 60, atk: 90, def: 55, spa: 90, spd: 80, spe: 110 },
     catchRate: 75, growth: 'mediumfast', baseXp: 243, body: 'quad', spriteSeed: 2601,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -167,7 +167,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 9, 10, 15, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   sandshrew: {
-    id: 'sandshrew', name: 'Sandshrew', dexNo: 27, types: ['ground'],
+    id: 'sandshrew', name: 'ARMADUNE', dexNo: 27, types: ['ground'],
     base: { hp: 50, atk: 75, def: 85, spa: 20, spd: 30, spe: 40 },
     catchRate: 255, growth: 'mediumfast', baseXp: 60, body: 'quad', spriteSeed: 2701,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -176,7 +176,7 @@ export const SPECIES2 = {
     evo: { to: 'sandslash', method: 'level', level: 22 }, tm: [3, 6, 8, 9, 10, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101],
   },
   sandslash: {
-    id: 'sandslash', name: 'Sandslash', dexNo: 28, types: ['ground'],
+    id: 'sandslash', name: 'QUILLDUNE', dexNo: 28, types: ['ground'],
     base: { hp: 75, atk: 100, def: 110, spa: 45, spd: 55, spe: 65 },
     catchRate: 90, growth: 'mediumfast', baseXp: 158, body: 'quad', spriteSeed: 2801,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -185,7 +185,7 @@ export const SPECIES2 = {
     tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
   },
   nidoranf: {
-    id: 'nidoranf', name: 'Nidoran♀', dexNo: 29, types: ['poison'],
+    id: 'nidoranf', name: 'TOXIKIT', dexNo: 29, types: ['poison'],
     base: { hp: 55, atk: 47, def: 52, spa: 40, spd: 40, spe: 41 },
     catchRate: 235, growth: 'mediumslow', baseXp: 55, body: 'quad', spriteSeed: 2901,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -194,7 +194,7 @@ export const SPECIES2 = {
     evo: { to: 'nidorina', method: 'level', level: 16 }, tm: [6, 8, 9, 10, 11, 12, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidorina: {
-    id: 'nidorina', name: 'Nidorina', dexNo: 30, types: ['poison'],
+    id: 'nidorina', name: 'VENOBELLE', dexNo: 30, types: ['poison'],
     base: { hp: 70, atk: 62, def: 67, spa: 55, spd: 55, spe: 56 },
     catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'quad', spriteSeed: 3001,
     eggGroups: ['no-eggs'], hatchCounter: 20,
@@ -203,7 +203,7 @@ export const SPECIES2 = {
     evo: { to: 'nidoqueen', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidoqueen: {
-    id: 'nidoqueen', name: 'Nidoqueen', dexNo: 31, types: ['poison', 'ground'],
+    id: 'nidoqueen', name: 'REGITOXA', dexNo: 31, types: ['poison', 'ground'],
     base: { hp: 90, atk: 92, def: 87, spa: 75, spd: 85, spe: 76 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 3101,
     eggGroups: ['no-eggs'], hatchCounter: 20,
@@ -212,7 +212,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
   },
   nidorino: {
-    id: 'nidorino', name: 'Nidorino', dexNo: 33, types: ['poison'],
+    id: 'nidorino', name: 'THORNBUCK', dexNo: 33, types: ['poison'],
     base: { hp: 61, atk: 72, def: 57, spa: 55, spd: 55, spe: 65 },
     catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'quad', spriteSeed: 3301,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -221,7 +221,7 @@ export const SPECIES2 = {
     evo: { to: 'nidoking', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidoking: {
-    id: 'nidoking', name: 'Nidoking', dexNo: 34, types: ['poison', 'ground'],
+    id: 'nidoking', name: 'REGITHORN', dexNo: 34, types: ['poison', 'ground'],
     base: { hp: 81, atk: 102, def: 77, spa: 85, spd: 75, spe: 85 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 3401,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -230,7 +230,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
   },
   clefairy: {
-    id: 'clefairy', name: 'Clefairy', dexNo: 35, types: ['fairy'],
+    id: 'clefairy', name: 'MOONLET', dexNo: 35, types: ['fairy'],
     base: { hp: 70, atk: 45, def: 48, spa: 60, spd: 65, spe: 35 },
     catchRate: 150, growth: 'fast', baseXp: 113, body: 'biped', spriteSeed: 3501,
     eggGroups: ['fairy'], hatchCounter: 10,
@@ -239,7 +239,7 @@ export const SPECIES2 = {
     evo: { to: 'clefable', method: 'stone', stone: 'moonstone' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   clefable: {
-    id: 'clefable', name: 'Clefable', dexNo: 36, types: ['fairy'],
+    id: 'clefable', name: 'LUNAVEIL', dexNo: 36, types: ['fairy'],
     base: { hp: 95, atk: 70, def: 73, spa: 95, spd: 90, spe: 60 },
     catchRate: 25, growth: 'fast', baseXp: 242, body: 'biped', spriteSeed: 3601,
     eggGroups: ['fairy'], hatchCounter: 10,
@@ -257,7 +257,7 @@ export const SPECIES2 = {
     evo: { to: 'ninetales', method: 'stone', stone: 'firestone' }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   ninetales: {
-    id: 'ninetales', name: 'Ninetales', dexNo: 38, types: ['fire'],
+    id: 'ninetales', name: 'PYCANIS', dexNo: 38, types: ['fire'],
     base: { hp: 73, atk: 76, def: 75, spa: 81, spd: 100, spe: 100 },
     catchRate: 75, growth: 'mediumfast', baseXp: 198, body: 'quad', spriteSeed: 3801,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -266,7 +266,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   jigglypuff: {
-    id: 'jigglypuff', name: 'Jigglypuff', dexNo: 39, types: ['normal', 'fairy'],
+    id: 'jigglypuff', name: 'PUFFUNE', dexNo: 39, types: ['normal', 'fairy'],
     base: { hp: 115, atk: 45, def: 20, spa: 45, spd: 25, spe: 20 },
     catchRate: 170, growth: 'fast', baseXp: 95, body: 'blob', spriteSeed: 3901,
     eggGroups: ['fairy'], hatchCounter: 10,
@@ -275,7 +275,7 @@ export const SPECIES2 = {
     evo: { to: 'wigglytuff', method: 'stone', stone: 'moonstone' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   wigglytuff: {
-    id: 'wigglytuff', name: 'Wigglytuff', dexNo: 40, types: ['normal', 'fairy'],
+    id: 'wigglytuff', name: 'ARIABLOOM', dexNo: 40, types: ['normal', 'fairy'],
     base: { hp: 140, atk: 70, def: 45, spa: 85, spd: 50, spe: 45 },
     catchRate: 50, growth: 'fast', baseXp: 196, body: 'blob', spriteSeed: 4001,
     eggGroups: ['fairy'], hatchCounter: 10,
@@ -647,7 +647,7 @@ export const SPECIES2 = {
     evo: { to: 'magnezone', method: 'level', level: 310 }, tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   farfetchd: {
-    id: 'farfetchd', name: "Farfetch'd", dexNo: 83, types: ['normal', 'flying'],
+    id: 'farfetchd', name: 'POSTDUCK', dexNo: 83, types: ['normal', 'flying'],
     base: { hp: 52, atk: 90, def: 55, spa: 58, spd: 62, spe: 60 },
     catchRate: 45, growth: 'mediumfast', baseXp: 132, body: 'bird', spriteSeed: 8301,
     eggGroups: ['flying', 'ground'], hatchCounter: 20,
