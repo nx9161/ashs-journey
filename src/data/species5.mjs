@@ -22,7 +22,7 @@
 
 export const SPECIES_SINNOH = {
   turtwig: {
-    id: 'turtwig', name: 'Turtwig', dexNo: 387, types: ['grass'],
+    id: 'turtwig', name: 'TURTURF', dexNo: 387, types: ['grass'],
     base: { hp: 55, atk: 68, def: 64, spa: 45, spd: 55, spe: 31 },
     catchRate: 45, growth: 'mediumslow', baseXp: 64, body: 'quad', spriteSeed: 38701,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
@@ -31,7 +31,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'grotle', method: 'level', level: 318 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   grotle: {
-    id: 'grotle', name: 'Grotle', dexNo: 388, types: ['grass'],
+    id: 'grotle', name: 'TURTTOISE', dexNo: 388, types: ['grass'],
     base: { hp: 75, atk: 89, def: 85, spa: 55, spd: 65, spe: 36 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'quad', spriteSeed: 38801,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
@@ -49,7 +49,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   chimchar: {
-    id: 'chimchar', name: 'Chimchar', dexNo: 390, types: ['fire'],
+    id: 'chimchar', name: 'SIMMER', dexNo: 390, types: ['fire'],
     base: { hp: 44, atk: 58, def: 44, spa: 58, spd: 44, spe: 61 },
     catchRate: 45, growth: 'mediumslow', baseXp: 62, body: 'biped', spriteSeed: 39001,
     eggGroups: ['ground', 'humanshape'], hatchCounter: 20,
@@ -58,7 +58,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'monferno', method: 'level', level: 314 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   monferno: {
-    id: 'monferno', name: 'Monferno', dexNo: 391, types: ['fire', 'fighting'],
+    id: 'monferno', name: 'EMBABOON', dexNo: 391, types: ['fire', 'fighting'],
     base: { hp: 64, atk: 78, def: 52, spa: 78, spd: 52, spe: 81 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'biped', spriteSeed: 39101,
     eggGroups: ['ground', 'humanshape'], hatchCounter: 20,
@@ -67,7 +67,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'infernape', method: 'level', level: 336 }, tm: [1, 3, 6, 8, 9, 10, 17, 18, 19, 20, 28, 31, 32, 34, 38, 40, 44, 50, 101, 104],
   },
   infernape: {
-    id: 'infernape', name: 'Infernape', dexNo: 392, types: ['fire', 'fighting'],
+    id: 'infernape', name: 'SOLARAPE', dexNo: 392, types: ['fire', 'fighting'],
     base: { hp: 76, atk: 104, def: 71, spa: 104, spd: 71, spe: 108 },
     catchRate: 45, growth: 'mediumslow', baseXp: 240, body: 'biped', spriteSeed: 39201,
     eggGroups: ['ground', 'humanshape'], hatchCounter: 20,
@@ -76,7 +76,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   piplup: {
-    id: 'piplup', name: 'Piplup', dexNo: 393, types: ['water'],
+    id: 'piplup', name: 'FRIGUIN', dexNo: 393, types: ['water'],
     base: { hp: 53, atk: 51, def: 53, spa: 61, spd: 56, spe: 40 },
     catchRate: 45, growth: 'mediumslow', baseXp: 63, body: 'biped', spriteSeed: 39301,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -85,7 +85,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'prinplup', method: 'level', level: 316 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   prinplup: {
-    id: 'prinplup', name: 'Prinplup', dexNo: 394, types: ['water'],
+    id: 'prinplup', name: 'TUXGUIN', dexNo: 394, types: ['water'],
     base: { hp: 64, atk: 66, def: 68, spa: 81, spd: 76, spe: 50 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'biped', spriteSeed: 39401,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -94,7 +94,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'empoleon', method: 'level', level: 336 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   empoleon: {
-    id: 'empoleon', name: 'Empoleon', dexNo: 395, types: ['water', 'steel'],
+    id: 'empoleon', name: 'POSEIGUIN', dexNo: 395, types: ['water', 'steel'],
     base: { hp: 84, atk: 86, def: 88, spa: 111, spd: 101, spe: 60 },
     catchRate: 45, growth: 'mediumslow', baseXp: 239, body: 'biped', spriteSeed: 39501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -103,7 +103,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   starly: {
-    id: 'starly', name: 'Starly', dexNo: 396, types: ['normal', 'flying'],
+    id: 'starly', name: 'DUSKLING', dexNo: 396, types: ['normal', 'flying'],
     base: { hp: 40, atk: 55, def: 30, spa: 30, spd: 30, spe: 60 },
     catchRate: 255, growth: 'mediumslow', baseXp: 49, body: 'bird', spriteSeed: 39601,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -112,7 +112,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'staravia', method: 'level', level: 314 }, tm: [4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   staravia: {
-    id: 'staravia', name: 'Staravia', dexNo: 397, types: ['normal', 'flying'],
+    id: 'staravia', name: 'SWIFTLING', dexNo: 397, types: ['normal', 'flying'],
     base: { hp: 55, atk: 75, def: 50, spa: 40, spd: 40, spe: 80 },
     catchRate: 120, growth: 'mediumslow', baseXp: 119, body: 'bird', spriteSeed: 39701,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -121,7 +121,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'staraptor', method: 'level', level: 334 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   staraptor: {
-    id: 'staraptor', name: 'Staraptor', dexNo: 398, types: ['normal', 'flying'],
+    id: 'staraptor', name: 'STRAPTOR', dexNo: 398, types: ['normal', 'flying'],
     base: { hp: 85, atk: 120, def: 70, spa: 50, spd: 60, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 218, body: 'bird', spriteSeed: 39801,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -130,7 +130,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   bidoof: {
-    id: 'bidoof', name: 'Bidoof', dexNo: 399, types: ['normal'],
+    id: 'bidoof', name: 'BEAVLET', dexNo: 399, types: ['normal'],
     base: { hp: 59, atk: 45, def: 40, spa: 35, spd: 40, spe: 31 },
     catchRate: 255, growth: 'mediumfast', baseXp: 50, body: 'quad', spriteSeed: 39901,
     eggGroups: ['water1', 'ground'], hatchCounter: 15,

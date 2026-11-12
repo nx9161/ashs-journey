@@ -1,11 +1,15 @@
-# monferno-back-accent — Arc4 S2a accent frame (crest/fin twitch, recolor-only).
+# monferno-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over monferno-back.
 PIXD monferno-back-accent monferno-back 64 64
-32 16 O
-28 17 O
-29 17 O
-30 17 O
-31 17 O
-32 17 O
-33 17 O
-34 17 O
+27 8 O
+28 8 O
+29 8 O
+26 9 O
+27 9 O
+28 9 O
+29 9 O
+30 9 O
+27 10 O
+28 10 O
+29 10 O
+30 10 O
 PAL

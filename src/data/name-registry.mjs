@@ -296,6 +296,19 @@ export const NAME_REGISTRY = {
     larvitar:  { name: 'CRAGLET', status: 'named', wave: 'G-JT7', design: 'craglet' },
     pupitar:   { name: 'PIKEPOD', status: 'named', wave: 'G-JT7', design: 'pikepod' },
     tyranitar: { name: 'CRAGTYRANT', status: 'named', wave: 'G-JT7', design: 'cragtyrant' },
+    // -- Wave G Sinnoh, Tranche 1 (coordinator-named, Naming Law tiers in wave log) --
+    turtwig:    { name: 'TURTURF', status: 'named', wave: 'G-ST1', design: 'turturf' },
+    grotle:     { name: 'TURTTOISE', status: 'named', wave: 'G-ST1', design: 'turttoise' },
+    chimchar:   { name: 'SIMMER', status: 'named', wave: 'G-ST1', design: 'simmer' },
+    monferno:   { name: 'EMBABOON', status: 'named', wave: 'G-ST1', design: 'embaboon' },
+    infernape:  { name: 'SOLARAPE', status: 'named', wave: 'G-ST1', design: 'solarape' },
+    piplup:     { name: 'FRIGUIN', status: 'named', wave: 'G-ST1', design: 'friguin' },
+    prinplup:   { name: 'TUXGUIN', status: 'named', wave: 'G-ST1', design: 'tuxguin' },
+    empoleon:   { name: 'POSEIGUIN', status: 'named', wave: 'G-ST1', design: 'poseiguin' },
+    starly:     { name: 'DUSKLING', status: 'named', wave: 'G-ST1', design: 'duskling' },
+    staravia:   { name: 'SWIFTLING', status: 'named', wave: 'G-ST1', design: 'swiftling' },
+    staraptor:  { name: 'STRAPTOR', status: 'named', wave: 'G-ST1', design: 'straptor' },
+    bidoof:     { name: 'BEAVLET', status: 'named', wave: 'G-ST1', design: 'beavlet' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -379,6 +392,10 @@ export const NAME_REGISTRY = {
     shellet: ['togepi', 'togetic'],
     oraclet: ['natu', 'xatu'],
     woolamp: ['mareep', 'flaaffy', 'ampharos'],
+    turturf: ['turtwig', 'grotle', 'torterra'],
+    simmer: ['chimchar', 'monferno', 'infernape'],
+    friguin: ['piplup', 'prinplup', 'empoleon'],
+    duskling: ['starly', 'staravia', 'staraptor'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

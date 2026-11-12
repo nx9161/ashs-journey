@@ -1,11 +1,14 @@
-# chimchar-back-accent — Arc4 S2a accent frame (crest/fin twitch, recolor-only).
+# chimchar-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over chimchar-back.
 PIXD chimchar-back-accent chimchar-back 64 64
-23 14 O
-41 14 O
-22 15 O
-23 15 O
-24 15 O
-40 15 O
-41 15 O
-42 15 O
+17 4 O
+16 5 O
+17 5 O
+18 5 O
+21 5 O
+16 6 O
+17 6 O
+18 6 O
+19 6 O
+20 6 O
+21 6 O
 PAL
