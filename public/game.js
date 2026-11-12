@@ -140016,6 +140016,24 @@ const ART_META = {
 // Regenerate: node assets/sprites/tools/build-kit-art.mjs (deterministic).
 // Art: Damian Gasinski aka Gassasin, CC-BY 3.0 (docs/THIRD-PARTY-ART.md).
 const KIT_ART = {
+  "kit-bed": { w: 16, h: 16, pal: {"A":"#000000","B":"#00788a","C":"#3b2400","D":"#f5d2ff","E":"#8d5500","F":"#98189c","G":"#00334e","H":"#ea7dfa","I":"#48d5d9","J":"#e6ad27"}, rows: [
+    "JEEAAAAAAAAAACCC",
+    "AAAEEEEEEEEEEAAA",
+    "AEEAAAAAAAAAAEEA",
+    "AAACCCCCCCCCCAAA",
+    "ACCCAAAAAAAACCCA",
+    "ACAADDFHFHFFAACA",
+    "AADADFHFHFHFADAA",
+    "ADDADDFHFHFFADDA",
+    "ADDADFHFHFHFADDA",
+    "ADAAAAAAAAAAAADA",
+    "AABBBBBBBBBGBGAA",
+    "AIBBBBBBBBBGBGGA",
+    "AIAAAAAAAAAAAAGA",
+    "AABBBBBBBBBGBGAA",
+    "AIBBBBBBBBBGBGGA",
+    "AIBBBBBBBBBGBGGA",
+  ] },
   "kit-canopy": { w: 16, h: 16, pal: {"A":"#000000","B":"#003f00","C":"#008100","D":"#3b2400","E":"#64e53c"}, rows: [
     "CBCBCBCBBBBBACBB",
     "BCBCBBBBBCBBBBBA",
@@ -140033,6 +140051,60 @@ const KIT_ART = {
     "A...............",
     "DA..............",
     "DDA.............",
+  ] },
+  "kit-canopy-dry": { w: 16, h: 16, pal: {"A":"#000000","B":"#5c5c1e","C":"#8a8a3a","D":"#3b2400","E":"#d8cd7a"}, rows: [
+    "CBCBCBCBBBBBACBB",
+    "BCBCBBBBBCBBBBBA",
+    "CBBBBEBBBBBBCBAB",
+    "BBBBBBBABCBBBABA",
+    "BBCBBBCBBBABAAAB",
+    "BCBCBBBABABABABA",
+    "BBCBABABABAAABAA",
+    "BABAAABABAAABABA",
+    "ABABAAAAAAABABAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAA..",
+    "A...AAA...AA....",
+    "A...............",
+    "A...............",
+    "DA..............",
+    "DDA.............",
+  ] },
+  "kit-canopy-snow": { w: 16, h: 16, pal: {"A":"#000000","B":"#1e4638","C":"#e8f3f8","D":"#2e6b52","E":"#3b2400","F":"#f4fafc"}, rows: [
+    "CBCBCBCBBBBBACBB",
+    "BCBCBBBBBCBBBBBA",
+    "CBBBBFBBBBBBCBAB",
+    "BBBBBBBABDBBBABA",
+    "BBDBBBDBBBABAAAB",
+    "BDBDBBBABABABABA",
+    "BBDBABABABAAABAA",
+    "BABAAABABAAABABA",
+    "ABABAAAAAAABABAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAA..",
+    "A...AAA...AA....",
+    "A...............",
+    "A...............",
+    "EA..............",
+    "EEA.............",
+  ] },
+  "kit-chair": { w: 16, h: 16, pal: {"A":"#000000","B":"#00334e","C":"#bec0b8","D":"#00788a","E":"#48d5d9"}, rows: [
+    "...AAAAAAAAAA...",
+    "..AEEEEEEEEEEA..",
+    ".AEADDDDDDDDAEA.",
+    ".AACADDDDDDACAA.",
+    "..ACABBBBBBACA..",
+    "..ACA......ACA..",
+    "..ACAAAAAAAACA..",
+    "..ACABBBBBBACA..",
+    ".AACABBBBBBACAA.",
+    ".AACABBBBBBACAA.",
+    ".AACABBBBBBACAA.",
+    "..ACADDDDDDACA..",
+    "..ACAAAAAAAACA..",
+    "..ACA......ACA..",
+    "..ACA......ACA..",
+    "...A........A...",
   ] },
   "kit-char-down-idle-1": { w: 16, h: 32, pal: {"O":"#000000","S":"#f28e59","H":"#3b2400","h":"#8d5500","P":"#001774","a":"#a03e00","B":"#5e0013","J":"#00788a","j":"#00334e","g":"#696b63","W":"#b9bbb3"}, rows: [
     "................",
@@ -140732,6 +140804,24 @@ const KIT_ART = {
     "..............BC",
     "..............BC",
   ] },
+  "kit-door-open": { w: 16, h: 16, pal: {"A":"#201204","B":"#0f0702","C":"#000000","D":"#bec0b8","E":"#696b63"}, rows: [
+    "CABABABABADEACCC",
+    "CABABABABADEACAC",
+    "CABABABABABCACAC",
+    "CABABABABABCACBC",
+    "CDBADABABABCACCC",
+    "CADDBABABABCACAC",
+    "CABABABABABCACAC",
+    "CABABABABABCACBC",
+    "CABABABABABCACCC",
+    "CABABABABADEACAA",
+    "CABABABABADEACAB",
+    "CBBBBBBBBBBCACBB",
+    "..............CC",
+    "..............AC",
+    "..............BC",
+    "..............BC",
+  ] },
   "kit-door-r": { w: 16, h: 16, pal: {"A":"#8d5500","B":"#3b2400","C":"#000000","D":"#bec0b8","E":"#696b63"}, rows: [
     "CCCAEDABABABABAC",
     "CACAEDABABABABAC",
@@ -140749,6 +140839,114 @@ const KIT_ART = {
     "CA..............",
     "CB..............",
     "CB..............",
+  ] },
+  "kit-dryground-1": { w: 16, h: 16, pal: {"A":"#d8bf83"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+  ] },
+  "kit-dryground-2": { w: 16, h: 16, pal: {"A":"#d8bf83","B":"#b39b5e"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "ABAAAAAAAAAAAAAA",
+    "ABABAAAAAABAAAAA",
+    "AAABABAAAABAAAAA",
+    "ABAAABAAAAAAAAAA",
+    "ABABAAAAAAAAAAAA",
+    "AAABAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAABA",
+    "AAAAAAAAAAAAAABA",
+    "AAAABAAAAAAAAAAA",
+    "AAAABAAAAAAAAAAA",
+    "AAAAAAAAAAAABAAA",
+    "ABAAAAAAAAAABABA",
+    "ABAAAAAAAAAAAABA",
+    "AAAAAAAAAAAAAAAA",
+  ] },
+  "kit-dryground-3": { w: 16, h: 16, pal: {"A":"#d8bf83","B":"#b39b5e"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "ABAAABAAAAAABAAA",
+    "ABABABABAAAABABA",
+    "AAABAAABAAAAAABA",
+    "ABAAABAAAAAABAAA",
+    "ABAAABABAAAABAAA",
+    "AAAAAAABAAAAAAAA",
+    "ABAAABAAAAAAAAAA",
+    "ABABABAAAAAAABAA",
+    "AAABAAAAAAAAABAA",
+    "AAAAAAAAAAABAAAB",
+    "AAAAAAAAABABABAB",
+    "AABAAAAAABAAABAA",
+    "AABABAAAAAABAAAB",
+    "AAAABAAAAAABABAB",
+    "AAAAAAAAAAAAABAA",
+  ] },
+  "kit-drytall": { w: 16, h: 16, pal: {"A":"#9a8148","B":"#d8bf83","C":"#efdf9f","D":"#f7ecc0"}, rows: [
+    "BBBBBAAABBBBBAAA",
+    "AAABADCAAAABADCA",
+    "ADCAACBAADCAACBA",
+    "BABCABAABABCABAA",
+    "BBACAAABBBACAAAB",
+    "BAAAAABBBBAAAAAB",
+    "ADCAAAAABADCADCA",
+    "ACBABADCAACBAABC",
+    "ABAABBABCABAABAC",
+    "AAABBAAACAAABAAA",
+    "AAABADCAAAABADCA",
+    "ADCAACBAADCAACBA",
+    "BABCABAABABCABAA",
+    "BBACAAABBBACAAAB",
+    "BBBAAABBBBBAAABB",
+    "BBBBABBBBBBBABBB",
+  ] },
+  "kit-floor-1": { w: 16, h: 16, pal: {"A":"#8d5500","B":"#3b2400","C":"#e6ad27"}, rows: [
+    "CAABBBBBCAABBBBB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "BBBBCAABBBBBCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+  ] },
+  "kit-floor-2": { w: 16, h: 16, pal: {"A":"#8d5500","B":"#3b2400","C":"#e6ad27"}, rows: [
+    "CAABBBBBCAABBBBB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "BBBBCAABBBBBCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
+    "CAABCAABCAABCAAB",
   ] },
   "kit-flora": { w: 16, h: 16, pal: {"A":"#008100","B":"#063a00","C":"#64e53c","D":"#b8fca8"}, rows: [
     "AAAAAAAAAAAAAAAA",
@@ -140822,6 +141020,78 @@ const KIT_ART = {
     "AAAABAAAAAABABAB",
     "AAAAAAAAAAAAABAA",
   ] },
+  "kit-housewall": { w: 16, h: 16, pal: {"A":"#3b2400","B":"#000000","C":"#e6ad27","D":"#8d5500"}, rows: [
+    "BBBBBBBBBBBBBBBB",
+    "CCCCCCCCCCCCCCCC",
+    "CCCCCCCCCCCCCCCC",
+    "CCCCCCCCCCCCCCCC",
+    "CCCCCCCCCCCCCCCC",
+    "BBBBBBBBBBBBBBBB",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "DDDDDDDDDDDDDDDD",
+    "BBBBBBBBBBBBBBBB",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "DDDDDDDDDDDDDDDD",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "BBBBBBBBBBBBBBBB",
+  ] },
+  "kit-labwall": { w: 16, h: 16, pal: {"A":"#46525e","B":"#000000","C":"#d7dee5","D":"#77879a"}, rows: [
+    "BBBBBBBBBBBBBBBB",
+    "CCCCCCCCCCCCCCCC",
+    "CCCCCCCCCCCCCCCC",
+    "CCCCCCCCCCCCCCCC",
+    "CCCCCCCCCCCCCCCC",
+    "BBBBBBBBBBBBBBBB",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "DDDDDDDDDDDDDDDD",
+    "BBBBBBBBBBBBBBBB",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "DDDDDDDDDDDDDDDD",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "BBBBBBBBBBBBBBBB",
+  ] },
+  "kit-painting-1": { w: 16, h: 16, pal: {"A":"#000000","B":"#8d5500","C":"#003f00","D":"#3b2400","E":"#a03e00","F":"#008100","G":"#f28e59","H":"#d2eaff","I":"#69a8ff"}, rows: [
+    "................",
+    "...AAAAAAAAAA...",
+    "...ADDDDDDDBA...",
+    "...ADEEFEEEBA...",
+    "...ADEECEEEBA...",
+    "...ADGFCCGGBA...",
+    "...ADECFCEEBA...",
+    "...ADFCFCCHBA...",
+    "...ADGGCGHIBA...",
+    "...ADCCFCFFBA...",
+    "...ADFFCFCCBA...",
+    "...ABBBBBBBBA...",
+    "...AAAAAAAAAA...",
+    "................",
+    "................",
+    "................",
+  ] },
+  "kit-painting-2": { w: 16, h: 16, pal: {"A":"#000000","B":"#8d5500","C":"#3b2400","D":"#4e5048","E":"#bec0b8","F":"#ffffff","G":"#b9bbb3","H":"#696b63"}, rows: [
+    "................",
+    ".AAAAAAAAAAAAAA.",
+    ".ACCCCCCCCCCCBA.",
+    ".ACFFAAAAAAFFBA.",
+    ".ACFADGGDDGAFBA.",
+    ".ACFAGDDDGHAFBA.",
+    ".ACAGDDAGADHABA.",
+    ".ACADAADAAADABA.",
+    ".ACAADDEDDDAFBA.",
+    ".ACFAAAEEAAAFBA.",
+    ".ACFAEAEEAEAFBA.",
+    ".ACADAEEEEADABA.",
+    ".ACAEDAAAADEABA.",
+    ".ABBBBBBBBBBBBA.",
+    ".AAAAAAAAAAAAAA.",
+    "................",
+  ] },
   "kit-path-1": { w: 16, h: 16, pal: {"A":"#3b2400","B":"#8d5500","C":"#000000"}, rows: [
     "AAAAAAAAAAAAAAAA",
     "AAAAAAAAAAAAAAAA",
@@ -140857,6 +141127,24 @@ const KIT_ART = {
     "AAAAAAAAAAAAAAAA",
     "AAAAAAAAAAAAAAAA",
     "AAAAAAAAAAAAAAAA",
+  ] },
+  "kit-plant": { w: 16, h: 16, pal: {"A":"#000000","B":"#063a00","C":"#2c7900","D":"#f28e59","E":"#90df07","F":"#a03e00","G":"#531a00"}, rows: [
+    "..AEBBBBAABACABE",
+    "..AABBAACCAABEAB",
+    "....AACEEACCAEBA",
+    "...ACCEBBACBABEA",
+    "...ACEBBACCB.ACB",
+    "..ACEBBBACB..ABE",
+    "..AEBBBACCB...AA",
+    "..AEBAA..ECB....",
+    "...AA.AAAEBAAA..",
+    ".....AFAACBAAFA.",
+    "....ADA..CC..ADA",
+    "....ADA......ADA",
+    "....ADDAAAAAADFA",
+    ".....ADDDDDDDFA.",
+    ".....ADGGGGGGFA.",
+    ".....ADFFFFFFFA.",
   ] },
   "kit-roof-dormer": { w: 16, h: 16, pal: {"A":"#531a00","B":"#a03e00","C":"#000000","D":"#bec0b8","E":"#4e5048","F":"#696b63"}, rows: [
     "................",
@@ -140930,6 +141218,60 @@ const KIT_ART = {
     "ACCCCEDDDDECCCCA",
     "CCCDDDDDDDDDDCCC",
   ] },
+  "kit-rug": { w: 16, h: 16, pal: {"A":"#9691ff","B":"#1e0087","C":"#4d2cda","D":"#e2e2ff","E":"#8d5500","F":"#3b2400","G":"#e6ad27"}, rows: [
+    "GDEFDFFDDEEDFFDF",
+    "AAAAAAAAAAAAAAAA",
+    "CBCBCBBCCBBCBCBC",
+    "CAAACCAAAACCAAAC",
+    "AABAAAABBAAAABAA",
+    "ABCBAABCCBAABCBA",
+    "AABAAAABBAAAABAA",
+    "BAAABBAAAABBAAAB",
+    "BAAABBAAAABBAAAB",
+    "AABAAAABBAAAABAA",
+    "ABCBAABCCBAABCBA",
+    "AABAAAABBAAAABAA",
+    "CAAACCAAAACCAAAC",
+    "CBCBCBBCCBBCBCBC",
+    "AAAAAAAAAAAAAAAA",
+    "GDEFDEEDDEEDGEDF",
+  ] },
+  "kit-rug2": { w: 16, h: 16, pal: {"A":"#5e0013","B":"#9d2344","C":"#f37bc7"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "ABBBBBBBBBBBBBBA",
+    "ABAAAAAAAAAAAABA",
+    "ABABBAABBAABBABA",
+    "ABABAAAAAAAABABA",
+    "ABAAACBBBBCAAABA",
+    "ABAAABCBBCBAAABA",
+    "ABABACBCCBCABABA",
+    "ABABABCBBCBABABA",
+    "ABAAABBCCBBAAABA",
+    "ABAAABBBBBBAAABA",
+    "ABABAAAAAAAABABA",
+    "ABABBAABBAABBABA",
+    "ABAAAAAAAAAAAABA",
+    "ABBBBBBBBBBBBBBA",
+    "AAAAAAAAAAAAAAAA",
+  ] },
+  "kit-shelf": { w: 16, h: 16, pal: {"A":"#000000","B":"#e6ad27","C":"#8d5500","D":"#bec0b8","E":"#d7c805","F":"#001774","G":"#00334e","H":"#3b2400","I":"#531a00","J":"#a03e00","K":"#b28afa","L":"#48d5d9","M":"#560057","N":"#69a8ff","O":"#f3f28c","P":"#45e27d"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "ABBBBBBBBBBBBBBA",
+    "ABBBBBBBBBBBBBBA",
+    "ABBBBBBBBBBBBBBA",
+    "ABBBBBBBBBBBBBBA",
+    "ABBBBBBBBBBBBBBA",
+    "ACCCCCCCCCCCCCCA",
+    "ACAAAAAAAAAAAACA",
+    "ACADGGIDFFHOOACA",
+    "ACAJLLIKNNHEEACA",
+    "ACAJGGIKFFAEEACA",
+    "AAABBBBBBBBBBAAA",
+    "ADAAAAAAAAAAAADA",
+    "ADDACCCCCCCCADDA",
+    "ADAAAAAAAAAAAADA",
+    "AAAEEFMMEKJPHAAA",
+  ] },
   "kit-sign": { w: 16, h: 16, pal: {"A":"#000000","B":"#8d5500","C":"#3b2400","D":"#e6ad27","E":"#656d00","F":"#d7c805"}, rows: [
     ".A............A.",
     "ADA..........ADA",
@@ -140947,6 +141289,96 @@ const KIT_ART = {
     "ABA...AAAA...ABA",
     "ABA..........ABA",
     ".A............A.",
+  ] },
+  "kit-snow-1": { w: 16, h: 16, pal: {"A":"#e9f2f6"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+  ] },
+  "kit-snow-2": { w: 16, h: 16, pal: {"A":"#e9f2f6","B":"#b9cfdb"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "ABAAAAAAAAAAAAAA",
+    "ABABAAAAAABAAAAA",
+    "AAABABAAAABAAAAA",
+    "ABAAABAAAAAAAAAA",
+    "ABABAAAAAAAAAAAA",
+    "AAABAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAAAA",
+    "AAAAAAAAAAAAAABA",
+    "AAAAAAAAAAAAAABA",
+    "AAAABAAAAAAAAAAA",
+    "AAAABAAAAAAAAAAA",
+    "AAAAAAAAAAAABAAA",
+    "ABAAAAAAAAAABABA",
+    "ABAAAAAAAAAAAABA",
+    "AAAAAAAAAAAAAAAA",
+  ] },
+  "kit-snow-3": { w: 16, h: 16, pal: {"A":"#e9f2f6","B":"#b9cfdb"}, rows: [
+    "AAAAAAAAAAAAAAAA",
+    "ABAAABAAAAAABAAA",
+    "ABABABABAAAABABA",
+    "AAABAAABAAAAAABA",
+    "ABAAABAAAAAABAAA",
+    "ABAAABABAAAABAAA",
+    "AAAAAAABAAAAAAAA",
+    "ABAAABAAAAAAAAAA",
+    "ABABABAAAAAAABAA",
+    "AAABAAAAAAAAABAA",
+    "AAAAAAAAAAABAAAB",
+    "AAAAAAAAABABABAB",
+    "AABAAAAAABAAABAA",
+    "AABABAAAAAABAAAB",
+    "AAAABAAAAAABABAB",
+    "AAAAAAAAAAAAABAA",
+  ] },
+  "kit-snowtuft": { w: 16, h: 16, pal: {"A":"#a9c3d2","B":"#e9f2f6","C":"#ffffff"}, rows: [
+    "BBBBBAAABBBBBAAA",
+    "AAABACCAAAABACCA",
+    "ACCAACBAACCAACBA",
+    "BABCABAABABCABAA",
+    "BBACAAABBBACAAAB",
+    "BAAAAABBBBAAAAAB",
+    "ACCAAAAABACCACCA",
+    "ACBABACCAACBAABC",
+    "ABAABBABCABAABAC",
+    "AAABBAAACAAABAAA",
+    "AAABACCAAAABACCA",
+    "ACCAACBAACCAACBA",
+    "BABCABAABABCABAA",
+    "BBACAAABBBACAAAB",
+    "BBBAAABBBBBAAABB",
+    "BBBBABBBBBBBABBB",
+  ] },
+  "kit-table": { w: 16, h: 16, pal: {"A":"#000000","B":"#8d5500","C":"#3b2400","D":"#e6ad27","E":"#bec0b8","F":"#b9bbb3","G":"#ffffff","H":"#48d5d9","I":"#caf3f3"}, rows: [
+    "DAAAAAAAAAAAAAAC",
+    "ABBBBBBBBBBBIIBA",
+    "ABBBBBFFFFBBIIBA",
+    "AACCCFEEEEGCHHAA",
+    "ABBBBFEEEEGBHHBA",
+    "ABBBBBGGGGBBBBBA",
+    "AACCCCCCCCCCCCAA",
+    "ABBBBBBBBBBBBBBA",
+    "ABBBBBBBBBBBBBBA",
+    "AACCCCCCCCCCCCAA",
+    "AAAAAAAAAAAAAAAA",
+    "ACCCCCCCCCCCCCCA",
+    "DAAAAAAAAAAAAAAC",
+    "DACCABBCDBBACCAC",
+    "DABBABBCDBBABBAC",
+    "DBAADBBCDBBCAABC",
   ] },
   "kit-tallgrass": { w: 16, h: 16, pal: {"A":"#063a00","B":"#008100","C":"#64e53c","D":"#b8fca8"}, rows: [
     "BBBBBAAABBBBBAAA",
@@ -142269,6 +142701,9 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     const a = hexRgbOf(hex), b = hexRgbOf(toward);
     return '#' + a.map((v, i) => Math.max(0, Math.min(255, Math.round(v + (b[i] - v) * f))).toString(16).padStart(2, '0')).join('');
   };
+  // Ground anchors live in three regional style tables (tiles.mjs);
+  // the vegetation tint reads whichever table owns the town.
+  const TOWN_STYLE_ANY = { ...TOWN_STYLE, ...JOHTO_TOWN_STYLE, ...HOENN_TOWN_STYLE, ...SINNOH_TOWN_STYLE };
   const KIT_VARIANTS = {
     pallet: null, // reference: authored kit colors
     viridian: { roof: ['#54687e', '#333f4f', '#7d92a8'], log: '#7d5226', door: '#46586e' }, // gabled slate
@@ -142280,12 +142715,75 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     lavender: { roof: ['#4d3d63', '#2d2338', '#71618c'], log: '#6e4f2a', door: '#4a3a5e' }, // steep dark shingle
     fuchsia: { roof: ['#b08d4f', '#6e5626', '#cfa860'], log: '#8d5f2b', door: '#96684a' }, // safari thatch
     cinnabar: { roof: ['#7d3a34', '#452723', '#a96152'], log: '#7d4a2b', door: '#87493f' }, // basalt slab
+    // ---- Wave B: Johto (keyed to JOHTO_TOWN_STYLE forms) ----
+    newbark: { roof: ['#7fa3a1', '#4c6e6c', '#a8c4c0'], log: '#8a6844', door: '#527a76' }, // lakeside-lab modern: pale teal slate
+    cherrygrove: { roof: ['#c48a94', '#8a5560', '#dda8ae'], log: '#7d5226', door: '#a86a72' }, // coastal flower gable: cherry pink
+    violet: { roof: ['#8d84a0', '#5b5470', '#aba2bc'], log: '#6e5a44', door: '#5e5470' }, // tower-town stone: grey violet
+    azalea: { roof: ['#5d8a4a', '#3c5c2e', '#84a866'], log: '#6b4a26', door: '#4e6e38' }, // forest-edge timber: moss
+    goldenrod: { roof: ['#93512e', '#63341d', '#b26f45'], log: '#8a6a48', door: '#74422a' }, // urban brick slab
+    ecruteak: { roof: ['#6e4530', '#402818', '#8f6248'], log: '#7d4a26', door: '#5e3016' }, // traditional timber: dark cedar
+    olivine: { roof: ['#b04a3c', '#74302a', '#cc7263'], log: '#7d5a30', door: '#8a3f34' }, // port + lighthouse: harbor red
+    cianwood: { roof: ['#a5946f', '#6f6444', '#c2b28c'], log: '#8a6f45', door: '#77643c' }, // rustic island stone: driftwood sand
+    mahogany: { roof: ['#476e4e', '#2c4632', '#648a68'], log: '#6e5230', door: '#3c5c42' }, // quiet lakeside timber: deep pine
+    blackthorn: { roof: ['#3f4a6e', '#272e47', '#5d6a8f'], log: '#5e4a30', door: '#35406b' }, // mountain slate + dragon motifs: charcoal
+    silvertown: { roof: ['#c9c9d4', '#8f8fa3', '#e2e2ea'], log: '#9a8a70', door: '#a8a8ba' }, // league marble: silver
+    // ---- Wave B: Hoenn (keyed to HOENN_TOWN_STYLE forms) ----
+    littleroot: { roof: ['#c08d45', '#7d551f', '#dcab62'], log: '#7d5226', door: '#8a5a2a' }, // starter-village timber: honey cedar
+    oldale: { roof: ['#c2a054', '#856830', '#d9bc76'], log: '#8a6a3d', door: '#97742f' }, // dry-meadow gable: weathered straw
+    petalburg: { roof: ['#75997c', '#4a6b52', '#9ab89e'], log: '#75603d', door: '#5d7d66' }, // park-pond stone: sage
+    rustboro: { roof: ['#84776a', '#52453a', '#a29885'], log: '#77644a', door: '#5e5648' }, // company-city cut stone: warm grey
+    dewford: { roof: ['#4fa3a5', '#2f6e70', '#79c2c0'], log: '#8a6f4d', door: '#3d8587' }, // island surf shack: surf teal
+    slateport: { roof: ['#d9c096', '#a68a5c', '#ecd9ae'], log: '#8d6a3a', door: '#b0874f' }, // harbor market canvas: cream
+    mauville: { roof: ['#98913f', '#605c22', '#bab45e'], log: '#7a6a3a', door: '#3f7d7a' }, // electric grid slab: olive bronze, teal door
+    verdanturf: { roof: ['#d8aebc', '#a87a8c', '#eccfd9'], log: '#7d5f36', door: '#a87a8f' }, // contest-garden trellis: pale rose
+    fallarbor: { roof: ['#a39a90', '#6e675e', '#bab2a6'], log: '#7a6a55', door: '#7d7468' }, // ash-country timber: ash grey
+    lavaridge: { roof: ['#c06a35', '#7d421f', '#da8f5a'], log: '#7d4a2b', door: '#96452a' }, // hot-spring volcanic stone: rust
+    fortree: { roof: ['#3f6b28', '#274716', '#5d8742'], log: '#6b4a26', door: '#3f6b28' }, // canopy treehouse: deep canopy green
+    lilycove: { roof: ['#9a7fb8', '#66538a', '#bfa8d4'], log: '#7d6248', door: '#7d639e' }, // contest-port lavender tile
+    mossdeep: { roof: ['#bcd4da', '#84a3ab', '#dcebef'], log: '#8a7a5c', door: '#6f9aa8' }, // space-center pale slab: pale cyan
+    sootopolis: { roof: ['#e6e1d5', '#b0aa9c', '#f4f1ea'], log: '#a08b62', door: '#c2bbaa' }, // crater white stone
+    pacifidlog: { roof: ['#9c7648', '#684a26', '#bd9868'], log: '#8d5f2b', door: '#a34d3f' }, // raft-timber float, coral door
+    evergrande: { roof: ['#c3cfe6', '#969fb5', '#e6eaf2'], log: '#8a7a52', door: '#b8933f' }, // league marble + gold door
+    // ---- Wave C: Kanto league + Orange Islands (keyed to each town's identity) ----
+    indigo: { roof: ['#5a4a8a', '#372a55', '#7d6cab'], log: '#6a5636', door: '#4a3a75' }, // league plateau: royal indigo
+    valencia: { roof: ['#c96f4a', '#8a4526', '#e09a70'], log: '#8a6844', door: '#a85638' }, // professor's island: coral terra
+    mikan: { roof: ['#d98a2b', '#96590f', '#eda94f'], log: '#7d5a26', door: '#b06e1e' }, // citrus grove: mikan orange
+    navel: { roof: ['#6e7d8c', '#45525e', '#93a5b5'], log: '#6e5636', door: '#54626e' }, // mountain isle: granite slate
+    moro: { roof: ['#b5a88f', '#7d7260', '#cdc2ab'], log: '#77644a', door: '#8a7a5c' }, // ghost-ship shore: bone drift
+    trovita: { roof: ['#e0b7a4', '#a87a64', '#f2d4c4'], log: '#8a6a48', door: '#b98a6e' }, // spike-shell coast: shell pink
+    kumquat: { roof: ['#3fa8a0', '#256e68', '#6cc4bc'], log: '#8d6a3a', door: '#2f8a84' }, // resort isle: pool aqua
+    pummelo: { roof: ['#a82f35', '#66191d', '#c45257'], log: '#7d5226', door: '#8a2329' }, // stadium isle: crimson
+    shamouti: { roof: ['#d8542e', '#96401d', '#ee7c52'], log: '#6e4a2a', door: '#b34a26' }, // shrine isle: vermillion
+    frontierhub: { roof: ['#8a6d3b', '#57431f', '#ad8f52'], log: '#5e4630', door: '#2f6e6a' }, // battle frontier: bronze, teal door
+    // ---- Wave C: Sinnoh (keyed to SINNOH_TOWN_STYLE forms) ----
+    twinleaf: { roof: ['#7a9a4d', '#4f6b2f', '#9aba6d'], log: '#7d5a30', door: '#5d7d3a' }, // starter hamlet: fresh leaf
+    sandgem: { roof: ['#d6cba6', '#a39368', '#eae0c0'], log: '#8a7050', door: '#7a94a8' }, // lab town: cool pale sand, lab-blue door
+    jubilife: { roof: ['#5d8aa8', '#385a73', '#84aec9'], log: '#77644a', door: '#4a7d99' }, // TV-city: steel glass blue
+    oreburgh: { roof: ['#5e564e', '#38332e', '#7d766c'], log: '#6e5136', door: '#8a4a2a' }, // coal city: soot iron, rust door
+    floaroma: { roof: ['#d4699e', '#9c4470', '#e89abb'], log: '#7d5a36', door: '#b34d82' }, // flower town: magenta bloom
+    eterna: { roof: ['#39614a', '#274435', '#557d63'], log: '#5e4630', door: '#33512c' }, // old stone + forest: teal-green stone
+    hearthome: { roof: ['#8a5fa8', '#5d3c73', '#ab84c7'], log: '#8a6a3d', door: '#c9a227' }, // contest hall: violet, gold door
+    solaceon: { roof: ['#9aa578', '#6b7350', '#bcc49c'], log: '#77644a', door: '#7d8461' }, // ranch ruins: olive stone
+    veilstone: { roof: ['#66707e', '#434a55', '#8a95a3'], log: '#6e5636', door: '#59636f' }, // meteor dept-store: meteor slate
+    canalave: { roof: ['#b8c4c9', '#8595a0', '#d8e2e6'], log: '#77603d', door: '#468faf' }, // harbor iron: pale iron, canal-blue door
+    pastoria: { roof: ['#6e8a4f', '#49632f', '#8fab6d'], log: '#7a5c33', door: '#57703c' }, // marsh town: marsh olive
+    celestic: { roof: ['#7d6ba8', '#53447a', '#9d8cc2'], log: '#5e4630', door: '#5a4390' }, // shrine town: dusk violet
+    snowpoint: { roof: ['#a8bfcc', '#71879a', '#c9dbe6'], log: '#7a6248', door: '#5d7d99', ground: 'snow' }, // snow port: pale stone; grounds wear the original snow family
+    sunnyshore: { roof: ['#e0a92e', '#a87a14', '#f2c452'], log: '#8a6a3d', door: '#3a6ea8' }, // solar city: amber, solar-blue door
+    'fight-area': { roof: ['#63322c', '#3e201c', '#83503f'], log: '#5e4630', door: '#a83f2a' }, // battle zone: dark basalt red
+    'survival-area': { roof: ['#9c905e', '#6e6240', '#bab086'], log: '#6e5230', door: '#7d6f3f' }, // rugged outpost: khaki
+    'resort-area': { roof: ['#e8d9c4', '#bfae94', '#f7ecdc'], log: '#9a7a52', door: '#d4695e' }, // villa resort: pearl, coral door
   };
   const KIT_VEG_IDS = new Set(['kit-grass-1', 'kit-grass-2', 'kit-grass-3', 'kit-tallgrass', 'kit-flora', 'kit-canopy']);
   const kitSeasonFn = seasonKitSwapFor || seasonSwapFor;
-  const buildKitSet = (townId) => {
+  const buildKitSet = (townId, opts) => {
     const variant = townId ? (KIT_VARIANTS[townId] || null) : null;
-    const anchor = townId && TOWN_STYLE[townId] ? TOWN_STYLE[townId].ground : null;
+    // Wave C biome ground families (original kit-pattern tiles for
+    // the biomes the cabin kit lacks): a variant may declare one, and
+    // a corridor set may override it (r228 wears Survival's roofs on
+    // desert ground).
+    const biome = (opts && opts.ground) || (variant && variant.ground) || null;
+    const anchor = townId && TOWN_STYLE_ANY[townId] ? TOWN_STYLE_ANY[townId].ground : null;
     // hex -> hex remap for one kit entry under this town's variant:
     // structural colors swap outright; vegetation greens tint toward
     // the town's ground anchor (composed BEFORE the seasonal grade,
@@ -142326,27 +142824,56 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
       return artCanvas(doc, id, 1, false, swap || undefined);
     };
     const grassSet = ['kit-grass-1', 'kit-grass-2', 'kit-grass-3'].map(cvFor).filter(Boolean);
+    const biomeSet = biome === 'snow'
+      ? ['kit-snow-1', 'kit-snow-2', 'kit-snow-3'].map(cvFor).filter(Boolean)
+      : biome === 'desert'
+        ? ['kit-dryground-1', 'kit-dryground-2', 'kit-dryground-3'].map(cvFor).filter(Boolean)
+        : null;
+    const effGrass = biomeSet && biomeSet.length ? biomeSet : grassSet;
+    // Night lit window (leftover from Waves A/B): the kit window wall
+    // with its pane swapped to warm lamplight, under the town's own
+    // wall-log remap. Consumed by kitTownLayers at phase 'night'.
+    const wallWindowLit = (() => {
+      const a = KIT_ART['kit-wall-window'];
+      if (!a || !a.pal) return null;
+      const remap = remapFor('kit-wall-window');
+      let swap = null;
+      for (const ch of Object.keys(a.pal)) {
+        let fin = (remap && remap[a.pal[ch]]) || a.pal[ch];
+        if (a.pal[ch] === '#00788a') fin = '#ffca7a'; // pane -> lamplight
+        if (fin !== a.pal[ch]) (swap = swap || {})[ch] = fin;
+      }
+      return artCanvas(doc, 'kit-wall-window', 1, false, swap || undefined);
+    })();
     return {
-      grass: grassSet,
+      grass: effGrass,
       // Textured-only grass variants (kit-grass-1 is the kit's solid
       // calm fill — right inside a lawn, but an ISOLATED cell of it
       // reads as a flat hole): grassground clearings and prop
       // underlays pick from these instead.
-      grassTex: grassSet.slice(1),
+      grassTex: effGrass.slice(1),
       path: ['kit-path-1', 'kit-path-2'].map(cvFor).filter(Boolean),
-      tall: cvFor('kit-tallgrass'),
-      flora: cvFor('kit-flora'),
-      canopy: cvFor('kit-canopy'),
+      tall: biome === 'snow' ? cvFor('kit-snowtuft') : biome === 'desert' ? cvFor('kit-drytall') : cvFor('kit-tallgrass'),
+      flora: biome ? null : cvFor('kit-flora'),
+      canopy: biome === 'snow' ? cvFor('kit-canopy-snow') : biome === 'desert' ? cvFor('kit-canopy-dry') : cvFor('kit-canopy'),
       sign: cvFor('kit-sign'),
       roofL: cvFor('kit-roof-l'), roofM: cvFor('kit-roof-m'),
       roofR: cvFor('kit-roof-r'), roofDormer: cvFor('kit-roof-dormer'),
       wallPlain: cvFor('kit-wall-plain'), wallWindow: cvFor('kit-wall-window'),
+      wallWindowLit,
       door: cvFor('kit-door'), doorR: cvFor('kit-door-r'),
+      biome,
     };
   };
   cache.kitTowns = {};
   for (const townId of Object.keys(KIT_VARIANTS)) cache.kitTowns[townId] = buildKitSet(townId);
   cache.kitTowns.route1 = buildKitSet(null); // Pallet->Viridian corridor: reference kit dressing
+  cache.kitTowns.r29 = buildKitSet('newbark'); // Wave B: Johto starter corridor wears New Bark's set
+  cache.kitTowns.r101 = buildKitSet('littleroot'); // Wave B: Hoenn starter corridor wears Littleroot's set
+  cache.kitTowns.r201 = buildKitSet('twinleaf'); // Wave C: Sinnoh starter corridor wears Twinleaf's set
+  cache.kitTowns.r216 = buildKitSet('snowpoint'); // Wave C: the snow approach — canopies + tufts dress, authored frost/ice floors stay
+  cache.kitTowns.r217 = buildKitSet('snowpoint');
+  cache.kitTowns.r228 = buildKitSet('survival-area', { ground: 'desert' }); // Wave C: the desert corridor — Survival roofs on original dry ground
   if (!cache.kitTowns.pallet.grass.length || !cache.kitTowns.pallet.door) delete cache.kitTowns;
   cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6', 'tile-grass-7', 'tile-grass-8', 'tile-grass-9', 'tile-grass-10']); // W5 TX-1: 10 base variants
   cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4', 'tile-tallgrass-5', 'tile-tallgrass-6']); // W5 TX-1: 6 tall variants
@@ -142611,6 +143138,61 @@ function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     const cv = artCanvas(doc, id, 1, false, svcSwapFor(materializeArt(id), false));
     if (cv) cache.kitSvc.signs[kind] = cv;
   }
+  // Wave C leftover: night-lit service windows inside kit towns. The
+  // authored -lit facade variants (the same art cache.litMap swaps to
+  // in shipped towns) re-graded with the same service grade, so a kit
+  // town's Center/Mart/Gym/Lab glows at night like everywhere else.
+  cache.kitSvcLit = { facade: {}, signs: {} };
+  for (const kind of Object.keys(cache.kitSvc.facade)) {
+    const litId = TILE_ART[kind] + '-lit';
+    const la = materializeArt(litId);
+    if (!la) continue;
+    const upId = litId + '-upper';
+    const upA = materializeArt(upId);
+    cache.kitSvcLit.facade[kind] = {
+      base: artCanvas(doc, litId, 1, false, svcSwapFor(la, false)),
+      side: artCanvas(doc, litId, 1, false, svcSwapFor(la, true)),
+      upper: upA ? artCanvas(doc, upId, 1, false, svcSwapFor(upA, false)) : null,
+      sideUpper: upA ? artCanvas(doc, upId, 1, false, svcSwapFor(upA, true)) : null,
+    };
+  }
+  {
+    const litId = (TILE_ART['sign-center'] || '') + '-lit';
+    const la = materializeArt(litId);
+    if (la) cache.kitSvcLit.signs['sign-center'] = artCanvas(doc, litId, 1, false, svcSwapFor(la, false));
+  }
+  // Wave C leftover: warp-fade door-open frames inside kit towns —
+  // house doors wear the kit door, so their open frame is the kit
+  // door-open tile; service doors wear re-graded authored doors, so
+  // their open frames get the same service grade. Consulted by the
+  // game's doorOpenSprite when the current map is a kit town.
+  cache.doorOpenKit = {};
+  {
+    const kitOpen = artCanvas(doc, 'kit-door-open', 1);
+    if (kitOpen) {
+      for (const kind of ['door-house', 'door-wood-facade', 'door-brick', 'door-wood-l', 'door-wood-r', 'door']) {
+        cache.doorOpenKit[kind] = kitOpen;
+      }
+    }
+    for (const [kind, id] of Object.entries(DOOR_OPEN_ART)) {
+      if (cache.doorOpenKit[kind]) continue;
+      const cv = artCanvas(doc, id, 1, false, svcSwapFor(materializeArt(id), false));
+      if (cv) cache.doorOpenKit[kind] = cv;
+    }
+  }
+  // Wave C: kit interior set (houses + labs). One uniform dressing —
+  // the mechanism is map-pattern based (house-* / *-house / *-lab),
+  // so it covers every region's interiors at once; the shared
+  // center/mart interiors keep their service identity and stay out.
+  cache.kitInt = {
+    floor: ids(['kit-floor-1', 'kit-floor-2']),
+    rug: artCanvas(doc, 'kit-rug', 1), rug2: artCanvas(doc, 'kit-rug2', 1),
+    bed: artCanvas(doc, 'kit-bed', 1), table: artCanvas(doc, 'kit-table', 1),
+    chair: artCanvas(doc, 'kit-chair', 1), shelf: artCanvas(doc, 'kit-shelf', 1),
+    plant: artCanvas(doc, 'kit-plant', 1),
+    housewall: artCanvas(doc, 'kit-housewall', 1), labwall: artCanvas(doc, 'kit-labwall', 1),
+    painting1: artCanvas(doc, 'kit-painting-1', 1), painting2: artCanvas(doc, 'kit-painting-2', 1),
+  };
   cache.doorOpen = {};
   for (const [kind, id] of Object.entries(DOOR_OPEN_ART)) {
     const cv = artCanvas(doc, id, 1);
@@ -142865,10 +143447,53 @@ function atmoKeyFor(mapId) {
 // no map data, warp, or collision is touched.
 const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall',
   'waterpump', 'barrel', 'haycart', 'well', 'sacks', 'tub', 'bench', 'planter',
-  'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch']);
+  'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch',
+  // Wave B: Johto/Hoenn regional props (J3/H3/H3B kinds + the W6 props
+  // those towns use) — same kit-ground treatment as the Kanto set.
+  'maple', 'apricorn', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
+  'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
+  'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
+  'starglobe', 'column', 'coral', 'bonsai',
+  // Wave C: Orange / frontier / Sinnoh regional props (S3/S3B + the
+  // generic prop kinds those towns use) — same kit-ground treatment.
+  'honeytree', 'ironarch', 'contestdome', 'marshreed', 'solarpanel',
+  'originstone', 'shrine', 'switchboard', 'gamestation', 'trophycase',
+  'sandcolumn', 'icecrystal']);
+// Props often stand on authored floor families (Dewford sand,
+// Fortree/Pacifidlog boardwalk): the prop underlay follows the floor
+// family south of the prop instead of defaulting to kit grass, so a
+// lifering on the beach keeps its sand (see floorUnder below).
 const KIT_SIGN_KINDS = ['sign-gym', 'sign-mart', 'sign-lab', 'sign-center'];
-function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
+// Wave C: kit interior dressing for house + lab maps. The interior
+// kinds are shared across every region, so one branch dresses all of
+// them; warps, collision and furniture interaction tiles are map data
+// and stay untouched — skin only. Rugs composite over the kit floor;
+// furniture keeps the shipped shadow; paintings hang on the kit wall.
+const KIT_INTERIOR_RE = /^(house-|.*-house$|.*-lab$)/;
+function kitInteriorLayers(cache, kind, x, y) {
+  const KI = cache.kitInt;
+  if (!KI || !KI.floor.length) return null;
+  const floor = pickVariant(KI.floor, x, y, 13) || KI.floor[0];
+  switch (kind) {
+    case 'housefloor': case 'labfloor': return [floor];
+    case 'housewall': return KI.housewall ? [KI.housewall] : null;
+    case 'labwall': return KI.labwall ? [KI.labwall] : null;
+    case 'rug': return [floor, KI.rug].filter(Boolean);
+    case 'rug2': return [floor, KI.rug2].filter(Boolean);
+    case 'bed': return [floor, cache.shadowProp, KI.bed].filter(Boolean);
+    case 'table': return [floor, cache.shadowProp, KI.table].filter(Boolean);
+    case 'chair': return [floor, cache.shadowProp, KI.chair].filter(Boolean);
+    case 'shelf': return [floor, cache.shadowProp, KI.shelf].filter(Boolean);
+    case 'plant': return [floor, cache.shadowProp, KI.plant].filter(Boolean);
+    case 'dresspicture': return KI.painting1 ? [KI.housewall, KI.painting1].filter(Boolean) : null;
+    case 'dresspicture2': return KI.painting2 ? [KI.housewall, KI.painting2].filter(Boolean) : null;
+    default: return null;
+  }
+}
+function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
   const K = cache.kitTowns[mapId];
+  const night = phase === 'night';
+  const winWall = night && K.wallWindowLit ? K.wallWindowLit : K.wallWindow;
   const grassBase = pickVariant(K.grass, x, y, 13) || K.grass[0];
   const pathBase = pickVariant(K.path, x, y, 21) || K.path[0] || grassBase;
   const run = (kinds) => {
@@ -142887,45 +143512,75 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
   // native sand road that runs town-to-route across the whole world
   // (Pallet's approved streets are 'path' cells, and the kit's dirt
   // would sever that continuity); tg2- town dirt wears the kit path.
-  if (kind === 'tg-' + mapId) return [grassBase];
-  if (kind === 'tg2-' + mapId) return [pathBase];
-  if (kind === 'tc-' + mapId || kind === 'tree') return [grassBase, K.canopy].filter(Boolean);
-  if (kind === 'td-' + mapId || kind === 'sign') return [grassBase, K.sign].filter(Boolean);
-  if (kind === 'flora-' + mapId || kind === 'flower') return [K.flora || grassBase];
+  // Town-family kinds are matched by prefix, not by mapId suffix:
+  // three Battle Zone towns wear a sister town's kind family
+  // (fight-area is built from tg-sunnyshore kinds, survival-area
+  // from tg-pastoria, resort-area from tg-sunnyshore), and inside a
+  // kit map any tg-/tc-/th- kind IS the local family by construction.
+  if (kind.startsWith('tg-') && !kind.startsWith('tg2-')) return [grassBase];
+  if (kind.startsWith('tg2-')) return [pathBase];
+  if (kind.startsWith('tc-') || kind === 'tree') return [grassBase, K.canopy].filter(Boolean);
+  if (kind.startsWith('td-') || kind === 'sign') return [grassBase, K.sign].filter(Boolean);
+  if (kind.startsWith('flora-') || kind === 'flower') return [K.flora || grassBase];
   if (kind === 'grass') return [K.tall || grassBase];
   if (kind === 'grassground') return [pickVariant(K.grassTex, x, y, 29) || grassBase];
+  // Biome exception to the native-sand rule: in snow/desert sets the
+  // sand road's green fringe transitions read as moss on snow, so the
+  // generic path wears the kit dirt track there (a plowed track on
+  // snow, a worn track in the desert). Green towns keep native sand.
+  if (kind === 'path' && K.biome) return [pathBase];
   // Roofs: house rows (th-) read across their run including any sign
   // seated in the row; service rows (tr-) read across their own run.
-  if (kind === 'th-' + mapId) return [roofPiece(new Set(['th-' + mapId, 'tl-' + mapId, ...KIT_SIGN_KINDS]))].filter(Boolean);
-  if (kind === 'tr-' + mapId) return [roofPiece(new Set(['tr-' + mapId, 'tl-' + mapId]))].filter(Boolean);
-  if (kind === 'tl-' + mapId) {
+  if (kind.startsWith('th-')) return [roofPiece(new Set([kind, 'tl-' + kind.slice(3), ...KIT_SIGN_KINDS]))].filter(Boolean);
+  if (kind.startsWith('tr-')) return [roofPiece(new Set([kind, 'tl-' + kind.slice(3)]))].filter(Boolean);
+  if (kind.startsWith('tl-')) {
     const s = kindAt(x, y + 1);
     const archSouth = !!s && (isArchKind(s) || !!FACADE_GROUPS[s] || !!DOOR_GROUP[s]);
-    return [archSouth ? (K.roofDormer || K.roofM) : (K.wallWindow || K.wallPlain)].filter(Boolean);
+    return [archSouth ? (K.roofDormer || K.roofM) : (winWall || K.wallPlain)].filter(Boolean);
   }
   if (KIT_SIGN_KINDS.includes(kind)) {
-    const sign = cache.kitSvc && cache.kitSvc.signs[kind];
+    let sign = cache.kitSvc && cache.kitSvc.signs[kind];
+    if (night && kind === 'sign-center' && cache.kitSvcLit && cache.kitSvcLit.signs[kind]) sign = cache.kitSvcLit.signs[kind];
     return [roofPiece(new Set(['th-' + mapId, 'tl-' + mapId, ...KIT_SIGN_KINDS])), sign].filter(Boolean);
   }
   // House walls & doors (cabin composites). The wall run spans every
   // house-door kind and the facade panel, so runs read whole.
-  const wallRun = new Set(['tw-' + mapId, 'door-house', 'door-wood-facade', 'door-brick', 'door-wood-l', 'door-wood-r', 'facade-panel']);
-  if (kind === 'tw-' + mapId) {
+  const wallRun = new Set(['tw-' + kind.slice(3), 'door-house', 'door-wood-facade', 'door-brick', 'door-wood-l', 'door-wood-r', 'facade-panel']);
+  if (kind.startsWith('tw-')) {
     const [c, last] = run(wallRun);
-    return [c === last && last > 0 ? K.wallWindow : K.wallPlain].filter(Boolean);
+    return [c === last && last > 0 ? (winWall || K.wallPlain) : K.wallPlain].filter(Boolean);
   }
   if (kind === 'facade-panel') return [K.wallPlain].filter(Boolean);
   if (kind === 'door-house' || kind === 'door-wood-facade' || kind === 'door-brick') return [K.door].filter(Boolean);
   if (kind === 'door-wood-l') return [K.door].filter(Boolean);
   if (kind === 'door-wood-r') return [K.doorR || K.door].filter(Boolean);
+  // Generic shared buildings (Wave C): Orange / frontier / Sinnoh
+  // towns whose houses and service blocks use the shared roof and
+  // wall families instead of per-town tr-/tw- rows. Roof rows read
+  // across their whole family (+ signs) and wear the kit roof, like
+  // tr- rows; generic house walls wear the kit wall pieces with the
+  // same run-end window rule as tw- rows. Service walls themselves
+  // (wall-center / wall-mart / wall-gym / wall-lab) stay with the
+  // SVC grade below — silhouette + signage are identity.
+  if (kind.startsWith('roof-')) {
+    const base = kind.replace(/-[lmr]$/, '');
+    return [roofPiece(new Set([base + '-l', base + '-m', base + '-r', ...KIT_SIGN_KINDS]))].filter(Boolean);
+  }
+  if (kind === 'wall-house-lit' || kind === 'wall-house-unlit' || kind === 'wall-house-plain' ||
+      kind === 'wall-wood-lit' || kind === 'wall-brick-lit' || kind === 'wall-brick-plain') {
+    const [c, last] = run(new Set([kind, 'door-house', 'door-brick', 'door-wood-facade', 'door-wood-l', 'door-wood-r', 'facade-panel']));
+    return [c === last && last > 0 ? (winWall || K.wallPlain) : K.wallPlain].filter(Boolean);
+  }
   // Service buildings: kit-family grade, authored shape — the facade
-  // upper/side composition mirrors the shipped facade branch.
+  // upper/side composition mirrors the shipped facade branch. At
+  // night the lit-window grade (kitSvcLit) takes the facade's place.
   const SVC = cache.kitSvc;
   if (SVC) {
-    if (SVC.facade[kind]) {
+    const fa0 = (night && cache.kitSvcLit && cache.kitSvcLit.facade[kind]) || SVC.facade[kind];
+    if (fa0) {
       const grp = FACADE_GROUPS[kind];
       const inGrp = (k) => !!k && (FACADE_GROUPS[k] === grp || DOOR_GROUP[k] === grp);
-      const fa = SVC.facade[kind];
+      const fa = fa0;
       const upper = inGrp(kindAt(x, y + 1) ?? kind);
       const side = !inGrp(kindAt(x - 1, y) ?? kind) || !inGrp(kindAt(x + 1, y) ?? kind);
       const cv = upper
@@ -142940,12 +143595,48 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
   // this they would sit on the drawn town-ground tiles and read as
   // pale patches in a kit town. Underlay follows the ground family
   // south of the prop, as the shipped prop branch reads it.
+  // Floor-family underlay (Wave B): where the cell south of an object
+  // is an authored floor family of its own (sand, boardwalk, and the
+  // other own-family floors), the object keeps standing on that floor
+  // — kit grass must not pave a beach or a raft deck.
+  const floorUnder = (s) => {
+    if (!s) return null;
+    // Town ground is its own family in groundFamilyOf — but inside a
+    // kit town the kit stack owns it; never fall back to the native
+    // town-ground canvas here.
+    if (s.startsWith('tg-') || s.startsWith('tg2-')) return null;
+    if (s.startsWith('psand-')) return pickVariant(cache.pathVariants, x, y, 21) || cache.path || null;
+    const fam = groundFamilyOf(s);
+    if (fam && fam === s && s !== 'grass') return groundBase(cache, fam, x, y);
+    if (fam === 'tropgrass') return groundBase(cache, 'tropgrass', x, y);
+    return null;
+  };
   if (KIT_PROP_KINDS.has(kind)) {
     const s = kindAt(x, y + 1);
     let under = pickVariant(K.grassTex, x, y, 29) || grassBase;
-    if (s === 'tg2-' + mapId) under = pathBase;
+    if (s && s.startsWith('tg2-')) under = pathBase;
     else if (s === 'path') under = pickVariant(cache.pathVariants, x, y, 21) || cache.path || grassBase;
+    else { const fu = floorUnder(s); if (fu) under = fu; }
     return [under, cache.shadowProp, cache[kind]].filter(Boolean);
+  }
+  // Rocks & fences (Wave B): the kit has neither, so the authored
+  // objects stay — composited over kit ground with the same shadow +
+  // boulder pick the shipped branch uses, so a town rock and a route
+  // rock read as one family. Rocks south of a cave mouth keep the
+  // cave boulder variant, as shipped.
+  if (kind === 'rock') {
+    const s = kindAt(x, y + 1);
+    let under = grassBase;
+    if (s && s.startsWith('tg2-')) under = pathBase;
+    else { const fu = floorUnder(s); if (fu) under = fu; }
+    return [under, cache.shadowRock, boulderCanvasFor(cache, x, y, s === 'cavefloor')].filter(Boolean);
+  }
+  if (kind === 'fence') {
+    const s = kindAt(x, y + 1);
+    let under = pickVariant(K.grassTex, x, y, 29) || grassBase;
+    if (s && s.startsWith('tg2-')) under = pathBase;
+    else { const fu = floorUnder(s); if (fu) under = fu; }
+    return [under, cache.shadowProp, cache.fence].filter(Boolean);
   }
   return null;
 }
@@ -142960,11 +143651,18 @@ function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     return k == null ? kind : k;
   };
   const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
+  // Kit interiors (Wave C): house + lab maps wear the kit's interior
+  // set (see kitInteriorLayers); uncovered interior kinds fall
+  // through to the shipped composition below.
+  if (mapId && cache.kitInt && KIT_INTERIOR_RE.test(mapId)) {
+    const il = kitInteriorLayers(cache, kind, x, y);
+    if (il) return il;
+  }
   // Kit towns: the kit stack replaces the composed layers wholesale
   // for covered kinds (see kitTownLayers); uncovered kinds fall
   // through to the shipped composition below.
   if (mapId && cache.kitTowns && cache.kitTowns[mapId]) {
-    const kl = kitTownLayers(cache, kind, x, y, kindAt, mapId);
+    const kl = kitTownLayers(cache, kind, x, y, kindAt, mapId, phase);
     if (kl) return kl;
   }
   const tt = t || 0; // W3: t < 0 = reduced-motion freeze (animFrame -> 0)
@@ -204441,7 +205139,7 @@ class OverworldScene {
     if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
     if (g.state.settings.reducedMotion) { this.doWarp(to, wp); return; }
     const kind = g.tileKind(this.tileAt(this.player.tx, this.player.ty));
-    const door = g.doorOpenSprite ? (g.doorOpenSprite(kind) ? kind : null) : null;
+    const door = g.doorOpenSprite ? (g.doorOpenSprite(kind, this.mapId) ? kind : null) : null;
     this.warpFx = {
       to, wp, phase: door ? 'door' : 'out', t: 0,
       doorKind: door, doorX: this.player.tx, doorY: this.player.ty,
@@ -204907,7 +205605,7 @@ class OverworldScene {
     // light spill on the threshold cell south of it.
     if (this.warpFx && this.warpFx.phase === 'door' && this.warpFx.doorKind) {
       const fx = this.warpFx;
-      const spr = g.doorOpenSprite ? g.doorOpenSprite(fx.doorKind) : null;
+      const spr = g.doorOpenSprite ? g.doorOpenSprite(fx.doorKind, this.mapId) : null;
       const c = r.ctx;
       c.fillStyle = 'rgba(255,214,130,0.35)';
       c.fillRect(fx.doorX * T, (fx.doorY + 1) * T, T, T);
@@ -210482,7 +211180,7 @@ class Game {
 
   // Premium+ W7 (TX-6/PL-1): the authored door-open frame for a door
   // kind (W6 registry), used by the warp-fade engine's door beat.
-  doorOpenSprite(kind) { return doorOpenCanvas(doc, kind); }
+  doorOpenSprite(kind, mapId) { const kit = mapId && this.tileCache && this.tileCache.kitTowns && this.tileCache.kitTowns[mapId] ? this.tileCache.doorOpenKit : null; return (kit && kit[kind]) || doorOpenCanvas(doc, kind); }
 
   // Premium+ W7 (TX-7): the foreground rule (canopy overhangs + roof
   // eaves), shared verbatim with the W7 census.

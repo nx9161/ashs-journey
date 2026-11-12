@@ -623,7 +623,7 @@ export class OverworldScene {
     if (to.map === 'mart' && wp.via) this.martReturn = wp.via;
     if (g.state.settings.reducedMotion) { this.doWarp(to, wp); return; }
     const kind = g.tileKind(this.tileAt(this.player.tx, this.player.ty));
-    const door = g.doorOpenSprite ? (g.doorOpenSprite(kind) ? kind : null) : null;
+    const door = g.doorOpenSprite ? (g.doorOpenSprite(kind, this.mapId) ? kind : null) : null;
     this.warpFx = {
       to, wp, phase: door ? 'door' : 'out', t: 0,
       doorKind: door, doorX: this.player.tx, doorY: this.player.ty,
@@ -1089,7 +1089,7 @@ export class OverworldScene {
     // light spill on the threshold cell south of it.
     if (this.warpFx && this.warpFx.phase === 'door' && this.warpFx.doorKind) {
       const fx = this.warpFx;
-      const spr = g.doorOpenSprite ? g.doorOpenSprite(fx.doorKind) : null;
+      const spr = g.doorOpenSprite ? g.doorOpenSprite(fx.doorKind, this.mapId) : null;
       const c = r.ctx;
       c.fillStyle = 'rgba(255,214,130,0.35)';
       c.fillRect(fx.doorX * T, (fx.doorY + 1) * T, T, T);

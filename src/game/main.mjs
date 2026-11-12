@@ -105,7 +105,7 @@ export class Game {
 
   // Premium+ W7 (TX-6/PL-1): the authored door-open frame for a door
   // kind (W6 registry), used by the warp-fade engine's door beat.
-  doorOpenSprite(kind) { return doorOpenCanvas(doc, kind); }
+  doorOpenSprite(kind, mapId) { const kit = mapId && this.tileCache && this.tileCache.kitTowns && this.tileCache.kitTowns[mapId] ? this.tileCache.doorOpenKit : null; return (kit && kit[kind]) || doorOpenCanvas(doc, kind); }
 
   // Premium+ W7 (TX-7): the foreground rule (canopy overhangs + roof
   // eaves), shared verbatim with the W7 census.
