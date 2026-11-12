@@ -13,7 +13,7 @@
 import { ART } from '../../assets/sprites/art-data.mjs';
 import { KIT_ART } from '../../assets/sprites/kit-art-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
-import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, TOWN_STYLE } from './tiles.mjs';
+import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
 import { battlerDrawSize } from '../data/battler-tiers.mjs';
 
@@ -727,6 +727,9 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     const a = hexRgbOf(hex), b = hexRgbOf(toward);
     return '#' + a.map((v, i) => Math.max(0, Math.min(255, Math.round(v + (b[i] - v) * f))).toString(16).padStart(2, '0')).join('');
   };
+  // Ground anchors live in three regional style tables (tiles.mjs);
+  // the vegetation tint reads whichever table owns the town.
+  const TOWN_STYLE_ANY = { ...TOWN_STYLE, ...JOHTO_TOWN_STYLE, ...HOENN_TOWN_STYLE };
   const KIT_VARIANTS = {
     pallet: null, // reference: authored kit colors
     viridian: { roof: ['#54687e', '#333f4f', '#7d92a8'], log: '#7d5226', door: '#46586e' }, // gabled slate
@@ -738,12 +741,41 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     lavender: { roof: ['#4d3d63', '#2d2338', '#71618c'], log: '#6e4f2a', door: '#4a3a5e' }, // steep dark shingle
     fuchsia: { roof: ['#b08d4f', '#6e5626', '#cfa860'], log: '#8d5f2b', door: '#96684a' }, // safari thatch
     cinnabar: { roof: ['#7d3a34', '#452723', '#a96152'], log: '#7d4a2b', door: '#87493f' }, // basalt slab
+    // ---- Wave B: Johto (keyed to JOHTO_TOWN_STYLE forms) ----
+    newbark: { roof: ['#7fa3a1', '#4c6e6c', '#a8c4c0'], log: '#8a6844', door: '#527a76' }, // lakeside-lab modern: pale teal slate
+    cherrygrove: { roof: ['#c48a94', '#8a5560', '#dda8ae'], log: '#7d5226', door: '#a86a72' }, // coastal flower gable: cherry pink
+    violet: { roof: ['#8d84a0', '#5b5470', '#aba2bc'], log: '#6e5a44', door: '#5e5470' }, // tower-town stone: grey violet
+    azalea: { roof: ['#5d8a4a', '#3c5c2e', '#84a866'], log: '#6b4a26', door: '#4e6e38' }, // forest-edge timber: moss
+    goldenrod: { roof: ['#93512e', '#63341d', '#b26f45'], log: '#8a6a48', door: '#74422a' }, // urban brick slab
+    ecruteak: { roof: ['#6e4530', '#402818', '#8f6248'], log: '#7d4a26', door: '#5e3016' }, // traditional timber: dark cedar
+    olivine: { roof: ['#b04a3c', '#74302a', '#cc7263'], log: '#7d5a30', door: '#8a3f34' }, // port + lighthouse: harbor red
+    cianwood: { roof: ['#a5946f', '#6f6444', '#c2b28c'], log: '#8a6f45', door: '#77643c' }, // rustic island stone: driftwood sand
+    mahogany: { roof: ['#476e4e', '#2c4632', '#648a68'], log: '#6e5230', door: '#3c5c42' }, // quiet lakeside timber: deep pine
+    blackthorn: { roof: ['#3f4a6e', '#272e47', '#5d6a8f'], log: '#5e4a30', door: '#35406b' }, // mountain slate + dragon motifs: charcoal
+    silvertown: { roof: ['#c9c9d4', '#8f8fa3', '#e2e2ea'], log: '#9a8a70', door: '#a8a8ba' }, // league marble: silver
+    // ---- Wave B: Hoenn (keyed to HOENN_TOWN_STYLE forms) ----
+    littleroot: { roof: ['#c08d45', '#7d551f', '#dcab62'], log: '#7d5226', door: '#8a5a2a' }, // starter-village timber: honey cedar
+    oldale: { roof: ['#c2a054', '#856830', '#d9bc76'], log: '#8a6a3d', door: '#97742f' }, // dry-meadow gable: weathered straw
+    petalburg: { roof: ['#75997c', '#4a6b52', '#9ab89e'], log: '#75603d', door: '#5d7d66' }, // park-pond stone: sage
+    rustboro: { roof: ['#84776a', '#52453a', '#a29885'], log: '#77644a', door: '#5e5648' }, // company-city cut stone: warm grey
+    dewford: { roof: ['#4fa3a5', '#2f6e70', '#79c2c0'], log: '#8a6f4d', door: '#3d8587' }, // island surf shack: surf teal
+    slateport: { roof: ['#d9c096', '#a68a5c', '#ecd9ae'], log: '#8d6a3a', door: '#b0874f' }, // harbor market canvas: cream
+    mauville: { roof: ['#98913f', '#605c22', '#bab45e'], log: '#7a6a3a', door: '#3f7d7a' }, // electric grid slab: olive bronze, teal door
+    verdanturf: { roof: ['#d8aebc', '#a87a8c', '#eccfd9'], log: '#7d5f36', door: '#a87a8f' }, // contest-garden trellis: pale rose
+    fallarbor: { roof: ['#a39a90', '#6e675e', '#bab2a6'], log: '#7a6a55', door: '#7d7468' }, // ash-country timber: ash grey
+    lavaridge: { roof: ['#c06a35', '#7d421f', '#da8f5a'], log: '#7d4a2b', door: '#96452a' }, // hot-spring volcanic stone: rust
+    fortree: { roof: ['#3f6b28', '#274716', '#5d8742'], log: '#6b4a26', door: '#3f6b28' }, // canopy treehouse: deep canopy green
+    lilycove: { roof: ['#9a7fb8', '#66538a', '#bfa8d4'], log: '#7d6248', door: '#7d639e' }, // contest-port lavender tile
+    mossdeep: { roof: ['#bcd4da', '#84a3ab', '#dcebef'], log: '#8a7a5c', door: '#6f9aa8' }, // space-center pale slab: pale cyan
+    sootopolis: { roof: ['#e6e1d5', '#b0aa9c', '#f4f1ea'], log: '#a08b62', door: '#c2bbaa' }, // crater white stone
+    pacifidlog: { roof: ['#9c7648', '#684a26', '#bd9868'], log: '#8d5f2b', door: '#a34d3f' }, // raft-timber float, coral door
+    evergrande: { roof: ['#c3cfe6', '#969fb5', '#e6eaf2'], log: '#8a7a52', door: '#b8933f' }, // league marble + gold door
   };
   const KIT_VEG_IDS = new Set(['kit-grass-1', 'kit-grass-2', 'kit-grass-3', 'kit-tallgrass', 'kit-flora', 'kit-canopy']);
   const kitSeasonFn = seasonKitSwapFor || seasonSwapFor;
   const buildKitSet = (townId) => {
     const variant = townId ? (KIT_VARIANTS[townId] || null) : null;
-    const anchor = townId && TOWN_STYLE[townId] ? TOWN_STYLE[townId].ground : null;
+    const anchor = townId && TOWN_STYLE_ANY[townId] ? TOWN_STYLE_ANY[townId].ground : null;
     // hex -> hex remap for one kit entry under this town's variant:
     // structural colors swap outright; vegetation greens tint toward
     // the town's ground anchor (composed BEFORE the seasonal grade,
@@ -805,6 +837,8 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
   cache.kitTowns = {};
   for (const townId of Object.keys(KIT_VARIANTS)) cache.kitTowns[townId] = buildKitSet(townId);
   cache.kitTowns.route1 = buildKitSet(null); // Pallet->Viridian corridor: reference kit dressing
+  cache.kitTowns.r29 = buildKitSet('newbark'); // Wave B: Johto starter corridor wears New Bark's set
+  cache.kitTowns.r101 = buildKitSet('littleroot'); // Wave B: Hoenn starter corridor wears Littleroot's set
   if (!cache.kitTowns.pallet.grass.length || !cache.kitTowns.pallet.door) delete cache.kitTowns;
   cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6', 'tile-grass-7', 'tile-grass-8', 'tile-grass-9', 'tile-grass-10']); // W5 TX-1: 10 base variants
   cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4', 'tile-tallgrass-5', 'tile-tallgrass-6']); // W5 TX-1: 6 tall variants
@@ -1323,7 +1357,21 @@ function atmoKeyFor(mapId) {
 // no map data, warp, or collision is touched.
 const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall',
   'waterpump', 'barrel', 'haycart', 'well', 'sacks', 'tub', 'bench', 'planter',
-  'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch']);
+  'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch',
+  // Wave B: Johto/Hoenn regional props (J3/H3/H3B kinds + the W6 props
+  // those towns use) — same kit-ground treatment as the Kanto set.
+  'maple', 'apricorn', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
+  'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
+  'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
+  'starglobe', 'column', 'coral', 'bonsai']);
+// The Wave B regional props often stand on authored floor families
+// (Dewford sand, Fortree/Pacifidlog boardwalk): for these kinds the
+// underlay follows the floor family south of the prop instead of
+// defaulting to kit grass, so a lifering on the beach keeps its sand.
+const KIT_REGION_PROP_KINDS = new Set(['maple', 'apricorn', 'jwell', 'stonebell',
+  'leaguefountain', 'snackmachine', 'fossildisplay', 'lifering', 'divingtank',
+  'coil', 'batterypack', 'contestarch', 'ashshrub', 'forge', 'meteorstone',
+  'telescope', 'starglobe', 'column', 'coral', 'bonsai']);
 const KIT_SIGN_KINDS = ['sign-gym', 'sign-mart', 'sign-lab', 'sign-center'];
 function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
   const K = cache.kitTowns[mapId];
@@ -1398,12 +1446,44 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
   // this they would sit on the drawn town-ground tiles and read as
   // pale patches in a kit town. Underlay follows the ground family
   // south of the prop, as the shipped prop branch reads it.
+  // Floor-family underlay (Wave B): where the cell south of an object
+  // is an authored floor family of its own (sand, boardwalk, and the
+  // other own-family floors), the object keeps standing on that floor
+  // — kit grass must not pave a beach or a raft deck.
+  const floorUnder = (s) => {
+    if (!s) return null;
+    if (s.startsWith('psand-')) return pickVariant(cache.pathVariants, x, y, 21) || cache.path || null;
+    const fam = groundFamilyOf(s);
+    if (fam && fam === s) return groundBase(cache, fam, x, y);
+    if (fam === 'tropgrass') return groundBase(cache, 'tropgrass', x, y);
+    return null;
+  };
   if (KIT_PROP_KINDS.has(kind)) {
     const s = kindAt(x, y + 1);
     let under = pickVariant(K.grassTex, x, y, 29) || grassBase;
     if (s === 'tg2-' + mapId) under = pathBase;
     else if (s === 'path') under = pickVariant(cache.pathVariants, x, y, 21) || cache.path || grassBase;
+    else if (KIT_REGION_PROP_KINDS.has(kind)) { const fu = floorUnder(s); if (fu) under = fu; }
     return [under, cache.shadowProp, cache[kind]].filter(Boolean);
+  }
+  // Rocks & fences (Wave B): the kit has neither, so the authored
+  // objects stay — composited over kit ground with the same shadow +
+  // boulder pick the shipped branch uses, so a town rock and a route
+  // rock read as one family. Rocks south of a cave mouth keep the
+  // cave boulder variant, as shipped.
+  if (kind === 'rock') {
+    const s = kindAt(x, y + 1);
+    let under = grassBase;
+    if (s === 'tg2-' + mapId) under = pathBase;
+    else { const fu = floorUnder(s); if (fu) under = fu; }
+    return [under, cache.shadowRock, boulderCanvasFor(cache, x, y, s === 'cavefloor')].filter(Boolean);
+  }
+  if (kind === 'fence') {
+    const s = kindAt(x, y + 1);
+    let under = pickVariant(K.grassTex, x, y, 29) || grassBase;
+    if (s === 'tg2-' + mapId) under = pathBase;
+    else { const fu = floorUnder(s); if (fu) under = fu; }
+    return [under, cache.shadowProp, cache.fence].filter(Boolean);
   }
   return null;
 }
