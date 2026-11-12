@@ -309,11 +309,17 @@ export function fillV2Defaults(data) {
   // Orange set opens with badges.orange = [] and loses nothing (the
   // other sets pass through untouched when present and well-shaped).
   if (isObj(data.badges)) {
-    if (!Array.isArray(data.badges.orange)) data.badges.orange = [];
-    if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
-    if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
-    if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
-    if (!Array.isArray(data.badges.sinnoh)) data.badges.sinnoh = [];
+    // Wave E (s6 triage): fill only ABSENT sets. The old any-non-array
+    // repair silently rewrote a present-but-malformed set (badges.kanto
+    // as a string) to [] BEFORE validateSave ran, making its strict
+    // 'bad-badges' reject dead code — a corrupted save loaded as valid.
+    // Present-but-wrong is the validator's reject, the same contract
+    // contest/frontier keep; absent (legacy saves) still fills.
+    if (data.badges.orange === undefined) data.badges.orange = [];
+    if (data.badges.kanto === undefined) data.badges.kanto = [];
+    if (data.badges.johto === undefined) data.badges.johto = [];
+    if (data.badges.hoenn === undefined) data.badges.hoenn = [];
+    if (data.badges.sinnoh === undefined) data.badges.sinnoh = [];
     // Stage F0: the symbols fill PRESERVES earned tiers and repairs
     // only the shape — a non-array becomes all-null, a wrong length
     // pads/truncates with nulls, an invalid entry becomes null. A
