@@ -820,7 +820,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -1483,7 +1483,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
