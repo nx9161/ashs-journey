@@ -1342,7 +1342,7 @@ export const SPECIES2 = {
     evo: { to: 'togetic', method: 'level', level: 25 },
   },
   marill: {
-    id: 'marill', name: 'Marill', dexNo: 183, types: ['water', 'fairy'],
+    id: 'marill', name: 'AQUALET', dexNo: 183, types: ['water', 'fairy'],
     base: { hp: 70, atk: 20, def: 50, spa: 20, spd: 50, spe: 40 },
     catchRate: 190, growth: 'fast', baseXp: 88, body: 'quad', spriteSeed: 18301,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10,

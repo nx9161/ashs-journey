@@ -254,7 +254,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'flaaffy', method: 'level', level: 115 }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   flaaffy: {
-    id: 'flaaffy', name: 'Flaaffy', dexNo: 180, types: ['electric'],
+    id: 'flaaffy', name: 'AMPFLEECE', dexNo: 180, types: ['electric'],
     base: { hp: 70, atk: 55, def: 55, spa: 80, spd: 60, spe: 45 },
     catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'biped', spriteSeed: 18001,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -263,7 +263,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'ampharos', method: 'level', level: 130 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   ampharos: {
-    id: 'ampharos', name: 'Ampharos', dexNo: 181, types: ['electric'],
+    id: 'ampharos', name: 'LUMENECK', dexNo: 181, types: ['electric'],
     base: { hp: 90, atk: 75, def: 85, spa: 115, spd: 90, spe: 55 },
     catchRate: 45, growth: 'mediumslow', baseXp: 230, body: 'biped', spriteSeed: 18101,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -272,7 +272,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
   },
   bellossom: {
-    id: 'bellossom', name: 'Bellossom', dexNo: 182, types: ['grass'],
+    id: 'bellossom', name: 'HULABLOOM', dexNo: 182, types: ['grass'],
     base: { hp: 75, atk: 80, def: 95, spa: 90, spd: 100, spe: 50 },
     catchRate: 45, growth: 'mediumslow', baseXp: 221, body: 'biped', spriteSeed: 18201,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -281,7 +281,7 @@ export const SPECIES_JOHTO = {
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   azumarill: {
-    id: 'azumarill', name: 'Azumarill', dexNo: 184, types: ['water', 'fairy'],
+    id: 'azumarill', name: 'BUBBLEAR', dexNo: 184, types: ['water', 'fairy'],
     base: { hp: 100, atk: 50, def: 80, spa: 60, spd: 80, spe: 50 },
     catchRate: 75, growth: 'fast', baseXp: 189, body: 'biped', spriteSeed: 18401,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10,
@@ -290,7 +290,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   sudowoodo: {
-    id: 'sudowoodo', name: 'Sudowoodo', dexNo: 185, types: ['rock'],
+    id: 'sudowoodo', name: 'PETRITREE', dexNo: 185, types: ['rock'],
     base: { hp: 70, atk: 100, def: 115, spa: 30, spd: 65, spe: 30 },
     catchRate: 65, growth: 'mediumfast', baseXp: 144, body: 'biped', spriteSeed: 18501,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -299,7 +299,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   politoed: {
-    id: 'politoed', name: 'Politoed', dexNo: 186, types: ['water'],
+    id: 'politoed', name: 'CROAKING', dexNo: 186, types: ['water'],
     base: { hp: 90, atk: 75, def: 75, spa: 90, spd: 100, spe: 70 },
     catchRate: 45, growth: 'mediumslow', baseXp: 225, body: 'biped', spriteSeed: 18601,
     eggGroups: ['water1'], hatchCounter: 20,
@@ -308,7 +308,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   hoppip: {
-    id: 'hoppip', name: 'Hoppip', dexNo: 187, types: ['grass', 'flying'],
+    id: 'hoppip', name: 'DRIFLET', dexNo: 187, types: ['grass', 'flying'],
     base: { hp: 35, atk: 35, def: 40, spa: 35, spd: 55, spe: 50 },
     catchRate: 255, growth: 'mediumslow', baseXp: 50, body: 'biped', spriteSeed: 18701,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -317,7 +317,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'skiploom', method: 'level', level: 118 }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
   },
   skiploom: {
-    id: 'skiploom', name: 'Skiploom', dexNo: 188, types: ['grass', 'flying'],
+    id: 'skiploom', name: 'FLORASOL', dexNo: 188, types: ['grass', 'flying'],
     base: { hp: 55, atk: 45, def: 50, spa: 45, spd: 65, spe: 80 },
     catchRate: 120, growth: 'mediumslow', baseXp: 119, body: 'biped', spriteSeed: 18801,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -326,7 +326,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'jumpluff', method: 'level', level: 127 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   jumpluff: {
-    id: 'jumpluff', name: 'Jumpluff', dexNo: 189, types: ['grass', 'flying'],
+    id: 'jumpluff', name: 'PUFFDRIFT', dexNo: 189, types: ['grass', 'flying'],
     base: { hp: 75, atk: 55, def: 70, spa: 55, spd: 95, spe: 110 },
     catchRate: 45, growth: 'mediumslow', baseXp: 207, body: 'biped', spriteSeed: 18901,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -335,7 +335,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   aipom: {
-    id: 'aipom', name: 'Aipom', dexNo: 190, types: ['normal'],
+    id: 'aipom', name: 'TAILGRIP', dexNo: 190, types: ['normal'],
     base: { hp: 55, atk: 70, def: 55, spa: 40, spd: 55, spe: 85 },
     catchRate: 45, growth: 'fast', baseXp: 72, body: 'biped', spriteSeed: 19001,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -344,7 +344,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'ambipom', method: 'level', level: 310 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   sunkern: {
-    id: 'sunkern', name: 'Sunkern', dexNo: 191, types: ['grass'],
+    id: 'sunkern', name: 'KERNLET', dexNo: 191, types: ['grass'],
     base: { hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30 },
     catchRate: 235, growth: 'mediumslow', baseXp: 36, body: 'blob', spriteSeed: 19101,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -353,7 +353,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'sunflora', method: 'stone', stone: 'sunstone' }, tm: [3, 6, 9, 10, 20, 21, 22, 28, 31, 32, 34, 44, 50, 101],
   },
   sunflora: {
-    id: 'sunflora', name: 'Sunflora', dexNo: 192, types: ['grass'],
+    id: 'sunflora', name: 'PETALGRIN', dexNo: 192, types: ['grass'],
     base: { hp: 75, atk: 75, def: 55, spa: 105, spd: 85, spe: 30 },
     catchRate: 120, growth: 'mediumslow', baseXp: 149, body: 'biped', spriteSeed: 19201,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -362,7 +362,7 @@ export const SPECIES_JOHTO = {
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 34, 39, 44, 50, 101],
   },
   yanma: {
-    id: 'yanma', name: 'Yanma', dexNo: 193, types: ['bug', 'flying'],
+    id: 'yanma', name: 'DARNLET', dexNo: 193, types: ['bug', 'flying'],
     base: { hp: 65, atk: 65, def: 45, spa: 75, spd: 45, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 78, body: 'bird', spriteSeed: 19301,
     eggGroups: ['bug'], hatchCounter: 20,
@@ -371,7 +371,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'yanmega', method: 'level', level: 310 }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   wooper: {
-    id: 'wooper', name: 'Wooper', dexNo: 194, types: ['water', 'ground'],
+    id: 'wooper', name: 'MUDGILL', dexNo: 194, types: ['water', 'ground'],
     base: { hp: 55, atk: 45, def: 45, spa: 25, spd: 25, spe: 15 },
     catchRate: 255, growth: 'mediumfast', baseXp: 42, body: 'quad', spriteSeed: 19401,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -380,7 +380,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'quagsire', method: 'level', level: 120 }, tm: [],
   },
   quagsire: {
-    id: 'quagsire', name: 'Quagsire', dexNo: 195, types: ['water', 'ground'],
+    id: 'quagsire', name: 'BOGLUMP', dexNo: 195, types: ['water', 'ground'],
     base: { hp: 95, atk: 85, def: 85, spa: 65, spd: 65, spe: 35 },
     catchRate: 90, growth: 'mediumfast', baseXp: 151, body: 'biped', spriteSeed: 19501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
