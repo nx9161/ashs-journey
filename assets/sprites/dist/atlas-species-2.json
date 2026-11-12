@@ -53,7 +53,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -66,7 +66,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -1964,7 +1964,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": "dewgong-front",
       "mirror_of": null
@@ -4135,7 +4135,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": "marowak-front",
       "mirror_of": null
@@ -6995,7 +6995,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": "voltorb-front",
       "mirror_of": null
@@ -10075,7 +10075,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10192,7 +10192,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10361,7 +10361,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10517,7 +10517,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11726,7 +11726,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11908,7 +11908,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -12363,7 +12363,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
