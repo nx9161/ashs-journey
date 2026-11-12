@@ -37,7 +37,7 @@ const ALL_MOVES = { ...MOVES, ...MOVES2 };
 // validators check state.contest.ribbons against (emitted into
 // tables.json by gen-tables — never hand-edit the generated table).
 export const CONTEST_HALLS = ['verdanturf', 'fallarbor', 'slateport', 'lilycove'];
-// Arc 4 Stage S4: Super Contests — Hearthome is THE Super Contest
+// Arc 4 Stage S4: Super Contests — Inglenook is THE Super Contest
 // hall in Platinum: one hall, four ranks (Normal/Great/Ultra/Master),
 // implemented as data on the shipped contest engine. Each rank is a
 // hall key of its own (its own NPC field below, its own ribbon), and
@@ -60,10 +60,10 @@ export const RIBBON_NAMES = {
   fallarbor: 'Ashfall Ribbon',
   slateport: 'Fairhaven Ribbon',
   lilycove: 'Lotus Cove Ribbon',
-  'hearthome-normal': 'Hearthome Ribbon (Normal Rank)',
-  'hearthome-great': 'Hearthome Ribbon (Great Rank)',
-  'hearthome-ultra': 'Hearthome Ribbon (Ultra Rank)',
-  'hearthome-master': 'Hearthome Ribbon (Master Rank)',
+  'hearthome-normal': 'Inglenook Ribbon (Normal Rank)',
+  'hearthome-great': 'Inglenook Ribbon (Great Rank)',
+  'hearthome-ultra': 'Inglenook Ribbon (Ultra Rank)',
+  'hearthome-master': 'Inglenook Ribbon (Master Rank)',
 };
 export const CONTEST_ROUNDS = 4;
 
@@ -176,7 +176,7 @@ export const CONTEST_NPCS = {
     { name: 'NOCT', species: 'banette', script: ['slash', 'firepunch', 'slash', 'firepunch'] },
     { name: 'LUMEN', species: 'milotic', script: ['surf', 'icebeam', 'surf', 'icebeam'] },
   ],
-  // Arc 4 Stage S4: the Super Contest fields, one per Hearthome rank.
+  // Arc 4 Stage S4: the Super Contest fields, one per Inglenook rank.
   // Scripts escalate with rank (appeal 4-5 at Normal, headliners and
   // jam at Master) on the same winnable-with-headliner-play tuning
   // law as the Maris fields.

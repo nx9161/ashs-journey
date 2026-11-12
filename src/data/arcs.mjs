@@ -13,7 +13,7 @@
 //    reset, no obedience cap, no compensating scaling. Nothing in the
 //    transition machine touches the team.
 //  - Amendment 2: per-arc LEVEL BANDS — cap = 100 x bandIndex (Arden
-//    1-100, Yamato 101-200, Maris 201-300, Sinnoh 301-400). Orange SHARES
+//    1-100, Yamato 101-200, Maris 201-300, Borea 301-400). Orange SHARES
 //    Arden's band (it continues Arden's power curve). The Trial Grounds
 //    is OPEN LEVEL (band: null — its facilities match the entrant).
 //
@@ -23,7 +23,7 @@
 //   label          'Arc 1', 'Arc 1.5', ...
 //   region         display name of the region
 //   regionKey      the story.region value while this arc is current
-//   edition        the governing edition era (Platinum governs Sinnoh)
+//   edition        the governing edition era (Platinum governs Borea)
 //   chapters       ADR-015 chapter numbers inside this arc
 //   dexHorizon     cumulative national-dex horizon at this arc
 //   band           { min, max, bandIndex } or null (open level)
@@ -169,7 +169,7 @@ export const ARCS = [
     ],
   },
   {
-    id: 'sinnoh', n: 4, label: 'Arc 4', region: 'Sinnoh', regionKey: 'sinnoh',
+    id: 'sinnoh', n: 4, label: 'Arc 4', region: 'Borea', regionKey: 'sinnoh',
     edition: 'Platinum', chapters: [8], dexHorizon: 493,
     band: { min: 301, max: 400, bandIndex: 4 },
     badgeSet: 'sinnoh', badgeTotal: 8,
@@ -181,13 +181,13 @@ export const ARCS = [
       'Eight badges, a god unchained and answered, and the only victory anyone took from the conference\'s darkest trainer. History will remember the attempt — and the Darkrai that fell.',
     ],
     hookLines: [
-      'Gary came by the lab while you were away — back from a northern region called Sinnoh, with an Electivire at his side and stories that sound half like weather reports, half like scripture.',
+      'Gary came by the lab while you were away — back from a northern region called Borea, with an Electivire at his side and stories that sound half like weather reports, half like scripture.',
       'Mountains that touch the sky, lakes older than kingdoms, and something sleeping at the top of the world. He said one more thing: "Tell Ash the north is not finished with trainers like us."',
-      'The Sandgem-bound ship sails from Arcport. Go and see what Gary saw.',
+      'The Shingle-bound ship sails from Arcport. Go and see what Gary saw.',
     ],
     enRouteLines: [
       '— days at sea —',
-      'The air sharpens mile by mile. Ahead: snow on the peaks, and Sinnoh.',
+      'The air sharpens mile by mile. Ahead: snow on the peaks, and Borea.',
     ],
   },
   // ---- Sealed future arcs (post-Platinum; ADR-027 Decision 2) ----
@@ -287,7 +287,7 @@ export const ARC_FINALE_ECHOES = {
   johto: 'Yamato asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Lastlight Conference.',
   hoenn: 'Maris argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
   frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
-  sinnoh: 'And Sinnoh: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
+  sinnoh: 'And Borea: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
 };
 
 export const FINALE_CREDITS_OPEN = [
@@ -307,7 +307,7 @@ export const FINALE_END_CARD = [
 ];
 
 // The committed national horizon: Platinum (ADR-027 Decision 5). Derived
-// from the Sinnoh row so a registry edit moves every presentation at once.
+// from the Borea row so a registry edit moves every presentation at once.
 export const PLATINUM_DEX_HORIZON = (ARCS.find((a) => a.id === 'sinnoh') || { dexHorizon: 493 }).dexHorizon;
 
 export function arcById(id) {
@@ -366,7 +366,7 @@ export function arcDexSpan(arc) {
 
 // Badges earned toward an arc's set. 'symbols' counts the non-null slots
 // of badges.symbols; every other set is a plain array (absent = 0, so the
-// Maris/Sinnoh sets read honestly before their badge arrays exist).
+// Maris/Borea sets read honestly before their badge arrays exist).
 export function badgeCountFor(state, arc) {
   if (!state || !arc) return 0;
   const badges = state.badges || {};

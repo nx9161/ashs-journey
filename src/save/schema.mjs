@@ -207,7 +207,7 @@ export function validateSave(data) {
     if (!Array.isArray(h) || !seq || h.length > seq.length || h.some((id, i) => id !== seq[i])) errors.push('bad-badges-hoenn');
   }
   // Arc 4 Stage S0: badges.sinnoh, when present, must be a PREFIX of
-  // the Sinnoh earn order (BADGE_SETS) — the same rule, the same source.
+  // the Borea earn order (BADGE_SETS) — the same rule, the same source.
   if (isObj(data.badges) && data.badges.sinnoh !== undefined) {
     const sn = data.badges.sinnoh;
     const seq = BADGE_SETS.sinnoh;

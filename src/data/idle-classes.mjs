@@ -419,7 +419,7 @@ export const IDLE_CLASS = {
   deoxysattack: 'hover',
   deoxysdefense: 'hover',
   deoxysspeed: 'hover',
-  // Stage S1 (Arc 4): +114 Sinnoh rows by the same rule.
+  // Stage S1 (Arc 4): +114 Borea rows by the same rule.
 turtwig: 'grounded',
   grotle: 'grounded',
   torterra: 'grounded',

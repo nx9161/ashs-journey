@@ -199,14 +199,14 @@ export const TALE_NPCS = [
   { map: 'vermilion', x: 16, y: 10, name: 'CAPT MARIS', art: 'sailor', skin: '#d8a878', shirt: '#5a2a7a', pants: '#2a2a3a', hair: '#2a1a0a',
     ferry: 'littleroot', ferryArc: 'hoenn',
     dialogue: ['The Rootlet run is the long weather crossing — Maris water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
-  // Arc 4 Stage S0: the Sinnoh embark captain, appended to Arcport's
+  // Arc 4 Stage S0: the Borea embark captain, appended to Arcport's
   // roster through this same loadMap append idiom (Arcport's map def
   // is NOT rewritten). He carries NO tale/role — the ferry handler
   // (overworld-systems, ferryArc 'sinnoh') owns him entirely: gated by
-  // the Foundation embark leg (embark_sinnoh, armed at the Sinnoh
+  // the Foundation embark leg (embark_sinnoh, armed at the Borea
   // homecoming — or by the deriveArcDefaults catch-up for a save that
-  // consumed that homecoming while Sinnoh was still sealed) outbound,
-  // and unconditional once Sinnoh has been reached (NO-SOFT-LOCK LAW).
+  // consumed that homecoming while Borea was still sealed) outbound,
+  // and unconditional once Borea has been reached (NO-SOFT-LOCK LAW).
   // He stands at (14,10) on Arcport's dock row, one tile east of
   // CAPT ORANGE (13,10) and two west of CAPT MARIS (16,10), leaving
   // (15,10) open as the passage between them: a plain ground tile —
@@ -218,9 +218,9 @@ export const TALE_NPCS = [
   // was REJECTED on that evidence: it seals (14,10) — whose only
   // walkable neighbours are captain tiles and HANK's stance — into
   // its own fragment.
-  { map: 'vermilion', x: 14, y: 10, name: 'CAPT SINNOH', art: 'sailor', skin: '#b8c8d8', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#e8e8e8',
+  { map: 'vermilion', x: 14, y: 10, name: 'CAPT BOREA', art: 'sailor', skin: '#b8c8d8', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#e8e8e8',
     ferry: 'sandgem', ferryArc: 'sinnoh',
-    dialogue: ['The Sandgem run is the northern crossing — cold water, colder air, and a mountain on the horizon that gets taller the whole way north.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+    dialogue: ['The Shingle run is the northern crossing — cold water, colder air, and a mountain on the horizon that gets taller the whole way north.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Wave 5b: MOM shifted two tiles, (3,4) -> (4,5). She stood on her
   // own front-door threshold (3,4) — the one-tile gap in the fence
   // row, fed only from (3,5) — so ANY stance in that column seals

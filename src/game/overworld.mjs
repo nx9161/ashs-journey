@@ -209,10 +209,10 @@ export class OverworldScene {
         npcs = [...npcs, ...hoennNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
-      // Arc 4 Stage S5a (Sinnoh story): the same append idiom fields
-      // the Sinnoh story actors (Rowan, Dawn, Barry, Paul, the
+      // Arc 4 Stage S5a (Borea story): the same append idiom fields
+      // the Borea story actors (Rowan, Dawn, Barry, Paul, the
       // commanders, Reggie, the four leaders + gym rosters) and stamps
-      // Sinnoh tale roles onto existing maps9 townsfolk by name
+      // Borea tale roles onto existing maps9 townsfolk by name
       // (SINNOH_NPC_PATCHES, keyed map -> name). The generated maps9
       // definitions are never mutated; the scene works on this copy.
       const sPatches = SINNOH_NPC_PATCHES[id];

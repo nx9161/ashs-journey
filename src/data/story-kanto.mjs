@@ -650,11 +650,11 @@ export const LEGENDARY_ARCS = {
     lair: 'birthisland',
   },
 
-  // ---- Sinnoh (designed) -------------------------------------------------------
+  // ---- Borea (designed) -------------------------------------------------------
   arc_regigigas: {
-    id: 'arc_regigigas', title: 'The One Who Moved Continents', species: 'regigigas', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_regigigas', title: 'The One Who Moved Continents', species: 'regigigas', region: 'Borea', designedOnly: true,
     prereq: { arcs: ['arc_regirock', 'arc_regice', 'arc_registeel'] },
-    hook: 'Snowpoint Temple’s lowest floor sleeps a giant that three smaller giants once served. It wakes only for their company.',
+    hook: 'Rimefall Temple’s lowest floor sleeps a giant that three smaller giants once served. It wakes only for their company.',
     steps: [
       { text: 'Bring Regirock, Regice, and Registeel to the temple', flag: 'regi_trio_present' },
       { text: 'Descend to the temple’s lowest floor' },
@@ -663,111 +663,111 @@ export const LEGENDARY_ARCS = {
     lair: 'snowpointtemple',
   },
   arc_uxie: {
-    id: 'arc_uxie', title: 'The Lake That Knows', species: 'uxie', region: 'Sinnoh', designedOnly: true,
-    hook: 'Lake Acuity is too still. Its guardian holds every memory of the region — and gives away none of them cheaply.',
+    id: 'arc_uxie', title: 'The Lake That Knows', species: 'uxie', region: 'Borea', designedOnly: true,
+    hook: 'Lake Insight is too still. Its guardian holds every memory of the region — and gives away none of them cheaply.',
     steps: [
       { text: 'Calm the crisis at the three great lakes', flag: 'lakes_calmed' },
-      { text: 'Enter the cavern at Lake Acuity’s heart' },
+      { text: 'Enter the cavern at Lake Insight’s heart' },
       { text: 'Face Uxie, level 50', catch: 'uxie' },
     ],
     lair: 'lakeacuity',
   },
   arc_mesprit: {
-    id: 'arc_mesprit', title: 'The Lake That Feels', species: 'mesprit', region: 'Sinnoh', designedOnly: true,
-    hook: 'Lake Verity’s guardian does not wait in its cavern. It runs — and it expects you to understand why that is the test.',
+    id: 'arc_mesprit', title: 'The Lake That Feels', species: 'mesprit', region: 'Borea', designedOnly: true,
+    hook: 'Lake Candor’s guardian does not wait in its cavern. It runs — and it expects you to understand why that is the test.',
     steps: [
       { text: 'Calm the crisis at the three great lakes', flag: 'lakes_calmed' },
-      { text: 'Touch the cavern at Lake Verity’s heart' },
-      { text: 'Chase Mesprit across Sinnoh', catch: 'mesprit' },
+      { text: 'Touch the cavern at Lake Candor’s heart' },
+      { text: 'Chase Mesprit across Borea', catch: 'mesprit' },
     ],
     lair: 'lakeverity',
   },
   arc_azelf: {
-    id: 'arc_azelf', title: 'The Lake That Wills', species: 'azelf', region: 'Sinnoh', designedOnly: true,
-    hook: 'Lake Valor took the worst of the crisis and its guardian took it personally. Willpower answers willpower.',
+    id: 'arc_azelf', title: 'The Lake That Wills', species: 'azelf', region: 'Borea', designedOnly: true,
+    hook: 'Lake Gallant took the worst of the crisis and its guardian took it personally. Willpower answers willpower.',
     steps: [
       { text: 'Calm the crisis at the three great lakes', flag: 'lakes_calmed' },
-      { text: 'Enter the cavern at Lake Valor’s heart' },
+      { text: 'Enter the cavern at Lake Gallant’s heart' },
       { text: 'Face Azelf, level 50', catch: 'azelf' },
     ],
     lair: 'lakevalor',
   },
   arc_dialga: {
-    id: 'arc_dialga', title: 'The Pillar of Time', species: 'dialga', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_dialga', title: 'The Pillar of Time', species: 'dialga', region: 'Borea', designedOnly: true,
     prereq: { arcs: ['arc_uxie', 'arc_mesprit', 'arc_azelf'] },
-    hook: 'Atop Mt. Coronet, someone is trying to unmake the world with a chain the color of old blood. Time itself is watching.',
+    hook: 'Atop Mt. Apex, someone is trying to unmake the world with a chain the color of old blood. Time itself is watching.',
     steps: [
       { text: 'Gather the lake trio’s blessing', flag: 'lake_trio_blessing' },
-      { text: 'Break the Red Chain’s ritual at the Spear Pillar' },
+      { text: 'Break the Red Chain’s ritual at the Zenith Spire' },
       { text: 'Face Dialga, level 70', catch: 'dialga' },
     ],
     lair: 'spearpillar',
   },
   arc_palkia: {
-    id: 'arc_palkia', title: 'The Pillar of Space', species: 'palkia', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_palkia', title: 'The Pillar of Space', species: 'palkia', region: 'Borea', designedOnly: true,
     prereq: { arcs: ['arc_uxie', 'arc_mesprit', 'arc_azelf'] },
-    hook: 'The sky over Mt. Coronet is folding wrong, like a map being crumpled by an unseen hand.',
+    hook: 'The sky over Mt. Apex is folding wrong, like a map being crumpled by an unseen hand.',
     steps: [
       { text: 'Gather the lake trio’s blessing', flag: 'lake_trio_blessing' },
-      { text: 'Break the Red Chain’s ritual at the Spear Pillar' },
+      { text: 'Break the Red Chain’s ritual at the Zenith Spire' },
       { text: 'Face Palkia, level 70', catch: 'palkia' },
     ],
     lair: 'spearpillar',
   },
   arc_giratina: {
-    id: 'arc_giratina', title: 'The World Behind the Waterfall', species: 'giratina', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_giratina', title: 'The World Behind the Waterfall', species: 'giratina', region: 'Borea', designedOnly: true,
     prereq: { arcs: ['arc_uxie', 'arc_mesprit', 'arc_azelf'] },
     hook: 'There is a fourth lake on no map, and a world on the other side of this one, where the banished one keeps the balance.',
     steps: [
       { text: 'Gather the lake trio’s blessing', flag: 'lake_trio_blessing' },
-      { text: 'Enter the Distortion World through the torn sky' },
+      { text: 'Enter the Mirrorworld through the torn sky' },
       { text: 'Face Giratina, level 70', catch: 'giratina' },
     ],
     lair: 'distortionworld',
   },
   arc_darkrai: {
-    id: 'arc_darkrai', title: 'The Nightmare at the Inn', species: 'darkrai', region: 'Sinnoh', designedOnly: true,
-    hook: 'A locked inn in Canalave has had one guest for fifty years. The harbor sailor’s boy has not woken in days.',
+    id: 'arc_darkrai', title: 'The Nightmare at the Inn', species: 'darkrai', region: 'Borea', designedOnly: true,
+    hook: 'A locked inn in Bridgeport has had one guest for fifty years. The harbor sailor’s boy has not woken in days.',
     steps: [
-      { text: 'Help the sailor’s family in Canalave' },
+      { text: 'Help the sailor’s family in Bridgeport' },
       { text: 'Receive the Member Card in a dream you will not remember' },
-      { text: 'Sail to Newmoon Island' },
+      { text: 'Sail to Darkmoon Island' },
       { text: 'Face Darkrai, level 70', catch: 'darkrai' },
     ],
     lair: 'newmoonisland',
   },
   arc_cresselia: {
-    id: 'arc_cresselia', title: 'The Feather of Good Dreams', species: 'cresselia', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_cresselia', title: 'The Feather of Good Dreams', species: 'cresselia', region: 'Borea', designedOnly: true,
     hook: 'For every nightmare there is an antidote, and she keeps hers on an island shaped like the moon’s other half.',
     steps: [
-      { text: 'Take a Lunar Feather from Fullmoon Island' },
-      { text: 'Heal the sailor’s boy in Canalave' },
+      { text: 'Take a Lunar Feather from Brightmoon Island' },
+      { text: 'Heal the sailor’s boy in Bridgeport' },
       { text: 'Chase Cresselia’s crescent trail', catch: 'cresselia' },
     ],
     lair: 'fullmoonisland',
   },
   arc_shaymin: {
-    id: 'arc_shaymin', title: 'The Gratitude Bloom', species: 'shaymin', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_shaymin', title: 'The Gratitude Bloom', species: 'shaymin', region: 'Borea', designedOnly: true,
     hook: 'A white-stone road north of the League ends in a flower field that only blooms for a thankful heart.',
     steps: [
       { text: 'Receive Oak’s Letter' },
-      { text: 'Walk the Seabreak Path with gratitude in mind' },
-      { text: 'Meet Shaymin in the Flower Paradise', catch: 'shaymin' },
+      { text: 'Walk the Foamline Path with gratitude in mind' },
+      { text: 'Meet Shaymin in the Petal Paradise', catch: 'shaymin' },
     ],
     lair: 'flowerparadise',
   },
   arc_heatran: {
-    id: 'arc_heatran', title: 'The Mountain’s Furnace', species: 'heatran', region: 'Sinnoh', designedOnly: true,
-    hook: 'Stark Mountain breathes like a forge, and something has stolen the stone that keeps its temper in check.',
+    id: 'arc_heatran', title: 'The Mountain’s Furnace', species: 'heatran', region: 'Borea', designedOnly: true,
+    hook: 'Grim Mountain breathes like a forge, and something has stolen the stone that keeps its temper in check.',
     steps: [
-      { text: 'Climb Stark Mountain with a local guide' },
+      { text: 'Climb Grim Mountain with a local guide' },
       { text: 'Recover the Magma Stone from the thieves' },
       { text: 'Return the stone — and face Heatran, level 70', catch: 'heatran' },
     ],
     lair: 'starkmountain',
   },
   arc_manaphy: {
-    id: 'arc_manaphy', title: 'The Prince of the Sea Temple', species: 'manaphy', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_manaphy', title: 'The Prince of the Sea Temple', species: 'manaphy', region: 'Borea', designedOnly: true,
     hook: 'An egg, blue as deep water, washes in from a far sea — and the temple it was stolen from is sinking out of legend.',
     steps: [
       { text: 'Receive the mysterious blue egg' },
@@ -778,11 +778,11 @@ export const LEGENDARY_ARCS = {
   },
   // Stage S6 addition to the designed register (Spiritomb's
   // placement was deferred at S1): the stub pre-registers the id in
-  // the validator's quest vocabulary, as the other twelve Sinnoh
+  // the validator's quest vocabulary, as the other twelve Borea
   // stubs did; S6's live entry supersedes it in the merge fold.
   arc_spiritomb: {
-    id: 'arc_spiritomb', title: 'The Hundred and Eight', species: 'spiritomb', region: 'Sinnoh', designedOnly: true,
-    hook: 'A cracked keystone, a ruined tower on the Lost Tower road, and a number the stones keep repeating: one hundred and eight.',
+    id: 'arc_spiritomb', title: 'The Hundred and Eight', species: 'spiritomb', region: 'Borea', designedOnly: true,
+    hook: 'A cracked keystone, a ruined tower on the Forsaken Tower road, and a number the stones keep repeating: one hundred and eight.',
     steps: [
       { text: 'Receive the Odd Keystone' },
       { text: 'Set the keystone into the Hallowed Tower' },
@@ -795,12 +795,12 @@ export const LEGENDARY_ARCS = {
   // vocabulary (the S6 arc_spiritomb precedent); S7's live entry in
   // SINNOH_LEGENDARY_ARCS supersedes it in the merge fold.
   arc_arceus: {
-    id: 'arc_arceus', title: 'The Hall of Origin', species: 'arceus', region: 'Sinnoh', designedOnly: true,
+    id: 'arc_arceus', title: 'The Hall of Dawning', species: 'arceus', region: 'Borea', designedOnly: true,
     hook: 'Above the oldest pillar in the world there is said to be a first room, and in it the one who was present before the chains, before the lakes, before everything — waiting for a flute only a finished road can be trusted with.',
     steps: [
       { text: 'Be entrusted with the Azure Flute at journey\u2019s end' },
-      { text: 'Play it at Spear Pillar, where the stairs should be' },
-      { text: 'Climb to the Hall of Origin', catch: 'arceus' },
+      { text: 'Play it at Zenith Spire, where the stairs should be' },
+      { text: 'Climb to the Hall of Dawning', catch: 'arceus' },
     ],
     lair: 'halloforigin',
   },

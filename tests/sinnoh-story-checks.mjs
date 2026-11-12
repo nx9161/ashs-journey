@@ -416,7 +416,7 @@ const { LEGENDARY_ARCS: DESIGNED_ARCS7 } = await import(join(ROOT, 'src/data/sto
   ok('A38 the Arceus capstone data: the live arc\u2019s steps spell the requirements (finale flag -> the flute at Spear Pillar -> the stairs -> the catch), its lair is the shipped Hall of Origin map; the stairs event is dialogue-only and opens the stairs; the face rides the catch-only chain at band cap 400 with arc-complete + done flag strictly after; the story-kanto designed stub pre-registers the id for the validator vocabulary',
     !!arc7 && !arc7.designedOnly && arc7.prereq === 'arceus_unlocked' && arc7.lair === 'hall-of-origin' && !!ALL_MAPS['hall-of-origin']
     && arc7.steps.length === 3 && arc7.steps[0].flag === 'arceus_unlocked' && arc7.steps[1].flag === 'arceus_stairs_open'
-    && arc7.steps[2].catch === 'arceus' && /Azure Flute/.test(arc7.steps[1].text) && /Spear Pillar/.test(arc7.steps[1].text) && /Hall of Origin/.test(arc7.steps[2].text)
+    && arc7.steps[2].catch === 'arceus' && /Azure Flute/.test(arc7.steps[1].text) && /Zenith Spire/.test(arc7.steps[1].text) && /Hall of Dawning/.test(arc7.steps[2].text)
     && Array.isArray(evStairs) && evStairs.every((s) => !s.wildBattleCatch && !s.battle && !s.battleAny) && evStairs.some((s) => s.flag === 'arceus_stairs_open')
     && bi7 >= 0 && evArc[bi7].wildBattleCatch.species === 'arceus' && evArc[bi7].wildBattleCatch.level === 400 && evArc[bi7].wildBattleCatch.legendary === true
     && evArc.slice(bi7 + 1).some((s) => s.arc === 'arc_arceus' && s.stage === 'complete') && evArc.slice(bi7 + 1).some((s) => s.flag === 'arc_arceus_done')
@@ -560,7 +560,7 @@ const driver = `
 
   // ===== embark =====
   var ow = gotoMap(g, 'vermilion', 13, 9); pump(g);
-  var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT SINNOH'; });
+  var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT BOREA'; });
   ok('B01 CAPT SINNOH stands on Vermilion (ferry sandgem, ferryArc sinnoh)', !!capt && capt.ferry === 'sandgem' && capt.ferryArc === 'sinnoh');
   if (capt) { ow.sysNpc(capt); pump(g, 600); }
   ok('B02 embark drive: Vermilion -> Sandgem on the shipped ferryArc machinery (position sandgem, reachedarc_sinnoh stamped) and the arrival scene completes on the landing (sinnoh_arrival)',
@@ -605,7 +605,7 @@ const driver = `
   var cole = talkName(g, ow, 'MINER COLE'); pump(g, 900);
   ok('B09 a shipped-roster gym trainer battles through the generic trainer path (beat_roark_miner1)', !!cole && !!st.story.flags.beat_roark_miner1);
   ok('B10 Gym 1: Roark awards the Coal Badge in order (badges.sinnoh [coal], badge_coal)', gym('gym-oreburgh', 'roark', 'coalbadge', 'badge_coal') && st.badges.sinnoh.join(',') === 'coalbadge');
-  ok('B11 the HUD objective now leads with the Windworks row of the Sinnoh chain', (function () { var o2 = g.scenes.top; return o2.sysObjective && o2.sysObjective().indexOf('Windworks') >= 0; })());
+  ok('B11 the HUD objective now leads with the Windworks row of the Sinnoh chain', (function () { var o2 = g.scenes.top; return o2.sysObjective && o2.sysObjective().indexOf('Galeworks') >= 0; })());
   // ===== Barry =====
   ow = gotoMap(g, 'jubilife', 13, 12); pump(g);
   var barry = talkKind(g, ow, 'barry'); pump(g);
@@ -673,9 +673,9 @@ const driver = `
   g.openQuestLog(); tk(g, 2);
   var logItems = g.ui.menu ? g.ui.menu.items : [];
   var logLabels = logItems.map(function (i) { return i.label; }).join(' | ');
-  var hasSinnohSection = logLabels.indexOf('— SINNOH —') >= 0
-    && logLabels.indexOf('★ Sail to Sinnoh') >= 0
-    && logLabels.indexOf('★ Veilstone — Paul') >= 0;
+  var hasSinnohSection = logLabels.indexOf('— BOREA —') >= 0
+    && logLabels.indexOf('★ Sail to Borea') >= 0
+    && logLabels.indexOf('★ Shardfall — Paul') >= 0;
   if (g.ui.menuOpen) { var li = logItems.findIndex(function (i) { return i.value === 'close'; }); if (li >= 0) g.ui.debugChoose(li); tk(g, 3); }
   drain(g);
   ok('B26 the Quest Log renders the SINNOH section with the completed first-half rows starred', hasSinnohSection, logLabels.slice(0, 200));
@@ -864,9 +864,9 @@ const driver = `
   g.openQuestLog(); tk(g, 2);
   var logItems2 = g.ui.menu ? g.ui.menu.items : [];
   var logLabels2 = logItems2.map(function (i) { return i.label; }).join(' | ');
-  var hasFinalRows = logLabels2.indexOf('— SINNOH —') >= 0
+  var hasFinalRows = logLabels2.indexOf('— BOREA —') >= 0
     && logLabels2.indexOf('★ The Conference semi-final') >= 0
-    && logLabels2.indexOf('★ The Distortion World') >= 0;
+    && logLabels2.indexOf('★ The Mirrorworld') >= 0;
   if (g.ui.menuOpen) { var li2 = logItems2.findIndex(function (i) { return i.value === 'close'; }); if (li2 >= 0) g.ui.debugChoose(li2); tk(g, 3); }
   drain(g);
   ok('B61 the Quest Log renders the SINNOH section with the second-half rows starred complete (the Distortion World + the semi-final rows)', hasFinalRows, logLabels2.slice(0, 200));
@@ -1017,7 +1017,7 @@ const driver = `
   if (g.ui.menuOpen) { var li3 = logItems3.findIndex(function (i) { return i.value === 'close'; }); if (li3 >= 0) g.ui.debugChoose(li3); tk(g, 3); }
   drain(g);
   ok('C10 THE CAPSTONE APPEARS: after the finale, the Quest Log\\'s Legendary Arcs section lists The Hall of Origin (discovered on the unlock) with its requirement steps spelled out in its card (Azure Flute -> Spear Pillar -> the stairs)',
-    st.story.quests.arc_arceus === 'discovered' && logLabels3.indexOf('The Hall of Origin') >= 0,
+    st.story.quests.arc_arceus === 'discovered' && logLabels3.indexOf('The Hall of Dawning') >= 0,
     logLabels3.slice(0, 240));
 
   // ---- C11-C13: Spear Pillar -> the stairs -> Arceus at the cap ----
@@ -1061,12 +1061,12 @@ const driver = `
   if (g.ui.menuOpen) { var ji = jItems.findIndex(function (i) { return i.value === 'close'; }); if (ji >= 0) g.ui.debugChoose(ji); tk(g, 3); }
   drain(g);
   ok('C18 the Journey menu reads the finished road: all six arc headers COMPLETE, and the future rows stand as one SEALED silhouette band (nothing fake-playable)',
-    ['KANTO — COMPLETE', 'ORANGE ISLANDS — COMPLETE', 'JOHTO — COMPLETE', 'HOENN — COMPLETE', 'BATTLE FRONTIER — COMPLETE', 'SINNOH — COMPLETE']
+    ['ARDEN — COMPLETE', 'ORANGE ISLANDS — COMPLETE', 'YAMATO — COMPLETE', 'MARIS — COMPLETE', 'TRIAL GROUNDS — COMPLETE', 'BOREA — COMPLETE']
       .every(function (s) { return jLabels.indexOf(s) >= 0; })
     && jLabels.indexOf('FUTURE ARCS — SEALED') >= 0,
     jLabels.slice(0, 300));
   ow = gotoMap(g, 'vermilion', 13, 9); pump(g);
-  var capt7 = ow.map.npcs.find(function (n) { return n.name === 'CAPT SINNOH'; });
+  var capt7 = ow.map.npcs.find(function (n) { return n.name === 'CAPT BOREA'; });
   if (capt7) { ow.sysNpc(capt7); pump(g, 600); }
   ok('C19 THE FERRY NETWORK IS WHOLE after the finale + capstone: CAPT SINNOH still sails Vermilion -> Sandgem on the shipped crossing (returns unconditional)',
     !!capt7 && st.story.position.map === 'sandgem', 'pos=' + st.story.position.map);

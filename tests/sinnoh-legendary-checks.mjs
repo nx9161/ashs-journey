@@ -70,7 +70,7 @@ const FACE = {
 {
   ok('A01 the live register carries the thirteen S6 arcs PLUS the S7 Arceus capstone (fourteen, supersedes the S6 exactly-thirteen count), none designedOnly, every species real (dex 442 + 480-488 + 490 + 492 + 493); the designed register in story-kanto carries the arc_spiritomb stub S6 added AND the arc_arceus stub S7 added (the validator-vocabulary pre-registration, Hoenn/Johto precedent)',
     JSON.stringify(Object.keys(SINNOH_LEGENDARY_ARCS).sort()) === JSON.stringify(FOURTEEN.slice().sort())
-    && FOURTEEN.every((id) => { const a = SINNOH_LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Sinnoh' && SPECIES[a.species]; })
+    && FOURTEEN.every((id) => { const a = SINNOH_LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Borea' && SPECIES[a.species]; })
     && JSON.stringify(FOURTEEN.map((id) => SPECIES[SINNOH_LEGENDARY_ARCS[id].species].dexNo).sort((x, y) => x - y)) === JSON.stringify([442, 480, 481, 482, 483, 484, 485, 486, 487, 488, 490, 491, 492, 493])
     && !!DESIGNED_ARCS.arc_spiritomb && DESIGNED_ARCS.arc_spiritomb.designedOnly === true
     && !!DESIGNED_ARCS.arc_arceus && DESIGNED_ARCS.arc_arceus.designedOnly === true);
@@ -328,7 +328,7 @@ const driver = `
 
   ok('B01 the merge fold landed in the bundle: all thirteen LEGENDARY_ARCS entries are LIVE (no designedOnly), the stubs superseded (Giratina lair is the shipped turnback-cave, Regigigas the temple depths, Spiritomb r209)',
     ['arc_uxie','arc_mesprit','arc_azelf','arc_dialga','arc_palkia','arc_giratina','arc_heatran','arc_regigigas','arc_cresselia','arc_darkrai','arc_manaphy','arc_shaymin','arc_spiritomb'].every(function (id) {
-      var a = LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Sinnoh';
+      var a = LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Borea';
     }) && LEGENDARY_ARCS.arc_giratina.lair === 'turnback-cave' && LEGENDARY_ARCS.arc_regigigas.lair === 'snowpoint-temple-depths' && LEGENDARY_ARCS.arc_spiritomb.lair === 'r209');
 
   // ---- B02: Uxie — locked, flee, KO, catch ----
@@ -667,7 +667,7 @@ const driver = `
     g.ui.say = origSay;
     var joined = lines.join(' ');
     ok('B14 the Quest Log LEGENDARY ARCS section renders a Sinnoh arc and its detail view spells out the requirement steps (The Lake That Knows + the climax step + the catch step)',
-      bandOk && entryIdx >= 0 && joined.includes('The Lake That Knows') && joined.includes('Spear Pillar climax') && joined.includes('face Uxie, level 370'),
+      bandOk && entryIdx >= 0 && joined.includes('The Lake That Knows') && joined.includes('Zenith Spire climax') && joined.includes('face Uxie, level 370'),
       'band=' + bandOk + ' entry=' + entryIdx + ' detail=' + joined.slice(0, 120));
   }
 

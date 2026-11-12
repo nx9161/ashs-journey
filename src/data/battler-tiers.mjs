@@ -5,7 +5,7 @@
 // on both sides of the field — staged parity, not uniform parity.
 //
 // Stage H1 (Arc 3): +138 Maris rows appended (395 rows total).
-// Stage S1 (Arc 4): +114 Sinnoh rows appended (509 rows total).
+// Stage S1 (Arc 4): +114 Borea rows appended (509 rows total).
 // Assignment rule (auditable): bulk = base HP + DEF + SPD from the
 // species data (the mass proxy the data carries — no height/weight
 // fields exist). S (52px) below 160, L (80px) at 245+, M (64px)
@@ -416,7 +416,7 @@ export const BATTLER_TIERS = {
   deoxysattack: 'S', // bulk 90
   deoxysdefense: 'L', // bulk 370
   deoxysspeed: 'M', // bulk 230
-  // Stage S1 (Arc 4): +114 Sinnoh rows by the same bulk rule (HP+DEF+SPD).
+  // Stage S1 (Arc 4): +114 Borea rows by the same bulk rule (HP+DEF+SPD).
 turtwig: 'M', // bulk 174
   grotle: 'M', // bulk 225
   torterra: 'L', // bulk 285

@@ -308,13 +308,13 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_hoenn_rayquaza');
       }
     }
-    // Arc 4 Stage S5a (Sinnoh story, first half): map-entry scenes,
+    // Arc 4 Stage S5a (Borea story, first half): map-entry scenes,
     // same idiom — each scene's own completion flag is its gate, so a
     // stalled chain (a fled battleAny, a lost must-win) re-fires on a
     // later entry. The chain order is the fiction's: the landing ->
-    // the lab (Rowan + Paul's first measure) -> the Verity glimpse
+    // the lab (Rowan + Paul's first measure) -> the Candor glimpse
     // (registered trainers only) -> the Windworks (Coal held) -> the
-    // Eterna building (Forest held) -> the Defog grant in the ruins.
+    // Heritage building (Forest held) -> the Defog grant in the ruins.
     if (!arcCardFired && !g.ui.dialogueOpen) {
       const sf = g.state.story.flags;
       if (id === 'sandgem' && g.state.story.arc === 'sinnoh' && !sf.sinnoh_arrival && !sf.ev_sinnoh_arrival_done) {
@@ -331,13 +331,13 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_sinnoh_defog');
       }
     }
-    // Arc 4 Stage S5b (Sinnoh story, second half): map-entry scenes,
+    // Arc 4 Stage S5b (Borea story, second half): map-entry scenes,
     // same idiom and gate law (each scene's completion flag is its
     // gate; a stalled chain re-fires on a later entry). Order:
-    // Valor + the HQ raid (Fen) -> Fullmoon (the sailor's plea) ->
-    // Acuity (Icicle) -> Verity pressure + Celestic's illusion (all
-    // badges) -> Coronet -> Spear Pillar -> the platform. Gracidea
-    // rides Floaroma from Cobble on; Rock Climb sleeps on r217.
+    // Gallant + the HQ raid (Fen) -> Brightmoon (the sailor's plea) ->
+    // Insight (Icicle) -> Candor pressure + Astral's illusion (all
+    // badges) -> Coronet -> Zenith Spire -> the platform. Gracidea
+    // rides Honeyfield from Cobble on; Rock Climb sleeps on r217.
     if (!arcCardFired && !g.ui.dialogueOpen) {
       const sf = g.state.story.flags;
       if (id === 'lake-valor' && sf.badge_fen && !sf.valor_glimpse && !sf.ev_sinnoh_valor_done) {
@@ -398,7 +398,7 @@ Object.assign(OverworldScene.prototype, {
         if (id === landing) this.runEvent('ev_hoenn_latias');
       }
     }
-    // Stage S6 (Sinnoh legendary arcs): discovery, faces, roamers —
+    // Stage S6 (Borea legendary arcs): discovery, faces, roamers —
     // the H6 idiom (faces gated on their arcs' own progress flags;
     // the catch-only chain leaves flee/KO unwritten, so faces
     // re-fire). The lake trio + Dialga/Palkia/Giratina key ONLY on
@@ -460,7 +460,7 @@ Object.assign(OverworldScene.prototype, {
         S6Q.arc_regigigas = S6Q.arc_regigigas || 'discovered';
         const triad = ['regirock', 'regice', 'registeel'].filter((s) => (g.state.party || []).some((m) => m && m.speciesId === s)).length;
         if (triad >= 3) { S6F.regi_trio_present = true; this.runEvent('ev_sinnoh_regigigas'); }
-        else g.ui.say(['The deep room of Snowpoint Temple is a held breath of a room: a dais built for a giant, and a statue the size of a small hill keeping it. Cold runs off it in sheets. Nothing moves.', 'A keeper\u2019s note, generations old, is carved where a visitor will find it: HE SLEEPS UNTIL HIS THREE COME TO HIM TOGETHER. BRING THE THREE OF THE TOMBS — ROCK, ICE AND STEEL — IN YOUR OWN COMPANY, OR LET HIM SLEEP. (' + triad + ' of his three stand with you.)']);
+        else g.ui.say(['The deep room of Rimefall Temple is a held breath of a room: a dais built for a giant, and a statue the size of a small hill keeping it. Cold runs off it in sheets. Nothing moves.', 'A keeper\u2019s note, generations old, is carved where a visitor will find it: HE SLEEPS UNTIL HIS THREE COME TO HIM TOGETHER. BRING THE THREE OF THE TOMBS — ROCK, ICE AND STEEL — IN YOUR OWN COMPANY, OR LET HIM SLEEP. (' + triad + ' of his three stand with you.)']);
       } else if (id === 'fullmoon-island' && S6F.sinnoh_climax_resolved && S6F.cresselia_glimpsed && !S6F.cresselia_roaming && !S6F.arc_cresselia_done && !S6F.ev_sinnoh_cresselia_meet_done) {
         this.runEvent('ev_sinnoh_cresselia_meet');
       } else if (id === 'house-canalave' && S6F.sinnoh_complete && S6F.darkrai_unlocked && !S6F.darkrai_inn_done && !S6F.ev_sinnoh_darkrai_inn_done) {
@@ -954,8 +954,8 @@ Object.assign(OverworldScene.prototype, {
     // Arc 4 Stage S4: the forme-switch objects (the shrine idiom —
     // each handler declines when its partner is not in the party, so
     // the authored sign text speaks exactly as before): the Griseous
-    // Orb's chamber sign in Turnback Cave (11,5), the Distortion
-    // World's platform dais sign (10,8), and the Old Chateau's
+    // Orb's chamber sign in Reversal Cave (11,5), the Distortion
+    // World's platform dais sign (10,8), and the Ruined Manor's
     // television sign (16,4) — Rotom's room, appliances included.
     if (this.mapId === 'turnback-cave' && fx === 11 && fy === 5 && this.griseousInteract()) return true;
     if (this.mapId === 'distortion-platform' && fx === 10 && fy === 8 && this.griseousInteract()) return true;
@@ -1179,7 +1179,7 @@ Object.assign(OverworldScene.prototype, {
     const g = this.game;
     const hall = this.map.contestHall;
     // Arc 4 Stage S4: a hall with ranks (data/contest.mjs
-    // CONTEST_RANKS — Hearthome's Super Contests) picks its rank
+    // CONTEST_RANKS — Inglenook's Super Contests) picks its rank
     // first: a rank is open when its required ribbon is held (the
     // sequential Platinum ladder), and the chosen rank key then runs
     // the shipped entry flow unchanged as the scene's hall.
@@ -1256,15 +1256,15 @@ Object.assign(OverworldScene.prototype, {
   // generically off the badge case (badgeHeld names no region), and
   // refusals name the missing piece, the Dive idiom. Neither gate
   // exists on any shipped region's tiles: climbwall tiles stand only
-  // in Sinnoh, and fog is a maps9-only weather field.
+  // in Borea, and fog is a maps9-only weather field.
   defogInteract() {
     const g = this.game;
     if (!badgeHeld(g.state, HM_GRANTS.defog.badge)) {
-      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'Come back with the Fen Badge in your case — Pastoria\'s gym, in the marsh country. The League does not let trainers clear Sinnoh\'s fog roads without it.']);
+      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'Come back with the Fen Badge in your case — Fenland\'s gym, in the marsh country. The League does not let trainers clear Borea\'s fog roads without it.']);
       return;
     }
     if (!partyKnowsFieldMove(g.state.party, 'defog')) {
-      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'You have the Fen Badge, but no partner who knows Defog. The HM waits in the Solaceon Ruins, east of Hearthome — the old stones keep it.']);
+      g.ui.say(['The fog sits on the road like a held breath — too thick to walk by eye.', 'You have the Fen Badge, but no partner who knows Defog. The HM waits in the Repose Ruins, east of Inglenook — the old stones keep it.']);
       return;
     }
     g.ui.showMenu('The fog is a white wall. Use Defog?', [
@@ -1287,7 +1287,7 @@ Object.assign(OverworldScene.prototype, {
       return;
     }
     if (!badgeHeld(g.state, HM_GRANTS.rockclimb.badge)) {
-      g.ui.say(['A cliff face veined with old handholds, worn smooth by weather and other climbers.', 'Come back with the Icicle Badge in your case — Snowpoint\'s gym, at the top of the world. The League does not let trainers scale Sinnoh\'s walls without it.']);
+      g.ui.say(['A cliff face veined with old handholds, worn smooth by weather and other climbers.', 'Come back with the Icicle Badge in your case — Rimefall\'s gym, at the top of the world. The League does not let trainers scale Borea\'s walls without it.']);
       return;
     }
     if (!partyKnowsFieldMove(g.state.party, 'rockclimb')) {
@@ -1343,7 +1343,7 @@ Object.assign(OverworldScene.prototype, {
   // Arc 4 Stage S6: the Hallowed Tower (Spiritomb's site) — a faced
   // rock object on Route 209 (HALLOWED_TOWER in story-sinnoh.mjs;
   // the object-append idiom: maps9 rows unedited, the (14,6) 'R'
-  // tile west of the Lost Tower claimed here for this map only).
+  // tile west of the Forsaken Tower claimed here for this map only).
   spiritombInteract(fx, fy) {
     const g = this.game;
     if (this.mapId !== HALLOWED_TOWER.map) return false;
@@ -1354,7 +1354,7 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
     if ((g.state.bag.oddkeystone || 0) < 1) {
-      g.ui.say(['The Hallowed Tower: a mound of weathered stones on the Lost Tower road, older than the road, older than the tower. Travellers touch it for luck and then walk a little faster. Something about it suggests a missing piece — a stone that should sit in it, cracked, and cold.']);
+      g.ui.say(['The Hallowed Tower: a mound of weathered stones on the Forsaken Tower road, older than the road, older than the tower. Travellers touch it for luck and then walk a little faster. Something about it suggests a missing piece — a stone that should sit in it, cracked, and cold.']);
       return true;
     }
     this.runEvent('ev_sinnoh_spiritomb');
@@ -1527,7 +1527,7 @@ Object.assign(OverworldScene.prototype, {
     // Stage H4a: Maris story actors (Birch, May, Wally, Norman, the
     // west leaders, Cozmo, the two admins) run their own scenes.
     if (npc.hoenn) { if (this.runHoennNpc(npc)) return true; }
-    // Arc 4 Stage S5a: Sinnoh story actors (Rowan, Dawn, Barry, Paul,
+    // Arc 4 Stage S5a: Borea story actors (Rowan, Dawn, Barry, Paul,
     // the commanders, Reggie, the four leaders) run their own scenes.
     if (npc.sinnoh) { if (this.runSinnohNpc(npc)) return true; }
     // Stage H6: the Mossdeep Space Center's facade researcher carries
@@ -1686,7 +1686,7 @@ Object.assign(OverworldScene.prototype, {
         // Arc 4 Stage S4: the gate is generic — fee/steps/balls, the
         // entry map, the zone's map set, its hub and exit, its name
         // and its rock-word all ride the NPC's map-data config (the
-        // Great Marsh warden plants them; the Arden warden plants
+        // Great Mire warden plants them; the Arden warden plants
         // none and reads every default below, byte-identical).
         const fee = npc.safariFee !== undefined ? npc.safariFee : 500;
         const steps = npc.safariSteps !== undefined ? npc.safariSteps : 500;
@@ -2822,7 +2822,7 @@ Object.assign(OverworldScene.prototype, {
       // IN-ARC, here). Original writing; the Tree of Beginning beat
       // is abstracted to our fiction — a great-tree root chamber in
       // Meadowbrook Woods and an aura that walked like a friend.
-      // Honest limit, recorded: Lucario is a Sinnoh-dex species
+      // Honest limit, recorded: Lucario is a Borea-dex species
       // (Arc 4's horizon), so no Lucario battle or catch is staged
       // or faked here; the event is the aura-legend beat itself.
       if (flags.lucario_event_done) { say(['The tree keeps its counsel and its flowers, {player}. Some meetings are not battles, and some friends are not caught. They are recognised. Walk well — something in the wood is walking well because you stopped here.']); return true; }
@@ -2990,14 +2990,14 @@ Object.assign(OverworldScene.prototype, {
     }));
   },
 
-  // ---------- Arc 4 Stage S5a: Sinnoh story actors ----------
+  // ---------- Arc 4 Stage S5a: Borea story actors ----------
   // One dispatch for every NPC carrying a `sinnoh:` key (the actors
   // loadMap appends from story-sinnoh.mjs SINNOH_NPCS). Leaders ride
   // the shared leader runner; the badge-order refusal reads
   // badges.sinnoh (the generic Yamato/Maris path). Paul's beats are
   // the arc's spine: the lab battle is an entry EVENT (ev_sinnoh_lab);
-  // here are his Eterna assessment, the Hearthome Chimchar beat, and
-  // the Veilstone audit battle. Dawn's Hearthome beat mirrors May's
+  // here are his Heritage assessment, the Inglenook Chimchar beat, and
+  // the Shardfall audit battle. Dawn's Inglenook beat mirrors May's
   // contest beats (dialogue-only story state on the shipped Super
   // Contest system — the player's own ranked entries are S4's).
   runSinnohNpc(npc) {
@@ -3008,26 +3008,26 @@ Object.assign(OverworldScene.prototype, {
     const say = (lines, cb, who) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, who === undefined ? npc.name : who);
     const kind = npc.sinnoh;
     const SINNOH_LEADER_WAITS = {
-      coalbadge: 'Roark, in Oreburgh City\'s gym',
-      forestbadge: 'Gardenia, in Eterna City\'s gym',
-      relicbadge: 'Fantina, in Hearthome City\'s gym',
-      cobblebadge: 'Maylene, in Veilstone City\'s gym',
-      fenbadge: 'Crasher Wake, in Pastoria City\'s gym',
-      minebadge: 'Byron, in Canalave City\'s gym',
-      iciclebadge: 'Candice, in Snowpoint City\'s gym',
-      beaconbadge: 'Volkner, in Sunyshore City\'s gym',
+      coalbadge: 'Roark, in Coalseam City\'s gym',
+      forestbadge: 'Gardenia, in Heritage City\'s gym',
+      relicbadge: 'Fantina, in Inglenook City\'s gym',
+      cobblebadge: 'Maylene, in Shardfall City\'s gym',
+      fenbadge: 'Crasher Wake, in Fenland City\'s gym',
+      minebadge: 'Byron, in Bridgeport City\'s gym',
+      iciclebadge: 'Candice, in Rimefall City\'s gym',
+      beaconbadge: 'Volkner, in Brightshore City\'s gym',
     };
     const badgeOrderRefusal = (badgeId) => {
       const idx = BADGE_SETS.sinnoh.indexOf(badgeId);
       if (idx <= 0 || sBadges.length >= idx) return null;
       const miss = BADGE_SETS.sinnoh[sBadges.length];
       const missItem = ITEMS[miss];
-      return ['The League keeps an order in Sinnoh, challenger, and I keep it with them: the badges are earned in sequence here, coast to mountain.',
+      return ['The League keeps an order in Borea, challenger, and I keep it with them: the badges are earned in sequence here, coast to mountain.',
         'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (SINNOH_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
     };
 
     if (kind === 'rowan') {
-      if (!flags.sinnoh_arrival && !flags.ev_sinnoh_arrival_done) { say(['The lab is at the north end of Sandgem, trainer — tall windows, taller reputation.']); return true; }
+      if (!flags.sinnoh_arrival && !flags.ev_sinnoh_arrival_done) { say(['The lab is at the north end of Shingle, trainer — tall windows, taller reputation.']); return true; }
       // Stage S6: Rowan delivers the two post-Conference gifts (the
       // Manaphy Egg, then Oak's Letter) — two talks, fixed order;
       // the egg is refused (nothing set) when there is no room.
@@ -3043,7 +3043,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       if (flags.sinnoh_complete && !flags.oaks_letter_received) {
-        say(['One more trust, while you are standing in my lab, {player}. Samuel Oak was in Sinnoh in the spring. He walked the white-stone road north of the League, stood in a flower field that should not exist, and came back quieter than I have ever seen him.', 'He left this letter in my keeping, sealed, with one instruction: it goes to the trainer who finishes the Conference road — the field only opens for gratitude, he said, and gratitude should be EARNED before it is carried. It is yours. The Seabreak Path, {player}. Mind the bloom.'], () => {
+        say(['One more trust, while you are standing in my lab, {player}. Samuel Oak was in Borea in the spring. He walked the white-stone road north of the League, stood in a flower field that should not exist, and came back quieter than I have ever seen him.', 'He left this letter in my keeping, sealed, with one instruction: it goes to the trainer who finishes the Conference road — the field only opens for gratitude, he said, and gratitude should be EARNED before it is carried. It is yours. The Foamline Path, {player}. Mind the bloom.'], () => {
           flags.oaks_letter_received = true; st.bag.oaksletter = (st.bag.oaksletter || 0) + 1;
           if (st.story.quests.arc_shaymin === undefined) st.story.quests.arc_shaymin = 'discovered';
           g.audio.playSfx('item-get');
@@ -3052,7 +3052,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       if (flags.galactic_eterna_done) { say(['Jupiter left a page behind, I am told. The lakes, underlined. My oldest books are missing their statue rubbings, {player} — and a thief who steals HISTORY is planning to use it. Walk carefully, and watch the water.']); return true; }
-      say(['Registered, measured, and only slightly audited by my least diplomatic colleague. Oreburgh first, {player}: east through Jubilife, then the mine road. Roark keeps the Coal Badge, and a fossil collection worth the walk on its own.']);
+      say(['Registered, measured, and only slightly audited by my least diplomatic colleague. Coalseam first, {player}: east through Revelry, then the mine road. Roark keeps the Coal Badge, and a fossil collection worth the walk on its own.']);
       return true;
     }
 
@@ -3063,17 +3063,17 @@ Object.assign(OverworldScene.prototype, {
       else if (flags.buck_met) say(['Stone\u2019s still rolled off its seat up there — I can tell by the way the mountain breathes wrong. We\u2019ll set it right together, you and me. The hall at the top, trainer. I\u2019ll keep your pace.']);
       else if (flags.sinnoh_climax_resolved) {
         flags.buck_met = true; if (st.story.quests.arc_heatran === undefined) st.story.quests.arc_heatran = 'discovered';
-        say(['Well now. The trainer who mended the sky, walking Stark Mountain\u2019s doorstep like it\u2019s a garden path. Name\u2019s Buck. The mountain\u2019s mine in the way a fence is a farmer\u2019s — I keep it, it keeps me honest.', 'Listen, since you\u2019re here: something\u2019s rolled the mountain\u2019s Magma Stone clean out of its socket up in the Crater Hall. A volcano without its temper-stone is a kettle shopping for a lid. Come up with me and we\u2019ll set it back — two pairs of hands, one careful lift.']);
+        say(['Well now. The trainer who mended the sky, walking Grim Mountain\u2019s doorstep like it\u2019s a garden path. Name\u2019s Buck. The mountain\u2019s mine in the way a fence is a farmer\u2019s — I keep it, it keeps me honest.', 'Listen, since you\u2019re here: something\u2019s rolled the mountain\u2019s Magma Stone clean out of its socket up in the Crater Hall. A volcano without its temper-stone is a kettle shopping for a lid. Come up with me and we\u2019ll set it back — two pairs of hands, one careful lift.']);
       }
-      else say(['Name\u2019s Buck. Stark Mountain\u2019s the last honest weather in Sinnoh — climb it like you mean it. And if you find a round stone down the crater that doesn\u2019t belong there... it belongs. That\u2019s the whole problem with stones.']);
+      else say(['Name\u2019s Buck. Grim Mountain\u2019s the last honest weather in Borea — climb it like you mean it. And if you find a round stone down the crater that doesn\u2019t belong there... it belongs. That\u2019s the whole problem with stones.']);
       return true;
     }
     // Stage S6: the Route 209 traveller — the Odd Keystone's giver.
     if (kind === 'keystone_traveller') {
       if (flags.arc_spiritomb_done) say(['You set it in the tower? And the counting STOPPED? ...Then the road is just a road again. Walk it like one, trainer. Slowly, for the view.']);
-      else if (flags.odd_keystone_received) say(['The tower, trainer. Weathered stones, west of the Lost Tower, where the grass gives up. Set the stone in and stand honest. Whatever counts itself out of it — it was counted for a reason.']);
+      else if (flags.odd_keystone_received) say(['The tower, trainer. Weathered stones, west of the Forsaken Tower, where the grass gives up. Set the stone in and stand honest. Whatever counts itself out of it — it was counted for a reason.']);
       else {
-        say(['Travelling light is a discipline, trainer, and I have been carrying a stone that disagrees with it. Cold thing. Heavy in a way that has nothing to do with my knees. Found it by a ruined tower up the road, years back, and it has been COUNTING at me ever since — quiet, patient, in numbers I don\u2019t care to reach.', 'You have the look of someone who finishes counts. Take it. Set it back in its tower, west of the Lost Tower, and whatever it\u2019s holding, hold it better than the road did.'], () => {
+        say(['Travelling light is a discipline, trainer, and I have been carrying a stone that disagrees with it. Cold thing. Heavy in a way that has nothing to do with my knees. Found it by a ruined tower up the road, years back, and it has been COUNTING at me ever since — quiet, patient, in numbers I don\u2019t care to reach.', 'You have the look of someone who finishes counts. Take it. Set it back in its tower, west of the Forsaken Tower, and whatever it\u2019s holding, hold it better than the road did.'], () => {
           flags.odd_keystone_received = true; st.bag.oddkeystone = (st.bag.oddkeystone || 0) + 1;
           if (st.story.quests.arc_spiritomb === undefined) st.story.quests.arc_spiritomb = 'discovered';
           g.audio.playSfx('item-get');
@@ -3085,16 +3085,16 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'dawn_twinleaf') {
       if (!flags.dawn_met) {
-        say(['Oh — you are HIM. The ferry trainer. Mom said a champion was landing in Sandgem and the whole street has been pretending not to look out of its windows since dawn. I am Dawn. This is Twinleaf — my town, my pond, my starting line.', 'Everyone assumes a road like yours is all gyms. Mine is contests: appeal rounds, stage lights, a crowd that grades your footwork while your partner performs. Hearthome\'s Super Contest Hall is my first real stage, {player}. When your road bends there — come and sit in my world. I will be the one not breathing until the music starts.'], () => { flags.dawn_met = true; });
+        say(['Oh — you are HIM. The ferry trainer. Mom said a champion was landing in Shingle and the whole street has been pretending not to look out of its windows since dawn. I am Dawn. This is Clover — my town, my pond, my starting line.', 'Everyone assumes a road like yours is all gyms. Mine is contests: appeal rounds, stage lights, a crowd that grades your footwork while your partner performs. Inglenook\'s Super Contest Hall is my first real stage, {player}. When your road bends there — come and sit in my world. I will be the one not breathing until the music starts.'], () => { flags.dawn_met = true; });
         return true;
       }
-      say(['Hearthome, {player}. First stage, full lights. I rehearse in the mirror and the mirror has started applauding early, which I choose to take as a good sign.']);
+      say(['Inglenook, {player}. First stage, full lights. I rehearse in the mirror and the mirror has started applauding early, which I choose to take as a good sign.']);
       return true;
     }
 
     if (kind === 'barry') {
       if (!flags.barry_met) {
-        say(['WHAM— oh. Oh no. Did I hit you? I hit you. That is a fine! I am fining MYSELF ten million for the collision and you a hundred million for standing in a doorway shaped exactly like a Barry-corridor— wait. WAIT. You are the ferry champion!', 'Barry. Future greatest trainer in Sinnoh, currently undefeated at running late. You are here for the badges, I am here for the badges, the badges are THEREFORE a race, and I am already winning it. Oreburgh! Now! If I am not at Roark\'s door in ten seconds I am fining myself again!'], () => { flags.barry_met = true; });
+        say(['WHAM— oh. Oh no. Did I hit you? I hit you. That is a fine! I am fining MYSELF ten million for the collision and you a hundred million for standing in a doorway shaped exactly like a Barry-corridor— wait. WAIT. You are the ferry champion!', 'Barry. Future greatest trainer in Borea, currently undefeated at running late. You are here for the badges, I am here for the badges, the badges are THEREFORE a race, and I am already winning it. Coalseam! Now! If I am not at Roark\'s door in ten seconds I am fining myself again!'], () => { flags.barry_met = true; });
         return true;
       }
       say(['Still racing you, {player}! The fine for losing to me is everything you own plus interest! I accept badges as payment! ...What do you mean that is not how fines work—']);
@@ -3117,10 +3117,10 @@ Object.assign(OverworldScene.prototype, {
       if (flags.galactic_hq_done) { say(['The house is a shell with excellent lighting now, trainer. The count left before you arrived — it always was going to. I keep the door. It is the only duty the new world left me, and I find I do not entirely mind it.']); return true; }
       // PACING CALL (S5a register): before the raid, Saturn is
       // presence and a locked door: the anime spreads the HQ across
-      // the arc. His flavour turns colder once Eterna has fallen.
+      // the arc. His flavour turns colder once Heritage has fallen.
       if (flags.saturn_met) { say(['Still here, trainer? Doors here open inward only — and the building has decided you are weather: noted, and kept outside.']); return true; }
       if (flags.galactic_eterna_done) {
-        say(['Saturn. I keep this house for Team Galactic — its doors, its ledgers, its patience. Eterna was a counting house, trainer; you have annoyed an abacus, nothing more.', 'Whatever you imagine is behind me, it will keep imagining back at you until the Commander-in-Chief calls it forward. Go and win your little badges. History is being scheduled elsewhere.'], () => { flags.saturn_met = true; });
+        say(['Saturn. I keep this house for Team Galactic — its doors, its ledgers, its patience. Heritage was a counting house, trainer; you have annoyed an abacus, nothing more.', 'Whatever you imagine is behind me, it will keep imagining back at you until the Commander-in-Chief calls it forward. Go and win your little badges. History is being scheduled elsewhere.'], () => { flags.saturn_met = true; });
         return true;
       }
       say(['Saturn. I keep this house — its doors, its ledgers, its patience. Tourists mistake it for a destination, trainer. It is a door, and doors here open inward only.', 'You have the look of a storm the building has been briefed about. Noted. Filed. Kept outside.'], () => { flags.saturn_met = true; });
@@ -3133,7 +3133,7 @@ Object.assign(OverworldScene.prototype, {
         say(['You took Gardenia\'s measure. Adequate. The Roserade folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Pokemon. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
         return true;
       }
-      say(['Still counting, {player}. Hearthome next — Fantina\'s theatre. Try not to be decorative about it.']);
+      say(['Still counting, {player}. Inglenook next — Fantina\'s theatre. Try not to be decorative about it.']);
       return true;
     }
 
@@ -3158,7 +3158,7 @@ Object.assign(OverworldScene.prototype, {
             if (v !== 'yes') {
               flags.chimchar_beat_done = true;
               flags.chimchar_left = true;
-              say(['You leave it to the road, and the road — Hearthome is kind, as cities go — will find it a softer arithmetic than Paul\'s. Its flame stays lit as you go. Some stories in this region are not yours to carry.'], null, '');
+              say(['You leave it to the road, and the road — Inglenook is kind, as cities go — will find it a softer arithmetic than Paul\'s. Its flame stays lit as you go. Some stories in this region are not yours to carry.'], null, '');
               return;
             }
             const res = st.party.length < 6
@@ -3182,12 +3182,12 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'reggie') {
       if (!flags.reggie_met) {
-        say(['I am Reggie. I breed Pokemon here in Veilstone — feed them, raise them, teach them the shape of a good life. My little brother Paul passed your name to me in a letter of exactly eleven words, which for Paul is a memoir.', '"Trainer from the ferry. Underestimated by everyone counting. Watch him." That is the whole letter. He has never once written watch him about anybody, {player}. Whatever you did at that lab, it is still walking around in his head.'], () => { flags.reggie_met = true; });
+        say(['I am Reggie. I breed Pokemon here in Shardfall — feed them, raise them, teach them the shape of a good life. My little brother Paul passed your name to me in a letter of exactly eleven words, which for Paul is a memoir.', '"Trainer from the ferry. Underestimated by everyone counting. Watch him." That is the whole letter. He has never once written watch him about anybody, {player}. Whatever you did at that lab, it is still walking around in his head.'], () => { flags.reggie_met = true; });
         return true;
       }
       say(flags.chimchar_taken
         ? ['A Chimchar with a Paul-shaped past and a {player}-shaped future. Feed it steady, train it honest, and let it win at its own pace. That is the whole method, and it has never once been the slow one that mattered.']
-        : ['Paul trains the way winter farms — nothing kept that cannot survive the season. I keep everything and feed it twice. Veilstone raised us both, trainer. The city declines to pick a favorite.']);
+        : ['Paul trains the way winter farms — nothing kept that cannot survive the season. I keep everything and feed it twice. Shardfall raised us both, trainer. The city declines to pick a favorite.']);
       return true;
     }
 
@@ -3198,11 +3198,11 @@ Object.assign(OverworldScene.prototype, {
       // entered at the counter, and are not gated by this beat).
       if (flags.dawn_hearthome_done) { say(['My ribbon is in the case and my heart has only just come down out of the lights, {player}. The road east has fog on it, they say. Good. I have decided fog is just stage mist that lost its hall.']); return true; }
       if (!sBadges.includes('relicbadge')) { say(['Not yet — Fantina first, {player}. A coordinator keeps her order too: I am not stepping onto this stage until the gym across town has had its performance. Besides — SHE is one of the judges\' favorite stories. I intend to be another.']); return true; }
-      say(['You came. Okay. OKAY. From the top, just like the mirror taught me...', '...The last appeal card turned MY way, {player}. The judges stood. The whole hall stood! My first Super Contest — a ribbon, earned in Hearthome, in front of a champion who once crossed four regions to sit in the third row.', 'Mom is going to hear about this from three towns away before I even call her. The road east is yours — Solaceon, the fog, Veilstone. Mine runs beside it a while longer. Walk it like a stage, {player}. That is what I intend to do.'], () => {
+      say(['You came. Okay. OKAY. From the top, just like the mirror taught me...', '...The last appeal card turned MY way, {player}. The judges stood. The whole hall stood! My first Super Contest — a ribbon, earned in Inglenook, in front of a champion who once crossed four regions to sit in the third row.', 'Mom is going to hear about this from three towns away before I even call her. The road east is yours — Repose, the fog, Shardfall. Mine runs beside it a while longer. Walk it like a stage, {player}. That is what I intend to do.'], () => {
         flags.dawn_hearthome_done = true;
         flags.dawn_ribbon_hearthome = true;
         g.audio.playSfx('dex-register');
-        g.ui.toast('Dawn won her first Super Contest ribbon at Hearthome!');
+        g.ui.toast('Dawn won her first Super Contest ribbon at Inglenook!');
       });
       return true;
     }
@@ -3212,7 +3212,7 @@ Object.assign(OverworldScene.prototype, {
       if (!sBadges.includes('cobblebadge')) { say(['Not here. Not yet. Maylene first, {player} — I do not audit a trainer my own city\'s gym has not finished examining. Win the Cobble Badge. Then come and be measured on ground that knows my name.']); return true; }
       const t0 = TRAINERS.paul_veilstone;
       say([t0.intro[0], t0.intro[1]], () => {
-        g.ui.showMenu('Face Paul — the Veilstone audit?', [
+        g.ui.showMenu('Face Paul — the Shardfall audit?', [
           { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => {
           if (v !== 'yes') return;
@@ -3246,7 +3246,7 @@ Object.assign(OverworldScene.prototype, {
       if (!sBadges.includes('iciclebadge')) { say(['Not yet. Candice first, {player} — I do not spend my best page on a trainer the north has not finished examining. Win the Icicle Badge. Then come out onto my lake.']); return true; }
       const t0 = TRAINERS.paul_acuity;
       say([t0.intro[0], t0.intro[1]], () => {
-        g.ui.showMenu('Face Paul — the full battle at Lake Acuity?', [
+        g.ui.showMenu('Face Paul — the full battle at Lake Insight?', [
           { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => {
           if (v !== 'yes') return;
@@ -3262,7 +3262,7 @@ Object.assign(OverworldScene.prototype, {
                 say(t0.lose, null, 'PAUL');
               } else {
                 flags.paul_acuity_lost = true;
-                say(['...Six. All six, {player}. I did not lose a battle on that lake — I performed an autopsy on one, mid-battle, with the whole of my team as the instrument.', 'This is what my arithmetic was FOR, and do you see what it bought? A full page of evidence that the way I have been counting is not the way winning is counted. Chimchar knew. It knew at Hearthome, standing in the road. I have been the last to know everything important in this region.', 'Again at the Conference — if the bracket is honest. I will not be carrying the same ledger. Neither, I suspect, will you.'], null, 'PAUL');
+                say(['...Six. All six, {player}. I did not lose a battle on that lake — I performed an autopsy on one, mid-battle, with the whole of my team as the instrument.', 'This is what my arithmetic was FOR, and do you see what it bought? A full page of evidence that the way I have been counting is not the way winning is counted. Chimchar knew. It knew at Inglenook, standing in the road. I have been the last to know everything important in this region.', 'Again at the Conference — if the bracket is honest. I will not be carrying the same ledger. Neither, I suspect, will you.'], null, 'PAUL');
               }
             },
           }));
@@ -3272,14 +3272,14 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'dawn_festival') {
-      // Dawn's co-spine concludes: the Grand Festival at Lake Valor
+      // Dawn's co-spine concludes: the Grand Festival at Lake Gallant
       // (the anime's placement), a dialogue beat riding the shipped
       // Super Contest ranks — her final is judged at the hall's own
       // highest rank; the player's own contest ladder stays open
       // and ungated by this beat (the S4/S5a law).
       if (flags.dawn_grand_festival_done) { say(['Runner-up of the Grand Festival, {player}. It still sounds like weather happening to somebody else. Zoey keeps the cup — and I keep the tape of that final, and I watch it like a map of a country I am going to live in. The Conference is yours now. Go and stand on your stage the way I stood on mine: all the way.']); return true; }
-      if (!sBadges.includes('beaconbadge')) { say(['Not yet — your eighth badge first, {player}. A coordinator keeps her order too: the Festival stage is lit, my rivals are arriving by boat, and I am NOT stepping out there until the Sunyshore lights have had their say about you. Besides — I want you in those seats with nothing left to prove but the sitting.']); return true; }
-      say(['You came. All the way to Valor, with the sky mended and eight badges in your case — you came to watch ME. Okay. OKAY. From the top, one last time...', '...The final card turned her way, {player}. Zoey — by a margin so small the judges checked it twice. Runner-up, at the Grand Festival, in my first full season. Mom cried on the phone in the GOOD direction. I did not win the cup. I won everything the cup was standing in front of.', 'My road forks here — home first, then a new region\'s stages, the way yours forked at a ferry dock a winter ago. Walk the Conference like a stage, {player}. I will be in the seats this time, and I do not breathe until the music starts. A promise, not a threat.'], () => {
+      if (!sBadges.includes('beaconbadge')) { say(['Not yet — your eighth badge first, {player}. A coordinator keeps her order too: the Festival stage is lit, my rivals are arriving by boat, and I am NOT stepping out there until the Brightshore lights have had their say about you. Besides — I want you in those seats with nothing left to prove but the sitting.']); return true; }
+      say(['You came. All the way to Gallant, with the sky mended and eight badges in your case — you came to watch ME. Okay. OKAY. From the top, one last time...', '...The final card turned her way, {player}. Zoey — by a margin so small the judges checked it twice. Runner-up, at the Grand Festival, in my first full season. Mom cried on the phone in the GOOD direction. I did not win the cup. I won everything the cup was standing in front of.', 'My road forks here — home first, then a new region\'s stages, the way yours forked at a ferry dock a winter ago. Walk the Conference like a stage, {player}. I will be in the seats this time, and I do not breathe until the music starts. A promise, not a threat.'], () => {
         flags.dawn_grand_festival_done = true;
         flags.dawn_festival_ribbon = true;
         g.audio.playSfx('dex-register');
@@ -3289,8 +3289,8 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'sailor_eldric') {
-      // The Darkrai beat (Canalave): a glimpse chain, staged here —
-      // the plea (Mine Badge held) -> Fullmoon Island's entry event
+      // The Darkrai beat (Bridgeport): a glimpse chain, staged here —
+      // the plea (Mine Badge held) -> Brightmoon Island's entry event
       // (Cresselia's glimpse + the Lunar Wing) -> the boy wakes.
       // Darkrai itself is S6's arc: darkrai_unlocked is its flavour
       // flag, set on the waking, never a catch here.
@@ -3304,9 +3304,9 @@ Object.assign(OverworldScene.prototype, {
         });
         return true;
       }
-      if (flags.darkrai_beat_started) { say(['Fullmoon Island, trainer — the boatman runs there from this very pier, and her island is past it, where the moon stands full. Bring back her feather. Bring back my boy\'s mornings.']); return true; }
+      if (flags.darkrai_beat_started) { say(['Brightmoon Island, trainer — the boatman runs there from this very pier, and her island is past it, where the moon stands full. Bring back her feather. Bring back my boy\'s mornings.']); return true; }
       if (!sBadges.includes('minebadge')) { say(['Mind the gulls, trainer. Everything in this port is watching something. Mine is a window up there with the curtain drawn, where my boy has been asleep a month — asleep, and dreaming of a dark shape that stands over the bed and will not be argued with. When you have the Mine Badge, come back to me. I will have a favour to ask that I do not ask lightly.']); return true; }
-      say(['You have Byron\'s badge — then you are the trainer the harbour says you are, and I can ask it plain. My son, trainer. A month asleep in the house by the pier, and every night the same dream: a dark shape over the bed, patient as debt. The doctors use the word nightmares the way sailors use the word weather — for things they cannot steer.', 'The old cure is not a doctor\'s. On Fullmoon Island, where the moon stands full over a crescent pond, SHE keeps her court — Cresselia, whose feathers are made of the light that ends bad dreams. The boatman will take you. Bring me a Lunar Wing, and I will bring you a boy eating breakfast. That is the whole contract.'], () => { flags.darkrai_beat_started = true; });
+      say(['You have Byron\'s badge — then you are the trainer the harbour says you are, and I can ask it plain. My son, trainer. A month asleep in the house by the pier, and every night the same dream: a dark shape over the bed, patient as debt. The doctors use the word nightmares the way sailors use the word weather — for things they cannot steer.', 'The old cure is not a doctor\'s. On Brightmoon Island, where the moon stands full over a crescent pond, SHE keeps her court — Cresselia, whose feathers are made of the light that ends bad dreams. The boatman will take you. Bring me a Lunar Wing, and I will bring you a boy eating breakfast. That is the whole contract.'], () => { flags.darkrai_beat_started = true; });
       return true;
     }
 
@@ -3315,10 +3315,10 @@ Object.assign(OverworldScene.prototype, {
       // is gated on eight badges + the climax resolved — the
       // Conference does not open its bracket over an unmended sky.
       if (flags.sinnoh_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Lily of the Valley book in the good ink, trainer — twice: once for the bracket, and once in the margin next to a Darkrai, where the clerks keep the results they still argue about.']); return true; }
-      if (sBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Sinnoh badges open this bracket; you hold ' + sBadges.length + '. Sunyshore is the usual last stop. I will keep your page open.']); return true; }
-      if (!flags.sinnoh_climax_resolved) { say(['Eight badges — counted, verified, well carried. And yet I cannot open the bracket while the sky over Mt. Coronet is still torn, trainer. Finish the region\'s gods first. The Conference will be here; it has waited through worse than a titan or two. Well. Comparable.']); return true; }
+      if (sBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Borea badges open this bracket; you hold ' + sBadges.length + '. Brightshore is the usual last stop. I will keep your page open.']); return true; }
+      if (!flags.sinnoh_climax_resolved) { say(['Eight badges — counted, verified, well carried. And yet I cannot open the bracket while the sky over Mt. Apex is still torn, trainer. Finish the region\'s gods first. The Conference will be here; it has waited through worse than a titan or two. Well. Comparable.']); return true; }
       if (!flags.sinnoh_conference_registered) {
-        say(['Eight badges, a mended sky, and a name the whole region has been carrying since the mountain. Let me write you into the Lily of the Valley Conference properly... There. Registered.', 'The bracket: one preliminary, here in this hall — then the quarter-final, which the draw has made personal: Paul, of Veilstone, who has been telling my clerks for a week that the bracket owes him this match. Then the semi-final. I will not describe the semi-final, trainer. Nobody in this hall describes him. Begin when you are ready: speak to me for the preliminary.'], () => {
+        say(['Eight badges, a mended sky, and a name the whole region has been carrying since the mountain. Let me write you into the Lily of the Valley Conference properly... There. Registered.', 'The bracket: one preliminary, here in this hall — then the quarter-final, which the draw has made personal: Paul, of Shardfall, who has been telling my clerks for a week that the bracket owes him this match. Then the semi-final. I will not describe the semi-final, trainer. Nobody in this hall describes him. Begin when you are ready: speak to me for the preliminary.'], () => {
           flags.sinnoh_conference_registered = true;
           g.audio.playSfx('dex-register');
           g.ui.toast('Registered for the Lily of the Valley Conference!');
@@ -3423,7 +3423,7 @@ Object.assign(OverworldScene.prototype, {
                 say(lines, () => {
                   flags.sinnoh_complete = true;
                   g.audio.playSfx('badge');
-                  say(['Lily of the Valley Conference — the run ends in honours, and Sinnoh ends with it: eight badges, a god unchained and answered, two rivals settled, and the only victory anyone took from the conference\'s darkest trainer. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+                  say(['Lily of the Valley Conference — the run ends in honours, and Borea ends with it: eight badges, a god unchained and answered, two rivals settled, and the only victory anyone took from the conference\'s darkest trainer. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
                 }, 'TOBIAS');
               },
             }));
@@ -3437,13 +3437,13 @@ Object.assign(OverworldScene.prototype, {
 
     // ---- the leaders (S5a's four + S5b's four) ----
     const LEADERS = {
-      roark: { badge: 'coalbadge', post: 'The road north runs through the mines\' shadow to Jubilife, and west past Floaroma the wind has stopped answering its keeper, they say. Mind the turbines, Coal Badge holder — and mind who else minds them.' },
+      roark: { badge: 'coalbadge', post: 'The road north runs through the mines\' shadow to Revelry, and west past Honeyfield the wind has stopped answering its keeper, they say. Mind the turbines, Coal Badge holder — and mind who else minds them.' },
       gardenia: { badge: 'forestbadge', post: 'The tower with the meteor on it, Forest Badge holder — its lobby is quieter than my forest and twice as watchful. Whatever Team Galactic counts in there, count yourself in carefully.' },
-      fantina: { badge: 'relicbadge', post: 'East now, Relic Badge holder: Solaceon\'s ruins keep an old remedy for the fog, and Veilstone keeps a gym that apologizes to no one. And the hall, darling — do come back to the hall. The stage remembers its friends.' },
-      maylene: { badge: 'cobblebadge', post: 'Four badges. The lakes are next on every road out of my city, Cobble Badge holder — Valor south, Acuity far north, and Verity behind you, already watching. Whatever is counting that water, it has started. Keep your team close and your eyes open.' },
-      wake: { badge: 'fenbadge', post: 'FIVE BADGES, and the main event rolls on! The lakes, Fen Badge holder — Valor is an hour\'s walk and something has gone wrong on its water, I can smell it over the marsh. Whatever is counting this region\'s lakes, it has started spending. Go and be loud about it.' },
-      byron: { badge: 'minebadge', post: 'Six badges. My son started you in Oreburgh and I have measured you at the face — the family verdict is in, Mine Badge holder, and it is respect. The sailor by the pier has a favour he asks only of trainers he believes in, they say. And the north road is waiting: snow, and my counterpart Candice, who is tougher than her welcome. Everything up there is.' },
-      candice: { badge: 'iciclebadge', post: 'Seven badges, Icicle Badge holder — full marks. The climb walls on Route 217 will take the old HM\'s measure now, and Sunyshore\'s lights are the last stop before the island. And whatever turned beneath my lake\'s ice — it is still turning. The mountain, trainer. Everything in this region points at the mountain now.' },
+      fantina: { badge: 'relicbadge', post: 'East now, Relic Badge holder: Repose\'s ruins keep an old remedy for the fog, and Shardfall keeps a gym that apologizes to no one. And the hall, darling — do come back to the hall. The stage remembers its friends.' },
+      maylene: { badge: 'cobblebadge', post: 'Four badges. The lakes are next on every road out of my city, Cobble Badge holder — Gallant south, Insight far north, and Candor behind you, already watching. Whatever is counting that water, it has started. Keep your team close and your eyes open.' },
+      wake: { badge: 'fenbadge', post: 'FIVE BADGES, and the main event rolls on! The lakes, Fen Badge holder — Gallant is an hour\'s walk and something has gone wrong on its water, I can smell it over the marsh. Whatever is counting this region\'s lakes, it has started spending. Go and be loud about it.' },
+      byron: { badge: 'minebadge', post: 'Six badges. My son started you in Coalseam and I have measured you at the face — the family verdict is in, Mine Badge holder, and it is respect. The sailor by the pier has a favour he asks only of trainers he believes in, they say. And the north road is waiting: snow, and my counterpart Candice, who is tougher than her welcome. Everything up there is.' },
+      candice: { badge: 'iciclebadge', post: 'Seven badges, Icicle Badge holder — full marks. The climb walls on Route 217 will take the old HM\'s measure now, and Brightshore\'s lights are the last stop before the island. And whatever turned beneath my lake\'s ice — it is still turning. The mountain, trainer. Everything in this region points at the mountain now.' },
       volkner: { badge: 'beaconbadge', post: 'Eight badges, Beacon Badge holder, and a leader awake for the first time in a season. The Conference at Lily of the Valley is lit, and the bracket has both your old scores in it — I checked, out of professional envy. Go and settle them at full voltage. I will be in the stands, conducting nothing at all. A holiday.' },
     };
     const L = LEADERS[kind];
@@ -3460,7 +3460,7 @@ Object.assign(OverworldScene.prototype, {
     return true;
   },
 
-  // The shared leader runner, Sinnoh seat (startHoennBattle's idiom).
+  // The shared leader runner, Borea seat (startHoennBattle's idiom).
   startSinnohBattle(trainerId, onWin) {
     const g = this.game;
     const t0 = TRAINERS[trainerId];
@@ -3477,7 +3477,7 @@ Object.assign(OverworldScene.prototype, {
   endSafari(msg) {
     const g = this.game;
     // S4: the exit is the session's own data (the Marsh session exits
-    // to Pastoria's gatehouse door); a session without one exits to
+    // to Fenland's gatehouse door); a session without one exits to
     // Bramble exactly as the Arden original.
     const saf = g.state.session.safari;
     const exit = (saf && saf.exit) || null;
@@ -5236,7 +5236,7 @@ Object.assign(OverworldScene.prototype, {
       const hq = HOENN_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (hq) return '▶ ' + hq.text;
     }
-    // Stage S5a: while the Sinnoh arc is current, its chain leads the
+    // Stage S5a: while the Borea arc is current, its chain leads the
     // HUD objective (the first-half rows; S5b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'sinnoh') {

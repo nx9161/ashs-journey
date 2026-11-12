@@ -14,7 +14,7 @@ Object.assign(EVENTS, ORANGE_EVENTS, JOHTO_EVENTS, HOENN_EVENTS, SINNOH_EVENTS);
 Object.assign(QUESTS, JOHTO_TALES);
 // Stage H4a: Maris Town Tales fold into the same tales table.
 Object.assign(QUESTS, HOENN_TALES);
-// Arc 4 Stage S5a: Sinnoh Town Tales fold into the same tales table.
+// Arc 4 Stage S5a: Borea Town Tales fold into the same tales table.
 Object.assign(QUESTS, SINNOH_TALES);
 Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
 // Stage J5 fold: Yamato's live legendary arcs (the beasts + Celebi).
@@ -28,7 +28,7 @@ Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
 // ids, pre-band levels, and arc_rayquaza's arcs-prereq, replaced by
 // the climax_resolved flag key per the H4b ruling).
 Object.assign(LEGENDARY_ARCS, HOENN_LEGENDARY_ARCS);
-// Arc 4 Stage S6 fold: Sinnoh's thirteen live legendary arcs,
+// Arc 4 Stage S6 fold: Borea's thirteen live legendary arcs,
 // superseding their story-kanto designed stubs (decision-9 keying).
 Object.assign(LEGENDARY_ARCS, SINNOH_LEGENDARY_ARCS);
 // Story patch (fidelity audit): the movie invite's island landing was

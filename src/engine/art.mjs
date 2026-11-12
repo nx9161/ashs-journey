@@ -693,10 +693,10 @@ for (const k of H3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 3 Stage H3b: Maris east/water kinds — same convention as H3a.
 for (const k of [...H3B_WALL_KINDS, ...H3B_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of H3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
-// Arc 4 Stage S3a: Sinnoh kinds — same convention as H3/H3b.
+// Arc 4 Stage S3a: Borea kinds — same convention as H3/H3b.
 for (const k of [...S3_WALL_KINDS, ...S3_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of S3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
-// Arc 4 Stage S3b: Sinnoh east/north kinds — same convention as S3a.
+// Arc 4 Stage S3b: Borea east/north kinds — same convention as S3a.
 for (const k of [...S3B_WALL_KINDS, ...S3B_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of S3B_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Perfection Pass Stage 2 Gate 0 (G0-4): the shuttered facade panel draws
@@ -956,7 +956,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     pummelo: { roof: ['#a82f35', '#66191d', '#c45257'], log: '#7d5226', door: '#8a2329' }, // stadium isle: crimson
     shamouti: { roof: ['#d8542e', '#96401d', '#ee7c52'], log: '#6e4a2a', door: '#b34a26' }, // shrine isle: vermillion
     frontierhub: { roof: ['#8a6d3b', '#57431f', '#ad8f52'], log: '#5e4630', door: '#2f6e6a' }, // battle frontier: bronze, teal door
-    // ---- Wave C: Sinnoh (keyed to SINNOH_TOWN_STYLE forms) ----
+    // ---- Wave C: Borea (keyed to SINNOH_TOWN_STYLE forms) ----
     twinleaf: { roof: ['#7a9a4d', '#4f6b2f', '#9aba6d'], log: '#7d5a30', door: '#5d7d3a' }, // starter hamlet: fresh leaf
     sandgem: { roof: ['#d6cba6', '#a39368', '#eae0c0'], log: '#8a7050', door: '#7a94a8' }, // lab town: cool pale sand, lab-blue door
     jubilife: { roof: ['#5d8aa8', '#385a73', '#84aec9'], log: '#77644a', door: '#4a7d99' }, // TV-city: steel glass blue
@@ -1076,7 +1076,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
   cache.kitTowns.route1 = buildKitSet(null); // Dawnwick->Fernmere corridor: reference kit dressing
   cache.kitTowns.r29 = buildKitSet('newbark'); // Wave B: Yamato starter corridor wears Galefield's set
   cache.kitTowns.r101 = buildKitSet('littleroot'); // Wave B: Maris starter corridor wears Rootlet's set
-  cache.kitTowns.r201 = buildKitSet('twinleaf'); // Wave C: Sinnoh starter corridor wears Twinleaf's set
+  cache.kitTowns.r201 = buildKitSet('twinleaf'); // Wave C: Borea starter corridor wears Clover's set
   cache.kitTowns.r216 = buildKitSet('snowpoint'); // Wave C: the snow approach — canopies + tufts dress, authored frost/ice floors stay
   cache.kitTowns.r217 = buildKitSet('snowpoint');
   cache.kitTowns.r228 = buildKitSet('survival-area', { ground: 'desert' }); // Wave C: the desert corridor — Survival roofs on original dry ground
@@ -1555,9 +1555,9 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   ...H3_PROP_KINDS,
   // Arc 3 Stage H3b: Maris east props composite over their ground too.
   ...H3B_PROP_KINDS,
-  // Arc 4 Stage S3a: Sinnoh props composite over their ground too.
+  // Arc 4 Stage S3a: Borea props composite over their ground too.
   ...S3_PROP_KINDS,
-  // Arc 4 Stage S3b: Sinnoh east/north props composite over their ground too.
+  // Arc 4 Stage S3b: Borea east/north props composite over their ground too.
   ...S3B_PROP_KINDS]);
 export function groundFamilyOf(kind) {
   // Perfection Pass Stage 2 Gate 2 (G2): beach kinds stand on tropgrass,
@@ -1660,7 +1660,7 @@ const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall'
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
   'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
   'starglobe', 'column', 'coral', 'bonsai',
-  // Wave C: Orange / frontier / Sinnoh regional props (S3/S3B + the
+  // Wave C: Orange / frontier / Borea regional props (S3/S3B + the
   // generic prop kinds those towns use) — same kit-ground treatment.
   'honeytree', 'ironarch', 'contestdome', 'marshreed', 'solarpanel',
   'originstone', 'shrine', 'switchboard', 'gamestation', 'trophycase',
@@ -1784,7 +1784,7 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
   if (kind === 'door-house' || kind === 'door-wood-facade' || kind === 'door-brick') return [K.door].filter(Boolean);
   if (kind === 'door-wood-l') return [K.door].filter(Boolean);
   if (kind === 'door-wood-r') return [K.doorR || K.door].filter(Boolean);
-  // Generic shared buildings (Wave C): Orange / frontier / Sinnoh
+  // Generic shared buildings (Wave C): Orange / frontier / Borea
   // towns whose houses and service blocks use the shared roof and
   // wall families instead of per-town tr-/tw- rows. Roof rows read
   // across their whole family (+ signs) and wear the kit roof, like

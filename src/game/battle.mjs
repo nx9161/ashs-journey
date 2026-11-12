@@ -229,7 +229,7 @@ export class BattleScene {
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
     this.safari = !!opts.safari; // Bramble Preserve: no ally actions, BALL/BAIT/ROCK/RUN
-    this.safariRockLabel = opts.safariRock || 'ROCK'; // S4: the zone's own word for the rock throw (the Great Marsh throws MUD) — data, from the session (the boolean below stays the thrown state)
+    this.safariRockLabel = opts.safariRock || 'ROCK'; // S4: the zone's own word for the rock throw (the Great Mire throws MUD) — data, from the session (the boolean below stays the thrown state)
     this.onEnd = opts.onEnd || null; // story-event continuation callback
     this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
     this.friendly = !!opts.friendly; // no-stakes battle (Candy Coach spar): defeat costs nothing

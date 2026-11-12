@@ -357,7 +357,7 @@ export const H3B_PROP_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'prop').map(
 export const H3B_FLOOR_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const H3B_WALL_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const H3B_WALKABLE_CHARS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => H3B_KIND_CHARS[k]);
-// ---- Arc 4 Stage S3a: Sinnoh kinds ----
+// ---- Arc 4 Stage S3a: Borea kinds ----
 // Chars continue the block at U+1E00+404 (W6 0..131, W7 132..151, O1
 // 152..163, J3 kinds 164..172, Yamato towns 173..260, H3 kinds 261..267,
 // Maris towns 268..395, H3b kinds 396..403). Same class convention:
@@ -379,16 +379,16 @@ export const S3_PROP_KINDS = S3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([
 export const S3_FLOOR_KINDS = S3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const S3_WALL_KINDS = S3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const S3_WALKABLE_CHARS = S3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => S3_KIND_CHARS[k]);
-// ---- Arc 4 Stage S3a: Sinnoh per-town identity kinds (the W5/J3/H3
+// ---- Arc 4 Stage S3a: Borea per-town identity kinds (the W5/J3/H3
 // machinery, extended a fourth time) ----
-// The fourteen Sinnoh settlements own the same eight signature kinds
+// The fourteen Borea settlements own the same eight signature kinds
 // as the Arden/Yamato/Maris towns. Chars continue the block after the
 // S3 kinds: town i owns idx 412+i*8 .. 419+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. S3a authors the ten west/central
 // towns (twinleaf..canalave, idx 412..491); the four east towns
 // (pastoria..sunnyshore, idx 492..523) are reserved here exactly as
 // Maris reserved its east towns at H3a — S3b authors their tiles.
-// The art.mjs resolver keys on the kind-name prefixes, so Sinnoh
+// The art.mjs resolver keys on the kind-name prefixes, so Borea
 // kinds ride the shipped W5 rendering paths unchanged.
 export const SINNOH_TOWN_ORDER = ['twinleaf', 'sandgem', 'jubilife', 'oreburgh', 'floaroma',
   'eterna', 'hearthome', 'solaceon', 'veilstone', 'canalave',
@@ -419,8 +419,8 @@ SINNOH_TOWN_ORDER.forEach((id, i) => {
     TILE_CHARS[ch] = sfx + '-' + id;
   });
 });
-// ---- Arc 4 Stage S3b: Sinnoh east/north kinds ----
-// Chars continue the block at U+1E00+524 (S3 kinds 404..411, Sinnoh
+// ---- Arc 4 Stage S3b: Borea east/north kinds ----
+// Chars continue the block at U+1E00+524 (S3 kinds 404..411, Borea
 // towns 412..523). Same class convention as S3: floor = WALKABLE
 // ground family of its own, wall = solid, prop = solid object
 // composited over the ground it stands on. Authored art:
@@ -428,7 +428,7 @@ SINNOH_TOWN_ORDER.forEach((id, i) => {
 // climbwall is the Rock Climb GATE kind: a solid cliff face whose
 // TILE_CHARS kind name is the marker the S4 field-move system reads
 // (the Cut-tree idiom — the gate lives in the tile, the move lands
-// in S4). distortfalls is the Distortion World's waterfall-walking
+// in S4). distortfalls is the Mirrorworld's waterfall-walking
 // floor: a WALKABLE floor family drawn as falling water (the honest
 // engine idiom for DW's inverted falls — you walk the falls as
 // floor; no new movement system is faked).

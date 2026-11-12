@@ -211,17 +211,17 @@ export const MAP_GROUND = {
   'cave-of-origin': 'spirit',
   'sky-pillar': 'storm',
   'mt-silver-cave': 'frost',
-  // Arc 4 Stage S5a: Sinnoh first-half gym signature Grounds (existing
+  // Arc 4 Stage S5a: Borea first-half gym signature Grounds (existing
   // 15 only — no new Grounds this stage): Roark's quarry gym rides the
   // Rubble, Gardenia's greenhouse the Bloom, Fantina's theatre of the
   // unseen the Grave, Maylene's bare-knuckle hall the Mind (a fighter's
   // focus). Landmarks follow their feel: the Windworks ride the Storm,
-  // the Galactic tower hums Volt, Lake Verity keeps the Tide, and the
-  // Solaceon Ruins rest on Grave ground.
-  'gym-oreburgh': 'rubble', // Oreburgh Gym — Roark
-  'gym-eterna': 'bloom', // Eterna Gym — Gardenia
-  'gym-hearthome': 'grave', // Hearthome Gym — Fantina
-  'gym-veilstone': 'mind', // Veilstone Gym — Maylene
+  // the Galactic tower hums Volt, Lake Candor keeps the Tide, and the
+  // Repose Ruins rest on Grave ground.
+  'gym-oreburgh': 'rubble', // Coalseam Gym — Roark
+  'gym-eterna': 'bloom', // Heritage Gym — Gardenia
+  'gym-hearthome': 'grave', // Inglenook Gym — Fantina
+  'gym-veilstone': 'mind', // Shardfall Gym — Maylene
   'valley-windworks': 'storm',
   'galactic-eterna': 'volt',
   'lake-verity': 'tide',
@@ -229,15 +229,15 @@ export const MAP_GROUND = {
   // Arc 4 Stage S5b (the same 15 Grounds — no new Grounds): Wake's
   // marsh gym rides the Tide, Byron's steel gym the Rubble of the
   // mine, Candice's the Frost, Volkner's the Volt. Landmarks: the
-  // HQ hums Volt like Eterna's tower, Lake Valor keeps the Tide,
-  // Lake Acuity the Frost, Spear Pillar stands on Spirit ground
+  // HQ hums Volt like Heritage's tower, Lake Gallant keeps the Tide,
+  // Lake Insight the Frost, Zenith Spire stands on Spirit ground
   // (the old earth of the first argument), and the Distortion
   // World — a grave turned inside out — rides the Grave on all
   // six of its floors.
-  'gym-pastoria': 'tide', // Pastoria Gym — Crasher Wake
-  'gym-canalave': 'rubble', // Canalave Gym — Byron
-  'gym-snowpoint': 'frost', // Snowpoint Gym — Candice
-  'gym-sunnyshore': 'volt', // Sunyshore Gym — Volkner
+  'gym-pastoria': 'tide', // Fenland Gym — Crasher Wake
+  'gym-canalave': 'rubble', // Bridgeport Gym — Byron
+  'gym-snowpoint': 'frost', // Rimefall Gym — Candice
+  'gym-sunnyshore': 'volt', // Brightshore Gym — Volkner
   'galactic-hq': 'volt',
   'lake-valor': 'tide',
   'lake-acuity': 'frost',

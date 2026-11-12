@@ -1,37 +1,37 @@
-// maps9.mjs — Arc 4 Stages S3a+S3b: SINNOH, COMPLETE (maps, world
+// maps9.mjs — Arc 4 Stages S3a+S3b: BOREA, COMPLETE (maps, world
 // art data, wild tables). 139 maps: S3a's 62 (10 settlements, 14
-// routes, 13 dungeons/places, 25 interiors — Rowan's lab, Jubilife
-// TV, the two Galactic buildings, the Hearthome Contest Hall,
-// Canalave Library, 14 houses, 5 gyms — shared center/mart
+// routes, 13 dungeons/places, 25 interiors — Rowan's lab, Revelry
+// TV, the two Galactic buildings, the Inglenook Contest Hall,
+// Bridgeport Library, 14 houses, 5 gyms — shared center/mart
 // interiors ride the via{} idiom exactly as Yamato/Maris) + S3b's 77:
-// the 4 remaining settlements (Pastoria + the Great Marsh set,
-// Celestic, Snowpoint, Sunyshore) + the League exterior and
+// the 4 remaining settlements (Fenland + the Great Mire set,
+// Astral, Rimefall, Brightshore) + the League exterior and
 // its lobby/chamber chain, 20 routes (212S, 210N fog segment, 213,
-// 214, 216, 217, 219-230, Spring Path, Seabreak Path), the Battle
-// Zone island (Fight/Survival/Resort settlement-lite + Stark
-// Mountain), Lakes Valor + Acuity (+caves), Sendoff Spring +
-// Turnback Cave, Mt. Coronet NORTH through the S3a gallery seam to
-// Spear Pillar + the Hall of Origin, Snowpoint Temple, Iron Island,
-// Crown Road, Fuego Ironworks, Fullmoon + Newmoon Islands, Flower
-// Paradise, and the six-map DISTORTION WORLD (distortion:true maps;
+// 214, 216, 217, 219-230, Vernal Path, Foamline Path), the Battle
+// Zone island (Fight/Survival/Palmside settlement-lite + Stark
+// Mountain), Lakes Gallant + Insight (+caves), Farewell Spring +
+// Reversal Cave, Mt. Apex NORTH through the S3a gallery seam to
+// Zenith Spire + the Hall of Dawning, Rimefall Temple, Foundry Isle,
+// Summit Road, Blaze Ironworks, Brightmoon + Darkmoon Islands, Flower
+// Paradise, and the six-map MIRRORWORLD (distortion:true maps;
 // distortfalls floors are walked like ground — the engine's honest
 // idiom for its inverted falls). S3b patches S3a maps only at the
 // documented seams (r212 fence opens south, r210 west lane,
-// Veilstone's second south lane, Sandgem's beach lane, the Fuego
-// building on r205, two boat sailors on Canalave's pier, and the
+// Shardfall's second south lane, Shingle's beach lane, the Fuego
+// building on r205, two boat sailors on Bridgeport's pier, and the
 // Coronet gallery seam itself). Rock Climb geography is authored
-// as climbwall gate tiles (r217, Crown Road, Coronet north —
+// as climbwall gate tiles (r217, Summit Road, Coronet north —
 // faces beside ungated through-roads; S4 wires the move). Route
 // 210 — North carries weather:'fog', the field the weather system
 // reads (S4 adds the fog kind + Defog).
-// Travel law: the Sinnoh embark lands at sandgem (registry:
+// Travel law: the Borea embark lands at sandgem (registry:
 // vermilion -> sandgem; S5 wires the embark drive itself); this
 // stage proves the whole west/central half walkable on foot from
-// Sandgem — Twinleaf + Lake Verity west, Jubilife + the Canalave
-// causeway, Oreburgh + the mine, the Ravaged Path to Floaroma, the
-// windworks valley + Eterna Forest to Eterna, the Route 206/207/208
-// foothill web into Mt. Coronet's south + central caverns, and the
-// Hearthome -> Solaceon -> Veilstone north loop. Canalave fields the
+// Shingle — Clover + Lake Candor west, Revelry + the Bridgeport
+// causeway, Coalseam + the mine, the Ruined Path to Honeyfield, the
+// windworks valley + Heritage Forest to Heritage, the Route 206/207/208
+// foothill web into Mt. Apex's south + central caverns, and the
+// Inglenook -> Repose -> Shardfall north loop. Bridgeport fields the
 // ferryArc 'sinnoh' network port (CAPT WESTWIND, ferry 'vermilion')
 // on its harbour pier, the maps6 Beacon / maps7 Fairhaven idiom —
 // the return is unconditional once reached. Gym interiors are
@@ -39,12 +39,12 @@
 // dressed, NPC-free floor with a counter (contestHall field — S4
 // wires the Super Contest reskin); the Galactic buildings are
 // dressed places (their story is S5's); Rotom's room exists in the
-// Old Chateau as a place (its forme system lands S4). Mt. Coronet
+// Ruined Manor as a place (its forme system lands S4). Mt. Apex
 // central is a two-storey cavern (lower hall + upper gallery, stair
 // pair); EXTENSION SEAM for S3b: the gallery's north wall (row 0,
 // cols 13-14) is where the north stair to the summit floors will be
 // cut — no other tile, warp, or landing in the map needs to move.
-// Mothim is wild-obtainable in Eterna Forest (w6) and on Route 205
+// Mothim is wild-obtainable in Heritage Forest (w6) and on Route 205
 // (w4) — the honey-tree country placement recorded in the register.
 // Spiritomb is NOT placed wild anywhere (its summoning is an S6 arc
 // decision). Weather is declared per outdoor map (data only).
@@ -54,7 +54,7 @@
 export const MAPS9 = {
   "twinleaf": {
     "id": "twinleaf",
-    "name": "Twinleaf Town",
+    "name": "Clover Town",
     "music": "pallet-theme",
     "weather": "clear",
     "rows": [
@@ -90,14 +90,14 @@ export const MAPS9 = {
       {"x": 0, "y": 9, "to": {"map": "lake-verity", "x": 24, "y": 8}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "TWINLEAF TOWN — Fresh and free, a town at the very start of the road. Sandgem lies east; Lake Verity sleeps west."},
-      {"x": 15, "y": 15, "text": "LAKE VERITY — West, through the trees. The lake keeps its own counsel and one small cave."},
-      {"x": 7, "y": 12, "text": "TWINLEAF TOWN — East: ROUTE 201 · West: LAKE VERITY."},
+      {"x": 2, "y": 5, "text": "CLOVER TOWN — Fresh and free, a town at the very start of the road. Shingle lies east; Lake Candor sleeps west."},
+      {"x": 15, "y": 15, "text": "LAKE CANDOR — West, through the trees. The lake keeps its own counsel and one small cave."},
+      {"x": 7, "y": 12, "text": "CLOVER TOWN — East: ROUTE 201 · West: LAKE CANDOR."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Twinleaf Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clover Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
       {"x": 8, "y": 7, "name": "MOM’S NEIGHBOR ASHA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Two kids in this town dream louder than the lake birds. The whole street can hear them growing.", "Professor Rowan's lab is one town east. The road there is short; the road back always feels shorter."]},
-      {"x": 19, "y": 6, "name": "PIP ELDER", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["I have watched forty springs come to Twinleaf. Each one brings a trainer out of it.", "Mind the lake mist at dawn. It has opinions."]},
+      {"x": 19, "y": 6, "name": "PIP ELDER", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["I have watched forty springs come to Clover. Each one brings a trainer out of it.", "Mind the lake mist at dawn. It has opinions."]},
       {"x": 6, "y": 13, "name": "YOUNGSTER TAM", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["When I start, I'm going EAST first. East is where journeys live. Then west. Then everywhere.", "The lake cave smells like rain that never left."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "starly", "min": 301, "max": 304, "weight": 30}, {"species": "bidoof", "min": 301, "max": 304, "weight": 30}, {"species": "kricketot", "min": 301, "max": 305, "weight": 22}, {"species": "shinx", "min": 302, "max": 305, "weight": 10}], "water": [{"species": "magikarp", "min": 301, "max": 305, "weight": 40}, {"species": "psyduck", "min": 302, "max": 306, "weight": 30}], "waterRate": 0.08},
@@ -108,7 +108,7 @@ export const MAPS9 = {
   },
   "sandgem": {
     "id": "sandgem",
-    "name": "Sandgem Town",
+    "name": "Shingle Town",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -147,17 +147,17 @@ export const MAPS9 = {
       {"x": 14, "y": 17, "to": {"map": "r219", "x": 12, "y": 1}},
     ],
     "signs": [
-      {"x": 1, "y": 3, "text": "PROF. ROWAN'S LAB — Sinnoh's Pokemon research, run from this beach town. The Professor studies evolution and tolerates no nonsense about it."},
-      {"x": 16, "y": 12, "text": "SANDGEM BEACH — The tide delivers shells, driftwood, and the occasional research assistant."},
-      {"x": 7, "y": 11, "text": "SANDGEM TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
-      {"x": 10, "y": 11, "text": "SANDGEM TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
-      {"x": 18, "y": 11, "text": "SANDGEM TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
-      {"x": 15, "y": 15, "text": "SANDGEM TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."}
+      {"x": 1, "y": 3, "text": "PROF. ROWAN'S LAB — Borea's Pokemon research, run from this beach town. The Professor studies evolution and tolerates no nonsense about it."},
+      {"x": 16, "y": 12, "text": "SHINGLE BEACH — The tide delivers shells, driftwood, and the occasional research assistant."},
+      {"x": 7, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 10, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 18, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
+      {"x": 15, "y": 15, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Sandgem Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
-      {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a Staraptor.", "Jubilife's towers are a walk north. The city never sleeps; it broadcasts."]},
-      {"x": 19, "y": 13, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Shellos change colour with the coast here. The lab writes it down; the beach just does it.", "Twinleaf is west, past the first grass of the journey."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shingle Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
+      {"x": 11, "y": 7, "name": "LAB AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor's bark is worse than his fieldwork, and his fieldwork once involved a Staraptor.", "Revelry's towers are a walk north. The city never sleeps; it broadcasts."]},
+      {"x": 19, "y": 13, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Shellos change colour with the coast here. The lab writes it down; the beach just does it.", "Clover is west, past the first grass of the journey."]},
       {"x": 6, "y": 10, "name": "YOUNGSTER RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the Wingull along the shore. The Wingull are winning on points.", "Route 202's grass rustles at knee height. That's the sound of starting."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "starly", "min": 303, "max": 307, "weight": 26}, {"species": "bidoof", "min": 303, "max": 307, "weight": 24}, {"species": "shinx", "min": 304, "max": 308, "weight": 16}, {"species": "buizel", "min": 304, "max": 308, "weight": 12}], "water": [{"species": "tentacool", "min": 303, "max": 308, "weight": 30}, {"species": "magikarp", "min": 303, "max": 307, "weight": 26}, {"species": "shellos", "min": 304, "max": 308, "weight": 20}, {"species": "wingull", "min": 304, "max": 308, "weight": 18}], "waterRate": 0.08},
@@ -168,7 +168,7 @@ export const MAPS9 = {
   },
   "jubilife": {
     "id": "jubilife",
-    "name": "Jubilife City",
+    "name": "Revelry City",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -211,21 +211,21 @@ export const MAPS9 = {
       {"x": 0, "y": 9, "to": {"map": "r218", "x": 24, "y": 8}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "JUBILIFE CITY — The biggest city in Sinnoh, and it knows it. Jubilife TV beams over every roof; the canals run west to Canalave."},
-      {"x": 24, "y": 4, "text": "JUBILIFE TV — Every screen in Sinnoh tuned to one tower. Visitors mind the cameras and the charisma."},
-      {"x": 16, "y": 12, "text": "JUBILIFE CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
-      {"x": 2, "y": 17, "text": "JUBILIFE CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
-      {"x": 20, "y": 2, "text": "JUBILIFE CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
-      {"x": 8, "y": 16, "text": "JUBILIFE CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
-      {"x": 10, "y": 16, "text": "JUBILIFE CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
-      {"x": 15, "y": 16, "text": "JUBILIFE CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
-      {"x": 21, "y": 16, "text": "JUBILIFE CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 2, "y": 5, "text": "REVELRY CITY — The biggest city in Borea, and it knows it. Revelry TV beams over every roof; the canals run west to Bridgeport."},
+      {"x": 24, "y": 4, "text": "REVELRY TV — Every screen in Borea tuned to one tower. Visitors mind the cameras and the charisma."},
+      {"x": 16, "y": 12, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 2, "y": 17, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 20, "y": 2, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 8, "y": 16, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 10, "y": 16, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 15, "y": 16, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
+      {"x": 21, "y": 16, "text": "REVELRY CITY — South: ROUTE 202 · East: ROUTE 203 · North: ROUTE 204 · West: ROUTE 218."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Jubilife City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
-      {"x": 11, "y": 7, "name": "BROADCAST INTERN VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I fetch coffee for people whose faces are on the building. The building is also their face. It's a lot.", "West gate: the causeway over the water to Canalave. East: Oreburgh's smoke. North: flower country."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Revelry City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 11, "y": 7, "name": "BROADCAST INTERN VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I fetch coffee for people whose faces are on the building. The building is also their face. It's a lot.", "West gate: the causeway over the water to Bridgeport. East: Coalseam's smoke. North: flower country."]},
       {"x": 18, "y": 12, "name": "CITY KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The condos have a hundred windows and every one has a Pokemon in it. I counted the lit ones.", "My NAPSEER teleports to school before I do. Every day. Show-off."]},
-      {"x": 7, "y": 16, "name": "COMMUTER UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Oreburgh miners, Canalave sailors, Floaroma florists — this city's platforms hold all of Sinnoh at rush hour.", "The TV station lets visitors watch a recording. The cameras are kind. Mostly."]},
+      {"x": 7, "y": 16, "name": "COMMUTER UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Coalseam miners, Bridgeport sailors, Honeyfield florists — this city's platforms hold all of Borea at rush hour.", "The TV station lets visitors watch a recording. The cameras are kind. Mostly."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "starly", "min": 306, "max": 311, "weight": 26}, {"species": "bidoof", "min": 306, "max": 311, "weight": 22}, {"species": "shinx", "min": 307, "max": 312, "weight": 18}, {"species": "abra", "min": 308, "max": 313, "weight": 8}, {"species": "bidoof", "min": 306, "max": 310, "weight": 10}], "water": [{"species": "tentacool", "min": 306, "max": 311, "weight": 30}, {"species": "magikarp", "min": 306, "max": 310, "weight": 26}], "waterRate": 0.08},
     "items": [],
@@ -235,7 +235,7 @@ export const MAPS9 = {
   },
   "oreburgh": {
     "id": "oreburgh",
-    "name": "Oreburgh City",
+    "name": "Coalseam City",
     "music": "pewter-theme",
     "weather": "sun",
     "rows": [
@@ -275,13 +275,13 @@ export const MAPS9 = {
       {"x": 14, "y": 0, "to": {"map": "r206", "x": 11, "y": 16}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "OREBURGH CITY — The coal town. The mine runs under it, the museum remembers over it, and the gym sorts the strong from the stubborn."},
-      {"x": 24, "y": 12, "text": "OREBURGH MINE — The working face is open to respectful visitors. Mind the carts; they do not mind you."},
+      {"x": 2, "y": 5, "text": "COALSEAM CITY — The coal town. The mine runs under it, the museum remembers over it, and the gym sorts the strong from the stubborn."},
+      {"x": 24, "y": 12, "text": "COALSEAM MINE — The working face is open to respectful visitors. Mind the carts; they do not mind you."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Oreburgh City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Coalseam City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 11, "y": 7, "name": "MINER BRAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Forty carts a day come up out of that dark, and every one of them sings on the rails.", "The gym leader is a miner first. His Rock types have calluses."]},
-      {"x": 18, "y": 13, "name": "MUSEUM GUIDE SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We revive fossils in the museum lab — old stone into living proof.", "North road climbs to the Eterna side of the mountain country. East: Mt. Coronet's own door."]},
+      {"x": 18, "y": 13, "name": "MUSEUM GUIDE SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We revive fossils in the museum lab — old stone into living proof.", "North road climbs to the Heritage side of the mountain country. East: Mt. Apex's own door."]},
       {"x": 7, "y": 10, "name": "APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I polish the museum's Cranidos skull every morning. It grins. I grin back.", "MUSCLING carry what the carts can't. Nobody here lifts alone."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "geodude", "min": 309, "max": 314, "weight": 24}, {"species": "machop", "min": 309, "max": 314, "weight": 22}, {"species": "zubat", "min": 310, "max": 315, "weight": 18}, {"species": "onix", "min": 311, "max": 315, "weight": 8}, {"species": "ponyta", "min": 310, "max": 314, "weight": 12}], "water": [{"species": "magikarp", "min": 309, "max": 313, "weight": 40}], "waterRate": 0.08},
@@ -292,7 +292,7 @@ export const MAPS9 = {
   },
   "floaroma": {
     "id": "floaroma",
-    "name": "Floaroma Town",
+    "name": "Honeyfield Town",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -327,12 +327,12 @@ export const MAPS9 = {
       {"x": 14, "y": 17, "to": {"map": "ravaged-path", "x": 19, "y": 12}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "FLOAROMA TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ravaged Path home."},
+      {"x": 2, "y": 5, "text": "HONEYFIELD TOWN — A town of flowers, honey, and unhurried bees. East: the windworks valley. South: the Ruined Path home."},
       {"x": 4, "y": 9, "text": "THE HONEY TREES — Sweet sap draws rare wings to the meadows. Mothim drift where the honey trees stand — patient eyes find them."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Floaroma Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
-      {"x": 11, "y": 6, "name": "FLORIST WREN", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every roof in Floaroma is a garden that got promoted.", "Combee read the flower fields like a newspaper. Today's headline is always the same: more flowers."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Honeyfield Town Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
+      {"x": 11, "y": 6, "name": "FLORIST WREN", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every roof in Honeyfield is a garden that got promoted.", "Combee read the flower fields like a newspaper. Today's headline is always the same: more flowers."]},
       {"x": 19, "y": 13, "name": "BEEKEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Honey sweetens the sap, the sap sweetens the trees, the trees sweeten everything else.", "The windworks turbines east keep the valley's hair combed."]},
       {"x": 8, "y": 14, "name": "MEADOW KID FENN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I can name forty flowers and eleven bees. The bees can name me.", "Cherubi ripen twice as fast when you compliment the tree. Science, probably."]},
     ],
@@ -344,7 +344,7 @@ export const MAPS9 = {
   },
   "eterna": {
     "id": "eterna",
-    "name": "Eterna City",
+    "name": "Heritage City",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -384,16 +384,16 @@ export const MAPS9 = {
       {"x": 14, "y": 17, "to": {"map": "r206", "x": 11, "y": 1}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "ETERNA CITY — The historic city, kept in stone and leaf-shadow. The old statue watches the crossroads; the forest keeps the west gate."},
+      {"x": 2, "y": 5, "text": "HERITAGE CITY — The historic city, kept in stone and leaf-shadow. The old statue watches the crossroads; the forest keeps the west gate."},
       {"x": 24, "y": 4, "text": "THE TALL BUILDING — A company with a star for a sign keeps the north street. Its windows are lit at hours offices keep nowhere else."},
-      {"x": 19, "y": 13, "text": "ETERNA CITY — West: ETERNA FOREST · East: ROUTE 211 · South: ROUTE 206."},
-      {"x": 9, "y": 14, "text": "ETERNA CITY — West: ETERNA FOREST · East: ROUTE 211 · South: ROUTE 206."},
-      {"x": 1, "y": 15, "text": "ETERNA CITY — West: ETERNA FOREST · East: ROUTE 211 · South: ROUTE 206."},
+      {"x": 19, "y": 13, "text": "HERITAGE CITY — West: HERITAGE FOREST · East: ROUTE 211 · South: ROUTE 206."},
+      {"x": 9, "y": 14, "text": "HERITAGE CITY — West: HERITAGE FOREST · East: ROUTE 211 · South: ROUTE 206."},
+      {"x": 1, "y": 15, "text": "HERITAGE CITY — West: HERITAGE FOREST · East: ROUTE 211 · South: ROUTE 206."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Eterna City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "HISTORIAN ILSE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Eterna was old when the roads were young. The statue in the square is older than the square.", "The forest west breathes through this city. Gardenia's gym smells of it."]},
-      {"x": 18, "y": 12, "name": "CYCLING COACH BO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["South, the cycling road runs over Wayward Cave to Oreburgh. The cave keeps Gible; the road keeps everyone else honest.", "East, Route 211 climbs to Mt. Coronet's heart."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Heritage City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 11, "y": 7, "name": "HISTORIAN ILSE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Heritage was old when the roads were young. The statue in the square is older than the square.", "The forest west breathes through this city. Gardenia's gym smells of it."]},
+      {"x": 18, "y": 12, "name": "CYCLING COACH BO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["South, the cycling road runs over Stray Cave to Coalseam. The cave keeps Gible; the road keeps everyone else honest.", "East, Route 211 climbs to Mt. Apex's heart."]},
       {"x": 7, "y": 14, "name": "STATUE KEEPER SOL", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Travellers leave flowers at the statue for journeys past and coming.", "A team in star-sign shirts photographs the statue weekly. I sweep around them and say nothing."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "buneary", "min": 320, "max": 326, "weight": 20}, {"species": "staravia", "min": 321, "max": 327, "weight": 16}, {"species": "bidoof", "min": 320, "max": 325, "weight": 16}, {"species": "gastly", "min": 321, "max": 327, "weight": 10}, {"species": "meditite", "min": 321, "max": 326, "weight": 12}, {"species": "bibarel", "min": 322, "max": 327, "weight": 8}], "water": [{"species": "magikarp", "min": 320, "max": 325, "weight": 40}], "waterRate": 0.08},
@@ -404,7 +404,7 @@ export const MAPS9 = {
   },
   "hearthome": {
     "id": "hearthome",
-    "name": "Hearthome City",
+    "name": "Inglenook City",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -449,14 +449,14 @@ export const MAPS9 = {
       {"x": 7, "y": 0, "to": {"map": "amity-square", "x": 11, "y": 12}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "HEARTHOME CITY — The warm heart of Sinnoh. Contests under the gold dome, Amity Square through the north gate, and a gym that haunts politely."},
-      {"x": 5, "y": 2, "text": "AMITY SQUARE — North gate. Walk the lawns with a cute partner and a clear afternoon."},
-      {"x": 7, "y": 18, "text": "HEARTHOME CITY — West: ROUTE 208 · North: ROUTE 209 / AMITY SQUARE · South: ROUTE 212 — NORTH."},
+      {"x": 2, "y": 5, "text": "INGLENOOK CITY — The warm heart of Borea. Contests under the gold dome, Kindred Square through the north gate, and a gym that haunts politely."},
+      {"x": 5, "y": 2, "text": "KINDRED SQUARE — North gate. Walk the lawns with a cute partner and a clear afternoon."},
+      {"x": 7, "y": 18, "text": "INGLENOOK CITY — West: ROUTE 208 · North: ROUTE 209 / KINDRED SQUARE · South: ROUTE 212 — NORTH."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Hearthome City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Inglenook City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Pokemon shone.", "Fantina judges the gym AND half the contests. The city runs on her standards and her accent."]},
-      {"x": 19, "y": 13, "name": "POFFIN COOK MASA", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries in, poffins out, patience throughout. The house by the square takes apprentices.", "Solaceon is north past the Lost Tower. Mind the tower's quiet; it minds you."]},
+      {"x": 19, "y": 13, "name": "POFFIN COOK MASA", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries in, poffins out, patience throughout. The house by the square takes apprentices.", "Repose is north past the Forsaken Tower. Mind the tower's quiet; it minds you."]},
       {"x": 8, "y": 16, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Amity's lawns are for strolling pairs. The Pokemon choose the route; we keep the gates.", "West road runs to the mountain's south door. South, Route 212 heads for the marsh country."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "buneary", "min": 326, "max": 332, "weight": 22}, {"species": "cleffa", "min": 326, "max": 331, "weight": 14}, {"species": "clefairy", "min": 327, "max": 332, "weight": 12}, {"species": "happiny", "min": 327, "max": 332, "weight": 6}, {"species": "chatot", "min": 327, "max": 333, "weight": 12}, {"species": "staravia", "min": 326, "max": 332, "weight": 16}], "water": [{"species": "magikarp", "min": 325, "max": 330, "weight": 40}], "waterRate": 0.08},
@@ -467,7 +467,7 @@ export const MAPS9 = {
   },
   "solaceon": {
     "id": "solaceon",
-    "name": "Solaceon Town",
+    "name": "Repose Town",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -504,21 +504,21 @@ export const MAPS9 = {
       {"x": 14, "y": 0, "to": {"map": "r210", "x": 11, "y": 16}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "SOLACEON TOWN — A quiet town of day cares and old stones. The ruins east keep their letters to themselves."},
-      {"x": 24, "y": 12, "text": "SOLACEON RUINS — The old chambers east of town. Something in there reads over your shoulder."},
-      {"x": 8, "y": 11, "text": "SOLACEON TOWN — South: ROUTE 209 · North: ROUTE 210."},
-      {"x": 19, "y": 2, "text": "SOLACEON TOWN — South: ROUTE 209 · North: ROUTE 210."},
-      {"x": 9, "y": 6, "text": "SOLACEON TOWN — South: ROUTE 209 · North: ROUTE 210."},
-      {"x": 16, "y": 6, "text": "SOLACEON TOWN — South: ROUTE 209 · North: ROUTE 210."},
-      {"x": 1, "y": 11, "text": "SOLACEON TOWN — South: ROUTE 209 · North: ROUTE 210."},
-      {"x": 8, "y": 14, "text": "SOLACEON TOWN — South: ROUTE 209 · North: ROUTE 210."},
-      {"x": 16, "y": 14, "text": "SOLACEON TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 2, "y": 5, "text": "REPOSE TOWN — A quiet town of day cares and old stones. The ruins east keep their letters to themselves."},
+      {"x": 24, "y": 12, "text": "REPOSE RUINS — The old chambers east of town. Something in there reads over your shoulder."},
+      {"x": 8, "y": 11, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 19, "y": 2, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 9, "y": 6, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 16, "y": 6, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 1, "y": 11, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 8, "y": 14, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
+      {"x": 16, "y": 14, "text": "REPOSE TOWN — South: ROUTE 209 · North: ROUTE 210."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Solaceon Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Repose Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "DAY CARE LADY UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["We raise what trainers entrust to us, egg to elder. The fence has heard ten thousand first steps.", "Two eggs hatched the same morning last week. The whole town took the day off."]},
-      {"x": 18, "y": 13, "name": "RUIN DELVER OSSA", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The ruins' chambers spell nothing I will repeat, and I have read them all.", "North road climbs toward Veilstone country. The tower south keeps the road's dead company."]},
-      {"x": 6, "y": 10, "name": "BREEDER KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My Bonsly pretends to be a plant until snack time. Then it pretends faster.", "Hearthome's domes are a walk south. I can see the gold from the north hill."]},
+      {"x": 18, "y": 13, "name": "RUIN DELVER OSSA", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The ruins' chambers spell nothing I will repeat, and I have read them all.", "North road climbs toward Shardfall country. The tower south keeps the road's dead company."]},
+      {"x": 6, "y": 10, "name": "BREEDER KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My Bonsly pretends to be a plant until snack time. Then it pretends faster.", "Inglenook's domes are a walk south. I can see the gold from the north hill."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "buneary", "min": 330, "max": 336, "weight": 22}, {"species": "ponyta", "min": 330, "max": 336, "weight": 20}, {"species": "mimejr", "min": 331, "max": 336, "weight": 12}, {"species": "bonsly", "min": 331, "max": 336, "weight": 10}, {"species": "staravia", "min": 330, "max": 336, "weight": 16}, {"species": "bibarel", "min": 331, "max": 337, "weight": 10}], "water": [{"species": "magikarp", "min": 330, "max": 335, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -528,7 +528,7 @@ export const MAPS9 = {
   },
   "veilstone": {
     "id": "veilstone",
-    "name": "Veilstone City",
+    "name": "Shardfall City",
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
@@ -566,19 +566,19 @@ export const MAPS9 = {
       {"x": 20, "y": 17, "to": {"map": "r214", "x": 12, "y": 1}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "VEILSTONE CITY — Meteor rocks, department shelves, and a fighting gym with a puzzle for a floor. The tall HQ on the north street keeps star-sign hours."},
+      {"x": 2, "y": 5, "text": "SHARDFALL CITY — Meteor rocks, department shelves, and a fighting gym with a puzzle for a floor. The tall HQ on the north street keeps star-sign hours."},
       {"x": 24, "y": 4, "text": "THE HEADQUARTERS — The star-sign company’s main building. Deliveries come and go at all hours; questions do not."},
-      {"x": 3, "y": 14, "text": "VEILSTONE CITY — South: ROUTE 215 / ROUTE 214."},
-      {"x": 5, "y": 6, "text": "VEILSTONE CITY — South: ROUTE 215 / ROUTE 214."},
-      {"x": 15, "y": 6, "text": "VEILSTONE CITY — South: ROUTE 215 / ROUTE 214."},
-      {"x": 21, "y": 9, "text": "VEILSTONE CITY — South: ROUTE 215 / ROUTE 214."},
-      {"x": 8, "y": 15, "text": "VEILSTONE CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 3, "y": 14, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 5, "y": 6, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 15, "y": 6, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 21, "y": 9, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
+      {"x": 8, "y": 15, "text": "SHARDFALL CITY — South: ROUTE 215 / ROUTE 214."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Veilstone City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Shardfall City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
       {"x": 11, "y": 7, "name": "DEPT CLERK VEE", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Four floors of shelves and I still run out of the one thing everyone wants. It's a gift.", "Maylene's gym rearranges itself for challengers. The vegetables in the market do not; stand your ground there."]},
-      {"x": 18, "y": 12, "name": "METEOR WATCHER SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The rocks north of town fell within living memory of the stones themselves. They hum at certain hours.", "Game corner coins, meteor dust, fighting mats — Veilstone collects intense hobbies."]},
-      {"x": 7, "y": 13, "name": "WAREHOUSE HAND BRIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Crates in, crates out. The star-sign crates are heavier and nobody says why.", "South road runs down to the tower country and Solaceon beyond."]},
+      {"x": 18, "y": 12, "name": "METEOR WATCHER SOL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The rocks north of town fell within living memory of the stones themselves. They hum at certain hours.", "Game corner coins, meteor dust, fighting mats — Shardfall collects intense hobbies."]},
+      {"x": 7, "y": 13, "name": "WAREHOUSE HAND BRIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Crates in, crates out. The star-sign crates are heavier and nobody says why.", "South road runs down to the tower country and Repose beyond."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "luxio", "min": 336, "max": 342, "weight": 20}, {"species": "staravia", "min": 336, "max": 342, "weight": 20}, {"species": "stunky", "min": 336, "max": 341, "weight": 16}, {"species": "croagunk", "min": 337, "max": 342, "weight": 8}, {"species": "skuntank", "min": 339, "max": 343, "weight": 6}, {"species": "bibarel", "min": 336, "max": 341, "weight": 12}], "water": [{"species": "magikarp", "min": 335, "max": 340, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -588,7 +588,7 @@ export const MAPS9 = {
   },
   "canalave": {
     "id": "canalave",
-    "name": "Canalave City",
+    "name": "Bridgeport City",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -624,19 +624,19 @@ export const MAPS9 = {
       {"x": 29, "y": 9, "to": {"map": "r218", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 1, "y": 4, "text": "CANALAVE CITY — The harbour city, split by its canal and joined by one iron bridge. Ships for every shore tie up south."},
-      {"x": 10, "y": 12, "text": "CANALAVE HARBOUR — The ferry captain keeps the long crossings at the pier. The library keeps everything else."},
-      {"x": 24, "y": 6, "text": "CANALAVE CITY — East: ROUTE 218."},
-      {"x": 19, "y": 11, "text": "CANALAVE CITY — East: ROUTE 218."},
-      {"x": 0, "y": 8, "text": "CANALAVE CITY — East: ROUTE 218."}
+      {"x": 1, "y": 4, "text": "BRIDGEPORT CITY — The harbour city, split by its canal and joined by one iron bridge. Ships for every shore tie up south."},
+      {"x": 10, "y": 12, "text": "BRIDGEPORT HARBOUR — The ferry captain keeps the long crossings at the pier. The library keeps everything else."},
+      {"x": 24, "y": 6, "text": "BRIDGEPORT CITY — East: ROUTE 218."},
+      {"x": 19, "y": 11, "text": "BRIDGEPORT CITY — East: ROUTE 218."},
+      {"x": 0, "y": 8, "text": "BRIDGEPORT CITY — East: ROUTE 218."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Canalave City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
-      {"x": 13, "y": 13, "name": "CAPT WESTWIND", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Canalave run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "sinnoh"},
-      {"x": 18, "y": 6, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Our library holds Sinnoh's oldest stories, including the ones about this harbour's first bridge.", "Byron's gym is all iron and certainty. The bridge approves; it is also iron."]},
-      {"x": 6, "y": 10, "name": "SAILOR KETT", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Iron Island boats leave from the north pier when the weather allows. The weather is a negotiator.", "East causeway runs to Jubilife over the water. Gulls audit every crossing."]},
-      {"x": 14, "y": 14, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Iron Island, when you're ready. The mine boats run in any weather the island respects, which is most of it.", "Mind the cave dust. It gets into everything, including the stories."], "ferry": "iron-island"},
-      {"x": 12, "y": 14, "name": "SAILOR LUNA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Fullmoon Island rides at anchor beyond the harbour lights. I keep the night run, crescent tides and all.", "Something sleeps in that island's dreams. We sail quiet past it."], "ferry": "fullmoon-island"},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Bridgeport City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
+      {"x": 13, "y": 13, "name": "CAPT WESTWIND", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Bridgeport run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "sinnoh"},
+      {"x": 18, "y": 6, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Our library holds Borea's oldest stories, including the ones about this harbour's first bridge.", "Byron's gym is all iron and certainty. The bridge approves; it is also iron."]},
+      {"x": 6, "y": 10, "name": "SAILOR KETT", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Foundry Isle boats leave from the north pier when the weather allows. The weather is a negotiator.", "East causeway runs to Revelry over the water. Gulls audit every crossing."]},
+      {"x": 14, "y": 14, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Foundry Isle, when you're ready. The mine boats run in any weather the island respects, which is most of it.", "Mind the cave dust. It gets into everything, including the stories."], "ferry": "iron-island"},
+      {"x": 12, "y": 14, "name": "SAILOR LUNA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Brightmoon Island rides at anchor beyond the harbour lights. I keep the night run, crescent tides and all.", "Something sleeps in that island's dreams. We sail quiet past it."], "ferry": "fullmoon-island"},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "wingull", "min": 333, "max": 339, "weight": 24}, {"species": "shellos", "min": 333, "max": 338, "weight": 16}, {"species": "staravia", "min": 333, "max": 339, "weight": 16}, {"species": "buizel", "min": 334, "max": 339, "weight": 12}], "water": [{"species": "tentacool", "min": 332, "max": 338, "weight": 28}, {"species": "wingull", "min": 333, "max": 339, "weight": 20}, {"species": "finneon", "min": 334, "max": 340, "weight": 14}, {"species": "magikarp", "min": 332, "max": 338, "weight": 22}, {"species": "gastrodon", "min": 336, "max": 340, "weight": 6}], "waterRate": 0.08},
     "items": [],
@@ -674,7 +674,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "sandgem", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 201 — Twinleaf Town to Sandgem Town. Every Sinnoh journey starts with this grass on its shoes."},
+      {"x": 12, "y": 7, "text": "ROUTE 201 — Clover Town to Shingle Town. Every Borea journey starts with this grass on its shoes."},
     ],
     "npcs": [
       {"x": 9, "y": 11, "name": "YOUNGSTER TAM", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My Starly knows this route better than I do. It leads; I follow.", "Prof. Rowan does his thinking walks up this way. If you hear muttering, it's science."]},
@@ -717,10 +717,10 @@ export const MAPS9 = {
       {"x": 12, "y": 0, "to": {"map": "jubilife", "x": 13, "y": 18}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 202 — Sandgem Town to Jubilife City. The towers appear before the road feels long."},
+      {"x": 13, "y": 15, "text": "ROUTE 202 — Shingle Town to Revelry City. The towers appear before the road feels long."},
     ],
     "npcs": [
-      {"x": 9, "y": 8, "name": "LASS MIRA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Jubilife's lights are on in the daytime too. The city likes being looked at.", "Shinx spark in this grass after rain. Worth the wet shoes."]},
+      {"x": 9, "y": 8, "name": "LASS MIRA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Revelry's lights are on in the daytime too. The city likes being looked at.", "Shinx spark in this grass after rain. Worth the wet shoes."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "starly", "min": 303, "max": 308, "weight": 28}, {"species": "bidoof", "min": 303, "max": 308, "weight": 26}, {"species": "kricketot", "min": 303, "max": 308, "weight": 20}, {"species": "shinx", "min": 304, "max": 309, "weight": 16}, {"species": "budew", "min": 304, "max": 309, "weight": 10}], "water": [{"species": "tentacool", "min": 302, "max": 308, "weight": 28}, {"species": "magikarp", "min": 302, "max": 307, "weight": 24}, {"species": "wingull", "min": 303, "max": 308, "weight": 20}, {"species": "buizel", "min": 304, "max": 309, "weight": 14}], "waterRate": 0.08},
     "items": [],
@@ -758,10 +758,10 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "oreburgh", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 203 — Jubilife City to Oreburgh City. The grass thins, the stone thickens, the coal smoke begins."},
+      {"x": 12, "y": 7, "text": "ROUTE 203 — Revelry City to Coalseam City. The grass thins, the stone thickens, the coal smoke begins."},
     ],
     "npcs": [
-      {"x": 14, "y": 11, "name": "EXCAVATOR KID CAL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Oreburgh's mine carts sing through the hill. You can hear them on quiet mornings.", "NAPSEER sleep standing up in this grass. Rude to wake them. I wake them."]},
+      {"x": 14, "y": 11, "name": "EXCAVATOR KID CAL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Coalseam's mine carts sing through the hill. You can hear them on quiet mornings.", "NAPSEER sleep standing up in this grass. Rude to wake them. I wake them."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "shinx", "min": 307, "max": 312, "weight": 22}, {"species": "budew", "min": 307, "max": 312, "weight": 20}, {"species": "starly", "min": 306, "max": 311, "weight": 20}, {"species": "abra", "min": 308, "max": 313, "weight": 8}, {"species": "bidoof", "min": 306, "max": 311, "weight": 16}, {"species": "zubat", "min": 307, "max": 312, "weight": 10}], "water": [{"species": "tentacool", "min": 302, "max": 308, "weight": 28}, {"species": "magikarp", "min": 302, "max": 307, "weight": 24}, {"species": "wingull", "min": 303, "max": 308, "weight": 20}, {"species": "buizel", "min": 304, "max": 309, "weight": 14}], "waterRate": 0.08},
     "items": [],
@@ -801,7 +801,7 @@ export const MAPS9 = {
       {"x": 12, "y": 0, "to": {"map": "ravaged-path", "x": 3, "y": 12}},
     ],
     "signs": [
-      {"x": 13, "y": 2, "text": "RAVAGED PATH — The cave under the north bluff. Through it: Floaroma’s flowers. The path was a road before it was a cave, and remembers both."},
+      {"x": 13, "y": 2, "text": "RUINED PATH — The cave under the north bluff. Through it: Honeyfield’s flowers. The path was a road before it was a cave, and remembers both."},
     ],
     "npcs": [
       {"x": 14, "y": 12, "name": "HIKER PAVEL", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The ravaged path is the mountain changing its mind in public.", "Budew drink the cave drip at the north mouth. Walk gentle there."]},
@@ -845,9 +845,9 @@ export const MAPS9 = {
       {"x": 5, "y": 3, "to": {"map": "fuego-ironworks", "x": 8, "y": 10}},
     ],
     "signs": [
-      {"x": 13, "y": 5, "text": "VALLEY WINDWORKS — The turbines drink the valley wind. Something small and round haunts the building on still days."},
-      {"x": 4, "y": 7, "text": "ROUTE 205 — Floaroma to the Eterna Forest. Honey on the trees, turbines on the hill, forest at the end of the grass."},
-      {"x": 7, "y": 4, "text": "FUEGO IRONWORKS — The charcoal works on the river bank. Iron, ash, and a foreman who counts both."},
+      {"x": 13, "y": 5, "text": "VALLEY GALEWORKS — The turbines drink the valley wind. Something small and round haunts the building on still days."},
+      {"x": 4, "y": 7, "text": "ROUTE 205 — Honeyfield to the Heritage Forest. Honey on the trees, turbines on the hill, forest at the end of the grass."},
+      {"x": 7, "y": 4, "text": "BLAZE IRONWORKS — The charcoal works on the river bank. Iron, ash, and a foreman who counts both."},
     ],
     "npcs": [
       {"x": 16, "y": 11, "name": "TURBINE TECH JUNO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Twelve turbines, one valley, zero calm days. The grid loves it here.", "A Drifloon drifts round the building some days, like it pays rent in weather."]},
@@ -892,7 +892,7 @@ export const MAPS9 = {
       {"x": 3, "y": 9, "to": {"map": "wayward-cave", "x": 12, "y": 14}},
     ],
     "signs": [
-      {"x": 5, "y": 7, "text": "WAYWARD CAVE — Under the cycling road. Dark, echoing, and — the miners swear — holding Gible in its deepest room."},
+      {"x": 5, "y": 7, "text": "STRAY CAVE — Under the cycling road. Dark, echoing, and — the miners swear — holding Gible in its deepest room."},
     ],
     "npcs": [
       {"x": 14, "y": 8, "name": "CYCLIST RHEA", "art": "lass", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["The road above, the cave below, and my legs arguing with both.", "Something scrabbles under the road at night. The cave keeping its own hours."]},
@@ -933,7 +933,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "mt-coronet-south", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 207 — Oreburgh City to Mt. Coronet. The road climbs the whole way; so will you."},
+      {"x": 12, "y": 7, "text": "ROUTE 207 — Coalseam City to Mt. Apex. The road climbs the whole way; so will you."},
     ],
     "npcs": [
       {"x": 10, "y": 11, "name": "HIKER EMBER", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The mountain keeps its south door open for honest legs.", "Bronzor ring faintly on this road when the wind is right. Nobody teaches them."]},
@@ -974,7 +974,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "mt-coronet-south", "x": 12, "y": 16}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 208 — Hearthome City to Mt. Coronet’s south door. The domes shrink behind you; the mountain does not."},
+      {"x": 12, "y": 7, "text": "ROUTE 208 — Inglenook City to Mt. Apex’s south door. The domes shrink behind you; the mountain does not."},
     ],
     "npcs": [
       {"x": 16, "y": 11, "name": "HIKER DUST", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Two doors into the mountain from the south country, and both of them earned.", "Mime Jr. copy the hikers' stretches at the rest rocks. Form is terrible. Commitment is total."]},
@@ -1019,10 +1019,10 @@ export const MAPS9 = {
       {"x": 20, "y": 7, "to": {"map": "lost-tower", "x": 8, "y": 12}},
     ],
     "signs": [
-      {"x": 20, "y": 10, "text": "LOST TOWER — The road’s quiet neighbour. Bells for the remembered, rest for the travellers."},
+      {"x": 20, "y": 10, "text": "FORSAKEN TOWER — The road’s quiet neighbour. Bells for the remembered, rest for the travellers."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "PILGRIM ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I walk this road twice a year and leave flowers at the tower both times.", "The tower bells carry to Hearthome on still evenings. The city listens like family."]},
+      {"x": 9, "y": 12, "name": "PILGRIM ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["I walk this road twice a year and leave flowers at the tower both times.", "The tower bells carry to Inglenook on still evenings. The city listens like family."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "buneary", "min": 327, "max": 334, "weight": 20}, {"species": "clefairy", "min": 328, "max": 334, "weight": 14}, {"species": "ponyta", "min": 327, "max": 334, "weight": 18}, {"species": "chatot", "min": 328, "max": 335, "weight": 12}, {"species": "mimejr", "min": 328, "max": 334, "weight": 10}, {"species": "staravia", "min": 327, "max": 333, "weight": 14}], "water": [{"species": "tentacool", "min": 314, "max": 320, "weight": 26}, {"species": "magikarp", "min": 314, "max": 319, "weight": 22}, {"species": "wingull", "min": 315, "max": 320, "weight": 18}, {"species": "buizel", "min": 315, "max": 321, "weight": 16}, {"species": "shellos", "min": 315, "max": 320, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -1064,10 +1064,10 @@ export const MAPS9 = {
       {"x": 0, "y": 9, "to": {"map": "r210-north", "x": 24, "y": 9}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 210 — Solaceon Town to the Veilstone road. North the grass deepens and the towers begin."},
+      {"x": 13, "y": 15, "text": "ROUTE 210 — Repose Town to the Shardfall road. North the grass deepens and the towers begin."},
     ],
     "npcs": [
-      {"x": 14, "y": 8, "name": "RANCHER BO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["EMBERFOAL herds bunch at the north fence like the road owes them a race.", "Veilstone's store lights are visible from the top field. My wallet feels it from here."]},
+      {"x": 14, "y": 8, "name": "RANCHER BO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["EMBERFOAL herds bunch at the north fence like the road owes them a race.", "Shardfall's store lights are visible from the top field. My wallet feels it from here."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "ponyta", "min": 332, "max": 339, "weight": 20}, {"species": "chatot", "min": 332, "max": 338, "weight": 14}, {"species": "rapidash", "min": 335, "max": 340, "weight": 6}, {"species": "chansey", "min": 333, "max": 339, "weight": 6}, {"species": "meditite", "min": 332, "max": 338, "weight": 12}, {"species": "staravia", "min": 332, "max": 338, "weight": 16}, {"species": "bibarel", "min": 332, "max": 338, "weight": 12}], "water": [{"species": "tentacool", "min": 330, "max": 336, "weight": 24}, {"species": "magikarp", "min": 330, "max": 335, "weight": 20}, {"species": "wingull", "min": 331, "max": 336, "weight": 18}, {"species": "finneon", "min": 332, "max": 337, "weight": 12}, {"species": "floatzel", "min": 333, "max": 338, "weight": 8}, {"species": "gastrodon", "min": 334, "max": 339, "weight": 6}], "waterRate": 0.08},
     "items": [],
@@ -1105,7 +1105,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "mt-coronet-central", "x": 1, "y": 10}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 211 — Eterna City to Mt. Coronet’s west door. The road ends at the mountain; the mountain is not an ending."},
+      {"x": 12, "y": 7, "text": "ROUTE 211 — Heritage City to Mt. Apex’s west door. The road ends at the mountain; the mountain is not an ending."},
     ],
     "npcs": [
       {"x": 9, "y": 11, "name": "HIKER PAVEL", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Inside that mountain, the caves run north like a spine. The upper gallery is as far as the marked road goes — for now.", "Medicham meditate on the bluff stones. The stones are winning."]},
@@ -1148,10 +1148,10 @@ export const MAPS9 = {
       {"x": 12, "y": 17, "to": {"map": "r212-south", "x": 12, "y": 1}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 212 — NORTH — Hearthome to the marsh country. The road south runs on through the wet pools to Pastoria. Bring boots you have already forgiven."},
+      {"x": 13, "y": 15, "text": "ROUTE 212 — NORTH — Inglenook to the marsh country. The road south runs on through the wet pools to Fenland. Bring boots you have already forgiven."},
     ],
     "npcs": [
-      {"x": 9, "y": 8, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Wooper own the south pools and sublet to the Quagsire.", "Pastoria's marsh begins where this fence ends. Bring boots you have already forgiven."]},
+      {"x": 9, "y": 8, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Wooper own the south pools and sublet to the Quagsire.", "Fenland's marsh begins where this fence ends. Bring boots you have already forgiven."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "psyduck", "min": 328, "max": 334, "weight": 18}, {"species": "wooper", "min": 328, "max": 334, "weight": 16}, {"species": "buneary", "min": 328, "max": 334, "weight": 16}, {"species": "shellos", "min": 329, "max": 335, "weight": 14}, {"species": "quagsire", "min": 331, "max": 336, "weight": 8}, {"species": "golduck", "min": 331, "max": 336, "weight": 8}], "water": [{"species": "tentacool", "min": 330, "max": 336, "weight": 24}, {"species": "magikarp", "min": 330, "max": 335, "weight": 20}, {"species": "wingull", "min": 331, "max": 336, "weight": 18}, {"species": "finneon", "min": 332, "max": 337, "weight": 12}, {"species": "floatzel", "min": 333, "max": 338, "weight": 8}, {"species": "gastrodon", "min": 334, "max": 339, "weight": 6}], "waterRate": 0.08},
     "items": [],
@@ -1191,10 +1191,10 @@ export const MAPS9 = {
       {"x": 12, "y": 0, "to": {"map": "veilstone", "x": 13, "y": 16}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 215 — The Veilstone road. Rain-slick grass, meteor country ahead, and a gym at the end of it."},
+      {"x": 13, "y": 15, "text": "ROUTE 215 — The Shardfall road. Rain-slick grass, meteor country ahead, and a gym at the end of it."},
     ],
     "npcs": [
-      {"x": 9, "y": 8, "name": "TRAINER SCHOOL KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Veilstone's gym leader is my age-adjacent and terrifying. Respectfully.", "Croagunk croak from the wet grass before you see them. The road announces itself."]},
+      {"x": 9, "y": 8, "name": "TRAINER SCHOOL KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Shardfall's gym leader is my age-adjacent and terrifying. Respectfully.", "Croagunk croak from the wet grass before you see them. The road announces itself."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "ponyta", "min": 334, "max": 340, "weight": 18}, {"species": "luxio", "min": 334, "max": 340, "weight": 16}, {"species": "staravia", "min": 334, "max": 340, "weight": 16}, {"species": "rapidash", "min": 336, "max": 342, "weight": 8}, {"species": "bibarel", "min": 334, "max": 339, "weight": 12}, {"species": "croagunk", "min": 335, "max": 341, "weight": 8}], "water": [{"species": "tentacool", "min": 330, "max": 336, "weight": 24}, {"species": "magikarp", "min": 330, "max": 335, "weight": 20}, {"species": "wingull", "min": 331, "max": 336, "weight": 18}, {"species": "finneon", "min": 332, "max": 337, "weight": 12}, {"species": "floatzel", "min": 333, "max": 338, "weight": 8}, {"species": "gastrodon", "min": 334, "max": 339, "weight": 6}], "waterRate": 0.08},
     "items": [],
@@ -1232,7 +1232,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "canalave", "x": 28, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 218 — The Canalave causeway. Planks over bright water: Jubilife behind, the harbour ahead."},
+      {"x": 12, "y": 7, "text": "ROUTE 218 — The Bridgeport causeway. Planks over bright water: Revelry behind, the harbour ahead."},
     ],
     "npcs": [
       {"x": 12, "y": 10, "name": "CAUSEWAY KEEPER DEL", "art": "fisher", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I count gulls at dawn and crossings at dusk. Both numbers are classified.", "Finneon light the shallows under the planks on dark mornings."]},
@@ -1245,7 +1245,7 @@ export const MAPS9 = {
   },
   "lake-verity": {
     "id": "lake-verity",
-    "name": "Lake Verity",
+    "name": "Lake Candor",
     "music": "pallet-theme",
     "weather": "clear",
     "rows": [
@@ -1273,11 +1273,11 @@ export const MAPS9 = {
       {"x": 13, "y": 1, "to": {"map": "lake-verity-cave", "x": 8, "y": 8}},
     ],
     "signs": [
-      {"x": 14, "y": 2, "text": "LAKE VERITY — The lake of emotion, the old stories say. A small cave keeps the north shore."},
+      {"x": 14, "y": 2, "text": "LAKE CANDOR — The lake of emotion, the old stories say. A small cave keeps the north shore."},
       {"x": 20, "y": 12, "text": "THE NORTH CAVE — Cool, dripping, and older than the town it neighbours."},
     ],
     "npcs": [
-      {"x": 20, "y": 6, "name": "LAKESIDE ELDER BRAMBLE", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three lakes in Sinnoh, three old stories. This one is ours, and it is the quietest.", "Something lived in that lake once that made the mist behave. The mist still behaves."]},
+      {"x": 20, "y": 6, "name": "LAKESIDE ELDER BRAMBLE", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three lakes in Borea, three old stories. This one is ours, and it is the quietest.", "Something lived in that lake once that made the mist behave. The mist still behaves."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "starly", "min": 302, "max": 307, "weight": 22}, {"species": "bidoof", "min": 302, "max": 307, "weight": 22}, {"species": "psyduck", "min": 303, "max": 308, "weight": 14}, {"species": "kricketot", "min": 302, "max": 307, "weight": 16}], "water": [{"species": "magikarp", "min": 302, "max": 307, "weight": 30}, {"species": "psyduck", "min": 303, "max": 308, "weight": 26}, {"species": "golduck", "min": 305, "max": 309, "weight": 8}, {"species": "tentacool", "min": 303, "max": 308, "weight": 14}], "waterRate": 0.08},
     "items": [],
@@ -1287,7 +1287,7 @@ export const MAPS9 = {
   },
   "lake-verity-cave": {
     "id": "lake-verity-cave",
-    "name": "Verity Cavern",
+    "name": "Candor Cavern",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1307,7 +1307,7 @@ export const MAPS9 = {
       {"x": 8, "y": 9, "to": {"map": "lake-verity", "x": 12, "y": 2}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "VERITY CAVERN — The lake’s small heart. The water in here has never seen the sky and does not miss it."},
+      {"x": 8, "y": 2, "text": "CANDOR CAVERN — The lake’s small heart. The water in here has never seen the sky and does not miss it."},
     ],
     "npcs": [
     ],
@@ -1319,7 +1319,7 @@ export const MAPS9 = {
   },
   "oreburgh-mine": {
     "id": "oreburgh-mine",
-    "name": "Oreburgh Mine",
+    "name": "Coalseam Mine",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1343,7 +1343,7 @@ export const MAPS9 = {
       {"x": 11, "y": 13, "to": {"map": "oreburgh", "x": 4, "y": 13}},
     ],
     "signs": [
-      {"x": 11, "y": 2, "text": "OREBURGH MINE — The working face. Fossils surface here the way secrets surface in small towns: eventually, and to applause."},
+      {"x": 11, "y": 2, "text": "COALSEAM MINE — The working face. Fossils surface here the way secrets surface in small towns: eventually, and to applause."},
     ],
     "npcs": [
       {"x": 6, "y": 6, "name": "FOREMAN BRAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Carts run on the hour; fossils run when they please.", "A Cranidos came out of the east wall last spring mad as a wet cat. The museum has it now. It has the museum, some days."]},
@@ -1356,7 +1356,7 @@ export const MAPS9 = {
   },
   "ravaged-path": {
     "id": "ravaged-path",
-    "name": "Ravaged Path",
+    "name": "Ruined Path",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1382,7 +1382,7 @@ export const MAPS9 = {
       {"x": 20, "y": 13, "to": {"map": "floaroma", "x": 14, "y": 16}},
     ],
     "signs": [
-      {"x": 11, "y": 12, "text": "RAVAGED PATH — South doors: Jubilife’s road. North doors: Floaroma’s flowers. The hill keeps the middle for itself."},
+      {"x": 11, "y": 12, "text": "RUINED PATH — South doors: Revelry’s road. North doors: Honeyfield’s flowers. The hill keeps the middle for itself."},
     ],
     "npcs": [
     ],
@@ -1394,7 +1394,7 @@ export const MAPS9 = {
   },
   "valley-windworks": {
     "id": "valley-windworks",
-    "name": "Valley Windworks",
+    "name": "Valley Galeworks",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -1416,7 +1416,7 @@ export const MAPS9 = {
       {"x": 9, "y": 11, "to": {"map": "r205", "x": 13, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "VALLEY WINDWORKS — Control room. The turbines outside argue with the wind; this room keeps score."},
+      {"x": 8, "y": 2, "text": "VALLEY GALEWORKS — Control room. The turbines outside argue with the wind; this room keeps score."},
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "WORKS CLERK", "art": "clerk", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Power for three towns runs through this room and one very patient kettle.", "A round, drifting Pokemon naps by the turbines some days. It signs the guest book as WEATHER."]},
@@ -1429,7 +1429,7 @@ export const MAPS9 = {
   },
   "eterna-forest": {
     "id": "eterna-forest",
-    "name": "Eterna Forest",
+    "name": "Heritage Forest",
     "music": "viridian-theme",
     "weather": "rain",
     "rows": [
@@ -1460,8 +1460,8 @@ export const MAPS9 = {
       {"x": 13, "y": 2, "to": {"map": "old-chateau", "x": 9, "y": 12}},
     ],
     "signs": [
-      {"x": 14, "y": 7, "text": "ETERNA FOREST — Deep shade, soft ground. The forest keeps a spare of everything: light, sound, and directions."},
-      {"x": 14, "y": 4, "text": "THE OLD CHATEAU — The forest’s one house, long empty. The garden statue watches the path; the windows watch everything else."},
+      {"x": 14, "y": 7, "text": "HERITAGE FOREST — Deep shade, soft ground. The forest keeps a spare of everything: light, sound, and directions."},
+      {"x": 14, "y": 4, "text": "THE RUINED MANOR — The forest’s one house, long empty. The garden statue watches the path; the windows watch everything else."},
     ],
     "npcs": [
       {"x": 9, "y": 10, "name": "BUG MANIAC FERN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Both Wurmple roads run through this forest, silk and cascoon alike, if your eyes are patient.", "Mothim drift down from the honey trees at dusk. The chateau garden is their ballroom."]},
@@ -1474,7 +1474,7 @@ export const MAPS9 = {
   },
   "old-chateau": {
     "id": "old-chateau",
-    "name": "Old Chateau",
+    "name": "Ruined Manor",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1499,7 +1499,7 @@ export const MAPS9 = {
     ],
     "signs": [
       {"x": 16, "y": 4, "text": "A SMALL ROOM — An old television hums here on no power at all. Something inside it is watching back. (Whatever it wants, it is not ready yet.)"},
-      {"x": 9, "y": 11, "text": "THE OLD CHATEAU — Dining hall below, bedrooms above, and a quiet that has kept the place furnished better than any tenant."},
+      {"x": 9, "y": 11, "text": "THE RUINED MANOR — Dining hall below, bedrooms above, and a quiet that has kept the place furnished better than any tenant."},
     ],
     "npcs": [
     ],
@@ -1511,7 +1511,7 @@ export const MAPS9 = {
   },
   "wayward-cave": {
     "id": "wayward-cave",
-    "name": "Wayward Cave",
+    "name": "Stray Cave",
     "music": "pewter-theme",
     "indoor": true,
     "dark": true,
@@ -1538,7 +1538,7 @@ export const MAPS9 = {
       {"x": 12, "y": 15, "to": {"map": "r206", "x": 4, "y": 9}},
     ],
     "signs": [
-      {"x": 12, "y": 12, "text": "WAYWARD CAVE — The deep room is the whole point. Small jaws in the dark: the Gible nest here, and they know it."},
+      {"x": 12, "y": 12, "text": "STRAY CAVE — The deep room is the whole point. Small jaws in the dark: the Gible nest here, and they know it."},
     ],
     "npcs": [
     ],
@@ -1550,7 +1550,7 @@ export const MAPS9 = {
   },
   "mt-coronet-south": {
     "id": "mt-coronet-south",
-    "name": "Mt. Coronet — South",
+    "name": "Mt. Apex — South",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1582,7 +1582,7 @@ export const MAPS9 = {
       {"x": 13, "y": 0, "to": {"map": "mt-coronet-central", "x": 14, "y": 20}},
     ],
     "signs": [
-      {"x": 13, "y": 14, "text": "MT. CORONET — SOUTH CAVERN — West: the Oreburgh road. South: the Hearthome road. North: the mountain’s heart, and above it, weather."},
+      {"x": 13, "y": 14, "text": "MT. APEX — SOUTH CAVERN — West: the Coalseam road. South: the Inglenook road. North: the mountain’s heart, and above it, weather."},
     ],
     "npcs": [
     ],
@@ -1594,7 +1594,7 @@ export const MAPS9 = {
   },
   "mt-coronet-central": {
     "id": "mt-coronet-central",
-    "name": "Mt. Coronet — Central",
+    "name": "Mt. Apex — Central",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1632,7 +1632,7 @@ export const MAPS9 = {
       {"x": 14, "y": 0, "to": {"map": "mt-coronet-north", "x": 14, "y": 18}},
     ],
     "signs": [
-      {"x": 14, "y": 19, "text": "MT. CORONET — CENTRAL CAVERN — The spine of Sinnoh. West: Eterna’s road. South: the foothill cavern. The stairs climb to the upper gallery."},
+      {"x": 14, "y": 19, "text": "MT. APEX — CENTRAL CAVERN — The spine of Borea. West: Heritage’s road. South: the foothill cavern. The stairs climb to the upper gallery."},
       {"x": 13, "y": 1, "text": "THE NORTH STAIR — The gallery’s north wall opens on a rising draught and dressed steps. The mountain continues up: the north cavern, and above it, the pillar in the sky."},
     ],
     "npcs": [
@@ -1645,7 +1645,7 @@ export const MAPS9 = {
   },
   "solaceon-ruins": {
     "id": "solaceon-ruins",
-    "name": "Solaceon Ruins",
+    "name": "Repose Ruins",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1681,7 +1681,7 @@ export const MAPS9 = {
   },
   "lost-tower": {
     "id": "lost-tower",
-    "name": "Lost Tower",
+    "name": "Forsaken Tower",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -1705,7 +1705,7 @@ export const MAPS9 = {
       {"x": 9, "y": 13, "to": {"map": "r209", "x": 19, "y": 9}},
     ],
     "signs": [
-      {"x": 9, "y": 2, "text": "LOST TOWER — Every stone here is a name somebody loved. Travellers ring the bell and walk the road lighter."},
+      {"x": 9, "y": 2, "text": "FORSAKEN TOWER — Every stone here is a name somebody loved. Travellers ring the bell and walk the road lighter."},
     ],
     "npcs": [
     ],
@@ -1717,7 +1717,7 @@ export const MAPS9 = {
   },
   "amity-square": {
     "id": "amity-square",
-    "name": "Amity Square",
+    "name": "Kindred Square",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -1741,7 +1741,7 @@ export const MAPS9 = {
       {"x": 12, "y": 13, "to": {"map": "hearthome", "x": 6, "y": 1}},
     ],
     "signs": [
-      {"x": 12, "y": 5, "text": "AMITY SQUARE — Lawns for strolling pairs. The Pokemon choose the route; the wardens keep the gates and the lemonade."},
+      {"x": 12, "y": 5, "text": "KINDRED SQUARE — Lawns for strolling pairs. The Pokemon choose the route; the wardens keep the gates and the lemonade."},
     ],
     "npcs": [
       {"x": 14, "y": 8, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North lawn for the shy ones, south lawn for the show-offs. Both lawns are correct.", "A Cleffa walked me in a circle for an hour last spring. Best hour of the year."]},
@@ -1754,7 +1754,7 @@ export const MAPS9 = {
   },
   "house-twinleaf": {
     "id": "house-twinleaf",
-    "name": "Twinleaf House",
+    "name": "Clover House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -1776,7 +1776,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "MS. HARLOW", "art": "lady", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["A trainer's house learns to keep a bag half-packed by the door.", "East is Sandgem, and Sandgem is the world beginning. Eat first."]},
+      {"x": 7, "y": 3, "name": "MS. HARLOW", "art": "lady", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["A trainer's house learns to keep a bag half-packed by the door.", "East is Shingle, and Shingle is the world beginning. Eat first."]},
     ],
     "encounters": null,
     "items": [],
@@ -1808,7 +1808,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "MR. OKONKWO", "art": "gent", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["My kid left at dawn with a notebook and a head start. Twinleaf exports rivals.", "Rowan's lab coats the whole region in questions. Good weather, that."]},
+      {"x": 7, "y": 3, "name": "MR. OKONKWO", "art": "gent", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["My kid left at dawn with a notebook and a head start. Clover exports rivals.", "Rowan's lab coats the whole region in questions. Good weather, that."]},
     ],
     "encounters": null,
     "items": [],
@@ -1818,7 +1818,7 @@ export const MAPS9 = {
   },
   "house-sandgem": {
     "id": "house-sandgem",
-    "name": "Sandgem House",
+    "name": "Shingle House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -1840,7 +1840,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "RESEARCH HOSTESS VEE", "art": "lady", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The lab's visiting scholars sleep here. The questions they ask at breakfast would curl your notes.", "Sandgem runs on tide tables and lab schedules. I keep both pinned by the door."]},
+      {"x": 7, "y": 3, "name": "RESEARCH HOSTESS VEE", "art": "lady", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The lab's visiting scholars sleep here. The questions they ask at breakfast would curl your notes.", "Shingle runs on tide tables and lab schedules. I keep both pinned by the door."]},
     ],
     "encounters": null,
     "items": [],
@@ -1850,7 +1850,7 @@ export const MAPS9 = {
   },
   "house-jubilife": {
     "id": "house-jubilife",
-    "name": "Jubilife House",
+    "name": "Revelry House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -1882,7 +1882,7 @@ export const MAPS9 = {
   },
   "house-jubilife-condo": {
     "id": "house-jubilife-condo",
-    "name": "Jubilife Condo",
+    "name": "Revelry Condo",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -1904,7 +1904,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "PRODUCER MARA", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I cut the morning show in a room the size of this kitchen. The city watches it in rooms smaller still.", "Trainers pass through Jubilife like weather systems. We just report them."]},
+      {"x": 7, "y": 3, "name": "PRODUCER MARA", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I cut the morning show in a room the size of this kitchen. The city watches it in rooms smaller still.", "Trainers pass through Revelry like weather systems. We just report them."]},
     ],
     "encounters": null,
     "items": [],
@@ -1914,7 +1914,7 @@ export const MAPS9 = {
   },
   "house-oreburgh": {
     "id": "house-oreburgh",
-    "name": "Oreburgh Museum",
+    "name": "Coalseam Museum",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -1946,7 +1946,7 @@ export const MAPS9 = {
   },
   "house-floaroma": {
     "id": "house-floaroma",
-    "name": "Floaroma House",
+    "name": "Honeyfield House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -1968,7 +1968,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "FLORIST WREN", "art": "lady", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Cut flowers by the door — Floaroma houses compete by scent, same as anywhere honest.", "My Gracidea blooms when the meadow does. The whole town keeps the same calendar."]},
+      {"x": 7, "y": 3, "name": "FLORIST WREN", "art": "lady", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Cut flowers by the door — Honeyfield houses compete by scent, same as anywhere honest.", "My Gracidea blooms when the meadow does. The whole town keeps the same calendar."]},
     ],
     "encounters": null,
     "items": [],
@@ -1978,7 +1978,7 @@ export const MAPS9 = {
   },
   "house-eterna": {
     "id": "house-eterna",
-    "name": "Eterna House",
+    "name": "Heritage House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2000,7 +2000,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "HISTORIAN ILSE", "art": "lady", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["This house predates the road it stands on. Eterna keeps its old things standing, including me.", "The statue's inscription is half weathered away. The half that remains is the important half."]},
+      {"x": 7, "y": 3, "name": "HISTORIAN ILSE", "art": "lady", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["This house predates the road it stands on. Heritage keeps its old things standing, including me.", "The statue's inscription is half weathered away. The half that remains is the important half."]},
     ],
     "encounters": null,
     "items": [],
@@ -2010,7 +2010,7 @@ export const MAPS9 = {
   },
   "house-hearthome": {
     "id": "house-hearthome",
-    "name": "Hearthome House",
+    "name": "Inglenook House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2032,7 +2032,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "CONTEST HOSTESS YUI", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Ribbons over the mantel, soup on the stove. A house should hold both kinds of warmth.", "Hearthome hospitality is a judged event. I intend to win it."]},
+      {"x": 7, "y": 3, "name": "CONTEST HOSTESS YUI", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Ribbons over the mantel, soup on the stove. A house should hold both kinds of warmth.", "Inglenook hospitality is a judged event. I intend to win it."]},
     ],
     "encounters": null,
     "items": [],
@@ -2074,7 +2074,7 @@ export const MAPS9 = {
   },
   "house-solaceon": {
     "id": "house-solaceon",
-    "name": "Solaceon House",
+    "name": "Repose House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2096,7 +2096,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "RUIN HOST PIOTR", "art": "gent", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["My family has swept the ruins' steps for four generations. The ruins have never once thanked us or asked us to stop.", "Quiet town, deep stones. Solaceon specialises in both."]},
+      {"x": 7, "y": 3, "name": "RUIN HOST PIOTR", "art": "gent", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["My family has swept the ruins' steps for four generations. The ruins have never once thanked us or asked us to stop.", "Quiet town, deep stones. Repose specialises in both."]},
     ],
     "encounters": null,
     "items": [],
@@ -2138,7 +2138,7 @@ export const MAPS9 = {
   },
   "house-veilstone": {
     "id": "house-veilstone",
-    "name": "Veilstone Department Store",
+    "name": "Shardfall Department Store",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2170,7 +2170,7 @@ export const MAPS9 = {
   },
   "house-canalave": {
     "id": "house-canalave",
-    "name": "Canalave House",
+    "name": "Bridgeport House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2192,7 +2192,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "SAILOR HOSTESS ANA", "art": "lady", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Every Canalave house has a rope by the door and salt in the corners. Harbour rules.", "My boy crews the Iron Island boat. The island sends back iron and stories in equal weight."]},
+      {"x": 7, "y": 3, "name": "SAILOR HOSTESS ANA", "art": "lady", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Every Bridgeport house has a rope by the door and salt in the corners. Harbour rules.", "My boy crews the Foundry Isle boat. The island sends back iron and stories in equal weight."]},
     ],
     "encounters": null,
     "items": [],
@@ -2202,7 +2202,7 @@ export const MAPS9 = {
   },
   "canalave-library": {
     "id": "canalave-library",
-    "name": "Canalave Library",
+    "name": "Bridgeport Library",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2227,7 +2227,7 @@ export const MAPS9 = {
       {"x": 7, "y": 2, "text": "THE OLD STACKS — Histories of the three lakes, the mountain, and the first bridge. The librarian knows which shelf breathes."},
     ],
     "npcs": [
-      {"x": 8, "y": 4, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every story Sinnoh tells about itself is in this room, including the contradictory ones. Especially those.", "Read the lake chapters first. The mountain chapters read you back."]},
+      {"x": 8, "y": 4, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Every story Borea tells about itself is in this room, including the contradictory ones. Especially those.", "Read the lake chapters first. The mountain chapters read you back."]},
     ],
     "encounters": null,
     "items": [],
@@ -2237,7 +2237,7 @@ export const MAPS9 = {
   },
   "rowan-lab": {
     "id": "rowan-lab",
-    "name": "Rowan Pokemon Lab",
+    "name": "Rowan Lab",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2262,8 +2262,8 @@ export const MAPS9 = {
       {"x": 8, "y": 2, "text": "ROWAN'S FIELD BOARD — 'A Pokemon is not fully known until you have been muddy in its company. Evolution is not an ending; it is a question.'"},
     ],
     "npcs": [
-      {"x": 9, "y": 4, "name": "PROF. ROWAN’S AIDE", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Sinnoh's species, catalogued from this room. The other seven percent are being difficult on purpose."]},
-      {"x": 5, "y": 8, "name": "AIDE COLM", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Sandgem doctrine: boots by the door, notebook in hand, opinions in pencil.", "Mind the specimen jars. The Shellos inside is conducting its own study of you."]},
+      {"x": 9, "y": 4, "name": "PROF. ROWAN’S AIDE", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Borea's species, catalogued from this room. The other seven percent are being difficult on purpose."]},
+      {"x": 5, "y": 8, "name": "AIDE COLM", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Shingle doctrine: boots by the door, notebook in hand, opinions in pencil.", "Mind the specimen jars. The Shellos inside is conducting its own study of you."]},
     ],
     "encounters": null,
     "items": [],
@@ -2273,7 +2273,7 @@ export const MAPS9 = {
   },
   "jubilife-tv": {
     "id": "jubilife-tv",
-    "name": "Jubilife TV",
+    "name": "Revelry TV",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -2295,7 +2295,7 @@ export const MAPS9 = {
       {"x": 9, "y": 11, "to": {"map": "jubilife", "x": 16, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 3, "text": "JUBILIFE TV — Studio floor. Every screen in Sinnoh tuned to this tower; mind the cables and the charisma."},
+      {"x": 8, "y": 3, "text": "REVELRY TV — Studio floor. Every screen in Borea tuned to this tower; mind the cables and the charisma."},
     ],
     "npcs": [
       {"x": 9, "y": 5, "name": "STUDIO HOST", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["We broadcast the weather, the contests, and the occasional roaming legend sighting. Two of those are reliable.", "Visitors can watch a recording from the gallery. The cameras are kind. Mostly."]},
@@ -2308,7 +2308,7 @@ export const MAPS9 = {
   },
   "galactic-eterna": {
     "id": "galactic-eterna",
-    "name": "Eterna Building",
+    "name": "Heritage Building",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -2330,7 +2330,7 @@ export const MAPS9 = {
       {"x": 9, "y": 11, "to": {"map": "eterna", "x": 22, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "ETERNA BUILDING — A company office. The star sign is lit; the work, whatever it is, is not described on the door."},
+      {"x": 8, "y": 2, "text": "HERITAGE BUILDING — A company office. The star sign is lit; the work, whatever it is, is not described on the door."},
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "RECEPTION CLERK", "art": "clerk", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["This is a private office. The company values energy, in all senses, and privacy, in every sense.", "Deliveries to the loading door only. Curiosity is not a delivery."]},
@@ -2343,7 +2343,7 @@ export const MAPS9 = {
   },
   "galactic-hq": {
     "id": "galactic-hq",
-    "name": "Galactic HQ",
+    "name": "Shardfall HQ",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -2367,10 +2367,10 @@ export const MAPS9 = {
       {"x": 10, "y": 13, "to": {"map": "veilstone", "x": 4, "y": 13}},
     ],
     "signs": [
-      {"x": 9, "y": 2, "text": "GALACTIC HQ — The star-sign company’s headquarters. Floors of desks, dishes on the roof, and a lobby polished to a mirror."},
+      {"x": 9, "y": 2, "text": "SHARDFALL HQ — The star-sign company’s headquarters. Floors of desks, dishes on the roof, and a lobby polished to a mirror."},
     ],
     "npcs": [
-      {"x": 10, "y": 4, "name": "HQ RECEPTIONIST", "art": "clerk", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Headquarters is not open for tours. The company's work concerns the whole region, which is why none of it is discussed here.", "Antennas on the roof track the sky over Mt. Coronet. For communications. Obviously."]},
+      {"x": 10, "y": 4, "name": "HQ RECEPTIONIST", "art": "clerk", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Headquarters is not open for tours. The company's work concerns the whole region, which is why none of it is discussed here.", "Antennas on the roof track the sky over Mt. Apex. For communications. Obviously."]},
     ],
     "encounters": null,
     "items": [],
@@ -2380,7 +2380,7 @@ export const MAPS9 = {
   },
   "gym-oreburgh": {
     "id": "gym-oreburgh",
-    "name": "Oreburgh Gym",
+    "name": "Coalseam Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -2414,7 +2414,7 @@ export const MAPS9 = {
   },
   "gym-eterna": {
     "id": "gym-eterna",
-    "name": "Eterna Gym",
+    "name": "Heritage Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -2448,7 +2448,7 @@ export const MAPS9 = {
   },
   "gym-hearthome": {
     "id": "gym-hearthome",
-    "name": "Hearthome Gym",
+    "name": "Inglenook Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -2482,7 +2482,7 @@ export const MAPS9 = {
   },
   "gym-veilstone": {
     "id": "gym-veilstone",
-    "name": "Veilstone Gym",
+    "name": "Shardfall Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -2516,7 +2516,7 @@ export const MAPS9 = {
   },
   "gym-canalave": {
     "id": "gym-canalave",
-    "name": "Canalave Gym",
+    "name": "Bridgeport Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -2550,7 +2550,7 @@ export const MAPS9 = {
   },
   "contest-hearthome": {
     "id": "contest-hearthome",
-    "name": "Hearthome Contest Hall",
+    "name": "Inglenook Contest Hall",
     "music": "viridian-theme",
     "contestHall": "hearthome",
     "indoor": true,
@@ -2573,7 +2573,7 @@ export const MAPS9 = {
       {"x": 9, "y": 11, "to": {"map": "hearthome", "x": 22, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 3, "text": "HEARTHOME CONTEST HALL — Reception counter ahead, stage beyond. The gold dome keeps the applause in. (The hall keeps its own hours until the contest season opens.)"},
+      {"x": 8, "y": 3, "text": "INGLENOOK CONTEST HALL — Reception counter ahead, stage beyond. The gold dome keeps the applause in. (The hall keeps its own hours until the contest season opens.)"},
     ],
     "npcs": [
     ],
@@ -2585,7 +2585,7 @@ export const MAPS9 = {
   },
   "pastoria": {
     "id": "pastoria",
-    "name": "Pastoria City",
+    "name": "Fenland City",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -2625,18 +2625,18 @@ export const MAPS9 = {
       {"x": 14, "y": 17, "to": {"map": "r221", "x": 11, "y": 1}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "PASTORIA CITY — The marsh city. The Great Marsh begins at the gatehouse and argues with every street; the gym floats its battles over the bog."},
-      {"x": 24, "y": 12, "text": "THE GREAT MARSH — Through the gatehouse: six hundred acres of bog, boardwalk, and things with eyes at water level."},
-      {"x": 17, "y": 12, "text": "PASTORIA CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
-      {"x": 20, "y": 2, "text": "PASTORIA CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
-      {"x": 25, "y": 2, "text": "PASTORIA CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
-      {"x": 1, "y": 11, "text": "PASTORIA CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
-      {"x": 8, "y": 11, "text": "PASTORIA CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
+      {"x": 2, "y": 5, "text": "FENLAND CITY — The marsh city. The Great Mire begins at the gatehouse and argues with every street; the gym floats its battles over the bog."},
+      {"x": 24, "y": 12, "text": "THE GREAT MIRE — Through the gatehouse: six hundred acres of bog, boardwalk, and things with eyes at water level."},
+      {"x": 17, "y": 12, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
+      {"x": 20, "y": 2, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
+      {"x": 25, "y": 2, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
+      {"x": 1, "y": 11, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
+      {"x": 8, "y": 11, "text": "FENLAND CITY — North: ROUTE 212 — SOUTH · East: ROUTE 213 · South: ROUTE 221."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Pastoria City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fenland City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "MARSH GUIDE SOLENNE", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The marsh keeps what it catches, including afternoons. Mind the deep bog — it minds you back.", "Wake's gym is half arena, half pond. The water types approve; the floor does not."]},
-      {"x": 19, "y": 6, "name": "FEN FISHER ODO", "art": "fisher", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Wooper own the south pools and sublet to the Quagsire. I pay rent in patience.", "East road runs to the Valor lakefront. West of the lake, the hotels; east, the sea road to Sunyshore."]},
+      {"x": 19, "y": 6, "name": "FEN FISHER ODO", "art": "fisher", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Wooper own the south pools and sublet to the Quagsire. I pay rent in patience.", "East road runs to the Gallant lakefront. West of the lake, the hotels; east, the sea road to Brightshore."]},
       {"x": 6, "y": 10, "name": "BOG KID MIRE", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I can name thirty marsh sounds and eleven of them are Croagunk. The rest are also Croagunk, lying.", "The gatehouse tram — I mean, the gatehouse MARSH — is the whole world before breakfast."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "wooper", "min": 342, "max": 348, "weight": 20}, {"species": "psyduck", "min": 342, "max": 348, "weight": 18}, {"species": "shellos", "min": 343, "max": 349, "weight": 14}, {"species": "croagunk", "min": 343, "max": 349, "weight": 10}, {"species": "bibarel", "min": 343, "max": 349, "weight": 12}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
@@ -2647,7 +2647,7 @@ export const MAPS9 = {
   },
   "celestic": {
     "id": "celestic",
-    "name": "Celestic Town",
+    "name": "Astral Town",
     "music": "pallet-theme",
     "weather": "clear",
     "rows": [
@@ -2681,15 +2681,15 @@ export const MAPS9 = {
       {"x": 27, "y": 9, "to": {"map": "r210-north", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 1, "y": 4, "text": "CELESTIC TOWN — The shrine town in the mountain’s lap. The oldest stories in Sinnoh are kept here, and they are kept carefully."},
+      {"x": 1, "y": 4, "text": "ASTRAL TOWN — The shrine town in the mountain’s lap. The oldest stories in Borea are kept here, and they are kept carefully."},
       {"x": 15, "y": 15, "text": "THE OLD SHRINE — Three small shrines in a ring of stones. What they commemorate, the town remembers so you do not have to ask twice."},
-      {"x": 13, "y": 10, "text": "CELESTIC TOWN — East: ROUTE 210 — NORTH."}
+      {"x": 13, "y": 10, "text": "ASTRAL TOWN — East: ROUTE 210 — NORTH."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Celestic Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "SHRINE ELDER UME", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Celestic was old when the lakes were young, child. Walk softly; the stones are listening out of habit.", "The cave paintings in the shrine tell of three lake spirits and the beings above them. Told, not explained."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Astral Town Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
+      {"x": 11, "y": 7, "name": "SHRINE ELDER UME", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Astral was old when the lakes were young, child. Walk softly; the stones are listening out of habit.", "The cave paintings in the shrine tell of three lake spirits and the beings above them. Told, not explained."]},
       {"x": 19, "y": 12, "name": "HISTORIAN BLYTHE", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I copy the shrine murals by hand, one panel a season. Some panels copy back, I swear it.", "East, the fog road drops to Route 210. West of the mountain, everything is somebody else's story."]},
-      {"x": 7, "y": 14, "name": "FOG RUNNER KESTREL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I run the fog road to Solaceon and back before lunch. The fog lets me. It likes the company.", "On clear days you can see Spear Pillar from the shrine steps. On fog days, it sees you."]},
+      {"x": 7, "y": 14, "name": "FOG RUNNER KESTREL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I run the fog road to Repose and back before lunch. The fog lets me. It likes the company.", "On clear days you can see Zenith Spire from the shrine steps. On fog days, it sees you."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "meditite", "min": 348, "max": 354, "weight": 18}, {"species": "bronzor", "min": 348, "max": 354, "weight": 16}, {"species": "chatot", "min": 349, "max": 355, "weight": 14}, {"species": "staravia", "min": 348, "max": 354, "weight": 16}, {"species": "buneary", "min": 348, "max": 353, "weight": 14}], "water": [{"species": "magikarp", "min": 347, "max": 353, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -2699,7 +2699,7 @@ export const MAPS9 = {
   },
   "snowpoint": {
     "id": "snowpoint",
-    "name": "Snowpoint City",
+    "name": "Rimefall City",
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
@@ -2735,17 +2735,17 @@ export const MAPS9 = {
       {"x": 0, "y": 9, "to": {"map": "lake-acuity", "x": 26, "y": 8}},
     ],
     "signs": [
-      {"x": 1, "y": 3, "text": "SNOWPOINT CITY — The snow port at the top of the world. The temple keeps the north street, the gym keeps the cold honest, and the boats keep the island road."},
-      {"x": 9, "y": 11, "text": "SNOWPOINT HARBOUR — The Battle Zone boat ties up at the pier. The lake road west is shorter and colder; choose your hardship."},
-      {"x": 3, "y": 15, "text": "SNOWPOINT CITY — West: LAKE ACUITY."},
-      {"x": 14, "y": 10, "text": "SNOWPOINT CITY — West: LAKE ACUITY."},
-      {"x": 19, "y": 3, "text": "SNOWPOINT CITY — West: LAKE ACUITY."}
+      {"x": 1, "y": 3, "text": "RIMEFALL CITY — The snow port at the top of the world. The temple keeps the north street, the gym keeps the cold honest, and the boats keep the island road."},
+      {"x": 9, "y": 11, "text": "RIMEFALL HARBOUR — The Battle Zone boat ties up at the pier. The lake road west is shorter and colder; choose your hardship."},
+      {"x": 3, "y": 15, "text": "RIMEFALL CITY — West: LAKE INSIGHT."},
+      {"x": 14, "y": 10, "text": "RIMEFALL CITY — West: LAKE INSIGHT."},
+      {"x": 19, "y": 3, "text": "RIMEFALL CITY — West: LAKE INSIGHT."}
     ],
     "npcs": [
-      {"x": 13, "y": 13, "name": "CAPT NORTHSTAR", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The northern run — Fight Area, out on the Battle Zone island. My boat respects the ice and nothing else.", "Trainers come back from that island taller. Or quieter. Both are forms of taller."], "ferry": "fight-area"},
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Snowpoint City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
+      {"x": 13, "y": 13, "name": "CAPT NORTHSTAR", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The northern run — Clashfield, out on the Battle Zone island. My boat respects the ice and nothing else.", "Trainers come back from that island taller. Or quieter. Both are forms of taller."], "ferry": "fight-area"},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Rimefall City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
       {"x": 11, "y": 7, "name": "TEMPLE ACOLYTE REN", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The temple's deep room has slept since before the town had a name. We sweep its steps and do not knock.", "Candice trains in the gym yard at dawn, in the snow, on purpose. The snow respects her."]},
-      {"x": 19, "y": 13, "name": "ICE FISHER SOLVI", "art": "fisher", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Lake Acuity's ice sings at night — expanding, settling, gossiping. The cave under it keeps the lake's old heart.", "Snover follow the drifts into town and apply for citizenship. Granted, mostly."]},
+      {"x": 19, "y": 13, "name": "ICE FISHER SOLVI", "art": "fisher", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Lake Insight's ice sings at night — expanding, settling, gossiping. The cave under it keeps the lake's old heart.", "Snover follow the drifts into town and apply for citizenship. Granted, mostly."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "snover", "min": 362, "max": 368, "weight": 22}, {"species": "sneasel", "min": 362, "max": 368, "weight": 16}, {"species": "swinub", "min": 361, "max": 367, "weight": 18}, {"species": "snorunt", "min": 362, "max": 368, "weight": 12}, {"species": "meditite", "min": 361, "max": 367, "weight": 12}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -2755,7 +2755,7 @@ export const MAPS9 = {
   },
   "sunnyshore": {
     "id": "sunnyshore",
-    "name": "Sunyshore City",
+    "name": "Brightshore City",
     "music": "viridian-theme",
     "weather": "sun",
     "rows": [
@@ -2793,15 +2793,15 @@ export const MAPS9 = {
       {"x": 14, "y": 0, "to": {"map": "r223", "x": 11, "y": 16}},
     ],
     "signs": [
-      {"x": 1, "y": 4, "text": "SUNNYSHORE CITY — The solar city. Its roads are panels, its lighthouse is a promise, and its gym leader is bored by everything except a real challenge."},
+      {"x": 1, "y": 4, "text": "BRIGHTSHORE CITY — The solar city. Its roads are panels, its lighthouse is a promise, and its gym leader is bored by everything except a real challenge."},
       {"x": 24, "y": 4, "text": "THE LIGHTHOUSE — Vista light over the north sea road. The League’s shore is visible from the top on a clear day, which is most of them."},
-      {"x": 9, "y": 12, "text": "SUNYSHORE CITY — West: ROUTE 222 · North: ROUTE 223."},
-      {"x": 1, "y": 14, "text": "SUNYSHORE CITY — West: ROUTE 222 · North: ROUTE 223."}
+      {"x": 9, "y": 12, "text": "BRIGHTSHORE CITY — West: ROUTE 222 · North: ROUTE 223."},
+      {"x": 1, "y": 14, "text": "BRIGHTSHORE CITY — West: ROUTE 222 · North: ROUTE 223."}
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Sunyshore City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
-      {"x": 11, "y": 7, "name": "PANEL TECH JUNIPER", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Every road in Sunyshore is a solar panel that permits feet. The city runs on sunlight and stubbornness.", "Volkner rebuilt the gym three times this year. Not broken — bored. There's a difference and it matters."]},
-      {"x": 18, "y": 13, "name": "LIGHTHOUSE KEEPER BLY", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North: Route 223, all water, to the Crown Road shore. I light the way; the way does the rest.", "The League cliff shows white over the water some mornings. Every trainer in town has aimed at it once."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Brightshore City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
+      {"x": 11, "y": 7, "name": "PANEL TECH JUNIPER", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Every road in Brightshore is a solar panel that permits feet. The city runs on sunlight and stubbornness.", "Volkner rebuilt the gym three times this year. Not broken — bored. There's a difference and it matters."]},
+      {"x": 18, "y": 13, "name": "LIGHTHOUSE KEEPER BLY", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North: Route 223, all water, to the Summit Road shore. I light the way; the way does the rest.", "The League cliff shows white over the water some mornings. Every trainer in town has aimed at it once."]},
       {"x": 7, "y": 10, "name": "SUN KID SOLA", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the panel glints down the main street. The glints cheat — they move at light speed.", "Pelipper deliver the harbour mail. Tips are fish. I am not in the delivery business."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "wingull", "min": 372, "max": 378, "weight": 22}, {"species": "pelipper", "min": 374, "max": 380, "weight": 10}, {"species": "luxio", "min": 372, "max": 378, "weight": 16}, {"species": "pachirisu", "min": 372, "max": 378, "weight": 14}, {"species": "chatot", "min": 373, "max": 379, "weight": 12}], "water": [{"species": "tentacool", "min": 368, "max": 378, "weight": 22}, {"species": "magikarp", "min": 368, "max": 375, "weight": 16}, {"species": "wingull", "min": 369, "max": 378, "weight": 18}, {"species": "pelipper", "min": 371, "max": 380, "weight": 10}, {"species": "mantine", "min": 372, "max": 380, "weight": 8}, {"species": "lumineon", "min": 372, "max": 380, "weight": 8}, {"species": "gyarados", "min": 374, "max": 382, "weight": 4}], "waterRate": 0.08},
@@ -2843,11 +2843,11 @@ export const MAPS9 = {
       {"x": 27, "y": 9, "to": {"map": "r224", "x": 1, "y": 9}},
     ],
     "signs": [
-      {"x": 12, "y": 5, "text": "THE LEAGUE — Sinnoh’s summit hall. Four chambers, one champion, and the whole road behind you."},
-      {"x": 24, "y": 7, "text": "ROUTE 224 — East, the stone coast runs to the Seabreak Path. The League keeps this door for the ones who have already arrived."},
+      {"x": 12, "y": 5, "text": "THE LEAGUE — Borea’s summit hall. Four chambers, one champion, and the whole road behind you."},
+      {"x": 24, "y": 7, "text": "ROUTE 224 — East, the stone coast runs to the Foamline Path. The League keeps this door for the ones who have already arrived."},
     ],
     "npcs": [
-      {"x": 16, "y": 7, "name": "LEAGUE PORTER ANSELM", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Eight badges open this door everywhere in Sinnoh. Character decides what happens after it.", "The chambers ahead keep their own order. Rest at the lobby; the road up is honest about what it is."]},
+      {"x": 16, "y": 7, "name": "LEAGUE PORTER ANSELM", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Eight badges open this door everywhere in Borea. Character decides what happens after it.", "The chambers ahead keep their own order. Rest at the lobby; the road up is honest about what it is."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "staraptor", "min": 386, "max": 392, "weight": 16}, {"species": "luxray", "min": 386, "max": 392, "weight": 14}, {"species": "floatzel", "min": 385, "max": 391, "weight": 12}, {"species": "roserade", "min": 386, "max": 392, "weight": 12}, {"species": "rapidash", "min": 385, "max": 391, "weight": 10}], "water": [{"species": "tentacruel", "min": 385, "max": 391, "weight": 20}, {"species": "pelipper", "min": 386, "max": 392, "weight": 16}, {"species": "lumineon", "min": 387, "max": 393, "weight": 12}, {"species": "gyarados", "min": 388, "max": 394, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -2887,10 +2887,10 @@ export const MAPS9 = {
       {"x": 12, "y": 0, "to": {"map": "r212", "x": 11, "y": 16}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 212 — SOUTH — The wet country. Pastoria’s roofs show over the reeds; Hearthome’s domes hide behind them."},
+      {"x": 13, "y": 15, "text": "ROUTE 212 — SOUTH — The wet country. Fenland’s roofs show over the reeds; Inglenook’s domes hide behind them."},
     ],
     "npcs": [
-      {"x": 9, "y": 8, "name": "MARSH RUNNER IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The pools deepen toward Pastoria and so do the Croagunk. Both are friendly. Both are loud.", "I keep to the boardwalk after rain. The bog keeps everything else."]},
+      {"x": 9, "y": 8, "name": "MARSH RUNNER IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The pools deepen toward Fenland and so do the Croagunk. Both are friendly. Both are loud.", "I keep to the boardwalk after rain. The bog keeps everything else."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "wooper", "min": 338, "max": 345, "weight": 20}, {"species": "psyduck", "min": 338, "max": 345, "weight": 18}, {"species": "shellos", "min": 339, "max": 346, "weight": 14}, {"species": "yanma", "min": 339, "max": 346, "weight": 10}, {"species": "quagsire", "min": 341, "max": 347, "weight": 8}, {"species": "bibarel", "min": 339, "max": 345, "weight": 12}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -2928,7 +2928,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "r210", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 210 — NORTH — The fog road. Celestic sleeps west in the mountain’s lap; the Solaceon road drops east. In fog, walk by ear: the grass keeps talking."},
+      {"x": 12, "y": 7, "text": "ROUTE 210 — NORTH — The fog road. Astral sleeps west in the mountain’s lap; the Repose road drops east. In fog, walk by ear: the grass keeps talking."},
     ],
     "npcs": [
       {"x": 14, "y": 11, "name": "FOG WALKER UMBER", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The fog here is a resident, not a weather. It has seniority and it knows the road better than the road does.", "Something with a bell clears its throat in the murk some mornings. The murk approves."]},
@@ -2969,10 +2969,10 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "lake-valor", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 213 — Pastoria to the Valor lakefront. Salt on the wind, hotels on the hill, and the lake shining through the trees."},
+      {"x": 12, "y": 7, "text": "ROUTE 213 — Fenland to the Gallant lakefront. Salt on the wind, hotels on the hill, and the lake shining through the trees."},
     ],
     "npcs": [
-      {"x": 10, "y": 11, "name": "BEACHCOMBER RUE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The lakefront hotels keep their boats painted and their secrets unpainted.", "Valor's water runs bluer than the sea it neighbours. The lake has standards."]},
+      {"x": 10, "y": 11, "name": "BEACHCOMBER RUE", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The lakefront hotels keep their boats painted and their secrets unpainted.", "Gallant's water runs bluer than the sea it neighbours. The lake has standards."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "shellos", "min": 344, "max": 350, "weight": 18}, {"species": "buizel", "min": 344, "max": 350, "weight": 16}, {"species": "wingull", "min": 344, "max": 350, "weight": 16}, {"species": "psyduck", "min": 345, "max": 351, "weight": 14}, {"species": "floatzel", "min": 346, "max": 352, "weight": 8}, {"species": "gastrodon", "min": 346, "max": 352, "weight": 8}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -3014,8 +3014,8 @@ export const MAPS9 = {
       {"x": 23, "y": 9, "to": {"map": "spring-path", "x": 1, "y": 9}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 214 — Veilstone to the Valor lakefront. East, a green lane leaves for the Spring Path — walkers swear the season turns there."},
-      {"x": 20, "y": 7, "text": "SPRING PATH — East. The lane the seasons use."},
+      {"x": 13, "y": 15, "text": "ROUTE 214 — Shardfall to the Gallant lakefront. East, a green lane leaves for the Vernal Path — walkers swear the season turns there."},
+      {"x": 20, "y": 7, "text": "VERNAL PATH — East. The lane the seasons use."},
     ],
     "npcs": [
       {"x": 9, "y": 12, "name": "LAKESHORE HAND TOV", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I keep the fences between the road and the lake's temper. Both hold, most years.", "Girafarig graze the east meadow. Two heads, two opinions, one lunch."]},
@@ -3028,7 +3028,7 @@ export const MAPS9 = {
   },
   "spring-path": {
     "id": "spring-path",
-    "name": "Spring Path",
+    "name": "Vernal Path",
     "music": "route1-theme",
     "weather": "clear",
     "rows": [
@@ -3056,7 +3056,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "sendoff-spring", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "SPRING PATH — The lane the seasons use. Sendoff Spring lies east, quiet as held breath."},
+      {"x": 12, "y": 7, "text": "VERNAL PATH — The lane the seasons use. Farewell Spring lies east, quiet as held breath."},
     ],
     "npcs": [
       {"x": 9, "y": 11, "name": "QUIET WALKER ANKA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["People lower their voices on this path without being asked. The spring has that effect, and so does what is behind it.", "The cave at the spring is older than the path, the town, and possibly the mountain."]},
@@ -3097,10 +3097,10 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "r217", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 216 — The snow bridge road out of Mt. Coronet’s north door. The wind here has a long memory and short patience."},
+      {"x": 12, "y": 7, "text": "ROUTE 216 — The snow bridge road out of Mt. Apex’s north door. The wind here has a long memory and short patience."},
     ],
     "npcs": [
-      {"x": 10, "y": 11, "name": "SKI PATROL VESK", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Coronet's north door opens straight into winter. The mountain keeps a spare season up here.", "Acuity's shore is one route east. The lake ice sings before the shore shows."]},
+      {"x": 10, "y": 11, "name": "SKI PATROL VESK", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Coronet's north door opens straight into winter. The mountain keeps a spare season up here.", "Insight's shore is one route east. The lake ice sings before the shore shows."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "snover", "min": 360, "max": 367, "weight": 22}, {"species": "sneasel", "min": 360, "max": 367, "weight": 16}, {"species": "swinub", "min": 359, "max": 366, "weight": 18}, {"species": "snorunt", "min": 360, "max": 367, "weight": 12}, {"species": "meditite", "min": 359, "max": 366, "weight": 12}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -3138,11 +3138,11 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "lake-acuity", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 217 — Snowpoint’s long white road. The cliff face on the north bench is a climber’s door — holds cut for hands that know the craft."},
+      {"x": 12, "y": 7, "text": "ROUTE 217 — Rimefall’s long white road. The cliff face on the north bench is a climber’s door — holds cut for hands that know the craft."},
       {"x": 17, "y": 6, "text": "THE CLIMB FACE — Cut holds in good stone, up to the high bench. A wall to most; a road to the ones who carry the climb."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "CLIMBER SORREL", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I have read that face like a book for six winters. The last chapter needs a partner who knows the climb craft.", "Acuity's cave is worth the cold. The lake keeps its heart under the ice, and the cave is where it beats."]},
+      {"x": 9, "y": 12, "name": "CLIMBER SORREL", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I have read that face like a book for six winters. The last chapter needs a partner who knows the climb craft.", "Insight's cave is worth the cold. The lake keeps its heart under the ice, and the cave is where it beats."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "snover", "min": 364, "max": 371, "weight": 20}, {"species": "sneasel", "min": 364, "max": 371, "weight": 16}, {"species": "swinub", "min": 363, "max": 370, "weight": 16}, {"species": "piloswine", "min": 366, "max": 372, "weight": 8}, {"species": "snorunt", "min": 364, "max": 371, "weight": 12}, {"species": "abomasnow", "min": 367, "max": 373, "weight": 5}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -3182,7 +3182,7 @@ export const MAPS9 = {
       {"x": 12, "y": 17, "to": {"map": "r220", "x": 12, "y": 1}},
     ],
     "signs": [
-      {"x": 13, "y": 9, "text": "ROUTE 219 — The south sea road off Sandgem beach. Bright water, honest weather, Pastoria’s coast around the long way."},
+      {"x": 13, "y": 9, "text": "ROUTE 219 — The south sea road off Shingle beach. Bright water, honest weather, Fenland’s coast around the long way."},
     ],
     "npcs": [
     ],
@@ -3222,7 +3222,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "r221", "x": 12, "y": 16}},
     ],
     "signs": [
-      {"x": 13, "y": 7, "text": "ROUTE 220 — The long sea. North: the Sandgem road. East: the Pal coast and Pastoria’s south shore."},
+      {"x": 13, "y": 7, "text": "ROUTE 220 — The long sea. North: the Shingle road. East: the Pal coast and Fenland’s south shore."},
     ],
     "npcs": [
     ],
@@ -3264,7 +3264,7 @@ export const MAPS9 = {
       {"x": 12, "y": 0, "to": {"map": "pastoria", "x": 13, "y": 16}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 221 — The Pal coast. Pastoria’s marsh smoke shows north; the long sea runs south."},
+      {"x": 13, "y": 15, "text": "ROUTE 221 — The Pal coast. Fenland’s marsh smoke shows north; the long sea runs south."},
     ],
     "npcs": [
       {"x": 9, "y": 8, "name": "COAST KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["The shore pools keep tiny worlds. I am mayor of three of them.", "Sailors say the sea road is longer but the road road is boggier. Science."]},
@@ -3305,10 +3305,10 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "sunnyshore", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 222 — The Sunyshore beach road. The panels start glinting a mile before the city does."},
+      {"x": 12, "y": 7, "text": "ROUTE 222 — The Brightshore beach road. The panels start glinting a mile before the city does."},
     ],
     "npcs": [
-      {"x": 10, "y": 11, "name": "BEACH TRAINER SOL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My VOLTIGRE charges off the road panels on bright days. Sunyshore provides; we just plug in.", "The lake road west is all hotels and shining water. Rich people's weather."]},
+      {"x": 10, "y": 11, "name": "BEACH TRAINER SOL", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My VOLTIGRE charges off the road panels on bright days. Brightshore provides; we just plug in.", "The lake road west is all hotels and shining water. Rich people's weather."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 368, "max": 375, "weight": 20}, {"species": "luxio", "min": 368, "max": 375, "weight": 16}, {"species": "pelipper", "min": 370, "max": 377, "weight": 10}, {"species": "pachirisu", "min": 368, "max": 375, "weight": 14}, {"species": "floatzel", "min": 370, "max": 377, "weight": 10}, {"species": "electabuzz", "min": 370, "max": 377, "weight": 6}], "water": [{"species": "tentacool", "min": 368, "max": 378, "weight": 22}, {"species": "magikarp", "min": 368, "max": 375, "weight": 16}, {"species": "wingull", "min": 369, "max": 378, "weight": 18}, {"species": "pelipper", "min": 371, "max": 380, "weight": 10}, {"species": "mantine", "min": 372, "max": 380, "weight": 8}, {"species": "lumineon", "min": 372, "max": 380, "weight": 8}, {"species": "gyarados", "min": 374, "max": 382, "weight": 4}], "waterRate": 0.08},
     "items": [],
@@ -3348,7 +3348,7 @@ export const MAPS9 = {
       {"x": 12, "y": 17, "to": {"map": "victory-road", "x": 12, "y": 16}},
     ],
     "signs": [
-      {"x": 13, "y": 9, "text": "ROUTE 223 — The League sea road. All water, north to the Crown Road shore. The cliff at the end of it has heard every promise trainers make."},
+      {"x": 13, "y": 9, "text": "ROUTE 223 — The League sea road. All water, north to the Summit Road shore. The cliff at the end of it has heard every promise trainers make."},
     ],
     "npcs": [
     ],
@@ -3388,7 +3388,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "seabreak-path", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 224 — The stone coast east of the League. A white headstone stands at the far end of the Seabreak Path, and flowers beyond counting."},
+      {"x": 12, "y": 7, "text": "ROUTE 224 — The stone coast east of the League. A white headstone stands at the far end of the Foamline Path, and flowers beyond counting."},
     ],
     "npcs": [
       {"x": 9, "y": 11, "name": "STONE KEEPER MARL", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I tend the white stone at the path's end. Whose it is, the flowers know. I just keep the weeds honest.", "Absol walk this coast before storms. The coast has had opinions about the sky lately."]},
@@ -3401,7 +3401,7 @@ export const MAPS9 = {
   },
   "seabreak-path": {
     "id": "seabreak-path",
-    "name": "Seabreak Path",
+    "name": "Foamline Path",
     "music": "route1-theme",
     "weather": "sun",
     "rows": [
@@ -3429,7 +3429,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "flower-paradise", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "SEABREAK PATH — A plank road over bright water, east of the white stone. The flowers at the end of it are not a rumour."},
+      {"x": 12, "y": 7, "text": "FOAMLINE PATH — A plank road over bright water, east of the white stone. The flowers at the end of it are not a rumour."},
     ],
     "npcs": [
     ],
@@ -3472,7 +3472,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 225 — The Battle Zone’s hard road. Everything out here trains, including the weather."},
     ],
     "npcs": [
-      {"x": 10, "y": 11, "name": "ZONE VETERAN KEST", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Fight Area west, Survival east, and the mountain smoking beyond both. This island is a gym that outgrew its walls.", "Nothing out here is below strong. Adjust your expectations or your route."]},
+      {"x": 10, "y": 11, "name": "ZONE VETERAN KEST", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Clashfield west, Survival east, and the mountain smoking beyond both. This island is a gym that outgrew its walls.", "Nothing out here is below strong. Adjust your expectations or your route."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "fearow", "min": 390, "max": 396, "weight": 16}, {"species": "rhydon", "min": 390, "max": 396, "weight": 12}, {"species": "skarmory", "min": 391, "max": 397, "weight": 10}, {"species": "bibarel", "min": 390, "max": 395, "weight": 14}, {"species": "luxray", "min": 391, "max": 397, "weight": 10}, {"species": "graveler", "min": 390, "max": 396, "weight": 12}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -3512,7 +3512,7 @@ export const MAPS9 = {
       {"x": 12, "y": 0, "to": {"map": "resort-area", "x": 13, "y": 1}},
     ],
     "signs": [
-      {"x": 13, "y": 15, "text": "ROUTE 226 — The island’s east water. Survival’s roofs north, the Resort’s villas south, cliffs between."},
+      {"x": 13, "y": 15, "text": "ROUTE 226 — The island’s east water. Survival’s roofs north, the Palmside’s villas south, cliffs between."},
     ],
     "npcs": [
     ],
@@ -3636,7 +3636,7 @@ export const MAPS9 = {
       {"x": 12, "y": 17, "to": {"map": "r230", "x": 1, "y": 8}},
     ],
     "signs": [
-      {"x": 13, "y": 9, "text": "ROUTE 229 — The island’s south water. Resort sails north, the long coast road south."},
+      {"x": 13, "y": 9, "text": "ROUTE 229 — The island’s south water. Palmside sails north, the long coast road south."},
     ],
     "npcs": [
     ],
@@ -3676,7 +3676,7 @@ export const MAPS9 = {
       {"x": 23, "y": 0, "to": {"map": "fight-area", "x": 14, "y": 14}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "ROUTE 230 — The west coast water. North at the point: Fight Area harbour. West: the Resort run."},
+      {"x": 12, "y": 7, "text": "ROUTE 230 — The west coast water. North at the point: Clashfield harbour. West: the Palmside run."},
     ],
     "npcs": [
     ],
@@ -3688,7 +3688,7 @@ export const MAPS9 = {
   },
   "lake-valor": {
     "id": "lake-valor",
-    "name": "Lake Valor",
+    "name": "Lake Gallant",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -3722,11 +3722,11 @@ export const MAPS9 = {
       {"x": 14, "y": 4, "to": {"map": "lake-valor-cave", "x": 8, "y": 8}},
     ],
     "signs": [
-      {"x": 15, "y": 5, "text": "LAKE VALOR — The lake of willpower, the old stories say. The water came back fuller than memory; the cave keeps the north shore."},
+      {"x": 15, "y": 5, "text": "LAKE GALLANT — The lake of willpower, the old stories say. The water came back fuller than memory; the cave keeps the north shore."},
       {"x": 6, "y": 7, "text": "THE LAKEFRONT — Hotels, boats, and a shore that has seen one very bad season and decided to be beautiful anyway."},
     ],
     "npcs": [
-      {"x": 20, "y": 6, "name": "LAKEFRONT HOSTESS VERA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The lake filled back to its banks stone by stone, guest by guest. Valor is a place that refuses to stay emptied.", "Something with a long memory lives in that cave water. We keep the shore lights kind for it."]},
+      {"x": 20, "y": 6, "name": "LAKEFRONT HOSTESS VERA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The lake filled back to its banks stone by stone, guest by guest. Gallant is a place that refuses to stay emptied.", "Something with a long memory lives in that cave water. We keep the shore lights kind for it."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "staravia", "min": 348, "max": 354, "weight": 20}, {"species": "bibarel", "min": 348, "max": 354, "weight": 18}, {"species": "psyduck", "min": 349, "max": 355, "weight": 14}, {"species": "shellos", "min": 348, "max": 354, "weight": 14}], "water": [{"species": "magikarp", "min": 348, "max": 354, "weight": 26}, {"species": "psyduck", "min": 349, "max": 355, "weight": 22}, {"species": "golduck", "min": 351, "max": 357, "weight": 8}, {"species": "gastrodon", "min": 350, "max": 356, "weight": 8}, {"species": "tentacool", "min": 348, "max": 354, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -3736,7 +3736,7 @@ export const MAPS9 = {
   },
   "lake-valor-cave": {
     "id": "lake-valor-cave",
-    "name": "Valor Cavern",
+    "name": "Gallant Cavern",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -3756,7 +3756,7 @@ export const MAPS9 = {
       {"x": 8, "y": 9, "to": {"map": "lake-valor", "x": 13, "y": 5}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "VALOR CAVERN — The lake’s deep heart. The water in here is the colour of decisions."},
+      {"x": 8, "y": 2, "text": "GALLANT CAVERN — The lake’s deep heart. The water in here is the colour of decisions."},
     ],
     "npcs": [
     ],
@@ -3768,7 +3768,7 @@ export const MAPS9 = {
   },
   "lake-acuity": {
     "id": "lake-acuity",
-    "name": "Lake Acuity",
+    "name": "Lake Insight",
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
@@ -3800,7 +3800,7 @@ export const MAPS9 = {
       {"x": 13, "y": 1, "to": {"map": "lake-acuity-cave", "x": 8, "y": 8}},
     ],
     "signs": [
-      {"x": 14, "y": 2, "text": "LAKE ACUITY — The lake of knowledge, the old stories say. The ice keeps the surface; the cave keeps the rest."},
+      {"x": 14, "y": 2, "text": "LAKE INSIGHT — The lake of knowledge, the old stories say. The ice keeps the surface; the cave keeps the rest."},
     ],
     "npcs": [
       {"x": 21, "y": 6, "name": "ICE WARDEN HALVOR", "art": "gent", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three lakes, three old stories. This one is the coldest and the clearest, in every sense.", "Walk the ice where it is white. Blue ice is a rumour; black ice is a decision."]},
@@ -3813,7 +3813,7 @@ export const MAPS9 = {
   },
   "lake-acuity-cave": {
     "id": "lake-acuity-cave",
-    "name": "Acuity Cavern",
+    "name": "Insight Cavern",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -3833,7 +3833,7 @@ export const MAPS9 = {
       {"x": 8, "y": 9, "to": {"map": "lake-acuity", "x": 12, "y": 2}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "ACUITY CAVERN — The lake’s cold heart. Breath fogs; the stone answers in a lower register."},
+      {"x": 8, "y": 2, "text": "INSIGHT CAVERN — The lake’s cold heart. Breath fogs; the stone answers in a lower register."},
     ],
     "npcs": [
     ],
@@ -3845,7 +3845,7 @@ export const MAPS9 = {
   },
   "sendoff-spring": {
     "id": "sendoff-spring",
-    "name": "Sendoff Spring",
+    "name": "Farewell Spring",
     "music": "pallet-theme",
     "weather": "clear",
     "rows": [
@@ -3873,10 +3873,10 @@ export const MAPS9 = {
       {"x": 17, "y": 1, "to": {"map": "turnback-cave", "x": 12, "y": 14}},
     ],
     "signs": [
-      {"x": 18, "y": 2, "text": "SENDOFF SPRING — A fourth lake that the old maps leave off, in the fourth direction. The cave behind it turns back on itself, and then keeps going."},
+      {"x": 18, "y": 2, "text": "FAREWELL SPRING — A fourth lake that the old maps leave off, in the fourth direction. The cave behind it turns back on itself, and then keeps going."},
     ],
     "npcs": [
-      {"x": 12, "y": 6, "name": "SPRING KEEPER MOSS", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Four lakes in Sinnoh, whatever the maps say. This one sends off what the others keep.", "The cave turns back three times. What waits in the last turn is not for the keeper to name."]},
+      {"x": 12, "y": 6, "name": "SPRING KEEPER MOSS", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Four lakes in Borea, whatever the maps say. This one sends off what the others keep.", "The cave turns back three times. What waits in the last turn is not for the keeper to name."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "buneary", "min": 354, "max": 360, "weight": 20}, {"species": "roselia", "min": 354, "max": 360, "weight": 16}, {"species": "staravia", "min": 354, "max": 360, "weight": 16}, {"species": "golduck", "min": 356, "max": 362, "weight": 8}], "water": [{"species": "magikarp", "min": 354, "max": 360, "weight": 28}, {"species": "psyduck", "min": 355, "max": 361, "weight": 22}, {"species": "golduck", "min": 357, "max": 363, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -3886,7 +3886,7 @@ export const MAPS9 = {
   },
   "turnback-cave": {
     "id": "turnback-cave",
-    "name": "Turnback Cave",
+    "name": "Reversal Cave",
     "music": "pewter-theme",
     "indoor": true,
     "dark": true,
@@ -3916,7 +3916,7 @@ export const MAPS9 = {
     ],
     "signs": [
       {"x": 11, "y": 5, "text": "THE GRISEOUS CHAMBER — A room the cave keeps for a stone that is not here, in the keeping of a shape the stone remembers. The floor at the back of this room is not entirely floor."},
-      {"x": 12, "y": 12, "text": "TURNBACK CAVE — Three turns, three pillars, and a silence that leans. What the lake sends off, this cave receives."},
+      {"x": 12, "y": 12, "text": "REVERSAL CAVE — Three turns, three pillars, and a silence that leans. What the lake sends off, this cave receives."},
     ],
     "npcs": [
     ],
@@ -3929,7 +3929,7 @@ export const MAPS9 = {
   "great-marsh-gate": {
     "id": "great-marsh-gate",
     "safariHub": "great-marsh",
-    "name": "Great Marsh Gatehouse",
+    "name": "Great Mire Gatehouse",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -3953,10 +3953,10 @@ export const MAPS9 = {
       {"x": 9, "y": 0, "to": {"map": "great-marsh-west", "x": 14, "y": 14}},
     ],
     "signs": [
-      {"x": 8, "y": 3, "text": "GREAT MARSH GATEHOUSE — North doors: the marsh proper. The bog keeps its own hours, its own depth, and — the wardens insist — its own opinions about visitors."},
+      {"x": 8, "y": 3, "text": "GREAT MIRE GATEHOUSE — North doors: the marsh proper. The bog keeps its own hours, its own depth, and — the wardens insist — its own opinions about visitors."},
     ],
     "npcs": [
-      {"x": 5, "y": 5, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "safariGate": true, "safariFee": 500, "safariSteps": 500, "safariBalls": 30, "safariMap": "great-marsh-west", "safariMaps": ["great-marsh-west", "great-marsh-east", "great-marsh-north"], "safariHub": "great-marsh-gate", "safariName": "Great Marsh", "safariRock": "MUD", "safariExit": {"map": "pastoria", "x": 4, "y": 13}, "dialogue": ["Boots laced, eyes up, and if the bog takes a shoe, let it — shoes are replaceable and so, fortunately, are afternoons.", "The deep pools keep the rarest tempers. Wade patient; the marsh rewards the unhurried."]},
+      {"x": 5, "y": 5, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "safariGate": true, "safariFee": 500, "safariSteps": 500, "safariBalls": 30, "safariMap": "great-marsh-west", "safariMaps": ["great-marsh-west", "great-marsh-east", "great-marsh-north"], "safariHub": "great-marsh-gate", "safariName": "Great Mire", "safariRock": "MUD", "safariExit": {"map": "pastoria", "x": 4, "y": 13}, "dialogue": ["Boots laced, eyes up, and if the bog takes a shoe, let it — shoes are replaceable and so, fortunately, are afternoons.", "The deep pools keep the rarest tempers. Wade patient; the marsh rewards the unhurried."]},
     ],
     "encounters": null,
     "items": [],
@@ -3967,7 +3967,7 @@ export const MAPS9 = {
   "great-marsh-west": {
     "id": "great-marsh-west",
     "safariZone": "great-marsh",
-    "name": "Great Marsh — West",
+    "name": "Great Mire — West",
     "music": "viridian-theme",
     "weather": "rain",
     "rows": [
@@ -3995,7 +3995,7 @@ export const MAPS9 = {
       {"x": 25, "y": 9, "to": {"map": "great-marsh-east", "x": 1, "y": 9}},
     ],
     "signs": [
-      {"x": 13, "y": 7, "text": "GREAT MARSH — WEST — Boardwalks over black water-meadow. The bog decides what is path; the boards just agree with it, mostly."},
+      {"x": 13, "y": 7, "text": "GREAT MIRE — WEST — Boardwalks over black water-meadow. The bog decides what is path; the boards just agree with it, mostly."},
     ],
     "npcs": [
     ],
@@ -4008,7 +4008,7 @@ export const MAPS9 = {
   "great-marsh-east": {
     "id": "great-marsh-east",
     "safariZone": "great-marsh",
-    "name": "Great Marsh — East",
+    "name": "Great Mire — East",
     "music": "viridian-theme",
     "weather": "rain",
     "rows": [
@@ -4036,7 +4036,7 @@ export const MAPS9 = {
       {"x": 14, "y": 0, "to": {"map": "great-marsh-north", "x": 14, "y": 14}},
     ],
     "signs": [
-      {"x": 14, "y": 7, "text": "GREAT MARSH — EAST — The deep pools country. North, the marsh rises to its reed beds; the rarest tempers keep the far water."},
+      {"x": 14, "y": 7, "text": "GREAT MIRE — EAST — The deep pools country. North, the marsh rises to its reed beds; the rarest tempers keep the far water."},
     ],
     "npcs": [
     ],
@@ -4049,7 +4049,7 @@ export const MAPS9 = {
   "great-marsh-north": {
     "id": "great-marsh-north",
     "safariZone": "great-marsh",
-    "name": "Great Marsh — North",
+    "name": "Great Mire — North",
     "music": "viridian-theme",
     "weather": "rain",
     "rows": [
@@ -4075,7 +4075,7 @@ export const MAPS9 = {
       {"x": 14, "y": 15, "to": {"map": "great-marsh-east", "x": 14, "y": 1}},
     ],
     "signs": [
-      {"x": 13, "y": 12, "text": "GREAT MARSH — NORTH REEDS — The end of the boardwalks. Beyond the reeds the marsh belongs to itself again."},
+      {"x": 13, "y": 12, "text": "GREAT MIRE — NORTH REEDS — The end of the boardwalks. Beyond the reeds the marsh belongs to itself again."},
     ],
     "npcs": [
     ],
@@ -4087,7 +4087,7 @@ export const MAPS9 = {
   },
   "mt-coronet-north": {
     "id": "mt-coronet-north",
-    "name": "Mt. Coronet — North",
+    "name": "Mt. Apex — North",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4121,7 +4121,7 @@ export const MAPS9 = {
       {"x": 27, "y": 11, "to": {"map": "r216", "x": 1, "y": 9}},
     ],
     "signs": [
-      {"x": 14, "y": 17, "text": "MT. CORONET — NORTH CAVERN — South: the central gallery. North: open sky and the pillar. East: a door the mountain keeps into winter."},
+      {"x": 14, "y": 17, "text": "MT. APEX — NORTH CAVERN — South: the central gallery. North: open sky and the pillar. East: a door the mountain keeps into winter."},
       {"x": 5, "y": 7, "text": "THE CLIMB SHELF — Holds cut in the high wall, up to the west shelf. A wall to most; a road to the ones who carry the climb."},
     ],
     "npcs": [
@@ -4134,7 +4134,7 @@ export const MAPS9 = {
   },
   "spear-pillar": {
     "id": "spear-pillar",
-    "name": "Spear Pillar",
+    "name": "Zenith Spire",
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
@@ -4162,7 +4162,7 @@ export const MAPS9 = {
       {"x": 14, "y": 0, "to": {"map": "hall-of-origin", "x": 11, "y": 12}},
     ],
     "signs": [
-      {"x": 15, "y": 10, "text": "SPEAR PILLAR — The summit of the world, where the mountain keeps its oldest appointment. Broken pillars, whole sky."},
+      {"x": 15, "y": 10, "text": "ZENITH SPIRE — The summit of the world, where the mountain keeps its oldest appointment. Broken pillars, whole sky."},
       {"x": 12, "y": 1, "text": "THE STAIR OF ORIGIN — Steps above the summit, older than the pillar, going up into clear air. Whatever they were cut for, it was not in a hurry."},
     ],
     "npcs": [
@@ -4175,7 +4175,7 @@ export const MAPS9 = {
   },
   "hall-of-origin": {
     "id": "hall-of-origin",
-    "name": "Hall of Origin",
+    "name": "Hall of Dawning",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4199,7 +4199,7 @@ export const MAPS9 = {
       {"x": 11, "y": 13, "to": {"map": "spear-pillar", "x": 14, "y": 1}},
     ],
     "signs": [
-      {"x": 11, "y": 8, "text": "THE HALL OF ORIGIN — A floor above the world’s first pillar, swept by no hand. The air here is the colour of the beginning of a sentence."},
+      {"x": 11, "y": 8, "text": "THE HALL OF DAWNING — A floor above the world’s first pillar, swept by no hand. The air here is the colour of the beginning of a sentence."},
     ],
     "npcs": [
     ],
@@ -4211,7 +4211,7 @@ export const MAPS9 = {
   },
   "iron-island": {
     "id": "iron-island",
-    "name": "Iron Island",
+    "name": "Foundry Isle",
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
@@ -4237,10 +4237,10 @@ export const MAPS9 = {
       {"x": 19, "y": 1, "to": {"map": "iron-island-mine", "x": 12, "y": 14}},
     ],
     "signs": [
-      {"x": 17, "y": 2, "text": "IRON ISLAND — A worked island: ore above, ore below, and a mine that hums in B-flat. The boats keep the south pier."},
+      {"x": 17, "y": 2, "text": "FOUNDRY ISLE — A worked island: ore above, ore below, and a mine that hums in B-flat. The boats keep the south pier."},
     ],
     "npcs": [
-      {"x": 13, "y": 12, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Canalave, when you're ready. The harbour keeps island hours: whenever the boat is in, which is now.", "The island gives back iron and stories in equal weight. Spend both carefully."], "ferry": "canalave"},
+      {"x": 13, "y": 12, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Bridgeport, when you're ready. The harbour keeps island hours: whenever the boat is in, which is now.", "The island gives back iron and stories in equal weight. Spend both carefully."], "ferry": "canalave"},
       {"x": 8, "y": 6, "name": "PROSPECTOR HALDEN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Steel types grow fat on this island's dust. My STRATON has opinions about seasoning.", "A trainer with an egg walked these caves for a season. The island remembers him kindly."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "graveler", "min": 356, "max": 363, "weight": 18}, {"species": "onix", "min": 357, "max": 364, "weight": 12}, {"species": "steelix", "min": 361, "max": 368, "weight": 4}, {"species": "golbat", "min": 356, "max": 363, "weight": 14}, {"species": "bronzor", "min": 357, "max": 364, "weight": 14}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
@@ -4251,7 +4251,7 @@ export const MAPS9 = {
   },
   "iron-island-mine": {
     "id": "iron-island-mine",
-    "name": "Iron Island Mine",
+    "name": "Foundry Isle Mine",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4277,7 +4277,7 @@ export const MAPS9 = {
       {"x": 12, "y": 15, "to": {"map": "iron-island", "x": 19, "y": 2}},
     ],
     "signs": [
-      {"x": 12, "y": 12, "text": "IRON ISLAND MINE — The deep galleries. The ore down here is old enough to have opinions about the surface."},
+      {"x": 12, "y": 12, "text": "FOUNDRY ISLE MINE — The deep galleries. The ore down here is old enough to have opinions about the surface."},
     ],
     "npcs": [
     ],
@@ -4289,7 +4289,7 @@ export const MAPS9 = {
   },
   "stark-mountain": {
     "id": "stark-mountain",
-    "name": "Stark Mountain",
+    "name": "Grim Mountain",
     "music": "pewter-theme",
     "weather": "ash",
     "rows": [
@@ -4317,7 +4317,7 @@ export const MAPS9 = {
       {"x": 9, "y": 1, "to": {"map": "stark-interior", "x": 11, "y": 12}},
     ],
     "signs": [
-      {"x": 10, "y": 2, "text": "STARK MOUNTAIN — The island’s hot heart. The crater keeps a stone that should not be carried off, and a temper that should not be tested."},
+      {"x": 10, "y": 2, "text": "GRIM MOUNTAIN — The island’s hot heart. The crater keeps a stone that should not be carried off, and a temper that should not be tested."},
     ],
     "npcs": [
       {"x": 13, "y": 11, "name": "CRATER WARDEN ASHA", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Wardens have kept this crater since before the Zone had a name. The mountain tolerates us. Barely, some days.", "What sleeps under the crater stone is the island's furnace and its god. We keep both words small out of respect."]},
@@ -4330,7 +4330,7 @@ export const MAPS9 = {
   },
   "stark-interior": {
     "id": "stark-interior",
-    "name": "Stark Mountain — Crater Hall",
+    "name": "Grim Mountain — Crater Hall",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4366,7 +4366,7 @@ export const MAPS9 = {
   },
   "victory-road": {
     "id": "victory-road",
-    "name": "Crown Road",
+    "name": "Summit Road",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4409,7 +4409,7 @@ export const MAPS9 = {
   },
   "fuego-ironworks": {
     "id": "fuego-ironworks",
-    "name": "Fuego Ironworks",
+    "name": "Blaze Ironworks",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4431,10 +4431,10 @@ export const MAPS9 = {
       {"x": 9, "y": 11, "to": {"map": "r205", "x": 4, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 3, "text": "FUEGO IRONWORKS — Charcoal, river iron, and a floor that has never once been cold. The foreman counts ingots the way misers count birthdays."},
+      {"x": 8, "y": 3, "text": "BLAZE IRONWORKS — Charcoal, river iron, and a floor that has never once been cold. The foreman counts ingots the way misers count birthdays."},
     ],
     "npcs": [
-      {"x": 9, "y": 5, "name": "FOREMAN FUEGO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Iron in, iron out, and the river pays the difference. My LAVAMAND run the bellows and unionised the breaks themselves.", "The windworks spin for the towns; we burn for the mountain roads. Sinnoh runs on both weathers."]},
+      {"x": 9, "y": 5, "name": "FOREMAN FUEGO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Iron in, iron out, and the river pays the difference. My LAVAMAND run the bellows and unionised the breaks themselves.", "The windworks spin for the towns; we burn for the mountain roads. Borea runs on both weathers."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "magmar", "min": 350, "max": 357, "weight": 18}, {"species": "machop", "min": 350, "max": 357, "weight": 16}, {"species": "koffing", "min": 351, "max": 358, "weight": 12}, {"species": "numel", "min": 351, "max": 358, "weight": 12}]},
     "items": [],
@@ -4444,7 +4444,7 @@ export const MAPS9 = {
   },
   "fullmoon-island": {
     "id": "fullmoon-island",
-    "name": "Fullmoon Island",
+    "name": "Brightmoon Island",
     "music": "pallet-theme",
     "weather": "clear",
     "rows": [
@@ -4466,11 +4466,11 @@ export const MAPS9 = {
     "warps": [
     ],
     "signs": [
-      {"x": 11, "y": 8, "text": "FULLMOON ISLAND — A crescent of meadow on night water. The pond keeps the moon’s shape out of loyalty."},
+      {"x": 11, "y": 8, "text": "BRIGHTMOON ISLAND — A crescent of meadow on night water. The pond keeps the moon’s shape out of loyalty."},
     ],
     "npcs": [
-      {"x": 18, "y": 11, "name": "SAILOR LUNA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Canalave, when you're ready. The night run keeps crescent hours, and so do I.", "We sail quiet off this island. What dreams here dreams better undisturbed."], "ferry": "canalave"},
-      {"x": 4, "y": 11, "name": "MOON BOATMAN REED", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Newmoon rides a short black hop east of here. I make the crossing when the moon is wrong, which is often.", "Take a steady nerve. The other island keeps the dreams this one refuses."], "ferry": "newmoon-island"},
+      {"x": 18, "y": 11, "name": "SAILOR LUNA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Bridgeport, when you're ready. The night run keeps crescent hours, and so do I.", "We sail quiet off this island. What dreams here dreams better undisturbed."], "ferry": "canalave"},
+      {"x": 4, "y": 11, "name": "MOON BOATMAN REED", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Darkmoon rides a short black hop east of here. I make the crossing when the moon is wrong, which is often.", "Take a steady nerve. The other island keeps the dreams this one refuses."], "ferry": "newmoon-island"},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "clefairy", "min": 382, "max": 388, "weight": 20}, {"species": "clefable", "min": 385, "max": 391, "weight": 8}, {"species": "jigglypuff", "min": 382, "max": 388, "weight": 14}, {"species": "chatot", "min": 382, "max": 388, "weight": 12}], "water": [{"species": "magikarp", "min": 381, "max": 387, "weight": 30}, {"species": "tentacool", "min": 381, "max": 387, "weight": 20}, {"species": "lumineon", "min": 384, "max": 390, "weight": 10}], "waterRate": 0.08},
     "items": [],
@@ -4480,7 +4480,7 @@ export const MAPS9 = {
   },
   "newmoon-island": {
     "id": "newmoon-island",
-    "name": "Newmoon Island",
+    "name": "Darkmoon Island",
     "music": "pewter-theme",
     "weather": "clear",
     "rows": [
@@ -4505,7 +4505,7 @@ export const MAPS9 = {
       {"x": 11, "y": 5, "text": "NEW MOON ISLAND — The dark twin. The woods here grow toward the pond, and the pond reflects nothing the sky admits to."},
     ],
     "npcs": [
-      {"x": 18, "y": 11, "name": "MOON BOATMAN REED", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Fullmoon, when you're ready. The hop back is shorter; the light helps.", "I do not stay on this island past my errand. Nobody with sense does. The trees keep the rest of that sentence."], "ferry": "fullmoon-island"},
+      {"x": 18, "y": 11, "name": "MOON BOATMAN REED", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Brightmoon, when you're ready. The hop back is shorter; the light helps.", "I do not stay on this island past my errand. Nobody with sense does. The trees keep the rest of that sentence."], "ferry": "fullmoon-island"},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "murkrow", "min": 384, "max": 390, "weight": 18}, {"species": "honchkrow", "min": 387, "max": 393, "weight": 8}, {"species": "misdreavus", "min": 384, "max": 390, "weight": 16}, {"species": "mismagius", "min": 387, "max": 393, "weight": 8}, {"species": "haunter", "min": 385, "max": 391, "weight": 12}], "water": [{"species": "magikarp", "min": 383, "max": 389, "weight": 30}, {"species": "tentacool", "min": 383, "max": 389, "weight": 22}], "waterRate": 0.08},
     "items": [],
@@ -4515,7 +4515,7 @@ export const MAPS9 = {
   },
   "flower-paradise": {
     "id": "flower-paradise",
-    "name": "Flower Paradise",
+    "name": "Petal Paradise",
     "music": "pallet-theme",
     "weather": "sun",
     "rows": [
@@ -4541,7 +4541,7 @@ export const MAPS9 = {
       {"x": 0, "y": 9, "to": {"map": "seabreak-path", "x": 24, "y": 9}},
     ],
     "signs": [
-      {"x": 12, "y": 7, "text": "FLOWER PARADISE — A meadow at the end of the sea road, in bloom past all reason. Somewhere in it, the flowers keep a smaller, greener secret."},
+      {"x": 12, "y": 7, "text": "PETAL PARADISE — A meadow at the end of the sea road, in bloom past all reason. Somewhere in it, the flowers keep a smaller, greener secret."},
     ],
     "npcs": [
     ],
@@ -4553,7 +4553,7 @@ export const MAPS9 = {
   },
   "fight-area": {
     "id": "fight-area",
-    "name": "Fight Area",
+    "name": "Clashfield",
     "music": "viridian-theme",
     "weather": "sun",
     "rows": [
@@ -4586,12 +4586,12 @@ export const MAPS9 = {
       {"x": 14, "y": 15, "to": {"map": "r230", "x": 22, "y": 1}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "FIGHT AREA — The Battle Zone’s port town. The harbour lane runs south to the coast water, the hard road east, and every conversation here is at least partly a scouting report."},
+      {"x": 2, "y": 5, "text": "CLASHFIELD — The Battle Zone’s port town. The harbour lane runs south to the coast water, the hard road east, and every conversation here is at least partly a scouting report."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fight Area Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
-      {"x": 13, "y": 13, "name": "CAPT NORTHSTAR", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Snowpoint, when you're ready. The northern run, ice permitting — and the ice usually permits me.", "You have the look of the island already. It does that fast."], "ferry": "snowpoint"},
-      {"x": 8, "y": 7, "name": "ZONE REGISTRAR OKTAVIA", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fight Area keeps the Zone's lists: who is training, who is resting, who is lying about both.", "Survival Area east, Resort south around the water, Stark smoking over all of it. Welcome to the hard island."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clashfield Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
+      {"x": 13, "y": 13, "name": "CAPT NORTHSTAR", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Rimefall, when you're ready. The northern run, ice permitting — and the ice usually permits me.", "You have the look of the island already. It does that fast."], "ferry": "snowpoint"},
+      {"x": 8, "y": 7, "name": "ZONE REGISTRAR OKTAVIA", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Clashfield keeps the Zone's lists: who is training, who is resting, who is lying about both.", "Wildreach east, Palmside south around the water, Stark smoking over all of it. Welcome to the hard island."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "bibarel", "min": 388, "max": 394, "weight": 18}, {"species": "staravia", "min": 388, "max": 394, "weight": 16}, {"species": "luxio", "min": 389, "max": 395, "weight": 14}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -4601,7 +4601,7 @@ export const MAPS9 = {
   },
   "survival-area": {
     "id": "survival-area",
-    "name": "Survival Area",
+    "name": "Wildreach",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -4634,11 +4634,11 @@ export const MAPS9 = {
       {"x": 14, "y": 15, "to": {"map": "r226", "x": 11, "y": 1}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "SURVIVAL AREA — A working town at the Zone’s waist. The hard road west, the island water south, and a Stark-shaped shadow over the roofs at noon."},
+      {"x": 2, "y": 5, "text": "WILDREACH — A working town at the Zone’s waist. The hard road west, the island water south, and a Stark-shaped shadow over the roofs at noon."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Survival Area Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
-      {"x": 11, "y": 7, "name": "TRAIL COOK BORIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I feed everyone who walks in standing up. The Zone sends me the rest by stretcher, joking. Mostly joking.", "The Resort road runs by water — cliffs make the land way a rumour. Sail it or swim it; the town recommends the first."]},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wildreach Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
+      {"x": 11, "y": 7, "name": "TRAIL COOK BORIN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I feed everyone who walks in standing up. The Zone sends me the rest by stretcher, joking. Mostly joking.", "The Palmside road runs by water — cliffs make the land way a rumour. Sail it or swim it; the town recommends the first."]},
       {"x": 18, "y": 12, "name": "CARTOGRAPHER WREN", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["I am re-charting this island at walking pace. It keeps being bigger than the charts, rudely.", "Stark's crater stone is the island's first fact. Everything else is commentary."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "bibarel", "min": 390, "max": 396, "weight": 18}, {"species": "fearow", "min": 390, "max": 396, "weight": 14}, {"species": "staravia", "min": 390, "max": 396, "weight": 16}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
@@ -4649,7 +4649,7 @@ export const MAPS9 = {
   },
   "resort-area": {
     "id": "resort-area",
-    "name": "Resort Area",
+    "name": "Palmside",
     "music": "viridian-theme",
     "weather": "sun",
     "rows": [
@@ -4687,15 +4687,15 @@ export const MAPS9 = {
       {"x": 24, "y": 0, "to": {"map": "r228", "x": 11, "y": 16}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "RESORT AREA — Villas, flower lawns, and the Zone’s softest beds, kept for the trainers its hardest roads wear down. North-east lane: the desert. East: the Stark road."},
-      {"x": 12, "y": 12, "text": "RESORT AREA — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
-      {"x": 8, "y": 2, "text": "RESORT AREA — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
-      {"x": 19, "y": 2, "text": "RESORT AREA — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 2, "y": 5, "text": "PALMSIDE — Villas, flower lawns, and the Zone’s softest beds, kept for the trainers its hardest roads wear down. North-east lane: the desert. East: the Stark road."},
+      {"x": 12, "y": 12, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 8, "y": 2, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
+      {"x": 19, "y": 2, "text": "PALMSIDE — North: ROUTE 226 / ROUTE 228 · East: ROUTE 227 · West: ROUTE 229."},
     ],
     "npcs": [
-      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Resort Area Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
+      {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Palmside Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
       {"x": 11, "y": 7, "name": "VILLA HOSTESS PRIA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Champions rest here between legends. The villas keep their towels folded and their stories unfolded.", "The desert gate is the north-east lane — sand country, storm fence, and Hippopotas with seniority."]},
-      {"x": 18, "y": 13, "name": "GROUNDSKEEPER TAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the flower beds and the resting champions both. One of those compliments the work.", "Stark smokes east every clear day. The Resort pretends not to notice, beautifully."]},
+      {"x": 18, "y": 13, "name": "GROUNDSKEEPER TAM", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the flower beds and the resting champions both. One of those compliments the work.", "Stark smokes east every clear day. The Palmside pretends not to notice, beautifully."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "bibarel", "min": 392, "max": 398, "weight": 16}, {"species": "staravia", "min": 392, "max": 398, "weight": 16}, {"species": "wingull", "min": 392, "max": 398, "weight": 16}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -4705,7 +4705,7 @@ export const MAPS9 = {
   },
   "distortion-entrance": {
     "id": "distortion-entrance",
-    "name": "Distortion World — Threshold",
+    "name": "Mirrorworld — Threshold",
     "music": "pewter-theme",
     "distortion": true,
     "indoor": true,
@@ -4746,7 +4746,7 @@ export const MAPS9 = {
   },
   "distortion-depths": {
     "id": "distortion-depths",
-    "name": "Distortion World — Depths",
+    "name": "Mirrorworld — Depths",
     "music": "pewter-theme",
     "distortion": true,
     "indoor": true,
@@ -4787,7 +4787,7 @@ export const MAPS9 = {
   },
   "distortion-isles": {
     "id": "distortion-isles",
-    "name": "Distortion World — Isles",
+    "name": "Mirrorworld — Isles",
     "music": "pewter-theme",
     "distortion": true,
     "indoor": true,
@@ -4828,7 +4828,7 @@ export const MAPS9 = {
   },
   "distortion-falls": {
     "id": "distortion-falls",
-    "name": "Distortion World — Falls",
+    "name": "Mirrorworld — Falls",
     "music": "pewter-theme",
     "distortion": true,
     "indoor": true,
@@ -4869,7 +4869,7 @@ export const MAPS9 = {
   },
   "distortion-abyss": {
     "id": "distortion-abyss",
-    "name": "Distortion World — Abyss",
+    "name": "Mirrorworld — Abyss",
     "music": "pewter-theme",
     "distortion": true,
     "indoor": true,
@@ -4910,7 +4910,7 @@ export const MAPS9 = {
   },
   "distortion-platform": {
     "id": "distortion-platform",
-    "name": "Distortion World — Platform",
+    "name": "Mirrorworld — Platform",
     "music": "pewter-theme",
     "distortion": true,
     "indoor": true,
@@ -4949,7 +4949,7 @@ export const MAPS9 = {
   },
   "house-pastoria": {
     "id": "house-pastoria",
-    "name": "Pastoria House",
+    "name": "Fenland House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -4971,7 +4971,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "MARSH HOSTESS SOLENNE", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Every Pastoria house keeps a spare pair of boots by the door and opinions about the tide.", "The marsh provides: reeds, frogs, and an education in patience."]},
+      {"x": 7, "y": 3, "name": "MARSH HOSTESS SOLENNE", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Every Fenland house keeps a spare pair of boots by the door and opinions about the tide.", "The marsh provides: reeds, frogs, and an education in patience."]},
     ],
     "encounters": null,
     "items": [],
@@ -4981,7 +4981,7 @@ export const MAPS9 = {
   },
   "house-celestic": {
     "id": "house-celestic",
-    "name": "Celestic House",
+    "name": "Astral House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5003,7 +5003,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "MURAL KEEPER UME", "art": "elder", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My family has copied the shrine murals for nine generations. The tenth copies us, some nights.", "Celestic houses keep their oldest things by the north wall, where the mountain can see them."]},
+      {"x": 7, "y": 3, "name": "MURAL KEEPER UME", "art": "elder", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["My family has copied the shrine murals for nine generations. The tenth copies us, some nights.", "Astral houses keep their oldest things by the north wall, where the mountain can see them."]},
     ],
     "encounters": null,
     "items": [],
@@ -5013,7 +5013,7 @@ export const MAPS9 = {
   },
   "house-snowpoint": {
     "id": "house-snowpoint",
-    "name": "Snowpoint House",
+    "name": "Rimefall House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5035,7 +5035,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "FERRY HOSTESS SOLVI", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Snowpoint houses are built like arguments against the weather: thick, low, and settled early.", "The temple acolytes take their tea here after the dawn sweeping. The snow takes the rest of the day."]},
+      {"x": 7, "y": 3, "name": "FERRY HOSTESS SOLVI", "art": "lady", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Rimefall houses are built like arguments against the weather: thick, low, and settled early.", "The temple acolytes take their tea here after the dawn sweeping. The snow takes the rest of the day."]},
     ],
     "encounters": null,
     "items": [],
@@ -5045,7 +5045,7 @@ export const MAPS9 = {
   },
   "house-sunnyshore": {
     "id": "house-sunnyshore",
-    "name": "Sunyshore House",
+    "name": "Brightshore House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5077,7 +5077,7 @@ export const MAPS9 = {
   },
   "house-fight": {
     "id": "house-fight",
-    "name": "Fight Area House",
+    "name": "Clashfield House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5099,7 +5099,7 @@ export const MAPS9 = {
     "signs": [
     ],
     "npcs": [
-      {"x": 7, "y": 3, "name": "REGISTRAR HOST OKTAVIA", "art": "clerk", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Fight Area houses keep a cot for whichever trainer the road sends back horizontal.", "Lists on the wall: ferries, tides, and who owes whom a rematch. The third list is longest."]},
+      {"x": 7, "y": 3, "name": "REGISTRAR HOST OKTAVIA", "art": "clerk", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Clashfield houses keep a cot for whichever trainer the road sends back horizontal.", "Lists on the wall: ferries, tides, and who owes whom a rematch. The third list is longest."]},
     ],
     "encounters": null,
     "items": [],
@@ -5109,7 +5109,7 @@ export const MAPS9 = {
   },
   "house-survival": {
     "id": "house-survival",
-    "name": "Survival Area House",
+    "name": "Wildreach House",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5141,7 +5141,7 @@ export const MAPS9 = {
   },
   "house-resort": {
     "id": "house-resort",
-    "name": "Resort Villa",
+    "name": "Palmside Villa",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5173,7 +5173,7 @@ export const MAPS9 = {
   },
   "house-resort-villa": {
     "id": "house-resort-villa",
-    "name": "Resort Grand Villa",
+    "name": "Palmside Grand Villa",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5205,7 +5205,7 @@ export const MAPS9 = {
   },
   "gym-pastoria": {
     "id": "gym-pastoria",
-    "name": "Pastoria Gym",
+    "name": "Fenland Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -5239,7 +5239,7 @@ export const MAPS9 = {
   },
   "gym-snowpoint": {
     "id": "gym-snowpoint",
-    "name": "Snowpoint Gym",
+    "name": "Rimefall Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -5273,7 +5273,7 @@ export const MAPS9 = {
   },
   "gym-sunnyshore": {
     "id": "gym-sunnyshore",
-    "name": "Sunyshore Gym",
+    "name": "Brightshore Gym",
     "music": "gym-theme",
     "indoor": true,
     "rows": [
@@ -5307,7 +5307,7 @@ export const MAPS9 = {
   },
   "celestic-shrine": {
     "id": "celestic-shrine",
-    "name": "Celestic Shrine",
+    "name": "Astral Shrine",
     "music": "pallet-theme",
     "indoor": true,
     "rows": [
@@ -5329,7 +5329,7 @@ export const MAPS9 = {
       {"x": 8, "y": 11, "to": {"map": "celestic", "x": 21, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 3, "text": "THE CELESTIC SHRINE — Three small shrines for three lake spirits, and a fourth space left empty on purpose, for what stands above them."},
+      {"x": 8, "y": 3, "text": "THE ASTRAL SHRINE — Three small shrines for three lake spirits, and a fourth space left empty on purpose, for what stands above them."},
     ],
     "npcs": [
       {"x": 8, "y": 7, "name": "SHRINE ELDER UME", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["The murals through that door tell it in pictures: emotion, knowledge, willpower — and the world they were given to.", "Copy the paintings if you like. Everyone does. The shrine considers it correspondence."]},
@@ -5342,7 +5342,7 @@ export const MAPS9 = {
   },
   "snowpoint-temple": {
     "id": "snowpoint-temple",
-    "name": "Snowpoint Temple",
+    "name": "Rimefall Temple",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -5366,7 +5366,7 @@ export const MAPS9 = {
       {"x": 9, "y": 0, "to": {"map": "snowpoint-temple-depths", "x": 8, "y": 10}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "SNOWPOINT TEMPLE — Five cold floors in the stories; here, one hall of ice and the stair down. What sleeps below has slept since the lake froze the first time."},
+      {"x": 8, "y": 2, "text": "RIMEFALL TEMPLE — Five cold floors in the stories; here, one hall of ice and the stair down. What sleeps below has slept since the lake froze the first time."},
     ],
     "npcs": [
     ],
@@ -5378,7 +5378,7 @@ export const MAPS9 = {
   },
   "snowpoint-temple-depths": {
     "id": "snowpoint-temple-depths",
-    "name": "Snowpoint Temple — Depths",
+    "name": "Rimefall Temple — Depths",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -5412,7 +5412,7 @@ export const MAPS9 = {
   },
   "sunnyshore-lighthouse": {
     "id": "sunnyshore-lighthouse",
-    "name": "Sunyshore Lighthouse",
+    "name": "Brightshore Lighthouse",
     "music": "viridian-theme",
     "indoor": true,
     "rows": [
@@ -5434,7 +5434,7 @@ export const MAPS9 = {
       {"x": 8, "y": 11, "to": {"map": "sunnyshore", "x": 4, "y": 13}},
     ],
     "signs": [
-      {"x": 7, "y": 3, "text": "SUNNYSHORE LIGHTHOUSE — The vista light. From the gallery, the League’s white cliff rides the horizon like a kept promise."},
+      {"x": 7, "y": 3, "text": "BRIGHTSHORE LIGHTHOUSE — The vista light. From the gallery, the League’s white cliff rides the horizon like a kept promise."},
     ],
     "npcs": [
       {"x": 8, "y": 5, "name": "LIGHTHOUSE KEEPER BLY", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Keepers log every hull on the 223 road. Yours will be a short entry and a good one, I expect.", "On the clearest mornings the light is redundant. The League cliff does its job for it."]},

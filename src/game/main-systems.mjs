@@ -28,8 +28,8 @@ const REGIONS = [
   { id: 'orange', name: 'Orange Islands', note: 'A southern sea league of trials. Complete Arden first.' },
   { id: 'johto', name: 'Yamato', note: 'Old towers, older legends. Complete the Orange voyage first.' },
   { id: 'hoenn', name: 'Maris', note: 'Sea and land at war with the sky. Complete Yamato first.' },
-  { id: 'sinnoh', name: 'Sinnoh', note: 'Myths written in stone and time. Complete Maris first.' },
-  { id: 'unova', name: 'Unova', note: 'Truth against ideals. Complete Sinnoh first.' },
+  { id: 'sinnoh', name: 'Borea', note: 'Myths written in stone and time. Complete Maris first.' },
+  { id: 'unova', name: 'Unova', note: 'Truth against ideals. Complete Borea first.' },
   { id: 'kalos', name: 'Kalos', note: 'Beauty, bonds, and a flare of war. Complete Unova first.' },
   { id: 'alola', name: 'Alola', note: 'An island challenge under twin lights. Complete Kalos first.' },
   { id: 'galar', name: 'Galar / Hisui', note: 'Stadiums roar; an older land remembers. Complete Alola first.' },
@@ -434,8 +434,8 @@ Object.assign(Game.prototype, {
         });
       }
     }
-    // Section 1.8 — Sinnoh (Stage S5a): the SINNOH_QUESTS chain in
-    // the same idiom, rendered once the Sinnoh arc is reached (the
+    // Section 1.8 — Borea (Stage S5a): the SINNOH_QUESTS chain in
+    // the same idiom, rendered once the Borea arc is reached (the
     // homecoming hook, the current arc, a first badge, the arrival,
     // or a completed journey). S5b's appended rows render here
     // unchanged — the chain order is the data order.
@@ -445,7 +445,7 @@ Object.assign(Game.prototype, {
       || !!g.state.story.flags.sinnoh_arrival
       || (g.state.story.regionsDone || []).includes('sinnoh');
     if (sinnohReached) {
-      items.push({ label: '— SINNOH —', value: null, disabled: true, band: true });
+      items.push({ label: '— BOREA —', value: null, disabled: true, band: true });
       for (const q of SINNOH_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
         const active = !doneF && SINNOH_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;

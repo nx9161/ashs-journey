@@ -8,7 +8,7 @@
 
 export const ACTS = [
   { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Arden → Orange Islands → Yamato (v1)' },
-  { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Maris → Trial Grounds → Sinnoh (v2, announced ADR-006)' },
+  { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Maris → Trial Grounds → Borea (v2, announced ADR-006)' },
   { n: 3, title: 'Act III: Beyond', scope: 'planned', note: 'Unova → Kalos → Alola → Journeys → Horizons (planned, not built)' },
 ];
 
@@ -64,10 +64,10 @@ export const CHAPTERS = [
     movies: ['Ranger and the Temple of the Sea'],
   },
   {
-    n: 8, id: 'sinnoh', act: 2, region: 'Sinnoh', scope: 'locked',
+    n: 8, id: 'sinnoh', act: 2, region: 'Borea', scope: 'locked',
     title: 'Diamond & Pearl',
     arc: 'Locked — Act II (v2).',
-    anime: 'Seasons 10–13: Diamond and Pearl / Battle Dimension / Galactic Battles / Sinnoh League Victors',
+    anime: 'Seasons 10–13: Diamond and Pearl / Battle Dimension / Galactic Battles / Borea League Victors',
     movies: ['The Rise of Darkrai', 'Giratina and the Sky Warrior', 'Arceus and the Jewel of Life', 'Zoroark: Master of Illusions'],
   },
   // ---- locked: Act III (planned) ----

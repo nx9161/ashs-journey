@@ -172,8 +172,8 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 
 // -- CAPT SINNOH placement + Vermilion connectivity (pure, sweep-style) --
 {
-  const capt = TALE_NPCS.find((n) => n.name === 'CAPT SINNOH');
-  const hoenn = TALE_NPCS.find((n) => n.name === 'CAPT HOENN');
+  const capt = TALE_NPCS.find((n) => n.name === 'CAPT BOREA');
+  const hoenn = TALE_NPCS.find((n) => n.name === 'CAPT MARIS');
   const harbor = TALE_NPCS.find((n) => n.name === 'HARBORMASTER');
   ok('A20 CAPT SINNOH appended via the TALE_NPCS idiom on vermilion (14,10) — ferry sandgem + ferryArc sinnoh, sailor art, no tale/role; CAPT HOENN unmoved at (16,10), HARBORMASTER unmoved at (16,11)',
     !!capt && capt.map === 'vermilion' && capt.x === 14 && capt.y === 10 && capt.ferry === 'sandgem' && capt.ferryArc === 'sinnoh'
@@ -188,7 +188,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     && !(v.npcs || []).some((n) => n.x === 14 && n.y === 10));
   const graph = (withCapt) => {
     const blocked = (x, y) => (v.npcs || []).some((n) => n.x === x && n.y === y)
-      || TALE_NPCS.some((n) => n.map === 'vermilion' && n.x === x && n.y === y && (withCapt || n.name !== 'CAPT SINNOH'));
+      || TALE_NPCS.some((n) => n.map === 'vermilion' && n.x === x && n.y === y && (withCapt || n.name !== 'CAPT BOREA'));
     const walkable = (x, y) => y >= 0 && y < v.rows.length && x >= 0 && x < v.rows[y].length && WALKABLE.has(v.rows[y][x]) && !blocked(x, y);
     const seenAll = new Set(); const comps = [];
     for (let y = 0; y < v.rows.length; y++) for (let x = 0; x < v.rows[y].length; x++) {
@@ -517,7 +517,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
   ok('S3a-12 Route 212 (S3b supersession — the S3a fence is OPEN: r212 remains the NORTH segment, its warps now reach hearthome AND r212-south, the Pastoria leg S3a signed as future work; the sign was reworded to say the road runs on)',
     (MAPS9.r212.warps || []).length > 0 && (MAPS9.r212.warps || []).every((w) => ['hearthome', 'r212-south'].includes(w.to.map))
     && (MAPS9.r212.warps || []).some((w) => w.to.map === 'r212-south')
-    && (MAPS9.r212.signs || []).some((s) => s.text.includes('212') && s.text.includes('Pastoria')));
+    && (MAPS9.r212.signs || []).some((s) => s.text.includes('212') && s.text.includes('Fenland')));
   const tiles9 = await import(join(ROOT, 'src/engine/tiles.mjs'));
   ok('S3a-13 Sinnoh tile identity: SINNOH_TOWN_ORDER reserves all 14 settlements; the 10 S3a towns each own 8 distinct signature chars (tg/tg2/tc/td/tr/tl/th/tw at U+1E00 idx 412+i*8) registered in TILE_CHARS, and the tg/tg2 ground chars + the 3 S3 floor kinds are in the engine WALKABLE set',
     tiles9.SINNOH_TOWN_ORDER.length === 14
@@ -687,7 +687,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     && ALLMV.defog.type === 'flying' && ALLMV.defog.cat === 'status' && ALLMV.defog.effect.eva === -1 && ALLMV.defog.pp === 15
     && ALLMV.rockclimb.power === 90 && ALLMV.rockclimb.acc === 85 && ALLMV.rockclimb.pp === 20 && ALLMV.rockclimb.effect.status === 'confusion');
   ok('S4-02 grant hooks as data (HM_GRANTS, the table S5 calls): defog -> hm06 gated on fenbadge from the Solaceon Ruins (Platinum); rockclimb -> hm07 gated on iciclebadge from Route 217 (Platinum); the Gracidea is a key-pocket item',
-    HM_GRANTS.defog.item === 'hm06' && HM_GRANTS.defog.badge === 'fenbadge' && HM_GRANTS.defog.source.includes('Solaceon')
+    HM_GRANTS.defog.item === 'hm06' && HM_GRANTS.defog.badge === 'fenbadge' && HM_GRANTS.defog.source.includes('Repose')
     && HM_GRANTS.rockclimb.item === 'hm07' && HM_GRANTS.rockclimb.badge === 'iciclebadge' && HM_GRANTS.rockclimb.source.includes('217')
     && ITEMS.gracidea.pocket === 'key');
   const fogMap = ALL_MAPS['r210-north'];
@@ -888,10 +888,10 @@ const driver = `
   var g = mkGame(801); boot(g);
   var st = g.state;
   var ow = gotoMap(g, 'vermilion', 13, 9); drain(g);
-  var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT SINNOH'; });
+  var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT BOREA'; });
   ok('B01 CAPT SINNOH stands on Vermilion\\'s live roster at (14,10) (ferry sandgem, ferryArc sinnoh), beside CAPT HOENN (16,10)',
     !!capt && capt.x === 14 && capt.y === 10 && capt.ferry === 'sandgem' && capt.ferryArc === 'sinnoh'
-    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT HOENN' && n.x === 16 && n.y === 10; }));
+    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT MARIS' && n.x === 16 && n.y === 10; }));
 
   // The gate: embark_sinnoh deleted (a fresh state never had it) —
   // talking yields the ferry gate line and NO warp, NO sail menu.
@@ -908,7 +908,7 @@ const driver = `
   }
   drain(g);
   ok('B02 with embark_sinnoh deleted, CAPT SINNOH yields the ferry gate line and NO warp (still on vermilion, no sail menu offered)',
-    seenLines.some(function (l) { return l.indexOf('No sailing to Sinnoh yet') === 0; }) && menuSeen === false && !g.ui.menuOpen
+    seenLines.some(function (l) { return l.indexOf('No sailing to Borea yet') === 0; }) && menuSeen === false && !g.ui.menuOpen
     && st.story.position.map === 'vermilion' && ow.mapId === 'vermilion',
     'lines=' + seenLines.join(' | ').slice(0, 200) + ' pos=' + st.story.position.map);
 

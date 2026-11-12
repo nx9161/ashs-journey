@@ -70,7 +70,7 @@ export const MOVES2 = {
   wingattack:   { id: 'wingattack', name: 'Wing Attack', type: 'flying', cat: 'physical', power: 35, acc: 100, pp: 35, priority: 0 },
   drillpeck:    { id: 'drillpeck', name: 'Drill Peck', type: 'flying', cat: 'physical', power: 80, acc: 100, pp: 20, priority: 0 },
   fly:          { id: 'fly', name: 'Fly', type: 'flying', cat: 'physical', power: 70, acc: 95, pp: 15, priority: 0, charge: true },
-  // Arc 4 Stage S4: the two Sinnoh field moves join the table (the HM
+  // Arc 4 Stage S4: the two Borea field moves join the table (the HM
   // items hm06/hm07 in items.mjs teach them through the shipped HM
   // path, so they must be real battle moves like cut/surf/fly).
   // Defog (Platinum): clears fog in the field; in battle it lowers

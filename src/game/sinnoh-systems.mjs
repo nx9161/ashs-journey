@@ -1,4 +1,4 @@
-// sinnoh-systems.mjs — Arc 4 Stage S4: the pure Sinnoh systems core.
+// sinnoh-systems.mjs — Arc 4 Stage S4: the pure Borea systems core.
 //
 // FORME-SWITCH (coordinator decision 6): rides the Deoxys mechanic
 // EXACTLY (overworld-systems switchDeoxysForme, Stage H6): a speciesId
@@ -6,7 +6,7 @@
 // keepsake, IVs/EVs, status and the move set are the individual's own
 // and are NOT touched; maxHp/stats recompute from the new forme's base
 // stats with HP carried by the max-delta rule. This module is that
-// same swap, generalised over the three Sinnoh families; the Deoxys
+// same swap, generalised over the three Borea families; the Deoxys
 // path itself is untouched. MOVE DELTA (recorded): canon swaps
 // Rotom's appliance move per forme; here every forme family's
 // learnsets draw from one shared pool (species5 data — the Deoxys
@@ -23,7 +23,7 @@ export const FORME_OF = {};
 for (const [base, formes] of Object.entries(FORME_FAMILIES)) {
   for (const id of formes) FORME_OF[id] = base;
 }
-// Rotom's appliances (Old Chateau, S4): forme id -> the room's object.
+// Rotom's appliances (Ruined Manor, S4): forme id -> the room's object.
 export const ROTOM_APPLIANCES = {
   rotomheat: 'the oven', rotomwash: 'the washing machine',
   rotomfrost: 'the refrigerator', rotomfan: 'the electric fan',
@@ -58,7 +58,7 @@ export function partyKnowsFieldMove(party, moveId) {
     || (m.hmMoves || []).includes(moveId)));
 }
 
-// The badge gate for a Sinnoh field move, read generically off the
+// The badge gate for a Borea field move, read generically off the
 // save's badge case: the gate badge must sit in SOME badge set (the
 // prefix law minted it into badges.sinnoh; the read names no region).
 export function badgeHeld(state, badgeId) {

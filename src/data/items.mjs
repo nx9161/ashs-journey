@@ -45,7 +45,7 @@ export const HM_MOVES = { 1: 'cut', 2: 'fly', 3: 'surf', 4: 'strength', 5: 'flas
 // overworld reads (badges.sinnoh prefix law), source = the Platinum
 // placement S5 stages.
 export const HM_GRANTS = {
-  defog: { item: 'hm06', move: 'defog', badge: 'fenbadge', source: 'Solaceon Ruins (Platinum)' },
+  defog: { item: 'hm06', move: 'defog', badge: 'fenbadge', source: 'Repose Ruins (Platinum)' },
   rockclimb: { item: 'hm07', move: 'rockclimb', badge: 'iciclebadge', source: 'Route 217 (Platinum)' },
 };
 const TM_PRICES = {
@@ -134,8 +134,8 @@ export const ITEMS = {
   coin: { id: 'coin', name: 'Game Coin', pocket: 'key', desc: 'Game Corner currency. Win at the slots; spend at the prize corner.' },
   itemfinder: { id: 'itemfinder', name: 'Itemfinder', pocket: 'key', desc: 'Beeps near hidden items when used (SELECT near a spot).' },
   townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Arden at a glance. Gary\'s sister would approve.' },
-  // Arc 4 Stage S5b: the Lunar Wing — carried away from Fullmoon
-  // Island in the Darkrai beat; S6's Newmoon arc reads it.
+  // Arc 4 Stage S5b: the Lunar Wing — carried away from Brightmoon
+  // Island in the Darkrai beat; S6's Darkmoon arc reads it.
   lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
   // Arc 4 Stage S6: the Odd Keystone (Spiritomb's stone, a Route 209
   // traveller's gift) and Oak's Letter (Shaymin's gate, Rowan-granted
@@ -145,7 +145,7 @@ export const ITEMS = {
   oaksletter: { id: 'oaksletter', name: "Oak's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
   // Arc 4 Stage S7: the Azure Flute — the finale's entrusting (the
   // arc machine grants it at the finale homecoming, never at arc
-  // completion alone); the Arceus capstone at Spear Pillar reads it.
+  // completion alone); the Arceus capstone at Zenith Spire reads it.
   azureflute: { id: 'azureflute', name: 'Azure Flute', pocket: 'key', desc: 'A flute of clear blue glass, older than the mountains it was carved under. Its note is said to build stairs where the sky keeps its first room.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
@@ -191,20 +191,20 @@ export const ITEMS = {
   featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Highbranch. Light enough to ride the canopy wind.' },
   mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Starfall. Two halves, one thought.' },
   rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Craterlake. It smells of deep water and old rain.' },
-  // Sinnoh badges (Arc 4 Stage S0): the Arden representation exactly —
+  // Borea badges (Arc 4 Stage S0): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.sinnoh, and the
   // badge_<root> story flag. Platinum order, minted complete now so
   // the set, the Cheat Terminal stock and the validator sequence are
   // whole before S5 stages their gyms (the Maris H4a precedent: the
   // east four rows shipped before their leaders existed).
-  coalbadge: { id: 'coalbadge', name: 'Coal Badge', pocket: 'key', desc: 'From Roark of Oreburgh. Cut from the seam his miners work — it still smells faintly of coal dust.' },
-  forestbadge: { id: 'forestbadge', name: 'Forest Badge', pocket: 'key', desc: 'From Gardenia of Eterna. It carries the green hush of the old forest at the town\'s edge.' },
-  relicbadge: { id: 'relicbadge', name: 'Relic Badge', pocket: 'key', desc: 'From Fantina of Hearthome. An old, elegant thing — it feels heavier than it looks, like a held breath.' },
-  cobblebadge: { id: 'cobblebadge', name: 'Cobble Badge', pocket: 'key', desc: 'From Maylene of Veilstone. Plain, hard and honest — it has never once pretended to be anything else.' },
-  fenbadge: { id: 'fenbadge', name: 'Fen Badge', pocket: 'key', desc: 'From Crasher Wake of Pastoria. It smells of marsh water and arena lights, and it grins back at you.' },
-  minebadge: { id: 'minebadge', name: 'Mine Badge', pocket: 'key', desc: 'From Byron of Canalave. Forged steel, harbour-forged — the iron island\'s weight in miniature.' },
-  iciclebadge: { id: 'iciclebadge', name: 'Icicle Badge', pocket: 'key', desc: 'From Candice of Snowpoint. Cold enough to sting the palm. It will not melt. Neither will she.' },
-  beaconbadge: { id: 'beaconbadge', name: 'Beacon Badge', pocket: 'key', desc: 'From Volkner of Sunyshore. It hums at lighthouse pitch — the last light before the League road.' },
+  coalbadge: { id: 'coalbadge', name: 'Coal Badge', pocket: 'key', desc: 'From Roark of Coalseam. Cut from the seam his miners work — it still smells faintly of coal dust.' },
+  forestbadge: { id: 'forestbadge', name: 'Forest Badge', pocket: 'key', desc: 'From Gardenia of Heritage. It carries the green hush of the old forest at the town\'s edge.' },
+  relicbadge: { id: 'relicbadge', name: 'Relic Badge', pocket: 'key', desc: 'From Fantina of Inglenook. An old, elegant thing — it feels heavier than it looks, like a held breath.' },
+  cobblebadge: { id: 'cobblebadge', name: 'Cobble Badge', pocket: 'key', desc: 'From Maylene of Shardfall. Plain, hard and honest — it has never once pretended to be anything else.' },
+  fenbadge: { id: 'fenbadge', name: 'Fen Badge', pocket: 'key', desc: 'From Crasher Wake of Fenland. It smells of marsh water and arena lights, and it grins back at you.' },
+  minebadge: { id: 'minebadge', name: 'Mine Badge', pocket: 'key', desc: 'From Byron of Bridgeport. Forged steel, harbour-forged — the iron island\'s weight in miniature.' },
+  iciclebadge: { id: 'iciclebadge', name: 'Icicle Badge', pocket: 'key', desc: 'From Candice of Rimefall. Cold enough to sting the palm. It will not melt. Neither will she.' },
+  beaconbadge: { id: 'beaconbadge', name: 'Beacon Badge', pocket: 'key', desc: 'From Volkner of Brightshore. It hums at lighthouse pitch — the last light before the League road.' },
   // Frontier Symbols (Stage F0): the Arden representation adapted to
   // the Frontier's shape — a key-pocket ITEMS row per Symbol, but the
   // earned state itself is NOT a bag/badge array: it is the slot array
@@ -273,7 +273,7 @@ export const KEEPSAKES = {
   thunderheadpin: { id: 'thunderheadpin', name: 'Thunderhead Pin', kind: 'lowHpDamage', moveType: 'electric', factor: 1.15, hpFrac: 0.5, effect: 'Electric moves deal x1.15 while at 50% HP or less.' },
   fossilspur: { id: 'fossilspur', name: 'Fossil Spur', kind: 'fasterFoeDamage', moveType: 'rock', factor: 1.15, effect: 'Rock moves deal x1.15 vs faster foes.' },
   championsribbon: { id: 'championsribbon', name: "Champion's Ribbon", kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
-  // Arc 4 Stage S5a: Sinnoh's first-half share (6 of the arc's 8–12) —
+  // Arc 4 Stage S5a: Borea's first-half share (6 of the arc's 8–12) —
   // existing resolved kinds ONLY (no new engine kind; the battle-model
   // gate is untouched). Every piece is acquired in-world: the six Town
   // Tales of this half pay them (see SINNOH_TALES), and two double as
@@ -284,7 +284,7 @@ export const KEEPSAKES = {
   meadowcord: { id: 'meadowcord', name: 'Meadow Cord', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },
   ruinbell: { id: 'ruinbell', name: 'Ruin Bell', kind: 'typeWard', moveType: 'psychic', factor: 0.8, effect: 'Takes x0.8 damage from Psychic moves.' },
   ribbonclasp: { id: 'ribbonclasp', name: 'Ribbon Clasp', kind: 'statusChance', moveType: 'normal', status: 'confusion', bonus: 10, effect: 'Normal moves gain +10% confusion chance.' },
-  // Arc 4 Stage S5b: Sinnoh's second-half share (4 — the arc total
+  // Arc 4 Stage S5b: Borea's second-half share (4 — the arc total
   // lands at 10). Existing resolved kinds ONLY, same law as S5a.
   // Paid in-world by this half's Town Tales; three double as gym-ace
   // signatures (Wake's Floatzel, Candice's Abomasnow, Volkner's
