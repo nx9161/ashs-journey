@@ -309,6 +309,14 @@ export const NAME_REGISTRY = {
     // glacier+erne (sea-eagle), pyre+hawk. FULMINIS (145) is M1.
     articuno:  { name: 'GLACIERNE', status: 'locked', wave: 'G-RES', design: 'glacierne' },
     moltres:   { name: 'PYREHAWK', status: 'locked', wave: 'G-RES', design: 'pyrehawk' },
+    // Yamato sovereigns (LEGENDARY tier; CHRONOFAE is the MYTHICAL
+    // slot — chrono+fae, the time-sprite aura register).
+    raikou:    { name: 'VOLTIGRIS', status: 'locked', wave: 'G-RES', design: 'voltigris' },
+    entei:     { name: 'MAGMALION', status: 'locked', wave: 'G-RES', design: 'magmalion' },
+    suicune:   { name: 'BOREPARD', status: 'locked', wave: 'G-RES', design: 'borepard' },
+    lugia:     { name: 'ABYSSORN', status: 'locked', wave: 'G-RES', design: 'abyssorn' },
+    hooh:      { name: 'IRISAVIS', status: 'locked', wave: 'G-RES', design: 'irisavis' },
+    celebi:    { name: 'CHRONOFAE', status: 'locked', wave: 'G-RES', design: 'chronofae' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -738,4 +746,5 @@ export const LOCKED_CANON = [
   'OMNIGEN', 'MOSSAIC', 'VULCANIS', 'UNDINARA', 'FULMINIS',
   'PRISMKIT', 'OTTERSAIL', 'SPARKHARE', 'KINDLEON', 'SOLYNX', 'LUNAPARD',
   'GLACIERNE', 'PYREHAWK',
+  'VOLTIGRIS', 'MAGMALION', 'BOREPARD', 'ABYSSORN', 'IRISAVIS', 'CHRONOFAE',
 ];
