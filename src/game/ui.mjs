@@ -83,8 +83,9 @@ export class UI {
     // in this frame layer, whose box is synced to the canvas rect by
     // _syncChipAnchor(). DOM chrome positioned against the viewport is how
     // v2 shipped dialogue/commands/party OUTSIDE the frame on the live build.
-    // Viewport-layer elements stay in #ui: touch controls, login/name-entry
-    // overlays (full-screen modal dim), hint card, 503 banner, sync dot.
+    // Viewport-layer elements stay in #ui: login/name-entry overlays
+    // (full-screen modal dim), hint card, 503 banner, sync dot. The touch
+    // controls live in #stage's #ctlband (UI v2.5, see buildControls).
     this.frame = this.el('div', 'frameui', this.root);
     if (typeof window !== 'undefined' && window.addEventListener) {
       window.addEventListener('resize', () => this._syncChipAnchor());
@@ -116,7 +117,11 @@ export class UI {
 
   // ---- touch controls ----
   buildControls() {
-    const g = this.el('div', 'controls', this.root);
+    // UI v2.5: the pad mounts in #ctlband (the reserved in-flow band in
+    // #stage), not the #ui viewport overlay — layout keeps it disjoint
+    // from the canvas. Fallback to #ui if an old shell lacks the band.
+    const band = document.getElementById && document.getElementById('ctlband');
+    const g = this.el('div', 'controls', band || this.root);
     const pad = this.el('div', 'dpad', g);
     this.dpadEl = pad;
     const mk = (action, cls, label) => {

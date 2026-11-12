@@ -371,38 +371,38 @@ export class Game {
     }
     const w = window.innerWidth, h = window.innerHeight;
     const fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-    // D3: desktop = fine pointer at >=700px, OR a laptop-class width regardless of
-    // what the browser reports (some browsers/headless never match
-    // '(pointer: fine)' — without the width fallback they fell into the phone
-    // landscape path and rendered stretched with touch controls on a laptop).
-    // Coarse-pointer wide tablets still land here and get controls back via the
-    // (pointer:coarse) CSS override.
-    if (w >= 700 && (fine || w >= 1024)) {
-      this.layoutMode = 'desktop';
-      // D3: aspect-locked 16:9 canvas. The old h*0.62 cap stretched the buffer
-      // on 1280x800-class viewports (1120x496 CSS over a 384x216 backing store).
-      // Height now reserves room for the hint card instead of a fixed fraction.
+    // D3: desktop = fine pointer at >=700px, OR a laptop-class width regardless
+    // of what the browser reports (some browsers/headless never match
+    // '(pointer: fine)' and fell into the phone landscape path, stretched,
+    // with touch controls on a laptop). Coarse wide tablets land here too and
+    // get controls back via the (pointer:coarse) CSS override.
+    const mode = (w >= 700 && (fine || w >= 1024)) ? 'desktop' : (w > h ? 'landscape' : 'portrait');
+    this.layoutMode = mode;
+    const bd = document.body.classList;
+    bd.toggle('desktop', mode === 'desktop');
+    bd.toggle('landscape', mode === 'landscape');
+    // UI v2.5: on phones the canvas letterboxes inside #screenwrap (the
+    // region above the reserved control band / between the flank clusters)
+    // and is sized FROM it, so it can never reach the controls. Headroom
+    // factors absorb the renderer's snap tolerance (B2-G5, <= +8%).
+    const wrap = document.getElementById && document.getElementById('screenwrap');
+    const ww = wrap ? wrap.clientWidth : w, wh = wrap ? wrap.clientHeight : h;
+    if (mode === 'desktop') {
+      // D3: aspect-locked 16:9; height reserves room for the hint card.
       const cssW0 = Math.min(1120, w * 0.9);
       let cw = cssW0, ch = cssW0 * 9 / 16;
       const maxH = Math.min(630, Math.max(240, h - 140));
       if (ch > maxH) { ch = maxH; cw = ch * 16 / 9; }
       r.resize(384, 216, Math.round(cw), Math.round(ch));
-      document.body.classList.add('desktop');
-    } else if (w > h) {
-      this.layoutMode = 'landscape';
-      // D3: aspect-locked 4:3 (was w*0.72 x h — stretched on every landscape phone).
-      const lw = Math.min(w * 0.72, h * 4 / 3);
-      r.resize(256, 192, Math.round(lw), Math.round(lw * 3 / 4));
-      document.body.classList.remove('desktop');
+    } else if (mode === 'landscape') {
+      // 4:3 in the screen column; width capped so snapped height fits.
+      const cw = Math.min(ww * 0.96, wh * 1.234);
+      r.resize(256, 192, Math.round(cw), Math.round(cw * 3 / 4));
     } else {
-      this.layoutMode = 'portrait';
-      // Portrait: canvas takes 58% of the height (was 45% — left a dead
-      // void below and shrank the game's subject). Logical stays 256x256.
-      r.resize(256, 256, w, h * 0.58);
-      document.body.classList.remove('desktop');
+      // Square: short side requested, height pre-divided by snap tolerance.
+      const s = Math.min(ww, wh / 1.08);
+      r.resize(256, 256, Math.round(s), Math.round(s));
     }
-    // P1/K2: landscape gets the right-edge command rail (CSS re-rails the HUD strip).
-    document.body.classList.toggle('landscape', this.layoutMode === 'landscape');
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
     // Elevation C1: the reduced-motion body gate for the menu transition.
     document.body.classList.toggle('reduced-motion', !!this.state.settings.reducedMotion);
