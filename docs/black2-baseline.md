@@ -258,3 +258,38 @@ Game Freak through official channels).
   service windows in kit towns (kit branch supersedes litMap
   there), and the warp-fade door-open frames (still authored art
   in kit towns, as in Phase 1).
+  Wave B LANDED on branch art/kit-wave-b (2026-11-11, not merged):
+  JOHTO + HOENN ROLLOUT — all 11 Johto and 16 Hoenn settlements
+  wear the kit, each with a unique variant keyed to its regional
+  TOWN_STYLE form (newbark pale-teal lakeside, cherrygrove cherry
+  gable, violet grey-violet stone, azalea moss, goldenrod brick,
+  ecruteak dark cedar, olivine harbor red, cianwood driftwood,
+  mahogany deep pine, blackthorn indigo slate, silvertown silver
+  marble; littleroot honey cedar, oldale straw, petalburg sage,
+  rustboro warm-grey stone, dewford surf teal, slateport cream
+  canvas, mauville olive bronze, verdanturf pale rose, fallarbor
+  ash grey, lavaridge rust, fortree deep canopy, lilycove
+  lavender, mossdeep pale cyan, sootopolis crater white,
+  pacifidlog raft timber, evergrande marble + gold door). The
+  vegetation anchor lookup now reads all three regional style
+  tables; pairwise palette distance was machine-checked against
+  every shipped set. Starter corridors follow the Route 1
+  precedent regionalized: r29 wears New Bark's set, r101 wears
+  Littleroot's. Regional props (maple, apricorn, lifering, forge,
+  telescopes, contest arches, columns, and the rest of the J3/H3
+  dressing) join the kit-ground prop set, and prop underlays now
+  follow authored floor families — a lifering keeps its Dewford
+  sand, Fortree/Pacifidlog objects keep their boardwalk; town
+  ground itself stays kit-owned (the tg- family is never used as
+  an underlay inside a kit town). Rocks and fences composite over
+  kit ground with the shipped shadow and boulder picks. Biome
+  floors stay native by design: Dewford sand, Fortree and
+  Pacifidlog boardwalk (Pacifidlog has no town-ground cells at
+  all — its kit identity is roofs, doors, and grounded objects on
+  the raft deck), Lavaridge hot-spring glow, cave mouths. Skin
+  only: audits green, slice 131/134 (same 3 pre-existing
+  failures), all build gates green, every town + both routes
+  visually graded through the shipped resolver, plus Goldenrod
+  rendered in Winter to prove the dampened grade family across
+  seasons. NOT yet: Orange/Sevii/Sinnoh settlements, frontierhub,
+  biome tile families, interiors (Wave C).
