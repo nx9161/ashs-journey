@@ -870,19 +870,19 @@ export const MAPS3 = {
   fuchsia: {
     id: 'fuchsia', name: 'Fuchsia City', music: 'viridian-theme',
     rows: rows([
-      'ÓÓÓÞÓÓÓÓÈÈÓÓÓÞÓÓÓÓ',
-      'ÓÈÈẌÈÈÈÈÈÈÈÈÈẈÈÈẆÓ',
-      'ÓÈēēēÈÈÈÈÈēXēēÈÈÈÓ',
-      'ÓÈīwīÈÈÈÈÈḆḆḆḆÈÈÈÓ',
-      'ÓÈÈÈÈÈÈÈÈÈḆVYḆÈẄÈÓ',
-      'ÓÈÈÈoÈÈÈÈÈÈÈÈÈẐoÈÈ',
-      'ÓÈÈÈÈÈééééẐÈÈÈÈÈÈÓ',
-      'ÓÈÈÈÈoAJKAoÈÈẈÈÈÈÓ',
-      'ÓẒÈÈÈÈÈÈÈÈÈÈÈÞÈÈÈÓ',
-      'ÓÈÈÈÈÈēēēēÈÈÈēôēÈÓ',
-      'ÓÈÈÈÈÈī78īÈÈẒP12ÈÓ',
-      'ÓÈÈÈÈÈÈÈÈÈÈÈÞÈÈÈÈÓ',
-      'ÓÓÓÞÓÓÓÓÈÈÓÓÓÞÓÓÓÓ',
+      'ÓÓÓÞÓÓÓÓŀŀÓÓÓÞÓÓÓÓ',
+      'ÓÈÈẌÈŀŀŀŀŀÈÈÈẈÈÈÈÓ',
+      'ÓÈēēēŀÈŀŀŀēXēēÈÈÈÓ',
+      'ÓÈīwīŀÈŀŀŀḆḆḆḆÈÈÈÓ',
+      'ÓÈÈŀŀŀŀŀŀŀḆVYḆÈẄÈÓ',
+      'ÓÈoŀŀŀŀŀŀŀŀŀŀŀẐoŀŀ',
+      'ÓÈoŀŀŀééééẐŀŀŀŀŀŀÓ',
+      'ÓÈẈŀŀŀAJKAoŀŀÈŀŀŀÓ',
+      'ÓẒÞŀŀŀŀŀŀŀŀŀŀŀŀŀŀÓ',
+      'ÓÈÈŀŀŀēēēēŀŀŀēôēŀÓ',
+      'ÓÈẆŀÈŀī78īŀŀẒP12ŀÓ',
+      'ÓÈÈŀŀŀŀŀŀŀŀŀÞÈŀŀŀÓ',
+      'ÓÓÓÞÓÓÓÓŀŀÓÓÓÞÓÓÓÓ'
     ]),
     warps: [
       { x: 11, y: 4, to: { map: 'gym-fuchsia', x: 7, y: 8 } },
@@ -903,6 +903,8 @@ export const MAPS3 = {
     signs: [
       { x: 7, y: 4, text: 'FUCHSIA CITY — The Safari City. Wild Pokemon roam free beyond the south gate.' },
       { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
+      { x: 13, y: 7, text: 'FUCHSIA CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
+      { x: 4, y: 10, text: 'FUCHSIA CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
     ],
     npcs: [
       { x: 10, y: 9, name: 'SAFARI WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
