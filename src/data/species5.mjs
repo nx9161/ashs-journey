@@ -139,7 +139,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'bibarel', method: 'level', level: 315 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   bibarel: {
-    id: 'bibarel', name: 'Bibarel', dexNo: 400, types: ['normal', 'water'],
+    id: 'bibarel', name: 'DAMBEAVER', dexNo: 400, types: ['normal', 'water'],
     base: { hp: 79, atk: 85, def: 60, spa: 55, spd: 60, spe: 71 },
     catchRate: 127, growth: 'mediumfast', baseXp: 144, body: 'biped', spriteSeed: 40001,
     eggGroups: ['water1', 'ground'], hatchCounter: 15,
@@ -148,7 +148,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   kricketot: {
-    id: 'kricketot', name: 'Kricketot', dexNo: 401, types: ['bug'],
+    id: 'kricketot', name: 'HOPLET', dexNo: 401, types: ['bug'],
     base: { hp: 37, atk: 25, def: 41, spa: 25, spd: 41, spe: 25 },
     catchRate: 255, growth: 'mediumslow', baseXp: 39, body: 'biped', spriteSeed: 40101,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -157,7 +157,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'kricketune', method: 'level', level: 310 }, tm: [],
   },
   kricketune: {
-    id: 'kricketune', name: 'Kricketune', dexNo: 402, types: ['bug'],
+    id: 'kricketune', name: 'BOWHOPPER', dexNo: 402, types: ['bug'],
     base: { hp: 77, atk: 85, def: 51, spa: 55, spd: 51, spe: 65 },
     catchRate: 45, growth: 'mediumslow', baseXp: 134, body: 'bird', spriteSeed: 40201,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -166,7 +166,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 33, 34, 44, 50, 101],
   },
   shinx: {
-    id: 'shinx', name: 'Shinx', dexNo: 403, types: ['electric'],
+    id: 'shinx', name: 'VOLTCUB', dexNo: 403, types: ['electric'],
     base: { hp: 45, atk: 65, def: 34, spa: 40, spd: 34, spe: 45 },
     catchRate: 235, growth: 'mediumslow', baseXp: 53, body: 'quad', spriteSeed: 40301,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -175,7 +175,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'luxio', method: 'level', level: 315 }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   luxio: {
-    id: 'luxio', name: 'Luxio', dexNo: 404, types: ['electric'],
+    id: 'luxio', name: 'MANEVOLT', dexNo: 404, types: ['electric'],
     base: { hp: 60, atk: 85, def: 49, spa: 60, spd: 49, spe: 60 },
     catchRate: 120, growth: 'mediumslow', baseXp: 127, body: 'quad', spriteSeed: 40401,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -184,7 +184,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'luxray', method: 'level', level: 330 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   luxray: {
-    id: 'luxray', name: 'Luxray', dexNo: 405, types: ['electric'],
+    id: 'luxray', name: 'RADILEON', dexNo: 405, types: ['electric'],
     base: { hp: 80, atk: 120, def: 79, spa: 95, spd: 79, spe: 70 },
     catchRate: 45, growth: 'mediumslow', baseXp: 235, body: 'quad', spriteSeed: 40501,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -193,7 +193,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
   },
   budew: {
-    id: 'budew', name: 'Budew', dexNo: 406, types: ['grass', 'poison'],
+    id: 'budew', name: 'ROSELET', dexNo: 406, types: ['grass', 'poison'],
     base: { hp: 40, atk: 30, def: 35, spa: 50, spd: 70, spe: 55 },
     catchRate: 255, growth: 'mediumslow', baseXp: 56, body: 'biped', spriteSeed: 40601,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 20,
@@ -202,7 +202,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'roselia', method: 'level', level: 310 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   roserade: {
-    id: 'roserade', name: 'Roserade', dexNo: 407, types: ['grass', 'poison'],
+    id: 'roserade', name: 'BOUQUADE', dexNo: 407, types: ['grass', 'poison'],
     base: { hp: 60, atk: 70, def: 65, spa: 125, spd: 105, spe: 90 },
     catchRate: 75, growth: 'mediumslow', baseXp: 232, body: 'biped', spriteSeed: 40701,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -211,7 +211,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   cranidos: {
-    id: 'cranidos', name: 'Cranidos', dexNo: 408, types: ['rock'],
+    id: 'cranidos', name: 'RAMOSAUR', dexNo: 408, types: ['rock'],
     base: { hp: 67, atk: 125, def: 40, spa: 30, spd: 30, spe: 58 },
     catchRate: 45, growth: 'fast', baseXp: 70, body: 'biped', spriteSeed: 40801,
     eggGroups: ['monster'], hatchCounter: 30,
@@ -220,7 +220,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'rampardos', method: 'level', level: 330 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   rampardos: {
-    id: 'rampardos', name: 'Rampardos', dexNo: 409, types: ['rock'],
+    id: 'rampardos', name: 'CRASHSAUR', dexNo: 409, types: ['rock'],
     base: { hp: 97, atk: 165, def: 60, spa: 65, spd: 50, spe: 58 },
     catchRate: 45, growth: 'fast', baseXp: 173, body: 'biped', spriteSeed: 40901,
     eggGroups: ['monster'], hatchCounter: 30,
@@ -229,7 +229,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   shieldon: {
-    id: 'shieldon', name: 'Shieldon', dexNo: 410, types: ['rock', 'steel'],
+    id: 'shieldon', name: 'AEGITRIKE', dexNo: 410, types: ['rock', 'steel'],
     base: { hp: 30, atk: 42, def: 118, spa: 42, spd: 88, spe: 30 },
     catchRate: 45, growth: 'fast', baseXp: 70, body: 'quad', spriteSeed: 41001,
     eggGroups: ['monster'], hatchCounter: 30,
@@ -238,7 +238,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'bastiodon', method: 'level', level: 330 }, tm: [6, 9, 10, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 50, 105],
   },
   bastiodon: {
-    id: 'bastiodon', name: 'Bastiodon', dexNo: 411, types: ['rock', 'steel'],
+    id: 'bastiodon', name: 'WALLTRIKE', dexNo: 411, types: ['rock', 'steel'],
     base: { hp: 60, atk: 52, def: 168, spa: 47, spd: 138, spe: 30 },
     catchRate: 45, growth: 'fast', baseXp: 173, body: 'quad', spriteSeed: 41101,
     eggGroups: ['monster'], hatchCounter: 30,
