@@ -115394,7 +115394,7 @@ const SPECIES_HOENN = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   deoxysattack: {
-    id: 'deoxysattack', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
+    id: 'deoxysattack', name: 'XENOLASH', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 180, def: 20, spa: 180, spd: 20, spe: 150 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38602,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -115404,7 +115404,7 @@ const SPECIES_HOENN = {
     form: true, baseSpecies: 'deoxys',
   },
   deoxysdefense: {
-    id: 'deoxysdefense', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
+    id: 'deoxysdefense', name: 'XENOAEGIS', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 70, def: 160, spa: 70, spd: 160, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38603,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -115414,7 +115414,7 @@ const SPECIES_HOENN = {
     form: true, baseSpecies: 'deoxys',
   },
   deoxysspeed: {
-    id: 'deoxysspeed', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
+    id: 'deoxysspeed', name: 'XENOVELOX', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 95, def: 90, spa: 95, spd: 90, spe: 180 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38604,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -117003,9 +117003,9 @@ const FORMS = [
   { id: 'castform-sunny', speciesId: 351, name: 'NIMBULET (Sunny Form)', kind: 'form', region: 'kalos', types: ['fire'], note: 'Harsh sun reshapes it into a small, cheerful ember.' },
   { id: 'castform-rainy', speciesId: 351, name: 'NIMBULET (Rainy Form)', kind: 'form', region: 'kalos', types: ['water'], note: 'Rain gathers it into a single drooping droplet.' },
   { id: 'castform-snowy', speciesId: 351, name: 'NIMBULET (Snowy Form)', kind: 'form', region: 'kalos', types: ['ice'], note: 'Hail bundles it into a tiny insulated snowball.' },
-  { id: 'deoxys-attack', speciesId: 386, name: 'XENOGENE (Attack Forme)', kind: 'form', region: 'kalos', types: ['psychic'], note: 'All offense; tentacles sharpened into striking whips.' },
-  { id: 'deoxys-defense', speciesId: 386, name: 'XENOGENE (Defense Forme)', kind: 'form', region: 'kalos', types: ['psychic'], note: 'Broad and braced; built to absorb the impossible.' },
-  { id: 'deoxys-speed', speciesId: 386, name: 'XENOGENE (Speed Forme)', kind: 'form', region: 'kalos', types: ['psychic'], note: 'Streamlined to a needle that outruns radar.' },
+  { id: 'deoxys-attack', speciesId: 386, name: 'XENOLASH', kind: 'form', region: 'kalos', types: ['psychic'], note: 'All offense; tentacles sharpened into striking whips.' },
+  { id: 'deoxys-defense', speciesId: 386, name: 'XENOAEGIS', kind: 'form', region: 'kalos', types: ['psychic'], note: 'Broad and braced; built to absorb the impossible.' },
+  { id: 'deoxys-speed', speciesId: 386, name: 'XENOVELOX', kind: 'form', region: 'kalos', types: ['psychic'], note: 'Streamlined to a needle that outruns radar.' },
   { id: 'shaymin-sky', speciesId: 492, name: 'Shaymin (Sky Forme)', kind: 'form', region: 'kalos', types: ['grass', 'flying'], note: 'Gracidea bloom turns gratitude into altitude.' },
   { id: 'giratina-origin', speciesId: 487, name: 'Giratina (Origin Forme)', kind: 'form', region: 'kalos', types: ['ghost', 'dragon'], note: 'Its true shape in the reversed world; winged and serpentine.' },
   { id: 'darmanitan-zen', speciesId: 555, name: 'Darmanitan (Zen Mode)', kind: 'form', region: 'kalos', types: ['fire', 'psychic'], note: 'Hurt enough, it sits down and thinks very hard.' },
@@ -158484,9 +158484,9 @@ const NAME_REGISTRY = {
     rayquaza: { name: 'STRATOWYRM', status: 'named', wave: 'G-HT9', design: 'stratowyrm' },
     jirachi: { name: 'ASTRAEON', status: 'named', wave: 'G-HT9', design: 'astraeon' },
     deoxys: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogene' },
-    deoxysattack: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogenea' },
-    deoxysdefense: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogened' },
-    deoxysspeed: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogenes' },
+    deoxysattack: { name: 'XENOLASH', status: 'named', wave: 'G-HT9', design: 'xenogenea' },
+    deoxysdefense: { name: 'XENOAEGIS', status: 'named', wave: 'G-HT9', design: 'xenogened' },
+    deoxysspeed: { name: 'XENOVELOX', status: 'named', wave: 'G-HT9', design: 'xenogenes' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).

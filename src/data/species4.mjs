@@ -1231,7 +1231,7 @@ export const SPECIES_HOENN = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   deoxysattack: {
-    id: 'deoxysattack', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
+    id: 'deoxysattack', name: 'XENOLASH', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 180, def: 20, spa: 180, spd: 20, spe: 150 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38602,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1241,7 +1241,7 @@ export const SPECIES_HOENN = {
     form: true, baseSpecies: 'deoxys',
   },
   deoxysdefense: {
-    id: 'deoxysdefense', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
+    id: 'deoxysdefense', name: 'XENOAEGIS', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 70, def: 160, spa: 70, spd: 160, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38603,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1251,7 +1251,7 @@ export const SPECIES_HOENN = {
     form: true, baseSpecies: 'deoxys',
   },
   deoxysspeed: {
-    id: 'deoxysspeed', name: 'XENOGENE', dexNo: 386, types: ['psychic'],
+    id: 'deoxysspeed', name: 'XENOVELOX', dexNo: 386, types: ['psychic'],
     base: { hp: 50, atk: 95, def: 90, spa: 95, spd: 90, spe: 180 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 38604,
     eggGroups: ['no-eggs'], hatchCounter: 120,
