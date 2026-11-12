@@ -369,13 +369,13 @@ Object.assign(OverworldScene.prototype, {
     // the event-done flag alone), and the catch-only chain
     // (wildBattleCatch) leaves everything unwritten on a flee or a
     // KO, so each face re-fires until the catch.
-    //  - The weather trio + Rayquaza key off climax_resolved ONLY
+    //  - The weather trio + STRATOWYRM key off climax_resolved ONLY
     //    (H4b ruling: their climax roles were appearances — no catch
     //    state exists, and NONE of these can fire before it).
-    //  - Jirachi's star fall is witnessed on Comet Falls entry once
+    //  - ASTRAEON's star fall is witnessed on Comet Falls entry once
     //    the Space Center's news is in hand and the falls' own story
     //    beat (H4a) is behind the player.
-    //  - Latias ROAMS: no roaming engine shipped (the Yamato beasts
+    //  - RUBIAVIS ROAMS: no roaming engine shipped (the Yamato beasts
     //    are fixed lairs), so she rides the lightest honest
     //    equivalent — five staged landing maps whose turn is derived
     //    deterministically from the PERSISTED walked-step counter
@@ -403,7 +403,7 @@ Object.assign(OverworldScene.prototype, {
     // the catch-only chain leaves flee/KO unwritten, so faces
     // re-fire). The lake trio + Dialga/Palkia/Giratina key ONLY on
     // sinnoh_climax_resolved (+ S5b's wake flags; Palkia behind
-    // Dialga's catch). Mesprit + Cresselia roam on the Latias
+    // Dialga's catch). Mesprit + Cresselia roam on the RUBIAVIS
     // precedent, generalised data-side: one pure landing function
     // (roamLanding) over the persisted step counter, two roamers,
     // disjoint landing sets, ZERO new save state. Heatran rides
@@ -551,7 +551,7 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
     // Stage H6: the Regi tombs' seals + the Eon stop. Both pre-empt
-    // random encounters: the seal is a wall that talks, and Latios
+    // random encounters: the seal is a wall that talks, and AZURAVIS
     // is an appointment, not an ambush.
     //  - A tomb's inner chamber is rows 0-4, north of the sealstone
     //    row (row 5, whose single floor gap at x=8 is the door).
@@ -562,9 +562,9 @@ Object.assign(OverworldScene.prototype, {
     //    every entry until the catch — flee/KO consume nothing).
     {
       const H6_TOMBS = {
-        'desert-ruins': { open: 'regi_rock_open', done: 'arc_regirock_done', ev: 'ev_hoenn_regirock', evDone: 'ev_hoenn_regirock_done', name: 'Regirock' },
-        'island-cave': { open: 'regi_ice_open', done: 'arc_regice_done', ev: 'ev_hoenn_regice', evDone: 'ev_hoenn_regice_done', name: 'Regice' },
-        'ancient-tomb': { open: 'regi_steel_open', done: 'arc_registeel_done', ev: 'ev_hoenn_registeel', evDone: 'ev_hoenn_registeel_done', name: 'Registeel' },
+        'desert-ruins': { open: 'regi_rock_open', done: 'arc_regirock_done', ev: 'ev_hoenn_regirock', evDone: 'ev_hoenn_regirock_done', name: 'PETRAGOLEM' },
+        'island-cave': { open: 'regi_ice_open', done: 'arc_regice_done', ev: 'ev_hoenn_regice', evDone: 'ev_hoenn_regice_done', name: 'CRYOGOLEM' },
+        'ancient-tomb': { open: 'regi_steel_open', done: 'arc_registeel_done', ev: 'ev_hoenn_registeel', evDone: 'ev_hoenn_registeel_done', name: 'SIDEROGOLEM' },
       };
       const tomb = H6_TOMBS[this.mapId];
       if (tomb && y <= 4) {
@@ -581,7 +581,7 @@ Object.assign(OverworldScene.prototype, {
         }
         if (!hf[tomb.done] && !hf[tomb.evDone]) { this.runEvent(tomb.ev); return true; }
       }
-      // Latios, the Eon stop: the Ebbtide Cave island's shore apron
+      // AZURAVIS, the Eon stop: the Ebbtide Cave island's shore apron
       // (r125, the island landmass x12-18 / y4-8). Post-climax only.
       if (this.mapId === 'r125' && x >= 12 && x <= 18 && y >= 4 && y <= 8) {
         const hf = g.state.story.flags;
@@ -945,8 +945,8 @@ Object.assign(OverworldScene.prototype, {
     // is Celebi's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
     // Stage H6: the Regi tombs (inscriptions, seals, puzzle stones)
-    // and Comet Falls' meteorstones (the Jirachi wish stone; the
-    // Deoxys crater meteorite + its forme switch). Faced-tile, the
+    // and Comet Falls' meteorstones (the ASTRAEON wish stone; the
+    // XENOGENE crater meteorite + its forme switch). Faced-tile, the
     // shrine idiom exactly: each handler declines (returns false)
     // whenever the faced tile is not one of its own.
     if (this.hoennTombInteract(fx, fy)) return true;
@@ -1309,7 +1309,7 @@ Object.assign(OverworldScene.prototype, {
   },
 
   // ---------- Arc 4 Stage S4: the forme switches ----------
-  // The Deoxys swap generalised (game/sinnoh-systems.mjs): the same
+  // The XENOGENE swap generalised (game/sinnoh-systems.mjs): the same
   // evolution-idiom species exchange, preserving the individual.
   switchSinnohForme(mon, formeId) {
     if (!switchForme(mon, formeId, SPECIES)) return false;
@@ -2573,8 +2573,8 @@ Object.assign(OverworldScene.prototype, {
   // Stage H6: the Space Center briefing (see the sysNpc dispatch —
   // SPACE RESEARCHER ORBIT, the Starfall Space Center's facade
   // researcher, is the information source for BOTH star arcs: the
-  // comet news opens Jirachi's chain, and the crater rumour arms
-  // Deoxys. Later talks track the two arcs' states.
+  // comet news opens ASTRAEON's chain, and the crater rumour arms
+  // XENOGENE. Later talks track the two arcs' states.
   runSpaceCenterNpc(npc) {
     const g = this.game;
     const st = g.state;
@@ -2631,7 +2631,7 @@ Object.assign(OverworldScene.prototype, {
       if (!flags.hoenn_arrival && !flags.ev_hoenn_arrival_done) { this.runEvent('ev_hoenn_arrival'); return true; }
       if (flags.chimney_clash_done) { say(['Star-stone fed to a crater, and the sky argued about it in two colors. My instruments have been restless ever since, {player}. Whatever those teams are waking, it is older than both of them — and the Weather Institute up Route 119 reads this region\'s sky for a living. If anyone can name what is coming, they can.']); return true; }
       if (flags.meteor_falls_done) { say(['Cozmo wrote me a letter with shaking handwriting, {player}. A stolen meteorite and two teams with flags — that is not fieldwork anymore, that is a forecast. Keep your eyes on the sky as much as the road. Maris\'s weather has opinions this year.']); return true; }
-      say(['Registered, welcomed, and only slightly mauled by the local wildlife — a complete Maris arrival, {player}. Meadowbrook first, then Copperton. And if a Poochyena ever corners me again, I am retiring to study sedimentary rock. Indoors.']);
+      say(['Registered, welcomed, and only slightly mauled by the local wildlife — a complete Maris arrival, {player}. Meadowbrook first, then Copperton. And if a UMBHYEN ever corners me again, I am retiring to study sedimentary rock. Indoors.']);
       return true;
     }
 
@@ -2676,17 +2676,17 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'wally') {
       if (!flags.wally_helped) {
-        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Wildflower, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has Ralts in it sometimes. I have a ball, and a borrowed Zigzagoon from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
-          say(['The grass shivers. A Ralts — small, horned, already turning away — and the borrowed Zigzagoon looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. Ralts, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Pokemon. I HAVE a Pokemon, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
+        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Wildflower, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has PSYLET in it sometimes. I have a ball, and a borrowed FURCOON from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
+          say(['The grass shivers. A PSYLET — small, horned, already turning away — and the borrowed FURCOON looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. PSYLET, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Pokemon. I HAVE a Pokemon, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
             flags.wally_helped = true;
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
-            g.ui.toast('Wally caught a Ralts!');
+            g.ui.toast('Wally caught a PSYLET!');
           }, 'WALLY');
         });
         return true;
       }
-      say(['Ralts is learning my moods faster than my doctors ever did, {player}. Wildflower soon — the air there, and my uncle\'s house, and a whole new road. When it crosses yours again, I will not be hard to recognize. I will be the one who is ready.']);
+      say(['PSYLET is learning my moods faster than my doctors ever did, {player}. Wildflower soon — the air there, and my uncle\'s house, and a whole new road. When it crosses yours again, I will not be hard to recognize. I will be the one who is ready.']);
       return true;
     }
 
@@ -3372,7 +3372,7 @@ Object.assign(OverworldScene.prototype, {
       // ALONE at 390, authored beatable in-band. A win sets
       // tobias_darkrai_felled; a full wipe before that is a defeat
       // and a rematch — nothing concludes, nothing is set. Act 2
-      // (only with the felling standing) is Latios ALONE, fought
+      // (only with the felling standing) is AZURAVIS ALONE, fought
       // FRIENDLY on the FACED predicate (Harrison/Brandon): win or
       // lose, the match concludes — both branch texts real, the
       // canon loss carrying the honour — and only then does the
@@ -3392,7 +3392,7 @@ Object.assign(OverworldScene.prototype, {
             this.startSinnohBattle('tobias_darkrai', (won) => {
               if (!won) return;
               flags.tobias_darkrai_felled = true;
-              say(['...Down. It is DOWN. Do you understand what this hall just saw, trainer? No one — no one — has done that in this entire Conference.', 'There is a second question on my team, and it has been patient all week. When you are ready — Latios. Finish the match. If the match can be finished.'], null, 'TOBIAS');
+              say(['...Down. It is DOWN. Do you understand what this hall just saw, trainer? No one — no one — has done that in this entire Conference.', 'There is a second question on my team, and it has been patient all week. When you are ready — AZURAVIS. Finish the match. If the match can be finished.'], null, 'TOBIAS');
             });
           });
         }, 'TOBIAS');
@@ -3401,7 +3401,7 @@ Object.assign(OverworldScene.prototype, {
       if (!flags.tobias_faced) {
         const t0 = TRAINERS.tobias_latios;
         say([t0.intro[0]], () => {
-          g.ui.showMenu('Finish the match — face Latios?', [
+          g.ui.showMenu('Finish the match — face AZURAVIS?', [
             { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
           ], (v) => {
             if (v !== 'yes') return;
@@ -3417,7 +3417,7 @@ Object.assign(OverworldScene.prototype, {
                   'Finished. Utterly, honestly finished — by the only trainer who ever got this far into my team, and went the rest of the way on merit. The hall is on its feet, trainer, and so — observe the record — am I.',
                   'They will write that the darkest trainer of the Conference fell in the semi-final. Let them. What the book cannot hold is the order of it: Darkrai first, by your hand, and then this. History will remember the attempt, they say. It will remember considerably more than that.',
                 ] : [
-                  '...And there the match ends — Latios, untouched by everything but the one exchange that mattered, and the judges\' card turning the way every card in this hall has turned all week. The semi-final is his. The loss stands. That is sport, and it is final.',
+                  '...And there the match ends — AZURAVIS, untouched by everything but the one exchange that mattered, and the judges\' card turning the way every card in this hall has turned all week. The semi-final is his. The loss stands. That is sport, and it is final.',
                   'But look at the hall, trainer. LOOK at it. They are not standing for the result — they are standing for the first line of the story, the one no other trainer in this Conference could write: DARKRAI FELL. To you. The only victory anyone took from me here — and you took it in front of everyone. The Conference ends, and that is what it ends WITH. Honours, trainer. Full honours.',
                 ];
                 say(lines, () => {
@@ -4037,7 +4037,7 @@ Object.assign(OverworldScene.prototype, {
     return true;
   },
 
-  // Stage H6: the Deoxys formes — the meteorite switch (coordinator
+  // Stage H6: the XENOGENE formes — the meteorite switch (coordinator
   // ruling 2, the REAL mechanic). The four entries share dexNo 386
   // and one in-table Psychic learnset pool (H1's design), so the
   // swap is a speciesId exchange in the evolution idiom: level, XP,
@@ -4046,7 +4046,7 @@ Object.assign(OverworldScene.prototype, {
   // recomputed from the new forme's base stats exactly as
   // evolveMon does, with HP carried by the max-delta rule. Moves
   // stay legal in every forme because all four learnsets draw from
-  // the same pool. A switched Deoxys round-trips save validation in
+  // the same pool. A switched XENOGENE round-trips save validation in
   // every forme (asserted in tests/hoenn-legendary-checks.mjs).
   DEOXYS_FORMES: ['deoxys', 'deoxysattack', 'deoxysdefense', 'deoxysspeed'],
   deoxysInParty() {
@@ -4073,11 +4073,11 @@ Object.assign(OverworldScene.prototype, {
 
   // Stage H6: Comet Falls' meteorstones. Three stones carry H3a's
   // meteorstone dressing; two are H6's set pieces:
-  //  - (21,4), the crater meteorite in the north chamber: Deoxys'
+  //  - (21,4), the crater meteorite in the north chamber: XENOGENE'
   //    door (the rumour arms it) and, after the catch, the forme
-  //    switch — interact with a Deoxys in the party and pick the
+  //    switch — interact with a XENOGENE in the party and pick the
   //    shape; the stone remembers every shape it has ever been.
-  //  - (13,11), the lower-falls stone: Jirachi's wish stone, live
+  //  - (13,11), the lower-falls stone: ASTRAEON's wish stone, live
   //    only once the star has fallen (the witness event).
   //  - (12,5) answers with plain flavour.
   hoennMeteorInteract(fx, fy) {
@@ -4103,14 +4103,14 @@ Object.assign(OverworldScene.prototype, {
       };
       g.ui.say(['The crater meteorite wakes at ' + name + '\'s nearness — light moving under its surface like something turning over in its sleep. It remembers every shape its tenant has ever been. Shapes, it turns out, are just memories with edges.'], () => {
         g.ui.showMenu('Let the meteorite remind ' + name + ' of a shape:', this.DEOXYS_FORMES.map((id) => ({
-          label: SPECIES[id].name.replace('Deoxys', 'Deoxys') + ' — ' + labels[id].split(' — ')[1],
+          label: SPECIES[id].name.replace('XENOGENE', 'XENOGENE') + ' — ' + labels[id].split(' — ')[1],
           value: id,
           disabled: mon.speciesId === id,
         })).concat([{ label: 'Not now', value: 'no' }]), (v) => {
           if (!v || v === 'no' || v === mon.speciesId) return;
           if (this.switchDeoxysForme(mon, v)) {
             g.audio.playSfx('levelup');
-            g.ui.say(['The light under the stone\'s surface reaches out — not hands, not quite — and ' + name + ' comes apart gently, the way a knot comes undone, and re-knots itself into a new geometry. Same partner. Same memories. New edges.', name + ' is now in its ' + SPECIES[v].name.replace('Deoxys (', '').replace(')', '') + ' shape.']);
+            g.ui.say(['The light under the stone\'s surface reaches out — not hands, not quite — and ' + name + ' comes apart gently, the way a knot comes undone, and re-knots itself into a new geometry. Same partner. Same memories. New edges.', name + ' is now in its ' + SPECIES[v].name.replace('XENOGENE (', '').replace(')', '') + ' shape.']);
           }
         });
       });
@@ -4138,15 +4138,15 @@ Object.assign(OverworldScene.prototype, {
   // chain): its inscription, read from the stone by the door (the
   // sign tile at (9,11)), is the only key, and its solution is a
   // concrete action performed in the chamber:
-  //  - Dune Tomb (Regirock): THE STANDING BEAT. Read, then stand
+  //  - Dune Tomb (PETRAGOLEM): THE STANDING BEAT. Read, then stand
   //    before the sealstone (face the sealstone row) and choose to
   //    wait — the shipped choice idiom carries the beat; the desert
   //    counts six slow breaths and the sealstones part.
-  //  - Sea Tomb (Regice): THE GREETING ORDER. Read, then greet
+  //  - Sea Tomb (CRYOGOLEM): THE GREETING ORDER. Read, then greet
   //    the chamber's two boulders (caveboulder tiles) in the
   //    inscription's order — west (2,12) first, east (14,11)
   //    second. The wrong order is politely forgotten by the cold.
-  //  - Iron Tomb (Registeel): IRON ANSWERS IRON. Read, then
+  //  - Iron Tomb (SIDEROGOLEM): IRON ANSWERS IRON. Read, then
   //    press the sealstone with a living Steel-type partner in the
   //    party (partyHasType — the shipped field check).
   // Solving parts the sealstone row (its flag stands; the sysOnStep
@@ -4196,7 +4196,7 @@ Object.assign(OverworldScene.prototype, {
       }
       return true;
     }
-    // Regice's greeting stones.
+    // CRYOGOLEM's greeting stones.
     if (this.mapId === 'island-cave' && kind === 'caveboulder' && ((fx === 2 && fy === 12) || (fx === 14 && fy === 11))) {
       if (f.regi_ice_open || f.arc_regice_done) {
         g.ui.say(['The boulder is cold and faintly pleased with itself, in the manner of furniture that has been thanked.']);

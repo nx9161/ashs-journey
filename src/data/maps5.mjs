@@ -4268,7 +4268,7 @@ export const MAPS5 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Grandest floor in the archipelago, and I sweep it. Mind the carpet — it's older than the League.",
-          "Finals night, this whole bowl roars loud enough to scare the Wingull off the roof."
+          "Finals night, this whole bowl roars loud enough to scare the BRINEGULL off the roof."
         ]
       }
     ],
