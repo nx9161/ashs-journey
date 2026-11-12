@@ -1,10 +1,10 @@
 # GitHub Pages — the public play address (owner order 2026-11-11: Pages
 # instead of Vercel, whose production provisioning keeps failing).
 # Publishes the GUEST edition: dist/standalone.html (single self-contained
-# file, auth compiled out, zero network) as index.html. The Vercel public
-# edition (accounts + cloud saves via api/) remains a separate target and
-# is NOT built here — Pages is static-only, so this edition plays guest
-# with local saves.
+# file, auth compiled out, zero network) as index.html — the canonical
+# shipped game. (The vercel build target was retired 2026-11-12; the only
+# other target, the ADR-012 personal edition, is not built here.) Pages is
+# static-only, so this edition plays guest with local saves.
 name: pages
 on:
   push:

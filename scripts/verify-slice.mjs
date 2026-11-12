@@ -26,7 +26,9 @@ globalThis.localStorage = {
 globalThis.__SEED__ = 20261015;
 
 // --target=personal: run the slice against the ADR-012 personal build
-// (guest auth-strip + EDITION_MARKER). Default: the full vercel bundle.
+// (guest auth-strip + EDITION_MARKER). Default: the full (unstripped) source
+// build — the superset the harness was written against; since the vercel
+// target was retired it is assembled in memory only, never shipped.
 const forPersonal = process.argv.includes('--target=personal');
 const gameJs = forPersonal ? buildGameJs({ edition: 'personal' }) : buildGameJs();
 
@@ -323,44 +325,54 @@ function walkMjs(dir, out) {
 }
 function countPat(s, pat) { const m = s.match(pat); return m ? m.length : 0; }
 
-// ---- build both bundles fresh (deterministic) ----
+// ---- build both shipped bundles fresh (deterministic) ----
 execFileSync(process.execPath, [path.join(HROOT, 'scripts', 'build.mjs')], { cwd: HROOT, stdio: 'pipe' });
 const standaloneHtml = fs.readFileSync(path.join(HROOT, 'dist', 'standalone.html'), 'utf8');
-const vercelJs = fs.readFileSync(path.join(HROOT, 'public', 'game.js'), 'utf8');
-const vercelIndex = fs.readFileSync(path.join(HROOT, 'public', 'index.html'), 'utf8');
+const personalJs = fs.readFileSync(path.join(HROOT, 'personal', 'game.js'), 'utf8');
+const personalIndex = fs.readFileSync(path.join(HROOT, 'personal', 'index.html'), 'utf8');
 const inlineJs = standaloneHtml.split('<script>\n')[1].split('\n</script>')[0];
 const sha = (s) => crypto.createHash('sha256').update(s).digest('hex');
-__QA__.bundleA = inlineJs;   // guest single-file bundle (Track A)
-__QA__.bundleB = vercelJs;   // vercel full client bundle (Track B static)
-const hashA = sha(inlineJs), hashB = sha(vercelJs);
+__QA__.bundleA = inlineJs;   // guest single-file bundle (canonical)
+__QA__.bundleB = personalJs; // personal edition bundle (ADR-012)
+const hashA = sha(inlineJs), hashB = sha(personalJs);
+// The strip oracle: the UNSTRIPPED full source build, assembled in memory
+// only. It replaces the retired vercel bundle (public/game.js) in the two
+// checks below — the same bytes that target used to ship, rebuilt fresh
+// from src on every run instead of read from a committed artifact.
+const authRefJs = buildGameJs({ auth: true });
 
-// ---- S3a: two-bundle relationship (Track B) ----
-// The bundles INTENTIONALLY differ now: guest = vercel minus the
-// compile-time-stripped auth sections (drift-gate proves the property; the
-// build's zero-network gate proves the guest side).
+// ---- S3a: bundle relationships ----
+// The shipped bundles INTENTIONALLY differ from the full source build:
+// guest = full build minus the compile-time-stripped auth sections
+// (drift-gate proves the property; the build's zero-network gate proves
+// the guest side). Personal = guest + the EDITION_MARKER token; s3b below
+// proves the two shipped editions play identically.
 qaOk('qa s3a guest bundle has zero fetch( (auth stripped)', countPat(inlineJs, /fetch\s*\(/g) === 0);
 qaOk('qa s3a guest bundle has zero /api/ references', !/\/api\//.test(inlineJs));
-qaOk('qa s3a guest === vercel minus auth sections (no drift)',
-  sha(stripAuthBlocks(vercelJs)) === hashA,
-  sha(stripAuthBlocks(vercelJs)).slice(0, 16) + ' vs ' + hashA.slice(0, 16));
-qaOk('qa s3a vercel bundle carries the auth client',
-  vercelJs.indexOf("'/api/'") >= 0 && vercelJs.indexOf('auth/sign-in/username') >= 0);
+qaOk('qa s3a guest === full build minus auth sections (no drift)',
+  sha(stripAuthBlocks(authRefJs)) === hashA,
+  sha(stripAuthBlocks(authRefJs)).slice(0, 16) + ' vs ' + hashA.slice(0, 16));
+qaOk('qa s3a full build carries the auth client (strip oracle)',
+  authRefJs.indexOf("'/api/'") >= 0 && authRefJs.indexOf('auth/sign-in/username') >= 0);
 const hashComment = (standaloneHtml.match(/contentHash:([0-9a-f]{64})/) || [])[1];
 qaOk('qa s3a content-hash comment matches game code', hashComment === hashA);
-qaOk('qa s3a vercel shell loads game.js', vercelIndex.indexOf('<script src="game.js">') >= 0);
+qaOk('qa s3a personal shell loads game.js', personalIndex.indexOf('<script src="game.js">') >= 0);
 qaOk('qa s3a guest bundle is shell-first (zero external scripts)', !/<script src=/.test(standaloneHtml));
 
-// ---- S4: network audit (Track B) ----
-// Guest bundle: zero fetch(, zero /api/. Vercel bundle: fetches exist but are
-// same-origin '/api/' only. src: fetch( only inside __AUTH__ blocks, '/api/' only.
+// ---- S4: network audit ----
+// Shipped bundles (guest + personal): zero fetch(, zero /api/. The full
+// source build's fetches exist but are same-origin '/api/' only, and they
+// live exclusively inside __AUTH__ blocks (checked against src below) —
+// which is why the strip removes every one of them from the shipped
+// editions. src: fetch( only inside __AUTH__ blocks, '/api/' only.
 const srcFiles = walkMjs(path.join(HROOT, 'src'));
 const fetchPat = /fetch\s*\(/g;
 qaOk('qa s4 guest bundle fetch( count = 0', countPat(inlineJs, fetchPat) === 0);
-const vercelApiFetches = (vercelJs.match(/fetch\s*\(\s*'\/api\//g) || []).length;
-const vercelFetchTotal = countPat(vercelJs, fetchPat);
-qaOk('qa s4 vercel fetches are same-origin /api/ only',
-  vercelFetchTotal > 0 && vercelFetchTotal === vercelApiFetches,
-  'total=' + vercelFetchTotal + ' same-origin=' + vercelApiFetches);
+const refApiFetches = (authRefJs.match(/fetch\s*\(\s*'\/api\//g) || []).length;
+const refFetchTotal = countPat(authRefJs, fetchPat);
+qaOk('qa s4 full-build fetches are same-origin /api/ only',
+  refFetchTotal > 0 && refFetchTotal === refApiFetches,
+  'total=' + refFetchTotal + ' same-origin=' + refApiFetches);
 const srcFetchOutside = [];
 const srcFetchNonApi = [];
 for (const f of srcFiles) {
@@ -380,7 +392,7 @@ for (const f of srcFiles) {
 qaOk('qa s4 src fetch( only inside auth blocks', srcFetchOutside.length === 0, JSON.stringify(srcFetchOutside));
 qaOk('qa s4 src auth-block fetches are /api/ only', srcFetchNonApi.length === 0, JSON.stringify(srcFetchNonApi));
 const netPat = /XMLHttpRequest|new WebSocket|import\s*\(/g;
-qaOk('qa s4 no XHR/WebSocket/dynamic-import in either bundle', countPat(inlineJs, netPat) + countPat(vercelJs, netPat) === 0);
+qaOk('qa s4 no XHR/WebSocket/dynamic-import in either shipped bundle', countPat(inlineJs, netPat) + countPat(personalJs, netPat) === 0);
 
 // ---- S5: tap-target audit (>= 44px, gameux §2) ----
 const css = (standaloneHtml.match(/<style>([\s\S]*?)<\/style>/) || [])[1] || '';
@@ -595,14 +607,14 @@ const qaDriver = `
   var plateText = rc.calls.filter(function(c){ return c.op === 'text'; }).map(function(c){ return c.text; }).join('|');
   ok('qa s2 status pip is text, not color alone', plateText.indexOf('BUR') >= 0, plateText);
 
-  // ============ S3b: both-bundle checksum playthrough (guest vs full) ============
+  // ============ S3b: both-bundle checksum playthrough (guest vs personal) ============
   function runInBundle(code, seed) {
     return (0, eval)('(function(){' + code + '\\n;return (' + Q.canonicalSrc + ')(' + seed + ');})()');
   }
   var tA = runInBundle(Q.bundleA, 20261015);
   var tB = runInBundle(Q.bundleB, 20261015);
   ok('qa s3b guest bundle plays the slice', tA.indexOf('map2=route1') >= 0 && tA.indexOf('save=true') >= 0, tA.split('\\n').slice(0,3).join(' / '));
-  ok('qa s3b full bundle plays the slice', tB.indexOf('map2=route1') >= 0 && tB.indexOf('save=true') >= 0, tB.split('\\n').slice(0,3).join(' / '));
+  ok('qa s3b personal bundle plays the slice', tB.indexOf('map2=route1') >= 0 && tB.indexOf('save=true') >= 0, tB.split('\\n').slice(0,3).join(' / '));
   ok('qa s3b both bundles byte-identical playthrough', tA === tB, tA === tB ? 'identical transcript' : 'DIVERGED');
   if (tA !== tB) { console.log('--- bundleA ---\\n' + tA + '\\n--- bundleB ---\\n' + tB); }
 

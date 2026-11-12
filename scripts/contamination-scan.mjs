@@ -23,12 +23,13 @@ function fail(msg) { console.error('FAIL ' + msg); failed++; }
 
 const srcFiles = walk(path.join(ROOT, 'src'), ['.mjs']);
 
-// 1. Runtime network policy (Track B).
-// The guest target is zero-network (asserted by build.mjs + budgets-check).
-// The vercel target may fetch SAME-ORIGIN '/api/' only, and only from inside
-// compile-time __AUTH_BEGIN__/__AUTH_END__ blocks (stripped from the guest
-// bundle). Everything else — XHR, WebSocket, absolute URLs, dynamic import —
-// is forbidden everywhere.
+// 1. Runtime network policy.
+// Both shipped targets (guest + personal) are zero-network — the auth code
+// is compile-time stripped from every bundle (asserted by build.mjs +
+// budgets-check). At SOURCE level, fetches may be SAME-ORIGIN '/api/' only,
+// and only from inside compile-time __AUTH_BEGIN__/__AUTH_END__ blocks (the
+// blocks both shipped bundles strip). Everything else — XHR, WebSocket,
+// absolute URLs, dynamic import — is forbidden everywhere.
 function authBlocks(t) {
   const blocks = [];
   const re = /__AUTH_BEGIN__([\s\S]*?)__AUTH_END__/g;

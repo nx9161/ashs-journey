@@ -15,8 +15,6 @@ function gate(name, actual, max) {
 }
 
 const dist = path.join(ROOT, 'dist', 'standalone.html');
-const pubJs = path.join(ROOT, 'public', 'game.js');
-const pubHtml = path.join(ROOT, 'public', 'index.html');
 const perJs = path.join(ROOT, 'personal', 'game.js');
 const perHtml = path.join(ROOT, 'personal', 'index.html');
 
@@ -42,9 +40,8 @@ if (!fs.existsSync(dist)) { console.error('FAIL: dist/standalone.html missing â€
 gate('guest bundle bytes (uncompressed)', fs.statSync(dist).size, hard.guestBundleMaxBytes);
 zeroNetGate(fs.readFileSync(dist, 'utf8'), 'guest bundle');
 
-if (fs.existsSync(pubJs) && fs.existsSync(pubHtml)) {
-  gate('vercel static bytes (uncompressed)', fs.statSync(pubJs).size + fs.statSync(pubHtml).size, hard.vercelStaticMaxBytes);
-}
+// (The vercel-static byte gate was retired with its target, 2026-11-12 â€”
+// budgets.json no longer carries vercelStaticMaxBytes.)
 
 // ADR-012: the personal bundle gets the same budget + zero-network gates as the
 // guest bundle (same 12MB ADR-007 per-bundle ceiling; no api/ functions ship).

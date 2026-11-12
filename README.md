@@ -18,7 +18,7 @@ created from scratch for this fan project.
 
 ## Live Demo
 
-**[https://ashs-journey-game-nx9161s-projects.vercel.app](https://ashs-journey-game-nx9161s-projects.vercel.app)**
+**[https://nx9161.github.io/ashs-journey/](https://nx9161.github.io/ashs-journey/)** — the guest edition on GitHub Pages (canonical). The old Vercel deployment served a stale build; its build target was retired 2026-11-12.
 
 ## Layout
 
@@ -33,8 +33,9 @@ assets/        manifest.yaml — per-asset provenance (generator seeds, hand-fin
 scripts/       build.mjs (zero-dep, Node stdlib only), budget/contamination/drift gates,
                verify-slice.mjs (headless playthrough harness)
 docs/          contracts.md (asset contracts for Art Director / Voice Designer)
-dist/          Bundle A — guest single-file build (offline)
-public/        Bundle B — Vercel static client (auth code paths feature-flagged OFF)
+dist/          Bundle A — guest single-file build (offline), the canonical edition
+personal/      Bundle B — personal edition (ADR-012): the guest build + edition marker
+               (the former Vercel static-client target, public/, was retired 2026-11-12)
 ```
 
 ## Build (dev)
@@ -42,7 +43,7 @@ public/        Bundle B — Vercel static client (auth code paths feature-flagge
 Requires Node only — **zero npm dependencies**.
 
 ```sh
-node scripts/build.mjs            # emits dist/standalone.html + public/
+node scripts/build.mjs            # emits dist/standalone.html + personal/
 node scripts/verify-slice.mjs     # headless playthrough: boot → catch → badge → save
 ```
 

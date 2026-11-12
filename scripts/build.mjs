@@ -1,18 +1,28 @@
 // build.mjs — zero-dependency build (Node stdlib only: fs/path/crypto).
-// One source tree -> three targets from the same concatenated game JS:
-//   Bundle A (guest):    dist/standalone.html — single self-contained file, offline.
-//   Bundle B (vercel):   public/index.html + public/game.js — static client.
-//   Bundle C (personal): personal/index.html + personal/game.js — static client.
+// One source tree -> two shipped targets from the same concatenated game JS:
+//   Bundle A (guest, CANONICAL): dist/standalone.html — single self-contained file, offline.
+//   Bundle B (personal):         personal/index.html + personal/game.js — static client.
 // Build targets:
-//   --target=vercel   : public/game.js + public/index.html (full client, auth UI compiled IN)
 //   --target=guest    : dist/standalone.html (guest single-file, auth UI compiled OUT)
 //   --target=personal : personal/game.js + personal/index.html (ADR-012 "Naman's edition")
-//   (default: all)
+//   (default: both)
+//
+// VERCEL TARGET RETIRED (2026-11-12, infra/retire-vercel): the former Bundle B
+// (public/ static client, auth UI compiled IN) is no longer built. The game is
+// canonical on GitHub Pages (the guest edition above); the Vercel deployment
+// only ever served a stale copy, and its 12 MB static budget had 61 bytes of
+// headroom left. The auth code itself stays in src/ behind its markers — it is
+// compile-time stripped from EVERY shipped bundle now. buildGameJs({auth:true})
+// still assembles the unstripped build IN MEMORY ONLY, as the proof oracle for
+// drift-gate.mjs / verify-slice.mjs (guest === that build minus auth sections);
+// it is not a target and is never written to disk.
+//
 // Auth code paths are compile-time feature-flagged:
-//   * lines between `// __AUTH_BEGIN__` and `// __AUTH_END__` are STRIPPED from the
-//     guest and personal targets (block strip, build fails on unbalanced markers);
-//   * the token `/*__AUTH_ENABLED__*/` is replaced with `true` (vercel) or `false` (guest, personal);
-//   * the token `/*__EDITION_MARKER__*/` is replaced with `''` (vercel, guest) or
+//   * lines between `// __AUTH_BEGIN__` and `// __AUTH_END__` are STRIPPED from
+//     both shipped targets (block strip, build fails on unbalanced markers);
+//   * the token `/*__AUTH_ENABLED__*/` is replaced with `false` (guest, personal)
+//     — `true` only in the in-memory auth reference build;
+//   * the token `/*__EDITION_MARKER__*/` is replaced with `''` (guest) or
 //     `"NAMAN'S EDITION"` (personal) — see ADR-012 delta note below.
 // The guest and personal bundles therefore contain zero auth code and zero `/api/`
 // references (asserted as a hard build gate below — PRD AC#1 / Tech Law COPPA cleanliness).
@@ -27,11 +37,11 @@
 //   * Saves are localStorage-only (identical to the guest path); no /api/* calls,
 //     no session code in the bundle.
 //   * The hard zero-network gate applies identically to the personal target.
-//   * Output mirrors the multi-file public/ layout (index.html + game.js) for
-//     static Vercel serving. NO api/ functions ship with this target — access
+//   * Output uses the multi-file layout (index.html + game.js) for
+//     static serving. NO api/ functions ship with this target — access
 //     control lives at the hosting layer (a separate Vercel project with Vercel
 //     Authentication, Standard Protection).
-//   * GC-verbatim disclaimers and credits are byte-identical across all targets.
+//   * GC-verbatim disclaimers and credits are byte-identical across both targets.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -48,7 +58,7 @@ const SRC = path.join(ROOT, 'src');
 // name-entry cursor, gender marks), and nobody could audit what the blobs
 // were. The fonts now live as real files in assets/fonts/ (see its
 // README.md for provenance + subset ranges) and are embedded from disk at
-// build time, byte-identical in all three targets. Galmuri + Pixelify
+// build time, byte-identical in both shipped targets. Galmuri + Pixelify
 // Sans are SIL OFL 1.1 (THIRD-PARTY-NOTICES.md; OFL text in assets/fonts/).
 // UI v2.2 (defect 1): the 400 face is Galmuri11 Regular — the true sibling
 // of the Galmuri11 Bold headings. Galmuri14 (the v2/v2.1 400 face) loads
@@ -128,11 +138,15 @@ function transform(src, file, opts) {
   return out.join('\n');
 }
 
-// stripAuthBlocks: the same guest-target auth removal, applied to an already-
-// built vercel bundle. Used by drift-gate.mjs + verify-slice.mjs to prove the
-// guest bundle is EXACTLY the vercel bundle minus the auth sections (no drift).
-// Also normalizes the AUTH_ENABLED compile flag (true in vercel, false in guest)
-// so the comparison isolates the block strip.
+// stripAuthBlocks: the same guest-target auth removal, applied to the
+// in-memory auth reference build (buildGameJs({ auth: true })). Used by
+// drift-gate.mjs + verify-slice.mjs to prove the guest bundle is EXACTLY the
+// full source build minus the auth sections (no drift). The reference build
+// replaced the retired vercel bundle as the strip oracle — same proof, and
+// the reference is now guaranteed current because it is rebuilt from src on
+// every gate run instead of read from a committed artifact.
+// Also normalizes the AUTH_ENABLED compile flag (true in the reference
+// build, false in guest) so the comparison isolates the block strip.
 export function stripAuthBlocks(js) {
   const lines = js.split('\n');
   const out = [];
@@ -157,8 +171,18 @@ export const EDITION_MARKER_LITERAL = {
 
 export function buildGameJs(opts) {
   opts = opts || {};
-  const edition = opts.edition || (opts.auth === false ? 'guest' : 'vercel');
-  const auth = edition === 'vercel'; // only the public vercel target carries auth UI
+  const edition = opts.edition || null;
+  // Shipped editions: 'guest' (canonical) and 'personal' — BOTH compile the
+  // auth UI out, and main() always names one explicitly. With NO edition
+  // named (the historical default, kept deliberately), the UNSTRIPPED full
+  // source build is assembled instead: auth in, marker ''. Since the vercel
+  // target was retired that build is never shipped and never written to disk
+  // as a bundle — it survives as (a) the strip-proof oracle for
+  // drift-gate.mjs / verify-slice.mjs (call it as buildGameJs({ auth: true })
+  // for readability) and (b) the superset build the headless test suites
+  // eval. Do not "fix" the default to guest: ~24 suites call buildGameJs()
+  // bare and were written against the full build.
+  const auth = !edition;
   const marker = edition === 'personal' ? EDITION_MARKER_LITERAL.personal : EDITION_MARKER_LITERAL.none;
   const order = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'module-order.json'), 'utf8'));
   const parts = [];
@@ -169,7 +193,8 @@ export function buildGameJs(opts) {
   }
   let js = parts.join('\n');
   // Compile-time auth flag: `const AUTH_ENABLED = /*__AUTH_ENABLED__*/;` ->
-  // true in the vercel bundle, false in the guest and personal bundles.
+  // true only in the in-memory auth reference build, false in both shipped
+  // bundles (guest and personal).
   js = js.split('/*__AUTH_ENABLED__*/').join(auth ? 'true' : 'false');
   // Compile-time edition marker: `const EDITION_MARKER = /*__EDITION_MARKER__*/;`
   // -> "NAMAN'S EDITION" in the personal bundle, '' everywhere else.
@@ -652,9 +677,10 @@ function shellHtml({ gameJs, inline }) {
 }
 
 // Command Deck (ADR-023): the owner dashboard page + client, generated for
-// the vercel and personal targets only (the guest standalone stays a single
-// zero-network file). Source lives in src/admin/; the build injects the
-// shared @font-face CSS into the page and the edition into the client.
+// the personal target only (the guest standalone stays a single zero-network
+// file; the vercel target, which also carried a deck build, was retired
+// 2026-11-12). Source lives in src/admin/; the build injects the shared
+// @font-face CSS into the page and the edition into the client.
 function buildAdminFiles(edition) {
   const dir = path.join(ROOT, 'src', 'admin');
   const html = fs.readFileSync(path.join(dir, 'admin.html'), 'utf8')
@@ -683,36 +709,19 @@ function zeroNetworkGate(js, label) {
 }
 
 async function main() {
-  const TARGETS = ['vercel', 'guest', 'personal'];
+  const TARGETS = ['guest', 'personal'];
   const explicit = TARGETS.filter((t) => process.argv.includes('--target=' + t));
   const want = (t) => explicit.length === 0 || explicit.includes(t);
   await validateData();
 
   fs.mkdirSync(path.join(ROOT, 'dist'), { recursive: true });
-  fs.mkdirSync(path.join(ROOT, 'public'), { recursive: true });
   fs.mkdirSync(path.join(ROOT, 'personal'), { recursive: true });
 
-  let vercelJs = null, guestJs = null, personalJs = null;
-
-  if (want('vercel')) {
-    // Bundle B: vercel static client (full auth UI compiled in).
-    vercelJs = buildGameJs({ auth: true });
-    const vhash = crypto.createHash('sha256').update(vercelJs).digest('hex');
-    console.log('game.js (auth): ' + vercelJs.length + ' bytes, contentHash ' + vhash.slice(0, 16) + '...');
-    fs.writeFileSync(path.join(ROOT, 'public', 'game.js'), vercelJs);
-    const indexHtml = shellHtml({ gameJs: null, inline: false })
-      .replace('</body>', '<!-- contentHash:' + vhash + ' -->\n</body>');
-    fs.writeFileSync(path.join(ROOT, 'public', 'index.html'), indexHtml);
-    console.log('public/game.js + index.html: ' + (vercelJs.length + indexHtml.length) + ' bytes');
-    const deckV = buildAdminFiles('vercel');
-    fs.writeFileSync(path.join(ROOT, 'public', 'admin.html'), deckV.html);
-    fs.writeFileSync(path.join(ROOT, 'public', 'admin.js'), deckV.js);
-    console.log('public/admin.html + admin.js: ' + (deckV.html.length + deckV.js.length) + ' bytes (Command Deck)');
-  }
+  let guestJs = null, personalJs = null;
 
   if (want('guest')) {
     // Bundle A: guest single-file (auth UI compile-time stripped, offline).
-    guestJs = buildGameJs({ auth: false });
+    guestJs = buildGameJs({ edition: 'guest' });
     zeroNetworkGate(guestJs, 'guest');
     const ghash = crypto.createHash('sha256').update(guestJs).digest('hex');
     console.log('game.js (guest, auth stripped): ' + guestJs.length + ' bytes, contentHash ' + ghash.slice(0, 16) + '...');
@@ -723,9 +732,9 @@ async function main() {
   }
 
   if (want('personal')) {
-    // Bundle C (ADR-012): personal edition — the guest auth-strip path, plus
-    // the EDITION_MARKER title ribbon. Multi-file layout mirroring public/
-    // (index.html + game.js) for static Vercel serving. No api/ functions.
+    // Bundle B (ADR-012): personal edition — the guest auth-strip path, plus
+    // the EDITION_MARKER title ribbon. Multi-file layout (index.html + game.js)
+    // for static serving. No api/ functions.
     personalJs = buildGameJs({ edition: 'personal' });
     zeroNetworkGate(personalJs, 'personal');
     const phash = crypto.createHash('sha256').update(personalJs).digest('hex');
@@ -743,7 +752,6 @@ async function main() {
 
   fs.writeFileSync(path.join(ROOT, 'dist', 'content-hash.txt'),
     (guestJs ? 'guest:' + crypto.createHash('sha256').update(guestJs).digest('hex') + '\n' : '') +
-    (vercelJs ? 'vercel:' + crypto.createHash('sha256').update(vercelJs).digest('hex') + '\n' : '') +
     (personalJs ? 'personal:' + crypto.createHash('sha256').update(personalJs).digest('hex') + '\n' : ''));
   console.log('build OK');
 }

@@ -1,8 +1,10 @@
 # Command Deck — owner backend dashboard
 
 The Command Deck is the owner's read-only operations console for the public
-game. It lives at **`/admin`** on the game site (source: `src/admin/`, built to
-`public/admin.html` + `public/admin.js`; API: `api/admin.mjs`, ONE route file
+game. It lives at **`/admin`** on the deployed site (source: `src/admin/`;
+since the vercel build target was retired (2026-11-12) the build emits the
+deck with the personal target only, to `personal/admin.html` +
+`personal/admin.js`; API: `api/admin.mjs`, ONE route file
 — 10 of the 12 Hobby function slots).
 
 ## What it shows

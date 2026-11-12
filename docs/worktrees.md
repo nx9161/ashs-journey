@@ -33,10 +33,11 @@ incident.
 6. **Stashes:** never leave a stash behind "for another seat". Either
    commit it to the right branch or drop it in the same session, and say
    which in the handoff.
-7. **Build artifacts:** `public/` and `dist/` are tracked build outputs —
+7. **Build artifacts:** `dist/` and `personal/` are tracked build outputs —
    rebuild (`node scripts/build.mjs`) before committing, and never hand-edit
-   `public/index.html` (it is generated from `SHELL_CSS` in
-   `scripts/build.mjs`).
+   the generated `index.html` files (they are generated from `SHELL_CSS` in
+   `scripts/build.mjs`). The retired vercel target's `public/` output is no
+   longer produced (retired 2026-11-12).
 
 ## Current worktrees
 
