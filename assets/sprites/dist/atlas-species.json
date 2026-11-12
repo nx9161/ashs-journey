@@ -3056,7 +3056,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -3069,7 +3069,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -4200,7 +4200,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -4213,7 +4213,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -4928,7 +4928,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -4941,7 +4941,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -5266,7 +5266,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -5396,7 +5396,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -5409,7 +5409,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -6462,7 +6462,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -6475,7 +6475,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -7450,7 +7450,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 17,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -7463,7 +7463,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 17,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -8490,7 +8490,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -8503,7 +8503,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 10,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9868,7 +9868,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9881,7 +9881,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9894,7 +9894,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9907,7 +9907,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9920,7 +9920,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9933,7 +9933,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11220,7 +11220,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11233,7 +11233,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11246,7 +11246,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11259,7 +11259,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11636,7 +11636,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11649,7 +11649,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11688,7 +11688,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11701,7 +11701,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

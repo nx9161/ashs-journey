@@ -2250,7 +2250,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": "electabuzz-front",
       "mirror_of": null
@@ -2822,7 +2822,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 15,
       "seed": null,
       "derived_from": "goldeen-front",
       "mirror_of": null
@@ -3186,7 +3186,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "horsea-front",
       "mirror_of": null
@@ -3420,7 +3420,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "kangaskhan-front",
       "mirror_of": null
@@ -3953,7 +3953,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": "magmar-front",
       "mirror_of": null
@@ -4447,7 +4447,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 17,
+      "palette": 16,
       "seed": null,
       "derived_from": "mrmime-front",
       "mirror_of": null
@@ -4967,7 +4967,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 10,
       "seed": null,
       "derived_from": "pinsir-front",
       "mirror_of": null
@@ -5656,7 +5656,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": "scyther-front",
       "mirror_of": null
@@ -5669,7 +5669,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": "seadra-front",
       "mirror_of": null
@@ -5682,7 +5682,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": "seaking-front",
       "mirror_of": null
@@ -6332,7 +6332,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": "starmie-front",
       "mirror_of": null
@@ -6345,7 +6345,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 11,
       "seed": null,
       "derived_from": "staryu-front",
       "mirror_of": null
@@ -6540,7 +6540,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": "tangela-front",
       "mirror_of": null
@@ -6566,7 +6566,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": "tauros-front",
       "mirror_of": null
@@ -10646,7 +10646,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11218,7 +11218,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11582,7 +11582,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11751,7 +11751,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11816,7 +11816,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -12349,7 +12349,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

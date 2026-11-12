@@ -169,6 +169,22 @@ export const NAME_REGISTRY = {
     rhyhorn:   { name: 'PLATLET', status: 'named', wave: 'G-KT7', design: 'platlet' },
     rhydon:    { name: 'PLATOR', status: 'named', wave: 'G-KT7', design: 'plator' },
     chansey:   { name: 'NURSELING', status: 'named', wave: 'G-KT7', design: 'nurseling' },
+    // -- Wave G Kanto Completion, Tranche 8 (coordinator-named) --
+    tangela:   { name: 'VINELUMP', status: 'named', wave: 'G-KT8', design: 'vinelump' },
+    kangaskhan: { name: 'PUNCHROO', status: 'named', wave: 'G-KT8', design: 'punchroo' },
+    horsea:    { name: 'SEAPIP', status: 'named', wave: 'G-KT8', design: 'seapip' },
+    seadra:    { name: 'CORALDRAK', status: 'named', wave: 'G-KT8', design: 'coraldrak' },
+    goldeen:   { name: 'VEILFIN', status: 'named', wave: 'G-KT8', design: 'veilfin' },
+    seaking:   { name: 'VEILARCH', status: 'named', wave: 'G-KT8', design: 'veilarch' },
+    staryu:    { name: 'ASTLET', status: 'named', wave: 'G-KT8', design: 'astlet' },
+    starmie:   { name: 'ASTRION', status: 'named', wave: 'G-KT8', design: 'astrion' },
+    mrmime:    { name: 'PANTOMIM', status: 'named', wave: 'G-KT8', design: 'pantomim' },
+    scyther:   { name: 'REAPMANT', status: 'named', wave: 'G-KT8', design: 'reapmant' },
+    jynx:      { name: 'FROSTELLE', status: 'named', wave: 'G-KT8', design: 'frostelle' },
+    electabuzz: { name: 'VOLTIGRE', status: 'named', wave: 'G-KT8', design: 'voltigre' },
+    magmar:    { name: 'LAVAMAND', status: 'named', wave: 'G-KT8', design: 'lavamand' },
+    pinsir:    { name: 'STAGHORN', status: 'named', wave: 'G-KT8', design: 'staghorn' },
+    tauros:    { name: 'BOVARCH', status: 'named', wave: 'G-KT8', design: 'bovarch' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -218,6 +234,9 @@ export const NAME_REGISTRY = {
     fosslet: ['cubone', 'marowak'],
     fumorb: ['koffing', 'weezing'],
     platlet: ['rhyhorn', 'rhydon'],
+    seapip: ['horsea', 'seadra'],
+    veilfin: ['goldeen', 'seaking'],
+    astlet: ['staryu', 'starmie'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
