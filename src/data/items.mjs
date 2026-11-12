@@ -223,7 +223,7 @@ export const ITEMS = {
   // Stage J4b key item: the Tidewall pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Lumi in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
-  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Pokemon — handle with both hands.' },
+  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Kin — handle with both hands.' },
   // Arc 4 Stage S4: the Gracidea — GRATHOG's forme key item. Use it
   // on a GRATHOG in the party to swap land <-> sky (the S4 forme
   // switch, game/sinnoh-systems.mjs). Never consumed.

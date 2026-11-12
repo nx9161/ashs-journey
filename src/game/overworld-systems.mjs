@@ -429,7 +429,7 @@ Object.assign(OverworldScene.prototype, {
       // dex registration (checked on every map load).
       if (S6F.manaphy_egg_received && !S6F.arc_manaphy_done && g.state.dex.caught[SPECIES.manaphy.dexNo]) {
         S6F.arc_manaphy_done = true; S6Q.arc_manaphy = 'complete';
-        g.ui.toast('The blue Egg hatched — CLIONARCH, the Seafaring Pokemon!');
+        g.ui.toast('The blue Egg hatched — CLIONARCH, the Seafaring Kin!');
       }
       if (id === 'spear-pillar' && S6F.arceus_unlocked && !S6F.arceus_stairs_open && !S6F.ev_sinnoh_arceus_stairs_done) {
         // Stage S7: the flute ceremony outranks the pillar's catch
@@ -3130,7 +3130,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'paul_eterna') {
       if (flags.paul_veilstone_done) { say(['Still ahead of my projections, {player}. The lakes will re-audit us both. Be there.']); return true; }
       if (!flags.paul_eterna_seen) {
-        say(['You took Gardenia\'s measure. Adequate. The BOUQUADE folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Pokemon. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
+        say(['You took Gardenia\'s measure. Adequate. The BOUQUADE folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Kin. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
         return true;
       }
       say(['Still counting, {player}. Inglenook next — Fantina\'s theatre. Try not to be decorative about it.']);
@@ -3149,7 +3149,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       // ---- the SIMMER beat ----
-      say(['There. Look at it, since you are here. A SIMMER I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Pokemon\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
+      say(['There. Look at it, since you are here. A SIMMER I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Kin\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
         say(['The little fire-type watches Paul walk away without a sound. Its flame is lit. Its stance, when it turns to you, is a question it has clearly been practicing: not can I win — but will anyone stay long enough to find out?'], () => {
           g.ui.showMenu('Take the SIMMER in?', [
             { label: 'Take it in', value: 'yes' },
