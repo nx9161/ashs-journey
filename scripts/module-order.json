@@ -42,6 +42,7 @@
  "src/data/story-hoenn.mjs",
  "src/data/story-sinnoh.mjs",
  "src/data/quests.mjs",
+ "src/data/narrative-db.mjs",
  "src/data/merge.mjs",
  "src/engine/fx.mjs",
  "src/data/grounds.mjs",
