@@ -293,3 +293,83 @@ Game Freak through official channels).
   rendered in Winter to prove the dampened grade family across
   seasons. NOT yet: Orange/Sevii/Sinnoh settlements, frontierhub,
   biome tile families, interiors (Wave C).
+  Wave C LANDED on branch art/kit-wave-c (2026-11-11, not merged):
+  WORLD ROLLOUT COMPLETE — the remaining 27 settlements wear the
+  kit (62 of 62 by the audit-towns definition): Indigo Plateau
+  (royal indigo), the eight Orange Islands (valencia coral,
+  mikan citrus orange, navel granite, moro bone drift, trovita
+  shell pink, kumquat pool aqua, pummelo stadium crimson,
+  shamouti shrine vermillion), frontierhub (bronze, teal door),
+  and all seventeen Sinnoh settlements (twinleaf leaf, sandgem
+  cool pale sand, jubilife steel glass, oreburgh soot iron,
+  floaroma magenta bloom, eterna teal-green stone, hearthome
+  contest violet, solaceon olive stone, veilstone meteor slate,
+  canalave pale iron, pastoria marsh olive, celestic dusk violet,
+  snowpoint pale stone, sunnyshore solar amber, fight-area dark
+  basalt, survival-area khaki, resort-area pearl). Pairwise
+  palette distance machine-checked against all 37 shipped sets
+  (closest Wave C pair 17.5 roof-main distance, above the shipped
+  floor of 14.8). THERE ARE NO SEVII ISLANDS MAPS in the game data
+  — the rollout covers every settlement that exists; nothing was
+  invented. Machinery generalised rather than multiplied: town
+  kinds match by prefix (the three Battle Zone towns wear sister
+  towns' kind families — fight-area is built from tg-sunnyshore
+  kinds, survival-area from tg-pastoria, resort-area from
+  tg-sunnyshore — while their variants stay their own), the
+  anchor lookup now reads SINNOH_TOWN_STYLE, and the shared
+  Orange/frontier/Sinnoh buildings (roof-slate/terra/teal/center
+  rows, wall-house/wood/brick walls) wear the kit roof and wall
+  pieces with the same run rules as tr-/tw- rows; service walls
+  keep the kitSvc grade. Regional props joined the kit-ground set
+  (honeytree, ironarch, contest dome, marsh reeds, solar panels,
+  origin stone, shrine, switchboard, game station, trophy case,
+  sand column, ice crystal). Starter/region corridors: r201
+  wears Twinleaf's set; Orange travel is ferry + sea lanes (no
+  land corridor exists to dress), Indigo and the frontier are
+  reached by ferry/league gates, not corridors. BIOME FAMILIES
+  drawn as ORIGINAL tiles in the kit's pattern language (the kit
+  grass/canopy/tallgrass pixel patterns re-toned, never the
+  cabin set stretched): the snow family (snow-1/2/3 ground,
+  snowtuft, snow-dusted spruce canopy) dresses Snowpoint and its
+  approach routes r216/r217 (their authored frost/ice floors
+  stay); the desert family (dryground-1/2/3, drytall, dry olive
+  canopy) dresses r228 under Survival Area's roofs. Census of
+  the rolled regions found no volcanic or cave settlement
+  grounds to build — Fight Area's ashground and Celestic's
+  shrine/coronet floors stay authored-native like earlier biome
+  floors. One biome exception to the native-sand rule: in snow/
+  desert sets the generic 'path' wears the kit dirt track (the
+  sand road's green fringe transitions read as moss on snow);
+  green towns keep native sand. INTERIORS: the kit sheet's room
+  set is sliced into the pipeline (plank floors x2, purple +
+  heart rugs, bed, table, chair, shelf, potted palm, paintings
+  x2, house wall extended to a full cell from its wainscot band,
+  lab wall re-toned cool from the real sheet hexes) and one
+  map-pattern branch (house-* / *-house / *-lab) dresses all 67
+  house and lab interiors game-wide — every region at once; the
+  shared center/mart interiors keep their service identity and
+  stay out. Warps, collision, furniture interaction tiles are
+  map data and untouched. LEFTOVERS CLOSED: night-lit windows
+  inside kit towns (the kit window wall's pane swaps to warm
+  lamplight at phase 'night'; service facades/signs swap to the
+  authored -lit art under the same kitSvc grade, cache.kitSvcLit)
+  and warp-fade door-open frames in kit towns (cache.doorOpenKit:
+  the kit door-open tile for house doors, kitSvc-graded authored
+  open frames for service doors; doorOpenSprite takes the current
+  map id — one-line main.mjs pass-through, line count unchanged).
+  Kit canvas law held: all 61 kit entries are 16x16 tiles at
+  <=16 colors (the bed/shelf/palm were conformed to 16x16 rather
+  than relaxing the gate). Skin only: builds x3 green, drift 0,
+  budgets + pack + art-gate (incl. kit census) PASS, audit-towns
+  PASS (62 settlements), audit-reachability 0 unreachable warps,
+  seasons PASS, slice 131/134 (same 3 pre-existing failures:
+  s6 badges fuzz, l8 dex roster, f4 encounter cadence), frozen
+  monolith caps unchanged (5254/1838/1318). Every settlement +
+  corridors + flagship interiors/biomes visually graded through
+  the shipped resolver in Autumn against the approved Pallet
+  references, plus a Night render proving the lit swaps. Honest
+  notes: Sinnoh towns are spacious by authored design (bare
+  ground is the map, not a dressing gap); the Orange groves share
+  one authored template family, so inter-island variety rides on
+  roofs and layout, as authored; the desert family's contrast
+  against native sand is deliberately low (dry ground on sand).
