@@ -63,7 +63,7 @@ export const SPECIES = {
     flavor: 'Navigates by sound. Startles easily in dark tunnels.',
   },
   geodude: {
-    id: 'geodude', name: 'Geodude', dexNo: 74, types: ['rock', 'ground'],
+    id: 'geodude', name: 'RUMBLING', dexNo: 74, types: ['rock', 'ground'],
     base: { hp: 40, atk: 80, def: 100, spa: 30, spd: 30, spe: 20 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'blob', spriteSeed: 7401,
     eggGroups: ['mineral'], hatchCounter: 15,

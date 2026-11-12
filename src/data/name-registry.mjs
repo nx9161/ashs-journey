@@ -123,6 +123,21 @@ export const NAME_REGISTRY = {
     machamp:   { name: 'QUADRAX', status: 'named', wave: 'G-KT4', design: 'quadrax' },
     tentacool: { name: 'STINGEL', status: 'named', wave: 'G-KT4', design: 'stingel' },
     tentacruel: { name: 'ABYSSGEL', status: 'named', wave: 'G-KT4', design: 'abyssgel' },
+    // -- Wave G Kanto Completion, Tranche 5 (coordinator-named) --
+    bellsprout: { name: 'PITCHLET', status: 'named', wave: 'G-KT5', design: 'pitchlet' },
+    weepinbell: { name: 'HANGCUP', status: 'named', wave: 'G-KT5', design: 'hangcup' },
+    victreebel: { name: 'PITCHLORD', status: 'named', wave: 'G-KT5', design: 'pitchlord' },
+    geodude:   { name: 'RUMBLING', status: 'named', wave: 'G-KT5', design: 'rumbling' },
+    graveler:  { name: 'CRAGBRUTE', status: 'named', wave: 'G-KT5', design: 'cragbrute' },
+    golem:     { name: 'TECTON', status: 'named', wave: 'G-KT5', design: 'tecton' },
+    ponyta:    { name: 'EMBERFOAL', status: 'named', wave: 'G-KT5', design: 'emberfoal' },
+    rapidash:  { name: 'PYROGALOP', status: 'named', wave: 'G-KT5', design: 'pyrogalop' },
+    slowpoke:  { name: 'DOZELING', status: 'named', wave: 'G-KT5', design: 'dozeling' },
+    slowbro:   { name: 'DOZEHIDE', status: 'named', wave: 'G-KT5', design: 'dozehide' },
+    magnemite: { name: 'COILORB', status: 'named', wave: 'G-KT5', design: 'coilorb' },
+    magneton:  { name: 'TRICOIL', status: 'named', wave: 'G-KT5', design: 'tricoil' },
+    doduo:     { name: 'TWINBEAK', status: 'named', wave: 'G-KT5', design: 'twinbeak' },
+    dodrio:    { name: 'TRIBEAK', status: 'named', wave: 'G-KT5', design: 'tribeak' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -155,6 +170,12 @@ export const NAME_REGISTRY = {
     napseer: ['abra', 'kadabra', 'alakazam'],
     muscling: ['machop', 'machoke', 'machamp'],
     stingel: ['tentacool', 'tentacruel'],
+    pitchlet: ['bellsprout', 'weepinbell', 'victreebel'],
+    rumbling: ['geodude', 'graveler', 'golem'],
+    emberfoal: ['ponyta', 'rapidash'],
+    dozeling: ['slowpoke', 'slowbro'],
+    coilorb: ['magnemite', 'magneton'],
+    twinbeak: ['doduo', 'dodrio'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

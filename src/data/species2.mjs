@@ -526,7 +526,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   bellsprout: {
-    id: 'bellsprout', name: 'Bellsprout', dexNo: 69, types: ['grass', 'poison'],
+    id: 'bellsprout', name: 'PITCHLET', dexNo: 69, types: ['grass', 'poison'],
     base: { hp: 50, atk: 75, def: 35, spa: 70, spd: 30, spe: 40 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'biped', spriteSeed: 6901,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -535,7 +535,7 @@ export const SPECIES2 = {
     evo: { to: 'weepinbell', method: 'level', level: 21 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   weepinbell: {
-    id: 'weepinbell', name: 'Weepinbell', dexNo: 70, types: ['grass', 'poison'],
+    id: 'weepinbell', name: 'HANGCUP', dexNo: 70, types: ['grass', 'poison'],
     base: { hp: 65, atk: 90, def: 50, spa: 85, spd: 45, spe: 55 },
     catchRate: 120, growth: 'mediumslow', baseXp: 137, body: 'blob', spriteSeed: 7001,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -544,7 +544,7 @@ export const SPECIES2 = {
     evo: { to: 'victreebel', method: 'stone', stone: 'leafstone' }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   victreebel: {
-    id: 'victreebel', name: 'Victreebel', dexNo: 71, types: ['grass', 'poison'],
+    id: 'victreebel', name: 'PITCHLORD', dexNo: 71, types: ['grass', 'poison'],
     base: { hp: 80, atk: 105, def: 65, spa: 100, spd: 70, spe: 70 },
     catchRate: 45, growth: 'mediumslow', baseXp: 245, body: 'blob', spriteSeed: 7101,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -571,7 +571,7 @@ export const SPECIES2 = {
     tm: [3, 6, 9, 10, 11, 12, 13, 14, 15, 20, 21, 22, 31, 32, 34, 44, 50, 101, 103],
   },
   graveler: {
-    id: 'graveler', name: 'Graveler', dexNo: 75, types: ['rock', 'ground'],
+    id: 'graveler', name: 'CRAGBRUTE', dexNo: 75, types: ['rock', 'ground'],
     base: { hp: 55, atk: 95, def: 115, spa: 45, spd: 45, spe: 35 },
     catchRate: 120, growth: 'mediumslow', baseXp: 137, body: 'blob', spriteSeed: 7501,
     eggGroups: ['mineral'], hatchCounter: 15,
@@ -580,7 +580,7 @@ export const SPECIES2 = {
     evo: { to: 'golem', method: 'trade' }, tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   golem: {
-    id: 'golem', name: 'Golem', dexNo: 76, types: ['rock', 'ground'],
+    id: 'golem', name: 'TECTON', dexNo: 76, types: ['rock', 'ground'],
     base: { hp: 80, atk: 120, def: 130, spa: 55, spd: 65, spe: 45 },
     catchRate: 45, growth: 'mediumslow', baseXp: 223, body: 'blob', spriteSeed: 7601,
     eggGroups: ['mineral'], hatchCounter: 15,
@@ -589,7 +589,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   ponyta: {
-    id: 'ponyta', name: 'Ponyta', dexNo: 77, types: ['fire'],
+    id: 'ponyta', name: 'EMBERFOAL', dexNo: 77, types: ['fire'],
     base: { hp: 50, atk: 85, def: 55, spa: 65, spd: 65, spe: 90 },
     catchRate: 190, growth: 'mediumfast', baseXp: 82, body: 'quad', spriteSeed: 7701,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -598,7 +598,7 @@ export const SPECIES2 = {
     evo: { to: 'rapidash', method: 'level', level: 40 }, tm: [6, 8, 9, 10, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   rapidash: {
-    id: 'rapidash', name: 'Rapidash', dexNo: 78, types: ['fire'],
+    id: 'rapidash', name: 'PYROGALOP', dexNo: 78, types: ['fire'],
     base: { hp: 65, atk: 100, def: 70, spa: 80, spd: 80, spe: 105 },
     catchRate: 60, growth: 'mediumfast', baseXp: 175, body: 'quad', spriteSeed: 7801,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -607,7 +607,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   slowpoke: {
-    id: 'slowpoke', name: 'Slowpoke', dexNo: 79, types: ['water', 'psychic'],
+    id: 'slowpoke', name: 'DOZELING', dexNo: 79, types: ['water', 'psychic'],
     base: { hp: 90, atk: 65, def: 65, spa: 40, spd: 40, spe: 15 },
     catchRate: 190, growth: 'mediumfast', baseXp: 99, body: 'quad', spriteSeed: 7901,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -620,7 +620,7 @@ export const SPECIES2 = {
     ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   slowbro: {
-    id: 'slowbro', name: 'Slowbro', dexNo: 80, types: ['water', 'psychic'],
+    id: 'slowbro', name: 'DOZEHIDE', dexNo: 80, types: ['water', 'psychic'],
     base: { hp: 95, atk: 75, def: 110, spa: 100, spd: 80, spe: 30 },
     catchRate: 75, growth: 'mediumfast', baseXp: 172, body: 'quad', spriteSeed: 8001,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -629,7 +629,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 104, 105],
   },
   magnemite: {
-    id: 'magnemite', name: 'Magnemite', dexNo: 81, types: ['electric', 'steel'],
+    id: 'magnemite', name: 'COILORB', dexNo: 81, types: ['electric', 'steel'],
     base: { hp: 25, atk: 35, def: 70, spa: 95, spd: 55, spe: 45 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'blob', spriteSeed: 8101,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -638,7 +638,7 @@ export const SPECIES2 = {
     evo: { to: 'magneton', method: 'level', level: 30 }, tm: [6, 9, 10, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 50, 105],
   },
   magneton: {
-    id: 'magneton', name: 'Magneton', dexNo: 82, types: ['electric', 'steel'],
+    id: 'magneton', name: 'TRICOIL', dexNo: 82, types: ['electric', 'steel'],
     base: { hp: 50, atk: 60, def: 95, spa: 120, spd: 70, spe: 70 },
     catchRate: 60, growth: 'mediumfast', baseXp: 163, body: 'blob', spriteSeed: 8201,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -656,7 +656,7 @@ export const SPECIES2 = {
     tm: [2, 3, 4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 50, 101, 102],
   },
   doduo: {
-    id: 'doduo', name: 'Doduo', dexNo: 84, types: ['normal', 'flying'],
+    id: 'doduo', name: 'TWINBEAK', dexNo: 84, types: ['normal', 'flying'],
     base: { hp: 35, atk: 85, def: 45, spa: 35, spd: 35, spe: 75 },
     catchRate: 190, growth: 'mediumfast', baseXp: 62, body: 'bird', spriteSeed: 8401,
     eggGroups: ['flying'], hatchCounter: 20,
@@ -665,7 +665,7 @@ export const SPECIES2 = {
     evo: { to: 'dodrio', method: 'level', level: 31 }, tm: [4, 6, 8, 9, 10, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   dodrio: {
-    id: 'dodrio', name: 'Dodrio', dexNo: 85, types: ['normal', 'flying'],
+    id: 'dodrio', name: 'TRIBEAK', dexNo: 85, types: ['normal', 'flying'],
     base: { hp: 60, atk: 110, def: 70, spa: 60, spd: 60, spe: 110 },
     catchRate: 45, growth: 'mediumfast', baseXp: 165, body: 'bird', spriteSeed: 8501,
     eggGroups: ['flying'], hatchCounter: 20,
