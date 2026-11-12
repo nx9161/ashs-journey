@@ -12,8 +12,8 @@
 // fused (VOLTIK, EMBRY, BUBLET, BUDDIN); lines escalate — first
 // stage small/cute, final stage grand (INFERNOX, ABYSSAR,
 // TERRABLOOM); legendaries in a sovereign register (OMNIGEN).
-// No name may echo a Nintendo name's sound or structure closely
-// enough to read as a respelling (General Counsel clean-room gate).
+// No name may echo a protected franchise name's sound or structure
+// closely enough to read as a respelling (General Counsel gate).
 //
 // Status values: 'locked' = owner-picked or owner-approved canon;
 // 'named' = coordinator-named under the style guide (owner can
