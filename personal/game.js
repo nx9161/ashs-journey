@@ -112986,7 +112986,7 @@ const SPECIES2 = {
     tm: [],
   },
   eevee: {
-    id: 'eevee', name: 'Eevee', dexNo: 133, types: ['normal'],
+    id: 'eevee', name: 'PRISMKIT', dexNo: 133, types: ['normal'],
     base: { hp: 55, atk: 55, def: 50, spa: 45, spd: 65, spe: 55 },
     catchRate: 45, growth: 'mediumfast', baseXp: 87, body: 'quad', spriteSeed: 13301,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -113004,7 +113004,7 @@ const SPECIES2 = {
     tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 39, 44, 50],
   },
   vaporeon: {
-    id: 'vaporeon', name: 'Vaporeon', dexNo: 134, types: ['water'],
+    id: 'vaporeon', name: 'OTTERSAIL', dexNo: 134, types: ['water'],
     base: { hp: 130, atk: 65, def: 60, spa: 110, spd: 95, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13401,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -113013,7 +113013,7 @@ const SPECIES2 = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 28, 31, 32, 34, 39, 44, 50, 103],
   },
   jolteon: {
-    id: 'jolteon', name: 'Jolteon', dexNo: 135, types: ['electric'],
+    id: 'jolteon', name: 'SPARKHARE', dexNo: 135, types: ['electric'],
     base: { hp: 65, atk: 65, def: 60, spa: 110, spd: 95, spe: 130 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13501,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -113022,7 +113022,7 @@ const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
   },
   flareon: {
-    id: 'flareon', name: 'Flareon', dexNo: 136, types: ['fire'],
+    id: 'flareon', name: 'KINDLEON', dexNo: 136, types: ['fire'],
     base: { hp: 65, atk: 130, def: 60, spa: 95, spd: 110, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13601,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -113094,7 +113094,7 @@ const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   articuno: {
-    id: 'articuno', name: 'Articuno', dexNo: 144, types: ['ice', 'flying'],
+    id: 'articuno', name: 'GLACIERNE', dexNo: 144, types: ['ice', 'flying'],
     base: { hp: 90, atk: 85, def: 100, spa: 95, spd: 125, spe: 85 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14401,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -113112,7 +113112,7 @@ const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
   },
   moltres: {
-    id: 'moltres', name: 'Moltres', dexNo: 146, types: ['fire', 'flying'],
+    id: 'moltres', name: 'PYREHAWK', dexNo: 146, types: ['fire', 'flying'],
     base: { hp: 90, atk: 100, def: 90, spa: 125, spd: 85, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14601,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -113266,14 +113266,14 @@ const SPECIES2 = {
     flavor: 'It curls into a living boulder and rolls clean through trouble.',
   },
   hooh: {
-    id: 'hooh', name: 'Ho-Oh', dexNo: 250, types: ['fire', 'flying'],
+    id: 'hooh', name: 'IRISAVIS', dexNo: 250, types: ['fire', 'flying'],
     base: { hp: 106, atk: 130, def: 90, spa: 110, spd: 154, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 25001,
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['gust', 'whirlwind'], 23: ['recover'], 29: ['fireblast'], 43: ['swift'], 90: ['skyattack'] },
     flavor: 'Where its rainbow passes, the ash of old sorrow turns green.',
   },
-  // Stage O1 (Arc 1.5): ONE more full species on the Ho-Oh precedent —
+  // Stage O1 (Arc 1.5): ONE more full species on the IRISAVIS precedent —
   // National dex only (dexNo 249 > 151, so the Arden diploma cannot
   // move). Canon facts (types/base stats/catch rate/growth/base XP)
   // verified against PokeAPI at build time (2026-10-29); learnset
@@ -113282,7 +113282,7 @@ const SPECIES2 = {
   // and no evolution entry. Cheat Terminal claimability follows the
   // guest-species precedent automatically (data-driven picker).
   lugia: {
-    id: 'lugia', name: 'Lugia', dexNo: 249, types: ['psychic', 'flying'],
+    id: 'lugia', name: 'ABYSSORN', dexNo: 249, types: ['psychic', 'flying'],
     base: { hp: 106, atk: 90, def: 130, spa: 90, spd: 154, spe: 110 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 24901,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -113690,21 +113690,21 @@ const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   espeon: {
-    id: 'espeon', name: 'Espeon', dexNo: 196, types: ['psychic'],
+    id: 'espeon', name: 'SOLYNX', dexNo: 196, types: ['psychic'],
     base: { hp: 65, atk: 65, def: 60, spa: 130, spd: 95, spe: 110 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 19601,
     eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip'], 108: ['sandattack'], 116: ['confusion'], 123: ['quickattack'], 130: ['swift'], 136: ['psybeam'], 147: ['psychic'] },
-    flavor: 'It reads the air on its forked tail and steps aside in time.',
+    flavor: 'It reads the air on its ribbon whiskers and steps aside in time.',
     tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
   },
   umbreon: {
-    id: 'umbreon', name: 'Umbreon', dexNo: 197, types: ['dark'],
+    id: 'umbreon', name: 'LUNAPARD', dexNo: 197, types: ['dark'],
     base: { hp: 95, atk: 65, def: 110, spa: 60, spd: 130, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 19701,
     eggGroups: ['ground'], hatchCounter: 35,
     learnset: { 1: ['tackle', 'tailwhip'], 108: ['sandattack'], 123: ['quickattack'], 130: ['confuseray'], 147: ['screech'] },
-    flavor: 'Its rings kindle when it is cornered — a warning in gold.',
+    flavor: 'Its moon-marks kindle when it is cornered — a warning in silver.',
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   murkrow: {
@@ -114095,7 +114095,7 @@ const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   raikou: {
-    id: 'raikou', name: 'Raikou', dexNo: 243, types: ['electric'],
+    id: 'raikou', name: 'VOLTIGRIS', dexNo: 243, types: ['electric'],
     base: { hp: 90, atk: 85, def: 75, spa: 115, spd: 100, spe: 115 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24301,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -114104,7 +114104,7 @@ const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
   },
   entei: {
-    id: 'entei', name: 'Entei', dexNo: 244, types: ['fire'],
+    id: 'entei', name: 'MAGMALION', dexNo: 244, types: ['fire'],
     base: { hp: 115, atk: 115, def: 85, spa: 90, spd: 75, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24401,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -114113,7 +114113,7 @@ const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50, 102],
   },
   suicune: {
-    id: 'suicune', name: 'Suicune', dexNo: 245, types: ['water'],
+    id: 'suicune', name: 'BOREPARD', dexNo: 245, types: ['water'],
     base: { hp: 100, atk: 75, def: 115, spa: 90, spd: 115, spe: 85 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24501,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -114149,7 +114149,7 @@ const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   celebi: {
-    id: 'celebi', name: 'Celebi', dexNo: 251, types: ['psychic', 'grass'],
+    id: 'celebi', name: 'CHRONOFAE', dexNo: 251, types: ['psychic', 'grass'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 270, body: 'biped', spriteSeed: 25101,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -116383,7 +116383,7 @@ const SPECIES_SINNOH = {
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 49001,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10, eggSpecies: 'phione',
     learnset: { 1: ['bubble'], 316: ['supersonic'], 324: ['bubblebeam'], 331: ['acidarmor'] },
-    flavor: 'Born on a cold seafloor, it swaps hearts the way tides swap shores. Its eggs hatch Phione here — the one line the breeding pools carry further than the Pokedex does.',
+    flavor: 'Born on a cold seafloor, it swaps hearts the way tides swap shores. Its eggs hatch Phione here — the one line the breeding pools carry further than the KinDex does.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   darkrai: {
@@ -116903,9 +116903,9 @@ const FORMS = [
   { id: 'weezing-galar', speciesId: 110, name: 'Galarian TWINSMOG', kind: 'regional', region: 'galar', types: ['poison', 'fairy'], note: 'Wears smokestacks like top hats and cleans the air it eats.' },
   { id: 'mrmime-galar', speciesId: 122, name: 'Galarian PANTOMIM', kind: 'regional', region: 'galar', types: ['ice', 'psychic'], note: 'Tap-dances on ice floors of its own making.' },
   { id: 'mrrime', speciesId: 122, name: 'TAPFROST', kind: 'regional', region: 'galar', types: ['ice', 'psychic'], note: 'Galarian PANTOMIM evolution; a cane, a stage, and perfect timing.' },
-  { id: 'articuno-galar', speciesId: 144, name: 'Galarian Articuno', kind: 'regional', region: 'galar', types: ['psychic', 'flying'], note: 'Cold-eyed and cruel-beamed; it freezes foes mid-thought.' },
+  { id: 'articuno-galar', speciesId: 144, name: 'Galarian GLACIERNE', kind: 'regional', region: 'galar', types: ['psychic', 'flying'], note: 'Cold-eyed and cruel-beamed; it freezes foes mid-thought.' },
   { id: 'zapdos-galar', speciesId: 145, name: 'Galarian FULMINIS', kind: 'regional', region: 'galar', types: ['fighting', 'flying'], note: 'Gave up the sky to outrun and out-kick everything on land.' },
-  { id: 'moltres-galar', speciesId: 146, name: 'Galarian Moltres', kind: 'regional', region: 'galar', types: ['dark', 'flying'], note: 'Its black aura burns like a flame that hates the light.' },
+  { id: 'moltres-galar', speciesId: 146, name: 'Galarian PYREHAWK', kind: 'regional', region: 'galar', types: ['dark', 'flying'], note: 'Its black aura burns like a flame that hates the light.' },
   { id: 'corsola-galar', speciesId: 222, name: 'Galarian CORALET', kind: 'regional', region: 'galar', types: ['ghost'], note: 'A bleached reef ghost that drains warmth from its perch.' },
   { id: 'cursola', speciesId: 222, name: 'PALECORAL', kind: 'regional', region: 'galar', types: ['ghost'], note: 'Galarian CORALET evolution; its spirit overflows its broken shell.' },
   { id: 'zigzagoon-galar', speciesId: 263, name: 'Galarian FURCOON', kind: 'regional', region: 'galar', types: ['dark', 'normal'], note: 'The original restless zigzagger; it starts fights for fun.' },
@@ -117106,11 +117106,11 @@ const BALLS = {
   // not meet its condition multiplies by exactly 1. `bonus` stays the
   // nominal 1; the rule supplies the true multiplier.
   levelball: { id: 'levelball', name: 'Level Ball', bonus: 1, rule: 'level', desc: 'Kurt-made. The bigger your lead\'s level edge over the wild foe, the stronger it pulls: over 4x its level x8, over 2x x4, over 1x x2, otherwise x1.' },
-  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Kurt-made. x3 on a Pokemon hooked while fishing; x1 on any other encounter.' },
+  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Kurt-made. x3 on a Kin hooked while fishing; x1 on any other encounter.' },
   moonball: { id: 'moonball', name: 'Moon Ball', bonus: 1, rule: 'moon', desc: 'Kurt-made. x4 on a species that evolves by Moon Stone; x1 on anything else.' },
   loveball: { id: 'loveball', name: 'Love Ball', bonus: 1, rule: 'love', desc: 'Kurt-made. x8 when the wild foe is the same species as your lead; x1 otherwise.' },
   fastball: { id: 'fastball', name: 'Fast Ball', bonus: 1, rule: 'fast', desc: 'Kurt-made. x4 on a species whose base Speed is 100 or more; x1 on slower species.' },
-  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Kurt-made. A plain x1 catch — but a Pokemon caught in it starts out trusting you (friendship set high).' },
+  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Kurt-made. A plain x1 catch — but a Kin caught in it starts out trusting you (friendship set high).' },
   heavyball: { id: 'heavyball', name: 'Heavy Ball', bonus: 1, rule: 'heavy', desc: 'Kurt-made. Pulls harder the bulkier the foe\'s battler tier: S x1, M x1.5, L x2.5, XL x4.' },
 };
 
@@ -117182,9 +117182,9 @@ const ITEMS = {
   fullrestore: { id: 'fullrestore', name: 'Full Restore', pocket: 'medicine', price: 3000, heal: 9999, cureStatus: true, desc: 'Full HP + cures status.' },
   antidote: { id: 'antidote', name: 'Antidote', pocket: 'medicine', price: 100, cure: 'poison', desc: 'Cures poison.' },
   parlyzheal: { id: 'parlyzheal', name: 'Parlyz Heal', pocket: 'medicine', price: 200, cure: 'paralysis', desc: 'Cures paralysis.' },
-  awakening: { id: 'awakening', name: 'Awakening', pocket: 'medicine', price: 250, cure: 'sleep', desc: 'Wakes a sleeping Pokemon.' },
+  awakening: { id: 'awakening', name: 'Awakening', pocket: 'medicine', price: 250, cure: 'sleep', desc: 'Wakes a sleeping Kin.' },
   burnheal: { id: 'burnheal', name: 'Burn Heal', pocket: 'medicine', price: 250, cure: 'burn', desc: 'Cures a burn.' },
-  iceheal: { id: 'iceheal', name: 'Ice Heal', pocket: 'medicine', price: 250, cure: 'freeze', desc: 'Thaws a frozen Pokemon.' },
+  iceheal: { id: 'iceheal', name: 'Ice Heal', pocket: 'medicine', price: 250, cure: 'freeze', desc: 'Thaws a frozen Kin.' },
   fullheal: { id: 'fullheal', name: 'Full Heal', pocket: 'medicine', price: 600, cure: 'all', desc: 'Cures any status.' },
   revive: { id: 'revive', name: 'Revive', pocket: 'medicine', price: 1500, revive: 0.5, desc: 'Revives with half HP.' },
   maxrevive: { id: 'maxrevive', name: 'Max Revive', pocket: 'medicine', price: 4000, revive: 1, desc: 'Revives with full HP.' },
@@ -117193,7 +117193,7 @@ const ITEMS = {
   elixir: { id: 'elixir', name: 'Elixir', pocket: 'medicine', price: 3000, ppRestoreAll: 10, desc: 'Restores 10 PP to all moves.' },
   maxelixir: { id: 'maxelixir', name: 'Max Elixir', pocket: 'medicine', price: 4500, ppRestoreAll: 999, desc: 'Fully restores all PP.' },
   rarecandy: { id: 'rarecandy', name: 'Rare Candy', pocket: 'medicine', levelUp: true, desc: 'Raises level by 1.' },
-  xpcandy: { id: 'xpcandy', name: 'XP Candy', pocket: 'medicine', xpBoost: 800, desc: 'A sparring prize. Grants 800 XP to one Pokemon.' },
+  xpcandy: { id: 'xpcandy', name: 'XP Candy', pocket: 'medicine', xpBoost: 800, desc: 'A sparring prize. Grants 800 XP to one Kin.' },
   // Evolution stones
   firestone: { id: 'firestone', name: 'Fire Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Fire lines.' },
   waterstone: { id: 'waterstone', name: 'Water Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Water lines.' },
@@ -117217,7 +117217,7 @@ const ITEMS = {
   goodrod: { id: 'goodrod', name: 'Good Rod', pocket: 'key', desc: 'A better rod. Better splashes.' },
   superrod: { id: 'superrod', name: 'Super Rod', pocket: 'key', desc: 'The best rod there is.' },
   silphscope: { id: 'silphscope', name: 'Vantage Scope', pocket: 'key', desc: 'Reveals unseen presences. The Tower\'s ghost, for instance.' },
-  pokeflute: { id: 'pokeflute', name: 'Poke Flute', pocket: 'key', desc: 'Its melody can wake anything. Even a roadblock.' },
+  pokeflute: { id: 'pokeflute', name: 'Kin Flute', pocket: 'key', desc: 'Its melody can wake anything. Even a roadblock.' },
   cardkey: { id: 'cardkey', name: 'Card Key', pocket: 'key', desc: 'Opens the sliding doors of Vantage Co.' },
   secretkey: { id: 'secretkey', name: 'Secret Key', pocket: 'key', desc: 'Opens the Caldera Gym. Still warm from the mansion ruins.' },
   ssticket: { id: 'ssticket', name: 'S.S. Ticket', pocket: 'key', desc: 'A boarding pass for a luxury cruise from Arcport.' },
@@ -117241,13 +117241,13 @@ const ITEMS = {
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Flintridge. Lets you use FLASH outside battle; Attack rises.' },
-  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Misty of Tidehaven. Pokemon up to Lv30 obey; CUT outside battle.' },
+  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Misty of Tidehaven. Kin up to Lv30 obey; CUT outside battle.' },
   thunderbadge: { id: 'thunderbadge', name: 'Thunder Badge', pocket: 'key', desc: 'From Lt. Surge of Arcport. FLY outside battle; Speed rises.' },
   rainbowbadge: { id: 'rainbowbadge', name: 'Rainbow Badge', pocket: 'key', desc: 'From Erika of Canopy. Up to Lv50 obey; STRENGTH outside battle.' },
   soulbadge: { id: 'soulbadge', name: 'Soul Badge', pocket: 'key', desc: 'From Koga of Bramble. SURF outside battle; Defense rises.' },
   marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Farsight. Up to Lv70 obey.' },
   volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Caldera. Special rises.' },
-  earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Fernmere Gym. All Pokemon obey. The League gate opens.' },
+  earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Fernmere Gym. All Kin obey. The League gate opens.' },
   // Amber Crew badges (Stage O2): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.orange, and the
   // badge_<root> story flag (winTrainer / cheatClaimBadge write all
@@ -117314,14 +117314,14 @@ const ITEMS = {
   // Stage J4b key item: the Tidewall pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Lumi in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
-  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Pokemon — handle with both hands.' },
+  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Kin — handle with both hands.' },
   // Arc 4 Stage S4: the Gracidea — Shaymin's forme key item. Use it
   // on a Shaymin in the party to swap land <-> sky (the S4 forme
   // switch, game/sinnoh-systems.mjs). Never consumed.
   gracidea: { id: 'gracidea', name: 'Gracidea', pocket: 'key', desc: 'A flower of gratitude that blooms only for Shaymin. Use it on Shaymin to swap between its land and sky formes.' },
   // Stage J5 key item: the Clear Bell, given by Lantern's Kimono
   // sisters once the three awakened beasts are quieted — its chime is
-  // the Chime Tower summit's invitation to Ho-Oh (arc_hooh).
+  // the Chime Tower summit's invitation to IRISAVIS (arc_hooh).
   clearbell: { id: 'clearbell', name: 'Clear Bell', pocket: 'key', desc: 'A bell of clear, cold crystal, kept by the Kimono sisters of Lantern. Its chime carries further than sound should — something in the high sky is meant to hear it.' },
   winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Amber League Winner\'s Trophy, presented at Grapefruit Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
@@ -117602,7 +117602,7 @@ const FACILITIES = {
   palace: {
     id: 'palace', name: 'Trial Palace', brain: 'Spencer', brainTitle: 'Palace Maven',
     setSize: 7, healBetween: true,
-    intro: 'At the Palace your Pokémon choose their own moves — you are the heart, not the hand. You call nothing; you simply learn what kind of team you really raised.',
+    intro: 'At the Palace your Kin choose their own moves — you are the heart, not the hand. You call nothing; you simply learn what kind of team you really raised.',
     pools: ['crobat', 'slaking', 'lapras', 'arcanine', 'exeggutor', 'slowbro', 'starmie', 'gardevoir', 'altaria', 'tropius', 'grumpig', 'xatu', 'noctowl', 'togetic'],
     title: 'Palace Guest',
     names: ['ALDER', 'BRIAR', 'CEDAR', 'DAPHNE', 'ELDER', 'FENNEL', 'GROVE', 'HAZEL', 'IRVING', 'LAUREL'],
@@ -117755,18 +117755,18 @@ const MAPS = {
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
     ],
     signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
+      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        // Yellow homage (original lines): the rival's partner is an Eevee.
-        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+        // Yellow homage (original lines): the rival's partner is a PRISMKIT.
+        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
       // entrance — Dawnwick's lab has no interior map, so the terminal lives
       // here (and in every Center) rather than nowhere.
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
-        dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
+        dialogue: ["Lab PC — Kin Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
     ],
     encounters: null,
     start: { x: 7, y: 7, dir: 'down' },
@@ -117803,11 +117803,11 @@ const MAPS = {
       { x: 8, y: 15, to: { map: 'pallet', x: 8, y: 9 } },
     ],
     signs: [
-      { x: 5, y: 6, text: 'ROUTE 1 — Dawnwick to Fernmere City. Tall grass rustles with wild Pokemon.' },
+      { x: 5, y: 6, text: 'ROUTE 1 — Dawnwick to Fernmere City. Tall grass rustles with wild Kin.' },
     ],
     npcs: [
       { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#1a1a1a',
-        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Capture Orb. The professor gave you ten to start."] },
+        dialogue: ["Wild Kin live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Capture Orb. The professor gave you ten to start."] },
       { x: 6, y: 4, name: 'CAL', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
         sight: { dir: 'left', range: 3 }, // Yellow-style: spots you, "!", walks up (down is blocked by the sign)
@@ -117885,7 +117885,7 @@ const MAPS = {
     npcs: [
       { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Center! Let me heal your team..."], heal: true,
-        afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
+        afterHeal: ["All better! Your Kin are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach (Candy Coach House Rule) — present in
       // every Center's data; the scene only fields him while the rule is
       // on (loadMap gate in overworld.mjs).
@@ -117998,7 +117998,7 @@ const MAPS = {
     ],
     signs: [
       { x: 3, y: 6, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
+      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Kin trainer!' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -118030,7 +118030,7 @@ const MAPS = {
     npcs: [
       { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#3a405a', hair: '#1a1a1a',
         trainer: 'brock',
-        dialogue: ["I'm Brock! I'm Flintridge's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
+        dialogue: ["I'm Brock! I'm Flintridge's Gym Leader! My rock-hard willpower is evident even in my Kin!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],
     encounters: null,
     start: null,
@@ -118219,7 +118219,7 @@ const TRAINERS = {
     intro: [
       "RUE: Well, well. A little trainer marching up OUR route.",
       "COLE: And carrying a VOLTIK that walks free? That's a rare one.",
-      "RUE: Hand over your Pokemon, kid — or we'll take them the fun way!",
+      "RUE: Hand over your Kin, kid — or we'll take them the fun way!",
       "COLE: Two of us, one of you. The math is delicious.",
     ],
     lose: [
@@ -118235,7 +118235,7 @@ const TRAINERS = {
   brock: {
     id: 'brock', name: 'Brock', title: 'Flintridge Gym Leader',
     ai: 'opener-setup',
-    intro: ["My rock-type Pokemon will crush you! Show me what you've got!"],
+    intro: ["My rock-type Kin will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],
     team: [
       // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
@@ -118300,7 +118300,7 @@ const MAPS2 = {
     ],
     signs: [
       { x: 3, y: 6, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Pokemon trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
+      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Kin trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -118553,7 +118553,7 @@ const MAPS2 = {
         dialogue: ["Heya! I'm Bill — the PC box whiz. My teleport experiment hiccuped and I woke up dressed as a MOONLET.", "My Sea Cottage lab is shuttered while I fix it, so ask me anything here. Your boxes? I built those. You're welcome."] },
       { x: 5, y: 10, name: 'WREN', art: 'nurse', skin: '#e8b888', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
         giveMon: { species: 'bulbasaur', level: 10 },
-        dialogue: ["I nurse hurt Pokemon back to health here. This BUDDIN came to me half-starved, the poor sprout.", "He's strong now — and he needs a journey, not a garden. Will you take him with you?"] },
+        dialogue: ["I nurse hurt Kin back to health here. This BUDDIN came to me half-starved, the poor sprout.", "He's strong now — and he needs a journey, not a garden. Will you take him with you?"] },
       { x: 15, y: 8, name: 'ORIN', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#6a4a2a',
         trade: { give: 'abra', get: 'mrmime', nickname: 'MARCEL' },
         dialogue: ["My NAPSEER teleports out of every conversation. Exhausting at parties.", "Trade you my PANTOMIM, Marcel, for an NAPSEER? At least he'll stay in the room. Mostly."] },
@@ -118598,7 +118598,7 @@ const MAPS2 = {
     npcs: [
       { x: 8, y: 2, name: 'MISTY', art: 'misty', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
-        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
+        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Kin are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
       { x: 4, y: 6, name: 'DIANA', art: 'swimmer', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'gym_cerulean_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Misty taught me to swim AND to battle. Both involve not panicking.", "You kept your head above water... fine, pass."] },
@@ -118635,11 +118635,11 @@ const MAPS2 = {
       { x: 9, y: 13, to: { map: 'route6', x: 9, y: 1 } },
     ],
     signs: [
-      { x: 10, y: 7, text: 'POKEMON DAY CARE — We raise your Pokemon with love while you travel. — The Day-Care Couple' },
+      { x: 10, y: 7, text: 'KIN DAY CARE — We raise your Kin with love while you travel. — The Day-Care Couple' },
     ],
     npcs: [
       { x: 8, y: 8, name: 'GRAMPS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
-        dialogue: ["Sixty years I've raised other folks' Pokemon on this route. They always come back stronger.", "Leave a partner with us someday, eh? Love and fresh air — that's the whole recipe."] },
+        dialogue: ["Sixty years I've raised other folks' Kin on this route. They always come back stronger.", "Leave a partner with us someday, eh? Love and fresh air — that's the whole recipe."] },
       { x: 12, y: 5, name: 'CAMPER JO', art: 'camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         trainer: 'r5_camper', sight: { dir: 'left', range: 3 },
         dialogue: ["Day care's closed to challengers, but I'M not! Battle the camper!", "Camp's all yours, champ. Sheesh."] },
@@ -118687,7 +118687,7 @@ const MAPS2 = {
       { x: 9, y: 13, to: { map: 'vermilion', x: 9, y: 1 } },
     ],
     signs: [
-      { x: 5, y: 7, text: 'ROUTE 6 — Tidehaven to Arcport. The pond is full of quiet, patient Pokemon.' },
+      { x: 5, y: 7, text: 'ROUTE 6 — Tidehaven to Arcport. The pond is full of quiet, patient Kin.' },
     ],
     npcs: [
       { x: 3, y: 10, name: 'BUG CATCHER ELI', art: 'bugcatcher', skin: '#e8b888', shirt: '#a03a5f', pants: '#2a304a', hair: '#7a4a1a',
@@ -118770,7 +118770,7 @@ const MAPS2 = {
         trade: { give: 'spearow', get: 'farfetchd', nickname: 'DUX' },
         dialogue: ["Caught this POSTDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
       { x: 13, y: 2, name: 'CHAIRMAN', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
-        dialogue: ["I chair the Pokemon Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
+        dialogue: ["I chair the Kin Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
     ],
     encounters: null,
     items: [],
@@ -118805,7 +118805,7 @@ const MAPS2 = {
     npcs: [
       { x: 8, y: 2, name: 'LT. SURGE', art: 'surge', skin: '#d8a878', shirt: '#324a83', pants: '#2a304a', hair: '#c0a03a',
         trainer: 'surge',
-        dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
+        dialogue: ["Name's Surge! My electric Kin saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
       { x: 4, y: 6, name: 'WALT', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
         trainer: 'gym_vermilion_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Surge taught this old gentleman one thing: never grab a live wire.", "Shocking... defeat. Mind the switches on your way up."] },
@@ -118850,7 +118850,7 @@ const MAPS2 = {
         sight: { dir: 'left', range: 3 },
         dialogue: ["We dressed as crew. The hats were VERY convincing.", "Abandon ship — the plan, I mean! The plan!"] },
       { x: 15, y: 8, name: 'CAPTAIN', art: 'sailor', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#2a3a4a', hair: '#c0c0c0',
-        dialogue: ["Back in '62 I wrestled a storm off the Sevii coast with one hand on the wheel and one on my tea.", "Rub my back when I'm seasick and I might teach your Pokemon to slice clean through anything."] },
+        dialogue: ["Back in '62 I wrestled a storm off the Sevii coast with one hand on the wheel and one on my tea.", "Rub my back when I'm seasick and I might teach your Kin to slice clean through anything."] },
     ],
     encounters: null,
     items: [],
@@ -118995,7 +118995,7 @@ const MAPS2 = {
     npcs: [
       { x: 5, y: 10, name: 'ELIAS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         giveMon: { species: 'eevee', level: 25 },
-        dialogue: ["Atop the old condo I kept an Eevee — bright little thing, brimming with possible futures.", "My traveling days are done. Take Eevee, and let it become whatever your journey needs."] },
+        dialogue: ["Atop the old condo I kept a PRISMKIT — bright little thing, brimming with possible futures.", "My traveling days are done. Take PRISMKIT, and let it become whatever your journey needs."] },
       { x: 11, y: 8, name: 'HOSTESS', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 3, y: 8, name: 'PERFUMER', art: 'lady', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
@@ -119075,7 +119075,7 @@ const MAPS2 = {
     signs: [
       { x: 3, y: 2, text: 'SLOT MACHINE — Three CELLORB and the jackpot is yours. The house thanks you for trying.' },
       { x: 6, y: 2, text: 'SLOT MACHINE — A sign reads: NO PEEKING BEHIND THE POSTER. MANAGEMENT.' },
-      { x: 9, y: 2, text: 'PRIZE DESK — Rare Pokemon for rare coin totals. No trades, no haggling, no tears.' },
+      { x: 9, y: 2, text: 'PRIZE DESK — Rare Kin for rare coin totals. No trades, no haggling, no tears.' },
       { x: 12, y: 2, text: 'SLOT MACHINE — Someone carved tiny letters here: R WAS HERE.' },
     ],
     npcs: [
@@ -119613,13 +119613,13 @@ const MAPS2 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
-      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Pokemon.' },
+      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
     ],
     npcs: [
       { x: 5, y: 9, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
-        dialogue: ["I volunteer at the Pokemon House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
+        dialogue: ["I volunteer at the Kin House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
       { x: 13, y: 9, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
-        dialogue: ["My grandma says the tower ghosts are just Pokemon who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
+        dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
     ],
     encounters: null,
     items: [],
@@ -119658,7 +119658,7 @@ const MAPS2 = {
     npcs: [
       { x: 8, y: 3, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_tower',
-        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
+        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Kin I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
       { x: 12, y: 6, name: 'CHANNELER', art: 'monk', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["The spirits drift closer to the stairs each night, child. Something above grieves — loudly.", "Purify your heart before you climb. The tower can smell doubt."] },
     ],
@@ -119868,12 +119868,12 @@ const MAPS2 = {
       { x: 9, y: 12, to: { map: 'route19', x: 9, y: 1 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Pokemon roam free beyond the south gate.' },
+      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Kin roam free beyond the south gate.' },
       { x: 8, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master!' },
     ],
     npcs: [
       { x: 10, y: 11, name: 'WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0',
-        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Find them and I'll teach your Pokemon to push boulders like they're made of foam. Mmh!"] },
+        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Find them and I'll teach your Kin to push boulders like they're made of foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
     ],
@@ -120301,7 +120301,7 @@ const MAPS2 = {
     npcs: [
       { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
-        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
+        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Kin will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
       { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#5a2a7a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
@@ -120384,12 +120384,12 @@ const MAPS2 = {
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
     ],
     signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
+      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       { x: 12, y: 8, name: 'CAPT MARA', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#e8e0f0',
         dialogue: ["I run the little ferry out of Dawnwick's dock, dear. Mostly supplies, sometimes secrets.", "Once a year the fog takes me somewhere that isn't on any chart. Exile Isle. When it calls you, I'll be waiting."] },
     ],
@@ -120663,10 +120663,10 @@ const MAPS2 = {
     npcs: [
       { x: 9, y: 17, name: 'LORELEI', art: 'lorelei', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#7a1a3a',
         trainer: 'lorelei',
-        dialogue: ["I am Lorelei of the Elite Four! My ice Pokemon are glaciers with tempers — no one breaks them. No one.", "Glaciers... melt. Astonishing. Bruno waits above, and he hits far harder than winter."] },
+        dialogue: ["I am Lorelei of the Elite Four! My ice Kin are glaciers with tempers — no one breaks them. No one.", "Glaciers... melt. Astonishing. Bruno waits above, and he hits far harder than winter."] },
       { x: 9, y: 13, name: 'BRUNO', art: 'bruno', skin: '#c89878', shirt: '#50368e', pants: '#3a3a3a', hair: '#1a1a1a',
         trainer: 'bruno',
-        dialogue: ["I am Bruno! Through rigorous training, my Pokemon and I became one machine of muscle!", "We train again. YOU — climb. Agatha's ghosts are older than my pride."] },
+        dialogue: ["I am Bruno! Through rigorous training, my Kin and I became one machine of muscle!", "We train again. YOU — climb. Agatha's ghosts are older than my pride."] },
       { x: 9, y: 9, name: 'AGATHA', art: 'agatha', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'agatha',
         dialogue: ["I am Agatha. I battled that fool Hawthorn when we were both young and reckless... mostly him.", "Hmph. You fight like he dreamed of fighting. Lance awaits, child. Mind the dragons."] },
@@ -120830,7 +120830,7 @@ const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'MISTY', art: 'misty', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
-        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
+        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Kin are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
       { x: 4, y: 6, name: 'DIANA', art: 'swimmer', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'gym_cerulean_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Misty taught me to swim AND to battle. Both involve not panicking.", "You kept your head above water... fine, pass."] },
@@ -120864,7 +120864,7 @@ const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'LT. SURGE', art: 'surge', skin: '#d8a878', shirt: '#324a83', pants: '#2a304a', hair: '#c0a03a',
         trainer: 'surge',
-        dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
+        dialogue: ["Name's Surge! My electric Kin saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
       { x: 4, y: 6, name: 'WALT', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
         trainer: 'gym_vermilion_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Surge taught this old gentleman one thing: never grab a live wire.", "Shocking... defeat. Mind the switches on your way up."] },
@@ -120994,7 +120994,7 @@ const MAPS3 = {
     ],
     signs: [
       { x: 8, y: 6, text: 'FARSIGHT CITY — The golden city at the heart of Arden. Vantage Co. HQ towers over all.' },
-      { x: 10, y: 7, text: 'FARSIGHT GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
+      { x: 10, y: 7, text: 'FARSIGHT GYM — Leader: Sabrina. The master of Psychic Kin! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
       { x: 6, y: 10, text: 'FARSIGHT CITY — East: ROUTE 9 · South: ROUTE 8.' }
     ],
     npcs: [
@@ -121407,15 +121407,15 @@ const MAPS3 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
-      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Pokemon.' },
+      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
       { x: 11, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
       { x: 14, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
     ],
     npcs: [
       { x: 5, y: 9, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
-        dialogue: ["I volunteer at the Pokemon House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
+        dialogue: ["I volunteer at the Kin House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
       { x: 13, y: 9, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
-        dialogue: ["My grandma says the tower ghosts are just Pokemon who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
+        dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
         dialogue: ["Hushmoor Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
@@ -121458,7 +121458,7 @@ const MAPS3 = {
     npcs: [
       { x: 8, y: 3, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_tower',
-        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
+        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Kin I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
       { x: 12, y: 6, name: 'CHANNELER', art: 'monk', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["The spirits drift closer to the stairs each night, child. Something above grieves — loudly.", "Purify your heart before you climb. The tower can smell doubt."] },
     ],
@@ -121690,14 +121690,14 @@ const MAPS3 = {
       { x: 15, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'fuchsia', x: 15, y: 11 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Pokemon roam free beyond the south gate.' },
+      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Kin roam free beyond the south gate.' },
       { x: 8, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
       { x: 13, y: 7, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
       { x: 4, y: 10, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
     ],
     npcs: [
       { x: 10, y: 9, name: 'PRESERVE WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
-        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Pokemon to push boulders like foam. Mmh!"] },
+        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Kin to push boulders like foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -122152,7 +122152,7 @@ const MAPS3 = {
       { x: 9, y: 10, to: { map: 'cinnabar', x: 7, y: 11 } },
     ],
     signs: [
-      { x: 3, y: 2, text: "DIARY — '...a new Pokemon was born in this house. We named the newborn with shaking hands, and it named us back with its eyes.'" },
+      { x: 3, y: 2, text: "DIARY — '...a new Kin was born in this house. We named the newborn with shaking hands, and it named us back with its eyes.'" },
       { x: 14, y: 2, text: "DIARY — 'The experiments escaped our caution. If the mountain ever takes this house, let the Gym key stay buried with our shame.'" },
       { x: 8, y: 4, text: "DIARY — 'It dreams of its mother. We hear it through the walls on still nights. God forgive the quiet we keep.'" },
     ],
@@ -122207,7 +122207,7 @@ const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
-        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
+        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Kin will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
       { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#5a2a7a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
@@ -122488,10 +122488,10 @@ const MAPS3 = {
     npcs: [
       { x: 2, y: 2, name: 'LORELEI', art: 'lorelei', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#7a1a3a',
         trainer: 'lorelei',
-        dialogue: ["Welcome to the League. I am Lorelei — my ice Pokemon are the first winter you'll have to outlast.", "You melted more than ice today. Go on — the others are colder company than me."] },
+        dialogue: ["Welcome to the League. I am Lorelei — my ice Kin are the first winter you'll have to outlast.", "You melted more than ice today. Go on — the others are colder company than me."] },
       { x: 6, y: 2, name: 'BRUNO', art: 'bruno', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
         trainer: 'bruno',
-        dialogue: ["I am Bruno! My Pokemon and I train until the mountain itself gets tired. Show me your discipline!", "Discipline... outmatched. My fists salute you. Forward!"] },
+        dialogue: ["I am Bruno! My Kin and I train until the mountain itself gets tired. Show me your discipline!", "Discipline... outmatched. My fists salute you. Forward!"] },
       { x: 10, y: 2, name: 'AGATHA', art: 'agatha', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'agatha',
         dialogue: ["So the professor's newest spark climbs to my chamber. I knew that man when his hair was dark and his ideas darker.", "Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."] },
@@ -122588,7 +122588,7 @@ const MAPS3 = {
     ],
     npcs: [
       { x: 12, y: 8, name: 'WRECKED LOG', art: 'youngster', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["A waterlogged logbook in a shattered case. The last entry is dated the night the storm swallowed the harbor lights.", "'The master of this island has made a Pokemon stronger than any that nature —' The rest is salt and ash."] },
+        dialogue: ["A waterlogged logbook in a shattered case. The last entry is dated the night the storm swallowed the harbor lights.", "'The master of this island has made a Kin stronger than any that nature —' The rest is salt and ash."] },
     ],
     encounters: null,
     items: [],
@@ -122626,20 +122626,20 @@ const MAPS3 = {
       { x: 11, y: 3, to: { map: 'house-pallet-gary', x: 4, y: 4 } },
     ],
     signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
+      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
       { x: 7, y: 9, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
       // (Dawnwick's lab has no interior map; the terminal stands by its door,
       // like the one in every Center).
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
-        dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
+        dialogue: ["Lab PC — Kin Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
       { x: 6, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
-        dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Pokemon, no questions asked. The professor pretends not to see this machine."] },
+        dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Kin, no questions asked. The professor pretends not to see this machine."] },
       // Partner guarantee (hotfix): the professor himself, at his lab
       // door. Pre-fix he existed only inside the intro cutscene, so a
       // player whose partner never arrived (defect 4's stranded saves)
@@ -122681,16 +122681,16 @@ const MAPS3 = {
     npcs: [
       { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Center! Let me heal your team..."], heal: true,
-        afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
+        afterHeal: ["All better! Your Kin are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach — see maps.mjs center (same placement;
       // the scene fields him only while the Candy Coach rule is on).
       { x: 2, y: 2, name: 'SPARRING COACH', art: 'sparcoach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
         sparCoach: true, sparSpecies: 'machop',
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
       { x: 7, y: 2, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
-        dialogue: ["Someone's PC — Pokemon Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
+        dialogue: ["Someone's PC — Kin Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
       { x: 6, y: 2, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
-        dialogue: ["CHEAT TERMINAL — a humming machine the nurses don't talk about. Everything on it is free: items, badges, even legendary Pokemon."] },
+        dialogue: ["CHEAT TERMINAL — a humming machine the nurses don't talk about. Everything on it is free: items, badges, even legendary Kin."] },
       { x: 2, y: 3, name: 'WAITING TRAINER', art: 'youngster', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         dialogue: ["Every Center in Arden runs the same boxes off Bill's system. Deposit a friend here, withdraw them a mountain away.", "Technology's incredible — and the nurse still heals for free. Some things never change."] },
     ],
@@ -122710,7 +122710,7 @@ const TRAINERS3 = {
   // ---- Gym Leaders ----
   misty: {
     id: 'misty', name: 'Misty', title: 'Tidehaven Gym Leader', ai: 'smart',
-    intro: ["My policy is an all-out offensive with water-type Pokemon! Show me you can swim in the deep end!"],
+    intro: ["My policy is an all-out offensive with water-type Kin! Show me you can swim in the deep end!"],
     lose: ["You drowned my best strategy... fine! The Cascade Badge is yours."],
     // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
     // applies them per difficulty — Challenge: all; Classic: ace only).
@@ -122726,7 +122726,7 @@ const TRAINERS3 = {
   },
   erika: {
     id: 'erika', name: 'Erika', title: 'Canopy Gym Leader',
-    intro: ["Forgive my drowsiness... the garden is so peaceful. My grass Pokemon, however, are wide awake for you."],
+    intro: ["Forgive my drowsiness... the garden is so peaceful. My grass Kin, however, are wide awake for you."],
     lose: ["A storm in my garden, beautifully fought. The Rainbow Badge is yours."],
     team: [ { species: 'victreebel', level: 29, keepsake: 'gloomfang' }, { species: 'tangela', level: 24, keepsake: 'gardeniasash' }, { species: 'vileplume', level: 29, keepsake: 'secondwindribbon' } ],
     reward: 2900, badge: 'rainbowbadge',
@@ -122883,28 +122883,28 @@ const TRAINERS3 = {
   // ---- Elite Four + Champion ----
   lorelei: {
     id: 'lorelei', name: 'Lorelei', title: 'Elite Four', ai: 'smart',
-    intro: ["No one can best me when it comes to icy Pokemon. Freezing moves are powerful — your Pokemon will be at my mercy when they are frozen solid!"],
+    intro: ["No one can best me when it comes to icy Kin. Freezing moves are powerful — your Kin will be at my mercy when they are frozen solid!"],
     lose: ["You melted more than ice today. Go on — the others are colder company than me."],
     team: [ { species: 'dewgong', level: 54, keepsake: 'tidepearl' }, { species: 'cloyster', level: 53, keepsake: 'ironacorn' }, { species: 'slowbro', level: 54, keepsake: 'gardeniasash' }, { species: 'jynx', level: 56, keepsake: 'secondwindribbon' }, { species: 'lapras', level: 56, keepsake: 'tortoisecharm' } ],
     reward: 5600,
   },
   bruno: {
     id: 'bruno', name: 'Bruno', title: 'Elite Four', ai: 'smart',
-    intro: ["I am Bruno of the Elite Four! Through rigorous training, people and Pokemon can become stronger! I have weight-trained with my Pokemon!"],
+    intro: ["I am Bruno of the Elite Four! Through rigorous training, people and Kin can become stronger! I have weight-trained with my Kin!"],
     lose: ["Discipline... outmatched. My fists salute you. Forward!"],
     team: [ { species: 'onix', level: 53, keepsake: 'fossilspur' }, { species: 'hitmonchan', level: 55, keepsake: 'secondwindribbon' }, { species: 'hitmonlee', level: 55, keepsake: 'sparrowfeather' }, { species: 'onix', level: 56, keepsake: 'ironacorn' }, { species: 'machamp', level: 58, keepsake: 'tortoisecharm' } ],
     reward: 5800,
   },
   agatha: {
     id: 'agatha', name: 'Agatha', title: 'Elite Four', ai: 'smart',
-    intro: ["That old duff, Professor Hawthorn, was once young and handsome. That was decades ago. Now he just wants to fill a Pokedex. He is wrong — Pokemon are for fighting!"],
+    intro: ["That old duff, Professor Hawthorn, was once young and handsome. That was decades ago. Now he just wants to fill a KinDex. He is wrong — Kin are for fighting!"],
     lose: ["Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."],
     team: [ { species: 'gengar', level: 56, keepsake: 'spectrebell' }, { species: 'golbat', level: 56, keepsake: 'gloomfang' }, { species: 'haunter', level: 55, keepsake: 'spectrebell' }, { species: 'arbok', level: 58, keepsake: 'gloomfang' }, { species: 'gengar', level: 60, keepsake: 'tortoisecharm' } ],
     reward: 6000,
   },
   lance: {
     id: 'lance', name: 'Lance', title: 'Elite Four', ai: 'smart',
-    intro: ["I lead the Elite Four. Dragon Pokemon are wild, untamable — and so am I, when the battle demands it. Your challenge ends here."],
+    intro: ["I lead the Elite Four. Dragon Kin are wild, untamable — and so am I, when the battle demands it. Your challenge ends here."],
     lose: ["A legend, answered by a legend. The final chamber waits. Give him a battle worthy of the climb."],
     team: [ { species: 'gyarados', level: 58, keepsake: 'tidepearl' }, { species: 'dragonair', level: 56, keepsake: 'secondwindribbon' }, { species: 'dragonair', level: 56, keepsake: 'sparrowfeather' }, { species: 'aerodactyl', level: 60, keepsake: 'fossilspur' }, { species: 'dragonite', level: 62, keepsake: 'tortoisecharm' } ],
     reward: 6200,
@@ -122913,7 +122913,7 @@ const TRAINERS3 = {
   gary_cerulean: {
     id: 'gary_cerulean', name: 'Gary', title: 'Rival',
     intro: ["Hey, {player}! I got a Cascade Badge already — no, wait, I'm ABOUT to. Watch and learn, slowpoke!"],
-    lose: ["How?! My Eevee picked these matchups itself! ...Whatever. Tidehaven's just a warm-up."],
+    lose: ["How?! My PRISMKIT picked these matchups itself! ...Whatever. Tidehaven's just a warm-up."],
     team: [ { species: 'pidgeotto', level: 18 }, { species: 'rattata', level: 15 }, { species: 'kadabra', level: 15 }, { species: 'ivysaur', level: 17 } ],
     reward: 700,
   },
@@ -122926,7 +122926,7 @@ const TRAINERS3 = {
   },
   gary_tower: {
     id: 'gary_tower', name: 'Gary', title: 'Rival',
-    intro: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew. Battle first. Questions never."],
+    intro: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Kin I once knew. Battle first. Questions never."],
     lose: ["Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."],
     team: [ { species: 'pidgeotto', level: 23 }, { species: 'growlithe', level: 22 }, { species: 'kadabra', level: 24 }, { species: 'ivysaur', level: 25 } ],
     reward: 900,
@@ -122962,7 +122962,7 @@ const TRAINERS3 = {
   },
   duo3_celadon: {
     id: 'duo3_celadon', name: 'Mara & Jules', title: 'Uniformed Duo',
-    intro: ["MARA: The Game Corner pays out in coins, kid — but trainers pay out in Pokemon.", "JULES: And business, as they say, is booming. Nickel counted the till himself."],
+    intro: ["MARA: The Game Corner pays out in coins, kid — but trainers pay out in Kin.", "JULES: And business, as they say, is booming. Nickel counted the till himself."],
     lose: ["MARA: The house always wins, they said. NOBODY warned us about the customers.", "JULES: Cashing out! Cashing OUT!"],
     team: [ { species: 'arbok', level: 26 }, { species: 'weezing', level: 26 }, { species: 'meowth', level: 25, nickname: 'Nickel' } ],
     reward: 900,
@@ -123516,7 +123516,7 @@ MAPS4.silph1 = {
 // stitch island<->lane<->island by edge warps. The shared 'center' and
 // 'mart' interiors serve every island via the shipped via{} tickets —
 // no per-island centers/marts are authored. Gym interiors are layouts
-// only (leaders/battles: Stage O2); the Lugia story is Stage O3.
+// only (leaders/battles: Stage O2); the ABYSSORN story is Stage O3.
 
 const MAPS5 = {
   "valencia": {
@@ -123655,7 +123655,7 @@ const MAPS5 = {
       {
         "x": 9,
         "y": 3,
-        "text": "PROF. IVY'S LAB — Marine Pokemon research. A certain unopenable Capture Orb rests inside."
+        "text": "PROF. IVY'S LAB — Marine Kin research. A certain unopenable Capture Orb rests inside."
       },
       {
         "x": 3,
@@ -127357,7 +127357,7 @@ const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Professor Ivy is out on the reef transect — she studies how the sea changes Pokemon.",
+          "Professor Ivy is out on the reef transect — she studies how the sea changes Kin.",
           "That ball on the pedestal? Every scanner we own just shrugs at it."
         ]
       }
@@ -128377,8 +128377,8 @@ MAPS5.vermilion = {
 // to r29, Beacon fields the Arcport ferryArc port (CAPT EASTWIND)
 // with CAPT EASTBOUND mirrored on Arcport's dock below, Tidewall
 // runs a plain island-hopper boat to Beacon, the Maelstrom Islands'
-// Deep Chamber is Lugia dressing/lore only (NO second catch — the
-// one Lugia shipped in Amber), the Drake's Den shrine and the
+// Deep Chamber is ABYSSORN dressing/lore only (NO second catch — the
+// one ABYSSORN shipped in Amber), the Drake's Den shrine and the
 // Lastlight Stadium are layouts awaiting J4 story wiring, and Red's
 // dais stands empty in Mt. Lastlight's summit cave for J4.
 // Generated by ~/workspace/ashs-journey-qa/johto-j3a/gen_maps6.py
@@ -128489,7 +128489,7 @@ const MAPS6 = {
       {
         "x": 2,
         "y": 5,
-        "text": "PROF. ELM'S LAB — Galefield's own Pokemon laboratory. Elm studies how Pokemon grow and hatch."
+        "text": "PROF. ELM'S LAB — Galefield's own Kin laboratory. Elm studies how Kin grow and hatch."
       },
       {
         "x": 15,
@@ -128541,7 +128541,7 @@ const MAPS6 = {
         "pants": "#4a3a2a",
         "hair": "#2a1a0a",
         "dialogue": [
-          "A bird Pokemon delivered a letter to the lab once. A LETTER.",
+          "A bird Kin delivered a letter to the lab once. A LETTER.",
           "When I grow up I'm studying eggs, just like Professor Elm."
         ]
       },
@@ -128813,7 +128813,7 @@ const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "First time in Yamato? The road east climbs to Iris City, past Mr. Pokemon's house country.",
+          "First time in Yamato? The road east climbs to Iris City, past Mr. Kin's house country.",
           "Take it slow. The region rewards trainers who look around."
         ]
       },
@@ -129405,7 +129405,7 @@ const MAPS6 = {
       {
         "x": 1,
         "y": 4,
-        "text": "CINDER TOWN — Where people and Pokemon live in happy harmony. Kurt works his craft on the north street."
+        "text": "CINDER TOWN — Where people and Kin live in happy harmony. Kurt works his craft on the north street."
       },
       {
         "x": 1,
@@ -130159,7 +130159,7 @@ const MAPS6 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Chime Tower's bells ring for a Pokemon the old songs call the rainbow's keeper.",
+          "The Chime Tower's bells ring for a Kin the old songs call the rainbow's keeper.",
           "We sweep the approach every morning. Some mornings, there are footprints that are not ours."
         ]
       },
@@ -131671,7 +131671,7 @@ const MAPS6 = {
       {
         "x": 15,
         "y": 9,
-        "text": "DAY-CARE — The couple on Route 34 raise Pokemon with famously patient hands."
+        "text": "DAY-CARE — The couple on Route 34 raise Kin with famously patient hands."
       }
     ],
     "npcs": [
@@ -132119,7 +132119,7 @@ const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "I walked my first Pokemon around this fountain. My granddaughter walks hers now.",
+          "I walked my first Kin around this fountain. My granddaughter walks hers now.",
           "Parks remember every generation kindly. That is their job."
         ]
       }
@@ -133027,7 +133027,7 @@ const MAPS6 = {
       {
         "x": 8,
         "y": 2,
-        "text": "ELM'S RESEARCH BOARD — 'Eggs are not the beginning of a Pokemon. They are the middle of a story.'"
+        "text": "ELM'S RESEARCH BOARD — 'Eggs are not the beginning of a Kin. They are the middle of a story.'"
       }
     ],
     "npcs": [
@@ -133055,7 +133055,7 @@ const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Galefield doctrine: a Pokemon's first hour matters as much as its hundredth level.",
+          "Galefield doctrine: a Kin's first hour matters as much as its hundredth level.",
           "Mind the tank glass. The TADLET inside judges visitors."
         ]
       }
@@ -134552,7 +134552,7 @@ const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "My wife and I have raised half the Pokemon in this county, one nap at a time.",
+          "My wife and I have raised half the Kin in this county, one nap at a time.",
           "Leave a guest with us and walk the routes. Eggs and friendships both happen at walking pace."
         ]
       }
@@ -139195,7 +139195,7 @@ const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "I walked this pass as a finalist thirty years ago. The mountain has not moved. Neither has my result, worse luck.",
-          "Past here the Pokemon stop being scenery and start being the exam."
+          "Past here the Kin stop being scenery and start being the exam."
         ]
       }
     ],
@@ -139332,7 +139332,7 @@ const MAPS6 = {
       {
         "x": 15,
         "y": 15,
-        "text": "MT. LASTLIGHT — The slopes. No signs past this one, no trails the mountain did not approve. The strongest wild Pokemon in Yamato keep these heights."
+        "text": "MT. LASTLIGHT — The slopes. No signs past this one, no trails the mountain did not approve. The strongest wild Kin in Yamato keep these heights."
       }
     ],
     "npcs": [
@@ -139347,7 +139347,7 @@ const MAPS6 = {
         "hair": "#5a3a2a",
         "dialogue": [
           "Thirty years I have lived on this slope, and the mountain has said perhaps eleven words to me.",
-          "Someone trains at the top. Has done for years. The Pokemon up there walk like soldiers and rest like kings."
+          "Someone trains at the top. Has done for years. The Kin up there walk like soldiers and rest like kings."
         ]
       }
     ],
@@ -140171,7 +140171,7 @@ const MAPS6 = {
         "hair": "#4a3a2a",
         "dialogue": [
           "Four hundred steps of stair, counting the ones that pretend not to be steps.",
-          "The lamp's partner Pokemon keeps the keeper company on storm nights. Everyone up here earns their keep."
+          "The lamp's partner Kin keeps the keeper company on storm nights. Everyone up here earns their keep."
         ]
       }
     ],
@@ -140510,7 +140510,7 @@ const MAPS7 = {
       {"x": 14, "y": 0, "to": {"map": "r101", "x": 12, "y": 14}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "PROF. BIRCH'S LAB — Rootlet's own Pokemon laboratory. Birch studies Pokemon where they actually live: outside."},
+      {"x": 2, "y": 5, "text": "PROF. BIRCH'S LAB — Rootlet's own Kin laboratory. Birch studies Kin where they actually live: outside."},
       {"x": 15, "y": 15, "text": "ROOTLET TOWN — A town that cannot be shaded any further. Route 101 runs north to Eldergrove."},
       {"x": 20, "y": 5, "text": "ROOTLET TOWN — North: ROUTE 101."},
       {"x": 3, "y": 9, "text": "ROOTLET TOWN — North: ROUTE 101."},
@@ -140630,7 +140630,7 @@ const MAPS7 = {
       {"x": 19, "y": 1, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
     ],
     "npcs": [
-      {"x": 11, "y": 6, "name": "WALLY’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Pokemon and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
+      {"x": 11, "y": 6, "name": "WALLY’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Kin and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
       {"x": 20, "y": 6, "name": "BALANCE KEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I trim the pond reeds to the same height on both banks. It matters. It does.", "Route 104's woods begin north of town. Mind the DOZSLOTH — they mind nothing."]},
       {"x": 10, "y": 14, "name": "FISHER LIO", "art": "fisher", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Pond fishing is patience practice. The gym is the exam.", "STRIDLET walk the surface here like it owes them money."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Meadowbrook Mart — woods-ready stock. Bug spray is a state of mind; we sell the other kind too."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
@@ -140683,12 +140683,12 @@ const MAPS7 = {
     ],
     "signs": [
       {"x": 2, "y": 5, "text": "COPPERTON CITY — The city that probes the integration of nature and science. Norwick Corporation keeps its headquarters on the north street."},
-      {"x": 24, "y": 4, "text": "NORWICK CORPORATION HQ — Makers of the PokeNav and half the instruments in Maris. Visitors mind the prototypes."},
+      {"x": 24, "y": 4, "text": "NORWICK CORPORATION HQ — Makers of the KinNav and half the instruments in Maris. Visitors mind the prototypes."},
       {"x": 28, "y": 13, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
       {"x": 9, "y": 14, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
     ],
     "npcs": [
-      {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Pokemon in this building. Twice. The paperwork was the hard part.", "Mr. Stone collects rare stones the way other presidents collect ties."]},
+      {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Kin in this building. Twice. The paperwork was the hard part.", "Mr. Stone collects rare stones the way other presidents collect ties."]},
       {"x": 18, "y": 11, "name": "CUTTER’S APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Cutter's house hands out field craft to anyone who asks nicely.", "Route 116 east ends at a tunnel the HUSHLET own. Bring earplugs and respect."]},
       {"x": 7, "y": 14, "name": "TRAINER SCHOOL KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Our teacher makes us battle the gym leader's portrait. It has never lost.", "Rock types run this town's gym AND its quarries. Copperton is honest about its geology."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Copperton Mart — company-town stock, company-town prices. The fossils are display only."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
@@ -140928,8 +140928,8 @@ const MAPS7 = {
       {"x": 13, "y": 12, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."}
     ],
     "npcs": [
-      {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Pokemon shone.", "My ROSEFAE has opinions about the hall's lighting. All of them correct."]},
-      {"x": 21, "y": 13, "name": "WALLY’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Pokemon and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
+      {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Kin shone.", "My ROSEFAE has opinions about the hall's lighting. All of them correct."]},
+      {"x": 21, "y": 13, "name": "WALLY’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Kin and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
       {"x": 8, "y": 14, "name": "GARDENER FENN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the wildflowers. The wildflowers were the point.", "Battle Tent hopefuls train on the north lawn at dawn. Quietly. It's Wildflower."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "roselia", "min": 214, "max": 220, "weight": 24}, {"species": "zigzagoon", "min": 214, "max": 220, "weight": 20}, {"species": "poochyena", "min": 214, "max": 220, "weight": 16}, {"species": "shroomish", "min": 215, "max": 221, "weight": 14}, {"species": "illumise", "min": 215, "max": 221, "weight": 8}, {"species": "volbeat", "min": 215, "max": 221, "weight": 8}, {"species": "skitty", "min": 215, "max": 220, "weight": 10}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
@@ -141180,7 +141180,7 @@ const MAPS7 = {
     ],
     "npcs": [
       {"x": 12, "y": 11, "name": "BUG CATCHER WREN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["SILKWURM by day, and the ponds keep their own hours.", "A PSYLET crossed here once. Once. I check every morning."]},
-      {"x": 20, "y": 6, "name": "LASS MIRA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Meadowbrook's gym leader is the calmest man in Maris. His Pokemon are not.", "First ponds, first ripples. Route 102 is where journeys get their feet wet."]},
+      {"x": 20, "y": 6, "name": "LASS MIRA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Meadowbrook's gym leader is the calmest man in Maris. His Kin are not.", "First ponds, first ripples. Route 102 is where journeys get their feet wet."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "zigzagoon", "min": 202, "max": 206, "weight": 24}, {"species": "poochyena", "min": 202, "max": 206, "weight": 22}, {"species": "wurmple", "min": 202, "max": 206, "weight": 18}, {"species": "lotad", "min": 203, "max": 207, "weight": 14}, {"species": "seedot", "min": 203, "max": 207, "weight": 10}, {"species": "surskit", "min": 203, "max": 207, "weight": 8}, {"species": "ralts", "min": 204, "max": 207, "weight": 4}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -141998,7 +141998,7 @@ const MAPS7 = {
       {"x": 24, "y": 9, "to": {"map": "rusturf-tunnel", "x": 4, "y": 12}},
     ],
     "signs": [
-      {"x": 23, "y": 7, "text": "COPPERBORE TUNNEL — Through the hill to Wildflower. The tunnel was a Pokemon’s home first and a road second."},
+      {"x": 23, "y": 7, "text": "COPPERBORE TUNNEL — Through the hill to Wildflower. The tunnel was a Kin’s home first and a road second."},
       {"x": 3, "y": 7, "text": "ROUTE 116 — Copperton to the tunnel hill. The woods thin, the hill thickens, the HUSHLET begin."},
     ],
     "npcs": [
@@ -142627,7 +142627,7 @@ const MAPS7 = {
       {"x": 9, "y": 11, "to": {"map": "littleroot", "x": 5, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "BIRCH'S FIELD BOARD — 'A Pokemon is not fully known until you have been muddy in its company.'"},
+      {"x": 8, "y": 2, "text": "BIRCH'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company.'"},
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor does fieldwork the way weather does rain: personally and everywhere.", "Habitat charts on every wall. The mud on the floor is also a chart, unofficially."]},
@@ -145774,8 +145774,8 @@ const MAPS8 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "Welcome to the Trial Palace! Here your Pokémon choose their own moves — we simply keep the gardens quiet for them.",
-          "Palace Maven Spencer believes a Pokémon's spirit speaks loudest uncommanded. Win your streaks and he will listen for yours."
+          "Welcome to the Trial Palace! Here your Kin choose their own moves — we simply keep the gardens quiet for them.",
+          "Palace Maven Spencer believes a Kin's spirit speaks loudest uncommanded. Win your streaks and he will listen for yours."
         ],
         "frontier": "palace"
       }
@@ -146221,7 +146221,7 @@ const MAPS9 = {
       {"x": 14, "y": 17, "to": {"map": "r219", "x": 12, "y": 1}},
     ],
     "signs": [
-      {"x": 1, "y": 3, "text": "PROF. ROWAN'S LAB — Borea's Pokemon research, run from this beach town. The Professor studies evolution and tolerates no nonsense about it."},
+      {"x": 1, "y": 3, "text": "PROF. ROWAN'S LAB — Borea's Kin research, run from this beach town. The Professor studies evolution and tolerates no nonsense about it."},
       {"x": 16, "y": 12, "text": "SHINGLE BEACH — The tide delivers shells, driftwood, and the occasional research assistant."},
       {"x": 7, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
       {"x": 10, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
@@ -146298,7 +146298,7 @@ const MAPS9 = {
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Revelry City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 11, "y": 7, "name": "BROADCAST INTERN VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I fetch coffee for people whose faces are on the building. The building is also their face. It's a lot.", "West gate: the causeway over the water to Bridgeport. East: Coalseam's smoke. North: flower country."]},
-      {"x": 18, "y": 12, "name": "CITY KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The condos have a hundred windows and every one has a Pokemon in it. I counted the lit ones.", "My NAPSEER teleports to school before I do. Every day. Show-off."]},
+      {"x": 18, "y": 12, "name": "CITY KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The condos have a hundred windows and every one has a Kin in it. I counted the lit ones.", "My NAPSEER teleports to school before I do. Every day. Show-off."]},
       {"x": 7, "y": 16, "name": "COMMUTER UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Coalseam miners, Bridgeport sailors, Honeyfield florists — this city's platforms hold all of Borea at rush hour.", "The TV station lets visitors watch a recording. The cameras are kind. Mostly."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "starly", "min": 306, "max": 311, "weight": 26}, {"species": "bidoof", "min": 306, "max": 311, "weight": 22}, {"species": "shinx", "min": 307, "max": 312, "weight": 18}, {"species": "abra", "min": 308, "max": 313, "weight": 8}, {"species": "bidoof", "min": 306, "max": 310, "weight": 10}], "water": [{"species": "tentacool", "min": 306, "max": 311, "weight": 30}, {"species": "magikarp", "min": 306, "max": 310, "weight": 26}], "waterRate": 0.08},
@@ -146529,9 +146529,9 @@ const MAPS9 = {
     ],
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Inglenook City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Pokemon shone.", "Fantina judges the gym AND half the contests. The city runs on her standards and her accent."]},
+      {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Kin shone.", "Fantina judges the gym AND half the contests. The city runs on her standards and her accent."]},
       {"x": 19, "y": 13, "name": "POFFIN COOK MASA", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries in, poffins out, patience throughout. The house by the square takes apprentices.", "Repose is north past the Forsaken Tower. Mind the tower's quiet; it minds you."]},
-      {"x": 8, "y": 16, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Amity's lawns are for strolling pairs. The Pokemon choose the route; we keep the gates.", "West road runs to the mountain's south door. South, Route 212 heads for the marsh country."]},
+      {"x": 8, "y": 16, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Amity's lawns are for strolling pairs. The Kin choose the route; we keep the gates.", "West road runs to the mountain's south door. South, Route 212 heads for the marsh country."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "buneary", "min": 326, "max": 332, "weight": 22}, {"species": "cleffa", "min": 326, "max": 331, "weight": 14}, {"species": "clefairy", "min": 327, "max": 332, "weight": 12}, {"species": "happiny", "min": 327, "max": 332, "weight": 6}, {"species": "chatot", "min": 327, "max": 333, "weight": 12}, {"species": "staravia", "min": 326, "max": 332, "weight": 16}], "water": [{"species": "magikarp", "min": 325, "max": 330, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -147493,7 +147493,7 @@ const MAPS9 = {
       {"x": 8, "y": 2, "text": "VALLEY GALEWORKS — Control room. The turbines outside argue with the wind; this room keeps score."},
     ],
     "npcs": [
-      {"x": 9, "y": 4, "name": "WORKS CLERK", "art": "clerk", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Power for three towns runs through this room and one very patient kettle.", "A round, drifting Pokemon naps by the turbines some days. It signs the guest book as WEATHER."]},
+      {"x": 9, "y": 4, "name": "WORKS CLERK", "art": "clerk", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Power for three towns runs through this room and one very patient kettle.", "A round, drifting Kin naps by the turbines some days. It signs the guest book as WEATHER."]},
     ],
     "encounters": null,
     "items": [],
@@ -147815,7 +147815,7 @@ const MAPS9 = {
       {"x": 12, "y": 13, "to": {"map": "hearthome", "x": 6, "y": 1}},
     ],
     "signs": [
-      {"x": 12, "y": 5, "text": "KINDRED SQUARE — Lawns for strolling pairs. The Pokemon choose the route; the wardens keep the gates and the lemonade."},
+      {"x": 12, "y": 5, "text": "KINDRED SQUARE — Lawns for strolling pairs. The Kin choose the route; the wardens keep the gates and the lemonade."},
     ],
     "npcs": [
       {"x": 14, "y": 8, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North lawn for the shy ones, south lawn for the show-offs. Both lawns are correct.", "A MOONMOTE walked me in a circle for an hour last spring. Best hour of the year."]},
@@ -148333,7 +148333,7 @@ const MAPS9 = {
       {"x": 9, "y": 11, "to": {"map": "sandgem", "x": 5, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "ROWAN'S FIELD BOARD — 'A Pokemon is not fully known until you have been muddy in its company. Evolution is not an ending; it is a question.'"},
+      {"x": 8, "y": 2, "text": "ROWAN'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company. Evolution is not an ending; it is a question.'"},
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "PROF. ROWAN’S AIDE", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Borea's species, catalogued from this room. The other seven percent are being difficult on purpose."]},
@@ -151750,10 +151750,10 @@ const INTRO_SCRIPT = {
   professor: 'PROF. HAWTHORN',
   lines: [
     'Ah — you made it. I was starting to worry the alarm won again.',
-    'Welcome to the world of Pokemon! My name is Hawthorn. I study how Pokemon and people grow together.',
+    'Welcome to the world of Kin! My name is Hawthorn. I study how Kin and people grow together.',
     'You must be {player}. That spark in your eyes — you are ready for the road.',
     'Now then... every trainer begins with a partner. But I have a confession.',
-    'The three young Pokemon I set aside for new trainers... they have already found homes this morning.',
+    'The three young Kin I set aside for new trainers... they have already found homes this morning.',
     'There is one left. A difficult one. It has opinions, and it has already shocked two of my aides today.',
   ],
   starterMoment: [
@@ -151761,7 +151761,7 @@ const INTRO_SCRIPT = {
     '...It shocked you too! Ha! That means it likes you. Mostly.',
     'Listen well: this one will never stay inside a Capture Orb. It walks beside you, or not at all.',
     'A bond like that is rarer than any badge. Treat it well, {player}.',
-    'Your journey starts on Route 1, north of Dawnwick. Catch Pokemon, grow strong — and when you are ready, Flintridge Gym awaits.',
+    'Your journey starts on Route 1, north of Dawnwick. Catch Kin, grow strong — and when you are ready, Flintridge Gym awaits.',
   ],
 };
 
@@ -151794,7 +151794,7 @@ const GYM_WIN_TEXT = [
 
 const SLICE_CAPSTONE = [
   '{player} received the Boulder Badge!',
-  'With the Boulder Badge, your Pokemon will obey you, and your team hits a little harder.',
+  'With the Boulder Badge, your Kin will obey you, and your team hits a little harder.',
   '...To be continued. The road to Tidehaven City lies ahead — in the next chapter.',
 ];
 
@@ -151823,14 +151823,14 @@ const BOND_DIALOGUE = {
     // Crown League: at Close, the post-champion scene GAINS these
     // mutual-respect lines (the standard scene plays identically).
     championAfter: {
-      close: ['...You know what the worst part is? I am not even mad. Somewhere between Dawnwick and here, beating you stopped being the point.', 'Eevee decided, in the end — because YOU pushed us hard enough to need to. That is what rivals are FOR, I guess.', 'So. Champion {player}. Say it back to me when we are old — and I will say it first. That is my concession speech. Do not tell anyone.'],
+      close: ['...You know what the worst part is? I am not even mad. Somewhere between Dawnwick and here, beating you stopped being the point.', 'PRISMKIT decided, in the end — because YOU pushed us hard enough to need to. That is what rivals are FOR, I guess.', 'So. Champion {player}. Say it back to me when we are old — and I will say it first. That is my concession speech. Do not tell anyone.'],
     },
-    // Dawnwick lab small talk (the Eevee beat, shaded).
+    // Dawnwick lab small talk (the PRISMKIT beat, shaded).
     lab: {
-      cold: ['What are YOU staring at? Eevee and I have training to do. Some of us take this seriously.'],
-      wary: ['Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!', 'He says it will evolve to match how I battle. Just watch — we will be champions!'],
-      warm: ['Yo, {player}! Meet Eevee. Everyone keeps asking when it will evolve — like that is the whole point.', 'It will evolve when WE decide, not when a chart says. You get that, right? ...Course you do.'],
-      close: ['You came back to the lab too, huh. Eevee, look — it is the only other trainer on this road I actually respect.', 'Do not let it go to your head, {player}. I respect exactly one person and it is already too many.'],
+      cold: ['What are YOU staring at? PRISMKIT and I have training to do. Some of us take this seriously.'],
+      wary: ['Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!', 'He says it will evolve to match how I battle. Just watch — we will be champions!'],
+      warm: ['Yo, {player}! Meet PRISMKIT. Everyone keeps asking when it will evolve — like that is the whole point.', 'It will evolve when WE decide, not when a chart says. You get that, right? ...Course you do.'],
+      close: ['You came back to the lab too, huh. PRISMKIT, look — it is the only other trainer on this road I actually respect.', 'Do not let it go to your head, {player}. I respect exactly one person and it is already too many.'],
     },
   },
   mom: {
@@ -151848,9 +151848,9 @@ const BOND_DIALOGUE = {
     // entry is never bond-gated); only the warmth of the delivery.
     rating: {
       cold: ['{n} caught. The data is the data, whatever either of us feels about it. Keep walking.'],
-      wary: ['{n} caught so far. The Pokedex fills one honest page at a time — keep going.'],
+      wary: ['{n} caught so far. The KinDex fills one honest page at a time — keep going.'],
       warm: ['{n} caught! Look at that. Every page of that dex is a place you stood and a creature that trusted you. Keep going!'],
-      close: ['{n} caught. Do you know, in forty years of handing out Pokedexes, yours is the one I check first in the morning. Whatever the number says — I am proud of the trainer carrying it.'],
+      close: ['{n} caught. Do you know, in forty years of handing out KinDexes, yours is the one I check first in the morning. Whatever the number says — I am proud of the trainer carrying it.'],
     },
   },
   brock: {
@@ -151915,15 +151915,15 @@ const BOND_DIALOGUE = {
 // ---- src/data/rivals.mjs ----
 // rivals.mjs — rival data + the documented Yellow partner-evolution rule.
 // Mechanics reimplemented from documentation (never ROM-derived). The rival
-// raises an EEVEE as his partner (Yellow), not a Arden starter; which form it
-// takes is decided by the early rivalry record. Species data for Eevee and its
+// raises a PRISMKIT as his partner (Yellow), not a Arden starter; which form it
+// takes is decided by the early rivalry record. Species data for PRISMKIT and its
 // evolutions lands with the act that first fields them (ADR-006 content tiers).
 
 const RIVALS = {
   gary: {
     id: 'gary',
     name: 'GARY',
-    partner: 'eevee', // Yellow: the rival's starter is an Eevee
+    partner: 'eevee', // Yellow: the rival's starter is a PRISMKIT
     // Team plans per act reference species ids; acts beyond Arden resolve
     // partner -> rivalPartnerEvolution(earlyWins, earlyLosses) at build time.
     acts: {
@@ -151934,14 +151934,14 @@ const RIVALS = {
   },
 };
 
-// Yellow's documented rule: the rival's Eevee evolves by how the first two
-// rivalry battles went — won both -> Vaporeon, split -> Flareon, lost both
-// -> Jolteon. Pure function; the act builders call it when scripting the
+// Yellow's documented rule: the rival's PRISMKIT evolves by how the first two
+// rivalry battles went — won both -> OTTERSAIL, split -> KINDLEON, lost both
+// -> SPARKHARE. Pure function; the act builders call it when scripting the
 // evolution beat.
 function rivalPartnerEvolution(earlyWins, earlyLosses) {
   if (earlyWins >= 2 && earlyLosses === 0) return 'vaporeon';
   if (earlyWins === 1 && earlyLosses === 1) return 'flareon';
-  return 'jolteon'; // losing record (incl. 0-2) -> Jolteon
+  return 'jolteon'; // losing record (incl. 0-2) -> SPARKHARE
 }
 
 
@@ -152227,7 +152227,7 @@ const ARCS = [
     ],
     hookLines: [
       'Word travels fast on the sea roads: a whole region across the water is in a strange mood — its land and ocean arguing through two old teams.',
-      'Maris, they call it. New Pokemon, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
+      'Maris, they call it. New Kin, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
       'The Arcport ferry runs that way. Pack for rain AND for drought; Maris cannot decide either.',
     ],
     enRouteLines: [
@@ -152603,8 +152603,8 @@ const MAIN_QUESTS = [
   { id: 'q_celadon', flag: 'reached_celadon', text: 'Reach Canopy City', hint: 'The department-store city lies west. The road bends past Hushmoor Town — mind the tower’s shadow.' },
   { id: 'q_rainbow', flag: 'badge_rainbow', text: 'Win the Rainbow Badge in Canopy City', hint: 'Erika’s Grass types wilt under Fire, Ice, and Flying moves.' },
   { id: 'q_scope', flag: 'scope_done', text: 'Infiltrate the Game Corner and recover the Vantage Scope', hint: 'That poster in the Game Corner is hiding something. Whatever is underneath it took the Scope — take it back.' },
-  { id: 'q_flute', flag: 'flute_got', text: 'Climb Hushmoor Tower and earn the Poke Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
-  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping NAPPASAUR', hint: 'The Poke Flute’s tune is the only alarm clock a NAPPASAUR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
+  { id: 'q_flute', flag: 'flute_got', text: 'Climb Hushmoor Tower and earn the Kin Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
+  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping NAPPASAUR', hint: 'The Kin Flute’s tune is the only alarm clock a NAPPASAUR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
   { id: 'q_soul', flag: 'badge_soul', text: 'Win the Soul Badge in Bramble City', hint: 'Koga’s Poison types and invisible walls reward patience. Ground and Psychic moves help.' },
   { id: 'q_silph', flag: 'silph_done', text: 'Liberate Vantage Co. in Farsight City', hint: 'Eleven floors of trouble, and the president is held on the top one. Find the card key and climb.' },
   { id: 'q_marsh', flag: 'badge_marsh', text: 'Win the Marsh Badge in Farsight City', hint: 'Sabrina’s Psychic types hit like prophecy. Bug, Ghost, and Dark moves are your friends.' },
@@ -152615,7 +152615,7 @@ const MAIN_QUESTS = [
   { id: 'q_league', flag: 'league_gate_passed', text: 'Pass the League gate on Route 23', hint: 'The guards check all eight badges. No exceptions, no shortcuts, no stories.' },
   { id: 'q_champion', flag: 'champion', text: 'Defeat the Elite Four and become Champion', hint: 'Four masters, then a face you know better than anyone. Heal between every door.' },
   { id: 'q_mewtwo', flag: 'mewtwo_done', text: 'Face what sleeps in Tidehaven Cave', hint: 'Post-game. The mansion journals pointed here all along. It has been waiting for someone strong enough.' },
-  { id: 'q_diploma', flag: 'diploma', text: 'Complete the Pokedex and claim your diploma', hint: 'Catch every species in Arden, then show Prof. Hawthorn a finished dex.' },
+  { id: 'q_diploma', flag: 'diploma', text: 'Complete the KinDex and claim your diploma', hint: 'Catch every species in Arden, then show Prof. Hawthorn a finished dex.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -152631,7 +152631,7 @@ const EVENTS = {
   // -- Tidehaven: Bill's Sea Cottage ---------------------------------------
   ev_bill: [
     { say: ['...Hello? Is someone there? Oh, thank goodness — a human. With hands. Hands are very important right now.'], who: 'BILL' },
-    { say: ['It is me. Bill. The researcher. And before you ask — yes, this small round Pokemon standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent MOONLET and one hundred percent embarrassed.'], who: 'BILL' },
+    { say: ['It is me. Bill. The researcher. And before you ask — yes, this small round Kin standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent MOONLET and one hundred percent embarrassed.'], who: 'BILL' },
     { say: ['The fix is on that terminal. Big friendly button. Press it, and try not to enjoy this too much.'], who: 'BILL' },
     { say: ['...And — THERE. Two legs, ten fingers, one dignity, slightly used. Bill is back!'], who: 'BILL' },
     { say: ['You saved my career and my afternoon, in that order. Take this — I get invited to a floating trainer party every year and I never go. A spare ticket for the St. Anne, docked in Arcport.', 'Go. Mingle. Battle someone who owns a butler. You have earned it.'], who: 'BILL' },
@@ -152645,9 +152645,9 @@ const EVENTS = {
     { say: ['Well, well. Look who finally crawled out of Mt. Lunestone.'], who: 'GARY' },
     { say: ['I was just up at that cottage on the cape. The researcher there let me scroll his whole database — some of us get the guided tour, {player}.'], who: 'GARY' },
     { say: ['Badges? Funny you should ask. Two already. I would show them off, but the glare might sting your eyes.'], who: 'GARY' },
-    { say: ['And this — this is Eevee. Everyone keeps asking why it has not evolved yet.', 'Because I am saving it. Evolution is a promise you make exactly once. When mine happens, it is going to mean something.'], who: 'GARY' },
-    { choice: { npc: 'gary', who: 'GARY', prompt: 'Eevee looks at you, head tilted. You —', options: [
-      { label: 'Ask what Eevee wants', delta: 2, say: ['...What Eevee wants? Nobody asks that. They ask what it will BECOME.', 'Huh. It wants to win, obviously. Like me. ...Thanks for asking, I guess. Do not make it weird.'] },
+    { say: ['And this — this is PRISMKIT. Everyone keeps asking why it has not evolved yet.', 'Because I am saving it. Evolution is a promise you make exactly once. When mine happens, it is going to mean something.'], who: 'GARY' },
+    { choice: { npc: 'gary', who: 'GARY', prompt: 'PRISMKIT looks at you, head tilted. You —', options: [
+      { label: 'Ask what PRISMKIT wants', delta: 2, say: ['...What PRISMKIT wants? Nobody asks that. They ask what it will BECOME.', 'Huh. It wants to win, obviously. Like me. ...Thanks for asking, I guess. Do not make it weird.'] },
       { label: 'Laugh at the speech', delta: -1, say: ['Oh, REAL mature, {player}. Laugh it up. In about ten minutes one of us is going to look extremely stupid, and it is not the one with two badges.'] },
       { label: 'Say nothing', delta: 0, say: ['...Yeah. You get it. Enough talk, then.'] },
     ] } },
@@ -152669,7 +152669,7 @@ const EVENTS = {
   // -- St. Anne: the duo, in "disguise" -------------------------------------
   ev_duo_stanne: [
     { say: ['Two waiters approach your table. One has a moustache that is clearly drawn on. The other is wearing his apron upside down.'], who: 'NARRATOR' },
-    { say: ['Bonjour! We are ze waiters, here to — how you say — wait upon you. And inspect your Pokemon. For health reasons. Ze health reasons are very strict.'], who: 'RUE' },
+    { say: ['Bonjour! We are ze waiters, here to — how you say — wait upon you. And inspect your Kin. For health reasons. Ze health reasons are very strict.'], who: 'RUE' },
     { say: ['Rue. The accent. Maybe... less accent.'], who: 'COLE' },
     { say: ['I am IN CHARACTER, Cole.'], who: 'RUE' },
     { say: ['You are holding the menu upside down.'], who: 'COLE' },
@@ -152701,7 +152701,7 @@ const EVENTS = {
   ev_scope_boss: [
     { say: ['A voice crackles out of a ceiling speaker — calm, amused, and nowhere near this room in person.'], who: 'NARRATOR' },
     { say: ['So. You are the little storm rattling my Game Corner.', 'Every coin in every slot upstairs paid for this operation, child. And the one thing I keep down here, you have come to steal. I almost admire the efficiency.'], who: 'THE BOSS (speaker)' },
-    { say: ['The Vantage Scope is in the keeping of my best administrator. Take it from him — if your Pokemon have the stomach for it.'], who: 'THE BOSS (speaker)' },
+    { say: ['The Vantage Scope is in the keeping of my best administrator. Take it from him — if your Kin have the stomach for it.'], who: 'THE BOSS (speaker)' },
     { battle: 'rocket_admin_hideout' },
     { say: ['...Impressive. ANNOYING, but impressive. The Scope is yours.', 'A word of advice, free of charge: stop digging. The tower in Hushmoor Town has nothing you want to see clearly.'], who: 'THE BOSS (speaker)' },
     { give: { items: { silphscope: 1 }, text: 'Vantage Scope' } },
@@ -152737,7 +152737,7 @@ const EVENTS = {
     { say: ['Ah... thank you, young one. They wanted this tower emptied, so that no one would ask what was taken from it. Greed makes such loud ghosts.'], who: 'MR. FUJI' },
     { say: ['You climbed all this way for the lost one below, not for glory. I saw her light rise, you know. First time in years this tower has felt like a beginning instead of an ending.'], who: 'MR. FUJI' },
     { say: ['Take my flute. Its song is older than the tower — sleeping things hear it the way children hear a parent calling them home. Use it kindly.'], who: 'MR. FUJI' },
-    { give: { items: { pokeflute: 1 }, text: 'Poke Flute' } },
+    { give: { items: { pokeflute: 1 }, text: 'Kin Flute' } },
     { flag: 'flute_got' },
     { questDone: 'q_flute' },
   ],
@@ -152745,7 +152745,7 @@ const EVENTS = {
   // -- The two NAPPASAUR (engine pre-checks pokeflute in bag) ------------------
   ev_snorlax_east: [
     { say: ['The path simply... ends. In fur. A mountain that breathes — in, out, in, out — directly on top of Route 12.'], who: 'NARRATOR' },
-    { say: ['You raise the Poke Flute. The first notes wobble across the water. The mountain does not approve of being woken. Or of your technique.'], who: 'NARRATOR' },
+    { say: ['You raise the Kin Flute. The first notes wobble across the water. The mountain does not approve of being woken. Or of your technique.'], who: 'NARRATOR' },
     { wildBattle: { species: 'snorlax', level: 30 } },
     { flag: 'snorlax_east' },
     { flag: 'snorlax_done' },
@@ -152767,7 +152767,7 @@ const EVENTS = {
   ev_silph_rival: [
     { say: ['{player}?! What are YOU doing on the eighth floor of a hostage situation?'], who: 'GARY' },
     { say: ['Do not give me that look. I smelled something rotten in Farsight and followed it up the elevator. Say what you want about me — even I do not let uniforms in matching shirts bully a whole company.'], who: 'GARY' },
-    { say: ['And before you ask: yes, Eevee is still Eevee. Still saving it. When it changes, it will be because WE decided. Nobody else.'], who: 'GARY' },
+    { say: ['And before you ask: yes, PRISMKIT is still PRISMKIT. Still saving it. When it changes, it will be because WE decided. Nobody else.'], who: 'GARY' },
     { choice: { npc: 'gary', who: 'GARY', prompt: 'He is grinning like this is a game. It is not a game. You —', options: [
       { label: 'Admit you followed the same smell', delta: 1, say: ['HA! Knew it. Two noses, one rotten building. That is us all over, {player} — everyone else smells flowers, we smell a fight.'] },
       { label: 'Tell him to stay out of your way', delta: -1, say: ['...Wow. Okay. Message received, hero. Do not come crying to the elevator when the top floor eats you.'] },
@@ -152842,7 +152842,7 @@ const EVENTS = {
     { say: ['Outside, the storm finds its voice all at once. Below the cliffs something enormous turns in the water — older than the castle, and angry at being woken for a party trick.'], who: 'NARRATOR' },
     { say: ['A serving hatch BURSTS open. Two very damp "waiters" tumble out, trailing seaweed and one (1) stolen tray of hors d’oeuvres.'], who: 'NARRATOR' },
     { say: ['Nobody move! This fortress of evil is now under the jurisdiction of— uh...'], who: 'RUE' },
-    { say: ['Rue. Rue, read the room. We are surrounded by legend-class Pokemon and a man in a machine. Read. The. Room.'], who: 'COLE' },
+    { say: ['Rue. Rue, read the room. We are surrounded by legend-class Kin and a man in a machine. Read. The. Room.'], who: 'COLE' },
     { say: ['...We will be over here. Quietly. Stealing NOTHING. For once, the show is bigger than the theft.'], who: 'RUE' },
     { choice: { npc: ['rue', 'cole'], who: 'COLE', prompt: 'Across the hall, the duo watches you face the storm. You —', options: [
       { label: 'Nod to them. Partners, this once.', delta: 1, say: ['Rue nods back, slow and solemn, like a general at a treaty signing. Cole is already crying a little. "We are part of history," he whispers. "Terrible, damp history."'] },
@@ -152863,7 +152863,7 @@ const EVENTS = {
   ev_rival_route22: [
     { say: ['Knew I would find you here, {player}. Route 22 — where big talk goes to get measured.'], who: 'GARY' },
     { say: ['The League gate is just ahead, and I am NOT letting you walk through it first. Everything since Dawnwick comes down to who is still standing after this.'], who: 'GARY' },
-    { say: ['And before you ask — yes, Eevee is still Eevee. I am saving its evolution for the League itself. When the whole region is watching. It deserves an entrance.'], who: 'GARY' },
+    { say: ['And before you ask — yes, PRISMKIT is still PRISMKIT. I am saving its evolution for the League itself. When the whole region is watching. It deserves an entrance.'], who: 'GARY' },
     { choice: { npc: 'gary', who: 'GARY', prompt: 'The League gate glitters at the top of the road. You —', options: [
       { label: 'Wish him luck — and mean it', delta: 1, say: ['...Luck. HAH. I do not need— ...yeah. Yeah, okay. You too, {player}. Mean it back. Do not waste it.'] },
       { label: 'Promise to end his run here', delta: -1, say: ['Big words. You have been promising that since Dawnwick, and somehow we are BOTH still standing. Make it count this time.'] },
@@ -152961,7 +152961,7 @@ const EVENTS = {
 
   // -- Starter gifts (anime beats, condensed) ----------------------------------------------
   ev_bulbasaur_gift: [
-    { say: ['Oh! Careful where you step, dear — the seedlings are sleeping. I keep this garden as a haven, for Pokemon who needed somewhere quiet to land.'], who: 'CARETAKER' },
+    { say: ['Oh! Careful where you step, dear — the seedlings are sleeping. I keep this garden as a haven, for Kin who needed somewhere quiet to land.'], who: 'CARETAKER' },
     { say: ['That BUDDIN has watched you since the gate. It is shy with people... WAS shy with people. It just planted itself squarely in your path — which, for that one, is a whole speech.'], who: 'CARETAKER' },
     { say: ['It wants to see the world that made you kind enough to stop for a garden. Will you take it with you? Treat it gently — it bruises like fruit and forgives like family.'], who: 'CARETAKER' },
     { giveMon: { species: 'bulbasaur', level: 10 } },
@@ -152995,7 +152995,7 @@ const EVENTS = {
     { say: ['Your PRISMWING is watching them. So is another — one it met on this very shore, whose wing pattern it has been quietly dreamy about for days.'], who: 'NARRATOR' },
     { say: ['This is the part of the journey nobody warns you about. Loving something sometimes means opening your hands.'], who: 'NARRATOR' },
     { say: ['Your PRISMWING looks back once — one long look, full of every battle and every berry — then lifts into the gold of the sky. Two wings become four, become a hundred, become gone.'], who: 'NARRATOR' },
-    { say: ['Its page in your dex does not close. From today, it is marked CHERISHED. Some Pokemon you keep. This one, you carry.'], who: 'NARRATOR' },
+    { say: ['Its page in your dex does not close. From today, it is marked CHERISHED. Some Kin you keep. This one, you carry.'], who: 'NARRATOR' },
     { flag: 'butterfree_released' },
     { toast: 'PRISMWING flew to its future.' },
   ],
@@ -153006,7 +153006,7 @@ const PRISMWING_EVENT = EVENTS.ev_butterfree;
 
 // The professor’s verdict on a certain herd. (Engine: shown when the player
 // has caught 5+ tauros.)
-const BOVARCH_LINE = 'Five BOVARCH. FIVE. {player}, the ranch hand has started billing me for their catering. Wonderful Pokemon. Terrifying grocery bill.';
+const BOVARCH_LINE = 'Five BOVARCH. FIVE. {player}, the ranch hand has started billing me for their catering. Wonderful Kin. Terrifying grocery bill.';
 
 // ---------------------------------------------------------------------------
 // LEGENDARY_ARCS — every legendary/mythical gets a side arc with quest-log
@@ -153034,7 +153034,7 @@ const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the scorched inscription on Crown Road', flag: 'arc_moltres_found' },
       { text: 'Reach the ember chamber', flag: 'arc_moltres_chamber' },
-      { text: 'Face Moltres, level 50', catch: 'moltres' },
+      { text: 'Face PYREHAWK, level 50', catch: 'moltres' },
     ],
     lair: 'victoryroad',
   },
@@ -153044,7 +153044,7 @@ const LEGENDARY_ARCS = {
     steps: [
       { text: 'Cross the frozen currents of the Rime Islands', flag: 'arc_articuno_found' },
       { text: 'Read the frost-etched plate', flag: 'arc_articuno_plate' },
-      { text: 'Face Articuno, level 50', catch: 'articuno' },
+      { text: 'Face GLACIERNE, level 50', catch: 'articuno' },
     ],
     lair: 'seafoamislands',
   },
@@ -153087,7 +153087,7 @@ const LEGENDARY_ARCS = {
       { text: 'Hear the tower’s history from Lantern’s elders', flag: 'hooh_history' },
       { text: 'Receive the Clear Bell from the Kimono sisters', flag: 'hooh_bell_received' },
       { text: 'Climb the Chime Tower at dawn', flag: 'hooh_summit' },
-      { text: 'Face Ho-Oh, level 182', catch: 'hooh' },
+      { text: 'Face IRISAVIS, level 182', catch: 'hooh' },
     ],
     lair: 'bell-tower',
   },
@@ -153096,10 +153096,10 @@ const LEGENDARY_ARCS = {
     prereq: { arcs: ['arc_zapdos', 'arc_moltres', 'arc_articuno'] },
     hook: 'When the three birds of Arden are gathered, an old melody surfaces — the sea guardian only answers those who have met its storms.',
     steps: [
-      { text: 'Catch FULMINIS, Moltres, and Articuno', flag: 'birds_caught' },
+      { text: 'Catch FULMINIS, PYREHAWK, and GLACIERNE', flag: 'birds_caught' },
       { text: 'Receive the Silver Wing at the Maelstrom Islands' },
       { text: 'Descend to the deepest waterfall chamber' },
-      { text: 'Face Lugia, level 70', catch: 'lugia' },
+      { text: 'Face ABYSSORN, level 70', catch: 'lugia' },
     ],
     lair: 'whirlislands',
   },
@@ -153110,7 +153110,7 @@ const LEGENDARY_ARCS = {
       { text: 'Return the lost POSTDUCK to the charcoal maker' },
       { text: 'Receive the GS Orb from a grateful craftsman' },
       { text: 'Place the GS Orb at the forest shrine' },
-      { text: 'Meet Celebi where the forest remembers', catch: 'celebi' },
+      { text: 'Meet CHRONOFAE where the forest remembers', catch: 'celebi' },
     ],
     lair: 'ilexforest',
   },
@@ -153468,7 +153468,7 @@ const LEGENDARY_ARCS = {
   },
   arc_volcanion: {
     id: 'arc_volcanion', title: 'The Steam of the Nebel Plateau', species: 'volcanion', region: 'Kalos', designedOnly: true,
-    hook: 'Hunters who poach the plateau’s Pokemon keep coming down the mountain missing their traps — and smelling of boiled rain.',
+    hook: 'Hunters who poach the plateau’s Kin keep coming down the mountain missing their traps — and smelling of boiled rain.',
     steps: [
       { text: 'Drive the poachers off the Nebel Plateau' },
       { text: 'Follow the steam vent trail' },
@@ -153480,7 +153480,7 @@ const LEGENDARY_ARCS = {
   // ---- Alola (designed) ----------------------------------------------------------------
   arc_solgaleo: {
     id: 'arc_solgaleo', title: 'The Child of the Stars, Sun', species: 'solgaleo', region: 'Alola', designedOnly: true,
-    hook: 'A strange little nebula of a Pokemon has fallen into your life, and every old altar in Alola is suddenly relevant.',
+    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Alola is suddenly relevant.',
     steps: [
       { text: 'Raise the Cosmog the professor rescued', flag: 'cosmog_raised' },
       { text: 'Sound the Sun Flute at the Altar of the Sunne' },
@@ -153490,7 +153490,7 @@ const LEGENDARY_ARCS = {
   },
   arc_lunala: {
     id: 'arc_lunala', title: 'The Child of the Stars, Moon', species: 'lunala', region: 'Alola', designedOnly: true,
-    hook: 'A strange little nebula of a Pokemon has fallen into your life, and every old altar in Alola is suddenly relevant.',
+    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Alola is suddenly relevant.',
     steps: [
       { text: 'Raise the Cosmog the professor rescued', flag: 'cosmog_raised' },
       { text: 'Sound the Moon Flute at the Altar of the Moone' },
@@ -153522,7 +153522,7 @@ const LEGENDARY_ARCS = {
     id: 'arc_marshadow', title: 'The Shadow in Your Shadow', species: 'marshadow', region: 'Alola', designedOnly: true,
     hook: 'Trainers who have glimpsed the rainbow-winged one sometimes report a second shadow at their feet. It is studying your fighting spirit.',
     steps: [
-      { text: 'Be witnessed by Ho-Oh’s rainbow', flag: 'rainbow_witnessed' },
+      { text: 'Be witnessed by IRISAVIS’s rainbow', flag: 'rainbow_witnessed' },
       { text: 'Prove your spirit in three dojos' },
       { text: 'Face Marshadow, level 70', catch: 'marshadow' },
     ],
@@ -153676,7 +153676,7 @@ const CREDITS_LINES = [
 // canon (ADR-015); ALL dialogue/copy is original writing in the anime's
 // spirit — no quoted or closely-paraphrased anime/game lines.
 //
-// Structured for O3 to APPEND: the Lugia / Pokemon 2000 stages join
+// Structured for O3 to APPEND: the ABYSSORN / Pokemon 2000 stages join
 // ORANGE_QUESTS and ORANGE_EVENTS below the marked seam — nothing here
 // needs reshaping when they land.
 //
@@ -153701,7 +153701,7 @@ const ORANGE_QUESTS = [
   { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Orb from Prof. Ivy on Marisol Island', hint: 'Professor Ivy\'s lab stands at the north edge of Marisol. The ball on her pedestal has defeated every machine she owns.' },
   { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Amber Crew badges', hint: 'Cissy on Tangelo, Danny on Pomelo, Rudy on Reefside, Luana on Calamondin. Each leader tests something before the battle — that is the Amber way.', badgeCount: true },
   { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Grapefruit Stadium and win the Amber League', hint: 'Four island badges open the stadium doors. Drake, the Amber League champion, waits inside with six partners and no intention of moving.' },
-  // --- O3 APPEND SEAM: the Lugia / 2000 stages join here. ---
+  // --- O3 APPEND SEAM: the ABYSSORN / 2000 stages join here. ---
   // The storm chain is chronology-true mid-arc content (it unlocks at
   // 2 Amber badges — see the sysLoadMap gate in overworld-systems)
   // but APPENDS after the League stage: it is never a gym blocker,
@@ -153709,7 +153709,7 @@ const ORANGE_QUESTS = [
   // tracks titans calmed n/3 (titanCount — the Quest Log and the HUD
   // objective count the orange_2000_<bird> flags, the badgeCount
   // idiom carried to flags).
-  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm Moltres, FULMINIS and Articuno at their shrine caves (any order), then return to Sanctum Shrine — DOZECROWN counsels from its rock on Sanctum\'s west shore.' },
+  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm PYREHAWK, FULMINIS and GLACIERNE at their shrine caves (any order), then return to Sanctum Shrine — DOZECROWN counsels from its rock on Sanctum\'s west shore.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -153833,7 +153833,7 @@ const ORANGE_EVENTS = {
   ],
 
   // =====================================================================
-  // Stage O3 — Pokemon 2000: the Sanctum climax + the Lugia arc.
+  // Stage O3 — Pokemon 2000: the Sanctum climax + the ABYSSORN arc.
   // The antagonist is an ORIGINAL character: Vance Halloway, a wealthy
   // sky-collector who cages wonders for a frozen menagerie he calls
   // the Still Sky Collection. He is not a renamed film character and
@@ -153873,9 +153873,9 @@ const ORANGE_EVENTS = {
     { say: ['The shrine niche is wrapped in bars of hard light, humming — Halloway\'s cage, sunk into the old stone like a fence into a grave. Behind it, the kind fires have gone white and furious, and the heat coming off the altar has a heartbeat.'], who: 'NARRATOR' },
     { say: ['You work the cage the only way cages understand. Stone chips. Light cracks — and the shrine\'s tenant answers the noise the way it has answered everything for a thousand years: all at once, and on fire.'], who: 'NARRATOR' },
     { wildBattle: { species: 'moltres', level: 50, uncatchable: true } },
-    { say: ['The great wings fold. The white rage banks down to ember, to glow, to the warm breathing dark the cave remembers. Moltres regards you for a long moment — then the cave roof is sky, and it is gone into the clearing south wind, free and unhurried.'], who: 'NARRATOR' },
+    { say: ['The great wings fold. The white rage banks down to ember, to glow, to the warm breathing dark the cave remembers. PYREHAWK regards you for a long moment — then the cave roof is sky, and it is gone into the clearing south wind, free and unhurried.'], who: 'NARRATOR' },
     { flag: 'orange_2000_moltres' },
-    { toast: 'Moltres is calmed. The southern storm cell breaks.' },
+    { toast: 'PYREHAWK is calmed. The southern storm cell breaks.' },
   ],
 
   ev_orange_2000_zapdos: [
@@ -153889,14 +153889,14 @@ const ORANGE_EVENTS = {
 
   ev_orange_2000_articuno: [
     { say: ['The cage bars are rimes of black ice over hard light, and the shrine\'s frozen offerings hang mid-gesture inside it, preserved like flies in amber. Halloway would call that a preview. The cold coming through the bars has an opinion of its own.'], who: 'NARRATOR' },
-    { say: ['The cage shatters outward in a ring of snow that never touches you. Articuno unfolds from the shrine the way winter unfolds from a mountain: slowly, beautifully, and with complete indifference to your plans.'], who: 'NARRATOR' },
+    { say: ['The cage shatters outward in a ring of snow that never touches you. GLACIERNE unfolds from the shrine the way winter unfolds from a mountain: slowly, beautifully, and with complete indifference to your plans.'], who: 'NARRATOR' },
     { wildBattle: { species: 'articuno', level: 50, uncatchable: true } },
-    { say: ['The vast wings settle. Frost flowers close like eyes. Articuno bows its head — a fraction, no more than courtesy owes — and lifts away north over water that has stopped arguing with itself. One storm remains, and it is the one in the middle.'], who: 'NARRATOR' },
+    { say: ['The vast wings settle. Frost flowers close like eyes. GLACIERNE bows its head — a fraction, no more than courtesy owes — and lifts away north over water that has stopped arguing with itself. One storm remains, and it is the one in the middle.'], who: 'NARRATOR' },
     { flag: 'orange_2000_articuno' },
-    { toast: 'Articuno is calmed. The northern storm cell breaks.' },
+    { toast: 'GLACIERNE is calmed. The northern storm cell breaks.' },
   ],
 
-  // -- The Lugia climax (Sanctum Shrine entry at 3/3 titans calmed;
+  // -- The ABYSSORN climax (Sanctum Shrine entry at 3/3 titans calmed;
   //    sysLoadMap gate. The proving is a straight win — the shipped
   //    event idiom — fought UNcatchable at the deep altar.) ------------
   ev_orange_2000_climax: [
@@ -153908,7 +153908,7 @@ const ORANGE_EVENTS = {
     { warp: { map: 'shamouti-deep', x: 7, y: 10 } },
     { say: ['It rises the way the tide rises: not fast, not slow — inevitably. Wings like white headlands. Eyes that have watched ten thousand festivals and every storm since the first one. The guardian of the sea does not rage. It MEASURES. The one who calmed the titans will be tested the way the sea tests everything: completely.'], who: 'NARRATOR' },
     { wildBattle: { species: 'lugia', level: 55, uncatchable: true } },
-    { say: ['Lugia folds its wings. The proving is over — and somewhere far above, audible even here, the storm simply... stops. Rain first, then wind, then the long grinding argument of the currents, settling one by one into their old, kind roads.'], who: 'NARRATOR' },
+    { say: ['ABYSSORN folds its wings. The proving is over — and somewhere far above, audible even here, the storm simply... stops. Rain first, then wind, then the long grinding argument of the currents, settling one by one into their old, kind roads.'], who: 'NARRATOR' },
     { say: ['Halloway\'s barge comes down in the harbour like a tired bird — cage swinging empty, lights drowned, engines full of seawater and second thoughts. Its owner stands on Sanctum\'s dock in the returning sunlight, holding his hat, looking at the calm he tried to steal and somehow helped to save.'], who: 'NARRATOR' },
     { say: ['...Stilled. All of it. And not one piece of it mine. Do you know, I believe that is the first honest thing the sea has ever said to me. Keep your guardian, island. Keep your storms. A collection, it turns out, is a poor substitute for a sky.'], who: 'VANCE HALLOWAY' },
     { flag: 'orange_2000_storm_stilled' },
@@ -153918,11 +153918,11 @@ const ORANGE_EVENTS = {
     { warp: { map: 'shamouti', x: 14, y: 14 } },
   ],
 
-  // -- The catch: Lugia waits at the deep altar (Sanctum Deep entry
+  // -- The catch: ABYSSORN waits at the deep altar (Sanctum Deep entry
   //    once the storm is stilled; sysLoadMap gate). Standard legendary
   //    pattern — Lv 55, CATCHABLE, and flee-safe per the Arden arc
   //    idiom: the runSteps guard completes the arc only on a clean
-  //    win, so a flee (or a loss) leaves Lugia waiting and the event
+  //    win, so a flee (or a loss) leaves ABYSSORN waiting and the event
   //    re-fires on the next descent. -------------------------------
   ev_orange_2000_lugia: [
     { say: ['The deep chamber is still as held breath. In the water-light at the altar, immense and patient, the guardian waits — not sleeping, not wary. Waiting the way the sea waits: because it can, and because you came back.'], who: 'NARRATOR' },
@@ -153938,7 +153938,7 @@ const ORANGE_EVENTS = {
 // ORANGE_LEGENDARY_ARCS — merged into LEGENDARY_ARCS by merge.mjs and
 // into the validator's quest table by gen-tables (the Arden table's
 // presentation: hook + requirement steps spelled out in the Quest
-// Log's LEGENDARY ARCS section). This is the Amber Lugia — a
+// Log's LEGENDARY ARCS section). This is the Amber ABYSSORN — a
 // DIFFERENT arc from the designed Yamato arc_lugia stub in
 // story-kanto (that arc's prereqs and lair are untouched).
 // ---------------------------------------------------------------------------
@@ -153948,11 +153948,11 @@ const ORANGE_LEGENDARY_ARCS = {
     hook: 'When the three titans raged over Sanctum, the sea\'s guardian rose to measure the one who calmed them — and having measured, it waits now in still water for the meeting to be finished properly.',
     steps: [
       { text: 'Hold the Sea Ruby Badge and come to Sanctum as the storm breaks', flag: 'orange_2000_active' },
-      { text: 'Calm Moltres at the Ember Isle shrine cave', flag: 'orange_2000_moltres' },
+      { text: 'Calm PYREHAWK at the Ember Isle shrine cave', flag: 'orange_2000_moltres' },
       { text: 'Calm FULMINIS at the Storm Isle shrine cave', flag: 'orange_2000_zapdos' },
-      { text: 'Calm Articuno at the Rime Isle shrine cave', flag: 'orange_2000_articuno' },
+      { text: 'Calm GLACIERNE at the Rime Isle shrine cave', flag: 'orange_2000_articuno' },
       { text: 'Face the guardian\'s proving at the deep altar (it cannot be caught there)', flag: 'orange_2000_storm_stilled' },
-      { text: 'Return to the altar in Sanctum Deep, where Lugia waits in still water', catch: 'lugia' },
+      { text: 'Return to the altar in Sanctum Deep, where ABYSSORN waits in still water', catch: 'lugia' },
     ],
     lair: 'shamouti-deep',
   },
@@ -153982,8 +153982,8 @@ const ORANGE_LEGENDARY_ARCS = {
 // the Foundation machine, and Red on Mt. Lastlight as post-game. J5 (this
 // stage, appended at the marked seams) ships the legendary arcs the
 // earlier stages armed: the three beasts (chases + lair faces on
-// `beasts_awakened`), Celebi (the GS Orb's return and the Ilex
-// shrine), and Ho-Oh (the designed arc_hooh, activated in
+// `beasts_awakened`), CHRONOFAE (the GS Orb's return and the Ilex
+// shrine), and IRISAVIS (the designed arc_hooh, activated in
 // story-kanto.mjs) — plus the badge-order leader gate and the Rocket
 // Hideout interior map's re-homed staging (engine side).
 //
@@ -154011,7 +154011,7 @@ const ORANGE_LEGENDARY_ARCS = {
 const JOHTO_QUESTS = [
   { id: 'q_johto_arrival', flag: 'johto_arrival', text: 'Meet Professor Elm in Galefield Town', hint: 'Elm\'s lab stands at the north edge of Galefield, the first building past the dock. Something happened there just before your boat came in.' },
   { id: 'q_johto_thief', flag: 'silver_reported', text: 'Watch for the red-haired thief — and report back to Elm', hint: 'A starter was stolen from Elm\'s lab. The thief was seen heading north, toward Blossom and Route 30. If you meet him, tell Elm what you saw.' },
-  { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Newleaf Tower and earn the Elder\'s blessing', hint: 'Iris City\'s tower sways like the Pokemon it honors. Falkner expects challengers to climb it first — the monks inside are the first half of his test.' },
+  { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Newleaf Tower and earn the Elder\'s blessing', hint: 'Iris City\'s tower sways like the Kin it honors. Falkner expects challengers to climb it first — the monks inside are the first half of his test.' },
   { id: 'q_johto_zephyr', flag: 'badge_zephyr', text: 'Win the Zephyr Badge from Falkner in Iris City', hint: 'Falkner keeps Iris\'s gym with birds raised in the tower\'s shadow. Flying types fear Electric, Ice and Rock moves.' },
   { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZELING Well', hint: 'Below Cinder Town, Rockets are cutting DOZELING tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
   { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Cinder Town', hint: 'The ball no machine can open, carried all the way from Marisol. Kurt of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
@@ -154020,7 +154020,7 @@ const JOHTO_QUESTS = [
   { id: 'q_johto_burned', flag: 'beasts_awakened', text: 'See what woke in the Ashen Tower', hint: 'In Lantern, the tower that burned a hundred and fifty years ago stands open and ash-smelling. Its basement held three statues. Held.' },
   { id: 'q_johto_fog', flag: 'badge_fog', text: 'Win the Fog Badge from Morty in Lantern City', hint: 'Morty reads the fog the way sailors read weather. His Ghost types fear Ghost and Dark moves — and respect trainers who have looked into the tower.' },
   // --- J4b: the east rows (appended at the J4a seam) ---
-  { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Lumi, the lighthouse Pokemon', hint: 'Lumi, the LUMENECK whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Jasmine is waiting on it.' },
+  { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Lumi, the lighthouse Kin', hint: 'Lumi, the LUMENECK whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Jasmine is waiting on it.' },
   { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Tidewall City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
   { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Lumi is sick — the errand comes first. Her STRATIRON fears Fire, Fighting and Ground moves.' },
   { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red WRATHWYRM at the Wrathmere Lake', hint: 'North of Redwood, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
@@ -154055,7 +154055,7 @@ const JOHTO_TRAINERS = {
   },
   bugsy: {
     id: 'bugsy', name: 'Bugsy', title: 'Cinder Gym Leader', ai: 'smart', badgeSet: 'johto',
-    intro: ['You found my gym under the trees — most people walk past it twice. I have studied Bug Pokemon my whole life, challenger. Every web in this room is load-bearing.'],
+    intro: ['You found my gym under the trees — most people walk past it twice. I have studied Bug Kin my whole life, challenger. Every web in this room is load-bearing.'],
     lose: ['My webbing... cut clean through. You really did your homework out there.', 'The Hive Badge is yours. Take a breath of the forest on your way out — Cinder smells best after a good battle.'],
     team: [
       { species: 'ariados', level: 120 },
@@ -154093,8 +154093,8 @@ const JOHTO_TRAINERS = {
   // lose, and the branch flag records what actually happened.
   silver_r30: {
     id: 'silver_r30', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
-    intro: ['...You saw nothing. That lab, that Pokemon — none of it is your business. Move, or I move you.'],
-    lose: ['Tch. Lucky. Take your little victory — it changes nothing. Weak Pokemon, weak trainers... I will fix both.'],
+    intro: ['...You saw nothing. That lab, that Kin — none of it is your business. Move, or I move you.'],
+    lose: ['Tch. Lucky. Take your little victory — it changes nothing. Weak Kin, weak trainers... I will fix both.'],
     team: [
       { species: 'zubat', level: 104 },
       { species: 'croconaw', level: 106 },
@@ -154350,7 +154350,7 @@ const JOHTO_TRAINERS = {
   // beat_gary_johto unset and Gary re-challengeable after healing —
   // no soft-lock). His team is built from his Arden identity, grown
   // to the Conference: MENTARCH and EMBERMANE from his road, GRIMSHADE
-  // and Umbreon from his Yamato years, AERARCH from the first sky
+  // and LUNAPARD from his Yamato years, AERARCH from the first sky
   // you shared — and ABYSSAR, his starter, anchoring it all, the
   // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
@@ -154424,7 +154424,7 @@ const JOHTO_EVENTS = {
   ev_johto_arrival: [
     { say: ['Elm\'s lab is not the calm place the ferry captain described. Paper covers the floor like leaves. A glass case near the back stands open and empty, and two aides are arguing in the hushed voices people use at the scene of a small disaster.'], who: 'NARRATOR' },
     { say: ['Oh — a trainer! From the boat, by your pack. I am Professor Elm. Forgive the lab. Forgive everything, actually — it has been that kind of morning.', 'First, the duty: your Yamato journey, registered. There. Whatever else today has done, it has not stopped that.'], who: 'PROF. ELM' },
-    { say: ['Now the rest. This case held three young Pokemon this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a SNAPLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
+    { say: ['Now the rest. This case held three young Kin this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a SNAPLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
     { say: ['I am not asking you to chase a thief across Yamato — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Iris City is your road: north through Blossom, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Cinder — a man named Kurt, who works Capture Orbs by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. ELM' },
     { flag: 'johto_arrival' },
     { flag: 'elm_registered' },
@@ -154434,10 +154434,10 @@ const JOHTO_EVENTS = {
   // -- Route 30: the first Silver clash (battleAny: win or lose) -------
   ev_johto_silver_r30: [
     { say: ['A shape cuts across the Route 30 grass — too fast for a hiker, too careless for a bird. Red hair. A carrier under one arm, the kind labs use. And at his heel, a RIDGEJAW whose every glance checks with him first, the way new partners do.'], who: 'NARRATOR' },
-    { say: ['...You. You were at the lab. I saw your boat from the hill.', 'Do not bother denying it. And do not bother with the speech either — I know what I took, and I know why. That lab keeps Pokemon in glass cases waiting for permission to live. Mine is LIVING now.'], who: 'SILVER' },
+    { say: ['...You. You were at the lab. I saw your boat from the hill.', 'Do not bother denying it. And do not bother with the speech either — I know what I took, and I know why. That lab keeps Kin in glass cases waiting for permission to live. Mine is LIVING now.'], who: 'SILVER' },
     { say: ['You want to judge me, judge me the way trainers do. Come on, then. RIDGEJAW — show them what a head start looks like.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_r30', winFlag: 'silver_r30_won', loseFlag: 'silver_r30_lost' } },
-    { say: ['Whatever the battle decided, it decides nothing for him. He recalls his Pokemon mid-motion, already turning away — over the fence line and into the trees before the grass has finished swaying, gone like he was never standing there at all.', 'On the path where he stood: nothing. No card, no name, no clue. Only Elm\'s missing page, still missing. Elm will want to hear about this.'], who: 'NARRATOR' },
+    { say: ['Whatever the battle decided, it decides nothing for him. He recalls his Kin mid-motion, already turning away — over the fence line and into the trees before the grass has finished swaying, gone like he was never standing there at all.', 'On the path where he stood: nothing. No card, no name, no clue. Only Elm\'s missing page, still missing. Elm will want to hear about this.'], who: 'NARRATOR' },
     { flag: 'silver_r30_done' },
     { toast: 'The red-haired thief got away.' },
   ],
@@ -154451,7 +154451,7 @@ const JOHTO_EVENTS = {
   ],
 
   // -- Ashen Tower basement: the awakening (first B1F entry) ----------
-  // This scene ARMS J5: beasts_awakened + the Suicune sighting are the
+  // This scene ARMS J5: beasts_awakened + the BOREPARD sighting are the
   // flags the three beast arcs and Morty's naming dialogue read. No
   // battle, no catch — a glimpse, staged honestly.
   ev_johto_burned: [
@@ -154502,7 +154502,7 @@ const JOHTO_EVENTS = {
     { say: ['It sees you. Whatever is screaming inside its head, for one moment you are louder. The Red WRATHWYRM comes at the shore like weather.'], who: 'NARRATOR' },
     { wildBattle: { species: 'gyarados', level: 162 } },
     { say: ['Quiet. Not peace — exhaustion, the lake settling back into its banks, the gulls daring their way down again one at a time. And over it, a new sound: wings. Very large wings, folding.'], who: 'NARRATOR' },
-    { say: ['You felt it too, then. Not the rage — the cause. I am Lance. I train dragons, and I have been following a signal across Yamato that should not exist: a radio wave, tuned like a hand on a shoulder, that Pokemon cannot refuse. It is loudest here. It drove that WRATHWYRM out of the deep water and painted it with its own fury.', 'Signals have sources, trainer. This one is close — buried under a town that smells of cedar and souvenirs. Redwood. Meet me there. Bring that look with you — the one you are wearing now. We are going to need it.'], who: 'LANCE' },
+    { say: ['You felt it too, then. Not the rage — the cause. I am Lance. I train dragons, and I have been following a signal across Yamato that should not exist: a radio wave, tuned like a hand on a shoulder, that Kin cannot refuse. It is loudest here. It drove that WRATHWYRM out of the deep water and painted it with its own fury.', 'Signals have sources, trainer. This one is close — buried under a town that smells of cedar and souvenirs. Redwood. Meet me there. Bring that look with you — the one you are wearing now. We are going to need it.'], who: 'LANCE' },
     { flag: 'red_gyarados_done' },
     { flag: 'lance_met' },
     { toast: 'Lance is waiting in Redwood Town.' },
@@ -154532,8 +154532,8 @@ const JOHTO_EVENTS = {
 
   // -- The Radio Tower takeover (staged AFTER the hideout) ---------
   ev_johto_radio_takeover: [
-    { say: ['The Radio Tower\'s lobby is too quiet, and every speaker in it is playing the same thing: a cheerful jingle, cut off mid-note, and a voice you do not know, reading the same sentence it was reading when you walked the plaza an hour ago. "— we are back. Tell your Pokemon to listen closely. We are back —"'], who: 'NARRATOR' },
-    { say: ['Team Rocket has taken the tower. With the hideout gone they have gone loud instead — a broadcast to every Pokemon in Yamato, calling them to a new Rocket age. The staff are locked out, the stairs are guarded, and somewhere above you a fake cheerful voice is reading your region its future. Not today.'], who: 'NARRATOR' },
+    { say: ['The Radio Tower\'s lobby is too quiet, and every speaker in it is playing the same thing: a cheerful jingle, cut off mid-note, and a voice you do not know, reading the same sentence it was reading when you walked the plaza an hour ago. "— we are back. Tell your Kin to listen closely. We are back —"'], who: 'NARRATOR' },
+    { say: ['Team Rocket has taken the tower. With the hideout gone they have gone loud instead — a broadcast to every Kin in Yamato, calling them to a new Rocket age. The staff are locked out, the stairs are guarded, and somewhere above you a fake cheerful voice is reading your region its future. Not today.'], who: 'NARRATOR' },
     { battle: 'rocket_radio_1' },
     { flag: 'radio_takeover_active' },
     { flag: 'radio_f1_cleared' },
@@ -154562,7 +154562,7 @@ const JOHTO_EVENTS = {
   ev_johto_radio_top: [
     { say: ['The Director\'s office. A wide desk, a warmer suit than the real Director has ever owned, and behind it a man arranging his face into gratitude like a bouquet. On the desk, the master microphone. On his face, when he sees your badge case: the exact moment the rehearsal fails.'], who: 'NARRATOR' },
     { battle: 'rocket_director_fake' },
-    { say: ['It ends the way takeovers end when one trainer climbs the whole building: quickly, and then all at once. The fake Director is hauled down the stairs by his own former guards, the master microphone is cut, and Director Hale\'s real voice — crackling up from the plaza speakers, borrowed from a handheld set — says the only honest broadcast of the day:', '"— to every trainer and Pokemon in Yamato: the tower is ours again. Theirs is over. Team Rocket has left the air."', 'Below, Signal is cheering at loudspeakers. Rocket is gone from Yamato — the well, the lake, the tower: finished. The road east is calling, trainer. Cragmoor. Then the Conference.'], who: 'NARRATOR' },
+    { say: ['It ends the way takeovers end when one trainer climbs the whole building: quickly, and then all at once. The fake Director is hauled down the stairs by his own former guards, the master microphone is cut, and Director Hale\'s real voice — crackling up from the plaza speakers, borrowed from a handheld set — says the only honest broadcast of the day:', '"— to every trainer and Kin in Yamato: the tower is ours again. Theirs is over. Team Rocket has left the air."', 'Below, Signal is cheering at loudspeakers. Rocket is gone from Yamato — the well, the lake, the tower: finished. The road east is calling, trainer. Cragmoor. Then the Conference.'], who: 'NARRATOR' },
     { flag: 'radio_tower_cleared' },
     { toast: 'Team Rocket has left Yamato!' },
   ],
@@ -154583,7 +154583,7 @@ const JOHTO_EVENTS = {
   // land: he acknowledges the gap either way.
   ev_johto_silver_route: [
     { say: ['Halfway up Lastlight Pass, where the wind has opinions and the road narrows to single file: red hair, a DREADBITE on the crosswind, and a SNAPTYRANT standing in the road like a toll. He has been waiting. By the look of the camp ashes behind him, he has been waiting a while.'], who: 'NARRATOR' },
-    { say: ['I stole a Pokemon from a glass case, and I told myself the case was the crime. Then a trainer from a boat kept showing up — Route 30, the forest — and the story kept not going the way I wrote it.', 'One more measurement, {player}. The real one. SNAPTYRANT: FULL strength. No excuses left in either of us.'], who: 'SILVER' },
+    { say: ['I stole a Kin from a glass case, and I told myself the case was the crime. Then a trainer from a boat kept showing up — Route 30, the forest — and the story kept not going the way I wrote it.', 'One more measurement, {player}. The real one. SNAPTYRANT: FULL strength. No excuses left in either of us.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_route', winFlag: 'silver_route_won', loseFlag: 'silver_route_lost' } },
     { say: ['Whatever the battle decided, he stands in the settling dust doing the arithmetic he has avoided all arc — and then, astonishingly, he laughs. Once. Like it hurts and helps at the same time.', '"There is the gap. Not luck. Not the road. You trained yours like partners and I trained mine like weapons, and the weapons kept... looking at me. Waiting to be asked, not aimed." He looks at SNAPTYRANT. SNAPTYRANT looks back, patient as a tide. "...We are going back to Cinder. There is a man there who makes balls by hand, and a lab with a page missing. I do not know how you return a beginning. I am going to learn."', 'He steps out of the road. The whole road, all of it, held his breath with him — Lastlight Pass is yours, trainer. The Conference is at the top of it. Go and be measured by better judges than me.'], who: 'SILVER' },
     { flag: 'silver_route_done' },
@@ -154601,7 +154601,7 @@ const JOHTO_EVENTS = {
     { flag: 'hooh_glimpsed' },
     { toast: 'Something rainbow-winged crossed the morning. Lantern\'s elders would know that shape.' },
   ],
-  // Raikou's face: the storm field of the National Park, after both
+  // VOLTIGRIS's face: the storm field of the National Park, after both
   // trail signs. Catch-only chain (wildBattleCatch) — flee or KO and
   // the storm simply gathers again another day.
   ev_johto_raikou: [
@@ -154610,18 +154610,18 @@ const JOHTO_EVENTS = {
     { wildBattleCatch: { species: 'raikou', level: 178, legendary: true } },
     { arc: 'arc_raikou', stage: 'complete' },
     { flag: 'arc_raikou_done' },
-    { toast: 'Raikou is yours. The storm lets go of the park all at once, like a held breath let out.' },
+    { toast: 'VOLTIGRIS is yours. The storm lets go of the park all at once, like a held breath let out.' },
   ],
-  // Entei's face: Mt. Millstone's deep chamber — the volcanic heart.
+  // MAGMALION's face: Mt. Millstone's deep chamber — the volcanic heart.
   ev_johto_entei: [
     { say: ['The mountain has been warm all the way up, but this chamber is the warmth\'s source — the rock ticks with cooling and heating, and somewhere below the floor something enormous turns over in the earth\'s sleep.', 'It steps out of the heat-shimmer already awake, already looking at you, ash sliding off a back broad as a lintel. The chamber\'s whole held breath goes out of it in one long, low note.'], who: 'NARRATOR' },
     { arc: 'arc_entei', stage: 'active' },
     { wildBattleCatch: { species: 'entei', level: 180, legendary: true } },
     { arc: 'arc_entei', stage: 'complete' },
     { flag: 'arc_entei_done' },
-    { toast: 'Entei is yours. The mountain settles around you like a dog deciding to stay.' },
+    { toast: 'MAGMALION is yours. The mountain settles around you like a dog deciding to stay.' },
   ],
-  // Suicune's face: the Chime Tower's foot (bell-tower-1 entry), gated
+  // BOREPARD's face: the Chime Tower's foot (bell-tower-1 entry), gated
   // by its signs AND by both other beasts being caught — it comes to
   // the tower when the others are quieted.
   ev_johto_suicune: [
@@ -154630,9 +154630,9 @@ const JOHTO_EVENTS = {
     { wildBattleCatch: { species: 'suicune', level: 184, legendary: true } },
     { arc: 'arc_suicune', stage: 'complete' },
     { flag: 'arc_suicune_done' },
-    { toast: 'Suicune is yours. Somewhere above you, one bell rings once, very softly, on nobody\'s hand.' },
+    { toast: 'BOREPARD is yours. Somewhere above you, one bell rings once, very softly, on nobody\'s hand.' },
   ],
-  // Celebi: the GS Orb at the Ilex shrine (fired by the shrine's
+  // CHRONOFAE: the GS Orb at the Ilex shrine (fired by the shrine's
   // faced-tile interact in overworld-systems, not a map-entry gate —
   // the shrine is a place you go to, not a room you pass through).
   ev_johto_celebi: [
@@ -154643,9 +154643,9 @@ const JOHTO_EVENTS = {
     { arc: 'arc_celebi', stage: 'complete' },
     { flag: 'arc_celebi_done' },
     { say: ['When it is over the forest is old again, and kind about it. The GS Orb hangs open and empty in your hand — an ordinary impossible object, its one errand run. You keep it. Some souvenirs are proof; this one is a receipt.'], who: 'NARRATOR' },
-    { toast: 'Celebi is yours. The empty GS Orb stays in your bag — a memento.' },
+    { toast: 'CHRONOFAE is yours. The empty GS Orb stays in your bag — a memento.' },
   ],
-  // Ho-Oh: the Chime Tower summit, with the Clear Bell in hand.
+  // IRISAVIS: the Chime Tower summit, with the Clear Bell in hand.
   ev_johto_hooh: [
     { say: ['The summit bells take the Clear Bell\'s chime up like a relay — hand to hand, bronze to crystal — and throw it out over Lantern in a single widening ring.', 'Then the sky answers. It comes down out of the morning in no hurry at all: seven colours in good order, a crest like a sunrise deciding to stay, eyes that have watched a tower burn and a tower rise and are interested — genuinely, courteously interested — in what you are. The perch takes its weight the way the tower takes weather. Five hundred years of ash settle, very quietly, in your chest.'], who: 'NARRATOR' },
     { flag: 'hooh_summit' },
@@ -154653,7 +154653,7 @@ const JOHTO_EVENTS = {
     { wildBattleCatch: { species: 'hooh', level: 182, legendary: true } },
     { arc: 'arc_hooh', stage: 'complete' },
     { flag: 'arc_hooh_done' },
-    { toast: 'Ho-Oh is yours. Every bell in Lantern rings once — the sisters will say it was the wind, and smile when they say it.' },
+    { toast: 'IRISAVIS is yours. Every bell in Lantern rings once — the sisters will say it was the wind, and smile when they say it.' },
   ],
 };
 
@@ -154931,13 +154931,13 @@ const JOHTO_NPC_PATCHES = [
 // matched the shipped GS Orb story J4a actually told.
 //
 // Shared laws (all five arcs):
-//  - prereq `beasts_awakened` for the beasts and Celebi; Ho-Oh's
+//  - prereq `beasts_awakened` for the beasts and CHRONOFAE; IRISAVIS's
 //    prereq rides its steps (beasts complete before the bell).
 //  - Every face uses the catch-only wildBattleCatch chain: flee OR
 //    KO stalls the event with nothing set, so the encounter re-fires
 //    until the species is CAUGHT. Arc completion = the catch.
 //  - Levels sit in Yamato's band (101-200): the beasts at 178/180/184,
-//    Celebi 170, Ho-Oh 182 (in LEGENDARY_ARCS; ruling 3 supersedes
+//    CHRONOFAE 170, IRISAVIS 182 (in LEGENDARY_ARCS; ruling 3 supersedes
 //    the designed Lv 70).
 // ---------------------------------------------------------------------------
 const JOHTO_LEGENDARY_ARCS = {
@@ -154948,7 +154948,7 @@ const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Talk to Stormwatcher Iben on Route 35 — she saw lightning strike the same pine twice and then walk away from it', flag: 'arc_raikou_sign1' },
       { text: 'Talk to Ranger Solveig on Route 36 about the scorch-signed meadow stones', flag: 'arc_raikou_sign2' },
-      { text: 'Face Raikou, level 178, in the National Park\'s storm field — its thunder hunts open ground', catch: 'raikou' },
+      { text: 'Face VOLTIGRIS, level 178, in the National Park\'s storm field — its thunder hunts open ground', catch: 'raikou' },
     ],
     lair: 'national-park',
   },
@@ -154959,7 +154959,7 @@ const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Talk to the Ashkeeper Monk in the Ashen Tower about the pawprints in the ash', flag: 'arc_entei_sign1' },
       { text: 'Talk to Karate Trainee Bo in Mt. Millstone about the heat below the upper halls', flag: 'arc_entei_sign2' },
-      { text: 'Face Entei, level 180, in Mt. Millstone\'s deep chamber — the volcanic heart of the mountain', catch: 'entei' },
+      { text: 'Face MAGMALION, level 180, in Mt. Millstone\'s deep chamber — the volcanic heart of the mountain', catch: 'entei' },
     ],
     lair: 'mt-mortar-2',
   },
@@ -154970,7 +154970,7 @@ const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Talk to Bell Warden Yuki in Lantern about the shape seen at the Chime Tower\'s foot', flag: 'arc_suicune_sign1' },
       { text: 'Talk to Fisherwoman Noor on Tidewall\'s north shore about the water that ran clear', flag: 'arc_suicune_sign2' },
-      { text: 'Quiet Raikou and Entei first — then face Suicune, level 184, at the Chime Tower\'s foot, where it comes when the others are still', catch: 'suicune' },
+      { text: 'Quiet VOLTIGRIS and MAGMALION first — then face BOREPARD, level 184, at the Chime Tower\'s foot, where it comes when the others are still', catch: 'suicune' },
     ],
     lair: 'bell-tower',
   },
@@ -154981,7 +154981,7 @@ const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Return to Kurt in Cinder Town — the GS Orb stirred the night the tower woke, and he is giving it back', flag: 'gsball_back_with_player' },
       { text: 'Take the GS Orb to the forest shrine in Holly Forest and stand before it', flag: 'celebi_shrine_opened' },
-      { text: 'Face Celebi, level 170, in the forest\'s younger light', catch: 'celebi' },
+      { text: 'Face CHRONOFAE, level 170, in the forest\'s younger light', catch: 'celebi' },
     ],
     lair: 'ilex-forest',
   },
@@ -155022,7 +155022,7 @@ const JOHTO_LEGENDARY_ARCS = {
 const HOENN_QUESTS = [
   { id: 'q_hoenn_rescue', flag: 'birch_rescued', text: 'Help Professor Birch — something is chasing him near Rootlet', hint: 'Shouting, just off the Rootlet road. A wild UMBHYEN has the professor cornered — drive it off.' },
   { id: 'q_hoenn_arrival', flag: 'hoenn_arrival', text: 'Meet Professor Birch in his Rootlet lab', hint: 'Birch\'s lab stands at the north edge of Rootlet. He owes you a proper welcome — and your Maris journey needs registering.' },
-  { id: 'q_hoenn_wally', flag: 'wally_helped', text: 'Help Wally catch his first Pokemon in Meadowbrook', hint: 'A frail boy in Meadowbrook wants to catch a Pokemon of his own before his family moves. He has the heart; he needs a borrowed partner and a steady friend.' },
+  { id: 'q_hoenn_wally', flag: 'wally_helped', text: 'Help Wally catch his first Kin in Meadowbrook', hint: 'A frail boy in Meadowbrook wants to catch a Kin of his own before his family moves. He has the heart; he needs a borrowed partner and a steady friend.' },
   { id: 'q_hoenn_stone', flag: 'badge_stone', text: 'Win the Stone Badge from Roxanne in Copperton City', hint: 'Roxanne keeps Copperton\'s gym with Rock types raised from the quarry stone itself. Water, Grass, Fighting, Ground and Steel moves crack them.' },
   { id: 'q_hoenn_knuckle', flag: 'badge_knuckle', text: 'Win the Knuckle Badge from Brawly in Mistford Town', hint: 'Brawly trains where the surf breaks. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
   { id: 'q_hoenn_slateport_may', flag: 'may_slateport_done', text: 'Watch May compete at the Fairhaven Contest Hall', hint: 'May is entering her first big contest in Fairhaven. She would never ask you to come. Come anyway.' },
@@ -155942,7 +155942,7 @@ const HOENN_TALES = {
     revelation: 'The school\'s travelling stone has been carried out of Copperton and brought home by forty years of departing students — it has seen more of Maris than most researchers, and the school registers its journeys like a student.',
     offerLines: ['Norwick keeps records of everything in this city except the one thing that matters to its children. There is a stone at the Trainer School, trainer — a plain river stone — that has travelled further than I have. The school will not explain it to a researcher. They might explain it to you.', 'Ask young Moss about the travelling stone. The full custom, exactly. Two Super Potions for the fieldwork — Norwick pays for data, even the embarrassing kind.'],
     stageLines: ['The stone? You are not a teacher. ...You do not LOOK like a teacher. Fine. The stone goes with whoever leaves.', 'Every student who leaves Copperton for a journey takes it in their pack, and someone brings it home — a sibling, a friend, a DUNPLUME in one famous case. It has been to every gym in Maris. It is enrolled here, technically. Its attendance is better than mine. Tell the researcher: it travels because leaving is a subject too, and the stone is the only one of us who has passed it forty times.'],
-    finishLines: ['Enrolled. Attendance better than the students. Forty journeys in a school register I was never shown...', 'Norwick studies how Pokemon change the world, trainer. That stone is how the world changes BACK — one pack, one road, one homecoming at a time. Two Super Potions. And if you pass the school on your way out... you did not hear this from me, but check your pack. Just in case.'],
+    finishLines: ['Enrolled. Attendance better than the students. Forty journeys in a school register I was never shown...', 'Norwick studies how Kin change the world, trainer. That stone is how the world changes BACK — one pack, one road, one homecoming at a time. Two Super Potions. And if you pass the school on your way out... you did not hear this from me, but check your pack. Just in case.'],
   },
   tale_slateport: {
     id: 'tale_slateport', town: 'Fairhaven City', giver: 'MARKET CRIER VESK', title: 'The Price of the Tide', hoennTale: true,
@@ -156116,7 +156116,7 @@ const HOENN_NPC_PATCHES = [
 
 const SINNOH_QUESTS = [
   { id: 'q_sinnoh_arrival', text: 'Sail to Borea — land at Shingle Town', hint: 'The ferry from Arcport docks at Shingle, under the mountain. A new region, an old cold, and a professor who measures trainers the way winter measures roofs.', flag: 'sinnoh_arrival' },
-  { id: 'q_sinnoh_lab', text: "Report to Professor Rowan's lab in Shingle", hint: 'Rowan studies how Pokemon change and grow. He has questions for a trainer of your record — and, it turns out, another visitor with questions of his own.', flag: 'rowan_registered' },
+  { id: 'q_sinnoh_lab', text: "Report to Professor Rowan's lab in Shingle", hint: 'Rowan studies how Kin change and grow. He has questions for a trainer of your record — and, it turns out, another visitor with questions of his own.', flag: 'rowan_registered' },
   { id: 'q_sinnoh_paul1', text: "The cold-eyed trainer: take Paul's measure at the lab", hint: 'Paul battles the way an auditor reads a ledger: everything counted, nothing forgiven. Whatever the result, he will file you under a number. Prove the number wrong later.', flag: 'paul1_done' },
   { id: 'q_sinnoh_verity', text: 'Lake Candor — something moved on the water', hint: 'West of Clover, the lake sits still as glass. Old stories say a spirit of emotion sleeps beneath it. Stand on the shore a while. Watch.', flag: 'verity_glimpse' },
   { id: 'q_sinnoh_roark', text: 'Coalseam Gym — challenge Roark for the Coal Badge', hint: 'East through the mines to Coalseam. Roark digs up fossils and challengers with the same care, and his Cranidos has opinions about both.', flag: 'badge_coal' },
@@ -156513,20 +156513,20 @@ const SINNOH_EVENTS = {
   ev_sinnoh_arrival: [
     { chapterCard: 7 },
     { say: ['Shingle Town. The ferry lets go of the horizon behind you, and Borea takes hold in front: pine-dark hills, a wind with edges, and snow standing on the peaks like the region is thinking about winter permanently.', 'No send-off committee, no starter ceremony, no beginner\'s kit. You are not beginning anything here. You are continuing — and the mountain ahead has been continuing a great deal longer.'], who: '' },
-    { say: ['Professor Rowan\'s lab stands at the north end of town — the tall windows, the taller reputation. He studies how Pokemon grow and change, and word of your crossing reached him before your ship did.', 'Clover Town lies west, past Route 201 — a small town under the trees, and beyond it, a lake the old stories refuse to leave alone.'], who: '' },
+    { say: ['Professor Rowan\'s lab stands at the north end of town — the tall windows, the taller reputation. He studies how Kin grow and change, and word of your crossing reached him before your ship did.', 'Clover Town lies west, past Route 201 — a small town under the trees, and beyond it, a lake the old stories refuse to leave alone.'], who: '' },
     { flag: 'sinnoh_arrival' },
     { toast: 'Landed in Borea — Shingle Town.' },
   ],
   // The lab: Rowan registers a veteran; Paul takes his first measure.
   ev_sinnoh_lab: [
     { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Arden champion. The Amber voyager. The Yamato and Maris name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
-    { say: ['"Understand me: I do not register beginners in this room, and I am not registering one now. Your Pokedex is a working instrument, not a schoolbook. Borea\'s pages are open to it — all of them, from the lake spirits to the things the mountain keeps."', '"Walk my region carefully, trainer. It is older than the League, and it keeps its evidence in stone."'], who: 'PROF. ROWAN' },
+    { say: ['"Understand me: I do not register beginners in this room, and I am not registering one now. Your KinDex is a working instrument, not a schoolbook. Borea\'s pages are open to it — all of them, from the lake spirits to the things the mountain keeps."', '"Walk my region carefully, trainer. It is older than the League, and it keeps its evidence in stone."'], who: 'PROF. ROWAN' },
     { flag: 'rowan_registered' },
     { say: ['The door opens on the cold. A trainer your age stands in it — cap low, hands in pockets, a gaze that has already finished measuring the room and moved on to you.', '"Paul." The professor\'s tone files the name under weather warnings. "You were told to wait outside." — "I waited. Then I came in."'], who: '' },
     { say: ['So you are the famous one. Four regions of reputation, and it all fits in one doorway.', 'I do not battle for introductions. I battle for data. Show me what the record is actually made of — I will be counting what it costs you.'], who: 'PAUL' },
     { battleAny: { trainer: 'paul_sandgem', winFlag: 'paul1_won', loseFlag: 'paul1_lost' } },
     { flag: 'paul1_done' },
-    { say: ['Paul recalls his last Pokemon without a flicker, writes nothing down — you understand, watching him, that he does not need to — and walks out into the cold.', '"Shardfall," Rowan says to the closing door, the way other men say avalanche season. "His home. You will cross him again, trainer. Trainers like that are not weather. They are climate."'], who: '' },
+    { say: ['Paul recalls his last Kin without a flicker, writes nothing down — you understand, watching him, that he does not need to — and walks out into the cold.', '"Shardfall," Rowan says to the closing door, the way other men say avalanche season. "His home. You will cross him again, trainer. Trainers like that are not weather. They are climate."'], who: '' },
     { toast: 'Registered with Prof. Rowan — and measured by Paul.' },
   ],
   // Lake Candor: the glimpse (no catch — S6 owns the lake trio).
@@ -156607,7 +156607,7 @@ const SINNOH_EVENTS = {
   // Warrior's flower) — a glimpse chain; S6 owns Shaymin's catch.
   ev_sinnoh_gracidea: [
     { say: ['Honeyfield\'s meadow has done something the florists will talk about for a decade: overnight, in the wrong season, the Gracidea have opened — all of them, a whole field standing in pink-white bloom like the meadow is holding a celebration it forgot to announce.', 'The beekeepers say the flowers open like this only in gratitude, and only all at once. Gratitude for what, nobody can agree — until the bloom at the field\'s heart moves against the wind, and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm... and settles back down into the flowers, the way a guest settles into a house that is partly theirs.'], who: '' },
-    { say: ['Shaymin. The Gratitude Pokemon, in its own flower field, at its own celebration. It is not yours to disturb today, and it knows you know it. Some meetings are appointments. This one is a promise.'], who: '' },
+    { say: ['Shaymin. The Gratitude Kin, in its own flower field, at its own celebration. It is not yours to disturb today, and it knows you know it. Some meetings are appointments. This one is a promise.'], who: '' },
     { flag: 'gracidea_beat_done' },
     { flag: 'shaymin_glimpsed' },
     { flag: 'shaymin_unlocked' },
@@ -156804,7 +156804,7 @@ const SINNOH_EVENTS = {
     { toast: 'Darkrai is yours. Darkmoon Island, for the first time in fifty years, sounds like an ordinary island at night.' },
   ],
   ev_sinnoh_shaymin: [
-    { say: ['Petal Paradise lives past its billing the way shrines do: quietly, and completely — a meadow at the end of the sea road, in bloom past all reason. The letter in your bag seems to weigh less here. The flowers seem to weigh more. Gratitude does that to a place.', 'At the meadow\u2019s heart the bloom moves against the wind — and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm, and makes the decision the Gracidea field made in Honeyfield: an appointment, kept. Shaymin. The Gratitude Pokemon, in its own house, offering the house\u2019s one examination. Pass it gently.'], who: '' },
+    { say: ['Petal Paradise lives past its billing the way shrines do: quietly, and completely — a meadow at the end of the sea road, in bloom past all reason. The letter in your bag seems to weigh less here. The flowers seem to weigh more. Gratitude does that to a place.', 'At the meadow\u2019s heart the bloom moves against the wind — and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm, and makes the decision the Gracidea field made in Honeyfield: an appointment, kept. Shaymin. The Gratitude Kin, in its own house, offering the house\u2019s one examination. Pass it gently.'], who: '' },
     { arc: 'arc_shaymin', stage: 'active' },
     { wildBattleCatch: { species: 'shaymin', level: 374, legendary: true } },
     { arc: 'arc_shaymin', stage: 'complete' },
@@ -157064,7 +157064,7 @@ const SINNOH_TALES = {
     ['Ask Ossa the ruin delver about the ledger stone', 'Return the reading to Una'],
     { keepsake: 'ruinbell' }, 'Ruin Bell',
     ['Our day-care keeps an egg ledger older than the town — every egg, every family, in my grandmother\'s hand. The first page refers to a "ledger stone" in the ruins, and I have never dared the dark to read it.', 'Ossa delves those halls weekly and fears nothing with a roof on it. Ask her what the stone says. A ledger should know its own first page.'],
-    ['The ledger stone? Read it years ago, in torchlight, with the GLYPHEYE watching like examiners. It says the ruins were a day-care FIRST — a place where the old people raised young Pokemon among the stones, and the bells they used to call them home are still down there. One hangs by the carved chamber. It rings for whoever the ruins approve of.'],
+    ['The ledger stone? Read it years ago, in torchlight, with the GLYPHEYE watching like examiners. It says the ruins were a day-care FIRST — a place where the old people raised young Kin among the stones, and the bells they used to call them home are still down there. One hangs by the carved chamber. It rings for whoever the ruins approve of.'],
     ['A day-care, before it was a ruin. Then my grandmother\'s ledger is a thousand pages long and most of them are stone. I shall copy that into the front, in my best hand.', 'And the bell approves of errands, it seems — the Ruin Bell is yours. Ossa brought it up this morning without a word, which from Ossa is a speech. It rings quiet. The ruins prefer it so.']),
   tale_sinnoh_veilstone: sinnohTale('tale_sinnoh_veilstone', 'The Clerk\'s Meteor', 'Shardfall City', 'DEPT CLERK VEE',
     ['Ask the meteor watcher about the fallen stone', 'Bring the word back to Vee at the store'],
@@ -157121,7 +157121,7 @@ const SINNOH_NPCS = [
   { map: 'hearthome', name: 'PAUL', x: 20, y: 9, dir: 'down', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_hearthome', dialogue: ['...'] },
   { map: 'veilstone', name: 'PAUL', x: 21, y: 9, dir: 'down', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_veilstone', dialogue: ['Shardfall. My streets. You know why you are here.'] },
   // Reggie, the Shardfall breeder (an original analogue, not the anime's).
-  { map: 'veilstone', name: 'REGGIE', x: 24, y: 13, dir: 'down', art: 'gent', skin: '#e8b888', shirt: '#4a5a4a', pants: '#2a2a3a', hair: '#6a6a6a', sinnoh: 'reggie', dialogue: ['I raise Pokemon the slow way, trainer — the way that takes the whole of a life and calls it quick.'] },
+  { map: 'veilstone', name: 'REGGIE', x: 24, y: 13, dir: 'down', art: 'gent', skin: '#e8b888', shirt: '#4a5a4a', pants: '#2a2a3a', hair: '#6a6a6a', sinnoh: 'reggie', dialogue: ['I raise Kin the slow way, trainer — the way that takes the whole of a life and calls it quick.'] },
   // Dawn again, at her first Super Contest (the hall is NPC-free S3a;
   // she is this stage's one authored addition there).
   { map: 'contest-hearthome', name: 'DAWN', x: 5, y: 7, dir: 'right', art: 'lass', skin: '#f0c8a0', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#3a5a8a', sinnoh: 'dawn_contest', dialogue: ['Deep breath. Stage lights. Okay. OKAY. Watch me, {player}.'] },
@@ -157725,7 +157725,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_celadon","arcId":"kanto","volume":1,"kind":"main","title":"Reach Canopy City","flag":"reached_celadon","requires":["q_thunder"],"locations":["celadon"],"canon":"original"},
 {"id":"q_rainbow","arcId":"kanto","volume":1,"kind":"main","title":"Win the Rainbow Badge in Canopy City","flag":"badge_rainbow","requires":["q_celadon"],"locations":["celadon","gym-celadon"],"characters":["ERIKA"],"battles":["erika"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_scope","arcId":"kanto","volume":1,"kind":"main","title":"Infiltrate the Game Corner and recover the Vantage Scope","flag":"scope_done","requires":["q_rainbow"],"locations":["gamecorner","hideout"],"characters":["THE BOSS (speaker)"],"events":["ev_hideout_entry","ev_scope_boss"],"battles":["rocket_admin_hideout"],"mechanics":["trainer-battle"],"canon":"original"},
-{"id":"q_flute","arcId":"kanto","volume":1,"kind":"main","title":"Climb Hushmoor Tower and earn the Poke Flute","flag":"flute_got","requires":["q_scope"],"locations":["tower2"],"characters":["RUE","COLE","MR. FUJI"],"events":["ev_fuji"],"relationships":["rue","cole"],"mechanics":["bond-choice"],"canon":"original"},
+{"id":"q_flute","arcId":"kanto","volume":1,"kind":"main","title":"Climb Hushmoor Tower and earn the Kin Flute","flag":"flute_got","requires":["q_scope"],"locations":["tower2"],"characters":["RUE","COLE","MR. FUJI"],"events":["ev_fuji"],"relationships":["rue","cole"],"mechanics":["bond-choice"],"canon":"original"},
 {"id":"q_snorlax","arcId":"kanto","volume":1,"kind":"main","title":"Wake a sleeping NAPPASAUR","flag":"snorlax_west","requires":["q_flute"],"locations":["route12","route16"],"events":["ev_snorlax_east","ev_snorlax_west"],"wildBattles":[{"species":"snorlax","level":30},{"species":"snorlax","level":30}],"mechanics":["wild-battle"],"canon":"original"},
 {"id":"q_soul","arcId":"kanto","volume":1,"kind":"main","title":"Win the Soul Badge in Bramble City","flag":"badge_soul","requires":["q_snorlax"],"locations":["fuchsia","gym-fuchsia"],"characters":["KOGA"],"battles":["koga"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_silph","arcId":"kanto","volume":1,"kind":"main","title":"Liberate Vantage Co. in Farsight City","flag":"silph_done","requires":["q_soul"],"locations":["silph2"],"characters":["ROCKET ADMIN","GIOVANNI (phone)","VANTAGE PRESIDENT"],"events":["ev_silph_boss"],"battles":["rocket_admin_silph"],"mechanics":["trainer-battle"],"canon":"original"},
@@ -157737,7 +157737,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_league","arcId":"kanto","volume":1,"kind":"main","title":"Pass the League gate on Route 23","flag":"league_gate_passed","requires":["q_movie"],"locations":["route22"],"characters":["LEAGUE GUARD"],"events":["ev_league_gate"],"canon":"original"},
 {"id":"q_champion","arcId":"kanto","volume":1,"kind":"main","title":"Defeat the Elite Four and become Champion","flag":"champion","requires":["q_league"],"locations":["league"],"characters":["GARY"],"events":["ev_champion"],"battles":["gary_champion"],"rivalBattles":["gary_champion"],"relationships":["gary"],"mechanics":["bond-choice","trainer-battle","ending"],"canon":"original"},
 {"id":"q_mewtwo","arcId":"kanto","volume":1,"kind":"main","title":"Face what sleeps in Tidehaven Cave","flag":"mewtwo_done","requires":["q_champion"],"locations":["ceruleancave"],"characters":["OMNIGEN"],"events":["ev_mewtwo"],"wildBattles":[{"species":"mewtwo","level":70}],"mechanics":["wild-battle"],"canon":"original"},
-{"id":"q_diploma","arcId":"kanto","volume":1,"kind":"main","title":"Complete the Pokedex and claim your diploma","flag":"diploma","requires":["q_mewtwo"],"locations":["pallet"],"canon":"original"},
+{"id":"q_diploma","arcId":"kanto","volume":1,"kind":"main","title":"Complete the KinDex and claim your diploma","flag":"diploma","requires":["q_mewtwo"],"locations":["pallet"],"canon":"original"},
 {"id":"q_orange_gsball","arcId":"orange","volume":2,"kind":"main","title":"Fetch the GS Orb from Prof. Ivy on Marisol Island","flag":"orange_gsball","locations":["ivy-lab"],"characters":["PROF. IVY"],"events":["ev_orange_ivy"],"canon":"original"},
 {"id":"q_orange_crew","arcId":"orange","volume":2,"kind":"main","title":"Win the four Amber Crew badges","flag":"orange_crew_done","requires":["q_orange_gsball"],"locations":["mikan","mikan-gym","navel","navel-gym","trovita","trovita-gym","kumquat","kumquat-gym"],"canon":"original"},
 {"id":"q_orange_league","arcId":"orange","volume":2,"kind":"main","title":"Challenge Drake at Grapefruit Stadium and win the Amber League","flag":"orange_champion","requires":["q_orange_crew"],"locations":["pummelo-stadium"],"canon":"original"},
@@ -157752,7 +157752,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_johto_plain","arcId":"johto","volume":3,"kind":"main","title":"Win the Plain Badge from Whitney in Signal City","flag":"badge_plain","requires":["q_johto_hive"],"locations":["goldenrod","gym-goldenrod"],"characters":["WHITNEY"],"battles":["whitney"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_johto_burned","arcId":"johto","volume":3,"kind":"main","title":"See what woke in the Ashen Tower","flag":"beasts_awakened","requires":["q_johto_plain"],"locations":["burned-tower-1"],"events":["ev_johto_burned"],"canon":"original"},
 {"id":"q_johto_fog","arcId":"johto","volume":3,"kind":"main","title":"Win the Fog Badge from Morty in Lantern City","flag":"badge_fog","requires":["q_johto_burned"],"locations":["ecruteak","gym-ecruteak"],"characters":["MORTY"],"battles":["morty"],"mechanics":["gym-battle"],"canon":"original"},
-{"id":"q_johto_potion","arcId":"johto","volume":4,"kind":"main","title":"Fetch the Secret Potion for Lumi, the lighthouse Pokemon","flag":"amphy_healed","requires":["q_johto_fog"],"locations":["lighthouse-1","cianwood"],"canon":"original"},
+{"id":"q_johto_potion","arcId":"johto","volume":4,"kind":"main","title":"Fetch the Secret Potion for Lumi, the lighthouse Kin","flag":"amphy_healed","requires":["q_johto_fog"],"locations":["lighthouse-1","cianwood"],"canon":"original"},
 {"id":"q_johto_storm","arcId":"johto","volume":4,"kind":"main","title":"Win the Storm Badge from Chuck in Tidewall City","flag":"badge_storm","requires":["q_johto_potion"],"locations":["cianwood","gym-cianwood"],"characters":["CHUCK"],"battles":["chuck"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_johto_mineral","arcId":"johto","volume":4,"kind":"main","title":"Win the Mineral Badge from Jasmine in Beacon City","flag":"badge_mineral","requires":["q_johto_storm"],"locations":["olivine","gym-olivine"],"characters":["JASMINE"],"battles":["jasmine"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_johto_redgyarados","arcId":"johto","volume":4,"kind":"main","title":"Face the Red WRATHWYRM at the Wrathmere Lake","flag":"red_gyarados_done","requires":["q_johto_mineral"],"locations":["lake-of-rage"],"characters":["LANCE"],"events":["ev_johto_redgyarados"],"wildBattles":[{"species":"gyarados","level":162}],"mechanics":["wild-battle"],"canon":"original"},
@@ -157766,7 +157766,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_johto_red","arcId":"johto","volume":5,"kind":"main","title":"Post-game: the silent trainer on Mt. Lastlight","flag":"red_defeated","requires":["q_johto_harrison"],"locations":["mt-silver"],"canon":"original"},
 {"id":"q_hoenn_rescue","arcId":"hoenn","volume":6,"kind":"main","title":"Help Professor Birch — something is chasing him near Rootlet","flag":"birch_rescued","locations":["littleroot"],"characters":["PROF. BIRCH"],"events":["ev_hoenn_rescue"],"wildBattles":[{"species":"poochyena","level":203}],"mechanics":["wild-battle"],"canon":"original"},
 {"id":"q_hoenn_arrival","arcId":"hoenn","volume":6,"kind":"main","title":"Meet Professor Birch in his Rootlet lab","flag":"hoenn_arrival","requires":["q_hoenn_rescue"],"locations":["littleroot"],"characters":["PROF. BIRCH"],"events":["ev_hoenn_arrival"],"canon":"original"},
-{"id":"q_hoenn_wally","arcId":"hoenn","volume":6,"kind":"main","title":"Help Wally catch his first Pokemon in Meadowbrook","flag":"wally_helped","requires":["q_hoenn_arrival"],"locations":["petalburg"],"canon":"original"},
+{"id":"q_hoenn_wally","arcId":"hoenn","volume":6,"kind":"main","title":"Help Wally catch his first Kin in Meadowbrook","flag":"wally_helped","requires":["q_hoenn_arrival"],"locations":["petalburg"],"canon":"original"},
 {"id":"q_hoenn_stone","arcId":"hoenn","volume":6,"kind":"main","title":"Win the Stone Badge from Roxanne in Copperton City","flag":"badge_stone","requires":["q_hoenn_wally"],"locations":["rustboro","gym-rustboro"],"characters":["ROXANNE"],"battles":["roxanne"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_hoenn_knuckle","arcId":"hoenn","volume":6,"kind":"main","title":"Win the Knuckle Badge from Brawly in Mistford Town","flag":"badge_knuckle","requires":["q_hoenn_stone"],"locations":["dewford","gym-dewford"],"characters":["BRAWLY"],"battles":["brawly"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_hoenn_slateport_may","arcId":"hoenn","volume":6,"kind":"main","title":"Watch May compete at the Fairhaven Contest Hall","flag":"may_slateport_done","requires":["q_hoenn_knuckle"],"locations":["contest-slateport"],"canon":"original"},
@@ -158027,7 +158027,7 @@ Object.assign(QUESTS, HOENN_TALES);
 // Arc 4 Stage S5a: Borea Town Tales fold into the same tales table.
 Object.assign(QUESTS, SINNOH_TALES);
 Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
-// Stage J5 fold: Yamato's live legendary arcs (the beasts + Celebi).
+// Stage J5 fold: Yamato's live legendary arcs (the beasts + CHRONOFAE).
 // arc_celebi here deliberately supersedes the designed entry in
 // story-kanto.mjs (its steps described an errand the shipped game
 // never told); arc_hooh was activated in place in LEGENDARY_ARCS.
@@ -158350,6 +158350,27 @@ const NAME_REGISTRY = {
     larvitar:  { name: 'CRAGLET', status: 'named', wave: 'G-JT7', design: 'craglet' },
     pupitar:   { name: 'PIKEPOD', status: 'named', wave: 'G-JT7', design: 'pikepod' },
     tyranitar: { name: 'CRAGTYRANT', status: 'named', wave: 'G-JT7', design: 'cragtyrant' },
+    // -- Wave G Reserved (director-set canon, Naming Law 2026-11-12) --
+    // The branching companion line: SPECIAL overlay (story/gift line),
+    // element + real-animal mash per the Naming Law.
+    eevee:     { name: 'PRISMKIT', status: 'locked', wave: 'G-RES', design: 'prismkit' },
+    vaporeon:  { name: 'OTTERSAIL', status: 'locked', wave: 'G-RES', design: 'ottersail' },
+    jolteon:   { name: 'SPARKHARE', status: 'locked', wave: 'G-RES', design: 'sparkhare' },
+    flareon:   { name: 'KINDLEON', status: 'locked', wave: 'G-RES', design: 'kindleon' },
+    espeon:    { name: 'SOLYNX', status: 'locked', wave: 'G-RES', design: 'solynx' },
+    umbreon:   { name: 'LUNAPARD', status: 'locked', wave: 'G-RES', design: 'lunapard' },
+    // Kanto sovereign trio slots (LEGENDARY tier, Naming Law):
+    // glacier+erne (sea-eagle), pyre+hawk. FULMINIS (145) is M1.
+    articuno:  { name: 'GLACIERNE', status: 'locked', wave: 'G-RES', design: 'glacierne' },
+    moltres:   { name: 'PYREHAWK', status: 'locked', wave: 'G-RES', design: 'pyrehawk' },
+    // Yamato sovereigns (LEGENDARY tier; CHRONOFAE is the MYTHICAL
+    // slot — chrono+fae, the time-sprite aura register).
+    raikou:    { name: 'VOLTIGRIS', status: 'locked', wave: 'G-RES', design: 'voltigris' },
+    entei:     { name: 'MAGMALION', status: 'locked', wave: 'G-RES', design: 'magmalion' },
+    suicune:   { name: 'BOREPARD', status: 'locked', wave: 'G-RES', design: 'borepard' },
+    lugia:     { name: 'ABYSSORN', status: 'locked', wave: 'G-RES', design: 'abyssorn' },
+    hooh:      { name: 'IRISAVIS', status: 'locked', wave: 'G-RES', design: 'irisavis' },
+    celebi:    { name: 'CHRONOFAE', status: 'locked', wave: 'G-RES', design: 'chronofae' },
     treecko: { name: 'VERGEKO', status: 'named', wave: 'G-HT1', design: 'vergeko' },
     grovyle: { name: 'VERGEKON', status: 'named', wave: 'G-HT1', design: 'vergekon' },
     sceptile: { name: 'SYLGEKON', status: 'named', wave: 'G-HT1', design: 'sylgekon' },
@@ -158570,6 +158591,7 @@ const NAME_REGISTRY = {
     shellet: ['togepi', 'togetic'],
     oraclet: ['natu', 'xatu'],
     woolamp: ['mareep', 'flaaffy', 'ampharos'],
+    prismkit: ['eevee', 'vaporeon', 'jolteon', 'flareon', 'espeon', 'umbreon'],
     // Hoenn lines (Wave G) — complete chains only; nosepass (probopass),
     // roselia (budew/roserade) and duskull (dusknoir) chains wait for Sinnoh.
     vergeko: ['treecko', 'grovyle', 'sceptile'],
@@ -158952,14 +158974,18 @@ const NAME_REGISTRY = {
   terms: {},
 };
 
-// The 15 owner-locked canon names of the headline round (closed
-// 2026-11-12 01:06 EST; further headline batches only on the
-// owner's call). VOLTIK appears once though it covers two records.
+// The owner-locked canon names: the 15 of the headline round
+// (closed 2026-11-12 01:06 EST) plus the director-set Reserved
+// batch (owner naming-authority ruling + Naming Law, 2026-11-12).
+// VOLTIK appears once though it covers two records.
 const LOCKED_CANON = [
   'VOLTIK', 'EMBRY', 'EMBRION', 'INFERNOX',
   'BUBLET', 'WAVLEEN', 'ABYSSAR',
   'BUDDIN', 'SAPLINT', 'TERRABLOOM',
   'OMNIGEN', 'MOSSAIC', 'VULCANIS', 'UNDINARA', 'FULMINIS',
+  'PRISMKIT', 'OTTERSAIL', 'SPARKHARE', 'KINDLEON', 'SOLYNX', 'LUNAPARD',
+  'GLACIERNE', 'PYREHAWK',
+  'VOLTIGRIS', 'MAGMALION', 'BOREPARD', 'ABYSSORN', 'IRISAVIS', 'CHRONOFAE',
 ];
 
 
@@ -161088,8 +161114,8 @@ function tierAtLeast(state, npcId, tier) {
 // note: the Quest Log PEOPLE detail line (no numbers, ever).
 const BOND_CHARACTERS = [
   { id: 'mom', name: 'Mom', plate: 'MOM', note: 'Dawnwick. Drew the first street maps of home, chalk on a barn door.' },
-  { id: 'hawthorn', name: 'Prof. Hawthorn', plate: 'Prof. Hawthorn', note: 'The professor who studies how Pokemon and people grow together. He gave you your partner.' },
-  { id: 'gary', name: 'Gary', plate: 'GARY', note: 'Your rival since before either of you could reach the lab door. His Eevee is still deciding.' },
+  { id: 'hawthorn', name: 'Prof. Hawthorn', plate: 'Prof. Hawthorn', note: 'The professor who studies how Kin and people grow together. He gave you your partner.' },
+  { id: 'gary', name: 'Gary', plate: 'GARY', note: 'Your rival since before either of you could reach the lab door. His PRISMKIT is still deciding.' },
   { id: 'rue', name: 'Rue', plate: 'RUE', note: 'Half of a uniformed duo with theatrical ambitions and a drawn-on moustache.' },
   { id: 'cole', name: 'Cole', plate: 'COLE', note: 'The other half. Holds the menu right-side up and the conscience for both of them.' },
   { id: 'retiredace', name: 'Ace Marlow', plate: 'ACE MARLOW', note: 'Fernmere elder. The first trainer ever to challenge the Fernmere Gym, before there was a League to record it.' },
@@ -161143,7 +161169,7 @@ function applyBondOnce(state, flag, npcId, delta) {
 }
 
 // ---------- the rival ledger (ADR-016, read — never rebuilt) ----------
-// Gary's Eevee evolution rule is driven by the early rivalry record:
+// Gary's PRISMKIT evolution rule is driven by the early rivalry record:
 // the outcomes of the first two rivalry battles. Bonds READ that same
 // ledger — each Gary battle's FIRST completed outcome is recorded once
 // (story.flags rivalwin_/rivalloss_<battleId>) and both the bond delta
@@ -161324,7 +161350,7 @@ function arcCompleteSummary(state, arc) {
     title: arc.label.toUpperCase() + ' — ' + arc.region.toUpperCase() + ' · COMPLETE',
     badgeLine: 'Badges: ' + badges + '/' + arc.badgeTotal,
     leagueLines: arc.summaryLines.slice(),
-    dexLine: 'Pokedex gained this arc: ' + gained + ' · National: ' + caught + '/' + arc.dexHorizon,
+    dexLine: 'KinDex gained this arc: ' + gained + ' · National: ' + caught + '/' + arc.dexHorizon,
     dexGained: gained,
     dexCaught: caught,
     team,
@@ -161427,7 +161453,7 @@ function finaleCreditsLines(state) {
     lines.push(arc.label + ' · ' + arc.region + ' — ' + (arc.summaryLines[0] || 'COMPLETE.'));
   }
   const caught = dexCaughtCount((state && state.dex) || { caught: {} });
-  lines.push('The road so far: ' + done.length + ' journeys complete · National Pokedex ' + caught + (horizon ? '/' + horizon : '') + ' · Playtime ' + fmtPlaytime(state && state.player && state.player.playtimeSec) + '.');
+  lines.push('The road so far: ' + done.length + ' journeys complete · National KinDex ' + caught + (horizon ? '/' + horizon : '') + ' · Playtime ' + fmtPlaytime(state && state.player && state.player.playtimeSec) + '.');
   lines.push(...FINALE_CREDITS_CLOSE);
   lines.push(...FINALE_END_CARD);
   return lines;
@@ -161476,8 +161502,8 @@ function playFinaleHomecoming(g, next, finish) {
     if (line) echoLines.push(line);
   }
   const oakLines = [
-    'The Professor looks at the Pokedex counter the way other people look at tide charts — as if it personally owed him money and had finally paid. "'
-      + caught + (horizon ? ' of ' + horizon : '') + '," he says. "The whole horizon. I have rated Pokedexes for forty years, and I am telling you plainly: there is nothing left on my chart to measure you against. You ARE the chart now."',
+    'The Professor looks at the KinDex counter the way other people look at tide charts — as if it personally owed him money and had finally paid. "'
+      + caught + (horizon ? ' of ' + horizon : '') + '," he says. "The whole horizon. I have rated KinDexes for forty years, and I am telling you plainly: there is nothing left on my chart to measure you against. You ARE the chart now."',
     '"One thing remains in my keeping, and it was never really mine." From a cloth older than the lab he unwraps a flute of clear blue glass. "The ' + itemName + '. It answers at the top of the world, where the first room is. Every other trainer I ever sent out, I sent with a beginning. You are the first I am sending with an ending — go and see what it opens."',
     'Received the ' + itemName.toUpperCase() + '!',
   ];
@@ -161536,7 +161562,7 @@ function tryHomecoming(g) {
     'Your room is just as you left it. Some roads change a trainer. Home is not one of them — home is where the changing gets measured.',
   ];
   const ratingLines = [
-    'Professor Hawthorn rang while you were on the road: "Tell them the Pokedex stands at ' + caught
+    'Professor Hawthorn rang while you were on the road: "Tell them the KinDex stands at ' + caught
       + ' — and tell them I said the next page is always the best one."',
   ];
   const finish = () => {
@@ -166047,7 +166073,7 @@ class BattleScene {
       // Scripted first-catch gate: the tips teach the loop (weaken -> throw),
       // the engine guarantees the outcome (endure + weakened auto-catch).
       this.say('Wild ' + foeName + ' appeared!', () => {
-        this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
+        this.say("AIDE (via KinGear): There's your first catch! One Thunder Shock to weaken it —", () => {
           this.say('— then open the BAG and throw a Capture Orb while its HP is yellow!', () => this.announceGround(() => this.toCommand()));
         });
       });
@@ -166446,7 +166472,7 @@ class BattleScene {
     // stranded the battle with no command state. No Back row in faint
     // mode, and a cancel simply re-opens the forced choice.
     if (!inFaint) items.push({ label: 'Back', value: -1 });
-    g.ui.showMenu(inFaint ? 'Choose next Pokemon' : 'Party', items, (v) => {
+    g.ui.showMenu(inFaint ? 'Choose next Kin' : 'Party', items, (v) => {
       if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
       this.ally = this.allyTeam(g)[v];
@@ -167373,7 +167399,7 @@ class BattleScene {
         const anyLeft = this.allyTeam(g).some((m) => m.hp > 0); // F2: routed (facility override team)
         if (!anyLeft) {
           this.state = 'defeat';
-          this.say('You have no Pokemon left!', () => this.afterMsg());
+          this.say('You have no Kin left!', () => this.afterMsg());
         } else {
           this.openPartyMenu(true);
         }
@@ -167470,13 +167496,13 @@ class BattleScene {
   _askShift() {
     const nextName = displayName(this._shiftIncoming, SPECIES);
     this.state = 'shiftprompt';
-    this.say(this.trainer.name + ' is about to send out ' + nextName + '! Will you change Pokemon?', () => this._showShiftMenu());
+    this.say(this.trainer.name + ' is about to send out ' + nextName + '! Will you change Kin?', () => this._showShiftMenu());
   }
 
   _showShiftMenu() {
     const g = this.game;
     this.state = 'shiftprompt';
-    g.ui.showMenu('Will you change Pokemon?', [
+    g.ui.showMenu('Will you change Kin?', [
       { label: 'Yes', value: 'yes' },
       { label: 'No', value: 'no' },
     ], (v) => {
@@ -167497,7 +167523,7 @@ class BattleScene {
       value: i, disabled: m.hp <= 0 || m === this.ally,
     }));
     items.push({ label: 'Back', value: -1 });
-    g.ui.showMenu('Choose a Pokemon', items, (v) => {
+    g.ui.showMenu('Choose a Kin', items, (v) => {
       if (v === null || v === -1) { this._showShiftMenu(); return; }
       this.ally = g.state.party[v];
       this.allyStages = this.ally.stages;
@@ -167913,7 +167939,7 @@ class BattleScene {
       ow.trail = [];
       ow.healParty(false);
       g.state.story.position = { map: 'center', x: 4, y: 4, dir: 'down' };
-      g.ui.toast('Your Pokemon were healed. (Lost half your money.)');
+      g.ui.toast('Your Kin were healed. (Lost half your money.)');
     });
   }
 
@@ -170111,7 +170137,7 @@ function startPossessedBrandon(g, ow) {
   const state = g.state;
   const voice = String(state.player.name || '???').toUpperCase() + '??';
   g.ui.say([
-    'Brandon\'s chamber is older than the Pyramid around it. Against its heart stands a sealed stone in black iron bands — the King of Pokélantis, the keeper whispers, asleep inside it for three thousand years.',
+    'Brandon\'s chamber is older than the Pyramid around it. Against its heart stands a sealed stone in black iron bands — the King of Thalantis, the keeper whispers, asleep inside it for three thousand years.',
     'The bands hum. Dust falls upward. The seal cracks a hair\'s width — and something is suddenly standing where you stand, wearing your stance, your grin, your voice.',
   ], () => {
     g.ui.say([
@@ -170119,7 +170145,7 @@ function startPossessedBrandon(g, ow) {
       'King Brandon! I have crossed an age for this summit. Give me its symbol. Give me EVERYTHING on this island.',
     ], () => {
       g.ui.say([
-        'Whatever wears the boy has his fire and none of his manners. Very well, King of Pokélantis — I accept YOUR challenge.',
+        'Whatever wears the boy has his fire and none of his manners. Very well, King of Thalantis — I accept YOUR challenge.',
         'Hear the terms, spirit: my Regis will stand TEN levels above the team the boy climbed with, and I will not hold back one stone\'s weight. If his team breaks you, it breaks you honestly.',
       ], () => launchPossessedBattle(g, ow), 'BRANDON');
     }, voice);
@@ -171296,7 +171322,7 @@ Object.assign(BattleScene.prototype, {
       const anyLeft = g.state.party.some((m) => m.hp > 0);
       if (!anyLeft) {
         this.state = 'defeat';
-        this.say('You have no Pokemon left!', () => this.afterMsg());
+        this.say('You have no Kin left!', () => this.afterMsg());
       } else {
         this.openPartyMenu(true);
       }
@@ -172410,7 +172436,7 @@ class OverworldScene {
       for (const mv of m.moves) mv.pp = mv.maxPp;
     }
     g.audio.playSfx('heal');
-    if (announce) g.ui.toast('Your Pokemon were healed to full health!');
+    if (announce) g.ui.toast('Your Kin were healed to full health!');
   }
 
   openPauseMenu() {
@@ -173191,7 +173217,7 @@ Object.assign(OverworldScene.prototype, {
       // dex registration (checked on every map load).
       if (S6F.manaphy_egg_received && !S6F.arc_manaphy_done && g.state.dex.caught[SPECIES.manaphy.dexNo]) {
         S6F.arc_manaphy_done = true; S6Q.arc_manaphy = 'complete';
-        g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Pokemon!');
+        g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Kin!');
       }
       if (id === 'spear-pillar' && S6F.arceus_unlocked && !S6F.arceus_stairs_open && !S6F.ev_sinnoh_arceus_stairs_done) {
         // Stage S7: the flute ceremony outranks the pillar's catch
@@ -173662,7 +173688,7 @@ Object.assign(OverworldScene.prototype, {
     const lines = CREDITS_LINES.slice();
     if (grantKeepsake(g.state, 'championsribbon')) {
       lines.push('The League registrar presents you with the CHAMPION\'S RIBBON!');
-      lines.push('Give it to a Pokemon from the party menu — its holder gains x1.2 XP.');
+      lines.push('Give it to a Kin from the party menu — its holder gains x1.2 XP.');
     } else if (ownsKeepsake(g.state, 'championsribbon')) {
       const hofGift = grantKeepsakeFromSource(g.state, 'championsribbon');
       lines.push('The League registrar reaches for the CHAMPION\'S RIBBON — then sees yours, and smiles.');
@@ -173704,7 +173730,7 @@ Object.assign(OverworldScene.prototype, {
     const taleSpot = taleSpotAt(this.mapId, fx, fy);
     if (taleSpot && this.taleSpotInteract(taleSpot)) return true;
     // Stage J5: the Holly Forest shrine (the JSHRINE prop at (14,3))
-    // is Celebi's door — faced-tile, exactly like a tale spot.
+    // is CHRONOFAE's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
     // Stage H6: the Regi tombs (inscriptions, seals, puzzle stones)
     // and Comet Falls' meteorstones (the ASTRAEON wish stone; the
@@ -173976,7 +174002,7 @@ Object.assign(OverworldScene.prototype, {
         : 'The receptionist beams: "Welcome to the Contest Hall! Four entrants, four rounds of appeal — first place takes the ' + RIBBON_NAMES[hall] + '!"',
       '"Who will you enter? Choose the partner who takes the stage."',
     ], () => {
-      g.ui.showMenu('Enter which Pokemon?', able.map((m, i) => ({
+      g.ui.showMenu('Enter which Kin?', able.map((m, i) => ({
         label: displayName(m, SPECIES) + '  Lv' + m.level, value: i,
       })), (v) => {
         const mon = able[v];
@@ -174629,7 +174655,7 @@ Object.assign(OverworldScene.prototype, {
           : [{ label: 'Show your best', value: 'best' }];
         g.ui.showMenu('Rudy\'s type drill — answer his test:', drill, (v) => {
           if (!v) return;
-          say(['Yes. That. A type is not a label, it is a promise about how a Pokemon meets the world — and you keep your promises.',
+          say(['Yes. That. A type is not a label, it is a promise about how a Kin meets the world — and you keep your promises.',
             'Now we dance properly. Battle tempo, challenger — try to keep up with my ASTRION. It has never once stood still.'], () => {
             this.startOrangeBattle('rudy', null);
           });
@@ -174893,7 +174919,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'pharmacist') {
       if (flags.amphy_healed) { say(['Lumi\'s light is back over the water — the whole island saw it come on at dusk. That is the best review this pharmacy has ever had, trainer.']); return true; }
       if ((st.bag.secretpotion || 0) > 0) { say(['That potion in your bag is the real article — my own mix, both hands, no shortcuts. Get it across the water to the lighthouse, and do not drop it. Lumi is counting on a steady hand.']); return true; }
-      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Lumi, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Beacon out of its depth.',
+      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Lumi, isn\'t it. The lighthouse Kin, sick these past weeks, and Beacon out of its depth.',
         'This is the Secret Potion. My family\'s recipe, the strong one — we make it for exactly one patient at a time, and today the patient is a lighthouse. Carry it carefully, trainer. Half of Yamato\'s ships steer by that light.'], () => {
         st.bag.secretpotion = (st.bag.secretpotion || 0) + 1;
         flags.secret_potion_got = true;
@@ -175095,7 +175121,7 @@ Object.assign(OverworldScene.prototype, {
                 'Take the semi-final road with my respect — you have beaten the two best trainers in this bracket back to back, and one of them is standing here applauding. The Conference is yours in every way that history checks.',
               ] : [
                 '...It is decided. The final exchange — CHARHOUND endures, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Harrison.',
-                'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
+                'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Kin I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
                 'Gary is in the tunnel, trainer. Even he is applauding. Especially him, though he will deny the especially.',
               ];
               say(lines, () => {
@@ -175138,38 +175164,38 @@ Object.assign(OverworldScene.prototype, {
     // first (a trail reads from the beginning) — the flags they set
     // are the arc steps' flags.
     const BEAST_SIGNS = {
-      beast_sign_raikou_1: { arc: 'arc_raikou', sign: 'arc_raikou_sign1', prev: null, toast: 'Raikou\'s trail: a storm-split pine on Route 35. It went east.',
+      beast_sign_raikou_1: { arc: 'arc_raikou', sign: 'arc_raikou_sign1', prev: null, toast: 'VOLTIGRIS\'s trail: a storm-split pine on Route 35. It went east.',
         dormant: ['Storms I can read. That one last week, I could not. It came out of a clear sky, struck the old pine twice — and here is the part my report left out: the second bolt had already happened when the first one\'s thunder arrived. Backwards weather. I have stopped writing that down where supervisors can see it.'],
         lines: ['There — see the pine? Black on the east side, and the grass around it combed FLAT, all one way, like something enormous stood here letting the storm off its back in waves.',
           'I was up the pole when it happened, trainer. The lightning came twice, and between the flashes something stood in the road looking at the tree — four legs, a mane like a storm deciding to be hair, and fast the way ideas are fast. It did not flee. It departed. There is a difference, and my hands knew it before I did.',
           'It went east, toward the park road. Thunder that hunts, hunts open ground — if you are following it, the National Park is where I would stand and wait to be found.'],
         again: ['The pine is still black, the grass still combed. East, trainer — the National Park\'s open ground, when the air starts standing up on your arms.'],
         after: ['They say the park\'s storm has a keeper now, and the keeper has a trainer. My reports have gone back to being very dull, and I have never been happier to file one.'] },
-      beast_sign_raikou_2: { arc: 'arc_raikou', sign: 'arc_raikou_sign2', prev: 'arc_raikou_sign1', toast: 'Raikou\'s trail ends at the National Park\'s storm field.',
+      beast_sign_raikou_2: { arc: 'arc_raikou', sign: 'arc_raikou_sign2', prev: 'arc_raikou_sign1', toast: 'VOLTIGRIS\'s trail ends at the National Park\'s storm field.',
         tooEarly: ['The meadow stones, you mean? Scorch marks shaped almost like writing. Something passed here, certainly — but if you want the start of the trail it is west: Route 35, the storm-split pine, and a watcher named Iben who saw more of it than I did. Trails, like sentences, read best from the beginning.'],
         lines: ['Look at the stones — no. LOOK at them. Scorch in spirals, and at the centre of every spiral, a print. A pawprint, trainer, burned into meadow stone like a signature pressed into sealing wax.',
           'Whatever signed this meadow was not passing through. It was announcing. East of here the land opens out — the National Park, all that flat green under all that sky. A creature made of storm does not hide in woods and alleys. It waits in the open, daring the weather to argue.'],
         again: ['The stones keep their signature. The park, trainer — open ground, when your hair starts to rise.'],
         after: ['I heard the thunder over the park stop all at once, like a sentence finishing. Rangers talk, trainer. Congratulations — the meadow stones make sense now: it was practising its autograph.'] },
-      beast_sign_entei_1: { arc: 'arc_entei', sign: 'arc_entei_sign1', prev: null, toast: 'Entei\'s trail: warm pawprints in the Ashen Tower\'s ash. It went toward heat.',
+      beast_sign_entei_1: { arc: 'arc_entei', sign: 'arc_entei_sign1', prev: null, toast: 'MAGMALION\'s trail: warm pawprints in the Ashen Tower\'s ash. It went toward heat.',
         dormant: ['One hundred and fifty years of ash, and my whole duty is to keep it unstepped-in. Something died in this tower, trainer, and something else has been keeping the grief warm ever since. I sweep around the prints. That is all I will say while the basement sleeps.'],
         lines: ['You have been below — I can tell; everyone who has wears the same quiet for a day. Then look, and do not step: the ash by the north wall. Prints. Enormous, fresh, and warm to the back of the hand, in a tower that has been cold since before my grandfather\'s grandfather.',
           'The monks\' old books say the fire-beast walks out of this ash when it walks at all, and goes where the earth itself is hot. Mortar, trainer. The mountain east of us has a furnace in it that no one dug. Whatever was reborn in fire will go home to heat eventually.'],
         again: ['Prints in the ash, pointing east. Mt. Millstone, trainer — follow the warmth.'],
         after: ['The ash is cold this morning — truly cold, for the first time in my tenure. The tower feels... finished with something. Whatever you did on that mountain, monk\'s honour: the old tower thanks you.'] },
-      beast_sign_entei_2: { arc: 'arc_entei', sign: 'arc_entei_sign2', prev: 'arc_entei_sign1', toast: 'Entei\'s trail ends in Mt. Millstone\'s deep chamber.',
+      beast_sign_entei_2: { arc: 'arc_entei', sign: 'arc_entei_sign2', prev: 'arc_entei_sign1', toast: 'MAGMALION\'s trail ends in Mt. Millstone\'s deep chamber.',
         tooEarly: ['You feel it too? The warm draught from the upper halls. Master says it is geology. Master also says I imagine the smell of woodsmoke. Start where the prints are, trainer — the Ashen Tower in Lantern keeps an ashkeeper who reads ash the way you read a map.'],
         lines: ['Shh — feel the floor. There. Again. The mountain has a heartbeat, and it is not mine. It started the week the tower in Lantern woke; Master doubled our training and tripled his pretending not to notice.',
           'Twice now I have seen the steam burst UP the chimney vents with nothing cooking below, and once — once — I heard a sound come down the shafts like a furnace clearing its throat. Whatever is using the deep chamber has a volcano\'s manners. Go carefully, trainer. The upper halls, and mind the heat.'],
         again: ['The heartbeat is still there, under the floor. The deep chamber, trainer — upper halls, and mind the heat.'],
         after: ['The mountain is quiet. Not cold — quiet, the way a dojo is quiet after the last bow. Master has started admitting he noticed things. Progress on every front, then.'] },
-      beast_sign_suicune_1: { arc: 'arc_suicune', sign: 'arc_suicune_sign1', prev: null, toast: 'Suicune was seen at the Chime Tower\'s foot. The wardens say it comes for the last time when its kin are quiet.',
+      beast_sign_suicune_1: { arc: 'arc_suicune', sign: 'arc_suicune_sign1', prev: null, toast: 'BOREPARD was seen at the Chime Tower\'s foot. The wardens say it comes for the last time when its kin are quiet.',
         dormant: ['I wind the tower bells and polish what the wind leaves. On certain mornings the big bell is wet — WET, trainer — though the night was dry as paper. The last keeper wrote it in the log for forty years and never once explained it. Keepers do not explain. We record.'],
         lines: ['Then you are the one the logbook has been waiting for, because I am recording it now: three mornings since the tower woke, I have come at dawn and found it standing at the Chime Tower\'s foot. Still as a held breath. Ribbons moving in a wind that was not blowing anything else.',
           'It did not run from me. It does not run, the old texts say — it arrives, when the water of the world needs carrying somewhere. The texts also say it will not come to the tower for the last time until its kin are quiet. The thunder and the fire first, trainer. Then, the tower\'s foot, at dawn.'],
         again: ['Dawn, the tower\'s foot — but only when the others are quiet. It keeps its own order, that one.'],
         after: ['This morning the big bell was dry, and the tower felt ordinary, and ordinary has never felt so much like a gift. The logbook has your name in it now, trainer. Keepers record. That is the highest honour we have.'] },
-      beast_sign_suicune_2: { arc: 'arc_suicune', sign: 'arc_suicune_sign2', prev: 'arc_suicune_sign1', toast: 'Suicune\'s route ends at the Chime Tower\'s foot.',
+      beast_sign_suicune_2: { arc: 'arc_suicune', sign: 'arc_suicune_sign2', prev: 'arc_suicune_sign1', toast: 'BOREPARD\'s route ends at the Chime Tower\'s foot.',
         tooEarly: ['Fishers notice water, trainer — it is most of the job. If it is the clear-running water you are asking after, start in Lantern. The bell wardens keep a log of strange mornings, and lately every morning in it is strange.'],
         lines: ['You see this shore? The northernmost rocks of Tidewall, where the inlet runs muddy nine days in ten. Last week it ran CLEAR — clear as a poured glass, all the way out to the second buoy — and a shape went along the waterline faster than the current, not swimming, not flying. Walking on the skin of the sea like it was a road it owned.',
           'My grandmother had a word for water that cleans itself as it goes, and the word was a name, and I am not saying it out loud where the gulls can steal it. But the Lantern wardens will. It was travelling, trainer, settling its route. Where it ends, they say, is a tower — when the time is right.'],
@@ -175198,7 +175224,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       say(['You ask an old man about towers, in Lantern, in this year of all years. Walk with me — my knees teach better than my chair does.',
-        'A hundred and fifty years ago this town kept two towers, so that whichever way the great bird came over the hills there would be bells beneath it. The bells were never alarms, child. They were doorbells. Then lightning — ordinary, stupid, indifferent lightning — took the western tower, and three Pokemon who slept in its basement died in a fire no one could outrun.',
+        'A hundred and fifty years ago this town kept two towers, so that whichever way the great bird came over the hills there would be bells beneath it. The bells were never alarms, child. They were doorbells. Then lightning — ordinary, stupid, indifferent lightning — took the western tower, and three Kin who slept in its basement died in a fire no one could outrun.',
         'And the bird came back. That is the part the histories whisper: it came down through the smoke and it CALLED — and the three who died stood up out of the ash and ran, remade: one into thunder, one into the mountain\'s fire, one into the north wind itself. Then it circled the new tower once, and it has been waiting ever since — not for worship. For a heart it could trust with what it protects.',
         'You saw it, didn\'t you. On the road, in the morning, most likely — it likes to look at candidates before candidates know there is a test. The sisters at the dance theatre keep its bell. When the three it raised are quiet, ask them. And climb at dawn. Everything about that bird happens at dawn.'], () => {
         flags.hooh_history = true;
@@ -175211,7 +175237,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'kimono_bell') {
       if (flags.hooh_bell_received) { say(['The bell is lighter than it looks, isn\'t it. Crystal should be heavy. It is not, because it was never really ours — we were only ever its shelf. The summit, trainer. At dawn. Dance attendance is not required, but it is tradition to bow to the sky.']); return true; }
       if (!flags.hooh_history) { say(['You have come about the bell — do not look surprised; the theatre hears everything the tower hears, and the tower hears the town think. But the order of things matters here, trainer: the history first. Elder Gensai walks the east street by the towers most days. Let him tell you about the fire, and the three, and the waiting. Then we will talk about what we keep.']); return true; }
-      if (!(flags.arc_raikou_done && flags.arc_entei_done && flags.arc_suicune_done)) { say(['We know about the waking — the theatre\'s floor hummed the night it happened, and three of our dances have been restless ever since. The bell we keep is for the bird, trainer, and the bird will not be called while the three it raised are still abroad and unsettled. Quiet Raikou. Quiet Entei. Let Suicune finish its errand last, the way it likes. Then come back to us, and bring your best listening.']); return true; }
+      if (!(flags.arc_raikou_done && flags.arc_entei_done && flags.arc_suicune_done)) { say(['We know about the waking — the theatre\'s floor hummed the night it happened, and three of our dances have been restless ever since. The bell we keep is for the bird, trainer, and the bird will not be called while the three it raised are still abroad and unsettled. Quiet VOLTIGRIS. Quiet MAGMALION. Let BOREPARD finish its errand last, the way it likes. Then come back to us, and bring your best listening.']); return true; }
       say(['Then it is time. Sisters — the eldest dance. The one we perform when the tower\'s guest is finally expected.',
         'They dance it without music, and the silence is the music: five women becoming weather, becoming wings, becoming a tower standing and a tower remembered — and at the dance\'s still centre, Moeko lifts a box of pale cedar and opens it on a bell of clear crystal, cold as well-water, older than the theatre, older than the town\'s second skyline.',
         'The Clear Bell. It has been rung exactly never, trainer. Bells like this are not rung — they are ANSWERED. Take it to the summit at dawn, and hold it where the sky can see it. If the heart is right, the sky will do the rest. It usually does, with hearts like yours.'], () => {
@@ -175274,7 +175300,7 @@ Object.assign(OverworldScene.prototype, {
     if (!L) return false;
     if (jBadges.includes(L.badge)) {
       if (kind === 'morty' && flags.beasts_awakened) {
-        say(['So. You have seen the empty plinths too, and the one who watched you from the lamplight\'s edge. Hear the names the tower-keepers use, {player}: Raikou, the thunder that walks. Entei, the mountain that burns. And Suicune, the north wind made visible — the one whose eyes you met.',
+        say(['So. You have seen the empty plinths too, and the one who watched you from the lamplight\'s edge. Hear the names the tower-keepers use, {player}: VOLTIGRIS, the thunder that walks. MAGMALION, the mountain that burns. And BOREPARD, the north wind made visible — the one whose eyes you met.',
           'They slept as statues for a hundred and fifty years, under a promise nobody wrote down. Promises end. What woke them, I cannot tell you — but they will cross your road again, all three, and when they do, remember: they are not angry. They are AWAKE. There is a difference, and it matters.']);
         return true;
       }
@@ -175438,8 +175464,8 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'wally') {
       if (!flags.wally_helped) {
-        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Wildflower, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has PSYLET in it sometimes. I have a ball, and a borrowed FURCOON from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
-          say(['The grass shivers. A PSYLET — small, horned, already turning away — and the borrowed FURCOON looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. PSYLET, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Pokemon. I HAVE a Pokemon, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
+        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Wildflower, for my health. The air, the doctors say.', 'I asked my family for a Kin of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has PSYLET in it sometimes. I have a ball, and a borrowed FURCOON from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
+          say(['The grass shivers. A PSYLET — small, horned, already turning away — and the borrowed FURCOON looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. PSYLET, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Kin. I HAVE a Kin, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
             flags.wally_helped = true;
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
@@ -175685,7 +175711,7 @@ Object.assign(OverworldScene.prototype, {
                 'Take the honours road with my respect — you beat everyone this bracket owns, back to back, and the last of them is standing here applauding. Whatever the book says, this hall knows what it saw.',
               ] : [
                 '...It is decided. The final exchange — TINKLETOM endures by a whisker and a promise, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Tyson. By the narrowest margin this hall has ever recorded.',
-                'Do not hang your head. DO NOT. You carried eight badges across a region that was ending its own weather, you calmed two titans and a sky, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history. Morrison is on his feet. The whole hall is. Look at them, trainer. That sound is yours.',
+                'Do not hang your head. DO NOT. You carried eight badges across a region that was ending its own weather, you calmed two titans and a sky, and you took me to the last Kin I own. The loss stands — that is sport. So does everything you did to get here — that is history. Morrison is on his feet. The whole hall is. Look at them, trainer. That sound is yours.',
               ];
               say(lines, () => {
                 say(['Trainer. TYSON\'s trainer — and everyone still standing. My name is Scott. I scout battle the way other men scout weather, and I have watched every match you fought in this hall with an envelope in my pocket getting heavier by the round.', 'Inside it: an invitation. Seven facilities, seven Frontier Brains, one island off Arden where battle is the whole civilisation. The Trial Grounds, trainer. When you have rested — when HOME has had you back a while — that envelope is your next horizon. Bring the team you trust most. The Frontier does not care where you have been. Only how you fight.'], () => {
@@ -175892,7 +175918,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'paul_eterna') {
       if (flags.paul_veilstone_done) { say(['Still ahead of my projections, {player}. The lakes will re-audit us both. Be there.']); return true; }
       if (!flags.paul_eterna_seen) {
-        say(['You took Gardenia\'s measure. Adequate. The Roserade folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Pokemon. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
+        say(['You took Gardenia\'s measure. Adequate. The Roserade folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Kin. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
         return true;
       }
       say(['Still counting, {player}. Inglenook next — Fantina\'s theatre. Try not to be decorative about it.']);
@@ -175911,7 +175937,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       // ---- the Chimchar beat ----
-      say(['There. Look at it, since you are here. A Chimchar I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Pokemon\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
+      say(['There. Look at it, since you are here. A Chimchar I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Kin\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
         say(['The little fire-type watches Paul walk away without a sound. Its flame is lit. Its stance, when it turns to you, is a question it has clearly been practicing: not can I win — but will anyone stay long enough to find out?'], () => {
           g.ui.showMenu('Take the Chimchar in?', [
             { label: 'Take it in', value: 'yes' },
@@ -175944,7 +175970,7 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'reggie') {
       if (!flags.reggie_met) {
-        say(['I am Reggie. I breed Pokemon here in Shardfall — feed them, raise them, teach them the shape of a good life. My little brother Paul passed your name to me in a letter of exactly eleven words, which for Paul is a memoir.', '"Trainer from the ferry. Underestimated by everyone counting. Watch him." That is the whole letter. He has never once written watch him about anybody, {player}. Whatever you did at that lab, it is still walking around in his head.'], () => { flags.reggie_met = true; });
+        say(['I am Reggie. I breed Kin here in Shardfall — feed them, raise them, teach them the shape of a good life. My little brother Paul passed your name to me in a letter of exactly eleven words, which for Paul is a memoir.', '"Trainer from the ferry. Underestimated by everyone counting. Watch him." That is the whole letter. He has never once written watch him about anybody, {player}. Whatever you did at that lab, it is still walking around in his head.'], () => { flags.reggie_met = true; });
         return true;
       }
       say(flags.chimchar_taken
@@ -176776,7 +176802,7 @@ Object.assign(OverworldScene.prototype, {
   // Faced-tile tale searches (sysInteract hook). Returns true only
   // when the spot did tale business; false lets signs/fishing speak.
   // Stage J5: the Ilex shrine. With the returned GS Orb in the bag
-  // and Celebi uncaught, facing the shrine runs the opening scene
+  // and CHRONOFAE uncaught, facing the shrine runs the opening scene
   // (the catch-only event — a flee or KO leaves the shrine ready to
   // try again). Otherwise it is a shrine: flavour, and after the
   // catch, a memento line. Always handled (the prop is a set piece).
@@ -177106,9 +177132,9 @@ Object.assign(OverworldScene.prototype, {
     const menu = () => {
       const items = [];
       if (st.daycareEgg) items.push({ label: 'Collect the Egg we found', value: 'egg' });
-      items.push({ label: 'Leave a Pokemon with us', value: 'dep', disabled: st.daycare.length >= 2 });
-      items.push({ label: 'Take a Pokemon back', value: 'wd', disabled: !st.daycare.length });
-      items.push({ label: 'How are my Pokemon?', value: 'status' });
+      items.push({ label: 'Leave a Kin with us', value: 'dep', disabled: st.daycare.length >= 2 });
+      items.push({ label: 'Take a Kin back', value: 'wd', disabled: !st.daycare.length });
+      items.push({ label: 'How are my Kin?', value: 'status' });
       items.push({ label: 'Leave', value: null });
       g.ui.showMenu('Day-Care — we raise them with patient hands.', items, (v) => {
         if (v === 'egg') {
@@ -177123,14 +177149,14 @@ Object.assign(OverworldScene.prototype, {
             label: displayName(m, SPECIES) + ' Lv' + m.level + (m.egg ? ' (Egg)' : ''), value: i, disabled: !!m.egg,
           }));
           rows.push({ label: 'Back', value: -1 });
-          g.ui.showMenu('Leave which Pokemon?', rows, (iv) => {
+          g.ui.showMenu('Leave which Kin?', rows, (iv) => {
             if (iv === null || iv === -1) { menu(); return; }
             const mon = st.party[iv];
             const res = depositToDaycare(st, iv);
             if (res.ok) {
               say(['We will take good care of ' + displayName(mon, SPECIES) + '. Walk the routes, trainer — eggs and friendships both happen at walking pace.'], () => menu());
             } else if (res.reason === 'partner') say([res.line], () => menu());
-            else if (res.reason === 'last-non-egg') say(['Not your last travelling partner, dear. An Egg cannot walk the roads alone — someone has to carry it, and battle for it. Leave us a Pokemon when another able one walks with you.'], () => menu());
+            else if (res.reason === 'last-non-egg') say(['Not your last travelling partner, dear. An Egg cannot walk the roads alone — someone has to carry it, and battle for it. Leave us a Kin when another able one walks with you.'], () => menu());
             else if (res.reason === 'is-egg') say(['An Egg needs its trainer\'s own walking to hatch. Keep it in your party, dear.'], () => menu());
             else say(['We are full up just now — two guests is our honest limit.'], () => menu());
           });
@@ -177139,7 +177165,7 @@ Object.assign(OverworldScene.prototype, {
         if (v === 'wd') {
           const rows = st.daycare.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
           rows.push({ label: 'Back', value: -1 });
-          g.ui.showMenu('Take back which Pokemon?', rows, (iv) => {
+          g.ui.showMenu('Take back which Kin?', rows, (iv) => {
             if (iv === null || iv === -1) { menu(); return; }
             const mon = st.daycare[iv];
             const res = withdrawFromDaycare(st, iv);
@@ -177170,8 +177196,8 @@ Object.assign(OverworldScene.prototype, {
     // visit, so every player meets the system. A full-everywhere
     // refusal sets NO flag — the offer stands on the next visit.
     if (!flags.daycare_story_egg) {
-      say(['Welcome to our little house, trainer. Forty years we have raised other folks\' Pokemon here, one nap at a time.',
-        'Before anything else — a gift. Travellers leave us all sorts here, and this was left with a note: "for a trainer who walks." It is a Pokemon Egg, and we would like you to walk with it.'], () => {
+      say(['Welcome to our little house, trainer. Forty years we have raised other folks\' Kin here, one nap at a time.',
+        'Before anything else — a gift. Travellers leave us all sorts here, and this was left with a note: "for a trainer who walks." It is a Kin Egg, and we would like you to walk with it.'], () => {
         const res = giveStoryEgg(st, () => g.rng.misc());
         if (!res.ok) {
           say(['Ah — no room anywhere, party and boxes both full. Make a little room, dear, and come back. The Egg will keep.']);
@@ -177179,7 +177205,7 @@ Object.assign(OverworldScene.prototype, {
         }
         flags.daycare_story_egg = true;
         g.audio.playSfx('dex-register');
-        say(['Received a Pokemon Egg!', destLine(res, 'The Egg'), 'Walk with it in your party. When it is ready, it will not ask permission — eggs never do.'], () => menu());
+        say(['Received a Kin Egg!', destLine(res, 'The Egg'), 'Walk with it in your party. When it is ready, it will not ask permission — eggs never do.'], () => menu());
       });
       return true;
     }
@@ -177235,7 +177261,7 @@ Object.assign(OverworldScene.prototype, {
       // never come back — checking (or backing out) cost the whole PC
       // session. The panel now stays open underneath (menus and dialogue
       // route above it) and every exit path returns to it.
-      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.'], () => render()); return; }
+      if (!cand.length) { g.ui.say(['No Kin here is waiting on a trade evolution.'], () => render()); return; }
       const items = cand.map((c, i) => ({ label: displayName(c.mon, SPECIES) + ' -> ' + SPECIES[c.evo.to].name, value: i }));
       items.push({ label: 'Back', value: null, wide: true });
       const linkRowHtml = (it) => {
@@ -177259,7 +177285,7 @@ Object.assign(OverworldScene.prototype, {
       }
       const mon = g.state.party[st.idx];
       if (mon) return '<b>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</b><br>HP ' + mon.hp + '/' + mon.maxHp + '<br>A: pick up.';
-      return 'Empty party slot.<br>Place a box Pokemon here to withdraw it.';
+      return 'Empty party slot.<br>Place a box Kin here to withdraw it.';
     };
 
     const render = () => {
@@ -177315,13 +177341,13 @@ Object.assign(OverworldScene.prototype, {
         const arr = boxArr();
         const occ = arr[idx];
         if (held.from === 'party') {
-          if (g.state.party.length <= 1) { g.ui.say(['You need at least one Pokemon with you!']); return; }
+          if (g.state.party.length <= 1) { g.ui.say(['You need at least one Kin with you!']); return; }
           // Stage J6: the all-egg guard (the deposit-your-last-mon
           // precedent, sharpened) — a move whose RESULTING party
           // holds only Eggs (or nothing able) is refused.
           const simParty = g.state.party.filter((_, i2) => i2 !== held.idx);
           if (occ) simParty.splice(held.idx, 0, occ);
-          if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
+          if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Kin with you.']); return; }
           const chk = boxCheck(held.mon);
           if (!chk.ok) { g.ui.say([chk.line]); return; }
           g.state.party.splice(held.idx, 1);
@@ -177343,7 +177369,7 @@ Object.assign(OverworldScene.prototype, {
             if (!chk.ok) { g.ui.say([chk.line]); return; }
             // Stage J6: the same all-egg guard on the swap direction.
             const simParty = g.state.party.slice(); simParty[idx] = held.mon;
-            if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
+            if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Kin with you.']); return; }
             src[held.idx] = occ; g.state.party[idx] = held.mon;
           } else {
             src.splice(held.idx, 1); g.state.party.push(held.mon);
@@ -177684,7 +177710,7 @@ Object.assign(OverworldScene.prototype, {
         return { label: 'No.' + sp.dexNo + ' ' + sp.name + (owned ? ' ✓' : ''), value: id };
       });
       rows.push({ label: 'Back', value: null });
-      g.ui.showMenu('Get Pokemon — everything $0', rows, (sid) => {
+      g.ui.showMenu('Get Kin — everything $0', rows, (sid) => {
         if (!sid) { this.openCheatShop(); return; }
         const sp = SPECIES[sid];
         // Level stepper, opening at 50 (pickQty idiom, own start);
@@ -177736,7 +177762,7 @@ Object.assign(OverworldScene.prototype, {
     };
     g.ui.showMenu('Cheat Terminal — everything is $0', [
       { label: 'Get Items', value: 'items' },
-      { label: 'Get Pokémon', value: 'pokemon' },
+      { label: 'Get Kin', value: 'pokemon' },
       { label: 'Leave', value: 'leave' },
     ], (v) => {
       if (v === 'items') showItems();
@@ -177827,7 +177853,7 @@ Object.assign(OverworldScene.prototype, {
       this.trail = [];
       this.healParty(false);
       g.state.story.position = { map: 'center', x: 4, y: 4, dir: 'down' };
-      g.ui.toast('Your Pokemon were healed. (Lost half your money.)');
+      g.ui.toast('Your Kin were healed. (Lost half your money.)');
     });
   },
 
@@ -178830,9 +178856,9 @@ class Game {
     // ADR-027 D5: the sealed divider — species beyond the Platinum
     // horizon (the rest of the 1025 frame) sit below it exactly as
     // undiscovered species render today: ??? rows under this line.
-    items.push({ label: '— More Pokémon are known to exist. Their regions are future arcs. —', value: null, disabled: true });
+    items.push({ label: '— More Kin are known to exist. Their regions are future arcs. —', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
-    g.ui.showMenu('Pokedex', items, (v) => {
+    g.ui.showMenu('KinDex', items, (v) => {
       if (!v || v === 'close') return;
       if (v === 'rating') { g.ui.say([g.oakRating()], () => g.openDex(filter), 'Prof. Hawthorn'); return; }
       if (v === 'filter') { g.openDexFilter(filter); return; }
@@ -178865,7 +178891,7 @@ class Game {
         + '<div><div class="sumname">' + (known ? sp.name : '???') + '</div>'
         + '<div class="sumsub">' + (known ? sp.types.join(' / ') : '???') + '</div>'
         + '<div class="sumsub">Status: ' + (c ? 'CAUGHT' : s ? 'SEEN' : 'UNSEEN') + '</div></div></div>'
-        + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Pokemon has not been seen.') + '</div>'
+        + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Kin has not been seen.') + '</div>'
         + '<div class="sumsub">◀ ▶ : previous / next entry</div>';
       return { title, bodyHtml: body };
     };
@@ -179511,7 +179537,7 @@ Object.assign(Game.prototype, {
       superrod: 'Face water and press A to cast.',
       townmap: null, // opens the map view below
       itemfinder: 'It reacts on its own near hidden items when you search a tile.',
-      pokeflute: 'Its tune wakes sleeping Pokemon — even very large roadblocks.',
+      pokeflute: 'Its tune wakes sleeping Kin — even very large roadblocks.',
       coincase: 'Coins: ' + (g.state.bag.coin || 0) + '. Win more at the Game Corner slots.',
     };
     if (id === 'townmap') { this.openTownMap(); return; }
@@ -180026,7 +180052,7 @@ Object.assign(Game.prototype, {
     if (g.state.story.flags.platinum_diploma) {
       const escP = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
       const htmlP = '<div class="diploma"><div class="diplomatitle">PLATINUM DIPLOMA</div>'
-        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Platinum Pokedex:</div>'
+        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Platinum KinDex:</div>'
         + '<div class="diplomabody">all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
       g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'PLATINUM DIPLOMA', bodyHtml: htmlP }] }, null);
       return;
@@ -180039,12 +180065,12 @@ Object.assign(Game.prototype, {
     const own = ownCaughtMap(g.state.dex);
     const n = kanto.filter((s) => own[s.dexNo]).length;
     if (n < 151) {
-      g.ui.say(['You\'ve caught ' + n + ' of 151 Arden Pokemon.'], null, 'Prof. Hawthorn');
+      g.ui.say(['You\'ve caught ' + n + ' of 151 Arden Kin.'], null, 'Prof. Hawthorn');
       return;
     }
     const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
     const html = '<div class="diploma"><div class="diplomatitle">DIPLOMA</div>'
-      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Arden Pokedex:</div>'
+      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Arden KinDex:</div>'
       + '<div class="diplomabody">all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
     g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'DIPLOMA', bodyHtml: html }] }, null);
   },
@@ -180121,11 +180147,11 @@ Object.assign(Game.prototype, {
     // honoured inside its band, and the diploma honors live in
     // checkDiploma (151, the arc honor) + checkPlatinumDiploma (493).
     if (n < 25) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
-    if (n < 100) return n + ' caught! You are learning what a Pokedex is for. Keep going!';
+    if (n < 100) return n + ' caught! You are learning what a KinDex is for. Keep going!';
     if (n < 151) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
     if (n < 300) return n + ' caught! Past the Arden horizon entirely — and the book still has pages. The Platinum horizon is ' + PLATINUM_DEX_HORIZON + '.';
     if (n < PLATINUM_DEX_HORIZON) return n + ' caught! Nearly there. The last pages are always the hardest.';
-    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum Pokedex, in one journey. This is a historic Pokedex!';
+    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum KinDex, in one journey. This is a historic KinDex!';
   },
 
   // ADR-027 D5 (Stage F): the Platinum Diploma — the 493 honor, keyed
@@ -180141,7 +180167,7 @@ Object.assign(Game.prototype, {
     g.state.story.flags.platinum_diploma = true;
     g.audio.playSfx('badge');
     g.ui.say([
-      'PLATINUM DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Platinum Pokedex:',
+      'PLATINUM DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Platinum KinDex:',
       'all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
     ], null, 'Prof. Hawthorn');
   },
@@ -180158,7 +180184,7 @@ Object.assign(Game.prototype, {
       applyBondOnce(g.state, 'bondsrc_diploma', 'hawthorn', 2); // ADR-025 §2: the diploma is a bond beat (+2, once — this guard is the one-shot)
       g.audio.playSfx('badge');
       g.ui.say([
-        'DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Arden Pokedex:',
+        'DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Arden KinDex:',
         'all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
       ], null, 'Prof. Hawthorn');
     }
