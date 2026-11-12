@@ -61,10 +61,10 @@ export const APRICORN_TO_BALL = {
 
 // ---------- APRICORN_TREES ----------
 // Every `apricorn` prop tile across maps6 (the J3a tile kind), scanned
-// from the shipped map rows (register, Stage J6): Azalea's grove, the
+// from the shipped map rows (register, Stage J6): Cinder's grove, the
 // Route 33 + Route 37 roadside trees, and Kurt's own two house trees.
 // Colours cycle red/blue/yellow/green/pink/white/black over the sorted
-// table so every colour grows in both halves of Johto.
+// table so every colour grows in both halves of Yamato.
 const APRICORN_TILE_SPOTS = [
   ['azalea', 19, 1], ['azalea', 20, 1], ['azalea', 25, 3], ['azalea', 2, 4], ['azalea', 4, 6],
   ['azalea', 20, 7], ['azalea', 2, 10], ['azalea', 17, 10], ['azalea', 13, 15], ['azalea', 22, 16],

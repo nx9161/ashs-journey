@@ -26,8 +26,8 @@ import { switchForme, FORME_OF } from './sinnoh-systems.mjs';
 const REGIONS = [
   { id: 'kanto', name: 'Arden', note: 'The beginning. Eight badges, one League, a storm over Exile Isle.' },
   { id: 'orange', name: 'Orange Islands', note: 'A southern sea league of trials. Complete Arden first.' },
-  { id: 'johto', name: 'Johto', note: 'Old towers, older legends. Complete the Orange voyage first.' },
-  { id: 'hoenn', name: 'Hoenn', note: 'Sea and land at war with the sky. Complete Johto first.' },
+  { id: 'johto', name: 'Yamato', note: 'Old towers, older legends. Complete the Orange voyage first.' },
+  { id: 'hoenn', name: 'Hoenn', note: 'Sea and land at war with the sky. Complete Yamato first.' },
   { id: 'sinnoh', name: 'Sinnoh', note: 'Myths written in stone and time. Complete Hoenn first.' },
   { id: 'unova', name: 'Unova', note: 'Truth against ideals. Complete Sinnoh first.' },
   { id: 'kalos', name: 'Kalos', note: 'Beauty, bonds, and a flare of war. Complete Unova first.' },
@@ -413,8 +413,8 @@ Object.assign(Game.prototype, {
         });
       }
     }
-    // Section 1.75 — Johto (Stage J4a): the JOHTO_QUESTS chain in the
-    // same idiom, rendered once the Johto arc is reached (the
+    // Section 1.75 — Yamato (Stage J4a): the JOHTO_QUESTS chain in the
+    // same idiom, rendered once the Yamato arc is reached (the
     // homecoming hook, the current arc, a first badge, the arrival,
     // or a completed journey). J4b's appended east rows render here
     // unchanged — the chain order is the data order.
@@ -424,7 +424,7 @@ Object.assign(Game.prototype, {
       || !!g.state.story.flags.johto_arrival
       || (g.state.story.regionsDone || []).includes('johto');
     if (johtoReached) {
-      items.push({ label: '— JOHTO —', value: null, disabled: true, band: true });
+      items.push({ label: '— YAMATO —', value: null, disabled: true, band: true });
       for (const q of JOHTO_QUESTS) {
         const doneF = q.flag && g.state.story.flags[q.flag];
         const active = !doneF && JOHTO_QUESTS.find((x) => !x.flag || !g.state.story.flags[x.flag]) === q;
@@ -456,7 +456,7 @@ Object.assign(Game.prototype, {
       }
     }
     // Section 1.9 — Battle Frontier (Stage F3): one row per facility
-    // in the Johto section's idiom, rendered once the Frontier is
+    // in the Yamato section's idiom, rendered once the Frontier is
     // reached (its homecoming hook, the crossing, the current arc,
     // or any symbol earned). The rows are INFORMATIONAL — they carry
     // no quest flags and complete nothing; each reads its state word

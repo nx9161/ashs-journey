@@ -1,13 +1,13 @@
 // story.mjs — Anime-chronology campaign spine (ADR-015).
 // Maps the owner's complete anime+movies watch order onto the game's chapter
 // structure. v1 "Act I: The Beginning" (ADR-006) = chapters 1-5 (Arden, Orange,
-// Johto). Everything beyond is scaffolded as honest locked markers — no fake
+// Yamato). Everything beyond is scaffolded as honest locked markers — no fake
 // content, no playable claims (scope-honesty rule). Non-canon movies/minis
 // live on the BONUS shelf, never on the main spine.
 // All text is original phrasing; episode/movie titles are factual references.
 
 export const ACTS = [
-  { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Arden → Orange Islands → Johto (v1)' },
+  { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Arden → Orange Islands → Yamato (v1)' },
   { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Hoenn → Battle Frontier → Sinnoh (v2, announced ADR-006)' },
   { n: 3, title: 'Act III: Beyond', scope: 'planned', note: 'Unova → Kalos → Alola → Journeys → Horizons (planned, not built)' },
 ];
@@ -28,23 +28,23 @@ export const CHAPTERS = [
     movies: ['Pok\u00e9mon 2000 — The Power of One'],
   },
   {
-    n: 3, id: 'johto-journeys', act: 1, region: 'Johto', scope: 'playable',
-    title: 'The Johto Journeys',
+    n: 3, id: 'johto-journeys', act: 1, region: 'Yamato', scope: 'playable',
+    title: 'The Yamato Journeys',
     arc: 'A new region, eight new gyms, an old rival.',
-    anime: 'Season 3: The Johto Journeys (Ep 1–38, Ep 39–41)',
+    anime: 'Season 3: The Yamato Journeys (Ep 1–38, Ep 39–41)',
     movies: ['Spell of the Unown'],
   },
   {
-    n: 4, id: 'johto-league-champions', act: 1, region: 'Johto', scope: 'playable',
-    title: 'Johto League Champions',
-    arc: 'The road to the Silver Conference.',
-    anime: 'Season 4: Johto League Champions (Ep 1–21, Ep 22–48, Ep 49–52)',
+    n: 4, id: 'johto-league-champions', act: 1, region: 'Yamato', scope: 'playable',
+    title: 'Yamato League Champions',
+    arc: 'The road to the Lastlight Conference.',
+    anime: 'Season 4: Yamato League Champions (Ep 1–21, Ep 22–48, Ep 49–52)',
     movies: ['OMNIGEN Returns', '4Ever — Celebi: Voice of the Forest'],
   },
   {
-    n: 5, id: 'master-quest', act: 1, region: 'Johto', scope: 'playable',
+    n: 5, id: 'master-quest', act: 1, region: 'Yamato', scope: 'playable',
     title: 'Master Quest',
-    arc: 'The Silver Conference — the road continues.',
+    arc: 'The Lastlight Conference — the road continues.',
     anime: 'Season 5: Master Quest (Ep 1–47, Ep 48–65)',
     movies: ['Heroes — Latios & Latias'],
   },

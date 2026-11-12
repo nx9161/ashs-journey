@@ -13,7 +13,7 @@
 //    reset, no obedience cap, no compensating scaling. Nothing in the
 //    transition machine touches the team.
 //  - Amendment 2: per-arc LEVEL BANDS — cap = 100 x bandIndex (Arden
-//    1-100, Johto 101-200, Hoenn 201-300, Sinnoh 301-400). Orange SHARES
+//    1-100, Yamato 101-200, Hoenn 201-300, Sinnoh 301-400). Orange SHARES
 //    Arden's band (it continues Arden's power curve). The Battle Frontier
 //    is OPEN LEVEL (band: null — its facilities match the entrant).
 //
@@ -103,7 +103,7 @@ export const ARCS = [
     ],
   },
   {
-    id: 'johto', n: 2, label: 'Arc 2', region: 'Johto', regionKey: 'johto',
+    id: 'johto', n: 2, label: 'Arc 2', region: 'Yamato', regionKey: 'johto',
     edition: 'Gold / Silver / Crystal', chapters: [3, 4, 5], dexHorizon: 251,
     band: { min: 101, max: 200, bandIndex: 2 },
     badgeSet: 'johto', badgeTotal: 8,
@@ -111,17 +111,17 @@ export const ARCS = [
     status: 'shipped', future: false,
     hookGiver: 'hawthorn', embarkPort: 'pallet', arrivalMap: 'newbark', home: 'pallet',
     summaryLines: [
-      'Silver Conference — HONOURS.',
+      'Lastlight Conference — HONOURS.',
       'Eight badges, the beasts woken and quieted, and the rivalry settled at last in the conference fire. The road home feels shorter than the road out.',
     ],
     hookLines: [
-      'That GS Orb you carried across the Orange Islands — there is a man in Azalea Town named Kurt who still works Capture Orbs by hand, the old way.',
-      'If anyone alive can open it, it is him. And Johto itself is calling: new towers, new legends, and a rival who will not wait forever.',
-      'The boat for Johto leaves from Dawnwick\'s own dock. Come home first. You always come home first.',
+      'That GS Orb you carried across the Orange Islands — there is a man in Cinder Town named Kurt who still works Capture Orbs by hand, the old way.',
+      'If anyone alive can open it, it is him. And Yamato itself is calling: new towers, new legends, and a rival who will not wait forever.',
+      'The boat for Yamato leaves from Dawnwick\'s own dock. Come home first. You always come home first.',
     ],
     enRouteLines: [
       '— days at sea —',
-      'Gulls first, then a coastline of old towers. Johto.',
+      'Gulls first, then a coastline of old towers. Yamato.',
     ],
   },
   {
@@ -284,7 +284,7 @@ export const FINALE_UNLOCK_FLAG = 'arceus_unlocked';
 export const ARC_FINALE_ECHOES = {
   kanto: 'Arden first: a borrowed bike voucher, a storm over Exile Isle, and a rival who turned out to be a measuring stick all along. You came home with eight badges and every friend you started with, plus several dozen more.',
   orange: 'Then the southern sea: four island badges, a ball that would not open, and a trophy heavy as an anchor. The Orange water taught the team to win on strange ground, under stranger stars.',
-  johto: 'Johto asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Silver Conference.',
+  johto: 'Yamato asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Lastlight Conference.',
   hoenn: 'Hoenn argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
   frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
   sinnoh: 'And Sinnoh: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',

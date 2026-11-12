@@ -504,40 +504,40 @@ export const LEGENDARY_ARCS = {
     lair: 'newisland',
   },
 
-  // ---- Johto (designed) -----------------------------------------------------
+  // ---- Yamato (designed) -----------------------------------------------------
   // Stage J5: arc_hooh is LIVE (the designed entry, activated in
   // place). Two designed facts are superseded and recorded in the
   // register: the encounter level 70 predates the arc bands (ruling
-  // 3) — the live face is Lv 182, inside Johto's band; and the lair
+  // 3) — the live face is Lv 182, inside Yamato's band; and the lair
   // id 'tintower' never existed as a map — the shipped tower is the
-  // Bell Tower ('bell-tower': bell-tower-1 / bell-tower-2, the
+  // Chime Tower ('bell-tower': bell-tower-1 / bell-tower-2, the
   // summit where the face fires).
   arc_hooh: {
-    id: 'arc_hooh', title: 'The Rainbow Over the Ashes', species: 'hooh', region: 'Johto',
-    hook: 'A tower in Ecruteak burned a hundred and fifty years ago — and something has circled its replacement ever since, waiting for a trainer with a pure heart.',
+    id: 'arc_hooh', title: 'The Rainbow Over the Ashes', species: 'hooh', region: 'Yamato',
+    hook: 'A tower in Lantern burned a hundred and fifty years ago — and something has circled its replacement ever since, waiting for a trainer with a pure heart.',
     steps: [
-      { text: 'Hear the tower’s history from Ecruteak’s elders', flag: 'hooh_history' },
+      { text: 'Hear the tower’s history from Lantern’s elders', flag: 'hooh_history' },
       { text: 'Receive the Clear Bell from the Kimono sisters', flag: 'hooh_bell_received' },
-      { text: 'Climb the Bell Tower at dawn', flag: 'hooh_summit' },
+      { text: 'Climb the Chime Tower at dawn', flag: 'hooh_summit' },
       { text: 'Face Ho-Oh, level 182', catch: 'hooh' },
     ],
     lair: 'bell-tower',
   },
   arc_lugia: {
-    id: 'arc_lugia', title: 'The Song Under the Whirlpools', species: 'lugia', region: 'Johto', designedOnly: true,
+    id: 'arc_lugia', title: 'The Song Under the Whirlpools', species: 'lugia', region: 'Yamato', designedOnly: true,
     prereq: { arcs: ['arc_zapdos', 'arc_moltres', 'arc_articuno'] },
     hook: 'When the three birds of Arden are gathered, an old melody surfaces — the sea guardian only answers those who have met its storms.',
     steps: [
       { text: 'Catch FULMINIS, Moltres, and Articuno', flag: 'birds_caught' },
-      { text: 'Receive the Silver Wing at the Whirl Islands' },
+      { text: 'Receive the Silver Wing at the Maelstrom Islands' },
       { text: 'Descend to the deepest waterfall chamber' },
       { text: 'Face Lugia, level 70', catch: 'lugia' },
     ],
     lair: 'whirlislands',
   },
   arc_celebi: {
-    id: 'arc_celebi', title: 'The Voice of the Forest', species: 'celebi', region: 'Johto', designedOnly: true,
-    hook: 'Ilex Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
+    id: 'arc_celebi', title: 'The Voice of the Forest', species: 'celebi', region: 'Yamato', designedOnly: true,
+    hook: 'Holly Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
     steps: [
       { text: 'Return the lost POSTDUCK to the charcoal maker' },
       { text: 'Receive the GS Orb from a grateful craftsman' },

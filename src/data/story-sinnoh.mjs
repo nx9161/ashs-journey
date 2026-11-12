@@ -18,7 +18,7 @@
 //  - The badge-prefix leader law is the GENERIC path: the leaders'
 //    trainer defs carry badgeSet:'sinnoh' + badge, so winTrainer
 //    awards badges.sinnoh in BADGE_SETS order, and the overworld
-//    refusal in runSinnohNpc reads badges.sinnoh (the Johto/Hoenn
+//    refusal in runSinnohNpc reads badges.sinnoh (the Yamato/Hoenn
 //    generic path).
 //  - PAUL is the rival spine: an intro battle at the lab (~312), a
 //    cold assessment at Eterna, the Chimchar beat at Hearthome, and a
@@ -439,7 +439,7 @@ export const SINNOH_EVENTS = {
   ],
   // The lab: Rowan registers a veteran; Paul takes his first measure.
   ev_sinnoh_lab: [
-    { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Arden champion. The Orange voyager. The Johto and Hoenn name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
+    { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Arden champion. The Orange voyager. The Yamato and Hoenn name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
     { say: ['"Understand me: I do not register beginners in this room, and I am not registering one now. Your Pokedex is a working instrument, not a schoolbook. Sinnoh\'s pages are open to it — all of them, from the lake spirits to the things the mountain keeps."', '"Walk my region carefully, trainer. It is older than the League, and it keeps its evidence in stone."'], who: 'PROF. ROWAN' },
     { flag: 'rowan_registered' },
     { say: ['The door opens on the cold. A trainer your age stands in it — cap low, hands in pockets, a gaze that has already finished measuring the room and moved on to you.', '"Paul." The professor\'s tone files the name under weather warnings. "You were told to wait outside." — "I waited. Then I came in."'], who: '' },
@@ -451,7 +451,7 @@ export const SINNOH_EVENTS = {
   ],
   // Lake Verity: the glimpse (no catch — S6 owns the lake trio).
   ev_sinnoh_verity: [
-    { say: ['Lake Verity holds still the way held breath holds still. The water gives back the sky, the pines, your own face — and then, slow as a thought deciding to surface, a shape crosses the reflection that is in none of those things.', 'Small. Crowned. Gone. The lake is only a lake again, and your heart is doing something it has not done since a tower in Johto caught fire in the stories.', 'Whatever sleeps here felt you arrive. It did not wake. Remember that it could have.'], who: '' },
+    { say: ['Lake Verity holds still the way held breath holds still. The water gives back the sky, the pines, your own face — and then, slow as a thought deciding to surface, a shape crosses the reflection that is in none of those things.', 'Small. Crowned. Gone. The lake is only a lake again, and your heart is doing something it has not done since a tower in Yamato caught fire in the stories.', 'Whatever sleeps here felt you arrive. It did not wake. Remember that it could have.'], who: '' },
     { flag: 'verity_glimpse' },
     { toast: 'Something moved on Lake Verity...' },
   ],
@@ -763,7 +763,7 @@ export const SINNOH_EVENTS = {
 // ---------------------------------------------------------------------------
 // SINNOH_LEGENDARY_ARCS — Stage S6. The thirteen Sinnoh legendary
 // arcs (a fourteenth, the Arceus capstone, is appended by Stage S7),
-// folded into LEGENDARY_ARCS by merge.mjs (the Johto/Hoenn
+// folded into LEGENDARY_ARCS by merge.mjs (the Yamato/Hoenn
 // fold idiom); the live entries supersede the story-kanto designed
 // stubs (Dialga/Palkia/Giratina key ONLY on sinnoh_climax_resolved
 // per decision 9; Regigigas' gate is the three Regis' party

@@ -267,7 +267,7 @@ export const ORANGE_EVENTS = {
 // into the validator's quest table by gen-tables (the Arden table's
 // presentation: hook + requirement steps spelled out in the Quest
 // Log's LEGENDARY ARCS section). This is the Orange Lugia — a
-// DIFFERENT arc from the designed Johto arc_lugia stub in
+// DIFFERENT arc from the designed Yamato arc_lugia stub in
 // story-kanto (that arc's prereqs and lair are untouched).
 // ---------------------------------------------------------------------------
 export const ORANGE_LEGENDARY_ARCS = {

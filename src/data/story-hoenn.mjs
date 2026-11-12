@@ -3,7 +3,7 @@
 // seed chain (Meteor Falls, Mt. Chimney) and May's contest beats.
 // Quest chain, leader / gym / villain trainer defs, scripted events,
 // Town Tales and the loadMap NPC tables, in the story-johto.mjs idiom
-// exactly (the CAPT JOHTO precedent: actors are appended / patched at
+// exactly (the CAPT YAMATO precedent: actors are appended / patched at
 // loadMap, never written into the generated maps7.mjs).
 // Anime is primary canon (ADR-015); ALL dialogue is original writing
 // in the game's voice — no quoted or closely-paraphrased lines.
@@ -781,7 +781,7 @@ export const HOENN_EVENTS = {
 
 // ---------------------------------------------------------------------------
 // HOENN_LEGENDARY_ARCS — Stage H6. The ten Hoenn legendary arcs,
-// folded into LEGENDARY_ARCS by merge.mjs exactly the way Johto's
+// folded into LEGENDARY_ARCS by merge.mjs exactly the way Yamato's
 // fold works (one arcs table, one quest log). Object.assign order
 // makes these LIVE entries supersede the designed stubs in
 // story-kanto.mjs — the stubs' lair ids ('deserttomb', 'skypillar',
@@ -911,7 +911,7 @@ export const HOENN_LEGENDARY_ARCS = {
 // front, a lore revelation at the end); the Hoenn rows carry their
 // dialogue lines as data (offerLines / stageLines / finishLines) and
 // `hoennTale: true` keys the generic data-driven branch of runTaleNpc
-// (the same branch the Johto tales ride).
+// (the same branch the Yamato tales ride).
 // ---------------------------------------------------------------------------
 export const HOENN_TALES = {
   tale_littleroot: {
@@ -971,11 +971,11 @@ export const HOENN_TALES = {
 
 // ---------------------------------------------------------------------------
 // HOENN_NPCS / HOENN_NPC_PATCHES — the loadMap-append idiom (quests.mjs
-// CAPT JOHTO precedent): appended actors carry `hoenn` (runHoennNpc
+// CAPT YAMATO precedent): appended actors carry `hoenn` (runHoennNpc
 // owns them) or `trainer` (the generic trainer path) or `tale`+`role`
 // (the tales above); patches stamp tale roles onto existing maps7
 // townsfolk by name. The generated maps7 data is never edited.
-// Gym leaders stand at (7,2), the Johto leader idiom; gym trainers
+// Gym leaders stand at (7,2), the Yamato leader idiom; gym trainers
 // fill the shipped empty gym floors (H3 register: layouts waiting
 // for leaders/rosters).
 // ---------------------------------------------------------------------------

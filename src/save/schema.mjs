@@ -193,7 +193,7 @@ export function validateSave(data) {
     if (!Array.isArray(o) || o.length > seq.length || o.some((id, i) => id !== seq[i])) errors.push('bad-badges-orange');
   }
   // Stage J4a: badges.johto, when present, must be a PREFIX of the
-  // Johto earn order (BADGE_SETS) — the same rule, the same source.
+  // Yamato earn order (BADGE_SETS) — the same rule, the same source.
   if (isObj(data.badges) && data.badges.johto !== undefined) {
     const j = data.badges.johto;
     const seq = BADGE_SETS.johto;
@@ -464,7 +464,7 @@ export function fillV2Defaults(data) {
     // server validator was written against) and the pushed
     // { team, badges } shape both land canonical; junk entries drop.
     // Stage J0: the normalizer clamps at THIS save's arc band cap
-    // (levelCapFor on the save being loaded), so a Johto HoF team's
+    // (levelCapFor on the save being loaded), so a Yamato HoF team's
     // levels survive load instead of being rewritten to 100.
     data.story.hof = normalizeHofList(data.story.hof, levelCapFor(data));
     data.story.priorHof = normalizeHofList(data.story.priorHof, levelCapFor(data));

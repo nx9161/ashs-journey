@@ -211,7 +211,7 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_johto_hooh');
       }
     }
-    // Stage J4a (Johto story, west): map-entry scenes, flag-gated once
+    // Stage J4a (Yamato story, west): map-entry scenes, flag-gated once
     // each, in the Orange idiom — a scene's own completion flag is its
     // gate, so a stalled chain re-fires on a later entry. The Silver
     // clash additionally requires Elm's registration (the arrival
@@ -228,7 +228,7 @@ Object.assign(OverworldScene.prototype, {
         this.runEvent('ev_johto_burned');
       }
     }
-    // Stage J4b (Johto story, east): map-entry scenes, same idiom —
+    // Stage J4b (Yamato story, east): map-entry scenes, same idiom —
     // each scene's own completion flag is its gate, so a fled or lost
     // beat re-fires on a later entry and completes nothing early.
     if (!arcCardFired && !g.ui.dialogueOpen) {
@@ -246,7 +246,7 @@ Object.assign(OverworldScene.prototype, {
         // on every under-badged entry (its own scene flag is never
         // the gate — the badge count is), so it can never be
         // bypassed by having seen it once, and never strands: the
-        // warp lands on Blackthorn's east edge, facing the road back.
+        // warp lands on Cragmoor's east edge, facing the road back.
         this.runEvent('ev_johto_silver_gate');
       } else if (id === 'route-silver' && jBadgeN >= 8 && !jf.silver_route_done && !jf.ev_johto_silver_route_done) {
         this.runEvent('ev_johto_silver_route');
@@ -375,7 +375,7 @@ Object.assign(OverworldScene.prototype, {
     //  - Jirachi's star fall is witnessed on Meteor Falls entry once
     //    the Space Center's news is in hand and the falls' own story
     //    beat (H4a) is behind the player.
-    //  - Latias ROAMS: no roaming engine shipped (the Johto beasts
+    //  - Latias ROAMS: no roaming engine shipped (the Yamato beasts
     //    are fixed lairs), so she rides the lightest honest
     //    equivalent — five staged landing maps whose turn is derived
     //    deterministically from the PERSISTED walked-step counter
@@ -557,7 +557,7 @@ Object.assign(OverworldScene.prototype, {
     //    row (row 5, whose single floor gap at x=8 is the door).
     //    Stepping north of the row before the tomb's puzzle is
     //    solved meets the seal: narration + a step back south (the
-    //    Route Silver gate idiom — turned back, never stuck). Once
+    //    Lastlight Pass gate idiom — turned back, never stuck). Once
     //    solved, stepping in meets the Regi (the face re-fires on
     //    every entry until the catch — flee/KO consume nothing).
     {
@@ -941,7 +941,7 @@ Object.assign(OverworldScene.prototype, {
     // their exact behavior the rest of the time.
     const taleSpot = taleSpotAt(this.mapId, fx, fy);
     if (taleSpot && this.taleSpotInteract(taleSpot)) return true;
-    // Stage J5: the Ilex Forest shrine (the JSHRINE prop at (14,3))
+    // Stage J5: the Holly Forest shrine (the JSHRINE prop at (14,3))
     // is Celebi's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
     // Stage H6: the Regi tombs (inscriptions, seals, puzzle stones)
@@ -1521,7 +1521,7 @@ Object.assign(OverworldScene.prototype, {
     // gates, and the two-stage Kumquat match are menu/battle flows,
     // not plain dialogue or a single trainer battle.
     if (npc.orange) { if (this.runOrangeNpc(npc)) return true; }
-    // Stage J4a: Johto story actors (Elm, the west leaders, Kurt, the
+    // Stage J4a: Yamato story actors (Elm, the west leaders, Kurt, the
     // Sprout Elder, the well Rockets) run their own scenes.
     if (npc.johto) { if (this.runJohtoNpc(npc)) return true; }
     // Stage H4a: Hoenn story actors (Birch, May, Wally, Norman, the
@@ -1938,7 +1938,7 @@ Object.assign(OverworldScene.prototype, {
     ], () => { checkArcCompletion(g); }, '');
   },
 
-  // ---------- Stage J4a: Johto story actors (west) ----------
+  // ---------- Stage J4a: Yamato story actors (west) ----------
   // One dispatch for every NPC carrying a `johto:` key (appended at
   // loadMap from story-johto.mjs JOHTO_NPCS). Leaders ride the shared
   // leader runner (startJohtoBattle = the startOrangeBattle idiom:
@@ -1954,31 +1954,31 @@ Object.assign(OverworldScene.prototype, {
     const kind = npc.johto;
     // Stage J5 badge-order gate (register, J5 addendum): the server
     // validator refuses any save whose badges are not a PREFIX of
-    // the earn order (bad-badge-order), but Johto's geography would
+    // the earn order (bad-badge-order), but Yamato's geography would
     // otherwise let a player earn Fog before Plain, Mineral before
     // Storm, or Glacier before Mineral — a legitimate playthrough
     // producing a save the server rejects. Fixed at the source:
-    // every Johto leader's BATTLE (never their scenes or errands)
-    // requires the earlier Johto badges. Data-driven from
+    // every Yamato leader's BATTLE (never their scenes or errands)
+    // requires the earlier Yamato badges. Data-driven from
     // BADGE_SETS.johto — leader index i refuses while the player
-    // holds fewer than i Johto badges, naming where the first
+    // holds fewer than i Yamato badges, naming where the first
     // missing badge's leader waits. Falkner (index 0) is always open.
     const JOHTO_LEADER_WAITS = {
-      zephyrbadge: 'Falkner, in Violet City\'s gym',
-      hivebadge: 'Bugsy, in Azalea Town\'s gym',
-      plainbadge: 'Whitney, in Goldenrod City\'s gym',
-      fogbadge: 'Morty, in Ecruteak City\'s gym',
-      stormbadge: 'Chuck, in Cianwood City\'s gym',
-      mineralbadge: 'Jasmine, in Olivine City\'s gym',
-      glacierbadge: 'Pryce, in Mahogany Town\'s gym',
-      risingbadge: 'Clair, in Blackthorn City\'s gym',
+      zephyrbadge: 'Falkner, in Iris City\'s gym',
+      hivebadge: 'Bugsy, in Cinder Town\'s gym',
+      plainbadge: 'Whitney, in Signal City\'s gym',
+      fogbadge: 'Morty, in Lantern City\'s gym',
+      stormbadge: 'Chuck, in Tidewall City\'s gym',
+      mineralbadge: 'Jasmine, in Beacon City\'s gym',
+      glacierbadge: 'Pryce, in Redwood Town\'s gym',
+      risingbadge: 'Clair, in Cragmoor City\'s gym',
     };
     const badgeOrderRefusal = (badgeId) => {
       const idx = BADGE_SETS.johto.indexOf(badgeId);
       if (idx <= 0 || jBadges.length >= idx) return null;
       const miss = BADGE_SETS.johto[jBadges.length];
       const missItem = ITEMS[miss];
-      return ['The League keeps an order in Johto, challenger, and I keep it with them: the badges are earned in sequence here, first to last.',
+      return ['The League keeps an order in Yamato, challenger, and I keep it with them: the badges are earned in sequence here, first to last.',
         'You are missing the ' + (missItem ? missItem.name : miss) + ' — ' + (JOHTO_LEADER_WAITS[miss] || 'its leader') + ' is where that road goes next. Win that badge first, and I will be here, ready, when you come back.'];
     };
 
@@ -1989,14 +1989,14 @@ Object.assign(OverworldScene.prototype, {
       if (flags.silver_r30_done && !flags.silver_reported) {
         say(['You met him. On Route 30, with the Croconaw — yes. Yes, that is my missing page, walking around with red hair and no intention of apologizing.',
           'A name. You are sure? ...Silver. One of the aides found his practice registration in the hedge by the window — half a card, all the name we need. Silver.',
-          'Thank you, {player}. A lab keeps records, and now mine has its page back — the rest of that story is his to write, and I suspect he will write it at you, repeatedly. The road west is yours: Violet first, then Azalea. And when you reach Kurt — remember what you are carrying.'], () => {
+          'Thank you, {player}. A lab keeps records, and now mine has its page back — the rest of that story is his to write, and I suspect he will write it at you, repeatedly. The road west is yours: Iris first, then Cinder. And when you reach Kurt — remember what you are carrying.'], () => {
           flags.silver_reported = true;
           g.ui.toast('You reported the thief to Elm.');
         });
         return true;
       }
-      if (flags.silver_reported) { say(['Silver. The record is complete, and the road is yours, {player}. Violet, Azalea, and Kurt — in that order, the way the wind goes.']); return true; }
-      say(['North through Cherrygrove, then Route 30 to Violet, {player}. And eyes open — red hair, no fear. Come back to me with whatever you find.']);
+      if (flags.silver_reported) { say(['Silver. The record is complete, and the road is yours, {player}. Iris, Cinder, and Kurt — in that order, the way the wind goes.']); return true; }
+      say(['North through Blossom, then Route 30 to Iris, {player}. And eyes open — red hair, no fear. Come back to me with whatever you find.']);
       return true;
     }
 
@@ -2004,7 +2004,7 @@ Object.assign(OverworldScene.prototype, {
       if (flags.sprout_tower_done) { say(['The tower sways, and so do we all. Falkner\'s birds are watching the road for you, child.']); return true; }
       say(['You climbed. Slowly, I hope — the tower dislikes being hurried, and so do my knees.',
         'I am Li, keeper of this creaking old prayer. The monks tell me your legs danced on the stairs, and the tower tells me the rest: you bend, traveler. You do not break.',
-        'Take these, and an old man\'s ruling with them: Falkner of the Violet Gym now owes you his proper challenge. Tell him the tower said so. It usually sways him.'], () => {
+        'Take these, and an old man\'s ruling with them: Falkner of the Iris Gym now owes you his proper challenge. Tell him the tower said so. It usually sways him.'], () => {
         st.bag.superpotion = (st.bag.superpotion || 0) + 2;
         flags.sprout_tower_done = true;
         g.audio.playSfx('dex-register');
@@ -2058,10 +2058,10 @@ Object.assign(OverworldScene.prototype, {
         say(['Mind the well on your way past, trainer. Something down there smells like a market that should not exist. If you find an old man investigating it badly — that will be me, shortly.']); return true; }
       if (!flags.gsball_delivered) {
         if ((st.bag.gsball || 0) > 0) {
-          say(['The well is quiet, the DOZELING are whole, and Azalea can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+          say(['The well is quiet, the DOZELING are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
             '...Wait. Wait wait wait. That — in your bag. Gold and silver bands, warm as a held hand. Let me see it. LET me see it.',
             'Forty years I have worked Capture Orbs by hand. Forty years, and I have never — feel that? It is not locked. It is not broken. It is WAITING, and no tool I own speaks its language. Even I cannot open this ball, trainer.',
-            'But listen. ...There. It hums. It has hummed twice since I took it — both times when the wind came through Ilex Forest, from the old shrine in the trees. Whatever this ball is waiting for, it is waiting THERE. Keep it with me a while. Let an old man study it properly, and when the forest calls, we will both know.'], () => {
+            'But listen. ...There. It hums. It has hummed twice since I took it — both times when the wind came through Holly Forest, from the old shrine in the trees. Whatever this ball is waiting for, it is waiting THERE. Keep it with me a while. Let an old man study it properly, and when the forest calls, we will both know.'], () => {
             st.bag.gsball = (st.bag.gsball || 0) - 1;
             if (st.bag.gsball <= 0) delete st.bag.gsball;
             flags.gsball_delivered = true;
@@ -2076,7 +2076,7 @@ Object.assign(OverworldScene.prototype, {
           });
           return true;
         }
-        say(['The well is quiet, the DOZELING are whole, and Azalea can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+        say(['The well is quiet, the DOZELING are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
           'Hawthorn wrote that you carry a ball no machine can open. Bring it to this house when you can — an old pair of hands would like its turn at being defeated by it.']);
         return true;
       }
@@ -2087,8 +2087,8 @@ Object.assign(OverworldScene.prototype, {
       // with the player, and the historical gsball_delivered stands.
       if (flags.beasts_awakened && !flags.gsball_back_with_player) {
         say(['You have come at the right hour, {player}. Sit — no. Stand. You will want to be standing for this.',
-          'The night the tower woke — and do not ask me how an old man in Azalea knows which night that was, the BALL told me — it began to hum. Not at the Ilex wind, the way it used to. Through it. Like something far away had finally answered, and the answer was a place, and the place was a shrine.',
-          'Forty years of craft, and the conclusion of all my study is this: it was never mine to keep, and it is done being studied. Here. Take it back, trainer. Whatever it has been waiting for is awake now — and it is waiting in Ilex Forest, at the old shrine, for the hands that carried it here.'], () => {
+          'The night the tower woke — and do not ask me how an old man in Cinder knows which night that was, the BALL told me — it began to hum. Not at the Ilex wind, the way it used to. Through it. Like something far away had finally answered, and the answer was a place, and the place was a shrine.',
+          'Forty years of craft, and the conclusion of all my study is this: it was never mine to keep, and it is done being studied. Here. Take it back, trainer. Whatever it has been waiting for is awake now — and it is waiting in Holly Forest, at the old shrine, for the hands that carried it here.'], () => {
           st.bag.gsball = (st.bag.gsball || 0) + 1;
           flags.kurt_has_ball = false;
           flags.gsball_at_kurt_house = false;
@@ -2104,7 +2104,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       if (flags.arc_celebi_done) {
-        say(['An open ball, an answered forest, and news that walked here faster than you did. Keep the ball, {player}. Some tools a craftsman makes once in a lifetime. That one, nobody made — and now it is a souvenir of the day time itself said hello to Azalea.']);
+        say(['An open ball, an answered forest, and news that walked here faster than you did. Keep the ball, {player}. Some tools a craftsman makes once in a lifetime. That one, nobody made — and now it is a souvenir of the day time itself said hello to Cinder.']);
         return true;
       }
       say(['The ball sits in my study and hums at the Ilex wind. Patience, trainer. Some locks are not picked. They are answered.']);
@@ -2131,8 +2131,8 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'pharmacist') {
       if (flags.amphy_healed) { say(['Amphy\'s light is back over the water — the whole island saw it come on at dusk. That is the best review this pharmacy has ever had, trainer.']); return true; }
       if ((st.bag.secretpotion || 0) > 0) { say(['That potion in your bag is the real article — my own mix, both hands, no shortcuts. Get it across the water to the lighthouse, and do not drop it. Amphy is counting on a steady hand.']); return true; }
-      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Amphy, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Olivine out of its depth.',
-        'This is the Secret Potion. My family\'s recipe, the strong one — we make it for exactly one patient at a time, and today the patient is a lighthouse. Carry it carefully, trainer. Half of Johto\'s ships steer by that light.'], () => {
+      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Amphy, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Beacon out of its depth.',
+        'This is the Secret Potion. My family\'s recipe, the strong one — we make it for exactly one patient at a time, and today the patient is a lighthouse. Carry it carefully, trainer. Half of Yamato\'s ships steer by that light.'], () => {
         st.bag.secretpotion = (st.bag.secretpotion || 0) + 1;
         flags.secret_potion_got = true;
         g.audio.playSfx('dex-register');
@@ -2142,9 +2142,9 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'jasmine_light') {
-      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Amphy is well, trainer, and every ship between here and Cianwood knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will Steelix.']); return true; }
+      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Amphy is well, trainer, and every ship between here and Tidewall knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will Steelix.']); return true; }
       if ((st.bag.secretpotion || 0) > 0) {
-        say(['That smell — honey and iron and something green. The Cianwood mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Amphy, love — medicine. The good kind, from across the water.'], () => {
+        say(['That smell — honey and iron and something green. The Tidewall mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Amphy, love — medicine. The good kind, from across the water.'], () => {
           st.bag.secretpotion = (st.bag.secretpotion || 0) - 1;
           if (st.bag.secretpotion <= 0) delete st.bag.secretpotion;
           flags.amphy_healed = true;
@@ -2154,24 +2154,24 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       if (!flags.jasmine_asked) {
-        say(['Oh — a trainer. Forgive me, I — my name is Jasmine. I keep Olivine\'s gym, most days. These days I keep this room.',
-          'This is Amphy. Her light has guided Olivine\'s ships since before I was born, and she is sick — a fever no medicine in this city touches. The pharmacy in Cianwood, across Route 40, makes one thing that might: their Secret Potion. I cannot leave her. The ships cannot wait much longer. Trainer... would you go? For a lighthouse?'], () => { flags.jasmine_asked = true; });
+        say(['Oh — a trainer. Forgive me, I — my name is Jasmine. I keep Beacon\'s gym, most days. These days I keep this room.',
+          'This is Amphy. Her light has guided Beacon\'s ships since before I was born, and she is sick — a fever no medicine in this city touches. The pharmacy in Tidewall, across Route 40, makes one thing that might: their Secret Potion. I cannot leave her. The ships cannot wait much longer. Trainer... would you go? For a lighthouse?'], () => { flags.jasmine_asked = true; });
         return true;
       }
-      say(['Amphy is holding on. The Cianwood pharmacy, trainer — across the sea road, Route 40. Their Secret Potion is her best hope, and you are its fastest ship.']);
+      say(['Amphy is holding on. The Tidewall pharmacy, trainer — across the sea road, Route 40. Their Secret Potion is her best hope, and you are its fastest ship.']);
       return true;
     }
 
     if (kind === 'lance_lake') {
-      if (flags.red_gyarados_done) { say(['The lake is quiet — listen to it being quiet. That is our work, trainer. Mahogany next: whatever made this lake scream is buried under that town, and I mean to dig. Meet me there.']); return true; }
+      if (flags.red_gyarados_done) { say(['The lake is quiet — listen to it being quiet. That is our work, trainer. Redwood next: whatever made this lake scream is buried under that town, and I mean to dig. Meet me there.']); return true; }
       say(['Careful at the water\'s edge, trainer. Something in that lake is in pain, and pain that size does not stay in the lake for long. Whatever you came here to do — do it gently, or do it fast. Ideally both.']);
       return true;
     }
 
     if (kind === 'lance_mahogany') {
-      if (flags.johto_hideout_cleared) { say(['The signal is dead and the lake is calm — I checked from the air at dawn. Team Rocket\'s Johto operation ended in that basement, trainer. What remains is the honest work: Pryce, Blackthorn, and a Conference with your name rising up its bracket.']); return true; }
-      if (!flags.red_gyarados_done) { say(['You have the look of a trainer between errands, so let me lend you one: the Lake of Rage, north of here. Something red is tearing it apart, and I do not believe in coincidences with scales. Look into it. Then come back and tell me what the water said.']); return true; }
-      say(['You saw the lake. You heard the signal in its screaming. The source is here, {player} — under the souvenir shop, behind the postcards: a transmitter, a power core, and the whole Johto operation of a team that should have stayed beaten.', 'WYRMARCH and I take the front, through the shop\'s stair. You take everything that moves behind us. Are you ready to go down?'], () => {
+      if (flags.johto_hideout_cleared) { say(['The signal is dead and the lake is calm — I checked from the air at dawn. Team Rocket\'s Yamato operation ended in that basement, trainer. What remains is the honest work: Pryce, Cragmoor, and a Conference with your name rising up its bracket.']); return true; }
+      if (!flags.red_gyarados_done) { say(['You have the look of a trainer between errands, so let me lend you one: the Wrathmere Lake, north of here. Something red is tearing it apart, and I do not believe in coincidences with scales. Look into it. Then come back and tell me what the water said.']); return true; }
+      say(['You saw the lake. You heard the signal in its screaming. The source is here, {player} — under the souvenir shop, behind the postcards: a transmitter, a power core, and the whole Yamato operation of a team that should have stayed beaten.', 'WYRMARCH and I take the front, through the shop\'s stair. You take everything that moves behind us. Are you ready to go down?'], () => {
         g.ui.showMenu('Enter the Hideout with Lance?', [
           { label: 'Descend', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => { if (v === 'yes') this.enterJohtoHideout(); });
@@ -2181,7 +2181,7 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'clair') {
       if (jBadges.includes('risingbadge')) { say(['The Rising Badge sits well on you, {player}. The den chose, the shrine approved, and I — I concur, which the clan will tell you is the rarest of the three. The Conference road is yours. Do not waste it.']); return true; }
-      if (flags.clair_beaten) { say(['The gym is settled between us — the DEN is not. North of the town, through the cliff mouth: the Dragon\'s Den, the elder, the old questions, the shrine. The badge waits there, {player}. It has only ever waited there.']); return true; }
+      if (flags.clair_beaten) { say(['The gym is settled between us — the DEN is not. North of the town, through the cliff mouth: the Drake\'s Den, the elder, the old questions, the shrine. The badge waits there, {player}. It has only ever waited there.']); return true; }
       // Stage J5: Clair's battle gates at index 7 like every other
       // leader's (the den award path beyond it is unchanged).
       const clairRefusal = badgeOrderRefusal('risingbadge');
@@ -2195,7 +2195,7 @@ Object.assign(OverworldScene.prototype, {
           this.startJohtoBattle('clair', (won) => {
             if (!won) return;
             flags.clair_beaten = true;
-            say(['North, then. The cliff behind this town, the water that runs black and patient — the Dragon\'s Den. The elder will ask you the old questions, and the shrine will ask its own. Pass, and the Rising Badge is yours by the clan\'s law. Fail... and you may try again. Dragons respect persistence almost as much as strength.'], null, 'CLAIR');
+            say(['North, then. The cliff behind this town, the water that runs black and patient — the Drake\'s Den. The elder will ask you the old questions, and the shrine will ask its own. Pass, and the Rising Badge is yours by the clan\'s law. Fail... and you may try again. Dragons respect persistence almost as much as strength.'], null, 'CLAIR');
           });
         });
       });
@@ -2237,7 +2237,7 @@ Object.assign(OverworldScene.prototype, {
                     if (!st.badges.johto.includes('risingbadge')) st.badges.johto.push('risingbadge');
                     flags.badge_rising = true;
                     g.audio.playSfx('badge');
-                    say(['It is decided, then — by gym, by word, and by battle, the full measure of the old law.', 'The RISING BADGE is yours, {player}. Eight badges. The whole of Johto, answered. Clair will hear of this before you reach the town — the den has its own ways of telling her. The road north is open now: Route Silver, Silver Town, and the Conference that has been waiting for you since New Bark.'], null, 'DEN ELDER');
+                    say(['It is decided, then — by gym, by word, and by battle, the full measure of the old law.', 'The RISING BADGE is yours, {player}. Eight badges. The whole of Yamato, answered. Clair will hear of this before you reach the town — the den has its own ways of telling her. The road north is open now: Lastlight Pass, Lastlight Town, and the Conference that has been waiting for you since Galefield.'], null, 'DEN ELDER');
                   });
                 });
               });
@@ -2255,18 +2255,18 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'silver_gate') {
       if (jBadges.length >= 8) { say(['Eight badges, counted with my own eyes — the pass is yours, Conference trainer. Hald, veteran of this road, at your service. Silver, when you are ready, is in the stadium. So is the young man with the red hair\'s opposite number. Make it a good one.']); return true; }
-      say(['Pass Officer Hald — the League keeps me at this end of the road to count, so let me count for you, trainer: ' + jBadges.length + ' of 8 Johto badges in that case.', 'The rule is the rule, and it turns nobody away forever: earn the eight — Blackthorn and the Dragon\'s Den hold the last of it for most — and this road opens like it was built for you. Because by then, trainer, it will have been.']);
+      say(['Pass Officer Hald — the League keeps me at this end of the road to count, so let me count for you, trainer: ' + jBadges.length + ' of 8 Yamato badges in that case.', 'The rule is the rule, and it turns nobody away forever: earn the eight — Cragmoor and the Drake\'s Den hold the last of it for most — and this road opens like it was built for you. Because by then, trainer, it will have been.']);
       return true;
     }
 
     if (kind === 'conference') {
-      if (flags.johto_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Conference book in the good ink, trainer. Whatever mountain is next — and there is always a next one — Silver Town was glad to host this chapter.']); return true; }
-      if (jBadges.length < 8) { say(['Conference registration, trainer — and I can see by your case that the road is not finished with you yet. Eight Johto badges open this bracket. You hold ' + jBadges.length + '. Blackthorn is the usual last stop. I will keep your page open.']); return true; }
+      if (flags.johto_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Conference book in the good ink, trainer. Whatever mountain is next — and there is always a next one — Lastlight Town was glad to host this chapter.']); return true; }
+      if (jBadges.length < 8) { say(['Conference registration, trainer — and I can see by your case that the road is not finished with you yet. Eight Yamato badges open this bracket. You hold ' + jBadges.length + '. Cragmoor is the usual last stop. I will keep your page open.']); return true; }
       if (!flags.conference_registered) {
-        say(['Eight badges. Counted, verified, and — if I may — well carried, trainer. Let me write your name into the Silver Conference properly... There. Registered.', 'The bracket: two qualifying battles, here in this stadium, then the names you already know are waiting deeper in. Gary is on the far side of the draw. He asked me to tell you the bracket was "finally interesting." His words. Begin when you are ready — speak to me for each qualifier.'], () => {
+        say(['Eight badges. Counted, verified, and — if I may — well carried, trainer. Let me write your name into the Lastlight Conference properly... There. Registered.', 'The bracket: two qualifying battles, here in this stadium, then the names you already know are waiting deeper in. Gary is on the far side of the draw. He asked me to tell you the bracket was "finally interesting." His words. Begin when you are ready — speak to me for each qualifier.'], () => {
           flags.conference_registered = true;
           g.audio.playSfx('dex-register');
-          g.ui.toast('Registered for the Silver Conference!');
+          g.ui.toast('Registered for the Lastlight Conference!');
         });
         return true;
       }
@@ -2299,7 +2299,7 @@ Object.assign(OverworldScene.prototype, {
       if (!flags.beat_conference_q2) { say(['Qualifiers first. Brenna, then Cato — the bracket is the bracket, even for the main event. I will be right here, being patient at a professional standard.']); return true; }
       const gt = TRAINERS.gary_johto;
       say(gt.intro.map((l) => l.replace('{player}', st.player.name)), () => {
-        g.ui.showMenu('Face Gary — the Silver Conference centrepiece?', [
+        g.ui.showMenu('Face Gary — the Lastlight Conference centrepiece?', [
           { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => { if (v === 'yes') this.startJohtoBattle('gary_johto', null); });
       }, 'GARY');
@@ -2339,7 +2339,7 @@ Object.assign(OverworldScene.prototype, {
               say(lines, () => {
                 flags.johto_complete = true;
                 g.audio.playSfx('badge');
-                say(['Silver Conference — the run ends in honours, and Johto ends with it: eight badges, a rivalry settled, a lake calmed, a tower retaken, and a Conference that will be argued about in Silver Town for a decade. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
+                say(['Lastlight Conference — the run ends in honours, and Yamato ends with it: eight badges, a rivalry settled, a lake calmed, a tower retaken, and a Conference that will be argued about in Lastlight Town for a decade. The road home is waiting, trainer. It always was.'], () => { checkArcCompletion(g); }, 'NARRATOR');
               }, 'HARRISON');
             },
           }));
@@ -2389,29 +2389,29 @@ Object.assign(OverworldScene.prototype, {
           'Whatever signed this meadow was not passing through. It was announcing. East of here the land opens out — the National Park, all that flat green under all that sky. A creature made of storm does not hide in woods and alleys. It waits in the open, daring the weather to argue.'],
         again: ['The stones keep their signature. The park, trainer — open ground, when your hair starts to rise.'],
         after: ['I heard the thunder over the park stop all at once, like a sentence finishing. Rangers talk, trainer. Congratulations — the meadow stones make sense now: it was practising its autograph.'] },
-      beast_sign_entei_1: { arc: 'arc_entei', sign: 'arc_entei_sign1', prev: null, toast: 'Entei\'s trail: warm pawprints in the Burned Tower\'s ash. It went toward heat.',
+      beast_sign_entei_1: { arc: 'arc_entei', sign: 'arc_entei_sign1', prev: null, toast: 'Entei\'s trail: warm pawprints in the Ashen Tower\'s ash. It went toward heat.',
         dormant: ['One hundred and fifty years of ash, and my whole duty is to keep it unstepped-in. Something died in this tower, trainer, and something else has been keeping the grief warm ever since. I sweep around the prints. That is all I will say while the basement sleeps.'],
         lines: ['You have been below — I can tell; everyone who has wears the same quiet for a day. Then look, and do not step: the ash by the north wall. Prints. Enormous, fresh, and warm to the back of the hand, in a tower that has been cold since before my grandfather\'s grandfather.',
           'The monks\' old books say the fire-beast walks out of this ash when it walks at all, and goes where the earth itself is hot. Mortar, trainer. The mountain east of us has a furnace in it that no one dug. Whatever was reborn in fire will go home to heat eventually.'],
-        again: ['Prints in the ash, pointing east. Mt. Mortar, trainer — follow the warmth.'],
+        again: ['Prints in the ash, pointing east. Mt. Millstone, trainer — follow the warmth.'],
         after: ['The ash is cold this morning — truly cold, for the first time in my tenure. The tower feels... finished with something. Whatever you did on that mountain, monk\'s honour: the old tower thanks you.'] },
-      beast_sign_entei_2: { arc: 'arc_entei', sign: 'arc_entei_sign2', prev: 'arc_entei_sign1', toast: 'Entei\'s trail ends in Mt. Mortar\'s deep chamber.',
-        tooEarly: ['You feel it too? The warm draught from the upper halls. Master says it is geology. Master also says I imagine the smell of woodsmoke. Start where the prints are, trainer — the Burned Tower in Ecruteak keeps an ashkeeper who reads ash the way you read a map.'],
-        lines: ['Shh — feel the floor. There. Again. The mountain has a heartbeat, and it is not mine. It started the week the tower in Ecruteak woke; Master doubled our training and tripled his pretending not to notice.',
+      beast_sign_entei_2: { arc: 'arc_entei', sign: 'arc_entei_sign2', prev: 'arc_entei_sign1', toast: 'Entei\'s trail ends in Mt. Millstone\'s deep chamber.',
+        tooEarly: ['You feel it too? The warm draught from the upper halls. Master says it is geology. Master also says I imagine the smell of woodsmoke. Start where the prints are, trainer — the Ashen Tower in Lantern keeps an ashkeeper who reads ash the way you read a map.'],
+        lines: ['Shh — feel the floor. There. Again. The mountain has a heartbeat, and it is not mine. It started the week the tower in Lantern woke; Master doubled our training and tripled his pretending not to notice.',
           'Twice now I have seen the steam burst UP the chimney vents with nothing cooking below, and once — once — I heard a sound come down the shafts like a furnace clearing its throat. Whatever is using the deep chamber has a volcano\'s manners. Go carefully, trainer. The upper halls, and mind the heat.'],
         again: ['The heartbeat is still there, under the floor. The deep chamber, trainer — upper halls, and mind the heat.'],
         after: ['The mountain is quiet. Not cold — quiet, the way a dojo is quiet after the last bow. Master has started admitting he noticed things. Progress on every front, then.'] },
-      beast_sign_suicune_1: { arc: 'arc_suicune', sign: 'arc_suicune_sign1', prev: null, toast: 'Suicune was seen at the Bell Tower\'s foot. The wardens say it comes for the last time when its kin are quiet.',
+      beast_sign_suicune_1: { arc: 'arc_suicune', sign: 'arc_suicune_sign1', prev: null, toast: 'Suicune was seen at the Chime Tower\'s foot. The wardens say it comes for the last time when its kin are quiet.',
         dormant: ['I wind the tower bells and polish what the wind leaves. On certain mornings the big bell is wet — WET, trainer — though the night was dry as paper. The last keeper wrote it in the log for forty years and never once explained it. Keepers do not explain. We record.'],
-        lines: ['Then you are the one the logbook has been waiting for, because I am recording it now: three mornings since the tower woke, I have come at dawn and found it standing at the Bell Tower\'s foot. Still as a held breath. Ribbons moving in a wind that was not blowing anything else.',
+        lines: ['Then you are the one the logbook has been waiting for, because I am recording it now: three mornings since the tower woke, I have come at dawn and found it standing at the Chime Tower\'s foot. Still as a held breath. Ribbons moving in a wind that was not blowing anything else.',
           'It did not run from me. It does not run, the old texts say — it arrives, when the water of the world needs carrying somewhere. The texts also say it will not come to the tower for the last time until its kin are quiet. The thunder and the fire first, trainer. Then, the tower\'s foot, at dawn.'],
         again: ['Dawn, the tower\'s foot — but only when the others are quiet. It keeps its own order, that one.'],
         after: ['This morning the big bell was dry, and the tower felt ordinary, and ordinary has never felt so much like a gift. The logbook has your name in it now, trainer. Keepers record. That is the highest honour we have.'] },
-      beast_sign_suicune_2: { arc: 'arc_suicune', sign: 'arc_suicune_sign2', prev: 'arc_suicune_sign1', toast: 'Suicune\'s route ends at the Bell Tower\'s foot.',
-        tooEarly: ['Fishers notice water, trainer — it is most of the job. If it is the clear-running water you are asking after, start in Ecruteak. The bell wardens keep a log of strange mornings, and lately every morning in it is strange.'],
-        lines: ['You see this shore? The northernmost rocks of Cianwood, where the inlet runs muddy nine days in ten. Last week it ran CLEAR — clear as a poured glass, all the way out to the second buoy — and a shape went along the waterline faster than the current, not swimming, not flying. Walking on the skin of the sea like it was a road it owned.',
-          'My grandmother had a word for water that cleans itself as it goes, and the word was a name, and I am not saying it out loud where the gulls can steal it. But the Ecruteak wardens will. It was travelling, trainer, settling its route. Where it ends, they say, is a tower — when the time is right.'],
-        again: ['The inlet has gone back to muddy, which almost disappoints me. The tower in Ecruteak, trainer — its foot, at dawn, when the others are quiet.'],
+      beast_sign_suicune_2: { arc: 'arc_suicune', sign: 'arc_suicune_sign2', prev: 'arc_suicune_sign1', toast: 'Suicune\'s route ends at the Chime Tower\'s foot.',
+        tooEarly: ['Fishers notice water, trainer — it is most of the job. If it is the clear-running water you are asking after, start in Lantern. The bell wardens keep a log of strange mornings, and lately every morning in it is strange.'],
+        lines: ['You see this shore? The northernmost rocks of Tidewall, where the inlet runs muddy nine days in ten. Last week it ran CLEAR — clear as a poured glass, all the way out to the second buoy — and a shape went along the waterline faster than the current, not swimming, not flying. Walking on the skin of the sea like it was a road it owned.',
+          'My grandmother had a word for water that cleans itself as it goes, and the word was a name, and I am not saying it out loud where the gulls can steal it. But the Lantern wardens will. It was travelling, trainer, settling its route. Where it ends, they say, is a tower — when the time is right.'],
+        again: ['The inlet has gone back to muddy, which almost disappoints me. The tower in Lantern, trainer — its foot, at dawn, when the others are quiet.'],
         after: ['The harbourmaster asked me why the fish have been calm all week. I told him the water signed a treaty. He laughed. Let him — you and I know what walked the shoreline.'] },
     };
     const BS = BEAST_SIGNS[kind];
@@ -2435,7 +2435,7 @@ Object.assign(OverworldScene.prototype, {
         say(['The history you have; the bell you have not, and the bell waits on the beasts. Quiet the thunder, the fire, and the north wind first, {player} — then the sisters. The tower keeps its order, and so do I.']);
         return true;
       }
-      say(['You ask an old man about towers, in Ecruteak, in this year of all years. Walk with me — my knees teach better than my chair does.',
+      say(['You ask an old man about towers, in Lantern, in this year of all years. Walk with me — my knees teach better than my chair does.',
         'A hundred and fifty years ago this town kept two towers, so that whichever way the great bird came over the hills there would be bells beneath it. The bells were never alarms, child. They were doorbells. Then lightning — ordinary, stupid, indifferent lightning — took the western tower, and three Pokemon who slept in its basement died in a fire no one could outrun.',
         'And the bird came back. That is the part the histories whisper: it came down through the smoke and it CALLED — and the three who died stood up out of the ash and ran, remade: one into thunder, one into the mountain\'s fire, one into the north wind itself. Then it circled the new tower once, and it has been waiting ever since — not for worship. For a heart it could trust with what it protects.',
         'You saw it, didn\'t you. On the road, in the morning, most likely — it likes to look at candidates before candidates know there is a test. The sisters at the dance theatre keep its bell. When the three it raised are quiet, ask them. And climb at dawn. Everything about that bird happens at dawn.'], () => {
@@ -2483,8 +2483,8 @@ Object.assign(OverworldScene.prototype, {
     // ---- the west leaders ----
     const LEADERS = {
       falkner: { badge: 'zephyrbadge', gate: 'sprout_tower_done',
-        gateLines: ['Not yet, challenger. On this side of Johto we do it in order: Sprout Tower first — the climb, the monks, the Elder\'s blessing. My gym is the second half of the test, and I will not rob you of the first.'],
-        post: 'The tower sways, the gulls turn, and Violet is quiet below us. Any time your team wants the sky again, challenger, my gym is its address.' },
+        gateLines: ['Not yet, challenger. On this side of Yamato we do it in order: Newleaf Tower first — the climb, the monks, the Elder\'s blessing. My gym is the second half of the test, and I will not rob you of the first.'],
+        post: 'The tower sways, the gulls turn, and Iris is quiet below us. Any time your team wants the sky again, challenger, my gym is its address.' },
       bugsy: { badge: 'hivebadge', gate: null, gateLines: [],
         post: 'The webs are re-strung and the forest is humming again. You are welcome under these trees any time, Hive Badge holder.' },
       whitney: { badge: 'plainbadge', gate: null, gateLines: [],
@@ -2503,7 +2503,7 @@ Object.assign(OverworldScene.prototype, {
         post: 'Any time the sea brings you back, Storm Badge holder, my gym is its loudest address. Bring your hands — and your appetite. My wife insists on feeding challengers who survive me.' },
       jasmine: { badge: 'mineralbadge', gate: 'amphy_healed',
         gateLines: ['I am sorry — truly. I cannot battle while Amphy is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my Steelix deserves better from me. The light first, trainer. Please. The light first.'],
-        post: 'Amphy\'s light and your Mineral Badge, trainer — Olivine shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
+        post: 'Amphy\'s light and your Mineral Badge, trainer — Beacon shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
       pryce: { badge: 'glacierbadge', gate: 'johto_hideout_cleared',
         gateLines: ['Not yet, challenger. My town is sitting on a Rocket nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Lance is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
         post: 'The lake is calm, the town is ours, and the Glacier Badge is where it belongs — with the warm-hearted. Winter remembers you kindly, trainer. That is rarer than the badge.' },
@@ -2525,12 +2525,12 @@ Object.assign(OverworldScene.prototype, {
     if (orderRefusal) { say(orderRefusal); return true; }
     if (L.gate && !flags[L.gate]) { say(L.gateLines); return true; }
     if (kind === 'morty' && !flags.beasts_awakened) {
-      say(['Morty of Ecruteak. Before we battle, a keeper\'s courtesy: the Burned Tower stands open in the west of town, and its basement has been... restless. Look into it, trainer. A leader likes to know what his challengers have seen. Then come back, and we will see each other clearly.']);
+      say(['Morty of Lantern. Before we battle, a keeper\'s courtesy: the Ashen Tower stands open in the west of town, and its basement has been... restless. Look into it, trainer. A leader likes to know what his challengers have seen. Then come back, and we will see each other clearly.']);
       return true;
     }
     if (kind === 'morty' && flags.beasts_awakened) {
       say(['You have been below the tower. I can see the ash on you — not on your clothes, {player}. On the way you hold still.',
-        'Then you know what I know: the statues are gone, and something with eyes like deep water is abroad in Johto. We will speak of it properly after. First — the Fog Badge has been waiting for a challenger the fog respects.'], () => {
+        'Then you know what I know: the statues are gone, and something with eyes like deep water is abroad in Yamato. We will speak of it properly after. First — the Fog Badge has been waiting for a challenger the fog respects.'], () => {
         g.ui.showMenu('Challenge Morty?', [
           { label: 'Challenge', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => { if (v === 'yes') this.startJohtoBattle('morty', null); });
@@ -2546,7 +2546,7 @@ Object.assign(OverworldScene.prototype, {
     return true;
   },
 
-  // The shared leader runner, Johto seat (startOrangeBattle's idiom):
+  // The shared leader runner, Yamato seat (startOrangeBattle's idiom):
   // the def's intro has already played in the handler above for the
   // menu leaders, so this goes straight to the BattleScene; winTrainer
   // writes the badge itself. onWin(won) fires from the battle's onEnd.
@@ -2566,7 +2566,7 @@ Object.assign(OverworldScene.prototype, {
   // loadMap from story-hoenn.mjs HOENN_NPCS). Leaders ride the shared
   // leader runner (startHoennBattle = the startJohtoBattle idiom:
   // winTrainer's award writes badges.hoenn + the badge_<root> flag),
-  // behind the same badge-order gate Johto's leaders carry (the
+  // behind the same badge-order gate Yamato's leaders carry (the
   // validator's prefix law, data-driven from BADGE_SETS.hoenn).
   // Birch, May, Wally, Norman, Cozmo and the admins are state-driven
   // scenes. H4b extends this dispatch at the marked seam.
@@ -2994,7 +2994,7 @@ Object.assign(OverworldScene.prototype, {
   // One dispatch for every NPC carrying a `sinnoh:` key (the actors
   // loadMap appends from story-sinnoh.mjs SINNOH_NPCS). Leaders ride
   // the shared leader runner; the badge-order refusal reads
-  // badges.sinnoh (the generic Johto/Hoenn path). Paul's beats are
+  // badges.sinnoh (the generic Yamato/Hoenn path). Paul's beats are
   // the arc's spine: the lab battle is an entry EVENT (ev_sinnoh_lab);
   // here are his Eterna assessment, the Hearthome Chimchar beat, and
   // the Veilstone audit battle. Dawn's Hearthome beat mirrors May's
@@ -3552,7 +3552,7 @@ Object.assign(OverworldScene.prototype, {
       if (npcId) { const d = Math.sign(bondOf(st, npcId) - before); if (d) g.ui.queueBondPip(d); }
     });
 
-    // ---- Stage J4a: Johto tales (data-driven lines) ----
+    // ---- Stage J4a: Yamato tales (data-driven lines) ----
     // The six west tales carry their dialogue in their defs
     // (story-johto.mjs JOHTO_TALES: offerLines / stageLines /
     // finishLines), so one generic branch serves them all through the
@@ -4272,7 +4272,7 @@ Object.assign(OverworldScene.prototype, {
     return false;
   },
 
-  // Stage J5: descend into the Hideout — the Mahogany shop's
+  // Stage J5: descend into the Hideout — the Redwood shop's
   // stairs (Lance leads the way, or the shopkeeper lets you down).
   // Landing on the map fires the re-homed descent event through the
   // sysLoadMap gate when its conditions hold; after the clear, the
@@ -5222,7 +5222,7 @@ Object.assign(OverworldScene.prototype, {
       const oq = ORANGE_QUESTS.find((qq) => qq.flag && !g.state.story.flags[qq.flag]);
       if (oq) return '▶ ' + oq.text + (oq.badgeCount ? ' (' + ((g.state.badges.orange || []).length) + '/4)' : '') + (oq.titanCount ? ' (' + ((f.orange_2000_moltres ? 1 : 0) + (f.orange_2000_zapdos ? 1 : 0) + (f.orange_2000_articuno ? 1 : 0)) + '/3 titans calmed)' : '');
     }
-    // Stage J4a: while the Johto arc is current, its chain leads the
+    // Stage J4a: while the Yamato arc is current, its chain leads the
     // HUD objective (the west rows in J4a; J4b's appended rows join
     // the same find, in chain order).
     if (currentArcOf(g.state).id === 'johto') {

@@ -74,15 +74,15 @@ export const ITEMS = {
   friendball: { id: 'friendball', name: 'Friend Ball', pocket: 'balls', desc: BALLS.friendball.desc },
   heavyball: { id: 'heavyball', name: 'Heavy Ball', pocket: 'balls', desc: BALLS.heavyball.desc },
   // Stage J6: apricorns (pocket 'items') — picked from apricorn trees
-  // across Johto (src/game/johto-systems.mjs APRICORN_TREES); Kurt in
-  // Azalea crafts one into its matching ball. No price: never mart stock.
-  redapricorn: { id: 'redapricorn', name: 'Red Apricorn', pocket: 'items', desc: 'A ripe red apricorn. Kurt of Azalea can work it into a Level Ball.' },
-  blueapricorn: { id: 'blueapricorn', name: 'Blue Apricorn', pocket: 'items', desc: 'A ripe blue apricorn. Kurt of Azalea can work it into a Lure Ball.' },
-  yellowapricorn: { id: 'yellowapricorn', name: 'Yellow Apricorn', pocket: 'items', desc: 'A ripe yellow apricorn. Kurt of Azalea can work it into a Moon Ball.' },
-  greenapricorn: { id: 'greenapricorn', name: 'Green Apricorn', pocket: 'items', desc: 'A ripe green apricorn. Kurt of Azalea can work it into a Friend Ball.' },
-  pinkapricorn: { id: 'pinkapricorn', name: 'Pink Apricorn', pocket: 'items', desc: 'A ripe pink apricorn. Kurt of Azalea can work it into a Love Ball.' },
-  whiteapricorn: { id: 'whiteapricorn', name: 'White Apricorn', pocket: 'items', desc: 'A ripe white apricorn. Kurt of Azalea can work it into a Fast Ball.' },
-  blackapricorn: { id: 'blackapricorn', name: 'Black Apricorn', pocket: 'items', desc: 'A ripe black apricorn. Kurt of Azalea can work it into a Heavy Ball.' },
+  // across Yamato (src/game/johto-systems.mjs APRICORN_TREES); Kurt in
+  // Cinder crafts one into its matching ball. No price: never mart stock.
+  redapricorn: { id: 'redapricorn', name: 'Red Apricorn', pocket: 'items', desc: 'A ripe red apricorn. Kurt of Cinder can work it into a Level Ball.' },
+  blueapricorn: { id: 'blueapricorn', name: 'Blue Apricorn', pocket: 'items', desc: 'A ripe blue apricorn. Kurt of Cinder can work it into a Lure Ball.' },
+  yellowapricorn: { id: 'yellowapricorn', name: 'Yellow Apricorn', pocket: 'items', desc: 'A ripe yellow apricorn. Kurt of Cinder can work it into a Moon Ball.' },
+  greenapricorn: { id: 'greenapricorn', name: 'Green Apricorn', pocket: 'items', desc: 'A ripe green apricorn. Kurt of Cinder can work it into a Friend Ball.' },
+  pinkapricorn: { id: 'pinkapricorn', name: 'Pink Apricorn', pocket: 'items', desc: 'A ripe pink apricorn. Kurt of Cinder can work it into a Love Ball.' },
+  whiteapricorn: { id: 'whiteapricorn', name: 'White Apricorn', pocket: 'items', desc: 'A ripe white apricorn. Kurt of Cinder can work it into a Fast Ball.' },
+  blackapricorn: { id: 'blackapricorn', name: 'Black Apricorn', pocket: 'items', desc: 'A ripe black apricorn. Kurt of Cinder can work it into a Heavy Ball.' },
   // Medicine
   potion: { id: 'potion', name: 'Potion', pocket: 'medicine', price: 300, heal: 20, desc: 'Restores 20 HP.' },
   superpotion: { id: 'superpotion', name: 'Super Potion', pocket: 'medicine', price: 700, heal: 50, desc: 'Restores 50 HP.' },
@@ -165,19 +165,19 @@ export const ITEMS = {
   searubybadge: { id: 'searubybadge', name: 'Sea Ruby Badge', pocket: 'key', desc: 'From Danny of Navel. The climb was the first half of the challenge.' },
   spikeshellbadge: { id: 'spikeshellbadge', name: 'Spike Shell Badge', pocket: 'key', desc: 'From Rudy of Trovita. He tests a team type by type, then dances.' },
   jadestarbadge: { id: 'jadestarbadge', name: 'Jade Star Badge', pocket: 'key', desc: 'From Luana of Kumquat. Her double battle: two pairs, back to back, no rest.' },
-  // Johto badges (Stage J4a): the Arden representation exactly — a
+  // Yamato badges (Stage J4a): the Arden representation exactly — a
   // key-pocket ITEMS row per badge, the id in badges.johto, and the
   // badge_<root> story flag. West four ship playable in J4a; the east
   // four rows exist now so the set, the Cheat Terminal stock and the
   // validator sequence are complete before J4b stages their gyms.
-  zephyrbadge: { id: 'zephyrbadge', name: 'Zephyr Badge', pocket: 'key', desc: 'From Falkner of Violet. The wind over the tower road is yours to borrow.' },
-  hivebadge: { id: 'hivebadge', name: 'Hive Badge', pocket: 'key', desc: 'From Bugsy of Azalea. Won under the trees, in a room of load-bearing webs.' },
-  plainbadge: { id: 'plainbadge', name: 'Plain Badge', pocket: 'key', desc: 'From Whitney of Goldenrod. It is not plain at all, whatever people say.' },
-  fogbadge: { id: 'fogbadge', name: 'Fog Badge', pocket: 'key', desc: 'From Morty of Ecruteak. For a trainer the fog decided to show things to.' },
-  stormbadge: { id: 'stormbadge', name: 'Storm Badge', pocket: 'key', desc: 'From Chuck of Cianwood. For a team the storm respects.' },
-  mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Olivine. It shines back at the lighthouse.' },
-  glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Mahogany. It will not melt. Neither will you.' },
-  risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Blackthorn — awarded in the Dragon\'s Den, by the clan\'s law, after the elder\'s test.' },
+  zephyrbadge: { id: 'zephyrbadge', name: 'Zephyr Badge', pocket: 'key', desc: 'From Falkner of Iris. The wind over the tower road is yours to borrow.' },
+  hivebadge: { id: 'hivebadge', name: 'Hive Badge', pocket: 'key', desc: 'From Bugsy of Cinder. Won under the trees, in a room of load-bearing webs.' },
+  plainbadge: { id: 'plainbadge', name: 'Plain Badge', pocket: 'key', desc: 'From Whitney of Signal. It is not plain at all, whatever people say.' },
+  fogbadge: { id: 'fogbadge', name: 'Fog Badge', pocket: 'key', desc: 'From Morty of Lantern. For a trainer the fog decided to show things to.' },
+  stormbadge: { id: 'stormbadge', name: 'Storm Badge', pocket: 'key', desc: 'From Chuck of Tidewall. For a team the storm respects.' },
+  mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Beacon. It shines back at the lighthouse.' },
+  glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Redwood. It will not melt. Neither will you.' },
+  risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Cragmoor — awarded in the Drake\'s Den, by the clan\'s law, after the elder\'s test.' },
   // Hoenn badges (Stage H4a): the Arden representation exactly — a
   // key-pocket ITEMS row per badge, the id in badges.hoenn, and the
   // badge_<root> story flag. First four are playable in H4a; the east
@@ -220,18 +220,18 @@ export const ITEMS = {
   lucksymbol: { id: 'lucksymbol', name: 'Luck Symbol', pocket: 'key', desc: 'From the Battle Pike. The rooms choose what happens to you in there; this says you walked out smiling anyway.' },
   spiritsymbol: { id: 'spiritsymbol', name: 'Spirit Symbol', pocket: 'key', desc: 'From the Battle Palace. For trusting your partners to choose their own moves — and being right to trust them.' },
   bravesymbol: { id: 'bravesymbol', name: 'Brave Symbol', pocket: 'key', desc: 'From the Battle Pyramid. Carried up through the dark, floor by floor, with only what you brought in your bag.' },
-  // Stage J4b key item: the Cianwood pharmacy's Secret Potion, the
+  // Stage J4b key item: the Tidewall pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Amphy in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
-  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Cianwood pharmacy. For Amphy, the lighthouse Pokemon — handle with both hands.' },
+  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Amphy, the lighthouse Pokemon — handle with both hands.' },
   // Arc 4 Stage S4: the Gracidea — Shaymin's forme key item. Use it
   // on a Shaymin in the party to swap land <-> sky (the S4 forme
   // switch, game/sinnoh-systems.mjs). Never consumed.
   gracidea: { id: 'gracidea', name: 'Gracidea', pocket: 'key', desc: 'A flower of gratitude that blooms only for Shaymin. Use it on Shaymin to swap between its land and sky formes.' },
-  // Stage J5 key item: the Clear Bell, given by Ecruteak's Kimono
+  // Stage J5 key item: the Clear Bell, given by Lantern's Kimono
   // sisters once the three awakened beasts are quieted — its chime is
-  // the Bell Tower summit's invitation to Ho-Oh (arc_hooh).
-  clearbell: { id: 'clearbell', name: 'Clear Bell', pocket: 'key', desc: 'A bell of clear, cold crystal, kept by the Kimono sisters of Ecruteak. Its chime carries further than sound should — something in the high sky is meant to hear it.' },
+  // the Chime Tower summit's invitation to Ho-Oh (arc_hooh).
+  clearbell: { id: 'clearbell', name: 'Clear Bell', pocket: 'key', desc: 'A bell of clear, cold crystal, kept by the Kimono sisters of Lantern. Its chime carries further than sound should — something in the high sky is meant to hear it.' },
   winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Orange League Winner\'s Trophy, presented at Pummelo Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE

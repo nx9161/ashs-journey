@@ -4,7 +4,7 @@
 // class only sets amplitude, rate and pattern per species. Assigned per
 // species in DATA — every battler species in the game (395 rows: the 394
 // authored species pairs + the partner) appears exactly once below.
-// Stage J1 (Arc 2): +94 Johto rows by the same rule (bird->hover, fish/
+// Stage J1 (Arc 2): +94 Yamato rows by the same rule (bird->hover, fish/
 // serpent->serpentine, blob->inert, else grounded; hand overrides for the
 // floaters misdreavus/unown/togetic/celebi/jumpluff -> hover).
 // Classes (measurably different amplitude/rate — see IDLE_CLASS_PARAMS):

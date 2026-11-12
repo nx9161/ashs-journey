@@ -7,7 +7,7 @@
 //
 // The field is per-map DATA: maps7.mjs declares `weather` on every
 // Hoenn outdoor map ('clear' | 'rain' | 'sun' | 'ash' | 'sand').
-// Arden/Johto/Orange maps declare no field and resolve 'clear' —
+// Arden/Yamato/Orange maps declare no field and resolve 'clear' —
 // untouched. Indoor and dark maps never render weather.
 //
 // CLIMAX-STATE OVERRIDE (H4a ships the mechanism; H4b's climax drives

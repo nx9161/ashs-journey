@@ -144,17 +144,17 @@ export const MAP_GROUND = {
   'trovita-gym': 'rubble',
   'kumquat-gym': 'mind',
   'pummelo-stadium': 'open',
-  // Stage J4a: Johto west gym signature Grounds (existing 15 only —
+  // Stage J4a: Yamato west gym signature Grounds (existing 15 only —
   // no new Grounds this stage): Falkner's sky gym rides the Storm,
   // Bugsy's forest gym the Bloom, Whitney's the Open (the Plain Badge
   // is plain all the way down, by her own cheerful admission), and
   // Morty's the Grave. West landmark interiors follow their feel:
-  // Sprout Tower blooms, the DOZELING Well runs Tide-wet, the Burned
+  // Newleaf Tower blooms, the DOZELING Well runs Tide-wet, the Burned
   // Tower is Grave ground, and the lab / Kurt's house stay Open.
-  'gym-violet': 'storm', // Violet Gym — Falkner
-  'gym-azalea': 'bloom', // Azalea Gym — Bugsy
-  'gym-goldenrod': 'open', // Goldenrod Gym — Whitney
-  'gym-ecruteak': 'grave', // Ecruteak Gym — Morty
+  'gym-violet': 'storm', // Iris Gym — Falkner
+  'gym-azalea': 'bloom', // Cinder Gym — Bugsy
+  'gym-goldenrod': 'open', // Signal Gym — Whitney
+  'gym-ecruteak': 'grave', // Lantern Gym — Morty
   'sprout-tower-1': 'bloom',
   'sprout-tower-2': 'bloom',
   'slowpoke-well': 'tide',
@@ -162,19 +162,19 @@ export const MAP_GROUND = {
   'burned-tower-2': 'grave',
   'elm-lab': 'open',
   'kurt-house': 'open',
-  // Stage J4b: Johto east gym signature Grounds (existing 15 only —
+  // Stage J4b: Yamato east gym signature Grounds (existing 15 only —
   // no new Grounds this stage): Chuck's shore gym rides the Rubble
   // (physical moves land true where the waves hit), Jasmine's harbor
   // gym the Tide, Pryce's the Frost, Clair's the Ember (the den's
   // lava-hearted dark). Landmarks follow their feel: the lighthouse
-  // and the Lake of Rage run Tide, the Radio Tower hums Storm, the
-  // Dragon's Den keeps Grave reverence, the Silver Stadium takes
-  // Open (the league-floor precedent), and Mt. Silver's summit cave
+  // and the Wrathmere Lake run Tide, the Radio Tower hums Storm, the
+  // Drake's Den keeps Grave reverence, the Lastlight Stadium takes
+  // Open (the league-floor precedent), and Mt. Lastlight's summit cave
   // is Frost ground.
-  'gym-cianwood': 'rubble', // Cianwood Gym — Chuck
-  'gym-olivine': 'tide', // Olivine Gym — Jasmine
-  'gym-mahogany': 'frost', // Mahogany Gym — Pryce
-  'gym-blackthorn': 'ember', // Blackthorn Gym — Clair
+  'gym-cianwood': 'rubble', // Tidewall Gym — Chuck
+  'gym-olivine': 'tide', // Beacon Gym — Jasmine
+  'gym-mahogany': 'frost', // Redwood Gym — Pryce
+  'gym-blackthorn': 'ember', // Cragmoor Gym — Clair
   'lighthouse-1': 'tide',
   'lighthouse-2': 'tide',
   'lake-of-rage': 'tide',

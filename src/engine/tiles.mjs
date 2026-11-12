@@ -215,7 +215,7 @@ export const O1_PROP_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'prop').map(([
 export const O1_FLOOR_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const O1_WALL_KINDS = O1_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const O1_WALKABLE_CHARS = O1_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => O1_KIND_CHARS[k]);
-// ---- Arc 2 Stage J3a: Johto kinds ----
+// ---- Arc 2 Stage J3a: Yamato kinds ----
 // Chars continue the W6/W7/O1 block at U+1E00+164 (W6 idx 0..131, W7
 // 132..151, O1 152..163). Same class convention as O1: floor = WALKABLE
 // ground family of its own, wall = solid, prop = solid object composited
@@ -236,16 +236,16 @@ export const J3_PROP_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'prop').map(([
 export const J3_FLOOR_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => k);
 export const J3_WALL_KINDS = J3_KIND_DEFS.filter(([, c]) => c === 'wall').map(([k]) => k);
 export const J3_WALKABLE_CHARS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => J3_KIND_CHARS[k]);
-// ---- Arc 2 Stage J3a: Johto per-town identity kinds (Premium+ W5
+// ---- Arc 2 Stage J3a: Yamato per-town identity kinds (Premium+ W5
 // machinery, extended) ----
-// The six west-Johto settlements own the same eight signature kinds as
+// The six west-Yamato settlements own the same eight signature kinds as
 // the Arden towns (tg ground / tg2 ground II / tc canopy / td dress /
 // tr roof / tl landmark facade / th house-roof / tw house-wall). The
 // U+00C0.. Latin-1 blocks are exhausted by the eleven Arden towns, so
-// Johto chars continue the Latin Extended Additional block after the
+// Yamato chars continue the Latin Extended Additional block after the
 // J3 kinds: town i owns idx 173+i*8 .. 180+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
-// kind-name prefixes (tg-/tc-/td-/tr-/tl-/th-/tw-), so Johto kinds ride
+// kind-name prefixes (tg-/tc-/td-/tr-/tl-/th-/tw-), so Yamato kinds ride
 // the shipped W5 rendering paths unchanged.
 export const JOHTO_TOWN_ORDER = ['newbark', 'cherrygrove', 'violet', 'azalea', 'goldenrod', 'ecruteak',
   'olivine', 'cianwood', 'mahogany', 'blackthorn', 'silvertown'];
@@ -276,7 +276,7 @@ export const JOHTO_TOWN_GROUND_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_C
 export const JOHTO_TOWN_GROUND2_CHARS = JOHTO_TOWN_ORDER.map((id) => JOHTO_TOWN_CHARS[id].tg2);
 // ---- Arc 3 Stage H3a: Hoenn kinds ----
 // Chars continue the block at U+1E00+261 (W6 0..131, W7 132..151, O1
-// 152..163, J3 kinds 164..172, Johto towns 173..260). Same class
+// 152..163, J3 kinds 164..172, Yamato towns 173..260). Same class
 // convention: floor = WALKABLE ground family of its own, wall = solid,
 // prop = solid object composited over the ground it stands on.
 // Authored art: assets/sprites/pix/tiles/tile-{prop-,}<kind>.pix (H3a).
@@ -298,7 +298,7 @@ export const H3_WALKABLE_CHARS = H3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // ---- Arc 3 Stage H3a: Hoenn per-town identity kinds (the W5/J3
 // machinery, extended a third time) ----
 // The eleven west/central-Hoenn settlements own the same eight
-// signature kinds as the Arden/Johto towns. Chars continue the block
+// signature kinds as the Arden/Yamato towns. Chars continue the block
 // after the H3 kinds: town i owns idx 268+i*8 .. 275+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
 // kind-name prefixes, so Hoenn kinds ride the shipped W5 paths.
@@ -359,7 +359,7 @@ export const H3B_WALL_KINDS = H3B_KIND_DEFS.filter(([, c]) => c === 'wall').map(
 export const H3B_WALKABLE_CHARS = H3B_KIND_DEFS.filter(([, c]) => c === 'floor').map(([k]) => H3B_KIND_CHARS[k]);
 // ---- Arc 4 Stage S3a: Sinnoh kinds ----
 // Chars continue the block at U+1E00+404 (W6 0..131, W7 132..151, O1
-// 152..163, J3 kinds 164..172, Johto towns 173..260, H3 kinds 261..267,
+// 152..163, J3 kinds 164..172, Yamato towns 173..260, H3 kinds 261..267,
 // Hoenn towns 268..395, H3b kinds 396..403). Same class convention:
 // floor = WALKABLE ground family of its own, wall = solid, prop =
 // solid object composited over the ground it stands on. Authored
@@ -382,7 +382,7 @@ export const S3_WALKABLE_CHARS = S3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // ---- Arc 4 Stage S3a: Sinnoh per-town identity kinds (the W5/J3/H3
 // machinery, extended a fourth time) ----
 // The fourteen Sinnoh settlements own the same eight signature kinds
-// as the Arden/Johto/Hoenn towns. Chars continue the block after the
+// as the Arden/Yamato/Hoenn towns. Chars continue the block after the
 // S3 kinds: town i owns idx 412+i*8 .. 419+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. S3a authors the ten west/central
 // towns (twinleaf..canalave, idx 412..491); the four east towns

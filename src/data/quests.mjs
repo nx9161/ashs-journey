@@ -153,19 +153,19 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 export const TALE_NPCS = [
-  // Arc 2 Stage J3a: the Johto embark captain, appended to Dawnwick's
+  // Arc 2 Stage J3a: the Yamato embark captain, appended to Dawnwick's
   // roster through this same loadMap append idiom (Dawnwick's map def in
   // maps3.mjs is NOT rewritten). He carries NO tale/role — the ferry
   // handler (overworld-systems, ferryArc 'johto') owns him entirely:
   // gated by the Foundation embark leg (embark_johto) outbound, and
-  // unconditional once Johto has been reached (NO-SOFT-LOCK LAW). He
+  // unconditional once Yamato has been reached (NO-SOFT-LOCK LAW). He
   // stands at (11,8), one tile east of the Caldera FERRYMAN, on a
   // tg2 ground tile in the open south field — no door, warp or route
   // can be sealed from there. The return captain stands on the
-  // New Bark dock (maps6.mjs, CAPT WESTWIND).
-  { map: 'pallet', x: 11, y: 8, name: 'CAPT JOHTO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
+  // Galefield dock (maps6.mjs, CAPT WESTWIND).
+  { map: 'pallet', x: 11, y: 8, name: 'CAPT YAMATO', art: 'sailor', skin: '#c89878', shirt: '#2a7a6a', pants: '#2a2a3a', hair: '#3a2a1a',
     ferry: 'newbark', ferryArc: 'johto',
-    dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
+    dialogue: ['The Galefield run is the western crossing — Yamato water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Arc 3.5 Stage F0: the Frontier embark captain, appended to
   // Dawnwick's roster through this same loadMap append idiom. He
   // carries NO tale/role — the ferry handler (overworld-systems,
@@ -175,11 +175,11 @@ export const TALE_NPCS = [
   // that homecoming while the Frontier was still sealed) outbound,
   // and unconditional once the Frontier has been reached
   // (NO-SOFT-LOCK LAW). He stands at (11,9), one tile south of CAPT
-  // JOHTO (11,8) in Dawnwick's open south field — a plain ground tile:
+  // YAMATO (11,8) in Dawnwick's open south field — a plain ground tile:
   // no door, warp or route tile is sealed from there, and Dawnwick's
   // walkable graph stays one fragment with all warps reachable
   // (celadon-sweep verified before/after in F0; the bundle suite pins
-  // his adjacency). The tile one EAST of CAPT JOHTO, (12,8), was
+  // his adjacency). The tile one EAST of CAPT YAMATO, (12,8), was
   // tried first and REJECTED on that evidence: it is the only exit
   // of the (13,8)/(14,8) pocket and an NPC there seals it into a
   // second fragment.
@@ -194,7 +194,7 @@ export const TALE_NPCS = [
   // Homecoming #3) outbound, and unconditional once Hoenn has been
   // reached (NO-SOFT-LOCK LAW). He stands at (16,10) on Arcport's
   // dock row, east of CAPT ORANGE (13,10) — each port its OWN captain
-  // (the Johto smell, J-register). The return captain stands on the
+  // (the Yamato smell, J-register). The return captain stands on the
   // Slateport dock (maps7.mjs, CAPT MERIDIAN).
   { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#5a2a7a', pants: '#2a2a3a', hair: '#2a1a0a',
     ferry: 'littleroot', ferryArc: 'hoenn',

@@ -493,7 +493,7 @@ const driver = `
     JSON.stringify({ arc: st.story.arc, hook: st.story.flags.hook_johto, embark: st.story.flags.embark_johto }));
 
   var owP = gotoMap(g, 'pallet', 7, 9);
-  talk(g, owP, 'CAPT JOHTO'); pump(g);
+  talk(g, owP, 'CAPT YAMATO'); pump(g);
   ok('B02 Pallet dock embark: CAPT JOHTO sails the Foundation leg and lands the player in New Bark (reachedarc stamped)',
     owP.mapId === 'newbark' && st.story.flags.reachedarc_johto === true, 'map=' + owP.mapId);
 
@@ -605,8 +605,8 @@ const driver = `
   var labels = g.ui.menu.items.map(function (i) { return i.label; });
   var fogRow = labels.find(function (l) { return l.includes('Fog Badge'); });
   ok('B18 Quest Log renders the JOHTO section on the true path; the Fog row reads complete',
-    labels.some(function (l) { return l.includes('JOHTO'); }) && !!fogRow && fogRow.indexOf('★') === 0,
-    labels.filter(function (l) { return l.includes('Badge') || l.includes('JOHTO'); }).join(' / ').slice(0, 200));
+    labels.some(function (l) { return l.includes('YAMATO'); }) && !!fogRow && fogRow.indexOf('★') === 0,
+    labels.filter(function (l) { return l.includes('Badge') || l.includes('YAMATO'); }).join(' / ').slice(0, 200));
   globalThis.__J4SAVE__ = JSON.parse(JSON.stringify(st));
 
   // ================= branch drives =================
@@ -617,7 +617,7 @@ const driver = `
   seenLines = [];
   talkKind(g2, owF2, 'falkner'); pump(g2);
   ok('B19 Falkner gate: without the Sprout blessing he sends the challenger to the tower first — no battle, no badge',
-    seenLines.join(' | ').includes('Sprout Tower first') && !(g2.scenes.top instanceof BattleScene) && g2.state.badges.johto.length === 0,
+    seenLines.join(' | ').includes('Newleaf Tower first') && !(g2.scenes.top instanceof BattleScene) && g2.state.badges.johto.length === 0,
     seenLines.join(' | ').slice(0, 120));
 
   // Silver LOSS branch: a weak team loses, the story still continues,
@@ -808,10 +808,10 @@ const driver = `
     stE.story.flags.red_defeated === true, 'tries=' + redTries);
   gE.openQuestLog();
   var eLabels = gE.ui.menu.items.map(function (i) { return i.label; });
-  var redRow = eLabels.find(function (l) { return l.includes('silent trainer'); });
+  var redRow = eLabels.find(function (l) { return /^[★▶·] Post-game: the silent trainer/.test(l); });
   ok('E28 Quest Log renders the Johto east rows; the Red row reads complete after the dais',
-    eLabels.some(function (l) { return l.includes('JOHTO'); }) && !!redRow && redRow.indexOf('★') === 0,
-    eLabels.filter(function (l) { return l.includes('Badge') || l.includes('JOHTO'); }).length + ' rows');
+    eLabels.some(function (l) { return l.includes('YAMATO'); }) && !!redRow && redRow.indexOf('★') === 0,
+    eLabels.filter(function (l) { return l.includes('Badge') || l.includes('YAMATO'); }).length + ' rows');
   globalThis.__J4EASTSAVE__ = JSON.parse(JSON.stringify(stE));
 
   // ================= J4b branch drives =================
@@ -1108,7 +1108,7 @@ const driver = `
     seenLines = [];
     talkKind(gG1, owG1, 'morty'); pump(gG1);
     var mortyRefuses = !stG1.badges.johto.includes('fogbadge') && !(gG1.scenes.top instanceof BattleScene)
-      && seenLines.join(' ').includes('Goldenrod City');
+      && seenLines.join(' ').includes('Signal City');
     stG1.badges.johto = ['zephyrbadge', 'hivebadge', 'plainbadge'];
     talkKind(gG1, owG1, 'morty'); drain(gG1);
     var mortyMenu = gG1.ui.menuOpen === true;
@@ -1125,7 +1125,7 @@ const driver = `
     seenLines = [];
     talkKind(gG2, owG2, 'jasmine'); pump(gG2);
     var jasmineRefuses = !stG2.badges.johto.includes('mineralbadge') && !(gG2.scenes.top instanceof BattleScene)
-      && seenLines.join(' ').includes('Cianwood City');
+      && seenLines.join(' ').includes('Tidewall City');
     stG2.badges.johto.push('stormbadge'); stG2.story.flags.badge_storm = true; stG2.story.flags.amphy_healed = true;
     talkKind(gG2, owG2, 'jasmine'); drain(gG2);
     var jasmineMenu = gG2.ui.menuOpen === true;
@@ -1147,7 +1147,7 @@ const driver = `
     seenLines = [];
     talkKind(gG3, owG3b, 'clair'); pump(gG3);
     var clairRefuses = !stG3.story.flags.clair_beaten && !(gG3.scenes.top instanceof BattleScene)
-      && seenLines.join(' ').includes('Mahogany Town');
+      && seenLines.join(' ').includes('Redwood Town');
     stG3.badges.johto.push('glacierbadge'); stG3.story.flags.badge_glacier = true;
     talkKind(gG3, owG3b, 'clair'); drain(gG3);
     var clairMenu = gG3.ui.menuOpen === true;

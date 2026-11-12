@@ -684,7 +684,7 @@ for (const k of W7_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // props draw tile-prop-<kind> (same convention as W6/W7).
 for (const k of [...O1_WALL_KINDS, ...O1_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of O1_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
-// Arc 2 Stage J3a: Johto kinds — same convention as O1.
+// Arc 2 Stage J3a: Yamato kinds — same convention as O1.
 for (const k of [...J3_WALL_KINDS, ...J3_FLOOR_KINDS]) TILE_ART[k] = 'tile-' + k;
 for (const k of J3_PROP_KINDS) TILE_ART[k] = 'tile-prop-' + k;
 // Arc 3 Stage H3a: Hoenn kinds — same convention as O1/J3.
@@ -780,7 +780,7 @@ for (const id of ['pallet', 'viridian', 'pewter', 'cerulean', 'vermilion',
 for (const id of ['pallet', 'cerulean', 'celadon', 'lavender', 'fuchsia', 'cinnabar']) {
   TILE_ART['flora-' + id] = 'tile-flora-' + id;
 }
-// Arc 2 Stage J3a: Johto town identity kinds -> their authored tiles
+// Arc 2 Stage J3a: Yamato town identity kinds -> their authored tiles
 // (the resolver's prefix branches handle tg/tg2/tc/td/tr/tl/th/tw for
 // any town id; tc2 canopy variants are optional and simply absent).
 for (const id of JOHTO_TOWN_ORDER) {
@@ -794,7 +794,7 @@ for (const id of JOHTO_TOWN_ORDER) {
   TILE_ART['tw-' + id] = 'tile-tw-' + id;
 }
 // Arc 3 Stage H3a: Hoenn town identity kinds -> their authored tiles
-// (same resolver prefix branches as Johto).
+// (same resolver prefix branches as Yamato).
 for (const id of SINNOH_TOWN_ORDER) {
   TILE_ART['tg-' + id] = 'tile-tg-' + id;
   TILE_ART['tg2-' + id] = 'tile-tg2-' + id;
@@ -916,7 +916,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     lavender: { roof: ['#4d3d63', '#2d2338', '#71618c'], log: '#6e4f2a', door: '#4a3a5e' }, // steep dark shingle
     fuchsia: { roof: ['#b08d4f', '#6e5626', '#cfa860'], log: '#8d5f2b', door: '#96684a' }, // safari thatch
     cinnabar: { roof: ['#7d3a34', '#452723', '#a96152'], log: '#7d4a2b', door: '#87493f' }, // basalt slab
-    // ---- Wave B: Johto (keyed to JOHTO_TOWN_STYLE forms) ----
+    // ---- Wave B: Yamato (keyed to JOHTO_TOWN_STYLE forms) ----
     newbark: { roof: ['#7fa3a1', '#4c6e6c', '#a8c4c0'], log: '#8a6844', door: '#527a76' }, // lakeside-lab modern: pale teal slate
     cherrygrove: { roof: ['#c48a94', '#8a5560', '#dda8ae'], log: '#7d5226', door: '#a86a72' }, // coastal flower gable: cherry pink
     violet: { roof: ['#8d84a0', '#5b5470', '#aba2bc'], log: '#6e5a44', door: '#5e5470' }, // tower-town stone: grey violet
@@ -1074,7 +1074,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
   cache.kitTowns = {};
   for (const townId of Object.keys(KIT_VARIANTS)) cache.kitTowns[townId] = buildKitSet(townId);
   cache.kitTowns.route1 = buildKitSet(null); // Dawnwick->Fernmere corridor: reference kit dressing
-  cache.kitTowns.r29 = buildKitSet('newbark'); // Wave B: Johto starter corridor wears New Bark's set
+  cache.kitTowns.r29 = buildKitSet('newbark'); // Wave B: Yamato starter corridor wears Galefield's set
   cache.kitTowns.r101 = buildKitSet('littleroot'); // Wave B: Hoenn starter corridor wears Littleroot's set
   cache.kitTowns.r201 = buildKitSet('twinleaf'); // Wave C: Sinnoh starter corridor wears Twinleaf's set
   cache.kitTowns.r216 = buildKitSet('snowpoint'); // Wave C: the snow approach — canopies + tufts dress, authored frost/ice floors stay
@@ -1549,7 +1549,7 @@ const PROP_KINDS = new Set(['counter', 'healmachine', 'pcdesk', 'bed', 'table',
   ...W7_PROP_KINDS,
   // Arc 1.5 Stage O1: Orange props composite over their ground too.
   ...O1_PROP_KINDS,
-  // Arc 2 Stage J3a: Johto props composite over their ground too.
+  // Arc 2 Stage J3a: Yamato props composite over their ground too.
   ...J3_PROP_KINDS,
   // Arc 3 Stage H3a: Hoenn props composite over their ground too.
   ...H3_PROP_KINDS,
@@ -1654,7 +1654,7 @@ function atmoKeyFor(mapId) {
 const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall',
   'waterpump', 'barrel', 'haycart', 'well', 'sacks', 'tub', 'bench', 'planter',
   'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch',
-  // Wave B: Johto/Hoenn regional props (J3/H3/H3B kinds + the W6 props
+  // Wave B: Yamato/Hoenn regional props (J3/H3/H3B kinds + the W6 props
   // those towns use) — same kit-ground treatment as the Arden set.
   'maple', 'apricorn', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',

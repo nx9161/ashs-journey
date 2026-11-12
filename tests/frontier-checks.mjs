@@ -171,7 +171,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
 // -- CAPT FRONTIER placement + Pallet connectivity (pure, sweep-style) --
 {
   const capt = TALE_NPCS.find((n) => n.name === 'CAPT FRONTIER');
-  const johto = TALE_NPCS.find((n) => n.name === 'CAPT JOHTO');
+  const johto = TALE_NPCS.find((n) => n.name === 'CAPT YAMATO');
   ok('A19 CAPT FRONTIER appended via the TALE_NPCS idiom on pallet (11,9) — ferry frontierhub + ferryArc frontier, sailor art, no tale/role; CAPT JOHTO unmoved at (11,8)',
     !!capt && capt.map === 'pallet' && capt.x === 11 && capt.y === 9 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
     && capt.art === 'sailor' && !capt.tale && Array.isArray(capt.dialogue) && capt.dialogue.length === 2
@@ -383,7 +383,7 @@ const driver = `
   var capt = ow.map.npcs.find(function (n) { return n.name === 'CAPT FRONTIER'; });
   ok('B01 CAPT FRONTIER stands on Pallet\\'s live roster at (11,9) (ferry frontierhub, ferryArc frontier), beside CAPT JOHTO (11,8)',
     !!capt && capt.x === 11 && capt.y === 9 && capt.ferry === 'frontierhub' && capt.ferryArc === 'frontier'
-    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT JOHTO' && n.x === 11 && n.y === 8; }));
+    && !!ow.map.npcs.find(function (n) { return n.name === 'CAPT YAMATO' && n.x === 11 && n.y === 8; }));
 
   // The gate: embark_frontier deleted (a fresh state never had it) —
   // talking yields the ferry gate line and NO warp, NO sail menu.

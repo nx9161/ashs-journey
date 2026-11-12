@@ -164,10 +164,10 @@ export class OverworldScene {
         npcs = [...npcs, ...taleNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
-      // Stage J4a (Johto story): the same append idiom fields the
-      // Johto story actors (Elm, the west leaders, Kurt, the Sprout
+      // Stage J4a (Yamato story): the same append idiom fields the
+      // Yamato story actors (Elm, the west leaders, Kurt, the Sprout
       // monks, the well Rockets — data/story-johto.mjs JOHTO_NPCS) and
-      // stamps Johto tale roles onto existing maps6 townsfolk by name
+      // stamps Yamato tale roles onto existing maps6 townsfolk by name
       // (JOHTO_NPC_PATCHES). The generated maps6 definitions are never
       // mutated; the scene works on this copy, exactly as for tales.
       const jPatches = JOHTO_NPC_PATCHES.filter((p) => p.map === id);
@@ -176,7 +176,7 @@ export class OverworldScene {
           const p = jPatches.find((pp) => pp.name === n.name);
           if (!p) return n;
           // Stage J4b: a patch may also stamp a functional `johto`
-          // kind (the Cianwood pharmacist, the Den Elder, the pass
+          // kind (the Tidewall pharmacist, the Den Elder, the pass
           // veteran, the Conference Official) — copied only when the
           // patch carries one, so tale-only patches stay byte-true.
           const out = { ...n, tale: p.tale, role: p.role };
