@@ -110,6 +110,11 @@ const TILES = {
 const out = {};
 for (const [id, [x, y]] of Object.entries(TILES)) out[id] = toEntry(extract(SHEET, x, y, 16, 16));
 out['kit-sign'] = toEntry(extract(SHEET, 48, 16, 16, 16, GRASS_GREENS));
+// Wave A: the 2-wide cabin entrances (Saffron's dojo, Fuchsia's safari
+// gate, Cinnabar's mansion) wear French doors — the kit door pairs with
+// its own horizontal mirror, latches meeting at the center post. The
+// mirror is derived from the same slice (same palette, still <=16).
+out['kit-door-r'] = toEntry(extract(SHEET, 98, 228, 16, 16).map((row) => row.slice().reverse()));
 
 // ---- character frames ----
 // Semantic palette keys so the NPC palette-swap machinery (NPC_SWAP_KEYS:
