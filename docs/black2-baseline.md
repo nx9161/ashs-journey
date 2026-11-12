@@ -155,7 +155,15 @@ Game Freak through official channels).
 - **B2-G6 (world detail):** every placed tile/object earns its place
   (owner rule, same evening): roads walkable end-to-end, no object on
   a route tile, placement intentional — mechanically guarded by
-  scripts/audit-reachability.mjs over all maps. Detail redraws follow
+  scripts/audit-reachability.mjs over all maps. Town fabric (owner
+  rule, later the same evening): entries and exits land on paved
+  ground and read as one continuous road across the border; a paved
+  walkway connects every door to the town's through-road; buildings
+  never merge — every house stands separated by ground, never sharing
+  a wall or roofline with its neighbour. Entry/exit audit 2026-11-11:
+  1,844 warps, zero landings inside walls/objects (167 water landings
+  are surf arrivals, by design); first fabric fix landed the same
+  night (Celadon west house: grass step-off paved into a walkway). Detail redraws follow
   the owner's standing art standard: ≥3 tones per object, one light
   direction, modelled ground with clean material edges.
 - **B2-G7 (characters & Pokémon):** detail-redraw queue ordered by
