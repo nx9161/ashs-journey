@@ -106,3 +106,38 @@ export function seasonalSwapFor(pal) {
   }
   return swap;
 }
+
+// ---- kit grade (Wave A, 2026-11-11) --------------------------------------
+// The adopted Gassasin kit's greens are far deeper than our authored
+// ramp (its grass is a pure #008100 against our #5da24a), and the
+// shared Autumn formula drives its red channel from the green — so on
+// kit palettes the grade overshoots into deep red (#a11c00, r:g 5.8:1)
+// where our own art lands in the amber family (r:g ~2.1:1, b ~0.28r).
+// The kit grade corrects ONLY that overshoot, and ONLY on the kit
+// path (engine/art.mjs feeds kit palettes through seasonalSwapForKit;
+// our own art keeps seasonalHex exactly): after the shared grade, a
+// red-dominant Autumn result is pulled back into the family band —
+// green floored at r/2.15, blue floored at 0.26r. Every other season
+// passes through untouched: the kit's Spring/Summer/Winter grades
+// already sit in the family (measured 2026-11-11).
+export function seasonalHexKit(hex, seasonName) {
+  const graded = seasonalHex(hex, seasonName);
+  if (seasonName !== 'Autumn') return graded;
+  const rgb = hexToRgb(graded);
+  if (!rgb) return graded;
+  const [r, g, b] = rgb;
+  if (!(r > g)) return graded;
+  return rgbToHex(r, Math.max(g, r / 2.15), Math.max(b, r * 0.26));
+}
+
+// seasonalSwapFor for kit palettes (same contract as seasonalSwapFor).
+export function seasonalSwapForKit(pal) {
+  if (!pal) return {};
+  const season = currentSeason().name;
+  const swap = {};
+  for (const ch of Object.keys(pal)) {
+    const graded = seasonalHexKit(pal[ch], season);
+    if (graded !== pal[ch]) swap[ch] = graded;
+  }
+  return swap;
+}
