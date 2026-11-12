@@ -1,13 +1,13 @@
 // orange-climax-checks.mjs — Arc 1.5 Stage O3 (Pokemon 2000: the
-// Shamouti climax + the Lugia legendary arc) proofs.
+// Shamouti climax + the ABYSSORN legendary arc) proofs.
 // Part A: pure units — the appended quest stage, the event/battle
-// data law (uncatchable quells + climax, catchable deep Lugia, no
-// Kanto arc flags touched), the Lugia legendary-arc entry, map
+// data law (uncatchable quells + climax, catchable deep ABYSSORN, no
+// Kanto arc flags touched), the ABYSSORN legendary-arc entry, map
 // placements (DOZECROWN's rock, cave altar tiles, NPC state variants),
 // walkability of the whole Shamouti cluster, legacy save-fill.
 // Part B: the built bundle in a headless Game — trigger gating
 // (1 badge quiet / 2 badges storm), the three quells (ball refusal,
-// flee -> re-fire, win -> flag), the climax at 3/3 only (Lugia
+// flee -> re-fire, win -> flag), the climax at 3/3 only (ABYSSORN
 // uncatchable), post-storm NPC variants, the deep catch (dex 249),
 // order independence (League -> homecoming -> return -> chain
 // completes; storm-first -> gyms unaffected), scenes fire once.
@@ -51,7 +51,7 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
     && JSON.stringify(ORANGE_EVENTS.ev_orange_2000_storm).includes('Vance Halloway')
     && JSON.stringify(ORANGE_EVENTS.ev_orange_2000_storm).includes('DOZECROWN'));
   const wb = (id) => ORANGE_EVENTS[id].find((s) => s.wildBattle).wildBattle;
-  ok('A03 quell battles: Moltres/Zapdos/Articuno Lv50, ALL uncatchable event versions',
+  ok('A03 quell battles: PYREHAWK/Zapdos/GLACIERNE Lv50, ALL uncatchable event versions',
     wb('ev_orange_2000_moltres').species === 'moltres' && wb('ev_orange_2000_moltres').level === 50 && wb('ev_orange_2000_moltres').uncatchable === true
     && wb('ev_orange_2000_zapdos').species === 'zapdos' && wb('ev_orange_2000_zapdos').uncatchable === true
     && wb('ev_orange_2000_articuno').species === 'articuno' && wb('ev_orange_2000_articuno').uncatchable === true);
@@ -61,14 +61,14 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
       const bi = ev.findIndex((s) => s.wildBattle); const fi = ev.findIndex((s) => s.flag === 'orange_2000_' + b);
       return bi >= 0 && fi > bi;
     }));
-  ok('A05 climax: Lugia Lv55 UNcatchable (the proving), storm_stilled + arc discovered + questDone AFTER the battle, collector retreats humbled in original lines',
+  ok('A05 climax: ABYSSORN Lv55 UNcatchable (the proving), storm_stilled + arc discovered + questDone AFTER the battle, collector retreats humbled in original lines',
     wb('ev_orange_2000_climax').species === 'lugia' && wb('ev_orange_2000_climax').level === 55 && wb('ev_orange_2000_climax').uncatchable === true
     && (() => { const ev = ORANGE_EVENTS.ev_orange_2000_climax; const bi = ev.findIndex((s) => s.wildBattle);
       return ev.findIndex((s) => s.flag === 'orange_2000_storm_stilled') > bi
         && ev.some((s) => s.arc === 'arc_lugia_shamouti' && s.stage === 'discovered')
         && ev.some((s) => s.questDone === 'q_orange_storm')
         && JSON.stringify(ev).includes('poor substitute for a sky'); })());
-  ok('A06 the catch: deep Lugia Lv55 legendary and NOT uncatchable; arc active -> battle -> arc complete -> orange_2000_lugia_done, in that order',
+  ok('A06 the catch: deep ABYSSORN Lv55 legendary and NOT uncatchable; arc active -> battle -> arc complete -> orange_2000_lugia_done, in that order',
     wb('ev_orange_2000_lugia').species === 'lugia' && wb('ev_orange_2000_lugia').level === 55
     && wb('ev_orange_2000_lugia').legendary === true && !wb('ev_orange_2000_lugia').uncatchable
     && (() => { const ev = ORANGE_EVENTS.ev_orange_2000_lugia;
@@ -83,7 +83,7 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
     && !JSON.stringify(ORANGE_EVENTS).match(/arc_(zapdos|moltres|articuno)/)
     && allSteps.every((s) => !s.flag || s.flag.startsWith('orange_2000_')));
   const arc = ORANGE_LEGENDARY_ARCS.arc_lugia_shamouti;
-  ok('A08 Lugia legendary arc entry (quest-log presentation mirrors Kanto): title The Guardian of the Sea, species lugia, lair shamouti-deep, 6 requirement steps spelled out, last step is the catch',
+  ok('A08 ABYSSORN legendary arc entry (quest-log presentation mirrors Kanto): title The Guardian of the Sea, species lugia, lair shamouti-deep, 6 requirement steps spelled out, last step is the catch',
     !!arc && arc.title === 'The Guardian of the Sea' && arc.species === 'lugia' && arc.lair === 'shamouti-deep'
     && arc.steps.length === 6 && arc.steps[5].catch === 'lugia'
     && arc.steps.slice(0, 5).every((s) => s.flag && s.flag.startsWith('orange_2000_')));
@@ -116,7 +116,7 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
   done.dex.caught[249] = true; done.dex.seen[249] = true;
   done.party = [makeMon('lugia', 55, SPECIES, MOVES)];
   const rv = VAL.validateSave(clone(done)); const cv = SCH.validateSave(clone(done));
-  ok('A11 a fully O3-completed save (all orange_2000_* flags + q_orange_storm/arc_lugia_shamouti complete + Lugia caught) validates SERVER-side and client-side',
+  ok('A11 a fully O3-completed save (all orange_2000_* flags + q_orange_storm/arc_lugia_shamouti complete + ABYSSORN caught) validates SERVER-side and client-side',
     rv.ok && cv.ok, JSON.stringify({ server: rv.errors, client: cv.errors }));
 }
 
@@ -381,22 +381,22 @@ const driver = `
   ok('B04 DOZECROWN at its rock gives STORM counsel while the storm is live (state variant, not base lines)',
     skLines.includes('tide table'), skLines.slice(0, 120));
 
-  // -- Moltres: ball refusal, then the win --
+  // -- PYREHAWK: ball refusal, then the win --
   var owF = gotoMap(gA, 'fire-cave', 6, 8);
   owF.sysOnStep(6, 2);
   var inBattle = drainToBattle(gA);
   var bF = gA.scenes.top;
-  ok('B05 Moltres quell fires at the fire-cave altar (storm active): event battle vs Lv50 Moltres, flagged uncatchable by the engine',
+  ok('B05 PYREHAWK quell fires at the fire-cave altar (storm active): event battle vs Lv50 PYREHAWK, flagged uncatchable by the engine',
     inBattle && bF.foe.speciesId === 'moltres' && bF.foe.level === 50 && bF.uncatchable === true,
     inBattle ? bF.foe.speciesId + ' lv' + bF.foe.level + ' unc=' + bF.uncatchable : 'no battle');
   var logAtBall = gA.ui.log.length;
   var threw = attemptBall(gA, 'masterball');
   var refused = battleMsgSeen(gA, 'cannot be caught', logAtBall);
-  ok('B06 balls are REFUSED in the event battle (the ghost/movie pattern): Master Ball deflected, Moltres not caught, battle continues',
+  ok('B06 balls are REFUSED in the event battle (the ghost/movie pattern): Master Ball deflected, PYREHAWK not caught, battle continues',
     threw && refused && (gA.scenes.top instanceof BattleScene) && !stA.dex.caught[146],
     'threw=' + threw + ' refused=' + refused + ' lines=' + seenLines.join(' | ').slice(0, 160));
   driveBattle(gA); pump(gA);
-  ok('B07 winning calms Moltres: orange_2000_moltres set — and NO Kanto arc state touched (no arc_moltres quest entry, no Kanto flags)',
+  ok('B07 winning calms PYREHAWK: orange_2000_moltres set — and NO Kanto arc state touched (no arc_moltres quest entry, no Kanto flags)',
     stA.story.flags.orange_2000_moltres === true && !stA.story.quests.arc_moltres
     && !stA.story.flags.arc_moltres_found && !stA.story.flags.arc_moltres_chamber);
 
@@ -419,8 +419,8 @@ const driver = `
   ok('B11 climax gate: the shrine is quiet at 2/3 titans calmed (no scene, no battle)',
     !gA.ui.dialogueOpen && !(gA.scenes.top instanceof BattleScene) && !stA.story.flags.orange_2000_storm_stilled);
 
-  // -- Articuno: plain win through the pump --
-  ok('B12 Articuno quell completes through the standard step->scene->battle path (3/3 titans)',
+  // -- GLACIERNE: plain win through the pump --
+  ok('B12 GLACIERNE quell completes through the standard step->scene->battle path (3/3 titans)',
     quell(gA, null, 'ice-cave', 'orange_2000_articuno') && stA.story.flags.orange_2000_articuno === true);
 
   // -- The climax --
@@ -428,17 +428,17 @@ const driver = `
   gotoMap(gA, 'shamouti-shrine', 7, 10);
   var climaxBattle = drainToBattle(gA);
   var bC = gA.scenes.top;
-  ok('B13 climax fires at 3/3 on shrine entry: the proving is Lugia Lv55, UNcatchable, fought at the deep altar (map is shamouti-deep)',
+  ok('B13 climax fires at 3/3 on shrine entry: the proving is ABYSSORN Lv55, UNcatchable, fought at the deep altar (map is shamouti-deep)',
     climaxBattle && bC.foe.speciesId === 'lugia' && bC.foe.level === 55 && bC.uncatchable === true
     && gA.state.story.position.map === 'shamouti-deep',
     climaxBattle ? bC.foe.speciesId + ' unc=' + bC.uncatchable + ' map=' + gA.state.story.position.map : 'no battle');
   var logAtClimaxBall = gA.ui.log.length;
   attemptBall(gA, 'masterball');
   var lugiaRefused = battleMsgSeen(gA, 'cannot be caught', logAtClimaxBall);
-  ok('B14 the guardian cannot be taken at the proving: ball deflected, Lugia not caught, battle continues',
+  ok('B14 the guardian cannot be taken at the proving: ball deflected, ABYSSORN not caught, battle continues',
     lugiaRefused && (gA.scenes.top instanceof BattleScene) && !stA.dex.caught[249]);
   driveBattle(gA); pump(gA);
-  ok('B15 winning the proving stills the storm: storm_stilled set, storm quest complete, Lugia arc DISCOVERED (not complete), player returned to Shamouti',
+  ok('B15 winning the proving stills the storm: storm_stilled set, storm quest complete, ABYSSORN arc DISCOVERED (not complete), player returned to Shamouti',
     stA.story.flags.orange_2000_storm_stilled === true && stA.story.quests.q_orange_storm === 'complete'
     && stA.story.quests.arc_lugia_shamouti === 'discovered' && !stA.story.flags.orange_2000_lugia_done
     && stA.story.position.map === 'shamouti',
@@ -457,14 +457,14 @@ const driver = `
   gotoMap(gA, 'shamouti-deep', 7, 10);
   var catchBattle = drainToBattle(gA);
   var bD = gA.scenes.top;
-  ok('B17 the deep catch encounter fires post-climax: Lugia Lv55 waits, CATCHABLE (no uncatchable flag)',
+  ok('B17 the deep catch encounter fires post-climax: ABYSSORN Lv55 waits, CATCHABLE (no uncatchable flag)',
     catchBattle && bD.foe.speciesId === 'lugia' && bD.foe.level === 55 && bD.uncatchable === false,
     catchBattle ? 'unc=' + bD.uncatchable : 'no battle');
   attemptBall(gA, 'masterball');
   pump(gA);
   var lugiaOwned = stA.party.some(function (m) { return m.speciesId === 'lugia'; })
     || Object.values(stA.boxes).some(function (b) { return b.some(function (m) { return m.speciesId === 'lugia'; }); });
-  ok('B18 the catch succeeds: Lugia owned, dex registers 249 CAUGHT, arc COMPLETE, orange_2000_lugia_done set',
+  ok('B18 the catch succeeds: ABYSSORN owned, dex registers 249 CAUGHT, arc COMPLETE, orange_2000_lugia_done set',
     lugiaOwned && stA.dex.caught[249] === true && stA.story.quests.arc_lugia_shamouti === 'complete'
     && stA.story.flags.orange_2000_lugia_done === true,
     JSON.stringify({ owned: lugiaOwned, dex: stA.dex.caught[249], arc: stA.story.quests.arc_lugia_shamouti }));
@@ -483,7 +483,7 @@ const driver = `
   gQ.openQuestLog();
   var labelsQ = gQ.ui.menu.items.map(function (i) { return i.label; });
   var stormRow = labelsQ.find(function (l) { return l.includes('Storm over Sanctum'); });
-  ok('B20 Quest Log: the storm row tracks titans calmed (1/3) and the Lugia arc lists in the LEGENDARY ARCS section',
+  ok('B20 Quest Log: the storm row tracks titans calmed (1/3) and the ABYSSORN arc lists in the LEGENDARY ARCS section',
     !!stormRow && stormRow.includes('1/3 titans calmed') && labelsQ.some(function (l) { return l.includes('LEGENDARY ARCS'); })
     && labelsQ.some(function (l) { return l.includes('The Guardian of the Sea'); }),
     labelsQ.join(' / ').slice(0, 300));

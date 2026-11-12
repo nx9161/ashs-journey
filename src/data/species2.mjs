@@ -1196,7 +1196,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   articuno: {
-    id: 'articuno', name: 'Articuno', dexNo: 144, types: ['ice', 'flying'],
+    id: 'articuno', name: 'GLACIERNE', dexNo: 144, types: ['ice', 'flying'],
     base: { hp: 90, atk: 85, def: 100, spa: 95, spd: 125, spe: 85 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14401,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1214,7 +1214,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
   },
   moltres: {
-    id: 'moltres', name: 'Moltres', dexNo: 146, types: ['fire', 'flying'],
+    id: 'moltres', name: 'PYREHAWK', dexNo: 146, types: ['fire', 'flying'],
     base: { hp: 90, atk: 100, def: 90, spa: 125, spd: 85, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14601,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1368,14 +1368,14 @@ export const SPECIES2 = {
     flavor: 'It curls into a living boulder and rolls clean through trouble.',
   },
   hooh: {
-    id: 'hooh', name: 'Ho-Oh', dexNo: 250, types: ['fire', 'flying'],
+    id: 'hooh', name: 'IRISAVIS', dexNo: 250, types: ['fire', 'flying'],
     base: { hp: 106, atk: 130, def: 90, spa: 110, spd: 154, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 25001,
     eggGroups: ['no-eggs'], hatchCounter: 120,
     learnset: { 1: ['gust', 'whirlwind'], 23: ['recover'], 29: ['fireblast'], 43: ['swift'], 90: ['skyattack'] },
     flavor: 'Where its rainbow passes, the ash of old sorrow turns green.',
   },
-  // Stage O1 (Arc 1.5): ONE more full species on the Ho-Oh precedent —
+  // Stage O1 (Arc 1.5): ONE more full species on the IRISAVIS precedent —
   // National dex only (dexNo 249 > 151, so the Arden diploma cannot
   // move). Canon facts (types/base stats/catch rate/growth/base XP)
   // verified against PokeAPI at build time (2026-10-29); learnset
@@ -1384,7 +1384,7 @@ export const SPECIES2 = {
   // and no evolution entry. Cheat Terminal claimability follows the
   // guest-species precedent automatically (data-driven picker).
   lugia: {
-    id: 'lugia', name: 'Lugia', dexNo: 249, types: ['psychic', 'flying'],
+    id: 'lugia', name: 'ABYSSORN', dexNo: 249, types: ['psychic', 'flying'],
     base: { hp: 106, atk: 90, def: 130, spa: 90, spd: 154, spe: 110 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'bird', spriteSeed: 24901,
     eggGroups: ['no-eggs'], hatchCounter: 120,

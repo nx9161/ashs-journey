@@ -74,7 +74,7 @@ export function tierAtLeast(state, npcId, tier) {
 export const BOND_CHARACTERS = [
   { id: 'mom', name: 'Mom', plate: 'MOM', note: 'Dawnwick. Drew the first street maps of home, chalk on a barn door.' },
   { id: 'hawthorn', name: 'Prof. Hawthorn', plate: 'Prof. Hawthorn', note: 'The professor who studies how Pokemon and people grow together. He gave you your partner.' },
-  { id: 'gary', name: 'Gary', plate: 'GARY', note: 'Your rival since before either of you could reach the lab door. His Eevee is still deciding.' },
+  { id: 'gary', name: 'Gary', plate: 'GARY', note: 'Your rival since before either of you could reach the lab door. His PRISMKIT is still deciding.' },
   { id: 'rue', name: 'Rue', plate: 'RUE', note: 'Half of a uniformed duo with theatrical ambitions and a drawn-on moustache.' },
   { id: 'cole', name: 'Cole', plate: 'COLE', note: 'The other half. Holds the menu right-side up and the conscience for both of them.' },
   { id: 'retiredace', name: 'Ace Marlow', plate: 'ACE MARLOW', note: 'Fernmere elder. The first trainer ever to challenge the Fernmere Gym, before there was a League to record it.' },
@@ -128,7 +128,7 @@ export function applyBondOnce(state, flag, npcId, delta) {
 }
 
 // ---------- the rival ledger (ADR-016, read — never rebuilt) ----------
-// Gary's Eevee evolution rule is driven by the early rivalry record:
+// Gary's PRISMKIT evolution rule is driven by the early rivalry record:
 // the outcomes of the first two rivalry battles. Bonds READ that same
 // ledger — each Gary battle's FIRST completed outcome is recorded once
 // (story.flags rivalwin_/rivalloss_<battleId>) and both the bond delta

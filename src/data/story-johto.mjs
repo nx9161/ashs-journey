@@ -20,8 +20,8 @@
 // the Foundation machine, and Red on Mt. Lastlight as post-game. J5 (this
 // stage, appended at the marked seams) ships the legendary arcs the
 // earlier stages armed: the three beasts (chases + lair faces on
-// `beasts_awakened`), Celebi (the GS Orb's return and the Ilex
-// shrine), and Ho-Oh (the designed arc_hooh, activated in
+// `beasts_awakened`), CHRONOFAE (the GS Orb's return and the Ilex
+// shrine), and IRISAVIS (the designed arc_hooh, activated in
 // story-kanto.mjs) — plus the badge-order leader gate and the Rocket
 // Hideout interior map's re-homed staging (engine side).
 //
@@ -388,7 +388,7 @@ export const JOHTO_TRAINERS = {
   // beat_gary_johto unset and Gary re-challengeable after healing —
   // no soft-lock). His team is built from his Arden identity, grown
   // to the Conference: MENTARCH and EMBERMANE from his road, GRIMSHADE
-  // and Umbreon from his Yamato years, AERARCH from the first sky
+  // and LUNAPARD from his Yamato years, AERARCH from the first sky
   // you shared — and ABYSSAR, his starter, anchoring it all, the
   // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
@@ -489,7 +489,7 @@ export const JOHTO_EVENTS = {
   ],
 
   // -- Ashen Tower basement: the awakening (first B1F entry) ----------
-  // This scene ARMS J5: beasts_awakened + the Suicune sighting are the
+  // This scene ARMS J5: beasts_awakened + the BOREPARD sighting are the
   // flags the three beast arcs and Morty's naming dialogue read. No
   // battle, no catch — a glimpse, staged honestly.
   ev_johto_burned: [
@@ -639,7 +639,7 @@ export const JOHTO_EVENTS = {
     { flag: 'hooh_glimpsed' },
     { toast: 'Something rainbow-winged crossed the morning. Lantern\'s elders would know that shape.' },
   ],
-  // Raikou's face: the storm field of the National Park, after both
+  // VOLTIGRIS's face: the storm field of the National Park, after both
   // trail signs. Catch-only chain (wildBattleCatch) — flee or KO and
   // the storm simply gathers again another day.
   ev_johto_raikou: [
@@ -648,18 +648,18 @@ export const JOHTO_EVENTS = {
     { wildBattleCatch: { species: 'raikou', level: 178, legendary: true } },
     { arc: 'arc_raikou', stage: 'complete' },
     { flag: 'arc_raikou_done' },
-    { toast: 'Raikou is yours. The storm lets go of the park all at once, like a held breath let out.' },
+    { toast: 'VOLTIGRIS is yours. The storm lets go of the park all at once, like a held breath let out.' },
   ],
-  // Entei's face: Mt. Millstone's deep chamber — the volcanic heart.
+  // MAGMALION's face: Mt. Millstone's deep chamber — the volcanic heart.
   ev_johto_entei: [
     { say: ['The mountain has been warm all the way up, but this chamber is the warmth\'s source — the rock ticks with cooling and heating, and somewhere below the floor something enormous turns over in the earth\'s sleep.', 'It steps out of the heat-shimmer already awake, already looking at you, ash sliding off a back broad as a lintel. The chamber\'s whole held breath goes out of it in one long, low note.'], who: 'NARRATOR' },
     { arc: 'arc_entei', stage: 'active' },
     { wildBattleCatch: { species: 'entei', level: 180, legendary: true } },
     { arc: 'arc_entei', stage: 'complete' },
     { flag: 'arc_entei_done' },
-    { toast: 'Entei is yours. The mountain settles around you like a dog deciding to stay.' },
+    { toast: 'MAGMALION is yours. The mountain settles around you like a dog deciding to stay.' },
   ],
-  // Suicune's face: the Chime Tower's foot (bell-tower-1 entry), gated
+  // BOREPARD's face: the Chime Tower's foot (bell-tower-1 entry), gated
   // by its signs AND by both other beasts being caught — it comes to
   // the tower when the others are quieted.
   ev_johto_suicune: [
@@ -668,9 +668,9 @@ export const JOHTO_EVENTS = {
     { wildBattleCatch: { species: 'suicune', level: 184, legendary: true } },
     { arc: 'arc_suicune', stage: 'complete' },
     { flag: 'arc_suicune_done' },
-    { toast: 'Suicune is yours. Somewhere above you, one bell rings once, very softly, on nobody\'s hand.' },
+    { toast: 'BOREPARD is yours. Somewhere above you, one bell rings once, very softly, on nobody\'s hand.' },
   ],
-  // Celebi: the GS Orb at the Ilex shrine (fired by the shrine's
+  // CHRONOFAE: the GS Orb at the Ilex shrine (fired by the shrine's
   // faced-tile interact in overworld-systems, not a map-entry gate —
   // the shrine is a place you go to, not a room you pass through).
   ev_johto_celebi: [
@@ -681,9 +681,9 @@ export const JOHTO_EVENTS = {
     { arc: 'arc_celebi', stage: 'complete' },
     { flag: 'arc_celebi_done' },
     { say: ['When it is over the forest is old again, and kind about it. The GS Orb hangs open and empty in your hand — an ordinary impossible object, its one errand run. You keep it. Some souvenirs are proof; this one is a receipt.'], who: 'NARRATOR' },
-    { toast: 'Celebi is yours. The empty GS Orb stays in your bag — a memento.' },
+    { toast: 'CHRONOFAE is yours. The empty GS Orb stays in your bag — a memento.' },
   ],
-  // Ho-Oh: the Chime Tower summit, with the Clear Bell in hand.
+  // IRISAVIS: the Chime Tower summit, with the Clear Bell in hand.
   ev_johto_hooh: [
     { say: ['The summit bells take the Clear Bell\'s chime up like a relay — hand to hand, bronze to crystal — and throw it out over Lantern in a single widening ring.', 'Then the sky answers. It comes down out of the morning in no hurry at all: seven colours in good order, a crest like a sunrise deciding to stay, eyes that have watched a tower burn and a tower rise and are interested — genuinely, courteously interested — in what you are. The perch takes its weight the way the tower takes weather. Five hundred years of ash settle, very quietly, in your chest.'], who: 'NARRATOR' },
     { flag: 'hooh_summit' },
@@ -691,7 +691,7 @@ export const JOHTO_EVENTS = {
     { wildBattleCatch: { species: 'hooh', level: 182, legendary: true } },
     { arc: 'arc_hooh', stage: 'complete' },
     { flag: 'arc_hooh_done' },
-    { toast: 'Ho-Oh is yours. Every bell in Lantern rings once — the sisters will say it was the wind, and smile when they say it.' },
+    { toast: 'IRISAVIS is yours. Every bell in Lantern rings once — the sisters will say it was the wind, and smile when they say it.' },
   ],
 };
 
@@ -969,13 +969,13 @@ export const JOHTO_NPC_PATCHES = [
 // matched the shipped GS Orb story J4a actually told.
 //
 // Shared laws (all five arcs):
-//  - prereq `beasts_awakened` for the beasts and Celebi; Ho-Oh's
+//  - prereq `beasts_awakened` for the beasts and CHRONOFAE; IRISAVIS's
 //    prereq rides its steps (beasts complete before the bell).
 //  - Every face uses the catch-only wildBattleCatch chain: flee OR
 //    KO stalls the event with nothing set, so the encounter re-fires
 //    until the species is CAUGHT. Arc completion = the catch.
 //  - Levels sit in Yamato's band (101-200): the beasts at 178/180/184,
-//    Celebi 170, Ho-Oh 182 (in LEGENDARY_ARCS; ruling 3 supersedes
+//    CHRONOFAE 170, IRISAVIS 182 (in LEGENDARY_ARCS; ruling 3 supersedes
 //    the designed Lv 70).
 // ---------------------------------------------------------------------------
 export const JOHTO_LEGENDARY_ARCS = {
@@ -986,7 +986,7 @@ export const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Talk to Stormwatcher Iben on Route 35 — she saw lightning strike the same pine twice and then walk away from it', flag: 'arc_raikou_sign1' },
       { text: 'Talk to Ranger Solveig on Route 36 about the scorch-signed meadow stones', flag: 'arc_raikou_sign2' },
-      { text: 'Face Raikou, level 178, in the National Park\'s storm field — its thunder hunts open ground', catch: 'raikou' },
+      { text: 'Face VOLTIGRIS, level 178, in the National Park\'s storm field — its thunder hunts open ground', catch: 'raikou' },
     ],
     lair: 'national-park',
   },
@@ -997,7 +997,7 @@ export const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Talk to the Ashkeeper Monk in the Ashen Tower about the pawprints in the ash', flag: 'arc_entei_sign1' },
       { text: 'Talk to Karate Trainee Bo in Mt. Millstone about the heat below the upper halls', flag: 'arc_entei_sign2' },
-      { text: 'Face Entei, level 180, in Mt. Millstone\'s deep chamber — the volcanic heart of the mountain', catch: 'entei' },
+      { text: 'Face MAGMALION, level 180, in Mt. Millstone\'s deep chamber — the volcanic heart of the mountain', catch: 'entei' },
     ],
     lair: 'mt-mortar-2',
   },
@@ -1008,7 +1008,7 @@ export const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Talk to Bell Warden Yuki in Lantern about the shape seen at the Chime Tower\'s foot', flag: 'arc_suicune_sign1' },
       { text: 'Talk to Fisherwoman Noor on Tidewall\'s north shore about the water that ran clear', flag: 'arc_suicune_sign2' },
-      { text: 'Quiet Raikou and Entei first — then face Suicune, level 184, at the Chime Tower\'s foot, where it comes when the others are still', catch: 'suicune' },
+      { text: 'Quiet VOLTIGRIS and MAGMALION first — then face BOREPARD, level 184, at the Chime Tower\'s foot, where it comes when the others are still', catch: 'suicune' },
     ],
     lair: 'bell-tower',
   },
@@ -1019,7 +1019,7 @@ export const JOHTO_LEGENDARY_ARCS = {
     steps: [
       { text: 'Return to Kurt in Cinder Town — the GS Orb stirred the night the tower woke, and he is giving it back', flag: 'gsball_back_with_player' },
       { text: 'Take the GS Orb to the forest shrine in Holly Forest and stand before it', flag: 'celebi_shrine_opened' },
-      { text: 'Face Celebi, level 170, in the forest\'s younger light', catch: 'celebi' },
+      { text: 'Face CHRONOFAE, level 170, in the forest\'s younger light', catch: 'celebi' },
     ],
     lair: 'ilex-forest',
   },

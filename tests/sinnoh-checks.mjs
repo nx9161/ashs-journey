@@ -326,7 +326,7 @@ const VAL = await import(join(ROOT, 'api/_lib/validator.mjs'));
     && SP4.snorunt.evos.some((v) => v.to === 'froslass' && v.stone === 'sunstone') && SP4.snorunt.evo.to === 'glalie'
     && [['sneasel', 'weavile'], ['gligar', 'gliscor'], ['piloswine', 'mamoswine'], ['yanma', 'yanmega'], ['aipom', 'ambipom']].every(([a, b]) => SP3[a].evo.to === b && SP3[a].evo.level === 310)
     && SP4.nosepass.evo.to === 'probopass' && SP4.nosepass.evo.level === 310);
-  ok('S1-17 eevee branches: the shipped evos[] gains leafeon (leafstone) and glaceon (level 310, Ice Rock class) beside the five shipped branches — seven branches, no singular evo invented',
+  ok('S1-17 prismkit branches: the shipped evos[] gains leafeon (leafstone) and glaceon (level 310, Ice Rock class) beside the five shipped branches — seven branches, no singular evo invented',
     SP2.eevee.evo === undefined && SP2.eevee.evos.length === 7
     && SP2.eevee.evos.some((v) => v.to === 'leafeon' && v.stone === 'leafstone')
     && SP2.eevee.evos.some((v) => v.to === 'glaceon' && v.level === 310));

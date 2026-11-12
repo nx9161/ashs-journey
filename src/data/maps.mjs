@@ -33,8 +33,8 @@ export const MAPS = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        // Yellow homage (original lines): the rival's partner is an Eevee.
-        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+        // Yellow homage (original lines): the rival's partner is a PRISMKIT.
+        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
       // entrance — Dawnwick's lab has no interior map, so the terminal lives
       // here (and in every Center) rather than nowhere.

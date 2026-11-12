@@ -65,7 +65,7 @@ const mon = (id, lv) => makeMon(id, lv || 120, SPECIES, MOVES);
 {
   ok('A04 compat matrix: same-group YES (bulbasaur x ivysaur share monster/plant)',
     JS.pairCompatible(mon('bulbasaur'), mon('ivysaur')) === true);
-  ok('A05 compat matrix: Ditto YES with a breedable partner (ditto x eevee), either slot',
+  ok('A05 compat matrix: Ditto YES with a breedable partner (ditto x prismkit), either slot',
     JS.pairCompatible(mon('ditto'), mon('eevee')) === true && JS.pairCompatible(mon('eevee'), mon('ditto')) === true);
   ok('A06 compat matrix: no-eggs NO (mewtwo x ditto), legendary NO (lugia x ditto), baby NO (pichu x ditto, togepi x pikachu)',
     JS.pairCompatible(mon('mewtwo'), mon('ditto')) === false
@@ -75,7 +75,7 @@ const mon = (id, lv) => makeMon(id, lv || 120, SPECIES, MOVES);
   ok('A07 compat matrix: unrelated groups NO (bulbasaur monster/plant x pikachu ground/fairy); eggs never pair',
     JS.pairCompatible(mon('bulbasaur'), mon('pikachu')) === false
     && JS.pairCompatible(JS.makeEggMon('eevee'), mon('eevee')) === false);
-  ok('A08 offspring rule: first-deposited parent line base (venusaur+charizard -> bulbasaur); Ditto yields the OTHER parent (ditto+eevee -> eevee, eevee+ditto -> eevee); branch base walks back (poliwhirl -> poliwag)',
+  ok('A08 offspring rule: first-deposited parent line base (venusaur+charizard -> bulbasaur); Ditto yields the OTHER parent (ditto+prismkit -> prismkit, prismkit+ditto -> prismkit); branch base walks back (poliwhirl -> poliwag)',
     JS.offspringOf([mon('venusaur'), mon('charizard')]) === 'bulbasaur'
     && JS.offspringOf([mon('ditto'), mon('eevee')]) === 'eevee'
     && JS.offspringOf([mon('eevee'), mon('ditto')]) === 'eevee'

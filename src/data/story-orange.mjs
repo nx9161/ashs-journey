@@ -4,7 +4,7 @@
 // canon (ADR-015); ALL dialogue/copy is original writing in the anime's
 // spirit — no quoted or closely-paraphrased anime/game lines.
 //
-// Structured for O3 to APPEND: the Lugia / Pokemon 2000 stages join
+// Structured for O3 to APPEND: the ABYSSORN / Pokemon 2000 stages join
 // ORANGE_QUESTS and ORANGE_EVENTS below the marked seam — nothing here
 // needs reshaping when they land.
 //
@@ -29,7 +29,7 @@ export const ORANGE_QUESTS = [
   { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Orb from Prof. Ivy on Marisol Island', hint: 'Professor Ivy\'s lab stands at the north edge of Marisol. The ball on her pedestal has defeated every machine she owns.' },
   { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Amber Crew badges', hint: 'Cissy on Tangelo, Danny on Pomelo, Rudy on Reefside, Luana on Calamondin. Each leader tests something before the battle — that is the Amber way.', badgeCount: true },
   { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Grapefruit Stadium and win the Amber League', hint: 'Four island badges open the stadium doors. Drake, the Amber League champion, waits inside with six partners and no intention of moving.' },
-  // --- O3 APPEND SEAM: the Lugia / 2000 stages join here. ---
+  // --- O3 APPEND SEAM: the ABYSSORN / 2000 stages join here. ---
   // The storm chain is chronology-true mid-arc content (it unlocks at
   // 2 Amber badges — see the sysLoadMap gate in overworld-systems)
   // but APPENDS after the League stage: it is never a gym blocker,
@@ -37,7 +37,7 @@ export const ORANGE_QUESTS = [
   // tracks titans calmed n/3 (titanCount — the Quest Log and the HUD
   // objective count the orange_2000_<bird> flags, the badgeCount
   // idiom carried to flags).
-  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm Moltres, FULMINIS and Articuno at their shrine caves (any order), then return to Sanctum Shrine — DOZECROWN counsels from its rock on Sanctum\'s west shore.' },
+  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm PYREHAWK, FULMINIS and GLACIERNE at their shrine caves (any order), then return to Sanctum Shrine — DOZECROWN counsels from its rock on Sanctum\'s west shore.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -161,7 +161,7 @@ export const ORANGE_EVENTS = {
   ],
 
   // =====================================================================
-  // Stage O3 — Pokemon 2000: the Sanctum climax + the Lugia arc.
+  // Stage O3 — Pokemon 2000: the Sanctum climax + the ABYSSORN arc.
   // The antagonist is an ORIGINAL character: Vance Halloway, a wealthy
   // sky-collector who cages wonders for a frozen menagerie he calls
   // the Still Sky Collection. He is not a renamed film character and
@@ -201,9 +201,9 @@ export const ORANGE_EVENTS = {
     { say: ['The shrine niche is wrapped in bars of hard light, humming — Halloway\'s cage, sunk into the old stone like a fence into a grave. Behind it, the kind fires have gone white and furious, and the heat coming off the altar has a heartbeat.'], who: 'NARRATOR' },
     { say: ['You work the cage the only way cages understand. Stone chips. Light cracks — and the shrine\'s tenant answers the noise the way it has answered everything for a thousand years: all at once, and on fire.'], who: 'NARRATOR' },
     { wildBattle: { species: 'moltres', level: 50, uncatchable: true } },
-    { say: ['The great wings fold. The white rage banks down to ember, to glow, to the warm breathing dark the cave remembers. Moltres regards you for a long moment — then the cave roof is sky, and it is gone into the clearing south wind, free and unhurried.'], who: 'NARRATOR' },
+    { say: ['The great wings fold. The white rage banks down to ember, to glow, to the warm breathing dark the cave remembers. PYREHAWK regards you for a long moment — then the cave roof is sky, and it is gone into the clearing south wind, free and unhurried.'], who: 'NARRATOR' },
     { flag: 'orange_2000_moltres' },
-    { toast: 'Moltres is calmed. The southern storm cell breaks.' },
+    { toast: 'PYREHAWK is calmed. The southern storm cell breaks.' },
   ],
 
   ev_orange_2000_zapdos: [
@@ -217,14 +217,14 @@ export const ORANGE_EVENTS = {
 
   ev_orange_2000_articuno: [
     { say: ['The cage bars are rimes of black ice over hard light, and the shrine\'s frozen offerings hang mid-gesture inside it, preserved like flies in amber. Halloway would call that a preview. The cold coming through the bars has an opinion of its own.'], who: 'NARRATOR' },
-    { say: ['The cage shatters outward in a ring of snow that never touches you. Articuno unfolds from the shrine the way winter unfolds from a mountain: slowly, beautifully, and with complete indifference to your plans.'], who: 'NARRATOR' },
+    { say: ['The cage shatters outward in a ring of snow that never touches you. GLACIERNE unfolds from the shrine the way winter unfolds from a mountain: slowly, beautifully, and with complete indifference to your plans.'], who: 'NARRATOR' },
     { wildBattle: { species: 'articuno', level: 50, uncatchable: true } },
-    { say: ['The vast wings settle. Frost flowers close like eyes. Articuno bows its head — a fraction, no more than courtesy owes — and lifts away north over water that has stopped arguing with itself. One storm remains, and it is the one in the middle.'], who: 'NARRATOR' },
+    { say: ['The vast wings settle. Frost flowers close like eyes. GLACIERNE bows its head — a fraction, no more than courtesy owes — and lifts away north over water that has stopped arguing with itself. One storm remains, and it is the one in the middle.'], who: 'NARRATOR' },
     { flag: 'orange_2000_articuno' },
-    { toast: 'Articuno is calmed. The northern storm cell breaks.' },
+    { toast: 'GLACIERNE is calmed. The northern storm cell breaks.' },
   ],
 
-  // -- The Lugia climax (Sanctum Shrine entry at 3/3 titans calmed;
+  // -- The ABYSSORN climax (Sanctum Shrine entry at 3/3 titans calmed;
   //    sysLoadMap gate. The proving is a straight win — the shipped
   //    event idiom — fought UNcatchable at the deep altar.) ------------
   ev_orange_2000_climax: [
@@ -236,7 +236,7 @@ export const ORANGE_EVENTS = {
     { warp: { map: 'shamouti-deep', x: 7, y: 10 } },
     { say: ['It rises the way the tide rises: not fast, not slow — inevitably. Wings like white headlands. Eyes that have watched ten thousand festivals and every storm since the first one. The guardian of the sea does not rage. It MEASURES. The one who calmed the titans will be tested the way the sea tests everything: completely.'], who: 'NARRATOR' },
     { wildBattle: { species: 'lugia', level: 55, uncatchable: true } },
-    { say: ['Lugia folds its wings. The proving is over — and somewhere far above, audible even here, the storm simply... stops. Rain first, then wind, then the long grinding argument of the currents, settling one by one into their old, kind roads.'], who: 'NARRATOR' },
+    { say: ['ABYSSORN folds its wings. The proving is over — and somewhere far above, audible even here, the storm simply... stops. Rain first, then wind, then the long grinding argument of the currents, settling one by one into their old, kind roads.'], who: 'NARRATOR' },
     { say: ['Halloway\'s barge comes down in the harbour like a tired bird — cage swinging empty, lights drowned, engines full of seawater and second thoughts. Its owner stands on Sanctum\'s dock in the returning sunlight, holding his hat, looking at the calm he tried to steal and somehow helped to save.'], who: 'NARRATOR' },
     { say: ['...Stilled. All of it. And not one piece of it mine. Do you know, I believe that is the first honest thing the sea has ever said to me. Keep your guardian, island. Keep your storms. A collection, it turns out, is a poor substitute for a sky.'], who: 'VANCE HALLOWAY' },
     { flag: 'orange_2000_storm_stilled' },
@@ -246,11 +246,11 @@ export const ORANGE_EVENTS = {
     { warp: { map: 'shamouti', x: 14, y: 14 } },
   ],
 
-  // -- The catch: Lugia waits at the deep altar (Sanctum Deep entry
+  // -- The catch: ABYSSORN waits at the deep altar (Sanctum Deep entry
   //    once the storm is stilled; sysLoadMap gate). Standard legendary
   //    pattern — Lv 55, CATCHABLE, and flee-safe per the Arden arc
   //    idiom: the runSteps guard completes the arc only on a clean
-  //    win, so a flee (or a loss) leaves Lugia waiting and the event
+  //    win, so a flee (or a loss) leaves ABYSSORN waiting and the event
   //    re-fires on the next descent. -------------------------------
   ev_orange_2000_lugia: [
     { say: ['The deep chamber is still as held breath. In the water-light at the altar, immense and patient, the guardian waits — not sleeping, not wary. Waiting the way the sea waits: because it can, and because you came back.'], who: 'NARRATOR' },
@@ -266,7 +266,7 @@ export const ORANGE_EVENTS = {
 // ORANGE_LEGENDARY_ARCS — merged into LEGENDARY_ARCS by merge.mjs and
 // into the validator's quest table by gen-tables (the Arden table's
 // presentation: hook + requirement steps spelled out in the Quest
-// Log's LEGENDARY ARCS section). This is the Amber Lugia — a
+// Log's LEGENDARY ARCS section). This is the Amber ABYSSORN — a
 // DIFFERENT arc from the designed Yamato arc_lugia stub in
 // story-kanto (that arc's prereqs and lair are untouched).
 // ---------------------------------------------------------------------------
@@ -276,11 +276,11 @@ export const ORANGE_LEGENDARY_ARCS = {
     hook: 'When the three titans raged over Sanctum, the sea\'s guardian rose to measure the one who calmed them — and having measured, it waits now in still water for the meeting to be finished properly.',
     steps: [
       { text: 'Hold the Sea Ruby Badge and come to Sanctum as the storm breaks', flag: 'orange_2000_active' },
-      { text: 'Calm Moltres at the Ember Isle shrine cave', flag: 'orange_2000_moltres' },
+      { text: 'Calm PYREHAWK at the Ember Isle shrine cave', flag: 'orange_2000_moltres' },
       { text: 'Calm FULMINIS at the Storm Isle shrine cave', flag: 'orange_2000_zapdos' },
-      { text: 'Calm Articuno at the Rime Isle shrine cave', flag: 'orange_2000_articuno' },
+      { text: 'Calm GLACIERNE at the Rime Isle shrine cave', flag: 'orange_2000_articuno' },
       { text: 'Face the guardian\'s proving at the deep altar (it cannot be caught there)', flag: 'orange_2000_storm_stilled' },
-      { text: 'Return to the altar in Sanctum Deep, where Lugia waits in still water', catch: 'lugia' },
+      { text: 'Return to the altar in Sanctum Deep, where ABYSSORN waits in still water', catch: 'lugia' },
     ],
     lair: 'shamouti-deep',
   },

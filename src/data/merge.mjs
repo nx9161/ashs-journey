@@ -17,7 +17,7 @@ Object.assign(QUESTS, HOENN_TALES);
 // Arc 4 Stage S5a: Borea Town Tales fold into the same tales table.
 Object.assign(QUESTS, SINNOH_TALES);
 Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
-// Stage J5 fold: Yamato's live legendary arcs (the beasts + Celebi).
+// Stage J5 fold: Yamato's live legendary arcs (the beasts + CHRONOFAE).
 // arc_celebi here deliberately supersedes the designed entry in
 // story-kanto.mjs (its steps described an errand the shipped game
 // never told); arc_hooh was activated in place in LEGENDARY_ARCS.

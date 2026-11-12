@@ -230,7 +230,7 @@ export const ITEMS = {
   gracidea: { id: 'gracidea', name: 'Gracidea', pocket: 'key', desc: 'A flower of gratitude that blooms only for Shaymin. Use it on Shaymin to swap between its land and sky formes.' },
   // Stage J5 key item: the Clear Bell, given by Lantern's Kimono
   // sisters once the three awakened beasts are quieted — its chime is
-  // the Chime Tower summit's invitation to Ho-Oh (arc_hooh).
+  // the Chime Tower summit's invitation to IRISAVIS (arc_hooh).
   clearbell: { id: 'clearbell', name: 'Clear Bell', pocket: 'key', desc: 'A bell of clear, cold crystal, kept by the Kimono sisters of Lantern. Its chime carries further than sound should — something in the high sky is meant to hear it.' },
   winnerstrophy: { id: 'winnerstrophy', name: "Winner's Trophy", pocket: 'items', collectible: true, desc: 'COLLECTIBLE — The Amber League Winner\'s Trophy, presented at Grapefruit Stadium. It catches southern light from every angle.' },
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon

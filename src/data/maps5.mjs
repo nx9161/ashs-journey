@@ -9,7 +9,7 @@
 // stitch island<->lane<->island by edge warps. The shared 'center' and
 // 'mart' interiors serve every island via the shipped via{} tickets —
 // no per-island centers/marts are authored. Gym interiors are layouts
-// only (leaders/battles: Stage O2); the Lugia story is Stage O3.
+// only (leaders/battles: Stage O2); the ABYSSORN story is Stage O3.
 import { MAPS4 } from './maps4.mjs';
 
 export const MAPS5 = {

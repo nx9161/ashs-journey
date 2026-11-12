@@ -942,7 +942,7 @@ Object.assign(OverworldScene.prototype, {
     const taleSpot = taleSpotAt(this.mapId, fx, fy);
     if (taleSpot && this.taleSpotInteract(taleSpot)) return true;
     // Stage J5: the Holly Forest shrine (the JSHRINE prop at (14,3))
-    // is Celebi's door — faced-tile, exactly like a tale spot.
+    // is CHRONOFAE's door — faced-tile, exactly like a tale spot.
     if (this.mapId === 'ilex-forest' && fx === 14 && fy === 3 && this.johtoShrineInteract()) return true;
     // Stage H6: the Regi tombs (inscriptions, seals, puzzle stones)
     // and Comet Falls' meteorstones (the Jirachi wish stone; the
@@ -2376,38 +2376,38 @@ Object.assign(OverworldScene.prototype, {
     // first (a trail reads from the beginning) — the flags they set
     // are the arc steps' flags.
     const BEAST_SIGNS = {
-      beast_sign_raikou_1: { arc: 'arc_raikou', sign: 'arc_raikou_sign1', prev: null, toast: 'Raikou\'s trail: a storm-split pine on Route 35. It went east.',
+      beast_sign_raikou_1: { arc: 'arc_raikou', sign: 'arc_raikou_sign1', prev: null, toast: 'VOLTIGRIS\'s trail: a storm-split pine on Route 35. It went east.',
         dormant: ['Storms I can read. That one last week, I could not. It came out of a clear sky, struck the old pine twice — and here is the part my report left out: the second bolt had already happened when the first one\'s thunder arrived. Backwards weather. I have stopped writing that down where supervisors can see it.'],
         lines: ['There — see the pine? Black on the east side, and the grass around it combed FLAT, all one way, like something enormous stood here letting the storm off its back in waves.',
           'I was up the pole when it happened, trainer. The lightning came twice, and between the flashes something stood in the road looking at the tree — four legs, a mane like a storm deciding to be hair, and fast the way ideas are fast. It did not flee. It departed. There is a difference, and my hands knew it before I did.',
           'It went east, toward the park road. Thunder that hunts, hunts open ground — if you are following it, the National Park is where I would stand and wait to be found.'],
         again: ['The pine is still black, the grass still combed. East, trainer — the National Park\'s open ground, when the air starts standing up on your arms.'],
         after: ['They say the park\'s storm has a keeper now, and the keeper has a trainer. My reports have gone back to being very dull, and I have never been happier to file one.'] },
-      beast_sign_raikou_2: { arc: 'arc_raikou', sign: 'arc_raikou_sign2', prev: 'arc_raikou_sign1', toast: 'Raikou\'s trail ends at the National Park\'s storm field.',
+      beast_sign_raikou_2: { arc: 'arc_raikou', sign: 'arc_raikou_sign2', prev: 'arc_raikou_sign1', toast: 'VOLTIGRIS\'s trail ends at the National Park\'s storm field.',
         tooEarly: ['The meadow stones, you mean? Scorch marks shaped almost like writing. Something passed here, certainly — but if you want the start of the trail it is west: Route 35, the storm-split pine, and a watcher named Iben who saw more of it than I did. Trails, like sentences, read best from the beginning.'],
         lines: ['Look at the stones — no. LOOK at them. Scorch in spirals, and at the centre of every spiral, a print. A pawprint, trainer, burned into meadow stone like a signature pressed into sealing wax.',
           'Whatever signed this meadow was not passing through. It was announcing. East of here the land opens out — the National Park, all that flat green under all that sky. A creature made of storm does not hide in woods and alleys. It waits in the open, daring the weather to argue.'],
         again: ['The stones keep their signature. The park, trainer — open ground, when your hair starts to rise.'],
         after: ['I heard the thunder over the park stop all at once, like a sentence finishing. Rangers talk, trainer. Congratulations — the meadow stones make sense now: it was practising its autograph.'] },
-      beast_sign_entei_1: { arc: 'arc_entei', sign: 'arc_entei_sign1', prev: null, toast: 'Entei\'s trail: warm pawprints in the Ashen Tower\'s ash. It went toward heat.',
+      beast_sign_entei_1: { arc: 'arc_entei', sign: 'arc_entei_sign1', prev: null, toast: 'MAGMALION\'s trail: warm pawprints in the Ashen Tower\'s ash. It went toward heat.',
         dormant: ['One hundred and fifty years of ash, and my whole duty is to keep it unstepped-in. Something died in this tower, trainer, and something else has been keeping the grief warm ever since. I sweep around the prints. That is all I will say while the basement sleeps.'],
         lines: ['You have been below — I can tell; everyone who has wears the same quiet for a day. Then look, and do not step: the ash by the north wall. Prints. Enormous, fresh, and warm to the back of the hand, in a tower that has been cold since before my grandfather\'s grandfather.',
           'The monks\' old books say the fire-beast walks out of this ash when it walks at all, and goes where the earth itself is hot. Mortar, trainer. The mountain east of us has a furnace in it that no one dug. Whatever was reborn in fire will go home to heat eventually.'],
         again: ['Prints in the ash, pointing east. Mt. Millstone, trainer — follow the warmth.'],
         after: ['The ash is cold this morning — truly cold, for the first time in my tenure. The tower feels... finished with something. Whatever you did on that mountain, monk\'s honour: the old tower thanks you.'] },
-      beast_sign_entei_2: { arc: 'arc_entei', sign: 'arc_entei_sign2', prev: 'arc_entei_sign1', toast: 'Entei\'s trail ends in Mt. Millstone\'s deep chamber.',
+      beast_sign_entei_2: { arc: 'arc_entei', sign: 'arc_entei_sign2', prev: 'arc_entei_sign1', toast: 'MAGMALION\'s trail ends in Mt. Millstone\'s deep chamber.',
         tooEarly: ['You feel it too? The warm draught from the upper halls. Master says it is geology. Master also says I imagine the smell of woodsmoke. Start where the prints are, trainer — the Ashen Tower in Lantern keeps an ashkeeper who reads ash the way you read a map.'],
         lines: ['Shh — feel the floor. There. Again. The mountain has a heartbeat, and it is not mine. It started the week the tower in Lantern woke; Master doubled our training and tripled his pretending not to notice.',
           'Twice now I have seen the steam burst UP the chimney vents with nothing cooking below, and once — once — I heard a sound come down the shafts like a furnace clearing its throat. Whatever is using the deep chamber has a volcano\'s manners. Go carefully, trainer. The upper halls, and mind the heat.'],
         again: ['The heartbeat is still there, under the floor. The deep chamber, trainer — upper halls, and mind the heat.'],
         after: ['The mountain is quiet. Not cold — quiet, the way a dojo is quiet after the last bow. Master has started admitting he noticed things. Progress on every front, then.'] },
-      beast_sign_suicune_1: { arc: 'arc_suicune', sign: 'arc_suicune_sign1', prev: null, toast: 'Suicune was seen at the Chime Tower\'s foot. The wardens say it comes for the last time when its kin are quiet.',
+      beast_sign_suicune_1: { arc: 'arc_suicune', sign: 'arc_suicune_sign1', prev: null, toast: 'BOREPARD was seen at the Chime Tower\'s foot. The wardens say it comes for the last time when its kin are quiet.',
         dormant: ['I wind the tower bells and polish what the wind leaves. On certain mornings the big bell is wet — WET, trainer — though the night was dry as paper. The last keeper wrote it in the log for forty years and never once explained it. Keepers do not explain. We record.'],
         lines: ['Then you are the one the logbook has been waiting for, because I am recording it now: three mornings since the tower woke, I have come at dawn and found it standing at the Chime Tower\'s foot. Still as a held breath. Ribbons moving in a wind that was not blowing anything else.',
           'It did not run from me. It does not run, the old texts say — it arrives, when the water of the world needs carrying somewhere. The texts also say it will not come to the tower for the last time until its kin are quiet. The thunder and the fire first, trainer. Then, the tower\'s foot, at dawn.'],
         again: ['Dawn, the tower\'s foot — but only when the others are quiet. It keeps its own order, that one.'],
         after: ['This morning the big bell was dry, and the tower felt ordinary, and ordinary has never felt so much like a gift. The logbook has your name in it now, trainer. Keepers record. That is the highest honour we have.'] },
-      beast_sign_suicune_2: { arc: 'arc_suicune', sign: 'arc_suicune_sign2', prev: 'arc_suicune_sign1', toast: 'Suicune\'s route ends at the Chime Tower\'s foot.',
+      beast_sign_suicune_2: { arc: 'arc_suicune', sign: 'arc_suicune_sign2', prev: 'arc_suicune_sign1', toast: 'BOREPARD\'s route ends at the Chime Tower\'s foot.',
         tooEarly: ['Fishers notice water, trainer — it is most of the job. If it is the clear-running water you are asking after, start in Lantern. The bell wardens keep a log of strange mornings, and lately every morning in it is strange.'],
         lines: ['You see this shore? The northernmost rocks of Tidewall, where the inlet runs muddy nine days in ten. Last week it ran CLEAR — clear as a poured glass, all the way out to the second buoy — and a shape went along the waterline faster than the current, not swimming, not flying. Walking on the skin of the sea like it was a road it owned.',
           'My grandmother had a word for water that cleans itself as it goes, and the word was a name, and I am not saying it out loud where the gulls can steal it. But the Lantern wardens will. It was travelling, trainer, settling its route. Where it ends, they say, is a tower — when the time is right.'],
@@ -2449,7 +2449,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'kimono_bell') {
       if (flags.hooh_bell_received) { say(['The bell is lighter than it looks, isn\'t it. Crystal should be heavy. It is not, because it was never really ours — we were only ever its shelf. The summit, trainer. At dawn. Dance attendance is not required, but it is tradition to bow to the sky.']); return true; }
       if (!flags.hooh_history) { say(['You have come about the bell — do not look surprised; the theatre hears everything the tower hears, and the tower hears the town think. But the order of things matters here, trainer: the history first. Elder Gensai walks the east street by the towers most days. Let him tell you about the fire, and the three, and the waiting. Then we will talk about what we keep.']); return true; }
-      if (!(flags.arc_raikou_done && flags.arc_entei_done && flags.arc_suicune_done)) { say(['We know about the waking — the theatre\'s floor hummed the night it happened, and three of our dances have been restless ever since. The bell we keep is for the bird, trainer, and the bird will not be called while the three it raised are still abroad and unsettled. Quiet Raikou. Quiet Entei. Let Suicune finish its errand last, the way it likes. Then come back to us, and bring your best listening.']); return true; }
+      if (!(flags.arc_raikou_done && flags.arc_entei_done && flags.arc_suicune_done)) { say(['We know about the waking — the theatre\'s floor hummed the night it happened, and three of our dances have been restless ever since. The bell we keep is for the bird, trainer, and the bird will not be called while the three it raised are still abroad and unsettled. Quiet VOLTIGRIS. Quiet MAGMALION. Let BOREPARD finish its errand last, the way it likes. Then come back to us, and bring your best listening.']); return true; }
       say(['Then it is time. Sisters — the eldest dance. The one we perform when the tower\'s guest is finally expected.',
         'They dance it without music, and the silence is the music: five women becoming weather, becoming wings, becoming a tower standing and a tower remembered — and at the dance\'s still centre, Moeko lifts a box of pale cedar and opens it on a bell of clear crystal, cold as well-water, older than the theatre, older than the town\'s second skyline.',
         'The Clear Bell. It has been rung exactly never, trainer. Bells like this are not rung — they are ANSWERED. Take it to the summit at dawn, and hold it where the sky can see it. If the heart is right, the sky will do the rest. It usually does, with hearts like yours.'], () => {
@@ -2512,7 +2512,7 @@ Object.assign(OverworldScene.prototype, {
     if (!L) return false;
     if (jBadges.includes(L.badge)) {
       if (kind === 'morty' && flags.beasts_awakened) {
-        say(['So. You have seen the empty plinths too, and the one who watched you from the lamplight\'s edge. Hear the names the tower-keepers use, {player}: Raikou, the thunder that walks. Entei, the mountain that burns. And Suicune, the north wind made visible — the one whose eyes you met.',
+        say(['So. You have seen the empty plinths too, and the one who watched you from the lamplight\'s edge. Hear the names the tower-keepers use, {player}: VOLTIGRIS, the thunder that walks. MAGMALION, the mountain that burns. And BOREPARD, the north wind made visible — the one whose eyes you met.',
           'They slept as statues for a hundred and fifty years, under a promise nobody wrote down. Promises end. What woke them, I cannot tell you — but they will cross your road again, all three, and when they do, remember: they are not angry. They are AWAKE. There is a difference, and it matters.']);
         return true;
       }
@@ -4014,7 +4014,7 @@ Object.assign(OverworldScene.prototype, {
   // Faced-tile tale searches (sysInteract hook). Returns true only
   // when the spot did tale business; false lets signs/fishing speak.
   // Stage J5: the Ilex shrine. With the returned GS Orb in the bag
-  // and Celebi uncaught, facing the shrine runs the opening scene
+  // and CHRONOFAE uncaught, facing the shrine runs the opening scene
   // (the catch-only event — a flee or KO leaves the shrine ready to
   // try again). Otherwise it is a shrine: flavour, and after the
   // catch, a memento line. Always handled (the prop is a set piece).

@@ -794,7 +794,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   raikou: {
-    id: 'raikou', name: 'Raikou', dexNo: 243, types: ['electric'],
+    id: 'raikou', name: 'VOLTIGRIS', dexNo: 243, types: ['electric'],
     base: { hp: 90, atk: 85, def: 75, spa: 115, spd: 100, spe: 115 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24301,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -803,7 +803,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 39, 44, 45, 50, 102, 105],
   },
   entei: {
-    id: 'entei', name: 'Entei', dexNo: 244, types: ['fire'],
+    id: 'entei', name: 'MAGMALION', dexNo: 244, types: ['fire'],
     base: { hp: 115, atk: 115, def: 85, spa: 90, spd: 75, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24401,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -812,7 +812,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50, 102],
   },
   suicune: {
-    id: 'suicune', name: 'Suicune', dexNo: 245, types: ['water'],
+    id: 'suicune', name: 'BOREPARD', dexNo: 245, types: ['water'],
     base: { hp: 100, atk: 75, def: 115, spa: 90, spd: 115, spe: 85 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'quad', spriteSeed: 24501,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -848,7 +848,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   celebi: {
-    id: 'celebi', name: 'Celebi', dexNo: 251, types: ['psychic', 'grass'],
+    id: 'celebi', name: 'CHRONOFAE', dexNo: 251, types: ['psychic', 'grass'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 270, body: 'biped', spriteSeed: 25101,
     eggGroups: ['no-eggs'], hatchCounter: 120,

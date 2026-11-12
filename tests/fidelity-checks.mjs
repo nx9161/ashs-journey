@@ -40,7 +40,7 @@ const ALL_MAPS = { ...MAPS, ...MAPS2, ...MAPS3, ...MAPS4 };
 const ALL_TRAINERS = { ...TRAINERS_BASE, ...TRAINERS, ...TRAINERS3, ...TRAINERS4 };
 
 // ---------- A. roster / data integrity ----------
-ok('roster: 151 Kanto species + partner + 5 forms + 100 National species (Cheat Shop expansion 2026-10-28 + Lugia, Stage O1 2026-10-29; +94 Johto species, Stage J1 2026-10-29; +135 Hoenn species + 3 Deoxys form entries, Stage H1 2026-10-29; +107 Sinnoh species + 7 Sinnoh form entries, Arc 4 Stage S1 2026-10-29 — supersedes the 395 count)', Object.keys(ALL_SPECIES).length === 509);
+ok('roster: 151 Kanto species + partner + 5 forms + 100 National species (Cheat Shop expansion 2026-10-28 + ABYSSORN, Stage O1 2026-10-29; +94 Johto species, Stage J1 2026-10-29; +135 Hoenn species + 3 Deoxys form entries, Stage H1 2026-10-29; +107 Sinnoh species + 7 Sinnoh form entries, Arc 4 Stage S1 2026-10-29 — supersedes the 395 count)', Object.keys(ALL_SPECIES).length === 509);
 {
   const byDex = {};
   // Form entries share their base species' dexNo by design (like partner

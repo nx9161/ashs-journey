@@ -1,7 +1,7 @@
 // rejuv-phase5-checks.mjs — Rejuvenation Phase 5 (ADR-025 §2) proofs:
 // Bonds. Part A: pure units over the tier model (src/game/bonds.mjs) —
 // derived tier edges, the swing/range clamps, one-shot sources, the
-// rival ledger feeding BOTH bonds and the ADR-016 Eevee rule, tier
+// rival ledger feeding BOTH bonds and the ADR-016 PRISMKIT rule, tier
 // dialogue resolution, the R3 structural proof (battle code carries no
 // bond references; the rival def variant differs only in text), Phase
 // 4 tale deltas landing in the live tier model, legacy saves.
@@ -104,7 +104,7 @@ const { TRAINERS3 } = await import(join(ROOT, 'src/data/maps3.mjs'));
     w && w.delta === 1 && again === null && l && l.delta === -1 && s.story.bonds.gary === 0
     && led.wins === 1 && led.losses === 1 && led.earlyWins === 1 && led.earlyLosses === 1, JSON.stringify(led));
   const mk = (recs) => { const x = defaultState(); for (const [id, won] of recs) B.recordRivalOutcome(x, id, won); return x; };
-  ok('A11 bonds READ the ADR-016 ledger: the same records feed rivalPartnerEvolution (2-0 Vaporeon / 1-1 Flareon / 0-2 Jolteon)',
+  ok('A11 bonds READ the ADR-016 ledger: the same records feed rivalPartnerEvolution (2-0 OTTERSAIL / 1-1 KINDLEON / 0-2 SPARKHARE)',
     B.rivalEvolutionFromLedger(mk([['gary_cerulean', true], ['gary_stanne', true]])) === 'vaporeon'
     && B.rivalEvolutionFromLedger(mk([['gary_cerulean', true], ['gary_stanne', false]])) === 'flareon'
     && B.rivalEvolutionFromLedger(mk([['gary_cerulean', false], ['gary_stanne', false]])) === 'jolteon'

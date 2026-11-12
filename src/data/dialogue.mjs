@@ -78,14 +78,14 @@ export const BOND_DIALOGUE = {
     // Crown League: at Close, the post-champion scene GAINS these
     // mutual-respect lines (the standard scene plays identically).
     championAfter: {
-      close: ['...You know what the worst part is? I am not even mad. Somewhere between Dawnwick and here, beating you stopped being the point.', 'Eevee decided, in the end — because YOU pushed us hard enough to need to. That is what rivals are FOR, I guess.', 'So. Champion {player}. Say it back to me when we are old — and I will say it first. That is my concession speech. Do not tell anyone.'],
+      close: ['...You know what the worst part is? I am not even mad. Somewhere between Dawnwick and here, beating you stopped being the point.', 'PRISMKIT decided, in the end — because YOU pushed us hard enough to need to. That is what rivals are FOR, I guess.', 'So. Champion {player}. Say it back to me when we are old — and I will say it first. That is my concession speech. Do not tell anyone.'],
     },
-    // Dawnwick lab small talk (the Eevee beat, shaded).
+    // Dawnwick lab small talk (the PRISMKIT beat, shaded).
     lab: {
-      cold: ['What are YOU staring at? Eevee and I have training to do. Some of us take this seriously.'],
-      wary: ['Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!', 'He says it will evolve to match how I battle. Just watch — we will be champions!'],
-      warm: ['Yo, {player}! Meet Eevee. Everyone keeps asking when it will evolve — like that is the whole point.', 'It will evolve when WE decide, not when a chart says. You get that, right? ...Course you do.'],
-      close: ['You came back to the lab too, huh. Eevee, look — it is the only other trainer on this road I actually respect.', 'Do not let it go to your head, {player}. I respect exactly one person and it is already too many.'],
+      cold: ['What are YOU staring at? PRISMKIT and I have training to do. Some of us take this seriously.'],
+      wary: ['Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!', 'He says it will evolve to match how I battle. Just watch — we will be champions!'],
+      warm: ['Yo, {player}! Meet PRISMKIT. Everyone keeps asking when it will evolve — like that is the whole point.', 'It will evolve when WE decide, not when a chart says. You get that, right? ...Course you do.'],
+      close: ['You came back to the lab too, huh. PRISMKIT, look — it is the only other trainer on this road I actually respect.', 'Do not let it go to your head, {player}. I respect exactly one person and it is already too many.'],
     },
   },
   mom: {

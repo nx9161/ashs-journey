@@ -1844,7 +1844,7 @@ export const MAPS3 = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
       // (Dawnwick's lab has no interior map; the terminal stands by its door,
       // like the one in every Center).
@@ -2125,7 +2125,7 @@ export const TRAINERS3 = {
   gary_cerulean: {
     id: 'gary_cerulean', name: 'Gary', title: 'Rival',
     intro: ["Hey, {player}! I got a Cascade Badge already — no, wait, I'm ABOUT to. Watch and learn, slowpoke!"],
-    lose: ["How?! My Eevee picked these matchups itself! ...Whatever. Tidehaven's just a warm-up."],
+    lose: ["How?! My PRISMKIT picked these matchups itself! ...Whatever. Tidehaven's just a warm-up."],
     team: [ { species: 'pidgeotto', level: 18 }, { species: 'rattata', level: 15 }, { species: 'kadabra', level: 15 }, { species: 'ivysaur', level: 17 } ],
     reward: 700,
   },

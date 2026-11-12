@@ -88,7 +88,7 @@ const BADGES = ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 
     hooh: { dexNo: 250, types: ['fire', 'flying'], base: { hp: 106, atk: 130, def: 90, spa: 110, spd: 154, spe: 90 }, catchRate: 3, growth: 'slow', baseXp: 306 },
     lugia: { dexNo: 249, types: ['psychic', 'flying'], base: { hp: 106, atk: 90, def: 130, spa: 90, spd: 154, spe: 110 }, catchRate: 3, growth: 'slow', baseXp: 306 },
   };
-  ok('A10 six full species match PokeAPI canon (types/stats/catch/growth/xp; Lugia added Stage O1, PokeAPI verified 2026-10-29)',
+  ok('A10 six full species match PokeAPI canon (types/stats/catch/growth/xp; ABYSSORN added Stage O1, PokeAPI verified 2026-10-29)',
     NEW_IDS.every((id) => { const s = SPECIES[id], c = canon[id];
       return s.dexNo === c.dexNo && JSON.stringify(s.types) === JSON.stringify(c.types)
         && JSON.stringify(s.base) === JSON.stringify(c.base) && s.catchRate === c.catchRate
@@ -275,7 +275,7 @@ const driver = `
   var expIds = ['crystalonix','pinkbutterfree','surfingpikachu','flyingpikachu','giantdragonite','togepi','marill','snubbull','donphan','hooh','lugia'];
   var allOk = expIds.every(function (id) { return ow5.cheatDeliverMon(id, 50, 'box').ok; });
   var ownedExp = [].concat.apply([], Object.values(g5.state.boxes)).map(function (m) { return m.speciesId; });
-  ok('B20 all 11 guest entries claimable (5 forms + 5 species + Lugia via the same data-driven picker, Stage O1)',
+  ok('B20 all 11 guest entries claimable (5 forms + 5 species + ABYSSORN via the same data-driven picker, Stage O1)',
     allOk && expIds.every(function (id) { return ownedExp.includes(id); }), ownedExp.join(','));
   ok('B21 expansion claims register their shared/base dex numbers',
     g5.state.dex.caught[95] === true && g5.state.dex.caught[250] === true && g5.state.dex.caught[175] === true && g5.state.dex.caught[249] === true);

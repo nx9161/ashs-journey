@@ -743,7 +743,7 @@ export const MAPS2 = {
     npcs: [
       { x: 5, y: 10, name: 'ELIAS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         giveMon: { species: 'eevee', level: 25 },
-        dialogue: ["Atop the old condo I kept an Eevee — bright little thing, brimming with possible futures.", "My traveling days are done. Take Eevee, and let it become whatever your journey needs."] },
+        dialogue: ["Atop the old condo I kept a PRISMKIT — bright little thing, brimming with possible futures.", "My traveling days are done. Take PRISMKIT, and let it become whatever your journey needs."] },
       { x: 11, y: 8, name: 'HOSTESS', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 3, y: 8, name: 'PERFUMER', art: 'lady', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
@@ -2137,7 +2137,7 @@ export const MAPS2 = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
-        dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
+        dialogue: ["Yo, {player}! The professor gave me a PRISMKIT — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       { x: 12, y: 8, name: 'CAPT MARA', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#e8e0f0',
         dialogue: ["I run the little ferry out of Dawnwick's dock, dear. Mostly supplies, sometimes secrets.", "Once a year the fog takes me somewhere that isn't on any chart. Exile Isle. When it calls you, I'll be waiting."] },
     ],

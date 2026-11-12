@@ -77,9 +77,9 @@ export const EVENTS = {
     { say: ['Well, well. Look who finally crawled out of Mt. Lunestone.'], who: 'GARY' },
     { say: ['I was just up at that cottage on the cape. The researcher there let me scroll his whole database — some of us get the guided tour, {player}.'], who: 'GARY' },
     { say: ['Badges? Funny you should ask. Two already. I would show them off, but the glare might sting your eyes.'], who: 'GARY' },
-    { say: ['And this — this is Eevee. Everyone keeps asking why it has not evolved yet.', 'Because I am saving it. Evolution is a promise you make exactly once. When mine happens, it is going to mean something.'], who: 'GARY' },
-    { choice: { npc: 'gary', who: 'GARY', prompt: 'Eevee looks at you, head tilted. You —', options: [
-      { label: 'Ask what Eevee wants', delta: 2, say: ['...What Eevee wants? Nobody asks that. They ask what it will BECOME.', 'Huh. It wants to win, obviously. Like me. ...Thanks for asking, I guess. Do not make it weird.'] },
+    { say: ['And this — this is PRISMKIT. Everyone keeps asking why it has not evolved yet.', 'Because I am saving it. Evolution is a promise you make exactly once. When mine happens, it is going to mean something.'], who: 'GARY' },
+    { choice: { npc: 'gary', who: 'GARY', prompt: 'PRISMKIT looks at you, head tilted. You —', options: [
+      { label: 'Ask what PRISMKIT wants', delta: 2, say: ['...What PRISMKIT wants? Nobody asks that. They ask what it will BECOME.', 'Huh. It wants to win, obviously. Like me. ...Thanks for asking, I guess. Do not make it weird.'] },
       { label: 'Laugh at the speech', delta: -1, say: ['Oh, REAL mature, {player}. Laugh it up. In about ten minutes one of us is going to look extremely stupid, and it is not the one with two badges.'] },
       { label: 'Say nothing', delta: 0, say: ['...Yeah. You get it. Enough talk, then.'] },
     ] } },
@@ -199,7 +199,7 @@ export const EVENTS = {
   ev_silph_rival: [
     { say: ['{player}?! What are YOU doing on the eighth floor of a hostage situation?'], who: 'GARY' },
     { say: ['Do not give me that look. I smelled something rotten in Farsight and followed it up the elevator. Say what you want about me — even I do not let uniforms in matching shirts bully a whole company.'], who: 'GARY' },
-    { say: ['And before you ask: yes, Eevee is still Eevee. Still saving it. When it changes, it will be because WE decided. Nobody else.'], who: 'GARY' },
+    { say: ['And before you ask: yes, PRISMKIT is still PRISMKIT. Still saving it. When it changes, it will be because WE decided. Nobody else.'], who: 'GARY' },
     { choice: { npc: 'gary', who: 'GARY', prompt: 'He is grinning like this is a game. It is not a game. You —', options: [
       { label: 'Admit you followed the same smell', delta: 1, say: ['HA! Knew it. Two noses, one rotten building. That is us all over, {player} — everyone else smells flowers, we smell a fight.'] },
       { label: 'Tell him to stay out of your way', delta: -1, say: ['...Wow. Okay. Message received, hero. Do not come crying to the elevator when the top floor eats you.'] },
@@ -295,7 +295,7 @@ export const EVENTS = {
   ev_rival_route22: [
     { say: ['Knew I would find you here, {player}. Route 22 — where big talk goes to get measured.'], who: 'GARY' },
     { say: ['The League gate is just ahead, and I am NOT letting you walk through it first. Everything since Dawnwick comes down to who is still standing after this.'], who: 'GARY' },
-    { say: ['And before you ask — yes, Eevee is still Eevee. I am saving its evolution for the League itself. When the whole region is watching. It deserves an entrance.'], who: 'GARY' },
+    { say: ['And before you ask — yes, PRISMKIT is still PRISMKIT. I am saving its evolution for the League itself. When the whole region is watching. It deserves an entrance.'], who: 'GARY' },
     { choice: { npc: 'gary', who: 'GARY', prompt: 'The League gate glitters at the top of the road. You —', options: [
       { label: 'Wish him luck — and mean it', delta: 1, say: ['...Luck. HAH. I do not need— ...yeah. Yeah, okay. You too, {player}. Mean it back. Do not waste it.'] },
       { label: 'Promise to end his run here', delta: -1, say: ['Big words. You have been promising that since Dawnwick, and somehow we are BOTH still standing. Make it count this time.'] },
@@ -466,7 +466,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the scorched inscription on Crown Road', flag: 'arc_moltres_found' },
       { text: 'Reach the ember chamber', flag: 'arc_moltres_chamber' },
-      { text: 'Face Moltres, level 50', catch: 'moltres' },
+      { text: 'Face PYREHAWK, level 50', catch: 'moltres' },
     ],
     lair: 'victoryroad',
   },
@@ -476,7 +476,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Cross the frozen currents of the Rime Islands', flag: 'arc_articuno_found' },
       { text: 'Read the frost-etched plate', flag: 'arc_articuno_plate' },
-      { text: 'Face Articuno, level 50', catch: 'articuno' },
+      { text: 'Face GLACIERNE, level 50', catch: 'articuno' },
     ],
     lair: 'seafoamislands',
   },
@@ -519,7 +519,7 @@ export const LEGENDARY_ARCS = {
       { text: 'Hear the tower’s history from Lantern’s elders', flag: 'hooh_history' },
       { text: 'Receive the Clear Bell from the Kimono sisters', flag: 'hooh_bell_received' },
       { text: 'Climb the Chime Tower at dawn', flag: 'hooh_summit' },
-      { text: 'Face Ho-Oh, level 182', catch: 'hooh' },
+      { text: 'Face IRISAVIS, level 182', catch: 'hooh' },
     ],
     lair: 'bell-tower',
   },
@@ -528,10 +528,10 @@ export const LEGENDARY_ARCS = {
     prereq: { arcs: ['arc_zapdos', 'arc_moltres', 'arc_articuno'] },
     hook: 'When the three birds of Arden are gathered, an old melody surfaces — the sea guardian only answers those who have met its storms.',
     steps: [
-      { text: 'Catch FULMINIS, Moltres, and Articuno', flag: 'birds_caught' },
+      { text: 'Catch FULMINIS, PYREHAWK, and GLACIERNE', flag: 'birds_caught' },
       { text: 'Receive the Silver Wing at the Maelstrom Islands' },
       { text: 'Descend to the deepest waterfall chamber' },
-      { text: 'Face Lugia, level 70', catch: 'lugia' },
+      { text: 'Face ABYSSORN, level 70', catch: 'lugia' },
     ],
     lair: 'whirlislands',
   },
@@ -542,7 +542,7 @@ export const LEGENDARY_ARCS = {
       { text: 'Return the lost POSTDUCK to the charcoal maker' },
       { text: 'Receive the GS Orb from a grateful craftsman' },
       { text: 'Place the GS Orb at the forest shrine' },
-      { text: 'Meet Celebi where the forest remembers', catch: 'celebi' },
+      { text: 'Meet CHRONOFAE where the forest remembers', catch: 'celebi' },
     ],
     lair: 'ilexforest',
   },
@@ -954,7 +954,7 @@ export const LEGENDARY_ARCS = {
     id: 'arc_marshadow', title: 'The Shadow in Your Shadow', species: 'marshadow', region: 'Alola', designedOnly: true,
     hook: 'Trainers who have glimpsed the rainbow-winged one sometimes report a second shadow at their feet. It is studying your fighting spirit.',
     steps: [
-      { text: 'Be witnessed by Ho-Oh’s rainbow', flag: 'rainbow_witnessed' },
+      { text: 'Be witnessed by IRISAVIS’s rainbow', flag: 'rainbow_witnessed' },
       { text: 'Prove your spirit in three dojos' },
       { text: 'Face Marshadow, level 70', catch: 'marshadow' },
     ],

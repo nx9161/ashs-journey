@@ -237,14 +237,14 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
 
 // -- Stage J5: legendary arcs + badge gate + hideout map (pure units) --
 {
-  ok('A30 JOHTO_LEGENDARY_ARCS: the beasts + Celebi, prereq beasts_awakened, lairs authored (national-park / mt-mortar-2 / bell-tower / ilex-forest), every step carrying its flag or its catch',
+  ok('A30 JOHTO_LEGENDARY_ARCS: the beasts + CHRONOFAE, prereq beasts_awakened, lairs authored (national-park / mt-mortar-2 / bell-tower / ilex-forest), every step carrying its flag or its catch',
     JSON.stringify(Object.keys(JOHTO_LEGENDARY_ARCS).sort()) === JSON.stringify(['arc_celebi', 'arc_entei', 'arc_raikou', 'arc_suicune'])
     && JOHTO_LEGENDARY_ARCS.arc_raikou.lair === 'national-park' && JOHTO_LEGENDARY_ARCS.arc_entei.lair === 'mt-mortar-2'
     && JOHTO_LEGENDARY_ARCS.arc_suicune.lair === 'bell-tower' && JOHTO_LEGENDARY_ARCS.arc_celebi.lair === 'ilex-forest'
     && Object.values(JOHTO_LEGENDARY_ARCS).every((a) => a.prereq === 'beasts_awakened' && a.steps.length === 3
       && a.steps.slice(0, 2).every((s) => typeof s.flag === 'string') && a.steps[2].catch === a.species)
     && JOHTO_LEGENDARY_ARCS.arc_raikou.steps[0].flag === 'arc_raikou_sign1' && JOHTO_LEGENDARY_ARCS.arc_raikou.steps[1].flag === 'arc_raikou_sign2'
-    && JOHTO_LEGENDARY_ARCS.arc_suicune.steps[2].text.includes('Raikou and Entei'));
+    && JOHTO_LEGENDARY_ARCS.arc_suicune.steps[2].text.includes('VOLTIGRIS and MAGMALION'));
   ok('A31 arc_hooh ACTIVATED in place: no designedOnly, lair bell-tower (supersedes tintower), the four designed steps with flags, the face written at level 182 (ruling 3 supersedes the designed 70)',
     !KANTO_FILE_ARCS.arc_hooh.designedOnly && KANTO_FILE_ARCS.arc_hooh.lair === 'bell-tower'
     && KANTO_FILE_ARCS.arc_hooh.steps.length === 4
@@ -586,7 +586,7 @@ const driver = `
 
   // ---- Burned Tower + Morty ----
   gotoMap(g, 'burned-tower-2', 2, 11); pump(g);
-  ok('B15 Burned Tower basement: the awakening fires — statues gone, Suicune glimpsed (scene, not a battle), beasts_awakened arms J5',
+  ok('B15 Burned Tower basement: the awakening fires — statues gone, BOREPARD glimpsed (scene, not a battle), beasts_awakened arms J5',
     st.story.flags.beasts_awakened === true && st.story.flags.beast_seen_suicune === true && st.story.flags.johto_burned_tower === true);
 
   var owM = gotoMap(g, 'gym-ecruteak', 7, 8);
@@ -597,8 +597,8 @@ const driver = `
     JSON.stringify(st.badges.johto));
   seenLines = [];
   talkKind(g, owM, 'morty'); pump(g);
-  ok('B17 Morty post-badge names what woke (Raikou / Entei / Suicune) — the J5 arming dialogue',
-    seenLines.join(' | ').includes('Raikou') && seenLines.join(' | ').includes('Suicune'),
+  ok('B17 Morty post-badge names what woke (VOLTIGRIS / MAGMALION / BOREPARD) — the J5 arming dialogue',
+    seenLines.join(' | ').includes('VOLTIGRIS') && seenLines.join(' | ').includes('BOREPARD'),
     seenLines.join(' | ').slice(0, 120));
 
   g.openQuestLog();
@@ -931,7 +931,7 @@ const driver = `
       && seenLines.join(' ').includes('crosses the sun');
     seenLines = [];
     gotoMap(gF1, 'r29', 12, 8); pump(gF1);
-    ok('F01 the Ho-Oh glimpse: fires on first r29 entry in the Johto arc (dialogue-only, sets hooh_glimpsed + arc discovered) and NEVER twice',
+    ok('F01 the IRISAVIS glimpse: fires on first r29 entry in the Johto arc (dialogue-only, sets hooh_glimpsed + arc discovered) and NEVER twice',
       glimpsedOnce && !seenLines.join(' ').includes('crosses the sun') && !(gF1.scenes.top instanceof BattleScene),
       seenLines.join(' | ').slice(0, 80));
   }
@@ -949,7 +949,7 @@ const driver = `
       dormantOk && !(gF2.scenes.top instanceof BattleScene) && !stF2.story.flags.arc_raikou_done);
   }
 
-  // F03+F04: Raikou's chase order, then flee / KO re-fire, catch completes.
+  // F03+F04: VOLTIGRIS's chase order, then flee / KO re-fire, catch completes.
   {
     var [gF3, stF3] = legendGame(503);
     stF3.story.quests.arc_raikou = 'discovered'; // the Burned Tower staging (J4a event writes this)
@@ -960,7 +960,7 @@ const driver = `
     talkKind(gF3, owF3b, 'beast_sign_raikou_1'); pump(gF3);
     var owF3c = gotoMap(gF3, 'r36', 20, 8); pump(gF3);
     talkKind(gF3, owF3c, 'beast_sign_raikou_2'); pump(gF3);
-    ok('F03 Raikou chase order: the second witness points you back to the first (no flag out of order); the signs set in order and the arc goes active',
+    ok('F03 VOLTIGRIS chase order: the second witness points you back to the first (no flag out of order); the signs set in order and the arc goes active',
       outOfOrder && stF3.story.flags.arc_raikou_sign1 === true && stF3.story.flags.arc_raikou_sign2 === true
       && stF3.story.quests.arc_raikou === 'active');
     gotoMap(gF3, 'national-park', 15, 14);
@@ -977,12 +977,12 @@ const driver = `
     gotoMap(gF3, 'national-park', 15, 14);
     var met3 = drainToBattle(gF3);
     catchWithBall(gF3);
-    ok('F04 Raikou face (Lv 178, National Park storm field): flee re-fires, KO re-fires (a one-of-one never dex-locks), the CATCH completes the arc + quest state',
+    ok('F04 VOLTIGRIS face (Lv 178, National Park storm field): flee re-fires, KO re-fires (a one-of-one never dex-locks), the CATCH completes the arc + quest state',
       fledOk && koOk && met3 && stF3.story.flags.arc_raikou_done === true && stF3.story.quests.arc_raikou === 'complete'
       && !!stF3.dex.caught[SPECIES.raikou.dexNo]);
   }
 
-  // F05: Entei's chase + face (flee, then catch) in Mt. Mortar's deep chamber.
+  // F05: MAGMALION's chase + face (flee, then catch) in Mt. Mortar's deep chamber.
   {
     var [gF5, stF5] = legendGame(505);
     stF5.story.quests.arc_entei = 'discovered';
@@ -999,12 +999,12 @@ const driver = `
     gotoMap(gF5, 'mt-mortar-2', 17, 11);
     var metE2 = drainToBattle(gF5);
     catchWithBall(gF5);
-    ok('F05 Entei face (Lv 180, Mt. Mortar deep chamber): signs in order arm it, flee re-fires, the catch completes the arc',
+    ok('F05 MAGMALION face (Lv 180, Mt. Mortar deep chamber): signs in order arm it, flee re-fires, the catch completes the arc',
       stF5.story.flags.arc_entei_sign1 === true && stF5.story.flags.arc_entei_sign2 === true && fledE && metE2
       && stF5.story.flags.arc_entei_done === true && stF5.story.quests.arc_entei === 'complete');
   }
 
-  // F06: Suicune waits for its kin.
+  // F06: BOREPARD waits for its kin.
   {
     var [gF6, stF6] = legendGame(506);
     stF6.story.quests.arc_suicune = 'discovered';
@@ -1019,12 +1019,12 @@ const driver = `
     var metS = drainToBattle(gF6);
     var foeS = metS && gF6.scenes.top.foe && gF6.scenes.top.foe.speciesId === 'suicune' && gF6.scenes.top.foe.level === 184;
     catchWithBall(gF6);
-    ok('F06 Suicune face (Lv 184, the Bell Tower foot): signs through Ecruteak + Cianwood north shore, but NO face while Raikou/Entei are unquieted — then the catch completes',
+    ok('F06 BOREPARD face (Lv 184, the Bell Tower foot): signs through Ecruteak + Cianwood north shore, but NO face while VOLTIGRIS/MAGMALION are unquieted — then the catch completes',
       stF6.story.flags.arc_suicune_sign1 === true && stF6.story.flags.arc_suicune_sign2 === true && tooSoon && foeS
       && stF6.story.flags.arc_suicune_done === true && stF6.story.quests.arc_suicune === 'complete');
   }
 
-  // F07: Ho-Oh's lock chain: history -> (beasts) -> bell -> summit.
+  // F07: IRISAVIS's lock chain: history -> (beasts) -> bell -> summit.
   {
     var [gF7, stF7] = legendGame(507);
     var owF7a = gotoMap(gF7, 'dance-theater', 9, 10); pump(gF7);
@@ -1050,12 +1050,12 @@ const driver = `
     gotoMap(gF7, 'bell-tower-2', 8, 9);
     var metH2 = drainToBattle(gF7);
     catchWithBall(gF7);
-    ok('F07 Ho-Oh lock chain: no bell before the history, no bell before the beasts are quiet, no summit face without the bell — then flee re-fires and the catch (Lv 182) completes the arc',
+    ok('F07 IRISAVIS lock chain: no bell before the history, no bell before the beasts are quiet, no summit face without the bell — then flee re-fires and the catch (Lv 182) completes the arc',
       noBellEarly && histOk && summitQuiet && noBellBeasts && bellOk && fledH && metH2
       && stF7.story.flags.arc_hooh_done === true && stF7.story.quests.arc_hooh === 'complete' && stF7.story.flags.hooh_summit === true);
   }
 
-  // F08: Celebi — locked until Kurt's return; the shrine; the memento.
+  // F08: CHRONOFAE — locked until Kurt's return; the shrine; the memento.
   {
     var [gF8, stF8] = legendGame(508);
     stF8.story.flags.silver_ilex_done = true; // the forest's other appointment, kept elsewhere (E34)
@@ -1080,7 +1080,7 @@ const driver = `
     owF8c.tryInteract();
     var metC2 = drainToBattle(gF8);
     catchWithBall(gF8);
-    ok('F08 Celebi: the shrine is inert until Kurt RETURNS the ball (whereabouts chain exact: delivered stands, kurt_has_ball / at_kurt_house clear, back_with_player set) — then the ball opens, flee re-fires, the catch (Lv 170) completes and the empty GS Ball stays in the bag',
+    ok('F08 CHRONOFAE: the shrine is inert until Kurt RETURNS the ball (whereabouts chain exact: delivered stands, kurt_has_ball / at_kurt_house clear, back_with_player set) — then the ball opens, flee re-fires, the catch (Lv 170) completes and the empty GS Ball stays in the bag',
       shrineLocked && returned && fledC && metC2 && stF8.story.flags.arc_celebi_done === true
       && stF8.story.quests.arc_celebi === 'complete' && (stF8.bag.gsball || 0) === 1 && stF8.story.flags.celebi_shrine_opened === true);
   }
