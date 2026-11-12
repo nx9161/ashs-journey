@@ -16,6 +16,7 @@ import { JOHTO_NPCS, JOHTO_NPC_PATCHES } from '../data/story-johto.mjs';
 import { HOENN_NPCS, HOENN_NPC_PATCHES } from '../data/story-hoenn.mjs';
 import { SINNOH_NPCS, SINNOH_NPC_PATCHES } from '../data/story-sinnoh.mjs';
 import { weatherForMap, drawWeatherOverlay } from './weather.mjs';
+import { seasonForDate, seasonTintFor } from './seasons.mjs';
 import { PARLEY_NPCS, parleyVisible, bondTrainerVariant, recordBattleBond } from './bonds.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { SFX } from '../engine/audio.mjs';
@@ -1182,6 +1183,17 @@ export class OverworldScene {
     // eaves) composes ON TOP of this sorted pass — the scene calls
     // sysRenderForeground here when W7 ships it. Nothing draws today.
     if (this.sysRenderForeground) this.sysRenderForeground(r);
+    // Black 2 baseline (2026-11-11): season tint — the season system's
+    // light over outdoor maps, drawn under the time-of-day tint so night
+    // still darkens over the season. Presentation only (src/game/
+    // seasons.mjs): derived from the calendar, never stored, and never
+    // drawn indoors or in dark maps (seasonTintFor resolves null there).
+    const sTint = seasonTintFor(this.map);
+    if (sTint) {
+      const c = r.ctx;
+      c.fillStyle = 'rgba(' + sTint.rgb[0] + ',' + sTint.rgb[1] + ',' + sTint.rgb[2] + ',' + sTint.alpha + ')';
+      c.fillRect(r.camX - T, r.camY - T, r.viewW + 2 * T, r.viewH + 2 * T);
+    }
     // Premium+ W5 (LD-2): time-of-day tint — ONE flat overlay over the
     // WORLD layer only, drawn after the sorted world pass and before
     // every HUD/canvas-text draw below (banner, clock glyph, prompts),
@@ -1284,6 +1296,15 @@ export class OverworldScene {
         this.moveTut._toastSent = true;
         ui.hudToast('Walk with the D-pad — Pikachu follows you!', 3600);
       }
+      // Season toast (Black 2 baseline): once per season rollover, when
+      // the calendar season differs from the last one announced. The
+      // season itself is derived (seasons.mjs), never stored; only the
+      // announcement marker lives here, per scene.
+      try {
+        const sName = seasonForDate(new Date()).name;
+        if (this._hudSeason === undefined) this._hudSeason = sName;
+        else if (sName !== this._hudSeason) { this._hudSeason = sName; ui.hudToast('Season — ' + sName, 2600); }
+      } catch (e) { /* headless */ }
     }
   }
 
@@ -1329,10 +1350,10 @@ export class OverworldScene {
       c.fillStyle = '#101018';
       c.fillRect(x + 6, y + 2, 5, 8);
     }
-    // season bar: spr green / sum gold / aut orange / win blue
-    let m = 0;
-    try { m = new Date().getMonth(); } catch (e) { /* headless */ }
-    const seasonCol = m < 2 || m === 11 ? '#5a9ae8' : m < 5 ? '#58c94f' : m < 8 ? '#e8c832' : '#e08a4a';
+    // season bar: color from the season system (src/game/seasons.mjs) —
+    // the single source of season truth since the Black 2 imposition.
+    let seasonCol = '#5a9ae8';
+    try { seasonCol = seasonForDate(new Date()).color; } catch (e) { /* headless */ }
     c.fillStyle = seasonCol;
     c.fillRect(x, y + 14, 12, 3);
   }

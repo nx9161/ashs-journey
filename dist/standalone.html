@@ -191734,6 +191734,61 @@ function drawWeatherOverlay(r, game, wstate) {
 }
 
 
+// ---- src/game/seasons.mjs ----
+// seasons.mjs — the season system (Black 2 baseline imposition, owner order
+// 2026-11-11: "make it more like Pokemon Black"). Gen V's signature world
+// system, implemented original: the season advances MONTHLY, cycling all
+// four seasons every four months — the world you walk in January is not
+// the world you walk in February. Before this module the game had only a
+// cosmetic season color bar in the clock glyph (quarter-year, hardcoded
+// in overworld.mjs); this module is now the single source of season truth.
+//
+// PRESENTATION ONLY, same doctrine as weather.mjs: seasons read the
+// calendar and write NOTHING — no state, no save fields, no encounter or
+// battle effects. Season is derived from the date, never stored (the
+// Bonds rule: derived, never stored). Effects today: a seasonal light
+// tint over outdoor maps, the clock-glyph season bar, and a one-shot
+// season toast when the season rolls over. Anything mechanical is a
+// future owner ruling, not a silent addition.
+//
+// Anchor (ours): January = Winter, then the cycle turns monthly —
+// Feb Spring, Mar Summer, Apr Autumn, May Winter, and so on.
+
+const SEASON_ORDER = ['Winter', 'Spring', 'Summer', 'Autumn'];
+
+// Per-season presentation: glyph/bar color (the exact hexes the clock
+// glyph has always used) and the outdoor light tint (rgb + alpha —
+// kept subtle, illumination only, like PHASE_TINTS).
+const SEASON_STYLE = {
+  Winter: { color: '#5a9ae8', tint: { rgb: [90, 154, 232], alpha: 0.08 } },
+  Spring: { color: '#58c94f', tint: { rgb: [88, 201, 79], alpha: 0.05 } },
+  Summer: { color: '#e8c832', tint: { rgb: [232, 200, 50], alpha: 0.04 } },
+  Autumn: { color: '#e08a4a', tint: { rgb: [224, 138, 74], alpha: 0.07 } },
+};
+
+// Pure resolver: Date -> { name, index, color, tint }.
+function seasonForDate(d) {
+  const month = d && typeof d.getMonth === 'function' ? d.getMonth() : 0;
+  const name = SEASON_ORDER[((month % 4) + 4) % 4];
+  const style = SEASON_STYLE[name];
+  return { name, index: SEASON_ORDER.indexOf(name), color: style.color, tint: style.tint };
+}
+
+// The current season, resolved from the real calendar. Headless-safe:
+// any Date failure resolves to the anchor season.
+function currentSeason() {
+  try { return seasonForDate(new Date()); } catch (e) { return seasonForDate(null); }
+}
+
+// The season's light tint for a map, or null where seasons never show:
+// interiors and dark maps (caves own their darkness — same exclusion as
+// the time-of-day tint and the weather layer).
+function seasonTintFor(map) {
+  if (!map || map.indoor || map.dark) return null;
+  return currentSeason().tint;
+}
+
+
 // ---- src/game/ball-rules.mjs ----
 // ball-rules.mjs — Stage J6: apricorn-ball catch rules, ONE shared
 // evaluation for both battle engines (battle.mjs classic + battle-rt.mjs
@@ -202458,6 +202513,17 @@ class OverworldScene {
     // eaves) composes ON TOP of this sorted pass — the scene calls
     // sysRenderForeground here when W7 ships it. Nothing draws today.
     if (this.sysRenderForeground) this.sysRenderForeground(r);
+    // Black 2 baseline (2026-11-11): season tint — the season system's
+    // light over outdoor maps, drawn under the time-of-day tint so night
+    // still darkens over the season. Presentation only (src/game/
+    // seasons.mjs): derived from the calendar, never stored, and never
+    // drawn indoors or in dark maps (seasonTintFor resolves null there).
+    const sTint = seasonTintFor(this.map);
+    if (sTint) {
+      const c = r.ctx;
+      c.fillStyle = 'rgba(' + sTint.rgb[0] + ',' + sTint.rgb[1] + ',' + sTint.rgb[2] + ',' + sTint.alpha + ')';
+      c.fillRect(r.camX - T, r.camY - T, r.viewW + 2 * T, r.viewH + 2 * T);
+    }
     // Premium+ W5 (LD-2): time-of-day tint — ONE flat overlay over the
     // WORLD layer only, drawn after the sorted world pass and before
     // every HUD/canvas-text draw below (banner, clock glyph, prompts),
@@ -202560,6 +202626,15 @@ class OverworldScene {
         this.moveTut._toastSent = true;
         ui.hudToast('Walk with the D-pad — Pikachu follows you!', 3600);
       }
+      // Season toast (Black 2 baseline): once per season rollover, when
+      // the calendar season differs from the last one announced. The
+      // season itself is derived (seasons.mjs), never stored; only the
+      // announcement marker lives here, per scene.
+      try {
+        const sName = seasonForDate(new Date()).name;
+        if (this._hudSeason === undefined) this._hudSeason = sName;
+        else if (sName !== this._hudSeason) { this._hudSeason = sName; ui.hudToast('Season — ' + sName, 2600); }
+      } catch (e) { /* headless */ }
     }
   }
 
@@ -202605,10 +202680,10 @@ class OverworldScene {
       c.fillStyle = '#101018';
       c.fillRect(x + 6, y + 2, 5, 8);
     }
-    // season bar: spr green / sum gold / aut orange / win blue
-    let m = 0;
-    try { m = new Date().getMonth(); } catch (e) { /* headless */ }
-    const seasonCol = m < 2 || m === 11 ? '#5a9ae8' : m < 5 ? '#58c94f' : m < 8 ? '#e8c832' : '#e08a4a';
+    // season bar: color from the season system (src/game/seasons.mjs) —
+    // the single source of season truth since the Black 2 imposition.
+    let seasonCol = '#5a9ae8';
+    try { seasonCol = seasonForDate(new Date()).color; } catch (e) { /* headless */ }
     c.fillStyle = seasonCol;
     c.fillRect(x, y + 14, 12, 3);
   }
@@ -210061,6 +210136,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:60325ca0c075d9735bbfe7bdc19df89e75b861308bb08f4fd4ad016cee7bc3a7 -->
+<!-- contentHash:7c89dbe66ca78d432c60a6bd36a157910e34b6ad1093dcda066ba24226d9f0ad -->
 </body>
 </html>

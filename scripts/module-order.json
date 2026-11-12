@@ -51,6 +51,7 @@
  "src/game/bonds.mjs",
  "src/game/arcs.mjs",
  "src/game/weather.mjs",
+ "src/game/seasons.mjs",
  "src/game/ball-rules.mjs",
  "src/game/johto-systems.mjs",
  "src/game/sinnoh-systems.mjs",

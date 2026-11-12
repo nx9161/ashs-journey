@@ -124,3 +124,15 @@ non-zero if any frozen monolith grew past its cap in scripts/pack-manifest.caps.
 64×64 canvas (B2-G1) or the >16-color entry count rises above the frozen ceiling
 of 116 in scripts/art-gate.caps.json (B2-G2); both failure modes were exercised
 with synthetic violations on 2026-11-11 and the restored tree passes.
+
+## Addendum 2026-11-11 — first system adopted under this law: SEASONS
+Owner order ("change game code and make it more like Pokemon Black — the
+game I gave you on iCloud"): the season system is now real, not just a
+clock-glyph color bar. In the RE, seasons were graded INFERRED (the
+archives are numerically named); adoption is the owner's explicit call,
+recorded here so the evidence trail stays honest. Implementation is
+original (src/game/seasons.mjs, its own module per B2-R1): monthly
+season rotation on a 4-month cycle, derived from the calendar and never
+stored, presentation-only per the weather.mjs doctrine — outdoor season
+light tint, glyph bar and rollover toast driven from the one resolver.
+Mechanical season effects (encounters, areas) remain a future ruling.
