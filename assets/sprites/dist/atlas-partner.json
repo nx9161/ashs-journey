@@ -2,7 +2,7 @@
   "atlas": "atlas-partner.png",
   "tile": 48,
   "size": [
-    790,
+    658,
     66
   ],
   "sprites": {
@@ -14,7 +14,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -27,12 +27,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "partner-back-accent": {
+    "partner-back-bob": {
       "x": 133,
       "y": 1,
       "w": 64,
@@ -40,54 +40,26 @@
       "frames": [
         "idle"
       ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "partner-back"
-    },
-    "partner-front-accent": {
-      "x": 199,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 12,
-      "seed": null,
-      "derived_from": null,
-      "mirror_of": null,
-      "delta_of": "partner-front"
-    },
-    "partner-back-bob": {
-      "x": 265,
-      "y": 1,
-      "w": 64,
-      "h": 64,
-      "frames": [
-        "idle"
-      ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "partner-front-bob": {
-      "x": 331,
+      "x": 199,
       "y": 1,
       "w": 64,
       "h": 64,
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
     "pikachu-hop-1": {
-      "x": 397,
+      "x": 265,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -100,7 +72,7 @@
       "mirror_of": null
     },
     "pikachu-hop-2": {
-      "x": 415,
+      "x": 283,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -113,7 +85,7 @@
       "mirror_of": null
     },
     "pikachu-idle-1": {
-      "x": 433,
+      "x": 301,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -126,7 +98,7 @@
       "mirror_of": null
     },
     "pikachu-idle-2": {
-      "x": 451,
+      "x": 319,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -140,7 +112,7 @@
       "mirror_of": null
     },
     "pikachu-left-hop-1": {
-      "x": 469,
+      "x": 337,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -153,7 +125,7 @@
       "mirror_of": null
     },
     "pikachu-left-hop-2": {
-      "x": 487,
+      "x": 355,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -166,7 +138,7 @@
       "mirror_of": null
     },
     "pikachu-left-idle-1": {
-      "x": 505,
+      "x": 373,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -179,7 +151,7 @@
       "mirror_of": null
     },
     "pikachu-left-idle-2": {
-      "x": 523,
+      "x": 391,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -193,7 +165,7 @@
       "mirror_of": null
     },
     "pikachu-look-1": {
-      "x": 541,
+      "x": 409,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -206,7 +178,7 @@
       "mirror_of": null
     },
     "pikachu-look-2": {
-      "x": 559,
+      "x": 427,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -219,7 +191,7 @@
       "mirror_of": null
     },
     "pikachu-right-hop-1": {
-      "x": 577,
+      "x": 445,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -232,7 +204,7 @@
       "mirror_of": null
     },
     "pikachu-right-hop-2": {
-      "x": 595,
+      "x": 463,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -245,7 +217,7 @@
       "mirror_of": null
     },
     "pikachu-right-idle-1": {
-      "x": 613,
+      "x": 481,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -258,7 +230,7 @@
       "mirror_of": null
     },
     "pikachu-right-idle-2": {
-      "x": 631,
+      "x": 499,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -272,7 +244,7 @@
       "mirror_of": null
     },
     "pikachu-sleep-1": {
-      "x": 649,
+      "x": 517,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -285,7 +257,7 @@
       "mirror_of": null
     },
     "pikachu-sleep-2": {
-      "x": 667,
+      "x": 535,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -298,7 +270,7 @@
       "mirror_of": null
     },
     "pikachu-up-hop-1": {
-      "x": 685,
+      "x": 553,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -311,7 +283,7 @@
       "mirror_of": null
     },
     "pikachu-up-hop-2": {
-      "x": 703,
+      "x": 571,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -324,7 +296,7 @@
       "mirror_of": null
     },
     "pikachu-up-idle-1": {
-      "x": 721,
+      "x": 589,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -337,7 +309,7 @@
       "mirror_of": null
     },
     "pikachu-up-idle-2": {
-      "x": 739,
+      "x": 607,
       "y": 1,
       "w": 16,
       "h": 20,
@@ -351,7 +323,7 @@
       "mirror_of": null
     },
     "pikachu-refuse": {
-      "x": 757,
+      "x": 625,
       "y": 1,
       "w": 32,
       "h": 16,

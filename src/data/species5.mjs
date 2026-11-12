@@ -40,7 +40,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'torterra', method: 'level', level: 332 }, tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   torterra: {
-    id: 'torterra', name: 'Torterra', dexNo: 389, types: ['grass', 'ground'],
+    id: 'torterra', name: 'MOSSAIC', dexNo: 389, types: ['grass', 'ground'],
     base: { hp: 95, atk: 109, def: 105, spa: 75, spd: 85, spe: 56 },
     catchRate: 45, growth: 'mediumslow', baseXp: 236, body: 'quad', spriteSeed: 38901,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,

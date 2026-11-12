@@ -4,7 +4,7 @@
 
 export const SPECIES = {
   partner: {
-    id: 'partner', name: 'Pikachu', dexNo: 25, types: ['electric'],
+    id: 'partner', name: 'VOLTIK', dexNo: 25, types: ['electric'],
     base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
     catchRate: 190, growth: 'mediumfast', baseXp: 82, body: 'quad', spriteSeed: 2501,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -80,7 +80,7 @@ export const SPECIES = {
     evo: { to: 'steelix', method: 'trade' },
   },
   bulbasaur: {
-    id: 'bulbasaur', name: 'Bulbasaur', dexNo: 1, types: ['grass', 'poison'],
+    id: 'bulbasaur', name: 'BUDDIN', dexNo: 1, types: ['grass', 'poison'],
     base: { hp: 45, atk: 49, def: 49, spa: 65, spd: 65, spe: 45 },
     catchRate: 45, growth: 'mediumslow', baseXp: 64, body: 'quad', spriteSeed: 101,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
@@ -88,7 +88,7 @@ export const SPECIES = {
     flavor: 'A seed on its back drinks the morning sun.',
   },
   charmander: {
-    id: 'charmander', name: 'Charmander', dexNo: 4, types: ['fire'],
+    id: 'charmander', name: 'EMBRY', dexNo: 4, types: ['fire'],
     base: { hp: 39, atk: 52, def: 43, spa: 60, spd: 50, spe: 65 },
     catchRate: 45, growth: 'mediumslow', baseXp: 62, body: 'biped', spriteSeed: 401,
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
@@ -96,7 +96,7 @@ export const SPECIES = {
     flavor: 'Its tail flame mirrors its spirit — bright and stubborn.',
   },
   squirtle: {
-    id: 'squirtle', name: 'Squirtle', dexNo: 7, types: ['water'],
+    id: 'squirtle', name: 'BUBLET', dexNo: 7, types: ['water'],
     base: { hp: 44, atk: 48, def: 65, spa: 50, spd: 64, spe: 43 },
     catchRate: 45, growth: 'mediumslow', baseXp: 63, body: 'biped', spriteSeed: 701,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,

@@ -898,7 +898,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'milotic', method: 'level', level: 220 }, tm: [],
   },
   milotic: {
-    id: 'milotic', name: 'Milotic', dexNo: 350, types: ['water'],
+    id: 'milotic', name: 'UNDINARA', dexNo: 350, types: ['water'],
     base: { hp: 95, atk: 60, def: 79, spa: 100, spd: 125, spe: 81 },
     catchRate: 60, growth: 'fast', baseXp: 189, body: 'serpent', spriteSeed: 35001,
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,

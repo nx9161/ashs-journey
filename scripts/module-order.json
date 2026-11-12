@@ -45,6 +45,7 @@
  "src/data/quests.mjs",
  "src/data/narrative-db.mjs",
  "src/data/merge.mjs",
+ "src/data/name-registry.mjs",
  "src/engine/fx.mjs",
  "src/data/grounds.mjs",
  "src/data/idle-classes.mjs",

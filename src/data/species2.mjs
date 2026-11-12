@@ -5,7 +5,7 @@
 
 export const SPECIES2 = {
   ivysaur: {
-    id: 'ivysaur', name: 'Ivysaur', dexNo: 2, types: ['grass', 'poison'],
+    id: 'ivysaur', name: 'SAPLINT', dexNo: 2, types: ['grass', 'poison'],
     base: { hp: 60, atk: 62, def: 63, spa: 80, spd: 80, spe: 60 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'quad', spriteSeed: 201,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
@@ -14,7 +14,7 @@ export const SPECIES2 = {
     evo: { to: 'venusaur', method: 'level', level: 32 }, tm: [3, 6, 9, 10, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   venusaur: {
-    id: 'venusaur', name: 'Venusaur', dexNo: 3, types: ['grass', 'poison'],
+    id: 'venusaur', name: 'TERRABLOOM', dexNo: 3, types: ['grass', 'poison'],
     base: { hp: 80, atk: 82, def: 83, spa: 100, spd: 100, spe: 80 },
     catchRate: 45, growth: 'mediumslow', baseXp: 263, body: 'quad', spriteSeed: 301,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
@@ -23,7 +23,7 @@ export const SPECIES2 = {
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   charmeleon: {
-    id: 'charmeleon', name: 'Charmeleon', dexNo: 5, types: ['fire'],
+    id: 'charmeleon', name: 'EMBRION', dexNo: 5, types: ['fire'],
     base: { hp: 58, atk: 64, def: 58, spa: 80, spd: 65, spe: 80 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'biped', spriteSeed: 501,
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
@@ -32,7 +32,7 @@ export const SPECIES2 = {
     evo: { to: 'charizard', method: 'level', level: 36 }, tm: [1, 3, 6, 8, 9, 10, 17, 18, 19, 20, 28, 31, 32, 34, 38, 40, 44, 50, 101, 104],
   },
   charizard: {
-    id: 'charizard', name: 'Charizard', dexNo: 6, types: ['fire', 'flying'],
+    id: 'charizard', name: 'INFERNOX', dexNo: 6, types: ['fire', 'flying'],
     base: { hp: 78, atk: 84, def: 78, spa: 109, spd: 85, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 267, body: 'biped', spriteSeed: 601,
     eggGroups: ['monster', 'dragon'], hatchCounter: 20,
@@ -41,7 +41,7 @@ export const SPECIES2 = {
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   wartortle: {
-    id: 'wartortle', name: 'Wartortle', dexNo: 8, types: ['water'],
+    id: 'wartortle', name: 'WAVLEEN', dexNo: 8, types: ['water'],
     base: { hp: 59, atk: 63, def: 80, spa: 65, spd: 80, spe: 58 },
     catchRate: 45, growth: 'mediumslow', baseXp: 142, body: 'biped', spriteSeed: 801,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -50,7 +50,7 @@ export const SPECIES2 = {
     evo: { to: 'blastoise', method: 'level', level: 36 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   blastoise: {
-    id: 'blastoise', name: 'Blastoise', dexNo: 9, types: ['water'],
+    id: 'blastoise', name: 'ABYSSAR', dexNo: 9, types: ['water'],
     base: { hp: 79, atk: 83, def: 100, spa: 85, spd: 105, spe: 78 },
     catchRate: 45, growth: 'mediumslow', baseXp: 265, body: 'biped', spriteSeed: 901,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -149,7 +149,7 @@ export const SPECIES2 = {
     tm: [6, 9, 10, 15, 20, 21, 26, 27, 28, 31, 32, 34, 44, 48, 50, 104],
   },
   pikachu: {
-    id: 'pikachu', name: 'Pikachu', dexNo: 25, types: ['electric'],
+    id: 'pikachu', name: 'VOLTIK', dexNo: 25, types: ['electric'],
     base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
     catchRate: 190, growth: 'mediumfast', baseXp: 112, body: 'quad', spriteSeed: 2502,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -248,7 +248,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 24, 25, 29, 30, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   vulpix: {
-    id: 'vulpix', name: 'Vulpix', dexNo: 37, types: ['fire'],
+    id: 'vulpix', name: 'VULCANIS', dexNo: 37, types: ['fire'],
     base: { hp: 38, atk: 41, def: 40, spa: 50, spd: 65, spe: 65 },
     catchRate: 190, growth: 'mediumfast', baseXp: 60, body: 'quad', spriteSeed: 3701,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -1205,7 +1205,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   zapdos: {
-    id: 'zapdos', name: 'Zapdos', dexNo: 145, types: ['electric', 'flying'],
+    id: 'zapdos', name: 'FULMINIS', dexNo: 145, types: ['electric', 'flying'],
     base: { hp: 90, atk: 90, def: 85, spa: 125, spd: 90, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 290, body: 'bird', spriteSeed: 14501,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1250,7 +1250,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   mewtwo: {
-    id: 'mewtwo', name: 'Mewtwo', dexNo: 150, types: ['psychic'],
+    id: 'mewtwo', name: 'OMNIGEN', dexNo: 150, types: ['psychic'],
     base: { hp: 106, atk: 110, def: 90, spa: 154, spd: 90, spe: 130 },
     catchRate: 3, growth: 'slow', baseXp: 340, body: 'biped', spriteSeed: 15001,
     eggGroups: ['no-eggs'], hatchCounter: 120,
