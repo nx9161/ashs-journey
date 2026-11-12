@@ -214,7 +214,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Marisol grows oranges sweet enough to make a NAPPASAUR sit up.",
+          "Marisol grows oranges sweet enough to make a SOMNIBEAR sit up.",
           "Professor Ivy studies the sea's odd Capture Orbs in the lab up the street."
         ]
       },
@@ -2419,7 +2419,7 @@ export const MAPS5 = {
       {
         "x": 13,
         "y": 9,
-        "text": "SANCTUM SHRINE PLAZA — Festival of the sea, kept since anyone can remember. Mind the DOZECROWN rock by the shore."
+        "text": "SANCTUM SHRINE PLAZA — Festival of the sea, kept since anyone can remember. Mind the ORAPOTAM rock by the shore."
       },
       {
         "x": 8,
@@ -2539,7 +2539,7 @@ export const MAPS5 = {
             "flag": "orange_2000_active",
             "dialogue": [
               "The festival can wait — festivals are patient, storms are not. The shrine isles, trainer: free the three titans from that collector's cages.",
-              "DOZECROWN counsels from its rock on the west shore. It has never once been wrong. It has also never once hurried, so listen slowly."
+              "ORAPOTAM counsels from its rock on the west shore. It has never once been wrong. It has also never once hurried, so listen slowly."
             ]
           }
         ]
@@ -2547,28 +2547,28 @@ export const MAPS5 = {
       {
         "x": 6,
         "y": 12,
-        "name": "DOZECROWN",
+        "name": "ORAPOTAM",
         "art": "slowking",
         "skin": "#f0c8d8",
         "shirt": "#e8a0b8",
         "pants": "#c8b898",
         "hair": "#f0e0c8",
         "dialogue": [
-          "DOZECROWN sits on the shore rocks where it has sat since before the plaza had a name, watching the three shrine isles the way old sailors watch weather.",
+          "ORAPOTAM sits on the shore rocks where it has sat since before the plaza had a name, watching the three shrine isles the way old sailors watch weather.",
           "Slow... king. (It regards you with enormous, unhurried calm. Some questions, its eyes suggest, the sea will answer when it is ready.)"
         ],
         "dialogueStates": [
           {
             "flag": "orange_2000_storm_stilled",
             "dialogue": [
-              "DOZECROWN is back on its rock, in the sun, in the exact patch of warmth it has occupied for longer than anyone can prove.",
-              "Slow... king. King. (The storm is a story now. DOZECROWN has already heard it — it was there. So were you.)"
+              "ORAPOTAM is back on its rock, in the sun, in the exact patch of warmth it has occupied for longer than anyone can prove.",
+              "Slow... king. King. (The storm is a story now. ORAPOTAM has already heard it — it was there. So were you.)"
             ]
           },
           {
             "flag": "orange_2000_active",
             "dialogue": [
-              "DOZECROWN turns its head — slowly — from isle to isle to isle. Fire. Lightning. Ice. Then it looks at you, and waits, with the patience of deep water.",
+              "ORAPOTAM turns its head — slowly — from isle to isle to isle. Fire. Lightning. Ice. Then it looks at you, and waits, with the patience of deep water.",
               "Slow... king. (Free the shrines. Calm the titans. Then climb to the shrine, and let the sea decide. It is not advice. It is a tide table.)"
             ]
           }
@@ -2584,7 +2584,7 @@ export const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The DOZECROWN by the rock has seen EVERYTHING. Ask it anything. It won't answer, but still.",
+          "The ORAPOTAM by the rock has seen EVERYTHING. Ask it anything. It won't answer, but still.",
           "Festival week, the plaza never sleeps. Neither do I."
         ]
       }
@@ -4366,14 +4366,14 @@ export const MAPS5 = {
             "flag": "orange_2000_storm_stilled",
             "dialogue": [
               "The candles burn straight tonight. First time since the barge came. I have relit this shrine's quiet, trainer — you relit the sea's.",
-              "DOZECROWN is back on its rock, the deep chamber sleeps, and the song is tonight. Stay for it, if the road allows."
+              "ORAPOTAM is back on its rock, the deep chamber sleeps, and the song is tonight. Stay for it, if the road allows."
             ]
           },
           {
             "flag": "orange_2000_active",
             "dialogue": [
               "The candles will not stay lit — the wind down the back passage is wrong, all wrong. You are the one Elder Mira is praying for, aren't you.",
-              "The three shrine caves, trainer. And when the titans are calm — this floor. DOZECROWN will know the hour. It always does."
+              "The three shrine caves, trainer. And when the titans are calm — this floor. ORAPOTAM will know the hour. It always does."
             ]
           }
         ]

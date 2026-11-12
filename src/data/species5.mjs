@@ -558,7 +558,7 @@ export const SPECIES_SINNOH = {
     catchRate: 50, growth: 'slow', baseXp: 78, body: 'biped', spriteSeed: 44601,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 40,
     learnset: { 1: ['tackle', 'metronome'], 304: ['defensecurl'], 309: ['amnesia'], 312: ['lick'], 320: ['screech'], 333: ['bodyslam'] },
-    flavor: 'It eats its weight, naps it off, and starts the paperwork again. It joins NAPPASAUR at level 310 here — friendship, in this region, is patience.',
+    flavor: 'It eats its weight, naps it off, and starts the paperwork again. It joins SOMNIBEAR at level 310 here — friendship, in this region, is patience.',
     evo: { to: 'snorlax', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 50, 101, 103, 104],
   },
   riolu: {

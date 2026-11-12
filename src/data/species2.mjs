@@ -104,7 +104,7 @@ export const SPECIES2 = {
     evo: { to: 'pidgeot', method: 'level', level: 36 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   pidgeot: {
-    id: 'pidgeot', name: 'AERARCH', dexNo: 18, types: ['normal', 'flying'],
+    id: 'pidgeot', name: 'AERHAWK', dexNo: 18, types: ['normal', 'flying'],
     base: { hp: 83, atk: 80, def: 75, spa: 70, spd: 70, spe: 101 },
     catchRate: 45, growth: 'mediumslow', baseXp: 216, body: 'bird', spriteSeed: 1801,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -113,7 +113,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   raticate: {
-    id: 'raticate', name: 'GNAWBRUTE', dexNo: 20, types: ['normal'],
+    id: 'raticate', name: 'BRUTERAT', dexNo: 20, types: ['normal'],
     base: { hp: 55, atk: 81, def: 60, spa: 50, spd: 70, spe: 97 },
     catchRate: 90, growth: 'mediumfast', baseXp: 145, body: 'quad', spriteSeed: 2001,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -158,7 +158,7 @@ export const SPECIES2 = {
     evo: { to: 'raichu', method: 'stone', stone: 'thunderstone' }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   raichu: {
-    id: 'raichu', name: 'GALVANIK', dexNo: 26, types: ['electric'],
+    id: 'raichu', name: 'GALVAMUS', dexNo: 26, types: ['electric'],
     base: { hp: 60, atk: 90, def: 55, spa: 90, spd: 80, spe: 110 },
     catchRate: 75, growth: 'mediumfast', baseXp: 243, body: 'quad', spriteSeed: 2601,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -194,7 +194,7 @@ export const SPECIES2 = {
     evo: { to: 'nidorina', method: 'level', level: 16 }, tm: [6, 8, 9, 10, 11, 12, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidorina: {
-    id: 'nidorina', name: 'VENOBELLE', dexNo: 30, types: ['poison'],
+    id: 'nidorina', name: 'VENODOE', dexNo: 30, types: ['poison'],
     base: { hp: 70, atk: 62, def: 67, spa: 55, spd: 55, spe: 56 },
     catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'quad', spriteSeed: 3001,
     eggGroups: ['no-eggs'], hatchCounter: 20,
@@ -203,7 +203,7 @@ export const SPECIES2 = {
     evo: { to: 'nidoqueen', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidoqueen: {
-    id: 'nidoqueen', name: 'REGITOXA', dexNo: 31, types: ['poison', 'ground'],
+    id: 'nidoqueen', name: 'TOXAHIND', dexNo: 31, types: ['poison', 'ground'],
     base: { hp: 90, atk: 92, def: 87, spa: 75, spd: 85, spe: 76 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 3101,
     eggGroups: ['no-eggs'], hatchCounter: 20,
@@ -351,7 +351,7 @@ export const SPECIES2 = {
     evo: { to: 'venomoth', method: 'level', level: 31 }, tm: [6, 9, 10, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
   },
   venomoth: {
-    id: 'venomoth', name: 'DUSTVEIL', dexNo: 49, types: ['bug', 'poison'],
+    id: 'venomoth', name: 'POWDERMOTH', dexNo: 49, types: ['bug', 'poison'],
     base: { hp: 70, atk: 65, def: 60, spa: 90, spd: 75, spe: 90 },
     catchRate: 75, growth: 'mediumfast', baseXp: 158, body: 'bird', spriteSeed: 4901,
     eggGroups: ['bug'], hatchCounter: 20,
@@ -405,7 +405,7 @@ export const SPECIES2 = {
     evo: { to: 'golduck', method: 'level', level: 33 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   golduck: {
-    id: 'golduck', name: 'TORRIDUCK', dexNo: 55, types: ['water'],
+    id: 'golduck', name: 'SEERDUCK', dexNo: 55, types: ['water'],
     base: { hp: 80, atk: 82, def: 78, spa: 95, spd: 80, spe: 85 },
     catchRate: 75, growth: 'mediumfast', baseXp: 175, body: 'biped', spriteSeed: 5501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -450,7 +450,7 @@ export const SPECIES2 = {
     evo: { to: 'poliwhirl', method: 'level', level: 25 }, tm: [6, 9, 10, 11, 12, 13, 14, 31, 32, 34, 44, 46, 50, 103],
   },
   poliwhirl: {
-    id: 'poliwhirl', name: 'WHIRLBOG', dexNo: 61, types: ['water'],
+    id: 'poliwhirl', name: 'WHIRLFROG', dexNo: 61, types: ['water'],
     base: { hp: 65, atk: 65, def: 65, spa: 50, spd: 50, spe: 90 },
     catchRate: 120, growth: 'mediumslow', baseXp: 135, body: 'biped', spriteSeed: 6101,
     eggGroups: ['water1'], hatchCounter: 20,
@@ -607,7 +607,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   slowpoke: {
-    id: 'slowpoke', name: 'DOZELING', dexNo: 79, types: ['water', 'psychic'],
+    id: 'slowpoke', name: 'DOZPOTAM', dexNo: 79, types: ['water', 'psychic'],
     base: { hp: 90, atk: 65, def: 65, spa: 40, spd: 40, spe: 15 },
     catchRate: 190, growth: 'mediumfast', baseXp: 99, body: 'quad', spriteSeed: 7901,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -620,7 +620,7 @@ export const SPECIES2 = {
     ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   slowbro: {
-    id: 'slowbro', name: 'DOZEHIDE', dexNo: 80, types: ['water', 'psychic'],
+    id: 'slowbro', name: 'POTAMCONCH', dexNo: 80, types: ['water', 'psychic'],
     base: { hp: 95, atk: 75, def: 110, spa: 100, spd: 80, spe: 30 },
     catchRate: 75, growth: 'mediumfast', baseXp: 172, body: 'quad', spriteSeed: 8001,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -647,7 +647,7 @@ export const SPECIES2 = {
     evo: { to: 'magnezone', method: 'level', level: 310 }, tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   farfetchd: {
-    id: 'farfetchd', name: 'POSTDUCK', dexNo: 83, types: ['normal', 'flying'],
+    id: 'farfetchd', name: 'GALEDUCK', dexNo: 83, types: ['normal', 'flying'],
     base: { hp: 52, atk: 90, def: 55, spa: 58, spd: 62, spe: 60 },
     catchRate: 45, growth: 'mediumfast', baseXp: 132, body: 'bird', spriteSeed: 8301,
     eggGroups: ['flying', 'ground'], hatchCounter: 20,
@@ -674,7 +674,7 @@ export const SPECIES2 = {
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   seel: {
-    id: 'seel', name: 'FLOPLET', dexNo: 86, types: ['water'],
+    id: 'seel', name: 'SEALET', dexNo: 86, types: ['water'],
     base: { hp: 65, atk: 45, def: 55, spa: 45, spd: 70, spe: 45 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'fish', spriteSeed: 8601,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -683,7 +683,7 @@ export const SPECIES2 = {
     evo: { to: 'dewgong', method: 'level', level: 34 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   dewgong: {
-    id: 'dewgong', name: 'FROSTINE', dexNo: 87, types: ['water', 'ice'],
+    id: 'dewgong', name: 'FROSTTUSK', dexNo: 87, types: ['water', 'ice'],
     base: { hp: 90, atk: 70, def: 80, spa: 70, spd: 95, spe: 70 },
     catchRate: 75, growth: 'mediumfast', baseXp: 166, body: 'fish', spriteSeed: 8701,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -764,7 +764,7 @@ export const SPECIES2 = {
     evo: { to: 'hypno', method: 'level', level: 26 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   hypno: {
-    id: 'hypno', name: 'SOMNOLORD', dexNo: 97, types: ['psychic'],
+    id: 'hypno', name: 'SOMNOTAPIR', dexNo: 97, types: ['psychic'],
     base: { hp: 85, atk: 73, def: 70, spa: 73, spd: 115, spe: 67 },
     catchRate: 75, growth: 'mediumfast', baseXp: 169, body: 'biped', spriteSeed: 9701,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -863,7 +863,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
   },
   lickitung: {
-    id: 'lickitung', name: 'SLURPARD', dexNo: 108, types: ['normal'],
+    id: 'lickitung', name: 'SLURPZARD', dexNo: 108, types: ['normal'],
     base: { hp: 90, atk: 55, def: 75, spa: 60, spd: 75, spe: 30 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'biped', spriteSeed: 10801,
     eggGroups: ['monster'], hatchCounter: 20,
@@ -935,7 +935,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   horsea: {
-    id: 'horsea', name: 'SEAPIP', dexNo: 116, types: ['water'],
+    id: 'horsea', name: 'SEAPONY', dexNo: 116, types: ['water'],
     base: { hp: 30, atk: 40, def: 70, spa: 70, spd: 35, spe: 60 },
     catchRate: 225, growth: 'mediumfast', baseXp: 59, body: 'fish', spriteSeed: 11601,
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,
@@ -962,7 +962,7 @@ export const SPECIES2 = {
     evo: { to: 'seaking', method: 'level', level: 33 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   seaking: {
-    id: 'seaking', name: 'VEILARCH', dexNo: 119, types: ['water'],
+    id: 'seaking', name: 'FINARCH', dexNo: 119, types: ['water'],
     base: { hp: 80, atk: 92, def: 65, spa: 65, spd: 80, spe: 68 },
     catchRate: 60, growth: 'mediumfast', baseXp: 158, body: 'fish', spriteSeed: 11901,
     eggGroups: ['water2'], hatchCounter: 20,
@@ -1025,7 +1025,7 @@ export const SPECIES2 = {
     evo: { to: 'electivire', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 39, 40, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   magmar: {
-    id: 'magmar', name: 'LAVAMAND', dexNo: 126, types: ['fire'],
+    id: 'magmar', name: 'LAVAMANDER', dexNo: 126, types: ['fire'],
     base: { hp: 65, atk: 95, def: 57, spa: 100, spd: 85, spe: 93 },
     catchRate: 45, growth: 'mediumfast', baseXp: 173, body: 'biped', spriteSeed: 12601,
     eggGroups: ['humanshape'], hatchCounter: 25,
@@ -1187,7 +1187,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   snorlax: {
-    id: 'snorlax', name: 'NAPPASAUR', dexNo: 143, types: ['normal'],
+    id: 'snorlax', name: 'SOMNIBEAR', dexNo: 143, types: ['normal'],
     base: { hp: 160, atk: 110, def: 65, spa: 65, spd: 110, spe: 30 },
     catchRate: 25, growth: 'slow', baseXp: 189, body: 'biped', spriteSeed: 14301,
     eggGroups: ['monster'], hatchCounter: 40,
@@ -1275,11 +1275,11 @@ export const SPECIES2 = {
   // Anime/book canon, absent from game data; stats/types/learnsets are
   // this project's own original take on the canon facts.
   crystalonix: {
-    // Crystal STRATON: a body of living crystal instead of rock. Canon: it
+    // Crystal ROCKWYRM: a body of living crystal instead of rock. Canon: it
     // shrugs off Fire yet fears Water. Our take: Rock/Ice — Ice sheds the
     // Fire weakness, Water still strikes the Rock half double, and the
     // crystal trades raw Defense for Special shine.
-    id: 'crystalonix', name: 'Crystal STRATON', dexNo: 95, types: ['rock', 'ice'],
+    id: 'crystalonix', name: 'Crystal ROCKWYRM', dexNo: 95, types: ['rock', 'ice'],
     base: { hp: 45, atk: 45, def: 110, spa: 55, spd: 65, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9502,
     eggGroups: ['mineral'], hatchCounter: 25,
@@ -1316,7 +1316,7 @@ export const SPECIES2 = {
   },
   giantdragonite: {
     // The lighthouse giant: same gentle heart, enormous frame. Stats are
-    // STRATON-scale upsized: huge bulk, heavy blows, slower on the wing.
+    // ROCKWYRM-scale upsized: huge bulk, heavy blows, slower on the wing.
     id: 'giantdragonite', name: 'Giant WYRMARCH', dexNo: 149, types: ['dragon', 'flying'],
     base: { hp: 121, atk: 154, def: 115, spa: 120, spd: 120, spe: 70 },
     catchRate: 45, growth: 'slow', baseXp: 300, body: 'biped', spriteSeed: 14902,
@@ -1342,7 +1342,7 @@ export const SPECIES2 = {
     evo: { to: 'togetic', method: 'level', level: 25 },
   },
   marill: {
-    id: 'marill', name: 'AQUALET', dexNo: 183, types: ['water', 'fairy'],
+    id: 'marill', name: 'AQUAMUS', dexNo: 183, types: ['water', 'fairy'],
     base: { hp: 70, atk: 20, def: 50, spa: 20, spd: 50, spe: 40 },
     catchRate: 190, growth: 'fast', baseXp: 88, body: 'quad', spriteSeed: 18301,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10,
@@ -1351,7 +1351,7 @@ export const SPECIES2 = {
     evo: { to: 'azumarill', method: 'level', level: 18 },
   },
   snubbull: {
-    id: 'snubbull', name: 'GRUMPLET', dexNo: 209, types: ['fairy'],
+    id: 'snubbull', name: 'GRUMPBULL', dexNo: 209, types: ['fairy'],
     base: { hp: 60, atk: 80, def: 50, spa: 40, spd: 40, spe: 30 },
     catchRate: 190, growth: 'fast', baseXp: 60, body: 'quad', spriteSeed: 20901,
     eggGroups: ['ground', 'fairy'], hatchCounter: 20,

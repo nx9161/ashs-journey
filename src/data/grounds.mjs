@@ -149,7 +149,7 @@ export const MAP_GROUND = {
   // Bugsy's forest gym the Bloom, Whitney's the Open (the Plain Badge
   // is plain all the way down, by her own cheerful admission), and
   // Morty's the Grave. West landmark interiors follow their feel:
-  // Newleaf Tower blooms, the DOZELING Well runs Tide-wet, the Burned
+  // Newleaf Tower blooms, the DOZPOTAM Well runs Tide-wet, the Burned
   // Tower is Grave ground, and the lab / Kurt's house stay Open.
   'gym-violet': 'storm', // Iris Gym — Falkner
   'gym-azalea': 'bloom', // Cinder Gym — Bugsy

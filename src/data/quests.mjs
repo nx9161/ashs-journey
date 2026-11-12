@@ -52,7 +52,7 @@ export const QUESTS = {
     id: 'tale_pewter', town: 'Flintridge City', giver: 'CURATOR', title: "Brock's Day Off",
     stages: [
       'Cover the museum desk: answer 3 visitor questions from the exhibits',
-      "Spar Brock's RUMBLING, off-duty, here in Flintridge City",
+      "Spar Brock's PEBBLET, off-duty, here in Flintridge City",
     ],
     reward: { keepsake: 'ironacorn' }, rewardText: 'Iron Acorn',
     bondNpc: 'brock', bondDelta: 2,

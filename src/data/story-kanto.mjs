@@ -20,13 +20,13 @@
 // table in data/quests.mjs, per ADR-025 §5; the bundle is one scope).
 // `flag` is the story flag that
 // completes the objective (events below also emit questDone where a route
-// can branch, e.g. either NAPPASAUR).
+// can branch, e.g. either SOMNIBEAR).
 // ---------------------------------------------------------------------------
 
 export const MAIN_QUESTS = [
   { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'VOLTIK joins you at the very start of your journey — it has opinions, and a strong dislike of Capture Orbs. If you ever find yourselves parted, Prof. Hawthorn at his Dawnwick lab will set it right.' },
   { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Flintridge City', hint: 'Through Fernmere Forest, then challenge Brock. Water and Grass moves crack Rock types open.' },
-  { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Lunestone and reach Tidehaven City', hint: 'The cave east of Flintridge is dark and full of SKREEP. Stock up on Potions before you go in.' },
+  { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Lunestone and reach Tidehaven City', hint: 'The cave east of Flintridge is dark and full of SKREEBAT. Stock up on Potions before you go in.' },
   { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Tidehaven City', hint: 'Misty’s Water types fear Grass and Electric moves. Watch for her ASTRION.' },
   { id: 'q_bill', flag: 'bill_helped', text: 'Help the researcher at the Sea Cottage', hint: 'Cross Nugget Bridge, then follow Route 25 to the cottage on the cape. Something there is not what it seems.' },
   { id: 'q_vermilion', flag: 'reached_vermilion', text: 'Reach Arcport City', hint: 'South through the underground path from Tidehaven. The harbor smells of salt and adventure.' },
@@ -36,7 +36,7 @@ export const MAIN_QUESTS = [
   { id: 'q_rainbow', flag: 'badge_rainbow', text: 'Win the Rainbow Badge in Canopy City', hint: 'Erika’s Grass types wilt under Fire, Ice, and Flying moves.' },
   { id: 'q_scope', flag: 'scope_done', text: 'Infiltrate the Game Corner and recover the Vantage Scope', hint: 'That poster in the Game Corner is hiding something. Whatever is underneath it took the Scope — take it back.' },
   { id: 'q_flute', flag: 'flute_got', text: 'Climb Hushmoor Tower and earn the Kin Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
-  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping NAPPASAUR', hint: 'The Kin Flute’s tune is the only alarm clock a NAPPASAUR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
+  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping SOMNIBEAR', hint: 'The Kin Flute’s tune is the only alarm clock a SOMNIBEAR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
   { id: 'q_soul', flag: 'badge_soul', text: 'Win the Soul Badge in Bramble City', hint: 'Koga’s Poison types and invisible walls reward patience. Ground and Psychic moves help.' },
   { id: 'q_silph', flag: 'silph_done', text: 'Liberate Vantage Co. in Farsight City', hint: 'Eleven floors of trouble, and the president is held on the top one. Find the card key and climb.' },
   { id: 'q_marsh', flag: 'badge_marsh', text: 'Win the Marsh Badge in Farsight City', hint: 'Sabrina’s Psychic types hit like prophecy. Bug, Ghost, and Dark moves are your friends.' },
@@ -51,7 +51,7 @@ export const MAIN_QUESTS = [
 ];
 
 // ---------------------------------------------------------------------------
-// EVENTS — scripted story beats, keyed by event id. Engine gates: NAPPASAUR
+// EVENTS — scripted story beats, keyed by event id. Engine gates: SOMNIBEAR
 // events require the pokeflute in the bag; ev_league_gate requires 8 badges;
 // PRISMWING_EVENT requires owning a butterfree. The duo escalation runs
 // r2_duo (slice, Route 2) -> duo2 (St. Anne) -> duo3 (tower cameo / Canopy)
@@ -174,7 +174,7 @@ export const EVENTS = {
     { questDone: 'q_flute' },
   ],
 
-  // -- The two NAPPASAUR (engine pre-checks pokeflute in bag) ------------------
+  // -- The two SOMNIBEAR (engine pre-checks pokeflute in bag) ------------------
   ev_snorlax_east: [
     { say: ['The path simply... ends. In fur. A mountain that breathes — in, out, in, out — directly on top of Route 12.'], who: 'NARRATOR' },
     { say: ['You raise the Kin Flute. The first notes wobble across the water. The mountain does not approve of being woken. Or of your technique.'], who: 'NARRATOR' },
@@ -539,7 +539,7 @@ export const LEGENDARY_ARCS = {
     id: 'arc_celebi', title: 'The Voice of the Forest', species: 'celebi', region: 'Yamato', designedOnly: true,
     hook: 'Holly Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
     steps: [
-      { text: 'Return the lost POSTDUCK to the charcoal maker' },
+      { text: 'Return the lost GALEDUCK to the charcoal maker' },
       { text: 'Receive the GS Orb from a grateful craftsman' },
       { text: 'Place the GS Orb at the forest shrine' },
       { text: 'Meet CHRONOFAE where the forest remembers', catch: 'celebi' },

@@ -24,7 +24,7 @@ export const CHAPTERS = [
     n: 2, id: 'orange-islands', act: 1, region: 'Amber Isles', scope: 'playable',
     title: 'Adventures in the Amber Isles',
     arc: 'Four Amber badges across the southern seas.',
-    anime: 'Season 2: Adventures in the Amber Isles (Ep 1–24, Special: DOZECROWN\u2019s Day, Ep 25–36)',
+    anime: 'Season 2: Adventures in the Amber Isles (Ep 1–24, Special: ORAPOTAM\u2019s Day, Ep 25–36)',
     movies: ['Pok\u00e9mon 2000 — The Power of One'],
   },
   {

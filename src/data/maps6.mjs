@@ -1043,7 +1043,7 @@ export const MAPS6 = {
       {
         "x": 25,
         "y": 6,
-        "text": "DOZELING WELL — The town well, and the DOZELINGs own it. Mind your step on the way down."
+        "text": "DOZPOTAM WELL — The town well, and the DOZPOTAMs own it. Mind your step on the way down."
       },
       {
         "x": 1,
@@ -1073,7 +1073,7 @@ export const MAPS6 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "Grandpa Kurt makes Capture Orbs from apricorns, one at a time, by hand.",
-          "The DOZELING bring rain. That's not a story, that's just Cinder."
+          "The DOZPOTAM bring rain. That's not a story, that's just Cinder."
         ]
       },
       {
@@ -1086,7 +1086,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "The well ran dry once, long ago. The DOZELING yawned, and the rain came back.",
+          "The well ran dry once, long ago. The DOZPOTAM yawned, and the rain came back.",
           "We don't hurry them. They don't hurry us. It works out."
         ]
       },
@@ -2062,7 +2062,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "First road out of Galefield. Every Yamato journey starts with this wind.",
-          "VIGILET at dawn, TICKOWL at dusk. The route keeps two shifts."
+          "FERRETLET at dawn, TICKOWL at dusk. The route keeps two shifts."
         ]
       }
     ],
@@ -2248,7 +2248,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "My DRIFLET drifts over the pond when the wind picks up.",
+          "My DRIFBUD drifts over the pond when the wind picks up.",
           "Route 30 is two climates: pond weather and hill weather."
         ]
       }
@@ -2629,7 +2629,7 @@ export const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "South shore fishing: the tide brings AQUALET this time of year.",
+          "South shore fishing: the tide brings AQUAMUS this time of year.",
           "Through the cave and the whole coast opens up. Worth the dark."
         ]
       }
@@ -3524,7 +3524,7 @@ export const MAPS6 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Park day! I pack for three picnics and eat two on this road.",
-          "ORACLET watch the crossroads like tiny green judges."
+          "ORACHICK watch the crossroads like tiny green judges."
         ]
       },
       {
@@ -4488,7 +4488,7 @@ export const MAPS6 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "Kiln smoke means Cinder's working. You learn to love the smell.",
-          "DOZELING tails grow back, tempers mend, charcoal sells. A patient town."
+          "DOZPOTAM tails grow back, tempers mend, charcoal sells. A patient town."
         ]
       }
     ],
@@ -5240,7 +5240,7 @@ export const MAPS6 = {
   },
   "slowpoke-well": {
     "id": "slowpoke-well",
-    "name": "DOZELING Well",
+    "name": "DOZPOTAM Well",
     "music": "pewter-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGG",
@@ -5282,7 +5282,7 @@ export const MAPS6 = {
       {
         "x": 11,
         "y": 12,
-        "text": "DOZELING WELL — The water down here is sweet and cold. The residents were here first."
+        "text": "DOZPOTAM WELL — The water down here is sweet and cold. The residents were here first."
       }
     ],
     "npcs": [],
@@ -11663,7 +11663,7 @@ export const MAPS6 = {
       {
         "x": 4,
         "y": 7,
-        "name": "GYM ATTENDANT FROSTINE",
+        "name": "GYM ATTENDANT FROSTTUSK",
         "art": "youngster",
         "skin": "#e8b888",
         "shirt": "#3a6ac0",

@@ -503,7 +503,7 @@ const driver = `
   pump(g);
   var arrivalText = seenLines.join(' | ');
   ok('B03 New Bark arrival scene fires on first elm-lab entry: Elm registers the journey and tells the stolen-starter incident (johto_arrival + elm_registered)',
-    arrivalOpen && arrivalText.includes('Professor Elm') && arrivalText.includes('SNAPLET')
+    arrivalOpen && arrivalText.includes('Professor Elm') && arrivalText.includes('CROCLET')
     && st.story.flags.johto_arrival === true && st.story.flags.elm_registered === true,
     arrivalText.slice(0, 140));
   var owL2 = gotoMap(g, 'elm-lab', 8, 10);
