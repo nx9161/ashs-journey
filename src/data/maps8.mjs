@@ -31,21 +31,21 @@ export const MAPS8 = {
       "#_abXbbc_de3eef_ghhhhi_abbXbbbc,jklllm##",
       "#_UUVYUU_Z6456Z_UUVYUU_UUUVYUUU_AAJKAA_#",
       "#......................................#",
-      "#o__.._Fo__..__o_,..__o___.._o,__,..__o#",
-      "#___..F____.._____..______..______..,__#",
-      "#___..p__,_..p__,_..p__,__.p_____p..___#",
-      "....................S...................",
+      "#opF.............,............,..,..o_o#",
+      "#__o.._.........................._..,__#",
+      "#__F.....,_..___,....._,_......_._..p__#",
       "........................................",
-      "#___..p____..p____..p____F.p_____p..___#",
-      "#_deeeef,abbbbc_MMMMMM_deOeef_____..___#",
-      "#oxxyxxxorrrsrroMMDMMMoPP12PPo____..__o#",
+      "........................................",
+      "#___..p____..p__oo..pp..........._..p__#",
+      "#_deeeef,abbbbc_MMMMMM_deOeef.._._..p__#",
+      "#oxxyxxxorrrsrroMMDMMMoPP12PP...._..p_o#",
       "#......................................#",
-      "#___.._____..___F...______..___Ẅ__.._Ẅ_#",
-      "#_F_.._____.._F,_...______.._,p___ḣ.__p#",
-      "#___..____F..___,...___,__.._Fp___..___#",
-      "#___.._,__F..____..._,____.._____,.._ẅ_#",
-      "#‖‖‖..‖‖‖‖‖..‖‖‖‖...‖S‖‖‖‖..‖nnnnẎ.ẏnnn#",
-      "#ẞẞẞ†‟ẞẞẞẞẞ†‟ẞẞẞẞ†.‟ẞẞẞẞẞẞ†‟ẞẞẞẞẞẞ†‟ẞẞẞ#",
+      "#__.............................._..oẄ_#",
+      "#_FF..........F,.............,p.__ḣ.Ẅ_p#",
+      "#F._...p_.....FF,......,.....Fp.._..___#",
+      "#_.....,.............,...........,.._ẅ_#",
+      "#‖....__.....................nnnnẎ.ẏnnn#",
+      "#ẞ†.........................‟ẞẞẞẞẞ†‟ẞẞẞ#",
       "~~~~~~~~~~~~~~~~~ἇἇἇ~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~ἇἇἇ~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~ἇἇἇ~~~~~~~~~~~~~~~~~~~~",
@@ -210,14 +210,49 @@ export const MAPS8 = {
     ],
     "signs": [
       {
-        "x": 20,
-        "y": 8,
+        "x": 23,
+        "y": 10,
         "text": "BATTLE FRONTIER — Seven facilities, one island, seven different laws of battle. The Center heals, the Mart stocks, and every other door is a streak waiting to start."
       },
       {
-        "x": 21,
-        "y": 18,
+        "x": 23,
+        "y": 17,
         "text": "FRONTIER DOCK — Ferries to Pallet Town tie up at the pier. CAPT BREAKWATER keeps the crossing, in all weathers."
+      },
+      {
+        "x": 20,
+        "y": 5,
+        "text": "BATTLE FRONTIER — North: TOWER · FACTORY · ARENA · DOME · CENTER. South: PIKE · PALACE · PYRAMID · MART · FERRY DOCK."
+      },
+      {
+        "x": 32,
+        "y": 15,
+        "text": "BATTLE FRONTIER — North: TOWER · FACTORY · ARENA · DOME · CENTER. South: PIKE · PALACE · PYRAMID · MART · FERRY DOCK."
+      },
+      {
+        "x": 2,
+        "y": 14,
+        "text": "BATTLE FRONTIER — North: TOWER · FACTORY · ARENA · DOME · CENTER. South: PIKE · PALACE · PYRAMID · MART · FERRY DOCK."
+      },
+      {
+        "x": 9,
+        "y": 14,
+        "text": "BATTLE FRONTIER — North: TOWER · FACTORY · ARENA · DOME · CENTER. South: PIKE · PALACE · PYRAMID · MART · FERRY DOCK."
+      },
+      {
+        "x": 3,
+        "y": 16,
+        "text": "BATTLE FRONTIER — North: TOWER · FACTORY · ARENA · DOME · CENTER. South: PIKE · PALACE · PYRAMID · MART · FERRY DOCK."
+      },
+      {
+        "x": 8,
+        "y": 16,
+        "text": "BATTLE FRONTIER — North: TOWER · FACTORY · ARENA · DOME · CENTER. South: PIKE · PALACE · PYRAMID · MART · FERRY DOCK."
+      },
+      {
+        "x": 9,
+        "y": 19,
+        "text": "BATTLE FRONTIER — North: TOWER · FACTORY · ARENA · DOME · CENTER. South: PIKE · PALACE · PYRAMID · MART · FERRY DOCK."
       }
     ],
     "npcs": [
