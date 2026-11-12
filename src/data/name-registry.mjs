@@ -391,6 +391,23 @@ export const NAME_REGISTRY = {
     mamoswine:   { name: 'IVORARCH', status: 'named', wave: 'G-ST7', design: 'ivorarch' },
     porygonz:    { name: 'POLYCRANE-Z', status: 'named', wave: 'G-ST7', design: 'polycrane-z' },
     gallade:     { name: 'DUELLORD', status: 'named', wave: 'G-ST7', design: 'duellord' },
+    // -- Wave G Sinnoh, Tranche 8 --
+    probopass:   { name: 'POLEWARD', status: 'named', wave: 'G-ST8', design: 'poleward' },
+    dusknoir:    { name: 'GLOOMEYE', status: 'named', wave: 'G-ST8', design: 'gloomeye' },
+    froslass:    { name: 'FROSTMAID', status: 'named', wave: 'G-ST8', design: 'frostmaid' },
+    rotom:       { name: 'SPARKIMP', status: 'named', wave: 'G-ST8', design: 'sparkimp' },
+    rotomheat:   { name: 'Heat SPARKIMP', status: 'named', wave: 'G-ST8', design: 'sparkimp-heat' },
+    rotomwash:   { name: 'Wash SPARKIMP', status: 'named', wave: 'G-ST8', design: 'sparkimp-wash' },
+    rotomfrost:  { name: 'Frost SPARKIMP', status: 'named', wave: 'G-ST8', design: 'sparkimp-frost' },
+    rotomfan:    { name: 'Fan SPARKIMP', status: 'named', wave: 'G-ST8', design: 'sparkimp-fan' },
+    rotommow:    { name: 'Mow SPARKIMP', status: 'named', wave: 'G-ST8', design: 'sparkimp-mow' },
+    uxie:        { name: 'LORACLE', status: 'named', wave: 'G-ST8', design: 'loracle' },
+    mesprit:     { name: 'EMPATHIS', status: 'named', wave: 'G-ST8', design: 'empathis' },
+    azelf:       { name: 'VOLITAR', status: 'named', wave: 'G-ST8', design: 'volitar' },
+    dialga:      { name: 'CHRONARCH', status: 'named', wave: 'G-ST8', design: 'chronarch' },
+    palkia:      { name: 'COSMARCH', status: 'named', wave: 'G-ST8', design: 'cosmarch' },
+    heatran:     { name: 'MAGMARCH', status: 'named', wave: 'G-ST8', design: 'magmarch' },
+    regigigas:   { name: 'COLOSSOR', status: 'named', wave: 'G-ST8', design: 'colossor' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
