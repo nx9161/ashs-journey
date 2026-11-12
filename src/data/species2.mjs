@@ -791,7 +791,7 @@ export const SPECIES2 = {
     tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 15, 19, 31, 32, 34, 44, 50, 101, 103, 104],
   },
   voltorb: {
-    id: 'voltorb', name: 'Voltorb', dexNo: 100, types: ['electric'],
+    id: 'voltorb', name: 'CELLORB', dexNo: 100, types: ['electric'],
     base: { hp: 40, atk: 30, def: 50, spa: 55, spd: 55, spe: 100 },
     catchRate: 190, growth: 'mediumfast', baseXp: 66, body: 'blob', spriteSeed: 10001,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -800,7 +800,7 @@ export const SPECIES2 = {
     evo: { to: 'electrode', method: 'level', level: 30 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   electrode: {
-    id: 'electrode', name: 'Electrode', dexNo: 101, types: ['electric'],
+    id: 'electrode', name: 'MEGACELL', dexNo: 101, types: ['electric'],
     base: { hp: 60, atk: 50, def: 70, spa: 80, spd: 80, spe: 150 },
     catchRate: 60, growth: 'mediumfast', baseXp: 172, body: 'blob', spriteSeed: 10101,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -809,7 +809,7 @@ export const SPECIES2 = {
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 47, 50, 105],
   },
   exeggcute: {
-    id: 'exeggcute', name: 'Exeggcute', dexNo: 102, types: ['grass', 'psychic'],
+    id: 'exeggcute', name: 'PODCLUMP', dexNo: 102, types: ['grass', 'psychic'],
     base: { hp: 60, atk: 40, def: 80, spa: 60, spd: 45, spe: 40 },
     catchRate: 90, growth: 'mediumslow', baseXp: 65, body: 'blob', spriteSeed: 10201,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -818,7 +818,7 @@ export const SPECIES2 = {
     evo: { to: 'exeggutor', method: 'stone', stone: 'leafstone' }, tm: [6, 9, 10, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 42, 44, 46, 47, 50],
   },
   exeggutor: {
-    id: 'exeggutor', name: 'Exeggutor', dexNo: 103, types: ['grass', 'psychic'],
+    id: 'exeggutor', name: 'GOURDTREE', dexNo: 103, types: ['grass', 'psychic'],
     base: { hp: 95, atk: 95, def: 85, spa: 125, spd: 75, spe: 55 },
     catchRate: 45, growth: 'mediumslow', baseXp: 186, body: 'biped', spriteSeed: 10301,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -827,7 +827,7 @@ export const SPECIES2 = {
     tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
   },
   cubone: {
-    id: 'cubone', name: 'Cubone', dexNo: 104, types: ['ground'],
+    id: 'cubone', name: 'FOSSLET', dexNo: 104, types: ['ground'],
     base: { hp: 50, atk: 50, def: 95, spa: 40, spd: 50, spe: 35 },
     catchRate: 190, growth: 'mediumfast', baseXp: 64, body: 'biped', spriteSeed: 10401,
     eggGroups: ['monster'], hatchCounter: 20,
@@ -836,7 +836,7 @@ export const SPECIES2 = {
     evo: { to: 'marowak', method: 'level', level: 28 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   marowak: {
-    id: 'marowak', name: 'Marowak', dexNo: 105, types: ['ground'],
+    id: 'marowak', name: 'FOSSILORD', dexNo: 105, types: ['ground'],
     base: { hp: 60, atk: 80, def: 110, spa: 50, spd: 80, spe: 45 },
     catchRate: 75, growth: 'mediumfast', baseXp: 149, body: 'biped', spriteSeed: 10501,
     eggGroups: ['monster'], hatchCounter: 20,
@@ -845,7 +845,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   hitmonlee: {
-    id: 'hitmonlee', name: 'Hitmonlee', dexNo: 106, types: ['fighting'],
+    id: 'hitmonlee', name: 'SPRINGLEG', dexNo: 106, types: ['fighting'],
     base: { hp: 50, atk: 120, def: 53, spa: 35, spd: 110, spe: 87 },
     catchRate: 45, growth: 'mediumslow', baseXp: 159, body: 'biped', spriteSeed: 10601,
     eggGroups: ['humanshape'], hatchCounter: 25,
@@ -854,7 +854,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
   },
   hitmonchan: {
-    id: 'hitmonchan', name: 'Hitmonchan', dexNo: 107, types: ['fighting'],
+    id: 'hitmonchan', name: 'PUNCHBOX', dexNo: 107, types: ['fighting'],
     base: { hp: 50, atk: 105, def: 79, spa: 35, spd: 110, spe: 76 },
     catchRate: 45, growth: 'mediumslow', baseXp: 159, body: 'biped', spriteSeed: 10701,
     eggGroups: ['humanshape'], hatchCounter: 25,
@@ -863,7 +863,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
   },
   lickitung: {
-    id: 'lickitung', name: 'Lickitung', dexNo: 108, types: ['normal'],
+    id: 'lickitung', name: 'SLURPARD', dexNo: 108, types: ['normal'],
     base: { hp: 90, atk: 55, def: 75, spa: 60, spd: 75, spe: 30 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'biped', spriteSeed: 10801,
     eggGroups: ['monster'], hatchCounter: 20,
@@ -872,7 +872,7 @@ export const SPECIES2 = {
     evo: { to: 'lickilicky', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 50, 101, 103, 104],
   },
   koffing: {
-    id: 'koffing', name: 'Koffing', dexNo: 109, types: ['poison'],
+    id: 'koffing', name: 'FUMORB', dexNo: 109, types: ['poison'],
     base: { hp: 40, atk: 65, def: 95, spa: 60, spd: 45, spe: 35 },
     catchRate: 190, growth: 'mediumfast', baseXp: 68, body: 'blob', spriteSeed: 10901,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -881,7 +881,7 @@ export const SPECIES2 = {
     evo: { to: 'weezing', method: 'level', level: 35 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   weezing: {
-    id: 'weezing', name: 'Weezing', dexNo: 110, types: ['poison'],
+    id: 'weezing', name: 'TWINSMOG', dexNo: 110, types: ['poison'],
     base: { hp: 65, atk: 90, def: 120, spa: 85, spd: 70, spe: 60 },
     catchRate: 60, growth: 'mediumfast', baseXp: 172, body: 'blob', spriteSeed: 11001,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -890,7 +890,7 @@ export const SPECIES2 = {
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   rhyhorn: {
-    id: 'rhyhorn', name: 'Rhyhorn', dexNo: 111, types: ['ground', 'rock'],
+    id: 'rhyhorn', name: 'PLATLET', dexNo: 111, types: ['ground', 'rock'],
     base: { hp: 80, atk: 85, def: 95, spa: 30, spd: 30, spe: 25 },
     catchRate: 120, growth: 'mediumslow', baseXp: 69, body: 'quad', spriteSeed: 11101,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -899,7 +899,7 @@ export const SPECIES2 = {
     evo: { to: 'rhydon', method: 'level', level: 42 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   rhydon: {
-    id: 'rhydon', name: 'Rhydon', dexNo: 112, types: ['ground', 'rock'],
+    id: 'rhydon', name: 'PLATOR', dexNo: 112, types: ['ground', 'rock'],
     base: { hp: 105, atk: 130, def: 120, spa: 45, spd: 45, spe: 40 },
     catchRate: 60, growth: 'mediumslow', baseXp: 170, body: 'biped', spriteSeed: 11201,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -908,7 +908,7 @@ export const SPECIES2 = {
     evo: { to: 'rhyperior', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 103, 104],
   },
   chansey: {
-    id: 'chansey', name: 'Chansey', dexNo: 113, types: ['normal'],
+    id: 'chansey', name: 'NURSELING', dexNo: 113, types: ['normal'],
     base: { hp: 250, atk: 5, def: 5, spa: 35, spd: 105, spe: 50 },
     catchRate: 30, growth: 'fast', baseXp: 395, body: 'blob', spriteSeed: 11301,
     eggGroups: ['fairy'], hatchCounter: 40,

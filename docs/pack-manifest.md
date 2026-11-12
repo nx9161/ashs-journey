@@ -62,7 +62,7 @@ audio subsystem (B2-R3) 25652 B in audio/ + src/engine/audio.mjs.
 | src/data/merge.mjs | 2347 | 41 | content pack (NARC analogue — B2-R2) |
 | src/data/moves.mjs | 3419 | 28 | content pack (NARC analogue — B2-R2) |
 | src/data/moves2.mjs | 21560 | 141 | content pack (NARC analogue — B2-R2) |
-| src/data/name-registry.mjs | 15261 | 230 | content pack (NARC analogue — B2-R2) |
+| src/data/name-registry.mjs | 16759 | 250 | content pack (NARC analogue — B2-R2) |
 | src/data/narrative-db.mjs | 63158 | 379 | content pack (NARC analogue — B2-R2) |
 | src/data/quests.mjs | 24860 | 395 | content pack (NARC analogue — B2-R2) |
 | src/data/rivals.mjs | 1386 | 30 | content pack (NARC analogue — B2-R2) |

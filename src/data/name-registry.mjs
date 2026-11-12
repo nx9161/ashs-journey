@@ -154,6 +154,21 @@ export const NAME_REGISTRY = {
     hypno:     { name: 'SOMNOLORD', status: 'named', wave: 'G-KT6', design: 'somnolord' },
     krabby:    { name: 'CLAWLET', status: 'named', wave: 'G-KT6', design: 'clawlet' },
     kingler:   { name: 'PINCHARCH', status: 'named', wave: 'G-KT6', design: 'pincharch' },
+    // -- Wave G Kanto Completion, Tranche 7 (coordinator-named) --
+    voltorb:   { name: 'CELLORB', status: 'named', wave: 'G-KT7', design: 'cellorb' },
+    electrode: { name: 'MEGACELL', status: 'named', wave: 'G-KT7', design: 'megacell' },
+    exeggcute: { name: 'PODCLUMP', status: 'named', wave: 'G-KT7', design: 'podclump' },
+    exeggutor: { name: 'GOURDTREE', status: 'named', wave: 'G-KT7', design: 'gourdtree' },
+    cubone:    { name: 'FOSSLET', status: 'named', wave: 'G-KT7', design: 'fosslet' },
+    marowak:   { name: 'FOSSILORD', status: 'named', wave: 'G-KT7', design: 'fossilord' },
+    hitmonlee: { name: 'SPRINGLEG', status: 'named', wave: 'G-KT7', design: 'springleg' },
+    hitmonchan: { name: 'PUNCHBOX', status: 'named', wave: 'G-KT7', design: 'punchbox' },
+    lickitung: { name: 'SLURPARD', status: 'named', wave: 'G-KT7', design: 'slurpard' },
+    koffing:   { name: 'FUMORB', status: 'named', wave: 'G-KT7', design: 'fumorb' },
+    weezing:   { name: 'TWINSMOG', status: 'named', wave: 'G-KT7', design: 'twinsmog' },
+    rhyhorn:   { name: 'PLATLET', status: 'named', wave: 'G-KT7', design: 'platlet' },
+    rhydon:    { name: 'PLATOR', status: 'named', wave: 'G-KT7', design: 'plator' },
+    chansey:   { name: 'NURSELING', status: 'named', wave: 'G-KT7', design: 'nurseling' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -198,6 +213,11 @@ export const NAME_REGISTRY = {
     vaplume: ['gastly', 'haunter', 'gengar'],
     dreampir: ['drowzee', 'hypno'],
     clawlet: ['krabby', 'kingler'],
+    cellorb: ['voltorb', 'electrode'],
+    podclump: ['exeggcute', 'exeggutor'],
+    fosslet: ['cubone', 'marowak'],
+    fumorb: ['koffing', 'weezing'],
+    platlet: ['rhyhorn', 'rhydon'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
