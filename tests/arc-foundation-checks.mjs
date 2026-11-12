@@ -115,7 +115,7 @@ function stateWith(mut) { const s = defaultState(); if (mut) mut(s); return s; }
   const sum = GA.arcCompleteSummary(s, arcById('kanto'));
   ok('A16 ARC COMPLETE summary: badges 8/8, dex gained 3, national 3/151, playtime 1h 0m, HoF team line, forward names Arc 1.5 + Pallet',
     sum.badgeLine === 'Badges: 8/8' && sum.dexGained === 3 && sum.dexLine.includes('National: 3/151')
-    && sum.playtimeLine === 'Playtime this arc: 1h 0m' && sum.teamLine.includes('Bulbasaur Lv63')
+    && sum.playtimeLine === 'Playtime this arc: 1h 0m' && sum.teamLine.includes('BUDDIN Lv63')
     && sum.forwardLine.includes('Arc 1.5') && sum.forwardLine.includes('Pallet Town'),
     JSON.stringify(sum));
 }
