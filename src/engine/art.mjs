@@ -1364,14 +1364,10 @@ const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall'
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
   'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
   'starglobe', 'column', 'coral', 'bonsai']);
-// The Wave B regional props often stand on authored floor families
-// (Dewford sand, Fortree/Pacifidlog boardwalk): for these kinds the
-// underlay follows the floor family south of the prop instead of
-// defaulting to kit grass, so a lifering on the beach keeps its sand.
-const KIT_REGION_PROP_KINDS = new Set(['maple', 'apricorn', 'jwell', 'stonebell',
-  'leaguefountain', 'snackmachine', 'fossildisplay', 'lifering', 'divingtank',
-  'coil', 'batterypack', 'contestarch', 'ashshrub', 'forge', 'meteorstone',
-  'telescope', 'starglobe', 'column', 'coral', 'bonsai']);
+// Props often stand on authored floor families (Dewford sand,
+// Fortree/Pacifidlog boardwalk): the prop underlay follows the floor
+// family south of the prop instead of defaulting to kit grass, so a
+// lifering on the beach keeps its sand (see floorUnder below).
 const KIT_SIGN_KINDS = ['sign-gym', 'sign-mart', 'sign-lab', 'sign-center'];
 function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
   const K = cache.kitTowns[mapId];
@@ -1452,9 +1448,13 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
   // — kit grass must not pave a beach or a raft deck.
   const floorUnder = (s) => {
     if (!s) return null;
+    // Town ground is its own family in groundFamilyOf — but inside a
+    // kit town the kit stack owns it; never fall back to the native
+    // town-ground canvas here.
+    if (s.startsWith('tg-') || s.startsWith('tg2-')) return null;
     if (s.startsWith('psand-')) return pickVariant(cache.pathVariants, x, y, 21) || cache.path || null;
     const fam = groundFamilyOf(s);
-    if (fam && fam === s) return groundBase(cache, fam, x, y);
+    if (fam && fam === s && s !== 'grass') return groundBase(cache, fam, x, y);
     if (fam === 'tropgrass') return groundBase(cache, 'tropgrass', x, y);
     return null;
   };
@@ -1463,7 +1463,7 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
     let under = pickVariant(K.grassTex, x, y, 29) || grassBase;
     if (s === 'tg2-' + mapId) under = pathBase;
     else if (s === 'path') under = pickVariant(cache.pathVariants, x, y, 21) || cache.path || grassBase;
-    else if (KIT_REGION_PROP_KINDS.has(kind)) { const fu = floorUnder(s); if (fu) under = fu; }
+    else { const fu = floorUnder(s); if (fu) under = fu; }
     return [under, cache.shadowProp, cache[kind]].filter(Boolean);
   }
   // Rocks & fences (Wave B): the kit has neither, so the authored
