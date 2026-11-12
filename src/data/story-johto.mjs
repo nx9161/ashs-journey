@@ -54,13 +54,13 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZELING Well', hint: 'Below Cinder Town, Rockets are cutting DOZELING tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
   { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Cinder Town', hint: 'The ball no machine can open, carried all the way from Marisol. Kurt of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
   { id: 'q_johto_hive', flag: 'badge_hive', text: 'Win the Hive Badge from Bugsy in Cinder Town', hint: 'Bugsy\'s Bug types are proud and quick. Fire, Flying and Rock moves end arguments with them.' },
-  { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Signal City', hint: 'Whitney\'s Miltank is famous all over Yamato, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
+  { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Signal City', hint: 'Whitney\'s MOOBELLE is famous all over Yamato, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
   { id: 'q_johto_burned', flag: 'beasts_awakened', text: 'See what woke in the Ashen Tower', hint: 'In Lantern, the tower that burned a hundred and fifty years ago stands open and ash-smelling. Its basement held three statues. Held.' },
   { id: 'q_johto_fog', flag: 'badge_fog', text: 'Win the Fog Badge from Morty in Lantern City', hint: 'Morty reads the fog the way sailors read weather. His Ghost types fear Ghost and Dark moves — and respect trainers who have looked into the tower.' },
   // --- J4b: the east rows (appended at the J4a seam) ---
-  { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Amphy, the lighthouse Pokemon', hint: 'Amphy, the Ampharos whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Jasmine is waiting on it.' },
+  { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Lumi, the lighthouse Pokemon', hint: 'Lumi, the LUMENECK whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Jasmine is waiting on it.' },
   { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Tidewall City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
-  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Amphy is sick — the errand comes first. Her Steelix fears Fire, Fighting and Ground moves.' },
+  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Lumi is sick — the errand comes first. Her STRATIRON fears Fire, Fighting and Ground moves.' },
   { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red WRATHWYRM at the Wrathmere Lake', hint: 'North of Redwood, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
   { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Hideout beneath Redwood\'s souvenir shop', hint: 'Lance is waiting in Redwood Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
   { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Pryce in Redwood Town', hint: 'Pryce has trained through fifty winters and one Rocket occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
@@ -68,7 +68,7 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_rising', flag: 'badge_rising', text: 'Win Clair\'s trust — and the Rising Badge — in Cragmoor', hint: 'Clair\'s gym is only the first half. By the clan\'s law the badge itself is given in the Drake\'s Den, after the elder\'s test. Her Dragon types fear Ice and Dragon moves.' },
   { id: 'q_johto_conference', flag: 'conference_registered', text: 'Register for the Lastlight Conference at Lastlight Town', hint: 'Eight Yamato badges open the road north: Cragmoor, Lastlight Pass, Lastlight Town. The Conference Official in the stadium keeps the bracket.' },
   { id: 'q_johto_gary', flag: 'beat_gary_johto', text: 'The Lastlight Conference — beat Gary', hint: 'He has been waiting on the far side of the bracket all arc. ABYSSAR and all. This one you have to win.' },
-  { id: 'q_johto_harrison', flag: 'johto_complete', text: 'The Lastlight Conference — the quarter-final, and whatever it decides', hint: 'Harrison of Rootlet, and a Houndoom that has ended better runs than yours. Face him with everything — the Conference, and Yamato, end on the far side of this battle.' },
+  { id: 'q_johto_harrison', flag: 'johto_complete', text: 'The Lastlight Conference — the quarter-final, and whatever it decides', hint: 'Harrison of Rootlet, and a CHARHOUND that has ended better runs than yours. Face him with everything — the Conference, and Yamato, end on the far side of this battle.' },
   { id: 'q_johto_red', flag: 'red_defeated', text: 'Post-game: the silent trainer on Mt. Lastlight', hint: 'Past Lastlight Town, the mountain keeps one more name off every bracket. He has been standing on that dais a long time, saying nothing, waiting for someone worth the silence.' },
 ];
 
@@ -104,7 +104,7 @@ export const JOHTO_TRAINERS = {
   },
   whitney: {
     id: 'whitney', name: 'Whitney', title: 'Signal Gym Leader', ai: 'smart', badgeSet: 'johto',
-    intro: ['Hi! I am Whitney, and everybody in Signal already knows how this goes, so let us skip to the fun part. My Miltank has been waiting ALL week for a real challenger.'],
+    intro: ['Hi! I am Whitney, and everybody in Signal already knows how this goes, so let us skip to the fun part. My MOOBELLE has been waiting ALL week for a real challenger.'],
     lose: ['Waaah! You — you actually stopped her roll...', 'Sniff. Okay. Okay! The Plain Badge is yours. It is not plain at all, whatever people say. Neither is that battle you just fought.'],
     team: [
       { species: 'clefairy', level: 131 },
@@ -206,8 +206,8 @@ export const JOHTO_TRAINERS = {
   },
   jasmine: {
     id: 'jasmine', name: 'Jasmine', title: 'Beacon Gym Leader', ai: 'smart', badgeSet: 'johto',
-    intro: ['Amphy is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My Steelix has been patient. I have not.'],
-    lose: ['Oh...! Beaten, truly beaten. Amphy\'s light and your battle — Beacon is bright today in every way there is.', 'The Mineral Badge is yours. Hold it up to the lighthouse sometime. It shines back.'],
+    intro: ['Lumi is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My STRATIRON has been patient. I have not.'],
+    lose: ['Oh...! Beaten, truly beaten. Lumi\'s light and your battle — Beacon is bright today in every way there is.', 'The Mineral Badge is yours. Hold it up to the lighthouse sometime. It shines back.'],
     team: [
       { species: 'magnemite', level: 154 },
       { species: 'magneton', level: 157 },
@@ -218,7 +218,7 @@ export const JOHTO_TRAINERS = {
   pryce: {
     id: 'pryce', name: 'Pryce', title: 'Redwood Gym Leader', ai: 'smart', badgeSet: 'johto',
     intro: ['Fifty winters I have trained in this town, and I will tell you the secret of every one of them: winter does not hate you. Winter is simply honest about what you are. Let us be honest, then.'],
-    lose: ['...Warm. That is the word. Your team fights warm, the way my Piloswine and I did when we were both young and foolish.', 'The Glacier Badge is yours. It will not melt. Neither, I think, will you.'],
+    lose: ['...Warm. That is the word. Your team fights warm, the way my SHAGBOAR and I did when we were both young and foolish.', 'The Glacier Badge is yours. It will not melt. Neither, I think, will you.'],
     team: [
       { species: 'seel', level: 162 },
       { species: 'dewgong', level: 165 },
@@ -254,12 +254,12 @@ export const JOHTO_TRAINERS = {
     reward: 1200,
   },
   // Silver, second clash (Holly Forest): the stolen starter grown
-  // (Croconaw, a touch stronger), a GLOOMBITE, a Sneasel he caught on
+  // (RIDGEJAW, a touch stronger), a GLOOMBITE, a NIGHTCLAW he caught on
   // the road. Fought through battleAny like the first clash — the
   // branch flag records the honest outcome.
   silver_ilex: {
     id: 'silver_ilex', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
-    intro: ['You again. Route 30 was interrupted, not finished. Croconaw — we finish it here.'],
+    intro: ['You again. Route 30 was interrupted, not finished. RIDGEJAW — we finish it here.'],
     lose: ['...Again?! No — no, this is data. You are data. I will be back with better.'],
     team: [
       { species: 'golbat', level: 128 },
@@ -269,12 +269,12 @@ export const JOHTO_TRAINERS = {
     reward: 0,
   },
   // Silver, third clash (Lastlight Pass): the rivalry closes here.
-  // His starter is fully grown at last — Feraligatr — and the team
+  // His starter is fully grown at last — SNAPTYRANT — and the team
   // around it is a real team. Still battleAny: he concedes the race
   // either way, in words (the handler event's closing lines).
   silver_route: {
     id: 'silver_route', name: 'Silver', title: 'Red-Haired Trainer', ai: 'basic',
-    intro: ['Last road, trainer. Whatever is left between us, we settle it here — Feraligatr and I have been waiting for a finish line.'],
+    intro: ['Last road, trainer. Whatever is left between us, we settle it here — SNAPTYRANT and I have been waiting for a finish line.'],
     lose: ['...There it is. There is the gap. I have been measuring it wrong all this time.'],
     team: [
       { species: 'crobat', level: 178 },
@@ -462,7 +462,7 @@ export const JOHTO_EVENTS = {
   ev_johto_arrival: [
     { say: ['Elm\'s lab is not the calm place the ferry captain described. Paper covers the floor like leaves. A glass case near the back stands open and empty, and two aides are arguing in the hushed voices people use at the scene of a small disaster.'], who: 'NARRATOR' },
     { say: ['Oh — a trainer! From the boat, by your pack. I am Professor Elm. Forgive the lab. Forgive everything, actually — it has been that kind of morning.', 'First, the duty: your Yamato journey, registered. There. Whatever else today has done, it has not stopped that.'], who: 'PROF. ELM' },
-    { say: ['Now the rest. This case held three young Pokemon this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a Totodile, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
+    { say: ['Now the rest. This case held three young Pokemon this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a SNAPLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
     { say: ['I am not asking you to chase a thief across Yamato — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Iris City is your road: north through Blossom, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Cinder — a man named Kurt, who works Capture Orbs by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. ELM' },
     { flag: 'johto_arrival' },
     { flag: 'elm_registered' },
@@ -471,9 +471,9 @@ export const JOHTO_EVENTS = {
 
   // -- Route 30: the first Silver clash (battleAny: win or lose) -------
   ev_johto_silver_r30: [
-    { say: ['A shape cuts across the Route 30 grass — too fast for a hiker, too careless for a bird. Red hair. A carrier under one arm, the kind labs use. And at his heel, a Croconaw whose every glance checks with him first, the way new partners do.'], who: 'NARRATOR' },
+    { say: ['A shape cuts across the Route 30 grass — too fast for a hiker, too careless for a bird. Red hair. A carrier under one arm, the kind labs use. And at his heel, a RIDGEJAW whose every glance checks with him first, the way new partners do.'], who: 'NARRATOR' },
     { say: ['...You. You were at the lab. I saw your boat from the hill.', 'Do not bother denying it. And do not bother with the speech either — I know what I took, and I know why. That lab keeps Pokemon in glass cases waiting for permission to live. Mine is LIVING now.'], who: 'SILVER' },
-    { say: ['You want to judge me, judge me the way trainers do. Come on, then. Croconaw — show them what a head start looks like.'], who: 'SILVER' },
+    { say: ['You want to judge me, judge me the way trainers do. Come on, then. RIDGEJAW — show them what a head start looks like.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_r30', winFlag: 'silver_r30_won', loseFlag: 'silver_r30_lost' } },
     { say: ['Whatever the battle decided, it decides nothing for him. He recalls his Pokemon mid-motion, already turning away — over the fence line and into the trees before the grass has finished swaying, gone like he was never standing there at all.', 'On the path where he stood: nothing. No card, no name, no clue. Only Elm\'s missing page, still missing. Elm will want to hear about this.'], who: 'NARRATOR' },
     { flag: 'silver_r30_done' },
@@ -511,7 +511,7 @@ export const JOHTO_EVENTS = {
   // opening lines genuinely branch on silver_r30_won / _lost; the
   // battle itself is the shared battleAny (win or lose advances).
   ev_johto_silver_ilex_won: [
-    { say: ['The Ilex trees close overhead like a held breath. Then — a laugh, short and disbelieving, from the Cinder-side path. Red hair. A GLOOMBITE riding the thermals between the trunks. And a Croconaw, bigger than you remember, keeping pace like a shadow with teeth.'], who: 'NARRATOR' },
+    { say: ['The Ilex trees close overhead like a held breath. Then — a laugh, short and disbelieving, from the Cinder-side path. Red hair. A GLOOMBITE riding the thermals between the trunks. And a RIDGEJAW, bigger than you remember, keeping pace like a shadow with teeth.'], who: 'NARRATOR' },
     { say: ['Route 30. I have replayed it every night since. You got LUCKY — the grass, the light, one lucky bounce. Luck is not a strategy, trainer. It runs out. Watch it run out.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
     { say: ['He is gone into the trees before the echo is — but slower than last time, and looking back once, the way a person looks at a measuring mark they did not expect to move.'], who: 'NARRATOR' },
@@ -519,8 +519,8 @@ export const JOHTO_EVENTS = {
     { toast: 'Silver is measuring himself against you now.' },
   ],
   ev_johto_silver_ilex_lost: [
-    { say: ['The Ilex trees close overhead like a held breath. Then — footsteps, unhurried, from the Cinder-side path. Red hair. A GLOOMBITE in the branches. And a Croconaw, bigger than you remember, wearing Route 30 like a medal.'], who: 'NARRATOR' },
-    { say: ['You. I wondered when the road would return my practice partner. Route 30 was not a fluke, and this forest is about to prove it twice. Croconaw — encore.'], who: 'SILVER' },
+    { say: ['The Ilex trees close overhead like a held breath. Then — footsteps, unhurried, from the Cinder-side path. Red hair. A GLOOMBITE in the branches. And a RIDGEJAW, bigger than you remember, wearing Route 30 like a medal.'], who: 'NARRATOR' },
+    { say: ['You. I wondered when the road would return my practice partner. Route 30 was not a fluke, and this forest is about to prove it twice. RIDGEJAW — encore.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
     { say: ['He is gone into the trees before the echo is — but slower than you would expect from a boy in a hurry, and looking back once, at the space where the battle happened, like it surprised him too.'], who: 'NARRATOR' },
     { flag: 'silver_ilex_done' },
@@ -620,10 +620,10 @@ export const JOHTO_EVENTS = {
   // rivalry with Silver closes. battleAny — win or lose, the words
   // land: he acknowledges the gap either way.
   ev_johto_silver_route: [
-    { say: ['Halfway up Lastlight Pass, where the wind has opinions and the road narrows to single file: red hair, a Crobat on the crosswind, and a Feraligatr standing in the road like a toll. He has been waiting. By the look of the camp ashes behind him, he has been waiting a while.'], who: 'NARRATOR' },
-    { say: ['I stole a Pokemon from a glass case, and I told myself the case was the crime. Then a trainer from a boat kept showing up — Route 30, the forest — and the story kept not going the way I wrote it.', 'One more measurement, {player}. The real one. Feraligatr: FULL strength. No excuses left in either of us.'], who: 'SILVER' },
+    { say: ['Halfway up Lastlight Pass, where the wind has opinions and the road narrows to single file: red hair, a DREADBITE on the crosswind, and a SNAPTYRANT standing in the road like a toll. He has been waiting. By the look of the camp ashes behind him, he has been waiting a while.'], who: 'NARRATOR' },
+    { say: ['I stole a Pokemon from a glass case, and I told myself the case was the crime. Then a trainer from a boat kept showing up — Route 30, the forest — and the story kept not going the way I wrote it.', 'One more measurement, {player}. The real one. SNAPTYRANT: FULL strength. No excuses left in either of us.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_route', winFlag: 'silver_route_won', loseFlag: 'silver_route_lost' } },
-    { say: ['Whatever the battle decided, he stands in the settling dust doing the arithmetic he has avoided all arc — and then, astonishingly, he laughs. Once. Like it hurts and helps at the same time.', '"There is the gap. Not luck. Not the road. You trained yours like partners and I trained mine like weapons, and the weapons kept... looking at me. Waiting to be asked, not aimed." He looks at Feraligatr. Feraligatr looks back, patient as a tide. "...We are going back to Cinder. There is a man there who makes balls by hand, and a lab with a page missing. I do not know how you return a beginning. I am going to learn."', 'He steps out of the road. The whole road, all of it, held his breath with him — Lastlight Pass is yours, trainer. The Conference is at the top of it. Go and be measured by better judges than me.'], who: 'SILVER' },
+    { say: ['Whatever the battle decided, he stands in the settling dust doing the arithmetic he has avoided all arc — and then, astonishingly, he laughs. Once. Like it hurts and helps at the same time.', '"There is the gap. Not luck. Not the road. You trained yours like partners and I trained mine like weapons, and the weapons kept... looking at me. Waiting to be asked, not aimed." He looks at SNAPTYRANT. SNAPTYRANT looks back, patient as a tide. "...We are going back to Cinder. There is a man there who makes balls by hand, and a lab with a page missing. I do not know how you return a beginning. I am going to learn."', 'He steps out of the road. The whole road, all of it, held his breath with him — Lastlight Pass is yours, trainer. The Conference is at the top of it. Go and be measured by better judges than me.'], who: 'SILVER' },
     { flag: 'silver_route_done' },
     { toast: 'The road to the Conference is clear.' },
   ],
@@ -793,9 +793,9 @@ export const JOHTO_TALES = {
     reward: { items: { superpotion: 2 } }, rewardText: '2 Super Potions',
     bondNpc: 'ada', bondDelta: 1,
     revelation: 'When the lighthouse went dark in the great storm, Beacon\'s fishing fleet did not stay in port — every boat lit its own lamp and held a line of small lights from the harbor mouth to open water, and the big ships steered home by their neighbors.',
-    offerLines: ['Forty years I have kept that light, trainer, through Amphy and her mother before her. Everybody asks how the light works. Nobody asks what the harbor does on the nights it cannot.', 'Ask Sailor Joss, down by the water. He was out in the great storm, the year the lamp failed. Bring me what he tells you — two Super Potions for the story, told straight.'],
+    offerLines: ['Forty years I have kept that light, trainer, through Lumi and her mother before her. Everybody asks how the light works. Nobody asks what the harbor does on the nights it cannot.', 'Ask Sailor Joss, down by the water. He was out in the great storm, the year the lamp failed. Bring me what he tells you — two Super Potions for the story, told straight.'],
     stageLines: ['The year the light failed? I was nineteen, and my father\'s boat was the last one out. You want to know what the harbor did, ask what the boats did.', 'Every fishing boat in Beacon lit its lamp and took station — harbor mouth to open water, a road of small lights on black sea. The big ships steered by US, trainer. Tell Ada: the light never really went out. It just changed hands for a night.'],
-    finishLines: ['It changed hands... He said that? That old — of course he said that. It is the truest thing ever said about this port, and a sailor said it in one breath.', 'That is why Amphy\'s light matters, trainer. Not because the harbor is helpless without it. Because on the one night it mattered, the harbor learned it was not. Two Super Potions — and thank you for carrying that home to me.'],
+    finishLines: ['It changed hands... He said that? That old — of course he said that. It is the truest thing ever said about this port, and a sailor said it in one breath.', 'That is why Lumi\'s light matters, trainer. Not because the harbor is helpless without it. Because on the one night it mattered, the harbor learned it was not. Two Super Potions — and thank you for carrying that home to me.'],
   },
   tale_cianwood: {
     id: 'tale_cianwood', town: 'Tidewall City', giver: 'ISLAND ELDER BRAN', title: 'Salt on the Steps', johtoTale: true,
@@ -869,7 +869,7 @@ export const JOHTO_NPCS = [
   { map: 'kurt-house', x: 4, y: 3, name: 'KURT', art: 'elder', skin: '#e8b888', shirt: '#2d4377', pants: '#3a3a4a', hair: '#e8e8e8', johto: 'kurt',
     dialogue: ['Balls made by hand remember the hand. Machines never learned that.'] },
   { map: 'gym-goldenrod', x: 7, y: 2, name: 'WHITNEY', art: 'gym3', skin: '#f0c8a0', shirt: '#e88ab0', pants: '#4a3a5a', hair: '#e8a0b8', johto: 'whitney',
-    dialogue: ['My Miltank has been waiting ALL week for a real challenger.'] },
+    dialogue: ['My MOOBELLE has been waiting ALL week for a real challenger.'] },
   { map: 'gym-ecruteak', x: 7, y: 2, name: 'MORTY', art: 'gym4', skin: '#e8b888', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#d8c8a0', johto: 'morty',
     dialogue: ['The fog is honest. It hides nothing that matters.'] },
   // ---- Stage J4b: the east actors ----
@@ -878,9 +878,9 @@ export const JOHTO_NPCS = [
   { map: 'house-cianwood', x: 10, y: 5, name: 'CHUCK\'S WIFE', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0c8', pants: '#5a4a6a', hair: '#6a4a2a', johto: 'chucks_wife',
     dialogue: ['My husband is at the gym, roaring at the weather.'] },
   { map: 'lighthouse-2', x: 5, y: 4, name: 'JASMINE', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine_light',
-    dialogue: ['Amphy... please hold on. The light has to hold on.'] },
+    dialogue: ['Lumi... please hold on. The light has to hold on.'] },
   { map: 'gym-olivine', x: 7, y: 2, name: 'JASMINE', art: 'lady', skin: '#f0c8a0', shirt: '#c8d4e0', pants: '#4a5a6a', hair: '#8a6a4a', johto: 'jasmine',
-    dialogue: ['Amphy first. Everything in Beacon is Amphy first, until the light is well.'] },
+    dialogue: ['Lumi first. Everything in Beacon is Lumi first, until the light is well.'] },
   { map: 'lake-of-rage', x: 16, y: 15, name: 'LANCE', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_lake',
     dialogue: ['The lake is screaming, trainer. Something is making it scream.'] },
   { map: 'mahogany', x: 18, y: 7, name: 'LANCE', art: 'lance', skin: '#f0c8a0', shirt: '#7a2a3a', pants: '#2a2a3a', hair: '#c83a3a', johto: 'lance_mahogany',

@@ -1987,7 +1987,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'elm') {
       if (!flags.johto_arrival && !flags.ev_johto_arrival_done) { this.runEvent('ev_johto_arrival'); return true; }
       if (flags.silver_r30_done && !flags.silver_reported) {
-        say(['You met him. On Route 30, with the Croconaw — yes. Yes, that is my missing page, walking around with red hair and no intention of apologizing.',
+        say(['You met him. On Route 30, with the RIDGEJAW — yes. Yes, that is my missing page, walking around with red hair and no intention of apologizing.',
           'A name. You are sure? ...Silver. One of the aides found his practice registration in the hedge by the window — half a card, all the name we need. Silver.',
           'Thank you, {player}. A lab keeps records, and now mine has its page back — the rest of that story is his to write, and I suspect he will write it at you, repeatedly. The road west is yours: Iris first, then Cinder. And when you reach Kurt — remember what you are carrying.'], () => {
           flags.silver_reported = true;
@@ -2129,9 +2129,9 @@ Object.assign(OverworldScene.prototype, {
 
     // ================= Stage J4b: the east actors =================
     if (kind === 'pharmacist') {
-      if (flags.amphy_healed) { say(['Amphy\'s light is back over the water — the whole island saw it come on at dusk. That is the best review this pharmacy has ever had, trainer.']); return true; }
-      if ((st.bag.secretpotion || 0) > 0) { say(['That potion in your bag is the real article — my own mix, both hands, no shortcuts. Get it across the water to the lighthouse, and do not drop it. Amphy is counting on a steady hand.']); return true; }
-      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Amphy, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Beacon out of its depth.',
+      if (flags.amphy_healed) { say(['Lumi\'s light is back over the water — the whole island saw it come on at dusk. That is the best review this pharmacy has ever had, trainer.']); return true; }
+      if ((st.bag.secretpotion || 0) > 0) { say(['That potion in your bag is the real article — my own mix, both hands, no shortcuts. Get it across the water to the lighthouse, and do not drop it. Lumi is counting on a steady hand.']); return true; }
+      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Lumi, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Beacon out of its depth.',
         'This is the Secret Potion. My family\'s recipe, the strong one — we make it for exactly one patient at a time, and today the patient is a lighthouse. Carry it carefully, trainer. Half of Yamato\'s ships steer by that light.'], () => {
         st.bag.secretpotion = (st.bag.secretpotion || 0) + 1;
         flags.secret_potion_got = true;
@@ -2142,23 +2142,23 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'jasmine_light') {
-      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Amphy is well, trainer, and every ship between here and Tidewall knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will Steelix.']); return true; }
+      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Lumi is well, trainer, and every ship between here and Tidewall knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will STRATIRON.']); return true; }
       if ((st.bag.secretpotion || 0) > 0) {
-        say(['That smell — honey and iron and something green. The Tidewall mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Amphy, love — medicine. The good kind, from across the water.'], () => {
+        say(['That smell — honey and iron and something green. The Tidewall mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Lumi, love — medicine. The good kind, from across the water.'], () => {
           st.bag.secretpotion = (st.bag.secretpotion || 0) - 1;
           if (st.bag.secretpotion <= 0) delete st.bag.secretpotion;
           flags.amphy_healed = true;
           g.audio.playSfx('heal');
-          say(['She drinks. A long, shuddering breath — and then the lamp room does what it has done every dusk for a hundred years, all at once, like a held note finally sounded: the light comes on. Slowly. Then completely. Out past the harbor mouth, three ships sound their horns in answer.', 'Amphy is well. And I... I am free to be a gym leader again, with my whole heart in it. My gym is across the plaza, trainer. Come and take your battle — you have more than earned the queue jumping.'], null, 'JASMINE');
+          say(['She drinks. A long, shuddering breath — and then the lamp room does what it has done every dusk for a hundred years, all at once, like a held note finally sounded: the light comes on. Slowly. Then completely. Out past the harbor mouth, three ships sound their horns in answer.', 'Lumi is well. And I... I am free to be a gym leader again, with my whole heart in it. My gym is across the plaza, trainer. Come and take your battle — you have more than earned the queue jumping.'], null, 'JASMINE');
         });
         return true;
       }
       if (!flags.jasmine_asked) {
         say(['Oh — a trainer. Forgive me, I — my name is Jasmine. I keep Beacon\'s gym, most days. These days I keep this room.',
-          'This is Amphy. Her light has guided Beacon\'s ships since before I was born, and she is sick — a fever no medicine in this city touches. The pharmacy in Tidewall, across Route 40, makes one thing that might: their Secret Potion. I cannot leave her. The ships cannot wait much longer. Trainer... would you go? For a lighthouse?'], () => { flags.jasmine_asked = true; });
+          'This is Lumi. Her light has guided Beacon\'s ships since before I was born, and she is sick — a fever no medicine in this city touches. The pharmacy in Tidewall, across Route 40, makes one thing that might: their Secret Potion. I cannot leave her. The ships cannot wait much longer. Trainer... would you go? For a lighthouse?'], () => { flags.jasmine_asked = true; });
         return true;
       }
-      say(['Amphy is holding on. The Tidewall pharmacy, trainer — across the sea road, Route 40. Their Secret Potion is her best hope, and you are its fastest ship.']);
+      say(['Lumi is holding on. The Tidewall pharmacy, trainer — across the sea road, Route 40. Their Secret Potion is her best hope, and you are its fastest ship.']);
       return true;
     }
 
@@ -2287,7 +2287,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       if (!flags.beat_gary_johto) { say(['The qualifiers are behind you, and the whole stadium knows what is next. Gary is on the pitch, pretending not to warm up. Go and give these people the match they came for.']); return true; }
-      if (!flags.harrison_faced) { say(['Gary is beaten, and the bracket has one name left on your side of it: Harrison, in the quarter-final. He is standing by the pitch with his Houndoom and his good manners. End this Conference properly, trainer.']); return true; }
+      if (!flags.harrison_faced) { say(['Gary is beaten, and the bracket has one name left on your side of it: Harrison, in the quarter-final. He is standing by the pitch with his CHARHOUND and his good manners. End this Conference properly, trainer.']); return true; }
       say(['The Conference is decided, and decided honestly. The book has it. So does everyone who was here.']);
       return true;
     }
@@ -2307,7 +2307,7 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'harrison') {
-      if (flags.johto_complete) { say(['The Conference book is closed and your name is in it in the good ink, trainer. Whatever either of us does next, this stadium saw the real thing. Travel well. Houndoom and I will be telling this one for years.']); return true; }
+      if (flags.johto_complete) { say(['The Conference book is closed and your name is in it in the good ink, trainer. Whatever either of us does next, this stadium saw the real thing. Travel well. CHARHOUND and I will be telling this one for years.']); return true; }
       if (!flags.beat_gary_johto) { say(['Harrison, from Rootlet Town. We are on a collision course, you and I — but Gary is your road to me, and the bracket does not bend. Beat him first. I will be here, and I will be ready either way.']); return true; }
       // The quarter-final (mechanism recorded at his trainer def):
       // a real full-strength battle, fought FRIENDLY — the predicate
@@ -2315,7 +2315,7 @@ Object.assign(OverworldScene.prototype, {
       // johto_complete is set, and the Foundation machine itself
       // fires (checkArcCompletion — ARC COMPLETE card, regionsDone,
       // the pinned Maris directive; nothing here writes regionsDone).
-      say(['So it is us. Gary is beaten — I watched it from the tunnel, and I will carry that match with me whatever happens here.', 'Quarter-final rules, trainer, and Conference stakes. Give me everything you gave him. Houndoom and I did not cross the bracket for less.'], () => {
+      say(['So it is us. Gary is beaten — I watched it from the tunnel, and I will carry that match with me whatever happens here.', 'Quarter-final rules, trainer, and Conference stakes. Give me everything you gave him. CHARHOUND and I did not cross the bracket for less.'], () => {
         g.ui.showMenu('The quarter-final — face Harrison?', [
           { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
         ], (v) => {
@@ -2332,7 +2332,7 @@ Object.assign(OverworldScene.prototype, {
                 '...Well. WELL. The card says your name, trainer — the judges did not even deliberate. An upset, the papers will call it. It was not an upset. I was there. It was a better team, on a bigger day.',
                 'Take the semi-final road with my respect — you have beaten the two best trainers in this bracket back to back, and one of them is standing here applauding. The Conference is yours in every way that history checks.',
               ] : [
-                '...It is decided. The final exchange — Houndoom endures, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Harrison.',
+                '...It is decided. The final exchange — CHARHOUND endures, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Harrison.',
                 'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
                 'Gary is in the tunnel, trainer. Even he is applauding. Especially him, though he will deny the especially.',
               ];
@@ -2488,7 +2488,7 @@ Object.assign(OverworldScene.prototype, {
       bugsy: { badge: 'hivebadge', gate: null, gateLines: [],
         post: 'The webs are re-strung and the forest is humming again. You are welcome under these trees any time, Hive Badge holder.' },
       whitney: { badge: 'plainbadge', gate: null, gateLines: [],
-        post: 'No crying this time — I practiced! Come back for a rematch whenever, Plain Badge holder. Miltank asks about your team by name now. By NAME.' },
+        post: 'No crying this time — I practiced! Come back for a rematch whenever, Plain Badge holder. MOOBELLE asks about your team by name now. By NAME.' },
       morty: { badge: 'fogbadge', gate: null, gateLines: [],
         post: 'The fog keeps its counsel and so do I. Walk carefully in it, Fog Badge holder — it has decided you are interesting.' },
       // Stage J4b east leaders on the same runner: Jasmine's battle
@@ -2502,8 +2502,8 @@ Object.assign(OverworldScene.prototype, {
       chuck: { badge: 'stormbadge', gate: null, gateLines: [],
         post: 'Any time the sea brings you back, Storm Badge holder, my gym is its loudest address. Bring your hands — and your appetite. My wife insists on feeding challengers who survive me.' },
       jasmine: { badge: 'mineralbadge', gate: 'amphy_healed',
-        gateLines: ['I am sorry — truly. I cannot battle while Amphy is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my Steelix deserves better from me. The light first, trainer. Please. The light first.'],
-        post: 'Amphy\'s light and your Mineral Badge, trainer — Beacon shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
+        gateLines: ['I am sorry — truly. I cannot battle while Lumi is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my STRATIRON deserves better from me. The light first, trainer. Please. The light first.'],
+        post: 'Lumi\'s light and your Mineral Badge, trainer — Beacon shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
       pryce: { badge: 'glacierbadge', gate: 'johto_hideout_cleared',
         gateLines: ['Not yet, challenger. My town is sitting on a Rocket nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Lance is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
         post: 'The lake is calm, the town is ours, and the Glacier Badge is where it belongs — with the warm-hearted. Winter remembers you kindly, trainer. That is rarer than the badge.' },
@@ -2520,7 +2520,7 @@ Object.assign(OverworldScene.prototype, {
     }
     // Stage J5: the badge-order gate composes ahead of each leader's
     // own story gate (the League's order is the outer law; Sprout
-    // Tower / Amphy / the hideout keep their inner gates untouched).
+    // Tower / Lumi / the hideout keep their inner gates untouched).
     const orderRefusal = badgeOrderRefusal(L.badge);
     if (orderRefusal) { say(orderRefusal); return true; }
     if (L.gate && !flags[L.gate]) { say(L.gateLines); return true; }

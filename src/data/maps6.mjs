@@ -2062,7 +2062,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "First road out of Galefield. Every Yamato journey starts with this wind.",
-          "Sentret at dawn, Hoothoot at dusk. The route keeps two shifts."
+          "VIGILET at dawn, TICKOWL at dusk. The route keeps two shifts."
         ]
       }
     ],
@@ -2234,7 +2234,7 @@ export const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "I camp where the Mareep graze. Counting them is how I fall asleep.",
+          "I camp where the WOOLAMP graze. Counting them is how I fall asleep.",
           "The house up the road belongs to a berry researcher. Nice fellow, odd hours."
         ]
       },
@@ -2248,7 +2248,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "My Hoppip drifts over the pond when the wind picks up.",
+          "My DRIFLET drifts over the pond when the wind picks up.",
           "Route 30 is two climates: pond weather and hill weather."
         ]
       }
@@ -2616,7 +2616,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "Junction Cave cuts the cliff the long way round forgot.",
-          "Wooper own the cave pools. We just visit."
+          "MUDGILL own the cave pools. We just visit."
         ]
       },
       {
@@ -2629,7 +2629,7 @@ export const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "South shore fishing: the tide brings Marill this time of year.",
+          "South shore fishing: the tide brings AQUALET this time of year.",
           "Through the cave and the whole coast opens up. Worth the dark."
         ]
       }
@@ -3159,7 +3159,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "Heracross sap, Pineco shade, NIGHTBUD everywhere. This forest is a whole city.",
+          "HORNTOSS sap, CONELET shade, NIGHTBUD everywhere. This forest is a whole city.",
           "The shrine? We leave flowers. Everybody leaves flowers. Nobody says why out loud."
         ]
       },
@@ -3174,7 +3174,7 @@ export const MAPS6 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "Third generation cutting Ilex charcoal. The forest grows back faster than we take.",
-          "Mind the webs after rain. The Ariados redecorate nightly."
+          "Mind the webs after rain. The SNARELOOM redecorate nightly."
         ]
       }
     ],
@@ -3524,7 +3524,7 @@ export const MAPS6 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Park day! I pack for three picnics and eat two on this road.",
-          "Natu watch the crossroads like tiny green judges."
+          "ORACLET watch the crossroads like tiny green judges."
         ]
       },
       {
@@ -3537,7 +3537,7 @@ export const MAPS6 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The ditch by the bend is Yanma water — dragonflies the size of teacups.",
+          "The ditch by the bend is DARNLET water — dragonflies the size of teacups.",
           "Signal hums behind you, the park breathes ahead. Good road."
         ]
       }
@@ -3734,7 +3734,7 @@ export const MAPS6 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "Twenty years tending these lawns. The Sunflora by the pond are my pension plan.",
+          "Twenty years tending these lawns. The PETALGRIN by the pond are my pension plan.",
           "Trainers rest here between cities. The park insists on it."
         ]
       },
@@ -3749,7 +3749,7 @@ export const MAPS6 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "Contest Tuesdays! The park judges have SEEN things.",
-          "A Yanma at the fountain at noon is the park's whole personality."
+          "A DARNLET at the fountain at noon is the park's whole personality."
         ]
       },
       {
@@ -3976,7 +3976,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "Three regions' worth of roads meet east of here, or so the signs promise.",
-          "Sudowoodo country north of this route, they say. A tree that is not a tree."
+          "PETRITREE country north of this route, they say. A tree that is not a tree."
         ]
       }
     ],
@@ -7806,7 +7806,7 @@ export const MAPS6 = {
       {
         "x": 3,
         "y": 7,
-        "text": "ROUTE 38 — Lantern to the coast road. Farm country: mind the fences, greet the Miltank."
+        "text": "ROUTE 38 — Lantern to the coast road. Farm country: mind the fences, greet the MOOBELLE."
       }
     ],
     "npcs": [
@@ -7820,7 +7820,7 @@ export const MAPS6 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "Our Miltank give the sweetest milk west of Signal. That is not pride, that is chemistry.",
+          "Our MOOBELLE give the sweetest milk west of Signal. That is not pride, that is chemistry.",
           "Beacon's light is visible from the top field on clear nights. The whole farm navigates by it."
         ]
       }
@@ -9336,7 +9336,7 @@ export const MAPS6 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "The lake's been wrong all season. Red wrong. You'll see what I mean from the shore.",
-          "Girafarig graze this road like the lake isn't watching. Maybe for them it isn't."
+          "TWINNECK graze this road like the lake isn't watching. Maybe for them it isn't."
         ]
       }
     ],
@@ -9698,7 +9698,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "Cragmoor side of the Frost Path, the cold lets go all at once. Like the mountain exhaling.",
-          "Swinub root in the cave mouth snow. Adorable. Immovable, but adorable."
+          "SNUFLET root in the cave mouth snow. Adorable. Immovable, but adorable."
         ]
       }
     ],
@@ -10319,7 +10319,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "South of Cragmoor the land falls away in ledges, one argument at a time.",
-          "Teddiursa country. Small bears, large opinions, no exceptions."
+          "HONEYCUB country. Small bears, large opinions, no exceptions."
         ]
       }
     ],
@@ -10657,7 +10657,7 @@ export const MAPS6 = {
       {
         "x": 12,
         "y": 13,
-        "text": "GLOOM CAVE — Two mouths, one mountain gut. Dunsparce burrow in the warm dark and ignore everyone equally."
+        "text": "GLOOM CAVE — Two mouths, one mountain gut. DRILLET burrow in the warm dark and ignore everyone equally."
       }
     ],
     "npcs": [
@@ -10672,7 +10672,7 @@ export const MAPS6 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "I navigate by echo and optimism. The echo is the reliable one.",
-          "Wobbuffet stand in the black like patient furniture. Mind your shins."
+          "STOICBLOB stand in the black like patient furniture. Mind your shins."
         ]
       }
     ],

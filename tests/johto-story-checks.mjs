@@ -61,7 +61,7 @@ const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
   ok('A04 leader teams in the band, aces keep the Classic keepsake (Falkner 108/111/114 sparrowfeather, Bugsy 120/123/126 ironacorn)',
     team('falkner') === 'pidgeotto:108,noctowl:111,pidgeot:114+sparrowfeather'
     && team('bugsy') === 'ariados:120,heracross:123,scizor:126+ironacorn');
-  ok('A05 leader teams II (Whitney 131/134/138 Miltank tortoisecharm, Morty 140/143/145/148 spectrebell); every leader badgeSet johto + its badge; every species exists',
+  ok('A05 leader teams II (Whitney 131/134/138 MOOBELLE tortoisecharm, Morty 140/143/145/148 spectrebell); every leader badgeSet johto + its badge; every species exists',
     team('whitney') === 'clefairy:131,snubbull:134,miltank:138+tortoisecharm'
     && team('morty') === 'gastly:140,haunter:143,misdreavus:145,gengar:148+spectrebell'
     && ['falkner', 'bugsy', 'whitney', 'morty'].every((id) => JOHTO_TRAINERS[id].badgeSet === 'johto' && JOHTO_ORDER.includes(JOHTO_TRAINERS[id].badge))
@@ -503,7 +503,7 @@ const driver = `
   pump(g);
   var arrivalText = seenLines.join(' | ');
   ok('B03 New Bark arrival scene fires on first elm-lab entry: Elm registers the journey and tells the stolen-starter incident (johto_arrival + elm_registered)',
-    arrivalOpen && arrivalText.includes('Professor Elm') && arrivalText.includes('Totodile')
+    arrivalOpen && arrivalText.includes('Professor Elm') && arrivalText.includes('SNAPLET')
     && st.story.flags.johto_arrival === true && st.story.flags.elm_registered === true,
     arrivalText.slice(0, 140));
   var owL2 = gotoMap(g, 'elm-lab', 8, 10);
@@ -580,7 +580,7 @@ const driver = `
 
   var owG = gotoMap(g, 'gym-goldenrod', 7, 8);
   talkKind(g, owG, 'whitney'); pump(g);
-  ok('B14 Whitney through the real leader runner: Plain Badge (Miltank faced and beaten)',
+  ok('B14 Whitney through the real leader runner: Plain Badge (MOOBELLE faced and beaten)',
     st.badges.johto.includes('plainbadge') && st.story.flags.badge_plain === true && st.story.flags.beat_whitney === true,
     JSON.stringify(st.badges.johto));
 
@@ -654,7 +654,7 @@ const driver = `
 
   var owLH = gotoMap(gE, 'lighthouse-2', 13, 9);
   talkKind(gE, owLH, 'jasmine_light'); pump(gE);
-  ok('E02 the errand opens: Jasmine at Amphy’s side asks for the Cianwood Secret Potion (jasmine_asked) — she will not battle yet',
+  ok('E02 the errand opens: Jasmine at Lumi’s side asks for the Cianwood Secret Potion (jasmine_asked) — she will not battle yet',
     stE.story.flags.jasmine_asked === true && !stE.story.flags.amphy_healed);
   var owJG = gotoMap(gE, 'gym-olivine', 7, 8);
   talkKind(gE, owJG, 'jasmine'); pump(gE);
@@ -673,7 +673,7 @@ const driver = `
 
   var owLH2 = gotoMap(gE, 'lighthouse-2', 13, 9);
   talkKind(gE, owLH2, 'jasmine_light'); pump(gE);
-  ok('E06 the delivery: the potion leaves the bag, Amphy heals and the light comes back on (amphy_healed)',
+  ok('E06 the delivery: the potion leaves the bag, Lumi heals and the light comes back on (amphy_healed)',
     stE.story.flags.amphy_healed === true && !(stE.bag.secretpotion > 0));
   var owJG2 = gotoMap(gE, 'gym-olivine', 7, 8);
   talkKind(gE, owJG2, 'jasmine'); pump(gE);
@@ -826,7 +826,7 @@ const driver = `
   talkKind(g5, ow5c, 'jasmine_light'); pump(g5);
   var ow5d = gotoMap(g5, 'gym-olivine', 7, 8);
   talkKind(g5, ow5d, 'jasmine'); pump(g5);
-  ok('E29 either-order proof (Cianwood first): the pharmacy serves a trainer who never asked Jasmine, Storm lands 5th, the delivery still heals Amphy, and Jasmine battles on the delivery alone — Mineral 6th, prefix intact',
+  ok('E29 either-order proof (Cianwood first): the pharmacy serves a trainer who never asked Jasmine, Storm lands 5th, the delivery still heals Lumi, and Jasmine battles on the delivery alone — Mineral 6th, prefix intact',
     st5.story.flags.badge_storm === true && st5.story.flags.amphy_healed === true && !st5.story.flags.jasmine_asked
     && JSON.stringify(st5.badges.johto) === JSON.stringify(['zephyrbadge', 'hivebadge', 'plainbadge', 'fogbadge', 'stormbadge', 'mineralbadge']),
     JSON.stringify(st5.badges.johto));
@@ -1120,7 +1120,7 @@ const driver = `
   }
   {
     var [gG2, stG2] = legendGame(511);
-    // westComplete holds 4 badges (through fog); Amphy is unhealed here.
+    // westComplete holds 4 badges (through fog); Lumi is unhealed here.
     var owG2 = gotoMap(gG2, 'gym-olivine', 7, 8); pump(gG2);
     seenLines = [];
     talkKind(gG2, owG2, 'jasmine'); pump(gG2);
@@ -1132,7 +1132,7 @@ const driver = `
     if (jasmineMenu) { gG2.ui.debugChoose(0); }
     var metJ = drainToBattle(gG2);
     driveBattle(gG2); pump(gG2);
-    ok('F10b badge-order gate: Jasmine refuses before Chuck (her line sends you to Cianwood’s gym) even though her errand gates are story-side — after the Storm Badge + Amphy healed, the Mineral Badge battle opens and is won',
+    ok('F10b badge-order gate: Jasmine refuses before Chuck (her line sends you to Cianwood’s gym) even though her errand gates are story-side — after the Storm Badge + Lumi healed, the Mineral Badge battle opens and is won',
       jasmineRefuses && jasmineMenu && metJ && stG2.badges.johto.includes('mineralbadge'));
   }
   {

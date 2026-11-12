@@ -37,7 +37,7 @@ export const ORANGE_QUESTS = [
   // tracks titans calmed n/3 (titanCount — the Quest Log and the HUD
   // objective count the orange_2000_<bird> flags, the badgeCount
   // idiom carried to flags).
-  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm Moltres, FULMINIS and Articuno at their shrine caves (any order), then return to Sanctum Shrine — Slowking counsels from its rock on Sanctum\'s west shore.' },
+  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm Moltres, FULMINIS and Articuno at their shrine caves (any order), then return to Sanctum Shrine — DOZECROWN counsels from its rock on Sanctum\'s west shore.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -189,8 +189,8 @@ export const ORANGE_EVENTS = {
     { say: ['Three nights ago a sky-barge came over the shrine isles — all glass and brass and quiet engines. Since then: cages of light on the shrines, the currents running wrong, and the birds — oh, the birds. When the three titans rage, the whole sky argues with itself.'], who: 'FEST ELDER MIRA' },
     { say: ['A pleasure to be introduced by my weather. Vance Halloway, collector — the Still Sky Collection, soon to be the wonder of every port that matters. Three titans, stilled forever in glass and frost-light. No more storms. No more moods. Perfection, kept.'], who: 'VANCE HALLOWAY' },
     { say: ['You mistake me for a villain, child. I am a curator. The sea cannot be trusted with its own treasures — look at it! I am simply... tidying the sky.'], who: 'VANCE HALLOWAY' },
-    { say: ['The barge lifts away toward Ember Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the Slowking speaks first.'], who: 'NARRATOR' },
-    { say: ['Slow... king. King. Slowking slow, king — slow.'], who: 'SLOWKING' },
+    { say: ['The barge lifts away toward Ember Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the DOZECROWN speaks first.'], who: 'NARRATOR' },
+    { say: ['Slow... king. King. DOZECROWN slow, king — slow.'], who: 'DOZECROWN' },
     { say: ['It turns its great head toward the three isles, one by one. Fire. Lightning. Ice. Then toward the shrine above the plaza, and down — deep down — with a patience like the bottom of the sea. The meaning arrives the way its speech does: slowly, and all at once. Free the shrines. Calm the titans. Then the guardian will decide what the sea does next.'], who: 'NARRATOR' },
     { flag: 'orange_2000_active' },
     { toast: 'The Storm over Sanctum has begun!' },
@@ -228,11 +228,11 @@ export const ORANGE_EVENTS = {
   //    sysLoadMap gate. The proving is a straight win — the shipped
   //    event idiom — fought UNcatchable at the deep altar.) ------------
   ev_orange_2000_climax: [
-    { say: ['The shrine is too quiet. Three candles burn straight up in windless air, and the keeper\'s hands are folded the way hands fold at sickbeds and weddings. Slowking stands in the doorway — it has climbed from its rock, which no living islander has seen it do.'], who: 'NARRATOR' },
-    { say: ['Slow... king.'], who: 'SLOWKING' },
+    { say: ['The shrine is too quiet. Three candles burn straight up in windless air, and the keeper\'s hands are folded the way hands fold at sickbeds and weddings. DOZECROWN stands in the doorway — it has climbed from its rock, which no living islander has seen it do.'], who: 'NARRATOR' },
+    { say: ['Slow... king.'], who: 'DOZECROWN' },
     { say: ['It means: now. Above the plaza, glass and brass descend through the breaking cloud — Halloway\'s barge, every light it owns burning, one enormous empty cage swinging beneath it like a bell.'], who: 'NARRATOR' },
     { say: ['Three titans, loose — my collection, scattered by a child with a ferry pass! No matter. No matter! The centre of the storm is still empty, curator\'s law: empty centres are filled by whoever arrives with a cage big enough. Guardian! I have come to tidy YOU.'], who: 'VANCE HALLOWAY' },
-    { say: ['Slowking walks — unhurried, absolute — to the back passage, and down toward the deep chamber. It does not look back. It does not need to. You follow it into the cold, deep water-light, where the sealed altar waits... and the sea, at last, answers.'], who: 'NARRATOR' },
+    { say: ['DOZECROWN walks — unhurried, absolute — to the back passage, and down toward the deep chamber. It does not look back. It does not need to. You follow it into the cold, deep water-light, where the sealed altar waits... and the sea, at last, answers.'], who: 'NARRATOR' },
     { warp: { map: 'shamouti-deep', x: 7, y: 10 } },
     { say: ['It rises the way the tide rises: not fast, not slow — inevitably. Wings like white headlands. Eyes that have watched ten thousand festivals and every storm since the first one. The guardian of the sea does not rage. It MEASURES. The one who calmed the titans will be tested the way the sea tests everything: completely.'], who: 'NARRATOR' },
     { wildBattle: { species: 'lugia', level: 55, uncatchable: true } },

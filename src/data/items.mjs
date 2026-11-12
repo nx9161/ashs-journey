@@ -221,9 +221,9 @@ export const ITEMS = {
   spiritsymbol: { id: 'spiritsymbol', name: 'Spirit Symbol', pocket: 'key', desc: 'From the Trial Palace. For trusting your partners to choose their own moves — and being right to trust them.' },
   bravesymbol: { id: 'bravesymbol', name: 'Brave Symbol', pocket: 'key', desc: 'From the Trial Pyramid. Carried up through the dark, floor by floor, with only what you brought in your bag.' },
   // Stage J4b key item: the Tidewall pharmacy's Secret Potion, the
-  // medicine errand's whole cargo (delivered to Amphy in the Glitter
+  // medicine errand's whole cargo (delivered to Lumi in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
-  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Amphy, the lighthouse Pokemon — handle with both hands.' },
+  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Pokemon — handle with both hands.' },
   // Arc 4 Stage S4: the Gracidea — Shaymin's forme key item. Use it
   // on a Shaymin in the party to swap land <-> sky (the S4 forme
   // switch, game/sinnoh-systems.mjs). Never consumed.

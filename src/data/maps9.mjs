@@ -1151,7 +1151,7 @@ export const MAPS9 = {
       {"x": 13, "y": 15, "text": "ROUTE 212 — NORTH — Inglenook to the marsh country. The road south runs on through the wet pools to Fenland. Bring boots you have already forgiven."},
     ],
     "npcs": [
-      {"x": 9, "y": 8, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Wooper own the south pools and sublet to the Quagsire.", "Fenland's marsh begins where this fence ends. Bring boots you have already forgiven."]},
+      {"x": 9, "y": 8, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["MUDGILL own the south pools and sublet to the BOGLUMP.", "Fenland's marsh begins where this fence ends. Bring boots you have already forgiven."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "psyduck", "min": 328, "max": 334, "weight": 18}, {"species": "wooper", "min": 328, "max": 334, "weight": 16}, {"species": "buneary", "min": 328, "max": 334, "weight": 16}, {"species": "shellos", "min": 329, "max": 335, "weight": 14}, {"species": "quagsire", "min": 331, "max": 336, "weight": 8}, {"species": "golduck", "min": 331, "max": 336, "weight": 8}], "water": [{"species": "tentacool", "min": 330, "max": 336, "weight": 24}, {"species": "magikarp", "min": 330, "max": 335, "weight": 20}, {"species": "wingull", "min": 331, "max": 336, "weight": 18}, {"species": "finneon", "min": 332, "max": 337, "weight": 12}, {"species": "floatzel", "min": 333, "max": 338, "weight": 8}, {"species": "gastrodon", "min": 334, "max": 339, "weight": 6}], "waterRate": 0.08},
     "items": [],
@@ -1744,7 +1744,7 @@ export const MAPS9 = {
       {"x": 12, "y": 5, "text": "KINDRED SQUARE — Lawns for strolling pairs. The Pokemon choose the route; the wardens keep the gates and the lemonade."},
     ],
     "npcs": [
-      {"x": 14, "y": 8, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North lawn for the shy ones, south lawn for the show-offs. Both lawns are correct.", "A Cleffa walked me in a circle for an hour last spring. Best hour of the year."]},
+      {"x": 14, "y": 8, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North lawn for the shy ones, south lawn for the show-offs. Both lawns are correct.", "A MOONMOTE walked me in a circle for an hour last spring. Best hour of the year."]},
     ],
     "encounters": {"rate": 0.08, "table": [{"species": "cleffa", "min": 326, "max": 332, "weight": 22}, {"species": "buneary", "min": 326, "max": 332, "weight": 24}, {"species": "pikachu", "min": 327, "max": 333, "weight": 10}, {"species": "psyduck", "min": 326, "max": 332, "weight": 14}, {"species": "happiny", "min": 327, "max": 332, "weight": 8}]},
     "items": [],
@@ -2636,7 +2636,7 @@ export const MAPS9 = {
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fenland City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "MARSH GUIDE SOLENNE", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The marsh keeps what it catches, including afternoons. Mind the deep bog — it minds you back.", "Wake's gym is half arena, half pond. The water types approve; the floor does not."]},
-      {"x": 19, "y": 6, "name": "FEN FISHER ODO", "art": "fisher", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Wooper own the south pools and sublet to the Quagsire. I pay rent in patience.", "East road runs to the Gallant lakefront. West of the lake, the hotels; east, the sea road to Brightshore."]},
+      {"x": 19, "y": 6, "name": "FEN FISHER ODO", "art": "fisher", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["MUDGILL own the south pools and sublet to the BOGLUMP. I pay rent in patience.", "East road runs to the Gallant lakefront. West of the lake, the hotels; east, the sea road to Brightshore."]},
       {"x": 6, "y": 10, "name": "BOG KID MIRE", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I can name thirty marsh sounds and eleven of them are Croagunk. The rest are also Croagunk, lying.", "The gatehouse tram — I mean, the gatehouse MARSH — is the whole world before breakfast."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "wooper", "min": 342, "max": 348, "weight": 20}, {"species": "psyduck", "min": 342, "max": 348, "weight": 18}, {"species": "shellos", "min": 343, "max": 349, "weight": 14}, {"species": "croagunk", "min": 343, "max": 349, "weight": 10}, {"species": "bibarel", "min": 343, "max": 349, "weight": 12}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
@@ -3018,7 +3018,7 @@ export const MAPS9 = {
       {"x": 20, "y": 7, "text": "VERNAL PATH — East. The lane the seasons use."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "LAKESHORE HAND TOV", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I keep the fences between the road and the lake's temper. Both hold, most years.", "Girafarig graze the east meadow. Two heads, two opinions, one lunch."]},
+      {"x": 9, "y": 12, "name": "LAKESHORE HAND TOV", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I keep the fences between the road and the lake's temper. Both hold, most years.", "TWINNECK graze the east meadow. Two heads, two opinions, one lunch."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "ponyta", "min": 350, "max": 357, "weight": 18}, {"species": "staravia", "min": 350, "max": 357, "weight": 16}, {"species": "luxio", "min": 351, "max": 358, "weight": 14}, {"species": "rapidash", "min": 353, "max": 359, "weight": 6}, {"species": "girafarig", "min": 351, "max": 358, "weight": 10}, {"species": "bibarel", "min": 350, "max": 356, "weight": 12}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -3555,7 +3555,7 @@ export const MAPS9 = {
       {"x": 12, "y": 7, "text": "ROUTE 227 — The Stark road. Ash on the wind, heat in the stone, and the mountain’s door at the end of it."},
     ],
     "npcs": [
-      {"x": 9, "y": 12, "name": "ASH WALKER BRYN", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The mountain breathes out on this road. Walk like a guest and it tolerates you.", "Magcargo leave glass trails where the ash is hottest. Pretty. Do not step."]},
+      {"x": 9, "y": 12, "name": "ASH WALKER BRYN", "art": "hiker", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The mountain breathes out on this road. Walk like a guest and it tolerates you.", "MAGMADOME leave glass trails where the ash is hottest. Pretty. Do not step."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "camerupt", "min": 393, "max": 399, "weight": 12}, {"species": "rhydon", "min": 393, "max": 399, "weight": 12}, {"species": "skarmory", "min": 393, "max": 399, "weight": 10}, {"species": "fearow", "min": 393, "max": 398, "weight": 14}, {"species": "golem", "min": 394, "max": 400, "weight": 8}, {"species": "magcargo", "min": 393, "max": 399, "weight": 10}], "water": [{"species": "tentacool", "min": 388, "max": 396, "weight": 20}, {"species": "magikarp", "min": 388, "max": 395, "weight": 14}, {"species": "wingull", "min": 389, "max": 396, "weight": 16}, {"species": "pelipper", "min": 390, "max": 397, "weight": 10}, {"species": "mantine", "min": 391, "max": 398, "weight": 8}, {"species": "lumineon", "min": 391, "max": 398, "weight": 8}, {"species": "gyarados", "min": 392, "max": 399, "weight": 5}], "waterRate": 0.08},
     "items": [],

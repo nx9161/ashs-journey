@@ -486,7 +486,7 @@ export const SPECIES_SINNOH = {
     catchRate: 255, growth: 'mediumfast', baseXp: 58, body: 'quad', spriteSeed: 43801,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 20,
     learnset: { 309: ['lowkick'], 314: ['rockthrow'], 317: ['mimic'], 333: ['rockslide'], 338: ['slam'], 346: ['doubleedge'] },
-    flavor: 'It cries fake tears to balance its water, and fools everyone kindly. It learns Sudowoodo’s mimicry at level 310 here.',
+    flavor: 'It cries fake tears to balance its water, and fools everyone kindly. It learns PETRITREE’s mimicry at level 310 here.',
     evo: { to: 'sudowoodo', method: 'level', level: 310 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   mimejr: {
@@ -666,7 +666,7 @@ export const SPECIES_SINNOH = {
     catchRate: 25, growth: 'slow', baseXp: 69, body: 'bird', spriteSeed: 45801,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
     learnset: { 1: ['tackle', 'bubble'], 304: ['supersonic'], 310: ['bubblebeam'], 313: ['headbutt'], 319: ['agility'], 322: ['wingattack'], 331: ['takedown'], 337: ['confuseray'], 349: ['hydropump'] },
-    flavor: 'It rides beside Remoraid like a page beside a knight. It joins Mantine at level 310 here.',
+    flavor: 'It rides beside JETLET like a page beside a knight. It joins KITERAY at level 310 here.',
     evo: { to: 'mantine', method: 'level', level: 310 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   snover: {

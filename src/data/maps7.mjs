@@ -1406,7 +1406,7 @@ export const MAPS7 = {
       {"x": 20, "y": 7, "text": "THE GLASS WORKSHOP — Ashfall glass is blown from this ash. Souvenirs carry a little of the mountain home."},
     ],
     "npcs": [
-      {"x": 14, "y": 11, "name": "ASH SWEEPER LIV", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I sweep the road; the mountain unsweeps it. We have an understanding.", "Skarmory ride the ash thermals like they own the sky's grey half."]},
+      {"x": 14, "y": 11, "name": "ASH SWEEPER LIV", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I sweep the road; the mountain unsweeps it. We have an understanding.", "PLATEWING ride the ash thermals like they own the sky's grey half."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "sandshrew", "min": 230, "max": 237, "weight": 20}, {"species": "spinda", "min": 231, "max": 238, "weight": 24}, {"species": "skarmory", "min": 232, "max": 239, "weight": 12}, {"species": "slugma", "min": 231, "max": 238, "weight": 14}, {"species": "swablu", "min": 231, "max": 238, "weight": 12}, {"species": "sandslash", "min": 233, "max": 240, "weight": 8}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -2735,7 +2735,7 @@ export const MAPS7 = {
     "npcs": [
       {"x": 10, "y": 11, "name": "RAFT ELDER CORALIE", "art": "elder", "skin": "#e8b888", "shirt": "#b0503c", "pants": "#2a2a3a", "hair": "#5a3a2a", "dialogue": ["Three generations my family has added logs to this town and subtracted none. It grows like we do: sideways, cheerfully.", "Tempest Tower stands east on its island. On clear mornings the top of it says hello first."]},
       {"x": 16, "y": 12, "name": "CURRENT RIDER PIKE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Ride the fast water east and it will carry you to Perennial’s shore faster than any sail.", "Miss your stop and the current files you under ‘later’. It always delivers, eventually."]},
-      {"x": 8, "y": 12, "name": "FLOAT KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My house has an anchor instead of a fence. When I grow up I’m untying it.", "Corsola hold up half the rafts. We hold up the other half. It’s fair."]},
+      {"x": 8, "y": 12, "name": "FLOAT KID WREN", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["My house has an anchor instead of a fence. When I grow up I’m untying it.", "CORALET hold up half the rafts. We hold up the other half. It’s fair."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "wingull", "min": 270, "max": 277, "weight": 26}, {"species": "pelipper", "min": 272, "max": 279, "weight": 14}, {"species": "azurill", "min": 271, "max": 278, "weight": 12}, {"species": "corsola", "min": 272, "max": 279, "weight": 10}], "water": [{"species": "tentacool", "min": 268, "max": 276, "weight": 24}, {"species": "tentacruel", "min": 272, "max": 278, "weight": 6}, {"species": "wingull", "min": 268, "max": 276, "weight": 20}, {"species": "pelipper", "min": 271, "max": 278, "weight": 10}, {"species": "magikarp", "min": 268, "max": 274, "weight": 14}, {"species": "wailmer", "min": 270, "max": 278, "weight": 10}, {"species": "carvanha", "min": 270, "max": 277, "weight": 10}, {"species": "sharpedo", "min": 273, "max": 278, "weight": 5}], "waterRate": 0.08},
     "items": [],
@@ -3271,7 +3271,7 @@ export const MAPS7 = {
       {"x": 27, "y": 9, "to": {"map": "r131", "x": 1, "y": 9}},
     ],
     "signs": [
-      {"x": 3, "y": 5, "text": "ROUTE 130 — The last quiet water before the raft town’s corridor. Corsola gardens show through the shallows."},
+      {"x": 3, "y": 5, "text": "ROUTE 130 — The last quiet water before the raft town’s corridor. CORALET gardens show through the shallows."},
     ],
     "npcs": [
     ],
