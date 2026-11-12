@@ -1141,7 +1141,7 @@ export const SPECIES_HOENN = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   regirock: {
-    id: 'regirock', name: 'Regirock', dexNo: 377, types: ['rock'],
+    id: 'regirock', name: 'PETRAGOLEM', dexNo: 377, types: ['rock'],
     base: { hp: 80, atk: 100, def: 200, spa: 50, spd: 100, spe: 50 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 37701,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1150,7 +1150,7 @@ export const SPECIES_HOENN = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   regice: {
-    id: 'regice', name: 'Regice', dexNo: 378, types: ['ice'],
+    id: 'regice', name: 'CRYOGOLEM', dexNo: 378, types: ['ice'],
     base: { hp: 80, atk: 50, def: 100, spa: 100, spd: 200, spe: 50 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 37801,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -1159,7 +1159,7 @@ export const SPECIES_HOENN = {
     tm: [2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   registeel: {
-    id: 'registeel', name: 'Registeel', dexNo: 379, types: ['steel'],
+    id: 'registeel', name: 'SIDEROGOLEM', dexNo: 379, types: ['steel'],
     base: { hp: 80, atk: 75, def: 150, spa: 75, spd: 150, spe: 50 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 37901,
     eggGroups: ['no-eggs'], hatchCounter: 80,

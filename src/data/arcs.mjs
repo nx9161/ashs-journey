@@ -178,10 +178,10 @@ export const ARCS = [
     hookGiver: 'gary', embarkPort: 'vermilion', arrivalMap: 'sandgem', home: 'pallet',
     summaryLines: [
       'Lily of the Valley Conference — HONOURS.',
-      'Eight badges, a god unchained and answered, and the only victory anyone took from the conference\'s darkest trainer. History will remember the attempt — and the Darkrai that fell.',
+      'Eight badges, a god unchained and answered, and the only victory anyone took from the conference\'s darkest trainer. History will remember the attempt — and the NOCTARCH that fell.',
     ],
     hookLines: [
-      'Gary came by the lab while you were away — back from a northern region called Borea, with an Electivire at his side and stories that sound half like weather reports, half like scripture.',
+      'Gary came by the lab while you were away — back from a northern region called Borea, with an VOLTYETI at his side and stories that sound half like weather reports, half like scripture.',
       'Mountains that touch the sky, lakes older than kingdoms, and something sleeping at the top of the world. He said one more thing: "Tell Ash the north is not finished with trainers like us."',
       'The Shingle-bound ship sails from Arcport. Go and see what Gary saw.',
     ],
@@ -287,7 +287,7 @@ export const ARC_FINALE_ECHOES = {
   johto: 'Yamato asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Lastlight Conference.',
   hoenn: 'Maris argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
   frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
-  sinnoh: 'And Borea: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
+  sinnoh: 'And Borea: a god in red chains, a world behind the world, and a NOCTARCH that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
 };
 
 export const FINALE_CREDITS_OPEN = [

@@ -16,7 +16,7 @@
 // Mt. Requiem orbs, the hideouts, Sunken Cavern, the drought/deluge
 // climax (which sets/clears the weather override flags the H4a
 // renderer reads — src/game/weather.mjs: climax_drought /
-// climax_deluge), the Lucario special, and the Perennial Conference
+// climax_deluge), the AURAJACK special, and the Perennial Conference
 // -> hoenn_complete through the Foundation machine.
 //
 // The visual weather layer itself lives in src/game/weather.mjs
@@ -684,7 +684,7 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'regirock', level: 285, legendary: true } },
     { arc: 'arc_regirock', stage: 'complete' },
     { flag: 'arc_regirock_done' },
-    { toast: 'Regirock is yours. The tomb settles back into its long, unbothered silence.' },
+    { toast: 'PETRAGOLEM is yours. The tomb settles back into its long, unbothered silence.' },
   ],
   ev_hoenn_regice: [
     { say: ['The inner chamber is a held breath of blue-white. The cold coming off the figure at its heart is not weather — it is a decision, made a very long time ago, to never melt. Crystals tick and settle in its surface like a slow clock.', 'Seven lights wake in its featureless face, one by one, the way stars come out. It has been cold for three thousand years. It can spare you a battle.'], who: 'NARRATOR' },
@@ -692,7 +692,7 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'regice', level: 285, legendary: true } },
     { arc: 'arc_regice', stage: 'complete' },
     { flag: 'arc_regice_done' },
-    { toast: 'Regice is yours. Behind you, the cave\'s cold softens by one honest degree.' },
+    { toast: 'CRYOGOLEM is yours. Behind you, the cave\'s cold softens by one honest degree.' },
   ],
   ev_hoenn_registeel: [
     { say: ['The inner chamber gleams dully, every surface worn smooth by centuries of stillness. At its heart, something the colour of old iron unfolds from a crouch it has held since the cliff above was young — slowly, joint by joint, like a gate deciding to be a guardian instead.', 'Seven lights arrange themselves in its face. The metal of it is wrong for any forge: too dark, too patient, fallen out of the sky before there were smiths to wonder at it.'], who: 'NARRATOR' },
@@ -700,7 +700,7 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'registeel', level: 285, legendary: true } },
     { arc: 'arc_registeel', stage: 'complete' },
     { flag: 'arc_registeel_done' },
-    { toast: 'Registeel is yours. The tomb\'s gleam dims, its long watch handed over.' },
+    { toast: 'SIDEROGOLEM is yours. The tomb\'s gleam dims, its long watch handed over.' },
   ],
   // Latias: the roaming face — fired by the sysLoadMap roam hook
   // when the player enters whichever staged landing she currently
@@ -808,7 +808,7 @@ export const HOENN_LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the dotted inscription on the stone by the Dune Tomb door', flag: 'regi_rock_read' },
       { text: 'Stand before the sealstone and wait out the six slow breaths it asks for', flag: 'regi_rock_open' },
-      { text: 'Face Regirock, level 285, beyond the parted sealstones', catch: 'regirock' },
+      { text: 'Face PETRAGOLEM, level 285, beyond the parted sealstones', catch: 'regirock' },
     ],
     lair: 'desert-ruins',
   },
@@ -818,7 +818,7 @@ export const HOENN_LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the dotted inscription on the stone by the Sea Tomb door', flag: 'regi_ice_read' },
       { text: 'Greet the chamber\'s two boulders in the inscription\'s order — west first, then east', flag: 'regi_ice_open' },
-      { text: 'Face Regice, level 285, beyond the parted sealstones', catch: 'regice' },
+      { text: 'Face CRYOGOLEM, level 285, beyond the parted sealstones', catch: 'regice' },
     ],
     lair: 'island-cave',
   },
@@ -828,7 +828,7 @@ export const HOENN_LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the dotted inscription on the stone by the Iron Tomb door', flag: 'regi_steel_read' },
       { text: 'Press your hand to the sealstone with a Steel-type partner standing beside you', flag: 'regi_steel_open' },
-      { text: 'Face Registeel, level 285, beyond the parted sealstones', catch: 'registeel' },
+      { text: 'Face SIDEROGOLEM, level 285, beyond the parted sealstones', catch: 'registeel' },
     ],
     lair: 'ancient-tomb',
   },

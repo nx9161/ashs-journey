@@ -1904,11 +1904,11 @@ const driverE = `
     ok('E06 hub ferry return with embark_frontier DELETED still sails (unconditional — the sail menu was offered and the crossing lands on Pallet)',
       menuSeen === true && st.story.position.map === 'pallet' && !st.story.flags.embark_frontier,
       'pos=' + JSON.stringify(st.story.position) + ' menu=' + menuSeen);
-    ok('E07 Scott closing beat fires on the Pallet entry: scott_closing_done set, and his spoken lines salute the conqueror, followed the whole campaign, and point at Hawthorn lab + Gary back from Sinnoh with an Electivire and stories, home first',
+    ok('E07 Scott closing beat fires on the Pallet entry: scott_closing_done set, and his spoken lines salute the conqueror, followed the whole campaign, and point at Hawthorn lab + Gary back from Sinnoh with an VOLTYETI and stories, home first',
       st.story.flags.scott_closing_done === true
       && seen.some(function (l) { return l.indexOf('salutes its conqueror') >= 0; })
       && seen.some(function (l) { return l.indexOf('followed the whole campaign') >= 0; })
-      && seen.some(function (l) { return l.indexOf('Hawthorn') >= 0 && l.indexOf('Gary') >= 0 && l.indexOf('Borea') >= 0 && l.indexOf('Electivire') >= 0; })
+      && seen.some(function (l) { return l.indexOf('Hawthorn') >= 0 && l.indexOf('Gary') >= 0 && l.indexOf('Borea') >= 0 && l.indexOf('VOLTYETI') >= 0; })
       && seen.some(function (l) { return l.indexOf('Home first') >= 0; }),
       'seen=' + seen.join(' | ').slice(0, 240));
     ow = gotoMap(g, 'viridian', 10, 10); drain(g);
@@ -1927,8 +1927,8 @@ const driverE = `
     var regionsBefore = st.story.regionsDone.slice();
     ow = gotoMap(g, 'house-pallet-ash', 4, 4);
     drain(g);
-    var hookSeen = g.ui.log.some(function (e) { return e.lines && e.lines.some(function (l) { return l.indexOf('Electivire') >= 0 && l.indexOf('Borea') >= 0; }); });
-    ok('E09 the Sinnoh homecoming completes at Mom house: the machine delivers Gary hook lines itself (the Electivire line), hook_sinnoh + homecoming_sinnoh set, the directive is cleared',
+    var hookSeen = g.ui.log.some(function (e) { return e.lines && e.lines.some(function (l) { return l.indexOf('VOLTYETI') >= 0 && l.indexOf('Borea') >= 0; }); });
+    ok('E09 the Sinnoh homecoming completes at Mom house: the machine delivers Gary hook lines itself (the VOLTYETI line), hook_sinnoh + homecoming_sinnoh set, the directive is cleared',
       hookSeen && st.story.flags.hook_sinnoh === true && st.story.flags.homecoming_sinnoh === true
       && st.story.arc_directive === null,
       'hook=' + st.story.flags.hook_sinnoh + ' dir=' + st.story.arc_directive);

@@ -408,6 +408,16 @@ export const NAME_REGISTRY = {
     palkia:      { name: 'COSMARCH', status: 'named', wave: 'G-ST8', design: 'cosmarch' },
     heatran:     { name: 'MAGMARCH', status: 'named', wave: 'G-ST8', design: 'magmarch' },
     regigigas:   { name: 'COLOSSOR', status: 'named', wave: 'G-ST8', design: 'colossor' },
+    // -- Wave G Sinnoh, Tranche 9 --
+    giratina:      { name: 'VOIDARCH', status: 'named', wave: 'G-ST9', design: 'voidarch' },
+    giratinaorigin: { name: 'Origin VOIDARCH', status: 'named', wave: 'G-ST9', design: 'voidarch-origin' },
+    cresselia:     { name: 'LUNACYGN', status: 'named', wave: 'G-ST9', design: 'lunacygn' },
+    phione:        { name: 'CLIONEA', status: 'named', wave: 'G-ST9', design: 'clionea' },
+    manaphy:       { name: 'CLIONARCH', status: 'named', wave: 'G-ST9', design: 'clionarch' },
+    darkrai:       { name: 'NOCTARCH', status: 'named', wave: 'G-ST9', design: 'noctarch' },
+    shaymin:       { name: 'GRATHOG', status: 'named', wave: 'G-ST9', design: 'grathog' },
+    shayminsky:    { name: 'Sky GRATHOG', status: 'named', wave: 'G-ST9', design: 'grathog-sky' },
+    arceus:        { name: 'PRIMARCH', status: 'named', wave: 'G-ST9', design: 'primarch' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).

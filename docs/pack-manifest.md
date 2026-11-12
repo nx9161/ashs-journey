@@ -23,19 +23,19 @@ audio subsystem (B2-R3) 25652 B in audio/ + src/engine/audio.mjs.
 | src/game/battle.mjs | 181966 | 3455 | system module (overlay analogue — B2-R1) |
 | src/game/bonds.mjs | 15314 | 266 | system module (overlay analogue — B2-R1) |
 | src/game/contest.mjs | 11597 | 273 | system module (overlay analogue — B2-R1) |
-| src/game/frontier.mjs | 53876 | 1167 | system module (overlay analogue — B2-R1) |
+| src/game/frontier.mjs | 53872 | 1167 | system module (overlay analogue — B2-R1) |
 | src/game/intro.mjs | 12273 | 278 | system module (overlay analogue — B2-R1) |
-| src/game/johto-systems.mjs | 16888 | 358 | system module (overlay analogue — B2-R1) |
+| src/game/johto-systems.mjs | 16898 | 358 | system module (overlay analogue — B2-R1) |
 | src/game/keepsakes.mjs | 10106 | 217 | system module (overlay analogue — B2-R1) |
 | src/game/main-systems.mjs | 48458 | 875 | system module (overlay analogue — B2-R1) |
 | src/game/main.mjs | 66130 | 1318 | system module (overlay analogue — B2-R1) (frozen, cap 1318) |
-| src/game/overworld-systems.mjs | 355885 | 5252 | system module (overlay analogue — B2-R1) (frozen, cap 5254) |
+| src/game/overworld-systems.mjs | 355927 | 5252 | system module (overlay analogue — B2-R1) (frozen, cap 5254) |
 | src/game/overworld.mjs | 66247 | 1367 | system module (overlay analogue — B2-R1) |
 | src/game/rules.mjs | 8096 | 179 | system module (overlay analogue — B2-R1) |
 | src/game/scenes.mjs | 1034 | 36 | system module (overlay analogue — B2-R1) |
 | src/game/seasons.mjs | 6565 | 143 | system module (overlay analogue — B2-R1) |
 | src/game/second-journey.mjs | 5648 | 121 | system module (overlay analogue — B2-R1) |
-| src/game/sinnoh-systems.mjs | 3596 | 76 | system module (overlay analogue — B2-R1) |
+| src/game/sinnoh-systems.mjs | 3605 | 76 | system module (overlay analogue — B2-R1) |
 | src/game/state.mjs | 18913 | 380 | system module (overlay analogue — B2-R1) |
 | src/game/sync.mjs | 27640 | 614 | system module (overlay analogue — B2-R1) |
 | src/game/title.mjs | 20023 | 459 | system module (overlay analogue — B2-R1) |
@@ -45,37 +45,37 @@ audio subsystem (B2-R3) 25652 B in audio/ + src/engine/audio.mjs.
 | src/data/battler-tiers.mjs | 16401 | 537 | content pack (NARC analogue — B2-R2) |
 | src/data/contest.mjs | 10039 | 203 | content pack (NARC analogue — B2-R2) |
 | src/data/dialogue.mjs | 13359 | 167 | content pack (NARC analogue — B2-R2) |
-| src/data/forms.mjs | 39100 | 220 | content pack (NARC analogue — B2-R2) |
+| src/data/forms.mjs | 39103 | 220 | content pack (NARC analogue — B2-R2) |
 | src/data/frontier.mjs | 18086 | 295 | content pack (NARC analogue — B2-R2) |
 | src/data/grounds.mjs | 17148 | 388 | content pack (NARC analogue — B2-R2) |
 | src/data/idle-classes.mjs | 14389 | 560 | content pack (NARC analogue — B2-R2) |
-| src/data/items.mjs | 34605 | 336 | content pack (NARC analogue — B2-R2) |
+| src/data/items.mjs | 34603 | 336 | content pack (NARC analogue — B2-R2) |
 | src/data/maps.mjs | 24047 | 522 | content pack (NARC analogue — B2-R2) |
-| src/data/maps2.mjs | 109253 | 2533 | content pack (NARC analogue — B2-R2) |
+| src/data/maps2.mjs | 109252 | 2533 | content pack (NARC analogue — B2-R2) |
 | src/data/maps3.mjs | 109560 | 2227 | content pack (NARC analogue — B2-R2) |
 | src/data/maps4.mjs | 20116 | 488 | content pack (NARC analogue — B2-R2) |
 | src/data/maps5.mjs | 115588 | 4849 | content pack (NARC analogue — B2-R2) |
 | src/data/maps6.mjs | 272770 | 12067 | content pack (NARC analogue — B2-R2) |
 | src/data/maps7.mjs | 255862 | 4329 | content pack (NARC analogue — B2-R2) |
 | src/data/maps8.mjs | 30583 | 1312 | content pack (NARC analogue — B2-R2) |
-| src/data/maps9.mjs | 324049 | 5668 | content pack (NARC analogue — B2-R2) |
+| src/data/maps9.mjs | 324071 | 5668 | content pack (NARC analogue — B2-R2) |
 | src/data/merge.mjs | 2347 | 41 | content pack (NARC analogue — B2-R2) |
 | src/data/moves.mjs | 3419 | 28 | content pack (NARC analogue — B2-R2) |
 | src/data/moves2.mjs | 21558 | 141 | content pack (NARC analogue — B2-R2) |
-| src/data/name-registry.mjs | 56403 | 759 | content pack (NARC analogue — B2-R2) |
+| src/data/name-registry.mjs | 66242 | 889 | content pack (NARC analogue — B2-R2) |
 | src/data/narrative-db.mjs | 63169 | 379 | content pack (NARC analogue — B2-R2) |
 | src/data/quests.mjs | 24878 | 395 | content pack (NARC analogue — B2-R2) |
 | src/data/rivals.mjs | 1386 | 30 | content pack (NARC analogue — B2-R2) |
 | src/data/species.mjs | 7546 | 148 | content pack (NARC analogue — B2-R2) |
 | src/data/species2.mjs | 91138 | 1400 | content pack (NARC analogue — B2-R2) |
 | src/data/species3.mjs | 57190 | 859 | content pack (NARC analogue — B2-R2) |
-| src/data/species4.mjs | 83076 | 1263 | content pack (NARC analogue — B2-R2) |
-| src/data/species5.mjs | 69331 | 1057 | content pack (NARC analogue — B2-R2) |
-| src/data/story-hoenn.mjs | 95440 | 1086 | content pack (NARC analogue — B2-R2) |
+| src/data/species4.mjs | 83083 | 1263 | content pack (NARC analogue — B2-R2) |
+| src/data/species5.mjs | 69358 | 1057 | content pack (NARC analogue — B2-R2) |
+| src/data/story-hoenn.mjs | 95455 | 1086 | content pack (NARC analogue — B2-R2) |
 | src/data/story-johto.mjs | 90088 | 1026 | content pack (NARC analogue — B2-R2) |
-| src/data/story-kanto.mjs | 71233 | 1101 | content pack (NARC analogue — B2-R2) |
+| src/data/story-kanto.mjs | 71261 | 1101 | content pack (NARC analogue — B2-R2) |
 | src/data/story-orange.mjs | 24369 | 287 | content pack (NARC analogue — B2-R2) |
-| src/data/story-sinnoh.mjs | 121442 | 1149 | content pack (NARC analogue — B2-R2) |
+| src/data/story-sinnoh.mjs | 121566 | 1149 | content pack (NARC analogue — B2-R2) |
 | src/data/story.mjs | 5946 | 139 | content pack (NARC analogue — B2-R2) |
 | src/save/schema.mjs | 33441 | 557 | save subsystem |
 | src/save/store.mjs | 2007 | 70 | save subsystem |

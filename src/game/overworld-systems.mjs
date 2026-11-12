@@ -21,12 +21,12 @@ import { ContestScene, hasRibbon } from './contest.mjs';
 import { startFrontier, startBrainAudience, talkFrontierScott, tryScottClosing, frontierOnWarpLanding, frontierOnStep } from './frontier.mjs';
 import { PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
 import { RIBBON_NAMES, CONTEST_RANKS } from '../data/contest.mjs';
-import { switchForme, FORME_FAMILIES, FORME_OF, ROTOM_APPLIANCES, partyKnowsFieldMove, badgeHeld } from './sinnoh-systems.mjs';
+import { switchForme, FORME_FAMILIES, FORME_OF, SPARKIMP_APPLIANCES, partyKnowsFieldMove, badgeHeld } from './sinnoh-systems.mjs';
 import { EVENTS, MAIN_QUESTS, LEGENDARY_ARCS, CREDITS_LINES } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
 import { HOENN_QUESTS } from '../data/story-hoenn.mjs';
-import { SINNOH_QUESTS, roamLanding, MESPRIT_LANDINGS, CRESSELIA_LANDINGS, HALLOWED_TOWER } from '../data/story-sinnoh.mjs';
+import { SINNOH_QUESTS, roamLanding, EMPATHIS_LANDINGS, LUNACYGN_LANDINGS, HALLOWED_TOWER } from '../data/story-sinnoh.mjs';
 import { DIVE_PAIRS } from '../data/maps7.mjs';
 import { QUESTS, taleSpotAt, taleStageOf, taleStatus, acceptTale, advanceTale, completeTale, IOU_PRIORITY } from '../data/quests.mjs';
 import { applyBond, applyBondOnce, bondOf, bondSceneLines, bondTrainerVariant, recordBattleBond, tierAtLeast, takeEchoGreeting, ECHO_LINE, BOND_NPC_IDS } from './bonds.mjs';
@@ -401,14 +401,14 @@ Object.assign(OverworldScene.prototype, {
     // Stage S6 (Borea legendary arcs): discovery, faces, roamers —
     // the H6 idiom (faces gated on their arcs' own progress flags;
     // the catch-only chain leaves flee/KO unwritten, so faces
-    // re-fire). The lake trio + Dialga/Palkia/Giratina key ONLY on
-    // sinnoh_climax_resolved (+ S5b's wake flags; Palkia behind
-    // Dialga's catch). Mesprit + Cresselia roam on the Latias
+    // re-fire). The lake trio + CHRONARCH/COSMARCH/VOIDARCH key ONLY on
+    // sinnoh_climax_resolved (+ S5b's wake flags; COSMARCH behind
+    // CHRONARCH's catch). EMPATHIS + LUNACYGN roam on the Latias
     // precedent, generalised data-side: one pure landing function
     // (roamLanding) over the persisted step counter, two roamers,
-    // disjoint landing sets, ZERO new save state. Heatran rides
-    // Buck's accompaniment; Regigigas reads the party's Regi
-    // presence live; Darkrai rides the inn event; Manaphy's arc
+    // disjoint landing sets, ZERO new save state. MAGMARCH rides
+    // Buck's accompaniment; COLOSSOR reads the party's Regi
+    // presence live; NOCTARCH rides the inn event; CLIONARCH's arc
     // completes on the hatch's dex registration (an egg has no face).
     if (!arcCardFired && !g.ui.dialogueOpen) {
       const S6F = g.state.story.flags, S6Q = g.state.story.quests;
@@ -425,11 +425,11 @@ Object.assign(OverworldScene.prototype, {
         ['arc_arceus', 'arceus_unlocked'],
       ];
       for (const [arcId, flag] of S6_DISCOVER) if (S6F[flag] && S6Q[arcId] === undefined) S6Q[arcId] = 'discovered';
-      // Manaphy completion sweep: the arc completes on the hatch's
+      // CLIONARCH completion sweep: the arc completes on the hatch's
       // dex registration (checked on every map load).
       if (S6F.manaphy_egg_received && !S6F.arc_manaphy_done && g.state.dex.caught[SPECIES.manaphy.dexNo]) {
         S6F.arc_manaphy_done = true; S6Q.arc_manaphy = 'complete';
-        g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Pokemon!');
+        g.ui.toast('The blue Egg hatched — CLIONARCH, the Seafaring Pokemon!');
       }
       if (id === 'spear-pillar' && S6F.arceus_unlocked && !S6F.arceus_stairs_open && !S6F.ev_sinnoh_arceus_stairs_done) {
         // Stage S7: the flute ceremony outranks the pillar's catch
@@ -455,7 +455,7 @@ Object.assign(OverworldScene.prototype, {
       } else if (id === 'stark-interior' && S6F.magma_stone_returned && !S6F.arc_heatran_done && !S6F.ev_sinnoh_heatran_done) {
         this.runEvent('ev_sinnoh_heatran');
       } else if (id === 'snowpoint-temple-depths' && !S6F.arc_regigigas_done && !S6F.ev_sinnoh_regigigas_done) {
-        // Regigigas: the gate is read live from the party. No trio
+        // COLOSSOR: the gate is read live from the party. No trio
         // -> the statue declines, nothing set; all three -> the face.
         S6Q.arc_regigigas = S6Q.arc_regigigas || 'discovered';
         const triad = ['regirock', 'regice', 'registeel'].filter((s) => (g.state.party || []).some((m) => m && m.speciesId === s)).length;
@@ -472,10 +472,10 @@ Object.assign(OverworldScene.prototype, {
       }
       // The two roamers (after the chain: a lair face outranks a
       // landing on the same load).
-      if (S6F.mesprit_roaming && !S6F.arc_mesprit_done && !S6F.ev_sinnoh_mesprit_done && id === roamLanding(g.state.stepsTotal, MESPRIT_LANDINGS)) {
+      if (S6F.mesprit_roaming && !S6F.arc_mesprit_done && !S6F.ev_sinnoh_mesprit_done && id === roamLanding(g.state.stepsTotal, EMPATHIS_LANDINGS)) {
         this.runEvent('ev_sinnoh_mesprit');
       }
-      if (S6F.cresselia_roaming && !S6F.arc_cresselia_done && !S6F.ev_sinnoh_cresselia_done && id === roamLanding(g.state.stepsTotal, CRESSELIA_LANDINGS)) {
+      if (S6F.cresselia_roaming && !S6F.arc_cresselia_done && !S6F.ev_sinnoh_cresselia_done && id === roamLanding(g.state.stepsTotal, LUNACYGN_LANDINGS)) {
         this.runEvent('ev_sinnoh_cresselia');
       }
     }
@@ -506,8 +506,8 @@ Object.assign(OverworldScene.prototype, {
   sysOnStep(x, y) {
     const g = this.game;
     const t = this.tileAt(x, y);
-    // Arc 4 Stage S4: Shaymin's simplified reversion — a fainted
-    // Sky-forme Shaymin settles back to its land forme (canon's
+    // Arc 4 Stage S4: GRATHOG's simplified reversion — a fainted
+    // Sky-forme GRATHOG settles back to its land forme (canon's
     // night/freeze reversion, recorded in the register).
     for (const m of g.state.party) {
       if (m && m.speciesId === 'shayminsky' && m.hp <= 0 && switchForme(m, 'shaymin', SPECIES)) {
@@ -562,9 +562,9 @@ Object.assign(OverworldScene.prototype, {
     //    every entry until the catch — flee/KO consume nothing).
     {
       const H6_TOMBS = {
-        'desert-ruins': { open: 'regi_rock_open', done: 'arc_regirock_done', ev: 'ev_hoenn_regirock', evDone: 'ev_hoenn_regirock_done', name: 'Regirock' },
-        'island-cave': { open: 'regi_ice_open', done: 'arc_regice_done', ev: 'ev_hoenn_regice', evDone: 'ev_hoenn_regice_done', name: 'Regice' },
-        'ancient-tomb': { open: 'regi_steel_open', done: 'arc_registeel_done', ev: 'ev_hoenn_registeel', evDone: 'ev_hoenn_registeel_done', name: 'Registeel' },
+        'desert-ruins': { open: 'regi_rock_open', done: 'arc_regirock_done', ev: 'ev_hoenn_regirock', evDone: 'ev_hoenn_regirock_done', name: 'PETRAGOLEM' },
+        'island-cave': { open: 'regi_ice_open', done: 'arc_regice_done', ev: 'ev_hoenn_regice', evDone: 'ev_hoenn_regice_done', name: 'CRYOGOLEM' },
+        'ancient-tomb': { open: 'regi_steel_open', done: 'arc_registeel_done', ev: 'ev_hoenn_registeel', evDone: 'ev_hoenn_registeel_done', name: 'SIDEROGOLEM' },
       };
       const tomb = H6_TOMBS[this.mapId];
       if (tomb && y <= 4) {
@@ -956,7 +956,7 @@ Object.assign(OverworldScene.prototype, {
     // the authored sign text speaks exactly as before): the Griseous
     // Orb's chamber sign in Reversal Cave (11,5), the Distortion
     // World's platform dais sign (10,8), and the Ruined Manor's
-    // television sign (16,4) — Rotom's room, appliances included.
+    // television sign (16,4) — SPARKIMP's room, appliances included.
     if (this.mapId === 'turnback-cave' && fx === 11 && fy === 5 && this.griseousInteract()) return true;
     if (this.mapId === 'distortion-platform' && fx === 10 && fy === 8 && this.griseousInteract()) return true;
     if (this.mapId === 'old-chateau' && fx === 16 && fy === 4 && this.rotomInteract()) return true;
@@ -1334,13 +1334,13 @@ Object.assign(OverworldScene.prototype, {
         if (!v || v === 'no') return;
         if (this.switchSinnohForme(mon, v)) {
           g.audio.playSfx('levelup');
-          g.ui.say(['The Orb\'s weight shifts — the world tips a degree — and ' + name + ' comes undone and re-knots itself along the grain of the other world. Same partner. Same memories. New edges.', name + ' is now in its ' + SPECIES[v].name.replace('Giratina (', '').replace(')', '') + ' shape.']);
+          g.ui.say(['The Orb\'s weight shifts — the world tips a degree — and ' + name + ' comes undone and re-knots itself along the grain of the other world. Same partner. Same memories. New edges.', name + ' is now in its ' + SPECIES[v].name.replace('VOIDARCH (', '').replace(')', '') + ' shape.']);
         }
       });
     });
     return true;
   },
-  // Arc 4 Stage S6: the Hallowed Tower (Spiritomb's site) — a faced
+  // Arc 4 Stage S6: the Hallowed Tower (CENTWISP's site) — a faced
   // rock object on Route 209 (HALLOWED_TOWER in story-sinnoh.mjs;
   // the object-append idiom: maps9 rows unedited, the (14,6) 'R'
   // tile west of the Forsaken Tower claimed here for this map only).
@@ -1366,7 +1366,7 @@ Object.assign(OverworldScene.prototype, {
     if (!mon) return false;
     const name = displayName(mon, SPECIES);
     const items = FORME_FAMILIES.rotom.filter((id) => id !== mon.speciesId).map((id) => ({
-      label: SPECIES[id].name + (ROTOM_APPLIANCES[id] ? ' — ' + ROTOM_APPLIANCES[id] : ' — leave the appliances behind'),
+      label: SPECIES[id].name + (SPARKIMP_APPLIANCES[id] ? ' — ' + SPARKIMP_APPLIANCES[id] : ' — leave the appliances behind'),
       value: id,
     }));
     items.push({ label: 'Not now', value: 'no' });
@@ -2816,21 +2816,21 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'lucario_keeper') {
-      // The Lucario special (chronology-mapping.md, Chapter 6 —
-      // "Rise Through Maris": Lucario and the Mystery of PRIMARA is
+      // The AURAJACK special (chronology-mapping.md, Chapter 6 —
+      // "Rise Through Maris": AURAJACK and the Mystery of PRIMARA is
       // listed among Maris's special story events, so it stages
       // IN-ARC, here). Original writing; the Tree of Beginning beat
       // is abstracted to our fiction — a great-tree root chamber in
       // Meadowbrook Woods and an aura that walked like a friend.
-      // Honest limit, recorded: Lucario is a Borea-dex species
-      // (Arc 4's horizon), so no Lucario battle or catch is staged
+      // Honest limit, recorded: AURAJACK is a Borea-dex species
+      // (Arc 4's horizon), so no AURAJACK battle or catch is staged
       // or faked here; the event is the aura-legend beat itself.
       if (flags.lucario_event_done) { say(['The tree keeps its counsel and its flowers, {player}. Some meetings are not battles, and some friends are not caught. They are recognised. Walk well — something in the wood is walking well because you stopped here.']); return true; }
       say(['You feel it too, then. Everyone with a kind team does, eventually, in this part of the wood. Sit a moment, trainer. The old tree is telling its story again, and it tells it in aura, not words — I only translate.', 'Long ago — the keepers\' count says before the gyms, before the League — a guardian walked these woods whose aura burned the blue of deep water. No ball ever held it. No trainer ever commanded it. It came when the tree was threatened, it fought like weather, and it stayed, afterward, the way a friend stays: without being asked twice.', 'The time-flowers still open along the roots when a worthy aura passes. Look — along the north root. Opening. For YOUR team, trainer, the way the stories say they opened for the guardian\'s friend, all those centuries ago. Whatever road that aura walked next... the flowers think yours rhymes with it.', 'Take that with you. Not a badge, not a ribbon — a recognition. The wood remembers a lucario-hearted guardian, and today it decided your team walks in the same light. Somewhere far north, in a region of mountains and snow, that story has a second half. But its first half happened HERE, in Maris\'s green dark, and now you are in it.'], () => {
         flags.lucario_event_done = true;
         flags.lucario_aura_seen = true;
         g.audio.playSfx('dex-register');
-        g.ui.toast('The aura flowers opened — the Lucario legend, witnessed in Maris.');
+        g.ui.toast('The aura flowers opened — the AURAJACK legend, witnessed in Maris.');
       });
       return true;
     }
@@ -2996,7 +2996,7 @@ Object.assign(OverworldScene.prototype, {
   // the shared leader runner; the badge-order refusal reads
   // badges.sinnoh (the generic Yamato/Maris path). Paul's beats are
   // the arc's spine: the lab battle is an entry EVENT (ev_sinnoh_lab);
-  // here are his Heritage assessment, the Inglenook Chimchar beat, and
+  // here are his Heritage assessment, the Inglenook SIMMER beat, and
   // the Shardfall audit battle. Dawn's Inglenook beat mirrors May's
   // contest beats (dialogue-only story state on the shipped Super
   // Contest system — the player's own ranked entries are S4's).
@@ -3029,10 +3029,10 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'rowan') {
       if (!flags.sinnoh_arrival && !flags.ev_sinnoh_arrival_done) { say(['The lab is at the north end of Shingle, trainer — tall windows, taller reputation.']); return true; }
       // Stage S6: Rowan delivers the two post-Conference gifts (the
-      // Manaphy Egg, then Oak's Letter) — two talks, fixed order;
+      // CLIONARCH Egg, then Oak's Letter) — two talks, fixed order;
       // the egg is refused (nothing set) when there is no room.
       if (flags.sinnoh_complete && !flags.manaphy_egg_received) {
-        say(['Ah. {player}. Come here — carefully, mind the warmth lamp. Something has been keeping this lab warmer than my tea since before the Conference, and it has your name on the crate.', 'A Ranger out of Fiore delivered it — by sea, by hand, the whole way, with instructions stricter than my own: the blue Egg goes to the trainer who finished the Lily of the Valley road, and to no one sooner. It hatches at the band floor of whatever road it walks, {player} — here, that means level 301, and it means Manaphy. The sea keeps a prince. Walk it gently.'], () => {
+        say(['Ah. {player}. Come here — carefully, mind the warmth lamp. Something has been keeping this lab warmer than my tea since before the Conference, and it has your name on the crate.', 'A Ranger out of Fiore delivered it — by sea, by hand, the whole way, with instructions stricter than my own: the blue Egg goes to the trainer who finished the Lily of the Valley road, and to no one sooner. It hatches at the band floor of whatever road it walks, {player} — here, that means level 301, and it means CLIONARCH. The sea keeps a prince. Walk it gently.'], () => {
           const res = deliverEggCapSafe(st, 'manaphy');
           if (!res || !res.ok) { g.ui.say(['No room, {player} — party full and boxes full. Make space and come back; the Egg is not going anywhere warmer than right here.'.replace('{player}', st.player.name)], null, npc.name); return; }
           flags.manaphy_egg_received = true;
@@ -3056,7 +3056,7 @@ Object.assign(OverworldScene.prototype, {
       return true;
     }
 
-    // Stage S6: Buck — meeting him (post-climax) discovers Heatran.
+    // Stage S6: Buck — meeting him (post-climax) discovers MAGMARCH.
     if (kind === 'buck') {
       if (flags.arc_heatran_done) say(['Caught him proper, did you? Ha! The mountain\u2019s temper and my temper both — settled. You climb like family now, trainer. Mind the stone stays PUT.']);
       else if (flags.magma_stone_returned) say(['Stone\u2019s back, and you can feel the change through your boots, can\u2019t you? He wakes slow. Go up and knock on the crater, trainer — politely. With your whole team.']);
@@ -3130,7 +3130,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'paul_eterna') {
       if (flags.paul_veilstone_done) { say(['Still ahead of my projections, {player}. The lakes will re-audit us both. Be there.']); return true; }
       if (!flags.paul_eterna_seen) {
-        say(['You took Gardenia\'s measure. Adequate. The Roserade folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Pokemon. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
+        say(['You took Gardenia\'s measure. Adequate. The BOUQUADE folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Pokemon. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
         return true;
       }
       say(['Still counting, {player}. Inglenook next — Fantina\'s theatre. Try not to be decorative about it.']);
@@ -3148,10 +3148,10 @@ Object.assign(OverworldScene.prototype, {
         say(['A trainer of mine is about to stop being a trainer of mine, in this city. Watch, if your road has the time. Yours usually finds time for strays.', 'Fantina first, {player}. Order matters. Even in discarding.']);
         return true;
       }
-      // ---- the Chimchar beat ----
-      say(['There. Look at it, since you are here. A Chimchar I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Pokemon\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
+      // ---- the SIMMER beat ----
+      say(['There. Look at it, since you are here. A SIMMER I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Pokemon\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
         say(['The little fire-type watches Paul walk away without a sound. Its flame is lit. Its stance, when it turns to you, is a question it has clearly been practicing: not can I win — but will anyone stay long enough to find out?'], () => {
-          g.ui.showMenu('Take the Chimchar in?', [
+          g.ui.showMenu('Take the SIMMER in?', [
             { label: 'Take it in', value: 'yes' },
             { label: 'Leave it to the road', value: 'no' },
           ], (v) => {
@@ -3165,15 +3165,15 @@ Object.assign(OverworldScene.prototype, {
               ? this.cheatDeliverMon('chimchar', 320, 'party')
               : this.cheatDeliverMon('chimchar', 320, 'box');
             if (!res.ok) {
-              g.ui.say(['There is no room anywhere — party full and every PC box full. Make room, and come back. The Chimchar waits; it has had practice at waiting.'], null, '');
+              g.ui.say(['There is no room anywhere — party full and every PC box full. Make room, and come back. The SIMMER waits; it has had practice at waiting.'], null, '');
               return;
             }
             flags.chimchar_beat_done = true;
             flags.chimchar_taken = true;
             g.audio.playSfx('dex-register');
-            if (res.dest === 'box' && res.boxId) g.ui.toast('Chimchar was sent to ' + res.boxId.replace('box', 'Box ') + '!');
-            else g.ui.toast('Chimchar joined the party!');
-            say(['It does not hesitate. Whatever Paul\'s ledger said, the Chimchar has done its own arithmetic about you — the whole of it, in one look — and chosen.', 'Train it however you train yours, {player}. If it wins for you where it could not win for him, then one of our ledgers is wrong. I find I am... content to let the lakes decide which.'], null, 'PAUL');
+            if (res.dest === 'box' && res.boxId) g.ui.toast('SIMMER was sent to ' + res.boxId.replace('box', 'Box ') + '!');
+            else g.ui.toast('SIMMER joined the party!');
+            say(['It does not hesitate. Whatever Paul\'s ledger said, the SIMMER has done its own arithmetic about you — the whole of it, in one look — and chosen.', 'Train it however you train yours, {player}. If it wins for you where it could not win for him, then one of our ledgers is wrong. I find I am... content to let the lakes decide which.'], null, 'PAUL');
           });
         }, '');
       });
@@ -3186,7 +3186,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       say(flags.chimchar_taken
-        ? ['A Chimchar with a Paul-shaped past and a {player}-shaped future. Feed it steady, train it honest, and let it win at its own pace. That is the whole method, and it has never once been the slow one that mattered.']
+        ? ['A SIMMER with a Paul-shaped past and a {player}-shaped future. Feed it steady, train it honest, and let it win at its own pace. That is the whole method, and it has never once been the slow one that mattered.']
         : ['Paul trains the way winter farms — nothing kept that cannot survive the season. I keep everything and feed it twice. Shardfall raised us both, trainer. The city declines to pick a favorite.']);
       return true;
     }
@@ -3262,7 +3262,7 @@ Object.assign(OverworldScene.prototype, {
                 say(t0.lose, null, 'PAUL');
               } else {
                 flags.paul_acuity_lost = true;
-                say(['...Six. All six, {player}. I did not lose a battle on that lake — I performed an autopsy on one, mid-battle, with the whole of my team as the instrument.', 'This is what my arithmetic was FOR, and do you see what it bought? A full page of evidence that the way I have been counting is not the way winning is counted. Chimchar knew. It knew at Inglenook, standing in the road. I have been the last to know everything important in this region.', 'Again at the Conference — if the bracket is honest. I will not be carrying the same ledger. Neither, I suspect, will you.'], null, 'PAUL');
+                say(['...Six. All six, {player}. I did not lose a battle on that lake — I performed an autopsy on one, mid-battle, with the whole of my team as the instrument.', 'This is what my arithmetic was FOR, and do you see what it bought? A full page of evidence that the way I have been counting is not the way winning is counted. SIMMER knew. It knew at Inglenook, standing in the road. I have been the last to know everything important in this region.', 'Again at the Conference — if the bracket is honest. I will not be carrying the same ledger. Neither, I suspect, will you.'], null, 'PAUL');
               }
             },
           }));
@@ -3289,10 +3289,10 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'sailor_eldric') {
-      // The Darkrai beat (Bridgeport): a glimpse chain, staged here —
+      // The NOCTARCH beat (Bridgeport): a glimpse chain, staged here —
       // the plea (Mine Badge held) -> Brightmoon Island's entry event
-      // (Cresselia's glimpse + the Lunar Wing) -> the boy wakes.
-      // Darkrai itself is S6's arc: darkrai_unlocked is its flavour
+      // (LUNACYGN's glimpse + the Lunar Wing) -> the boy wakes.
+      // NOCTARCH itself is S6's arc: darkrai_unlocked is its flavour
       // flag, set on the waking, never a catch here.
       if (flags.darkrai_beat_done) { say(['Sleeping like a stone in a river, my boy — deep, ordinary, dreamless sleep, the kind with drool in it. A father could frame that drool. Whatever stood over his bed has gone wherever uninvited things go when a light is lit in the room. The wing did it, trainer. You did it.']); return true; }
       if (flags.lunar_wing_received) {
@@ -3306,7 +3306,7 @@ Object.assign(OverworldScene.prototype, {
       }
       if (flags.darkrai_beat_started) { say(['Brightmoon Island, trainer — the boatman runs there from this very pier, and her island is past it, where the moon stands full. Bring back her feather. Bring back my boy\'s mornings.']); return true; }
       if (!sBadges.includes('minebadge')) { say(['Mind the gulls, trainer. Everything in this port is watching something. Mine is a window up there with the curtain drawn, where my boy has been asleep a month — asleep, and dreaming of a dark shape that stands over the bed and will not be argued with. When you have the Mine Badge, come back to me. I will have a favour to ask that I do not ask lightly.']); return true; }
-      say(['You have Byron\'s badge — then you are the trainer the harbour says you are, and I can ask it plain. My son, trainer. A month asleep in the house by the pier, and every night the same dream: a dark shape over the bed, patient as debt. The doctors use the word nightmares the way sailors use the word weather — for things they cannot steer.', 'The old cure is not a doctor\'s. On Brightmoon Island, where the moon stands full over a crescent pond, SHE keeps her court — Cresselia, whose feathers are made of the light that ends bad dreams. The boatman will take you. Bring me a Lunar Wing, and I will bring you a boy eating breakfast. That is the whole contract.'], () => { flags.darkrai_beat_started = true; });
+      say(['You have Byron\'s badge — then you are the trainer the harbour says you are, and I can ask it plain. My son, trainer. A month asleep in the house by the pier, and every night the same dream: a dark shape over the bed, patient as debt. The doctors use the word nightmares the way sailors use the word weather — for things they cannot steer.', 'The old cure is not a doctor\'s. On Brightmoon Island, where the moon stands full over a crescent pond, SHE keeps her court — LUNACYGN, whose feathers are made of the light that ends bad dreams. The boatman will take you. Bring me a Lunar Wing, and I will bring you a boy eating breakfast. That is the whole contract.'], () => { flags.darkrai_beat_started = true; });
       return true;
     }
 
@@ -3314,7 +3314,7 @@ Object.assign(OverworldScene.prototype, {
       // The registrar (the Maris registrar's idiom): registration
       // is gated on eight badges + the climax resolved — the
       // Conference does not open its bracket over an unmended sky.
-      if (flags.sinnoh_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Lily of the Valley book in the good ink, trainer — twice: once for the bracket, and once in the margin next to a Darkrai, where the clerks keep the results they still argue about.']); return true; }
+      if (flags.sinnoh_complete) { say(['The bracket is archived, the confetti is swept, and your name is in the Lily of the Valley book in the good ink, trainer — twice: once for the bracket, and once in the margin next to a NOCTARCH, where the clerks keep the results they still argue about.']); return true; }
       if (sBadges.length < 8) { say(['Conference registration, trainer — and your case is not finished yet. Eight Borea badges open this bracket; you hold ' + sBadges.length + '. Brightshore is the usual last stop. I will keep your page open.']); return true; }
       if (!flags.sinnoh_climax_resolved) { say(['Eight badges — counted, verified, well carried. And yet I cannot open the bracket while the sky over Mt. Apex is still torn, trainer. Finish the region\'s gods first. The Conference will be here; it has waited through worse than a titan or two. Well. Comparable.']); return true; }
       if (!flags.sinnoh_conference_registered) {
@@ -3326,7 +3326,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       if (!flags.beat_conference_s_p1) {
-        say(['The preliminary, trainer. Tamsin, of the sea roads — a clean battler with a cleaner record, and Garchomp in the back like a held chord. The floor is yours when you call it.'], () => {
+        say(['The preliminary, trainer. Tamsin, of the sea roads — a clean battler with a cleaner record, and APEXSHARK in the back like a held chord. The floor is yours when you call it.'], () => {
           g.ui.showMenu('Begin the preliminary?', [
             { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
           ], (v) => { if (v === 'yes') this.startSinnohBattle('conference_s_p1', null); });
@@ -3346,7 +3346,7 @@ Object.assign(OverworldScene.prototype, {
       // rivalry resolves with the player's win, as canon has it;
       // the engine never hard-locks.
       if (flags.sinnoh_complete) { say(['The book is closed, {player}, and the last page of the ledger is the one I would not change. Semi-finals and semi-legends — go home a while. Even ledgers rest.']); return true; }
-      if (flags.paul_conference_done) { say(['Settled, {player}. In ink. Now go and find out what is standing past me — I have seen his Darkrai work from the tunnel, and my arithmetic has opinions it is keeping to itself for once.']); return true; }
+      if (flags.paul_conference_done) { say(['Settled, {player}. In ink. Now go and find out what is standing past me — I have seen his NOCTARCH work from the tunnel, and my arithmetic has opinions it is keeping to itself for once.']); return true; }
       if (!flags.beat_conference_s_p1) { say(['The bracket does not bend, {player} — not even for us. Tamsin first. Then you may have the match this whole region has been a draft of.']); return true; }
       const t0 = TRAINERS.paul_conference;
       say([t0.intro[0], t0.intro[1]], () => {
@@ -3368,7 +3368,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'tobias') {
       // THE TOBIAS MECHANISM (the coordinator's S5b ruling, line
       // by line): Act 1 is a REAL battle on the league rechallenge
-      // idiom (startSinnohBattle — not friendly, not faced): Darkrai
+      // idiom (startSinnohBattle — not friendly, not faced): NOCTARCH
       // ALONE at 390, authored beatable in-band. A win sets
       // tobias_darkrai_felled; a full wipe before that is a defeat
       // and a rematch — nothing concludes, nothing is set. Act 2
@@ -3380,12 +3380,12 @@ Object.assign(OverworldScene.prototype, {
       // machine fires (checkArcCompletion — the registry's card,
       // regionsDone and directive are the machine's own writes).
       // No hand-rolled ending; S7 owns the finale variant.
-      if (flags.sinnoh_complete) { say(['The book has it now, trainer: the Darkrai that fell, and the match that followed. Trainers will sail to this island for years to argue about that semi-final, and every one of them will get the first line right: you were the one who stood there. Travel well. The road past a Conference is the only undefeated thing left.']); return true; }
+      if (flags.sinnoh_complete) { say(['The book has it now, trainer: the NOCTARCH that fell, and the match that followed. Trainers will sail to this island for years to argue about that semi-final, and every one of them will get the first line right: you were the one who stood there. Travel well. The road past a Conference is the only undefeated thing left.']); return true; }
       if (!flags.paul_conference_done) { say(['Tobias. I have watched every match in this hall, including yours — your quarter-final is still ahead of you, and I do not stand in front of unfinished brackets. Settle Paul first, trainer. Then come and ask me the question everyone else has failed.']); return true; }
       if (!flags.tobias_darkrai_felled) {
         const t0 = TRAINERS.tobias_darkrai;
         say([t0.intro[0], t0.intro[1]], () => {
-          g.ui.showMenu('Face Tobias — Darkrai?', [
+          g.ui.showMenu('Face Tobias — NOCTARCH?', [
             { label: 'Battle', value: 'yes' }, { label: 'Not yet', value: 'no' },
           ], (v) => {
             if (v !== 'yes') return;
@@ -3415,10 +3415,10 @@ Object.assign(OverworldScene.prototype, {
                 if (won) flags.tobias_won = true; else flags.tobias_lost = true;
                 const lines = won ? [
                   'Finished. Utterly, honestly finished — by the only trainer who ever got this far into my team, and went the rest of the way on merit. The hall is on its feet, trainer, and so — observe the record — am I.',
-                  'They will write that the darkest trainer of the Conference fell in the semi-final. Let them. What the book cannot hold is the order of it: Darkrai first, by your hand, and then this. History will remember the attempt, they say. It will remember considerably more than that.',
+                  'They will write that the darkest trainer of the Conference fell in the semi-final. Let them. What the book cannot hold is the order of it: NOCTARCH first, by your hand, and then this. History will remember the attempt, they say. It will remember considerably more than that.',
                 ] : [
                   '...And there the match ends — Latios, untouched by everything but the one exchange that mattered, and the judges\' card turning the way every card in this hall has turned all week. The semi-final is his. The loss stands. That is sport, and it is final.',
-                  'But look at the hall, trainer. LOOK at it. They are not standing for the result — they are standing for the first line of the story, the one no other trainer in this Conference could write: DARKRAI FELL. To you. The only victory anyone took from me here — and you took it in front of everyone. The Conference ends, and that is what it ends WITH. Honours, trainer. Full honours.',
+                  'But look at the hall, trainer. LOOK at it. They are not standing for the result — they are standing for the first line of the story, the one no other trainer in this Conference could write: NOCTARCH FELL. To you. The only victory anyone took from me here — and you took it in front of everyone. The Conference ends, and that is what it ends WITH. Honours, trainer. Full honours.',
                 ];
                 say(lines, () => {
                   flags.sinnoh_complete = true;
@@ -4138,15 +4138,15 @@ Object.assign(OverworldScene.prototype, {
   // chain): its inscription, read from the stone by the door (the
   // sign tile at (9,11)), is the only key, and its solution is a
   // concrete action performed in the chamber:
-  //  - Dune Tomb (Regirock): THE STANDING BEAT. Read, then stand
+  //  - Dune Tomb (PETRAGOLEM): THE STANDING BEAT. Read, then stand
   //    before the sealstone (face the sealstone row) and choose to
   //    wait — the shipped choice idiom carries the beat; the desert
   //    counts six slow breaths and the sealstones part.
-  //  - Sea Tomb (Regice): THE GREETING ORDER. Read, then greet
+  //  - Sea Tomb (CRYOGOLEM): THE GREETING ORDER. Read, then greet
   //    the chamber's two boulders (caveboulder tiles) in the
   //    inscription's order — west (2,12) first, east (14,11)
   //    second. The wrong order is politely forgotten by the cold.
-  //  - Iron Tomb (Registeel): IRON ANSWERS IRON. Read, then
+  //  - Iron Tomb (SIDEROGOLEM): IRON ANSWERS IRON. Read, then
   //    press the sealstone with a living Steel-type partner in the
   //    party (partyHasType — the shipped field check).
   // Solving parts the sealstone row (its flag stands; the sysOnStep
@@ -4196,7 +4196,7 @@ Object.assign(OverworldScene.prototype, {
       }
       return true;
     }
-    // Regice's greeting stones.
+    // CRYOGOLEM's greeting stones.
     if (this.mapId === 'island-cave' && kind === 'caveboulder' && ((fx === 2 && fy === 12) || (fx === 14 && fy === 11))) {
       if (f.regi_ice_open || f.arc_regice_done) {
         g.ui.say(['The boulder is cold and faintly pleased with itself, in the manner of furniture that has been thanked.']);

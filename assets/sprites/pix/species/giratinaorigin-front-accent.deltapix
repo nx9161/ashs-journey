@@ -1,10 +1,12 @@
-# giratinaorigin-front-accent — Arc4 S2b accent frame (blink). Recolor-only delta over giratinaorigin-front.
+# giratinaorigin-front-accent — Wave G Sinnoh accent frame (crest (blink fallback)). Recolor-only delta over giratinaorigin-front.
 PIXD giratinaorigin-front-accent giratinaorigin-front 64 64
-22 22 O
-20 23 O
-21 23 O
-22 23 O
-23 23 O
-24 23 O
-22 24 O
+21 3 O
+19 4 O
+20 4 O
+21 4 O
+22 4 O
+20 5 O
+21 5 O
+22 5 O
+23 5 O
 PAL

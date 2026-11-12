@@ -8,7 +8,7 @@
 // stats with HP carried by the max-delta rule. This module is that
 // same swap, generalised over the three Borea families; the Deoxys
 // path itself is untouched. MOVE DELTA (recorded): canon swaps
-// Rotom's appliance move per forme; here every forme family's
+// SPARKIMP's appliance move per forme; here every forme family's
 // learnsets draw from one shared pool (species5 data — the Deoxys
 // design), so moves stay legal in every forme untouched, and no
 // appliance move is auto-taught or auto-forgotten.
@@ -23,8 +23,8 @@ export const FORME_OF = {};
 for (const [base, formes] of Object.entries(FORME_FAMILIES)) {
   for (const id of formes) FORME_OF[id] = base;
 }
-// Rotom's appliances (Ruined Manor, S4): forme id -> the room's object.
-export const ROTOM_APPLIANCES = {
+// SPARKIMP's appliances (Ruined Manor, S4): forme id -> the room's object.
+export const SPARKIMP_APPLIANCES = {
   rotomheat: 'the oven', rotomwash: 'the washing machine',
   rotomfrost: 'the refrigerator', rotomfan: 'the electric fan',
   rotommow: 'the lawn mower',
@@ -66,10 +66,10 @@ export function badgeHeld(state, badgeId) {
   return Object.values(sets).some((v) => Array.isArray(v) && v.includes(badgeId));
 }
 
-// Shaymin's sky reversion, simplified (recorded in the register):
+// GRATHOG's sky reversion, simplified (recorded in the register):
 // canon reverts sky -> land at nightfall or when frozen; here the
 // sky forme persists until the player uses the Gracidea again or
-// Shaymin faints (hp reaches 0 — checked by the caller on the field
+// GRATHOG faints (hp reaches 0 — checked by the caller on the field
 // and after battles through this helper).
 export function shayminReverted(mon) {
   return !!mon && mon.speciesId === 'shayminsky' && mon.hp <= 0;

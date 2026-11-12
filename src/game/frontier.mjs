@@ -230,7 +230,7 @@ export function talkFrontierScott(g, ow) {
 // interrupted, the arc machine's own convention (checkArcCompletion
 // and tryHomecoming both commit before presenting). The scene
 // POINTS at the Borea homecoming — Hawthorn's lab, Gary back from
-// Borea with an Electivire and stories, home first — but does not
+// Borea with an VOLTYETI and stories, home first — but does not
 // duplicate the registry's sinnoh hookLines: the machine delivers
 // the hook itself at Mom's house, untouched, and this beat must not
 // block it (separate map, separate load). Registered here in the
@@ -246,7 +246,7 @@ export function tryScottClosing(g, mapId) {
   g.ui.say([
     'There you are. I followed the whole campaign, trainer — every facility, every Brain, every last gold strike. I would not have missed the end of it for a quieter island.',
     'Seven Symbols, all of them gold. The Trial Grounds salutes its conqueror — and its founder got to watch it happen, door by door.',
-    'One thing more, and it is not about my island. Word came in off the water: Professor Hawthorn\'s lab has a visitor — Gary, fresh home from somewhere called Borea, an Electivire shadowing him and stories enough to fill the room.',
+    'One thing more, and it is not about my island. Word came in off the water: Professor Hawthorn\'s lab has a visitor — Gary, fresh home from somewhere called Borea, an VOLTYETI shadowing him and stories enough to fill the room.',
     'Home first, though — your mother has waited out this whole campaign too. Eat. Rest. Then the lab talk, and whatever road it opens next.',
   ], () => {}, 'SCOTT');
   return true;

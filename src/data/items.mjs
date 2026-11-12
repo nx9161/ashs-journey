@@ -135,17 +135,17 @@ export const ITEMS = {
   itemfinder: { id: 'itemfinder', name: 'Itemfinder', pocket: 'key', desc: 'Beeps near hidden items when used (SELECT near a spot).' },
   townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Arden at a glance. Gary\'s sister would approve.' },
   // Arc 4 Stage S5b: the Lunar Wing — carried away from Brightmoon
-  // Island in the Darkrai beat; S6's Darkmoon arc reads it.
+  // Island in the NOCTARCH beat; S6's Darkmoon arc reads it.
   lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
-  // Arc 4 Stage S6: the Odd Keystone (Spiritomb's stone, a Route 209
-  // traveller's gift) and Oak's Letter (Shaymin's gate, Rowan-granted
-  // post-Conference; no item is invented for Darkrai — the inn event
+  // Arc 4 Stage S6: the Odd Keystone (CENTWISP's stone, a Route 209
+  // traveller's gift) and Oak's Letter (GRATHOG's gate, Rowan-granted
+  // post-Conference; no item is invented for NOCTARCH — the inn event
   // is its key, by flag).
   oddkeystone: { id: 'oddkeystone', name: 'Odd Keystone', pocket: 'key', desc: 'A cracked stone, cold in a way weather does not explain. Something in it is counting. It wants a tower to go home to.' },
   oaksletter: { id: 'oaksletter', name: "Oak's Letter", pocket: 'key', desc: 'A letter in a famous hand, sealed with a sprig pressed flat as a bookmark. It opens a flower field at the end of the sea road — to gratitude, it says. Bring some.' },
   // Arc 4 Stage S7: the Azure Flute — the finale's entrusting (the
   // arc machine grants it at the finale homecoming, never at arc
-  // completion alone); the Arceus capstone at Zenith Spire reads it.
+  // completion alone); the PRIMARCH capstone at Zenith Spire reads it.
   azureflute: { id: 'azureflute', name: 'Azure Flute', pocket: 'key', desc: 'A flute of clear blue glass, older than the mountains it was carved under. Its note is said to build stairs where the sky keeps its first room.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
@@ -224,10 +224,10 @@ export const ITEMS = {
   // medicine errand's whole cargo (delivered to Lumi in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
   secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Pokemon — handle with both hands.' },
-  // Arc 4 Stage S4: the Gracidea — Shaymin's forme key item. Use it
-  // on a Shaymin in the party to swap land <-> sky (the S4 forme
+  // Arc 4 Stage S4: the Gracidea — GRATHOG's forme key item. Use it
+  // on a GRATHOG in the party to swap land <-> sky (the S4 forme
   // switch, game/sinnoh-systems.mjs). Never consumed.
-  gracidea: { id: 'gracidea', name: 'Gracidea', pocket: 'key', desc: 'A flower of gratitude that blooms only for Shaymin. Use it on Shaymin to swap between its land and sky formes.' },
+  gracidea: { id: 'gracidea', name: 'Gracidea', pocket: 'key', desc: 'A flower of gratitude that blooms only for GRATHOG. Use it on GRATHOG to swap between its land and sky formes.' },
   // Stage J5 key item: the Clear Bell, given by Lantern's Kimono
   // sisters once the three awakened beasts are quieted — its chime is
   // the Chime Tower summit's invitation to Ho-Oh (arc_hooh).
@@ -277,7 +277,7 @@ export const KEEPSAKES = {
   // existing resolved kinds ONLY (no new engine kind; the battle-model
   // gate is untouched). Every piece is acquired in-world: the six Town
   // Tales of this half pay them (see SINNOH_TALES), and two double as
-  // gym-ace signatures (Roark's Cranidos, Gardenia's Roserade).
+  // gym-ace signatures (Roark's RAMOSAUR, Gardenia's BOUQUADE).
   dawnribbon: { id: 'dawnribbon', name: 'Dawn Ribbon', kind: 'xpBoost', factor: 1.2, effect: 'Holder gains x1.2 XP.' },
   starshard: { id: 'starshard', name: 'Star Shard', kind: 'underdogDamage', factor: 1.25, levelGap: 3, effect: 'Deals x1.25 damage while 3+ levels below the foe.' },
   coalseamcharm: { id: 'coalseamcharm', name: 'Coal Seam Charm', kind: 'lowHpDamage', moveType: 'rock', factor: 1.15, hpFrac: 0.5, effect: 'Rock moves deal x1.15 while at 50% HP or less.' },
@@ -287,8 +287,8 @@ export const KEEPSAKES = {
   // Arc 4 Stage S5b: Borea's second-half share (4 — the arc total
   // lands at 10). Existing resolved kinds ONLY, same law as S5a.
   // Paid in-world by this half's Town Tales; three double as gym-ace
-  // signatures (Wake's Floatzel, Candice's Abomasnow, Volkner's
-  // Electivire).
+  // signatures (Wake's TIDESEL, Candice's YETIFIR, Volkner's
+  // VOLTYETI).
   fencharm: { id: 'fencharm', name: 'Fen Charm', kind: 'lowHpDamage', moveType: 'water', factor: 1.15, hpFrac: 0.5, effect: 'Water moves deal x1.15 while at 50% HP or less.' },
   shrinebell: { id: 'shrinebell', name: 'Shrine Bell', kind: 'matchupDamage', moveType: 'dragon', vsType: 'dragon', factor: 1.2, effect: 'Dragon moves deal x1.2 vs Dragon-types.' },
   frostpetal: { id: 'frostpetal', name: 'Frost Petal', kind: 'typeWard', moveType: 'fire', factor: 0.8, effect: 'Takes x0.8 damage from Fire moves.' },

@@ -1,11 +1,6 @@
-# cresselia-back-accent — Arc4 S2b accent frame (crest/fin twitch, recolor-only).
+# cresselia-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over cresselia-back.
 PIXD cresselia-back-accent cresselia-back 64 64
-28 9 O
-27 10 O
-28 10 O
-29 10 O
-28 11 O
-29 11 O
-28 12 O
-29 12 O
+11 3 O
+11 4 O
+11 5 O
 PAL

@@ -554,7 +554,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
       { text: 'Open the Desert Tomb' },
-      { text: 'Face Regirock, level 40', catch: 'regirock' },
+      { text: 'Face PETRAGOLEM, level 40', catch: 'regirock' },
     ],
     lair: 'deserttomb',
   },
@@ -564,7 +564,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
       { text: 'Open the Sea Tomb and wait, perfectly still' },
-      { text: 'Face Regice, level 40', catch: 'regice' },
+      { text: 'Face CRYOGOLEM, level 40', catch: 'regice' },
     ],
     lair: 'islandcave',
   },
@@ -574,7 +574,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
       { text: 'Open the Iron Tomb' },
-      { text: 'Face Registeel, level 40', catch: 'registeel' },
+      { text: 'Face SIDEROGOLEM, level 40', catch: 'registeel' },
     ],
     lair: 'ancienttomb',
   },
@@ -656,9 +656,9 @@ export const LEGENDARY_ARCS = {
     prereq: { arcs: ['arc_regirock', 'arc_regice', 'arc_registeel'] },
     hook: 'Rimefall Temple’s lowest floor sleeps a giant that three smaller giants once served. It wakes only for their company.',
     steps: [
-      { text: 'Bring Regirock, Regice, and Registeel to the temple', flag: 'regi_trio_present' },
+      { text: 'Bring PETRAGOLEM, CRYOGOLEM, and SIDEROGOLEM to the temple', flag: 'regi_trio_present' },
       { text: 'Descend to the temple’s lowest floor' },
-      { text: 'Face Regigigas, level 70', catch: 'regigigas' },
+      { text: 'Face COLOSSOR, level 70', catch: 'regigigas' },
     ],
     lair: 'snowpointtemple',
   },
@@ -668,7 +668,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Calm the crisis at the three great lakes', flag: 'lakes_calmed' },
       { text: 'Enter the cavern at Lake Insight’s heart' },
-      { text: 'Face Uxie, level 50', catch: 'uxie' },
+      { text: 'Face LORACLE, level 50', catch: 'uxie' },
     ],
     lair: 'lakeacuity',
   },
@@ -678,7 +678,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Calm the crisis at the three great lakes', flag: 'lakes_calmed' },
       { text: 'Touch the cavern at Lake Candor’s heart' },
-      { text: 'Chase Mesprit across Borea', catch: 'mesprit' },
+      { text: 'Chase EMPATHIS across Borea', catch: 'mesprit' },
     ],
     lair: 'lakeverity',
   },
@@ -688,7 +688,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Calm the crisis at the three great lakes', flag: 'lakes_calmed' },
       { text: 'Enter the cavern at Lake Gallant’s heart' },
-      { text: 'Face Azelf, level 50', catch: 'azelf' },
+      { text: 'Face VOLITAR, level 50', catch: 'azelf' },
     ],
     lair: 'lakevalor',
   },
@@ -699,7 +699,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Gather the lake trio’s blessing', flag: 'lake_trio_blessing' },
       { text: 'Break the Red Chain’s ritual at the Zenith Spire' },
-      { text: 'Face Dialga, level 70', catch: 'dialga' },
+      { text: 'Face CHRONARCH, level 70', catch: 'dialga' },
     ],
     lair: 'spearpillar',
   },
@@ -710,7 +710,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Gather the lake trio’s blessing', flag: 'lake_trio_blessing' },
       { text: 'Break the Red Chain’s ritual at the Zenith Spire' },
-      { text: 'Face Palkia, level 70', catch: 'palkia' },
+      { text: 'Face COSMARCH, level 70', catch: 'palkia' },
     ],
     lair: 'spearpillar',
   },
@@ -721,7 +721,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Gather the lake trio’s blessing', flag: 'lake_trio_blessing' },
       { text: 'Enter the Mirrorworld through the torn sky' },
-      { text: 'Face Giratina, level 70', catch: 'giratina' },
+      { text: 'Face VOIDARCH, level 70', catch: 'giratina' },
     ],
     lair: 'distortionworld',
   },
@@ -732,7 +732,7 @@ export const LEGENDARY_ARCS = {
       { text: 'Help the sailor’s family in Bridgeport' },
       { text: 'Receive the Member Card in a dream you will not remember' },
       { text: 'Sail to Darkmoon Island' },
-      { text: 'Face Darkrai, level 70', catch: 'darkrai' },
+      { text: 'Face NOCTARCH, level 70', catch: 'darkrai' },
     ],
     lair: 'newmoonisland',
   },
@@ -742,7 +742,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Take a Lunar Feather from Brightmoon Island' },
       { text: 'Heal the sailor’s boy in Bridgeport' },
-      { text: 'Chase Cresselia’s crescent trail', catch: 'cresselia' },
+      { text: 'Chase LUNACYGN’s crescent trail', catch: 'cresselia' },
     ],
     lair: 'fullmoonisland',
   },
@@ -752,7 +752,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Receive Oak’s Letter' },
       { text: 'Walk the Foamline Path with gratitude in mind' },
-      { text: 'Meet Shaymin in the Petal Paradise', catch: 'shaymin' },
+      { text: 'Meet GRATHOG in the Petal Paradise', catch: 'shaymin' },
     ],
     lair: 'flowerparadise',
   },
@@ -762,7 +762,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Climb Grim Mountain with a local guide' },
       { text: 'Recover the Magma Stone from the thieves' },
-      { text: 'Return the stone — and face Heatran, level 70', catch: 'heatran' },
+      { text: 'Return the stone — and face MAGMARCH, level 70', catch: 'heatran' },
     ],
     lair: 'starkmountain',
   },
@@ -772,11 +772,11 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Receive the mysterious blue egg' },
       { text: 'Guard the egg on the road to the sea temple' },
-      { text: 'Hatch Manaphy where the temple surfaces', catch: 'manaphy' },
+      { text: 'Hatch CLIONARCH where the temple surfaces', catch: 'manaphy' },
     ],
     lair: 'seatemple',
   },
-  // Stage S6 addition to the designed register (Spiritomb's
+  // Stage S6 addition to the designed register (CENTWISP's
   // placement was deferred at S1): the stub pre-registers the id in
   // the validator's quest vocabulary, as the other twelve Borea
   // stubs did; S6's live entry supersedes it in the merge fold.
@@ -790,7 +790,7 @@ export const LEGENDARY_ARCS = {
     ],
     lair: 'hallowedtower',
   },
-  // Arc 4 Stage S7 addition to the designed register: the Arceus
+  // Arc 4 Stage S7 addition to the designed register: the PRIMARCH
   // capstone's stub pre-registers arc_arceus in the validator's quest
   // vocabulary (the S6 arc_spiritomb precedent); S7's live entry in
   // SINNOH_LEGENDARY_ARCS supersedes it in the merge fold.

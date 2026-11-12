@@ -82,14 +82,14 @@ Object.assign(Game.prototype, {
     }
     if (it.pocket === 'tm' || it.pocket === 'hm') { this.teachFromBag(id, it); return; }
     if (id === 'gracidea') {
-      // Arc 4 Stage S4: the Gracidea swaps a party Shaymin between
+      // Arc 4 Stage S4: the Gracidea swaps a party GRATHOG between
       // its land and sky formes (the Deoxys-idiom switch). Never
-      // consumed; a party with no Shaymin hears the honest line.
+      // consumed; a party with no GRATHOG hears the honest line.
       const targets = g.state.party.map((m, i) => ({
         label: displayName(m, SPECIES) + ' Lv' + m.level, value: i,
         disabled: !!m.egg || FORME_OF[m.speciesId] !== 'shaymin',
       }));
-      if (!targets.some((t) => !t.disabled)) { g.ui.say(['The Gracidea stays folded. It blooms only for Shaymin, and none is travelling with you.']); return; }
+      if (!targets.some((t) => !t.disabled)) { g.ui.say(['The Gracidea stays folded. It blooms only for GRATHOG, and none is travelling with you.']); return; }
       targets.push({ label: 'Back', value: -1 });
       g.ui.showMenu('Use the Gracidea on...', targets, (t) => {
         if (t === null || t === -1) { finish(); return; }
@@ -98,7 +98,7 @@ Object.assign(Game.prototype, {
         if (switchForme(m, to, SPECIES)) {
           g.state.story.flags.shaymin_forme_touched = true;
           g.audio.playSfx('levelup');
-          g.ui.say(['The Gracidea opens all at once — a flower that was waiting for exactly this — and ' + displayName(m, SPECIES) + ' rises into its ' + SPECIES[to].name.replace('Shaymin (', '').replace(')', '') + ' shape. Same partner, skyward. (Use the Gracidea again to settle it back; a fainted sky Shaymin settles on its own.)'], () => finish());
+          g.ui.say(['The Gracidea opens all at once — a flower that was waiting for exactly this — and ' + displayName(m, SPECIES) + ' rises into its ' + SPECIES[to].name.replace('GRATHOG (', '').replace(')', '') + ' shape. Same partner, skyward. (Use the Gracidea again to settle it back; a fainted sky GRATHOG settles on its own.)'], () => finish());
         } else finish();
       }, { rowHtml: (it2) => g.partyTargetRowHtml(it2) });
       return;

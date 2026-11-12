@@ -1,11 +1,15 @@
-# giratina-back-accent — Arc4 S2b accent frame (crest/fin twitch, recolor-only).
+# giratina-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over giratina-back.
 PIXD giratina-back-accent giratina-back 64 64
-16 10 O
-13 11 O
-15 11 O
-16 11 O
-17 11 O
-12 12 O
-13 12 O
-14 12 O
+54 23 O
+55 23 O
+56 23 O
+53 24 O
+54 24 O
+55 24 O
+56 24 O
+57 24 O
+54 25 O
+55 25 O
+56 25 O
+57 25 O
 PAL

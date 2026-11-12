@@ -922,7 +922,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   giratina: {
-    id: 'giratina', name: 'Giratina', dexNo: 487, types: ['ghost', 'dragon'],
+    id: 'giratina', name: 'VOIDARCH', dexNo: 487, types: ['ghost', 'dragon'],
     base: { hp: 150, atk: 100, def: 120, spa: 100, spd: 120, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'serpent', spriteSeed: 48701,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -931,7 +931,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   cresselia: {
-    id: 'cresselia', name: 'Cresselia', dexNo: 488, types: ['psychic'],
+    id: 'cresselia', name: 'LUNACYGN', dexNo: 488, types: ['psychic'],
     base: { hp: 120, atk: 70, def: 110, spa: 75, spd: 120, spe: 85 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'serpent', spriteSeed: 48801,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -940,7 +940,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   phione: {
-    id: 'phione', name: 'Phione', dexNo: 489, types: ['water'],
+    id: 'phione', name: 'CLIONEA', dexNo: 489, types: ['water'],
     base: { hp: 80, atk: 80, def: 80, spa: 80, spd: 80, spe: 80 },
     catchRate: 30, growth: 'slow', baseXp: 216, body: 'blob', spriteSeed: 48901,
     eggGroups: ['water1', 'fairy'], hatchCounter: 40,
@@ -949,7 +949,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   manaphy: {
-    id: 'manaphy', name: 'Manaphy', dexNo: 490, types: ['water'],
+    id: 'manaphy', name: 'CLIONARCH', dexNo: 490, types: ['water'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 49001,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10, eggSpecies: 'phione',
@@ -958,7 +958,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   darkrai: {
-    id: 'darkrai', name: 'Darkrai', dexNo: 491, types: ['dark'],
+    id: 'darkrai', name: 'NOCTARCH', dexNo: 491, types: ['dark'],
     base: { hp: 70, atk: 90, def: 90, spa: 135, spd: 90, spe: 125 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 49101,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -967,7 +967,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   shaymin: {
-    id: 'shaymin', name: 'Shaymin', dexNo: 492, types: ['grass'],
+    id: 'shaymin', name: 'GRATHOG', dexNo: 492, types: ['grass'],
     base: { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 },
     catchRate: 45, growth: 'mediumslow', baseXp: 270, body: 'quad', spriteSeed: 49201,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -976,7 +976,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
   },
   arceus: {
-    id: 'arceus', name: 'Arceus', dexNo: 493, types: ['normal'],
+    id: 'arceus', name: 'PRIMARCH', dexNo: 493, types: ['normal'],
     base: { hp: 120, atk: 120, def: 120, spa: 120, spd: 120, spe: 120 },
     catchRate: 3, growth: 'slow', baseXp: 324, body: 'quad', spriteSeed: 49301,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1035,7 +1035,7 @@ export const SPECIES_SINNOH = {
     form: true, baseSpecies: 'rotom',
   },
   giratinaorigin: {
-    id: 'giratinaorigin', name: 'Giratina (Origin Forme)', dexNo: 487, types: ['ghost', 'dragon'],
+    id: 'giratinaorigin', name: 'Origin VOIDARCH', dexNo: 487, types: ['ghost', 'dragon'],
     base: { hp: 150, atk: 120, def: 100, spa: 120, spd: 100, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 340, body: 'serpent', spriteSeed: 48702,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -1045,7 +1045,7 @@ export const SPECIES_SINNOH = {
     form: true, baseSpecies: 'giratina',
   },
   shayminsky: {
-    id: 'shayminsky', name: 'Shaymin (Sky Forme)', dexNo: 492, types: ['grass', 'flying'],
+    id: 'shayminsky', name: 'Sky GRATHOG', dexNo: 492, types: ['grass', 'flying'],
     base: { hp: 100, atk: 103, def: 75, spa: 120, spd: 75, spe: 127 },
     catchRate: 45, growth: 'mediumslow', baseXp: 270, body: 'blob', spriteSeed: 49202,
     eggGroups: ['no-eggs'], hatchCounter: 120,

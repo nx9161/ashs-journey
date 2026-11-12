@@ -1,15 +1,8 @@
-# cresselia-front-accent — Arc4 S2b accent frame (blink). Recolor-only delta over cresselia-front.
+# cresselia-front-accent — Wave G Sinnoh accent frame (crest (blink fallback)). Recolor-only delta over cresselia-front.
 PIXD cresselia-front-accent cresselia-front 64 64
-18 17 O
-18 18 O
-19 18 O
-16 19 O
-17 19 O
-18 19 O
-19 19 O
-20 19 O
-17 20 O
-18 20 O
-19 20 O
-18 21 O
+49 4 O
+48 5 O
+49 5 O
+48 6 O
+49 6 O
 PAL
