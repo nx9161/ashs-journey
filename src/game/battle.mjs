@@ -65,11 +65,11 @@ const FX_POOL_MAX = 60;
 // pix/ui/ball-*.pix sprites; used when no canvas art is available
 // (headless) and to tint catch bursts. [top, highlight, bottom, shade]
 const BALL_PALETTES = {
-  pokeball: ['#e84040', '#ff9a8a', '#f4f4f8', '#b8b8c8'],
-  greatball: ['#3868d8', '#8ab8ff', '#f4f4f8', '#b8b8c8'],
-  ultraball: ['#2a2a32', '#f8d030', '#f4f4f8', '#b8b8c8'],
-  masterball: ['#7030a0', '#f858a8', '#f4f4f8', '#b8b8c8'],
-  safariball: ['#58a838', '#b8e888', '#f4f4f8', '#b8b8c8'],
+  pokeball: ['#c47b3a', '#eda964', '#f2e3c2', '#d9bd8f'],
+  greatball: ['#3a6ea8', '#7fb0dd', '#f2e3c2', '#d9bd8f'],
+  ultraball: ['#33333c', '#6a6a76', '#f2e3c2', '#d9bd8f'],
+  masterball: ['#6a3a9e', '#b48ae0', '#f2e3c2', '#d9bd8f'],
+  safariball: ['#5d8a3c', '#9cc46e', '#f2e3c2', '#d9bd8f'],
   gsball: ['#d8a018', '#ffe898', '#c8ccd8', '#9098a8'],
 };
 const LEGENDARY_SPECIES = new Set(['mewtwo', 'articuno', 'zapdos', 'moltres', 'mew']);
