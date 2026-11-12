@@ -697,7 +697,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   magnezone: {
-    id: 'magnezone', name: 'Magnezone', dexNo: 462, types: ['electric', 'steel'],
+    id: 'magnezone', name: 'OMNICOIL', dexNo: 462, types: ['electric', 'steel'],
     base: { hp: 70, atk: 70, def: 115, spa: 130, spd: 90, spe: 60 },
     catchRate: 30, growth: 'mediumfast', baseXp: 241, body: 'blob', spriteSeed: 46201,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -706,7 +706,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   lickilicky: {
-    id: 'lickilicky', name: 'Lickilicky', dexNo: 463, types: ['normal'],
+    id: 'lickilicky', name: 'SLURPORD', dexNo: 463, types: ['normal'],
     base: { hp: 110, atk: 85, def: 95, spa: 80, spd: 95, spe: 50 },
     catchRate: 30, growth: 'mediumfast', baseXp: 180, body: 'biped', spriteSeed: 46301,
     eggGroups: ['monster'], hatchCounter: 20,
@@ -715,7 +715,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   rhyperior: {
-    id: 'rhyperior', name: 'Rhyperior', dexNo: 464, types: ['ground', 'rock'],
+    id: 'rhyperior', name: 'PLATOREX', dexNo: 464, types: ['ground', 'rock'],
     base: { hp: 115, atk: 140, def: 130, spa: 55, spd: 55, spe: 40 },
     catchRate: 30, growth: 'slow', baseXp: 241, body: 'biped', spriteSeed: 46401,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
@@ -724,7 +724,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   tangrowth: {
-    id: 'tangrowth', name: 'Tangrowth', dexNo: 465, types: ['grass'],
+    id: 'tangrowth', name: 'VINEMASS', dexNo: 465, types: ['grass'],
     base: { hp: 100, atk: 100, def: 125, spa: 110, spd: 50, spe: 50 },
     catchRate: 30, growth: 'mediumfast', baseXp: 187, body: 'biped', spriteSeed: 46501,
     eggGroups: ['plant'], hatchCounter: 20,
@@ -733,7 +733,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 9, 10, 15, 20, 21, 22, 29, 30, 31, 32, 33, 34, 36, 37, 42, 44, 46, 47, 50, 104],
   },
   electivire: {
-    id: 'electivire', name: 'Electivire', dexNo: 466, types: ['electric'],
+    id: 'electivire', name: 'VOLTYETI', dexNo: 466, types: ['electric'],
     base: { hp: 75, atk: 123, def: 67, spa: 95, spd: 85, spe: 95 },
     catchRate: 30, growth: 'mediumfast', baseXp: 243, body: 'biped', spriteSeed: 46601,
     eggGroups: ['humanshape'], hatchCounter: 25,
@@ -742,7 +742,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
   },
   magmortar: {
-    id: 'magmortar', name: 'Magmortar', dexNo: 467, types: ['fire'],
+    id: 'magmortar', name: 'LAVAMORT', dexNo: 467, types: ['fire'],
     base: { hp: 75, atk: 95, def: 67, spa: 125, spd: 95, spe: 83 },
     catchRate: 30, growth: 'mediumfast', baseXp: 243, body: 'biped', spriteSeed: 46701,
     eggGroups: ['humanshape'], hatchCounter: 25,
@@ -751,7 +751,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   togekiss: {
-    id: 'togekiss', name: 'Togekiss', dexNo: 468, types: ['fairy', 'flying'],
+    id: 'togekiss', name: 'SERADOVE', dexNo: 468, types: ['fairy', 'flying'],
     base: { hp: 85, atk: 50, def: 95, spa: 120, spd: 115, spe: 80 },
     catchRate: 30, growth: 'fast', baseXp: 245, body: 'bird', spriteSeed: 46801,
     eggGroups: ['flying', 'fairy'], hatchCounter: 10,
@@ -760,7 +760,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   yanmega: {
-    id: 'yanmega', name: 'Yanmega', dexNo: 469, types: ['bug', 'flying'],
+    id: 'yanmega', name: 'DARNOGRE', dexNo: 469, types: ['bug', 'flying'],
     base: { hp: 86, atk: 76, def: 86, spa: 116, spd: 56, spe: 95 },
     catchRate: 30, growth: 'mediumfast', baseXp: 180, body: 'bird', spriteSeed: 46901,
     eggGroups: ['bug'], hatchCounter: 20,
@@ -769,7 +769,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   leafeon: {
-    id: 'leafeon', name: 'Leafeon', dexNo: 470, types: ['grass'],
+    id: 'leafeon', name: 'FERNKIT', dexNo: 470, types: ['grass'],
     base: { hp: 65, atk: 110, def: 130, spa: 60, spd: 65, spe: 95 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 47001,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -778,7 +778,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 21, 22, 32, 33, 34, 44, 50, 101],
   },
   glaceon: {
-    id: 'glaceon', name: 'Glaceon', dexNo: 471, types: ['ice'],
+    id: 'glaceon', name: 'RIMEKIT', dexNo: 471, types: ['ice'],
     base: { hp: 65, atk: 60, def: 110, spa: 130, spd: 95, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 47101,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -787,7 +787,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
   },
   gliscor: {
-    id: 'gliscor', name: 'Gliscor', dexNo: 472, types: ['ground', 'flying'],
+    id: 'gliscor', name: 'STINGSOAR', dexNo: 472, types: ['ground', 'flying'],
     base: { hp: 75, atk: 95, def: 125, spa: 45, spd: 75, spe: 95 },
     catchRate: 30, growth: 'mediumslow', baseXp: 179, body: 'bird', spriteSeed: 47201,
     eggGroups: ['bug'], hatchCounter: 20,
@@ -796,7 +796,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   mamoswine: {
-    id: 'mamoswine', name: 'Mamoswine', dexNo: 473, types: ['ice', 'ground'],
+    id: 'mamoswine', name: 'IVORARCH', dexNo: 473, types: ['ice', 'ground'],
     base: { hp: 110, atk: 130, def: 80, spa: 70, spd: 60, spe: 80 },
     catchRate: 50, growth: 'slow', baseXp: 239, body: 'quad', spriteSeed: 47301,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -814,7 +814,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   gallade: {
-    id: 'gallade', name: 'Gallade', dexNo: 475, types: ['psychic', 'fighting'],
+    id: 'gallade', name: 'DUELLORD', dexNo: 475, types: ['psychic', 'fighting'],
     base: { hp: 68, atk: 125, def: 65, spa: 65, spd: 115, spe: 80 },
     catchRate: 45, growth: 'slow', baseXp: 233, body: 'biped', spriteSeed: 47501,
     eggGroups: ['humanshape', 'indeterminate'], hatchCounter: 20,
