@@ -430,9 +430,9 @@ export const NAME_REGISTRY = {
     rayquaza: { name: 'STRATOWYRM', status: 'named', wave: 'G-HT9', design: 'stratowyrm' },
     jirachi: { name: 'ASTRAEON', status: 'named', wave: 'G-HT9', design: 'astraeon' },
     deoxys: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogene' },
-    deoxysattack: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogenea' },
-    deoxysdefense: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogened' },
-    deoxysspeed: { name: 'XENOGENE', status: 'named', wave: 'G-HT9', design: 'xenogenes' },
+    deoxysattack: { name: 'XENOLASH', status: 'named', wave: 'G-HT9', design: 'xenogenea' },
+    deoxysdefense: { name: 'XENOAEGIS', status: 'named', wave: 'G-HT9', design: 'xenogened' },
+    deoxysspeed: { name: 'XENOVELOX', status: 'named', wave: 'G-HT9', design: 'xenogenes' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
