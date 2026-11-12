@@ -296,6 +296,15 @@ export const NAME_REGISTRY = {
     larvitar:  { name: 'CRAGLET', status: 'named', wave: 'G-JT7', design: 'craglet' },
     pupitar:   { name: 'PIKEPOD', status: 'named', wave: 'G-JT7', design: 'pikepod' },
     tyranitar: { name: 'CRAGTYRANT', status: 'named', wave: 'G-JT7', design: 'cragtyrant' },
+    // -- Wave G Reserved (director-set canon, Naming Law 2026-11-12) --
+    // The branching companion line: SPECIAL overlay (story/gift line),
+    // element + real-animal mash per the Naming Law.
+    eevee:     { name: 'PRISMKIT', status: 'locked', wave: 'G-RES', design: 'prismkit' },
+    vaporeon:  { name: 'OTTERSAIL', status: 'locked', wave: 'G-RES', design: 'ottersail' },
+    jolteon:   { name: 'SPARKHARE', status: 'locked', wave: 'G-RES', design: 'sparkhare' },
+    flareon:   { name: 'KINDLEON', status: 'locked', wave: 'G-RES', design: 'kindleon' },
+    espeon:    { name: 'SOLYNX', status: 'locked', wave: 'G-RES', design: 'solynx' },
+    umbreon:   { name: 'LUNAPARD', status: 'locked', wave: 'G-RES', design: 'lunapard' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -379,6 +388,7 @@ export const NAME_REGISTRY = {
     shellet: ['togepi', 'togetic'],
     oraclet: ['natu', 'xatu'],
     woolamp: ['mareep', 'flaaffy', 'ampharos'],
+    prismkit: ['eevee', 'vaporeon', 'jolteon', 'flareon', 'espeon', 'umbreon'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
@@ -713,12 +723,14 @@ export const NAME_REGISTRY = {
   terms: {},
 };
 
-// The 15 owner-locked canon names of the headline round (closed
-// 2026-11-12 01:06 EST; further headline batches only on the
-// owner's call). VOLTIK appears once though it covers two records.
+// The owner-locked canon names: the 15 of the headline round
+// (closed 2026-11-12 01:06 EST) plus the director-set Reserved
+// batch (owner naming-authority ruling + Naming Law, 2026-11-12).
+// VOLTIK appears once though it covers two records.
 export const LOCKED_CANON = [
   'VOLTIK', 'EMBRY', 'EMBRION', 'INFERNOX',
   'BUBLET', 'WAVLEEN', 'ABYSSAR',
   'BUDDIN', 'SAPLINT', 'TERRABLOOM',
   'OMNIGEN', 'MOSSAIC', 'VULCANIS', 'UNDINARA', 'FULMINIS',
+  'PRISMKIT', 'OTTERSAIL', 'SPARKHARE', 'KINDLEON', 'SOLYNX', 'LUNAPARD',
 ];

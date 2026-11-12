@@ -1088,7 +1088,7 @@ export const SPECIES2 = {
     tm: [],
   },
   eevee: {
-    id: 'eevee', name: 'Eevee', dexNo: 133, types: ['normal'],
+    id: 'eevee', name: 'PRISMKIT', dexNo: 133, types: ['normal'],
     base: { hp: 55, atk: 55, def: 50, spa: 45, spd: 65, spe: 55 },
     catchRate: 45, growth: 'mediumfast', baseXp: 87, body: 'quad', spriteSeed: 13301,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -1106,7 +1106,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 39, 44, 50],
   },
   vaporeon: {
-    id: 'vaporeon', name: 'Vaporeon', dexNo: 134, types: ['water'],
+    id: 'vaporeon', name: 'OTTERSAIL', dexNo: 134, types: ['water'],
     base: { hp: 130, atk: 65, def: 60, spa: 110, spd: 95, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13401,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -1115,7 +1115,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 28, 31, 32, 34, 39, 44, 50, 103],
   },
   jolteon: {
-    id: 'jolteon', name: 'Jolteon', dexNo: 135, types: ['electric'],
+    id: 'jolteon', name: 'SPARKHARE', dexNo: 135, types: ['electric'],
     base: { hp: 65, atk: 65, def: 60, spa: 110, spd: 95, spe: 130 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13501,
     eggGroups: ['ground'], hatchCounter: 35,
@@ -1124,7 +1124,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 24, 25, 28, 31, 32, 34, 39, 44, 45, 50, 105],
   },
   flareon: {
-    id: 'flareon', name: 'Flareon', dexNo: 136, types: ['fire'],
+    id: 'flareon', name: 'KINDLEON', dexNo: 136, types: ['fire'],
     base: { hp: 65, atk: 130, def: 60, spa: 95, spd: 110, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 184, body: 'quad', spriteSeed: 13601,
     eggGroups: ['ground'], hatchCounter: 35,
