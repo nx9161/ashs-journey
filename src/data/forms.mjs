@@ -117,7 +117,7 @@ export const FORMS = [
   { id: 'mega-latias', speciesId: 380, name: 'Mega RUBIAVIS', kind: 'mega', region: 'kalos', types: ['dragon', 'psychic'], note: 'Mega form; violet sheen and jet-stream speed.' },
   { id: 'mega-latios', speciesId: 381, name: 'Mega AZURAVIS', kind: 'mega', region: 'kalos', types: ['dragon', 'psychic'], note: 'Mega form; violet sheen and a sharper silhouette.' },
   { id: 'mega-rayquaza', speciesId: 384, name: 'Mega STRATOWYRM', kind: 'mega', region: 'kalos', types: ['dragon', 'flying'], note: 'Mega form; the sky serpent crowned in gold streamers.' },
-  { id: 'mega-lopunny', speciesId: 428, name: 'Mega Lopunny', kind: 'mega', region: 'kalos', types: ['normal', 'fighting'], note: 'Mega form; leggings torn by kicks it throws constantly.' },
+  { id: 'mega-lopunny', speciesId: 428, name: 'Mega VELVETLOP', kind: 'mega', region: 'kalos', types: ['normal', 'fighting'], note: 'Mega form; leggings torn by kicks it throws constantly.' },
   { id: 'mega-garchomp', speciesId: 445, name: 'Mega Garchomp', kind: 'mega', region: 'kalos', types: ['dragon', 'ground'], note: 'Mega form; fins melt into scythes. It hates the tradeoff.' },
   { id: 'mega-lucario', speciesId: 448, name: 'Mega Lucario', kind: 'mega', region: 'kalos', types: ['fighting', 'steel'], note: 'Mega form; aura so strong it marks its fur black.' },
   { id: 'mega-abomasnow', speciesId: 460, name: 'Mega Abomasnow', kind: 'mega', region: 'kalos', types: ['grass', 'ice'], note: 'Mega form; a blizzard that grew extra ice spikes.' },
