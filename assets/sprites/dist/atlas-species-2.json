@@ -963,7 +963,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "azelf-front",
       "mirror_of": null
@@ -1977,7 +1977,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "dialga-front",
       "mirror_of": null
@@ -2185,7 +2185,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "dusknoir-front",
       "mirror_of": null
@@ -2536,7 +2536,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": "froslass-front",
       "mirror_of": null
@@ -3043,7 +3043,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "heatran-front",
       "mirror_of": null
@@ -4239,7 +4239,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "mesprit-front",
       "mirror_of": null
@@ -4772,7 +4772,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "palkia-front",
       "mirror_of": null
@@ -5149,7 +5149,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": "probopass-front",
       "mirror_of": null
@@ -5500,7 +5500,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": "rotom-front",
       "mirror_of": null
@@ -5513,7 +5513,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "rotomfan-front",
       "mirror_of": null
@@ -5526,7 +5526,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 11,
+      "palette": 12,
       "seed": null,
       "derived_from": "rotomfrost-front",
       "mirror_of": null
@@ -5539,7 +5539,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "rotomheat-front",
       "mirror_of": null
@@ -5552,7 +5552,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "rotommow-front",
       "mirror_of": null
@@ -5565,7 +5565,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "rotomwash-front",
       "mirror_of": null
@@ -6852,7 +6852,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": "uxie-front",
       "mirror_of": null
@@ -7669,7 +7669,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7683,7 +7683,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -8229,7 +8229,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -8243,7 +8243,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -8967,7 +8967,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9981,7 +9981,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10189,7 +10189,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10540,7 +10540,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11047,7 +11047,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -12243,7 +12243,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
