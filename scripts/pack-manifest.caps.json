@@ -1,0 +1,8 @@
+{
+  "_comment": "B2-R1 frozen monolith caps (lines), measured 2026-11-11. May shrink, never grow. Enforced by scripts/pack-manifest.mjs.",
+  "frozen": {
+    "src/game/overworld-systems.mjs": 5254,
+    "src/game/ui.mjs": 1838,
+    "src/game/main.mjs": 1318
+  }
+}
