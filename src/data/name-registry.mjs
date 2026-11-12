@@ -350,6 +350,19 @@ export const NAME_REGISTRY = {
     skuntank:    { name: 'TANKCAT', status: 'named', wave: 'G-ST4', design: 'tankcat' },
     bronzor:     { name: 'RELICT', status: 'named', wave: 'G-ST4', design: 'relict' },
     bronzong:    { name: 'CARILLON', status: 'named', wave: 'G-ST4', design: 'carillon' },
+    // -- Wave G Sinnoh, Tranche 5 --
+    bonsly:      { name: 'PETRILET', status: 'named', wave: 'G-ST5', design: 'petrilet' },
+    mimejr:      { name: 'PANTLET', status: 'named', wave: 'G-ST5', design: 'pantlet' },
+    happiny:     { name: 'NURSELET', status: 'named', wave: 'G-ST5', design: 'nurselet' },
+    chatot:      { name: 'PARROTUNE', status: 'named', wave: 'G-ST5', design: 'parrotune' },
+    spiritomb:   { name: 'CENTWISP', status: 'named', wave: 'G-ST5', design: 'centwisp' },
+    gible:       { name: 'SHARKLET', status: 'named', wave: 'G-ST5', design: 'sharklet' },
+    gabite:      { name: 'JETSHARK', status: 'named', wave: 'G-ST5', design: 'jetshark' },
+    garchomp:    { name: 'APEXSHARK', status: 'named', wave: 'G-ST5', design: 'apexshark' },
+    munchlax:    { name: 'NAPLET', status: 'named', wave: 'G-ST5', design: 'naplet' },
+    riolu:       { name: 'AURAPUP', status: 'named', wave: 'G-ST5', design: 'aurapup' },
+    lucario:     { name: 'AURAJACK', status: 'named', wave: 'G-ST5', design: 'aurajack' },
+    hippopotas:  { name: 'SANDPOTAM', status: 'named', wave: 'G-ST5', design: 'sandpotam' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -396,7 +409,7 @@ export const NAME_REGISTRY = {
     trunklet: ['phanpy', 'donphan'],
     polycrane: ['porygon', 'porygon2'],
     hitmon: ['tyrogue', 'hitmonlee', 'hitmonchan', 'hitmontop'],
-    nurseling: ['chansey', 'blissey'],
+    nurselet: ['happiny', 'chansey', 'blissey'],
     frostelle: ['smoochum', 'jynx'],
     voltigre: ['elekid', 'electabuzz'],
     lavamand: ['magby', 'magmar'],
@@ -455,6 +468,11 @@ export const NAME_REGISTRY = {
     coilcat: ['glameow', 'purugly'],
     muskunk: ['stunky', 'skuntank'],
     relict: ['bronzor', 'bronzong'],
+    petrilet: ['bonsly', 'sudowoodo'],
+    pantlet: ['mimejr', 'mrmime'],
+    naplet: ['munchlax', 'snorlax'],
+    sharklet: ['gible', 'gabite', 'garchomp'],
+    aurapup: ['riolu', 'lucario'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
