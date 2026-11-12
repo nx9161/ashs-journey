@@ -467,6 +467,19 @@ export const NAME_REGISTRY = {
     staravia:   { name: 'SWIFTLING', status: 'named', wave: 'G-ST1', design: 'swiftling' },
     staraptor:  { name: 'STRAPTOR', status: 'named', wave: 'G-ST1', design: 'straptor' },
     bidoof:     { name: 'BEAVLET', status: 'named', wave: 'G-ST1', design: 'beavlet' },
+    // -- Wave G Sinnoh, Tranche 2 --
+    bibarel:     { name: 'DAMBEAVER', status: 'named', wave: 'G-ST2', design: 'dambeaver' },
+    kricketot:   { name: 'HOPLET', status: 'named', wave: 'G-ST2', design: 'hoplet' },
+    kricketune:  { name: 'BOWHOPPER', status: 'named', wave: 'G-ST2', design: 'bowhopper' },
+    shinx:       { name: 'VOLTCUB', status: 'named', wave: 'G-ST2', design: 'voltcub' },
+    luxio:       { name: 'MANEVOLT', status: 'named', wave: 'G-ST2', design: 'manevolt' },
+    luxray:      { name: 'RADILEON', status: 'named', wave: 'G-ST2', design: 'radileon' },
+    budew:       { name: 'ROSELET', status: 'named', wave: 'G-ST2', design: 'roselet' },
+    roserade:    { name: 'BOUQUADE', status: 'named', wave: 'G-ST2', design: 'bouquade' },
+    cranidos:    { name: 'RAMOSAUR', status: 'named', wave: 'G-ST2', design: 'ramosaur' },
+    rampardos:   { name: 'CRASHSAUR', status: 'named', wave: 'G-ST2', design: 'crashsaur' },
+    shieldon:    { name: 'AEGITRIKE', status: 'named', wave: 'G-ST2', design: 'aegitrike' },
+    bastiodon:   { name: 'WALLTRIKE', status: 'named', wave: 'G-ST2', design: 'walltrike' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -603,6 +616,11 @@ export const NAME_REGISTRY = {
     simmer: ['chimchar', 'monferno', 'infernape'],
     friguin: ['piplup', 'prinplup', 'empoleon'],
     duskling: ['starly', 'staravia', 'staraptor'],
+    beavlet: ['bidoof', 'bibarel'],
+    hoplet: ['kricketot', 'kricketune'],
+    voltcub: ['shinx', 'luxio', 'luxray'],
+    ramosaur: ['cranidos', 'rampardos'],
+    aegitrike: ['shieldon', 'bastiodon'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
