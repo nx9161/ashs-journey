@@ -759,7 +759,20 @@ const qaDriver = `
   var l7 = new SaveStore().load();
   ok('qa l7 save/load round-trip preserves state', l7.ok && l7.data.party.length === 1 && l7.data.party[0].speciesId === 'pidgey' && l7.data.badges.kanto[0] === 'boulderbadge' && l7.data.story.flags.beat_brock === true && l7.data.story.position.map === 'gym' && !!l7.data.dex.caught[16]);
   ok('qa l7 save <= 64KB budget', s7.ok && s7.bytes <= 65536, s7.bytes + ' bytes');
-  ok('qa l8 dex tracks 1025, Kanto roster complete (151 + partner + 5 forms + 5 National, Cheat Shop expansion)', DEX_TOTAL === 1025 && Object.keys(SPECIES).length === 162);
+  // Wave E triage (l8) — TEST expectation corrected, game data verified
+  // sound. The old assertion counted the GLOBAL merged SPECIES table
+  // (=== 162), which stopped measuring its own label as the roster grew
+  // by deliberate stages: Lugia joined the Kanto tables in Stage O1
+  // (34d4093 — a 6th National extra, 'on the Ho-Oh precedent'), and J1
+  // folded the Johto table into SPECIES (e59cb6c; Hoenn/Sinnoh folds
+  // followed), so the merged table is 509 by design, not by data loss.
+  // The labeled property is now asserted directly: every dexNo 1..151
+  // present, plus the partner, the 5 form keys and the 6 National
+  // extras by name. DEX_TOTAL is unchanged at 1025.
+  ok('qa l8 dex tracks 1025, Kanto roster complete (151 + partner + 5 forms + 6 National, Cheat Shop expansion)',
+    DEX_TOTAL === 1025
+    && (function(){ var seen = {}; for (var k in SPECIES) seen[SPECIES[k].dexNo] = true; for (var n = 1; n <= 151; n++) if (!seen[n]) return false; return true; })()
+    && ['partner', 'pinkbutterfree', 'surfingpikachu', 'flyingpikachu', 'crystalonix', 'giantdragonite', 'togepi', 'marill', 'snubbull', 'donphan', 'hooh', 'lugia'].every(function(id){ return !!SPECIES[id]; }));
   ok('qa l8 frontier-ready hooks (7 symbol slots + befriended state)', defaultState().badges.symbols.length === 7 && typeof defaultState().dex.befriended === 'object');
 
   // ============ Yellow authenticity (Gameplay Designer seat update) ============
@@ -904,10 +917,23 @@ const qaDriver = `
   g4.state.story.flags.tutorialDone = true;
   g4.input.press('down'); { let wg = 0; while (ow4.mapId !== 'route1' && wg < 120) { tk(g4, 1); wg++; } } g4.input.release('down'); tk(g4, 2);
   g4.input.press('left'); { let wg = 0; while (ow4.player.tx > 4 && wg < 120) { tk(g4, 1); wg++; } } g4.input.release('left'); tk(g4, 2); // W7 poll-release (see §3 note)
-  var gaps = [], gap = 0, steps = 0, dir = 'up';
+  // Wave E triage (f4) — TEST harness defect, game cadence verified
+  // sound. The old sampler alternated up/down blindly: battle
+  // interruptions desynced the alternation, the player drifted north
+  // out of the grass to (4,4) — inside trainer Cal's sight cone — and
+  // his scripted challenge opened a pre-battle dialogue that this
+  // sampler (which never presses A) could never drain, freezing all
+  // further steps (probe: 33 onStep calls total, dialogueOpen=true,
+  // A-drain -> BattleScene). While it stayed in grass the cadence was
+  // healthy (gaps 4,3,2,9 at rate 0.12 + the 21-step anti-frustration
+  // force). The sampler now ping-pongs INSIDE the south grass patch
+  // (x 2<->3 on row 14, all tall grass, no sight cones), choosing its
+  // direction from the player's actual position each step so battle
+  // interruptions cannot desync it. All four f4 assertions unchanged.
+  var gaps = [], gap = 0, steps = 0, dir = 'left';
   while (gaps.length < 12 && steps < 900) {
+    dir = ow4.player.tx >= 3 ? 'left' : 'right';
     g4.input.press(dir); tk(g4, 9); g4.input.release(dir); tk(g4, 2);
-    dir = (dir === 'up') ? 'down' : 'up';
     steps++;
     if (g4.scenes.top instanceof BattleScene) {
       gaps.push(gap + 1); gap = 0;
