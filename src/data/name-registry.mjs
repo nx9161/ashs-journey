@@ -219,6 +219,19 @@ export const NAME_REGISTRY = {
     ledyba:    { name: 'SPOTLET', status: 'named', wave: 'G-JT1', design: 'spotlet' },
     ledian:    { name: 'STARFIST', status: 'named', wave: 'G-JT1', design: 'starfist' },
     spinarak:  { name: 'SILKLET', status: 'named', wave: 'G-JT1', design: 'silklet' },
+    // -- Wave G Johto, Tranche 2 (coordinator-named) --
+    ariados:   { name: 'SNARELOOM', status: 'named', wave: 'G-JT2', design: 'snareloom' },
+    crobat:    { name: 'DREADBITE', status: 'named', wave: 'G-JT2', design: 'dreadbite' },
+    chinchou:  { name: 'GLOWLET', status: 'named', wave: 'G-JT2', design: 'glowlet' },
+    lanturn:   { name: 'LUMIFIN', status: 'named', wave: 'G-JT2', design: 'lumifin' },
+    pichu:     { name: 'VOLTLET', status: 'named', wave: 'G-JT2', design: 'voltlet' },
+    cleffa:    { name: 'MOONMOTE', status: 'named', wave: 'G-JT2', design: 'moonmote' },
+    igglybuff: { name: 'PUFFLET', status: 'named', wave: 'G-JT2', design: 'pufflet' },
+    togepi:    { name: 'SHELLET', status: 'named', wave: 'G-JT2', design: 'shellet' },
+    togetic:   { name: 'SERASHELL', status: 'named', wave: 'G-JT2', design: 'serashell' },
+    natu:      { name: 'ORACLET', status: 'named', wave: 'G-JT2', design: 'oraclet' },
+    xatu:      { name: 'SUNSEER', status: 'named', wave: 'G-JT2', design: 'sunseer' },
+    mareep:    { name: 'WOOLAMP', status: 'named', wave: 'G-JT2', design: 'woolamp' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -232,13 +245,13 @@ export const NAME_REGISTRY = {
     scurrat: ['rattata', 'raticate'],
     keenbeak: ['spearow', 'fearow'],
     viplet: ['ekans', 'arbok'],
-    voltik: ['pikachu', 'raichu'],
+    voltik: ['pichu', 'pikachu', 'raichu'],
     armadune: ['sandshrew', 'sandslash'],
     toxikit: ['nidoranf', 'nidorina', 'nidoqueen'],
     toxibuck: ['nidoranm', 'nidorino', 'nidoking'],
-    moonlet: ['clefairy', 'clefable'],
+    moonlet: ['cleffa', 'clefairy', 'clefable'],
     vulcanis: ['vulpix', 'ninetales'],
-    puffune: ['jigglypuff', 'wigglytuff'],
+    puffune: ['igglybuff', 'jigglypuff', 'wigglytuff'],
     nightbud: ['oddish', 'gloom', 'vileplume'],
     fungling: ['paras', 'parasect'],
     fuzzmite: ['venonat', 'venomoth'],
@@ -281,7 +294,12 @@ export const NAME_REGISTRY = {
     vigilet: ['sentret', 'furret'],
     tickowl: ['hoothoot', 'noctowl'],
     spotlet: ['ledyba', 'ledian'],
-    // silklet line ['spinarak','ariados'] registers in JT2 with ariados (Kanto discipline: lines land complete).
+    silklet: ['spinarak', 'ariados'],
+    skreep: ['zubat', 'golbat', 'crobat'],
+    glowlet: ['chinchou', 'lanturn'],
+    shellet: ['togepi', 'togetic'],
+    oraclet: ['natu', 'xatu'],
+    // woolamp line ['mareep','flaaffy','ampharos'] registers in JT3 (lines land complete).
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

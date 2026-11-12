@@ -1333,7 +1333,7 @@ export const SPECIES2 = {
   // canonical-frame evolution entries below — ruling 2; donphan/hooh/
   // lugia correctly have none.)
   togepi: {
-    id: 'togepi', name: 'Togepi', dexNo: 175, types: ['fairy'],
+    id: 'togepi', name: 'SHELLET', dexNo: 175, types: ['fairy'],
     base: { hp: 35, atk: 20, def: 65, spa: 40, spd: 65, spe: 20 },
     catchRate: 190, growth: 'fast', baseXp: 49, body: 'biped', spriteSeed: 17501,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,

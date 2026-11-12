@@ -155,7 +155,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'ariados', method: 'level', level: 122 }, tm: [],
   },
   ariados: {
-    id: 'ariados', name: 'Ariados', dexNo: 168, types: ['bug', 'poison'],
+    id: 'ariados', name: 'SNARELOOM', dexNo: 168, types: ['bug', 'poison'],
     base: { hp: 70, atk: 90, def: 70, spa: 60, spd: 70, spe: 40 },
     catchRate: 90, growth: 'fast', baseXp: 140, body: 'blob', spriteSeed: 16801,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -164,7 +164,7 @@ export const SPECIES_JOHTO = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 33, 34, 44, 50, 101],
   },
   crobat: {
-    id: 'crobat', name: 'Crobat', dexNo: 169, types: ['poison', 'flying'],
+    id: 'crobat', name: 'DREADBITE', dexNo: 169, types: ['poison', 'flying'],
     base: { hp: 85, atk: 90, def: 80, spa: 70, spd: 80, spe: 130 },
     catchRate: 90, growth: 'mediumfast', baseXp: 241, body: 'bird', spriteSeed: 16901,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -173,7 +173,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   chinchou: {
-    id: 'chinchou', name: 'Chinchou', dexNo: 170, types: ['water', 'electric'],
+    id: 'chinchou', name: 'GLOWLET', dexNo: 170, types: ['water', 'electric'],
     base: { hp: 75, atk: 38, def: 38, spa: 56, spd: 56, spe: 67 },
     catchRate: 190, growth: 'slow', baseXp: 66, body: 'fish', spriteSeed: 17001,
     eggGroups: ['water2'], hatchCounter: 20,
@@ -182,7 +182,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'lanturn', method: 'level', level: 127 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   lanturn: {
-    id: 'lanturn', name: 'Lanturn', dexNo: 171, types: ['water', 'electric'],
+    id: 'lanturn', name: 'LUMIFIN', dexNo: 171, types: ['water', 'electric'],
     base: { hp: 125, atk: 58, def: 58, spa: 76, spd: 76, spe: 67 },
     catchRate: 75, growth: 'slow', baseXp: 161, body: 'fish', spriteSeed: 17101,
     eggGroups: ['water2'], hatchCounter: 20,
@@ -191,7 +191,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   pichu: {
-    id: 'pichu', name: 'Pichu', dexNo: 172, types: ['electric'],
+    id: 'pichu', name: 'VOLTLET', dexNo: 172, types: ['electric'],
     base: { hp: 20, atk: 40, def: 15, spa: 35, spd: 35, spe: 60 },
     catchRate: 190, growth: 'mediumfast', baseXp: 41, body: 'quad', spriteSeed: 17201,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
@@ -200,7 +200,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'pikachu', method: 'level', level: 110 }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   cleffa: {
-    id: 'cleffa', name: 'Cleffa', dexNo: 173, types: ['fairy'],
+    id: 'cleffa', name: 'MOONMOTE', dexNo: 173, types: ['fairy'],
     base: { hp: 50, atk: 25, def: 28, spa: 45, spd: 55, spe: 15 },
     catchRate: 150, growth: 'fast', baseXp: 44, body: 'biped', spriteSeed: 17301,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
@@ -209,7 +209,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'clefairy', method: 'level', level: 110 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   igglybuff: {
-    id: 'igglybuff', name: 'Igglybuff', dexNo: 174, types: ['normal', 'fairy'],
+    id: 'igglybuff', name: 'PUFFLET', dexNo: 174, types: ['normal', 'fairy'],
     base: { hp: 90, atk: 30, def: 15, spa: 40, spd: 20, spe: 15 },
     catchRate: 170, growth: 'fast', baseXp: 42, body: 'biped', spriteSeed: 17401,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
@@ -218,7 +218,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'jigglypuff', method: 'level', level: 110 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   togetic: {
-    id: 'togetic', name: 'Togetic', dexNo: 176, types: ['fairy', 'flying'],
+    id: 'togetic', name: 'SERASHELL', dexNo: 176, types: ['fairy', 'flying'],
     base: { hp: 55, atk: 40, def: 85, spa: 80, spd: 105, spe: 40 },
     catchRate: 75, growth: 'fast', baseXp: 142, body: 'biped', spriteSeed: 17601,
     eggGroups: ['flying', 'fairy'], hatchCounter: 10,
@@ -227,7 +227,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'togekiss', method: 'stone', stone: 'sunstone' }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   natu: {
-    id: 'natu', name: 'Natu', dexNo: 177, types: ['psychic', 'flying'],
+    id: 'natu', name: 'ORACLET', dexNo: 177, types: ['psychic', 'flying'],
     base: { hp: 40, atk: 50, def: 45, spa: 70, spd: 45, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 64, body: 'bird', spriteSeed: 17701,
     eggGroups: ['flying'], hatchCounter: 20,
@@ -236,7 +236,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'xatu', method: 'level', level: 125 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   xatu: {
-    id: 'xatu', name: 'Xatu', dexNo: 178, types: ['psychic', 'flying'],
+    id: 'xatu', name: 'SUNSEER', dexNo: 178, types: ['psychic', 'flying'],
     base: { hp: 65, atk: 75, def: 70, spa: 95, spd: 70, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 165, body: 'bird', spriteSeed: 17801,
     eggGroups: ['flying'], hatchCounter: 20,
@@ -245,7 +245,7 @@ export const SPECIES_JOHTO = {
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   mareep: {
-    id: 'mareep', name: 'Mareep', dexNo: 179, types: ['electric'],
+    id: 'mareep', name: 'WOOLAMP', dexNo: 179, types: ['electric'],
     base: { hp: 55, atk: 40, def: 40, spa: 65, spd: 45, spe: 35 },
     catchRate: 235, growth: 'mediumslow', baseXp: 56, body: 'quad', spriteSeed: 17901,
     eggGroups: ['monster', 'ground'], hatchCounter: 20,
