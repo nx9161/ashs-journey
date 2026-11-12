@@ -36,7 +36,7 @@
 
 export const SINNOH_QUESTS = [
   { id: 'q_sinnoh_arrival', text: 'Sail to Borea — land at Shingle Town', hint: 'The ferry from Arcport docks at Shingle, under the mountain. A new region, an old cold, and a professor who measures trainers the way winter measures roofs.', flag: 'sinnoh_arrival' },
-  { id: 'q_sinnoh_lab', text: "Report to Professor Rowan's lab in Shingle", hint: 'Rowan studies how Pokemon change and grow. He has questions for a trainer of your record — and, it turns out, another visitor with questions of his own.', flag: 'rowan_registered' },
+  { id: 'q_sinnoh_lab', text: "Report to Professor Rowan's lab in Shingle", hint: 'Rowan studies how Kin change and grow. He has questions for a trainer of your record — and, it turns out, another visitor with questions of his own.', flag: 'rowan_registered' },
   { id: 'q_sinnoh_paul1', text: "The cold-eyed trainer: take Paul's measure at the lab", hint: 'Paul battles the way an auditor reads a ledger: everything counted, nothing forgiven. Whatever the result, he will file you under a number. Prove the number wrong later.', flag: 'paul1_done' },
   { id: 'q_sinnoh_verity', text: 'Lake Candor — something moved on the water', hint: 'West of Clover, the lake sits still as glass. Old stories say a spirit of emotion sleeps beneath it. Stand on the shore a while. Watch.', flag: 'verity_glimpse' },
   { id: 'q_sinnoh_roark', text: 'Coalseam Gym — challenge Roark for the Coal Badge', hint: 'East through the mines to Coalseam. Roark digs up fossils and challengers with the same care, and his Cranidos has opinions about both.', flag: 'badge_coal' },
@@ -433,20 +433,20 @@ export const SINNOH_EVENTS = {
   ev_sinnoh_arrival: [
     { chapterCard: 7 },
     { say: ['Shingle Town. The ferry lets go of the horizon behind you, and Borea takes hold in front: pine-dark hills, a wind with edges, and snow standing on the peaks like the region is thinking about winter permanently.', 'No send-off committee, no starter ceremony, no beginner\'s kit. You are not beginning anything here. You are continuing — and the mountain ahead has been continuing a great deal longer.'], who: '' },
-    { say: ['Professor Rowan\'s lab stands at the north end of town — the tall windows, the taller reputation. He studies how Pokemon grow and change, and word of your crossing reached him before your ship did.', 'Clover Town lies west, past Route 201 — a small town under the trees, and beyond it, a lake the old stories refuse to leave alone.'], who: '' },
+    { say: ['Professor Rowan\'s lab stands at the north end of town — the tall windows, the taller reputation. He studies how Kin grow and change, and word of your crossing reached him before your ship did.', 'Clover Town lies west, past Route 201 — a small town under the trees, and beyond it, a lake the old stories refuse to leave alone.'], who: '' },
     { flag: 'sinnoh_arrival' },
     { toast: 'Landed in Borea — Shingle Town.' },
   ],
   // The lab: Rowan registers a veteran; Paul takes his first measure.
   ev_sinnoh_lab: [
     { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Arden champion. The Amber voyager. The Yamato and Maris name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
-    { say: ['"Understand me: I do not register beginners in this room, and I am not registering one now. Your Pokedex is a working instrument, not a schoolbook. Borea\'s pages are open to it — all of them, from the lake spirits to the things the mountain keeps."', '"Walk my region carefully, trainer. It is older than the League, and it keeps its evidence in stone."'], who: 'PROF. ROWAN' },
+    { say: ['"Understand me: I do not register beginners in this room, and I am not registering one now. Your KinDex is a working instrument, not a schoolbook. Borea\'s pages are open to it — all of them, from the lake spirits to the things the mountain keeps."', '"Walk my region carefully, trainer. It is older than the League, and it keeps its evidence in stone."'], who: 'PROF. ROWAN' },
     { flag: 'rowan_registered' },
     { say: ['The door opens on the cold. A trainer your age stands in it — cap low, hands in pockets, a gaze that has already finished measuring the room and moved on to you.', '"Paul." The professor\'s tone files the name under weather warnings. "You were told to wait outside." — "I waited. Then I came in."'], who: '' },
     { say: ['So you are the famous one. Four regions of reputation, and it all fits in one doorway.', 'I do not battle for introductions. I battle for data. Show me what the record is actually made of — I will be counting what it costs you.'], who: 'PAUL' },
     { battleAny: { trainer: 'paul_sandgem', winFlag: 'paul1_won', loseFlag: 'paul1_lost' } },
     { flag: 'paul1_done' },
-    { say: ['Paul recalls his last Pokemon without a flicker, writes nothing down — you understand, watching him, that he does not need to — and walks out into the cold.', '"Shardfall," Rowan says to the closing door, the way other men say avalanche season. "His home. You will cross him again, trainer. Trainers like that are not weather. They are climate."'], who: '' },
+    { say: ['Paul recalls his last Kin without a flicker, writes nothing down — you understand, watching him, that he does not need to — and walks out into the cold.', '"Shardfall," Rowan says to the closing door, the way other men say avalanche season. "His home. You will cross him again, trainer. Trainers like that are not weather. They are climate."'], who: '' },
     { toast: 'Registered with Prof. Rowan — and measured by Paul.' },
   ],
   // Lake Candor: the glimpse (no catch — S6 owns the lake trio).
@@ -527,7 +527,7 @@ export const SINNOH_EVENTS = {
   // Warrior's flower) — a glimpse chain; S6 owns Shaymin's catch.
   ev_sinnoh_gracidea: [
     { say: ['Honeyfield\'s meadow has done something the florists will talk about for a decade: overnight, in the wrong season, the Gracidea have opened — all of them, a whole field standing in pink-white bloom like the meadow is holding a celebration it forgot to announce.', 'The beekeepers say the flowers open like this only in gratitude, and only all at once. Gratitude for what, nobody can agree — until the bloom at the field\'s heart moves against the wind, and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm... and settles back down into the flowers, the way a guest settles into a house that is partly theirs.'], who: '' },
-    { say: ['Shaymin. The Gratitude Pokemon, in its own flower field, at its own celebration. It is not yours to disturb today, and it knows you know it. Some meetings are appointments. This one is a promise.'], who: '' },
+    { say: ['Shaymin. The Gratitude Kin, in its own flower field, at its own celebration. It is not yours to disturb today, and it knows you know it. Some meetings are appointments. This one is a promise.'], who: '' },
     { flag: 'gracidea_beat_done' },
     { flag: 'shaymin_glimpsed' },
     { flag: 'shaymin_unlocked' },
@@ -724,7 +724,7 @@ export const SINNOH_EVENTS = {
     { toast: 'Darkrai is yours. Darkmoon Island, for the first time in fifty years, sounds like an ordinary island at night.' },
   ],
   ev_sinnoh_shaymin: [
-    { say: ['Petal Paradise lives past its billing the way shrines do: quietly, and completely — a meadow at the end of the sea road, in bloom past all reason. The letter in your bag seems to weigh less here. The flowers seem to weigh more. Gratitude does that to a place.', 'At the meadow\u2019s heart the bloom moves against the wind — and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm, and makes the decision the Gracidea field made in Honeyfield: an appointment, kept. Shaymin. The Gratitude Pokemon, in its own house, offering the house\u2019s one examination. Pass it gently.'], who: '' },
+    { say: ['Petal Paradise lives past its billing the way shrines do: quietly, and completely — a meadow at the end of the sea road, in bloom past all reason. The letter in your bag seems to weigh less here. The flowers seem to weigh more. Gratitude does that to a place.', 'At the meadow\u2019s heart the bloom moves against the wind — and a small green shape with a flower on either ear lifts its head out of the blossom, considers you with total unafraid calm, and makes the decision the Gracidea field made in Honeyfield: an appointment, kept. Shaymin. The Gratitude Kin, in its own house, offering the house\u2019s one examination. Pass it gently.'], who: '' },
     { arc: 'arc_shaymin', stage: 'active' },
     { wildBattleCatch: { species: 'shaymin', level: 374, legendary: true } },
     { arc: 'arc_shaymin', stage: 'complete' },
@@ -984,7 +984,7 @@ export const SINNOH_TALES = {
     ['Ask Ossa the ruin delver about the ledger stone', 'Return the reading to Una'],
     { keepsake: 'ruinbell' }, 'Ruin Bell',
     ['Our day-care keeps an egg ledger older than the town — every egg, every family, in my grandmother\'s hand. The first page refers to a "ledger stone" in the ruins, and I have never dared the dark to read it.', 'Ossa delves those halls weekly and fears nothing with a roof on it. Ask her what the stone says. A ledger should know its own first page.'],
-    ['The ledger stone? Read it years ago, in torchlight, with the GLYPHEYE watching like examiners. It says the ruins were a day-care FIRST — a place where the old people raised young Pokemon among the stones, and the bells they used to call them home are still down there. One hangs by the carved chamber. It rings for whoever the ruins approve of.'],
+    ['The ledger stone? Read it years ago, in torchlight, with the GLYPHEYE watching like examiners. It says the ruins were a day-care FIRST — a place where the old people raised young Kin among the stones, and the bells they used to call them home are still down there. One hangs by the carved chamber. It rings for whoever the ruins approve of.'],
     ['A day-care, before it was a ruin. Then my grandmother\'s ledger is a thousand pages long and most of them are stone. I shall copy that into the front, in my best hand.', 'And the bell approves of errands, it seems — the Ruin Bell is yours. Ossa brought it up this morning without a word, which from Ossa is a speech. It rings quiet. The ruins prefer it so.']),
   tale_sinnoh_veilstone: sinnohTale('tale_sinnoh_veilstone', 'The Clerk\'s Meteor', 'Shardfall City', 'DEPT CLERK VEE',
     ['Ask the meteor watcher about the fallen stone', 'Bring the word back to Vee at the store'],
@@ -1041,7 +1041,7 @@ export const SINNOH_NPCS = [
   { map: 'hearthome', name: 'PAUL', x: 20, y: 9, dir: 'down', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_hearthome', dialogue: ['...'] },
   { map: 'veilstone', name: 'PAUL', x: 21, y: 9, dir: 'down', art: 'rival', skin: '#f0c8a0', shirt: '#4a3a6a', pants: '#2a2a3a', hair: '#3a2a4a', sinnoh: 'paul_veilstone', dialogue: ['Shardfall. My streets. You know why you are here.'] },
   // Reggie, the Shardfall breeder (an original analogue, not the anime's).
-  { map: 'veilstone', name: 'REGGIE', x: 24, y: 13, dir: 'down', art: 'gent', skin: '#e8b888', shirt: '#4a5a4a', pants: '#2a2a3a', hair: '#6a6a6a', sinnoh: 'reggie', dialogue: ['I raise Pokemon the slow way, trainer — the way that takes the whole of a life and calls it quick.'] },
+  { map: 'veilstone', name: 'REGGIE', x: 24, y: 13, dir: 'down', art: 'gent', skin: '#e8b888', shirt: '#4a5a4a', pants: '#2a2a3a', hair: '#6a6a6a', sinnoh: 'reggie', dialogue: ['I raise Kin the slow way, trainer — the way that takes the whole of a life and calls it quick.'] },
   // Dawn again, at her first Super Contest (the hall is NPC-free S3a;
   // she is this stage's one authored addition there).
   { map: 'contest-hearthome', name: 'DAWN', x: 5, y: 7, dir: 'right', art: 'lass', skin: '#f0c8a0', shirt: '#3a6ac8', pants: '#2a2a3a', hair: '#3a5a8a', sinnoh: 'dawn_contest', dialogue: ['Deep breath. Stage lights. Okay. OKAY. Watch me, {player}.'] },

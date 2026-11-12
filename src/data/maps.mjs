@@ -28,8 +28,8 @@ export const MAPS = {
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
     ],
     signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
+      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
@@ -39,7 +39,7 @@ export const MAPS = {
       // entrance — Dawnwick's lab has no interior map, so the terminal lives
       // here (and in every Center) rather than nowhere.
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
-        dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
+        dialogue: ["Lab PC — Kin Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
     ],
     encounters: null,
     start: { x: 7, y: 7, dir: 'down' },
@@ -76,11 +76,11 @@ export const MAPS = {
       { x: 8, y: 15, to: { map: 'pallet', x: 8, y: 9 } },
     ],
     signs: [
-      { x: 5, y: 6, text: 'ROUTE 1 — Dawnwick to Fernmere City. Tall grass rustles with wild Pokemon.' },
+      { x: 5, y: 6, text: 'ROUTE 1 — Dawnwick to Fernmere City. Tall grass rustles with wild Kin.' },
     ],
     npcs: [
       { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#1a1a1a',
-        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Capture Orb. The professor gave you ten to start."] },
+        dialogue: ["Wild Kin live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Capture Orb. The professor gave you ten to start."] },
       { x: 6, y: 4, name: 'CAL', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
         sight: { dir: 'left', range: 3 }, // Yellow-style: spots you, "!", walks up (down is blocked by the sign)
@@ -158,7 +158,7 @@ export const MAPS = {
     npcs: [
       { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Center! Let me heal your team..."], heal: true,
-        afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
+        afterHeal: ["All better! Your Kin are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach (Candy Coach House Rule) — present in
       // every Center's data; the scene only fields him while the rule is
       // on (loadMap gate in overworld.mjs).
@@ -271,7 +271,7 @@ export const MAPS = {
     ],
     signs: [
       { x: 3, y: 6, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
+      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Kin trainer!' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -303,7 +303,7 @@ export const MAPS = {
     npcs: [
       { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#3a405a', hair: '#1a1a1a',
         trainer: 'brock',
-        dialogue: ["I'm Brock! I'm Flintridge's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
+        dialogue: ["I'm Brock! I'm Flintridge's Gym Leader! My rock-hard willpower is evident even in my Kin!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],
     encounters: null,
     start: null,
@@ -492,7 +492,7 @@ export const TRAINERS = {
     intro: [
       "RUE: Well, well. A little trainer marching up OUR route.",
       "COLE: And carrying a VOLTIK that walks free? That's a rare one.",
-      "RUE: Hand over your Pokemon, kid — or we'll take them the fun way!",
+      "RUE: Hand over your Kin, kid — or we'll take them the fun way!",
       "COLE: Two of us, one of you. The math is delicious.",
     ],
     lose: [
@@ -508,7 +508,7 @@ export const TRAINERS = {
   brock: {
     id: 'brock', name: 'Brock', title: 'Flintridge Gym Leader',
     ai: 'opener-setup',
-    intro: ["My rock-type Pokemon will crush you! Show me what you've got!"],
+    intro: ["My rock-type Kin will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],
     team: [
       // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor

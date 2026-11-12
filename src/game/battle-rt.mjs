@@ -789,7 +789,7 @@ Object.assign(BattleScene.prototype, {
       const anyLeft = g.state.party.some((m) => m.hp > 0);
       if (!anyLeft) {
         this.state = 'defeat';
-        this.say('You have no Pokemon left!', () => this.afterMsg());
+        this.say('You have no Kin left!', () => this.afterMsg());
       } else {
         this.openPartyMenu(true);
       }

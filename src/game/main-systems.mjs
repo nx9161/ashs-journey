@@ -220,7 +220,7 @@ Object.assign(Game.prototype, {
       superrod: 'Face water and press A to cast.',
       townmap: null, // opens the map view below
       itemfinder: 'It reacts on its own near hidden items when you search a tile.',
-      pokeflute: 'Its tune wakes sleeping Pokemon — even very large roadblocks.',
+      pokeflute: 'Its tune wakes sleeping Kin — even very large roadblocks.',
       coincase: 'Coins: ' + (g.state.bag.coin || 0) + '. Win more at the Game Corner slots.',
     };
     if (id === 'townmap') { this.openTownMap(); return; }
@@ -735,7 +735,7 @@ Object.assign(Game.prototype, {
     if (g.state.story.flags.platinum_diploma) {
       const escP = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
       const htmlP = '<div class="diploma"><div class="diplomatitle">PLATINUM DIPLOMA</div>'
-        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Platinum Pokedex:</div>'
+        + '<div class="diplomabody">This certifies that ' + escP(g.state.player.name) + ' completed the Platinum KinDex:</div>'
         + '<div class="diplomabody">all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
       g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'PLATINUM DIPLOMA', bodyHtml: htmlP }] }, null);
       return;
@@ -748,12 +748,12 @@ Object.assign(Game.prototype, {
     const own = ownCaughtMap(g.state.dex);
     const n = kanto.filter((s) => own[s.dexNo]).length;
     if (n < 151) {
-      g.ui.say(['You\'ve caught ' + n + ' of 151 Arden Pokemon.'], null, 'Prof. Hawthorn');
+      g.ui.say(['You\'ve caught ' + n + ' of 151 Arden Kin.'], null, 'Prof. Hawthorn');
       return;
     }
     const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
     const html = '<div class="diploma"><div class="diplomatitle">DIPLOMA</div>'
-      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Arden Pokedex:</div>'
+      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Arden KinDex:</div>'
       + '<div class="diplomabody">all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
     g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'DIPLOMA', bodyHtml: html }] }, null);
   },
@@ -830,11 +830,11 @@ Object.assign(Game.prototype, {
     // honoured inside its band, and the diploma honors live in
     // checkDiploma (151, the arc honor) + checkPlatinumDiploma (493).
     if (n < 25) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
-    if (n < 100) return n + ' caught! You are learning what a Pokedex is for. Keep going!';
+    if (n < 100) return n + ' caught! You are learning what a KinDex is for. Keep going!';
     if (n < 151) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
     if (n < 300) return n + ' caught! Past the Arden horizon entirely — and the book still has pages. The Platinum horizon is ' + PLATINUM_DEX_HORIZON + '.';
     if (n < PLATINUM_DEX_HORIZON) return n + ' caught! Nearly there. The last pages are always the hardest.';
-    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum Pokedex, in one journey. This is a historic Pokedex!';
+    return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum KinDex, in one journey. This is a historic KinDex!';
   },
 
   // ADR-027 D5 (Stage F): the Platinum Diploma — the 493 honor, keyed
@@ -850,7 +850,7 @@ Object.assign(Game.prototype, {
     g.state.story.flags.platinum_diploma = true;
     g.audio.playSfx('badge');
     g.ui.say([
-      'PLATINUM DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Platinum Pokedex:',
+      'PLATINUM DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Platinum KinDex:',
       'all ' + PLATINUM_DEX_HORIZON + ' species of the Platinum horizon, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
     ], null, 'Prof. Hawthorn');
   },
@@ -867,7 +867,7 @@ Object.assign(Game.prototype, {
       applyBondOnce(g.state, 'bondsrc_diploma', 'hawthorn', 2); // ADR-025 §2: the diploma is a bond beat (+2, once — this guard is the one-shot)
       g.audio.playSfx('badge');
       g.ui.say([
-        'DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Arden Pokedex:',
+        'DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Arden KinDex:',
         'all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
       ], null, 'Prof. Hawthorn');
     }

@@ -73,7 +73,7 @@ export function tierAtLeast(state, npcId, tier) {
 // note: the Quest Log PEOPLE detail line (no numbers, ever).
 export const BOND_CHARACTERS = [
   { id: 'mom', name: 'Mom', plate: 'MOM', note: 'Dawnwick. Drew the first street maps of home, chalk on a barn door.' },
-  { id: 'hawthorn', name: 'Prof. Hawthorn', plate: 'Prof. Hawthorn', note: 'The professor who studies how Pokemon and people grow together. He gave you your partner.' },
+  { id: 'hawthorn', name: 'Prof. Hawthorn', plate: 'Prof. Hawthorn', note: 'The professor who studies how Kin and people grow together. He gave you your partner.' },
   { id: 'gary', name: 'Gary', plate: 'GARY', note: 'Your rival since before either of you could reach the lab door. His PRISMKIT is still deciding.' },
   { id: 'rue', name: 'Rue', plate: 'RUE', note: 'Half of a uniformed duo with theatrical ambitions and a drawn-on moustache.' },
   { id: 'cole', name: 'Cole', plate: 'COLE', note: 'The other half. Holds the menu right-side up and the conscience for both of them.' },

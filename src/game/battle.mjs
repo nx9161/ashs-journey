@@ -402,7 +402,7 @@ export class BattleScene {
       // Scripted first-catch gate: the tips teach the loop (weaken -> throw),
       // the engine guarantees the outcome (endure + weakened auto-catch).
       this.say('Wild ' + foeName + ' appeared!', () => {
-        this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
+        this.say("AIDE (via KinGear): There's your first catch! One Thunder Shock to weaken it —", () => {
           this.say('— then open the BAG and throw a Capture Orb while its HP is yellow!', () => this.announceGround(() => this.toCommand()));
         });
       });
@@ -801,7 +801,7 @@ export class BattleScene {
     // stranded the battle with no command state. No Back row in faint
     // mode, and a cancel simply re-opens the forced choice.
     if (!inFaint) items.push({ label: 'Back', value: -1 });
-    g.ui.showMenu(inFaint ? 'Choose next Pokemon' : 'Party', items, (v) => {
+    g.ui.showMenu(inFaint ? 'Choose next Kin' : 'Party', items, (v) => {
       if (v === null || v === -1) { if (inFaint) this.openPartyMenu(true); else this.toCommand(); return; }
       const old = this.ally;
       this.ally = this.allyTeam(g)[v];
@@ -1728,7 +1728,7 @@ export class BattleScene {
         const anyLeft = this.allyTeam(g).some((m) => m.hp > 0); // F2: routed (facility override team)
         if (!anyLeft) {
           this.state = 'defeat';
-          this.say('You have no Pokemon left!', () => this.afterMsg());
+          this.say('You have no Kin left!', () => this.afterMsg());
         } else {
           this.openPartyMenu(true);
         }
@@ -1825,13 +1825,13 @@ export class BattleScene {
   _askShift() {
     const nextName = displayName(this._shiftIncoming, SPECIES);
     this.state = 'shiftprompt';
-    this.say(this.trainer.name + ' is about to send out ' + nextName + '! Will you change Pokemon?', () => this._showShiftMenu());
+    this.say(this.trainer.name + ' is about to send out ' + nextName + '! Will you change Kin?', () => this._showShiftMenu());
   }
 
   _showShiftMenu() {
     const g = this.game;
     this.state = 'shiftprompt';
-    g.ui.showMenu('Will you change Pokemon?', [
+    g.ui.showMenu('Will you change Kin?', [
       { label: 'Yes', value: 'yes' },
       { label: 'No', value: 'no' },
     ], (v) => {
@@ -1852,7 +1852,7 @@ export class BattleScene {
       value: i, disabled: m.hp <= 0 || m === this.ally,
     }));
     items.push({ label: 'Back', value: -1 });
-    g.ui.showMenu('Choose a Pokemon', items, (v) => {
+    g.ui.showMenu('Choose a Kin', items, (v) => {
       if (v === null || v === -1) { this._showShiftMenu(); return; }
       this.ally = g.state.party[v];
       this.allyStages = this.ally.stages;
@@ -2268,7 +2268,7 @@ export class BattleScene {
       ow.trail = [];
       ow.healParty(false);
       g.state.story.position = { map: 'center', x: 4, y: 4, dir: 'down' };
-      g.ui.toast('Your Pokemon were healed. (Lost half your money.)');
+      g.ui.toast('Your Kin were healed. (Lost half your money.)');
     });
   }
 

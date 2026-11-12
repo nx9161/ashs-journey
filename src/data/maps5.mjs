@@ -149,7 +149,7 @@ export const MAPS5 = {
       {
         "x": 9,
         "y": 3,
-        "text": "PROF. IVY'S LAB — Marine Pokemon research. A certain unopenable Capture Orb rests inside."
+        "text": "PROF. IVY'S LAB — Marine Kin research. A certain unopenable Capture Orb rests inside."
       },
       {
         "x": 3,
@@ -3851,7 +3851,7 @@ export const MAPS5 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Professor Ivy is out on the reef transect — she studies how the sea changes Pokemon.",
+          "Professor Ivy is out on the reef transect — she studies how the sea changes Kin.",
           "That ball on the pedestal? Every scanner we own just shrugs at it."
         ]
       }

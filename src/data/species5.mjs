@@ -954,7 +954,7 @@ export const SPECIES_SINNOH = {
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 49001,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10, eggSpecies: 'phione',
     learnset: { 1: ['bubble'], 316: ['supersonic'], 324: ['bubblebeam'], 331: ['acidarmor'] },
-    flavor: 'Born on a cold seafloor, it swaps hearts the way tides swap shores. Its eggs hatch Phione here — the one line the breeding pools carry further than the Pokedex does.',
+    flavor: 'Born on a cold seafloor, it swaps hearts the way tides swap shores. Its eggs hatch Phione here — the one line the breeding pools carry further than the KinDex does.',
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   darkrai: {

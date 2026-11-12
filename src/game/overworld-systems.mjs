@@ -429,7 +429,7 @@ Object.assign(OverworldScene.prototype, {
       // dex registration (checked on every map load).
       if (S6F.manaphy_egg_received && !S6F.arc_manaphy_done && g.state.dex.caught[SPECIES.manaphy.dexNo]) {
         S6F.arc_manaphy_done = true; S6Q.arc_manaphy = 'complete';
-        g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Pokemon!');
+        g.ui.toast('The blue Egg hatched — Manaphy, the Seafaring Kin!');
       }
       if (id === 'spear-pillar' && S6F.arceus_unlocked && !S6F.arceus_stairs_open && !S6F.ev_sinnoh_arceus_stairs_done) {
         // Stage S7: the flute ceremony outranks the pillar's catch
@@ -900,7 +900,7 @@ Object.assign(OverworldScene.prototype, {
     const lines = CREDITS_LINES.slice();
     if (grantKeepsake(g.state, 'championsribbon')) {
       lines.push('The League registrar presents you with the CHAMPION\'S RIBBON!');
-      lines.push('Give it to a Pokemon from the party menu — its holder gains x1.2 XP.');
+      lines.push('Give it to a Kin from the party menu — its holder gains x1.2 XP.');
     } else if (ownsKeepsake(g.state, 'championsribbon')) {
       const hofGift = grantKeepsakeFromSource(g.state, 'championsribbon');
       lines.push('The League registrar reaches for the CHAMPION\'S RIBBON — then sees yours, and smiles.');
@@ -1214,7 +1214,7 @@ Object.assign(OverworldScene.prototype, {
         : 'The receptionist beams: "Welcome to the Contest Hall! Four entrants, four rounds of appeal — first place takes the ' + RIBBON_NAMES[hall] + '!"',
       '"Who will you enter? Choose the partner who takes the stage."',
     ], () => {
-      g.ui.showMenu('Enter which Pokemon?', able.map((m, i) => ({
+      g.ui.showMenu('Enter which Kin?', able.map((m, i) => ({
         label: displayName(m, SPECIES) + '  Lv' + m.level, value: i,
       })), (v) => {
         const mon = able[v];
@@ -1867,7 +1867,7 @@ Object.assign(OverworldScene.prototype, {
           : [{ label: 'Show your best', value: 'best' }];
         g.ui.showMenu('Rudy\'s type drill — answer his test:', drill, (v) => {
           if (!v) return;
-          say(['Yes. That. A type is not a label, it is a promise about how a Pokemon meets the world — and you keep your promises.',
+          say(['Yes. That. A type is not a label, it is a promise about how a Kin meets the world — and you keep your promises.',
             'Now we dance properly. Battle tempo, challenger — try to keep up with my ASTRION. It has never once stood still.'], () => {
             this.startOrangeBattle('rudy', null);
           });
@@ -2131,7 +2131,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'pharmacist') {
       if (flags.amphy_healed) { say(['Lumi\'s light is back over the water — the whole island saw it come on at dusk. That is the best review this pharmacy has ever had, trainer.']); return true; }
       if ((st.bag.secretpotion || 0) > 0) { say(['That potion in your bag is the real article — my own mix, both hands, no shortcuts. Get it across the water to the lighthouse, and do not drop it. Lumi is counting on a steady hand.']); return true; }
-      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Lumi, isn\'t it. The lighthouse Pokemon, sick these past weeks, and Beacon out of its depth.',
+      say(['You have the look of an errand that matters. Let me guess — no. Let me KNOW: it is Lumi, isn\'t it. The lighthouse Kin, sick these past weeks, and Beacon out of its depth.',
         'This is the Secret Potion. My family\'s recipe, the strong one — we make it for exactly one patient at a time, and today the patient is a lighthouse. Carry it carefully, trainer. Half of Yamato\'s ships steer by that light.'], () => {
         st.bag.secretpotion = (st.bag.secretpotion || 0) + 1;
         flags.secret_potion_got = true;
@@ -2333,7 +2333,7 @@ Object.assign(OverworldScene.prototype, {
                 'Take the semi-final road with my respect — you have beaten the two best trainers in this bracket back to back, and one of them is standing here applauding. The Conference is yours in every way that history checks.',
               ] : [
                 '...It is decided. The final exchange — CHARHOUND endures, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Harrison.',
-                'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
+                'Do not hang your head. DO NOT. You beat Gary Oak in this stadium, you carried eight badges across a region that tests everything, and you took me to the last Kin I own. The loss stands — that is sport. So does everything you did to get here — that is history.',
                 'Gary is in the tunnel, trainer. Even he is applauding. Especially him, though he will deny the especially.',
               ];
               say(lines, () => {
@@ -2436,7 +2436,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       say(['You ask an old man about towers, in Lantern, in this year of all years. Walk with me — my knees teach better than my chair does.',
-        'A hundred and fifty years ago this town kept two towers, so that whichever way the great bird came over the hills there would be bells beneath it. The bells were never alarms, child. They were doorbells. Then lightning — ordinary, stupid, indifferent lightning — took the western tower, and three Pokemon who slept in its basement died in a fire no one could outrun.',
+        'A hundred and fifty years ago this town kept two towers, so that whichever way the great bird came over the hills there would be bells beneath it. The bells were never alarms, child. They were doorbells. Then lightning — ordinary, stupid, indifferent lightning — took the western tower, and three Kin who slept in its basement died in a fire no one could outrun.',
         'And the bird came back. That is the part the histories whisper: it came down through the smoke and it CALLED — and the three who died stood up out of the ash and ran, remade: one into thunder, one into the mountain\'s fire, one into the north wind itself. Then it circled the new tower once, and it has been waiting ever since — not for worship. For a heart it could trust with what it protects.',
         'You saw it, didn\'t you. On the road, in the morning, most likely — it likes to look at candidates before candidates know there is a test. The sisters at the dance theatre keep its bell. When the three it raised are quiet, ask them. And climb at dawn. Everything about that bird happens at dawn.'], () => {
         flags.hooh_history = true;
@@ -2676,8 +2676,8 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'wally') {
       if (!flags.wally_helped) {
-        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Wildflower, for my health. The air, the doctors say.', 'I asked my family for a Pokemon of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has Ralts in it sometimes. I have a ball, and a borrowed Zigzagoon from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
-          say(['The grass shivers. A Ralts — small, horned, already turning away — and the borrowed Zigzagoon looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. Ralts, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Pokemon. I HAVE a Pokemon, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
+        say(['Oh — excuse me. You are a trainer, aren\'t you? I can tell. Everyone here can always tell, and I — I am Wally. I am moving away soon, to Wildflower, for my health. The air, the doctors say.', 'I asked my family for a Kin of my own before we go, and they said yes, if — if I could catch one. Me. The pond grass past the gym has Ralts in it sometimes. I have a ball, and a borrowed Zigzagoon from my neighbor, and hands that shake at exactly the wrong moments. Would you... walk with me? Just to the grass. Just so the shaking is not the loudest thing there.'], () => {
+          say(['The grass shivers. A Ralts — small, horned, already turning away — and the borrowed Zigzagoon looks back once, waiting to be believed in.', 'You did it. YOU DID IT — no, wait. WE did it. Ralts, I — thank you. Thank you for not running. I will take care of you. I will learn how, I promise, I will learn everything.', 'I have a Kin. I HAVE a Kin, {player}. When I am stronger — when we are both stronger — our road is going to cross yours again, and I am not going to be the boy who needed help standing in the grass. Remember my name for then. Wally. Remember it kindly.'], () => {
             flags.wally_helped = true;
             flags.wally_ralts = true;
             g.audio.playSfx('dex-register');
@@ -2923,7 +2923,7 @@ Object.assign(OverworldScene.prototype, {
                 'Take the honours road with my respect — you beat everyone this bracket owns, back to back, and the last of them is standing here applauding. Whatever the book says, this hall knows what it saw.',
               ] : [
                 '...It is decided. The final exchange — TINKLETOM endures by a whisker and a promise, the crowd comes up off its seats like a tide, and the judges\' card, when it turns, says Tyson. By the narrowest margin this hall has ever recorded.',
-                'Do not hang your head. DO NOT. You carried eight badges across a region that was ending its own weather, you calmed two titans and a sky, and you took me to the last Pokemon I own. The loss stands — that is sport. So does everything you did to get here — that is history. Morrison is on his feet. The whole hall is. Look at them, trainer. That sound is yours.',
+                'Do not hang your head. DO NOT. You carried eight badges across a region that was ending its own weather, you calmed two titans and a sky, and you took me to the last Kin I own. The loss stands — that is sport. So does everything you did to get here — that is history. Morrison is on his feet. The whole hall is. Look at them, trainer. That sound is yours.',
               ];
               say(lines, () => {
                 say(['Trainer. TYSON\'s trainer — and everyone still standing. My name is Scott. I scout battle the way other men scout weather, and I have watched every match you fought in this hall with an envelope in my pocket getting heavier by the round.', 'Inside it: an invitation. Seven facilities, seven Frontier Brains, one island off Arden where battle is the whole civilisation. The Trial Grounds, trainer. When you have rested — when HOME has had you back a while — that envelope is your next horizon. Bring the team you trust most. The Frontier does not care where you have been. Only how you fight.'], () => {
@@ -3130,7 +3130,7 @@ Object.assign(OverworldScene.prototype, {
     if (kind === 'paul_eterna') {
       if (flags.paul_veilstone_done) { say(['Still ahead of my projections, {player}. The lakes will re-audit us both. Be there.']); return true; }
       if (!flags.paul_eterna_seen) {
-        say(['You took Gardenia\'s measure. Adequate. The Roserade folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Pokemon. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
+        say(['You took Gardenia\'s measure. Adequate. The Roserade folded later than my model said it would — I have adjusted the model, not the conclusion.', 'Understand something, {player}: I do not hate weak Kin. I hate WASTED ones — potential spent on trainers who will not do the arithmetic. Your arithmetic interests me. That is not a compliment. It is a warning that I am still counting.'], () => { flags.paul_eterna_seen = true; });
         return true;
       }
       say(['Still counting, {player}. Inglenook next — Fantina\'s theatre. Try not to be decorative about it.']);
@@ -3149,7 +3149,7 @@ Object.assign(OverworldScene.prototype, {
         return true;
       }
       // ---- the Chimchar beat ----
-      say(['There. Look at it, since you are here. A Chimchar I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Pokemon\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
+      say(['There. Look at it, since you are here. A Chimchar I have raised since the egg — fed it, drilled it, entered it. Three gyms of data, and the data is a wall: it does not win when winning is hard.', 'A trainer\'s resources are finite. So is a Kin\'s ceiling. I do not confuse the two, and I do not keep the ones the arithmetic has finished with. It stays here. Released. As of this sentence, it is no one\'s problem — which, in my experience, means it is about to become yours.'], () => {
         say(['The little fire-type watches Paul walk away without a sound. Its flame is lit. Its stance, when it turns to you, is a question it has clearly been practicing: not can I win — but will anyone stay long enough to find out?'], () => {
           g.ui.showMenu('Take the Chimchar in?', [
             { label: 'Take it in', value: 'yes' },
@@ -3182,7 +3182,7 @@ Object.assign(OverworldScene.prototype, {
 
     if (kind === 'reggie') {
       if (!flags.reggie_met) {
-        say(['I am Reggie. I breed Pokemon here in Shardfall — feed them, raise them, teach them the shape of a good life. My little brother Paul passed your name to me in a letter of exactly eleven words, which for Paul is a memoir.', '"Trainer from the ferry. Underestimated by everyone counting. Watch him." That is the whole letter. He has never once written watch him about anybody, {player}. Whatever you did at that lab, it is still walking around in his head.'], () => { flags.reggie_met = true; });
+        say(['I am Reggie. I breed Kin here in Shardfall — feed them, raise them, teach them the shape of a good life. My little brother Paul passed your name to me in a letter of exactly eleven words, which for Paul is a memoir.', '"Trainer from the ferry. Underestimated by everyone counting. Watch him." That is the whole letter. He has never once written watch him about anybody, {player}. Whatever you did at that lab, it is still walking around in his head.'], () => { flags.reggie_met = true; });
         return true;
       }
       say(flags.chimchar_taken
@@ -4344,9 +4344,9 @@ Object.assign(OverworldScene.prototype, {
     const menu = () => {
       const items = [];
       if (st.daycareEgg) items.push({ label: 'Collect the Egg we found', value: 'egg' });
-      items.push({ label: 'Leave a Pokemon with us', value: 'dep', disabled: st.daycare.length >= 2 });
-      items.push({ label: 'Take a Pokemon back', value: 'wd', disabled: !st.daycare.length });
-      items.push({ label: 'How are my Pokemon?', value: 'status' });
+      items.push({ label: 'Leave a Kin with us', value: 'dep', disabled: st.daycare.length >= 2 });
+      items.push({ label: 'Take a Kin back', value: 'wd', disabled: !st.daycare.length });
+      items.push({ label: 'How are my Kin?', value: 'status' });
       items.push({ label: 'Leave', value: null });
       g.ui.showMenu('Day-Care — we raise them with patient hands.', items, (v) => {
         if (v === 'egg') {
@@ -4361,14 +4361,14 @@ Object.assign(OverworldScene.prototype, {
             label: displayName(m, SPECIES) + ' Lv' + m.level + (m.egg ? ' (Egg)' : ''), value: i, disabled: !!m.egg,
           }));
           rows.push({ label: 'Back', value: -1 });
-          g.ui.showMenu('Leave which Pokemon?', rows, (iv) => {
+          g.ui.showMenu('Leave which Kin?', rows, (iv) => {
             if (iv === null || iv === -1) { menu(); return; }
             const mon = st.party[iv];
             const res = depositToDaycare(st, iv);
             if (res.ok) {
               say(['We will take good care of ' + displayName(mon, SPECIES) + '. Walk the routes, trainer — eggs and friendships both happen at walking pace.'], () => menu());
             } else if (res.reason === 'partner') say([res.line], () => menu());
-            else if (res.reason === 'last-non-egg') say(['Not your last travelling partner, dear. An Egg cannot walk the roads alone — someone has to carry it, and battle for it. Leave us a Pokemon when another able one walks with you.'], () => menu());
+            else if (res.reason === 'last-non-egg') say(['Not your last travelling partner, dear. An Egg cannot walk the roads alone — someone has to carry it, and battle for it. Leave us a Kin when another able one walks with you.'], () => menu());
             else if (res.reason === 'is-egg') say(['An Egg needs its trainer\'s own walking to hatch. Keep it in your party, dear.'], () => menu());
             else say(['We are full up just now — two guests is our honest limit.'], () => menu());
           });
@@ -4377,7 +4377,7 @@ Object.assign(OverworldScene.prototype, {
         if (v === 'wd') {
           const rows = st.daycare.map((m, i) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: i }));
           rows.push({ label: 'Back', value: -1 });
-          g.ui.showMenu('Take back which Pokemon?', rows, (iv) => {
+          g.ui.showMenu('Take back which Kin?', rows, (iv) => {
             if (iv === null || iv === -1) { menu(); return; }
             const mon = st.daycare[iv];
             const res = withdrawFromDaycare(st, iv);
@@ -4408,8 +4408,8 @@ Object.assign(OverworldScene.prototype, {
     // visit, so every player meets the system. A full-everywhere
     // refusal sets NO flag — the offer stands on the next visit.
     if (!flags.daycare_story_egg) {
-      say(['Welcome to our little house, trainer. Forty years we have raised other folks\' Pokemon here, one nap at a time.',
-        'Before anything else — a gift. Travellers leave us all sorts here, and this was left with a note: "for a trainer who walks." It is a Pokemon Egg, and we would like you to walk with it.'], () => {
+      say(['Welcome to our little house, trainer. Forty years we have raised other folks\' Kin here, one nap at a time.',
+        'Before anything else — a gift. Travellers leave us all sorts here, and this was left with a note: "for a trainer who walks." It is a Kin Egg, and we would like you to walk with it.'], () => {
         const res = giveStoryEgg(st, () => g.rng.misc());
         if (!res.ok) {
           say(['Ah — no room anywhere, party and boxes both full. Make a little room, dear, and come back. The Egg will keep.']);
@@ -4417,7 +4417,7 @@ Object.assign(OverworldScene.prototype, {
         }
         flags.daycare_story_egg = true;
         g.audio.playSfx('dex-register');
-        say(['Received a Pokemon Egg!', destLine(res, 'The Egg'), 'Walk with it in your party. When it is ready, it will not ask permission — eggs never do.'], () => menu());
+        say(['Received a Kin Egg!', destLine(res, 'The Egg'), 'Walk with it in your party. When it is ready, it will not ask permission — eggs never do.'], () => menu());
       });
       return true;
     }
@@ -4473,7 +4473,7 @@ Object.assign(OverworldScene.prototype, {
       // never come back — checking (or backing out) cost the whole PC
       // session. The panel now stays open underneath (menus and dialogue
       // route above it) and every exit path returns to it.
-      if (!cand.length) { g.ui.say(['No Pokemon here is waiting on a trade evolution.'], () => render()); return; }
+      if (!cand.length) { g.ui.say(['No Kin here is waiting on a trade evolution.'], () => render()); return; }
       const items = cand.map((c, i) => ({ label: displayName(c.mon, SPECIES) + ' -> ' + SPECIES[c.evo.to].name, value: i }));
       items.push({ label: 'Back', value: null, wide: true });
       const linkRowHtml = (it) => {
@@ -4497,7 +4497,7 @@ Object.assign(OverworldScene.prototype, {
       }
       const mon = g.state.party[st.idx];
       if (mon) return '<b>' + displayName(mon, SPECIES) + ' Lv' + mon.level + '</b><br>HP ' + mon.hp + '/' + mon.maxHp + '<br>A: pick up.';
-      return 'Empty party slot.<br>Place a box Pokemon here to withdraw it.';
+      return 'Empty party slot.<br>Place a box Kin here to withdraw it.';
     };
 
     const render = () => {
@@ -4553,13 +4553,13 @@ Object.assign(OverworldScene.prototype, {
         const arr = boxArr();
         const occ = arr[idx];
         if (held.from === 'party') {
-          if (g.state.party.length <= 1) { g.ui.say(['You need at least one Pokemon with you!']); return; }
+          if (g.state.party.length <= 1) { g.ui.say(['You need at least one Kin with you!']); return; }
           // Stage J6: the all-egg guard (the deposit-your-last-mon
           // precedent, sharpened) — a move whose RESULTING party
           // holds only Eggs (or nothing able) is refused.
           const simParty = g.state.party.filter((_, i2) => i2 !== held.idx);
           if (occ) simParty.splice(held.idx, 0, occ);
-          if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
+          if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Kin with you.']); return; }
           const chk = boxCheck(held.mon);
           if (!chk.ok) { g.ui.say([chk.line]); return; }
           g.state.party.splice(held.idx, 1);
@@ -4581,7 +4581,7 @@ Object.assign(OverworldScene.prototype, {
             if (!chk.ok) { g.ui.say([chk.line]); return; }
             // Stage J6: the same all-egg guard on the swap direction.
             const simParty = g.state.party.slice(); simParty[idx] = held.mon;
-            if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Pokemon with you.']); return; }
+            if (!simParty.some((m) => m && !m.egg)) { g.ui.say(['An Egg can\'t travel alone! Keep at least one hatched Kin with you.']); return; }
             src[held.idx] = occ; g.state.party[idx] = held.mon;
           } else {
             src.splice(held.idx, 1); g.state.party.push(held.mon);
@@ -4922,7 +4922,7 @@ Object.assign(OverworldScene.prototype, {
         return { label: 'No.' + sp.dexNo + ' ' + sp.name + (owned ? ' ✓' : ''), value: id };
       });
       rows.push({ label: 'Back', value: null });
-      g.ui.showMenu('Get Pokemon — everything $0', rows, (sid) => {
+      g.ui.showMenu('Get Kin — everything $0', rows, (sid) => {
         if (!sid) { this.openCheatShop(); return; }
         const sp = SPECIES[sid];
         // Level stepper, opening at 50 (pickQty idiom, own start);
@@ -4974,7 +4974,7 @@ Object.assign(OverworldScene.prototype, {
     };
     g.ui.showMenu('Cheat Terminal — everything is $0', [
       { label: 'Get Items', value: 'items' },
-      { label: 'Get Pokémon', value: 'pokemon' },
+      { label: 'Get Kin', value: 'pokemon' },
       { label: 'Leave', value: 'leave' },
     ], (v) => {
       if (v === 'items') showItems();
@@ -5065,7 +5065,7 @@ Object.assign(OverworldScene.prototype, {
       this.trail = [];
       this.healParty(false);
       g.state.story.position = { map: 'center', x: 4, y: 4, dir: 'down' };
-      g.ui.toast('Your Pokemon were healed. (Lost half your money.)');
+      g.ui.toast('Your Kin were healed. (Lost half your money.)');
     });
   },
 

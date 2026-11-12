@@ -840,9 +840,9 @@ export class Game {
     // ADR-027 D5: the sealed divider — species beyond the Platinum
     // horizon (the rest of the 1025 frame) sit below it exactly as
     // undiscovered species render today: ??? rows under this line.
-    items.push({ label: '— More Pokémon are known to exist. Their regions are future arcs. —', value: null, disabled: true });
+    items.push({ label: '— More Kin are known to exist. Their regions are future arcs. —', value: null, disabled: true });
     items.push({ label: 'Close', value: 'close' });
-    g.ui.showMenu('Pokedex', items, (v) => {
+    g.ui.showMenu('KinDex', items, (v) => {
       if (!v || v === 'close') return;
       if (v === 'rating') { g.ui.say([g.oakRating()], () => g.openDex(filter), 'Prof. Hawthorn'); return; }
       if (v === 'filter') { g.openDexFilter(filter); return; }
@@ -875,7 +875,7 @@ export class Game {
         + '<div><div class="sumname">' + (known ? sp.name : '???') + '</div>'
         + '<div class="sumsub">' + (known ? sp.types.join(' / ') : '???') + '</div>'
         + '<div class="sumsub">Status: ' + (c ? 'CAUGHT' : s ? 'SEEN' : 'UNSEEN') + '</div></div></div>'
-        + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Pokemon has not been seen.') + '</div>'
+        + '<div class="sumflavor">' + (known ? sp.flavor : 'No data yet — this Kin has not been seen.') + '</div>'
         + '<div class="sumsub">◀ ▶ : previous / next entry</div>';
       return { title, bodyHtml: body };
     };

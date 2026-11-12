@@ -5,10 +5,10 @@ export const INTRO_SCRIPT = {
   professor: 'PROF. HAWTHORN',
   lines: [
     'Ah — you made it. I was starting to worry the alarm won again.',
-    'Welcome to the world of Pokemon! My name is Hawthorn. I study how Pokemon and people grow together.',
+    'Welcome to the world of Kin! My name is Hawthorn. I study how Kin and people grow together.',
     'You must be {player}. That spark in your eyes — you are ready for the road.',
     'Now then... every trainer begins with a partner. But I have a confession.',
-    'The three young Pokemon I set aside for new trainers... they have already found homes this morning.',
+    'The three young Kin I set aside for new trainers... they have already found homes this morning.',
     'There is one left. A difficult one. It has opinions, and it has already shocked two of my aides today.',
   ],
   starterMoment: [
@@ -16,7 +16,7 @@ export const INTRO_SCRIPT = {
     '...It shocked you too! Ha! That means it likes you. Mostly.',
     'Listen well: this one will never stay inside a Capture Orb. It walks beside you, or not at all.',
     'A bond like that is rarer than any badge. Treat it well, {player}.',
-    'Your journey starts on Route 1, north of Dawnwick. Catch Pokemon, grow strong — and when you are ready, Flintridge Gym awaits.',
+    'Your journey starts on Route 1, north of Dawnwick. Catch Kin, grow strong — and when you are ready, Flintridge Gym awaits.',
   ],
 };
 
@@ -49,7 +49,7 @@ export const GYM_WIN_TEXT = [
 
 export const SLICE_CAPSTONE = [
   '{player} received the Boulder Badge!',
-  'With the Boulder Badge, your Pokemon will obey you, and your team hits a little harder.',
+  'With the Boulder Badge, your Kin will obey you, and your team hits a little harder.',
   '...To be continued. The road to Tidehaven City lies ahead — in the next chapter.',
 ];
 
@@ -103,9 +103,9 @@ export const BOND_DIALOGUE = {
     // entry is never bond-gated); only the warmth of the delivery.
     rating: {
       cold: ['{n} caught. The data is the data, whatever either of us feels about it. Keep walking.'],
-      wary: ['{n} caught so far. The Pokedex fills one honest page at a time — keep going.'],
+      wary: ['{n} caught so far. The KinDex fills one honest page at a time — keep going.'],
       warm: ['{n} caught! Look at that. Every page of that dex is a place you stood and a creature that trusted you. Keep going!'],
-      close: ['{n} caught. Do you know, in forty years of handing out Pokedexes, yours is the one I check first in the morning. Whatever the number says — I am proud of the trainer carrying it.'],
+      close: ['{n} caught. Do you know, in forty years of handing out KinDexes, yours is the one I check first in the morning. Whatever the number says — I am proud of the trainer carrying it.'],
     },
   },
   brock: {

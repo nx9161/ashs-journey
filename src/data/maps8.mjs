@@ -1015,8 +1015,8 @@ export const MAPS8 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "Welcome to the Trial Palace! Here your Pokémon choose their own moves — we simply keep the gardens quiet for them.",
-          "Palace Maven Spencer believes a Pokémon's spirit speaks loudest uncommanded. Win your streaks and he will listen for yours."
+          "Welcome to the Trial Palace! Here your Kin choose their own moves — we simply keep the gardens quiet for them.",
+          "Palace Maven Spencer believes a Kin's spirit speaks loudest uncommanded. Win your streaks and he will listen for yours."
         ],
         "frontier": "palace"
       }

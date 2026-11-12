@@ -48,7 +48,7 @@ export const MAPS2 = {
     ],
     signs: [
       { x: 3, y: 6, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Pokemon trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
+      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Kin trainer! Inside lies a RUBBLE GROUND: Rock moves hit harder and physical moves land true — for Brock, and for you.' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -301,7 +301,7 @@ export const MAPS2 = {
         dialogue: ["Heya! I'm Bill — the PC box whiz. My teleport experiment hiccuped and I woke up dressed as a MOONLET.", "My Sea Cottage lab is shuttered while I fix it, so ask me anything here. Your boxes? I built those. You're welcome."] },
       { x: 5, y: 10, name: 'WREN', art: 'nurse', skin: '#e8b888', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
         giveMon: { species: 'bulbasaur', level: 10 },
-        dialogue: ["I nurse hurt Pokemon back to health here. This BUDDIN came to me half-starved, the poor sprout.", "He's strong now — and he needs a journey, not a garden. Will you take him with you?"] },
+        dialogue: ["I nurse hurt Kin back to health here. This BUDDIN came to me half-starved, the poor sprout.", "He's strong now — and he needs a journey, not a garden. Will you take him with you?"] },
       { x: 15, y: 8, name: 'ORIN', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#6a4a2a',
         trade: { give: 'abra', get: 'mrmime', nickname: 'MARCEL' },
         dialogue: ["My NAPSEER teleports out of every conversation. Exhausting at parties.", "Trade you my PANTOMIM, Marcel, for an NAPSEER? At least he'll stay in the room. Mostly."] },
@@ -346,7 +346,7 @@ export const MAPS2 = {
     npcs: [
       { x: 8, y: 2, name: 'MISTY', art: 'misty', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
-        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
+        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Kin are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
       { x: 4, y: 6, name: 'DIANA', art: 'swimmer', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'gym_cerulean_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Misty taught me to swim AND to battle. Both involve not panicking.", "You kept your head above water... fine, pass."] },
@@ -383,11 +383,11 @@ export const MAPS2 = {
       { x: 9, y: 13, to: { map: 'route6', x: 9, y: 1 } },
     ],
     signs: [
-      { x: 10, y: 7, text: 'POKEMON DAY CARE — We raise your Pokemon with love while you travel. — The Day-Care Couple' },
+      { x: 10, y: 7, text: 'KIN DAY CARE — We raise your Kin with love while you travel. — The Day-Care Couple' },
     ],
     npcs: [
       { x: 8, y: 8, name: 'GRAMPS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
-        dialogue: ["Sixty years I've raised other folks' Pokemon on this route. They always come back stronger.", "Leave a partner with us someday, eh? Love and fresh air — that's the whole recipe."] },
+        dialogue: ["Sixty years I've raised other folks' Kin on this route. They always come back stronger.", "Leave a partner with us someday, eh? Love and fresh air — that's the whole recipe."] },
       { x: 12, y: 5, name: 'CAMPER JO', art: 'camper', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         trainer: 'r5_camper', sight: { dir: 'left', range: 3 },
         dialogue: ["Day care's closed to challengers, but I'M not! Battle the camper!", "Camp's all yours, champ. Sheesh."] },
@@ -435,7 +435,7 @@ export const MAPS2 = {
       { x: 9, y: 13, to: { map: 'vermilion', x: 9, y: 1 } },
     ],
     signs: [
-      { x: 5, y: 7, text: 'ROUTE 6 — Tidehaven to Arcport. The pond is full of quiet, patient Pokemon.' },
+      { x: 5, y: 7, text: 'ROUTE 6 — Tidehaven to Arcport. The pond is full of quiet, patient Kin.' },
     ],
     npcs: [
       { x: 3, y: 10, name: 'BUG CATCHER ELI', art: 'bugcatcher', skin: '#e8b888', shirt: '#a03a5f', pants: '#2a304a', hair: '#7a4a1a',
@@ -518,7 +518,7 @@ export const MAPS2 = {
         trade: { give: 'spearow', get: 'farfetchd', nickname: 'DUX' },
         dialogue: ["Caught this POSTDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
       { x: 13, y: 2, name: 'CHAIRMAN', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
-        dialogue: ["I chair the Pokemon Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
+        dialogue: ["I chair the Kin Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
     ],
     encounters: null,
     items: [],
@@ -553,7 +553,7 @@ export const MAPS2 = {
     npcs: [
       { x: 8, y: 2, name: 'LT. SURGE', art: 'surge', skin: '#d8a878', shirt: '#324a83', pants: '#2a304a', hair: '#c0a03a',
         trainer: 'surge',
-        dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
+        dialogue: ["Name's Surge! My electric Kin saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
       { x: 4, y: 6, name: 'WALT', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
         trainer: 'gym_vermilion_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Surge taught this old gentleman one thing: never grab a live wire.", "Shocking... defeat. Mind the switches on your way up."] },
@@ -598,7 +598,7 @@ export const MAPS2 = {
         sight: { dir: 'left', range: 3 },
         dialogue: ["We dressed as crew. The hats were VERY convincing.", "Abandon ship — the plan, I mean! The plan!"] },
       { x: 15, y: 8, name: 'CAPTAIN', art: 'sailor', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#2a3a4a', hair: '#c0c0c0',
-        dialogue: ["Back in '62 I wrestled a storm off the Sevii coast with one hand on the wheel and one on my tea.", "Rub my back when I'm seasick and I might teach your Pokemon to slice clean through anything."] },
+        dialogue: ["Back in '62 I wrestled a storm off the Sevii coast with one hand on the wheel and one on my tea.", "Rub my back when I'm seasick and I might teach your Kin to slice clean through anything."] },
     ],
     encounters: null,
     items: [],
@@ -823,7 +823,7 @@ export const MAPS2 = {
     signs: [
       { x: 3, y: 2, text: 'SLOT MACHINE — Three CELLORB and the jackpot is yours. The house thanks you for trying.' },
       { x: 6, y: 2, text: 'SLOT MACHINE — A sign reads: NO PEEKING BEHIND THE POSTER. MANAGEMENT.' },
-      { x: 9, y: 2, text: 'PRIZE DESK — Rare Pokemon for rare coin totals. No trades, no haggling, no tears.' },
+      { x: 9, y: 2, text: 'PRIZE DESK — Rare Kin for rare coin totals. No trades, no haggling, no tears.' },
       { x: 12, y: 2, text: 'SLOT MACHINE — Someone carved tiny letters here: R WAS HERE.' },
     ],
     npcs: [
@@ -1361,13 +1361,13 @@ export const MAPS2 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
-      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Pokemon.' },
+      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
     ],
     npcs: [
       { x: 5, y: 9, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
-        dialogue: ["I volunteer at the Pokemon House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
+        dialogue: ["I volunteer at the Kin House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
       { x: 13, y: 9, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
-        dialogue: ["My grandma says the tower ghosts are just Pokemon who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
+        dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
     ],
     encounters: null,
     items: [],
@@ -1406,7 +1406,7 @@ export const MAPS2 = {
     npcs: [
       { x: 8, y: 3, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_tower',
-        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
+        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Kin I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
       { x: 12, y: 6, name: 'CHANNELER', art: 'monk', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["The spirits drift closer to the stairs each night, child. Something above grieves — loudly.", "Purify your heart before you climb. The tower can smell doubt."] },
     ],
@@ -1616,12 +1616,12 @@ export const MAPS2 = {
       { x: 9, y: 12, to: { map: 'route19', x: 9, y: 1 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Pokemon roam free beyond the south gate.' },
+      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Kin roam free beyond the south gate.' },
       { x: 8, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master!' },
     ],
     npcs: [
       { x: 10, y: 11, name: 'WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0',
-        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Find them and I'll teach your Pokemon to push boulders like they're made of foam. Mmh!"] },
+        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Find them and I'll teach your Kin to push boulders like they're made of foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
     ],
@@ -2049,7 +2049,7 @@ export const MAPS2 = {
     npcs: [
       { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
-        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
+        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Kin will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
       { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#5a2a7a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
@@ -2132,8 +2132,8 @@ export const MAPS2 = {
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 14 } },
     ],
     signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
+      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
@@ -2411,10 +2411,10 @@ export const MAPS2 = {
     npcs: [
       { x: 9, y: 17, name: 'LORELEI', art: 'lorelei', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#7a1a3a',
         trainer: 'lorelei',
-        dialogue: ["I am Lorelei of the Elite Four! My ice Pokemon are glaciers with tempers — no one breaks them. No one.", "Glaciers... melt. Astonishing. Bruno waits above, and he hits far harder than winter."] },
+        dialogue: ["I am Lorelei of the Elite Four! My ice Kin are glaciers with tempers — no one breaks them. No one.", "Glaciers... melt. Astonishing. Bruno waits above, and he hits far harder than winter."] },
       { x: 9, y: 13, name: 'BRUNO', art: 'bruno', skin: '#c89878', shirt: '#50368e', pants: '#3a3a3a', hair: '#1a1a1a',
         trainer: 'bruno',
-        dialogue: ["I am Bruno! Through rigorous training, my Pokemon and I became one machine of muscle!", "We train again. YOU — climb. Agatha's ghosts are older than my pride."] },
+        dialogue: ["I am Bruno! Through rigorous training, my Kin and I became one machine of muscle!", "We train again. YOU — climb. Agatha's ghosts are older than my pride."] },
       { x: 9, y: 9, name: 'AGATHA', art: 'agatha', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'agatha',
         dialogue: ["I am Agatha. I battled that fool Hawthorn when we were both young and reckless... mostly him.", "Hmph. You fight like he dreamed of fighting. Lance awaits, child. Mind the dragons."] },

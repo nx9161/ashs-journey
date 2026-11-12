@@ -83,7 +83,7 @@ export const MAPS7 = {
       {"x": 14, "y": 0, "to": {"map": "r101", "x": 12, "y": 14}},
     ],
     "signs": [
-      {"x": 2, "y": 5, "text": "PROF. BIRCH'S LAB — Rootlet's own Pokemon laboratory. Birch studies Pokemon where they actually live: outside."},
+      {"x": 2, "y": 5, "text": "PROF. BIRCH'S LAB — Rootlet's own Kin laboratory. Birch studies Kin where they actually live: outside."},
       {"x": 15, "y": 15, "text": "ROOTLET TOWN — A town that cannot be shaded any further. Route 101 runs north to Eldergrove."},
       {"x": 20, "y": 5, "text": "ROOTLET TOWN — North: ROUTE 101."},
       {"x": 3, "y": 9, "text": "ROOTLET TOWN — North: ROUTE 101."},
@@ -203,7 +203,7 @@ export const MAPS7 = {
       {"x": 19, "y": 1, "text": "MEADOWBROOK CITY — North: ROUTE 104 · East: ROUTE 102."},
     ],
     "npcs": [
-      {"x": 11, "y": 6, "name": "WALLY’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Pokemon and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
+      {"x": 11, "y": 6, "name": "WALLY’S NEIGHBOR UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A shy boy from this street went out with a borrowed Kin and came back standing taller.", "The gym leader's family keeps the ponds. Balance is a household habit here."]},
       {"x": 20, "y": 6, "name": "BALANCE KEEPER ORIN", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["I trim the pond reeds to the same height on both banks. It matters. It does.", "Route 104's woods begin north of town. Mind the Slakoth — they mind nothing."]},
       {"x": 10, "y": 14, "name": "FISHER LIO", "art": "fisher", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Pond fishing is patience practice. The gym is the exam.", "Surskit walk the surface here like it owes them money."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Meadowbrook Mart — woods-ready stock. Bug spray is a state of mind; we sell the other kind too."], "mart": {"stock": ["pokeball", "greatball", "potion", "superpotion", "antidote", "awakening"]}},
@@ -256,12 +256,12 @@ export const MAPS7 = {
     ],
     "signs": [
       {"x": 2, "y": 5, "text": "COPPERTON CITY — The city that probes the integration of nature and science. Norwick Corporation keeps its headquarters on the north street."},
-      {"x": 24, "y": 4, "text": "NORWICK CORPORATION HQ — Makers of the PokeNav and half the instruments in Maris. Visitors mind the prototypes."},
+      {"x": 24, "y": 4, "text": "NORWICK CORPORATION HQ — Makers of the KinNav and half the instruments in Maris. Visitors mind the prototypes."},
       {"x": 28, "y": 13, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
       {"x": 9, "y": 14, "text": "COPPERTON CITY — South: ROUTE 104 · East: ROUTE 116 · North: ROUTE 115."},
     ],
     "npcs": [
-      {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Pokemon in this building. Twice. The paperwork was the hard part.", "Mr. Stone collects rare stones the way other presidents collect ties."]},
+      {"x": 11, "y": 7, "name": "NORWICK RESEARCHER PELL", "art": "scientist", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["We turned a fossil into a living Kin in this building. Twice. The paperwork was the hard part.", "Mr. Stone collects rare stones the way other presidents collect ties."]},
       {"x": 18, "y": 11, "name": "CUTTER’S APPRENTICE RUE", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Cutter's house hands out field craft to anyone who asks nicely.", "Route 116 east ends at a tunnel the Whismur own. Bring earplugs and respect."]},
       {"x": 7, "y": 14, "name": "TRAINER SCHOOL KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Our teacher makes us battle the gym leader's portrait. It has never lost.", "Rock types run this town's gym AND its quarries. Copperton is honest about its geology."]},
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Copperton Mart — company-town stock, company-town prices. The fossils are display only."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
@@ -501,8 +501,8 @@ export const MAPS7 = {
       {"x": 13, "y": 12, "text": "WILDFLOWER TOWN — West: COPPERBORE TUNNEL · East: ROUTE 117."}
     ],
     "npcs": [
-      {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Pokemon shone.", "My Roselia has opinions about the hall's lighting. All of them correct."]},
-      {"x": 21, "y": 13, "name": "WALLY’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Pokemon and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
+      {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Kin shone.", "My Roselia has opinions about the hall's lighting. All of them correct."]},
+      {"x": 21, "y": 13, "name": "WALLY’S UNCLE PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My nephew went out to catch his first Kin and came back a trainer. This town's air, I say.", "The tunnel air does my lungs good. The fresh side of the hill is this one."]},
       {"x": 8, "y": 14, "name": "GARDENER FENN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I mow around the wildflowers. The wildflowers were the point.", "Battle Tent hopefuls train on the north lawn at dawn. Quietly. It's Wildflower."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "roselia", "min": 214, "max": 220, "weight": 24}, {"species": "zigzagoon", "min": 214, "max": 220, "weight": 20}, {"species": "poochyena", "min": 214, "max": 220, "weight": 16}, {"species": "shroomish", "min": 215, "max": 221, "weight": 14}, {"species": "illumise", "min": 215, "max": 221, "weight": 8}, {"species": "volbeat", "min": 215, "max": 221, "weight": 8}, {"species": "skitty", "min": 215, "max": 220, "weight": 10}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
@@ -753,7 +753,7 @@ export const MAPS7 = {
     ],
     "npcs": [
       {"x": 12, "y": 11, "name": "BUG CATCHER WREN", "art": "bugcatcher", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Wurmple by day, and the ponds keep their own hours.", "A Ralts crossed here once. Once. I check every morning."]},
-      {"x": 20, "y": 6, "name": "LASS MIRA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Meadowbrook's gym leader is the calmest man in Maris. His Pokemon are not.", "First ponds, first ripples. Route 102 is where journeys get their feet wet."]},
+      {"x": 20, "y": 6, "name": "LASS MIRA", "art": "lass", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Meadowbrook's gym leader is the calmest man in Maris. His Kin are not.", "First ponds, first ripples. Route 102 is where journeys get their feet wet."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "zigzagoon", "min": 202, "max": 206, "weight": 24}, {"species": "poochyena", "min": 202, "max": 206, "weight": 22}, {"species": "wurmple", "min": 202, "max": 206, "weight": 18}, {"species": "lotad", "min": 203, "max": 207, "weight": 14}, {"species": "seedot", "min": 203, "max": 207, "weight": 10}, {"species": "surskit", "min": 203, "max": 207, "weight": 8}, {"species": "ralts", "min": 204, "max": 207, "weight": 4}], "water": [{"species": "tentacool", "min": 202, "max": 210, "weight": 28}, {"species": "magikarp", "min": 202, "max": 208, "weight": 24}, {"species": "wingull", "min": 203, "max": 210, "weight": 20}, {"species": "pelipper", "min": 206, "max": 212, "weight": 8}], "waterRate": 0.08},
     "items": [],
@@ -1571,7 +1571,7 @@ export const MAPS7 = {
       {"x": 24, "y": 9, "to": {"map": "rusturf-tunnel", "x": 4, "y": 12}},
     ],
     "signs": [
-      {"x": 23, "y": 7, "text": "COPPERBORE TUNNEL — Through the hill to Wildflower. The tunnel was a Pokemon’s home first and a road second."},
+      {"x": 23, "y": 7, "text": "COPPERBORE TUNNEL — Through the hill to Wildflower. The tunnel was a Kin’s home first and a road second."},
       {"x": 3, "y": 7, "text": "ROUTE 116 — Copperton to the tunnel hill. The woods thin, the hill thickens, the Whismur begin."},
     ],
     "npcs": [
@@ -2200,7 +2200,7 @@ export const MAPS7 = {
       {"x": 9, "y": 11, "to": {"map": "littleroot", "x": 5, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "BIRCH'S FIELD BOARD — 'A Pokemon is not fully known until you have been muddy in its company.'"},
+      {"x": 8, "y": 2, "text": "BIRCH'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company.'"},
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "AIDE FERN", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor does fieldwork the way weather does rain: personally and everywhere.", "Habitat charts on every wall. The mud on the floor is also a chart, unofficially."]},

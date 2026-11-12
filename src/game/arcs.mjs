@@ -49,7 +49,7 @@ export function arcCompleteSummary(state, arc) {
     title: arc.label.toUpperCase() + ' — ' + arc.region.toUpperCase() + ' · COMPLETE',
     badgeLine: 'Badges: ' + badges + '/' + arc.badgeTotal,
     leagueLines: arc.summaryLines.slice(),
-    dexLine: 'Pokedex gained this arc: ' + gained + ' · National: ' + caught + '/' + arc.dexHorizon,
+    dexLine: 'KinDex gained this arc: ' + gained + ' · National: ' + caught + '/' + arc.dexHorizon,
     dexGained: gained,
     dexCaught: caught,
     team,
@@ -152,7 +152,7 @@ export function finaleCreditsLines(state) {
     lines.push(arc.label + ' · ' + arc.region + ' — ' + (arc.summaryLines[0] || 'COMPLETE.'));
   }
   const caught = dexCaughtCount((state && state.dex) || { caught: {} });
-  lines.push('The road so far: ' + done.length + ' journeys complete · National Pokedex ' + caught + (horizon ? '/' + horizon : '') + ' · Playtime ' + fmtPlaytime(state && state.player && state.player.playtimeSec) + '.');
+  lines.push('The road so far: ' + done.length + ' journeys complete · National KinDex ' + caught + (horizon ? '/' + horizon : '') + ' · Playtime ' + fmtPlaytime(state && state.player && state.player.playtimeSec) + '.');
   lines.push(...FINALE_CREDITS_CLOSE);
   lines.push(...FINALE_END_CARD);
   return lines;
@@ -201,8 +201,8 @@ function playFinaleHomecoming(g, next, finish) {
     if (line) echoLines.push(line);
   }
   const oakLines = [
-    'The Professor looks at the Pokedex counter the way other people look at tide charts — as if it personally owed him money and had finally paid. "'
-      + caught + (horizon ? ' of ' + horizon : '') + '," he says. "The whole horizon. I have rated Pokedexes for forty years, and I am telling you plainly: there is nothing left on my chart to measure you against. You ARE the chart now."',
+    'The Professor looks at the KinDex counter the way other people look at tide charts — as if it personally owed him money and had finally paid. "'
+      + caught + (horizon ? ' of ' + horizon : '') + '," he says. "The whole horizon. I have rated KinDexes for forty years, and I am telling you plainly: there is nothing left on my chart to measure you against. You ARE the chart now."',
     '"One thing remains in my keeping, and it was never really mine." From a cloth older than the lab he unwraps a flute of clear blue glass. "The ' + itemName + '. It answers at the top of the world, where the first room is. Every other trainer I ever sent out, I sent with a beginning. You are the first I am sending with an ending — go and see what it opens."',
     'Received the ' + itemName.toUpperCase() + '!',
   ];
@@ -261,7 +261,7 @@ export function tryHomecoming(g) {
     'Your room is just as you left it. Some roads change a trainer. Home is not one of them — home is where the changing gets measured.',
   ];
   const ratingLines = [
-    'Professor Hawthorn rang while you were on the road: "Tell them the Pokedex stands at ' + caught
+    'Professor Hawthorn rang while you were on the road: "Tell them the KinDex stands at ' + caught
       + ' — and tell them I said the next page is always the best one."',
   ];
   const finish = () => {

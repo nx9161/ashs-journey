@@ -138,7 +138,7 @@ export const ARCS = [
     ],
     hookLines: [
       'Word travels fast on the sea roads: a whole region across the water is in a strange mood — its land and ocean arguing through two old teams.',
-      'Maris, they call it. New Pokemon, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
+      'Maris, they call it. New Kin, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
       'The Arcport ferry runs that way. Pack for rain AND for drought; Maris cannot decide either.',
     ],
     enRouteLines: [

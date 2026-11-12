@@ -984,7 +984,7 @@ export class OverworldScene {
       for (const mv of m.moves) mv.pp = mv.maxPp;
     }
     g.audio.playSfx('heal');
-    if (announce) g.ui.toast('Your Pokemon were healed to full health!');
+    if (announce) g.ui.toast('Your Kin were healed to full health!');
   }
 
   openPauseMenu() {

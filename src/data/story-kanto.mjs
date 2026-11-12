@@ -35,8 +35,8 @@ export const MAIN_QUESTS = [
   { id: 'q_celadon', flag: 'reached_celadon', text: 'Reach Canopy City', hint: 'The department-store city lies west. The road bends past Hushmoor Town — mind the tower’s shadow.' },
   { id: 'q_rainbow', flag: 'badge_rainbow', text: 'Win the Rainbow Badge in Canopy City', hint: 'Erika’s Grass types wilt under Fire, Ice, and Flying moves.' },
   { id: 'q_scope', flag: 'scope_done', text: 'Infiltrate the Game Corner and recover the Vantage Scope', hint: 'That poster in the Game Corner is hiding something. Whatever is underneath it took the Scope — take it back.' },
-  { id: 'q_flute', flag: 'flute_got', text: 'Climb Hushmoor Tower and earn the Poke Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
-  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping NAPPASAUR', hint: 'The Poke Flute’s tune is the only alarm clock a NAPPASAUR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
+  { id: 'q_flute', flag: 'flute_got', text: 'Climb Hushmoor Tower and earn the Kin Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
+  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping NAPPASAUR', hint: 'The Kin Flute’s tune is the only alarm clock a NAPPASAUR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
   { id: 'q_soul', flag: 'badge_soul', text: 'Win the Soul Badge in Bramble City', hint: 'Koga’s Poison types and invisible walls reward patience. Ground and Psychic moves help.' },
   { id: 'q_silph', flag: 'silph_done', text: 'Liberate Vantage Co. in Farsight City', hint: 'Eleven floors of trouble, and the president is held on the top one. Find the card key and climb.' },
   { id: 'q_marsh', flag: 'badge_marsh', text: 'Win the Marsh Badge in Farsight City', hint: 'Sabrina’s Psychic types hit like prophecy. Bug, Ghost, and Dark moves are your friends.' },
@@ -47,7 +47,7 @@ export const MAIN_QUESTS = [
   { id: 'q_league', flag: 'league_gate_passed', text: 'Pass the League gate on Route 23', hint: 'The guards check all eight badges. No exceptions, no shortcuts, no stories.' },
   { id: 'q_champion', flag: 'champion', text: 'Defeat the Elite Four and become Champion', hint: 'Four masters, then a face you know better than anyone. Heal between every door.' },
   { id: 'q_mewtwo', flag: 'mewtwo_done', text: 'Face what sleeps in Tidehaven Cave', hint: 'Post-game. The mansion journals pointed here all along. It has been waiting for someone strong enough.' },
-  { id: 'q_diploma', flag: 'diploma', text: 'Complete the Pokedex and claim your diploma', hint: 'Catch every species in Arden, then show Prof. Hawthorn a finished dex.' },
+  { id: 'q_diploma', flag: 'diploma', text: 'Complete the KinDex and claim your diploma', hint: 'Catch every species in Arden, then show Prof. Hawthorn a finished dex.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -63,7 +63,7 @@ export const EVENTS = {
   // -- Tidehaven: Bill's Sea Cottage ---------------------------------------
   ev_bill: [
     { say: ['...Hello? Is someone there? Oh, thank goodness — a human. With hands. Hands are very important right now.'], who: 'BILL' },
-    { say: ['It is me. Bill. The researcher. And before you ask — yes, this small round Pokemon standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent MOONLET and one hundred percent embarrassed.'], who: 'BILL' },
+    { say: ['It is me. Bill. The researcher. And before you ask — yes, this small round Kin standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent MOONLET and one hundred percent embarrassed.'], who: 'BILL' },
     { say: ['The fix is on that terminal. Big friendly button. Press it, and try not to enjoy this too much.'], who: 'BILL' },
     { say: ['...And — THERE. Two legs, ten fingers, one dignity, slightly used. Bill is back!'], who: 'BILL' },
     { say: ['You saved my career and my afternoon, in that order. Take this — I get invited to a floating trainer party every year and I never go. A spare ticket for the St. Anne, docked in Arcport.', 'Go. Mingle. Battle someone who owns a butler. You have earned it.'], who: 'BILL' },
@@ -101,7 +101,7 @@ export const EVENTS = {
   // -- St. Anne: the duo, in "disguise" -------------------------------------
   ev_duo_stanne: [
     { say: ['Two waiters approach your table. One has a moustache that is clearly drawn on. The other is wearing his apron upside down.'], who: 'NARRATOR' },
-    { say: ['Bonjour! We are ze waiters, here to — how you say — wait upon you. And inspect your Pokemon. For health reasons. Ze health reasons are very strict.'], who: 'RUE' },
+    { say: ['Bonjour! We are ze waiters, here to — how you say — wait upon you. And inspect your Kin. For health reasons. Ze health reasons are very strict.'], who: 'RUE' },
     { say: ['Rue. The accent. Maybe... less accent.'], who: 'COLE' },
     { say: ['I am IN CHARACTER, Cole.'], who: 'RUE' },
     { say: ['You are holding the menu upside down.'], who: 'COLE' },
@@ -133,7 +133,7 @@ export const EVENTS = {
   ev_scope_boss: [
     { say: ['A voice crackles out of a ceiling speaker — calm, amused, and nowhere near this room in person.'], who: 'NARRATOR' },
     { say: ['So. You are the little storm rattling my Game Corner.', 'Every coin in every slot upstairs paid for this operation, child. And the one thing I keep down here, you have come to steal. I almost admire the efficiency.'], who: 'THE BOSS (speaker)' },
-    { say: ['The Vantage Scope is in the keeping of my best administrator. Take it from him — if your Pokemon have the stomach for it.'], who: 'THE BOSS (speaker)' },
+    { say: ['The Vantage Scope is in the keeping of my best administrator. Take it from him — if your Kin have the stomach for it.'], who: 'THE BOSS (speaker)' },
     { battle: 'rocket_admin_hideout' },
     { say: ['...Impressive. ANNOYING, but impressive. The Scope is yours.', 'A word of advice, free of charge: stop digging. The tower in Hushmoor Town has nothing you want to see clearly.'], who: 'THE BOSS (speaker)' },
     { give: { items: { silphscope: 1 }, text: 'Vantage Scope' } },
@@ -169,7 +169,7 @@ export const EVENTS = {
     { say: ['Ah... thank you, young one. They wanted this tower emptied, so that no one would ask what was taken from it. Greed makes such loud ghosts.'], who: 'MR. FUJI' },
     { say: ['You climbed all this way for the lost one below, not for glory. I saw her light rise, you know. First time in years this tower has felt like a beginning instead of an ending.'], who: 'MR. FUJI' },
     { say: ['Take my flute. Its song is older than the tower — sleeping things hear it the way children hear a parent calling them home. Use it kindly.'], who: 'MR. FUJI' },
-    { give: { items: { pokeflute: 1 }, text: 'Poke Flute' } },
+    { give: { items: { pokeflute: 1 }, text: 'Kin Flute' } },
     { flag: 'flute_got' },
     { questDone: 'q_flute' },
   ],
@@ -177,7 +177,7 @@ export const EVENTS = {
   // -- The two NAPPASAUR (engine pre-checks pokeflute in bag) ------------------
   ev_snorlax_east: [
     { say: ['The path simply... ends. In fur. A mountain that breathes — in, out, in, out — directly on top of Route 12.'], who: 'NARRATOR' },
-    { say: ['You raise the Poke Flute. The first notes wobble across the water. The mountain does not approve of being woken. Or of your technique.'], who: 'NARRATOR' },
+    { say: ['You raise the Kin Flute. The first notes wobble across the water. The mountain does not approve of being woken. Or of your technique.'], who: 'NARRATOR' },
     { wildBattle: { species: 'snorlax', level: 30 } },
     { flag: 'snorlax_east' },
     { flag: 'snorlax_done' },
@@ -274,7 +274,7 @@ export const EVENTS = {
     { say: ['Outside, the storm finds its voice all at once. Below the cliffs something enormous turns in the water — older than the castle, and angry at being woken for a party trick.'], who: 'NARRATOR' },
     { say: ['A serving hatch BURSTS open. Two very damp "waiters" tumble out, trailing seaweed and one (1) stolen tray of hors d’oeuvres.'], who: 'NARRATOR' },
     { say: ['Nobody move! This fortress of evil is now under the jurisdiction of— uh...'], who: 'RUE' },
-    { say: ['Rue. Rue, read the room. We are surrounded by legend-class Pokemon and a man in a machine. Read. The. Room.'], who: 'COLE' },
+    { say: ['Rue. Rue, read the room. We are surrounded by legend-class Kin and a man in a machine. Read. The. Room.'], who: 'COLE' },
     { say: ['...We will be over here. Quietly. Stealing NOTHING. For once, the show is bigger than the theft.'], who: 'RUE' },
     { choice: { npc: ['rue', 'cole'], who: 'COLE', prompt: 'Across the hall, the duo watches you face the storm. You —', options: [
       { label: 'Nod to them. Partners, this once.', delta: 1, say: ['Rue nods back, slow and solemn, like a general at a treaty signing. Cole is already crying a little. "We are part of history," he whispers. "Terrible, damp history."'] },
@@ -393,7 +393,7 @@ export const EVENTS = {
 
   // -- Starter gifts (anime beats, condensed) ----------------------------------------------
   ev_bulbasaur_gift: [
-    { say: ['Oh! Careful where you step, dear — the seedlings are sleeping. I keep this garden as a haven, for Pokemon who needed somewhere quiet to land.'], who: 'CARETAKER' },
+    { say: ['Oh! Careful where you step, dear — the seedlings are sleeping. I keep this garden as a haven, for Kin who needed somewhere quiet to land.'], who: 'CARETAKER' },
     { say: ['That BUDDIN has watched you since the gate. It is shy with people... WAS shy with people. It just planted itself squarely in your path — which, for that one, is a whole speech.'], who: 'CARETAKER' },
     { say: ['It wants to see the world that made you kind enough to stop for a garden. Will you take it with you? Treat it gently — it bruises like fruit and forgives like family.'], who: 'CARETAKER' },
     { giveMon: { species: 'bulbasaur', level: 10 } },
@@ -427,7 +427,7 @@ export const EVENTS = {
     { say: ['Your PRISMWING is watching them. So is another — one it met on this very shore, whose wing pattern it has been quietly dreamy about for days.'], who: 'NARRATOR' },
     { say: ['This is the part of the journey nobody warns you about. Loving something sometimes means opening your hands.'], who: 'NARRATOR' },
     { say: ['Your PRISMWING looks back once — one long look, full of every battle and every berry — then lifts into the gold of the sky. Two wings become four, become a hundred, become gone.'], who: 'NARRATOR' },
-    { say: ['Its page in your dex does not close. From today, it is marked CHERISHED. Some Pokemon you keep. This one, you carry.'], who: 'NARRATOR' },
+    { say: ['Its page in your dex does not close. From today, it is marked CHERISHED. Some Kin you keep. This one, you carry.'], who: 'NARRATOR' },
     { flag: 'butterfree_released' },
     { toast: 'PRISMWING flew to its future.' },
   ],
@@ -438,7 +438,7 @@ export const PRISMWING_EVENT = EVENTS.ev_butterfree;
 
 // The professor’s verdict on a certain herd. (Engine: shown when the player
 // has caught 5+ tauros.)
-export const BOVARCH_LINE = 'Five BOVARCH. FIVE. {player}, the ranch hand has started billing me for their catering. Wonderful Pokemon. Terrifying grocery bill.';
+export const BOVARCH_LINE = 'Five BOVARCH. FIVE. {player}, the ranch hand has started billing me for their catering. Wonderful Kin. Terrifying grocery bill.';
 
 // ---------------------------------------------------------------------------
 // LEGENDARY_ARCS — every legendary/mythical gets a side arc with quest-log
@@ -900,7 +900,7 @@ export const LEGENDARY_ARCS = {
   },
   arc_volcanion: {
     id: 'arc_volcanion', title: 'The Steam of the Nebel Plateau', species: 'volcanion', region: 'Kalos', designedOnly: true,
-    hook: 'Hunters who poach the plateau’s Pokemon keep coming down the mountain missing their traps — and smelling of boiled rain.',
+    hook: 'Hunters who poach the plateau’s Kin keep coming down the mountain missing their traps — and smelling of boiled rain.',
     steps: [
       { text: 'Drive the poachers off the Nebel Plateau' },
       { text: 'Follow the steam vent trail' },
@@ -912,7 +912,7 @@ export const LEGENDARY_ARCS = {
   // ---- Alola (designed) ----------------------------------------------------------------
   arc_solgaleo: {
     id: 'arc_solgaleo', title: 'The Child of the Stars, Sun', species: 'solgaleo', region: 'Alola', designedOnly: true,
-    hook: 'A strange little nebula of a Pokemon has fallen into your life, and every old altar in Alola is suddenly relevant.',
+    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Alola is suddenly relevant.',
     steps: [
       { text: 'Raise the Cosmog the professor rescued', flag: 'cosmog_raised' },
       { text: 'Sound the Sun Flute at the Altar of the Sunne' },
@@ -922,7 +922,7 @@ export const LEGENDARY_ARCS = {
   },
   arc_lunala: {
     id: 'arc_lunala', title: 'The Child of the Stars, Moon', species: 'lunala', region: 'Alola', designedOnly: true,
-    hook: 'A strange little nebula of a Pokemon has fallen into your life, and every old altar in Alola is suddenly relevant.',
+    hook: 'A strange little nebula of a Kin has fallen into your life, and every old altar in Alola is suddenly relevant.',
     steps: [
       { text: 'Raise the Cosmog the professor rescued', flag: 'cosmog_raised' },
       { text: 'Sound the Moon Flute at the Altar of the Moone' },

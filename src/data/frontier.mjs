@@ -173,7 +173,7 @@ export const FACILITIES = {
   palace: {
     id: 'palace', name: 'Trial Palace', brain: 'Spencer', brainTitle: 'Palace Maven',
     setSize: 7, healBetween: true,
-    intro: 'At the Palace your Pokémon choose their own moves — you are the heart, not the hand. You call nothing; you simply learn what kind of team you really raised.',
+    intro: 'At the Palace your Kin choose their own moves — you are the heart, not the hand. You call nothing; you simply learn what kind of team you really raised.',
     pools: ['crobat', 'slaking', 'lapras', 'arcanine', 'exeggutor', 'slowbro', 'starmie', 'gardevoir', 'altaria', 'tropius', 'grumpig', 'xatu', 'noctowl', 'togetic'],
     title: 'Palace Guest',
     names: ['ALDER', 'BRIAR', 'CEDAR', 'DAPHNE', 'ELDER', 'FENNEL', 'GROVE', 'HAZEL', 'IRVING', 'LAUREL'],

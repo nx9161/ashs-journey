@@ -15,11 +15,11 @@ export const BALLS = {
   // not meet its condition multiplies by exactly 1. `bonus` stays the
   // nominal 1; the rule supplies the true multiplier.
   levelball: { id: 'levelball', name: 'Level Ball', bonus: 1, rule: 'level', desc: 'Kurt-made. The bigger your lead\'s level edge over the wild foe, the stronger it pulls: over 4x its level x8, over 2x x4, over 1x x2, otherwise x1.' },
-  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Kurt-made. x3 on a Pokemon hooked while fishing; x1 on any other encounter.' },
+  lureball: { id: 'lureball', name: 'Lure Ball', bonus: 1, rule: 'lure', desc: 'Kurt-made. x3 on a Kin hooked while fishing; x1 on any other encounter.' },
   moonball: { id: 'moonball', name: 'Moon Ball', bonus: 1, rule: 'moon', desc: 'Kurt-made. x4 on a species that evolves by Moon Stone; x1 on anything else.' },
   loveball: { id: 'loveball', name: 'Love Ball', bonus: 1, rule: 'love', desc: 'Kurt-made. x8 when the wild foe is the same species as your lead; x1 otherwise.' },
   fastball: { id: 'fastball', name: 'Fast Ball', bonus: 1, rule: 'fast', desc: 'Kurt-made. x4 on a species whose base Speed is 100 or more; x1 on slower species.' },
-  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Kurt-made. A plain x1 catch — but a Pokemon caught in it starts out trusting you (friendship set high).' },
+  friendball: { id: 'friendball', name: 'Friend Ball', bonus: 1, rule: 'friend', desc: 'Kurt-made. A plain x1 catch — but a Kin caught in it starts out trusting you (friendship set high).' },
   heavyball: { id: 'heavyball', name: 'Heavy Ball', bonus: 1, rule: 'heavy', desc: 'Kurt-made. Pulls harder the bulkier the foe\'s battler tier: S x1, M x1.5, L x2.5, XL x4.' },
 };
 
@@ -91,9 +91,9 @@ export const ITEMS = {
   fullrestore: { id: 'fullrestore', name: 'Full Restore', pocket: 'medicine', price: 3000, heal: 9999, cureStatus: true, desc: 'Full HP + cures status.' },
   antidote: { id: 'antidote', name: 'Antidote', pocket: 'medicine', price: 100, cure: 'poison', desc: 'Cures poison.' },
   parlyzheal: { id: 'parlyzheal', name: 'Parlyz Heal', pocket: 'medicine', price: 200, cure: 'paralysis', desc: 'Cures paralysis.' },
-  awakening: { id: 'awakening', name: 'Awakening', pocket: 'medicine', price: 250, cure: 'sleep', desc: 'Wakes a sleeping Pokemon.' },
+  awakening: { id: 'awakening', name: 'Awakening', pocket: 'medicine', price: 250, cure: 'sleep', desc: 'Wakes a sleeping Kin.' },
   burnheal: { id: 'burnheal', name: 'Burn Heal', pocket: 'medicine', price: 250, cure: 'burn', desc: 'Cures a burn.' },
-  iceheal: { id: 'iceheal', name: 'Ice Heal', pocket: 'medicine', price: 250, cure: 'freeze', desc: 'Thaws a frozen Pokemon.' },
+  iceheal: { id: 'iceheal', name: 'Ice Heal', pocket: 'medicine', price: 250, cure: 'freeze', desc: 'Thaws a frozen Kin.' },
   fullheal: { id: 'fullheal', name: 'Full Heal', pocket: 'medicine', price: 600, cure: 'all', desc: 'Cures any status.' },
   revive: { id: 'revive', name: 'Revive', pocket: 'medicine', price: 1500, revive: 0.5, desc: 'Revives with half HP.' },
   maxrevive: { id: 'maxrevive', name: 'Max Revive', pocket: 'medicine', price: 4000, revive: 1, desc: 'Revives with full HP.' },
@@ -102,7 +102,7 @@ export const ITEMS = {
   elixir: { id: 'elixir', name: 'Elixir', pocket: 'medicine', price: 3000, ppRestoreAll: 10, desc: 'Restores 10 PP to all moves.' },
   maxelixir: { id: 'maxelixir', name: 'Max Elixir', pocket: 'medicine', price: 4500, ppRestoreAll: 999, desc: 'Fully restores all PP.' },
   rarecandy: { id: 'rarecandy', name: 'Rare Candy', pocket: 'medicine', levelUp: true, desc: 'Raises level by 1.' },
-  xpcandy: { id: 'xpcandy', name: 'XP Candy', pocket: 'medicine', xpBoost: 800, desc: 'A sparring prize. Grants 800 XP to one Pokemon.' },
+  xpcandy: { id: 'xpcandy', name: 'XP Candy', pocket: 'medicine', xpBoost: 800, desc: 'A sparring prize. Grants 800 XP to one Kin.' },
   // Evolution stones
   firestone: { id: 'firestone', name: 'Fire Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Fire lines.' },
   waterstone: { id: 'waterstone', name: 'Water Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Water lines.' },
@@ -126,7 +126,7 @@ export const ITEMS = {
   goodrod: { id: 'goodrod', name: 'Good Rod', pocket: 'key', desc: 'A better rod. Better splashes.' },
   superrod: { id: 'superrod', name: 'Super Rod', pocket: 'key', desc: 'The best rod there is.' },
   silphscope: { id: 'silphscope', name: 'Vantage Scope', pocket: 'key', desc: 'Reveals unseen presences. The Tower\'s ghost, for instance.' },
-  pokeflute: { id: 'pokeflute', name: 'Poke Flute', pocket: 'key', desc: 'Its melody can wake anything. Even a roadblock.' },
+  pokeflute: { id: 'pokeflute', name: 'Kin Flute', pocket: 'key', desc: 'Its melody can wake anything. Even a roadblock.' },
   cardkey: { id: 'cardkey', name: 'Card Key', pocket: 'key', desc: 'Opens the sliding doors of Vantage Co.' },
   secretkey: { id: 'secretkey', name: 'Secret Key', pocket: 'key', desc: 'Opens the Caldera Gym. Still warm from the mansion ruins.' },
   ssticket: { id: 'ssticket', name: 'S.S. Ticket', pocket: 'key', desc: 'A boarding pass for a luxury cruise from Arcport.' },
@@ -150,13 +150,13 @@ export const ITEMS = {
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
   boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Flintridge. Lets you use FLASH outside battle; Attack rises.' },
-  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Misty of Tidehaven. Pokemon up to Lv30 obey; CUT outside battle.' },
+  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Misty of Tidehaven. Kin up to Lv30 obey; CUT outside battle.' },
   thunderbadge: { id: 'thunderbadge', name: 'Thunder Badge', pocket: 'key', desc: 'From Lt. Surge of Arcport. FLY outside battle; Speed rises.' },
   rainbowbadge: { id: 'rainbowbadge', name: 'Rainbow Badge', pocket: 'key', desc: 'From Erika of Canopy. Up to Lv50 obey; STRENGTH outside battle.' },
   soulbadge: { id: 'soulbadge', name: 'Soul Badge', pocket: 'key', desc: 'From Koga of Bramble. SURF outside battle; Defense rises.' },
   marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Farsight. Up to Lv70 obey.' },
   volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Caldera. Special rises.' },
-  earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Fernmere Gym. All Pokemon obey. The League gate opens.' },
+  earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Fernmere Gym. All Kin obey. The League gate opens.' },
   // Amber Crew badges (Stage O2): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.orange, and the
   // badge_<root> story flag (winTrainer / cheatClaimBadge write all
@@ -223,7 +223,7 @@ export const ITEMS = {
   // Stage J4b key item: the Tidewall pharmacy's Secret Potion, the
   // medicine errand's whole cargo (delivered to Lumi in the Glitter
   // Lighthouse; the delivery scene removes it from the bag).
-  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Pokemon — handle with both hands.' },
+  secretpotion: { id: 'secretpotion', name: 'Secret Potion', pocket: 'key', desc: 'A dense, honey-bright medicine from the Tidewall pharmacy. For Lumi, the lighthouse Kin — handle with both hands.' },
   // Arc 4 Stage S4: the Gracidea — Shaymin's forme key item. Use it
   // on a Shaymin in the party to swap land <-> sky (the S4 forme
   // switch, game/sinnoh-systems.mjs). Never consumed.

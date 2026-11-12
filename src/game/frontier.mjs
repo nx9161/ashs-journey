@@ -752,7 +752,7 @@ function startPossessedBrandon(g, ow) {
   const state = g.state;
   const voice = String(state.player.name || '???').toUpperCase() + '??';
   g.ui.say([
-    'Brandon\'s chamber is older than the Pyramid around it. Against its heart stands a sealed stone in black iron bands — the King of Pokélantis, the keeper whispers, asleep inside it for three thousand years.',
+    'Brandon\'s chamber is older than the Pyramid around it. Against its heart stands a sealed stone in black iron bands — the King of Thalantis, the keeper whispers, asleep inside it for three thousand years.',
     'The bands hum. Dust falls upward. The seal cracks a hair\'s width — and something is suddenly standing where you stand, wearing your stance, your grin, your voice.',
   ], () => {
     g.ui.say([
@@ -760,7 +760,7 @@ function startPossessedBrandon(g, ow) {
       'King Brandon! I have crossed an age for this summit. Give me its symbol. Give me EVERYTHING on this island.',
     ], () => {
       g.ui.say([
-        'Whatever wears the boy has his fire and none of his manners. Very well, King of Pokélantis — I accept YOUR challenge.',
+        'Whatever wears the boy has his fire and none of his manners. Very well, King of Thalantis — I accept YOUR challenge.',
         'Hear the terms, spirit: my Regis will stand TEN levels above the team the boy climbed with, and I will not hold back one stone\'s weight. If his team breaks you, it breaks you honestly.',
       ], () => launchPossessedBattle(g, ow), 'BRANDON');
     }, voice);

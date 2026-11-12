@@ -147,7 +147,7 @@ export const MAPS9 = {
       {"x": 14, "y": 17, "to": {"map": "r219", "x": 12, "y": 1}},
     ],
     "signs": [
-      {"x": 1, "y": 3, "text": "PROF. ROWAN'S LAB — Borea's Pokemon research, run from this beach town. The Professor studies evolution and tolerates no nonsense about it."},
+      {"x": 1, "y": 3, "text": "PROF. ROWAN'S LAB — Borea's Kin research, run from this beach town. The Professor studies evolution and tolerates no nonsense about it."},
       {"x": 16, "y": 12, "text": "SHINGLE BEACH — The tide delivers shells, driftwood, and the occasional research assistant."},
       {"x": 7, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
       {"x": 10, "y": 11, "text": "SHINGLE TOWN — West: ROUTE 201 · North: ROUTE 202 · South: ROUTE 219."},
@@ -224,7 +224,7 @@ export const MAPS9 = {
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Revelry City Mart — stocked for the road ahead."], "mart": {"stock": ["pokeball", "greatball", "superpotion", "hyperpotion", "antidote", "parlyzheal", "revive"]}},
       {"x": 11, "y": 7, "name": "BROADCAST INTERN VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["I fetch coffee for people whose faces are on the building. The building is also their face. It's a lot.", "West gate: the causeway over the water to Bridgeport. East: Coalseam's smoke. North: flower country."]},
-      {"x": 18, "y": 12, "name": "CITY KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The condos have a hundred windows and every one has a Pokemon in it. I counted the lit ones.", "My NAPSEER teleports to school before I do. Every day. Show-off."]},
+      {"x": 18, "y": 12, "name": "CITY KID MOSS", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The condos have a hundred windows and every one has a Kin in it. I counted the lit ones.", "My NAPSEER teleports to school before I do. Every day. Show-off."]},
       {"x": 7, "y": 16, "name": "COMMUTER UNA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Coalseam miners, Bridgeport sailors, Honeyfield florists — this city's platforms hold all of Borea at rush hour.", "The TV station lets visitors watch a recording. The cameras are kind. Mostly."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "starly", "min": 306, "max": 311, "weight": 26}, {"species": "bidoof", "min": 306, "max": 311, "weight": 22}, {"species": "shinx", "min": 307, "max": 312, "weight": 18}, {"species": "abra", "min": 308, "max": 313, "weight": 8}, {"species": "bidoof", "min": 306, "max": 310, "weight": 10}], "water": [{"species": "tentacool", "min": 306, "max": 311, "weight": 30}, {"species": "magikarp", "min": 306, "max": 310, "weight": 26}], "waterRate": 0.08},
@@ -455,9 +455,9 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Inglenook City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
-      {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Pokemon shone.", "Fantina judges the gym AND half the contests. The city runs on her standards and her accent."]},
+      {"x": 11, "y": 7, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is a judge admitting, in the record books, that your Kin shone.", "Fantina judges the gym AND half the contests. The city runs on her standards and her accent."]},
       {"x": 19, "y": 13, "name": "POFFIN COOK MASA", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries in, poffins out, patience throughout. The house by the square takes apprentices.", "Repose is north past the Forsaken Tower. Mind the tower's quiet; it minds you."]},
-      {"x": 8, "y": 16, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Amity's lawns are for strolling pairs. The Pokemon choose the route; we keep the gates.", "West road runs to the mountain's south door. South, Route 212 heads for the marsh country."]},
+      {"x": 8, "y": 16, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Amity's lawns are for strolling pairs. The Kin choose the route; we keep the gates.", "West road runs to the mountain's south door. South, Route 212 heads for the marsh country."]},
     ],
     "encounters": {"rate": 0.09, "table": [{"species": "buneary", "min": 326, "max": 332, "weight": 22}, {"species": "cleffa", "min": 326, "max": 331, "weight": 14}, {"species": "clefairy", "min": 327, "max": 332, "weight": 12}, {"species": "happiny", "min": 327, "max": 332, "weight": 6}, {"species": "chatot", "min": 327, "max": 333, "weight": 12}, {"species": "staravia", "min": 326, "max": 332, "weight": 16}], "water": [{"species": "magikarp", "min": 325, "max": 330, "weight": 40}], "waterRate": 0.08},
     "items": [],
@@ -1419,7 +1419,7 @@ export const MAPS9 = {
       {"x": 8, "y": 2, "text": "VALLEY GALEWORKS — Control room. The turbines outside argue with the wind; this room keeps score."},
     ],
     "npcs": [
-      {"x": 9, "y": 4, "name": "WORKS CLERK", "art": "clerk", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Power for three towns runs through this room and one very patient kettle.", "A round, drifting Pokemon naps by the turbines some days. It signs the guest book as WEATHER."]},
+      {"x": 9, "y": 4, "name": "WORKS CLERK", "art": "clerk", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Power for three towns runs through this room and one very patient kettle.", "A round, drifting Kin naps by the turbines some days. It signs the guest book as WEATHER."]},
     ],
     "encounters": null,
     "items": [],
@@ -1741,7 +1741,7 @@ export const MAPS9 = {
       {"x": 12, "y": 13, "to": {"map": "hearthome", "x": 6, "y": 1}},
     ],
     "signs": [
-      {"x": 12, "y": 5, "text": "KINDRED SQUARE — Lawns for strolling pairs. The Pokemon choose the route; the wardens keep the gates and the lemonade."},
+      {"x": 12, "y": 5, "text": "KINDRED SQUARE — Lawns for strolling pairs. The Kin choose the route; the wardens keep the gates and the lemonade."},
     ],
     "npcs": [
       {"x": 14, "y": 8, "name": "SQUARE WARDEN PIOTR", "art": "gent", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North lawn for the shy ones, south lawn for the show-offs. Both lawns are correct.", "A MOONMOTE walked me in a circle for an hour last spring. Best hour of the year."]},
@@ -2259,7 +2259,7 @@ export const MAPS9 = {
       {"x": 9, "y": 11, "to": {"map": "sandgem", "x": 5, "y": 4}},
     ],
     "signs": [
-      {"x": 8, "y": 2, "text": "ROWAN'S FIELD BOARD — 'A Pokemon is not fully known until you have been muddy in its company. Evolution is not an ending; it is a question.'"},
+      {"x": 8, "y": 2, "text": "ROWAN'S FIELD BOARD — 'A Kin is not fully known until you have been muddy in its company. Evolution is not an ending; it is a question.'"},
     ],
     "npcs": [
       {"x": 9, "y": 4, "name": "PROF. ROWAN’S AIDE", "art": "aide", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Professor is in the field. The Professor is always in the field. The field is wherever he is standing.", "Ninety-three percent of Borea's species, catalogued from this room. The other seven percent are being difficult on purpose."]},

@@ -42,7 +42,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'MISTY', art: 'misty', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
-        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
+        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Kin are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
       { x: 4, y: 6, name: 'DIANA', art: 'swimmer', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'gym_cerulean_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Misty taught me to swim AND to battle. Both involve not panicking.", "You kept your head above water... fine, pass."] },
@@ -76,7 +76,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'LT. SURGE', art: 'surge', skin: '#d8a878', shirt: '#324a83', pants: '#2a304a', hair: '#c0a03a',
         trainer: 'surge',
-        dialogue: ["Name's Surge! My electric Pokemon saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
+        dialogue: ["Name's Surge! My electric Kin saved my life more than once out there — now they fight for keeps!", "Whoa, baby! You're the real voltage. Thunder Badge — earned, not given."] },
       { x: 4, y: 6, name: 'WALT', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#4a3a2a',
         trainer: 'gym_vermilion_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Surge taught this old gentleman one thing: never grab a live wire.", "Shocking... defeat. Mind the switches on your way up."] },
@@ -206,7 +206,7 @@ export const MAPS3 = {
     ],
     signs: [
       { x: 8, y: 6, text: 'FARSIGHT CITY — The golden city at the heart of Arden. Vantage Co. HQ towers over all.' },
-      { x: 10, y: 7, text: 'FARSIGHT GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
+      { x: 10, y: 7, text: 'FARSIGHT GYM — Leader: Sabrina. The master of Psychic Kin! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
       { x: 6, y: 10, text: 'FARSIGHT CITY — East: ROUTE 9 · South: ROUTE 8.' }
     ],
     npcs: [
@@ -619,15 +619,15 @@ export const MAPS3 = {
     ],
     signs: [
       { x: 7, y: 4, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
-      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Pokemon.' },
+      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Kin.' },
       { x: 11, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
       { x: 14, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
     ],
     npcs: [
       { x: 5, y: 9, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
-        dialogue: ["I volunteer at the Pokemon House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
+        dialogue: ["I volunteer at the Kin House. Mr. Fuji takes in every orphan the roads leave behind.", "Lately the tower's restless — a mother's spirit, the channelers say, searching for her child."] },
       { x: 13, y: 9, name: 'CHILD', art: 'kid', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#6a4a2a',
-        dialogue: ["My grandma says the tower ghosts are just Pokemon who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
+        dialogue: ["My grandma says the tower ghosts are just Kin who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
         dialogue: ["Hushmoor Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
@@ -670,7 +670,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 3, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         trainer: 'gary_tower',
-        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
+        dialogue: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Kin I once knew.", "Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."] },
       { x: 12, y: 6, name: 'CHANNELER', art: 'monk', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["The spirits drift closer to the stairs each night, child. Something above grieves — loudly.", "Purify your heart before you climb. The tower can smell doubt."] },
     ],
@@ -902,14 +902,14 @@ export const MAPS3 = {
       { x: 15, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'fuchsia', x: 15, y: 11 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Pokemon roam free beyond the south gate.' },
+      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Kin roam free beyond the south gate.' },
       { x: 8, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
       { x: 13, y: 7, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
       { x: 4, y: 10, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
     ],
     npcs: [
       { x: 10, y: 9, name: 'PRESERVE WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
-        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Pokemon to push boulders like foam. Mmh!"] },
+        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Kin to push boulders like foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -1364,7 +1364,7 @@ export const MAPS3 = {
       { x: 9, y: 10, to: { map: 'cinnabar', x: 7, y: 11 } },
     ],
     signs: [
-      { x: 3, y: 2, text: "DIARY — '...a new Pokemon was born in this house. We named the newborn with shaking hands, and it named us back with its eyes.'" },
+      { x: 3, y: 2, text: "DIARY — '...a new Kin was born in this house. We named the newborn with shaking hands, and it named us back with its eyes.'" },
       { x: 14, y: 2, text: "DIARY — 'The experiments escaped our caution. If the mountain ever takes this house, let the Gym key stay buried with our shame.'" },
       { x: 8, y: 4, text: "DIARY — 'It dreams of its mother. We hear it through the walls on still nights. God forgive the quiet we keep.'" },
     ],
@@ -1419,7 +1419,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
-        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
+        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Kin will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
       { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#5a2a7a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
@@ -1700,10 +1700,10 @@ export const MAPS3 = {
     npcs: [
       { x: 2, y: 2, name: 'LORELEI', art: 'lorelei', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a3a4a', hair: '#7a1a3a',
         trainer: 'lorelei',
-        dialogue: ["Welcome to the League. I am Lorelei — my ice Pokemon are the first winter you'll have to outlast.", "You melted more than ice today. Go on — the others are colder company than me."] },
+        dialogue: ["Welcome to the League. I am Lorelei — my ice Kin are the first winter you'll have to outlast.", "You melted more than ice today. Go on — the others are colder company than me."] },
       { x: 6, y: 2, name: 'BRUNO', art: 'bruno', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
         trainer: 'bruno',
-        dialogue: ["I am Bruno! My Pokemon and I train until the mountain itself gets tired. Show me your discipline!", "Discipline... outmatched. My fists salute you. Forward!"] },
+        dialogue: ["I am Bruno! My Kin and I train until the mountain itself gets tired. Show me your discipline!", "Discipline... outmatched. My fists salute you. Forward!"] },
       { x: 10, y: 2, name: 'AGATHA', art: 'agatha', skin: '#e8b888', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
         trainer: 'agatha',
         dialogue: ["So the professor's newest spark climbs to my chamber. I knew that man when his hair was dark and his ideas darker.", "Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."] },
@@ -1800,7 +1800,7 @@ export const MAPS3 = {
     ],
     npcs: [
       { x: 12, y: 8, name: 'WRECKED LOG', art: 'youngster', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["A waterlogged logbook in a shattered case. The last entry is dated the night the storm swallowed the harbor lights.", "'The master of this island has made a Pokemon stronger than any that nature —' The rest is salt and ash."] },
+        dialogue: ["A waterlogged logbook in a shattered case. The last entry is dated the night the storm swallowed the harbor lights.", "'The master of this island has made a Kin stronger than any that nature —' The rest is salt and ash."] },
     ],
     encounters: null,
     items: [],
@@ -1838,8 +1838,8 @@ export const MAPS3 = {
       { x: 11, y: 3, to: { map: 'house-pallet-gary', x: 4, y: 4 } },
     ],
     signs: [
-      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
-      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
+      { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
+      { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Kin research. The professor is out on Route 1 today." },
       { x: 7, y: 9, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
     ],
     npcs: [
@@ -1849,9 +1849,9 @@ export const MAPS3 = {
       // (Dawnwick's lab has no interior map; the terminal stands by its door,
       // like the one in every Center).
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
-        dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
+        dialogue: ["Lab PC — Kin Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
       { x: 6, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
-        dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Pokemon, no questions asked. The professor pretends not to see this machine."] },
+        dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Kin, no questions asked. The professor pretends not to see this machine."] },
       // Partner guarantee (hotfix): the professor himself, at his lab
       // door. Pre-fix he existed only inside the intro cutscene, so a
       // player whose partner never arrived (defect 4's stranded saves)
@@ -1893,16 +1893,16 @@ export const MAPS3 = {
     npcs: [
       { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
         dialogue: ["Welcome to the Center! Let me heal your team..."], heal: true,
-        afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
+        afterHeal: ["All better! Your Kin are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach — see maps.mjs center (same placement;
       // the scene fields him only while the Candy Coach rule is on).
       { x: 2, y: 2, name: 'SPARRING COACH', art: 'sparcoach', skin: '#c88a5a', shirt: '#c05a3a', pants: '#3a3a4a', hair: '#2a1a0a',
         sparCoach: true, sparSpecies: 'machop',
         dialogue: ["Name's Coach — I run sparring drills out of this Center.", "Beat my partner and you earn an XP Candy. Lose, and all it costs you is sweat. We can go as many rounds as you like."] },
       { x: 7, y: 2, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
-        dialogue: ["Someone's PC — Pokemon Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
+        dialogue: ["Someone's PC — Kin Storage System. Bill's handiwork, humming softly. Access your boxes here."] },
       { x: 6, y: 2, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
-        dialogue: ["CHEAT TERMINAL — a humming machine the nurses don't talk about. Everything on it is free: items, badges, even legendary Pokemon."] },
+        dialogue: ["CHEAT TERMINAL — a humming machine the nurses don't talk about. Everything on it is free: items, badges, even legendary Kin."] },
       { x: 2, y: 3, name: 'WAITING TRAINER', art: 'youngster', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
         dialogue: ["Every Center in Arden runs the same boxes off Bill's system. Deposit a friend here, withdraw them a mountain away.", "Technology's incredible — and the nurse still heals for free. Some things never change."] },
     ],
@@ -1922,7 +1922,7 @@ export const TRAINERS3 = {
   // ---- Gym Leaders ----
   misty: {
     id: 'misty', name: 'Misty', title: 'Tidehaven Gym Leader', ai: 'smart',
-    intro: ["My policy is an all-out offensive with water-type Pokemon! Show me you can swim in the deep end!"],
+    intro: ["My policy is an all-out offensive with water-type Kin! Show me you can swim in the deep end!"],
     lose: ["You drowned my best strategy... fine! The Cascade Badge is yours."],
     // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
     // applies them per difficulty — Challenge: all; Classic: ace only).
@@ -1938,7 +1938,7 @@ export const TRAINERS3 = {
   },
   erika: {
     id: 'erika', name: 'Erika', title: 'Canopy Gym Leader',
-    intro: ["Forgive my drowsiness... the garden is so peaceful. My grass Pokemon, however, are wide awake for you."],
+    intro: ["Forgive my drowsiness... the garden is so peaceful. My grass Kin, however, are wide awake for you."],
     lose: ["A storm in my garden, beautifully fought. The Rainbow Badge is yours."],
     team: [ { species: 'victreebel', level: 29, keepsake: 'gloomfang' }, { species: 'tangela', level: 24, keepsake: 'gardeniasash' }, { species: 'vileplume', level: 29, keepsake: 'secondwindribbon' } ],
     reward: 2900, badge: 'rainbowbadge',
@@ -2095,28 +2095,28 @@ export const TRAINERS3 = {
   // ---- Elite Four + Champion ----
   lorelei: {
     id: 'lorelei', name: 'Lorelei', title: 'Elite Four', ai: 'smart',
-    intro: ["No one can best me when it comes to icy Pokemon. Freezing moves are powerful — your Pokemon will be at my mercy when they are frozen solid!"],
+    intro: ["No one can best me when it comes to icy Kin. Freezing moves are powerful — your Kin will be at my mercy when they are frozen solid!"],
     lose: ["You melted more than ice today. Go on — the others are colder company than me."],
     team: [ { species: 'dewgong', level: 54, keepsake: 'tidepearl' }, { species: 'cloyster', level: 53, keepsake: 'ironacorn' }, { species: 'slowbro', level: 54, keepsake: 'gardeniasash' }, { species: 'jynx', level: 56, keepsake: 'secondwindribbon' }, { species: 'lapras', level: 56, keepsake: 'tortoisecharm' } ],
     reward: 5600,
   },
   bruno: {
     id: 'bruno', name: 'Bruno', title: 'Elite Four', ai: 'smart',
-    intro: ["I am Bruno of the Elite Four! Through rigorous training, people and Pokemon can become stronger! I have weight-trained with my Pokemon!"],
+    intro: ["I am Bruno of the Elite Four! Through rigorous training, people and Kin can become stronger! I have weight-trained with my Kin!"],
     lose: ["Discipline... outmatched. My fists salute you. Forward!"],
     team: [ { species: 'onix', level: 53, keepsake: 'fossilspur' }, { species: 'hitmonchan', level: 55, keepsake: 'secondwindribbon' }, { species: 'hitmonlee', level: 55, keepsake: 'sparrowfeather' }, { species: 'onix', level: 56, keepsake: 'ironacorn' }, { species: 'machamp', level: 58, keepsake: 'tortoisecharm' } ],
     reward: 5800,
   },
   agatha: {
     id: 'agatha', name: 'Agatha', title: 'Elite Four', ai: 'smart',
-    intro: ["That old duff, Professor Hawthorn, was once young and handsome. That was decades ago. Now he just wants to fill a Pokedex. He is wrong — Pokemon are for fighting!"],
+    intro: ["That old duff, Professor Hawthorn, was once young and handsome. That was decades ago. Now he just wants to fill a KinDex. He is wrong — Kin are for fighting!"],
     lose: ["Hmph. The old fool chose well, for once. The last door, child. Mind the dragon."],
     team: [ { species: 'gengar', level: 56, keepsake: 'spectrebell' }, { species: 'golbat', level: 56, keepsake: 'gloomfang' }, { species: 'haunter', level: 55, keepsake: 'spectrebell' }, { species: 'arbok', level: 58, keepsake: 'gloomfang' }, { species: 'gengar', level: 60, keepsake: 'tortoisecharm' } ],
     reward: 6000,
   },
   lance: {
     id: 'lance', name: 'Lance', title: 'Elite Four', ai: 'smart',
-    intro: ["I lead the Elite Four. Dragon Pokemon are wild, untamable — and so am I, when the battle demands it. Your challenge ends here."],
+    intro: ["I lead the Elite Four. Dragon Kin are wild, untamable — and so am I, when the battle demands it. Your challenge ends here."],
     lose: ["A legend, answered by a legend. The final chamber waits. Give him a battle worthy of the climb."],
     team: [ { species: 'gyarados', level: 58, keepsake: 'tidepearl' }, { species: 'dragonair', level: 56, keepsake: 'secondwindribbon' }, { species: 'dragonair', level: 56, keepsake: 'sparrowfeather' }, { species: 'aerodactyl', level: 60, keepsake: 'fossilspur' }, { species: 'dragonite', level: 62, keepsake: 'tortoisecharm' } ],
     reward: 6200,
@@ -2138,7 +2138,7 @@ export const TRAINERS3 = {
   },
   gary_tower: {
     id: 'gary_tower', name: 'Gary', title: 'Rival',
-    intro: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Pokemon I once knew. Battle first. Questions never."],
+    intro: ["What's a grave-robber like you doing here, {player}? ...Me? I came to check on a Kin I once knew. Battle first. Questions never."],
     lose: ["Tch. Even your sympathy battles sting. Whatever — the tower's weird today. Watch yourself."],
     team: [ { species: 'pidgeotto', level: 23 }, { species: 'growlithe', level: 22 }, { species: 'kadabra', level: 24 }, { species: 'ivysaur', level: 25 } ],
     reward: 900,
@@ -2174,7 +2174,7 @@ export const TRAINERS3 = {
   },
   duo3_celadon: {
     id: 'duo3_celadon', name: 'Mara & Jules', title: 'Uniformed Duo',
-    intro: ["MARA: The Game Corner pays out in coins, kid — but trainers pay out in Pokemon.", "JULES: And business, as they say, is booming. Nickel counted the till himself."],
+    intro: ["MARA: The Game Corner pays out in coins, kid — but trainers pay out in Kin.", "JULES: And business, as they say, is booming. Nickel counted the till himself."],
     lose: ["MARA: The house always wins, they said. NOBODY warned us about the customers.", "JULES: Cashing out! Cashing OUT!"],
     team: [ { species: 'arbok', level: 26 }, { species: 'weezing', level: 26 }, { species: 'meowth', level: 25, nickname: 'Nickel' } ],
     reward: 900,

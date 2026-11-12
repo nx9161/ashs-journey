@@ -132,7 +132,7 @@ export const MAPS6 = {
       {
         "x": 2,
         "y": 5,
-        "text": "PROF. ELM'S LAB — Galefield's own Pokemon laboratory. Elm studies how Pokemon grow and hatch."
+        "text": "PROF. ELM'S LAB — Galefield's own Kin laboratory. Elm studies how Kin grow and hatch."
       },
       {
         "x": 15,
@@ -184,7 +184,7 @@ export const MAPS6 = {
         "pants": "#4a3a2a",
         "hair": "#2a1a0a",
         "dialogue": [
-          "A bird Pokemon delivered a letter to the lab once. A LETTER.",
+          "A bird Kin delivered a letter to the lab once. A LETTER.",
           "When I grow up I'm studying eggs, just like Professor Elm."
         ]
       },
@@ -456,7 +456,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "First time in Yamato? The road east climbs to Iris City, past Mr. Pokemon's house country.",
+          "First time in Yamato? The road east climbs to Iris City, past Mr. Kin's house country.",
           "Take it slow. The region rewards trainers who look around."
         ]
       },
@@ -1048,7 +1048,7 @@ export const MAPS6 = {
       {
         "x": 1,
         "y": 4,
-        "text": "CINDER TOWN — Where people and Pokemon live in happy harmony. Kurt works his craft on the north street."
+        "text": "CINDER TOWN — Where people and Kin live in happy harmony. Kurt works his craft on the north street."
       },
       {
         "x": 1,
@@ -1802,7 +1802,7 @@ export const MAPS6 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The Chime Tower's bells ring for a Pokemon the old songs call the rainbow's keeper.",
+          "The Chime Tower's bells ring for a Kin the old songs call the rainbow's keeper.",
           "We sweep the approach every morning. Some mornings, there are footprints that are not ours."
         ]
       },
@@ -3314,7 +3314,7 @@ export const MAPS6 = {
       {
         "x": 15,
         "y": 9,
-        "text": "DAY-CARE — The couple on Route 34 raise Pokemon with famously patient hands."
+        "text": "DAY-CARE — The couple on Route 34 raise Kin with famously patient hands."
       }
     ],
     "npcs": [
@@ -3762,7 +3762,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "I walked my first Pokemon around this fountain. My granddaughter walks hers now.",
+          "I walked my first Kin around this fountain. My granddaughter walks hers now.",
           "Parks remember every generation kindly. That is their job."
         ]
       }
@@ -4670,7 +4670,7 @@ export const MAPS6 = {
       {
         "x": 8,
         "y": 2,
-        "text": "ELM'S RESEARCH BOARD — 'Eggs are not the beginning of a Pokemon. They are the middle of a story.'"
+        "text": "ELM'S RESEARCH BOARD — 'Eggs are not the beginning of a Kin. They are the middle of a story.'"
       }
     ],
     "npcs": [
@@ -4698,7 +4698,7 @@ export const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "Galefield doctrine: a Pokemon's first hour matters as much as its hundredth level.",
+          "Galefield doctrine: a Kin's first hour matters as much as its hundredth level.",
           "Mind the tank glass. The TADLET inside judges visitors."
         ]
       }
@@ -6195,7 +6195,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "My wife and I have raised half the Pokemon in this county, one nap at a time.",
+          "My wife and I have raised half the Kin in this county, one nap at a time.",
           "Leave a guest with us and walk the routes. Eggs and friendships both happen at walking pace."
         ]
       }
@@ -10838,7 +10838,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "I walked this pass as a finalist thirty years ago. The mountain has not moved. Neither has my result, worse luck.",
-          "Past here the Pokemon stop being scenery and start being the exam."
+          "Past here the Kin stop being scenery and start being the exam."
         ]
       }
     ],
@@ -10975,7 +10975,7 @@ export const MAPS6 = {
       {
         "x": 15,
         "y": 15,
-        "text": "MT. LASTLIGHT — The slopes. No signs past this one, no trails the mountain did not approve. The strongest wild Pokemon in Yamato keep these heights."
+        "text": "MT. LASTLIGHT — The slopes. No signs past this one, no trails the mountain did not approve. The strongest wild Kin in Yamato keep these heights."
       }
     ],
     "npcs": [
@@ -10990,7 +10990,7 @@ export const MAPS6 = {
         "hair": "#5a3a2a",
         "dialogue": [
           "Thirty years I have lived on this slope, and the mountain has said perhaps eleven words to me.",
-          "Someone trains at the top. Has done for years. The Pokemon up there walk like soldiers and rest like kings."
+          "Someone trains at the top. Has done for years. The Kin up there walk like soldiers and rest like kings."
         ]
       }
     ],
@@ -11814,7 +11814,7 @@ export const MAPS6 = {
         "hair": "#4a3a2a",
         "dialogue": [
           "Four hundred steps of stair, counting the ones that pretend not to be steps.",
-          "The lamp's partner Pokemon keeps the keeper company on storm nights. Everyone up here earns their keep."
+          "The lamp's partner Kin keeps the keeper company on storm nights. Everyone up here earns their keep."
         ]
       }
     ],
