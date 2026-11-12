@@ -641,7 +641,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   delibird: {
-    id: 'delibird', name: 'Delibird', dexNo: 225, types: ['ice', 'flying'],
+    id: 'delibird', name: 'PARCELIN', dexNo: 225, types: ['ice', 'flying'],
     base: { hp: 45, atk: 55, def: 45, spa: 65, spd: 45, spe: 75 },
     catchRate: 45, growth: 'fast', baseXp: 116, body: 'bird', spriteSeed: 22501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -650,7 +650,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   mantine: {
-    id: 'mantine', name: 'Mantine', dexNo: 226, types: ['water', 'flying'],
+    id: 'mantine', name: 'KITERAY', dexNo: 226, types: ['water', 'flying'],
     base: { hp: 85, atk: 40, def: 70, spa: 80, spd: 140, spe: 70 },
     catchRate: 25, growth: 'slow', baseXp: 170, body: 'bird', spriteSeed: 22601,
     eggGroups: ['water1'], hatchCounter: 25,
@@ -659,7 +659,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   skarmory: {
-    id: 'skarmory', name: 'Skarmory', dexNo: 227, types: ['steel', 'flying'],
+    id: 'skarmory', name: 'PLATEWING', dexNo: 227, types: ['steel', 'flying'],
     base: { hp: 65, atk: 80, def: 140, spa: 40, spd: 70, spe: 70 },
     catchRate: 25, growth: 'slow', baseXp: 163, body: 'bird', spriteSeed: 22701,
     eggGroups: ['flying'], hatchCounter: 25,
@@ -668,7 +668,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   houndour: {
-    id: 'houndour', name: 'Houndour', dexNo: 228, types: ['dark', 'fire'],
+    id: 'houndour', name: 'CHARPUP', dexNo: 228, types: ['dark', 'fire'],
     base: { hp: 45, atk: 60, def: 30, spa: 80, spd: 50, spe: 65 },
     catchRate: 120, growth: 'slow', baseXp: 66, body: 'quad', spriteSeed: 22801,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -677,7 +677,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'houndoom', method: 'level', level: 124 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   houndoom: {
-    id: 'houndoom', name: 'Houndoom', dexNo: 229, types: ['dark', 'fire'],
+    id: 'houndoom', name: 'CHARHOUND', dexNo: 229, types: ['dark', 'fire'],
     base: { hp: 75, atk: 90, def: 50, spa: 110, spd: 80, spe: 95 },
     catchRate: 45, growth: 'slow', baseXp: 175, body: 'quad', spriteSeed: 22901,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -686,7 +686,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   kingdra: {
-    id: 'kingdra', name: 'Kingdra', dexNo: 230, types: ['water', 'dragon'],
+    id: 'kingdra', name: 'SEADRAKON', dexNo: 230, types: ['water', 'dragon'],
     base: { hp: 75, atk: 95, def: 95, spa: 95, spd: 95, spe: 85 },
     catchRate: 45, growth: 'mediumfast', baseXp: 243, body: 'fish', spriteSeed: 23001,
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,
@@ -695,7 +695,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   phanpy: {
-    id: 'phanpy', name: 'Phanpy', dexNo: 231, types: ['ground'],
+    id: 'phanpy', name: 'TRUNKLET', dexNo: 231, types: ['ground'],
     base: { hp: 90, atk: 60, def: 60, spa: 40, spd: 40, spe: 40 },
     catchRate: 120, growth: 'mediumfast', baseXp: 66, body: 'quad', spriteSeed: 23101,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -704,7 +704,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'donphan', method: 'level', level: 125 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   porygon2: {
-    id: 'porygon2', name: 'POLYCRANE2', dexNo: 233, types: ['normal'],
+    id: 'porygon2', name: 'POLYSILK', dexNo: 233, types: ['normal'],
     base: { hp: 85, atk: 80, def: 90, spa: 105, spd: 95, spe: 60 },
     catchRate: 45, growth: 'mediumfast', baseXp: 180, body: 'blob', spriteSeed: 23301,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -713,7 +713,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'porygonz', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   stantler: {
-    id: 'stantler', name: 'Stantler', dexNo: 234, types: ['normal'],
+    id: 'stantler', name: 'ORBOSTAG', dexNo: 234, types: ['normal'],
     base: { hp: 73, atk: 95, def: 62, spa: 85, spd: 65, spe: 85 },
     catchRate: 45, growth: 'slow', baseXp: 163, body: 'quad', spriteSeed: 23401,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -722,7 +722,7 @@ export const SPECIES_JOHTO = {
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   smeargle: {
-    id: 'smeargle', name: 'Smeargle', dexNo: 235, types: ['normal'],
+    id: 'smeargle', name: 'PAINTAIL', dexNo: 235, types: ['normal'],
     base: { hp: 55, atk: 20, def: 35, spa: 20, spd: 45, spe: 75 },
     catchRate: 45, growth: 'fast', baseXp: 88, body: 'biped', spriteSeed: 23501,
     eggGroups: ['ground'], hatchCounter: 20,

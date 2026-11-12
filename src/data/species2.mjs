@@ -1360,7 +1360,7 @@ export const SPECIES2 = {
     evo: { to: 'granbull', method: 'level', level: 23 },
   },
   donphan: {
-    id: 'donphan', name: 'Donphan', dexNo: 232, types: ['ground'],
+    id: 'donphan', name: 'ROLLPHANT', dexNo: 232, types: ['ground'],
     base: { hp: 90, atk: 120, def: 120, spa: 60, spd: 60, spe: 50 },
     catchRate: 60, growth: 'mediumfast', baseXp: 175, body: 'quad', spriteSeed: 23201,
     eggGroups: ['ground'], hatchCounter: 20,
