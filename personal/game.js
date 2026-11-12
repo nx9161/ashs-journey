@@ -150040,12 +150040,12 @@ const FORMS = [
   { id: 'rapidash-galar', speciesId: 78, name: 'Galarian PYROGALOP', kind: 'regional', region: 'galar', types: ['psychic', 'fairy'], note: 'Gallops through ancient forests trailing stardust.' },
   { id: 'slowpoke-galar', speciesId: 79, name: 'Galarian DOZELING', kind: 'regional', region: 'galar', types: ['psychic'], note: 'Spicy seeds tinted its head gold and its thoughts slower.' },
   { id: 'slowbro-galar', speciesId: 80, name: 'Galarian DOZEHIDE', kind: 'regional', region: 'galar', types: ['poison', 'psychic'], note: 'The shell on its arm fires poison like a trick cannon.' },
-  { id: 'slowking-galar', speciesId: 80, name: 'Galarian Slowking', kind: 'regional', region: 'galar', types: ['poison', 'psychic'], note: 'Chants eerie hexes through the shell crowning its head.' },
-  { id: 'farfetchd-galar', speciesId: 83, name: 'Galarian Farfetch’d', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Hauls a leek so large it fights like a battering ram.' },
-  { id: 'sirfetchd', speciesId: 83, name: 'Sirfetch’d', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Galarian Farfetch’d evolution; a leek lance and leaf shield.' },
+  { id: 'slowking-galar', speciesId: 80, name: 'Galarian DOZECROWN', kind: 'regional', region: 'galar', types: ['poison', 'psychic'], note: 'Chants eerie hexes through the shell crowning its head.' },
+  { id: 'farfetchd-galar', speciesId: 83, name: 'Galarian POSTDUCK', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Hauls a leek so large it fights like a battering ram.' },
+  { id: 'sirfetchd', speciesId: 83, name: 'LANCEBILL', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Galarian POSTDUCK evolution; a leek lance and leaf shield.' },
   { id: 'weezing-galar', speciesId: 110, name: 'Galarian TWINSMOG', kind: 'regional', region: 'galar', types: ['poison', 'fairy'], note: 'Wears smokestacks like top hats and cleans the air it eats.' },
   { id: 'mrmime-galar', speciesId: 122, name: 'Galarian PANTOMIM', kind: 'regional', region: 'galar', types: ['ice', 'psychic'], note: 'Tap-dances on ice floors of its own making.' },
-  { id: 'mrrime', speciesId: 122, name: 'Mr. Rime', kind: 'regional', region: 'galar', types: ['ice', 'psychic'], note: 'Galarian PANTOMIM evolution; a cane, a stage, and perfect timing.' },
+  { id: 'mrrime', speciesId: 122, name: 'TAPFROST', kind: 'regional', region: 'galar', types: ['ice', 'psychic'], note: 'Galarian PANTOMIM evolution; a cane, a stage, and perfect timing.' },
   { id: 'articuno-galar', speciesId: 144, name: 'Galarian Articuno', kind: 'regional', region: 'galar', types: ['psychic', 'flying'], note: 'Cold-eyed and cruel-beamed; it freezes foes mid-thought.' },
   { id: 'zapdos-galar', speciesId: 145, name: 'Galarian FULMINIS', kind: 'regional', region: 'galar', types: ['fighting', 'flying'], note: 'Gave up the sky to outrun and out-kick everything on land.' },
   { id: 'moltres-galar', speciesId: 146, name: 'Galarian Moltres', kind: 'regional', region: 'galar', types: ['dark', 'flying'], note: 'Its black aura burns like a flame that hates the light.' },
@@ -162390,7 +162390,7 @@ const MAPS6 = {
       {
         "x": 22,
         "y": 5,
-        "text": "DOZELING WELL — The town well, and the Slowpokes own it. Mind your step on the way down."
+        "text": "DOZELING WELL — The town well, and the DOZELINGs own it. Mind your step on the way down."
       },
       {
         "x": 2,
@@ -185236,7 +185236,7 @@ const FINALE_CREDITS_OPEN = [
 ];
 
 const FINALE_CREDITS_CLOSE = [
-  'Teams changed. Towns blurred. The one constant was the walking — and the ones who walked beside you, in Pokeballs and out of them.',
+  'Teams changed. Towns blurred. The one constant was the walking — and the ones who walked beside you, in Capture Orbs and out of them.',
   'This is not a goodbye. Roads like this one do not end; they just go quiet for a while, the way a held note does before the music remembers it.',
 ];
 
@@ -185958,7 +185958,7 @@ const LEGENDARY_ARCS = {
     id: 'arc_celebi', title: 'The Voice of the Forest', species: 'celebi', region: 'Johto', designedOnly: true,
     hook: 'Ilex Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
     steps: [
-      { text: 'Return the lost Farfetch’d to the charcoal maker' },
+      { text: 'Return the lost POSTDUCK to the charcoal maker' },
       { text: 'Receive the GS Orb from a grateful craftsman' },
       { text: 'Place the GS Orb at the forest shrine' },
       { text: 'Meet Celebi where the forest remembers', catch: 'celebi' },

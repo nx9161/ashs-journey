@@ -539,7 +539,7 @@ export const LEGENDARY_ARCS = {
     id: 'arc_celebi', title: 'The Voice of the Forest', species: 'celebi', region: 'Johto', designedOnly: true,
     hook: 'Ilex Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
     steps: [
-      { text: 'Return the lost Farfetch’d to the charcoal maker' },
+      { text: 'Return the lost POSTDUCK to the charcoal maker' },
       { text: 'Receive the GS Orb from a grateful craftsman' },
       { text: 'Place the GS Orb at the forest shrine' },
       { text: 'Meet Celebi where the forest remembers', catch: 'celebi' },

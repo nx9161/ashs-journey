@@ -296,7 +296,7 @@ export const FINALE_CREDITS_OPEN = [
 ];
 
 export const FINALE_CREDITS_CLOSE = [
-  'Teams changed. Towns blurred. The one constant was the walking — and the ones who walked beside you, in Pokeballs and out of them.',
+  'Teams changed. Towns blurred. The one constant was the walking — and the ones who walked beside you, in Capture Orbs and out of them.',
   'This is not a goodbye. Roads like this one do not end; they just go quiet for a while, the way a held note does before the music remembers it.',
 ];
 

@@ -1026,7 +1026,7 @@ export const MAPS6 = {
       {
         "x": 22,
         "y": 5,
-        "text": "DOZELING WELL — The town well, and the Slowpokes own it. Mind your step on the way down."
+        "text": "DOZELING WELL — The town well, and the DOZELINGs own it. Mind your step on the way down."
       },
       {
         "x": 2,
