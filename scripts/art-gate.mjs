@@ -14,6 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ART } from '../assets/sprites/art-data.mjs';
+import { KIT_ART } from '../assets/sprites/kit-art-data.mjs';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const caps = JSON.parse(fs.readFileSync(path.join(root, 'scripts/art-gate.caps.json'), 'utf8'));
@@ -66,5 +67,24 @@ if (over > caps.maxOver16ColorEntries) {
   console.log(`art-gate: B2-G2 FAIL — ${over} entries use >16 colors, ceiling is ${caps.maxOver16ColorEntries} (frozen 2026-11-11, shrink-only)`);
 }
 
-console.log(`art-gate: ${keys.length} entries · ${battle.length} battle entries on ${caps.battleCanvas} (${offCanvas.length} off-canvas) · ${over}/${caps.maxOver16ColorEntries} entries >16 colors — ${fail ? 'GATE FAILED' : 'gate PASS'}`);
+// (c) Kit registry (B2-G2 applied at the raster: per-entry color census
+// with a hard cap and NO exceedance allowance — the kit pipeline folds
+// to <=16 colors at slice time, so an over-cap entry is a pipeline bug.
+// Canvas discipline: tiles 16x16, character frames 16x32.)
+const kitKeys = Object.keys(KIT_ART);
+let kitOver = 0, kitOffCanvas = 0;
+for (const k of kitKeys) {
+  const e = KIT_ART[k];
+  const used = new Set();
+  for (const r of e.rows) for (const ch of r) if (ch !== '.') used.add(ch);
+  if (used.size > caps.kitMaxColors) kitOver++;
+  const want = k.startsWith('kit-char-') ? [16, 32] : [16, 16];
+  if (e.w !== want[0] || e.h !== want[1]) kitOffCanvas++;
+}
+if (kitOver || kitOffCanvas) {
+  fail = 1;
+  console.log(`art-gate: KIT FAIL — ${kitOver} kit entries >${caps.kitMaxColors} colors, ${kitOffCanvas} off-canvas (tiles 16x16 / chars 16x32)`);
+}
+
+console.log(`art-gate: ${keys.length} entries · ${battle.length} battle entries on ${caps.battleCanvas} (${offCanvas.length} off-canvas) · ${over}/${caps.maxOver16ColorEntries} entries >16 colors · kit: ${kitKeys.length} entries, ${kitOver} over ${caps.kitMaxColors} colors, ${kitOffCanvas} off-canvas — ${fail ? 'GATE FAILED' : 'gate PASS'}`);
 process.exit(fail);

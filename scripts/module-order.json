@@ -9,6 +9,7 @@
  "src/engine/tiles.mjs",
  "src/engine/sprites.mjs",
  "assets/sprites/art-data.mjs",
+ "assets/sprites/kit-art-data.mjs",
  "src/data/battler-tiers.mjs",
  "src/engine/art.mjs",
  "src/data/species.mjs",

@@ -11,6 +11,7 @@
 // those are documented placeholders, never presented as finished art.
 
 import { ART } from '../../assets/sprites/art-data.mjs';
+import { KIT_ART } from '../../assets/sprites/kit-art-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
 import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
@@ -27,7 +28,11 @@ import { battlerDrawSize } from '../data/battler-tiers.mjs';
 // chain is depth-1 by build law (build-art rejects a delta base).
 const matCache = new Map();
 export function materializeArt(id) {
-  const a = ART[id];
+  // Kit entries (Gassasin CC-BY tileset/character, Phase 1 2026-11-11)
+  // live in their own generated registry; they are plain entries (no
+  // delta chains), resolved here so artCanvas — and with it the swap
+  // and seasonal-grade machinery — treats them identically to ART.
+  const a = ART[id] || KIT_ART[id];
   if (!a) return null;
   if (!a.deltas && !a.shiftY) return a;
   const hit = matCache.get(id);
@@ -128,7 +133,37 @@ export function speciesBattleArt(doc, speciesId, species) {
 }
 
 // ---- overworld ----
+// Gassasin kit character (Phase 1, owner adoption 2026-11-11): one
+// character, idle + walk in 4 directions, authored 16x16 and padded
+// bottom-anchored onto the 16x32 overworld frame format by the kit
+// pipeline (build-kit-art.mjs) — the draw path is unchanged. The kit
+// ships directional idles only for 'down'; other facings idle on their
+// walk cycle's standing frame. swap (NPC instances) recolors via the
+// semantic palette keys (S/H/J/P) baked into the kit entries.
+// forPlayer=true returns the ashFrames layout [idle1..4, walk1..6]
+// (the kit's 4 walk frames ping-ponged across the 6 walk slots);
+// otherwise returns { idle, walk } sets for the NPC frame picker.
+export function kitCharFrames(doc, dir, swap, forPlayer) {
+  const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
+  const cv = (id) => artCanvas(doc, id, 1, false, swap || undefined);
+  const walk = [1, 2, 3, 4].map((i) => cv('kit-char-' + d + '-walk-' + i));
+  if (walk.some((c) => !c)) return null;
+  let idle = null;
+  if (d === 'down') {
+    const f = [1, 2, 3, 4].map((i) => cv('kit-char-down-idle-' + i));
+    if (!f.some((c) => !c)) idle = f;
+  }
+  if (!idle) idle = [walk[0], walk[0], walk[0], walk[0]];
+  if (forPlayer) return [...idle, walk[0], walk[1], walk[2], walk[3], walk[2], walk[1]];
+  return { idle, walk };
+}
+
 export function ashFrames(doc, dir) {
+  // Kit adoption (Phase 1): the player wears the kit character on this
+  // branch. Mode sets (run/bike/surf/fish) have no kit equivalent and
+  // keep the authored Ash sets via ashModeFrames.
+  const kit = kitCharFrames(doc, dir, null, true);
+  if (kit) return kit;
   // [idle1..4, walk1..6] — 16x32 canvases since Wave 3a (the right-facing
   // set is authored art of its own, NOT a mirror of the left set — cap
   // logo, hip strap buckle, bag pocket). Premium+ W3 (AN-3): idle extends
@@ -300,6 +335,19 @@ export function npcFramesFor(doc, npc, dir, moving) {
   const prefix = kind === 'brock' ? 'brock' : 'npc-' + kind;
   const swap = npcSwapFor(npc, kind);
   const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
+  // Kit adoption (Phase 1): Pallet's cast — Gary — wears the kit
+  // character, recolored by his instance palette through the standard
+  // swap machinery (his blue shirt / dark pants / brown hair read
+  // against the player's authored teal). The champion kind
+  // ('garychamp') and every other NPC keep their authored art.
+  if (kind === 'gary') {
+    const set = kitCharFrames(doc, d, swap, false);
+    if (set) {
+      if (moving) return [set.walk[0], set.walk[1]];
+      if (d === 'down') return set.idle; // 4-frame named-cast cycle
+      return [set.walk[0], set.walk[0]];
+    }
+  }
   const cv = (id) => artCanvas(doc, id, 1, false, swap);
   if (moving) {
     const w = [cv(prefix + '-' + d + '-walk-1'), cv(prefix + '-' + d + '-walk-2')].filter(Boolean);
@@ -658,6 +706,36 @@ export function buildArtTileCache(doc, seasonSwapFor) {
     cache[kind] = fb;
   }
   const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false, swapFor(id))).filter(Boolean);
+  // ---- Gassasin kit towns (Phase 1: pallet; docs/THIRD-PARTY-ART.md) ----
+  // Kit canvases for opted-in towns, keyed cache.kitTowns[mapId] and
+  // consumed by resolveTileLayers' kit branch. Vegetation tiles pass
+  // through the SAME seasonal grade as our own art — seasonSwapFor
+  // re-grades green-dominant kit palette entries, so a kit lawn turns
+  // amber in Autumn and snow-pale in Winter like the drawn world;
+  // roofs, logs, dirt and doors keep their authored colors.
+  const kitSwap = (id) => {
+    if (!seasonSwapFor) return undefined;
+    const a = KIT_ART[id];
+    if (!a || !a.pal) return undefined;
+    const sw = seasonSwapFor(a.pal);
+    return sw && Object.keys(sw).length ? sw : undefined;
+  };
+  const kitCv = (id, veg) => artCanvas(doc, id, 1, false, veg ? kitSwap(id) : undefined);
+  cache.kitTowns = {
+    pallet: {
+      grass: ['kit-grass-1', 'kit-grass-2', 'kit-grass-3'].map((id) => kitCv(id, true)).filter(Boolean),
+      path: ['kit-path-1', 'kit-path-2'].map((id) => kitCv(id, false)).filter(Boolean),
+      tall: kitCv('kit-tallgrass', true),
+      flora: kitCv('kit-flora', true),
+      canopy: kitCv('kit-canopy', true),
+      sign: kitCv('kit-sign', false),
+      roofL: kitCv('kit-roof-l', false), roofM: kitCv('kit-roof-m', false),
+      roofR: kitCv('kit-roof-r', false), roofDormer: kitCv('kit-roof-dormer', false),
+      wallPlain: kitCv('kit-wall-plain', false), wallWindow: kitCv('kit-wall-window', false),
+      door: kitCv('kit-door', false),
+    },
+  };
+  if (!cache.kitTowns.pallet.grass.length || !cache.kitTowns.pallet.door) delete cache.kitTowns;
   cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6', 'tile-grass-7', 'tile-grass-8', 'tile-grass-9', 'tile-grass-10']); // W5 TX-1: 10 base variants
   cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4', 'tile-tallgrass-5', 'tile-tallgrass-6']); // W5 TX-1: 6 tall variants
   cache.pathVariants = ids(['tile-path', 'tile-path-2', 'tile-path-3', 'tile-path-4', 'tile-path-5', 'tile-path-6']); // W5 TX-1: 6 path variants (cobble + worn-centre)
@@ -905,8 +983,12 @@ export const TYPED_FACADE_KINDS = new Set(['wall-center', 'wall-mart', 'wall-gym
 // south neighbour is not a tree), an eave piece for a typed facade
 // cell standing under a roof/sign row, else null. Hash-driven only
 // (PL-3): no RNG, no allocation — the return is a cached canvas.
-export function foregroundFor(cache, kind, x, y, kindAt) {
+export function foregroundFor(cache, kind, x, y, kindAt, mapId) {
   if (!cache || !kind) return null;
+  // Kit towns: kit tiles are self-contained (canopy and facade pieces
+  // carry their own overhang shading) — the authored fg canopy/eaves
+  // never overlay them.
+  if (mapId && cache.kitTowns && cache.kitTowns[mapId]) return null;
   const isTree = kind === 'tree' || kind.startsWith('tc-');
   if (isTree) {
     const s = kindAt(x, y + 1);
@@ -1102,6 +1184,45 @@ function atmoKeyFor(mapId) {
   return 'warm'; // every interior / dungeon-adjacent map: warmth
 }
 
+// ---- Gassasin kit towns (Phase 1) ----
+// The kit layer stack for one cell of an opted-in town, or null when
+// the kit does not cover the kind (the shipped resolver then composes
+// the cell as usual — lamps, props and signs keep their authored art
+// in a kit town). Buildings compose positionally from kit pieces:
+// a roof row reads left/mid/right across its contiguous run (the
+// landmark kind wears the dormer piece), a wall row reads plain-log
+// at the run's west end and the window piece at its east end, and the
+// door kind wears the kit door. Presentation only — no map data,
+// warp, or collision is touched.
+function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
+  const K = cache.kitTowns[mapId];
+  const grassBase = pickVariant(K.grass, x, y, 13) || K.grass[0];
+  const run = (kinds) => {
+    let c = 0;
+    while (kinds.has(kindAt(x - c - 1, y))) c++;
+    let last = c;
+    while (kinds.has(kindAt(x + (last - c) + 1, y))) last++;
+    return [c, last];
+  };
+  if (kind === 'tg-' + mapId) return [grassBase];
+  if (kind === 'tg2-' + mapId) return [pickVariant(K.path, x, y, 21) || K.path[0] || grassBase];
+  if (kind === 'tc-' + mapId) return [grassBase, K.canopy].filter(Boolean);
+  if (kind === 'td-' + mapId) return [grassBase, K.sign].filter(Boolean);
+  if (kind === 'flora-' + mapId) return [K.flora || grassBase];
+  if (kind === 'grass') return [K.tall || grassBase];
+  if (kind === 'th-' + mapId) {
+    const [c, last] = run(new Set(['th-' + mapId, 'tl-' + mapId]));
+    return [c === 0 ? K.roofL : c === last ? K.roofR : K.roofM].filter(Boolean);
+  }
+  if (kind === 'tl-' + mapId) return [K.roofDormer || K.roofM].filter(Boolean);
+  if (kind === 'tw-' + mapId) {
+    const [c, last] = run(new Set(['tw-' + mapId, 'door-house']));
+    return [c === last && last > 0 ? K.wallWindow : K.wallPlain].filter(Boolean);
+  }
+  if (kind === 'door-house') return [K.door].filter(Boolean);
+  return null;
+}
+
 // Compose the layer stack for one map cell. kindAt(x, y) returns the tile
 // KIND at a map position, or null off-map (off-map neighbours never raise
 // a transition). t is the shared animation clock (water/foam stay in sync
@@ -1112,6 +1233,13 @@ export function resolveTileLayers(cache, kind, x, y, kindAt, t, phase, mapId) {
     return k == null ? kind : k;
   };
   const nb = { n: at(0, -1), e: at(1, 0), s: at(0, 1), w: at(-1, 0) };
+  // Kit towns: the kit stack replaces the composed layers wholesale
+  // for covered kinds (see kitTownLayers); uncovered kinds fall
+  // through to the shipped composition below.
+  if (mapId && cache.kitTowns && cache.kitTowns[mapId]) {
+    const kl = kitTownLayers(cache, kind, x, y, kindAt, mapId);
+    if (kl) return kl;
+  }
   const tt = t || 0; // W3: t < 0 = reduced-motion freeze (animFrame -> 0)
   // Premium+ W5 (LD-2): time-of-day phase, threaded from the scene
   // (day is the reference; caves/interiors always resolve as day).

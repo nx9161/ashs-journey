@@ -62,3 +62,67 @@ export function rasterize(s) {
   }
   return out;
 }
+
+// ---- decoder (kit-art pipeline, 2026-11-11) ----
+// Minimal zero-dependency PNG reader: 8-bit, color types 0/2/3/4/6,
+// no interlace. Returns { w, h, rgba: Uint8Array(w*h*4) }.
+export function decodePng(buf) {
+  if (buf.length < 8 || buf[0] !== 137 || buf[1] !== 80) throw new Error('decodePng: not a PNG');
+  let pos = 8, w = 0, h = 0, depth = 0, ctype = 0, interlace = 0;
+  let plte = null, trns = null;
+  const idat = [];
+  while (pos < buf.length) {
+    const len = buf.readUInt32BE(pos);
+    const type = buf.toString('ascii', pos + 4, pos + 8);
+    const data = buf.subarray(pos + 8, pos + 8 + len);
+    if (type === 'IHDR') {
+      w = data.readUInt32BE(0); h = data.readUInt32BE(4);
+      depth = data[8]; ctype = data[9]; interlace = data[12];
+    } else if (type === 'PLTE') plte = data;
+    else if (type === 'tRNS') trns = data;
+    else if (type === 'IDAT') idat.push(data);
+    else if (type === 'IEND') break;
+    pos += 12 + len;
+  }
+  if (depth !== 8) throw new Error('decodePng: bit depth ' + depth + ' unsupported');
+  if (interlace !== 0) throw new Error('decodePng: interlaced PNG unsupported');
+  const bpp = { 0: 1, 2: 3, 3: 1, 4: 2, 6: 4 }[ctype];
+  if (!bpp) throw new Error('decodePng: color type ' + ctype + ' unsupported');
+  const raw = zlib.inflateSync(Buffer.concat(idat));
+  const stride = w * bpp;
+  const out = new Uint8Array(w * h * 4);
+  let prev = new Uint8Array(stride);
+  for (let y = 0; y < h; y++) {
+    const f = raw[y * (stride + 1)];
+    const line = raw.subarray(y * (stride + 1) + 1, (y + 1) * (stride + 1));
+    const cur = new Uint8Array(stride);
+    for (let x = 0; x < stride; x++) {
+      const a = x >= bpp ? cur[x - bpp] : 0;
+      const b = prev[x];
+      const c = x >= bpp ? prev[x - bpp] : 0;
+      let v = line[x];
+      if (f === 1) v = (v + a) & 255;
+      else if (f === 2) v = (v + b) & 255;
+      else if (f === 3) v = (v + ((a + b) >> 1)) & 255;
+      else if (f === 4) {
+        const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+        v = (v + (pa <= pb && pa <= pc ? a : pb <= pc ? b : c)) & 255;
+      } else if (f !== 0) throw new Error('decodePng: filter ' + f + ' unsupported');
+      cur[x] = v;
+    }
+    for (let x = 0; x < w; x++) {
+      const o = (y * w + x) * 4, s = x * bpp;
+      if (ctype === 6) { out[o] = cur[s]; out[o + 1] = cur[s + 1]; out[o + 2] = cur[s + 2]; out[o + 3] = cur[s + 3]; }
+      else if (ctype === 2) { out[o] = cur[s]; out[o + 1] = cur[s + 1]; out[o + 2] = cur[s + 2]; out[o + 3] = 255; }
+      else if (ctype === 4) { out[o] = out[o + 1] = out[o + 2] = cur[s]; out[o + 3] = cur[s + 1]; }
+      else if (ctype === 0) { out[o] = out[o + 1] = out[o + 2] = cur[s]; out[o + 3] = 255; }
+      else { // palette
+        const idx = cur[s] * 3;
+        out[o] = plte[idx]; out[o + 1] = plte[idx + 1]; out[o + 2] = plte[idx + 2];
+        out[o + 3] = trns && cur[s] < trns.length ? trns[cur[s]] : 255;
+      }
+    }
+    prev = cur;
+  }
+  return { w, h, rgba: out };
+}

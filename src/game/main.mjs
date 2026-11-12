@@ -109,7 +109,7 @@ export class Game {
 
   // Premium+ W7 (TX-7): the foreground rule (canopy overhangs + roof
   // eaves), shared verbatim with the W7 census.
-  foregroundFor(kind, x, y, kindAt) { return foregroundFor(this.tileCache, kind, x, y, kindAt); }
+  foregroundFor(kind, x, y, kindAt, mapId) { return foregroundFor(this.tileCache, kind, x, y, kindAt, mapId); }
 
   buildSprites() {
     // Wave 3: real ART data replaces the forge placeholders (README wiring handoff).

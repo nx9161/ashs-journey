@@ -5199,7 +5199,7 @@ Object.assign(OverworldScene.prototype, {
       ? null : g.tileKind(this.map.rows[ty][tx]);
     for (let y = y0; y <= y1; y++) {
       for (let x = x0; x <= x1; x++) {
-        const fg = g.foregroundFor(g.tileKind(this.map.rows[y][x]), x, y, kindAt);
+        const fg = g.foregroundFor(g.tileKind(this.map.rows[y][x]), x, y, kindAt, this.map && this.map.id);
         if (fg) r.blit(fg, x * T - 8, y * T - 16);
       }
     }
