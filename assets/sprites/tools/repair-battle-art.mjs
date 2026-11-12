@@ -56,13 +56,14 @@ const STRATA_SCHEDULE = [
 function parseArgs(argv) {
   const [png, id, ...rest] = argv;
   if (!png || !id) { console.error('usage: repair-battle-art.mjs <design.png> <sprite-id> [flags]'); process.exit(2); }
-  const o = { png, id, out: path.join(ROOT, 'pix', 'species'), fit: 60, colors: 15, paletteFrom: null, name: id };
+  const o = { png, id, out: path.join(ROOT, 'pix', 'species'), fit: 60, colors: 15, paletteFrom: null, name: id, deepen: 0 };
   for (let i = 0; i < rest.length; i++) {
     if (rest[i] === '--out') o.out = rest[++i];
     else if (rest[i] === '--fit') o.fit = +rest[++i];
     else if (rest[i] === '--colors') o.colors = +rest[++i];
     else if (rest[i] === '--palette-from') o.paletteFrom = rest[++i];
     else if (rest[i] === '--name') o.name = rest[++i];
+    else if (rest[i] === '--deepen') o.deepen = +rest[++i];
     else { console.error('unknown flag: ' + rest[i]); process.exit(2); }
   }
   return o;
@@ -109,6 +110,23 @@ function gradientPass(small, tw, th, strength) {
       if (work[i + 3] <= 110) continue;
       for (let c = 0; c < 3; c++) work[i + c] = Math.max(0, Math.min(255, work[i + c] * f));
     }
+  }
+  return work;
+}
+
+// Saturation expansion around each pixel's own luminance: pastel
+// designs (PRIMARA class) gain presence without hue change. Opt-in
+// per record via --deepen F (the Wave G converter's --deepen-violet
+// was the same medicine for OMNIGEN).
+function deepenPass(small, tw, th, f) {
+  const work = new Float32Array(small);
+  for (let i = 0; i < tw * th; i++) {
+    if (work[i * 4 + 3] <= 110) continue;
+    const r = work[i * 4], g = work[i * 4 + 1], b = work[i * 4 + 2];
+    const L = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    work[i * 4] = Math.max(0, Math.min(255, L + (r - L) * (1 + f)));
+    work[i * 4 + 1] = Math.max(0, Math.min(255, L + (g - L) * (1 + f)));
+    work[i * 4 + 2] = Math.max(0, Math.min(255, L + (b - L) * (1 + f)));
   }
   return work;
 }
@@ -323,7 +341,7 @@ function main() {
   outer:
   for (const pm of paletteModes) {
     for (const cv of colorVariants) {
-      let sm = strataPass(small, tw, th, cv.pull, cv.sep, cv.auto).small;
+      let sm = strataPass(o.deepen ? deepenPass(small, tw, th, o.deepen) : small, tw, th, cv.pull, cv.sep, cv.auto).small;
       if (cv.grad) sm = gradientPass(sm, tw, th, cv.grad);
       let palette, bias = null;
       if (pm === 'own') {
