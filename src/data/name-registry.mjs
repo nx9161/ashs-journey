@@ -305,6 +305,10 @@ export const NAME_REGISTRY = {
     flareon:   { name: 'KINDLEON', status: 'locked', wave: 'G-RES', design: 'kindleon' },
     espeon:    { name: 'SOLYNX', status: 'locked', wave: 'G-RES', design: 'solynx' },
     umbreon:   { name: 'LUNAPARD', status: 'locked', wave: 'G-RES', design: 'lunapard' },
+    // Kanto sovereign trio slots (LEGENDARY tier, Naming Law):
+    // glacier+erne (sea-eagle), pyre+hawk. FULMINIS (145) is M1.
+    articuno:  { name: 'GLACIERNE', status: 'locked', wave: 'G-RES', design: 'glacierne' },
+    moltres:   { name: 'PYREHAWK', status: 'locked', wave: 'G-RES', design: 'pyrehawk' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -733,4 +737,5 @@ export const LOCKED_CANON = [
   'BUDDIN', 'SAPLINT', 'TERRABLOOM',
   'OMNIGEN', 'MOSSAIC', 'VULCANIS', 'UNDINARA', 'FULMINIS',
   'PRISMKIT', 'OTTERSAIL', 'SPARKHARE', 'KINDLEON', 'SOLYNX', 'LUNAPARD',
+  'GLACIERNE', 'PYREHAWK',
 ];
