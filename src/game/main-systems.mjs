@@ -11,12 +11,14 @@ import { displayName, dexCaughtCount, evolutionCheck, ownCaughtMap } from './sta
 import { MAIN_QUESTS, LEGENDARY_ARCS } from '../data/story-kanto.mjs';
 import { ORANGE_QUESTS } from '../data/story-orange.mjs';
 import { JOHTO_QUESTS } from '../data/story-johto.mjs';
+import { HOENN_QUESTS } from '../data/story-hoenn.mjs';
 import { SINNOH_QUESTS } from '../data/story-sinnoh.mjs';
 import { FACILITIES, FACILITY_IDS } from '../data/frontier.mjs';
 import { QUESTS, taleStageOf, taleStageText } from '../data/quests.mjs';
 import { applyBondOnce, bondedCharacters, bondSceneLines, tierOf } from './bonds.mjs';
 import { FORMS } from '../data/forms.mjs';
 import { ARCS, arcById, currentArcOf, arcStateOf, levelCapFor, PLATINUM_DEX_HORIZON } from '../data/arcs.mjs';
+import { narrativeArcById, currentChapterInArcOf, chapterStateOf, arcProgressOf } from '../data/narrative-db.mjs';
 import { arcDirectiveLines } from './arcs.mjs';
 import { xpForLevel, statValue, hpValue } from '../engine/formulas.mjs';
 import { switchForme, FORME_OF } from './sinnoh-systems.mjs';
@@ -356,6 +358,28 @@ Object.assign(Game.prototype, {
       items.push({ label: '— THE ROAD HOME —', value: null, disabled: true, band: true });
       items.push({ label: '★ Go home — return to Pallet Town', value: 'arcdirective' });
     }
+    // Section 0 — STORY (Wave D, Phase 5): the narrative DB's read of
+    // the journey — one row per reached arc, state derived by the DB
+    // helpers over the shipped flags (no new state; nothing below
+    // changes). A row opens the arc's current chapter from the DB.
+    {
+      const storyArcs = ['kanto', 'orange', 'johto', 'hoenn', 'sinnoh', 'frontier']
+        .filter((id) => ['current', 'complete', 'locked-next'].includes(arcStateOf(g.state, id)));
+      if (storyArcs.length) {
+        items.push({ label: '— STORY —', value: null, disabled: true, band: true });
+        for (const arcId of storyArcs) {
+          const arc = narrativeArcById(arcId);
+          const cur = currentChapterInArcOf(g.state, arcId);
+          const prog = arcProgressOf(g.state, arcId);
+          const counts = prog.main.total ? prog.main.done + '/' + prog.main.total + ' chapters'
+            : prog.facilities.total ? prog.facilities.done + '/' + prog.facilities.total + ' facilities' : '—';
+          items.push({
+            label: arc.region + ' — ' + (cur ? (chapterStateOf(g.state, cur.id) === 'complete' ? '★ ' : '▶ ') + cur.title : 'the road continues') + ' (' + counts + ')',
+            value: 'ndb:' + arcId,
+          });
+        }
+      }
+    }
     // Section 1 — Main Story (unchanged machinery: the MAIN_QUESTS chain).
     items.push({ label: '— MAIN STORY —', value: null, disabled: true, band: true });
     for (const q of MAIN_QUESTS) {
@@ -495,6 +519,35 @@ Object.assign(Game.prototype, {
       if (v.startsWith('bond:')) {
         const c = people.find((x) => 'bond:' + x.id === v);
         if (c) g.ui.say([c.name + ' — ' + tierOf(g.state, c.id), c.note], () => g.openQuestLog(), 'People');
+        return;
+      }
+      if (v.startsWith('ndb:')) {
+        // Wave D: the arc's current chapter, read from the narrative DB.
+        const arc = narrativeArcById(v.slice(4));
+        if (arc) {
+          const cur = currentChapterInArcOf(g.state, arc.id);
+          const prog = arcProgressOf(g.state, arc.id);
+          const ed = (arcById(arc.id) || {}).edition;
+          const lines = [arc.label + ' — ' + arc.region + (ed ? ' (' + ed + ')' : '')];
+          if (cur) {
+            lines.push('Now: ' + cur.title);
+            // Prose stays single-sourced in the story tables (the DB is
+            // the architecture layer): the hint is read from the chain.
+            const src = [...MAIN_QUESTS, ...ORANGE_QUESTS, ...JOHTO_QUESTS, ...HOENN_QUESTS, ...SINNOH_QUESTS]
+              .find((q) => q.id === cur.id);
+            if (src && src.hint) lines.push('Hint: ' + src.hint);
+          }
+          const bits = [];
+          if (prog.main.total) bits.push('Story chapters ' + prog.main.done + ' of ' + prog.main.total);
+          if (prog.legendary.total) bits.push('Legendary arcs ' + prog.legendary.done + ' of ' + prog.legendary.total);
+          if (prog.tales.total) bits.push('Town tales ' + prog.tales.done + ' of ' + prog.tales.total);
+          if (prog.facilities.total) bits.push('Facilities ' + prog.facilities.done + ' of ' + prog.facilities.total);
+          if (bits.length) lines.push(bits.join(' · ') + '.');
+          lines.push(arc.canon === 'canon-structure'
+            ? 'This arc is a reserved structure — its story is not written yet.'
+            : 'The story database records every beat as it is earned in play.');
+          g.ui.say(lines, () => g.openQuestLog(), 'Story');
+        }
         return;
       }
       if (v.startsWith('fq:')) {
