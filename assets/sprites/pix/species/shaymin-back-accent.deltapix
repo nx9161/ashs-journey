@@ -1,11 +1,15 @@
-# shaymin-back-accent — Arc4 S2b accent frame (crest/fin twitch, recolor-only).
+# shaymin-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over shaymin-back.
 PIXD shaymin-back-accent shaymin-back 64 64
-18 26 O
-38 26 O
-14 27 O
-15 27 O
-16 27 O
-17 27 O
-18 27 O
-19 27 O
+26 3 O
+27 3 O
+25 4 O
+26 4 O
+27 4 O
+28 4 O
+29 4 O
+30 4 O
+26 5 O
+27 5 O
+28 5 O
+29 5 O
 PAL

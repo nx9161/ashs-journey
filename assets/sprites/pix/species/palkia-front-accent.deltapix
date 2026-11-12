@@ -1,34 +1,15 @@
-# palkia-front-accent — Arc4 S2b accent frame (blink). Recolor-only delta over palkia-front.
+# palkia-front-accent — Wave G Sinnoh accent frame (crest (blink fallback)). Recolor-only delta over palkia-front.
 PIXD palkia-front-accent palkia-front 64 64
-29 11 O
-35 11 O
-29 12 O
-30 12 O
-35 12 O
-36 12 O
-27 13 O
-28 13 O
-29 13 O
-30 13 O
-31 13 O
-33 13 O
-34 13 O
-35 13 O
-36 13 O
-37 13 O
-28 14 O
-29 14 O
-30 14 O
-34 14 O
-35 14 O
-36 14 O
-29 15 O
-35 15 O
-32 18 O
-30 19 O
-31 19 O
-32 19 O
-33 19 O
-34 19 O
-32 20 O
+28 4 O
+29 5 O
+30 5 O
+31 5 O
+32 5 O
+33 5 O
+34 5 O
+29 6 O
+30 6 O
+31 6 O
+32 6 O
+33 6 O
 PAL

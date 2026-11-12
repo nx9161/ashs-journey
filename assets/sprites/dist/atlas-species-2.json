@@ -898,7 +898,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "arceus-front",
       "mirror_of": null
@@ -1782,7 +1782,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "cresselia-front",
       "mirror_of": null
@@ -1873,7 +1873,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": "darkrai-front",
       "mirror_of": null
@@ -2705,7 +2705,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": "giratina-front",
       "mirror_of": null
@@ -2718,7 +2718,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": "giratinaorigin-front",
       "mirror_of": null
@@ -4044,7 +4044,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 11,
       "seed": null,
       "derived_from": "manaphy-front",
       "mirror_of": null
@@ -4850,7 +4850,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": "phione-front",
       "mirror_of": null
@@ -5773,7 +5773,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "shaymin-front",
       "mirror_of": null
@@ -5786,7 +5786,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": "shayminsky-front",
       "mirror_of": null
@@ -7333,7 +7333,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7347,7 +7347,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7445,7 +7445,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7459,7 +7459,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7473,7 +7473,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7487,7 +7487,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7641,7 +7641,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7655,7 +7655,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7669,7 +7669,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7683,7 +7683,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7949,7 +7949,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7963,7 +7963,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 9,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7977,7 +7977,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -7991,7 +7991,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null,
@@ -8258,7 +8258,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9142,7 +9142,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -9233,7 +9233,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10065,7 +10065,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10078,7 +10078,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

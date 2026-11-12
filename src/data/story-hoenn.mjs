@@ -16,7 +16,7 @@
 // Mt. Requiem orbs, the hideouts, Sunken Cavern, the drought/deluge
 // climax (which sets/clears the weather override flags the H4a
 // renderer reads — src/game/weather.mjs: climax_drought /
-// climax_deluge), the Lucario special, and the Perennial Conference
+// climax_deluge), the AURAJACK special, and the Perennial Conference
 // -> hoenn_complete through the Foundation machine.
 //
 // The visual weather layer itself lives in src/game/weather.mjs

@@ -1,7 +1,15 @@
-# arceus-front-accent — Arc4 S2b accent frame (blink). Recolor-only delta over arceus-front.
+# arceus-front-accent — Wave G Sinnoh accent frame (crest (blink fallback)). Recolor-only delta over arceus-front.
 PIXD arceus-front-accent arceus-front 64 64
-15 18 O
-16 18 O
-17 18 O
-18 18 O
+33 4 O
+33 5 O
+34 5 O
+35 5 O
+36 5 O
+38 5 O
+33 6 O
+34 6 O
+35 6 O
+36 6 O
+37 6 O
+38 6 O
 PAL

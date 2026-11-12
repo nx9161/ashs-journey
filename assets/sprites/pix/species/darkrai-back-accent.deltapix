@@ -1,11 +1,15 @@
-# darkrai-back-accent — Arc4 S2b accent frame (crest/fin twitch, recolor-only).
+# darkrai-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over darkrai-back.
 PIXD darkrai-back-accent darkrai-back 64 64
-36 9 O
-48 9 O
-33 10 O
-34 10 O
-35 10 O
-36 10 O
-37 10 O
-38 10 O
+42 5 O
+35 6 O
+36 6 O
+37 6 O
+40 6 O
+41 6 O
+36 7 O
+37 7 O
+38 7 O
+39 7 O
+40 7 O
+41 7 O
 PAL

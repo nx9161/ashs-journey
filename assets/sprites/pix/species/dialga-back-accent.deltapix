@@ -1,11 +1,15 @@
-# dialga-back-accent — Arc4 S2b accent frame (crest/fin twitch, recolor-only).
+# dialga-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over dialga-back.
 PIXD dialga-back-accent dialga-back 64 64
-16 10 O
-18 10 O
-19 10 O
-21 10 O
-22 10 O
-24 10 O
-15 11 O
-16 11 O
+31 3 O
+32 3 O
+33 3 O
+30 4 O
+31 4 O
+32 4 O
+33 4 O
+34 4 O
+31 5 O
+32 5 O
+33 5 O
+34 5 O
 PAL

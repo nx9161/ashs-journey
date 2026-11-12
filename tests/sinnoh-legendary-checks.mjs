@@ -30,7 +30,7 @@ function ok(name, cond, extra) {
 const clone = (o) => JSON.parse(JSON.stringify(o));
 
 // ================= Part A: pure units =================
-const { SINNOH_LEGENDARY_ARCS, SINNOH_EVENTS, SINNOH_TRAINERS, roamLanding, MESPRIT_LANDINGS, CRESSELIA_LANDINGS, HALLOWED_TOWER } = await import(join(ROOT, 'src/data/story-sinnoh.mjs'));
+const { SINNOH_LEGENDARY_ARCS, SINNOH_EVENTS, SINNOH_TRAINERS, roamLanding, EMPATHIS_LANDINGS, LUNACYGN_LANDINGS, HALLOWED_TOWER } = await import(join(ROOT, 'src/data/story-sinnoh.mjs'));
 const { LEGENDARY_ARCS: DESIGNED_ARCS } = await import(join(ROOT, 'src/data/story-kanto.mjs'));
 const { SPECIES: SP1 } = await import(join(ROOT, 'src/data/species.mjs'));
 const { SPECIES2 } = await import(join(ROOT, 'src/data/species2.mjs'));
@@ -108,11 +108,11 @@ const FACE = {
     && SINNOH_EVENTS.ev_sinnoh_cresselia_meet.every((s) => !s.wildBattleCatch && !s.battle) && SINNOH_EVENTS.ev_sinnoh_cresselia_meet.some((s) => s.flag === 'cresselia_roaming')
     && SINNOH_EVENTS.ev_sinnoh_magma_stone.every((s) => !s.wildBattleCatch && !s.battle) && SINNOH_EVENTS.ev_sinnoh_magma_stone.some((s) => s.flag === 'magma_stone_returned'));
   ok('A06 the roaming idiom is ONE shared pure function (roamLanding over the persisted step counter): same steps -> same map for both roamers; the two landing sets are disjoint shipped route maps; a full 250-step cycle visits every landing exactly once per roamer',
-    [0, 49, 50, 12345].every((n) => roamLanding(n, MESPRIT_LANDINGS) === roamLanding(n, MESPRIT_LANDINGS) && roamLanding(n, CRESSELIA_LANDINGS) === roamLanding(n, CRESSELIA_LANDINGS))
-    && MESPRIT_LANDINGS.every((m) => !!MAPS9[m] && !CRESSELIA_LANDINGS.includes(m)) && CRESSELIA_LANDINGS.every((m) => !!MAPS9[m])
-    && new Set([0, 50, 100, 150, 200].map((n) => roamLanding(n, MESPRIT_LANDINGS))).size === 5
-    && new Set([0, 50, 100, 150, 200].map((n) => roamLanding(n, CRESSELIA_LANDINGS))).size === 5
-    && roamLanding(0, MESPRIT_LANDINGS) === 'r201' && roamLanding(100, MESPRIT_LANDINGS) === 'r210' && roamLanding(0, CRESSELIA_LANDINGS) === 'r218');
+    [0, 49, 50, 12345].every((n) => roamLanding(n, EMPATHIS_LANDINGS) === roamLanding(n, EMPATHIS_LANDINGS) && roamLanding(n, LUNACYGN_LANDINGS) === roamLanding(n, LUNACYGN_LANDINGS))
+    && EMPATHIS_LANDINGS.every((m) => !!MAPS9[m] && !LUNACYGN_LANDINGS.includes(m)) && LUNACYGN_LANDINGS.every((m) => !!MAPS9[m])
+    && new Set([0, 50, 100, 150, 200].map((n) => roamLanding(n, EMPATHIS_LANDINGS))).size === 5
+    && new Set([0, 50, 100, 150, 200].map((n) => roamLanding(n, LUNACYGN_LANDINGS))).size === 5
+    && roamLanding(0, EMPATHIS_LANDINGS) === 'r201' && roamLanding(100, EMPATHIS_LANDINGS) === 'r210' && roamLanding(0, LUNACYGN_LANDINGS) === 'r218');
   const poolOf = (sp, lvl) => {
     const e = SPECIES[sp]; const pool = new Set();
     for (const [l0, ids] of Object.entries(e.learnset)) if (+l0 <= lvl) for (const id of [].concat(ids || [])) pool.add(id);
@@ -136,8 +136,8 @@ const FACE = {
     ITEMS.oddkeystone && ITEMS.oddkeystone.pocket === 'key' && ITEMS.oaksletter && ITEMS.oaksletter.pocket === 'key'
     && Object.keys(ITEMS).length === 200 && t6.items.length === 200 && t6.quests.includes('arc_spiritomb') && t6.quests.includes('arc_arceus') && t6.items.includes('azureflute')
     && checkOut.includes('tables.json OK') && !ITEMS.membercard && !ITEMS.magmastone);
-  ok('A09 the Regigigas quest-log step SAYS the gate: it names Regirock, Regice AND Registeel and the words "in your party" (the spelled-out requirement the S6 handler reads live)',
-    (() => { const s = SINNOH_LEGENDARY_ARCS.arc_regigigas.steps[0]; return s.flag === 'regi_trio_present' && /Regirock/.test(s.text) && /Regice/.test(s.text) && /Registeel/.test(s.text) && /in your party/i.test(s.text); })());
+  ok('A09 the COLOSSOR quest-log step SAYS the gate: it names PETRAGOLEM, CRYOGOLEM AND SIDEROGOLEM and the words "in your party" (the spelled-out requirement the S6 handler reads live)',
+    (() => { const s = SINNOH_LEGENDARY_ARCS.arc_regigigas.steps[0]; return s.flag === 'regi_trio_present' && /PETRAGOLEM/.test(s.text) && /CRYOGOLEM/.test(s.text) && /SIDEROGOLEM/.test(s.text) && /in your party/i.test(s.text); })());
   ok('A10 the Manaphy -> Phione breeding data (the S1 assumption, corrected by S6): manaphy declares eggSpecies phione (its eggs hatch Phione, canon), phione is a real dex-489 entry, and manaphy is genuinely breedable (egg groups water1/fairy, not no-eggs)',
     SPECIES_SINNOH.manaphy.eggSpecies === 'phione' && SPECIES_SINNOH.phione && SPECIES_SINNOH.phione.dexNo === 489
     && SPECIES_SINNOH.manaphy.dexNo === 490 && !SPECIES_SINNOH.manaphy.eggGroups.includes('no-eggs'));
@@ -490,7 +490,7 @@ const driver = `
     ow = gotoMap(g, 'snowpoint-temple-depths');
     var met2 = drainToBattle(g);
     catchWithBall(g); pump(g);
-    ok('B08 Regigigas (Snowpoint Temple depths, Lv 380): the statue REFUSES with none of the three in the party (the keeper\\'s note names the gate; the arc discovers but nothing fires), refuses again with only two; with Regirock + Regice + Registeel IN THE PARTY the statue wakes; flee re-fires; the catch completes + dex',
+    ok('B08 Regigigas (Snowpoint Temple depths, Lv 380): the statue REFUSES with none of the three in the party (the keeper\\'s note names the gate; the arc discovers but nothing fires), refuses again with only two; with PETRAGOLEM + CRYOGOLEM + SIDEROGOLEM IN THE PARTY the statue wakes; flee re-fires; the catch completes + dex',
       refused0 && refused2 && met && fledOk && met2
       && st.story.flags.arc_regigigas_done === true && !!st.dex.caught[SPECIES.regigigas.dexNo],
       'r0=' + refused0 + ' r2=' + refused2 + ' met=' + met + ' foe=' + foeOk + ' fled=' + fledOk);
@@ -667,7 +667,7 @@ const driver = `
     g.ui.say = origSay;
     var joined = lines.join(' ');
     ok('B14 the Quest Log LEGENDARY ARCS section renders a Sinnoh arc and its detail view spells out the requirement steps (The Lake That Knows + the climax step + the catch step)',
-      bandOk && entryIdx >= 0 && joined.includes('The Lake That Knows') && joined.includes('Zenith Spire climax') && joined.includes('face Uxie, level 370'),
+      bandOk && entryIdx >= 0 && joined.includes('The Lake That Knows') && joined.includes('Zenith Spire climax') && joined.includes('face LORACLE, level 370'),
       'band=' + bandOk + ' entry=' + entryIdx + ' detail=' + joined.slice(0, 120));
   }
 
