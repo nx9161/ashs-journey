@@ -2181,8 +2181,13 @@ export const TRAINERS3 = {
   // no-opped. Voss is the hideout admin as authored (his draft lived
   // in the unmerged TRAINERS2 under the shared id 'rocket_admin';
   // team sits just over Erika's 29 ace, as a post-Celadon boss).
+  // The draft's ai:'smart' is NOT carried over: TRAINERS2 stamped it
+  // table-wide, while the live Silph admin below ships with no ai
+  // override — and 'smart' would promote Voss into the leader class
+  // (rules.mjs isLeaderTrainer: challenge +2 levels, keepsake levers,
+  // the A19 leader census) that his Silph counterpart is not in.
   rocket_admin_hideout: {
-    id: 'rocket_admin_hideout', name: 'Admin Voss', title: 'Rocket Admin', ai: 'smart',
+    id: 'rocket_admin_hideout', name: 'Admin Voss', title: 'Rocket Admin',
     intro: ["I am Voss — the hand that signs the Team's dirty work. You found our hideout; you'll leave in a crate, gift-wrapped."],
     lose: ["A child... dismantling MY operation. The boss will want your name. I already regret giving it."],
     team: [ { species: 'golbat', level: 32 }, { species: 'weezing', level: 34 }, { species: 'arbok', level: 34 } ],
