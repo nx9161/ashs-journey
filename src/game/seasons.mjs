@@ -14,8 +14,19 @@
 // season toast when the season rolls over. Anything mechanical is a
 // future owner ruling, not a silent addition.
 //
-// Anchor (ours): January = Winter, then the cycle turns monthly —
-// Feb Spring, Mar Summer, Apr Autumn, May Winter, and so on.
+// Anchor (ours): January opens Spring, then the cycle turns monthly —
+// Feb Summer, Mar Autumn, Apr Winter, May Spring… — so November plays
+// in Autumn and December in Winter.
+//
+// SEASONAL ART (added same day, owner verdict "the game looks the
+// same"): the season also re-grades the world's vegetation art. Tile
+// palettes pass through seasonalHex() below when the tile cache is
+// built (buildArtTileCache in engine/art.mjs, fed by main.mjs):
+// greens — grass, tall grass, flowers' stems, tree canopies — shift
+// per season (spring brighter, autumn amber, winter frost-pale) while
+// every non-green (trunks, roofs, paths, water) keeps its authored
+// color. Original color math, our own art; the authored palette is
+// the Summer grade.
 
 export const SEASON_ORDER = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
@@ -32,7 +43,7 @@ export const SEASON_STYLE = {
 // Pure resolver: Date -> { name, index, color, tint }.
 export function seasonForDate(d) {
   const month = d && typeof d.getMonth === 'function' ? d.getMonth() : 0;
-  const name = SEASON_ORDER[((month % 4) + 4) % 4];
+  const name = SEASON_ORDER[(((month + 1) % 4) + 4) % 4];
   const style = SEASON_STYLE[name];
   return { name, index: SEASON_ORDER.indexOf(name), color: style.color, tint: style.tint };
 }
@@ -49,4 +60,49 @@ export function currentSeason() {
 export function seasonTintFor(map) {
   if (!map || map.indoor || map.dark) return null;
   return currentSeason().tint;
+}
+
+// ---- seasonal art grade -------------------------------------------------
+const clamp255 = (v) => Math.max(0, Math.min(255, Math.round(v)));
+function hexToRgb(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+  if (!m) return null;
+  const n = parseInt(m[1], 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+const rgbToHex = (r, g, b) => '#' + [r, g, b].map((v) => clamp255(v).toString(16).padStart(2, '0')).join('');
+
+// One authored color -> its seasonal grade. Only green-dominant colors
+// (foliage and grass: g strictly greatest) are re-graded; everything
+// else returns unchanged, in every season.
+export function seasonalHex(hex, seasonName) {
+  const rgb = hexToRgb(hex);
+  if (!rgb) return hex;
+  const [r, g, b] = rgb;
+  if (!(g > r && g > b)) return hex;
+  switch (seasonName) {
+    case 'Spring': return rgbToHex(r * 0.94 + 14, g * 1.07 + 8, b * 0.94 + 6);
+    case 'Summer': return rgbToHex(r * 0.97, g, b * 0.97);
+    case 'Autumn': return rgbToHex(g * 1.05 + 26, r * 0.58 + g * 0.22, b * 0.5);
+    case 'Winter': {
+      const lum = (r + g + b) / 3;
+      const mix = (t) => lum + (t - lum) * 0.66;
+      return rgbToHex(mix(228), mix(238), mix(244));
+    }
+    default: return hex;
+  }
+}
+
+// Build an artCanvas swap ({ paletteChar: hex }) re-grading every
+// green in a palette for the current season. Entries whose grade is
+// unchanged are omitted; an all-unchanged palette yields {}.
+export function seasonalSwapFor(pal) {
+  if (!pal) return {};
+  const season = currentSeason().name;
+  const swap = {};
+  for (const ch of Object.keys(pal)) {
+    const graded = seasonalHex(pal[ch], season);
+    if (graded !== pal[ch]) swap[ch] = graded;
+  }
+  return swap;
 }

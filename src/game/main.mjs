@@ -1,7 +1,6 @@
 // main.mjs — Game root: owns loop, renderer, input, audio, UI, scenes, save.
 // Scene flow: BOOT (legal card) -> TITLE -> INTRO -> OVERWORLD <-> BATTLE.
 // Battle/overworld menus (Bag/Party/Dex/Save/Options) live here as UI states.
-
 import { Loop } from '../engine/loop.mjs';
 import { Renderer, TILE } from '../engine/render.mjs';
 import { Input, KEYMAP, ACTIONS } from '../engine/input.mjs';
@@ -18,6 +17,7 @@ import { SPECIES, DEX_TOTAL } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
 import { ITEMS, POCKETS, BALLS, KEEPSAKES } from '../data/items.mjs';
 import { giveKeepsake, takeKeepsake } from './keepsakes.mjs';
+import { seasonalSwapFor } from './seasons.mjs';
 import { MAPS } from '../data/maps.mjs';
 import { CHAPTERS, BONUS_SHELF, chapterOf } from '../data/story.mjs';
 import { ARCS, arcStateOf, currentArcOf, arcDexSpan, PLATINUM_DEX_HORIZON } from '../data/arcs.mjs';
@@ -68,7 +68,7 @@ export class Game {
     this.store = new SaveStore();
     this.state = freshState();
     this.rng = makeRngStreams(nextSeed());
-    this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs); void -> solid fill
+    this.tileCache = buildArtTileCache(doc, seasonalSwapFor); // hand-authored tileset (art.mjs), season-graded vegetation; void -> solid fill
     this.spriteCache = {};
     this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
     this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)
