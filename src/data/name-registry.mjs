@@ -363,6 +363,19 @@ export const NAME_REGISTRY = {
     riolu:       { name: 'AURAPUP', status: 'named', wave: 'G-ST5', design: 'aurapup' },
     lucario:     { name: 'AURAJACK', status: 'named', wave: 'G-ST5', design: 'aurajack' },
     hippopotas:  { name: 'SANDPOTAM', status: 'named', wave: 'G-ST5', design: 'sandpotam' },
+    // -- Wave G Sinnoh, Tranche 6 --
+    hippowdon:   { name: 'MAWPOTAM', status: 'named', wave: 'G-ST6', design: 'mawpotam' },
+    skorupi:     { name: 'SCORPLET', status: 'named', wave: 'G-ST6', design: 'scorplet' },
+    drapion:     { name: 'OGRESCORP', status: 'named', wave: 'G-ST6', design: 'ogrescorp' },
+    croagunk:    { name: 'VENOFROG', status: 'named', wave: 'G-ST6', design: 'venofrog' },
+    toxicroak:   { name: 'BRAWLFROG', status: 'named', wave: 'G-ST6', design: 'brawlfrog' },
+    carnivine:   { name: 'SNAPVINE', status: 'named', wave: 'G-ST6', design: 'snapvine' },
+    finneon:     { name: 'GLOWFIN', status: 'named', wave: 'G-ST6', design: 'glowfin' },
+    lumineon:    { name: 'LUMIVEIL', status: 'named', wave: 'G-ST6', design: 'veilfin' },
+    mantyke:     { name: 'KITELET', status: 'named', wave: 'G-ST6', design: 'kitelet' },
+    snover:      { name: 'SNOWFIR', status: 'named', wave: 'G-ST6', design: 'snowfir' },
+    abomasnow:   { name: 'YETIFIR', status: 'named', wave: 'G-ST6', design: 'yetifir' },
+    weavile:     { name: 'NIGHTMAUL', status: 'named', wave: 'G-ST6', design: 'nightmaul' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -473,6 +486,13 @@ export const NAME_REGISTRY = {
     naplet: ['munchlax', 'snorlax'],
     sharklet: ['gible', 'gabite', 'garchomp'],
     aurapup: ['riolu', 'lucario'],
+    sandpotam: ['hippopotas', 'hippowdon'],
+    scorplet: ['skorupi', 'drapion'],
+    venofrog: ['croagunk', 'toxicroak'],
+    glowfin: ['finneon', 'lumineon'],
+    kitelet: ['mantyke', 'mantine'],
+    snowfir: ['snover', 'abomasnow'],
+    nightclaw: ['sneasel', 'weavile'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
