@@ -1,6 +1,6 @@
-# xatu-front battle sprite, 64x64. Wave G: generated original design,
-# converted by assets/sprites/tools/convert-monster.mjs from
-# assets/sprites/designs/sunseer.png (deterministic).
+# xatu-front battle sprite, 64x64. Wave J B2-G10 repair: re-converted by
+# assets/sprites/tools/repair-battle-art.mjs from the locked Wave G design
+# assets/sprites/designs/sunseer.png (deterministic; strata pull 0.55 / palette own; body steps 8).
 PIX xatu-front 64 64
 ................................................................
 ................................................................

@@ -1,6 +1,6 @@
 # houndour-front battle sprite, 64x64. Wave J B2-G10 repair: re-converted by
 # assets/sprites/tools/repair-battle-art.mjs from the locked Wave G design
-# assets/sprites/designs/charpup.png (deterministic; strata pull 0.55 / palette own; body steps 8).
+# assets/sprites/designs/charpup.png (deterministic; strata pull 0.55 / palette strict; body steps 8; pair J 0.50).
 PIX houndour-front 64 64
 ................................................................
 ................................................................
