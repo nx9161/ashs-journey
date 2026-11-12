@@ -53,7 +53,7 @@ export const FORMS = [
   { id: 'arcanine-hisui', speciesId: 59, name: 'Hisuian EMBERMANE', kind: 'regional', region: 'hisui', types: ['fire', 'rock'], note: 'Dances across lava fields lighter than its bulk suggests.' },
   { id: 'voltorb-hisui', speciesId: 100, name: 'Hisuian CELLORB', kind: 'regional', region: 'hisui', types: ['electric', 'grass'], note: 'Wooden-bodied and jolly right up until it discharges.' },
   { id: 'electrode-hisui', speciesId: 101, name: 'Hisuian MEGACELL', kind: 'regional', region: 'hisui', types: ['electric', 'grass'], note: 'Villagers once mistook its crackle for angry spirits.' },
-  { id: 'typhlosion-hisui', speciesId: 157, name: 'Hisuian Typhlosion', kind: 'regional', region: 'hisui', types: ['fire', 'ghost'], note: 'Gentle purple flames guide lost souls onward.' },
+  { id: 'typhlosion-hisui', speciesId: 157, name: 'Hisuian PYROCLAST', kind: 'regional', region: 'hisui', types: ['fire', 'ghost'], note: 'Gentle purple flames guide lost souls onward.' },
   { id: 'qwilfish-hisui', speciesId: 211, name: 'Hisuian Qwilfish', kind: 'regional', region: 'hisui', types: ['dark', 'poison'], note: 'Black spines and a worse temper than its sea cousins.' },
   { id: 'overqwil', speciesId: 211, name: 'Overqwil', kind: 'regional', region: 'hisui', types: ['dark', 'poison'], note: 'Hisuian Qwilfish evolution; a reef of needles with a grudge.' },
   { id: 'sneasel-hisui', speciesId: 215, name: 'Hisuian Sneasel', kind: 'regional', region: 'hisui', types: ['fighting', 'poison'], note: 'Cliff climber whose claws leave venom in the rock.' },

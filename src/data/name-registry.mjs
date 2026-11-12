@@ -202,6 +202,23 @@ export const NAME_REGISTRY = {
     dragonite: { name: 'WYRMARCH', status: 'named', wave: 'G-KT9', design: 'wyrmarch' },
     giantdragonite: { name: 'Giant WYRMARCH', status: 'named', wave: 'G-KT9', design: 'wyrmarch-giant' },
     mew:       { name: 'PRIMARA', status: 'named', wave: 'G-KT9', design: 'primara' },
+    // -- Wave G Johto, Tranche 1 (coordinator-named) --
+    chikorita: { name: 'SPROUTLET', status: 'named', wave: 'G-JT1', design: 'sproutlet' },
+    bayleef:   { name: 'AROMANE', status: 'named', wave: 'G-JT1', design: 'aromane' },
+    meganium:  { name: 'PETALORD', status: 'named', wave: 'G-JT1', design: 'petalord' },
+    cyndaquil: { name: 'ASHMOLE', status: 'named', wave: 'G-JT1', design: 'ashmole' },
+    quilava:   { name: 'QUILLVENT', status: 'named', wave: 'G-JT1', design: 'quillvent' },
+    typhlosion: { name: 'PYROCLAST', status: 'named', wave: 'G-JT1', design: 'pyroclast' },
+    totodile:  { name: 'SNAPLET', status: 'named', wave: 'G-JT1', design: 'snaplet' },
+    croconaw:  { name: 'RIDGEJAW', status: 'named', wave: 'G-JT1', design: 'ridgejaw' },
+    feraligatr: { name: 'SNAPTYRANT', status: 'named', wave: 'G-JT1', design: 'snaptyrant' },
+    sentret:   { name: 'VIGILET', status: 'named', wave: 'G-JT1', design: 'vigilet' },
+    furret:    { name: 'DASHLONG', status: 'named', wave: 'G-JT1', design: 'dashlong' },
+    hoothoot:  { name: 'TICKOWL', status: 'named', wave: 'G-JT1', design: 'tickowl' },
+    noctowl:   { name: 'HUSHWING', status: 'named', wave: 'G-JT1', design: 'hushwing' },
+    ledyba:    { name: 'SPOTLET', status: 'named', wave: 'G-JT1', design: 'spotlet' },
+    ledian:    { name: 'STARFIST', status: 'named', wave: 'G-JT1', design: 'starfist' },
+    spinarak:  { name: 'SILKLET', status: 'named', wave: 'G-JT1', design: 'silklet' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -258,6 +275,13 @@ export const NAME_REGISTRY = {
     ammonlet: ['omanyte', 'omastar'],
     domeshel: ['kabuto', 'kabutops'],
     wyrmling: ['dratini', 'dragonair', 'dragonite'],
+    sproutlet: ['chikorita', 'bayleef', 'meganium'],
+    ashmole: ['cyndaquil', 'quilava', 'typhlosion'],
+    snaplet: ['totodile', 'croconaw', 'feraligatr'],
+    vigilet: ['sentret', 'furret'],
+    tickowl: ['hoothoot', 'noctowl'],
+    spotlet: ['ledyba', 'ledian'],
+    // silklet line ['spinarak','ariados'] registers in JT2 with ariados (Kanto discipline: lines land complete).
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
