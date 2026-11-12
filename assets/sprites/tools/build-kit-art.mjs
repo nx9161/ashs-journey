@@ -108,8 +108,62 @@ const TILES = {
   'kit-door': [98, 228], 'kit-wall-window': [115, 227],
 };
 const out = {};
-for (const [id, [x, y]] of Object.entries(TILES)) out[id] = toEntry(extract(SHEET, x, y, 16, 16));
+const GRIDS = {};
+for (const [id, [x, y]] of Object.entries(TILES)) { GRIDS[id] = extract(SHEET, x, y, 16, 16); out[id] = toEntry(GRIDS[id]); }
 out['kit-sign'] = toEntry(extract(SHEET, 48, 16, 16, 16, GRASS_GREENS));
+
+// ---- Wave C: interiors (the sheet's top-band room set) ----
+// Single-cell motifs sliced from the composed room scene; every pick
+// is a complete object in its cell (bed and shelf/plant are 16x32,
+// bottom-anchored like the shipped wardrobe). Chair and plant carry
+// the room's plank floor behind them — the floor hexes key out so
+// they composite over the live kit floor like our own props.
+const FLOOR_HEXES = new Set(['#8d5500', '#3b2400', '#e6ad27']); // the sheet's plank browns
+out['kit-floor-1'] = toEntry(extract(SHEET, 224, 96, 16, 16));
+out['kit-floor-2'] = toEntry(extract(SHEET, 224, 112, 16, 16));
+out['kit-rug'] = toEntry(extract(SHEET, 200, 96, 16, 16)); // purple diamond rug, center crop
+out['kit-rug2'] = toEntry(extract(SHEET, 128, 48, 16, 16)); // pink heart rug
+out['kit-bed'] = toEntry(extract(SHEET, 176, 80, 16, 32));
+out['kit-table'] = toEntry(extract(SHEET, 176, 112, 16, 16));
+out['kit-chair'] = toEntry(extract(SHEET, 240, 96, 16, 16, FLOOR_HEXES));
+out['kit-plant'] = toEntry(extract(SHEET, 269, 100, 16, 32, FLOOR_HEXES)); // palm, center crop (crown is 20 wide; reads as a potted palm)
+out['kit-shelf'] = toEntry(extract(SHEET, 272, 64, 16, 32));
+out['kit-housewall'] = toEntry(extract(SHEET, 128, 64, 16, 16));
+out['kit-painting-1'] = toEntry(extract(SHEET, 192, 48, 16, 16));
+out['kit-painting-2'] = toEntry(extract(SHEET, 208, 48, 16, 16));
+// Lab wall: the house wall re-toned cool (labs read clinical, houses warm).
+const LABWALL_MAP = { '#f7e38a': '#dfe5ea', '#e6d06a': '#bcc9d4', '#c9a94e': '#93a7b8', '#f9efae': '#eef3f6' };
+const labwallGrid = extract(SHEET, 128, 64, 16, 16).map((row) => row.map((c) => (c && LABWALL_MAP[c]) || c));
+out['kit-labwall'] = toEntry(labwallGrid);
+
+// ---- Wave C: biome families the kit lacks (ORIGINAL tiles in the
+// kit's own pattern language: the kit grass/canopy/tallgrass pixel
+// patterns re-toned, never the cabin set stretched out of biome) ----
+// Snow: kit speckle carried into a snow scale; the canopy remaps to
+// spruce with its lightest tone becoming snow load, and the top
+// contour rows dust over.
+const SNOW_MAP = { '#008100': '#e9f2f6', '#003f00': '#b9cfdb', '#64e53c': '#ffffff', '#063a00': '#a9c3d2', '#b8fca8': '#ffffff' };
+const DRY_MAP = { '#008100': '#d8bf83', '#003f00': '#b39b5e', '#64e53c': '#efdf9f', '#063a00': '#9a8148', '#b8fca8': '#f7ecc0' };
+const remapGrid = (grid, map) => grid.map((row) => row.map((c) => (c && map[c]) || c));
+out['kit-snow-1'] = toEntry(remapGrid(GRIDS['kit-grass-1'], SNOW_MAP));
+out['kit-snow-2'] = toEntry(remapGrid(GRIDS['kit-grass-2'], SNOW_MAP));
+out['kit-snow-3'] = toEntry(remapGrid(GRIDS['kit-grass-3'], SNOW_MAP));
+out['kit-snowtuft'] = toEntry(remapGrid(GRIDS['kit-tallgrass'], SNOW_MAP));
+out['kit-dryground-1'] = toEntry(remapGrid(GRIDS['kit-grass-1'], DRY_MAP));
+out['kit-dryground-2'] = toEntry(remapGrid(GRIDS['kit-grass-2'], DRY_MAP));
+out['kit-dryground-3'] = toEntry(remapGrid(GRIDS['kit-grass-3'], DRY_MAP));
+out['kit-drytall'] = toEntry(remapGrid(GRIDS['kit-tallgrass'], DRY_MAP));
+const CANOPY_SNOW_MAP = { '#003f00': '#1e4638', '#008100': '#2e6b52', '#64e53c': '#f4fafc' };
+const snowCanopy = remapGrid(GRIDS['kit-canopy'], CANOPY_SNOW_MAP)
+  .map((row, j) => (j <= 2 ? row.map((c) => (c === '#2e6b52' ? '#e8f3f8' : c)) : row));
+out['kit-canopy-snow'] = toEntry(snowCanopy);
+const CANOPY_DRY_MAP = { '#003f00': '#5c5c1e', '#008100': '#8a8a3a', '#64e53c': '#d8cd7a' };
+out['kit-canopy-dry'] = toEntry(remapGrid(GRIDS['kit-canopy'], CANOPY_DRY_MAP));
+// Kit door, open frame (warp-fade door beat in kit towns): the leaf
+// tones drop to deep shadow — a dark opening inside the kept frame,
+// the mirror of the authored door-open registry's read.
+const DOOR_OPEN_MAP = { '#8d5500': '#201204', '#3b2400': '#0f0702' };
+out['kit-door-open'] = toEntry(remapGrid(GRIDS['kit-door'], DOOR_OPEN_MAP));
 // Wave A: the 2-wide cabin entrances (Saffron's dojo, Fuchsia's safari
 // gate, Cinnabar's mansion) wear French doors — the kit door pairs with
 // its own horizontal mirror, latches meeting at the center post. The
