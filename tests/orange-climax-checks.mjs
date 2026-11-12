@@ -482,7 +482,7 @@ const driver = `
   gQ.state.story.quests.arc_lugia_shamouti = 'discovered';
   gQ.openQuestLog();
   var labelsQ = gQ.ui.menu.items.map(function (i) { return i.label; });
-  var stormRow = labelsQ.find(function (l) { return l.includes('Storm over Shamouti'); });
+  var stormRow = labelsQ.find(function (l) { return l.includes('Storm over Sanctum'); });
   ok('B20 Quest Log: the storm row tracks titans calmed (1/3) and the Lugia arc lists in the LEGENDARY ARCS section',
     !!stormRow && stormRow.includes('1/3 titans calmed') && labelsQ.some(function (l) { return l.includes('LEGENDARY ARCS'); })
     && labelsQ.some(function (l) { return l.includes('The Guardian of the Sea'); }),

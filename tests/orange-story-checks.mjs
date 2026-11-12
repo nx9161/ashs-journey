@@ -438,9 +438,9 @@ const driver = `
   g8.state.badges.orange = ['coraleyebadge', 'searubybadge'];
   g8.openQuestLog();
   var labels8 = g8.ui.menu.items.map(function (i) { return i.label; });
-  var crewRow = labels8.find(function (l) { return l.includes('Orange Crew badges'); });
+  var crewRow = labels8.find(function (l) { return l.includes('Amber Crew badges'); });
   ok('B17 Quest Log renders the ORANGE ISLANDS section once reached; crew stage tracks 2/4 badges',
-    labels8.some(function (l) { return l.includes('ORANGE ISLANDS'); }) && !!crewRow && crewRow.includes('2/4 badges'),
+    labels8.some(function (l) { return l.includes('AMBER ISLES'); }) && !!crewRow && crewRow.includes('2/4 badges'),
     labels8.join(' / ').slice(0, 260));
 
   // ---- B18: Cheat Terminal orange badge claims (prefix per set, independent) ----

@@ -1876,7 +1876,7 @@ const driverE = `
       cardLines.length > 0 && cardLines[0] === sum.title && sum.title.indexOf('TRIAL GROUNDS') >= 0
       && sum.badgeLine === 'Badges: 7/7' && cardLines.includes('Badges: 7/7')
       && frontierArc.summaryLines.every(function (l) { return cardLines.includes(l); })
-      && sum.forwardLine.indexOf('Sinnoh') >= 0 && sum.forwardLine.indexOf('Gary') >= 0,
+      && sum.forwardLine.indexOf('Borea') >= 0 && sum.forwardLine.indexOf('Gary') >= 0,
       'card=' + cardLines.join(' | ').slice(0, 200));
     drain(g);
     ok('E04 the machine recorded the card: regionsDone gains frontier EXACTLY once, arc_card_frontier set, the directive is pinned on sinnoh — and Scott has NOT fired on the hub (his beat is Pallet-only)',
@@ -1908,7 +1908,7 @@ const driverE = `
       st.story.flags.scott_closing_done === true
       && seen.some(function (l) { return l.indexOf('salutes its conqueror') >= 0; })
       && seen.some(function (l) { return l.indexOf('followed the whole campaign') >= 0; })
-      && seen.some(function (l) { return l.indexOf('Hawthorn') >= 0 && l.indexOf('Gary') >= 0 && l.indexOf('Sinnoh') >= 0 && l.indexOf('Electivire') >= 0; })
+      && seen.some(function (l) { return l.indexOf('Hawthorn') >= 0 && l.indexOf('Gary') >= 0 && l.indexOf('Borea') >= 0 && l.indexOf('Electivire') >= 0; })
       && seen.some(function (l) { return l.indexOf('Home first') >= 0; }),
       'seen=' + seen.join(' | ').slice(0, 240));
     ow = gotoMap(g, 'viridian', 10, 10); drain(g);
@@ -1927,7 +1927,7 @@ const driverE = `
     var regionsBefore = st.story.regionsDone.slice();
     ow = gotoMap(g, 'house-pallet-ash', 4, 4);
     drain(g);
-    var hookSeen = g.ui.log.some(function (e) { return e.lines && e.lines.some(function (l) { return l.indexOf('Electivire') >= 0 && l.indexOf('Sinnoh') >= 0; }); });
+    var hookSeen = g.ui.log.some(function (e) { return e.lines && e.lines.some(function (l) { return l.indexOf('Electivire') >= 0 && l.indexOf('Borea') >= 0; }); });
     ok('E09 the Sinnoh homecoming completes at Mom house: the machine delivers Gary hook lines itself (the Electivire line), hook_sinnoh + homecoming_sinnoh set, the directive is cleared',
       hookSeen && st.story.flags.hook_sinnoh === true && st.story.flags.homecoming_sinnoh === true
       && st.story.arc_directive === null,
@@ -1947,11 +1947,11 @@ const driverE = `
     ok('E11 Journey surface: the arc headers read ARC 3.5 BATTLE FRONTIER COMPLETE and ARC 4 SINNOH CURRENT (Stage S0 supersedes the sealed reading: arcStateOf agrees — frontier complete, sinnoh current after its shipped homecoming)',
       arcStateOf(st, 'frontier') === 'complete' && arcStateOf(st, 'sinnoh') === 'current'
       && jLabels.some(function (l) { return l.indexOf('TRIAL GROUNDS') >= 0 && l.indexOf('COMPLETE') >= 0; })
-      && jLabels.some(function (l) { return l.indexOf('SINNOH') >= 0 && l.indexOf('CURRENT') >= 0; }),
+      && jLabels.some(function (l) { return l.indexOf('BOREA') >= 0 && l.indexOf('CURRENT') >= 0; }),
       jLabels.join(' / ').slice(0, 300));
     ok('E12 Regions surface: the Sinnoh row reads current — you are here (Stage S0 supersedes the sealed reading; not done, not sealed)',
-      rLabels.some(function (l) { return l.indexOf('Sinnoh') >= 0 && l.indexOf('you are here') >= 0; })
-      && !rLabels.some(function (l) { return l.indexOf('Sinnoh') >= 0 && l.indexOf('sealed') >= 0; }),
+      rLabels.some(function (l) { return l.indexOf('Borea') >= 0 && l.indexOf('you are here') >= 0; })
+      && !rLabels.some(function (l) { return l.indexOf('Borea') >= 0 && l.indexOf('sealed') >= 0; }),
       rLabels.join(' / ').slice(0, 300));
   }
 

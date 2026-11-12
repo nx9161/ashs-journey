@@ -62,7 +62,7 @@ const FACE = {
 {
   ok('A01 the live register carries exactly the ten Hoenn arcs, none designedOnly, every species real and Hoenn-dex (377-386)',
     JSON.stringify(Object.keys(HOENN_LEGENDARY_ARCS).sort()) === JSON.stringify(TEN.slice().sort())
-    && TEN.every((id) => { const a = HOENN_LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Hoenn' && SPECIES[a.species] && SPECIES[a.species].dexNo >= 377 && SPECIES[a.species].dexNo <= 386; }));
+    && TEN.every((id) => { const a = HOENN_LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Maris' && SPECIES[a.species] && SPECIES[a.species].dexNo >= 377 && SPECIES[a.species].dexNo <= 386; }));
   ok('A02 every arc states its quest-log requirements: >=2 steps, exactly one catch step naming its own species, every other step flag-keyed (the Deoxys forme step is a post-catch requirement, flag deoxys_forme_touched)',
     TEN.every((id) => { const a = HOENN_LEGENDARY_ARCS[id];
       return a.steps.length >= 2 && a.steps.filter((s) => s.catch).length === 1
@@ -279,7 +279,7 @@ const driver = `
 
   ok('B01 the merge fold landed in the bundle: all ten LEGENDARY_ARCS entries are LIVE (no designedOnly), with shipped lairs and climax keying intact',
     ['arc_regirock','arc_regice','arc_registeel','arc_latias','arc_latios','arc_groudon','arc_kyogre','arc_rayquaza','arc_jirachi','arc_deoxys'].every(function (id) {
-      var a = LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Hoenn';
+      var a = LEGENDARY_ARCS[id]; return a && !a.designedOnly && a.region === 'Maris';
     }) && LEGENDARY_ARCS.arc_rayquaza.prereq === 'climax_resolved' && LEGENDARY_ARCS.arc_kyogre.lair === 'r127-underwater');
 
   // ---- B02-B04: Regirock — the standing beat ----

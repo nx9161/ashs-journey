@@ -1061,7 +1061,7 @@ const driver = `
   if (g.ui.menuOpen) { var ji = jItems.findIndex(function (i) { return i.value === 'close'; }); if (ji >= 0) g.ui.debugChoose(ji); tk(g, 3); }
   drain(g);
   ok('C18 the Journey menu reads the finished road: all six arc headers COMPLETE, and the future rows stand as one SEALED silhouette band (nothing fake-playable)',
-    ['ARDEN — COMPLETE', 'ORANGE ISLANDS — COMPLETE', 'YAMATO — COMPLETE', 'MARIS — COMPLETE', 'TRIAL GROUNDS — COMPLETE', 'BOREA — COMPLETE']
+    ['ARDEN — COMPLETE', 'AMBER ISLES — COMPLETE', 'YAMATO — COMPLETE', 'MARIS — COMPLETE', 'TRIAL GROUNDS — COMPLETE', 'BOREA — COMPLETE']
       .every(function (s) { return jLabels.indexOf(s) >= 0; })
     && jLabels.indexOf('FUTURE ARCS — SEALED') >= 0,
     jLabels.slice(0, 300));

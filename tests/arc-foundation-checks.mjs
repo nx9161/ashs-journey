@@ -116,7 +116,7 @@ function stateWith(mut) { const s = defaultState(); if (mut) mut(s); return s; }
   ok('A16 ARC COMPLETE summary: badges 8/8, dex gained 3, national 3/151, playtime 1h 0m, HoF team line, forward names Arc 1.5 + Pallet',
     sum.badgeLine === 'Badges: 8/8' && sum.dexGained === 3 && sum.dexLine.includes('National: 3/151')
     && sum.playtimeLine === 'Playtime this arc: 1h 0m' && sum.teamLine.includes('BUDDIN Lv63')
-    && sum.forwardLine.includes('Arc 1.5') && sum.forwardLine.includes('Pallet Town'),
+    && sum.forwardLine.includes('Arc 1.5') && sum.forwardLine.includes('Dawnwick'),
     JSON.stringify(sum));
 }
 
@@ -275,13 +275,13 @@ const driver = `
   g1.openQuestLog();
   var pin = g1.ui.menu.items.find(function (it) { return it.value === 'arcdirective'; });
   ok('B04 Quest Log pins ★ Go home as its first actionable entry while the directive is set',
-    !!pin && pin.label.includes('Go home — return to Pallet Town')
+    !!pin && pin.label.includes('Go home — return to Dawnwick')
     && g1.ui.menu.items.findIndex(function (it) { return it.value === 'arcdirective'; }) < g1.ui.menu.items.findIndex(function (it) { return String(it.value || '').indexOf('q:') === 0; }),
     g1.ui.menu.items.map(function (i) { return i.label; }).join(' / ').slice(0, 200));
   pickVal(g1, 'arcdirective');
   var dirText = g1.ui.dlg ? g1.ui.dlg.lines.join(' | ') : '';
   ok('B05 selecting the directive shows the next arc + who waits at home',
-    dirText.includes('Orange Islands') && dirText.includes('Hawthorn'), dirText.slice(0, 200));
+    dirText.includes('Amber Isles') && dirText.includes('Hawthorn'), dirText.slice(0, 200));
   drain(g1); pickVal(g1, 'close'); tk(g1, 2);
 
   // ---- B3: the homecoming (Kanto -> Orange) ----
@@ -353,7 +353,7 @@ const driver = `
   var labels4 = g4.ui.menu.items.map(function (i) { return i.label; });
   ok('B14 dex header: chapter row still first, Regional + National (Platinum 493) lines present, sealed divider before Close',
     labels4[0].indexOf('Journey — Ch.') === 0
-    && labels4.some(function (l) { return l === 'Regional — Kanto: 2/151'; })
+    && labels4.some(function (l) { return l === 'Regional — Arden: 2/151'; })
     && labels4.some(function (l) { return l === 'National — Platinum horizon: 2/493 (0%)'; })
     && labels4[labels4.length - 2].includes('future arcs') && labels4[labels4.length - 1] === 'Close',
     labels4.slice(0, 6).join(' / '));
@@ -363,17 +363,17 @@ const driver = `
   g5.openJourney();
   var labels5 = g5.ui.menu.items.map(function (i) { return i.label; });
   ok('B15 Journey groups chapters under arc headers with state (Arc 1 CURRENT, Future arcs SEALED), chapter rows intact',
-    labels5.some(function (l) { return l.includes('ARC 1 · KANTO') && l.includes('CURRENT'); })
+    labels5.some(function (l) { return l.includes('ARC 1 · ARDEN') && l.includes('CURRENT'); })
     && labels5.some(function (l) { return l.includes('FUTURE ARCS') && l.includes('SEALED'); })
-    && labels5.some(function (l) { return l.includes('Ch.1 — The Indigo League'); })
+    && labels5.some(function (l) { return l.includes('Ch.1 — The Crown League'); })
     && labels5.some(function (l) { return l.includes('Ch.13 — Horizons'); }),
     labels5.join(' / ').slice(0, 300));
   g5.state.story.regionsDone = ['kanto'];
   g5.openJourney();
   var labels5b = g5.ui.menu.items.map(function (i) { return i.label; });
   ok('B16 with Kanto done, the headers read Arc 1 COMPLETE and Arc 1.5 NEXT',
-    labels5b.some(function (l) { return l.includes('ARC 1 · KANTO') && l.includes('COMPLETE'); })
-    && labels5b.some(function (l) { return l.includes('ARC 1.5 · ORANGE ISLANDS') && l.includes('NEXT'); }),
+    labels5b.some(function (l) { return l.includes('ARC 1 · ARDEN') && l.includes('COMPLETE'); })
+    && labels5b.some(function (l) { return l.includes('ARC 1.5 · AMBER ISLES') && l.includes('NEXT'); }),
     labels5b.join(' / ').slice(0, 300));
 
   // ---- B9: Rare Candy cap is a registry read ----

@@ -53,16 +53,16 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
       && t.reward && typeof t.rewardText === 'string' && t.rewardText.length > 0
       && typeof t.bondNpc === 'string' && typeof t.revelation === 'string' && t.revelation.length > 40));
   const SPEC = {
-    tale_pallet: ['Pallet Town', "Mom's Care Package", 'mom', 2],
-    tale_viridian: ['Viridian City', 'The Retired Ace', 'retiredace', 0],
-    tale_pewter: ['Pewter City', "Brock's Day Off", 'brock', 2],
-    tale_cerulean: ['Cerulean City', 'The Stolen Bike Bell', 'misty', 1],
-    tale_vermilion: ['Vermilion City', 'Fan Club Founder', 'surge', 1],
-    tale_lavender: ['Lavender Town', 'Names on the Wall', 'fuji', 2],
-    tale_celadon: ['Celadon City', 'Roof Garden', 'erika', 2],
-    tale_saffron: ['Saffron City', 'Two Gyms, One City', 'sabrina', 1],
-    tale_fuchsia: ['Fuchsia City', "The Warden's Teeth", 'koga', 1],
-    tale_cinnabar: ['Cinnabar Island', 'Lab Notes', 'blaine', 1],
+    tale_pallet: ['Dawnwick', "Mom's Care Package", 'mom', 2],
+    tale_viridian: ['Fernmere City', 'The Retired Ace', 'retiredace', 0],
+    tale_pewter: ['Flintridge City', "Brock's Day Off", 'brock', 2],
+    tale_cerulean: ['Tidehaven City', 'The Stolen Bike Bell', 'misty', 1],
+    tale_vermilion: ['Arcport City', 'Fan Club Founder', 'surge', 1],
+    tale_lavender: ['Hushmoor Town', 'Names on the Wall', 'fuji', 2],
+    tale_celadon: ['Canopy City', 'Roof Garden', 'erika', 2],
+    tale_saffron: ['Farsight City', 'Two Gyms, One City', 'sabrina', 1],
+    tale_fuchsia: ['Bramble City', "The Warden's Teeth", 'koga', 1],
+    tale_cinnabar: ['Caldera Town', 'Lab Notes', 'blaine', 1],
   };
   ok('A03 spec table: town, title, bond NPC and bond delta per tale (Viridian delta is the choice, applied by the wiring)',
     Object.entries(SPEC).every(([id, [town, title, npc, d]]) =>
@@ -93,7 +93,7 @@ const ALL_TRAINERS = Object.assign({}, TRAINERS3, TRAINERS4);
     && Q.advanceTale(s, t.id) === 3 && s.story.quests[t.id] === 'complete' && Q.taleStatus(s, t.id) === 'complete'
     && Q.advanceTale(s, t.id) === -1);
   ok('A06 stage text: unaccepted points at the giver; active shows the CURRENT stage; complete carries the revelation',
-    Q.taleStageText(defaultState(), t).includes('GARDENER') && Q.taleStageText(defaultState(), t).includes('Celadon')
+    Q.taleStageText(defaultState(), t).includes('GARDENER') && Q.taleStageText(defaultState(), t).includes('Canopy')
     && (() => { const s2 = defaultState(); Q.acceptTale(s2, t.id); Q.advanceTale(s2, t.id); return Q.taleStageText(s2, t) === t.stages[1]; })()
     && (() => { const s3 = defaultState(); Q.completeTale(s3, t.id); return Q.taleStageText(s3, t).includes('Complete') && Q.taleStageText(s3, t).includes(t.revelation); })());
   ok('A07 Saffron stage-3 text follows the IOU flag (spar text otherwise)',
@@ -542,12 +542,12 @@ const driver = `
   {
     const balls0 = st.bag.safariball || 0;
     const ow = D.gotoMap('fuchsia', 8, 8);
-    D.talkTo(ow, 'SAFARI WARDEN');
+    D.talkTo(ow, 'PRESERVE WARDEN');
     const owS = D.gotoMap('safari', 10, 11);
     D.faceSpot(owS, 3, 6, 3, 7, 'up');
     out.fuchsiaStage1 = Q('tale_fuchsia');
     const ow2 = D.gotoMap('fuchsia', 8, 8);
-    D.talkTo(ow2, 'SAFARI WARDEN');
+    D.talkTo(ow2, 'PRESERVE WARDEN');
     out.fuchsiaDone = Q('tale_fuchsia');
     out.fuchsiaBalls = (st.bag.safariball || 0) - balls0;
     out.fuchsiaBond = bond('koga');
@@ -564,7 +564,7 @@ const driver = `
     game.openQuestLog();
     const labels = (ui.menu ? ui.menu.items : []).map((it) => it.label);
     out.logSections = labels.filter((l) => l.startsWith('—'));
-    out.logTaleRows = labels.filter((l) => l.includes('(Celadon City)') || l.includes('(Pallet Town)'));
+    out.logTaleRows = labels.filter((l) => l.includes('(Canopy City)') || l.includes('(Dawnwick)'));
     const items = ui.menu ? ui.menu.items : [];
     const ri = items.findIndex((it) => it.label && it.label.includes('Roof Garden'));
     if (ri >= 0) ui.debugChoose(ri);
@@ -644,11 +644,11 @@ const driver = `
     out.lateSaffron = Q2('tale_saffron') + ':' + bond2('sabrina') + ':' + ((st2.bag.tortoisecharm || 0) + (st2.bag.sparrowfeather || 0));
     // Fuchsia late
     ow = E.gotoMap('fuchsia', 8, 8);
-    E.talkTo(ow, 'SAFARI WARDEN');
+    E.talkTo(ow, 'PRESERVE WARDEN');
     ow = E.gotoMap('safari', 10, 11);
     E.faceSpot(ow, 3, 6, 3, 7, 'up');
     ow = E.gotoMap('fuchsia', 8, 8);
-    E.talkTo(ow, 'SAFARI WARDEN');
+    E.talkTo(ow, 'PRESERVE WARDEN');
     out.lateFuchsia = Q2('tale_fuchsia') + ':' + (st2.bag.safariball || 0);
     // Cinnabar late
     ow = E.gotoMap('cinnabar', 8, 8);
@@ -847,7 +847,7 @@ ok('B22 Saffron SPAR branch resolves completely: choice -> Dojo spar won -> tale
           game.openQuestLog();
           const labels = (game.ui.menu ? game.ui.menu.items : []).map((it) => it.label);
           out.sections = labels.filter((l) => l.startsWith('—'));
-          out.taleRows = labels.filter((l) => l.includes('( Town)') === false && /\\((Pallet Town|Viridian City|Pewter City|Cerulean City|Vermilion City|Lavender Town|Celadon City|Saffron City|Fuchsia City|Cinnabar Island)\\)/.test(l)).length;
+          out.taleRows = labels.filter((l) => l.includes('( Town)') === false && /\\((Dawnwick|Fernmere City|Flintridge City|Tidehaven City|Arcport City|Hushmoor Town|Canopy City|Farsight City|Bramble City|Caldera Town)\\)/.test(l)).length;
           const ow = new OverworldScene(); game.scenes.push(ow); ow.enter();
           out.momThere = ow.map.npcs.some((n) => n.name === 'MOM');
         } catch (e) { out.error = String((e && e.stack) || e); }
