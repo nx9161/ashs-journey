@@ -15,3 +15,24 @@
 - Adopted by owner order 2026-11-11 as the world-art family for the
   town re-dress program (B2-G9 rollout). Everything else in the game
   remains original art drawn for this project.
+
+## Wave H addition (2026-11-12): the kit's dirt-path family
+
+- Same work, same author, same CC-BY 3.0 license and credit as above —
+  no new third-party art enters the game in this wave.
+- `assets/sprites/tools/build-kit-art.mjs` (Wave H section) now also
+  slices the sheet's composed 3x3 dirt-on-grass blob (cells (6..8,
+  8..10)) as the path edge/corner family `kit-path-{n,e,s,w,ne,nw,es,sw}`,
+  with grass margins keyed transparent (the engine composites them
+  over each town's own season-graded grass).
+- The variants the blob lacks (1-wide runs, end caps, isolated cell:
+  `kit-path-{ew,ns,esw,new,nsw,nes,nesw}`) are synthesized in the same
+  tool from the blob's own boundary profiles, filled with the blob
+  center's dirt — kit pixels only, arranged originally, under the same
+  license (the Wave C derived-tile precedent: kit-door-r, kit-door-open).
+- Mining manifest (Gassasin city set, Ninja Adventure, Superpowers,
+  Kenney, 0x72, LPC — licenses, verdicts, technique notes):
+  `~/workspace/muse-directive/WAVE-H2-EXEMPLAR.md`. No tiles from any
+  other source are used in the Wave H exemplar build; the Gassasin
+  "2D City tileset" was NOT adopted (its license could not be verified
+  from the source page — see the manifest).

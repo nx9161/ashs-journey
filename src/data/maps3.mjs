@@ -1810,13 +1810,13 @@ export const MAPS3 = {
       'ËËËËËÖËËËËÖËËËËË',
       'ËẆẈÀÀÀÀÀÀÀÀÀÀÀẈË',
       'ËẊāìāÀÀÀÀÀāāāÀÀË',
-      'ËẌęsę...ÀÀęsęÀÀË',
+      'ËẌęsę...ıÀęsęÀÀË',
       'ËÀÀ......o..ÀÖÀË',
-      'ËÀÀÀÀ.ÀËËÀÀÀÀÀÀË',
-      'ËÀÀÀÀ.ÀËËÀÀÀÀÀÀË',
-      'ËÀÖÀÀ.ÀÀÀÀÀÀÀÀẆË',
-      'ËÀÀÀÀ.oÀÀoÀÀÀÀÀË',
-      'ËÀÀÀÀ....ÀÀÀÀÀÀË',
+      'ËÀÀıÀ.ıËËıııÀÀÀË',
+      'ËÀÀıÀ.ıËËıııÀÀÀË',
+      'ËÀÖıÀ.ııııııÀÀẆË',
+      'ËÀÀıÀ.oıÀoııÀÀÀË',
+      'ËÀÀıı....ıııÀÀÀË',
       'ËËÖËËË....ËËËÖËË',
     ]),
     warps: [
@@ -1830,6 +1830,7 @@ export const MAPS3 = {
     signs: [
       { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
+      { x: 7, y: 9, text: "PALLET TOWN — a quiet shore town. The road south leads to ROUTE 1." },
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',

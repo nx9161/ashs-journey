@@ -1052,6 +1052,11 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
       // underlays pick from these instead.
       grassTex: effGrass.slice(1),
       path: ['kit-path-1', 'kit-path-2'].map(cvFor).filter(Boolean),
+      // Wave H: the kit dirt autotile family, keyed by GRASS side(s)
+      // in n,e,s,w order (build-kit-art.mjs, Wave H section). The
+      // tg2 branch of kitTownLayers picks by neighbour mask.
+      pathEdges: Object.fromEntries(['n', 'e', 's', 'w', 'ne', 'nw', 'es', 'sw', 'ew', 'ns', 'esw', 'new', 'nsw', 'nes', 'nesw']
+        .map((k) => [k, cvFor('kit-path-' + k)]).filter(([, v]) => v)),
       tall: biome === 'snow' ? cvFor('kit-snowtuft') : biome === 'desert' ? cvFor('kit-drytall') : cvFor('kit-tallgrass'),
       flora: biome ? null : cvFor('kit-flora'),
       canopy: biome === 'snow' ? cvFor('kit-canopy-snow') : biome === 'desert' ? cvFor('kit-canopy-dry') : cvFor('kit-canopy'),
@@ -1717,7 +1722,31 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
   // from tg-pastoria, resort-area from tg-sunnyshore), and inside a
   // kit map any tg-/tc-/th- kind IS the local family by construction.
   if (kind.startsWith('tg-') && !kind.startsWith('tg2-')) return [grassBase];
-  if (kind.startsWith('tg2-')) return [pathBase];
+  if (kind.startsWith('tg2-')) {
+    // Wave H: neighbour-masked autotiling over the kit dirt family —
+    // the fabric cell wears the edge/corner/run/cap tile whose grass
+    // sides match its non-fabric neighbours, so the path reads as one
+    // blended fabric instead of stamped rectangles. Fabric neighbours:
+    // tg2 kin, the native sand road, doors and steps (dirt runs into a
+    // doorstep without a grass lip). Biome sets keep the flat stamp
+    // (their ground is snow/sand, not kit grass).
+    const E = !K.biome && K.pathEdges;
+    if (E) {
+      const fab = (k) => !!k && (k.startsWith('tg2-') || k === 'path' || k.startsWith('door') || k.startsWith('step'));
+      const at2 = (dx, dy) => { const k = kindAt(x + dx, y + dy); return k == null ? kind : k; };
+      let g = '';
+      if (!fab(at2(0, -1))) g += 'n';
+      if (!fab(at2(1, 0))) g += 'e';
+      if (!fab(at2(0, 1))) g += 's';
+      if (!fab(at2(-1, 0))) g += 'w';
+      if (!g) return [pathBase];
+      // Edge tiles carry transparent grass margins (build-kit-art):
+      // composite over this cell's own season-graded grass so the
+      // blend follows the town palette in every season.
+      if (E[g]) return [grassBase, E[g]];
+    }
+    return [pathBase];
+  }
   if (kind.startsWith('tc-') || kind === 'tree') return [grassBase, K.canopy].filter(Boolean);
   if (kind.startsWith('td-') || kind === 'sign') return [grassBase, K.sign].filter(Boolean);
   if (kind.startsWith('flora-') || kind === 'flower') return [K.flora || grassBase];

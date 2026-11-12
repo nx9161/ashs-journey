@@ -112,6 +112,72 @@ const GRIDS = {};
 for (const [id, [x, y]] of Object.entries(TILES)) { GRIDS[id] = extract(SHEET, x, y, 16, 16); out[id] = toEntry(GRIDS[id]); }
 out['kit-sign'] = toEntry(extract(SHEET, 48, 16, 16, 16, GRASS_GREENS));
 
+// ---- Wave H: the kit's dirt-path EDGE family + derived variants ----
+// The sheet's composed dirt blob at cells (6..8, 8..10) is a complete
+// 3x3 dirt-on-grass autotile set: corners, straight edges, center
+// (the two flat interiors were sliced earlier as kit-path-1/2 from
+// the top band). Entry ids are keyed by GRASS side(s) in n,e,s,w
+// order — the same key the engine's tg2 autotile branch computes.
+// The blob lacks 1-wide runs, end caps and the isolated cell; those
+// are composed pixel-wise from the blob's own edge masks — kit
+// pixels only, arranged originally (the Wave C derived-tile
+// precedent: kit-door-r / kit-door-open). Grass vs dirt classifies
+// by channel dominance (kit grass greens have G > R; dirt browns
+// have R > G).
+const blobAt = (cx, cy) => extract(SHEET, cx * 16, cy * 16, 16, 16);
+const BLOB = { nw: blobAt(6, 8), n: blobAt(7, 8), ne: blobAt(8, 8), w: blobAt(6, 9), e: blobAt(8, 9), sw: blobAt(6, 10), s: blobAt(7, 10), se: blobAt(8, 10) };
+const isGrassPx = (c) => { if (!c) return false; const r = parseInt(c.slice(1, 3), 16), g = parseInt(c.slice(3, 5), 16), b = parseInt(c.slice(5, 7), 16); return g > r && g >= b; };
+const dirtAt = (grid, x, y) => { const c = grid[y][x]; return c !== null && !isGrassPx(c); };
+// The grass margins are TRANSPARENT, never baked: the engine
+// composites each edge tile over the town's own season-graded grass
+// (kitTownLayers returns [grassBase, edge]), so the blend follows
+// the town palette in every season — the kit-sign key-out precedent,
+// generalized. Baked grass would freeze one season's green into the
+// path family (first exemplar render, 2026-11-12: summer-green lips
+// on autumn ground — rejected on sight).
+const clearGrass = (grid) => grid.map((row) => row.map((c) => (c && isGrassPx(c)) ? null : c));
+const BLOB_IDS = { n: BLOB.n, e: BLOB.e, s: BLOB.s, w: BLOB.w, ne: BLOB.ne, nw: BLOB.nw, es: BLOB.se, sw: BLOB.sw };
+for (const [k, g] of Object.entries(BLOB_IDS)) out[`kit-path-${k}`] = toEntry(clearGrass(g));
+// Derived variants are synthesized from the blob's BOUNDARY PROFILES
+// (grass depth per row/column of each straight edge), filled with the
+// blob center's own dirt. A pixel-mask AND of the source tiles holes
+// out wherever two boundaries wobble apart (first exemplar render:
+// stepping-stone lanes); profiles guarantee a continuous ribbon with
+// the kit's own wavy edge shapes. Depths on opposed sides are capped
+// at 7 so a run always keeps its center 2px.
+const profDepth = (grid, side) => {
+  const d = [];
+  if (side === 'w') for (let y = 0; y < 16; y++) { let x = 0; while (x < 16 && !dirtAt(grid, x, y)) x++; d.push(x); }
+  if (side === 'e') for (let y = 0; y < 16; y++) { let x = 15; while (x >= 0 && !dirtAt(grid, x, y)) x--; d.push(15 - x); }
+  if (side === 'n') for (let x = 0; x < 16; x++) { let y = 0; while (y < 16 && !dirtAt(grid, x, y)) y++; d.push(y); }
+  if (side === 's') for (let x = 0; x < 16; x++) { let y = 15; while (y >= 0 && !dirtAt(grid, x, y)) y--; d.push(15 - y); }
+  return d;
+};
+const synthPath = (grassSides) => {
+  const fill = blobAt(7, 9); // the blob's own center dirt
+  const has = (s) => grassSides.includes(s);
+  let dN = has('n') ? profDepth(BLOB.n, 'n') : null;
+  let dS = has('s') ? profDepth(BLOB.s, 's') : null;
+  let dW = has('w') ? profDepth(BLOB.w, 'w') : null;
+  let dE = has('e') ? profDepth(BLOB.e, 'e') : null;
+  if (dN && dS) { dN = dN.map((v) => Math.min(v, 7)); dS = dS.map((v) => Math.min(v, 7)); }
+  if (dW && dE) { dW = dW.map((v) => Math.min(v, 7)); dE = dE.map((v) => Math.min(v, 7)); }
+  const out16 = [];
+  for (let y = 0; y < 16; y++) { const row = [];
+    for (let x = 0; x < 16; x++) {
+      const dirt = (!dN || y >= dN[x]) && (!dS || y <= 15 - dS[x]) && (!dW || x >= dW[y]) && (!dE || x <= 15 - dE[y]);
+      row.push(dirt ? fill[y][x] : null);
+    } out16.push(row); }
+  return out16;
+};
+out['kit-path-ew'] = toEntry(synthPath('ew'));     // 1-wide vertical run (grass E+W)
+out['kit-path-ns'] = toEntry(synthPath('ns'));     // 1-wide horizontal run (grass N+S)
+out['kit-path-esw'] = toEntry(synthPath('esw'));   // end cap: fabric north only
+out['kit-path-new'] = toEntry(synthPath('new'));   // end cap: fabric south only
+out['kit-path-nsw'] = toEntry(synthPath('nsw'));   // end cap: fabric east only
+out['kit-path-nes'] = toEntry(synthPath('nes'));   // end cap: fabric west only
+out['kit-path-nesw'] = toEntry(synthPath('nesw')); // isolated cell
+
 // ---- Wave C: interiors (the sheet's top-band room set) ----
 // Single-cell motifs sliced from the composed room scene; every pick
 // is a complete object in its 16x16 cell (the gate's kit canvas law:
