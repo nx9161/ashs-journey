@@ -1730,7 +1730,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 8,
+      "palette": 16,
       "seed": null,
       "derived_from": "corsola-front",
       "mirror_of": null
@@ -3056,7 +3056,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 16,
       "seed": null,
       "derived_from": "heracross-front",
       "mirror_of": null
@@ -3927,7 +3927,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 16,
       "seed": null,
       "derived_from": "magcargo-front",
       "mirror_of": null
@@ -4694,7 +4694,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 16,
       "seed": null,
       "derived_from": "octillery-front",
       "mirror_of": null
@@ -4928,7 +4928,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 16,
       "seed": null,
       "derived_from": "piloswine-front",
       "mirror_of": null
@@ -5409,7 +5409,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 15,
       "seed": null,
       "derived_from": "remoraid-front",
       "mirror_of": null
@@ -6072,7 +6072,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 7,
+      "palette": 16,
       "seed": null,
       "derived_from": "slugma-front",
       "mirror_of": null
@@ -6111,7 +6111,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 16,
       "seed": null,
       "derived_from": "sneasel-front",
       "mirror_of": null
@@ -6514,7 +6514,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 16,
       "seed": null,
       "derived_from": "swinub-front",
       "mirror_of": null
@@ -6579,7 +6579,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 9,
+      "palette": 16,
       "seed": null,
       "derived_from": "teddiursa-front",
       "mirror_of": null
@@ -6839,7 +6839,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 8,
+      "palette": 16,
       "seed": null,
       "derived_from": "ursaring-front",
       "mirror_of": null
@@ -9958,7 +9958,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 5,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11284,7 +11284,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 7,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -12155,7 +12155,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

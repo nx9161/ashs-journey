@@ -542,7 +542,7 @@ export const SPECIES_JOHTO = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   heracross: {
-    id: 'heracross', name: 'Heracross', dexNo: 214, types: ['bug', 'fighting'],
+    id: 'heracross', name: 'HORNTOSS', dexNo: 214, types: ['bug', 'fighting'],
     base: { hp: 80, atk: 125, def: 75, spa: 40, spd: 95, spe: 85 },
     catchRate: 45, growth: 'slow', baseXp: 175, body: 'biped', spriteSeed: 21401,
     eggGroups: ['bug'], hatchCounter: 25,
@@ -551,7 +551,7 @@ export const SPECIES_JOHTO = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   sneasel: {
-    id: 'sneasel', name: 'Sneasel', dexNo: 215, types: ['dark', 'ice'],
+    id: 'sneasel', name: 'NIGHTCLAW', dexNo: 215, types: ['dark', 'ice'],
     base: { hp: 55, atk: 95, def: 55, spa: 35, spd: 75, spe: 115 },
     catchRate: 60, growth: 'mediumslow', baseXp: 86, body: 'biped', spriteSeed: 21501,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -560,7 +560,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'weavile', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   teddiursa: {
-    id: 'teddiursa', name: 'Teddiursa', dexNo: 216, types: ['normal'],
+    id: 'teddiursa', name: 'HONEYCUB', dexNo: 216, types: ['normal'],
     base: { hp: 60, atk: 80, def: 50, spa: 50, spd: 50, spe: 40 },
     catchRate: 120, growth: 'mediumfast', baseXp: 66, body: 'biped', spriteSeed: 21601,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -569,7 +569,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'ursaring', method: 'level', level: 130 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 39, 44, 50],
   },
   ursaring: {
-    id: 'ursaring', name: 'Ursaring', dexNo: 217, types: ['normal'],
+    id: 'ursaring', name: 'GRIZRING', dexNo: 217, types: ['normal'],
     base: { hp: 90, atk: 130, def: 75, spa: 75, spd: 75, spe: 55 },
     catchRate: 60, growth: 'mediumfast', baseXp: 175, body: 'biped', spriteSeed: 21701,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -578,7 +578,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   slugma: {
-    id: 'slugma', name: 'Slugma', dexNo: 218, types: ['fire'],
+    id: 'slugma', name: 'MAGMELT', dexNo: 218, types: ['fire'],
     base: { hp: 40, atk: 40, def: 40, spa: 70, spd: 40, spe: 20 },
     catchRate: 190, growth: 'mediumfast', baseXp: 50, body: 'serpent', spriteSeed: 21801,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -587,7 +587,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'magcargo', method: 'level', level: 138 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   magcargo: {
-    id: 'magcargo', name: 'Magcargo', dexNo: 219, types: ['fire', 'rock'],
+    id: 'magcargo', name: 'MAGMADOME', dexNo: 219, types: ['fire', 'rock'],
     base: { hp: 60, atk: 50, def: 120, spa: 90, spd: 80, spe: 30 },
     catchRate: 75, growth: 'mediumfast', baseXp: 151, body: 'serpent', spriteSeed: 21901,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -596,7 +596,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   swinub: {
-    id: 'swinub', name: 'Swinub', dexNo: 220, types: ['ice', 'ground'],
+    id: 'swinub', name: 'SNUFLET', dexNo: 220, types: ['ice', 'ground'],
     base: { hp: 50, atk: 50, def: 40, spa: 30, spd: 30, spe: 50 },
     catchRate: 225, growth: 'slow', baseXp: 50, body: 'quad', spriteSeed: 22001,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -605,7 +605,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'piloswine', method: 'level', level: 133 }, tm: [6, 8, 9, 10, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   piloswine: {
-    id: 'piloswine', name: 'Piloswine', dexNo: 221, types: ['ice', 'ground'],
+    id: 'piloswine', name: 'SHAGBOAR', dexNo: 221, types: ['ice', 'ground'],
     base: { hp: 100, atk: 100, def: 80, spa: 60, spd: 60, spe: 50 },
     catchRate: 75, growth: 'slow', baseXp: 158, body: 'quad', spriteSeed: 22101,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -614,7 +614,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'mamoswine', method: 'level', level: 310 }, tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
   },
   corsola: {
-    id: 'corsola', name: 'Corsola', dexNo: 222, types: ['water', 'rock'],
+    id: 'corsola', name: 'CORALET', dexNo: 222, types: ['water', 'rock'],
     base: { hp: 65, atk: 55, def: 95, spa: 65, spd: 95, spe: 35 },
     catchRate: 60, growth: 'fast', baseXp: 144, body: 'blob', spriteSeed: 22201,
     eggGroups: ['water1', 'water3'], hatchCounter: 20,
@@ -623,7 +623,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   remoraid: {
-    id: 'remoraid', name: 'Remoraid', dexNo: 223, types: ['water'],
+    id: 'remoraid', name: 'JETLET', dexNo: 223, types: ['water'],
     base: { hp: 35, atk: 65, def: 35, spa: 65, spd: 35, spe: 65 },
     catchRate: 190, growth: 'mediumfast', baseXp: 60, body: 'fish', spriteSeed: 22301,
     eggGroups: ['water1', 'water2'], hatchCounter: 20,
@@ -632,7 +632,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'octillery', method: 'level', level: 125 }, tm: [6, 9, 10, 11, 12, 13, 14, 31, 32, 34, 44, 46, 50, 103],
   },
   octillery: {
-    id: 'octillery', name: 'Octillery', dexNo: 224, types: ['water'],
+    id: 'octillery', name: 'OCTURRET', dexNo: 224, types: ['water'],
     base: { hp: 75, atk: 105, def: 75, spa: 105, spd: 75, spe: 45 },
     catchRate: 75, growth: 'mediumfast', baseXp: 168, body: 'blob', spriteSeed: 22401,
     eggGroups: ['water1', 'water2'], hatchCounter: 20,
