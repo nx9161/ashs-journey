@@ -137,29 +137,23 @@ function analyze(s) {
   compSizes.sort((a, b) => b - a);
   const detached = Math.max(0, compSizes.length - 1);
   const specks = compSizes.slice(1).filter((sz) => sz < 9).length;
-  // value steps on the body mass (non-outline colors)
+  // value steps on the body mass: distinct luminance buckets across
+  // ALL non-outline body colors at >=2% of body pixels. (First pass
+  // restricted steps to the dominant hue family; that misfires on
+  // marked designs — LANCEWASP's yellow/black body carries its value
+  // structure ACROSS hues, in stripes. B2-G10 amended to match: the
+  // body mass, not one hue family, is the shading surface.)
   const outlineHex = pal.O ? pal.O.hex : null;
   const bodyCounts = new Map([...counts].filter(([hex]) => hex !== outlineHex));
   const bodyPx = [...bodyCounts.values()].reduce((a, b) => a + b, 0) || 1;
   let steps = 0;
   if (bodyCounts.size) {
-    const sorted = [...bodyCounts.entries()].sort((a, b) => b[1] - a[1]);
-    const [topHex] = sorted[0];
-    const [tr, tg, tb] = hexRgb(topHex);
-    const top = hueSat(tr, tg, tb);
-    const fam = [...bodyCounts.entries()].filter(([hex, n]) => {
-      if (n / bodyPx < 0.02) return false;
-      const [r, g, b] = hexRgb(hex);
-      const hs = hueSat(r, g, b);
-      if (top.sat < 0.12) return hs.sat < 0.12;
-      if (hs.sat < 0.12) return false;
-      let dh = Math.abs(hs.hue - top.hue); if (dh > 180) dh = 360 - dh;
-      return dh <= 30;
-    });
-    const buckets = new Set(fam.map(([hex]) => {
-      const [r, g, b] = hexRgb(hex);
-      return Math.round(((0.2126 * r + 0.7152 * g + 0.0722 * b) / 255) / 0.07);
-    }));
+    const buckets = new Set([...bodyCounts.entries()]
+      .filter(([, n]) => n / bodyPx >= 0.02)
+      .map(([hex]) => {
+        const [r, g, b] = hexRgb(hex);
+        return Math.round(((0.2126 * r + 0.7152 * g + 0.0722 * b) / 255) / 0.07);
+      }));
     steps = buckets.size;
   }
   // silhouette signature: aspect-preserving fit into 16x16, a cell is

@@ -429,8 +429,11 @@ Game Freak through official channels).
   specks: any detached component under 9 px fails; detached
   components (authored satellites — orbs, stars, screws) number
   at most 4. (4) SHADING — the main body mass carries >= 3 value
-  steps (distinct luminance steps within the dominant hue family,
-  each covering >= 2% of body pixels), and the palette uses the
+  steps (distinct luminance steps across the body mass, outline
+  excluded, each covering >= 2% of body pixels — stripes and markings
+  are value structure too; the audit's first pass restricted steps to
+  the dominant hue family and misread marked designs like the
+  yellow/black LANCEWASP, amended 2026-11-12), and the palette uses the
   <=16-color budget deliberately: >= 5 colors per sprite, chosen by
   the design, not whatever survives the median cut. (5) UNIQUENESS
   GATE (machine-checked over the whole converted roster) — every
