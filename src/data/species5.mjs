@@ -823,7 +823,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   probopass: {
-    id: 'probopass', name: 'Probopass', dexNo: 476, types: ['rock', 'steel'],
+    id: 'probopass', name: 'POLEWARD', dexNo: 476, types: ['rock', 'steel'],
     base: { hp: 60, atk: 55, def: 145, spa: 75, spd: 150, spe: 40 },
     catchRate: 60, growth: 'mediumfast', baseXp: 184, body: 'blob', spriteSeed: 47601,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -832,7 +832,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   dusknoir: {
-    id: 'dusknoir', name: 'Dusknoir', dexNo: 477, types: ['ghost'],
+    id: 'dusknoir', name: 'GLOOMEYE', dexNo: 477, types: ['ghost'],
     base: { hp: 45, atk: 100, def: 135, spa: 65, spd: 135, spe: 45 },
     catchRate: 45, growth: 'fast', baseXp: 236, body: 'blob', spriteSeed: 47701,
     eggGroups: ['indeterminate'], hatchCounter: 25,
@@ -841,7 +841,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 20, 21, 24, 25, 29, 31, 32, 34, 35, 36, 42, 44, 46, 47, 50, 104],
   },
   froslass: {
-    id: 'froslass', name: 'Froslass', dexNo: 478, types: ['ice', 'ghost'],
+    id: 'froslass', name: 'FROSTMAID', dexNo: 478, types: ['ice', 'ghost'],
     base: { hp: 70, atk: 80, def: 70, spa: 80, spd: 70, spe: 110 },
     catchRate: 75, growth: 'mediumfast', baseXp: 168, body: 'blob', spriteSeed: 47801,
     eggGroups: ['fairy', 'mineral'], hatchCounter: 20,
@@ -850,7 +850,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   rotom: {
-    id: 'rotom', name: 'Rotom', dexNo: 479, types: ['electric', 'ghost'],
+    id: 'rotom', name: 'SPARKIMP', dexNo: 479, types: ['electric', 'ghost'],
     base: { hp: 50, atk: 50, def: 77, spa: 95, spd: 77, spe: 91 },
     catchRate: 45, growth: 'mediumfast', baseXp: 154, body: 'blob', spriteSeed: 47901,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -859,7 +859,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   uxie: {
-    id: 'uxie', name: 'Uxie', dexNo: 480, types: ['psychic'],
+    id: 'uxie', name: 'LORACLE', dexNo: 480, types: ['psychic'],
     base: { hp: 75, atk: 75, def: 130, spa: 75, spd: 130, spe: 95 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 48001,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -868,7 +868,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   mesprit: {
-    id: 'mesprit', name: 'Mesprit', dexNo: 481, types: ['psychic'],
+    id: 'mesprit', name: 'EMPATHIS', dexNo: 481, types: ['psychic'],
     base: { hp: 80, atk: 105, def: 105, spa: 105, spd: 105, spe: 80 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 48101,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -877,7 +877,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   azelf: {
-    id: 'azelf', name: 'Azelf', dexNo: 482, types: ['psychic'],
+    id: 'azelf', name: 'VOLITAR', dexNo: 482, types: ['psychic'],
     base: { hp: 75, atk: 125, def: 70, spa: 125, spd: 70, spe: 115 },
     catchRate: 3, growth: 'slow', baseXp: 261, body: 'biped', spriteSeed: 48201,
     eggGroups: ['no-eggs'], hatchCounter: 80,
@@ -886,7 +886,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   dialga: {
-    id: 'dialga', name: 'Dialga', dexNo: 483, types: ['steel', 'dragon'],
+    id: 'dialga', name: 'CHRONARCH', dexNo: 483, types: ['steel', 'dragon'],
     base: { hp: 100, atk: 120, def: 120, spa: 150, spd: 100, spe: 90 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'quad', spriteSeed: 48301,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -895,7 +895,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 33, 34, 38, 39, 40, 44, 45, 50, 102, 103, 104, 105],
   },
   palkia: {
-    id: 'palkia', name: 'Palkia', dexNo: 484, types: ['water', 'dragon'],
+    id: 'palkia', name: 'COSMARCH', dexNo: 484, types: ['water', 'dragon'],
     base: { hp: 90, atk: 120, def: 100, spa: 150, spd: 120, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 306, body: 'biped', spriteSeed: 48401,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -904,7 +904,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   heatran: {
-    id: 'heatran', name: 'Heatran', dexNo: 485, types: ['fire', 'steel'],
+    id: 'heatran', name: 'MAGMARCH', dexNo: 485, types: ['fire', 'steel'],
     base: { hp: 91, atk: 90, def: 106, spa: 130, spd: 106, spe: 77 },
     catchRate: 3, growth: 'slow', baseXp: 270, body: 'quad', spriteSeed: 48501,
     eggGroups: ['no-eggs'], hatchCounter: 10,
@@ -913,7 +913,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 44, 45, 46, 47, 48, 49, 50, 101, 102, 103, 104, 105],
   },
   regigigas: {
-    id: 'regigigas', name: 'Regigigas', dexNo: 486, types: ['normal'],
+    id: 'regigigas', name: 'COLOSSOR', dexNo: 486, types: ['normal'],
     base: { hp: 110, atk: 160, def: 110, spa: 80, spd: 110, spe: 100 },
     catchRate: 3, growth: 'slow', baseXp: 302, body: 'biped', spriteSeed: 48601,
     eggGroups: ['no-eggs'], hatchCounter: 120,
@@ -985,7 +985,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 29, 31, 32, 34, 36, 38, 39, 40, 42, 44, 46, 47, 50, 103, 104],
   },
   rotomheat: {
-    id: 'rotomheat', name: 'Heat Rotom', dexNo: 479, types: ['electric', 'fire'],
+    id: 'rotomheat', name: 'Heat SPARKIMP', dexNo: 479, types: ['electric', 'fire'],
     base: { hp: 50, atk: 65, def: 107, spa: 105, spd: 107, spe: 86 },
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47902,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -995,7 +995,7 @@ export const SPECIES_SINNOH = {
     form: true, baseSpecies: 'rotom',
   },
   rotomwash: {
-    id: 'rotomwash', name: 'Wash Rotom', dexNo: 479, types: ['electric', 'water'],
+    id: 'rotomwash', name: 'Wash SPARKIMP', dexNo: 479, types: ['electric', 'water'],
     base: { hp: 50, atk: 65, def: 107, spa: 105, spd: 107, spe: 86 },
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47903,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -1005,7 +1005,7 @@ export const SPECIES_SINNOH = {
     form: true, baseSpecies: 'rotom',
   },
   rotomfrost: {
-    id: 'rotomfrost', name: 'Frost Rotom', dexNo: 479, types: ['electric', 'ice'],
+    id: 'rotomfrost', name: 'Frost SPARKIMP', dexNo: 479, types: ['electric', 'ice'],
     base: { hp: 50, atk: 65, def: 107, spa: 105, spd: 107, spe: 86 },
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47904,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -1015,7 +1015,7 @@ export const SPECIES_SINNOH = {
     form: true, baseSpecies: 'rotom',
   },
   rotomfan: {
-    id: 'rotomfan', name: 'Fan Rotom', dexNo: 479, types: ['electric', 'flying'],
+    id: 'rotomfan', name: 'Fan SPARKIMP', dexNo: 479, types: ['electric', 'flying'],
     base: { hp: 50, atk: 65, def: 107, spa: 105, spd: 107, spe: 86 },
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47905,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -1025,7 +1025,7 @@ export const SPECIES_SINNOH = {
     form: true, baseSpecies: 'rotom',
   },
   rotommow: {
-    id: 'rotommow', name: 'Mow Rotom', dexNo: 479, types: ['electric', 'grass'],
+    id: 'rotommow', name: 'Mow SPARKIMP', dexNo: 479, types: ['electric', 'grass'],
     base: { hp: 50, atk: 65, def: 107, spa: 105, spd: 107, spe: 86 },
     catchRate: 45, growth: 'mediumfast', baseXp: 182, body: 'blob', spriteSeed: 47906,
     eggGroups: ['indeterminate'], hatchCounter: 20,
