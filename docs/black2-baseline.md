@@ -293,6 +293,40 @@ Game Freak through official channels).
   rendered in Winter to prove the dampened grade family across
   seasons. NOT yet: Orange/Sevii/Sinnoh settlements, frontierhub,
   biome tile families, interiors (Wave C).
+  Wave F LANDED on branch art/kit-cast (2026-11-12, not merged):
+  THE KIT CAST — every overworld NPC wears the kit character
+  (owner order: 'No everyone should get one'). The kit ships
+  exactly one character, so identity is a variant system
+  (art.mjs kitCastVariant): the instance palette every NPC
+  already carries remapped over the kit's full semantic key set
+  INCLUDING the derived shades the shipped Gary swap never
+  touches (h = hair light, j = shirt shade), class palette
+  rules (nurse/officer/grunt uniforms forced; scientist and
+  professor white coats; monks bald by palette; swimmers bare
+  by palette), and ORIGINAL accessory overlays drawn in kit
+  discipline (assets/sprites/kitacc-data.mjs — 59 directional
+  entries: nurse cap with cross, officer cap with badge, clerk
+  apron, fisher/straw/sturdy wide-brim hats, top hat, fedora,
+  hard hat, caps, headbands, bandana, bow, glasses, skirts,
+  long hair, ponytail, cape; art-gate census-extended, all
+  ≤16 colors). Named characters carry fixed recorded variants
+  (the champion's cape separates him from Gary's identical
+  palette; Bruno's headband from Brock; Giovanni's fedora;
+  Misty's ponytail; Blaine bald + glasses). A same-map clone
+  breaker (roster-stamped occurrence index + deterministic
+  hair/skin nudges) keeps any two humans on one map from
+  rendering pixel-identical — frame-hash verified: 592
+  converted instances, all changed vs the authored baseline;
+  player + Gary byte-identical; named cast 18/18 distinct.
+  Census: 604 NPC instances, 47 art kinds. Exceptions (kept
+  authored, by design): the PC terminal is a machine;
+  cubonespirit / marowakspirit / slowking are Pokemon species
+  characters, not people; elders wear a bald crown + silver
+  hair rather than a beard because one elder instance is
+  female. No pose system exists in the data (every NPC stands
+  or walks in four directions) — positions, dialogue,
+  movement, warps and progression untouched; skin only,
+  budget caps unraised.
   Wave C LANDED on branch art/kit-wave-c (2026-11-11, not merged):
   WORLD ROLLOUT COMPLETE — the remaining 27 settlements wear the
   kit (62 of 62 by the audit-towns definition): Indigo Plateau
