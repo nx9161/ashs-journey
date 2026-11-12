@@ -346,6 +346,27 @@ export function boxCheck(mon) {
   }
   return { ok: true };
 }
+// The partner guarantee: the state change behind intro.mjs's
+// grantPartner ceremony, shared by every door that can deliver VOLTIK
+// — the intro itself, the save-load repair (save/schema.mjs) and the
+// Pallet lab handover (overworld-systems.mjs talkHawthorn). Party
+// member + dex seen/caught + the metPartner/refusedBall flags, exactly
+// as the intro has always written them. Idempotent by construction: a
+// state already carrying the partner is returned untouched (false).
+export function hasPartnerMon(state) {
+  return !!(state && Array.isArray(state.party)
+    && state.party.some((m) => m && m.speciesId === 'partner'));
+}
+export function grantPartnerMon(state, speciesTable, movesTable) {
+  if (!state || !Array.isArray(state.party) || hasPartnerMon(state)) return false;
+  state.party.push(makeMon('partner', 5, speciesTable, movesTable));
+  const sp = speciesTable.partner;
+  dexRegister(state.dex, 'seen', sp.dexNo);
+  dexRegister(state.dex, 'caught', sp.dexNo);
+  state.story.flags.metPartner = true;
+  state.story.flags.refusedBall = true;
+  return true;
+}
 export function dexRegister(dex, kind, dexNo) {
   dex[kind][dexNo] = true;
   if (kind === 'caught' || kind === 'befriended') dex.seen[dexNo] = true;

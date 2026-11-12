@@ -24,7 +24,7 @@
 // ---------------------------------------------------------------------------
 
 export const MAIN_QUESTS = [
-  { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'The lab sits at the north edge of Pallet Town. Your partner has opinions — and a strong dislike of Capture Orbs.' },
+  { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'VOLTIK joins you at the very start of your journey — it has opinions, and a strong dislike of Capture Orbs. If you ever find yourselves parted, Prof. Hawthorn at his Pallet Town lab will set it right.' },
   { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Pewter City', hint: 'Through Viridian Forest, then challenge Brock. Water and Grass moves crack Rock types open.' },
   { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Moon and reach Cerulean City', hint: 'The cave east of Pewter is dark and full of SKREEP. Stock up on Potions before you go in.' },
   { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Cerulean City', hint: 'Misty’s Water types fear Grass and Electric moves. Watch for her ASTRION.' },

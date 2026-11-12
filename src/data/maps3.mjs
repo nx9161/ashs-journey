@@ -1852,6 +1852,14 @@ export const MAPS3 = {
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
       { x: 6, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
         dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Pokemon, no questions asked. The professor pretends not to see this machine."] },
+      // Partner guarantee (hotfix): the professor himself, at his lab
+      // door. Pre-fix he existed only inside the intro cutscene, so a
+      // player whose partner never arrived (defect 4's stranded saves)
+      // found nobody in Pallet who could sort it out. His handover
+      // branch lives in overworld-systems.mjs (talkHawthorn); these
+      // lines are what he says to everyone else.
+      { x: 8, y: 4, name: 'PROF. HAWTHORN', art: 'hawthorn', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c8c4bc',
+        dialogue: ["Ah, {player}! Out walking the town again? Good. Legs first, glory later — that is the order of things.", "VOLTIK still refusing every Capture Orb it sees, I hope. Some bonds are not meant to be carried in a pocket."] },
       { x: 10, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
         dialogue: ["My little ferry runs Pallet to Cinnabar for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],

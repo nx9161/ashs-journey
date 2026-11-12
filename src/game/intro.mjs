@@ -5,7 +5,7 @@
 // (default OFF); hold START 1s during the intro offers a skip confirm.
 
 import { INTRO_SCRIPT } from '../data/dialogue.mjs';
-import { makeMon, dexRegister } from './state.mjs';
+import { makeMon, dexRegister, grantPartnerMon } from './state.mjs';
 import { houseRule } from './rules.mjs';
 import { SPECIES } from '../data/species.mjs';
 import { MOVES } from '../data/moves.mjs';
@@ -85,25 +85,23 @@ export class IntroScene {
     }, INTRO_SCRIPT.professor);
   }
 
-  // The partner grant, idempotent: party member + dex seen/caught + story
-  // flags. The watched flow reaches it via starterMoment(); finishIntro()
-  // backstops it so EVERY skip path (veteran offer, hold-START confirm,
-  // headless) converges on the same state. (UI v2.2 defect 4: skipping used
-  // to call finishIntro() alone — empty party, first wild battle soft-locked
-  // on a faded screen because no ally existed.)
+  // The partner grant ceremony: the state change itself is state.mjs's
+  // grantPartnerMon (idempotent — party member + dex seen/caught + story
+  // flags), shared with the save-load repair and the lab handover so all
+  // three doors write byte-identical state; only the presentation (sfx +
+  // toast) lives here. The watched flow reaches it via starterMoment();
+  // finishIntro() backstops it so EVERY skip path (veteran offer,
+  // hold-START confirm, headless) converges on the same state. (UI v2.2
+  // defect 4: skipping used to call finishIntro() alone — empty party,
+  // first wild battle soft-locked on a faded screen because no ally
+  // existed. Saves written by that build are healed on load — see
+  // fillV2Defaults in save/schema.mjs.)
   grantPartner() {
     const g = this.game;
-    if (g.state.party.some((m) => m && m.speciesId === 'partner')) return;
     // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
-    const pikachu = makeMon('partner', 5, SPECIES, MOVES);
-    g.state.party.push(pikachu);
-    const sp = SPECIES.partner;
-    dexRegister(g.state.dex, 'seen', sp.dexNo);
-    dexRegister(g.state.dex, 'caught', sp.dexNo);
-    g.state.story.flags.metPartner = true;
-    g.state.story.flags.refusedBall = true;
+    if (!grantPartnerMon(g.state, SPECIES, MOVES)) return;
     g.audio.playSfx('dex-register');
-    g.ui.toast(sp.name + ' joined your party!');
+    g.ui.toast(SPECIES.partner.name + ' joined your party!');
   }
 
   finishIntro() {

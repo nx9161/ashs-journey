@@ -1,7 +1,9 @@
 // schema.mjs — save schema validation + migration (current: v2).
 // Hand-rolled typed validator (LCR ruling §9.8). Whitelist, never blacklist.
 
-import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES } from '../game/state.mjs';
+import { SCHEMA_VERSION, normalizeHofList, TRAVELERS_MEMORY_GATES, STARTER_LINES, grantPartnerMon } from '../game/state.mjs';
+import { SPECIES } from '../data/species.mjs';
+import { MOVES } from '../data/moves.mjs';
 import { KEEPSAKES, BADGE_SETS, BALLS } from '../data/items.mjs';
 import { CONTEST_RIBBONS } from '../data/contest.mjs';
 import { FACILITY_IDS, RECORD_FIELDS, PIKE_EVENT_KINDS, PYRAMID_FLOOR_MAPS } from '../data/frontier.mjs';
@@ -511,6 +513,24 @@ export function fillV2Defaults(data) {
   if (isObj(data.meta)) {
     if (typeof data.meta.houseRulesTouched !== 'boolean') data.meta.houseRulesTouched = false;
     if (!Number.isInteger(data.meta.ngPlus) || data.meta.ngPlus < 0) data.meta.ngPlus = 0;
+  }
+  // Partner guarantee (hotfix): UI v2.2 defect 4's stranded saves. The
+  // pre-fix intro's skip paths could write introDone with an EMPTY
+  // party — no partner, no ally at all — and nothing ever healed them:
+  // the overworld professor had no handover and the first wild battle
+  // soft-locked. The intro's own backstop covers new games; this is
+  // the load-side twin, riding migrate() so every load door that
+  // validates through here (the guest store, SYNC.validPayload) heals
+  // the save itself. The test is deliberately narrow — intro done AND
+  // a party holding no member at all: a party carrying ANY member is
+  // a progressed save and is never touched (the grant is a repair,
+  // not a handout), and grantPartnerMon's own guard keeps it
+  // idempotent. Runs last: the mon fills above have already run, and
+  // makeMon writes the current shape (keepsake included), so the
+  // granted partner needs no second pass before validateSave.
+  if (isObj(data.story) && isObj(data.story.flags) && data.story.flags.introDone === true
+    && isObj(data.dex) && Array.isArray(data.party) && !data.party.some(Boolean)) {
+    grantPartnerMon(data, SPECIES, MOVES);
   }
   return data;
 }
