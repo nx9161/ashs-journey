@@ -114,8 +114,8 @@ out['kit-sign'] = toEntry(extract(SHEET, 48, 16, 16, 16, GRASS_GREENS));
 
 // ---- Wave C: interiors (the sheet's top-band room set) ----
 // Single-cell motifs sliced from the composed room scene; every pick
-// is a complete object in its cell (bed and shelf/plant are 16x32,
-// bottom-anchored like the shipped wardrobe). Chair and plant carry
+// is a complete object in its 16x16 cell (the gate's kit canvas law:
+// tiles 16x16, only character frames 16x32). Chair and plant carry
 // the room's plank floor behind them — the floor hexes key out so
 // they composite over the live kit floor like our own props.
 const FLOOR_HEXES = new Set(['#8d5500', '#3b2400', '#e6ad27']); // the sheet's plank browns
@@ -123,17 +123,25 @@ out['kit-floor-1'] = toEntry(extract(SHEET, 224, 96, 16, 16));
 out['kit-floor-2'] = toEntry(extract(SHEET, 224, 112, 16, 16));
 out['kit-rug'] = toEntry(extract(SHEET, 200, 96, 16, 16)); // purple diamond rug, center crop
 out['kit-rug2'] = toEntry(extract(SHEET, 128, 48, 16, 16)); // pink heart rug
-out['kit-bed'] = toEntry(extract(SHEET, 176, 80, 16, 32));
+out['kit-bed'] = toEntry(extract(SHEET, 176, 80, 16, 16)); // bed head + blanket top (kit tiles are 16x16 by gate law)
 out['kit-table'] = toEntry(extract(SHEET, 176, 112, 16, 16));
 out['kit-chair'] = toEntry(extract(SHEET, 240, 96, 16, 16, FLOOR_HEXES));
-out['kit-plant'] = toEntry(extract(SHEET, 269, 100, 16, 32, FLOOR_HEXES)); // palm, center crop (crown is 20 wide; reads as a potted palm)
-out['kit-shelf'] = toEntry(extract(SHEET, 272, 64, 16, 32));
-out['kit-housewall'] = toEntry(extract(SHEET, 128, 64, 16, 16));
+out['kit-plant'] = toEntry(extract(SHEET, 270, 110, 16, 16, FLOOR_HEXES)); // potted palm: pot + trunk + crown base
+out['kit-shelf'] = toEntry(extract(SHEET, 272, 64, 16, 16));
+// The sheet's wall is a 10-row wainscot band (transparent below);
+// our interior walls are full cells, so the wood panelling extends
+// down to a baseboard row — the kit's own C/D wood rows continued.
+const housewallGrid = extract(SHEET, 128, 64, 16, 16);
+for (let j = 10; j < 16; j++) {
+  const srcRow = housewallGrid[j === 15 ? 9 : 6 + ((j - 10) % 3)];
+  housewallGrid[j] = srcRow.slice();
+}
+out['kit-housewall'] = toEntry(housewallGrid);
 out['kit-painting-1'] = toEntry(extract(SHEET, 192, 48, 16, 16));
 out['kit-painting-2'] = toEntry(extract(SHEET, 208, 48, 16, 16));
 // Lab wall: the house wall re-toned cool (labs read clinical, houses warm).
-const LABWALL_MAP = { '#f7e38a': '#dfe5ea', '#e6d06a': '#bcc9d4', '#c9a94e': '#93a7b8', '#f9efae': '#eef3f6' };
-const labwallGrid = extract(SHEET, 128, 64, 16, 16).map((row) => row.map((c) => (c && LABWALL_MAP[c]) || c));
+const LABWALL_MAP = { '#e6ad27': '#d7dee5', '#8d5500': '#77879a', '#3b2400': '#46525e' };
+const labwallGrid = housewallGrid.map((row) => row.map((c) => (c && LABWALL_MAP[c]) || c));
 out['kit-labwall'] = toEntry(labwallGrid);
 
 // ---- Wave C: biome families the kit lacks (ORIGINAL tiles in the
