@@ -80,6 +80,14 @@ function main() {
   }
 
   // ---- derived bob frames: species/<id>/front.pix -> <id>-front-bob (2px down) ----
+  // Wave J2: front bobs ship as SHIFT deltas ({ base, shiftY: 2 }), the
+  // exact form back bobs have used since Premium+ W2 below — a bob is a
+  // pure 2px downward shift of the base pose, and the materialized rows
+  // built here are byte-identical to what the runtime materializer
+  // (src/engine/art.mjs) reconstructs from the shift form. The full-form
+  // emission cost ~4.5 KB x 508 fronts (~2.46 MB of bundle) for data the
+  // loader derives anyway; the shift form costs ~95 B per bob. The
+  // materialized sprite still packs into the atlas like any other.
   const derived = [];
   const byId = new Map(sprites.map((s) => [s.id, s]));
   for (const s of sprites) {
@@ -89,7 +97,7 @@ function main() {
       for (let y = 0; y < s.h - shift; y++) rows[y + shift] = s.rows[y];
       derived.push({
         id: s.id + '-bob', w: s.w, h: s.h, rows, pal: s.pal,
-        family: 'species', derivedFrom: s.id, path: s.path + ' (derived)',
+        family: 'species', derivedFrom: s.id, shiftOf: s.id, shiftY: shift, path: s.path + ' (derived)',
       });
     }
   }
@@ -368,8 +376,8 @@ function main() {
   data += 'export const ART_META = ' + JSON.stringify({
     families: FAMILIES,
     generated: new Date().toISOString().slice(0, 10),
-    derived_bob: derived.map((d) => d.id),
-    shift_bob: shiftSprites.map((d) => d.id),
+    derived_bob: derived.filter((d) => !d.shiftOf).map((d) => d.id),
+    shift_bob: [...shiftSprites, ...derived.filter((d) => d.shiftOf)].map((d) => d.id),
     delta_frames: deltaSprites.map((d) => d.id),
   }, null, 2) + ';\n';
   fs.writeFileSync(path.join(ROOT, 'art-data.mjs'), data);
