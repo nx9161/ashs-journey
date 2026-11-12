@@ -120,7 +120,7 @@ export const FORMS = [
   { id: 'mega-lopunny', speciesId: 428, name: 'Mega VELVETLOP', kind: 'mega', region: 'kalos', types: ['normal', 'fighting'], note: 'Mega form; leggings torn by kicks it throws constantly.' },
   { id: 'mega-garchomp', speciesId: 445, name: 'Mega APEXSHARK', kind: 'mega', region: 'kalos', types: ['dragon', 'ground'], note: 'Mega form; fins melt into scythes. It hates the tradeoff.' },
   { id: 'mega-lucario', speciesId: 448, name: 'Mega AURAJACK', kind: 'mega', region: 'kalos', types: ['fighting', 'steel'], note: 'Mega form; aura so strong it marks its fur black.' },
-  { id: 'mega-abomasnow', speciesId: 460, name: 'Mega Abomasnow', kind: 'mega', region: 'kalos', types: ['grass', 'ice'], note: 'Mega form; a blizzard that grew extra ice spikes.' },
+  { id: 'mega-abomasnow', speciesId: 460, name: 'Mega YETIFIR', kind: 'mega', region: 'kalos', types: ['grass', 'ice'], note: 'Mega form; a blizzard that grew extra ice spikes.' },
   { id: 'mega-gallade', speciesId: 475, name: 'Mega Gallade', kind: 'mega', region: 'kalos', types: ['psychic', 'fighting'], note: 'Mega form; a duelist cape and longer elbow blades.' },
   { id: 'mega-audino', speciesId: 531, name: 'Mega Audino', kind: 'mega', region: 'kalos', types: ['normal', 'fairy'], note: 'Mega form; its touch reads hearts and heals hurts.' },
   { id: 'mega-diancie', speciesId: 719, name: 'Mega Diancie', kind: 'mega', region: 'kalos', types: ['rock', 'fairy'], note: 'Mega form; the pink jewel blooms into full regalia.' },

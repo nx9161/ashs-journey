@@ -589,7 +589,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'hippowdon', method: 'level', level: 334 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   hippowdon: {
-    id: 'hippowdon', name: 'Hippowdon', dexNo: 450, types: ['ground'],
+    id: 'hippowdon', name: 'MAWPOTAM', dexNo: 450, types: ['ground'],
     base: { hp: 108, atk: 112, def: 118, spa: 68, spd: 72, spe: 47 },
     catchRate: 60, growth: 'slow', baseXp: 184, body: 'quad', spriteSeed: 45001,
     eggGroups: ['ground'], hatchCounter: 30,
@@ -598,7 +598,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 31, 32, 33, 34, 38, 39, 44, 48, 50, 103, 104],
   },
   skorupi: {
-    id: 'skorupi', name: 'Skorupi', dexNo: 451, types: ['poison', 'bug'],
+    id: 'skorupi', name: 'SCORPLET', dexNo: 451, types: ['poison', 'bug'],
     base: { hp: 40, atk: 50, def: 90, spa: 30, spd: 55, spe: 65 },
     catchRate: 120, growth: 'slow', baseXp: 66, body: 'quad', spriteSeed: 45101,
     eggGroups: ['bug', 'water3'], hatchCounter: 20,
@@ -607,7 +607,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'drapion', method: 'level', level: 340 }, tm: [6, 9, 10, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
   },
   drapion: {
-    id: 'drapion', name: 'Drapion', dexNo: 452, types: ['poison', 'dark'],
+    id: 'drapion', name: 'OGRESCORP', dexNo: 452, types: ['poison', 'dark'],
     base: { hp: 70, atk: 90, def: 110, spa: 60, spd: 75, spe: 95 },
     catchRate: 45, growth: 'slow', baseXp: 175, body: 'quad', spriteSeed: 45201,
     eggGroups: ['bug', 'water3'], hatchCounter: 20,
@@ -616,7 +616,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   croagunk: {
-    id: 'croagunk', name: 'Croagunk', dexNo: 453, types: ['poison', 'fighting'],
+    id: 'croagunk', name: 'VENOFROG', dexNo: 453, types: ['poison', 'fighting'],
     base: { hp: 48, atk: 61, def: 40, spa: 61, spd: 40, spe: 50 },
     catchRate: 140, growth: 'mediumfast', baseXp: 60, body: 'biped', spriteSeed: 45301,
     eggGroups: ['humanshape'], hatchCounter: 10,
@@ -625,7 +625,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'toxicroak', method: 'level', level: 337 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   toxicroak: {
-    id: 'toxicroak', name: 'Toxicroak', dexNo: 454, types: ['poison', 'fighting'],
+    id: 'toxicroak', name: 'BRAWLFROG', dexNo: 454, types: ['poison', 'fighting'],
     base: { hp: 83, atk: 106, def: 65, spa: 86, spd: 65, spe: 85 },
     catchRate: 75, growth: 'mediumfast', baseXp: 172, body: 'biped', spriteSeed: 45401,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -634,7 +634,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   carnivine: {
-    id: 'carnivine', name: 'Carnivine', dexNo: 455, types: ['grass'],
+    id: 'carnivine', name: 'SNAPVINE', dexNo: 455, types: ['grass'],
     base: { hp: 74, atk: 100, def: 72, spa: 90, spd: 72, spe: 46 },
     catchRate: 200, growth: 'slow', baseXp: 159, body: 'blob', spriteSeed: 45501,
     eggGroups: ['plant'], hatchCounter: 25,
@@ -643,7 +643,7 @@ export const SPECIES_SINNOH = {
     tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   finneon: {
-    id: 'finneon', name: 'Finneon', dexNo: 456, types: ['water'],
+    id: 'finneon', name: 'GLOWFIN', dexNo: 456, types: ['water'],
     base: { hp: 49, atk: 49, def: 56, spa: 49, spd: 61, spe: 66 },
     catchRate: 190, growth: 'fast', baseXp: 66, body: 'fish', spriteSeed: 45601,
     eggGroups: ['water2'], hatchCounter: 20,
@@ -652,7 +652,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'lumineon', method: 'level', level: 331 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   lumineon: {
-    id: 'lumineon', name: 'Lumineon', dexNo: 457, types: ['water'],
+    id: 'lumineon', name: 'LUMIVEIL', dexNo: 457, types: ['water'],
     base: { hp: 69, atk: 69, def: 76, spa: 69, spd: 86, spe: 91 },
     catchRate: 75, growth: 'fast', baseXp: 161, body: 'fish', spriteSeed: 45701,
     eggGroups: ['water2'], hatchCounter: 20,
@@ -661,7 +661,7 @@ export const SPECIES_SINNOH = {
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   mantyke: {
-    id: 'mantyke', name: 'Mantyke', dexNo: 458, types: ['water', 'flying'],
+    id: 'mantyke', name: 'KITELET', dexNo: 458, types: ['water', 'flying'],
     base: { hp: 45, atk: 20, def: 50, spa: 60, spd: 120, spe: 50 },
     catchRate: 25, growth: 'slow', baseXp: 69, body: 'bird', spriteSeed: 45801,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
@@ -670,7 +670,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'mantine', method: 'level', level: 310 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   snover: {
-    id: 'snover', name: 'Snover', dexNo: 459, types: ['grass', 'ice'],
+    id: 'snover', name: 'SNOWFIR', dexNo: 459, types: ['grass', 'ice'],
     base: { hp: 60, atk: 62, def: 50, spa: 62, spd: 60, spe: 40 },
     catchRate: 120, growth: 'slow', baseXp: 67, body: 'biped', spriteSeed: 45901,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
@@ -679,7 +679,7 @@ export const SPECIES_SINNOH = {
     evo: { to: 'abomasnow', method: 'level', level: 340 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   abomasnow: {
-    id: 'abomasnow', name: 'Abomasnow', dexNo: 460, types: ['grass', 'ice'],
+    id: 'abomasnow', name: 'YETIFIR', dexNo: 460, types: ['grass', 'ice'],
     base: { hp: 90, atk: 92, def: 75, spa: 92, spd: 85, spe: 60 },
     catchRate: 60, growth: 'slow', baseXp: 173, body: 'biped', spriteSeed: 46001,
     eggGroups: ['monster', 'plant'], hatchCounter: 20,
@@ -688,7 +688,7 @@ export const SPECIES_SINNOH = {
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   weavile: {
-    id: 'weavile', name: 'Weavile', dexNo: 461, types: ['dark', 'ice'],
+    id: 'weavile', name: 'NIGHTMAUL', dexNo: 461, types: ['dark', 'ice'],
     base: { hp: 70, atk: 120, def: 65, spa: 45, spd: 85, spe: 125 },
     catchRate: 45, growth: 'mediumslow', baseXp: 179, body: 'biped', spriteSeed: 46101,
     eggGroups: ['ground'], hatchCounter: 20,
