@@ -674,7 +674,7 @@ export const SPECIES2 = {
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   seel: {
-    id: 'seel', name: 'Seel', dexNo: 86, types: ['water'],
+    id: 'seel', name: 'FLOPLET', dexNo: 86, types: ['water'],
     base: { hp: 65, atk: 45, def: 55, spa: 45, spd: 70, spe: 45 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'fish', spriteSeed: 8601,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -683,7 +683,7 @@ export const SPECIES2 = {
     evo: { to: 'dewgong', method: 'level', level: 34 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   dewgong: {
-    id: 'dewgong', name: 'Dewgong', dexNo: 87, types: ['water', 'ice'],
+    id: 'dewgong', name: 'FROSTINE', dexNo: 87, types: ['water', 'ice'],
     base: { hp: 90, atk: 70, def: 80, spa: 70, spd: 95, spe: 70 },
     catchRate: 75, growth: 'mediumfast', baseXp: 166, body: 'fish', spriteSeed: 8701,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -692,7 +692,7 @@ export const SPECIES2 = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   grimer: {
-    id: 'grimer', name: 'Grimer', dexNo: 88, types: ['poison'],
+    id: 'grimer', name: 'SLUDGLING', dexNo: 88, types: ['poison'],
     base: { hp: 80, atk: 80, def: 50, spa: 40, spd: 50, spe: 25 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'blob', spriteSeed: 8801,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -701,7 +701,7 @@ export const SPECIES2 = {
     evo: { to: 'muk', method: 'level', level: 38 }, tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   muk: {
-    id: 'muk', name: 'Muk', dexNo: 89, types: ['poison'],
+    id: 'muk', name: 'MIREMASS', dexNo: 89, types: ['poison'],
     base: { hp: 105, atk: 105, def: 75, spa: 65, spd: 100, spe: 50 },
     catchRate: 75, growth: 'mediumfast', baseXp: 175, body: 'blob', spriteSeed: 8901,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -710,7 +710,7 @@ export const SPECIES2 = {
     tm: [6, 9, 10, 15, 20, 24, 25, 31, 32, 34, 36, 38, 44, 47, 50],
   },
   shellder: {
-    id: 'shellder', name: 'Shellder', dexNo: 90, types: ['water'],
+    id: 'shellder', name: 'CLAMLET', dexNo: 90, types: ['water'],
     base: { hp: 30, atk: 65, def: 100, spa: 45, spd: 25, spe: 40 },
     catchRate: 190, growth: 'slow', baseXp: 61, body: 'blob', spriteSeed: 9001,
     eggGroups: ['water3'], hatchCounter: 20,
@@ -719,7 +719,7 @@ export const SPECIES2 = {
     evo: { to: 'cloyster', method: 'stone', stone: 'waterstone' }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
   },
   cloyster: {
-    id: 'cloyster', name: 'Cloyster', dexNo: 91, types: ['water', 'ice'],
+    id: 'cloyster', name: 'SPIKSHELL', dexNo: 91, types: ['water', 'ice'],
     base: { hp: 50, atk: 95, def: 180, spa: 85, spd: 45, spe: 70 },
     catchRate: 60, growth: 'slow', baseXp: 184, body: 'blob', spriteSeed: 9101,
     eggGroups: ['water3'], hatchCounter: 20,
@@ -728,7 +728,7 @@ export const SPECIES2 = {
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 103],
   },
   gastly: {
-    id: 'gastly', name: 'Gastly', dexNo: 92, types: ['ghost', 'poison'],
+    id: 'gastly', name: 'VAPLUME', dexNo: 92, types: ['ghost', 'poison'],
     base: { hp: 30, atk: 35, def: 30, spa: 100, spd: 35, spe: 80 },
     catchRate: 190, growth: 'mediumslow', baseXp: 62, body: 'blob', spriteSeed: 9201,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -737,7 +737,7 @@ export const SPECIES2 = {
     evo: { to: 'haunter', method: 'level', level: 25 }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   haunter: {
-    id: 'haunter', name: 'Haunter', dexNo: 93, types: ['ghost', 'poison'],
+    id: 'haunter', name: 'VAPHAUNT', dexNo: 93, types: ['ghost', 'poison'],
     base: { hp: 45, atk: 50, def: 45, spa: 115, spd: 55, spe: 95 },
     catchRate: 90, growth: 'mediumslow', baseXp: 142, body: 'blob', spriteSeed: 9301,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -746,7 +746,7 @@ export const SPECIES2 = {
     evo: { to: 'gengar', method: 'trade' }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   gengar: {
-    id: 'gengar', name: 'Gengar', dexNo: 94, types: ['ghost', 'poison'],
+    id: 'gengar', name: 'GRIMSHADE', dexNo: 94, types: ['ghost', 'poison'],
     base: { hp: 60, atk: 65, def: 60, spa: 130, spd: 75, spe: 110 },
     catchRate: 45, growth: 'mediumslow', baseXp: 250, body: 'biped', spriteSeed: 9401,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -755,7 +755,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 20, 21, 24, 25, 29, 31, 32, 34, 35, 36, 42, 44, 46, 47, 50, 104],
   },
   drowzee: {
-    id: 'drowzee', name: 'Drowzee', dexNo: 96, types: ['psychic'],
+    id: 'drowzee', name: 'DREAMPIR', dexNo: 96, types: ['psychic'],
     base: { hp: 60, atk: 48, def: 45, spa: 43, spd: 90, spe: 42 },
     catchRate: 190, growth: 'mediumfast', baseXp: 66, body: 'biped', spriteSeed: 9601,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -764,7 +764,7 @@ export const SPECIES2 = {
     evo: { to: 'hypno', method: 'level', level: 26 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   hypno: {
-    id: 'hypno', name: 'Hypno', dexNo: 97, types: ['psychic'],
+    id: 'hypno', name: 'SOMNOLORD', dexNo: 97, types: ['psychic'],
     base: { hp: 85, atk: 73, def: 70, spa: 73, spd: 115, spe: 67 },
     catchRate: 75, growth: 'mediumfast', baseXp: 169, body: 'biped', spriteSeed: 9701,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -773,7 +773,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   krabby: {
-    id: 'krabby', name: 'Krabby', dexNo: 98, types: ['water'],
+    id: 'krabby', name: 'CLAWLET', dexNo: 98, types: ['water'],
     base: { hp: 30, atk: 105, def: 90, spa: 25, spd: 25, spe: 50 },
     catchRate: 225, growth: 'mediumfast', baseXp: 52, body: 'quad', spriteSeed: 9801,
     eggGroups: ['water3'], hatchCounter: 20,
@@ -782,7 +782,7 @@ export const SPECIES2 = {
     evo: { to: 'kingler', method: 'level', level: 28 }, tm: [3, 6, 8, 9, 10, 11, 12, 13, 14, 19, 31, 32, 34, 44, 50, 101, 103, 104],
   },
   kingler: {
-    id: 'kingler', name: 'Kingler', dexNo: 99, types: ['water'],
+    id: 'kingler', name: 'PINCHARCH', dexNo: 99, types: ['water'],
     base: { hp: 55, atk: 130, def: 115, spa: 50, spd: 50, spe: 75 },
     catchRate: 60, growth: 'mediumfast', baseXp: 166, body: 'quad', spriteSeed: 9901,
     eggGroups: ['water3'], hatchCounter: 20,
@@ -1279,7 +1279,7 @@ export const SPECIES2 = {
     // shrugs off Fire yet fears Water. Our take: Rock/Ice — Ice sheds the
     // Fire weakness, Water still strikes the Rock half double, and the
     // crystal trades raw Defense for Special shine.
-    id: 'crystalonix', name: 'Crystal Onix', dexNo: 95, types: ['rock', 'ice'],
+    id: 'crystalonix', name: 'Crystal STRATON', dexNo: 95, types: ['rock', 'ice'],
     base: { hp: 45, atk: 45, def: 110, spa: 55, spd: 65, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9502,
     eggGroups: ['mineral'], hatchCounter: 25,

@@ -138,6 +138,22 @@ export const NAME_REGISTRY = {
     magneton:  { name: 'TRICOIL', status: 'named', wave: 'G-KT5', design: 'tricoil' },
     doduo:     { name: 'TWINBEAK', status: 'named', wave: 'G-KT5', design: 'twinbeak' },
     dodrio:    { name: 'TRIBEAK', status: 'named', wave: 'G-KT5', design: 'tribeak' },
+    // -- Wave G Kanto Completion, Tranche 6 (coordinator-named) --
+    seel:      { name: 'FLOPLET', status: 'named', wave: 'G-KT6', design: 'floplet' },
+    dewgong:   { name: 'FROSTINE', status: 'named', wave: 'G-KT6', design: 'frostine' },
+    grimer:    { name: 'SLUDGLING', status: 'named', wave: 'G-KT6', design: 'sludgling' },
+    muk:       { name: 'MIREMASS', status: 'named', wave: 'G-KT6', design: 'miremass' },
+    shellder:  { name: 'CLAMLET', status: 'named', wave: 'G-KT6', design: 'clamlet' },
+    cloyster:  { name: 'SPIKSHELL', status: 'named', wave: 'G-KT6', design: 'spikshell' },
+    gastly:    { name: 'VAPLUME', status: 'named', wave: 'G-KT6', design: 'vaplume' },
+    haunter:   { name: 'VAPHAUNT', status: 'named', wave: 'G-KT6', design: 'vaphaunt' },
+    gengar:    { name: 'GRIMSHADE', status: 'named', wave: 'G-KT6', design: 'grimshade' },
+    onix:      { name: 'STRATON', status: 'named', wave: 'G-KT6', design: 'straton' },
+    crystalonix: { name: 'Crystal STRATON', status: 'named', wave: 'G-KT6', design: 'straton-crystal' },
+    drowzee:   { name: 'DREAMPIR', status: 'named', wave: 'G-KT6', design: 'dreampir' },
+    hypno:     { name: 'SOMNOLORD', status: 'named', wave: 'G-KT6', design: 'somnolord' },
+    krabby:    { name: 'CLAWLET', status: 'named', wave: 'G-KT6', design: 'clawlet' },
+    kingler:   { name: 'PINCHARCH', status: 'named', wave: 'G-KT6', design: 'pincharch' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -176,6 +192,12 @@ export const NAME_REGISTRY = {
     dozeling: ['slowpoke', 'slowbro'],
     coilorb: ['magnemite', 'magneton'],
     twinbeak: ['doduo', 'dodrio'],
+    floplet: ['seel', 'dewgong'],
+    sludgling: ['grimer', 'muk'],
+    clamlet: ['shellder', 'cloyster'],
+    vaplume: ['gastly', 'haunter', 'gengar'],
+    dreampir: ['drowzee', 'hypno'],
+    clawlet: ['krabby', 'kingler'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

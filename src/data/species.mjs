@@ -71,7 +71,7 @@ export const SPECIES = {
     flavor: 'Arms of living stone. Often mistaken for an ordinary boulder.',
   },
   onix: {
-    id: 'onix', name: 'Onix', dexNo: 95, types: ['rock', 'ground'],
+    id: 'onix', name: 'STRATON', dexNo: 95, types: ['rock', 'ground'],
     base: { hp: 35, atk: 45, def: 160, spa: 30, spd: 45, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9501,
     eggGroups: ['mineral'], hatchCounter: 25,
