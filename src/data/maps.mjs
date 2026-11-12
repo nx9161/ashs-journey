@@ -133,7 +133,7 @@ export const MAPS = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
     ],
     encounters: null,
     start: null,
@@ -203,7 +203,7 @@ export const MAPS = {
       { x: 6, y: 3, name: 'RICK', art: 'youngster', skin: '#e8b888', shirt: '#a03a5f', pants: '#2a304a', hair: '#2a1a0a',
         trainer: 'r2_bug',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
-        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a FRONLET under a boot."] },
+        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a GRUBLET under a boot."] },
       { x: 7, y: 5, name: 'BEA', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#a05a2a',
         trainer: 'r2_camper',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up

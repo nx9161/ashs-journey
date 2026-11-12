@@ -3,7 +3,7 @@
 // Part A: pure units — the appended quest stage, the event/battle
 // data law (uncatchable quells + climax, catchable deep ABYSSORN, no
 // Kanto arc flags touched), the ABYSSORN legendary-arc entry, map
-// placements (DOZECROWN's rock, cave altar tiles, NPC state variants),
+// placements (ORAPOTAM's rock, cave altar tiles, NPC state variants),
 // walkability of the whole Shamouti cluster, legacy save-fill.
 // Part B: the built bundle in a headless Game — trigger gating
 // (1 badge quiet / 2 badges storm), the three quells (ball refusal,
@@ -45,11 +45,11 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
     !!q && q.flag === 'orange_2000_storm_stilled' && q.titanCount === true
     && /Sea Ruby/.test(q.hint) && /Halloway/.test(q.hint)
     && ORANGE_QUESTS.indexOf(q) === ORANGE_QUESTS.length - 1);
-  ok('A02 all six O3 events exist; the trigger sets orange_2000_active and introduces the ORIGINAL collector (Vance Halloway) + DOZECROWN counsel',
+  ok('A02 all six O3 events exist; the trigger sets orange_2000_active and introduces the ORIGINAL collector (Vance Halloway) + ORAPOTAM counsel',
     O3_EVENTS.every((id) => Array.isArray(ORANGE_EVENTS[id]))
     && ORANGE_EVENTS.ev_orange_2000_storm.some((s) => s.flag === 'orange_2000_active')
     && JSON.stringify(ORANGE_EVENTS.ev_orange_2000_storm).includes('Vance Halloway')
-    && JSON.stringify(ORANGE_EVENTS.ev_orange_2000_storm).includes('DOZECROWN'));
+    && JSON.stringify(ORANGE_EVENTS.ev_orange_2000_storm).includes('ORAPOTAM'));
   const wb = (id) => ORANGE_EVENTS[id].find((s) => s.wildBattle).wildBattle;
   ok('A03 quell battles: PYREHAWK/Zapdos/GLACIERNE Lv50, ALL uncatchable event versions',
     wb('ev_orange_2000_moltres').species === 'moltres' && wb('ev_orange_2000_moltres').level === 50 && wb('ev_orange_2000_moltres').uncatchable === true
@@ -126,8 +126,8 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
   const { WALKABLE } = await import(join(ROOT, 'src/data/maps.mjs'));
   ok('A12 MAPS5 holds the 30 Orange maps + the vermilion ferry-port re-declaration (31 keys, unchanged census)', Object.keys(MAPS5).length === 31 && !!MAPS5.vermilion && !!MAPS5.shamouti && !!MAPS5['shamouti-deep'], Object.keys(MAPS5).length + '');
   const sham = MAPS5.shamouti;
-  const sk = sham.npcs.find((n) => n.name === 'DOZECROWN');
-  ok('A13 DOZECROWN NPC placed at DOZECROWN\'s rock — (6,12), beside the west-shore rock tiles — with base + storm + post-storm dialogue states',
+  const sk = sham.npcs.find((n) => n.name === 'ORAPOTAM');
+  ok('A13 ORAPOTAM NPC placed at ORAPOTAM\'s rock — (6,12), beside the west-shore rock tiles — with base + storm + post-storm dialogue states',
     !!sk && sk.x === 6 && sk.y === 12 && Array.isArray(sk.dialogueStates) && sk.dialogueStates.length === 2
     && sk.dialogueStates[0].flag === 'orange_2000_storm_stilled' && sk.dialogueStates[1].flag === 'orange_2000_active'
     && sham.rows[12][5] === 'R' && sham.rows[12][4] === 'R');
@@ -167,7 +167,7 @@ const O3_EVENTS = ['ev_orange_2000_storm', 'ev_orange_2000_moltres', 'ev_orange_
     const m = MAPS5[mid]; const s = bfs(m, 6, 9);
     if (!(s.has('6,2') && s.has('7,2'))) { cavesOk = false; caveDetail.push(mid); }
   }
-  ok('A16 Shamouti cluster walkability: dock start reaches DOZECROWN-adjacent + the shrine door; shrine entry reaches the deep passage; deep entry reaches the altar; every cave entry reaches BOTH altar tiles (new NPCs block nothing)',
+  ok('A16 Shamouti cluster walkability: dock start reaches ORAPOTAM-adjacent + the shrine door; shrine entry reaches the deep passage; deep entry reaches the altar; every cave entry reaches BOTH altar tiles (new NPCs block nothing)',
     adj(shamSeen, 6, 12) && shamSeen.has('4,4')
     && shrineSeen.has('7,2') && adj(deepSeen, 7, 1) && cavesOk, caveDetail.join(','));
 }
@@ -371,14 +371,14 @@ const driver = `
   var stormOpen = gA.ui.dialogueOpen === true;
   pump(gA);
   var stormText = seenLines.join(' | ');
-  ok('B02 trigger: first Shamouti arrival with the Sea Ruby held fires the storm — Halloway named, DOZECROWN counsels, orange_2000_active set',
-    stormOpen && stormText.includes('Vance Halloway') && stormText.includes('DOZECROWN') && stA.story.flags.orange_2000_active === true,
+  ok('B02 trigger: first Shamouti arrival with the Sea Ruby held fires the storm — Halloway named, ORAPOTAM counsels, orange_2000_active set',
+    stormOpen && stormText.includes('Vance Halloway') && stormText.includes('ORAPOTAM') && stA.story.flags.orange_2000_active === true,
     stormText.slice(0, 140));
   gotoMap(gA, 'shamouti', 14, 15);
   ok('B03 the trigger fires exactly once: re-entry is quiet', !gA.ui.dialogueOpen);
   var owA = gotoMap(gA, 'shamouti', 14, 15);
-  var skLines = talkLines(gA, owA, 'DOZECROWN');
-  ok('B04 DOZECROWN at its rock gives STORM counsel while the storm is live (state variant, not base lines)',
+  var skLines = talkLines(gA, owA, 'ORAPOTAM');
+  ok('B04 ORAPOTAM at its rock gives STORM counsel while the storm is live (state variant, not base lines)',
     skLines.includes('tide table'), skLines.slice(0, 120));
 
   // -- PYREHAWK: ball refusal, then the win --
@@ -448,8 +448,8 @@ const driver = `
   var owA2 = gotoMap(gA, 'shamouti', 14, 15);
   var elderPost = talkLines(gA, owA2, 'FEST ELDER MIRA');
   var ferryPost = talkLines(gA, owA2, 'CAPT MARINA-PUMM');
-  var skPost = talkLines(gA, owA2, 'DOZECROWN');
-  ok('B16 post-storm variants: elder (festival restored), ferryman (glass sea), DOZECROWN (sun patch) all speak their post-storm lines',
+  var skPost = talkLines(gA, owA2, 'ORAPOTAM');
+  ok('B16 post-storm variants: elder (festival restored), ferryman (glass sea), ORAPOTAM (sun patch) all speak their post-storm lines',
     elderPost.includes('Sixty festivals') && ferryPost.includes('like glass') && skPost.includes('patch of warmth'),
     elderPost.slice(0, 60) + ' // ' + ferryPost.slice(0, 60) + ' // ' + skPost.slice(0, 60));
 

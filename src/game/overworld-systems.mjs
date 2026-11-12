@@ -2054,11 +2054,11 @@ Object.assign(OverworldScene.prototype, {
         }
       }
       if (!flags.johto_well_cleared) {
-        if (flags.kurt_well_plea) { say(['Still sitting, still useless, still proud — the back has union rules, apparently. The well, trainer. Three Rockets, and DOZELING who deserve better. My house will keep.']); return true; }
+        if (flags.kurt_well_plea) { say(['Still sitting, still useless, still proud — the back has union rules, apparently. The well, trainer. Three Rockets, and DOZPOTAM who deserve better. My house will keep.']); return true; }
         say(['Mind the well on your way past, trainer. Something down there smells like a market that should not exist. If you find an old man investigating it badly — that will be me, shortly.']); return true; }
       if (!flags.gsball_delivered) {
         if ((st.bag.gsball || 0) > 0) {
-          say(['The well is quiet, the DOZELING are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+          say(['The well is quiet, the DOZPOTAM are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
             '...Wait. Wait wait wait. That — in your bag. Gold and silver bands, warm as a held hand. Let me see it. LET me see it.',
             'Forty years I have worked Capture Orbs by hand. Forty years, and I have never — feel that? It is not locked. It is not broken. It is WAITING, and no tool I own speaks its language. Even I cannot open this ball, trainer.',
             'But listen. ...There. It hums. It has hummed twice since I took it — both times when the wind came through Holly Forest, from the old shrine in the trees. Whatever this ball is waiting for, it is waiting THERE. Keep it with me a while. Let an old man study it properly, and when the forest calls, we will both know.'], () => {
@@ -2076,7 +2076,7 @@ Object.assign(OverworldScene.prototype, {
           });
           return true;
         }
-        say(['The well is quiet, the DOZELING are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+        say(['The well is quiet, the DOZPOTAM are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
           'Hawthorn wrote that you carry a ball no machine can open. Bring it to this house when you can — an old pair of hands would like its turn at being defeated by it.']);
         return true;
       }
@@ -2120,7 +2120,7 @@ Object.assign(OverworldScene.prototype, {
           if (!won) return;
           if (flags.beat_rocket_well_1 && flags.beat_rocket_well_2 && flags.beat_rocket_well_3 && !flags.johto_well_cleared) {
             flags.johto_well_cleared = true;
-            say(['The last Rocket scrambles up the ladder and does not look back. Below, in the wet dark, the DOZELING lift their heads one by one — slow, unhurried, already forgetting, which is the kindest thing about them.', 'Somewhere above, a bent old man is about to hear the best news of his year. Kurt\'s house, trainer. And bring what you are carrying — he has waited long enough.'], null, 'NARRATOR');
+            say(['The last Rocket scrambles up the ladder and does not look back. Below, in the wet dark, the DOZPOTAM lift their heads one by one — slow, unhurried, already forgetting, which is the kindest thing about them.', 'Somewhere above, a bent old man is about to hear the best news of his year. Kurt\'s house, trainer. And bring what you are carrying — he has waited long enough.'], null, 'NARRATOR');
           }
         });
       }, npc.name);
@@ -2142,7 +2142,7 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'jasmine_light') {
-      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Lumi is well, trainer, and every ship between here and Tidewall knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will STRATIRON.']); return true; }
+      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Lumi is well, trainer, and every ship between here and Tidewall knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will FERROWYRM.']); return true; }
       if ((st.bag.secretpotion || 0) > 0) {
         say(['That smell — honey and iron and something green. The Tidewall mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Lumi, love — medicine. The good kind, from across the water.'], () => {
           st.bag.secretpotion = (st.bag.secretpotion || 0) - 1;
@@ -2502,7 +2502,7 @@ Object.assign(OverworldScene.prototype, {
       chuck: { badge: 'stormbadge', gate: null, gateLines: [],
         post: 'Any time the sea brings you back, Storm Badge holder, my gym is its loudest address. Bring your hands — and your appetite. My wife insists on feeding challengers who survive me.' },
       jasmine: { badge: 'mineralbadge', gate: 'amphy_healed',
-        gateLines: ['I am sorry — truly. I cannot battle while Lumi is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my STRATIRON deserves better from me. The light first, trainer. Please. The light first.'],
+        gateLines: ['I am sorry — truly. I cannot battle while Lumi is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my FERROWYRM deserves better from me. The light first, trainer. Please. The light first.'],
         post: 'Lumi\'s light and your Mineral Badge, trainer — Beacon shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
       pryce: { badge: 'glacierbadge', gate: 'johto_hideout_cleared',
         gateLines: ['Not yet, challenger. My town is sitting on a Rocket nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Lance is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
@@ -3623,21 +3623,21 @@ Object.assign(OverworldScene.prototype, {
     // ---- Flintridge: Brock's Day Off ----
     if (id === 'tale_pewter') {
       if (npc.name === 'CURATOR') {
-        if (stage < 0) { say(['Psst — trainer. Brock has not had a day off since the museum roof leaked, and that was two winters ago.', 'Cover my desk quiz for the visitors — three questions, all from the exhibits — then spar his RUMBLING so he can call it exercise and clock out.', 'The Iron Acorn is yours if you pull it off. It has been our paperweight for a decade; it deserves adventure.'], () => acceptTale(st, id)); return true; }
+        if (stage < 0) { say(['Psst — trainer. Brock has not had a day off since the museum roof leaked, and that was two winters ago.', 'Cover my desk quiz for the visitors — three questions, all from the exhibits — then spar his PEBBLET so he can call it exercise and clock out.', 'The Iron Acorn is yours if you pull it off. It has been our paperweight for a decade; it deserves adventure.'], () => acceptTale(st, id)); return true; }
         if (stage === 0) { this.taleQuizPewter(npc); return true; }
-        if (stage === 1) { say(['Quiz covered! Brock is in the square, pretending not to be off duty. His RUMBLING is already judging you.']); return true; }
+        if (stage === 1) { say(['Quiz covered! Brock is in the square, pretending not to be off duty. His PEBBLET is already judging you.']); return true; }
         say(['The museum hums along, and Brock actually smiled at a fossil today. Miracles, catalogued.']); return true;
       }
       if (npc.name === 'BROCK') {
         if (stage === 1) {
-          say(['Day off. Allegedly. The Curator says you are my exercise plan.', 'One RUMBLING, no badges on the line, no crowd. Just rock and honest work.'], () => {
-            g.ui.showMenu('Spar with Brock\'s RUMBLING (Lv 12)?', [
+          say(['Day off. Allegedly. The Curator says you are my exercise plan.', 'One PEBBLET, no badges on the line, no crowd. Just rock and honest work.'], () => {
+            g.ui.showMenu('Spar with Brock\'s PEBBLET (Lv 12)?', [
               { label: 'Spar', value: 'yes' }, { label: 'Not yet', value: 'no' },
             ], (v) => {
               if (v !== 'yes') return;
               this.taleSpar('geodude', 12, () => {
                 finishWith(['Solid. You read a Rock type like a book you have already finished.', 'Here — the Iron Acorn. The museum\'s oldest paperweight, and harder than my whole team\'s heads.', 'Secret, trainer to trainer: this city\'s gym was built out of the museum\'s own stone. The museum came first. Leaders here have been part-time curators ever since — I pay the fossil lab out of gym winnings, and I would do it on my day off, too.']);
-              }, () => say(['RUMBLING takes the round. He is smug about it in three languages of rock.', 'Shake it off — a day off has room for a rematch.']));
+              }, () => say(['PEBBLET takes the round. He is smug about it in three languages of rock.', 'Shake it off — a day off has room for a rematch.']));
             });
           });
           return true;
@@ -3741,7 +3741,7 @@ Object.assign(OverworldScene.prototype, {
       if (stage < 0) { say(['You are looking at Canopy\'s best-kept height: the Game Corner roof garden, Erika\'s own.', 'It wants three waterings this season — and the garden keeps gym hours, in its way: the second visit wants a trainer with 4 badges, the third, 6. Plants respect a journey.', 'Finish the season and the Gardenia Sash is yours. Erika sewed it herself, so water like you mean it.'], () => acceptTale(st, id)); return true; }
       if (stage === 0) { say(['Watering one — there you go. Slow circles, no splashing the marigolds; they hold grudges.', 'One bed drinks for the whole roof when a journey is young. Come back at 4 badges for the second round.'], () => advanceTale(st, id)); return true; }
       if (stage === 1) {
-        if (badges >= 4) { say(['Four badges! The vines noticed before I did. Watering two — mind the hanging bed, it drinks like a NAPPASAUR.', 'One more round, at 6 badges, and the season is yours.'], () => advanceTale(st, id)); return true; }
+        if (badges >= 4) { say(['Four badges! The vines noticed before I did. Watering two — mind the hanging bed, it drinks like a SOMNIBEAR.', 'One more round, at 6 badges, and the season is yours.'], () => advanceTale(st, id)); return true; }
         say(['The garden is still sipping its first watering, trainer. Second round opens at 4 badges — you hold ' + badges + '. The plants are patient. Be like the plants.']); return true;
       }
       if (stage === 2) {
@@ -3999,7 +3999,7 @@ Object.assign(OverworldScene.prototype, {
     ];
     const ask = (i) => {
       if (i >= QS.length) {
-        this.taleSay(['Three for three! The desk is covered, the visitors are dazzled, and Brock owes us both a day off.', 'He is in the square with his RUMBLING. Go and collect your spar.'], npc.name, () => advanceTale(st, 'tale_pewter'));
+        this.taleSay(['Three for three! The desk is covered, the visitors are dazzled, and Brock owes us both a day off.', 'He is in the square with his PEBBLET. Go and collect your spar.'], npc.name, () => advanceTale(st, 'tale_pewter'));
         return;
       }
       const item = QS[i];

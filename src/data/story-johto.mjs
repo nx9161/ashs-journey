@@ -7,7 +7,7 @@
 // in the game's voice — no quoted or closely-paraphrased lines.
 //
 // Stage split: J4a ships the west (badges 1-4: zephyr / hive / plain /
-// fog), the Silver thief thread's first clash, the DOZELING Well +
+// fog), the Silver thief thread's first clash, the DOZPOTAM Well +
 // Kurt + GS Orb delivery, and the Ashen Tower awakening that ARMS
 // J5's beast arcs. J4b (this stage, appended below the marked seams)
 // ships the east: the Beacon/Tidewall medicine errand + Storm and
@@ -51,7 +51,7 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_thief', flag: 'silver_reported', text: 'Watch for the red-haired thief — and report back to Elm', hint: 'A starter was stolen from Elm\'s lab. The thief was seen heading north, toward Blossom and Route 30. If you meet him, tell Elm what you saw.' },
   { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Newleaf Tower and earn the Elder\'s blessing', hint: 'Iris City\'s tower sways like the Kin it honors. Falkner expects challengers to climb it first — the monks inside are the first half of his test.' },
   { id: 'q_johto_zephyr', flag: 'badge_zephyr', text: 'Win the Zephyr Badge from Falkner in Iris City', hint: 'Falkner keeps Iris\'s gym with birds raised in the tower\'s shadow. Flying types fear Electric, Ice and Rock moves.' },
-  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZELING Well', hint: 'Below Cinder Town, Rockets are cutting DOZELING tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
+  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZPOTAM Well', hint: 'Below Cinder Town, Rockets are cutting DOZPOTAM tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
   { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Cinder Town', hint: 'The ball no machine can open, carried all the way from Marisol. Kurt of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
   { id: 'q_johto_hive', flag: 'badge_hive', text: 'Win the Hive Badge from Bugsy in Cinder Town', hint: 'Bugsy\'s Bug types are proud and quick. Fire, Flying and Rock moves end arguments with them.' },
   { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Signal City', hint: 'Whitney\'s MOOBELLE is famous all over Yamato, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
@@ -60,7 +60,7 @@ export const JOHTO_QUESTS = [
   // --- J4b: the east rows (appended at the J4a seam) ---
   { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Lumi, the lighthouse Kin', hint: 'Lumi, the LUMENECK whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Jasmine is waiting on it.' },
   { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Tidewall City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
-  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Lumi is sick — the errand comes first. Her STRATIRON fears Fire, Fighting and Ground moves.' },
+  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Lumi is sick — the errand comes first. Her FERROWYRM fears Fire, Fighting and Ground moves.' },
   { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red WRATHWYRM at the Wrathmere Lake', hint: 'North of Redwood, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
   { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Hideout beneath Redwood\'s souvenir shop', hint: 'Lance is waiting in Redwood Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
   { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Pryce in Redwood Town', hint: 'Pryce has trained through fifty winters and one Rocket occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
@@ -126,7 +126,7 @@ export const JOHTO_TRAINERS = {
     reward: 6400, badge: 'fogbadge',
   },
   // Silver, first clash (Route 30): the stolen starter at band floor
-  // plus a SKREEP. NOT a leader (no badge, no smart AI, no keepsake) —
+  // plus a SKREEBAT. NOT a leader (no badge, no smart AI, no keepsake) —
   // the battle is fought through the battleAny event step, win or
   // lose, and the branch flag records what actually happened.
   silver_r30: {
@@ -160,11 +160,11 @@ export const JOHTO_TRAINERS = {
     ],
     reward: 450,
   },
-  // The DOZELING Well Rockets (plain trainers; the johto NPC handler
+  // The DOZPOTAM Well Rockets (plain trainers; the johto NPC handler
   // gates their battles on Kurt's plea and counts the clear).
   rocket_well_1: {
     id: 'rocket_well_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
-    intro: ['Hey! This well is a work site! DOZELING tails, one snip at a time — the boss calls it harvesting. I call it overtime. Scram!'],
+    intro: ['Hey! This well is a work site! DOZPOTAM tails, one snip at a time — the boss calls it harvesting. I call it overtime. Scram!'],
     lose: ['Ow — okay, okay! The tail business was the boss\'s idea anyway...'],
     team: [
       { species: 'rattata', level: 118 },
@@ -206,7 +206,7 @@ export const JOHTO_TRAINERS = {
   },
   jasmine: {
     id: 'jasmine', name: 'Jasmine', title: 'Beacon Gym Leader', ai: 'smart', badgeSet: 'johto',
-    intro: ['Lumi is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My STRATIRON has been patient. I have not.'],
+    intro: ['Lumi is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My FERROWYRM has been patient. I have not.'],
     lose: ['Oh...! Beaten, truly beaten. Lumi\'s light and your battle — Beacon is bright today in every way there is.', 'The Mineral Badge is yours. Hold it up to the lighthouse sometime. It shines back.'],
     team: [
       { species: 'magnemite', level: 154 },
@@ -388,7 +388,7 @@ export const JOHTO_TRAINERS = {
   // beat_gary_johto unset and Gary re-challengeable after healing —
   // no soft-lock). His team is built from his Arden identity, grown
   // to the Conference: MENTARCH and EMBERMANE from his road, GRIMSHADE
-  // and LUNAPARD from his Yamato years, AERARCH from the first sky
+  // and LUNAPARD from his Yamato years, AERHAWK from the first sky
   // you shared — and ABYSSAR, his starter, anchoring it all, the
   // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
@@ -462,7 +462,7 @@ export const JOHTO_EVENTS = {
   ev_johto_arrival: [
     { say: ['Elm\'s lab is not the calm place the ferry captain described. Paper covers the floor like leaves. A glass case near the back stands open and empty, and two aides are arguing in the hushed voices people use at the scene of a small disaster.'], who: 'NARRATOR' },
     { say: ['Oh — a trainer! From the boat, by your pack. I am Professor Elm. Forgive the lab. Forgive everything, actually — it has been that kind of morning.', 'First, the duty: your Yamato journey, registered. There. Whatever else today has done, it has not stopped that.'], who: 'PROF. ELM' },
-    { say: ['Now the rest. This case held three young Kin this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a SNAPLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
+    { say: ['Now the rest. This case held three young Kin this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a CROCLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
     { say: ['I am not asking you to chase a thief across Yamato — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Iris City is your road: north through Blossom, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Cinder — a man named Kurt, who works Capture Orbs by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. ELM' },
     { flag: 'johto_arrival' },
     { flag: 'elm_registered' },
@@ -480,10 +480,10 @@ export const JOHTO_EVENTS = {
     { toast: 'The red-haired thief got away.' },
   ],
 
-  // -- DOZELING Well: Kurt's plea (first well entry) -------------------
+  // -- DOZPOTAM Well: Kurt's plea (first well entry) -------------------
   ev_johto_well: [
     { say: ['The well smells of wet stone and something worse — a sweet, wrong smell, like a market stall in a cave. Halfway down the ladder, a voice you know from Cinder\'s doorsteps calls up, tight with pain.'], who: 'NARRATOR' },
-    { say: ['Careful on that rung — and careful below it, too. Kurt. Yes, THAT Kurt, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the DOZELING are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the DOZELING — and so an old man\'s pride survives the afternoon.'], who: 'KURT' },
+    { say: ['Careful on that rung — and careful below it, too. Kurt. Yes, THAT Kurt, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the DOZPOTAM are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the DOZPOTAM — and so an old man\'s pride survives the afternoon.'], who: 'KURT' },
     { flag: 'kurt_well_plea' },
     { toast: 'Kurt is counting on you.' },
   ],
@@ -746,17 +746,17 @@ export const JOHTO_TALES = {
     finishLines: ['Aya. ...My great-grandmother\'s name was Aya. Sixty years at that door and the tower kept HER secret from me, not the stone\'s.', 'A tower that sways starts with a stone carried gently. That is the whole philosophy of this town in one sentence, and my family paid for it in shoe leather. Two Super Potions, trainer — and thank you.'],
   },
   tale_azalea: {
-    id: 'tale_azalea', town: 'Cinder Town', giver: 'MAIZIE', title: 'Rain for the DOZELING', johtoTale: true,
+    id: 'tale_azalea', town: 'Cinder Town', giver: 'MAIZIE', title: 'Rain for the DOZPOTAM', johtoTale: true,
     stages: [
-      'Ask the Wellkeeper Jonas in Cinder about the DOZELING rain story',
+      'Ask the Wellkeeper Jonas in Cinder about the DOZPOTAM rain story',
       'Tell Maizie the story, the way Jonas told it',
     ],
     reward: { items: { hyperpotion: 1 } }, rewardText: '1 Hyper Potion',
     bondNpc: 'maizie', bondDelta: 1,
-    revelation: 'The wellkeeper\'s grandfather swore the great drought broke the morning a whole town simply stood in the dry well and sang — the DOZELING answered first, and the rain answered them.',
-    offerLines: ['Everyone says the DOZELING brought the rain back to Cinder, once, in the big drought. Everyone! But nobody tells it PROPERLY anymore.', 'Wellkeeper Jonas tells it properly. Go and hear it from him, then tell it back to me — a Hyper Potion for the full story, no skipping the good parts.'],
-    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Kurt\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the DOZELING lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
-    finishLines: ['They SANG into the well?! And the DOZELING sang back, and THEN the rain...', 'That is the best version. That is the one I am telling from now on, and I am telling it exactly like that. A Hyper Potion — earned. Storytellers should be paid properly; Jonas says so.'],
+    revelation: 'The wellkeeper\'s grandfather swore the great drought broke the morning a whole town simply stood in the dry well and sang — the DOZPOTAM answered first, and the rain answered them.',
+    offerLines: ['Everyone says the DOZPOTAM brought the rain back to Cinder, once, in the big drought. Everyone! But nobody tells it PROPERLY anymore.', 'Wellkeeper Jonas tells it properly. Go and hear it from him, then tell it back to me — a Hyper Potion for the full story, no skipping the good parts.'],
+    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Kurt\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the DOZPOTAM lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
+    finishLines: ['They SANG into the well?! And the DOZPOTAM sang back, and THEN the rain...', 'That is the best version. That is the one I am telling from now on, and I am telling it exactly like that. A Hyper Potion — earned. Storytellers should be paid properly; Jonas says so.'],
   },
   tale_goldenrod: {
     id: 'tale_goldenrod', town: 'Signal City', giver: 'FLOWER SELLER UNA', title: 'Flowers for the Night Train', johtoTale: true,
@@ -965,7 +965,7 @@ export const JOHTO_NPC_PATCHES = [
 // it was designed inside LEGENDARY_ARCS (story-kanto.mjs) and J5
 // activated it in place there. arc_celebi IS here, and Object.assign
 // order makes this live entry supersede the designed one in
-// story-kanto.mjs — the designed steps (a POSTDUCK errand) never
+// story-kanto.mjs — the designed steps (a GALEDUCK errand) never
 // matched the shipped GS Orb story J4a actually told.
 //
 // Shared laws (all five arcs):

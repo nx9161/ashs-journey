@@ -65,7 +65,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   totodile: {
-    id: 'totodile', name: 'SNAPLET', dexNo: 158, types: ['water'],
+    id: 'totodile', name: 'CROCLET', dexNo: 158, types: ['water'],
     base: { hp: 50, atk: 65, def: 64, spa: 44, spd: 48, spe: 43 },
     catchRate: 45, growth: 'mediumslow', baseXp: 63, body: 'biped', spriteSeed: 15801,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -92,7 +92,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   sentret: {
-    id: 'sentret', name: 'VIGILET', dexNo: 161, types: ['normal'],
+    id: 'sentret', name: 'FERRETLET', dexNo: 161, types: ['normal'],
     base: { hp: 35, atk: 46, def: 34, spa: 35, spd: 45, spe: 20 },
     catchRate: 255, growth: 'mediumfast', baseXp: 43, body: 'quad', spriteSeed: 16101,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -101,7 +101,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'furret', method: 'level', level: 115 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   furret: {
-    id: 'furret', name: 'DASHLONG', dexNo: 162, types: ['normal'],
+    id: 'furret', name: 'DASHFERRET', dexNo: 162, types: ['normal'],
     base: { hp: 85, atk: 76, def: 64, spa: 45, spd: 55, spe: 90 },
     catchRate: 90, growth: 'mediumfast', baseXp: 145, body: 'quad', spriteSeed: 16201,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -128,7 +128,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   ledyba: {
-    id: 'ledyba', name: 'SPOTLET', dexNo: 165, types: ['bug', 'flying'],
+    id: 'ledyba', name: 'DOTBEETLE', dexNo: 165, types: ['bug', 'flying'],
     base: { hp: 40, atk: 20, def: 30, spa: 40, spd: 80, spe: 55 },
     catchRate: 255, growth: 'fast', baseXp: 53, body: 'bird', spriteSeed: 16501,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -146,7 +146,7 @@ export const SPECIES_JOHTO = {
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   spinarak: {
-    id: 'spinarak', name: 'SILKLET', dexNo: 167, types: ['bug', 'poison'],
+    id: 'spinarak', name: 'ARACHLET', dexNo: 167, types: ['bug', 'poison'],
     base: { hp: 40, atk: 60, def: 40, spa: 40, spd: 40, spe: 30 },
     catchRate: 255, growth: 'fast', baseXp: 50, body: 'blob', spriteSeed: 16701,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -191,7 +191,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   pichu: {
-    id: 'pichu', name: 'VOLTLET', dexNo: 172, types: ['electric'],
+    id: 'pichu', name: 'VOLTMUS', dexNo: 172, types: ['electric'],
     base: { hp: 20, atk: 40, def: 15, spa: 35, spd: 35, spe: 60 },
     catchRate: 190, growth: 'mediumfast', baseXp: 41, body: 'quad', spriteSeed: 17201,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
@@ -227,7 +227,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'togekiss', method: 'stone', stone: 'sunstone' }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   natu: {
-    id: 'natu', name: 'ORACLET', dexNo: 177, types: ['psychic', 'flying'],
+    id: 'natu', name: 'ORACHICK', dexNo: 177, types: ['psychic', 'flying'],
     base: { hp: 40, atk: 50, def: 45, spa: 70, spd: 45, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 64, body: 'bird', spriteSeed: 17701,
     eggGroups: ['flying'], hatchCounter: 20,
@@ -236,7 +236,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'xatu', method: 'level', level: 125 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   xatu: {
-    id: 'xatu', name: 'SUNSEER', dexNo: 178, types: ['psychic', 'flying'],
+    id: 'xatu', name: 'GAZEBIRD', dexNo: 178, types: ['psychic', 'flying'],
     base: { hp: 65, atk: 75, def: 70, spa: 95, spd: 70, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 165, body: 'bird', spriteSeed: 17801,
     eggGroups: ['flying'], hatchCounter: 20,
@@ -281,7 +281,7 @@ export const SPECIES_JOHTO = {
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   azumarill: {
-    id: 'azumarill', name: 'BUBBLEAR', dexNo: 184, types: ['water', 'fairy'],
+    id: 'azumarill', name: 'AQUALOP', dexNo: 184, types: ['water', 'fairy'],
     base: { hp: 100, atk: 50, def: 80, spa: 60, spd: 80, spe: 50 },
     catchRate: 75, growth: 'fast', baseXp: 189, body: 'biped', spriteSeed: 18401,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10,
@@ -308,7 +308,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   hoppip: {
-    id: 'hoppip', name: 'DRIFLET', dexNo: 187, types: ['grass', 'flying'],
+    id: 'hoppip', name: 'DRIFBUD', dexNo: 187, types: ['grass', 'flying'],
     base: { hp: 35, atk: 35, def: 40, spa: 35, spd: 55, spe: 50 },
     catchRate: 255, growth: 'mediumslow', baseXp: 50, body: 'biped', spriteSeed: 18701,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -380,7 +380,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'quagsire', method: 'level', level: 120 }, tm: [],
   },
   quagsire: {
-    id: 'quagsire', name: 'BOGLUMP', dexNo: 195, types: ['water', 'ground'],
+    id: 'quagsire', name: 'BOGNEWT', dexNo: 195, types: ['water', 'ground'],
     base: { hp: 95, atk: 85, def: 85, spa: 65, spd: 65, spe: 35 },
     catchRate: 90, growth: 'mediumfast', baseXp: 151, body: 'biped', spriteSeed: 19501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -416,7 +416,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'honchkrow', method: 'stone', stone: 'moonstone' }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   slowking: {
-    id: 'slowking', name: 'DOZECROWN', dexNo: 199, types: ['water', 'psychic'],
+    id: 'slowking', name: 'ORAPOTAM', dexNo: 199, types: ['water', 'psychic'],
     base: { hp: 95, atk: 75, def: 80, spa: 100, spd: 110, spe: 30 },
     catchRate: 70, growth: 'mediumfast', baseXp: 172, body: 'biped', spriteSeed: 19901,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -497,7 +497,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'gliscor', method: 'level', level: 310 }, tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   steelix: {
-    id: 'steelix', name: 'STRATIRON', dexNo: 208, types: ['steel', 'ground'],
+    id: 'steelix', name: 'FERROWYRM', dexNo: 208, types: ['steel', 'ground'],
     base: { hp: 75, atk: 85, def: 200, spa: 55, spd: 65, spe: 30 },
     catchRate: 25, growth: 'mediumfast', baseXp: 179, body: 'serpent', spriteSeed: 20801,
     eggGroups: ['mineral'], hatchCounter: 25,
@@ -578,7 +578,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   slugma: {
-    id: 'slugma', name: 'MAGMELT', dexNo: 218, types: ['fire'],
+    id: 'slugma', name: 'MAGSLUG', dexNo: 218, types: ['fire'],
     base: { hp: 40, atk: 40, def: 40, spa: 70, spd: 40, spe: 20 },
     catchRate: 190, growth: 'mediumfast', baseXp: 50, body: 'serpent', spriteSeed: 21801,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -641,7 +641,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   delibird: {
-    id: 'delibird', name: 'PARCELIN', dexNo: 225, types: ['ice', 'flying'],
+    id: 'delibird', name: 'PARCELGUIN', dexNo: 225, types: ['ice', 'flying'],
     base: { hp: 45, atk: 55, def: 45, spa: 65, spd: 45, spe: 75 },
     catchRate: 45, growth: 'fast', baseXp: 116, body: 'bird', spriteSeed: 22501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -767,7 +767,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'electabuzz', method: 'level', level: 130 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   magby: {
-    id: 'magby', name: 'CINDLET', dexNo: 240, types: ['fire'],
+    id: 'magby', name: 'CINDBILL', dexNo: 240, types: ['fire'],
     base: { hp: 45, atk: 75, def: 37, spa: 70, spd: 55, spe: 83 },
     catchRate: 45, growth: 'mediumfast', baseXp: 73, body: 'biped', spriteSeed: 24001,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,

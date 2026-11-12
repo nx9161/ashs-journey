@@ -113,7 +113,7 @@ export const BOND_DIALOGUE = {
       cold: ['Gym hours are posted by the door. The museum is that way. We are done here.'],
       wary: ['Back for the exhibits or the rematch talk? Either way, the stone here remembers every challenger.'],
       warm: ['You know the museum paid for this gym\'s roof twice over? Once in stone, once in patience.', 'My father said a leader\'s real job is the day OFF — anyone can be a wall. Being a door takes practice. You taught the whole city that, covering my desk.'],
-      close: ['I keep a list, you know. Every challenger who ever made STRATON actually try. It is a short list, {player}, and your name is underlined.', 'When I retire, the museum gets my badge polish and the gym gets a plaque: "A trainer once covered the desk so the leader could rest." That was you. That mattered.'],
+      close: ['I keep a list, you know. Every challenger who ever made ROCKWYRM actually try. It is a short list, {player}, and your name is underlined.', 'When I retire, the museum gets my badge polish and the gym gets a plaque: "A trainer once covered the desk so the leader could rest." That was you. That mattered.'],
     },
   },
   misty: {

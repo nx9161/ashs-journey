@@ -31,7 +31,7 @@ export const SPECIES = {
     flavor: 'Quick teeth, quicker feet. Nibbles anything left unattended.',
   },
   caterpie: {
-    id: 'caterpie', name: 'FRONLET', dexNo: 10, types: ['bug'],
+    id: 'caterpie', name: 'GRUBLET', dexNo: 10, types: ['bug'],
     base: { hp: 45, atk: 30, def: 35, spa: 20, spd: 20, spe: 45 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1001,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -39,7 +39,7 @@ export const SPECIES = {
     flavor: 'Gentle and green. Its antennae taste the air for friends.',
   },
   weedle: {
-    id: 'weedle', name: 'THORNIB', dexNo: 13, types: ['bug', 'poison'],
+    id: 'weedle', name: 'STINGRUB', dexNo: 13, types: ['bug', 'poison'],
     base: { hp: 40, atk: 35, def: 30, spa: 20, spd: 20, spe: 50 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1301,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -55,7 +55,7 @@ export const SPECIES = {
     flavor: 'Territorial and loud. Best admired from a respectful distance.',
   },
   zubat: {
-    id: 'zubat', name: 'SKREEP', dexNo: 41, types: ['poison', 'flying'],
+    id: 'zubat', name: 'SKREEBAT', dexNo: 41, types: ['poison', 'flying'],
     base: { hp: 40, atk: 45, def: 35, spa: 30, spd: 40, spe: 55 },
     catchRate: 255, growth: 'mediumfast', baseXp: 49, body: 'bird', spriteSeed: 4101,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -63,7 +63,7 @@ export const SPECIES = {
     flavor: 'Navigates by sound. Startles easily in dark tunnels.',
   },
   geodude: {
-    id: 'geodude', name: 'RUMBLING', dexNo: 74, types: ['rock', 'ground'],
+    id: 'geodude', name: 'PEBBLET', dexNo: 74, types: ['rock', 'ground'],
     base: { hp: 40, atk: 80, def: 100, spa: 30, spd: 30, spe: 20 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'blob', spriteSeed: 7401,
     eggGroups: ['mineral'], hatchCounter: 15,
@@ -71,7 +71,7 @@ export const SPECIES = {
     flavor: 'Arms of living stone. Often mistaken for an ordinary boulder.',
   },
   onix: {
-    id: 'onix', name: 'STRATON', dexNo: 95, types: ['rock', 'ground'],
+    id: 'onix', name: 'ROCKWYRM', dexNo: 95, types: ['rock', 'ground'],
     base: { hp: 35, atk: 45, def: 160, spa: 30, spd: 45, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9501,
     eggGroups: ['mineral'], hatchCounter: 25,

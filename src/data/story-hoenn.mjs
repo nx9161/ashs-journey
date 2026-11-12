@@ -176,7 +176,7 @@ export const HOENN_TRAINERS = {
   },
   lavaridge_gym_1: {
     id: 'lavaridge_gym_1', name: 'Kindler Fenn', title: 'Steamspring Gym Trainer', ai: 'basic',
-    intro: ['The floor grates breathe spring steam, and the footing here is a local tradition and a local test. Mind your step — then mind my MAGMELT.'],
+    intro: ['The floor grates breathe spring steam, and the footing here is a local tradition and a local test. Mind your step — then mind my MAGSLUG.'],
     lose: ['Out-steamed and out-fought. Flannery is at the back, past the last grate. She has been pacing. Challengers make her nervous; nervous makes her dangerous.'],
     team: [
       { species: 'slugma', level: 236 },
@@ -1009,7 +1009,7 @@ export const HOENN_NPCS = [
   { map: 'gym-lavaridge', x: 7, y: 2, name: 'FLANNERY', art: 'gym4', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a2a3a', hair: '#c83a1a', hoenn: 'flannery',
     dialogue: ['In here, we burn. That is the whole policy.'] },
   { map: 'gym-lavaridge', x: 4, y: 5, name: 'KINDLER FENN', art: 'camper', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a2a', hair: '#3a2a1a', trainer: 'lavaridge_gym_1',
-    dialogue: ['Mind your step — then mind my MAGMELT.'] },
+    dialogue: ['Mind your step — then mind my MAGSLUG.'] },
   { map: 'gym-lavaridge', x: 11, y: 5, name: 'HIKER BRASA', art: 'hiker', skin: '#c89878', shirt: '#2d4377', pants: '#3a3a2a', hair: '#1a1a0a', trainer: 'lavaridge_gym_2',
     dialogue: ['The portrait watches that door. It has never nodded at me.'] },
   { map: 'contest-slateport', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_slateport',

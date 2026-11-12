@@ -183,7 +183,7 @@ function analyze(s) {
   // ribbon share (Wave J2): the fraction of opaque rows whose opaque
   // count is <=5 px. The mass/wisp measures are blind to the sliver
   // class — a creature carried on a 2px-wide ribbon (measured:
-  // VIGILET, 0.41/0.38) has healthy mass, ~0 thin fraction (ribbon
+  // FERRETLET, 0.41/0.38) has healthy mass, ~0 thin fraction (ribbon
   // pixels keep 2 vertical neighbours), and a normalized silhouette.
   // Roster calibration: next-highest view is LANCEWASP 0.31 (wasp
   // waist + stinger, reads fine); the 0.31-0.38 band is empty, the
@@ -366,7 +366,7 @@ if (mdPath) {
   L.push('- The silhouette signature is an aspect-preserving 16x16 fit with a 35% coverage floor. The first pass (any-hit over the raw bbox) saturated and flagged 742 pairs; the shipped numbers are from the calibrated signature.', '');
   L.push('- Components are 8-connected: pixel art joins tails/whiskers/flames diagonally, and 4-connectivity shatters them into false specks (the repo orphan rule is likewise 8-based). Specks that remain are genuinely detached at render.', '');
   L.push('- PRIMARA correction: the Wave G sheet grade called it wispy. Measured: mass 513/602 and wisp 1.8% are FINE. Its failure is value depth (2 steps — pale on pale) + 2 front specks. The flat-shading class, not the mass class.', '');
-  L.push('- Ribbon share (Wave J2 addendum): rows carrying <=5 opaque px, as a share of opaque rows. The mass/wisp/silhouette measures are all blind to the sliver class (a 2px ribbon keeps 2 vertical neighbours per pixel, and the signature normalizes its bbox away). VIGILET measured 0.41/0.38 — the roster outlier; next-highest view LANCEWASP 0.31. FAIL line 0.35 sits in the empty 0.31-0.38 band, so no previously-graded record changes class under the new rule.', '');
+  L.push('- Ribbon share (Wave J2 addendum): rows carrying <=5 opaque px, as a share of opaque rows. The mass/wisp/silhouette measures are all blind to the sliver class (a 2px ribbon keeps 2 vertical neighbours per pixel, and the signature normalizes its bbox away). FERRETLET measured 0.41/0.38 — the roster outlier; next-highest view LANCEWASP 0.31. FAIL line 0.35 sits in the empty 0.31-0.38 band, so no previously-graded record changes class under the new rule.', '');
   L.push('- Flag dispositions are decided per tranche, in three classes: clear twins -> junior redesign; evolution-line pairs -> strengthen the junior\'s escalation element; back-view-only collisions -> an authored back marking. The gate flags; it does not auto-condemn.', '');
   L.push('## Redraw tranches (queue order over the FAIL + flag-junior set)', '');
   const redrawSet = records.filter((r) => r.grade === 'FAIL' || flags.some((f) => !f.exempt && f.junior === r.id));

@@ -111870,7 +111870,7 @@ const SPECIES = {
     flavor: 'Quick teeth, quicker feet. Nibbles anything left unattended.',
   },
   caterpie: {
-    id: 'caterpie', name: 'FRONLET', dexNo: 10, types: ['bug'],
+    id: 'caterpie', name: 'GRUBLET', dexNo: 10, types: ['bug'],
     base: { hp: 45, atk: 30, def: 35, spa: 20, spd: 20, spe: 45 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1001,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -111878,7 +111878,7 @@ const SPECIES = {
     flavor: 'Gentle and green. Its antennae taste the air for friends.',
   },
   weedle: {
-    id: 'weedle', name: 'THORNIB', dexNo: 13, types: ['bug', 'poison'],
+    id: 'weedle', name: 'STINGRUB', dexNo: 13, types: ['bug', 'poison'],
     base: { hp: 40, atk: 35, def: 30, spa: 20, spd: 20, spe: 50 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1301,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -111894,7 +111894,7 @@ const SPECIES = {
     flavor: 'Territorial and loud. Best admired from a respectful distance.',
   },
   zubat: {
-    id: 'zubat', name: 'SKREEP', dexNo: 41, types: ['poison', 'flying'],
+    id: 'zubat', name: 'SKREEBAT', dexNo: 41, types: ['poison', 'flying'],
     base: { hp: 40, atk: 45, def: 35, spa: 30, spd: 40, spe: 55 },
     catchRate: 255, growth: 'mediumfast', baseXp: 49, body: 'bird', spriteSeed: 4101,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -111902,7 +111902,7 @@ const SPECIES = {
     flavor: 'Navigates by sound. Startles easily in dark tunnels.',
   },
   geodude: {
-    id: 'geodude', name: 'RUMBLING', dexNo: 74, types: ['rock', 'ground'],
+    id: 'geodude', name: 'PEBBLET', dexNo: 74, types: ['rock', 'ground'],
     base: { hp: 40, atk: 80, def: 100, spa: 30, spd: 30, spe: 20 },
     catchRate: 255, growth: 'mediumslow', baseXp: 60, body: 'blob', spriteSeed: 7401,
     eggGroups: ['mineral'], hatchCounter: 15,
@@ -111910,7 +111910,7 @@ const SPECIES = {
     flavor: 'Arms of living stone. Often mistaken for an ordinary boulder.',
   },
   onix: {
-    id: 'onix', name: 'STRATON', dexNo: 95, types: ['rock', 'ground'],
+    id: 'onix', name: 'ROCKWYRM', dexNo: 95, types: ['rock', 'ground'],
     base: { hp: 35, atk: 45, def: 160, spa: 30, spd: 45, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9501,
     eggGroups: ['mineral'], hatchCounter: 25,
@@ -112094,7 +112094,7 @@ const SPECIES2 = {
     evo: { to: 'pidgeot', method: 'level', level: 36 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   pidgeot: {
-    id: 'pidgeot', name: 'AERARCH', dexNo: 18, types: ['normal', 'flying'],
+    id: 'pidgeot', name: 'AERHAWK', dexNo: 18, types: ['normal', 'flying'],
     base: { hp: 83, atk: 80, def: 75, spa: 70, spd: 70, spe: 101 },
     catchRate: 45, growth: 'mediumslow', baseXp: 216, body: 'bird', spriteSeed: 1801,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -112103,7 +112103,7 @@ const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   raticate: {
-    id: 'raticate', name: 'GNAWBRUTE', dexNo: 20, types: ['normal'],
+    id: 'raticate', name: 'BRUTERAT', dexNo: 20, types: ['normal'],
     base: { hp: 55, atk: 81, def: 60, spa: 50, spd: 70, spe: 97 },
     catchRate: 90, growth: 'mediumfast', baseXp: 145, body: 'quad', spriteSeed: 2001,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -112148,7 +112148,7 @@ const SPECIES2 = {
     evo: { to: 'raichu', method: 'stone', stone: 'thunderstone' }, tm: [1, 5, 6, 9, 10, 16, 19, 24, 25, 31, 32, 33, 34, 39, 40, 44, 45, 50, 105],
   },
   raichu: {
-    id: 'raichu', name: 'GALVANIK', dexNo: 26, types: ['electric'],
+    id: 'raichu', name: 'GALVAMUS', dexNo: 26, types: ['electric'],
     base: { hp: 60, atk: 90, def: 55, spa: 90, spd: 80, spe: 110 },
     catchRate: 75, growth: 'mediumfast', baseXp: 243, body: 'quad', spriteSeed: 2601,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -112184,7 +112184,7 @@ const SPECIES2 = {
     evo: { to: 'nidorina', method: 'level', level: 16 }, tm: [6, 8, 9, 10, 11, 12, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidorina: {
-    id: 'nidorina', name: 'VENOBELLE', dexNo: 30, types: ['poison'],
+    id: 'nidorina', name: 'VENODOE', dexNo: 30, types: ['poison'],
     base: { hp: 70, atk: 62, def: 67, spa: 55, spd: 55, spe: 56 },
     catchRate: 120, growth: 'mediumslow', baseXp: 128, body: 'quad', spriteSeed: 3001,
     eggGroups: ['no-eggs'], hatchCounter: 20,
@@ -112193,7 +112193,7 @@ const SPECIES2 = {
     evo: { to: 'nidoqueen', method: 'stone', stone: 'moonstone' }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 24, 25, 31, 32, 33, 34, 44, 50],
   },
   nidoqueen: {
-    id: 'nidoqueen', name: 'REGITOXA', dexNo: 31, types: ['poison', 'ground'],
+    id: 'nidoqueen', name: 'TOXAHIND', dexNo: 31, types: ['poison', 'ground'],
     base: { hp: 90, atk: 92, def: 87, spa: 75, spd: 85, spe: 76 },
     catchRate: 45, growth: 'mediumslow', baseXp: 253, body: 'biped', spriteSeed: 3101,
     eggGroups: ['no-eggs'], hatchCounter: 20,
@@ -112341,7 +112341,7 @@ const SPECIES2 = {
     evo: { to: 'venomoth', method: 'level', level: 31 }, tm: [6, 9, 10, 20, 22, 29, 31, 32, 33, 34, 44, 46, 50, 105],
   },
   venomoth: {
-    id: 'venomoth', name: 'DUSTVEIL', dexNo: 49, types: ['bug', 'poison'],
+    id: 'venomoth', name: 'POWDERMOTH', dexNo: 49, types: ['bug', 'poison'],
     base: { hp: 70, atk: 65, def: 60, spa: 90, spd: 75, spe: 90 },
     catchRate: 75, growth: 'mediumfast', baseXp: 158, body: 'bird', spriteSeed: 4901,
     eggGroups: ['bug'], hatchCounter: 20,
@@ -112395,7 +112395,7 @@ const SPECIES2 = {
     evo: { to: 'golduck', method: 'level', level: 33 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   golduck: {
-    id: 'golduck', name: 'TORRIDUCK', dexNo: 55, types: ['water'],
+    id: 'golduck', name: 'SEERDUCK', dexNo: 55, types: ['water'],
     base: { hp: 80, atk: 82, def: 78, spa: 95, spd: 80, spe: 85 },
     catchRate: 75, growth: 'mediumfast', baseXp: 175, body: 'biped', spriteSeed: 5501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -112440,7 +112440,7 @@ const SPECIES2 = {
     evo: { to: 'poliwhirl', method: 'level', level: 25 }, tm: [6, 9, 10, 11, 12, 13, 14, 31, 32, 34, 44, 46, 50, 103],
   },
   poliwhirl: {
-    id: 'poliwhirl', name: 'WHIRLBOG', dexNo: 61, types: ['water'],
+    id: 'poliwhirl', name: 'WHIRLFROG', dexNo: 61, types: ['water'],
     base: { hp: 65, atk: 65, def: 65, spa: 50, spd: 50, spe: 90 },
     catchRate: 120, growth: 'mediumslow', baseXp: 135, body: 'biped', spriteSeed: 6101,
     eggGroups: ['water1'], hatchCounter: 20,
@@ -112597,7 +112597,7 @@ const SPECIES2 = {
     tm: [6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   slowpoke: {
-    id: 'slowpoke', name: 'DOZELING', dexNo: 79, types: ['water', 'psychic'],
+    id: 'slowpoke', name: 'DOZPOTAM', dexNo: 79, types: ['water', 'psychic'],
     base: { hp: 90, atk: 65, def: 65, spa: 40, spd: 40, spe: 15 },
     catchRate: 190, growth: 'mediumfast', baseXp: 99, body: 'quad', spriteSeed: 7901,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -112610,7 +112610,7 @@ const SPECIES2 = {
     ], tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   slowbro: {
-    id: 'slowbro', name: 'DOZEHIDE', dexNo: 80, types: ['water', 'psychic'],
+    id: 'slowbro', name: 'POTAMCONCH', dexNo: 80, types: ['water', 'psychic'],
     base: { hp: 95, atk: 75, def: 110, spa: 100, spd: 80, spe: 30 },
     catchRate: 75, growth: 'mediumfast', baseXp: 172, body: 'quad', spriteSeed: 8001,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -112637,7 +112637,7 @@ const SPECIES2 = {
     evo: { to: 'magnezone', method: 'level', level: 310 }, tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   farfetchd: {
-    id: 'farfetchd', name: 'POSTDUCK', dexNo: 83, types: ['normal', 'flying'],
+    id: 'farfetchd', name: 'GALEDUCK', dexNo: 83, types: ['normal', 'flying'],
     base: { hp: 52, atk: 90, def: 55, spa: 58, spd: 62, spe: 60 },
     catchRate: 45, growth: 'mediumfast', baseXp: 132, body: 'bird', spriteSeed: 8301,
     eggGroups: ['flying', 'ground'], hatchCounter: 20,
@@ -112664,7 +112664,7 @@ const SPECIES2 = {
     tm: [4, 6, 8, 9, 10, 15, 20, 31, 32, 33, 34, 39, 44, 49, 50, 102],
   },
   seel: {
-    id: 'seel', name: 'FLOPLET', dexNo: 86, types: ['water'],
+    id: 'seel', name: 'SEALET', dexNo: 86, types: ['water'],
     base: { hp: 65, atk: 45, def: 55, spa: 45, spd: 70, spe: 45 },
     catchRate: 190, growth: 'mediumfast', baseXp: 65, body: 'fish', spriteSeed: 8601,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -112673,7 +112673,7 @@ const SPECIES2 = {
     evo: { to: 'dewgong', method: 'level', level: 34 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   dewgong: {
-    id: 'dewgong', name: 'FROSTINE', dexNo: 87, types: ['water', 'ice'],
+    id: 'dewgong', name: 'FROSTTUSK', dexNo: 87, types: ['water', 'ice'],
     base: { hp: 90, atk: 70, def: 80, spa: 70, spd: 95, spe: 70 },
     catchRate: 75, growth: 'mediumfast', baseXp: 166, body: 'fish', spriteSeed: 8701,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -112754,7 +112754,7 @@ const SPECIES2 = {
     evo: { to: 'hypno', method: 'level', level: 26 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   hypno: {
-    id: 'hypno', name: 'SOMNOLORD', dexNo: 97, types: ['psychic'],
+    id: 'hypno', name: 'SOMNOTAPIR', dexNo: 97, types: ['psychic'],
     base: { hp: 85, atk: 73, def: 70, spa: 73, spd: 115, spe: 67 },
     catchRate: 75, growth: 'mediumfast', baseXp: 169, body: 'biped', spriteSeed: 9701,
     eggGroups: ['humanshape'], hatchCounter: 20,
@@ -112853,7 +112853,7 @@ const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 31, 32, 34, 35, 44, 50, 104],
   },
   lickitung: {
-    id: 'lickitung', name: 'SLURPARD', dexNo: 108, types: ['normal'],
+    id: 'lickitung', name: 'SLURPZARD', dexNo: 108, types: ['normal'],
     base: { hp: 90, atk: 55, def: 75, spa: 60, spd: 75, spe: 30 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'biped', spriteSeed: 10801,
     eggGroups: ['monster'], hatchCounter: 20,
@@ -112925,7 +112925,7 @@ const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   horsea: {
-    id: 'horsea', name: 'SEAPIP', dexNo: 116, types: ['water'],
+    id: 'horsea', name: 'SEAPONY', dexNo: 116, types: ['water'],
     base: { hp: 30, atk: 40, def: 70, spa: 70, spd: 35, spe: 60 },
     catchRate: 225, growth: 'mediumfast', baseXp: 59, body: 'fish', spriteSeed: 11601,
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,
@@ -112952,7 +112952,7 @@ const SPECIES2 = {
     evo: { to: 'seaking', method: 'level', level: 33 }, tm: [6, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   seaking: {
-    id: 'seaking', name: 'VEILARCH', dexNo: 119, types: ['water'],
+    id: 'seaking', name: 'FINARCH', dexNo: 119, types: ['water'],
     base: { hp: 80, atk: 92, def: 65, spa: 65, spd: 80, spe: 68 },
     catchRate: 60, growth: 'mediumfast', baseXp: 158, body: 'fish', spriteSeed: 11901,
     eggGroups: ['water2'], hatchCounter: 20,
@@ -113015,7 +113015,7 @@ const SPECIES2 = {
     evo: { to: 'electivire', method: 'trade' }, tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 39, 40, 42, 44, 45, 46, 49, 50, 104, 105],
   },
   magmar: {
-    id: 'magmar', name: 'LAVAMAND', dexNo: 126, types: ['fire'],
+    id: 'magmar', name: 'LAVAMANDER', dexNo: 126, types: ['fire'],
     base: { hp: 65, atk: 95, def: 57, spa: 100, spd: 85, spe: 93 },
     catchRate: 45, growth: 'mediumfast', baseXp: 173, body: 'biped', spriteSeed: 12601,
     eggGroups: ['humanshape'], hatchCounter: 25,
@@ -113177,7 +113177,7 @@ const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 20, 28, 31, 32, 34, 38, 39, 44, 50, 102],
   },
   snorlax: {
-    id: 'snorlax', name: 'NAPPASAUR', dexNo: 143, types: ['normal'],
+    id: 'snorlax', name: 'SOMNIBEAR', dexNo: 143, types: ['normal'],
     base: { hp: 160, atk: 110, def: 65, spa: 65, spd: 110, spe: 30 },
     catchRate: 25, growth: 'slow', baseXp: 189, body: 'biped', spriteSeed: 14301,
     eggGroups: ['monster'], hatchCounter: 40,
@@ -113265,11 +113265,11 @@ const SPECIES2 = {
   // Anime/book canon, absent from game data; stats/types/learnsets are
   // this project's own original take on the canon facts.
   crystalonix: {
-    // Crystal STRATON: a body of living crystal instead of rock. Canon: it
+    // Crystal ROCKWYRM: a body of living crystal instead of rock. Canon: it
     // shrugs off Fire yet fears Water. Our take: Rock/Ice — Ice sheds the
     // Fire weakness, Water still strikes the Rock half double, and the
     // crystal trades raw Defense for Special shine.
-    id: 'crystalonix', name: 'Crystal STRATON', dexNo: 95, types: ['rock', 'ice'],
+    id: 'crystalonix', name: 'Crystal ROCKWYRM', dexNo: 95, types: ['rock', 'ice'],
     base: { hp: 45, atk: 45, def: 110, spa: 55, spd: 65, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 77, body: 'serpent', spriteSeed: 9502,
     eggGroups: ['mineral'], hatchCounter: 25,
@@ -113306,7 +113306,7 @@ const SPECIES2 = {
   },
   giantdragonite: {
     // The lighthouse giant: same gentle heart, enormous frame. Stats are
-    // STRATON-scale upsized: huge bulk, heavy blows, slower on the wing.
+    // ROCKWYRM-scale upsized: huge bulk, heavy blows, slower on the wing.
     id: 'giantdragonite', name: 'Giant WYRMARCH', dexNo: 149, types: ['dragon', 'flying'],
     base: { hp: 121, atk: 154, def: 115, spa: 120, spd: 120, spe: 70 },
     catchRate: 45, growth: 'slow', baseXp: 300, body: 'biped', spriteSeed: 14902,
@@ -113332,7 +113332,7 @@ const SPECIES2 = {
     evo: { to: 'togetic', method: 'level', level: 25 },
   },
   marill: {
-    id: 'marill', name: 'AQUALET', dexNo: 183, types: ['water', 'fairy'],
+    id: 'marill', name: 'AQUAMUS', dexNo: 183, types: ['water', 'fairy'],
     base: { hp: 70, atk: 20, def: 50, spa: 20, spd: 50, spe: 40 },
     catchRate: 190, growth: 'fast', baseXp: 88, body: 'quad', spriteSeed: 18301,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10,
@@ -113341,7 +113341,7 @@ const SPECIES2 = {
     evo: { to: 'azumarill', method: 'level', level: 18 },
   },
   snubbull: {
-    id: 'snubbull', name: 'GRUMPLET', dexNo: 209, types: ['fairy'],
+    id: 'snubbull', name: 'GRUMPBULL', dexNo: 209, types: ['fairy'],
     base: { hp: 60, atk: 80, def: 50, spa: 40, spd: 40, spe: 30 },
     catchRate: 190, growth: 'fast', baseXp: 60, body: 'quad', spriteSeed: 20901,
     eggGroups: ['ground', 'fairy'], hatchCounter: 20,
@@ -113458,7 +113458,7 @@ const SPECIES_JOHTO = {
     tm: [1, 2, 3, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 39, 40, 44, 50, 101, 102, 104],
   },
   totodile: {
-    id: 'totodile', name: 'SNAPLET', dexNo: 158, types: ['water'],
+    id: 'totodile', name: 'CROCLET', dexNo: 158, types: ['water'],
     base: { hp: 50, atk: 65, def: 64, spa: 44, spd: 48, spe: 43 },
     catchRate: 45, growth: 'mediumslow', baseXp: 63, body: 'biped', spriteSeed: 15801,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -113485,7 +113485,7 @@ const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   sentret: {
-    id: 'sentret', name: 'VIGILET', dexNo: 161, types: ['normal'],
+    id: 'sentret', name: 'FERRETLET', dexNo: 161, types: ['normal'],
     base: { hp: 35, atk: 46, def: 34, spa: 35, spd: 45, spe: 20 },
     catchRate: 255, growth: 'mediumfast', baseXp: 43, body: 'quad', spriteSeed: 16101,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -113494,7 +113494,7 @@ const SPECIES_JOHTO = {
     evo: { to: 'furret', method: 'level', level: 115 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   furret: {
-    id: 'furret', name: 'DASHLONG', dexNo: 162, types: ['normal'],
+    id: 'furret', name: 'DASHFERRET', dexNo: 162, types: ['normal'],
     base: { hp: 85, atk: 76, def: 64, spa: 45, spd: 55, spe: 90 },
     catchRate: 90, growth: 'mediumfast', baseXp: 145, body: 'quad', spriteSeed: 16201,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -113521,7 +113521,7 @@ const SPECIES_JOHTO = {
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   ledyba: {
-    id: 'ledyba', name: 'SPOTLET', dexNo: 165, types: ['bug', 'flying'],
+    id: 'ledyba', name: 'DOTBEETLE', dexNo: 165, types: ['bug', 'flying'],
     base: { hp: 40, atk: 20, def: 30, spa: 40, spd: 80, spe: 55 },
     catchRate: 255, growth: 'fast', baseXp: 53, body: 'bird', spriteSeed: 16501,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -113539,7 +113539,7 @@ const SPECIES_JOHTO = {
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   spinarak: {
-    id: 'spinarak', name: 'SILKLET', dexNo: 167, types: ['bug', 'poison'],
+    id: 'spinarak', name: 'ARACHLET', dexNo: 167, types: ['bug', 'poison'],
     base: { hp: 40, atk: 60, def: 40, spa: 40, spd: 40, spe: 30 },
     catchRate: 255, growth: 'fast', baseXp: 50, body: 'blob', spriteSeed: 16701,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -113584,7 +113584,7 @@ const SPECIES_JOHTO = {
     tm: [6, 9, 10, 15, 20, 24, 25, 30, 31, 32, 33, 34, 39, 44, 45, 49, 50, 105],
   },
   pichu: {
-    id: 'pichu', name: 'VOLTLET', dexNo: 172, types: ['electric'],
+    id: 'pichu', name: 'VOLTMUS', dexNo: 172, types: ['electric'],
     base: { hp: 20, atk: 40, def: 15, spa: 35, spd: 35, spe: 60 },
     catchRate: 190, growth: 'mediumfast', baseXp: 41, body: 'quad', spriteSeed: 17201,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 10,
@@ -113620,7 +113620,7 @@ const SPECIES_JOHTO = {
     evo: { to: 'togekiss', method: 'stone', stone: 'sunstone' }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   natu: {
-    id: 'natu', name: 'ORACLET', dexNo: 177, types: ['psychic', 'flying'],
+    id: 'natu', name: 'ORACHICK', dexNo: 177, types: ['psychic', 'flying'],
     base: { hp: 40, atk: 50, def: 45, spa: 70, spd: 45, spe: 70 },
     catchRate: 190, growth: 'mediumfast', baseXp: 64, body: 'bird', spriteSeed: 17701,
     eggGroups: ['flying'], hatchCounter: 20,
@@ -113629,7 +113629,7 @@ const SPECIES_JOHTO = {
     evo: { to: 'xatu', method: 'level', level: 125 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 16, 20, 26, 27, 28, 29, 30, 31, 32, 33, 34, 38, 39, 42, 44, 45, 46, 50, 103, 105],
   },
   xatu: {
-    id: 'xatu', name: 'SUNSEER', dexNo: 178, types: ['psychic', 'flying'],
+    id: 'xatu', name: 'GAZEBIRD', dexNo: 178, types: ['psychic', 'flying'],
     base: { hp: 65, atk: 75, def: 70, spa: 95, spd: 70, spe: 95 },
     catchRate: 75, growth: 'mediumfast', baseXp: 165, body: 'bird', spriteSeed: 17801,
     eggGroups: ['flying'], hatchCounter: 20,
@@ -113674,7 +113674,7 @@ const SPECIES_JOHTO = {
     tm: [3, 6, 9, 10, 15, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   azumarill: {
-    id: 'azumarill', name: 'BUBBLEAR', dexNo: 184, types: ['water', 'fairy'],
+    id: 'azumarill', name: 'AQUALOP', dexNo: 184, types: ['water', 'fairy'],
     base: { hp: 100, atk: 50, def: 80, spa: 60, spd: 80, spe: 50 },
     catchRate: 75, growth: 'fast', baseXp: 189, body: 'biped', spriteSeed: 18401,
     eggGroups: ['water1', 'fairy'], hatchCounter: 10,
@@ -113701,7 +113701,7 @@ const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   hoppip: {
-    id: 'hoppip', name: 'DRIFLET', dexNo: 187, types: ['grass', 'flying'],
+    id: 'hoppip', name: 'DRIFBUD', dexNo: 187, types: ['grass', 'flying'],
     base: { hp: 35, atk: 35, def: 40, spa: 35, spd: 55, spe: 50 },
     catchRate: 255, growth: 'mediumslow', baseXp: 50, body: 'biped', spriteSeed: 18701,
     eggGroups: ['fairy', 'plant'], hatchCounter: 20,
@@ -113773,7 +113773,7 @@ const SPECIES_JOHTO = {
     evo: { to: 'quagsire', method: 'level', level: 120 }, tm: [],
   },
   quagsire: {
-    id: 'quagsire', name: 'BOGLUMP', dexNo: 195, types: ['water', 'ground'],
+    id: 'quagsire', name: 'BOGNEWT', dexNo: 195, types: ['water', 'ground'],
     base: { hp: 95, atk: 85, def: 85, spa: 65, spd: 65, spe: 35 },
     catchRate: 90, growth: 'mediumfast', baseXp: 151, body: 'biped', spriteSeed: 19501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -113809,7 +113809,7 @@ const SPECIES_JOHTO = {
     evo: { to: 'honchkrow', method: 'stone', stone: 'moonstone' }, tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   slowking: {
-    id: 'slowking', name: 'DOZECROWN', dexNo: 199, types: ['water', 'psychic'],
+    id: 'slowking', name: 'ORAPOTAM', dexNo: 199, types: ['water', 'psychic'],
     base: { hp: 95, atk: 75, def: 80, spa: 100, spd: 110, spe: 30 },
     catchRate: 70, growth: 'mediumfast', baseXp: 172, body: 'biped', spriteSeed: 19901,
     eggGroups: ['monster', 'water1'], hatchCounter: 20,
@@ -113890,7 +113890,7 @@ const SPECIES_JOHTO = {
     evo: { to: 'gliscor', method: 'level', level: 310 }, tm: [6, 8, 9, 10, 15, 20, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   steelix: {
-    id: 'steelix', name: 'STRATIRON', dexNo: 208, types: ['steel', 'ground'],
+    id: 'steelix', name: 'FERROWYRM', dexNo: 208, types: ['steel', 'ground'],
     base: { hp: 75, atk: 85, def: 200, spa: 55, spd: 65, spe: 30 },
     catchRate: 25, growth: 'mediumfast', baseXp: 179, body: 'serpent', spriteSeed: 20801,
     eggGroups: ['mineral'], hatchCounter: 25,
@@ -113971,7 +113971,7 @@ const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   slugma: {
-    id: 'slugma', name: 'MAGMELT', dexNo: 218, types: ['fire'],
+    id: 'slugma', name: 'MAGSLUG', dexNo: 218, types: ['fire'],
     base: { hp: 40, atk: 40, def: 40, spa: 70, spd: 40, spe: 20 },
     catchRate: 190, growth: 'mediumfast', baseXp: 50, body: 'serpent', spriteSeed: 21801,
     eggGroups: ['indeterminate'], hatchCounter: 20,
@@ -114034,7 +114034,7 @@ const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   delibird: {
-    id: 'delibird', name: 'PARCELIN', dexNo: 225, types: ['ice', 'flying'],
+    id: 'delibird', name: 'PARCELGUIN', dexNo: 225, types: ['ice', 'flying'],
     base: { hp: 45, atk: 55, def: 45, spa: 65, spd: 45, spe: 75 },
     catchRate: 45, growth: 'fast', baseXp: 116, body: 'bird', spriteSeed: 22501,
     eggGroups: ['water1', 'ground'], hatchCounter: 20,
@@ -114160,7 +114160,7 @@ const SPECIES_JOHTO = {
     evo: { to: 'electabuzz', method: 'level', level: 130 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   magby: {
-    id: 'magby', name: 'CINDLET', dexNo: 240, types: ['fire'],
+    id: 'magby', name: 'CINDBILL', dexNo: 240, types: ['fire'],
     base: { hp: 45, atk: 75, def: 37, spa: 70, spd: 55, spe: 83 },
     catchRate: 45, growth: 'mediumfast', baseXp: 73, body: 'biped', spriteSeed: 24001,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
@@ -116079,7 +116079,7 @@ const SPECIES_SINNOH = {
     catchRate: 50, growth: 'slow', baseXp: 78, body: 'biped', spriteSeed: 44601,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 40,
     learnset: { 1: ['tackle', 'metronome'], 304: ['defensecurl'], 309: ['amnesia'], 312: ['lick'], 320: ['screech'], 333: ['bodyslam'] },
-    flavor: 'It eats its weight, naps it off, and starts the paperwork again. It joins NAPPASAUR at level 310 here — friendship, in this region, is patience.',
+    flavor: 'It eats its weight, naps it off, and starts the paperwork again. It joins SOMNIBEAR at level 310 here — friendship, in this region, is patience.',
     evo: { to: 'snorlax', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 50, 101, 103, 104],
   },
   riolu: {
@@ -116965,8 +116965,8 @@ const CONTEST_NPCS = {
 const FORMS = [
   // ---- Alola (18) ----
   { id: 'rattata-alola', speciesId: 19, name: 'Alolan SCURRAT', kind: 'regional', region: 'alola', types: ['dark', 'normal'], note: 'Nocturnal city scavenger with a fine nose for stored food.' },
-  { id: 'raticate-alola', speciesId: 20, name: 'Alolan GNAWBRUTE', kind: 'regional', region: 'alola', types: ['dark', 'normal'], note: 'Hoards berries in its cheeks until they bulge like saddlebags.' },
-  { id: 'raichu-alola', speciesId: 26, name: 'Alolan GALVANIK', kind: 'regional', region: 'alola', types: ['electric', 'psychic'], note: 'Surfs through the air on its own tail, smelling of pancakes.' },
+  { id: 'raticate-alola', speciesId: 20, name: 'Alolan BRUTERAT', kind: 'regional', region: 'alola', types: ['dark', 'normal'], note: 'Hoards berries in its cheeks until they bulge like saddlebags.' },
+  { id: 'raichu-alola', speciesId: 26, name: 'Alolan GALVAMUS', kind: 'regional', region: 'alola', types: ['electric', 'psychic'], note: 'Surfs through the air on its own tail, smelling of pancakes.' },
   { id: 'sandshrew-alola', speciesId: 27, name: 'Alolan ARMADUNE', kind: 'regional', region: 'alola', types: ['ice', 'steel'], note: 'An igloo with legs; it slides downhill on its belly.' },
   { id: 'sandslash-alola', speciesId: 28, name: 'Alolan QUILLDUNE', kind: 'regional', region: 'alola', types: ['ice', 'steel'], note: 'Icicle spines double as climbing hooks on frozen cliffs.' },
   { id: 'vulpix-alola', speciesId: 37, name: 'Alolan VULCANIS', kind: 'regional', region: 'alola', types: ['ice'], note: 'Guides lost hikers down snowy slopes for the praise.' },
@@ -116975,7 +116975,7 @@ const FORMS = [
   { id: 'dugtrio-alola', speciesId: 51, name: 'Alolan TRIMOLE', kind: 'regional', region: 'alola', types: ['ground', 'steel'], note: 'Worshipped as a land deity; taking its hair is taboo.' },
   { id: 'meowth-alola', speciesId: 52, name: 'Alolan TINKLETOM', kind: 'regional', region: 'alola', types: ['dark'], note: 'Pampered by old royalty into a smug, scheming house cat.' },
   { id: 'persian-alola', speciesId: 53, name: 'Alolan MAJESTOM', kind: 'regional', region: 'alola', types: ['dark'], note: 'Its round face is a point of pride it shows off constantly.' },
-  { id: 'geodude-alola', speciesId: 74, name: 'Alolan RUMBLING', kind: 'regional', region: 'alola', types: ['rock', 'electric'], note: 'Magnetic boulders cling to its body after every scuffle.' },
+  { id: 'geodude-alola', speciesId: 74, name: 'Alolan PEBBLET', kind: 'regional', region: 'alola', types: ['rock', 'electric'], note: 'Magnetic boulders cling to its body after every scuffle.' },
   { id: 'graveler-alola', speciesId: 75, name: 'Alolan CRAGBRUTE', kind: 'regional', region: 'alola', types: ['rock', 'electric'], note: 'It snacks on charged crystals and sparks when content.' },
   { id: 'golem-alola', speciesId: 76, name: 'Alolan TECTON', kind: 'regional', region: 'alola', types: ['rock', 'electric'], note: 'Launches smaller kin from the railgun on its back.' },
   { id: 'grimer-alola', speciesId: 88, name: 'Alolan SLUDGLING', kind: 'regional', region: 'alola', types: ['poison', 'dark'], note: 'Island trash duty gave it fangs and a greener grin.' },
@@ -116987,11 +116987,11 @@ const FORMS = [
   { id: 'perrserker', speciesId: 52, name: 'Perrserker', kind: 'regional', region: 'galar', types: ['steel'], note: 'Galarian TINKLETOM evolution; fights with horned-helm enthusiasm.' },
   { id: 'ponyta-galar', speciesId: 77, name: 'Galarian EMBERFOAL', kind: 'regional', region: 'galar', types: ['psychic'], note: 'Pastel mane, healing horn, and a very high opinion of itself.' },
   { id: 'rapidash-galar', speciesId: 78, name: 'Galarian PYROGALOP', kind: 'regional', region: 'galar', types: ['psychic', 'fairy'], note: 'Gallops through ancient forests trailing stardust.' },
-  { id: 'slowpoke-galar', speciesId: 79, name: 'Galarian DOZELING', kind: 'regional', region: 'galar', types: ['psychic'], note: 'Spicy seeds tinted its head gold and its thoughts slower.' },
-  { id: 'slowbro-galar', speciesId: 80, name: 'Galarian DOZEHIDE', kind: 'regional', region: 'galar', types: ['poison', 'psychic'], note: 'The shell on its arm fires poison like a trick cannon.' },
-  { id: 'slowking-galar', speciesId: 80, name: 'Galarian DOZECROWN', kind: 'regional', region: 'galar', types: ['poison', 'psychic'], note: 'Chants eerie hexes through the shell crowning its head.' },
-  { id: 'farfetchd-galar', speciesId: 83, name: 'Galarian POSTDUCK', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Hauls a leek so large it fights like a battering ram.' },
-  { id: 'sirfetchd', speciesId: 83, name: 'LANCEBILL', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Galarian POSTDUCK evolution; a leek lance and leaf shield.' },
+  { id: 'slowpoke-galar', speciesId: 79, name: 'Galarian DOZPOTAM', kind: 'regional', region: 'galar', types: ['psychic'], note: 'Spicy seeds tinted its head gold and its thoughts slower.' },
+  { id: 'slowbro-galar', speciesId: 80, name: 'Galarian POTAMCONCH', kind: 'regional', region: 'galar', types: ['poison', 'psychic'], note: 'The shell on its arm fires poison like a trick cannon.' },
+  { id: 'slowking-galar', speciesId: 80, name: 'Galarian ORAPOTAM', kind: 'regional', region: 'galar', types: ['poison', 'psychic'], note: 'Chants eerie hexes through the shell crowning its head.' },
+  { id: 'farfetchd-galar', speciesId: 83, name: 'Galarian GALEDUCK', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Hauls a leek so large it fights like a battering ram.' },
+  { id: 'sirfetchd', speciesId: 83, name: 'LANCEBILL', kind: 'regional', region: 'galar', types: ['fighting'], note: 'Galarian GALEDUCK evolution; a leek lance and leaf shield.' },
   { id: 'weezing-galar', speciesId: 110, name: 'Galarian TWINSMOG', kind: 'regional', region: 'galar', types: ['poison', 'fairy'], note: 'Wears smokestacks like top hats and cleans the air it eats.' },
   { id: 'mrmime-galar', speciesId: 122, name: 'Galarian PANTOMIM', kind: 'regional', region: 'galar', types: ['ice', 'psychic'], note: 'Tap-dances on ice floors of its own making.' },
   { id: 'mrrime', speciesId: 122, name: 'TAPFROST', kind: 'regional', region: 'galar', types: ['ice', 'psychic'], note: 'Galarian PANTOMIM evolution; a cane, a stage, and perfect timing.' },
@@ -117041,9 +117041,9 @@ const FORMS = [
   { id: 'mega-charizard-y', speciesId: 6, name: 'Mega INFERNOX Y', kind: 'mega', region: 'kalos', types: ['fire', 'flying'], note: 'Mega form; sharper wings and drought-bringing heat.' },
   { id: 'mega-blastoise', speciesId: 9, name: 'Mega ABYSSAR', kind: 'mega', region: 'kalos', types: ['water'], note: 'Mega form; one great cannon fed by two arm jets.' },
   { id: 'mega-beedrill', speciesId: 15, name: 'Mega LANCEWASP', kind: 'mega', region: 'kalos', types: ['bug', 'poison'], note: 'Mega form; every limb becomes another lance.' },
-  { id: 'mega-pidgeot', speciesId: 18, name: 'Mega AERARCH', kind: 'mega', region: 'kalos', types: ['normal', 'flying'], note: 'Mega form; a crest like a banner in a hurricane.' },
+  { id: 'mega-pidgeot', speciesId: 18, name: 'Mega AERHAWK', kind: 'mega', region: 'kalos', types: ['normal', 'flying'], note: 'Mega form; a crest like a banner in a hurricane.' },
   { id: 'mega-alakazam', speciesId: 65, name: 'Mega MENTARCH', kind: 'mega', region: 'kalos', types: ['psychic'], note: 'Mega form; five spoons and total battlefield recall.' },
-  { id: 'mega-slowbro', speciesId: 80, name: 'Mega DOZEHIDE', kind: 'mega', region: 'kalos', types: ['water', 'psychic'], note: 'Mega form; the shell ate almost everything but the tail.' },
+  { id: 'mega-slowbro', speciesId: 80, name: 'Mega POTAMCONCH', kind: 'mega', region: 'kalos', types: ['water', 'psychic'], note: 'Mega form; the shell ate almost everything but the tail.' },
   { id: 'mega-gengar', speciesId: 94, name: 'Mega GRIMSHADE', kind: 'mega', region: 'kalos', types: ['ghost', 'poison'], note: 'Mega form; a third eye opens onto somewhere else.' },
   { id: 'mega-kangaskhan', speciesId: 115, name: 'Mega PUNCHROO', kind: 'mega', region: 'kalos', types: ['normal'], note: 'Mega form; the joey steps out ready to fight too.' },
   { id: 'mega-pinsir', speciesId: 127, name: 'Mega STAGHORN', kind: 'mega', region: 'kalos', types: ['bug', 'flying'], note: 'Mega form; it finally flies, and clearly loves it.' },
@@ -117052,7 +117052,7 @@ const FORMS = [
   { id: 'mega-mewtwo-x', speciesId: 150, name: 'Mega OMNIGEN X', kind: 'mega', region: 'kalos', types: ['psychic', 'fighting'], note: 'Mega form; psychic power rebuilt into brute muscle.' },
   { id: 'mega-mewtwo-y', speciesId: 150, name: 'Mega OMNIGEN Y', kind: 'mega', region: 'kalos', types: ['psychic'], note: 'Mega form; smaller body, vastly larger mind.' },
   { id: 'mega-ampharos', speciesId: 181, name: 'Mega LUMENECK', kind: 'mega', region: 'kalos', types: ['electric', 'dragon'], note: 'Mega form; a glorious mane and draconic static.' },
-  { id: 'mega-steelix', speciesId: 208, name: 'Mega STRATIRON', kind: 'mega', region: 'kalos', types: ['steel', 'ground'], note: 'Mega form; diamond-dusted armor that shrugs off ruin.' },
+  { id: 'mega-steelix', speciesId: 208, name: 'Mega FERROWYRM', kind: 'mega', region: 'kalos', types: ['steel', 'ground'], note: 'Mega form; diamond-dusted armor that shrugs off ruin.' },
   { id: 'mega-scizor', speciesId: 212, name: 'Mega REAPINCER', kind: 'mega', region: 'kalos', types: ['bug', 'steel'], note: 'Mega form; pincers sharpened into saw-toothed shears.' },
   { id: 'mega-heracross', speciesId: 214, name: 'Mega HORNTOSS', kind: 'mega', region: 'kalos', types: ['bug', 'fighting'], note: 'Mega form; a horn like a battering lance.' },
   { id: 'mega-houndoom', speciesId: 229, name: 'Mega CHARHOUND', kind: 'mega', region: 'kalos', types: ['dark', 'fire'], note: 'Mega form; its own heat reddens its claws.' },
@@ -117169,7 +117169,7 @@ const FORMS = [
   // ---- Anime/book canon forms (Cheat Shop expansion, 2026-10-28) ----
   // Playable partner-style species entries live in species2.mjs under
   // these same ids; this index row is their forms-table registration.
-  { id: 'crystalonix', speciesId: 95, name: 'Crystal STRATON', kind: 'form', region: 'orange', types: ['rock', 'ice'], note: 'A cave spring grew an STRATON out of living crystal.' },
+  { id: 'crystalonix', speciesId: 95, name: 'Crystal ROCKWYRM', kind: 'form', region: 'orange', types: ['rock', 'ice'], note: 'A cave spring grew an ROCKWYRM out of living crystal.' },
   { id: 'pinkbutterfree', speciesId: 12, name: 'Pink PRISMWING', kind: 'form', region: 'orange', types: ['bug', 'flying'], note: 'Island fruit blushed its wings a deep, lovesick pink.' },
   { id: 'surfingpikachu', speciesId: 25, name: 'Surfing VOLTIK', kind: 'form', region: 'kanto', types: ['electric'], note: 'Born wave-tamer; it carries its board everywhere.' },
   { id: 'flyingpikachu', speciesId: 25, name: 'Flying VOLTIK', kind: 'form', region: 'kanto', types: ['electric', 'flying'], note: 'Balloon-borne and beaming; the sky is just tall grass.' },
@@ -117952,7 +117952,7 @@ const MAPS = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
     ],
     encounters: null,
     start: null,
@@ -118022,7 +118022,7 @@ const MAPS = {
       { x: 6, y: 3, name: 'RICK', art: 'youngster', skin: '#e8b888', shirt: '#a03a5f', pants: '#2a304a', hair: '#2a1a0a',
         trainer: 'r2_bug',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
-        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a FRONLET under a boot."] },
+        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a GRUBLET under a boot."] },
       { x: 7, y: 5, name: 'BEA', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#a05a2a',
         trainer: 'r2_camper',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
@@ -118482,7 +118482,7 @@ const MAPS2 = {
     signs: [],
     npcs: [
       { x: 12, y: 6, name: 'HIKER TOMO', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
-        dialogue: ["SKREEP own the dark in here — they hear you before you see them.", "Somewhere below, the mountain keeps a stone that fell from the sky. Moon Stone, they call it."] },
+        dialogue: ["SKREEBAT own the dark in here — they hear you before you see them.", "Somewhere below, the mountain keeps a stone that fell from the sky. Moon Stone, they call it."] },
     ],
     encounters: {
       rate: 0.1, cave: true,
@@ -118651,7 +118651,7 @@ const MAPS2 = {
         dialogue: ["My NAPSEER teleports out of every conversation. Exhausting at parties.", "Trade you my PANTOMIM, Marcel, for an NAPSEER? At least he'll stay in the room. Mostly."] },
       { x: 2, y: 6, name: 'TESS', art: 'lady', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#c0a03a',
         trade: { give: 'poliwhirl', get: 'jynx', nickname: 'LOLA' },
-        dialogue: ["Lola my FROSTELLE sings to the river every dawn. Beautiful. Loud. So loud.", "Swap her for a WHIRLBOG? My ears are begging you."] },
+        dialogue: ["Lola my FROSTELLE sings to the river every dawn. Beautiful. Loud. So loud.", "Swap her for a WHIRLFROG? My ears are begging you."] },
       { x: 10, y: 9, name: 'FAN', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         dialogue: ["Misty's ASTRION once spun a whirlpool that soaked the whole front row. Best day of my life.", "North of here the bridge kids challenge everyone who crosses. Even grandmas. ESPECIALLY grandmas."] },
     ],
@@ -118860,7 +118860,7 @@ const MAPS2 = {
         dialogue: ["This BUBLET leads a whole squad of pranksters — they flooded the pier AGAIN this morning.", "He listens to you, though. Take him, trainer. A squad needs a real leader."] },
       { x: 14, y: 9, name: 'HANK', art: 'fisher', skin: '#c89878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         trade: { give: 'spearow', get: 'farfetchd', nickname: 'DUX' },
-        dialogue: ["Caught this POSTDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
+        dialogue: ["Caught this GALEDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
       { x: 13, y: 2, name: 'CHAIRMAN', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
         dialogue: ["I chair the Kin Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
     ],
@@ -119091,7 +119091,7 @@ const MAPS2 = {
       { x: 11, y: 8, name: 'HOSTESS', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 3, y: 8, name: 'PERFUMER', art: 'lady', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
-        dialogue: ["Erika's perfume is distilled from her own garden. One whiff and even a NAPPASAUR sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
+        dialogue: ["Erika's perfume is distilled from her own garden. One whiff and even a SOMNIBEAR sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
       // ADR-025 §3 (Phase 3): Canopy gains a small keepsake atelier —
       // the Second-Wind Ribbon's SECOND source (its first is the Rue &
       // Cole parley, bond-gated to Phase 5). The ribbon's stock is
@@ -120114,7 +120114,7 @@ const MAPS2 = {
     npcs: [
       { x: 10, y: 5, name: 'MARCUS', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         trade: { give: 'slowbro', get: 'lickitung', nickname: 'MARC' },
-        dialogue: ["My DOZEHIDE naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPARD? I hear they never sleep. Sounds exhausting. Perfect."] },
+        dialogue: ["My POTAMCONCH naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPZARD? I hear they never sleep. Sounds exhausting. Perfect."] },
       { x: 4, y: 10, name: 'BIKER JOEL', art: 'biker', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
         trainer: 'r16_biker', sight: { dir: 'right', range: 3 },
         dialogue: ["Cyclists rule this hill, pedestrian! Defend your walking privileges!", "The hill... respects your legs. UGH. Fine."] },
@@ -120360,7 +120360,7 @@ const MAPS2 = {
         dialogue: ["Lab work breeds FUZZMITE like paperwork. My VINELUMP, Tang, at least files the vines neatly.", "Swap? Your FUZZMITE for my VINELUMP. The lab gains a moth; you gain a jungle."] },
       { x: 15, y: 8, name: 'UMA', art: 'lady', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
         trade: { give: 'raichu', get: 'electrode', nickname: 'DORRY' },
-        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVANIK? Something with legs, for once. Please. My shins beg you."] },
+        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVAMUS? Something with legs, for once. Please. My shins beg you."] },
     ],
     encounters: null,
     items: [],
@@ -120530,7 +120530,7 @@ const MAPS2 = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
       { x: 12, y: 4, name: 'OLD MAN', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["That gym's leader vanished years ago — some say he runs... an organization. Some say he'll be back.", "When the door opens again, trainer, Arden will feel it. Mark an old man's words."] },
     ],
@@ -121446,7 +121446,7 @@ const MAPS3 = {
     signs: [],
     npcs: [
       { x: 4, y: 5, name: 'HIKER DOSS', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
-        dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The SKREEP union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
+        dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The SKREEBAT union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
     ],
     encounters: {
       rate: 0.1, cave: true,
@@ -121953,7 +121953,7 @@ const MAPS3 = {
     npcs: [
       { x: 10, y: 5, name: 'MARCUS', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         trade: { give: 'slowbro', get: 'lickitung', nickname: 'MARC' },
-        dialogue: ["My DOZEHIDE naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPARD? I hear they never sleep. Sounds exhausting. Perfect."] },
+        dialogue: ["My POTAMCONCH naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPZARD? I hear they never sleep. Sounds exhausting. Perfect."] },
       { x: 4, y: 10, name: 'BIKER JOEL', art: 'biker', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
         trainer: 'r16_biker', sight: { dir: 'right', range: 3 },
         dialogue: ["Cyclists rule this hill, pedestrian! Defend your walking privileges!", "The hill... respects your legs. UGH. Fine."] },
@@ -122208,7 +122208,7 @@ const MAPS3 = {
         dialogue: ["Lab work breeds FUZZMITE like paperwork. My VINELUMP, Tang, at least files the vines neatly.", "Swap? Your FUZZMITE for my VINELUMP. The lab gains a moth; you gain a jungle."] },
       { x: 15, y: 8, name: 'UMA', art: 'lady', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
         trade: { give: 'raichu', get: 'electrode', nickname: 'DORRY' },
-        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVANIK? Something with legs, for once. Please. My shins beg you."] },
+        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVAMUS? Something with legs, for once. Please. My shins beg you."] },
       { x: 13, y: 8, name: 'DR. EMBER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#e07830', revive: true,
         dialogue: ["The lab behind me coaxes life out of stone — bring a fossil, any fossil, and our machines will do the rest.", "Helix, dome, even amber older than the island. Stone remembers, trainer. We just remind it how."] },
       { x: 2, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -122355,7 +122355,7 @@ const MAPS3 = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
       { x: 5, y: 7, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
     ],
@@ -123812,7 +123812,7 @@ const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Marisol grows oranges sweet enough to make a NAPPASAUR sit up.",
+          "Marisol grows oranges sweet enough to make a SOMNIBEAR sit up.",
           "Professor Ivy studies the sea's odd Capture Orbs in the lab up the street."
         ]
       },
@@ -126017,7 +126017,7 @@ const MAPS5 = {
       {
         "x": 13,
         "y": 9,
-        "text": "SANCTUM SHRINE PLAZA — Festival of the sea, kept since anyone can remember. Mind the DOZECROWN rock by the shore."
+        "text": "SANCTUM SHRINE PLAZA — Festival of the sea, kept since anyone can remember. Mind the ORAPOTAM rock by the shore."
       },
       {
         "x": 8,
@@ -126137,7 +126137,7 @@ const MAPS5 = {
             "flag": "orange_2000_active",
             "dialogue": [
               "The festival can wait — festivals are patient, storms are not. The shrine isles, trainer: free the three titans from that collector's cages.",
-              "DOZECROWN counsels from its rock on the west shore. It has never once been wrong. It has also never once hurried, so listen slowly."
+              "ORAPOTAM counsels from its rock on the west shore. It has never once been wrong. It has also never once hurried, so listen slowly."
             ]
           }
         ]
@@ -126145,28 +126145,28 @@ const MAPS5 = {
       {
         "x": 6,
         "y": 12,
-        "name": "DOZECROWN",
+        "name": "ORAPOTAM",
         "art": "slowking",
         "skin": "#f0c8d8",
         "shirt": "#e8a0b8",
         "pants": "#c8b898",
         "hair": "#f0e0c8",
         "dialogue": [
-          "DOZECROWN sits on the shore rocks where it has sat since before the plaza had a name, watching the three shrine isles the way old sailors watch weather.",
+          "ORAPOTAM sits on the shore rocks where it has sat since before the plaza had a name, watching the three shrine isles the way old sailors watch weather.",
           "Slow... king. (It regards you with enormous, unhurried calm. Some questions, its eyes suggest, the sea will answer when it is ready.)"
         ],
         "dialogueStates": [
           {
             "flag": "orange_2000_storm_stilled",
             "dialogue": [
-              "DOZECROWN is back on its rock, in the sun, in the exact patch of warmth it has occupied for longer than anyone can prove.",
-              "Slow... king. King. (The storm is a story now. DOZECROWN has already heard it — it was there. So were you.)"
+              "ORAPOTAM is back on its rock, in the sun, in the exact patch of warmth it has occupied for longer than anyone can prove.",
+              "Slow... king. King. (The storm is a story now. ORAPOTAM has already heard it — it was there. So were you.)"
             ]
           },
           {
             "flag": "orange_2000_active",
             "dialogue": [
-              "DOZECROWN turns its head — slowly — from isle to isle to isle. Fire. Lightning. Ice. Then it looks at you, and waits, with the patience of deep water.",
+              "ORAPOTAM turns its head — slowly — from isle to isle to isle. Fire. Lightning. Ice. Then it looks at you, and waits, with the patience of deep water.",
               "Slow... king. (Free the shrines. Calm the titans. Then climb to the shrine, and let the sea decide. It is not advice. It is a tide table.)"
             ]
           }
@@ -126182,7 +126182,7 @@ const MAPS5 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The DOZECROWN by the rock has seen EVERYTHING. Ask it anything. It won't answer, but still.",
+          "The ORAPOTAM by the rock has seen EVERYTHING. Ask it anything. It won't answer, but still.",
           "Festival week, the plaza never sleeps. Neither do I."
         ]
       }
@@ -127964,14 +127964,14 @@ const MAPS5 = {
             "flag": "orange_2000_storm_stilled",
             "dialogue": [
               "The candles burn straight tonight. First time since the barge came. I have relit this shrine's quiet, trainer — you relit the sea's.",
-              "DOZECROWN is back on its rock, the deep chamber sleeps, and the song is tonight. Stay for it, if the road allows."
+              "ORAPOTAM is back on its rock, the deep chamber sleeps, and the song is tonight. Stay for it, if the road allows."
             ]
           },
           {
             "flag": "orange_2000_active",
             "dialogue": [
               "The candles will not stay lit — the wind down the back passage is wrong, all wrong. You are the one Elder Mira is praying for, aren't you.",
-              "The three shrine caves, trainer. And when the titans are calm — this floor. DOZECROWN will know the hour. It always does."
+              "The three shrine caves, trainer. And when the titans are calm — this floor. ORAPOTAM will know the hour. It always does."
             ]
           }
         ]
@@ -129492,7 +129492,7 @@ const MAPS6 = {
       {
         "x": 25,
         "y": 6,
-        "text": "DOZELING WELL — The town well, and the DOZELINGs own it. Mind your step on the way down."
+        "text": "DOZPOTAM WELL — The town well, and the DOZPOTAMs own it. Mind your step on the way down."
       },
       {
         "x": 1,
@@ -129522,7 +129522,7 @@ const MAPS6 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "Grandpa Kurt makes Capture Orbs from apricorns, one at a time, by hand.",
-          "The DOZELING bring rain. That's not a story, that's just Cinder."
+          "The DOZPOTAM bring rain. That's not a story, that's just Cinder."
         ]
       },
       {
@@ -129535,7 +129535,7 @@ const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "The well ran dry once, long ago. The DOZELING yawned, and the rain came back.",
+          "The well ran dry once, long ago. The DOZPOTAM yawned, and the rain came back.",
           "We don't hurry them. They don't hurry us. It works out."
         ]
       },
@@ -130511,7 +130511,7 @@ const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "First road out of Galefield. Every Yamato journey starts with this wind.",
-          "VIGILET at dawn, TICKOWL at dusk. The route keeps two shifts."
+          "FERRETLET at dawn, TICKOWL at dusk. The route keeps two shifts."
         ]
       }
     ],
@@ -130697,7 +130697,7 @@ const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "My DRIFLET drifts over the pond when the wind picks up.",
+          "My DRIFBUD drifts over the pond when the wind picks up.",
           "Route 30 is two climates: pond weather and hill weather."
         ]
       }
@@ -131078,7 +131078,7 @@ const MAPS6 = {
         "pants": "#3a3a4a",
         "hair": "#7a4a1a",
         "dialogue": [
-          "South shore fishing: the tide brings AQUALET this time of year.",
+          "South shore fishing: the tide brings AQUAMUS this time of year.",
           "Through the cave and the whole coast opens up. Worth the dark."
         ]
       }
@@ -131973,7 +131973,7 @@ const MAPS6 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Park day! I pack for three picnics and eat two on this road.",
-          "ORACLET watch the crossroads like tiny green judges."
+          "ORACHICK watch the crossroads like tiny green judges."
         ]
       },
       {
@@ -132937,7 +132937,7 @@ const MAPS6 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "Kiln smoke means Cinder's working. You learn to love the smell.",
-          "DOZELING tails grow back, tempers mend, charcoal sells. A patient town."
+          "DOZPOTAM tails grow back, tempers mend, charcoal sells. A patient town."
         ]
       }
     ],
@@ -133689,7 +133689,7 @@ const MAPS6 = {
   },
   "slowpoke-well": {
     "id": "slowpoke-well",
-    "name": "DOZELING Well",
+    "name": "DOZPOTAM Well",
     "music": "pewter-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGG",
@@ -133731,7 +133731,7 @@ const MAPS6 = {
       {
         "x": 11,
         "y": 12,
-        "text": "DOZELING WELL — The water down here is sweet and cold. The residents were here first."
+        "text": "DOZPOTAM WELL — The water down here is sweet and cold. The residents were here first."
       }
     ],
     "npcs": [],
@@ -140112,7 +140112,7 @@ const MAPS6 = {
       {
         "x": 4,
         "y": 7,
-        "name": "GYM ATTENDANT FROSTINE",
+        "name": "GYM ATTENDANT FROSTTUSK",
         "art": "youngster",
         "skin": "#e8b888",
         "shirt": "#3a6ac0",
@@ -147317,7 +147317,7 @@ const MAPS9 = {
       {"x": 13, "y": 15, "text": "ROUTE 212 — NORTH — Inglenook to the marsh country. The road south runs on through the wet pools to Fenland. Bring boots you have already forgiven."},
     ],
     "npcs": [
-      {"x": 9, "y": 8, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["MUDGILL own the south pools and sublet to the BOGLUMP.", "Fenland's marsh begins where this fence ends. Bring boots you have already forgiven."]},
+      {"x": 9, "y": 8, "name": "MARSH WARDEN IO", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["MUDGILL own the south pools and sublet to the BOGNEWT.", "Fenland's marsh begins where this fence ends. Bring boots you have already forgiven."]},
     ],
     "encounters": {"rate": 0.13, "table": [{"species": "psyduck", "min": 328, "max": 334, "weight": 18}, {"species": "wooper", "min": 328, "max": 334, "weight": 16}, {"species": "buneary", "min": 328, "max": 334, "weight": 16}, {"species": "shellos", "min": 329, "max": 335, "weight": 14}, {"species": "quagsire", "min": 331, "max": 336, "weight": 8}, {"species": "golduck", "min": 331, "max": 336, "weight": 8}], "water": [{"species": "tentacool", "min": 330, "max": 336, "weight": 24}, {"species": "magikarp", "min": 330, "max": 335, "weight": 20}, {"species": "wingull", "min": 331, "max": 336, "weight": 18}, {"species": "finneon", "min": 332, "max": 337, "weight": 12}, {"species": "floatzel", "min": 333, "max": 338, "weight": 8}, {"species": "gastrodon", "min": 334, "max": 339, "weight": 6}], "waterRate": 0.08},
     "items": [],
@@ -148802,7 +148802,7 @@ const MAPS9 = {
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Fenland City Mart — stocked for the road ahead."], "mart": {"stock": ["greatball", "ultraball", "hyperpotion", "fullheal", "revive", "superpotion"]}},
       {"x": 11, "y": 7, "name": "MARSH GUIDE SOLENNE", "art": "ranger", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The marsh keeps what it catches, including afternoons. Mind the deep bog — it minds you back.", "Wake's gym is half arena, half pond. The water types approve; the floor does not."]},
-      {"x": 19, "y": 6, "name": "FEN FISHER ODO", "art": "fisher", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["MUDGILL own the south pools and sublet to the BOGLUMP. I pay rent in patience.", "East road runs to the Gallant lakefront. West of the lake, the hotels; east, the sea road to Brightshore."]},
+      {"x": 19, "y": 6, "name": "FEN FISHER ODO", "art": "fisher", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["MUDGILL own the south pools and sublet to the BOGNEWT. I pay rent in patience.", "East road runs to the Gallant lakefront. West of the lake, the hotels; east, the sea road to Brightshore."]},
       {"x": 6, "y": 10, "name": "BOG KID MIRE", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I can name thirty marsh sounds and eleven of them are VENOFROG. The rest are also VENOFROG, lying.", "The gatehouse tram — I mean, the gatehouse MARSH — is the whole world before breakfast."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "wooper", "min": 342, "max": 348, "weight": 20}, {"species": "psyduck", "min": 342, "max": 348, "weight": 18}, {"species": "shellos", "min": 343, "max": 349, "weight": 14}, {"species": "croagunk", "min": 343, "max": 349, "weight": 10}, {"species": "bibarel", "min": 343, "max": 349, "weight": 12}], "water": [{"species": "tentacool", "min": 340, "max": 348, "weight": 24}, {"species": "magikarp", "min": 340, "max": 347, "weight": 20}, {"species": "wingull", "min": 341, "max": 348, "weight": 18}, {"species": "shellos", "min": 341, "max": 348, "weight": 14}, {"species": "gastrodon", "min": 344, "max": 350, "weight": 6}, {"species": "floatzel", "min": 343, "max": 350, "weight": 8}], "waterRate": 0.08},
@@ -150407,7 +150407,7 @@ const MAPS9 = {
     ],
     "npcs": [
       {"x": 13, "y": 12, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Bridgeport, when you're ready. The harbour keeps island hours: whenever the boat is in, which is now.", "The island gives back iron and stories in equal weight. Spend both carefully."], "ferry": "canalave"},
-      {"x": 8, "y": 6, "name": "PROSPECTOR HALDEN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Steel types grow fat on this island's dust. My STRATON has opinions about seasoning.", "A trainer with an egg walked these caves for a season. The island remembers him kindly."]},
+      {"x": 8, "y": 6, "name": "PROSPECTOR HALDEN", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Steel types grow fat on this island's dust. My ROCKWYRM has opinions about seasoning.", "A trainer with an egg walked these caves for a season. The island remembers him kindly."]},
     ],
     "encounters": {"rate": 0.12, "table": [{"species": "graveler", "min": 356, "max": 363, "weight": 18}, {"species": "onix", "min": 357, "max": 364, "weight": 12}, {"species": "steelix", "min": 361, "max": 368, "weight": 4}, {"species": "golbat", "min": 356, "max": 363, "weight": 14}, {"species": "bronzor", "min": 357, "max": 364, "weight": 14}], "water": [{"species": "tentacool", "min": 358, "max": 366, "weight": 22}, {"species": "magikarp", "min": 358, "max": 365, "weight": 18}, {"species": "wingull", "min": 359, "max": 366, "weight": 16}, {"species": "pelipper", "min": 361, "max": 368, "weight": 10}, {"species": "mantyke", "min": 360, "max": 367, "weight": 10}, {"species": "finneon", "min": 360, "max": 367, "weight": 12}], "waterRate": 0.08},
     "items": [],
@@ -150600,7 +150600,7 @@ const MAPS9 = {
       {"x": 8, "y": 3, "text": "BLAZE IRONWORKS — Charcoal, river iron, and a floor that has never once been cold. The foreman counts ingots the way misers count birthdays."},
     ],
     "npcs": [
-      {"x": 9, "y": 5, "name": "FOREMAN FUEGO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Iron in, iron out, and the river pays the difference. My LAVAMAND run the bellows and unionised the breaks themselves.", "The windworks spin for the towns; we burn for the mountain roads. Borea runs on both weathers."]},
+      {"x": 9, "y": 5, "name": "FOREMAN FUEGO", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Iron in, iron out, and the river pays the difference. My LAVAMANDER run the bellows and unionised the breaks themselves.", "The windworks spin for the towns; we burn for the mountain roads. Borea runs on both weathers."]},
     ],
     "encounters": {"rate": 0.11, "table": [{"species": "magmar", "min": 350, "max": 357, "weight": 18}, {"species": "machop", "min": 350, "max": 357, "weight": 16}, {"species": "koffing", "min": 351, "max": 358, "weight": 12}, {"species": "numel", "min": 351, "max": 358, "weight": 12}]},
     "items": [],
@@ -151950,7 +151950,7 @@ const BOND_DIALOGUE = {
       cold: ['Gym hours are posted by the door. The museum is that way. We are done here.'],
       wary: ['Back for the exhibits or the rematch talk? Either way, the stone here remembers every challenger.'],
       warm: ['You know the museum paid for this gym\'s roof twice over? Once in stone, once in patience.', 'My father said a leader\'s real job is the day OFF — anyone can be a wall. Being a door takes practice. You taught the whole city that, covering my desk.'],
-      close: ['I keep a list, you know. Every challenger who ever made STRATON actually try. It is a short list, {player}, and your name is underlined.', 'When I retire, the museum gets my badge polish and the gym gets a plaque: "A trainer once covered the desk so the leader could rest." That was you. That mattered.'],
+      close: ['I keep a list, you know. Every challenger who ever made ROCKWYRM actually try. It is a short list, {player}, and your name is underlined.', 'When I retire, the museum gets my badge polish and the gym gets a plaque: "A trainer once covered the desk so the leader could rest." That was you. That mattered.'],
     },
   },
   misty: {
@@ -152064,7 +152064,7 @@ const CHAPTERS = [
     n: 2, id: 'orange-islands', act: 1, region: 'Amber Isles', scope: 'playable',
     title: 'Adventures in the Amber Isles',
     arc: 'Four Amber badges across the southern seas.',
-    anime: 'Season 2: Adventures in the Amber Isles (Ep 1–24, Special: DOZECROWN\u2019s Day, Ep 25–36)',
+    anime: 'Season 2: Adventures in the Amber Isles (Ep 1–24, Special: ORAPOTAM\u2019s Day, Ep 25–36)',
     movies: ['Pok\u00e9mon 2000 — The Power of One'],
   },
   {
@@ -152680,13 +152680,13 @@ function deriveArcDefaults(story, caughtCount, playtimeSec) {
 // table in data/quests.mjs, per ADR-025 §5; the bundle is one scope).
 // `flag` is the story flag that
 // completes the objective (events below also emit questDone where a route
-// can branch, e.g. either NAPPASAUR).
+// can branch, e.g. either SOMNIBEAR).
 // ---------------------------------------------------------------------------
 
 const MAIN_QUESTS = [
   { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'VOLTIK joins you at the very start of your journey — it has opinions, and a strong dislike of Capture Orbs. If you ever find yourselves parted, Prof. Hawthorn at his Dawnwick lab will set it right.' },
   { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Flintridge City', hint: 'Through Fernmere Forest, then challenge Brock. Water and Grass moves crack Rock types open.' },
-  { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Lunestone and reach Tidehaven City', hint: 'The cave east of Flintridge is dark and full of SKREEP. Stock up on Potions before you go in.' },
+  { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Lunestone and reach Tidehaven City', hint: 'The cave east of Flintridge is dark and full of SKREEBAT. Stock up on Potions before you go in.' },
   { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Tidehaven City', hint: 'Misty’s Water types fear Grass and Electric moves. Watch for her ASTRION.' },
   { id: 'q_bill', flag: 'bill_helped', text: 'Help the researcher at the Sea Cottage', hint: 'Cross Nugget Bridge, then follow Route 25 to the cottage on the cape. Something there is not what it seems.' },
   { id: 'q_vermilion', flag: 'reached_vermilion', text: 'Reach Arcport City', hint: 'South through the underground path from Tidehaven. The harbor smells of salt and adventure.' },
@@ -152696,7 +152696,7 @@ const MAIN_QUESTS = [
   { id: 'q_rainbow', flag: 'badge_rainbow', text: 'Win the Rainbow Badge in Canopy City', hint: 'Erika’s Grass types wilt under Fire, Ice, and Flying moves.' },
   { id: 'q_scope', flag: 'scope_done', text: 'Infiltrate the Game Corner and recover the Vantage Scope', hint: 'That poster in the Game Corner is hiding something. Whatever is underneath it took the Scope — take it back.' },
   { id: 'q_flute', flag: 'flute_got', text: 'Climb Hushmoor Tower and earn the Kin Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
-  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping NAPPASAUR', hint: 'The Kin Flute’s tune is the only alarm clock a NAPPASAUR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
+  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping SOMNIBEAR', hint: 'The Kin Flute’s tune is the only alarm clock a SOMNIBEAR respects. One sleeps east of Hushmoor, one west above Cycling Road — either road leads on.' },
   { id: 'q_soul', flag: 'badge_soul', text: 'Win the Soul Badge in Bramble City', hint: 'Koga’s Poison types and invisible walls reward patience. Ground and Psychic moves help.' },
   { id: 'q_silph', flag: 'silph_done', text: 'Liberate Vantage Co. in Farsight City', hint: 'Eleven floors of trouble, and the president is held on the top one. Find the card key and climb.' },
   { id: 'q_marsh', flag: 'badge_marsh', text: 'Win the Marsh Badge in Farsight City', hint: 'Sabrina’s Psychic types hit like prophecy. Bug, Ghost, and Dark moves are your friends.' },
@@ -152711,7 +152711,7 @@ const MAIN_QUESTS = [
 ];
 
 // ---------------------------------------------------------------------------
-// EVENTS — scripted story beats, keyed by event id. Engine gates: NAPPASAUR
+// EVENTS — scripted story beats, keyed by event id. Engine gates: SOMNIBEAR
 // events require the pokeflute in the bag; ev_league_gate requires 8 badges;
 // PRISMWING_EVENT requires owning a butterfree. The duo escalation runs
 // r2_duo (slice, Route 2) -> duo2 (St. Anne) -> duo3 (tower cameo / Canopy)
@@ -152834,7 +152834,7 @@ const EVENTS = {
     { questDone: 'q_flute' },
   ],
 
-  // -- The two NAPPASAUR (engine pre-checks pokeflute in bag) ------------------
+  // -- The two SOMNIBEAR (engine pre-checks pokeflute in bag) ------------------
   ev_snorlax_east: [
     { say: ['The path simply... ends. In fur. A mountain that breathes — in, out, in, out — directly on top of Route 12.'], who: 'NARRATOR' },
     { say: ['You raise the Kin Flute. The first notes wobble across the water. The mountain does not approve of being woken. Or of your technique.'], who: 'NARRATOR' },
@@ -153199,7 +153199,7 @@ const LEGENDARY_ARCS = {
     id: 'arc_celebi', title: 'The Voice of the Forest', species: 'celebi', region: 'Yamato', designedOnly: true,
     hook: 'Holly Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
     steps: [
-      { text: 'Return the lost POSTDUCK to the charcoal maker' },
+      { text: 'Return the lost GALEDUCK to the charcoal maker' },
       { text: 'Receive the GS Orb from a grateful craftsman' },
       { text: 'Place the GS Orb at the forest shrine' },
       { text: 'Meet CHRONOFAE where the forest remembers', catch: 'celebi' },
@@ -153801,7 +153801,7 @@ const ORANGE_QUESTS = [
   // tracks titans calmed n/3 (titanCount — the Quest Log and the HUD
   // objective count the orange_2000_<bird> flags, the badgeCount
   // idiom carried to flags).
-  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm PYREHAWK, FULMINIS and GLACIERNE at their shrine caves (any order), then return to Sanctum Shrine — DOZECROWN counsels from its rock on Sanctum\'s west shore.' },
+  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Sanctum — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Rime Isle, and the currents are tearing themselves apart. Free and calm PYREHAWK, FULMINIS and GLACIERNE at their shrine caves (any order), then return to Sanctum Shrine — ORAPOTAM counsels from its rock on Sanctum\'s west shore.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -153953,8 +153953,8 @@ const ORANGE_EVENTS = {
     { say: ['Three nights ago a sky-barge came over the shrine isles — all glass and brass and quiet engines. Since then: cages of light on the shrines, the currents running wrong, and the birds — oh, the birds. When the three titans rage, the whole sky argues with itself.'], who: 'FEST ELDER MIRA' },
     { say: ['A pleasure to be introduced by my weather. Vance Halloway, collector — the Still Sky Collection, soon to be the wonder of every port that matters. Three titans, stilled forever in glass and frost-light. No more storms. No more moods. Perfection, kept.'], who: 'VANCE HALLOWAY' },
     { say: ['You mistake me for a villain, child. I am a curator. The sea cannot be trusted with its own treasures — look at it! I am simply... tidying the sky.'], who: 'VANCE HALLOWAY' },
-    { say: ['The barge lifts away toward Ember Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the DOZECROWN speaks first.'], who: 'NARRATOR' },
-    { say: ['Slow... king. King. DOZECROWN slow, king — slow.'], who: 'DOZECROWN' },
+    { say: ['The barge lifts away toward Ember Isle, unhurried as snowfall. On the west shore, unmoving on its rock through all of it, the island\'s oldest resident watches you approach — and, for the first time in living memory, the ORAPOTAM speaks first.'], who: 'NARRATOR' },
+    { say: ['Slow... king. King. ORAPOTAM slow, king — slow.'], who: 'ORAPOTAM' },
     { say: ['It turns its great head toward the three isles, one by one. Fire. Lightning. Ice. Then toward the shrine above the plaza, and down — deep down — with a patience like the bottom of the sea. The meaning arrives the way its speech does: slowly, and all at once. Free the shrines. Calm the titans. Then the guardian will decide what the sea does next.'], who: 'NARRATOR' },
     { flag: 'orange_2000_active' },
     { toast: 'The Storm over Sanctum has begun!' },
@@ -153992,11 +153992,11 @@ const ORANGE_EVENTS = {
   //    sysLoadMap gate. The proving is a straight win — the shipped
   //    event idiom — fought UNcatchable at the deep altar.) ------------
   ev_orange_2000_climax: [
-    { say: ['The shrine is too quiet. Three candles burn straight up in windless air, and the keeper\'s hands are folded the way hands fold at sickbeds and weddings. DOZECROWN stands in the doorway — it has climbed from its rock, which no living islander has seen it do.'], who: 'NARRATOR' },
-    { say: ['Slow... king.'], who: 'DOZECROWN' },
+    { say: ['The shrine is too quiet. Three candles burn straight up in windless air, and the keeper\'s hands are folded the way hands fold at sickbeds and weddings. ORAPOTAM stands in the doorway — it has climbed from its rock, which no living islander has seen it do.'], who: 'NARRATOR' },
+    { say: ['Slow... king.'], who: 'ORAPOTAM' },
     { say: ['It means: now. Above the plaza, glass and brass descend through the breaking cloud — Halloway\'s barge, every light it owns burning, one enormous empty cage swinging beneath it like a bell.'], who: 'NARRATOR' },
     { say: ['Three titans, loose — my collection, scattered by a child with a ferry pass! No matter. No matter! The centre of the storm is still empty, curator\'s law: empty centres are filled by whoever arrives with a cage big enough. Guardian! I have come to tidy YOU.'], who: 'VANCE HALLOWAY' },
-    { say: ['DOZECROWN walks — unhurried, absolute — to the back passage, and down toward the deep chamber. It does not look back. It does not need to. You follow it into the cold, deep water-light, where the sealed altar waits... and the sea, at last, answers.'], who: 'NARRATOR' },
+    { say: ['ORAPOTAM walks — unhurried, absolute — to the back passage, and down toward the deep chamber. It does not look back. It does not need to. You follow it into the cold, deep water-light, where the sealed altar waits... and the sea, at last, answers.'], who: 'NARRATOR' },
     { warp: { map: 'shamouti-deep', x: 7, y: 10 } },
     { say: ['It rises the way the tide rises: not fast, not slow — inevitably. Wings like white headlands. Eyes that have watched ten thousand festivals and every storm since the first one. The guardian of the sea does not rage. It MEASURES. The one who calmed the titans will be tested the way the sea tests everything: completely.'], who: 'NARRATOR' },
     { wildBattle: { species: 'lugia', level: 55, uncatchable: true } },
@@ -154061,7 +154061,7 @@ const ORANGE_LEGENDARY_ARCS = {
 // in the game's voice — no quoted or closely-paraphrased lines.
 //
 // Stage split: J4a ships the west (badges 1-4: zephyr / hive / plain /
-// fog), the Silver thief thread's first clash, the DOZELING Well +
+// fog), the Silver thief thread's first clash, the DOZPOTAM Well +
 // Kurt + GS Orb delivery, and the Ashen Tower awakening that ARMS
 // J5's beast arcs. J4b (this stage, appended below the marked seams)
 // ships the east: the Beacon/Tidewall medicine errand + Storm and
@@ -154105,7 +154105,7 @@ const JOHTO_QUESTS = [
   { id: 'q_johto_thief', flag: 'silver_reported', text: 'Watch for the red-haired thief — and report back to Elm', hint: 'A starter was stolen from Elm\'s lab. The thief was seen heading north, toward Blossom and Route 30. If you meet him, tell Elm what you saw.' },
   { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Newleaf Tower and earn the Elder\'s blessing', hint: 'Iris City\'s tower sways like the Kin it honors. Falkner expects challengers to climb it first — the monks inside are the first half of his test.' },
   { id: 'q_johto_zephyr', flag: 'badge_zephyr', text: 'Win the Zephyr Badge from Falkner in Iris City', hint: 'Falkner keeps Iris\'s gym with birds raised in the tower\'s shadow. Flying types fear Electric, Ice and Rock moves.' },
-  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZELING Well', hint: 'Below Cinder Town, Rockets are cutting DOZELING tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
+  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZPOTAM Well', hint: 'Below Cinder Town, Rockets are cutting DOZPOTAM tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
   { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Cinder Town', hint: 'The ball no machine can open, carried all the way from Marisol. Kurt of Cinder works Capture Orbs by hand, the old way — his house stands in the east of town.' },
   { id: 'q_johto_hive', flag: 'badge_hive', text: 'Win the Hive Badge from Bugsy in Cinder Town', hint: 'Bugsy\'s Bug types are proud and quick. Fire, Flying and Rock moves end arguments with them.' },
   { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Signal City', hint: 'Whitney\'s MOOBELLE is famous all over Yamato, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
@@ -154114,7 +154114,7 @@ const JOHTO_QUESTS = [
   // --- J4b: the east rows (appended at the J4a seam) ---
   { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Lumi, the lighthouse Kin', hint: 'Lumi, the LUMENECK whose light guides Beacon\'s ships, is sick in the Gleam Lighthouse. The pharmacy across Route 40 in Tidewall makes a Secret Potion — Jasmine is waiting on it.' },
   { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Tidewall City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
-  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Lumi is sick — the errand comes first. Her STRATIRON fears Fire, Fighting and Ground moves.' },
+  { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Beacon City', hint: 'Jasmine will not battle while Lumi is sick — the errand comes first. Her FERROWYRM fears Fire, Fighting and Ground moves.' },
   { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red WRATHWYRM at the Wrathmere Lake', hint: 'North of Redwood, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
   { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Hideout beneath Redwood\'s souvenir shop', hint: 'Lance is waiting in Redwood Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
   { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Pryce in Redwood Town', hint: 'Pryce has trained through fifty winters and one Rocket occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
@@ -154180,7 +154180,7 @@ const JOHTO_TRAINERS = {
     reward: 6400, badge: 'fogbadge',
   },
   // Silver, first clash (Route 30): the stolen starter at band floor
-  // plus a SKREEP. NOT a leader (no badge, no smart AI, no keepsake) —
+  // plus a SKREEBAT. NOT a leader (no badge, no smart AI, no keepsake) —
   // the battle is fought through the battleAny event step, win or
   // lose, and the branch flag records what actually happened.
   silver_r30: {
@@ -154214,11 +154214,11 @@ const JOHTO_TRAINERS = {
     ],
     reward: 450,
   },
-  // The DOZELING Well Rockets (plain trainers; the johto NPC handler
+  // The DOZPOTAM Well Rockets (plain trainers; the johto NPC handler
   // gates their battles on Kurt's plea and counts the clear).
   rocket_well_1: {
     id: 'rocket_well_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
-    intro: ['Hey! This well is a work site! DOZELING tails, one snip at a time — the boss calls it harvesting. I call it overtime. Scram!'],
+    intro: ['Hey! This well is a work site! DOZPOTAM tails, one snip at a time — the boss calls it harvesting. I call it overtime. Scram!'],
     lose: ['Ow — okay, okay! The tail business was the boss\'s idea anyway...'],
     team: [
       { species: 'rattata', level: 118 },
@@ -154260,7 +154260,7 @@ const JOHTO_TRAINERS = {
   },
   jasmine: {
     id: 'jasmine', name: 'Jasmine', title: 'Beacon Gym Leader', ai: 'smart', badgeSet: 'johto',
-    intro: ['Lumi is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My STRATIRON has been patient. I have not.'],
+    intro: ['Lumi is well. The light is turning again, and the ships are safe — because of you. So now... now I can battle with my whole heart. My FERROWYRM has been patient. I have not.'],
     lose: ['Oh...! Beaten, truly beaten. Lumi\'s light and your battle — Beacon is bright today in every way there is.', 'The Mineral Badge is yours. Hold it up to the lighthouse sometime. It shines back.'],
     team: [
       { species: 'magnemite', level: 154 },
@@ -154442,7 +154442,7 @@ const JOHTO_TRAINERS = {
   // beat_gary_johto unset and Gary re-challengeable after healing —
   // no soft-lock). His team is built from his Arden identity, grown
   // to the Conference: MENTARCH and EMBERMANE from his road, GRIMSHADE
-  // and LUNAPARD from his Yamato years, AERARCH from the first sky
+  // and LUNAPARD from his Yamato years, AERHAWK from the first sky
   // you shared — and ABYSSAR, his starter, anchoring it all, the
   // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
@@ -154516,7 +154516,7 @@ const JOHTO_EVENTS = {
   ev_johto_arrival: [
     { say: ['Elm\'s lab is not the calm place the ferry captain described. Paper covers the floor like leaves. A glass case near the back stands open and empty, and two aides are arguing in the hushed voices people use at the scene of a small disaster.'], who: 'NARRATOR' },
     { say: ['Oh — a trainer! From the boat, by your pack. I am Professor Elm. Forgive the lab. Forgive everything, actually — it has been that kind of morning.', 'First, the duty: your Yamato journey, registered. There. Whatever else today has done, it has not stopped that.'], who: 'PROF. ELM' },
-    { say: ['Now the rest. This case held three young Kin this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a SNAPLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
+    { say: ['Now the rest. This case held three young Kin this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a CROCLET, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
     { say: ['I am not asking you to chase a thief across Yamato — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Iris City is your road: north through Blossom, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Cinder — a man named Kurt, who works Capture Orbs by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. ELM' },
     { flag: 'johto_arrival' },
     { flag: 'elm_registered' },
@@ -154534,10 +154534,10 @@ const JOHTO_EVENTS = {
     { toast: 'The red-haired thief got away.' },
   ],
 
-  // -- DOZELING Well: Kurt's plea (first well entry) -------------------
+  // -- DOZPOTAM Well: Kurt's plea (first well entry) -------------------
   ev_johto_well: [
     { say: ['The well smells of wet stone and something worse — a sweet, wrong smell, like a market stall in a cave. Halfway down the ladder, a voice you know from Cinder\'s doorsteps calls up, tight with pain.'], who: 'NARRATOR' },
-    { say: ['Careful on that rung — and careful below it, too. Kurt. Yes, THAT Kurt, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the DOZELING are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the DOZELING — and so an old man\'s pride survives the afternoon.'], who: 'KURT' },
+    { say: ['Careful on that rung — and careful below it, too. Kurt. Yes, THAT Kurt, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the DOZPOTAM are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the DOZPOTAM — and so an old man\'s pride survives the afternoon.'], who: 'KURT' },
     { flag: 'kurt_well_plea' },
     { toast: 'Kurt is counting on you.' },
   ],
@@ -154800,17 +154800,17 @@ const JOHTO_TALES = {
     finishLines: ['Aya. ...My great-grandmother\'s name was Aya. Sixty years at that door and the tower kept HER secret from me, not the stone\'s.', 'A tower that sways starts with a stone carried gently. That is the whole philosophy of this town in one sentence, and my family paid for it in shoe leather. Two Super Potions, trainer — and thank you.'],
   },
   tale_azalea: {
-    id: 'tale_azalea', town: 'Cinder Town', giver: 'MAIZIE', title: 'Rain for the DOZELING', johtoTale: true,
+    id: 'tale_azalea', town: 'Cinder Town', giver: 'MAIZIE', title: 'Rain for the DOZPOTAM', johtoTale: true,
     stages: [
-      'Ask the Wellkeeper Jonas in Cinder about the DOZELING rain story',
+      'Ask the Wellkeeper Jonas in Cinder about the DOZPOTAM rain story',
       'Tell Maizie the story, the way Jonas told it',
     ],
     reward: { items: { hyperpotion: 1 } }, rewardText: '1 Hyper Potion',
     bondNpc: 'maizie', bondDelta: 1,
-    revelation: 'The wellkeeper\'s grandfather swore the great drought broke the morning a whole town simply stood in the dry well and sang — the DOZELING answered first, and the rain answered them.',
-    offerLines: ['Everyone says the DOZELING brought the rain back to Cinder, once, in the big drought. Everyone! But nobody tells it PROPERLY anymore.', 'Wellkeeper Jonas tells it properly. Go and hear it from him, then tell it back to me — a Hyper Potion for the full story, no skipping the good parts.'],
-    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Kurt\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the DOZELING lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
-    finishLines: ['They SANG into the well?! And the DOZELING sang back, and THEN the rain...', 'That is the best version. That is the one I am telling from now on, and I am telling it exactly like that. A Hyper Potion — earned. Storytellers should be paid properly; Jonas says so.'],
+    revelation: 'The wellkeeper\'s grandfather swore the great drought broke the morning a whole town simply stood in the dry well and sang — the DOZPOTAM answered first, and the rain answered them.',
+    offerLines: ['Everyone says the DOZPOTAM brought the rain back to Cinder, once, in the big drought. Everyone! But nobody tells it PROPERLY anymore.', 'Wellkeeper Jonas tells it properly. Go and hear it from him, then tell it back to me — a Hyper Potion for the full story, no skipping the good parts.'],
+    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Kurt\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the DOZPOTAM lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
+    finishLines: ['They SANG into the well?! And the DOZPOTAM sang back, and THEN the rain...', 'That is the best version. That is the one I am telling from now on, and I am telling it exactly like that. A Hyper Potion — earned. Storytellers should be paid properly; Jonas says so.'],
   },
   tale_goldenrod: {
     id: 'tale_goldenrod', town: 'Signal City', giver: 'FLOWER SELLER UNA', title: 'Flowers for the Night Train', johtoTale: true,
@@ -155019,7 +155019,7 @@ const JOHTO_NPC_PATCHES = [
 // it was designed inside LEGENDARY_ARCS (story-kanto.mjs) and J5
 // activated it in place there. arc_celebi IS here, and Object.assign
 // order makes this live entry supersede the designed one in
-// story-kanto.mjs — the designed steps (a POSTDUCK errand) never
+// story-kanto.mjs — the designed steps (a GALEDUCK errand) never
 // matched the shipped GS Orb story J4a actually told.
 //
 // Shared laws (all five arcs):
@@ -155259,7 +155259,7 @@ const HOENN_TRAINERS = {
   },
   lavaridge_gym_1: {
     id: 'lavaridge_gym_1', name: 'Kindler Fenn', title: 'Steamspring Gym Trainer', ai: 'basic',
-    intro: ['The floor grates breathe spring steam, and the footing here is a local tradition and a local test. Mind your step — then mind my MAGMELT.'],
+    intro: ['The floor grates breathe spring steam, and the footing here is a local tradition and a local test. Mind your step — then mind my MAGSLUG.'],
     lose: ['Out-steamed and out-fought. Flannery is at the back, past the last grate. She has been pacing. Challengers make her nervous; nervous makes her dangerous.'],
     team: [
       { species: 'slugma', level: 236 },
@@ -156092,7 +156092,7 @@ const HOENN_NPCS = [
   { map: 'gym-lavaridge', x: 7, y: 2, name: 'FLANNERY', art: 'gym4', skin: '#f0c8a0', shirt: '#c83a2a', pants: '#2a2a3a', hair: '#c83a1a', hoenn: 'flannery',
     dialogue: ['In here, we burn. That is the whole policy.'] },
   { map: 'gym-lavaridge', x: 4, y: 5, name: 'KINDLER FENN', art: 'camper', skin: '#e8b888', shirt: '#a03a2a', pants: '#3a3a2a', hair: '#3a2a1a', trainer: 'lavaridge_gym_1',
-    dialogue: ['Mind your step — then mind my MAGMELT.'] },
+    dialogue: ['Mind your step — then mind my MAGSLUG.'] },
   { map: 'gym-lavaridge', x: 11, y: 5, name: 'HIKER BRASA', art: 'hiker', skin: '#c89878', shirt: '#2d4377', pants: '#3a3a2a', hair: '#1a1a0a', trainer: 'lavaridge_gym_2',
     dialogue: ['The portrait watches that door. It has never nodded at me.'] },
   { map: 'contest-slateport', x: 8, y: 6, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_contest_slateport',
@@ -157375,7 +157375,7 @@ const QUESTS = {
     id: 'tale_pewter', town: 'Flintridge City', giver: 'CURATOR', title: "Brock's Day Off",
     stages: [
       'Cover the museum desk: answer 3 visitor questions from the exhibits',
-      "Spar Brock's RUMBLING, off-duty, here in Flintridge City",
+      "Spar Brock's PEBBLET, off-duty, here in Flintridge City",
     ],
     reward: { keepsake: 'ironacorn' }, rewardText: 'Iron Acorn',
     bondNpc: 'brock', bondDelta: 2,
@@ -157818,7 +157818,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_rainbow","arcId":"kanto","volume":1,"kind":"main","title":"Win the Rainbow Badge in Canopy City","flag":"badge_rainbow","requires":["q_celadon"],"locations":["celadon","gym-celadon"],"characters":["ERIKA"],"battles":["erika"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_scope","arcId":"kanto","volume":1,"kind":"main","title":"Infiltrate the Game Corner and recover the Vantage Scope","flag":"scope_done","requires":["q_rainbow"],"locations":["gamecorner","hideout"],"characters":["THE BOSS (speaker)"],"events":["ev_hideout_entry","ev_scope_boss"],"battles":["rocket_admin_hideout"],"mechanics":["trainer-battle"],"canon":"original"},
 {"id":"q_flute","arcId":"kanto","volume":1,"kind":"main","title":"Climb Hushmoor Tower and earn the Kin Flute","flag":"flute_got","requires":["q_scope"],"locations":["tower2"],"characters":["RUE","COLE","MR. FUJI"],"events":["ev_fuji"],"relationships":["rue","cole"],"mechanics":["bond-choice"],"canon":"original"},
-{"id":"q_snorlax","arcId":"kanto","volume":1,"kind":"main","title":"Wake a sleeping NAPPASAUR","flag":"snorlax_west","requires":["q_flute"],"locations":["route12","route16"],"events":["ev_snorlax_east","ev_snorlax_west"],"wildBattles":[{"species":"snorlax","level":30},{"species":"snorlax","level":30}],"mechanics":["wild-battle"],"canon":"original"},
+{"id":"q_snorlax","arcId":"kanto","volume":1,"kind":"main","title":"Wake a sleeping SOMNIBEAR","flag":"snorlax_west","requires":["q_flute"],"locations":["route12","route16"],"events":["ev_snorlax_east","ev_snorlax_west"],"wildBattles":[{"species":"snorlax","level":30},{"species":"snorlax","level":30}],"mechanics":["wild-battle"],"canon":"original"},
 {"id":"q_soul","arcId":"kanto","volume":1,"kind":"main","title":"Win the Soul Badge in Bramble City","flag":"badge_soul","requires":["q_snorlax"],"locations":["fuchsia","gym-fuchsia"],"characters":["KOGA"],"battles":["koga"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_silph","arcId":"kanto","volume":1,"kind":"main","title":"Liberate Vantage Co. in Farsight City","flag":"silph_done","requires":["q_soul"],"locations":["silph2"],"characters":["ROCKET ADMIN","GIOVANNI (phone)","VANTAGE PRESIDENT"],"events":["ev_silph_boss"],"battles":["rocket_admin_silph"],"mechanics":["trainer-battle"],"canon":"original"},
 {"id":"q_marsh","arcId":"kanto","volume":1,"kind":"main","title":"Win the Marsh Badge in Farsight City","flag":"badge_marsh","requires":["q_silph"],"locations":["saffron","gym-saffron"],"characters":["SABRINA"],"battles":["sabrina"],"mechanics":["gym-battle"],"canon":"original"},
@@ -157833,12 +157833,12 @@ const NARRATIVE_CHAPTERS = [
 {"id":"q_orange_gsball","arcId":"orange","volume":2,"kind":"main","title":"Fetch the GS Orb from Prof. Ivy on Marisol Island","flag":"orange_gsball","locations":["ivy-lab"],"characters":["PROF. IVY"],"events":["ev_orange_ivy"],"canon":"original"},
 {"id":"q_orange_crew","arcId":"orange","volume":2,"kind":"main","title":"Win the four Amber Crew badges","flag":"orange_crew_done","requires":["q_orange_gsball"],"locations":["mikan","mikan-gym","navel","navel-gym","trovita","trovita-gym","kumquat","kumquat-gym"],"canon":"original"},
 {"id":"q_orange_league","arcId":"orange","volume":2,"kind":"main","title":"Challenge Drake at Grapefruit Stadium and win the Amber League","flag":"orange_champion","requires":["q_orange_crew"],"locations":["pummelo-stadium"],"canon":"original"},
-{"id":"q_orange_storm","arcId":"orange","volume":2,"kind":"main","title":"The Storm over Sanctum — calm the three titans and still the guardian's storm","flag":"orange_2000_storm_stilled","requires":["q_orange_league"],"locations":["shamouti-deep","shamouti"],"characters":["DOZECROWN","VANCE HALLOWAY"],"events":["ev_orange_2000_climax"],"wildBattles":[{"species":"lugia","level":55}],"mechanics":["wild-battle"],"canon":"original"},
+{"id":"q_orange_storm","arcId":"orange","volume":2,"kind":"main","title":"The Storm over Sanctum — calm the three titans and still the guardian's storm","flag":"orange_2000_storm_stilled","requires":["q_orange_league"],"locations":["shamouti-deep","shamouti"],"characters":["ORAPOTAM","VANCE HALLOWAY"],"events":["ev_orange_2000_climax"],"wildBattles":[{"species":"lugia","level":55}],"mechanics":["wild-battle"],"canon":"original"},
 {"id":"q_johto_arrival","arcId":"johto","volume":3,"kind":"main","title":"Meet Professor Elm in Galefield Town","flag":"johto_arrival","locations":["newbark"],"characters":["PROF. ELM"],"events":["ev_johto_arrival"],"canon":"original"},
 {"id":"q_johto_thief","arcId":"johto","volume":3,"kind":"main","title":"Watch for the red-haired thief — and report back to Elm","flag":"silver_reported","requires":["q_johto_arrival"],"locations":["elm-lab","cherrygrove"],"canon":"original"},
 {"id":"q_johto_sprout","arcId":"johto","volume":3,"kind":"main","title":"Climb Newleaf Tower and earn the Elder's blessing","flag":"sprout_tower_done","requires":["q_johto_thief"],"locations":["sprout-tower-1"],"canon":"original"},
 {"id":"q_johto_zephyr","arcId":"johto","volume":3,"kind":"main","title":"Win the Zephyr Badge from Falkner in Iris City","flag":"badge_zephyr","requires":["q_johto_sprout"],"locations":["violet","gym-violet"],"characters":["FALKNER"],"battles":["falkner"],"mechanics":["gym-battle"],"canon":"original"},
-{"id":"q_johto_well","arcId":"johto","volume":3,"kind":"main","title":"Clear Team Rocket out of the DOZELING Well","flag":"johto_well_cleared","requires":["q_johto_zephyr"],"locations":["slowpoke-well"],"canon":"original"},
+{"id":"q_johto_well","arcId":"johto","volume":3,"kind":"main","title":"Clear Team Rocket out of the DOZPOTAM Well","flag":"johto_well_cleared","requires":["q_johto_zephyr"],"locations":["slowpoke-well"],"canon":"original"},
 {"id":"q_johto_gsball","arcId":"johto","volume":3,"kind":"main","title":"Deliver the GS Orb to Kurt in Cinder Town","flag":"gsball_delivered","requires":["q_johto_well"],"locations":["elm-lab"],"canon":"original"},
 {"id":"q_johto_hive","arcId":"johto","volume":3,"kind":"main","title":"Win the Hive Badge from Bugsy in Cinder Town","flag":"badge_hive","requires":["q_johto_gsball"],"locations":["azalea","gym-azalea"],"characters":["BUGSY"],"battles":["bugsy"],"mechanics":["gym-battle"],"canon":"original"},
 {"id":"q_johto_plain","arcId":"johto","volume":3,"kind":"main","title":"Win the Plain Badge from Whitney in Signal City","flag":"badge_plain","requires":["q_johto_hive"],"locations":["goldenrod","gym-goldenrod"],"characters":["WHITNEY"],"battles":["whitney"],"mechanics":["gym-battle"],"canon":"original"},
@@ -157970,7 +157970,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"arc_terapagos","arcId":"kanto","volume":1,"kind":"legendary","title":"The Jewel Under the Academy","mechanics":["capture"],"canon":"original","designedOnly":true},
 {"id":"arc_ogerpon","arcId":"kanto","volume":1,"kind":"legendary","title":"The Ogre of the Festival","mechanics":["capture"],"canon":"original","designedOnly":true},
 {"id":"arc_pecharunt","arcId":"kanto","volume":1,"kind":"legendary","title":"The Peach That Binds","flag":"ogerpon_truth","mechanics":["capture"],"canon":"original","designedOnly":true},
-{"id":"arc_lugia_shamouti","arcId":"orange","volume":2,"kind":"legendary","title":"The Guardian of the Sea","flag":"orange_2000_storm_stilled","locations":["shamouti-deep","fire-cave","lightning-cave","ice-cave"],"characters":["FEST ELDER MIRA","VANCE HALLOWAY","DOZECROWN"],"events":["ev_orange_2000_storm","ev_orange_2000_moltres","ev_orange_2000_zapdos","ev_orange_2000_articuno","ev_orange_2000_lugia"],"mechanics":["capture"],"canon":"original"},
+{"id":"arc_lugia_shamouti","arcId":"orange","volume":2,"kind":"legendary","title":"The Guardian of the Sea","flag":"orange_2000_storm_stilled","locations":["shamouti-deep","fire-cave","lightning-cave","ice-cave"],"characters":["FEST ELDER MIRA","VANCE HALLOWAY","ORAPOTAM"],"events":["ev_orange_2000_storm","ev_orange_2000_moltres","ev_orange_2000_zapdos","ev_orange_2000_articuno","ev_orange_2000_lugia"],"mechanics":["capture"],"canon":"original"},
 {"id":"arc_raikou","arcId":"johto","volume":5,"kind":"legendary","title":"The Thunder That Walks","flag":"arc_raikou_sign2","requires":["q_johto_burned"],"locations":["national-park"],"events":["ev_johto_raikou"],"mechanics":["capture"],"canon":"original"},
 {"id":"arc_entei","arcId":"johto","volume":5,"kind":"legendary","title":"The Mountain's Heartbeat","flag":"arc_entei_sign2","requires":["q_johto_burned"],"locations":["mt-mortar-2"],"events":["ev_johto_entei"],"mechanics":["capture"],"canon":"original"},
 {"id":"arc_suicune","arcId":"johto","volume":5,"kind":"legendary","title":"The North Wind's Errand","flag":"arc_suicune_sign2","requires":["q_johto_burned"],"locations":["bell-tower-1"],"events":["ev_johto_suicune"],"mechanics":["capture"],"canon":"original"},
@@ -157987,7 +157987,7 @@ const NARRATIVE_CHAPTERS = [
 {"id":"tale_newbark","arcId":"johto","volume":3,"kind":"tale","title":"A Letter for the Lab","locations":["newbark"],"characters":["ELDER MARA"],"bondNpc":"mara","canon":"original"},
 {"id":"tale_cherrygrove","arcId":"johto","volume":3,"kind":"tale","title":"The Old Man and the Tide","locations":["cherrygrove"],"characters":["GUIDE GENT"],"bondNpc":"gent","canon":"original"},
 {"id":"tale_violet","arcId":"johto","volume":3,"kind":"tale","title":"What the Tower Keeps","locations":["violet"],"characters":["OLD TOWERKEEP"],"bondNpc":"towerkeep","canon":"original"},
-{"id":"tale_azalea","arcId":"johto","volume":3,"kind":"tale","title":"Rain for the DOZELING","locations":["azalea"],"characters":["MAIZIE"],"bondNpc":"maizie","canon":"original"},
+{"id":"tale_azalea","arcId":"johto","volume":3,"kind":"tale","title":"Rain for the DOZPOTAM","locations":["azalea"],"characters":["MAIZIE"],"bondNpc":"maizie","canon":"original"},
 {"id":"tale_goldenrod","arcId":"johto","volume":3,"kind":"tale","title":"Flowers for the Night Train","locations":["goldenrod"],"characters":["FLOWER SELLER UNA"],"bondNpc":"una","canon":"original"},
 {"id":"tale_ecruteak","arcId":"johto","volume":3,"kind":"tale","title":"Two Towers, One Skyline","locations":["ecruteak"],"characters":["HISTORIAN ELIAS"],"bondNpc":"elias","canon":"original"},
 {"id":"tale_olivine","arcId":"johto","volume":3,"kind":"tale","title":"The Light That Waits","locations":["olivine"],"characters":["LIGHTKEEPER ADA"],"bondNpc":"ada","canon":"original"},
@@ -158203,29 +158203,29 @@ const NAME_REGISTRY = {
     zapdos:    { name: 'FULMINIS', status: 'locked', wave: 'G-M1', design: 'fulminis' },
     torterra:  { name: 'MOSSAIC', status: 'locked', wave: 'G-M1', design: 'mossaic' },
     // -- Wave G Kanto Completion, Tranche 1 (coordinator-named) --
-    caterpie:  { name: 'FRONLET', status: 'named', wave: 'G-KT1', design: 'fronlet' },
+    caterpie:  { name: 'GRUBLET', status: 'named', wave: 'N', design: 'fronlet' },
     metapod:   { name: 'COCOVEL', status: 'named', wave: 'G-KT1', design: 'cocovel' },
     butterfree: { name: 'PRISMWING', status: 'named', wave: 'G-KT1', design: 'prismwing' },
     pinkbutterfree: { name: 'Pink PRISMWING', status: 'named', wave: 'G-KT1', design: 'prismwing-pink' },
-    weedle:    { name: 'THORNIB', status: 'named', wave: 'G-KT1', design: 'thornib' },
+    weedle:    { name: 'STINGRUB', status: 'named', wave: 'N', design: 'thornib' },
     kakuna:    { name: 'SPIKOON', status: 'named', wave: 'G-KT1', design: 'spikoon' },
     beedrill:  { name: 'LANCEWASP', status: 'named', wave: 'G-KT1', design: 'lancewasp' },
     pidgey:    { name: 'DUNPLUME', status: 'named', wave: 'G-KT1', design: 'dunplume' },
     pidgeotto: { name: 'GUSTPLUME', status: 'named', wave: 'G-KT1', design: 'gustplume' },
-    pidgeot:   { name: 'AERARCH', status: 'named', wave: 'G-KT1', design: 'aerarch' },
+    pidgeot:   { name: 'AERHAWK', status: 'named', wave: 'N', design: 'aerarch' },
     rattata:   { name: 'SCURRAT', status: 'named', wave: 'G-KT1', design: 'scurrat' },
-    raticate:  { name: 'GNAWBRUTE', status: 'named', wave: 'G-KT1', design: 'gnawbrute' },
+    raticate:  { name: 'BRUTERAT', status: 'named', wave: 'N', design: 'gnawbrute' },
     spearow:   { name: 'KEENBEAK', status: 'named', wave: 'G-KT1', design: 'keenbeak' },
     fearow:    { name: 'GLAREHAWK', status: 'named', wave: 'G-KT1', design: 'glarehawk' },
     ekans:     { name: 'VIPLET', status: 'named', wave: 'G-KT1', design: 'viplet' },
     arbok:     { name: 'DREADHOOD', status: 'named', wave: 'G-KT1', design: 'dreadhood' },
     // -- Wave G Kanto Completion, Tranche 2 (coordinator-named) --
-    raichu:    { name: 'GALVANIK', status: 'named', wave: 'G-KT2', design: 'galvanik' },
+    raichu:    { name: 'GALVAMUS', status: 'named', wave: 'N', design: 'galvanik' },
     sandshrew: { name: 'ARMADUNE', status: 'named', wave: 'G-KT2', design: 'armadune' },
     sandslash: { name: 'QUILLDUNE', status: 'named', wave: 'G-KT2', design: 'quilldune' },
     nidoranf:  { name: 'TOXIKIT', status: 'named', wave: 'G-KT2', design: 'toxikit' },
-    nidorina:  { name: 'VENOBELLE', status: 'named', wave: 'G-KT2', design: 'venobelle' },
-    nidoqueen: { name: 'REGITOXA', status: 'named', wave: 'G-KT2', design: 'regitoxa' },
+    nidorina:  { name: 'VENODOE', status: 'named', wave: 'N', design: 'venobelle' },
+    nidoqueen: { name: 'TOXAHIND', status: 'named', wave: 'N', design: 'regitoxa' },
     nidoranm:  { name: 'TOXIBUCK', status: 'named', wave: 'G-KT2', design: 'toxibuck' },
     nidorino:  { name: 'THORNBUCK', status: 'named', wave: 'G-KT2', design: 'thornbuck' },
     nidoking:  { name: 'REGITHORN', status: 'named', wave: 'G-KT2', design: 'regithorn' },
@@ -158234,11 +158234,11 @@ const NAME_REGISTRY = {
     ninetales: { name: 'PYCANIS', status: 'named', wave: 'G-KT2', design: 'pycanis' },
     jigglypuff: { name: 'PUFFUNE', status: 'named', wave: 'G-KT2', design: 'puffune' },
     wigglytuff: { name: 'ARIABLOOM', status: 'named', wave: 'G-KT2', design: 'ariabloom' },
-    farfetchd: { name: 'POSTDUCK', status: 'named', wave: 'G-KT2', design: 'postduck' },
+    farfetchd: { name: 'GALEDUCK', status: 'named', wave: 'N', design: 'postduck' },
     // -- Wave G Kanto Completion, Tranche 3 (coordinator-named) --
     // zubat line: chain continues to crobat (Johto) — lines entry
     // waits for the Johto wave so `lines` only lists complete chains.
-    zubat:     { name: 'SKREEP', status: 'named', wave: 'G-KT3', design: 'skreep' },
+    zubat:     { name: 'SKREEBAT', status: 'named', wave: 'N', design: 'skreep' },
     golbat:    { name: 'GLOOMBITE', status: 'named', wave: 'G-KT3', design: 'gloombite' },
     oddish:    { name: 'NIGHTBUD', status: 'named', wave: 'G-KT3', design: 'nightbud' },
     gloom:     { name: 'DROOPETAL', status: 'named', wave: 'G-KT3', design: 'droopetal' },
@@ -158246,20 +158246,20 @@ const NAME_REGISTRY = {
     paras:     { name: 'FUNGLING', status: 'named', wave: 'G-KT3', design: 'fungling' },
     parasect:  { name: 'MYCELORD', status: 'named', wave: 'G-KT3', design: 'mycelord' },
     venonat:   { name: 'FUZZMITE', status: 'named', wave: 'G-KT3', design: 'fuzzmite' },
-    venomoth:  { name: 'DUSTVEIL', status: 'named', wave: 'G-KT3', design: 'dustveil' },
+    venomoth:  { name: 'POWDERMOTH', status: 'named', wave: 'N', design: 'dustveil' },
     diglett:   { name: 'MOLING', status: 'named', wave: 'G-KT3', design: 'moling' },
     dugtrio:   { name: 'TRIMOLE', status: 'named', wave: 'G-KT3', design: 'trimole' },
     meowth:    { name: 'TINKLETOM', status: 'named', wave: 'G-KT3', design: 'tinkletom' },
     persian:   { name: 'MAJESTOM', status: 'named', wave: 'G-KT3', design: 'majestom' },
     psyduck:   { name: 'DIZDUCK', status: 'named', wave: 'G-KT3', design: 'dizduck' },
-    golduck:   { name: 'TORRIDUCK', status: 'named', wave: 'G-KT3', design: 'torriduck' },
+    golduck:   { name: 'SEERDUCK', status: 'named', wave: 'N', design: 'torriduck' },
     // -- Wave G Kanto Completion, Tranche 4 (coordinator-named) --
     mankey:    { name: 'FUSSAPE', status: 'named', wave: 'G-KT4', design: 'fussape' },
     primeape:  { name: 'WRATHAPE', status: 'named', wave: 'G-KT4', design: 'wrathape' },
     growlithe: { name: 'CINDERPUP', status: 'named', wave: 'G-KT4', design: 'cinderpup' },
     arcanine:  { name: 'EMBERMANE', status: 'named', wave: 'G-KT4', design: 'embermane' },
     poliwag:   { name: 'TADLET', status: 'named', wave: 'G-KT4', design: 'tadlet' },
-    poliwhirl: { name: 'WHIRLBOG', status: 'named', wave: 'G-KT4', design: 'whirlbog' },
+    poliwhirl: { name: 'WHIRLFROG', status: 'named', wave: 'N', design: 'whirlbog' },
     poliwrath: { name: 'BRAWLTOAD', status: 'named', wave: 'G-KT4', design: 'brawltoad' },
     abra:      { name: 'NAPSEER', status: 'named', wave: 'G-KT4', design: 'napseer' },
     kadabra:   { name: 'ORAKIN', status: 'named', wave: 'G-KT4', design: 'orakin' },
@@ -158273,20 +158273,20 @@ const NAME_REGISTRY = {
     bellsprout: { name: 'PITCHLET', status: 'named', wave: 'G-KT5', design: 'pitchlet' },
     weepinbell: { name: 'HANGCUP', status: 'named', wave: 'G-KT5', design: 'hangcup' },
     victreebel: { name: 'PITCHLORD', status: 'named', wave: 'G-KT5', design: 'pitchlord' },
-    geodude:   { name: 'RUMBLING', status: 'named', wave: 'G-KT5', design: 'rumbling' },
+    geodude:   { name: 'PEBBLET', status: 'named', wave: 'N', design: 'rumbling' },
     graveler:  { name: 'CRAGBRUTE', status: 'named', wave: 'G-KT5', design: 'cragbrute' },
     golem:     { name: 'TECTON', status: 'named', wave: 'G-KT5', design: 'tecton' },
     ponyta:    { name: 'EMBERFOAL', status: 'named', wave: 'G-KT5', design: 'emberfoal' },
     rapidash:  { name: 'PYROGALOP', status: 'named', wave: 'G-KT5', design: 'pyrogalop' },
-    slowpoke:  { name: 'DOZELING', status: 'named', wave: 'G-KT5', design: 'dozeling' },
-    slowbro:   { name: 'DOZEHIDE', status: 'named', wave: 'G-KT5', design: 'dozehide' },
+    slowpoke:  { name: 'DOZPOTAM', status: 'named', wave: 'N', design: 'dozeling' },
+    slowbro:   { name: 'POTAMCONCH', status: 'named', wave: 'N', design: 'dozehide' },
     magnemite: { name: 'COILORB', status: 'named', wave: 'G-KT5', design: 'coilorb' },
     magneton:  { name: 'TRICOIL', status: 'named', wave: 'G-KT5', design: 'tricoil' },
     doduo:     { name: 'TWINBEAK', status: 'named', wave: 'G-KT5', design: 'twinbeak' },
     dodrio:    { name: 'TRIBEAK', status: 'named', wave: 'G-KT5', design: 'tribeak' },
     // -- Wave G Kanto Completion, Tranche 6 (coordinator-named) --
-    seel:      { name: 'FLOPLET', status: 'named', wave: 'G-KT6', design: 'floplet' },
-    dewgong:   { name: 'FROSTINE', status: 'named', wave: 'G-KT6', design: 'frostine' },
+    seel:      { name: 'SEALET', status: 'named', wave: 'N', design: 'floplet' },
+    dewgong:   { name: 'FROSTTUSK', status: 'named', wave: 'N', design: 'frostine' },
     grimer:    { name: 'SLUDGLING', status: 'named', wave: 'G-KT6', design: 'sludgling' },
     muk:       { name: 'MIREMASS', status: 'named', wave: 'G-KT6', design: 'miremass' },
     shellder:  { name: 'CLAMLET', status: 'named', wave: 'G-KT6', design: 'clamlet' },
@@ -158294,10 +158294,10 @@ const NAME_REGISTRY = {
     gastly:    { name: 'VAPLUME', status: 'named', wave: 'G-KT6', design: 'vaplume' },
     haunter:   { name: 'VAPHAUNT', status: 'named', wave: 'G-KT6', design: 'vaphaunt' },
     gengar:    { name: 'GRIMSHADE', status: 'named', wave: 'G-KT6', design: 'grimshade' },
-    onix:      { name: 'STRATON', status: 'named', wave: 'G-KT6', design: 'straton' },
-    crystalonix: { name: 'Crystal STRATON', status: 'named', wave: 'G-KT6', design: 'straton-crystal' },
+    onix:      { name: 'ROCKWYRM', status: 'named', wave: 'N', design: 'straton' },
+    crystalonix: { name: 'Crystal ROCKWYRM', status: 'named', wave: 'G-KT6', design: 'straton-crystal' },
     drowzee:   { name: 'DREAMPIR', status: 'named', wave: 'G-KT6', design: 'dreampir' },
-    hypno:     { name: 'SOMNOLORD', status: 'named', wave: 'G-KT6', design: 'somnolord' },
+    hypno:     { name: 'SOMNOTAPIR', status: 'named', wave: 'N', design: 'somnolord' },
     krabby:    { name: 'CLAWLET', status: 'named', wave: 'G-KT6', design: 'clawlet' },
     kingler:   { name: 'PINCHARCH', status: 'named', wave: 'G-KT6', design: 'pincharch' },
     // -- Wave G Kanto Completion, Tranche 7 (coordinator-named) --
@@ -158309,7 +158309,7 @@ const NAME_REGISTRY = {
     marowak:   { name: 'FOSSILORD', status: 'named', wave: 'G-KT7', design: 'fossilord' },
     hitmonlee: { name: 'SPRINGLEG', status: 'named', wave: 'G-KT7', design: 'springleg' },
     hitmonchan: { name: 'PUNCHBOX', status: 'named', wave: 'G-KT7', design: 'punchbox' },
-    lickitung: { name: 'SLURPARD', status: 'named', wave: 'G-KT7', design: 'slurpard' },
+    lickitung: { name: 'SLURPZARD', status: 'named', wave: 'N', design: 'slurpard' },
     koffing:   { name: 'FUMORB', status: 'named', wave: 'G-KT7', design: 'fumorb' },
     weezing:   { name: 'TWINSMOG', status: 'named', wave: 'G-KT7', design: 'twinsmog' },
     rhyhorn:   { name: 'PLATLET', status: 'named', wave: 'G-KT7', design: 'platlet' },
@@ -158318,17 +158318,17 @@ const NAME_REGISTRY = {
     // -- Wave G Kanto Completion, Tranche 8 (coordinator-named) --
     tangela:   { name: 'VINELUMP', status: 'named', wave: 'G-KT8', design: 'vinelump' },
     kangaskhan: { name: 'PUNCHROO', status: 'named', wave: 'G-KT8', design: 'punchroo' },
-    horsea:    { name: 'SEAPIP', status: 'named', wave: 'G-KT8', design: 'seapip' },
+    horsea:    { name: 'SEAPONY', status: 'named', wave: 'N', design: 'seapip' },
     seadra:    { name: 'CORALDRAK', status: 'named', wave: 'G-KT8', design: 'coraldrak' },
     goldeen:   { name: 'VEILFIN', status: 'named', wave: 'G-KT8', design: 'veilfin' },
-    seaking:   { name: 'VEILARCH', status: 'named', wave: 'G-KT8', design: 'veilarch' },
+    seaking:   { name: 'FINARCH', status: 'named', wave: 'N', design: 'veilarch' },
     staryu:    { name: 'ASTLET', status: 'named', wave: 'G-KT8', design: 'astlet' },
     starmie:   { name: 'ASTRION', status: 'named', wave: 'G-KT8', design: 'astrion' },
     mrmime:    { name: 'PANTOMIM', status: 'named', wave: 'G-KT8', design: 'pantomim' },
     scyther:   { name: 'REAPMANT', status: 'named', wave: 'G-KT8', design: 'reapmant' },
     jynx:      { name: 'FROSTELLE', status: 'named', wave: 'G-KT8', design: 'frostelle' },
     electabuzz: { name: 'VOLTIGRE', status: 'named', wave: 'G-KT8', design: 'voltigre' },
-    magmar:    { name: 'LAVAMAND', status: 'named', wave: 'G-KT8', design: 'lavamand' },
+    magmar:    { name: 'LAVAMANDER', status: 'named', wave: 'N', design: 'lavamand' },
     pinsir:    { name: 'STAGHORN', status: 'named', wave: 'G-KT8', design: 'staghorn' },
     tauros:    { name: 'BOVARCH', status: 'named', wave: 'G-KT8', design: 'bovarch' },
     // -- Wave G Kanto Completion, Tranche 9 (coordinator-named) --
@@ -158342,7 +158342,7 @@ const NAME_REGISTRY = {
     kabuto:    { name: 'DOMESHEL', status: 'named', wave: 'G-KT9', design: 'domeshel' },
     kabutops:  { name: 'DOMEREAP', status: 'named', wave: 'G-KT9', design: 'domereap' },
     aerodactyl: { name: 'PTERARCH', status: 'named', wave: 'G-KT9', design: 'pterarch' },
-    snorlax:   { name: 'NAPPASAUR', status: 'named', wave: 'G-KT9', design: 'nappasaur' },
+    snorlax:   { name: 'SOMNIBEAR', status: 'named', wave: 'N', design: 'nappasaur' },
     dratini:   { name: 'WYRMLING', status: 'named', wave: 'G-KT9', design: 'wyrmling' },
     dragonair: { name: 'WYRMSAGE', status: 'named', wave: 'G-KT9', design: 'wyrmsage' },
     dragonite: { name: 'WYRMARCH', status: 'named', wave: 'G-KT9', design: 'wyrmarch' },
@@ -158355,37 +158355,37 @@ const NAME_REGISTRY = {
     cyndaquil: { name: 'ASHMOLE', status: 'named', wave: 'G-JT1', design: 'ashmole' },
     quilava:   { name: 'QUILLVENT', status: 'named', wave: 'G-JT1', design: 'quillvent' },
     typhlosion: { name: 'PYROCLAST', status: 'named', wave: 'G-JT1', design: 'pyroclast' },
-    totodile:  { name: 'SNAPLET', status: 'named', wave: 'G-JT1', design: 'snaplet' },
+    totodile:  { name: 'CROCLET', status: 'named', wave: 'N', design: 'snaplet' },
     croconaw:  { name: 'RIDGEJAW', status: 'named', wave: 'G-JT1', design: 'ridgejaw' },
     feraligatr: { name: 'SNAPTYRANT', status: 'named', wave: 'G-JT1', design: 'snaptyrant' },
-    sentret:   { name: 'VIGILET', status: 'named', wave: 'G-JT1', design: 'vigilet' },
-    furret:    { name: 'DASHLONG', status: 'named', wave: 'G-JT1', design: 'dashlong' },
+    sentret:   { name: 'FERRETLET', status: 'named', wave: 'N', design: 'vigilet' },
+    furret:    { name: 'DASHFERRET', status: 'named', wave: 'N', design: 'dashlong' },
     hoothoot:  { name: 'TICKOWL', status: 'named', wave: 'G-JT1', design: 'tickowl' },
     noctowl:   { name: 'HUSHWING', status: 'named', wave: 'G-JT1', design: 'hushwing' },
-    ledyba:    { name: 'SPOTLET', status: 'named', wave: 'G-JT1', design: 'spotlet' },
+    ledyba:    { name: 'DOTBEETLE', status: 'named', wave: 'N', design: 'spotlet' },
     ledian:    { name: 'STARFIST', status: 'named', wave: 'G-JT1', design: 'starfist' },
-    spinarak:  { name: 'SILKLET', status: 'named', wave: 'G-JT1', design: 'silklet' },
+    spinarak:  { name: 'ARACHLET', status: 'named', wave: 'N', design: 'silklet' },
     // -- Wave G Johto, Tranche 2 (coordinator-named) --
     ariados:   { name: 'SNARELOOM', status: 'named', wave: 'G-JT2', design: 'snareloom' },
     crobat:    { name: 'DREADBITE', status: 'named', wave: 'G-JT2', design: 'dreadbite' },
     chinchou:  { name: 'GLOWLET', status: 'named', wave: 'G-JT2', design: 'glowlet' },
     lanturn:   { name: 'LUMIFIN', status: 'named', wave: 'G-JT2', design: 'lumifin' },
-    pichu:     { name: 'VOLTLET', status: 'named', wave: 'G-JT2', design: 'voltlet' },
+    pichu:     { name: 'VOLTMUS', status: 'named', wave: 'N', design: 'voltlet' },
     cleffa:    { name: 'MOONMOTE', status: 'named', wave: 'G-JT2', design: 'moonmote' },
     igglybuff: { name: 'PUFFLET', status: 'named', wave: 'G-JT2', design: 'pufflet' },
     togepi:    { name: 'SHELLET', status: 'named', wave: 'G-JT2', design: 'shellet' },
     togetic:   { name: 'SERASHELL', status: 'named', wave: 'G-JT2', design: 'serashell' },
-    natu:      { name: 'ORACLET', status: 'named', wave: 'G-JT2', design: 'oraclet' },
-    xatu:      { name: 'SUNSEER', status: 'named', wave: 'G-JT2', design: 'sunseer' },
+    natu:      { name: 'ORACHICK', status: 'named', wave: 'N', design: 'oraclet' },
+    xatu:      { name: 'GAZEBIRD', status: 'named', wave: 'N', design: 'sunseer' },
     mareep:    { name: 'WOOLAMP', status: 'named', wave: 'G-JT2', design: 'woolamp' },
     flaaffy:   { name: 'AMPFLEECE', status: 'named', wave: 'G-JT3', design: 'ampfleece' },
     ampharos:  { name: 'LUMENECK', status: 'named', wave: 'G-JT3', design: 'lumeneck' },
     bellossom: { name: 'HULABLOOM', status: 'named', wave: 'G-JT3', design: 'hulabloom' },
-    marill:    { name: 'AQUALET', status: 'named', wave: 'G-JT3', design: 'aqualet' },
-    azumarill: { name: 'BUBBLEAR', status: 'named', wave: 'G-JT3', design: 'bubblear' },
+    marill:    { name: 'AQUAMUS', status: 'named', wave: 'N', design: 'aqualet' },
+    azumarill: { name: 'AQUALOP', status: 'named', wave: 'N', design: 'bubblear' },
     sudowoodo: { name: 'PETRITREE', status: 'named', wave: 'G-JT3', design: 'petritree' },
     politoed:  { name: 'CROAKING', status: 'named', wave: 'G-JT3', design: 'croaking' },
-    hoppip:    { name: 'DRIFLET', status: 'named', wave: 'G-JT3', design: 'driflet' },
+    hoppip:    { name: 'DRIFBUD', status: 'named', wave: 'N', design: 'driflet' },
     skiploom:  { name: 'FLORASOL', status: 'named', wave: 'G-JT3', design: 'florasol' },
     jumpluff:  { name: 'PUFFDRIFT', status: 'named', wave: 'G-JT3', design: 'puffdrift' },
     aipom:     { name: 'TAILGRIP', status: 'named', wave: 'G-JT3', design: 'tailgrip' },
@@ -158393,9 +158393,9 @@ const NAME_REGISTRY = {
     sunflora:  { name: 'PETALGRIN', status: 'named', wave: 'G-JT3', design: 'petalgrin' },
     yanma:     { name: 'DARNLET', status: 'named', wave: 'G-JT3', design: 'darnlet' },
     wooper:    { name: 'MUDGILL', status: 'named', wave: 'G-JT3', design: 'mudgill' },
-    quagsire:  { name: 'BOGLUMP', status: 'named', wave: 'G-JT3', design: 'boglump' },
+    quagsire:  { name: 'BOGNEWT', status: 'named', wave: 'N', design: 'boglump' },
     murkrow:   { name: 'HEXCROW', status: 'named', wave: 'G-JT4', design: 'hexcrow' },
-    slowking:  { name: 'DOZECROWN', status: 'named', wave: 'G-JT4', design: 'dozecrown' },
+    slowking:  { name: 'ORAPOTAM', status: 'named', wave: 'N', design: 'dozecrown' },
     misdreavus:{ name: 'WAILWISP', status: 'named', wave: 'G-JT4', design: 'wailwisp' },
     unown:     { name: 'GLYPHEYE', status: 'named', wave: 'G-JT4', design: 'glypheye' },
     wobbuffet: { name: 'STOICBLOB', status: 'named', wave: 'G-JT4', design: 'stoicblob' },
@@ -158404,8 +158404,8 @@ const NAME_REGISTRY = {
     forretress:{ name: 'FORTORB', status: 'named', wave: 'G-JT4', design: 'fortorb' },
     dunsparce: { name: 'DRILLET', status: 'named', wave: 'G-JT4', design: 'drillet' },
     gligar:    { name: 'STINGLIDE', status: 'named', wave: 'G-JT4', design: 'stinglide' },
-    steelix:   { name: 'STRATIRON', status: 'named', wave: 'G-JT4', design: 'stratiron' },
-    snubbull:  { name: 'GRUMPLET', status: 'named', wave: 'G-JT4', design: 'grumplet' },
+    steelix:   { name: 'FERROWYRM', status: 'named', wave: 'N', design: 'stratiron' },
+    snubbull:  { name: 'GRUMPBULL', status: 'named', wave: 'N', design: 'grumplet' },
     granbull:  { name: 'BRUTEJAW', status: 'named', wave: 'G-JT4', design: 'brutejaw' },
     qwilfish:  { name: 'MINEPUFF', status: 'named', wave: 'G-JT4', design: 'minepuff' },
     scizor:    { name: 'REAPINCER', status: 'named', wave: 'G-JT4', design: 'reapincer' },
@@ -158414,14 +158414,14 @@ const NAME_REGISTRY = {
     sneasel:   { name: 'NIGHTCLAW', status: 'named', wave: 'G-JT5', design: 'nightclaw' },
     teddiursa: { name: 'HONEYCUB', status: 'named', wave: 'G-JT5', design: 'honeycub' },
     ursaring:  { name: 'GRIZRING', status: 'named', wave: 'G-JT5', design: 'grizring' },
-    slugma:    { name: 'MAGMELT', status: 'named', wave: 'G-JT5', design: 'magmelt' },
+    slugma:    { name: 'MAGSLUG', status: 'named', wave: 'N', design: 'magmelt' },
     magcargo:  { name: 'MAGMADOME', status: 'named', wave: 'G-JT5', design: 'magmadome' },
     swinub:    { name: 'SNUFLET', status: 'named', wave: 'G-JT5', design: 'snuflet' },
     piloswine: { name: 'SHAGBOAR', status: 'named', wave: 'G-JT5', design: 'shagboar' },
     corsola:   { name: 'CORALET', status: 'named', wave: 'G-JT5', design: 'coralet' },
     remoraid:  { name: 'JETLET', status: 'named', wave: 'G-JT5', design: 'jetlet' },
     octillery: { name: 'OCTURRET', status: 'named', wave: 'G-JT5', design: 'octurret' },
-    delibird:  { name: 'PARCELIN', status: 'named', wave: 'G-JT6', design: 'parcelin' },
+    delibird:  { name: 'PARCELGUIN', status: 'named', wave: 'N', design: 'parcelin' },
     mantine:   { name: 'KITERAY', status: 'named', wave: 'G-JT6', design: 'kiteray' },
     skarmory:  { name: 'PLATEWING', status: 'named', wave: 'G-JT6', design: 'platewing' },
     houndour:  { name: 'CHARPUP', status: 'named', wave: 'G-JT6', design: 'charpup' },
@@ -158436,7 +158436,7 @@ const NAME_REGISTRY = {
     hitmontop: { name: 'SPINKICK', status: 'named', wave: 'G-JT7', design: 'spinkick' },
     smoochum:  { name: 'FROSTLET', status: 'named', wave: 'G-JT7', design: 'frostlet' },
     elekid:    { name: 'PLUGLET', status: 'named', wave: 'G-JT7', design: 'pluglet' },
-    magby:     { name: 'CINDLET', status: 'named', wave: 'G-JT7', design: 'cindlet' },
+    magby:     { name: 'CINDBILL', status: 'named', wave: 'N', design: 'cindlet' },
     miltank:   { name: 'MOOBELLE', status: 'named', wave: 'G-JT7', design: 'moobelle' },
     blissey:   { name: 'SERENURSE', status: 'named', wave: 'G-JT7', design: 'serenurse' },
     larvitar:  { name: 'CRAGLET', status: 'named', wave: 'G-JT7', design: 'craglet' },
@@ -158729,8 +158729,8 @@ const NAME_REGISTRY = {
     buddin: ['bulbasaur', 'ivysaur', 'venusaur'],
     embry: ['charmander', 'charmeleon', 'charizard'],
     bublet: ['squirtle', 'wartortle', 'blastoise'],
-    fronlet: ['caterpie', 'metapod', 'butterfree'],
-    thornib: ['weedle', 'kakuna', 'beedrill'],
+    grublet: ['caterpie', 'metapod', 'butterfree'],
+    stingrub: ['weedle', 'kakuna', 'beedrill'],
     dunplume: ['pidgey', 'pidgeotto', 'pidgeot'],
     scurrat: ['rattata', 'raticate'],
     keenbeak: ['spearow', 'fearow'],
@@ -158755,13 +158755,13 @@ const NAME_REGISTRY = {
     muscling: ['machop', 'machoke', 'machamp'],
     stingel: ['tentacool', 'tentacruel'],
     pitchlet: ['bellsprout', 'weepinbell', 'victreebel'],
-    rumbling: ['geodude', 'graveler', 'golem'],
+    pebblet: ['geodude', 'graveler', 'golem'],
     emberfoal: ['ponyta', 'rapidash'],
-    dozeling: ['slowpoke', 'slowbro', 'slowking'],
-    straton: ['onix', 'steelix'],
+    dozpotam: ['slowpoke', 'slowbro', 'slowking'],
+    rockwyrm: ['onix', 'steelix'],
     reapmant: ['scyther', 'scizor'],
     honeycub: ['teddiursa', 'ursaring'],
-    magmelt: ['slugma', 'magcargo'],
+    magslug: ['slugma', 'magcargo'],
     snuflet: ['swinub', 'piloswine'],
     jetlet: ['remoraid', 'octillery'],
     charpup: ['houndour', 'houndoom'],
@@ -158775,7 +158775,7 @@ const NAME_REGISTRY = {
     craglet: ['larvitar', 'pupitar', 'tyranitar'],
     coilorb: ['magnemite', 'magneton'],
     twinbeak: ['doduo', 'dodrio'],
-    floplet: ['seel', 'dewgong'],
+    sealet: ['seel', 'dewgong'],
     sludgling: ['grimer', 'muk'],
     clamlet: ['shellder', 'cloyster'],
     vaplume: ['gastly', 'haunter', 'gengar'],
@@ -158786,7 +158786,7 @@ const NAME_REGISTRY = {
     fosslet: ['cubone', 'marowak'],
     fumorb: ['koffing', 'weezing'],
     platlet: ['rhyhorn', 'rhydon'],
-    seapip: ['horsea', 'seadra', 'kingdra'],
+    seapony: ['horsea', 'seadra', 'kingdra'],
     veilfin: ['goldeen', 'seaking'],
     astlet: ['staryu', 'starmie'],
     rustcarp: ['magikarp', 'gyarados'],
@@ -158795,19 +158795,19 @@ const NAME_REGISTRY = {
     wyrmling: ['dratini', 'dragonair', 'dragonite'],
     sproutlet: ['chikorita', 'bayleef', 'meganium'],
     ashmole: ['cyndaquil', 'quilava', 'typhlosion'],
-    snaplet: ['totodile', 'croconaw', 'feraligatr'],
-    vigilet: ['sentret', 'furret'],
+    croclet: ['totodile', 'croconaw', 'feraligatr'],
+    ferretlet: ['sentret', 'furret'],
     tickowl: ['hoothoot', 'noctowl'],
-    spotlet: ['ledyba', 'ledian'],
-    silklet: ['spinarak', 'ariados'],
-    skreep: ['zubat', 'golbat', 'crobat'],
+    dotbeetle: ['ledyba', 'ledian'],
+    arachlet: ['spinarak', 'ariados'],
+    skreebat: ['zubat', 'golbat', 'crobat'],
     glowlet: ['chinchou', 'lanturn'],
     shellet: ['togepi', 'togetic', 'togekiss'],
-    oraclet: ['natu', 'xatu'],
+    orachick: ['natu', 'xatu'],
     woolamp: ['mareep', 'flaaffy', 'ampharos'],
     prismkit: ['eevee', 'vaporeon', 'jolteon', 'flareon', 'espeon', 'umbreon'],
-    // Hoenn lines (Wave G) — complete chains only; nosepass (probopass),
-    // roselia (budew/roserade) and duskull (dusknoir) chains wait for Sinnoh.
+    // Hoenn lines (Wave G) — complete chains only; the nosepass,
+    // roselia and duskull chains were completed by Wave N (below).
     vergeko: ['treecko', 'grovyle', 'sceptile'],
     pyrchik: ['torchic', 'combusken', 'blaziken'],
     rillskip: ['mudkip', 'marshtomp', 'swampert'],
@@ -158889,14 +158889,24 @@ const NAME_REGISTRY = {
     snowfir: ['snover', 'abomasnow'],
     nightclaw: ['sneasel', 'weavile'],
     coilorb: ['magnemite', 'magneton', 'magnezone'],
-    slurpard: ['lickitung', 'lickilicky'],
+    slurpzard: ['lickitung', 'lickilicky'],
     platlet: ['rhyhorn', 'rhydon', 'rhyperior'],
     vinelump: ['tangela', 'tangrowth'],
     pluglet: ['elekid', 'electabuzz', 'electivire'],
-    cindlet: ['magby', 'magmar', 'magmortar'],
+    cindbill: ['magby', 'magmar', 'magmortar'],
     darnlet: ['yanma', 'yanmega'],
     stinglide: ['gligar', 'gliscor'],
     snuflet: ['swinub', 'piloswine', 'mamoswine'],
+    // Wave N: cross-region chains completed once Sinnoh landed, plus
+    // intra-Johto chains the Johto wave left unregistered.
+    magmoai: ['nosepass', 'probopass'],
+    roselet: ['budew', 'roselia', 'roserade'],
+    skullet: ['duskull', 'dusclops', 'dusknoir'],
+    drifbud: ['hoppip', 'skiploom', 'jumpluff'],
+    kernlet: ['sunkern', 'sunflora'],
+    mudgill: ['wooper', 'quagsire'],
+    conelet: ['pineco', 'forretress'],
+    grumpbull: ['snubbull', 'granbull'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --
@@ -159719,7 +159729,7 @@ const MAP_GROUND = {
   // Bugsy's forest gym the Bloom, Whitney's the Open (the Plain Badge
   // is plain all the way down, by her own cheerful admission), and
   // Morty's the Grave. West landmark interiors follow their feel:
-  // Newleaf Tower blooms, the DOZELING Well runs Tide-wet, the Burned
+  // Newleaf Tower blooms, the DOZPOTAM Well runs Tide-wet, the Burned
   // Tower is Grave ground, and the lab / Kurt's house stay Open.
   'gym-violet': 'storm', // Iris Gym — Falkner
   'gym-azalea': 'bloom', // Cinder Gym — Bugsy
@@ -175099,11 +175109,11 @@ Object.assign(OverworldScene.prototype, {
         }
       }
       if (!flags.johto_well_cleared) {
-        if (flags.kurt_well_plea) { say(['Still sitting, still useless, still proud — the back has union rules, apparently. The well, trainer. Three Rockets, and DOZELING who deserve better. My house will keep.']); return true; }
+        if (flags.kurt_well_plea) { say(['Still sitting, still useless, still proud — the back has union rules, apparently. The well, trainer. Three Rockets, and DOZPOTAM who deserve better. My house will keep.']); return true; }
         say(['Mind the well on your way past, trainer. Something down there smells like a market that should not exist. If you find an old man investigating it badly — that will be me, shortly.']); return true; }
       if (!flags.gsball_delivered) {
         if ((st.bag.gsball || 0) > 0) {
-          say(['The well is quiet, the DOZELING are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+          say(['The well is quiet, the DOZPOTAM are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
             '...Wait. Wait wait wait. That — in your bag. Gold and silver bands, warm as a held hand. Let me see it. LET me see it.',
             'Forty years I have worked Capture Orbs by hand. Forty years, and I have never — feel that? It is not locked. It is not broken. It is WAITING, and no tool I own speaks its language. Even I cannot open this ball, trainer.',
             'But listen. ...There. It hums. It has hummed twice since I took it — both times when the wind came through Holly Forest, from the old shrine in the trees. Whatever this ball is waiting for, it is waiting THERE. Keep it with me a while. Let an old man study it properly, and when the forest calls, we will both know.'], () => {
@@ -175121,7 +175131,7 @@ Object.assign(OverworldScene.prototype, {
           });
           return true;
         }
-        say(['The well is quiet, the DOZELING are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
+        say(['The well is quiet, the DOZPOTAM are whole, and Cinder can hear itself think again. You did in an hour what my back would not let me do all day, {player}.',
           'Hawthorn wrote that you carry a ball no machine can open. Bring it to this house when you can — an old pair of hands would like its turn at being defeated by it.']);
         return true;
       }
@@ -175165,7 +175175,7 @@ Object.assign(OverworldScene.prototype, {
           if (!won) return;
           if (flags.beat_rocket_well_1 && flags.beat_rocket_well_2 && flags.beat_rocket_well_3 && !flags.johto_well_cleared) {
             flags.johto_well_cleared = true;
-            say(['The last Rocket scrambles up the ladder and does not look back. Below, in the wet dark, the DOZELING lift their heads one by one — slow, unhurried, already forgetting, which is the kindest thing about them.', 'Somewhere above, a bent old man is about to hear the best news of his year. Kurt\'s house, trainer. And bring what you are carrying — he has waited long enough.'], null, 'NARRATOR');
+            say(['The last Rocket scrambles up the ladder and does not look back. Below, in the wet dark, the DOZPOTAM lift their heads one by one — slow, unhurried, already forgetting, which is the kindest thing about them.', 'Somewhere above, a bent old man is about to hear the best news of his year. Kurt\'s house, trainer. And bring what you are carrying — he has waited long enough.'], null, 'NARRATOR');
           }
         });
       }, npc.name);
@@ -175187,7 +175197,7 @@ Object.assign(OverworldScene.prototype, {
     }
 
     if (kind === 'jasmine_light') {
-      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Lumi is well, trainer, and every ship between here and Tidewall knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will STRATIRON.']); return true; }
+      if (flags.amphy_healed) { say(['Look at her. Look at that light — steady, warm, all the way to the horizon. Lumi is well, trainer, and every ship between here and Tidewall knows it tonight because of you.', 'And now I owe you the other thing I promised myself I would give properly: a battle, with nothing held back and nothing weighing on it. My gym, when you are ready. I will be there. So will FERROWYRM.']); return true; }
       if ((st.bag.secretpotion || 0) > 0) {
         say(['That smell — honey and iron and something green. The Tidewall mix. You actually crossed the sea for her. Trainer... thank you. Hold her steady for me. Lumi, love — medicine. The good kind, from across the water.'], () => {
           st.bag.secretpotion = (st.bag.secretpotion || 0) - 1;
@@ -175547,7 +175557,7 @@ Object.assign(OverworldScene.prototype, {
       chuck: { badge: 'stormbadge', gate: null, gateLines: [],
         post: 'Any time the sea brings you back, Storm Badge holder, my gym is its loudest address. Bring your hands — and your appetite. My wife insists on feeding challengers who survive me.' },
       jasmine: { badge: 'mineralbadge', gate: 'amphy_healed',
-        gateLines: ['I am sorry — truly. I cannot battle while Lumi is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my STRATIRON deserves better from me. The light first, trainer. Please. The light first.'],
+        gateLines: ['I am sorry — truly. I cannot battle while Lumi is sick. A leader who fights with her heart in a lighthouse lamp room is no leader at all, and my FERROWYRM deserves better from me. The light first, trainer. Please. The light first.'],
         post: 'Lumi\'s light and your Mineral Badge, trainer — Beacon shines twice tonight. Come back for a rematch whenever the harbor looks quiet. It so rarely is, and I so rarely mind.' },
       pryce: { badge: 'glacierbadge', gate: 'johto_hideout_cleared',
         gateLines: ['Not yet, challenger. My town is sitting on a Rocket nest, my lake is screaming, and an old man does not hand out badges over an occupation. Clear what is under the souvenir shop — Lance is in town, and the lake road is north. Then come back, and winter will receive you properly.'],
@@ -176668,21 +176678,21 @@ Object.assign(OverworldScene.prototype, {
     // ---- Flintridge: Brock's Day Off ----
     if (id === 'tale_pewter') {
       if (npc.name === 'CURATOR') {
-        if (stage < 0) { say(['Psst — trainer. Brock has not had a day off since the museum roof leaked, and that was two winters ago.', 'Cover my desk quiz for the visitors — three questions, all from the exhibits — then spar his RUMBLING so he can call it exercise and clock out.', 'The Iron Acorn is yours if you pull it off. It has been our paperweight for a decade; it deserves adventure.'], () => acceptTale(st, id)); return true; }
+        if (stage < 0) { say(['Psst — trainer. Brock has not had a day off since the museum roof leaked, and that was two winters ago.', 'Cover my desk quiz for the visitors — three questions, all from the exhibits — then spar his PEBBLET so he can call it exercise and clock out.', 'The Iron Acorn is yours if you pull it off. It has been our paperweight for a decade; it deserves adventure.'], () => acceptTale(st, id)); return true; }
         if (stage === 0) { this.taleQuizPewter(npc); return true; }
-        if (stage === 1) { say(['Quiz covered! Brock is in the square, pretending not to be off duty. His RUMBLING is already judging you.']); return true; }
+        if (stage === 1) { say(['Quiz covered! Brock is in the square, pretending not to be off duty. His PEBBLET is already judging you.']); return true; }
         say(['The museum hums along, and Brock actually smiled at a fossil today. Miracles, catalogued.']); return true;
       }
       if (npc.name === 'BROCK') {
         if (stage === 1) {
-          say(['Day off. Allegedly. The Curator says you are my exercise plan.', 'One RUMBLING, no badges on the line, no crowd. Just rock and honest work.'], () => {
-            g.ui.showMenu('Spar with Brock\'s RUMBLING (Lv 12)?', [
+          say(['Day off. Allegedly. The Curator says you are my exercise plan.', 'One PEBBLET, no badges on the line, no crowd. Just rock and honest work.'], () => {
+            g.ui.showMenu('Spar with Brock\'s PEBBLET (Lv 12)?', [
               { label: 'Spar', value: 'yes' }, { label: 'Not yet', value: 'no' },
             ], (v) => {
               if (v !== 'yes') return;
               this.taleSpar('geodude', 12, () => {
                 finishWith(['Solid. You read a Rock type like a book you have already finished.', 'Here — the Iron Acorn. The museum\'s oldest paperweight, and harder than my whole team\'s heads.', 'Secret, trainer to trainer: this city\'s gym was built out of the museum\'s own stone. The museum came first. Leaders here have been part-time curators ever since — I pay the fossil lab out of gym winnings, and I would do it on my day off, too.']);
-              }, () => say(['RUMBLING takes the round. He is smug about it in three languages of rock.', 'Shake it off — a day off has room for a rematch.']));
+              }, () => say(['PEBBLET takes the round. He is smug about it in three languages of rock.', 'Shake it off — a day off has room for a rematch.']));
             });
           });
           return true;
@@ -176786,7 +176796,7 @@ Object.assign(OverworldScene.prototype, {
       if (stage < 0) { say(['You are looking at Canopy\'s best-kept height: the Game Corner roof garden, Erika\'s own.', 'It wants three waterings this season — and the garden keeps gym hours, in its way: the second visit wants a trainer with 4 badges, the third, 6. Plants respect a journey.', 'Finish the season and the Gardenia Sash is yours. Erika sewed it herself, so water like you mean it.'], () => acceptTale(st, id)); return true; }
       if (stage === 0) { say(['Watering one — there you go. Slow circles, no splashing the marigolds; they hold grudges.', 'One bed drinks for the whole roof when a journey is young. Come back at 4 badges for the second round.'], () => advanceTale(st, id)); return true; }
       if (stage === 1) {
-        if (badges >= 4) { say(['Four badges! The vines noticed before I did. Watering two — mind the hanging bed, it drinks like a NAPPASAUR.', 'One more round, at 6 badges, and the season is yours.'], () => advanceTale(st, id)); return true; }
+        if (badges >= 4) { say(['Four badges! The vines noticed before I did. Watering two — mind the hanging bed, it drinks like a SOMNIBEAR.', 'One more round, at 6 badges, and the season is yours.'], () => advanceTale(st, id)); return true; }
         say(['The garden is still sipping its first watering, trainer. Second round opens at 4 badges — you hold ' + badges + '. The plants are patient. Be like the plants.']); return true;
       }
       if (stage === 2) {
@@ -177044,7 +177054,7 @@ Object.assign(OverworldScene.prototype, {
     ];
     const ask = (i) => {
       if (i >= QS.length) {
-        this.taleSay(['Three for three! The desk is covered, the visitors are dazzled, and Brock owes us both a day off.', 'He is in the square with his RUMBLING. Go and collect your spar.'], npc.name, () => advanceTale(st, 'tale_pewter'));
+        this.taleSay(['Three for three! The desk is covered, the visitors are dazzled, and Brock owes us both a day off.', 'He is in the square with his PEBBLET. Go and collect your spar.'], npc.name, () => advanceTale(st, 'tale_pewter'));
         return;
       }
       const item = QS[i];

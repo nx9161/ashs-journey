@@ -566,7 +566,7 @@ export const MAPS3 = {
     signs: [],
     npcs: [
       { x: 4, y: 5, name: 'HIKER DOSS', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
-        dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The SKREEP union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
+        dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The SKREEBAT union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
     ],
     encounters: {
       rate: 0.1, cave: true,
@@ -1073,7 +1073,7 @@ export const MAPS3 = {
     npcs: [
       { x: 10, y: 5, name: 'MARCUS', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         trade: { give: 'slowbro', get: 'lickitung', nickname: 'MARC' },
-        dialogue: ["My DOZEHIDE naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPARD? I hear they never sleep. Sounds exhausting. Perfect."] },
+        dialogue: ["My POTAMCONCH naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPZARD? I hear they never sleep. Sounds exhausting. Perfect."] },
       { x: 4, y: 10, name: 'BIKER JOEL', art: 'biker', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
         trainer: 'r16_biker', sight: { dir: 'right', range: 3 },
         dialogue: ["Cyclists rule this hill, pedestrian! Defend your walking privileges!", "The hill... respects your legs. UGH. Fine."] },
@@ -1328,7 +1328,7 @@ export const MAPS3 = {
         dialogue: ["Lab work breeds FUZZMITE like paperwork. My VINELUMP, Tang, at least files the vines neatly.", "Swap? Your FUZZMITE for my VINELUMP. The lab gains a moth; you gain a jungle."] },
       { x: 15, y: 8, name: 'UMA', art: 'lady', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
         trade: { give: 'raichu', get: 'electrode', nickname: 'DORRY' },
-        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVANIK? Something with legs, for once. Please. My shins beg you."] },
+        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVAMUS? Something with legs, for once. Please. My shins beg you."] },
       { x: 13, y: 8, name: 'DR. EMBER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#e07830', revive: true,
         dialogue: ["The lab behind me coaxes life out of stone — bring a fossil, any fossil, and our machines will do the rest.", "Helix, dome, even amber older than the island. Stone remembers, trainer. We just remind it how."] },
       { x: 2, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -1475,7 +1475,7 @@ export const MAPS3 = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
       { x: 5, y: 7, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
     ],

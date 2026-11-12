@@ -138,7 +138,7 @@ export const MAPS2 = {
     signs: [],
     npcs: [
       { x: 12, y: 6, name: 'HIKER TOMO', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
-        dialogue: ["SKREEP own the dark in here — they hear you before you see them.", "Somewhere below, the mountain keeps a stone that fell from the sky. Moon Stone, they call it."] },
+        dialogue: ["SKREEBAT own the dark in here — they hear you before you see them.", "Somewhere below, the mountain keeps a stone that fell from the sky. Moon Stone, they call it."] },
     ],
     encounters: {
       rate: 0.1, cave: true,
@@ -307,7 +307,7 @@ export const MAPS2 = {
         dialogue: ["My NAPSEER teleports out of every conversation. Exhausting at parties.", "Trade you my PANTOMIM, Marcel, for an NAPSEER? At least he'll stay in the room. Mostly."] },
       { x: 2, y: 6, name: 'TESS', art: 'lady', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#c0a03a',
         trade: { give: 'poliwhirl', get: 'jynx', nickname: 'LOLA' },
-        dialogue: ["Lola my FROSTELLE sings to the river every dawn. Beautiful. Loud. So loud.", "Swap her for a WHIRLBOG? My ears are begging you."] },
+        dialogue: ["Lola my FROSTELLE sings to the river every dawn. Beautiful. Loud. So loud.", "Swap her for a WHIRLFROG? My ears are begging you."] },
       { x: 10, y: 9, name: 'FAN', art: 'youngster', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         dialogue: ["Misty's ASTRION once spun a whirlpool that soaked the whole front row. Best day of my life.", "North of here the bridge kids challenge everyone who crosses. Even grandmas. ESPECIALLY grandmas."] },
     ],
@@ -516,7 +516,7 @@ export const MAPS2 = {
         dialogue: ["This BUBLET leads a whole squad of pranksters — they flooded the pier AGAIN this morning.", "He listens to you, though. Take him, trainer. A squad needs a real leader."] },
       { x: 14, y: 9, name: 'HANK', art: 'fisher', skin: '#c89878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
         trade: { give: 'spearow', get: 'farfetchd', nickname: 'DUX' },
-        dialogue: ["Caught this POSTDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
+        dialogue: ["Caught this GALEDUCK — Dux — by the harbor. Clever bird. Keeps outsmarting my dinner plans.", "Swap me a KEENBEAK for him? A sailor needs a scout, not a chef."] },
       { x: 13, y: 2, name: 'CHAIRMAN', art: 'elder', skin: '#e8b888', shirt: '#6a5a8a', pants: '#3a3a4a', hair: '#c0c0c0',
         dialogue: ["I chair the Kin Fan Club! Did I tell you about my PYROGALOP? Its coat — like spun sunset!", "And my GLAREHAWK? Magnificent. I could talk for hours. I HAVE talked for hours. Ask anyone."] },
     ],
@@ -747,7 +747,7 @@ export const MAPS2 = {
       { x: 11, y: 8, name: 'HOSTESS', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to the Game Corner, hon! Coins, prizes, and absolutely no funny business by the poster. None. Ever.", "The boss counts the slot tokens twice a night. Paranoid? In THIS city? Ha."] },
       { x: 3, y: 8, name: 'PERFUMER', art: 'lady', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#a05a2a',
-        dialogue: ["Erika's perfume is distilled from her own garden. One whiff and even a NAPPASAUR sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
+        dialogue: ["Erika's perfume is distilled from her own garden. One whiff and even a SOMNIBEAR sighs.", "Careful — her gym smells sweet right up until the Sleep Powder."] },
       // ADR-025 §3 (Phase 3): Canopy gains a small keepsake atelier —
       // the Second-Wind Ribbon's SECOND source (its first is the Rue &
       // Cole parley, bond-gated to Phase 5). The ribbon's stock is
@@ -1770,7 +1770,7 @@ export const MAPS2 = {
     npcs: [
       { x: 10, y: 5, name: 'MARCUS', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         trade: { give: 'slowbro', get: 'lickitung', nickname: 'MARC' },
-        dialogue: ["My DOZEHIDE naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPARD? I hear they never sleep. Sounds exhausting. Perfect."] },
+        dialogue: ["My POTAMCONCH naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPZARD? I hear they never sleep. Sounds exhausting. Perfect."] },
       { x: 4, y: 10, name: 'BIKER JOEL', art: 'biker', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
         trainer: 'r16_biker', sight: { dir: 'right', range: 3 },
         dialogue: ["Cyclists rule this hill, pedestrian! Defend your walking privileges!", "The hill... respects your legs. UGH. Fine."] },
@@ -2016,7 +2016,7 @@ export const MAPS2 = {
         dialogue: ["Lab work breeds FUZZMITE like paperwork. My VINELUMP, Tang, at least files the vines neatly.", "Swap? Your FUZZMITE for my VINELUMP. The lab gains a moth; you gain a jungle."] },
       { x: 15, y: 8, name: 'UMA', art: 'lady', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
         trade: { give: 'raichu', get: 'electrode', nickname: 'DORRY' },
-        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVANIK? Something with legs, for once. Please. My shins beg you."] },
+        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVAMUS? Something with legs, for once. Please. My shins beg you."] },
     ],
     encounters: null,
     items: [],
@@ -2186,7 +2186,7 @@ export const MAPS2 = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's PEBBLET."] },
       { x: 12, y: 4, name: 'OLD MAN', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["That gym's leader vanished years ago — some say he runs... an organization. Some say he'll be back.", "When the door opens again, trainer, Arden will feel it. Mark an old man's words."] },
     ],
