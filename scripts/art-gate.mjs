@@ -86,5 +86,35 @@ if (kitOver || kitOffCanvas) {
   console.log(`art-gate: KIT FAIL — ${kitOver} kit entries >${caps.kitMaxColors} colors, ${kitOffCanvas} off-canvas (tiles 16x16 / chars 16x32)`);
 }
 
-console.log(`art-gate: ${keys.length} entries · ${battle.length} battle entries on ${caps.battleCanvas} (${offCanvas.length} off-canvas) · ${over}/${caps.maxOver16ColorEntries} entries >16 colors · kit: ${kitKeys.length} entries, ${kitOver} over ${caps.kitMaxColors} colors, ${kitOffCanvas} off-canvas — ${fail ? 'GATE FAILED' : 'gate PASS'}`);
+// (d) Wave F accessory overlays (kitacc-data.mjs, ORIGINAL art layered
+// on the kit character): same B2-G2 discipline as the kit registry —
+// per-entry hard cap, no exceedance allowance — on the 16x32 overworld
+// canvas. Sparse rows and mirrorOf entries are expanded exactly as
+// materializeArt resolves them.
+const { KITACC } = await import('../assets/sprites/kitacc-data.mjs');
+const accKeys = Object.keys(KITACC);
+let accOver = 0, accBroken = 0;
+const accExpand = (id, depth = 0) => {
+  const e = KITACC[id];
+  if (!e || depth > 2) return null;
+  if (e.mirrorOf) { const b = accExpand(e.mirrorOf, depth + 1); return b ? b.map((r) => [...r].reverse().join('')) : null; }
+  const rows = Array.from({ length: 32 }, () => '.'.repeat(16));
+  for (const [y, s] of Object.entries(e.rows)) { if (s.length !== 16) return null; rows[+y] = s; }
+  return rows;
+};
+for (const k of accKeys) {
+  const rows = accExpand(k);
+  if (!rows) { accBroken++; continue; }
+  const used = new Set();
+  for (const r of rows) for (const ch of r) if (ch !== '.') used.add(ch);
+  const pal = KITACC[k].pal || (KITACC[KITACC[k].mirrorOf] || {}).pal || {};
+  for (const ch of used) if (!pal[ch]) { accBroken++; break; }
+  if (used.size > caps.kitMaxColors) accOver++;
+}
+if (accOver || accBroken) {
+  fail = 1;
+  console.log(`art-gate: KITACC FAIL — ${accOver} entries >${caps.kitMaxColors} colors, ${accBroken} broken (bad rows / undeclared chars / missing mirror target)`);
+}
+
+console.log(`art-gate: ${keys.length} entries · ${battle.length} battle entries on ${caps.battleCanvas} (${offCanvas.length} off-canvas) · ${over}/${caps.maxOver16ColorEntries} entries >16 colors · kit: ${kitKeys.length} entries, ${kitOver} over ${caps.kitMaxColors} colors, ${kitOffCanvas} off-canvas · kitacc: ${accKeys.length} entries, ${accOver} over ${caps.kitMaxColors} colors, ${accBroken} broken — ${fail ? 'GATE FAILED' : 'gate PASS'}`);
 process.exit(fail);
