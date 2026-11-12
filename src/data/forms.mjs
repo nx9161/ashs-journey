@@ -108,7 +108,7 @@ export const FORMS = [
   { id: 'mega-manectric', speciesId: 310, name: 'Mega VOLTHOUND', kind: 'mega', region: 'kalos', types: ['electric'], note: 'Mega form; a mane shaped like a lightning strike.' },
   { id: 'mega-sharpedo', speciesId: 319, name: 'Mega TORPEDARK', kind: 'mega', region: 'kalos', types: ['water', 'dark'], note: 'Mega form; nose spikes and an all-ahead bite.' },
   { id: 'mega-camerupt', speciesId: 323, name: 'Mega ERUPTAMEL', kind: 'mega', region: 'kalos', types: ['fire', 'ground'], note: 'Mega form; its humps merge into one slow volcano.' },
-  { id: 'mega-altaria', speciesId: 334, name: 'Mega Altaria', kind: 'mega', region: 'kalos', types: ['dragon', 'fairy'], note: 'Mega form; a thunderhead of fluff with a temper.' },
+  { id: 'mega-altaria', speciesId: 334, name: 'Mega ARIASWAN', kind: 'mega', region: 'kalos', types: ['dragon', 'fairy'], note: 'Mega form; a thunderhead of fluff with a temper.' },
   { id: 'mega-banette', speciesId: 354, name: 'Mega Banette', kind: 'mega', region: 'kalos', types: ['ghost'], note: 'Mega form; the zipper opens and the grudge spills out.' },
   { id: 'mega-absol', speciesId: 359, name: 'Mega Absol', kind: 'mega', region: 'kalos', types: ['dark'], note: 'Mega form; wing-like fur that reads as an omen.' },
   { id: 'mega-glalie', speciesId: 362, name: 'Mega Glalie', kind: 'mega', region: 'kalos', types: ['ice'], note: 'Mega form; its jaw unhinges on excess ice energy.' },
