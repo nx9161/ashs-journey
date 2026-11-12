@@ -465,7 +465,7 @@ body.flip .ab{right:auto;left:16px}
 .cmdf.tut-focus{outline:3px solid #58c94f;outline-offset:-3px;animation:cmdfocus 1s infinite}
 @keyframes cmdfocus{50%{outline-color:#e8b832}}
 .cmdicon{width:24px;height:24px;image-rendering:pixelated}
-.cmdlabel{line-height:1}
+.cmdlabel{line-height:1;font-weight:700}
 @media (max-width:560px){.cmdf{min-height:34px;font-size:14px;padding-left:16px}.cmdicon{width:20px;height:20px}.cmdpanel{gap:4px;padding:5px}}
 /* battle menus — UI v2.2 (defect 3): in battle, list menus (moves, bag,
    ball picker) live in the message-box zone as a Platinum window, the way

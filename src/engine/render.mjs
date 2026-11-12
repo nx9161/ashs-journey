@@ -220,6 +220,17 @@ export class Renderer {
     if (o.align) c.textAlign = 'left';
   }
 
+  // Width of a string under the EXACT font text() would render it with.
+  // Stub ctxs (QA recording surfaces) may lack measureText — fall back to
+  // a per-char estimate; nothing rendered depends on that path.
+  measure(str, opts) {
+    const o = opts || {};
+    const c = this.ctx;
+    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + (o.display ? UI_DISPLAY_FONT_STACK : UI_FONT_STACK);
+    if (typeof c.measureText === 'function') return c.measureText(str).width;
+    return String(str).length * (o.size || 8) * 0.6;
+  }
+
   // UI v2.3 (defect 1): word-wrap measured with the EXACT font string text()
   // renders with (same stack, size, weight) — breaks fall only on spaces,
   // so no line ever ends mid-word. A single word longer than maxW is the

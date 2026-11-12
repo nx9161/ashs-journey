@@ -9,7 +9,7 @@
 export const TEXT_SPEED_CPS = { slow: 15, normal: 30, fast: 60, instant: 9999 };
 
 import { SFX } from '../engine/audio.mjs';
-import { uiIcon, speakerPortraitCanvas } from '../engine/art.mjs';
+import { speakerPortraitCanvas } from '../engine/art.mjs';
 import { TYPE_COLORS } from '../engine/sprites.mjs';
 
 function stubEl() {
@@ -26,51 +26,17 @@ function stubEl() {
 }
 
 // Hand-authored 12x12 pixel command icons (original, no emoji — contracts §1.3).
-// '1' = ink (#ffe9a8 on dark), '.' = transparent.
+// Rows joined by '/'; '1' = kit ink #2a1800, '2' = per-icon accent (CMD_ACC),
+// '.' = transparent. Wave G M1.1 set: crossed blades, orb cluster, satchel,
+// bootprints — replaces the legacy starburst / bars / arrow / ball art.
+const CMD_ACC = { fight: '#647d99', party: '#e8b832', bag: '#b07a3f', run: '#8fa4bd' };
 const CMD_PIX = {
-  fight: [
-    '.....1......',
-    '.....1......',
-    '..1..1..1...',
-    '...11111....',
-    '....111.....',
-    '.111111111..',
-    '....111.....',
-    '...11111....',
-    '..1..1..1...',
-    '.....1......',
-    '.....1......',
-    '............',
-  ],
-  party: [
-    '.11...11....',
-    '.11...11....',
-    '.11...11....',
-    '............',
-    '.11...11....',
-    '.11...11....',
-    '............',
-    '.1111111....',
-    '.1111111....',
-    '............',
-    '............',
-    '............',
-  ],
-  run: [
-    '....1.......',
-    '.....1......',
-    '......1.....',
-    '.......1....',
-    '11111111111.',
-    '.......1....',
-    '......1.....',
-    '.....1......',
-    '....1.......',
-    '............',
-    '............',
-    '............',
-  ],
+  fight: '12........21/.12......21./..12....21../...12..21.../....1221..../.....21...../....2112..../...21..12.../..111..111../...1....1.../..1......1../............',
+  party: '.....111..../....1.221.../....12221.../....12221.../.....111..../............/.111....111./1.221..1.221/12221..12221/12221..12221/.111....111./............',
+  bag: '............/.....11...../....1..1..../..11111111../.1222222221./.1221111221./.1222112221./.1222222221./.1222222221./.1222222221./.1111111111./............',
+  run: '........11../.222...1111./222....1111./.......1111./..11....11../.1111......./.1111...11../.1111...11../..11......../............/..11......../..11........',
 };
+for (const k in CMD_PIX) CMD_PIX[k] = CMD_PIX[k].split('/');
 
 export function typePill(type) {
   const col = TYPE_COLORS[type] || '#a8a878';
@@ -223,20 +189,18 @@ export class UI {
     c.className = 'cmdicon';
     const x = c.getContext('2d');
     x.imageSmoothingEnabled = false;
-    if (value === 'bag') {
-      const art = uiIcon(document, 'pokeball');
-      if (art) x.drawImage(art, 0, 0);
-      return c;
-    }
     const pat = CMD_PIX[value];
     if (pat) {
       // UI v2.2: command icons are ink on the light Platinum plate interior
       // (the v2 pale-gold '#ffe9a8' was drawn for the old dark gradient bars
-      // and vanished on the framed buttons).
-      x.fillStyle = '#232838';
+      // and vanished on the framed buttons). M1.1: two-tone — kit ink plus
+      // one accent per command.
       for (let r = 0; r < pat.length; r++) {
         for (let q = 0; q < pat[r].length; q++) {
-          if (pat[r][q] === '1') x.fillRect(q + 2, r + 2, 1, 1);
+          const ch = pat[r][q];
+          if (ch === '.') continue;
+          x.fillStyle = ch === '1' ? '#2a1800' : (CMD_ACC[value] || '#2a1800');
+          x.fillRect(q + 2, r + 2, 1, 1);
         }
       }
     }

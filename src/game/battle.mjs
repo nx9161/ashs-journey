@@ -3401,7 +3401,15 @@ export class BattleScene {
     // the databox is gender-neutral — no symbol is drawn (UI v2 ruling).
     // 'Lv' + level, right-aligned inside the frame (a 10-char name at
     // px + 6 still clears the 'Lv100' block ending at px + w - 6).
-    r.text('Lv' + mon.level, px + w - 6, y + 5, { size: 14, color: ink, shadow: false, align: 'right' });
+    // Wave G M1.1: level DIGITS render in the display stack (Galmuri lining
+    // figures) — PtPixel's figures are decorative and uneven at plate size
+    // (owner catch on the M1 proof zoom). The 'Lv' letters keep the plate
+    // face, set immediately left of the digits; the block still ends at
+    // px + w - 6. Numbers stay plain weight per the owner's battle rule.
+    const lvNum = String(mon.level);
+    const lvEnd = px + w - 6;
+    r.text(lvNum, lvEnd, y + 5, { size: 14, color: ink, shadow: false, align: 'right', display: true });
+    r.text('Lv', lvEnd - r.measure(lvNum, { size: 14, display: true }) - 1, y + 5, { size: 14, color: ink, shadow: false, align: 'right' });
     // HP row: gold 'HP' tag + the Platinum hpBar; the status chip slot is
     // reserved at the row's right end (the bar shortens when a chip shows).
     const fracRaw = hpShown / mon.maxHp;
@@ -3427,7 +3435,8 @@ export class BattleScene {
       if (frac < 0.25 && mon.hp > 0) {
         r.text('!', px + 6, y + 40, { size: 14, bold: true, color: '#c02818', shadow: false });
       }
-      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + w - 6, y + 40, { size: 14, color: ink, shadow: false, align: 'right' });
+      // M1.1: HP fraction figures in the display stack too (see 'Lv' note).
+      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + w - 6, y + 40, { size: 14, color: ink, shadow: false, align: 'right', display: true });
       // EXP row: blue 'EXP' tag + the Platinum-blue xpBar (P0/E3: 600ms
       // ease-out via xpShownFrac; instant under reduced motion).
       r.text('EXP', px + 6, y + 54, { size: 14, bold: true, color: '#2f68b8', shadow: false });

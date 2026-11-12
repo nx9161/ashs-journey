@@ -1320,6 +1320,17 @@ class Renderer {
     if (o.align) c.textAlign = 'left';
   }
 
+  // Width of a string under the EXACT font text() would render it with.
+  // Stub ctxs (QA recording surfaces) may lack measureText — fall back to
+  // a per-char estimate; nothing rendered depends on that path.
+  measure(str, opts) {
+    const o = opts || {};
+    const c = this.ctx;
+    c.font = (o.bold ? '700 ' : '400 ') + (o.size || 8) + 'px ' + (o.display ? UI_DISPLAY_FONT_STACK : UI_FONT_STACK);
+    if (typeof c.measureText === 'function') return c.measureText(str).width;
+    return String(str).length * (o.size || 8) * 0.6;
+  }
+
   // UI v2.3 (defect 1): word-wrap measured with the EXACT font string text()
   // renders with (same stack, size, weight) — breaks fall only on spaces,
   // so no line ever ends mid-word. A single word longer than maxW is the
@@ -194886,51 +194897,17 @@ function stubEl() {
 }
 
 // Hand-authored 12x12 pixel command icons (original, no emoji — contracts §1.3).
-// '1' = ink (#ffe9a8 on dark), '.' = transparent.
+// Rows joined by '/'; '1' = kit ink #2a1800, '2' = per-icon accent (CMD_ACC),
+// '.' = transparent. Wave G M1.1 set: crossed blades, orb cluster, satchel,
+// bootprints — replaces the legacy starburst / bars / arrow / ball art.
+const CMD_ACC = { fight: '#647d99', party: '#e8b832', bag: '#b07a3f', run: '#8fa4bd' };
 const CMD_PIX = {
-  fight: [
-    '.....1......',
-    '.....1......',
-    '..1..1..1...',
-    '...11111....',
-    '....111.....',
-    '.111111111..',
-    '....111.....',
-    '...11111....',
-    '..1..1..1...',
-    '.....1......',
-    '.....1......',
-    '............',
-  ],
-  party: [
-    '.11...11....',
-    '.11...11....',
-    '.11...11....',
-    '............',
-    '.11...11....',
-    '.11...11....',
-    '............',
-    '.1111111....',
-    '.1111111....',
-    '............',
-    '............',
-    '............',
-  ],
-  run: [
-    '....1.......',
-    '.....1......',
-    '......1.....',
-    '.......1....',
-    '11111111111.',
-    '.......1....',
-    '......1.....',
-    '.....1......',
-    '....1.......',
-    '............',
-    '............',
-    '............',
-  ],
+  fight: '12........21/.12......21./..12....21../...12..21.../....1221..../.....21...../....2112..../...21..12.../..111..111../...1....1.../..1......1../............',
+  party: '.....111..../....1.221.../....12221.../....12221.../.....111..../............/.111....111./1.221..1.221/12221..12221/12221..12221/.111....111./............',
+  bag: '............/.....11...../....1..1..../..11111111../.1222222221./.1221111221./.1222112221./.1222222221./.1222222221./.1222222221./.1111111111./............',
+  run: '........11../.222...1111./222....1111./.......1111./..11....11../.1111......./.1111...11../.1111...11../..11......../............/..11......../..11........',
 };
+for (const k in CMD_PIX) CMD_PIX[k] = CMD_PIX[k].split('/');
 
 function typePill(type) {
   const col = TYPE_COLORS[type] || '#a8a878';
@@ -195083,20 +195060,18 @@ class UI {
     c.className = 'cmdicon';
     const x = c.getContext('2d');
     x.imageSmoothingEnabled = false;
-    if (value === 'bag') {
-      const art = uiIcon(document, 'pokeball');
-      if (art) x.drawImage(art, 0, 0);
-      return c;
-    }
     const pat = CMD_PIX[value];
     if (pat) {
       // UI v2.2: command icons are ink on the light Platinum plate interior
       // (the v2 pale-gold '#ffe9a8' was drawn for the old dark gradient bars
-      // and vanished on the framed buttons).
-      x.fillStyle = '#232838';
+      // and vanished on the framed buttons). M1.1: two-tone — kit ink plus
+      // one accent per command.
       for (let r = 0; r < pat.length; r++) {
         for (let q = 0; q < pat[r].length; q++) {
-          if (pat[r][q] === '1') x.fillRect(q + 2, r + 2, 1, 1);
+          const ch = pat[r][q];
+          if (ch === '.') continue;
+          x.fillStyle = ch === '1' ? '#2a1800' : (CMD_ACC[value] || '#2a1800');
+          x.fillRect(q + 2, r + 2, 1, 1);
         }
       }
     }
@@ -202323,7 +202298,15 @@ class BattleScene {
     // the databox is gender-neutral — no symbol is drawn (UI v2 ruling).
     // 'Lv' + level, right-aligned inside the frame (a 10-char name at
     // px + 6 still clears the 'Lv100' block ending at px + w - 6).
-    r.text('Lv' + mon.level, px + w - 6, y + 5, { size: 14, color: ink, shadow: false, align: 'right' });
+    // Wave G M1.1: level DIGITS render in the display stack (Galmuri lining
+    // figures) — PtPixel's figures are decorative and uneven at plate size
+    // (owner catch on the M1 proof zoom). The 'Lv' letters keep the plate
+    // face, set immediately left of the digits; the block still ends at
+    // px + w - 6. Numbers stay plain weight per the owner's battle rule.
+    const lvNum = String(mon.level);
+    const lvEnd = px + w - 6;
+    r.text(lvNum, lvEnd, y + 5, { size: 14, color: ink, shadow: false, align: 'right', display: true });
+    r.text('Lv', lvEnd - r.measure(lvNum, { size: 14, display: true }) - 1, y + 5, { size: 14, color: ink, shadow: false, align: 'right' });
     // HP row: gold 'HP' tag + the Platinum hpBar; the status chip slot is
     // reserved at the row's right end (the bar shortens when a chip shows).
     const fracRaw = hpShown / mon.maxHp;
@@ -202349,7 +202332,8 @@ class BattleScene {
       if (frac < 0.25 && mon.hp > 0) {
         r.text('!', px + 6, y + 40, { size: 14, bold: true, color: '#c02818', shadow: false });
       }
-      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + w - 6, y + 40, { size: 14, color: ink, shadow: false, align: 'right' });
+      // M1.1: HP fraction figures in the display stack too (see 'Lv' note).
+      r.text(Math.ceil(hpShown) + '/' + mon.maxHp, px + w - 6, y + 40, { size: 14, color: ink, shadow: false, align: 'right', display: true });
       // EXP row: blue 'EXP' tag + the Platinum-blue xpBar (P0/E3: 600ms
       // ease-out via xpShownFrac; instant under reduced motion).
       r.text('EXP', px + 6, y + 54, { size: 14, bold: true, color: '#2f68b8', shadow: false });
