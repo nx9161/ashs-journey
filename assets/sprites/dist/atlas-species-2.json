@@ -2510,7 +2510,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 18,
+      "palette": 16,
       "seed": null,
       "derived_from": "flyingpikachu-front",
       "mirror_of": null
@@ -6436,7 +6436,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 17,
+      "palette": 16,
       "seed": null,
       "derived_from": "surfingpikachu-front",
       "mirror_of": null
@@ -10738,7 +10738,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

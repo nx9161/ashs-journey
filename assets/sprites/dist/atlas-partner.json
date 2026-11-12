@@ -58,7 +58,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-hop-1": {
+    "voltik-hop-1": {
       "x": 265,
       "y": 1,
       "w": 16,
@@ -66,12 +66,12 @@
       "frames": [
         "hop-1"
       ],
-      "palette": 9,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-hop-2": {
+    "voltik-hop-2": {
       "x": 283,
       "y": 1,
       "w": 16,
@@ -79,12 +79,12 @@
       "frames": [
         "hop-2"
       ],
-      "palette": 9,
+      "palette": 10,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-idle-1": {
+    "voltik-idle-1": {
       "x": 301,
       "y": 1,
       "w": 16,
@@ -92,12 +92,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-idle-2": {
+    "voltik-idle-2": {
       "x": 319,
       "y": 1,
       "w": 16,
@@ -106,12 +106,12 @@
         "idle",
         "idle2"
       ],
-      "palette": 7,
+      "palette": 10,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-left-hop-1": {
+    "voltik-left-hop-1": {
       "x": 337,
       "y": 1,
       "w": 16,
@@ -119,12 +119,12 @@
       "frames": [
         "hop-1"
       ],
-      "palette": 9,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-left-hop-2": {
+    "voltik-left-hop-2": {
       "x": 355,
       "y": 1,
       "w": 16,
@@ -132,12 +132,12 @@
       "frames": [
         "hop-2"
       ],
-      "palette": 9,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-left-idle-1": {
+    "voltik-left-idle-1": {
       "x": 373,
       "y": 1,
       "w": 16,
@@ -145,12 +145,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-left-idle-2": {
+    "voltik-left-idle-2": {
       "x": 391,
       "y": 1,
       "w": 16,
@@ -159,12 +159,12 @@
         "idle",
         "idle2"
       ],
-      "palette": 7,
+      "palette": 9,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-look-1": {
+    "voltik-look-1": {
       "x": 409,
       "y": 1,
       "w": 16,
@@ -172,12 +172,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-look-2": {
+    "voltik-look-2": {
       "x": 427,
       "y": 1,
       "w": 16,
@@ -185,12 +185,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-right-hop-1": {
+    "voltik-right-hop-1": {
       "x": 445,
       "y": 1,
       "w": 16,
@@ -198,12 +198,12 @@
       "frames": [
         "hop-1"
       ],
-      "palette": 9,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-right-hop-2": {
+    "voltik-right-hop-2": {
       "x": 463,
       "y": 1,
       "w": 16,
@@ -211,12 +211,12 @@
       "frames": [
         "hop-2"
       ],
-      "palette": 9,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-right-idle-1": {
+    "voltik-right-idle-1": {
       "x": 481,
       "y": 1,
       "w": 16,
@@ -224,12 +224,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 8,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-right-idle-2": {
+    "voltik-right-idle-2": {
       "x": 499,
       "y": 1,
       "w": 16,
@@ -238,12 +238,12 @@
         "idle",
         "idle2"
       ],
-      "palette": 7,
+      "palette": 9,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-sleep-1": {
+    "voltik-sleep-1": {
       "x": 517,
       "y": 1,
       "w": 16,
@@ -256,7 +256,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-sleep-2": {
+    "voltik-sleep-2": {
       "x": 535,
       "y": 1,
       "w": 16,
@@ -269,7 +269,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-up-hop-1": {
+    "voltik-up-hop-1": {
       "x": 553,
       "y": 1,
       "w": 16,
@@ -277,12 +277,12 @@
       "frames": [
         "hop-1"
       ],
-      "palette": 8,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-up-hop-2": {
+    "voltik-up-hop-2": {
       "x": 571,
       "y": 1,
       "w": 16,
@@ -295,7 +295,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-up-idle-1": {
+    "voltik-up-idle-1": {
       "x": 589,
       "y": 1,
       "w": 16,
@@ -303,12 +303,12 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 7,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-up-idle-2": {
+    "voltik-up-idle-2": {
       "x": 607,
       "y": 1,
       "w": 16,
@@ -322,7 +322,7 @@
       "derived_from": null,
       "mirror_of": null
     },
-    "pikachu-refuse": {
+    "voltik-refuse": {
       "x": 625,
       "y": 1,
       "w": 32,
@@ -330,7 +330,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 6,
+      "palette": 10,
       "seed": null,
       "derived_from": null,
       "mirror_of": null

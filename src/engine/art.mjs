@@ -564,34 +564,36 @@ export function npcFrames(doc, npc) {
 }
 
 // Premium+ W3 (AN-2): the follower is fully directional — hop + idle
-// pairs for all four facings (down = the Wave 3a front set, redrawn with
-// the wide bolt tail; up = back view with stripes; left/right = profiles),
-// plus the sleep pair and the look-around emote pair. Every frame paints
-// all 4 palette yellows (the shipped 4th yellow painted zero pixels).
-const PARTNER_DIR_PREFIX = { down: 'pikachu', up: 'pikachu-up', left: 'pikachu-left', right: 'pikachu-right' };
+// pairs for all four facings, plus the sleep pair and the look-around
+// emote pair. Hotfix fix/voltik-follower: the set is VOLTIK (the approved
+// original design — mint electric shrew, copper battery ears + head
+// battery, copper battery spine on the back view, cream tail puff; no
+// bolt tail, no back stripes, no yellow). Same 16x20 frame structure,
+// counts and timing as the set it replaced — presentation swap only.
+const PARTNER_DIR_PREFIX = { down: 'voltik', up: 'voltik-up', left: 'voltik-left', right: 'voltik-right' };
 export function partnerHopFrames(doc, dir) {
-  const p = PARTNER_DIR_PREFIX[dir] || 'pikachu';
+  const p = PARTNER_DIR_PREFIX[dir] || 'voltik';
   const a = artCanvas(doc, p + '-hop-1', 1);
   const b = artCanvas(doc, p + '-hop-2', 1);
   return (a && b) ? [a, b] : null;
 }
 
 export function partnerIdleFrames(doc, dir) {
-  const p = PARTNER_DIR_PREFIX[dir] || 'pikachu';
+  const p = PARTNER_DIR_PREFIX[dir] || 'voltik';
   const a = artCanvas(doc, p + '-idle-1', 1);
   const b = artCanvas(doc, p + '-idle-2', 1);
   return (a && b) ? [a, b] : null;
 }
 
 export function partnerSleepFrames(doc) {
-  const a = artCanvas(doc, 'pikachu-sleep-1', 1);
-  const b = artCanvas(doc, 'pikachu-sleep-2', 1);
+  const a = artCanvas(doc, 'voltik-sleep-1', 1);
+  const b = artCanvas(doc, 'voltik-sleep-2', 1);
   return (a && b) ? [a, b] : null;
 }
 
 export function partnerLookFrames(doc) {
-  const a = artCanvas(doc, 'pikachu-look-1', 1);
-  const b = artCanvas(doc, 'pikachu-look-2', 1);
+  const a = artCanvas(doc, 'voltik-look-1', 1);
+  const b = artCanvas(doc, 'voltik-look-2', 1);
   return (a && b) ? [a, b] : null;
 }
 

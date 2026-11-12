@@ -87,7 +87,7 @@ async function main() {
   // Legacy 32x32 battlers upscale x2 through the same draw path.
   const need = {
     'ash-down-idle-1': [16, 16], 'ash-up-walk-4': [16, 16],
-    'pikachu-hop-1': [16, 16], 'partner-front': [64, 64], 'partner-back': [64, 64],
+    'voltik-hop-1': [16, 20], 'partner-front': [64, 64], 'partner-back': [64, 64],
     'onix-front': [64, 64], 'geodude-front': [64, 64], 'brock-battle': [48, 64],
     'npc-professor-idle-1': [16, 16], 'tile-grass': [16, 16], 'icon-pokeball': [16, 16],
   };
@@ -96,6 +96,22 @@ async function main() {
     if (!art) { console.error(`FAIL surface: missing ${id}`); fails++; continue; }
     if (art.w !== w || art.h !== h) { console.error(`FAIL surface: ${id} is ${art.w}x${art.h}, want ${w}x${h}`); fails++; }
   }
+  // fix/voltik-follower: the follower set is VOLTIK. All 20 directional
+  // frames + the refuse frame exist under voltik-* ids; the retired
+  // pikachu-* follower ids are gone; and the front frame's palette is the
+  // VOLTIK palette (mint + copper present, the old yellows absent).
+  const followerIds = [], retiredIds = [];
+  for (const p of ['voltik', 'voltik-up', 'voltik-left', 'voltik-right'])
+    for (const a of ['idle-1', 'idle-2', 'hop-1', 'hop-2']) followerIds.push(`${p}-${a}`);
+  followerIds.push('voltik-sleep-1', 'voltik-sleep-2', 'voltik-look-1', 'voltik-look-2', 'voltik-refuse');
+  for (const p of ['pikachu', 'pikachu-up', 'pikachu-left', 'pikachu-right'])
+    for (const a of ['idle-1', 'idle-2', 'hop-1', 'hop-2']) retiredIds.push(`${p}-${a}`);
+  retiredIds.push('pikachu-sleep-1', 'pikachu-sleep-2', 'pikachu-look-1', 'pikachu-look-2', 'pikachu-refuse');
+  for (const id of followerIds) if (!ART[id]) { console.error(`FAIL surface: missing ${id}`); fails++; }
+  for (const id of retiredIds) if (ART[id]) { console.error(`FAIL surface: retired follower id still present: ${id}`); fails++; }
+  const vpal = Object.values((ART['voltik-idle-1'] || {}).pal || {});
+  if (!vpal.includes('#8dcaaa') || !vpal.includes('#bf6b41')) { console.error('FAIL surface: voltik-idle-1 palette lacks VOLTIK mint/copper'); fails++; }
+  if (vpal.includes('#f5c93c') || vpal.includes('#ffdf6b')) { console.error('FAIL surface: voltik-idle-1 palette still paints the old yellows'); fails++; }
   console.log(`load-test: ${ids.length - fails}/${ids.length} sprites rasterize through the game path`);
   if (fails) { console.error(`LOAD-TEST FAIL: ${fails}`); process.exit(1); }
   console.log('LOAD-TEST PASS');
