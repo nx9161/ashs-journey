@@ -2003,7 +2003,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 13,
+      "palette": 10,
       "seed": null,
       "derived_from": "ditto-front",
       "mirror_of": null
@@ -2666,7 +2666,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": "giantdragonite-front",
       "mirror_of": null
@@ -2822,7 +2822,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 16,
       "seed": null,
       "derived_from": "goldeen-front",
       "mirror_of": null
@@ -3368,7 +3368,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 12,
+      "palette": 14,
       "seed": null,
       "derived_from": "kabuto-front",
       "mirror_of": null
@@ -4720,7 +4720,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 16,
+      "palette": 15,
       "seed": null,
       "derived_from": "omanyte-front",
       "mirror_of": null
@@ -4967,7 +4967,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 10,
+      "palette": 12,
       "seed": null,
       "derived_from": "pinsir-front",
       "mirror_of": null
@@ -5084,7 +5084,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 12,
       "seed": null,
       "derived_from": "porygon-front",
       "mirror_of": null
@@ -6566,7 +6566,7 @@
       "frames": [
         "bob"
       ],
-      "palette": 15,
+      "palette": 14,
       "seed": null,
       "derived_from": "tauros-front",
       "mirror_of": null
@@ -9685,7 +9685,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 16,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10231,7 +10231,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 11,
+      "palette": 9,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10296,7 +10296,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 15,
+      "palette": 9,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -10894,7 +10894,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 11,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11050,7 +11050,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11596,7 +11596,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 14,
+      "palette": 12,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
@@ -11804,7 +11804,7 @@
       "frames": [
         "idle"
       ],
-      "palette": 16,
+      "palette": 14,
       "seed": null,
       "derived_from": null,
       "mirror_of": null
