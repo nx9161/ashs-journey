@@ -683,6 +683,10 @@ const KEYMAP = {
 };
 const ACTIONS = ['up', 'down', 'left', 'right', 'a', 'b', 'start', 'select',
   'pageup', 'pagedown', 'slot1', 'slot2', 'slot3', 'slot4', 'fullscreen', 'mute', 'escape'];
+// Gamepad (W3C standard mapping): button index -> action. Shoulders page
+// lists (the game's pageup/pagedown equivalents); 12-15 are the D-pad.
+const PAD_BUTTONS = { 0: 'a', 1: 'b', 4: 'pageup', 5: 'pagedown', 8: 'select', 9: 'start',
+  12: 'up', 13: 'down', 14: 'left', 15: 'right' };
 
 class Input {
   constructor() {
@@ -690,6 +694,7 @@ class Input {
     this.pressed = {};   // action -> bool (edge: went down since last sample)
     this._dirStack = []; // last-pressed-wins for diagonals
     this.remap = Object.assign({}, KEYMAP);
+    this._padHeld = {};  // action -> bool, gamepad-sourced held state
     this.flipControls = false;
     for (const a of ACTIONS) { this.held[a] = false; this.pressed[a] = false; }
     this._bound = false;
@@ -724,6 +729,31 @@ class Input {
     // Touch overlays call press/release directly.
   }
 
+  // Gamepad polling, called once per tick from sample(). The first
+  // connected pad wins; the left stick acts as digital directions at a
+  // 0.5 threshold. State transitions feed the same _press/_release path
+  // as keyboard/touch, so edges, held state and the direction stack
+  // behave identically. No pad, no API (headless), or a disconnect is a
+  // silent no-op — a disconnect simply releases whatever the pad held.
+  pollGamepad() {
+    if (typeof navigator === 'undefined' || !navigator.getGamepads) return;
+    let pad = null;
+    for (const p of navigator.getGamepads() || []) if (p && p.connected) { pad = p; break; }
+    const now = {};
+    if (pad) {
+      for (const i in PAD_BUTTONS) if (pad.buttons[i] && pad.buttons[i].pressed) now[PAD_BUTTONS[i]] = true;
+      const x = pad.axes[0] || 0, y = pad.axes[1] || 0;
+      if (x < -0.5) now.left = true; else if (x > 0.5) now.right = true;
+      if (y < -0.5) now.up = true; else if (y > 0.5) now.down = true;
+    }
+    for (const a of ACTIONS) {
+      const is = !!now[a];
+      if (is === !!this._padHeld[a]) continue;
+      this._padHeld[a] = is;
+      if (is) this._press(a); else this._release(a);
+    }
+  }
+
   _press(action, repeat) {
     // AUDIT FIX (laptop paging): OS key-repeat re-fires direction edges so
     // HOLDING an arrow scrolls menus/lists (Platinum behavior). Buttons
@@ -751,6 +781,7 @@ class Input {
 
   // Called once per sim tick (and per rAF in loop) — edges consumed here.
   sample() {
+    this.pollGamepad();
     // pressed[] stays true until consumed by game code via wasPressed().
   }
 
@@ -153534,581 +153565,6 @@ const MAPS2 = {
   },
 };
 
-// Trainer definitions for the extension. Same shape as TRAINERS in
-// maps.mjs. Gym leaders carry ai:'smart'; anime-flavored, original lines.
-const TRAINERS2 = {
-  // ---------- Gym Leaders ----------
-  misty: {
-    id: 'misty', name: 'Misty', title: 'Cerulean Gym Leader', ai: 'smart',
-    intro: ["My policy is an all-out offensive with water-type Pokemon! Dive in — if you can swim."],
-    lose: ["You flooded my whole strategy...", "The Cascade Badge is yours. Take good care of it."],
-    team: [
-      { species: 'staryu', level: 18 },
-      { species: 'starmie', level: 21 },
-    ],
-    reward: 2000, badge: 'cascadebadge',
-  },
-  surge: {
-    id: 'surge', name: 'Lt. Surge', title: 'Vermilion Gym Leader', ai: 'smart',
-    intro: ["Electricity is a soldier's best friend, baby! It paralyzes fear itself!"],
-    lose: ["Fried... my whole circuit's fried.", "Thunder Badge — take it before I change my mind, soldier."],
-    team: [
-      { species: 'voltorb', level: 21 },
-      { species: 'pikachu', level: 18 },
-      { species: 'raichu', level: 24 },
-    ],
-    reward: 2400, badge: 'thunderbadge',
-  },
-  erika: {
-    id: 'erika', name: 'Erika', title: 'Celadon Gym Leader', ai: 'smart',
-    intro: ["I would never collect Pokemon if they were unattractive... but strength, too, is a kind of beauty. Observe."],
-    lose: ["Oh! A defeat, arranged so gracefully.", "The Rainbow Badge, with my compliments."],
-    team: [
-      { species: 'victreebel', level: 29 },
-      { species: 'tangela', level: 24 },
-      { species: 'vileplume', level: 29 },
-    ],
-    reward: 2900, badge: 'rainbowbadge',
-  },
-  koga: {
-    id: 'koga', name: 'Koga', title: 'Fuchsia Gym Leader', ai: 'smart',
-    intro: ["Poison is the ninja's patience made visible. Your Pokemon will sleep — and may never wake refreshed."],
-    lose: ["You moved like smoke through my own fog.", "The Soul Badge. Go — quietly, as you came."],
-    team: [
-      { species: 'koffing', level: 37 },
-      { species: 'muk', level: 39 },
-      { species: 'koffing', level: 37 },
-      { species: 'weezing', level: 43 },
-    ],
-    reward: 4300, badge: 'soulbadge',
-  },
-  sabrina: {
-    id: 'sabrina', name: 'Sabrina', title: 'Saffron Gym Leader', ai: 'smart',
-    intro: ["I dislike fighting... but my vision says you will challenge me anyway. It also says something you'll enjoy less."],
-    lose: ["The vision... shattered. What a rare, precious feeling.", "The Marsh Badge is yours. This loss makes me smile. Strange."],
-    team: [
-      { species: 'kadabra', level: 38 },
-      { species: 'mrmime', level: 37 },
-      { species: 'venomoth', level: 38 },
-      { species: 'alakazam', level: 43 },
-    ],
-    reward: 4300, badge: 'marshbadge',
-  },
-  blaine: {
-    id: 'blaine', name: 'Blaine', title: 'Cinnabar Gym Leader', ai: 'smart',
-    intro: ["Riddle me this, challenger: what burns hotter — my Arcanine's flame, or your ambition? Let's test both!"],
-    lose: ["Extinguished! Ha — a most educational burn.", "The Volcano Badge, hot off the press. Mind your fingers."],
-    team: [
-      { species: 'growlithe', level: 42 },
-      { species: 'ponyta', level: 40 },
-      { species: 'rapidash', level: 42 },
-      { species: 'arcanine', level: 47 },
-    ],
-    reward: 4700, badge: 'volcanobadge',
-  },
-  giovanni: {
-    id: 'giovanni', name: 'Giovanni', title: 'Viridian Gym Leader', ai: 'smart',
-    intro: ["For your insolence in my... operations, you will taste the ground itself rise against you."],
-    lose: ["Ha! Beaten in my own gym, by a child with a spark...", "The Earth Badge. Take it — and our business is concluded. Forever."],
-    team: [
-      { species: 'rhyhorn', level: 45 },
-      { species: 'dugtrio', level: 42 },
-      { species: 'nidoqueen', level: 44 },
-      { species: 'nidoking', level: 45 },
-      { species: 'rhydon', level: 50 },
-    ],
-    reward: 5000, badge: 'earthbadge',
-  },
-
-  // ---------- Gym trainers (one per new gym) ----------
-  gym_cerulean_1: {
-    id: 'gym_cerulean_1', name: 'Diana', title: 'Swimmer',
-    intro: ["Misty's drills start at dawn. My Goldeen could lap this pool blind!"],
-    lose: ["Lapped... and tapped. Go on, the mermaid awaits."],
-    team: [
-      { species: 'goldeen', level: 19 },
-      { species: 'staryu', level: 20 },
-    ],
-    reward: 600,
-  },
-  gym_vermilion_1: {
-    id: 'gym_vermilion_1', name: 'Walt', title: 'Gentleman',
-    intro: ["In my day we battled by lamplight. Surge's gym has rather more voltage."],
-    lose: ["Blown a fuse at my age... how nostalgic."],
-    team: [
-      { species: 'voltorb', level: 22 },
-      { species: 'magnemite', level: 22 },
-    ],
-    reward: 650,
-  },
-  gym_celadon_1: {
-    id: 'gym_celadon_1', name: 'Tamia', title: 'Beauty',
-    intro: ["Erika naps; I prune. Nothing personal, challenger — you're simply... untidy."],
-    lose: ["Pruned by my own shears. Erika will be delighted, worse luck."],
-    team: [
-      { species: 'oddish', level: 27 },
-      { species: 'gloom', level: 28 },
-    ],
-    reward: 800,
-  },
-  gym_saffron_1: {
-    id: 'gym_saffron_1', name: 'Johan', title: 'Psychic',
-    intro: ["I knew you'd challenge me. I also knew how — no, wait. That part's gone fuzzy..."],
-    lose: ["Foreseen... and still lost. Prophecy is humbling."],
-    team: [
-      { species: 'abra', level: 36 },
-      { species: 'kadabra', level: 37 },
-    ],
-    reward: 1000,
-  },
-  gym_fuchsia_1: {
-    id: 'gym_fuchsia_1', name: 'Edgar', title: 'Tamer',
-    intro: ["The walls here deceive everyone. My Arbok only has to deceive you once."],
-    lose: ["The maze itself bows to you. Koga is watching from somewhere. He always is."],
-    team: [
-      { species: 'arbok', level: 38 },
-      { species: 'sandslash', level: 39 },
-    ],
-    reward: 1100,
-  },
-  gym_cinnabar_1: {
-    id: 'gym_cinnabar_1', name: 'Pyro', title: 'Burglar',
-    intro: ["I came for Blaine's quiz answers and stayed for the ash-sweeping. Battle tax, kid!"],
-    lose: ["My answers were wrong AND I lost. Typical Tuesday."],
-    team: [
-      { species: 'vulpix', level: 41 },
-      { species: 'ponyta', level: 42 },
-    ],
-    reward: 1200,
-  },
-  gym_viridian_1: {
-    id: 'gym_viridian_1', name: 'Vex', title: 'Cooltrainer',
-    intro: ["Seven badges got you through the door. Getting OUT is the interview."],
-    lose: ["Interview... passed. The boss will see you now. Try not to bleed on the carpet."],
-    team: [
-      { species: 'rhyhorn', level: 44 },
-      { species: 'nidorino', level: 44 },
-    ],
-    reward: 1400,
-  },
-
-  // ---------- Route & misc trainers (Lv 9 -> 45 ramp) ----------
-  r3_lass: {
-    id: 'r3_lass', name: 'Ana', title: 'Lass',
-    intro: ["New badge, new me! Wanna compare shine?"],
-    lose: ["Your shine's... shinier. Fine!"],
-    team: [
-      { species: 'pidgey', level: 9 },
-      { species: 'nidoranf', level: 9 },
-    ],
-    reward: 270,
-  },
-  r3_bug: {
-    id: 'r3_bug', name: 'Bugsy Jr', title: 'Bug Catcher',
-    intro: ["Caterpie squad, assemble! We've been training since breakfast!"],
-    lose: ["Squashed by lunch. The squad demands a rematch era."],
-    team: [
-      { species: 'caterpie', level: 10 },
-      { species: 'weedle', level: 10 },
-      { species: 'metapod', level: 10 },
-    ],
-    reward: 200,
-  },
-  moon_grunt: {
-    id: 'moon_grunt', name: 'Grunt Rex', title: 'Team Grunt',
-    intro: ["Fossils are Team property now. Your backpack, though? That's negotiable."],
-    lose: ["The Team does NOT cover backpack-related losses..."],
-    team: [
-      { species: 'ekans', level: 11 },
-      { species: 'zubat', level: 11 },
-    ],
-    reward: 330,
-  },
-  r4_lass: {
-    id: 'r4_lass', name: 'Rue', title: 'Lass',
-    intro: ["Last picnic blanket before Cerulean! House rules: losers pack up."],
-    lose: ["Packing... I'm packing! Sheesh."],
-    team: [
-      { species: 'pidgey', level: 11 },
-      { species: 'spearow', level: 12 },
-    ],
-    reward: 300,
-  },
-  r5_camper: {
-    id: 'r5_camper', name: 'Jo', title: 'Camper',
-    intro: ["The day-care couple won't battle me anymore. Something about 'insurance'. YOU will!"],
-    lose: ["Add me to your insurance exclusions, I guess."],
-    team: [
-      { species: 'oddish', level: 15 },
-      { species: 'bellsprout', level: 15 },
-    ],
-    reward: 360,
-  },
-  r6_bug: {
-    id: 'r6_bug', name: 'Eli', title: 'Bug Catcher',
-    intro: ["Butterfree supremacy is a hill I will nap on. Sleep Powder, go!"],
-    lose: ["Napped on... by destiny..."],
-    team: [
-      { species: 'metapod', level: 16 },
-      { species: 'butterfree', level: 17 },
-    ],
-    reward: 340,
-  },
-  r7_lass: {
-    id: 'r7_lass', name: 'Mina', title: 'Lass',
-    intro: ["Shopping can wait. My Meowth smells prize money on you!"],
-    lose: ["It smelled YOUR prize money, apparently. Ugh."],
-    team: [
-      { species: 'meowth', level: 21 },
-      { species: 'pidgeotto', level: 21 },
-    ],
-    reward: 500,
-  },
-  r8_lass: {
-    id: 'r8_lass', name: 'Paige', title: 'Lass',
-    intro: ["A battle for the road's luck — the tower takes enough tears already."],
-    lose: ["Luck: transferred. Spend it kindly in Lavender."],
-    team: [
-      { species: 'clefairy', level: 23 },
-      { species: 'jigglypuff', level: 23 },
-    ],
-    reward: 520,
-  },
-  r9_hiker: {
-    id: 'r9_hiker', name: 'Brant', title: 'Hiker',
-    intro: ["Route 9 is my gym, the sky is my roof, and you are my workout!"],
-    lose: ["Workout complete. Every muscle: respect."],
-    team: [
-      { species: 'geodude', level: 22 },
-      { species: 'onix', level: 23 },
-      { species: 'graveler', level: 24 },
-    ],
-    reward: 700,
-  },
-  r10_hiker: {
-    id: 'r10_hiker', name: 'Rui', title: 'Engineer',
-    intro: ["Mind the cables! My crew runs on pure, uninsulated enthusiasm!"],
-    lose: ["Tripped the whole grid. The plant felt that one."],
-    team: [
-      { species: 'voltorb', level: 23 },
-      { species: 'magnemite', level: 24 },
-    ],
-    reward: 650,
-  },
-  r11_gamer: {
-    id: 'r11_gamer', name: 'Hugo', title: 'Gamer',
-    intro: ["Odds are my co-pilot and Diglett is my insurance policy!"],
-    lose: ["Policy denied. The house always wins, and today the house was you."],
-    team: [
-      { species: 'diglett', level: 24 },
-      { species: 'sandshrew', level: 24 },
-    ],
-    reward: 600,
-  },
-  r12_fisher: {
-    id: 'r12_fisher', name: 'Ed', title: 'Fisherman',
-    intro: ["You scared the fish AND the quiet. That costs a battle, friend."],
-    lose: ["Fine — the fish saw everything and they're all laughing."],
-    team: [
-      { species: 'magikarp', level: 24 },
-      { species: 'goldeen', level: 25 },
-      { species: 'poliwag', level: 25 },
-    ],
-    reward: 550,
-  },
-  r15_biker: {
-    id: 'r15_biker', name: 'Rex', title: 'Biker',
-    intro: ["This road echoes when I rev. Let's make it echo with your defeat!"],
-    lose: ["Stalled out... in front of everyone. Ride on, legend."],
-    team: [
-      { species: 'koffing', level: 28 },
-      { species: 'grimer', level: 28 },
-      { species: 'weezing', level: 30 },
-    ],
-    reward: 800,
-  },
-  r16_biker: {
-    id: 'r16_biker', name: 'Joel', title: 'Biker',
-    intro: ["Pedestrian detected! The hill demands tribute — in battle!"],
-    lose: ["Tribute: paid in full, by me. The hill is merciless."],
-    team: [
-      { species: 'koffing', level: 27 },
-      { species: 'grimer', level: 27 },
-    ],
-    reward: 750,
-  },
-  r19_swimmer: {
-    id: 'r19_swimmer', name: 'Ada', title: 'Swimmer',
-    intro: ["First to the buoy wins — my team ARE the buoys' worst nightmare!"],
-    lose: ["You lapped us in our own ocean. Cinnabar earned you."],
-    team: [
-      { species: 'staryu', level: 32 },
-      { species: 'seadra', level: 33 },
-    ],
-    reward: 700,
-  },
-  tunnel_hiker: {
-    id: 'tunnel_hiker', name: 'Doss', title: 'Hiker',
-    intro: ["Dark tunnels fear ME. Let me demonstrate on your team!"],
-    lose: ["The tunnel... fears you more. Noted, with bruises."],
-    team: [
-      { species: 'geodude', level: 24 },
-      { species: 'machop', level: 25 },
-      { species: 'onix', level: 25 },
-    ],
-    reward: 750,
-  },
-  silph_grunt: {
-    id: 'silph_grunt', name: 'Grunt Vex', title: 'Team Grunt',
-    intro: ["This building is a takeover in progress. You're the 'in progress' problem."],
-    lose: ["HR is gonna hear about this hostile workplace..."],
-    team: [
-      { species: 'raticate', level: 30 },
-      { species: 'golbat', level: 31 },
-    ],
-    reward: 900,
-  },
-  dojo_master: {
-    id: 'dojo_master', name: 'Master Ko', title: 'Karate Master',
-    intro: ["The dojo's honor rides on this bout! Strike first, strike true — HAIYAA!"],
-    lose: ["The sign may be gone, but the spirit... the spirit just chose YOU. Take your pick of my fighters."],
-    team: [
-      { species: 'hitmonlee', level: 37 },
-      { species: 'hitmonchan', level: 37 },
-    ],
-    reward: 1200,
-  },
-  vr_cool: {
-    id: 'vr_cool', name: 'Rin', title: 'Cooltrainer',
-    intro: ["Victory Road eats the unprepared. I am merely its quality control."],
-    lose: ["Quality: confirmed. The plateau is two breaths away. Make them count."],
-    team: [
-      { species: 'persian', level: 44 },
-      { species: 'raichu', level: 45 },
-    ],
-    reward: 1500,
-  },
-
-  // ---------- Elite Four ----------
-  lorelei: {
-    id: 'lorelei', name: 'Lorelei', title: 'Elite Four', ai: 'smart',
-    intro: ["Welcome to the Pokemon League! I am Lorelei — things here move slowly. Ice loves patience."],
-    lose: ["Patience... outlasted. Bruno's fists are less forgiving than my frost."],
-    team: [
-      { species: 'dewgong', level: 54 },
-      { species: 'cloyster', level: 53 },
-      { species: 'slowbro', level: 54 },
-      { species: 'jynx', level: 56 },
-      { species: 'lapras', level: 56 },
-    ],
-    reward: 8000,
-  },
-  bruno: {
-    id: 'bruno', name: 'Bruno', title: 'Elite Four', ai: 'smart',
-    intro: ["We will grind you down with our superior power! Hoo! Hah!"],
-    lose: ["Ground down instead! Agatha — the challenger is worthy of your worst!"],
-    team: [
-      { species: 'onix', level: 53 },
-      { species: 'hitmonchan', level: 55 },
-      { species: 'hitmonlee', level: 55 },
-      { species: 'onix', level: 56 },
-      { species: 'machamp', level: 58 },
-    ],
-    reward: 8500,
-  },
-  agatha: {
-    id: 'agatha', name: 'Agatha', title: 'Elite Four', ai: 'smart',
-    intro: ["Hawthorn's shadow falls on every challenger — but shadows are MY parish, child. Come."],
-    lose: ["You banished more than my ghosts today. Lance! A storm approaches your dragons!"],
-    team: [
-      { species: 'gengar', level: 56 },
-      { species: 'golbat', level: 56 },
-      { species: 'haunter', level: 55 },
-      { species: 'arbok', level: 58 },
-      { species: 'gengar', level: 60 },
-    ],
-    reward: 9000,
-  },
-  lance: {
-    id: 'lance', name: 'Lance', title: 'Elite Four', ai: 'smart',
-    intro: ["Dragons are mythical things, near impossible to raise — and I have raised an army. Your run ends in legend."],
-    lose: ["Legend... rewritten. The champion's door stands open. I almost pity him. Almost."],
-    team: [
-      { species: 'gyarados', level: 58 },
-      { species: 'dragonair', level: 56 },
-      { species: 'dragonair', level: 56 },
-      { species: 'aerodactyl', level: 60 },
-      { species: 'dragonite', level: 62 },
-    ],
-    reward: 9500,
-  },
-
-  // ---------- Rival stages (Gary; partner Eevee-line evolves to match) ----------
-  gary_cerulean: {
-    id: 'gary_cerulean', name: 'Gary', title: 'Rival',
-    intro: ["Bonjour, {player}! Imagine seeing you on MY bridge. My Eevee's been itching to show off — sit. Stay. Lose."],
-    lose: ["What?! My Eevee had the type charts memorized! Fine — the bridge toll is waived. THIS time."],
-    team: [
-      { species: 'pidgeotto', level: 18 },
-      { species: 'rattata', level: 15 },
-      { species: 'kadabra', level: 15 },
-      { species: 'ivysaur', level: 17 },
-    ],
-    reward: 1500,
-  },
-  gary_stanne: {
-    id: 'gary_stanne', name: 'Gary', title: 'Rival',
-    intro: ["The captain saved me the ribbon-cutting, {player}. Care to be my warm-up act?"],
-    lose: ["Seasickness. Definitely seasickness. Tell no one."],
-    team: [
-      { species: 'pidgeotto', level: 19 },
-      { species: 'raticate', level: 16 },
-      { species: 'kadabra', level: 18 },
-      { species: 'ivysaur', level: 20 },
-    ],
-    reward: 1600,
-  },
-  gary_tower: {
-    id: 'gary_tower', name: 'Gary', title: 'Rival',
-    intro: ["Even here, {player}? Fine. The tower's ghosts can referee. My team doesn't do 'haunted and hesitant'."],
-    lose: ["Losing in a graveyard. Great. Even my insults feel disrespectful right now."],
-    team: [
-      { species: 'pidgeotto', level: 23 },
-      { species: 'growlithe', level: 22 },
-      { species: 'kadabra', level: 24 },
-      { species: 'ivysaur', level: 25 },
-    ],
-    reward: 2000,
-  },
-  gary_silph: {
-    id: 'gary_silph', name: 'Gary', title: 'Rival',
-    intro: ["I was THIS close to evicting these creeps myself, {player}. Watch a master work — then try to keep up."],
-    lose: ["You did NOT just out-eviction me. Rematch at the top of the world, someday. Be there."],
-    team: [
-      { species: 'pidgeot', level: 37 },
-      { species: 'growlithe', level: 38 },
-      { species: 'alakazam', level: 35 },
-      { species: 'ivysaur', level: 38 },
-      { species: 'rhydon', level: 40 },
-    ],
-    reward: 3000,
-  },
-  gary_r22_final: {
-    id: 'gary_r22_final', name: 'Gary', title: 'Rival',
-    intro: ["Hold it, {player}! Eight badges apiece and only one road. Eevee picked its final shape for this — try to keep up."],
-    lose: ["My whole team, my best plan... and still second. The League's right there. Don't you dare lose to anyone else."],
-    team: [
-      { species: 'pidgeot', level: 47 },
-      { species: 'alakazam', level: 45 },
-      { species: 'rhydon', level: 45 },
-      { species: 'arcanine', level: 47 },
-      { species: 'vaporeon', level: 47 },
-      { species: 'venusaur', level: 49 },
-    ],
-    reward: 4000,
-  },
-  gary_champion: {
-    id: 'gary_champion', name: 'Gary', title: 'Champion',
-    intro: ["Why do I have the best seat in Kanto? Because I earned it an hour before you, {player}. Defend YOUR story — I'm defending mine."],
-    lose: ["Champion for one afternoon... and you know what? It was the best afternoon ever. The crown's yours. Don't let it gather dust."],
-    team: [
-      { species: 'pidgeot', level: 59 },
-      { species: 'alakazam', level: 57 },
-      { species: 'rhydon', level: 59 },
-      { species: 'exeggutor', level: 58 },
-      { species: 'vaporeon', level: 59 },
-      { species: 'venusaur', level: 63 },
-    ],
-    reward: 6000,
-  },
-
-  // ---------- The uniformed duo (sequential duo battles, original pair) ----------
-  duo2_vermilion: {
-    id: 'duo2_vermilion', name: 'Mara & Jules', title: 'Uniformed Duo',
-    intro: [
-      "MARA: A famous ship, a richer passenger list... and one Pikachu, walking itself.",
-      "JULES: Crew hats on, Mara. Heist hats... also on. We're double-hatted professionals.",
-      "MARA: Hand over the mouse, kid. Our employer collects the extraordinary.",
-    ],
-    lose: [
-      "MARA: Blasting off the itinerary — again?!",
-      "JULES: Note to selves: the kid IS the extraordinary one. New plan: RUN.",
-    ],
-    team: [
-      { species: 'ekans', level: 14, nickname: 'Slink' },
-      { species: 'koffing', level: 14, nickname: 'Puff' },
-    ],
-    reward: 800,
-  },
-  duo3_celadon: {
-    id: 'duo3_celadon', name: 'Mara & Jules', title: 'Uniformed Duo',
-    intro: [
-      "MARA: The Game Corner's vault, Jules. Retirement in T-minus one heist.",
-      "JULES: Is that... the same kid? On OUR crime scene? Statistically hurtful.",
-      "MARA: Then we collect the kid's team as a consolation jackpot!",
-    ],
-    lose: [
-      "MARA: Jackpot: denied. Again. By the same small disaster.",
-      "JULES: Our cat did better than us today. NICKEL did better. I'm retiring from retirement.",
-    ],
-    team: [
-      { species: 'arbok', level: 26 },
-      { species: 'weezing', level: 26 },
-      { species: 'meowth', level: 25, nickname: 'Nickel' },
-    ],
-    reward: 1400,
-  },
-  duo4_saffron: {
-    id: 'duo4_saffron', name: 'Mara & Jules', title: 'Uniformed Duo',
-    intro: [
-      "MARA: Silph's top floor, the boss's prize — nothing stands between us and glory.",
-      "JULES: Something stands. It's short, it's stubborn, and it's beaten us twice.",
-      "MARA: THIRD time pays for all, Jules. For the Team — attack!",
-    ],
-    lose: [
-      "MARA: Beaten in the boss's own conquest. The performance review writes itself.",
-      "JULES: It just says 'see attached defeats, volumes one through three.'",
-    ],
-    team: [
-      { species: 'arbok', level: 33 },
-      { species: 'weezing', level: 33 },
-      { species: 'victreebel', level: 34 },
-    ],
-    reward: 2000,
-  },
-  duo5_island: {
-    id: 'duo5_island', name: 'Mara & Jules', title: 'Uniformed Duo',
-    intro: [
-      "MARA: New Island. The boss's greatest secret — and somehow, so is that kid.",
-      "JULES: We followed a legend across the sea and found our nemesis holding the map.",
-      "MARA: No more running, no more hats. For once — we fight like we mean it!",
-    ],
-    lose: [
-      "MARA: Four defeats... and I finally get it. We were never the storm in this story.",
-      "JULES: Then let's be the calm after it. Truce, kid. The island's secret is bigger than all of us.",
-    ],
-    team: [
-      { species: 'arbok', level: 40 },
-      { species: 'weezing', level: 40 },
-      { species: 'victreebel', level: 41 },
-      { species: 'lickitung', level: 39, nickname: 'Slurp' },
-    ],
-    reward: 2800,
-  },
-
-  // ---------- Rocket admin (Silph Scope boss, Hideout) ----------
-  rocket_admin: {
-    id: 'rocket_admin', name: 'Admin Voss', title: 'Rocket Admin', ai: 'smart',
-    intro: ["I am Voss — the hand that signs the Team's dirty work. You found our hideout; you'll leave in a crate, gift-wrapped."],
-    lose: ["A child... dismantling MY operation. The boss will want your name. I already regret giving it."],
-    team: [
-      { species: 'golbat', level: 32 },
-      { species: 'weezing', level: 34 },
-      { species: 'arbok', level: 34 },
-    ],
-    reward: 2500,
-  },
-};
 
 
 // ---- src/data/maps3.mjs ----
@@ -156288,12 +155744,36 @@ const TRAINERS3 = {
     team: [ { species: 'arbok', level: 40 }, { species: 'weezing', level: 40 }, { species: 'victreebel', level: 41 }, { species: 'lickitung', level: 39, nickname: 'Slurp' } ],
     reward: 1700,
   },
-  rocket_admin: {
-    id: 'rocket_admin', name: 'Vex', title: 'Rocket Admin',
+  // Wave E: the two Rocket Admin boss battles the Kanto events name.
+  // ev_scope_boss (hideout) and ev_silph_boss always referenced the
+  // ids rocket_admin_hideout / rocket_admin_silph, which no table
+  // defined — the battle step skipped them silently and both beats
+  // no-opped. Voss is the hideout admin as authored (his draft lived
+  // in the unmerged TRAINERS2 under the shared id 'rocket_admin';
+  // team sits just over Erika's 29 ace, as a post-Celadon boss).
+  // The draft's ai:'smart' is NOT carried over: TRAINERS2 stamped it
+  // table-wide, while the live Silph admin below ships with no ai
+  // override — and 'smart' would promote Voss into the leader class
+  // (rules.mjs isLeaderTrainer: challenge +2 levels, keepsake levers,
+  // the A19 leader census) that his Silph counterpart is not in.
+  rocket_admin_hideout: {
+    id: 'rocket_admin_hideout', name: 'Admin Voss', title: 'Rocket Admin',
+    intro: ["I am Voss — the hand that signs the Team's dirty work. You found our hideout; you'll leave in a crate, gift-wrapped."],
+    lose: ["A child... dismantling MY operation. The boss will want your name. I already regret giving it."],
+    team: [ { species: 'golbat', level: 32 }, { species: 'weezing', level: 34 }, { species: 'arbok', level: 34 } ],
+    reward: 2500,
+  },
+  // Vex is the Silph admin (this def's original text/team). Levels
+  // re-curved for his actual slot: he is fought after Gary's Silph
+  // team (ace 40) on a post-Soul-Badge chain, under Sabrina's 43 ace
+  // and Giovanni's 50 — the drafted 32/34/34 sat below the rival
+  // fight that precedes him in the same event chain.
+  rocket_admin_silph: {
+    id: 'rocket_admin_silph', name: 'Vex', title: 'Rocket Admin',
     intro: ["The president's office is occupied, child — by progress. Our progress. Remove yourself, or be removed."],
     lose: ["A child... dismantled the Saffron operation. The boss will not believe the report. NEITHER DO I."],
-    team: [ { species: 'golbat', level: 32 }, { species: 'weezing', level: 34 }, { species: 'arbok', level: 34 } ],
-    reward: 1600,
+    team: [ { species: 'golbat', level: 38 }, { species: 'weezing', level: 40 }, { species: 'arbok', level: 41 } ],
+    reward: 2600,
   },
 };
 
@@ -192509,7 +191989,7 @@ function defaultState(inherit) {
     pikachu: { mood: 'happy', foundItemCooldown: 0 },
     settings: {
       textSpeed: 'normal', battleAnims: true, shake: true, reducedMotion: false,
-      mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1,
+      mute: false, musicVol: 0.8, sfxVol: 0.8, controlsFlip: false, keymap: null, hudScale: 1, controlsOpacity: 1,
       vibration: true, autosave: true, showTouch: false, // P1/I5+I2: Wave-3 additions
       battleStyle: 'classic', // ADR-026 (owner ruling 2026-10-28): 'classic' turn-based is THE main battle (default) | 'rt' real-time (optional legacy mode, ADR-020)
       switchMode: 'set', // ADR-026: 'set' (default — no switch prompt on a foe KO) | 'shift' (genre prompt before the next foe is sent out; classic engine only)
@@ -194735,8 +194215,18 @@ function fillV2Defaults(data) {
   // Orange set opens with badges.orange = [] and loses nothing (the
   // other sets pass through untouched when present and well-shaped).
   if (isObj(data.badges)) {
+    // Wave E (s6 triage): the KANTO set fills only when ABSENT. The old
+    // any-non-array repair silently rewrote a present-but-malformed
+    // kanto (a string) to [] BEFORE validateSave ran, making its strict
+    // 'bad-badges' reject dead code — a corrupted save loaded as valid.
+    // Kanto is the v0-core set validateSave requires unconditionally;
+    // every historical save carries it as an array, so a non-array
+    // kanto is corruption and the validator's reject now reaches it.
+    // The regional sets keep their stage-documented fill semantics
+    // (absent or malformed -> []; content policed by the prefix
+    // validators) — pinned by sinnoh-checks A07.
     if (!Array.isArray(data.badges.orange)) data.badges.orange = [];
-    if (!Array.isArray(data.badges.kanto)) data.badges.kanto = [];
+    if (data.badges.kanto === undefined) data.badges.kanto = [];
     if (!Array.isArray(data.badges.johto)) data.badges.johto = [];
     if (!Array.isArray(data.badges.hoenn)) data.badges.hoenn = [];
     if (!Array.isArray(data.badges.sinnoh)) data.badges.sinnoh = [];
@@ -211865,7 +211355,7 @@ class Game {
     // P1/K3 + I2: desktop hint card; show-touch toggle honored on hybrids.
     document.body.classList.toggle('showtouch', !!this.state.settings.showTouch);
     // Headless harness stubs document without documentElement — guard it.
-    if (document.documentElement) document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1);
+    if (document.documentElement) document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1); if (document.documentElement) document.documentElement.style.setProperty('--ctlop', this.state.settings.controlsOpacity || 1);
     this.ui.showHintCard(this.layoutMode === 'desktop');
     // UI v2.1: the frame layer tracks the canvas box on every layout pass
     // (boot, resize, orientation, fullscreen) — not just the UI tick throttle.
@@ -212552,7 +212042,7 @@ class Game {
       { label: 'Flip controls: ' + yn(s.controlsFlip), value: 'flip' },
       { label: 'Controls — remap keys', value: 'controls' },
       { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
-      { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
+      { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' }, { label: 'Controls opacity: ' + Math.round((s.controlsOpacity || 1) * 100) + '%', value: 'ctlop' },
       { label: 'Legal / credits', value: 'legal' },
     ];
     // Track B: account surface (wireframes §10). Labels are static — the
@@ -212577,7 +212067,7 @@ class Game {
       else if (v === 'swmode') { s.switchMode = s.switchMode === 'shift' ? 'set' : 'shift'; g.ui.toast('Switch style: ' + (s.switchMode === 'shift' ? 'Shift' : 'Set')); }
       else if (v === 'diff') { g.openDifficultyMenu(); return; }
       else if (v === 'hrules') { g.openHouseRulesMenu(); return; }
-      else if (v === 'shake') s.shake = !s.shake;
+      else if (v === 'shake') s.shake = !s.shake; else if (v === 'ctlop') { s.controlsOpacity = (s.controlsOpacity || 1) <= 0.4 ? 1 : Math.round(((s.controlsOpacity || 1) - 0.15) * 100) / 100; if (typeof document !== 'undefined') document.documentElement.style.setProperty('--ctlop', s.controlsOpacity); }
       else if (v === 'vib') s.vibration = !s.vibration;
       else if (v === 'asave') s.autosave = !s.autosave;
       else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); if (typeof document !== 'undefined' && document.body) document.body.classList.toggle('reduced-motion', !!s.reducedMotion); }
