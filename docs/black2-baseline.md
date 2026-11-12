@@ -416,8 +416,10 @@ Game Freak through official channels).
   (1) ONE CREATURE PER PAIR — front and back derive from the same
   archived design source (assets/sprites/designs/) and read as the
   same individual: consistent markings, proportions and palette
-  family; the pair's non-outline palettes share at least half their
-  colors (Jaccard >= 0.5). (2) MASS — the silhouette must carry at
+  family; the pair's palettes share at least half their colors
+  (Jaccard >= 0.5 over 2-bit-quantized palette bins — front and back
+  are quantized independently, so exact-hex sharing is not the
+  measure; Wave J audit calibration, 2026-11-12). (2) MASS — the silhouette must carry at
   battle size: >= 400 opaque pixels inside the 62x62 inner box, and
   the wispy fraction (opaque pixels with at most one opaque
   4-neighbour) stays <= 35% of the silhouette. The PRIMARA failure
