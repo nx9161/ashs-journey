@@ -385,7 +385,7 @@ export const MAPS7 = {
       {"x": 9, "y": 14, "text": "SLATEPORT CITY — North: ROUTE 110 · South: ROUTE 109."}
     ],
     "npcs": [
-      {"x": 20, "y": 16, "name": "CAPT MERIDIAN", "art": "sailor", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Slateport run is the long crossing home — Vermilion, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "hoenn"},
+      {"x": 20, "y": 16, "name": "CAPT MERIDIAN", "art": "sailor", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Slateport run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "hoenn"},
       {"x": 11, "y": 13, "name": "MARKET CRIER VESK", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Berries! Stones! A chair shaped like a Wailmer! The market provides!", "Captain Stern's shipyard builds hulls at the north end. Fine work, slow varnish."]},
       {"x": 24, "y": 7, "name": "STERN’S APPRENTICE LIO", "art": "youngster", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["The Captain's new submersible part went missing between the dock and the museum. Again.", "Oceanic Museum's queue is longest at opening. The exhibits don't mind."]},
       {"x": 5, "y": 15, "name": "BEACHCOMBER ANA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["The tide delivers the market half its stock and all of its gossip.", "Route 110's cycling road runs north to Mauville, humming the whole way."]},
@@ -2782,8 +2782,8 @@ export const MAPS7 = {
       {"x": 0, "y": 13, "to": {"map": "r134", "x": 26, "y": 9}},
     ],
     "signs": [
-      {"x": 26, "y": 7, "text": "THE EVER GRANDE FALLS — The falls pour off the league plateau. The road through the mountain is the only way up on foot: Victory Road."},
-      {"x": 2, "y": 5, "text": "EVER GRANDE CITY — The league city at the end of every Hoenn road. Eight badges open Victory Road; the Conference waits on the plateau above."},
+      {"x": 26, "y": 7, "text": "THE EVER GRANDE FALLS — The falls pour off the league plateau. The road through the mountain is the only way up on foot: Crown Road."},
+      {"x": 2, "y": 5, "text": "EVER GRANDE CITY — The league city at the end of every Hoenn road. Eight badges open Crown Road; the Conference waits on the plateau above."},
       {"x": 18, "y": 3, "text": "EVER GRANDE LEAGUE — The Conference hall. Bracket boards inside carry the road to the final; the falls keep the minutes."},
       {"x": 6, "y": 8, "text": "EVER GRANDE CITY — West: ROUTE 134."},
       {"x": 24, "y": 10, "text": "EVER GRANDE CITY — West: ROUTE 134."},
@@ -2885,7 +2885,7 @@ export const MAPS7 = {
       {"x": 25, "y": 15, "to": {"map": "r122", "x": 12, "y": 1}},
     ],
     "signs": [
-      {"x": 4, "y": 4, "text": "SAFARI ZONE — The wardens’ fence runs north of this road. The gate keeps its own seasons."},
+      {"x": 4, "y": 4, "text": "BRAMBLE PRESERVE — The wardens’ fence runs north of this road. The gate keeps its own seasons."},
       {"x": 13, "y": 7, "text": "ROUTE 121 — The Lilycove road under Mt. Pyre’s shoulder. South at the shore: the surf crossing to the Pyre island."},
     ],
     "npcs": [
@@ -3805,7 +3805,7 @@ export const MAPS7 = {
   },
   "victory-road": {
     "id": "victory-road",
-    "name": "Victory Road",
+    "name": "Crown Road",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -3833,7 +3833,7 @@ export const MAPS7 = {
       {"x": 19, "y": 0, "to": {"map": "evergrande", "x": 21, "y": 5}},
     ],
     "signs": [
-      {"x": 12, "y": 13, "text": "VICTORY ROAD — The mountain’s examination hall. South doors: the city. North doors: the league plateau. Every finalist walks it; the mountain signs every paper."},
+      {"x": 12, "y": 13, "text": "CROWN ROAD — The mountain’s examination hall. South doors: the city. North doors: the league plateau. Every finalist walks it; the mountain signs every paper."},
     ],
     "npcs": [
     ],

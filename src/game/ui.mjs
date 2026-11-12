@@ -774,7 +774,7 @@ export class UI {
   buildMapPanel() {
     this.mapEl = this.el('div', 'mappanel hidden', this.frame);
     const head = this.el('div', 'maptitle', this.mapEl);
-    head.textContent = 'TOWN MAP — KANTO';
+    head.textContent = 'TOWN MAP — ARDEN';
     this.mapCanvas = this.el('canvas', 'mapcanvas', this.mapEl);
     if (this.mapCanvas) { this.mapCanvas.width = 480; this.mapCanvas.height = 300; }
     this.mapNarr = this.el('div', 'mapnarr', this.mapEl);
@@ -817,7 +817,7 @@ export class UI {
   _mapNarrate() {
     if (this.headless || !this.mapNarr || !this.mapPanel) return;
     const n = this.mapPanel.data.nodes[this.mapPanel.cursor];
-    this.mapNarr.textContent = 'Town Map — Kanto · ' + (n ? n.name + (n.current ? ' (you are here)' : '') : 'Nowhere yet');
+    this.mapNarr.textContent = 'Town Map — Arden · ' + (n ? n.name + (n.current ? ' (you are here)' : '') : 'Nowhere yet');
   }
 
   mapMove(dir) {
@@ -862,7 +862,7 @@ export class UI {
     land.forEach(([lx, ly], i) => { const X = lx * W, Y = ly * H; if (i === 0) x.moveTo(X, Y); else x.lineTo(X, Y); });
     x.closePath(); x.fill();
     x.strokeStyle = '#46543a'; x.lineWidth = 2; x.stroke(); // the LCD plate border green
-    // Cinnabar is an island off the SW coast.
+    // Caldera is an island off the SW coast.
     x.fillStyle = '#a9c08a'; // land: the LCD plate green (--lcd)
     x.fillRect(Math.round(0.10 * W), Math.round(0.86 * H), 52, 26);
     x.strokeRect(Math.round(0.10 * W), Math.round(0.86 * H), 52, 26);
@@ -1104,7 +1104,7 @@ export class UI {
     this._renderChip(key);
   }
 
-  // Location name only (e.g. 'Pallet Town'). Null/empty hides the chip.
+  // Location name only (e.g. 'Dawnwick'). Null/empty hides the chip.
   setLocationChip(textOrNull) { this._setChip('location', textOrNull, 'locationchip'); }
 
   // Current objective, up to 2 lines (CSS line-clamp + ellipsis). Null hides.

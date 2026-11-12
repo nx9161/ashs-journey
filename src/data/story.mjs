@@ -1,23 +1,23 @@
 // story.mjs — Anime-chronology campaign spine (ADR-015).
 // Maps the owner's complete anime+movies watch order onto the game's chapter
-// structure. v1 "Act I: The Beginning" (ADR-006) = chapters 1-5 (Kanto, Orange,
+// structure. v1 "Act I: The Beginning" (ADR-006) = chapters 1-5 (Arden, Orange,
 // Johto). Everything beyond is scaffolded as honest locked markers — no fake
 // content, no playable claims (scope-honesty rule). Non-canon movies/minis
 // live on the BONUS shelf, never on the main spine.
 // All text is original phrasing; episode/movie titles are factual references.
 
 export const ACTS = [
-  { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Kanto → Orange Islands → Johto (v1)' },
+  { n: 1, title: 'Act I: The Beginning', scope: 'playable', note: 'Arden → Orange Islands → Johto (v1)' },
   { n: 2, title: 'Act II: New Horizons', scope: 'announced', note: 'Hoenn → Battle Frontier → Sinnoh (v2, announced ADR-006)' },
   { n: 3, title: 'Act III: Beyond', scope: 'planned', note: 'Unova → Kalos → Alola → Journeys → Horizons (planned, not built)' },
 ];
 
 export const CHAPTERS = [
   {
-    n: 1, id: 'indigo-league', act: 1, region: 'Kanto', scope: 'playable',
-    title: 'The Indigo League',
-    arc: 'Pallet Town to the Indigo Plateau — eight gyms, one dream.',
-    anime: 'Season 1: Indigo League (Ep 1–69, incl. Ep 70–82 tail)',
+    n: 1, id: 'indigo-league', act: 1, region: 'Arden', scope: 'playable',
+    title: 'The Crown League',
+    arc: 'Dawnwick to the Crownspire — eight gyms, one dream.',
+    anime: 'Season 1: Crown League (Ep 1–69, incl. Ep 70–82 tail)',
     movies: ['The First Movie — OMNIGEN Strikes Back'],
   },
   {
@@ -57,7 +57,7 @@ export const CHAPTERS = [
     movies: ['Jirachi: Wish Maker', 'Destiny Deoxys', 'Lucario and the Mystery of PRIMARA'],
   },
   {
-    n: 7, id: 'battle-frontier', act: 2, region: 'Kanto (Frontier)', scope: 'locked',
+    n: 7, id: 'battle-frontier', act: 2, region: 'Arden (Frontier)', scope: 'locked',
     title: 'Battle Frontier',
     arc: 'Locked — Act II (v2). The Frontier-Brain seat is the announced finale.',
     anime: 'Season 9: Battle Frontier (Ep 1–5, Special: Mastermind of Mirage Pok\u00e9mon, Ep 6–47)',

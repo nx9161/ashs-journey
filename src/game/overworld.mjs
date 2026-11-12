@@ -42,7 +42,7 @@ const WALK_MS = 200; // ~200ms per walked tile (GD feel note)
 //     revival) are NOT pinned: every interaction resolves at the NPC's
 //     current tile through npcTileOf, so they work from any tile in
 //     the radius — wander can never strand them.
-//   * it is not BILL of Cerulean: his instance is dialogue-only, but
+//   * it is not BILL of Tidehaven: his instance is dialogue-only, but
 //     his post beside the ev_bill event tile is a story placement.
 // Radius is 2 (Chebyshev) around the authored home tile; step legality
 // (updateWander) additionally bars warp tiles AND warp-adjacent tiles
@@ -135,8 +135,8 @@ export class OverworldScene {
       // and the shared 'mart' scene fields the ORIGIN town's clerk
       // behind the goods counter at (5,2) instead, verbatim. The
       // origin is the via{} return ticket set by the door warp; with
-      // no ticket (scripted entry) it falls back to Viridian, the
-      // first Mart town — the Center's Pallet fallback pattern.
+      // no ticket (scripted entry) it falls back to Fernmere, the
+      // first Mart town — the Center's Dawnwick fallback pattern.
       if (id === 'mart') {
         const origin = (this.martReturn && this.martReturn.map) || 'viridian';
         this._martOrigin = origin;
@@ -157,7 +157,7 @@ export class OverworldScene {
         changed = true;
       }
       // Wave 5b: the SHOPKEEPER tale actor belongs to the 'mart' map
-      // (quests.mjs) but is fielded only for a Viridian entry — in any
+      // (quests.mjs) but is fielded only for a Fernmere entry — in any
       // other town's Mart he would collide with that town's clerk.
       const taleNpcs = TALE_NPCS.filter((n) => n.map === id && (id !== 'mart' || n.name !== 'SHOPKEEPER' || this._martOrigin === 'viridian'));
       if (taleNpcs.length) {
@@ -228,7 +228,7 @@ export class OverworldScene {
         npcs = [...npcs, ...sinnohNpcs.map((n) => { const c = { ...n }; delete c.map; return c; })];
         changed = true;
       }
-      // ADR-025 §2 (Bonds): the Celadon parley pair stand in Celadon
+      // ADR-025 §2 (Bonds): the Canopy parley pair stand in Canopy
       // only while their scene is unresolved (post-St. Anne window).
       if (id === 'celadon' && parleyVisible(this.game.state)) {
         npcs = [...npcs, ...PARLEY_NPCS.map((n) => { const c = { ...n }; delete c.map; return c; })];
@@ -311,8 +311,8 @@ export class OverworldScene {
   // P1: the ONE resolver for "where does leaving the Center put me" —
   // the runtime ticket first, then the persisted last-Center anchor
   // (story.lastCenter survives a save/reload inside a Center, where
-  // the runtime ticket is gone), then the genre fallback: Pallet,
-  // home (Pallet has no Center of its own in this world).
+  // the runtime ticket is gone), then the genre fallback: Dawnwick,
+  // home (Dawnwick has no Center of its own in this world).
   centerExit() {
     if (this.centerReturn && this.centerReturn.map) return this.centerReturn;
     const lc = this.game && this.game.state && this.game.state.story && this.game.state.story.lastCenter;
@@ -338,7 +338,7 @@ export class OverworldScene {
   // home tile exempt — homes are data): this is what "wander never
   // seals a door" means mechanically, and it subsumes sole-approach
   // corridors that a fixed warp-adjacency radius cannot see (e.g.
-  // Cinnabar's (3,5), the only corridor tile to the (3,3) house door,
+  // Caldera's (3,5), the only corridor tile to the (3,3) house door,
   // two tiles from the warp). Terrain only: NPC occupancy and boulders
   // are not part of the graph. Cost is trivial at town map sizes.
   computeDoorCritical() {
@@ -1335,7 +1335,7 @@ export class OverworldScene {
     if (this.sysObjective) { const t = this.sysObjective(); if (t) return t; }
     const f = this.game.state.story.flags;
     if (!f.beat_brock) return '▶ Earn the Boulder Badge';
-    return '▶ Explore Kanto';
+    return '▶ Explore Arden';
   }
 
   // P1/D8: day/night pixel icon + season color bar, top-right of canvas.

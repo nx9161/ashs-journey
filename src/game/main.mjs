@@ -856,7 +856,7 @@ export class Game {
 
   // Elevation B5: the dex entry as its own plate, pageable in place —
   // Left/Right (and Q/E, the PC box-switch convention) walk the whole
-  // Kanto dex in dex order without returning to the list. Unseen
+  // Arden dex in dex order without returning to the list. Unseen
   // neighbours render redacted, exactly as the list shows them (???).
   openDexEntry(speciesId, filter) {
     const g = this;

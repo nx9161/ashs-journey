@@ -269,7 +269,7 @@ export class BootScene {
     }
     items.push({ label: 'Options', value: 'options' });
     // ADR-025 §6: Second Journey unlocks when ANY save slot holds a
-    // completed Kanto. The row is appended AFTER Options so every
+    // completed Arden. The row is appended AFTER Options so every
     // existing counted-press path (New Game / Continue / Options) is
     // untouched; with no completed slot the menu is byte-identical
     // to before Phase 6. The unlock scan is cached for the title's

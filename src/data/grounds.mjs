@@ -71,7 +71,7 @@ export const GROUNDS = {
     'The arena is a Spirit Ground — Ground moves hit harder here, and the earth drags at the unadapted.', '#8a6a42'),
 };
 
-// map id -> groundId. Every Kanto map in the merged MAPS table is assigned
+// map id -> groundId. Every Arden map in the merged MAPS table is assigned
 // explicitly (70 unique ids across maps.mjs/maps2/maps3/maps4 — interiors
 // that are shared, 'center'/'mart', resolve Open). Unmapped ids fall back
 // to Open in groundForMap(), so a future map can never crash a battle.
@@ -81,29 +81,29 @@ export const MAP_GROUND = {
   viridian: 'open',
   center: 'open',
   mart: 'open', // World Art Wave 5b: the shared Mart interior
-  route2: 'bloom', // Route 2 carries the Viridian Forest corridor in this build
+  route2: 'bloom', // Route 2 carries the Fernmere Forest corridor in this build
   pewter: 'open',
-  gym: 'rubble', // Pewter Gym — Brock
+  gym: 'rubble', // Flintridge Gym — Brock
   route3: 'bloom',
   moon1: 'rubble',
   moon2: 'rubble',
   route4: 'bloom',
   cerulean: 'open',
-  'gym-cerulean': 'tide', // Cerulean Gym — Misty
+  'gym-cerulean': 'tide', // Tidehaven Gym — Misty
   route5: 'bloom',
   route6: 'bloom',
   vermilion: 'open',
-  'gym-vermilion': 'volt', // Vermilion Gym — Lt. Surge
+  'gym-vermilion': 'volt', // Arcport Gym — Lt. Surge
   stanne: 'tide',
   route11: 'bloom',
   route7: 'bloom',
   celadon: 'open',
-  'gym-celadon': 'marsh', // Celadon Gym — Erika
+  'gym-celadon': 'marsh', // Canopy Gym — Erika
   gamecorner: 'open',
   hideout: 'open',
   route8: 'bloom',
   saffron: 'open',
-  'gym-saffron': 'mind', // Saffron Gym — Sabrina
+  'gym-saffron': 'mind', // Farsight Gym — Sabrina
   dojo: 'open',
   silph1: 'open',
   silph2: 'open',
@@ -117,16 +117,16 @@ export const MAP_GROUND = {
   route12: 'tide',
   route15: 'bloom',
   fuchsia: 'open',
-  'gym-fuchsia': 'venom', // Fuchsia Gym — Koga
+  'gym-fuchsia': 'venom', // Bramble Gym — Koga
   safari: 'mire',
   route16: 'bloom',
   route19: 'tide',
   route20: 'tide',
   seafoam: 'frost',
   cinnabar: 'ember',
-  'gym-cinnabar': 'pyre', // Cinnabar Gym — Blaine
+  'gym-cinnabar': 'pyre', // Caldera Gym — Blaine
   mansion: 'ember',
-  'gym-viridian': 'spirit', // Viridian Gym — Giovanni
+  'gym-viridian': 'spirit', // Fernmere Gym — Giovanni
   route22: 'open',
   victoryroad: 'rubble',
   indigo: 'open',
@@ -137,7 +137,7 @@ export const MAP_GROUND = {
   // no new Grounds this stage): Cissy's lagoon range rides the Tide,
   // Danny's summit gym the Frost, Rudy's spike-stone arena the Rubble,
   // Luana's resort arena the Mind (her MENTARCH's home turf); the
-  // stadium and Ivy's lab take Open, as the Indigo League floor does.
+  // stadium and Ivy's lab take Open, as the Crown League floor does.
   'ivy-lab': 'open',
   'mikan-gym': 'tide',
   'navel-gym': 'frost',
@@ -182,7 +182,7 @@ export const MAP_GROUND = {
   'radio-tower-2': 'storm',
   'radio-tower-3': 'storm',
   'dragons-den': 'grave',
-  // Stage J5: the Rocket Hideout interior — a transmitter base hums,
+  // Stage J5: the Hideout interior — a transmitter base hums,
   // so its battles ride the Storm ground.
   'rocket-hideout': 'storm',
   'silver-stadium': 'open',

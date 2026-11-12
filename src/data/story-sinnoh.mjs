@@ -35,7 +35,7 @@
 //    here so S5b inherits the same answer.
 
 export const SINNOH_QUESTS = [
-  { id: 'q_sinnoh_arrival', text: 'Sail to Sinnoh — land at Sandgem Town', hint: 'The ferry from Vermilion docks at Sandgem, under the mountain. A new region, an old cold, and a professor who measures trainers the way winter measures roofs.', flag: 'sinnoh_arrival' },
+  { id: 'q_sinnoh_arrival', text: 'Sail to Sinnoh — land at Sandgem Town', hint: 'The ferry from Arcport docks at Sandgem, under the mountain. A new region, an old cold, and a professor who measures trainers the way winter measures roofs.', flag: 'sinnoh_arrival' },
   { id: 'q_sinnoh_lab', text: "Report to Professor Rowan's lab in Sandgem", hint: 'Rowan studies how Pokemon change and grow. He has questions for a trainer of your record — and, it turns out, another visitor with questions of his own.', flag: 'rowan_registered' },
   { id: 'q_sinnoh_paul1', text: "The cold-eyed trainer: take Paul's measure at the lab", hint: 'Paul battles the way an auditor reads a ledger: everything counted, nothing forgiven. Whatever the result, he will file you under a number. Prove the number wrong later.', flag: 'paul1_done' },
   { id: 'q_sinnoh_verity', text: 'Lake Verity — something moved on the water', hint: 'West of Twinleaf, the lake sits still as glass. Old stories say a spirit of emotion sleeps beneath it. Stand on the shore a while. Watch.', flag: 'verity_glimpse' },
@@ -439,7 +439,7 @@ export const SINNOH_EVENTS = {
   ],
   // The lab: Rowan registers a veteran; Paul takes his first measure.
   ev_sinnoh_lab: [
-    { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Kanto champion. The Orange voyager. The Johto and Hoenn name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
+    { say: ['The lab is quiet the way libraries are quiet — by enforcement. PROF. ROWAN looks up from a fossil ledger, and his eyebrows conduct a brief, severe census of you.', '"Hm. The Arden champion. The Orange voyager. The Johto and Hoenn name my colleagues keep attaching to weather events."'], who: 'PROF. ROWAN' },
     { say: ['"Understand me: I do not register beginners in this room, and I am not registering one now. Your Pokedex is a working instrument, not a schoolbook. Sinnoh\'s pages are open to it — all of them, from the lake spirits to the things the mountain keeps."', '"Walk my region carefully, trainer. It is older than the League, and it keeps its evidence in stone."'], who: 'PROF. ROWAN' },
     { flag: 'rowan_registered' },
     { say: ['The door opens on the cold. A trainer your age stands in it — cap low, hands in pockets, a gaze that has already finished measuring the room and moved on to you.', '"Paul." The professor\'s tone files the name under weather warnings. "You were told to wait outside." — "I waited. Then I came in."'], who: '' },
@@ -929,7 +929,7 @@ export const SINNOH_LEGENDARY_ARCS = {
     prereq: 'arceus_unlocked',
     hook: 'Above the oldest pillar in the world there is a first room, and in it the one who was present before the chains, before the lakes, before everything. It does not summon. It simply stops being unreachable — for exactly one trainer, the one the whole road was walked by.',
     steps: [
-      { text: 'Walk the whole road home — the Azure Flute is entrusted only at the finale, in Pallet Town, when every journey stands complete', flag: 'arceus_unlocked' },
+      { text: 'Walk the whole road home — the Azure Flute is entrusted only at the finale, in Dawnwick, when every journey stands complete', flag: 'arceus_unlocked' },
       { text: 'Carry the Azure Flute (it rides in your bag\u2019s key pocket) to Spear Pillar, atop Mt. Coronet — play it where the sky was chained, and let it build the stairs', flag: 'arceus_stairs_open' },
       { text: 'Climb the stairs to the Hall of Origin, above Spear Pillar, and face Arceus, level 400', catch: 'arceus' },
     ],

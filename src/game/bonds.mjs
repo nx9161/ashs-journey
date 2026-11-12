@@ -15,7 +15,7 @@
 // - Wary's floor is -3 so no single choice (swing <= 2, enforced in
 //   applyBond) can hard-lock a character below Wary from neutral —
 //   reaching Cold takes sustained coldness (two or more cold beats).
-// - A full Kanto run offers Gary 11 attainable points (6 rival-battle
+// - A full Arden run offers Gary 11 attainable points (6 rival-battle
 //   wins + 5 choice points), the duo 7, leaders 3 (tale + talk choice) —
 //   Close is reachable for the rival, Warm for everyone, neither is
 //   the default.
@@ -72,20 +72,20 @@ export function tierAtLeast(state, npcId, tier) {
 // plate: the dialogue nameplate string this character speaks under.
 // note: the Quest Log PEOPLE detail line (no numbers, ever).
 export const BOND_CHARACTERS = [
-  { id: 'mom', name: 'Mom', plate: 'MOM', note: 'Pallet Town. Drew the first street maps of home, chalk on a barn door.' },
+  { id: 'mom', name: 'Mom', plate: 'MOM', note: 'Dawnwick. Drew the first street maps of home, chalk on a barn door.' },
   { id: 'hawthorn', name: 'Prof. Hawthorn', plate: 'Prof. Hawthorn', note: 'The professor who studies how Pokemon and people grow together. He gave you your partner.' },
   { id: 'gary', name: 'Gary', plate: 'GARY', note: 'Your rival since before either of you could reach the lab door. His Eevee is still deciding.' },
   { id: 'rue', name: 'Rue', plate: 'RUE', note: 'Half of a uniformed duo with theatrical ambitions and a drawn-on moustache.' },
   { id: 'cole', name: 'Cole', plate: 'COLE', note: 'The other half. Holds the menu right-side up and the conscience for both of them.' },
-  { id: 'retiredace', name: 'Ace Marlow', plate: 'ACE MARLOW', note: 'Viridian elder. The first trainer ever to challenge the Viridian Gym, before there was a League to record it.' },
-  { id: 'brock', name: 'Brock', plate: 'BROCK', note: 'Pewter leader and part-time museum curator. The museum came first; the gym is built from its stone.' },
-  { id: 'misty', name: 'Misty', plate: 'MISTY', note: 'Cerulean leader. Keeps the old bike-shop ledger from when her gym had a pool out back.' },
-  { id: 'surge', name: 'Lt. Surge', plate: 'LT. SURGE', note: 'Vermilion leader. Learned to read the bay from the Fan Club founder\'s tide tables.' },
-  { id: 'erika', name: 'Erika', plate: 'ERIKA', note: 'Celadon leader. Her grandmother planted the roof garden so the city\'s green would outgrow its neon.' },
-  { id: 'koga', name: 'Koga', plate: 'KOGA', note: 'Fuchsia leader. His grandfather taught the Safari Warden to fish with one carved lure.' },
-  { id: 'sabrina', name: 'Sabrina', plate: 'SABRINA', note: 'Saffron leader. Her father and Master Ko split one school over what strength is for.' },
-  { id: 'blaine', name: 'Blaine', plate: 'BLAINE', note: 'Cinnabar leader. He was on the jungle expedition that followed a mirage, and never called it a failure.' },
-  { id: 'fuji', name: 'Mr. Fuji', plate: 'MR. FUJI', note: 'Lavender elder. He has carried his town\'s grief longer than anyone, and keeps a bell for the kind.' },
+  { id: 'retiredace', name: 'Ace Marlow', plate: 'ACE MARLOW', note: 'Fernmere elder. The first trainer ever to challenge the Fernmere Gym, before there was a League to record it.' },
+  { id: 'brock', name: 'Brock', plate: 'BROCK', note: 'Flintridge leader and part-time museum curator. The museum came first; the gym is built from its stone.' },
+  { id: 'misty', name: 'Misty', plate: 'MISTY', note: 'Tidehaven leader. Keeps the old bike-shop ledger from when her gym had a pool out back.' },
+  { id: 'surge', name: 'Lt. Surge', plate: 'LT. SURGE', note: 'Arcport leader. Learned to read the bay from the Fan Club founder\'s tide tables.' },
+  { id: 'erika', name: 'Erika', plate: 'ERIKA', note: 'Canopy leader. Her grandmother planted the roof garden so the city\'s green would outgrow its neon.' },
+  { id: 'koga', name: 'Koga', plate: 'KOGA', note: 'Bramble leader. His grandfather taught the Preserve Warden to fish with one carved lure.' },
+  { id: 'sabrina', name: 'Sabrina', plate: 'SABRINA', note: 'Farsight leader. Her father and Master Ko split one school over what strength is for.' },
+  { id: 'blaine', name: 'Blaine', plate: 'BLAINE', note: 'Caldera leader. He was on the jungle expedition that followed a mirage, and never called it a failure.' },
+  { id: 'fuji', name: 'Mr. Fuji', plate: 'MR. FUJI', note: 'Hushmoor elder. He has carried his town\'s grief longer than anyone, and keeps a bell for the kind.' },
 ];
 export function bondCharacter(id) {
   return BOND_CHARACTERS.find((c) => c.id === id) || null;
@@ -185,18 +185,18 @@ export function recordBattleBond(state, trainerId, won, fled) {
 // variants of the same beats. Resolution falls back Close -> Warm ->
 // Wary, Cold -> Wary; a scene with no set for the resolved tier
 // returns null and the caller keeps its default lines.
-// ---------- the Celadon parley (Phase 3's deferred first source) ----------
+// ---------- the Canopy parley (Phase 3's deferred first source) ----------
 // The Second-Wind Ribbon's FIRST source (§3 table) is the Rue & Cole
-// parley; Phase 3 shipped only the second source (the Celadon atelier
+// parley; Phase 3 shipped only the second source (the Canopy atelier
 // clerk, 7-badge stock gate) and left this one for Phase 5. The duo
-// appear in Celadon City — the duo3 beat of their escalation arc —
+// appear in Canopy City — the duo3 beat of their escalation arc —
 // once the St. Anne has sailed and until the parley resolves. The
 // scene wiring lives in overworld-systems (runParleyNpc); loadMap
 // injects these actors into the scene's map copy under parleyVisible,
 // the tale-NPC pattern (shared MAPS data is never mutated).
 export const PARLEY_NPCS = [
   { map: 'celadon', x: 8, y: 8, name: 'RUE', art: 'rue', skin: '#e8b888', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a', parley: true,
-    dialogue: ['You. YOU. Of all the street corners in all of Kanto—', 'Do not look at me like that. The moustache was ONE time.'] },
+    dialogue: ['You. YOU. Of all the street corners in all of Arden—', 'Do not look at me like that. The moustache was ONE time.'] },
   { map: 'celadon', x: 9, y: 8, name: 'COLE', art: 'cole', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a', parley: true,
     dialogue: ['Oh no. Oh no no no. Rue. Rue, it is the kid. It is THE kid.'] },
 ];

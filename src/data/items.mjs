@@ -7,7 +7,7 @@ export const BALLS = {
   greatball: { id: 'greatball', name: 'Greater Orb', bonus: 1.5, desc: 'A better catch rate.' },
   ultraball: { id: 'ultraball', name: 'Ultra Orb', bonus: 2, desc: 'The best standard orb.' },
   masterball: { id: 'masterball', name: 'Master Orb', bonus: 999, desc: 'Catches without fail. One exists.' },
-  safariball: { id: 'safariball', name: 'Safari Orb', bonus: 1, desc: 'Issued at the Safari Zone gate.' },
+  safariball: { id: 'safariball', name: 'Safari Orb', bonus: 1, desc: 'Issued at the Bramble Preserve gate.' },
   // Stage J6: Kurt's apricorn balls. Each carries a `rule` that the
   // catch calculation in BOTH battle engines evaluates against the
   // live battle (src/game/ball-rules.mjs) — the bonus is NEVER flat
@@ -108,32 +108,32 @@ export const ITEMS = {
   waterstone: { id: 'waterstone', name: 'Water Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Water lines.' },
   thunderstone: { id: 'thunderstone', name: 'Thunder Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Electric lines. The partner refuses it — firmly.' },
   leafstone: { id: 'leafstone', name: 'Leaf Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Grass lines.' },
-  moonstone: { id: 'moonstone', name: 'Moon Stone', pocket: 'items', price: 0, desc: 'A stone that fell with the MOONLET legends of Mt. Moon.' },
+  moonstone: { id: 'moonstone', name: 'Moon Stone', pocket: 'items', price: 0, desc: 'A stone that fell with the MOONLET legends of Mt. Lunestone.' },
   sunstone: { id: 'sunstone', name: 'Sun Stone', pocket: 'items', price: 0, desc: 'A stone that glows like bottled morning. Evolves certain sun-loving lines.' },
   // Treasures / misc
   nugget: { id: 'nugget', name: 'Nugget', pocket: 'items', price: 10000, desc: 'A gold nugget. Sell it at a mart.' },
   stardust: { id: 'stardust', name: 'Stardust', pocket: 'items', price: 2000, desc: 'Fine red sand. Sell it at a mart.' },
   starpiece: { id: 'starpiece', name: 'Star Piece', pocket: 'items', price: 9800, desc: 'A glittering gem shard. Sell it at a mart.' },
-  // Fossils (revived at the Cinnabar Lab)
-  helixfossil: { id: 'helixfossil', name: 'Helix Fossil', pocket: 'key', desc: 'A spiral fossil from Mt. Moon. The Cinnabar Lab can revive it.' },
-  domefossil: { id: 'domefossil', name: 'Dome Fossil', pocket: 'key', desc: 'A domed fossil from Mt. Moon. The Cinnabar Lab can revive it.' },
+  // Fossils (revived at the Caldera Lab)
+  helixfossil: { id: 'helixfossil', name: 'Helix Fossil', pocket: 'key', desc: 'A spiral fossil from Mt. Lunestone. The Caldera Lab can revive it.' },
+  domefossil: { id: 'domefossil', name: 'Dome Fossil', pocket: 'key', desc: 'A domed fossil from Mt. Lunestone. The Caldera Lab can revive it.' },
   oldamber: { id: 'oldamber', name: 'Old Amber', pocket: 'key', desc: 'Ancient tree sap with something preserved inside.' },
   escaperope: { id: 'escaperope', name: 'Escape Rope', pocket: 'items', price: 550, desc: 'A long, sturdy rope. Warps you out of caves and buildings to the last town where you healed your team.' },
   // Key items
   bicycle: { id: 'bicycle', name: 'Bicycle', pocket: 'key', desc: 'Ride with SELECT; twice as fast. Cycling Road loves it.' },
-  bikevoucher: { id: 'bikevoucher', name: 'Bike Voucher', pocket: 'key', desc: 'Good for one free bicycle at the Cerulean bike shop.' },
+  bikevoucher: { id: 'bikevoucher', name: 'Bike Voucher', pocket: 'key', desc: 'Good for one free bicycle at the Tidehaven bike shop.' },
   oldrod: { id: 'oldrod', name: 'Old Rod', pocket: 'key', desc: 'Fish by facing water and pressing A. Catches humble things.' },
   goodrod: { id: 'goodrod', name: 'Good Rod', pocket: 'key', desc: 'A better rod. Better splashes.' },
   superrod: { id: 'superrod', name: 'Super Rod', pocket: 'key', desc: 'The best rod there is.' },
-  silphscope: { id: 'silphscope', name: 'Silph Scope', pocket: 'key', desc: 'Reveals unseen presences. The Tower\'s ghost, for instance.' },
+  silphscope: { id: 'silphscope', name: 'Vantage Scope', pocket: 'key', desc: 'Reveals unseen presences. The Tower\'s ghost, for instance.' },
   pokeflute: { id: 'pokeflute', name: 'Poke Flute', pocket: 'key', desc: 'Its melody can wake anything. Even a roadblock.' },
-  cardkey: { id: 'cardkey', name: 'Card Key', pocket: 'key', desc: 'Opens the sliding doors of Silph Co.' },
-  secretkey: { id: 'secretkey', name: 'Secret Key', pocket: 'key', desc: 'Opens the Cinnabar Gym. Still warm from the mansion ruins.' },
-  ssticket: { id: 'ssticket', name: 'S.S. Ticket', pocket: 'key', desc: 'A boarding pass for a luxury cruise from Vermilion.' },
+  cardkey: { id: 'cardkey', name: 'Card Key', pocket: 'key', desc: 'Opens the sliding doors of Vantage Co.' },
+  secretkey: { id: 'secretkey', name: 'Secret Key', pocket: 'key', desc: 'Opens the Caldera Gym. Still warm from the mansion ruins.' },
+  ssticket: { id: 'ssticket', name: 'S.S. Ticket', pocket: 'key', desc: 'A boarding pass for a luxury cruise from Arcport.' },
   coincase: { id: 'coincase', name: 'Coin Case', pocket: 'key', desc: 'Holds Game Corner coins.' },
   coin: { id: 'coin', name: 'Game Coin', pocket: 'key', desc: 'Game Corner currency. Win at the slots; spend at the prize corner.' },
   itemfinder: { id: 'itemfinder', name: 'Itemfinder', pocket: 'key', desc: 'Beeps near hidden items when used (SELECT near a spot).' },
-  townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Kanto at a glance. Gary\'s sister would approve.' },
+  townmap: { id: 'townmap', name: 'Town Map', pocket: 'key', desc: 'Arden at a glance. Gary\'s sister would approve.' },
   // Arc 4 Stage S5b: the Lunar Wing — carried away from Fullmoon
   // Island in the Darkrai beat; S6's Newmoon arc reads it.
   lunarwing: { id: 'lunarwing', name: 'Lunar Wing', pocket: 'key', desc: 'A feather that shines like a crescent moon. Said to drive off nightmares.' },
@@ -149,15 +149,15 @@ export const ITEMS = {
   azureflute: { id: 'azureflute', name: 'Azure Flute', pocket: 'key', desc: 'A flute of clear blue glass, older than the mountains it was carved under. Its note is said to build stairs where the sky keeps its first room.' },
   goldteeth: { id: 'goldteeth', name: 'Gold Teeth', pocket: 'key', desc: 'The Safari warden\'s lost teeth. He\'d be grateful.' },
   // Badges (key pocket; effects enforced by the field-move + obedience systems)
-  boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Pewter. Lets you use FLASH outside battle; Attack rises.' },
-  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Misty of Cerulean. Pokemon up to Lv30 obey; CUT outside battle.' },
-  thunderbadge: { id: 'thunderbadge', name: 'Thunder Badge', pocket: 'key', desc: 'From Lt. Surge of Vermilion. FLY outside battle; Speed rises.' },
-  rainbowbadge: { id: 'rainbowbadge', name: 'Rainbow Badge', pocket: 'key', desc: 'From Erika of Celadon. Up to Lv50 obey; STRENGTH outside battle.' },
-  soulbadge: { id: 'soulbadge', name: 'Soul Badge', pocket: 'key', desc: 'From Koga of Fuchsia. SURF outside battle; Defense rises.' },
-  marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Saffron. Up to Lv70 obey.' },
-  volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Cinnabar. Special rises.' },
-  earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Viridian Gym. All Pokemon obey. The League gate opens.' },
-  // Orange Crew badges (Stage O2): the Kanto representation exactly —
+  boulderbadge: { id: 'boulderbadge', name: 'Boulder Badge', pocket: 'key', desc: 'From Brock of Flintridge. Lets you use FLASH outside battle; Attack rises.' },
+  cascadebadge: { id: 'cascadebadge', name: 'Cascade Badge', pocket: 'key', desc: 'From Misty of Tidehaven. Pokemon up to Lv30 obey; CUT outside battle.' },
+  thunderbadge: { id: 'thunderbadge', name: 'Thunder Badge', pocket: 'key', desc: 'From Lt. Surge of Arcport. FLY outside battle; Speed rises.' },
+  rainbowbadge: { id: 'rainbowbadge', name: 'Rainbow Badge', pocket: 'key', desc: 'From Erika of Canopy. Up to Lv50 obey; STRENGTH outside battle.' },
+  soulbadge: { id: 'soulbadge', name: 'Soul Badge', pocket: 'key', desc: 'From Koga of Bramble. SURF outside battle; Defense rises.' },
+  marshbadge: { id: 'marshbadge', name: 'Marsh Badge', pocket: 'key', desc: 'From Sabrina of Farsight. Up to Lv70 obey.' },
+  volcanobadge: { id: 'volcanobadge', name: 'Volcano Badge', pocket: 'key', desc: 'From Blaine of Caldera. Special rises.' },
+  earthbadge: { id: 'earthbadge', name: 'Earth Badge', pocket: 'key', desc: 'From the Fernmere Gym. All Pokemon obey. The League gate opens.' },
+  // Orange Crew badges (Stage O2): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.orange, and the
   // badge_<root> story flag (winTrainer / cheatClaimBadge write all
   // three from the trainer def / claim, never a parallel shape).
@@ -165,7 +165,7 @@ export const ITEMS = {
   searubybadge: { id: 'searubybadge', name: 'Sea Ruby Badge', pocket: 'key', desc: 'From Danny of Navel. The climb was the first half of the challenge.' },
   spikeshellbadge: { id: 'spikeshellbadge', name: 'Spike Shell Badge', pocket: 'key', desc: 'From Rudy of Trovita. He tests a team type by type, then dances.' },
   jadestarbadge: { id: 'jadestarbadge', name: 'Jade Star Badge', pocket: 'key', desc: 'From Luana of Kumquat. Her double battle: two pairs, back to back, no rest.' },
-  // Johto badges (Stage J4a): the Kanto representation exactly — a
+  // Johto badges (Stage J4a): the Arden representation exactly — a
   // key-pocket ITEMS row per badge, the id in badges.johto, and the
   // badge_<root> story flag. West four ship playable in J4a; the east
   // four rows exist now so the set, the Cheat Terminal stock and the
@@ -178,7 +178,7 @@ export const ITEMS = {
   mineralbadge: { id: 'mineralbadge', name: 'Mineral Badge', pocket: 'key', desc: 'From Jasmine of Olivine. It shines back at the lighthouse.' },
   glacierbadge: { id: 'glacierbadge', name: 'Glacier Badge', pocket: 'key', desc: 'From Pryce of Mahogany. It will not melt. Neither will you.' },
   risingbadge: { id: 'risingbadge', name: 'Rising Badge', pocket: 'key', desc: 'From Clair of Blackthorn — awarded in the Dragon\'s Den, by the clan\'s law, after the elder\'s test.' },
-  // Hoenn badges (Stage H4a): the Kanto representation exactly — a
+  // Hoenn badges (Stage H4a): the Arden representation exactly — a
   // key-pocket ITEMS row per badge, the id in badges.hoenn, and the
   // badge_<root> story flag. First four are playable in H4a; the east
   // four rows ship now so the earn order is complete from day one
@@ -191,7 +191,7 @@ export const ITEMS = {
   featherbadge: { id: 'featherbadge', name: 'Feather Badge', pocket: 'key', desc: 'From Winona of Fortree. Light enough to ride the canopy wind.' },
   mindbadge: { id: 'mindbadge', name: 'Mind Badge', pocket: 'key', desc: 'From Tate and Liza of Mossdeep. Two halves, one thought.' },
   rainbadge: { id: 'rainbadge', name: 'Rain Badge', pocket: 'key', desc: 'From Juan of Sootopolis. It smells of deep water and old rain.' },
-  // Sinnoh badges (Arc 4 Stage S0): the Kanto representation exactly —
+  // Sinnoh badges (Arc 4 Stage S0): the Arden representation exactly —
   // a key-pocket ITEMS row per badge, the id in badges.sinnoh, and the
   // badge_<root> story flag. Platinum order, minted complete now so
   // the set, the Cheat Terminal stock and the validator sequence are
@@ -205,7 +205,7 @@ export const ITEMS = {
   minebadge: { id: 'minebadge', name: 'Mine Badge', pocket: 'key', desc: 'From Byron of Canalave. Forged steel, harbour-forged — the iron island\'s weight in miniature.' },
   iciclebadge: { id: 'iciclebadge', name: 'Icicle Badge', pocket: 'key', desc: 'From Candice of Snowpoint. Cold enough to sting the palm. It will not melt. Neither will she.' },
   beaconbadge: { id: 'beaconbadge', name: 'Beacon Badge', pocket: 'key', desc: 'From Volkner of Sunyshore. It hums at lighthouse pitch — the last light before the League road.' },
-  // Frontier Symbols (Stage F0): the Kanto representation adapted to
+  // Frontier Symbols (Stage F0): the Arden representation adapted to
   // the Frontier's shape — a key-pocket ITEMS row per Symbol, but the
   // earned state itself is NOT a bag/badge array: it is the slot array
   // badges.symbols (slot i = facility BADGE_SETS.symbols[i], each slot
@@ -295,7 +295,7 @@ export const KEEPSAKES = {
   beaconcoil: { id: 'beaconcoil', name: 'Beacon Coil', kind: 'fasterFoeDamage', moveType: 'electric', factor: 1.15, effect: 'Electric moves deal x1.15 vs faster foes.' },
 };
 // The bag/mart surface of the same pieces (ITEMS is the bag's table).
-// price exists ONLY on the Second-Wind Ribbon (its Celadon shop source);
+// price exists ONLY on the Second-Wind Ribbon (its Canopy shop source);
 // minBadges is the mart's late-game gate for that stock (see openMart).
 // No other keepsake carries a price: they are never bought or sold.
 for (const k of Object.values(KEEPSAKES)) {
@@ -313,7 +313,7 @@ for (const k of Object.values(KEEPSAKES)) {
 // badgeSequences FROM this table) all read these lists — a badge set
 // can never drift between the game, the shop, and the cloud.
 // Root flag convention: badge_<id minus the 'badge' suffix>
-// (badge_coraleye, badge_boulder, ...), exactly as Kanto shipped.
+// (badge_coraleye, badge_boulder, ...), exactly as Arden shipped.
 export const BADGE_SETS = {
   kanto: ['boulderbadge', 'cascadebadge', 'thunderbadge', 'rainbowbadge', 'soulbadge', 'marshbadge', 'volcanobadge', 'earthbadge'],
   orange: ['coraleyebadge', 'searubybadge', 'spikeshellbadge', 'jadestarbadge'],

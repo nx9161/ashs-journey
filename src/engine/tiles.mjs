@@ -34,7 +34,7 @@ export const TILE_CHARS = {
   // Wave 4 nature & dungeons: cave set (wall/floor are new chars so the
   // collision class is carried by the char itself — G/N stay non-walkable
   // wall/boulder class, L joins WALKABLE as floor class) and the three
-  // dungeon-interior sets (Tower stone, Silph panel, Plant industrial).
+  // dungeon-interior sets (Tower stone, Vantage panel, Plant industrial).
   G: 'cavewall', L: 'cavefloor', N: 'caveboulder',
   M: 'towerwall', Q: 'towerfloor',
   I: 'silphwall', '%': 'silphfloor',
@@ -239,9 +239,9 @@ export const J3_WALKABLE_CHARS = J3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // ---- Arc 2 Stage J3a: Johto per-town identity kinds (Premium+ W5
 // machinery, extended) ----
 // The six west-Johto settlements own the same eight signature kinds as
-// the Kanto towns (tg ground / tg2 ground II / tc canopy / td dress /
+// the Arden towns (tg ground / tg2 ground II / tc canopy / td dress /
 // tr roof / tl landmark facade / th house-roof / tw house-wall). The
-// U+00C0.. Latin-1 blocks are exhausted by the eleven Kanto towns, so
+// U+00C0.. Latin-1 blocks are exhausted by the eleven Arden towns, so
 // Johto chars continue the Latin Extended Additional block after the
 // J3 kinds: town i owns idx 173+i*8 .. 180+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
@@ -298,7 +298,7 @@ export const H3_WALKABLE_CHARS = H3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // ---- Arc 3 Stage H3a: Hoenn per-town identity kinds (the W5/J3
 // machinery, extended a third time) ----
 // The eleven west/central-Hoenn settlements own the same eight
-// signature kinds as the Kanto/Johto towns. Chars continue the block
+// signature kinds as the Arden/Johto towns. Chars continue the block
 // after the H3 kinds: town i owns idx 268+i*8 .. 275+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. The art.mjs resolver keys on the
 // kind-name prefixes, so Hoenn kinds ride the shipped W5 paths.
@@ -382,7 +382,7 @@ export const S3_WALKABLE_CHARS = S3_KIND_DEFS.filter(([, c]) => c === 'floor').m
 // ---- Arc 4 Stage S3a: Sinnoh per-town identity kinds (the W5/J3/H3
 // machinery, extended a fourth time) ----
 // The fourteen Sinnoh settlements own the same eight signature kinds
-// as the Kanto/Johto/Hoenn towns. Chars continue the block after the
+// as the Arden/Johto/Hoenn towns. Chars continue the block after the
 // S3 kinds: town i owns idx 412+i*8 .. 419+i*8 in the order
 // [tg, tg2, tc, td, tr, tl, th, tw]. S3a authors the ten west/central
 // towns (twinleaf..canalave, idx 412..491); the four east towns

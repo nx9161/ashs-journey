@@ -42,11 +42,11 @@ export const ORANGE_QUESTS = [
 
 // ---------------------------------------------------------------------------
 // ORANGE_TRAINERS — merged into TRAINERS by merge.mjs. Leader shape is
-// the Kanto gym idiom exactly (intro / lose / team / reward / badge),
+// the Arden gym idiom exactly (intro / lose / team / reward / badge),
 // plus badgeSet: 'orange' so winTrainer's award path writes
-// badges.orange + the badge_<root> flag (the Kanto representation).
+// badges.orange + the badge_<root> flag (the Arden representation).
 // Teams carry species + level only: foe movesets resolve from the
-// learnset idiom in makeMon, exactly as Kanto's leaders do.
+// learnset idiom in makeMon, exactly as Arden's leaders do.
 // ---------------------------------------------------------------------------
 export const ORANGE_TRAINERS = {
   cissy: {
@@ -176,7 +176,7 @@ export const ORANGE_EVENTS = {
   // and the scene re-fires (cave altar tiles / shrine & deep entry).
   // Losing blacks out to the nearest Center per shipped rules and
   // likewise leaves the chain unstalled-but-unfinished — re-entry
-  // re-fires. These event birds are NOT the Kanto legendary-arc
+  // re-fires. These event birds are NOT the Arden legendary-arc
   // birds: no arc_zapdos / arc_moltres / arc_articuno flag or quest
   // entry is read or written anywhere below.
   // =====================================================================
@@ -248,7 +248,7 @@ export const ORANGE_EVENTS = {
 
   // -- The catch: Lugia waits at the deep altar (Shamouti Deep entry
   //    once the storm is stilled; sysLoadMap gate). Standard legendary
-  //    pattern — Lv 55, CATCHABLE, and flee-safe per the Kanto arc
+  //    pattern — Lv 55, CATCHABLE, and flee-safe per the Arden arc
   //    idiom: the runSteps guard completes the arc only on a clean
   //    win, so a flee (or a loss) leaves Lugia waiting and the event
   //    re-fires on the next descent. -------------------------------
@@ -264,7 +264,7 @@ export const ORANGE_EVENTS = {
 
 // ---------------------------------------------------------------------------
 // ORANGE_LEGENDARY_ARCS — merged into LEGENDARY_ARCS by merge.mjs and
-// into the validator's quest table by gen-tables (the Kanto table's
+// into the validator's quest table by gen-tables (the Arden table's
 // presentation: hook + requirement steps spelled out in the Quest
 // Log's LEGENDARY ARCS section). This is the Orange Lugia — a
 // DIFFERENT arc from the designed Johto arc_lugia stub in

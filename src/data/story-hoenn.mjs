@@ -53,14 +53,14 @@ export const HOENN_QUESTS = [
   { id: 'q_hoenn_seafloor', flag: 'seafloor_done', text: 'Dive to the Seafloor Cavern off Route 128', hint: 'Mind Badge, a partner who knows Dive, and a trench that has waited since before there were teams. Steven in Mossdeep can teach the way down.' },
   { id: 'q_hoenn_climax', flag: 'climax_resolved', text: 'End the clash of the weather titans', hint: 'When the sky chooses sides, the answer is older than either side: a green pillar east of Pacifidlog, and something asleep at its top.' },
   { id: 'q_hoenn_rain', flag: 'badge_rain', text: 'Win the Rain Badge from Juan in Sootopolis City', hint: 'Sootopolis is reached only from below — surface inside its crater lake. Juan, the last gym, keeps Water types and a conductor\'s patience.' },
-  { id: 'q_hoenn_wally_final', flag: 'wally_final_done', text: 'Face Wally in Victory Road', hint: 'The boy from Petalburg, grown into the road. He asked to be remembered kindly. He did not ask to be gone easy on.' },
+  { id: 'q_hoenn_wally_final', flag: 'wally_final_done', text: 'Face Wally in Crown Road', hint: 'The boy from Petalburg, grown into the road. He asked to be remembered kindly. He did not ask to be gone easy on.' },
   { id: 'q_hoenn_conference', flag: 'hoenn_conference_registered', text: 'Register for the Ever Grande Conference', hint: 'Eight Hoenn badges open the league hall at Ever Grande. The registrar keeps the bracket; Tyson waits at the end of it.' },
   { id: 'q_hoenn_tyson', flag: 'hoenn_complete', text: 'The Ever Grande Conference — the final, against Tyson', hint: 'Face him with everything the region taught you. However the card falls, Hoenn ends on the far side of this battle.' },
 ];
 
 // ---------------------------------------------------------------------------
 // HOENN_TRAINERS — merged into TRAINERS by merge.mjs. Leader shape is
-// the Kanto gym idiom exactly, plus badgeSet: 'hoenn' so winTrainer's
+// the Arden gym idiom exactly, plus badgeSet: 'hoenn' so winTrainer's
 // award path writes badges.hoenn + the badge_<root> flag. Leader aces
 // carry an authored keepsake (the Classic leader-ace pattern).
 // Levels ride the Hoenn band (201-300), ruling 6 curve for H4a:
@@ -424,7 +424,7 @@ export const HOENN_TRAINERS = {
     ],
     reward: 6000,
   },
-  // --- H4b: Wally, grown (Victory Road, in-band 286-292) ---
+  // --- H4b: Wally, grown (Crown Road, in-band 286-292) ---
   wally_final: {
     id: 'wally_final', name: 'Wally', title: 'Trainer', ai: 'smart',
     intro: ['You remembered my name kindly, {player}. I have thought about how this sentence ends for a whole region: not with thanks. With a battle. Ralts is a Gardevoir now, and my hands do not shake at the wrong moments anymore. They shake at the right ones. Face me — the way I always meant to face you.'],

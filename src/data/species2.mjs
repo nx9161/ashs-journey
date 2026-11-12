@@ -1270,7 +1270,7 @@ export const SPECIES2 = {
   // ===== Cheat Shop canon expansion (owner order 2026-10-28) =====
   // Five FORMS in the partner pattern: own speciesId, SHARED dexNo with
   // the base species, `form: true` + baseSpecies for picker grouping.
-  // They never count as separate species: the Kanto diploma reads dex
+  // They never count as separate species: the Arden diploma reads dex
   // numbers 1-151 and the dex lists exclude form entries (like partner).
   // Anime/book canon, absent from game data; stats/types/learnsets are
   // this project's own original take on the canon facts.
@@ -1325,7 +1325,7 @@ export const SPECIES2 = {
     flavor: 'Its song crosses whole seas. Ships steer home by its shadow.',
     form: true, baseSpecies: 'dragonite',
   },
-  // Five FULL SPECIES (National dex only — dexNo > 151, so the Kanto
+  // Five FULL SPECIES (National dex only — dexNo > 151, so the Arden
   // diploma's 151 cannot move). Canon facts (types/base stats/catch
   // rate/growth/base XP) verified against PokeAPI at build time;
   // learnsets restricted to this game's move table; flavor written for
@@ -1376,7 +1376,7 @@ export const SPECIES2 = {
     flavor: 'Where its rainbow passes, the ash of old sorrow turns green.',
   },
   // Stage O1 (Arc 1.5): ONE more full species on the Ho-Oh precedent —
-  // National dex only (dexNo 249 > 151, so the Kanto diploma cannot
+  // National dex only (dexNo 249 > 151, so the Arden diploma cannot
   // move). Canon facts (types/base stats/catch rate/growth/base XP)
   // verified against PokeAPI at build time (2026-10-29); learnset
   // restricted to this game's move table; flavor original. No wild

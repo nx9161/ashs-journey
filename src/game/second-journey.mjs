@@ -1,6 +1,6 @@
 // ---------- ADR-025 §6 (Phase 6): Second Journey creation ----------
 // The New Game+ flow. A "Second Journey" begins from a COMPLETED save
-// (state.mjs isCompletedRun: its own Hall of Fame entry, or Kanto in
+// (state.mjs isCompletedRun: its own Hall of Fame entry, or Arden in
 // regionsDone) and inherits exactly what §6 allows — dex records, the
 // keepsake collection, Traveler's Memory, starter breadth, the bond
 // echo, prior HoF teams, and meta.ngPlus + 1 — all applied inside

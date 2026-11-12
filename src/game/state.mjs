@@ -24,7 +24,7 @@ export function normalizeHofEntry(e, cap) {
   // passed by the save-flow callers (schema fillV2Defaults reads it
   // via levelCapFor on the save being loaded; Second Journey
   // inheritance reads it off the source save). A bare call with no
-  // save context keeps the historical Kanto ceiling of 100 — the
+  // save context keeps the historical Arden ceiling of 100 — the
   // only callers of that form count entries, never levels.
   const ceil = typeof cap === 'number' && cap > 0 ? cap : 100;
   const lvl = (v) => (typeof v === 'number' && Number.isFinite(v) ? Math.max(1, Math.min(ceil, Math.trunc(v))) : 1);
@@ -54,8 +54,8 @@ export function normalizeHofList(list, cap) {
   for (const e of list) { const n = normalizeHofEntry(e, cap); if (n) out.push(n); }
   return out;
 }
-// Completion detection (§6): a run has completed Kanto when ITS OWN
-// Hall of Fame holds an entry, or its regionsDone names Kanto.
+// Completion detection (§6): a run has completed Arden when ITS OWN
+// Hall of Fame holds an entry, or its regionsDone names Arden.
 // Inherited priorHof entries NEVER satisfy this — they live apart.
 export function isCompletedRun(save) {
   if (!save || typeof save !== 'object' || !save.story) return false;
@@ -94,7 +94,7 @@ export function bondEchoFromSave(save) {
 // the SOURCE save's own shipped evidence — its story flags, its badge
 // case, its bag. (The shipped game records these exact names:
 // silph_done / fossil_taken are story flags set by the campaign;
-// reached_saffron is written by sysLoadMap on entering Saffron.)
+// reached_saffron is written by sysLoadMap on entering Farsight.)
 export const TRAVELERS_MEMORY_GATES = ['saffron-guard', 'coin-case', 'card-key', 'fossil-choice'];
 export function travelersMemoryFromSave(save) {
   if (!save || typeof save !== 'object') return [];
@@ -112,7 +112,7 @@ export function hasTravelersMemory(state, gate) {
   return !!(state && state.story && Array.isArray(state.story.travelersMemory)
     && state.story.travelersMemory.includes(gate));
 }
-// Starter breadth (§6): the Kanto starter lines, by base species. A
+// Starter breadth (§6): the Arden starter lines, by base species. A
 // line counts as "chosen in the source run" when the shipped game
 // recorded it joining that run: the gift-event flags
 // (bulbasaur_joined / charmander_joined / squirtle_joined), a line
@@ -231,7 +231,7 @@ export function defaultState(inherit) {
     facilities: { registry: [], unlocked: [] },
     bag: { pokeball: 10, potion: 3 },
     meta: {
-      createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Pallet Town',
+      createdAt: 0, updatedAt: 0, playtimeSec: 0, location: 'Dawnwick',
       houseRulesTouched: false, // ADR-025: true once any House Rule is enabled
       ngPlus: 0, // ADR-025 §6: Second Journey counter (Phase 6 consumes it)
     },

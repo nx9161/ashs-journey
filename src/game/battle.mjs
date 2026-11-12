@@ -228,7 +228,7 @@ export class BattleScene {
     this.kind = opts.kind; // 'wild' | 'trainer'
     this.foeMon = opts.foe;
     this.trainer = opts.trainer || null;
-    this.safari = !!opts.safari; // Safari Zone: no ally actions, BALL/BAIT/ROCK/RUN
+    this.safari = !!opts.safari; // Bramble Preserve: no ally actions, BALL/BAIT/ROCK/RUN
     this.safariRockLabel = opts.safariRock || 'ROCK'; // S4: the zone's own word for the rock throw (the Great Marsh throws MUD) — data, from the session (the boolean below stays the thrown state)
     this.onEnd = opts.onEnd || null; // story-event continuation callback
     this.uncatchable = !!opts.uncatchable; // scripted presences (the Tower ghost)
@@ -2221,10 +2221,10 @@ export class BattleScene {
       : 'You defeated ' + t.title + ' ' + t.name + '! Got $' + prize + '.';
     this.msgOpen = false;
     if (t.badge) {
-      // Badge award (Kanto representation, generalized Stage O2): the
+      // Badge award (Arden representation, generalized Stage O2): the
       // trainer def names its set (badgeSet, default 'kanto'); the id
       // lands in badges.<set> and the badge_<root> flag fires — the
-      // exact two writes Kanto shipped, now set-driven.
+      // exact two writes Arden shipped, now set-driven.
       const setId = t.badgeSet || 'kanto';
       const setArr = g.state.badges[setId] || (g.state.badges[setId] = []);
       if (!setArr.includes(t.badge)) setArr.push(t.badge);
@@ -2252,11 +2252,11 @@ export class BattleScene {
     // Friendly battles (Candy Coach spar, ADR-025): a loss costs nothing —
     // no money halving, no Center warp. onEnd still fires with won=false.
     if (this.friendly) { this.endBattle(false); return; }
-    // Defeat: fade -> Pokemon Center (overworld, healed, money halved) — architecture §2.2
+    // Defeat: fade -> Center (overworld, healed, money halved) — architecture §2.2
     g.state.pikachu.mood = 'sad'; // Yellow homage: the partner hates losing
     g.state.player.money = Math.floor(g.state.player.money / 2);
     this.endBattle(false);
-    g.ui.say(['You hurried to the Pokemon Center...'], () => {
+    g.ui.say(['You hurried to the Center...'], () => {
       const ow = this.returnTo;
       // P1: same blackout anchor as the overworld path — the defeat
       // warp loads 'center' directly, so the exit ticket must be set

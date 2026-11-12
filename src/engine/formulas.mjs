@@ -46,7 +46,7 @@ export function effectiveness(moveType, defenderTypes) {
 // passes raw stats), and burn does not halve. Random factor is the classic
 // integer roll 217-255 / 255 (see gen1Random). STAB 1.5x. Type chart is the
 // complete modern 18-type chart per the WS8 ruling (ADR-018): fidelity
-// governs feel, pacing and presentation in Kanto — not chart bugs.
+// governs feel, pacing and presentation in Arden — not chart bugs.
 export function calcDamage(level, power, atk, def, opts) {
   const o = opts || {};
   const stab = o.stab ? 1.5 : 1;

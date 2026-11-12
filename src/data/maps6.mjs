@@ -1,12 +1,12 @@
 // maps6.mjs — Arc 2 Stages J3a+J3b: JOHTO (maps, world art data, wild
 // tables). 83 maps: 11 towns, 33 routes/dungeons/waters, 39 interiors.
-// Stage J5 adds one interior: the Rocket Hideout under Mahogany's
+// Stage J5 adds one interior: the Hideout under Mahogany's
 // souvenir shop — the map J4b's scripted descent was staged without.
 // Its stair entry is an NPC/event warp in the engine (maps6 geography
 // itself only gains this one map).
 // Travel law: the Johto embark lands at newbark (registry: pallet ->
-// newbark, ferryArc 'johto' — the Pallet dock captain is appended at
-// loadMap via quests.mjs TALE_NPCS, the Vermilion/CAPT ORANGE pattern);
+// newbark, ferryArc 'johto' — the Dawnwick dock captain is appended at
+// loadMap via quests.mjs TALE_NPCS, the Arcport/CAPT ORANGE pattern);
 // the walking chain newbark -> ecruteak is connected end-to-end, with
 // Union Cave as the Route 32 through-passage. The shared 'center' and
 // 'mart' interiors serve every town via via{} tickets — no per-town
@@ -16,8 +16,8 @@
 // the Burned Tower beast statues are dressing for Stage J5. J3b
 // (east half): the r36 (27,8)/(27,9) -> r38 and r37 (23,8)/(23,9) ->
 // r42 stitches are LIVE, the r45/r46 + Dark Cave ring closes south
-// to r29, Olivine fields the Vermilion ferryArc port (CAPT EASTWIND)
-// with CAPT EASTBOUND mirrored on Vermilion's dock below, Cianwood
+// to r29, Olivine fields the Arcport ferryArc port (CAPT EASTWIND)
+// with CAPT EASTBOUND mirrored on Arcport's dock below, Cianwood
 // runs a plain island-hopper boat to Olivine, the Whirl Islands'
 // Deep Chamber is Lugia dressing/lore only (NO second catch — the
 // one Lugia shipped in Orange), the Dragon's Den shrine and the
@@ -137,7 +137,7 @@ export const MAPS6 = {
       {
         "x": 15,
         "y": 15,
-        "text": "NEW BARK DOCK — The Johto boat ties up here. West across the water lies Pallet Town and home."
+        "text": "NEW BARK DOCK — The Johto boat ties up here. West across the water lies Dawnwick and home."
       },
       {"x": 7, "y": 14, "text": "NEW BARK TOWN — East: ROUTE 29."},
       {"x": 20, "y": 10, "text": "NEW BARK TOWN — East: ROUTE 29."},
@@ -154,7 +154,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The New Bark run is the western crossing — Pallet Town, straight across the water.",
+          "The New Bark run is the western crossing — Dawnwick, straight across the water.",
           "Step aboard when you're ready. Johto keeps no one waiting who knows her moods."
         ],
         "ferry": "pallet",
@@ -3314,7 +3314,7 @@ export const MAPS6 = {
       {
         "x": 15,
         "y": 9,
-        "text": "POKEMON DAY-CARE — The couple on Route 34 raise Pokemon with famously patient hands."
+        "text": "DAY-CARE — The couple on Route 34 raise Pokemon with famously patient hands."
       }
     ],
     "npcs": [
@@ -5402,7 +5402,7 @@ export const MAPS6 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "Welcome to the Radio Tower! Tours run when the red light is off.",
-          "The tower's antenna can hear Kanto on a clear night. Or so engineering swears."
+          "The tower's antenna can hear Arden on a clear night. Or so engineering swears."
         ]
       }
     ],
@@ -6143,7 +6143,7 @@ export const MAPS6 = {
   },
   "daycare": {
     "id": "daycare",
-    "name": "Pokemon Day-Care",
+    "name": "Day-Care",
     "music": "viridian-theme",
     "rows": [
       "<<<<<<<<<<<<<<",
@@ -6384,7 +6384,7 @@ export const MAPS6 = {
       {
         "x": 18,
         "y": 15,
-        "text": "OLIVINE PORT — Ferries for Vermilion City at the east pier; the island boat for Cianwood beside it. The Glitter Lighthouse watches both."
+        "text": "OLIVINE PORT — Ferries for Arcport City at the east pier; the island boat for Cianwood beside it. The Glitter Lighthouse watches both."
       },
       {"x": 7, "y": 9, "text": "OLIVINE CITY — North: ROUTE 39 · West: ROUTE 40."},
       {"x": 3, "y": 12, "text": "OLIVINE CITY — North: ROUTE 39 · West: ROUTE 40."},
@@ -6403,8 +6403,8 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Vermilion run is the long eastern crossing — Kanto water, gull-grey and honest.",
-          "Johto and Kanto keep one sea between them and a hundred years of ferries across it. Step aboard when you're ready."
+          "The Arcport run is the long eastern crossing — Arden water, gull-grey and honest.",
+          "Johto and Arden keep one sea between them and a hundred years of ferries across it. Step aboard when you're ready."
         ],
         "ferry": "vermilion",
         "ferryArc": "johto"
@@ -6435,7 +6435,7 @@ export const MAPS6 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "The lighthouse lamp burns apricorn oil and stubbornness, in that order.",
-          "Ships read our light from halfway to Vermilion. I intend to keep it that way."
+          "Ships read our light from halfway to Arcport. I intend to keep it that way."
         ]
       },
       {
@@ -11861,7 +11861,7 @@ export const MAPS6 = {
       {
         "x": 7,
         "y": 6,
-        "text": "THE LAMP ROOM — From here the beam reaches halfway to Vermilion. On fog nights it is the only road the ships have."
+        "text": "THE LAMP ROOM — From here the beam reaches halfway to Arcport. On fog nights it is the only road the ships have."
       }
     ],
     "npcs": [
@@ -11981,7 +11981,7 @@ export const MAPS6 = {
   },
   "rocket-hideout": {
     "id": "rocket-hideout",
-    "name": "Rocket Hideout",
+    "name": "Hideout",
     "music": "pewter-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGGGGGGGG",
@@ -12046,8 +12046,8 @@ export const MAPS6 = {
   }
 };
 
-// ---- Vermilion dock: the Johto crossing captain (Stage J3b) ----
-// Rides on MAPS5's Vermilion (which already carries CAPT ORANGE for
+// ---- Arcport dock: the Johto crossing captain (Stage J3b) ----
+// Rides on MAPS5's Arcport (which already carries CAPT ORANGE for
 // the Orange crossing), adding ONE npc: the Olivine ferryman, a
 // ferryArc 'johto' network port exactly like CAPT ORANGE. Before
 // Johto is reached he gates (arcFerryAllowed); once Johto has been

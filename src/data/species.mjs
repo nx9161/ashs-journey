@@ -1,4 +1,4 @@
-// species.mjs — slice roster data (Kanto opening: Pallet -> Pewter).
+// species.mjs — slice roster data (Arden opening: Dawnwick -> Flintridge).
 // Original data tables for this fan project. spriteSeed feeds SpriteForge v1;
 // Art Director replaces sprites per docs/contracts.md §1.
 

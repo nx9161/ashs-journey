@@ -1,4 +1,4 @@
-// maps.mjs — Kanto opening slice: Pallet -> Route 1 -> Viridian -> Route 2 -> Pewter (+ interiors).
+// maps.mjs — Arden opening slice: Dawnwick -> Route 1 -> Fernmere -> Route 2 -> Flintridge (+ interiors).
 // Tile legend: # tree | . path | , grass | ~ water | H house | D door | S sign |
 //              G gymwall | E gymdoor | C centerdoor | F flower | R rock | ' ' void
 // Warps fire on step. Doors are step-warps; edge exits are listed per tile.
@@ -7,7 +7,7 @@ function rows(list) { return list; }
 
 export const MAPS = {
   pallet: {
-    id: 'pallet', name: 'Pallet Town', music: 'pallet-theme',
+    id: 'pallet', name: 'Dawnwick', music: 'pallet-theme',
     rows: rows([
       'ËËËËËËËËËËËËËËËË',
       'ËẆẈÀıııÀÀÀÀÀıÀẈË',
@@ -36,8 +36,8 @@ export const MAPS = {
         // Yellow homage (original lines): the rival's partner is an Eevee.
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal, standing at the lab
-      // entrance — Pallet's lab has no interior map, so the terminal lives
-      // here (and in every Pokemon Center) rather than nowhere.
+      // entrance — Dawnwick's lab has no interior map, so the terminal lives
+      // here (and in every Center) rather than nowhere.
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
     ],
@@ -76,7 +76,7 @@ export const MAPS = {
       { x: 8, y: 15, to: { map: 'pallet', x: 8, y: 9 } },
     ],
     signs: [
-      { x: 5, y: 6, text: 'ROUTE 1 — Pallet Town to Viridian City. Tall grass rustles with wild Pokemon.' },
+      { x: 5, y: 6, text: 'ROUTE 1 — Dawnwick to Fernmere City. Tall grass rustles with wild Pokemon.' },
     ],
     npcs: [
       { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#1a1a1a',
@@ -102,7 +102,7 @@ export const MAPS = {
   },
 
   viridian: {
-    id: 'viridian', name: 'Viridian City', music: 'viridian-theme',
+    id: 'viridian', name: 'Fernmere City', music: 'viridian-theme',
     rows: rows([
       'ÌÌÌÌÌÌÁÁĲÁÌÌÌÌÌÌ',
       'ÌĲ×ĲÁĲĲÌÌÁÁÁĲ×ĲÌ',
@@ -129,7 +129,7 @@ export const MAPS = {
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 1 } },
     ],
     signs: [
-      { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
+      { x: 3, y: 6, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
@@ -140,7 +140,7 @@ export const MAPS = {
   },
 
   center: {
-    id: 'center', name: 'Pokemon Center', music: 'center-theme', indoor: true,
+    id: 'center', name: 'Center', music: 'center-theme', indoor: true,
     rows: rows([
       'ṗṘ::::::::',
       ':θḈḉḖβṢθγ:',
@@ -157,7 +157,7 @@ export const MAPS = {
     signs: [],
     npcs: [
       { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
-        dialogue: ["Welcome to the Pokemon Center! Let me heal your team..."], heal: true,
+        dialogue: ["Welcome to the Center! Let me heal your team..."], heal: true,
         afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach (Candy Coach House Rule) — present in
       // every Center's data; the scene only fields him while the rule is
@@ -247,7 +247,7 @@ export const MAPS = {
   },
 
   pewter: {
-    id: 'pewter', name: 'Pewter City', music: 'pewter-theme',
+    id: 'pewter', name: 'Flintridge City', music: 'pewter-theme',
     rows: rows([
       'ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ',
       'ÍĵĵĵÂoąîąąoÂĵÂĵÍ',
@@ -270,8 +270,8 @@ export const MAPS = {
       { x: 9, y: 10, to: { map: 'route2', x: 7, y: 1 } },
     ],
     signs: [
-      { x: 3, y: 6, text: 'PEWTER CITY — A stone-gray city nestled between mountains.' },
-      { x: 11, y: 6, text: 'PEWTER GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
+      { x: 3, y: 6, text: 'FLINTRIDGE CITY — A stone-gray city nestled between mountains.' },
+      { x: 11, y: 6, text: 'FLINTRIDGE GYM — Leader: Brock. The rock-solid Pokemon trainer!' },
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
@@ -283,7 +283,7 @@ export const MAPS = {
   },
 
   gym: {
-    id: 'gym', name: 'Pewter Gym', music: 'gym-theme', indoor: true,
+    id: 'gym', name: 'Flintridge Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===========',
       '=νḿṀλṁλ++Ḙθ=',
@@ -303,7 +303,7 @@ export const MAPS = {
     npcs: [
       { x: 5, y: 2, name: 'BROCK', art: 'brock', skin: '#c89878', shirt: '#c8782a', pants: '#3a405a', hair: '#1a1a1a',
         trainer: 'brock',
-        dialogue: ["I'm Brock! I'm Pewter's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
+        dialogue: ["I'm Brock! I'm Flintridge's Gym Leader! My rock-hard willpower is evident even in my Pokemon!", "Stone may endure for ages, but your resolve struck harder today. The Boulder Badge is yours."] },
     ],
     encounters: null,
     start: null,
@@ -326,7 +326,7 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
   // The chars occur ONLY as the 15 town house doors (13 warped, the 2
   // known decorative doors stay enclosed by roof/facade/border tiles).
   's', 'w', 'y',
-  // Wave 4 dungeon floors: cave L, Tower Q, Silph %, Plant & — each was
+  // Wave 4 dungeon floors: cave L, Tower Q, Vantage %, Plant & — each was
   // swapped 1:1 from the walkable '.' floor char, so floor stays floor.
   'L', 'Q', '%', '&',
   // Wave 5a interior floors (center !, mart $, house *, gym +, lab -)
@@ -506,7 +506,7 @@ export const TRAINERS = {
     reward: 200,
   },
   brock: {
-    id: 'brock', name: 'Brock', title: 'Pewter Gym Leader',
+    id: 'brock', name: 'Brock', title: 'Flintridge Gym Leader',
     ai: 'opener-setup',
     intro: ["My rock-type Pokemon will crush you! Show me what you've got!"],
     lose: ["I took you for granted... You're stronger than I thought.", "Take the Boulder Badge — you earned it."],

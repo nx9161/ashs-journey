@@ -12,7 +12,7 @@
 // J5's beast arcs. J4b (this stage, appended below the marked seams)
 // ships the east: the Olivine/Cianwood medicine errand + Storm and
 // Mineral badges, Silver's second and third clashes, the Red WRATHWYRM
-// + Lance + the Rocket Hideout + Glacier Badge, the Radio Tower
+// + Lance + the Hideout + Glacier Badge, the Radio Tower
 // takeover, Clair + the Dragon's Den test (the Rising Badge is awarded
 // AT THE DEN, not in the gym), the route-silver badge gate, the Silver
 // Conference (Gary must-win centrepiece, then Harrison — see the
@@ -62,7 +62,7 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Cianwood City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
   { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Olivine City', hint: 'Jasmine will not battle while Amphy is sick — the errand comes first. Her Steelix fears Fire, Fighting and Ground moves.' },
   { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red WRATHWYRM at the Lake of Rage', hint: 'North of Mahogany, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
-  { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Rocket Hideout beneath Mahogany\'s souvenir shop', hint: 'Lance is waiting in Mahogany Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
+  { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Hideout beneath Mahogany\'s souvenir shop', hint: 'Lance is waiting in Mahogany Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
   { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Pryce in Mahogany Town', hint: 'Pryce has trained through fifty winters and one Rocket occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
   { id: 'q_johto_radio', flag: 'radio_tower_cleared', text: 'Take back the Goldenrod Radio Tower', hint: 'With the hideout gone, Team Rocket has seized the Radio Tower to broadcast their return. The real Director is being held somewhere below the city — the Card Key is with him.' },
   { id: 'q_johto_rising', flag: 'badge_rising', text: 'Win Clair\'s trust — and the Rising Badge — in Blackthorn', hint: 'Clair\'s gym is only the first half. By the clan\'s law the badge itself is given in the Dragon\'s Den, after the elder\'s test. Her Dragon types fear Ice and Dragon moves.' },
@@ -74,7 +74,7 @@ export const JOHTO_QUESTS = [
 
 // ---------------------------------------------------------------------------
 // JOHTO_TRAINERS — merged into TRAINERS by merge.mjs. Leader shape is
-// the Kanto gym idiom exactly, plus badgeSet: 'johto' so winTrainer's
+// the Arden gym idiom exactly, plus badgeSet: 'johto' so winTrainer's
 // award path writes badges.johto + the badge_<root> flag. Leader aces
 // carry an authored keepsake (the Classic leader-ace pattern —
 // rules.foeKeepsakeFor reads the team entry's keepsake).
@@ -284,7 +284,7 @@ export const JOHTO_TRAINERS = {
     ],
     reward: 0,
   },
-  // The Rocket Hideout gauntlet (staged as the descent event — see
+  // The Hideout gauntlet (staged as the descent event — see
   // ev_johto_hideout; J3b authored no hideout interior map and
   // maps6 stays untouched, so the gauntlet plays as a scripted
   // descent from Mahogany's souvenir shop with Lance beside you).
@@ -386,14 +386,14 @@ export const JOHTO_TRAINERS = {
   // THE GARY BATTLE — the arc's centrepiece. A REAL trainer battle
   // the player must WIN (standard league idiom: losing leaves
   // beat_gary_johto unset and Gary re-challengeable after healing —
-  // no soft-lock). His team is built from his Kanto identity, grown
+  // no soft-lock). His team is built from his Arden identity, grown
   // to the Conference: MENTARCH and EMBERMANE from his road, GRIMSHADE
   // and Umbreon from his Johto years, AERARCH from the first sky
   // you shared — and ABYSSAR, his starter, anchoring it all, the
   // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
     id: 'gary_johto', name: 'Gary', title: 'Silver Conference Trainer', ai: 'smart',
-    intro: ['Well. Look who the bracket dragged in.', 'Kanto champion, Orange winner — and still the second-most interesting trainer in this stadium. I have waited two regions for this draw, {player}. Do not make me regret the wait.'],
+    intro: ['Well. Look who the bracket dragged in.', 'Arden champion, Orange winner — and still the second-most interesting trainer in this stadium. I have waited two regions for this draw, {player}. Do not make me regret the wait.'],
     lose: ['...Ha. Hahaha. Yeah. Yeah, that is the one I wanted.', 'Two regions, and it still comes down to us at the end of the bracket. Take the win. Take it all the way to Harrison — and do not you dare lose to him after beating me.'],
     team: [
       { species: 'pidgeot', level: 186 },
@@ -546,7 +546,7 @@ export const JOHTO_EVENTS = {
     { toast: 'Lance is waiting in Mahogany Town.' },
   ],
 
-  // -- The Rocket Hideout (the descent, run from Lance in Mahogany):
+  // -- The Hideout (the descent, run from Lance in Mahogany):
   // a gauntlet of must-win { battle } steps — a loss stalls the chain
   // with no flag and no event-done, so talking to Lance re-runs the
   // descent; it can never half-clear. The MEGACELL power core is a
@@ -565,7 +565,7 @@ export const JOHTO_EVENTS = {
     { battle: 'rocket_hideout_exec' },
     { say: ['It is over. The transmitter is dark, the signal is dead, and Team Rocket\'s little empire under the souvenir shop is a basement again — wet concrete and abandoned paperwork.', 'You fight the way the lake needed someone to fight, trainer. Remember that. Now — Mahogany has a gym, and an old man in it who has been waiting out an occupation. Pryce is free to take challengers again. Tell him Lance sent you. Tell him the lake is quiet.'], who: 'LANCE' },
     { flag: 'johto_hideout_cleared' },
-    { toast: 'The Rocket Hideout is cleared!' },
+    { toast: 'The Hideout is cleared!' },
   ],
 
   // -- The Radio Tower takeover (staged AFTER the hideout) ---------

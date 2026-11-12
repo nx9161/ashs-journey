@@ -132,9 +132,9 @@ export function xpMultFor(state, mon) {
 // no trainer and never hold one in ANY mode. Authored pieces live on
 // the trainer data (team entry `keepsake`); a leader member with no
 // authored piece holds none. READING NOTE (§3 vs §4): §3 says Classic
-// aces hold "from the Indigo League onward" while §4 says "aces only,
+// aces hold "from the Crown League onward" while §4 says "aces only,
 // late" — this implements §4's row over the Phase-1 leader set (no
-// gym-leader battle exists at/after the Indigo League in this build,
+// gym-leader battle exists at/after the Crown League in this build,
 // so the literal §3 reading would make the Classic row dead content);
 // "late" is read as the ace's late-battle position, as in §4.
 export function foeKeepsakeFor(state, trainer, teamIndex, teamLength) {

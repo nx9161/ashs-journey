@@ -222,7 +222,7 @@ export function talkFrontierScott(g, ow) {
 // Scott's closing beat (Stage F4)
 // ------------------------------------------------------------------
 
-// A one-shot map-entry scene on Pallet Town: once the Frontier is
+// A one-shot map-entry scene on Dawnwick: once the Frontier is
 // complete (story.flags.frontier_complete, set by the shared award
 // helper when the seventh symbol turned gold) and the beat has not
 // played, Scott intercepts the returning conqueror on entry. The

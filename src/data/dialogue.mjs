@@ -16,7 +16,7 @@ export const INTRO_SCRIPT = {
     '...It shocked you too! Ha! That means it likes you. Mostly.',
     'Listen well: this one will never stay inside a Capture Orb. It walks beside you, or not at all.',
     'A bond like that is rarer than any badge. Treat it well, {player}.',
-    'Your journey starts on Route 1, north of Pallet Town. Catch Pokemon, grow strong — and when you are ready, Pewter Gym awaits.',
+    'Your journey starts on Route 1, north of Dawnwick. Catch Pokemon, grow strong — and when you are ready, Flintridge Gym awaits.',
   ],
 };
 
@@ -50,7 +50,7 @@ export const GYM_WIN_TEXT = [
 export const SLICE_CAPSTONE = [
   '{player} received the Boulder Badge!',
   'With the Boulder Badge, your Pokemon will obey you, and your team hits a little harder.',
-  '...To be continued. The road to Cerulean City lies ahead — in the next chapter.',
+  '...To be continued. The road to Tidehaven City lies ahead — in the next chapter.',
 ];
 
 // BOND_DIALOGUE — Rejuvenation Phase 5 (ADR-025 §2): tier-variant line
@@ -73,14 +73,14 @@ export const BOND_DIALOGUE = {
       cold: ['...Tch. Whatever. The League is still mine.'],
       wary: ['Tch. Fine. Take the win. I will take the next one — count on it.'],
       warm: ['Hah... okay. OKAY. You earned that one, {player}. Do not let it go to your head — I am still ahead on style points.'],
-      close: ['...Yeah. That is the battle I have been chasing since Pallet Town. Do it again at the top, {player} — I will be waiting.'],
+      close: ['...Yeah. That is the battle I have been chasing since Dawnwick. Do it again at the top, {player} — I will be waiting.'],
     },
-    // Indigo League: at Close, the post-champion scene GAINS these
+    // Crown League: at Close, the post-champion scene GAINS these
     // mutual-respect lines (the standard scene plays identically).
     championAfter: {
-      close: ['...You know what the worst part is? I am not even mad. Somewhere between Pallet and here, beating you stopped being the point.', 'Eevee decided, in the end — because YOU pushed us hard enough to need to. That is what rivals are FOR, I guess.', 'So. Champion {player}. Say it back to me when we are old — and I will say it first. That is my concession speech. Do not tell anyone.'],
+      close: ['...You know what the worst part is? I am not even mad. Somewhere between Dawnwick and here, beating you stopped being the point.', 'Eevee decided, in the end — because YOU pushed us hard enough to need to. That is what rivals are FOR, I guess.', 'So. Champion {player}. Say it back to me when we are old — and I will say it first. That is my concession speech. Do not tell anyone.'],
     },
-    // Pallet lab small talk (the Eevee beat, shaded).
+    // Dawnwick lab small talk (the Eevee beat, shaded).
     lab: {
       cold: ['What are YOU staring at? Eevee and I have training to do. Some of us take this seriously.'],
       wary: ['Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!', 'He says it will evolve to match how I battle. Just watch — we will be champions!'],
@@ -89,11 +89,11 @@ export const BOND_DIALOGUE = {
     },
   },
   mom: {
-    // Post-tale send-offs (Pallet talks after the Care Package).
+    // Post-tale send-offs (Dawnwick talks after the Care Package).
     sendoff: {
       cold: ['Oh. It is you. The road keeping you busy, then. ...Mind the grass on Route 1, love.'],
       wary: ['My maps, her shop, your road. That is how a town stays stitched together, love.'],
-      warm: ['There is my cartographer-in-training. Tea before you go — no, do not argue, the kettle is already on.', 'Half of Kanto navigates by my handwriting, and my favorite trainer navigates by his own heart. Off you go, love.'],
+      warm: ['There is my cartographer-in-training. Tea before you go — no, do not argue, the kettle is already on.', 'Half of Arden navigates by my handwriting, and my favorite trainer navigates by his own heart. Off you go, love.'],
       close: ['Sit. SIT. You are thin as a rail and twice as stubborn — where did you get that from, I wonder.', 'When you were small you mapped this house in crayon, every room a country. Look at you now, mapping the whole region. Come home sometimes, {player}. The door remembers you.'],
     },
   },
@@ -121,7 +121,7 @@ export const BOND_DIALOGUE = {
       cold: ['Pool\'s for training. If you are not challenging, you are dripping on my deck.'],
       wary: ['The bell still rings over the shop — I mean the gym. Old habits. You did that, trainer.'],
       warm: ['My sisters think the gym is the family business. It is not — the BIKE SHOP was. I turned it into this so nobody could call me the spare sister again.', 'That bell you saved? It rang over my cradle. Some heirlooms are just sounds a town refuses to lose.'],
-      close: ['Between us, {player}? ASTRION only performs like that when it respects the other side of the pool. It has never once performed for my sisters.', 'Cerulean blue is not a color here. It is a promise the water makes. You kept it better than most who were born to it.'],
+      close: ['Between us, {player}? ASTRION only performs like that when it respects the other side of the pool. It has never once performed for my sisters.', 'Tidehaven blue is not a color here. It is a promise the water makes. You kept it better than most who were born to it.'],
     },
   },
   surge: {
@@ -137,7 +137,7 @@ export const BOND_DIALOGUE = {
       cold: ['The gym keeps garden hours. Perfume and patience — you seem short on both today.'],
       wary: ['The roof garden asks after you. Plants remember who waters, in their way.'],
       warm: ['My grandmother planted that first bed the year the Game Corner\'s lights went up — "so the green stays taller," she said. Every perfume I make starts up there, in her soil.', 'People think Grass is the gentle type. Grass is the type that outlives EMPIRES, trainer. It just does it quietly.'],
-      close: ['I keep one cutting from the roof that I give to no one — from the first bed, the grandmother bed. This season it rooted, {player}. When you are next in Celadon, it is yours to plant.', 'A garden is a promise you keep in public. You kept mine three times, in three weathers. The city is greener for you, and so am I.'],
+      close: ['I keep one cutting from the roof that I give to no one — from the first bed, the grandmother bed. This season it rooted, {player}. When you are next in Canopy, it is yours to plant.', 'A garden is a promise you keep in public. You kept mine three times, in three weathers. The city is greener for you, and so am I.'],
     },
   },
   sabrina: {
@@ -152,7 +152,7 @@ export const BOND_DIALOGUE = {
     banter: {
       cold: ['A ninja\'s gym has no small talk. State your purpose or become part of the scenery.'],
       wary: ['Janine speaks of the lure, and of you. In this family, that is not nothing.'],
-      warm: ['My grandfather carved that lure the winter the marsh fed all of Fuchsia. A ninja learns patience from water: still on top, deep below.', 'Janine trains twice as hard since your visit. She says a stranger showed her what our family code looks like from outside. She is right to study it.'],
+      warm: ['My grandfather carved that lure the winter the marsh fed all of Bramble. A ninja learns patience from water: still on top, deep below.', 'Janine trains twice as hard since your visit. She says a stranger showed her what our family code looks like from outside. She is right to study it.'],
       close: ['The Warden\'s lure hangs by my door now, between my grandfather\'s portrait and my daughter\'s first badge sketch. You understand what that shelf means, {player}.', 'Poison is the honest type. It never pretends the world is safe — it teaches you to move through it anyway. You move well.'],
     },
   },

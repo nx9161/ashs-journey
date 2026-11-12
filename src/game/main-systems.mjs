@@ -24,8 +24,8 @@ import { xpForLevel, statValue, hpValue } from '../engine/formulas.mjs';
 import { switchForme, FORME_OF } from './sinnoh-systems.mjs';
 
 const REGIONS = [
-  { id: 'kanto', name: 'Kanto', note: 'The beginning. Eight badges, one League, a storm over New Island.' },
-  { id: 'orange', name: 'Orange Islands', note: 'A southern sea league of trials. Complete Kanto first.' },
+  { id: 'kanto', name: 'Arden', note: 'The beginning. Eight badges, one League, a storm over Exile Isle.' },
+  { id: 'orange', name: 'Orange Islands', note: 'A southern sea league of trials. Complete Arden first.' },
   { id: 'johto', name: 'Johto', note: 'Old towers, older legends. Complete the Orange voyage first.' },
   { id: 'hoenn', name: 'Hoenn', note: 'Sea and land at war with the sky. Complete Johto first.' },
   { id: 'sinnoh', name: 'Sinnoh', note: 'Myths written in stone and time. Complete Hoenn first.' },
@@ -226,7 +226,7 @@ Object.assign(Game.prototype, {
     if (id === 'townmap') { this.openTownMap(); return; }
     if (id === 'escaperope') {
       // Warp to the last Center town. P1: resolve through centerExit()
-      // (runtime ticket -> persisted lastCenter -> Pallet) — the
+      // (runtime ticket -> persisted lastCenter -> Dawnwick) — the
       // landing tile is now that Center's door-front, where before it
       // could be a stale load-time snapshot tile in the same town.
       const owNow = g.scenes.top;
@@ -356,7 +356,7 @@ Object.assign(Game.prototype, {
     // src/game/arcs.mjs clears it).
     if (g.state.story.arc_directive) {
       items.push({ label: '— THE ROAD HOME —', value: null, disabled: true, band: true });
-      items.push({ label: '★ Go home — return to Pallet Town', value: 'arcdirective' });
+      items.push({ label: '★ Go home — return to Dawnwick', value: 'arcdirective' });
     }
     // Section 0 — STORY (Wave D, Phase 5): the narrative DB's read of
     // the journey — one row per reached arc, state derived by the DB
@@ -636,7 +636,7 @@ Object.assign(Game.prototype, {
   openTownMap() {
     const g = this;
     // Elevation B1 (C201 remainder): the Town Map is now Platinum's
-    // GRAPHICAL map — a canvas panel over a hand-authored Kanto layout.
+    // GRAPHICAL map — a canvas panel over a hand-authored Arden layout.
     // The gating rule is unchanged from the text screen it replaces:
     // only places whose reached_* flag is set appear at all, and the
     // player's current map carries the "you are here" marker.
@@ -726,11 +726,11 @@ Object.assign(Game.prototype, {
 
   // Elevation B2 (S-48): Diploma viewer — the same plate Hawthorn
   // presents at dex completion (checkDiploma's exact lines), re-viewable
-  // from the Journey menu once the Kanto dex is complete.
+  // from the Journey menu once the Arden dex is complete.
   openDiploma() {
     const g = this;
     // ADR-027 D5 (Stage F): the Platinum Diploma (493) supersedes as
-    // THE diploma once earned; the Kanto plate below remains the Arc 1
+    // THE diploma once earned; the Arden plate below remains the Arc 1
     // honor and is never un-awarded.
     if (g.state.story.flags.platinum_diploma) {
       const escP = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -741,19 +741,19 @@ Object.assign(Game.prototype, {
       return;
     }
     // Form entries share their base species' dexNo — excluded so the
-    // Kanto count stays exactly the 151 species (Cheat Shop, 2026-10-28).
+    // Arden count stays exactly the 151 species (Cheat Shop, 2026-10-28).
     const kanto = Object.values(SPECIES).filter((s) => !s.form && s.dexNo >= 1 && s.dexNo <= 151);
     // ADR-025 §6: the diploma is an HONOR — it reads the run's OWN
     // catches (ownCaughtMap), never the carried archive alone.
     const own = ownCaughtMap(g.state.dex);
     const n = kanto.filter((s) => own[s.dexNo]).length;
     if (n < 151) {
-      g.ui.say(['You\'ve caught ' + n + ' of 151 Kanto Pokemon.'], null, 'Prof. Hawthorn');
+      g.ui.say(['You\'ve caught ' + n + ' of 151 Arden Pokemon.'], null, 'Prof. Hawthorn');
       return;
     }
     const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
     const html = '<div class="diploma"><div class="diplomatitle">DIPLOMA</div>'
-      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Kanto Pokedex:</div>'
+      + '<div class="diplomabody">This certifies that ' + esc(g.state.player.name) + ' completed the Arden Pokedex:</div>'
       + '<div class="diplomabody">all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.</div></div>';
     g.ui.showSummary({ name: 'Diploma', tabs: [{ id: 'diploma', label: 'DIPLOMA', bodyHtml: html }] }, null);
   },
@@ -826,20 +826,20 @@ Object.assign(Game.prototype, {
       if (framed && framed.length) return framed[0].replace('{n}', String(n));
     }
     // ADR-027 D5 (Stage F): the rating bands key to the PLATINUM
-    // horizon (493, from the registry) — the Kanto 151 completion is
+    // horizon (493, from the registry) — the Arden 151 completion is
     // honoured inside its band, and the diploma honors live in
     // checkDiploma (151, the arc honor) + checkPlatinumDiploma (493).
     if (n < 25) return 'Hmm. ' + n + ' caught. The journey is young — walk the grass, meet them all.';
     if (n < 100) return n + ' caught! You are learning what a Pokedex is for. Keep going!';
     if (n < 151) return n + ' caught! A genuine collector\'s eye. The rare ones hide well — patience.';
-    if (n < 300) return n + ' caught! Past the Kanto horizon entirely — and the book still has pages. The Platinum horizon is ' + PLATINUM_DEX_HORIZON + '.';
+    if (n < 300) return n + ' caught! Past the Arden horizon entirely — and the book still has pages. The Platinum horizon is ' + PLATINUM_DEX_HORIZON + '.';
     if (n < PLATINUM_DEX_HORIZON) return n + ' caught! Nearly there. The last pages are always the hardest.';
     return 'ALL ' + PLATINUM_DEX_HORIZON + '! The full Platinum Pokedex, in one journey. This is a historic Pokedex!';
   },
 
   // ADR-027 D5 (Stage F): the Platinum Diploma — the 493 honor, keyed
   // to the registry's Platinum horizon. It reads the run's OWN catches
-  // (ownCaughtMap), exactly like the Kanto diploma; earning it never
+  // (ownCaughtMap), exactly like the Arden diploma; earning it never
   // un-awards the 151 diploma, which remains as the Arc 1 honor.
   checkPlatinumDiploma() {
     const g = this;
@@ -867,7 +867,7 @@ Object.assign(Game.prototype, {
       applyBondOnce(g.state, 'bondsrc_diploma', 'hawthorn', 2); // ADR-025 §2: the diploma is a bond beat (+2, once — this guard is the one-shot)
       g.audio.playSfx('badge');
       g.ui.say([
-        'DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Kanto Pokedex:',
+        'DIPLOMA — This certifies that ' + g.state.player.name + ' completed the Arden Pokedex:',
         'all 151 species, caught in a single journey. Sealed by Prof. Hawthorn, with enormous pride.',
       ], null, 'Prof. Hawthorn');
     }

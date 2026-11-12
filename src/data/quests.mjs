@@ -29,67 +29,67 @@ import { grantKeepsakeFromSource } from '../game/keepsakes.mjs';
 
 export const QUESTS = {
   tale_pallet: {
-    id: 'tale_pallet', town: 'Pallet Town', giver: 'MOM', title: "Mom's Care Package",
+    id: 'tale_pallet', town: 'Dawnwick', giver: 'MOM', title: "Mom's Care Package",
     stages: [
-      "Deliver Mom's package to the Viridian shopkeeper",
-      'Bring the receipt back to Mom in Pallet Town',
+      "Deliver Mom's package to the Fernmere shopkeeper",
+      'Bring the receipt back to Mom in Dawnwick',
     ],
     reward: { items: { potion: 3 } }, rewardText: '3 Potions',
     bondNpc: 'mom', bondDelta: 2,
-    revelation: 'Mom drew the first street maps of Pallet Town as a girl, chalk on a barn door. The Viridian shopkeeper still sells copies — half the trainers in Kanto navigate by her hand.',
+    revelation: 'Mom drew the first street maps of Dawnwick as a girl, chalk on a barn door. The Fernmere shopkeeper still sells copies — half the trainers in Arden navigate by her hand.',
   },
   tale_viridian: {
-    id: 'tale_viridian', town: 'Viridian City', giver: 'ACE MARLOW', title: 'The Retired Ace',
+    id: 'tale_viridian', town: 'Fernmere City', giver: 'ACE MARLOW', title: 'The Retired Ace',
     stages: [
-      'Find the lost keepsake in the Viridian Forest (search the Route 2 grass)',
+      'Find the lost keepsake in the Fernmere Forest (search the Route 2 grass)',
       'Choose: return the keepsake to Ace Marlow, or keep it',
     ],
     reward: { keepsake: 'tortoisecharm' }, rewardText: 'Tortoise Charm',
     bondNpc: 'retiredace', bondDelta: 0, // the return choice itself is the bond record (+2, applied by the wiring)
-    revelation: 'Marlow was the first trainer ever to challenge the Viridian Gym — before there was a League to record it. His tortoise outlived three gyms, two badges designs, and every one of his rivals.',
+    revelation: 'Marlow was the first trainer ever to challenge the Fernmere Gym — before there was a League to record it. His tortoise outlived three gyms, two badges designs, and every one of his rivals.',
   },
   tale_pewter: {
-    id: 'tale_pewter', town: 'Pewter City', giver: 'CURATOR', title: "Brock's Day Off",
+    id: 'tale_pewter', town: 'Flintridge City', giver: 'CURATOR', title: "Brock's Day Off",
     stages: [
       'Cover the museum desk: answer 3 visitor questions from the exhibits',
-      "Spar Brock's RUMBLING, off-duty, here in Pewter City",
+      "Spar Brock's RUMBLING, off-duty, here in Flintridge City",
     ],
     reward: { keepsake: 'ironacorn' }, rewardText: 'Iron Acorn',
     bondNpc: 'brock', bondDelta: 2,
-    revelation: "The museum came first. Pewter's gym was built afterwards, out of the museum's own stone — the city's leaders have been part-time curators ever since. Brock still pays the fossil lab out of his gym winnings.",
+    revelation: "The museum came first. Flintridge's gym was built afterwards, out of the museum's own stone — the city's leaders have been part-time curators ever since. Brock still pays the fossil lab out of his gym winnings.",
   },
   tale_cerulean: {
-    id: 'tale_cerulean', town: 'Cerulean City', giver: 'TESS', title: 'The Stolen Bike Bell',
+    id: 'tale_cerulean', town: 'Tidehaven City', giver: 'TESS', title: 'The Stolen Bike Bell',
     stages: [
-      'Ask the 3 witnesses around Cerulean City about the bell',
-      'Confront the culprit at the cape, in the north of Cerulean — talk, or battle',
+      'Ask the 3 witnesses around Tidehaven City about the bell',
+      'Confront the culprit at the cape, in the north of Tidehaven — talk, or battle',
     ],
     reward: { items: { tm11: 1 } }, rewardText: 'TM11 (BubbleBeam)',
     bondNpc: 'misty', bondDelta: 1,
-    revelation: "The bell is older than the gym: it rang on the first bicycle ever ridden over Nugget Bridge, back when Cerulean's gym was a bike shop with a pool out back. Misty still keeps the shop's old ledger.",
+    revelation: "The bell is older than the gym: it rang on the first bicycle ever ridden over Nugget Bridge, back when Tidehaven's gym was a bike shop with a pool out back. Misty still keeps the shop's old ledger.",
   },
   tale_vermilion: {
-    id: 'tale_vermilion', town: 'Vermilion City', giver: 'CHAIRMAN', title: 'Fan Club Founder',
+    id: 'tale_vermilion', town: 'Arcport City', giver: 'CHAIRMAN', title: 'Fan Club Founder',
     stages: [
-      "Recover the founder's notes at the S.S. Anne dock in Vermilion (after the Anne departs, ask the Harbormaster)",
+      "Recover the founder's notes at the S.S. Tern dock in Arcport (after the Tern departs, ask the Harbormaster)",
       'Return the notes to the Fan Club Chairman',
     ],
     reward: { keepsake: 'tidepearl' }, rewardText: 'Tide Pearl',
     bondNpc: 'surge', bondDelta: 1,
-    revelation: "The founder charted Vermilion's tides before there was a harbor — the Fan Club began as three sailors arguing over his tide tables. Even Lt. Surge learned to read the bay from those notes.",
+    revelation: "The founder charted Arcport's tides before there was a harbor — the Fan Club began as three sailors arguing over his tide tables. Even Lt. Surge learned to read the bay from those notes.",
   },
   tale_lavender: {
-    id: 'tale_lavender', town: 'Lavender Town', giver: 'VOLUNTEER', title: 'Names on the Wall',
+    id: 'tale_lavender', town: 'Hushmoor Town', giver: 'VOLUNTEER', title: 'Names on the Wall',
     stages: [
-      'Record the unnamed graves in Pokemon Tower (the west gravestones)',
-      'Meet Elder Bram in Lavender Town, who remembers the FOSSILORD',
+      'Record the unnamed graves in Hushmoor Tower (the west gravestones)',
+      'Meet Elder Bram in Hushmoor Town, who remembers the FOSSILORD',
     ],
     reward: { keepsake: 'spectrebell' }, rewardText: 'Spectre Bell',
     bondNpc: 'fuji', bondDelta: 2,
     revelation: "Elder Bram remembers a mother FOSSILORD who guarded the tower stairs so her child could escape — the channelers say a mother's love does not leave a place just because her body did. (A rumor, offered gently: nothing here is needed for the climb.)",
   },
   tale_celadon: {
-    id: 'tale_celadon', town: 'Celadon City', giver: 'GARDENER', title: 'Roof Garden',
+    id: 'tale_celadon', town: 'Canopy City', giver: 'GARDENER', title: 'Roof Garden',
     stages: [
       'Water the Game Corner roof garden plants (visit 1 of 3)',
       'Water the plants again once you hold 4 badges (visit 2 of 3)',
@@ -97,35 +97,35 @@ export const QUESTS = {
     ],
     reward: { keepsake: 'gardeniasash' }, rewardText: 'Gardenia Sash',
     bondNpc: 'erika', bondDelta: 2,
-    revelation: "The roof garden grows over Celadon's first gym — a wooden hall that stood where the Game Corner now glitters. Erika's grandmother planted the first bed so the city's green would always be taller than its neon.",
+    revelation: "The roof garden grows over Canopy's first gym — a wooden hall that stood where the Game Corner now glitters. Erika's grandmother planted the first bed so the city's green would always be taller than its neon.",
   },
   tale_saffron: {
-    id: 'tale_saffron', town: 'Saffron City', giver: 'MASTER KO', title: 'Two Gyms, One City',
+    id: 'tale_saffron', town: 'Farsight City', giver: 'MASTER KO', title: 'Two Gyms, One City',
     stages: [
-      "Carry the Dojo's message to Sabrina in Saffron Gym",
+      "Carry the Dojo's message to Sabrina in Farsight Gym",
       "Witness the old rivalry — then choose: the Dojo spar (XP), or Sabrina's keepsake IOU",
       'Finish it: win the Dojo spar, or redeem the IOU with Sabrina after winning her Marsh Badge',
     ],
     reward: { choice: true }, rewardText: 'Dojo spar (XP) or a keepsake IOU',
     bondNpc: 'sabrina', bondDelta: 1,
-    revelation: "The Dojo and the Gym were one school once. Sabrina's father and Master Ko trained side by side — until the day they disagreed about what strength is FOR, and split the hall, the students, and Saffron itself down the middle.",
+    revelation: "The Dojo and the Gym were one school once. Sabrina's father and Master Ko trained side by side — until the day they disagreed about what strength is FOR, and split the hall, the students, and Farsight itself down the middle.",
   },
   tale_fuchsia: {
-    id: 'tale_fuchsia', town: 'Fuchsia City', giver: 'SAFARI WARDEN', title: "The Warden's Teeth",
+    id: 'tale_fuchsia', town: 'Bramble City', giver: 'PRESERVE WARDEN', title: "The Warden's Teeth",
     // Original spin (§5): the warden lost his FISHING LURE, not dentures.
     stages: [
-      'Search the Safari Zone entrance marsh for the lost fishing lure',
-      'Return the lure to the Safari Warden in Fuchsia City',
+      'Search the Bramble Preserve entrance marsh for the lost fishing lure',
+      'Return the lure to the Preserve Warden in Bramble City',
     ],
     reward: { items: { safariball: 10 } }, rewardText: '10 Safari Balls',
     bondNpc: 'koga', bondDelta: 1, // via his daughter Janine's thanks, at completion
-    revelation: "The lure is older than the Safari Zone: the Warden carved it the year the marsh fed all of Fuchsia, before there were fences, gates, or tickets. Koga's grandfather taught him to fish with it.",
+    revelation: "The lure is older than the Bramble Preserve: the Warden carved it the year the marsh fed all of Bramble, before there were fences, gates, or tickets. Koga's grandfather taught him to fish with it.",
   },
   tale_cinnabar: {
-    id: 'tale_cinnabar', town: 'Cinnabar Island', giver: 'LAB TECH', title: 'Lab Notes',
+    id: 'tale_cinnabar', town: 'Caldera Town', giver: 'LAB TECH', title: 'Lab Notes',
     stages: [
       'Recover the burned notes from the Mansion library (the west and east shelves)',
-      'Deliver the notes to the lab tech in Cinnabar',
+      'Deliver the notes to the lab tech in Caldera',
     ],
     reward: { keepsake: 'embereed' }, rewardText: 'Ember Seed',
     bondNpc: 'blaine', bondDelta: 1,
@@ -153,13 +153,13 @@ const APPEAR = {
   tech: { skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#3a6ac0' },
 };
 export const TALE_NPCS = [
-  // Arc 2 Stage J3a: the Johto embark captain, appended to Pallet's
-  // roster through this same loadMap append idiom (Pallet's map def in
+  // Arc 2 Stage J3a: the Johto embark captain, appended to Dawnwick's
+  // roster through this same loadMap append idiom (Dawnwick's map def in
   // maps3.mjs is NOT rewritten). He carries NO tale/role — the ferry
   // handler (overworld-systems, ferryArc 'johto') owns him entirely:
   // gated by the Foundation embark leg (embark_johto) outbound, and
   // unconditional once Johto has been reached (NO-SOFT-LOCK LAW). He
-  // stands at (11,8), one tile east of the Cinnabar FERRYMAN, on a
+  // stands at (11,8), one tile east of the Caldera FERRYMAN, on a
   // tg2 ground tile in the open south field — no door, warp or route
   // can be sealed from there. The return captain stands on the
   // New Bark dock (maps6.mjs, CAPT WESTWIND).
@@ -167,7 +167,7 @@ export const TALE_NPCS = [
     ferry: 'newbark', ferryArc: 'johto',
     dialogue: ['The New Bark run is the western crossing — Johto water, old towers on the horizon.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
   // Arc 3.5 Stage F0: the Frontier embark captain, appended to
-  // Pallet's roster through this same loadMap append idiom. He
+  // Dawnwick's roster through this same loadMap append idiom. He
   // carries NO tale/role — the ferry handler (overworld-systems,
   // ferryArc 'frontier') owns him entirely: gated by the Foundation
   // embark leg (embark_frontier, armed at the Frontier homecoming —
@@ -175,8 +175,8 @@ export const TALE_NPCS = [
   // that homecoming while the Frontier was still sealed) outbound,
   // and unconditional once the Frontier has been reached
   // (NO-SOFT-LOCK LAW). He stands at (11,9), one tile south of CAPT
-  // JOHTO (11,8) in Pallet's open south field — a plain ground tile:
-  // no door, warp or route tile is sealed from there, and Pallet's
+  // JOHTO (11,8) in Dawnwick's open south field — a plain ground tile:
+  // no door, warp or route tile is sealed from there, and Dawnwick's
   // walkable graph stays one fragment with all warps reachable
   // (celadon-sweep verified before/after in F0; the bundle suite pins
   // his adjacency). The tile one EAST of CAPT JOHTO, (12,8), was
@@ -186,32 +186,32 @@ export const TALE_NPCS = [
   { map: 'pallet', x: 11, y: 9, name: 'CAPT FRONTIER', art: 'sailor', skin: '#e8b888', shirt: '#5a3a7a', pants: '#2a2a3a', hair: '#1a1a2a',
     ferry: 'frontierhub', ferryArc: 'frontier',
     dialogue: ['The Frontier run is the short island crossing — seven arenas on one island, and every trainer there fighting like the whole sea is watching.', "Scott himself left your invitation — his scouts book that passage, and his name is already on your boarding card. No invitation, no boarding — captain's orders, trainer."] },
-  // Arc 3 Stage H4a: the Hoenn embark captain, appended to Vermilion's
-  // roster through this same loadMap append idiom (Vermilion's map def
+  // Arc 3 Stage H4a: the Hoenn embark captain, appended to Arcport's
+  // roster through this same loadMap append idiom (Arcport's map def
   // in maps2.mjs is NOT rewritten). He carries NO tale/role — the ferry
   // handler (overworld-systems, ferryArc 'hoenn') owns him entirely:
   // gated by the Foundation embark leg (embark_hoenn, armed at
   // Homecoming #3) outbound, and unconditional once Hoenn has been
-  // reached (NO-SOFT-LOCK LAW). He stands at (16,10) on Vermilion's
+  // reached (NO-SOFT-LOCK LAW). He stands at (16,10) on Arcport's
   // dock row, east of CAPT ORANGE (13,10) — each port its OWN captain
   // (the Johto smell, J-register). The return captain stands on the
   // Slateport dock (maps7.mjs, CAPT MERIDIAN).
   { map: 'vermilion', x: 16, y: 10, name: 'CAPT HOENN', art: 'sailor', skin: '#d8a878', shirt: '#5a2a7a', pants: '#2a2a3a', hair: '#2a1a0a',
     ferry: 'littleroot', ferryArc: 'hoenn',
     dialogue: ['The Littleroot run is the long weather crossing — Hoenn water, arguing with its own sky the whole way.', "Professor Hawthorn's office books that passage. No booking, no boarding — captain's orders, trainer."] },
-  // Arc 4 Stage S0: the Sinnoh embark captain, appended to Vermilion's
-  // roster through this same loadMap append idiom (Vermilion's map def
+  // Arc 4 Stage S0: the Sinnoh embark captain, appended to Arcport's
+  // roster through this same loadMap append idiom (Arcport's map def
   // is NOT rewritten). He carries NO tale/role — the ferry handler
   // (overworld-systems, ferryArc 'sinnoh') owns him entirely: gated by
   // the Foundation embark leg (embark_sinnoh, armed at the Sinnoh
   // homecoming — or by the deriveArcDefaults catch-up for a save that
   // consumed that homecoming while Sinnoh was still sealed) outbound,
   // and unconditional once Sinnoh has been reached (NO-SOFT-LOCK LAW).
-  // He stands at (14,10) on Vermilion's dock row, one tile east of
+  // He stands at (14,10) on Arcport's dock row, one tile east of
   // CAPT ORANGE (13,10) and two west of CAPT HOENN (16,10), leaving
   // (15,10) open as the passage between them: a plain ground tile —
   // no warp, door, sign or event tile is sealed from there, and
-  // Vermilion's walkable graph keeps its exact base shape (the main
+  // Arcport's walkable graph keeps its exact base shape (the main
   // fragment loses only the captain's own tile; the one pre-existing
   // isolated tile at (5,11) is untouched — sweep-verified in S0, the
   // bundle suite pins the graph). The tile one EAST of him, (15,10),
@@ -229,12 +229,12 @@ export const TALE_NPCS = [
   // staging, same lines, and every tale drive finds her by name.
   { map: 'pallet', x: 4, y: 5, name: 'MOM', art: 'mom', ...APPEAR.mom, tale: 'tale_pallet', role: 'giver',
     dialogue: ['Mind the grass on Route 1, love. And eat something that is not a Potion.'] },
-  // Wave 5b: the SHOPKEEPER moved indoors with the Viridian Mart (the
+  // Wave 5b: the SHOPKEEPER moved indoors with the Fernmere Mart (the
   // owner's "real Mart interior" ruling) — he stands behind the Mart
-  // counter in the shared 'mart' scene, fielded only for a Viridian
+  // counter in the shared 'mart' scene, fielded only for a Fernmere
   // entry (see overworld loadMap). Same NPC, same tale, same lines.
   { map: 'mart', x: 5, y: 2, name: 'SHOPKEEPER', art: 'clerk', ...APPEAR.shop, tale: 'tale_pallet', role: 'stage',
-    dialogue: ['Viridian sundries! Maps, string, and strong opinions about both.'] },
+    dialogue: ['Fernmere sundries! Maps, string, and strong opinions about both.'] },
   { map: 'viridian', x: 14, y: 4, name: 'ACE MARLOW', art: 'elder', ...APPEAR.ace, tale: 'tale_viridian', role: 'giver',
     dialogue: ['Sixty years I walked that forest. It kept one thing of mine. Fair trade, I suppose.'] },
   { map: 'pewter', x: 5, y: 4, name: 'BROCK', art: 'brock', ...APPEAR.brock, tale: 'tale_pewter', role: 'stage',
@@ -245,7 +245,7 @@ export const TALE_NPCS = [
     dialogue: ['Every crate, every rope, every lost page — the harbor keeps what the sea gives back.'] },
   { map: 'lavender', x: 16, y: 5, name: 'ELDER BRAM', art: 'elder', ...APPEAR.elder, tale: 'tale_lavender', role: 'stage',
     dialogue: ['I remember every name the tower forgot. Sit; an old man likes an audience.'] },
-  // Celadon fragmentation fix (2026-10-28): the GARDENER stands at
+  // Canopy fragmentation fix (2026-10-28): the GARDENER stands at
   // (15,9), NOT (16,9) — (16,9) is the Route 8 gate's only approach tile
   // and its landing tile; an NPC there seals the gate (see
   // ~/workspace/ashs-journey-qa/celadon-fix.md).
@@ -269,7 +269,7 @@ export const TALE_NPC_PATCHES = [
   { map: 'lavender', name: 'VOLUNTEER', tale: 'tale_lavender', role: 'giver' },
   { map: 'dojo', name: 'MASTER KO', tale: 'tale_saffron', role: 'giver' },
   { map: 'gym-saffron', name: 'SABRINA', tale: 'tale_saffron', role: 'stage' },
-  { map: 'fuchsia', name: 'SAFARI WARDEN', tale: 'tale_fuchsia', role: 'giver' },
+  { map: 'fuchsia', name: 'PRESERVE WARDEN', tale: 'tale_fuchsia', role: 'giver' },
 ];
 
 // ---------- tale spots (faced-tile searches, sysInteract hook) ----------
@@ -314,12 +314,12 @@ export function taleStageText(state, tale) {
   if (s < 0) return 'Ask ' + tale.giver + ' in ' + tale.town + '.';
   if (s >= tale.stages.length) return 'Complete. ' + tale.revelation;
   let text = tale.stages[s];
-  // Saffron's final stage reads differently per branch (the choice is a
+  // Farsight's final stage reads differently per branch (the choice is a
   // story flag, since flags are the save's boolean scratch space).
   if (tale.id === 'tale_saffron' && s === 2 && state.story.flags && state.story.flags.tale_saffron_iou) {
     text = 'Redeem the keepsake IOU with Sabrina (needs the Marsh Badge, if not yet won)';
   }
-  // Celadon tells the player exactly which badge count unlocks a visit.
+  // Canopy tells the player exactly which badge count unlocks a visit.
   return text;
 }
 
@@ -358,8 +358,8 @@ export function recordBond(state, npcId, delta) {
 // never pays twice). Items land in the bag; a keepsake lands via the
 // Phase 3 grant (unique-object rule: if the player somehow already owns
 // the piece, the tale still completes — the object is the same one).
-// opts.bondDelta overrides the def's delta (Viridian's return choice).
-// opts.keepsake overrides the def's keepsake (Saffron's IOU redemption
+// opts.bondDelta overrides the def's delta (Fernmere's return choice).
+// opts.keepsake overrides the def's keepsake (Farsight's IOU redemption
 // grants the redeemed piece, resolved by the wiring).
 export function completeTale(state, id, opts) {
   const tale = QUESTS[id];
@@ -383,7 +383,7 @@ export function completeTale(state, id, opts) {
   return true;
 }
 
-// The Saffron IOU redemption pick: the first keepsake (tale pieces
+// The Farsight IOU redemption pick: the first keepsake (tale pieces
 // first, then the rest of the set) the player does not yet own — an IOU
 // for "a keepsake" that can never duplicate a unique object. Resolved
 // in data order; if the collection is somehow complete, the IOU pays

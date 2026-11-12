@@ -2,7 +2,7 @@
 // wild tables, ferry network). 30 new maps: 11 island exteriors, 4 sea
 // lanes, 15 interiors. Every exterior/sea map is >=24x14 (viewport-
 // filling from the first tile, roadmap §5 note). Travel law: the
-// Vermilion<->Valencia crossing is the Stage F ferryArc network port
+// Arcport<->Valencia crossing is the Stage F ferryArc network port
 // (embark-gated outbound, unconditional return); every island dock
 // fields plain two-way ferry legs to its neighbours (the island-hopper
 // graph is connected by construction); sea lanes are surfable and
@@ -168,7 +168,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "The Vermilion City boat ties up at this dock — I run her both ways, fair weather or foul.",
+          "The Arcport City boat ties up at this dock — I run her both ways, fair weather or foul.",
           "Step aboard when you're ready. The Orange sea keeps no one waiting who knows her moods."
         ],
         "ferry": "vermilion",
@@ -4647,7 +4647,7 @@ export const MAPS5 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "Ferry days, the whole street smells of orange peel and rope tar.",
-          "Valencia oranges travel further than most trainers. Half the Kanto shops stock them."
+          "Valencia oranges travel further than most trainers. Half the Arden shops stock them."
         ]
       }
     ],
@@ -4830,8 +4830,8 @@ export const MAPS5 = {
   }
 };
 
-// ---- Vermilion dock: the Orange crossing ferryman (Stage O1) ----
-// Rides on MAPS4's travel-graph-repaired Vermilion (which already
+// ---- Arcport dock: the Orange crossing ferryman (Stage O1) ----
+// Rides on MAPS4's travel-graph-repaired Arcport (which already
 // carries SAILOR BRINE + the movie events), adding ONE npc: the
 // Valencia ferryman, gated by the Stage F ferryArc handler — before
 // the embark is armed he stands at the dock with flavour dialogue and

@@ -12,9 +12,9 @@
 //    / honors carry across arcs UNCONDITIONALLY — no deposit, no partner
 //    reset, no obedience cap, no compensating scaling. Nothing in the
 //    transition machine touches the team.
-//  - Amendment 2: per-arc LEVEL BANDS — cap = 100 x bandIndex (Kanto
+//  - Amendment 2: per-arc LEVEL BANDS — cap = 100 x bandIndex (Arden
 //    1-100, Johto 101-200, Hoenn 201-300, Sinnoh 301-400). Orange SHARES
-//    Kanto's band (it continues Kanto's power curve). The Battle Frontier
+//    Arden's band (it continues Arden's power curve). The Battle Frontier
 //    is OPEN LEVEL (band: null — its facilities match the entrant).
 //
 // Row fields:
@@ -32,7 +32,7 @@
 //   completionKey  the story.regionsDone value for this arc
 //   completionFlag story.flags name whose presence proves completion —
 //                  the registry completion-test hook: each arc's build
-//                  stage registers its own flag here (Kanto's is the
+//                  stage registers its own flag here (Arden's is the
 //                  shipped 'champion'; later flags are named now so the
 //                  machine never changes shape)
 //   status         'shipped' (playable in this build) | 'next' (the road
@@ -44,7 +44,7 @@
 //   embarkPort     map id of the port the embark sails from (null: origin
 //                  arc, or not yet charted for sealed rows)
 //   arrivalMap     map id the embark lands on (null likewise)
-//   home           the homecoming town map id (Pallet for every arc —
+//   home           the homecoming town map id (Dawnwick for every arc —
 //                  roadmap §2.1: one anchor, one ritual)
 //   summaryLines   league-result wording for the ARC COMPLETE card
 //                  (original writing, anime-true outcomes)
@@ -66,7 +66,7 @@ export const ARC_GIVER_NAMES = {
 
 export const ARCS = [
   {
-    id: 'kanto', n: 1, label: 'Arc 1', region: 'Kanto', regionKey: 'kanto',
+    id: 'kanto', n: 1, label: 'Arc 1', region: 'Arden', regionKey: 'kanto',
     edition: 'Yellow', chapters: [1], dexHorizon: 151,
     band: { min: 1, max: 100, bandIndex: 1 },
     badgeSet: 'kanto', badgeTotal: 8,
@@ -74,8 +74,8 @@ export const ARCS = [
     status: 'shipped', future: false,
     hookGiver: null, embarkPort: null, arrivalMap: null, home: 'pallet',
     summaryLines: [
-      'Indigo League — CHAMPION.',
-      'Eight badges, one storm over New Island, and a final against the rival who started it all. The Plateau wrote your team into its light.',
+      'Crown League — CHAMPION.',
+      'Eight badges, one storm over Exile Isle, and a final against the rival who started it all. The Plateau wrote your team into its light.',
     ],
     hookLines: [],
     enRouteLines: [],
@@ -83,7 +83,7 @@ export const ARCS = [
   {
     id: 'orange', n: 1.5, label: 'Arc 1.5', region: 'Orange Islands', regionKey: 'orange',
     edition: 'Anime-original', chapters: [2], dexHorizon: 151,
-    band: { min: 1, max: 100, bandIndex: 1 }, // shares Kanto's band (Amendment 2)
+    band: { min: 1, max: 100, bandIndex: 1 }, // shares Arden's band (Amendment 2)
     badgeSet: 'orange', badgeTotal: 4,
     completionKey: 'orange', completionFlag: 'orange_champion',
     status: 'next', future: false,
@@ -94,7 +94,7 @@ export const ARCS = [
     ],
     hookLines: [
       'A colleague of mine — Professor Ivy, on Valencia Island in the Orange Archipelago — is holding a Capture Orb that no machine can open.',
-      'They call it the GS Orb. Fetch it for me, would you? The ferry for Valencia leaves from Vermilion City.',
+      'They call it the GS Orb. Fetch it for me, would you? The ferry for Valencia leaves from Arcport City.',
       'Mind the sea air down there. It changes trainers — usually for the better.',
     ],
     enRouteLines: [
@@ -117,7 +117,7 @@ export const ARCS = [
     hookLines: [
       'That GS Orb you carried across the Orange Islands — there is a man in Azalea Town named Kurt who still works Capture Orbs by hand, the old way.',
       'If anyone alive can open it, it is him. And Johto itself is calling: new towers, new legends, and a rival who will not wait forever.',
-      'The boat for Johto leaves from Pallet\'s own dock. Come home first. You always come home first.',
+      'The boat for Johto leaves from Dawnwick\'s own dock. Come home first. You always come home first.',
     ],
     enRouteLines: [
       '— days at sea —',
@@ -139,7 +139,7 @@ export const ARCS = [
     hookLines: [
       'Word travels fast on the sea roads: a whole region across the water is in a strange mood — its land and ocean arguing through two old teams.',
       'Hoenn, they call it. New Pokemon, new gyms, contests in every port — and a certain evolved friend of Gary\'s waiting to prove a point.',
-      'The Vermilion ferry runs that way. Pack for rain AND for drought; Hoenn cannot decide either.',
+      'The Arcport ferry runs that way. Pack for rain AND for drought; Hoenn cannot decide either.',
     ],
     enRouteLines: [
       '— days at sea —',
@@ -161,7 +161,7 @@ export const ARCS = [
     hookLines: [
       'A man named Scott has been watching your battles — he scouts for a place called the Battle Frontier, seven facilities run by trainers called Frontier Brains.',
       'He left an invitation with your name on it and one instruction: bring the team you trust most. The Frontier does not care where you have been — only how you fight.',
-      'It stands on an island off Kanto. The boat leaves from Pallet. Scott will be waiting at the dock, smiling like he already knows the result.',
+      'It stands on an island off Arden. The boat leaves from Dawnwick. Scott will be waiting at the dock, smiling like he already knows the result.',
     ],
     enRouteLines: [
       '— a short crossing —',
@@ -183,7 +183,7 @@ export const ARCS = [
     hookLines: [
       'Gary came by the lab while you were away — back from a northern region called Sinnoh, with an Electivire at his side and stories that sound half like weather reports, half like scripture.',
       'Mountains that touch the sky, lakes older than kingdoms, and something sleeping at the top of the world. He said one more thing: "Tell Ash the north is not finished with trainers like us."',
-      'The Sandgem-bound ship sails from Vermilion. Go and see what Gary saw.',
+      'The Sandgem-bound ship sails from Arcport. Go and see what Gary saw.',
     ],
     enRouteLines: [
       '— days at sea —',
@@ -282,9 +282,9 @@ export const FINALE_GRANT_ITEM_ID = 'azureflute';
 export const FINALE_UNLOCK_FLAG = 'arceus_unlocked';
 
 export const ARC_FINALE_ECHOES = {
-  kanto: 'Kanto first: a borrowed bike voucher, a storm over New Island, and a rival who turned out to be a measuring stick all along. You came home with eight badges and every friend you started with, plus several dozen more.',
+  kanto: 'Arden first: a borrowed bike voucher, a storm over Exile Isle, and a rival who turned out to be a measuring stick all along. You came home with eight badges and every friend you started with, plus several dozen more.',
   orange: 'Then the southern sea: four island badges, a ball that would not open, and a trophy heavy as an anchor. The Orange water taught the team to win on strange ground, under stranger stars.',
-  johto: 'Johto asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Pallet Town lane finally burned itself honest at the Silver Conference.',
+  johto: 'Johto asked older questions — towers, bells, beasts woken out of legend — and the rivalry that started in a Dawnwick lane finally burned itself honest at the Silver Conference.',
   hoenn: 'Hoenn argued with its own weather, and the team answered both sides of it: drought and deluge, two old teams, and a conference run that ended narrow and proud.',
   frontier: 'The Frontier cared nothing for any of that. Seven doors, seven Brains, one standard — gold. It is the only place that ever graded the team purely on how they fight, and they know it.',
   sinnoh: 'And Sinnoh: a god in red chains, a world behind the world, and a Darkrai that finally fell. The north is finished with trainers like us, Gary said. It was not wrong. It is finished — because it is complete.',
@@ -325,7 +325,7 @@ export function nextArcOf(arcId) {
 
 // The arc the run is currently inside. story.arc is authoritative (the
 // save-fill path guarantees it); the fallback is Arc 1 — a state with no
-// arc field is a Kanto state by definition (pre-foundation shape).
+// arc field is a Arden state by definition (pre-foundation shape).
 export function currentArcOf(state) {
   const id = state && state.story ? state.story.arc : null;
   return arcById(id) || ARCS[0];
@@ -353,7 +353,7 @@ export function dexHorizonFor(state) {
 }
 
 // The regional dex span of an arc: (previous distinct horizon, horizon].
-// Orange shares Kanto's 1-151 set (no delta); the Frontier shares Hoenn's.
+// Orange shares Arden's 1-151 set (no delta); the Frontier shares Hoenn's.
 export function arcDexSpan(arc) {
   if (!arc) return { lo: 1, hi: ARCS[0].dexHorizon };
   let prev = 0;
@@ -408,13 +408,13 @@ export function arcStateOf(state, arcId) {
 // load, so legacy saves open unchanged in shape): fills story.arc,
 // story.arc_directive, story.arcDexStart, story.arcStartPlaytime with
 // derived defaults and NEVER overwrites a valid stored value.
-//  - A mid-Kanto save derives arc 'kanto', no directive.
-//  - A Kanto-complete save (regionsDone carries 'kanto', OR a Hall of
+//  - A mid-Arden save derives arc 'kanto', no directive.
+//  - A Arden-complete save (regionsDone carries 'kanto', OR a Hall of
 //    Fame entry exists, OR the shipped 'champion' flag is set — the
 //    three forms the shipped game writes) derives arc 'kanto' with the
 //    directive PENDING on the next arc ('orange'): the transition is
 //    the player's to walk (directive -> homecoming), exactly as for a
-//    save that completed Kanto after this foundation shipped.
+//    save that completed Arden after this foundation shipped.
 //  - Arc-start snapshots default truthfully for Arc 1 (the journey
 //    began at 0 caught / 0 seconds); for any later arc they default to
 //    the current totals (the arc's gains count from load).

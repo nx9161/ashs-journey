@@ -2,8 +2,8 @@
 // maps2.mjs truncated mid-write (maps2.mjs closes MAPS2 early at tower2 and
 // everything after it — route12 onward — is orphaned, invalid JS).
 // This file re-authors the missing span as a self-contained extension:
-// Celadon/Saffron gyms + Silph, the east block, Safari + south/west block,
-// and the endgame block (Viridian Gym -> League -> post-game), plus the
+// Canopy/Farsight gyms + Vantage, the east block, Safari + south/west block,
+// and the endgame block (Fernmere Gym -> League -> post-game), plus the
 // TRAINERS3 table those maps reference.
 // Shapes match maps.mjs / maps2.mjs EXACTLY. Overrides (viridian / pallet /
 // center) are COMPLETE defs meant to replace the maps.mjs entries when
@@ -19,9 +19,9 @@
 function rows(list) { return list; }
 
 export const MAPS3 = {
-  // ================= CHUNK 1 — gym interiors + Celadon/Saffron block ====
+  // ================= CHUNK 1 — gym interiors + Canopy/Farsight block ====
   'gym-cerulean': {
-    id: 'gym-cerulean', name: 'Cerulean Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-cerulean', name: 'Tidehaven Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
       '=νṂḘ++Ṣλṃλ+++Ṅθ=',
@@ -42,7 +42,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'MISTY', art: 'misty', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a6ac0', hair: '#e07830',
         trainer: 'misty',
-        dialogue: ["I'm Misty! Cerulean's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
+        dialogue: ["I'm Misty! Tidehaven's Gym Leader — and my water Pokemon are no splash in the pan!", "Your wave hit harder today. The Cascade Badge is yours — wear it like deep water."] },
       { x: 4, y: 6, name: 'DIANA', art: 'swimmer', skin: '#e8b888', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'gym_cerulean_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Misty taught me to swim AND to battle. Both involve not panicking.", "You kept your head above water... fine, pass."] },
@@ -55,7 +55,7 @@ export const MAPS3 = {
   },
 
   'gym-vermilion': {
-    id: 'gym-vermilion', name: 'Vermilion Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-vermilion', name: 'Arcport Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
       '=νṅḘ++ṢλṆλ+++ṇθ=',
@@ -89,7 +89,7 @@ export const MAPS3 = {
   },
 
   'gym-celadon': {
-    id: 'gym-celadon', name: 'Celadon Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-celadon', name: 'Canopy Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
       '=νṊḗḘ++λṈλ++++ṉ=',
@@ -110,7 +110,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'ERIKA', art: 'erika', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a405a', hair: '#1a1a1a',
         trainer: 'erika',
-        dialogue: ["I am Erika, of Celadon Gym. My flower arrangements... and my battles... both demand a gentle, exact hand.", "How lovely — a storm in my garden. The Rainbow Badge is yours."] },
+        dialogue: ["I am Erika, of Canopy Gym. My flower arrangements... and my battles... both demand a gentle, exact hand.", "How lovely — a storm in my garden. The Rainbow Badge is yours."] },
       { x: 4, y: 6, name: 'TAMIA', art: 'lass', skin: '#e8b888', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a1a1a',
         trainer: 'gym_celadon_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Erika's napping again, so I weed out the unworthy. That's you, apparently.", "Ugh. Even the weeds respect you now. Go on, then."] },
@@ -144,7 +144,7 @@ export const MAPS3 = {
       { x: 10, y: 0, to: { map: 'saffron', x: 10, y: 11 } },
     ],
     signs: [
-      { x: 5, y: 7, text: 'ROUTE 8 — Celadon to Lavender, under the shadow of Saffron. The grass here smells faintly of perfume.' },
+      { x: 5, y: 7, text: 'ROUTE 8 — Canopy to Hushmoor, under the shadow of Farsight. The grass here smells faintly of perfume.' },
     ],
     npcs: [
       { x: 8, y: 4, name: 'LASS PAIGE', art: 'lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#a05a2a',
@@ -173,7 +173,7 @@ export const MAPS3 = {
   },
 
   saffron: {
-    id: 'saffron', name: 'Saffron City', music: 'viridian-theme',
+    id: 'saffron', name: 'Farsight City', music: 'viridian-theme',
     rows: rows([
       'ÑÑÑÜÑÑÑÑÑÑÜÑÑÑÑÑÑÜ',
       'ÑẐÆÆÆďòďďďďẎÆďOďÆÑ',
@@ -205,9 +205,9 @@ export const MAPS3 = {
       { x: 15, y: 2, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'saffron', x: 15, y: 3 } },
     ],
     signs: [
-      { x: 8, y: 6, text: 'SAFFRON CITY — The golden city at the heart of Kanto. Silph Co. HQ towers over all.' },
-      { x: 10, y: 7, text: 'SAFFRON GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
-      { x: 6, y: 10, text: 'SAFFRON CITY — East: ROUTE 9 · South: ROUTE 8.' }
+      { x: 8, y: 6, text: 'FARSIGHT CITY — The golden city at the heart of Arden. Vantage Co. HQ towers over all.' },
+      { x: 10, y: 7, text: 'FARSIGHT GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
+      { x: 6, y: 10, text: 'FARSIGHT CITY — East: ROUTE 9 · South: ROUTE 8.' }
     ],
     npcs: [
       { x: 15, y: 9, name: 'SEER IVO', art: 'monk', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -217,7 +217,7 @@ export const MAPS3 = {
         dialogue: ["Copycat's my name — I mimic every word you say... starting now, retroactively.", "Your TWINBEAK impression? Flawless. Wait. That was ME. Ugh, I've confused myself again."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'fullheal', 'revive'] },
-        dialogue: ["Saffron Mart, ground floor, everything a traveling trainer needs. The big city's prices, the small town's smile."] },
+        dialogue: ["Farsight Mart, ground floor, everything a traveling trainer needs. The big city's prices, the small town's smile."] },
     ],
     encounters: null,
     items: [],
@@ -227,7 +227,7 @@ export const MAPS3 = {
   },
 
   'gym-saffron': {
-    id: 'gym-saffron', name: 'Saffron Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-saffron', name: 'Farsight Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
       '=νṌṍḗλṋSSλḘ+++θ=',
@@ -294,7 +294,7 @@ export const MAPS3 = {
   },
 
   silph1: {
-    id: 'silph1', name: 'Silph Co. — Lobby', music: 'gym-theme', indoor: true,
+    id: 'silph1', name: 'Vantage Co. — Lobby', music: 'gym-theme', indoor: true,
     rows: rows([
       'ṛṠIIIIIIIIIIIIIIẀI',
       'IθḛḜḝ%%%%%%%%%%%%I',
@@ -318,11 +318,11 @@ export const MAPS3 = {
     signs: [],
     npcs: [
       { x: 4, y: 4, name: 'GUARD VEX', art: 'grunt', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
-        dialogue: ["Silph is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
+        dialogue: ["Vantage is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
       { x: 13, y: 8, name: 'EMPLOYEE', art: 'lady', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
         dialogue: ["They stormed the president's office upstairs. Someone dropped a Card Key in the lobby rush — check the corner by the plants!", "Please — my POLYCRANE project is up there. And, uh. My lunch. Mostly the project."] },
       { x: 3, y: 8, name: 'RECEPTIONIST', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
-        dialogue: ["Welcome to Silph Co.! ...Is what I would say, on a normal day. Today the lobby belongs to men in black.", "The lift doors upstairs only answer to the Card Key. Company policy. Criminal policy too, apparently."] },
+        dialogue: ["Welcome to Vantage Co.! ...Is what I would say, on a normal day. Today the lobby belongs to men in black.", "The lift doors upstairs only answer to the Card Key. Company policy. Criminal policy too, apparently."] },
     ],
     encounters: null,
     items: [
@@ -334,7 +334,7 @@ export const MAPS3 = {
   },
 
   silph2: {
-    id: 'silph2', name: 'Silph Co. — Top Floor', music: 'gym-theme', indoor: true,
+    id: 'silph2', name: 'Vantage Co. — Top Floor', music: 'gym-theme', indoor: true,
     rows: rows([
       'ṛṠIIIIIIIIIIIIIIẀI',
       'Iθḛ%%%%%%%%%%%%%θI',
@@ -356,11 +356,11 @@ export const MAPS3 = {
     signs: [],
     npcs: [
       { x: 15, y: 2, name: 'PRESIDENT', art: 'gent', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["You drove them out of my building?! Silph owes you a debt no bonus could cover.", "Take our prototype — the Master Orb. It has never failed, and after today, I trust no hands but yours."],
+        dialogue: ["You drove them out of my building?! Vantage owes you a debt no bonus could cover.", "Take our prototype — the Master Orb. It has never failed, and after today, I trust no hands but yours."],
         give: { flag: 'pres_masterball', items: { masterball: 1 }, text: 'Master Orb' } },
       { x: 13, y: 9, name: 'RESEARCHER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         giveMon: { species: 'lapras', level: 25 },
-        dialogue: ["This KELPSAIL ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Kanto are open to you."] },
+        dialogue: ["This KELPSAIL ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Arden are open to you."] },
     ],
     encounters: null,
     items: [],
@@ -450,7 +450,7 @@ export const MAPS3 = {
       { x: 9, y: 13, to: { map: 'rocktunnel', x: 10, y: 1 } },
     ],
     signs: [
-      { x: 11, y: 7, text: 'ROUTE 10 — Rock Tunnel ahead. East: the old Power Plant, humming with something vast.' },
+      { x: 11, y: 7, text: 'ROUTE 10 — Stonebore Tunnel ahead. East: the old Coilworks, humming with something vast.' },
     ],
     npcs: [
       { x: 4, y: 9, name: 'ENGINEER RUI', art: 'worker', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#1a1a1a',
@@ -491,7 +491,7 @@ export const MAPS3 = {
   },
 
   powerplant: {
-    id: 'powerplant', name: 'Power Plant', music: 'pewter-theme', indoor: true, dark: true,
+    id: 'powerplant', name: 'Coilworks', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
       '@@@@@@@@@@@@@@@@@@',
       '@Ḥ&&&&&&&&&&&ẁẁ&&@',
@@ -530,7 +530,7 @@ export const MAPS3 = {
       { x: 16, y: 1, item: 'ultraball', n: 1 },
     ],
     hidden: [
-      // ADR-025 §3 (Phase 3) source: Thunderhead Pin — Power Plant
+      // ADR-025 §3 (Phase 3) source: Thunderhead Pin — Coilworks
       // exploration placement.
       { x: 16, y: 10, item: 'thunderheadpin', n: 1 },
     ],
@@ -541,7 +541,7 @@ export const MAPS3 = {
   },
 
   rocktunnel: {
-    id: 'rocktunnel', name: 'Rock Tunnel', music: 'pewter-theme', indoor: true, dark: true,
+    id: 'rocktunnel', name: 'Stonebore Tunnel', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
       'GþṲþGþGGLLGGGþGG',
       'GṶLLLLLLLṳLLLLṳG',
@@ -587,7 +587,7 @@ export const MAPS3 = {
   },
 
   lavender: {
-    id: 'lavender', name: 'Lavender Town', music: 'viridian-theme',
+    id: 'lavender', name: 'Hushmoor Town', music: 'viridian-theme',
     rows: rows([
       'ÒÒÒÝÒÒÒÒľľÒÒÒÝÒÒÒÒ',
       'ÒÇÇẓÇľľľľľÇÇẅẑÇÇẋÒ',
@@ -618,10 +618,10 @@ export const MAPS3 = {
       { x: 16, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'lavender', x: 16, y: 9 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'LAVENDER TOWN — The noble purple town. Speak softly here; the tower is listening.' },
-      { x: 8, y: 4, text: 'POKEMON TOWER — Honor the spirits of departed Pokemon.' },
-      { x: 11, y: 10, text: 'LAVENDER TOWN — North: ROCK TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
-      { x: 14, y: 10, text: 'LAVENDER TOWN — North: ROCK TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
+      { x: 7, y: 4, text: 'HUSHMOOR TOWN — The noble purple town. Speak softly here; the tower is listening.' },
+      { x: 8, y: 4, text: 'HUSHMOOR TOWER — Honor the spirits of departed Pokemon.' },
+      { x: 11, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
+      { x: 14, y: 10, text: 'HUSHMOOR TOWN — North: STONEBORE TUNNEL · West: ROUTE 8 · South: ROUTE 12.' },
     ],
     npcs: [
       { x: 5, y: 9, name: 'VOLUNTEER', art: 'lady', skin: '#f0c8a0', shirt: '#e8e0f0', pants: '#5a4a6a', hair: '#3a2a4a',
@@ -630,7 +630,7 @@ export const MAPS3 = {
         dialogue: ["My grandma says the tower ghosts are just Pokemon who loved us too much to leave.", "Do you believe her? I do. It makes the tower feel less scary. Mostly."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'antidote', 'awakening'] },
-        dialogue: ["Lavender Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
+        dialogue: ["Hushmoor Mart. Quiet shelves, honest prices. Travelers heading south stock up on Antidotes — the fishing road is all fangs."] },
     ],
     encounters: null,
     items: [],
@@ -641,7 +641,7 @@ export const MAPS3 = {
   },
 
   tower1: {
-    id: 'tower1', name: 'Pokemon Tower — Lower', music: 'pewter-theme', indoor: true,
+    id: 'tower1', name: 'Hushmoor Tower — Lower', music: 'pewter-theme', indoor: true,
     rows: rows([
       'ṚMMMMMMMMMMMMMMM',
       'MḡQQQQQQQQQḢḠṿ(M',
@@ -690,7 +690,7 @@ export const MAPS3 = {
   },
 
   tower2: {
-    id: 'tower2', name: 'Pokemon Tower — Top', music: 'pewter-theme', indoor: true,
+    id: 'tower2', name: 'Hushmoor Tower — Top', music: 'pewter-theme', indoor: true,
     rows: rows([
       'ṚMMMMMMMMMMMMMMM',
       'MḡQQQQQQQQQḢḠṿṿM',
@@ -716,7 +716,7 @@ export const MAPS3 = {
     ],
     npcs: [
       { x: 8, y: 2, name: 'MR. FUJI', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
-        dialogue: ["Easy, children... the old man means you no harm. I am Fuji — I keep this tower, and it keeps me.", "You calmed a grieving mother and freed an old fool. Lavender will not forget it. Neither will I."] },
+        dialogue: ["Easy, children... the old man means you no harm. I am Fuji — I keep this tower, and it keeps me.", "You calmed a grieving mother and freed an old fool. Hushmoor will not forget it. Neither will I."] },
       // Wave 4 addendum (world-art): the Wave 0 why-not below is RESOLVED.
       // Wave 0 (world-art): FOSSLET + FOSSILORD SPIRIT deliberately carried
       // NO art field — they are Pokemon, not people, but no overworld
@@ -730,7 +730,7 @@ export const MAPS3 = {
       { x: 5, y: 6, name: 'FOSSLET', art: 'cubonespirit', skin: '#e8b888', shirt: '#c8b898', pants: '#5a628a', hair: '#3a2a1a',
         dialogue: ["A small FOSSLET sits by the topmost grave, helmet polished, bone laid across its knees like an offering.", "It is not crying. Whatever grieved on this floor... it grieves quieter now."] },
       { x: 11, y: 6, name: 'FOSSILORD SPIRIT', art: 'marowakspirit', skin: '#e8e0f0', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["A shape like a FOSSILORD drifts between the stones, neither hostile nor at rest — a mother, still counting her children.", "The Silph Scope might let you see her clearly. Without it, she is only a sorrow in the air."] },
+        dialogue: ["A shape like a FOSSILORD drifts between the stones, neither hostile nor at rest — a mother, still counting her children.", "The Vantage Scope might let you see her clearly. Without it, she is only a sorrow in the air."] },
     ],
     encounters: {
       rate: 0.1, cave: true,
@@ -843,7 +843,7 @@ export const MAPS3 = {
       { x: 0, y: 5, to: { map: 'fuchsia', x: 16, y: 5 } },
     ],
     signs: [
-      { x: 5, y: 7, text: 'ROUTE 15 — Fuchsia lies west. Something in this grass copies what it touches. Almost.' },
+      { x: 5, y: 7, text: 'ROUTE 15 — Bramble lies west. Something in this grass copies what it touches. Almost.' },
     ],
     npcs: [
       { x: 9, y: 4, name: 'BIKER REX2', art: 'biker', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#7a1a1a',
@@ -869,7 +869,7 @@ export const MAPS3 = {
   },
 
   fuchsia: {
-    id: 'fuchsia', name: 'Fuchsia City', music: 'viridian-theme',
+    id: 'fuchsia', name: 'Bramble City', music: 'viridian-theme',
     rows: rows([
       'ÓÓÓÞÓÓÓÓŀŀÓÓÓÞÓÓÓÓ',
       'ÓÈÈẌÈŀŀŀŀŀÈÈÈẈÈÈÈÓ',
@@ -902,19 +902,19 @@ export const MAPS3 = {
       { x: 15, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'fuchsia', x: 15, y: 11 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'FUCHSIA CITY — The Safari City. Wild Pokemon roam free beyond the south gate.' },
-      { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
-      { x: 13, y: 7, text: 'FUCHSIA CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
-      { x: 4, y: 10, text: 'FUCHSIA CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
+      { x: 7, y: 4, text: 'BRAMBLE CITY — The Preserve City. Wild Pokemon roam free beyond the south gate.' },
+      { x: 8, y: 4, text: 'BRAMBLE GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
+      { x: 13, y: 7, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
+      { x: 4, y: 10, text: 'BRAMBLE CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
     ],
     npcs: [
-      { x: 10, y: 9, name: 'SAFARI WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
-        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Safari Zone mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Pokemon to push boulders like foam. Mmh!"] },
+      { x: 10, y: 9, name: 'PRESERVE WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
+        dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Bramble Preserve mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Pokemon to push boulders like foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
         dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
-        dialogue: ["Fuchsia Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
+        dialogue: ["Bramble Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
       // Wave 5b: AUNTIE MOSS moved into her house (house-fuchsia in
       // maps4.mjs) — her dialogue names it as hers; same NPC, same lines.
     ],
@@ -926,7 +926,7 @@ export const MAPS3 = {
   },
 
   'gym-fuchsia': {
-    id: 'gym-fuchsia', name: 'Fuchsia Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-fuchsia', name: 'Bramble Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
       '=νṐḘ++ṢλṎλ+++ṏθ=',
@@ -947,7 +947,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'KOGA', art: 'koga', skin: '#d8a878', shirt: '#3a2a4a', pants: '#1a1a2a', hair: '#1a1a1a',
         trainer: 'koga',
-        dialogue: ["I am Koga of the Fuchsia Gym. A ninja's poison creeps unseen — despair begins before the pain.", "You saw through the fog. Impressive. The Soul Badge, from one shadow to another."] },
+        dialogue: ["I am Koga of the Bramble Gym. A ninja's poison creeps unseen — despair begins before the pain.", "You saw through the fog. Impressive. The Soul Badge, from one shadow to another."] },
       { x: 4, y: 6, name: 'EDGAR', art: 'monk', skin: '#c89878', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#3a2a1a',
         trainer: 'gym_fuchsia_1', sight: { dir: 'right', range: 3 },
         dialogue: ["Master Koga's walls are invisible, but his students are not. Regrettably for you.", "Hm. You found the gaps in more than the walls."] },
@@ -961,7 +961,7 @@ export const MAPS3 = {
 
   // ================= CHUNK 3 — safari + south/west block ===============
   safari: {
-    id: 'safari', name: 'Safari Zone', music: 'route1-theme',
+    id: 'safari', name: 'Bramble Preserve', music: 'route1-theme',
     rows: rows([
       '####################',
       '#......,,,,.F......#',
@@ -1035,7 +1035,7 @@ export const MAPS3 = {
     hidden: [
       { x: 10, y: 5, item: 'goldteeth', n: 1 },
       { x: 18, y: 11, item: 'rarecandy', n: 1 },
-      // ADR-025 §3 (Phase 3) source: DROOPETAL Fang — Safari Zone
+      // ADR-025 §3 (Phase 3) source: DROOPETAL Fang — Bramble Preserve
       // exploration placement.
       { x: 2, y: 8, item: 'gloomfang', n: 1 },
     ],
@@ -1124,12 +1124,12 @@ export const MAPS3 = {
       { x: 9, y: 12, to: { map: 'route20', x: 3, y: 1 } },
     ],
     signs: [
-      { x: 5, y: 6, text: 'ROUTE 19 — Fuchsia Beach. The surf runs south all the way to Cinnabar.' },
+      { x: 5, y: 6, text: 'ROUTE 19 — Bramble Beach. The surf runs south all the way to Caldera.' },
     ],
     npcs: [
       { x: 11, y: 9, name: 'SWIMMER ADA', art: 'swimmer', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#e07830',
         trainer: 'r19_swimmer', sight: { dir: 'right', range: 3 },
-        dialogue: ["I swim this coast every morning — race my team to the buoy and back!", "You swim like a ASTRION spins. Cinnabar's yours to reach."] },
+        dialogue: ["I swim this coast every morning — race my team to the buoy and back!", "You swim like a ASTRION spins. Caldera's yours to reach."] },
       { x: 4, y: 7, name: 'SWIMMER KIT', art: 'swimmer', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'r19_swimmer2', sight: { dir: 'down', range: 3 },
         dialogue: ["STINGEL stung me twice this week. Twice! My ASTLET's honor demands a land battle!", "Honor restored... and only slightly damp."] },
@@ -1193,11 +1193,11 @@ export const MAPS3 = {
       { x: 17, y: 3, to: { map: 'cinnabar', x: 1, y: 5 } },
     ],
     signs: [
-      { x: 11, y: 7, text: 'ROUTE 20 — Seafoam Isles west, Cinnabar east. The caves breathe cold air in summer.' },
+      { x: 11, y: 7, text: 'ROUTE 20 — Rime Isles west, Caldera east. The caves breathe cold air in summer.' },
     ],
     npcs: [
       { x: 12, y: 8, name: 'SWIMMER BO', art: 'swimmer', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
-        dialogue: ["Something huge and blue nests in the Seafoam caves. The cold near its chamber isn't weather — it's presence.", "Push the boulders into the sea holes if you go. Slows the current. Old swimmer's trick."] },
+        dialogue: ["Something huge and blue nests in the Rime caves. The cold near its chamber isn't weather — it's presence.", "Push the boulders into the sea holes if you go. Slows the current. Old swimmer's trick."] },
     ],
     encounters: {
       rate: 0.12, waterRate: 0.12,
@@ -1233,7 +1233,7 @@ export const MAPS3 = {
   },
 
   seafoam: {
-    id: 'seafoam', name: 'Seafoam Islands', music: 'pewter-theme', indoor: true, dark: true,
+    id: 'seafoam', name: 'Rime Islands', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
       'GṦṥýGṥGṦýṦGṦGGGG',
       'GṬṬṬṫLLLLLṨṪṪLLG',
@@ -1286,7 +1286,7 @@ export const MAPS3 = {
   },
 
   cinnabar: {
-    id: 'cinnabar', name: 'Cinnabar Island', music: 'viridian-theme',
+    id: 'cinnabar', name: 'Caldera Town', music: 'viridian-theme',
     rows: rows([
       'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔÉ',
       'ÔÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉÔ',
@@ -1315,14 +1315,14 @@ export const MAPS3 = {
       { x: 3, y: 10, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'cinnabar', x: 3, y: 11 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'CINNABAR ISLAND — A volcanic isle of labs and legends. The sea here never quite cools.' },
-      { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
-      { x: 12, y: 6, text: 'CINNABAR ISLAND — West: ROUTE 20.' },
-      { x: 4, y: 11, text: 'CINNABAR ISLAND — West: ROUTE 20.' }
+      { x: 7, y: 4, text: 'CALDERA TOWN — A volcanic isle of labs and legends. The sea here never quite cools.' },
+      { x: 8, y: 4, text: 'CALDERA GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
+      { x: 12, y: 6, text: 'CALDERA TOWN — West: ROUTE 20.' },
+      { x: 4, y: 11, text: 'CALDERA TOWN — West: ROUTE 20.' }
     ],
     npcs: [
       { x: 15, y: 11, name: 'CAPT SALT', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'pallet',
-        dialogue: ["Fifty years I've ferried folks around this coast, but ONE island I sail to only when the sea itself asks.", "New Island, they call it. When its story calls you, trainer — you'll know. Everyone does, exactly once.", "And if it's Pallet Town you're wanting, my little boat runs home any time — no questions asked."] },
+        dialogue: ["Fifty years I've ferried folks around this coast, but ONE island I sail to only when the sea itself asks.", "Exile Isle, they call it. When its story calls you, trainer — you'll know. Everyone does, exactly once.", "And if it's Dawnwick you're wanting, my little boat runs home any time — no questions asked."] },
       { x: 3, y: 6, name: 'TOM', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         trade: { give: 'venonat', get: 'tangela', nickname: 'TANG' },
         dialogue: ["Lab work breeds FUZZMITE like paperwork. My VINELUMP, Tang, at least files the vines neatly.", "Swap? Your FUZZMITE for my VINELUMP. The lab gains a moth; you gain a jungle."] },
@@ -1333,7 +1333,7 @@ export const MAPS3 = {
         dialogue: ["The lab behind me coaxes life out of stone — bring a fossil, any fossil, and our machines will do the rest.", "Helix, dome, even amber older than the island. Stone remembers, trainer. We just remind it how."] },
       { x: 2, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['ultraball', 'hyperpotion', 'maxpotion', 'fullrestore', 'revive', 'firestone', 'waterstone', 'thunderstone', 'leafstone'] },
-        dialogue: ["Cinnabar Mart — last proper shop before the League road turns north. Stones, balls, and burn insurance."] },
+        dialogue: ["Caldera Mart — last proper shop before the League road turns north. Stones, balls, and burn insurance."] },
     ],
     encounters: null,
     items: [],
@@ -1344,7 +1344,7 @@ export const MAPS3 = {
   },
 
   mansion: {
-    id: 'mansion', name: 'Pokemon Mansion', music: 'pewter-theme', indoor: true, dark: true,
+    id: 'mansion', name: 'Caldera Mansion', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
       'Ṝ<<<<<<<<<<<<<<<<<',
       '<ḔḓḟḠ************<',
@@ -1398,7 +1398,7 @@ export const MAPS3 = {
   },
 
   'gym-cinnabar': {
-    id: 'gym-cinnabar', name: 'Cinnabar Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-cinnabar', name: 'Caldera Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===============',
       '=νṒṓḙḗλSSṑλḘ++θ=',
@@ -1419,7 +1419,7 @@ export const MAPS3 = {
     npcs: [
       { x: 8, y: 2, name: 'BLAINE', art: 'blaine', skin: '#e8b888', shirt: '#c03a3a', pants: '#3a3a3a', hair: '#c0c0c0',
         trainer: 'blaine',
-        dialogue: ["Blaine's the name — quiz-master of Cinnabar and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
+        dialogue: ["Blaine's the name — quiz-master of Caldera and keeper of its flames! My fire Pokemon will incinerate all challengers!", "Burned down to the wick, I am! Take the Volcano Badge — mind you don't drop it, it's still warm."] },
       { x: 4, y: 6, name: 'PYRO', art: 'youngster', skin: '#c89878', shirt: '#5a2a7a', pants: '#2a2a2a', hair: '#e07830',
         trainer: 'gym_cinnabar_1', sight: { dir: 'right', range: 3 },
         dialogue: ["I, uh, 'found' my way in here. Blaine lets me stay 'cause I sweep the ash. Battle?", "Swept... like the ash. The old man saw potential in you anyway."] },
@@ -1432,11 +1432,11 @@ export const MAPS3 = {
   },
 
   // ================= CHUNK 4 — endgame block ===========================
-  // Viridian override: COMPLETE copy of maps.mjs viridian + the Gym on the
+  // Fernmere override: COMPLETE copy of maps.mjs viridian + the Gym on the
   // west side. The gym door warp is always present; the step event in front
   // of it (ev_viridian_gym_locked, badgesBelow 7) handles the locked case.
   viridian: {
-    id: 'viridian', name: 'Viridian City', music: 'viridian-theme',
+    id: 'viridian', name: 'Fernmere City', music: 'viridian-theme',
     rows: rows([
       'ÌÌÌÌÌÌĲĲĲĲÌÌÌÌÌÌ',
       'Ìẇ×ÁÁĲĲÌÌÁÁÁÁ×ÁÌ',
@@ -1469,9 +1469,9 @@ export const MAPS3 = {
       { x: 9, y: 10, to: { map: 'route1', x: 7, y: 1 } },
     ],
     signs: [
-      { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
-      { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
-      { x: 4, y: 1, text: 'VIRIDIAN CITY — North: ROUTE 2 · West: ROUTE 22 · South: ROUTE 1.' },
+      { x: 3, y: 6, text: 'FERNMERE CITY — The city of evergreen. The Center heals your team for free.' },
+      { x: 11, y: 6, text: 'FERNMERE GYM — The leader returned at last. Seven badges to knock; the eighth door in Arden. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
+      { x: 4, y: 1, text: 'FERNMERE CITY — North: ROUTE 2 · West: ROUTE 22 · South: ROUTE 1.' },
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
@@ -1490,7 +1490,7 @@ export const MAPS3 = {
   },
 
   'gym-viridian': {
-    id: 'gym-viridian', name: 'Viridian Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-viridian', name: 'Fernmere Gym', music: 'gym-theme', indoor: true,
     rows: rows([
       'Ṛ===========',
       '=νṔṕλṖλ++Ḙθ=',
@@ -1563,7 +1563,7 @@ export const MAPS3 = {
     events: [
       { id: 'ev_rival_route22', x: 12, y: 5, when: { flagNot: 'ev_rival_route22_done' } },
       // League gate, ENFORCED (2026-11-11): the pass script only fires
-      // with all 8 Kanto badges; below 8 the guard turns the player
+      // with all 8 Arden badges; below 8 the guard turns the player
       // back (deny script warps them east of the checkpoint). Both
       // corridor tiles (2,5) and (1,5) carry the pair, so the row-5
       // chokepoint cannot be stepped around via row 4.
@@ -1576,7 +1576,7 @@ export const MAPS3 = {
   },
 
   victoryroad: {
-    id: 'victoryroad', name: 'Victory Road', music: 'pewter-theme', indoor: true, dark: true,
+    id: 'victoryroad', name: 'Crown Road', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
       'GGGÿGþGGÿGGGGþGGÿṸ',
       'GṶLLLLLLLLLLLLLLLG',
@@ -1623,7 +1623,7 @@ export const MAPS3 = {
   },
 
   indigo: {
-    id: 'indigo', name: 'Indigo Plateau', music: 'viridian-theme',
+    id: 'indigo', name: 'Crownspire', music: 'viridian-theme',
     rows: rows([
       'ÕÕÕàÕÕÕÕÕÕàÕÕÕÕÕ',
       'ÕÊÊÊÊÊÊÊẎńńńńńńÕ',
@@ -1651,10 +1651,10 @@ export const MAPS3 = {
       { x: 4, y: 8, to: { map: 'mart', x: 6, y: 5 }, via: { map: 'indigo', x: 4, y: 9 } },
     ],
     signs: [
-      { x: 7, y: 4, text: 'INDIGO PLATEAU — The Pokemon League. Every road in Kanto ends here.' },
-      { x: 8, y: 4, text: 'POKEMON LEAGUE — Four chambers, then the Champion. No healing between. No mercy asked.' },
-      { x: 13, y: 6, text: 'INDIGO PLATEAU — South: VICTORY ROAD.' },
-      { x: 4, y: 6, text: 'INDIGO PLATEAU — South: VICTORY ROAD.' }
+      { x: 7, y: 4, text: 'CROWNSPIRE — The League. Every road in Arden ends here.' },
+      { x: 8, y: 4, text: 'LEAGUE — Four chambers, then the Champion. No healing between. No mercy asked.' },
+      { x: 13, y: 6, text: 'CROWNSPIRE — South: CROWN ROAD.' },
+      { x: 4, y: 6, text: 'CROWNSPIRE — South: CROWN ROAD.' }
     ],
     npcs: [
       { x: 5, y: 8, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -1671,7 +1671,7 @@ export const MAPS3 = {
   },
 
   league: {
-    id: 'league', name: 'Pokemon League', music: 'gym-theme', indoor: true,
+    id: 'league', name: 'League', music: 'gym-theme', indoor: true,
     rows: rows([
       'ṚṘ^^^^^^^^^^^^^^^^^^',
       '^ḚḙS+++S+++SḠ++SḚSφ^',
@@ -1728,7 +1728,7 @@ export const MAPS3 = {
   },
 
   ceruleancave: {
-    id: 'ceruleancave', name: 'Cerulean Cave', music: 'pewter-theme', indoor: true, dark: true,
+    id: 'ceruleancave', name: 'Tidehaven Cave', music: 'pewter-theme', indoor: true, dark: true,
     rows: rows([
       'GGṺýGýGGýGGGGýGG',
       'GṾṾLLLLLLLĀṽṽLLG',
@@ -1778,7 +1778,7 @@ export const MAPS3 = {
   },
 
   newisland: {
-    id: 'newisland', name: 'New Island', music: 'title-theme', indoor: false,
+    id: 'newisland', name: 'Exile Isle', music: 'title-theme', indoor: false,
     rows: rows([
       '##################',
       '#....~~WWWW~~....#',
@@ -1812,10 +1812,10 @@ export const MAPS3 = {
     start: null,
   },
 
-  // Pallet override: COMPLETE copy of maps.mjs pallet + the Cinnabar
+  // Dawnwick override: COMPLETE copy of maps.mjs pallet + the Caldera
   // ferryman waiting at the south shore.
   pallet: {
-    id: 'pallet', name: 'Pallet Town', music: 'pallet-theme',
+    id: 'pallet', name: 'Dawnwick', music: 'pallet-theme',
     rows: rows([
       'ËËËËËÖËËËËÖËËËËË',
       'ËẆẈÀÀÀÀÀÀÀÀÀÀÀẈË',
@@ -1840,14 +1840,14 @@ export const MAPS3 = {
     signs: [
       { x: 6, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
       { x: 7, y: 3, text: "PROF. HAWTHORN'S LAB — Pokemon research. The professor is out on Route 1 today." },
-      { x: 7, y: 9, text: "PALLET TOWN — a quiet shore town. The road south leads to ROUTE 1." },
+      { x: 7, y: 9, text: "DAWNWICK — a quiet shore town. The road south leads to ROUTE 1." },
     ],
     npcs: [
       { x: 10, y: 4, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
         dialogue: ["Yo, {player}! The professor gave me an EEVEE — fluffy, clever, and all mine!", "He says it'll evolve to match how I battle. Just watch — we'll be champions!"] },
       // UI v2.3 (defect 5): the lab's storage terminal at the lab entrance
-      // (Pallet's lab has no interior map; the terminal stands by its door,
-      // like the one in every Pokemon Center).
+      // (Dawnwick's lab has no interior map; the terminal stands by its door,
+      // like the one in every Center).
       { x: 5, y: 4, name: 'PC TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', pc: true,
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
       { x: 6, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
@@ -1861,7 +1861,7 @@ export const MAPS3 = {
       { x: 8, y: 4, name: 'PROF. HAWTHORN', art: 'hawthorn', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c8c4bc',
         dialogue: ["Ah, {player}! Out walking the town again? Good. Legs first, glory later — that is the order of things.", "VOLTIK still refusing every Capture Orb it sees, I hope. Some bonds are not meant to be carried in a pocket."] },
       { x: 10, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
-        dialogue: ["My little ferry runs Pallet to Cinnabar for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
+        dialogue: ["My little ferry runs Dawnwick to Caldera for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
     encounters: null,
     items: [],
@@ -1875,7 +1875,7 @@ export const MAPS3 = {
   // whichever city door they entered from; the pallet target is the
   // fallback home door.
   center: {
-    id: 'center', name: 'Pokemon Center', music: 'center-theme', indoor: true,
+    id: 'center', name: 'Center', music: 'center-theme', indoor: true,
     rows: rows([
       'ṗṘ::::::::',
       ':θḈḉḖβṢḈθ:',
@@ -1892,7 +1892,7 @@ export const MAPS3 = {
     signs: [],
     npcs: [
       { x: 4, y: 2, name: 'NURSE', art: 'nurse', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#f0a0b0', hair: '#e86a5a',
-        dialogue: ["Welcome to the Pokemon Center! Let me heal your team..."], heal: true,
+        dialogue: ["Welcome to the Center! Let me heal your team..."], heal: true,
         afterHeal: ["All better! Your Pokemon are fighting fit. Come back any time."] },
       // ADR-025 §4: Sparring Coach — see maps.mjs center (same placement;
       // the scene fields him only while the Candy Coach rule is on).
@@ -1904,7 +1904,7 @@ export const MAPS3 = {
       { x: 6, y: 2, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
         dialogue: ["CHEAT TERMINAL — a humming machine the nurses don't talk about. Everything on it is free: items, badges, even legendary Pokemon."] },
       { x: 2, y: 3, name: 'WAITING TRAINER', art: 'youngster', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#2a1a0a',
-        dialogue: ["Every Center in Kanto runs the same boxes off Bill's system. Deposit a friend here, withdraw them a mountain away.", "Technology's incredible — and the nurse still heals for free. Some things never change."] },
+        dialogue: ["Every Center in Arden runs the same boxes off Bill's system. Deposit a friend here, withdraw them a mountain away.", "Technology's incredible — and the nurse still heals for free. Some things never change."] },
     ],
     encounters: null,
     items: [],
@@ -1921,7 +1921,7 @@ export const MAPS3 = {
 export const TRAINERS3 = {
   // ---- Gym Leaders ----
   misty: {
-    id: 'misty', name: 'Misty', title: 'Cerulean Gym Leader', ai: 'smart',
+    id: 'misty', name: 'Misty', title: 'Tidehaven Gym Leader', ai: 'smart',
     intro: ["My policy is an all-out offensive with water-type Pokemon! Show me you can swim in the deep end!"],
     lose: ["You drowned my best strategy... fine! The Cascade Badge is yours."],
     // ADR-025 §3 (Phase 3): authored foe keepsakes (rules.foeKeepsakeFor
@@ -1930,43 +1930,43 @@ export const TRAINERS3 = {
     reward: 2000, badge: 'cascadebadge',
   },
   surge: {
-    id: 'surge', name: 'Lt. Surge', title: 'Vermilion Gym Leader',
+    id: 'surge', name: 'Lt. Surge', title: 'Arcport Gym Leader',
     intro: ["You look like a baby, but babies don't carry badges into MY gym. My electric team will paralyze your whole plan!"],
     lose: ["Whoa! You're not just sparking — you're the whole thunderhead. Thunder Badge, earned!"],
     team: [ { species: 'voltorb', level: 21, keepsake: 'ironacorn' }, { species: 'pikachu', level: 18, keepsake: 'thunderheadpin' }, { species: 'raichu', level: 24, keepsake: 'secondwindribbon' } ],
     reward: 2400, badge: 'thunderbadge',
   },
   erika: {
-    id: 'erika', name: 'Erika', title: 'Celadon Gym Leader',
+    id: 'erika', name: 'Erika', title: 'Canopy Gym Leader',
     intro: ["Forgive my drowsiness... the garden is so peaceful. My grass Pokemon, however, are wide awake for you."],
     lose: ["A storm in my garden, beautifully fought. The Rainbow Badge is yours."],
     team: [ { species: 'victreebel', level: 29, keepsake: 'gloomfang' }, { species: 'tangela', level: 24, keepsake: 'gardeniasash' }, { species: 'vileplume', level: 29, keepsake: 'secondwindribbon' } ],
     reward: 2900, badge: 'rainbowbadge',
   },
   koga: {
-    id: 'koga', name: 'Koga', title: 'Fuchsia Gym Leader',
+    id: 'koga', name: 'Koga', title: 'Bramble Gym Leader',
     intro: ["A ninja's poison needs no strength — only patience. Breathe deep, challenger. Everyone does, at first."],
     lose: ["You held your breath longer than my fog. The Soul Badge, from one shadow to another."],
     team: [ { species: 'koffing', level: 37, keepsake: 'gloomfang' }, { species: 'muk', level: 39, keepsake: 'tortoisecharm' }, { species: 'koffing', level: 37, keepsake: 'gloomfang' }, { species: 'weezing', level: 43, keepsake: 'gloomfang' } ],
     reward: 4300, badge: 'soulbadge',
   },
   sabrina: {
-    id: 'sabrina', name: 'Sabrina', title: 'Saffron Gym Leader',
+    id: 'sabrina', name: 'Sabrina', title: 'Farsight Gym Leader',
     intro: ["Three days ago I watched this battle in a vision. You were... surprising. Visions are rarely wrong. Begin."],
     lose: ["The vision broke. How wonderful — the future is unwritten again. The Marsh Badge is yours."],
     team: [ { species: 'kadabra', level: 38, keepsake: 'secondwindribbon' }, { species: 'mrmime', level: 37, keepsake: 'tidepearl' }, { species: 'venomoth', level: 38, keepsake: 'gloomfang' }, { species: 'alakazam', level: 43, keepsake: 'tortoisecharm' } ],
     reward: 4300, badge: 'marshbadge',
   },
   blaine: {
-    id: 'blaine', name: 'Blaine', title: 'Cinnabar Gym Leader',
+    id: 'blaine', name: 'Blaine', title: 'Caldera Gym Leader',
     intro: ["Quiz time, hotshot! What burns hotter — my EMBERMANE's pride, or a challenger's overconfidence? Battle me and we'll grade it!"],
     lose: ["Full marks... on MY exam. Take the Volcano Badge — and a fire extinguisher for the road."],
     team: [ { species: 'growlithe', level: 42, keepsake: 'embereed' }, { species: 'ponyta', level: 40, keepsake: 'sparrowfeather' }, { species: 'rapidash', level: 42, keepsake: 'embereed' }, { species: 'arcanine', level: 47, keepsake: 'tortoisecharm' } ],
     reward: 4700, badge: 'volcanobadge',
   },
   giovanni: {
-    id: 'giovanni', name: 'Giovanni', title: 'Viridian Gym Leader',
-    intro: ["You stand in the strongest gym in Kanto, child. I do not lose. The ground itself has signed that contract."],
+    id: 'giovanni', name: 'Giovanni', title: 'Fernmere Gym Leader',
+    intro: ["You stand in the strongest gym in Arden, child. I do not lose. The ground itself has signed that contract."],
     lose: ["The ground... renegotiates. Take the Earth Badge. And know that we will meet in worse weather."],
     team: [ { species: 'rhyhorn', level: 45, keepsake: 'ironacorn' }, { species: 'dugtrio', level: 42, keepsake: 'secondwindribbon' }, { species: 'nidoqueen', level: 44, keepsake: 'gloomfang' }, { species: 'nidoking', level: 45, keepsake: 'gloomfang' }, { species: 'rhydon', level: 50, keepsake: 'fossilspur' } ],
     reward: 5000, badge: 'earthbadge',
@@ -2081,7 +2081,7 @@ export const TRAINERS3 = {
   r19_swimmer: {
     id: 'r19_swimmer', name: 'Ada', title: 'Swimmer',
     intro: ["I swim this coast every morning — race my team to the buoy and back!"],
-    lose: ["You swim like a ASTRION spins. Cinnabar's yours to reach."],
+    lose: ["You swim like a ASTRION spins. Caldera's yours to reach."],
     team: [ { species: 'staryu', level: 32 }, { species: 'shellder', level: 33 } ],
     reward: 660,
   },
@@ -2125,7 +2125,7 @@ export const TRAINERS3 = {
   gary_cerulean: {
     id: 'gary_cerulean', name: 'Gary', title: 'Rival',
     intro: ["Hey, {player}! I got a Cascade Badge already — no, wait, I'm ABOUT to. Watch and learn, slowpoke!"],
-    lose: ["How?! My Eevee picked these matchups itself! ...Whatever. Cerulean's just a warm-up."],
+    lose: ["How?! My Eevee picked these matchups itself! ...Whatever. Tidehaven's just a warm-up."],
     team: [ { species: 'pidgeotto', level: 18 }, { species: 'rattata', level: 15 }, { species: 'kadabra', level: 15 }, { species: 'ivysaur', level: 17 } ],
     reward: 700,
   },
@@ -2159,7 +2159,7 @@ export const TRAINERS3 = {
   },
   gary_champion: {
     id: 'gary_champion', name: 'Gary', title: 'Champion', ai: 'smart',
-    intro: ["Heh. Of course it's you at the top of the mountain, {player}. It was always going to be you. Now — the battle Kanto will talk about for a hundred years!"],
+    intro: ["Heh. Of course it's you at the top of the mountain, {player}. It was always going to be you. Now — the battle Arden will talk about for a hundred years!"],
     lose: ["...Yeah. Okay. The chair's yours, Champion. Smell ya at the top — because I'll be back for it."],
     team: [ { species: 'pidgeot', level: 59, keepsake: 'secondwindribbon' }, { species: 'alakazam', level: 57, keepsake: 'tortoisecharm' }, { species: 'rhydon', level: 59, keepsake: 'fossilspur' }, { species: 'exeggutor', level: 58, keepsake: 'gardeniasash' }, { species: 'vaporeon', level: 59, keepsake: 'tidepearl' }, { species: 'venusaur', level: 63, keepsake: 'gloomfang' } ],
     reward: 6300,
@@ -2181,7 +2181,7 @@ export const TRAINERS3 = {
   },
   duo4_saffron: {
     id: 'duo4_saffron', name: 'Mara & Jules', title: 'Uniformed Duo',
-    intro: ["MARA: Silph's top floor, kid. The boss wants the prototype, and the boss gets what the boss wants.", "JULES: We've rehearsed this heist nine times. NINE. This is the good timeline."],
+    intro: ["MARA: Vantage's top floor, kid. The boss wants the prototype, and the boss gets what the boss wants.", "JULES: We've rehearsed this heist nine times. NINE. This is the good timeline."],
     lose: ["MARA: Nine rehearsals... and the kid wasn't in ANY of them.", "JULES: Timeline's broken! Retreat to a better one!"],
     team: [ { species: 'arbok', level: 33 }, { species: 'weezing', level: 33 }, { species: 'victreebel', level: 34 } ],
     reward: 1300,
@@ -2193,18 +2193,18 @@ export const TRAINERS3 = {
     team: [ { species: 'arbok', level: 40 }, { species: 'weezing', level: 40 }, { species: 'victreebel', level: 41 }, { species: 'lickitung', level: 39, nickname: 'Slurp' } ],
     reward: 1700,
   },
-  // Wave E: the two Rocket Admin boss battles the Kanto events name.
+  // Wave E: the two Rocket Admin boss battles the Arden events name.
   // ev_scope_boss (hideout) and ev_silph_boss always referenced the
   // ids rocket_admin_hideout / rocket_admin_silph, which no table
   // defined — the battle step skipped them silently and both beats
   // no-opped. Voss is the hideout admin as authored (his draft lived
   // in the unmerged TRAINERS2 under the shared id 'rocket_admin';
-  // team sits just over Erika's 29 ace, as a post-Celadon boss).
+  // team sits just over Erika's 29 ace, as a post-Canopy boss).
   // The draft's ai:'smart' is NOT carried over: TRAINERS2 stamped it
-  // table-wide, while the live Silph admin below ships with no ai
+  // table-wide, while the live Vantage admin below ships with no ai
   // override — and 'smart' would promote Voss into the leader class
   // (rules.mjs isLeaderTrainer: challenge +2 levels, keepsake levers,
-  // the A19 leader census) that his Silph counterpart is not in.
+  // the A19 leader census) that his Vantage counterpart is not in.
   rocket_admin_hideout: {
     id: 'rocket_admin_hideout', name: 'Admin Voss', title: 'Rocket Admin',
     intro: ["I am Voss — the hand that signs the Team's dirty work. You found our hideout; you'll leave in a crate, gift-wrapped."],
@@ -2212,15 +2212,15 @@ export const TRAINERS3 = {
     team: [ { species: 'golbat', level: 32 }, { species: 'weezing', level: 34 }, { species: 'arbok', level: 34 } ],
     reward: 2500,
   },
-  // Vex is the Silph admin (this def's original text/team). Levels
-  // re-curved for his actual slot: he is fought after Gary's Silph
+  // Vex is the Vantage admin (this def's original text/team). Levels
+  // re-curved for his actual slot: he is fought after Gary's Vantage
   // team (ace 40) on a post-Soul-Badge chain, under Sabrina's 43 ace
   // and Giovanni's 50 — the drafted 32/34/34 sat below the rival
   // fight that precedes him in the same event chain.
   rocket_admin_silph: {
     id: 'rocket_admin_silph', name: 'Vex', title: 'Rocket Admin',
     intro: ["The president's office is occupied, child — by progress. Our progress. Remove yourself, or be removed."],
-    lose: ["A child... dismantled the Saffron operation. The boss will not believe the report. NEITHER DO I."],
+    lose: ["A child... dismantled the Farsight operation. The boss will not believe the report. NEITHER DO I."],
     team: [ { species: 'golbat', level: 38 }, { species: 'weezing', level: 40 }, { species: 'arbok', level: 41 } ],
     reward: 2600,
   },

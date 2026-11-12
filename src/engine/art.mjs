@@ -226,7 +226,7 @@ export function ashModeFrames(doc, dir, mode) {
 // 'garychamp', 'mom', 'hawthorn', 'misty', 'surge', 'erika', 'koga',
 // 'sabrina', 'blaine', 'giovanni', 'lorelei', 'bruno', 'agatha',
 // 'lance', 'rue', 'cole', 'sparcoach'), plus, since the Wave 4
-// addendum, the two Pokemon Tower spirit kinds ('cubonespirit' |
+// addendum, the two Hushmoor Tower spirit kinds ('cubonespirit' |
 // 'marowakspirit' — 16x20 overworld species sprites, deliberately NOT
 // in NPC_SWAP_KEYS so their authored ghost palettes never swap). That
 // field is the primary key. The
@@ -496,7 +496,7 @@ export function npcFramesFor(doc, npc, dir, moving) {
   const prefix = kind === 'brock' ? 'brock' : 'npc-' + kind;
   const swap = npcSwapFor(npc, kind);
   const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
-  // Kit adoption (Phase 1): Pallet's cast — Gary — wears the kit
+  // Kit adoption (Phase 1): Dawnwick's cast — Gary — wears the kit
   // character, recolored by his instance palette through the standard
   // swap machinery (his blue shirt / dark pants / brown hair read
   // against the player's authored teal). The champion kind
@@ -881,7 +881,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     cache[kind] = fb;
   }
   const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false, swapFor(id))).filter(Boolean);
-  // ---- Gassasin kit towns (Phase 1: pallet; Wave A: Kanto + route1) ----
+  // ---- Gassasin kit towns (Phase 1: pallet; Wave A: Arden + route1) ----
   // Kit canvases for opted-in maps, keyed cache.kitTowns[mapId] and
   // consumed by resolveTileLayers' kit branch (docs/THIRD-PARTY-ART.md).
   // Vegetation tiles pass through the KIT seasonal grade (seasons.mjs
@@ -895,7 +895,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
   // roof shingles take the town's roof material (slate / stone /
   // blue-tile / copper / glass-green / gold / dark shingle / thatch /
   // basalt), log walls and door wood take town tones, and vegetation
-  // picks up a light tint of the town's ground anchor. Pallet is the
+  // picks up a light tint of the town's ground anchor. Dawnwick is the
   // reference town: authored kit colors, no remap (owner-approved).
   const hexRgbOf = (hex) => [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
   const mixHex = (hex, toward, f) => {
@@ -945,7 +945,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
     sootopolis: { roof: ['#e6e1d5', '#b0aa9c', '#f4f1ea'], log: '#a08b62', door: '#c2bbaa' }, // crater white stone
     pacifidlog: { roof: ['#9c7648', '#684a26', '#bd9868'], log: '#8d5f2b', door: '#a34d3f' }, // raft-timber float, coral door
     evergrande: { roof: ['#c3cfe6', '#969fb5', '#e6eaf2'], log: '#8a7a52', door: '#b8933f' }, // league marble + gold door
-    // ---- Wave C: Kanto league + Orange Islands (keyed to each town's identity) ----
+    // ---- Wave C: Arden league + Orange Islands (keyed to each town's identity) ----
     indigo: { roof: ['#5a4a8a', '#372a55', '#7d6cab'], log: '#6a5636', door: '#4a3a75' }, // league plateau: royal indigo
     valencia: { roof: ['#c96f4a', '#8a4526', '#e09a70'], log: '#8a6844', door: '#a85638' }, // professor's island: coral terra
     mikan: { roof: ['#d98a2b', '#96590f', '#eda94f'], log: '#7d5a26', door: '#b06e1e' }, // citrus grove: mikan orange
@@ -1073,7 +1073,7 @@ export function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
   };
   cache.kitTowns = {};
   for (const townId of Object.keys(KIT_VARIANTS)) cache.kitTowns[townId] = buildKitSet(townId);
-  cache.kitTowns.route1 = buildKitSet(null); // Pallet->Viridian corridor: reference kit dressing
+  cache.kitTowns.route1 = buildKitSet(null); // Dawnwick->Fernmere corridor: reference kit dressing
   cache.kitTowns.r29 = buildKitSet('newbark'); // Wave B: Johto starter corridor wears New Bark's set
   cache.kitTowns.r101 = buildKitSet('littleroot'); // Wave B: Hoenn starter corridor wears Littleroot's set
   cache.kitTowns.r201 = buildKitSet('twinleaf'); // Wave C: Sinnoh starter corridor wears Twinleaf's set
@@ -1637,7 +1637,7 @@ function atmoKeyFor(mapId) {
   return 'warm'; // every interior / dungeon-adjacent map: warmth
 }
 
-// ---- Gassasin kit towns (Phase 1: pallet; Wave A: Kanto + route1) ----
+// ---- Gassasin kit towns (Phase 1: pallet; Wave A: Arden + route1) ----
 // The kit layer stack for one cell of an opted-in map, or null when
 // the kit does not cover the kind (the shipped resolver then composes
 // the cell as usual). Buildings compose positionally from kit pieces:
@@ -1655,7 +1655,7 @@ const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall'
   'waterpump', 'barrel', 'haycart', 'well', 'sacks', 'tub', 'bench', 'planter',
   'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch',
   // Wave B: Johto/Hoenn regional props (J3/H3/H3B kinds + the W6 props
-  // those towns use) — same kit-ground treatment as the Kanto set.
+  // those towns use) — same kit-ground treatment as the Arden set.
   'maple', 'apricorn', 'jwell', 'stonebell', 'leaguefountain', 'snackmachine',
   'fossildisplay', 'lifering', 'divingtank', 'coil', 'batterypack',
   'contestarch', 'ashshrub', 'forge', 'meteorstone', 'telescope',
@@ -1716,7 +1716,7 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId, phase) {
   // Grounds & vegetation (town kinds + the generic route kinds).
   // The generic 'path' kind is deliberately NOT dressed: it is the
   // native sand road that runs town-to-route across the whole world
-  // (Pallet's approved streets are 'path' cells, and the kit's dirt
+  // (Dawnwick's approved streets are 'path' cells, and the kit's dirt
   // would sever that continuity); tg2- town dirt wears the kit path.
   // Town-family kinds are matched by prefix, not by mapId suffix:
   // three Battle Zone towns wear a sister town's kind family

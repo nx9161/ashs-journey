@@ -5,14 +5,14 @@
 // Canalave Library, 14 houses, 5 gyms — shared center/mart
 // interiors ride the via{} idiom exactly as Johto/Hoenn) + S3b's 77:
 // the 4 remaining settlements (Pastoria + the Great Marsh set,
-// Celestic, Snowpoint, Sunyshore) + the Pokemon League exterior and
+// Celestic, Snowpoint, Sunyshore) + the League exterior and
 // its lobby/chamber chain, 20 routes (212S, 210N fog segment, 213,
 // 214, 216, 217, 219-230, Spring Path, Seabreak Path), the Battle
 // Zone island (Fight/Survival/Resort settlement-lite + Stark
 // Mountain), Lakes Valor + Acuity (+caves), Sendoff Spring +
 // Turnback Cave, Mt. Coronet NORTH through the S3a gallery seam to
 // Spear Pillar + the Hall of Origin, Snowpoint Temple, Iron Island,
-// Victory Road, Fuego Ironworks, Fullmoon + Newmoon Islands, Flower
+// Crown Road, Fuego Ironworks, Fullmoon + Newmoon Islands, Flower
 // Paradise, and the six-map DISTORTION WORLD (distortion:true maps;
 // distortfalls floors are walked like ground — the engine's honest
 // idiom for its inverted falls). S3b patches S3a maps only at the
@@ -20,7 +20,7 @@
 // Veilstone's second south lane, Sandgem's beach lane, the Fuego
 // building on r205, two boat sailors on Canalave's pier, and the
 // Coronet gallery seam itself). Rock Climb geography is authored
-// as climbwall gate tiles (r217, Victory Road, Coronet north —
+// as climbwall gate tiles (r217, Crown Road, Coronet north —
 // faces beside ungated through-roads; S4 wires the move). Route
 // 210 — North carries weather:'fog', the field the weather system
 // reads (S4 adds the fog kind + Defog).
@@ -632,7 +632,7 @@ export const MAPS9 = {
     ],
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Canalave City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
-      {"x": 13, "y": 13, "name": "CAPT WESTWIND", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Canalave run is the long crossing home — Vermilion, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "sinnoh"},
+      {"x": 13, "y": 13, "name": "CAPT WESTWIND", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["The Canalave run is the long crossing home — Arcport, straight across the weather.", "Once this port knows you, the whole ferry network does. Step aboard when you're ready."], "ferry": "vermilion", "ferryArc": "sinnoh"},
       {"x": 18, "y": 6, "name": "LIBRARIAN MIRA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["Our library holds Sinnoh's oldest stories, including the ones about this harbour's first bridge.", "Byron's gym is all iron and certainty. The bridge approves; it is also iron."]},
       {"x": 6, "y": 10, "name": "SAILOR KETT", "art": "sailor", "skin": "#c89878", "shirt": "#2a7a6a", "pants": "#3a3a4a", "hair": "#7a4a1a", "dialogue": ["Iron Island boats leave from the north pier when the weather allows. The weather is a negotiator.", "East causeway runs to Jubilife over the water. Gulls audit every crossing."]},
       {"x": 14, "y": 14, "name": "SAILOR BRINE", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["Iron Island, when you're ready. The mine boats run in any weather the island respects, which is most of it.", "Mind the cave dust. It gets into everything, including the stories."], "ferry": "iron-island"},
@@ -2801,7 +2801,7 @@ export const MAPS9 = {
     "npcs": [
       {"x": 3, "y": 5, "name": "MART CLERK", "art": "clerk", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["Sunyshore City Mart — stocked for the road ahead."], "mart": {"stock": ["ultraball", "hyperpotion", "maxpotion", "fullheal", "revive", "escape"]}},
       {"x": 11, "y": 7, "name": "PANEL TECH JUNIPER", "art": "worker", "skin": "#f0c8a0", "shirt": "#3a7a4a", "pants": "#4a3a2a", "hair": "#2a1a0a", "dialogue": ["Every road in Sunyshore is a solar panel that permits feet. The city runs on sunlight and stubbornness.", "Volkner rebuilt the gym three times this year. Not broken — bored. There's a difference and it matters."]},
-      {"x": 18, "y": 13, "name": "LIGHTHOUSE KEEPER BLY", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North: Route 223, all water, to the Victory Road shore. I light the way; the way does the rest.", "The League cliff shows white over the water some mornings. Every trainer in town has aimed at it once."]},
+      {"x": 18, "y": 13, "name": "LIGHTHOUSE KEEPER BLY", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["North: Route 223, all water, to the Crown Road shore. I light the way; the way does the rest.", "The League cliff shows white over the water some mornings. Every trainer in town has aimed at it once."]},
       {"x": 7, "y": 10, "name": "SUN KID SOLA", "art": "kid", "skin": "#f0c8a0", "shirt": "#c05a3a", "pants": "#2a2a3a", "hair": "#4a3a2a", "dialogue": ["I race the panel glints down the main street. The glints cheat — they move at light speed.", "Pelipper deliver the harbour mail. Tips are fish. I am not in the delivery business."]},
     ],
     "encounters": {"rate": 0.1, "table": [{"species": "wingull", "min": 372, "max": 378, "weight": 22}, {"species": "pelipper", "min": 374, "max": 380, "weight": 10}, {"species": "luxio", "min": 372, "max": 378, "weight": 16}, {"species": "pachirisu", "min": 372, "max": 378, "weight": 14}, {"species": "chatot", "min": 373, "max": 379, "weight": 12}], "water": [{"species": "tentacool", "min": 368, "max": 378, "weight": 22}, {"species": "magikarp", "min": 368, "max": 375, "weight": 16}, {"species": "wingull", "min": 369, "max": 378, "weight": 18}, {"species": "pelipper", "min": 371, "max": 380, "weight": 10}, {"species": "mantine", "min": 372, "max": 380, "weight": 8}, {"species": "lumineon", "min": 372, "max": 380, "weight": 8}, {"species": "gyarados", "min": 374, "max": 382, "weight": 4}], "waterRate": 0.08},
@@ -2812,7 +2812,7 @@ export const MAPS9 = {
   },
   "pokemon-league": {
     "id": "pokemon-league",
-    "name": "Pokemon League",
+    "name": "League",
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
@@ -2843,7 +2843,7 @@ export const MAPS9 = {
       {"x": 27, "y": 9, "to": {"map": "r224", "x": 1, "y": 9}},
     ],
     "signs": [
-      {"x": 12, "y": 5, "text": "THE POKEMON LEAGUE — Sinnoh’s summit hall. Four chambers, one champion, and the whole road behind you."},
+      {"x": 12, "y": 5, "text": "THE LEAGUE — Sinnoh’s summit hall. Four chambers, one champion, and the whole road behind you."},
       {"x": 24, "y": 7, "text": "ROUTE 224 — East, the stone coast runs to the Seabreak Path. The League keeps this door for the ones who have already arrived."},
     ],
     "npcs": [
@@ -3348,7 +3348,7 @@ export const MAPS9 = {
       {"x": 12, "y": 17, "to": {"map": "victory-road", "x": 12, "y": 16}},
     ],
     "signs": [
-      {"x": 13, "y": 9, "text": "ROUTE 223 — The League sea road. All water, north to the Victory Road shore. The cliff at the end of it has heard every promise trainers make."},
+      {"x": 13, "y": 9, "text": "ROUTE 223 — The League sea road. All water, north to the Crown Road shore. The cliff at the end of it has heard every promise trainers make."},
     ],
     "npcs": [
     ],
@@ -4366,7 +4366,7 @@ export const MAPS9 = {
   },
   "victory-road": {
     "id": "victory-road",
-    "name": "Victory Road",
+    "name": "Crown Road",
     "music": "pewter-theme",
     "indoor": true,
     "rows": [
@@ -4396,7 +4396,7 @@ export const MAPS9 = {
       {"x": 13, "y": 0, "to": {"map": "pokemon-league", "x": 14, "y": 16}},
     ],
     "signs": [
-      {"x": 13, "y": 14, "text": "VICTORY ROAD — The last cave. South: the sea road and everything you have been. North: the League, and what you are for."},
+      {"x": 13, "y": 14, "text": "CROWN ROAD — The last cave. South: the sea road and everything you have been. North: the League, and what you are for."},
       {"x": 20, "y": 6, "text": "THE CLIMB LEDGE — Holds cut over the east drop, up to the high ledge. A wall to most; a road to the ones who carry the climb."},
     ],
     "npcs": [

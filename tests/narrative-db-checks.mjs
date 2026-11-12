@@ -275,7 +275,7 @@ const driver = `
     chapterStateOf(g.state, 'q_partner') === 'complete' && currentChapterOf(g.state).id === 'q_boulder',
     currentChapterOf(g.state) && currentChapterOf(g.state).id);
   ok('B1 nextObjectiveOf reads the DB: the Boulder Badge chapter is the objective',
-    nextObjectiveOf(g.state).chapterId === 'q_boulder' && nextObjectiveOf(g.state).objective === 'Win the Boulder Badge in Pewter City');
+    nextObjectiveOf(g.state).chapterId === 'q_boulder' && nextObjectiveOf(g.state).objective === 'Win the Boulder Badge in Flintridge City');
   g.openQuestLog(); tk(g, 3);
   var rows = storyRows(g);
   ok('B1 Quest Log STORY section: exactly the reached arcs (Kanto only on a fresh journey)',
@@ -284,8 +284,8 @@ const driver = `
     rows.length === 1 && rows[0].label.indexOf('Boulder Badge') >= 0 && rows[0].label.indexOf('1/24') >= 0,
     rows.length && rows[0].label);
   ok('B1 selecting the row opens the arc detail from the DB',
-    pickVal(g, 'ndb:kanto') && g.ui.dlg && g.ui.dlg.lines.join(' | ').indexOf('Now: Win the Boulder Badge in Pewter City') >= 0
-      && g.ui.dlg.lines.join(' | ').indexOf('Through Viridian Forest') >= 0
+    pickVal(g, 'ndb:kanto') && g.ui.dlg && g.ui.dlg.lines.join(' | ').indexOf('Now: Win the Boulder Badge in Flintridge City') >= 0
+      && g.ui.dlg.lines.join(' | ').indexOf('Through Fernmere Forest') >= 0
       && g.ui.dlg.lines.join(' | ').indexOf('Story chapters 1 of 24') >= 0,
     g.ui.dlg ? g.ui.dlg.lines.join(' | ').slice(0, 160) : 'no dialogue');
   drain(g); tk(g, 3);
@@ -296,8 +296,8 @@ const driver = `
   g.state.story.flags.badge_boulder = true;
   g.openQuestLog(); tk(g, 3);
   rows = storyRows(g);
-  ok('B2 earning the Boulder Badge advances the DB current chapter (row now the Cerulean road, 2/24)',
-    rows.length === 1 && rows[0].label.indexOf('Cross Mt. Moon and reach Cerulean City') >= 0 && rows[0].label.indexOf('2/24') >= 0
+  ok('B2 earning the Boulder Badge advances the DB current chapter (row now the Tidehaven road, 2/24)',
+    rows.length === 1 && rows[0].label.indexOf('Cross Mt. Lunestone and reach Tidehaven City') >= 0 && rows[0].label.indexOf('2/24') >= 0
       && chapterStateOf(g.state, 'q_boulder') === 'complete' && currentChapterOf(g.state).id === 'q_cerulean',
     rows.length && rows[0].label);
   if (g.ui.menu) g.ui.menu = null;

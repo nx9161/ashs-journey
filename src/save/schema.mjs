@@ -42,7 +42,7 @@ export function validateSave(data) {
   // registry reads off the save's own story.arc (levelCapFor /
   // xpCeilingFor — the exact derivation gen-tables emits for the
   // server validator, so the pair cannot drift). Min stays 1; an
-  // absent/invalid arc reads as Kanto here and is rejected on its
+  // absent/invalid arc reads as Arden here and is rejected on its
   // own code below.
   const levelCap = levelCapFor(data);
   const xpCeiling = xpCeilingFor(data);
@@ -311,11 +311,11 @@ export function fillV2Defaults(data) {
   // Orange set opens with badges.orange = [] and loses nothing (the
   // other sets pass through untouched when present and well-shaped).
   if (isObj(data.badges)) {
-    // Wave E (s6 triage): the KANTO set fills only when ABSENT. The old
+    // Wave E (s6 triage): the ARDEN set fills only when ABSENT. The old
     // any-non-array repair silently rewrote a present-but-malformed
     // kanto (a string) to [] BEFORE validateSave ran, making its strict
     // 'bad-badges' reject dead code — a corrupted save loaded as valid.
-    // Kanto is the v0-core set validateSave requires unconditionally;
+    // Arden is the v0-core set validateSave requires unconditionally;
     // every historical save carries it as an array, so a non-array
     // kanto is corruption and the validator's reject now reaches it.
     // The regional sets keep their stage-documented fill semantics
@@ -452,7 +452,7 @@ export function fillV2Defaults(data) {
     // anchor of the last Center entered (the Center exit resolver
     // falls back to it after a reload inside a Center). Sanitized to
     // its closed shape on load; dropped when malformed (the exit
-    // then falls back to Pallet until the next Center visit).
+    // then falls back to Dawnwick until the next Center visit).
     if (data.story.lastCenter !== undefined) {
       const lc = data.story.lastCenter;
       if (isObj(lc) && typeof lc.map === 'string' && /^[a-z0-9-]{1,40}$/.test(lc.map) && Number.isFinite(lc.x) && Number.isFinite(lc.y)) {

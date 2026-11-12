@@ -1,7 +1,7 @@
 // arcs.mjs — the arc transition machine (ADR-027 Decision 3, roadmap
 // §2.2, Stage F foundation). One generic state machine serves every arc
 // boundary: finale -> ARC COMPLETE summary card + pinned directive
-// ("Go home — return to Pallet Town") -> the playable journey home (the
+// ("Go home — return to Dawnwick") -> the playable journey home (the
 // ferry network, §2.4) -> the Homecoming at Mom's house -> the Embark.
 // Everything arc-specific is registry data (src/data/arcs.mjs); this
 // module names NO region in its logic.
@@ -61,7 +61,7 @@ export function arcCompleteSummary(state, arc) {
       : '',
     playtimeLine: 'Playtime this arc: ' + fmtPlaytime(playSec),
     forwardLine: next
-      ? 'Next: ' + next.label + ' · ' + next.region + ' — go home first. ' + giverName(next) + ' is waiting at Pallet Town.'
+      ? 'Next: ' + next.label + ' · ' + next.region + ' — go home first. ' + giverName(next) + ' is waiting at Dawnwick.'
       : 'The road ahead is unwritten — future arcs wait beyond the horizon.',
     nextArcId: next ? next.id : null,
   };
@@ -84,7 +84,7 @@ export function showArcCompleteCard(g, arc, done) {
 // ONCE (flag arc_card_<id>): records the arc in story.regionsDone,
 // shows the ARC COMPLETE card, and pins the directive on the next arc.
 // Returns true iff the card fired. Call sites: runEnding (the shipped
-// HoF path) and sysLoadMap (so a legacy save that completed Kanto
+// HoF path) and sysLoadMap (so a legacy save that completed Arden
 // before this foundation shipped gets its card on first entry).
 export function checkArcCompletion(g, done) {
   if (!g || !g.state || !g.state.story) return false;
@@ -111,9 +111,9 @@ export function checkArcCompletion(g, done) {
 // name + who waits at home, in the roadmap's sample voice.
 export function arcDirectiveLines(state) {
   const next = state && state.story ? arcById(state.story.arc_directive) : null;
-  if (!next) return ['Go home — return to Pallet Town.'];
+  if (!next) return ['Go home — return to Dawnwick.'];
   return [
-    'Go home — return to Pallet Town.',
+    'Go home — return to Dawnwick.',
     'Next: ' + next.label + ' · ' + next.region + '.',
     giverName(next) + ' is waiting at home with the next leg of the journey.',
     'The way home is yours to walk — and every ferry you have ever taken still runs, both ways, free. It always will.',
@@ -323,5 +323,5 @@ export function arcFerryAllowed(state, npc) {
 
 export function arcFerryGateLine(arc) {
   if (!arc) return 'That crossing is not running yet.';
-  return 'No sailing to ' + arc.region + ' yet — that crossing opens from home. Professor Hawthorn is waiting in Pallet Town.';
+  return 'No sailing to ' + arc.region + ' yet — that crossing opens from home. Professor Hawthorn is waiting in Dawnwick.';
 }

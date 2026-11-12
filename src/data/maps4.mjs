@@ -1,7 +1,7 @@
 // maps4.mjs — coordinator patch: the three interiors maps3 could not land
-// (Saffron Gym, Cinnabar Gym, Silph Co. upper floor) plus travel-graph
+// (Farsight Gym, Caldera Gym, Vantage Co. upper floor) plus travel-graph
 // repairs found by the fidelity audit (St. Anne boarding, Game Corner
-// poster entrance, New Island arrival/return, hideout entry event).
+// poster entrance, Exile Isle arrival/return, hideout entry event).
 // City-side warps in maps3 already point at the gyms/silph2.
 
 import { MAPS2 } from './maps2.mjs';
@@ -9,7 +9,7 @@ import { MAPS3 } from './maps3.mjs';
 
 export const MAPS4 = {
   'gym-saffron': {
-    id: 'gym-saffron', name: 'Saffron Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-saffron', name: 'Farsight Gym', music: 'gym-theme', indoor: true,
     rows: [
       'Ṛ===============',
       '=νṌṍḗλṋSSλḘ+++θ=',
@@ -39,7 +39,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'gym-cinnabar': {
-    id: 'gym-cinnabar', name: 'Cinnabar Gym', music: 'gym-theme', indoor: true,
+    id: 'gym-cinnabar', name: 'Caldera Gym', music: 'gym-theme', indoor: true,
     rows: [
       'Ṛ===============',
       '=νṒṓḙḗλSSṑλḘ++θ=',
@@ -69,7 +69,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   silph2: {
-    id: 'silph2', name: 'Silph Co. — Executive Floor', music: 'pewter-theme', indoor: true,
+    id: 'silph2', name: 'Vantage Co. — Executive Floor', music: 'pewter-theme', indoor: true,
     rows: [
       'ṛṠIIIIIIIIIIIIIIẀI',
       'Iθḛω%%%(%%%%%%%%θI',
@@ -91,7 +91,7 @@ export const MAPS4 = {
     signs: [
       { x: 7, y: 2, text: 'PRESIDENT\'S OFFICE — AUTHORIZED SMILES ONLY BEYOND THIS POINT.' },
       { x: 8, y: 2, text: 'A photo on the desk: a younger president, a beach, and something small and pink at the edge of the frame.' },
-      { x: 9, y: 2, text: 'Filing cabinet: Q1..Q4 reports, and one folder labeled only "NEW ISLAND — DO NOT OPEN".' },
+      { x: 9, y: 2, text: 'Filing cabinet: Q1..Q4 reports, and one folder labeled only "EXILE ISLE — DO NOT OPEN".' },
       { x: 10, y: 2, text: 'The big chair has been spun around to face the window for some time.' },
     ],
     npcs: [
@@ -123,10 +123,10 @@ export const MAPS4 = {
   // Center pattern: town doors carry a via{} return ticket, the exits
   // carry viaExit:true, and loadMap fields the origin town's own clerk
   // (its stock/dialogue definition stays in the town's data) behind
-  // the goods counter — Viridian fields its SHOPKEEPER tale actor
+  // the goods counter — Fernmere fields its SHOPKEEPER tale actor
   // instead (data/quests.mjs). Mart base npcs are therefore empty.
   mart: {
-    id: 'mart', name: 'Pokemon Mart', music: 'viridian-theme', indoor: true,
+    id: 'mart', name: 'Mart', music: 'viridian-theme', indoor: true,
     rows: [
       'Ṛṟ;;;;;;;;;;',
       ';ιιḌ$$$$$κκ;',
@@ -188,7 +188,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-viridian': {
-    id: 'house-viridian', name: 'Viridian City — House', music: 'viridian-theme', indoor: true,
+    id: 'house-viridian', name: 'Fernmere City — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṡ<<<<<<<<<',
       '<ηḏḩθḐḢṢη<',
@@ -207,7 +207,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-pewter-w': {
-    id: 'house-pewter-w', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
+    id: 'house-pewter-w', name: 'Flintridge City — House', music: 'pewter-theme', indoor: true,
     rows: [
       'Ṟ<<<<<<<<<',
       '<θḏηḫṣḑγδ<',
@@ -226,7 +226,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-pewter-e': {
-    id: 'house-pewter-e', name: 'Pewter City — House', music: 'pewter-theme', indoor: true,
+    id: 'house-pewter-e', name: 'Flintridge City — House', music: 'pewter-theme', indoor: true,
     rows: [
       'ṛ<<<<<<<<<',
       '<θḭḮηγḑḒḏ<',
@@ -245,7 +245,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-cerulean': {
-    id: 'house-cerulean', name: 'Cerulean City — House', music: 'viridian-theme', indoor: true,
+    id: 'house-cerulean', name: 'Tidehaven City — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṙ<<<<<<<<<',
       '<δḯḰηḒḓθḏ<',
@@ -264,7 +264,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-vermilion': {
-    id: 'house-vermilion', name: 'Vermilion City — House', music: 'viridian-theme', indoor: true,
+    id: 'house-vermilion', name: 'Arcport City — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṡ<<<<<<<<<',
       '<θḏηḱḕḉḐδ<',
@@ -283,7 +283,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-celadon-w': {
-    id: 'house-celadon-w', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
+    id: 'house-celadon-w', name: 'Canopy City — House', music: 'viridian-theme', indoor: true,
     rows: [
       'Ṟ<<<<<<<<<',
       '<θḳḴηḢṢṣḏ<',
@@ -302,7 +302,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-celadon-e': {
-    id: 'house-celadon-e', name: 'Celadon City — House', music: 'viridian-theme', indoor: true,
+    id: 'house-celadon-e', name: 'Canopy City — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṛ<<<<<<<<<',
       '<δḵḶηγḑθḏ<',
@@ -321,7 +321,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-lavender': {
-    id: 'house-lavender', name: 'Lavender Town — House', music: 'viridian-theme', indoor: true,
+    id: 'house-lavender', name: 'Hushmoor Town — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṙ<<<<<<<<<',
       '<ηḏḷθḑḒḓη<',
@@ -358,14 +358,14 @@ export const MAPS4 = {
     npcs: [
       // Wave 5b: the one resident whose dialogue names her house ("My
       // house? The warden borrows it half the year...") — same NPC,
-      // same lines, now standing inside it (was Fuchsia (2,5)).
+      // same lines, now standing inside it (was Bramble (2,5)).
       { x: 6, y: 2, name: 'AUNTIE MOSS', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["My house? The warden borrows it half the year and leaves it smelling of bait and boot polish.", "If I'd a spare set of teeth I'd trade him for his, just to end the mumbling. Family rates, of course."] },
     ],
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-cinnabar': {
-    id: 'house-cinnabar', name: 'Cinnabar Island — House', music: 'viridian-theme', indoor: true,
+    id: 'house-cinnabar', name: 'Caldera Town — House', music: 'viridian-theme', indoor: true,
     rows: [
       'Ṟ<<<<<<<<<',
       '<θḏηḻḉḐḢδ<',
@@ -384,7 +384,7 @@ export const MAPS4 = {
     encounters: null, items: [], hidden: [], events: [], start: null,
   },
   'house-indigo': {
-    id: 'house-indigo', name: 'Indigo Plateau — House', music: 'viridian-theme', indoor: true,
+    id: 'house-indigo', name: 'Crownspire — House', music: 'viridian-theme', indoor: true,
     rows: [
       'ṛ<<<<<<<<<',
       '<δḽḾηṢṣθḏ<',
@@ -409,12 +409,12 @@ MAPS4.vermilion = {
   ...MAPS2.vermilion,  npcs: [
     ...MAPS2.vermilion.npcs,
     { x: 10, y: 10, name: 'SAILOR BRINE', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#4a3a2a', ferry: 'stanne',
-      dialogue: ['The S.S. Anne is in port, shining like a coin in a fountain. Ticket holders, step lively!', 'Fine sailing, trainer. Mind the gulls — they have seen things.'] },
+      dialogue: ['The S.S. Tern is in port, shining like a coin in a fountain. Ticket holders, step lively!', 'Fine sailing, trainer. Mind the gulls — they have seen things.'] },
   ],
   events: [
     ...(MAPS2.vermilion.events || []),
     // The First Movie invitation arrives at the dock once the Earth Badge
-    // is earned (owner watch order: after the Viridian Gym finale).
+    // is earned (owner watch order: after the Fernmere Gym finale).
     { id: 'ev_movie_arrive', x: 8, y: 11, when: { flag: 'badge_earth', flagNot: 'movie_done' } },
     { id: 'ev_movie_arrive', x: 9, y: 11, when: { flag: 'badge_earth', flagNot: 'movie_done' } },
   ],
@@ -440,7 +440,7 @@ MAPS4.hideout = {
 };
 MAPS4.newisland = {
   ...MAPS3.newisland,
-  // The invite event fires on the Vermilion dock (above); on the island
+  // The invite event fires on the Arcport dock (above); on the island
   // only the climax remains, and the dock boat goes home again.
   events: (MAPS3.newisland.events || []).filter((e) => e.id !== 'ev_movie_arrive'),
   warps: [
@@ -452,7 +452,7 @@ MAPS4.newisland = {
 // Route trainers referenced by maps2 whose definitions were in the lost
 // tail of that file — authored here on the campaign level curve.
 export const TRAINERS4 = {
-  // ADR-025 §5 (Town Tales): the Cerulean cape culprit — the one tale
+  // ADR-025 §5 (Town Tales): the Tidehaven cape culprit — the one tale
   // battle fought as a real trainer battle (a talk-it-out path exists
   // beside it). One low-level mon: a errand fight, never a boss.
   tale_kid: { id: 'tale_kid', name: 'Pip', title: 'Youngster',
@@ -466,7 +466,7 @@ export const TRAINERS4 = {
   moon_grunt: { id: 'moon_grunt', name: 'Rocket Grunt', team: [{ species: 'zubat', level: 13 }, { species: 'sandshrew', level: 13 }], prize: 420,
     intro: ['This cave is ours now. The fossils too.'], lose: ['Tch. The boss will hear about this...'] },
   r4_lass: { id: 'r4_lass', name: 'Lass Robin', team: [{ species: 'oddish', level: 14 }, { species: 'bellsprout', level: 14 }], prize: 280,
-    intro: ['Cerulean is just over the hill — but I am the hill!'], lose: ['Okay. The hill has been climbed.'] },
+    intro: ['Tidehaven is just over the hill — but I am the hill!'], lose: ['Okay. The hill has been climbed.'] },
   r5_camper: { id: 'r5_camper', name: 'Camper Flint', team: [{ species: 'growlithe', level: 16 }, { species: 'diglett', level: 15 }], prize: 320,
     intro: ['Camp rule one: challenge everyone who passes!'], lose: ['Camp rule two: lose gracefully. Sigh.'] },
   r6_bug: { id: 'r6_bug', name: 'Bug Catcher Wes', team: [{ species: 'butterfree', level: 18 }, { species: 'beedrill', level: 18 }], prize: 300,
@@ -474,10 +474,10 @@ export const TRAINERS4 = {
   r11_gamer: { id: 'r11_gamer', name: 'Gambler Hugo', team: [{ species: 'poliwag', level: 20 }, { species: 'horsea', level: 20 }], prize: 900,
     intro: ['All my money on this battle. Again.'], lose: ['One day the odds will read the script.'] },
   r7_lass: { id: 'r7_lass', name: 'Lass Petra', team: [{ species: 'meowth', level: 24 }, { species: 'vulpix', level: 24 }], prize: 480,
-    intro: ['Celadon sparkle meets route grit!'], lose: ['The grit won this round.'] },
+    intro: ['Canopy sparkle meets route grit!'], lose: ['The grit won this round.'] },
 };
 
-// Silph rival ambush placement (was unplaced in maps3's delivery).
+// Vantage rival ambush placement (was unplaced in maps3's delivery).
 MAPS4.silph1 = {
   ...(MAPS3.silph1 || {}),
   events: [
