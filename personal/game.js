@@ -154798,19 +154798,19 @@ const MAPS3 = {
   fuchsia: {
     id: 'fuchsia', name: 'Fuchsia City', music: 'viridian-theme',
     rows: rows([
-      'ÓÓÓÞÓÓÓÓÈÈÓÓÓÞÓÓÓÓ',
-      'ÓÈÈẌÈÈÈÈÈÈÈÈÈẈÈÈẆÓ',
-      'ÓÈēēēÈÈÈÈÈēXēēÈÈÈÓ',
-      'ÓÈīwīÈÈÈÈÈḆḆḆḆÈÈÈÓ',
-      'ÓÈÈÈÈÈÈÈÈÈḆVYḆÈẄÈÓ',
-      'ÓÈÈÈoÈÈÈÈÈÈÈÈÈẐoÈÈ',
-      'ÓÈÈÈÈÈééééẐÈÈÈÈÈÈÓ',
-      'ÓÈÈÈÈoAJKAoÈÈẈÈÈÈÓ',
-      'ÓẒÈÈÈÈÈÈÈÈÈÈÈÞÈÈÈÓ',
-      'ÓÈÈÈÈÈēēēēÈÈÈēôēÈÓ',
-      'ÓÈÈÈÈÈī78īÈÈẒP12ÈÓ',
-      'ÓÈÈÈÈÈÈÈÈÈÈÈÞÈÈÈÈÓ',
-      'ÓÓÓÞÓÓÓÓÈÈÓÓÓÞÓÓÓÓ',
+      'ÓÓÓÞÓÓÓÓŀŀÓÓÓÞÓÓÓÓ',
+      'ÓÈÈẌÈŀŀŀŀŀÈÈÈẈÈÈÈÓ',
+      'ÓÈēēēŀÈŀŀŀēXēēÈÈÈÓ',
+      'ÓÈīwīŀÈŀŀŀḆḆḆḆÈÈÈÓ',
+      'ÓÈÈŀŀŀŀŀŀŀḆVYḆÈẄÈÓ',
+      'ÓÈoŀŀŀŀŀŀŀŀŀŀŀẐoŀŀ',
+      'ÓÈoŀŀŀééééẐŀŀŀŀŀŀÓ',
+      'ÓÈẈŀŀŀAJKAoŀŀÈŀŀŀÓ',
+      'ÓẒÞŀŀŀŀŀŀŀŀŀŀŀŀŀŀÓ',
+      'ÓÈÈŀŀŀēēēēŀŀŀēôēŀÓ',
+      'ÓÈẆŀÈŀī78īŀŀẒP12ŀÓ',
+      'ÓÈÈŀŀŀŀŀŀŀŀŀÞÈŀŀŀÓ',
+      'ÓÓÓÞÓÓÓÓŀŀÓÓÓÞÓÓÓÓ'
     ]),
     warps: [
       { x: 11, y: 4, to: { map: 'gym-fuchsia', x: 7, y: 8 } },
@@ -154831,6 +154831,8 @@ const MAPS3 = {
     signs: [
       { x: 7, y: 4, text: 'FUCHSIA CITY — The Safari City. Wild Pokemon roam free beyond the south gate.' },
       { x: 8, y: 4, text: 'FUCHSIA GYM — Leader: Koga. The poisonous ninja master! Inside lies a VENOM GROUND: Poison moves hit harder and venom seeps in more easily — for Koga, and for you.' },
+      { x: 13, y: 7, text: 'FUCHSIA CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' },
+      { x: 4, y: 10, text: 'FUCHSIA CITY — North: ROUTE 16 · East: ROUTE 15 · South: ROUTE 19.' }
     ],
     npcs: [
       { x: 10, y: 9, name: 'SAFARI WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
@@ -161667,20 +161669,20 @@ const MAPS6 = {
       "ặẵẵoẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẅẵẵẵẵặ",
       "ặnẵjklmẵẵdeefẵẸẻẻẻẵẵẵẵẵẵoẵẵặ",
       "ặẵẵAJKAẵẵP12PẵẵẼsẼẵẵẵẵẵẵẵẵFặ",
-      "ặẵẵẵẵẵẵẵẵẵẵẵẵẏẵẵẵẵẵẵẵẵẵẵẵẵẵặ",
-      "ặẵSẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵặ",
-      "ặẵẵẵẵẵẵẵẅẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵặ",
-      "ặẵẵẵẵẵẵẵẵẵẵẵẵẵẵnẵẵẵẵẵẵẵẵẵFẵặ",
-      "ặẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵ",
-      "ặẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵẵ",
-      "ặẵẵẵẵẵẵẵẵẵẵẵẵẵẵẅẵẵẵẵẵẵẵẵẵẵẵặ",
-      "ặẵẵẵẵẵẵẵẵẵẵẵẵẵF....ẵẵẵẵẵẵẵẵặ",
-      "ặẵẵFFFFFFFẵẵnẵ.,,,,.ẵẵ.F.ẵẵặ",
-      "ặẵẵ~~~~~~~ẵẵẵẵF,,,,.ẵ.,,,.ẵặ",
-      "ặẵF~~~~~~~ẵẵẵẵẵ....ẵẵ.,,,.ẵặ",
-      "ặFẵ~~~~~~~ẵẵẵẵẵẵẵẵẵẵẵẵ...ẏẵặ",
+      "ặSẶẶẶẶẶẶẶẶẶẶẶẏẶẶẶẶẶẶẶẶẶẶẶẶẶặ",
+      "ặẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶặ",
+      "ặẶẶẶẵẵẵẵẅẶẶẶẶẶẶẶẶẵẶẶẶẶẶẶẵẵẶặ",
+      "ặẶẶẶẵẵẵẵẵẶẵẶẵẵẵnẵẶẶẵẵẵẵẶẵFẶặ",
+      "ặẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶ",
+      "ặẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶẶ",
+      "ặẵẵẶẶẶẶẶẶẵẶẶẶẶẶẅẶẶẵẶẶẶẶẶẵFẵặ",
+      "ặẵẵẶẶẶẶẶẶẶẶẶẶẶẶ....ẶẶẶẶẶẶẵẵặ",
+      "ặẵẵFFFFFFFFẵnẶ.,,,,.ẶẶ.ẵ.ẵẵặ",
+      "ặẵẵ~~~~~~~ẵẵẵẸF,,,,.ẵ.,,,,ẵặ",
+      "ặẵF~~~~~~~ẵẵẵẵẵ,,,,ẵẵ.,,,,ẵặ",
+      "ặFẵ~~~~~~~ẵẵẵẵẵẵẵẵẵẵẵẸ,,,ẏẵặ",
       "ặẵẵ~~~~~~~ẵẵẏẵẵẵFẵẵẵẵẵẵẵẵẵẵặ",
-      "ặặặẸặặặặặặẸặặặặặặẸặặặặặặẸặặặ"
+      "ặặặẸặặặặặặẵặặặặặặẸặặặặặặẵặặặ"
     ],
     "warps": [
       {
@@ -161769,9 +161771,19 @@ const MAPS6 = {
     ],
     "signs": [
       {
-        "x": 2,
-        "y": 5,
+        "x": 1,
+        "y": 4,
         "text": "CHERRYGROVE CITY — The city of fragrant flowers. Route 30 climbs north from the east gate."
+      },
+      {
+        "x": 18,
+        "y": 10,
+        "text": "CHERRYGROVE CITY — East: ROUTE 30."
+      },
+      {
+        "x": 9,
+        "y": 10,
+        "text": "CHERRYGROVE CITY — East: ROUTE 30."
       }
     ],
     "npcs": [
@@ -167918,22 +167930,22 @@ const MAPS6 = {
     "name": "Cianwood City",
     "music": "viridian-theme",
     "rows": [
-      "ủủủỨủủủủủủỨủủủủủủỨủủủủủủỨủủủ",
+      "ủủủỨủủủủủủỨủủủủủủỨủủủủủủụủủủ",
       "ủụụụụụụụụụụụụụụụụỨụụụụụụụụụủ",
       "ủụụjklmụụứứứứụụừừừụụụụụụụụụủ",
       "ủỨụAJKARụUVYUụụỬsỬụụụụụụụụụủ",
-      "ủụRụụụụụụụụụụụụụụụụụụụụụụụụủ",
-      "ủụSụụụụụụụụụụụụụụụụụụụụụụụụủ",
-      "ủụụụụụRụụụụụụụụụụụụụnụoụụụụủ",
-      "ủnRụụụụụụụụẄụụụụụụụỨụụụụụụụủ",
-      "ủụụụụụụụụụụụụụụụụụụụụụụụụụ~~",
-      "ủụụụụụụụụụụụụụụụụụụụụụụụụụ~~",
-      "ủụụụụụụRụụụụụẄụụụụoụụụụụnụụủ",
-      "ủụụụụụụụụụụụụụụụụụụụ..ụụụụụủ",
-      "ủụụụụụụụụụụụụụụụụno.,,.ụụụụủ",
-      "ủụụụụụụụụụụụụụụụụụụ.,,,.ụụoủ",
-      "ủụụoụụụụụụụụụụụụụụụụ...ụụụụủ",
-      "ủ~~~~~~~~~~ụụụS~~~~~~~~~~~~ủ",
+      "ủụRỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦụụụụụụụụụủ",
+      "ủụSỦỦỦỦỦỦỦỦỦỦỦỦỦỦỦỨụụụụụụụụủ",
+      "ủụỦỦụỦRẄỦụỦỦỦụỦỦỦỦẄụnụụụụụụủ",
+      "ủnRỦụỦỦụỦụỦỦỦụỦỦỦỦụỨụoụụụụụủ",
+      "ủụụỦụỦỦụỦụỦỦỦụỦỦỦỦỦỦỦỦỦỦỦỦ~~",
+      "ủụụỦụụỦỦỦỦỦỦỦỦỦỦỦỦụụụụụụụỦ~~",
+      "ủụụỦụỦỦRỦỦỦỦỦỦỦỦỦỦoụụụụụnoụủ",
+      "ủụụỦụỦỦỦỦỦỦỦỦỦỦỦỦỦụụ,,ụụụụụủ",
+      "ủụụỦụỦụỦụụụỦỦụỦỦỦno,,,,ụụụụủ",
+      "ủụụỦỦỦụụụụụỦỦụỦỦỦụụ,,,,,ụụụủ",
+      "ủụụoỦỦỦỦỦỦỦỦỦỦỦỦỦụụụ,,,ụụụụủ",
+      "ủ~~~~~~~~~~ỦỦỦS~~~~~~~~~~~~ủ",
       "ủ~~~~~~~~~~~ụụ~~~~~~~~~~~~~ủ",
       "ủ~~~~~~~~~~~ụụ~~~~~~~~~~~~~ủ"
     ],
@@ -168022,6 +168034,21 @@ const MAPS6 = {
         "x": 14,
         "y": 15,
         "text": "CIANWOOD LANDING — The island boat runs to Olivine, weather and whim permitting. It always permits."
+      },
+      {
+        "x": 15,
+        "y": 9,
+        "text": "CIANWOOD CITY — East: ROUTE 41."
+      },
+      {
+        "x": 5,
+        "y": 9,
+        "text": "CIANWOOD CITY — East: ROUTE 41."
+      },
+      {
+        "x": 2,
+        "y": 11,
+        "text": "CIANWOOD CITY — East: ROUTE 41."
       }
     ],
     "npcs": [
@@ -173671,23 +173698,23 @@ const MAPS7 = {
     "weather": "clear",
     "rows": [
       "ἮἮἮἯἮἮἮἮἮἮἯἮἮ~~ἮἮἮἯἮἮἮἮἮἮἯἮἮ",
-      "RRRRRRRRRRRRRἬἬRRRRRRRRRLLRR",
-      "ἮἬFjklmἬἬdeefἬἬἰἰἰἰἯἬἲἲἲἬἬSἮ",
-      "ἮἬἬAJKAἬἬP12PἬἬUVYUἬἬἳsἳἬἬἬἮ",
-      "ἮFἬἬἬἬἬFἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἮ",
-      "ἮἬSἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἮ",
-      "ἮoἬἬἬἬἬἬἬἬṃἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἮ",
-      "ἮἬἬṃἯἬἬἬἬἬἬFoἬἬἬἬἬἬἯἬἬἬἬἬἬἬἮ",
-      "ἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬ",
-      "ἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬἬ",
-      "ἮἬἬo....ἬἬἬἬFἬἬἬἬἬẐἬἬἬἬἬἬἬἬἮ",
-      "ἮἬἬ.,,,,.ἬἬoἬἬἬἬἬἬἬἬἬFἬἬἬἬἬἮ",
-      "Ἦ„F„,,,,o„„„„„„„„Ẑ„„S„ṃṄ„F„Ἦ",
-      "Ἦẞẞẞ“‖‖‛ẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞἮ",
+      "RRRRRRRRRRRRRἭἭRRRRRRRRRLLRR",
+      "ἮἬFjklmἬἬdeefἭἭἰἰἰἰἯἬἲἲἲἭἭSἮ",
+      "ἮἬἬAJKAἬἬP12PἭἭUVYUἬἬἳsἳἭἭἭἮ",
+      "ἮFἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἮ",
+      "ἮἬἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἬἬἭἮ",
+      "ἮoἭἭἭἭFFFἭṃἭἭἭἭἭἭἭἭἭἭἭἭἬἬἯἭἮ",
+      "ἮSἭṃἭἭἯooἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭFἯἭἮ",
+      "ἬoἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭ",
+      "ἬἬἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭ",
+      "ἮFἭἬ....ἭἭἭἭἬἭἭἭἭἭẐἭἭἭἬἭἬFἭἮ",
+      "ἮἭἭ.,,,,.ἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἭἬἭἮ",
+      "Ἦ„Ἤ„,,,,o„„„„„„„„Ẑ„„S„ṃṄ„Ἤ„Ἦ",
+      "Ἦẞẞẞ“‖‖‛ẞẞ„„„„„„„„„ẞẞ„ẞẞẞẞẞἮ",
+      "Ἦẞẞẞ„„ẞẞẞẞ„ẞẞẞẞẞẞẞ„ẞẞ„ẞẞẞẞẞἮ",
+      "Ἦẞẞẞ„„„„„„„„„„„„„„„„„„ẞẞẞẞẞἮ",
       "ἮẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞἮ",
-      "ἮẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞἮ",
-      "ἮẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞẞἮ",
-      "ἮἮἮἯἮἮἮἮἮἮἯἮἮἮἮἮἮἯἮἮἮἮἮἮἯἮἮἮ",
+      "ἮἮἮἯἮἮἮἮἮἮἯἮἮἮἮἮἮἯἮἮἮἮἮἮἬἮἮἮ"
     ],
     "warps": [
       {"x": 24, "y": 1, "to": {"map": "granite-cave", "x": 11, "y": 14}},
@@ -173706,8 +173733,13 @@ const MAPS7 = {
     ],
     "signs": [
       {"x": 26, "y": 2, "text": "GRANITE CAVE — The island’s dark heart, north of town. What glitters in there is not all stone."},
-      {"x": 2, "y": 5, "text": "DEWFORD TOWN — A tiny island community with a fighting spirit. The hall posts what is trendy; the island decides what is true."},
+      {"x": 1, "y": 7, "text": "DEWFORD TOWN — A tiny island community with a fighting spirit. The hall posts what is trendy; the island decides what is true."},
       {"x": 20, "y": 12, "text": "DEWFORD BEACH — The boat from Route 104 ties up along this shore, and the surf road east runs to Slateport."},
+      {"x": 1, "y": 9, "text": "DEWFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 22, "y": 10, "text": "DEWFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 10, "y": 15, "text": "DEWFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 17, "y": 15, "text": "DEWFORD TOWN — North: ROUTE 106 · East: ROUTE 107."},
+      {"x": 5, "y": 15, "text": "DEWFORD TOWN — North: ROUTE 106 · East: ROUTE 107."}
     ],
     "npcs": [
       {"x": 18, "y": 15, "name": "BOATMAN SULA", "art": "sailor", "skin": "#e8b888", "shirt": "#3a6ac0", "pants": "#2a3a4a", "hair": "#1a1a1a", "dialogue": ["My run is the Slateport crossing by way of the surf roads — or straight across my bow, your choice.", "No tickets, no fuss. The island provides."], "ferry": "slateport"},
@@ -173846,24 +173878,24 @@ const MAPS7 = {
     "music": "viridian-theme",
     "weather": "clear",
     "rows": [
-      "὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆",
+      "὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆ὄ὆὆὆",
       "὆FὄὄὄFὄFὄὄ὇ὄὄẏὄὄὄὄὄὄὄὄẏὄὄὄὄ὆",
       "὆ὄὄjklmὄFὈὈὈὈὄὄὊὊὊὄὄὄὄὄὄὄὄὄ὆",
-      "὆ὄὄAJKAὄὄὉsὉὉὄὄὋsὋὄὄὄὄὄὄὄὄὄ὆",
-      "὆ὄὄὄὄὄὄὄὄὄὄὄὄ὇ὄὄὄὄὄὄὄὄὄὄὄὄὄ὆",
-      "὆ὄSὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄ὆",
-      "὆ὄὄἋὄὄὄὄὄὄὄὄὄὄὄὄFὄὄὄὄẏὄὄὄὄὄ὆",
-      "RSὄὄὄὄὄὄὄὄὄὄὄὄẅὄὄFὄFὄὄὄὄὄὄὄ὆",
-      "Lὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄ",
-      "Lὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄ",
-      "Rὄὄὄὄὄ὇ὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄ὆",
-      "὆ὄὄFFFFFFFὄὄὄὄὄἋὄὄὄFF..FὄἋὄ὆",
-      "὆ὄὄFFFFFFFὄὄὄὄὄὄὄὄ.,,,,,ẏFὄ὆",
-      "὆ὄὄFFFFFFFẅὄFὄὄὄὄὄ.,,,,,.ὄὄ὆",
-      "὆ὄὄFFFFFFFὄὄὄὄὄὄὄὄ.,,,,,.ὄὄ὆",
-      "὆ὄὄFFFFFFFὄFὄὄὄFὄ὇ὄ.....ὄFὄ὆",
+      "὆SὅAJKAὄὄὉsὉὉὄὄὋsὋὄFὄ὇ὄὄὄὄὄ὆",
+      "὆ὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ὆",
+      "὆ὅὄὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ὆",
+      "὆ὅὅἋὅὄὄὄὅὅὅὅὄὅὅὅὅὅὅὅὅẏFὄὄὄὅ὆",
+      "Rὅὅὅὅὅὅὅὅὅὅὅὅὅẅὄὄὅὄὄὅὅὄὄὄὄὅ὆",
+      "Lὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ",
+      "Lὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅὅ",
+      "RSὅὅὅὅ὇ὄὅFὄὄὅὅὅὅὅὅὅ὇ὄὅὄὄὄὄὄ὆",
+      "὆ὄὄFFFFFFFὅὅὅὅὅἋὅὄὅFF..FὄἋὄ὆",
+      "὆ὄὄFFFFFFFὅὅὅὅὅὅὅὅ.,,,,,ẏFὄ὆",
+      "὆ὄὄFFFFFFFẅὅὅὅὅὅὅὅ.,,,,,,ὄὄ὆",
+      "὆ὄὄFFFFFFFὅὅὅὅFὄὄὄ.,,,,,,ὄὄ὆",
+      "὆ὄὄFFFFFFFὄFὄὄὄFὄ὇ὄ,,,,,ὄFὄ὆",
       "὆ὄὄὄὄὄὄὄẏὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄὄ὆",
-      "὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆",
+      "὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆὆὆὆὇὆὆὆"
     ],
     "warps": [
       {"x": 4, "y": 3, "to": {"map": "center", "x": 4, "y": 4}, "via": {"map": "verdanturf", "x": 4, "y": 4}},
@@ -173876,8 +173908,10 @@ const MAPS7 = {
       {"x": 27, "y": 9, "to": {"map": "r117", "x": 1, "y": 9}},
     ],
     "signs": [
-      {"x": 1, "y": 7, "text": "RUSTURF TUNNEL — Through the hill to Route 116 and Rustboro. The Whismur were here first; walk gentle."},
-      {"x": 2, "y": 5, "text": "VERDANTURF TOWN — A small town bathed in pure, sweet air. The contest hall keeps the greenest lawn in Hoenn."},
+      {"x": 1, "y": 10, "text": "RUSTURF TUNNEL — Through the hill to Route 116 and Rustboro. The Whismur were here first; walk gentle."},
+      {"x": 1, "y": 3, "text": "VERDANTURF TOWN — A small town bathed in pure, sweet air. The contest hall keeps the greenest lawn in Hoenn."},
+      {"x": 17, "y": 11, "text": "VERDANTURF TOWN — West: RUSTURF TUNNEL · East: ROUTE 117."},
+      {"x": 13, "y": 12, "text": "VERDANTURF TOWN — West: RUSTURF TUNNEL · East: ROUTE 117."}
     ],
     "npcs": [
       {"x": 12, "y": 6, "name": "CONTEST AUNTIE ROSA", "art": "lady", "skin": "#d8a878", "shirt": "#7a4a8a", "pants": "#2a2a3a", "hair": "#c0c0c0", "dialogue": ["A ribbon is just a judge admitting, in writing, that your Pokemon shone.", "My Roselia has opinions about the hall's lighting. All of them correct."]},
