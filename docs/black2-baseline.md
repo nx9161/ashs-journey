@@ -180,3 +180,17 @@ Game Freak through official channels).
   gated (audit-reachability + audit-towns cover all 431 maps,
   interiors included); the visual half grades per map on screenshots
   in the style-pass waves.
+- **B2-G9 (the calm-density model, owner reference photos 2026-11-11):**
+  the owner pinned the target look with screenshots of a GBA-era town
+  (Littleroot-style, via a web emulator): calm single-hue speckled
+  grass with large unbroken areas; small-footprint buildings standing
+  alone in clear ground, never touching; interiors with furniture
+  hugged to the walls, open floor in the middle, one rug as the
+  feature; small characters against a quiet world. Principles adopted
+  (density, spacing, ground calm, interior openness) — layouts and
+  assets are NOT copied; the art stays original. This is the same
+  direction as the owner's 2026-10-29 readability ruling (halve the
+  clutter) with a picture now pinned to it: the world wave SUBTRACTS
+  before it adds. Working targets: decorative objects per screen at
+  most half the current density; >=2 ground tiles between any two
+  buildings; interior walking floor >=60% open.
