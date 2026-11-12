@@ -98,12 +98,13 @@ ok('A1 chapter ids unique', Object.keys(chById).length === NARRATIVE_CHAPTERS.le
 ok('A1 chapter kinds are the four documented kinds', NARRATIVE_CHAPTERS.every((c) => ['main', 'legendary', 'tale', 'facility'].includes(c.kind)));
 
 // ---------- A2: referential integrity ----------
-// Known dead references in the SHIPPED event data: two Kanto events name
-// battle ids no trainer table defines; the engine's battle step skips
-// unknown ids silently (overworld-systems: `if (!t0) { next(); }`), so
-// these beats no-op in the shipped game. The DB records them faithfully;
-// this ledger pins the exact set so any change forces a conscious update.
-const KNOWN_UNRESOLVED_BATTLES = ['rocket_admin_hideout', 'rocket_admin_silph'];
+// Wave E closed the known-dead set: ev_scope_boss / ev_silph_boss named
+// battle ids (rocket_admin_hideout / rocket_admin_silph) that no trainer
+// table defined, and the engine's battle step skips unknown ids silently
+// (overworld-systems: `if (!t0) { next(); }`), so both beats no-opped.
+// The trainers now exist (maps3.mjs TRAINERS3), so the ledger is EMPTY:
+// any unresolved battle reference from here on is a hard failure.
+const KNOWN_UNRESOLVED_BATTLES = [];
 let bad = [];
 const unresolvedBattles = new Set();
 for (const c of NARRATIVE_CHAPTERS) {
@@ -119,7 +120,7 @@ for (const c of NARRATIVE_CHAPTERS) {
 }
 ok('A2 every chapter reference resolves (arc/volume/maps/events/bonds/species/deps)', bad.length === 0);
 if (bad.length) console.log('    ' + bad.slice(0, 12).join(', '));
-ok('A2 battle references resolve, except the pinned known-dead shipped set',
+ok('A2 battle references resolve (known-dead ledger is empty since Wave E)',
   JSON.stringify([...unresolvedBattles].sort()) === JSON.stringify(KNOWN_UNRESOLVED_BATTLES),
   [...unresolvedBattles].join(','));
 ok('A2 live chapters have at least one real location (roaming arcs exempt)',

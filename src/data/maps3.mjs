@@ -2174,11 +2174,30 @@ export const TRAINERS3 = {
     team: [ { species: 'arbok', level: 40 }, { species: 'weezing', level: 40 }, { species: 'victreebel', level: 41 }, { species: 'lickitung', level: 39, nickname: 'Slurp' } ],
     reward: 1700,
   },
-  rocket_admin: {
-    id: 'rocket_admin', name: 'Vex', title: 'Rocket Admin',
+  // Wave E: the two Rocket Admin boss battles the Kanto events name.
+  // ev_scope_boss (hideout) and ev_silph_boss always referenced the
+  // ids rocket_admin_hideout / rocket_admin_silph, which no table
+  // defined — the battle step skipped them silently and both beats
+  // no-opped. Voss is the hideout admin as authored (his draft lived
+  // in the unmerged TRAINERS2 under the shared id 'rocket_admin';
+  // team sits just over Erika's 29 ace, as a post-Celadon boss).
+  rocket_admin_hideout: {
+    id: 'rocket_admin_hideout', name: 'Admin Voss', title: 'Rocket Admin', ai: 'smart',
+    intro: ["I am Voss — the hand that signs the Team's dirty work. You found our hideout; you'll leave in a crate, gift-wrapped."],
+    lose: ["A child... dismantling MY operation. The boss will want your name. I already regret giving it."],
+    team: [ { species: 'golbat', level: 32 }, { species: 'weezing', level: 34 }, { species: 'arbok', level: 34 } ],
+    reward: 2500,
+  },
+  // Vex is the Silph admin (this def's original text/team). Levels
+  // re-curved for his actual slot: he is fought after Gary's Silph
+  // team (ace 40) on a post-Soul-Badge chain, under Sabrina's 43 ace
+  // and Giovanni's 50 — the drafted 32/34/34 sat below the rival
+  // fight that precedes him in the same event chain.
+  rocket_admin_silph: {
+    id: 'rocket_admin_silph', name: 'Vex', title: 'Rocket Admin',
     intro: ["The president's office is occupied, child — by progress. Our progress. Remove yourself, or be removed."],
     lose: ["A child... dismantled the Saffron operation. The boss will not believe the report. NEITHER DO I."],
-    team: [ { species: 'golbat', level: 32 }, { species: 'weezing', level: 34 }, { species: 'arbok', level: 34 } ],
-    reward: 1600,
+    team: [ { species: 'golbat', level: 38 }, { species: 'weezing', level: 40 }, { species: 'arbok', level: 41 } ],
+    reward: 2600,
   },
 };
