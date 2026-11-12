@@ -1,0 +1,5 @@
+{
+  "_comment": "B2-G1/G2 caps, measured 2026-11-11 from assets/sprites/art-data.mjs (4,186 entries). battleCanvas: all 2,262 battle entries (1,018 base fronts/backs + 1,244 -bob/-accent companions) measured on 64x64, zero exceptions. maxOver16ColorEntries: 116 entries materialize to >16 used colors (max 21); the ceiling is shrink-only \u2014 new art must be <=16 colors. Enforced by scripts/art-gate.mjs.",
+  "battleCanvas": "64x64",
+  "maxOver16ColorEntries": 116
+}

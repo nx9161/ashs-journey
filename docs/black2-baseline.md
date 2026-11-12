@@ -15,6 +15,7 @@ text, or data tables were extracted or used. Nothing from that file enters this 
 | Content storage | **308 NARC archives**, index-addressed (a/0, a/1, a/2 = 100 each, a/3 = 8); largest 31.5 MB / 1,065 members | 30+ data files in src/data/ (2.2 MB), split ad hoc (maps.mjs…maps9.mjs, species.mjs…species5.mjs), no registry |
 | Sound | One dedicated **89,373,024 B SDAT bank** (~30% of used ROM) + soundstatus.narc, served by the ARM7 co-processor | audio/ = 28 KB total; engine/audio.mjs = 291 lines |
 | Connectivity | Separate shipped binaries: `dl_rom/` Download Play child ROMs, `dwc/utility.bin` Wi-Fi utility | sync.mjs + auth.mjs (614 + ~200 lines) — already separate; now a rule, not an accident |
+| Graphics storage | ≈184 MB identified graphics: 10,452 NCGR tile graphics, 5,072 palettes, 3,643 cell banks + 3,643 animation banks, 840 3D models + 1,725 textures (RE-GRAPHICS-CENSUS.md) | assets/sprites/art-data.mjs: 4,186 entries, 10 distinct canvases only (measured below, B2-G) |
 | Files total | 662 (344 overlays + 318 named) | — |
 
 ## The imposed rules (binding on new work from 2026-11-11)
@@ -62,6 +63,51 @@ equivalent: the game must stay fully playable at the budgets.json floor (low-end
 Android, DPR tier 1, 30 fps adaptive); visual/audio enhancements layer on top and
 must degrade, never gate. An enhancement that breaks the floor fails review.
 
+## Graphics rules — the census imposed (B2-G, added 2026-11-11)
+
+Evidence: `~/workspace/black2-baseline/RE-GRAPHICS-CENSUS.md` — member-level scan of all
+308 NARC archives (69,850 members; LZ-unwrapped; dimensions counted only when header
+arithmetic validated). Our side measured the same day from the generated registry
+`assets/sprites/art-data.mjs` (4,186 entries), with derived entries materialized through
+their base chains exactly as the engine renders them.
+
+**B2-G1 — One battle canvas (the 256×128 rule).** Black 2 puts 3,607 of its 4,480
+validated graphics on a single battle canvas, 256×128 px. Our equivalent already exists
+and is now law: the standard battle canvas is **64×64**. Measured today: 509 species
+stems, 1,018 base fronts/backs — every one 64×64, zero stems missing a view — plus
+1,244 derived companions (-bob / -accent), also all 64×64; 2,262 battle entries, zero
+exceptions. Trainer battle art is a separate, separately uniform class (92 entries at
+48×64) and does not mix into the species canvas. Any battle entry off 64×64 fails
+`scripts/art-gate.mjs`.
+
+**B2-G2 — 16-color discipline (the 4bpp rule).** Black 2: 97% of validated 2D art is
+4bpp (4,336 vs 144 files); its palettes are 16 colors × 2,572 files or 256 × 2,376,
+almost nothing between. Our measured state: 4,070 of 4,186 entries (97.2%) materialize
+to ≤16 used colors (histogram peak: 13); **116 entries exceed 16 (max 21, mostly Ash
+overworld animation frames at 17–18 colors)**. Rule: NEW art ships at ≤16 used colors.
+The 116 legacy exceedances are a frozen ceiling in `scripts/art-gate.caps.json` —
+shrink-only; raising the count fails `scripts/art-gate.mjs`.
+
+**B2-G3 — Animation ships as a pair (the NCER==NANR rule).** Black 2's pairing is
+exact: 3,643 cell banks (layout) and 3,643 animation banks, one of each per animated
+sprite, no loose frames. Our registry has the same shape: an animated entry is a base
+raster plus a registered derivation in the same generated file — 510 shift/bob entries
+and 709 delta entries (ART_META records both lists: shift_bob 510, delta_frames 709),
+and measured today **1,219 of 1,219 derived entries resolve to a base present in the
+registry (0 orphans)**; the engine's materializeArt() resolves every frame through
+its base. Rule: no orphan frames and no animation defined outside the registry — a
+derived entry whose base is missing hard-fails the art gate's materializer.
+
+**B2-G4 — Screen layers snap to the base grid (the NSCR rule).** Black 2's screen
+layers standardize on 256×256 (×538), 256×192 (×133), and 512×512 scrolling (×127) —
+all built on its 8px tile. Ours: the tile is 16px (`TILE = 16`, src/engine/render.mjs);
+1,002 of 1,057 tile entries are exactly 16×16 and the rest are exact multiples
+(16×32, 16×48, 32×32); the logical viewports (src/game/main.mjs) are 256×192 and
+256×256 — the DS layer sizes themselves — plus the 384×216 wide mode, all multiples
+of the tile. Rule: new tiles, layers, and viewports snap to the 16px grid and the
+256-family logical sizes; off-grid art (today only the 24×24 portrait class and two
+one-off pieces exist outside the tile multiples) does not spread to new classes.
+
 ## What this does NOT do
 - Does not import any Black 2 system by name into the design on structural evidence
   alone: seasons, medals, Join Avenue, Pokéstar Studios, and the World Tournament
@@ -74,3 +120,7 @@ must degrade, never gate. An enhancement that breaks the floor fails review.
 ## Verification
 `node scripts/pack-manifest.mjs` regenerates docs/pack-manifest.md and exits
 non-zero if any frozen monolith grew past its cap in scripts/pack-manifest.caps.json.
+`node scripts/art-gate.mjs` exits non-zero if any battle-sprite entry is off the
+64×64 canvas (B2-G1) or the >16-color entry count rises above the frozen ceiling
+of 116 in scripts/art-gate.caps.json (B2-G2); both failure modes were exercised
+with synthetic violations on 2026-11-11 and the restored tree passes.
