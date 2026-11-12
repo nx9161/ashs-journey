@@ -598,12 +598,16 @@ body.flip.landscape .sysbtns{grid-column:1}
 body.menu-full .hudchips,body.menu-full .hudstrip,body.menu-full .moodpip,body.menu-full .syncdot{display:none}
 .inbattle .hudchips{display:none}
 @media (max-width:560px){.hudchips{top:84px;max-width:calc(100% - 72px)}.objchip{max-width:min(300px,calc(100% - 72px))}}
-/* HUD quick-strip — one light Platinum frame rail with the 4 buttons */
-.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:0;pointer-events:auto;z-index:15;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px 6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+/* HUD quick-strip — one light Platinum frame rail with the 4 buttons.
+   UI v2.5 QA D-1: the strip is width-capped to the frame and its buttons
+   may flex-shrink, so when a very short viewport snaps the canvas down
+   to 256px the strip compresses inside the frame instead of overhanging
+   its left edge. No-op at normal frame sizes (strip is 272px natural). */
+.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:0;max-width:calc(100% - 16px);pointer-events:auto;z-index:15;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px 6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .nohud .hudstrip{display:none}
 .inbattle .hudstrip{display:none}
 .inbattle .hintcard{display:none}
-.hudbtn{position:relative;width:64px;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-left:1px solid #ccd6ea;border-radius:0;cursor:pointer;touch-action:none;font-family:var(--font)}
+.hudbtn{position:relative;width:64px;min-width:0;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-left:1px solid #ccd6ea;border-radius:0;cursor:pointer;touch-action:none;font-family:var(--font)}
 .hudbtn:first-child{border-left:0}
 .hudbtn:active{background:var(--sky)}
 .hudicon{width:24px;height:24px;image-rendering:pixelated}
