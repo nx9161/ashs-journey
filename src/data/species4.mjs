@@ -835,7 +835,7 @@ export const SPECIES_HOENN = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 31, 32, 34, 44, 50, 103],
   },
   baltoy: {
-    id: 'baltoy', name: 'Baltoy', dexNo: 343, types: ['ground', 'psychic'],
+    id: 'baltoy', name: 'SPINCLAY', dexNo: 343, types: ['ground', 'psychic'],
     base: { hp: 40, atk: 40, def: 55, spa: 40, spd: 70, spe: 55 },
     catchRate: 255, growth: 'mediumfast', baseXp: 60, body: 'blob', spriteSeed: 34301,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -844,7 +844,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'claydol', method: 'level', level: 236 }, tm: [3, 6, 8, 9, 10, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101],
   },
   claydol: {
-    id: 'claydol', name: 'Claydol', dexNo: 344, types: ['ground', 'psychic'],
+    id: 'claydol', name: 'CLAYTITAN', dexNo: 344, types: ['ground', 'psychic'],
     base: { hp: 60, atk: 70, def: 105, spa: 70, spd: 120, spe: 75 },
     catchRate: 90, growth: 'mediumfast', baseXp: 175, body: 'blob', spriteSeed: 34401,
     eggGroups: ['mineral'], hatchCounter: 20,
@@ -853,7 +853,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 9, 10, 15, 17, 18, 19, 28, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   lileep: {
-    id: 'lileep', name: 'Lileep', dexNo: 345, types: ['rock', 'grass'],
+    id: 'lileep', name: 'CRINLET', dexNo: 345, types: ['rock', 'grass'],
     base: { hp: 66, atk: 41, def: 77, spa: 61, spd: 87, spe: 23 },
     catchRate: 45, growth: 'fast', baseXp: 71, body: 'blob', spriteSeed: 34501,
     eggGroups: ['water3'], hatchCounter: 30,
@@ -862,7 +862,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'cradily', method: 'level', level: 240 }, tm: [6, 8, 9, 10, 11, 12, 13, 14, 20, 31, 32, 34, 44, 50, 103],
   },
   cradily: {
-    id: 'cradily', name: 'Cradily', dexNo: 346, types: ['rock', 'grass'],
+    id: 'cradily', name: 'ELDERCRIN', dexNo: 346, types: ['rock', 'grass'],
     base: { hp: 86, atk: 81, def: 97, spa: 81, spd: 107, spe: 43 },
     catchRate: 45, growth: 'fast', baseXp: 173, body: 'blob', spriteSeed: 34601,
     eggGroups: ['water3'], hatchCounter: 30,
@@ -871,7 +871,7 @@ export const SPECIES_HOENN = {
     tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   anorith: {
-    id: 'anorith', name: 'Anorith', dexNo: 347, types: ['rock', 'bug'],
+    id: 'anorith', name: 'CAMBLET', dexNo: 347, types: ['rock', 'bug'],
     base: { hp: 45, atk: 95, def: 50, spa: 40, spd: 50, spe: 75 },
     catchRate: 45, growth: 'fast', baseXp: 71, body: 'blob', spriteSeed: 34701,
     eggGroups: ['water3'], hatchCounter: 30,
@@ -880,7 +880,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'armaldo', method: 'level', level: 240 }, tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   armaldo: {
-    id: 'armaldo', name: 'Armaldo', dexNo: 348, types: ['rock', 'bug'],
+    id: 'armaldo', name: 'CAMBREX', dexNo: 348, types: ['rock', 'bug'],
     base: { hp: 75, atk: 125, def: 100, spa: 70, spd: 80, spe: 45 },
     catchRate: 45, growth: 'fast', baseXp: 173, body: 'biped', spriteSeed: 34801,
     eggGroups: ['water3'], hatchCounter: 30,
@@ -889,7 +889,7 @@ export const SPECIES_HOENN = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 34, 39, 44, 50, 101, 102],
   },
   feebas: {
-    id: 'feebas', name: 'Feebas', dexNo: 349, types: ['water'],
+    id: 'feebas', name: 'RAGFIN', dexNo: 349, types: ['water'],
     base: { hp: 20, atk: 15, def: 20, spa: 10, spd: 55, spe: 80 },
     catchRate: 255, growth: 'fast', baseXp: 40, body: 'fish', spriteSeed: 34901,
     eggGroups: ['water1', 'dragon'], hatchCounter: 20,
@@ -907,7 +907,7 @@ export const SPECIES_HOENN = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   castform: {
-    id: 'castform', name: 'Castform', dexNo: 351, types: ['normal'],
+    id: 'castform', name: 'NIMBULET', dexNo: 351, types: ['normal'],
     base: { hp: 70, atk: 70, def: 70, spa: 70, spd: 70, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 147, body: 'blob', spriteSeed: 35101,
     eggGroups: ['fairy', 'indeterminate'], hatchCounter: 25,
@@ -916,7 +916,7 @@ export const SPECIES_HOENN = {
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 28, 31, 32, 34, 39, 44, 50],
   },
   kecleon: {
-    id: 'kecleon', name: 'Kecleon', dexNo: 352, types: ['normal'],
+    id: 'kecleon', name: 'CAMOLEON', dexNo: 352, types: ['normal'],
     base: { hp: 60, atk: 90, def: 70, spa: 60, spd: 120, spe: 40 },
     catchRate: 200, growth: 'mediumslow', baseXp: 154, body: 'biped', spriteSeed: 35201,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -925,7 +925,7 @@ export const SPECIES_HOENN = {
     tm: [6, 9, 10, 11, 12, 15, 16, 20, 24, 25, 31, 32, 34, 39, 44, 50],
   },
   shuppet: {
-    id: 'shuppet', name: 'Shuppet', dexNo: 353, types: ['ghost'],
+    id: 'shuppet', name: 'SHADOLL', dexNo: 353, types: ['ghost'],
     base: { hp: 44, atk: 75, def: 35, spa: 63, spd: 33, spe: 45 },
     catchRate: 225, growth: 'fast', baseXp: 59, body: 'blob', spriteSeed: 35301,
     eggGroups: ['indeterminate'], hatchCounter: 25,
@@ -934,7 +934,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'banette', method: 'level', level: 237 }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   banette: {
-    id: 'banette', name: 'Banette', dexNo: 354, types: ['ghost'],
+    id: 'banette', name: 'BANEDOLL', dexNo: 354, types: ['ghost'],
     base: { hp: 64, atk: 115, def: 65, spa: 83, spd: 63, spe: 65 },
     catchRate: 45, growth: 'fast', baseXp: 159, body: 'biped', spriteSeed: 35401,
     eggGroups: ['indeterminate'], hatchCounter: 25,
@@ -943,7 +943,7 @@ export const SPECIES_HOENN = {
     tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   duskull: {
-    id: 'duskull', name: 'Duskull', dexNo: 355, types: ['ghost'],
+    id: 'duskull', name: 'SKULLET', dexNo: 355, types: ['ghost'],
     base: { hp: 20, atk: 40, def: 90, spa: 30, spd: 90, spe: 25 },
     catchRate: 190, growth: 'fast', baseXp: 59, body: 'blob', spriteSeed: 35501,
     eggGroups: ['indeterminate'], hatchCounter: 25,
@@ -952,7 +952,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'dusclops', method: 'level', level: 237 }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   dusclops: {
-    id: 'dusclops', name: 'Dusclops', dexNo: 356, types: ['ghost'],
+    id: 'dusclops', name: 'CYCLOWRAITH', dexNo: 356, types: ['ghost'],
     base: { hp: 40, atk: 70, def: 130, spa: 60, spd: 130, spe: 25 },
     catchRate: 90, growth: 'fast', baseXp: 159, body: 'biped', spriteSeed: 35601,
     eggGroups: ['indeterminate'], hatchCounter: 25,
@@ -961,7 +961,7 @@ export const SPECIES_HOENN = {
     evo: { to: 'dusknoir', method: 'trade' }, tm: [6, 20, 21, 24, 25, 29, 31, 32, 34, 36, 42, 44, 46, 47, 50],
   },
   tropius: {
-    id: 'tropius', name: 'Tropius', dexNo: 357, types: ['grass', 'flying'],
+    id: 'tropius', name: 'PALMSAUR', dexNo: 357, types: ['grass', 'flying'],
     base: { hp: 99, atk: 68, def: 83, spa: 72, spd: 87, spe: 51 },
     catchRate: 200, growth: 'slow', baseXp: 161, body: 'quad', spriteSeed: 35701,
     eggGroups: ['monster', 'plant'], hatchCounter: 25,
@@ -970,7 +970,7 @@ export const SPECIES_HOENN = {
     tm: [2, 4, 6, 9, 10, 15, 20, 21, 31, 32, 34, 39, 44, 50, 102],
   },
   chimecho: {
-    id: 'chimecho', name: 'Chimecho', dexNo: 358, types: ['psychic'],
+    id: 'chimecho', name: 'BELLECHO', dexNo: 358, types: ['psychic'],
     base: { hp: 75, atk: 50, def: 80, spa: 95, spd: 90, spe: 65 },
     catchRate: 45, growth: 'fast', baseXp: 159, body: 'blob', spriteSeed: 35801,
     eggGroups: ['indeterminate'], hatchCounter: 25,
