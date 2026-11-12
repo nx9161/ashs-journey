@@ -12,6 +12,7 @@
 
 import { ART } from '../../assets/sprites/art-data.mjs';
 import { KIT_ART } from '../../assets/sprites/kit-art-data.mjs';
+import { KITACC } from '../../assets/sprites/kitacc-data.mjs';
 import { forgeSprite, forgeHumanoid } from './sprites.mjs';
 import { paintTile, W6_PROP_KINDS, W6_RUG_KINDS, W6_FLOOR_KINDS, W6_WALL_KINDS, W7_PROP_KINDS, O1_PROP_KINDS, O1_FLOOR_KINDS, O1_WALL_KINDS, J3_PROP_KINDS, J3_FLOOR_KINDS, J3_WALL_KINDS, JOHTO_TOWN_ORDER, H3_PROP_KINDS, H3_FLOOR_KINDS, H3_WALL_KINDS, H3B_PROP_KINDS, H3B_FLOOR_KINDS, H3B_WALL_KINDS, HOENN_TOWN_ORDER, S3_PROP_KINDS, S3_FLOOR_KINDS, S3_WALL_KINDS, S3B_PROP_KINDS, S3B_FLOOR_KINDS, S3B_WALL_KINDS, SINNOH_TOWN_ORDER, G2_KINDS, TOWN_STYLE, JOHTO_TOWN_STYLE, HOENN_TOWN_STYLE, SINNOH_TOWN_STYLE } from './tiles.mjs';
 import { BATTLER_DRAW_SIZE } from './render.mjs';
@@ -28,6 +29,26 @@ import { battlerDrawSize } from '../data/battler-tiers.mjs';
 // chain is depth-1 by build law (build-art rejects a delta base).
 const matCache = new Map();
 export function materializeArt(id) {
+  // Wave F accessory overlays (original art, kitacc-data.mjs): sparse
+  // rows on the 16x32 overworld canvas, expanded here; left-facing
+  // entries mirror their right-facing source. Cached like deltas.
+  const ka = KITACC[id];
+  if (ka) {
+    const hit = matCache.get(id);
+    if (hit) return hit;
+    let out;
+    if (ka.mirrorOf) {
+      const base = materializeArt(ka.mirrorOf);
+      if (!base) return null;
+      out = { w: base.w, h: base.h, pal: base.pal, rows: base.rows.map((r) => [...r].reverse().join('')) };
+    } else {
+      const rows = Array.from({ length: 32 }, () => '.'.repeat(16));
+      for (const [y, s] of Object.entries(ka.rows)) rows[+y] = s;
+      out = { w: 16, h: 32, pal: ka.pal, rows };
+    }
+    matCache.set(id, out);
+    return out;
+  }
   // Kit entries (Gassasin CC-BY tileset/character, Phase 1 2026-11-11)
   // live in their own generated registry; they are plain entries (no
   // delta chains), resolved here so artCanvas — and with it the swap
@@ -307,6 +328,146 @@ export function npcSwapFor(npc, kind) {
   return Object.keys(swap).length ? swap : null;
 }
 
+// ---- Wave F kit cast (owner order 2026-11-12: EVERY NPC wears the
+// kit character) ----
+// The kit ships one character; identity comes from the variant: the
+// instance palette remapped over the kit's semantic keys INCLUDING the
+// derived shades the shipped Gary swap never touches (h = hair light,
+// j = shirt shade), class palette rules (uniforms forced; monks and
+// Blaine bald by palette; swimmers bare by palette), and ORIGINAL
+// accessory overlays (kitacc-data.mjs) composited over the kit frames.
+// Player + Gary keep their shipped paths exactly; the PC is a machine;
+// the Pokemon-character kinds (KIT_CAST_EXCEPTIONS) are species art.
+export const KIT_CAST_EXCEPTIONS = new Set(['cubonespirit', 'marowakspirit', 'slowking']);
+const CAST_HEX_RE = /^#[0-9a-fA-F]{6}$/;
+function castHex(v, dflt) { return (typeof v === 'string' && CAST_HEX_RE.test(v)) ? v.toLowerCase() : dflt; }
+function castMix(hex, hex2, t) { const a = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16)); const b = [1, 3, 5].map((i) => parseInt(hex2.slice(i, i + 2), 16)); return '#' + a.map((v, i) => Math.round(v + (b[i] - v) * t).toString(16).padStart(2, '0')).join(''); }
+const castLighten = (hex, t) => castMix(hex, '#ffffff', t);
+const castDarken = (hex, t) => castMix(hex, '#000000', t);
+
+// Per-kind cast spec. acc entries are [overlayId, swapTokens]; tokens
+// '@J/@j/@H/@h/@P/@p/@S' resolve against the wearer's variant, '#hex'
+// is literal. force rewrites palette fields before the swap is built
+// ('@skin' = the instance's own skin). hairLight overrides the derived
+// hair highlight (elder silver).
+const KIT_CAST_SPEC = {
+  youngster: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  kid: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  camper: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  bugcatcher: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  coach: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  sparcoach: { acc: [['cap', { C: '@J', c: '@j', X: '@j' }]] },
+  sailor: { acc: [['cap', { C: '#f4f4f0', c: '#cfd4dc', X: '#cfd4dc' }]] },
+  officer: { force: { shirt: '#2a3a6a', pants: '#22304f' }, acc: [['cap', { C: '#2a3a6a', c: '#141f38', X: '#e8c832' }]] },
+  grunt: { force: { shirt: '#3a3a44', pants: '#2a2a33' }, acc: [['cap', { C: '#2a2a33', c: '#101014', X: '#101014' }]] },
+  nurse: { force: { shirt: '#f4f0f0', pants: '#e88aa0' }, acc: [['cap', { C: '#f4f0f0', c: '#d8d8e0', X: '#e04848' }], ['skirt', { C: '@P', c: '@p' }]] },
+  fisher: { acc: [['hat-wide', { C: '#b8a05a', c: '#8a7640', X: '#8a7640' }]] },
+  ranger: { acc: [['hat-wide', { C: '#7a7a4a', c: '#4a4a2c', X: '#4a4a2c' }]] },
+  hiker: { acc: [['hat-wide', { C: '#6a7a4a', c: '#44502c', X: '#44502c' }]] },
+  lady: { acc: [['hat-wide', { C: '#e0cd96', c: '#b8a05a', X: '#c05a7a' }], ['skirt', { C: '@J', c: '@j' }]] },
+  gent: { acc: [['hat-top', { C: '#2a2a33', c: '#101014' }]] },
+  worker: { acc: [['hat-hard', { C: '#e8c832', c: '#b8931f' }]] },
+  biker: { acc: [['bandana', { C: '#7a1a2a', c: '#4a0f18' }]] },
+  clerk: { acc: [['apron', {}]] },
+  scientist: { force: { shirt: '#e8e8e8' }, acc: [['glasses', {}]] },
+  professor: { force: { shirt: '#e8e8e8' }, acc: [['glasses', {}]] },
+  monk: { force: { hair: '@skin' } },
+  swimmer: { force: { shirt: '@skin' } },
+  elder: { hairLight: '#e8e4da', acc: [['bald', {}]] },
+  lass: { acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  twin: { acc: [['bow', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  acetrainer: { acc: [['headband', { C: '@J', c: '@j' }]] },
+  aide: {}, rival: {},
+  // Named cast — fixed recorded variants (palette = the character's own
+  // instance data; accessories keep close palettes apart: bruno's
+  // headband vs brock, the champion's cape vs gary, cole vs rue).
+  garychamp: { acc: [['cape', { C: '#5a1030', c: '#38081e' }]] },
+  mom: { acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  hawthorn: { force: { shirt: '#e8e8e8' }, acc: [['glasses', {}]] },
+  misty: { acc: [['hair-pony', {}]] },
+  erika: { acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  sabrina: { acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }]] },
+  lorelei: { acc: [['hair-long', {}], ['skirt', { C: '@J', c: '@j' }], ['glasses', {}]] },
+  blaine: { force: { hair: '@skin' }, acc: [['glasses', {}]] },
+  giovanni: { acc: [['hat-fedora', { C: '#3a3230', c: '#241e1c' }]] },
+  koga: { acc: [['headband', { C: '@J', c: '@j' }]] },
+  bruno: { acc: [['headband', { C: '@J', c: '@j' }]] },
+  cole: { acc: [['headband', { C: '@J', c: '@j' }]] },
+  agatha: { acc: [['skirt', { C: '@J', c: '@j' }]] },
+  lance: { acc: [['cape', { C: '#7a1a3a', c: '#4a0f24' }]] },
+  brock: {}, surge: {}, rue: {},
+};
+// Same-map clone breaker: loadMap stamps _cloneIx (occurrence index of
+// this kind+palette on the map); later occurrences rotate deterministic
+// hair/skin nudges — uniforms stay, hair/skin vary.
+const KIT_CAST_NUDGES = [
+  (s) => { s.H = castLighten(s.H, 0.25); s.h = castLighten(s.H, 0.42); },
+  (s) => { s.H = castDarken(s.H, 0.22); s.h = castLighten(s.H, 0.42); },
+  (s) => { s.S = castLighten(s.S, 0.15); },
+  (s) => { s.H = castMix(s.H, '#7a4a1a', 0.45); s.h = castLighten(s.H, 0.42); },
+  (s) => { s.S = castDarken(s.S, 0.12); s.H = castDarken(s.H, 0.18); s.h = castLighten(s.H, 0.42); },
+];
+export function kitCastVariant(npc, kind) {
+  const spec = KIT_CAST_SPEC[kind];
+  if (!spec || !npc) return null;
+  let skin = castHex(npc.skin, '#f28e59');
+  let shirt = castHex(npc.shirt, '#00788a');
+  let pants = castHex(npc.pants, '#001774');
+  let hair = castHex(npc.hair, '#3b2400');
+  if (spec.force) {
+    const F = { skin, shirt, pants, hair };
+    for (const [f, v] of Object.entries(spec.force)) F[f] = v === '@skin' ? F.skin : v;
+    ({ skin, shirt, pants, hair } = F);
+  }
+  const swap = { S: skin, H: hair, h: castLighten(hair, 0.42), J: shirt, j: castDarken(shirt, 0.5), P: pants };
+  if (spec.hairLight) swap.h = spec.hairLight;
+  const ix = npc._cloneIx || 0;
+  if (ix > 0) KIT_CAST_NUDGES[(ix - 1) % KIT_CAST_NUDGES.length](swap);
+  const tokens = { '@J': swap.J, '@j': swap.j, '@H': swap.H, '@h': swap.h, '@P': swap.P, '@p': castDarken(swap.P, 0.3), '@S': swap.S };
+  const acc = (spec.acc || []).map(([id, m]) => {
+    const resolved = {};
+    for (const [ch, v] of Object.entries(m || {})) resolved[ch] = tokens[v] || v;
+    return { id, swap: resolved };
+  });
+  const key = [swap.S, swap.H, swap.h, swap.J, swap.j, swap.P,
+    acc.map((a) => a.id + JSON.stringify(a.swap)).join(',')].join('|');
+  return { swap, acc, key };
+}
+
+const castCvCache = new Map();
+function castComposite(doc, baseCv, baseId, v, dir) {
+  if (!v.acc.length) return baseCv;
+  const key = baseId + '|' + v.key;
+  const hit = castCvCache.get(key);
+  if (hit) return hit;
+  const cv = doc.createElement('canvas');
+  cv.width = 16; cv.height = 32;
+  const ctx = cv.getContext('2d');
+  ctx.drawImage(baseCv, 0, 0);
+  for (const a of v.acc) {
+    const oc = artCanvas(doc, 'kitacc-' + a.id + '-' + dir, 1, false, { ...v.swap, ...a.swap });
+    if (oc) ctx.drawImage(oc, 0, 0);
+  }
+  castCvCache.set(key, cv);
+  return cv;
+}
+
+// Kit-cast frame set for one NPC instance — same return contract as
+// the authored path in npcFramesFor.
+export function kitCastFrames(doc, npc, kind, dir, moving) {
+  const v = kitCastVariant(npc, kind);
+  if (!v) return null;
+  const d = ['down', 'up', 'left', 'right'].includes(dir) ? dir : 'down';
+  const set = kitCharFrames(doc, d, v.swap, false);
+  if (!set) return null;
+  let slots;
+  if (moving) slots = [[set.walk[0], 'walk-1'], [set.walk[1], 'walk-2']];
+  else if (d === 'down' && NPC_NAMED_KINDS.has(kind)) slots = set.idle.map((c, i) => [c, 'idle-' + (i + 1)]);
+  else if (d === 'down') slots = [[set.idle[0], 'idle-1'], [set.idle[1], 'idle-2']];
+  else slots = [[set.walk[0], 'walk-1'], [set.walk[0], 'walk-1']];
+  return slots.map(([cv, bid]) => castComposite(doc, cv, 'kit-char-' + d + '-' + bid, v, d));
+}
+
 // ---- Premium+ W4 (AN-4): directional NPC sets + named/roaming tables ----
 // The named cast (Wave 3a's 20 individual kinds) extends its FRONT idle
 // to 4 frames with a kind-specific gesture (idle-3/4 deltas). The 24
@@ -348,6 +509,13 @@ export function npcFramesFor(doc, npc, dir, moving) {
       return [set.walk[0], set.walk[0]];
     }
   }
+  // Wave F kit cast: every other NPC wears the kit character with its
+  // variant (kitCastVariant). The authored sets below remain the path
+  // for the exception kinds and the fallback if the kit set is absent.
+  if (!KIT_CAST_EXCEPTIONS.has(kind)) {
+    const cast = kitCastFrames(doc, npc, kind, d, moving);
+    if (cast) return cast;
+  }
   const cv = (id) => artCanvas(doc, id, 1, false, swap);
   if (moving) {
     const w = [cv(prefix + '-' + d + '-walk-1'), cv(prefix + '-' + d + '-walk-2')].filter(Boolean);
@@ -379,6 +547,11 @@ export function npcFrames(doc, npc) {
     const frames = ['npc-pc-idle-1', 'npc-pc-idle-2', 'npc-pc-idle-3', 'npc-pc-idle-4']
       .map((id) => artCanvas(doc, id, 1)).filter(Boolean);
     if (frames.length >= 2) return frames;
+  }
+  // Wave F kit cast (front set; npcFramesFor carries the full path).
+  if (kind !== 'gary' && !KIT_CAST_EXCEPTIONS.has(kind)) {
+    const cast = kitCastFrames(doc, npc, kind, 'down', false);
+    if (cast) return cast;
   }
   const prefix = kind === 'brock' ? 'brock' : 'npc-' + kind;
   const swap = npcSwapFor(npc, kind);
