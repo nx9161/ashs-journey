@@ -1623,16 +1623,16 @@ export const MAPS3 = {
     id: 'indigo', name: 'Indigo Plateau', music: 'viridian-theme',
     rows: rows([
       'ÕÕÕàÕÕÕÕÕÕàÕÕÕÕÕ',
-      'ÕÊÊÊÊÊÊÊẎÊÊÊÊÊÊÕ',
-      'ÕÊėėėÊÊÊÊÊėXėėÊÕ',
-      'ÕÊįsįÊÊÊÊÊUUUUÊÕ',
-      'ÕÊÊÊÊÊÊÊÊÊUVYUÊÕ',
-      'ÕÊÊÊẈoÊÊÊÊoÊÊÊÊÕ',
-      'ÕÊÊÊÊÊëöëëẒÊÊÊÊÕ',
-      'ÕÊėOėoAJKAoÊÊÊẆÕ',
-      'ÕÊP12ÊÊÊÊÊÊFFÊÊÕ',
-      'ÕẒÊÊÊÊÊÊÊÊÊÊÊÊÊÕ',
-      'ÕÕÕÕÕÕÊÊÊÊÕÕÕÕÕÕ',
+      'ÕÊÊÊÊÊÊÊẎńńńńńńÕ',
+      'ÕÊėėėńńńńńėXėėńÕ',
+      'ÕÊįsįńÊńńńUUUUńÕ',
+      'ÕÊÊńńńńńńńUVYUńÕ',
+      'ÕÊÊńẈoÊÊÊÊońńńńÕ',
+      'ÕÊÊńÊÊëöëëẒńńńFÕ',
+      'ÕÊėOėoAJKAońńńẆÕ',
+      'ÕÊP12ńńńńńńńńńFÕ',
+      'ÕẒÊńńńńńńńńńńńÊÕ',
+      'ÕÕÕÕÕÕńńńńÕÕÕÕÕÕ'
     ]),
     warps: [
       { x: 11, y: 4, to: { map: 'league', x: 3, y: 9 } },
@@ -1650,6 +1650,8 @@ export const MAPS3 = {
     signs: [
       { x: 7, y: 4, text: 'INDIGO PLATEAU — The Pokemon League. Every road in Kanto ends here.' },
       { x: 8, y: 4, text: 'POKEMON LEAGUE — Four chambers, then the Champion. No healing between. No mercy asked.' },
+      { x: 13, y: 6, text: 'INDIGO PLATEAU — South: VICTORY ROAD.' },
+      { x: 4, y: 6, text: 'INDIGO PLATEAU — South: VICTORY ROAD.' }
     ],
     npcs: [
       { x: 5, y: 8, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
