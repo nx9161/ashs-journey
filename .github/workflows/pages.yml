@@ -1,0 +1,50 @@
+# GitHub Pages — the public play address (owner order 2026-11-11: Pages
+# instead of Vercel, whose production provisioning keeps failing).
+# Publishes the GUEST edition: dist/standalone.html (single self-contained
+# file, auth compiled out, zero network) as index.html. The Vercel public
+# edition (accounts + cloud saves via api/) remains a separate target and
+# is NOT built here — Pages is static-only, so this edition plays guest
+# with local saves.
+name: pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Black 2 baseline law gates
+        run: |
+          node scripts/pack-manifest.mjs
+          node scripts/art-gate.mjs
+          node tests/seasons-checks.mjs
+      - name: Build guest edition
+        run: node scripts/build.mjs --target=guest
+      - name: Stage Pages artifact
+        run: |
+          mkdir -p _site
+          cp dist/standalone.html _site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
