@@ -141134,6 +141134,24 @@ const KIT_ART = {
     "..............BC",
     "..............BC",
   ] },
+  "kit-door-r": { w: 16, h: 16, pal: {"A":"#8d5500","B":"#3b2400","C":"#000000","D":"#bec0b8","E":"#696b63"}, rows: [
+    "CCCAEDABABABABAC",
+    "CACAEDABABABABAC",
+    "CACACBABABABABAC",
+    "CBCACBABABABABAC",
+    "CCCACBABABADABDC",
+    "CACACBABABABDDAC",
+    "CACACBABABABABAC",
+    "CBCACBABABABABAC",
+    "CCCACBABABABABAC",
+    "AACAEDABABABABAC",
+    "BACAEDABABABABAC",
+    "BBCACBBBBBBBBBBC",
+    "CC..............",
+    "CA..............",
+    "CB..............",
+    "CB..............",
+  ] },
   "kit-flora": { w: 16, h: 16, pal: {"A":"#008100","B":"#063a00","C":"#64e53c","D":"#b8fca8"}, rows: [
     "AAAAAAAAAAAAAAAA",
     "AAAAAABBBAAAABBB",
@@ -142606,7 +142624,7 @@ function pickVariant(arr, x, y, salt) {
 // agree on it, so it lives in exactly one place.
 function isTallGrass(x, y) { return hashTile(x, y, 11) < 0.78; }
 
-function buildArtTileCache(doc, seasonSwapFor) {
+function buildArtTileCache(doc, seasonSwapFor, seasonKitSwapFor) {
   // kind -> canvas (16x16). 'water' -> [water-1..3] animated frames.
   // 'void' stays a solid fill (no art). Kinds without ART fall back to paintTile.
   // Season grade (Black 2 imposition, 2026-11-11): when seasonSwapFor is
@@ -142632,35 +142650,105 @@ function buildArtTileCache(doc, seasonSwapFor) {
     cache[kind] = fb;
   }
   const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false, swapFor(id))).filter(Boolean);
-  // ---- Gassasin kit towns (Phase 1: pallet; docs/THIRD-PARTY-ART.md) ----
-  // Kit canvases for opted-in towns, keyed cache.kitTowns[mapId] and
-  // consumed by resolveTileLayers' kit branch. Vegetation tiles pass
-  // through the SAME seasonal grade as our own art — seasonSwapFor
-  // re-grades green-dominant kit palette entries, so a kit lawn turns
-  // amber in Autumn and snow-pale in Winter like the drawn world;
-  // roofs, logs, dirt and doors keep their authored colors.
-  const kitSwap = (id) => {
-    if (!seasonSwapFor) return undefined;
-    const a = KIT_ART[id];
-    if (!a || !a.pal) return undefined;
-    const sw = seasonSwapFor(a.pal);
-    return sw && Object.keys(sw).length ? sw : undefined;
+  // ---- Gassasin kit towns (Phase 1: pallet; Wave A: Kanto + route1) ----
+  // Kit canvases for opted-in maps, keyed cache.kitTowns[mapId] and
+  // consumed by resolveTileLayers' kit branch (docs/THIRD-PARTY-ART.md).
+  // Vegetation tiles pass through the KIT seasonal grade (seasons.mjs
+  // seasonalSwapForKit, fed by main.mjs): the shared grade's Autumn
+  // overshoot on the kit's deep greens is dampened back into our amber
+  // family there; roofs, logs, dirt and doors keep authored colors.
+  //
+  // PER-TOWN VARIANTS (B2-G9 anti-repetition law: no two towns share
+  // an identical house set): each town remaps the kit's structural
+  // colors onto a palette keyed to its existing TOWN_STYLE identity —
+  // roof shingles take the town's roof material (slate / stone /
+  // blue-tile / copper / glass-green / gold / dark shingle / thatch /
+  // basalt), log walls and door wood take town tones, and vegetation
+  // picks up a light tint of the town's ground anchor. Pallet is the
+  // reference town: authored kit colors, no remap (owner-approved).
+  const hexRgbOf = (hex) => [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)];
+  const mixHex = (hex, toward, f) => {
+    const a = hexRgbOf(hex), b = hexRgbOf(toward);
+    return '#' + a.map((v, i) => Math.max(0, Math.min(255, Math.round(v + (b[i] - v) * f))).toString(16).padStart(2, '0')).join('');
   };
-  const kitCv = (id, veg) => artCanvas(doc, id, 1, false, veg ? kitSwap(id) : undefined);
-  cache.kitTowns = {
-    pallet: {
-      grass: ['kit-grass-1', 'kit-grass-2', 'kit-grass-3'].map((id) => kitCv(id, true)).filter(Boolean),
-      path: ['kit-path-1', 'kit-path-2'].map((id) => kitCv(id, false)).filter(Boolean),
-      tall: kitCv('kit-tallgrass', true),
-      flora: kitCv('kit-flora', true),
-      canopy: kitCv('kit-canopy', true),
-      sign: kitCv('kit-sign', false),
-      roofL: kitCv('kit-roof-l', false), roofM: kitCv('kit-roof-m', false),
-      roofR: kitCv('kit-roof-r', false), roofDormer: kitCv('kit-roof-dormer', false),
-      wallPlain: kitCv('kit-wall-plain', false), wallWindow: kitCv('kit-wall-window', false),
-      door: kitCv('kit-door', false),
-    },
+  const KIT_VARIANTS = {
+    pallet: null, // reference: authored kit colors
+    viridian: { roof: ['#54687e', '#333f4f', '#7d92a8'], log: '#7d5226', door: '#46586e' }, // gabled slate
+    pewter: { roof: ['#8f887a', '#5b564d', '#ada697'], log: '#8a6f4d', door: '#6e675c' }, // flat stone parapet
+    cerulean: { roof: ['#2f639e', '#1e4069', '#6392c2'], log: '#7d5226', door: '#2e63b0' }, // mansard blue-tile
+    vermilion: { roof: ['#a8662f', '#6b3d17', '#cf9455'], log: '#8d5500', door: '#7a4a1f' }, // copper gable
+    celadon: { roof: ['#2f7d5c', '#1e5240', '#57a87e'], log: '#7d5a26', door: '#2e6e50' }, // glass dome green
+    saffron: { roof: ['#c9a227', '#7d5f14', '#e3c65a'], log: '#8a6428', door: '#a87f36' }, // gold spire
+    lavender: { roof: ['#4d3d63', '#2d2338', '#71618c'], log: '#6e4f2a', door: '#4a3a5e' }, // steep dark shingle
+    fuchsia: { roof: ['#b08d4f', '#6e5626', '#cfa860'], log: '#8d5f2b', door: '#96684a' }, // safari thatch
+    cinnabar: { roof: ['#7d3a34', '#452723', '#a96152'], log: '#7d4a2b', door: '#87493f' }, // basalt slab
   };
+  const KIT_VEG_IDS = new Set(['kit-grass-1', 'kit-grass-2', 'kit-grass-3', 'kit-tallgrass', 'kit-flora', 'kit-canopy']);
+  const kitSeasonFn = seasonKitSwapFor || seasonSwapFor;
+  const buildKitSet = (townId) => {
+    const variant = townId ? (KIT_VARIANTS[townId] || null) : null;
+    const anchor = townId && TOWN_STYLE[townId] ? TOWN_STYLE[townId].ground : null;
+    // hex -> hex remap for one kit entry under this town's variant:
+    // structural colors swap outright; vegetation greens tint toward
+    // the town's ground anchor (composed BEFORE the seasonal grade,
+    // so the grade acts on the town's own greens).
+    const remapFor = (id) => {
+      if (!variant) return null;
+      if (id.startsWith('kit-roof')) return { '#a03e00': variant.roof[0], '#531a00': variant.roof[1], '#8d5500': variant.roof[2] };
+      if (id.startsWith('kit-wall')) return { '#8d5500': variant.log };
+      if (id === 'kit-door' || id === 'kit-door-r') return { '#8d5500': variant.door };
+      if (id.startsWith('kit-path') || id === 'kit-sign') return { '#8d5500': variant.log };
+      if (KIT_VEG_IDS.has(id) && anchor) {
+        const a = KIT_ART[id];
+        if (!a || !a.pal) return null;
+        const m = {};
+        for (const hex of Object.values(a.pal)) {
+          const [r, g, b] = hexRgbOf(hex);
+          if (g > r && g > b) m[hex] = mixHex(hex, anchor, 0.18);
+        }
+        return Object.keys(m).length ? m : null;
+      }
+      return null;
+    };
+    const cvFor = (id) => {
+      const a = KIT_ART[id];
+      if (!a || !a.pal) return null;
+      const remap = remapFor(id);
+      let pal2 = a.pal;
+      if (remap) {
+        pal2 = {};
+        for (const ch of Object.keys(a.pal)) pal2[ch] = remap[a.pal[ch]] || a.pal[ch];
+      }
+      const graded = KIT_VEG_IDS.has(id) && kitSeasonFn ? kitSeasonFn(pal2) : null;
+      let swap = null;
+      for (const ch of Object.keys(a.pal)) {
+        const fin = (graded && graded[ch]) || pal2[ch];
+        if (fin !== a.pal[ch]) (swap = swap || {})[ch] = fin;
+      }
+      return artCanvas(doc, id, 1, false, swap || undefined);
+    };
+    const grassSet = ['kit-grass-1', 'kit-grass-2', 'kit-grass-3'].map(cvFor).filter(Boolean);
+    return {
+      grass: grassSet,
+      // Textured-only grass variants (kit-grass-1 is the kit's solid
+      // calm fill — right inside a lawn, but an ISOLATED cell of it
+      // reads as a flat hole): grassground clearings and prop
+      // underlays pick from these instead.
+      grassTex: grassSet.slice(1),
+      path: ['kit-path-1', 'kit-path-2'].map(cvFor).filter(Boolean),
+      tall: cvFor('kit-tallgrass'),
+      flora: cvFor('kit-flora'),
+      canopy: cvFor('kit-canopy'),
+      sign: cvFor('kit-sign'),
+      roofL: cvFor('kit-roof-l'), roofM: cvFor('kit-roof-m'),
+      roofR: cvFor('kit-roof-r'), roofDormer: cvFor('kit-roof-dormer'),
+      wallPlain: cvFor('kit-wall-plain'), wallWindow: cvFor('kit-wall-window'),
+      door: cvFor('kit-door'), doorR: cvFor('kit-door-r'),
+    };
+  };
+  cache.kitTowns = {};
+  for (const townId of Object.keys(KIT_VARIANTS)) cache.kitTowns[townId] = buildKitSet(townId);
+  cache.kitTowns.route1 = buildKitSet(null); // Pallet->Viridian corridor: reference kit dressing
   if (!cache.kitTowns.pallet.grass.length || !cache.kitTowns.pallet.door) delete cache.kitTowns;
   cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6', 'tile-grass-7', 'tile-grass-8', 'tile-grass-9', 'tile-grass-10']); // W5 TX-1: 10 base variants
   cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4', 'tile-tallgrass-5', 'tile-tallgrass-6']); // W5 TX-1: 6 tall variants
@@ -142871,6 +142959,59 @@ function buildArtTileCache(doc, seasonSwapFor) {
       upper: upperA ? artCanvas(doc, upperId, 1) : null,
       sideUpper: upperA ? artCanvas(doc, upperId, 1, false, swap) : null,
     };
+  }
+  // ---- Kit service buildings (Wave A) ----
+  // In kit towns the service buildings (Center / Mart / Gym / Lab)
+  // keep their authored silhouettes and signage — gameplay identity —
+  // but their palettes are re-graded into the kit family: a warm
+  // ochre mix over every color, with the shared trim wood and frame
+  // greys mapped onto the kit's log-dark and frame grey. One uniform
+  // set for all kit towns (the roofs above them carry the town
+  // variant); consumed by kitTownLayers' service branch, which
+  // mirrors the facade upper/side composition above.
+  const svcGradeHex = (hex) => {
+    if (hex === '#71523d') return '#3b2400'; // shared trim wood -> kit log dark
+    if (hex === '#757585' || hex === '#7c7c8d') return '#4e5048'; // frame greys -> kit frame
+    return mixHex(hex, '#8d5500', 0.14);
+  };
+  const svcSwapFor = (a, side) => {
+    if (!a || !a.pal) return undefined;
+    const swap = {};
+    for (const [ch, hex] of Object.entries(a.pal)) {
+      const g = svcGradeHex(hex);
+      swap[ch] = side ? shadeStep(g) : g;
+    }
+    return Object.keys(swap).length ? swap : undefined;
+  };
+  cache.kitSvc = { facade: {}, doors: {}, signs: {} };
+  for (const kind of Object.keys(FACADE_GROUPS)) {
+    const grp = FACADE_GROUPS[kind];
+    if (grp !== 'center' && grp !== 'mart' && grp !== 'gym' && grp !== 'lab') continue;
+    const baseId = TILE_ART[kind];
+    if (!baseId) continue;
+    const a = materializeArt(baseId);
+    if (!a) continue;
+    const upperId = baseId + '-upper';
+    const upperA = materializeArt(upperId);
+    cache.kitSvc.facade[kind] = {
+      base: artCanvas(doc, baseId, 1, false, svcSwapFor(a, false)),
+      side: artCanvas(doc, baseId, 1, false, svcSwapFor(a, true)),
+      upper: upperA ? artCanvas(doc, upperId, 1, false, svcSwapFor(upperA, false)) : null,
+      sideUpper: upperA ? artCanvas(doc, upperId, 1, false, svcSwapFor(upperA, true)) : null,
+    };
+  }
+  for (const [kind, grp] of Object.entries(DOOR_GROUP)) {
+    if (grp === 'house') continue; // house doors wear the kit door instead
+    const id = TILE_ART[kind];
+    if (!id) continue;
+    const cv = artCanvas(doc, id, 1, false, svcSwapFor(materializeArt(id), false));
+    if (cv) cache.kitSvc.doors[kind] = cv;
+  }
+  for (const kind of ['sign-gym', 'sign-mart', 'sign-lab', 'sign-center']) {
+    const id = TILE_ART[kind];
+    if (!id) continue;
+    const cv = artCanvas(doc, id, 1, false, svcSwapFor(materializeArt(id), false));
+    if (cv) cache.kitSvc.signs[kind] = cv;
   }
   cache.doorOpen = {};
   for (const [kind, id] of Object.entries(DOOR_OPEN_ART)) {
@@ -143110,19 +143251,28 @@ function atmoKeyFor(mapId) {
   return 'warm'; // every interior / dungeon-adjacent map: warmth
 }
 
-// ---- Gassasin kit towns (Phase 1) ----
-// The kit layer stack for one cell of an opted-in town, or null when
+// ---- Gassasin kit towns (Phase 1: pallet; Wave A: Kanto + route1) ----
+// The kit layer stack for one cell of an opted-in map, or null when
 // the kit does not cover the kind (the shipped resolver then composes
-// the cell as usual — lamps, props and signs keep their authored art
-// in a kit town). Buildings compose positionally from kit pieces:
+// the cell as usual). Buildings compose positionally from kit pieces:
 // a roof row reads left/mid/right across its contiguous run (the
-// landmark kind wears the dormer piece), a wall row reads plain-log
-// at the run's west end and the window piece at its east end, and the
-// door kind wears the kit door. Presentation only — no map data,
-// warp, or collision is touched.
+// landmark kind wears the dormer piece when a building stands south
+// of it, a window wall panel when it fronts open ground), a wall row
+// reads plain-log along the run and the window piece at its east
+// end, and house doors wear the kit door — the 2-wide entrances pair
+// it with its mirror as French doors. Service buildings (Center /
+// Mart / Gym / Lab) keep their authored silhouettes and signage,
+// re-graded into the kit family (cache.kitSvc). Dressing props keep
+// their authored art but stand on kit ground. Presentation only —
+// no map data, warp, or collision is touched.
+const KIT_PROP_KINDS = new Set(['lamp', 'crates', 'signpost', 'postbox', 'stall',
+  'waterpump', 'barrel', 'haycart', 'well', 'sacks', 'tub', 'bench', 'planter',
+  'birdbath', 'bikestand', 'pottedtree', 'sundial', 'gatepost', 'gatearch']);
+const KIT_SIGN_KINDS = ['sign-gym', 'sign-mart', 'sign-lab', 'sign-center'];
 function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
   const K = cache.kitTowns[mapId];
   const grassBase = pickVariant(K.grass, x, y, 13) || K.grass[0];
+  const pathBase = pickVariant(K.path, x, y, 21) || K.path[0] || grassBase;
   const run = (kinds) => {
     let c = 0;
     while (kinds.has(kindAt(x - c - 1, y))) c++;
@@ -143130,30 +143280,73 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
     while (kinds.has(kindAt(x + (last - c) + 1, y))) last++;
     return [c, last];
   };
+  const roofPiece = (kinds) => {
+    const [c, last] = run(kinds);
+    return c === 0 ? K.roofL : c === last ? K.roofR : K.roofM;
+  };
+  // Grounds & vegetation (town kinds + the generic route kinds).
+  // The generic 'path' kind is deliberately NOT dressed: it is the
+  // native sand road that runs town-to-route across the whole world
+  // (Pallet's approved streets are 'path' cells, and the kit's dirt
+  // would sever that continuity); tg2- town dirt wears the kit path.
   if (kind === 'tg-' + mapId) return [grassBase];
-  if (kind === 'tg2-' + mapId) return [pickVariant(K.path, x, y, 21) || K.path[0] || grassBase];
-  if (kind === 'tc-' + mapId) return [grassBase, K.canopy].filter(Boolean);
-  if (kind === 'td-' + mapId) return [grassBase, K.sign].filter(Boolean);
-  if (kind === 'flora-' + mapId) return [K.flora || grassBase];
+  if (kind === 'tg2-' + mapId) return [pathBase];
+  if (kind === 'tc-' + mapId || kind === 'tree') return [grassBase, K.canopy].filter(Boolean);
+  if (kind === 'td-' + mapId || kind === 'sign') return [grassBase, K.sign].filter(Boolean);
+  if (kind === 'flora-' + mapId || kind === 'flower') return [K.flora || grassBase];
   if (kind === 'grass') return [K.tall || grassBase];
-  if (kind === 'th-' + mapId) {
-    const [c, last] = run(new Set(['th-' + mapId, 'tl-' + mapId]));
-    return [c === 0 ? K.roofL : c === last ? K.roofR : K.roofM].filter(Boolean);
+  if (kind === 'grassground') return [pickVariant(K.grassTex, x, y, 29) || grassBase];
+  // Roofs: house rows (th-) read across their run including any sign
+  // seated in the row; service rows (tr-) read across their own run.
+  if (kind === 'th-' + mapId) return [roofPiece(new Set(['th-' + mapId, 'tl-' + mapId, ...KIT_SIGN_KINDS]))].filter(Boolean);
+  if (kind === 'tr-' + mapId) return [roofPiece(new Set(['tr-' + mapId, 'tl-' + mapId]))].filter(Boolean);
+  if (kind === 'tl-' + mapId) {
+    const s = kindAt(x, y + 1);
+    const archSouth = !!s && (isArchKind(s) || !!FACADE_GROUPS[s] || !!DOOR_GROUP[s]);
+    return [archSouth ? (K.roofDormer || K.roofM) : (K.wallWindow || K.wallPlain)].filter(Boolean);
   }
-  if (kind === 'tl-' + mapId) return [K.roofDormer || K.roofM].filter(Boolean);
+  if (KIT_SIGN_KINDS.includes(kind)) {
+    const sign = cache.kitSvc && cache.kitSvc.signs[kind];
+    return [roofPiece(new Set(['th-' + mapId, 'tl-' + mapId, ...KIT_SIGN_KINDS])), sign].filter(Boolean);
+  }
+  // House walls & doors (cabin composites). The wall run spans every
+  // house-door kind and the facade panel, so runs read whole.
+  const wallRun = new Set(['tw-' + mapId, 'door-house', 'door-wood-facade', 'door-brick', 'door-wood-l', 'door-wood-r', 'facade-panel']);
   if (kind === 'tw-' + mapId) {
-    const [c, last] = run(new Set(['tw-' + mapId, 'door-house']));
+    const [c, last] = run(wallRun);
     return [c === last && last > 0 ? K.wallWindow : K.wallPlain].filter(Boolean);
   }
-  if (kind === 'door-house') return [K.door].filter(Boolean);
+  if (kind === 'facade-panel') return [K.wallPlain].filter(Boolean);
+  if (kind === 'door-house' || kind === 'door-wood-facade' || kind === 'door-brick') return [K.door].filter(Boolean);
+  if (kind === 'door-wood-l') return [K.door].filter(Boolean);
+  if (kind === 'door-wood-r') return [K.doorR || K.door].filter(Boolean);
+  // Service buildings: kit-family grade, authored shape — the facade
+  // upper/side composition mirrors the shipped facade branch.
+  const SVC = cache.kitSvc;
+  if (SVC) {
+    if (SVC.facade[kind]) {
+      const grp = FACADE_GROUPS[kind];
+      const inGrp = (k) => !!k && (FACADE_GROUPS[k] === grp || DOOR_GROUP[k] === grp);
+      const fa = SVC.facade[kind];
+      const upper = inGrp(kindAt(x, y + 1) ?? kind);
+      const side = !inGrp(kindAt(x - 1, y) ?? kind) || !inGrp(kindAt(x + 1, y) ?? kind);
+      const cv = upper
+        ? (side ? (fa.sideUpper || fa.side) : (fa.upper || fa.base))
+        : (side && fa.side ? fa.side : fa.base);
+      return [cv].filter(Boolean);
+    }
+    if (SVC.doors[kind]) return [SVC.doors[kind]];
+  }
   // Dressing props keep their authored art (the kit has no lamp /
   // crates / postbox / stall), but they stand on KIT ground: without
   // this they would sit on the drawn town-ground tiles and read as
   // pale patches in a kit town. Underlay follows the ground family
   // south of the prop, as the shipped prop branch reads it.
-  if (kind === 'lamp' || kind === 'crates' || kind === 'signpost' || kind === 'postbox' || kind === 'stall') {
+  if (KIT_PROP_KINDS.has(kind)) {
     const s = kindAt(x, y + 1);
-    const under = s === 'tg2-' + mapId ? (pickVariant(K.path, x, y, 21) || grassBase) : grassBase;
+    let under = pickVariant(K.grassTex, x, y, 29) || grassBase;
+    if (s === 'tg2-' + mapId) under = pathBase;
+    else if (s === 'path') under = pickVariant(cache.pathVariants, x, y, 21) || cache.path || grassBase;
     return [under, cache.shadowProp, cache[kind]].filter(Boolean);
   }
   return null;
@@ -193005,6 +193198,41 @@ function seasonalSwapFor(pal) {
   return swap;
 }
 
+// ---- kit grade (Wave A, 2026-11-11) --------------------------------------
+// The adopted Gassasin kit's greens are far deeper than our authored
+// ramp (its grass is a pure #008100 against our #5da24a), and the
+// shared Autumn formula drives its red channel from the green — so on
+// kit palettes the grade overshoots into deep red (#a11c00, r:g 5.8:1)
+// where our own art lands in the amber family (r:g ~2.1:1, b ~0.28r).
+// The kit grade corrects ONLY that overshoot, and ONLY on the kit
+// path (engine/art.mjs feeds kit palettes through seasonalSwapForKit;
+// our own art keeps seasonalHex exactly): after the shared grade, a
+// red-dominant Autumn result is pulled back into the family band —
+// green floored at r/2.15, blue floored at 0.26r. Every other season
+// passes through untouched: the kit's Spring/Summer/Winter grades
+// already sit in the family (measured 2026-11-11).
+function seasonalHexKit(hex, seasonName) {
+  const graded = seasonalHex(hex, seasonName);
+  if (seasonName !== 'Autumn') return graded;
+  const rgb = hexToRgb(graded);
+  if (!rgb) return graded;
+  const [r, g, b] = rgb;
+  if (!(r > g)) return graded;
+  return rgbToHex(r, Math.max(g, r / 2.15), Math.max(b, r * 0.26));
+}
+
+// seasonalSwapFor for kit palettes (same contract as seasonalSwapFor).
+function seasonalSwapForKit(pal) {
+  if (!pal) return {};
+  const season = currentSeason().name;
+  const swap = {};
+  for (const ch of Object.keys(pal)) {
+    const graded = seasonalHexKit(pal[ch], season);
+    if (graded !== pal[ch]) swap[ch] = graded;
+  }
+  return swap;
+}
+
 
 // ---- src/game/ball-rules.mjs ----
 // ball-rules.mjs — Stage J6: apricorn-ball catch rules, ONE shared
@@ -209179,7 +209407,7 @@ class Game {
     this.store = new SaveStore();
     this.state = freshState();
     this.rng = makeRngStreams(nextSeed());
-    this.tileCache = buildArtTileCache(doc, seasonalSwapFor); // hand-authored tileset (art.mjs), season-graded vegetation; void -> solid fill
+    this.tileCache = buildArtTileCache(doc, seasonalSwapFor, seasonalSwapForKit); // hand-authored tileset (art.mjs), season-graded vegetation; void -> solid fill
     this.spriteCache = {};
     this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
     this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)
@@ -211357,6 +211585,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:e3924b703ca2e19b96053272e53c675398741d42f679261f7ba688ebd68404ae -->
+<!-- contentHash:4f85b3d5614de8d4e441ad81f799f7e03952b55e9d7ab13487f765fc637b62bd -->
 </body>
 </html>

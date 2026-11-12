@@ -224,3 +224,37 @@ Game Freak through official channels).
   the kit family per rollout rule 2), per-town roof/trim variants
   (rollout rule 1), and the run/bike/surf/fish player sets (no kit
   frames exist; Ash's sets still serve those modes).
+  Phase 1 MERGED to main 2026-11-11 (d83a228) and is live on Pages.
+  Wave A LANDED on branch art/kit-wave-a (2026-11-11, not merged):
+  (a) SEASONAL DAMPENING — the kit grade is now its own path
+  (seasons.mjs seasonalHexKit/seasonalSwapForKit, fed to the kit
+  canvases only): the shared Autumn formula's red-dominant output
+  on kit palettes is pulled into our amber family band (green
+  floored at r/2.15, blue at 0.26r; measured #a11c00 -> #a14b2a);
+  our own art's grade is untouched, and a pixel diff of Pallet
+  before/after shows ONLY vegetation colors moved. (b) KANTO
+  ROLLOUT — all nine remaining Kanto towns wear the kit with
+  per-town variants keyed to TOWN_STYLE (viridian slate, pewter
+  stone, cerulean blue-tile, vermilion copper, celadon glass-green,
+  saffron gold, lavender dark shingle, fuchsia thatch, cinnabar
+  basalt; vegetation tinted 18% toward each town's ground anchor).
+  Houses are positional cabin composites as in Pallet (2-wide
+  entrances pair the kit door with its pipeline mirror, kit-door-r,
+  as French doors); service buildings keep their silhouettes and
+  signage, re-graded into the kit family (cache.kitSvc: warm ochre
+  mix, trim wood -> kit log-dark, frame greys -> kit frame). The
+  generic 'path' kind stays native sand everywhere — it is the
+  inter-town road fabric (Pallet's approved streets are 'path'
+  cells) and the kit's dark dirt would sever that continuity.
+  (c) ROUTE 1 wears kit tall grass / canopy / flora for corridor
+  coherence; its road stays native sand. Isolated kit-grass cells
+  (grassground clearings, prop underlays) pick the textured grass
+  variants only — kit-grass-1 is a solid fill and reads as a hole
+  when isolated. Skin only throughout: audits green, slice 131/134
+  (same 3 pre-existing failures), all build gates green, and every
+  town + Route 1 visually graded through the shipped resolver
+  against the approved Pallet references. NOT yet: Johto/Hoenn/
+  Orange/Sevii towns and biomes (Wave B/C), interiors, night-lit
+  service windows in kit towns (kit branch supersedes litMap
+  there), and the warp-fade door-open frames (still authored art
+  in kit towns, as in Phase 1).
