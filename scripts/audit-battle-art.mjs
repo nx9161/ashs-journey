@@ -180,9 +180,24 @@ function analyze(s) {
     const [r, g, b] = hexRgb(hex);
     bins.add((r >> 6) * 16 + (g >> 6) * 4 + (b >> 6));
   }
+  // ribbon share (Wave J2): the fraction of opaque rows whose opaque
+  // count is <=5 px. The mass/wisp measures are blind to the sliver
+  // class — a creature carried on a 2px-wide ribbon (measured:
+  // VIGILET, 0.41/0.38) has healthy mass, ~0 thin fraction (ribbon
+  // pixels keep 2 vertical neighbours), and a normalized silhouette.
+  // Roster calibration: next-highest view is LANCEWASP 0.31 (wasp
+  // waist + stinger, reads fine); the 0.31-0.38 band is empty, the
+  // FAIL line sits mid-band at 0.35.
+  let opaqueRows = 0, ribbonRows = 0;
+  for (let y = 0; y < h; y++) {
+    let n = 0;
+    for (let x = 0; x < w; x++) if (at(x, y)) n++;
+    if (n > 0) { opaqueRows++; if (n <= 5) ribbonRows++; }
+  }
   const oc = outlineOk(s);
   return {
     mass, thinFrac: mass ? thin / mass : 1, detached, specks,
+    ribbonFrac: opaqueRows ? ribbonRows / opaqueRows : 0,
     colors: counts.size, steps, outlineOk: oc.ok, outlineBad: oc.bad || 0,
     orphans: orphanCount(s), sig, bins,
     colorSet: new Set([...counts.keys()].filter((hex) => hex !== outlineHex)),
@@ -221,6 +236,7 @@ for (const id of QUEUE) {
   const check = (view, A) => {
     if (A.mass < 400) reasons.push(`${view} mass ${A.mass} < 400`);
     if (A.thinFrac > 0.35) reasons.push(`${view} wisp ${(A.thinFrac * 100).toFixed(0)}% > 35%`);
+    if (A.ribbonFrac > 0.35) reasons.push(`${view} ribbon share ${A.ribbonFrac.toFixed(2)} > 0.35 (presence carried on <=5px rows)`);
     if (A.specks > 0) reasons.push(`${view} ${A.specks} speck component(s) < 9px`);
     if (A.detached > 4) reasons.push(`${view} ${A.detached} detached components > 4`);
     if (!A.outlineOk) reasons.push(`${view} outline breaks (${A.outlineBad}px)`);
@@ -245,8 +261,8 @@ for (const id of QUEUE) {
     id, name: REG[id].name, dex: dexOf[id] || null, tier: tierOf(id),
     queue: records.length + 1, grade, reasons, pairJac: +pairJac.toFixed(3),
     design, designOk: !!designOk,
-    front: { mass: F.mass, thin: +F.thinFrac.toFixed(3), colors: F.colors, steps: F.steps, detached: F.detached, specks: F.specks },
-    back: { mass: B.mass, thin: +B.thinFrac.toFixed(3), colors: B.colors, steps: B.steps, detached: B.detached, specks: B.specks },
+    front: { mass: F.mass, thin: +F.thinFrac.toFixed(3), colors: F.colors, steps: F.steps, detached: F.detached, specks: F.specks, ribbon: +F.ribbonFrac.toFixed(3) },
+    back: { mass: B.mass, thin: +B.thinFrac.toFixed(3), colors: B.colors, steps: B.steps, detached: B.detached, specks: B.specks, ribbon: +B.ribbonFrac.toFixed(3) },
     _F: F, _B: B, _front: front, _back: back,
   });
 }
@@ -350,6 +366,7 @@ if (mdPath) {
   L.push('- The silhouette signature is an aspect-preserving 16x16 fit with a 35% coverage floor. The first pass (any-hit over the raw bbox) saturated and flagged 742 pairs; the shipped numbers are from the calibrated signature.', '');
   L.push('- Components are 8-connected: pixel art joins tails/whiskers/flames diagonally, and 4-connectivity shatters them into false specks (the repo orphan rule is likewise 8-based). Specks that remain are genuinely detached at render.', '');
   L.push('- PRIMARA correction: the Wave G sheet grade called it wispy. Measured: mass 513/602 and wisp 1.8% are FINE. Its failure is value depth (2 steps — pale on pale) + 2 front specks. The flat-shading class, not the mass class.', '');
+  L.push('- Ribbon share (Wave J2 addendum): rows carrying <=5 opaque px, as a share of opaque rows. The mass/wisp/silhouette measures are all blind to the sliver class (a 2px ribbon keeps 2 vertical neighbours per pixel, and the signature normalizes its bbox away). VIGILET measured 0.41/0.38 — the roster outlier; next-highest view LANCEWASP 0.31. FAIL line 0.35 sits in the empty 0.31-0.38 band, so no previously-graded record changes class under the new rule.', '');
   L.push('- Flag dispositions are decided per tranche, in three classes: clear twins -> junior redesign; evolution-line pairs -> strengthen the junior\'s escalation element; back-view-only collisions -> an authored back marking. The gate flags; it does not auto-condemn.', '');
   L.push('## Redraw tranches (queue order over the FAIL + flag-junior set)', '');
   const redrawSet = records.filter((r) => r.grade === 'FAIL' || flags.some((f) => !f.exempt && f.junior === r.id));
