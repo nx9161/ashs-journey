@@ -29,7 +29,7 @@
 // the marked seam.
 // ---------------------------------------------------------------------------
 export const HOENN_QUESTS = [
-  { id: 'q_hoenn_rescue', flag: 'birch_rescued', text: 'Help Professor Birch — something is chasing him near Rootlet', hint: 'Shouting, just off the Rootlet road. A wild Poochyena has the professor cornered — drive it off.' },
+  { id: 'q_hoenn_rescue', flag: 'birch_rescued', text: 'Help Professor Birch — something is chasing him near Rootlet', hint: 'Shouting, just off the Rootlet road. A wild UMBHYEN has the professor cornered — drive it off.' },
   { id: 'q_hoenn_arrival', flag: 'hoenn_arrival', text: 'Meet Professor Birch in his Rootlet lab', hint: 'Birch\'s lab stands at the north edge of Rootlet. He owes you a proper welcome — and your Maris journey needs registering.' },
   { id: 'q_hoenn_wally', flag: 'wally_helped', text: 'Help Wally catch his first Kin in Meadowbrook', hint: 'A frail boy in Meadowbrook wants to catch a Kin of his own before his family moves. He has the heart; he needs a borrowed partner and a steady friend.' },
   { id: 'q_hoenn_stone', flag: 'badge_stone', text: 'Win the Stone Badge from Roxanne in Copperton City', hint: 'Roxanne keeps Copperton\'s gym with Rock types raised from the quarry stone itself. Water, Grass, Fighting, Ground and Steel moves crack them.' },
@@ -427,8 +427,8 @@ export const HOENN_TRAINERS = {
   // --- H4b: Wally, grown (Crown Road, in-band 286-292) ---
   wally_final: {
     id: 'wally_final', name: 'Wally', title: 'Trainer', ai: 'smart',
-    intro: ['You remembered my name kindly, {player}. I have thought about how this sentence ends for a whole region: not with thanks. With a battle. Ralts is a Gardevoir now, and my hands do not shake at the wrong moments anymore. They shake at the right ones. Face me — the way I always meant to face you.'],
-    lose: ['There it is. There is the whole road, in one battle: the pond grass, the borrowed Zigzagoon, and THIS. I am not the boy who needed help standing anymore — and you are still the trainer who helped him stand. Both of those are true. The league doors are yours. Mine will keep. I will be right behind you, forever, one road back and closing.'],
+    intro: ['You remembered my name kindly, {player}. I have thought about how this sentence ends for a whole region: not with thanks. With a battle. PSYLET is a AEGISFAE now, and my hands do not shake at the wrong moments anymore. They shake at the right ones. Face me — the way I always meant to face you.'],
+    lose: ['There it is. There is the whole road, in one battle: the pond grass, the borrowed FURCOON, and THIS. I am not the boy who needed help standing anymore — and you are still the trainer who helped him stand. Both of those are true. The league doors are yours. Mine will keep. I will be right behind you, forever, one road back and closing.'],
     team: [
       { species: 'altaria', level: 286 },
       { species: 'delcatty', level: 288 },
@@ -507,21 +507,21 @@ export const HOENN_TRAINERS = {
 export const HOENN_EVENTS = {
   // -- Rootlet: the rescue (first littleroot entry) ----------------
   // The Advanced opening, adapted to a carried-team reality: the wild
-  // Poochyena is a band-floor face the player's veteran team drives
+  // UMBHYEN is a band-floor face the player's veteran team drives
   // off — the beat is Birch's peril and gratitude, not a starter pick.
   // A flee stalls the chain (nothing set), so it re-fires on entry.
   ev_hoenn_rescue: [
-    { say: ['Shouting — close, and getting closer. Around the bend of the Rootlet road a man in a lab coat is backed against the fence line, briefcase held up like a very small shield, while a wild Poochyena worries at the hem of his coat with the total confidence of the young and territorial.'], who: 'NARRATOR' },
+    { say: ['Shouting — close, and getting closer. Around the bend of the Rootlet road a man in a lab coat is backed against the fence line, briefcase held up like a very small shield, while a wild UMBHYEN worries at the hem of his coat with the total confidence of the young and territorial.'], who: 'NARRATOR' },
     { say: ['You — trainer! Yes, you, with the team that walks like it has somewhere to be! A hand, if you would! This youngster objects to my fieldwork, my footwear, and my entire profession, in that order!'], who: 'PROF. BIRCH' },
     { wildBattle: { species: 'poochyena', level: 203, uncatchable: true } },
-    { say: ['Gone — over the fence and into the long grass, dignity intact on exactly one side of this encounter. ...Thank you. Sincerely. Professor Birch, of the Rootlet lab — you have caught me at my most empirical.', 'Come to the lab, trainer. Proper thanks, a proper registration, and a chair that no Poochyena has opinions about. North side of town. I will put the kettle on and pretend this never happens weekly.'], who: 'PROF. BIRCH' },
+    { say: ['Gone — over the fence and into the long grass, dignity intact on exactly one side of this encounter. ...Thank you. Sincerely. Professor Birch, of the Rootlet lab — you have caught me at my most empirical.', 'Come to the lab, trainer. Proper thanks, a proper registration, and a chair that no UMBHYEN has opinions about. North side of town. I will put the kettle on and pretend this never happens weekly.'], who: 'PROF. BIRCH' },
     { flag: 'birch_rescued' },
-    { toast: 'You drove off the Poochyena!' },
+    { toast: 'You drove off the UMBHYEN!' },
   ],
 
   // -- Birch's lab: the arrival (first birch-lab entry) --------------
   ev_hoenn_arrival: [
-    { say: ['Birch\'s lab smells of kettle steam, field mud, and paper — a working lab, not a showroom. Assistants weave between specimen shelves with the ease of people who have dodged the same Poochyena-shaped hazards for years.'], who: 'NARRATOR' },
+    { say: ['Birch\'s lab smells of kettle steam, field mud, and paper — a working lab, not a showroom. Assistants weave between specimen shelves with the ease of people who have dodged the same UMBHYEN-shaped hazards for years.'], who: 'NARRATOR' },
     { say: ['There. Registered, stamped, and entirely official: your Maris journey begins in this lab, with a rescued professor as its first entry. Professor Hawthorn wrote ahead, you know. The letter just said: "He walks far and arrives kind. Register whatever he asks."', 'You will want the gym road: Meadowbrook first — mind young Wally there, he is frailer than he looks and braver than he knows — then Copperton, and Roxanne. And a warning from my own fieldwork: Maris is arguing with itself this year. Land people, sea people, and weather that cannot pick a side. Walk carefully, and walk anyway.'], who: 'PROF. BIRCH' },
     { say: ['Oh — and my neighbor\'s girl, May, is somewhere about town. A beginning coordinator, all nerves and ribbon dreams. If a contest hall ever crosses your road, trainer, that is her world the way gyms are yours. You might learn something in the seats. She would die before saying so, but she hopes you come.'], who: 'PROF. BIRCH' },
     { flag: 'hoenn_arrival' },
@@ -561,19 +561,19 @@ export const HOENN_EVENTS = {
   // Team Aqua holds the Institute for its rain records (our staging
   // of the canon institute beat). battleAny: the story survives
   // either way; the records are freed regardless, and the grateful
-  // staff hand over the Institute's own Castform — canon's gift, and
-  // Castform's obtainable source in this game (flagged for H6/H7:
+  // staff hand over the Institute's own NIMBULET — canon's gift, and
+  // NIMBULET's obtainable source in this game (flagged for H6/H7:
   // castform_received; species dex 351, ONE entry, no formes —
   // ruling 2).
   ev_hoenn_institute: [
     { say: ['The Weather Institute stands over Route 119\'s rain like a lighthouse over a harbour — and today its windows are watched by blue scarves. Inside, the great rain-gauges tick in a held breath of a room, and a researcher with a clipboard meets you at the door at a run.'], who: 'NARRATOR' },
-    { say: ['They came an hour ago — polite, at first. Drought records, deluge records, a hundred years of sky, and they would not say WHY. Then polite ran out. Their admin is upstairs with our director and our Castform, and the stairs are watched. Trainer — please. The sky is the one thing this valley reads honestly. Do not let them make it a weapon with footnotes.'], who: 'INSTITUTE DIRECTOR\'S AIDE' },
+    { say: ['They came an hour ago — polite, at first. Drought records, deluge records, a hundred years of sky, and they would not say WHY. Then polite ran out. Their admin is upstairs with our director and our NIMBULET, and the stairs are watched. Trainer — please. The sky is the one thing this valley reads honestly. Do not let them make it a weapon with footnotes.'], who: 'INSTITUTE DIRECTOR\'S AIDE' },
     { battleAny: { trainer: 'aqua_admin_institute', winFlag: 'institute_aqua_won', loseFlag: 'institute_aqua_lost' } },
-    { say: ['Win or lose, the moment breaks the takeover\'s nerve: word runs down the stairs that the road has arrived in force, the blue scarves pour out into the rain they came to study, and the Institute exhales all at once — gauges ticking, kettle on, a hundred years of sky safe in its ledgers.', 'From the director, with the whole staff behind her: "Our Castform has lived in this building\'s weather all its life — it has never once been surprised by the sky. Take it with you, trainer. Where you are going, the sky is about to do things our ledgers have no columns for. It should have a witness it trusts."'], who: 'NARRATOR' },
+    { say: ['Win or lose, the moment breaks the takeover\'s nerve: word runs down the stairs that the road has arrived in force, the blue scarves pour out into the rain they came to study, and the Institute exhales all at once — gauges ticking, kettle on, a hundred years of sky safe in its ledgers.', 'From the director, with the whole staff behind her: "Our NIMBULET has lived in this building\'s weather all its life — it has never once been surprised by the sky. Take it with you, trainer. Where you are going, the sky is about to do things our ledgers have no columns for. It should have a witness it trusts."'], who: 'NARRATOR' },
     { giveMon: { species: 'castform', level: 258 } },
     { flag: 'institute_done' },
     { flag: 'castform_received' },
-    { toast: 'The Weather Institute is free — and Castform joined you!' },
+    { toast: 'The Weather Institute is free — and NIMBULET joined you!' },
   ],
 
   // -- Mt. Requiem: the orbs taken (entry, Mind Badge held) --------------
@@ -621,20 +621,20 @@ export const HOENN_EVENTS = {
   // chamber first (the depth sounding from the hideout console) and
   // Maxie, out of patience with the surface, lets the red orb's
   // leash go in the one place land and sea are the same pressure.
-  // Groudon wakes: climax_drought SET (the deluge flag is not set;
+  // TERRATITAN wakes: climax_drought SET (the deluge flag is not set;
   // the phases never overlap — see the standoff event).
   ev_hoenn_seafloor: [
     { say: ['The Sunken Cavern is not a cave. It is a held breath the ocean has been holding since the world was young — basalt chambers, water the colour of bottled night, and at its heart a floor that is warm through boot leather. Red scarves have been here. Red scarves are GONE from here, which is worse: their instruments stand abandoned mid-reading, needles pegged, in a silence that is getting hotter.'], who: 'NARRATOR' },
     { battleAny: { trainer: 'maxie', winFlag: 'seafloor_maxie_won', loseFlag: 'seafloor_maxie_lost' } },
-    { say: ['Whatever the battle\'s verdict, it arrives one heartbeat too late to matter. Maxie — scorched, exultant, halfway to a sermon — holds the red orb up to the chamber\'s heart the way a key is held up to a lock. "The leash," he says, almost gently, "was never for holding. It was for CHOOSING THE MOMENT."', 'The floor answers. Not an earthquake — earthquakes end. This is a waking: heat rolling up through basalt like a sunrise through a wall, light the colour of a kiln\'s heart, and a shape older than the sea floor itself rising out of the world\'s oldest ground with the sun already gathering at its shoulders. Groudon does not roar. The SKY roars for it, all across Maris, as the rain simply... stops. Everywhere. At once.', 'Maxie is gone into the light and the steam, laughing or weeping — the cavern does not say. What it says, in heat shimmer and falling dust, is simpler: get to the surface. Get to Craterlake. A titan is walking toward the sea, and the sea has never once in its life intended to be walked on.'], who: 'NARRATOR' },
+    { say: ['Whatever the battle\'s verdict, it arrives one heartbeat too late to matter. Maxie — scorched, exultant, halfway to a sermon — holds the red orb up to the chamber\'s heart the way a key is held up to a lock. "The leash," he says, almost gently, "was never for holding. It was for CHOOSING THE MOMENT."', 'The floor answers. Not an earthquake — earthquakes end. This is a waking: heat rolling up through basalt like a sunrise through a wall, light the colour of a kiln\'s heart, and a shape older than the sea floor itself rising out of the world\'s oldest ground with the sun already gathering at its shoulders. TERRATITAN does not roar. The SKY roars for it, all across Maris, as the rain simply... stops. Everywhere. At once.', 'Maxie is gone into the light and the steam, laughing or weeping — the cavern does not say. What it says, in heat shimmer and falling dust, is simpler: get to the surface. Get to Craterlake. A titan is walking toward the sea, and the sea has never once in its life intended to be walked on.'], who: 'NARRATOR' },
     { flag: 'seafloor_done' },
     { flag: 'groudon_woken' },
     { flag: 'climax_drought' },
-    { toast: 'Groudon has woken. The drought begins.' },
+    { toast: 'TERRATITAN has woken. The drought begins.' },
   ],
 
   // -- Craterlake: the answer + the standoff (entry, Seafloor done) --
-  // CLIMAX PHASE 2 — DELUGE. Kyogre answers: the drought flag is
+  // CLIMAX PHASE 2 — DELUGE. ABYSSORCA answers: the drought flag is
   // CLEARED and the deluge flag SET by this scene's steps (the
   // clearFlag steps below), so the renderer phases sun -> rain and
   // the two flags never stand together (the weather module's
@@ -644,37 +644,37 @@ export const HOENN_EVENTS = {
   // H6's, opened by climax_resolved).
   ev_hoenn_standoff: [
     { say: ['Craterlake, from below: a crater lake under a sun that has forgotten how to set, the city\'s white walls shimmering, its people gathered along the water stairs being calm in the specific way of people who have decided to be calm together. The lake is warm. The lake is rising. The lake, a fisherman says to no one, has a heartbeat today.'], who: 'NARRATOR' },
-    { say: ['It comes over the crater rim the way weather used to come when the world was newer: a wall of water with a mind in it, blue as the first deep, and the drought\'s white sky breaks above it like a held note breaking. Kyogre has answered. Rain returns to Maris all at once, everywhere, at war with the sun — and between the two titans, in a crater full of steam and screaming gulls, stands one small white city, holding its breath in chorus.'], who: 'NARRATOR' },
+    { say: ['It comes over the crater rim the way weather used to come when the world was newer: a wall of water with a mind in it, blue as the first deep, and the drought\'s white sky breaks above it like a held note breaking. ABYSSORCA has answered. Rain returns to Maris all at once, everywhere, at war with the sun — and between the two titans, in a crater full of steam and screaming gulls, stands one small white city, holding its breath in chorus.'], who: 'NARRATOR' },
     { clearFlag: 'climax_drought' },
     { flag: 'climax_deluge' },
     { flag: 'kyogre_answered' },
     { say: ['The standoff does not resolve. That is its horror and its mercy: two old answers to the world\'s first question, glaring at each other across a city neither has yet chosen to step on, while the sky tears itself between drought and deluge fast enough to see. An old keeper is waiting by the Worldroot Cave\'s mouth, trainer, and she is looking at you the way people look at the last page of a letter.'], who: 'NARRATOR' },
     { flag: 'standoff_seen' },
-    { toast: 'Kyogre has answered. The standoff holds — for now.' },
+    { toast: 'ABYSSORCA has answered. The standoff holds — for now.' },
   ],
 
-  // -- Tempest Tower: Rayquaza descends (entry, standoff seen) ----------
-  // CLIMAX RESOLUTION. Rayquaza wakes and descends; BOTH climax
+  // -- Tempest Tower: STRATOWYRM descends (entry, standoff seen) ----------
+  // CLIMAX RESOLUTION. STRATOWYRM wakes and descends; BOTH climax
   // flags are CLEARED by this scene's steps, so the renderer falls
   // back to per-map fields region-wide (asserted by the suite).
   // climax_resolved is THE flag H6 keys its titan catch arcs off:
   // set exactly here, never earlier.
   ev_hoenn_rayquaza: [
     { say: ['The Tempest Tower has stood east of Driftlog since before there were charts to leave it off of, and its top floor has been slept on, all these centuries, by the sky\'s own answer to the argument below. You climb through weather that cannot decide what it is — rain falling UP past the broken roof-slabs, sunlight arriving in rain\'s clothing — and at the summit, the green serpent of the upper air uncoils from its ring of old stone and considers you the way the horizon considers a ship.'], who: 'NARRATOR' },
-    { say: ['Rayquaza does not battle you. Rayquaza does not even, in any sense the ledgers keep, notice you — and somehow that is the most reassuring thing that has ever happened on this mountain of air. It rises. It shines, once, the green of deep water seen from above. Then the sky over Maris simply... opens its hand, and the serpent goes down into the standoff like a verdict coming home.'], who: 'NARRATOR' },
+    { say: ['STRATOWYRM does not battle you. STRATOWYRM does not even, in any sense the ledgers keep, notice you — and somehow that is the most reassuring thing that has ever happened on this mountain of air. It rises. It shines, once, the green of deep water seen from above. Then the sky over Maris simply... opens its hand, and the serpent goes down into the standoff like a verdict coming home.'], who: 'NARRATOR' },
     { say: ['What the city saw, it will tell for a hundred years: the green light between the titans, the drought guttering out like a candle, the deluge softening to ordinary rain, two old answers turning — slowly, sullenly, ALIVE and unharmed and uncaught — back toward the deep places they came from. The weather over Maris becomes weather again: local, arguable, kind. The region breathes. So, eventually, do you.'], who: 'NARRATOR' },
     { clearFlag: 'climax_drought' },
     { clearFlag: 'climax_deluge' },
     { flag: 'rayquaza_descended' },
     { flag: 'climax_resolved' },
-    { toast: 'Rayquaza descended. The clash of titans is over.' },
+    { toast: 'STRATOWYRM descended. The clash of titans is over.' },
   ],
 
   // ================= Stage H6: legendary arcs =================
   // The ten faces. Every face rides the shipped catch-only chain
   // ({ wildBattleCatch } — flee OR KO stalls the event with nothing
   // set, so the encounter re-fires until the species is CAUGHT; arc
-  // completion = the catch). The weather trio + Rayquaza key off
+  // completion = the catch). The weather trio + STRATOWYRM key off
   // climax_resolved (set ONLY by ev_hoenn_rayquaza above): their
   // climax roles were appearances, no catch state existed — H6 opens
   // every catch. Levels ride the late band (285-300).
@@ -684,7 +684,7 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'regirock', level: 285, legendary: true } },
     { arc: 'arc_regirock', stage: 'complete' },
     { flag: 'arc_regirock_done' },
-    { toast: 'Regirock is yours. The tomb settles back into its long, unbothered silence.' },
+    { toast: 'PETRAGOLEM is yours. The tomb settles back into its long, unbothered silence.' },
   ],
   ev_hoenn_regice: [
     { say: ['The inner chamber is a held breath of blue-white. The cold coming off the figure at its heart is not weather — it is a decision, made a very long time ago, to never melt. Crystals tick and settle in its surface like a slow clock.', 'Seven lights wake in its featureless face, one by one, the way stars come out. It has been cold for three thousand years. It can spare you a battle.'], who: 'NARRATOR' },
@@ -692,7 +692,7 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'regice', level: 285, legendary: true } },
     { arc: 'arc_regice', stage: 'complete' },
     { flag: 'arc_regice_done' },
-    { toast: 'Regice is yours. Behind you, the cave\'s cold softens by one honest degree.' },
+    { toast: 'CRYOGOLEM is yours. Behind you, the cave\'s cold softens by one honest degree.' },
   ],
   ev_hoenn_registeel: [
     { say: ['The inner chamber gleams dully, every surface worn smooth by centuries of stillness. At its heart, something the colour of old iron unfolds from a crouch it has held since the cliff above was young — slowly, joint by joint, like a gate deciding to be a guardian instead.', 'Seven lights arrange themselves in its face. The metal of it is wrong for any forge: too dark, too patient, fallen out of the sky before there were smiths to wonder at it.'], who: 'NARRATOR' },
@@ -700,9 +700,9 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'registeel', level: 285, legendary: true } },
     { arc: 'arc_registeel', stage: 'complete' },
     { flag: 'arc_registeel_done' },
-    { toast: 'Registeel is yours. The tomb\'s gleam dims, its long watch handed over.' },
+    { toast: 'SIDEROGOLEM is yours. The tomb\'s gleam dims, its long watch handed over.' },
   ],
-  // Latias: the roaming face — fired by the sysLoadMap roam hook
+  // RUBIAVIS: the roaming face — fired by the sysLoadMap roam hook
   // when the player enters whichever staged landing she currently
   // holds (the rotation rides the persisted walked-step counter).
   ev_hoenn_latias: [
@@ -711,17 +711,17 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'latias', level: 290, legendary: true } },
     { arc: 'arc_latias', stage: 'complete' },
     { flag: 'arc_latias_done' },
-    { toast: 'Latias is yours. The red streak over Maris has a name in your log now — and a home.' },
+    { toast: 'RUBIAVIS is yours. The red streak over Maris has a name in your log now — and a home.' },
   ],
-  // Latios: the event face at the Eon stop (the Ebbtide Cave island
+  // AZURAVIS: the event face at the Eon stop (the Ebbtide Cave island
   // shore on Route 125), fired by the sysOnStep shore hook.
   ev_hoenn_latios: [
-    { say: ['The island\'s shore is quiet in the particular way of a place that is waited-in. Then the water offshore stands up in a clean blue line, and the line has wings, and the wings have opinions about you.', 'Latios folds out of his own speed at the tideline and regards you with the bright, measuring calm of something that has watched this shore for a very long time, waiting to see who would finally think to land on it.'], who: 'NARRATOR' },
+    { say: ['The island\'s shore is quiet in the particular way of a place that is waited-in. Then the water offshore stands up in a clean blue line, and the line has wings, and the wings have opinions about you.', 'AZURAVIS folds out of his own speed at the tideline and regards you with the bright, measuring calm of something that has watched this shore for a very long time, waiting to see who would finally think to land on it.'], who: 'NARRATOR' },
     { arc: 'arc_latios', stage: 'active' },
     { wildBattleCatch: { species: 'latios', level: 290, legendary: true } },
     { arc: 'arc_latios', stage: 'complete' },
     { flag: 'arc_latios_done' },
-    { toast: 'Latios is yours. The Eon stop keeps its quiet — it is just sharing it now.' },
+    { toast: 'AZURAVIS is yours. The Eon stop keeps its quiet — it is just sharing it now.' },
   ],
   ev_hoenn_groudon: [
     { say: ['The hideout\'s foundry floors are cold. Its owners are gone. But the magma pool at the back of the deep chamber is NOT cold, and it is not still, and as you come down the last slope it begins, unmistakably, to rise.', 'It withdrew here when the sky settled its argument — back to the earth\'s own heat, to sleep the way continents sleep. It is not asleep now. The pool stands up in red-black armour, and the whole mountain remembers whose house this actually is.'], who: 'NARRATOR' },
@@ -729,7 +729,7 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'groudon', level: 298, legendary: true } },
     { arc: 'arc_groudon', stage: 'complete' },
     { flag: 'arc_groudon_done' },
-    { toast: 'Groudon is yours. The magma pool settles, ordinary as a forge at closing time.' },
+    { toast: 'TERRATITAN is yours. The magma pool settles, ordinary as a forge at closing time.' },
   ],
   ev_hoenn_kyogre: [
     { say: ['The trench water below the dive light is doing something water should not do: it is holding a shape. A vast shape. The shape opens one eye the size of a porthole in the blue dark, and the pressure of its attention arrives a half-second before the sight of it does.', 'It sleeps here, in the deep it nearly drowned the world with — and it has decided, in the unhurried way of tides, to see what the trainer who ended the deluge actually is. The trench holds its breath. So does everything in it.'], who: 'NARRATOR' },
@@ -737,19 +737,19 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'kyogre', level: 298, legendary: true } },
     { arc: 'arc_kyogre', stage: 'complete' },
     { flag: 'arc_kyogre_done' },
-    { toast: 'Kyogre is yours. The trench exhales, slow as a sleeping tide.' },
+    { toast: 'ABYSSORCA is yours. The trench exhales, slow as a sleeping tide.' },
   ],
   // The catch face — NOT ev_hoenn_rayquaza (that was the climax
   // appearance, an uncatchable descent). This is the return ascent.
   ev_hoenn_rayquaza_face: [
-    { say: ['The pillar is quieter than your first climb — no argument below for its sleeper to settle, only wind, coming home to roost. At the summit the ring of old stone is empty for exactly one heartbeat.', 'Then the sky folds, green as deep water seen from above, and Rayquaza is coiled in its ring again, considering you with the total, courteous attention of the oldest thing in Maris\'s sky. It descended once for the world. This time, it has come down for you.'], who: 'NARRATOR' },
+    { say: ['The pillar is quieter than your first climb — no argument below for its sleeper to settle, only wind, coming home to roost. At the summit the ring of old stone is empty for exactly one heartbeat.', 'Then the sky folds, green as deep water seen from above, and STRATOWYRM is coiled in its ring again, considering you with the total, courteous attention of the oldest thing in Maris\'s sky. It descended once for the world. This time, it has come down for you.'], who: 'NARRATOR' },
     { arc: 'arc_rayquaza', stage: 'active' },
     { wildBattleCatch: { species: 'rayquaza', level: 300, legendary: true } },
     { arc: 'arc_rayquaza', stage: 'complete' },
     { flag: 'arc_rayquaza_done' },
-    { toast: 'Rayquaza is yours. The summit wind, for once, has nothing to say.' },
+    { toast: 'STRATOWYRM is yours. The summit wind, for once, has nothing to say.' },
   ],
-  // Jirachi I: the star fall, witnessed at Comet Falls once the
+  // ASTRAEON I: the star fall, witnessed at Comet Falls once the
   // Space Center\'s news is in hand (entry gate in sysLoadMap).
   ev_hoenn_jirachi_witness: [
     { say: ['The falls are loud the way they always are — and then, for exactly three seconds, they are not the loudest thing in the cave. Light comes down the north shaft in a clean white line, unhurried, deliberate: a star, falling indoors, on appointment.', 'It lands beyond the lower falls without a sound, and the spray where it fell keeps glowing faintly, like the water is remembering it. The Space Center said a Wish Maker wakes beneath the comet. The comet, it seems, has sent a piece of itself ahead — down there. By the meteorstone. Go and be polite.'], who: 'NARRATOR' },
@@ -757,7 +757,7 @@ export const HOENN_EVENTS = {
     { flag: 'jirachi_star_fell' },
     { toast: 'A star fell at Comet Falls. Something small is waking by the lower falls.' },
   ],
-  // Jirachi II: the wish beat at the lower-falls meteorstone
+  // ASTRAEON II: the wish beat at the lower-falls meteorstone
   // (13,11), fired by the meteorstone interact once the star fell.
   ev_hoenn_jirachi: [
     { say: ['The meteorstone is warm. Curled against it, no bigger than a secret, is a small yellow shape with streamers like ribbons on a parcel — asleep on its feet, swaying, humming a note you feel in your teeth more than hear.', 'One eye opens. Then the other. Then the third one — the true one, in its belly, the one that hears wishes the way ears hear thunder — and the little Wish Maker looks at you, looks at the comet going over far above, and makes a decision older than the Space Center, older than the falls: a wish is only real if somebody has to work for it. Catch, then. Earn the wish.'], who: 'NARRATOR' },
@@ -765,9 +765,9 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'jirachi', level: 292, legendary: true } },
     { arc: 'arc_jirachi', stage: 'complete' },
     { flag: 'arc_jirachi_done' },
-    { toast: 'Jirachi is yours. Somewhere above the falls, a comet files the wish away under "answered".' },
+    { toast: 'ASTRAEON is yours. Somewhere above the falls, a comet files the wish away under "answered".' },
   ],
-  // Deoxys: the crater face at the north-chamber meteorite (21,4),
+  // XENOGENE: the crater face at the north-chamber meteorite (21,4),
   // fired by the meteorstone interact once the rumour is in hand.
   ev_hoenn_deoxys: [
     { say: ['The crater meteorite is not warm the way sun-warmed stone is warm. It is warm the way a held hand is warm — recently, and on purpose. As you reach it, the stone\'s heart answers with light: a core of orange fire, unfolding out of the rock in limbs that cannot decide what shape honesty requires.', 'It came down with the old shower, before there were falls to name it by, and it has been rehearsing shapes ever since — waiting for an audience worth the performance. The rehearsals are over. This is the performance.'], who: 'NARRATOR' },
@@ -775,7 +775,7 @@ export const HOENN_EVENTS = {
     { wildBattleCatch: { species: 'deoxys', level: 295, legendary: true } },
     { arc: 'arc_deoxys', stage: 'complete' },
     { flag: 'arc_deoxys_done' },
-    { toast: 'Deoxys is yours. The crater stone goes quiet — its tenant has moved into your party.' },
+    { toast: 'XENOGENE is yours. The crater stone goes quiet — its tenant has moved into your party.' },
   ],
 };
 
@@ -788,7 +788,7 @@ export const HOENN_EVENTS = {
 // 'birthisland', 'forina') never existed as maps, their levels (40/70)
 // predate the arc bands, and arc_rayquaza's designed prereq
 // ({ arcs: [kyogre, groudon] }) is superseded by the H4b ruling: the
-// trio + Rayquaza key off the `climax_resolved` flag alone.
+// trio + STRATOWYRM key off the `climax_resolved` flag alone.
 //
 // Shared laws (all ten arcs):
 //  - Every face uses the catch-only wildBattleCatch chain: flee OR
@@ -799,7 +799,7 @@ export const HOENN_EVENTS = {
 //    exists — each tomb's own inscription is its only key (the
 //    simplification is recorded in the register).
 //  - Levels sit in Maris's late band: Regis 285, the Eon pair 290,
-//    Jirachi 292, Deoxys 295, the titans 298, Rayquaza 300 (ceiling).
+//    ASTRAEON 292, XENOGENE 295, the titans 298, STRATOWYRM 300 (ceiling).
 // ---------------------------------------------------------------------------
 export const HOENN_LEGENDARY_ARCS = {
   arc_regirock: {
@@ -808,7 +808,7 @@ export const HOENN_LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the dotted inscription on the stone by the Dune Tomb door', flag: 'regi_rock_read' },
       { text: 'Stand before the sealstone and wait out the six slow breaths it asks for', flag: 'regi_rock_open' },
-      { text: 'Face Regirock, level 285, beyond the parted sealstones', catch: 'regirock' },
+      { text: 'Face PETRAGOLEM, level 285, beyond the parted sealstones', catch: 'regirock' },
     ],
     lair: 'desert-ruins',
   },
@@ -818,7 +818,7 @@ export const HOENN_LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the dotted inscription on the stone by the Sea Tomb door', flag: 'regi_ice_read' },
       { text: 'Greet the chamber\'s two boulders in the inscription\'s order — west first, then east', flag: 'regi_ice_open' },
-      { text: 'Face Regice, level 285, beyond the parted sealstones', catch: 'regice' },
+      { text: 'Face CRYOGOLEM, level 285, beyond the parted sealstones', catch: 'regice' },
     ],
     lair: 'island-cave',
   },
@@ -828,7 +828,7 @@ export const HOENN_LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the dotted inscription on the stone by the Iron Tomb door', flag: 'regi_steel_read' },
       { text: 'Press your hand to the sealstone with a Steel-type partner standing beside you', flag: 'regi_steel_open' },
-      { text: 'Face Registeel, level 285, beyond the parted sealstones', catch: 'registeel' },
+      { text: 'Face SIDEROGOLEM, level 285, beyond the parted sealstones', catch: 'registeel' },
     ],
     lair: 'ancient-tomb',
   },
@@ -838,7 +838,7 @@ export const HOENN_LEGENDARY_ARCS = {
     hook: 'Since the titans settled, something red, kind and impossibly fast has been crossing Maris\'s routes and waters — landing, watching, and moving on. It is not fleeing. It is deciding where to be met.',
     steps: [
       { text: 'End the clash of the weather titans — she only came down once the sky was safe', flag: 'climax_resolved' },
-      { text: 'Meet Latias, level 290, where she lands — her landings turn with your walking: Routes 110, 118, 123, the Route 127 sea and Route 134, in turn', catch: 'latias' },
+      { text: 'Meet RUBIAVIS, level 290, where she lands — her landings turn with your walking: Routes 110, 118, 123, the Route 127 sea and Route 134, in turn', catch: 'latias' },
     ],
     lair: 'hoenn-routes',
   },
@@ -848,7 +848,7 @@ export const HOENN_LEGENDARY_ARCS = {
     hook: 'Fishermen keep reporting the same impossible thing: a blue jet-shaped shadow that outruns their boats — except at one quiet shore, where it slows, and waits.',
     steps: [
       { text: 'End the clash of the weather titans — he only slowed down once the sea was calm', flag: 'climax_resolved' },
-      { text: 'Land on the Ebbtide Cave island on Route 125 — the Eon stop — and face Latios, level 290, at its tideline', catch: 'latios' },
+      { text: 'Land on the Ebbtide Cave island on Route 125 — the Eon stop — and face AZURAVIS, level 290, at its tideline', catch: 'latios' },
     ],
     lair: 'r125',
   },
@@ -858,7 +858,7 @@ export const HOENN_LEGENDARY_ARCS = {
     hook: 'When the sky settled the argument, the land\'s answer did not die and was not caught — it withdrew, sullen and alive, to the earth\'s own heat.',
     steps: [
       { text: 'End the clash of the weather titans at the Tempest Tower', flag: 'climax_resolved' },
-      { text: 'Return to the deep chamber of Team Magma\'s old hideout and face Groudon, level 298, risen from its magma pool', catch: 'groudon' },
+      { text: 'Return to the deep chamber of Team Magma\'s old hideout and face TERRATITAN, level 298, risen from its magma pool', catch: 'groudon' },
     ],
     lair: 'magma-hideout',
   },
@@ -868,7 +868,7 @@ export const HOENN_LEGENDARY_ARCS = {
     hook: 'The deluge ended, but the sea\'s answer was never caught — it sleeps now in the deep it nearly drowned the world with, and it knows your name.',
     steps: [
       { text: 'End the clash of the weather titans at the Tempest Tower', flag: 'climax_resolved' },
-      { text: 'Dive the Route 127 trench and face Kyogre, level 298, in the deep (Mind Badge + a partner who knows Dive)', catch: 'kyogre' },
+      { text: 'Dive the Route 127 trench and face ABYSSORCA, level 298, in the deep (Mind Badge + a partner who knows Dive)', catch: 'kyogre' },
     ],
     lair: 'r127-underwater',
   },
@@ -878,7 +878,7 @@ export const HOENN_LEGENDARY_ARCS = {
     hook: 'It descended once, for the world, and asked nothing. The summit keeps its ring of old stone — and the sleeper, the wardens say, has started watching the road up.',
     steps: [
       { text: 'End the clash of the weather titans — the descent was an appearance, not a meeting', flag: 'climax_resolved' },
-      { text: 'Climb the Tempest Tower again and face Rayquaza, level 300, at the summit', catch: 'rayquaza' },
+      { text: 'Climb the Tempest Tower again and face STRATOWYRM, level 300, at the summit', catch: 'rayquaza' },
     ],
     lair: 'sky-pillar',
   },
@@ -888,7 +888,7 @@ export const HOENN_LEGENDARY_ARCS = {
     steps: [
       { text: 'Ask Researcher Orbit at the Starfall Space Center about the comet crossing Maris', flag: 'arc_jirachi_news' },
       { text: 'Witness the star fall at Comet Falls', flag: 'jirachi_star_fell' },
-      { text: 'Follow the fallen light to the meteorstone by the lower falls and face Jirachi, level 292 — earn the wish', catch: 'jirachi' },
+      { text: 'Follow the fallen light to the meteorstone by the lower falls and face ASTRAEON, level 292 — earn the wish', catch: 'jirachi' },
     ],
     lair: 'meteor-falls',
   },
@@ -897,8 +897,8 @@ export const HOENN_LEGENDARY_ARCS = {
     hook: 'Something fell with the old meteor shower at Comet Falls and never cooled. The Space Center tracks it the way you track weather: respectfully, and from a distance.',
     steps: [
       { text: 'Hear the Space Center\'s rumour from Researcher Orbit in Starfall', flag: 'arc_deoxys_rumor' },
-      { text: 'Face Deoxys, level 295, at the crater meteorite in Comet Falls\' north chamber', catch: 'deoxys' },
-      { text: 'Return to the meteorite with Deoxys in your party — it remembers every shape it has ever been', flag: 'deoxys_forme_touched' },
+      { text: 'Face XENOGENE, level 295, at the crater meteorite in Comet Falls\' north chamber', catch: 'deoxys' },
+      { text: 'Return to the meteorite with XENOGENE in your party — it remembers every shape it has ever been', flag: 'deoxys_forme_touched' },
     ],
     lair: 'meteor-falls',
   },
@@ -985,7 +985,7 @@ export const HOENN_NPCS = [
   { map: 'littleroot', x: 15, y: 8, name: 'MAY', art: 'lass', skin: '#f0c8a0', shirt: '#c83a3a', pants: '#2a4a6a', hair: '#6a4a2a', hoenn: 'may_littleroot',
     dialogue: ['Contests are not the soft option, you know. They are battles where the crowd grades your footwork.'] },
   { map: 'petalburg', x: 13, y: 7, name: 'WALLY', art: 'kid', skin: '#f0d8b8', shirt: '#7c3fa5', pants: '#3a3a4a', hair: '#4a7a4a', hoenn: 'wally',
-    dialogue: ['I caught one. Me. A Ralts, by the pond grass — well. We caught each other, I think.'] },
+    dialogue: ['I caught one. Me. A PSYLET, by the pond grass — well. We caught each other, I think.'] },
   { map: 'gym-petalburg', x: 7, y: 2, name: 'NORMAN', art: 'gym5', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#2a2a3a', hoenn: 'norman',
     dialogue: ['Balance is not standing still, challenger. Come back when the road has taught you that, and I will test it personally.'] },
   { map: 'gym-rustboro', x: 7, y: 2, name: 'ROXANNE', art: 'gym1', skin: '#f0c8a0', shirt: '#7a3a3a', pants: '#3a3a4a', hair: '#5a2a3a', hoenn: 'roxanne',

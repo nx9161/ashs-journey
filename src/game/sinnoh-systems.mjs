@@ -1,15 +1,15 @@
 // sinnoh-systems.mjs — Arc 4 Stage S4: the pure Borea systems core.
 //
-// FORME-SWITCH (coordinator decision 6): rides the Deoxys mechanic
+// FORME-SWITCH (coordinator decision 6): rides the XENOGENE mechanic
 // EXACTLY (overworld-systems switchDeoxysForme, Stage H6): a speciesId
 // exchange in the evolution idiom — level, XP, nickname, held item,
 // keepsake, IVs/EVs, status and the move set are the individual's own
 // and are NOT touched; maxHp/stats recompute from the new forme's base
 // stats with HP carried by the max-delta rule. This module is that
-// same swap, generalised over the three Borea families; the Deoxys
+// same swap, generalised over the three Borea families; the XENOGENE
 // path itself is untouched. MOVE DELTA (recorded): canon swaps
 // Rotom's appliance move per forme; here every forme family's
-// learnsets draw from one shared pool (species5 data — the Deoxys
+// learnsets draw from one shared pool (species5 data — the XENOGENE
 // design), so moves stay legal in every forme untouched, and no
 // appliance move is auto-taught or auto-forgotten.
 import { statValue, hpValue } from '../engine/formulas.mjs';
@@ -30,7 +30,7 @@ export const ROTOM_APPLIANCES = {
   rotommow: 'the lawn mower',
 };
 
-// The Deoxys swap, generalised. Returns true on a real switch.
+// The XENOGENE swap, generalised. Returns true on a real switch.
 export function switchForme(mon, formeId, speciesTable) {
   if (!mon || !FORME_OF[mon.speciesId] || !FORME_OF[formeId]) return false;
   if (FORME_OF[mon.speciesId] !== FORME_OF[formeId]) return false;

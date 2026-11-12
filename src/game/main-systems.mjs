@@ -83,7 +83,7 @@ Object.assign(Game.prototype, {
     if (it.pocket === 'tm' || it.pocket === 'hm') { this.teachFromBag(id, it); return; }
     if (id === 'gracidea') {
       // Arc 4 Stage S4: the Gracidea swaps a party Shaymin between
-      // its land and sky formes (the Deoxys-idiom switch). Never
+      // its land and sky formes (the XENOGENE-idiom switch). Never
       // consumed; a party with no Shaymin hears the honest line.
       const targets = g.state.party.map((m, i) => ({
         label: displayName(m, SPECIES) + ' Lv' + m.level, value: i,

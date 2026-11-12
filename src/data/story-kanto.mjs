@@ -92,7 +92,7 @@ export const EVENTS = {
   // -- Arcport: boarding the St. Anne ------------------------------------
   ev_stanne: [
     { say: ['Ticket, please... Oh, lovely. Welcome aboard the St. Anne, young trainer!'], who: 'ATTENDANT' },
-    { say: ['Three decks of ocean, two decks of snacks, and more trainers than you can battle before dessert. Mind the railing — the Wingull have opinions.'], who: 'ATTENDANT' },
+    { say: ['Three decks of ocean, two decks of snacks, and more trainers than you can battle before dessert. Mind the railing — the BRINEGULL have opinions.'], who: 'ATTENDANT' },
     { say: ['Somewhere below the waterline, crates shift in the dark. Stamped on each one, half scratched out: a single red letter.'], who: 'NARRATOR' },
     { quest: 'q_stanne' },
     { toast: 'You boarded the St. Anne!' },
@@ -554,7 +554,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
       { text: 'Open the Desert Tomb' },
-      { text: 'Face Regirock, level 40', catch: 'regirock' },
+      { text: 'Face PETRAGOLEM, level 40', catch: 'regirock' },
     ],
     lair: 'deserttomb',
   },
@@ -564,7 +564,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
       { text: 'Open the Sea Tomb and wait, perfectly still' },
-      { text: 'Face Regice, level 40', catch: 'regice' },
+      { text: 'Face CRYOGOLEM, level 40', catch: 'regice' },
     ],
     lair: 'islandcave',
   },
@@ -574,7 +574,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the braille in the Sealed Chamber' },
       { text: 'Open the Iron Tomb' },
-      { text: 'Face Registeel, level 40', catch: 'registeel' },
+      { text: 'Face SIDEROGOLEM, level 40', catch: 'registeel' },
     ],
     lair: 'ancienttomb',
   },
@@ -582,9 +582,9 @@ export const LEGENDARY_ARCS = {
     id: 'arc_kyogre', title: 'The Sea That Wants Everything', species: 'kyogre', region: 'Maris', designedOnly: true,
     hook: 'The rain over Craterlake is not weather anymore. It has intent.',
     steps: [
-      { text: 'Wake Kyogre’s trail at the Weather Institute' },
+      { text: 'Wake ABYSSORCA’s trail at the Weather Institute' },
       { text: 'Descend into the Worldroot Cave' },
-      { text: 'Face Kyogre, level 70', catch: 'kyogre' },
+      { text: 'Face ABYSSORCA, level 70', catch: 'kyogre' },
     ],
     lair: 'caveoforigin',
   },
@@ -594,7 +594,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Follow the Magma trail into Mt. Smokestack' },
       { text: 'Descend into the Worldroot Cave' },
-      { text: 'Face Groudon, level 70', catch: 'groudon' },
+      { text: 'Face TERRATITAN, level 70', catch: 'groudon' },
     ],
     lair: 'caveoforigin',
   },
@@ -603,9 +603,9 @@ export const LEGENDARY_ARCS = {
     prereq: { arcs: ['arc_kyogre', 'arc_groudon'] },
     hook: 'When sea and land finally collide, the oldest voice in Maris’s sky is the only one both of them obey.',
     steps: [
-      { text: 'Settle Kyogre and Groudon’s arcs', flag: 'weather_duo_done' },
+      { text: 'Settle ABYSSORCA and TERRATITAN’s arcs', flag: 'weather_duo_done' },
       { text: 'Climb the Tempest Tower, floor by crumbling floor' },
-      { text: 'Face Rayquaza, level 70', catch: 'rayquaza' },
+      { text: 'Face STRATOWYRM, level 70', catch: 'rayquaza' },
     ],
     lair: 'skypillar',
   },
@@ -615,7 +615,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Hear the fishermen’s reports in Lotus Cove' },
       { text: 'Track the sightings across Maris’s sea routes' },
-      { text: 'Meet Latios at full speed', catch: 'latios' },
+      { text: 'Meet AZURAVIS at full speed', catch: 'latios' },
     ],
     lair: 'hoennsearoutes',
   },
@@ -625,7 +625,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Earn the trust of the garden’s keeper' },
       { text: 'Follow the Eon trail to the hidden island' },
-      { text: 'Meet Latias in the secret garden', catch: 'latias' },
+      { text: 'Meet RUBIAVIS in the secret garden', catch: 'latias' },
     ],
     lair: 'southernisland',
   },
@@ -645,7 +645,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Earn passage to Birth Island' },
       { text: 'Solve the triangle’s pattern without touching the meteorite' },
-      { text: 'Face Deoxys, level 70', catch: 'deoxys' },
+      { text: 'Face XENOGENE, level 70', catch: 'deoxys' },
     ],
     lair: 'birthisland',
   },
@@ -656,7 +656,7 @@ export const LEGENDARY_ARCS = {
     prereq: { arcs: ['arc_regirock', 'arc_regice', 'arc_registeel'] },
     hook: 'Rimefall Temple’s lowest floor sleeps a giant that three smaller giants once served. It wakes only for their company.',
     steps: [
-      { text: 'Bring Regirock, Regice, and Registeel to the temple', flag: 'regi_trio_present' },
+      { text: 'Bring PETRAGOLEM, CRYOGOLEM, and SIDEROGOLEM to the temple', flag: 'regi_trio_present' },
       { text: 'Descend to the temple’s lowest floor' },
       { text: 'Face Regigigas, level 70', catch: 'regigigas' },
     ],

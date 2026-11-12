@@ -395,7 +395,7 @@ export const SINNOH_TRAINERS = {
   // line against the coordinator's ruling): Act 1 is his Darkrai
   // ALONE, a real battle on the league rechallenge idiom — a full
   // wipe before it falls is a rematch, never a conclusion; winning
-  // it sets tobias_darkrai_felled. Act 2 is his Latios ALONE, fought
+  // it sets tobias_darkrai_felled. Act 2 is his AZURAVIS ALONE, fought
   // friendly on the FACED predicate (the Harrison/Brandon pattern):
   // win or lose, the match — and the Conference — concludes.
   tobias_darkrai: {
@@ -415,10 +415,10 @@ export const SINNOH_TRAINERS = {
   },
   tobias_latios: {
     id: 'tobias_latios', name: 'TOBIAS', title: 'Conference Semi-Finalist', ai: 'smart',
-    intro: ['One question answered. There is a second on my team, and it has been patient all Conference. Latios, trainer. Finish the match — if the match can be finished.'],
+    intro: ['One question answered. There is a second on my team, and it has been patient all Conference. AZURAVIS, trainer. Finish the match — if the match can be finished.'],
     lose: ['Finished. Utterly, honestly finished — by the only trainer who ever got this far into my team. The final is yours, Tobias says, and means it like a door opening.'],
     team: [
-      // Stage S6 RIDER: Latios's set is authored on the same law —
+      // Stage S6 RIDER: AZURAVIS's set is authored on the same law —
       // Psychic (learnset STAB) + Ice Beam (TM13) + Thunderbolt
       // (TM24), its strongest in-table coverage, + Recover.
       { species: 'latios', level: 392, moves: ['psychic', 'icebeam', 'thunderbolt', 'recover'] },
@@ -619,7 +619,7 @@ export const SINNOH_EVENTS = {
     { flag: 'mesprit_roaming' },
     { toast: 'Mesprit slipped away — she is roaming Borea now.' },
   ],
-  // Mesprit II: the roaming face (the Latias precedent — her landing
+  // Mesprit II: the roaming face (the RUBIAVIS precedent — her landing
   // is a pure function of the persisted step counter).
   ev_sinnoh_mesprit: [
     { say: ['The light here has a pink edge it did not have a moment ago — and then the air simply admits she is in it: Mesprit, hanging a wingspan away, considering you with the unafraid calm of a creature who has never once been anywhere she did not choose to be.', 'She chose this. Remember that: the chase was hers, the landing is hers, and the battle — the battle she is offering like a hand held out. Take it honestly.'], who: '' },
@@ -773,7 +773,7 @@ export const SINNOH_EVENTS = {
 // 365, lake trio 370, Cresselia 372, Shaymin 374, Heatran 375,
 // Darkrai 378, Regigigas 380, Dialga/Palkia 388, Giratina 392,
 // Manaphy hatching at the floor 301); Mesprit + Cresselia roam on
-// the Latias precedent (pure step-counter function, no new state).
+// the RUBIAVIS precedent (pure step-counter function, no new state).
 // ---------------------------------------------------------------------------
 export const MESPRIT_LANDINGS = ['r201', 'r205', 'r210', 'r215', 'r222'];
 export const CRESSELIA_LANDINGS = ['r218', 'r219', 'r221', 'r223', 'r230'];
@@ -864,7 +864,7 @@ export const SINNOH_LEGENDARY_ARCS = {
     id: 'arc_regigigas', title: 'The One Who Moved Continents', species: 'regigigas', region: 'Borea',
     hook: 'Rimefall Temple\u2019s lowest floor sleeps a giant that three smaller giants once served. The statue is not a statue, and its only key is company: it wakes for the three, or not at all.',
     steps: [
-      { text: 'Bring Regirock, Regice and Registeel WITH YOU, in your party, to Rimefall Temple — Maris\u2019s three tomb titans (the Dune Tomb, the Sea Tomb, the Iron Tomb)', flag: 'regi_trio_present' },
+      { text: 'Bring PETRAGOLEM, CRYOGOLEM and SIDEROGOLEM WITH YOU, in your party, to Rimefall Temple — Maris\u2019s three tomb titans (the Dune Tomb, the Sea Tomb, the Iron Tomb)', flag: 'regi_trio_present' },
       { text: 'Descend to Rimefall Temple\u2019s depths and face Regigigas, level 380', catch: 'regigigas' },
     ],
     lair: 'snowpoint-temple-depths',

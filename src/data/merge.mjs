@@ -23,7 +23,7 @@ Object.assign(LEGENDARY_ARCS, ORANGE_LEGENDARY_ARCS);
 // never told); arc_hooh was activated in place in LEGENDARY_ARCS.
 Object.assign(LEGENDARY_ARCS, JOHTO_LEGENDARY_ARCS);
 // Stage H6 fold: Maris's ten live legendary arcs (the Regi tombs,
-// the Eon pair, the weather trio + Rayquaza, Jirachi, Deoxys) —
+// the Eon pair, the weather trio + STRATOWYRM, ASTRAEON, XENOGENE) —
 // every one supersedes its story-kanto.mjs designed stub (dead lair
 // ids, pre-band levels, and arc_rayquaza's arcs-prereq, replaced by
 // the climax_resolved flag key per the H4b ruling).

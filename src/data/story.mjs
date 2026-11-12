@@ -46,7 +46,7 @@ export const CHAPTERS = [
     title: 'Master Quest',
     arc: 'The Lastlight Conference — the road continues.',
     anime: 'Season 5: Master Quest (Ep 1–47, Ep 48–65)',
-    movies: ['Heroes — Latios & Latias'],
+    movies: ['Heroes — AZURAVIS & RUBIAVIS'],
   },
   // ---- locked: Act II (v2, announced in ADR-006) ----
   {
@@ -54,7 +54,7 @@ export const CHAPTERS = [
     title: 'Rise Through Maris',
     arc: 'Locked — Act II (v2).',
     anime: 'Seasons 6–8: Advanced / Advanced Challenge / Advanced Battle',
-    movies: ['Jirachi: Wish Maker', 'Destiny Deoxys', 'Lucario and the Mystery of PRIMARA'],
+    movies: ['ASTRAEON: Wish Maker', 'Destiny XENOGENE', 'Lucario and the Mystery of PRIMARA'],
   },
   {
     n: 7, id: 'battle-frontier', act: 2, region: 'Arden (Frontier)', scope: 'locked',

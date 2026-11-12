@@ -4,7 +4,7 @@
 // 114 entries: the 107 Borea species PLUS the 7 mission formes as
 // partner-pattern form entries (rotom-heat/wash/frost/fan/mow sharing
 // dexNo 479, giratina-origin sharing 487, shaymin-sky sharing 492 —
-// form:true + baseSpecies, the Deoxys precedent in species4.mjs; the
+// form:true + baseSpecies, the XENOGENE precedent in species4.mjs; the
 // forms.mjs catalogue rows for all seven pre-existed and are
 // reconciled, not duplicated). Learnsets: platinum level-up preferred
 // (diamond-pearl / heartgold-soulsilver fallback — Platinum governs),
@@ -198,7 +198,7 @@ export const SPECIES_SINNOH = {
     catchRate: 255, growth: 'mediumslow', baseXp: 56, body: 'biped', spriteSeed: 40601,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 20,
     learnset: { 1: ['absorb'], 304: ['growth'], 310: ['stunspore'], 313: ['megadrain'] },
-    flavor: 'It opens only for kind sunlight and closes for everything else. It joins Roselia at level 310 here — friendship, in this region, is patience.',
+    flavor: 'It opens only for kind sunlight and closes for everything else. It joins ROSEFAE at level 310 here — friendship, in this region, is patience.',
     evo: { to: 'roselia', method: 'level', level: 310 }, tm: [3, 6, 9, 10, 20, 21, 22, 31, 32, 33, 34, 44, 50, 101],
   },
   roserade: {
@@ -441,7 +441,7 @@ export const SPECIES_SINNOH = {
     catchRate: 120, growth: 'fast', baseXp: 57, body: 'biped', spriteSeed: 43301,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
     learnset: { 1: ['wrap', 'psybeam'], 306: ['growl'], 314: ['confusion'] },
-    flavor: 'A small bell that rings when the room’s feelings turn. It joins Chimecho at level 310 here — friendship, in this region, is patience.',
+    flavor: 'A small bell that rings when the room’s feelings turn. It joins BELLECHO at level 310 here — friendship, in this region, is patience.',
     evo: { to: 'chimecho', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   stunky: {
