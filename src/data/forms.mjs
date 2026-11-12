@@ -96,7 +96,7 @@ export const FORMS = [
   { id: 'mega-scizor', speciesId: 212, name: 'Mega REAPINCER', kind: 'mega', region: 'kalos', types: ['bug', 'steel'], note: 'Mega form; pincers sharpened into saw-toothed shears.' },
   { id: 'mega-heracross', speciesId: 214, name: 'Mega HORNTOSS', kind: 'mega', region: 'kalos', types: ['bug', 'fighting'], note: 'Mega form; a horn like a battering lance.' },
   { id: 'mega-houndoom', speciesId: 229, name: 'Mega CHARHOUND', kind: 'mega', region: 'kalos', types: ['dark', 'fire'], note: 'Mega form; its own heat reddens its claws.' },
-  { id: 'mega-tyranitar', speciesId: 248, name: 'Mega Tyranitar', kind: 'mega', region: 'kalos', types: ['rock', 'dark'], note: 'Mega form; a mountain range with more spikes.' },
+  { id: 'mega-tyranitar', speciesId: 248, name: 'Mega CRAGTYRANT', kind: 'mega', region: 'kalos', types: ['rock', 'dark'], note: 'Mega form; a mountain range with more spikes.' },
   { id: 'mega-sceptile', speciesId: 254, name: 'Mega Sceptile', kind: 'mega', region: 'kalos', types: ['grass', 'dragon'], note: 'Mega form; it fires its own tail as a missile.' },
   { id: 'mega-blaziken', speciesId: 257, name: 'Mega Blaziken', kind: 'mega', region: 'kalos', types: ['fire', 'fighting'], note: 'Mega form; flame ribbons stream from its wrists.' },
   { id: 'mega-swampert', speciesId: 260, name: 'Mega Swampert', kind: 'mega', region: 'kalos', types: ['water', 'ground'], note: 'Mega form; rain turns it into a wrecking ball.' },

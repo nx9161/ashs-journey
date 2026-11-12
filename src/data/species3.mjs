@@ -731,7 +731,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   tyrogue: {
-    id: 'tyrogue', name: 'Tyrogue', dexNo: 236, types: ['fighting'],
+    id: 'tyrogue', name: 'SCRAPLET', dexNo: 236, types: ['fighting'],
     base: { hp: 35, atk: 35, def: 35, spa: 35, spd: 35, spe: 35 },
     catchRate: 75, growth: 'mediumfast', baseXp: 42, body: 'biped', spriteSeed: 23601,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
@@ -740,7 +740,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'hitmontop', method: 'level', level: 120 }, tm: [1, 5, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   hitmontop: {
-    id: 'hitmontop', name: 'Hitmontop', dexNo: 237, types: ['fighting'],
+    id: 'hitmontop', name: 'SPINKICK', dexNo: 237, types: ['fighting'],
     base: { hp: 50, atk: 95, def: 95, spa: 35, spd: 110, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 159, body: 'biped', spriteSeed: 23701,
     eggGroups: ['humanshape'], hatchCounter: 25,
@@ -749,7 +749,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 16, 17, 18, 19, 20, 24, 25, 28, 31, 32, 34, 39, 44, 48, 50, 104],
   },
   smoochum: {
-    id: 'smoochum', name: 'Smoochum', dexNo: 238, types: ['ice', 'psychic'],
+    id: 'smoochum', name: 'FROSTLET', dexNo: 238, types: ['ice', 'psychic'],
     base: { hp: 45, atk: 30, def: 15, spa: 85, spd: 65, spe: 65 },
     catchRate: 45, growth: 'mediumfast', baseXp: 61, body: 'biped', spriteSeed: 23801,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
@@ -758,7 +758,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'jynx', method: 'level', level: 130 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 103],
   },
   elekid: {
-    id: 'elekid', name: 'Elekid', dexNo: 239, types: ['electric'],
+    id: 'elekid', name: 'PLUGLET', dexNo: 239, types: ['electric'],
     base: { hp: 45, atk: 63, def: 37, spa: 65, spd: 55, spe: 95 },
     catchRate: 45, growth: 'mediumfast', baseXp: 72, body: 'biped', spriteSeed: 23901,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
@@ -767,7 +767,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'electabuzz', method: 'level', level: 130 }, tm: [6, 9, 10, 20, 24, 25, 31, 32, 33, 34, 36, 39, 44, 50, 105],
   },
   magby: {
-    id: 'magby', name: 'Magby', dexNo: 240, types: ['fire'],
+    id: 'magby', name: 'CINDLET', dexNo: 240, types: ['fire'],
     base: { hp: 45, atk: 75, def: 37, spa: 70, spd: 55, spe: 83 },
     catchRate: 45, growth: 'mediumfast', baseXp: 73, body: 'biped', spriteSeed: 24001,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
@@ -776,7 +776,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'magmar', method: 'level', level: 130 }, tm: [6, 8, 9, 10, 20, 28, 31, 32, 33, 34, 38, 39, 44, 50],
   },
   miltank: {
-    id: 'miltank', name: 'Miltank', dexNo: 241, types: ['normal'],
+    id: 'miltank', name: 'MOOBELLE', dexNo: 241, types: ['normal'],
     base: { hp: 95, atk: 80, def: 105, spa: 40, spd: 70, spe: 100 },
     catchRate: 45, growth: 'slow', baseXp: 172, body: 'biped', spriteSeed: 24101,
     eggGroups: ['ground'], hatchCounter: 20,
@@ -785,7 +785,7 @@ export const SPECIES_JOHTO = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 48, 50, 104],
   },
   blissey: {
-    id: 'blissey', name: 'Blissey', dexNo: 242, types: ['normal'],
+    id: 'blissey', name: 'SERENURSE', dexNo: 242, types: ['normal'],
     base: { hp: 255, atk: 10, def: 10, spa: 75, spd: 135, spe: 55 },
     catchRate: 30, growth: 'fast', baseXp: 608, body: 'biped', spriteSeed: 24201,
     eggGroups: ['fairy'], hatchCounter: 40,
@@ -821,7 +821,7 @@ export const SPECIES_JOHTO = {
     tm: [6, 8, 9, 10, 11, 12, 13, 14, 15, 20, 24, 25, 28, 31, 32, 34, 38, 39, 44, 50, 103, 104],
   },
   larvitar: {
-    id: 'larvitar', name: 'Larvitar', dexNo: 246, types: ['rock', 'ground'],
+    id: 'larvitar', name: 'CRAGLET', dexNo: 246, types: ['rock', 'ground'],
     base: { hp: 50, atk: 64, def: 50, spa: 45, spd: 50, spe: 41 },
     catchRate: 45, growth: 'slow', baseXp: 60, body: 'biped', spriteSeed: 24601,
     eggGroups: ['monster'], hatchCounter: 40,
@@ -830,7 +830,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'pupitar', method: 'level', level: 130 }, tm: [6, 8, 9, 10, 15, 20, 24, 25, 26, 27, 28, 31, 32, 34, 38, 44, 48, 50, 104],
   },
   pupitar: {
-    id: 'pupitar', name: 'Pupitar', dexNo: 247, types: ['rock', 'ground'],
+    id: 'pupitar', name: 'PIKEPOD', dexNo: 247, types: ['rock', 'ground'],
     base: { hp: 70, atk: 84, def: 70, spa: 65, spd: 70, spe: 51 },
     catchRate: 45, growth: 'slow', baseXp: 144, body: 'blob', spriteSeed: 24701,
     eggGroups: ['monster'], hatchCounter: 40,
@@ -839,7 +839,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'tyranitar', method: 'level', level: 155 }, tm: [1, 6, 8, 9, 10, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 36, 38, 44, 47, 48, 50, 104],
   },
   tyranitar: {
-    id: 'tyranitar', name: 'Tyranitar', dexNo: 248, types: ['rock', 'dark'],
+    id: 'tyranitar', name: 'CRAGTYRANT', dexNo: 248, types: ['rock', 'dark'],
     base: { hp: 100, atk: 134, def: 110, spa: 95, spd: 100, spe: 61 },
     catchRate: 45, growth: 'slow', baseXp: 270, body: 'biped', spriteSeed: 24801,
     eggGroups: ['monster'], hatchCounter: 40,
