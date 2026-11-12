@@ -207,3 +207,20 @@ Game Freak through official channels).
   layouts, warps, progression geometry and placement intent are the
   game's existing hand-designed layer and do not change (guarded by
   the reachability and town audits).
+  Phase 1 LANDED on branch art/gassasin-kit (2026-11-11, not merged):
+  the slicing pipeline (assets/sprites/tools/build-kit-art.mjs ->
+  kit-art-data.mjs, 36 entries, all <=16 colors, art-gate kit census)
+  and Pallet Town rendering in the kit inside the real engine —
+  ground/path/canopy/flora/sign + positional cabin composites —
+  with the kit character as the player and as Gary (instance-palette
+  swap). Skin only: audits green, slice 131/134 (same 3 pre-existing
+  failures), all build gates green. Seasons grade the kit vegetation
+  with the same formula as our art; on the kit's deep green the
+  Autumn grade runs a deeper red than our amber — owner call pending
+  on whether kit grades dampen in Phase 2. NOT yet: every other town,
+  interiors (the sheet's interior set is Phase 2 material), service
+  buildings (Center/Mart/Gym have no kit equivalents — proposed:
+  keep the original service silhouettes/signage, re-paletted into
+  the kit family per rollout rule 2), per-town roof/trim variants
+  (rollout rule 1), and the run/bike/surf/fish player sets (no kit
+  frames exist; Ash's sets still serve those modes).

@@ -1220,6 +1220,16 @@ function kitTownLayers(cache, kind, x, y, kindAt, mapId) {
     return [c === last && last > 0 ? K.wallWindow : K.wallPlain].filter(Boolean);
   }
   if (kind === 'door-house') return [K.door].filter(Boolean);
+  // Dressing props keep their authored art (the kit has no lamp /
+  // crates / postbox / stall), but they stand on KIT ground: without
+  // this they would sit on the drawn town-ground tiles and read as
+  // pale patches in a kit town. Underlay follows the ground family
+  // south of the prop, as the shipped prop branch reads it.
+  if (kind === 'lamp' || kind === 'crates' || kind === 'signpost' || kind === 'postbox' || kind === 'stall') {
+    const s = kindAt(x, y + 1);
+    const under = s === 'tg2-' + mapId ? (pickVariant(K.path, x, y, 21) || grassBase) : grassBase;
+    return [under, cache.shadowProp, cache[kind]].filter(Boolean);
+  }
   return null;
 }
 
