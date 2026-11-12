@@ -155783,6 +155783,14 @@ const MAPS3 = {
         dialogue: ["Lab PC — Pokemon Storage System. The professor keeps a terminal by the door for trainers passing through. Access your boxes here."] },
       { x: 6, y: 4, name: 'CHEAT TERMINAL', art: 'pc', skin: '#c0c0c0', shirt: '#3a3a4a', pants: '#2a2a2a', hair: '#3a6ac0', cheat: true,
         dialogue: ["CHEAT TERMINAL — everything is free here. Every item, every Pokemon, no questions asked. The professor pretends not to see this machine."] },
+      // Partner guarantee (hotfix): the professor himself, at his lab
+      // door. Pre-fix he existed only inside the intro cutscene, so a
+      // player whose partner never arrived (defect 4's stranded saves)
+      // found nobody in Pallet who could sort it out. His handover
+      // branch lives in overworld-systems.mjs (talkHawthorn); these
+      // lines are what he says to everyone else.
+      { x: 8, y: 4, name: 'PROF. HAWTHORN', art: 'hawthorn', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#c8c4bc',
+        dialogue: ["Ah, {player}! Out walking the town again? Good. Legs first, glory later — that is the order of things.", "VOLTIK still refusing every Capture Orb it sees, I hope. Some bonds are not meant to be carried in a pocket."] },
       { x: 10, y: 8, name: 'FERRYMAN', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'cinnabar', ferryGate: 'surf',
         dialogue: ["My little ferry runs Pallet to Cinnabar for trainers who've earned the sea legs — and the badges.", "Say the word when you want the crossing. The volcano smokes a welcome the whole way in."] },
     ],
@@ -185727,7 +185735,7 @@ function deriveArcDefaults(story, caughtCount, playtimeSec) {
 // ---------------------------------------------------------------------------
 
 const MAIN_QUESTS = [
-  { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'The lab sits at the north edge of Pallet Town. Your partner has opinions — and a strong dislike of Capture Orbs.' },
+  { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'VOLTIK joins you at the very start of your journey — it has opinions, and a strong dislike of Capture Orbs. If you ever find yourselves parted, Prof. Hawthorn at his Pallet Town lab will set it right.' },
   { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Pewter City', hint: 'Through Viridian Forest, then challenge Brock. Water and Grass moves crack Rock types open.' },
   { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Moon and reach Cerulean City', hint: 'The cave east of Pewter is dark and full of SKREEP. Stock up on Potions before you go in.' },
   { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Cerulean City', hint: 'Misty’s Water types fear Grass and Electric moves. Watch for her ASTRION.' },
@@ -193106,6 +193114,27 @@ function boxCheck(mon) {
   }
   return { ok: true };
 }
+// The partner guarantee: the state change behind intro.mjs's
+// grantPartner ceremony, shared by every door that can deliver VOLTIK
+// — the intro itself, the save-load repair (save/schema.mjs) and the
+// Pallet lab handover (overworld-systems.mjs talkHawthorn). Party
+// member + dex seen/caught + the metPartner/refusedBall flags, exactly
+// as the intro has always written them. Idempotent by construction: a
+// state already carrying the partner is returned untouched (false).
+function hasPartnerMon(state) {
+  return !!(state && Array.isArray(state.party)
+    && state.party.some((m) => m && m.speciesId === 'partner'));
+}
+function grantPartnerMon(state, speciesTable, movesTable) {
+  if (!state || !Array.isArray(state.party) || hasPartnerMon(state)) return false;
+  state.party.push(makeMon('partner', 5, speciesTable, movesTable));
+  const sp = speciesTable.partner;
+  dexRegister(state.dex, 'seen', sp.dexNo);
+  dexRegister(state.dex, 'caught', sp.dexNo);
+  state.story.flags.metPartner = true;
+  state.story.flags.refusedBall = true;
+  return true;
+}
 function dexRegister(dex, kind, dexNo) {
   dex[kind][dexNo] = true;
   if (kind === 'caught' || kind === 'befriended') dex.seen[dexNo] = true;
@@ -195405,6 +195434,24 @@ function fillV2Defaults(data) {
   if (isObj(data.meta)) {
     if (typeof data.meta.houseRulesTouched !== 'boolean') data.meta.houseRulesTouched = false;
     if (!Number.isInteger(data.meta.ngPlus) || data.meta.ngPlus < 0) data.meta.ngPlus = 0;
+  }
+  // Partner guarantee (hotfix): UI v2.2 defect 4's stranded saves. The
+  // pre-fix intro's skip paths could write introDone with an EMPTY
+  // party — no partner, no ally at all — and nothing ever healed them:
+  // the overworld professor had no handover and the first wild battle
+  // soft-locked. The intro's own backstop covers new games; this is
+  // the load-side twin, riding migrate() so every load door that
+  // validates through here (the guest store, SYNC.validPayload) heals
+  // the save itself. The test is deliberately narrow — intro done AND
+  // a party holding no member at all: a party carrying ANY member is
+  // a progressed save and is never touched (the grant is a repair,
+  // not a handout), and grantPartnerMon's own guard keeps it
+  // idempotent. Runs last: the mon fills above have already run, and
+  // makeMon writes the current shape (keepsake included), so the
+  // granted partner needs no second pass before validateSave.
+  if (isObj(data.story) && isObj(data.story.flags) && data.story.flags.introDone === true
+    && isObj(data.dex) && Array.isArray(data.party) && !data.party.some(Boolean)) {
+    grantPartnerMon(data, SPECIES, MOVES);
   }
   return data;
 }
@@ -197961,25 +198008,23 @@ class IntroScene {
     }, INTRO_SCRIPT.professor);
   }
 
-  // The partner grant, idempotent: party member + dex seen/caught + story
-  // flags. The watched flow reaches it via starterMoment(); finishIntro()
-  // backstops it so EVERY skip path (veteran offer, hold-START confirm,
-  // headless) converges on the same state. (UI v2.2 defect 4: skipping used
-  // to call finishIntro() alone — empty party, first wild battle soft-locked
-  // on a faded screen because no ally existed.)
+  // The partner grant ceremony: the state change itself is state.mjs's
+  // grantPartnerMon (idempotent — party member + dex seen/caught + story
+  // flags), shared with the save-load repair and the lab handover so all
+  // three doors write byte-identical state; only the presentation (sfx +
+  // toast) lives here. The watched flow reaches it via starterMoment();
+  // finishIntro() backstops it so EVERY skip path (veteran offer,
+  // hold-START confirm, headless) converges on the same state. (UI v2.2
+  // defect 4: skipping used to call finishIntro() alone — empty party,
+  // first wild battle soft-locked on a faded screen because no ally
+  // existed. Saves written by that build are healed on load — see
+  // fillV2Defaults in save/schema.mjs.)
   grantPartner() {
     const g = this.game;
-    if (g.state.party.some((m) => m && m.speciesId === 'partner')) return;
     // Partner joins OUTSIDE the ball system (EP014 homage — hard rule).
-    const pikachu = makeMon('partner', 5, SPECIES, MOVES);
-    g.state.party.push(pikachu);
-    const sp = SPECIES.partner;
-    dexRegister(g.state.dex, 'seen', sp.dexNo);
-    dexRegister(g.state.dex, 'caught', sp.dexNo);
-    g.state.story.flags.metPartner = true;
-    g.state.story.flags.refusedBall = true;
+    if (!grantPartnerMon(g.state, SPECIES, MOVES)) return;
     g.audio.playSfx('dex-register');
-    g.ui.toast(sp.name + ' joined your party!');
+    g.ui.toast(SPECIES.partner.name + ' joined your party!');
   }
 
   finishIntro() {
@@ -205947,12 +205992,9 @@ Object.assign(OverworldScene.prototype, {
       }
       next(); return;
     }
-    // ADR-025 §2: the CHOICE POINT primitive. An authored beat offers
-    // unlabelled options through the existing ui.showMenu (keyboard /
-    // touch parity is the menu's own); the chosen option applies its
-    // bond delta (swing-clamped to <=2 inside applyBond), queues the
-    // heart pip for the consequence dialogue, then plays its lines.
-    // Choices never gate the story: every option advances the beat.
+    // ADR-025 §2: the CHOICE POINT primitive — unlabelled options via
+    // ui.showMenu; the pick applies its bond delta (clamped in
+    // applyBond) + heart pip, then plays its lines. Never story-gating.
     if (s.choice) {
       const c = s.choice;
       const who = c.who || '';
@@ -205968,10 +206010,8 @@ Object.assign(OverworldScene.prototype, {
       });
       return;
     }
-    // ADR-025 §2: a tier-variant beat. Emits the scene's lines for the
-    // character's CURRENT tier when a variant exists for it (e.g. the
-    // champion scene's Close-only mutual-respect lines); otherwise the
-    // beat is silent and the authored scene around it plays unchanged.
+    // ADR-025 §2: a tier-variant beat — emits the scene's lines for the
+    // character's CURRENT tier when a variant exists; else silent.
     if (s.sayVar) {
       const lines = bondSceneLines(g.state, s.sayVar.npc, s.sayVar.scene);
       if (lines && lines.length) {
@@ -206002,10 +206042,8 @@ Object.assign(OverworldScene.prototype, {
       next(); return;
     }
     if (s.giveMon) { this.giftMon(s.giveMon.species, s.giveMon.level, next); return; }
-    // Stage O2: the GS Orb grant beat. The story GS Orb IS the Cheat
-    // Shop collectible item (one id, one representation): a player who
-    // already owns one hears the variant line and is NOT granted a
-    // duplicate — the errand beat can never soft-fail on shop stock.
+    // Stage O2: the GS Orb grant beat — the story GS Orb IS the Cheat
+    // Shop item (one id); an owner hears the variant, never a duplicate.
     if (s.gsBall) {
       if ((g.state.bag.gsball || 0) > 0) {
         g.ui.say([
@@ -206023,11 +206061,9 @@ Object.assign(OverworldScene.prototype, {
       }
       return;
     }
-    // Stage O2: cap-safe gift delivery (the Cheat Shop stage's
-    // cheatDeliverMon, NOT giftMon's blind push): party if room, else
-    // the first PC box with space, with a toast naming the box. Total
-    // refusal STALLS the chain — no flag, no event-done — so the beat
-    // re-fires on a later entry once room exists.
+    // Stage O2: cap-safe gift delivery (cheatDeliverMon, NOT giftMon's
+    // blind push): party if room, else first PC box with space. Total
+    // refusal STALLS the chain (no flag), so the beat re-fires later.
     if (s.giftCapSafe) {
       const spec = s.giftCapSafe;
       const res = g.state.party.length < 6
@@ -206061,11 +206097,9 @@ Object.assign(OverworldScene.prototype, {
       next(); return;
     }
     // Stage J4a: a scripted battle the story survives either way
-    // (Silver on Route 30). Fought friendly — a loss costs nothing and
-    // never blacks out — the branch flag records the honest outcome
-    // (winFlag / loseFlag), and the chain advances on a win OR a loss.
-    // Fleeing stalls the chain (no flag, no event-done), so the scene
-    // re-fires on the next entry, exactly like a fled wildBattle.
+    // (Silver on Route 30) — friendly, the branch flag records the
+    // honest outcome, the chain advances on a win OR a loss. Fleeing
+    // stalls the chain, so the scene re-fires on the next entry.
     if (s.battleAny) {
       const spec = s.battleAny;
       const t0 = TRAINERS[spec.trainer];
@@ -206721,13 +206755,10 @@ Object.assign(OverworldScene.prototype, {
     });
   },
 
-  // Stage O3: state-variant dialogue resolution. An NPC may carry
-  // dialogueStates: [{ flag?, flagNot?, dialogue }] — the FIRST entry
-  // whose conditions match the story flags supplies the lines for
-  // this talk; otherwise the base dialogue is used. Only the LINES
-  // are swapped: every downstream flow (ferry menus, marts, gifts,
-  // the plain-dialogue fallback in overworld.mjs) proceeds exactly
-  // as shipped. Both talk paths resolve through this one helper.
+  // Stage O3: state-variant dialogue resolution — dialogueStates:
+  // [{ flag?, flagNot?, dialogue }]; the FIRST matching entry supplies
+  // the talk's lines, else the base dialogue. Only LINES are swapped:
+  // every downstream flow proceeds exactly as shipped.
   npcDialogueLines(npc) {
     const g = this.game;
     const stateDlg = Array.isArray(npc.dialogueStates)
@@ -206736,12 +206767,36 @@ Object.assign(OverworldScene.prototype, {
     return (stateDlg ? stateDlg.dialogue : npc.dialogue).map((l) => l.replace('{player}', g.state.player.name));
   },
 
+  // Partner guarantee (hotfix): the lab handover. Fires ONLY for a
+  // player whose intro completed (introDone) yet who walks without the
+  // partner — the stranded shape defect 4's skip paths could write.
+  // The grant runs through the intro's own idempotent core
+  // (grantPartnerMon), so the state written is identical: party member,
+  // dex records, metPartner + refusedBall — VOLTIK still refuses the
+  // ball, here as everywhere. Everyone else returns false and
+  // Hawthorn's ordinary dialogue proceeds untouched.
+  talkHawthorn(npc) {
+    const g = this.game, st = g.state;
+    if (hasPartnerMon(st) || !st.story.flags.introDone) return false;
+    const say = (lines, cb) => g.ui.say(lines.map((l) => l.replace('{player}', st.player.name)), cb, npc.name);
+    say(['{player}. There you are. I have been watching the road all morning, and something has been missing from it.',
+      'VOLTIK is here, trainer — it never left. Whatever tangle the morning made of your first meeting, we will set it right now, properly.',
+      'Go on — say hello. Careful now...'], () => {
+      if (!grantPartnerMon(st, SPECIES, MOVES)) return;
+      g.audio.playSfx('dex-register');
+      g.ui.toast(SPECIES.partner.name + ' joined your party!');
+      say(['...It shocked you too! Ha! That means it likes you. Mostly.',
+        'Listen well: this one will never stay inside a Capture Orb. It walks beside you, or not at all.',
+        'A bond like that is rarer than any badge. Treat it well, {player}. Now — the road is waiting.'], null);
+    });
+    return true;
+  },
+
   sysNpc(npc) {
     const g = this.game;
     const sayLines = (cb) => g.ui.say(this.npcDialogueLines(npc), cb, npc.name);
     // ADR-025 §6 (Bond echo): a character who was Close in a previous
-    // journey says the line, once, the first time the new journey
-    // meets them — then their own scene proceeds. Presentation only.
+    // journey says the line, once, on first meeting. Presentation only.
     const echoId = BOND_NPC_IDS[npc.name];
     if (echoId && takeEchoGreeting(g.state, echoId)) {
       g.ui.say([ECHO_LINE], () => { this.sysNpc(npc); }, npc.name);
@@ -206764,27 +206819,23 @@ Object.assign(OverworldScene.prototype, {
     // Arc 4 Stage S5a: Sinnoh story actors (Rowan, Dawn, Barry, Paul,
     // the commanders, Reggie, the four leaders) run their own scenes.
     if (npc.sinnoh) { if (this.runSinnohNpc(npc)) return true; }
-    // Stage H6: the Mossdeep Space Center's facade researcher
-    // (SPACE RESEARCHER ORBIT, a maps7 townsfolk — no interior
-    // exists and none is faked) carries the two star arcs' briefings.
+    // Stage H6: the Mossdeep Space Center's facade researcher carries
+    // the two star arcs' briefings (no interior exists, none is faked).
     if (npc.name === 'SPACE RESEARCHER ORBIT') { if (this.runSpaceCenterNpc(npc)) return true; }
-    // ADR-025 §2: the Pallet lab Gary is dialogue-only — his lines are
-    // tier-variant (the wary set IS his authored dialogue, so a neutral
-    // run reads byte-identically to before Phase 5).
+    // ADR-025 §2: the Pallet lab Gary is dialogue-only, tier-variant
+    // (the wary set IS his authored dialogue — neutral reads identical).
     if (npc.name === 'GARY' && !npc.trainer) {
       const lines = bondSceneLines(g.state, 'gary', 'lab');
       if (lines) { g.ui.say(lines.map((l) => l.replace('{player}', g.state.player.name)), null, npc.name); return true; }
     }
-    // ADR-025 §5 (Town Tales): tale actors run their stage machine.
-    // The handler returns false when the tale is not at a stage this
-    // actor serves, and the NPC's normal flow (dialogue, trainer
-    // battle, gifts) proceeds untouched — Sabrina's gym battle and the
-    // Cerulean witnesses' small talk included.
+    // Partner guarantee (hotfix): Hawthorn at his lab door runs the
+    // handover for a partner who never arrived (see talkHawthorn).
+    if (npc.name === 'PROF. HAWTHORN') { if (this.talkHawthorn(npc)) return true; }
+    // ADR-025 §5 (Town Tales): tale actors run their stage machine;
+    // a false return lets the NPC's normal flow proceed untouched.
     if (npc.tale) { if (this.runTaleNpc(npc)) return true; }
     // ADR-025 §2: a beaten gym leader whose Town Tale is complete runs
-    // the bond talk (Warm+ gift + tier-variant rematch banter). Placed
-    // after the tale hook: Sabrina's tale stages keep first claim on
-    // her, and the hook itself declines pre-badge / pre-tale.
+    // the bond talk. Placed after the tale hook (first claim is hers).
     if (npc.trainer) { if (this.leaderBondTalk(npc)) return true; }
     if (npc.event) {
       if (!g.state.story.flags['evdone_' + npc.event]) {
@@ -206796,18 +206847,13 @@ Object.assign(OverworldScene.prototype, {
     if (npc.pc) { sayLines(() => this.openPc()); return true; }
     if (npc.mart) { sayLines(() => this.openMart(npc.mart.stock || [])); return true; }
     if (npc.cheat) { sayLines(() => this.openCheatShop()); return true; }
-    // Arc 3.5 Stage F2: Battle Frontier receptionists (F1 maps carry
-    // frontier: '<facilityId>') and the appended Brain audiences
-    // (Lucy on the Pike dais, Brandon on Pyramid floor 7) — the
-    // controller lives in game/frontier.mjs (startFrontier et al).
+    // Arc 3.5 Stage F2: Battle Frontier receptionists + Brain audiences
+    // — the controller lives in game/frontier.mjs (startFrontier et al).
     if (npc.frontier) { startFrontier(g, npc.frontier, this); return true; }
     if (npc.frontierBrain) { startBrainAudience(g, npc.frontierBrain, this); return true; }
-    // Stage F3: the frontierhub Scott's lines are keyed on the symbol
-    // state (counts over badges.symbols), which dialogueStates'
-    // flag/flagNot keys cannot express — his talk-branch lives in the
-    // Frontier controller (the name-keyed SPACE RESEARCHER precedent;
-    // the Hoenn Scott is a different actor and never reaches here,
-    // his hoenn: key dispatches above).
+    // Stage F3: frontierhub Scott's lines key on the symbol state,
+    // which dialogueStates cannot express — his branch lives in the
+    // Frontier controller (name-keyed, SPACE RESEARCHER precedent).
     if (npc.name === 'SCOTT' && this.mapId === 'frontierhub') { talkFrontierScott(g, this); return true; }
     if (npc.slots) { sayLines(() => this.openSlots()); return true; }
     if (npc.prize) {
@@ -206905,15 +206951,11 @@ Object.assign(OverworldScene.prototype, {
           });
           return;
         }
-        // CINNABAR TRAP FIX (owner report 2026-10-28): a ferry whose def
-        // carries ferryGate:'surf' enforces the game's own Surf rule —
-        // Soul Badge + a party member that knows Surf, the same pair
-        // sysInteract checks at the water's edge. The Pallet FERRYMAN's
-        // dialogue always claimed "sea legs — and the badges", but the
-        // menu opened for anyone: a fresh player sailed to Cinnabar in
-        // the first minutes and had no way home. Return legs carry no
-        // gate (CAPT SALT, Cinnabar -> Pallet): NO-SOFT-LOCK LAW —
-        // anyone standing on Cinnabar can always sail home.
+        // CINNABAR TRAP FIX (owner report 2026-10-28): a ferryGate:'surf'
+        // ferry enforces the game's own Surf rule (Soul Badge + a party
+        // member who knows Surf — sysInteract's pair). The ungated menu
+        // once let a fresh player sail to Cinnabar with no way home;
+        // return legs carry no gate (NO-SOFT-LOCK LAW).
         if (npc.ferryGate === 'surf' && !(g.state.badges.kanto.includes('soulbadge') && this.partyKnows('surf'))) {
           g.ui.say(['The crossing is no fair-weather hop, trainer.', 'Come back with the Soul Badge in your case and a partner who knows Surf — then we sail.'], null, npc.name);
           return;
