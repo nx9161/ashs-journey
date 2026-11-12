@@ -409,7 +409,7 @@ export class Game {
     // P1/K3 + I2: desktop hint card; show-touch toggle honored on hybrids.
     document.body.classList.toggle('showtouch', !!this.state.settings.showTouch);
     // Headless harness stubs document without documentElement — guard it.
-    if (document.documentElement) document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1);
+    if (document.documentElement) document.documentElement.style.setProperty('--hudscale', this.state.settings.hudScale || 1); if (document.documentElement) document.documentElement.style.setProperty('--ctlop', this.state.settings.controlsOpacity || 1);
     this.ui.showHintCard(this.layoutMode === 'desktop');
     // UI v2.1: the frame layer tracks the canvas box on every layout pass
     // (boot, resize, orientation, fullscreen) — not just the UI tick throttle.
@@ -1096,7 +1096,7 @@ export class Game {
       { label: 'Flip controls: ' + yn(s.controlsFlip), value: 'flip' },
       { label: 'Controls — remap keys', value: 'controls' },
       { label: 'Show touch controls: ' + yn(s.showTouch), value: 'showtouch' },
-      { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' },
+      { label: 'HUD scale: ' + Math.round(s.hudScale * 100) + '%', value: 'hudscale' }, { label: 'Controls opacity: ' + Math.round((s.controlsOpacity || 1) * 100) + '%', value: 'ctlop' },
       { label: 'Legal / credits', value: 'legal' },
     ];
     // Track B: account surface (wireframes §10). Labels are static — the
@@ -1121,7 +1121,7 @@ export class Game {
       else if (v === 'swmode') { s.switchMode = s.switchMode === 'shift' ? 'set' : 'shift'; g.ui.toast('Switch style: ' + (s.switchMode === 'shift' ? 'Shift' : 'Set')); }
       else if (v === 'diff') { g.openDifficultyMenu(); return; }
       else if (v === 'hrules') { g.openHouseRulesMenu(); return; }
-      else if (v === 'shake') s.shake = !s.shake;
+      else if (v === 'shake') s.shake = !s.shake; else if (v === 'ctlop') { s.controlsOpacity = (s.controlsOpacity || 1) <= 0.4 ? 1 : Math.round(((s.controlsOpacity || 1) - 0.15) * 100) / 100; if (typeof document !== 'undefined') document.documentElement.style.setProperty('--ctlop', s.controlsOpacity); }
       else if (v === 'vib') s.vibration = !s.vibration;
       else if (v === 'asave') s.autosave = !s.autosave;
       else if (v === 'rmotion') { s.reducedMotion = !s.reducedMotion; g.audio.setReducedMotion(s.reducedMotion); if (typeof document !== 'undefined' && document.body) document.body.classList.toggle('reduced-motion', !!s.reducedMotion); }
