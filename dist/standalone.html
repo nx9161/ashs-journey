@@ -10,7 +10,20 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#070a16;touch-action:none;overscroll-behavior:none}
 body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-#stage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 90% 60% at 50% 38%,rgba(46,74,143,.32),rgba(7,10,22,0) 62%),repeating-linear-gradient(45deg,rgba(188,210,245,.03) 0 2px,transparent 2px 14px),#070a16}
+#stage{position:fixed;inset:0;height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 90% 60% at 50% 38%,rgba(46,74,143,.32),rgba(7,10,22,0) 62%),repeating-linear-gradient(45deg,rgba(188,210,245,.03) 0 2px,transparent 2px 14px),#070a16}
+/* UI v2.5 (mobile controls fix): the stage is two regions — #screenwrap
+   (flexes, letterboxes the canvas) and #ctlband (the reserved control
+   band in flow below it). The touch pad lives in the band, never as a
+   viewport overlay, so control boxes and the canvas box are disjoint by
+   layout at every size. Landscape dissolves the band into grid flanks. */
+#screenwrap{flex:1 1 auto;width:100%;min-height:0;min-width:0;display:flex;align-items:center;justify-content:center}
+#ctlband{width:100%;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+body.desktop #ctlband{display:none}
+body.desktop.showtouch #ctlband{display:block}
+@media (pointer:coarse){body.desktop #ctlband{display:block}}
+body.landscape #stage{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:1fr auto;align-items:stretch;justify-content:stretch;column-gap:20px;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
+body.landscape #screenwrap{grid-column:2;grid-row:1/3;width:auto}
+body.landscape #ctlband{display:contents}
 #game{image-rendering:pixelated;background:#000;outline:2px solid #8d9bbf;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 #ui{position:fixed;inset:0;pointer-events:none}
 /* UI v2.1 frame layer: box synced to the canvas rect by UI._syncChipAnchor.
@@ -189,20 +202,39 @@ body.desktop.showtouch .rtmoves{display:flex}
 .toasts{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 8px;pointer-events:none}
 .toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:16px;font-weight:700;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hudtoast{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-weight:bold}
-/* controls — emulator pad in deep navy/silver to sit under the Pt chrome */
-.controls{position:absolute;inset:0;pointer-events:none;opacity:var(--ctlop,1)}
-.dpad{position:absolute;left:16px;bottom:12px;width:144px;height:144px;pointer-events:auto}
-body.flip .dpad{left:auto;right:16px}
+/* controls — emulator pad in deep navy/silver to sit under the Pt chrome.
+   UI v2.5: the pad renders INSIDE #ctlband (page flow), not as a viewport
+   overlay. Portrait band = flex rows: [D-pad | ABXY diamond] over a
+   centered START/SELECT row; if the row ever gets too narrow the diamond
+   wraps whole below the D-pad (still in flow, still disjoint).
+   Geometry law: the D-pad is one cross driven by a single 48px unit; the
+   ABXY diamond is an ellipse arrangement 3 units wide x 2 units tall
+   (56px unit, 11px gutters) whose four boxes are pairwise disjoint by
+   construction — X/B separate from A/Y on the horizontal axis, X from B
+   on the vertical axis. Landscape: .controls dissolves (display:contents)
+   and the clusters become grid items flanking #screenwrap. */
+.controls{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:8px 12px;pointer-events:none;opacity:var(--ctlop,1)}
+body.flip .controls{flex-direction:row-reverse}
+.dpad{position:relative;width:144px;height:144px;flex:none;pointer-events:auto}
 .padbtn{position:absolute;width:48px;height:48px;background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:8px;font-family:var(--font);font-size:16px;pointer-events:auto;touch-action:none}
 .p-up{left:48px;top:0}.p-down{left:48px;bottom:0}.p-left{left:0;top:48px}.p-right{right:0;top:48px}
 .padbtn:active{background:#3c4f7d}
-.ab{position:absolute;right:16px;bottom:12px;width:160px;height:110px;pointer-events:auto}
-body.flip .ab{right:auto;left:16px}
-.abtn{position:absolute;width:72px;height:72px;border-radius:50%;background:#26304d;color:#fff;border:2px solid #8d9bbf;font-family:var(--font);font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
-.a-a{right:0;bottom:0}.a-b{left:0;bottom:0}
+.ab{position:relative;width:178px;height:122px;flex:none;pointer-events:auto}
+.abtn{position:absolute;width:56px;height:56px;border-radius:50%;background:#26304d;color:#fff;border:2px solid #8d9bbf;font-family:var(--font);font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
+.a-x{left:50%;top:0;transform:translateX(-50%)}
+.a-a{right:0;top:50%;transform:translateY(-50%)}
+.a-b{left:50%;bottom:0;transform:translateX(-50%)}
+.a-y{left:0;top:50%;transform:translateY(-50%)}
 .abtn:active{background:#c03028}
-.sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;pointer-events:auto}
+.sysbtns{position:relative;width:100%;display:flex;gap:8px;justify-content:center;pointer-events:auto}
 .sysbtn{background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:14px;font-family:var(--font);font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
+body.landscape .controls{display:contents;opacity:1}
+body.landscape .dpad{grid-column:1;grid-row:1/3;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .ab{grid-column:3;grid-row:1;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .sysbtns{grid-column:3;grid-row:2;width:auto;align-self:start;opacity:var(--ctlop,1)}
+body.flip.landscape .dpad{grid-column:3}
+body.flip.landscape .ab{grid-column:1}
+body.flip.landscape .sysbtns{grid-column:1}
 /* battle commands — UI v2.2 (defect 3): Platinum's touch-screen layout as a
    framed window in the message-box zone (bottom strip, where the canvas
    message box lives), NOT four free-floating gradient bars. Each command is
@@ -300,12 +332,16 @@ body.flip .ab{right:auto;left:16px}
 body.menu-full .hudchips,body.menu-full .hudstrip,body.menu-full .moodpip,body.menu-full .syncdot{display:none}
 .inbattle .hudchips{display:none}
 @media (max-width:560px){.hudchips{top:84px;max-width:calc(100% - 72px)}.objchip{max-width:min(300px,calc(100% - 72px))}}
-/* HUD quick-strip — one light Platinum frame rail with the 4 buttons */
-.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:0;pointer-events:auto;z-index:15;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px 6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+/* HUD quick-strip — one light Platinum frame rail with the 4 buttons.
+   UI v2.5 QA D-1: the strip is width-capped to the frame and its buttons
+   may flex-shrink, so when a very short viewport snaps the canvas down
+   to 256px the strip compresses inside the frame instead of overhanging
+   its left edge. No-op at normal frame sizes (strip is 272px natural). */
+.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:0;max-width:calc(100% - 16px);pointer-events:auto;z-index:15;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px 6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .nohud .hudstrip{display:none}
 .inbattle .hudstrip{display:none}
 .inbattle .hintcard{display:none}
-.hudbtn{position:relative;width:64px;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-left:1px solid #ccd6ea;border-radius:0;cursor:pointer;touch-action:none;font-family:var(--font)}
+.hudbtn{position:relative;width:64px;min-width:0;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-left:1px solid #ccd6ea;border-radius:0;cursor:pointer;touch-action:none;font-family:var(--font)}
 .hudbtn:first-child{border-left:0}
 .hudbtn:active{background:var(--sky)}
 .hudicon{width:24px;height:24px;image-rendering:pixelated}
@@ -322,10 +358,9 @@ body.landscape .moodpip{display:none}
 .pstat{font-size:14px;font-weight:bold;color:#a040a0;margin-left:6px}
 .pbadge{display:inline-block;background:var(--gold);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:1px 8px;border:2px solid var(--frame);border-radius:4px;margin-left:6px;vertical-align:middle}
 .hudstrip{transform:scale(var(--hudscale,1));transform-origin:top right}
-body.landscape .hudstrip{transform:translateY(-50%) scale(var(--hudscale,1))}
-body.landscape .hudstrip{top:50%;flex-direction:column}
-body.landscape .hudbtn{border-left:0;border-top:1px solid #ccd6ea}
-body.landscape .hudbtn:first-child{border-top:0}
+/* UI v2.5: the landscape right-edge rail is retired — it rendered ON the
+   canvas. Landscape now uses the portrait form (in-frame, top-right,
+   horizontal), inside the frame bounds and clear of the dialogue zone. */
 /* desktop keyboard-hint card — Platinum mini-frame */
 .hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-family:var(--font);font-size:16px;font-weight:700;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hintcard-x{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;border:2px solid var(--frame);border-radius:6px;font-size:14px;font-weight:bold;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer;white-space:nowrap}
@@ -337,8 +372,8 @@ body.desktop .controls{display:none}
 .cc-arc{font-size:17px;font-weight:700;color:#3c4a6a;margin-bottom:6px;line-height:1.4;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .cc-anime{font-size:16px;font-weight:700;color:#6a7799;line-height:1.4;margin-bottom:4px;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .cc-hint{font-size:16px;font-weight:700;color:var(--red);margin-top:10px;animation:blink 1s infinite;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
-body.desktop.showtouch .controls{display:block}
-@media (pointer:coarse){body.desktop .controls{display:block}}
+body.desktop.showtouch .controls{display:flex}
+@media (pointer:coarse){body.desktop .controls{display:flex}}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
    Structure and behavior untouched; presentation only. */
 .authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
@@ -397,7 +432,7 @@ body.desktop.showtouch .controls{display:block}
 </style>
 </head>
 <body>
-<div id="stage"><canvas id="game"></canvas></div>
+<div id="stage"><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script>
 
@@ -196380,8 +196415,9 @@ class UI {
     // in this frame layer, whose box is synced to the canvas rect by
     // _syncChipAnchor(). DOM chrome positioned against the viewport is how
     // v2 shipped dialogue/commands/party OUTSIDE the frame on the live build.
-    // Viewport-layer elements stay in #ui: touch controls, login/name-entry
-    // overlays (full-screen modal dim), hint card, 503 banner, sync dot.
+    // Viewport-layer elements stay in #ui: login/name-entry overlays
+    // (full-screen modal dim), hint card, 503 banner, sync dot. The touch
+    // controls live in #stage's #ctlband (UI v2.5, see buildControls).
     this.frame = this.el('div', 'frameui', this.root);
     if (typeof window !== 'undefined' && window.addEventListener) {
       window.addEventListener('resize', () => this._syncChipAnchor());
@@ -196413,7 +196449,11 @@ class UI {
 
   // ---- touch controls ----
   buildControls() {
-    const g = this.el('div', 'controls', this.root);
+    // UI v2.5: the pad mounts in #ctlband (the reserved in-flow band in
+    // #stage), not the #ui viewport overlay — layout keeps it disjoint
+    // from the canvas. Fallback to #ui if an old shell lacks the band.
+    const band = document.getElementById && document.getElementById('ctlband');
+    const g = this.el('div', 'controls', band || this.root);
     const pad = this.el('div', 'dpad', g);
     this.dpadEl = pad;
     const mk = (action, cls, label) => {
@@ -211597,38 +211637,38 @@ class Game {
     }
     const w = window.innerWidth, h = window.innerHeight;
     const fine = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
-    // D3: desktop = fine pointer at >=700px, OR a laptop-class width regardless of
-    // what the browser reports (some browsers/headless never match
-    // '(pointer: fine)' — without the width fallback they fell into the phone
-    // landscape path and rendered stretched with touch controls on a laptop).
-    // Coarse-pointer wide tablets still land here and get controls back via the
-    // (pointer:coarse) CSS override.
-    if (w >= 700 && (fine || w >= 1024)) {
-      this.layoutMode = 'desktop';
-      // D3: aspect-locked 16:9 canvas. The old h*0.62 cap stretched the buffer
-      // on 1280x800-class viewports (1120x496 CSS over a 384x216 backing store).
-      // Height now reserves room for the hint card instead of a fixed fraction.
+    // D3: desktop = fine pointer at >=700px, OR a laptop-class width regardless
+    // of what the browser reports (some browsers/headless never match
+    // '(pointer: fine)' and fell into the phone landscape path, stretched,
+    // with touch controls on a laptop). Coarse wide tablets land here too and
+    // get controls back via the (pointer:coarse) CSS override.
+    const mode = (w >= 700 && (fine || w >= 1024)) ? 'desktop' : (w > h ? 'landscape' : 'portrait');
+    this.layoutMode = mode;
+    const bd = document.body.classList;
+    bd.toggle('desktop', mode === 'desktop');
+    bd.toggle('landscape', mode === 'landscape');
+    // UI v2.5: on phones the canvas letterboxes inside #screenwrap (the
+    // region above the reserved control band / between the flank clusters)
+    // and is sized FROM it, so it can never reach the controls. Headroom
+    // factors absorb the renderer's snap tolerance (B2-G5, <= +8%).
+    const wrap = document.getElementById && document.getElementById('screenwrap');
+    const ww = wrap ? wrap.clientWidth : w, wh = wrap ? wrap.clientHeight : h;
+    if (mode === 'desktop') {
+      // D3: aspect-locked 16:9; height reserves room for the hint card.
       const cssW0 = Math.min(1120, w * 0.9);
       let cw = cssW0, ch = cssW0 * 9 / 16;
       const maxH = Math.min(630, Math.max(240, h - 140));
       if (ch > maxH) { ch = maxH; cw = ch * 16 / 9; }
       r.resize(384, 216, Math.round(cw), Math.round(ch));
-      document.body.classList.add('desktop');
-    } else if (w > h) {
-      this.layoutMode = 'landscape';
-      // D3: aspect-locked 4:3 (was w*0.72 x h — stretched on every landscape phone).
-      const lw = Math.min(w * 0.72, h * 4 / 3);
-      r.resize(256, 192, Math.round(lw), Math.round(lw * 3 / 4));
-      document.body.classList.remove('desktop');
+    } else if (mode === 'landscape') {
+      // 4:3 in the screen column; width capped so snapped height fits.
+      const cw = Math.min(ww * 0.96, wh * 1.234);
+      r.resize(256, 192, Math.round(cw), Math.round(cw * 3 / 4));
     } else {
-      this.layoutMode = 'portrait';
-      // Portrait: canvas takes 58% of the height (was 45% — left a dead
-      // void below and shrank the game's subject). Logical stays 256x256.
-      r.resize(256, 256, w, h * 0.58);
-      document.body.classList.remove('desktop');
+      // Square: short side requested, height pre-divided by snap tolerance.
+      const s = Math.min(ww, wh / 1.08);
+      r.resize(256, 256, Math.round(s), Math.round(s));
     }
-    // P1/K2: landscape gets the right-edge command rail (CSS re-rails the HUD strip).
-    document.body.classList.toggle('landscape', this.layoutMode === 'landscape');
     document.body.classList.toggle('flip', !!this.state.settings.controlsFlip);
     // Elevation C1: the reduced-motion body gate for the menu transition.
     document.body.classList.toggle('reduced-motion', !!this.state.settings.reducedMotion);
@@ -213523,6 +213563,6 @@ if (typeof Game !== 'undefined') Object.assign(Game.prototype, {
 });
 
 </script>
-<!-- contentHash:7ef26e2dc4e5a9b90ed15708e75d7f9d58ffbd671399b91ec23959310379383a -->
+<!-- contentHash:9b8c096c1dbf177c5ff5a9f0316bfc3bb4989d5ebb7433dab625bdcc9f751c55 -->
 </body>
 </html>

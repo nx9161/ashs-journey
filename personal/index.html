@@ -10,7 +10,20 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;overflow:hidden;background:#070a16;touch-action:none;overscroll-behavior:none}
 body{font-family:var(--font);-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
-#stage{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 90% 60% at 50% 38%,rgba(46,74,143,.32),rgba(7,10,22,0) 62%),repeating-linear-gradient(45deg,rgba(188,210,245,.03) 0 2px,transparent 2px 14px),#070a16}
+#stage{position:fixed;inset:0;height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(ellipse 90% 60% at 50% 38%,rgba(46,74,143,.32),rgba(7,10,22,0) 62%),repeating-linear-gradient(45deg,rgba(188,210,245,.03) 0 2px,transparent 2px 14px),#070a16}
+/* UI v2.5 (mobile controls fix): the stage is two regions — #screenwrap
+   (flexes, letterboxes the canvas) and #ctlband (the reserved control
+   band in flow below it). The touch pad lives in the band, never as a
+   viewport overlay, so control boxes and the canvas box are disjoint by
+   layout at every size. Landscape dissolves the band into grid flanks. */
+#screenwrap{flex:1 1 auto;width:100%;min-height:0;min-width:0;display:flex;align-items:center;justify-content:center}
+#ctlband{width:100%;padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+body.desktop #ctlband{display:none}
+body.desktop.showtouch #ctlband{display:block}
+@media (pointer:coarse){body.desktop #ctlband{display:block}}
+body.landscape #stage{display:grid;grid-template-columns:auto 1fr auto;grid-template-rows:1fr auto;align-items:stretch;justify-content:stretch;column-gap:20px;padding-left:max(10px,env(safe-area-inset-left,0px));padding-right:max(10px,env(safe-area-inset-right,0px));padding-top:env(safe-area-inset-top,0px)}
+body.landscape #screenwrap{grid-column:2;grid-row:1/3;width:auto}
+body.landscape #ctlband{display:contents}
 #game{image-rendering:pixelated;background:#000;outline:2px solid #8d9bbf;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 #ui{position:fixed;inset:0;pointer-events:none}
 /* UI v2.1 frame layer: box synced to the canvas rect by UI._syncChipAnchor.
@@ -189,20 +202,39 @@ body.desktop.showtouch .rtmoves{display:flex}
 .toasts{position:absolute;left:0;right:0;bottom:12px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 8px;pointer-events:none}
 .toast{background:var(--paper);color:var(--ink);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;font-size:16px;font-weight:700;line-height:1.4;padding:10px 16px;border-radius:3px;pointer-events:none;max-width:min(520px,92%);text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hudtoast{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;font-weight:bold}
-/* controls — emulator pad in deep navy/silver to sit under the Pt chrome */
-.controls{position:absolute;inset:0;pointer-events:none;opacity:var(--ctlop,1)}
-.dpad{position:absolute;left:16px;bottom:12px;width:144px;height:144px;pointer-events:auto}
-body.flip .dpad{left:auto;right:16px}
+/* controls — emulator pad in deep navy/silver to sit under the Pt chrome.
+   UI v2.5: the pad renders INSIDE #ctlband (page flow), not as a viewport
+   overlay. Portrait band = flex rows: [D-pad | ABXY diamond] over a
+   centered START/SELECT row; if the row ever gets too narrow the diamond
+   wraps whole below the D-pad (still in flow, still disjoint).
+   Geometry law: the D-pad is one cross driven by a single 48px unit; the
+   ABXY diamond is an ellipse arrangement 3 units wide x 2 units tall
+   (56px unit, 11px gutters) whose four boxes are pairwise disjoint by
+   construction — X/B separate from A/Y on the horizontal axis, X from B
+   on the vertical axis. Landscape: .controls dissolves (display:contents)
+   and the clusters become grid items flanking #screenwrap. */
+.controls{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:8px 12px;pointer-events:none;opacity:var(--ctlop,1)}
+body.flip .controls{flex-direction:row-reverse}
+.dpad{position:relative;width:144px;height:144px;flex:none;pointer-events:auto}
 .padbtn{position:absolute;width:48px;height:48px;background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:8px;font-family:var(--font);font-size:16px;pointer-events:auto;touch-action:none}
 .p-up{left:48px;top:0}.p-down{left:48px;bottom:0}.p-left{left:0;top:48px}.p-right{right:0;top:48px}
 .padbtn:active{background:#3c4f7d}
-.ab{position:absolute;right:16px;bottom:12px;width:160px;height:110px;pointer-events:auto}
-body.flip .ab{right:auto;left:16px}
-.abtn{position:absolute;width:72px;height:72px;border-radius:50%;background:#26304d;color:#fff;border:2px solid #8d9bbf;font-family:var(--font);font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
-.a-a{right:0;bottom:0}.a-b{left:0;bottom:0}
+.ab{position:relative;width:178px;height:122px;flex:none;pointer-events:auto}
+.abtn{position:absolute;width:56px;height:56px;border-radius:50%;background:#26304d;color:#fff;border:2px solid #8d9bbf;font-family:var(--font);font-size:20px;font-weight:bold;pointer-events:auto;touch-action:none}
+.a-x{left:50%;top:0;transform:translateX(-50%)}
+.a-a{right:0;top:50%;transform:translateY(-50%)}
+.a-b{left:50%;bottom:0;transform:translateX(-50%)}
+.a-y{left:0;top:50%;transform:translateY(-50%)}
 .abtn:active{background:#c03028}
-.sysbtns{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;pointer-events:auto}
+.sysbtns{position:relative;width:100%;display:flex;gap:8px;justify-content:center;pointer-events:auto}
 .sysbtn{background:#26304d;color:#dfe7f5;border:2px solid #8d9bbf;border-radius:14px;font-family:var(--font);font-size:14px;padding:10px 14px;min-height:48px;pointer-events:auto}
+body.landscape .controls{display:contents;opacity:1}
+body.landscape .dpad{grid-column:1;grid-row:1/3;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .ab{grid-column:3;grid-row:1;align-self:center;opacity:var(--ctlop,1)}
+body.landscape .sysbtns{grid-column:3;grid-row:2;width:auto;align-self:start;opacity:var(--ctlop,1)}
+body.flip.landscape .dpad{grid-column:3}
+body.flip.landscape .ab{grid-column:1}
+body.flip.landscape .sysbtns{grid-column:1}
 /* battle commands — UI v2.2 (defect 3): Platinum's touch-screen layout as a
    framed window in the message-box zone (bottom strip, where the canvas
    message box lives), NOT four free-floating gradient bars. Each command is
@@ -300,12 +332,16 @@ body.flip .ab{right:auto;left:16px}
 body.menu-full .hudchips,body.menu-full .hudstrip,body.menu-full .moodpip,body.menu-full .syncdot{display:none}
 .inbattle .hudchips{display:none}
 @media (max-width:560px){.hudchips{top:84px;max-width:calc(100% - 72px)}.objchip{max-width:min(300px,calc(100% - 72px))}}
-/* HUD quick-strip — one light Platinum frame rail with the 4 buttons */
-.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:0;pointer-events:auto;z-index:15;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px 6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+/* HUD quick-strip — one light Platinum frame rail with the 4 buttons.
+   UI v2.5 QA D-1: the strip is width-capped to the frame and its buttons
+   may flex-shrink, so when a very short viewport snaps the canvas down
+   to 256px the strip compresses inside the frame instead of overhanging
+   its left edge. No-op at normal frame sizes (strip is 272px natural). */
+.hudstrip{position:absolute;top:8px;right:8px;display:flex;gap:0;max-width:calc(100% - 16px);pointer-events:auto;z-index:15;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:4px 6px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
 .nohud .hudstrip{display:none}
 .inbattle .hudstrip{display:none}
 .inbattle .hintcard{display:none}
-.hudbtn{position:relative;width:64px;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-left:1px solid #ccd6ea;border-radius:0;cursor:pointer;touch-action:none;font-family:var(--font)}
+.hudbtn{position:relative;width:64px;min-width:0;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:transparent;border:0;border-left:1px solid #ccd6ea;border-radius:0;cursor:pointer;touch-action:none;font-family:var(--font)}
 .hudbtn:first-child{border-left:0}
 .hudbtn:active{background:var(--sky)}
 .hudicon{width:24px;height:24px;image-rendering:pixelated}
@@ -322,10 +358,9 @@ body.landscape .moodpip{display:none}
 .pstat{font-size:14px;font-weight:bold;color:#a040a0;margin-left:6px}
 .pbadge{display:inline-block;background:var(--gold);color:var(--ink);font-size:14px;font-weight:bold;letter-spacing:1px;padding:1px 8px;border:2px solid var(--frame);border-radius:4px;margin-left:6px;vertical-align:middle}
 .hudstrip{transform:scale(var(--hudscale,1));transform-origin:top right}
-body.landscape .hudstrip{transform:translateY(-50%) scale(var(--hudscale,1))}
-body.landscape .hudstrip{top:50%;flex-direction:column}
-body.landscape .hudbtn{border-left:0;border-top:1px solid #ccd6ea}
-body.landscape .hudbtn:first-child{border-top:0}
+/* UI v2.5: the landscape right-edge rail is retired — it rendered ON the
+   canvas. Landscape now uses the portrait form (in-frame, top-right,
+   horizontal), inside the frame bounds and clear of the dialogue zone. */
 /* desktop keyboard-hint card — Platinum mini-frame */
 .hintcard{position:absolute;left:50%;transform:translateX(-50%);bottom:8px;display:flex;align-items:center;gap:10px;background-color:var(--paper);background-image:var(--rivets);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;color:var(--ink);font-family:var(--font);font-size:16px;font-weight:700;padding:8px 8px 8px 16px;pointer-events:auto;z-index:25;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.35);-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .hintcard-x{background:linear-gradient(#4a7dd0,#2a4d9c);color:#fff;border:2px solid var(--frame);border-radius:6px;font-size:14px;font-weight:bold;font-family:inherit;padding:8px 12px;min-height:48px;cursor:pointer;white-space:nowrap}
@@ -337,8 +372,8 @@ body.desktop .controls{display:none}
 .cc-arc{font-size:17px;font-weight:700;color:#3c4a6a;margin-bottom:6px;line-height:1.4;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .cc-anime{font-size:16px;font-weight:700;color:#6a7799;line-height:1.4;margin-bottom:4px;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
 .cc-hint{font-size:16px;font-weight:700;color:var(--red);margin-top:10px;animation:blink 1s infinite;-webkit-text-stroke:.8px currentColor;letter-spacing:-.3px}
-body.desktop.showtouch .controls{display:block}
-@media (pointer:coarse){body.desktop .controls{display:block}}
+body.desktop.showtouch .controls{display:flex}
+@media (pointer:coarse){body.desktop .controls{display:flex}}
 /* Track B auth — Platinum frame card, system-blue head, silver tabs.
    Structure and behavior untouched; presentation only. */
 .authcard{background:var(--paper);border:2px solid var(--frame);outline:2px solid var(--frame2);outline-offset:-5px;border-radius:3px;padding:0;width:min(440px,94vw);max-height:92dvh;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.35);overflow:hidden}
@@ -397,9 +432,9 @@ body.desktop.showtouch .controls{display:block}
 </style>
 </head>
 <body>
-<div id="stage"><canvas id="game"></canvas></div>
+<div id="stage"><div id="screenwrap"><canvas id="game"></canvas></div><div id="ctlband"></div></div>
 <div id="ui"></div>
 <script src="game.js"></script>
-<!-- contentHash:4cc3020c09c1210a770a6aabfc7e7b497b5a5f8faba2f5f04ae6a614f8942fc0 -->
+<!-- contentHash:6435cd82efb7f534772c0acf5f30f78beaa1df07ead0e0d2fcad46672f0501e3 -->
 </body>
 </html>
