@@ -136,3 +136,29 @@ season rotation on a 4-month cycle, derived from the calendar and never
 stored, presentation-only per the weather.mjs doctrine — outdoor season
 light tint, glyph bar and rollover toast driven from the one resolver.
 Mechanical season effects (encounters, areas) remain a future ruling.
+
+## Addendum 2026-11-11 (evening) — the style pass: B2-G5..G7
+Owner scope, in his words: characters, world, and Pokémon; theme
+"micro pixel, same as Pokémon Black" — executed, as everything in this
+program, with original art under Black 2's measured discipline
+(clean-room: structure and numbers, never their pixels; his claimed
+Game Freak license was reviewed and is NOT verified — four uploaded
+drafts, each self-described as a proposal/draft or edited between
+uploads; the standing requirement is independent confirmation from
+Game Freak through official channels).
+
+- **B2-G5 (presentation):** the game presents at an integer multiple
+  of its logical resolution, so every game pixel is exactly k×k device
+  pixels — the DS-native micro-pixel read. Implemented in
+  Renderer.resize (integer backing snap, ≤8% size deviation, legacy
+  path untouched headless).
+- **B2-G6 (world detail):** every placed tile/object earns its place
+  (owner rule, same evening): roads walkable end-to-end, no object on
+  a route tile, placement intentional — mechanically guarded by
+  scripts/audit-reachability.mjs over all maps. Detail redraws follow
+  the owner's standing art standard: ≥3 tones per object, one light
+  direction, modelled ground with clean material edges.
+- **B2-G7 (characters & Pokémon):** detail-redraw queue ordered by
+  screen time (player + partner first, then town casts, leaders,
+  battlers by usage), each wave QA-graded on live screenshots before
+  the next begins. Palette discipline stays B2-G2 (≤16 colors).

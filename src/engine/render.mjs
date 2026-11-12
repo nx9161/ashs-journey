@@ -71,15 +71,32 @@ export class Renderer {
   // drawing still happens in logical units at full display resolution.
   resize(logicalW, logicalH, cssW, cssH) {
     this.viewW = logicalW; this.viewH = logicalH;
-    const bw = Math.round((cssW != null ? cssW : logicalW) * this.dpr);
-    const bh = Math.round((cssH != null ? cssH : logicalH) * this.dpr);
+    let bw = Math.round((cssW != null ? cssW : logicalW) * this.dpr);
+    let bh = Math.round((cssH != null ? cssH : logicalH) * this.dpr);
+    let styleW = cssW != null ? cssW : logicalW;
+    let styleH = cssH != null ? cssH : logicalH;
+    // Micro-pixel presentation (Black 2 imposition B2-G5, 2026-11-11):
+    // snap the backing store to an INTEGER multiple of the logical size
+    // and size the element to match (backing / dpr), so every game pixel
+    // lands on exactly k x k device pixels — uniform, DS-native pixels
+    // instead of the alternating 1px/2px shimmer of a fractional fit.
+    // Only when a real CSS box was requested and the snap stays within
+    // 8% of it; headless and fallback paths keep the legacy sizing.
+    if (cssW != null && cssH != null && this.canvas.style && logicalW && logicalH) {
+      let k = Math.max(1, Math.round((cssW * this.dpr) / logicalW));
+      if ((logicalW * k) / this.dpr > cssW * 1.08 && k > 1) k -= 1;
+      bw = logicalW * k;
+      bh = logicalH * k;
+      styleW = bw / this.dpr;
+      styleH = bh / this.dpr;
+    }
     this.canvas.width = bw;
     this.canvas.height = bh;
     this.scaleX = logicalW ? bw / logicalW : this.dpr;
     this.scaleY = logicalH ? bh / logicalH : this.dpr;
     if (this.canvas.style) {
-      this.canvas.style.width = (cssW != null ? cssW : logicalW) + 'px';
-      this.canvas.style.height = (cssH != null ? cssH : logicalH) + 'px';
+      this.canvas.style.width = styleW + 'px';
+      this.canvas.style.height = styleH + 'px';
     }
   }
 
