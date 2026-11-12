@@ -1,12 +1,9 @@
-# chimchar-front-accent — Arc4 S2a accent frame (blink). Recolor-only delta over chimchar-front.
+# chimchar-front-accent — Wave G Sinnoh accent frame (crest (blink fallback)). Recolor-only delta over chimchar-front.
 PIXD chimchar-front-accent chimchar-front 64 64
-25 24 O
-39 24 O
-32 28 O
-30 29 O
-31 29 O
-32 29 O
-33 29 O
-34 29 O
-32 30 O
+22 3 O
+22 4 O
+23 4 O
+21 5 O
+22 5 O
+23 5 O
 PAL

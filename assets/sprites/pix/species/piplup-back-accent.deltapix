@@ -1,11 +1,15 @@
-# piplup-back-accent — Arc4 S2a accent frame (crest/fin twitch, recolor-only).
+# piplup-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over piplup-back.
 PIXD piplup-back-accent piplup-back 64 64
-32 16 O
-28 17 O
-29 17 O
-30 17 O
-31 17 O
-32 17 O
-33 17 O
-34 17 O
+32 6 O
+33 6 O
+34 6 O
+31 7 O
+32 7 O
+33 7 O
+34 7 O
+35 7 O
+32 8 O
+33 8 O
+34 8 O
+35 8 O
 PAL

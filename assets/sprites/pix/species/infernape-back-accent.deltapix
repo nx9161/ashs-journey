@@ -1,11 +1,8 @@
-# infernape-back-accent — Arc4 S2a accent frame (crest/fin twitch, recolor-only).
+# infernape-back-accent — Wave G Sinnoh accent frame (crest/fin twitch). Recolor-only delta over infernape-back.
 PIXD infernape-back-accent infernape-back 64 64
-32 9 O
-32 10 O
-32 11 O
-27 12 O
-32 12 O
-37 12 O
-27 13 O
-37 13 O
+31 4 O
+31 5 O
+30 6 O
+31 6 O
+32 6 O
 PAL
