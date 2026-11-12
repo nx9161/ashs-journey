@@ -1489,7 +1489,7 @@ export class UI {
   // edge. No longer a floating bottom-right page widget.
   buildMoodPip() {
     const b = this.el('button', 'moodpip hidden', this.frame);
-    b.setAttribute('aria-label', 'Pikachu');
+    b.setAttribute('aria-label', 'VOLTIK');
     const cv = this.headless ? null : document.createElement('canvas');
     if (cv) {
       cv.width = 16; cv.height = 16;

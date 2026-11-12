@@ -704,7 +704,7 @@ export const SPECIES_JOHTO = {
     evo: { to: 'donphan', method: 'level', level: 125 }, tm: [1, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 26, 27, 28, 31, 32, 34, 38, 44, 50, 104],
   },
   porygon2: {
-    id: 'porygon2', name: 'Porygon2', dexNo: 233, types: ['normal'],
+    id: 'porygon2', name: 'POLYCRANE2', dexNo: 233, types: ['normal'],
     base: { hp: 85, atk: 80, def: 90, spa: 105, spd: 95, spe: 60 },
     catchRate: 45, growth: 'mediumfast', baseXp: 180, body: 'blob', spriteSeed: 23301,
     eggGroups: ['mineral'], hatchCounter: 20,

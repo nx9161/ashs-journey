@@ -18,7 +18,7 @@ export const CHAPTERS = [
     title: 'The Indigo League',
     arc: 'Pallet Town to the Indigo Plateau — eight gyms, one dream.',
     anime: 'Season 1: Indigo League (Ep 1–69, incl. Ep 70–82 tail)',
-    movies: ['The First Movie — Mewtwo Strikes Back'],
+    movies: ['The First Movie — OMNIGEN Strikes Back'],
   },
   {
     n: 2, id: 'orange-islands', act: 1, region: 'Orange Islands', scope: 'playable',
@@ -39,7 +39,7 @@ export const CHAPTERS = [
     title: 'Johto League Champions',
     arc: 'The road to the Silver Conference.',
     anime: 'Season 4: Johto League Champions (Ep 1–21, Ep 22–48, Ep 49–52)',
-    movies: ['Mewtwo Returns', '4Ever — Celebi: Voice of the Forest'],
+    movies: ['OMNIGEN Returns', '4Ever — Celebi: Voice of the Forest'],
   },
   {
     n: 5, id: 'master-quest', act: 1, region: 'Johto', scope: 'playable',
@@ -54,7 +54,7 @@ export const CHAPTERS = [
     title: 'Rise Through Hoenn',
     arc: 'Locked — Act II (v2).',
     anime: 'Seasons 6–8: Advanced / Advanced Challenge / Advanced Battle',
-    movies: ['Jirachi: Wish Maker', 'Destiny Deoxys', 'Lucario and the Mystery of Mew'],
+    movies: ['Jirachi: Wish Maker', 'Destiny Deoxys', 'Lucario and the Mystery of PRIMARA'],
   },
   {
     n: 7, id: 'battle-frontier', act: 2, region: 'Kanto (Frontier)', scope: 'locked',
@@ -113,8 +113,8 @@ export const BONUS_SHELF = [
   'I Choose You!',
   'The Power of Us',
   'Secrets of the Jungle',
-  'Detective Pikachu',
-  'Mewtwo Strikes Back: Evolution',
+  'Detective VOLTIK',
+  'OMNIGEN Strikes Back: Evolution',
   'Pok\u00e9mon Origins',
   'Pok\u00e9mon Generations',
   'Twilight Wings',

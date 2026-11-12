@@ -152,7 +152,7 @@ export const MAPS3 = {
         dialogue: ["I take this road to visit the tower graves. First — a battle, for luck!", "Luck noted. The road respects you."] },
       { x: 13, y: 8, name: 'GAMER DOSS', art: 'youngster', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         trainer: 'r8_gamer', sight: { dir: 'left', range: 3 },
-        dialogue: ["I bet my lunch money on my Growlithe's nose. It has never once lied about snacks — or challengers!", "My nose for trainers needs recalibrating..."] },
+        dialogue: ["I bet my lunch money on my CINDERPUP's nose. It has never once lied about snacks — or challengers!", "My nose for trainers needs recalibrating..."] },
     ],
     encounters: {
       rate: 0.12,
@@ -213,7 +213,7 @@ export const MAPS3 = {
         dialogue: ["I saw you coming, trainer — yesterday, in fact. Psychic's honor.", "Take this TM. Inside it sleeps a move that reads minds and rattles them."],
         give: { flag: 'seer_tm', items: { tm29: 1 }, text: 'TM29 Psychic' } },
       { x: 2, y: 11, name: 'COPYCAT', art: 'twin', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#3a3a4a', hair: '#7a4a1a',
-        dialogue: ["Copycat's my name — I mimic every word you say... starting now, retroactively.", "Your Doduo impression? Flawless. Wait. That was ME. Ugh, I've confused myself again."] },
+        dialogue: ["Copycat's my name — I mimic every word you say... starting now, retroactively.", "Your TWINBEAK impression? Flawless. Wait. That was ME. Ugh, I've confused myself again."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['pokeball', 'greatball', 'superpotion', 'hyperpotion', 'fullheal', 'revive'] },
         dialogue: ["Saffron Mart, ground floor, everything a traveling trainer needs. The big city's prices, the small town's smile."] },
@@ -280,10 +280,10 @@ export const MAPS3 = {
         dialogue: ["I am Ko, master of this dojo! We were a Gym once — Sabrina's psychics took our sign, but never our spirit!", "You have bested my students and my pride alike. Choose one of my prized fighters as your reward. Choose with your heart."] },
       { x: 4, y: 3, name: 'MONK TETSU', art: 'monk', skin: '#e8b888', shirt: '#c8782a', pants: '#3a3a3a', hair: '#1a1a1a',
         giveMon: { species: 'hitmonlee', level: 30 },
-        dialogue: ["Hitmonlee — the Kicking Fiend. Legs like tempered springs, strikes like thunder.", "Take him as your prize, champion of the dojo. He has been waiting for a worthy corner."] },
+        dialogue: ["SPRINGLEG — the Kicking Fiend. Legs like tempered springs, strikes like thunder.", "Take him as your prize, champion of the dojo. He has been waiting for a worthy corner."] },
       { x: 10, y: 3, name: 'MONK BRUNO2', art: 'monk', skin: '#c89878', shirt: '#c8782a', pants: '#3a3a3a', hair: '#2a1a0a',
         giveMon: { species: 'hitmonchan', level: 30 },
-        dialogue: ["Hitmonchan — the Punching Demon. His gloves have ended a hundred arguments.", "Take him as your prize, champion of the dojo. Every punch, a punctuation mark."] },
+        dialogue: ["PUNCHBOX — the Punching Demon. His gloves have ended a hundred arguments.", "Take him as your prize, champion of the dojo. Every punch, a punctuation mark."] },
     ],
     encounters: null,
     items: [],
@@ -319,7 +319,7 @@ export const MAPS3 = {
       { x: 4, y: 4, name: 'GUARD VEX', art: 'grunt', skin: '#d8a878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#3a2a1a',
         dialogue: ["Silph is under new management, kid — ours. Show yourself out.", "Management's gonna dock my pay for this..."] },
       { x: 13, y: 8, name: 'EMPLOYEE', art: 'lady', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#a05a2a',
-        dialogue: ["They stormed the president's office upstairs. Someone dropped a Card Key in the lobby rush — check the corner by the plants!", "Please — my Porygon project is up there. And, uh. My lunch. Mostly the project."] },
+        dialogue: ["They stormed the president's office upstairs. Someone dropped a Card Key in the lobby rush — check the corner by the plants!", "Please — my POLYCRANE project is up there. And, uh. My lunch. Mostly the project."] },
       { x: 3, y: 8, name: 'RECEPTIONIST', art: 'lady', skin: '#f0c8a0', shirt: '#e86a5a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["Welcome to Silph Co.! ...Is what I would say, on a normal day. Today the lobby belongs to men in black.", "The lift doors upstairs only answer to the Card Key. Company policy. Criminal policy too, apparently."] },
     ],
@@ -355,11 +355,11 @@ export const MAPS3 = {
     signs: [],
     npcs: [
       { x: 15, y: 2, name: 'PRESIDENT', art: 'gent', skin: '#e8b888', shirt: '#4a4a5a', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["You drove them out of my building?! Silph owes you a debt no bonus could cover.", "Take our prototype — the Master Ball. It has never failed, and after today, I trust no hands but yours."],
-        give: { flag: 'pres_masterball', items: { masterball: 1 }, text: 'Master Ball' } },
+        dialogue: ["You drove them out of my building?! Silph owes you a debt no bonus could cover.", "Take our prototype — the Master Orb. It has never failed, and after today, I trust no hands but yours."],
+        give: { flag: 'pres_masterball', items: { masterball: 1 }, text: 'Master Orb' } },
       { x: 13, y: 9, name: 'RESEARCHER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         giveMon: { species: 'lapras', level: 25 },
-        dialogue: ["This Lapras ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Kanto are open to you."] },
+        dialogue: ["This KELPSAIL ferried our survey team for years — gentle, wise, unsinkable.", "She's yours now, with the president's blessing. The seas of Kanto are open to you."] },
     ],
     encounters: null,
     items: [],
@@ -454,7 +454,7 @@ export const MAPS3 = {
     npcs: [
       { x: 4, y: 9, name: 'ENGINEER RUI', art: 'worker', skin: '#d8a878', shirt: '#e08a3a', pants: '#4a4a5a', hair: '#1a1a1a',
         trainer: 'r10_hiker', sight: { dir: 'right', range: 3 },
-        dialogue: ["I maintain the lines out here — my Voltorb ARE the spare parts!", "Grounded. Thoroughly, professionally grounded."] },
+        dialogue: ["I maintain the lines out here — my CELLORB ARE the spare parts!", "Grounded. Thoroughly, professionally grounded."] },
     ],
     encounters: {
       rate: 0.12, waterRate: 0.1,
@@ -565,7 +565,7 @@ export const MAPS3 = {
     signs: [],
     npcs: [
       { x: 4, y: 5, name: 'HIKER DOSS', art: 'hiker', skin: '#c89878', shirt: '#9a603a', pants: '#3a3a3a', hair: '#4a3a2a',
-        dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The Zubat union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
+        dialogue: ["No light, no map, no problem — a hiker's pride lights the way! Usually!", "The SKREEP union runs this tunnel, friend. Pay the toll in dignity and walk on."] },
     ],
     encounters: {
       rate: 0.1, cave: true,
@@ -662,7 +662,7 @@ export const MAPS3 = {
       { x: 3, y: 2, text: 'A weathered gravestone. The name has been loved smooth by a thousand fingertips.' },
       { x: 4, y: 2, text: 'A weathered gravestone. Fresh flowers, every morning, from a hand no one sees.' },
       { x: 11, y: 2, text: 'A small gravestone, child-high. Someone left a tiny wooden flute.' },
-      { x: 12, y: 2, text: 'A gravestone carved with a smiling Cubone. It does not look sad at all.' },
+      { x: 12, y: 2, text: 'A gravestone carved with a smiling FOSSLET. It does not look sad at all.' },
     ],
     npcs: [
       { x: 8, y: 3, name: 'GARY', art: 'gary', skin: '#f0c8a0', shirt: '#3a5a9a', pants: '#2a2a3a', hair: '#6a4a2a',
@@ -715,7 +715,7 @@ export const MAPS3 = {
       { x: 8, y: 2, name: 'MR. FUJI', art: 'elder', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#c0c0c0',
         dialogue: ["Easy, children... the old man means you no harm. I am Fuji — I keep this tower, and it keeps me.", "You calmed a grieving mother and freed an old fool. Lavender will not forget it. Neither will I."] },
       // Wave 4 addendum (world-art): the Wave 0 why-not below is RESOLVED.
-      // Wave 0 (world-art): CUBONE + MAROWAK SPIRIT deliberately carried
+      // Wave 0 (world-art): FOSSLET + FOSSILORD SPIRIT deliberately carried
       // NO art field — they are Pokemon, not people, but no overworld
       // species art existed to route them to. Wave 4 authors dedicated
       // overworld spirit sprites (npc-cubonespirit-idle-1/2 and
@@ -724,10 +724,10 @@ export const MAPS3 = {
       // the kinds carry no NPC_SWAP_KEYS entry, so the authored ghost
       // palettes render as drawn (the skin/shirt fields below stay as
       // data, unused by the rasterizer for these kinds).
-      { x: 5, y: 6, name: 'CUBONE', art: 'cubonespirit', skin: '#e8b888', shirt: '#c8b898', pants: '#5a628a', hair: '#3a2a1a',
-        dialogue: ["A small Cubone sits by the topmost grave, helmet polished, bone laid across its knees like an offering.", "It is not crying. Whatever grieved on this floor... it grieves quieter now."] },
-      { x: 11, y: 6, name: 'MAROWAK SPIRIT', art: 'marowakspirit', skin: '#e8e0f0', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
-        dialogue: ["A shape like a Marowak drifts between the stones, neither hostile nor at rest — a mother, still counting her children.", "The Silph Scope might let you see her clearly. Without it, she is only a sorrow in the air."] },
+      { x: 5, y: 6, name: 'FOSSLET', art: 'cubonespirit', skin: '#e8b888', shirt: '#c8b898', pants: '#5a628a', hair: '#3a2a1a',
+        dialogue: ["A small FOSSLET sits by the topmost grave, helmet polished, bone laid across its knees like an offering.", "It is not crying. Whatever grieved on this floor... it grieves quieter now."] },
+      { x: 11, y: 6, name: 'FOSSILORD SPIRIT', art: 'marowakspirit', skin: '#e8e0f0', shirt: '#5a4a6a', pants: '#2a2a3a', hair: '#c0c0c0',
+        dialogue: ["A shape like a FOSSILORD drifts between the stones, neither hostile nor at rest — a mother, still counting her children.", "The Silph Scope might let you see her clearly. Without it, she is only a sorrow in the air."] },
     ],
     encounters: {
       rate: 0.1, cave: true,
@@ -906,7 +906,7 @@ export const MAPS3 = {
       { x: 10, y: 9, name: 'SAFARI WARDEN', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#c0c0c0', safariGate: true,
         dialogue: ["Mmh — pardon the mumbling, lost my Gold Teeth to the Safari Zone mud again.", "Step through the south gatehouse for the Safari, mmh. Find my teeth in there and I'll teach your Pokemon to push boulders like foam. Mmh!"] },
       { x: 3, y: 9, name: 'ZOO FAN', art: 'lady', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#7a4a1a',
-        dialogue: ["The zoo's Chansey waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
+        dialogue: ["The zoo's NURSELING waved at me once. WAVED. I think about it every day.", "Koga's gym is full of invisible walls. Ninjas, man. Ninjas."] },
       { x: 15, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
         mart: { stock: ['greatball', 'ultraball', 'hyperpotion', 'fullheal', 'revive', 'antidote'] },
         dialogue: ["Fuchsia Mart! Safari-goers, take note: Ultra Balls and Full Heals, right here, no mud required."] },
@@ -980,11 +980,11 @@ export const MAPS3 = {
     signs: [],
     npcs: [
       { x: 16, y: 8, name: 'RANGER', art: 'ranger', skin: '#e8b888', shirt: '#324a83', pants: '#2a304a', hair: '#2a1a0a',
-        dialogue: ["Safari rules: no battling the wildlife — bait, rocks, and quick feet. The rare ones reward patience.", "Chansey and Kangaskhan nest deep in the center grass. Tauros stampede the east field at dawn."] },
+        dialogue: ["Safari rules: no battling the wildlife — bait, rocks, and quick feet. The rare ones reward patience.", "NURSELING and PUNCHROO nest deep in the center grass. BOVARCH stampede the east field at dawn."] },
       { x: 10, y: 11, name: 'GATE RANGER', art: 'ranger', skin: '#d8a878', shirt: '#324a83', pants: '#2a304a', hair: '#1a1a1a', safariExit: true,
         dialogue: ["Heading out? The gatehouse is right here — step up when your Safari Balls or your courage run dry.", "Mind the mud on your way. The warden lost something precious in it, and he has NOT stopped mentioning it."] },
       { x: 14, y: 11, name: 'KEEPER', art: 'ranger', skin: '#f0c8a0', shirt: '#50368e', pants: '#4a4a5a', hair: '#a05a2a',
-        dialogue: ["The rest house is open to every Safari guest. Sit a spell — the grass will still be rustling when you get back.", "A trainer once fished a Dratini out of the west pond with the Super Rod. Once. In thirty years."] },
+        dialogue: ["The rest house is open to every Safari guest. Sit a spell — the grass will still be rustling when you get back.", "A trainer once fished a WYRMLING out of the west pond with the Super Rod. Once. In thirty years."] },
     ],
     encounters: {
       rate: 0.2, waterRate: 0.1,
@@ -1030,7 +1030,7 @@ export const MAPS3 = {
     hidden: [
       { x: 10, y: 5, item: 'goldteeth', n: 1 },
       { x: 18, y: 11, item: 'rarecandy', n: 1 },
-      // ADR-025 §3 (Phase 3) source: Gloom Fang — Safari Zone
+      // ADR-025 §3 (Phase 3) source: DROOPETAL Fang — Safari Zone
       // exploration placement.
       { x: 2, y: 8, item: 'gloomfang', n: 1 },
     ],
@@ -1068,7 +1068,7 @@ export const MAPS3 = {
     npcs: [
       { x: 10, y: 5, name: 'MARCUS', art: 'youngster', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#1a1a1a',
         trade: { give: 'slowbro', get: 'lickitung', nickname: 'MARC' },
-        dialogue: ["My Slowbro naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a Lickitung? I hear they never sleep. Sounds exhausting. Perfect."] },
+        dialogue: ["My DOZEHIDE naps through every race I enter. EVERY one. Even the ones he wins.", "Trade him for a SLURPARD? I hear they never sleep. Sounds exhausting. Perfect."] },
       { x: 4, y: 10, name: 'BIKER JOEL', art: 'biker', skin: '#c89878', shirt: '#2a2a3a', pants: '#1a1a2a', hair: '#2a1a0a',
         trainer: 'r16_biker', sight: { dir: 'right', range: 3 },
         dialogue: ["Cyclists rule this hill, pedestrian! Defend your walking privileges!", "The hill... respects your legs. UGH. Fine."] },
@@ -1124,10 +1124,10 @@ export const MAPS3 = {
     npcs: [
       { x: 11, y: 9, name: 'SWIMMER ADA', art: 'swimmer', skin: '#f0c8a0', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#e07830',
         trainer: 'r19_swimmer', sight: { dir: 'right', range: 3 },
-        dialogue: ["I swim this coast every morning — race my team to the buoy and back!", "You swim like a Starmie spins. Cinnabar's yours to reach."] },
+        dialogue: ["I swim this coast every morning — race my team to the buoy and back!", "You swim like a ASTRION spins. Cinnabar's yours to reach."] },
       { x: 4, y: 7, name: 'SWIMMER KIT', art: 'swimmer', skin: '#d8a878', shirt: '#3a9ac0', pants: '#2a3a4a', hair: '#1a1a1a',
         trainer: 'r19_swimmer2', sight: { dir: 'down', range: 3 },
-        dialogue: ["Tentacool stung me twice this week. Twice! My Staryu's honor demands a land battle!", "Honor restored... and only slightly damp."] },
+        dialogue: ["STINGEL stung me twice this week. Twice! My ASTLET's honor demands a land battle!", "Honor restored... and only slightly damp."] },
     ],
     encounters: {
       rate: 0.12, waterRate: 0.12,
@@ -1318,10 +1318,10 @@ export const MAPS3 = {
         dialogue: ["Fifty years I've ferried folks around this coast, but ONE island I sail to only when the sea itself asks.", "New Island, they call it. When its story calls you, trainer — you'll know. Everyone does, exactly once.", "And if it's Pallet Town you're wanting, my little boat runs home any time — no questions asked."] },
       { x: 3, y: 6, name: 'TOM', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#1a1a1a',
         trade: { give: 'venonat', get: 'tangela', nickname: 'TANG' },
-        dialogue: ["Lab work breeds Venonat like paperwork. My Tangela, Tang, at least files the vines neatly.", "Swap? Your Venonat for my Tangela. The lab gains a moth; you gain a jungle."] },
+        dialogue: ["Lab work breeds FUZZMITE like paperwork. My VINELUMP, Tang, at least files the vines neatly.", "Swap? Your FUZZMITE for my VINELUMP. The lab gains a moth; you gain a jungle."] },
       { x: 15, y: 8, name: 'UMA', art: 'lady', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#7a1a1a',
         trade: { give: 'raichu', get: 'electrode', nickname: 'DORRY' },
-        dialogue: ["My Electrode, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a Raichu? Something with legs, for once. Please. My shins beg you."] },
+        dialogue: ["My MEGACELL, Dorry, rolls downhill faster than gossip. I adore her; my ankles do not.", "Trade you for a GALVANIK? Something with legs, for once. Please. My shins beg you."] },
       { x: 13, y: 8, name: 'DR. EMBER', art: 'scientist', skin: '#f0c8a0', shirt: '#f0f0f0', pants: '#4a4a5a', hair: '#e07830', revive: true,
         dialogue: ["The lab behind me coaxes life out of stone — bring a fossil, any fossil, and our machines will do the rest.", "Helix, dome, even amber older than the island. Stone remembers, trainer. We just remind it how."] },
       { x: 2, y: 11, name: 'MART CLERK', art: 'clerk', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#2a1a0a',
@@ -1363,7 +1363,7 @@ export const MAPS3 = {
     ],
     npcs: [
       { x: 3, y: 8, name: 'JOURNAL', art: 'youngster', skin: '#e8b888', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["A charred journal page: 'We named the newborn MEWTWO. The mother dreams beneath the island still...'", "Another page: 'If anyone reads this — the Gym key is hidden where we worked. Forgive us.'"] },
+        dialogue: ["A charred journal page: 'We named the newborn OMNIGEN. The mother dreams beneath the island still...'", "Another page: 'If anyone reads this — the Gym key is hidden where we worked. Forgive us.'"] },
     ],
     encounters: {
       rate: 0.12, cave: true,
@@ -1467,7 +1467,7 @@ export const MAPS3 = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
       { x: 5, y: 7, name: 'GYM GUIDE', art: 'clerk', skin: '#e8b888', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
         dialogue: ["That gym slept for years, doors chained, paint peeling. Then HE came back and the lights came on in one night.", "Word is the League won't even look at you without all eight. Knock when you're carrying seven, trainer."] },
     ],
@@ -1941,7 +1941,7 @@ export const TRAINERS3 = {
   },
   blaine: {
     id: 'blaine', name: 'Blaine', title: 'Cinnabar Gym Leader',
-    intro: ["Quiz time, hotshot! What burns hotter — my Arcanine's pride, or a challenger's overconfidence? Battle me and we'll grade it!"],
+    intro: ["Quiz time, hotshot! What burns hotter — my EMBERMANE's pride, or a challenger's overconfidence? Battle me and we'll grade it!"],
     lose: ["Full marks... on MY exam. Take the Volcano Badge — and a fire extinguisher for the road."],
     team: [ { species: 'growlithe', level: 42, keepsake: 'embereed' }, { species: 'ponyta', level: 40, keepsake: 'sparrowfeather' }, { species: 'rapidash', level: 42, keepsake: 'embereed' }, { species: 'arcanine', level: 47, keepsake: 'tortoisecharm' } ],
     reward: 4700, badge: 'volcanobadge',
@@ -2013,7 +2013,7 @@ export const TRAINERS3 = {
   },
   r8_gamer: {
     id: 'r8_gamer', name: 'Doss', title: 'Gamer',
-    intro: ["I bet my lunch money on my Growlithe's nose. It has never once lied about snacks — or challengers!"],
+    intro: ["I bet my lunch money on my CINDERPUP's nose. It has never once lied about snacks — or challengers!"],
     lose: ["My nose for trainers needs recalibrating..."],
     team: [ { species: 'growlithe', level: 19 }, { species: 'vulpix', level: 19 } ],
     reward: 380,
@@ -2034,7 +2034,7 @@ export const TRAINERS3 = {
   },
   r10_hiker: {
     id: 'r10_hiker', name: 'Rui', title: 'Engineer',
-    intro: ["I maintain the lines out here — my Voltorb ARE the spare parts!"],
+    intro: ["I maintain the lines out here — my CELLORB ARE the spare parts!"],
     lose: ["Grounded. Thoroughly, professionally grounded."],
     team: [ { species: 'voltorb', level: 21 }, { species: 'magnemite', level: 22 } ],
     reward: 420,
@@ -2063,13 +2063,13 @@ export const TRAINERS3 = {
   r19_swimmer: {
     id: 'r19_swimmer', name: 'Ada', title: 'Swimmer',
     intro: ["I swim this coast every morning — race my team to the buoy and back!"],
-    lose: ["You swim like a Starmie spins. Cinnabar's yours to reach."],
+    lose: ["You swim like a ASTRION spins. Cinnabar's yours to reach."],
     team: [ { species: 'staryu', level: 32 }, { species: 'shellder', level: 33 } ],
     reward: 660,
   },
   r19_swimmer2: {
     id: 'r19_swimmer2', name: 'Kit', title: 'Swimmer',
-    intro: ["Tentacool stung me twice this week. Twice! My team's honor demands a land battle!"],
+    intro: ["STINGEL stung me twice this week. Twice! My team's honor demands a land battle!"],
     lose: ["Honor restored... and only slightly damp."],
     team: [ { species: 'tentacool', level: 31 }, { species: 'horsea', level: 32 } ],
     reward: 640,

@@ -121,7 +121,7 @@ export function hpValue(base, level, iv) {
 // ball's range (poke 0-255, great 0-200, ultra 0-150, master = automatic).
 // Status shifts R down (sleep/freeze -25, poison/burn/paralysis -12).
 // R < 0 => caught; R > catchRate => immediate fail; otherwise the HP factor
-// f = (HPmax * 255 * 4) / (HPcur * divisor) (divisor 8 for Great Ball, else
+// f = (HPmax * 255 * 4) / (HPcur * divisor) (divisor 8 for Greater Orb, else
 // 12, f capped at 255) and a second roll R2 in 0-255 catches iff R2 <= f.
 // Wobble count for animation comes from how far R fell under the rate.
 export const BALL_RANGES = { pokeball: 255, greatball: 200, ultraball: 150, masterball: 0, safariball: 255 };

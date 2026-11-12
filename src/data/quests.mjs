@@ -52,7 +52,7 @@ export const QUESTS = {
     id: 'tale_pewter', town: 'Pewter City', giver: 'CURATOR', title: "Brock's Day Off",
     stages: [
       'Cover the museum desk: answer 3 visitor questions from the exhibits',
-      "Spar Brock's Geodude, off-duty, here in Pewter City",
+      "Spar Brock's RUMBLING, off-duty, here in Pewter City",
     ],
     reward: { keepsake: 'ironacorn' }, rewardText: 'Iron Acorn',
     bondNpc: 'brock', bondDelta: 2,
@@ -82,18 +82,18 @@ export const QUESTS = {
     id: 'tale_lavender', town: 'Lavender Town', giver: 'VOLUNTEER', title: 'Names on the Wall',
     stages: [
       'Record the unnamed graves in Pokemon Tower (the west gravestones)',
-      'Meet Elder Bram in Lavender Town, who remembers the Marowak',
+      'Meet Elder Bram in Lavender Town, who remembers the FOSSILORD',
     ],
     reward: { keepsake: 'spectrebell' }, rewardText: 'Spectre Bell',
     bondNpc: 'fuji', bondDelta: 2,
-    revelation: "Elder Bram remembers a mother Marowak who guarded the tower stairs so her child could escape — the channelers say a mother's love does not leave a place just because her body did. (A rumor, offered gently: nothing here is needed for the climb.)",
+    revelation: "Elder Bram remembers a mother FOSSILORD who guarded the tower stairs so her child could escape — the channelers say a mother's love does not leave a place just because her body did. (A rumor, offered gently: nothing here is needed for the climb.)",
   },
   tale_celadon: {
     id: 'tale_celadon', town: 'Celadon City', giver: 'GARDENER', title: 'Roof Garden',
     stages: [
       'Water the Game Corner roof garden plants (visit 1 of 3)',
       'Water the plants again once you hold 4 badges (visit 2 of 3)',
-      'Water the plants once more at 6 badges, and chase off the wild Meowth (visit 3 of 3)',
+      'Water the plants once more at 6 badges, and chase off the wild TINKLETOM (visit 3 of 3)',
     ],
     reward: { keepsake: 'gardeniasash' }, rewardText: 'Gardenia Sash',
     bondNpc: 'erika', bondDelta: 2,

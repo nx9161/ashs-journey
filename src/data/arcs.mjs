@@ -93,8 +93,8 @@ export const ARCS = [
       'Four island badges and a champion\'s battle under southern stars. The Winner\'s Trophy is yours — and so is the strange ball that started the voyage.',
     ],
     hookLines: [
-      'A colleague of mine — Professor Ivy, on Valencia Island in the Orange Archipelago — is holding a Poke Ball that no machine can open.',
-      'They call it the GS Ball. Fetch it for me, would you? The ferry for Valencia leaves from Vermilion City.',
+      'A colleague of mine — Professor Ivy, on Valencia Island in the Orange Archipelago — is holding a Capture Orb that no machine can open.',
+      'They call it the GS Orb. Fetch it for me, would you? The ferry for Valencia leaves from Vermilion City.',
       'Mind the sea air down there. It changes trainers — usually for the better.',
     ],
     enRouteLines: [
@@ -115,7 +115,7 @@ export const ARCS = [
       'Eight badges, the beasts woken and quieted, and the rivalry settled at last in the conference fire. The road home feels shorter than the road out.',
     ],
     hookLines: [
-      'That GS Ball you carried across the Orange Islands — there is a man in Azalea Town named Kurt who still works Poke Balls by hand, the old way.',
+      'That GS Orb you carried across the Orange Islands — there is a man in Azalea Town named Kurt who still works Capture Orbs by hand, the old way.',
       'If anyone alive can open it, it is him. And Johto itself is calling: new towers, new legends, and a rival who will not wait forever.',
       'The boat for Johto leaves from Pallet\'s own dock. Come home first. You always come home first.',
     ],

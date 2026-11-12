@@ -275,7 +275,15 @@ export const NAME_REGISTRY = {
   // terms: coined vocabulary (balls, leagues, mechanics coinages).
   moves: {},
   abilities: {},
-  items: {},
+  items: {
+    // -- Wave G Kanto Completion, T10/T11 capture-orb rename --
+    pokeball:  { name: 'Capture Orb', status: 'named', wave: 'G-KT11' },
+    greatball: { name: 'Greater Orb', status: 'named', wave: 'G-KT11' },
+    ultraball: { name: 'Ultra Orb', status: 'named', wave: 'G-KT11' },
+    masterball: { name: 'Master Orb', status: 'named', wave: 'G-KT11' },
+    safariball: { name: 'Safari Orb', status: 'named', wave: 'G-KT11' },
+    gsball:    { name: 'GS Orb', status: 'named', wave: 'G-KT11' },
+  },
   terms: {},
 };
 

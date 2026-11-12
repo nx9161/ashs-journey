@@ -80,7 +80,7 @@ export const MAPS = {
     ],
     npcs: [
       { x: 9, y: 5, name: 'AIDE', art: 'aide', skin: '#f0c8a0', shirt: '#5d3fa5', pants: '#3a3a4a', hair: '#1a1a1a',
-        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Poke Ball. The professor gave you ten to start."] },
+        dialogue: ["Wild Pokemon live in the tall grass! Walk through it and keep your eyes open.", "Weaken them first, then throw a Capture Orb. The professor gave you ten to start."] },
       { x: 6, y: 4, name: 'CAL', art: 'youngster', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0a03a',
         trainer: 'r1_cal',
         sight: { dir: 'left', range: 3 }, // Yellow-style: spots you, "!", walks up (down is blocked by the sign)
@@ -88,7 +88,7 @@ export const MAPS = {
       { x: 7, y: 11, name: 'LISA', art: 'lass', skin: '#f0c8a0', shirt: '#c03a7a', pants: '#3a3a4a', hair: '#7a4a1a',
         trainer: 'r1_lisa',
         sight: { dir: 'up', range: 3 }, // Yellow-style: spots you, "!", walks up
-        dialogue: ["Pidgey and I train here every morning! Care to spar?", "We'll be back stronger tomorrow, won't we, Pidgey?"] },
+        dialogue: ["DUNPLUME and I train here every morning! Care to spar?", "We'll be back stronger tomorrow, won't we, DUNPLUME?"] },
     ],
     encounters: {
       rate: 0.12,
@@ -133,7 +133,7 @@ export const MAPS = {
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
-        dialogue: ["Heading north? Route 2's grass is thicker — I saw a Mankey up there yesterday.", "Fighting-types crack rock wide open. A Mankey that knows Low Kick will humble Brock's Geodude."] },
+        dialogue: ["Heading north? Route 2's grass is thicker — I saw a FUSSAPE up there yesterday.", "Fighting-types crack rock wide open. A FUSSAPE that knows Low Kick will humble Brock's RUMBLING."] },
     ],
     encounters: null,
     start: null,
@@ -203,7 +203,7 @@ export const MAPS = {
       { x: 6, y: 3, name: 'RICK', art: 'youngster', skin: '#e8b888', shirt: '#a03a5f', pants: '#2a304a', hair: '#2a1a0a',
         trainer: 'r2_bug',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
-        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a Caterpie under a boot."] },
+        dialogue: ["My bugs are gonna cocoon you! En garde!", "S-squashed... like a FRONLET under a boot."] },
       { x: 7, y: 5, name: 'BEA', art: 'lass', skin: '#f0c8a0', shirt: '#e08a3a', pants: '#2c3049', hair: '#a05a2a',
         trainer: 'r2_camper',
         sight: { dir: 'down', range: 3 }, // Yellow-style: spots you, "!", walks up
@@ -275,8 +275,8 @@ export const MAPS = {
     ],
     npcs: [
       { x: 10, y: 4, name: 'COACH', art: 'coach', skin: '#d8a878', shirt: '#c03a3a', pants: '#2a2a3a', hair: '#1a1a1a',
-        dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a Mankey on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Poke Balls — on the house."],
-        give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Poke Balls' } },
+        dialogue: ["Brock's rock-types shrug off electric attacks — your partner's sparks won't cut it in there.", "Catch a FUSSAPE on Route 2 — fighting beats rock, and they learn Low Kick young. Water or grass would work too, but you won't find those this side of the forest.", "You've got heart, kid. Take these Capture Orbs — on the house."],
+        give: { flag: 'coach_balls', items: { pokeball: 3 }, text: '3 Capture Orbs' } },
     ],
     encounters: null,
     start: null,
@@ -426,7 +426,7 @@ export const WALKABLE = new Set(['.', ',', 'D', 'E', 'C', 'F', 'J', 'K', '1', '2
 export const TRAINERS = {
   r1_cal: {
     id: 'r1_cal', name: 'Cal', title: 'Youngster',
-    intro: ["Hey! My Rattata's the toughest on Route 1! Battle me!"],
+    intro: ["Hey! My SCURRAT's the toughest on Route 1! Battle me!"],
     lose: ["Toughest... except against you, huh."],
     team: [
       { species: 'rattata', level: 3 },
@@ -436,7 +436,7 @@ export const TRAINERS = {
   },
   r1_lisa: {
     id: 'r1_lisa', name: 'Lisa', title: 'Lass',
-    intro: ["Pidgey and I do our morning laps here. Spar with us?"],
+    intro: ["DUNPLUME and I do our morning laps here. Spar with us?"],
     lose: ["We still have a lot of laps to run..."],
     team: [
       { species: 'pidgey', level: 3 },
@@ -491,7 +491,7 @@ export const TRAINERS = {
     id: 'r2_duo', name: 'Rue & Cole', title: 'Uniformed Duo',
     intro: [
       "RUE: Well, well. A little trainer marching up OUR route.",
-      "COLE: And carrying a Pikachu that walks free? That's a rare one.",
+      "COLE: And carrying a VOLTIK that walks free? That's a rare one.",
       "RUE: Hand over your Pokemon, kid — or we'll take them the fun way!",
       "COLE: Two of us, one of you. The math is delicious.",
     ],

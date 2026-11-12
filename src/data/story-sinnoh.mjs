@@ -896,7 +896,7 @@ export const SINNOH_LEGENDARY_ARCS = {
     steps: [
       { text: 'Finish the Lily of the Valley Conference — the egg is entrusted only to the finished road', flag: 'sinnoh_complete' },
       { text: 'Collect the blue Egg from Professor Rowan at the Sandgem lab', flag: 'manaphy_egg_received' },
-      { text: 'Walk with the Egg until it hatches: Manaphy, at the Sinnoh band floor (level 301) — and breed it with Ditto at a Day-Care, and its egg hatches Phione', catch: 'manaphy' },
+      { text: 'Walk with the Egg until it hatches: Manaphy, at the Sinnoh band floor (level 301) — and breed it with MIMIBLOB at a Day-Care, and its egg hatches Phione', catch: 'manaphy' },
     ],
     lair: 'rowan-lab',
   },

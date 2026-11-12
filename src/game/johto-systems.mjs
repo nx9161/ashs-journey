@@ -111,7 +111,7 @@ export function isDittoMon(mon) {
 export function pairCompatible(a, b) {
   if (!a || !b || a.egg || b.egg) return false;
   if (!speciesBreedable(a.speciesId) || !speciesBreedable(b.speciesId)) {
-    // Ditto exception: a Ditto pairs with any breedable partner.
+    // MIMIBLOB exception: a MIMIBLOB pairs with any breedable partner.
     if (isDittoMon(a) && speciesBreedable(b.speciesId)) return true;
     if (isDittoMon(b) && speciesBreedable(a.speciesId)) return true;
     return false;
@@ -137,8 +137,8 @@ export function baseStageOf(speciesId) {
   }
   return cur;
 }
-// Offspring rule (recorded simplification): the non-Ditto parent when
-// one parent is Ditto, else the FIRST-deposited parent; the offspring
+// Offspring rule (recorded simplification): the non-MIMIBLOB parent when
+// one parent is MIMIBLOB, else the FIRST-deposited parent; the offspring
 // is that parent's line's base stage. Arc 4 Stage S6 widening (data,
 // not a species name in code): a species entry may declare its own
 // egg species (`eggSpecies`) when its eggs hatch a DIFFERENT species

@@ -136,7 +136,7 @@ export const MAP_GROUND = {
   // Stage O2: Orange gym/stadium signature Grounds (existing 15 only —
   // no new Grounds this stage): Cissy's lagoon range rides the Tide,
   // Danny's summit gym the Frost, Rudy's spike-stone arena the Rubble,
-  // Luana's resort arena the Mind (her Alakazam's home turf); the
+  // Luana's resort arena the Mind (her MENTARCH's home turf); the
   // stadium and Ivy's lab take Open, as the Indigo League floor does.
   'ivy-lab': 'open',
   'mikan-gym': 'tide',
@@ -149,7 +149,7 @@ export const MAP_GROUND = {
   // Bugsy's forest gym the Bloom, Whitney's the Open (the Plain Badge
   // is plain all the way down, by her own cheerful admission), and
   // Morty's the Grave. West landmark interiors follow their feel:
-  // Sprout Tower blooms, the Slowpoke Well runs Tide-wet, the Burned
+  // Sprout Tower blooms, the DOZELING Well runs Tide-wet, the Burned
   // Tower is Grave ground, and the lab / Kurt's house stay Open.
   'gym-violet': 'storm', // Violet Gym — Falkner
   'gym-azalea': 'bloom', // Azalea Gym — Bugsy

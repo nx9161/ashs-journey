@@ -3,11 +3,11 @@
 // documented mart prices; sell price is half unless noted.
 
 export const BALLS = {
-  pokeball:  { id: 'pokeball', name: 'Poke Ball', bonus: 1, desc: 'The baseline. Reliable.' },
-  greatball: { id: 'greatball', name: 'Great Ball', bonus: 1.5, desc: 'A better catch rate.' },
-  ultraball: { id: 'ultraball', name: 'Ultra Ball', bonus: 2, desc: 'The best standard ball.' },
-  masterball: { id: 'masterball', name: 'Master Ball', bonus: 999, desc: 'Catches without fail. One exists.' },
-  safariball: { id: 'safariball', name: 'Safari Ball', bonus: 1, desc: 'Issued at the Safari Zone gate.' },
+  pokeball:  { id: 'pokeball', name: 'Capture Orb', bonus: 1, desc: 'The baseline. Reliable.' },
+  greatball: { id: 'greatball', name: 'Greater Orb', bonus: 1.5, desc: 'A better catch rate.' },
+  ultraball: { id: 'ultraball', name: 'Ultra Orb', bonus: 2, desc: 'The best standard orb.' },
+  masterball: { id: 'masterball', name: 'Master Orb', bonus: 999, desc: 'Catches without fail. One exists.' },
+  safariball: { id: 'safariball', name: 'Safari Orb', bonus: 1, desc: 'Issued at the Safari Zone gate.' },
   // Stage J6: Kurt's apricorn balls. Each carries a `rule` that the
   // catch calculation in BOTH battle engines evaluates against the
   // live battle (src/game/ball-rules.mjs) — the bonus is NEVER flat
@@ -58,11 +58,11 @@ const TM_PRICES = {
 
 export const ITEMS = {
   // Balls
-  pokeball:  { id: 'pokeball', name: 'Poke Ball', pocket: 'balls', price: 200, desc: BALLS.pokeball.desc },
-  greatball: { id: 'greatball', name: 'Great Ball', pocket: 'balls', price: 600, desc: BALLS.greatball.desc },
-  ultraball: { id: 'ultraball', name: 'Ultra Ball', pocket: 'balls', price: 1200, desc: BALLS.ultraball.desc },
-  masterball: { id: 'masterball', name: 'Master Ball', pocket: 'balls', desc: BALLS.masterball.desc },
-  safariball: { id: 'safariball', name: 'Safari Ball', pocket: 'balls', desc: BALLS.safariball.desc },
+  pokeball:  { id: 'pokeball', name: 'Capture Orb', pocket: 'balls', price: 200, desc: BALLS.pokeball.desc },
+  greatball: { id: 'greatball', name: 'Greater Orb', pocket: 'balls', price: 600, desc: BALLS.greatball.desc },
+  ultraball: { id: 'ultraball', name: 'Ultra Orb', pocket: 'balls', price: 1200, desc: BALLS.ultraball.desc },
+  masterball: { id: 'masterball', name: 'Master Orb', pocket: 'balls', desc: BALLS.masterball.desc },
+  safariball: { id: 'safariball', name: 'Safari Orb', pocket: 'balls', desc: BALLS.safariball.desc },
   // Stage J6: apricorn balls — Kurt-only (canon): no price, so no mart
   // ever stocks them; the Cheat Terminal stocks them from data like
   // everything else.
@@ -108,7 +108,7 @@ export const ITEMS = {
   waterstone: { id: 'waterstone', name: 'Water Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Water lines.' },
   thunderstone: { id: 'thunderstone', name: 'Thunder Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Electric lines. The partner refuses it — firmly.' },
   leafstone: { id: 'leafstone', name: 'Leaf Stone', pocket: 'items', price: 2100, desc: 'Evolves certain Grass lines.' },
-  moonstone: { id: 'moonstone', name: 'Moon Stone', pocket: 'items', price: 0, desc: 'A stone that fell with the Clefairy legends of Mt. Moon.' },
+  moonstone: { id: 'moonstone', name: 'Moon Stone', pocket: 'items', price: 0, desc: 'A stone that fell with the MOONLET legends of Mt. Moon.' },
   sunstone: { id: 'sunstone', name: 'Sun Stone', pocket: 'items', price: 0, desc: 'A stone that glows like bottled morning. Evolves certain sun-loving lines.' },
   // Treasures / misc
   nugget: { id: 'nugget', name: 'Nugget', pocket: 'items', price: 10000, desc: 'A gold nugget. Sell it at a mart.' },
@@ -236,7 +236,7 @@ export const ITEMS = {
   // Cheat Shop collectibles (owner order 2026-10-28): anime/book canon
   // treasures with NO game system to hook — honestly labeled COLLECTIBLE
   // in the shop, with no effects of any kind.
-  gsball: { id: 'gsball', name: 'GS Ball', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A gold-and-silver ball no machine can open. It hums near old shrines.' },
+  gsball: { id: 'gsball', name: 'GS Orb', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A gold-and-silver orb no machine can open. It hums near old shrines.' },
   pinkanberry: { id: 'pinkanberry', name: 'Pinkan Berry', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A rosy island berry. One bite blushes fur and feathers pink for a day.' },
   minimistylure: { id: 'minimistylure', name: 'Mini-Misty Lure', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A hand-painted fishing lure, a tiny redhead in a yellow top. Fish approve.' },
   rainbowwing: { id: 'rainbowwing', name: 'Rainbow Wing', pocket: 'items', collectible: true, desc: 'COLLECTIBLE — A single feather in every color at once. It is warm, as if just flown in.' },
@@ -266,7 +266,7 @@ export const KEEPSAKES = {
   secondwindribbon: { id: 'secondwindribbon', name: 'Second-Wind Ribbon', kind: 'lowHpSpeed', hpFrac: 0.25, stages: 1, effect: 'Once per battle, at 25% HP or less, Speed rises 1 stage.', price: 3000, minBadges: 7 },
   embereed: { id: 'embereed', name: 'Ember Seed', kind: 'statusChance', moveType: 'fire', status: 'burn', bonus: 10, effect: "Fire moves gain +10% burn chance; the holder can't be frozen." },
   tidepearl: { id: 'tidepearl', name: 'Tide Pearl', kind: 'typeWard', moveType: 'electric', factor: 0.8, effect: 'Takes x0.8 damage from Electric moves.' },
-  gloomfang: { id: 'gloomfang', name: 'Gloom Fang', kind: 'statusChance', moveType: 'poison', status: 'poison', bonus: 10, rtCooldown: 0.85, effect: 'Poison moves: +10% poison chance (RT: cooldown x0.85).' },
+  gloomfang: { id: 'gloomfang', name: 'DROOPETAL Fang', kind: 'statusChance', moveType: 'poison', status: 'poison', bonus: 10, rtCooldown: 0.85, effect: 'Poison moves: +10% poison chance (RT: cooldown x0.85).' },
   ironacorn: { id: 'ironacorn', name: 'Iron Acorn', kind: 'firstHitWard', factor: 0.85, effect: 'Takes x0.85 from the first hit it takes each battle.' },
   spectrebell: { id: 'spectrebell', name: 'Spectre Bell', kind: 'matchupDamage', moveType: 'ghost', vsType: 'psychic', factor: 1.2, effect: 'Ghost moves deal x1.2 vs Psychic-types.' },
   gardeniasash: { id: 'gardeniasash', name: 'Gardenia Sash', kind: 'healBoost', factor: 1.5, effect: 'Healing moves on the holder restore +50%.' },

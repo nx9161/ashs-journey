@@ -1,4 +1,4 @@
-// intro.mjs — professor intro, name entry, starter moment (Pikachu refuses the ball).
+// intro.mjs — professor intro, name entry, starter moment (VOLTIK refuses the ball).
 // Original dialogue. P0/C3: name entry is an A-Z grid keyboard (44px keys,
 // physical-keyboard support, 8-char max, validation shake). P1/C4: rival name
 // entry reuses the grid. P1/C5: "Skip intro (veteran)" offered on replay

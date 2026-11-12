@@ -184,7 +184,7 @@ const driver = `
         const low = b.ally.hp < b.ally.maxHp * 0.7;
         let idx = -1;
         if (low) idx = m.items.findIndex((it) => it.label.indexOf('Potion') === 0 && !it.disabled);
-        if (idx < 0) idx = m.items.findIndex((it) => it.label.indexOf('Poke Ball') === 0 && !it.disabled);
+        if (idx < 0) idx = m.items.findIndex((it) => it.label.indexOf('Capture Orb') === 0 && !it.disabled);
         choose(idx >= 0 ? idx : m.items.length - 1);
       }
       else if (m.title === 'Use Potion on...') {
@@ -1061,7 +1061,7 @@ const qaDriver = `
   setViewport(1280, 800, true); g9.applyLayout(); tk(g9, 4);
   ok('qa s9 rotation: desktop mid-bag', g9.scenes.top === b9b && g9.layoutMode === 'desktop' && b9b.state === 'bag' && b9b.ally === ally2);
   var bagMenu = g9.ui.menu, ballIdx = -1;
-  for (var bix = 0; bix < bagMenu.items.length; bix++) { if (bagMenu.items[bix].label.indexOf('Poke Ball') === 0) ballIdx = bix; }
+  for (var bix = 0; bix < bagMenu.items.length; bix++) { if (bagMenu.items[bix].label.indexOf('Capture Orb') === 0) ballIdx = bix; }
   ok('qa s9 poke ball listed in bag', ballIdx >= 0);
   choose(g9, ballIdx);
   ok('qa s9 catchseq started', b9b.state === 'catchseq');

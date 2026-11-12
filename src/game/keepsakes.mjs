@@ -119,7 +119,7 @@ export function evaluateTriggers(mon, ctx) {
 // ---- status-shaped effects ----
 // Infliction-chance bonus in percentage POINTS, added only where the
 // move can already inflict that status (the Ground-twist law, §1):
-// Ember Seed — the holder's Fire moves +10% burn; Gloom Fang — the
+// Ember Seed — the holder's Fire moves +10% burn; DROOPETAL Fang — the
 // holder's Poison moves +10% poison. Composes additively with the
 // Ground twist bonus at the same roll.
 export function keepsakeStatusChanceBonus(atk, mv, status) {
@@ -134,7 +134,7 @@ export function refusesStatus(mon, status) {
   return status === 'freeze' && holds(mon, 'embereed');
 }
 
-// RT cooldown multiplier (Gloom Fang: the holder's Poison moves cool
+// RT cooldown multiplier (DROOPETAL Fang: the holder's Poison moves cool
 // down x0.85 in real-time battles; classic uses the chance bonus above).
 export function keepsakeCooldownMult(mon, mv) {
   const k = keepsakeOf(mon);

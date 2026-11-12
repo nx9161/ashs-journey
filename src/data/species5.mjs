@@ -495,7 +495,7 @@ export const SPECIES_SINNOH = {
     catchRate: 145, growth: 'mediumfast', baseXp: 62, body: 'biped', spriteSeed: 43901,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 25,
     learnset: { 1: ['confusion', 'barrier'], 308: ['meditate'], 315: ['doubleslap'], 318: ['mimic'], 322: ['lightscreen', 'reflect'], 325: ['psybeam'], 329: ['substitute'], 339: ['psychic'] },
-    flavor: 'It copies the room until the room applauds, then bows first. It performs its way to Mr. Mime at level 310 here.',
+    flavor: 'It copies the room until the room applauds, then bows first. It performs its way to PANTOMIM at level 310 here.',
     evo: { to: 'mrmime', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 15, 17, 18, 19, 20, 29, 30, 31, 32, 33, 34, 35, 40, 42, 44, 45, 46, 49, 50, 105],
   },
   happiny: {
@@ -504,7 +504,7 @@ export const SPECIES_SINNOH = {
     catchRate: 130, growth: 'fast', baseXp: 110, body: 'biped', spriteSeed: 44001,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 40,
     learnset: { 1: ['pound', 'tackle', 'quickattack', 'swift'] },
-    flavor: 'It carries a round stone like an egg and nurses it gravely. It grows into Chansey at level 310 here.',
+    flavor: 'It carries a round stone like an egg and nurses it gravely. It grows into NURSELING at level 310 here.',
     evo: { to: 'chansey', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 17, 18, 19, 20, 24, 25, 29, 31, 32, 33, 34, 35, 38, 39, 40, 41, 42, 44, 45, 46, 49, 50, 105],
   },
   chatot: {
@@ -558,7 +558,7 @@ export const SPECIES_SINNOH = {
     catchRate: 50, growth: 'slow', baseXp: 78, body: 'biped', spriteSeed: 44601,
     eggGroups: ['no-eggs'], baby: true, hatchCounter: 40,
     learnset: { 1: ['tackle', 'metronome'], 304: ['defensecurl'], 309: ['amnesia'], 312: ['lick'], 320: ['screech'], 333: ['bodyslam'] },
-    flavor: 'It eats its weight, naps it off, and starts the paperwork again. It joins Snorlax at level 310 here — friendship, in this region, is patience.',
+    flavor: 'It eats its weight, naps it off, and starts the paperwork again. It joins NAPPASAUR at level 310 here — friendship, in this region, is patience.',
     evo: { to: 'snorlax', method: 'level', level: 310 }, tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 20, 24, 25, 26, 27, 28, 31, 32, 34, 36, 38, 39, 40, 44, 47, 50, 101, 103, 104],
   },
   riolu: {
@@ -805,7 +805,7 @@ export const SPECIES_SINNOH = {
     tm: [3, 6, 8, 9, 10, 15, 17, 19, 20, 26, 27, 28, 31, 32, 34, 39, 44, 48, 50, 101, 104],
   },
   porygonz: {
-    id: 'porygonz', name: 'Porygon-Z', dexNo: 474, types: ['normal'],
+    id: 'porygonz', name: 'POLYCRANE-Z', dexNo: 474, types: ['normal'],
     base: { hp: 85, atk: 80, def: 70, spa: 135, spd: 75, spe: 90 },
     catchRate: 30, growth: 'mediumfast', baseXp: 241, body: 'blob', spriteSeed: 47401,
     eggGroups: ['mineral'], hatchCounter: 20,

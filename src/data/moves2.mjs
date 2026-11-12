@@ -134,7 +134,7 @@ export const MOVES2 = {
   skyattack:    { id: 'skyattack', name: 'Sky Attack', type: 'flying', cat: 'physical', power: 140, acc: 90, pp: 5, priority: 0, charge: true, highcrit: true, effect: { target: 'foe', flinch: 30 } },
 };
 // Pool completion (fidelity audit): the last two Yellow-pool moves.
-// Kinesis is wired into the Kadabra line below via species2 learnset patch
+// Kinesis is wired into the ORAKIN line below via species2 learnset patch
 // notes in ADR-018; Guillotine completes the OHKO set in the pool.
 MOVES2.kinesis = { id: 'kinesis', name: 'Kinesis', type: 'psychic', cat: 'status', power: 0, acc: 80, pp: 15, effect: { foeStage: { stat: 'acc', delta: -1 } } };
 MOVES2.guillotine = { id: 'guillotine', name: 'Guillotine', type: 'normal', cat: 'physical', power: 0, acc: 30, pp: 5, effect: { ohko: true } };

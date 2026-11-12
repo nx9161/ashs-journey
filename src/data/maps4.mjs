@@ -97,9 +97,9 @@ export const MAPS4 = {
     npcs: [
       { x: 8, y: 1, name: 'THE PRESIDENT', art: 'gent', skin: '#e8c098', shirt: '#3a4a6a', pants: '#2a2a3a', hair: '#c8c8d0',
         dialogue: ['You climbed eleven floors of trouble to reach an old man at a desk. The Scope, the company, my gratitude — and this prototype ball. Take them all.', 'Whatever is on that island, child — it is older than this company and sadder than its board. Go gently.'],
-        give: { flag: 'silph_president_gift', items: { masterball: 1 }, text: 'the Master Ball prototype' } },
+        give: { flag: 'silph_president_gift', items: { masterball: 1 }, text: 'the Master Orb prototype' } },
       { x: 15, y: 3, name: 'AIDE NOVA', art: 'aide', skin: '#f0c8a0', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#5a3a6a',
-        dialogue: ['I hid the transport project when they stormed in. Lapras — gentle, strong, and it can carry you across any water. Take it. Please. Get us help, or be the help.', 'Lapras sings when the sea is calm. You will be good for each other.'],
+        dialogue: ['I hid the transport project when they stormed in. KELPSAIL — gentle, strong, and it can carry you across any water. Take it. Please. Get us help, or be the help.', 'KELPSAIL sings when the sea is calm. You will be good for each other.'],
         giveMon: { species: 'lapras', level: 15 } },
     ],
     encounters: null,
@@ -457,8 +457,8 @@ export const TRAINERS4 = {
   // beside it). One low-level mon: a errand fight, never a boss.
   tale_kid: { id: 'tale_kid', name: 'Pip', title: 'Youngster',
     team: [{ species: 'oddish', level: 13 }], reward: 120,
-    intro: ['You want the bell? Then take it off my whole team! (It is one Oddish. We are both scared.)'],
-    lose: ['Oddish says uncle. I say uncle. UNCLE. The bell is yours — it was always yours.'] },
+    intro: ['You want the bell? Then take it off my whole team! (It is one NIGHTBUD. We are both scared.)'],
+    lose: ['NIGHTBUD says uncle. I say uncle. UNCLE. The bell is yours — it was always yours.'] },
   r3_lass: { id: 'r3_lass', name: 'Lass Mina', team: [{ species: 'pidgey', level: 11 }, { species: 'nidoranf', level: 12 }], prize: 240,
     intro: ['I practiced all week for a trainer like you!'], lose: ['Practice or not — you were better.'] },
   r3_bug: { id: 'r3_bug', name: 'Bug Catcher Colt', team: [{ species: 'caterpie', level: 11 }, { species: 'weedle', level: 11 }, { species: 'metapod', level: 12 }], prize: 180,

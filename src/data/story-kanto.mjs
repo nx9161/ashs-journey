@@ -20,14 +20,14 @@
 // table in data/quests.mjs, per ADR-025 §5; the bundle is one scope).
 // `flag` is the story flag that
 // completes the objective (events below also emit questDone where a route
-// can branch, e.g. either Snorlax).
+// can branch, e.g. either NAPPASAUR).
 // ---------------------------------------------------------------------------
 
 export const MAIN_QUESTS = [
-  { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'The lab sits at the north edge of Pallet Town. Your partner has opinions — and a strong dislike of Poke Balls.' },
+  { id: 'q_partner', flag: 'metPartner', text: 'Meet Prof. Hawthorn and receive your partner', hint: 'The lab sits at the north edge of Pallet Town. Your partner has opinions — and a strong dislike of Capture Orbs.' },
   { id: 'q_boulder', flag: 'badge_boulder', text: 'Win the Boulder Badge in Pewter City', hint: 'Through Viridian Forest, then challenge Brock. Water and Grass moves crack Rock types open.' },
-  { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Moon and reach Cerulean City', hint: 'The cave east of Pewter is dark and full of Zubat. Stock up on Potions before you go in.' },
-  { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Cerulean City', hint: 'Misty’s Water types fear Grass and Electric moves. Watch for her Starmie.' },
+  { id: 'q_cerulean', flag: 'reached_cerulean', text: 'Cross Mt. Moon and reach Cerulean City', hint: 'The cave east of Pewter is dark and full of SKREEP. Stock up on Potions before you go in.' },
+  { id: 'q_cascade', flag: 'badge_cascade', text: 'Win the Cascade Badge in Cerulean City', hint: 'Misty’s Water types fear Grass and Electric moves. Watch for her ASTRION.' },
   { id: 'q_bill', flag: 'bill_helped', text: 'Help the researcher at the Sea Cottage', hint: 'Cross Nugget Bridge, then follow Route 25 to the cottage on the cape. Something there is not what it seems.' },
   { id: 'q_vermilion', flag: 'reached_vermilion', text: 'Reach Vermilion City', hint: 'South through the underground path from Cerulean. The harbor smells of salt and adventure.' },
   { id: 'q_stanne', flag: 'stanne_done', text: 'Sail on the St. Anne', hint: 'Bill’s spare ticket gets you aboard. Enjoy the party — and keep an eye on the waiters.' },
@@ -36,7 +36,7 @@ export const MAIN_QUESTS = [
   { id: 'q_rainbow', flag: 'badge_rainbow', text: 'Win the Rainbow Badge in Celadon City', hint: 'Erika’s Grass types wilt under Fire, Ice, and Flying moves.' },
   { id: 'q_scope', flag: 'scope_done', text: 'Infiltrate the Game Corner and recover the Silph Scope', hint: 'That poster in the Game Corner is hiding something. Whatever is underneath it took the Scope — take it back.' },
   { id: 'q_flute', flag: 'flute_got', text: 'Climb Pokemon Tower and earn the Poke Flute', hint: 'The Scope reveals what haunts the tower. Bring a gentle heart for the upper floors.' },
-  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping Snorlax', hint: 'The Poke Flute’s tune is the only alarm clock a Snorlax respects. One sleeps east of Lavender, one west above Cycling Road — either road leads on.' },
+  { id: 'q_snorlax', flag: 'snorlax_west', text: 'Wake a sleeping NAPPASAUR', hint: 'The Poke Flute’s tune is the only alarm clock a NAPPASAUR respects. One sleeps east of Lavender, one west above Cycling Road — either road leads on.' },
   { id: 'q_soul', flag: 'badge_soul', text: 'Win the Soul Badge in Fuchsia City', hint: 'Koga’s Poison types and invisible walls reward patience. Ground and Psychic moves help.' },
   { id: 'q_silph', flag: 'silph_done', text: 'Liberate Silph Co. in Saffron City', hint: 'Eleven floors of trouble, and the president is held on the top one. Find the card key and climb.' },
   { id: 'q_marsh', flag: 'badge_marsh', text: 'Win the Marsh Badge in Saffron City', hint: 'Sabrina’s Psychic types hit like prophecy. Bug, Ghost, and Dark moves are your friends.' },
@@ -51,9 +51,9 @@ export const MAIN_QUESTS = [
 ];
 
 // ---------------------------------------------------------------------------
-// EVENTS — scripted story beats, keyed by event id. Engine gates: Snorlax
+// EVENTS — scripted story beats, keyed by event id. Engine gates: NAPPASAUR
 // events require the pokeflute in the bag; ev_league_gate requires 8 badges;
-// BUTTERFREE_EVENT requires owning a butterfree. The duo escalation runs
+// PRISMWING_EVENT requires owning a butterfree. The duo escalation runs
 // r2_duo (slice, Route 2) -> duo2 (St. Anne) -> duo3 (tower cameo / Celadon)
 // -> duo4 (Saffron) -> duo5 (islands) across the campaign.
 // ---------------------------------------------------------------------------
@@ -63,7 +63,7 @@ export const EVENTS = {
   // -- Cerulean: Bill's Sea Cottage ---------------------------------------
   ev_bill: [
     { say: ['...Hello? Is someone there? Oh, thank goodness — a human. With hands. Hands are very important right now.'], who: 'BILL' },
-    { say: ['It is me. Bill. The researcher. And before you ask — yes, this small round Pokemon standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent Clefairy and one hundred percent embarrassed.'], who: 'BILL' },
+    { say: ['It is me. Bill. The researcher. And before you ask — yes, this small round Pokemon standing in my cottage IS me, wearing the consequences of my own experiment.', 'I was testing pod-to-pod transfers and the separation step... improvised. Now I am roughly forty percent MOONLET and one hundred percent embarrassed.'], who: 'BILL' },
     { say: ['The fix is on that terminal. Big friendly button. Press it, and try not to enjoy this too much.'], who: 'BILL' },
     { say: ['...And — THERE. Two legs, ten fingers, one dignity, slightly used. Bill is back!'], who: 'BILL' },
     { say: ['You saved my career and my afternoon, in that order. Take this — I get invited to a floating trainer party every year and I never go. A spare ticket for the St. Anne, docked in Vermilion.', 'Go. Mingle. Battle someone who owns a butler. You have earned it.'], who: 'BILL' },
@@ -105,10 +105,10 @@ export const EVENTS = {
     { say: ['Rue. The accent. Maybe... less accent.'], who: 'COLE' },
     { say: ['I am IN CHARACTER, Cole.'], who: 'RUE' },
     { say: ['You are holding the menu upside down.'], who: 'COLE' },
-    { say: ['It is AVANT-GARDE. ...Enough! The disguise was flawless and everyone on this ship knows it. Hand over the Pikachu, {player} — the fun way or the other way!'], who: 'RUE' },
+    { say: ['It is AVANT-GARDE. ...Enough! The disguise was flawless and everyone on this ship knows it. Hand over the VOLTIK, {player} — the fun way or the other way!'], who: 'RUE' },
     { battle: 'duo2_vermilion' },
     { choice: { npc: ['rue', 'cole'], who: 'COLE', prompt: 'The duo is down, dripping, and tangled in a tablecloth. You —', options: [
-      { label: 'Help them up', delta: 2, say: ['...You are helping us? We literally just tried to steal your Pikachu. In waiter costumes.', 'Rue. Rue, the kid is HELPING us. I do not know what to do with that. File it under — under DECENT, I guess.'] },
+      { label: 'Help them up', delta: 2, say: ['...You are helping us? We literally just tried to steal your VOLTIK. In waiter costumes.', 'Rue. Rue, the kid is HELPING us. I do not know what to do with that. File it under — under DECENT, I guess.'] },
       { label: 'Leave them dripping', delta: -1, say: ['Yeah. Yeah, that is fair. That is — ow — that is extremely fair, actually.'] },
     ] } },
     { say: ['Beaten... on a boat... in front of the soup course...'], who: 'RUE' },
@@ -174,7 +174,7 @@ export const EVENTS = {
     { questDone: 'q_flute' },
   ],
 
-  // -- The two Snorlax (engine pre-checks pokeflute in bag) ------------------
+  // -- The two NAPPASAUR (engine pre-checks pokeflute in bag) ------------------
   ev_snorlax_east: [
     { say: ['The path simply... ends. In fur. A mountain that breathes — in, out, in, out — directly on top of Route 12.'], who: 'NARRATOR' },
     { say: ['You raise the Poke Flute. The first notes wobble across the water. The mountain does not approve of being woken. Or of your technique.'], who: 'NARRATOR' },
@@ -218,7 +218,7 @@ export const EVENTS = {
     { say: ['...So. The little trainer from Pallet Town, standing in my building, holding my company.', 'You have spirit. Spirit is a resource, and I collect resources. Remember this voice, child. When we meet properly, I will be considerably less charming.'], who: 'GIOVANNI (phone)' },
     { say: ['The line goes dead. For a moment, nobody in the room breathes.'], who: 'NARRATOR' },
     { say: ['Young trainer... you have saved Silph Co. Words are cheap; prototypes are not. This is our one-of-one. It has never failed, not once, not for anyone. Use it on something that matters.'], who: 'SILPH PRESIDENT' },
-    { give: { items: { masterball: 1 }, text: 'Master Ball' } },
+    { give: { items: { masterball: 1 }, text: 'Master Orb' } },
     { flag: 'silph_done' },
     { questDone: 'q_silph' },
     { heal: true },
@@ -258,7 +258,7 @@ export const EVENTS = {
 
   // -- The First Movie: New Island (post-Earth Badge) --------------------------
   ev_movie_arrive: [
-    { say: ['It arrives at dawn, out of a sky that was not stormy a minute ago — a Dragonite riding the wind like it owns the lease, a sealed envelope in one claw.'], who: 'NARRATOR' },
+    { say: ['It arrives at dawn, out of a sky that was not stormy a minute ago — a WYRMARCH riding the wind like it owns the lease, a sealed envelope in one claw.'], who: 'NARRATOR' },
     { say: ['Heavy paper. A wax seal. No return address. Inside, one line of elegant script: "The strongest trainer in the region is requested. Come." — and a set of coordinates.'], who: 'NARRATOR' },
     { say: ['Your partner is already staring at the horizon like it made a promise out there. Fair enough. You have never once said no to the sky.'], who: 'NARRATOR' },
     { quest: 'q_movie' },
@@ -382,7 +382,7 @@ export const EVENTS = {
   ev_mewtwo: [
     { say: ['Cerulean Cave. The water runs strange here, the stones hum, and every wild thing inside is strong enough to have opinions about you.'], who: 'NARRATOR' },
     { say: ['At the heart of it: a stillness shaped like a person who never asked to exist. The journals were right. It dreams — and it has been dreaming of the day someone strong enough arrived.'], who: 'NARRATOR' },
-    { say: ['So. You are the one the world made me to meet. Show me why.'], who: 'MEWTWO' },
+    { say: ['So. You are the one the world made me to meet. Show me why.'], who: 'OMNIGEN' },
     { arc: 'arc_mewtwo', stage: 'active' },
     { wildBattle: { species: 'mewtwo', level: 70, legendary: true } },
     { arc: 'arc_mewtwo', stage: 'complete' },
@@ -394,51 +394,51 @@ export const EVENTS = {
   // -- Starter gifts (anime beats, condensed) ----------------------------------------------
   ev_bulbasaur_gift: [
     { say: ['Oh! Careful where you step, dear — the seedlings are sleeping. I keep this garden as a haven, for Pokemon who needed somewhere quiet to land.'], who: 'CARETAKER' },
-    { say: ['That Bulbasaur has watched you since the gate. It is shy with people... WAS shy with people. It just planted itself squarely in your path — which, for that one, is a whole speech.'], who: 'CARETAKER' },
+    { say: ['That BUDDIN has watched you since the gate. It is shy with people... WAS shy with people. It just planted itself squarely in your path — which, for that one, is a whole speech.'], who: 'CARETAKER' },
     { say: ['It wants to see the world that made you kind enough to stop for a garden. Will you take it with you? Treat it gently — it bruises like fruit and forgives like family.'], who: 'CARETAKER' },
     { giveMon: { species: 'bulbasaur', level: 10 } },
     { flag: 'bulbasaur_joined' },
-    { toast: 'Bulbasaur joined your team!' },
+    { toast: 'BUDDIN joined your team!' },
   ],
 
   ev_charmander: [
     { say: ['Rain, coming down in sheets — and on that flat rock, the smallest fire you have ever seen, fighting the whole sky to stay lit.'], who: 'NARRATOR' },
-    { say: ['A Charmander. Alone. Its tail flame gutters with every gust, and it keeps looking up the road — still waiting for someone who is not coming back.'], who: 'NARRATOR' },
+    { say: ['A EMBRY. Alone. Its tail flame gutters with every gust, and it keeps looking up the road — still waiting for someone who is not coming back.'], who: 'NARRATOR' },
     { say: ['You kneel in the mud and hold your jacket over the flame. It looks at you for a long moment... then steps under the shelter. And stays.'], who: 'NARRATOR' },
     { giveMon: { species: 'charmander', level: 10 } },
     { flag: 'charmander_joined' },
     { say: ['Someday, its old trainer may learn what he threw away — word travels, and Vermilion talks. By then it will not matter. This one has a real partner now.'], who: 'NARRATOR' },
-    { toast: 'Charmander joined your team!' },
+    { toast: 'EMBRY joined your team!' },
   ],
 
   ev_squirtle_squad: [
     { say: ['Trainer! Thank goodness. Officer, Vermilion docks. Something keeps pranking my patrols — cones on the lighthouse, my hat in the harbor, sunglasses on every statue in the plaza. SUNGLASSES, trainer.'], who: 'OFFICER' },
     { say: ['THERE. By the crates. Five shapes, zero remorse, excellent eyewear. That is the squad. Go on then — catch the ringleader. Diplomatically.'], who: 'OFFICER' },
     { say: ['The leader steps out, shades down, arms crossed. It sizes up your partner with a long, professional look... then grins, and bumps your partner’s fist.'], who: 'NARRATOR' },
-    { say: ['That is a Squirtle Squad salute. It has seen a hundred trainers bluff. Yours did not. The leader wants in — pranks henceforth purely recreational, and mostly aimed at your rivals.'], who: 'NARRATOR' },
+    { say: ['That is a BUBLET Squad salute. It has seen a hundred trainers bluff. Yours did not. The leader wants in — pranks henceforth purely recreational, and mostly aimed at your rivals.'], who: 'NARRATOR' },
     { giveMon: { species: 'squirtle', level: 10 } },
     { flag: 'squirtle_joined' },
-    { toast: 'The Squirtle Squad leader joined!' },
+    { toast: 'The BUBLET Squad leader joined!' },
   ],
 
   // -- Vermilion coast: the migration send-off (engine gates on owning a butterfree) --
   ev_butterfree: [
-    { say: ['The coast at Vermilion is full of wings today — hundreds of Butterfree rising on the sea wind, beginning the long flight to their breeding grounds.'], who: 'NARRATOR' },
-    { say: ['Your Butterfree is watching them. So is another — one it met on this very shore, whose wing pattern it has been quietly dreamy about for days.'], who: 'NARRATOR' },
+    { say: ['The coast at Vermilion is full of wings today — hundreds of PRISMWING rising on the sea wind, beginning the long flight to their breeding grounds.'], who: 'NARRATOR' },
+    { say: ['Your PRISMWING is watching them. So is another — one it met on this very shore, whose wing pattern it has been quietly dreamy about for days.'], who: 'NARRATOR' },
     { say: ['This is the part of the journey nobody warns you about. Loving something sometimes means opening your hands.'], who: 'NARRATOR' },
-    { say: ['Your Butterfree looks back once — one long look, full of every battle and every berry — then lifts into the gold of the sky. Two wings become four, become a hundred, become gone.'], who: 'NARRATOR' },
+    { say: ['Your PRISMWING looks back once — one long look, full of every battle and every berry — then lifts into the gold of the sky. Two wings become four, become a hundred, become gone.'], who: 'NARRATOR' },
     { say: ['Its page in your dex does not close. From today, it is marked CHERISHED. Some Pokemon you keep. This one, you carry.'], who: 'NARRATOR' },
     { flag: 'butterfree_released' },
-    { toast: 'Butterfree flew to its future.' },
+    { toast: 'PRISMWING flew to its future.' },
   ],
 };
 
-// The Butterfree send-off, exported standalone for the overworld trigger.
-export const BUTTERFREE_EVENT = EVENTS.ev_butterfree;
+// The PRISMWING send-off, exported standalone for the overworld trigger.
+export const PRISMWING_EVENT = EVENTS.ev_butterfree;
 
 // The professor’s verdict on a certain herd. (Engine: shown when the player
 // has caught 5+ tauros.)
-export const TAUROS_LINE = 'Five Tauros. FIVE. {player}, the ranch hand has started billing me for their catering. Wonderful Pokemon. Terrifying grocery bill.';
+export const BOVARCH_LINE = 'Five BOVARCH. FIVE. {player}, the ranch hand has started billing me for their catering. Wonderful Pokemon. Terrifying grocery bill.';
 
 // ---------------------------------------------------------------------------
 // LEGENDARY_ARCS — every legendary/mythical gets a side arc with quest-log
@@ -456,7 +456,7 @@ export const LEGENDARY_ARCS = {
     steps: [
       { text: 'Read the melted inscription at the Power Plant', flag: 'arc_zapdos_found' },
       { text: 'Reach the nest between the turbines', flag: 'arc_zapdos_nest' },
-      { text: 'Face Zapdos, level 50', catch: 'zapdos' },
+      { text: 'Face FULMINIS, level 50', catch: 'zapdos' },
     ],
     lair: 'powerplant',
   },
@@ -488,18 +488,18 @@ export const LEGENDARY_ARCS = {
       { text: 'Find the surviving journal page in the Cinnabar Mansion', flag: 'mewtwo_journal' },
       { text: 'Become Champion of the Indigo League', flag: 'champion' },
       { text: 'Enter Cerulean Cave, north of Cerulean City', flag: 'mewtwo_cave' },
-      { text: 'Face Mewtwo at the cave’s heart', climax: { species: 'mewtwo', level: 70, legendary: true } },
+      { text: 'Face OMNIGEN at the cave’s heart', climax: { species: 'mewtwo', level: 70, legendary: true } },
     ],
     lair: 'ceruleancave',
   },
   arc_mew: {
     id: 'arc_mew', title: 'The Blessing in the Rain', species: 'mew',
-    hook: 'A sealed invitation, delivered by Dragonite on a storm wind, names you the guest of honor on New Island.',
+    hook: 'A sealed invitation, delivered by WYRMARCH on a storm wind, names you the guest of honor on New Island.',
     steps: [
       { text: 'Win the Earth Badge', flag: 'badge_earth' },
       { text: 'Answer the invitation and cross to New Island', flag: 'movie_arrived' },
       { text: 'Weather the storm and the Armored One’s test', flag: 'movie_done' },
-      { text: 'Accept Mew’s invitation to play', catch: 'mew' },
+      { text: 'Accept PRIMARA’s invitation to play', catch: 'mew' },
     ],
     lair: 'newisland',
   },
@@ -528,7 +528,7 @@ export const LEGENDARY_ARCS = {
     prereq: { arcs: ['arc_zapdos', 'arc_moltres', 'arc_articuno'] },
     hook: 'When the three birds of Kanto are gathered, an old melody surfaces — the sea guardian only answers those who have met its storms.',
     steps: [
-      { text: 'Catch Zapdos, Moltres, and Articuno', flag: 'birds_caught' },
+      { text: 'Catch FULMINIS, Moltres, and Articuno', flag: 'birds_caught' },
       { text: 'Receive the Silver Wing at the Whirl Islands' },
       { text: 'Descend to the deepest waterfall chamber' },
       { text: 'Face Lugia, level 70', catch: 'lugia' },
@@ -540,8 +540,8 @@ export const LEGENDARY_ARCS = {
     hook: 'Ilex Forest has a shrine older than the road through it, and the charcoal maker swears the trees sometimes repeat your words back — forty years younger.',
     steps: [
       { text: 'Return the lost Farfetch’d to the charcoal maker' },
-      { text: 'Receive the GS Ball from a grateful craftsman' },
-      { text: 'Place the GS Ball at the forest shrine' },
+      { text: 'Receive the GS Orb from a grateful craftsman' },
+      { text: 'Place the GS Orb at the forest shrine' },
       { text: 'Meet Celebi where the forest remembers', catch: 'celebi' },
     ],
     lair: 'ilexforest',

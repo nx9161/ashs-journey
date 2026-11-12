@@ -7,11 +7,11 @@
 // in the game's voice — no quoted or closely-paraphrased lines.
 //
 // Stage split: J4a ships the west (badges 1-4: zephyr / hive / plain /
-// fog), the Silver thief thread's first clash, the Slowpoke Well +
-// Kurt + GS Ball delivery, and the Burned Tower awakening that ARMS
+// fog), the Silver thief thread's first clash, the DOZELING Well +
+// Kurt + GS Orb delivery, and the Burned Tower awakening that ARMS
 // J5's beast arcs. J4b (this stage, appended below the marked seams)
 // ships the east: the Olivine/Cianwood medicine errand + Storm and
-// Mineral badges, Silver's second and third clashes, the Red Gyarados
+// Mineral badges, Silver's second and third clashes, the Red WRATHWYRM
 // + Lance + the Rocket Hideout + Glacier Badge, the Radio Tower
 // takeover, Clair + the Dragon's Den test (the Rising Badge is awarded
 // AT THE DEN, not in the gym), the route-silver badge gate, the Silver
@@ -20,7 +20,7 @@
 // the Foundation machine, and Red on Mt. Silver as post-game. J5 (this
 // stage, appended at the marked seams) ships the legendary arcs the
 // earlier stages armed: the three beasts (chases + lair faces on
-// `beasts_awakened`), Celebi (the GS Ball's return and the Ilex
+// `beasts_awakened`), Celebi (the GS Orb's return and the Ilex
 // shrine), and Ho-Oh (the designed arc_hooh, activated in
 // story-kanto.mjs) — plus the badge-order leader gate and the Rocket
 // Hideout interior map's re-homed staging (engine side).
@@ -51,8 +51,8 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_thief', flag: 'silver_reported', text: 'Watch for the red-haired thief — and report back to Elm', hint: 'A starter was stolen from Elm\'s lab. The thief was seen heading north, toward Cherrygrove and Route 30. If you meet him, tell Elm what you saw.' },
   { id: 'q_johto_sprout', flag: 'sprout_tower_done', text: 'Climb Sprout Tower and earn the Elder\'s blessing', hint: 'Violet City\'s tower sways like the Pokemon it honors. Falkner expects challengers to climb it first — the monks inside are the first half of his test.' },
   { id: 'q_johto_zephyr', flag: 'badge_zephyr', text: 'Win the Zephyr Badge from Falkner in Violet City', hint: 'Falkner keeps Violet\'s gym with birds raised in the tower\'s shadow. Flying types fear Electric, Ice and Rock moves.' },
-  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the Slowpoke Well', hint: 'Below Azalea Town, Rockets are cutting Slowpoke tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
-  { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Ball to Kurt in Azalea Town', hint: 'The ball no machine can open, carried all the way from Valencia. Kurt of Azalea works Poke Balls by hand, the old way — his house stands in the east of town.' },
+  { id: 'q_johto_well', flag: 'johto_well_cleared', text: 'Clear Team Rocket out of the DOZELING Well', hint: 'Below Azalea Town, Rockets are cutting DOZELING tails to sell. Kurt went down to stop them and hurt his back — finish what he started.' },
+  { id: 'q_johto_gsball', flag: 'gsball_delivered', text: 'Deliver the GS Orb to Kurt in Azalea Town', hint: 'The ball no machine can open, carried all the way from Valencia. Kurt of Azalea works Capture Orbs by hand, the old way — his house stands in the east of town.' },
   { id: 'q_johto_hive', flag: 'badge_hive', text: 'Win the Hive Badge from Bugsy in Azalea Town', hint: 'Bugsy\'s Bug types are proud and quick. Fire, Flying and Rock moves end arguments with them.' },
   { id: 'q_johto_plain', flag: 'badge_plain', text: 'Win the Plain Badge from Whitney in Goldenrod City', hint: 'Whitney\'s Miltank is famous all over Johto, and not for being gentle. Bring a team that can take a rolling hit — and give one back.' },
   { id: 'q_johto_burned', flag: 'beasts_awakened', text: 'See what woke in the Burned Tower', hint: 'In Ecruteak, the tower that burned a hundred and fifty years ago stands open and ash-smelling. Its basement held three statues. Held.' },
@@ -61,13 +61,13 @@ export const JOHTO_QUESTS = [
   { id: 'q_johto_potion', flag: 'amphy_healed', text: 'Fetch the Secret Potion for Amphy, the lighthouse Pokemon', hint: 'Amphy, the Ampharos whose light guides Olivine\'s ships, is sick in the Glitter Lighthouse. The pharmacy across Route 40 in Cianwood makes a Secret Potion — Jasmine is waiting on it.' },
   { id: 'q_johto_storm', flag: 'badge_storm', text: 'Win the Storm Badge from Chuck in Cianwood City', hint: 'Chuck trains where the sea hits the island hardest. His Fighting types fear Flying and Psychic moves — and respect anyone who crossed the water to reach him.' },
   { id: 'q_johto_mineral', flag: 'badge_mineral', text: 'Win the Mineral Badge from Jasmine in Olivine City', hint: 'Jasmine will not battle while Amphy is sick — the errand comes first. Her Steelix fears Fire, Fighting and Ground moves.' },
-  { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red Gyarados at the Lake of Rage', hint: 'North of Mahogany, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
+  { id: 'q_johto_redgyarados', flag: 'red_gyarados_done', text: 'Face the Red WRATHWYRM at the Lake of Rage', hint: 'North of Mahogany, something red and furious is tearing the lake apart. The fishermen say it was not always red — or always furious.' },
   { id: 'q_johto_hideout', flag: 'johto_hideout_cleared', text: 'Clear the Rocket Hideout beneath Mahogany\'s souvenir shop', hint: 'Lance is waiting in Mahogany Town. Whatever is humming under that shop is the same signal that has been hurting the lake.' },
   { id: 'q_johto_glacier', flag: 'badge_glacier', text: 'Win the Glacier Badge from Pryce in Mahogany Town', hint: 'Pryce has trained through fifty winters and one Rocket occupation. His Ice types fear Fire, Fighting, Rock and Steel moves.' },
   { id: 'q_johto_radio', flag: 'radio_tower_cleared', text: 'Take back the Goldenrod Radio Tower', hint: 'With the hideout gone, Team Rocket has seized the Radio Tower to broadcast their return. The real Director is being held somewhere below the city — the Card Key is with him.' },
   { id: 'q_johto_rising', flag: 'badge_rising', text: 'Win Clair\'s trust — and the Rising Badge — in Blackthorn', hint: 'Clair\'s gym is only the first half. By the clan\'s law the badge itself is given in the Dragon\'s Den, after the elder\'s test. Her Dragon types fear Ice and Dragon moves.' },
   { id: 'q_johto_conference', flag: 'conference_registered', text: 'Register for the Silver Conference at Silver Town', hint: 'Eight Johto badges open the road north: Blackthorn, Route Silver, Silver Town. The Conference Official in the stadium keeps the bracket.' },
-  { id: 'q_johto_gary', flag: 'beat_gary_johto', text: 'The Silver Conference — beat Gary', hint: 'He has been waiting on the far side of the bracket all arc. Blastoise and all. This one you have to win.' },
+  { id: 'q_johto_gary', flag: 'beat_gary_johto', text: 'The Silver Conference — beat Gary', hint: 'He has been waiting on the far side of the bracket all arc. ABYSSAR and all. This one you have to win.' },
   { id: 'q_johto_harrison', flag: 'johto_complete', text: 'The Silver Conference — the quarter-final, and whatever it decides', hint: 'Harrison of Littleroot, and a Houndoom that has ended better runs than yours. Face him with everything — the Conference, and Johto, end on the far side of this battle.' },
   { id: 'q_johto_red', flag: 'red_defeated', text: 'Post-game: the silent trainer on Mt. Silver', hint: 'Past Silver Town, the mountain keeps one more name off every bracket. He has been standing on that dais a long time, saying nothing, waiting for someone worth the silence.' },
 ];
@@ -126,7 +126,7 @@ export const JOHTO_TRAINERS = {
     reward: 6400, badge: 'fogbadge',
   },
   // Silver, first clash (Route 30): the stolen starter at band floor
-  // plus a Zubat. NOT a leader (no badge, no smart AI, no keepsake) —
+  // plus a SKREEP. NOT a leader (no badge, no smart AI, no keepsake) —
   // the battle is fought through the battleAny event step, win or
   // lose, and the branch flag records what actually happened.
   silver_r30: {
@@ -142,7 +142,7 @@ export const JOHTO_TRAINERS = {
   // Sprout Tower gauntlet (the monks are plain talk-to trainers).
   sprout_monk_1: {
     id: 'sprout_monk_1', name: 'Monk Jin', title: 'Sprout Tower Monk', ai: 'basic',
-    intro: ['The tower sways so the Bellsprout at its heart can feel the weather. We train the same way: bend, do not break. Show me your bend, traveler.'],
+    intro: ['The tower sways so the PITCHLET at its heart can feel the weather. We train the same way: bend, do not break. Show me your bend, traveler.'],
     lose: ['You bend well. The stairs are yours — mind the sway on the way up.'],
     team: [
       { species: 'bellsprout', level: 106 },
@@ -160,11 +160,11 @@ export const JOHTO_TRAINERS = {
     ],
     reward: 450,
   },
-  // The Slowpoke Well Rockets (plain trainers; the johto NPC handler
+  // The DOZELING Well Rockets (plain trainers; the johto NPC handler
   // gates their battles on Kurt's plea and counts the clear).
   rocket_well_1: {
     id: 'rocket_well_1', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
-    intro: ['Hey! This well is a work site! Slowpoke tails, one snip at a time — the boss calls it harvesting. I call it overtime. Scram!'],
+    intro: ['Hey! This well is a work site! DOZELING tails, one snip at a time — the boss calls it harvesting. I call it overtime. Scram!'],
     lose: ['Ow — okay, okay! The tail business was the boss\'s idea anyway...'],
     team: [
       { species: 'rattata', level: 118 },
@@ -254,7 +254,7 @@ export const JOHTO_TRAINERS = {
     reward: 1200,
   },
   // Silver, second clash (Ilex Forest): the stolen starter grown
-  // (Croconaw, a touch stronger), a Golbat, a Sneasel he caught on
+  // (Croconaw, a touch stronger), a GLOOMBITE, a Sneasel he caught on
   // the road. Fought through battleAny like the first clash — the
   // branch flag records the honest outcome.
   silver_ilex: {
@@ -300,7 +300,7 @@ export const JOHTO_TRAINERS = {
   },
   rocket_hideout_2: {
     id: 'rocket_hideout_2', name: 'Rocket Grunt', title: 'Team Rocket', ai: 'basic',
-    intro: ['You hear that hum? That is the sound of every Gyarados on the lake answering US. Keep walking and you join the choir — as the example!'],
+    intro: ['You hear that hum? That is the sound of every WRATHWYRM on the lake answering US. Keep walking and you join the choir — as the example!'],
     lose: ['The hum... it stopped for a second there. Did you feel it stop? That is bad. That is very bad.'],
     team: [
       { species: 'arbok', level: 161 },
@@ -311,7 +311,7 @@ export const JOHTO_TRAINERS = {
   rocket_hideout_exec: {
     id: 'rocket_hideout_exec', name: 'Executive Vey', title: 'Team Rocket Executive', ai: 'smart',
     intro: ['I am Vey. I sign the orders the grunts are afraid to read aloud. The lake, the signal, this little shop of horrors — my paperwork, all of it. And you are the audit.'],
-    lose: ['Audit... accepted. The signal dies with this room, trainer. Tell the man with the Dragonite that Vey sends her regards — and her resignation.'],
+    lose: ['Audit... accepted. The signal dies with this room, trainer. Tell the man with the WYRMARCH that Vey sends her regards — and her resignation.'],
     team: [
       { species: 'hypno', level: 164 },
       { species: 'houndoom', level: 166 },
@@ -387,10 +387,10 @@ export const JOHTO_TRAINERS = {
   // the player must WIN (standard league idiom: losing leaves
   // beat_gary_johto unset and Gary re-challengeable after healing —
   // no soft-lock). His team is built from his Kanto identity, grown
-  // to the Conference: Alakazam and Arcanine from his road, Gengar
-  // and Umbreon from his Johto years, Pidgeot from the first sky
-  // you shared — and Blastoise, his starter, anchoring it all, the
-  // Charizard-vs-Blastoise echo the whole rivalry has pointed at.
+  // to the Conference: MENTARCH and EMBERMANE from his road, GRIMSHADE
+  // and Umbreon from his Johto years, AERARCH from the first sky
+  // you shared — and ABYSSAR, his starter, anchoring it all, the
+  // INFERNOX-vs-ABYSSAR echo the whole rivalry has pointed at.
   gary_johto: {
     id: 'gary_johto', name: 'Gary', title: 'Silver Conference Trainer', ai: 'smart',
     intro: ['Well. Look who the bracket dragged in.', 'Kanto champion, Orange winner — and still the second-most interesting trainer in this stadium. I have waited two regions for this draw, {player}. Do not make me regret the wait.'],
@@ -433,7 +433,7 @@ export const JOHTO_TRAINERS = {
     reward: 9500,
   },
   // RED — post-completion, gated on johto_complete in his handler.
-  // The canon team at the band ceiling: Pikachu 200, the rest
+  // The canon team at the band ceiling: VOLTIK 200, the rest
   // 195-198. Rematchable: talk again, battle again.
   red: {
     id: 'red', name: 'Red', title: 'Trainer', ai: 'smart',
@@ -463,7 +463,7 @@ export const JOHTO_EVENTS = {
     { say: ['Elm\'s lab is not the calm place the ferry captain described. Paper covers the floor like leaves. A glass case near the back stands open and empty, and two aides are arguing in the hushed voices people use at the scene of a small disaster.'], who: 'NARRATOR' },
     { say: ['Oh — a trainer! From the boat, by your pack. I am Professor Elm. Forgive the lab. Forgive everything, actually — it has been that kind of morning.', 'First, the duty: your Johto journey, registered. There. Whatever else today has done, it has not stopped that.'], who: 'PROF. ELM' },
     { say: ['Now the rest. This case held three young Pokemon this morning, waiting for new trainers. It holds two. Sometime before dawn, someone came through that window, helped themselves to the third — a Totodile, already strong for its age — and was gone over the fence before the alarm finished waking up.', 'The guard on the dock saw red hair. That is all anyone saw. Red hair, and no fear at all.'], who: 'PROF. ELM' },
-    { say: ['I am not asking you to chase a thief across Johto — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Violet City is your road: north through Cherrygrove, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Azalea — a man named Kurt, who works Poke Balls by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. ELM' },
+    { say: ['I am not asking you to chase a thief across Johto — you have badges to earn and a whole region to see. I am asking smaller: keep your eyes open. If you cross paths with whoever did this, come back and tell me what you found. A lab keeps records. Today, mine has a page missing.', 'Violet City is your road: north through Cherrygrove, then Route 30. Professor Hawthorn speaks well of you, trainer. So does Hawthorn\'s friend in Azalea — a man named Kurt, who works Capture Orbs by hand. When you reach him... you are carrying something he should see. But that is a later page. Go safely.'], who: 'PROF. ELM' },
     { flag: 'johto_arrival' },
     { flag: 'elm_registered' },
     { toast: 'Your Johto journey is registered!' },
@@ -480,10 +480,10 @@ export const JOHTO_EVENTS = {
     { toast: 'The red-haired thief got away.' },
   ],
 
-  // -- Slowpoke Well: Kurt's plea (first well entry) -------------------
+  // -- DOZELING Well: Kurt's plea (first well entry) -------------------
   ev_johto_well: [
     { say: ['The well smells of wet stone and something worse — a sweet, wrong smell, like a market stall in a cave. Halfway down the ladder, a voice you know from Azalea\'s doorsteps calls up, tight with pain.'], who: 'NARRATOR' },
-    { say: ['Careful on that rung — and careful below it, too. Kurt. Yes, THAT Kurt, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the Slowpoke are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the Slowpoke — and so an old man\'s pride survives the afternoon.'], who: 'KURT' },
+    { say: ['Careful on that rung — and careful below it, too. Kurt. Yes, THAT Kurt, sitting in the mud like a dropped tool. I came down to have words with the tail-cutters and my back had words with ME. Fair trade, the old traitor.', 'Listen, trainer. Three of them are still down there, and the DOZELING are too gentle to run and too slow to hide. I cannot climb, I cannot fight, and I am too proud to crawl past them. So the well is yours, if you will take it. Clear them out. Every last one. For the DOZELING — and so an old man\'s pride survives the afternoon.'], who: 'KURT' },
     { flag: 'kurt_well_plea' },
     { toast: 'Kurt is counting on you.' },
   ],
@@ -511,7 +511,7 @@ export const JOHTO_EVENTS = {
   // opening lines genuinely branch on silver_r30_won / _lost; the
   // battle itself is the shared battleAny (win or lose advances).
   ev_johto_silver_ilex_won: [
-    { say: ['The Ilex trees close overhead like a held breath. Then — a laugh, short and disbelieving, from the Azalea-side path. Red hair. A Golbat riding the thermals between the trunks. And a Croconaw, bigger than you remember, keeping pace like a shadow with teeth.'], who: 'NARRATOR' },
+    { say: ['The Ilex trees close overhead like a held breath. Then — a laugh, short and disbelieving, from the Azalea-side path. Red hair. A GLOOMBITE riding the thermals between the trunks. And a Croconaw, bigger than you remember, keeping pace like a shadow with teeth.'], who: 'NARRATOR' },
     { say: ['Route 30. I have replayed it every night since. You got LUCKY — the grass, the light, one lucky bounce. Luck is not a strategy, trainer. It runs out. Watch it run out.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
     { say: ['He is gone into the trees before the echo is — but slower than last time, and looking back once, the way a person looks at a measuring mark they did not expect to move.'], who: 'NARRATOR' },
@@ -519,7 +519,7 @@ export const JOHTO_EVENTS = {
     { toast: 'Silver is measuring himself against you now.' },
   ],
   ev_johto_silver_ilex_lost: [
-    { say: ['The Ilex trees close overhead like a held breath. Then — footsteps, unhurried, from the Azalea-side path. Red hair. A Golbat in the branches. And a Croconaw, bigger than you remember, wearing Route 30 like a medal.'], who: 'NARRATOR' },
+    { say: ['The Ilex trees close overhead like a held breath. Then — footsteps, unhurried, from the Azalea-side path. Red hair. A GLOOMBITE in the branches. And a Croconaw, bigger than you remember, wearing Route 30 like a medal.'], who: 'NARRATOR' },
     { say: ['You. I wondered when the road would return my practice partner. Route 30 was not a fluke, and this forest is about to prove it twice. Croconaw — encore.'], who: 'SILVER' },
     { battleAny: { trainer: 'silver_ilex', winFlag: 'silver_ilex_won', loseFlag: 'silver_ilex_lost' } },
     { say: ['He is gone into the trees before the echo is — but slower than you would expect from a boy in a hurry, and looking back once, at the space where the battle happened, like it surprised him too.'], who: 'NARRATOR' },
@@ -527,7 +527,7 @@ export const JOHTO_EVENTS = {
     { toast: 'Silver is measuring himself against you now.' },
   ],
 
-  // -- The Red Gyarados (Lake of Rage entry): a one-time CATCHABLE
+  // -- The Red WRATHWYRM (Lake of Rage entry): a one-time CATCHABLE
   // wildBattle. The runSteps fled guard is the whole law here:
   // fleeing leaves the chain unfinished (no flag, no event-done), so
   // the encounter re-fires on the next entry and completes NOTHING;
@@ -536,11 +536,11 @@ export const JOHTO_EVENTS = {
   // the same scene.
   ev_johto_redgyarados: [
     { say: ['The lake is wrong before you even see it. Gulls are screaming inland, away from the water, and the sound coming off the shore is not waves — it is something enormous, thrashing in water too shallow to hold it, over and over, like a bell being struck underwater.'], who: 'NARRATOR' },
-    { say: ['Then the surface breaks. Red. Not sunset-red — scale-red, fin-red, a Gyarados the colour of a wound, thirty feet of fury trying to shake a sound out of its own skull that only it can hear. The fishermen are on the shore with their boats pulled up and their hats in their hands. Nobody is fishing today.'], who: 'NARRATOR' },
-    { say: ['It sees you. Whatever is screaming inside its head, for one moment you are louder. The Red Gyarados comes at the shore like weather.'], who: 'NARRATOR' },
+    { say: ['Then the surface breaks. Red. Not sunset-red — scale-red, fin-red, a WRATHWYRM the colour of a wound, thirty feet of fury trying to shake a sound out of its own skull that only it can hear. The fishermen are on the shore with their boats pulled up and their hats in their hands. Nobody is fishing today.'], who: 'NARRATOR' },
+    { say: ['It sees you. Whatever is screaming inside its head, for one moment you are louder. The Red WRATHWYRM comes at the shore like weather.'], who: 'NARRATOR' },
     { wildBattle: { species: 'gyarados', level: 162 } },
     { say: ['Quiet. Not peace — exhaustion, the lake settling back into its banks, the gulls daring their way down again one at a time. And over it, a new sound: wings. Very large wings, folding.'], who: 'NARRATOR' },
-    { say: ['You felt it too, then. Not the rage — the cause. I am Lance. I train dragons, and I have been following a signal across Johto that should not exist: a radio wave, tuned like a hand on a shoulder, that Pokemon cannot refuse. It is loudest here. It drove that Gyarados out of the deep water and painted it with its own fury.', 'Signals have sources, trainer. This one is close — buried under a town that smells of cedar and souvenirs. Mahogany. Meet me there. Bring that look with you — the one you are wearing now. We are going to need it.'], who: 'LANCE' },
+    { say: ['You felt it too, then. Not the rage — the cause. I am Lance. I train dragons, and I have been following a signal across Johto that should not exist: a radio wave, tuned like a hand on a shoulder, that Pokemon cannot refuse. It is loudest here. It drove that WRATHWYRM out of the deep water and painted it with its own fury.', 'Signals have sources, trainer. This one is close — buried under a town that smells of cedar and souvenirs. Mahogany. Meet me there. Bring that look with you — the one you are wearing now. We are going to need it.'], who: 'LANCE' },
     { flag: 'red_gyarados_done' },
     { flag: 'lance_met' },
     { toast: 'Lance is waiting in Mahogany Town.' },
@@ -549,17 +549,17 @@ export const JOHTO_EVENTS = {
   // -- The Rocket Hideout (the descent, run from Lance in Mahogany):
   // a gauntlet of must-win { battle } steps — a loss stalls the chain
   // with no flag and no event-done, so talking to Lance re-runs the
-  // descent; it can never half-clear. The Electrode power core is a
+  // descent; it can never half-clear. The MEGACELL power core is a
   // wildBattle staged as a battle (uncatchable — it is a machine's
   // heart, not a wild encounter). Lance fights beside you in the
   // dialogue between beats, not as a mechanic.
   ev_johto_hideout: [
     { say: ['Behind the souvenir shop\'s counter, under a trapdoor stacked with unsold keychains: stairs. The air coming up is warm, electric, and humming at a pitch that makes your teeth ache — the lake\'s scream, at its source.'], who: 'NARRATOR' },
-    { say: ['Dragonite walks point with me — you watch our backs, trainer, and I will watch yours. Whatever they are powering down here, it ends tonight. On three. One — two —'], who: 'LANCE' },
+    { say: ['WYRMARCH walks point with me — you watch our backs, trainer, and I will watch yours. Whatever they are powering down here, it ends tonight. On three. One — two —'], who: 'LANCE' },
     { battle: 'rocket_hideout_1' },
-    { say: ['The first room folds. Lance does not even slow down — somewhere to your left a Dragonite\'s wingbeat puts out a row of lights like candles, and the humming climbs a note. The core is close. The core is AWAKE.'], who: 'NARRATOR' },
+    { say: ['The first room folds. Lance does not even slow down — somewhere to your left a WYRMARCH\'s wingbeat puts out a row of lights like candles, and the humming climbs a note. The core is close. The core is AWAKE.'], who: 'NARRATOR' },
     { battle: 'rocket_hideout_2' },
-    { say: ['There. The power core: a ring of Electrode, wired into the transmitter like beads on a wire, pouring themselves into the signal. They cannot be caught and they cannot be reasoned with — they can only be emptied. Gently is not available. Go.'], who: 'LANCE' },
+    { say: ['There. The power core: a ring of MEGACELL, wired into the transmitter like beads on a wire, pouring themselves into the signal. They cannot be caught and they cannot be reasoned with — they can only be emptied. Gently is not available. Go.'], who: 'LANCE' },
     { wildBattle: { species: 'electrode', level: 166, uncatchable: true } },
     { say: ['The core cracks open like an egg of light. The hum stutters — drops — dies, floor by floor, and in the sudden quiet you can hear the lake, miles north, going calm. One door remains, and behind it, the hand that signed the orders.'], who: 'NARRATOR' },
     { battle: 'rocket_hideout_exec' },
@@ -670,18 +670,18 @@ export const JOHTO_EVENTS = {
     { flag: 'arc_suicune_done' },
     { toast: 'Suicune is yours. Somewhere above you, one bell rings once, very softly, on nobody\'s hand.' },
   ],
-  // Celebi: the GS Ball at the Ilex shrine (fired by the shrine's
+  // Celebi: the GS Orb at the Ilex shrine (fired by the shrine's
   // faced-tile interact in overworld-systems, not a map-entry gate —
   // the shrine is a place you go to, not a room you pass through).
   ev_johto_celebi: [
-    { say: ['The GS Ball comes out of your bag already warm. At the shrine\'s foot it clicks — a small, definite sound, like a latch being asked a question and answering yes — and the two halves open on nothing at all, and the nothing is looking at you.', 'Then the forest breathes in. For one held moment Ilex is young: saplings where the old oaks stand, light the colour of first mornings, leaf-mould unstepped-on by any boot that has ever existed. A small green shape hangs in that younger light, wings ticking like a clock that counts in seasons, and it is laughing — delighted, entirely unafraid — and the laugh says: you took the long way round, and the long way round was the way.'], who: 'NARRATOR' },
+    { say: ['The GS Orb comes out of your bag already warm. At the shrine\'s foot it clicks — a small, definite sound, like a latch being asked a question and answering yes — and the two halves open on nothing at all, and the nothing is looking at you.', 'Then the forest breathes in. For one held moment Ilex is young: saplings where the old oaks stand, light the colour of first mornings, leaf-mould unstepped-on by any boot that has ever existed. A small green shape hangs in that younger light, wings ticking like a clock that counts in seasons, and it is laughing — delighted, entirely unafraid — and the laugh says: you took the long way round, and the long way round was the way.'], who: 'NARRATOR' },
     { flag: 'celebi_shrine_opened' },
     { arc: 'arc_celebi', stage: 'active' },
     { wildBattleCatch: { species: 'celebi', level: 170, legendary: true } },
     { arc: 'arc_celebi', stage: 'complete' },
     { flag: 'arc_celebi_done' },
-    { say: ['When it is over the forest is old again, and kind about it. The GS Ball hangs open and empty in your hand — an ordinary impossible object, its one errand run. You keep it. Some souvenirs are proof; this one is a receipt.'], who: 'NARRATOR' },
-    { toast: 'Celebi is yours. The empty GS Ball stays in your bag — a memento.' },
+    { say: ['When it is over the forest is old again, and kind about it. The GS Orb hangs open and empty in your hand — an ordinary impossible object, its one errand run. You keep it. Some souvenirs are proof; this one is a receipt.'], who: 'NARRATOR' },
+    { toast: 'Celebi is yours. The empty GS Orb stays in your bag — a memento.' },
   ],
   // Ho-Oh: the Bell Tower summit, with the Clear Bell in hand.
   ev_johto_hooh: [
@@ -746,17 +746,17 @@ export const JOHTO_TALES = {
     finishLines: ['Aya. ...My great-grandmother\'s name was Aya. Sixty years at that door and the tower kept HER secret from me, not the stone\'s.', 'A tower that sways starts with a stone carried gently. That is the whole philosophy of this town in one sentence, and my family paid for it in shoe leather. Two Super Potions, trainer — and thank you.'],
   },
   tale_azalea: {
-    id: 'tale_azalea', town: 'Azalea Town', giver: 'MAIZIE', title: 'Rain for the Slowpoke', johtoTale: true,
+    id: 'tale_azalea', town: 'Azalea Town', giver: 'MAIZIE', title: 'Rain for the DOZELING', johtoTale: true,
     stages: [
-      'Ask the Wellkeeper Jonas in Azalea about the Slowpoke rain story',
+      'Ask the Wellkeeper Jonas in Azalea about the DOZELING rain story',
       'Tell Maizie the story, the way Jonas told it',
     ],
     reward: { items: { hyperpotion: 1 } }, rewardText: '1 Hyper Potion',
     bondNpc: 'maizie', bondDelta: 1,
-    revelation: 'The wellkeeper\'s grandfather swore the great drought broke the morning a whole town simply stood in the dry well and sang — the Slowpoke answered first, and the rain answered them.',
-    offerLines: ['Everyone says the Slowpoke brought the rain back to Azalea, once, in the big drought. Everyone! But nobody tells it PROPERLY anymore.', 'Wellkeeper Jonas tells it properly. Go and hear it from him, then tell it back to me — a Hyper Potion for the full story, no skipping the good parts.'],
-    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Kurt\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the Slowpoke lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
-    finishLines: ['They SANG into the well?! And the Slowpoke sang back, and THEN the rain...', 'That is the best version. That is the one I am telling from now on, and I am telling it exactly like that. A Hyper Potion — earned. Storytellers should be paid properly; Jonas says so.'],
+    revelation: 'The wellkeeper\'s grandfather swore the great drought broke the morning a whole town simply stood in the dry well and sang — the DOZELING answered first, and the rain answered them.',
+    offerLines: ['Everyone says the DOZELING brought the rain back to Azalea, once, in the big drought. Everyone! But nobody tells it PROPERLY anymore.', 'Wellkeeper Jonas tells it properly. Go and hear it from him, then tell it back to me — a Hyper Potion for the full story, no skipping the good parts.'],
+    stageLines: ['The rain story? You want it properly, then. Sit on the well rim — no, not IN, sit ON.', 'My grandfather was there. A year with no rain, the well dry as a drum, and the whole town gone quiet with thirst. Then old Yuna — Kurt\'s mother — climbed down and started SINGING into the empty well, and one by one the town joined her, and the DOZELING lifted their heads and sang back. By morning: rain. A week of it. Tell Maizie all of it — especially the singing.'],
+    finishLines: ['They SANG into the well?! And the DOZELING sang back, and THEN the rain...', 'That is the best version. That is the one I am telling from now on, and I am telling it exactly like that. A Hyper Potion — earned. Storytellers should be paid properly; Jonas says so.'],
   },
   tale_goldenrod: {
     id: 'tale_goldenrod', town: 'Goldenrod City', giver: 'FLOWER SELLER UNA', title: 'Flowers for the Night Train', johtoTale: true,
@@ -818,9 +818,9 @@ export const JOHTO_TALES = {
     ],
     reward: { items: { hyperpotion: 1 } }, rewardText: '1 Hyper Potion',
     bondNpc: 'fenn', bondDelta: 1,
-    revelation: 'Oda\'s grandfather, the town\'s first timberwright, threw his wedding ring into the lake in a rage after an argument — and a Magikarp delivered it back to his doorstep plank three winters later, in the spring melt, the week the couple\'s fiftieth anniversary came due. Mahogany says the lake keeps count of everything it is owed and everything it owes.',
+    revelation: 'Oda\'s grandfather, the town\'s first timberwright, threw his wedding ring into the lake in a rage after an argument — and a RUSTCARP delivered it back to his doorstep plank three winters later, in the spring melt, the week the couple\'s fiftieth anniversary came due. Mahogany says the lake keeps count of everything it is owed and everything it owes.',
     offerLines: ['Thirty years I have watched that lake, trainer, and I will tell you its one law for an errand: the lake keeps count. What it takes, it owes. What it is given, it remembers.', 'Timberwright Oda knows a count the lake settled. Ask him what the lake gave back. A Hyper Potion for the telling — some stories are medicine.'],
-    stageLines: ['What the lake gave back? My grandfather\'s ring. Sit — no, stand there, the story is short and I tell it standing, the way he did.', 'He threw it in after a row with my grandmother, the winter they were wed — threw it far, and was too proud to fish for it. Three winters later the spring melt comes down, and on the doorstep plank, in a clump of weed: the ring. A Magikarp had been carrying it, or the current had, or the lake had. In Mahogany we do not separate those. It came back the week of their fiftieth. He never took it off again.'],
+    stageLines: ['What the lake gave back? My grandfather\'s ring. Sit — no, stand there, the story is short and I tell it standing, the way he did.', 'He threw it in after a row with my grandmother, the winter they were wed — threw it far, and was too proud to fish for it. Three winters later the spring melt comes down, and on the doorstep plank, in a clump of weed: the ring. A RUSTCARP had been carrying it, or the current had, or the lake had. In Mahogany we do not separate those. It came back the week of their fiftieth. He never took it off again.'],
     finishLines: ['The week of their fiftieth. The count kept to the WEEK. That is the lake all over, trainer — slow as ice and exact as a ledger.', 'That is why this town did not panic when the water turned strange lately. We know the lake. What is taken from it is owed, and what is owed comes back. A Hyper Potion — earned, and counted.'],
   },
   tale_blackthorn: {
@@ -965,8 +965,8 @@ export const JOHTO_NPC_PATCHES = [
 // it was designed inside LEGENDARY_ARCS (story-kanto.mjs) and J5
 // activated it in place there. arc_celebi IS here, and Object.assign
 // order makes this live entry supersede the designed one in
-// story-kanto.mjs — the designed steps (a Farfetch'd errand) never
-// matched the shipped GS Ball story J4a actually told.
+// story-kanto.mjs — the designed steps (a POSTDUCK errand) never
+// matched the shipped GS Orb story J4a actually told.
 //
 // Shared laws (all five arcs):
 //  - prereq `beasts_awakened` for the beasts and Celebi; Ho-Oh's
@@ -1015,10 +1015,10 @@ export const JOHTO_LEGENDARY_ARCS = {
   arc_celebi: {
     id: 'arc_celebi', title: 'The Ball That Hums at Shrines', species: 'celebi', region: 'Johto',
     prereq: 'beasts_awakened',
-    hook: 'The GS Ball Kurt has been studying began to hum the night the tower woke — and Kurt, who trusts old objects the way sailors trust weather, says it is not his to keep any longer.',
+    hook: 'The GS Orb Kurt has been studying began to hum the night the tower woke — and Kurt, who trusts old objects the way sailors trust weather, says it is not his to keep any longer.',
     steps: [
-      { text: 'Return to Kurt in Azalea Town — the GS Ball stirred the night the tower woke, and he is giving it back', flag: 'gsball_back_with_player' },
-      { text: 'Take the GS Ball to the forest shrine in Ilex Forest and stand before it', flag: 'celebi_shrine_opened' },
+      { text: 'Return to Kurt in Azalea Town — the GS Orb stirred the night the tower woke, and he is giving it back', flag: 'gsball_back_with_player' },
+      { text: 'Take the GS Orb to the forest shrine in Ilex Forest and stand before it', flag: 'celebi_shrine_opened' },
       { text: 'Face Celebi, level 170, in the forest\'s younger light', catch: 'celebi' },
     ],
     lair: 'ilex-forest',

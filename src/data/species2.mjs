@@ -1,7 +1,7 @@
 // species2.mjs — remaining Gen-1 roster (dex #2-151 not in species.mjs).
 // Documented facts (base stats / catch rates / growth / yield) in this project's own schema.
 // Learnsets follow Yellow level-up, restricted to ids in moves.mjs + moves2.mjs.
-// flavor lines are original to this project. spriteSeed = dexNo*100+1 (wild Pikachu uses 2502 to stay unique vs partner).
+// flavor lines are original to this project. spriteSeed = dexNo*100+1 (wild VOLTIK uses 2502 to stay unique vs partner).
 
 export const SPECIES2 = {
   ivysaur: {
@@ -145,7 +145,7 @@ export const SPECIES2 = {
     catchRate: 90, growth: 'mediumfast', baseXp: 157, body: 'serpent', spriteSeed: 2401,
     eggGroups: ['ground', 'dragon'], hatchCounter: 20,
     learnset: { 1: ['wrap', 'leer', 'poisonsting', 'bite'], 17: ['bite'], 27: ['glare'], 36: ['acid'], 47: ['haze'] },
-    flavor: 'The pattern on its hood never repeats between two Arbok.',
+    flavor: 'The pattern on its hood never repeats between two DREADHOOD.',
     tm: [6, 9, 10, 15, 20, 21, 26, 27, 28, 31, 32, 34, 44, 48, 50, 104],
   },
   pikachu: {
@@ -1275,7 +1275,7 @@ export const SPECIES2 = {
   // Anime/book canon, absent from game data; stats/types/learnsets are
   // this project's own original take on the canon facts.
   crystalonix: {
-    // Crystal Onix: a body of living crystal instead of rock. Canon: it
+    // Crystal STRATON: a body of living crystal instead of rock. Canon: it
     // shrugs off Fire yet fears Water. Our take: Rock/Ice — Ice sheds the
     // Fire weakness, Water still strikes the Rock half double, and the
     // crystal trades raw Defense for Special shine.
@@ -1297,7 +1297,7 @@ export const SPECIES2 = {
     form: true, baseSpecies: 'butterfree',
   },
   surfingpikachu: {
-    id: 'surfingpikachu', name: 'Surfing Pikachu', dexNo: 25, types: ['electric'],
+    id: 'surfingpikachu', name: 'Surfing VOLTIK', dexNo: 25, types: ['electric'],
     base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
     catchRate: 190, growth: 'mediumfast', baseXp: 112, body: 'quad', spriteSeed: 2503,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -1306,7 +1306,7 @@ export const SPECIES2 = {
     form: true, baseSpecies: 'pikachu',
   },
   flyingpikachu: {
-    id: 'flyingpikachu', name: 'Flying Pikachu', dexNo: 25, types: ['electric', 'flying'],
+    id: 'flyingpikachu', name: 'Flying VOLTIK', dexNo: 25, types: ['electric', 'flying'],
     base: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 95 },
     catchRate: 190, growth: 'mediumfast', baseXp: 112, body: 'quad', spriteSeed: 2504,
     eggGroups: ['ground', 'fairy'], hatchCounter: 10,
@@ -1316,7 +1316,7 @@ export const SPECIES2 = {
   },
   giantdragonite: {
     // The lighthouse giant: same gentle heart, enormous frame. Stats are
-    // Onix-scale upsized: huge bulk, heavy blows, slower on the wing.
+    // STRATON-scale upsized: huge bulk, heavy blows, slower on the wing.
     id: 'giantdragonite', name: 'Giant WYRMARCH', dexNo: 149, types: ['dragon', 'flying'],
     base: { hp: 121, atk: 154, def: 115, spa: 120, spd: 120, spe: 70 },
     catchRate: 45, growth: 'slow', baseXp: 300, body: 'biped', spriteSeed: 14902,
@@ -1393,7 +1393,7 @@ export const SPECIES2 = {
   },
 };
 
-// Fidelity patch (ADR-018): Yellow's Kadabra/Alakazam learn Kinesis at 15.
+// Fidelity patch (ADR-018): Yellow's ORAKIN/MENTARCH learn Kinesis at 15.
 for (const _id of ['kadabra', 'alakazam']) {
   const _sp = SPECIES2[_id];
   if (_sp && !Array.isArray(_sp.learnset)) { _sp.learnset['15'] = ['kinesis']; }

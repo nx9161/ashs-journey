@@ -10,7 +10,7 @@ export const DISCLAIMER_BOOT = [
   'An unofficial fan homage. Not affiliated with, endorsed by, or connected to',
   'Nintendo, Creatures Inc., or GAME FREAK inc.',
   '',
-  'Pok\u00e9mon, Pikachu, and all character names are trademarks of',
+  'Pok\u00e9mon, VOLTIK, and all character names are trademarks of',
   'Nintendo / Creatures Inc. / GAME FREAK inc.',
   'This is a free, non-commercial fan project made with love by fans.',
   'No purchase is required or accepted. Please support the official releases.',
@@ -165,7 +165,7 @@ const LEGAL_PAGES = [
     'GAME FREAK inc.',
   ],
   [
-    'Pok\u00e9mon, Pikachu, and all',
+    'Pok\u00e9mon, VOLTIK, and all',
     'character names are trademarks',
     'of Nintendo / Creatures Inc. /',
     'GAME FREAK inc.',

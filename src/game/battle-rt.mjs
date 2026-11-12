@@ -54,7 +54,7 @@ function cooldownMs(mv, userSpe, foeSpe, field, mon) {
   // ADR-025 §1 RT twists at this hook: Storm/Volt — Electric moves x0.85;
   // Grave/Mind — status moves x1.25 (groundCooldownMult, field-resolved,
   // so Story's twist-off is already folded in).
-  // ADR-025 §3: Gloom Fang — the holder's (optional 5th arg) Poison moves
+  // ADR-025 §3: DROOPETAL Fang — the holder's (optional 5th arg) Poison moves
   // cool down x0.85; the classic engine takes the +10% chance instead.
   if (mv.cat === 'status') return Math.round(1500 * groundCooldownMult(field, mv) * keepsakeCooldownMult(mon, mv));
   return Math.round(clamp(800 + (mv.power || 30) * 9 + (100 - (mv.acc || 100)) * 6 - (userSpe - foeSpe) * 3, 650, 4200) * groundCooldownMult(field, mv) * keepsakeCooldownMult(mon, mv));
@@ -536,7 +536,7 @@ Object.assign(BattleScene.prototype, {
       if (efx.statusAny) statusRoll = efx.statusAny[Math.floor(g.rng.battle() * efx.statusAny.length)];
       // ADR-025 §1: Ember/Pyre (burn) / Venom (poison) +10 points, same
       // hook as classic — only where the move can already inflict it.
-      // ADR-025 §3: Ember Seed / Gloom Fang add their +10 at the same roll.
+      // ADR-025 §3: Ember Seed / DROOPETAL Fang add their +10 at the same roll.
       const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll)
         + keepsakeStatusChanceBonus(atk, mv, statusRoll);
       if (statusRoll && def.hp > 0 && (!efx.chance || roll(Math.min(100, statusChancePct) / 100, g.rng.battle))) {

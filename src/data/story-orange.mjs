@@ -1,6 +1,6 @@
 // story-orange.mjs — Arc 1.5 (Orange Islands) campaign data: the quest
 // chain, the Orange Crew + Drake trainer defs, and the scripted story
-// events (Ivy / the GS Ball, Lapras, the pod reunion). Anime is primary
+// events (Ivy / the GS Orb, KELPSAIL, the pod reunion). Anime is primary
 // canon (ADR-015); ALL dialogue/copy is original writing in the anime's
 // spirit — no quoted or closely-paraphrased anime/game lines.
 //
@@ -9,7 +9,7 @@
 // needs reshaping when they land.
 //
 // New event-step kinds consumed by runSteps (overworld-systems.mjs):
-//   { gsBall }       — the Ivy grant beat: grants the GS Ball item, or
+//   { gsBall }       — the Ivy grant beat: grants the GS Orb item, or
 //                      plays the already-own-one variant (Cheat
 //                      Terminal owners) with NO duplicate grant.
 //   { giftCapSafe }  — cap-safe gift delivery (cheatDeliverMon idiom):
@@ -26,7 +26,7 @@
 // the stage is active — see main-systems openQuestLog).
 // ---------------------------------------------------------------------------
 export const ORANGE_QUESTS = [
-  { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Ball from Prof. Ivy on Valencia Island', hint: 'Professor Ivy\'s lab stands at the north edge of Valencia. The ball on her pedestal has defeated every machine she owns.' },
+  { id: 'q_orange_gsball', flag: 'orange_gsball', text: 'Fetch the GS Orb from Prof. Ivy on Valencia Island', hint: 'Professor Ivy\'s lab stands at the north edge of Valencia. The ball on her pedestal has defeated every machine she owns.' },
   { id: 'q_orange_crew', flag: 'orange_crew_done', text: 'Win the four Orange Crew badges', hint: 'Cissy on Mikan, Danny on Navel, Rudy on Trovita, Luana on Kumquat. Each leader tests something before the battle — that is the Orange way.', badgeCount: true },
   { id: 'q_orange_league', flag: 'orange_champion', text: 'Challenge Drake at Pummelo Stadium and win the Orange League', hint: 'Four island badges open the stadium doors. Drake, the Orange League champion, waits inside with six partners and no intention of moving.' },
   // --- O3 APPEND SEAM: the Lugia / 2000 stages join here. ---
@@ -37,7 +37,7 @@ export const ORANGE_QUESTS = [
   // tracks titans calmed n/3 (titanCount — the Quest Log and the HUD
   // objective count the orange_2000_<bird> flags, the badgeCount
   // idiom carried to flags).
-  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Shamouti — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Ice Isle, and the currents are tearing themselves apart. Free and calm Moltres, Zapdos and Articuno at their shrine caves (any order), then return to Shamouti Shrine — Slowking counsels from its rock on Shamouti\'s west shore.' },
+  { id: 'q_orange_storm', flag: 'orange_2000_storm_stilled', titanCount: true, text: 'The Storm over Shamouti — calm the three titans and still the guardian\'s storm', hint: 'Unlocks once the Sea Ruby Badge is held. A sky-collector named Vance Halloway has caged the shrines of Fire, Lightning and Ice Isle, and the currents are tearing themselves apart. Free and calm Moltres, FULMINIS and Articuno at their shrine caves (any order), then return to Shamouti Shrine — Slowking counsels from its rock on Shamouti\'s west shore.' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -83,12 +83,12 @@ export const ORANGE_TRAINERS = {
   },
   // Luana's double battle, honestly adapted to the singles engine as a
   // TWO-STAGE match (deliberate, disclosed deviation — see the audit
-  // register): stage A leads with Alakazam, stage B with Marowak, party
+  // register): stage A leads with MENTARCH, stage B with FOSSILORD, party
   // state carries between stages with NO heal. Only stage B carries
   // the badge, so the award fires once, on clearing both.
   luana_a: {
     id: 'luana_a', name: 'Luana', title: 'Kumquat Gym Leader', ai: 'smart', badgeSet: 'orange',
-    intro: ['Pair one. Alakazam takes the floor — mind the spoons, dear, they bend toward trouble.'],
+    intro: ['Pair one. MENTARCH takes the floor — mind the spoons, dear, they bend toward trouble.'],
     lose: ['Pair one, down! No resting — that is the whole point. Pair two, straight away!'],
     team: [
       { species: 'alakazam', level: 48 },
@@ -98,7 +98,7 @@ export const ORANGE_TRAINERS = {
   },
   luana_b: {
     id: 'luana_b', name: 'Luana', title: 'Kumquat Gym Leader', ai: 'smart', badgeSet: 'orange',
-    intro: ['Pair two. Marowak, darling — show them the ground remembers every step.'],
+    intro: ['Pair two. FOSSILORD, darling — show them the ground remembers every step.'],
     lose: ['Both pairs. Both! Oh, that was a match to frame.', 'The Jade Star Badge is yours, with the resort\'s compliments — and mine, which are rarer.'],
     team: [
       { species: 'marowak', level: 50 },
@@ -125,14 +125,14 @@ export const ORANGE_TRAINERS = {
 // ---------------------------------------------------------------------------
 // ORANGE_EVENTS — merged into EVENTS by merge.mjs. Map-entry scenes
 // (sysLoadMap fires them once, flag-gated): Ivy's intro on first entry
-// to ivy-lab, Lapras on Valencia after the first Orange badge, and the
+// to ivy-lab, KELPSAIL on Valencia after the first Orange badge, and the
 // pod reunion pre-League. Leader / Drake scenes live in
 // overworld-systems (runOrangeLeader / runOrangeDrake) because their
 // challenges are menu-driven, not step-driven.
 // ---------------------------------------------------------------------------
 export const ORANGE_EVENTS = {
   ev_orange_ivy: [
-    { say: ['The lab smells of salt, paper, and hot electronics. On a pedestal at its heart, under a glass hood: a Poke Ball banded in gold and silver, humming very faintly, like a kettle thinking about it.'], who: 'NARRATOR' },
+    { say: ['The lab smells of salt, paper, and hot electronics. On a pedestal at its heart, under a glass hood: a Capture Orb banded in gold and silver, humming very faintly, like a kettle thinking about it.'], who: 'NARRATOR' },
     { say: ['You must be Professor Hawthorn\'s runner. I am Professor Ivy — welcome to Valencia.', 'Forgive the mess. Marine research is ninety percent waiting for the sea to finish a sentence.'], who: 'PROF. IVY' },
     { say: ['That is the famous ball. It turned up in these waters, and in three months it has beaten every opener, scanner, and polite request this lab owns. No machine can open it. I have stopped taking that personally. Mostly.'], who: 'PROF. IVY' },
     { gsBall: true },
@@ -142,22 +142,22 @@ export const ORANGE_EVENTS = {
   ],
 
   ev_orange_lapras: [
-    { say: ['Down at the waterline, something is wrong. A young Lapras lies in the shallows, breathing hard — one flipper scraped raw, its song coming out thin and lost. Its pod\'s voices answer from far out at sea, farther every minute.'], who: 'NARRATOR' },
-    { say: ['Laa... laaa...'], who: 'LAPRAS' },
+    { say: ['Down at the waterline, something is wrong. A young KELPSAIL lies in the shallows, breathing hard — one flipper scraped raw, its song coming out thin and lost. Its pod\'s voices answer from far out at sea, farther every minute.'], who: 'NARRATOR' },
+    { say: ['Laa... laaa...'], who: 'KELPSAIL' },
     { say: ['You work the way the Center nurses taught you: clean water, pressure, patience. The bleeding slows. The breathing steadies. Big dark eyes follow your hands the whole time — frightened, and deciding not to be.'], who: 'NARRATOR' },
-    { say: ['By dusk it can swim again — slow circles, close to shore, never far from you. The pod is a day gone. This Lapras has made a decision about that, and it is looking at you when it makes it.'], who: 'NARRATOR' },
+    { say: ['By dusk it can swim again — slow circles, close to shore, never far from you. The pod is a day gone. This KELPSAIL has made a decision about that, and it is looking at you when it makes it.'], who: 'NARRATOR' },
     { giftCapSafe: { species: 'lapras', level: 30 } },
     { flag: 'orange_lapras_joined' },
-    { say: ['Lapras joined you! It sings once from the shallows — steadier already — and falls in beside you like it was always going to.'], who: 'NARRATOR' },
+    { say: ['KELPSAIL joined you! It sings once from the shallows — steadier already — and falls in beside you like it was always going to.'], who: 'NARRATOR' },
   ],
 
   ev_orange_lapras_pod: [
-    { say: ['A sound rolls over the water — many voices, one song, the harmony Lapras answers in its sleep. Out beyond the surf line, backs are breaking the surface in a slow, travelling line. The pod. Passing, at last, on its old road.'], who: 'NARRATOR' },
-    { say: ['Lapras goes very still. Then it sings — the thin, lost note from the Valencia shallows, grown strong. An older voice answers from the line, and for a while the two songs braid around each other: news, and grief, and pride, all in the family key.'], who: 'NARRATOR' },
+    { say: ['A sound rolls over the water — many voices, one song, the harmony KELPSAIL answers in its sleep. Out beyond the surf line, backs are breaking the surface in a slow, travelling line. The pod. Passing, at last, on its old road.'], who: 'NARRATOR' },
+    { say: ['KELPSAIL goes very still. Then it sings — the thin, lost note from the Valencia shallows, grown strong. An older voice answers from the line, and for a while the two songs braid around each other: news, and grief, and pride, all in the family key.'], who: 'NARRATOR' },
     { say: ['It swims out. It rides a long circle with its own kind, touching flippers, learning the road it missed. The stadium lights behind you can wait. Some things a trainer simply stands back for.'], who: 'NARRATOR' },
-    { say: ['Then — a turn. A choice, made the way it made the first one: with its whole heart, in the open. Lapras cuts back through the surf and beaches itself at your feet, singing fit to burst. It visited home. It is choosing its other home. Yours.'], who: 'NARRATOR' },
+    { say: ['Then — a turn. A choice, made the way it made the first one: with its whole heart, in the open. KELPSAIL cuts back through the surf and beaches itself at your feet, singing fit to burst. It visited home. It is choosing its other home. Yours.'], who: 'NARRATOR' },
     { flag: 'orange_lapras_pod' },
-    { toast: 'Lapras chose to stay with you.' },
+    { toast: 'KELPSAIL chose to stay with you.' },
   ],
 
   // =====================================================================
@@ -210,9 +210,9 @@ export const ORANGE_EVENTS = {
     { say: ['Copper offerings have fused into the cage bars, and the whole shrine rings at a pitch just below hearing. Halloway\'s light-cage is drinking the storm out of the stone — and the stone\'s owner has noticed the theft, and the thief\'s timing, and you.'], who: 'NARRATOR' },
     { say: ['The bars come down in a smell of hot rain. What rises out of the shrine is not angry the way fire is angry. It is angry the way weather is angry: personally, and at everything, all at once.'], who: 'NARRATOR' },
     { wildBattle: { species: 'zapdos', level: 50, uncatchable: true } },
-    { say: ['One last thunderclap — closer to a sentence than a sound — and Zapdos shakes the cage-light off its wings like rain. It circles the cave once, sparks settling, then takes the east wind out over a sky that is suddenly, noticeably quieter.'], who: 'NARRATOR' },
+    { say: ['One last thunderclap — closer to a sentence than a sound — and FULMINIS shakes the cage-light off its wings like rain. It circles the cave once, sparks settling, then takes the east wind out over a sky that is suddenly, noticeably quieter.'], who: 'NARRATOR' },
     { flag: 'orange_2000_zapdos' },
-    { toast: 'Zapdos is calmed. The eastern storm cell breaks.' },
+    { toast: 'FULMINIS is calmed. The eastern storm cell breaks.' },
   ],
 
   ev_orange_2000_articuno: [
@@ -277,7 +277,7 @@ export const ORANGE_LEGENDARY_ARCS = {
     steps: [
       { text: 'Hold the Sea Ruby Badge and come to Shamouti as the storm breaks', flag: 'orange_2000_active' },
       { text: 'Calm Moltres at the Fire Isle shrine cave', flag: 'orange_2000_moltres' },
-      { text: 'Calm Zapdos at the Lightning Isle shrine cave', flag: 'orange_2000_zapdos' },
+      { text: 'Calm FULMINIS at the Lightning Isle shrine cave', flag: 'orange_2000_zapdos' },
       { text: 'Calm Articuno at the Ice Isle shrine cave', flag: 'orange_2000_articuno' },
       { text: 'Face the guardian\'s proving at the deep altar (it cannot be caught there)', flag: 'orange_2000_storm_stilled' },
       { text: 'Return to the altar in Shamouti Deep, where Lugia waits in still water', catch: 'lugia' },

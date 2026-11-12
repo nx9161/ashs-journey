@@ -14,7 +14,7 @@ export const INTRO_SCRIPT = {
   starterMoment: [
     'Go on — say hello. Careful now...',
     '...It shocked you too! Ha! That means it likes you. Mostly.',
-    'Listen well: this one will never stay inside a Poke Ball. It walks beside you, or not at all.',
+    'Listen well: this one will never stay inside a Capture Orb. It walks beside you, or not at all.',
     'A bond like that is rarer than any badge. Treat it well, {player}.',
     'Your journey starts on Route 1, north of Pallet Town. Catch Pokemon, grow strong — and when you are ready, Pewter Gym awaits.',
   ],
@@ -35,8 +35,8 @@ export const PARTNER_MOODS = {
 // outright (intro), refuses evolution, and refuses the PC box (guards in
 // state.mjs). It walks beside you, or not at all.
 export const PARTNER_REFUSAL = {
-  evolution: 'PIKACHU turned away! It does not want to change — not ever.',
-  box: 'PIKACHU leapt right back out! It walks beside you, or not at all.',
+  evolution: 'VOLTIK turned away! It does not want to change — not ever.',
+  box: 'VOLTIK leapt right back out! It walks beside you, or not at all.',
 };
 
 export const TUTORIAL_AIDE_EXTRA = [
@@ -113,7 +113,7 @@ export const BOND_DIALOGUE = {
       cold: ['Gym hours are posted by the door. The museum is that way. We are done here.'],
       wary: ['Back for the exhibits or the rematch talk? Either way, the stone here remembers every challenger.'],
       warm: ['You know the museum paid for this gym\'s roof twice over? Once in stone, once in patience.', 'My father said a leader\'s real job is the day OFF — anyone can be a wall. Being a door takes practice. You taught the whole city that, covering my desk.'],
-      close: ['I keep a list, you know. Every challenger who ever made Onix actually try. It is a short list, {player}, and your name is underlined.', 'When I retire, the museum gets my badge polish and the gym gets a plaque: "A trainer once covered the desk so the leader could rest." That was you. That mattered.'],
+      close: ['I keep a list, you know. Every challenger who ever made STRATON actually try. It is a short list, {player}, and your name is underlined.', 'When I retire, the museum gets my badge polish and the gym gets a plaque: "A trainer once covered the desk so the leader could rest." That was you. That mattered.'],
     },
   },
   misty: {
@@ -121,7 +121,7 @@ export const BOND_DIALOGUE = {
       cold: ['Pool\'s for training. If you are not challenging, you are dripping on my deck.'],
       wary: ['The bell still rings over the shop — I mean the gym. Old habits. You did that, trainer.'],
       warm: ['My sisters think the gym is the family business. It is not — the BIKE SHOP was. I turned it into this so nobody could call me the spare sister again.', 'That bell you saved? It rang over my cradle. Some heirlooms are just sounds a town refuses to lose.'],
-      close: ['Between us, {player}? Starmie only performs like that when it respects the other side of the pool. It has never once performed for my sisters.', 'Cerulean blue is not a color here. It is a promise the water makes. You kept it better than most who were born to it.'],
+      close: ['Between us, {player}? ASTRION only performs like that when it respects the other side of the pool. It has never once performed for my sisters.', 'Cerulean blue is not a color here. It is a promise the water makes. You kept it better than most who were born to it.'],
     },
   },
   surge: {

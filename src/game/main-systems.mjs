@@ -192,7 +192,7 @@ Object.assign(Game.prototype, {
       });
       if (id === 'thunderstone') {
         const partner = g.state.party.find((m) => m.speciesId === 'partner');
-        if (partner && !stoneTargets.length) { g.ui.say(['PIKACHU shook its head hard. It will never use that stone.']); return; }
+        if (partner && !stoneTargets.length) { g.ui.say(['VOLTIK shook its head hard. It will never use that stone.']); return; }
       }
       if (!stoneTargets.length) { g.ui.say(['It won\'t have any effect on your party.']); return; }
       const items = stoneTargets.map((m) => ({ label: displayName(m, SPECIES) + ' Lv' + m.level, value: m.monId }));

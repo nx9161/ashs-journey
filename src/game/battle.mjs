@@ -403,7 +403,7 @@ export class BattleScene {
       // the engine guarantees the outcome (endure + weakened auto-catch).
       this.say('Wild ' + foeName + ' appeared!', () => {
         this.say("AIDE (via Pokegear): There's your first catch! One Thunder Shock to weaken it —", () => {
-          this.say('— then open the BAG and throw a Poke Ball while its HP is yellow!', () => this.announceGround(() => this.toCommand()));
+          this.say('— then open the BAG and throw a Capture Orb while its HP is yellow!', () => this.announceGround(() => this.toCommand()));
         });
       });
     } else if (this.kind === 'trainer') {
@@ -743,7 +743,7 @@ export class BattleScene {
         items.push({ label: ITEMS[mid].name + ' x' + g.state.bag[mid], value: mid, pocket: 'medicine' });
       }
       items.push({ label: 'Back', value: null });
-      // P0/C7: in the guided tutorial, the Poke Ball row is highlighted once the foe is weakened.
+      // P0/C7: in the guided tutorial, the Capture Orb row is highlighted once the foe is weakened.
       const focusBall = this.tutorial && this._tutStage === 'bag';
       g.ui.showMenu('Bag', items, (v) => {
         if (v === null) { this.toCommand(); return; }
@@ -1405,7 +1405,7 @@ export class BattleScene {
       const after = () => {
         // Secondary effects, then the damage line.
         let msg2 = hungOn
-          ? defName + ' hung on with 1 HP! Now — open the BAG and throw a Poke Ball!'
+          ? defName + ' hung on with 1 HP! Now — open the BAG and throw a Capture Orb!'
           : (subBroke ? 'The substitute broke!' : defName + ' took ' + dmg + ' damage!');
         if (this._hitCount) { msg2 += ' Hit ' + this._hitCount + ' times!'; this._hitCount = 0; }
         if (mv.ohko || efx.ohko) msg2 = 'One-hit KO!';
@@ -1421,7 +1421,7 @@ export class BattleScene {
         // ADR-025 §1: Ember/Pyre (burn) and Venom (poison) twists add +10
         // points to the infliction roll — only where the move can already
         // inflict that status (no chance on the move = guaranteed, no roll).
-        // ADR-025 §3: Ember Seed / Gloom Fang add their +10 at the same
+        // ADR-025 §3: Ember Seed / DROOPETAL Fang add their +10 at the same
         // roll, composing additively with the Ground twist.
         const statusChancePct = (efx.chance || 0) + groundStatusChanceBonus(this.field, statusRoll)
           + keepsakeStatusChanceBonus(atk, mv, statusRoll);

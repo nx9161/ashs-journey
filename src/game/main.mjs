@@ -356,7 +356,7 @@ export class Game {
     this.audio.applySettings(this.state.settings);
     this.applyKeymap();
     // Gameplay Designer co-design note (C7): the tutorial catch gate must be
-    // robust to a Spearow-class foe — the script is deterministic (balance-seat
+    // robust to a KEENBEAK-class foe — the script is deterministic (balance-seat
     // gate), never luck. Recorded here so the gate lives with the flow.
     this.scenes.push(new BootScene());
     this.loop.start();
@@ -649,7 +649,7 @@ export class Game {
     // P1/G1: rows carry the species battle-art sprite, an HP mini-bar +
     // numbers, status chip, and a PARTNER text chip for the partner.
     const rowHtml = (it) => {
-      // UI v2.1 (defect 3): every party plate leads with its Poke Ball slot
+      // UI v2.1 (defect 3): every party plate leads with its Capture Orb slot
       // marker, Platinum-style — filled rows and empty slots alike.
       const ball = '<img class="pball" src="' + g.itemIconDataUrl('pokeball') + '" alt="">';
       if (it.value === -1) return ball + '<span class="emptyslot">Empty slot</span>';
@@ -737,7 +737,7 @@ export class Game {
       // anywhere in the game. Switch picks a partner and swaps places.
       if (g.state.party.length > 1) rows.push({ label: 'Switch', value: 'switch' });
       // ADR-025 §3 (Phase 3): Keepsake Give/Take rows. The partner
-      // Pikachu may hold one (the ADR-016 guards do NOT apply here).
+      // VOLTIK may hold one (the ADR-016 guards do NOT apply here).
       const heldDef = m.keepsake && ITEMS[m.keepsake] ? ITEMS[m.keepsake] : null;
       const bagKs = Object.keys(KEEPSAKES).filter((id) => (g.state.bag[id] || 0) > 0);
       if (heldDef) rows.push({ label: 'Take ' + heldDef.name, value: 'ks-take' });

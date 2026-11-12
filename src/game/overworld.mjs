@@ -92,7 +92,7 @@ export class OverworldScene {
     // syncHud pushes values only when they change). undefined = never sent.
     this._hudLoc = undefined; this._hudObj = undefined; this._hudDex = undefined;
     this._hudBannerObj = null;
-    // P1/D7: partner mood pip — tap = pet (same as facing + A on Pikachu).
+    // P1/D7: partner mood pip — tap = pet (same as facing + A on VOLTIK).
     g.ui.onMoodTap = () => this.petPartner();
     g.ui.showMoodPip(true);
     g.ui.setBattleMode(false);
@@ -730,7 +730,7 @@ export class OverworldScene {
     if (t === ',' && this.map.encounters && !g.state.story.flags.noEncounters
       && g.state.party.some((m) => m && m.hp > 0)) {
       // GD balance: the FIRST grass step on Route 1 is a scripted tutorial
-      // encounter (Lv 3 Rattata), not a random roll — the <3min first-catch
+      // encounter (Lv 3 SCURRAT), not a random roll — the <3min first-catch
       // gate is a certainty that teaches, never a gamble.
       if (this.mapId === 'route1' && !g.state.story.flags.tutorialDone) {
         this.startTutorialEncounter();
@@ -839,8 +839,8 @@ export class OverworldScene {
     g.state.story.flags.tutorialDone = true;
     this.stepsSinceEncounter = 0;
     this.chainCount = 0; // scripted tutorial isn't part of the random chain (QA-003)
-    // Lv 3 Rattata: one Thunder Shock drops it to yellow (teaches weakening),
-    // its Tackle does ~4 to a Lv 5 Pikachu (cannot threaten), and the battle
+    // Lv 3 SCURRAT: one Thunder Shock drops it to yellow (teaches weakening),
+    // its Tackle does ~4 to a Lv 5 VOLTIK (cannot threaten), and the battle
     // engine guarantees the catch once weakened + never lets it faint.
     this.enc = {
       phase: 'rustle', t: 0, tutorial: true,
@@ -897,8 +897,8 @@ export class OverworldScene {
     // Yellow homage: the partner emotes when talked to; petting cheers it up.
     const g = this.game;
     g.state.pikachu.mood = 'happy'; // a petting cheers it up (D7: mood reacts to beats)
-    g.ui.toast('Pikachu ' + (PARTNER_MOODS[g.state.pikachu.mood] || PARTNER_MOODS.happy));
-    g.audio.playSfx('partner-happy'); // visual twin: Pikachu hop + mood pip
+    g.ui.toast('VOLTIK ' + (PARTNER_MOODS[g.state.pikachu.mood] || PARTNER_MOODS.happy));
+    g.audio.playSfx('partner-happy'); // visual twin: VOLTIK hop + mood pip
     g.ui.updateMoodPip();
     return true;
   }
@@ -909,7 +909,7 @@ export class OverworldScene {
     const dx = p.dir === 'left' ? -1 : p.dir === 'right' ? 1 : 0;
     const dy = p.dir === 'up' ? -1 : p.dir === 'down' ? 1 : 0;
     const fx = p.tx + dx, fy = p.ty + dy;
-    // Partner interaction (facing Pikachu's tile)
+    // Partner interaction (facing VOLTIK's tile)
     const ptx = Math.round(this.partner.px / TILE), pty = Math.round(this.partner.py / TILE);
     if (fx === ptx && fy === pty) return this.petPartner();
     // Systems interactions (item balls, hidden items, field moves, fishing)
@@ -1301,7 +1301,7 @@ export class OverworldScene {
       // Movement tutorial toast: once, when the tutorial starts.
       if (this.moveTut && !this.moveTut._toastSent) {
         this.moveTut._toastSent = true;
-        ui.hudToast('Walk with the D-pad — Pikachu follows you!', 3600);
+        ui.hudToast('Walk with the D-pad — VOLTIK follows you!', 3600);
       }
       // Season toast (Black 2 baseline): once per season rollover, when
       // the calendar season differs from the last one announced. The

@@ -464,7 +464,7 @@ export const HOENN_TRAINERS = {
   morrison: {
     id: 'morrison', name: 'Morrison', title: 'Conference Trainer', ai: 'smart',
     intro: ['Morrison! Your semi-final, my semi-final, and a friendship the bracket does not care about one bit. I checked: it really does not. So — no holding back, either of us. That IS the friendship, as far as I can tell.'],
-    lose: ['Beaten by my friend, in a semi-final, with the whole region watching — do you know, I would not trade a single part of that sentence. The final is yours, trainer. Tyson is waiting, and his Meowth has never once smiled at anyone. Go and give it a reason to.'],
+    lose: ['Beaten by my friend, in a semi-final, with the whole region watching — do you know, I would not trade a single part of that sentence. The final is yours, trainer. Tyson is waiting, and his TINKLETOM has never once smiled at anyone. Go and give it a reason to.'],
     team: [
       { species: 'girafarig', level: 293 },
       { species: 'growlithe', level: 294 },
@@ -950,7 +950,7 @@ export const HOENN_TALES = {
     bondNpc: 'pell', bondDelta: 1,
     revelation: 'The school\'s travelling stone has been carried out of Rustboro and brought home by forty years of departing students — it has seen more of Hoenn than most researchers, and the school registers its journeys like a student.',
     offerLines: ['Devon keeps records of everything in this city except the one thing that matters to its children. There is a stone at the Trainer School, trainer — a plain river stone — that has travelled further than I have. The school will not explain it to a researcher. They might explain it to you.', 'Ask young Moss about the travelling stone. The full custom, exactly. Two Super Potions for the fieldwork — Devon pays for data, even the embarrassing kind.'],
-    stageLines: ['The stone? You are not a teacher. ...You do not LOOK like a teacher. Fine. The stone goes with whoever leaves.', 'Every student who leaves Rustboro for a journey takes it in their pack, and someone brings it home — a sibling, a friend, a Pidgey in one famous case. It has been to every gym in Hoenn. It is enrolled here, technically. Its attendance is better than mine. Tell the researcher: it travels because leaving is a subject too, and the stone is the only one of us who has passed it forty times.'],
+    stageLines: ['The stone? You are not a teacher. ...You do not LOOK like a teacher. Fine. The stone goes with whoever leaves.', 'Every student who leaves Rustboro for a journey takes it in their pack, and someone brings it home — a sibling, a friend, a DUNPLUME in one famous case. It has been to every gym in Hoenn. It is enrolled here, technically. Its attendance is better than mine. Tell the researcher: it travels because leaving is a subject too, and the stone is the only one of us who has passed it forty times.'],
     finishLines: ['Enrolled. Attendance better than the students. Forty journeys in a school register I was never shown...', 'Devon studies how Pokemon change the world, trainer. That stone is how the world changes BACK — one pack, one road, one homecoming at a time. Two Super Potions. And if you pass the school on your way out... you did not hear this from me, but check your pack. Just in case.'],
   },
   tale_slateport: {

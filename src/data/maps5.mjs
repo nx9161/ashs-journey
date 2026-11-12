@@ -149,7 +149,7 @@ export const MAPS5 = {
       {
         "x": 8,
         "y": 4,
-        "text": "PROF. IVY'S LAB — Marine Pokemon research. A certain unopenable Poke Ball rests inside."
+        "text": "PROF. IVY'S LAB — Marine Pokemon research. A certain unopenable Capture Orb rests inside."
       }
     ],
     "npcs": [
@@ -209,8 +209,8 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "Valencia grows oranges sweet enough to make a Snorlax sit up.",
-          "Professor Ivy studies the sea's odd Poke Balls in the lab up the street."
+          "Valencia grows oranges sweet enough to make a NAPPASAUR sit up.",
+          "Professor Ivy studies the sea's odd Capture Orbs in the lab up the street."
         ]
       },
       {
@@ -223,7 +223,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "A Lapras pod sang past the pier this morning!",
+          "A KELPSAIL pod sang past the pier this morning!",
           "When I grow up I'm sailing every island. Every single one."
         ]
       },
@@ -1095,7 +1095,7 @@ export const MAPS5 = {
         "pants": "#2a2a3a",
         "hair": "#c0c0c0",
         "dialogue": [
-          "I found a barnacle shaped exactly like a Poke Ball!",
+          "I found a barnacle shaped exactly like a Capture Orb!",
           "The ghost ship isn't real. Probably. I don't go at night."
         ]
       }
@@ -3705,7 +3705,7 @@ export const MAPS5 = {
       {
         "x": 8,
         "y": 2,
-        "text": "The GS Ball rests on its pedestal — gold, banded, and sealed tighter than any lock. No machine in the lab can open it."
+        "text": "The GS Orb rests on its pedestal — gold, banded, and sealed tighter than any lock. No machine in the lab can open it."
       },
       {
         "x": 2,
@@ -3723,7 +3723,7 @@ export const MAPS5 = {
         "shirt": "#5a3a8a",
         "pants": "#e8e0d0",
         "hair": "#3a5a2a",
-        "dialogue": ["The GS Ball rides with you now, trainer. Whatever hands finally open it, I suspect they will be old, patient, and far inland.", "My reef transect can wait. Some mysteries only visit a lab once."],
+        "dialogue": ["The GS Orb rides with you now, trainer. Whatever hands finally open it, I suspect they will be old, patient, and far inland.", "My reef transect can wait. Some mysteries only visit a lab once."],
         "orange": "ivy"
       },
       {

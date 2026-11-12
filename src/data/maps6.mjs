@@ -727,7 +727,7 @@ export const MAPS6 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "The tower pillar was a Bellsprout a hundred feet tall, so the story goes.",
+          "The tower pillar was a PITCHLET a hundred feet tall, so the story goes.",
           "We train beside it to learn what it teaches: bend, and do not break."
         ]
       },
@@ -1026,7 +1026,7 @@ export const MAPS6 = {
       {
         "x": 22,
         "y": 5,
-        "text": "SLOWPOKE WELL — The town well, and the Slowpokes own it. Mind your step on the way down."
+        "text": "DOZELING WELL — The town well, and the Slowpokes own it. Mind your step on the way down."
       },
       {
         "x": 2,
@@ -1045,8 +1045,8 @@ export const MAPS6 = {
         "pants": "#4a3a2a",
         "hair": "#2a1a0a",
         "dialogue": [
-          "Grandpa Kurt makes Poke Balls from apricorns, one at a time, by hand.",
-          "The Slowpoke bring rain. That's not a story, that's just Azalea."
+          "Grandpa Kurt makes Capture Orbs from apricorns, one at a time, by hand.",
+          "The DOZELING bring rain. That's not a story, that's just Azalea."
         ]
       },
       {
@@ -1059,7 +1059,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#5a3a2a",
         "dialogue": [
-          "The well ran dry once, long ago. The Slowpoke yawned, and the rain came back.",
+          "The well ran dry once, long ago. The DOZELING yawned, and the rain came back.",
           "We don't hurry them. They don't hurry us. It works out."
         ]
       },
@@ -2395,7 +2395,7 @@ export const MAPS6 = {
         "hair": "#4a3a2a",
         "dialogue": [
           "Violet's gym leader watches the sky, not the road. That's all I'm saying.",
-          "I race the Spearow shadows home. They always win."
+          "I race the KEENBEAK shadows home. They always win."
         ]
       }
     ],
@@ -3122,7 +3122,7 @@ export const MAPS6 = {
         "pants": "#2a2a3a",
         "hair": "#4a3a2a",
         "dialogue": [
-          "Heracross sap, Pineco shade, Oddish everywhere. This forest is a whole city.",
+          "Heracross sap, Pineco shade, NIGHTBUD everywhere. This forest is a whole city.",
           "The shrine? We leave flowers. Everybody leaves flowers. Nobody says why out loud."
         ]
       },
@@ -4154,7 +4154,7 @@ export const MAPS6 = {
         "hair": "#c0c0c0",
         "dialogue": [
           "Ecruteak's bells carry down this whole road on a still day.",
-          "Growlithe patrol the dusk here like small, serious guards."
+          "CINDERPUP patrol the dusk here like small, serious guards."
         ]
       }
     ],
@@ -4451,7 +4451,7 @@ export const MAPS6 = {
         "hair": "#2a1a0a",
         "dialogue": [
           "Kiln smoke means Azalea's working. You learn to love the smell.",
-          "Slowpoke tails grow back, tempers mend, charcoal sells. A patient town."
+          "DOZELING tails grow back, tempers mend, charcoal sells. A patient town."
         ]
       }
     ],
@@ -4662,7 +4662,7 @@ export const MAPS6 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "New Bark doctrine: a Pokemon's first hour matters as much as its hundredth level.",
-          "Mind the tank glass. The Poliwag inside judges visitors."
+          "Mind the tank glass. The TADLET inside judges visitors."
         ]
       }
     ],
@@ -5138,7 +5138,7 @@ export const MAPS6 = {
       {
         "x": 7,
         "y": 4,
-        "text": "SPROUT TOWER — UPPER FLOOR — The great pillar rises through this room. Bellsprout carved in the beam-ends watch the mats."
+        "text": "SPROUT TOWER — UPPER FLOOR — The great pillar rises through this room. PITCHLET carved in the beam-ends watch the mats."
       }
     ],
     "npcs": [
@@ -5203,7 +5203,7 @@ export const MAPS6 = {
   },
   "slowpoke-well": {
     "id": "slowpoke-well",
-    "name": "Slowpoke Well",
+    "name": "DOZELING Well",
     "music": "pewter-theme",
     "rows": [
       "GGGGGGGGGGGGGGGGGGGG",
@@ -5245,7 +5245,7 @@ export const MAPS6 = {
       {
         "x": 11,
         "y": 12,
-        "text": "SLOWPOKE WELL — The water down here is sweet and cold. The residents were here first."
+        "text": "DOZELING WELL — The water down here is sweet and cold. The residents were here first."
       }
     ],
     "npcs": [],
@@ -6662,7 +6662,7 @@ export const MAPS6 = {
         "hair": "#1a1a1a",
         "dialogue": [
           "Olivine's my run — in past the Whirl Islands before the fog wakes.",
-          "Sit anywhere. Mind the Krabby crates. They mind you back."
+          "Sit anywhere. Mind the CLAWLET crates. They mind you back."
         ],
         "ferry": "olivine"
       },
@@ -7958,7 +7958,7 @@ export const MAPS6 = {
         "hair": "#7a4a1a",
         "dialogue": [
           "Harbour hill repeats! The lighthouse counts my laps better than I do.",
-          "Tauros graze the east pasture. Jog AROUND. Learned that once."
+          "BOVARCH graze the east pasture. Jog AROUND. Learned that once."
         ]
       }
     ],
@@ -9440,7 +9440,7 @@ export const MAPS6 = {
       {
         "x": 13,
         "y": 9,
-        "text": "LAKE OF RAGE — The largest lake in Johto. The Magikarp here grow strange on its temper, and lately the water itself runs red at the edges."
+        "text": "LAKE OF RAGE — The largest lake in Johto. The RUSTCARP here grow strange on its temper, and lately the water itself runs red at the edges."
       }
     ],
     "npcs": [
@@ -9454,7 +9454,7 @@ export const MAPS6 = {
         "pants": "#2a3a4a",
         "hair": "#1a1a1a",
         "dialogue": [
-          "Forty years I've fished this lake. This season the Gyarados run shallow and angry, and the shallows run red.",
+          "Forty years I've fished this lake. This season the WRATHWYRM run shallow and angry, and the shallows run red.",
           "Something under that water is hurting, trainer. Fish can tell. So can old men."
         ]
       }
@@ -11970,7 +11970,7 @@ export const MAPS6 = {
       {
         "x": 19,
         "y": 13,
-        "text": "TRANSMITTER CORE — IF THE LAKE STOPS SCREAMING, CHECK THE ELECTRODE LINE FIRST."
+        "text": "TRANSMITTER CORE — IF THE LAKE STOPS SCREAMING, CHECK THE MEGACELL LINE FIRST."
       }
     ],
     "npcs": [],
