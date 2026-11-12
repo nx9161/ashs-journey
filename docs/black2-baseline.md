@@ -407,3 +407,41 @@ Game Freak through official channels).
   one authored template family, so inter-island variety rides on
   roofs and layout, as authored; the desert family's contrast
   against native sand is deliberately low (dry ground on sand).
+- **B2-G10 (battle sprite standard, owner order 2026-11-12 — Wave J):**
+  "Improve battle spirit art for all pokemon" + "Everyone gets
+  unique." Two mandates: a render-quality floor for every battle
+  sprite, and a uniqueness guarantee across the roster. Canon names
+  and design identities are LOCKED (Wave G) — this is a render pass
+  first; a design itself changes only where the rules below fail it.
+  (1) ONE CREATURE PER PAIR — front and back derive from the same
+  archived design source (assets/sprites/designs/) and read as the
+  same individual: consistent markings, proportions and palette
+  family; the pair's non-outline palettes share at least half their
+  colors (Jaccard >= 0.5). (2) MASS — the silhouette must carry at
+  battle size: >= 400 opaque pixels inside the 62x62 inner box, and
+  the wispy fraction (opaque pixels with at most one opaque
+  4-neighbour) stays <= 35% of the silhouette. The PRIMARA failure
+  class — 1px forms that vanish at 64x64 — fails this rule by
+  definition. (3) OUTLINE & SPECKS — the outline is unbroken
+  (the pix outline check passes, zero orphan pixels) and no stray
+  specks: any detached component under 9 px fails; detached
+  components (authored satellites — orbs, stars, screws) number
+  at most 4. (4) SHADING — the main body mass carries >= 3 value
+  steps (distinct luminance steps within the dominant hue family,
+  each covering >= 2% of body pixels), and the palette uses the
+  <=16-color budget deliberately: >= 5 colors per sprite, chosen by
+  the design, not whatever survives the median cut. (5) UNIQUENESS
+  GATE (machine-checked over the whole converted roster) — every
+  front (and every back) is reduced to a 16x16 occupancy signature
+  normalized to its bounding box, plus a quantized palette set;
+  a pair flags when silhouette IoU >= 0.72 AND palette similarity
+  >= 0.45 (palette-swap twins), or silhouette IoU >= 0.85 at any
+  palette (shared body). A flagged pair's junior member (lower
+  screen-time priority; ties break to the higher dex number) gets a
+  differentiating redesign — a new silhouette element, marking or
+  proportion, design-level and reported per case — never a mere
+  recolor. Evolution lines are not exempt: their differentiation
+  is the authored escalation element each stage already claims,
+  proven by the same measurement. The audit tool is
+  scripts/audit-battle-art.mjs; the art-gate enforces rules 2-4
+  per tranche from Wave J on.
