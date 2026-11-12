@@ -1431,17 +1431,17 @@ export const MAPS3 = {
   viridian: {
     id: 'viridian', name: 'Viridian City', music: 'viridian-theme',
     rows: rows([
-      'ÌÌÌÌÌÌÁÁÁÁÌÌÌÌÌÌ',
-      'Ìẇ×ÁÁÁÁÌÌÁÁÁÁ×ÁÌ',
-      'ÌÁăíăÁÁÌÌÁăăăÁÁÌ',
-      'ÌẍḀḀḀÁÁÁẉÁěsěÁÁÌ',
-      'ÌÁḀVYÁââââÁÁÁÁÁÌ',
-      'ÌÁÁÁÁÁAJKAÁÁÁÁẓÌ',
-      'ÌÁÁÁÁÁoÁÁoÁÁÁÁÁÌ',
-      'ÁÁăOăÁÁÁÁÁÁÁÁÁÁÌ',
-      'ÌÁP12ÁÁÁÁÁÁFF×ẑÌ',
-      'ÌÁÁÁÁÁÁÁÁÁÁÁẓÁÁÌ',
-      'ÌÌÌÌÌÌÁÁÁÁÌÌÌÌÌÌ',
+      'ÌÌÌÌÌÌĲĲĲĲÌÌÌÌÌÌ',
+      'Ìẇ×ÁÁĲĲÌÌÁÁÁÁ×ÁÌ',
+      'ÌÁăíăĲĲÌÌÁăăăÁÁÌ',
+      'ÌẍḀḀḀĲĲoẉÁěsěÁÁÌ',
+      'ÌÁḀVYĲââââĲĲÁÁÁÌ',
+      'ÌĲĲĲĲĲAJKAĲĲoÁẓÌ',
+      'ÌĲĲĲĲĲĲĲĲĲĲĲĲFÁÌ',
+      'ĲĲăOăĲĲĲĲĲĲĲÁÁÁÌ',
+      'ÌĲP12ĲĲĲĲĲĲĲF×ẑÌ',
+      'ÌĲĲĲĲĲĲĲĲĲĲĲẓÁÁÌ',
+      'ÌÌÌÌÌÌĲĲĲĲÌÌÌÌÌÌ',
     ]),
     warps: [
       { x: 3, y: 4, to: { map: 'gym-viridian', x: 5, y: 7 } },
@@ -1464,6 +1464,7 @@ export const MAPS3 = {
     signs: [
       { x: 3, y: 6, text: 'VIRIDIAN CITY — The city of evergreen. The Pokemon Center heals your team for free.' },
       { x: 11, y: 6, text: 'VIRIDIAN GYM — The leader returned at last. Seven badges to knock; the eighth door in Kanto. Inside lies a SPIRIT GROUND: Ground moves hit harder and the earth drags at the unadapted — for the leader, and for you.' },
+      { x: 4, y: 1, text: 'VIRIDIAN CITY — North: ROUTE 2 · West: ROUTE 22 · South: ROUTE 1.' },
     ],
     npcs: [
       { x: 11, y: 7, name: 'HIKER', art: 'hiker', skin: '#d8a878', shirt: '#50368e', pants: '#4a4a5a', hair: '#3a2a1a',
