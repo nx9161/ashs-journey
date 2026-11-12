@@ -178,16 +178,16 @@ export const MAPS3 = {
       'ÑÑÑÜÑÑÑÑÑÑÜÑÑÑÑÑÑÜ',
       'ÑẐÆÆÆďòďďďďẎÆďOďÆÑ',
       'ÑÆÆÆÆZ6ZZ6ZÆÆP12ÆÑ',
-      'ÑÆÆÆÆZZZ45ZÆÆÆÆÆÆÑ',
-      'ÑÆÜẌÆÆoÆÆÆÆÆÆÆÆÆÆÆ',
-      'ÑÆďďďďẒÆÆÆďXďďÜÆÆÑ',
-      'ÑÆħħħħẐÆÆÆḅḅḅḅÆÆẎÑ',
-      'ÑÆħ78ħÆÆÆÆÆVYḅÆÆÆÑ',
-      'ÑÆÆÆÆÆççççÆÆÆÆÆÆÆÑ',
-      'ÑÆÆÆÆÆAJKAÆÆÆÆÆÆÆÑ',
-      'ÑÆÆFFÆoÆÆoÆFÆÜÆÆÆÑ',
-      'ÑÆÆÆÆÆÆÆÆÆÆÆoÆÆÆÆÑ',
-      'ÑÑÑÜÑÑÑÑÑÆÆÑÑÑÜÑÑÑ',
+      'ÑÆÆÆÆZZZ45ZļļļļļÆÑ',
+      'ÑÆÜẌÆÆoÆļļļļļļļļļļ',
+      'ÑÆďďďďẒoļļďXďďļļļÑ',
+      'ÑÆħħħħẐÆļļḅḅḅḅļļẎÑ',
+      'ÑÆħ78ħÆÆļļļVYḅļļÜÑ',
+      'ÑÆļļļļççççļļļļļļFÑ',
+      'ÑFļļļļAJKAļļļļļļÆÑ',
+      'ÑFļļļļļļļļļļļÜoļÆÑ',
+      'ÑÆÆļļļļļļļļļoÆÆÆÆÑ',
+      'ÑÑÑÜÑÑÑÑÑļļÑÑÑÜÑÑÑ'
     ]),
     warps: [
       { x: 8, y: 3, to: { map: 'silph1', x: 8, y: 10 } },
@@ -207,6 +207,7 @@ export const MAPS3 = {
     signs: [
       { x: 8, y: 6, text: 'SAFFRON CITY — The golden city at the heart of Kanto. Silph Co. HQ towers over all.' },
       { x: 10, y: 7, text: 'SAFFRON GYM — Leader: Sabrina. The master of Psychic Pokemon! Inside lies a MIND GROUND: Psychic moves hit harder and status rites falter — for Sabrina, and for you.' },
+      { x: 6, y: 10, text: 'SAFFRON CITY — East: ROUTE 9 · South: ROUTE 8.' }
     ],
     npcs: [
       { x: 15, y: 9, name: 'SEER IVO', art: 'monk', skin: '#e8b888', shirt: '#6a5a8a', pants: '#2a2a3a', hair: '#c0c0c0',
@@ -1287,19 +1288,19 @@ export const MAPS3 = {
   cinnabar: {
     id: 'cinnabar', name: 'Cinnabar Island', music: 'viridian-theme',
     rows: rows([
-      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔß',
+      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔÉ',
       'ÔÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉÉÔ',
       'ÔÉĕõĕÉÉÉÉÉĕXĕĕÉÉÉÔ',
-      'ÔÉĭyĭÉÉÉÉÉḇḇḇḇẉÉÉÔ',
-      'ÔÉÉÉÉÉÉÉÉÉḇVYḇÉẋÉÔ',
-      'ÉÉÉÉÉÉÉÉÉÉÉÉÉÉẓoẇÔ',
-      'ÔÉÉÉÉÉêêêêÉÉÉÉÉÉÉÔ',
-      'ÔÉÉÉÉoAJKAoÉÉÉÉÉÉÔ',
-      'ÔẑßÉÉÉÉÉÉÉÉÉÉÉÉÉÉÔ',
-      'ÔĕOĕÉĕĕĕĕÉÉĕ3ĕÉÉÉÔ',
-      'ÔP12Éĭ78ĭÉẑZ6ZÉÉÉÔ',
-      'ÔÉÉÉÉÉÉÉÉÉoÉÉÉÉÉÉÔ',
-      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔß',
+      'ÔÉĭyĭÉoÉÉoḇḇḇḇẉÉÉÔ',
+      'ÔÉÉłłłłłłłḇVYḇßẋÉÔ',
+      'łłłłłłłłłłłłłłẓoÉÔ',
+      'ÔłłłłłêêêêłłÉłłłẇÔ',
+      'ÔłłłłłAJKAłłłłÉłÉÔ',
+      'ÔẑßłłłłłłłłłłłłłÉÔ',
+      'ÔĕOĕłĕĕĕĕłłĕ3ĕłłÉÔ',
+      'ÔP12łĭ78ĭłẑZ6ZłłÉÔ',
+      'ÔÉłłłłłłłłoÉÉÉłÉÉÔ',
+      'ÔÔÔßÔÔÔÔÔÔßÔÔÔÔÔÔß'
     ]),
     warps: [
       { x: 11, y: 4, to: { map: 'gym-cinnabar', x: 7, y: 8 } },
@@ -1316,6 +1317,8 @@ export const MAPS3 = {
     signs: [
       { x: 7, y: 4, text: 'CINNABAR ISLAND — A volcanic isle of labs and legends. The sea here never quite cools.' },
       { x: 8, y: 4, text: 'CINNABAR GYM — Leader: Blaine. Locked fast. A note reads: THE KEY SLEEPS WHERE THE FIRE SLEPT FIRST. Inside lies a PYRE GROUND: Fire moves hit harder and burns catch more easily — for Blaine, and for you.' },
+      { x: 12, y: 6, text: 'CINNABAR ISLAND — West: ROUTE 20.' },
+      { x: 4, y: 11, text: 'CINNABAR ISLAND — West: ROUTE 20.' }
     ],
     npcs: [
       { x: 15, y: 11, name: 'CAPT SALT', art: 'sailor', skin: '#d8a878', shirt: '#3a6ac0', pants: '#2a2a3a', hair: '#c0c0c0', ferry: 'pallet',
