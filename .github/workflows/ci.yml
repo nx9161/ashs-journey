@@ -9,7 +9,19 @@ jobs:
         with:
           node-version: 24
       - name: syntax check all modules
-        run: for f in $(find src scripts api -name '*.mjs'); do node --check "$f" || exit 1; done
+        # Build-time tokens (/*__AUTH_ENABLED__*/ and /*__EDITION_MARKER__*/,
+        # replaced by scripts/build.mjs during assembly) sit in expression
+        # position in src/game/auth.mjs and src/game/title.mjs, so those
+        # sources are intentionally NOT standalone-parseable. Check every
+        # module with the tokens neutralized to `null` in a temp copy —
+        # full coverage, and the build step below validates the real thing.
+        run: |
+          for f in $(find src scripts api -name '*.mjs'); do
+            tmp=$(mktemp --suffix=.mjs)
+            sed -E 's#/\*__[A-Z_]+__\*/#null#g' "$f" > "$tmp"
+            node --check "$tmp" || { echo "syntax FAIL: $f"; rm -f "$tmp"; exit 1; }
+            rm -f "$tmp"
+          done
       - name: build (zero-dep)
         run: node scripts/build.mjs
       - name: budget gates
@@ -36,33 +48,33 @@ jobs:
       - name: single-validator gate (LCR condition 8)
         # Exactly two validators may exist: the client pre-check
         # (src/save/schema.mjs) and the authoritative server gate
-        # (api/lib/validator.mjs). Parity status is documented honestly in
+        # (api/_lib/validator.mjs). Parity status is documented honestly in
         # api/README.md ("Save contract" > Validator).
         run: |
-          defs=$(grep -rln -E "function validateSave" src/save api/lib --include="*.mjs" | sort)
+          defs=$(grep -rln -E "function validateSave" src/save api/_lib --include="*.mjs" | sort)
           echo "$defs"
-          expected=$(printf 'api/lib/validator.mjs\nsrc/save/schema.mjs')
+          expected=$(printf 'api/_lib/validator.mjs\nsrc/save/schema.mjs')
           [ "$defs" = "$expected" ] || { echo "single-validator gate FAILED"; exit 1; }
           echo "single-validator gate: PASS"
       - name: validator table snapshot freshness
-        run: node api/scripts/gen-tables.mjs --check
+        run: node tools/api-scripts/gen-tables.mjs --check
       - name: api unit tests (validator)
-        run: node api/scripts/validator.test.mjs
+        run: node tools/api-scripts/validator.test.mjs
       - name: api fuzz test (validator, seeded N=2000)
-        run: node api/scripts/validator.fuzz.test.mjs
+        run: node tools/api-scripts/validator.fuzz.test.mjs
       - name: api unit tests (save contract F1)
-        run: node api/scripts/save-contract.test.mjs
+        run: node tools/api-scripts/save-contract.test.mjs
       - name: api unit tests (auth config)
-        run: node api/scripts/config.test.mjs
+        run: node tools/api-scripts/config.test.mjs
       - name: api unit tests (http + ip)
-        run: node api/scripts/http-ip.test.mjs
+        run: node tools/api-scripts/http-ip.test.mjs
       - name: api fail-closed test (no DATABASE_URL)
-        run: env -u DATABASE_URL node api/scripts/failclosed.test.mjs
+        run: env -u DATABASE_URL node tools/api-scripts/failclosed.test.mjs
       - name: api coverage report (log-only; honest number in fuzz test header)
         # Records branch coverage; the aggregate number is written into
-        # api/scripts/validator.fuzz.test.mjs's header comment. Log-only:
+        # tools/api-scripts/validator.fuzz.test.mjs's header comment. Log-only:
         # coverage is reported, never chased artificially.
-        run: env -u DATABASE_URL node --experimental-test-coverage --test api/scripts/validator.test.mjs api/scripts/validator.fuzz.test.mjs api/scripts/config.test.mjs api/scripts/http-ip.test.mjs api/scripts/save-contract.test.mjs api/scripts/failclosed.test.mjs
+        run: env -u DATABASE_URL node --experimental-test-coverage --test tools/api-scripts/validator.test.mjs tools/api-scripts/validator.fuzz.test.mjs tools/api-scripts/config.test.mjs tools/api-scripts/http-ip.test.mjs tools/api-scripts/save-contract.test.mjs tools/api-scripts/failclosed.test.mjs
       - name: secret scan
         uses: gitleaks/gitleaks-action@v2
         env:

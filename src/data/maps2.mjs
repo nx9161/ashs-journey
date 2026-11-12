@@ -2269,7 +2269,8 @@ export const MAPS2 = {
     hidden: [],
     events: [
       { id: 'ev_rival_route22', x: 4, y: 5, when: { flagNot: 'ev_rival_route22_done' } },
-      { id: 'ev_league_gate', x: 1, y: 5, when: { badgesAtLeast: 8 } },
+      { id: 'ev_league_gate', x: 1, y: 5, when: { badgesAtLeast: 8, flagNot: 'ev_league_gate_done' } },
+      { id: 'ev_league_gate_deny', x: 1, y: 5, when: { badgesBelow: 8 } },
     ],
     start: null,
   },

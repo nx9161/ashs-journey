@@ -1554,7 +1554,15 @@ export const MAPS3 = {
     hidden: [],
     events: [
       { id: 'ev_rival_route22', x: 12, y: 5, when: { flagNot: 'ev_rival_route22_done' } },
-      { id: 'ev_league_gate', x: 2, y: 5, when: { flagNot: 'ev_league_gate_done' } },
+      // League gate, ENFORCED (2026-11-11): the pass script only fires
+      // with all 8 Kanto badges; below 8 the guard turns the player
+      // back (deny script warps them east of the checkpoint). Both
+      // corridor tiles (2,5) and (1,5) carry the pair, so the row-5
+      // chokepoint cannot be stepped around via row 4.
+      { id: 'ev_league_gate', x: 2, y: 5, when: { badgesAtLeast: 8, flagNot: 'ev_league_gate_done' } },
+      { id: 'ev_league_gate', x: 1, y: 5, when: { badgesAtLeast: 8, flagNot: 'ev_league_gate_done' } },
+      { id: 'ev_league_gate_deny', x: 2, y: 5, when: { badgesBelow: 8 } },
+      { id: 'ev_league_gate_deny', x: 1, y: 5, when: { badgesBelow: 8 } },
     ],
     start: null,
   },

@@ -28,16 +28,23 @@ on:
 jobs:
   ping:
     runs-on: ubuntu-latest
+    # The secrets context is NOT available in step-level `if:` (GitHub
+    # rejects the whole workflow at parse time: "Unrecognized named-value:
+    # 'secrets'" — that parse failure is why every push logged a 0-second
+    # keepalive failure and the workflow never ran). Route the secret
+    # through job env and guard on the env context instead.
+    env:
+      GAME_URL: ${{ secrets.GAME_URL }}
     steps:
       - name: Ping /api/health
-        if: ${{ secrets.GAME_URL != '' }}
+        if: ${{ env.GAME_URL != '' }}
         run: |
           set -euo pipefail
-          URL="${{ secrets.GAME_URL }}/api/health"
+          URL="$GAME_URL/api/health"
           echo "Pinging $URL"
           BODY="$(curl -fsS --max-time 60 "$URL")"
           echo "$BODY"
           echo "$BODY" | grep -q '"ok":true' || { echo "health check did not report ok:true"; exit 1; }
       - name: No GAME_URL configured (pre-deploy)
-        if: ${{ secrets.GAME_URL == '' }}
+        if: ${{ env.GAME_URL == '' }}
         run: echo "GAME_URL secret not set — keep-alive is inert until the owner provisions the deploy (see runbook above)."

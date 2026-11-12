@@ -141164,19 +141164,32 @@ function pickVariant(arr, x, y, salt) {
 // agree on it, so it lives in exactly one place.
 function isTallGrass(x, y) { return hashTile(x, y, 11) < 0.78; }
 
-function buildArtTileCache(doc) {
+function buildArtTileCache(doc, seasonSwapFor) {
   // kind -> canvas (16x16). 'water' -> [water-1..3] animated frames.
   // 'void' stays a solid fill (no art). Kinds without ART fall back to paintTile.
+  // Season grade (Black 2 imposition, 2026-11-11): when seasonSwapFor is
+  // supplied (main.mjs passes seasons.mjs's), vegetation tile art —
+  // grass / tall grass / flowers / trees / bush / tropgrass — is
+  // rasterized with its greens re-graded for the current season. Every
+  // other tile keeps its authored palette exactly.
+  const VEG_ID = /^tile-(grass|tallgrass|flower|tree|bush|tropgrass|grassground)/;
+  const swapFor = (id) => {
+    if (!seasonSwapFor || !VEG_ID.test(id)) return undefined;
+    const a = materializeArt(id);
+    if (!a || !a.pal) return undefined;
+    const sw = seasonSwapFor(a.pal);
+    return sw && Object.keys(sw).length ? sw : undefined;
+  };
   const cache = {};
   for (const kind of Object.keys(TILE_ART)) {
-    const cv = artCanvas(doc, TILE_ART[kind], 1);
+    const cv = artCanvas(doc, TILE_ART[kind], 1, false, swapFor(TILE_ART[kind]));
     if (cv) { cache[kind] = cv; continue; }
     const fb = doc.createElement('canvas');
     fb.width = 16; fb.height = 16;
     paintTile(fb.getContext('2d'), kind, 0, 0);
     cache[kind] = fb;
   }
-  const ids = (list) => list.map((id) => artCanvas(doc, id, 1)).filter(Boolean);
+  const ids = (list) => list.map((id) => artCanvas(doc, id, 1, false, swapFor(id))).filter(Boolean);
   cache.grassVariants = ids(['tile-grass', 'tile-grass-2', 'tile-grass-3', 'tile-grass-4', 'tile-grass-5', 'tile-grass-6', 'tile-grass-7', 'tile-grass-8', 'tile-grass-9', 'tile-grass-10']); // W5 TX-1: 10 base variants
   cache.tallVariants = ids(['tile-tallgrass-1', 'tile-tallgrass-2', 'tile-tallgrass-3', 'tile-tallgrass-4', 'tile-tallgrass-5', 'tile-tallgrass-6']); // W5 TX-1: 6 tall variants
   cache.pathVariants = ids(['tile-path', 'tile-path-2', 'tile-path-3', 'tile-path-4', 'tile-path-5', 'tile-path-6']); // W5 TX-1: 6 path variants (cobble + worn-centre)
@@ -151242,7 +151255,8 @@ const MAPS2 = {
     hidden: [],
     events: [
       { id: 'ev_rival_route22', x: 4, y: 5, when: { flagNot: 'ev_rival_route22_done' } },
-      { id: 'ev_league_gate', x: 1, y: 5, when: { badgesAtLeast: 8 } },
+      { id: 'ev_league_gate', x: 1, y: 5, when: { badgesAtLeast: 8, flagNot: 'ev_league_gate_done' } },
+      { id: 'ev_league_gate_deny', x: 1, y: 5, when: { badgesBelow: 8 } },
     ],
     start: null,
   },
@@ -153633,7 +153647,15 @@ const MAPS3 = {
     hidden: [],
     events: [
       { id: 'ev_rival_route22', x: 12, y: 5, when: { flagNot: 'ev_rival_route22_done' } },
-      { id: 'ev_league_gate', x: 2, y: 5, when: { flagNot: 'ev_league_gate_done' } },
+      // League gate, ENFORCED (2026-11-11): the pass script only fires
+      // with all 8 Kanto badges; below 8 the guard turns the player
+      // back (deny script warps them east of the checkpoint). Both
+      // corridor tiles (2,5) and (1,5) carry the pair, so the row-5
+      // chokepoint cannot be stepped around via row 4.
+      { id: 'ev_league_gate', x: 2, y: 5, when: { badgesAtLeast: 8, flagNot: 'ev_league_gate_done' } },
+      { id: 'ev_league_gate', x: 1, y: 5, when: { badgesAtLeast: 8, flagNot: 'ev_league_gate_done' } },
+      { id: 'ev_league_gate_deny', x: 2, y: 5, when: { badgesBelow: 8 } },
+      { id: 'ev_league_gate_deny', x: 1, y: 5, when: { badgesBelow: 8 } },
     ],
     start: null,
   },
@@ -183824,6 +183846,15 @@ const EVENTS = {
     { questDone: 'q_league' },
   ],
 
+  // The same checkpoint, below eight badges: the guard counts, refuses,
+  // and walks the player back east of the gate (warp step, same map).
+  ev_league_gate_deny: [
+    { say: ['Hold, trainer. Route 23 is not a road. It is a verdict. Eight badges — let us see them.'], who: 'LEAGUE GUARD' },
+    { say: ['I count what is there, {player}, and what is there is short of eight. The mountain does not grade on effort, and neither do I.'], who: 'LEAGUE GUARD' },
+    { say: ['Boulder, Cascade, Thunder, Rainbow, Soul, Marsh, Volcano, Earth — earn the ones you are missing, and this gate opens like it was built for you. Step back now.'], who: 'LEAGUE GUARD' },
+    { warp: { map: 'route22', x: 6, y: 5 } },
+  ],
+
   // -- The Elite Four ---------------------------------------------------------------
   ev_e4_1: [
     { say: ['Welcome to the cold end of the road, {player}. I am Lorelei. Everything you love about summer ends at my door.'], who: 'LORELEI' },
@@ -191349,8 +191380,19 @@ function drawWeatherOverlay(r, game, wstate) {
 // season toast when the season rolls over. Anything mechanical is a
 // future owner ruling, not a silent addition.
 //
-// Anchor (ours): January = Winter, then the cycle turns monthly —
-// Feb Spring, Mar Summer, Apr Autumn, May Winter, and so on.
+// Anchor (ours): January opens Spring, then the cycle turns monthly —
+// Feb Summer, Mar Autumn, Apr Winter, May Spring… — so November plays
+// in Autumn and December in Winter.
+//
+// SEASONAL ART (added same day, owner verdict "the game looks the
+// same"): the season also re-grades the world's vegetation art. Tile
+// palettes pass through seasonalHex() below when the tile cache is
+// built (buildArtTileCache in engine/art.mjs, fed by main.mjs):
+// greens — grass, tall grass, flowers' stems, tree canopies — shift
+// per season (spring brighter, autumn amber, winter frost-pale) while
+// every non-green (trunks, roofs, paths, water) keeps its authored
+// color. Original color math, our own art; the authored palette is
+// the Summer grade.
 
 const SEASON_ORDER = ['Winter', 'Spring', 'Summer', 'Autumn'];
 
@@ -191367,7 +191409,7 @@ const SEASON_STYLE = {
 // Pure resolver: Date -> { name, index, color, tint }.
 function seasonForDate(d) {
   const month = d && typeof d.getMonth === 'function' ? d.getMonth() : 0;
-  const name = SEASON_ORDER[((month % 4) + 4) % 4];
+  const name = SEASON_ORDER[(((month + 1) % 4) + 4) % 4];
   const style = SEASON_STYLE[name];
   return { name, index: SEASON_ORDER.indexOf(name), color: style.color, tint: style.tint };
 }
@@ -191384,6 +191426,51 @@ function currentSeason() {
 function seasonTintFor(map) {
   if (!map || map.indoor || map.dark) return null;
   return currentSeason().tint;
+}
+
+// ---- seasonal art grade -------------------------------------------------
+const clamp255 = (v) => Math.max(0, Math.min(255, Math.round(v)));
+function hexToRgb(hex) {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex || '');
+  if (!m) return null;
+  const n = parseInt(m[1], 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+const rgbToHex = (r, g, b) => '#' + [r, g, b].map((v) => clamp255(v).toString(16).padStart(2, '0')).join('');
+
+// One authored color -> its seasonal grade. Only green-dominant colors
+// (foliage and grass: g strictly greatest) are re-graded; everything
+// else returns unchanged, in every season.
+function seasonalHex(hex, seasonName) {
+  const rgb = hexToRgb(hex);
+  if (!rgb) return hex;
+  const [r, g, b] = rgb;
+  if (!(g > r && g > b)) return hex;
+  switch (seasonName) {
+    case 'Spring': return rgbToHex(r * 0.94 + 14, g * 1.07 + 8, b * 0.94 + 6);
+    case 'Summer': return rgbToHex(r * 0.97, g, b * 0.97);
+    case 'Autumn': return rgbToHex(g * 1.05 + 26, r * 0.58 + g * 0.22, b * 0.5);
+    case 'Winter': {
+      const lum = (r + g + b) / 3;
+      const mix = (t) => lum + (t - lum) * 0.66;
+      return rgbToHex(mix(228), mix(238), mix(244));
+    }
+    default: return hex;
+  }
+}
+
+// Build an artCanvas swap ({ paletteChar: hex }) re-grading every
+// green in a palette for the current season. Entries whose grade is
+// unchanged are omitted; an all-unchanged palette yields {}.
+function seasonalSwapFor(pal) {
+  if (!pal) return {};
+  const season = currentSeason().name;
+  const swap = {};
+  for (const ch of Object.keys(pal)) {
+    const graded = seasonalHex(pal[ch], season);
+    if (graded !== pal[ch]) swap[ch] = graded;
+  }
+  return swap;
 }
 
 
@@ -208956,7 +209043,6 @@ Object.assign(OverworldScene.prototype, {
 // Scene flow: BOOT (legal card) -> TITLE -> INTRO -> OVERWORLD <-> BATTLE.
 // Battle/overworld menus (Bag/Party/Dex/Save/Options) live here as UI states.
 
-
 function nextSeed() {
   if (typeof globalThis !== 'undefined' && globalThis.__SEED__) return globalThis.__SEED__ >>> 0;
   return (Date.now() ^ (Math.random() * 1e9)) >>> 0;
@@ -208996,7 +209082,7 @@ class Game {
     this.store = new SaveStore();
     this.state = freshState();
     this.rng = makeRngStreams(nextSeed());
-    this.tileCache = buildArtTileCache(doc); // hand-authored tileset (art.mjs); void -> solid fill
+    this.tileCache = buildArtTileCache(doc, seasonalSwapFor); // hand-authored tileset (art.mjs), season-graded vegetation; void -> solid fill
     this.spriteCache = {};
     this._spriteUrlCache = {}; // species id -> battle-art data URL (toDataURL once per species)
     this._iconUrlCache = {};   // item id -> uiIcon data URL (toDataURL once per item)

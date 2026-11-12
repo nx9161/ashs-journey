@@ -331,6 +331,15 @@ export const EVENTS = {
     { questDone: 'q_league' },
   ],
 
+  // The same checkpoint, below eight badges: the guard counts, refuses,
+  // and walks the player back east of the gate (warp step, same map).
+  ev_league_gate_deny: [
+    { say: ['Hold, trainer. Route 23 is not a road. It is a verdict. Eight badges — let us see them.'], who: 'LEAGUE GUARD' },
+    { say: ['I count what is there, {player}, and what is there is short of eight. The mountain does not grade on effort, and neither do I.'], who: 'LEAGUE GUARD' },
+    { say: ['Boulder, Cascade, Thunder, Rainbow, Soul, Marsh, Volcano, Earth — earn the ones you are missing, and this gate opens like it was built for you. Step back now.'], who: 'LEAGUE GUARD' },
+    { warp: { map: 'route22', x: 6, y: 5 } },
+  ],
+
   // -- The Elite Four ---------------------------------------------------------------
   ev_e4_1: [
     { say: ['Welcome to the cold end of the road, {player}. I am Lorelei. Everything you love about summer ends at my door.'], who: 'LORELEI' },
