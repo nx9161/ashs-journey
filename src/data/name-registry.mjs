@@ -56,6 +56,23 @@ export const NAME_REGISTRY = {
     milotic:   { name: 'UNDINARA', status: 'locked', wave: 'G-M1', design: 'undinara' },
     zapdos:    { name: 'FULMINIS', status: 'locked', wave: 'G-M1', design: 'fulminis' },
     torterra:  { name: 'MOSSAIC', status: 'locked', wave: 'G-M1', design: 'mossaic' },
+    // -- Wave G Kanto Completion, Tranche 1 (coordinator-named) --
+    caterpie:  { name: 'FRONLET', status: 'named', wave: 'G-KT1', design: 'fronlet' },
+    metapod:   { name: 'COCOVEL', status: 'named', wave: 'G-KT1', design: 'cocovel' },
+    butterfree: { name: 'PRISMWING', status: 'named', wave: 'G-KT1', design: 'prismwing' },
+    pinkbutterfree: { name: 'Pink PRISMWING', status: 'named', wave: 'G-KT1', design: 'prismwing-pink' },
+    weedle:    { name: 'THORNIB', status: 'named', wave: 'G-KT1', design: 'thornib' },
+    kakuna:    { name: 'SPIKOON', status: 'named', wave: 'G-KT1', design: 'spikoon' },
+    beedrill:  { name: 'LANCEWASP', status: 'named', wave: 'G-KT1', design: 'lancewasp' },
+    pidgey:    { name: 'DUNPLUME', status: 'named', wave: 'G-KT1', design: 'dunplume' },
+    pidgeotto: { name: 'GUSTPLUME', status: 'named', wave: 'G-KT1', design: 'gustplume' },
+    pidgeot:   { name: 'AERARCH', status: 'named', wave: 'G-KT1', design: 'aerarch' },
+    rattata:   { name: 'SCURRAT', status: 'named', wave: 'G-KT1', design: 'scurrat' },
+    raticate:  { name: 'GNAWBRUTE', status: 'named', wave: 'G-KT1', design: 'gnawbrute' },
+    spearow:   { name: 'KEENBEAK', status: 'named', wave: 'G-KT1', design: 'keenbeak' },
+    fearow:    { name: 'GLAREHAWK', status: 'named', wave: 'G-KT1', design: 'glarehawk' },
+    ekans:     { name: 'VIPLET', status: 'named', wave: 'G-KT1', design: 'viplet' },
+    arbok:     { name: 'DREADHOOD', status: 'named', wave: 'G-KT1', design: 'dreadhood' },
   },
 
   // Evolution lines fully renamed so far (slot ids, in order).
@@ -63,6 +80,12 @@ export const NAME_REGISTRY = {
     buddin: ['bulbasaur', 'ivysaur', 'venusaur'],
     embry: ['charmander', 'charmeleon', 'charizard'],
     bublet: ['squirtle', 'wartortle', 'blastoise'],
+    fronlet: ['caterpie', 'metapod', 'butterfree'],
+    thornib: ['weedle', 'kakuna', 'beedrill'],
+    dunplume: ['pidgey', 'pidgeotto', 'pidgeot'],
+    scurrat: ['rattata', 'raticate'],
+    keenbeak: ['spearow', 'fearow'],
+    viplet: ['ekans', 'arbok'],
   },
 
   // -- Places (registry extension, owner order 2026-11-12 00:54) --

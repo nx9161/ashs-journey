@@ -59,7 +59,7 @@ export const SPECIES2 = {
     tm: [1, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 19, 26, 27, 28, 31, 32, 34, 44, 50, 103, 104],
   },
   metapod: {
-    id: 'metapod', name: 'Metapod', dexNo: 11, types: ['bug'],
+    id: 'metapod', name: 'COCOVEL', dexNo: 11, types: ['bug'],
     base: { hp: 50, atk: 20, def: 55, spa: 25, spd: 25, spe: 30 },
     catchRate: 120, growth: 'mediumfast', baseXp: 72, body: 'blob', spriteSeed: 1101,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -68,7 +68,7 @@ export const SPECIES2 = {
     evo: { to: 'butterfree', method: 'level', level: 10 }, tm: [],
   },
   butterfree: {
-    id: 'butterfree', name: 'Butterfree', dexNo: 12, types: ['bug', 'flying'],
+    id: 'butterfree', name: 'PRISMWING', dexNo: 12, types: ['bug', 'flying'],
     base: { hp: 60, atk: 45, def: 50, spa: 90, spd: 80, spe: 70 },
     catchRate: 45, growth: 'mediumfast', baseXp: 198, body: 'bird', spriteSeed: 1201,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -77,7 +77,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 15, 21, 22, 29, 30, 31, 32, 33, 34, 42, 44, 46, 50, 105],
   },
   kakuna: {
-    id: 'kakuna', name: 'Kakuna', dexNo: 14, types: ['bug', 'poison'],
+    id: 'kakuna', name: 'SPIKOON', dexNo: 14, types: ['bug', 'poison'],
     base: { hp: 45, atk: 25, def: 50, spa: 25, spd: 25, spe: 35 },
     catchRate: 120, growth: 'mediumfast', baseXp: 72, body: 'blob', spriteSeed: 1401,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -86,7 +86,7 @@ export const SPECIES2 = {
     evo: { to: 'beedrill', method: 'level', level: 10 }, tm: [],
   },
   beedrill: {
-    id: 'beedrill', name: 'Beedrill', dexNo: 15, types: ['bug', 'poison'],
+    id: 'beedrill', name: 'LANCEWASP', dexNo: 15, types: ['bug', 'poison'],
     base: { hp: 65, atk: 90, def: 40, spa: 45, spd: 80, spe: 75 },
     catchRate: 45, growth: 'mediumfast', baseXp: 198, body: 'bird', spriteSeed: 1501,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -95,7 +95,7 @@ export const SPECIES2 = {
     tm: [3, 6, 9, 10, 15, 20, 31, 32, 33, 34, 44, 50, 101],
   },
   pidgeotto: {
-    id: 'pidgeotto', name: 'Pidgeotto', dexNo: 17, types: ['normal', 'flying'],
+    id: 'pidgeotto', name: 'GUSTPLUME', dexNo: 17, types: ['normal', 'flying'],
     base: { hp: 63, atk: 60, def: 55, spa: 50, spd: 50, spe: 71 },
     catchRate: 120, growth: 'mediumslow', baseXp: 122, body: 'bird', spriteSeed: 1701,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -104,7 +104,7 @@ export const SPECIES2 = {
     evo: { to: 'pidgeot', method: 'level', level: 36 }, tm: [2, 4, 6, 9, 10, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   pidgeot: {
-    id: 'pidgeot', name: 'Pidgeot', dexNo: 18, types: ['normal', 'flying'],
+    id: 'pidgeot', name: 'AERARCH', dexNo: 18, types: ['normal', 'flying'],
     base: { hp: 83, atk: 80, def: 75, spa: 70, spd: 70, spe: 101 },
     catchRate: 45, growth: 'mediumslow', baseXp: 216, body: 'bird', spriteSeed: 1801,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -113,7 +113,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   raticate: {
-    id: 'raticate', name: 'Raticate', dexNo: 20, types: ['normal'],
+    id: 'raticate', name: 'GNAWBRUTE', dexNo: 20, types: ['normal'],
     base: { hp: 55, atk: 81, def: 60, spa: 50, spd: 70, spe: 97 },
     catchRate: 90, growth: 'mediumfast', baseXp: 145, body: 'quad', spriteSeed: 2001,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -122,7 +122,7 @@ export const SPECIES2 = {
     tm: [6, 9, 10, 11, 12, 13, 14, 15, 24, 25, 28, 31, 32, 34, 39, 44, 50],
   },
   fearow: {
-    id: 'fearow', name: 'Fearow', dexNo: 22, types: ['normal', 'flying'],
+    id: 'fearow', name: 'GLAREHAWK', dexNo: 22, types: ['normal', 'flying'],
     base: { hp: 65, atk: 90, def: 65, spa: 61, spd: 61, spe: 100 },
     catchRate: 90, growth: 'mediumfast', baseXp: 155, body: 'bird', spriteSeed: 2201,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -131,7 +131,7 @@ export const SPECIES2 = {
     tm: [2, 4, 6, 9, 10, 15, 31, 32, 33, 34, 39, 44, 50, 102],
   },
   ekans: {
-    id: 'ekans', name: 'Ekans', dexNo: 23, types: ['poison'],
+    id: 'ekans', name: 'VIPLET', dexNo: 23, types: ['poison'],
     base: { hp: 35, atk: 60, def: 44, spa: 40, spd: 54, spe: 55 },
     catchRate: 255, growth: 'mediumfast', baseXp: 58, body: 'serpent', spriteSeed: 2301,
     eggGroups: ['ground', 'dragon'], hatchCounter: 20,
@@ -140,7 +140,7 @@ export const SPECIES2 = {
     evo: { to: 'arbok', method: 'level', level: 22 }, tm: [6, 9, 10, 20, 21, 26, 27, 28, 31, 32, 34, 44, 48, 50],
   },
   arbok: {
-    id: 'arbok', name: 'Arbok', dexNo: 24, types: ['poison'],
+    id: 'arbok', name: 'DREADHOOD', dexNo: 24, types: ['poison'],
     base: { hp: 60, atk: 95, def: 69, spa: 65, spd: 79, spe: 80 },
     catchRate: 90, growth: 'mediumfast', baseXp: 157, body: 'serpent', spriteSeed: 2401,
     eggGroups: ['ground', 'dragon'], hatchCounter: 20,
@@ -1288,7 +1288,7 @@ export const SPECIES2 = {
     form: true, baseSpecies: 'onix',
   },
   pinkbutterfree: {
-    id: 'pinkbutterfree', name: 'Pink Butterfree', dexNo: 12, types: ['bug', 'flying'],
+    id: 'pinkbutterfree', name: 'Pink PRISMWING', dexNo: 12, types: ['bug', 'flying'],
     base: { hp: 60, atk: 45, def: 50, spa: 95, spd: 80, spe: 75 },
     catchRate: 45, growth: 'mediumfast', baseXp: 198, body: 'bird', spriteSeed: 1202,
     eggGroups: ['bug'], hatchCounter: 15,

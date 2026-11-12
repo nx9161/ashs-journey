@@ -15,7 +15,7 @@ export const SPECIES = {
     refusesBox: true,
   },
   pidgey: {
-    id: 'pidgey', name: 'Pidgey', dexNo: 16, types: ['normal', 'flying'],
+    id: 'pidgey', name: 'DUNPLUME', dexNo: 16, types: ['normal', 'flying'],
     base: { hp: 40, atk: 45, def: 40, spa: 35, spd: 35, spe: 56 },
     catchRate: 255, growth: 'mediumslow', baseXp: 50, body: 'bird', spriteSeed: 1601,
     eggGroups: ['flying'], hatchCounter: 15,
@@ -23,7 +23,7 @@ export const SPECIES = {
     flavor: 'Common on quiet routes. Gusts up dust when it takes off.',
   },
   rattata: {
-    id: 'rattata', name: 'Rattata', dexNo: 19, types: ['normal'],
+    id: 'rattata', name: 'SCURRAT', dexNo: 19, types: ['normal'],
     base: { hp: 30, atk: 56, def: 35, spa: 25, spd: 35, spe: 72 },
     catchRate: 255, growth: 'mediumfast', baseXp: 51, body: 'quad', spriteSeed: 1901,
     eggGroups: ['ground'], hatchCounter: 15,
@@ -31,7 +31,7 @@ export const SPECIES = {
     flavor: 'Quick teeth, quicker feet. Nibbles anything left unattended.',
   },
   caterpie: {
-    id: 'caterpie', name: 'Caterpie', dexNo: 10, types: ['bug'],
+    id: 'caterpie', name: 'FRONLET', dexNo: 10, types: ['bug'],
     base: { hp: 45, atk: 30, def: 35, spa: 20, spd: 20, spe: 45 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1001,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -39,7 +39,7 @@ export const SPECIES = {
     flavor: 'Gentle and green. Its antennae taste the air for friends.',
   },
   weedle: {
-    id: 'weedle', name: 'Weedle', dexNo: 13, types: ['bug', 'poison'],
+    id: 'weedle', name: 'THORNIB', dexNo: 13, types: ['bug', 'poison'],
     base: { hp: 40, atk: 35, def: 30, spa: 20, spd: 20, spe: 50 },
     catchRate: 255, growth: 'mediumfast', baseXp: 39, body: 'serpent', spriteSeed: 1301,
     eggGroups: ['bug'], hatchCounter: 15,
@@ -47,7 +47,7 @@ export const SPECIES = {
     flavor: 'Mind the stinger. It only uses it when startled.',
   },
   spearow: {
-    id: 'spearow', name: 'Spearow', dexNo: 21, types: ['normal', 'flying'],
+    id: 'spearow', name: 'KEENBEAK', dexNo: 21, types: ['normal', 'flying'],
     base: { hp: 40, atk: 60, def: 30, spa: 31, spd: 31, spe: 70 },
     catchRate: 255, growth: 'mediumfast', baseXp: 52, body: 'bird', spriteSeed: 2101,
     eggGroups: ['flying'], hatchCounter: 15,

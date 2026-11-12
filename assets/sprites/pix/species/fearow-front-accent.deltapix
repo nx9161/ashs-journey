@@ -1,9 +1,0 @@
-# fearow-front-accent — Premium+ W2 accent frame (blink). Recolor-only delta
-# over fearow-front: the silhouette never changes; the accent reads in
-# alternation with the base frame under the species idle class.
-PIXD fearow-front-accent fearow-front 64 64
-25 25 Y
-26 25 Y
-38 25 Y
-39 25 Y
-PAL
